@@ -94,6 +94,65 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
          */
         this.UserData = null;
 
+        /**
+         * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的`SecurityGroupId`字段来获取。
+若指定该参数，请至少提供一个安全组，列表顺序有先后。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 公网带宽相关信息设置。
+本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * 实例计费类型。具体取值范围如下：
+<br><li>POSTPAID_BY_HOUR：按小时后付费
+<br><li>SPOTPAID：竞价付费
+<br><li>PREPAID：预付费，即包年包月
+         * @type {string || null}
+         */
+        this.InstanceChargeType = null;
+
+        /**
+         * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
+若修改实例的付费模式为预付费，则该参数必传；从预付费修改为其他付费模式时，本字段原信息会自动丢弃。
+本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+         * @type {InstanceChargePrepaid || null}
+         */
+        this.InstanceChargePrepaid = null;
+
+        /**
+         * 实例的市场相关选项，如竞价实例相关参数。
+若修改实例的付费模式为竞价付费，则该参数必传；从竞价付费修改为其他付费模式时，本字段原信息会自动丢弃。
+本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+         * @type {InstanceMarketOptionsRequest || null}
+         */
+        this.InstanceMarketOptions = null;
+
+        /**
+         * 云盘类型选择策略，取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型。
+<br><li>AUTOMATIC：自动选择当前可用的云盘类型。
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
+        /**
+         * 实例系统盘配置信息。
+         * @type {SystemDisk || null}
+         */
+        this.SystemDisk = null;
+
+        /**
+         * 实例数据盘配置信息。最多支持指定11块数据盘。采取整体修改，因此请提供修改后的全部值。
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
     }
 
     /**
@@ -109,6 +168,42 @@ class ModifyLaunchConfigurationAttributesRequest extends  AbstractModel {
         this.InstanceTypesCheckPolicy = 'InstanceTypesCheckPolicy' in params ? params.InstanceTypesCheckPolicy : null;
         this.LaunchConfigurationName = 'LaunchConfigurationName' in params ? params.LaunchConfigurationName : null;
         this.UserData = 'UserData' in params ? params.UserData : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
+        }
+        this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
+
+        if (params.InstanceChargePrepaid) {
+            let obj = new InstanceChargePrepaid();
+            obj.deserialize(params.InstanceChargePrepaid)
+            this.InstanceChargePrepaid = obj;
+        }
+
+        if (params.InstanceMarketOptions) {
+            let obj = new InstanceMarketOptionsRequest();
+            obj.deserialize(params.InstanceMarketOptions)
+            this.InstanceMarketOptions = obj;
+        }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
+
+        if (params.SystemDisk) {
+            let obj = new SystemDisk();
+            obj.deserialize(params.SystemDisk)
+            this.SystemDisk = obj;
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
 
     }
 }
@@ -300,6 +395,41 @@ class ModifyAutoScalingGroupRequest extends  AbstractModel {
         }
         this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
         this.MultiZoneSubnetPolicy = 'MultiZoneSubnetPolicy' in params ? params.MultiZoneSubnetPolicy : null;
+
+    }
+}
+
+/**
+ * ScaleOutInstances请求参数结构体
+ * @class
+ */
+class ScaleOutInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID。
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 希望扩容的实例数量。
+         * @type {number || null}
+         */
+        this.ScaleOutNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScaleOutNumber = 'ScaleOutNumber' in params ? params.ScaleOutNumber : null;
 
     }
 }
@@ -692,6 +822,34 @@ class CreateLifecycleHookResponse extends  AbstractModel {
 }
 
 /**
+ * ClearLaunchConfigurationAttributes返回参数结构体
+ * @class
+ */
+class ClearLaunchConfigurationAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAutoScalingGroups返回参数结构体
  * @class
  */
@@ -1036,7 +1194,7 @@ class InstanceNameSettings extends  AbstractModel {
 
 点号（.）和短横线（-）不能作为 InstanceName 的首尾字符，不能连续使用。
 
-其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。不允许为纯数字。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1920,6 +2078,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
 <br><li>POSTPAID_BY_HOUR：按小时后付费
 <br><li>SPOTPAID：竞价付费
+<br><li>PREPAID：预付费，即包年包月
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -1968,6 +2127,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
 
         /**
          * 云服务器实例名（InstanceName）的相关设置。
+如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。
          * @type {InstanceNameSettings || null}
          */
         this.InstanceNameSettings = null;
@@ -1977,6 +2137,14 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
          * @type {InstanceChargePrepaid || null}
          */
         this.InstanceChargePrepaid = null;
+
+        /**
+         * 云盘类型选择策略，默认取值 ORIGINAL，取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型
+<br><li>AUTOMATIC：自动选择当前可用的云盘类型
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
 
     }
 
@@ -2063,6 +2231,7 @@ class CreateLaunchConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
 
     }
 }
@@ -2425,7 +2594,7 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.DefaultResult = null;
 
         /**
-         * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到3600秒，默认值为300秒
+         * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到7200秒，默认值为300秒
          * @type {number || null}
          */
         this.HeartbeatTimeout = null;
@@ -2596,7 +2765,7 @@ class HostNameSettings extends  AbstractModel {
          * 云服务器的主机名。
 <br><li> 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。
 <br><li> 不支持 Windows 实例。
-<br><li> 其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+<br><li> 其他类型（Linux 等）实例：字符长度为[2, 40]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。不允许为纯数字。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3439,6 +3608,7 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
          * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
 <br><li>POSTPAID_BY_HOUR：按小时后付费
 <br><li>SPOTPAID：竞价付费
+<br><li>PREPAID：预付费，即包年包月
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -3526,6 +3696,14 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * 云盘类型选择策略，取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型
+<br><li>AUTOMATIC：自动选择当前可用的云盘类型
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
     }
 
     /**
@@ -3611,6 +3789,7 @@ class UpgradeLaunchConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
 
     }
 }
@@ -4501,7 +4680,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.DefaultResult = null;
 
         /**
-         * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到3600秒，默认值为300秒
+         * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到7200秒，默认值为300秒
          * @type {number || null}
          */
         this.HeartbeatTimeout = null;
@@ -4664,6 +4843,41 @@ class CompleteLifecycleActionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ScaleOutInstances返回参数结构体
+ * @class
+ */
+class ScaleOutInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID。
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4986,6 +5200,14 @@ class LaunchConfiguration extends  AbstractModel {
          */
         this.InstanceChargePrepaid = null;
 
+        /**
+         * 云盘类型选择策略。取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型
+<br><li>AUTOMATIC：自动选择当前可用区下可用的云盘类型
+         * @type {string || null}
+         */
+        this.DiskTypePolicy = null;
+
     }
 
     /**
@@ -5085,6 +5307,7 @@ class LaunchConfiguration extends  AbstractModel {
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+        this.DiskTypePolicy = 'DiskTypePolicy' in params ? params.DiskTypePolicy : null;
 
     }
 }
@@ -5323,6 +5546,41 @@ class CreateScalingPolicyRequest extends  AbstractModel {
         }
         this.Cooldown = 'Cooldown' in params ? params.Cooldown : null;
         this.NotificationUserGroupIds = 'NotificationUserGroupIds' in params ? params.NotificationUserGroupIds : null;
+
+    }
+}
+
+/**
+ * ScaleInInstances返回参数结构体
+ * @class
+ */
+class ScaleInInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩活动ID。
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5731,6 +5989,41 @@ class DescribeNotificationConfigurationsRequest extends  AbstractModel {
 }
 
 /**
+ * ScaleInInstances请求参数结构体
+ * @class
+ */
+class ScaleInInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 伸缩组ID。
+         * @type {string || null}
+         */
+        this.AutoScalingGroupId = null;
+
+        /**
+         * 希望缩容的实例数量。
+         * @type {number || null}
+         */
+        this.ScaleInNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AutoScalingGroupId = 'AutoScalingGroupId' in params ? params.AutoScalingGroupId : null;
+        this.ScaleInNumber = 'ScaleInNumber' in params ? params.ScaleInNumber : null;
+
+    }
+}
+
+/**
  * 生命周期挂钩
  * @class
  */
@@ -5886,6 +6179,42 @@ class ForwardLoadBalancer extends  AbstractModel {
         }
         this.LocationId = 'LocationId' in params ? params.LocationId : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * ClearLaunchConfigurationAttributes请求参数结构体
+ * @class
+ */
+class ClearLaunchConfigurationAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 启动配置ID。
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * 是否清空数据盘信息，非必填，默认为 false。
+填 true 代表清空“数据盘”信息，清空后基于此新创建的云主机将不含有任何数据盘。
+         * @type {boolean || null}
+         */
+        this.ClearDataDisks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.ClearDataDisks = 'ClearDataDisks' in params ? params.ClearDataDisks : null;
 
     }
 }
@@ -6655,6 +6984,7 @@ module.exports = {
     ModifyLaunchConfigurationAttributesRequest: ModifyLaunchConfigurationAttributesRequest,
     DisableAutoScalingGroupRequest: DisableAutoScalingGroupRequest,
     ModifyAutoScalingGroupRequest: ModifyAutoScalingGroupRequest,
+    ScaleOutInstancesRequest: ScaleOutInstancesRequest,
     AutoScalingNotification: AutoScalingNotification,
     ModifyScheduledActionRequest: ModifyScheduledActionRequest,
     DescribeAutoScalingGroupsRequest: DescribeAutoScalingGroupsRequest,
@@ -6663,6 +6993,7 @@ module.exports = {
     CreatePaiInstanceResponse: CreatePaiInstanceResponse,
     CreateLaunchConfigurationResponse: CreateLaunchConfigurationResponse,
     CreateLifecycleHookResponse: CreateLifecycleHookResponse,
+    ClearLaunchConfigurationAttributesResponse: ClearLaunchConfigurationAttributesResponse,
     DescribeAutoScalingGroupsResponse: DescribeAutoScalingGroupsResponse,
     CreatePaiInstanceRequest: CreatePaiInstanceRequest,
     SystemDisk: SystemDisk,
@@ -6736,6 +7067,7 @@ module.exports = {
     CreateLifecycleHookRequest: CreateLifecycleHookRequest,
     ScheduledAction: ScheduledAction,
     CompleteLifecycleActionResponse: CompleteLifecycleActionResponse,
+    ScaleOutInstancesResponse: ScaleOutInstancesResponse,
     Filter: Filter,
     DescribeLifecycleHooksRequest: DescribeLifecycleHooksRequest,
     ServiceSettings: ServiceSettings,
@@ -6745,6 +7077,7 @@ module.exports = {
     DescribeAutoScalingInstancesResponse: DescribeAutoScalingInstancesResponse,
     DescribeLifecycleHooksResponse: DescribeLifecycleHooksResponse,
     CreateScalingPolicyRequest: CreateScalingPolicyRequest,
+    ScaleInInstancesResponse: ScaleInInstancesResponse,
     DeleteNotificationConfigurationRequest: DeleteNotificationConfigurationRequest,
     DescribeLaunchConfigurationsRequest: DescribeLaunchConfigurationsRequest,
     NotificationTarget: NotificationTarget,
@@ -6754,8 +7087,10 @@ module.exports = {
     EnableAutoScalingGroupRequest: EnableAutoScalingGroupRequest,
     MetricAlarm: MetricAlarm,
     DescribeNotificationConfigurationsRequest: DescribeNotificationConfigurationsRequest,
+    ScaleInInstancesRequest: ScaleInInstancesRequest,
     LifecycleHook: LifecycleHook,
     ForwardLoadBalancer: ForwardLoadBalancer,
+    ClearLaunchConfigurationAttributesRequest: ClearLaunchConfigurationAttributesRequest,
     PreviewPaiDomainNameResponse: PreviewPaiDomainNameResponse,
     DeleteAutoScalingGroupRequest: DeleteAutoScalingGroupRequest,
     RemoveInstancesRequest: RemoveInstancesRequest,

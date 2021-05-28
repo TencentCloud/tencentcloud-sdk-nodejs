@@ -17,42 +17,26 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * CheckKol
+ * 业务出参
  * @class
  */
-class InputKolDataList extends  AbstractModel {
+class OutputRecognizeEffectiveFlowValue extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 账号类型[1：微信；2：qq；3：微博]
+         * 返回标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Lable = null;
+
+        /**
+         * 返回分值
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Type = null;
-
-        /**
-         * KOL账号ID[比如微信公众号ID]
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
-         * KOL名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 手机号
-         * @type {string || null}
-         */
-        this.Phone = null;
-
-        /**
-         * 代理商名称
-         * @type {string || null}
-         */
-        this.AgentInfo = null;
+        this.Score = null;
 
     }
 
@@ -63,11 +47,8 @@ class InputKolDataList extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Phone = 'Phone' in params ? params.Phone : null;
-        this.AgentInfo = 'AgentInfo' in params ? params.AgentInfo : null;
+        this.Lable = 'Lable' in params ? params.Lable : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -156,6 +137,39 @@ class InputKolBspData extends  AbstractModel {
                 obj.deserialize(params.DataList[z]);
                 this.DataList.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * RecognizeEffectiveFlow请求参数结构体
+ * @class
+ */
+class RecognizeEffectiveFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务入参
+         * @type {InputRecognizeEffectiveFlow || null}
+         */
+        this.BusinessSecurityData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BusinessSecurityData) {
+            let obj = new InputRecognizeEffectiveFlow();
+            obj.deserialize(params.BusinessSecurityData)
+            this.BusinessSecurityData = obj;
         }
 
     }
@@ -689,6 +703,46 @@ class OutputSendTrafficSecuritySmsMsg extends  AbstractModel {
 }
 
 /**
+ * RecognizeEffectiveFlow返回参数结构体
+ * @class
+ */
+class RecognizeEffectiveFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务出参
+         * @type {OutputRecognizeEffectiveFlow || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new OutputRecognizeEffectiveFlow();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SendTrafficSecuritySmsMessage返回参数结构体
  * @class
  */
@@ -796,6 +850,39 @@ class RecognizeCustomizedAudienceRequest extends  AbstractModel {
 }
 
 /**
+ * RecognizeTargetAudience请求参数结构体
+ * @class
+ */
+class RecognizeTargetAudienceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 业务数据
+         * @type {InputRecognizeTargetAudience || null}
+         */
+        this.BspData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BspData) {
+            let obj = new InputRecognizeTargetAudience();
+            obj.deserialize(params.BspData)
+            this.BspData = obj;
+        }
+
+    }
+}
+
+/**
  * RecognizeTargetAudience返回参数结构体
  * @class
  */
@@ -832,6 +919,56 @@ class RecognizeTargetAudienceResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 业务出参
+ * @class
+ */
+class OutputRecognizeEffectiveFlow extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回码。0表示成功，非0标识失败错误码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * UTF-8编码，出错消息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 业务入参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutputRecognizeEffectiveFlowValue || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Value) {
+            let obj = new OutputRecognizeEffectiveFlowValue();
+            obj.deserialize(params.Value)
+            this.Value = obj;
+        }
 
     }
 }
@@ -1243,18 +1380,42 @@ class RecognizePreciseTargetAudienceRequest extends  AbstractModel {
 }
 
 /**
- * RecognizeTargetAudience请求参数结构体
+ * CheckKol
  * @class
  */
-class RecognizeTargetAudienceRequest extends  AbstractModel {
+class InputKolDataList extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 业务数据
-         * @type {InputRecognizeTargetAudience || null}
+         * 账号类型[1：微信；2：qq；3：微博]
+         * @type {number || null}
          */
-        this.BspData = null;
+        this.Type = null;
+
+        /**
+         * KOL账号ID[比如微信公众号ID]
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * KOL名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 代理商名称
+         * @type {string || null}
+         */
+        this.AgentInfo = null;
 
     }
 
@@ -1265,11 +1426,31 @@ class RecognizeTargetAudienceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.AgentInfo = 'AgentInfo' in params ? params.AgentInfo : null;
 
-        if (params.BspData) {
-            let obj = new InputRecognizeTargetAudience();
-            obj.deserialize(params.BspData)
-            this.BspData = obj;
+    }
+}
+
+/**
+ * 接口入参
+ * @class
+ */
+class InputRecognizeEffectiveFlow extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
     }
@@ -1404,9 +1585,10 @@ class InputSendTrafficSecuritySmsMsg extends  AbstractModel {
 }
 
 module.exports = {
-    InputKolDataList: InputKolDataList,
+    OutputRecognizeEffectiveFlowValue: OutputRecognizeEffectiveFlowValue,
     OutputKolData: OutputKolData,
     InputKolBspData: InputKolBspData,
+    RecognizeEffectiveFlowRequest: RecognizeEffectiveFlowRequest,
     EnhanceTaDegreeRequest: EnhanceTaDegreeRequest,
     OutputRecognizeTargetAudienceValue: OutputRecognizeTargetAudienceValue,
     SendTrafficSecuritySmsMessageRequest: SendTrafficSecuritySmsMessageRequest,
@@ -1416,15 +1598,19 @@ module.exports = {
     EnhanceTaDegreeResponse: EnhanceTaDegreeResponse,
     InputTaBspData: InputTaBspData,
     OutputSendTrafficSecuritySmsMsg: OutputSendTrafficSecuritySmsMsg,
+    RecognizeEffectiveFlowResponse: RecognizeEffectiveFlowResponse,
     SendTrafficSecuritySmsMessageResponse: SendTrafficSecuritySmsMessageResponse,
     DetectFraudKOLRequest: DetectFraudKOLRequest,
     RecognizeCustomizedAudienceRequest: RecognizeCustomizedAudienceRequest,
+    RecognizeTargetAudienceRequest: RecognizeTargetAudienceRequest,
     RecognizeTargetAudienceResponse: RecognizeTargetAudienceResponse,
+    OutputRecognizeEffectiveFlow: OutputRecognizeEffectiveFlow,
     InputRecognizeTargetAudience: InputRecognizeTargetAudience,
     OutputTaData: OutputTaData,
     OutputTaValue: OutputTaValue,
     RecognizePreciseTargetAudienceRequest: RecognizePreciseTargetAudienceRequest,
-    RecognizeTargetAudienceRequest: RecognizeTargetAudienceRequest,
+    InputKolDataList: InputKolDataList,
+    InputRecognizeEffectiveFlow: InputRecognizeEffectiveFlow,
     RecognizePreciseTargetAudienceResponse: RecognizePreciseTargetAudienceResponse,
     OutputRecognizeTargetAudience: OutputRecognizeTargetAudience,
     InputSendTrafficSecuritySmsMsg: InputSendTrafficSecuritySmsMsg,

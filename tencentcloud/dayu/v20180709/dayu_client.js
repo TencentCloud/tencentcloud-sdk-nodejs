@@ -83,13 +83,14 @@ const DescribePcapRequest = models.DescribePcapRequest;
 const DescribeDDoSAlarmThresholdResponse = models.DescribeDDoSAlarmThresholdResponse;
 const KeyValueRecord = models.KeyValueRecord;
 const DescribeBasicDeviceThresholdRequest = models.DescribeBasicDeviceThresholdRequest;
+const ModifyDDoSWaterKeyResponse = models.ModifyDDoSWaterKeyResponse;
 const DescribleNewL7RulesResponse = models.DescribleNewL7RulesResponse;
 const ModifyResBindDDoSPolicyResponse = models.ModifyResBindDDoSPolicyResponse;
 const ModifyDDoSWaterKeyRequest = models.ModifyDDoSWaterKeyRequest;
 const ModifyCCLevelResponse = models.ModifyCCLevelResponse;
 const DescribeBaradDataRequest = models.DescribeBaradDataRequest;
 const DescribeDDoSDefendStatusResponse = models.DescribeDDoSDefendStatusResponse;
-const DescribeCCSelfDefinePolicyResponse = models.DescribeCCSelfDefinePolicyResponse;
+const DescribeBizHttpStatusRequest = models.DescribeBizHttpStatusRequest;
 const CCPolicy = models.CCPolicy;
 const ModifyDDoSAIStatusResponse = models.ModifyDDoSAIStatusResponse;
 const DescribeDDoSNetEvInfoRequest = models.DescribeDDoSNetEvInfoRequest;
@@ -111,7 +112,7 @@ const DescribeResIpListResponse = models.DescribeResIpListResponse;
 const ModifyCCIpAllowDenyRequest = models.ModifyCCIpAllowDenyRequest;
 const CreateInstanceNameResponse = models.CreateInstanceNameResponse;
 const DescribeDDoSDefendStatusRequest = models.DescribeDDoSDefendStatusRequest;
-const ModifyDDoSWaterKeyResponse = models.ModifyDDoSWaterKeyResponse;
+const HttpStatusMap = models.HttpStatusMap;
 const ModifyL4HealthRequest = models.ModifyL4HealthRequest;
 const ModifyCCHostProtectionResponse = models.ModifyCCHostProtectionResponse;
 const CreateL4RulesResponse = models.CreateL4RulesResponse;
@@ -126,13 +127,14 @@ const DescribleL4RulesRequest = models.DescribleL4RulesRequest;
 const L4RuleEntry = models.L4RuleEntry;
 const DescribeL4HealthConfigRequest = models.DescribeL4HealthConfigRequest;
 const CreateL7CCRuleResponse = models.CreateL7CCRuleResponse;
+const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatusResponse;
 const ModifyNetReturnSwitchRequest = models.ModifyNetReturnSwitchRequest;
 const CreateL7CCRuleRequest = models.CreateL7CCRuleRequest;
 const CreateL7RulesRequest = models.CreateL7RulesRequest;
-const CreateL4RulesRequest = models.CreateL4RulesRequest;
+const DescribeBizHttpStatusResponse = models.DescribeBizHttpStatusResponse;
 const DescribeNewL7RulesErrHealthResponse = models.DescribeNewL7RulesErrHealthResponse;
 const DescribeDDoSNetEvListResponse = models.DescribeDDoSNetEvListResponse;
-const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatusResponse;
+const CreateL4RulesRequest = models.CreateL4RulesRequest;
 const ModifyNewL4RuleRequest = models.ModifyNewL4RuleRequest;
 const DescribeL4RulesErrHealthRequest = models.DescribeL4RulesErrHealthRequest;
 const L4RuleSource = models.L4RuleSource;
@@ -177,6 +179,7 @@ const BaradData = models.BaradData;
 const ModifyDDoSSwitchRequest = models.ModifyDDoSSwitchRequest;
 const CreateNetReturnRequest = models.CreateNetReturnRequest;
 const ModifyDDoSAIStatusRequest = models.ModifyDDoSAIStatusRequest;
+const DescribeDDoSAttackSourceResponse = models.DescribeDDoSAttackSourceResponse;
 const DescribeResourceListResponse = models.DescribeResourceListResponse;
 const DescribeNewL4RulesResponse = models.DescribeNewL4RulesResponse;
 const ModifyCCThresholdRequest = models.ModifyCCThresholdRequest;
@@ -214,7 +217,7 @@ const CCFrequencyRule = models.CCFrequencyRule;
 const CreateCCSelfDefinePolicyResponse = models.CreateCCSelfDefinePolicyResponse;
 const NewL7RuleEntry = models.NewL7RuleEntry;
 const L4DelRule = models.L4DelRule;
-const DescribeDDoSAttackSourceResponse = models.DescribeDDoSAttackSourceResponse;
+const DescribeCCSelfDefinePolicyResponse = models.DescribeCCSelfDefinePolicyResponse;
 const CreateBoundIPResponse = models.CreateBoundIPResponse;
 const DescribeDDoSUsedStatisRequest = models.DescribeDDoSUsedStatisRequest;
 const DDoSPolicyDropOption = models.DDoSPolicyDropOption;
@@ -796,6 +799,17 @@ class DayuClient extends AbstractClient {
     }
 
     /**
+     * 获取业务流量状态码统计
+     * @param {DescribeBizHttpStatusRequest} req
+     * @param {function(string, DescribeBizHttpStatusResponse):void} cb
+     * @public
+     */
+    DescribeBizHttpStatus(req, cb) {
+        let resp = new DescribeBizHttpStatusResponse();
+        this.request("DescribeBizHttpStatus", req, resp, cb);
+    }
+
+    /**
      * 删除CC自定义策略
      * @param {DeleteCCSelfDefinePolicyRequest} req
      * @param {function(string, DeleteCCSelfDefinePolicyResponse):void} cb
@@ -1060,14 +1074,14 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 获取DDoS攻击源IP地域分布图，支持全球攻击分布和国内省份攻击分布；
-     * @param {DescribeDDoSAttackIPRegionMapRequest} req
-     * @param {function(string, DescribeDDoSAttackIPRegionMapResponse):void} cb
+     * 获取DDoS高级策略
+     * @param {DescribeDDoSPolicyRequest} req
+     * @param {function(string, DescribeDDoSPolicyResponse):void} cb
      * @public
      */
-    DescribeDDoSAttackIPRegionMap(req, cb) {
-        let resp = new DescribeDDoSAttackIPRegionMapResponse();
-        this.request("DescribeDDoSAttackIPRegionMap", req, resp, cb);
+    DescribeDDoSPolicy(req, cb) {
+        let resp = new DescribeDDoSPolicyResponse();
+        this.request("DescribeDDoSPolicy", req, resp, cb);
     }
 
     /**
@@ -1501,14 +1515,14 @@ class DayuClient extends AbstractClient {
     }
 
     /**
-     * 获取DDoS高级策略
-     * @param {DescribeDDoSPolicyRequest} req
-     * @param {function(string, DescribeDDoSPolicyResponse):void} cb
+     * 获取DDoS攻击源IP地域分布图，支持全球攻击分布和国内省份攻击分布；
+     * @param {DescribeDDoSAttackIPRegionMapRequest} req
+     * @param {function(string, DescribeDDoSAttackIPRegionMapResponse):void} cb
      * @public
      */
-    DescribeDDoSPolicy(req, cb) {
-        let resp = new DescribeDDoSPolicyResponse();
-        this.request("DescribeDDoSPolicy", req, resp, cb);
+    DescribeDDoSAttackIPRegionMap(req, cb) {
+        let resp = new DescribeDDoSAttackIPRegionMapResponse();
+        this.request("DescribeDDoSAttackIPRegionMap", req, resp, cb);
     }
 
 

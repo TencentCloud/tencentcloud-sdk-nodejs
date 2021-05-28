@@ -206,6 +206,20 @@ class Service extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 独享实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SetType = null;
+
     }
 
     /**
@@ -239,31 +253,25 @@ class Service extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SetType = 'SetType' in params ? params.SetType : null;
 
     }
 }
 
 /**
- * 服务发布版本
+ * DeleteAPIDoc请求参数结构体
  * @class
  */
-class ServiceReleaseVersion extends  AbstractModel {
+class DeleteAPIDocRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 发布版本总数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * API文档ID
+         * @type {string || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * 发布版本列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ServiceReleaseHistoryInfo> || null}
-         */
-        this.VersionList = null;
+        this.ApiDocId = null;
 
     }
 
@@ -274,16 +282,7 @@ class ServiceReleaseVersion extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.VersionList) {
-            this.VersionList = new Array();
-            for (let z in params.VersionList) {
-                let obj = new ServiceReleaseHistoryInfo();
-                obj.deserialize(params.VersionList[z]);
-                this.VersionList.push(obj);
-            }
-        }
+        this.ApiDocId = 'ApiDocId' in params ? params.ApiDocId : null;
 
     }
 }
@@ -329,6 +328,116 @@ class ApiUsagePlanSet extends  AbstractModel {
                 this.ApiUsagePlanList.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DemoteServiceUsagePlan请求参数结构体
+ * @class
+ */
+class DemoteServiceUsagePlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用计划ID。
+         * @type {string || null}
+         */
+        this.UsagePlanId = null;
+
+        /**
+         * 待降级的服务唯一 ID。
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 环境名称。
+         * @type {string || null}
+         */
+        this.Environment = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+
+    }
+}
+
+/**
+ * DescribeAPIDocDetail请求参数结构体
+ * @class
+ */
+class DescribeAPIDocDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档ID
+         * @type {string || null}
+         */
+        this.ApiDocId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiDocId = 'ApiDocId' in params ? params.ApiDocId : null;
+
+    }
+}
+
+/**
+ * ModifyAPIDoc返回参数结构体
+ * @class
+ */
+class ModifyAPIDocResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档基本信息
+         * @type {APIDoc || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new APIDoc();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -525,6 +634,12 @@ class ModifySubDomainRequest extends  AbstractModel {
          */
         this.NetType = null;
 
+        /**
+         * 是否将HTTP请求强制跳转 HTTPS，默认为false。参数为 true时，API网关会将所有使用该自定义域名的 HTTP 协议的请求重定向至 HTTPS 协议进行转发。
+         * @type {boolean || null}
+         */
+        this.IsForcedHttps = null;
+
     }
 
     /**
@@ -549,6 +664,49 @@ class ModifySubDomainRequest extends  AbstractModel {
             }
         }
         this.NetType = 'NetType' in params ? params.NetType : null;
+        this.IsForcedHttps = 'IsForcedHttps' in params ? params.IsForcedHttps : null;
+
+    }
+}
+
+/**
+ * DescribeServiceUsagePlan请求参数结构体
+ * @class
+ */
+class DescribeServiceUsagePlanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待查询的服务唯一 ID。
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -661,6 +819,13 @@ class ServiceEnvironmentStrategy extends  AbstractModel {
          */
         this.Strategy = null;
 
+        /**
+         * 最大限流值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxStrategy = null;
+
     }
 
     /**
@@ -675,35 +840,30 @@ class ServiceEnvironmentStrategy extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.VersionName = 'VersionName' in params ? params.VersionName : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.MaxStrategy = 'MaxStrategy' in params ? params.MaxStrategy : null;
 
     }
 }
 
 /**
- * DemoteServiceUsagePlan请求参数结构体
+ * DescribeApi返回参数结构体
  * @class
  */
-class DemoteServiceUsagePlanRequest extends  AbstractModel {
+class DescribeApiResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 使用计划ID。
-         * @type {string || null}
+         * API 详情。
+         * @type {ApiInfo || null}
          */
-        this.UsagePlanId = null;
+        this.Result = null;
 
         /**
-         * 待降级的服务唯一 ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ServiceId = null;
-
-        /**
-         * 环境名称。
-         * @type {string || null}
-         */
-        this.Environment = null;
+        this.RequestId = null;
 
     }
 
@@ -714,9 +874,13 @@ class DemoteServiceUsagePlanRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UsagePlanId = 'UsagePlanId' in params ? params.UsagePlanId : null;
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-        this.Environment = 'Environment' in params ? params.Environment : null;
+
+        if (params.Result) {
+            let obj = new ApiInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -857,7 +1021,7 @@ class CreateIPStrategyRequest extends  AbstractModel {
         this.StrategyType = null;
 
         /**
-         * 策略详情。
+         * 策略详情，多个ip 使用\n 分隔符分开。
          * @type {string || null}
          */
         this.StrategyData = null;
@@ -1071,6 +1235,101 @@ class HealthCheckConf extends  AbstractModel {
 }
 
 /**
+ * API网关插件详情。
+ * @class
+ */
+class Plugin extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 插件ID。
+         * @type {string || null}
+         */
+        this.PluginId = null;
+
+        /**
+         * 插件名称。
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * 插件类型。
+         * @type {string || null}
+         */
+        this.PluginType = null;
+
+        /**
+         * 插件定义语句。
+         * @type {string || null}
+         */
+        this.PluginData = null;
+
+        /**
+         * 插件描述。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 插件创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 插件修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * 插件绑定的API总数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AttachedApiTotalCount = null;
+
+        /**
+         * 插件绑定的API信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AttachedApiInfo> || null}
+         */
+        this.AttachedApis = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginId = 'PluginId' in params ? params.PluginId : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.PluginData = 'PluginData' in params ? params.PluginData : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.AttachedApiTotalCount = 'AttachedApiTotalCount' in params ? params.AttachedApiTotalCount : null;
+
+        if (params.AttachedApis) {
+            this.AttachedApis = new Array();
+            for (let z in params.AttachedApis) {
+                let obj = new AttachedApiInfo();
+                obj.deserialize(params.AttachedApis[z]);
+                this.AttachedApis.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeApiUsagePlan返回参数结构体
  * @class
  */
@@ -1142,6 +1401,62 @@ class DeleteIPStrategyRequest extends  AbstractModel {
         }
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+
+    }
+}
+
+/**
+ * ModifyAPIDoc请求参数结构体
+ * @class
+ */
+class ModifyAPIDocRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档ID
+         * @type {string || null}
+         */
+        this.ApiDocId = null;
+
+        /**
+         * API文档名称
+         * @type {string || null}
+         */
+        this.ApiDocName = null;
+
+        /**
+         * 服务名称
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 环境名称
+         * @type {string || null}
+         */
+        this.Environment = null;
+
+        /**
+         * 生成文档的API列表
+         * @type {Array.<string> || null}
+         */
+        this.ApiIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiDocId = 'ApiDocId' in params ? params.ApiDocId : null;
+        this.ApiDocName = 'ApiDocName' in params ? params.ApiDocName : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+        this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
 
     }
 }
@@ -1231,6 +1546,12 @@ class DeleteServiceRequest extends  AbstractModel {
          */
         this.ServiceId = null;
 
+        /**
+         * 跳过删除前置条件校验（仅支持独享实例上的服务）
+         * @type {number || null}
+         */
+        this.SkipVerification = null;
+
     }
 
     /**
@@ -1241,6 +1562,7 @@ class DeleteServiceRequest extends  AbstractModel {
             return;
         }
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.SkipVerification = 'SkipVerification' in params ? params.SkipVerification : null;
 
     }
 }
@@ -1580,6 +1902,27 @@ class DescribeServiceResponse extends  AbstractModel {
         this.Tags = null;
 
         /**
+         * 独享实例id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 独享实例name
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SetType = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1639,6 +1982,9 @@ class DescribeServiceResponse extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SetType = 'SetType' in params ? params.SetType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1734,6 +2080,13 @@ class BindSubDomainResponse extends  AbstractModel {
         super();
 
         /**
+         * 绑定操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1748,6 +2101,7 @@ class BindSubDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1825,25 +2179,24 @@ class Tag extends  AbstractModel {
 }
 
 /**
- * DescribeServiceEnvironmentStrategy返回参数结构体
+ * DescribeIPStrategysStatus请求参数结构体
  * @class
  */
-class DescribeServiceEnvironmentStrategyResponse extends  AbstractModel {
+class DescribeIPStrategysStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 限流策略列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ServiceEnvironmentStrategyStatus || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 服务唯一ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ServiceId = null;
+
+        /**
+         * 过滤条件。支持StrategyName。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -1854,13 +2207,16 @@ class DescribeServiceEnvironmentStrategyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
 
-        if (params.Result) {
-            let obj = new ServiceEnvironmentStrategyStatus();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1960,24 +2316,24 @@ class UsagePlansStatus extends  AbstractModel {
 }
 
 /**
- * ModifySubDomain返回参数结构体
+ * API文档列表
  * @class
  */
-class ModifySubDomainResponse extends  AbstractModel {
+class APIDocs extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 修改自定义域名操作是否成功。
-         * @type {boolean || null}
+         * API文档数量
+         * @type {number || null}
          */
-        this.Result = null;
+        this.TotalCount = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * API文档基本信息
+         * @type {Array.<APIDoc> || null}
          */
-        this.RequestId = null;
+        this.APIDocSet = null;
 
     }
 
@@ -1988,8 +2344,16 @@ class ModifySubDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.APIDocSet) {
+            this.APIDocSet = new Array();
+            for (let z in params.APIDocSet) {
+                let obj = new APIDoc();
+                obj.deserialize(params.APIDocSet[z]);
+                this.APIDocSet.push(obj);
+            }
+        }
 
     }
 }
@@ -2376,6 +2740,76 @@ class DeleteServiceSubDomainMappingRequest extends  AbstractModel {
 }
 
 /**
+ * 策略绑定api列表
+ * @class
+ */
+class IPStrategyApi extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API 唯一 ID。
+         * @type {string || null}
+         */
+        this.ApiId = null;
+
+        /**
+         * 用户自定义的 API 名称。
+         * @type {string || null}
+         */
+        this.ApiName = null;
+
+        /**
+         * API 类型。取值为NORMAL（普通API）和TSF （微服务API）。
+         * @type {string || null}
+         */
+        this.ApiType = null;
+
+        /**
+         * API 的路径。如 /path。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * API 的请求方法。如 GET。
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * API 已经绑定的其他策略唯一ID。
+         * @type {string || null}
+         */
+        this.OtherIPStrategyId = null;
+
+        /**
+         * API 已经绑定的环境。
+         * @type {string || null}
+         */
+        this.OtherEnvironmentName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
+        this.ApiType = 'ApiType' in params ? params.ApiType : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.OtherIPStrategyId = 'OtherIPStrategyId' in params ? params.OtherIPStrategyId : null;
+        this.OtherEnvironmentName = 'OtherEnvironmentName' in params ? params.OtherEnvironmentName : null;
+
+    }
+}
+
+/**
  * DescribeIPStrategy返回参数结构体
  * @class
  */
@@ -2412,6 +2846,41 @@ class DescribeIPStrategyResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * api文档下载
+ * @class
+ */
+class DocumentSDK extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
+         * @type {string || null}
+         */
+        this.DocumentURL = null;
+
+        /**
+         * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
+         * @type {string || null}
+         */
+        this.SdkURL = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DocumentURL = 'DocumentURL' in params ? params.DocumentURL : null;
+        this.SdkURL = 'SdkURL' in params ? params.SdkURL : null;
 
     }
 }
@@ -2857,30 +3326,31 @@ class ReqParameter extends  AbstractModel {
 }
 
 /**
- * DescribeServicesStatus请求参数结构体
+ * Base64编码的header触发规则
  * @class
  */
-class DescribeServicesStatusRequest extends  AbstractModel {
+class Base64EncodedTriggerRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回数量，默认为 20，最大值为 100。
-         * @type {number || null}
+         * 进行编码触发的header，可选值 "Accept"和"Content_Type" 对应实际数据流请求header中的Accept和 Content-Type。
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Name = null;
 
         /**
-         * 偏移量，默认为 0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+         * 进行编码触发的header的可选值数组, 数组元素的字符串最大长度为40，元素可以包括数字，英文字母以及特殊字符，特殊字符的可选值为： `.`    `+`    `*`   `-`   `/`  `_` 
 
-        /**
-         * 过滤条件。支持ServiceId、ServiceName、NotUsagePlanId、Environment、IpVersion。
-         * @type {Array.<Filter> || null}
+例如 [
+    "application/x-vpeg005",
+    "application/xhtml+xml",
+    "application/vnd.ms-project",
+    "application/vnd.rn-rn_music_package"
+] 等都是合法的。
+         * @type {Array.<string> || null}
          */
-        this.Filters = null;
+        this.Value = null;
 
     }
 
@@ -2891,17 +3361,8 @@ class DescribeServicesStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -3208,6 +3669,55 @@ req_id：请求id。
 }
 
 /**
+ * UnBindIPStrategy请求参数结构体
+ * @class
+ */
+class UnBindIPStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待解绑的服务唯一ID。
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 待解绑的IP策略唯一ID。
+         * @type {string || null}
+         */
+        this.StrategyId = null;
+
+        /**
+         * 待解绑的环境。
+         * @type {string || null}
+         */
+        this.EnvironmentName = null;
+
+        /**
+         * 待解绑的 API 列表。
+         * @type {Array.<string> || null}
+         */
+        this.UnBindApiIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
+        this.UnBindApiIds = 'UnBindApiIds' in params ? params.UnBindApiIds : null;
+
+    }
+}
+
+/**
  * 错误码入参
  * @class
  */
@@ -3272,7 +3782,7 @@ class CreateServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * 用户自定义的服务名称。如果没传，则系统自动生成一个唯一名称。
+         * 用户自定义的服务名称。
          * @type {string || null}
          */
         this.ServiceName = null;
@@ -3325,6 +3835,12 @@ class CreateServiceRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 独享实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -3351,29 +3867,31 @@ class CreateServiceRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
 
 /**
- * DescribeIPStrategysStatus请求参数结构体
+ * DescribeServiceEnvironmentStrategy返回参数结构体
  * @class
  */
-class DescribeIPStrategysStatusRequest extends  AbstractModel {
+class DescribeServiceEnvironmentStrategyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务唯一ID。
-         * @type {string || null}
+         * 限流策略列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ServiceEnvironmentStrategyStatus || null}
          */
-        this.ServiceId = null;
+        this.Result = null;
 
         /**
-         * 过滤条件。支持StrategyName。
-         * @type {Array.<Filter> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -3384,16 +3902,13 @@ class DescribeIPStrategysStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+        if (params.Result) {
+            let obj = new ServiceEnvironmentStrategyStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3546,6 +4061,46 @@ class UnReleaseServiceResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAPIDoc返回参数结构体
+ * @class
+ */
+class CreateAPIDocResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档基本信息
+         * @type {APIDoc || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new APIDoc();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3719,26 +4274,30 @@ class UpdateServiceRequest extends  AbstractModel {
 }
 
 /**
- * 发布服务返回
+ * tsf类型入参
  * @class
  */
-class ReleaseService extends  AbstractModel {
+class MicroServiceReq extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 发布时的备注信息填写。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 微服务集群。
          * @type {string || null}
          */
-        this.ReleaseDesc = null;
+        this.ClusterId = null;
 
         /**
-         * 发布的版本id。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 微服务命名空间。
          * @type {string || null}
          */
-        this.ReleaseVersion = null;
+        this.NamespaceId = null;
+
+        /**
+         * 微服务名称。
+         * @type {string || null}
+         */
+        this.MicroServiceName = null;
 
     }
 
@@ -3749,23 +4308,24 @@ class ReleaseService extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
-        this.ReleaseVersion = 'ReleaseVersion' in params ? params.ReleaseVersion : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.MicroServiceName = 'MicroServiceName' in params ? params.MicroServiceName : null;
 
     }
 }
 
 /**
- * DescribeServiceSubDomainMappings返回参数结构体
+ * ModifySubDomain返回参数结构体
  * @class
  */
-class DescribeServiceSubDomainMappingsResponse extends  AbstractModel {
+class ModifySubDomainResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 自定义路径映射列表。
-         * @type {ServiceSubDomainMappings || null}
+         * 修改自定义域名操作是否成功。
+         * @type {boolean || null}
          */
         this.Result = null;
 
@@ -3784,13 +4344,79 @@ class DescribeServiceSubDomainMappingsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new ServiceSubDomainMappings();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePlugins请求参数结构体
+ * @class
+ */
+class DescribePluginsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要查询的插件列表。
+         * @type {Array.<string> || null}
+         */
+        this.PluginIds = null;
+
+        /**
+         * 要查询的插件名称。
+         * @type {string || null}
+         */
+        this.PluginName = null;
+
+        /**
+         * 要查询的插件类型。
+         * @type {string || null}
+         */
+        this.PluginType = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。预留字段，目前不支持过滤。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PluginIds = 'PluginIds' in params ? params.PluginIds : null;
+        this.PluginName = 'PluginName' in params ? params.PluginName : null;
+        this.PluginType = 'PluginType' in params ? params.PluginType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4203,7 +4829,7 @@ class ModifyApiRequest extends  AbstractModel {
         this.ApiType = null;
 
         /**
-         * API 鉴权类型。支持SECRET、NONE、OAUTH。默认为NONE。
+         * API 鉴权类型。支持SECRET、NONE、OAUTH、APP。默认为NONE。
          * @type {string || null}
          */
         this.AuthType = null;
@@ -4430,6 +5056,24 @@ class ModifyApiRequest extends  AbstractModel {
          */
         this.ResponseErrorCodes = null;
 
+        /**
+         * 是否开启Base64编码，只有后端为scf时才会生效。
+         * @type {boolean || null}
+         */
+        this.IsBase64Encoded = null;
+
+        /**
+         * 是否开启Base64编码的header触发，只有后端为scf时才会生效。
+         * @type {boolean || null}
+         */
+        this.IsBase64Trigger = null;
+
+        /**
+         * Header触发规则，总规则数不能超过10。
+         * @type {Array.<Base64EncodedTriggerRule> || null}
+         */
+        this.Base64EncodedTriggerRules = null;
+
     }
 
     /**
@@ -4557,6 +5201,17 @@ class ModifyApiRequest extends  AbstractModel {
                 let obj = new ResponseErrorCodeReq();
                 obj.deserialize(params.ResponseErrorCodes[z]);
                 this.ResponseErrorCodes.push(obj);
+            }
+        }
+        this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
+        this.IsBase64Trigger = 'IsBase64Trigger' in params ? params.IsBase64Trigger : null;
+
+        if (params.Base64EncodedTriggerRules) {
+            this.Base64EncodedTriggerRules = new Array();
+            for (let z in params.Base64EncodedTriggerRules) {
+                let obj = new Base64EncodedTriggerRule();
+                obj.deserialize(params.Base64EncodedTriggerRules[z]);
+                this.Base64EncodedTriggerRules.push(obj);
             }
         }
 
@@ -4888,7 +5543,7 @@ class CreateApiRequest extends  AbstractModel {
         this.ServiceId = null;
 
         /**
-         * API 的后端服务类型。支持HTTP、MOCK、TSF、CLB、SCF、WEBSOCKET、TARGET（内测）。
+         * API 的后端服务类型。支持HTTP、MOCK、TSF、SCF、WEBSOCKET、TARGET（内测）。
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -4900,7 +5555,7 @@ class CreateApiRequest extends  AbstractModel {
         this.ServiceTimeout = null;
 
         /**
-         * API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。
+         * API 的前端请求协议，支持HTTP和WEBSOCKET。
          * @type {string || null}
          */
         this.Protocol = null;
@@ -4930,7 +5585,7 @@ class CreateApiRequest extends  AbstractModel {
         this.ApiType = null;
 
         /**
-         * API 鉴权类型。支持SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。默认为NONE。
+         * API 鉴权类型。支持SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH、APP（应用认证）。默认为NONE。
          * @type {string || null}
          */
         this.AuthType = null;
@@ -5151,6 +5806,12 @@ class CreateApiRequest extends  AbstractModel {
          */
         this.UserType = null;
 
+        /**
+         * 是否打开Base64编码，只有后端是scf时才会生效。
+         * @type {boolean || null}
+         */
+        this.IsBase64Encoded = null;
+
     }
 
     /**
@@ -5283,6 +5944,7 @@ class CreateApiRequest extends  AbstractModel {
         }
         this.TargetNamespaceId = 'TargetNamespaceId' in params ? params.TargetNamespaceId : null;
         this.UserType = 'UserType' in params ? params.UserType : null;
+        this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
 
     }
 }
@@ -5505,6 +6167,41 @@ class Environment extends  AbstractModel {
 }
 
 /**
+ * DescribeAPIDocs请求参数结构体
+ * @class
+ */
+class DescribeAPIDocsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * 服务发布列表详情
  * @class
  */
@@ -5550,6 +6247,46 @@ class ServiceReleaseHistoryInfo extends  AbstractModel {
 }
 
 /**
+ * DescribePlugins返回参数结构体
+ * @class
+ */
+class DescribePluginsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 插件详情。
+         * @type {PluginSummary || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new PluginSummary();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ReleaseService返回参数结构体
  * @class
  */
@@ -5590,36 +6327,96 @@ class ReleaseServiceResponse extends  AbstractModel {
 }
 
 /**
- * UnBindIPStrategy请求参数结构体
+ * API文档详细信息
  * @class
  */
-class UnBindIPStrategyRequest extends  AbstractModel {
+class APIDocInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待解绑的服务唯一ID。
+         * API文档ID
+         * @type {string || null}
+         */
+        this.ApiDocId = null;
+
+        /**
+         * API文档名称
+         * @type {string || null}
+         */
+        this.ApiDocName = null;
+
+        /**
+         * API文档构建状态
+         * @type {string || null}
+         */
+        this.ApiDocStatus = null;
+
+        /**
+         * API文档API数量
+         * @type {number || null}
+         */
+        this.ApiCount = null;
+
+        /**
+         * API文档查看次数
+         * @type {number || null}
+         */
+        this.ViewCount = null;
+
+        /**
+         * API文档发布次数
+         * @type {number || null}
+         */
+        this.ReleaseCount = null;
+
+        /**
+         * API文档访问URI
+         * @type {string || null}
+         */
+        this.ApiDocUri = null;
+
+        /**
+         * API文档分享密码
+         * @type {string || null}
+         */
+        this.SharePassword = null;
+
+        /**
+         * API文档更新时间
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * 服务ID
          * @type {string || null}
          */
         this.ServiceId = null;
 
         /**
-         * 待解绑的IP策略唯一ID。
+         * 环境信息
          * @type {string || null}
          */
-        this.StrategyId = null;
+        this.Environment = null;
 
         /**
-         * 待解绑的环境。
-         * @type {string || null}
-         */
-        this.EnvironmentName = null;
-
-        /**
-         * 待解绑的 API 列表。
+         * 生成API文档的API ID
          * @type {Array.<string> || null}
          */
-        this.UnBindApiIds = null;
+        this.ApiIds = null;
+
+        /**
+         * 服务名称
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * 生成API文档的API名称
+         * @type {Array.<string> || null}
+         */
+        this.ApiNames = null;
 
     }
 
@@ -5630,10 +6427,63 @@ class UnBindIPStrategyRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ApiDocId = 'ApiDocId' in params ? params.ApiDocId : null;
+        this.ApiDocName = 'ApiDocName' in params ? params.ApiDocName : null;
+        this.ApiDocStatus = 'ApiDocStatus' in params ? params.ApiDocStatus : null;
+        this.ApiCount = 'ApiCount' in params ? params.ApiCount : null;
+        this.ViewCount = 'ViewCount' in params ? params.ViewCount : null;
+        this.ReleaseCount = 'ReleaseCount' in params ? params.ReleaseCount : null;
+        this.ApiDocUri = 'ApiDocUri' in params ? params.ApiDocUri : null;
+        this.SharePassword = 'SharePassword' in params ? params.SharePassword : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
-        this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
-        this.UnBindApiIds = 'UnBindApiIds' in params ? params.UnBindApiIds : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+        this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.ApiNames = 'ApiNames' in params ? params.ApiNames : null;
+
+    }
+}
+
+/**
+ * 插件列表详情。
+ * @class
+ */
+class PluginSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 插件个数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 插件详情。
+         * @type {Array.<Plugin> || null}
+         */
+        this.PluginSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.PluginSet) {
+            this.PluginSet = new Array();
+            for (let z in params.PluginSet) {
+                let obj = new Plugin();
+                obj.deserialize(params.PluginSet[z]);
+                this.PluginSet.push(obj);
+            }
+        }
 
     }
 }
@@ -5990,24 +6840,369 @@ class DescribeApiKeysStatusRequest extends  AbstractModel {
 }
 
 /**
- * DescribeApi返回参数结构体
+ * 展示api信息
  * @class
  */
-class DescribeApiResponse extends  AbstractModel {
+class ApiInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API 详情。
-         * @type {ApiInfo || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * API 所在的服务唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ServiceId = null;
+
+        /**
+         * API 所在的服务的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * API 所在的服务的描述。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceDesc = null;
+
+        /**
+         * API 接口唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApiId = null;
+
+        /**
+         * API 接口的描述。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApiDesc = null;
+
+        /**
+         * 创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 最后修改时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModifiedTime = null;
+
+        /**
+         * API 接口的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApiName = null;
+
+        /**
+         * API 类型。可取值为NORMAL（普通API）、TSF（微服务API）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApiType = null;
+
+        /**
+         * API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * API 鉴权类型。可取值为 SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AuthType = null;
+
+        /**
+         * OAUTH API的类型。可取值为NORMAL（业务API）、OAUTH（授权API）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApiBusinessType = null;
+
+        /**
+         * OAUTH 业务API 关联的授权API 唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AuthRelationApiId = null;
+
+        /**
+         * OAUTH配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OauthConfig || null}
+         */
+        this.OauthConfig = null;
+
+        /**
+         * 是否购买后调试（云市场预留参数）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsDebugAfterCharge = null;
+
+        /**
+         * 请求的前端配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RequestConfig || null}
+         */
+        this.RequestConfig = null;
+
+        /**
+         * 返回类型。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResponseType = null;
+
+        /**
+         * 自定义响应配置成功响应示例。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResponseSuccessExample = null;
+
+        /**
+         * 自定义响应配置失败响应示例。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResponseFailExample = null;
+
+        /**
+         * 用户自定义错误码配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ErrorCodes> || null}
+         */
+        this.ResponseErrorCodes = null;
+
+        /**
+         * 前端请求参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ReqParameter> || null}
+         */
+        this.RequestParameters = null;
+
+        /**
+         * API 的后端服务超时时间，单位是秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ServiceTimeout = null;
+
+        /**
+         * API 的后端服务类型。可取值为 HTTP、MOCK、TSF、CLB、SCF、WEBSOCKET、TARGET（内测）。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * API 的后端服务配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ServiceConfig || null}
+         */
+        this.ServiceConfig = null;
+
+        /**
+         * API的后端服务参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServiceParameter> || null}
+         */
+        this.ServiceParameters = null;
+
+        /**
+         * 常量参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ConstantParameter> || null}
+         */
+        this.ConstantParameters = null;
+
+        /**
+         * API 的后端 Mock 返回信息。如果 ServiceType 是 Mock，则此参数必传。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceMockReturnMessage = null;
+
+        /**
+         * scf 函数名称。当后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceScfFunctionName = null;
+
+        /**
+         * scf 函数命名空间。当后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceScfFunctionNamespace = null;
+
+        /**
+         * scf函数版本。当后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceScfFunctionQualifier = null;
+
+        /**
+         * 是否开启集成响应。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ServiceScfIsIntegratedResponse = null;
+
+        /**
+         * scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketRegisterFunctionName = null;
+
+        /**
+         * scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketRegisterFunctionNamespace = null;
+
+        /**
+         * scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketRegisterFunctionQualifier = null;
+
+        /**
+         * scf websocket清理函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketCleanupFunctionName = null;
+
+        /**
+         * scf websocket清理函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketCleanupFunctionNamespace = null;
+
+        /**
+         * scf websocket清理函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketCleanupFunctionQualifier = null;
+
+        /**
+         * WEBSOCKET 回推地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InternalDomain = null;
+
+        /**
+         * scf websocket传输函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketTransportFunctionName = null;
+
+        /**
+         * scf websocket传输函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketTransportFunctionNamespace = null;
+
+        /**
+         * scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceWebsocketTransportFunctionQualifier = null;
+
+        /**
+         * API绑定微服务服务列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MicroService> || null}
+         */
+        this.MicroServices = null;
+
+        /**
+         * 微服务信息详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.MicroServicesInfo = null;
+
+        /**
+         * 微服务的负载均衡配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfLoadBalanceConfResp || null}
+         */
+        this.ServiceTsfLoadBalanceConf = null;
+
+        /**
+         * 微服务的健康检查配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {HealthCheckConf || null}
+         */
+        this.ServiceTsfHealthCheckConf = null;
+
+        /**
+         * 是否开启跨域。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableCORS = null;
+
+        /**
+         * API绑定的tag信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * API已发布的环境信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Environments = null;
+
+        /**
+         * 是否开启Base64编码，只有后端为scf时才会生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsBase64Encoded = null;
+
+        /**
+         * 是否开启Base64编码的header触发，只有后端为scf时才会生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsBase64Trigger = null;
+
+        /**
+         * Header触发规则，总规则数量不超过10。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Base64EncodedTriggerRule> || null}
+         */
+        this.Base64EncodedTriggerRules = null;
 
     }
 
@@ -6018,13 +7213,138 @@ class DescribeApiResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.ServiceDesc = 'ServiceDesc' in params ? params.ServiceDesc : null;
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ApiDesc = 'ApiDesc' in params ? params.ApiDesc : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
+        this.ApiType = 'ApiType' in params ? params.ApiType : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.AuthType = 'AuthType' in params ? params.AuthType : null;
+        this.ApiBusinessType = 'ApiBusinessType' in params ? params.ApiBusinessType : null;
+        this.AuthRelationApiId = 'AuthRelationApiId' in params ? params.AuthRelationApiId : null;
 
-        if (params.Result) {
-            let obj = new ApiInfo();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.OauthConfig) {
+            let obj = new OauthConfig();
+            obj.deserialize(params.OauthConfig)
+            this.OauthConfig = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IsDebugAfterCharge = 'IsDebugAfterCharge' in params ? params.IsDebugAfterCharge : null;
+
+        if (params.RequestConfig) {
+            let obj = new RequestConfig();
+            obj.deserialize(params.RequestConfig)
+            this.RequestConfig = obj;
+        }
+        this.ResponseType = 'ResponseType' in params ? params.ResponseType : null;
+        this.ResponseSuccessExample = 'ResponseSuccessExample' in params ? params.ResponseSuccessExample : null;
+        this.ResponseFailExample = 'ResponseFailExample' in params ? params.ResponseFailExample : null;
+
+        if (params.ResponseErrorCodes) {
+            this.ResponseErrorCodes = new Array();
+            for (let z in params.ResponseErrorCodes) {
+                let obj = new ErrorCodes();
+                obj.deserialize(params.ResponseErrorCodes[z]);
+                this.ResponseErrorCodes.push(obj);
+            }
+        }
+
+        if (params.RequestParameters) {
+            this.RequestParameters = new Array();
+            for (let z in params.RequestParameters) {
+                let obj = new ReqParameter();
+                obj.deserialize(params.RequestParameters[z]);
+                this.RequestParameters.push(obj);
+            }
+        }
+        this.ServiceTimeout = 'ServiceTimeout' in params ? params.ServiceTimeout : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+
+        if (params.ServiceConfig) {
+            let obj = new ServiceConfig();
+            obj.deserialize(params.ServiceConfig)
+            this.ServiceConfig = obj;
+        }
+
+        if (params.ServiceParameters) {
+            this.ServiceParameters = new Array();
+            for (let z in params.ServiceParameters) {
+                let obj = new ServiceParameter();
+                obj.deserialize(params.ServiceParameters[z]);
+                this.ServiceParameters.push(obj);
+            }
+        }
+
+        if (params.ConstantParameters) {
+            this.ConstantParameters = new Array();
+            for (let z in params.ConstantParameters) {
+                let obj = new ConstantParameter();
+                obj.deserialize(params.ConstantParameters[z]);
+                this.ConstantParameters.push(obj);
+            }
+        }
+        this.ServiceMockReturnMessage = 'ServiceMockReturnMessage' in params ? params.ServiceMockReturnMessage : null;
+        this.ServiceScfFunctionName = 'ServiceScfFunctionName' in params ? params.ServiceScfFunctionName : null;
+        this.ServiceScfFunctionNamespace = 'ServiceScfFunctionNamespace' in params ? params.ServiceScfFunctionNamespace : null;
+        this.ServiceScfFunctionQualifier = 'ServiceScfFunctionQualifier' in params ? params.ServiceScfFunctionQualifier : null;
+        this.ServiceScfIsIntegratedResponse = 'ServiceScfIsIntegratedResponse' in params ? params.ServiceScfIsIntegratedResponse : null;
+        this.ServiceWebsocketRegisterFunctionName = 'ServiceWebsocketRegisterFunctionName' in params ? params.ServiceWebsocketRegisterFunctionName : null;
+        this.ServiceWebsocketRegisterFunctionNamespace = 'ServiceWebsocketRegisterFunctionNamespace' in params ? params.ServiceWebsocketRegisterFunctionNamespace : null;
+        this.ServiceWebsocketRegisterFunctionQualifier = 'ServiceWebsocketRegisterFunctionQualifier' in params ? params.ServiceWebsocketRegisterFunctionQualifier : null;
+        this.ServiceWebsocketCleanupFunctionName = 'ServiceWebsocketCleanupFunctionName' in params ? params.ServiceWebsocketCleanupFunctionName : null;
+        this.ServiceWebsocketCleanupFunctionNamespace = 'ServiceWebsocketCleanupFunctionNamespace' in params ? params.ServiceWebsocketCleanupFunctionNamespace : null;
+        this.ServiceWebsocketCleanupFunctionQualifier = 'ServiceWebsocketCleanupFunctionQualifier' in params ? params.ServiceWebsocketCleanupFunctionQualifier : null;
+        this.InternalDomain = 'InternalDomain' in params ? params.InternalDomain : null;
+        this.ServiceWebsocketTransportFunctionName = 'ServiceWebsocketTransportFunctionName' in params ? params.ServiceWebsocketTransportFunctionName : null;
+        this.ServiceWebsocketTransportFunctionNamespace = 'ServiceWebsocketTransportFunctionNamespace' in params ? params.ServiceWebsocketTransportFunctionNamespace : null;
+        this.ServiceWebsocketTransportFunctionQualifier = 'ServiceWebsocketTransportFunctionQualifier' in params ? params.ServiceWebsocketTransportFunctionQualifier : null;
+
+        if (params.MicroServices) {
+            this.MicroServices = new Array();
+            for (let z in params.MicroServices) {
+                let obj = new MicroService();
+                obj.deserialize(params.MicroServices[z]);
+                this.MicroServices.push(obj);
+            }
+        }
+        this.MicroServicesInfo = 'MicroServicesInfo' in params ? params.MicroServicesInfo : null;
+
+        if (params.ServiceTsfLoadBalanceConf) {
+            let obj = new TsfLoadBalanceConfResp();
+            obj.deserialize(params.ServiceTsfLoadBalanceConf)
+            this.ServiceTsfLoadBalanceConf = obj;
+        }
+
+        if (params.ServiceTsfHealthCheckConf) {
+            let obj = new HealthCheckConf();
+            obj.deserialize(params.ServiceTsfHealthCheckConf)
+            this.ServiceTsfHealthCheckConf = obj;
+        }
+        this.EnableCORS = 'EnableCORS' in params ? params.EnableCORS : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Environments = 'Environments' in params ? params.Environments : null;
+        this.IsBase64Encoded = 'IsBase64Encoded' in params ? params.IsBase64Encoded : null;
+        this.IsBase64Trigger = 'IsBase64Trigger' in params ? params.IsBase64Trigger : null;
+
+        if (params.Base64EncodedTriggerRules) {
+            this.Base64EncodedTriggerRules = new Array();
+            for (let z in params.Base64EncodedTriggerRules) {
+                let obj = new Base64EncodedTriggerRule();
+                obj.deserialize(params.Base64EncodedTriggerRules[z]);
+                this.Base64EncodedTriggerRules.push(obj);
+            }
+        }
 
     }
 }
@@ -6226,6 +7546,46 @@ class DescribeServiceSubDomainMappingsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeServiceSubDomainMappings返回参数结构体
+ * @class
+ */
+class DescribeServiceSubDomainMappingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自定义路径映射列表。
+         * @type {ServiceSubDomainMappings || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ServiceSubDomainMappings();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeServiceEnvironmentList请求参数结构体
  * @class
  */
@@ -6339,17 +7699,16 @@ class DescribeApiKeyRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUsagePlan返回参数结构体
+ * DescribeAPIDocDetail返回参数结构体
  * @class
  */
-class DescribeUsagePlanResponse extends  AbstractModel {
+class DescribeAPIDocDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 使用计划详情。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {UsagePlanInfo || null}
+         * API文档详细信息
+         * @type {APIDocInfo || null}
          */
         this.Result = null;
 
@@ -6370,7 +7729,7 @@ class DescribeUsagePlanResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new UsagePlanInfo();
+            let obj = new APIDocInfo();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -6499,30 +7858,25 @@ class DeleteServiceSubDomainMappingResponse extends  AbstractModel {
 }
 
 /**
- * DescribeServiceUsagePlan请求参数结构体
+ * CreateApiKey返回参数结构体
  * @class
  */
-class DescribeServiceUsagePlanRequest extends  AbstractModel {
+class CreateApiKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待查询的服务唯一 ID。
+         * 新增的密钥详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ApiKey || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ServiceId = null;
-
-        /**
-         * 返回数量，默认为20，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -6533,9 +7887,13 @@ class DescribeServiceUsagePlanRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Result) {
+            let obj = new ApiKey();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6885,6 +8243,34 @@ class UnBindSecretIdsResponse extends  AbstractModel {
 }
 
 /**
+ * ResetAPIDocPassword请求参数结构体
+ * @class
+ */
+class ResetAPIDocPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档ID
+         * @type {string || null}
+         */
+        this.ApiDocId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiDocId = 'ApiDocId' in params ? params.ApiDocId : null;
+
+    }
+}
+
+/**
  * api或service绑定使用计划详情
  * @class
  */
@@ -7026,54 +8412,18 @@ class ApiUsagePlan extends  AbstractModel {
 }
 
 /**
- * 策略绑定api列表
+ * BuildAPIDoc请求参数结构体
  * @class
  */
-class IPStrategyApi extends  AbstractModel {
+class BuildAPIDocRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * API 唯一 ID。
+         * API文档ID
          * @type {string || null}
          */
-        this.ApiId = null;
-
-        /**
-         * 用户自定义的 API 名称。
-         * @type {string || null}
-         */
-        this.ApiName = null;
-
-        /**
-         * API 类型。取值为NORMAL（普通API）和TSF （微服务API）。
-         * @type {string || null}
-         */
-        this.ApiType = null;
-
-        /**
-         * API 的路径。如 /path。
-         * @type {string || null}
-         */
-        this.Path = null;
-
-        /**
-         * API 的请求方法。如 GET。
-         * @type {string || null}
-         */
-        this.Method = null;
-
-        /**
-         * API 已经绑定的其他策略唯一ID。
-         * @type {string || null}
-         */
-        this.OtherIPStrategyId = null;
-
-        /**
-         * API 已经绑定的环境。
-         * @type {string || null}
-         */
-        this.OtherEnvironmentName = null;
+        this.ApiDocId = null;
 
     }
 
@@ -7084,36 +8434,30 @@ class IPStrategyApi extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ApiId = 'ApiId' in params ? params.ApiId : null;
-        this.ApiName = 'ApiName' in params ? params.ApiName : null;
-        this.ApiType = 'ApiType' in params ? params.ApiType : null;
-        this.Path = 'Path' in params ? params.Path : null;
-        this.Method = 'Method' in params ? params.Method : null;
-        this.OtherIPStrategyId = 'OtherIPStrategyId' in params ? params.OtherIPStrategyId : null;
-        this.OtherEnvironmentName = 'OtherEnvironmentName' in params ? params.OtherEnvironmentName : null;
+        this.ApiDocId = 'ApiDocId' in params ? params.ApiDocId : null;
 
     }
 }
 
 /**
- * api文档下载
+ * DescribeAPIDocs返回参数结构体
  * @class
  */
-class DocumentSDK extends  AbstractModel {
+class DescribeAPIDocsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
-         * @type {string || null}
+         * API文档列表信息
+         * @type {APIDocs || null}
          */
-        this.DocumentURL = null;
+        this.Result = null;
 
         /**
-         * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SdkURL = null;
+        this.RequestId = null;
 
     }
 
@@ -7124,8 +8468,13 @@ class DocumentSDK extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DocumentURL = 'DocumentURL' in params ? params.DocumentURL : null;
-        this.SdkURL = 'SdkURL' in params ? params.SdkURL : null;
+
+        if (params.Result) {
+            let obj = new APIDocs();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7168,6 +8517,55 @@ class ModifyServiceEnvironmentStrategyRequest extends  AbstractModel {
         this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.EnvironmentNames = 'EnvironmentNames' in params ? params.EnvironmentNames : null;
+
+    }
+}
+
+/**
+ * CreateAPIDoc请求参数结构体
+ * @class
+ */
+class CreateAPIDocRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档名称
+         * @type {string || null}
+         */
+        this.ApiDocName = null;
+
+        /**
+         * 服务名称
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 环境名称
+         * @type {string || null}
+         */
+        this.Environment = null;
+
+        /**
+         * 生成文档的API列表
+         * @type {Array.<string> || null}
+         */
+        this.ApiIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiDocName = 'ApiDocName' in params ? params.ApiDocName : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+        this.ApiIds = 'ApiIds' in params ? params.ApiIds : null;
 
     }
 }
@@ -7391,6 +8789,12 @@ class BindSubDomainRequest extends  AbstractModel {
          */
         this.PathMappingSet = null;
 
+        /**
+         * 是否将HTTP请求强制跳转 HTTPS，默认为false。参数为 true时，API网关会将所有使用该自定义域名的 HTTP 协议的请求重定向至 HTTPS 协议进行转发。
+         * @type {boolean || null}
+         */
+        this.IsForcedHttps = null;
+
     }
 
     /**
@@ -7416,6 +8820,7 @@ class BindSubDomainRequest extends  AbstractModel {
                 this.PathMappingSet.push(obj);
             }
         }
+        this.IsForcedHttps = 'IsForcedHttps' in params ? params.IsForcedHttps : null;
 
     }
 }
@@ -7507,6 +8912,85 @@ class CreateIPStrategyResponse extends  AbstractModel {
 }
 
 /**
+ * 插件绑定的API信息
+ * @class
+ */
+class AttachedApiInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API所在服务ID。
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * API所在服务名称。
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * API所在服务描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceDesc = null;
+
+        /**
+         * API ID。
+         * @type {string || null}
+         */
+        this.ApiId = null;
+
+        /**
+         * API名称。
+         * @type {string || null}
+         */
+        this.ApiName = null;
+
+        /**
+         * API描述。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApiDesc = null;
+
+        /**
+         * 插件绑定API的环境。
+         * @type {string || null}
+         */
+        this.Environment = null;
+
+        /**
+         * 插件和API绑定时间。
+         * @type {string || null}
+         */
+        this.AttachedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.ServiceDesc = 'ServiceDesc' in params ? params.ServiceDesc : null;
+        this.ApiId = 'ApiId' in params ? params.ApiId : null;
+        this.ApiName = 'ApiName' in params ? params.ApiName : null;
+        this.ApiDesc = 'ApiDesc' in params ? params.ApiDesc : null;
+        this.Environment = 'Environment' in params ? params.Environment : null;
+        this.AttachedTime = 'AttachedTime' in params ? params.AttachedTime : null;
+
+    }
+}
+
+/**
  * BindIPStrategy请求参数结构体
  * @class
  */
@@ -7556,30 +9040,24 @@ class BindIPStrategyRequest extends  AbstractModel {
 }
 
 /**
- * tsf类型入参
+ * BuildAPIDoc返回参数结构体
  * @class
  */
-class MicroServiceReq extends  AbstractModel {
+class BuildAPIDocResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 微服务集群。
-         * @type {string || null}
+         * 操作是否成功
+         * @type {boolean || null}
          */
-        this.ClusterId = null;
+        this.Result = null;
 
         /**
-         * 微服务命名空间。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.NamespaceId = null;
-
-        /**
-         * 微服务名称。
-         * @type {string || null}
-         */
-        this.MicroServiceName = null;
+        this.RequestId = null;
 
     }
 
@@ -7590,9 +9068,8 @@ class MicroServiceReq extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.MicroServiceName = 'MicroServiceName' in params ? params.MicroServiceName : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7938,6 +9415,47 @@ class ApiKey extends  AbstractModel {
 }
 
 /**
+ * DescribeUsagePlan返回参数结构体
+ * @class
+ */
+class DescribeUsagePlanResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 使用计划详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {UsagePlanInfo || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new UsagePlanInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BindEnvironment请求参数结构体
  * @class
  */
@@ -8109,47 +9627,6 @@ class DescribeUsagePlanEnvironmentsRequest extends  AbstractModel {
         this.BindType = 'BindType' in params ? params.BindType : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
-/**
- * CreateApiKey返回参数结构体
- * @class
- */
-class CreateApiKeyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 新增的密钥详情。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ApiKey || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            let obj = new ApiKey();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8518,6 +9995,43 @@ class UsagePlanStatusInfo extends  AbstractModel {
 }
 
 /**
+ * 发布服务返回
+ * @class
+ */
+class ReleaseService extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发布时的备注信息填写。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseDesc = null;
+
+        /**
+         * 发布的版本id。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReleaseDesc = 'ReleaseDesc' in params ? params.ReleaseDesc : null;
+        this.ReleaseVersion = 'ReleaseVersion' in params ? params.ReleaseVersion : null;
+
+    }
+}
+
+/**
  * CreateService返回参数结构体
  * @class
  */
@@ -8597,6 +10111,41 @@ class CreateServiceResponse extends  AbstractModel {
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.NetTypes = 'NetTypes' in params ? params.NetTypes : null;
         this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAPIDoc返回参数结构体
+ * @class
+ */
+class DeleteAPIDocResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作是否成功
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9063,6 +10612,48 @@ class ApiKeysStatus extends  AbstractModel {
 }
 
 /**
+ * API文档基本信息
+ * @class
+ */
+class APIDoc extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档ID
+         * @type {string || null}
+         */
+        this.ApiDocId = null;
+
+        /**
+         * API文档名称
+         * @type {string || null}
+         */
+        this.ApiDocName = null;
+
+        /**
+         * API文档构建状态
+         * @type {string || null}
+         */
+        this.ApiDocStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApiDocId = 'ApiDocId' in params ? params.ApiDocId : null;
+        this.ApiDocName = 'ApiDocName' in params ? params.ApiDocName : null;
+        this.ApiDocStatus = 'ApiDocStatus' in params ? params.ApiDocStatus : null;
+
+    }
+}
+
+/**
  * DescribeServiceUsagePlan返回参数结构体
  * @class
  */
@@ -9257,476 +10848,6 @@ class DescribeIPStrategysStatusResponse extends  AbstractModel {
 }
 
 /**
- * 展示api信息
- * @class
- */
-class ApiInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * API 所在的服务唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceId = null;
-
-        /**
-         * API 所在的服务的名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceName = null;
-
-        /**
-         * API 所在的服务的描述。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceDesc = null;
-
-        /**
-         * API 接口唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApiId = null;
-
-        /**
-         * API 接口的描述。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApiDesc = null;
-
-        /**
-         * 创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * 最后修改时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ModifiedTime = null;
-
-        /**
-         * API 接口的名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApiName = null;
-
-        /**
-         * API 类型。可取值为NORMAL（普通API）、TSF（微服务API）。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApiType = null;
-
-        /**
-         * API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * API 鉴权类型。可取值为 SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AuthType = null;
-
-        /**
-         * OAUTH API的类型。可取值为NORMAL（业务API）、OAUTH（授权API）。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApiBusinessType = null;
-
-        /**
-         * OAUTH 业务API 关联的授权API 唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AuthRelationApiId = null;
-
-        /**
-         * OAUTH配置。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {OauthConfig || null}
-         */
-        this.OauthConfig = null;
-
-        /**
-         * 是否购买后调试（云市场预留参数）。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.IsDebugAfterCharge = null;
-
-        /**
-         * 请求的前端配置。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {RequestConfig || null}
-         */
-        this.RequestConfig = null;
-
-        /**
-         * 返回类型。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ResponseType = null;
-
-        /**
-         * 自定义响应配置成功响应示例。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ResponseSuccessExample = null;
-
-        /**
-         * 自定义响应配置失败响应示例。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ResponseFailExample = null;
-
-        /**
-         * 用户自定义错误码配置。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ErrorCodes> || null}
-         */
-        this.ResponseErrorCodes = null;
-
-        /**
-         * 前端请求参数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ReqParameter> || null}
-         */
-        this.RequestParameters = null;
-
-        /**
-         * API 的后端服务超时时间，单位是秒。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ServiceTimeout = null;
-
-        /**
-         * API 的后端服务类型。可取值为 HTTP、MOCK、TSF、CLB、SCF、WEBSOCKET、TARGET（内测）。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceType = null;
-
-        /**
-         * API 的后端服务配置。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ServiceConfig || null}
-         */
-        this.ServiceConfig = null;
-
-        /**
-         * API的后端服务参数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ServiceParameter> || null}
-         */
-        this.ServiceParameters = null;
-
-        /**
-         * 常量参数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ConstantParameter> || null}
-         */
-        this.ConstantParameters = null;
-
-        /**
-         * API 的后端 Mock 返回信息。如果 ServiceType 是 Mock，则此参数必传。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceMockReturnMessage = null;
-
-        /**
-         * scf 函数名称。当后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceScfFunctionName = null;
-
-        /**
-         * scf 函数命名空间。当后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceScfFunctionNamespace = null;
-
-        /**
-         * scf函数版本。当后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceScfFunctionQualifier = null;
-
-        /**
-         * 是否开启集成响应。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.ServiceScfIsIntegratedResponse = null;
-
-        /**
-         * scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketRegisterFunctionName = null;
-
-        /**
-         * scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketRegisterFunctionNamespace = null;
-
-        /**
-         * scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketRegisterFunctionQualifier = null;
-
-        /**
-         * scf websocket清理函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketCleanupFunctionName = null;
-
-        /**
-         * scf websocket清理函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketCleanupFunctionNamespace = null;
-
-        /**
-         * scf websocket清理函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketCleanupFunctionQualifier = null;
-
-        /**
-         * WEBSOCKET 回推地址。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.InternalDomain = null;
-
-        /**
-         * scf websocket传输函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketTransportFunctionName = null;
-
-        /**
-         * scf websocket传输函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketTransportFunctionNamespace = null;
-
-        /**
-         * scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ServiceWebsocketTransportFunctionQualifier = null;
-
-        /**
-         * API绑定微服务服务列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<MicroService> || null}
-         */
-        this.MicroServices = null;
-
-        /**
-         * 微服务信息详情。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<number> || null}
-         */
-        this.MicroServicesInfo = null;
-
-        /**
-         * 微服务的负载均衡配置。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TsfLoadBalanceConfResp || null}
-         */
-        this.ServiceTsfLoadBalanceConf = null;
-
-        /**
-         * 微服务的健康检查配置。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {HealthCheckConf || null}
-         */
-        this.ServiceTsfHealthCheckConf = null;
-
-        /**
-         * 是否开启跨域。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
-         */
-        this.EnableCORS = null;
-
-        /**
-         * API绑定的tag信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
-        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
-        this.ServiceDesc = 'ServiceDesc' in params ? params.ServiceDesc : null;
-        this.ApiId = 'ApiId' in params ? params.ApiId : null;
-        this.ApiDesc = 'ApiDesc' in params ? params.ApiDesc : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.ModifiedTime = 'ModifiedTime' in params ? params.ModifiedTime : null;
-        this.ApiName = 'ApiName' in params ? params.ApiName : null;
-        this.ApiType = 'ApiType' in params ? params.ApiType : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.AuthType = 'AuthType' in params ? params.AuthType : null;
-        this.ApiBusinessType = 'ApiBusinessType' in params ? params.ApiBusinessType : null;
-        this.AuthRelationApiId = 'AuthRelationApiId' in params ? params.AuthRelationApiId : null;
-
-        if (params.OauthConfig) {
-            let obj = new OauthConfig();
-            obj.deserialize(params.OauthConfig)
-            this.OauthConfig = obj;
-        }
-        this.IsDebugAfterCharge = 'IsDebugAfterCharge' in params ? params.IsDebugAfterCharge : null;
-
-        if (params.RequestConfig) {
-            let obj = new RequestConfig();
-            obj.deserialize(params.RequestConfig)
-            this.RequestConfig = obj;
-        }
-        this.ResponseType = 'ResponseType' in params ? params.ResponseType : null;
-        this.ResponseSuccessExample = 'ResponseSuccessExample' in params ? params.ResponseSuccessExample : null;
-        this.ResponseFailExample = 'ResponseFailExample' in params ? params.ResponseFailExample : null;
-
-        if (params.ResponseErrorCodes) {
-            this.ResponseErrorCodes = new Array();
-            for (let z in params.ResponseErrorCodes) {
-                let obj = new ErrorCodes();
-                obj.deserialize(params.ResponseErrorCodes[z]);
-                this.ResponseErrorCodes.push(obj);
-            }
-        }
-
-        if (params.RequestParameters) {
-            this.RequestParameters = new Array();
-            for (let z in params.RequestParameters) {
-                let obj = new ReqParameter();
-                obj.deserialize(params.RequestParameters[z]);
-                this.RequestParameters.push(obj);
-            }
-        }
-        this.ServiceTimeout = 'ServiceTimeout' in params ? params.ServiceTimeout : null;
-        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
-
-        if (params.ServiceConfig) {
-            let obj = new ServiceConfig();
-            obj.deserialize(params.ServiceConfig)
-            this.ServiceConfig = obj;
-        }
-
-        if (params.ServiceParameters) {
-            this.ServiceParameters = new Array();
-            for (let z in params.ServiceParameters) {
-                let obj = new ServiceParameter();
-                obj.deserialize(params.ServiceParameters[z]);
-                this.ServiceParameters.push(obj);
-            }
-        }
-
-        if (params.ConstantParameters) {
-            this.ConstantParameters = new Array();
-            for (let z in params.ConstantParameters) {
-                let obj = new ConstantParameter();
-                obj.deserialize(params.ConstantParameters[z]);
-                this.ConstantParameters.push(obj);
-            }
-        }
-        this.ServiceMockReturnMessage = 'ServiceMockReturnMessage' in params ? params.ServiceMockReturnMessage : null;
-        this.ServiceScfFunctionName = 'ServiceScfFunctionName' in params ? params.ServiceScfFunctionName : null;
-        this.ServiceScfFunctionNamespace = 'ServiceScfFunctionNamespace' in params ? params.ServiceScfFunctionNamespace : null;
-        this.ServiceScfFunctionQualifier = 'ServiceScfFunctionQualifier' in params ? params.ServiceScfFunctionQualifier : null;
-        this.ServiceScfIsIntegratedResponse = 'ServiceScfIsIntegratedResponse' in params ? params.ServiceScfIsIntegratedResponse : null;
-        this.ServiceWebsocketRegisterFunctionName = 'ServiceWebsocketRegisterFunctionName' in params ? params.ServiceWebsocketRegisterFunctionName : null;
-        this.ServiceWebsocketRegisterFunctionNamespace = 'ServiceWebsocketRegisterFunctionNamespace' in params ? params.ServiceWebsocketRegisterFunctionNamespace : null;
-        this.ServiceWebsocketRegisterFunctionQualifier = 'ServiceWebsocketRegisterFunctionQualifier' in params ? params.ServiceWebsocketRegisterFunctionQualifier : null;
-        this.ServiceWebsocketCleanupFunctionName = 'ServiceWebsocketCleanupFunctionName' in params ? params.ServiceWebsocketCleanupFunctionName : null;
-        this.ServiceWebsocketCleanupFunctionNamespace = 'ServiceWebsocketCleanupFunctionNamespace' in params ? params.ServiceWebsocketCleanupFunctionNamespace : null;
-        this.ServiceWebsocketCleanupFunctionQualifier = 'ServiceWebsocketCleanupFunctionQualifier' in params ? params.ServiceWebsocketCleanupFunctionQualifier : null;
-        this.InternalDomain = 'InternalDomain' in params ? params.InternalDomain : null;
-        this.ServiceWebsocketTransportFunctionName = 'ServiceWebsocketTransportFunctionName' in params ? params.ServiceWebsocketTransportFunctionName : null;
-        this.ServiceWebsocketTransportFunctionNamespace = 'ServiceWebsocketTransportFunctionNamespace' in params ? params.ServiceWebsocketTransportFunctionNamespace : null;
-        this.ServiceWebsocketTransportFunctionQualifier = 'ServiceWebsocketTransportFunctionQualifier' in params ? params.ServiceWebsocketTransportFunctionQualifier : null;
-
-        if (params.MicroServices) {
-            this.MicroServices = new Array();
-            for (let z in params.MicroServices) {
-                let obj = new MicroService();
-                obj.deserialize(params.MicroServices[z]);
-                this.MicroServices.push(obj);
-            }
-        }
-        this.MicroServicesInfo = 'MicroServicesInfo' in params ? params.MicroServicesInfo : null;
-
-        if (params.ServiceTsfLoadBalanceConf) {
-            let obj = new TsfLoadBalanceConfResp();
-            obj.deserialize(params.ServiceTsfLoadBalanceConf)
-            this.ServiceTsfLoadBalanceConf = obj;
-        }
-
-        if (params.ServiceTsfHealthCheckConf) {
-            let obj = new HealthCheckConf();
-            obj.deserialize(params.ServiceTsfHealthCheckConf)
-            this.ServiceTsfHealthCheckConf = obj;
-        }
-        this.EnableCORS = 'EnableCORS' in params ? params.EnableCORS : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
  * 环境限流
  * @class
  */
@@ -9746,6 +10867,13 @@ class EnvironmentStrategy extends  AbstractModel {
          */
         this.Quota = null;
 
+        /**
+         * 限流最大值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxQuota = null;
+
     }
 
     /**
@@ -9757,6 +10885,7 @@ class EnvironmentStrategy extends  AbstractModel {
         }
         this.EnvironmentName = 'EnvironmentName' in params ? params.EnvironmentName : null;
         this.Quota = 'Quota' in params ? params.Quota : null;
+        this.MaxQuota = 'MaxQuota' in params ? params.MaxQuota : null;
 
     }
 }
@@ -9785,6 +10914,141 @@ class EnableApiKeyRequest extends  AbstractModel {
             return;
         }
         this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+
+    }
+}
+
+/**
+ * ResetAPIDocPassword返回参数结构体
+ * @class
+ */
+class ResetAPIDocPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * API文档基本信息
+         * @type {APIDoc || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new APIDoc();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeServicesStatus请求参数结构体
+ * @class
+ */
+class DescribeServicesStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。支持ServiceId、ServiceName、NotUsagePlanId、Environment、IpVersion。InstanceId
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 服务发布版本
+ * @class
+ */
+class ServiceReleaseVersion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发布版本总数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 发布版本列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServiceReleaseHistoryInfo> || null}
+         */
+        this.VersionList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.VersionList) {
+            this.VersionList = new Array();
+            for (let z in params.VersionList) {
+                let obj = new ServiceReleaseHistoryInfo();
+                obj.deserialize(params.VersionList[z]);
+                this.VersionList.push(obj);
+            }
+        }
 
     }
 }
@@ -9883,25 +11147,31 @@ module.exports = {
     UnBindSubDomainResponse: UnBindSubDomainResponse,
     UpdateApiKeyRequest: UpdateApiKeyRequest,
     Service: Service,
-    ServiceReleaseVersion: ServiceReleaseVersion,
+    DeleteAPIDocRequest: DeleteAPIDocRequest,
     ApiUsagePlanSet: ApiUsagePlanSet,
+    DemoteServiceUsagePlanRequest: DemoteServiceUsagePlanRequest,
+    DescribeAPIDocDetailRequest: DescribeAPIDocDetailRequest,
+    ModifyAPIDocResponse: ModifyAPIDocResponse,
     DescribeUsagePlanRequest: DescribeUsagePlanRequest,
     DeleteUsagePlanResponse: DeleteUsagePlanResponse,
     DisableApiKeyResponse: DisableApiKeyResponse,
     UnReleaseServiceRequest: UnReleaseServiceRequest,
     ModifySubDomainRequest: ModifySubDomainRequest,
+    DescribeServiceUsagePlanRequest: DescribeServiceUsagePlanRequest,
     DescribeServiceEnvironmentListResponse: DescribeServiceEnvironmentListResponse,
     ModifyApiResponse: ModifyApiResponse,
     ServiceEnvironmentStrategy: ServiceEnvironmentStrategy,
-    DemoteServiceUsagePlanRequest: DemoteServiceUsagePlanRequest,
+    DescribeApiResponse: DescribeApiResponse,
     TargetServicesReq: TargetServicesReq,
     TsfLoadBalanceConfResp: TsfLoadBalanceConfResp,
     CreateIPStrategyRequest: CreateIPStrategyRequest,
     IPStrategy: IPStrategy,
     DescribeUsagePlansStatusResponse: DescribeUsagePlansStatusResponse,
     HealthCheckConf: HealthCheckConf,
+    Plugin: Plugin,
     DescribeApiUsagePlanResponse: DescribeApiUsagePlanResponse,
     DeleteIPStrategyRequest: DeleteIPStrategyRequest,
+    ModifyAPIDocRequest: ModifyAPIDocRequest,
     DomainSets: DomainSets,
     DeleteUsagePlanRequest: DeleteUsagePlanRequest,
     DeleteServiceRequest: DeleteServiceRequest,
@@ -9915,10 +11185,10 @@ module.exports = {
     BindSubDomainResponse: BindSubDomainResponse,
     BindEnvironmentResponse: BindEnvironmentResponse,
     Tag: Tag,
-    DescribeServiceEnvironmentStrategyResponse: DescribeServiceEnvironmentStrategyResponse,
+    DescribeIPStrategysStatusRequest: DescribeIPStrategysStatusRequest,
     ConstantParameter: ConstantParameter,
     UsagePlansStatus: UsagePlansStatus,
-    ModifySubDomainResponse: ModifySubDomainResponse,
+    APIDocs: APIDocs,
     LogQuery: LogQuery,
     ServiceParameter: ServiceParameter,
     ModifyServiceResponse: ModifyServiceResponse,
@@ -9928,7 +11198,9 @@ module.exports = {
     BindIPStrategyResponse: BindIPStrategyResponse,
     DescribeApisStatusRequest: DescribeApisStatusRequest,
     DeleteServiceSubDomainMappingRequest: DeleteServiceSubDomainMappingRequest,
+    IPStrategyApi: IPStrategyApi,
     DescribeIPStrategyResponse: DescribeIPStrategyResponse,
+    DocumentSDK: DocumentSDK,
     DeleteApiResponse: DeleteApiResponse,
     CreateApiResponse: CreateApiResponse,
     DescribeIPStrategyApisStatusRequest: DescribeIPStrategyApisStatusRequest,
@@ -9938,26 +11210,29 @@ module.exports = {
     ModifyUsagePlanResponse: ModifyUsagePlanResponse,
     CreateUsagePlanResponse: CreateUsagePlanResponse,
     ReqParameter: ReqParameter,
-    DescribeServicesStatusRequest: DescribeServicesStatusRequest,
+    Base64EncodedTriggerRule: Base64EncodedTriggerRule,
     RequestConfig: RequestConfig,
     DeleteApiKeyResponse: DeleteApiKeyResponse,
     UsagePlan: UsagePlan,
     DescribeServiceReleaseVersionRequest: DescribeServiceReleaseVersionRequest,
     DescribeUsagePlanSecretIdsRequest: DescribeUsagePlanSecretIdsRequest,
     DescribeLogSearchResponse: DescribeLogSearchResponse,
+    UnBindIPStrategyRequest: UnBindIPStrategyRequest,
     ResponseErrorCodeReq: ResponseErrorCodeReq,
     CreateServiceRequest: CreateServiceRequest,
-    DescribeIPStrategysStatusRequest: DescribeIPStrategysStatusRequest,
+    DescribeServiceEnvironmentStrategyResponse: DescribeServiceEnvironmentStrategyResponse,
     DemoteServiceUsagePlanResponse: DemoteServiceUsagePlanResponse,
     EnableApiKeyResponse: EnableApiKeyResponse,
     ServiceReleaseHistory: ServiceReleaseHistory,
     UnReleaseServiceResponse: UnReleaseServiceResponse,
+    CreateAPIDocResponse: CreateAPIDocResponse,
     DescribeServiceRequest: DescribeServiceRequest,
     CreateUsagePlanRequest: CreateUsagePlanRequest,
     DescribeUsagePlanSecretIdsResponse: DescribeUsagePlanSecretIdsResponse,
     UpdateServiceRequest: UpdateServiceRequest,
-    ReleaseService: ReleaseService,
-    DescribeServiceSubDomainMappingsResponse: DescribeServiceSubDomainMappingsResponse,
+    MicroServiceReq: MicroServiceReq,
+    ModifySubDomainResponse: ModifySubDomainResponse,
+    DescribePluginsRequest: DescribePluginsRequest,
     BindSecretIdsRequest: BindSecretIdsRequest,
     UnBindEnvironmentResponse: UnBindEnvironmentResponse,
     UsagePlanBindSecret: UsagePlanBindSecret,
@@ -9978,9 +11253,12 @@ module.exports = {
     DeleteServiceResponse: DeleteServiceResponse,
     DescribeServiceEnvironmentReleaseHistoryResponse: DescribeServiceEnvironmentReleaseHistoryResponse,
     Environment: Environment,
+    DescribeAPIDocsRequest: DescribeAPIDocsRequest,
     ServiceReleaseHistoryInfo: ServiceReleaseHistoryInfo,
+    DescribePluginsResponse: DescribePluginsResponse,
     ReleaseServiceResponse: ReleaseServiceResponse,
-    UnBindIPStrategyRequest: UnBindIPStrategyRequest,
+    APIDocInfo: APIDocInfo,
+    PluginSummary: PluginSummary,
     ModifyApiIncrementRequest: ModifyApiIncrementRequest,
     GenerateApiDocumentRequest: GenerateApiDocumentRequest,
     ServiceUsagePlanSet: ServiceUsagePlanSet,
@@ -9989,30 +11267,33 @@ module.exports = {
     UpdateApiKeyResponse: UpdateApiKeyResponse,
     DescribeApisStatusResponse: DescribeApisStatusResponse,
     DescribeApiKeysStatusRequest: DescribeApiKeysStatusRequest,
-    DescribeApiResponse: DescribeApiResponse,
+    ApiInfo: ApiInfo,
     BindSecretIdsResponse: BindSecretIdsResponse,
     CreateApiRsp: CreateApiRsp,
     UsagePlanBindEnvironment: UsagePlanBindEnvironment,
     DeleteApiRequest: DeleteApiRequest,
     DescribeServiceSubDomainMappingsRequest: DescribeServiceSubDomainMappingsRequest,
+    DescribeServiceSubDomainMappingsResponse: DescribeServiceSubDomainMappingsResponse,
     DescribeServiceEnvironmentListRequest: DescribeServiceEnvironmentListRequest,
     ServiceSubDomainMappings: ServiceSubDomainMappings,
     DescribeApiKeyRequest: DescribeApiKeyRequest,
-    DescribeUsagePlanResponse: DescribeUsagePlanResponse,
+    DescribeAPIDocDetailResponse: DescribeAPIDocDetailResponse,
     Filter: Filter,
     UsagePlanBindSecretStatus: UsagePlanBindSecretStatus,
     DeleteServiceSubDomainMappingResponse: DeleteServiceSubDomainMappingResponse,
-    DescribeServiceUsagePlanRequest: DescribeServiceUsagePlanRequest,
+    CreateApiKeyResponse: CreateApiKeyResponse,
     DescribeUsagePlansStatusRequest: DescribeUsagePlansStatusRequest,
     UsagePlanEnvironment: UsagePlanEnvironment,
     ModifyIPStrategyRequest: ModifyIPStrategyRequest,
     UnBindSecretIdsRequest: UnBindSecretIdsRequest,
     ApiEnvironmentStrategy: ApiEnvironmentStrategy,
     UnBindSecretIdsResponse: UnBindSecretIdsResponse,
+    ResetAPIDocPasswordRequest: ResetAPIDocPasswordRequest,
     ApiUsagePlan: ApiUsagePlan,
-    IPStrategyApi: IPStrategyApi,
-    DocumentSDK: DocumentSDK,
+    BuildAPIDocRequest: BuildAPIDocRequest,
+    DescribeAPIDocsResponse: DescribeAPIDocsResponse,
     ModifyServiceEnvironmentStrategyRequest: ModifyServiceEnvironmentStrategyRequest,
+    CreateAPIDocRequest: CreateAPIDocRequest,
     DescribeServiceSubDomainsRequest: DescribeServiceSubDomainsRequest,
     GenerateApiDocumentResponse: GenerateApiDocumentResponse,
     DescribeUsagePlanEnvironmentsResponse: DescribeUsagePlanEnvironmentsResponse,
@@ -10020,8 +11301,9 @@ module.exports = {
     BindSubDomainRequest: BindSubDomainRequest,
     IPStrategyApiStatus: IPStrategyApiStatus,
     CreateIPStrategyResponse: CreateIPStrategyResponse,
+    AttachedApiInfo: AttachedApiInfo,
     BindIPStrategyRequest: BindIPStrategyRequest,
-    MicroServiceReq: MicroServiceReq,
+    BuildAPIDocResponse: BuildAPIDocResponse,
     ErrorCodes: ErrorCodes,
     ServiceEnvironmentStrategyStatus: ServiceEnvironmentStrategyStatus,
     DescribeApiEnvironmentStrategyResponse: DescribeApiEnvironmentStrategyResponse,
@@ -10029,30 +11311,35 @@ module.exports = {
     ApiEnvironmentStrategyStataus: ApiEnvironmentStrategyStataus,
     DeleteIPStrategyResponse: DeleteIPStrategyResponse,
     ApiKey: ApiKey,
+    DescribeUsagePlanResponse: DescribeUsagePlanResponse,
     BindEnvironmentRequest: BindEnvironmentRequest,
     DescribeIPStrategyRequest: DescribeIPStrategyRequest,
     DescribeUsagePlanEnvironmentsRequest: DescribeUsagePlanEnvironmentsRequest,
-    CreateApiKeyResponse: CreateApiKeyResponse,
     DescribeServiceReleaseVersionResponse: DescribeServiceReleaseVersionResponse,
     RequestParameter: RequestParameter,
     UsagePlanInfo: UsagePlanInfo,
     DescribeServiceEnvironmentReleaseHistoryRequest: DescribeServiceEnvironmentReleaseHistoryRequest,
     UsagePlanStatusInfo: UsagePlanStatusInfo,
+    ReleaseService: ReleaseService,
     CreateServiceResponse: CreateServiceResponse,
+    DeleteAPIDocResponse: DeleteAPIDocResponse,
     DesApisStatus: DesApisStatus,
     DescribeApiKeysStatusResponse: DescribeApiKeysStatusResponse,
     ServicesStatus: ServicesStatus,
     DescribeLogSearchRequest: DescribeLogSearchRequest,
     ApisStatus: ApisStatus,
     ApiKeysStatus: ApiKeysStatus,
+    APIDoc: APIDoc,
     DescribeServiceUsagePlanResponse: DescribeServiceUsagePlanResponse,
     DescribeApiUsagePlanRequest: DescribeApiUsagePlanRequest,
     UnBindSubDomainRequest: UnBindSubDomainRequest,
     DescribeApiRequest: DescribeApiRequest,
     DescribeIPStrategysStatusResponse: DescribeIPStrategysStatusResponse,
-    ApiInfo: ApiInfo,
     EnvironmentStrategy: EnvironmentStrategy,
     EnableApiKeyRequest: EnableApiKeyRequest,
+    ResetAPIDocPasswordResponse: ResetAPIDocPasswordResponse,
+    DescribeServicesStatusRequest: DescribeServicesStatusRequest,
+    ServiceReleaseVersion: ServiceReleaseVersion,
     DescribeServicesStatusResponse: DescribeServicesStatusResponse,
     CreateApiKeyRequest: CreateApiKeyRequest,
 

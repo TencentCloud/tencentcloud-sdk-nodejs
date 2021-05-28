@@ -16,81 +16,100 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ExportBashEventsRequest = models.ExportBashEventsRequest;
-const ModifyAutoOpenProVersionConfigRequest = models.ModifyAutoOpenProVersionConfigRequest;
-const DescribeProcessTaskStatusResponse = models.DescribeProcessTaskStatusResponse;
+const DescribeMalwareInfoRequest = models.DescribeMalwareInfoRequest;
+const DescribeSearchTemplatesResponse = models.DescribeSearchTemplatesResponse;
+const DescribeMachineOsListRequest = models.DescribeMachineOsListRequest;
 const ExportReverseShellEventsResponse = models.ExportReverseShellEventsResponse;
 const DescribeBashRulesRequest = models.DescribeBashRulesRequest;
+const ExportBashEventsRequest = models.ExportBashEventsRequest;
 const ExportPrivilegeEventsResponse = models.ExportPrivilegeEventsResponse;
 const DescribeAlarmAttributeResponse = models.DescribeAlarmAttributeResponse;
 const DescribeWeeklyReportBruteAttacksResponse = models.DescribeWeeklyReportBruteAttacksResponse;
-const DescribeAgentVulsRequest = models.DescribeAgentVulsRequest;
+const DescribeImportMachineInfoResponse = models.DescribeImportMachineInfoResponse;
+const AssetFilters = models.AssetFilters;
 const DescribeTagsRequest = models.DescribeTagsRequest;
 const AddMachineTagResponse = models.AddMachineTagResponse;
 const UsualPlace = models.UsualPlace;
-const DescribeReverseShellRulesRequest = models.DescribeReverseShellRulesRequest;
+const DescribeProcessTaskStatusResponse = models.DescribeProcessTaskStatusResponse;
 const SetBashEventsStatusRequest = models.SetBashEventsStatusRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeReverseShellEventsRequest = models.DescribeReverseShellEventsRequest;
 const WeeklyReportVul = models.WeeklyReportVul;
 const DescribeWeeklyReportBruteAttacksRequest = models.DescribeWeeklyReportBruteAttacksRequest;
+const CreateSearchTemplateResponse = models.CreateSearchTemplateResponse;
 const CreateUsualLoginPlacesRequest = models.CreateUsualLoginPlacesRequest;
 const DescribeProcessTaskStatusRequest = models.DescribeProcessTaskStatusRequest;
-const RegionInfo = models.RegionInfo;
-const DescribeVulScanResultResponse = models.DescribeVulScanResultResponse;
+const DescribeAttackVulTypeListRequest = models.DescribeAttackVulTypeListRequest;
+const DescribeLogStorageStatisticRequest = models.DescribeLogStorageStatisticRequest;
 const ModifyAlarmAttributeRequest = models.ModifyAlarmAttributeRequest;
 const DescribeAttackLogsRequest = models.DescribeAttackLogsRequest;
 const ComponentStatistics = models.ComponentStatistics;
 const InquiryPriceOpenProVersionPrepaidRequest = models.InquiryPriceOpenProVersionPrepaidRequest;
+const DescribeSearchTemplatesRequest = models.DescribeSearchTemplatesRequest;
 const ExportMalwaresRequest = models.ExportMalwaresRequest;
 const DescribeProcessesResponse = models.DescribeProcessesResponse;
 const DeleteBashEventsResponse = models.DeleteBashEventsResponse;
+const DescribeMalwareInfoResponse = models.DescribeMalwareInfoResponse;
 const ExportPrivilegeEventsRequest = models.ExportPrivilegeEventsRequest;
 const WeeklyReportMalware = models.WeeklyReportMalware;
 const CreateBaselineStrategyRequest = models.CreateBaselineStrategyRequest;
 const DescribeSecurityTrendsRequest = models.DescribeSecurityTrendsRequest;
+const DescribeAttackVulTypeListResponse = models.DescribeAttackVulTypeListResponse;
 const Account = models.Account;
 const DescribeReverseShellEventsResponse = models.DescribeReverseShellEventsResponse;
 const DescribePrivilegeRulesRequest = models.DescribePrivilegeRulesRequest;
 const BruteAttack = models.BruteAttack;
 const DescribeOpenPortsRequest = models.DescribeOpenPortsRequest;
-const DescribeImpactedHostsRequest = models.DescribeImpactedHostsRequest;
-const DescribeMaliciousRequestsResponse = models.DescribeMaliciousRequestsResponse;
-const NonLocalLoginPlace = models.NonLocalLoginPlace;
+const DeleteBashRulesResponse = models.DeleteBashRulesResponse;
+const DescribeScanMalwareScheduleRequest = models.DescribeScanMalwareScheduleRequest;
+const DescribeAgentVulsRequest = models.DescribeAgentVulsRequest;
+const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
+const DescribeRiskDnsListResponse = models.DescribeRiskDnsListResponse;
+const DescribeExportMachinesRequest = models.DescribeExportMachinesRequest;
 const CreateProcessTaskResponse = models.CreateProcessTaskResponse;
-const SecurityDynamic = models.SecurityDynamic;
+const DescribeHistoryServiceResponse = models.DescribeHistoryServiceResponse;
 const RenewProVersionRequest = models.RenewProVersionRequest;
 const DescribeComponentsRequest = models.DescribeComponentsRequest;
 const DescribeNonlocalLoginPlacesRequest = models.DescribeNonlocalLoginPlacesRequest;
 const DeleteMachineTagRequest = models.DeleteMachineTagRequest;
 const CreateBaselineStrategyResponse = models.CreateBaselineStrategyResponse;
+const DescribeMaliciousRequestsResponse = models.DescribeMaliciousRequestsResponse;
 const ReverseShellRule = models.ReverseShellRule;
 const OpenPortStatistics = models.OpenPortStatistics;
+const DescribeBruteAttackListResponse = models.DescribeBruteAttackListResponse;
+const DescribeExportMachinesResponse = models.DescribeExportMachinesResponse;
+const DescribeVulInfoResponse = models.DescribeVulInfoResponse;
 const EditPrivilegeRuleResponse = models.EditPrivilegeRuleResponse;
+const UntrustMaliciousRequestRequest = models.UntrustMaliciousRequestRequest;
 const DescribeHistoryAccountsResponse = models.DescribeHistoryAccountsResponse;
 const AgentVul = models.AgentVul;
 const UntrustMalwaresRequest = models.UntrustMalwaresRequest;
-const ExportAttackLogsResponse = models.ExportAttackLogsResponse;
+const DescribeVulsResponse = models.DescribeVulsResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeLoginWhiteListRequest = models.DescribeLoginWhiteListRequest;
 const ReverseShell = models.ReverseShell;
-const UntrustMaliciousRequestRequest = models.UntrustMaliciousRequestRequest;
-const ExportNonlocalLoginPlacesRequest = models.ExportNonlocalLoginPlacesRequest;
+const SecurityDynamic = models.SecurityDynamic;
+const ExportBruteAttacksResponse = models.ExportBruteAttacksResponse;
+const ExportVulDetectionReportResponse = models.ExportVulDetectionReportResponse;
 const DescribeComponentInfoResponse = models.DescribeComponentInfoResponse;
 const DescribeAccountStatisticsResponse = models.DescribeAccountStatisticsResponse;
-const OpenProVersionPrepaidRequest = models.OpenProVersionPrepaidRequest;
+const SwitchBashRulesResponse = models.SwitchBashRulesResponse;
+const DescribeSearchExportListRequest = models.DescribeSearchExportListRequest;
 const ModifyLoginWhiteListResponse = models.ModifyLoginWhiteListResponse;
 const DescribeTagsResponse = models.DescribeTagsResponse;
-const OpenPort = models.OpenPort;
+const DescribePrivilegeEventsRequest = models.DescribePrivilegeEventsRequest;
 const DescribeProVersionInfoRequest = models.DescribeProVersionInfoRequest;
 const CreateProcessTaskRequest = models.CreateProcessTaskRequest;
 const DeleteMaliciousRequestsResponse = models.DeleteMaliciousRequestsResponse;
-const ExportBruteAttacksResponse = models.ExportBruteAttacksResponse;
+const DescribeESHitsResponse = models.DescribeESHitsResponse;
+const SearchTemplate = models.SearchTemplate;
 const EditReverseShellRuleResponse = models.EditReverseShellRuleResponse;
+const OsName = models.OsName;
 const ExportBruteAttacksRequest = models.ExportBruteAttacksRequest;
 const DeleteMachineResponse = models.DeleteMachineResponse;
 const DeleteLoginWhiteListRequest = models.DeleteLoginWhiteListRequest;
 const MachineTag = models.MachineTag;
+const DescribeLogStorageStatisticResponse = models.DescribeLogStorageStatisticResponse;
 const DescribeAttackLogInfoResponse = models.DescribeAttackLogInfoResponse;
 const DescribePrivilegeEventsResponse = models.DescribePrivilegeEventsResponse;
 const WeeklyReportNonlocalLoginPlace = models.WeeklyReportNonlocalLoginPlace;
@@ -99,6 +118,7 @@ const RecoverMalwaresRequest = models.RecoverMalwaresRequest;
 const MaliciousRequest = models.MaliciousRequest;
 const TrustMalwaresResponse = models.TrustMalwaresResponse;
 const TagMachine = models.TagMachine;
+const DescribeOpenPortTaskStatusResponse = models.DescribeOpenPortTaskStatusResponse;
 const DescribeWeeklyReportInfoRequest = models.DescribeWeeklyReportInfoRequest;
 const EditTagsRequest = models.EditTagsRequest;
 const AddLoginWhiteListRequest = models.AddLoginWhiteListRequest;
@@ -109,59 +129,83 @@ const DescribeImpactedHostsResponse = models.DescribeImpactedHostsResponse;
 const RescanImpactedHostRequest = models.RescanImpactedHostRequest;
 const DescribeBashEventsResponse = models.DescribeBashEventsResponse;
 const ModifyLoginWhiteListRequest = models.ModifyLoginWhiteListRequest;
+const Vul = models.Vul;
+const CreateSearchTemplateRequest = models.CreateSearchTemplateRequest;
 const DescribeBashEventsRequest = models.DescribeBashEventsRequest;
 const DeleteTagsRequest = models.DeleteTagsRequest;
 const DescribeOpenPortStatisticsRequest = models.DescribeOpenPortStatisticsRequest;
 const ExportAttackLogsRequest = models.ExportAttackLogsRequest;
+const ModifyMalwareTimingScanSettingsRequest = models.ModifyMalwareTimingScanSettingsRequest;
 const DeleteMachineRequest = models.DeleteMachineRequest;
+const SetBashEventsStatusResponse = models.SetBashEventsStatusResponse;
 const DescribeVulInfoRequest = models.DescribeVulInfoRequest;
 const UntrustMaliciousRequestResponse = models.UntrustMaliciousRequestResponse;
 const DescribeComponentStatisticsResponse = models.DescribeComponentStatisticsResponse;
-const PrivilegeEscalationProcess = models.PrivilegeEscalationProcess;
+const DescribeMachineListResponse = models.DescribeMachineListResponse;
+const MalwareInfo = models.MalwareInfo;
+const ModifyMalwareTimingScanSettingsResponse = models.ModifyMalwareTimingScanSettingsResponse;
 const Place = models.Place;
-const SwitchBashRulesResponse = models.SwitchBashRulesResponse;
+const DescribeMachineRegionsRequest = models.DescribeMachineRegionsRequest;
 const LoginWhiteLists = models.LoginWhiteLists;
 const DeleteUsualLoginPlacesResponse = models.DeleteUsualLoginPlacesResponse;
+const DescribeSearchExportListResponse = models.DescribeSearchExportListResponse;
+const DeleteSearchTemplateRequest = models.DeleteSearchTemplateRequest;
 const DeleteNonlocalLoginPlacesResponse = models.DeleteNonlocalLoginPlacesResponse;
 const DescribeNonlocalLoginPlacesResponse = models.DescribeNonlocalLoginPlacesResponse;
 const DeleteReverseShellRulesResponse = models.DeleteReverseShellRulesResponse;
 const ExportMalwaresResponse = models.ExportMalwaresResponse;
+const UpdateBaselineStrategyResponse = models.UpdateBaselineStrategyResponse;
 const UntrustMalwaresResponse = models.UntrustMalwaresResponse;
+const RenewProVersionResponse = models.RenewProVersionResponse;
 const DeletePrivilegeRulesResponse = models.DeletePrivilegeRulesResponse;
 const CreateOpenPortTaskResponse = models.CreateOpenPortTaskResponse;
+const DescribeMachineListRequest = models.DescribeMachineListRequest;
 const EditBashRuleRequest = models.EditBashRuleRequest;
+const ExportVulDetectionExcelResponse = models.ExportVulDetectionExcelResponse;
+const SeparateMalwaresResponse = models.SeparateMalwaresResponse;
+const SwitchBashRulesRequest = models.SwitchBashRulesRequest;
 const DeletePrivilegeEventsResponse = models.DeletePrivilegeEventsResponse;
 const InquiryPriceOpenProVersionPrepaidResponse = models.InquiryPriceOpenProVersionPrepaidResponse;
+const PrivilegeEscalationProcess = models.PrivilegeEscalationProcess;
 const CloseProVersionRequest = models.CloseProVersionRequest;
-const SetBashEventsStatusResponse = models.SetBashEventsStatusResponse;
+const DescribeIndexListResponse = models.DescribeIndexListResponse;
+const DescribeImportMachineInfoRequest = models.DescribeImportMachineInfoRequest;
 const DescribeUsualLoginPlacesResponse = models.DescribeUsualLoginPlacesResponse;
+const DescribeRiskDnsListRequest = models.DescribeRiskDnsListRequest;
 const DescribeProcessStatisticsResponse = models.DescribeProcessStatisticsResponse;
 const MisAlarmNonlocalLoginPlacesRequest = models.MisAlarmNonlocalLoginPlacesRequest;
 const TrustMaliciousRequestRequest = models.TrustMaliciousRequestRequest;
 const ExportMaliciousRequestsResponse = models.ExportMaliciousRequestsResponse;
+const DescribeSearchLogsRequest = models.DescribeSearchLogsRequest;
 const DescribeAttackLogInfoRequest = models.DescribeAttackLogInfoRequest;
 const DescribeWeeklyReportMalwaresRequest = models.DescribeWeeklyReportMalwaresRequest;
 const DescribeBruteAttacksResponse = models.DescribeBruteAttacksResponse;
+const ModifyProVersionRenewFlagResponse = models.ModifyProVersionRenewFlagResponse;
+const RegionInfo = models.RegionInfo;
 const ExportNonlocalLoginPlacesResponse = models.ExportNonlocalLoginPlacesResponse;
 const DescribeComponentStatisticsRequest = models.DescribeComponentStatisticsRequest;
 const DescribeOverviewStatisticsRequest = models.DescribeOverviewStatisticsRequest;
 const DescribeOpenPortStatisticsResponse = models.DescribeOpenPortStatisticsResponse;
 const DeleteAttackLogsResponse = models.DeleteAttackLogsResponse;
 const DescribeLoginWhiteListResponse = models.DescribeLoginWhiteListResponse;
-const DescribeVulInfoResponse = models.DescribeVulInfoResponse;
-const DescribeTagMachinesRequest = models.DescribeTagMachinesRequest;
+const DescribeMachineRegionsResponse = models.DescribeMachineRegionsResponse;
+const OpenProVersionPrepaidRequest = models.OpenProVersionPrepaidRequest;
+const DescribeScanMalwareScheduleResponse = models.DescribeScanMalwareScheduleResponse;
 const EditReverseShellRuleRequest = models.EditReverseShellRuleRequest;
-const DescribeProVersionInfoResponse = models.DescribeProVersionInfoResponse;
+const DescribeESAggregationsResponse = models.DescribeESAggregationsResponse;
 const DeleteTagsResponse = models.DeleteTagsResponse;
+const DescribeSecurityEventsCntRequest = models.DescribeSecurityEventsCntRequest;
+const UpdateBaselineStrategyRequest = models.UpdateBaselineStrategyRequest;
 const DeleteBruteAttacksRequest = models.DeleteBruteAttacksRequest;
 const DescribeWeeklyReportVulsRequest = models.DescribeWeeklyReportVulsRequest;
 const AddLoginWhiteListResponse = models.AddLoginWhiteListResponse;
 const BashRule = models.BashRule;
-const DescribeOpenPortTaskStatusResponse = models.DescribeOpenPortTaskStatusResponse;
+const DescribeIndexListRequest = models.DescribeIndexListRequest;
 const DescribeWeeklyReportNonlocalLoginPlacesResponse = models.DescribeWeeklyReportNonlocalLoginPlacesResponse;
 const SeparateMalwaresRequest = models.SeparateMalwaresRequest;
-const RenewProVersionResponse = models.RenewProVersionResponse;
+const EffectiveMachineInfo = models.EffectiveMachineInfo;
 const LoginWhiteListsRule = models.LoginWhiteListsRule;
+const CreateSearchLogResponse = models.CreateSearchLogResponse;
 const DescribeTagMachinesResponse = models.DescribeTagMachinesResponse;
 const DescribeSecurityTrendsResponse = models.DescribeSecurityTrendsResponse;
 const ProVersionMachine = models.ProVersionMachine;
@@ -171,6 +215,8 @@ const DescribeSecurityDynamicsResponse = models.DescribeSecurityDynamicsResponse
 const DeleteReverseShellEventsResponse = models.DeleteReverseShellEventsResponse;
 const DeletePrivilegeEventsRequest = models.DeletePrivilegeEventsRequest;
 const DeleteBashRulesRequest = models.DeleteBashRulesRequest;
+const OpenPort = models.OpenPort;
+const TrustMalwaresRequest = models.TrustMalwaresRequest;
 const CloseProVersionResponse = models.CloseProVersionResponse;
 const DeleteAttackLogsRequest = models.DeleteAttackLogsRequest;
 const DescribeOpenPortsResponse = models.DescribeOpenPortsResponse;
@@ -181,27 +227,35 @@ const DescribeMaliciousRequestsRequest = models.DescribeMaliciousRequestsRequest
 const DescribeProcessesRequest = models.DescribeProcessesRequest;
 const DeleteUsualLoginPlacesRequest = models.DeleteUsualLoginPlacesRequest;
 const WeeklyReport = models.WeeklyReport;
+const DescribeGeneralStatRequest = models.DescribeGeneralStatRequest;
 const DescribeOpenPortTaskStatusRequest = models.DescribeOpenPortTaskStatusRequest;
 const Filter = models.Filter;
 const DeleteLoginWhiteListResponse = models.DeleteLoginWhiteListResponse;
 const DescribeAccountStatisticsRequest = models.DescribeAccountStatisticsRequest;
 const DescribeAttackLogsResponse = models.DescribeAttackLogsResponse;
+const NonLocalLoginPlace = models.NonLocalLoginPlace;
+const SecurityEventInfo = models.SecurityEventInfo;
 const OpenProVersionPrepaidResponse = models.OpenProVersionPrepaidResponse;
 const MisAlarmNonlocalLoginPlacesResponse = models.MisAlarmNonlocalLoginPlacesResponse;
 const DeleteMalwaresResponse = models.DeleteMalwaresResponse;
+const DescribeTagMachinesRequest = models.DescribeTagMachinesRequest;
 const ChargePrepaid = models.ChargePrepaid;
 const DescribeWeeklyReportNonlocalLoginPlacesRequest = models.DescribeWeeklyReportNonlocalLoginPlacesRequest;
-const SeparateMalwaresResponse = models.SeparateMalwaresResponse;
+const RecoverMalwaresResponse = models.RecoverMalwaresResponse;
 const ProcessStatistics = models.ProcessStatistics;
 const Process = models.Process;
 const DescribeBruteAttacksRequest = models.DescribeBruteAttacksRequest;
 const DescribeVulScanResultRequest = models.DescribeVulScanResultRequest;
-const DescribePrivilegeEventsRequest = models.DescribePrivilegeEventsRequest;
+const DescribeHistoryServiceRequest = models.DescribeHistoryServiceRequest;
+const ExportVulDetectionReportRequest = models.ExportVulDetectionReportRequest;
 const DescribeWeeklyReportMalwaresResponse = models.DescribeWeeklyReportMalwaresResponse;
+const DescribeReverseShellRulesRequest = models.DescribeReverseShellRulesRequest;
 const DescribeSecurityDynamicsRequest = models.DescribeSecurityDynamicsRequest;
 const ExportBashEventsResponse = models.ExportBashEventsResponse;
 const ImpactedHost = models.ImpactedHost;
+const DescribeESAggregationsRequest = models.DescribeESAggregationsRequest;
 const DescribeReverseShellRulesResponse = models.DescribeReverseShellRulesResponse;
+const DescribeBruteAttackListRequest = models.DescribeBruteAttackListRequest;
 const DescribeComponentInfoRequest = models.DescribeComponentInfoRequest;
 const DeleteNonlocalLoginPlacesRequest = models.DeleteNonlocalLoginPlacesRequest;
 const EditPrivilegeRuleRequest = models.EditPrivilegeRuleRequest;
@@ -210,9 +264,9 @@ const AccountStatistics = models.AccountStatistics;
 const DescribeMachinesResponse = models.DescribeMachinesResponse;
 const CreateUsualLoginPlacesResponse = models.CreateUsualLoginPlacesResponse;
 const DescribePrivilegeRulesResponse = models.DescribePrivilegeRulesResponse;
-const ModifyProVersionRenewFlagResponse = models.ModifyProVersionRenewFlagResponse;
+const ExportNonlocalLoginPlacesRequest = models.ExportNonlocalLoginPlacesRequest;
 const Machine = models.Machine;
-const TrustMalwaresRequest = models.TrustMalwaresRequest;
+const DeleteSearchTemplateResponse = models.DeleteSearchTemplateResponse;
 const Malware = models.Malware;
 const DescribeWeeklyReportVulsResponse = models.DescribeWeeklyReportVulsResponse;
 const WeeklyReportBruteAttack = models.WeeklyReportBruteAttack;
@@ -220,32 +274,38 @@ const DefendAttackLog = models.DefendAttackLog;
 const PrivilegeRule = models.PrivilegeRule;
 const HistoryAccount = models.HistoryAccount;
 const ModifyProVersionRenewFlagRequest = models.ModifyProVersionRenewFlagRequest;
-const TrustMaliciousRequestResponse = models.TrustMaliciousRequestResponse;
+const DescribeESHitsRequest = models.DescribeESHitsRequest;
 const DescribeUsualLoginPlacesRequest = models.DescribeUsualLoginPlacesRequest;
+const TrustMaliciousRequestResponse = models.TrustMaliciousRequestResponse;
 const Component = models.Component;
 const DescribeVulsRequest = models.DescribeVulsRequest;
 const DescribeAgentVulsResponse = models.DescribeAgentVulsResponse;
-const SwitchBashRulesRequest = models.SwitchBashRulesRequest;
+const DescribeGeneralStatResponse = models.DescribeGeneralStatResponse;
 const DescribeProcessStatisticsRequest = models.DescribeProcessStatisticsRequest;
 const DeleteMachineTagResponse = models.DeleteMachineTagResponse;
 const DescribeHistoryAccountsRequest = models.DescribeHistoryAccountsRequest;
+const BruteAttackInfo = models.BruteAttackInfo;
 const DescribeMachineInfoResponse = models.DescribeMachineInfoResponse;
 const OpenProVersionRequest = models.OpenProVersionRequest;
-const DeleteBashRulesResponse = models.DeleteBashRulesResponse;
+const DescribeImpactedHostsRequest = models.DescribeImpactedHostsRequest;
 const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
 const DeleteBashEventsRequest = models.DeleteBashEventsRequest;
 const DescribeComponentsResponse = models.DescribeComponentsResponse;
 const Tag = models.Tag;
 const RescanImpactedHostResponse = models.RescanImpactedHostResponse;
 const SecurityTrend = models.SecurityTrend;
-const Vul = models.Vul;
+const ExportTasksRequest = models.ExportTasksRequest;
+const DescribeVulScanResultResponse = models.DescribeVulScanResultResponse;
+const ModifyAutoOpenProVersionConfigRequest = models.ModifyAutoOpenProVersionConfigRequest;
 const AddMachineTagRequest = models.AddMachineTagRequest;
+const ExportVulDetectionExcelRequest = models.ExportVulDetectionExcelRequest;
 const DescribeWeeklyReportsResponse = models.DescribeWeeklyReportsResponse;
 const DeleteReverseShellEventsRequest = models.DeleteReverseShellEventsRequest;
+const DescribeSearchLogsResponse = models.DescribeSearchLogsResponse;
 const ModifyAutoOpenProVersionConfigResponse = models.ModifyAutoOpenProVersionConfigResponse;
 const ExportReverseShellEventsRequest = models.ExportReverseShellEventsRequest;
-const DescribeVulsResponse = models.DescribeVulsResponse;
-const RecoverMalwaresResponse = models.RecoverMalwaresResponse;
+const DescribeMachineOsListResponse = models.DescribeMachineOsListResponse;
+const ExportAttackLogsResponse = models.ExportAttackLogsResponse;
 const EditTagsResponse = models.EditTagsResponse;
 const IgnoreImpactedHostsRequest = models.IgnoreImpactedHostsRequest;
 const DescribeAlarmAttributeRequest = models.DescribeAlarmAttributeRequest;
@@ -254,10 +314,14 @@ const DeleteBruteAttacksResponse = models.DeleteBruteAttacksResponse;
 const DeleteMaliciousRequestsRequest = models.DeleteMaliciousRequestsRequest;
 const DescribeMachinesRequest = models.DescribeMachinesRequest;
 const ModifyAlarmAttributeResponse = models.ModifyAlarmAttributeResponse;
+const DescribeSecurityEventsCntResponse = models.DescribeSecurityEventsCntResponse;
+const Filters = models.Filters;
 const BashEvent = models.BashEvent;
 const DeleteMalwaresRequest = models.DeleteMalwaresRequest;
 const DescribeMalwaresResponse = models.DescribeMalwaresResponse;
+const CreateSearchLogRequest = models.CreateSearchLogRequest;
 const DeletePrivilegeRulesRequest = models.DeletePrivilegeRulesRequest;
+const ExportTasksResponse = models.ExportTasksResponse;
 
 
 /**
@@ -326,14 +390,14 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (OpenProVersion) 用于开通专业版。
-     * @param {OpenProVersionRequest} req
-     * @param {function(string, OpenProVersionResponse):void} cb
+     * 导出ES查询文档列表
+     * @param {DescribeSearchExportListRequest} req
+     * @param {function(string, DescribeSearchExportListResponse):void} cb
      * @public
      */
-    OpenProVersion(req, cb) {
-        let resp = new OpenProVersionResponse();
-        this.request("OpenProVersion", req, resp, cb);
+    DescribeSearchExportList(req, cb) {
+        let resp = new DescribeSearchExportListResponse();
+        this.request("DescribeSearchExportList", req, resp, cb);
     }
 
     /**
@@ -348,14 +412,14 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeVulInfo) 用于获取漏洞详情。
-     * @param {DescribeVulInfoRequest} req
-     * @param {function(string, DescribeVulInfoResponse):void} cb
+     * 删除检索模板
+     * @param {DeleteSearchTemplateRequest} req
+     * @param {function(string, DeleteSearchTemplateResponse):void} cb
      * @public
      */
-    DescribeVulInfo(req, cb) {
-        let resp = new DescribeVulInfoResponse();
-        this.request("DescribeVulInfo", req, resp, cb);
+    DeleteSearchTemplate(req, cb) {
+        let resp = new DeleteSearchTemplateResponse();
+        this.request("DeleteSearchTemplate", req, resp, cb);
     }
 
     /**
@@ -414,6 +478,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 查询批量导入机器信息
+     * @param {DescribeImportMachineInfoRequest} req
+     * @param {function(string, DescribeImportMachineInfoResponse):void} cb
+     * @public
+     */
+    DescribeImportMachineInfo(req, cb) {
+        let resp = new DescribeImportMachineInfoResponse();
+        this.request("DescribeImportMachineInfo", req, resp, cb);
+    }
+
+    /**
      * 获取高危命令规则列表
      * @param {DescribeBashRulesRequest} req
      * @param {function(string, DescribeBashRulesResponse):void} cb
@@ -422,6 +497,17 @@ class CwpClient extends AbstractClient {
     DescribeBashRules(req, cb) {
         let resp = new DescribeBashRulesResponse();
         this.request("DescribeBashRules", req, resp, cb);
+    }
+
+    /**
+     * 获取历史搜索记录
+     * @param {DescribeSearchLogsRequest} req
+     * @param {function(string, DescribeSearchLogsResponse):void} cb
+     * @public
+     */
+    DescribeSearchLogs(req, cb) {
+        let resp = new DescribeSearchLogsResponse();
+        this.request("DescribeSearchLogs", req, resp, cb);
     }
 
     /**
@@ -491,6 +577,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 获取索引列表
+     * @param {DescribeIndexListRequest} req
+     * @param {function(string, DescribeIndexListResponse):void} cb
+     * @public
+     */
+    DescribeIndexList(req, cb) {
+        let resp = new DescribeIndexListResponse();
+        this.request("DescribeIndexList", req, resp, cb);
+    }
+
+    /**
      * 获取反弹Shell规则列表
      * @param {DescribeReverseShellRulesRequest} req
      * @param {function(string, DescribeReverseShellRulesResponse):void} cb
@@ -499,6 +596,17 @@ class CwpClient extends AbstractClient {
     DescribeReverseShellRules(req, cb) {
         let resp = new DescribeReverseShellRulesResponse();
         this.request("DescribeReverseShellRules", req, resp, cb);
+    }
+
+    /**
+     * 用于异步导出数据量大的日志文件
+     * @param {ExportTasksRequest} req
+     * @param {function(string, ExportTasksResponse):void} cb
+     * @public
+     */
+    ExportTasks(req, cb) {
+        let resp = new ExportTasksResponse();
+        this.request("ExportTasks", req, resp, cb);
     }
 
     /**
@@ -521,6 +629,17 @@ class CwpClient extends AbstractClient {
     DeleteReverseShellRules(req, cb) {
         let resp = new DeleteReverseShellRulesResponse();
         this.request("DeleteReverseShellRules", req, resp, cb);
+    }
+
+    /**
+     * 查询日志检索服务信息
+     * @param {DescribeHistoryServiceRequest} req
+     * @param {function(string, DescribeHistoryServiceResponse):void} cb
+     * @public
+     */
+    DescribeHistoryService(req, cb) {
+        let resp = new DescribeHistoryServiceResponse();
+        this.request("DescribeHistoryService", req, resp, cb);
     }
 
     /**
@@ -590,7 +709,29 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 编辑白名单规则
+     * 获取ES字段聚合结果
+     * @param {DescribeESAggregationsRequest} req
+     * @param {function(string, DescribeESAggregationsResponse):void} cb
+     * @public
+     */
+    DescribeESAggregations(req, cb) {
+        let resp = new DescribeESAggregationsResponse();
+        this.request("DescribeESAggregations", req, resp, cb);
+    }
+
+    /**
+     * 添加历史搜索记录
+     * @param {CreateSearchLogRequest} req
+     * @param {function(string, CreateSearchLogResponse):void} cb
+     * @public
+     */
+    CreateSearchLog(req, cb) {
+        let resp = new CreateSearchLogResponse();
+        this.request("CreateSearchLog", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于编辑异地登录白名单规则。
      * @param {ModifyLoginWhiteListRequest} req
      * @param {function(string, ModifyLoginWhiteListResponse):void} cb
      * @public
@@ -679,6 +820,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+     * @param {ModifyAlarmAttributeRequest} req
+     * @param {function(string, ModifyAlarmAttributeResponse):void} cb
+     * @public
+     */
+    ModifyAlarmAttribute(req, cb) {
+        let resp = new ModifyAlarmAttributeResponse();
+        this.request("ModifyAlarmAttribute", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeNonlocalLoginPlaces)用于获取异地登录事件。
      * @param {DescribeNonlocalLoginPlacesRequest} req
      * @param {function(string, DescribeNonlocalLoginPlacesResponse):void} cb
@@ -709,6 +861,39 @@ class CwpClient extends AbstractClient {
     DescribeOverviewStatistics(req, cb) {
         let resp = new DescribeOverviewStatisticsResponse();
         this.request("DescribeOverviewStatistics", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (DescribeVulInfo) 用于获取漏洞详情。
+     * @param {DescribeVulInfoRequest} req
+     * @param {function(string, DescribeVulInfoResponse):void} cb
+     * @public
+     */
+    DescribeVulInfo(req, cb) {
+        let resp = new DescribeVulInfoResponse();
+        this.request("DescribeVulInfo", req, resp, cb);
+    }
+
+    /**
+     * 获取网络攻击威胁类型列表
+     * @param {DescribeAttackVulTypeListRequest} req
+     * @param {function(string, DescribeAttackVulTypeListResponse):void} cb
+     * @public
+     */
+    DescribeAttackVulTypeList(req, cb) {
+        let resp = new DescribeAttackVulTypeListResponse();
+        this.request("DescribeAttackVulTypeList", req, resp, cb);
+    }
+
+    /**
+     * 添加检索模板
+     * @param {CreateSearchTemplateRequest} req
+     * @param {function(string, CreateSearchTemplateResponse):void} cb
+     * @public
+     */
+    CreateSearchTemplate(req, cb) {
+        let resp = new CreateSearchTemplateResponse();
+        this.request("CreateSearchTemplate", req, resp, cb);
     }
 
     /**
@@ -767,6 +952,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (DescribeMachineList) 用于网页防篡改获取区域主机列表。
+     * @param {DescribeMachineListRequest} req
+     * @param {function(string, DescribeMachineListResponse):void} cb
+     * @public
+     */
+    DescribeMachineList(req, cb) {
+        let resp = new DescribeMachineListResponse();
+        this.request("DescribeMachineList", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeWeeklyReportNonlocalLoginPlaces) 用于获取专业周报异地登录数据。
      * @param {DescribeWeeklyReportNonlocalLoginPlacesRequest} req
      * @param {function(string, DescribeWeeklyReportNonlocalLoginPlacesResponse):void} cb
@@ -778,7 +974,18 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 删除白名单规则
+     * 查询木马扫描进度
+     * @param {DescribeScanMalwareScheduleRequest} req
+     * @param {function(string, DescribeScanMalwareScheduleResponse):void} cb
+     * @public
+     */
+    DescribeScanMalwareSchedule(req, cb) {
+        let resp = new DescribeScanMalwareScheduleResponse();
+        this.request("DescribeScanMalwareSchedule", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于删除异地登录白名单规则。
      * @param {DeleteLoginWhiteListRequest} req
      * @param {function(string, DeleteLoginWhiteListResponse):void} cb
      * @public
@@ -822,14 +1029,25 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyAlarmAttribute）用于修改告警设置。
-     * @param {ModifyAlarmAttributeRequest} req
-     * @param {function(string, ModifyAlarmAttributeResponse):void} cb
+     * 本接口 (DescribeExportMachines) 用于导出区域主机列表。
+     * @param {DescribeExportMachinesRequest} req
+     * @param {function(string, DescribeExportMachinesResponse):void} cb
      * @public
      */
-    ModifyAlarmAttribute(req, cb) {
-        let resp = new ModifyAlarmAttributeResponse();
-        this.request("ModifyAlarmAttribute", req, resp, cb);
+    DescribeExportMachines(req, cb) {
+        let resp = new DescribeExportMachinesResponse();
+        this.request("DescribeExportMachines", req, resp, cb);
+    }
+
+    /**
+     * 获取机器地域列表
+     * @param {DescribeMachineRegionsRequest} req
+     * @param {function(string, DescribeMachineRegionsResponse):void} cb
+     * @public
+     */
+    DescribeMachineRegions(req, cb) {
+        let resp = new DescribeMachineRegionsResponse();
+        this.request("DescribeMachineRegions", req, resp, cb);
     }
 
     /**
@@ -910,6 +1128,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 获取密码破解列表
+     * @param {DescribeBruteAttackListRequest} req
+     * @param {function(string, DescribeBruteAttackListResponse):void} cb
+     * @public
+     */
+    DescribeBruteAttackList(req, cb) {
+        let resp = new DescribeBruteAttackListResponse();
+        this.request("DescribeBruteAttackList", req, resp, cb);
+    }
+
+    /**
      * 本接口 (OpenProVersionPrepaid) 用于开通专业版(包年包月)。
      * @param {OpenProVersionPrepaidRequest} req
      * @param {function(string, OpenProVersionPrepaidResponse):void} cb
@@ -929,6 +1158,17 @@ class CwpClient extends AbstractClient {
     AddMachineTag(req, cb) {
         let resp = new AddMachineTagResponse();
         this.request("AddMachineTag", req, resp, cb);
+    }
+
+    /**
+     * 获取快速检索列表
+     * @param {DescribeSearchTemplatesRequest} req
+     * @param {function(string, DescribeSearchTemplatesResponse):void} cb
+     * @public
+     */
+    DescribeSearchTemplates(req, cb) {
+        let resp = new DescribeSearchTemplatesResponse();
+        this.request("DescribeSearchTemplates", req, resp, cb);
     }
 
     /**
@@ -954,7 +1194,7 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 本接口（AddLoginWhiteList）用于添加白名单规则
+     * 本接口用于新增异地登录白名单规则。
      * @param {AddLoginWhiteListRequest} req
      * @param {function(string, AddLoginWhiteListResponse):void} cb
      * @public
@@ -965,14 +1205,25 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
-     * @param {ExportNonlocalLoginPlacesRequest} req
-     * @param {function(string, ExportNonlocalLoginPlacesResponse):void} cb
+     * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
+     * @param {DescribeProcessStatisticsRequest} req
+     * @param {function(string, DescribeProcessStatisticsResponse):void} cb
      * @public
      */
-    ExportNonlocalLoginPlaces(req, cb) {
-        let resp = new ExportNonlocalLoginPlacesResponse();
-        this.request("ExportNonlocalLoginPlaces", req, resp, cb);
+    DescribeProcessStatistics(req, cb) {
+        let resp = new DescribeProcessStatisticsResponse();
+        this.request("DescribeProcessStatistics", req, resp, cb);
+    }
+
+    /**
+     * 查看恶意文件详情
+     * @param {DescribeMalwareInfoRequest} req
+     * @param {function(string, DescribeMalwareInfoResponse):void} cb
+     * @public
+     */
+    DescribeMalwareInfo(req, cb) {
+        let resp = new DescribeMalwareInfoResponse();
+        this.request("DescribeMalwareInfo", req, resp, cb);
     }
 
     /**
@@ -1064,6 +1315,28 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 获取ES查询文档列表
+     * @param {DescribeESHitsRequest} req
+     * @param {function(string, DescribeESHitsResponse):void} cb
+     * @public
+     */
+    DescribeESHits(req, cb) {
+        let resp = new DescribeESHitsResponse();
+        this.request("DescribeESHits", req, resp, cb);
+    }
+
+    /**
+     * 概览页抽屉侧边弹窗：安全概览“立即处理”页面中的相关事件数统计接口。
+     * @param {DescribeSecurityEventsCntRequest} req
+     * @param {function(string, DescribeSecurityEventsCntResponse):void} cb
+     * @public
+     */
+    DescribeSecurityEventsCnt(req, cb) {
+        let resp = new DescribeSecurityEventsCntResponse();
+        this.request("DescribeSecurityEventsCnt", req, resp, cb);
+    }
+
+    /**
      * 获取本地提权事件列表
      * @param {DescribePrivilegeEventsRequest} req
      * @param {function(string, DescribePrivilegeEventsResponse):void} cb
@@ -1097,6 +1370,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 获取日志检索容量使用统计
+     * @param {DescribeLogStorageStatisticRequest} req
+     * @param {function(string, DescribeLogStorageStatisticResponse):void} cb
+     * @public
+     */
+    DescribeLogStorageStatistic(req, cb) {
+        let resp = new DescribeLogStorageStatisticResponse();
+        this.request("DescribeLogStorageStatistic", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeComponents) 用于获取组件列表数据。
      * @param {DescribeComponentsRequest} req
      * @param {function(string, DescribeComponentsResponse):void} cb
@@ -1119,6 +1403,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 根据基线策略id更新策略信息
+     * @param {UpdateBaselineStrategyRequest} req
+     * @param {function(string, UpdateBaselineStrategyResponse):void} cb
+     * @public
+     */
+    UpdateBaselineStrategy(req, cb) {
+        let resp = new UpdateBaselineStrategyResponse();
+        this.request("UpdateBaselineStrategy", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
 
      * @param {DescribeVulScanResultRequest} req
@@ -1128,6 +1423,17 @@ class CwpClient extends AbstractClient {
     DescribeVulScanResult(req, cb) {
         let resp = new DescribeVulScanResultResponse();
         this.request("DescribeVulScanResult", req, resp, cb);
+    }
+
+    /**
+     * 入侵检测，获取恶意请求列表
+     * @param {DescribeRiskDnsListRequest} req
+     * @param {function(string, DescribeRiskDnsListResponse):void} cb
+     * @public
+     */
+    DescribeRiskDnsList(req, cb) {
+        let resp = new DescribeRiskDnsListResponse();
+        this.request("DescribeRiskDnsList", req, resp, cb);
     }
 
     /**
@@ -1142,14 +1448,14 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
-     * @param {DescribeProcessStatisticsRequest} req
-     * @param {function(string, DescribeProcessStatisticsResponse):void} cb
+     * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
+     * @param {ExportNonlocalLoginPlacesRequest} req
+     * @param {function(string, ExportNonlocalLoginPlacesResponse):void} cb
      * @public
      */
-    DescribeProcessStatistics(req, cb) {
-        let resp = new DescribeProcessStatisticsResponse();
-        this.request("DescribeProcessStatistics", req, resp, cb);
+    ExportNonlocalLoginPlaces(req, cb) {
+        let resp = new ExportNonlocalLoginPlacesResponse();
+        this.request("ExportNonlocalLoginPlaces", req, resp, cb);
     }
 
     /**
@@ -1175,6 +1481,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (OpenProVersion) 用于开通专业版。
+     * @param {OpenProVersionRequest} req
+     * @param {function(string, OpenProVersionResponse):void} cb
+     * @public
+     */
+    OpenProVersion(req, cb) {
+        let resp = new OpenProVersionResponse();
+        this.request("OpenProVersion", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
 
      * @param {DescribeWeeklyReportVulsRequest} req
@@ -1187,14 +1504,25 @@ class CwpClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
-     * @param {DescribeWeeklyReportInfoRequest} req
-     * @param {function(string, DescribeWeeklyReportInfoResponse):void} cb
+     * 查询可筛选操作系统列表.
+     * @param {DescribeMachineOsListRequest} req
+     * @param {function(string, DescribeMachineOsListResponse):void} cb
      * @public
      */
-    DescribeWeeklyReportInfo(req, cb) {
-        let resp = new DescribeWeeklyReportInfoResponse();
-        this.request("DescribeWeeklyReportInfo", req, resp, cb);
+    DescribeMachineOsList(req, cb) {
+        let resp = new DescribeMachineOsListResponse();
+        this.request("DescribeMachineOsList", req, resp, cb);
+    }
+
+    /**
+     * 定时扫描设置
+     * @param {ModifyMalwareTimingScanSettingsRequest} req
+     * @param {function(string, ModifyMalwareTimingScanSettingsResponse):void} cb
+     * @public
+     */
+    ModifyMalwareTimingScanSettings(req, cb) {
+        let resp = new ModifyMalwareTimingScanSettingsResponse();
+        this.request("ModifyMalwareTimingScanSettings", req, resp, cb);
     }
 
     /**
@@ -1217,6 +1545,17 @@ class CwpClient extends AbstractClient {
     ModifyProVersionRenewFlag(req, cb) {
         let resp = new ModifyProVersionRenewFlagResponse();
         this.request("ModifyProVersionRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * 获取主机安全相关统计
+     * @param {DescribeGeneralStatRequest} req
+     * @param {function(string, DescribeGeneralStatResponse):void} cb
+     * @public
+     */
+    DescribeGeneralStat(req, cb) {
+        let resp = new DescribeGeneralStatResponse();
+        this.request("DescribeGeneralStat", req, resp, cb);
     }
 
     /**
@@ -1308,6 +1647,17 @@ class CwpClient extends AbstractClient {
     }
 
     /**
+     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
+     * @param {DescribeWeeklyReportInfoRequest} req
+     * @param {function(string, DescribeWeeklyReportInfoResponse):void} cb
+     * @public
+     */
+    DescribeWeeklyReportInfo(req, cb) {
+        let resp = new DescribeWeeklyReportInfoResponse();
+        this.request("DescribeWeeklyReportInfo", req, resp, cb);
+    }
+
+    /**
      * 网络攻击日志详情
      * @param {DescribeAttackLogInfoRequest} req
      * @param {function(string, DescribeAttackLogInfoResponse):void} cb
@@ -1327,6 +1677,17 @@ class CwpClient extends AbstractClient {
     IgnoreImpactedHosts(req, cb) {
         let resp = new IgnoreImpactedHostsResponse();
         this.request("IgnoreImpactedHosts", req, resp, cb);
+    }
+
+    /**
+     * 导出本次漏洞检测Excel
+     * @param {ExportVulDetectionExcelRequest} req
+     * @param {function(string, ExportVulDetectionExcelResponse):void} cb
+     * @public
+     */
+    ExportVulDetectionExcel(req, cb) {
+        let resp = new ExportVulDetectionExcelResponse();
+        this.request("ExportVulDetectionExcel", req, resp, cb);
     }
 
     /**
@@ -1360,6 +1721,17 @@ class CwpClient extends AbstractClient {
     CreateUsualLoginPlaces(req, cb) {
         let resp = new CreateUsualLoginPlacesResponse();
         this.request("CreateUsualLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * 导出漏洞检测报告。
+     * @param {ExportVulDetectionReportRequest} req
+     * @param {function(string, ExportVulDetectionReportResponse):void} cb
+     * @public
+     */
+    ExportVulDetectionReport(req, cb) {
+        let resp = new ExportVulDetectionReportResponse();
+        this.request("ExportVulDetectionReport", req, resp, cb);
     }
 
     /**

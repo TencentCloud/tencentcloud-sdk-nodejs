@@ -179,7 +179,7 @@ class FaceFusionResponse extends  AbstractModel {
         this.Image = null;
 
         /**
-         * 鉴政结果
+         * 不适宜内容识别结果
          * @type {Array.<FuseFaceReviewResult> || null}
          */
         this.ReviewResultSet = null;
@@ -343,8 +343,8 @@ class FaceFusionRequest extends  AbstractModel {
         this.PornDetect = null;
 
         /**
-         * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
-请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
+         * 0表示不需要不适宜内容识别，1表示需要不适宜内容识别。默认值为0。
+请注意，不适宜内容识别服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
          * @type {number || null}
          */
         this.CelebrityIdentify = null;
@@ -420,7 +420,7 @@ class FaceFusionLiteResponse extends  AbstractModel {
 }
 
 /**
- * 人脸融合鉴黄鉴政人脸信息
+ * 人脸融合不适宜内容识别人脸信息
  * @class
  */
 class FuseFaceReviewDetail extends  AbstractModel {
@@ -600,7 +600,7 @@ class FaceFusionLiteRequest extends  AbstractModel {
 }
 
 /**
- * 人脸融合鉴黄鉴政返回参数item
+ * 人脸融合不适宜内容识别返回参数item
  * @class
  */
 class FuseFaceReviewResult extends  AbstractModel {
@@ -685,7 +685,7 @@ class FuseFaceResponse extends  AbstractModel {
         this.FusedImage = null;
 
         /**
-         * 鉴政结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应
+         * 不适宜内容识别结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<FuseFaceReviewResult> || null}
          */
@@ -768,8 +768,8 @@ class FuseFaceRequest extends  AbstractModel {
         this.FuseFaceDegree = null;
 
         /**
-         * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
-请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
+         * 0表示不需要不适宜内容识别，1表示需要不适宜内容识别。默认值为0。
+请注意，不适宜内容识别服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
          * @type {number || null}
          */
         this.CelebrityIdentify = null;

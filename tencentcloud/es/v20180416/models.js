@@ -251,6 +251,34 @@ class NodeInfo extends  AbstractModel {
 }
 
 /**
+ * GetRequestTargetNodeTypes请求参数结构体
+ * @class
+ */
+class GetRequestTargetNodeTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceOperations请求参数结构体
  * @class
  */
@@ -358,6 +386,34 @@ class OperationDetail extends  AbstractModel {
 }
 
 /**
+ * DiagnoseInstance返回参数结构体
+ * @class
+ */
+class DiagnoseInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ES公网访问访问控制信息
  * @class
  */
@@ -458,6 +514,34 @@ class RestartInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestartKibana请求参数结构体
+ * @class
+ */
+class RestartKibanaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -576,6 +660,41 @@ class DescribeInstanceLogsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
+ * UpdateRequestTargetNodeTypes请求参数结构体
+ * @class
+ */
+class UpdateRequestTargetNodeTypesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 接收请求的目标节点类型列表
+         * @type {Array.<string> || null}
+         */
+        this.TargetNodeTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
 
     }
 }
@@ -1340,6 +1459,13 @@ class InstanceInfo extends  AbstractModel {
          */
         this.SceneType = null;
 
+        /**
+         * Kibana配置项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KibanaConfig = null;
+
     }
 
     /**
@@ -1451,6 +1577,7 @@ class InstanceInfo extends  AbstractModel {
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.SecurityType = 'SecurityType' in params ? params.SecurityType : null;
         this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.KibanaConfig = 'KibanaConfig' in params ? params.KibanaConfig : null;
 
     }
 }
@@ -1607,6 +1734,48 @@ class UpdatePluginsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DiagnoseInstance请求参数结构体
+ * @class
+ */
+class DiagnoseInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 需要触发的诊断项
+         * @type {Array.<string> || null}
+         */
+        this.DiagnoseJobs = null;
+
+        /**
+         * 需要诊断的索引，支持通配符
+         * @type {string || null}
+         */
+        this.DiagnoseIndices = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DiagnoseJobs = 'DiagnoseJobs' in params ? params.DiagnoseJobs : null;
+        this.DiagnoseIndices = 'DiagnoseIndices' in params ? params.DiagnoseIndices : null;
 
     }
 }
@@ -1774,6 +1943,48 @@ class DescribeInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateDiagnoseSettings请求参数结构体
+ * @class
+ */
+class UpdateDiagnoseSettingsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 0：开启智能运维；-1：关闭智能运维
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 智能运维每天定时巡检时间
+         * @type {string || null}
+         */
+        this.CronTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CronTime = 'CronTime' in params ? params.CronTime : null;
+
+    }
+}
+
+/**
  * UpdateInstance请求参数结构体
  * @class
  */
@@ -1801,7 +2012,7 @@ class UpdateInstanceRequest extends  AbstractModel {
         this.NodeNum = null;
 
         /**
-         * 配置项（JSON格式字符串）
+         * ES配置项（JSON格式字符串）
          * @type {string || null}
          */
         this.EsConfig = null;
@@ -1925,6 +2136,12 @@ class UpdateInstanceRequest extends  AbstractModel {
          */
         this.SceneType = null;
 
+        /**
+         * Kibana配置项（JSON格式字符串）
+         * @type {string || null}
+         */
+        this.KibanaConfig = null;
+
     }
 
     /**
@@ -1988,6 +2205,7 @@ class UpdateInstanceRequest extends  AbstractModel {
             }
         }
         this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.KibanaConfig = 'KibanaConfig' in params ? params.KibanaConfig : null;
 
     }
 }
@@ -2204,6 +2422,12 @@ class UpdatePluginsRequest extends  AbstractModel {
          */
         this.ForceRestart = null;
 
+        /**
+         * 是否重新安装
+         * @type {boolean || null}
+         */
+        this.ForceUpdate = null;
+
     }
 
     /**
@@ -2217,6 +2441,63 @@ class UpdatePluginsRequest extends  AbstractModel {
         this.InstallPluginList = 'InstallPluginList' in params ? params.InstallPluginList : null;
         this.RemovePluginList = 'RemovePluginList' in params ? params.RemovePluginList : null;
         this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
+        this.ForceUpdate = 'ForceUpdate' in params ? params.ForceUpdate : null;
+
+    }
+}
+
+/**
+ * UpdateRequestTargetNodeTypes返回参数结构体
+ * @class
+ */
+class UpdateRequestTargetNodeTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateDiagnoseSettings返回参数结构体
+ * @class
+ */
+class UpdateDiagnoseSettingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2607,6 +2888,69 @@ class UpgradeInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * GetRequestTargetNodeTypes返回参数结构体
+ * @class
+ */
+class GetRequestTargetNodeTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接收请求的目标节点类型列表
+         * @type {Array.<string> || null}
+         */
+        this.TargetNodeTypes = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetNodeTypes = 'TargetNodeTypes' in params ? params.TargetNodeTypes : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestartKibana返回参数结构体
+ * @class
+ */
+class RestartKibanaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ES集群操作详细信息
  * @class
  */
@@ -2694,13 +3038,17 @@ module.exports = {
     LocalDiskInfo: LocalDiskInfo,
     TaskDetail: TaskDetail,
     NodeInfo: NodeInfo,
+    GetRequestTargetNodeTypesRequest: GetRequestTargetNodeTypesRequest,
     DescribeInstanceOperationsRequest: DescribeInstanceOperationsRequest,
     OperationDetail: OperationDetail,
+    DiagnoseInstanceResponse: DiagnoseInstanceResponse,
     EsPublicAcl: EsPublicAcl,
     DictInfo: DictInfo,
     RestartInstanceResponse: RestartInstanceResponse,
+    RestartKibanaRequest: RestartKibanaRequest,
     CreateInstanceResponse: CreateInstanceResponse,
     DescribeInstanceLogsRequest: DescribeInstanceLogsRequest,
+    UpdateRequestTargetNodeTypesRequest: UpdateRequestTargetNodeTypesRequest,
     UpgradeLicenseRequest: UpgradeLicenseRequest,
     CosBackup: CosBackup,
     TagInfo: TagInfo,
@@ -2711,14 +3059,18 @@ module.exports = {
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeInstanceLogsResponse: DescribeInstanceLogsResponse,
     UpdatePluginsResponse: UpdatePluginsResponse,
+    DiagnoseInstanceRequest: DiagnoseInstanceRequest,
     RestartInstanceRequest: RestartInstanceRequest,
     ZoneDetail: ZoneDetail,
     DescribeInstancesRequest: DescribeInstancesRequest,
+    UpdateDiagnoseSettingsRequest: UpdateDiagnoseSettingsRequest,
     UpdateInstanceRequest: UpdateInstanceRequest,
     EsDictionaryInfo: EsDictionaryInfo,
     DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
     RestartNodesRequest: RestartNodesRequest,
     UpdatePluginsRequest: UpdatePluginsRequest,
+    UpdateRequestTargetNodeTypesResponse: UpdateRequestTargetNodeTypesResponse,
+    UpdateDiagnoseSettingsResponse: UpdateDiagnoseSettingsResponse,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,
@@ -2728,6 +3080,8 @@ module.exports = {
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpdateInstanceResponse: UpdateInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    GetRequestTargetNodeTypesResponse: GetRequestTargetNodeTypesResponse,
+    RestartKibanaResponse: RestartKibanaResponse,
     Operation: Operation,
 
 }

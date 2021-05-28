@@ -25,6 +25,7 @@ const CreateKeyRequest = models.CreateKeyRequest;
 const DisableWhiteBoxKeyResponse = models.DisableWhiteBoxKeyResponse;
 const DisableKeyResponse = models.DisableKeyResponse;
 const DescribeWhiteBoxServiceStatusRequest = models.DescribeWhiteBoxServiceStatusRequest;
+const VerifyByAsymmetricKeyRequest = models.VerifyByAsymmetricKeyRequest;
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
@@ -47,6 +48,7 @@ const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
 const ArchiveKeyResponse = models.ArchiveKeyResponse;
+const VerifyByAsymmetricKeyResponse = models.VerifyByAsymmetricKeyResponse;
 const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
 const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptResponse = models.DecryptResponse;
@@ -100,6 +102,7 @@ const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDevic
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const BindCloudResourceResponse = models.BindCloudResourceResponse;
 const EnableKeysResponse = models.EnableKeysResponse;
+const SignByAsymmetricKeyRequest = models.SignByAsymmetricKeyRequest;
 const DescribeWhiteBoxDeviceFingerprintsRequest = models.DescribeWhiteBoxDeviceFingerprintsRequest;
 const GetRegionsRequest = models.GetRegionsRequest;
 const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
@@ -110,6 +113,7 @@ const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const BindCloudResourceRequest = models.BindCloudResourceRequest;
 const TagFilter = models.TagFilter;
+const SignByAsymmetricKeyResponse = models.SignByAsymmetricKeyResponse;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
@@ -238,6 +242,18 @@ class KmsClient extends AbstractClient {
     AsymmetricSm2Decrypt(req, cb) {
         let resp = new AsymmetricSm2DecryptResponse();
         this.request("AsymmetricSm2Decrypt", req, resp, cb);
+    }
+
+    /**
+     * 非对称密钥签名。
+注意：只有成功创建了KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2 的密钥才可以使用签名功能
+     * @param {SignByAsymmetricKeyRequest} req
+     * @param {function(string, SignByAsymmetricKeyResponse):void} cb
+     * @public
+     */
+    SignByAsymmetricKey(req, cb) {
+        let resp = new SignByAsymmetricKeyResponse();
+        this.request("SignByAsymmetricKey", req, resp, cb);
     }
 
     /**
@@ -645,6 +661,17 @@ class KmsClient extends AbstractClient {
     GetRegions(req, cb) {
         let resp = new GetRegionsResponse();
         this.request("GetRegions", req, resp, cb);
+    }
+
+    /**
+     * 使用非对称密钥验签
+     * @param {VerifyByAsymmetricKeyRequest} req
+     * @param {function(string, VerifyByAsymmetricKeyResponse):void} cb
+     * @public
+     */
+    VerifyByAsymmetricKey(req, cb) {
+        let resp = new VerifyByAsymmetricKeyResponse();
+        this.request("VerifyByAsymmetricKey", req, resp, cb);
     }
 
 

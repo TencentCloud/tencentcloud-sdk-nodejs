@@ -16,46 +16,69 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const InquirePriceRenewEmrResponse = models.InquirePriceRenewEmrResponse;
 const MultiDiskMC = models.MultiDiskMC;
+const ClusterSetting = models.ClusterSetting;
+const JobResult = models.JobResult;
 const EmrProductConfigOutter = models.EmrProductConfigOutter;
 const LoginSettings = models.LoginSettings;
+const RunJobFlowRequest = models.RunJobFlowRequest;
 const VPCSettings = models.VPCSettings;
-const PriceResource = models.PriceResource;
+const DescribeInstanceRenewNodesRequest = models.DescribeInstanceRenewNodesRequest;
 const ScaleOutInstanceResponse = models.ScaleOutInstanceResponse;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const Resource = models.Resource;
 const TerminateInstanceRequest = models.TerminateInstanceRequest;
+const TerminateTasksRequest = models.TerminateTasksRequest;
 const PodVolume = models.PodVolume;
 const TerminateInstanceResponse = models.TerminateInstanceResponse;
 const CreateInstanceResponse = models.CreateInstanceResponse;
-const PodSpec = models.PodSpec;
+const PersistentVolumeContext = models.PersistentVolumeContext;
 const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
-const TerminateTasksRequest = models.TerminateTasksRequest;
+const DescribeJobFlowRequest = models.DescribeJobFlowRequest;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
+const BootstrapAction = models.BootstrapAction;
 const HostVolumeContext = models.HostVolumeContext;
+const Step = models.Step;
+const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const DescribeClusterNodesRequest = models.DescribeClusterNodesRequest;
 const PreExecuteFileSettings = models.PreExecuteFileSettings;
 const CreateInstanceRequest = models.CreateInstanceRequest;
+const InquirePriceRenewEmrRequest = models.InquirePriceRenewEmrRequest;
+const PodParameter = models.PodParameter;
+const MetaDbInfo = models.MetaDbInfo;
+const Execution = models.Execution;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InquiryPriceScaleOutInstanceRequest = models.InquiryPriceScaleOutInstanceRequest;
 const Tag = models.Tag;
 const Placement = models.Placement;
+const SearchItem = models.SearchItem;
+const DynamicPodSpec = models.DynamicPodSpec;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CustomMetaInfo = models.CustomMetaInfo;
+const DiskSpec = models.DiskSpec;
+const JobFlowResourceSpec = models.JobFlowResourceSpec;
 const InquiryPriceUpdateInstanceRequest = models.InquiryPriceUpdateInstanceRequest;
+const DescribeInstanceRenewNodesResponse = models.DescribeInstanceRenewNodesResponse;
 const COSSettings = models.COSSettings;
 const ClusterInstancesInfo = models.ClusterInstancesInfo;
+const PodSpec = models.PodSpec;
 const MultiDisk = models.MultiDisk;
-const SearchItem = models.SearchItem;
+const RunJobFlowResponse = models.RunJobFlowResponse;
+const RenewInstancesInfo = models.RenewInstancesInfo;
 const InquiryPriceScaleOutInstanceResponse = models.InquiryPriceScaleOutInstanceResponse;
 const OutterResource = models.OutterResource;
 const UpdateInstanceSettings = models.UpdateInstanceSettings;
+const Configuration = models.Configuration;
 const TerminateTasksResponse = models.TerminateTasksResponse;
+const PriceResource = models.PriceResource;
 const DescribeClusterNodesResponse = models.DescribeClusterNodesResponse;
 const NodeHardwareInfo = models.NodeHardwareInfo;
 const InquiryPriceUpdateInstanceResponse = models.InquiryPriceUpdateInstanceResponse;
 const NewResourceSpec = models.NewResourceSpec;
-const PersistentVolumeContext = models.PersistentVolumeContext;
+const DiskGroup = models.DiskGroup;
+const JobFlowResource = models.JobFlowResource;
+const DescribeJobFlowResponse = models.DescribeJobFlowResponse;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
 const CdbInfo = models.CdbInfo;
 const ScaleOutInstanceRequest = models.ScaleOutInstanceRequest;
@@ -71,6 +94,17 @@ class EmrClient extends AbstractClient {
         super("emr.tencentcloudapi.com", "2019-01-03", credential, region, profile);
     }
     
+    /**
+     * 预付费集群隔离后续费资源查询
+     * @param {DescribeInstanceRenewNodesRequest} req
+     * @param {function(string, DescribeInstanceRenewNodesResponse):void} cb
+     * @public
+     */
+    DescribeInstanceRenewNodes(req, cb) {
+        let resp = new DescribeInstanceRenewNodesResponse();
+        this.request("DescribeInstanceRenewNodes", req, resp, cb);
+    }
+
     /**
      * 缩容Task节点
      * @param {TerminateTasksRequest} req
@@ -149,6 +183,17 @@ class EmrClient extends AbstractClient {
     }
 
     /**
+     * 集群续费询价。
+     * @param {InquirePriceRenewEmrRequest} req
+     * @param {function(string, InquirePriceRenewEmrResponse):void} cb
+     * @public
+     */
+    InquirePriceRenewEmr(req, cb) {
+        let resp = new InquirePriceRenewEmrResponse();
+        this.request("InquirePriceRenewEmr", req, resp, cb);
+    }
+
+    /**
      * 扩容询价. 当扩容时候，请通过该接口查询价格。
      * @param {InquiryPriceScaleOutInstanceRequest} req
      * @param {function(string, InquiryPriceScaleOutInstanceResponse):void} cb
@@ -160,6 +205,17 @@ class EmrClient extends AbstractClient {
     }
 
     /**
+     * 查询流程任务
+     * @param {DescribeJobFlowRequest} req
+     * @param {function(string, DescribeJobFlowResponse):void} cb
+     * @public
+     */
+    DescribeJobFlow(req, cb) {
+        let resp = new DescribeJobFlowResponse();
+        this.request("DescribeJobFlow", req, resp, cb);
+    }
+
+    /**
      * 实例扩容
      * @param {ScaleOutInstanceRequest} req
      * @param {function(string, ScaleOutInstanceResponse):void} cb
@@ -168,6 +224,17 @@ class EmrClient extends AbstractClient {
     ScaleOutInstance(req, cb) {
         let resp = new ScaleOutInstanceResponse();
         this.request("ScaleOutInstance", req, resp, cb);
+    }
+
+    /**
+     * 创建流程作业
+     * @param {RunJobFlowRequest} req
+     * @param {function(string, RunJobFlowResponse):void} cb
+     * @public
+     */
+    RunJobFlow(req, cb) {
+        let resp = new RunJobFlowResponse();
+        this.request("RunJobFlow", req, resp, cb);
     }
 
     /**

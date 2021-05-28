@@ -16,20 +16,26 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeImagesRequest = models.DescribeImagesRequest;
 const BatchDescribeOrderCertificateRequest = models.BatchDescribeOrderCertificateRequest;
 const BatchDescribeOrderImageResponse = models.BatchDescribeOrderImageResponse;
 const ImageItem = models.ImageItem;
 const DescribeImagesResponse = models.DescribeImagesResponse;
-const DescribeAuthUsersRequest = models.DescribeAuthUsersRequest;
+const ImageInfo = models.ImageInfo;
+const CreateOrderAndDownloadsRequest = models.CreateOrderAndDownloadsRequest;
 const ImageMarshal = models.ImageMarshal;
 const BatchDescribeOrderCertificateResponse = models.BatchDescribeOrderCertificateResponse;
 const DescribeImageResponse = models.DescribeImageResponse;
 const DescribeAuthUsersResponse = models.DescribeAuthUsersResponse;
+const DownloadInfo = models.DownloadInfo;
 const AuthInfo = models.AuthInfo;
 const DescribeImageRequest = models.DescribeImageRequest;
+const DescribeDownloadInfosResponse = models.DescribeDownloadInfosResponse;
 const CreateOrderAndPayResponse = models.CreateOrderAndPayResponse;
-const DescribeImagesRequest = models.DescribeImagesRequest;
+const DescribeAuthUsersRequest = models.DescribeAuthUsersRequest;
+const DescribeDownloadInfosRequest = models.DescribeDownloadInfosRequest;
 const CreateOrderAndPayRequest = models.CreateOrderAndPayRequest;
+const CreateOrderAndDownloadsResponse = models.CreateOrderAndDownloadsResponse;
 const BatchDescribeOrderImageRequest = models.BatchDescribeOrderImageRequest;
 
 
@@ -55,6 +61,17 @@ class ApeClient extends AbstractClient {
     }
 
     /**
+     * 获取用户图片下载记录
+     * @param {DescribeDownloadInfosRequest} req
+     * @param {function(string, DescribeDownloadInfosResponse):void} cb
+     * @public
+     */
+    DescribeDownloadInfos(req, cb) {
+        let resp = new DescribeDownloadInfosResponse();
+        this.request("DescribeDownloadInfos", req, resp, cb);
+    }
+
+    /**
      * 批量获取授权书下载地址
      * @param {BatchDescribeOrderCertificateRequest} req
      * @param {function(string, BatchDescribeOrderCertificateResponse):void} cb
@@ -74,6 +91,17 @@ class ApeClient extends AbstractClient {
     DescribeImages(req, cb) {
         let resp = new DescribeImagesResponse();
         this.request("DescribeImages", req, resp, cb);
+    }
+
+    /**
+     * 核销图片，获取原图URL地址
+     * @param {CreateOrderAndDownloadsRequest} req
+     * @param {function(string, CreateOrderAndDownloadsResponse):void} cb
+     * @public
+     */
+    CreateOrderAndDownloads(req, cb) {
+        let resp = new CreateOrderAndDownloadsResponse();
+        this.request("CreateOrderAndDownloads", req, resp, cb);
     }
 
     /**

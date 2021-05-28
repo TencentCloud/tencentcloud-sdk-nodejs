@@ -22,11 +22,13 @@ const CaptchaOperDataTryTimesDistributeUnit = models.CaptchaOperDataTryTimesDist
 const DescribeCaptchaMiniOperDataResponse = models.DescribeCaptchaMiniOperDataResponse;
 const DescribeCaptchaMiniDataSumResponse = models.DescribeCaptchaMiniDataSumResponse;
 const UpdateCaptchaAppIdInfoRequest = models.UpdateCaptchaAppIdInfoRequest;
+const OutputManageMarketingRiskValue = models.OutputManageMarketingRiskValue;
 const CaptchaOperDataRes = models.CaptchaOperDataRes;
 const TicketInterceptUnit = models.TicketInterceptUnit;
 const DescribeCaptchaUserAllAppIdRequest = models.DescribeCaptchaUserAllAppIdRequest;
 const DescribeCaptchaMiniDataResponse = models.DescribeCaptchaMiniDataResponse;
 const UpdateCaptchaAppIdInfoResponse = models.UpdateCaptchaAppIdInfoResponse;
+const DescribeCaptchaMiniRiskResultRequest = models.DescribeCaptchaMiniRiskResultRequest;
 const CaptchaUserAllAppId = models.CaptchaUserAllAppId;
 const DescribeCaptchaDataSumResponse = models.DescribeCaptchaDataSumResponse;
 const DescribeCaptchaTicketDataRequest = models.DescribeCaptchaTicketDataRequest;
@@ -34,6 +36,7 @@ const DescribeCaptchaMiniDataSumRequest = models.DescribeCaptchaMiniDataSumReque
 const CaptchaOperDataTryTimesUnit = models.CaptchaOperDataTryTimesUnit;
 const DescribeCaptchaOperDataRequest = models.DescribeCaptchaOperDataRequest;
 const DescribeCaptchaDataSumRequest = models.DescribeCaptchaDataSumRequest;
+const DescribeCaptchaMiniRiskResultResponse = models.DescribeCaptchaMiniRiskResultResponse;
 const TicketAmountUnit = models.TicketAmountUnit;
 const CaptchaQueryData = models.CaptchaQueryData;
 const TicketThroughUnit = models.TicketThroughUnit;
@@ -64,14 +67,14 @@ class CaptchaClient extends AbstractClient {
     }
     
     /**
-     * 安全验证码获取用户注册所有APPId和应用名称
-     * @param {DescribeCaptchaUserAllAppIdRequest} req
-     * @param {function(string, DescribeCaptchaUserAllAppIdResponse):void} cb
+     * 核查验证码小程序插件票据接入风控结果(Beta)
+     * @param {DescribeCaptchaMiniRiskResultRequest} req
+     * @param {function(string, DescribeCaptchaMiniRiskResultResponse):void} cb
      * @public
      */
-    DescribeCaptchaUserAllAppId(req, cb) {
-        let resp = new DescribeCaptchaUserAllAppIdResponse();
-        this.request("DescribeCaptchaUserAllAppId", req, resp, cb);
+    DescribeCaptchaMiniRiskResult(req, cb) {
+        let resp = new DescribeCaptchaMiniRiskResultResponse();
+        this.request("DescribeCaptchaMiniRiskResult", req, resp, cb);
     }
 
     /**
@@ -171,6 +174,17 @@ class CaptchaClient extends AbstractClient {
     UpdateCaptchaAppIdInfo(req, cb) {
         let resp = new UpdateCaptchaAppIdInfoResponse();
         this.request("UpdateCaptchaAppIdInfo", req, resp, cb);
+    }
+
+    /**
+     * 安全验证码获取用户注册所有APPId和应用名称
+     * @param {DescribeCaptchaUserAllAppIdRequest} req
+     * @param {function(string, DescribeCaptchaUserAllAppIdResponse):void} cb
+     * @public
+     */
+    DescribeCaptchaUserAllAppId(req, cb) {
+        let resp = new DescribeCaptchaUserAllAppIdResponse();
+        this.request("DescribeCaptchaUserAllAppId", req, resp, cb);
     }
 
     /**

@@ -16,18 +16,27 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeExecutionHistoryResponse = models.DescribeExecutionHistoryResponse;
 const DescribeExecutionsRequest = models.DescribeExecutionsRequest;
-const DescribeExecutionResponse = models.DescribeExecutionResponse;
-const StartExecutionResponse = models.StartExecutionResponse;
-const DescribeExecutionRequest = models.DescribeExecutionRequest;
+const DescribeFlowServicesResponse = models.DescribeFlowServicesResponse;
+const StateMachine = models.StateMachine;
 const DescribeFlowServiceDetailResponse = models.DescribeFlowServiceDetailResponse;
+const DescribeExecutionResponse = models.DescribeExecutionResponse;
+const DescribeFlowServicesRequest = models.DescribeFlowServicesRequest;
+const DescribeExecutionRequest = models.DescribeExecutionRequest;
+const DescribeExecutionHistoryRequest = models.DescribeExecutionHistoryRequest;
 const CreateFlowServiceResponse = models.CreateFlowServiceResponse;
 const StartExecutionRequest = models.StartExecutionRequest;
+const Filter = models.Filter;
+const ExecutionEvent = models.ExecutionEvent;
 const ModifyFlowServiceResponse = models.ModifyFlowServiceResponse;
+const StartExecutionResponse = models.StartExecutionResponse;
 const CreateFlowServiceRequest = models.CreateFlowServiceRequest;
 const DescribeExecutionsResponse = models.DescribeExecutionsResponse;
 const ModifyFlowServiceRequest = models.ModifyFlowServiceRequest;
 const DescribeFlowServiceDetailRequest = models.DescribeFlowServiceDetailRequest;
+const StopExecutionResponse = models.StopExecutionResponse;
+const StopExecutionRequest = models.StopExecutionRequest;
 
 
 /**
@@ -52,6 +61,28 @@ class AswClient extends AbstractClient {
     }
 
     /**
+     * 终止某个状态机
+     * @param {StopExecutionRequest} req
+     * @param {function(string, StopExecutionResponse):void} cb
+     * @public
+     */
+    StopExecution(req, cb) {
+        let resp = new StopExecutionResponse();
+        this.request("StopExecution", req, resp, cb);
+    }
+
+    /**
+     * 一次执行会有很多步骤，经过很多节点，这个接口描述某一次执行的事件的历史
+     * @param {DescribeExecutionHistoryRequest} req
+     * @param {function(string, DescribeExecutionHistoryResponse):void} cb
+     * @public
+     */
+    DescribeExecutionHistory(req, cb) {
+        let resp = new DescribeExecutionHistoryResponse();
+        this.request("DescribeExecutionHistory", req, resp, cb);
+    }
+
+    /**
      * 查询执行详细信息
      * @param {DescribeExecutionRequest} req
      * @param {function(string, DescribeExecutionResponse):void} cb
@@ -60,6 +91,17 @@ class AswClient extends AbstractClient {
     DescribeExecution(req, cb) {
         let resp = new DescribeExecutionResponse();
         this.request("DescribeExecution", req, resp, cb);
+    }
+
+    /**
+     * 查询指定用户下所有状态机，以列表形式返回
+     * @param {DescribeFlowServicesRequest} req
+     * @param {function(string, DescribeFlowServicesResponse):void} cb
+     * @public
+     */
+    DescribeFlowServices(req, cb) {
+        let resp = new DescribeFlowServicesResponse();
+        this.request("DescribeFlowServices", req, resp, cb);
     }
 
     /**

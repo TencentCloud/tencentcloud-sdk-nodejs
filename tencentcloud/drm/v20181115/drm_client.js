@@ -54,7 +54,8 @@ class DrmClient extends AbstractClient {
     }
     
     /**
-     * 开发者调用该接口，启动一次内容文件的DRM加密工作流
+     * 开发者调用该接口，启动一次内容文件的DRM加密工作流。
+注意：该接口已下线。
      * @param {StartEncryptionRequest} req
      * @param {function(string, StartEncryptionResponse):void} cb
      * @public

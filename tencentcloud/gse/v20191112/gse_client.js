@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const TargetConfiguration = models.TargetConfiguration;
 const DeleteGameServerSessionQueueRequest = models.DeleteGameServerSessionQueueRequest;
 const FleetAttributes = models.FleetAttributes;
 const CreateAssetResponse = models.CreateAssetResponse;
@@ -23,9 +24,11 @@ const InboundPermission = models.InboundPermission;
 const GetInstanceAccessResponse = models.GetInstanceAccessResponse;
 const Asset = models.Asset;
 const ListAliasesResponse = models.ListAliasesResponse;
+const UpdateBucketCORSOptResponse = models.UpdateBucketCORSOptResponse;
 const DeleteGameServerSessionQueueResponse = models.DeleteGameServerSessionQueueResponse;
 const DescribeFleetAttributesRequest = models.DescribeFleetAttributesRequest;
 const ResolveAliasRequest = models.ResolveAliasRequest;
+const GetGameServerInstanceLogUrlResponse = models.GetGameServerInstanceLogUrlResponse;
 const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
 const DescribeFleetStatisticDetailsRequest = models.DescribeFleetStatisticDetailsRequest;
 const DescribeAssetSystemsRequest = models.DescribeAssetSystemsRequest;
@@ -37,15 +40,17 @@ const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const ListFleetsResponse = models.ListFleetsResponse;
 const DeleteAssetResponse = models.DeleteAssetResponse;
 const DescribeFleetUtilizationResponse = models.DescribeFleetUtilizationResponse;
+const DescribeFleetRelatedResourcesResponse = models.DescribeFleetRelatedResourcesResponse;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
 const DeleteFleetRequest = models.DeleteFleetRequest;
+const TimerScalingPolicy = models.TimerScalingPolicy;
 const DetachCcnInstancesResponse = models.DetachCcnInstancesResponse;
 const DescribeFleetPortSettingsResponse = models.DescribeFleetPortSettingsResponse;
 const DescribeUserQuotasRequest = models.DescribeUserQuotasRequest;
 const UpdateAssetRequest = models.UpdateAssetRequest;
-const DesiredPlayerSession = models.DesiredPlayerSession;
+const CcnInfo = models.CcnInfo;
 const UpdateFleetPortSettingsRequest = models.UpdateFleetPortSettingsRequest;
-const DescribeFleetStatisticFlowsRequest = models.DescribeFleetStatisticFlowsRequest;
+const CcnInstanceSets = models.CcnInstanceSets;
 const UpdateAliasRequest = models.UpdateAliasRequest;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
 const JoinGameServerSessionBatchRequest = models.JoinGameServerSessionBatchRequest;
@@ -60,13 +65,17 @@ const DescribeGameServerSessionQueuesRequest = models.DescribeGameServerSessionQ
 const GetUploadFederationTokenResponse = models.GetUploadFederationTokenResponse;
 const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
 const DescribeFleetStatisticSummaryRequest = models.DescribeFleetStatisticSummaryRequest;
+const Tag = models.Tag;
 const PlayerDataMap = models.PlayerDataMap;
 const ResolveAliasResponse = models.ResolveAliasResponse;
 const DescribeInstancesExtendResponse = models.DescribeInstancesExtendResponse;
 const Event = models.Event;
-const UpdateRuntimeConfigurationResponse = models.UpdateRuntimeConfigurationResponse;
+const PutTimerScalingPolicyRequest = models.PutTimerScalingPolicyRequest;
+const RelatedCcnInfo = models.RelatedCcnInfo;
 const DescribeCcnInstancesResponse = models.DescribeCcnInstancesResponse;
 const AssetSupportSys = models.AssetSupportSys;
+const DeleteTimerScalingPolicyResponse = models.DeleteTimerScalingPolicyResponse;
+const DescribeTimerScalingPoliciesRequest = models.DescribeTimerScalingPoliciesRequest;
 const DescribeInstanceLimitResponse = models.DescribeInstanceLimitResponse;
 const DescribeAssetResponse = models.DescribeAssetResponse;
 const PlacedPlayerSession = models.PlacedPlayerSession;
@@ -74,6 +83,7 @@ const DescribeFleetStatisticSummaryResponse = models.DescribeFleetStatisticSumma
 const FleetUtilization = models.FleetUtilization;
 const DescribeGameServerSessionQueuesResponse = models.DescribeGameServerSessionQueuesResponse;
 const DeleteAliasRequest = models.DeleteAliasRequest;
+const UpdateBucketCORSOptRequest = models.UpdateBucketCORSOptRequest;
 const DescribeAssetSystemsResponse = models.DescribeAssetSystemsResponse;
 const DescribeFleetAttributesResponse = models.DescribeFleetAttributesResponse;
 const GetUploadCredentialsResponse = models.GetUploadCredentialsResponse;
@@ -90,19 +100,22 @@ const DescribeAssetsResponse = models.DescribeAssetsResponse;
 const DescribeFleetCapacityRequest = models.DescribeFleetCapacityRequest;
 const DescribeCcnInstancesRequest = models.DescribeCcnInstancesRequest;
 const DescribeFleetStatisticDetailsResponse = models.DescribeFleetStatisticDetailsResponse;
-const UpdateGameServerSessionQueueRequest = models.UpdateGameServerSessionQueueRequest;
+const DeleteTimerScalingPolicyRequest = models.DeleteTimerScalingPolicyRequest;
 const JoinGameServerSessionResponse = models.JoinGameServerSessionResponse;
 const AssetCredentials = models.AssetCredentials;
-const TargetConfiguration = models.TargetConfiguration;
+const DescribeFleetRelatedResourcesRequest = models.DescribeFleetRelatedResourcesRequest;
 const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
 const GameServerSessionQueueDestination = models.GameServerSessionQueueDestination;
+const UpdateGameServerSessionQueueRequest = models.UpdateGameServerSessionQueueRequest;
 const FleetCapacity = models.FleetCapacity;
 const SetServerWeightRequest = models.SetServerWeightRequest;
 const GetGameServerSessionLogUrlResponse = models.GetGameServerSessionLogUrlResponse;
+const UpdateBucketAccelerateOptRequest = models.UpdateBucketAccelerateOptRequest;
 const DeleteFleetResponse = models.DeleteFleetResponse;
 const StartGameServerSessionPlacementRequest = models.StartGameServerSessionPlacementRequest;
 const InstanceTypeInfo = models.InstanceTypeInfo;
 const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSessionPlacementResponse;
+const UpdateRuntimeConfigurationResponse = models.UpdateRuntimeConfigurationResponse;
 const CreateAliasResponse = models.CreateAliasResponse;
 const ResourceCreationLimitPolicy = models.ResourceCreationLimitPolicy;
 const ListFleetsRequest = models.ListFleetsRequest;
@@ -123,10 +136,14 @@ const DescribeInstanceLimitRequest = models.DescribeInstanceLimitRequest;
 const CreateGameServerSessionQueueResponse = models.CreateGameServerSessionQueueResponse;
 const DescribeInstanceTypesRequest = models.DescribeInstanceTypesRequest;
 const PlayerLatency = models.PlayerLatency;
+const SetServerReservedResponse = models.SetServerReservedResponse;
 const StopGameServerSessionPlacementRequest = models.StopGameServerSessionPlacementRequest;
 const UpdateFleetNameResponse = models.UpdateFleetNameResponse;
+const TimerFleetCapacity = models.TimerFleetCapacity;
 const DescribeAliasRequest = models.DescribeAliasRequest;
 const CreateAliasRequest = models.CreateAliasRequest;
+const TimerValue = models.TimerValue;
+const CopyFleetResponse = models.CopyFleetResponse;
 const UpdateGameServerSessionRequest = models.UpdateGameServerSessionRequest;
 const ListAliasesRequest = models.ListAliasesRequest;
 const CreateAssetRequest = models.CreateAssetRequest;
@@ -138,15 +155,18 @@ const CreateGameServerSessionResponse = models.CreateGameServerSessionResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const QuotaResource = models.QuotaResource;
 const DescribeFleetStatisticFlowsResponse = models.DescribeFleetStatisticFlowsResponse;
-const InstanceCounts = models.InstanceCounts;
-const UpdateFleetNameRequest = models.UpdateFleetNameRequest;
+const DiskInfo = models.DiskInfo;
+const TimerConfiguration = models.TimerConfiguration;
 const CreateFleetResponse = models.CreateFleetResponse;
 const Filter = models.Filter;
 const UpdateFleetAttributesResponse = models.UpdateFleetAttributesResponse;
 const DescribeFleetUtilizationRequest = models.DescribeFleetUtilizationRequest;
+const DescribeInstanceTypesResponse = models.DescribeInstanceTypesResponse;
+const StartFleetActionsResponse = models.StartFleetActionsResponse;
 const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSessionDetailsRequest;
 const GameServerSession = models.GameServerSession;
 const PlayerLatencyPolicy = models.PlayerLatencyPolicy;
+const FleetRelatedResource = models.FleetRelatedResource;
 const UpdateRuntimeConfigurationRequest = models.UpdateRuntimeConfigurationRequest;
 const GameProperty = models.GameProperty;
 const CreateAssetWithImageResponse = models.CreateAssetWithImageResponse;
@@ -155,14 +175,18 @@ const FleetStatisticFlows = models.FleetStatisticFlows;
 const DescribeAssetRequest = models.DescribeAssetRequest;
 const DescribeInstancesExtendRequest = models.DescribeInstancesExtendRequest;
 const DescribeGameServerSessionsResponse = models.DescribeGameServerSessionsResponse;
-const StartFleetActionsResponse = models.StartFleetActionsResponse;
+const InstanceCounts = models.InstanceCounts;
+const UpdateBucketAccelerateOptResponse = models.UpdateBucketAccelerateOptResponse;
 const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
 const DescribeUserQuotasResponse = models.DescribeUserQuotasResponse;
 const GetUploadFederationTokenRequest = models.GetUploadFederationTokenRequest;
-const DescribeInstanceTypesResponse = models.DescribeInstanceTypesResponse;
+const DescribeTimerScalingPoliciesResponse = models.DescribeTimerScalingPoliciesResponse;
+const CopyFleetRequest = models.CopyFleetRequest;
 const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
+const PutTimerScalingPolicyResponse = models.PutTimerScalingPolicyResponse;
 const DescribeFleetEventsResponse = models.DescribeFleetEventsResponse;
 const RoutingStrategy = models.RoutingStrategy;
+const GetGameServerInstanceLogUrlRequest = models.GetGameServerInstanceLogUrlRequest;
 const DescribeFleetCapacityResponse = models.DescribeFleetCapacityResponse;
 const DescribeUserQuotaResponse = models.DescribeUserQuotaResponse;
 const DescribeFleetEventsRequest = models.DescribeFleetEventsRequest;
@@ -171,6 +195,7 @@ const CreateAssetWithImageRequest = models.CreateAssetWithImageRequest;
 const PlayerSession = models.PlayerSession;
 const PutScalingPolicyResponse = models.PutScalingPolicyResponse;
 const CreateGameServerSessionQueueRequest = models.CreateGameServerSessionQueueRequest;
+const UpdateFleetNameRequest = models.UpdateFleetNameRequest;
 const Alias = models.Alias;
 const DescribeRuntimeConfigurationRequest = models.DescribeRuntimeConfigurationRequest;
 const RuntimeConfiguration = models.RuntimeConfiguration;
@@ -181,11 +206,13 @@ const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
 const InstanceAccess = models.InstanceAccess;
 const UpdateFleetCapacityRequest = models.UpdateFleetCapacityRequest;
 const FleetStatisticDetail = models.FleetStatisticDetail;
+const DesiredPlayerSession = models.DesiredPlayerSession;
 const JoinGameServerSessionBatchResponse = models.JoinGameServerSessionBatchResponse;
+const SetServerReservedRequest = models.SetServerReservedRequest;
 const InstanceExtend = models.InstanceExtend;
 const PutScalingPolicyRequest = models.PutScalingPolicyRequest;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
-const CcnInstanceSets = models.CcnInstanceSets;
+const DescribeFleetStatisticFlowsRequest = models.DescribeFleetStatisticFlowsRequest;
 
 
 /**
@@ -198,6 +225,17 @@ class GseClient extends AbstractClient {
         super("gse.tencentcloudapi.com", "2019-11-12", credential, region, profile);
     }
     
+    /**
+     * 本接口（UpdateBucketCORSOpt）用于设置cos跨域访问。
+     * @param {UpdateBucketCORSOptRequest} req
+     * @param {function(string, UpdateBucketCORSOptResponse):void} cb
+     * @public
+     */
+    UpdateBucketCORSOpt(req, cb) {
+        let resp = new UpdateBucketCORSOptResponse();
+        this.request("UpdateBucketCORSOpt", req, resp, cb);
+    }
+
     /**
      * 本接口（DeleteFleet）用于删除服务器舰队。
      * @param {DeleteFleetRequest} req
@@ -221,14 +259,14 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
-     * @param {StartFleetActionsRequest} req
-     * @param {function(string, StartFleetActionsResponse):void} cb
+     * 本接口（DescribeFleetRelatedResources）用于获取与游戏服务器舰队关联的资源信息，如别名、队列
+     * @param {DescribeFleetRelatedResourcesRequest} req
+     * @param {function(string, DescribeFleetRelatedResourcesResponse):void} cb
      * @public
      */
-    StartFleetActions(req, cb) {
-        let resp = new StartFleetActionsResponse();
-        this.request("StartFleetActions", req, resp, cb);
+    DescribeFleetRelatedResources(req, cb) {
+        let resp = new DescribeFleetRelatedResourcesResponse();
+        this.request("DescribeFleetRelatedResources", req, resp, cb);
     }
 
     /**
@@ -300,6 +338,20 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * 本接口（SetServerReserved）用于将异常的实例标记为保留，用于问题排查。
+
+字段ReserveValue：0默认值，不保留；1 保留
+
+     * @param {SetServerReservedRequest} req
+     * @param {function(string, SetServerReservedResponse):void} cb
+     * @public
+     */
+    SetServerReserved(req, cb) {
+        let resp = new SetServerReservedResponse();
+        this.request("SetServerReserved", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateGameServerSessionQueue）用于创建游戏服务器会话队列。
      * @param {CreateGameServerSessionQueueRequest} req
      * @param {function(string, CreateGameServerSessionQueueResponse):void} cb
@@ -308,6 +360,17 @@ class GseClient extends AbstractClient {
     CreateGameServerSessionQueue(req, cb) {
         let resp = new CreateGameServerSessionQueueResponse();
         this.request("CreateGameServerSessionQueue", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeInstanceLimit）用于查询用户实例数限额。
+     * @param {DescribeInstanceLimitRequest} req
+     * @param {function(string, DescribeInstanceLimitResponse):void} cb
+     * @public
+     */
+    DescribeInstanceLimit(req, cb) {
+        let resp = new DescribeInstanceLimitResponse();
+        this.request("DescribeInstanceLimit", req, resp, cb);
     }
 
     /**
@@ -363,6 +426,28 @@ class GseClient extends AbstractClient {
     DescribeFleetCapacity(req, cb) {
         let resp = new DescribeFleetCapacityResponse();
         this.request("DescribeFleetCapacity", req, resp, cb);
+    }
+
+    /**
+     * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
+     * @param {StopGameServerSessionPlacementRequest} req
+     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
+     * @public
+     */
+    StopGameServerSessionPlacement(req, cb) {
+        let resp = new StopGameServerSessionPlacementResponse();
+        this.request("StopGameServerSessionPlacement", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
+     * @param {UpdateBucketAccelerateOptRequest} req
+     * @param {function(string, UpdateBucketAccelerateOptResponse):void} cb
+     * @public
+     */
+    UpdateBucketAccelerateOpt(req, cb) {
+        let resp = new UpdateBucketAccelerateOptResponse();
+        this.request("UpdateBucketAccelerateOpt", req, resp, cb);
     }
 
     /**
@@ -518,14 +603,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
-     * @param {DescribeFleetStatisticDetailsRequest} req
-     * @param {function(string, DescribeFleetStatisticDetailsResponse):void} cb
+     * 本接口（CopyFleet）用于复制服务器舰队。
+     * @param {CopyFleetRequest} req
+     * @param {function(string, CopyFleetResponse):void} cb
      * @public
      */
-    DescribeFleetStatisticDetails(req, cb) {
-        let resp = new DescribeFleetStatisticDetailsResponse();
-        this.request("DescribeFleetStatisticDetails", req, resp, cb);
+    CopyFleet(req, cb) {
+        let resp = new CopyFleetResponse();
+        this.request("CopyFleet", req, resp, cb);
     }
 
     /**
@@ -537,6 +622,17 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     DescribeGameServerSessions(req, cb) {
         let resp = new DescribeGameServerSessionsResponse();
         this.request("DescribeGameServerSessions", req, resp, cb);
+    }
+
+    /**
+     * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
+     * @param {StartGameServerSessionPlacementRequest} req
+     * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
+     * @public
+     */
+    StartGameServerSessionPlacement(req, cb) {
+        let resp = new StartGameServerSessionPlacementResponse();
+        this.request("StartGameServerSessionPlacement", req, resp, cb);
     }
 
     /**
@@ -584,14 +680,15 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeInstanceLimit）用于查询用户实例数限额。
-     * @param {DescribeInstanceLimitRequest} req
-     * @param {function(string, DescribeInstanceLimitResponse):void} cb
+     * 本接口（DeleteTimerScalingPolicy）用于删除fleet下的定时器。
+
+     * @param {DeleteTimerScalingPolicyRequest} req
+     * @param {function(string, DeleteTimerScalingPolicyResponse):void} cb
      * @public
      */
-    DescribeInstanceLimit(req, cb) {
-        let resp = new DescribeInstanceLimitResponse();
-        this.request("DescribeInstanceLimit", req, resp, cb);
+    DeleteTimerScalingPolicy(req, cb) {
+        let resp = new DeleteTimerScalingPolicyResponse();
+        this.request("DeleteTimerScalingPolicy", req, resp, cb);
     }
 
     /**
@@ -606,14 +703,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
-     * @param {StartGameServerSessionPlacementRequest} req
-     * @param {function(string, StartGameServerSessionPlacementResponse):void} cb
+     * 本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
+     * @param {StartFleetActionsRequest} req
+     * @param {function(string, StartFleetActionsResponse):void} cb
      * @public
      */
-    StartGameServerSessionPlacement(req, cb) {
-        let resp = new StartGameServerSessionPlacementResponse();
-        this.request("StartGameServerSessionPlacement", req, resp, cb);
+    StartFleetActions(req, cb) {
+        let resp = new StartFleetActionsResponse();
+        this.request("StartFleetActions", req, resp, cb);
     }
 
     /**
@@ -752,14 +849,15 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
-     * @param {StopGameServerSessionPlacementRequest} req
-     * @param {function(string, StopGameServerSessionPlacementResponse):void} cb
+     * 本接口（DescribeTimerScalingPolicies）用于查询fleet下的定时器列表。可以通过fleetid，定时器名称分页查询。
+
+     * @param {DescribeTimerScalingPoliciesRequest} req
+     * @param {function(string, DescribeTimerScalingPoliciesResponse):void} cb
      * @public
      */
-    StopGameServerSessionPlacement(req, cb) {
-        let resp = new StopGameServerSessionPlacementResponse();
-        this.request("StopGameServerSessionPlacement", req, resp, cb);
+    DescribeTimerScalingPolicies(req, cb) {
+        let resp = new DescribeTimerScalingPoliciesResponse();
+        this.request("DescribeTimerScalingPolicies", req, resp, cb);
     }
 
     /**
@@ -818,6 +916,17 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
+     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     * @param {UpdateGameServerSessionRequest} req
+     * @param {function(string, UpdateGameServerSessionResponse):void} cb
+     * @public
+     */
+    UpdateGameServerSession(req, cb) {
+        let resp = new UpdateGameServerSessionResponse();
+        this.request("UpdateGameServerSession", req, resp, cb);
+    }
+
+    /**
      * 本接口（GetUploadFederationToken）用于 获取生成包上传所需要的临时密钥。
      * @param {GetUploadFederationTokenRequest} req
      * @param {function(string, GetUploadFederationTokenResponse):void} cb
@@ -829,14 +938,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
-     * @param {ResolveAliasRequest} req
-     * @param {function(string, ResolveAliasResponse):void} cb
+     * 本接口用于获取游戏服务器实例的日志URL。
+     * @param {GetGameServerInstanceLogUrlRequest} req
+     * @param {function(string, GetGameServerInstanceLogUrlResponse):void} cb
      * @public
      */
-    ResolveAlias(req, cb) {
-        let resp = new ResolveAliasResponse();
-        this.request("ResolveAlias", req, resp, cb);
+    GetGameServerInstanceLogUrl(req, cb) {
+        let resp = new GetGameServerInstanceLogUrlResponse();
+        this.request("GetGameServerInstanceLogUrl", req, resp, cb);
     }
 
     /**
@@ -851,14 +960,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeInstances）用于查询服务器实例列表。
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
+     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
+     * @param {DescribeFleetStatisticDetailsRequest} req
+     * @param {function(string, DescribeFleetStatisticDetailsResponse):void} cb
      * @public
      */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
+    DescribeFleetStatisticDetails(req, cb) {
+        let resp = new DescribeFleetStatisticDetailsResponse();
+        this.request("DescribeFleetStatisticDetails", req, resp, cb);
     }
 
     /**
@@ -928,6 +1037,17 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
+     * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
+     * @param {UpdateFleetPortSettingsRequest} req
+     * @param {function(string, UpdateFleetPortSettingsResponse):void} cb
+     * @public
+     */
+    UpdateFleetPortSettings(req, cb) {
+        let resp = new UpdateFleetPortSettingsResponse();
+        this.request("UpdateFleetPortSettings", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeUserQuotas）用于获取用户配额
      * @param {DescribeUserQuotasRequest} req
      * @param {function(string, DescribeUserQuotasResponse):void} cb
@@ -994,25 +1114,39 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
-     * @param {UpdateGameServerSessionRequest} req
-     * @param {function(string, UpdateGameServerSessionResponse):void} cb
+     * 本接口（DescribeInstances）用于查询服务器实例列表。
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
      * @public
      */
-    UpdateGameServerSession(req, cb) {
-        let resp = new UpdateGameServerSessionResponse();
-        this.request("UpdateGameServerSession", req, resp, cb);
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**
-     * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
-     * @param {UpdateFleetPortSettingsRequest} req
-     * @param {function(string, UpdateFleetPortSettingsResponse):void} cb
+     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+     * @param {ResolveAliasRequest} req
+     * @param {function(string, ResolveAliasResponse):void} cb
      * @public
      */
-    UpdateFleetPortSettings(req, cb) {
-        let resp = new UpdateFleetPortSettingsResponse();
-        this.request("UpdateFleetPortSettings", req, resp, cb);
+    ResolveAlias(req, cb) {
+        let resp = new ResolveAliasResponse();
+        this.request("ResolveAlias", req, resp, cb);
+    }
+
+    /**
+     * 本接口（PutTimerScalingPolicy）用于给fleet创建或更新定时器。
+
+填写字段timer_id，表示更新；不填字段timer_id表示新增。
+
+     * @param {PutTimerScalingPolicyRequest} req
+     * @param {function(string, PutTimerScalingPolicyResponse):void} cb
+     * @public
+     */
+    PutTimerScalingPolicy(req, cb) {
+        let resp = new PutTimerScalingPolicyResponse();
+        this.request("PutTimerScalingPolicy", req, resp, cb);
     }
 
 

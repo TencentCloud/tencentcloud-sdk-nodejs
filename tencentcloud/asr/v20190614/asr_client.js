@@ -18,41 +18,49 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SetVocabStateResponse = models.SetVocabStateResponse;
 const CreateCustomizationResponse = models.CreateCustomizationResponse;
+const DescribeAsyncRecognitionTasksRequest = models.DescribeAsyncRecognitionTasksRequest;
 const ModifyCustomizationStateRequest = models.ModifyCustomizationStateRequest;
 const GetAsrVocabResponse = models.GetAsrVocabResponse;
+const CreateAsyncRecognitionTaskRequest = models.CreateAsyncRecognitionTaskRequest;
 const HotWord = models.HotWord;
 const GetAsrVocabRequest = models.GetAsrVocabRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const SentenceRecognitionRequest = models.SentenceRecognitionRequest;
+const CloseAsyncRecognitionTaskResponse = models.CloseAsyncRecognitionTaskResponse;
 const SentenceWord = models.SentenceWord;
 const CreateCustomizationRequest = models.CreateCustomizationRequest;
 const DownloadAsrVocabResponse = models.DownloadAsrVocabResponse;
 const CreateRecTaskResponse = models.CreateRecTaskResponse;
 const ModifyCustomizationResponse = models.ModifyCustomizationResponse;
-const ModifyCustomizationStateResponse = models.ModifyCustomizationStateResponse;
+const CreateAsyncRecognitionTaskResponse = models.CreateAsyncRecognitionTaskResponse;
 const DeleteAsrVocabResponse = models.DeleteAsrVocabResponse;
 const DownloadCustomizationResponse = models.DownloadCustomizationResponse;
-const GetAsrVocabListRequest = models.GetAsrVocabListRequest;
 const CreateRecTaskRequest = models.CreateRecTaskRequest;
+const GetAsrVocabListRequest = models.GetAsrVocabListRequest;
 const GetCustomizationListResponse = models.GetCustomizationListResponse;
 const DownloadAsrVocabRequest = models.DownloadAsrVocabRequest;
 const SetVocabStateRequest = models.SetVocabStateRequest;
 const Vocab = models.Vocab;
+const CloseAsyncRecognitionTaskRequest = models.CloseAsyncRecognitionTaskRequest;
 const Task = models.Task;
+const AsyncRecognitionTasks = models.AsyncRecognitionTasks;
 const ModifyCustomizationRequest = models.ModifyCustomizationRequest;
 const DeleteCustomizationResponse = models.DeleteCustomizationResponse;
 const TaskStatus = models.TaskStatus;
 const DeleteAsrVocabRequest = models.DeleteAsrVocabRequest;
 const GetCustomizationListRequest = models.GetCustomizationListRequest;
 const UpdateAsrVocabResponse = models.UpdateAsrVocabResponse;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const CreateAsrVocabResponse = models.CreateAsrVocabResponse;
 const Model = models.Model;
 const CreateAsrVocabRequest = models.CreateAsrVocabRequest;
 const SentenceDetail = models.SentenceDetail;
 const UpdateAsrVocabRequest = models.UpdateAsrVocabRequest;
-const CreateAsrVocabResponse = models.CreateAsrVocabResponse;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const SentenceRecognitionResponse = models.SentenceRecognitionResponse;
 const DeleteCustomizationRequest = models.DeleteCustomizationRequest;
+const AsyncRecognitionTaskInfo = models.AsyncRecognitionTaskInfo;
+const ModifyCustomizationStateResponse = models.ModifyCustomizationStateResponse;
+const DescribeAsyncRecognitionTasksResponse = models.DescribeAsyncRecognitionTasksResponse;
 const GetAsrVocabListResponse = models.GetAsrVocabListResponse;
 const SentenceWords = models.SentenceWords;
 const DownloadCustomizationRequest = models.DownloadCustomizationRequest;
@@ -68,6 +76,17 @@ class AsrClient extends AbstractClient {
         super("asr.tencentcloudapi.com", "2019-06-14", credential, region, profile);
     }
     
+    /**
+     * 本接口用于关闭语音流异步识别任务。
+     * @param {CloseAsyncRecognitionTaskRequest} req
+     * @param {function(string, CloseAsyncRecognitionTaskResponse):void} cb
+     * @public
+     */
+    CloseAsyncRecognitionTask(req, cb) {
+        let resp = new CloseAsyncRecognitionTaskResponse();
+        this.request("CloseAsyncRecognitionTask", req, resp, cb);
+    }
+
     /**
      * 用户通过该接口，可获得所有的热词表及其信息。
      * @param {GetAsrVocabListRequest} req
@@ -92,9 +111,9 @@ class AsrClient extends AbstractClient {
 
     /**
      * 本接口服务对时长5小时以内的录音文件进行识别，异步返回识别全部结果。
-<br>• 支持中文普通话、英语、粤语、日语和上海话方言
+<br>• 支持中文普通话、英语、粤语、日语、泰语
 <br>• 支持通用、音视频领域
-<br>• 支持wav、mp3、m4a的音频格式
+<br>• 支持wav、mp3、m4a、flv、mp4、wma、3gp、amr、aac、ogg-opus、flac格式
 <br>• 支持语音 URL 和本地语音文件两种请求方式
 <br>• 语音 URL 的音频时长不能长于5小时，文件大小不超过512MB
 <br>• 本地语音文件不能大于5MB
@@ -102,6 +121,7 @@ class AsrClient extends AbstractClient {
 <br>• 支持回调或轮询的方式获取结果，结果获取请参考[ 录音文件识别结果查询](https://cloud.tencent.com/document/product/1093/37822)。
 <br>•   请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
 <br>•   签名方法参考 [公共参数](https://cloud.tencent.com/document/api/1093/35640) 中签名方法v3。
+<br>• 默认接口请求频率限制：20次/秒，如您有提高请求频率限制的需求，请提[工单](https://console.cloud.tencent.com/workorder/category)进行咨询。
      * @param {CreateRecTaskRequest} req
      * @param {function(string, CreateRecTaskResponse):void} cb
      * @public
@@ -124,11 +144,11 @@ class AsrClient extends AbstractClient {
 
     /**
      * 在调用录音文件识别请求接口后，有回调和轮询两种方式获取识别结果。
-<br>• 当采用回调方式时，识别完成后会将结果通过 POST 请求的形式通知到用户在请求时填写的回调 URL，具体请参见[ 录音识别结果回调 ](https://cloud.tencent.com/document/product/1093/37139#callback)。
+<br>• 当采用回调方式时，识别完成后会将结果通过 POST 请求的形式通知到用户在请求时填写的回调 URL，具体请参见[ 录音识别结果回调 ](https://cloud.tencent.com/document/product/1093/52632)。
 <br>• 当采用轮询方式时，需要主动提交任务ID来轮询识别结果，共有任务成功、等待、执行中和失败四种结果，具体信息请参见下文说明。
 <br>•   请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
 <br>•   签名方法参考 [公共参数](https://cloud.tencent.com/document/api/1093/35640) 中签名方法v3。
-
+<br>•   默认接口请求频率限制：50次/秒，如您有提高请求频率限制的需求，请提[工单](https://console.cloud.tencent.com/workorder/category)进行咨询。
      * @param {DescribeTaskStatusRequest} req
      * @param {function(string, DescribeTaskStatusResponse):void} cb
      * @public
@@ -172,6 +192,22 @@ class AsrClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于对语音流进行准实时识别，通过异步回调来返回识别结果。适用于直播审核等场景。
+<br>• 支持rtmp、hls、rtsp等流媒体协议，以及各类基于http协议的直播流
+<br>• 音频流时长无限制，服务会自动拉取音频流数据，若连续10分钟拉不到流数据时，服务会终止识别任务
+<br>• 服务通过回调的方式来提供识别结果，用户需要提供CallbackUrl。回调时机为一小段话(最长15秒)回调一次。
+<br>• 签名方法参考 [公共参数](https://cloud.tencent.com/document/api/1093/35640) 中签名方法v3。
+<br>• 默认单账号限制并发数为20路，如您有提高并发限制的需求，请提[工单](https://console.cloud.tencent.com/workorder/category)进行咨询。
+     * @param {CreateAsyncRecognitionTaskRequest} req
+     * @param {function(string, CreateAsyncRecognitionTaskResponse):void} cb
+     * @public
+     */
+    CreateAsyncRecognitionTask(req, cb) {
+        let resp = new CreateAsyncRecognitionTaskResponse();
+        this.request("CreateAsyncRecognitionTask", req, resp, cb);
+    }
+
+    /**
      * 用户通过本接口进行热词表的创建。
 <br>•   默认最多可创建30个热词表。
 <br>•   每个热词表最多可添加128个词，每个词最长10个字，不能超出限制。
@@ -207,6 +243,18 @@ class AsrClient extends AbstractClient {
     CreateCustomization(req, cb) {
         let resp = new CreateCustomizationResponse();
         this.request("CreateCustomization", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于查询当前在运行的语音流异步识别任务列表。
+<br>•   签名方法参考 [公共参数](https://cloud.tencent.com/document/api/1093/35640) 中签名方法v3。
+     * @param {DescribeAsyncRecognitionTasksRequest} req
+     * @param {function(string, DescribeAsyncRecognitionTasksResponse):void} cb
+     * @public
+     */
+    DescribeAsyncRecognitionTasks(req, cb) {
+        let resp = new DescribeAsyncRecognitionTasksResponse();
+        this.request("DescribeAsyncRecognitionTasks", req, resp, cb);
     }
 
     /**
@@ -250,6 +298,7 @@ class AsrClient extends AbstractClient {
 <br>•   当音频文件通过请求中body内容上传时，请求大小不能超过3MB。
 <br>•   请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
 <br>•   签名方法参考 [公共参数](https://cloud.tencent.com/document/api/1093/35640) 中签名方法v3。
+<br>•   默认接口请求频率限制：25次/秒，如您有提高请求频率限制的需求，请提[工单](https://console.cloud.tencent.com/workorder/category)进行咨询。
      * @param {SentenceRecognitionRequest} req
      * @param {function(string, SentenceRecognitionResponse):void} cb
      * @public

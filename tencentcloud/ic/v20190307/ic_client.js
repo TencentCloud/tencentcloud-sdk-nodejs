@@ -21,12 +21,14 @@ const AppInfo = models.AppInfo;
 const RenewCardsResponse = models.RenewCardsResponse;
 const CardList = models.CardList;
 const DescribeCardsResponse = models.DescribeCardsResponse;
+const ModifyUserCardRemarkRequest = models.ModifyUserCardRemarkRequest;
 const DescribeCardResponse = models.DescribeCardResponse;
 const CardInfo = models.CardInfo;
 const DescribeAppResponse = models.DescribeAppResponse;
 const DescribeCardRequest = models.DescribeCardRequest;
 const DescribeAppRequest = models.DescribeAppRequest;
 const SendSmsResponse = models.SendSmsResponse;
+const ModifyUserCardRemarkResponse = models.ModifyUserCardRemarkResponse;
 const SendSmsRequest = models.SendSmsRequest;
 const DescribeCardsRequest = models.DescribeCardsRequest;
 const SendMultiSmsRequest = models.SendMultiSmsRequest;
@@ -88,6 +90,17 @@ class IcClient extends AbstractClient {
     SendMultiSms(req, cb) {
         let resp = new SendMultiSmsResponse();
         this.request("SendMultiSms", req, resp, cb);
+    }
+
+    /**
+     * 编辑卡片备注
+     * @param {ModifyUserCardRemarkRequest} req
+     * @param {function(string, ModifyUserCardRemarkResponse):void} cb
+     * @public
+     */
+    ModifyUserCardRemark(req, cb) {
+        let resp = new ModifyUserCardRemarkResponse();
+        this.request("ModifyUserCardRemark", req, resp, cb);
     }
 
     /**

@@ -149,6 +149,62 @@ class Candidate extends  AbstractModel {
 }
 
 /**
+ * 视频基础信息
+ * @class
+ */
+class VideoBasicInformation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频宽度
+         * @type {number || null}
+         */
+        this.FrameWidth = null;
+
+        /**
+         * 视频高度
+         * @type {number || null}
+         */
+        this.FrameHeight = null;
+
+        /**
+         * 视频帧速率(FPS)
+         * @type {number || null}
+         */
+        this.FramesPerSecond = null;
+
+        /**
+         * 视频时长
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 视频帧数
+         * @type {number || null}
+         */
+        this.TotalFrames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FrameWidth = 'FrameWidth' in params ? params.FrameWidth : null;
+        this.FrameHeight = 'FrameHeight' in params ? params.FrameHeight : null;
+        this.FramesPerSecond = 'FramesPerSecond' in params ? params.FramesPerSecond : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.TotalFrames = 'TotalFrames' in params ? params.TotalFrames : null;
+
+    }
+}
+
+/**
  * DeletePerson请求参数结构体
  * @class
  */
@@ -205,24 +261,18 @@ class ModifyGroupResponse extends  AbstractModel {
 }
 
 /**
- * 上衣衣袖信息。
+ * TerminateSegmentationTask返回参数结构体
  * @class
  */
-class UpperBodyClothSleeve extends  AbstractModel {
+class TerminateSegmentationTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 上衣衣袖信息, 返回值为以下集合中的一个 {长袖, 短袖}。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Type = null;
-
-        /**
-         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
-         * @type {number || null}
-         */
-        this.Probability = null;
+        this.RequestId = null;
 
     }
 
@@ -233,8 +283,7 @@ class UpperBodyClothSleeve extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Probability = 'Probability' in params ? params.Probability : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -452,6 +501,34 @@ Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 。
 }
 
 /**
+ * DescribeSegmentationTask请求参数结构体
+ * @class
+ */
+class DescribeSegmentationTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 在提交分割任务成功时返回的任务标识ID。
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+
+    }
+}
+
+/**
  * 此参数为分割选项，请根据需要选择自己所想从图片中分割的部分。注意所有选项均为非必选，如未选择则值默认为false, 但是必须要保证多于一个选项的描述为true。
  * @class
  */
@@ -620,6 +697,69 @@ class SegmentationOptions extends  AbstractModel {
 }
 
 /**
+ * 上衣纹理信息。
+ * @class
+ */
+class UpperBodyClothTexture extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上衣纹理信息，返回值为以下集合中的一个, {纯色, 格子, 大色块}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0], 代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * TerminateSegmentationTask请求参数结构体
+ * @class
+ */
+class TerminateSegmentationTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 在提交分割任务成功时返回的任务标识ID。
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+
+    }
+}
+
+/**
  * ModifyGroup请求参数结构体
  * @class
  */
@@ -745,42 +885,30 @@ class ModifyPersonInfoResponse extends  AbstractModel {
 }
 
 /**
- * 人体轨迹信息
+ * CreateSegmentationTask返回参数结构体
  * @class
  */
-class Trace extends  AbstractModel {
+class CreateSegmentationTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 人体轨迹图片 Base64 数组。 
-数组长度最小为1最大为5。 
-单个图片 base64 编码后大小不可超过2M。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-         * @type {Array.<string> || null}
+         * 任务标识ID,可以用与追溯任务状态，查看任务结果
+         * @type {string || null}
          */
-        this.Images = null;
+        this.TaskID = null;
 
         /**
-         * 人体轨迹图片 Url 数组。 
-数组长度最小为1最大为5。 
-单个图片 base64 编码后大小不可超过2M。 
-Urls、Images必须提供一个，如果都提供，只使用 Urls。 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-         * @type {Array.<string> || null}
+         * 预估处理时间，单位为秒
+         * @type {number || null}
          */
-        this.Urls = null;
+        this.EstimatedProcessingTime = null;
 
         /**
-         * 若输入的Images 和 Urls 是已经裁剪后的人体小图，则可以忽略本参数。 
-若否，或图片中包含多个人体，则需要通过本参数来指定图片中的人体框。 
-顺序对应 Images 或 Urls 中的顺序。  
-当不输入本参数时，我们将认为输入图片已是经过裁剪后的人体小图，不会进行人体检测而直接进行特征提取处理。
-         * @type {Array.<BodyRect> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.BodyRects = null;
+        this.RequestId = null;
 
     }
 
@@ -791,17 +919,9 @@ Urls、Images必须提供一个，如果都提供，只使用 Urls。
         if (!params) {
             return;
         }
-        this.Images = 'Images' in params ? params.Images : null;
-        this.Urls = 'Urls' in params ? params.Urls : null;
-
-        if (params.BodyRects) {
-            this.BodyRects = new Array();
-            for (let z in params.BodyRects) {
-                let obj = new BodyRect();
-                obj.deserialize(params.BodyRects[z]);
-                this.BodyRects.push(obj);
-            }
-        }
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.EstimatedProcessingTime = 'EstimatedProcessingTime' in params ? params.EstimatedProcessingTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1068,24 +1188,32 @@ class LowerBodyCloth extends  AbstractModel {
 }
 
 /**
- * 上衣纹理信息。
+ * CreateSegmentationTask请求参数结构体
  * @class
  */
-class UpperBodyClothTexture extends  AbstractModel {
+class CreateSegmentationTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 上衣纹理信息，返回值为以下集合中的一个, {纯色, 格子, 大色块}。
+         * 需要分割的视频URL，可外网访问。
          * @type {string || null}
          */
-        this.Type = null;
+        this.VideoUrl = null;
 
         /**
-         * Type识别概率值，[0.0,1.0], 代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
-         * @type {number || null}
+         * 背景图片URL。 
+可以将视频背景替换为输入的图片。 
+如果不输入背景图片，则输出人像区域mask。
+         * @type {string || null}
          */
-        this.Probability = null;
+        this.BackgroundImageUrl = null;
+
+        /**
+         * 预留字段，后期用于展示更多识别信息。
+         * @type {string || null}
+         */
+        this.Config = null;
 
     }
 
@@ -1096,8 +1224,9 @@ class UpperBodyClothTexture extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Probability = 'Probability' in params ? params.Probability : null;
+        this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
+        this.BackgroundImageUrl = 'BackgroundImageUrl' in params ? params.BackgroundImageUrl : null;
+        this.Config = 'Config' in params ? params.Config : null;
 
     }
 }
@@ -1215,6 +1344,81 @@ class BodyRect extends  AbstractModel {
 }
 
 /**
+ * DescribeSegmentationTask返回参数结构体
+ * @class
+ */
+class DescribeSegmentationTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前任务状态：
+QUEUING 排队中
+PROCESSING 处理中
+FINISHED 处理完成
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 分割后视频URL, 存储于腾讯云COS
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultVideoUrl = null;
+
+        /**
+         * 分割后视频MD5，用于校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultVideoMD5 = null;
+
+        /**
+         * 视频基本信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VideoBasicInformation || null}
+         */
+        this.VideoBasicInformation = null;
+
+        /**
+         * 分割任务错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.ResultVideoUrl = 'ResultVideoUrl' in params ? params.ResultVideoUrl : null;
+        this.ResultVideoMD5 = 'ResultVideoMD5' in params ? params.ResultVideoMD5 : null;
+
+        if (params.VideoBasicInformation) {
+            let obj = new VideoBasicInformation();
+            obj.deserialize(params.VideoBasicInformation)
+            this.VideoBasicInformation = obj;
+        }
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DetectBody请求参数结构体
  * @class
  */
@@ -1225,29 +1429,29 @@ class DetectBodyRequest extends  AbstractModel {
         /**
          * 人体图片 Base64 数据。
 图片 base64 编码后大小不可超过5M。
-图片分辨率不得超过 2048*2048。
+图片分辨率不得超过 1920 * 1080 。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Image = null;
 
         /**
+         * 最多检测的人体数目，默认值为1（仅检测图片中面积最大的那个人体）； 最大值10 ，检测图片中面积最大的10个人体。
+         * @type {number || null}
+         */
+        this.MaxBodyNum = null;
+
+        /**
          * 人体图片 Url 。
 Url、Image必须提供一个，如果都提供，只使用 Url。
 图片 base64 编码后大小不可超过5M。 
-图片分辨率不得超过 2048*2048。
+图片分辨率不得超过 1920 * 1080 。
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。 
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
         this.Url = null;
-
-        /**
-         * 最多检测的人体数目，默认值为1（仅检测图片中面积最大的那个人体）； 最大值10 ，检测图片中面积最大的10个人体。
-         * @type {number || null}
-         */
-        this.MaxBodyNum = null;
 
         /**
          * 是否返回年龄、性别、朝向等属性。 
@@ -1270,8 +1474,8 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
             return;
         }
         this.Image = 'Image' in params ? params.Image : null;
-        this.Url = 'Url' in params ? params.Url : null;
         this.MaxBodyNum = 'MaxBodyNum' in params ? params.MaxBodyNum : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
         if (params.AttributesOptions) {
             let obj = new AttributesOptions();
@@ -1574,6 +1778,13 @@ class SegmentCustomizedPortraitPicResponse extends  AbstractModel {
         this.MaskImage = null;
 
         /**
+         * 坐标信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageRect> || null}
+         */
+        this.ImageRects = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1590,7 +1801,78 @@ class SegmentCustomizedPortraitPicResponse extends  AbstractModel {
         }
         this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
         this.MaskImage = 'MaskImage' in params ? params.MaskImage : null;
+
+        if (params.ImageRects) {
+            this.ImageRects = new Array();
+            for (let z in params.ImageRects) {
+                let obj = new ImageRect();
+                obj.deserialize(params.ImageRects[z]);
+                this.ImageRects.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 人体轨迹信息
+ * @class
+ */
+class Trace extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人体轨迹图片 Base64 数组。 
+数组长度最小为1最大为5。 
+单个图片 base64 编码后大小不可超过2M。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {Array.<string> || null}
+         */
+        this.Images = null;
+
+        /**
+         * 人体轨迹图片 Url 数组。 
+数组长度最小为1最大为5。 
+单个图片 base64 编码后大小不可超过2M。 
+Urls、Images必须提供一个，如果都提供，只使用 Urls。 
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+        /**
+         * 若输入的Images 和 Urls 是已经裁剪后的人体小图，则可以忽略本参数。 
+若否，或图片中包含多个人体，则需要通过本参数来指定图片中的人体框。 
+顺序对应 Images 或 Urls 中的顺序。  
+当不输入本参数时，我们将认为输入图片已是经过裁剪后的人体小图，不会进行人体检测而直接进行特征提取处理。
+         * @type {Array.<BodyRect> || null}
+         */
+        this.BodyRects = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Images = 'Images' in params ? params.Images : null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
+
+        if (params.BodyRects) {
+            this.BodyRects = new Array();
+            for (let z in params.BodyRects) {
+                let obj = new BodyRect();
+                obj.deserialize(params.BodyRects[z]);
+                this.BodyRects.push(obj);
+            }
+        }
 
     }
 }
@@ -1748,6 +2030,62 @@ class GetGroupListRequest extends  AbstractModel {
 }
 
 /**
+ * 图像坐标信息。
+ * @class
+ */
+class ImageRect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 左上角横坐标。
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 左上角纵坐标。
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 人体宽度。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 人体高度。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 分割选项名称。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Label = 'Label' in params ? params.Label : null;
+
+    }
+}
+
+/**
  * 图中检测出来的人体框。
  * @class
  */
@@ -1888,6 +2226,41 @@ class BodyJointsResult extends  AbstractModel {
             }
         }
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * 上衣衣袖信息。
+ * @class
+ */
+class UpperBodyClothSleeve extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上衣衣袖信息, 返回值为以下集合中的一个 {长袖, 短袖}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
 
     }
 }
@@ -2553,27 +2926,32 @@ module.exports = {
     SegmentPortraitPicResponse: SegmentPortraitPicResponse,
     DetectBodyJointsResponse: DetectBodyJointsResponse,
     Candidate: Candidate,
+    VideoBasicInformation: VideoBasicInformation,
     DeletePersonRequest: DeletePersonRequest,
     ModifyGroupResponse: ModifyGroupResponse,
-    UpperBodyClothSleeve: UpperBodyClothSleeve,
+    TerminateSegmentationTaskResponse: TerminateSegmentationTaskResponse,
     BodyAttributeInfo: BodyAttributeInfo,
     GetGroupListResponse: GetGroupListResponse,
     GroupInfo: GroupInfo,
+    DescribeSegmentationTaskRequest: DescribeSegmentationTaskRequest,
     SegmentationOptions: SegmentationOptions,
+    UpperBodyClothTexture: UpperBodyClothTexture,
+    TerminateSegmentationTaskRequest: TerminateSegmentationTaskRequest,
     ModifyGroupRequest: ModifyGroupRequest,
     CreatePersonRequest: CreatePersonRequest,
     ModifyPersonInfoResponse: ModifyPersonInfoResponse,
-    Trace: Trace,
+    CreateSegmentationTaskResponse: CreateSegmentationTaskResponse,
     DeleteGroupRequest: DeleteGroupRequest,
     ModifyPersonInfoRequest: ModifyPersonInfoRequest,
     Gender: Gender,
     SegmentCustomizedPortraitPicRequest: SegmentCustomizedPortraitPicRequest,
     CreateGroupRequest: CreateGroupRequest,
     LowerBodyCloth: LowerBodyCloth,
-    UpperBodyClothTexture: UpperBodyClothTexture,
+    CreateSegmentationTaskRequest: CreateSegmentationTaskRequest,
     TraceInfo: TraceInfo,
     DeleteGroupResponse: DeleteGroupResponse,
     BodyRect: BodyRect,
+    DescribeSegmentationTaskResponse: DescribeSegmentationTaskResponse,
     DetectBodyRequest: DetectBodyRequest,
     Age: Age,
     SearchTraceRequest: SearchTraceRequest,
@@ -2582,13 +2960,16 @@ module.exports = {
     PersonInfo: PersonInfo,
     Bag: Bag,
     SegmentCustomizedPortraitPicResponse: SegmentCustomizedPortraitPicResponse,
+    Trace: Trace,
     DetectBodyJointsRequest: DetectBodyJointsRequest,
     SegmentPortraitPicRequest: SegmentPortraitPicRequest,
     UpperBodyClothColor: UpperBodyClothColor,
     GetGroupListRequest: GetGroupListRequest,
+    ImageRect: ImageRect,
     BodyDetectResult: BodyDetectResult,
     Orientation: Orientation,
     BodyJointsResult: BodyJointsResult,
+    UpperBodyClothSleeve: UpperBodyClothSleeve,
     UpperBodyCloth: UpperBodyCloth,
     LowerBodyClothLength: LowerBodyClothLength,
     SearchTraceResponse: SearchTraceResponse,

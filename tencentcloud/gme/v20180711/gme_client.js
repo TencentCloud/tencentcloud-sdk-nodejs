@@ -19,24 +19,35 @@ const AbstractClient = require('../../common/abstract_client')
 const ScanVoiceResponse = models.ScanVoiceResponse;
 const AppStatisticsItem = models.AppStatisticsItem;
 const ModifyAppStatusRequest = models.ModifyAppStatusRequest;
+const InOutTimeInfo = models.InOutTimeInfo;
 const DescribeScanResultListResponse = models.DescribeScanResultListResponse;
+const DescribeApplicationDataRequest = models.DescribeApplicationDataRequest;
 const VoiceFilterRequest = models.VoiceFilterRequest;
 const VoiceMessageStatisticsItem = models.VoiceMessageStatisticsItem;
+const RoomUser = models.RoomUser;
+const DescribeRoomInfoRequest = models.DescribeRoomInfoRequest;
 const DescribeScanResultListRequest = models.DescribeScanResultListRequest;
 const RealTimeSpeechStatisticsItem = models.RealTimeSpeechStatisticsItem;
 const VoiceFilterResponse = models.VoiceFilterResponse;
 const Tag = models.Tag;
 const VoiceMessageConf = models.VoiceMessageConf;
+const ApplicationDataStatistics = models.ApplicationDataStatistics;
 const DescribeFilterResultListResponse = models.DescribeFilterResultListResponse;
 const DescribeAppStatisticsResponse = models.DescribeAppStatisticsResponse;
+const DescribeApplicationDataResponse = models.DescribeApplicationDataResponse;
 const Task = models.Task;
 const VoiceFilterStatisticsItem = models.VoiceFilterStatisticsItem;
+const StatisticsItem = models.StatisticsItem;
+const DescribeRoomInfoResponse = models.DescribeRoomInfoResponse;
+const DescribeUserInAndOutTimeResponse = models.DescribeUserInAndOutTimeResponse;
 const VoiceFilterInfo = models.VoiceFilterInfo;
 const DescribeFilterResultResponse = models.DescribeFilterResultResponse;
+const ModifyRoomInfoResponse = models.ModifyRoomInfoResponse;
 const DescribeScanResult = models.DescribeScanResult;
 const DescribeFilterResultListRequest = models.DescribeFilterResultListRequest;
 const VoiceFilter = models.VoiceFilter;
 const ScanDetail = models.ScanDetail;
+const ModifyRoomInfoRequest = models.ModifyRoomInfoRequest;
 const CreateAppRequest = models.CreateAppRequest;
 const RealtimeSpeechConf = models.RealtimeSpeechConf;
 const ScanVoiceResult = models.ScanVoiceResult;
@@ -44,9 +55,10 @@ const CreateAppResponse = models.CreateAppResponse;
 const DescribeAppStatisticsRequest = models.DescribeAppStatisticsRequest;
 const ScanPiece = models.ScanPiece;
 const ModifyAppStatusResponse = models.ModifyAppStatusResponse;
-const DescribeFilterResultRequest = models.DescribeFilterResultRequest;
-const VoiceFilterConf = models.VoiceFilterConf;
 const ScanVoiceRequest = models.ScanVoiceRequest;
+const VoiceFilterConf = models.VoiceFilterConf;
+const DescribeFilterResultRequest = models.DescribeFilterResultRequest;
+const DescribeUserInAndOutTimeRequest = models.DescribeUserInAndOutTimeRequest;
 
 
 /**
@@ -60,14 +72,14 @@ class GmeClient extends AbstractClient {
     }
     
     /**
-     * 根据应用ID和文件ID查询识别结果
-     * @param {DescribeFilterResultRequest} req
-     * @param {function(string, DescribeFilterResultResponse):void} cb
+     * 获取房间内用户信息
+     * @param {DescribeRoomInfoRequest} req
+     * @param {function(string, DescribeRoomInfoResponse):void} cb
      * @public
      */
-    DescribeFilterResult(req, cb) {
-        let resp = new DescribeFilterResultResponse();
-        this.request("DescribeFilterResult", req, resp, cb);
+    DescribeRoomInfo(req, cb) {
+        let resp = new DescribeRoomInfoResponse();
+        this.request("DescribeRoomInfo", req, resp, cb);
     }
 
     /**
@@ -104,6 +116,28 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     VoiceFilter(req, cb) {
         let resp = new VoiceFilterResponse();
         this.request("VoiceFilter", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
+     * @param {DescribeApplicationDataRequest} req
+     * @param {function(string, DescribeApplicationDataResponse):void} cb
+     * @public
+     */
+    DescribeApplicationData(req, cb) {
+        let resp = new DescribeApplicationDataResponse();
+        this.request("DescribeApplicationData", req, resp, cb);
+    }
+
+    /**
+     * 根据应用ID和文件ID查询识别结果
+     * @param {DescribeFilterResultRequest} req
+     * @param {function(string, DescribeFilterResultResponse):void} cb
+     * @public
+     */
+    DescribeFilterResult(req, cb) {
+        let resp = new DescribeFilterResultResponse();
+        this.request("DescribeFilterResult", req, resp, cb);
     }
 
     /**
@@ -265,6 +299,17 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     }
 
     /**
+     * 修改房间信息
+     * @param {ModifyRoomInfoRequest} req
+     * @param {function(string, ModifyRoomInfoResponse):void} cb
+     * @public
+     */
+    ModifyRoomInfo(req, cb) {
+        let resp = new ModifyRoomInfoResponse();
+        this.request("ModifyRoomInfo", req, resp, cb);
+    }
+
+    /**
      * 本接口(CreateApp)用于创建一个GME应用。
      * @param {CreateAppRequest} req
      * @param {function(string, CreateAppResponse):void} cb
@@ -284,6 +329,17 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     ModifyAppStatus(req, cb) {
         let resp = new ModifyAppStatusResponse();
         this.request("ModifyAppStatus", req, resp, cb);
+    }
+
+    /**
+     * 拉取用户在房间得进出时间
+     * @param {DescribeUserInAndOutTimeRequest} req
+     * @param {function(string, DescribeUserInAndOutTimeResponse):void} cb
+     * @public
+     */
+    DescribeUserInAndOutTime(req, cb) {
+        let resp = new DescribeUserInAndOutTimeResponse();
+        this.request("DescribeUserInAndOutTime", req, resp, cb);
     }
 
 

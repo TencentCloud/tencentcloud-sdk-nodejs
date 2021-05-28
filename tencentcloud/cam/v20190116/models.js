@@ -17,6 +17,85 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 子用户信息
+ * @class
+ */
+class SubAccountUser extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子用户用户 ID
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 子用户用户名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 子用户 UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 子用户备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 用户类型(1:主账号;2:子用户;3:企业微信子用户;4:协作者;5:消息接收人)
+         * @type {number || null}
+         */
+        this.UserType = null;
+
+        /**
+         * 最近登录IP
+         * @type {string || null}
+         */
+        this.LastLoginIp = null;
+
+        /**
+         * 最近登录时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastLoginTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UserType = 'UserType' in params ? params.UserType : null;
+        this.LastLoginIp = 'LastLoginIp' in params ? params.LastLoginIp : null;
+        this.LastLoginTime = 'LastLoginTime' in params ? params.LastLoginTime : null;
+
+    }
+}
+
+/**
  * GetUser返回参数结构体
  * @class
  */
@@ -943,6 +1022,34 @@ class PolicyVersionItem extends  AbstractModel {
 }
 
 /**
+ * DescribeSubAccounts请求参数结构体
+ * @class
+ */
+class DescribeSubAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子用户UIN列表，最多支持50个UIN
+         * @type {Array.<number> || null}
+         */
+        this.FilterSubAccountUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterSubAccountUin = 'FilterSubAccountUin' in params ? params.FilterSubAccountUin : null;
+
+    }
+}
+
+/**
  * DeleteUserPermissionsBoundary请求参数结构体
  * @class
  */
@@ -1372,6 +1479,99 @@ IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0
         }
         this.ServiceTypeList = 'ServiceTypeList' in params ? params.ServiceTypeList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 企业微信子用户
+ * @class
+ */
+class WeChatWorkSubAccount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子用户用户 ID
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 子用户用户名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 子用户 UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 子用户能否登录控制台
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * 区号
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * 邮箱
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 企业微信UserId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WeChatWorkUserId = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.WeChatWorkUserId = 'WeChatWorkUserId' in params ? params.WeChatWorkUserId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2292,6 +2492,41 @@ class DeleteRoleRequest extends  AbstractModel {
 }
 
 /**
+ * ListWeChatWorkSubAccounts请求参数结构体
+ * @class
+ */
+class ListWeChatWorkSubAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * UpdateRoleConsoleLogin请求参数结构体
  * @class
  */
@@ -2620,6 +2855,13 @@ class SubAccountInfo extends  AbstractModel {
          */
         this.Email = null;
 
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -2637,6 +2879,7 @@ class SubAccountInfo extends  AbstractModel {
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2826,6 +3069,56 @@ class UpdateUserRequest extends  AbstractModel {
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+
+    }
+}
+
+/**
+ * ListWeChatWorkSubAccounts返回参数结构体
+ * @class
+ */
+class ListWeChatWorkSubAccountsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 企业微信子用户列表。
+         * @type {Array.<WeChatWorkSubAccount> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 总数目。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new WeChatWorkSubAccount();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5191,6 +5484,49 @@ class AddUserResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSubAccounts返回参数结构体
+ * @class
+ */
+class DescribeSubAccountsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子用户列表
+         * @type {Array.<SubAccountUser> || null}
+         */
+        this.SubAccounts = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SubAccounts) {
+            this.SubAccounts = new Array();
+            for (let z in params.SubAccounts) {
+                let obj = new SubAccountUser();
+                obj.deserialize(params.SubAccounts[z]);
+                this.SubAccounts.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListEntitiesForPolicy返回参数结构体
  * @class
  */
@@ -5796,6 +6132,7 @@ class CreateGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
+    SubAccountUser: SubAccountUser,
     GetUserResponse: GetUserResponse,
     ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
@@ -5820,6 +6157,7 @@ module.exports = {
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
+    DescribeSubAccountsRequest: DescribeSubAccountsRequest,
     DeleteUserPermissionsBoundaryRequest: DeleteUserPermissionsBoundaryRequest,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
     ListGroupsRequest: ListGroupsRequest,
@@ -5831,6 +6169,7 @@ module.exports = {
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
     CreatePolicyVersionResponse: CreatePolicyVersionResponse,
     ListPoliciesResponse: ListPoliciesResponse,
+    WeChatWorkSubAccount: WeChatWorkSubAccount,
     OffsiteFlag: OffsiteFlag,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
@@ -5849,6 +6188,7 @@ module.exports = {
     AddUserRequest: AddUserRequest,
     LoginActionFlag: LoginActionFlag,
     DeleteRoleRequest: DeleteRoleRequest,
+    ListWeChatWorkSubAccountsRequest: ListWeChatWorkSubAccountsRequest,
     UpdateRoleConsoleLoginRequest: UpdateRoleConsoleLoginRequest,
     GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
@@ -5862,6 +6202,7 @@ module.exports = {
     SAMLProviderInfo: SAMLProviderInfo,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
     UpdateUserRequest: UpdateUserRequest,
+    ListWeChatWorkSubAccountsResponse: ListWeChatWorkSubAccountsResponse,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
     PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
@@ -5919,6 +6260,7 @@ module.exports = {
     ListUsersForGroupResponse: ListUsersForGroupResponse,
     PolicyVersionDetail: PolicyVersionDetail,
     AddUserResponse: AddUserResponse,
+    DescribeSubAccountsResponse: DescribeSubAccountsResponse,
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,

@@ -1878,6 +1878,12 @@ class CreateCustomImageResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1893,6 +1899,7 @@ class CreateCustomImageResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

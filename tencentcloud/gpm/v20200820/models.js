@@ -79,7 +79,7 @@ class DescribeMatchCodesRequest extends  AbstractModel {
         super();
 
         /**
-         * 偏移量
+         * 偏移量，页码
          * @type {number || null}
          */
         this.Offset = null;
@@ -89,6 +89,12 @@ class DescribeMatchCodesRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Limit = null;
+
+        /**
+         * 搜索的字符串
+         * @type {string || null}
+         */
+        this.MatchCode = null;
 
     }
 
@@ -101,6 +107,7 @@ class DescribeMatchCodesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.MatchCode = 'MatchCode' in params ? params.MatchCode : null;
 
     }
 }
@@ -178,7 +185,7 @@ class ModifyMatchRequest extends  AbstractModel {
         this.MatchDesc = null;
 
         /**
-         * 只支持https协议
+         * 只支持 http 和 https 协议
          * @type {string || null}
          */
         this.NotifyUrl = null;
@@ -283,7 +290,7 @@ class StartMatchingResponse extends  AbstractModel {
         this.ErrCode = null;
 
         /**
-         * 请求 id 长度 128。
+         * 匹配票据 ID长度 128。
          * @type {string || null}
          */
         this.MatchTicketId = null;
@@ -349,7 +356,7 @@ class CreateMatchRequest extends  AbstractModel {
         this.MatchDesc = null;
 
         /**
-         * 只支持https协议
+         * 只支持https 和 http 协议
          * @type {string || null}
          */
         this.NotifyUrl = null;
@@ -447,7 +454,7 @@ class DescribeMatchingProgressRequest extends  AbstractModel {
         super();
 
         /**
-         * 请求 id 列表, 列表长度 128。
+         * 匹配票据 ID列表, 列表长度 12。
          * @type {Array.<MTicket> || null}
          */
         this.MatchTicketIds = null;
@@ -935,7 +942,7 @@ class MatchInfo extends  AbstractModel {
         this.RuleName = null;
 
         /**
-         * 日志状态，0表示正常，1表示日志集不存在，2表示日志主题不存在，3表示日志集和日志主题都不存在
+         * 日志状态，0表示正常，1表示日志集不存在，2表示日志主题不存在，3表示日志集和日志主题都不存在。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1004,13 +1011,13 @@ class DescribeRulesRequest extends  AbstractModel {
         super();
 
         /**
-         * 当前页号，不传则获取所有有权限的资源。
+         * 当前页号，不传则返回第一页
          * @type {number || null}
          */
         this.PageNumber = null;
 
         /**
-         * 单页大小，不传则获取所有有权限的资源。
+         * 单页大小，最大 30，不填默认30
          * @type {number || null}
          */
         this.PageSize = null;
@@ -1187,7 +1194,7 @@ class ModifyRuleRequest extends  AbstractModel {
         this.RuleCode = null;
 
         /**
-         * 规则名称
+         * 规则名称，只能包含数字、字母、. 和 -
          * @type {string || null}
          */
         this.RuleName = null;
@@ -1637,7 +1644,7 @@ class MatchAttribute extends  AbstractModel {
         this.NumberValue = null;
 
         /**
-         * 字符串属性值 长度 1024 默认 ""
+         * 字符串属性值 长度 128 默认 ""
          * @type {string || null}
          */
         this.StringValue = null;
@@ -1724,7 +1731,7 @@ class CancelMatchingRequest extends  AbstractModel {
         this.MatchCode = null;
 
         /**
-         * 要取消的匹配请求 Id
+         * 要取消的匹配匹配票据 ID
          * @type {string || null}
          */
         this.MatchTicketId = null;
@@ -1810,6 +1817,63 @@ class StringKV extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * StartMatchingBackfill请求参数结构体
+ * @class
+ */
+class StartMatchingBackfillRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 匹配code
+         * @type {string || null}
+         */
+        this.MatchCode = null;
+
+        /**
+         * 玩家信息
+         * @type {Array.<Player> || null}
+         */
+        this.Players = null;
+
+        /**
+         * 游戏服务器回话 ID [1-256] 个ASCII 字符
+         * @type {string || null}
+         */
+        this.GameServerSessionId = null;
+
+        /**
+         * 匹配票据 Id 默认 "" 为空则由 GPM 自动生成 长度 [1, 128]
+         * @type {string || null}
+         */
+        this.MatchTicketId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MatchCode = 'MatchCode' in params ? params.MatchCode : null;
+
+        if (params.Players) {
+            this.Players = new Array();
+            for (let z in params.Players) {
+                let obj = new Player();
+                obj.deserialize(params.Players[z]);
+                this.Players.push(obj);
+            }
+        }
+        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+        this.MatchTicketId = 'MatchTicketId' in params ? params.MatchTicketId : null;
 
     }
 }
@@ -2021,7 +2085,7 @@ class DescribeRulesResponse extends  AbstractModel {
 }
 
 /**
- * matchCode和TicketId组合结构
+ * matchCode和匹配票据 ID组合结构
  * @class
  */
 class MTicket extends  AbstractModel {
@@ -2035,7 +2099,7 @@ class MTicket extends  AbstractModel {
         this.MatchCode = null;
 
         /**
-         * 请求TicketId
+         * 匹配票据 ID
          * @type {string || null}
          */
         this.MatchTicketId = null;
@@ -2219,6 +2283,47 @@ class ModifyTokenRequest extends  AbstractModel {
 }
 
 /**
+ * StartMatchingBackfill返回参数结构体
+ * @class
+ */
+class StartMatchingBackfillResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 匹配票据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MatchTicket || null}
+         */
+        this.MatchTicket = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MatchTicket) {
+            let obj = new MatchTicket();
+            obj.deserialize(params.MatchTicket)
+            this.MatchTicket = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMatches返回参数结构体
  * @class
  */
@@ -2240,13 +2345,13 @@ class DescribeMatchesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 当前页号
+         * 当前页号，不填默认返回第一页
          * @type {number || null}
          */
         this.PageNumber = null;
 
         /**
-         * 单页大小
+         * 单页大小，不填默认取 30，最大值不能超过 30
          * @type {number || null}
          */
         this.PageSize = null;
@@ -2404,7 +2509,7 @@ class StartMatchingRequest extends  AbstractModel {
         this.Players = null;
 
         /**
-         * 请求 Id 默认 "" 为空则由 GPM 自动生成 长度 128。
+         * 匹配票据 ID 默认空字符串，为空则由 GPM 自动生成 长度 128，只能包含数字、字母、. 和 -
          * @type {string || null}
          */
         this.MatchTicketId = null;
@@ -2497,7 +2602,7 @@ class DeleteMatchRequest extends  AbstractModel {
 }
 
 /**
- * 匹配请求信息
+ * 匹配票据信息
  * @class
  */
 class MatchTicket extends  AbstractModel {
@@ -2505,7 +2610,7 @@ class MatchTicket extends  AbstractModel {
         super();
 
         /**
-         * MatchTicketId 长度 128 [a-zA-Z0-9-\.]*
+         * 匹配票据 ID长度 128 [a-zA-Z0-9-\.]*
          * @type {string || null}
          */
         this.Id = null;
@@ -2609,7 +2714,7 @@ class DescribeMatchingProgressResponse extends  AbstractModel {
         super();
 
         /**
-         * 请求结果列表
+         * 匹配票据列表
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MatchTicket> || null}
          */
@@ -2726,6 +2831,7 @@ module.exports = {
     CancelMatchingRequest: CancelMatchingRequest,
     AttributeMap: AttributeMap,
     StringKV: StringKV,
+    StartMatchingBackfillRequest: StartMatchingBackfillRequest,
     CancelMatchingResponse: CancelMatchingResponse,
     DescribeMatchCodesResponse: DescribeMatchCodesResponse,
     CreateRuleResponse: CreateRuleResponse,
@@ -2733,6 +2839,7 @@ module.exports = {
     MTicket: MTicket,
     RuleInfo: RuleInfo,
     ModifyTokenRequest: ModifyTokenRequest,
+    StartMatchingBackfillResponse: StartMatchingBackfillResponse,
     DescribeMatchesResponse: DescribeMatchesResponse,
     Player: Player,
     StartMatchingRequest: StartMatchingRequest,

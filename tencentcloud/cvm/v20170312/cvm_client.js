@@ -28,10 +28,11 @@ const DeleteDisasterRecoverGroupsRequest = models.DeleteDisasterRecoverGroupsReq
 const DeleteKeyPairsResponse = models.DeleteKeyPairsResponse;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const ModifyInstancesChargeTypeResponse = models.ModifyInstancesChargeTypeResponse;
-const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
+const AccountQuota = models.AccountQuota;
 const InquiryPriceResetInstancesInternetMaxBandwidthResponse = models.InquiryPriceResetInstancesInternetMaxBandwidthResponse;
 const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const PostPaidQuota = models.PostPaidQuota;
 const ResetInstancesTypeRequest = models.ResetInstancesTypeRequest;
 const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
 const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
@@ -59,7 +60,6 @@ const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
 const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
 const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
-const DescribeSpotTypeConfigResponse = models.DescribeSpotTypeConfigResponse;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
@@ -67,7 +67,7 @@ const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPai
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
 const ReservedInstancePrice = models.ReservedInstancePrice;
-const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
+const DisasterRecoverGroupQuota = models.DisasterRecoverGroupQuota;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
 const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
@@ -86,6 +86,8 @@ const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
+const SpotPaidQuota = models.SpotPaidQuota;
+const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
 const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfigsResponse;
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
@@ -101,6 +103,7 @@ const DescribeReservedInstancesConfigInfosResponse = models.DescribeReservedInst
 const DescribeReservedInstancesResponse = models.DescribeReservedInstancesResponse;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const InquirePricePurchaseReservedInstancesOfferingRequest = models.InquirePricePurchaseReservedInstancesOfferingRequest;
+const PrePaidQuota = models.PrePaidQuota;
 const DataDisk = models.DataDisk;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const OperationCountLimit = models.OperationCountLimit;
@@ -116,6 +119,7 @@ const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstancesOfferingsRequest;
 const ReservedInstanceFamilyItem = models.ReservedInstanceFamilyItem;
+const ImageQuota = models.ImageQuota;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
@@ -143,6 +147,7 @@ const StartInstancesResponse = models.StartInstancesResponse;
 const ModifyInstancesVpcAttributeRequest = models.ModifyInstancesVpcAttributeRequest;
 const DescribeReservedInstancesRequest = models.DescribeReservedInstancesRequest;
 const DescribeInternetChargeTypeConfigsResponse = models.DescribeInternetChargeTypeConfigsResponse;
+const AccountQuotaOverview = models.AccountQuotaOverview;
 const DescribeZoneInstanceConfigInfosRequest = models.DescribeZoneInstanceConfigInfosRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
@@ -151,6 +156,7 @@ const ImageOsList = models.ImageOsList;
 const ReservedInstanceTypeItem = models.ReservedInstanceTypeItem;
 const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
+const DescribeAccountQuotaRequest = models.DescribeAccountQuotaRequest;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
 const DescribeInstancesStatusRequest = models.DescribeInstancesStatusRequest;
 const InquiryPriceResizeInstanceDisksResponse = models.InquiryPriceResizeInstanceDisksResponse;
@@ -162,7 +168,7 @@ const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
 const RebootInstancesResponse = models.RebootInstancesResponse;
-const DescribeSpotTypeConfigRequest = models.DescribeSpotTypeConfigRequest;
+const CreateDisasterRecoverGroupResponse = models.CreateDisasterRecoverGroupResponse;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
 const ReservedInstancesOffering = models.ReservedInstancesOffering;
 const OsVersion = models.OsVersion;
@@ -182,6 +188,7 @@ const ImportKeyPairRequest = models.ImportKeyPairRequest;
 const KeyPair = models.KeyPair;
 const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstancesOfferingsResponse;
 const RenewInstancesResponse = models.RenewInstancesResponse;
+const DescribeAccountQuotaResponse = models.DescribeAccountQuotaResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
@@ -529,6 +536,7 @@ class CvmClient extends AbstractClient {
 
 * 实例创建成功后将自动开机启动，[实例状态](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)变为“运行中”。
 * 预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
+* 调用本接口创建实例，支持代金券自动抵扣（注意，代金券不可用于抵扣后付费冻结金额），详情请参考[代金券选用规则](https://cloud.tencent.com/document/product/555/7428)。
 * 本接口允许购买的实例数量遵循[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)，所创建的实例和官网入口创建的实例共用配额。
 * 本接口为异步接口，当创建实例请求下发成功后会返回一个实例`ID`列表和一个`RequestId`，此时创建实例操作并未立即完成。在此期间实例的状态将会处于“PENDING”，实例创建结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728)  接口查询，如果实例状态(InstanceState)由“PENDING”变为“RUNNING”，则代表实例创建成功，“LAUNCH_FAILED”代表实例创建失败。
      * @param {RunInstancesRequest} req
@@ -729,8 +737,20 @@ class CvmClient extends AbstractClient {
     }
 
     /**
+     * 本接口(DescribeAccountQuota)用于查询用户配额详情。
+     * @param {DescribeAccountQuotaRequest} req
+     * @param {function(string, DescribeAccountQuotaResponse):void} cb
+     * @public
+     */
+    DescribeAccountQuota(req, cb) {
+        let resp = new DescribeAccountQuotaResponse();
+        this.request("DescribeAccountQuota", req, resp, cb);
+    }
+
+    /**
      * 本接口 (ResetInstancesType) 用于调整实例的机型。
-* 目前只支持[系统盘类型](/document/api/213/9452#block_device)是`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`类型的实例使用该接口进行机型调整。
+
+* 目前只支持[系统盘类型](/document/api/213/9452#block_device)是CLOUD_BASIC、CLOUD_PREMIUM、CLOUD_SSD类型的实例使用该接口进行机型调整。
 * 目前不支持[CDH](https://cloud.tencent.com/document/product/416)实例使用该接口调整机型。对于包年包月实例，使用该接口会涉及扣费，请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
 * 本接口为异步接口，调整实例配置请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表调整实例配置操作成功。
      * @param {ResetInstancesTypeRequest} req
@@ -1135,17 +1155,6 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * 查询用户可购买的竞价机型信息列表
-     * @param {DescribeSpotTypeConfigRequest} req
-     * @param {function(string, DescribeSpotTypeConfigResponse):void} cb
-     * @public
-     */
-    DescribeSpotTypeConfig(req, cb) {
-        let resp = new DescribeSpotTypeConfigResponse();
-        this.request("DescribeSpotTypeConfig", req, resp, cb);
     }
 
 

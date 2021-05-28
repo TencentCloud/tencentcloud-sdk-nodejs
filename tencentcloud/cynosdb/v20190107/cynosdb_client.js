@@ -28,6 +28,7 @@ const SecurityGroup = models.SecurityGroup;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
 const DescribeClusterInstanceGrpsRequest = models.DescribeClusterInstanceGrpsRequest;
+const DescribeResourcesByDealNameResponse = models.DescribeResourcesByDealNameResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const IsolateInstanceRequest = models.IsolateInstanceRequest;
 const DescribeMaintainPeriodResponse = models.DescribeMaintainPeriodResponse;
@@ -54,15 +55,17 @@ const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidity
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const DescribeResourcesByDealNameRequest = models.DescribeResourcesByDealNameRequest;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
+const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
 const QueryFilter = models.QueryFilter;
 const CynosdbInstance = models.CynosdbInstance;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
 const OfflineInstanceRequest = models.OfflineInstanceRequest;
-const DescribeRollbackTimeRangeRequest = models.DescribeRollbackTimeRangeRequest;
+const BillingResourceInfo = models.BillingResourceInfo;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
 const ObjectTask = models.ObjectTask;
@@ -300,6 +303,17 @@ class CynosdbClient extends AbstractClient {
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * 根据计费订单id查询资源列表
+     * @param {DescribeResourcesByDealNameRequest} req
+     * @param {function(string, DescribeResourcesByDealNameResponse):void} cb
+     * @public
+     */
+    DescribeResourcesByDealName(req, cb) {
+        let resp = new DescribeResourcesByDealNameResponse();
+        this.request("DescribeResourcesByDealName", req, resp, cb);
     }
 
     /**

@@ -99,6 +99,13 @@ class TopicDetail extends  AbstractModel {
          */
         this.Config = null;
 
+        /**
+         * 消息保留时间配置(用于动态配置变更记录)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TopicRetentionTimeConfigRsp || null}
+         */
+        this.RetentionTimeConfig = null;
+
     }
 
     /**
@@ -124,6 +131,12 @@ class TopicDetail extends  AbstractModel {
             let obj = new Config();
             obj.deserialize(params.Config)
             this.Config = obj;
+        }
+
+        if (params.RetentionTimeConfig) {
+            let obj = new TopicRetentionTimeConfigRsp();
+            obj.deserialize(params.RetentionTimeConfig)
+            this.RetentionTimeConfig = obj;
         }
 
     }
@@ -735,6 +748,88 @@ class TopicResult extends  AbstractModel {
 }
 
 /**
+ * 地域实体对象
+ * @class
+ */
+class Region extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 区域名称
+         * @type {string || null}
+         */
+        this.AreaName = null;
+
+        /**
+         * 地域代码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * 地域代码（V3版本）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionCodeV3 = null;
+
+        /**
+         * NONE:默认值不支持任何特殊机型\nCVM:支持CVM类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Support = null;
+
+        /**
+         * 是否支持ipv6, 0：表示不支持，1：表示支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv6 = null;
+
+        /**
+         * 是否支持跨可用区, 0：表示不支持，1：表示支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MultiZone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.AreaName = 'AreaName' in params ? params.AreaName : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.RegionCodeV3 = 'RegionCodeV3' in params ? params.RegionCodeV3 : null;
+        this.Support = 'Support' in params ? params.Support : null;
+        this.Ipv6 = 'Ipv6' in params ? params.Ipv6 : null;
+        this.MultiZone = 'MultiZone' in params ? params.MultiZone : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDetail返回参数结构体
  * @class
  */
@@ -894,6 +989,104 @@ class JgwOperateResponse extends  AbstractModel {
             let obj = new OperateResponseData();
             obj.deserialize(params.Data)
             this.Data = obj;
+        }
+
+    }
+}
+
+/**
+ * zone信息实体
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * zone的id
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 是否内部APP
+         * @type {number || null}
+         */
+        this.IsInternalApp = null;
+
+        /**
+         * app id
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 标识
+         * @type {boolean || null}
+         */
+        this.Flag = null;
+
+        /**
+         * zone名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * zone状态
+         * @type {number || null}
+         */
+        this.ZoneStatus = null;
+
+        /**
+         * 额外标识
+         * @type {string || null}
+         */
+        this.Exflag = null;
+
+        /**
+         * json对象，key为机型，value true为售罄，false为未售罄
+         * @type {string || null}
+         */
+        this.SoldOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.IsInternalApp = 'IsInternalApp' in params ? params.IsInternalApp : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneStatus = 'ZoneStatus' in params ? params.ZoneStatus : null;
+        this.Exflag = 'Exflag' in params ? params.Exflag : null;
+        this.SoldOut = 'SoldOut' in params ? params.SoldOut : null;
+
+    }
+}
+
+/**
+ * DescribeCkafkaZone请求参数结构体
+ * @class
+ */
+class DescribeCkafkaZoneRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
     }
@@ -1140,6 +1333,41 @@ class DescribeGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteAclRule请求参数结构体
+ * @class
+ */
+class DeleteAclRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id信息
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * acl规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+    }
+}
+
+/**
  * 修改实例属性的配置对象
  * @class
  */
@@ -1251,25 +1479,24 @@ class CreateUserResponse extends  AbstractModel {
 }
 
 /**
- * 消费分组主题对象
+ * ModifyInstanceAttributes返回参数结构体
  * @class
  */
-class GroupOffsetTopic extends  AbstractModel {
+class ModifyInstanceAttributesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主题名称
-         * @type {string || null}
+         * 返回结果
+         * @type {JgwOperateResponse || null}
          */
-        this.Topic = null;
+        this.Result = null;
 
         /**
-         * 该主题分区数组，其中每个元素为一个 json object
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<GroupOffsetPartition> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Partitions = null;
+        this.RequestId = null;
 
     }
 
@@ -1280,16 +1507,13 @@ class GroupOffsetTopic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Topic = 'Topic' in params ? params.Topic : null;
 
-        if (params.Partitions) {
-            this.Partitions = new Array();
-            for (let z in params.Partitions) {
-                let obj = new GroupOffsetPartition();
-                obj.deserialize(params.Partitions[z]);
-                this.Partitions.push(obj);
-            }
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1330,6 +1554,145 @@ class CreatePartitionResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 集群信息实体
+ * @class
+ */
+class ClusterInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群最大磁盘 单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxDiskSize = null;
+
+        /**
+         * 集群最大带宽 单位MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxBandWidth = null;
+
+        /**
+         * 集群当前可用磁盘  单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AvailableDiskSize = null;
+
+        /**
+         * 集群当前可用带宽 单位MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AvailableBandWidth = null;
+
+        /**
+         * 集群所属可用区，表明集群归属的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.ZoneIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.MaxDiskSize = 'MaxDiskSize' in params ? params.MaxDiskSize : null;
+        this.MaxBandWidth = 'MaxBandWidth' in params ? params.MaxBandWidth : null;
+        this.AvailableDiskSize = 'AvailableDiskSize' in params ? params.AvailableDiskSize : null;
+        this.AvailableBandWidth = 'AvailableBandWidth' in params ? params.AvailableBandWidth : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
+
+    }
+}
+
+/**
+ * DescribeConsumerGroup请求参数结构体
+ * @class
+ */
+class DescribeConsumerGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ckafka实例id。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 可选，用户需要查询的group名称。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 本次返回个数限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移位置
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1395,12 +1758,6 @@ class CreateAclRequest extends  AbstractModel {
         this.ResourceType = null;
 
         /**
-         * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
-         * @type {string || null}
-         */
-        this.ResourceName = null;
-
-        /**
          * Acl操作方式，(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS)
          * @type {number || null}
          */
@@ -1413,13 +1770,19 @@ class CreateAclRequest extends  AbstractModel {
         this.PermissionType = null;
 
         /**
+         * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
+         * @type {string || null}
+         */
+        this.ResourceName = null;
+
+        /**
          * 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持
          * @type {string || null}
          */
         this.Host = null;
 
         /**
-         * 用户列表，默认为*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户
+         * 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入时需要加 User: 前缀,如用户A则传入User:A。
          * @type {string || null}
          */
         this.Principal = null;
@@ -1435,9 +1798,9 @@ class CreateAclRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.PermissionType = 'PermissionType' in params ? params.PermissionType : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.Principal = 'Principal' in params ? params.Principal : null;
 
@@ -1685,24 +2048,25 @@ class CreateTopicIpWhiteListResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAttributes返回参数结构体
+ * 消费分组主题对象
  * @class
  */
-class ModifyInstanceAttributesResponse extends  AbstractModel {
+class GroupOffsetTopic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 主题名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Topic = null;
+
+        /**
+         * 该主题分区数组，其中每个元素为一个 json object
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GroupOffsetPartition> || null}
+         */
+        this.Partitions = null;
 
     }
 
@@ -1713,13 +2077,16 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Topic = 'Topic' in params ? params.Topic : null;
 
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new GroupOffsetPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1978,6 +2345,59 @@ class DeleteAclResponse extends  AbstractModel {
 }
 
 /**
+ * 动态消息保留时间配置
+ * @class
+ */
+class DynamicRetentionTime extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 动态消息保留时间配置开关（0: 关闭，1: 开启）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Enable = null;
+
+        /**
+         * 磁盘配额百分比触发条件，即消息达到此值触发消息保留时间变更事件
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskQuotaPercentage = null;
+
+        /**
+         * 每次向前调整消息保留时间百分比
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.StepForwardPercentage = null;
+
+        /**
+         * 保底时长，单位分钟
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BottomRetention = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.DiskQuotaPercentage = 'DiskQuotaPercentage' in params ? params.DiskQuotaPercentage : null;
+        this.StepForwardPercentage = 'StepForwardPercentage' in params ? params.StepForwardPercentage : null;
+        this.BottomRetention = 'BottomRetention' in params ? params.BottomRetention : null;
+
+    }
+}
+
+/**
  * DescribeRoute请求参数结构体
  * @class
  */
@@ -2001,6 +2421,48 @@ class DescribeRouteRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeRegion请求参数结构体
+ * @class
+ */
+class DescribeRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回最大结果数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 业务字段，可忽略
+         * @type {string || null}
+         */
+        this.Business = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Business = 'Business' in params ? params.Business : null;
 
     }
 }
@@ -2043,6 +2505,41 @@ class InstanceConfigDO extends  AbstractModel {
         this.AutoCreateTopicsEnable = 'AutoCreateTopicsEnable' in params ? params.AutoCreateTopicsEnable : null;
         this.DefaultNumPartitions = 'DefaultNumPartitions' in params ? params.DefaultNumPartitions : null;
         this.DefaultReplicationFactor = 'DefaultReplicationFactor' in params ? params.DefaultReplicationFactor : null;
+
+    }
+}
+
+/**
+ * DeleteAclRule返回参数结构体
+ * @class
+ */
+class DeleteAclRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回被删除的规则的ID
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2164,6 +2661,46 @@ class DescribeGroupInfoResponse extends  AbstractModel {
                 obj.deserialize(params.Result[z]);
                 this.Result.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyTopicAttributes返回参数结构体
+ * @class
+ */
+class ModifyTopicAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果集
+         * @type {JgwOperateResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2450,6 +2987,128 @@ class AclResponse extends  AbstractModel {
 }
 
 /**
+ * 查询kafka的zone信息返回的实体
+ * @class
+ */
+class ZoneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * zone列表
+         * @type {Array.<ZoneInfo> || null}
+         */
+        this.ZoneList = null;
+
+        /**
+         * 最大购买实例个数
+         * @type {number || null}
+         */
+        this.MaxBuyInstanceNum = null;
+
+        /**
+         * 最大购买带宽 单位Mb/s
+         * @type {number || null}
+         */
+        this.MaxBandwidth = null;
+
+        /**
+         * 后付费单位价格
+         * @type {Price || null}
+         */
+        this.UnitPrice = null;
+
+        /**
+         * 后付费消息单价
+         * @type {Price || null}
+         */
+        this.MessagePrice = null;
+
+        /**
+         * 用户独占集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ClusterInfo> || null}
+         */
+        this.ClusterInfo = null;
+
+        /**
+         * 购买标准版配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Standard = null;
+
+        /**
+         * 购买标准版S2配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StandardS2 = null;
+
+        /**
+         * 购买专业版配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Profession = null;
+
+        /**
+         * 购买物理独占版配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Physical = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ZoneList) {
+            this.ZoneList = new Array();
+            for (let z in params.ZoneList) {
+                let obj = new ZoneInfo();
+                obj.deserialize(params.ZoneList[z]);
+                this.ZoneList.push(obj);
+            }
+        }
+        this.MaxBuyInstanceNum = 'MaxBuyInstanceNum' in params ? params.MaxBuyInstanceNum : null;
+        this.MaxBandwidth = 'MaxBandwidth' in params ? params.MaxBandwidth : null;
+
+        if (params.UnitPrice) {
+            let obj = new Price();
+            obj.deserialize(params.UnitPrice)
+            this.UnitPrice = obj;
+        }
+
+        if (params.MessagePrice) {
+            let obj = new Price();
+            obj.deserialize(params.MessagePrice)
+            this.MessagePrice = obj;
+        }
+
+        if (params.ClusterInfo) {
+            this.ClusterInfo = new Array();
+            for (let z in params.ClusterInfo) {
+                let obj = new ClusterInfo();
+                obj.deserialize(params.ClusterInfo[z]);
+                this.ClusterInfo.push(obj);
+            }
+        }
+        this.Standard = 'Standard' in params ? params.Standard : null;
+        this.StandardS2 = 'StandardS2' in params ? params.StandardS2 : null;
+        this.Profession = 'Profession' in params ? params.Profession : null;
+        this.Physical = 'Physical' in params ? params.Physical : null;
+
+    }
+}
+
+/**
  * 实例对象
  * @class
  */
@@ -2711,6 +3370,90 @@ class ModifyPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * CreateInstancePre请求参数结构体
+ * @class
+ */
+class CreateInstancePreRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 可用区
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 预付费购买时长，例如 "1m",就是一个月
+         * @type {string || null}
+         */
+        this.Period = null;
+
+        /**
+         * 实例规格，1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * vpcId，不填默认基础网络
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网id，vpc网络需要传该参数，基础网络可以不传
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
+         * @type {number || null}
+         */
+        this.MsgRetentionTime = null;
+
+        /**
+         * 创建实例时可以选择集群Id, 该入参表示集群Id
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * ModifyInstanceAttributes请求参数结构体
  * @class
  */
@@ -2742,6 +3485,18 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
          */
         this.Config = null;
 
+        /**
+         * 动态消息保留策略配置
+         * @type {DynamicRetentionTime || null}
+         */
+        this.DynamicRetentionConfig = null;
+
+        /**
+         * 修改升配置rebalance时间
+         * @type {number || null}
+         */
+        this.RebalanceTime = null;
+
     }
 
     /**
@@ -2761,20 +3516,28 @@ class ModifyInstanceAttributesRequest extends  AbstractModel {
             this.Config = obj;
         }
 
+        if (params.DynamicRetentionConfig) {
+            let obj = new DynamicRetentionTime();
+            obj.deserialize(params.DynamicRetentionConfig)
+            this.DynamicRetentionConfig = obj;
+        }
+        this.RebalanceTime = 'RebalanceTime' in params ? params.RebalanceTime : null;
+
     }
 }
 
 /**
- * ModifyTopicAttributes返回参数结构体
+ * DescribeRegion返回参数结构体
  * @class
  */
-class ModifyTopicAttributesResponse extends  AbstractModel {
+class DescribeRegionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果集
-         * @type {JgwOperateResponse || null}
+         * 返回地域枚举结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Region> || null}
          */
         this.Result = null;
 
@@ -2795,9 +3558,12 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+            this.Result = new Array();
+            for (let z in params.Result) {
+                let obj = new Region();
+                obj.deserialize(params.Result[z]);
+                this.Result.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2805,42 +3571,24 @@ class ModifyTopicAttributesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeConsumerGroup请求参数结构体
+ * CreateTopic返回参数结构体
  * @class
  */
-class DescribeConsumerGroupRequest extends  AbstractModel {
+class CreateTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ckafka实例id。
+         * 返回创建结果
+         * @type {CreateTopicResp || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 可选，用户需要查询的group名称。
-         * @type {string || null}
-         */
-        this.GroupName = null;
-
-        /**
-         * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 本次返回个数限制
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移位置
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -2851,11 +3599,13 @@ class DescribeConsumerGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Result) {
+            let obj = new CreateTopicResp();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3310,7 +4060,7 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.MaxGroupNum = null;
 
         /**
-         * 售卖类型
+         * 售卖类型,0:标准版,1:专业版
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -3329,6 +4079,13 @@ class InstanceAttributesResponse extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.Features = null;
+
+        /**
+         * 动态消息保留策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DynamicRetentionTime || null}
+         */
+        this.RetentionTimeConfig = null;
 
     }
 
@@ -3389,40 +4146,34 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.Features = 'Features' in params ? params.Features : null;
 
+        if (params.RetentionTimeConfig) {
+            let obj = new DynamicRetentionTime();
+            obj.deserialize(params.RetentionTimeConfig)
+            this.RetentionTimeConfig = obj;
+        }
+
     }
 }
 
 /**
- * DescribeGroup请求参数结构体
+ * DescribeCkafkaZone返回参数结构体
  * @class
  */
-class DescribeGroupRequest extends  AbstractModel {
+class DescribeCkafkaZoneResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
+         * 查询结果复杂对象实体
+         * @type {ZoneResponse || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
-
-        /**
-         * 搜索关键字
-         * @type {string || null}
-         */
-        this.SearchWord = null;
-
-        /**
-         * 偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 最大返回数量
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -3433,10 +4184,13 @@ class DescribeGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Result) {
+            let obj = new ZoneResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4531,6 +5285,51 @@ class Acl extends  AbstractModel {
 }
 
 /**
+ * Topic消息保留时间配置返回信息
+ * @class
+ */
+class TopicRetentionTimeConfigRsp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 期望值，即用户配置的Topic消息保留时间(单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Expect = null;
+
+        /**
+         * 当前值，即当前生效值(可能存在动态调整，单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Current = null;
+
+        /**
+         * 最近变更时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ModTimeStamp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Expect = 'Expect' in params ? params.Expect : null;
+        this.Current = 'Current' in params ? params.Current : null;
+        this.ModTimeStamp = 'ModTimeStamp' in params ? params.ModTimeStamp : null;
+
+    }
+}
+
+/**
  * ModifyTopicAttributes请求参数结构体
  * @class
  */
@@ -4622,24 +5421,36 @@ class ModifyTopicAttributesRequest extends  AbstractModel {
 }
 
 /**
- * CreateTopic返回参数结构体
+ * DescribeGroup请求参数结构体
  * @class
  */
-class CreateTopicResponse extends  AbstractModel {
+class DescribeGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回创建结果
-         * @type {CreateTopicResp || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * 搜索关键字
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 最大返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -4650,97 +5461,10 @@ class CreateTopicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new CreateTopicResp();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateInstancePre请求参数结构体
- * @class
- */
-class CreateInstancePreRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 可用区
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 预付费购买时长，例如 "1m",就是一个月
-         * @type {string || null}
-         */
-        this.Period = null;
-
-        /**
-         * 实例规格，1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
-         * @type {number || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * vpcId，不填默认基础网络
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 子网id，vpc网络需要传该参数，基础网络可以不传
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
-         * @type {number || null}
-         */
-        this.MsgRetentionTime = null;
-
-        /**
-         * 创建实例时可以选择集群Id, 该入参表示集群Id
-         * @type {number || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
-         * @type {number || null}
-         */
-        this.RenewFlag = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5042,6 +5766,41 @@ class InstanceDetail extends  AbstractModel {
          */
         this.Cvm = null;
 
+        /**
+         * ckafka实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 当前规格最大Topic数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxTopicNumber = null;
+
+        /**
+         * 当前规格最大Partition数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxPartitionNumber = null;
+
+        /**
+         * 计划升级配置时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RebalanceTime = null;
+
     }
 
     /**
@@ -5089,6 +5848,11 @@ class InstanceDetail extends  AbstractModel {
         this.Version = 'Version' in params ? params.Version : null;
         this.ZoneIds = 'ZoneIds' in params ? params.ZoneIds : null;
         this.Cvm = 'Cvm' in params ? params.Cvm : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.MaxTopicNumber = 'MaxTopicNumber' in params ? params.MaxTopicNumber : null;
+        this.MaxPartitionNumber = 'MaxPartitionNumber' in params ? params.MaxPartitionNumber : null;
+        this.RebalanceTime = 'RebalanceTime' in params ? params.RebalanceTime : null;
 
     }
 }
@@ -5193,6 +5957,41 @@ class SubscribedInfo extends  AbstractModel {
     }
 }
 
+/**
+ * 消息价格实体
+ * @class
+ */
+class Price extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 折扣价
+         * @type {number || null}
+         */
+        this.RealTotalCost = null;
+
+        /**
+         * 原价
+         * @type {number || null}
+         */
+        this.TotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.TotalCost = 'TotalCost' in params ? params.TotalCost : null;
+
+    }
+}
+
 module.exports = {
     TopicDetail: TopicDetail,
     DeleteAclRequest: DeleteAclRequest,
@@ -5209,38 +6008,48 @@ module.exports = {
     DescribeInstancesResponse: DescribeInstancesResponse,
     GroupInfoTopics: GroupInfoTopics,
     TopicResult: TopicResult,
+    Region: Region,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     CreateInstancePreData: CreateInstancePreData,
     DescribeACLResponse: DescribeACLResponse,
     JgwOperateResponse: JgwOperateResponse,
+    ZoneInfo: ZoneInfo,
+    DescribeCkafkaZoneRequest: DescribeCkafkaZoneRequest,
     Topic: Topic,
     Tag: Tag,
     GroupResponse: GroupResponse,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
     RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
+    DeleteAclRuleRequest: DeleteAclRuleRequest,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
     OperateResponseData: OperateResponseData,
     CreateUserResponse: CreateUserResponse,
-    GroupOffsetTopic: GroupOffsetTopic,
+    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     CreatePartitionResponse: CreatePartitionResponse,
+    ClusterInfo: ClusterInfo,
+    DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
     DeleteUserResponse: DeleteUserResponse,
     CreateAclRequest: CreateAclRequest,
     DescribeAppInfoRequest: DescribeAppInfoRequest,
     DescribeTopicResponse: DescribeTopicResponse,
     ConsumerGroupResponse: ConsumerGroupResponse,
     CreateTopicIpWhiteListResponse: CreateTopicIpWhiteListResponse,
-    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
+    GroupOffsetTopic: GroupOffsetTopic,
     ModifyGroupOffsetsResponse: ModifyGroupOffsetsResponse,
     Partition: Partition,
     CreateAclResponse: CreateAclResponse,
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
+    DynamicRetentionTime: DynamicRetentionTime,
     DescribeRouteRequest: DescribeRouteRequest,
+    DescribeRegionRequest: DescribeRegionRequest,
     InstanceConfigDO: InstanceConfigDO,
+    DeleteAclRuleResponse: DeleteAclRuleResponse,
     UserResponse: UserResponse,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
     DescribeGroupInfoResponse: DescribeGroupInfoResponse,
+    ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
     DescribeUserResponse: DescribeUserResponse,
     AppIdResponse: AppIdResponse,
     DescribeTopicRequest: DescribeTopicRequest,
@@ -5248,14 +6057,16 @@ module.exports = {
     Group: Group,
     DescribeAppInfoResponse: DescribeAppInfoResponse,
     AclResponse: AclResponse,
+    ZoneResponse: ZoneResponse,
     Instance: Instance,
     DescribeInstanceAttributesResponse: DescribeInstanceAttributesResponse,
     TopicDetailResponse: TopicDetailResponse,
     Config: Config,
     ModifyPasswordRequest: ModifyPasswordRequest,
+    CreateInstancePreRequest: CreateInstancePreRequest,
     ModifyInstanceAttributesRequest: ModifyInstanceAttributesRequest,
-    ModifyTopicAttributesResponse: ModifyTopicAttributesResponse,
-    DescribeConsumerGroupRequest: DescribeConsumerGroupRequest,
+    DescribeRegionResponse: DescribeRegionResponse,
+    CreateTopicResponse: CreateTopicResponse,
     VipEntity: VipEntity,
     ConsumerGroupTopic: ConsumerGroupTopic,
     User: User,
@@ -5263,7 +6074,7 @@ module.exports = {
     DeleteTopicResponse: DeleteTopicResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     InstanceAttributesResponse: InstanceAttributesResponse,
-    DescribeGroupRequest: DescribeGroupRequest,
+    DescribeCkafkaZoneResponse: DescribeCkafkaZoneResponse,
     Filter: Filter,
     GroupOffsetResponse: GroupOffsetResponse,
     CreateUserRequest: CreateUserRequest,
@@ -5285,14 +6096,15 @@ module.exports = {
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,
     Acl: Acl,
+    TopicRetentionTimeConfigRsp: TopicRetentionTimeConfigRsp,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
-    CreateTopicResponse: CreateTopicResponse,
-    CreateInstancePreRequest: CreateInstancePreRequest,
+    DescribeGroupRequest: DescribeGroupRequest,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DescribeUserRequest: DescribeUserRequest,
     InstanceDetail: InstanceDetail,
     DescribeTopicDetailResponse: DescribeTopicDetailResponse,
     SubscribedInfo: SubscribedInfo,
+    Price: Price,
 
 }

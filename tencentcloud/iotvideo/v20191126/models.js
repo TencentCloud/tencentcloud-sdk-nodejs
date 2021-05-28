@@ -17,6 +17,58 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeRechargeRecords返回参数结构体
+ * @class
+ */
+class DescribeRechargeRecordsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账户类型 1:设备接入 2:云存
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * 充值记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RechargeRecord> || null}
+         */
+        this.Records = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+
+        if (params.Records) {
+            this.Records = new Array();
+            for (let z in params.Records) {
+                let obj = new RechargeRecord();
+                obj.deserialize(params.Records[z]);
+                this.Records.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UploadOtaVersion返回参数结构体
  * @class
  */
@@ -258,6 +310,10 @@ class RefundStorageServiceResponse extends  AbstractModel {
 
         /**
          * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
          * @type {number || null}
          */
         this.Status = null;
@@ -538,6 +594,8 @@ ye1m30d ：事件30天存储月套餐 。
 ye1y3d ：事件3天存储年套餐。
 ye1y7d ：事件7天存储年套餐。
 ye1y30d ：事件30天存储年套餐。
+yc1w7d : 全时7天存储周套餐。
+ye1w7d : 事件7天存储周套餐。
          * @type {string || null}
          */
         this.PkgId = null;
@@ -555,7 +613,7 @@ ye1y30d ：事件30天存储年套餐。
         this.OrderCount = null;
 
         /**
-         * 云存服务所在的区域,如ap-guangzhou,ap-singapore
+         * 云存服务所在的区域,如ap-guangzhou,ap-singapore, na-siliconvalley, eu-frankfurt
          * @type {string || null}
          */
         this.StorageRegion = null;
@@ -959,6 +1017,10 @@ class DescribeStorageServiceResponse extends  AbstractModel {
 
         /**
          * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
          * @type {number || null}
          */
         this.Status = null;
@@ -1030,6 +1092,48 @@ class DeleteIotDataTypeRequest extends  AbstractModel {
             return;
         }
         this.TypeId = 'TypeId' in params ? params.TypeId : null;
+
+    }
+}
+
+/**
+ * DescribeRechargeRecords请求参数结构体
+ * @class
+ */
+class DescribeRechargeRecordsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账户类型 1:设备接入 2:云存。
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * 从第几条记录开始显示, 默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 总共查询多少条记录，默认为值50。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1788,54 +1892,42 @@ class DeviceData extends  AbstractModel {
 }
 
 /**
- * SetMessageQueue请求参数结构体
+ * DescribeStream请求参数结构体
  * @class
  */
-class SetMessageQueueRequest extends  AbstractModel {
+class DescribeStreamRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
+         * 设备TID
          * @type {string || null}
          */
-        this.ProductId = null;
+        this.Tid = null;
 
         /**
-         * 消息队列类型 1-CMQ; 2-Ckafka
-         * @type {number || null}
-         */
-        this.MsgQueueType = null;
-
-        /**
-         * 消息类型,整型值（0-31）之间以“,”分隔
-0：在线状态变更
-1.固件版本变更
-2.设置参数变更
-3.控制状态变更
-4.状态信息变更
-5.事件发布
+         * 终端用户ID
          * @type {string || null}
          */
-        this.MsgType = null;
+        this.AccessId = null;
 
         /**
-         * 消息队列主题，不超过32字符
+         * 直播协议, 可选值：RTSP、RTMP、HLS、HLS-fmp4
          * @type {string || null}
          */
-        this.Topic = null;
+        this.Protocol = null;
 
         /**
-         * kafka消息队列的实例名，不超过64字符
+         * 音视频流地址
          * @type {string || null}
          */
-        this.Instance = null;
+        this.Address = null;
 
         /**
-         * 消息地域，不超过32字符
+         * 设备访问token，访问用户未绑定的设备时，需提供该参数
          * @type {string || null}
          */
-        this.MsgRegion = null;
+        this.AccessToken = null;
 
     }
 
@@ -1846,12 +1938,11 @@ class SetMessageQueueRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.MsgQueueType = 'MsgQueueType' in params ? params.MsgQueueType : null;
-        this.MsgType = 'MsgType' in params ? params.MsgType : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Instance = 'Instance' in params ? params.Instance : null;
-        this.MsgRegion = 'MsgRegion' in params ? params.MsgRegion : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.AccessToken = 'AccessToken' in params ? params.AccessToken : null;
 
     }
 }
@@ -2140,6 +2231,12 @@ class CreateBindingRequest extends  AbstractModel {
          */
         this.ForceBind = null;
 
+        /**
+         * 设备昵称，最多不超过64个字符
+         * @type {string || null}
+         */
+        this.Nick = null;
+
     }
 
     /**
@@ -2153,6 +2250,7 @@ class CreateBindingRequest extends  AbstractModel {
         this.Tid = 'Tid' in params ? params.Tid : null;
         this.Role = 'Role' in params ? params.Role : null;
         this.ForceBind = 'ForceBind' in params ? params.ForceBind : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
 
     }
 }
@@ -2998,6 +3096,12 @@ Other-Overseas（其他境外地区）
          */
         this.Os = null;
 
+        /**
+         * 芯片架构，只是针对操作系统为android的
+         * @type {string || null}
+         */
+        this.ChipArch = null;
+
     }
 
     /**
@@ -3017,6 +3121,7 @@ Other-Overseas（其他境外地区）
         this.ProductCate = 'ProductCate' in params ? params.ProductCate : null;
         this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
         this.Os = 'Os' in params ? params.Os : null;
+        this.ChipArch = 'ChipArch' in params ? params.ChipArch : null;
 
     }
 }
@@ -3272,6 +3377,13 @@ class Contents extends  AbstractModel {
          */
         this.Tc = null;
 
+        /**
+         * 默认语言，最多不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Default = null;
+
     }
 
     /**
@@ -3284,6 +3396,7 @@ class Contents extends  AbstractModel {
         this.En = 'En' in params ? params.En : null;
         this.Cn = 'Cn' in params ? params.Cn : null;
         this.Tc = 'Tc' in params ? params.Tc : null;
+        this.Default = 'Default' in params ? params.Default : null;
 
     }
 }
@@ -3542,8 +3655,8 @@ class ModifyVerContentRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品id,大于0的有符号长整型
-         * @type {number || null}
+         * 产品id
+         * @type {string || null}
          */
         this.ProductId = null;
 
@@ -3878,6 +3991,76 @@ class DeviceModelData extends  AbstractModel {
 }
 
 /**
+ * SetMessageQueue请求参数结构体
+ * @class
+ */
+class SetMessageQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 消息队列类型 1-CMQ; 2-Ckafka
+         * @type {number || null}
+         */
+        this.MsgQueueType = null;
+
+        /**
+         * 消息类型,整型值（0-31）之间以“,”分隔
+0.设备在线状态变更
+1.常亮属性(ProConst)变更
+2.可写属性(ProWritable)变更
+3.只读属性(ProReadonly)变更
+4.设备控制(Action)
+5.设备事件(Event)
+6.系统事件(System)
+         * @type {string || null}
+         */
+        this.MsgType = null;
+
+        /**
+         * 消息队列主题，不超过32字符
+         * @type {string || null}
+         */
+        this.Topic = null;
+
+        /**
+         * kafka消息队列的实例名，不超过64字符
+         * @type {string || null}
+         */
+        this.Instance = null;
+
+        /**
+         * 消息地域，不超过32字符
+         * @type {string || null}
+         */
+        this.MsgRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.MsgQueueType = 'MsgQueueType' in params ? params.MsgQueueType : null;
+        this.MsgType = 'MsgType' in params ? params.MsgType : null;
+        this.Topic = 'Topic' in params ? params.Topic : null;
+        this.Instance = 'Instance' in params ? params.Instance : null;
+        this.MsgRegion = 'MsgRegion' in params ? params.MsgRegion : null;
+
+    }
+}
+
+/**
  * CreateStorageService返回参数结构体
  * @class
  */
@@ -3935,6 +4118,10 @@ class CreateStorageServiceResponse extends  AbstractModel {
 
         /**
          * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
          * @type {number || null}
          */
         this.Status = null;
@@ -4071,6 +4258,67 @@ class SendOnlineMsgRequest extends  AbstractModel {
 }
 
 /**
+ * 接口DescribeStream输出参数
+ * @class
+ */
+class Data extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 直播协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 流媒体播放地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.URI = null;
+
+        /**
+         * 流媒体地址过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 视频编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VideoCodec = null;
+
+        /**
+         * 音频编码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AudioCodec = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.URI = 'URI' in params ? params.URI : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.VideoCodec = 'VideoCodec' in params ? params.VideoCodec : null;
+        this.AudioCodec = 'AudioCodec' in params ? params.AudioCodec : null;
+
+    }
+}
+
+/**
  * DescribeDevice请求参数结构体
  * @class
  */
@@ -4192,6 +4440,10 @@ class DeliverStorageServiceResponse extends  AbstractModel {
 
         /**
          * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
          * @type {number || null}
          */
         this.Status = null;
@@ -4427,6 +4679,12 @@ class CreateUsrTokenRequest extends  AbstractModel {
          */
         this.TtlMinutes = null;
 
+        /**
+         * 旧的AccessToken。续期Token时，此参数为必须。
+         * @type {string || null}
+         */
+        this.OldAccessToken = null;
+
     }
 
     /**
@@ -4439,6 +4697,7 @@ class CreateUsrTokenRequest extends  AbstractModel {
         this.AccessId = 'AccessId' in params ? params.AccessId : null;
         this.UniqueId = 'UniqueId' in params ? params.UniqueId : null;
         this.TtlMinutes = 'TtlMinutes' in params ? params.TtlMinutes : null;
+        this.OldAccessToken = 'OldAccessToken' in params ? params.OldAccessToken : null;
 
     }
 }
@@ -4467,6 +4726,76 @@ class RunDeviceRequest extends  AbstractModel {
             return;
         }
         this.Tids = 'Tids' in params ? params.Tids : null;
+
+    }
+}
+
+/**
+ * RunOtaVersion返回参数结构体
+ * @class
+ */
+class RunOtaVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDevice请求参数结构体
+ * @class
+ */
+class ModifyDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备ID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 用户ID
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+        /**
+         * 设备昵称，最多不超过64个字符
+         * @type {string || null}
+         */
+        this.Nick = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.Nick = 'Nick' in params ? params.Nick : null;
 
     }
 }
@@ -4944,6 +5273,12 @@ class StorageOrder extends  AbstractModel {
 
         /**
          * 定单服务状态
+1;订单正在使用。
+2:订单未开始。
+3:订单已经使用过，现在暂时未开始使用(该订单从其他服务转移而来)。
+4:订单已过期。
+5:订单已被退订。
+6:定单已被转移到其他云存服务。
          * @type {number || null}
          */
         this.Status = null;
@@ -5189,10 +5524,10 @@ class RunDeviceStreamResponse extends  AbstractModel {
 }
 
 /**
- * RunOtaVersion返回参数结构体
+ * ModifyDevice返回参数结构体
  * @class
  */
-class RunOtaVersionResponse extends  AbstractModel {
+class ModifyDeviceResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5383,72 +5718,18 @@ class CreateBindingResponse extends  AbstractModel {
 }
 
 /**
- * 设备列表元素所包含的设备基本信息
+ * DescribeAccountBalance请求参数结构体
  * @class
  */
-class DevicesData extends  AbstractModel {
+class DescribeAccountBalanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 设备TID
-         * @type {string || null}
-         */
-        this.Tid = null;
-
-        /**
-         * 设备名称
-         * @type {string || null}
-         */
-        this.DeviceName = null;
-
-        /**
-         * 激活时间 0代表未激活
+         * 账户类型 1:设备接入 2:云存
          * @type {number || null}
          */
-        this.ActiveTime = null;
-
-        /**
-         * 设备是否被禁用
-         * @type {boolean || null}
-         */
-        this.Disabled = null;
-
-        /**
-         * 设备推流状态
-         * @type {boolean || null}
-         */
-        this.StreamStatus = null;
-
-        /**
-         * 固件版本
-         * @type {string || null}
-         */
-        this.OtaVersion = null;
-
-        /**
-         * 设备在线状态
-         * @type {number || null}
-         */
-        this.Online = null;
-
-        /**
-         * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
-         * @type {number || null}
-         */
-        this.LastOnlineTime = null;
-
-        /**
-         * 物模型json数据
-         * @type {string || null}
-         */
-        this.IotModel = null;
-
-        /**
-         * 设备固件最新更新时间，UNIX时间戳，单位秒
-         * @type {number || null}
-         */
-        this.LastUpdateTime = null;
+        this.AccountType = null;
 
     }
 
@@ -5459,16 +5740,7 @@ class DevicesData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Tid = 'Tid' in params ? params.Tid : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.ActiveTime = 'ActiveTime' in params ? params.ActiveTime : null;
-        this.Disabled = 'Disabled' in params ? params.Disabled : null;
-        this.StreamStatus = 'StreamStatus' in params ? params.StreamStatus : null;
-        this.OtaVersion = 'OtaVersion' in params ? params.OtaVersion : null;
-        this.Online = 'Online' in params ? params.Online : null;
-        this.LastOnlineTime = 'LastOnlineTime' in params ? params.LastOnlineTime : null;
-        this.IotModel = 'IotModel' in params ? params.IotModel : null;
-        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
 
     }
 }
@@ -5546,6 +5818,107 @@ class DisableDeviceRequest extends  AbstractModel {
             return;
         }
         this.Tids = 'Tids' in params ? params.Tids : null;
+
+    }
+}
+
+/**
+ * DescribeStream返回参数结构体
+ * @class
+ */
+class DescribeStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回参数结构
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Data || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new Data();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccountBalance返回参数结构体
+ * @class
+ */
+class DescribeAccountBalanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账户类型 1=设备接入;2=云存。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * 余额, 单位 : 分(人民币)。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Balance = null;
+
+        /**
+         * 账户状态，1=正常；8=冻结；9=销户。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.State = null;
+
+        /**
+         * 最后修改时间，UTC值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastUpdateTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.Balance = 'Balance' in params ? params.Balance : null;
+        this.State = 'State' in params ? params.State : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6197,6 +6570,59 @@ class CreateUploadPathResponse extends  AbstractModel {
 }
 
 /**
+ * 充值记录列表
+ * @class
+ */
+class RechargeRecord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流水记录号。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WaterId = null;
+
+        /**
+         * 充值前的余额，单位0.01元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BalanceBeforeRecharge = null;
+
+        /**
+         * 充值金额，单位0.01元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Money = null;
+
+        /**
+         * 充值时间, UTC值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OperateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterId = 'WaterId' in params ? params.WaterId : null;
+        this.BalanceBeforeRecharge = 'BalanceBeforeRecharge' in params ? params.BalanceBeforeRecharge : null;
+        this.Money = 'Money' in params ? params.Money : null;
+        this.OperateTime = 'OperateTime' in params ? params.OperateTime : null;
+
+    }
+}
+
+/**
  * 固件版本详细信息
  * @class
  */
@@ -6323,6 +6749,13 @@ class VersionData extends  AbstractModel {
          */
         this.Contents = null;
 
+        /**
+         * 月活设备数，当月第一天开始有上线的设备数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AliveInMonthCnt = null;
+
     }
 
     /**
@@ -6354,11 +6787,104 @@ class VersionData extends  AbstractModel {
             obj.deserialize(params.Contents)
             this.Contents = obj;
         }
+        this.AliveInMonthCnt = 'AliveInMonthCnt' in params ? params.AliveInMonthCnt : null;
+
+    }
+}
+
+/**
+ * 设备列表元素所包含的设备基本信息
+ * @class
+ */
+class DevicesData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 激活时间 0代表未激活
+         * @type {number || null}
+         */
+        this.ActiveTime = null;
+
+        /**
+         * 设备是否被禁用
+         * @type {boolean || null}
+         */
+        this.Disabled = null;
+
+        /**
+         * 设备推流状态
+         * @type {boolean || null}
+         */
+        this.StreamStatus = null;
+
+        /**
+         * 固件版本
+         * @type {string || null}
+         */
+        this.OtaVersion = null;
+
+        /**
+         * 设备在线状态
+         * @type {number || null}
+         */
+        this.Online = null;
+
+        /**
+         * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
+         * @type {number || null}
+         */
+        this.LastOnlineTime = null;
+
+        /**
+         * 物模型json数据
+         * @type {string || null}
+         */
+        this.IotModel = null;
+
+        /**
+         * 设备固件最新更新时间，UNIX时间戳，单位秒
+         * @type {number || null}
+         */
+        this.LastUpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ActiveTime = 'ActiveTime' in params ? params.ActiveTime : null;
+        this.Disabled = 'Disabled' in params ? params.Disabled : null;
+        this.StreamStatus = 'StreamStatus' in params ? params.StreamStatus : null;
+        this.OtaVersion = 'OtaVersion' in params ? params.OtaVersion : null;
+        this.Online = 'Online' in params ? params.Online : null;
+        this.LastOnlineTime = 'LastOnlineTime' in params ? params.LastOnlineTime : null;
+        this.IotModel = 'IotModel' in params ? params.IotModel : null;
+        this.LastUpdateTime = 'LastUpdateTime' in params ? params.LastUpdateTime : null;
 
     }
 }
 
 module.exports = {
+    DescribeRechargeRecordsResponse: DescribeRechargeRecordsResponse,
     UploadOtaVersionResponse: UploadOtaVersionResponse,
     CreateGencodeResponse: CreateGencodeResponse,
     DescribeLogsRequest: DescribeLogsRequest,
@@ -6382,6 +6908,7 @@ module.exports = {
     CreateDevTokenRequest: CreateDevTokenRequest,
     DescribeStorageServiceResponse: DescribeStorageServiceResponse,
     DeleteIotDataTypeRequest: DeleteIotDataTypeRequest,
+    DescribeRechargeRecordsRequest: DescribeRechargeRecordsRequest,
     ModifyVerContentResponse: ModifyVerContentResponse,
     DescribeMessageQueueRequest: DescribeMessageQueueRequest,
     DeleteAppUsrResponse: DeleteAppUsrResponse,
@@ -6400,7 +6927,7 @@ module.exports = {
     DeleteProductRequest: DeleteProductRequest,
     DescribeBindUsrResponse: DescribeBindUsrResponse,
     DeviceData: DeviceData,
-    SetMessageQueueRequest: SetMessageQueueRequest,
+    DescribeStreamRequest: DescribeStreamRequest,
     BindUsrInfo: BindUsrInfo,
     DeleteOtaVersionRequest: DeleteOtaVersionRequest,
     DescribeIotDataTypeResponse: DescribeIotDataTypeResponse,
@@ -6447,9 +6974,11 @@ module.exports = {
     RunOtaVersionRequest: RunOtaVersionRequest,
     CreateDevicesResponse: CreateDevicesResponse,
     DeviceModelData: DeviceModelData,
+    SetMessageQueueRequest: SetMessageQueueRequest,
     CreateStorageServiceResponse: CreateStorageServiceResponse,
     DescribeIotDataTypeRequest: DescribeIotDataTypeRequest,
     SendOnlineMsgRequest: SendOnlineMsgRequest,
+    Data: Data,
     DescribeDeviceRequest: DescribeDeviceRequest,
     DescribeRunLogResponse: DescribeRunLogResponse,
     DeliverStorageServiceResponse: DeliverStorageServiceResponse,
@@ -6460,6 +6989,8 @@ module.exports = {
     DeleteMessageQueueRequest: DeleteMessageQueueRequest,
     CreateUsrTokenRequest: CreateUsrTokenRequest,
     RunDeviceRequest: RunDeviceRequest,
+    RunOtaVersionResponse: RunOtaVersionResponse,
+    ModifyDeviceRequest: ModifyDeviceRequest,
     DescribeDeviceModelResponse: DescribeDeviceModelResponse,
     DescribeStorageServiceRequest: DescribeStorageServiceRequest,
     ProductBase: ProductBase,
@@ -6476,14 +7007,16 @@ module.exports = {
     CreateAnonymousAccessTokenRequest: CreateAnonymousAccessTokenRequest,
     DeliverStorageServiceRequest: DeliverStorageServiceRequest,
     RunDeviceStreamResponse: RunDeviceStreamResponse,
-    RunOtaVersionResponse: RunOtaVersionResponse,
+    ModifyDeviceResponse: ModifyDeviceResponse,
     DescribeDeviceModelRequest: DescribeDeviceModelRequest,
     DescribeLogsResponse: DescribeLogsResponse,
     ModifyDeviceActionResponse: ModifyDeviceActionResponse,
     CreateBindingResponse: CreateBindingResponse,
-    DevicesData: DevicesData,
+    DescribeAccountBalanceRequest: DescribeAccountBalanceRequest,
     CreateDevicesRequest: CreateDevicesRequest,
     DisableDeviceRequest: DisableDeviceRequest,
+    DescribeStreamResponse: DescribeStreamResponse,
+    DescribeAccountBalanceResponse: DescribeAccountBalanceResponse,
     DisableOtaVersionRequest: DisableOtaVersionRequest,
     DescribeProductResponse: DescribeProductResponse,
     CreateAnonymousAccessTokenResponse: CreateAnonymousAccessTokenResponse,
@@ -6502,6 +7035,8 @@ module.exports = {
     DisableDeviceStreamResponse: DisableDeviceStreamResponse,
     DeleteDeviceResponse: DeleteDeviceResponse,
     CreateUploadPathResponse: CreateUploadPathResponse,
+    RechargeRecord: RechargeRecord,
     VersionData: VersionData,
+    DevicesData: DevicesData,
 
 }

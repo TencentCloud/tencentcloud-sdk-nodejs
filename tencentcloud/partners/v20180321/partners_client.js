@@ -18,17 +18,24 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AgentClientElem = models.AgentClientElem;
 const DescribeAgentDealsCacheRequest = models.DescribeAgentDealsCacheRequest;
-const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
+const DescribeClientBaseInfoResponse = models.DescribeClientBaseInfoResponse;
 const DescribeAgentAuditedClientsRequest = models.DescribeAgentAuditedClientsRequest;
 const RemovePayRelationForClientRequest = models.RemovePayRelationForClientRequest;
 const AgentPayDealsRequest = models.AgentPayDealsRequest;
 const DescribeAgentClientGradeResponse = models.DescribeAgentClientGradeResponse;
+const DescribeAgentDealsByCacheResponse = models.DescribeAgentDealsByCacheResponse;
 const RebateInfoElem = models.RebateInfoElem;
 const DescribeClientBalanceResponse = models.DescribeClientBalanceResponse;
 const DescribeAgentSelfPayDealsResponse = models.DescribeAgentSelfPayDealsResponse;
+const DescribeAgentPayDealsV2Response = models.DescribeAgentPayDealsV2Response;
 const AgentTransferMoneyRequest = models.AgentTransferMoneyRequest;
 const DescribeClientBalanceRequest = models.DescribeClientBalanceRequest;
+const DescribeAgentPayDealsV2Request = models.DescribeAgentPayDealsV2Request;
+const ProductInfoElem = models.ProductInfoElem;
+const UnbindClientElem = models.UnbindClientElem;
 const RemovePayRelationForClientResponse = models.RemovePayRelationForClientResponse;
+const DescribeSalesmansRequest = models.DescribeSalesmansRequest;
+const DescribeClientBaseInfoRequest = models.DescribeClientBaseInfoRequest;
 const DescribeRebateInfosRequest = models.DescribeRebateInfosRequest;
 const CreatePayRelationForClientResponse = models.CreatePayRelationForClientResponse;
 const DescribeAgentAuditedClientsResponse = models.DescribeAgentAuditedClientsResponse;
@@ -37,23 +44,31 @@ const DescribeAgentPayDealsRequest = models.DescribeAgentPayDealsRequest;
 const AuditApplyClientRequest = models.AuditApplyClientRequest;
 const ModifyClientRemarkResponse = models.ModifyClientRemarkResponse;
 const DescribeAgentClientsResponse = models.DescribeAgentClientsResponse;
+const AgentDealNewElem = models.AgentDealNewElem;
 const DescribeAgentClientsRequest = models.DescribeAgentClientsRequest;
+const DescribeAgentSelfPayDealsV2Request = models.DescribeAgentSelfPayDealsV2Request;
 const DescribeSalesmansResponse = models.DescribeSalesmansResponse;
 const AgentAuditedClient = models.AgentAuditedClient;
+const DescribeUnbindClientListRequest = models.DescribeUnbindClientListRequest;
+const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
 const DescribeAgentPayDealsResponse = models.DescribeAgentPayDealsResponse;
 const DealGoodsPriceElem = models.DealGoodsPriceElem;
+const DescribeAgentDealsByCacheRequest = models.DescribeAgentDealsByCacheRequest;
 const DescribeAgentSelfPayDealsRequest = models.DescribeAgentSelfPayDealsRequest;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
 const CreatePayRelationForClientRequest = models.CreatePayRelationForClientRequest;
 const AgentTransferMoneyResponse = models.AgentTransferMoneyResponse;
+const DescribeUnbindClientListResponse = models.DescribeUnbindClientListResponse;
+const DescribeAgentSelfPayDealsV2Response = models.DescribeAgentSelfPayDealsV2Response;
 const AgentBillElem = models.AgentBillElem;
 const AuditApplyClientResponse = models.AuditApplyClientResponse;
-const DescribeAgentDealsCacheResponse = models.DescribeAgentDealsCacheResponse;
+const ClientBaseElem = models.ClientBaseElem;
 const DescribeAgentBillsRequest = models.DescribeAgentBillsRequest;
 const AgentPayDealsResponse = models.AgentPayDealsResponse;
 const AgentDealElem = models.AgentDealElem;
 const AgentSalesmanElem = models.AgentSalesmanElem;
-const DescribeRebateInfosResponse = models.DescribeRebateInfosResponse;
+const DealGoodsPriceNewElem = models.DealGoodsPriceNewElem;
+const DescribeAgentDealsCacheResponse = models.DescribeAgentDealsCacheResponse;
 const DescribeAgentClientGradeRequest = models.DescribeAgentClientGradeRequest;
 
 
@@ -68,7 +83,7 @@ class PartnersClient extends AbstractClient {
     }
     
     /**
-     * 可以查询代理商下指定客户的自付订单
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
      * @param {DescribeAgentSelfPayDealsRequest} req
      * @param {function(string, DescribeAgentSelfPayDealsResponse):void} cb
      * @public
@@ -79,7 +94,8 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+
      * @param {DescribeAgentDealsCacheRequest} req
      * @param {function(string, DescribeAgentDealsCacheResponse):void} cb
      * @public
@@ -87,6 +103,28 @@ class PartnersClient extends AbstractClient {
     DescribeAgentDealsCache(req, cb) {
         let resp = new DescribeAgentDealsCacheResponse();
         this.request("DescribeAgentDealsCache", req, resp, cb);
+    }
+
+    /**
+     * 代理商名下客户解绑记录查询接口
+     * @param {DescribeUnbindClientListRequest} req
+     * @param {function(string, DescribeUnbindClientListResponse):void} cb
+     * @public
+     */
+    DescribeUnbindClientList(req, cb) {
+        let resp = new DescribeUnbindClientListResponse();
+        this.request("DescribeUnbindClientList", req, resp, cb);
+    }
+
+    /**
+     * 可以查询代理商下指定客户的自付订单
+     * @param {DescribeAgentSelfPayDealsV2Request} req
+     * @param {function(string, DescribeAgentSelfPayDealsV2Response):void} cb
+     * @public
+     */
+    DescribeAgentSelfPayDealsV2(req, cb) {
+        let resp = new DescribeAgentSelfPayDealsV2Response();
+        this.request("DescribeAgentSelfPayDealsV2", req, resp, cb);
     }
 
     /**
@@ -134,14 +172,14 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 代理商查询名下业务员列表信息
-     * @param {DescribeSalesmansRequest} req
-     * @param {function(string, DescribeSalesmansResponse):void} cb
+     * 国际站根据UIN查询代客基础信息【本接口仅限主账号访问】
+     * @param {DescribeClientBaseInfoRequest} req
+     * @param {function(string, DescribeClientBaseInfoResponse):void} cb
      * @public
      */
-    DescribeSalesmans(req, cb) {
-        let resp = new DescribeSalesmansResponse();
-        this.request("DescribeSalesmans", req, resp, cb);
+    DescribeClientBaseInfo(req, cb) {
+        let resp = new DescribeClientBaseInfoResponse();
+        this.request("DescribeClientBaseInfo", req, resp, cb);
     }
 
     /**
@@ -167,7 +205,7 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
-     * 可以查询代理商代付的所有订单
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
      * @param {DescribeAgentPayDealsRequest} req
      * @param {function(string, DescribeAgentPayDealsResponse):void} cb
      * @public
@@ -175,6 +213,17 @@ class PartnersClient extends AbstractClient {
     DescribeAgentPayDeals(req, cb) {
         let resp = new DescribeAgentPayDealsResponse();
         this.request("DescribeAgentPayDeals", req, resp, cb);
+    }
+
+    /**
+     * 代理商查询名下业务员列表信息
+     * @param {DescribeSalesmansRequest} req
+     * @param {function(string, DescribeSalesmansResponse):void} cb
+     * @public
+     */
+    DescribeSalesmans(req, cb) {
+        let resp = new DescribeSalesmansResponse();
+        this.request("DescribeSalesmans", req, resp, cb);
     }
 
     /**
@@ -211,6 +260,17 @@ class PartnersClient extends AbstractClient {
     }
 
     /**
+     * 可以查询代理商代付的所有订单
+     * @param {DescribeAgentPayDealsV2Request} req
+     * @param {function(string, DescribeAgentPayDealsV2Response):void} cb
+     * @public
+     */
+    DescribeAgentPayDealsV2(req, cb) {
+        let resp = new DescribeAgentPayDealsV2Response();
+        this.request("DescribeAgentPayDealsV2", req, resp, cb);
+    }
+
+    /**
      * 查询已审核客户列表
      * @param {DescribeAgentAuditedClientsRequest} req
      * @param {function(string, DescribeAgentAuditedClientsResponse):void} cb
@@ -241,6 +301,17 @@ class PartnersClient extends AbstractClient {
     AuditApplyClient(req, cb) {
         let resp = new AuditApplyClientResponse();
         this.request("AuditApplyClient", req, resp, cb);
+    }
+
+    /**
+     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     * @param {DescribeAgentDealsByCacheRequest} req
+     * @param {function(string, DescribeAgentDealsByCacheResponse):void} cb
+     * @public
+     */
+    DescribeAgentDealsByCache(req, cb) {
+        let resp = new DescribeAgentDealsByCacheResponse();
+        this.request("DescribeAgentDealsByCache", req, resp, cb);
     }
 
 

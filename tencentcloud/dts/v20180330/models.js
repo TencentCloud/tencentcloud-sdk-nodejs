@@ -811,6 +811,13 @@ class SubscribeInfo extends  AbstractModel {
          */
         this.AutoRenewFlag = null;
 
+        /**
+         * 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubscribeVersion = null;
+
     }
 
     /**
@@ -851,6 +858,7 @@ class SubscribeInfo extends  AbstractModel {
             }
         }
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.SubscribeVersion = 'SubscribeVersion' in params ? params.SubscribeVersion : null;
 
     }
 }
@@ -2171,6 +2179,12 @@ class DescribeSubscribesRequest extends  AbstractModel {
          */
         this.TagFilters = null;
 
+        /**
+         * 订阅实例版本;txdts-旧版数据订阅，kafka-kafka版本数据订阅
+         * @type {string || null}
+         */
+        this.SubscribeVersion = null;
+
     }
 
     /**
@@ -2200,6 +2214,7 @@ class DescribeSubscribesRequest extends  AbstractModel {
                 this.TagFilters.push(obj);
             }
         }
+        this.SubscribeVersion = 'SubscribeVersion' in params ? params.SubscribeVersion : null;
 
     }
 }

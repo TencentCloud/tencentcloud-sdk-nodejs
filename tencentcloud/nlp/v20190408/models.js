@@ -30,6 +30,7 @@ class LexicalAnalysisResponse extends  AbstractModel {
 <li>LOC：表示地名，如北京、华山</li>
 <li>ORG：表示机构团体名，如腾讯、最高人民法院、人大附中</li>
 <li>PRODUCTION：表示产品名，如QQ、微信、iPhone</li>
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<NerToken> || null}
          */
         this.NerTokens = null;
@@ -179,6 +180,7 @@ class SearchWordItemsResponse extends  AbstractModel {
 
         /**
          * 词条检索结果集合。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SearchResult> || null}
          */
         this.Results = null;
@@ -221,28 +223,32 @@ class DpToken extends  AbstractModel {
         super();
 
         /**
-         * 当前词父节点的序号
-         * @type {number || null}
-         */
-        this.HeadId = null;
-
-        /**
-         * 基础词的序号
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
          * 句法依存关系的类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Relation = null;
 
         /**
+         * 当前词父节点的序号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HeadId = null;
+
+        /**
          * 基础词
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Word = null;
+
+        /**
+         * 基础词的序号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Id = null;
 
     }
 
@@ -253,10 +259,10 @@ class DpToken extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HeadId = 'HeadId' in params ? params.HeadId : null;
-        this.Id = 'Id' in params ? params.Id : null;
         this.Relation = 'Relation' in params ? params.Relation : null;
+        this.HeadId = 'HeadId' in params ? params.HeadId : null;
         this.Word = 'Word' in params ? params.Word : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -341,16 +347,16 @@ class ChatBotResponse extends  AbstractModel {
         super();
 
         /**
-         * 对于当前输出回复的自信度
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
          * 闲聊回复
          * @type {string || null}
          */
         this.Reply = null;
+
+        /**
+         * 对于当前输出回复的自信度
+         * @type {number || null}
+         */
+        this.Confidence = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -367,8 +373,8 @@ class ChatBotResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Reply = 'Reply' in params ? params.Reply : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -384,6 +390,7 @@ class KeywordsExtractionResponse extends  AbstractModel {
 
         /**
          * 关键词提取结果
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Keyword> || null}
          */
         this.Keywords = null;
@@ -468,16 +475,16 @@ class ChatBotRequest extends  AbstractModel {
         this.Query = null;
 
         /**
-         * 0: 通用闲聊, 1:儿童闲聊, 默认是通用闲聊
-         * @type {number || null}
-         */
-        this.Flag = null;
-
-        /**
          * 服务的id,  主要用于儿童闲聊接口，比如手Q的openid
          * @type {string || null}
          */
         this.OpenId = null;
+
+        /**
+         * 0: 通用闲聊, 1:儿童闲聊, 默认是通用闲聊
+         * @type {number || null}
+         */
+        this.Flag = null;
 
     }
 
@@ -489,8 +496,8 @@ class ChatBotRequest extends  AbstractModel {
             return;
         }
         this.Query = 'Query' in params ? params.Query : null;
-        this.Flag = 'Flag' in params ? params.Flag : null;
         this.OpenId = 'OpenId' in params ? params.OpenId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
 
     }
 }
@@ -574,34 +581,37 @@ class DictInfo extends  AbstractModel {
         super();
 
         /**
-         * 自定义词库ID。
-         * @type {string || null}
-         */
-        this.Id = null;
-
-        /**
          * 自定义词库名称。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
+         * 自定义词库ID。
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.Id = null;
 
         /**
          * 自定义词库描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Description = null;
 
         /**
          * 自定义词库修改时间，形式为:yyyy-mm-dd hh:mm:ss。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.UpdateTime = null;
+
+        /**
+         * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
     }
 
@@ -612,11 +622,11 @@ class DictInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Id = 'Id' in params ? params.Id : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -678,6 +688,7 @@ class WordItem extends  AbstractModel {
 
         /**
          * 词条的词性。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Pos = null;
@@ -713,22 +724,66 @@ class ClassificationResult extends  AbstractModel {
         this.FirstClassName = null;
 
         /**
-         * 一级分类概率
-         * @type {number || null}
-         */
-        this.FirstClassProbability = null;
-
-        /**
          * 二级分类名称
          * @type {string || null}
          */
         this.SecondClassName = null;
 
         /**
+         * 一级分类概率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirstClassProbability = null;
+
+        /**
          * 二级分类概率
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.SecondClassProbability = null;
+
+        /**
+         * 三级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ThirdClassName = null;
+
+        /**
+         * 三级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ThirdClassProbability = null;
+
+        /**
+         * 四级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FourthClassName = null;
+
+        /**
+         * 四级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FourthClassProbability = null;
+
+        /**
+         * 五级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FifthClassName = null;
+
+        /**
+         * 五级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FifthClassProbability = null;
 
     }
 
@@ -740,9 +795,15 @@ class ClassificationResult extends  AbstractModel {
             return;
         }
         this.FirstClassName = 'FirstClassName' in params ? params.FirstClassName : null;
-        this.FirstClassProbability = 'FirstClassProbability' in params ? params.FirstClassProbability : null;
         this.SecondClassName = 'SecondClassName' in params ? params.SecondClassName : null;
+        this.FirstClassProbability = 'FirstClassProbability' in params ? params.FirstClassProbability : null;
         this.SecondClassProbability = 'SecondClassProbability' in params ? params.SecondClassProbability : null;
+        this.ThirdClassName = 'ThirdClassName' in params ? params.ThirdClassName : null;
+        this.ThirdClassProbability = 'ThirdClassProbability' in params ? params.ThirdClassProbability : null;
+        this.FourthClassName = 'FourthClassName' in params ? params.FourthClassName : null;
+        this.FourthClassProbability = 'FourthClassProbability' in params ? params.FourthClassProbability : null;
+        this.FifthClassName = 'FifthClassName' in params ? params.FifthClassName : null;
+        this.FifthClassProbability = 'FifthClassProbability' in params ? params.FifthClassProbability : null;
 
     }
 }
@@ -925,6 +986,12 @@ class SearchResult extends  AbstractModel {
         super();
 
         /**
+         * 被搜索的词条文本。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
          * 0表示词条不存在，1表示存在。
          * @type {number || null}
          */
@@ -932,18 +999,14 @@ class SearchResult extends  AbstractModel {
 
         /**
          * 匹配到的词条文本。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MatchText = null;
 
         /**
-         * 被搜索的词条文本。
-         * @type {string || null}
-         */
-        this.Text = null;
-
-        /**
          * 词条的词性。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Pos = null;
@@ -957,9 +1020,9 @@ class SearchResult extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Text = 'Text' in params ? params.Text : null;
         this.IsExist = 'IsExist' in params ? params.IsExist : null;
         this.MatchText = 'MatchText' in params ? params.MatchText : null;
-        this.Text = 'Text' in params ? params.Text : null;
         this.Pos = 'Pos' in params ? params.Pos : null;
 
     }
@@ -974,16 +1037,16 @@ class CreateWordItemsRequest extends  AbstractModel {
         super();
 
         /**
-         * 待添加的词条集合。
-         * @type {Array.<WordItem> || null}
-         */
-        this.WordItems = null;
-
-        /**
          * 自定义词库ID。
          * @type {string || null}
          */
         this.DictId = null;
+
+        /**
+         * 待添加的词条集合。
+         * @type {Array.<WordItem> || null}
+         */
+        this.WordItems = null;
 
     }
 
@@ -994,6 +1057,7 @@ class CreateWordItemsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DictId = 'DictId' in params ? params.DictId : null;
 
         if (params.WordItems) {
             this.WordItems = new Array();
@@ -1003,7 +1067,6 @@ class CreateWordItemsRequest extends  AbstractModel {
                 this.WordItems.push(obj);
             }
         }
-        this.DictId = 'DictId' in params ? params.DictId : null;
 
     }
 }
@@ -1017,7 +1080,7 @@ class TextCorrectionRequest extends  AbstractModel {
         super();
 
         /**
-         * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
+         * 待纠错的文本（仅支持UTF-8格式，不超过2000字符）
          * @type {string || null}
          */
         this.Text = null;
@@ -1073,16 +1136,16 @@ class SentenceEmbeddingResponse extends  AbstractModel {
         super();
 
         /**
-         * 句向量的维度
-         * @type {number || null}
-         */
-        this.Dimension = null;
-
-        /**
          * 句向量数组
          * @type {Array.<number> || null}
          */
         this.Vector = null;
+
+        /**
+         * 句向量的维度
+         * @type {number || null}
+         */
+        this.Dimension = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1099,8 +1162,8 @@ class SentenceEmbeddingResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Dimension = 'Dimension' in params ? params.Dimension : null;
         this.Vector = 'Vector' in params ? params.Vector : null;
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1234,16 +1297,16 @@ class DescribeWordItemsRequest extends  AbstractModel {
         this.DictId = null;
 
         /**
-         * 每页数据量，范围为1~100，默认为10。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
          * 分页偏移量，从0开始，默认为0。
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * 每页数据量，范围为1~100，默认为10。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
         /**
          * 待检索的词条文本，支持模糊匹配。
@@ -1261,8 +1324,8 @@ class DescribeWordItemsRequest extends  AbstractModel {
             return;
         }
         this.DictId = 'DictId' in params ? params.DictId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.Text = 'Text' in params ? params.Text : null;
 
     }
@@ -1277,16 +1340,16 @@ class SearchWordItemsRequest extends  AbstractModel {
         super();
 
         /**
-         * 待检索的词条集合。
-         * @type {Array.<WordItem> || null}
-         */
-        this.WordItems = null;
-
-        /**
          * 自定义词库ID。
          * @type {string || null}
          */
         this.DictId = null;
+
+        /**
+         * 待检索的词条集合。
+         * @type {Array.<WordItem> || null}
+         */
+        this.WordItems = null;
 
     }
 
@@ -1297,6 +1360,7 @@ class SearchWordItemsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DictId = 'DictId' in params ? params.DictId : null;
 
         if (params.WordItems) {
             this.WordItems = new Array();
@@ -1306,7 +1370,6 @@ class SearchWordItemsRequest extends  AbstractModel {
                 this.WordItems.push(obj);
             }
         }
-        this.DictId = 'DictId' in params ? params.DictId : null;
 
     }
 }
@@ -1327,8 +1390,8 @@ class TextClassificationRequest extends  AbstractModel {
 
         /**
          * 领域分类体系（默认取1值）：
-1、通用领域
-2、新闻领域
+1、通用领域，二分类
+2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表
          * @type {number || null}
          */
         this.Flag = null;
@@ -1358,6 +1421,7 @@ class CreateDictResponse extends  AbstractModel {
 
         /**
          * 创建的自定义词库ID。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.DictId = null;
@@ -1398,8 +1462,7 @@ class TextSimilarityRequest extends  AbstractModel {
         this.SrcText = null;
 
         /**
-         * 需要与源句子计算相似度的一个或多个目标句子（仅支持UTF-8格式，目标句子的数量不超过100个，每个句子不超过500字符）
-注意：每成功计算1个目标句子与源句子的相似度算1次调用
+         * 目标句子
          * @type {Array.<string> || null}
          */
         this.TargetText = null;
@@ -1463,16 +1526,16 @@ class WordEmbeddingResponse extends  AbstractModel {
         super();
 
         /**
-         * 词向量的维度
-         * @type {number || null}
-         */
-        this.Dimension = null;
-
-        /**
          * 词向量数组
          * @type {Array.<number> || null}
          */
         this.Vector = null;
+
+        /**
+         * 词向量的维度
+         * @type {number || null}
+         */
+        this.Dimension = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1489,8 +1552,8 @@ class WordEmbeddingResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Dimension = 'Dimension' in params ? params.Dimension : null;
         this.Vector = 'Vector' in params ? params.Vector : null;
+        this.Dimension = 'Dimension' in params ? params.Dimension : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1548,16 +1611,17 @@ class DescribeWordItemsResponse extends  AbstractModel {
         super();
 
         /**
-         * 词条信息列表。
-         * @type {Array.<WordItem> || null}
-         */
-        this.WordItems = null;
-
-        /**
          * 词条记录总条数。
          * @type {number || null}
          */
         this.TotalCount = null;
+
+        /**
+         * 词条信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<WordItem> || null}
+         */
+        this.WordItems = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1574,6 +1638,7 @@ class DescribeWordItemsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.WordItems) {
             this.WordItems = new Array();
@@ -1583,7 +1648,6 @@ class DescribeWordItemsResponse extends  AbstractModel {
                 this.WordItems.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1668,10 +1732,10 @@ class PosToken extends  AbstractModel {
         super();
 
         /**
-         * 起始位置
-         * @type {number || null}
+         * 基础词
+         * @type {string || null}
          */
-        this.BeginOffset = null;
+        this.Word = null;
 
         /**
          * 长度
@@ -1680,16 +1744,16 @@ class PosToken extends  AbstractModel {
         this.Length = null;
 
         /**
+         * 起始位置
+         * @type {number || null}
+         */
+        this.BeginOffset = null;
+
+        /**
          * 词性
          * @type {string || null}
          */
         this.Pos = null;
-
-        /**
-         * 基础词
-         * @type {string || null}
-         */
-        this.Word = null;
 
     }
 
@@ -1700,10 +1764,10 @@ class PosToken extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginOffset = 'BeginOffset' in params ? params.BeginOffset : null;
-        this.Length = 'Length' in params ? params.Length : null;
-        this.Pos = 'Pos' in params ? params.Pos : null;
         this.Word = 'Word' in params ? params.Word : null;
+        this.Length = 'Length' in params ? params.Length : null;
+        this.BeginOffset = 'BeginOffset' in params ? params.BeginOffset : null;
+        this.Pos = 'Pos' in params ? params.Pos : null;
 
     }
 }
@@ -1717,22 +1781,23 @@ class SentimentAnalysisResponse extends  AbstractModel {
         super();
 
         /**
-         * 负面情感概率
+         * 正面情感概率
          * @type {number || null}
          */
-        this.Negative = null;
+        this.Positive = null;
 
         /**
          * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Neutral = null;
 
         /**
-         * 正面情感概率
+         * 负面情感概率
          * @type {number || null}
          */
-        this.Positive = null;
+        this.Negative = null;
 
         /**
          * 情感分类结果：
@@ -1758,9 +1823,9 @@ class SentimentAnalysisResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Negative = 'Negative' in params ? params.Negative : null;
-        this.Neutral = 'Neutral' in params ? params.Neutral : null;
         this.Positive = 'Positive' in params ? params.Positive : null;
+        this.Neutral = 'Neutral' in params ? params.Neutral : null;
+        this.Negative = 'Negative' in params ? params.Negative : null;
         this.Sentiment = 'Sentiment' in params ? params.Sentiment : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1776,16 +1841,16 @@ class DeleteWordItemsRequest extends  AbstractModel {
         super();
 
         /**
-         * 待删除的词条集合。
-         * @type {Array.<WordItem> || null}
-         */
-        this.WordItems = null;
-
-        /**
          * 自定义词库ID。
          * @type {string || null}
          */
         this.DictId = null;
+
+        /**
+         * 待删除的词条集合。
+         * @type {Array.<WordItem> || null}
+         */
+        this.WordItems = null;
 
     }
 
@@ -1796,6 +1861,7 @@ class DeleteWordItemsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DictId = 'DictId' in params ? params.DictId : null;
 
         if (params.WordItems) {
             this.WordItems = new Array();
@@ -1805,7 +1871,6 @@ class DeleteWordItemsRequest extends  AbstractModel {
                 this.WordItems.push(obj);
             }
         }
-        this.DictId = 'DictId' in params ? params.DictId : null;
 
     }
 }
@@ -1820,6 +1885,7 @@ class DescribeDictResponse extends  AbstractModel {
 
         /**
          * 查询到的词库信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DictInfo> || null}
          */
         this.Dicts = null;
@@ -1863,6 +1929,7 @@ class TextCorrectionResponse extends  AbstractModel {
 
         /**
          * 纠错详情
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<CCIToken> || null}
          */
         this.CCITokens = null;
@@ -1912,16 +1979,17 @@ class DescribeDictsResponse extends  AbstractModel {
         super();
 
         /**
-         * 自定义词库信息列表。
-         * @type {Array.<DictInfo> || null}
-         */
-        this.Dicts = null;
-
-        /**
          * 记录总条数。
          * @type {number || null}
          */
         this.TotalCount = null;
+
+        /**
+         * 自定义词库信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DictInfo> || null}
+         */
+        this.Dicts = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1938,6 +2006,7 @@ class DescribeDictsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.Dicts) {
             this.Dicts = new Array();
@@ -1947,7 +2016,6 @@ class DescribeDictsResponse extends  AbstractModel {
                 this.Dicts.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2010,7 +2078,7 @@ class DeleteDictRequest extends  AbstractModel {
 }
 
 /**
- * 命名实体识别结果
+ * 命名实体识别结果  
  * @class
  */
 class NerToken extends  AbstractModel {
@@ -2018,10 +2086,10 @@ class NerToken extends  AbstractModel {
         super();
 
         /**
-         * 起始位置
-         * @type {number || null}
+         * 基础词
+         * @type {string || null}
          */
-        this.BeginOffset = null;
+        this.Word = null;
 
         /**
          * 长度
@@ -2030,16 +2098,16 @@ class NerToken extends  AbstractModel {
         this.Length = null;
 
         /**
+         * 起始位置
+         * @type {number || null}
+         */
+        this.BeginOffset = null;
+
+        /**
          * 命名实体类型
          * @type {string || null}
          */
         this.Type = null;
-
-        /**
-         * 基础词
-         * @type {string || null}
-         */
-        this.Word = null;
 
     }
 
@@ -2050,10 +2118,10 @@ class NerToken extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BeginOffset = 'BeginOffset' in params ? params.BeginOffset : null;
-        this.Length = 'Length' in params ? params.Length : null;
-        this.Type = 'Type' in params ? params.Type : null;
         this.Word = 'Word' in params ? params.Word : null;
+        this.Length = 'Length' in params ? params.Length : null;
+        this.BeginOffset = 'BeginOffset' in params ? params.BeginOffset : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -2102,22 +2170,25 @@ class EntityRelationObject extends  AbstractModel {
         super();
 
         /**
+         * object对应popular值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Popular = null;
+
+        /**
          * object对应id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Id = null;
 
         /**
          * object对应name
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Name = null;
-
-        /**
-         * object对应popular值
-         * @type {Array.<number> || null}
-         */
-        this.Popular = null;
 
     }
 
@@ -2128,9 +2199,9 @@ class EntityRelationObject extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Popular = 'Popular' in params ? params.Popular : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.Popular = 'Popular' in params ? params.Popular : null;
 
     }
 }
@@ -2202,16 +2273,16 @@ class Similarity extends  AbstractModel {
         super();
 
         /**
-         * 相似度分数
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
          * 目标文本句子
          * @type {string || null}
          */
         this.Text = null;
+
+        /**
+         * 相似度分数
+         * @type {number || null}
+         */
+        this.Score = null;
 
     }
 
@@ -2222,8 +2293,8 @@ class Similarity extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Score = 'Score' in params ? params.Score : null;
         this.Text = 'Text' in params ? params.Text : null;
+        this.Score = 'Score' in params ? params.Score : null;
 
     }
 }
@@ -2237,6 +2308,12 @@ class CCIToken extends  AbstractModel {
         super();
 
         /**
+         * 错别字内容
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
          * 错别字的起始位置，从0开始
          * @type {number || null}
          */
@@ -2248,12 +2325,6 @@ class CCIToken extends  AbstractModel {
          */
         this.CorrectWord = null;
 
-        /**
-         * 错别字内容
-         * @type {string || null}
-         */
-        this.Word = null;
-
     }
 
     /**
@@ -2263,9 +2334,9 @@ class CCIToken extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Word = 'Word' in params ? params.Word : null;
         this.BeginOffset = 'BeginOffset' in params ? params.BeginOffset : null;
         this.CorrectWord = 'CorrectWord' in params ? params.CorrectWord : null;
-        this.Word = 'Word' in params ? params.Word : null;
 
     }
 }
@@ -2399,6 +2470,12 @@ class EntityRelationSubject extends  AbstractModel {
         super();
 
         /**
+         * Subject对应popular
+         * @type {Array.<number> || null}
+         */
+        this.Popular = null;
+
+        /**
          * Subject对应id
          * @type {Array.<string> || null}
          */
@@ -2410,12 +2487,6 @@ class EntityRelationSubject extends  AbstractModel {
          */
         this.Name = null;
 
-        /**
-         * Subject对应popular
-         * @type {Array.<number> || null}
-         */
-        this.Popular = null;
-
     }
 
     /**
@@ -2425,9 +2496,9 @@ class EntityRelationSubject extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Popular = 'Popular' in params ? params.Popular : null;
         this.Id = 'Id' in params ? params.Id : null;
         this.Name = 'Name' in params ? params.Name : null;
-        this.Popular = 'Popular' in params ? params.Popular : null;
 
     }
 }
@@ -2442,21 +2513,24 @@ class EntityRelationContent extends  AbstractModel {
 
         /**
          * 实体关系查询返回关系的object
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<EntityRelationObject> || null}
          */
         this.Object = null;
 
         /**
-         * 实体关系查询返回关系的subject
-         * @type {Array.<EntityRelationSubject> || null}
-         */
-        this.Subject = null;
-
-        /**
          * 实体关系查询返回的关系名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Relation = null;
+
+        /**
+         * 实体关系查询返回关系的subject
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<EntityRelationSubject> || null}
+         */
+        this.Subject = null;
 
     }
 
@@ -2476,6 +2550,7 @@ class EntityRelationContent extends  AbstractModel {
                 this.Object.push(obj);
             }
         }
+        this.Relation = 'Relation' in params ? params.Relation : null;
 
         if (params.Subject) {
             this.Subject = new Array();
@@ -2485,7 +2560,6 @@ class EntityRelationContent extends  AbstractModel {
                 this.Subject.push(obj);
             }
         }
-        this.Relation = 'Relation' in params ? params.Relation : null;
 
     }
 }
@@ -2534,28 +2608,32 @@ class TripleContent extends  AbstractModel {
         super();
 
         /**
-         * 实体id
-         * @type {string || null}
+         * 实体流行度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Id = null;
+        this.Popular = null;
 
         /**
          * 实体名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
          * 实体order
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Order = null;
 
         /**
-         * 实体流行度
-         * @type {number || null}
+         * 实体id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Popular = null;
+        this.Id = null;
 
     }
 
@@ -2566,10 +2644,10 @@ class TripleContent extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.Popular = 'Popular' in params ? params.Popular : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.Order = 'Order' in params ? params.Order : null;
-        this.Popular = 'Popular' in params ? params.Popular : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }

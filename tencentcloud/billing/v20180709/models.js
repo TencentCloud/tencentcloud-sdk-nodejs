@@ -130,19 +130,13 @@ class DescribeCostSummaryByProductRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -160,6 +154,12 @@ class DescribeCostSummaryByProductRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
          * 是否需要返回记录数量，0不需要，1需要，默认不需要
          * @type {number || null}
          */
@@ -174,12 +174,40 @@ class DescribeCostSummaryByProductRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
+
+    }
+}
+
+/**
+ * 消耗汇总详情
+ * @class
+ */
+class ConsumptionSummaryTotal extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 折后总价
+         * @type {string || null}
+         */
+        this.RealTotalCost = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
 
     }
 }
@@ -451,22 +479,22 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -477,9 +505,9 @@ class DescribeBillSummaryByProductRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -1036,19 +1064,13 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1059,6 +1081,12 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
          */
         this.TagKey = null;
 
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
     }
 
     /**
@@ -1068,10 +1096,10 @@ class DescribeBillSummaryByTagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -1815,6 +1843,12 @@ class DescribeBillDetailRequest extends  AbstractModel {
          */
         this.ActionType = null;
 
+        /**
+         * 项目ID:资源所属项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
     }
 
     /**
@@ -1835,6 +1869,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -2133,6 +2168,36 @@ class DescribeBillListResponse extends  AbstractModel {
         this.DeductAmount = null;
 
         /**
+         * 资金转入总额，单位（分）
+         * @type {number || null}
+         */
+        this.AgentInAmount = null;
+
+        /**
+         * 垫付充值总额，单位（分）
+         * @type {number || null}
+         */
+        this.AdvanceRechargeAmount = null;
+
+        /**
+         * 提现扣减总额，单位（分）
+         * @type {number || null}
+         */
+        this.WithdrawAmount = null;
+
+        /**
+         * 资金转出总额，单位（分）
+         * @type {number || null}
+         */
+        this.AgentOutAmount = null;
+
+        /**
+         * 还垫付总额，单位（分）
+         * @type {number || null}
+         */
+        this.AdvancePayAmount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2162,6 +2227,11 @@ class DescribeBillListResponse extends  AbstractModel {
         this.BlockAmount = 'BlockAmount' in params ? params.BlockAmount : null;
         this.UnblockAmount = 'UnblockAmount' in params ? params.UnblockAmount : null;
         this.DeductAmount = 'DeductAmount' in params ? params.DeductAmount : null;
+        this.AgentInAmount = 'AgentInAmount' in params ? params.AgentInAmount : null;
+        this.AdvanceRechargeAmount = 'AdvanceRechargeAmount' in params ? params.AdvanceRechargeAmount : null;
+        this.WithdrawAmount = 'WithdrawAmount' in params ? params.WithdrawAmount : null;
+        this.AgentOutAmount = 'AgentOutAmount' in params ? params.AgentOutAmount : null;
+        this.AdvancePayAmount = 'AdvancePayAmount' in params ? params.AdvancePayAmount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2176,10 +2246,82 @@ class DescribeAccountBalanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 云账户信息中的”展示可用余额”字段，单位为"分"
+         * 接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分
          * @type {number || null}
          */
         this.Balance = null;
+
+        /**
+         * 查询的用户Uin
+         * @type {number || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 当前真实可用余额,单位 分
+         * @type {number || null}
+         */
+        this.RealBalance = null;
+
+        /**
+         * 现金账户余额,单位 分
+         * @type {number || null}
+         */
+        this.CashAccountBalance = null;
+
+        /**
+         * 收益转入账户余额,单位 分
+         * @type {number || null}
+         */
+        this.IncomeIntoAccountBalance = null;
+
+        /**
+         * 赠送账户余额,单位 分
+         * @type {number || null}
+         */
+        this.PresentAccountBalance = null;
+
+        /**
+         * 冻结金额,单位 分
+         * @type {number || null}
+         */
+        this.FreezeAmount = null;
+
+        /**
+         * 欠费金额,单位 分
+         * @type {number || null}
+         */
+        this.OweAmount = null;
+
+        /**
+         * 是否允许欠费消费
+         * @type {boolean || null}
+         */
+        this.IsAllowArrears = null;
+
+        /**
+         * 是否限制信用额度
+         * @type {boolean || null}
+         */
+        this.IsCreditLimited = null;
+
+        /**
+         * 信用额度
+         * @type {number || null}
+         */
+        this.CreditAmount = null;
+
+        /**
+         * 可用信用额度
+         * @type {number || null}
+         */
+        this.CreditBalance = null;
+
+        /**
+         * 真实可用信用额度
+         * @type {number || null}
+         */
+        this.RealCreditBalance = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2197,6 +2339,18 @@ class DescribeAccountBalanceResponse extends  AbstractModel {
             return;
         }
         this.Balance = 'Balance' in params ? params.Balance : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.RealBalance = 'RealBalance' in params ? params.RealBalance : null;
+        this.CashAccountBalance = 'CashAccountBalance' in params ? params.CashAccountBalance : null;
+        this.IncomeIntoAccountBalance = 'IncomeIntoAccountBalance' in params ? params.IncomeIntoAccountBalance : null;
+        this.PresentAccountBalance = 'PresentAccountBalance' in params ? params.PresentAccountBalance : null;
+        this.FreezeAmount = 'FreezeAmount' in params ? params.FreezeAmount : null;
+        this.OweAmount = 'OweAmount' in params ? params.OweAmount : null;
+        this.IsAllowArrears = 'IsAllowArrears' in params ? params.IsAllowArrears : null;
+        this.IsCreditLimited = 'IsCreditLimited' in params ? params.IsCreditLimited : null;
+        this.CreditAmount = 'CreditAmount' in params ? params.CreditAmount : null;
+        this.CreditBalance = 'CreditBalance' in params ? params.CreditBalance : null;
+        this.RealCreditBalance = 'RealCreditBalance' in params ? params.RealCreditBalance : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2211,19 +2365,13 @@ class DescribeCostSummaryByRegionRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2241,6 +2389,12 @@ class DescribeCostSummaryByRegionRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
          * 是否需要返回记录数量，0不需要，1需要，默认不需要
          * @type {number || null}
          */
@@ -2255,11 +2409,11 @@ class DescribeCostSummaryByRegionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
 
     }
@@ -2448,14 +2602,14 @@ class BillDetailComponent extends  AbstractModel {
         this.IncentivePayAmount = null;
 
         /**
-         * 组件类型代码（未开放的字段）
+         * 组件类型代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ItemCode = null;
 
         /**
-         * 组件名称代码（未开放的字段）
+         * 组件名称代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2545,22 +2699,22 @@ class DescribeBillSummaryByRegionRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -2571,9 +2725,9 @@ class DescribeBillSummaryByRegionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -2587,22 +2741,22 @@ class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -2613,9 +2767,9 @@ class DescribeBillSummaryByPayModeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -2629,19 +2783,13 @@ class DescribeCostSummaryByProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2659,6 +2807,12 @@ class DescribeCostSummaryByProjectRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
+
+        /**
          * 是否需要返回记录数量，0不需要，1需要，默认不需要
          * @type {number || null}
          */
@@ -2673,11 +2827,11 @@ class DescribeCostSummaryByProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
 
     }
@@ -2748,6 +2902,49 @@ class ConsumptionRegionSummaryDataItem extends  AbstractModel {
                 this.Business.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeDosageCosDetailByDate返回参数结构体
+ * @class
+ */
+class DescribeDosageCosDetailByDateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用量数组
+         * @type {Array.<CosDetailSets> || null}
+         */
+        this.DetailSets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DetailSets) {
+            this.DetailSets = new Array();
+            for (let z in params.DetailSets) {
+                let obj = new CosDetailSets();
+                obj.deserialize(params.DetailSets[z]);
+                this.DetailSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3062,6 +3259,55 @@ class DescribeBillResourceSummaryRequest extends  AbstractModel {
 }
 
 /**
+ * PayDeals请求参数结构体
+ * @class
+ */
+class PayDealsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要支付的一个或者多个子订单号，与BigDealIds字段两者必须且仅传一个参数
+         * @type {Array.<string> || null}
+         */
+        this.OrderIds = null;
+
+        /**
+         * 是否自动使用代金券,1:是,0否,默认0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 代金券ID列表,目前仅支持指定一张代金券
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * 需要支付的一个或者多个大订单号，与OrderIds字段两者必须且仅传一个参数
+         * @type {Array.<string> || null}
+         */
+        this.BigDealIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
+
+    }
+}
+
+/**
  * DescribeBillList请求参数结构体
  * @class
  */
@@ -3304,14 +3550,14 @@ class BillDetail extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 商品名称代码（未开放的字段）
+         * 商品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.BusinessCode = null;
 
         /**
-         * 子商品名称代码 （未开放的字段）
+         * 子商品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3330,6 +3576,12 @@ class BillDetail extends  AbstractModel {
          * @type {string || null}
          */
         this.RegionId = null;
+
+        /**
+         * 项目ID:资源所属项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
 
     }
 
@@ -3379,6 +3631,7 @@ class BillDetail extends  AbstractModel {
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.ActionType = 'ActionType' in params ? params.ActionType : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -4053,18 +4306,54 @@ class ConditionProject extends  AbstractModel {
 }
 
 /**
- * 消耗汇总详情
+ * cos产品用量明细返回数据结构
  * @class
  */
-class ConsumptionSummaryTotal extends  AbstractModel {
+class CosDetailSets extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 折后总价
+         * 存储桶名称
          * @type {string || null}
          */
-        this.RealTotalCost = null;
+        this.BucketName = null;
+
+        /**
+         * 用量开始时间
+         * @type {string || null}
+         */
+        this.DosageBeginTime = null;
+
+        /**
+         * 用量结束时间
+         * @type {string || null}
+         */
+        this.DosageEndTime = null;
+
+        /**
+         * 一级产品类型名称
+         * @type {string || null}
+         */
+        this.SubProductCodeName = null;
+
+        /**
+         * 二级产品类型名称
+         * @type {string || null}
+         */
+        this.BillingItemCodeName = null;
+
+        /**
+         * 用量
+         * @type {string || null}
+         */
+        this.DosageValue = null;
+
+        /**
+         * 单位
+         * @type {string || null}
+         */
+        this.Unit = null;
 
     }
 
@@ -4075,7 +4364,13 @@ class ConsumptionSummaryTotal extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RealTotalCost = 'RealTotalCost' in params ? params.RealTotalCost : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.DosageBeginTime = 'DosageBeginTime' in params ? params.DosageBeginTime : null;
+        this.DosageEndTime = 'DosageEndTime' in params ? params.DosageEndTime : null;
+        this.SubProductCodeName = 'SubProductCodeName' in params ? params.SubProductCodeName : null;
+        this.BillingItemCodeName = 'BillingItemCodeName' in params ? params.BillingItemCodeName : null;
+        this.DosageValue = 'DosageValue' in params ? params.DosageValue : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
 
     }
 }
@@ -4089,22 +4384,22 @@ class DescribeBillSummaryByProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
     }
 
@@ -4115,9 +4410,9 @@ class DescribeBillSummaryByProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
 
     }
 }
@@ -4217,19 +4512,13 @@ class DescribeCostSummaryByResourceRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询账单数据的用户UIN
-         * @type {string || null}
-         */
-        this.PayerUin = null;
-
-        /**
-         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -4245,6 +4534,12 @@ class DescribeCostSummaryByResourceRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * 查询账单数据的用户UIN
+         * @type {string || null}
+         */
+        this.PayerUin = null;
 
         /**
          * 是否需要返回记录数量，0不需要，1需要，默认不需要
@@ -4273,11 +4568,11 @@ class DescribeCostSummaryByResourceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.PayerUin = 'PayerUin' in params ? params.PayerUin : null;
         this.NeedRecordNum = 'NeedRecordNum' in params ? params.NeedRecordNum : null;
         this.NeedConditionValue = 'NeedConditionValue' in params ? params.NeedConditionValue : null;
 
@@ -4343,36 +4638,30 @@ class DescribeCostDetailResponse extends  AbstractModel {
 }
 
 /**
- * PayDeals请求参数结构体
+ * DescribeDosageCosDetailByDate请求参数结构体
  * @class
  */
-class PayDealsRequest extends  AbstractModel {
+class DescribeDosageCosDetailByDateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要支付的一个或者多个子订单号，与BigDealIds字段两者必须且仅传一个参数
-         * @type {Array.<string> || null}
+         * 查询用量开始时间
+         * @type {string || null}
          */
-        this.OrderIds = null;
+        this.StartDate = null;
 
         /**
-         * 是否自动使用代金券,1:是,0否,默认0
-         * @type {number || null}
+         * 查询用量结束时间（与开始时间同月，不支持跨月查询）
+         * @type {string || null}
          */
-        this.AutoVoucher = null;
+        this.EndDate = null;
 
         /**
-         * 代金券ID列表,目前仅支持指定一张代金券
-         * @type {Array.<string> || null}
+         * COS 存储桶名称，可通过Get Service 接口是用来获取请求者名下的所有存储空间列表（Bucket list）https://tcloud-dev.oa.com/document/product/555/30925?!preview&!document=1
+         * @type {string || null}
          */
-        this.VoucherIds = null;
-
-        /**
-         * 需要支付的一个或者多个大订单号，与OrderIds字段两者必须且仅传一个参数
-         * @type {Array.<string> || null}
-         */
-        this.BigDealIds = null;
+        this.BucketName = null;
 
     }
 
@@ -4383,10 +4672,9 @@ class PayDealsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
-        this.BigDealIds = 'BigDealIds' in params ? params.BigDealIds : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
 
     }
 }
@@ -4598,6 +4886,7 @@ class DescribeCostSummaryByRegionResponse extends  AbstractModel {
 module.exports = {
     CostComponentSet: CostComponentSet,
     DescribeCostSummaryByProductRequest: DescribeCostSummaryByProductRequest,
+    ConsumptionSummaryTotal: ConsumptionSummaryTotal,
     DescribeCostSummaryByProjectResponse: DescribeCostSummaryByProjectResponse,
     DescribeDosageDetailByDateRequest: DescribeDosageDetailByDateRequest,
     ProjectSummaryOverviewItem: ProjectSummaryOverviewItem,
@@ -4633,11 +4922,13 @@ module.exports = {
     DescribeBillSummaryByPayModeRequest: DescribeBillSummaryByPayModeRequest,
     DescribeCostSummaryByProjectRequest: DescribeCostSummaryByProjectRequest,
     ConsumptionRegionSummaryDataItem: ConsumptionRegionSummaryDataItem,
+    DescribeDosageCosDetailByDateResponse: DescribeDosageCosDetailByDateResponse,
     DescribeBillResourceSummaryResponse: DescribeBillResourceSummaryResponse,
     ActionSummaryOverviewItem: ActionSummaryOverviewItem,
     ConditionPayMode: ConditionPayMode,
     DescribeDealsByCondRequest: DescribeDealsByCondRequest,
     DescribeBillResourceSummaryRequest: DescribeBillResourceSummaryRequest,
+    PayDealsRequest: PayDealsRequest,
     DescribeBillListRequest: DescribeBillListRequest,
     PayDealsResponse: PayDealsResponse,
     BillDetail: BillDetail,
@@ -4650,13 +4941,13 @@ module.exports = {
     DescribeCostDetailRequest: DescribeCostDetailRequest,
     DescribeDealsByCondResponse: DescribeDealsByCondResponse,
     ConditionProject: ConditionProject,
-    ConsumptionSummaryTotal: ConsumptionSummaryTotal,
+    CosDetailSets: CosDetailSets,
     DescribeBillSummaryByProjectRequest: DescribeBillSummaryByProjectRequest,
     DescribeBillSummaryByProjectResponse: DescribeBillSummaryByProjectResponse,
     ConditionBusiness: ConditionBusiness,
     DescribeCostSummaryByResourceRequest: DescribeCostSummaryByResourceRequest,
     DescribeCostDetailResponse: DescribeCostDetailResponse,
-    PayDealsRequest: PayDealsRequest,
+    DescribeDosageCosDetailByDateRequest: DescribeDosageCosDetailByDateRequest,
     PayModeSummaryOverviewItem: PayModeSummaryOverviewItem,
     BusinessSummaryTotal: BusinessSummaryTotal,
     DescribeCostSummaryByRegionResponse: DescribeCostSummaryByRegionResponse,

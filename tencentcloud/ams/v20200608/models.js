@@ -70,11 +70,9 @@ class ImageResultResult extends  AbstractModel {
          * 场景
 Porn 色情
 Sexy 性感
-Polity 政治
-Illegal 违法
 Abuse 谩骂
-Terror 暴恐
 Ad 广告
+等多个识别场景
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -90,10 +88,8 @@ Ad 广告
         this.HitFlag = null;
 
         /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -164,6 +160,56 @@ Block 确认违规
                 obj.deserialize(params.Details[z]);
                 this.Details.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * 输入信息详情
+ * @class
+ */
+class InputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 传入的类型可选：URL，COS
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Url地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 桶信息。当输入当时COS时，该字段不为空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {BucketInfo || null}
+         */
+        this.BucketInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.BucketInfo) {
+            let obj = new BucketInfo();
+            obj.deserialize(params.BucketInfo)
+            this.BucketInfo = obj;
         }
 
     }
@@ -843,6 +889,34 @@ class DescribeTaskDetailRequest extends  AbstractModel {
 }
 
 /**
+ * CancelTask返回参数结构体
+ * @class
+ */
+class CancelTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 任务输出标签
  * @class
  */
@@ -851,24 +925,16 @@ class TaskLabel extends  AbstractModel {
         super();
 
         /**
-         * 命中的标签
-Porn 色情
-Sexy 性感
-Polity 政治
-Illegal 违法
-Abuse 谩骂
-Terror 暴恐
-Ad 广告
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1006,33 +1072,36 @@ class ImageResultsResultDetail extends  AbstractModel {
 }
 
 /**
- * 输入信息详情
+ * DescribeAmsList请求参数结构体
  * @class
  */
-class InputInfo extends  AbstractModel {
+class DescribeAmsListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 传入的类型可选：URL，COS
-注意：此字段可能返回 null，表示取不到有效值。
+         * 页码
          * @type {string || null}
          */
-        this.Type = null;
+        this.PageToken = null;
 
         /**
-         * Url地址
-注意：此字段可能返回 null，表示取不到有效值。
+         * 过滤条件
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 查询方向
          * @type {string || null}
          */
-        this.Url = null;
+        this.PageDirection = null;
 
         /**
-         * 桶信息。当输入当时COS时，该字段不为空
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {BucketInfo || null}
+         * 过滤条件
+         * @type {Array.<Filter> || null}
          */
-        this.BucketInfo = null;
+        this.Filters = null;
 
     }
 
@@ -1043,14 +1112,182 @@ class InputInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Url = 'Url' in params ? params.Url : null;
+        this.PageToken = 'PageToken' in params ? params.PageToken : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.PageDirection = 'PageDirection' in params ? params.PageDirection : null;
 
-        if (params.BucketInfo) {
-            let obj = new BucketInfo();
-            obj.deserialize(params.BucketInfo)
-            this.BucketInfo = obj;
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
+
+    }
+}
+
+/**
+ * 音频过滤条件
+ * @class
+ */
+class Filters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询字段：
+策略BizType
+子账号SubUin
+日期区间DateRange
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 查询值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * 机器审核详情列表数据项
+ * @class
+ */
+class AmsDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签
+         * @type {Array.<string> || null}
+         */
+        this.Label = null;
+
+        /**
+         * 时长(秒/s)
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 任务名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 任务ID，创建任务后返回的TaskId字段
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 插入时间
+         * @type {string || null}
+         */
+        this.InsertTime = null;
+
+        /**
+         * 数据来源 0机审，其他为自主审核
+         * @type {number || null}
+         */
+        this.DataForm = null;
+
+        /**
+         * 操作人
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 原始命中标签
+         * @type {Array.<string> || null}
+         */
+        this.OriginalLabel = null;
+
+        /**
+         * 操作时间
+         * @type {string || null}
+         */
+        this.OperateTime = null;
+
+        /**
+         * 视频原始地址
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 封面图地址
+         * @type {string || null}
+         */
+        this.Thumbnail = null;
+
+        /**
+         * 短音频内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 短音频个数
+         * @type {number || null}
+         */
+        this.DetailCount = null;
+
+        /**
+         * 音频审核的请求 id
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+        /**
+         * 音频机审状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.InsertTime = 'InsertTime' in params ? params.InsertTime : null;
+        this.DataForm = 'DataForm' in params ? params.DataForm : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.OriginalLabel = 'OriginalLabel' in params ? params.OriginalLabel : null;
+        this.OperateTime = 'OperateTime' in params ? params.OperateTime : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Thumbnail = 'Thumbnail' in params ? params.Thumbnail : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.DetailCount = 'DetailCount' in params ? params.DetailCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1064,7 +1301,7 @@ class AudioResultDetailLanguageResult extends  AbstractModel {
         super();
 
         /**
-         * 语种
+         * 语言信息
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1159,12 +1396,65 @@ class FileOutput extends  AbstractModel {
 }
 
 /**
- * CancelTask返回参数结构体
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
  * @class
  */
-class CancelTaskResponse extends  AbstractModel {
+class Filter extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 过滤键的名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 一个或者多个过滤值。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DescribeAudioStat返回参数结构体
+ * @class
+ */
+class DescribeAudioStatResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别结果统计
+         * @type {Overview || null}
+         */
+        this.Overview = null;
+
+        /**
+         * 识别量统计
+         * @type {Array.<TrendCount> || null}
+         */
+        this.TrendCount = null;
+
+        /**
+         * 违规数据分布
+         * @type {Array.<EvilCount> || null}
+         */
+        this.EvilCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1181,7 +1471,172 @@ class CancelTaskResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Overview) {
+            let obj = new Overview();
+            obj.deserialize(params.Overview)
+            this.Overview = obj;
+        }
+
+        if (params.TrendCount) {
+            this.TrendCount = new Array();
+            for (let z in params.TrendCount) {
+                let obj = new TrendCount();
+                obj.deserialize(params.TrendCount[z]);
+                this.TrendCount.push(obj);
+            }
+        }
+
+        if (params.EvilCount) {
+            this.EvilCount = new Array();
+            for (let z in params.EvilCount) {
+                let obj = new EvilCount();
+                obj.deserialize(params.EvilCount[z]);
+                this.EvilCount.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAmsList返回参数结构体
+ * @class
+ */
+class DescribeAmsListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回列表数据----非必选，该参数暂未对外开放
+         * @type {Array.<AmsDetailInfo> || null}
+         */
+        this.AmsDetailSet = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 分页 token
+         * @type {string || null}
+         */
+        this.PageToken = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AmsDetailSet) {
+            this.AmsDetailSet = new Array();
+            for (let z in params.AmsDetailSet) {
+                let obj = new AmsDetailInfo();
+                obj.deserialize(params.AmsDetailSet[z]);
+                this.AmsDetailSet.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.PageToken = 'PageToken' in params ? params.PageToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 识别量统计
+ * @class
+ */
+class TrendCount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总调用量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 总调用时长
+         * @type {number || null}
+         */
+        this.TotalHour = null;
+
+        /**
+         * 通过量
+         * @type {number || null}
+         */
+        this.PassCount = null;
+
+        /**
+         * 通过时长
+         * @type {number || null}
+         */
+        this.PassHour = null;
+
+        /**
+         * 违规量
+         * @type {number || null}
+         */
+        this.EvilCount = null;
+
+        /**
+         * 违规时长
+         * @type {number || null}
+         */
+        this.EvilHour = null;
+
+        /**
+         * 疑似违规量
+         * @type {number || null}
+         */
+        this.SuspectCount = null;
+
+        /**
+         * 疑似违规时长
+         * @type {number || null}
+         */
+        this.SuspectHour = null;
+
+        /**
+         * 日期
+         * @type {string || null}
+         */
+        this.Date = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalHour = 'TotalHour' in params ? params.TotalHour : null;
+        this.PassCount = 'PassCount' in params ? params.PassCount : null;
+        this.PassHour = 'PassHour' in params ? params.PassHour : null;
+        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
+        this.EvilHour = 'EvilHour' in params ? params.EvilHour : null;
+        this.SuspectCount = 'SuspectCount' in params ? params.SuspectCount : null;
+        this.SuspectHour = 'SuspectHour' in params ? params.SuspectHour : null;
+        this.Date = 'Date' in params ? params.Date : null;
 
     }
 }
@@ -1263,6 +1718,126 @@ class AudioResultDetailTextResult extends  AbstractModel {
 }
 
 /**
+ * DescribeAudioStat请求参数结构体
+ * @class
+ */
+class DescribeAudioStatRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审核类型 1: 机器审核; 2: 人工审核
+         * @type {number || null}
+         */
+        this.AuditType = null;
+
+        /**
+         * 查询条件
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditType = 'AuditType' in params ? params.AuditType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 识别结果统计
+ * @class
+ */
+class Overview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总调用量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 总调用时长
+         * @type {number || null}
+         */
+        this.TotalHour = null;
+
+        /**
+         * 通过量
+         * @type {number || null}
+         */
+        this.PassCount = null;
+
+        /**
+         * 通过时长
+         * @type {number || null}
+         */
+        this.PassHour = null;
+
+        /**
+         * 违规量
+         * @type {number || null}
+         */
+        this.EvilCount = null;
+
+        /**
+         * 违规时长
+         * @type {number || null}
+         */
+        this.EvilHour = null;
+
+        /**
+         * 疑似违规量
+         * @type {number || null}
+         */
+        this.SuspectCount = null;
+
+        /**
+         * 疑似违规时长
+         * @type {number || null}
+         */
+        this.SuspectHour = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalHour = 'TotalHour' in params ? params.TotalHour : null;
+        this.PassCount = 'PassCount' in params ? params.PassCount : null;
+        this.PassHour = 'PassHour' in params ? params.PassHour : null;
+        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
+        this.EvilHour = 'EvilHour' in params ? params.EvilHour : null;
+        this.SuspectCount = 'SuspectCount' in params ? params.SuspectCount : null;
+        this.SuspectHour = 'SuspectHour' in params ? params.SuspectHour : null;
+
+    }
+}
+
+/**
  * 音频输出参数
  * @class
  */
@@ -1280,24 +1855,16 @@ class AudioResult extends  AbstractModel {
         this.HitFlag = null;
 
         /**
-         * 命中的标签
-Porn 色情
-Polity 政治
-Illegal 违法
-Abuse 谩骂
-Terror 暴恐
-Ad 广告
-Moan 呻吟
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1337,19 +1904,19 @@ Block 确认违规
         this.Extra = null;
 
         /**
-         * 文本审核结果
+         * 文本识别结果
          * @type {Array.<AudioResultDetailTextResult> || null}
          */
         this.TextResults = null;
 
         /**
-         * 音频呻吟审核结果
+         * 音频呻吟检测结果
          * @type {Array.<AudioResultDetailMoanResult> || null}
          */
         this.MoanResults = null;
 
         /**
-         * 音频语种检测结果
+         * 音频语言检测结果
          * @type {Array.<AudioResultDetailLanguageResult> || null}
          */
         this.LanguageResults = null;
@@ -1411,7 +1978,7 @@ class AudioResultDetailMoanResult extends  AbstractModel {
         super();
 
         /**
-         * 固定为Moan
+         * 固定为Moan（呻吟）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1569,6 +2136,12 @@ class MediaInfo extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 缩略图
+         * @type {string || null}
+         */
+        this.Thumbnail = null;
+
     }
 
     /**
@@ -1582,6 +2155,7 @@ class MediaInfo extends  AbstractModel {
         this.Duration = 'Duration' in params ? params.Duration : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.Thumbnail = 'Thumbnail' in params ? params.Thumbnail : null;
 
     }
 }
@@ -1699,6 +2273,41 @@ class AudioSegments extends  AbstractModel {
 }
 
 /**
+ * 违规数据分布
+ * @class
+ */
+class EvilCount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ----非必选，该参数功能暂未对外开放
+         * @type {string || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 分布类型总量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
  * 图片详情位置信息
  * @class
  */
@@ -1777,27 +2386,19 @@ class ImageResult extends  AbstractModel {
         this.HitFlag = null;
 
         /**
-         * 命中的标签
-Porn 色情
-Sexy 性感
-Polity 政治
-Illegal 违法
-Abuse 谩骂
-Terror 暴恐
-Ad 广告
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Label = null;
-
-        /**
-         * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
-         * @type {string || null}
-         */
-        this.Suggestion = null;
 
         /**
          * 得分
@@ -1833,8 +2434,8 @@ Block 确认违规
             return;
         }
         this.HitFlag = 'HitFlag' in params ? params.HitFlag : null;
-        this.Label = 'Label' in params ? params.Label : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Label = 'Label' in params ? params.Label : null;
         this.Score = 'Score' in params ? params.Score : null;
 
         if (params.Results) {
@@ -1854,6 +2455,7 @@ Block 确认违规
 module.exports = {
     ImageSegments: ImageSegments,
     ImageResultResult: ImageResultResult,
+    InputInfo: InputInfo,
     StorageInfo: StorageInfo,
     BucketInfo: BucketInfo,
     CreateAudioModerationTaskResponse: CreateAudioModerationTaskResponse,
@@ -1866,19 +2468,28 @@ module.exports = {
     CreateBizConfigResponse: CreateBizConfigResponse,
     TaskInput: TaskInput,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
+    CancelTaskResponse: CancelTaskResponse,
     TaskLabel: TaskLabel,
     ImageResultsResultDetail: ImageResultsResultDetail,
-    InputInfo: InputInfo,
+    DescribeAmsListRequest: DescribeAmsListRequest,
+    Filters: Filters,
+    AmsDetailInfo: AmsDetailInfo,
     AudioResultDetailLanguageResult: AudioResultDetailLanguageResult,
     FileOutput: FileOutput,
-    CancelTaskResponse: CancelTaskResponse,
+    Filter: Filter,
+    DescribeAudioStatResponse: DescribeAudioStatResponse,
+    DescribeAmsListResponse: DescribeAmsListResponse,
+    TrendCount: TrendCount,
     AudioResultDetailTextResult: AudioResultDetailTextResult,
+    DescribeAudioStatRequest: DescribeAudioStatRequest,
+    Overview: Overview,
     AudioResult: AudioResult,
     AudioResultDetailMoanResult: AudioResultDetailMoanResult,
     DescribeBizConfigResponse: DescribeBizConfigResponse,
     MediaInfo: MediaInfo,
     MediaModerationConfig: MediaModerationConfig,
     AudioSegments: AudioSegments,
+    EvilCount: EvilCount,
     ImageResultsResultDetailLocation: ImageResultsResultDetailLocation,
     ImageResult: ImageResult,
 

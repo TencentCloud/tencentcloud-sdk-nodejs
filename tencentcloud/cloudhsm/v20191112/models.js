@@ -210,6 +210,49 @@ class DescribeVsmsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSupportedHsm返回参数结构体
+ * @class
+ */
+class DescribeSupportedHsmResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前地域所支持的设备列表
+         * @type {Array.<DeviceInfo> || null}
+         */
+        this.DeviceTypes = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DeviceTypes) {
+            this.DeviceTypes = new Array();
+            for (let z in params.DeviceTypes) {
+                let obj = new DeviceInfo();
+                obj.deserialize(params.DeviceTypes[z]);
+                this.DeviceTypes.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquiryPriceBuyVsm请求参数结构体
  * @class
  */
@@ -236,7 +279,7 @@ class InquiryPriceBuyVsmRequest extends  AbstractModel {
         this.TimeSpan = null;
 
         /**
-         * 商品的时间单位
+         * 商品的时间单位，m表示月，y表示年
          * @type {string || null}
          */
         this.TimeUnit = null;
@@ -441,18 +484,24 @@ class DescribeSubnetResponse extends  AbstractModel {
 }
 
 /**
- * DescribeHSMByVpcId请求参数结构体
+ * 支持的Vsm类型信息
  * @class
  */
-class DescribeHSMByVpcIdRequest extends  AbstractModel {
+class VsmInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPC标识符
+         * VSM类型名称
          * @type {string || null}
          */
-        this.VpcId = null;
+        this.TypeName = null;
+
+        /**
+         * VSM类型值
+         * @type {number || null}
+         */
+        this.TypeID = null;
 
     }
 
@@ -463,7 +512,82 @@ class DescribeHSMByVpcIdRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.TypeID = 'TypeID' in params ? params.TypeID : null;
+
+    }
+}
+
+/**
+ * DescribeSupportedHsm请求参数结构体
+ * @class
+ */
+class DescribeSupportedHsmRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * 安全组基础信息
+ * @class
+ */
+class SgUnit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SgId = null;
+
+        /**
+         * 安全组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SgName = null;
+
+        /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SgRemark = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SgId = 'SgId' in params ? params.SgId : null;
+        this.SgName = 'SgName' in params ? params.SgName : null;
+        this.SgRemark = 'SgRemark' in params ? params.SgRemark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -752,6 +876,13 @@ class ResourceInfo extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 厂商
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Manufacturer = null;
+
     }
 
     /**
@@ -798,6 +929,7 @@ class ResourceInfo extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Manufacturer = 'Manufacturer' in params ? params.Manufacturer : null;
 
     }
 }
@@ -960,7 +1092,7 @@ class DescribeVsmAttributesResponse extends  AbstractModel {
         this.ResourceName = null;
 
         /**
-         * 资源状态
+         * 资源状态，1表示资源为正常，2表示资源处于隔离状态
          * @type {number || null}
          */
         this.Status = null;
@@ -990,19 +1122,19 @@ class DescribeVsmAttributesResponse extends  AbstractModel {
         this.Model = null;
 
         /**
-         * 资源类型
+         * 资源类型，17表示EVSM，33表示GVSM，49表示SVSM
          * @type {number || null}
          */
         this.VsmType = null;
 
         /**
-         * 地域Id
+         * 地域Id，返回腾讯云地域代码，如广州为1，北京为8
          * @type {number || null}
          */
         this.RegionId = null;
 
         /**
-         * 区域Id
+         * 区域Id，返回腾讯云每个地域的可用区代码
          * @type {number || null}
          */
         this.ZoneId = null;
@@ -1091,6 +1223,13 @@ class DescribeVsmAttributesResponse extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
+         * 厂商
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Manufacturer = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1143,6 +1282,7 @@ class DescribeVsmAttributesResponse extends  AbstractModel {
             }
         }
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.Manufacturer = 'Manufacturer' in params ? params.Manufacturer : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1184,40 +1324,18 @@ class TagFilter extends  AbstractModel {
 }
 
 /**
- * 安全组基础信息
+ * DescribeHSMByVpcId请求参数结构体
  * @class
  */
-class SgUnit extends  AbstractModel {
+class DescribeHSMByVpcIdRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 安全组Id
-注意：此字段可能返回 null，表示取不到有效值。
+         * VPC标识符
          * @type {string || null}
          */
-        this.SgId = null;
-
-        /**
-         * 安全组名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SgName = null;
-
-        /**
-         * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SgRemark = null;
-
-        /**
-         * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
+        this.VpcId = null;
 
     }
 
@@ -1228,10 +1346,7 @@ class SgUnit extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SgId = 'SgId' in params ? params.SgId : null;
-        this.SgName = 'SgName' in params ? params.SgName : null;
-        this.SgRemark = 'SgRemark' in params ? params.SgRemark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
 
     }
 }
@@ -1338,7 +1453,7 @@ class InquiryPriceBuyVsmResponse extends  AbstractModel {
         super();
 
         /**
-         * 总金额
+         * 原始总金额
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1366,7 +1481,7 @@ class InquiryPriceBuyVsmResponse extends  AbstractModel {
         this.TimeUnit = null;
 
         /**
-         * 原始总金额
+         * 应付总金额
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -1435,6 +1550,49 @@ class DescribeHSMBySubnetIdResponse extends  AbstractModel {
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 支持的加密机类型信息
+ * @class
+ */
+class HsmInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加密机型号
+         * @type {string || null}
+         */
+        this.Model = null;
+
+        /**
+         * 此类型的加密机所支持的VSM类型列表
+         * @type {Array.<VsmInfo> || null}
+         */
+        this.VsmTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Model = 'Model' in params ? params.Model : null;
+
+        if (params.VsmTypes) {
+            this.VsmTypes = new Array();
+            for (let z in params.VsmTypes) {
+                let obj = new VsmInfo();
+                obj.deserialize(params.VsmTypes[z]);
+                this.VsmTypes.push(obj);
+            }
+        }
 
     }
 }
@@ -1550,6 +1708,12 @@ class DescribeVsmsRequest extends  AbstractModel {
          */
         this.TagFilters = null;
 
+        /**
+         * 设备所属的厂商名称，根据厂商来进行筛选
+         * @type {string || null}
+         */
+        this.Manufacturer = null;
+
     }
 
     /**
@@ -1569,6 +1733,50 @@ class DescribeVsmsRequest extends  AbstractModel {
                 let obj = new TagFilter();
                 obj.deserialize(params.TagFilters[z]);
                 this.TagFilters.push(obj);
+            }
+        }
+        this.Manufacturer = 'Manufacturer' in params ? params.Manufacturer : null;
+
+    }
+}
+
+/**
+ * 设备厂商信息
+ * @class
+ */
+class DeviceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 厂商名称
+         * @type {string || null}
+         */
+        this.Manufacturer = null;
+
+        /**
+         * 此厂商旗下的设备信息列表
+         * @type {Array.<HsmInfo> || null}
+         */
+        this.HsmTypes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Manufacturer = 'Manufacturer' in params ? params.Manufacturer : null;
+
+        if (params.HsmTypes) {
+            this.HsmTypes = new Array();
+            for (let z in params.HsmTypes) {
+                let obj = new HsmInfo();
+                obj.deserialize(params.HsmTypes[z]);
+                this.HsmTypes.push(obj);
             }
         }
 
@@ -1748,11 +1956,14 @@ module.exports = {
     Subnet: Subnet,
     DescribeSubnetRequest: DescribeSubnetRequest,
     DescribeVsmsResponse: DescribeVsmsResponse,
+    DescribeSupportedHsmResponse: DescribeSupportedHsmResponse,
     InquiryPriceBuyVsmRequest: InquiryPriceBuyVsmRequest,
     DescribeVpcResponse: DescribeVpcResponse,
     ModifyVsmAttributesRequest: ModifyVsmAttributesRequest,
     DescribeSubnetResponse: DescribeSubnetResponse,
-    DescribeHSMByVpcIdRequest: DescribeHSMByVpcIdRequest,
+    VsmInfo: VsmInfo,
+    DescribeSupportedHsmRequest: DescribeSupportedHsmRequest,
+    SgUnit: SgUnit,
     DescribeHSMByVpcIdResponse: DescribeHSMByVpcIdResponse,
     DescribeUsgRuleResponse: DescribeUsgRuleResponse,
     Tag: Tag,
@@ -1762,13 +1973,15 @@ module.exports = {
     DescribeUsgRequest: DescribeUsgRequest,
     DescribeVsmAttributesResponse: DescribeVsmAttributesResponse,
     TagFilter: TagFilter,
-    SgUnit: SgUnit,
+    DescribeHSMByVpcIdRequest: DescribeHSMByVpcIdRequest,
     UsgRuleDetail: UsgRuleDetail,
     InquiryPriceBuyVsmResponse: InquiryPriceBuyVsmResponse,
     DescribeHSMBySubnetIdResponse: DescribeHSMBySubnetIdResponse,
+    HsmInfo: HsmInfo,
     DescribeUsgResponse: DescribeUsgResponse,
     DescribeHSMBySubnetIdRequest: DescribeHSMBySubnetIdRequest,
     DescribeVsmsRequest: DescribeVsmsRequest,
+    DeviceInfo: DeviceInfo,
     DescribeUsgRuleRequest: DescribeUsgRuleRequest,
     ModifyVsmAttributesResponse: ModifyVsmAttributesResponse,
     DescribeVsmAttributesRequest: DescribeVsmAttributesRequest,

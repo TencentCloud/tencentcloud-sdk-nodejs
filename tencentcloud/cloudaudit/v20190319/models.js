@@ -88,16 +88,16 @@ class CmqRegionInfo extends  AbstractModel {
         super();
 
         /**
-         * cmq地域
-         * @type {string || null}
-         */
-        this.CmqRegion = null;
-
-        /**
          * 地域描述
          * @type {string || null}
          */
         this.CmqRegionName = null;
+
+        /**
+         * cmq地域
+         * @type {string || null}
+         */
+        this.CmqRegion = null;
 
     }
 
@@ -108,8 +108,8 @@ class CmqRegionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.CmqRegionName = 'CmqRegionName' in params ? params.CmqRegionName : null;
+        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
 
     }
 }
@@ -192,52 +192,16 @@ class UpdateAuditRequest extends  AbstractModel {
         this.AuditName = null;
 
         /**
-         * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
-         * @type {string || null}
-         */
-        this.CmqQueueName = null;
-
-        /**
-         * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-         * @type {string || null}
-         */
-        this.CmqRegion = null;
-
-        /**
-         * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
-         * @type {string || null}
-         */
-        this.CosBucketName = null;
-
-        /**
-         * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
-         * @type {string || null}
-         */
-        this.CosRegion = null;
-
-        /**
-         * 是否创建新的cos存储桶。1：是，0：否。
-         * @type {number || null}
-         */
-        this.IsCreateNewBucket = null;
-
-        /**
-         * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-         * @type {number || null}
-         */
-        this.IsCreateNewQueue = null;
-
-        /**
          * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
          * @type {number || null}
          */
         this.IsEnableCmqNotify = null;
 
         /**
-         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * 管理事件的读写属性。1：只读，2：只写，3：全部。
          * @type {number || null}
          */
-        this.IsEnableKmsEncry = null;
+        this.ReadWriteAttribute = null;
 
         /**
          * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
@@ -246,10 +210,46 @@ class UpdateAuditRequest extends  AbstractModel {
         this.KeyId = null;
 
         /**
+         * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
+         * @type {string || null}
+         */
+        this.CosRegion = null;
+
+        /**
+         * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
+         * @type {string || null}
+         */
+        this.CmqQueueName = null;
+
+        /**
+         * 是否创建新的cos存储桶。1：是，0：否。
+         * @type {number || null}
+         */
+        this.IsCreateNewBucket = null;
+
+        /**
          * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
          * @type {string || null}
          */
         this.KmsRegion = null;
+
+        /**
+         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
+         * @type {string || null}
+         */
+        this.CosBucketName = null;
+
+        /**
+         * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+         * @type {string || null}
+         */
+        this.CmqRegion = null;
 
         /**
          * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。
@@ -258,10 +258,10 @@ class UpdateAuditRequest extends  AbstractModel {
         this.LogFilePrefix = null;
 
         /**
-         * 管理事件的读写属性。1：只读，2：只写，3：全部。
+         * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
          * @type {number || null}
          */
-        this.ReadWriteAttribute = null;
+        this.IsCreateNewQueue = null;
 
     }
 
@@ -273,18 +273,18 @@ class UpdateAuditRequest extends  AbstractModel {
             return;
         }
         this.AuditName = 'AuditName' in params ? params.AuditName : null;
-        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
-        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
-        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
-        this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
-        this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
         this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
-        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
-        this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
         this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
+        this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
+        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
+        this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
+        this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
 
     }
 }
@@ -306,6 +306,64 @@ class InquireAuditCreditRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * DescribeEvents返回参数结构体
+ * @class
+ */
+class DescribeEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志集合是否结束
+         * @type {boolean || null}
+         */
+        this.ListOver = null;
+
+        /**
+         * 查看更多日志的凭证
+         * @type {number || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * 日志集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Event> || null}
+         */
+        this.Events = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ListOver = 'ListOver' in params ? params.ListOver : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+
+        if (params.Events) {
+            this.Events = new Array();
+            for (let z in params.Events) {
+                let obj = new Event();
+                obj.deserialize(params.Events[z]);
+                this.Events.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -362,22 +420,28 @@ class LookUpEventsRequest extends  AbstractModel {
         super();
 
         /**
-         * 结束时间
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
          * 开始时间
          * @type {number || null}
          */
         this.StartTime = null;
 
         /**
+         * 结束时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
          * 检索条件
          * @type {Array.<LookupAttribute> || null}
          */
         this.LookupAttributes = null;
+
+        /**
+         * 查看更多日志的凭证
+         * @type {string || null}
+         */
+        this.NextToken = null;
 
         /**
          * 返回日志的最大条数
@@ -391,12 +455,6 @@ class LookUpEventsRequest extends  AbstractModel {
          */
         this.Mode = null;
 
-        /**
-         * 查看更多日志的凭证
-         * @type {string || null}
-         */
-        this.NextToken = null;
-
     }
 
     /**
@@ -406,8 +464,8 @@ class LookUpEventsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
         if (params.LookupAttributes) {
             this.LookupAttributes = new Array();
@@ -417,9 +475,9 @@ class LookUpEventsRequest extends  AbstractModel {
                 this.LookupAttributes.push(obj);
             }
         }
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
         this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
         this.Mode = 'Mode' in params ? params.Mode : null;
-        this.NextToken = 'NextToken' in params ? params.NextToken : null;
 
     }
 }
@@ -531,22 +589,10 @@ class AttributeKeyDetail extends  AbstractModel {
         super();
 
         /**
-         * 中文标签
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
          * 输入框类型
          * @type {string || null}
          */
         this.LabelType = null;
-
-        /**
-         * 展示排序
-         * @type {number || null}
-         */
-        this.Order = null;
 
         /**
          * 初始化展示
@@ -555,10 +601,22 @@ class AttributeKeyDetail extends  AbstractModel {
         this.Starter = null;
 
         /**
+         * 展示排序
+         * @type {number || null}
+         */
+        this.Order = null;
+
+        /**
          * AttributeKey值
          * @type {string || null}
          */
         this.Value = null;
+
+        /**
+         * 中文标签
+         * @type {string || null}
+         */
+        this.Label = null;
 
     }
 
@@ -569,11 +627,11 @@ class AttributeKeyDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Label = 'Label' in params ? params.Label : null;
         this.LabelType = 'LabelType' in params ? params.LabelType : null;
-        this.Order = 'Order' in params ? params.Order : null;
         this.Starter = 'Starter' in params ? params.Starter : null;
+        this.Order = 'Order' in params ? params.Order : null;
         this.Value = 'Value' in params ? params.Value : null;
+        this.Label = 'Label' in params ? params.Label : null;
 
     }
 }
@@ -615,16 +673,16 @@ class ListKeyAliasByRegionResponse extends  AbstractModel {
         super();
 
         /**
-         * 密钥别名
-         * @type {Array.<KeyMetadata> || null}
-         */
-        this.KeyMetadatas = null;
-
-        /**
          * CMK的总数量
          * @type {number || null}
          */
         this.TotalCount = null;
+
+        /**
+         * 密钥别名
+         * @type {Array.<KeyMetadata> || null}
+         */
+        this.KeyMetadatas = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -641,6 +699,7 @@ class ListKeyAliasByRegionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
         if (params.KeyMetadatas) {
             this.KeyMetadatas = new Array();
@@ -650,7 +709,6 @@ class ListKeyAliasByRegionResponse extends  AbstractModel {
                 this.KeyMetadatas.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -665,16 +723,17 @@ class Resource extends  AbstractModel {
         super();
 
         /**
-         * 资源名称
-         * @type {string || null}
-         */
-        this.ResourceName = null;
-
-        /**
          * 资源类型
          * @type {string || null}
          */
         this.ResourceType = null;
+
+        /**
+         * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceName = null;
 
     }
 
@@ -685,8 +744,8 @@ class Resource extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceName = 'ResourceName' in params ? params.ResourceName : null;
 
     }
 }
@@ -757,12 +816,14 @@ class LookupAttribute extends  AbstractModel {
 
         /**
          * AttributeKey的有效取值范围是:RequestId、EventName、ReadOnly、Username、ResourceType、ResourceName和AccessKeyId，EventId
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.AttributeKey = null;
 
         /**
-         * AttributeValue
+         * AttributeValue的值
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.AttributeValue = null;
@@ -792,6 +853,7 @@ class ListAuditsResponse extends  AbstractModel {
 
         /**
          * 查询跟踪集概要集合
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AuditSummary> || null}
          */
         this.AuditSummarys = null;
@@ -856,6 +918,70 @@ class KeyMetadata extends  AbstractModel {
         }
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * DescribeEvents请求参数结构体
+ * @class
+ */
+class DescribeEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始时间戳（单位秒，不超过当前时间 90 天）
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间戳（单位秒，查询时间跨度小于 30 天）
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查看更多日志的凭证
+         * @type {number || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * 返回日志的最大条数（最大 50 条）
+         * @type {number || null}
+         */
+        this.MaxResults = null;
+
+        /**
+         * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码）
+         * @type {Array.<LookupAttribute> || null}
+         */
+        this.LookupAttributes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.MaxResults = 'MaxResults' in params ? params.MaxResults : null;
+
+        if (params.LookupAttributes) {
+            this.LookupAttributes = new Array();
+            for (let z in params.LookupAttributes) {
+                let obj = new LookupAttribute();
+                obj.deserialize(params.LookupAttributes[z]);
+                this.LookupAttributes.push(obj);
+            }
+        }
 
     }
 }
@@ -974,16 +1100,22 @@ class CreateAuditRequest extends  AbstractModel {
         super();
 
         /**
+         * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
+         * @type {number || null}
+         */
+        this.IsEnableCmqNotify = null;
+
+        /**
+         * 管理事件的读写属性。1：只读，2：只写，3：全部。
+         * @type {number || null}
+         */
+        this.ReadWriteAttribute = null;
+
+        /**
          * 跟踪集名称。3-128字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9，下划线 _。
          * @type {string || null}
          */
         this.AuditName = null;
-
-        /**
-         * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
-         * @type {string || null}
-         */
-        this.CosBucketName = null;
 
         /**
          * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
@@ -998,40 +1130,10 @@ class CreateAuditRequest extends  AbstractModel {
         this.IsCreateNewBucket = null;
 
         /**
-         * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
-         * @type {number || null}
-         */
-        this.IsEnableCmqNotify = null;
-
-        /**
-         * 管理事件的读写属性。1：只读，2：只写，3：全部。
-         * @type {number || null}
-         */
-        this.ReadWriteAttribute = null;
-
-        /**
-         * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
+         * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
          * @type {string || null}
          */
-        this.CmqQueueName = null;
-
-        /**
-         * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-         * @type {string || null}
-         */
-        this.CmqRegion = null;
-
-        /**
-         * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-         * @type {number || null}
-         */
-        this.IsCreateNewQueue = null;
-
-        /**
-         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
-         * @type {number || null}
-         */
-        this.IsEnableKmsEncry = null;
+        this.CosBucketName = null;
 
         /**
          * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
@@ -1040,16 +1142,40 @@ class CreateAuditRequest extends  AbstractModel {
         this.KeyId = null;
 
         /**
+         * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
+         * @type {string || null}
+         */
+        this.CmqQueueName = null;
+
+        /**
          * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
          * @type {string || null}
          */
         this.KmsRegion = null;
 
         /**
+         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+         * @type {string || null}
+         */
+        this.CmqRegion = null;
+
+        /**
          * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。可以不填，默认以账号ID作为日志前缀。
          * @type {string || null}
          */
         this.LogFilePrefix = null;
+
+        /**
+         * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+         * @type {number || null}
+         */
+        this.IsCreateNewQueue = null;
 
     }
 
@@ -1060,19 +1186,19 @@ class CreateAuditRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuditName = 'AuditName' in params ? params.AuditName : null;
-        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
-        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
-        this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
         this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
         this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
-        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
-        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
-        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.AuditName = 'AuditName' in params ? params.AuditName : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.IsCreateNewBucket = 'IsCreateNewBucket' in params ? params.IsCreateNewBucket : null;
+        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
         this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
+        this.IsCreateNewQueue = 'IsCreateNewQueue' in params ? params.IsCreateNewQueue : null;
 
     }
 }
@@ -1228,22 +1354,25 @@ class LookUpEventsResponse extends  AbstractModel {
         super();
 
         /**
+         * 查看更多日志的凭证
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
          * 日志集合
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Event> || null}
          */
         this.Events = null;
 
         /**
          * 日志集合是否结束
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.ListOver = null;
-
-        /**
-         * 查看更多日志的凭证
-         * @type {string || null}
-         */
-        this.NextToken = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1260,6 +1389,7 @@ class LookUpEventsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
 
         if (params.Events) {
             this.Events = new Array();
@@ -1270,7 +1400,6 @@ class LookUpEventsResponse extends  AbstractModel {
             }
         }
         this.ListOver = 'ListOver' in params ? params.ListOver : null;
-        this.NextToken = 'NextToken' in params ? params.NextToken : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1320,10 +1449,22 @@ class DescribeAuditResponse extends  AbstractModel {
         super();
 
         /**
-         * 跟踪集名称。
+         * 是否开启cmq消息通知。1：是，0：否。
+         * @type {number || null}
+         */
+        this.IsEnableCmqNotify = null;
+
+        /**
+         * 管理事件读写属性，1：只读，2：只写，3：全部
+         * @type {number || null}
+         */
+        this.ReadWriteAttribute = null;
+
+        /**
+         * CMK的全局唯一标识符。
          * @type {string || null}
          */
-        this.AuditName = null;
+        this.KeyId = null;
 
         /**
          * 跟踪集状态，1：开启，0：停止。
@@ -1332,22 +1473,10 @@ class DescribeAuditResponse extends  AbstractModel {
         this.AuditStatus = null;
 
         /**
-         * 队列名称。
+         * 跟踪集名称。
          * @type {string || null}
          */
-        this.CmqQueueName = null;
-
-        /**
-         * 队列所在地域。
-         * @type {string || null}
-         */
-        this.CmqRegion = null;
-
-        /**
-         * cos存储桶名称。
-         * @type {string || null}
-         */
-        this.CosBucketName = null;
+        this.AuditName = null;
 
         /**
          * cos存储桶所在地域。
@@ -1356,22 +1485,10 @@ class DescribeAuditResponse extends  AbstractModel {
         this.CosRegion = null;
 
         /**
-         * 是否开启cmq消息通知。1：是，0：否。
-         * @type {number || null}
-         */
-        this.IsEnableCmqNotify = null;
-
-        /**
-         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
-         * @type {number || null}
-         */
-        this.IsEnableKmsEncry = null;
-
-        /**
-         * CMK的全局唯一标识符。
+         * 队列名称。
          * @type {string || null}
          */
-        this.KeyId = null;
+        this.CmqQueueName = null;
 
         /**
          * CMK别名。
@@ -1386,16 +1503,28 @@ class DescribeAuditResponse extends  AbstractModel {
         this.KmsRegion = null;
 
         /**
+         * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+         * @type {number || null}
+         */
+        this.IsEnableKmsEncry = null;
+
+        /**
+         * cos存储桶名称。
+         * @type {string || null}
+         */
+        this.CosBucketName = null;
+
+        /**
+         * 队列所在地域。
+         * @type {string || null}
+         */
+        this.CmqRegion = null;
+
+        /**
          * 日志前缀。
          * @type {string || null}
          */
         this.LogFilePrefix = null;
-
-        /**
-         * 管理事件读写属性，1：只读，2：只写，3：全部
-         * @type {number || null}
-         */
-        this.ReadWriteAttribute = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1412,19 +1541,19 @@ class DescribeAuditResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuditName = 'AuditName' in params ? params.AuditName : null;
-        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
-        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
-        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
-        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
-        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
         this.IsEnableCmqNotify = 'IsEnableCmqNotify' in params ? params.IsEnableCmqNotify : null;
-        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.AuditName = 'AuditName' in params ? params.AuditName : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.CmqQueueName = 'CmqQueueName' in params ? params.CmqQueueName : null;
         this.KmsAlias = 'KmsAlias' in params ? params.KmsAlias : null;
         this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
+        this.IsEnableKmsEncry = 'IsEnableKmsEncry' in params ? params.IsEnableKmsEncry : null;
+        this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
+        this.CmqRegion = 'CmqRegion' in params ? params.CmqRegion : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
-        this.ReadWriteAttribute = 'ReadWriteAttribute' in params ? params.ReadWriteAttribute : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1439,16 +1568,22 @@ class Event extends  AbstractModel {
         super();
 
         /**
-         * 资源对
-         * @type {Resource || null}
+         * 日志ID
+         * @type {string || null}
          */
-        this.Resources = null;
+        this.EventId = null;
 
         /**
-         * 主账号ID
-         * @type {number || null}
+         * 用户名
+         * @type {string || null}
          */
-        this.AccountID = null;
+        this.Username = null;
+
+        /**
+         * 事件时间
+         * @type {string || null}
+         */
+        this.EventTime = null;
 
         /**
          * 日志详情
@@ -1457,16 +1592,16 @@ class Event extends  AbstractModel {
         this.CloudAuditEvent = null;
 
         /**
+         * 资源类型中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
+         * @type {string || null}
+         */
+        this.ResourceTypeCn = null;
+
+        /**
          * 鉴权错误码
          * @type {number || null}
          */
         this.ErrorCode = null;
-
-        /**
-         * 日志ID
-         * @type {string || null}
-         */
-        this.EventId = null;
 
         /**
          * 事件名称
@@ -1475,28 +1610,17 @@ class Event extends  AbstractModel {
         this.EventName = null;
 
         /**
-         * 事件名称中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
+         * 证书ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.EventNameCn = null;
-
-        /**
-         * 事件地域
-         * @type {string || null}
-         */
-        this.EventRegion = null;
+        this.SecretId = null;
 
         /**
          * 请求来源
          * @type {string || null}
          */
         this.EventSource = null;
-
-        /**
-         * 事件时间
-         * @type {string || null}
-         */
-        this.EventTime = null;
 
         /**
          * 请求ID
@@ -1511,28 +1635,41 @@ class Event extends  AbstractModel {
         this.ResourceRegion = null;
 
         /**
-         * 资源类型中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
-         * @type {string || null}
+         * 主账号ID
+         * @type {number || null}
          */
-        this.ResourceTypeCn = null;
-
-        /**
-         * 证书ID
-         * @type {string || null}
-         */
-        this.SecretId = null;
+        this.AccountID = null;
 
         /**
          * 源IP
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SourceIPAddress = null;
 
         /**
-         * 用户名
+         * 事件名称中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
          * @type {string || null}
          */
-        this.Username = null;
+        this.EventNameCn = null;
+
+        /**
+         * 资源对
+         * @type {Resource || null}
+         */
+        this.Resources = null;
+
+        /**
+         * 事件地域
+         * @type {string || null}
+         */
+        this.EventRegion = null;
+
+        /**
+         * IP 归属地
+         * @type {string || null}
+         */
+        this.Location = null;
 
     }
 
@@ -1543,27 +1680,28 @@ class Event extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.Username = 'Username' in params ? params.Username : null;
+        this.EventTime = 'EventTime' in params ? params.EventTime : null;
+        this.CloudAuditEvent = 'CloudAuditEvent' in params ? params.CloudAuditEvent : null;
+        this.ResourceTypeCn = 'ResourceTypeCn' in params ? params.ResourceTypeCn : null;
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.EventName = 'EventName' in params ? params.EventName : null;
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.EventSource = 'EventSource' in params ? params.EventSource : null;
+        this.RequestID = 'RequestID' in params ? params.RequestID : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
+        this.AccountID = 'AccountID' in params ? params.AccountID : null;
+        this.SourceIPAddress = 'SourceIPAddress' in params ? params.SourceIPAddress : null;
+        this.EventNameCn = 'EventNameCn' in params ? params.EventNameCn : null;
 
         if (params.Resources) {
             let obj = new Resource();
             obj.deserialize(params.Resources)
             this.Resources = obj;
         }
-        this.AccountID = 'AccountID' in params ? params.AccountID : null;
-        this.CloudAuditEvent = 'CloudAuditEvent' in params ? params.CloudAuditEvent : null;
-        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.EventName = 'EventName' in params ? params.EventName : null;
-        this.EventNameCn = 'EventNameCn' in params ? params.EventNameCn : null;
         this.EventRegion = 'EventRegion' in params ? params.EventRegion : null;
-        this.EventSource = 'EventSource' in params ? params.EventSource : null;
-        this.EventTime = 'EventTime' in params ? params.EventTime : null;
-        this.RequestID = 'RequestID' in params ? params.RequestID : null;
-        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
-        this.ResourceTypeCn = 'ResourceTypeCn' in params ? params.ResourceTypeCn : null;
-        this.SecretId = 'SecretId' in params ? params.SecretId : null;
-        this.SourceIPAddress = 'SourceIPAddress' in params ? params.SourceIPAddress : null;
-        this.Username = 'Username' in params ? params.Username : null;
+        this.Location = 'Location' in params ? params.Location : null;
 
     }
 }
@@ -1577,12 +1715,6 @@ class AuditSummary extends  AbstractModel {
         super();
 
         /**
-         * 跟踪集名称
-         * @type {string || null}
-         */
-        this.AuditName = null;
-
-        /**
          * 跟踪集状态，1：开启，0：关闭
          * @type {number || null}
          */
@@ -1593,6 +1725,12 @@ class AuditSummary extends  AbstractModel {
          * @type {string || null}
          */
         this.CosBucketName = null;
+
+        /**
+         * 跟踪集名称
+         * @type {string || null}
+         */
+        this.AuditName = null;
 
         /**
          * 日志前缀
@@ -1609,9 +1747,9 @@ class AuditSummary extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AuditName = 'AuditName' in params ? params.AuditName : null;
         this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
         this.CosBucketName = 'CosBucketName' in params ? params.CosBucketName : null;
+        this.AuditName = 'AuditName' in params ? params.AuditName : null;
         this.LogFilePrefix = 'LogFilePrefix' in params ? params.LogFilePrefix : null;
 
     }
@@ -1625,6 +1763,7 @@ module.exports = {
     DeleteAuditResponse: DeleteAuditResponse,
     UpdateAuditRequest: UpdateAuditRequest,
     InquireAuditCreditRequest: InquireAuditCreditRequest,
+    DescribeEventsResponse: DescribeEventsResponse,
     ListCosEnableRegionResponse: ListCosEnableRegionResponse,
     LookUpEventsRequest: LookUpEventsRequest,
     StartLoggingRequest: StartLoggingRequest,
@@ -1639,6 +1778,7 @@ module.exports = {
     LookupAttribute: LookupAttribute,
     ListAuditsResponse: ListAuditsResponse,
     KeyMetadata: KeyMetadata,
+    DescribeEventsRequest: DescribeEventsRequest,
     UpdateAuditResponse: UpdateAuditResponse,
     DescribeAuditRequest: DescribeAuditRequest,
     ListKeyAliasByRegionRequest: ListKeyAliasByRegionRequest,

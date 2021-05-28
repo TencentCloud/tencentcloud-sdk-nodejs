@@ -16,13 +16,22 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const Filters = models.Filters;
+const Overview = models.Overview;
 const RiskDetails = models.RiskDetails;
+const DescribeTextStatRequest = models.DescribeTextStatRequest;
 const TextModerationRequest = models.TextModerationRequest;
-const DetailResults = models.DetailResults;
 const AccountTipoffAccessRequest = models.AccountTipoffAccessRequest;
+const TextLib = models.TextLib;
+const TrendCount = models.TrendCount;
+const DescribeTextLibResponse = models.DescribeTextLibResponse;
+const DetailResults = models.DetailResults;
+const EvilCount = models.EvilCount;
 const Device = models.Device;
 const TipoffResponse = models.TipoffResponse;
 const AccountTipoffAccessResponse = models.AccountTipoffAccessResponse;
+const DescribeTextLibRequest = models.DescribeTextLibRequest;
+const DescribeTextStatResponse = models.DescribeTextStatResponse;
 const TextModerationResponse = models.TextModerationResponse;
 const User = models.User;
 
@@ -38,6 +47,17 @@ class TmsClient extends AbstractClient {
     }
     
     /**
+     * 控制台识别统计
+     * @param {DescribeTextStatRequest} req
+     * @param {function(string, DescribeTextStatResponse):void} cb
+     * @public
+     */
+    DescribeTextStat(req, cb) {
+        let resp = new DescribeTextStatResponse();
+        this.request("DescribeTextStat", req, resp, cb);
+    }
+
+    /**
      * 举报恶意账号
      * @param {AccountTipoffAccessRequest} req
      * @param {function(string, AccountTipoffAccessResponse):void} cb
@@ -49,7 +69,7 @@ class TmsClient extends AbstractClient {
     }
 
     /**
-     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
+     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别可能令人反感、不安全或不适宜的文本内容，同时支持用户配置词库黑白名单，打击自定义识别类型的图片。
      * @param {TextModerationRequest} req
      * @param {function(string, TextModerationResponse):void} cb
      * @public
@@ -57,6 +77,17 @@ class TmsClient extends AbstractClient {
     TextModeration(req, cb) {
         let resp = new TextModerationResponse();
         this.request("TextModeration", req, resp, cb);
+    }
+
+    /**
+     * 控制台获取用户词库列表
+     * @param {DescribeTextLibRequest} req
+     * @param {function(string, DescribeTextLibResponse):void} cb
+     * @public
+     */
+    DescribeTextLib(req, cb) {
+        let resp = new DescribeTextLibResponse();
+        this.request("DescribeTextLib", req, resp, cb);
     }
 
 

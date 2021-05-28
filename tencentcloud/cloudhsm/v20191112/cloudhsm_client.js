@@ -19,11 +19,14 @@ const AbstractClient = require('../../common/abstract_client')
 const Subnet = models.Subnet;
 const DescribeSubnetRequest = models.DescribeSubnetRequest;
 const DescribeVsmsResponse = models.DescribeVsmsResponse;
+const DescribeSupportedHsmResponse = models.DescribeSupportedHsmResponse;
 const InquiryPriceBuyVsmRequest = models.InquiryPriceBuyVsmRequest;
 const DescribeVpcResponse = models.DescribeVpcResponse;
 const ModifyVsmAttributesRequest = models.ModifyVsmAttributesRequest;
 const DescribeSubnetResponse = models.DescribeSubnetResponse;
-const DescribeHSMByVpcIdRequest = models.DescribeHSMByVpcIdRequest;
+const VsmInfo = models.VsmInfo;
+const DescribeSupportedHsmRequest = models.DescribeSupportedHsmRequest;
+const SgUnit = models.SgUnit;
 const DescribeHSMByVpcIdResponse = models.DescribeHSMByVpcIdResponse;
 const DescribeUsgRuleResponse = models.DescribeUsgRuleResponse;
 const Tag = models.Tag;
@@ -33,13 +36,15 @@ const Vpc = models.Vpc;
 const DescribeUsgRequest = models.DescribeUsgRequest;
 const DescribeVsmAttributesResponse = models.DescribeVsmAttributesResponse;
 const TagFilter = models.TagFilter;
-const SgUnit = models.SgUnit;
+const DescribeHSMByVpcIdRequest = models.DescribeHSMByVpcIdRequest;
 const UsgRuleDetail = models.UsgRuleDetail;
 const InquiryPriceBuyVsmResponse = models.InquiryPriceBuyVsmResponse;
 const DescribeHSMBySubnetIdResponse = models.DescribeHSMBySubnetIdResponse;
+const HsmInfo = models.HsmInfo;
 const DescribeUsgResponse = models.DescribeUsgResponse;
 const DescribeHSMBySubnetIdRequest = models.DescribeHSMBySubnetIdRequest;
 const DescribeVsmsRequest = models.DescribeVsmsRequest;
+const DeviceInfo = models.DeviceInfo;
 const DescribeUsgRuleRequest = models.DescribeUsgRuleRequest;
 const ModifyVsmAttributesResponse = models.ModifyVsmAttributesResponse;
 const DescribeVsmAttributesRequest = models.DescribeVsmAttributesRequest;
@@ -142,6 +147,17 @@ class CloudhsmClient extends AbstractClient {
     DescribeSubnet(req, cb) {
         let resp = new DescribeSubnetResponse();
         this.request("DescribeSubnet", req, resp, cb);
+    }
+
+    /**
+     * 获取当前地域所支持的设备列表
+     * @param {DescribeSupportedHsmRequest} req
+     * @param {function(string, DescribeSupportedHsmResponse):void} cb
+     * @public
+     */
+    DescribeSupportedHsm(req, cb) {
+        let resp = new DescribeSupportedHsmResponse();
+        this.request("DescribeSupportedHsm", req, resp, cb);
     }
 
     /**

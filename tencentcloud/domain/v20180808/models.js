@@ -71,6 +71,14 @@ class BatchModifyDomainInfoRequest extends  AbstractModel {
          */
         this.TemplateId = null;
 
+        /**
+         * true： 开启60天内禁止转移注册商锁定
+false：关闭60天内禁止转移注册商锁定
+默认 true
+         * @type {boolean || null}
+         */
+        this.LockTransfer = null;
+
     }
 
     /**
@@ -82,6 +90,7 @@ class BatchModifyDomainInfoRequest extends  AbstractModel {
         }
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.LockTransfer = 'LockTransfer' in params ? params.LockTransfer : null;
 
     }
 }
@@ -101,7 +110,7 @@ class TemplateInfo extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * 认证状态
+         * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
          * @type {string || null}
          */
         this.AuditStatus = null;
@@ -125,7 +134,7 @@ class TemplateInfo extends  AbstractModel {
         this.UserUin = null;
 
         /**
-         * 是否是默认模板
+         * 是否是默认模板: 是:yes，否:no
          * @type {string || null}
          */
         this.IsDefault = null;
@@ -291,6 +300,22 @@ class TransferInDomainBatchRequest extends  AbstractModel {
          */
         this.PayMode = null;
 
+        /**
+         * 自动续费开关。有两个可选值：
+0 表示关闭，不自动续费（默认值）
+1 表示开启，将自动续费
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * true： 开启60天内禁止转移注册商锁定
+false：关闭60天内禁止转移注册商锁定
+默认 true
+         * @type {boolean || null}
+         */
+        this.LockTransfer = null;
+
     }
 
     /**
@@ -304,6 +329,8 @@ class TransferInDomainBatchRequest extends  AbstractModel {
         this.PassWords = 'PassWords' in params ? params.PassWords : null;
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.LockTransfer = 'LockTransfer' in params ? params.LockTransfer : null;
 
     }
 }
@@ -472,6 +499,15 @@ class RenewDomainBatchRequest extends  AbstractModel {
          */
         this.PayMode = null;
 
+        /**
+         * 自动续费开关。有三个可选值：
+0 表示关闭，不自动续费
+1 表示开启，将自动续费
+2 表示不处理，保留域名原有状态（默认值）
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -484,23 +520,24 @@ class RenewDomainBatchRequest extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
 
 /**
- * TransferInDomainBatch返回参数结构体
+ * DescribeTemplate返回参数结构体
  * @class
  */
-class TransferInDomainBatchResponse extends  AbstractModel {
+class DescribeTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 日志ID
-         * @type {number || null}
+         * 模板信息
+         * @type {TemplateInfo || null}
          */
-        this.LogId = null;
+        this.Template = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -517,7 +554,12 @@ class TransferInDomainBatchResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogId = 'LogId' in params ? params.LogId : null;
+
+        if (params.Template) {
+            let obj = new TemplateInfo();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -617,7 +659,7 @@ class CheckDomainResponse extends  AbstractModel {
         this.FeeRenew = null;
 
         /**
-         * 域名真实价格
+         * 域名真实价格, 溢价词时价格跟年限有关，非溢价词时价格为1年的价格
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -773,6 +815,69 @@ class PriceInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeTemplate请求参数结构体
+ * @class
+ */
+class DescribeTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * TransferInDomainBatch返回参数结构体
+ * @class
+ */
+class TransferInDomainBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志ID
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BatchModifyDomainInfo返回参数结构体
  * @class
  */
@@ -822,6 +927,13 @@ class DescribeDomainBaseInfoResponse extends  AbstractModel {
         this.DomainInfo = null;
 
         /**
+         * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -842,6 +954,7 @@ class DescribeDomainBaseInfoResponse extends  AbstractModel {
             obj.deserialize(params.DomainInfo)
             this.DomainInfo = obj;
         }
+        this.Uin = 'Uin' in params ? params.Uin : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1635,7 +1748,7 @@ class CreateDomainBatchRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板ID
+         * 模板ID。详情请查看：[获取模板列表](https://cloud.tencent.com/document/product/242/48940)
          * @type {string || null}
          */
         this.TemplateId = null;
@@ -1653,10 +1766,24 @@ class CreateDomainBatchRequest extends  AbstractModel {
         this.Domains = null;
 
         /**
-         * 付费模式 0手动在线付费，1使用余额付费
+         * 付费模式 0手动在线付费，1使用余额付费，2使用特惠包
          * @type {number || null}
          */
         this.PayMode = null;
+
+        /**
+         * 自动续费开关。有两个可选值：
+0 表示关闭，不自动续费（默认值）
+1 表示开启，将自动续费
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 使用的特惠包ID，PayMode为2时必填
+         * @type {string || null}
+         */
+        this.PackageResourceId = null;
 
     }
 
@@ -1671,6 +1798,8 @@ class CreateDomainBatchRequest extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.PackageResourceId = 'PackageResourceId' in params ? params.PackageResourceId : null;
 
     }
 }
@@ -1808,12 +1937,33 @@ TransferFailed：转入失败
         this.BuyStatus = null;
 
         /**
-         * 注册类型
-epp （腾讯云自有域名）
-xinnet (新网域名)
+         * 注册商类型
+epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）
+qcloud: Tencent Cloud Computing (Beijing) Limited Liability Company（腾讯云计算（北京）有限责任公司）
+yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）
+xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
          * @type {string || null}
          */
         this.RegistrarType = null;
+
+        /**
+         * 域名绑定的ns
+         * @type {Array.<string> || null}
+         */
+        this.NameServer = null;
+
+        /**
+         * true：开启锁定
+false：关闭锁定
+         * @type {boolean || null}
+         */
+        this.LockTransfer = null;
+
+        /**
+         * 锁定结束时间
+         * @type {string || null}
+         */
+        this.LockEndTime = null;
 
     }
 
@@ -1835,6 +1985,9 @@ xinnet (新网域名)
         this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
         this.BuyStatus = 'BuyStatus' in params ? params.BuyStatus : null;
         this.RegistrarType = 'RegistrarType' in params ? params.RegistrarType : null;
+        this.NameServer = 'NameServer' in params ? params.NameServer : null;
+        this.LockTransfer = 'LockTransfer' in params ? params.LockTransfer : null;
+        this.LockEndTime = 'LockEndTime' in params ? params.LockEndTime : null;
 
     }
 }
@@ -2219,6 +2372,12 @@ class DescribeTemplateListRequest extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 域名所有者筛选
+         * @type {string || null}
+         */
+        this.Keyword = null;
+
     }
 
     /**
@@ -2232,6 +2391,7 @@ class DescribeTemplateListRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Keyword = 'Keyword' in params ? params.Keyword : null;
 
     }
 }
@@ -2406,11 +2566,13 @@ module.exports = {
     DomainBatchDetailSet: DomainBatchDetailSet,
     ModifyDomainDNSBatchResponse: ModifyDomainDNSBatchResponse,
     RenewDomainBatchRequest: RenewDomainBatchRequest,
-    TransferInDomainBatchResponse: TransferInDomainBatchResponse,
+    DescribeTemplateResponse: DescribeTemplateResponse,
     UpdateProhibitionBatchResponse: UpdateProhibitionBatchResponse,
     CheckDomainResponse: CheckDomainResponse,
     RenewDomainBatchResponse: RenewDomainBatchResponse,
     PriceInfo: PriceInfo,
+    DescribeTemplateRequest: DescribeTemplateRequest,
+    TransferInDomainBatchResponse: TransferInDomainBatchResponse,
     BatchModifyDomainInfoResponse: BatchModifyDomainInfoResponse,
     DescribeDomainBaseInfoResponse: DescribeDomainBaseInfoResponse,
     DescribeTemplateListResponse: DescribeTemplateListResponse,

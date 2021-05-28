@@ -31,38 +31,48 @@ const DeleteTopicRequest = models.DeleteTopicRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const GroupInfoTopics = models.GroupInfoTopics;
 const TopicResult = models.TopicResult;
+const Region = models.Region;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
 const CreateInstancePreData = models.CreateInstancePreData;
 const DescribeACLResponse = models.DescribeACLResponse;
 const JgwOperateResponse = models.JgwOperateResponse;
+const ZoneInfo = models.ZoneInfo;
+const DescribeCkafkaZoneRequest = models.DescribeCkafkaZoneRequest;
 const Topic = models.Topic;
 const Tag = models.Tag;
 const GroupResponse = models.GroupResponse;
 const DescribeTopicAttributesResponse = models.DescribeTopicAttributesResponse;
 const RouteResponse = models.RouteResponse;
 const DescribeGroupResponse = models.DescribeGroupResponse;
+const DeleteAclRuleRequest = models.DeleteAclRuleRequest;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
 const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
-const GroupOffsetTopic = models.GroupOffsetTopic;
+const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
 const CreatePartitionResponse = models.CreatePartitionResponse;
+const ClusterInfo = models.ClusterInfo;
+const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
 const DeleteUserResponse = models.DeleteUserResponse;
 const CreateAclRequest = models.CreateAclRequest;
 const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
 const DescribeTopicResponse = models.DescribeTopicResponse;
 const ConsumerGroupResponse = models.ConsumerGroupResponse;
 const CreateTopicIpWhiteListResponse = models.CreateTopicIpWhiteListResponse;
-const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
+const GroupOffsetTopic = models.GroupOffsetTopic;
 const ModifyGroupOffsetsResponse = models.ModifyGroupOffsetsResponse;
 const Partition = models.Partition;
 const CreateAclResponse = models.CreateAclResponse;
 const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteAclResponse = models.DeleteAclResponse;
+const DynamicRetentionTime = models.DynamicRetentionTime;
 const DescribeRouteRequest = models.DescribeRouteRequest;
+const DescribeRegionRequest = models.DescribeRegionRequest;
 const InstanceConfigDO = models.InstanceConfigDO;
+const DeleteAclRuleResponse = models.DeleteAclRuleResponse;
 const UserResponse = models.UserResponse;
 const DescribeGroupInfoRequest = models.DescribeGroupInfoRequest;
 const DescribeGroupInfoResponse = models.DescribeGroupInfoResponse;
+const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
 const DescribeUserResponse = models.DescribeUserResponse;
 const AppIdResponse = models.AppIdResponse;
 const DescribeTopicRequest = models.DescribeTopicRequest;
@@ -70,14 +80,16 @@ const CreatePartitionRequest = models.CreatePartitionRequest;
 const Group = models.Group;
 const DescribeAppInfoResponse = models.DescribeAppInfoResponse;
 const AclResponse = models.AclResponse;
+const ZoneResponse = models.ZoneResponse;
 const Instance = models.Instance;
 const DescribeInstanceAttributesResponse = models.DescribeInstanceAttributesResponse;
 const TopicDetailResponse = models.TopicDetailResponse;
 const Config = models.Config;
 const ModifyPasswordRequest = models.ModifyPasswordRequest;
+const CreateInstancePreRequest = models.CreateInstancePreRequest;
 const ModifyInstanceAttributesRequest = models.ModifyInstanceAttributesRequest;
-const ModifyTopicAttributesResponse = models.ModifyTopicAttributesResponse;
-const DescribeConsumerGroupRequest = models.DescribeConsumerGroupRequest;
+const DescribeRegionResponse = models.DescribeRegionResponse;
+const CreateTopicResponse = models.CreateTopicResponse;
 const VipEntity = models.VipEntity;
 const ConsumerGroupTopic = models.ConsumerGroupTopic;
 const User = models.User;
@@ -85,7 +97,7 @@ const GroupOffsetPartition = models.GroupOffsetPartition;
 const DeleteTopicResponse = models.DeleteTopicResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const InstanceAttributesResponse = models.InstanceAttributesResponse;
-const DescribeGroupRequest = models.DescribeGroupRequest;
+const DescribeCkafkaZoneResponse = models.DescribeCkafkaZoneResponse;
 const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const CreateUserRequest = models.CreateUserRequest;
@@ -107,15 +119,16 @@ const ModifyGroupOffsetsRequest = models.ModifyGroupOffsetsRequest;
 const CreateTopicIpWhiteListRequest = models.CreateTopicIpWhiteListRequest;
 const Route = models.Route;
 const Acl = models.Acl;
+const TopicRetentionTimeConfigRsp = models.TopicRetentionTimeConfigRsp;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
-const CreateTopicResponse = models.CreateTopicResponse;
-const CreateInstancePreRequest = models.CreateInstancePreRequest;
+const DescribeGroupRequest = models.DescribeGroupRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
 const InstanceDetail = models.InstanceDetail;
 const DescribeTopicDetailResponse = models.DescribeTopicDetailResponse;
 const SubscribedInfo = models.SubscribedInfo;
+const Price = models.Price;
 
 
 /**
@@ -383,6 +396,17 @@ class CkafkaClient extends AbstractClient {
     }
 
     /**
+     * 删除ACL规则
+     * @param {DeleteAclRuleRequest} req
+     * @param {function(string, DeleteAclRuleResponse):void} cb
+     * @public
+     */
+    DeleteAclRule(req, cb) {
+        let resp = new DeleteAclRuleResponse();
+        this.request("DeleteAclRule", req, resp, cb);
+    }
+
+    /**
      * 删除用户
      * @param {DeleteUserRequest} req
      * @param {function(string, DeleteUserResponse):void} cb
@@ -414,6 +438,28 @@ class CkafkaClient extends AbstractClient {
     DescribeTopic(req, cb) {
         let resp = new DescribeTopicResponse();
         this.request("DescribeTopic", req, resp, cb);
+    }
+
+    /**
+     * 用于查看ckafka的可用区列表
+     * @param {DescribeCkafkaZoneRequest} req
+     * @param {function(string, DescribeCkafkaZoneResponse):void} cb
+     * @public
+     */
+    DescribeCkafkaZone(req, cb) {
+        let resp = new DescribeCkafkaZoneResponse();
+        this.request("DescribeCkafkaZone", req, resp, cb);
+    }
+
+    /**
+     * 枚举地域,只支持广州地域
+     * @param {DescribeRegionRequest} req
+     * @param {function(string, DescribeRegionResponse):void} cb
+     * @public
+     */
+    DescribeRegion(req, cb) {
+        let resp = new DescribeRegionResponse();
+        this.request("DescribeRegion", req, resp, cb);
     }
 
     /**

@@ -425,6 +425,106 @@ class UpdateCaptchaAppIdInfoRequest extends  AbstractModel {
 }
 
 /**
+ * 拦截策略返回信息
+ * @class
+ */
+class OutputManageMarketingRiskValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账号 ID。对应输入参数： AccountType 是 1 时，对应 QQ 的 OpenID。
+AccountType 是 2 时，对应微信的 OpenID/UnionID。
+AccountType 是 4 时，对应手机号。
+AccountType 是 8 时，对应 imei、idfa、imeiMD5 或者 idfaMD5。
+AccountType 是 0 时，对应账号信息。
+AccountType 是 10004 时，对应手机号的 MD5。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 操作时间戳，单位秒（对应输入参数）。 
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PostTime = null;
+
+        /**
+         * 对应输入参数，AccountType 是 QQ 或微信开放账号时，用于标识 QQ 或微信用户登录 后关联业务自身的账号 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AssociateAccount = null;
+
+        /**
+         * 业务详情。 注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * 风险值 pass : 无恶意
+review：需要人工审核
+reject：拒绝，高风险恶意
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RiskLevel = null;
+
+        /**
+         * 风险类型，请查看下面详细说明 注意：此字段可能返回 null，表示取不到有效值。
+账号风险	
+        账号信用低	1	账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素
+	疑似 低活跃账号	11	账号活跃度与正常用户有差异
+	垃圾账号	2	疑似批量注册小号，近期存在严重违规或大量举报
+	疑似小号	21	账号有疑似线上养号，小号等行为
+	疑似 违规账号	22	账号曾有违规行为、曾被举报过、曾因违规被处罚过等
+	无效账号	3	送检账号参数无法成功解析，请检查微信 openid 是否有
+	黑名单	4	该账号在业务侧有过拉黑记录
+	白名单 	5	业务自行有添加过白名单记录
+行为风险	
+        批量操作	101	存在 ip/设备/环境等因素的聚集性异常
+	疑似 IP 属性聚集 	1011	出现 IP 聚集
+	疑似 设备属性聚集 	1012	出现设备聚集
+	自动机 	103	疑似自动机批量请求
+	微信登录态无效 	104	检查 wxtoken 参数，是否已经失效
+环境风险	
+        环境异常 	201	操作 ip/设备/环境存在异常。当前 ip 为非常用 ip 或恶意 ip 段
+	疑似 非常用IP请求 	2011	当前请求 IP 非该账号常用 IP
+	疑似 IP 异常 	2012	使用 idc 机房 ip 或 使用代理 ip 或 使用恶意 ip 
+	非公网有效 ip 	205	传进来的 IP 地址为内网 ip 地址或者 ip 保留地
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.RiskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.PostTime = 'PostTime' in params ? params.PostTime : null;
+        this.AssociateAccount = 'AssociateAccount' in params ? params.AssociateAccount : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.RiskLevel = 'RiskLevel' in params ? params.RiskLevel : null;
+        this.RiskType = 'RiskType' in params ? params.RiskType : null;
+
+    }
+}
+
+/**
  * DescribeCaptchaOperData 接口 返回数据类型集合
  * @class
  */
@@ -668,6 +768,104 @@ class UpdateCaptchaAppIdInfoResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCaptchaMiniRiskResult请求参数结构体
+ * @class
+ */
+class DescribeCaptchaMiniRiskResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固定填值：9（滑块验证码）
+         * @type {number || null}
+         */
+        this.CaptchaType = null;
+
+        /**
+         * 验证码返回给用户的票据
+         * @type {string || null}
+         */
+        this.Ticket = null;
+
+        /**
+         * 用户操作来源的外网 IP
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * 验证码应用APPID
+         * @type {number || null}
+         */
+        this.CaptchaAppId = null;
+
+        /**
+         * 用于服务器端校验验证码票据的验证密钥，请妥善保密，请勿泄露给第三方
+         * @type {string || null}
+         */
+        this.AppSecretKey = null;
+
+        /**
+         * 业务 ID，网站或应用在多个业务中使用此服务，通过此 ID 区分统计数据
+         * @type {number || null}
+         */
+        this.BusinessId = null;
+
+        /**
+         * 场景 ID，网站或应用的业务下有多个场景使用此服务，通过此 ID 区分统计数据
+         * @type {number || null}
+         */
+        this.SceneId = null;
+
+        /**
+         * mac 地址或设备唯一标识
+         * @type {string || null}
+         */
+        this.MacAddress = null;
+
+        /**
+         * 手机设备号
+         * @type {string || null}
+         */
+        this.Imei = null;
+
+        /**
+         * 验证场景：1 活动防刷场景，2 登录保护场景，3 注册保护场景。根据需求选择场景参数。
+         * @type {number || null}
+         */
+        this.SceneCode = null;
+
+        /**
+         * 用户操作来源的微信开放账号
+         * @type {string || null}
+         */
+        this.WeChatOpenId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaType = 'CaptchaType' in params ? params.CaptchaType : null;
+        this.Ticket = 'Ticket' in params ? params.Ticket : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
+        this.AppSecretKey = 'AppSecretKey' in params ? params.AppSecretKey : null;
+        this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+        this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
+        this.Imei = 'Imei' in params ? params.Imei : null;
+        this.SceneCode = 'SceneCode' in params ? params.SceneCode : null;
+        this.WeChatOpenId = 'WeChatOpenId' in params ? params.WeChatOpenId : null;
+
+    }
+}
+
+/**
  * 用户注册的APPID和应用名称对象
  * @class
  */
@@ -809,7 +1007,7 @@ class DescribeCaptchaTicketDataRequest extends  AbstractModel {
         this.CaptchaAppId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间 例如：20200909
          * @type {number || null}
          */
         this.Start = null;
@@ -993,6 +1191,73 @@ class DescribeCaptchaDataSumRequest extends  AbstractModel {
         this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
         this.Start = 'Start' in params ? params.Start : null;
         this.End = 'End' in params ? params.End : null;
+
+    }
+}
+
+/**
+ * DescribeCaptchaMiniRiskResult返回参数结构体
+ * @class
+ */
+class DescribeCaptchaMiniRiskResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 1 ticket verification succeeded 票据验证成功
+7 CaptchaAppId does not match 票据与验证码应用APPID不匹配
+8 ticket expired 票据超时
+10 ticket format error 票据格式不正确
+15 ticket decryption failed 票据解密失败
+16 CaptchaAppId wrong format 检查验证码应用APPID错误
+21 ticket error 票据验证错误
+25 bad visitor 策略拦截
+26 system internal error 系统内部错误
+100 param err 参数校验错误
+         * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 状态描述及验证错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 拦截策略返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OutputManageMarketingRiskValue || null}
+         */
+        this.ManageMarketingRiskValue = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+
+        if (params.ManageMarketingRiskValue) {
+            let obj = new OutputManageMarketingRiskValue();
+            obj.deserialize(params.ManageMarketingRiskValue)
+            this.ManageMarketingRiskValue = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1182,7 +1447,7 @@ class DescribeCaptchaResultRequest extends  AbstractModel {
         this.Ticket = null;
 
         /**
-         * 用户操作来源的外网 IP
+         * 透传业务侧获取到的验证码使用者的IP
          * @type {string || null}
          */
         this.UserIp = null;
@@ -1268,28 +1533,29 @@ class DescribeCaptchaResultResponse extends  AbstractModel {
         super();
 
         /**
-         * 1	OK	验证通过
-6	user code len error	验证码长度不匹配
-7	captcha no match	验证码答案不匹配/Randstr参数不匹配
-8	verify timeout	验证码签名超时
-9	Sequnce repeat	验证码签名重放
-10	Sequnce invalid	验证码签名序列
-11	Cookie invalid	验证码cookie信息不合法
-12	sig len error	签名长度错误
-13	verify ip no match	ip不匹配
-15	decrypt fail	验证码签名解密失败
-16	appid no match	验证码强校验appid错误
-17	cmd no much	验证码系统命令不匹配
-18	uin no match	号码不匹配
-19	seq redirect	重定向验证
-20	opt no vcode	操作使用pt免验证码校验错误
-21	diff	差别，验证错误
-22	captcha type not match	验证码类型与拉取时不一致
-23	verify type error	验证类型错误
-24	invalid pkg	非法请求包
-25	bad visitor	策略拦截
-26	system busy	系统内部错误
-100	param err	appsecretkey 参数校验错误
+         * 1 OK 验证通过
+6 user code len error 验证码长度不匹配，请检查请求是否带Randstr参数，Randstr参数大小写是否有误
+7 captcha no match 验证码答案不匹配/Randstr参数不匹配，请重新生成Randstr、Ticket进行校验
+8 verify timeout 验证码签名超时，票据已过期，请重新生成Randstr、Ticket票进行校验
+9 Sequnce repeat 验证码签名重放，票据重复使用，请重新生成Randstr、Ticket进行校验
+10 Sequnce invalid 验证码签名序列
+11 Cookie invalid 验证码cookie信息不合法，非法请求，可能存在不规范接入
+12 sig len error 签名长度错误
+13 verify ip no match ip不匹配，非法请求，可能存在不规范接入
+15 decrypt fail 验证码签名解密失败，票据校验失败，请检查Ticket票据是否与前端返回Ticket一致
+16 appid no match 验证码强校验appid错误，请检查CaptchaAppId是否为控制台基础配置界面系统分配的APPID
+17 cmd no much 验证码系统命令不匹配
+18 uin no match 号码不匹配
+19 seq redirect 重定向验证
+20 opt no vcode 操作使用pt免验证码校验错误
+21 diff 差别，验证错误
+22 captcha type not match 验证码类型与拉取时不一致
+23 verify type error 验证类型错误
+24 invalid pkg 非法请求包
+25 bad visitor 策略拦截
+26 system busy 系统内部错误
+100 param err appsecretkey 参数校验错误，请检查AppSecretKey是否与控制台基础配置界面系统分配的APPID、AppSecretKey相对应
+104 Ticket Reuse 票据重复使用，同个票据验证多次，请重新生成Randstr、Ticket进行校验
          * @type {number || null}
          */
         this.CaptchaCode = null;
@@ -1715,7 +1981,7 @@ class DescribeCaptchaMiniResultRequest extends  AbstractModel {
         this.Ticket = null;
 
         /**
-         * 用户操作来源的外网 IP
+         * 透传业务侧获取到的验证码使用者的IP
          * @type {string || null}
          */
         this.UserIp = null;
@@ -1966,19 +2232,19 @@ class DescribeCaptchaMiniDataRequest extends  AbstractModel {
         this.CaptchaAppId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间 例如：2019112900
          * @type {number || null}
          */
         this.Start = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间 例如：2019112902
          * @type {number || null}
          */
         this.End = null;
 
         /**
-         * 查询类型
+         * 查询类型 安全验证码小程序插件分类查询数据接口，请求量type=0、通过量type=1、验证量type=2、拦截量type=3 小时级查询（五小时左右延迟）
          * @type {number || null}
          */
         this.Type = null;
@@ -2007,11 +2273,13 @@ module.exports = {
     DescribeCaptchaMiniOperDataResponse: DescribeCaptchaMiniOperDataResponse,
     DescribeCaptchaMiniDataSumResponse: DescribeCaptchaMiniDataSumResponse,
     UpdateCaptchaAppIdInfoRequest: UpdateCaptchaAppIdInfoRequest,
+    OutputManageMarketingRiskValue: OutputManageMarketingRiskValue,
     CaptchaOperDataRes: CaptchaOperDataRes,
     TicketInterceptUnit: TicketInterceptUnit,
     DescribeCaptchaUserAllAppIdRequest: DescribeCaptchaUserAllAppIdRequest,
     DescribeCaptchaMiniDataResponse: DescribeCaptchaMiniDataResponse,
     UpdateCaptchaAppIdInfoResponse: UpdateCaptchaAppIdInfoResponse,
+    DescribeCaptchaMiniRiskResultRequest: DescribeCaptchaMiniRiskResultRequest,
     CaptchaUserAllAppId: CaptchaUserAllAppId,
     DescribeCaptchaDataSumResponse: DescribeCaptchaDataSumResponse,
     DescribeCaptchaTicketDataRequest: DescribeCaptchaTicketDataRequest,
@@ -2019,6 +2287,7 @@ module.exports = {
     CaptchaOperDataTryTimesUnit: CaptchaOperDataTryTimesUnit,
     DescribeCaptchaOperDataRequest: DescribeCaptchaOperDataRequest,
     DescribeCaptchaDataSumRequest: DescribeCaptchaDataSumRequest,
+    DescribeCaptchaMiniRiskResultResponse: DescribeCaptchaMiniRiskResultResponse,
     TicketAmountUnit: TicketAmountUnit,
     CaptchaQueryData: CaptchaQueryData,
     TicketThroughUnit: TicketThroughUnit,

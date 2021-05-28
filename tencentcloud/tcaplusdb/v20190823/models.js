@@ -17,6 +17,119 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ImportSnapshots返回参数结构体
+ * @class
+ */
+class ImportSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 比较表格的Meta信息
+ * @class
+ */
+class CompareTablesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源表格的集群id
+         * @type {string || null}
+         */
+        this.SrcTableClusterId = null;
+
+        /**
+         * 源表格的表格组id
+         * @type {string || null}
+         */
+        this.SrcTableGroupId = null;
+
+        /**
+         * 源表格的表名
+         * @type {string || null}
+         */
+        this.SrcTableName = null;
+
+        /**
+         * 目标表格的集群id
+         * @type {string || null}
+         */
+        this.DstTableClusterId = null;
+
+        /**
+         * 目标表格的表格组id
+         * @type {string || null}
+         */
+        this.DstTableGroupId = null;
+
+        /**
+         * 目标表格的表名
+         * @type {string || null}
+         */
+        this.DstTableName = null;
+
+        /**
+         * 源表格的实例id
+         * @type {string || null}
+         */
+        this.SrcTableInstanceId = null;
+
+        /**
+         * 目标表格的实例id
+         * @type {string || null}
+         */
+        this.DstTableInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcTableClusterId = 'SrcTableClusterId' in params ? params.SrcTableClusterId : null;
+        this.SrcTableGroupId = 'SrcTableGroupId' in params ? params.SrcTableGroupId : null;
+        this.SrcTableName = 'SrcTableName' in params ? params.SrcTableName : null;
+        this.DstTableClusterId = 'DstTableClusterId' in params ? params.DstTableClusterId : null;
+        this.DstTableGroupId = 'DstTableGroupId' in params ? params.DstTableGroupId : null;
+        this.DstTableName = 'DstTableName' in params ? params.DstTableName : null;
+        this.SrcTableInstanceId = 'SrcTableInstanceId' in params ? params.SrcTableInstanceId : null;
+        this.DstTableInstanceId = 'DstTableInstanceId' in params ? params.DstTableInstanceId : null;
+
+    }
+}
+
+/**
  * ModifyClusterName请求参数结构体
  * @class
  */
@@ -350,6 +463,104 @@ class TableRollbackResultNew extends  AbstractModel {
 }
 
 /**
+ * 申请单id及其状态
+ * @class
+ */
+class ApplyStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id-申请单id
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 处理状态-1-撤回 1-通过 2-驳回，非0状态的申请单不可改变状态。
+         * @type {number || null}
+         */
+        this.ApplicationStatus = null;
+
+        /**
+         * 申请单类型
+         * @type {number || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * TcaplusDB服务地域信息详情
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域Ap-Code
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地域缩写
+         * @type {string || null}
+         */
+        this.RegionAbbr = null;
+
+        /**
+         * 地域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 是否支持ipv6，0:不支持，1:支持
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+
+    }
+}
+
+/**
  * DescribeTables返回参数结构体
  * @class
  */
@@ -394,6 +605,107 @@ class DescribeTablesResponse extends  AbstractModel {
                 this.TableInfos.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifySnapshots返回参数结构体
+ * @class
+ */
+class ModifySnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量创建的快照数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 批量创建的快照结果列表
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateApply返回参数结构体
+ * @class
+ */
+class UpdateApplyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已更新的申请单列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ApplyResult> || null}
+         */
+        this.ApplyResults = null;
+
+        /**
+         * 更新数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ApplyResults) {
+            this.ApplyResults = new Array();
+            for (let z in params.ApplyResults) {
+                let obj = new ApplyResult();
+                obj.deserialize(params.ApplyResults[z]);
+                this.ApplyResults.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -544,6 +856,41 @@ class DeleteTableIndexRequest extends  AbstractModel {
                 this.SelectedTables.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * proxy机器信息
+ * @class
+ */
+class ProxyMachineInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一id
+         * @type {string || null}
+         */
+        this.ProxyUid = null;
+
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyUid = 'ProxyUid' in params ? params.ProxyUid : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
 
     }
 }
@@ -867,6 +1214,49 @@ class ModifyClusterPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeMachine返回参数结构体
+ * @class
+ */
+class DescribeMachineResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 独占机器资源列表
+         * @type {Array.<PoolInfo> || null}
+         */
+        this.PoolList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PoolList) {
+            this.PoolList = new Array();
+            for (let z in params.PoolList) {
+                let obj = new PoolInfo();
+                obj.deserialize(params.PoolList[z]);
+                this.PoolList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteTableGroup请求参数结构体
  * @class
  */
@@ -897,6 +1287,55 @@ class DeleteTableGroupRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+
+    }
+}
+
+/**
+ * DescribeSnapshots请求参数结构体
+ * @class
+ */
+class DescribeSnapshotsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格所属集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 所属表格组ID
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 快照名称
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
 
     }
 }
@@ -968,6 +1407,56 @@ class TagsInfoOfTableGroup extends  AbstractModel {
 }
 
 /**
+ * DescribeApplications返回参数结构体
+ * @class
+ */
+class DescribeApplicationsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 申请单列表
+         * @type {Array.<Application> || null}
+         */
+        this.Applications = null;
+
+        /**
+         * 申请单个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Applications) {
+            this.Applications = new Array();
+            for (let z in params.Applications) {
+                let obj = new Application();
+                obj.deserialize(params.Applications[z]);
+                this.Applications.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateTableGroup请求参数结构体
  * @class
  */
@@ -1020,6 +1509,41 @@ class CreateTableGroupRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyClusterMachine返回参数结构体
+ * @class
+ */
+class ModifyClusterMachineResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1271,50 +1795,39 @@ class ModifyTableTagsRequest extends  AbstractModel {
 }
 
 /**
- * 表定义描述文件详情，包含文件内容
+ * 合服结果
  * @class
  */
-class IdlFileInfo extends  AbstractModel {
+class MergeTableResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文件名称，不包含扩展名
-         * @type {string || null}
-         */
-        this.FileName = null;
-
-        /**
-         * 数据描述语言（IDL）类型
-         * @type {string || null}
-         */
-        this.FileType = null;
-
-        /**
-         * 文件扩展名
-         * @type {string || null}
-         */
-        this.FileExtType = null;
-
-        /**
-         * 文件大小（Bytes）
-         * @type {number || null}
-         */
-        this.FileSize = null;
-
-        /**
-         * 文件ID，对于已上传的文件有意义
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FileId = null;
-
-        /**
-         * 文件内容，对于本次新上传的文件有意义
+         * 任务Id
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.FileContent = null;
+        this.TaskId = null;
+
+        /**
+         * 成功时此字段返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+        /**
+         * 对比的表格信息
+         * @type {CompareTablesInfo || null}
+         */
+        this.Table = null;
+
+        /**
+         * 申请单Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
 
     }
 
@@ -1325,12 +1838,84 @@ class IdlFileInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FileName = 'FileName' in params ? params.FileName : null;
-        this.FileType = 'FileType' in params ? params.FileType : null;
-        this.FileExtType = 'FileExtType' in params ? params.FileExtType : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
+
+        if (params.Table) {
+            let obj = new CompareTablesInfo();
+            obj.deserialize(params.Table)
+            this.Table = obj;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+
+    }
+}
+
+/**
+ * 更新申请单结果
+ * @class
+ */
+class ApplyResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 申请单id
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 申请类型
+         * @type {number || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * 处理状态 0-待审核 1-已经审核并提交任务 2-已驳回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ApplicationStatus = null;
+
+        /**
+         * 已提交的任务Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
 
     }
 }
@@ -1400,30 +1985,36 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
- * RecoverRecycleTables返回参数结构体
+ * 新的快照过期时间
  * @class
  */
-class RecoverRecycleTablesResponse extends  AbstractModel {
+class SnapshotInfoNew extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 恢复表结果数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 恢复表信息列表
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 所属表格组ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.TableGroupId = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 快照名称
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * 快照过期时间点
+         * @type {string || null}
+         */
+        this.SnapshotDeadTime = null;
 
     }
 
@@ -1434,17 +2025,157 @@ class RecoverRecycleTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.SnapshotDeadTime = 'SnapshotDeadTime' in params ? params.SnapshotDeadTime : null;
 
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
-            }
+    }
+}
+
+/**
+ * 审批申请单
+ * @class
+ */
+class Application extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审批单号
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 申请类型
+         * @type {number || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 表格组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TableGroupName = null;
+
+        /**
+         * 表格名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 申请人
+         * @type {string || null}
+         */
+        this.Applicant = null;
+
+        /**
+         * 建单时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 处理状态 -1 撤回 0-待审核 1-已经审核并提交任务 2-已驳回
+         * @type {number || null}
+         */
+        this.ApplicationStatus = null;
+
+        /**
+         * 表格组Id
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 已提交的任务Id，未提交申请为0
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 腾讯云上table的唯一键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TableInstanceId = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 审批人
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExecuteUser = null;
+
+        /**
+         * 执行状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExecuteStatus = null;
+
+        /**
+         * 该申请单是否可以被当前用户审批
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.CanCensor = null;
+
+        /**
+         * 该申请单是否可以被当前用户撤回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.CanWithdrawal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.TableGroupName = 'TableGroupName' in params ? params.TableGroupName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.Applicant = 'Applicant' in params ? params.Applicant : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ApplicationStatus = 'ApplicationStatus' in params ? params.ApplicationStatus : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TableInstanceId = 'TableInstanceId' in params ? params.TableInstanceId : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ExecuteUser = 'ExecuteUser' in params ? params.ExecuteUser : null;
+        this.ExecuteStatus = 'ExecuteStatus' in params ? params.ExecuteStatus : null;
+        this.CanCensor = 'CanCensor' in params ? params.CanCensor : null;
+        this.CanWithdrawal = 'CanWithdrawal' in params ? params.CanWithdrawal : null;
 
     }
 }
@@ -1556,6 +2287,204 @@ class DescribeIdlFileInfosRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyTableTags返回参数结构体
+ * @class
+ */
+class ModifyTableTagsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回结果总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回结果
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 创建快照结果
+ * @class
+ */
+class SnapshotResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格所属表格组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 表格名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 任务ID，对于创建单任务的接口有效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ErrorInfo || null}
+         */
+        this.Error = null;
+
+        /**
+         * 快照名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * 快照的时间点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SnapshotTime = null;
+
+        /**
+         * 快照的过期时间点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SnapshotDeadTime = null;
+
+        /**
+         * 快照创建时间点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SnapshotCreateTime = null;
+
+        /**
+         * 快照大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SnapshotSize = null;
+
+        /**
+         * 快照状态，0 生成中 1 正常 2 删除中 3 已失效 4 回档使用中
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SnapshotStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.Error) {
+            let obj = new ErrorInfo();
+            obj.deserialize(params.Error)
+            this.Error = obj;
+        }
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.SnapshotTime = 'SnapshotTime' in params ? params.SnapshotTime : null;
+        this.SnapshotDeadTime = 'SnapshotDeadTime' in params ? params.SnapshotDeadTime : null;
+        this.SnapshotCreateTime = 'SnapshotCreateTime' in params ? params.SnapshotCreateTime : null;
+        this.SnapshotSize = 'SnapshotSize' in params ? params.SnapshotSize : null;
+        this.SnapshotStatus = 'SnapshotStatus' in params ? params.SnapshotStatus : null;
+
+    }
+}
+
+/**
+ * ModifyCensorship请求参数结构体
+ * @class
+ */
+class ModifyCensorshipRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群是否开启审核 0-关闭 1-开启
+         * @type {number || null}
+         */
+        this.Censorship = null;
+
+        /**
+         * 审批人uin列表
+         * @type {Array.<string> || null}
+         */
+        this.Uins = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Censorship = 'Censorship' in params ? params.Censorship : null;
+        this.Uins = 'Uins' in params ? params.Uins : null;
+
+    }
+}
+
+/**
  * 集群详细信息
  * @class
  */
@@ -1655,6 +2584,68 @@ class ClusterInfo extends  AbstractModel {
          */
         this.ApiAccessIpv6 = null;
 
+        /**
+         * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ClusterStatus = null;
+
+        /**
+         * 读CU
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReadCapacityUnit = null;
+
+        /**
+         * 写CU
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WriteCapacityUnit = null;
+
+        /**
+         * 磁盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskVolume = null;
+
+        /**
+         * 独占server机器信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServerDetailInfo> || null}
+         */
+        this.ServerList = null;
+
+        /**
+         * 独占proxy机器信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ProxyDetailInfo> || null}
+         */
+        this.ProxyList = null;
+
+        /**
+         * 是否开启审核 0-不开启 1-开启
+         * @type {number || null}
+         */
+        this.Censorship = null;
+
+        /**
+         * 审批人uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DbaUins = null;
+
     }
 
     /**
@@ -1679,6 +2670,59 @@ class ClusterInfo extends  AbstractModel {
         this.ApiAccessPort = 'ApiAccessPort' in params ? params.ApiAccessPort : null;
         this.OldPasswordExpireTime = 'OldPasswordExpireTime' in params ? params.OldPasswordExpireTime : null;
         this.ApiAccessIpv6 = 'ApiAccessIpv6' in params ? params.ApiAccessIpv6 : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterStatus = 'ClusterStatus' in params ? params.ClusterStatus : null;
+        this.ReadCapacityUnit = 'ReadCapacityUnit' in params ? params.ReadCapacityUnit : null;
+        this.WriteCapacityUnit = 'WriteCapacityUnit' in params ? params.WriteCapacityUnit : null;
+        this.DiskVolume = 'DiskVolume' in params ? params.DiskVolume : null;
+
+        if (params.ServerList) {
+            this.ServerList = new Array();
+            for (let z in params.ServerList) {
+                let obj = new ServerDetailInfo();
+                obj.deserialize(params.ServerList[z]);
+                this.ServerList.push(obj);
+            }
+        }
+
+        if (params.ProxyList) {
+            this.ProxyList = new Array();
+            for (let z in params.ProxyList) {
+                let obj = new ProxyDetailInfo();
+                obj.deserialize(params.ProxyList[z]);
+                this.ProxyList.push(obj);
+            }
+        }
+        this.Censorship = 'Censorship' in params ? params.Censorship : null;
+        this.DbaUins = 'DbaUins' in params ? params.DbaUins : null;
+
+    }
+}
+
+/**
+ * DisableRestProxy请求参数结构体
+ * @class
+ */
+class DisableRestProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对应appid
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1784,6 +2828,49 @@ class ModifyTablesResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteSnapshots请求参数结构体
+ * @class
+ */
+class DeleteSnapshotsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格所属集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 删除的快照列表
+         * @type {Array.<SnapshotInfoNew> || null}
+         */
+        this.SelectedTables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SnapshotInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyTableGroupTags返回参数结构体
  * @class
  */
@@ -1871,6 +2958,49 @@ class ModifyClusterTagsRequest extends  AbstractModel {
                 let obj = new TagInfoUnit();
                 obj.deserialize(params.DeleteTags[z]);
                 this.DeleteTags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * CreateSnapshots请求参数结构体
+ * @class
+ */
+class CreateSnapshotsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格所属集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 快照列表
+         * @type {Array.<SnapshotInfo> || null}
+         */
+        this.SelectedTables = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SnapshotInfo();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
             }
         }
 
@@ -2066,6 +3196,106 @@ class RecoverRecycleTablesRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteSnapshots返回参数结构体
+ * @class
+ */
+class DeleteSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量删除的快照数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 批量删除的快照结果
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteTables返回参数结构体
+ * @class
+ */
+class DeleteTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除表结果数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 删除表结果详情列表
+         * @type {Array.<TableResultNew> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyTableGroupName请求参数结构体
  * @class
  */
@@ -2172,30 +3402,12 @@ class DescribeTableGroupsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTableTags返回参数结构体
+ * DescribeUinInWhitelist请求参数结构体
  * @class
  */
-class ModifyTableTagsResponse extends  AbstractModel {
+class DescribeUinInWhitelistRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 返回结果总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 返回结果
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -2206,17 +3418,164 @@ class ModifyTableTagsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
+    }
+}
+
+/**
+ * MergeTablesData请求参数结构体
+ * @class
+ */
+class MergeTablesDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 选取的表格
+         * @type {Array.<MergeTablesInfo> || null}
+         */
+        this.SelectedTables = null;
+
+        /**
+         * true只做对比，false既对比又执行
+         * @type {boolean || null}
+         */
+        this.IsOnlyCompare = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new MergeTablesInfo();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.IsOnlyCompare = 'IsOnlyCompare' in params ? params.IsOnlyCompare : null;
+
+    }
+}
+
+/**
+ * CreateCluster请求参数结构体
+ * @class
+ */
+class CreateClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX`
+         * @type {string || null}
+         */
+        this.IdlType = null;
+
+        /**
+         * 集群名称，可使用中文或英文字符，最大长度32个字符
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 集群所绑定的子网实例ID，形如：subnet-pxir56ns
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 集群标签列表
+         * @type {Array.<TagInfoUnit> || null}
+         */
+        this.ResourceTags = null;
+
+        /**
+         * 集群是否开启IPv6功能
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
+        /**
+         * 独占集群占用的svr机器
+         * @type {Array.<MachineInfo> || null}
+         */
+        this.ServerList = null;
+
+        /**
+         * 独占集群占用的proxy机器
+         * @type {Array.<MachineInfo> || null}
+         */
+        this.ProxyList = null;
+
+        /**
+         * 集群类型1共享2独占
+         * @type {number || null}
+         */
+        this.ClusterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdlType = 'IdlType' in params ? params.IdlType : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new TagInfoUnit();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+
+        if (params.ServerList) {
+            this.ServerList = new Array();
+            for (let z in params.ServerList) {
+                let obj = new MachineInfo();
+                obj.deserialize(params.ServerList[z]);
+                this.ServerList.push(obj);
+            }
+        }
+
+        if (params.ProxyList) {
+            this.ProxyList = new Array();
+            for (let z in params.ProxyList) {
+                let obj = new MachineInfo();
+                obj.deserialize(params.ProxyList[z]);
+                this.ProxyList.push(obj);
+            }
+        }
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
 
     }
 }
@@ -2282,6 +3641,34 @@ class ModifyTableGroupTagsRequest extends  AbstractModel {
                 this.DeleteTags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * EnableRestProxy请求参数结构体
+ * @class
+ */
+class EnableRestProxyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对应于appid
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -2511,6 +3898,46 @@ class DescribeClustersResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 合服请求入参
+ * @class
+ */
+class MergeTablesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 合服的表格信息
+         * @type {CompareTablesInfo || null}
+         */
+        this.MergeTables = null;
+
+        /**
+         * 是否检查索引
+         * @type {boolean || null}
+         */
+        this.CheckIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MergeTables) {
+            let obj = new CompareTablesInfo();
+            obj.deserialize(params.MergeTables)
+            this.MergeTables = obj;
+        }
+        this.CheckIndex = 'CheckIndex' in params ? params.CheckIndex : null;
 
     }
 }
@@ -2805,6 +4232,198 @@ class DescribeIdlFileInfosResponse extends  AbstractModel {
 }
 
 /**
+ * svr的机器列表ServerList
+ * @class
+ */
+class ServerMachineInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器唯一id
+         * @type {string || null}
+         */
+        this.ServerUid = null;
+
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServerUid = 'ServerUid' in params ? params.ServerUid : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+
+    }
+}
+
+/**
+ * CreateSnapshots返回参数结构体
+ * @class
+ */
+class CreateSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量创建的快照数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 批量创建的快照结果列表
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 表定义描述文件详情，包含文件内容
+ * @class
+ */
+class IdlFileInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件名称，不包含扩展名
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 数据描述语言（IDL）类型
+         * @type {string || null}
+         */
+        this.FileType = null;
+
+        /**
+         * 文件扩展名
+         * @type {string || null}
+         */
+        this.FileExtType = null;
+
+        /**
+         * 文件大小（Bytes）
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 文件ID，对于已上传的文件有意义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 文件内容，对于本次新上传的文件有意义
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileType = 'FileType' in params ? params.FileType : null;
+        this.FileExtType = 'FileExtType' in params ? params.FileExtType : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+
+    }
+}
+
+/**
+ * DisableRestProxy返回参数结构体
+ * @class
+ */
+class DisableRestProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RestProxy的状态，0为关闭，1为开启中，2为开启，3为关闭中
+         * @type {number || null}
+         */
+        this.RestProxyStatus = null;
+
+        /**
+         * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RestProxyStatus = 'RestProxyStatus' in params ? params.RestProxyStatus : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 标签信息单元
  * @class
  */
@@ -2935,6 +4554,69 @@ class DescribeClustersRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+
+    }
+}
+
+/**
+ * server独占机器的详细信息
+ * @class
+ */
+class ServerDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * svr唯一id
+         * @type {string || null}
+         */
+        this.ServerUid = null;
+
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 内存占用量
+         * @type {number || null}
+         */
+        this.MemoryRate = null;
+
+        /**
+         * 磁盘占用量
+         * @type {number || null}
+         */
+        this.DiskRate = null;
+
+        /**
+         * 读次数
+         * @type {number || null}
+         */
+        this.ReadNum = null;
+
+        /**
+         * 写次数
+         * @type {number || null}
+         */
+        this.WriteNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServerUid = 'ServerUid' in params ? params.ServerUid : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MemoryRate = 'MemoryRate' in params ? params.MemoryRate : null;
+        this.DiskRate = 'DiskRate' in params ? params.DiskRate : null;
+        this.ReadNum = 'ReadNum' in params ? params.ReadNum : null;
+        this.WriteNum = 'WriteNum' in params ? params.WriteNum : null;
 
     }
 }
@@ -3333,9 +5015,17 @@ class CreateBackupResponse extends  AbstractModel {
 
         /**
          * 创建的备份任务ID列表
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.TaskIds = null;
+
+        /**
+         * 创建的备份申请ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ApplicationIds = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3353,7 +5043,57 @@ class CreateBackupResponse extends  AbstractModel {
             return;
         }
         this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.ApplicationIds = 'ApplicationIds' in params ? params.ApplicationIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 部分key导入快照数据时所需要的key文件
+ * @class
+ */
+class KeyFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * key文件名称
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * key文件扩展名
+         * @type {string || null}
+         */
+        this.FileExtType = null;
+
+        /**
+         * key文件内容
+         * @type {string || null}
+         */
+        this.FileContent = null;
+
+        /**
+         * key文件大小
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.FileExtType = 'FileExtType' in params ? params.FileExtType : null;
+        this.FileContent = 'FileContent' in params ? params.FileContent : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
 
     }
 }
@@ -3509,6 +5249,56 @@ class CreateTableGroupResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSnapshots返回参数结构体
+ * @class
+ */
+class DescribeSnapshotsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 快照数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 快照结果列表
+         * @type {Array.<SnapshotResult> || null}
+         */
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new SnapshotResult();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * VerifyIdlFiles请求参数结构体
  * @class
  */
@@ -3569,6 +5359,48 @@ class VerifyIdlFilesRequest extends  AbstractModel {
                 this.NewIdlFiles.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * EnableRestProxy返回参数结构体
+ * @class
+ */
+class EnableRestProxyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RestProxy的状态，0为关闭，1为开启中，2为开启，3为关闭中
+         * @type {number || null}
+         */
+        this.RestProxyStatus = null;
+
+        /**
+         * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RestProxyStatus = 'RestProxyStatus' in params ? params.RestProxyStatus : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3838,6 +5670,42 @@ class DescribeTablesRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateApply请求参数结构体
+ * @class
+ */
+class UpdateApplyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 申请单状态
+         * @type {Array.<ApplyStatus> || null}
+         */
+        this.ApplyStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ApplyStatus) {
+            this.ApplyStatus = new Array();
+            for (let z in params.ApplyStatus) {
+                let obj = new ApplyStatus();
+                obj.deserialize(params.ApplyStatus[z]);
+                this.ApplyStatus.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyTableMemos请求参数结构体
  * @class
  */
@@ -3911,6 +5779,62 @@ class DescribeUinInWhitelistResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 快照列表
+ * @class
+ */
+class SnapshotInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 所属表格组ID
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 表名称
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 快照名称
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * 快照时间点
+         * @type {string || null}
+         */
+        this.SnapshotTime = null;
+
+        /**
+         * 快照过期时间点
+         * @type {string || null}
+         */
+        this.SnapshotDeadTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.SnapshotTime = 'SnapshotTime' in params ? params.SnapshotTime : null;
+        this.SnapshotDeadTime = 'SnapshotDeadTime' in params ? params.SnapshotDeadTime : null;
 
     }
 }
@@ -4136,6 +6060,41 @@ class RollbackTablesResponse extends  AbstractModel {
 }
 
 /**
+ * 机器类型和数量
+ * @class
+ */
+class MachineInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器数量
+         * @type {number || null}
+         */
+        this.MachineNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineNum = 'MachineNum' in params ? params.MachineNum : null;
+
+    }
+}
+
+/**
  * CreateBackup请求参数结构体
  * @class
  */
@@ -4181,84 +6140,6 @@ class CreateBackupRequest extends  AbstractModel {
             }
         }
         this.Remark = 'Remark' in params ? params.Remark : null;
-
-    }
-}
-
-/**
- * CreateCluster请求参数结构体
- * @class
- */
-class CreateClusterRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX`
-         * @type {string || null}
-         */
-        this.IdlType = null;
-
-        /**
-         * 集群名称，可使用中文或英文字符，最大长度32个字符
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * 集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 集群所绑定的子网实例ID，形如：subnet-pxir56ns
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母
-         * @type {string || null}
-         */
-        this.Password = null;
-
-        /**
-         * 集群标签列表
-         * @type {Array.<TagInfoUnit> || null}
-         */
-        this.ResourceTags = null;
-
-        /**
-         * 集群是否开启IPv6功能
-         * @type {number || null}
-         */
-        this.Ipv6Enable = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.IdlType = 'IdlType' in params ? params.IdlType : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Password = 'Password' in params ? params.Password : null;
-
-        if (params.ResourceTags) {
-            this.ResourceTags = new Array();
-            for (let z in params.ResourceTags) {
-                let obj = new TagInfoUnit();
-                obj.deserialize(params.ResourceTags[z]);
-                this.ResourceTags.push(obj);
-            }
-        }
-        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -4327,6 +6208,13 @@ class TableResultNew extends  AbstractModel {
          */
         this.TaskIds = null;
 
+        /**
+         * 腾讯云申请审核单Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
     }
 
     /**
@@ -4349,6 +6237,7 @@ class TableResultNew extends  AbstractModel {
             this.Error = obj;
         }
         this.TaskIds = 'TaskIds' in params ? params.TaskIds : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
 
     }
 }
@@ -4455,36 +6344,30 @@ class DescribeClusterTagsRequest extends  AbstractModel {
 }
 
 /**
- * TcaplusDB服务地域信息详情
+ * RecoverRecycleTables返回参数结构体
  * @class
  */
-class RegionInfo extends  AbstractModel {
+class RecoverRecycleTablesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 地域Ap-Code
-         * @type {string || null}
-         */
-        this.RegionName = null;
-
-        /**
-         * 地域缩写
-         * @type {string || null}
-         */
-        this.RegionAbbr = null;
-
-        /**
-         * 地域ID
+         * 恢复表结果数量
          * @type {number || null}
          */
-        this.RegionId = null;
+        this.TotalCount = null;
 
         /**
-         * 是否支持ipv6，0:不支持，1:支持
-         * @type {number || null}
+         * 恢复表信息列表
+         * @type {Array.<TableResultNew> || null}
          */
-        this.Ipv6Enable = null;
+        this.TableResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4495,10 +6378,137 @@ class RegionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TableResults) {
+            this.TableResults = new Array();
+            for (let z in params.TableResults) {
+                let obj = new TableResultNew();
+                obj.deserialize(params.TableResults[z]);
+                this.TableResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MergeTablesData返回参数结构体
+ * @class
+ */
+class MergeTablesDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 合服结果集
+         * @type {Array.<MergeTableResult> || null}
+         */
+        this.Results = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Results) {
+            this.Results = new Array();
+            for (let z in params.Results) {
+                let obj = new MergeTableResult();
+                obj.deserialize(params.Results[z]);
+                this.Results.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeApplications请求参数结构体
+ * @class
+ */
+class DescribeApplicationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID，用于获取指定集群的单据
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 分页
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 申请单状态，用于过滤
+         * @type {number || null}
+         */
+        this.CensorStatus = null;
+
+        /**
+         * 表格组id，用于过滤
+         * @type {string || null}
+         */
+        this.TableGroupId = null;
+
+        /**
+         * 表格名，用于过滤
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 申请人uin，用于过滤
+         * @type {string || null}
+         */
+        this.Applicant = null;
+
+        /**
+         * 申请类型，用于过滤
+         * @type {number || null}
+         */
+        this.ApplyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.CensorStatus = 'CensorStatus' in params ? params.CensorStatus : null;
+        this.TableGroupId = 'TableGroupId' in params ? params.TableGroupId : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.Applicant = 'Applicant' in params ? params.Applicant : null;
+        this.ApplyType = 'ApplyType' in params ? params.ApplyType : null;
 
     }
 }
@@ -4589,6 +6599,106 @@ class DeleteTableGroupResponse extends  AbstractModel {
 }
 
 /**
+ * center资源池中的机器信息
+ * @class
+ */
+class PoolInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一id
+         * @type {number || null}
+         */
+        this.PoolUid = null;
+
+        /**
+         * 是否支持ipv6
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
+        /**
+         * 剩余可用app
+         * @type {number || null}
+         */
+        this.AvailableAppCount = null;
+
+        /**
+         * svr机器列表
+         * @type {Array.<ServerMachineInfo> || null}
+         */
+        this.ServerList = null;
+
+        /**
+         * proxy机器列表
+         * @type {Array.<ProxyMachineInfo> || null}
+         */
+        this.ProxyList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PoolUid = 'PoolUid' in params ? params.PoolUid : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+        this.AvailableAppCount = 'AvailableAppCount' in params ? params.AvailableAppCount : null;
+
+        if (params.ServerList) {
+            this.ServerList = new Array();
+            for (let z in params.ServerList) {
+                let obj = new ServerMachineInfo();
+                obj.deserialize(params.ServerList[z]);
+                this.ServerList.push(obj);
+            }
+        }
+
+        if (params.ProxyList) {
+            this.ProxyList = new Array();
+            for (let z in params.ProxyList) {
+                let obj = new ProxyMachineInfo();
+                obj.deserialize(params.ProxyList[z]);
+                this.ProxyList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeMachine请求参数结构体
+ * @class
+ */
+class DescribeMachineRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 不为0，表示查询支持ipv6的机器
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
+
+    }
+}
+
+/**
  * RollbackTables请求参数结构体
  * @class
  */
@@ -4646,12 +6756,37 @@ class RollbackTablesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeUinInWhitelist请求参数结构体
+ * ModifyCensorship返回参数结构体
  * @class
  */
-class DescribeUinInWhitelistRequest extends  AbstractModel {
+class ModifyCensorshipResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 已加入审批人的uin
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Uins = null;
+
+        /**
+         * 集群是否开启审核 0-关闭 1-开启
+         * @type {number || null}
+         */
+        this.Censorship = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4662,6 +6797,10 @@ class DescribeUinInWhitelistRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Uins = 'Uins' in params ? params.Uins : null;
+        this.Censorship = 'Censorship' in params ? params.Censorship : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4735,6 +6874,62 @@ class CompareIdlFilesRequest extends  AbstractModel {
                 this.NewIdlFiles.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 独占的proxy详细信息
+ * @class
+ */
+class ProxyDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * proxy的唯一id
+         * @type {string || null}
+         */
+        this.ProxyUid = null;
+
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 请求包速度
+         * @type {number || null}
+         */
+        this.ProcessSpeed = null;
+
+        /**
+         * 请求包时延
+         * @type {number || null}
+         */
+        this.AverageProcessDelay = null;
+
+        /**
+         * 慢处理包速度
+         * @type {number || null}
+         */
+        this.SlowProcessSpeed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyUid = 'ProxyUid' in params ? params.ProxyUid : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.ProcessSpeed = 'ProcessSpeed' in params ? params.ProcessSpeed : null;
+        this.AverageProcessDelay = 'AverageProcessDelay' in params ? params.AverageProcessDelay : null;
+        this.SlowProcessSpeed = 'SlowProcessSpeed' in params ? params.SlowProcessSpeed : null;
 
     }
 }
@@ -4864,6 +7059,71 @@ class ModifyTableMemosResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterMachine请求参数结构体
+ * @class
+ */
+class ModifyClusterMachineRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * svr占用的机器
+         * @type {Array.<MachineInfo> || null}
+         */
+        this.ServerList = null;
+
+        /**
+         * proxy占用的机器
+         * @type {Array.<MachineInfo> || null}
+         */
+        this.ProxyList = null;
+
+        /**
+         * 集群类型1共享集群2独占集群
+         * @type {number || null}
+         */
+        this.ClusterType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ServerList) {
+            this.ServerList = new Array();
+            for (let z in params.ServerList) {
+                let obj = new MachineInfo();
+                obj.deserialize(params.ServerList[z]);
+                this.ServerList.push(obj);
+            }
+        }
+
+        if (params.ProxyList) {
+            this.ProxyList = new Array();
+            for (let z in params.ProxyList) {
+                let obj = new MachineInfo();
+                obj.deserialize(params.ProxyList[z]);
+                this.ProxyList.push(obj);
+            }
+        }
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+
+    }
+}
+
+/**
  * 过滤条件
  * @class
  */
@@ -4883,6 +7143,12 @@ class Filter extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * 过滤字段值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
     }
 
     /**
@@ -4894,35 +7160,30 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
 
 /**
- * DeleteTables返回参数结构体
+ * ModifySnapshots请求参数结构体
  * @class
  */
-class DeleteTablesResponse extends  AbstractModel {
+class ModifySnapshotsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 删除表结果数量
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 删除表结果详情列表
-         * @type {Array.<TableResultNew> || null}
-         */
-        this.TableResults = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 表格所属集群id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ClusterId = null;
+
+        /**
+         * 快照列表
+         * @type {Array.<SnapshotInfoNew> || null}
+         */
+        this.SelectedTables = null;
 
     }
 
@@ -4933,17 +7194,96 @@ class DeleteTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
-        if (params.TableResults) {
-            this.TableResults = new Array();
-            for (let z in params.TableResults) {
-                let obj = new TableResultNew();
-                obj.deserialize(params.TableResults[z]);
-                this.TableResults.push(obj);
+        if (params.SelectedTables) {
+            this.SelectedTables = new Array();
+            for (let z in params.SelectedTables) {
+                let obj = new SnapshotInfoNew();
+                obj.deserialize(params.SelectedTables[z]);
+                this.SelectedTables.push(obj);
             }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ImportSnapshots请求参数结构体
+ * @class
+ */
+class ImportSnapshotsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格所属的集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 用于导入的快照信息
+         * @type {SnapshotInfo || null}
+         */
+        this.Snapshots = null;
+
+        /**
+         * 是否导入部分记录，TRUE表示导入部分记录，FALSE表示全表导入
+         * @type {string || null}
+         */
+        this.ImportSpecialKey = null;
+
+        /**
+         * 是否导入到当前表，TRUE表示导入到当前表，FALSE表示导入到新表
+         * @type {string || null}
+         */
+        this.ImportOriginTable = null;
+
+        /**
+         * 部分记录的key文件
+         * @type {KeyFile || null}
+         */
+        this.KeyFile = null;
+
+        /**
+         * 如果导入到新表，此为新表所属的表格组id
+         * @type {string || null}
+         */
+        this.NewTableGroupId = null;
+
+        /**
+         * 如果导入到新表，此为新表的表名，系统会以该名称自动创建一张结构相同的空表
+         * @type {string || null}
+         */
+        this.NewTableName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Snapshots) {
+            let obj = new SnapshotInfo();
+            obj.deserialize(params.Snapshots)
+            this.Snapshots = obj;
+        }
+        this.ImportSpecialKey = 'ImportSpecialKey' in params ? params.ImportSpecialKey : null;
+        this.ImportOriginTable = 'ImportOriginTable' in params ? params.ImportOriginTable : null;
+
+        if (params.KeyFile) {
+            let obj = new KeyFile();
+            obj.deserialize(params.KeyFile)
+            this.KeyFile = obj;
+        }
+        this.NewTableGroupId = 'NewTableGroupId' in params ? params.NewTableGroupId : null;
+        this.NewTableName = 'NewTableName' in params ? params.NewTableName : null;
 
     }
 }
@@ -5040,6 +7380,8 @@ class TableGroupInfo extends  AbstractModel {
 }
 
 module.exports = {
+    ImportSnapshotsResponse: ImportSnapshotsResponse,
+    CompareTablesInfo: CompareTablesInfo,
     ModifyClusterNameRequest: ModifyClusterNameRequest,
     ModifyTableGroupNameResponse: ModifyTableGroupNameResponse,
     DescribeTableTagsRequest: DescribeTableTagsRequest,
@@ -5047,86 +7389,126 @@ module.exports = {
     DeleteClusterResponse: DeleteClusterResponse,
     DeleteTableIndexResponse: DeleteTableIndexResponse,
     TableRollbackResultNew: TableRollbackResultNew,
+    ApplyStatus: ApplyStatus,
+    RegionInfo: RegionInfo,
     DescribeTablesResponse: DescribeTablesResponse,
+    ModifySnapshotsResponse: ModifySnapshotsResponse,
+    UpdateApplyResponse: UpdateApplyResponse,
     DeleteClusterRequest: DeleteClusterRequest,
     SelectedTableWithField: SelectedTableWithField,
     DeleteTableIndexRequest: DeleteTableIndexRequest,
+    ProxyMachineInfo: ProxyMachineInfo,
     DescribeTasksResponse: DescribeTasksResponse,
     DeleteTablesRequest: DeleteTablesRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
     SelectedTableInfoNew: SelectedTableInfoNew,
     ModifyClusterPasswordRequest: ModifyClusterPasswordRequest,
+    DescribeMachineResponse: DescribeMachineResponse,
     DeleteTableGroupRequest: DeleteTableGroupRequest,
+    DescribeSnapshotsRequest: DescribeSnapshotsRequest,
     TagsInfoOfTableGroup: TagsInfoOfTableGroup,
+    DescribeApplicationsResponse: DescribeApplicationsResponse,
     CreateTableGroupRequest: CreateTableGroupRequest,
+    ModifyClusterMachineResponse: ModifyClusterMachineResponse,
     TagsInfoOfTable: TagsInfoOfTable,
     DeleteIdlFilesResponse: DeleteIdlFilesResponse,
     FieldInfo: FieldInfo,
     ModifyTableTagsRequest: ModifyTableTagsRequest,
-    IdlFileInfo: IdlFileInfo,
+    MergeTableResult: MergeTableResult,
+    ApplyResult: ApplyResult,
     DescribeTasksRequest: DescribeTasksRequest,
-    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
+    SnapshotInfoNew: SnapshotInfoNew,
+    Application: Application,
     ClearTablesResponse: ClearTablesResponse,
     DescribeIdlFileInfosRequest: DescribeIdlFileInfosRequest,
+    ModifyTableTagsResponse: ModifyTableTagsResponse,
+    SnapshotResult: SnapshotResult,
+    ModifyCensorshipRequest: ModifyCensorshipRequest,
     ClusterInfo: ClusterInfo,
+    DisableRestProxyRequest: DisableRestProxyRequest,
     DescribeTablesInRecycleResponse: DescribeTablesInRecycleResponse,
     ModifyTablesResponse: ModifyTablesResponse,
+    DeleteSnapshotsRequest: DeleteSnapshotsRequest,
     ModifyTableGroupTagsResponse: ModifyTableGroupTagsResponse,
     ModifyClusterTagsRequest: ModifyClusterTagsRequest,
+    CreateSnapshotsRequest: CreateSnapshotsRequest,
     DescribeTableGroupTagsResponse: DescribeTableGroupTagsResponse,
     SetTableIndexRequest: SetTableIndexRequest,
     ModifyTableQuotasResponse: ModifyTableQuotasResponse,
     RecoverRecycleTablesRequest: RecoverRecycleTablesRequest,
+    DeleteSnapshotsResponse: DeleteSnapshotsResponse,
+    DeleteTablesResponse: DeleteTablesResponse,
     ModifyTableGroupNameRequest: ModifyTableGroupNameRequest,
     DescribeTableGroupsRequest: DescribeTableGroupsRequest,
-    ModifyTableTagsResponse: ModifyTableTagsResponse,
+    DescribeUinInWhitelistRequest: DescribeUinInWhitelistRequest,
+    MergeTablesDataRequest: MergeTablesDataRequest,
+    CreateClusterRequest: CreateClusterRequest,
     ModifyTableGroupTagsRequest: ModifyTableGroupTagsRequest,
+    EnableRestProxyRequest: EnableRestProxyRequest,
     ModifyTableQuotasRequest: ModifyTableQuotasRequest,
     CompareIdlFilesResponse: CompareIdlFilesResponse,
     CreateTablesResponse: CreateTablesResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
+    MergeTablesInfo: MergeTablesInfo,
     ModifyClusterTagsResponse: ModifyClusterTagsResponse,
     DescribeClusterTagsResponse: DescribeClusterTagsResponse,
     TagsInfoOfCluster: TagsInfoOfCluster,
     SetTableIndexResponse: SetTableIndexResponse,
     ClearTablesRequest: ClearTablesRequest,
     DescribeIdlFileInfosResponse: DescribeIdlFileInfosResponse,
+    ServerMachineInfo: ServerMachineInfo,
+    CreateSnapshotsResponse: CreateSnapshotsResponse,
+    IdlFileInfo: IdlFileInfo,
+    DisableRestProxyResponse: DisableRestProxyResponse,
     TagInfoUnit: TagInfoUnit,
     CreateClusterResponse: CreateClusterResponse,
     DescribeClustersRequest: DescribeClustersRequest,
+    ServerDetailInfo: ServerDetailInfo,
     TableInfoNew: TableInfoNew,
     TaskInfoNew: TaskInfoNew,
     DeleteIdlFilesRequest: DeleteIdlFilesRequest,
     CreateBackupResponse: CreateBackupResponse,
+    KeyFile: KeyFile,
     VerifyIdlFilesResponse: VerifyIdlFilesResponse,
     DescribeTableTagsResponse: DescribeTableTagsResponse,
     CreateTableGroupResponse: CreateTableGroupResponse,
+    DescribeSnapshotsResponse: DescribeSnapshotsResponse,
     VerifyIdlFilesRequest: VerifyIdlFilesRequest,
+    EnableRestProxyResponse: EnableRestProxyResponse,
     ModifyClusterNameResponse: ModifyClusterNameResponse,
     ModifyTablesRequest: ModifyTablesRequest,
     DescribeTableGroupTagsRequest: DescribeTableGroupTagsRequest,
     DescribeTablesInRecycleRequest: DescribeTablesInRecycleRequest,
     DescribeTablesRequest: DescribeTablesRequest,
+    UpdateApplyRequest: UpdateApplyRequest,
     ModifyTableMemosRequest: ModifyTableMemosRequest,
     DescribeUinInWhitelistResponse: DescribeUinInWhitelistResponse,
+    SnapshotInfo: SnapshotInfo,
     ParsedTableInfoNew: ParsedTableInfoNew,
     RollbackTablesResponse: RollbackTablesResponse,
+    MachineInfo: MachineInfo,
     CreateBackupRequest: CreateBackupRequest,
-    CreateClusterRequest: CreateClusterRequest,
     TableResultNew: TableResultNew,
     CreateTablesRequest: CreateTablesRequest,
     DescribeClusterTagsRequest: DescribeClusterTagsRequest,
-    RegionInfo: RegionInfo,
+    RecoverRecycleTablesResponse: RecoverRecycleTablesResponse,
+    MergeTablesDataResponse: MergeTablesDataResponse,
+    DescribeApplicationsRequest: DescribeApplicationsRequest,
     DescribeTableGroupsResponse: DescribeTableGroupsResponse,
     DeleteTableGroupResponse: DeleteTableGroupResponse,
+    PoolInfo: PoolInfo,
+    DescribeMachineRequest: DescribeMachineRequest,
     RollbackTablesRequest: RollbackTablesRequest,
-    DescribeUinInWhitelistRequest: DescribeUinInWhitelistRequest,
+    ModifyCensorshipResponse: ModifyCensorshipResponse,
     CompareIdlFilesRequest: CompareIdlFilesRequest,
+    ProxyDetailInfo: ProxyDetailInfo,
     IdlFileInfoWithoutContent: IdlFileInfoWithoutContent,
     ModifyTableMemosResponse: ModifyTableMemosResponse,
+    ModifyClusterMachineRequest: ModifyClusterMachineRequest,
     Filter: Filter,
-    DeleteTablesResponse: DeleteTablesResponse,
+    ModifySnapshotsRequest: ModifySnapshotsRequest,
+    ImportSnapshotsRequest: ImportSnapshotsRequest,
     ErrorInfo: ErrorInfo,
     TableGroupInfo: TableGroupInfo,
 

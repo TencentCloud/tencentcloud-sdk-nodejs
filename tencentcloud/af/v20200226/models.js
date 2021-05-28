@@ -25,7 +25,7 @@ class RiskDetail extends  AbstractModel {
         super();
 
         /**
-         * 风险码
+         * 风险码 参数详细定义请加微信：TYXGJ-01
          * @type {number || null}
          */
         this.RiskCode = null;

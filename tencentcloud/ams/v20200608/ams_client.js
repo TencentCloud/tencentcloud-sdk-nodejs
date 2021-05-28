@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ImageSegments = models.ImageSegments;
 const ImageResultResult = models.ImageResultResult;
+const InputInfo = models.InputInfo;
 const StorageInfo = models.StorageInfo;
 const BucketInfo = models.BucketInfo;
 const CreateAudioModerationTaskResponse = models.CreateAudioModerationTaskResponse;
@@ -30,19 +31,28 @@ const CreateAudioModerationTaskRequest = models.CreateAudioModerationTaskRequest
 const CreateBizConfigResponse = models.CreateBizConfigResponse;
 const TaskInput = models.TaskInput;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
+const CancelTaskResponse = models.CancelTaskResponse;
 const TaskLabel = models.TaskLabel;
 const ImageResultsResultDetail = models.ImageResultsResultDetail;
-const InputInfo = models.InputInfo;
+const DescribeAmsListRequest = models.DescribeAmsListRequest;
+const Filters = models.Filters;
+const AmsDetailInfo = models.AmsDetailInfo;
 const AudioResultDetailLanguageResult = models.AudioResultDetailLanguageResult;
 const FileOutput = models.FileOutput;
-const CancelTaskResponse = models.CancelTaskResponse;
+const Filter = models.Filter;
+const DescribeAudioStatResponse = models.DescribeAudioStatResponse;
+const DescribeAmsListResponse = models.DescribeAmsListResponse;
+const TrendCount = models.TrendCount;
 const AudioResultDetailTextResult = models.AudioResultDetailTextResult;
+const DescribeAudioStatRequest = models.DescribeAudioStatRequest;
+const Overview = models.Overview;
 const AudioResult = models.AudioResult;
 const AudioResultDetailMoanResult = models.AudioResultDetailMoanResult;
 const DescribeBizConfigResponse = models.DescribeBizConfigResponse;
 const MediaInfo = models.MediaInfo;
 const MediaModerationConfig = models.MediaModerationConfig;
 const AudioSegments = models.AudioSegments;
+const EvilCount = models.EvilCount;
 const ImageResultsResultDetailLocation = models.ImageResultsResultDetailLocation;
 const ImageResult = models.ImageResult;
 
@@ -57,6 +67,66 @@ class AmsClient extends AbstractClient {
         super("ams.tencentcloudapi.com", "2020-06-08", credential, region, profile);
     }
     
+    /**
+     * 控制台识别统计
+     * @param {DescribeAudioStatRequest} req
+     * @param {function(string, DescribeAudioStatResponse):void} cb
+     * @public
+     */
+    DescribeAudioStat(req, cb) {
+        let resp = new DescribeAudioStatResponse();
+        this.request("DescribeAudioStat", req, resp, cb);
+    }
+
+    /**
+     * 查看任务详情
+     * @param {DescribeTaskDetailRequest} req
+     * @param {function(string, DescribeTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeTaskDetail(req, cb) {
+        let resp = new DescribeTaskDetailResponse();
+        this.request("DescribeTaskDetail", req, resp, cb);
+    }
+
+    /**
+     * 创建业务配置，1个账号最多可以创建20个配置，可定义音频审核的场景，如色情、谩骂等，
+
+在创建业务配置之前，你需要以下步骤：
+1. 开通COS存储桶功能，新建存储桶，例如 cms_segments，用来存储 视频转换过程中生成对音频和图片。
+2. 然后在COS控制台，授权天御内容安全主账号 对 cms_segments 存储桶对读写权限。具体授权操作，参考https://cloud.tencent.com/document/product/436/38648
+
+     * @param {CreateBizConfigRequest} req
+     * @param {function(string, CreateBizConfigResponse):void} cb
+     * @public
+     */
+    CreateBizConfig(req, cb) {
+        let resp = new CreateBizConfigResponse();
+        this.request("CreateBizConfig", req, resp, cb);
+    }
+
+    /**
+     * 查看单个配置
+     * @param {DescribeBizConfigRequest} req
+     * @param {function(string, DescribeBizConfigResponse):void} cb
+     * @public
+     */
+    DescribeBizConfig(req, cb) {
+        let resp = new DescribeBizConfigResponse();
+        this.request("DescribeBizConfig", req, resp, cb);
+    }
+
+    /**
+     * 取消任务
+     * @param {CancelTaskRequest} req
+     * @param {function(string, CancelTaskResponse):void} cb
+     * @public
+     */
+    CancelTask(req, cb) {
+        let resp = new CancelTaskResponse();
+        this.request("CancelTask", req, resp, cb);
+    }
+
     /**
      * 本接口（Audio Moderation）用于提交音频内容（包括音频文件或流地址）进行智能审核任务，使用前请您登陆控制台开通音频内容安全服务。
 
@@ -92,52 +162,14 @@ class AmsClient extends AbstractClient {
     }
 
     /**
-     * 查看单个配置
-     * @param {DescribeBizConfigRequest} req
-     * @param {function(string, DescribeBizConfigResponse):void} cb
+     * 音频审核明细列表
+     * @param {DescribeAmsListRequest} req
+     * @param {function(string, DescribeAmsListResponse):void} cb
      * @public
      */
-    DescribeBizConfig(req, cb) {
-        let resp = new DescribeBizConfigResponse();
-        this.request("DescribeBizConfig", req, resp, cb);
-    }
-
-    /**
-     * 查看任务详情
-     * @param {DescribeTaskDetailRequest} req
-     * @param {function(string, DescribeTaskDetailResponse):void} cb
-     * @public
-     */
-    DescribeTaskDetail(req, cb) {
-        let resp = new DescribeTaskDetailResponse();
-        this.request("DescribeTaskDetail", req, resp, cb);
-    }
-
-    /**
-     * 创建业务配置，1个账号最多可以创建20个配置，可定义音频审核的场景，如色情、谩骂等，
-
-在创建业务配置之前，你需要以下步骤：
-1. 开通COS存储桶功能，新建存储桶，例如 cms_segments，用来存储 视频转换过程中生成对音频和图片。
-2. 然后在COS控制台，授权天御内容安全主账号 对 cms_segments 存储桶对读写权限。具体授权操作，参考https://cloud.tencent.com/document/product/436/38648
-
-     * @param {CreateBizConfigRequest} req
-     * @param {function(string, CreateBizConfigResponse):void} cb
-     * @public
-     */
-    CreateBizConfig(req, cb) {
-        let resp = new CreateBizConfigResponse();
-        this.request("CreateBizConfig", req, resp, cb);
-    }
-
-    /**
-     * 取消任务
-     * @param {CancelTaskRequest} req
-     * @param {function(string, CancelTaskResponse):void} cb
-     * @public
-     */
-    CancelTask(req, cb) {
-        let resp = new CancelTaskResponse();
-        this.request("CancelTask", req, resp, cb);
+    DescribeAmsList(req, cb) {
+        let resp = new DescribeAmsListResponse();
+        this.request("DescribeAmsList", req, resp, cb);
     }
 
 

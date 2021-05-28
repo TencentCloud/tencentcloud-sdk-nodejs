@@ -17,6 +17,121 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 文本过滤条件
+ * @class
+ */
+class Filters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询字段：
+策略BizType
+子账号SubUin
+日期区间DateRange
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 查询值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * 识别结果统计
+ * @class
+ */
+class Overview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总调用量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 总调用时长
+         * @type {number || null}
+         */
+        this.TotalHour = null;
+
+        /**
+         * 通过量
+         * @type {number || null}
+         */
+        this.PassCount = null;
+
+        /**
+         * 通过时长
+         * @type {number || null}
+         */
+        this.PassHour = null;
+
+        /**
+         * 违规量
+         * @type {number || null}
+         */
+        this.EvilCount = null;
+
+        /**
+         * 违规时长
+         * @type {number || null}
+         */
+        this.EvilHour = null;
+
+        /**
+         * 疑似违规量
+         * @type {number || null}
+         */
+        this.SuspectCount = null;
+
+        /**
+         * 疑似违规时长
+         * @type {number || null}
+         */
+        this.SuspectHour = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalHour = 'TotalHour' in params ? params.TotalHour : null;
+        this.PassCount = 'PassCount' in params ? params.PassCount : null;
+        this.PassHour = 'PassHour' in params ? params.PassHour : null;
+        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
+        this.EvilHour = 'EvilHour' in params ? params.EvilHour : null;
+        this.SuspectCount = 'SuspectCount' in params ? params.SuspectCount : null;
+        this.SuspectHour = 'SuspectHour' in params ? params.SuspectHour : null;
+
+    }
+}
+
+/**
  * 账号风险检测结果
  * @class
  */
@@ -52,6 +167,49 @@ class RiskDetails extends  AbstractModel {
 }
 
 /**
+ * DescribeTextStat请求参数结构体
+ * @class
+ */
+class DescribeTextStatRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审核类型 1: 机器审核; 2: 人工审核
+         * @type {number || null}
+         */
+        this.AuditType = null;
+
+        /**
+         * 查询条件
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditType = 'AuditType' in params ? params.AuditType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * TextModeration请求参数结构体
  * @class
  */
@@ -66,16 +224,16 @@ class TextModerationRequest extends  AbstractModel {
         this.Content = null;
 
         /**
-         * 数据ID，英文字母、下划线、-组成，不超过64个字符
-         * @type {string || null}
-         */
-        this.DataId = null;
-
-        /**
          * 该字段用于标识业务场景。您可以在内容安全控制台创建对应的ID，配置不同的内容审核策略，通过接口调用，默认不填为0，后端使用默认策略。 -- 该字段暂未开放。
          * @type {string || null}
          */
         this.BizType = null;
+
+        /**
+         * 数据ID，英文字母、下划线、-组成，不超过64个字符
+         * @type {string || null}
+         */
+        this.DataId = null;
 
         /**
          * 账号相关信息字段，填入后可识别违规风险账号。
@@ -99,8 +257,8 @@ class TextModerationRequest extends  AbstractModel {
             return;
         }
         this.Content = 'Content' in params ? params.Content : null;
-        this.DataId = 'DataId' in params ? params.DataId : null;
         this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DataId = 'DataId' in params ? params.DataId : null;
 
         if (params.User) {
             let obj = new User();
@@ -113,82 +271,6 @@ class TextModerationRequest extends  AbstractModel {
             obj.deserialize(params.Device)
             this.Device = obj;
         }
-
-    }
-}
-
-/**
- * 文本返回的详细结果
- * @class
- */
-class DetailResults extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
-         * @type {string || null}
-         */
-        this.Label = null;
-
-        /**
-         * 建议值,Block：打击,Review：待复审,Pass：正常
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 该标签下命中的关键词
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Keywords = null;
-
-        /**
-         * 该标签模型命中的分值
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Score = null;
-
-        /**
-         * 仅当Lable为Custom自定义关键词时有效，表示自定义关键词库类型，1:黑白库，2：自定义库
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.LibType = null;
-
-        /**
-         * 仅当Lable为Custom自定义关键词时有效，表示自定义库id
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LibId = null;
-
-        /**
-         * 仅当Lable为Custom自定义关键词时有效，表示自定义库名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LibName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Keywords = 'Keywords' in params ? params.Keywords : null;
-        this.Score = 'Score' in params ? params.Score : null;
-        this.LibType = 'LibType' in params ? params.LibType : null;
-        this.LibId = 'LibId' in params ? params.LibId : null;
-        this.LibName = 'LibName' in params ? params.LibName : null;
 
     }
 }
@@ -259,6 +341,290 @@ class AccountTipoffAccessRequest extends  AbstractModel {
         this.SenderAccountType = 'SenderAccountType' in params ? params.SenderAccountType : null;
         this.SenderIP = 'SenderIP' in params ? params.SenderIP : null;
         this.EvilContent = 'EvilContent' in params ? params.EvilContent : null;
+
+    }
+}
+
+/**
+ * 自定义库列表
+ * @class
+ */
+class TextLib extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 库id
+         * @type {number || null}
+         */
+        this.LibId = null;
+
+        /**
+         * 库名
+         * @type {string || null}
+         */
+        this.LibName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LibId = 'LibId' in params ? params.LibId : null;
+        this.LibName = 'LibName' in params ? params.LibName : null;
+
+    }
+}
+
+/**
+ * 识别量统计
+ * @class
+ */
+class TrendCount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总调用量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 总调用时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalHour = null;
+
+        /**
+         * 通过量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PassCount = null;
+
+        /**
+         * 通过时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PassHour = null;
+
+        /**
+         * 违规量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EvilCount = null;
+
+        /**
+         * 违规时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EvilHour = null;
+
+        /**
+         * 疑似违规量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuspectCount = null;
+
+        /**
+         * 疑似违规时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuspectHour = null;
+
+        /**
+         * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Date = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TotalHour = 'TotalHour' in params ? params.TotalHour : null;
+        this.PassCount = 'PassCount' in params ? params.PassCount : null;
+        this.PassHour = 'PassHour' in params ? params.PassHour : null;
+        this.EvilCount = 'EvilCount' in params ? params.EvilCount : null;
+        this.EvilHour = 'EvilHour' in params ? params.EvilHour : null;
+        this.SuspectCount = 'SuspectCount' in params ? params.SuspectCount : null;
+        this.SuspectHour = 'SuspectHour' in params ? params.SuspectHour : null;
+        this.Date = 'Date' in params ? params.Date : null;
+
+    }
+}
+
+/**
+ * DescribeTextLib返回参数结构体
+ * @class
+ */
+class DescribeTextLibResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文本库id和name列表
+         * @type {Array.<TextLib> || null}
+         */
+        this.TextLib = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TextLib) {
+            this.TextLib = new Array();
+            for (let z in params.TextLib) {
+                let obj = new TextLib();
+                obj.deserialize(params.TextLib[z]);
+                this.TextLib.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文本返回的详细结果
+ * @class
+ */
+class DetailResults extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+         * @type {string || null}
+         */
+        this.Label = null;
+
+        /**
+         * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Suggestion = null;
+
+        /**
+         * 该标签下命中的关键词
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 该标签模型命中的分值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 仅当Label为Custom自定义关键词时有效，表示自定义关键词库类型，1:黑白库，2：自定义库
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LibType = null;
+
+        /**
+         * 仅当Label为Custom自定义关键词时有效，表示自定义库id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LibId = null;
+
+        /**
+         * 仅当Labe为Custom自定义关键词时有效，表示自定义库名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LibName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.LibType = 'LibType' in params ? params.LibType : null;
+        this.LibId = 'LibId' in params ? params.LibId : null;
+        this.LibName = 'LibName' in params ? params.LibName : null;
+
+    }
+}
+
+/**
+ * 违规数据分布
+ * @class
+ */
+class EvilCount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ----非必选，该参数功能暂未对外开放
+         * @type {string || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 分布类型总量
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.Count = 'Count' in params ? params.Count : null;
 
     }
 }
@@ -410,6 +776,105 @@ class AccountTipoffAccessResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTextLib请求参数结构体
+ * @class
+ */
+class DescribeTextLibRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 内容类型 text: 1; image: 2; audio: 3; video: 4
+         * @type {number || null}
+         */
+        this.StrategyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrategyType = 'StrategyType' in params ? params.StrategyType : null;
+
+    }
+}
+
+/**
+ * DescribeTextStat返回参数结构体
+ * @class
+ */
+class DescribeTextStatResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别结果统计
+         * @type {Overview || null}
+         */
+        this.Overview = null;
+
+        /**
+         * 识别量统计
+         * @type {Array.<TrendCount> || null}
+         */
+        this.TrendCount = null;
+
+        /**
+         * 违规数据分布
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<EvilCount> || null}
+         */
+        this.EvilCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Overview) {
+            let obj = new Overview();
+            obj.deserialize(params.Overview)
+            this.Overview = obj;
+        }
+
+        if (params.TrendCount) {
+            this.TrendCount = new Array();
+            for (let z in params.TrendCount) {
+                let obj = new TrendCount();
+                obj.deserialize(params.TrendCount[z]);
+                this.TrendCount.push(obj);
+            }
+        }
+
+        if (params.EvilCount) {
+            this.EvilCount = new Array();
+            for (let z in params.EvilCount) {
+                let obj = new EvilCount();
+                obj.deserialize(params.EvilCount[z]);
+                this.EvilCount.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TextModeration返回参数结构体
  * @class
  */
@@ -431,15 +896,15 @@ class TextModerationResponse extends  AbstractModel {
         this.EvilFlag = null;
 
         /**
-         * 机器识别后判断违规所属类型。
-Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
+         * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
          * @type {string || null}
          */
         this.Label = null;
 
         /**
          * 建议您拿到判断结果后的执行操作。
-Block：建议打击，Review：建议复审，Normal：建议通过。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
          * @type {string || null}
          */
         this.Suggestion = null;
@@ -481,6 +946,13 @@ Block：建议打击，Review：建议复审，Normal：建议通过。
         this.Extra = null;
 
         /**
+         * 请求参数中的DataId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DataId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -520,6 +992,7 @@ Block：建议打击，Review：建议复审，Normal：建议通过。
             }
         }
         this.Extra = 'Extra' in params ? params.Extra : null;
+        this.DataId = 'DataId' in params ? params.DataId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -596,13 +1069,22 @@ class User extends  AbstractModel {
 }
 
 module.exports = {
+    Filters: Filters,
+    Overview: Overview,
     RiskDetails: RiskDetails,
+    DescribeTextStatRequest: DescribeTextStatRequest,
     TextModerationRequest: TextModerationRequest,
-    DetailResults: DetailResults,
     AccountTipoffAccessRequest: AccountTipoffAccessRequest,
+    TextLib: TextLib,
+    TrendCount: TrendCount,
+    DescribeTextLibResponse: DescribeTextLibResponse,
+    DetailResults: DetailResults,
+    EvilCount: EvilCount,
     Device: Device,
     TipoffResponse: TipoffResponse,
     AccountTipoffAccessResponse: AccountTipoffAccessResponse,
+    DescribeTextLibRequest: DescribeTextLibRequest,
+    DescribeTextStatResponse: DescribeTextStatResponse,
     TextModerationResponse: TextModerationResponse,
     User: User,
 

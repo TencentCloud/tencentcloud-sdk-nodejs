@@ -2216,7 +2216,7 @@ class UpdateCfsFileSystemSizeLimitRequest extends  AbstractModel {
         this.FsLimit = null;
 
         /**
-         * 文件系统ID
+         * 文件系统ID，目前仅支持标准型文件系统。
          * @type {string || null}
          */
         this.FileSystemId = null;

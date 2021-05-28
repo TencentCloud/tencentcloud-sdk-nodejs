@@ -134,7 +134,7 @@ class AgeInfo extends  AbstractModel {
 }
 
 /**
- * 人脸框位置
+ * 人脸框信息
  * @class
  */
 class FaceRect extends  AbstractModel {
@@ -142,16 +142,16 @@ class FaceRect extends  AbstractModel {
         super();
 
         /**
-         * 人脸框左上角横坐标。
-         * @type {number || null}
-         */
-        this.X = null;
-
-        /**
          * 人脸框左上角纵坐标。
          * @type {number || null}
          */
         this.Y = null;
+
+        /**
+         * 人脸框左上角横坐标。
+         * @type {number || null}
+         */
+        this.X = null;
 
         /**
          * 人脸框宽度。
@@ -174,8 +174,8 @@ class FaceRect extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.X = 'X' in params ? params.X : null;
         this.Y = 'Y' in params ? params.Y : null;
+        this.X = 'X' in params ? params.X : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
 
@@ -450,7 +450,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。图片存储�
         this.Fps = null;
 
         /**
-         * 视频类型，取值[0,2]，其中0为MP4，1为GIF，2为MOV。目前仅支持MP4格式，默认为MP4格式
+         * 视频类型，取值0。目前仅支持MP4格式，默认为MP4格式
          * @type {number || null}
          */
         this.OutputType = null;

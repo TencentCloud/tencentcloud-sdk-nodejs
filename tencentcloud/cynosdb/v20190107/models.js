@@ -576,6 +576,49 @@ class DescribeClusterInstanceGrpsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeResourcesByDealName返回参数结构体
+ * @class
+ */
+class DescribeResourcesByDealNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计费资源id信息数组
+         * @type {Array.<BillingResourceInfo> || null}
+         */
+        this.BillingResourceInfos = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BillingResourceInfos) {
+            this.BillingResourceInfos = new Array();
+            for (let z in params.BillingResourceInfos) {
+                let obj = new BillingResourceInfo();
+                obj.deserialize(params.BillingResourceInfos[z]);
+                this.BillingResourceInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAccounts请求参数结构体
  * @class
  */
@@ -2210,6 +2253,34 @@ class DescribeInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeResourcesByDealName请求参数结构体
+ * @class
+ */
+class DescribeResourcesByDealNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计费订单id
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+
+    }
+}
+
+/**
  * IsolateInstance返回参数结构体
  * @class
  */
@@ -2290,6 +2361,34 @@ class DescribeBackupListRequest extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeRollbackTimeRange请求参数结构体
+ * @class
+ */
+class DescribeRollbackTimeRangeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -2573,6 +2672,26 @@ class CynosdbInstance extends  AbstractModel {
          */
         this.RenewFlag = null;
 
+        /**
+         * serverless实例cpu下限
+         * @type {number || null}
+         */
+        this.MinCpu = null;
+
+        /**
+         * serverless实例cpu上限
+         * @type {number || null}
+         */
+        this.MaxCpu = null;
+
+        /**
+         * serverless实例状态, 可选值：
+resume
+pause
+         * @type {string || null}
+         */
+        this.ServerlessStatus = null;
+
     }
 
     /**
@@ -2619,6 +2738,9 @@ class CynosdbInstance extends  AbstractModel {
         this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
         this.ProcessingTask = 'ProcessingTask' in params ? params.ProcessingTask : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.MinCpu = 'MinCpu' in params ? params.MinCpu : null;
+        this.MaxCpu = 'MaxCpu' in params ? params.MaxCpu : null;
+        this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
 
     }
 }
@@ -2813,10 +2935,10 @@ class OfflineInstanceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRollbackTimeRange请求参数结构体
+ * 计费资源信息
  * @class
  */
-class DescribeRollbackTimeRangeRequest extends  AbstractModel {
+class BillingResourceInfo extends  AbstractModel {
     constructor(){
         super();
 
@@ -2825,6 +2947,12 @@ class DescribeRollbackTimeRangeRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ClusterId = null;
+
+        /**
+         * 实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
 
     }
 
@@ -2836,6 +2964,7 @@ class DescribeRollbackTimeRangeRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -3152,14 +3281,14 @@ class CreateClustersResponse extends  AbstractModel {
         this.DealNames = null;
 
         /**
-         * 资源ID列表
+         * 资源ID列表（异步发货可能无法返回该字段, 强烈建议使用dealNames字段查询接口DescribeResourcesByDealName获取异步发货的资源ID）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
 
         /**
-         * 集群ID列表
+         * 集群ID列表（异步发货可能不返回该字段, 强烈建议使用dealNames查询接口DescribeResourcesByDealName获取异步发货的集群ID）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -3273,28 +3402,22 @@ class CreateClustersRequest extends  AbstractModel {
         this.DbVersion = null;
 
         /**
-         * Cpu核数
+         * 所属项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 普通实例Cpu核数
          * @type {number || null}
          */
         this.Cpu = null;
 
         /**
-         * 内存
+         * 普通实例内存
          * @type {number || null}
          */
         this.Memory = null;
-
-        /**
-         * 存储上限，单位GB
-         * @type {number || null}
-         */
-        this.StorageLimit = null;
-
-        /**
-         * 所属项目ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
 
         /**
          * 存储
@@ -3366,6 +3489,12 @@ timeRollback，时间点回档
         this.ExpectTimeThresh = null;
 
         /**
+         * 普通实例存储上限，单位GB
+         * @type {number || null}
+         */
+        this.StorageLimit = null;
+
+        /**
          * 实例数量
          * @type {number || null}
          */
@@ -3413,6 +3542,45 @@ timeRollback，时间点回档
          */
         this.ResourceTags = null;
 
+        /**
+         * Db类型
+当DbType为MYSQL时可选(默认NORMAL)：
+<li>NORMAL</li>
+<li>SERVERLESS</li>
+         * @type {string || null}
+         */
+        this.DbMode = null;
+
+        /**
+         * 当DbMode为SEVERLESS时必填
+cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+         * @type {number || null}
+         */
+        this.MinCpu = null;
+
+        /**
+         * 当DbMode为SEVERLESS时必填：
+cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+         * @type {number || null}
+         */
+        this.MaxCpu = null;
+
+        /**
+         * 当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围
+<li>yes</li>
+<li>no</li>
+默认值:yes
+         * @type {string || null}
+         */
+        this.AutoPause = null;
+
+        /**
+         * 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]
+默认值:600
+         * @type {number || null}
+         */
+        this.AutoPauseDelay = null;
+
     }
 
     /**
@@ -3427,10 +3595,9 @@ timeRollback，时间点回档
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
         this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
-        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
         this.AdminPassword = 'AdminPassword' in params ? params.AdminPassword : null;
@@ -3442,6 +3609,7 @@ timeRollback，时间点回档
         this.OriginalClusterId = 'OriginalClusterId' in params ? params.OriginalClusterId : null;
         this.ExpectTime = 'ExpectTime' in params ? params.ExpectTime : null;
         this.ExpectTimeThresh = 'ExpectTimeThresh' in params ? params.ExpectTimeThresh : null;
+        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
@@ -3458,6 +3626,11 @@ timeRollback，时间点回档
                 this.ResourceTags.push(obj);
             }
         }
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
+        this.MinCpu = 'MinCpu' in params ? params.MinCpu : null;
+        this.MaxCpu = 'MaxCpu' in params ? params.MaxCpu : null;
+        this.AutoPause = 'AutoPause' in params ? params.AutoPause : null;
+        this.AutoPauseDelay = 'AutoPauseDelay' in params ? params.AutoPauseDelay : null;
 
     }
 }
@@ -3626,6 +3799,20 @@ class CynosdbCluster extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * Db类型(NORMAL, SERVERLESS)
+         * @type {string || null}
+         */
+        this.DbMode = null;
+
+        /**
+         * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
+resume
+pause
+         * @type {string || null}
+         */
+        this.ServerlessStatus = null;
+
     }
 
     /**
@@ -3677,6 +3864,8 @@ class CynosdbCluster extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.DbMode = 'DbMode' in params ? params.DbMode : null;
+        this.ServerlessStatus = 'ServerlessStatus' in params ? params.ServerlessStatus : null;
 
     }
 }
@@ -4116,6 +4305,7 @@ module.exports = {
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     DescribeClusterInstanceGrpsRequest: DescribeClusterInstanceGrpsRequest,
+    DescribeResourcesByDealNameResponse: DescribeResourcesByDealNameResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
     IsolateInstanceRequest: IsolateInstanceRequest,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
@@ -4142,15 +4332,17 @@ module.exports = {
     DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
     ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
+    DescribeResourcesByDealNameRequest: DescribeResourcesByDealNameRequest,
     IsolateInstanceResponse: IsolateInstanceResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
+    DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
     QueryFilter: QueryFilter,
     CynosdbInstance: CynosdbInstance,
     DescribeAccountsResponse: DescribeAccountsResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
     DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
     OfflineInstanceRequest: OfflineInstanceRequest,
-    DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
+    BillingResourceInfo: BillingResourceInfo,
     OfflineClusterResponse: OfflineClusterResponse,
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
     ObjectTask: ObjectTask,

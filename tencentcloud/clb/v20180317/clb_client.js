@@ -30,12 +30,14 @@ const RuleHealth = models.RuleHealth;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
+const DescribeLoadBalancerTrafficResponse = models.DescribeLoadBalancerTrafficResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
+const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
 const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
-const ClustersZone = models.ClustersZone;
+const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
 const ClassicalTarget = models.ClassicalTarget;
 const RsWeightRule = models.RsWeightRule;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
@@ -68,12 +70,13 @@ const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const Target = models.Target;
+const DescribeLoadBalancerTrafficRequest = models.DescribeLoadBalancerTrafficRequest;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
 const DescribeClsLogSetRequest = models.DescribeClsLogSetRequest;
 const Listener = models.Listener;
-const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
+const LoadBalancerTraffic = models.LoadBalancerTraffic;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ReplaceCertForLoadBalancersResponse = models.ReplaceCertForLoadBalancersResponse;
@@ -129,7 +132,7 @@ const ClusterResource = models.ClusterResource;
 const ModifyDomainResponse = models.ModifyDomainResponse;
 const RegisterTargetsResponse = models.RegisterTargetsResponse;
 const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
-const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
+const ClustersZone = models.ClustersZone;
 const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
@@ -236,7 +239,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 创建主题，默认开启全文索引和键值索引。如果不存在clb专有日志集，则创建失败。
+     * 创建主题，默认开启全文索引和键值索引。如果不存在CLB专有日志集，则创建失败。
      * @param {CreateTopicRequest} req
      * @param {function(string, CreateTopicResponse):void} cb
      * @public
@@ -247,7 +250,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 对于SnatPro的负载均衡，这个接口用于删除SnatIp
+     * 这个接口用于删除SnatPro的负载均衡的SnatIp。
      * @param {DeleteLoadBalancerSnatIpsRequest} req
      * @param {function(string, DeleteLoadBalancerSnatIpsResponse):void} cb
      * @public
@@ -327,7 +330,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 增加、删除、更新负载均衡的日志服务(CLS)主题
+     * 增加、删除、更新负载均衡的日志服务(CLS)主题。
      * @param {SetLoadBalancerClsLogRequest} req
      * @param {function(string, SetLoadBalancerClsLogResponse):void} cb
      * @public
@@ -422,8 +425,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DeregisterTargetsFromClassicalLB 接口用于解绑负载均衡后端服务。
-本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * DeregisterTargetsFromClassicalLB 接口用于解绑负载均衡后端服务。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {DeregisterTargetsFromClassicalLBRequest} req
      * @param {function(string, DeregisterTargetsFromClassicalLBResponse):void} cb
      * @public
@@ -434,7 +436,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 创建clb专有日志集，此日志集用于存储clb的日志。
+     * 创建CLB专有日志集，此日志集用于存储CLB的日志。
      * @param {CreateClsLogSetRequest} req
      * @param {function(string, CreateClsLogSetResponse):void} cb
      * @public
@@ -506,6 +508,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 获取目标组绑定的服务器信息
+     * @param {DescribeTargetGroupInstancesRequest} req
+     * @param {function(string, DescribeTargetGroupInstancesResponse):void} cb
+     * @public
+     */
+    DescribeTargetGroupInstances(req, cb) {
+        let resp = new DescribeTargetGroupInstancesResponse();
+        this.request("DescribeTargetGroupInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(AssociateTargetGroups)用来将目标组绑定到负载均衡的监听器（四层协议）或转发规则（七层协议）上。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {AssociateTargetGroupsRequest} req
@@ -518,7 +531,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 将服务器从目标组中解绑。
+     * 从目标组中解绑服务器。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {DeregisterTargetGroupInstancesRequest} req
      * @param {function(string, DeregisterTargetGroupInstancesResponse):void} cb
@@ -530,7 +543,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 查询一个地域的负载均衡实例列表
+     * 查询一个地域的负载均衡实例列表。
 
      * @param {DescribeLoadBalancersRequest} req
      * @param {function(string, DescribeLoadBalancersResponse):void} cb
@@ -564,7 +577,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DescribeClassicalLBTargets用于获取传统型负载均衡绑定的后端服务
+     * DescribeClassicalLBTargets用于获取传统型负载均衡绑定的后端服务。
      * @param {DescribeClassicalLBTargetsRequest} req
      * @param {function(string, DescribeClassicalLBTargetsResponse):void} cb
      * @public
@@ -610,7 +623,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 获取用户的clb专有日志集
+     * 获取用户的CLB专有日志集。
      * @param {DescribeClsLogSetRequest} req
      * @param {function(string, DescribeClsLogSetResponse):void} cb
      * @public
@@ -656,7 +669,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 查询独占集群中资源列表，支持按集群ID、vip、负载均衡ID、是否闲置为过滤条件检索
+     * 查询独占集群中的资源列表，支持按集群ID、VIP、负载均衡ID、是否闲置为过滤条件检索。
      * @param {DescribeClusterResourcesRequest} req
      * @param {function(string, DescribeClusterResourcesResponse):void} cb
      * @public
@@ -734,8 +747,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。
-本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {RegisterTargetsWithClassicalLBRequest} req
      * @param {function(string, RegisterTargetsWithClassicalLBResponse):void} cb
      * @public
@@ -825,7 +837,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启
+     * 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启。
      * @param {CreateLoadBalancerSnatIpsRequest} req
      * @param {function(string, CreateLoadBalancerSnatIpsResponse):void} cb
      * @public
@@ -836,7 +848,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * DescribeClassicalLBByInstanceId用于通过后端实例ID获取传统型负载均衡ID列表
+     * DescribeClassicalLBByInstanceId用于通过后端实例ID获取传统型负载均衡ID列表。
      * @param {DescribeClassicalLBByInstanceIdRequest} req
      * @param {function(string, DescribeClassicalLBByInstanceIdResponse):void} cb
      * @public
@@ -847,14 +859,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 获取目标组绑定的服务器信息
-     * @param {DescribeTargetGroupInstancesRequest} req
-     * @param {function(string, DescribeTargetGroupInstancesResponse):void} cb
+     * 查询账号下的高流量负载均衡，返回前10个负载均衡。如果是子账号登录，只返回子账号有权限的负载均衡。
+     * @param {DescribeLoadBalancerTrafficRequest} req
+     * @param {function(string, DescribeLoadBalancerTrafficResponse):void} cb
      * @public
      */
-    DescribeTargetGroupInstances(req, cb) {
-        let resp = new DescribeTargetGroupInstancesResponse();
-        this.request("DescribeTargetGroupInstances", req, resp, cb);
+    DescribeLoadBalancerTraffic(req, cb) {
+        let resp = new DescribeLoadBalancerTrafficResponse();
+        this.request("DescribeLoadBalancerTraffic", req, resp, cb);
     }
 
     /**

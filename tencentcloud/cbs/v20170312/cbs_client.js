@@ -20,9 +20,10 @@ const DetachDisksRequest = models.DetachDisksRequest;
 const DescribeDiskOperationLogsResponse = models.DescribeDiskOperationLogsResponse;
 const ResizeDiskRequest = models.ResizeDiskRequest;
 const RenewDiskRequest = models.RenewDiskRequest;
-const TerminateDisksResponse = models.TerminateDisksResponse;
+const Price = models.Price;
 const DescribeSnapshotSharePermissionResponse = models.DescribeSnapshotSharePermissionResponse;
 const SharePermission = models.SharePermission;
+const ModifyDiskExtraPerformanceRequest = models.ModifyDiskExtraPerformanceRequest;
 const ModifyDiskAttributesResponse = models.ModifyDiskAttributesResponse;
 const TerminateDisksRequest = models.TerminateDisksRequest;
 const ModifyDisksChargeTypeResponse = models.ModifyDisksChargeTypeResponse;
@@ -31,6 +32,7 @@ const DescribeInstancesDiskNumRequest = models.DescribeInstancesDiskNumRequest;
 const AutoSnapshotPolicy = models.AutoSnapshotPolicy;
 const Policy = models.Policy;
 const ModifySnapshotsSharePermissionResponse = models.ModifySnapshotsSharePermissionResponse;
+const InquirePriceModifyDiskExtraPerformanceRequest = models.InquirePriceModifyDiskExtraPerformanceRequest;
 const GetSnapOverviewRequest = models.GetSnapOverviewRequest;
 const DescribeSnapshotOperationLogsRequest = models.DescribeSnapshotOperationLogsRequest;
 const ModifySnapshotAttributeRequest = models.ModifySnapshotAttributeRequest;
@@ -41,7 +43,7 @@ const InquiryPriceRenewDisksResponse = models.InquiryPriceRenewDisksResponse;
 const ModifyDisksRenewFlagRequest = models.ModifyDisksRenewFlagRequest;
 const ModifyAutoSnapshotPolicyAttributeResponse = models.ModifyAutoSnapshotPolicyAttributeResponse;
 const ModifyDisksChargeTypeRequest = models.ModifyDisksChargeTypeRequest;
-const Price = models.Price;
+const ModifyDiskExtraPerformanceResponse = models.ModifyDiskExtraPerformanceResponse;
 const UnbindAutoSnapshotPolicyResponse = models.UnbindAutoSnapshotPolicyResponse;
 const InquiryPriceCreateDisksResponse = models.InquiryPriceCreateDisksResponse;
 const DiskConfig = models.DiskConfig;
@@ -54,6 +56,7 @@ const DiskChargePrepaid = models.DiskChargePrepaid;
 const DescribeSnapshotOperationLogsResponse = models.DescribeSnapshotOperationLogsResponse;
 const ModifyDisksRenewFlagResponse = models.ModifyDisksRenewFlagResponse;
 const DescribeDiskAssociatedAutoSnapshotPolicyResponse = models.DescribeDiskAssociatedAutoSnapshotPolicyResponse;
+const TerminateDisksResponse = models.TerminateDisksResponse;
 const GetSnapOverviewResponse = models.GetSnapOverviewResponse;
 const ApplySnapshotResponse = models.ApplySnapshotResponse;
 const DeleteAutoSnapshotPoliciesResponse = models.DeleteAutoSnapshotPoliciesResponse;
@@ -74,6 +77,7 @@ const ModifySnapshotsSharePermissionRequest = models.ModifySnapshotsSharePermiss
 const DiskOperationLog = models.DiskOperationLog;
 const UnbindAutoSnapshotPolicyRequest = models.UnbindAutoSnapshotPolicyRequest;
 const DescribeDiskOperationLogsRequest = models.DescribeDiskOperationLogsRequest;
+const InquirePriceModifyDiskExtraPerformanceResponse = models.InquirePriceModifyDiskExtraPerformanceResponse;
 const BindAutoSnapshotPolicyResponse = models.BindAutoSnapshotPolicyResponse;
 const CreateDisksRequest = models.CreateDisksRequest;
 const AttachDisksRequest = models.AttachDisksRequest;
@@ -108,6 +112,19 @@ class CbsClient extends AbstractClient {
         super("cbs.tencentcloudapi.com", "2017-03-12", credential, region, profile);
     }
     
+    /**
+     * 本接口（ModifyDiskExtraPerformance）用于调整云硬盘额外的性能。
+
+* 目前仅支持极速型SSD云硬盘（CLOUD_TSSD）和高性能SSD云硬盘(CLOUD_HSSD)。
+     * @param {ModifyDiskExtraPerformanceRequest} req
+     * @param {function(string, ModifyDiskExtraPerformanceResponse):void} cb
+     * @public
+     */
+    ModifyDiskExtraPerformance(req, cb) {
+        let resp = new ModifyDiskExtraPerformanceResponse();
+        this.request("ModifyDiskExtraPerformance", req, resp, cb);
+    }
+
     /**
      * 本接口（RenewDisk）用于续费云硬盘。
 
@@ -149,6 +166,17 @@ class CbsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（InquirePriceModifyDiskExtraPerformance）用于调整云硬盘额外性能询价。
+     * @param {InquirePriceModifyDiskExtraPerformanceRequest} req
+     * @param {function(string, InquirePriceModifyDiskExtraPerformanceResponse):void} cb
+     * @public
+     */
+    InquirePriceModifyDiskExtraPerformance(req, cb) {
+        let resp = new InquirePriceModifyDiskExtraPerformanceResponse();
+        this.request("InquirePriceModifyDiskExtraPerformance", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeAutoSnapshotPolicies）用于查询定期快照策略。
 
 * 可以根据定期快照策略ID、名称或者状态等信息来查询定期快照策略的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
@@ -166,7 +194,7 @@ class CbsClient extends AbstractClient {
     /**
      * 本接口（AttachDisks）用于挂载云硬盘。
  
-* 支持批量操作，将多块云盘挂载到同一云主机。如果多个云盘存在不允许挂载的云盘，则操作不执行，以返回特定的错误码返回。
+* 支持批量操作，将多块云盘挂载到同一云主机。如果多个云盘中存在不允许挂载的云盘，则操作不执行，返回特定的错误码。
 * 本接口为异步接口，当挂载云盘的请求成功返回时，表示后台已发起挂载云盘的操作，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHING”变为“ATTACHED”，则为挂载成功。
      * @param {AttachDisksRequest} req
      * @param {function(string, AttachDisksResponse):void} cb
@@ -520,10 +548,10 @@ class CbsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DetachDisks）用于解挂云硬盘。
+     * 本接口（DetachDisks）用于卸载云硬盘。
 
-* 支持批量操作，解挂挂载在同一主机上的多块云盘。如果多块云盘存在不允许解挂载的云盘，则操作不执行，以返回特定的错误码返回。
-* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机解挂载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为解挂载成功。
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
      * @param {DetachDisksRequest} req
      * @param {function(string, DetachDisksResponse):void} cb
      * @public

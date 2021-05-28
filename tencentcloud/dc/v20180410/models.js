@@ -17,6 +17,27 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeInternetAddressQuota请求参数结构体
+ * @class
+ */
+class DescribeInternetAddressQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * bgp参数，包括Asn，AuthKey
  * @class
  */
@@ -52,7 +73,7 @@ class BgpPeer extends  AbstractModel {
 }
 
 /**
- * 专线通道路由
+ * 专用通道路由
  * @class
  */
 class DirectConnectTunnelRoute extends  AbstractModel {
@@ -143,84 +164,24 @@ class RejectDirectConnectTunnelRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDirectConnectAttribute请求参数结构体
+ * 坐标，经维度描述
  * @class
  */
-class ModifyDirectConnectAttributeRequest extends  AbstractModel {
+class Coordinate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 物理专线的ID。
-         * @type {string || null}
-         */
-        this.DirectConnectId = null;
-
-        /**
-         * 物理专线名称。
-         * @type {string || null}
-         */
-        this.DirectConnectName = null;
-
-        /**
-         * 运营商或者服务商为物理专线提供的电路编码。
-         * @type {string || null}
-         */
-        this.CircuitCode = null;
-
-        /**
-         * 物理专线调试VLAN。
+         * 纬度
          * @type {number || null}
          */
-        this.Vlan = null;
+        this.Lat = null;
 
         /**
-         * 物理专线调试腾讯侧互联 IP。
-         * @type {string || null}
+         * 经度
+         * @type {number || null}
          */
-        this.TencentAddress = null;
-
-        /**
-         * 物理专线调试用户侧互联 IP。
-         * @type {string || null}
-         */
-        this.CustomerAddress = null;
-
-        /**
-         * 物理专线申请者姓名。默认从账户体系获取。
-         * @type {string || null}
-         */
-        this.CustomerName = null;
-
-        /**
-         * 物理专线申请者联系邮箱。默认从账户体系获取。
-         * @type {string || null}
-         */
-        this.CustomerContactMail = null;
-
-        /**
-         * 物理专线申请者联系号码。默认从账户体系获取。
-         * @type {string || null}
-         */
-        this.CustomerContactNumber = null;
-
-        /**
-         * 报障联系人。
-         * @type {string || null}
-         */
-        this.FaultReportContactPerson = null;
-
-        /**
-         * 报障联系电话。
-         * @type {string || null}
-         */
-        this.FaultReportContactNumber = null;
-
-        /**
-         * 物理专线申请者补签用户使用协议
-         * @type {boolean || null}
-         */
-        this.SignLaw = null;
+        this.Lng = null;
 
     }
 
@@ -231,46 +192,8 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
-        this.DirectConnectName = 'DirectConnectName' in params ? params.DirectConnectName : null;
-        this.CircuitCode = 'CircuitCode' in params ? params.CircuitCode : null;
-        this.Vlan = 'Vlan' in params ? params.Vlan : null;
-        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
-        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
-        this.CustomerName = 'CustomerName' in params ? params.CustomerName : null;
-        this.CustomerContactMail = 'CustomerContactMail' in params ? params.CustomerContactMail : null;
-        this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
-        this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
-        this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
-        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
-
-    }
-}
-
-/**
- * DeleteDirectConnectTunnel请求参数结构体
- * @class
- */
-class DeleteDirectConnectTunnelRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 专用通道ID
-         * @type {string || null}
-         */
-        this.DirectConnectTunnelId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+        this.Lat = 'Lat' in params ? params.Lat : null;
+        this.Lng = 'Lng' in params ? params.Lng : null;
 
     }
 }
@@ -597,6 +520,34 @@ class DirectConnect extends  AbstractModel {
          */
         this.SignLaw = null;
 
+        /**
+         * 物理专线是否为LocalZone
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.LocalZone = null;
+
+        /**
+         * 该物理专线下vlan 0的专用通道数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VlanZeroDirectConnectTunnelCount = null;
+
+        /**
+         * 该物理专线下非vlan 0的专用通道数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OtherVlanDirectConnectTunnelCount = null;
+
+        /**
+         * 物理专线最小带宽
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MinBandwidth = null;
+
     }
 
     /**
@@ -642,6 +593,131 @@ class DirectConnect extends  AbstractModel {
         this.ChargeState = 'ChargeState' in params ? params.ChargeState : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+        this.LocalZone = 'LocalZone' in params ? params.LocalZone : null;
+        this.VlanZeroDirectConnectTunnelCount = 'VlanZeroDirectConnectTunnelCount' in params ? params.VlanZeroDirectConnectTunnelCount : null;
+        this.OtherVlanDirectConnectTunnelCount = 'OtherVlanDirectConnectTunnelCount' in params ? params.OtherVlanDirectConnectTunnelCount : null;
+        this.MinBandwidth = 'MinBandwidth' in params ? params.MinBandwidth : null;
+
+    }
+}
+
+/**
+ * 互联网地址详细信息
+ * @class
+ */
+class InternetAddressDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 互联网地址ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 互联网网络地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Subnet = null;
+
+        /**
+         * 网络地址掩码长度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaskLen = null;
+
+        /**
+         * 0:BGP
+1:电信
+2:移动
+3:联通
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AddrType = null;
+
+        /**
+         * 0:使用中
+1:已停用
+2:已退还
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 申请时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplyTime = null;
+
+        /**
+         * 停用时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StopTime = null;
+
+        /**
+         * 退还时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReleaseTime = null;
+
+        /**
+         * 地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 0:IPv4 1:IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AddrProto = null;
+
+        /**
+         * 释放状态的IP地址保留的天数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReserveTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Subnet = 'Subnet' in params ? params.Subnet : null;
+        this.MaskLen = 'MaskLen' in params ? params.MaskLen : null;
+        this.AddrType = 'AddrType' in params ? params.AddrType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ApplyTime = 'ApplyTime' in params ? params.ApplyTime : null;
+        this.StopTime = 'StopTime' in params ? params.StopTime : null;
+        this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.AddrProto = 'AddrProto' in params ? params.AddrProto : null;
+        this.ReserveTime = 'ReserveTime' in params ? params.ReserveTime : null;
 
     }
 }
@@ -697,18 +773,18 @@ class DescribeAccessPointsResponse extends  AbstractModel {
 }
 
 /**
- * AcceptDirectConnectTunnel返回参数结构体
+ * DeleteDirectConnectTunnel请求参数结构体
  * @class
  */
-class AcceptDirectConnectTunnelResponse extends  AbstractModel {
+class DeleteDirectConnectTunnelRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 专用通道ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DirectConnectTunnelId = null;
 
     }
 
@@ -719,7 +795,7 @@ class AcceptDirectConnectTunnelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
 
     }
 }
@@ -748,6 +824,34 @@ class AcceptDirectConnectTunnelRequest extends  AbstractModel {
             return;
         }
         this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+
+    }
+}
+
+/**
+ * ReleaseInternetAddress请求参数结构体
+ * @class
+ */
+class ReleaseInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公网互联网地址ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -844,6 +948,42 @@ class RouteFilterPrefix extends  AbstractModel {
             return;
         }
         this.Cidr = 'Cidr' in params ? params.Cidr : null;
+
+    }
+}
+
+/**
+ * ApplyInternetAddress返回参数结构体
+ * @class
+ */
+class ApplyInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 互联网公网地址ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1099,6 +1239,48 @@ REJECTED:拒绝
          */
         this.BgpStatus = null;
 
+        /**
+         * 是否开启IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IPv6Enable = null;
+
+        /**
+         * 腾讯侧互联IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TencentIPv6Address = null;
+
+        /**
+         * 腾讯侧备用互联IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TencentBackupIPv6Address = null;
+
+        /**
+         * BGPv6状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {BGPStatus || null}
+         */
+        this.BgpIPv6Status = null;
+
+        /**
+         * 用户侧互联IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CustomerIPv6Address = null;
+
+        /**
+         * 专线通道是否支持巨帧。1 支持，0 不支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.JumboEnable = null;
+
     }
 
     /**
@@ -1177,6 +1359,17 @@ REJECTED:拒绝
             obj.deserialize(params.BgpStatus)
             this.BgpStatus = obj;
         }
+        this.IPv6Enable = 'IPv6Enable' in params ? params.IPv6Enable : null;
+        this.TencentIPv6Address = 'TencentIPv6Address' in params ? params.TencentIPv6Address : null;
+        this.TencentBackupIPv6Address = 'TencentBackupIPv6Address' in params ? params.TencentBackupIPv6Address : null;
+
+        if (params.BgpIPv6Status) {
+            let obj = new BGPStatus();
+            obj.deserialize(params.BgpIPv6Status)
+            this.BgpIPv6Status = obj;
+        }
+        this.CustomerIPv6Address = 'CustomerIPv6Address' in params ? params.CustomerIPv6Address : null;
+        this.JumboEnable = 'JumboEnable' in params ? params.JumboEnable : null;
 
     }
 }
@@ -1325,6 +1518,12 @@ STATIC：静态
          */
         this.TencentBackupAddress = null;
 
+        /**
+         * 高速上云服务ID
+         * @type {string || null}
+         */
+        this.CloudAttachId = null;
+
     }
 
     /**
@@ -1362,6 +1561,7 @@ STATIC：静态
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
+        this.CloudAttachId = 'CloudAttachId' in params ? params.CloudAttachId : null;
 
     }
 }
@@ -1418,6 +1618,80 @@ class ModifyDirectConnectTunnelExtraResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnableInternetAddress返回参数结构体
+ * @class
+ */
+class EnableInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ApplyInternetAddress请求参数结构体
+ * @class
+ */
+class ApplyInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CIDR地址掩码长度
+         * @type {number || null}
+         */
+        this.MaskLen = null;
+
+        /**
+         * 0:BGP类型地址
+1：中国电信
+2：中国移动
+3：中国联通
+         * @type {number || null}
+         */
+        this.AddrType = null;
+
+        /**
+         * 0：IPv4
+1:IPv6
+         * @type {number || null}
+         */
+        this.AddrProto = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaskLen = 'MaskLen' in params ? params.MaskLen : null;
+        this.AddrType = 'AddrType' in params ? params.AddrType : null;
+        this.AddrProto = 'AddrProto' in params ? params.AddrProto : null;
 
     }
 }
@@ -1525,36 +1799,18 @@ class DescribeAccessPointsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDirectConnects请求参数结构体
+ * AcceptDirectConnectTunnel返回参数结构体
  * @class
  */
-class DescribeDirectConnectsRequest extends  AbstractModel {
+class AcceptDirectConnectTunnelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤条件:
-         * @type {Array.<Filter> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Filters = null;
-
-        /**
-         * 物理专线 ID数组
-         * @type {Array.<string> || null}
-         */
-        this.DirectConnectIds = null;
-
-        /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认为20，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -1565,18 +1821,7 @@ class DescribeDirectConnectsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.DirectConnectIds = 'DirectConnectIds' in params ? params.DirectConnectIds : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1638,6 +1883,169 @@ class DescribeDirectConnectTunnelsRequest extends  AbstractModel {
         this.DirectConnectTunnelIds = 'DirectConnectTunnelIds' in params ? params.DirectConnectTunnelIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyDirectConnectAttribute请求参数结构体
+ * @class
+ */
+class ModifyDirectConnectAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 物理专线的ID。
+         * @type {string || null}
+         */
+        this.DirectConnectId = null;
+
+        /**
+         * 物理专线名称。
+         * @type {string || null}
+         */
+        this.DirectConnectName = null;
+
+        /**
+         * 运营商或者服务商为物理专线提供的电路编码。
+         * @type {string || null}
+         */
+        this.CircuitCode = null;
+
+        /**
+         * 物理专线调试VLAN。
+         * @type {number || null}
+         */
+        this.Vlan = null;
+
+        /**
+         * 物理专线调试腾讯侧互联 IP。
+         * @type {string || null}
+         */
+        this.TencentAddress = null;
+
+        /**
+         * 物理专线调试用户侧互联 IP。
+         * @type {string || null}
+         */
+        this.CustomerAddress = null;
+
+        /**
+         * 物理专线申请者姓名。默认从账户体系获取。
+         * @type {string || null}
+         */
+        this.CustomerName = null;
+
+        /**
+         * 物理专线申请者联系邮箱。默认从账户体系获取。
+         * @type {string || null}
+         */
+        this.CustomerContactMail = null;
+
+        /**
+         * 物理专线申请者联系号码。默认从账户体系获取。
+         * @type {string || null}
+         */
+        this.CustomerContactNumber = null;
+
+        /**
+         * 报障联系人。
+         * @type {string || null}
+         */
+        this.FaultReportContactPerson = null;
+
+        /**
+         * 报障联系电话。
+         * @type {string || null}
+         */
+        this.FaultReportContactNumber = null;
+
+        /**
+         * 物理专线申请者补签用户使用协议
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
+        /**
+         * 物理专线带宽
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
+        this.DirectConnectName = 'DirectConnectName' in params ? params.DirectConnectName : null;
+        this.CircuitCode = 'CircuitCode' in params ? params.CircuitCode : null;
+        this.Vlan = 'Vlan' in params ? params.Vlan : null;
+        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
+        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.CustomerName = 'CustomerName' in params ? params.CustomerName : null;
+        this.CustomerContactMail = 'CustomerContactMail' in params ? params.CustomerContactMail : null;
+        this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
+        this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
+        this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+
+    }
+}
+
+/**
+ * DescribeInternetAddress返回参数结构体
+ * @class
+ */
+class DescribeInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 互联网公网地址数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 互联网公网地址列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InternetAddressDetail> || null}
+         */
+        this.Subnets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Subnets) {
+            this.Subnets = new Array();
+            for (let z in params.Subnets) {
+                let obj = new InternetAddressDetail();
+                obj.deserialize(params.Subnets[z]);
+                this.Subnets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1763,6 +2171,92 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * DisableInternetAddress返回参数结构体
+ * @class
+ */
+class DisableInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInternetAddressStatistics请求参数结构体
+ * @class
+ */
+class DescribeInternetAddressStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * 互联网公网地址统计
+ * @class
+ */
+class InternetAddressStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 互联网公网地址数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SubnetNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.SubnetNum = 'SubnetNum' in params ? params.SubnetNum : null;
 
     }
 }
@@ -1909,6 +2403,34 @@ class CreateDirectConnectRequest extends  AbstractModel {
 }
 
 /**
+ * EnableInternetAddress请求参数结构体
+ * @class
+ */
+class EnableInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 互联网公网地址ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ModifyDirectConnectAttribute返回参数结构体
  * @class
  */
@@ -1963,7 +2485,7 @@ class ModifyDirectConnectTunnelExtraRequest extends  AbstractModel {
         this.BgpPeer = null;
 
         /**
-         * 用户侧网段地址
+         * 用户侧过滤网段地址
          * @type {RouteFilterPrefix || null}
          */
         this.RouteFilterPrefixes = null;
@@ -2022,6 +2544,27 @@ class ModifyDirectConnectTunnelExtraRequest extends  AbstractModel {
          */
         this.NqaInfo = null;
 
+        /**
+         * 0：停用IPv6
+1: 启用IPv6
+         * @type {number || null}
+         */
+        this.IPv6Enable = null;
+
+        /**
+         * 去往用户侧的路由信息
+         * @type {Array.<RouteFilterPrefix> || null}
+         */
+        this.CustomerIDCRoutes = null;
+
+        /**
+         * 是否开启巨帧
+1：开启
+0：不开启
+         * @type {number || null}
+         */
+        this.JumboEnable = null;
+
     }
 
     /**
@@ -2064,6 +2607,17 @@ class ModifyDirectConnectTunnelExtraRequest extends  AbstractModel {
             obj.deserialize(params.NqaInfo)
             this.NqaInfo = obj;
         }
+        this.IPv6Enable = 'IPv6Enable' in params ? params.IPv6Enable : null;
+
+        if (params.CustomerIDCRoutes) {
+            this.CustomerIDCRoutes = new Array();
+            for (let z in params.CustomerIDCRoutes) {
+                let obj = new RouteFilterPrefix();
+                obj.deserialize(params.CustomerIDCRoutes[z]);
+                this.CustomerIDCRoutes.push(obj);
+            }
+        }
+        this.JumboEnable = 'JumboEnable' in params ? params.JumboEnable : null;
 
     }
 }
@@ -2127,6 +2681,63 @@ class CreateDirectConnectTunnelResponse extends  AbstractModel {
         }
         this.DirectConnectTunnelIdSet = 'DirectConnectTunnelIdSet' in params ? params.DirectConnectTunnelIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDirectConnects请求参数结构体
+ * @class
+ */
+class DescribeDirectConnectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件:
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 物理专线 ID数组
+         * @type {Array.<string> || null}
+         */
+        this.DirectConnectIds = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.DirectConnectIds = 'DirectConnectIds' in params ? params.DirectConnectIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2323,6 +2934,27 @@ class AccessPoint extends  AbstractModel {
          */
         this.AvailablePortType = null;
 
+        /**
+         * 接入点经纬度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Coordinate || null}
+         */
+        this.Coordinate = null;
+
+        /**
+         * 接入点所在城市
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 接入点地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -2339,6 +2971,65 @@ class AccessPoint extends  AbstractModel {
         this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.AvailablePortType = 'AvailablePortType' in params ? params.AvailablePortType : null;
+
+        if (params.Coordinate) {
+            let obj = new Coordinate();
+            obj.deserialize(params.Coordinate)
+            this.Coordinate = obj;
+        }
+        this.City = 'City' in params ? params.City : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * DescribeInternetAddressStatistics返回参数结构体
+ * @class
+ */
+class DescribeInternetAddressStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 互联网公网地址统计信息数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 互联网公网地址统计信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InternetAddressStatistics> || null}
+         */
+        this.InternetAddressStatistics = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InternetAddressStatistics) {
+            this.InternetAddressStatistics = new Array();
+            for (let z in params.InternetAddressStatistics) {
+                let obj = new InternetAddressStatistics();
+                obj.deserialize(params.InternetAddressStatistics[z]);
+                this.InternetAddressStatistics.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2381,6 +3072,61 @@ class NQAInfo extends  AbstractModel {
         this.ProbeFailedTimes = 'ProbeFailedTimes' in params ? params.ProbeFailedTimes : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.DestinationIp = 'DestinationIp' in params ? params.DestinationIp : null;
+
+    }
+}
+
+/**
+ * DescribeInternetAddress请求参数结构体
+ * @class
+ */
+class DescribeInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤条件：
+<li>AddrType, 地址类型。0：BGP 1; 1: 电信， 2：移动， 3：联通</li>
+<li>AddrProto地址类型。0：IPv4 1:IPv6</li>
+<li>Status 地址状态。 0：使用中， 1：已停用， 2：已退还</li>
+<li>Subnet 互联网公网地址，数组</li>
+<InstanceIds>互联网公网地址ID，数组</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -2430,6 +3176,102 @@ class DescribePublicDirectConnectTunnelRoutesResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInternetAddressQuota返回参数结构体
+ * @class
+ */
+class DescribeInternetAddressQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IPv6互联网公网允许的最小前缀长度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv6PrefixLen = null;
+
+        /**
+         * BGP类型IPv4互联网地址配额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv4BgpQuota = null;
+
+        /**
+         * 非BGP类型IPv4互联网地址配额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv4OtherQuota = null;
+
+        /**
+         * BGP类型IPv4互联网地址已使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv4BgpNum = null;
+
+        /**
+         * 非BGP类型互联网地址已使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv4OtherNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ipv6PrefixLen = 'Ipv6PrefixLen' in params ? params.Ipv6PrefixLen : null;
+        this.Ipv4BgpQuota = 'Ipv4BgpQuota' in params ? params.Ipv4BgpQuota : null;
+        this.Ipv4OtherQuota = 'Ipv4OtherQuota' in params ? params.Ipv4OtherQuota : null;
+        this.Ipv4BgpNum = 'Ipv4BgpNum' in params ? params.Ipv4BgpNum : null;
+        this.Ipv4OtherNum = 'Ipv4OtherNum' in params ? params.Ipv4OtherNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleaseInternetAddress返回参数结构体
+ * @class
+ */
+class ReleaseInternetAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2637,6 +3479,13 @@ REJECTED:拒绝
          */
         this.SignLaw = null;
 
+        /**
+         * 高速上云服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CloudAttachId = null;
+
     }
 
     /**
@@ -2696,50 +3545,96 @@ REJECTED:拒绝
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
         this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+        this.CloudAttachId = 'CloudAttachId' in params ? params.CloudAttachId : null;
+
+    }
+}
+
+/**
+ * DisableInternetAddress请求参数结构体
+ * @class
+ */
+class DisableInternetAddressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公网互联网地址ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
 
 module.exports = {
+    DescribeInternetAddressQuotaRequest: DescribeInternetAddressQuotaRequest,
     BgpPeer: BgpPeer,
     DirectConnectTunnelRoute: DirectConnectTunnelRoute,
     RejectDirectConnectTunnelRequest: RejectDirectConnectTunnelRequest,
-    ModifyDirectConnectAttributeRequest: ModifyDirectConnectAttributeRequest,
-    DeleteDirectConnectTunnelRequest: DeleteDirectConnectTunnelRequest,
+    Coordinate: Coordinate,
     CreateDirectConnectResponse: CreateDirectConnectResponse,
     DescribeDirectConnectTunnelExtraRequest: DescribeDirectConnectTunnelExtraRequest,
     DescribePublicDirectConnectTunnelRoutesRequest: DescribePublicDirectConnectTunnelRoutesRequest,
     DirectConnect: DirectConnect,
+    InternetAddressDetail: InternetAddressDetail,
     DescribeAccessPointsResponse: DescribeAccessPointsResponse,
-    AcceptDirectConnectTunnelResponse: AcceptDirectConnectTunnelResponse,
+    DeleteDirectConnectTunnelRequest: DeleteDirectConnectTunnelRequest,
     AcceptDirectConnectTunnelRequest: AcceptDirectConnectTunnelRequest,
+    ReleaseInternetAddressRequest: ReleaseInternetAddressRequest,
     DescribeDirectConnectTunnelExtraResponse: DescribeDirectConnectTunnelExtraResponse,
     ModifyDirectConnectTunnelAttributeResponse: ModifyDirectConnectTunnelAttributeResponse,
     RouteFilterPrefix: RouteFilterPrefix,
+    ApplyInternetAddressResponse: ApplyInternetAddressResponse,
     BGPStatus: BGPStatus,
     DirectConnectTunnelExtra: DirectConnectTunnelExtra,
     Tag: Tag,
     CreateDirectConnectTunnelRequest: CreateDirectConnectTunnelRequest,
     DeleteDirectConnectResponse: DeleteDirectConnectResponse,
     ModifyDirectConnectTunnelExtraResponse: ModifyDirectConnectTunnelExtraResponse,
+    EnableInternetAddressResponse: EnableInternetAddressResponse,
+    ApplyInternetAddressRequest: ApplyInternetAddressRequest,
     DescribeDirectConnectsResponse: DescribeDirectConnectsResponse,
     DescribeAccessPointsRequest: DescribeAccessPointsRequest,
-    DescribeDirectConnectsRequest: DescribeDirectConnectsRequest,
+    AcceptDirectConnectTunnelResponse: AcceptDirectConnectTunnelResponse,
     DescribeDirectConnectTunnelsRequest: DescribeDirectConnectTunnelsRequest,
+    ModifyDirectConnectAttributeRequest: ModifyDirectConnectAttributeRequest,
+    DescribeInternetAddressResponse: DescribeInternetAddressResponse,
     ModifyDirectConnectTunnelAttributeRequest: ModifyDirectConnectTunnelAttributeRequest,
     Filter: Filter,
+    DisableInternetAddressResponse: DisableInternetAddressResponse,
+    DescribeInternetAddressStatisticsRequest: DescribeInternetAddressStatisticsRequest,
+    InternetAddressStatistics: InternetAddressStatistics,
     CreateDirectConnectRequest: CreateDirectConnectRequest,
+    EnableInternetAddressRequest: EnableInternetAddressRequest,
     ModifyDirectConnectAttributeResponse: ModifyDirectConnectAttributeResponse,
     ModifyDirectConnectTunnelExtraRequest: ModifyDirectConnectTunnelExtraRequest,
     RejectDirectConnectTunnelResponse: RejectDirectConnectTunnelResponse,
     CreateDirectConnectTunnelResponse: CreateDirectConnectTunnelResponse,
+    DescribeDirectConnectsRequest: DescribeDirectConnectsRequest,
     DeleteDirectConnectTunnelResponse: DeleteDirectConnectTunnelResponse,
     BFDInfo: BFDInfo,
     DeleteDirectConnectRequest: DeleteDirectConnectRequest,
     DescribeDirectConnectTunnelsResponse: DescribeDirectConnectTunnelsResponse,
     AccessPoint: AccessPoint,
+    DescribeInternetAddressStatisticsResponse: DescribeInternetAddressStatisticsResponse,
     NQAInfo: NQAInfo,
+    DescribeInternetAddressRequest: DescribeInternetAddressRequest,
     DescribePublicDirectConnectTunnelRoutesResponse: DescribePublicDirectConnectTunnelRoutesResponse,
+    DescribeInternetAddressQuotaResponse: DescribeInternetAddressQuotaResponse,
+    ReleaseInternetAddressResponse: ReleaseInternetAddressResponse,
     DirectConnectTunnel: DirectConnectTunnel,
+    DisableInternetAddressRequest: DisableInternetAddressRequest,
 
 }

@@ -17,12 +17,18 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * ExportBashEvents请求参数结构体
+ * DescribeMalwareInfo请求参数结构体
  * @class
  */
-class ExportBashEventsRequest extends  AbstractModel {
+class DescribeMalwareInfoRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 唯一ID
+         * @type {number || null}
+         */
+        this.Id = null;
 
     }
 
@@ -33,57 +39,30 @@ class ExportBashEventsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
 
 /**
- * ModifyAutoOpenProVersionConfig请求参数结构体
+ * DescribeSearchTemplates返回参数结构体
  * @class
  */
-class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
+class DescribeSearchTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 设置自动开通状态。
-<li>CLOSE：关闭</li>
-<li>OPEN：打开</li>
-         * @type {string || null}
+         * 总数
+         * @type {number || null}
          */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-
-    }
-}
-
-/**
- * DescribeProcessTaskStatus返回参数结构体
- * @class
- */
-class DescribeProcessTaskStatusResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.TotalCount = null;
 
         /**
-         * 任务状态。
-<li>COMPLETE：完成（此时可以调用DescribeProcesses接口获取实时进程列表）</li>
-<li>AGENT_OFFLINE：云镜客户端离线</li>
-<li>COLLECTING：进程获取中</li>
-<li>FAILED：进程获取失败</li>
-         * @type {string || null}
+         * 模板列表
+         * @type {Array.<SearchTemplate> || null}
          */
-        this.Status = null;
+        this.List = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -100,8 +79,38 @@ class DescribeProcessTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new SearchTemplate();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMachineOsList请求参数结构体
+ * @class
+ */
+class DescribeMachineOsListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -121,6 +130,12 @@ class ExportReverseShellEventsResponse extends  AbstractModel {
         this.DownloadUrl = null;
 
         /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -136,6 +151,7 @@ class ExportReverseShellEventsResponse extends  AbstractModel {
             return;
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -200,6 +216,42 @@ class DescribeBashRulesRequest extends  AbstractModel {
 }
 
 /**
+ * ExportBashEvents请求参数结构体
+ * @class
+ */
+class ExportBashEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤参数
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ExportPrivilegeEvents返回参数结构体
  * @class
  */
@@ -212,6 +264,12 @@ class ExportPrivilegeEventsResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.DownloadUrl = null;
+
+        /**
+         * 导出任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -229,6 +287,7 @@ class ExportPrivilegeEventsResponse extends  AbstractModel {
             return;
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -349,46 +408,32 @@ class DescribeWeeklyReportBruteAttacksResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAgentVuls请求参数结构体
+ * DescribeImportMachineInfo返回参数结构体
  * @class
  */
-class DescribeAgentVulsRequest extends  AbstractModel {
+class DescribeImportMachineInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞类型。
-<li>WEB: Web应用漏洞</li>
-<li>SYSTEM：系统组件漏洞</li>
-<li>BASELINE：安全基线</li>
+         * 有效的机器信息列表：机器名称、机器公网/内网ip、机器标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<EffectiveMachineInfo> || null}
+         */
+        this.EffectiveMachineInfoList = null;
+
+        /**
+         * 用户批量导入失败的机器列表（比如机器不存在等...）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.InvalidMachineList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.VulType = null;
-
-        /**
-         * 客户端UUID。
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * 返回数量，默认为10，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤条件。
-<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | FIXED：已修复）
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -399,19 +444,63 @@ class DescribeAgentVulsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulType = 'VulType' in params ? params.VulType : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.EffectiveMachineInfoList) {
+            this.EffectiveMachineInfoList = new Array();
+            for (let z in params.EffectiveMachineInfoList) {
+                let obj = new EffectiveMachineInfo();
+                obj.deserialize(params.EffectiveMachineInfoList[z]);
+                this.EffectiveMachineInfoList.push(obj);
             }
         }
+        this.InvalidMachineList = 'InvalidMachineList' in params ? params.InvalidMachineList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 容器安全
+描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+
+ * @class
+ */
+class AssetFilters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤键的名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 一个或者多个过滤值。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * 是否模糊查询
+         * @type {boolean || null}
+         */
+        this.ExactMatch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
 
     }
 }
@@ -438,6 +527,18 @@ class DescribeTagsRequest extends  AbstractModel {
          */
         this.MachineRegion = null;
 
+        /**
+         * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 查询关键字(机器名称/机器IP </li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装 | SHUTDOWN 已关机）</li>
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+<li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -449,6 +550,15 @@ class DescribeTagsRequest extends  AbstractModel {
         }
         this.MachineType = 'MachineType' in params ? params.MachineType : null;
         this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -538,31 +648,28 @@ class UsualPlace extends  AbstractModel {
 }
 
 /**
- * DescribeReverseShellRules请求参数结构体
+ * DescribeProcessTaskStatus返回参数结构体
  * @class
  */
-class DescribeReverseShellRulesRequest extends  AbstractModel {
+class DescribeProcessTaskStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回数量，默认为10，最大值为100。
-         * @type {number || null}
+         * 任务状态。
+<li>COMPLETE：完成（此时可以调用DescribeProcesses接口获取实时进程列表）</li>
+<li>AGENT_OFFLINE：云镜客户端离线</li>
+<li>COLLECTING：进程获取中</li>
+<li>FAILED：进程获取失败</li>
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.Status = null;
 
         /**
-         * 偏移量，默认为0。
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Offset = null;
-
-        /**
-         * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.RequestId = null;
 
     }
 
@@ -573,17 +680,8 @@ class DescribeReverseShellRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -853,6 +951,41 @@ class DescribeWeeklyReportBruteAttacksRequest extends  AbstractModel {
 }
 
 /**
+ * CreateSearchTemplate返回参数结构体
+ * @class
+ */
+class CreateSearchTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0：成功，非0：失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateUsualLoginPlaces请求参数结构体
  * @class
  */
@@ -924,36 +1057,12 @@ class DescribeProcessTaskStatusRequest extends  AbstractModel {
 }
 
 /**
- * 地域信息
+ * DescribeAttackVulTypeList请求参数结构体
  * @class
  */
-class RegionInfo extends  AbstractModel {
+class DescribeAttackVulTypeListRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
-         * @type {string || null}
-         */
-        this.RegionName = null;
-
-        /**
-         * 地域ID
-         * @type {number || null}
-         */
-        this.RegionId = null;
-
-        /**
-         * 地域代码，如 gz，sh，bj
-         * @type {string || null}
-         */
-        this.RegionCode = null;
 
     }
 
@@ -964,57 +1073,17 @@ class RegionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
 
     }
 }
 
 /**
- * DescribeVulScanResult返回参数结构体
+ * DescribeLogStorageStatistic请求参数结构体
  * @class
  */
-class DescribeVulScanResultResponse extends  AbstractModel {
+class DescribeLogStorageStatisticRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 漏洞数量。
-         * @type {number || null}
-         */
-        this.VulNum = null;
-
-        /**
-         * 专业版机器数。
-         * @type {number || null}
-         */
-        this.ProVersionNum = null;
-
-        /**
-         * 受影响的专业版主机数。
-         * @type {number || null}
-         */
-        this.ImpactedHostNum = null;
-
-        /**
-         * 主机总数。
-         * @type {number || null}
-         */
-        this.HostNum = null;
-
-        /**
-         * 基础版机器数。
-         * @type {number || null}
-         */
-        this.BasicVersionNum = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -1025,12 +1094,6 @@ class DescribeVulScanResultResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulNum = 'VulNum' in params ? params.VulNum : null;
-        this.ProVersionNum = 'ProVersionNum' in params ? params.ProVersionNum : null;
-        this.ImpactedHostNum = 'ImpactedHostNum' in params ? params.ImpactedHostNum : null;
-        this.HostNum = 'HostNum' in params ? params.HostNum : null;
-        this.BasicVersionNum = 'BasicVersionNum' in params ? params.BasicVersionNum : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1099,8 +1162,12 @@ class DescribeAttackLogsRequest extends  AbstractModel {
         /**
          * 过滤条件。
 <li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
 <li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
+<li>VulType - String 威胁类型 - 是否必填: 否</li>
+<li>SrcIp - String 攻击源IP - 是否必填: 否</li>
+<li>DstIp - String 攻击目标IP - 是否必填: 否</li>
+<li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
+<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1250,12 +1317,24 @@ class InquiryPriceOpenProVersionPrepaidRequest extends  AbstractModel {
 }
 
 /**
- * ExportMalwares请求参数结构体
+ * DescribeSearchTemplates请求参数结构体
  * @class
  */
-class ExportMalwaresRequest extends  AbstractModel {
+class DescribeSearchTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -1265,6 +1344,64 @@ class ExportMalwaresRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ExportMalwares请求参数结构体
+ * @class
+ */
+class ExportMalwaresRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 限制条数,默认10
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量 默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤参数。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>FilePath - String - 是否必填：否 - 路径筛选</li>
+<li>VirusName - String - 是否必填：否 - 描述筛选</li>
+<li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间</li>
+<li>CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间</li>
+<li>Status - String - 是否必填：否 - 状态筛选</li>
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -1349,12 +1486,24 @@ class DeleteBashEventsResponse extends  AbstractModel {
 }
 
 /**
- * ExportPrivilegeEvents请求参数结构体
+ * DescribeMalwareInfo返回参数结构体
  * @class
  */
-class ExportPrivilegeEventsRequest extends  AbstractModel {
+class DescribeMalwareInfoResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 恶意文件详情信息
+         * @type {MalwareInfo || null}
+         */
+        this.MalwareInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1364,6 +1513,49 @@ class ExportPrivilegeEventsRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.MalwareInfo) {
+            let obj = new MalwareInfo();
+            obj.deserialize(params.MalwareInfo)
+            this.MalwareInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExportPrivilegeEvents请求参数结构体
+ * @class
+ */
+class ExportPrivilegeEventsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤参数
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -1538,6 +1730,41 @@ class DescribeSecurityTrendsRequest extends  AbstractModel {
         }
         this.BeginDate = 'BeginDate' in params ? params.BeginDate : null;
         this.EndDate = 'EndDate' in params ? params.EndDate : null;
+
+    }
+}
+
+/**
+ * DescribeAttackVulTypeList返回参数结构体
+ * @class
+ */
+class DescribeAttackVulTypeListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 威胁类型列表
+         * @type {Array.<string> || null}
+         */
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.List = 'List' in params ? params.List : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1926,82 +2153,12 @@ class DescribeOpenPortsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeImpactedHosts请求参数结构体
+ * DeleteBashRules返回参数结构体
  * @class
  */
-class DescribeImpactedHostsRequest extends  AbstractModel {
+class DeleteBashRulesResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 漏洞种类ID。
-         * @type {number || null}
-         */
-        this.VulId = null;
-
-        /**
-         * 返回数量，默认为10，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤条件。
-<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED：待处理 | FIXED：已修复）</li>
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VulId = 'VulId' in params ? params.VulId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DescribeMaliciousRequests返回参数结构体
- * @class
- */
-class DescribeMaliciousRequestsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 记录总数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 恶意请求记录数组。
-         * @type {Array.<MaliciousRequest> || null}
-         */
-        this.MaliciousRequests = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2018,96 +2175,18 @@ class DescribeMaliciousRequestsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.MaliciousRequests) {
-            this.MaliciousRequests = new Array();
-            for (let z in params.MaliciousRequests) {
-                let obj = new MaliciousRequest();
-                obj.deserialize(params.MaliciousRequests[z]);
-                this.MaliciousRequests.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 异地登录
+ * DescribeScanMalwareSchedule请求参数结构体
  * @class
  */
-class NonLocalLoginPlace extends  AbstractModel {
+class DescribeScanMalwareScheduleRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 事件ID。
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 主机IP。
-         * @type {string || null}
-         */
-        this.MachineIp = null;
-
-        /**
-         * 登录状态
-<li>NON_LOCAL_LOGIN：异地登录</li>
-<li>NORMAL_LOGIN：正常登录</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 用户名。
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * 城市ID。
-         * @type {number || null}
-         */
-        this.City = null;
-
-        /**
-         * 国家ID。
-         * @type {number || null}
-         */
-        this.Country = null;
-
-        /**
-         * 省份ID。
-         * @type {number || null}
-         */
-        this.Province = null;
-
-        /**
-         * 登录IP。
-         * @type {string || null}
-         */
-        this.SrcIp = null;
-
-        /**
-         * 机器名称。
-         * @type {string || null}
-         */
-        this.MachineName = null;
-
-        /**
-         * 登录时间。
-         * @type {string || null}
-         */
-        this.LoginTime = null;
-
-        /**
-         * 云镜客户端唯一标识Uuid。
-         * @type {string || null}
-         */
-        this.Uuid = null;
 
     }
 
@@ -2118,17 +2197,228 @@ class NonLocalLoginPlace extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.City = 'City' in params ? params.City : null;
-        this.Country = 'Country' in params ? params.Country : null;
-        this.Province = 'Province' in params ? params.Province : null;
-        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+
+    }
+}
+
+/**
+ * DescribeAgentVuls请求参数结构体
+ * @class
+ */
+class DescribeAgentVulsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞类型。
+<li>WEB: Web应用漏洞</li>
+<li>SYSTEM：系统组件漏洞</li>
+<li>BASELINE：安全基线</li>
+         * @type {string || null}
+         */
+        this.VulType = null;
+
+        /**
+         * 客户端UUID。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED: 待处理 | FIXED：已修复）
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulType = 'VulType' in params ? params.VulType : null;
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeProVersionInfo返回参数结构体
+ * @class
+ */
+class DescribeProVersionInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 后付费昨日扣费
+         * @type {number || null}
+         */
+        this.PostPayCost = null;
+
+        /**
+         * 新增主机是否自动开通专业版
+         * @type {boolean || null}
+         */
+        this.IsAutoOpenProVersion = null;
+
+        /**
+         * 开通专业版主机数
+         * @type {number || null}
+         */
+        this.ProVersionNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PostPayCost = 'PostPayCost' in params ? params.PostPayCost : null;
+        this.IsAutoOpenProVersion = 'IsAutoOpenProVersion' in params ? params.IsAutoOpenProVersion : null;
+        this.ProVersionNum = 'ProVersionNum' in params ? params.ProVersionNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRiskDnsList返回参数结构体
+ * @class
+ */
+class DescribeRiskDnsListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeExportMachines请求参数结构体
+ * @class
+ */
+class DescribeExportMachinesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云主机类型。
+<li>CVM：表示虚拟主机</li>
+<li>BM:  表示黑石物理机</li>
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器所属地域。如：ap-guangzhou，ap-shanghai
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 机器所属业务ID列表
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
 
     }
 }
@@ -2162,51 +2452,54 @@ class CreateProcessTaskResponse extends  AbstractModel {
 }
 
 /**
- * 安全事件消息数据。
+ * DescribeHistoryService返回参数结构体
  * @class
  */
-class SecurityDynamic extends  AbstractModel {
+class DescribeHistoryServiceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云镜客户端UUID。
-         * @type {string || null}
+         * 1 可购买 2 只能升降配 3 只能跳到续费管理页
+         * @type {number || null}
          */
-        this.Uuid = null;
+        this.BuyStatus = null;
 
         /**
-         * 安全事件发生事件。
-         * @type {string || null}
+         * 用户已购容量 单位 G
+         * @type {number || null}
          */
-        this.EventTime = null;
+        this.InquireNum = null;
 
         /**
-         * 安全事件类型。
-<li>MALWARE：木马事件</li>
-<li>NON_LOCAL_LOGIN：异地登录</li>
-<li>BRUTEATTACK_SUCCESS：密码破解成功</li>
-<li>VUL：漏洞</li>
-<li>BASELINE：安全基线</li>
+         * 到期时间
          * @type {string || null}
          */
-        this.EventType = null;
+        this.EndTime = null;
 
         /**
-         * 安全事件消息。
-         * @type {string || null}
+         * 是否自动续费,0 初始值, 1 开通 2 没开通
+         * @type {number || null}
          */
-        this.Message = null;
+        this.IsAutoOpenRenew = null;
 
         /**
-         * 安全事件等级。
-<li>RISK: 严重</li>
-<li>HIGH: 高危</li>
-<li>NORMAL: 中危</li>
-<li>LOW: 低危</li>
+         * 资源ID
          * @type {string || null}
          */
-        this.SecurityLevel = null;
+        this.ResourceId = null;
+
+        /**
+         * 0 没开通 1 正常 2隔离 3销毁
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2217,11 +2510,13 @@ class SecurityDynamic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.EventTime = 'EventTime' in params ? params.EventTime : null;
-        this.EventType = 'EventType' in params ? params.EventType : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.SecurityLevel = 'SecurityLevel' in params ? params.SecurityLevel : null;
+        this.BuyStatus = 'BuyStatus' in params ? params.BuyStatus : null;
+        this.InquireNum = 'InquireNum' in params ? params.InquireNum : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IsAutoOpenRenew = 'IsAutoOpenRenew' in params ? params.IsAutoOpenRenew : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2448,6 +2743,56 @@ class CreateBaselineStrategyResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMaliciousRequests返回参数结构体
+ * @class
+ */
+class DescribeMaliciousRequestsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 恶意请求记录数组。
+         * @type {Array.<MaliciousRequest> || null}
+         */
+        this.MaliciousRequests = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.MaliciousRequests) {
+            this.MaliciousRequests = new Array();
+            for (let z in params.MaliciousRequests) {
+                let obj = new MaliciousRequest();
+                obj.deserialize(params.MaliciousRequests[z]);
+                this.MaliciousRequests.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 反弹Shell规则
  * @class
  */
@@ -2581,6 +2926,177 @@ class OpenPortStatistics extends  AbstractModel {
 }
 
 /**
+ * DescribeBruteAttackList返回参数结构体
+ * @class
+ */
+class DescribeBruteAttackListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 密码破解列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<BruteAttackInfo> || null}
+         */
+        this.BruteAttackList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.BruteAttackList) {
+            this.BruteAttackList = new Array();
+            for (let z in params.BruteAttackList) {
+                let obj = new BruteAttackInfo();
+                obj.deserialize(params.BruteAttackList[z]);
+                this.BruteAttackList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeExportMachines返回参数结构体
+ * @class
+ */
+class DescribeExportMachinesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVulInfo返回参数结构体
+ * @class
+ */
+class DescribeVulInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞种类ID。
+         * @type {number || null}
+         */
+        this.VulId = null;
+
+        /**
+         * 漏洞名称。
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 漏洞等级。
+         * @type {string || null}
+         */
+        this.VulLevel = null;
+
+        /**
+         * 漏洞类型。
+         * @type {string || null}
+         */
+        this.VulType = null;
+
+        /**
+         * 漏洞描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 修复方案。
+         * @type {string || null}
+         */
+        this.RepairPlan = null;
+
+        /**
+         * 漏洞CVE。
+         * @type {string || null}
+         */
+        this.CveId = null;
+
+        /**
+         * 参考链接。
+         * @type {string || null}
+         */
+        this.Reference = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
+        this.VulType = 'VulType' in params ? params.VulType : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RepairPlan = 'RepairPlan' in params ? params.RepairPlan : null;
+        this.CveId = 'CveId' in params ? params.CveId : null;
+        this.Reference = 'Reference' in params ? params.Reference : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EditPrivilegeRule返回参数结构体
  * @class
  */
@@ -2604,6 +3120,34 @@ class EditPrivilegeRuleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UntrustMaliciousRequest请求参数结构体
+ * @class
+ */
+class UntrustMaliciousRequestRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 受信任记录ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -2770,24 +3314,24 @@ class UntrustMalwaresRequest extends  AbstractModel {
 }
 
 /**
- * ExportAttackLogs返回参数结构体
+ * DescribeVuls返回参数结构体
  * @class
  */
-class ExportAttackLogsResponse extends  AbstractModel {
+class DescribeVulsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 导出文件下载链接地址。
-         * @type {string || null}
+         * 漏洞数量。
+         * @type {number || null}
          */
-        this.DownloadUrl = null;
+        this.TotalCount = null;
 
         /**
-         * 导出任务ID
-         * @type {string || null}
+         * 漏洞列表数组。
+         * @type {Array.<Vul> || null}
          */
-        this.TaskId = null;
+        this.Vuls = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2804,8 +3348,16 @@ class ExportAttackLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Vuls) {
+            this.Vuls = new Array();
+            for (let z in params.Vuls) {
+                let obj = new Vul();
+                obj.deserialize(params.Vuls[z]);
+                this.Vuls.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3067,18 +3619,51 @@ class ReverseShell extends  AbstractModel {
 }
 
 /**
- * UntrustMaliciousRequest请求参数结构体
+ * 安全事件消息数据。
  * @class
  */
-class UntrustMaliciousRequestRequest extends  AbstractModel {
+class SecurityDynamic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 受信任记录ID。
-         * @type {number || null}
+         * 云镜客户端UUID。
+         * @type {string || null}
          */
-        this.Id = null;
+        this.Uuid = null;
+
+        /**
+         * 安全事件发生事件。
+         * @type {string || null}
+         */
+        this.EventTime = null;
+
+        /**
+         * 安全事件类型。
+<li>MALWARE：木马事件</li>
+<li>NON_LOCAL_LOGIN：异地登录</li>
+<li>BRUTEATTACK_SUCCESS：密码破解成功</li>
+<li>VUL：漏洞</li>
+<li>BASELINE：安全基线</li>
+         * @type {string || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 安全事件消息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 安全事件等级。
+<li>RISK: 严重</li>
+<li>HIGH: 高危</li>
+<li>NORMAL: 中危</li>
+<li>LOW: 低危</li>
+         * @type {string || null}
+         */
+        this.SecurityLevel = null;
 
     }
 
@@ -3089,18 +3674,40 @@ class UntrustMaliciousRequestRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.EventTime = 'EventTime' in params ? params.EventTime : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.SecurityLevel = 'SecurityLevel' in params ? params.SecurityLevel : null;
 
     }
 }
 
 /**
- * ExportNonlocalLoginPlaces请求参数结构体
+ * ExportBruteAttacks返回参数结构体
  * @class
  */
-class ExportNonlocalLoginPlacesRequest extends  AbstractModel {
+class ExportBruteAttacksResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 导出文件下载链接地址。
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 导出任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3111,6 +3718,51 @@ class ExportNonlocalLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExportVulDetectionReport返回参数结构体
+ * @class
+ */
+class ExportVulDetectionReportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出文件下载链接地址
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 导出检测报告的任务Id（不同于入参的漏洞扫描任务id）
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3231,24 +3883,18 @@ class DescribeAccountStatisticsResponse extends  AbstractModel {
 }
 
 /**
- * OpenProVersionPrepaid请求参数结构体
+ * SwitchBashRules返回参数结构体
  * @class
  */
-class OpenProVersionPrepaidRequest extends  AbstractModel {
+class SwitchBashRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 购买相关参数。
-         * @type {ChargePrepaid || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.ChargePrepaid = null;
-
-        /**
-         * 需要开通专业版主机信息数组。
-         * @type {Array.<ProVersionMachine> || null}
-         */
-        this.Machines = null;
+        this.RequestId = null;
 
     }
 
@@ -3259,21 +3905,35 @@ class OpenProVersionPrepaidRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.ChargePrepaid) {
-            let obj = new ChargePrepaid();
-            obj.deserialize(params.ChargePrepaid)
-            this.ChargePrepaid = obj;
-        }
+    }
+}
 
-        if (params.Machines) {
-            this.Machines = new Array();
-            for (let z in params.Machines) {
-                let obj = new ProVersionMachine();
-                obj.deserialize(params.Machines[z]);
-                this.Machines.push(obj);
-            }
+/**
+ * DescribeSearchExportList请求参数结构体
+ * @class
+ */
+class DescribeSearchExportListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES查询条件JSON
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Query = 'Query' in params ? params.Query : null;
 
     }
 }
@@ -3350,66 +4010,31 @@ class DescribeTagsResponse extends  AbstractModel {
 }
 
 /**
- * 端口列表
+ * DescribePrivilegeEvents请求参数结构体
  * @class
  */
-class OpenPort extends  AbstractModel {
+class DescribePrivilegeEventsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一ID。
+         * 返回数量，默认为10，最大值为100。
          * @type {number || null}
          */
-        this.Id = null;
+        this.Limit = null;
 
         /**
-         * 云镜客户端唯一UUID。
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * 开放端口号。
+         * 偏移量，默认为0。
          * @type {number || null}
          */
-        this.Port = null;
+        this.Offset = null;
 
         /**
-         * 主机IP。
-         * @type {string || null}
+         * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
+         * @type {Array.<Filter> || null}
          */
-        this.MachineIp = null;
-
-        /**
-         * 主机名。
-         * @type {string || null}
-         */
-        this.MachineName = null;
-
-        /**
-         * 端口对应进程名。
-         * @type {string || null}
-         */
-        this.ProcessName = null;
-
-        /**
-         * 端口对应进程Pid。
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * 记录创建时间。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 记录更新时间。
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
+        this.Filters = null;
 
     }
 
@@ -3420,15 +4045,17 @@ class OpenPort extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -3511,18 +4138,18 @@ class DeleteMaliciousRequestsResponse extends  AbstractModel {
 }
 
 /**
- * ExportBruteAttacks返回参数结构体
+ * DescribeESHits返回参数结构体
  * @class
  */
-class ExportBruteAttacksResponse extends  AbstractModel {
+class DescribeESHitsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 导出文件下载链接地址。
+         * ES查询结果JSON
          * @type {string || null}
          */
-        this.DownloadUrl = null;
+        this.Data = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3539,8 +4166,85 @@ class ExportBruteAttacksResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.Data = 'Data' in params ? params.Data : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 快速搜索模板
+ * @class
+ */
+class SearchTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检索名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 检索索引类型
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 检索语句
+         * @type {string || null}
+         */
+        this.Condition = null;
+
+        /**
+         * 时间范围
+         * @type {string || null}
+         */
+        this.TimeRange = null;
+
+        /**
+         * 转换的检索语句内容
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 检索方式。输入框检索：standard,过滤，检索：simple
+         * @type {string || null}
+         */
+        this.Flag = null;
+
+        /**
+         * 展示数据
+         * @type {string || null}
+         */
+        this.DisplayData = null;
+
+        /**
+         * 规则ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.Condition = 'Condition' in params ? params.Condition : null;
+        this.TimeRange = 'TimeRange' in params ? params.TimeRange : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
+        this.DisplayData = 'DisplayData' in params ? params.DisplayData : null;
+        this.Id = 'Id' in params ? params.Id : null;
 
     }
 }
@@ -3574,12 +4278,24 @@ class EditReverseShellRuleResponse extends  AbstractModel {
 }
 
 /**
- * ExportBruteAttacks请求参数结构体
+ * 操作系统名称
  * @class
  */
-class ExportBruteAttacksRequest extends  AbstractModel {
+class OsName extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 系统名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 操作系统类型枚举值
+         * @type {number || null}
+         */
+        this.MachineOSType = null;
 
     }
 
@@ -3589,6 +4305,44 @@ class ExportBruteAttacksRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MachineOSType = 'MachineOSType' in params ? params.MachineOSType : null;
+
+    }
+}
+
+/**
+ * ExportBruteAttacks请求参数结构体
+ * @class
+ */
+class ExportBruteAttacksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤参数
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -3688,6 +4442,48 @@ class MachineTag extends  AbstractModel {
         this.Rid = 'Rid' in params ? params.Rid : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.TagId = 'TagId' in params ? params.TagId : null;
+
+    }
+}
+
+/**
+ * DescribeLogStorageStatistic返回参数结构体
+ * @class
+ */
+class DescribeLogStorageStatisticResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总容量（单位：GB）
+         * @type {number || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * 已使用容量（单位：GB）
+         * @type {number || null}
+         */
+        this.UsedSize = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+        this.UsedSize = 'UsedSize' in params ? params.UsedSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4286,6 +5082,45 @@ class TagMachine extends  AbstractModel {
 }
 
 /**
+ * DescribeOpenPortTaskStatus返回参数结构体
+ * @class
+ */
+class DescribeOpenPortTaskStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态。
+<li>COMPLETE：完成（此时可以调用DescribeOpenPorts接口获取实时进程列表）</li>
+<li>AGENT_OFFLINE：云镜客户端离线</li>
+<li>COLLECTING：端口获取中</li>
+<li>FAILED：进程获取失败</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeWeeklyReportInfo请求参数结构体
  * @class
  */
@@ -4663,6 +5498,108 @@ class ModifyLoginWhiteListRequest extends  AbstractModel {
 }
 
 /**
+ * 漏洞列表数据
+ * @class
+ */
+class Vul extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞种类ID
+         * @type {number || null}
+         */
+        this.VulId = null;
+
+        /**
+         * 漏洞名称
+         * @type {string || null}
+         */
+        this.VulName = null;
+
+        /**
+         * 漏洞危害等级:
+HIGH：高危
+MIDDLE：中危
+LOW：低危
+NOTICE：提示
+         * @type {string || null}
+         */
+        this.VulLevel = null;
+
+        /**
+         * 最后扫描时间
+         * @type {string || null}
+         */
+        this.LastScanTime = null;
+
+        /**
+         * 受影响机器数量
+         * @type {number || null}
+         */
+        this.ImpactedHostNum = null;
+
+        /**
+         * 漏洞状态
+* UN_OPERATED : 待处理
+* FIXED : 已修复
+         * @type {string || null}
+         */
+        this.VulStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.VulName = 'VulName' in params ? params.VulName : null;
+        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
+        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.ImpactedHostNum = 'ImpactedHostNum' in params ? params.ImpactedHostNum : null;
+        this.VulStatus = 'VulStatus' in params ? params.VulStatus : null;
+
+    }
+}
+
+/**
+ * CreateSearchTemplate请求参数结构体
+ * @class
+ */
+class CreateSearchTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索模板
+         * @type {SearchTemplate || null}
+         */
+        this.SearchTemplate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SearchTemplate) {
+            let obj = new SearchTemplate();
+            obj.deserialize(params.SearchTemplate)
+            this.SearchTemplate = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeBashEvents请求参数结构体
  * @class
  */
@@ -4800,6 +5737,31 @@ class ExportAttackLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 过滤条件。
+<li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
+<li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
+<li>VulType - String 威胁类型 - 是否必填: 否</li>
+<li>SrcIp - String 攻击源IP - 是否必填: 否</li>
+<li>DstIp - String 攻击目标IP - 是否必填: 否</li>
+<li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
+<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 主机安全客户端ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 云主机机器ID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
     }
 
     /**
@@ -4809,6 +5771,101 @@ class ExportAttackLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+
+    }
+}
+
+/**
+ * ModifyMalwareTimingScanSettings请求参数结构体
+ * @class
+ */
+class ModifyMalwareTimingScanSettingsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检测模式 0 全盘检测  1快速检测
+         * @type {number || null}
+         */
+        this.CheckPattern = null;
+
+        /**
+         * 检测周期 开始时间，如：02:00:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 检测周期 超时结束时间，如：04:00:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 是否全部服务器 1 全部 2 自选
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * 定时检测开关 0 关闭 1开启
+         * @type {number || null}
+         */
+        this.EnableScan = null;
+
+        /**
+         * 监控模式 0 标准 1深度
+         * @type {number || null}
+         */
+        this.MonitoringPattern = null;
+
+        /**
+         * 扫描周期 默认每天 1
+         * @type {number || null}
+         */
+        this.Cycle = null;
+
+        /**
+         * 实时监控 0 关闭 1开启
+         * @type {number || null}
+         */
+        this.RealTimeMonitoring = null;
+
+        /**
+         * 自选服务器时必须 主机quuid的string数组
+         * @type {Array.<string> || null}
+         */
+        this.QuuidList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CheckPattern = 'CheckPattern' in params ? params.CheckPattern : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.EnableScan = 'EnableScan' in params ? params.EnableScan : null;
+        this.MonitoringPattern = 'MonitoringPattern' in params ? params.MonitoringPattern : null;
+        this.Cycle = 'Cycle' in params ? params.Cycle : null;
+        this.RealTimeMonitoring = 'RealTimeMonitoring' in params ? params.RealTimeMonitoring : null;
+        this.QuuidList = 'QuuidList' in params ? params.QuuidList : null;
 
     }
 }
@@ -4837,6 +5894,34 @@ class DeleteMachineRequest extends  AbstractModel {
             return;
         }
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+    }
+}
+
+/**
+ * SetBashEventsStatus返回参数结构体
+ * @class
+ */
+class SetBashEventsStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4942,6 +6027,1131 @@ class DescribeComponentStatisticsResponse extends  AbstractModel {
                 this.ComponentStatistics.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMachineList返回参数结构体
+ * @class
+ */
+class DescribeMachineListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主机列表
+         * @type {Array.<Machine> || null}
+         */
+        this.Machines = null;
+
+        /**
+         * 主机数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Machines) {
+            this.Machines = new Array();
+            for (let z in params.Machines) {
+                let obj = new Machine();
+                obj.deserialize(params.Machines[z]);
+                this.Machines.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 恶意文件详情
+ * @class
+ */
+class MalwareInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 病毒名称
+         * @type {string || null}
+         */
+        this.VirusName = null;
+
+        /**
+         * 文件大小
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 文件MD5
+         * @type {string || null}
+         */
+        this.MD5 = null;
+
+        /**
+         * 文件地址
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * 首次运行时间
+         * @type {string || null}
+         */
+        this.FileCreateTime = null;
+
+        /**
+         * 最近一次运行时间
+         * @type {string || null}
+         */
+        this.FileModifierTime = null;
+
+        /**
+         * 危害描述
+         * @type {string || null}
+         */
+        this.HarmDescribe = null;
+
+        /**
+         * 建议方案
+         * @type {string || null}
+         */
+        this.SuggestScheme = null;
+
+        /**
+         * 服务器名称
+         * @type {string || null}
+         */
+        this.ServersName = null;
+
+        /**
+         * 服务器IP
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * 进程名称
+         * @type {string || null}
+         */
+        this.ProcessName = null;
+
+        /**
+         * 进程ID
+         * @type {string || null}
+         */
+        this.ProcessID = null;
+
+        /**
+         * 标签特性
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 影响广度 // 暂时不提供
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Breadth = null;
+
+        /**
+         * 查询热度 // 暂时不提供
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Heat = null;
+
+        /**
+         * 唯一ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 文件名称
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 首次发现时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最近扫描时间
+         * @type {string || null}
+         */
+        this.LatestScanTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VirusName = 'VirusName' in params ? params.VirusName : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.MD5 = 'MD5' in params ? params.MD5 : null;
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.FileCreateTime = 'FileCreateTime' in params ? params.FileCreateTime : null;
+        this.FileModifierTime = 'FileModifierTime' in params ? params.FileModifierTime : null;
+        this.HarmDescribe = 'HarmDescribe' in params ? params.HarmDescribe : null;
+        this.SuggestScheme = 'SuggestScheme' in params ? params.SuggestScheme : null;
+        this.ServersName = 'ServersName' in params ? params.ServersName : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.ProcessID = 'ProcessID' in params ? params.ProcessID : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.Breadth = 'Breadth' in params ? params.Breadth : null;
+        this.Heat = 'Heat' in params ? params.Heat : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.LatestScanTime = 'LatestScanTime' in params ? params.LatestScanTime : null;
+
+    }
+}
+
+/**
+ * ModifyMalwareTimingScanSettings返回参数结构体
+ * @class
+ */
+class ModifyMalwareTimingScanSettingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 登录地信息
+ * @class
+ */
+class Place extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 城市 ID。
+         * @type {number || null}
+         */
+        this.CityId = null;
+
+        /**
+         * 省份 ID。
+         * @type {number || null}
+         */
+        this.ProvinceId = null;
+
+        /**
+         * 国家ID，暂只支持国内：1。
+         * @type {number || null}
+         */
+        this.CountryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CityId = 'CityId' in params ? params.CityId : null;
+        this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
+        this.CountryId = 'CountryId' in params ? params.CountryId : null;
+
+    }
+}
+
+/**
+ * DescribeMachineRegions请求参数结构体
+ * @class
+ */
+class DescribeMachineRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * 异地登录白名单
+ * @class
+ */
+class LoginWhiteLists extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云镜客户端ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 白名单地域
+         * @type {Array.<Place> || null}
+         */
+        this.Places = null;
+
+        /**
+         * 白名单用户（多个用户逗号隔开）
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 白名单IP（多个IP逗号隔开）
+         * @type {string || null}
+         */
+        this.SrcIp = null;
+
+        /**
+         * 是否为全局规则
+         * @type {boolean || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * 创建白名单时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 修改白名单时间
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 机器名
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 机器IP
+         * @type {string || null}
+         */
+        this.HostIp = null;
+
+        /**
+         * 起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+        if (params.Places) {
+            this.Places = new Array();
+            for (let z in params.Places) {
+                let obj = new Place();
+                obj.deserialize(params.Places[z]);
+                this.Places.push(obj);
+            }
+        }
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * DeleteUsualLoginPlaces返回参数结构体
+ * @class
+ */
+class DeleteUsualLoginPlacesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSearchExportList返回参数结构体
+ * @class
+ */
+class DescribeSearchExportListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出的任务号
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 下载地址
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteSearchTemplate请求参数结构体
+ * @class
+ */
+class DeleteSearchTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DeleteNonlocalLoginPlaces返回参数结构体
+ * @class
+ */
+class DeleteNonlocalLoginPlacesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeNonlocalLoginPlaces返回参数结构体
+ * @class
+ */
+class DescribeNonlocalLoginPlacesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 异地登录信息数组。
+         * @type {Array.<NonLocalLoginPlace> || null}
+         */
+        this.NonLocalLoginPlaces = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.NonLocalLoginPlaces) {
+            this.NonLocalLoginPlaces = new Array();
+            for (let z in params.NonLocalLoginPlaces) {
+                let obj = new NonLocalLoginPlace();
+                obj.deserialize(params.NonLocalLoginPlaces[z]);
+                this.NonLocalLoginPlaces.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteReverseShellRules返回参数结构体
+ * @class
+ */
+class DeleteReverseShellRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExportMalwares返回参数结构体
+ * @class
+ */
+class ExportMalwaresResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出文件下载链接地址。
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateBaselineStrategy返回参数结构体
+ * @class
+ */
+class UpdateBaselineStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UntrustMalwares返回参数结构体
+ * @class
+ */
+class UntrustMalwaresResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RenewProVersion返回参数结构体
+ * @class
+ */
+class RenewProVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeletePrivilegeRules返回参数结构体
+ * @class
+ */
+class DeletePrivilegeRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateOpenPortTask返回参数结构体
+ * @class
+ */
+class CreateOpenPortTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMachineList请求参数结构体
+ * @class
+ */
+class DescribeMachineListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云主机类型。
+<li>CVM：表示虚拟主机</li>
+<li>BM:  表示黑石物理机</li>
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器所属地域。如：ap-guangzhou，ap-shanghai
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+         * @type {Array.<AssetFilters> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new AssetFilters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * EditBashRule请求参数结构体
+ * @class
+ */
+class EditBashRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 危险等级(1: 高危 2:中危 3: 低危)
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 正则表达式
+         * @type {string || null}
+         */
+        this.Rule = null;
+
+        /**
+         * 规则ID(新增时不填)
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 客户端ID(IsGlobal为0时，Uuid或Hostip必填一个)
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 主机IP(IsGlobal为0时，Uuid或Hostip必填一个)
+         * @type {string || null}
+         */
+        this.Hostip = null;
+
+        /**
+         * 是否全局规则(默认否)
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Rule = 'Rule' in params ? params.Rule : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Hostip = 'Hostip' in params ? params.Hostip : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+
+    }
+}
+
+/**
+ * ExportVulDetectionExcel返回参数结构体
+ * @class
+ */
+class ExportVulDetectionExcelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导出文件下载链接地址
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 导出本次漏洞检测Excel的任务Id（不同于入参的本次漏洞检测任务id）
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SeparateMalwares返回参数结构体
+ * @class
+ */
+class SeparateMalwaresResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 隔离成功的id数组。
+         * @type {Array.<number> || null}
+         */
+        this.SuccessIds = null;
+
+        /**
+         * 隔离失败的id数组。
+         * @type {Array.<number> || null}
+         */
+        this.FailedIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessIds = 'SuccessIds' in params ? params.SuccessIds : null;
+        this.FailedIds = 'FailedIds' in params ? params.FailedIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchBashRules请求参数结构体
+ * @class
+ */
+class SwitchBashRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 是否禁用
+         * @type {number || null}
+         */
+        this.Disabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Disabled = 'Disabled' in params ? params.Disabled : null;
+
+    }
+}
+
+/**
+ * DeletePrivilegeEvents返回参数结构体
+ * @class
+ */
+class DeletePrivilegeEventsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * InquiryPriceOpenProVersionPrepaid返回参数结构体
+ * @class
+ */
+class InquiryPriceOpenProVersionPrepaidResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预支费用的原价，单位：元。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 预支费用的折扣价，单位：元。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5095,582 +7305,6 @@ class PrivilegeEscalationProcess extends  AbstractModel {
 }
 
 /**
- * 登录地信息
- * @class
- */
-class Place extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 城市 ID。
-         * @type {number || null}
-         */
-        this.CityId = null;
-
-        /**
-         * 省份 ID。
-         * @type {number || null}
-         */
-        this.ProvinceId = null;
-
-        /**
-         * 国家ID，暂只支持国内：1。
-         * @type {number || null}
-         */
-        this.CountryId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CityId = 'CityId' in params ? params.CityId : null;
-        this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
-        this.CountryId = 'CountryId' in params ? params.CountryId : null;
-
-    }
-}
-
-/**
- * SwitchBashRules返回参数结构体
- * @class
- */
-class SwitchBashRulesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 异地登录白名单
- * @class
- */
-class LoginWhiteLists extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 记录ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 云镜客户端ID
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * 白名单地域
-         * @type {Array.<Place> || null}
-         */
-        this.Places = null;
-
-        /**
-         * 白名单用户（多个用户逗号隔开）
-         * @type {string || null}
-         */
-        this.UserName = null;
-
-        /**
-         * 白名单IP（多个IP逗号隔开）
-         * @type {string || null}
-         */
-        this.SrcIp = null;
-
-        /**
-         * 是否为全局规则
-         * @type {boolean || null}
-         */
-        this.IsGlobal = null;
-
-        /**
-         * 创建白名单时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 修改白名单时间
-         * @type {string || null}
-         */
-        this.ModifyTime = null;
-
-        /**
-         * 机器名
-         * @type {string || null}
-         */
-        this.MachineName = null;
-
-        /**
-         * 机器IP
-         * @type {string || null}
-         */
-        this.HostIp = null;
-
-        /**
-         * 起始时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-
-        if (params.Places) {
-            this.Places = new Array();
-            for (let z in params.Places) {
-                let obj = new Place();
-                obj.deserialize(params.Places[z]);
-                this.Places.push(obj);
-            }
-        }
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
-        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.HostIp = 'HostIp' in params ? params.HostIp : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
- * DeleteUsualLoginPlaces返回参数结构体
- * @class
- */
-class DeleteUsualLoginPlacesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteNonlocalLoginPlaces返回参数结构体
- * @class
- */
-class DeleteNonlocalLoginPlacesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeNonlocalLoginPlaces返回参数结构体
- * @class
- */
-class DescribeNonlocalLoginPlacesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 记录总数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 异地登录信息数组。
-         * @type {Array.<NonLocalLoginPlace> || null}
-         */
-        this.NonLocalLoginPlaces = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.NonLocalLoginPlaces) {
-            this.NonLocalLoginPlaces = new Array();
-            for (let z in params.NonLocalLoginPlaces) {
-                let obj = new NonLocalLoginPlace();
-                obj.deserialize(params.NonLocalLoginPlaces[z]);
-                this.NonLocalLoginPlaces.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteReverseShellRules返回参数结构体
- * @class
- */
-class DeleteReverseShellRulesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ExportMalwares返回参数结构体
- * @class
- */
-class ExportMalwaresResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 导出文件下载链接地址。
-         * @type {string || null}
-         */
-        this.DownloadUrl = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UntrustMalwares返回参数结构体
- * @class
- */
-class UntrustMalwaresResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeletePrivilegeRules返回参数结构体
- * @class
- */
-class DeletePrivilegeRulesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateOpenPortTask返回参数结构体
- * @class
- */
-class CreateOpenPortTaskResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * EditBashRule请求参数结构体
- * @class
- */
-class EditBashRuleRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 规则名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 危险等级(1: 高危 2:中危 3: 低危)
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * 正则表达式
-         * @type {string || null}
-         */
-        this.Rule = null;
-
-        /**
-         * 规则ID(新增时不填)
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
-         * @type {string || null}
-         */
-        this.Hostip = null;
-
-        /**
-         * 是否全局规则(默认否)
-         * @type {number || null}
-         */
-        this.IsGlobal = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Rule = 'Rule' in params ? params.Rule : null;
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Hostip = 'Hostip' in params ? params.Hostip : null;
-        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
-
-    }
-}
-
-/**
- * DeletePrivilegeEvents返回参数结构体
- * @class
- */
-class DeletePrivilegeEventsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * InquiryPriceOpenProVersionPrepaid返回参数结构体
- * @class
- */
-class InquiryPriceOpenProVersionPrepaidResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 预支费用的原价，单位：元。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 预支费用的折扣价，单位：元。
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * CloseProVersion请求参数结构体
  * @class
  */
@@ -5700,12 +7334,18 @@ class CloseProVersionRequest extends  AbstractModel {
 }
 
 /**
- * SetBashEventsStatus返回参数结构体
+ * DescribeIndexList返回参数结构体
  * @class
  */
-class SetBashEventsStatusResponse extends  AbstractModel {
+class DescribeIndexListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * ES 索引信息
+         * @type {string || null}
+         */
+        this.Data = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5722,7 +7362,43 @@ class SetBashEventsStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Data = 'Data' in params ? params.Data : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeImportMachineInfo请求参数结构体
+ * @class
+ */
+class DescribeImportMachineInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器内网IP（默认）/ 服务器名称 / 服务器ID 数组
+         * @type {Array.<string> || null}
+         */
+        this.MachineList = null;
+
+        /**
+         * 批量导入的数据类型：Ip、Name、Id 三选一
+         * @type {string || null}
+         */
+        this.ImportType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineList = 'MachineList' in params ? params.MachineList : null;
+        this.ImportType = 'ImportType' in params ? params.ImportType : null;
 
     }
 }
@@ -5766,6 +7442,75 @@ class DescribeUsualLoginPlacesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRiskDnsList请求参数结构体
+ * @class
+ */
+class DescribeRiskDnsListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>Url - String - 是否必填：否 - Url筛选</li>
+<li>Status - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
+<li>MergeBeginTime - String - 是否必填：否 - 最近访问开始时间</li>
+<li>MergeEndTime - String - 是否必填：否 - 最近访问结束时间</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.Order = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.By = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Order = 'Order' in params ? params.Order : null;
+        this.By = 'By' in params ? params.By : null;
 
     }
 }
@@ -5912,6 +7657,27 @@ class ExportMaliciousRequestsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSearchLogs请求参数结构体
+ * @class
+ */
+class DescribeSearchLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeAttackLogInfo请求参数结构体
  * @class
  */
@@ -6027,6 +7793,90 @@ class DescribeBruteAttacksResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyProVersionRenewFlag返回参数结构体
+ * @class
+ */
+class ModifyProVersionRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 地域信息
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域代码，如 gz，sh，bj
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * 地域英文名
+         * @type {string || null}
+         */
+        this.RegionNameEn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.RegionNameEn = 'RegionNameEn' in params ? params.RegionNameEn : null;
 
     }
 }
@@ -6274,60 +8124,12 @@ class DescribeLoginWhiteListResponse extends  AbstractModel {
 }
 
 /**
- * DescribeVulInfo返回参数结构体
+ * DescribeMachineRegions返回参数结构体
  * @class
  */
-class DescribeVulInfoResponse extends  AbstractModel {
+class DescribeMachineRegionsResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 漏洞种类ID。
-         * @type {number || null}
-         */
-        this.VulId = null;
-
-        /**
-         * 漏洞名称。
-         * @type {string || null}
-         */
-        this.VulName = null;
-
-        /**
-         * 漏洞等级。
-         * @type {string || null}
-         */
-        this.VulLevel = null;
-
-        /**
-         * 漏洞类型。
-         * @type {string || null}
-         */
-        this.VulType = null;
-
-        /**
-         * 漏洞描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 修复方案。
-         * @type {string || null}
-         */
-        this.RepairPlan = null;
-
-        /**
-         * 漏洞CVE。
-         * @type {string || null}
-         */
-        this.CveId = null;
-
-        /**
-         * 参考链接。
-         * @type {string || null}
-         */
-        this.Reference = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6344,32 +8146,30 @@ class DescribeVulInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VulId = 'VulId' in params ? params.VulId : null;
-        this.VulName = 'VulName' in params ? params.VulName : null;
-        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
-        this.VulType = 'VulType' in params ? params.VulType : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RepairPlan = 'RepairPlan' in params ? params.RepairPlan : null;
-        this.CveId = 'CveId' in params ? params.CveId : null;
-        this.Reference = 'Reference' in params ? params.Reference : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeTagMachines请求参数结构体
+ * OpenProVersionPrepaid请求参数结构体
  * @class
  */
-class DescribeTagMachinesRequest extends  AbstractModel {
+class OpenProVersionPrepaidRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签ID
-         * @type {number || null}
+         * 购买相关参数。
+         * @type {ChargePrepaid || null}
          */
-        this.Id = null;
+        this.ChargePrepaid = null;
+
+        /**
+         * 需要开通专业版主机信息数组。
+         * @type {Array.<ProVersionMachine> || null}
+         */
+        this.Machines = null;
 
     }
 
@@ -6380,7 +8180,77 @@ class DescribeTagMachinesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.ChargePrepaid) {
+            let obj = new ChargePrepaid();
+            obj.deserialize(params.ChargePrepaid)
+            this.ChargePrepaid = obj;
+        }
+
+        if (params.Machines) {
+            this.Machines = new Array();
+            for (let z in params.Machines) {
+                let obj = new ProVersionMachine();
+                obj.deserialize(params.Machines[z]);
+                this.Machines.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeScanMalwareSchedule返回参数结构体
+ * @class
+ */
+class DescribeScanMalwareScheduleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扫描进度
+         * @type {number || null}
+         */
+        this.Schedule = null;
+
+        /**
+         * 风险文件数,当进度满了以后才有该值
+         * @type {number || null}
+         */
+        this.RiskFileNumber = null;
+
+        /**
+         * 是否正在扫描中
+         * @type {boolean || null}
+         */
+        this.IsSchedule = null;
+
+        /**
+         * 0 从未扫描过、 1 扫描中、 2扫描完成、 3停止中、 4停止完成
+         * @type {number || null}
+         */
+        this.ScanStatus = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Schedule = 'Schedule' in params ? params.Schedule : null;
+        this.RiskFileNumber = 'RiskFileNumber' in params ? params.RiskFileNumber : null;
+        this.IsSchedule = 'IsSchedule' in params ? params.IsSchedule : null;
+        this.ScanStatus = 'ScanStatus' in params ? params.ScanStatus : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6456,30 +8326,18 @@ class EditReverseShellRuleRequest extends  AbstractModel {
 }
 
 /**
- * DescribeProVersionInfo返回参数结构体
+ * DescribeESAggregations返回参数结构体
  * @class
  */
-class DescribeProVersionInfoResponse extends  AbstractModel {
+class DescribeESAggregationsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 后付费昨日扣费
-         * @type {number || null}
+         * ES聚合结果JSON
+         * @type {string || null}
          */
-        this.PostPayCost = null;
-
-        /**
-         * 新增主机是否自动开通专业版
-         * @type {boolean || null}
-         */
-        this.IsAutoOpenProVersion = null;
-
-        /**
-         * 开通专业版主机数
-         * @type {number || null}
-         */
-        this.ProVersionNum = null;
+        this.Data = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6496,9 +8354,7 @@ class DescribeProVersionInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PostPayCost = 'PostPayCost' in params ? params.PostPayCost : null;
-        this.IsAutoOpenProVersion = 'IsAutoOpenProVersion' in params ? params.IsAutoOpenProVersion : null;
-        this.ProVersionNum = 'ProVersionNum' in params ? params.ProVersionNum : null;
+        this.Data = 'Data' in params ? params.Data : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6528,6 +8384,111 @@ class DeleteTagsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityEventsCnt请求参数结构体
+ * @class
+ */
+class DescribeSecurityEventsCntRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * UpdateBaselineStrategy请求参数结构体
+ * @class
+ */
+class UpdateBaselineStrategyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略id
+         * @type {number || null}
+         */
+        this.StrategyId = null;
+
+        /**
+         * 策略名称
+         * @type {string || null}
+         */
+        this.StrategyName = null;
+
+        /**
+         * 检测周期
+         * @type {number || null}
+         */
+        this.ScanCycle = null;
+
+        /**
+         * 定期检测时间，该时间下发扫描
+         * @type {string || null}
+         */
+        this.ScanAt = null;
+
+        /**
+         * 该策略下选择的基线id数组
+         * @type {Array.<string> || null}
+         */
+        this.CategoryIds = null;
+
+        /**
+         * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
+         * @type {number || null}
+         */
+        this.IsGlobal = null;
+
+        /**
+         * 云主机类型：cvm：虚拟主机，bms：裸金属，ecm：边缘计算主机
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 主机地域
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * 主机id数组
+         * @type {Array.<string> || null}
+         */
+        this.Quuids = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StrategyId = 'StrategyId' in params ? params.StrategyId : null;
+        this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
+        this.ScanCycle = 'ScanCycle' in params ? params.ScanCycle : null;
+        this.ScanAt = 'ScanAt' in params ? params.ScanAt : null;
+        this.CategoryIds = 'CategoryIds' in params ? params.CategoryIds : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.Quuids = 'Quuids' in params ? params.Quuids : null;
 
     }
 }
@@ -6736,28 +8697,12 @@ class BashRule extends  AbstractModel {
 }
 
 /**
- * DescribeOpenPortTaskStatus返回参数结构体
+ * DescribeIndexList请求参数结构体
  * @class
  */
-class DescribeOpenPortTaskStatusResponse extends  AbstractModel {
+class DescribeIndexListRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 任务状态。
-<li>COMPLETE：完成（此时可以调用DescribeOpenPorts接口获取实时进程列表）</li>
-<li>AGENT_OFFLINE：云镜客户端离线</li>
-<li>COLLECTING：端口获取中</li>
-<li>FAILED：进程获取失败</li>
-         * @type {string || null}
-         */
-        this.Status = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -6768,8 +8713,6 @@ class DescribeOpenPortTaskStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Status = 'Status' in params ? params.Status : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6853,18 +8796,47 @@ class SeparateMalwaresRequest extends  AbstractModel {
 }
 
 /**
- * RenewProVersion返回参数结构体
+ * 批量导入机器信息.
  * @class
  */
-class RenewProVersionResponse extends  AbstractModel {
+class EffectiveMachineInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 机器名称
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.MachineName = null;
+
+        /**
+         * 机器公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MachinePublicIp = null;
+
+        /**
+         * 机器内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MachinePrivateIp = null;
+
+        /**
+         * 机器标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MachineTag> || null}
+         */
+        this.MachineTag = null;
+
+        /**
+         * 机器Quuid
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Quuid = null;
 
     }
 
@@ -6875,7 +8847,19 @@ class RenewProVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.MachinePublicIp = 'MachinePublicIp' in params ? params.MachinePublicIp : null;
+        this.MachinePrivateIp = 'MachinePrivateIp' in params ? params.MachinePrivateIp : null;
+
+        if (params.MachineTag) {
+            this.MachineTag = new Array();
+            for (let z in params.MachineTag) {
+                let obj = new MachineTag();
+                obj.deserialize(params.MachineTag[z]);
+                this.MachineTag.push(obj);
+            }
+        }
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -6961,6 +8945,41 @@ class LoginWhiteListsRule extends  AbstractModel {
         this.Id = 'Id' in params ? params.Id : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CreateSearchLog返回参数结构体
+ * @class
+ */
+class CreateSearchLogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0：成功，非0：失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7517,6 +9536,118 @@ class DeleteBashRulesRequest extends  AbstractModel {
 }
 
 /**
+ * 端口列表
+ * @class
+ */
+class OpenPort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云镜客户端唯一UUID。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 开放端口号。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 主机IP。
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * 主机名。
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 端口对应进程名。
+         * @type {string || null}
+         */
+        this.ProcessName = null;
+
+        /**
+         * 端口对应进程Pid。
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 记录创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 记录更新时间。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.ProcessName = 'ProcessName' in params ? params.ProcessName : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
+ * TrustMalwares请求参数结构体
+ * @class
+ */
+class TrustMalwaresRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 木马ID数组。
+         * @type {Array.<number> || null}
+         */
+        this.Ids = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ids = 'Ids' in params ? params.Ids : null;
+
+    }
+}
+
+/**
  * CloseProVersion返回参数结构体
  * @class
  */
@@ -7903,6 +10034,43 @@ class WeeklyReport extends  AbstractModel {
 }
 
 /**
+ * DescribeGeneralStat请求参数结构体
+ * @class
+ */
+class DescribeGeneralStatRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云主机类型。
+<li>CVM：表示虚拟主机</li>
+<li>BM:  表示黑石物理机</li>
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器所属地域。如：ap-guangzhou，ap-shanghai
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+
+    }
+}
+
+/**
  * DescribeOpenPortTaskStatus请求参数结构体
  * @class
  */
@@ -7957,6 +10125,12 @@ class Filter extends  AbstractModel {
          */
         this.Values = null;
 
+        /**
+         * 模糊搜索
+         * @type {boolean || null}
+         */
+        this.ExactMatch = null;
+
     }
 
     /**
@@ -7968,6 +10142,7 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
 
     }
 }
@@ -8103,6 +10278,141 @@ class DescribeAttackLogsResponse extends  AbstractModel {
 }
 
 /**
+ * 异地登录
+ * @class
+ */
+class NonLocalLoginPlace extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件ID。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 主机IP。
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * 登录状态
+<li>NON_LOCAL_LOGIN：异地登录</li>
+<li>NORMAL_LOGIN：正常登录</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 用户名。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 城市ID。
+         * @type {number || null}
+         */
+        this.City = null;
+
+        /**
+         * 国家ID。
+         * @type {number || null}
+         */
+        this.Country = null;
+
+        /**
+         * 省份ID。
+         * @type {number || null}
+         */
+        this.Province = null;
+
+        /**
+         * 登录IP。
+         * @type {string || null}
+         */
+        this.SrcIp = null;
+
+        /**
+         * 机器名称。
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 登录时间。
+         * @type {string || null}
+         */
+        this.LoginTime = null;
+
+        /**
+         * 云镜客户端唯一标识Uuid。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+    }
+}
+
+/**
+ * 安全事件统计列表
+ * @class
+ */
+class SecurityEventInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全事件数
+         * @type {number || null}
+         */
+        this.EventCnt = null;
+
+        /**
+         * 受影响机器数
+         * @type {number || null}
+         */
+        this.UuidCnt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EventCnt = 'EventCnt' in params ? params.EventCnt : null;
+        this.UuidCnt = 'UuidCnt' in params ? params.UuidCnt : null;
+
+    }
+}
+
+/**
  * OpenProVersionPrepaid返回参数结构体
  * @class
  */
@@ -8194,6 +10504,34 @@ class DeleteMalwaresResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTagMachines请求参数结构体
+ * @class
+ */
+class DescribeTagMachinesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
  * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
  * @class
  */
@@ -8276,21 +10614,21 @@ class DescribeWeeklyReportNonlocalLoginPlacesRequest extends  AbstractModel {
 }
 
 /**
- * SeparateMalwares返回参数结构体
+ * RecoverMalwares返回参数结构体
  * @class
  */
-class SeparateMalwaresResponse extends  AbstractModel {
+class RecoverMalwaresResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 隔离成功的id数组。
+         * 恢复成功id数组
          * @type {Array.<number> || null}
          */
         this.SuccessIds = null;
 
         /**
-         * 隔离失败的id数组。
+         * 恢复失败id数组
          * @type {Array.<number> || null}
          */
         this.FailedIds = null;
@@ -8535,31 +10873,12 @@ class DescribeVulScanResultRequest extends  AbstractModel {
 }
 
 /**
- * DescribePrivilegeEvents请求参数结构体
+ * DescribeHistoryService请求参数结构体
  * @class
  */
-class DescribePrivilegeEventsRequest extends  AbstractModel {
+class DescribeHistoryServiceRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 返回数量，默认为10，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
 
     }
 
@@ -8570,17 +10889,63 @@ class DescribePrivilegeEventsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ExportVulDetectionReport请求参数结构体
+ * @class
+ */
+class ExportVulDetectionReportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞扫描任务id（不同于出参的导出检测报告的任务Id）
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 过滤参数
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
         if (params.Filters) {
             this.Filters = new Array();
             for (let z in params.Filters) {
-                let obj = new Filter();
+                let obj = new Filters();
                 obj.deserialize(params.Filters[z]);
                 this.Filters.push(obj);
             }
         }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -8636,6 +11001,57 @@ class DescribeWeeklyReportMalwaresResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeReverseShellRules请求参数结构体
+ * @class
+ */
+class DescribeReverseShellRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeSecurityDynamics请求参数结构体
  * @class
  */
@@ -8685,6 +11101,12 @@ class ExportBashEventsResponse extends  AbstractModel {
         this.DownloadUrl = null;
 
         /**
+         * 导出任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -8700,6 +11122,7 @@ class ExportBashEventsResponse extends  AbstractModel {
             return;
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8793,6 +11216,34 @@ class ImpactedHost extends  AbstractModel {
 }
 
 /**
+ * DescribeESAggregations请求参数结构体
+ * @class
+ */
+class DescribeESAggregationsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ES聚合条件JSON
+         * @type {string || null}
+         */
+        this.Query = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Query = 'Query' in params ? params.Query : null;
+
+    }
+}
+
+/**
  * DescribeReverseShellRules返回参数结构体
  * @class
  */
@@ -8843,6 +11294,63 @@ class DescribeReverseShellRulesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBruteAttackList请求参数结构体
+ * @class
+ */
+class DescribeBruteAttackListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要返回的数量，默认为10，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>Status - String - 是否必填：否 - 状态筛选：失败：FAILED 成功：SUCCESS</li>
+<li>UserName - String - 是否必填：否 - UserName筛选</li>
+<li>SrcIp - String - 是否必填：否 - 来源ip筛选</li>
+<li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选，开始时间</li>
+<li>CreateEndTime - String - 是否必填：否 - 创建时间筛选，结束时间</li>
+<li>Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-已阻断，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeComponentInfo请求参数结构体
  * @class
  */
@@ -8879,10 +11387,28 @@ class DeleteNonlocalLoginPlacesRequest extends  AbstractModel {
         super();
 
         /**
-         * 异地登录事件ID数组。
+         * 删除异地登录事件的方式，可选值："Ids"、"Ip"、"All"，默认为Ids
+         * @type {string || null}
+         */
+        this.DelType = null;
+
+        /**
+         * 异地登录事件ID数组。DelType为Ids或DelType未填时此项必填
          * @type {Array.<number> || null}
          */
         this.Ids = null;
+
+        /**
+         * 异地登录事件的Ip。DelType为Ip时必填
+         * @type {Array.<string> || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 主机Uuid
+         * @type {string || null}
+         */
+        this.Uuid = null;
 
     }
 
@@ -8893,7 +11419,10 @@ class DeleteNonlocalLoginPlacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DelType = 'DelType' in params ? params.DelType : null;
         this.Ids = 'Ids' in params ? params.Ids : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
 
     }
 }
@@ -8969,6 +11498,12 @@ class ExportMaliciousRequestsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 过滤参数
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -8977,6 +11512,15 @@ class ExportMaliciousRequestsRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
@@ -9146,18 +11690,18 @@ class DescribePrivilegeRulesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyProVersionRenewFlag返回参数结构体
+ * ExportNonlocalLoginPlaces请求参数结构体
  * @class
  */
-class ModifyProVersionRenewFlagResponse extends  AbstractModel {
+class ExportNonlocalLoginPlacesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * <li>Status - int - 是否必填：否 - 状态筛选1:正常登录；2：异地登录</li>
+         * @type {Array.<Filter> || null}
          */
-        this.RequestId = null;
+        this.Filters = null;
 
     }
 
@@ -9168,7 +11712,15 @@ class ModifyProVersionRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -9197,7 +11749,7 @@ class Machine extends  AbstractModel {
          * 主机状态。
 <li>OFFLINE: 离线  </li>
 <li>ONLINE: 在线</li>
-<li>MACHINE_STOPPED: 已关机</li>
+<li>SHUTDOWN: 已关机</li>
          * @type {string || null}
          */
         this.MachineStatus = null;
@@ -9293,6 +11845,30 @@ class Machine extends  AbstractModel {
          */
         this.RegionInfo = null;
 
+        /**
+         * 实例状态 TERMINATED_PRO_VERSION 已销毁
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * 授权状态 1 授权 0 未授权
+         * @type {number || null}
+         */
+        this.LicenseStatus = null;
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 是否有资产扫描接口，0无，1有
+         * @type {number || null}
+         */
+        this.HasAssetScan = null;
+
     }
 
     /**
@@ -9332,23 +11908,33 @@ class Machine extends  AbstractModel {
             obj.deserialize(params.RegionInfo)
             this.RegionInfo = obj;
         }
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.LicenseStatus = 'LicenseStatus' in params ? params.LicenseStatus : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.HasAssetScan = 'HasAssetScan' in params ? params.HasAssetScan : null;
 
     }
 }
 
 /**
- * TrustMalwares请求参数结构体
+ * DeleteSearchTemplate返回参数结构体
  * @class
  */
-class TrustMalwaresRequest extends  AbstractModel {
+class DeleteSearchTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 木马ID数组。
-         * @type {Array.<number> || null}
+         * 0：成功，非0：失败
+         * @type {number || null}
          */
-        this.Ids = null;
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -9359,7 +11945,8 @@ class TrustMalwaresRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Ids = 'Ids' in params ? params.Ids : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9878,18 +12465,30 @@ class ModifyProVersionRenewFlagRequest extends  AbstractModel {
 }
 
 /**
- * TrustMaliciousRequest返回参数结构体
+ * DescribeESHits请求参数结构体
  * @class
  */
-class TrustMaliciousRequestResponse extends  AbstractModel {
+class DescribeESHitsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * ES查询条件JSON
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Query = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -9900,7 +12499,9 @@ class TrustMaliciousRequestResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -9929,6 +12530,34 @@ class DescribeUsualLoginPlacesRequest extends  AbstractModel {
             return;
         }
         this.Uuid = 'Uuid' in params ? params.Uuid : null;
+
+    }
+}
+
+/**
+ * TrustMaliciousRequest返回参数结构体
+ * @class
+ */
+class TrustMaliciousRequestResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10126,24 +12755,72 @@ class DescribeAgentVulsResponse extends  AbstractModel {
 }
 
 /**
- * SwitchBashRules请求参数结构体
+ * DescribeGeneralStat返回参数结构体
  * @class
  */
-class SwitchBashRulesRequest extends  AbstractModel {
+class DescribeGeneralStatResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则ID
+         * 云主机总数
          * @type {number || null}
          */
-        this.Id = null;
+        this.MachinesAll = null;
 
         /**
-         * 是否禁用
+         * 云主机没有安装主机安全客户端的总数
          * @type {number || null}
          */
-        this.Disabled = null;
+        this.MachinesUninstalled = null;
+
+        /**
+         * 主机安全客户端总数的总数
+         * @type {number || null}
+         */
+        this.AgentsAll = null;
+
+        /**
+         * 主机安全客户端在线的总数
+         * @type {number || null}
+         */
+        this.AgentsOnline = null;
+
+        /**
+         * 主机安全客户端离线的总数
+         * @type {number || null}
+         */
+        this.AgentsOffline = null;
+
+        /**
+         * 主机安全客户端专业版的总数
+         * @type {number || null}
+         */
+        this.AgentsPro = null;
+
+        /**
+         * 主机安全客户端基础版的总数
+         * @type {number || null}
+         */
+        this.AgentsBasic = null;
+
+        /**
+         * 7天内到期的预付费专业版总数
+         * @type {number || null}
+         */
+        this.AgentsProExpireWithInSevenDays = null;
+
+        /**
+         * 风险主机总数
+         * @type {number || null}
+         */
+        this.RiskMachine = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -10154,8 +12831,16 @@ class SwitchBashRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Disabled = 'Disabled' in params ? params.Disabled : null;
+        this.MachinesAll = 'MachinesAll' in params ? params.MachinesAll : null;
+        this.MachinesUninstalled = 'MachinesUninstalled' in params ? params.MachinesUninstalled : null;
+        this.AgentsAll = 'AgentsAll' in params ? params.AgentsAll : null;
+        this.AgentsOnline = 'AgentsOnline' in params ? params.AgentsOnline : null;
+        this.AgentsOffline = 'AgentsOffline' in params ? params.AgentsOffline : null;
+        this.AgentsPro = 'AgentsPro' in params ? params.AgentsPro : null;
+        this.AgentsBasic = 'AgentsBasic' in params ? params.AgentsBasic : null;
+        this.AgentsProExpireWithInSevenDays = 'AgentsProExpireWithInSevenDays' in params ? params.AgentsProExpireWithInSevenDays : null;
+        this.RiskMachine = 'RiskMachine' in params ? params.RiskMachine : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10298,6 +12983,178 @@ class DescribeHistoryAccountsRequest extends  AbstractModel {
 }
 
 /**
+ * 密码破解列表实体
+ * @class
+ */
+class BruteAttackInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一Id
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 云镜客户端唯一标识UUID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 主机ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 来源ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SrcIp = null;
+
+        /**
+         * 失败：FAILED；成功：SUCCESS
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 国家id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Country = null;
+
+        /**
+         * 城市id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.City = null;
+
+        /**
+         * 省份id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Province = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 阻断状态：0-未阻断；1-已阻断；2-阻断失败；3-内网攻击暂不支持阻断；4-安平暂不支持阻断
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BanStatus = null;
+
+        /**
+         * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.EventType = null;
+
+        /**
+         * 发生次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 机器UUID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
+        /**
+         * 是否为专业版（true/false）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsProVersion = null;
+
+        /**
+         * 被攻击的服务的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 最近攻击时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.SrcIp = 'SrcIp' in params ? params.SrcIp : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BanStatus = 'BanStatus' in params ? params.BanStatus : null;
+        this.EventType = 'EventType' in params ? params.EventType : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * DescribeMachineInfo返回参数结构体
  * @class
  */
@@ -10410,6 +13267,18 @@ class DescribeMachineInfoResponse extends  AbstractModel {
         this.FreeVulsLeft = null;
 
         /**
+         * agent版本号
+         * @type {string || null}
+         */
+        this.AgentVersion = null;
+
+        /**
+         * 专业版到期时间(仅预付费)
+         * @type {string || null}
+         */
+        this.ProVersionDeadline = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -10440,6 +13309,8 @@ class DescribeMachineInfoResponse extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.FreeMalwaresLeft = 'FreeMalwaresLeft' in params ? params.FreeMalwaresLeft : null;
         this.FreeVulsLeft = 'FreeVulsLeft' in params ? params.FreeVulsLeft : null;
+        this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
+        this.ProVersionDeadline = 'ProVersionDeadline' in params ? params.ProVersionDeadline : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10499,18 +13370,37 @@ class OpenProVersionRequest extends  AbstractModel {
 }
 
 /**
- * DeleteBashRules返回参数结构体
+ * DescribeImpactedHosts请求参数结构体
  * @class
  */
-class DeleteBashRulesResponse extends  AbstractModel {
+class DescribeImpactedHostsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 漏洞种类ID。
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.VulId = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED：待处理 | FIXED：已修复）</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -10521,7 +13411,18 @@ class DeleteBashRulesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.VulId = 'VulId' in params ? params.VulId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -10738,54 +13639,18 @@ class SecurityTrend extends  AbstractModel {
 }
 
 /**
- * 漏洞列表数据
+ * ExportTasks请求参数结构体
  * @class
  */
-class Vul extends  AbstractModel {
+class ExportTasksRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞种类ID
-         * @type {number || null}
-         */
-        this.VulId = null;
-
-        /**
-         * 漏洞名称
+         * 任务ID
          * @type {string || null}
          */
-        this.VulName = null;
-
-        /**
-         * 漏洞危害等级:
-HIGH：高危
-MIDDLE：中危
-LOW：低危
-NOTICE：提示
-         * @type {string || null}
-         */
-        this.VulLevel = null;
-
-        /**
-         * 最后扫描时间
-         * @type {string || null}
-         */
-        this.LastScanTime = null;
-
-        /**
-         * 受影响机器数量
-         * @type {number || null}
-         */
-        this.ImpactedHostNum = null;
-
-        /**
-         * 漏洞状态
-* UN_OPERATED : 待处理
-* FIXED : 已修复
-         * @type {string || null}
-         */
-        this.VulStatus = null;
+        this.TaskId = null;
 
     }
 
@@ -10796,12 +13661,100 @@ NOTICE：提示
         if (!params) {
             return;
         }
-        this.VulId = 'VulId' in params ? params.VulId : null;
-        this.VulName = 'VulName' in params ? params.VulName : null;
-        this.VulLevel = 'VulLevel' in params ? params.VulLevel : null;
-        this.LastScanTime = 'LastScanTime' in params ? params.LastScanTime : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeVulScanResult返回参数结构体
+ * @class
+ */
+class DescribeVulScanResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 漏洞数量。
+         * @type {number || null}
+         */
+        this.VulNum = null;
+
+        /**
+         * 专业版机器数。
+         * @type {number || null}
+         */
+        this.ProVersionNum = null;
+
+        /**
+         * 受影响的专业版主机数。
+         * @type {number || null}
+         */
+        this.ImpactedHostNum = null;
+
+        /**
+         * 主机总数。
+         * @type {number || null}
+         */
+        this.HostNum = null;
+
+        /**
+         * 基础版机器数。
+         * @type {number || null}
+         */
+        this.BasicVersionNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VulNum = 'VulNum' in params ? params.VulNum : null;
+        this.ProVersionNum = 'ProVersionNum' in params ? params.ProVersionNum : null;
         this.ImpactedHostNum = 'ImpactedHostNum' in params ? params.ImpactedHostNum : null;
-        this.VulStatus = 'VulStatus' in params ? params.VulStatus : null;
+        this.HostNum = 'HostNum' in params ? params.HostNum : null;
+        this.BasicVersionNum = 'BasicVersionNum' in params ? params.BasicVersionNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAutoOpenProVersionConfig请求参数结构体
+ * @class
+ */
+class ModifyAutoOpenProVersionConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设置自动开通状态。
+<li>CLOSE：关闭</li>
+<li>OPEN：打开</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -10851,6 +13804,34 @@ class AddMachineTagRequest extends  AbstractModel {
         this.TagId = 'TagId' in params ? params.TagId : null;
         this.MRegion = 'MRegion' in params ? params.MRegion : null;
         this.MArea = 'MArea' in params ? params.MArea : null;
+
+    }
+}
+
+/**
+ * ExportVulDetectionExcel请求参数结构体
+ * @class
+ */
+class ExportVulDetectionExcelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本次漏洞检测任务id（不同于出参的导出本次漏洞检测Excel的任务Id）
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -10934,6 +13915,41 @@ class DeleteReverseShellEventsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSearchLogs返回参数结构体
+ * @class
+ */
+class DescribeSearchLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 历史搜索记录
+         * @type {Array.<string> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyAutoOpenProVersionConfig返回参数结构体
  * @class
  */
@@ -10969,6 +13985,12 @@ class ExportReverseShellEventsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 过滤参数
+         * @type {Array.<Filters> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -10979,28 +14001,31 @@ class ExportReverseShellEventsRequest extends  AbstractModel {
             return;
         }
 
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filters();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * DescribeVuls返回参数结构体
+ * DescribeMachineOsList返回参数结构体
  * @class
  */
-class DescribeVulsResponse extends  AbstractModel {
+class DescribeMachineOsListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 漏洞数量。
-         * @type {number || null}
+         * 操作系统列表
+         * @type {Array.<OsName> || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * 漏洞列表数组。
-         * @type {Array.<Vul> || null}
-         */
-        this.Vuls = null;
+        this.List = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11017,14 +14042,13 @@ class DescribeVulsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Vuls) {
-            this.Vuls = new Array();
-            for (let z in params.Vuls) {
-                let obj = new Vul();
-                obj.deserialize(params.Vuls[z]);
-                this.Vuls.push(obj);
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new OsName();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -11033,24 +14057,24 @@ class DescribeVulsResponse extends  AbstractModel {
 }
 
 /**
- * RecoverMalwares返回参数结构体
+ * ExportAttackLogs返回参数结构体
  * @class
  */
-class RecoverMalwaresResponse extends  AbstractModel {
+class ExportAttackLogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 恢复成功id数组
-         * @type {Array.<number> || null}
+         * 导出文件下载链接地址。
+         * @type {string || null}
          */
-        this.SuccessIds = null;
+        this.DownloadUrl = null;
 
         /**
-         * 恢复失败id数组
-         * @type {Array.<number> || null}
+         * 导出任务ID
+         * @type {string || null}
          */
-        this.FailedIds = null;
+        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11067,8 +14091,8 @@ class RecoverMalwaresResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SuccessIds = 'SuccessIds' in params ? params.SuccessIds : null;
-        this.FailedIds = 'FailedIds' in params ? params.FailedIds : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11304,12 +14328,20 @@ class DescribeMachinesRequest extends  AbstractModel {
         /**
          * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）</li>
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+<li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
+
+        /**
+         * 机器所属业务ID列表
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
 
     }
 
@@ -11333,6 +14365,7 @@ class DescribeMachinesRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
 
     }
 }
@@ -11361,6 +14394,223 @@ class ModifyAlarmAttributeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSecurityEventsCnt返回参数结构体
+ * @class
+ */
+class DescribeSecurityEventsCntResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 木马文件相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.Malware = null;
+
+        /**
+         * 登录审计相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.HostLogin = null;
+
+        /**
+         * 密码破解相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.BruteAttack = null;
+
+        /**
+         * 恶意请求相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.RiskDns = null;
+
+        /**
+         * 高危命令相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.Bash = null;
+
+        /**
+         * 本地提权相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.PrivilegeRules = null;
+
+        /**
+         * 反弹Shell相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.ReverseShell = null;
+
+        /**
+         * 系统组件相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.SysVul = null;
+
+        /**
+         * Web应用漏洞相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.WebVul = null;
+
+        /**
+         * 应急漏洞相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.EmergencyVul = null;
+
+        /**
+         * 安全基线相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.BaseLine = null;
+
+        /**
+         * 攻击检测相关风险事件
+         * @type {SecurityEventInfo || null}
+         */
+        this.AttackLogs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Malware) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.Malware)
+            this.Malware = obj;
+        }
+
+        if (params.HostLogin) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.HostLogin)
+            this.HostLogin = obj;
+        }
+
+        if (params.BruteAttack) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.BruteAttack)
+            this.BruteAttack = obj;
+        }
+
+        if (params.RiskDns) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.RiskDns)
+            this.RiskDns = obj;
+        }
+
+        if (params.Bash) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.Bash)
+            this.Bash = obj;
+        }
+
+        if (params.PrivilegeRules) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.PrivilegeRules)
+            this.PrivilegeRules = obj;
+        }
+
+        if (params.ReverseShell) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.ReverseShell)
+            this.ReverseShell = obj;
+        }
+
+        if (params.SysVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.SysVul)
+            this.SysVul = obj;
+        }
+
+        if (params.WebVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.WebVul)
+            this.WebVul = obj;
+        }
+
+        if (params.EmergencyVul) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.EmergencyVul)
+            this.EmergencyVul = obj;
+        }
+
+        if (params.BaseLine) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.BaseLine)
+            this.BaseLine = obj;
+        }
+
+        if (params.AttackLogs) {
+            let obj = new SecurityEventInfo();
+            obj.deserialize(params.AttackLogs)
+            this.AttackLogs = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ * @class
+ */
+class Filters extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤键的名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 一个或者多个过滤值。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * 是否模糊匹配，前端框架会带上，可以不管
+         * @type {boolean || null}
+         */
+        this.ExactMatch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
 
     }
 }
@@ -11556,6 +14806,34 @@ class DescribeMalwaresResponse extends  AbstractModel {
 }
 
 /**
+ * CreateSearchLog请求参数结构体
+ * @class
+ */
+class CreateSearchLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索内容
+         * @type {string || null}
+         */
+        this.SearchContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SearchContent = 'SearchContent' in params ? params.SearchContent : null;
+
+    }
+}
+
+/**
  * DeletePrivilegeRules请求参数结构体
  * @class
  */
@@ -11583,82 +14861,143 @@ class DeletePrivilegeRulesRequest extends  AbstractModel {
     }
 }
 
+/**
+ * ExportTasks返回参数结构体
+ * @class
+ */
+class ExportTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * PENDING：正在生成下载链接，FINISHED：下载链接已生成，ERROR：网络异常等异常情况
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 下载链接
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
-    ExportBashEventsRequest: ExportBashEventsRequest,
-    ModifyAutoOpenProVersionConfigRequest: ModifyAutoOpenProVersionConfigRequest,
-    DescribeProcessTaskStatusResponse: DescribeProcessTaskStatusResponse,
+    DescribeMalwareInfoRequest: DescribeMalwareInfoRequest,
+    DescribeSearchTemplatesResponse: DescribeSearchTemplatesResponse,
+    DescribeMachineOsListRequest: DescribeMachineOsListRequest,
     ExportReverseShellEventsResponse: ExportReverseShellEventsResponse,
     DescribeBashRulesRequest: DescribeBashRulesRequest,
+    ExportBashEventsRequest: ExportBashEventsRequest,
     ExportPrivilegeEventsResponse: ExportPrivilegeEventsResponse,
     DescribeAlarmAttributeResponse: DescribeAlarmAttributeResponse,
     DescribeWeeklyReportBruteAttacksResponse: DescribeWeeklyReportBruteAttacksResponse,
-    DescribeAgentVulsRequest: DescribeAgentVulsRequest,
+    DescribeImportMachineInfoResponse: DescribeImportMachineInfoResponse,
+    AssetFilters: AssetFilters,
     DescribeTagsRequest: DescribeTagsRequest,
     AddMachineTagResponse: AddMachineTagResponse,
     UsualPlace: UsualPlace,
-    DescribeReverseShellRulesRequest: DescribeReverseShellRulesRequest,
+    DescribeProcessTaskStatusResponse: DescribeProcessTaskStatusResponse,
     SetBashEventsStatusRequest: SetBashEventsStatusRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeReverseShellEventsRequest: DescribeReverseShellEventsRequest,
     WeeklyReportVul: WeeklyReportVul,
     DescribeWeeklyReportBruteAttacksRequest: DescribeWeeklyReportBruteAttacksRequest,
+    CreateSearchTemplateResponse: CreateSearchTemplateResponse,
     CreateUsualLoginPlacesRequest: CreateUsualLoginPlacesRequest,
     DescribeProcessTaskStatusRequest: DescribeProcessTaskStatusRequest,
-    RegionInfo: RegionInfo,
-    DescribeVulScanResultResponse: DescribeVulScanResultResponse,
+    DescribeAttackVulTypeListRequest: DescribeAttackVulTypeListRequest,
+    DescribeLogStorageStatisticRequest: DescribeLogStorageStatisticRequest,
     ModifyAlarmAttributeRequest: ModifyAlarmAttributeRequest,
     DescribeAttackLogsRequest: DescribeAttackLogsRequest,
     ComponentStatistics: ComponentStatistics,
     InquiryPriceOpenProVersionPrepaidRequest: InquiryPriceOpenProVersionPrepaidRequest,
+    DescribeSearchTemplatesRequest: DescribeSearchTemplatesRequest,
     ExportMalwaresRequest: ExportMalwaresRequest,
     DescribeProcessesResponse: DescribeProcessesResponse,
     DeleteBashEventsResponse: DeleteBashEventsResponse,
+    DescribeMalwareInfoResponse: DescribeMalwareInfoResponse,
     ExportPrivilegeEventsRequest: ExportPrivilegeEventsRequest,
     WeeklyReportMalware: WeeklyReportMalware,
     CreateBaselineStrategyRequest: CreateBaselineStrategyRequest,
     DescribeSecurityTrendsRequest: DescribeSecurityTrendsRequest,
+    DescribeAttackVulTypeListResponse: DescribeAttackVulTypeListResponse,
     Account: Account,
     DescribeReverseShellEventsResponse: DescribeReverseShellEventsResponse,
     DescribePrivilegeRulesRequest: DescribePrivilegeRulesRequest,
     BruteAttack: BruteAttack,
     DescribeOpenPortsRequest: DescribeOpenPortsRequest,
-    DescribeImpactedHostsRequest: DescribeImpactedHostsRequest,
-    DescribeMaliciousRequestsResponse: DescribeMaliciousRequestsResponse,
-    NonLocalLoginPlace: NonLocalLoginPlace,
+    DeleteBashRulesResponse: DeleteBashRulesResponse,
+    DescribeScanMalwareScheduleRequest: DescribeScanMalwareScheduleRequest,
+    DescribeAgentVulsRequest: DescribeAgentVulsRequest,
+    DescribeProVersionInfoResponse: DescribeProVersionInfoResponse,
+    DescribeRiskDnsListResponse: DescribeRiskDnsListResponse,
+    DescribeExportMachinesRequest: DescribeExportMachinesRequest,
     CreateProcessTaskResponse: CreateProcessTaskResponse,
-    SecurityDynamic: SecurityDynamic,
+    DescribeHistoryServiceResponse: DescribeHistoryServiceResponse,
     RenewProVersionRequest: RenewProVersionRequest,
     DescribeComponentsRequest: DescribeComponentsRequest,
     DescribeNonlocalLoginPlacesRequest: DescribeNonlocalLoginPlacesRequest,
     DeleteMachineTagRequest: DeleteMachineTagRequest,
     CreateBaselineStrategyResponse: CreateBaselineStrategyResponse,
+    DescribeMaliciousRequestsResponse: DescribeMaliciousRequestsResponse,
     ReverseShellRule: ReverseShellRule,
     OpenPortStatistics: OpenPortStatistics,
+    DescribeBruteAttackListResponse: DescribeBruteAttackListResponse,
+    DescribeExportMachinesResponse: DescribeExportMachinesResponse,
+    DescribeVulInfoResponse: DescribeVulInfoResponse,
     EditPrivilegeRuleResponse: EditPrivilegeRuleResponse,
+    UntrustMaliciousRequestRequest: UntrustMaliciousRequestRequest,
     DescribeHistoryAccountsResponse: DescribeHistoryAccountsResponse,
     AgentVul: AgentVul,
     UntrustMalwaresRequest: UntrustMalwaresRequest,
-    ExportAttackLogsResponse: ExportAttackLogsResponse,
+    DescribeVulsResponse: DescribeVulsResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeLoginWhiteListRequest: DescribeLoginWhiteListRequest,
     ReverseShell: ReverseShell,
-    UntrustMaliciousRequestRequest: UntrustMaliciousRequestRequest,
-    ExportNonlocalLoginPlacesRequest: ExportNonlocalLoginPlacesRequest,
+    SecurityDynamic: SecurityDynamic,
+    ExportBruteAttacksResponse: ExportBruteAttacksResponse,
+    ExportVulDetectionReportResponse: ExportVulDetectionReportResponse,
     DescribeComponentInfoResponse: DescribeComponentInfoResponse,
     DescribeAccountStatisticsResponse: DescribeAccountStatisticsResponse,
-    OpenProVersionPrepaidRequest: OpenProVersionPrepaidRequest,
+    SwitchBashRulesResponse: SwitchBashRulesResponse,
+    DescribeSearchExportListRequest: DescribeSearchExportListRequest,
     ModifyLoginWhiteListResponse: ModifyLoginWhiteListResponse,
     DescribeTagsResponse: DescribeTagsResponse,
-    OpenPort: OpenPort,
+    DescribePrivilegeEventsRequest: DescribePrivilegeEventsRequest,
     DescribeProVersionInfoRequest: DescribeProVersionInfoRequest,
     CreateProcessTaskRequest: CreateProcessTaskRequest,
     DeleteMaliciousRequestsResponse: DeleteMaliciousRequestsResponse,
-    ExportBruteAttacksResponse: ExportBruteAttacksResponse,
+    DescribeESHitsResponse: DescribeESHitsResponse,
+    SearchTemplate: SearchTemplate,
     EditReverseShellRuleResponse: EditReverseShellRuleResponse,
+    OsName: OsName,
     ExportBruteAttacksRequest: ExportBruteAttacksRequest,
     DeleteMachineResponse: DeleteMachineResponse,
     DeleteLoginWhiteListRequest: DeleteLoginWhiteListRequest,
     MachineTag: MachineTag,
+    DescribeLogStorageStatisticResponse: DescribeLogStorageStatisticResponse,
     DescribeAttackLogInfoResponse: DescribeAttackLogInfoResponse,
     DescribePrivilegeEventsResponse: DescribePrivilegeEventsResponse,
     WeeklyReportNonlocalLoginPlace: WeeklyReportNonlocalLoginPlace,
@@ -11667,6 +15006,7 @@ module.exports = {
     MaliciousRequest: MaliciousRequest,
     TrustMalwaresResponse: TrustMalwaresResponse,
     TagMachine: TagMachine,
+    DescribeOpenPortTaskStatusResponse: DescribeOpenPortTaskStatusResponse,
     DescribeWeeklyReportInfoRequest: DescribeWeeklyReportInfoRequest,
     EditTagsRequest: EditTagsRequest,
     AddLoginWhiteListRequest: AddLoginWhiteListRequest,
@@ -11677,59 +15017,83 @@ module.exports = {
     RescanImpactedHostRequest: RescanImpactedHostRequest,
     DescribeBashEventsResponse: DescribeBashEventsResponse,
     ModifyLoginWhiteListRequest: ModifyLoginWhiteListRequest,
+    Vul: Vul,
+    CreateSearchTemplateRequest: CreateSearchTemplateRequest,
     DescribeBashEventsRequest: DescribeBashEventsRequest,
     DeleteTagsRequest: DeleteTagsRequest,
     DescribeOpenPortStatisticsRequest: DescribeOpenPortStatisticsRequest,
     ExportAttackLogsRequest: ExportAttackLogsRequest,
+    ModifyMalwareTimingScanSettingsRequest: ModifyMalwareTimingScanSettingsRequest,
     DeleteMachineRequest: DeleteMachineRequest,
+    SetBashEventsStatusResponse: SetBashEventsStatusResponse,
     DescribeVulInfoRequest: DescribeVulInfoRequest,
     UntrustMaliciousRequestResponse: UntrustMaliciousRequestResponse,
     DescribeComponentStatisticsResponse: DescribeComponentStatisticsResponse,
-    PrivilegeEscalationProcess: PrivilegeEscalationProcess,
+    DescribeMachineListResponse: DescribeMachineListResponse,
+    MalwareInfo: MalwareInfo,
+    ModifyMalwareTimingScanSettingsResponse: ModifyMalwareTimingScanSettingsResponse,
     Place: Place,
-    SwitchBashRulesResponse: SwitchBashRulesResponse,
+    DescribeMachineRegionsRequest: DescribeMachineRegionsRequest,
     LoginWhiteLists: LoginWhiteLists,
     DeleteUsualLoginPlacesResponse: DeleteUsualLoginPlacesResponse,
+    DescribeSearchExportListResponse: DescribeSearchExportListResponse,
+    DeleteSearchTemplateRequest: DeleteSearchTemplateRequest,
     DeleteNonlocalLoginPlacesResponse: DeleteNonlocalLoginPlacesResponse,
     DescribeNonlocalLoginPlacesResponse: DescribeNonlocalLoginPlacesResponse,
     DeleteReverseShellRulesResponse: DeleteReverseShellRulesResponse,
     ExportMalwaresResponse: ExportMalwaresResponse,
+    UpdateBaselineStrategyResponse: UpdateBaselineStrategyResponse,
     UntrustMalwaresResponse: UntrustMalwaresResponse,
+    RenewProVersionResponse: RenewProVersionResponse,
     DeletePrivilegeRulesResponse: DeletePrivilegeRulesResponse,
     CreateOpenPortTaskResponse: CreateOpenPortTaskResponse,
+    DescribeMachineListRequest: DescribeMachineListRequest,
     EditBashRuleRequest: EditBashRuleRequest,
+    ExportVulDetectionExcelResponse: ExportVulDetectionExcelResponse,
+    SeparateMalwaresResponse: SeparateMalwaresResponse,
+    SwitchBashRulesRequest: SwitchBashRulesRequest,
     DeletePrivilegeEventsResponse: DeletePrivilegeEventsResponse,
     InquiryPriceOpenProVersionPrepaidResponse: InquiryPriceOpenProVersionPrepaidResponse,
+    PrivilegeEscalationProcess: PrivilegeEscalationProcess,
     CloseProVersionRequest: CloseProVersionRequest,
-    SetBashEventsStatusResponse: SetBashEventsStatusResponse,
+    DescribeIndexListResponse: DescribeIndexListResponse,
+    DescribeImportMachineInfoRequest: DescribeImportMachineInfoRequest,
     DescribeUsualLoginPlacesResponse: DescribeUsualLoginPlacesResponse,
+    DescribeRiskDnsListRequest: DescribeRiskDnsListRequest,
     DescribeProcessStatisticsResponse: DescribeProcessStatisticsResponse,
     MisAlarmNonlocalLoginPlacesRequest: MisAlarmNonlocalLoginPlacesRequest,
     TrustMaliciousRequestRequest: TrustMaliciousRequestRequest,
     ExportMaliciousRequestsResponse: ExportMaliciousRequestsResponse,
+    DescribeSearchLogsRequest: DescribeSearchLogsRequest,
     DescribeAttackLogInfoRequest: DescribeAttackLogInfoRequest,
     DescribeWeeklyReportMalwaresRequest: DescribeWeeklyReportMalwaresRequest,
     DescribeBruteAttacksResponse: DescribeBruteAttacksResponse,
+    ModifyProVersionRenewFlagResponse: ModifyProVersionRenewFlagResponse,
+    RegionInfo: RegionInfo,
     ExportNonlocalLoginPlacesResponse: ExportNonlocalLoginPlacesResponse,
     DescribeComponentStatisticsRequest: DescribeComponentStatisticsRequest,
     DescribeOverviewStatisticsRequest: DescribeOverviewStatisticsRequest,
     DescribeOpenPortStatisticsResponse: DescribeOpenPortStatisticsResponse,
     DeleteAttackLogsResponse: DeleteAttackLogsResponse,
     DescribeLoginWhiteListResponse: DescribeLoginWhiteListResponse,
-    DescribeVulInfoResponse: DescribeVulInfoResponse,
-    DescribeTagMachinesRequest: DescribeTagMachinesRequest,
+    DescribeMachineRegionsResponse: DescribeMachineRegionsResponse,
+    OpenProVersionPrepaidRequest: OpenProVersionPrepaidRequest,
+    DescribeScanMalwareScheduleResponse: DescribeScanMalwareScheduleResponse,
     EditReverseShellRuleRequest: EditReverseShellRuleRequest,
-    DescribeProVersionInfoResponse: DescribeProVersionInfoResponse,
+    DescribeESAggregationsResponse: DescribeESAggregationsResponse,
     DeleteTagsResponse: DeleteTagsResponse,
+    DescribeSecurityEventsCntRequest: DescribeSecurityEventsCntRequest,
+    UpdateBaselineStrategyRequest: UpdateBaselineStrategyRequest,
     DeleteBruteAttacksRequest: DeleteBruteAttacksRequest,
     DescribeWeeklyReportVulsRequest: DescribeWeeklyReportVulsRequest,
     AddLoginWhiteListResponse: AddLoginWhiteListResponse,
     BashRule: BashRule,
-    DescribeOpenPortTaskStatusResponse: DescribeOpenPortTaskStatusResponse,
+    DescribeIndexListRequest: DescribeIndexListRequest,
     DescribeWeeklyReportNonlocalLoginPlacesResponse: DescribeWeeklyReportNonlocalLoginPlacesResponse,
     SeparateMalwaresRequest: SeparateMalwaresRequest,
-    RenewProVersionResponse: RenewProVersionResponse,
+    EffectiveMachineInfo: EffectiveMachineInfo,
     LoginWhiteListsRule: LoginWhiteListsRule,
+    CreateSearchLogResponse: CreateSearchLogResponse,
     DescribeTagMachinesResponse: DescribeTagMachinesResponse,
     DescribeSecurityTrendsResponse: DescribeSecurityTrendsResponse,
     ProVersionMachine: ProVersionMachine,
@@ -11739,6 +15103,8 @@ module.exports = {
     DeleteReverseShellEventsResponse: DeleteReverseShellEventsResponse,
     DeletePrivilegeEventsRequest: DeletePrivilegeEventsRequest,
     DeleteBashRulesRequest: DeleteBashRulesRequest,
+    OpenPort: OpenPort,
+    TrustMalwaresRequest: TrustMalwaresRequest,
     CloseProVersionResponse: CloseProVersionResponse,
     DeleteAttackLogsRequest: DeleteAttackLogsRequest,
     DescribeOpenPortsResponse: DescribeOpenPortsResponse,
@@ -11749,27 +15115,35 @@ module.exports = {
     DescribeProcessesRequest: DescribeProcessesRequest,
     DeleteUsualLoginPlacesRequest: DeleteUsualLoginPlacesRequest,
     WeeklyReport: WeeklyReport,
+    DescribeGeneralStatRequest: DescribeGeneralStatRequest,
     DescribeOpenPortTaskStatusRequest: DescribeOpenPortTaskStatusRequest,
     Filter: Filter,
     DeleteLoginWhiteListResponse: DeleteLoginWhiteListResponse,
     DescribeAccountStatisticsRequest: DescribeAccountStatisticsRequest,
     DescribeAttackLogsResponse: DescribeAttackLogsResponse,
+    NonLocalLoginPlace: NonLocalLoginPlace,
+    SecurityEventInfo: SecurityEventInfo,
     OpenProVersionPrepaidResponse: OpenProVersionPrepaidResponse,
     MisAlarmNonlocalLoginPlacesResponse: MisAlarmNonlocalLoginPlacesResponse,
     DeleteMalwaresResponse: DeleteMalwaresResponse,
+    DescribeTagMachinesRequest: DescribeTagMachinesRequest,
     ChargePrepaid: ChargePrepaid,
     DescribeWeeklyReportNonlocalLoginPlacesRequest: DescribeWeeklyReportNonlocalLoginPlacesRequest,
-    SeparateMalwaresResponse: SeparateMalwaresResponse,
+    RecoverMalwaresResponse: RecoverMalwaresResponse,
     ProcessStatistics: ProcessStatistics,
     Process: Process,
     DescribeBruteAttacksRequest: DescribeBruteAttacksRequest,
     DescribeVulScanResultRequest: DescribeVulScanResultRequest,
-    DescribePrivilegeEventsRequest: DescribePrivilegeEventsRequest,
+    DescribeHistoryServiceRequest: DescribeHistoryServiceRequest,
+    ExportVulDetectionReportRequest: ExportVulDetectionReportRequest,
     DescribeWeeklyReportMalwaresResponse: DescribeWeeklyReportMalwaresResponse,
+    DescribeReverseShellRulesRequest: DescribeReverseShellRulesRequest,
     DescribeSecurityDynamicsRequest: DescribeSecurityDynamicsRequest,
     ExportBashEventsResponse: ExportBashEventsResponse,
     ImpactedHost: ImpactedHost,
+    DescribeESAggregationsRequest: DescribeESAggregationsRequest,
     DescribeReverseShellRulesResponse: DescribeReverseShellRulesResponse,
+    DescribeBruteAttackListRequest: DescribeBruteAttackListRequest,
     DescribeComponentInfoRequest: DescribeComponentInfoRequest,
     DeleteNonlocalLoginPlacesRequest: DeleteNonlocalLoginPlacesRequest,
     EditPrivilegeRuleRequest: EditPrivilegeRuleRequest,
@@ -11778,9 +15152,9 @@ module.exports = {
     DescribeMachinesResponse: DescribeMachinesResponse,
     CreateUsualLoginPlacesResponse: CreateUsualLoginPlacesResponse,
     DescribePrivilegeRulesResponse: DescribePrivilegeRulesResponse,
-    ModifyProVersionRenewFlagResponse: ModifyProVersionRenewFlagResponse,
+    ExportNonlocalLoginPlacesRequest: ExportNonlocalLoginPlacesRequest,
     Machine: Machine,
-    TrustMalwaresRequest: TrustMalwaresRequest,
+    DeleteSearchTemplateResponse: DeleteSearchTemplateResponse,
     Malware: Malware,
     DescribeWeeklyReportVulsResponse: DescribeWeeklyReportVulsResponse,
     WeeklyReportBruteAttack: WeeklyReportBruteAttack,
@@ -11788,32 +15162,38 @@ module.exports = {
     PrivilegeRule: PrivilegeRule,
     HistoryAccount: HistoryAccount,
     ModifyProVersionRenewFlagRequest: ModifyProVersionRenewFlagRequest,
-    TrustMaliciousRequestResponse: TrustMaliciousRequestResponse,
+    DescribeESHitsRequest: DescribeESHitsRequest,
     DescribeUsualLoginPlacesRequest: DescribeUsualLoginPlacesRequest,
+    TrustMaliciousRequestResponse: TrustMaliciousRequestResponse,
     Component: Component,
     DescribeVulsRequest: DescribeVulsRequest,
     DescribeAgentVulsResponse: DescribeAgentVulsResponse,
-    SwitchBashRulesRequest: SwitchBashRulesRequest,
+    DescribeGeneralStatResponse: DescribeGeneralStatResponse,
     DescribeProcessStatisticsRequest: DescribeProcessStatisticsRequest,
     DeleteMachineTagResponse: DeleteMachineTagResponse,
     DescribeHistoryAccountsRequest: DescribeHistoryAccountsRequest,
+    BruteAttackInfo: BruteAttackInfo,
     DescribeMachineInfoResponse: DescribeMachineInfoResponse,
     OpenProVersionRequest: OpenProVersionRequest,
-    DeleteBashRulesResponse: DeleteBashRulesResponse,
+    DescribeImpactedHostsRequest: DescribeImpactedHostsRequest,
     IgnoreImpactedHostsResponse: IgnoreImpactedHostsResponse,
     DeleteBashEventsRequest: DeleteBashEventsRequest,
     DescribeComponentsResponse: DescribeComponentsResponse,
     Tag: Tag,
     RescanImpactedHostResponse: RescanImpactedHostResponse,
     SecurityTrend: SecurityTrend,
-    Vul: Vul,
+    ExportTasksRequest: ExportTasksRequest,
+    DescribeVulScanResultResponse: DescribeVulScanResultResponse,
+    ModifyAutoOpenProVersionConfigRequest: ModifyAutoOpenProVersionConfigRequest,
     AddMachineTagRequest: AddMachineTagRequest,
+    ExportVulDetectionExcelRequest: ExportVulDetectionExcelRequest,
     DescribeWeeklyReportsResponse: DescribeWeeklyReportsResponse,
     DeleteReverseShellEventsRequest: DeleteReverseShellEventsRequest,
+    DescribeSearchLogsResponse: DescribeSearchLogsResponse,
     ModifyAutoOpenProVersionConfigResponse: ModifyAutoOpenProVersionConfigResponse,
     ExportReverseShellEventsRequest: ExportReverseShellEventsRequest,
-    DescribeVulsResponse: DescribeVulsResponse,
-    RecoverMalwaresResponse: RecoverMalwaresResponse,
+    DescribeMachineOsListResponse: DescribeMachineOsListResponse,
+    ExportAttackLogsResponse: ExportAttackLogsResponse,
     EditTagsResponse: EditTagsResponse,
     IgnoreImpactedHostsRequest: IgnoreImpactedHostsRequest,
     DescribeAlarmAttributeRequest: DescribeAlarmAttributeRequest,
@@ -11822,9 +15202,13 @@ module.exports = {
     DeleteMaliciousRequestsRequest: DeleteMaliciousRequestsRequest,
     DescribeMachinesRequest: DescribeMachinesRequest,
     ModifyAlarmAttributeResponse: ModifyAlarmAttributeResponse,
+    DescribeSecurityEventsCntResponse: DescribeSecurityEventsCntResponse,
+    Filters: Filters,
     BashEvent: BashEvent,
     DeleteMalwaresRequest: DeleteMalwaresRequest,
     DescribeMalwaresResponse: DescribeMalwaresResponse,
+    CreateSearchLogRequest: CreateSearchLogRequest,
     DeletePrivilegeRulesRequest: DeletePrivilegeRulesRequest,
+    ExportTasksResponse: ExportTasksResponse,
 
 }

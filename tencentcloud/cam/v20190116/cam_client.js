@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const SubAccountUser = models.SubAccountUser;
 const GetUserResponse = models.GetUserResponse;
 const ListAccessKeysRequest = models.ListAccessKeysRequest;
 const SetMfaFlagResponse = models.SetMfaFlagResponse;
@@ -40,6 +41,7 @@ const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const DeleteRoleResponse = models.DeleteRoleResponse;
 const PolicyVersionItem = models.PolicyVersionItem;
+const DescribeSubAccountsRequest = models.DescribeSubAccountsRequest;
 const DeleteUserPermissionsBoundaryRequest = models.DeleteUserPermissionsBoundaryRequest;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
@@ -51,6 +53,7 @@ const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
 const CreatePolicyVersionResponse = models.CreatePolicyVersionResponse;
 const ListPoliciesResponse = models.ListPoliciesResponse;
+const WeChatWorkSubAccount = models.WeChatWorkSubAccount;
 const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
@@ -69,6 +72,7 @@ const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
 const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
+const ListWeChatWorkSubAccountsRequest = models.ListWeChatWorkSubAccountsRequest;
 const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
 const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
@@ -82,6 +86,7 @@ const CreateGroupRequest = models.CreateGroupRequest;
 const SAMLProviderInfo = models.SAMLProviderInfo;
 const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
 const UpdateUserRequest = models.UpdateUserRequest;
+const ListWeChatWorkSubAccountsResponse = models.ListWeChatWorkSubAccountsResponse;
 const CreateSAMLProviderRequest = models.CreateSAMLProviderRequest;
 const AttachPolicyInfo = models.AttachPolicyInfo;
 const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryRequest;
@@ -139,6 +144,7 @@ const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
 const ListUsersForGroupResponse = models.ListUsersForGroupResponse;
 const PolicyVersionDetail = models.PolicyVersionDetail;
 const AddUserResponse = models.AddUserResponse;
+const DescribeSubAccountsResponse = models.DescribeSubAccountsResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
@@ -705,6 +711,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 通过子用户UIN列表查询子用户
+     * @param {DescribeSubAccountsRequest} req
+     * @param {function(string, DescribeSubAccountsResponse):void} cb
+     * @public
+     */
+    DescribeSubAccounts(req, cb) {
+        let resp = new DescribeSubAccountsResponse();
+        this.request("DescribeSubAccounts", req, resp, cb);
+    }
+
+    /**
      * 从用户组删除用户
      * @param {RemoveUserFromGroupRequest} req
      * @param {function(string, RemoveUserFromGroupResponse):void} cb
@@ -757,6 +774,17 @@ class CamClient extends AbstractClient {
     ListEntitiesForPolicy(req, cb) {
         let resp = new ListEntitiesForPolicyResponse();
         this.request("ListEntitiesForPolicy", req, resp, cb);
+    }
+
+    /**
+     * 获取企业微信子用户列表
+     * @param {ListWeChatWorkSubAccountsRequest} req
+     * @param {function(string, ListWeChatWorkSubAccountsResponse):void} cb
+     * @public
+     */
+    ListWeChatWorkSubAccounts(req, cb) {
+        let resp = new ListWeChatWorkSubAccountsResponse();
+        this.request("ListWeChatWorkSubAccounts", req, resp, cb);
     }
 
     /**

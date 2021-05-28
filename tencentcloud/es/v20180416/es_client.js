@@ -20,13 +20,17 @@ const InstanceLog = models.InstanceLog;
 const LocalDiskInfo = models.LocalDiskInfo;
 const TaskDetail = models.TaskDetail;
 const NodeInfo = models.NodeInfo;
+const GetRequestTargetNodeTypesRequest = models.GetRequestTargetNodeTypesRequest;
 const DescribeInstanceOperationsRequest = models.DescribeInstanceOperationsRequest;
 const OperationDetail = models.OperationDetail;
+const DiagnoseInstanceResponse = models.DiagnoseInstanceResponse;
 const EsPublicAcl = models.EsPublicAcl;
 const DictInfo = models.DictInfo;
 const RestartInstanceResponse = models.RestartInstanceResponse;
+const RestartKibanaRequest = models.RestartKibanaRequest;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DescribeInstanceLogsRequest = models.DescribeInstanceLogsRequest;
+const UpdateRequestTargetNodeTypesRequest = models.UpdateRequestTargetNodeTypesRequest;
 const UpgradeLicenseRequest = models.UpgradeLicenseRequest;
 const CosBackup = models.CosBackup;
 const TagInfo = models.TagInfo;
@@ -37,14 +41,18 @@ const DeleteInstanceResponse = models.DeleteInstanceResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
 const UpdatePluginsResponse = models.UpdatePluginsResponse;
+const DiagnoseInstanceRequest = models.DiagnoseInstanceRequest;
 const RestartInstanceRequest = models.RestartInstanceRequest;
 const ZoneDetail = models.ZoneDetail;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const UpdateDiagnoseSettingsRequest = models.UpdateDiagnoseSettingsRequest;
 const UpdateInstanceRequest = models.UpdateInstanceRequest;
 const EsDictionaryInfo = models.EsDictionaryInfo;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
 const RestartNodesRequest = models.RestartNodesRequest;
 const UpdatePluginsRequest = models.UpdatePluginsRequest;
+const UpdateRequestTargetNodeTypesResponse = models.UpdateRequestTargetNodeTypesResponse;
+const UpdateDiagnoseSettingsResponse = models.UpdateDiagnoseSettingsResponse;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;
@@ -54,6 +62,8 @@ const RestartNodesResponse = models.RestartNodesResponse;
 const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const UpdateInstanceResponse = models.UpdateInstanceResponse;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const GetRequestTargetNodeTypesResponse = models.GetRequestTargetNodeTypesResponse;
+const RestartKibanaResponse = models.RestartKibanaResponse;
 const Operation = models.Operation;
 
 
@@ -67,6 +77,28 @@ class EsClient extends AbstractClient {
         super("es.tencentcloudapi.com", "2018-04-16", credential, region, profile);
     }
     
+    /**
+     * 更新接收客户端请求的节点类型
+     * @param {UpdateRequestTargetNodeTypesRequest} req
+     * @param {function(string, UpdateRequestTargetNodeTypesResponse):void} cb
+     * @public
+     */
+    UpdateRequestTargetNodeTypes(req, cb) {
+        let resp = new UpdateRequestTargetNodeTypesResponse();
+        this.request("UpdateRequestTargetNodeTypes", req, resp, cb);
+    }
+
+    /**
+     * 智能运维诊断集群
+     * @param {DiagnoseInstanceRequest} req
+     * @param {function(string, DiagnoseInstanceResponse):void} cb
+     * @public
+     */
+    DiagnoseInstance(req, cb) {
+        let resp = new DiagnoseInstanceResponse();
+        this.request("DiagnoseInstance", req, resp, cb);
+    }
+
     /**
      * 查询实例指定条件下的操作记录
      * @param {DescribeInstanceOperationsRequest} req
@@ -90,6 +122,17 @@ class EsClient extends AbstractClient {
     }
 
     /**
+     * 获取接收客户端请求的节点类型
+     * @param {GetRequestTargetNodeTypesRequest} req
+     * @param {function(string, GetRequestTargetNodeTypesResponse):void} cb
+     * @public
+     */
+    GetRequestTargetNodeTypes(req, cb) {
+        let resp = new GetRequestTargetNodeTypesResponse();
+        this.request("GetRequestTargetNodeTypes", req, resp, cb);
+    }
+
+    /**
      * 变更插件列表
      * @param {UpdatePluginsRequest} req
      * @param {function(string, UpdatePluginsResponse):void} cb
@@ -109,6 +152,17 @@ class EsClient extends AbstractClient {
     CreateInstance(req, cb) {
         let resp = new CreateInstanceResponse();
         this.request("CreateInstance", req, resp, cb);
+    }
+
+    /**
+     * 更新智能运维配置
+     * @param {UpdateDiagnoseSettingsRequest} req
+     * @param {function(string, UpdateDiagnoseSettingsResponse):void} cb
+     * @public
+     */
+    UpdateDiagnoseSettings(req, cb) {
+        let resp = new UpdateDiagnoseSettingsResponse();
+        this.request("UpdateDiagnoseSettings", req, resp, cb);
     }
 
     /**
@@ -193,6 +247,17 @@ class EsClient extends AbstractClient {
     DescribeInstanceLogs(req, cb) {
         let resp = new DescribeInstanceLogsResponse();
         this.request("DescribeInstanceLogs", req, resp, cb);
+    }
+
+    /**
+     * 重启Kibana 
+     * @param {RestartKibanaRequest} req
+     * @param {function(string, RestartKibanaResponse):void} cb
+     * @public
+     */
+    RestartKibana(req, cb) {
+        let resp = new RestartKibanaResponse();
+        this.request("RestartKibana", req, resp, cb);
     }
 
 

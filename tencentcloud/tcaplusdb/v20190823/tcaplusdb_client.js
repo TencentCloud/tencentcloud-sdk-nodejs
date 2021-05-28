@@ -16,6 +16,8 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ImportSnapshotsResponse = models.ImportSnapshotsResponse;
+const CompareTablesInfo = models.CompareTablesInfo;
 const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const ModifyTableGroupNameResponse = models.ModifyTableGroupNameResponse;
 const DescribeTableTagsRequest = models.DescribeTableTagsRequest;
@@ -23,86 +25,126 @@ const ModifyClusterPasswordResponse = models.ModifyClusterPasswordResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
 const DeleteTableIndexResponse = models.DeleteTableIndexResponse;
 const TableRollbackResultNew = models.TableRollbackResultNew;
+const ApplyStatus = models.ApplyStatus;
+const RegionInfo = models.RegionInfo;
 const DescribeTablesResponse = models.DescribeTablesResponse;
+const ModifySnapshotsResponse = models.ModifySnapshotsResponse;
+const UpdateApplyResponse = models.UpdateApplyResponse;
 const DeleteClusterRequest = models.DeleteClusterRequest;
 const SelectedTableWithField = models.SelectedTableWithField;
 const DeleteTableIndexRequest = models.DeleteTableIndexRequest;
+const ProxyMachineInfo = models.ProxyMachineInfo;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DeleteTablesRequest = models.DeleteTablesRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const SelectedTableInfoNew = models.SelectedTableInfoNew;
 const ModifyClusterPasswordRequest = models.ModifyClusterPasswordRequest;
+const DescribeMachineResponse = models.DescribeMachineResponse;
 const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
+const DescribeSnapshotsRequest = models.DescribeSnapshotsRequest;
 const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
+const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
 const CreateTableGroupRequest = models.CreateTableGroupRequest;
+const ModifyClusterMachineResponse = models.ModifyClusterMachineResponse;
 const TagsInfoOfTable = models.TagsInfoOfTable;
 const DeleteIdlFilesResponse = models.DeleteIdlFilesResponse;
 const FieldInfo = models.FieldInfo;
 const ModifyTableTagsRequest = models.ModifyTableTagsRequest;
-const IdlFileInfo = models.IdlFileInfo;
+const MergeTableResult = models.MergeTableResult;
+const ApplyResult = models.ApplyResult;
 const DescribeTasksRequest = models.DescribeTasksRequest;
-const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const SnapshotInfoNew = models.SnapshotInfoNew;
+const Application = models.Application;
 const ClearTablesResponse = models.ClearTablesResponse;
 const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
+const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
+const SnapshotResult = models.SnapshotResult;
+const ModifyCensorshipRequest = models.ModifyCensorshipRequest;
 const ClusterInfo = models.ClusterInfo;
+const DisableRestProxyRequest = models.DisableRestProxyRequest;
 const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
 const ModifyTablesResponse = models.ModifyTablesResponse;
+const DeleteSnapshotsRequest = models.DeleteSnapshotsRequest;
 const ModifyTableGroupTagsResponse = models.ModifyTableGroupTagsResponse;
 const ModifyClusterTagsRequest = models.ModifyClusterTagsRequest;
+const CreateSnapshotsRequest = models.CreateSnapshotsRequest;
 const DescribeTableGroupTagsResponse = models.DescribeTableGroupTagsResponse;
 const SetTableIndexRequest = models.SetTableIndexRequest;
 const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
 const RecoverRecycleTablesRequest = models.RecoverRecycleTablesRequest;
+const DeleteSnapshotsResponse = models.DeleteSnapshotsResponse;
+const DeleteTablesResponse = models.DeleteTablesResponse;
 const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
 const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
-const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
+const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
+const MergeTablesDataRequest = models.MergeTablesDataRequest;
+const CreateClusterRequest = models.CreateClusterRequest;
 const ModifyTableGroupTagsRequest = models.ModifyTableGroupTagsRequest;
+const EnableRestProxyRequest = models.EnableRestProxyRequest;
 const ModifyTableQuotasRequest = models.ModifyTableQuotasRequest;
 const CompareIdlFilesResponse = models.CompareIdlFilesResponse;
 const CreateTablesResponse = models.CreateTablesResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
+const MergeTablesInfo = models.MergeTablesInfo;
 const ModifyClusterTagsResponse = models.ModifyClusterTagsResponse;
 const DescribeClusterTagsResponse = models.DescribeClusterTagsResponse;
 const TagsInfoOfCluster = models.TagsInfoOfCluster;
 const SetTableIndexResponse = models.SetTableIndexResponse;
 const ClearTablesRequest = models.ClearTablesRequest;
 const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
+const ServerMachineInfo = models.ServerMachineInfo;
+const CreateSnapshotsResponse = models.CreateSnapshotsResponse;
+const IdlFileInfo = models.IdlFileInfo;
+const DisableRestProxyResponse = models.DisableRestProxyResponse;
 const TagInfoUnit = models.TagInfoUnit;
 const CreateClusterResponse = models.CreateClusterResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
+const ServerDetailInfo = models.ServerDetailInfo;
 const TableInfoNew = models.TableInfoNew;
 const TaskInfoNew = models.TaskInfoNew;
 const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
+const KeyFile = models.KeyFile;
 const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
 const DescribeTableTagsResponse = models.DescribeTableTagsResponse;
 const CreateTableGroupResponse = models.CreateTableGroupResponse;
+const DescribeSnapshotsResponse = models.DescribeSnapshotsResponse;
 const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
+const EnableRestProxyResponse = models.EnableRestProxyResponse;
 const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
 const ModifyTablesRequest = models.ModifyTablesRequest;
 const DescribeTableGroupTagsRequest = models.DescribeTableGroupTagsRequest;
 const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
+const UpdateApplyRequest = models.UpdateApplyRequest;
 const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
 const DescribeUinInWhitelistResponse = models.DescribeUinInWhitelistResponse;
+const SnapshotInfo = models.SnapshotInfo;
 const ParsedTableInfoNew = models.ParsedTableInfoNew;
 const RollbackTablesResponse = models.RollbackTablesResponse;
+const MachineInfo = models.MachineInfo;
 const CreateBackupRequest = models.CreateBackupRequest;
-const CreateClusterRequest = models.CreateClusterRequest;
 const TableResultNew = models.TableResultNew;
 const CreateTablesRequest = models.CreateTablesRequest;
 const DescribeClusterTagsRequest = models.DescribeClusterTagsRequest;
-const RegionInfo = models.RegionInfo;
+const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const MergeTablesDataResponse = models.MergeTablesDataResponse;
+const DescribeApplicationsRequest = models.DescribeApplicationsRequest;
 const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
 const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
+const PoolInfo = models.PoolInfo;
+const DescribeMachineRequest = models.DescribeMachineRequest;
 const RollbackTablesRequest = models.RollbackTablesRequest;
-const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
+const ModifyCensorshipResponse = models.ModifyCensorshipResponse;
 const CompareIdlFilesRequest = models.CompareIdlFilesRequest;
+const ProxyDetailInfo = models.ProxyDetailInfo;
 const IdlFileInfoWithoutContent = models.IdlFileInfoWithoutContent;
 const ModifyTableMemosResponse = models.ModifyTableMemosResponse;
+const ModifyClusterMachineRequest = models.ModifyClusterMachineRequest;
 const Filter = models.Filter;
-const DeleteTablesResponse = models.DeleteTablesResponse;
+const ModifySnapshotsRequest = models.ModifySnapshotsRequest;
+const ImportSnapshotsRequest = models.ImportSnapshotsRequest;
 const ErrorInfo = models.ErrorInfo;
 const TableGroupInfo = models.TableGroupInfo;
 
@@ -140,6 +182,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 更新申请单状态
+     * @param {UpdateApplyRequest} req
+     * @param {function(string, UpdateApplyResponse):void} cb
+     * @public
+     */
+    UpdateApply(req, cb) {
+        let resp = new UpdateApplyResponse();
+        this.request("UpdateApply", req, resp, cb);
+    }
+
+    /**
      * 修改表格标签
      * @param {ModifyTableTagsRequest} req
      * @param {function(string, ModifyTableTagsResponse):void} cb
@@ -162,6 +215,28 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 查询独占集群可以申请的剩余机器
+     * @param {DescribeMachineRequest} req
+     * @param {function(string, DescribeMachineResponse):void} cb
+     * @public
+     */
+    DescribeMachine(req, cb) {
+        let resp = new DescribeMachineResponse();
+        this.request("DescribeMachine", req, resp, cb);
+    }
+
+    /**
+     * 合并指定表格
+     * @param {MergeTablesDataRequest} req
+     * @param {function(string, MergeTablesDataResponse):void} cb
+     * @public
+     */
+    MergeTablesData(req, cb) {
+        let resp = new MergeTablesDataResponse();
+        this.request("MergeTablesData", req, resp, cb);
+    }
+
+    /**
      * 查询本用户是否在白名单中，控制是否能创建TDR类型的APP或表
      * @param {DescribeUinInWhitelistRequest} req
      * @param {function(string, DescribeUinInWhitelistResponse):void} cb
@@ -181,6 +256,17 @@ class TcaplusdbClient extends AbstractClient {
     DescribeTablesInRecycle(req, cb) {
         let resp = new DescribeTablesInRecycleResponse();
         this.request("DescribeTablesInRecycle", req, resp, cb);
+    }
+
+    /**
+     * 当restful api为关闭状态时，可以通过此接口关闭restful api
+     * @param {DisableRestProxyRequest} req
+     * @param {function(string, DisableRestProxyResponse):void} cb
+     * @public
+     */
+    DisableRestProxy(req, cb) {
+        let resp = new DisableRestProxyResponse();
+        this.request("DisableRestProxy", req, resp, cb);
     }
 
     /**
@@ -228,28 +314,6 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
-     * 指定集群ID和待删除IDL文件的信息，删除目标文件，如果文件正在被表关联则删除失败。
-     * @param {DeleteIdlFilesRequest} req
-     * @param {function(string, DeleteIdlFilesResponse):void} cb
-     * @public
-     */
-    DeleteIdlFiles(req, cb) {
-        let resp = new DeleteIdlFilesResponse();
-        this.request("DeleteIdlFiles", req, resp, cb);
-    }
-
-    /**
-     * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
-     * @param {RecoverRecycleTablesRequest} req
-     * @param {function(string, RecoverRecycleTablesResponse):void} cb
-     * @public
-     */
-    RecoverRecycleTables(req, cb) {
-        let resp = new RecoverRecycleTablesResponse();
-        this.request("RecoverRecycleTables", req, resp, cb);
-    }
-
-    /**
      * 设置表格分布式索引
      * @param {SetTableIndexRequest} req
      * @param {function(string, SetTableIndexResponse):void} cb
@@ -261,6 +325,39 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 指定集群ID和待删除IDL文件的信息，删除目标文件，如果文件正在被表关联则删除失败。
+     * @param {DeleteIdlFilesRequest} req
+     * @param {function(string, DeleteIdlFilesResponse):void} cb
+     * @public
+     */
+    DeleteIdlFiles(req, cb) {
+        let resp = new DeleteIdlFilesResponse();
+        this.request("DeleteIdlFiles", req, resp, cb);
+    }
+
+    /**
+     * 构造表格过去时间点的快照
+     * @param {CreateSnapshotsRequest} req
+     * @param {function(string, CreateSnapshotsResponse):void} cb
+     * @public
+     */
+    CreateSnapshots(req, cb) {
+        let resp = new CreateSnapshotsResponse();
+        this.request("CreateSnapshots", req, resp, cb);
+    }
+
+    /**
+     * 当restful api为关闭状态时，可以通过此接口开启restful apu
+     * @param {EnableRestProxyRequest} req
+     * @param {function(string, EnableRestProxyResponse):void} cb
+     * @public
+     */
+    EnableRestProxy(req, cb) {
+        let resp = new EnableRestProxyResponse();
+        this.request("EnableRestProxy", req, resp, cb);
+    }
+
+    /**
      * 用户创建备份任务
      * @param {CreateBackupRequest} req
      * @param {function(string, CreateBackupResponse):void} cb
@@ -269,6 +366,17 @@ class TcaplusdbClient extends AbstractClient {
     CreateBackup(req, cb) {
         let resp = new CreateBackupResponse();
         this.request("CreateBackup", req, resp, cb);
+    }
+
+    /**
+     * 修改集群审批状态
+     * @param {ModifyCensorshipRequest} req
+     * @param {function(string, ModifyCensorshipResponse):void} cb
+     * @public
+     */
+    ModifyCensorship(req, cb) {
+        let resp = new ModifyCensorshipResponse();
+        this.request("ModifyCensorship", req, resp, cb);
     }
 
     /**
@@ -305,6 +413,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 修改独占集群机器
+     * @param {ModifyClusterMachineRequest} req
+     * @param {function(string, ModifyClusterMachineResponse):void} cb
+     * @public
+     */
+    ModifyClusterMachine(req, cb) {
+        let resp = new ModifyClusterMachineResponse();
+        this.request("ModifyClusterMachine", req, resp, cb);
+    }
+
+    /**
      * 删除表格组
      * @param {DeleteTableGroupRequest} req
      * @param {function(string, DeleteTableGroupResponse):void} cb
@@ -327,6 +446,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 删除表格的快照
+     * @param {DeleteSnapshotsRequest} req
+     * @param {function(string, DeleteSnapshotsResponse):void} cb
+     * @public
+     */
+    DeleteSnapshots(req, cb) {
+        let resp = new DeleteSnapshotsResponse();
+        this.request("DeleteSnapshots", req, resp, cb);
+    }
+
+    /**
      * 在TcaplusDB集群下创建表格组
      * @param {CreateTableGroupRequest} req
      * @param {function(string, CreateTableGroupResponse):void} cb
@@ -335,6 +465,17 @@ class TcaplusdbClient extends AbstractClient {
     CreateTableGroup(req, cb) {
         let resp = new CreateTableGroupResponse();
         this.request("CreateTableGroup", req, resp, cb);
+    }
+
+    /**
+     * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
+     * @param {RecoverRecycleTablesRequest} req
+     * @param {function(string, RecoverRecycleTablesResponse):void} cb
+     * @public
+     */
+    RecoverRecycleTables(req, cb) {
+        let resp = new RecoverRecycleTablesResponse();
+        this.request("RecoverRecycleTables", req, resp, cb);
     }
 
     /**
@@ -360,6 +501,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 查询快照列表
+     * @param {DescribeSnapshotsRequest} req
+     * @param {function(string, DescribeSnapshotsResponse):void} cb
+     * @public
+     */
+    DescribeSnapshots(req, cb) {
+        let resp = new DescribeSnapshotsResponse();
+        this.request("DescribeSnapshots", req, resp, cb);
+    }
+
+    /**
      * 修改集群标签
      * @param {ModifyClusterTagsRequest} req
      * @param {function(string, ModifyClusterTagsResponse):void} cb
@@ -382,6 +534,17 @@ class TcaplusdbClient extends AbstractClient {
     }
 
     /**
+     * 获取审批管理的申请单
+     * @param {DescribeApplicationsRequest} req
+     * @param {function(string, DescribeApplicationsResponse):void} cb
+     * @public
+     */
+    DescribeApplications(req, cb) {
+        let resp = new DescribeApplicationsResponse();
+        this.request("DescribeApplications", req, resp, cb);
+    }
+
+    /**
      * 获取表格组关联的标签列表
      * @param {DescribeTableGroupTagsRequest} req
      * @param {function(string, DescribeTableGroupTagsResponse):void} cb
@@ -390,6 +553,17 @@ class TcaplusdbClient extends AbstractClient {
     DescribeTableGroupTags(req, cb) {
         let resp = new DescribeTableGroupTagsResponse();
         this.request("DescribeTableGroupTags", req, resp, cb);
+    }
+
+    /**
+     * 将快照数据导入到新表或当前表
+     * @param {ImportSnapshotsRequest} req
+     * @param {function(string, ImportSnapshotsResponse):void} cb
+     * @public
+     */
+    ImportSnapshots(req, cb) {
+        let resp = new ImportSnapshotsResponse();
+        this.request("ImportSnapshots", req, resp, cb);
     }
 
     /**
@@ -445,6 +619,17 @@ class TcaplusdbClient extends AbstractClient {
     ModifyTableMemos(req, cb) {
         let resp = new ModifyTableMemosResponse();
         this.request("ModifyTableMemos", req, resp, cb);
+    }
+
+    /**
+     * 修改表格快照的过期时间
+     * @param {ModifySnapshotsRequest} req
+     * @param {function(string, ModifySnapshotsResponse):void} cb
+     * @public
+     */
+    ModifySnapshots(req, cb) {
+        let resp = new ModifySnapshotsResponse();
+        this.request("ModifySnapshots", req, resp, cb);
     }
 
     /**

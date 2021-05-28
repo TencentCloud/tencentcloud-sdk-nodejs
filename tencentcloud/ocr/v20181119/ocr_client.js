@@ -69,6 +69,7 @@ const TextVatInvoice = models.TextVatInvoice;
 const GeneralHandwritingOCRRequest = models.GeneralHandwritingOCRRequest;
 const BizLicenseOCRRequest = models.BizLicenseOCRRequest;
 const MixedInvoiceDetectResponse = models.MixedInvoiceDetectResponse;
+const VatInvoiceUserInfo = models.VatInvoiceUserInfo;
 const InsuranceBillOCRResponse = models.InsuranceBillOCRResponse;
 const GeneralEfficientOCRResponse = models.GeneralEfficientOCRResponse;
 const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
@@ -87,6 +88,7 @@ const DutyPaidProofOCRResponse = models.DutyPaidProofOCRResponse;
 const TollInvoiceOCRRequest = models.TollInvoiceOCRRequest;
 const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
 const HKIDCardOCRResponse = models.HKIDCardOCRResponse;
+const VatInvoiceGoodsInfo = models.VatInvoiceGoodsInfo;
 const PermitOCRRequest = models.PermitOCRRequest;
 const InvoiceGeneralOCRResponse = models.InvoiceGeneralOCRResponse;
 const TaxiInvoiceOCRRequest = models.TaxiInvoiceOCRRequest;
@@ -110,9 +112,11 @@ const TextVehicleBack = models.TextVehicleBack;
 const GeneralEfficientOCRRequest = models.GeneralEfficientOCRRequest;
 const AdvertiseOCRRequest = models.AdvertiseOCRRequest;
 const RideHailingDriverLicenseOCRResponse = models.RideHailingDriverLicenseOCRResponse;
+const Detail = models.Detail;
 const EnglishOCRRequest = models.EnglishOCRRequest;
 const VatInvoiceVerifyResponse = models.VatInvoiceVerifyResponse;
 const PassportOCRResponse = models.PassportOCRResponse;
+const VerifyEnterpriseFourFactorsRequest = models.VerifyEnterpriseFourFactorsRequest;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const OrgCodeCertOCRRequest = models.OrgCodeCertOCRRequest;
 const FlightInvoiceOCRResponse = models.FlightInvoiceOCRResponse;
@@ -124,6 +128,7 @@ const AdvertiseTextDetection = models.AdvertiseTextDetection;
 const FinanBillSliceInfo = models.FinanBillSliceInfo;
 const QueryBarCodeResponse = models.QueryBarCodeResponse;
 const ArithmeticOCRRequest = models.ArithmeticOCRRequest;
+const VerifyOfdVatInvoiceOCRRequest = models.VerifyOfdVatInvoiceOCRRequest;
 const FinanBillSliceOCRRequest = models.FinanBillSliceOCRRequest;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const VatRollInvoiceOCRRequest = models.VatRollInvoiceOCRRequest;
@@ -156,6 +161,7 @@ const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
 const ClassifyDetectInfo = models.ClassifyDetectInfo;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const SealOCRRequest = models.SealOCRRequest;
+const VerifyOfdVatInvoiceOCRResponse = models.VerifyOfdVatInvoiceOCRResponse;
 const TextTable = models.TextTable;
 const ResidenceBookletOCRRequest = models.ResidenceBookletOCRRequest;
 const BusInvoiceOCRResponse = models.BusInvoiceOCRResponse;
@@ -191,6 +197,7 @@ const QuotaInvoiceOCRRequest = models.QuotaInvoiceOCRRequest;
 const BankCardOCRResponse = models.BankCardOCRResponse;
 const BusinessCardOCRRequest = models.BusinessCardOCRRequest;
 const FinanBillOCRRequest = models.FinanBillOCRRequest;
+const VerifyEnterpriseFourFactorsResponse = models.VerifyEnterpriseFourFactorsResponse;
 const GeneralFastOCRResponse = models.GeneralFastOCRResponse;
 const QrcodePositionObj = models.QrcodePositionObj;
 
@@ -217,7 +224,9 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持营业执照信息的识别与准确性核验。您可以通过输入营业执照关键字段或传入营业执照图片提供所需的验证信息，接口返回真实的企业工商照面信息及核验结果，包括统一社会信用代码、经营期限、法人姓名、经营状态、经营业务范围、状态信息、原注册号、要核验的工商注册号、工商注册号、要核验的企业名称、企业名称、要核验的注册住址、注册住址、核验结果、注册资本共16个基础字段。
+     * 本接口支持营业执照信息的识别与准确性核验。
+
+您可以通过输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询）进行核验，接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。查询到工商信息包括：统一社会信用代码、经营期限、法人姓名、经营状态、经营业务范围、注册资本等。
      * @param {VerifyBasicBizLicenseRequest} req
      * @param {function(string, VerifyBasicBizLicenseResponse):void} cb
      * @public
@@ -420,7 +429,7 @@ class OcrClient extends AbstractClient {
         </tr>
         <tr>
           <td>自动旋转纠正</td>
-          <td>支持旋转识别，不支持角度返回</td>
+          <td>支持旋转识别，返回角度信息</td>
           <td>支持旋转识别，返回角度信息</td>
           <td>支持旋转识别，返回角度信息</td>
         </tr>
@@ -436,7 +445,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持机票行程单关键字段的识别，包括姓名、身份证件号码、航班号、票价 、合计、电子客票号码、填开日期等。
+     * 本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
      * @param {FlightInvoiceOCRRequest} req
      * @param {function(string, FlightInvoiceOCRResponse):void} cb
      * @public
@@ -458,7 +467,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持识别轮船票的发票代码、发票号码、日期、姓名、票价等字段。
+     * 本接口支持识别轮船票的发票代码、发票号码、日期、姓名、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种字段。
      * @param {ShipInvoiceOCRRequest} req
      * @param {function(string, ShipInvoiceOCRResponse):void} cb
      * @public
@@ -526,6 +535,7 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持房产证关键字段的识别，包括房地产权利人、共有情况、登记时间、规划用途、房屋性质、房屋坐落等。
+目前接口对合肥、成都、佛山三个城市的房产证版式识别较好。
      * @param {PropOwnerCertOCRRequest} req
      * @param {function(string, PropOwnerCertOCRResponse):void} cb
      * @public
@@ -604,7 +614,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持图片/ PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持对0度至180度旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。
+     * 本接口支持中英文图片/ PDF内常规表格、无线表格、多表格的检测和识别，支持日文有线表格识别，返回每个单元格的文字内容，支持旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。
      * @param {RecognizeTableOCRRequest} req
      * @param {function(string, RecognizeTableOCRResponse):void} cb
      * @public
@@ -615,8 +625,11 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持营业执照信息的识别与准确性核验，返回的营业执照信息比营业执照识别及核验（基础版）接口更详细。
-您可以通过输入营业执照关键字段或传入营业执照图片提供所需的验证信息，接口返回真实的企业工商照面信息及核验结果，包括统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围、要核验的工商注册号、工商注册号、要核验的企业名称、企业名称、要核验的注册住址、注册住址、核验结果共33个详细字段。
+     * 本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
+
+您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
+
+查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
      * @param {VerifyBizLicenseRequest} req
      * @param {function(string, VerifyBizLicenseResponse):void} cb
      * @public
@@ -694,7 +707,7 @@ class OcrClient extends AbstractClient {
         <tr>
           <td>自动旋转纠正</td>
           <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，不支持角度返回</td>
+          <td>支持旋转识别，返回角度信息</td>
           <td>支持旋转识别，返回角度信息</td>
         </tr>
       </tbody>
@@ -739,6 +752,17 @@ class OcrClient extends AbstractClient {
     FinanBillSliceOCR(req, cb) {
         let resp = new FinanBillSliceOCRResponse();
         this.request("FinanBillSliceOCR", req, resp, cb);
+    }
+
+    /**
+     * 此接口基于企业四要素授权“姓名、证件号码、企业标识、企业全称”，验证企业信息是否一致。
+     * @param {VerifyEnterpriseFourFactorsRequest} req
+     * @param {function(string, VerifyEnterpriseFourFactorsResponse):void} cb
+     * @public
+     */
+    VerifyEnterpriseFourFactors(req, cb) {
+        let resp = new VerifyEnterpriseFourFactorsResponse();
+        this.request("VerifyEnterpriseFourFactors", req, resp, cb);
     }
 
     /**
@@ -801,7 +825,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持作业算式题目的自动识别，目前覆盖 K12 学力范围内的 14 种题型，包括加减乘除四则运算、分数四则运算、竖式四则运算、脱式计算等。
+     * 本接口支持作业算式题目的自动识别和判分，目前覆盖 K12 学力范围内的 11 种题型，包括加减乘除四则、加减乘除已知结果求运算因子、判断大小、约等于估算、带余数除法、分数四则运算、单位换算、竖式加减法、竖式乘除法、脱式计算和解方程，平均识别精度达到93%以上。
      * @param {ArithmeticOCRRequest} req
      * @param {function(string, ArithmeticOCRResponse):void} cb
      * @public
@@ -952,7 +976,7 @@ class OcrClient extends AbstractClient {
           <td>自动旋转纠正</td>
           <td>支持旋转识别，返回角度信息</td>
           <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，不支持角度返回</td>
+          <td>支持旋转识别，返回角度信息</td>
           
          
         </tr>
@@ -1025,7 +1049,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持对中国大陆主流银行卡的卡号、银行信息、有效期等关键字段的检测与识别。
+     * 本接口支持对中国大陆主流银行卡正反面关键字段的检测与识别，包括卡号、卡类型、卡名字、银行信息、有效期。支持竖排异形卡识别、多角度旋转图片识别。支持对复印件、翻拍件、边框遮挡的银行卡进行告警，可应用于各种银行卡信息有效性校验场景，如金融行业身份认证、第三方支付绑卡等场景。
      * @param {BankCardOCRRequest} req
      * @param {function(string, BankCardOCRResponse):void} cb
      * @public
@@ -1049,7 +1073,7 @@ class OcrClient extends AbstractClient {
     /**
      * 本接口支持驾驶证主页和副页所有字段的自动定位与识别，重点字段的识别准确度达到99%以上。
 
-驾驶证主页：包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限。
+驾驶证主页：包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限、发证单位
 
 驾驶证副页：包括证号、姓名、档案编号、记录。
 
@@ -1108,6 +1132,17 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持OFD格式的增值税电子普通发票和增值税电子专用发票的识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
+     * @param {VerifyOfdVatInvoiceOCRRequest} req
+     * @param {function(string, VerifyOfdVatInvoiceOCRResponse):void} cb
+     * @public
+     */
+    VerifyOfdVatInvoiceOCR(req, cb) {
+        let resp = new VerifyOfdVatInvoiceOCRResponse();
+        this.request("VerifyOfdVatInvoiceOCR", req, resp, cb);
+    }
+
+    /**
      * 本接口支持多张、多类型票据的混合识别，系统自动实现分割、分类和识别，同时支持自选需要识别的票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共11种票据。
      * @param {MixedInvoiceOCRRequest} req
      * @param {function(string, MixedInvoiceOCRResponse):void} cb
@@ -1119,7 +1154,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持数学试题内容的识别和结构化输出，包括通用文本解析和小学/初中/高中数学公式解析能力（包括91种题型，180种符号）。
+     * 本接口支持数学试题内容的识别和结构化输出，包括通用文本解析和小学/初中/高中数学公式解析能力（包括91种题型，180种符号），公式返回格式为 Latex 格式文本。
      * @param {EduPaperOCRRequest} req
      * @param {function(string, EduPaperOCRResponse):void} cb
      * @public

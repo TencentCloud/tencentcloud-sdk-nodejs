@@ -23,6 +23,7 @@ const GetAttributeKeyRequest = models.GetAttributeKeyRequest;
 const DeleteAuditResponse = models.DeleteAuditResponse;
 const UpdateAuditRequest = models.UpdateAuditRequest;
 const InquireAuditCreditRequest = models.InquireAuditCreditRequest;
+const DescribeEventsResponse = models.DescribeEventsResponse;
 const ListCosEnableRegionResponse = models.ListCosEnableRegionResponse;
 const LookUpEventsRequest = models.LookUpEventsRequest;
 const StartLoggingRequest = models.StartLoggingRequest;
@@ -37,6 +38,7 @@ const StopLoggingResponse = models.StopLoggingResponse;
 const LookupAttribute = models.LookupAttribute;
 const ListAuditsResponse = models.ListAuditsResponse;
 const KeyMetadata = models.KeyMetadata;
+const DescribeEventsRequest = models.DescribeEventsRequest;
 const UpdateAuditResponse = models.UpdateAuditResponse;
 const DescribeAuditRequest = models.DescribeAuditRequest;
 const ListKeyAliasByRegionRequest = models.ListKeyAliasByRegionRequest;
@@ -104,6 +106,17 @@ class CloudauditClient extends AbstractClient {
     DeleteAudit(req, cb) {
         let resp = new DeleteAuditResponse();
         this.request("DeleteAudit", req, resp, cb);
+    }
+
+    /**
+     * 查询云审计日志
+     * @param {DescribeEventsRequest} req
+     * @param {function(string, DescribeEventsResponse):void} cb
+     * @public
+     */
+    DescribeEvents(req, cb) {
+        let resp = new DescribeEventsResponse();
+        this.request("DescribeEvents", req, resp, cb);
     }
 
     /**

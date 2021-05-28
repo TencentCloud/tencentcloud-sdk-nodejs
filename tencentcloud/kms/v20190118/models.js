@@ -221,7 +221,7 @@ class CreateKeyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥
+         * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥, “ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥
          * @type {string || null}
          */
         this.KeyUsage = null;
@@ -337,6 +337,62 @@ class DescribeWhiteBoxServiceStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * VerifyByAsymmetricKey请求参数结构体
+ * @class
+ */
+class VerifyByAsymmetricKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 密钥的唯一标识
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 签名值，通过调用KMS签名接口生成
+         * @type {string || null}
+         */
+        this.SignatureValue = null;
+
+        /**
+         * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+         * @type {string || null}
+         */
+        this.MessageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.SignatureValue = 'SignatureValue' in params ? params.SignatureValue : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.MessageType = 'MessageType' in params ? params.MessageType : null;
 
     }
 }
@@ -496,6 +552,12 @@ class ListAlgorithmsResponse extends  AbstractModel {
         this.AsymmetricAlgorithms = null;
 
         /**
+         * 本地区支持的非对称签名验签算法
+         * @type {Array.<AlgorithmInfo> || null}
+         */
+        this.AsymmetricSignVerifyAlgorithms = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -526,6 +588,15 @@ class ListAlgorithmsResponse extends  AbstractModel {
                 let obj = new AlgorithmInfo();
                 obj.deserialize(params.AsymmetricAlgorithms[z]);
                 this.AsymmetricAlgorithms.push(obj);
+            }
+        }
+
+        if (params.AsymmetricSignVerifyAlgorithms) {
+            this.AsymmetricSignVerifyAlgorithms = new Array();
+            for (let z in params.AsymmetricSignVerifyAlgorithms) {
+                let obj = new AlgorithmInfo();
+                obj.deserialize(params.AsymmetricSignVerifyAlgorithms[z]);
+                this.AsymmetricSignVerifyAlgorithms.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1158,6 +1229,41 @@ class ArchiveKeyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VerifyByAsymmetricKey返回参数结构体
+ * @class
+ */
+class VerifyByAsymmetricKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 签名是否有效。true：签名有效，false：签名无效。
+         * @type {boolean || null}
+         */
+        this.SignatureValid = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SignatureValid = 'SignatureValid' in params ? params.SignatureValid : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1829,7 +1935,7 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.Origin = null;
 
         /**
-         * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2，为空则默认筛选ENCRYPT_DECRYPT类型
+         * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2 或 ASYMMETRIC_SIGN_VERIFY_SM2 或 ASYMMETRIC_SIGN_VERIFY_RSA_2048 或 ASYMMETRIC_SIGN_VERIFY_ECC，为空则默认筛选ENCRYPT_DECRYPT类型
          * @type {string || null}
          */
         this.KeyUsage = null;
@@ -2353,7 +2459,7 @@ class EncryptResponse extends  AbstractModel {
         super();
 
         /**
-         * 加密后经过base64编码的密文
+         * 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为Decrypt接口的输入参数，才可以解密出原文。
          * @type {string || null}
          */
         this.CiphertextBlob = null;
@@ -2829,7 +2935,7 @@ class KeyMetadata extends  AbstractModel {
         this.KeyState = null;
 
         /**
-         * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2
+         * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2 | ASYMMETRIC_SIGN_VERIFY_RSA_2048 | ASYMMETRIC_SIGN_VERIFY_ECC
          * @type {string || null}
          */
         this.KeyUsage = null;
@@ -3342,6 +3448,55 @@ class EnableKeysResponse extends  AbstractModel {
 }
 
 /**
+ * SignByAsymmetricKey请求参数结构体
+ * @class
+ */
+class SignByAsymmetricKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
+         * @type {string || null}
+         */
+        this.Algorithm = null;
+
+        /**
+         * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，消息摘要长度（Base64编码前的长度）必须等于32字节
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 密钥的唯一标识
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+         * @type {string || null}
+         */
+        this.MessageType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Algorithm = 'Algorithm' in params ? params.Algorithm : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.MessageType = 'MessageType' in params ? params.MessageType : null;
+
+    }
+}
+
+/**
  * DescribeWhiteBoxDeviceFingerprints请求参数结构体
  * @class
  */
@@ -3678,6 +3833,41 @@ class TagFilter extends  AbstractModel {
 }
 
 /**
+ * SignByAsymmetricKey返回参数结构体
+ * @class
+ */
+class SignByAsymmetricKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 签名，Base64编码
+         * @type {string || null}
+         */
+        this.Signature = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Signature = 'Signature' in params ? params.Signature : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeWhiteBoxDecryptKey返回参数结构体
  * @class
  */
@@ -3925,6 +4115,7 @@ module.exports = {
     DisableWhiteBoxKeyResponse: DisableWhiteBoxKeyResponse,
     DisableKeyResponse: DisableKeyResponse,
     DescribeWhiteBoxServiceStatusRequest: DescribeWhiteBoxServiceStatusRequest,
+    VerifyByAsymmetricKeyRequest: VerifyByAsymmetricKeyRequest,
     DescribeKeyRequest: DescribeKeyRequest,
     WhiteboxKeyInfo: WhiteboxKeyInfo,
     ListAlgorithmsResponse: ListAlgorithmsResponse,
@@ -3947,6 +4138,7 @@ module.exports = {
     GetServiceStatusRequest: GetServiceStatusRequest,
     EnableWhiteBoxKeysResponse: EnableWhiteBoxKeysResponse,
     ArchiveKeyResponse: ArchiveKeyResponse,
+    VerifyByAsymmetricKeyResponse: VerifyByAsymmetricKeyResponse,
     DescribeWhiteBoxKeyRequest: DescribeWhiteBoxKeyRequest,
     GetParametersForImportResponse: GetParametersForImportResponse,
     DecryptResponse: DecryptResponse,
@@ -4000,6 +4192,7 @@ module.exports = {
     EnableKeyRotationResponse: EnableKeyRotationResponse,
     BindCloudResourceResponse: BindCloudResourceResponse,
     EnableKeysResponse: EnableKeysResponse,
+    SignByAsymmetricKeyRequest: SignByAsymmetricKeyRequest,
     DescribeWhiteBoxDeviceFingerprintsRequest: DescribeWhiteBoxDeviceFingerprintsRequest,
     GetRegionsRequest: GetRegionsRequest,
     EncryptByWhiteBoxRequest: EncryptByWhiteBoxRequest,
@@ -4010,6 +4203,7 @@ module.exports = {
     GetPublicKeyResponse: GetPublicKeyResponse,
     BindCloudResourceRequest: BindCloudResourceRequest,
     TagFilter: TagFilter,
+    SignByAsymmetricKeyResponse: SignByAsymmetricKeyResponse,
     DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     DescribeWhiteBoxDeviceFingerprintsResponse: DescribeWhiteBoxDeviceFingerprintsResponse,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,

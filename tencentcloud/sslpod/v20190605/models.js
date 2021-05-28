@@ -53,7 +53,7 @@ class DeleteDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名列表中的ID
+         * 域名ID，可通过搜索域名接口获得
          * @type {number || null}
          */
         this.DomainId = null;
@@ -130,7 +130,7 @@ class DescribeDomainCertsRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名ID
+         * 域名ID，可通过搜索域名接口获得
          * @type {number || null}
          */
         this.DomainId = null;
@@ -158,7 +158,7 @@ class RefreshDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名列表中的ID
+         * 域名列表中的ID，可通过搜索域名接口获得
          * @type {number || null}
          */
         this.DomainId = null;
@@ -472,7 +472,7 @@ class CreateDomainRequest extends  AbstractModel {
         super();
 
         /**
-         * 监控的服务器类型 Enums(0,1,2,3)
+         * 监控的服务器类型（0：web，1：smtp，2：imap，3：pops）
          * @type {number || null}
          */
         this.ServerType = null;
@@ -1227,7 +1227,7 @@ class DescribeDomainsRequest extends  AbstractModel {
         this.SearchType = null;
 
         /**
-         * 标签
+         * 标签，多个标签用逗号分隔
          * @type {string || null}
          */
         this.Tag = null;

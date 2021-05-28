@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeRechargeRecordsResponse = models.DescribeRechargeRecordsResponse;
 const UploadOtaVersionResponse = models.UploadOtaVersionResponse;
 const CreateGencodeResponse = models.CreateGencodeResponse;
 const DescribeLogsRequest = models.DescribeLogsRequest;
@@ -39,6 +40,7 @@ const CreateUploadPathRequest = models.CreateUploadPathRequest;
 const CreateDevTokenRequest = models.CreateDevTokenRequest;
 const DescribeStorageServiceResponse = models.DescribeStorageServiceResponse;
 const DeleteIotDataTypeRequest = models.DeleteIotDataTypeRequest;
+const DescribeRechargeRecordsRequest = models.DescribeRechargeRecordsRequest;
 const ModifyVerContentResponse = models.ModifyVerContentResponse;
 const DescribeMessageQueueRequest = models.DescribeMessageQueueRequest;
 const DeleteAppUsrResponse = models.DeleteAppUsrResponse;
@@ -57,7 +59,7 @@ const OtaPubHistory = models.OtaPubHistory;
 const DeleteProductRequest = models.DeleteProductRequest;
 const DescribeBindUsrResponse = models.DescribeBindUsrResponse;
 const DeviceData = models.DeviceData;
-const SetMessageQueueRequest = models.SetMessageQueueRequest;
+const DescribeStreamRequest = models.DescribeStreamRequest;
 const BindUsrInfo = models.BindUsrInfo;
 const DeleteOtaVersionRequest = models.DeleteOtaVersionRequest;
 const DescribeIotDataTypeResponse = models.DescribeIotDataTypeResponse;
@@ -104,9 +106,11 @@ const DeleteProductResponse = models.DeleteProductResponse;
 const RunOtaVersionRequest = models.RunOtaVersionRequest;
 const CreateDevicesResponse = models.CreateDevicesResponse;
 const DeviceModelData = models.DeviceModelData;
+const SetMessageQueueRequest = models.SetMessageQueueRequest;
 const CreateStorageServiceResponse = models.CreateStorageServiceResponse;
 const DescribeIotDataTypeRequest = models.DescribeIotDataTypeRequest;
 const SendOnlineMsgRequest = models.SendOnlineMsgRequest;
+const Data = models.Data;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const DescribeRunLogResponse = models.DescribeRunLogResponse;
 const DeliverStorageServiceResponse = models.DeliverStorageServiceResponse;
@@ -117,6 +121,8 @@ const DeleteTraceIdsResponse = models.DeleteTraceIdsResponse;
 const DeleteMessageQueueRequest = models.DeleteMessageQueueRequest;
 const CreateUsrTokenRequest = models.CreateUsrTokenRequest;
 const RunDeviceRequest = models.RunDeviceRequest;
+const RunOtaVersionResponse = models.RunOtaVersionResponse;
+const ModifyDeviceRequest = models.ModifyDeviceRequest;
 const DescribeDeviceModelResponse = models.DescribeDeviceModelResponse;
 const DescribeStorageServiceRequest = models.DescribeStorageServiceRequest;
 const ProductBase = models.ProductBase;
@@ -133,14 +139,16 @@ const RegisteredStatus = models.RegisteredStatus;
 const CreateAnonymousAccessTokenRequest = models.CreateAnonymousAccessTokenRequest;
 const DeliverStorageServiceRequest = models.DeliverStorageServiceRequest;
 const RunDeviceStreamResponse = models.RunDeviceStreamResponse;
-const RunOtaVersionResponse = models.RunOtaVersionResponse;
+const ModifyDeviceResponse = models.ModifyDeviceResponse;
 const DescribeDeviceModelRequest = models.DescribeDeviceModelRequest;
 const DescribeLogsResponse = models.DescribeLogsResponse;
 const ModifyDeviceActionResponse = models.ModifyDeviceActionResponse;
 const CreateBindingResponse = models.CreateBindingResponse;
-const DevicesData = models.DevicesData;
+const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const CreateDevicesRequest = models.CreateDevicesRequest;
 const DisableDeviceRequest = models.DisableDeviceRequest;
+const DescribeStreamResponse = models.DescribeStreamResponse;
+const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
 const DisableOtaVersionRequest = models.DisableOtaVersionRequest;
 const DescribeProductResponse = models.DescribeProductResponse;
 const CreateAnonymousAccessTokenResponse = models.CreateAnonymousAccessTokenResponse;
@@ -159,7 +167,9 @@ const CreateStorageResponse = models.CreateStorageResponse;
 const DisableDeviceStreamResponse = models.DisableDeviceStreamResponse;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const CreateUploadPathResponse = models.CreateUploadPathResponse;
+const RechargeRecord = models.RechargeRecord;
 const VersionData = models.VersionData;
+const DevicesData = models.DevicesData;
 
 
 /**
@@ -308,20 +318,14 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
-
-可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
-注意:
-  1.若设备当前不在线,会直接返回错误
-  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
-  3.value的内容必须与实际物模型的定义一致
-     * @param {ModifyDeviceActionRequest} req
-     * @param {function(string, ModifyDeviceActionResponse):void} cb
+     * 修改设备信息
+     * @param {ModifyDeviceRequest} req
+     * @param {function(string, ModifyDeviceResponse):void} cb
      * @public
      */
-    ModifyDeviceAction(req, cb) {
-        let resp = new ModifyDeviceActionResponse();
-        this.request("ModifyDeviceAction", req, resp, cb);
+    ModifyDevice(req, cb) {
+        let resp = new ModifyDeviceResponse();
+        this.request("ModifyDevice", req, resp, cb);
     }
 
     /**
@@ -412,6 +416,23 @@ class IotvideoClient extends AbstractClient {
     DescribeIotModel(req, cb) {
         let resp = new DescribeIotModelResponse();
         this.request("DescribeIotModel", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
+
+可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
+注意:
+  1.若设备当前不在线,会直接返回错误
+  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
+  3.value的内容必须与实际物模型的定义一致
+     * @param {ModifyDeviceActionRequest} req
+     * @param {function(string, ModifyDeviceActionResponse):void} cb
+     * @public
+     */
+    ModifyDeviceAction(req, cb) {
+        let resp = new ModifyDeviceActionResponse();
+        this.request("ModifyDeviceAction", req, resp, cb);
     }
 
     /**
@@ -507,6 +528,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 客户可通过本接口获取充值记录信息, 一次最多返回50条记录。
+     * @param {DescribeRechargeRecordsRequest} req
+     * @param {function(string, DescribeRechargeRecordsResponse):void} cb
+     * @public
+     */
+    DescribeRechargeRecords(req, cb) {
+        let resp = new DescribeRechargeRecordsResponse();
+        this.request("DescribeRechargeRecords", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyProduct）用于编辑物联网智能视频产品的相关信息。
      * @param {ModifyProductRequest} req
      * @param {function(string, ModifyProductResponse):void} cb
@@ -530,7 +562,11 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 退订已购买的云存服务
+     * 本接口（RefundStorageService）用于退订已购买的云存服务。
+退订时，云存服务对应订单的处理方式 : 
+1. 未开始的订单自动回到已付费订单池
+2. 已开始的订单自动失效
+3. 购买云存接口,优先从已付费订单池中分配订单
      * @param {RefundStorageServiceRequest} req
      * @param {function(string, RefundStorageServiceResponse):void} cb
      * @public
@@ -560,6 +596,17 @@ class IotvideoClient extends AbstractClient {
     SetMessageQueue(req, cb) {
         let resp = new SetMessageQueueResponse();
         this.request("SetMessageQueue", req, resp, cb);
+    }
+
+    /**
+     * 客户可通过本接口获取账户余额信息, 默认接口请求频率限制：1次/秒
+     * @param {DescribeAccountBalanceRequest} req
+     * @param {function(string, DescribeAccountBalanceResponse):void} cb
+     * @public
+     */
+    DescribeAccountBalance(req, cb) {
+        let resp = new DescribeAccountBalanceResponse();
+        this.request("DescribeAccountBalance", req, resp, cb);
     }
 
     /**
@@ -626,6 +673,17 @@ class IotvideoClient extends AbstractClient {
     DescribeTraceStatus(req, cb) {
         let resp = new DescribeTraceStatusResponse();
         this.request("DescribeTraceStatus", req, resp, cb);
+    }
+
+    /**
+     * 请求设备直播流地址
+     * @param {DescribeStreamRequest} req
+     * @param {function(string, DescribeStreamResponse):void} cb
+     * @public
+     */
+    DescribeStream(req, cb) {
+        let resp = new DescribeStreamResponse();
+        this.request("DescribeStream", req, resp, cb);
     }
 
     /**
@@ -783,7 +841,7 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateStorage）用于购买云存套餐。
+     * 该接口已经停止维护，请勿使用
      * @param {CreateStorageRequest} req
      * @param {function(string, CreateStorageResponse):void} cb
      * @public

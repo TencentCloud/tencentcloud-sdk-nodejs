@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * ResetDBInstancePassword返回参数结构体
+ * @class
+ */
+class ResetDBInstancePasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步请求Id，用户查询该流程的运行状态
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSpecInfo请求参数结构体
  * @class
  */
@@ -174,7 +209,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 实例密码，不设置该参数则需要在创建完成后通过设置密码接口初始化实例密码。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
+         * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
          * @type {string || null}
          */
         this.Password = null;
@@ -257,12 +292,18 @@ class CreateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * KillOps返回参数结构体
+ * DescribeSecurityGroup返回参数结构体
  * @class
  */
-class KillOpsResponse extends  AbstractModel {
+class DescribeSecurityGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 实例绑定的安全组
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -278,6 +319,15 @@ class KillOpsResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -335,15 +385,15 @@ class DescribeCurrentOpResponse extends  AbstractModel {
 }
 
 /**
- * ResetDBInstancePassword返回参数结构体
+ * IsolateDBInstance返回参数结构体
  * @class
  */
-class ResetDBInstancePasswordResponse extends  AbstractModel {
+class IsolateDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步请求Id，用户查询该流程的运行状态
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -365,6 +415,41 @@ class ResetDBInstancePasswordResponse extends  AbstractModel {
         }
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 创建备份下载任务结果
+ * @class
+ */
+class BackupDownloadTaskStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分片名
+         * @type {string || null}
+         */
+        this.ReplicaSetId = null;
+
+        /**
+         * 任务当前状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -448,24 +533,36 @@ class DBInstancePrice extends  AbstractModel {
 }
 
 /**
- * 备份文件存储信息
+ * DescribeBackupAccess返回参数结构体
  * @class
  */
-class BackupFile extends  AbstractModel {
+class DescribeBackupAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 备份文件所属的副本集/分片ID
+         * 实例所属地域
          * @type {string || null}
          */
-        this.ReplicateSetId = null;
+        this.Region = null;
 
         /**
-         * 备份文件保存路径
+         * 备份文件所在存储桶
          * @type {string || null}
          */
-        this.File = null;
+        this.Bucket = null;
+
+        /**
+         * 备份文件的存储信息
+         * @type {Array.<BackupFile> || null}
+         */
+        this.Files = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -476,8 +573,18 @@ class BackupFile extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
-        this.File = 'File' in params ? params.File : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+        if (params.Files) {
+            this.Files = new Array();
+            for (let z in params.Files) {
+                let obj = new BackupFile();
+                obj.deserialize(params.Files[z]);
+                this.Files.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -652,36 +759,18 @@ class DescribeSlowLogPatternsResponse extends  AbstractModel {
 }
 
 /**
- * 用于描述MongoDB数据库慢日志统计信息
+ * 分片信息
  * @class
  */
-class SlowLogPattern extends  AbstractModel {
+class ReplicaSetInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 慢日志模式
+         * 分片名称
          * @type {string || null}
          */
-        this.Pattern = null;
-
-        /**
-         * 最大执行时间
-         * @type {number || null}
-         */
-        this.MaxTime = null;
-
-        /**
-         * 平均执行时间
-         * @type {number || null}
-         */
-        this.AverageTime = null;
-
-        /**
-         * 该模式慢日志条数
-         * @type {number || null}
-         */
-        this.Total = null;
+        this.ReplicaSetId = null;
 
     }
 
@@ -692,10 +781,7 @@ class SlowLogPattern extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Pattern = 'Pattern' in params ? params.Pattern : null;
-        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
-        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
-        this.Total = 'Total' in params ? params.Total : null;
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
 
     }
 }
@@ -775,7 +861,7 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 实例密码，不设置该参数则需要在创建完成后通过设置密码接口初始化实例密码。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
+         * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
          * @type {string || null}
          */
         this.Password = null;
@@ -884,25 +970,95 @@ class AssignProjectRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSlowLogs返回参数结构体
+ * 安全组规则
  * @class
  */
-class DescribeSlowLogsResponse extends  AbstractModel {
+class SecurityGroupBound extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 慢日志总数
-         * @type {number || null}
+         * 执行规则。ACCEPT或DROP
+         * @type {string || null}
          */
-        this.Count = null;
+        this.Action = null;
 
         /**
-         * 慢日志详情
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
+         * ip段。
+         * @type {string || null}
          */
-        this.SlowLogs = null;
+        this.CidrIp = null;
+
+        /**
+         * 端口范围
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * 传输层协议。tcp，udp或ALL
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+        /**
+         * 安全组id代表的地址集合
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 地址组id代表的地址集合
+         * @type {string || null}
+         */
+        this.AddressModule = null;
+
+        /**
+         * 服务组id代表的协议和端口集合
+         * @type {string || null}
+         */
+        this.ServiceModule = null;
+
+        /**
+         * 描述
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
+        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
+
+    }
+}
+
+/**
+ * CreateBackupDownloadTask返回参数结构体
+ * @class
+ */
+class CreateBackupDownloadTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载任务状态
+         * @type {Array.<BackupDownloadTaskStatus> || null}
+         */
+        this.Tasks = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -919,8 +1075,15 @@ class DescribeSlowLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
-        this.SlowLogs = 'SlowLogs' in params ? params.SlowLogs : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new BackupDownloadTaskStatus();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1160,6 +1323,34 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
 }
 
 /**
+ * KillOps返回参数结构体
+ * @class
+ */
+class KillOpsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例规格信息
  * @class
  */
@@ -1210,73 +1401,30 @@ class SpecificationInfo extends  AbstractModel {
 }
 
 /**
- * 云数据库实例当前操作
+ * CreateBackupDownloadTask请求参数结构体
  * @class
  */
-class CurrentOp extends  AbstractModel {
+class CreateBackupDownloadTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 操作序号
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OpId = null;
-
-        /**
-         * 操作所在的命名空间，形式如db.collection
-注意：此字段可能返回 null，表示取不到有效值。
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
          * @type {string || null}
          */
-        this.Ns = null;
+        this.InstanceId = null;
 
         /**
-         * 操作执行语句
-注意：此字段可能返回 null，表示取不到有效值。
+         * 要下载的备份文件名，可通过DescribeDBBackups接口获取
          * @type {string || null}
          */
-        this.Query = null;
+        this.BackupName = null;
 
         /**
-         * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 下载备份的分片列表
+         * @type {Array.<ReplicaSetInfo> || null}
          */
-        this.Op = null;
-
-        /**
-         * 操作所在的分片名称
-         * @type {string || null}
-         */
-        this.ReplicaSetName = null;
-
-        /**
-         * 筛选条件，节点状态，可能的取值为：Primary、Secondary
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * 操作详细信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Operation = null;
-
-        /**
-         * 操作所在的节点名称
-         * @type {string || null}
-         */
-        this.NodeName = null;
-
-        /**
-         * 操作已执行时间（ms）
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MicrosecsRunning = null;
+        this.BackupSets = null;
 
     }
 
@@ -1287,15 +1435,17 @@ class CurrentOp extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OpId = 'OpId' in params ? params.OpId : null;
-        this.Ns = 'Ns' in params ? params.Ns : null;
-        this.Query = 'Query' in params ? params.Query : null;
-        this.Op = 'Op' in params ? params.Op : null;
-        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
-        this.State = 'State' in params ? params.State : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
-        this.NodeName = 'NodeName' in params ? params.NodeName : null;
-        this.MicrosecsRunning = 'MicrosecsRunning' in params ? params.MicrosecsRunning : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+
+        if (params.BackupSets) {
+            this.BackupSets = new Array();
+            for (let z in params.BackupSets) {
+                let obj = new ReplicaSetInfo();
+                obj.deserialize(params.BackupSets[z]);
+                this.BackupSets.push(obj);
+            }
+        }
 
     }
 }
@@ -1344,6 +1494,12 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+         * @type {string || null}
+         */
+        this.Format = null;
+
     }
 
     /**
@@ -1359,6 +1515,50 @@ class DescribeSlowLogPatternsRequest extends  AbstractModel {
         this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Format = 'Format' in params ? params.Format : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogs返回参数结构体
+ * @class
+ */
+class DescribeSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢日志总数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 慢日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SlowLogs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.SlowLogs = 'SlowLogs' in params ? params.SlowLogs : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1452,7 +1652,7 @@ class SpecItem extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 规格有效标志，取值：0-停止售卖，1-开放售卖
+         * 计算资源规格，单位为CPU核心数
          * @type {number || null}
          */
         this.Cpu = null;
@@ -2159,6 +2359,76 @@ class CreateDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSlowLogs请求参数结构体
+ * @class
+ */
+class DescribeSlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+         * @type {number || null}
+         */
+        this.SlowMS = null;
+
+        /**
+         * 偏移量，最小值为0，最大值为10000，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页大小，最小值为1，最大值为100，默认值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+         * @type {string || null}
+         */
+        this.Format = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Format = 'Format' in params ? params.Format : null;
+
+    }
+}
+
+/**
  * AssignProject返回参数结构体
  * @class
  */
@@ -2189,6 +2459,83 @@ class AssignProjectResponse extends  AbstractModel {
         }
         this.FlowIds = 'FlowIds' in params ? params.FlowIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 备份下载任务
+ * @class
+ */
+class BackupDownloadTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 备份文件名
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+        /**
+         * 分片名称
+         * @type {string || null}
+         */
+        this.ReplicaSetId = null;
+
+        /**
+         * 备份数据大小，单位为字节
+         * @type {number || null}
+         */
+        this.BackupSize = null;
+
+        /**
+         * 任务状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务进度百分比
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * 耗时，单位为秒
+         * @type {number || null}
+         */
+        this.TimeSpend = null;
+
+        /**
+         * 备份数据下载链接
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
+        this.BackupSize = 'BackupSize' in params ? params.BackupSize : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.TimeSpend = 'TimeSpend' in params ? params.TimeSpend : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -2376,60 +2723,54 @@ class ModifyDBInstanceSpecResponse extends  AbstractModel {
 }
 
 /**
- * 实例分片详情
+ * 安全组信息
  * @class
  */
-class ShardInfo extends  AbstractModel {
+class SecurityGroup extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分片已使用容量
+         * 所属项目id
          * @type {number || null}
          */
-        this.UsedVolume = null;
+        this.ProjectId = null;
 
         /**
-         * 分片ID
+         * 创建时间
          * @type {string || null}
          */
-        this.ReplicaSetId = null;
+        this.CreateTime = null;
 
         /**
-         * 分片名
+         * 入站规则
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Inbound = null;
+
+        /**
+         * 出站规则
+         * @type {Array.<SecurityGroupBound> || null}
+         */
+        this.Outbound = null;
+
+        /**
+         * 安全组id
          * @type {string || null}
          */
-        this.ReplicaSetName = null;
+        this.SecurityGroupId = null;
 
         /**
-         * 分片内存规格，单位为MB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 分片磁盘规格，单位为MB
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * 分片Oplog大小，单位为MB
-         * @type {number || null}
-         */
-        this.OplogSize = null;
-
-        /**
-         * 分片从节点数
-         * @type {number || null}
-         */
-        this.SecondaryNum = null;
-
-        /**
-         * 分片物理id
+         * 安全组名称
          * @type {string || null}
          */
-        this.RealReplicaSetId = null;
+        this.SecurityGroupName = null;
+
+        /**
+         * 安全组备注
+         * @type {string || null}
+         */
+        this.SecurityGroupRemark = null;
 
     }
 
@@ -2440,14 +2781,29 @@ class ShardInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UsedVolume = 'UsedVolume' in params ? params.UsedVolume : null;
-        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
-        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
-        this.SecondaryNum = 'SecondaryNum' in params ? params.SecondaryNum : null;
-        this.RealReplicaSetId = 'RealReplicaSetId' in params ? params.RealReplicaSetId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Inbound) {
+            this.Inbound = new Array();
+            for (let z in params.Inbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Inbound[z]);
+                this.Inbound.push(obj);
+            }
+        }
+
+        if (params.Outbound) {
+            this.Outbound = new Array();
+            for (let z in params.Outbound) {
+                let obj = new SecurityGroupBound();
+                obj.deserialize(params.Outbound[z]);
+                this.Outbound.push(obj);
+            }
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
 
     }
 }
@@ -2488,24 +2844,66 @@ class OfflineIsolatedDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * IsolateDBInstance返回参数结构体
+ * DescribeBackupDownloadTask请求参数结构体
  * @class
  */
-class IsolateDBInstanceResponse extends  AbstractModel {
+class DescribeBackupDownloadTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.InstanceId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 备份文件名，用来过滤指定文件的下载任务
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.BackupName = null;
+
+        /**
+         * 指定要查询任务的时间范围，StartTime指定开始时间，不填默认不限制开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 指定要查询任务的时间范围，EndTime指定结束时间，不填默认不限制结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 此次查询返回的条数，取值范围为1-100，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 指定此次查询返回的页数，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段，取值为createTime，finishTime两种，默认为createTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式，取值为asc，desc两种，默认desc
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试。不填默认返回所有类型
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
 
     }
 
@@ -2516,8 +2914,15 @@ class IsolateDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -2593,6 +2998,34 @@ class RenameInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroup请求参数结构体
+ * @class
+ */
+class DescribeSecurityGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * RenewDBInstances返回参数结构体
  * @class
  */
@@ -2614,6 +3047,56 @@ class RenewDBInstancesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBackupDownloadTask返回参数结构体
+ * @class
+ */
+class DescribeBackupDownloadTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 满足查询条件的所有条数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 下载任务列表
+         * @type {Array.<BackupDownloadTask> || null}
+         */
+        this.Tasks = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new BackupDownloadTask();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2762,48 +3245,73 @@ class DBInstanceInfo extends  AbstractModel {
 }
 
 /**
- * DescribeSlowLogs请求参数结构体
+ * 云数据库实例当前操作
  * @class
  */
-class DescribeSlowLogsRequest extends  AbstractModel {
+class CurrentOp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+         * 操作序号
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.SlowMS = null;
+        this.OpId = null;
 
         /**
-         * 偏移量，最小值为0，最大值为10000，默认值为0。
-         * @type {number || null}
+         * 操作所在的命名空间，形式如db.collection
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.Ns = null;
 
         /**
-         * 分页大小，最小值为1，最大值为100，默认值为20。
+         * 操作执行语句
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Op = null;
+
+        /**
+         * 操作所在的分片名称
+         * @type {string || null}
+         */
+        this.ReplicaSetName = null;
+
+        /**
+         * 筛选条件，节点状态，可能的取值为：Primary、Secondary
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 操作详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 操作所在的节点名称
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 操作已执行时间（ms）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Limit = null;
+        this.MicrosecsRunning = null;
 
     }
 
@@ -2814,47 +3322,38 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OpId = 'OpId' in params ? params.OpId : null;
+        this.Ns = 'Ns' in params ? params.Ns : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Op = 'Op' in params ? params.Op : null;
+        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.MicrosecsRunning = 'MicrosecsRunning' in params ? params.MicrosecsRunning : null;
 
     }
 }
 
 /**
- * DescribeBackupAccess返回参数结构体
+ * 备份文件存储信息
  * @class
  */
-class DescribeBackupAccessResponse extends  AbstractModel {
+class BackupFile extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例所属地域
+         * 备份文件所属的副本集/分片ID
          * @type {string || null}
          */
-        this.Region = null;
+        this.ReplicateSetId = null;
 
         /**
-         * 备份文件所在存储桶
+         * 备份文件保存路径
          * @type {string || null}
          */
-        this.Bucket = null;
-
-        /**
-         * 备份文件的存储信息
-         * @type {Array.<BackupFile> || null}
-         */
-        this.Files = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.File = null;
 
     }
 
@@ -2865,18 +3364,8 @@ class DescribeBackupAccessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
-
-        if (params.Files) {
-            this.Files = new Array();
-            for (let z in params.Files) {
-                let obj = new BackupFile();
-                obj.deserialize(params.Files[z]);
-                this.Files.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
+        this.File = 'File' in params ? params.File : null;
 
     }
 }
@@ -3313,6 +3802,55 @@ class ModifyDBInstanceSpecRequest extends  AbstractModel {
 }
 
 /**
+ * 用于描述MongoDB数据库慢日志统计信息
+ * @class
+ */
+class SlowLogPattern extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 慢日志模式
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * 最大执行时间
+         * @type {number || null}
+         */
+        this.MaxTime = null;
+
+        /**
+         * 平均执行时间
+         * @type {number || null}
+         */
+        this.AverageTime = null;
+
+        /**
+         * 该模式慢日志条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.MaxTime = 'MaxTime' in params ? params.MaxTime : null;
+        this.AverageTime = 'AverageTime' in params ? params.AverageTime : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
  * CreateDBInstanceHour返回参数结构体
  * @class
  */
@@ -3560,31 +4098,113 @@ class RenewDBInstancesRequest extends  AbstractModel {
     }
 }
 
+/**
+ * 实例分片详情
+ * @class
+ */
+class ShardInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分片已使用容量
+         * @type {number || null}
+         */
+        this.UsedVolume = null;
+
+        /**
+         * 分片ID
+         * @type {string || null}
+         */
+        this.ReplicaSetId = null;
+
+        /**
+         * 分片名
+         * @type {string || null}
+         */
+        this.ReplicaSetName = null;
+
+        /**
+         * 分片内存规格，单位为MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 分片磁盘规格，单位为MB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 分片Oplog大小，单位为MB
+         * @type {number || null}
+         */
+        this.OplogSize = null;
+
+        /**
+         * 分片从节点数
+         * @type {number || null}
+         */
+        this.SecondaryNum = null;
+
+        /**
+         * 分片物理id
+         * @type {string || null}
+         */
+        this.RealReplicaSetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedVolume = 'UsedVolume' in params ? params.UsedVolume : null;
+        this.ReplicaSetId = 'ReplicaSetId' in params ? params.ReplicaSetId : null;
+        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.OplogSize = 'OplogSize' in params ? params.OplogSize : null;
+        this.SecondaryNum = 'SecondaryNum' in params ? params.SecondaryNum : null;
+        this.RealReplicaSetId = 'RealReplicaSetId' in params ? params.RealReplicaSetId : null;
+
+    }
+}
+
 module.exports = {
+    ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     KillOpsRequest: KillOpsRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
-    KillOpsResponse: KillOpsResponse,
+    DescribeSecurityGroupResponse: DescribeSecurityGroupResponse,
     DescribeCurrentOpResponse: DescribeCurrentOpResponse,
-    ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
+    IsolateDBInstanceResponse: IsolateDBInstanceResponse,
+    BackupDownloadTaskStatus: BackupDownloadTaskStatus,
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DBInstancePrice: DBInstancePrice,
-    BackupFile: BackupFile,
+    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
     InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
-    SlowLogPattern: SlowLogPattern,
+    ReplicaSetInfo: ReplicaSetInfo,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     AssignProjectRequest: AssignProjectRequest,
-    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
+    SecurityGroupBound: SecurityGroupBound,
+    CreateBackupDownloadTaskResponse: CreateBackupDownloadTaskResponse,
     ClientConnection: ClientConnection,
     InquirePriceModifyDBInstanceSpecRequest: InquirePriceModifyDBInstanceSpecRequest,
     BackupInfo: BackupInfo,
     InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
+    KillOpsResponse: KillOpsResponse,
     SpecificationInfo: SpecificationInfo,
-    CurrentOp: CurrentOp,
+    CreateBackupDownloadTaskRequest: CreateBackupDownloadTaskRequest,
     DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
+    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     FlushInstanceRouterConfigResponse: FlushInstanceRouterConfigResponse,
     InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
     SpecItem: SpecItem,
@@ -3599,31 +4219,37 @@ module.exports = {
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
+    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     AssignProjectResponse: AssignProjectResponse,
+    BackupDownloadTask: BackupDownloadTask,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
     DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
     DescribeDBInstanceDealResponse: DescribeDBInstanceDealResponse,
     ModifyDBInstanceSpecResponse: ModifyDBInstanceSpecResponse,
-    ShardInfo: ShardInfo,
+    SecurityGroup: SecurityGroup,
     OfflineIsolatedDBInstanceResponse: OfflineIsolatedDBInstanceResponse,
-    IsolateDBInstanceResponse: IsolateDBInstanceResponse,
+    DescribeBackupDownloadTaskRequest: DescribeBackupDownloadTaskRequest,
     DescribeBackupAccessRequest: DescribeBackupAccessRequest,
     RenameInstanceRequest: RenameInstanceRequest,
+    DescribeSecurityGroupRequest: DescribeSecurityGroupRequest,
     RenewDBInstancesResponse: RenewDBInstancesResponse,
+    DescribeBackupDownloadTaskResponse: DescribeBackupDownloadTaskResponse,
     RenameInstanceResponse: RenameInstanceResponse,
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
     FlushInstanceRouterConfigRequest: FlushInstanceRouterConfigRequest,
     DBInstanceInfo: DBInstanceInfo,
-    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
-    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
+    CurrentOp: CurrentOp,
+    BackupFile: BackupFile,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
+    SlowLogPattern: SlowLogPattern,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
     Operation: Operation,
     InstanceChargePrepaid: InstanceChargePrepaid,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     RenewDBInstancesRequest: RenewDBInstancesRequest,
+    ShardInfo: ShardInfo,
 
 }

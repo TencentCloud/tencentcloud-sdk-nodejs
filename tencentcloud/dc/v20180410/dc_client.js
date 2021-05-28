@@ -16,46 +16,63 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeInternetAddressQuotaRequest = models.DescribeInternetAddressQuotaRequest;
 const BgpPeer = models.BgpPeer;
 const DirectConnectTunnelRoute = models.DirectConnectTunnelRoute;
 const RejectDirectConnectTunnelRequest = models.RejectDirectConnectTunnelRequest;
-const ModifyDirectConnectAttributeRequest = models.ModifyDirectConnectAttributeRequest;
-const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
+const Coordinate = models.Coordinate;
 const CreateDirectConnectResponse = models.CreateDirectConnectResponse;
 const DescribeDirectConnectTunnelExtraRequest = models.DescribeDirectConnectTunnelExtraRequest;
 const DescribePublicDirectConnectTunnelRoutesRequest = models.DescribePublicDirectConnectTunnelRoutesRequest;
 const DirectConnect = models.DirectConnect;
+const InternetAddressDetail = models.InternetAddressDetail;
 const DescribeAccessPointsResponse = models.DescribeAccessPointsResponse;
-const AcceptDirectConnectTunnelResponse = models.AcceptDirectConnectTunnelResponse;
+const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
 const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
+const ReleaseInternetAddressRequest = models.ReleaseInternetAddressRequest;
 const DescribeDirectConnectTunnelExtraResponse = models.DescribeDirectConnectTunnelExtraResponse;
 const ModifyDirectConnectTunnelAttributeResponse = models.ModifyDirectConnectTunnelAttributeResponse;
 const RouteFilterPrefix = models.RouteFilterPrefix;
+const ApplyInternetAddressResponse = models.ApplyInternetAddressResponse;
 const BGPStatus = models.BGPStatus;
 const DirectConnectTunnelExtra = models.DirectConnectTunnelExtra;
 const Tag = models.Tag;
 const CreateDirectConnectTunnelRequest = models.CreateDirectConnectTunnelRequest;
 const DeleteDirectConnectResponse = models.DeleteDirectConnectResponse;
 const ModifyDirectConnectTunnelExtraResponse = models.ModifyDirectConnectTunnelExtraResponse;
+const EnableInternetAddressResponse = models.EnableInternetAddressResponse;
+const ApplyInternetAddressRequest = models.ApplyInternetAddressRequest;
 const DescribeDirectConnectsResponse = models.DescribeDirectConnectsResponse;
 const DescribeAccessPointsRequest = models.DescribeAccessPointsRequest;
-const DescribeDirectConnectsRequest = models.DescribeDirectConnectsRequest;
+const AcceptDirectConnectTunnelResponse = models.AcceptDirectConnectTunnelResponse;
 const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
+const ModifyDirectConnectAttributeRequest = models.ModifyDirectConnectAttributeRequest;
+const DescribeInternetAddressResponse = models.DescribeInternetAddressResponse;
 const ModifyDirectConnectTunnelAttributeRequest = models.ModifyDirectConnectTunnelAttributeRequest;
 const Filter = models.Filter;
+const DisableInternetAddressResponse = models.DisableInternetAddressResponse;
+const DescribeInternetAddressStatisticsRequest = models.DescribeInternetAddressStatisticsRequest;
+const InternetAddressStatistics = models.InternetAddressStatistics;
 const CreateDirectConnectRequest = models.CreateDirectConnectRequest;
+const EnableInternetAddressRequest = models.EnableInternetAddressRequest;
 const ModifyDirectConnectAttributeResponse = models.ModifyDirectConnectAttributeResponse;
 const ModifyDirectConnectTunnelExtraRequest = models.ModifyDirectConnectTunnelExtraRequest;
 const RejectDirectConnectTunnelResponse = models.RejectDirectConnectTunnelResponse;
 const CreateDirectConnectTunnelResponse = models.CreateDirectConnectTunnelResponse;
+const DescribeDirectConnectsRequest = models.DescribeDirectConnectsRequest;
 const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelResponse;
 const BFDInfo = models.BFDInfo;
 const DeleteDirectConnectRequest = models.DeleteDirectConnectRequest;
 const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
 const AccessPoint = models.AccessPoint;
+const DescribeInternetAddressStatisticsResponse = models.DescribeInternetAddressStatisticsResponse;
 const NQAInfo = models.NQAInfo;
+const DescribeInternetAddressRequest = models.DescribeInternetAddressRequest;
 const DescribePublicDirectConnectTunnelRoutesResponse = models.DescribePublicDirectConnectTunnelRoutesResponse;
+const DescribeInternetAddressQuotaResponse = models.DescribeInternetAddressQuotaResponse;
+const ReleaseInternetAddressResponse = models.ReleaseInternetAddressResponse;
 const DirectConnectTunnel = models.DirectConnectTunnel;
+const DisableInternetAddressRequest = models.DisableInternetAddressRequest;
 
 
 /**
@@ -69,6 +86,28 @@ class DcClient extends AbstractClient {
     }
     
     /**
+     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     * @param {ModifyDirectConnectTunnelExtraRequest} req
+     * @param {function(string, ModifyDirectConnectTunnelExtraResponse):void} cb
+     * @public
+     */
+    ModifyDirectConnectTunnelExtra(req, cb) {
+        let resp = new ModifyDirectConnectTunnelExtraResponse();
+        this.request("ModifyDirectConnectTunnelExtra", req, resp, cb);
+    }
+
+    /**
+     * 停用用户申请的公网互联网地址
+     * @param {DisableInternetAddressRequest} req
+     * @param {function(string, DisableInternetAddressResponse):void} cb
+     * @public
+     */
+    DisableInternetAddress(req, cb) {
+        let resp = new DisableInternetAddressResponse();
+        this.request("DisableInternetAddress", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribePublicDirectConnectTunnelRoutes）用于查询互联网通道路由列表
      * @param {DescribePublicDirectConnectTunnelRoutesRequest} req
      * @param {function(string, DescribePublicDirectConnectTunnelRoutesResponse):void} cb
@@ -80,14 +119,15 @@ class DcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
-     * @param {ModifyDirectConnectTunnelExtraRequest} req
-     * @param {function(string, ModifyDirectConnectTunnelExtraResponse):void} cb
+     * 查询物理专线接入点
+
+     * @param {DescribeAccessPointsRequest} req
+     * @param {function(string, DescribeAccessPointsResponse):void} cb
      * @public
      */
-    ModifyDirectConnectTunnelExtra(req, cb) {
-        let resp = new ModifyDirectConnectTunnelExtraResponse();
-        this.request("ModifyDirectConnectTunnelExtra", req, resp, cb);
+    DescribeAccessPoints(req, cb) {
+        let resp = new DescribeAccessPointsResponse();
+        this.request("DescribeAccessPoints", req, resp, cb);
     }
 
     /**
@@ -147,6 +187,17 @@ class DcClient extends AbstractClient {
     }
 
     /**
+     * 获取用户互联网公网地址分配统计信息
+     * @param {DescribeInternetAddressStatisticsRequest} req
+     * @param {function(string, DescribeInternetAddressStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeInternetAddressStatistics(req, cb) {
+        let resp = new DescribeInternetAddressStatisticsResponse();
+        this.request("DescribeInternetAddressStatistics", req, resp, cb);
+    }
+
+    /**
      * 删除专用通道
      * @param {DeleteDirectConnectTunnelRequest} req
      * @param {function(string, DeleteDirectConnectTunnelResponse):void} cb
@@ -158,15 +209,47 @@ class DcClient extends AbstractClient {
     }
 
     /**
-     * 查询物理专线接入点
-
-     * @param {DescribeAccessPointsRequest} req
-     * @param {function(string, DescribeAccessPointsResponse):void} cb
+     * 申请互联网CIDR地址
+     * @param {ApplyInternetAddressRequest} req
+     * @param {function(string, ApplyInternetAddressResponse):void} cb
      * @public
      */
-    DescribeAccessPoints(req, cb) {
-        let resp = new DescribeAccessPointsResponse();
-        this.request("DescribeAccessPoints", req, resp, cb);
+    ApplyInternetAddress(req, cb) {
+        let resp = new ApplyInternetAddressResponse();
+        this.request("ApplyInternetAddress", req, resp, cb);
+    }
+
+    /**
+     * 启用已停用的互联网公网地址
+     * @param {EnableInternetAddressRequest} req
+     * @param {function(string, EnableInternetAddressResponse):void} cb
+     * @public
+     */
+    EnableInternetAddress(req, cb) {
+        let resp = new EnableInternetAddressResponse();
+        this.request("EnableInternetAddress", req, resp, cb);
+    }
+
+    /**
+     * 获取用户互联网公网地址配额
+     * @param {DescribeInternetAddressQuotaRequest} req
+     * @param {function(string, DescribeInternetAddressQuotaResponse):void} cb
+     * @public
+     */
+    DescribeInternetAddressQuota(req, cb) {
+        let resp = new DescribeInternetAddressQuotaResponse();
+        this.request("DescribeInternetAddressQuota", req, resp, cb);
+    }
+
+    /**
+     * 获取用户互联网公网地址信息
+     * @param {DescribeInternetAddressRequest} req
+     * @param {function(string, DescribeInternetAddressResponse):void} cb
+     * @public
+     */
+    DescribeInternetAddress(req, cb) {
+        let resp = new DescribeInternetAddressResponse();
+        this.request("DescribeInternetAddress", req, resp, cb);
     }
 
     /**
@@ -214,6 +297,17 @@ class DcClient extends AbstractClient {
     DescribeDirectConnects(req, cb) {
         let resp = new DescribeDirectConnectsResponse();
         this.request("DescribeDirectConnects", req, resp, cb);
+    }
+
+    /**
+     * 释放已申请的互联网地址
+     * @param {ReleaseInternetAddressRequest} req
+     * @param {function(string, ReleaseInternetAddressResponse):void} cb
+     * @public
+     */
+    ReleaseInternetAddress(req, cb) {
+        let resp = new ReleaseInternetAddressResponse();
+        this.request("ReleaseInternetAddress", req, resp, cb);
     }
 
     /**

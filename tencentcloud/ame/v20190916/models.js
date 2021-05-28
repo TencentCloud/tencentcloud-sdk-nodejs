@@ -143,6 +143,34 @@ class DescribeLyricResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyMusicOnShelves返回参数结构体
+ * @class
+ */
+class ModifyMusicOnShelvesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 分类内容
  * @class
  */
@@ -357,7 +385,7 @@ class DescribePackageItemsResponse extends  AbstractModel {
         super();
 
         /**
-         * 歌曲信息数组
+         * 已核销歌曲信息列表
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<PackageItem> || null}
          */
@@ -388,6 +416,34 @@ class DescribePackageItemsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCloudMusicPurchased请求参数结构体
+ * @class
+ */
+class DescribeCloudMusicPurchasedRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权项目Id
+         * @type {string || null}
+         */
+        this.AuthInfoId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuthInfoId = 'AuthInfoId' in params ? params.AuthInfoId : null;
 
     }
 }
@@ -463,6 +519,50 @@ class PackageItem extends  AbstractModel {
 }
 
 /**
+ * DescribeCloudMusicPurchased返回参数结构体
+ * @class
+ */
+class DescribeCloudMusicPurchasedResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云音乐列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<MusicOpenDetail> || null}
+         */
+        this.MusicOpenDetail = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MusicOpenDetail) {
+            this.MusicOpenDetail = new Array();
+            for (let z in params.MusicOpenDetail) {
+                let obj = new MusicOpenDetail();
+                obj.deserialize(params.MusicOpenDetail[z]);
+                this.MusicOpenDetail.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 数据信息
  * @class
  */
@@ -514,6 +614,99 @@ class DataInfo extends  AbstractModel {
         this.Duration = 'Duration' in params ? params.Duration : null;
         this.AuditionBegin = 'AuditionBegin' in params ? params.AuditionBegin : null;
         this.AuditionEnd = 'AuditionEnd' in params ? params.AuditionEnd : null;
+
+    }
+}
+
+/**
+ * 对外开放信息
+ * @class
+ */
+class MusicOpenDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 音乐Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MusicId = null;
+
+        /**
+         * 专辑名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlbumName = null;
+
+        /**
+         * 专辑图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AlbumImageUrl = null;
+
+        /**
+         * 音乐名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MusicName = null;
+
+        /**
+         * 音乐图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MusicImageUrl = null;
+
+        /**
+         * 歌手
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Singers = null;
+
+        /**
+         * 播放时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 歌词url
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LyricUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MusicId = 'MusicId' in params ? params.MusicId : null;
+        this.AlbumName = 'AlbumName' in params ? params.AlbumName : null;
+        this.AlbumImageUrl = 'AlbumImageUrl' in params ? params.AlbumImageUrl : null;
+        this.MusicName = 'MusicName' in params ? params.MusicName : null;
+        this.MusicImageUrl = 'MusicImageUrl' in params ? params.MusicImageUrl : null;
+        this.Singers = 'Singers' in params ? params.Singers : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.LyricUrl = 'LyricUrl' in params ? params.LyricUrl : null;
 
     }
 }
@@ -653,6 +846,46 @@ class ReportDataResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyMusicOnShelves请求参数结构体
+ * @class
+ */
+class ModifyMusicOnShelvesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 歌曲变更信息
+         * @type {MusicDetailInfo || null}
+         */
+        this.MusicDetailInfos = null;
+
+        /**
+         * ame对接资源方密钥
+         * @type {string || null}
+         */
+        this.AmeKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MusicDetailInfos) {
+            let obj = new MusicDetailInfo();
+            obj.deserialize(params.MusicDetailInfos)
+            this.MusicDetailInfos = obj;
+        }
+        this.AmeKey = 'AmeKey' in params ? params.AmeKey : null;
+
+    }
+}
+
+/**
  * DescribePackageItems请求参数结构体
  * @class
  */
@@ -661,13 +894,13 @@ class DescribePackageItemsRequest extends  AbstractModel {
         super();
 
         /**
-         * 订单id
+         * 订单id，从获取已购曲库包列表中获取
          * @type {string || null}
          */
         this.OrderId = null;
 
         /**
-         * 默认0
+         * 默认0，Offset=Offset+Length
          * @type {number || null}
          */
         this.Offset = null;
@@ -690,6 +923,198 @@ class DescribePackageItemsRequest extends  AbstractModel {
         this.OrderId = 'OrderId' in params ? params.OrderId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Length = 'Length' in params ? params.Length : null;
+
+    }
+}
+
+/**
+ * AuthInfo集合
+ * @class
+ */
+class AuthInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主体名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubjectName = null;
+
+        /**
+         * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 应用场景
+         * @type {number || null}
+         */
+        this.AppScene = null;
+
+        /**
+         * 应用地域
+         * @type {number || null}
+         */
+        this.AppRegion = null;
+
+        /**
+         * 授权时间
+         * @type {number || null}
+         */
+        this.AuthPeriod = null;
+
+        /**
+         * 是否可商业化
+         * @type {number || null}
+         */
+        this.Commercialization = null;
+
+        /**
+         * 是否可跨平台
+         * @type {number || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 加密后Id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubjectName = 'SubjectName' in params ? params.SubjectName : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.AppScene = 'AppScene' in params ? params.AppScene : null;
+        this.AppRegion = 'AppRegion' in params ? params.AppRegion : null;
+        this.AuthPeriod = 'AuthPeriod' in params ? params.AuthPeriod : null;
+        this.Commercialization = 'Commercialization' in params ? params.Commercialization : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * TakeMusicOffShelves请求参数结构体
+ * @class
+ */
+class TakeMusicOffShelvesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源方下架必传结构
+         * @type {Array.<TakeMusicOffShelves> || null}
+         */
+        this.TakeMusicOffShelves = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TakeMusicOffShelves) {
+            this.TakeMusicOffShelves = new Array();
+            for (let z in params.TakeMusicOffShelves) {
+                let obj = new TakeMusicOffShelves();
+                obj.deserialize(params.TakeMusicOffShelves[z]);
+                this.TakeMusicOffShelves.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 下架歌曲复合结构
+ * @class
+ */
+class TakeMusicOffShelves extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源方对应音乐Id
+         * @type {string || null}
+         */
+        this.MusicIds = null;
+
+        /**
+         * 当曲目临时下架时：已订购客户无影响，无需消息通知。当曲目封杀下架后，推送消息至已订购老客户，枚举值，判断是否上/下架
+         * @type {string || null}
+         */
+        this.SaleStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MusicIds = 'MusicIds' in params ? params.MusicIds : null;
+        this.SaleStatus = 'SaleStatus' in params ? params.SaleStatus : null;
+
+    }
+}
+
+/**
+ * 歌词信息
+ * @class
+ */
+class Lyric extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 歌词cdn地址
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 歌词后缀名
+         * @type {string || null}
+         */
+        this.FileNameExt = null;
+
+        /**
+         * 歌词类型
+         * @type {string || null}
+         */
+        this.SubItemType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FileNameExt = 'FileNameExt' in params ? params.FileNameExt : null;
+        this.SubItemType = 'SubItemType' in params ? params.SubItemType : null;
 
     }
 }
@@ -743,8 +1168,8 @@ class DescribeMusicRequest extends  AbstractModel {
         this.IdentityId = null;
 
         /**
-         * 基础版：入参 MP3-64K-FTD-P  获取64kbps歌曲热门片段。
-高级/商用版：入参 MP3-320K-FTD 获取320kbps已核验歌曲完整资源。
+         * MP3-320K-FTD-P  为获取64kbps歌曲热门片段。
+MP3-320K-FTD 为获取320kbps已核验歌曲完整资源。
          * @type {string || null}
          */
         this.SubItemType = null;
@@ -851,7 +1276,7 @@ class DescribeStationsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * offset (Default = 0)，(当前页-1) * Limit
+         * offset (Default = 0)，Offset=Offset+Limit
          * @type {number || null}
          */
         this.Offset = null;
@@ -867,6 +1292,56 @@ class DescribeStationsRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * PutMusicOnTheShelves返回参数结构体
+ * @class
+ */
+class PutMusicOnTheShelvesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作成功数量
+         * @type {number || null}
+         */
+        this.SuccessNum = null;
+
+        /**
+         * 操作失败数量
+         * @type {number || null}
+         */
+        this.FailedNum = null;
+
+        /**
+         * 失败歌曲Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailedMusicIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessNum = 'SuccessNum' in params ? params.SuccessNum : null;
+        this.FailedNum = 'FailedNum' in params ? params.FailedNum : null;
+        this.FailedMusicIds = 'FailedMusicIds' in params ? params.FailedMusicIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -999,6 +1474,79 @@ class Item extends  AbstractModel {
 }
 
 /**
+ * DescribeCloudMusic返回参数结构体
+ * @class
+ */
+class DescribeCloudMusicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 歌曲Id
+         * @type {string || null}
+         */
+        this.MusicId = null;
+
+        /**
+         * 歌曲名称
+         * @type {string || null}
+         */
+        this.MusicName = null;
+
+        /**
+         * 歌曲时长
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 歌曲链接
+         * @type {string || null}
+         */
+        this.MusicUrl = null;
+
+        /**
+         * 歌曲图片
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MusicImageUrl = null;
+
+        /**
+         * 歌手列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Singers = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MusicId = 'MusicId' in params ? params.MusicId : null;
+        this.MusicName = 'MusicName' in params ? params.MusicName : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.MusicUrl = 'MusicUrl' in params ? params.MusicUrl : null;
+        this.MusicImageUrl = 'MusicImageUrl' in params ? params.MusicImageUrl : null;
+        this.Singers = 'Singers' in params ? params.Singers : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePackages请求参数结构体
  * @class
  */
@@ -1007,7 +1555,7 @@ class DescribePackagesRequest extends  AbstractModel {
         super();
 
         /**
-         * 默认0
+         * 默认0，Offset=Offset+Length
          * @type {number || null}
          */
         this.Offset = null;
@@ -1029,6 +1577,111 @@ class DescribePackagesRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Length = 'Length' in params ? params.Length : null;
+
+    }
+}
+
+/**
+ * 歌曲变更细节
+ * @class
+ */
+class MusicDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源方音乐Id
+         * @type {string || null}
+         */
+        this.MusicId = null;
+
+        /**
+         * 资源方识别信息
+         * @type {string || null}
+         */
+        this.AmeId = null;
+
+        /**
+         * 分类标签
+         * @type {Array.<string> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 关键词
+         * @type {Array.<string> || null}
+         */
+        this.HitWords = null;
+
+        /**
+         * 节奏信息
+         * @type {number || null}
+         */
+        this.Bpm = null;
+
+        /**
+         * 商业化权益
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 场景信息
+         * @type {Array.<string> || null}
+         */
+        this.Scene = null;
+
+        /**
+         * 应用地域
+         * @type {Array.<string> || null}
+         */
+        this.Region = null;
+
+        /**
+         * 授权期限
+         * @type {string || null}
+         */
+        this.AuthPeriod = null;
+
+        /**
+         * 商业化权益
+         * @type {string || null}
+         */
+        this.Commercialization = null;
+
+        /**
+         * 跨平台传播权益
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 传播渠道
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MusicId = 'MusicId' in params ? params.MusicId : null;
+        this.AmeId = 'AmeId' in params ? params.AmeId : null;
+        this.Tags = 'Tags' in params ? params.Tags : null;
+        this.HitWords = 'HitWords' in params ? params.HitWords : null;
+        this.Bpm = 'Bpm' in params ? params.Bpm : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.AuthPeriod = 'AuthPeriod' in params ? params.AuthPeriod : null;
+        this.Commercialization = 'Commercialization' in params ? params.Commercialization : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -1188,6 +1841,34 @@ class DescribeItemByIdResponse extends  AbstractModel {
 }
 
 /**
+ * PutMusicOnTheShelves请求参数结构体
+ * @class
+ */
+class PutMusicOnTheShelvesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源方歌曲Id
+         * @type {Array.<string> || null}
+         */
+        this.MusicIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MusicIds = 'MusicIds' in params ? params.MusicIds : null;
+
+    }
+}
+
+/**
  * DescribePackages返回参数结构体
  * @class
  */
@@ -1196,7 +1877,7 @@ class DescribePackagesResponse extends  AbstractModel {
         super();
 
         /**
-         * 已购曲库包数组
+         * 已购曲库包列表
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Package> || null}
          */
@@ -1232,30 +1913,28 @@ class DescribePackagesResponse extends  AbstractModel {
 }
 
 /**
- * 歌词信息
+ * DescribeCloudMusic请求参数结构体
  * @class
  */
-class Lyric extends  AbstractModel {
+class DescribeCloudMusicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 歌词cdn地址
+         * 歌曲Id
          * @type {string || null}
          */
-        this.Url = null;
+        this.MusicId = null;
 
         /**
-         * 歌词后缀名
+         * 歌曲类型，可选值有：
+<li>MP3-128K-FTW：含有水印的试听资源；</li>
+<li>MP3-320K-FTD-P：320kbps歌曲热门片段；</li>
+<li>MP3-320K-FTD：320kbps已核验歌曲完整资源。</li>
+默认为：MP3-128K-FTW
          * @type {string || null}
          */
-        this.FileNameExt = null;
-
-        /**
-         * 歌词类型
-         * @type {string || null}
-         */
-        this.SubItemType = null;
+        this.MusicType = null;
 
     }
 
@@ -1266,9 +1945,108 @@ class Lyric extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.FileNameExt = 'FileNameExt' in params ? params.FileNameExt : null;
-        this.SubItemType = 'SubItemType' in params ? params.SubItemType : null;
+        this.MusicId = 'MusicId' in params ? params.MusicId : null;
+        this.MusicType = 'MusicType' in params ? params.MusicType : null;
+
+    }
+}
+
+/**
+ * DescribeAuthInfo返回参数结构体
+ * @class
+ */
+class DescribeAuthInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权项目列表
+         * @type {Array.<AuthInfo> || null}
+         */
+        this.AuthInfo = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AuthInfo) {
+            this.AuthInfo = new Array();
+            for (let z in params.AuthInfo) {
+                let obj = new AuthInfo();
+                obj.deserialize(params.AuthInfo[z]);
+                this.AuthInfo.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TakeMusicOffShelves返回参数结构体
+ * @class
+ */
+class TakeMusicOffShelvesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回成功数量
+         * @type {number || null}
+         */
+        this.SuccessNum = null;
+
+        /**
+         * 返回失败数量
+         * @type {number || null}
+         */
+        this.FailedNum = null;
+
+        /**
+         * 返回失败歌曲musicId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailedMusicIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessNum = 'SuccessNum' in params ? params.SuccessNum : null;
+        this.FailedNum = 'FailedNum' in params ? params.FailedNum : null;
+        this.FailedMusicIds = 'FailedMusicIds' in params ? params.FailedMusicIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1304,6 +2082,48 @@ class DescribeLyricRequest extends  AbstractModel {
         }
         this.ItemId = 'ItemId' in params ? params.ItemId : null;
         this.SubItemType = 'SubItemType' in params ? params.SubItemType : null;
+
+    }
+}
+
+/**
+ * DescribeAuthInfo请求参数结构体
+ * @class
+ */
+class DescribeAuthInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量：Offset=Offset+Limit
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 数据条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 搜索关键字
+         * @type {string || null}
+         */
+        this.Key = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Key = 'Key' in params ? params.Key : null;
 
     }
 }
@@ -1352,29 +2172,45 @@ module.exports = {
     Album: Album,
     DescribeMusicResponse: DescribeMusicResponse,
     DescribeLyricResponse: DescribeLyricResponse,
+    ModifyMusicOnShelvesResponse: ModifyMusicOnShelvesResponse,
     Station: Station,
     Music: Music,
     DescribeStationsResponse: DescribeStationsResponse,
     DescribePackageItemsResponse: DescribePackageItemsResponse,
+    DescribeCloudMusicPurchasedRequest: DescribeCloudMusicPurchasedRequest,
     PackageItem: PackageItem,
+    DescribeCloudMusicPurchasedResponse: DescribeCloudMusicPurchasedResponse,
     DataInfo: DataInfo,
+    MusicOpenDetail: MusicOpenDetail,
     Package: Package,
     ReportDataResponse: ReportDataResponse,
+    ModifyMusicOnShelvesRequest: ModifyMusicOnShelvesRequest,
     DescribePackageItemsRequest: DescribePackageItemsRequest,
+    AuthInfo: AuthInfo,
+    TakeMusicOffShelvesRequest: TakeMusicOffShelvesRequest,
+    TakeMusicOffShelves: TakeMusicOffShelves,
+    Lyric: Lyric,
     DescribeItemByIdRequest: DescribeItemByIdRequest,
     DescribeMusicRequest: DescribeMusicRequest,
     UseRange: UseRange,
     Artist: Artist,
     DescribeStationsRequest: DescribeStationsRequest,
+    PutMusicOnTheShelvesResponse: PutMusicOnTheShelvesResponse,
     DescribeItemsRequest: DescribeItemsRequest,
     Item: Item,
+    DescribeCloudMusicResponse: DescribeCloudMusicResponse,
     DescribePackagesRequest: DescribePackagesRequest,
+    MusicDetailInfo: MusicDetailInfo,
     ImagePath: ImagePath,
     DescribeItemsResponse: DescribeItemsResponse,
     DescribeItemByIdResponse: DescribeItemByIdResponse,
+    PutMusicOnTheShelvesRequest: PutMusicOnTheShelvesRequest,
     DescribePackagesResponse: DescribePackagesResponse,
-    Lyric: Lyric,
+    DescribeCloudMusicRequest: DescribeCloudMusicRequest,
+    DescribeAuthInfoResponse: DescribeAuthInfoResponse,
+    TakeMusicOffShelvesResponse: TakeMusicOffShelvesResponse,
     DescribeLyricRequest: DescribeLyricRequest,
+    DescribeAuthInfoRequest: DescribeAuthInfoRequest,
     ReportDataRequest: ReportDataRequest,
 
 }

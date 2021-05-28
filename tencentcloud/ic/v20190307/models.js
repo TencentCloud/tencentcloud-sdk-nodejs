@@ -264,6 +264,48 @@ class DescribeCardsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyUserCardRemark请求参数结构体
+ * @class
+ */
+class ModifyUserCardRemarkRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.Sdkappid = null;
+
+        /**
+         * 物联卡ICCID
+         * @type {string || null}
+         */
+        this.Iccid = null;
+
+        /**
+         * 备注信息，限50字
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+        this.Iccid = 'Iccid' in params ? params.Iccid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
  * DescribeCard返回参数结构体
  * @class
  */
@@ -678,6 +720,34 @@ class SendSmsResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyUserCardRemark返回参数结构体
+ * @class
+ */
+class ModifyUserCardRemarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SendSms请求参数结构体
  * @class
  */
@@ -965,12 +1035,14 @@ module.exports = {
     RenewCardsResponse: RenewCardsResponse,
     CardList: CardList,
     DescribeCardsResponse: DescribeCardsResponse,
+    ModifyUserCardRemarkRequest: ModifyUserCardRemarkRequest,
     DescribeCardResponse: DescribeCardResponse,
     CardInfo: CardInfo,
     DescribeAppResponse: DescribeAppResponse,
     DescribeCardRequest: DescribeCardRequest,
     DescribeAppRequest: DescribeAppRequest,
     SendSmsResponse: SendSmsResponse,
+    ModifyUserCardRemarkResponse: ModifyUserCardRemarkResponse,
     SendSmsRequest: SendSmsRequest,
     DescribeCardsRequest: DescribeCardsRequest,
     SendMultiSmsRequest: SendMultiSmsRequest,

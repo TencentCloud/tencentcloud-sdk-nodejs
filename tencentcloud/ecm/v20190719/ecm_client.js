@@ -26,8 +26,10 @@ const SecurityGroupLimitSet = models.SecurityGroupLimitSet;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
 const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
 const InstanceStatistic = models.InstanceStatistic;
+const CreateRoutesRequest = models.CreateRoutesRequest;
+const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadbalancersRequest;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
-const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
+const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
 const ModifyModuleSecurityGroupsRequest = models.ModifyModuleSecurityGroupsRequest;
 const Internet = models.Internet;
 const DescribeModuleResponse = models.DescribeModuleResponse;
@@ -35,7 +37,7 @@ const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesR
 const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
 const ImageTask = models.ImageTask;
 const Province = models.Province;
-const ImportCustomImageResponse = models.ImportCustomImageResponse;
+const DescribeMonthPeakNetworkResponse = models.DescribeMonthPeakNetworkResponse;
 const ModifyModuleConfigResponse = models.ModifyModuleConfigResponse;
 const NetworkStorageRange = models.NetworkStorageRange;
 const ModifyModuleNameResponse = models.ModifyModuleNameResponse;
@@ -43,22 +45,29 @@ const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest
 const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const StartInstancesRequest = models.StartInstancesRequest;
+const ImageLimitConfig = models.ImageLimitConfig;
+const HaVip = models.HaVip;
+const RouteConflict = models.RouteConflict;
+const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
 const EipQuota = models.EipQuota;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
 const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
+const Tag = models.Tag;
 const RunInstancesRequest = models.RunInstancesRequest;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const NetworkInterface = models.NetworkInterface;
+const DescribeMonthPeakNetworkRequest = models.DescribeMonthPeakNetworkRequest;
+const ImportImageRequest = models.ImportImageRequest;
 const ModifyModuleSecurityGroupsResponse = models.ModifyModuleSecurityGroupsResponse;
 const SrcImage = models.SrcImage;
+const SetSecurityGroupForLoadbalancersResponse = models.SetSecurityGroupForLoadbalancersResponse;
 const InstanceTypeConfig = models.InstanceTypeConfig;
 const DescribeNodeResponse = models.DescribeNodeResponse;
 const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
 const DescribeDefaultSubnetResponse = models.DescribeDefaultSubnetResponse;
-const VpcInfo = models.VpcInfo;
+const ReplaceRouteTableAssociationRequest = models.ReplaceRouteTableAssociationRequest;
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const Node = models.Node;
@@ -70,20 +79,26 @@ const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
 const CreateModuleResponse = models.CreateModuleResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
+const RuleHealth = models.RuleHealth;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
+const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
+const Instance = models.Instance;
 const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
 const RemovePrivateIpAddressesRequest = models.RemovePrivateIpAddressesRequest;
+const RouteTable = models.RouteTable;
 const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
 const LoadBalancerHealth = models.LoadBalancerHealth;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const InstanceFamilyTypeConfig = models.InstanceFamilyTypeConfig;
 const ResetInstancesResponse = models.ResetInstancesResponse;
-const DescribeImageRequest = models.DescribeImageRequest;
+const DeleteVpcRequest = models.DeleteVpcRequest;
 const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
 const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
 const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
 const ZoneInfo = models.ZoneInfo;
+const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
+const DeleteRouteTableRequest = models.DeleteRouteTableRequest;
 const DescribeNodeRequest = models.DescribeNodeRequest;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
@@ -92,55 +107,68 @@ const Area = models.Area;
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
 const DescribeConfigRequest = models.DescribeConfigRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
-const CreateListenerResponse = models.CreateListenerResponse;
+const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const TargetsWeightRule = models.TargetsWeightRule;
 const StopInstancesResponse = models.StopInstancesResponse;
 const StartInstancesResponse = models.StartInstancesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const AssistantCidr = models.AssistantCidr;
+const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const CreateModuleRequest = models.CreateModuleRequest;
+const ReplaceRouteTableAssociationResponse = models.ReplaceRouteTableAssociationResponse;
 const InstanceNetworkInfo = models.InstanceNetworkInfo;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
-const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const DeleteHaVipResponse = models.DeleteHaVipResponse;
+const ReleaseIpv6AddressesRequest = models.ReleaseIpv6AddressesRequest;
 const TaskOutput = models.TaskOutput;
 const ModuleCounter = models.ModuleCounter;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
-const RuleHealth = models.RuleHealth;
+const ModifyPrivateIpAddressesAttributeResponse = models.ModifyPrivateIpAddressesAttributeResponse;
+const ReplaceRoutesResponse = models.ReplaceRoutesResponse;
+const PhysicalPosition = models.PhysicalPosition;
 const Listener = models.Listener;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
-const Tag = models.Tag;
+const SetLoadBalancerSecurityGroupsRequest = models.SetLoadBalancerSecurityGroupsRequest;
 const DescribeDefaultSubnetRequest = models.DescribeDefaultSubnetRequest;
 const ResetInstancesMaxBandwidthResponse = models.ResetInstancesMaxBandwidthResponse;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
-const DeleteVpcRequest = models.DeleteVpcRequest;
+const VpcInfo = models.VpcInfo;
+const Route = models.Route;
+const DescribeImageRequest = models.DescribeImageRequest;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
 const ModifyListenerRequest = models.ModifyListenerRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
+const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
 const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResponse;
 const NodeInstanceNum = models.NodeInstanceNum;
 const HealthCheck = models.HealthCheck;
 const DescribeSecurityGroupLimitsResponse = models.DescribeSecurityGroupLimitsResponse;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
-const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
+const AssignIpv6AddressesResponse = models.AssignIpv6AddressesResponse;
+const CreateRoutesResponse = models.CreateRoutesResponse;
+const NetworkInterface = models.NetworkInterface;
 const DeleteListenerRequest = models.DeleteListenerRequest;
 const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
-const ImportImageRequest = models.ImportImageRequest;
+const ImportCustomImageResponse = models.ImportCustomImageResponse;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
+const MonthNetwork = models.MonthNetwork;
+const ResetRoutesResponse = models.ResetRoutesResponse;
 const DeleteModuleRequest = models.DeleteModuleRequest;
 const CreateImageResponse = models.CreateImageResponse;
 const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const ResetInstancesMaxBandwidthRequest = models.ResetInstancesMaxBandwidthRequest;
 const LoadBalancerInternetAccessible = models.LoadBalancerInternetAccessible;
 const OsVersion = models.OsVersion;
-const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
+const ResetRoutesRequest = models.ResetRoutesRequest;
+const DisableRoutesResponse = models.DisableRoutesResponse;
 const PeakBase = models.PeakBase;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const ModifyModuleNetworkRequest = models.ModifyModuleNetworkRequest;
@@ -149,19 +177,23 @@ const TagSpecification = models.TagSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const AddressTemplateSpecification = models.AddressTemplateSpecification;
 const DescribeConfigResponse = models.DescribeConfigResponse;
+const AssignIpv6AddressesRequest = models.AssignIpv6AddressesRequest;
 const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
 const ModifyDefaultSubnetResponse = models.ModifyDefaultSubnetResponse;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const CreateSubnetRequest = models.CreateSubnetRequest;
 const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
 const TaskInput = models.TaskInput;
-const StopInstancesRequest = models.StopInstancesRequest;
+const ModifyModuleDisableWanIpRequest = models.ModifyModuleDisableWanIpRequest;
 const Backend = models.Backend;
 const Subnet = models.Subnet;
 const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
 const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
+const ModifyIpv6AddressesAttributeResponse = models.ModifyIpv6AddressesAttributeResponse;
 const DeleteVpcResponse = models.DeleteVpcResponse;
 const Target = models.Target;
+const RouteTableAssociation = models.RouteTableAssociation;
+const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
 const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const ImageUrl = models.ImageUrl;
 const ISP = models.ISP;
@@ -170,14 +202,18 @@ const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttribute
 const ISPCounter = models.ISPCounter;
 const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
 const CreateImageRequest = models.CreateImageRequest;
-const Instance = models.Instance;
+const DeleteRouteTableResponse = models.DeleteRouteTableResponse;
+const ModifyModuleDisableWanIpResponse = models.ModifyModuleDisableWanIpResponse;
 const EnhancedService = models.EnhancedService;
-const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
+const CreateListenerResponse = models.CreateListenerResponse;
 const DeleteModuleResponse = models.DeleteModuleResponse;
 const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
 const DescribeLoadBalanceTaskStatusRequest = models.DescribeLoadBalanceTaskStatusRequest;
 const ImportCustomImageRequest = models.ImportCustomImageRequest;
+const ModifyHaVipAttributeResponse = models.ModifyHaVipAttributeResponse;
+const ModifyIpv6AddressesAttributeRequest = models.ModifyIpv6AddressesAttributeRequest;
 const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
+const DeleteRoutesRequest = models.DeleteRoutesRequest;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
 const ModifyModuleConfigRequest = models.ModifyModuleConfigRequest;
@@ -186,16 +222,20 @@ const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewRe
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const DescribeVpcsRequest = models.DescribeVpcsRequest;
+const DescribeRouteConflictsResponse = models.DescribeRouteConflictsResponse;
+const DescribeRouteTablesRequest = models.DescribeRouteTablesRequest;
 const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
+const CreateHaVipResponse = models.CreateHaVipResponse;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DiskInfo = models.DiskInfo;
+const ModifyRouteTableAttributeRequest = models.ModifyRouteTableAttributeRequest;
 const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
-const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
+const DisableRoutesRequest = models.DisableRoutesRequest;
 const ModifyListenerResponse = models.ModifyListenerResponse;
 const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
 const DescribeLoadBalanceTaskStatusResponse = models.DescribeLoadBalanceTaskStatusResponse;
-const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
+const EnableRoutesRequest = models.EnableRoutesRequest;
 const ModifyDefaultSubnetRequest = models.ModifyDefaultSubnetRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const CreateListenerRequest = models.CreateListenerRequest;
@@ -203,8 +243,10 @@ const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const AssociateAddressResponse = models.AssociateAddressResponse;
 const Filter = models.Filter;
+const CreateRouteTableRequest = models.CreateRouteTableRequest;
 const PublicIPAddressInfo = models.PublicIPAddressInfo;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
+const CreateHaVipRequest = models.CreateHaVipRequest;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
 const DescribeSecurityGroupPoliciesRequest = models.DescribeSecurityGroupPoliciesRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
@@ -214,12 +256,15 @@ const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const ZoneInstanceInfo = models.ZoneInstanceInfo;
 const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
-const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
+const ReplaceRoutesRequest = models.ReplaceRoutesRequest;
+const CreateRouteTableResponse = models.CreateRouteTableResponse;
 const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
+const DeleteRoutesResponse = models.DeleteRoutesResponse;
 const ResetInstancesRequest = models.ResetInstancesRequest;
 const PeakNetwork = models.PeakNetwork;
 const DescribeCustomImageTaskRequest = models.DescribeCustomImageTaskRequest;
 const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const ModifyPrivateIpAddressesAttributeRequest = models.ModifyPrivateIpAddressesAttributeRequest;
 const DescribeTargetsResponse = models.DescribeTargetsResponse;
 const ImageOsList = models.ImageOsList;
 const InstanceOperator = models.InstanceOperator;
@@ -232,7 +277,7 @@ const BatchTarget = models.BatchTarget;
 const City = models.City;
 const PrivateIPAddressInfo = models.PrivateIPAddressInfo;
 const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
-const TerminateInstancesRequest = models.TerminateInstancesRequest;
+const EnableRoutesResponse = models.EnableRoutesResponse;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const SimpleModule = models.SimpleModule;
 const DescribePeakNetworkOverviewRequest = models.DescribePeakNetworkOverviewRequest;
@@ -240,13 +285,16 @@ const ModifyModuleIpDirectResponse = models.ModifyModuleIpDirectResponse;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
 const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
 const PeakNetworkRegionInfo = models.PeakNetworkRegionInfo;
+const ModifyHaVipAttributeRequest = models.ModifyHaVipAttributeRequest;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const ModifyModuleIpDirectRequest = models.ModifyModuleIpDirectRequest;
 const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
 const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
+const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const PeakFamilyInfo = models.PeakFamilyInfo;
 const DescribePeakBaseOverviewResponse = models.DescribePeakBaseOverviewResponse;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
+const DescribeHaVipsRequest = models.DescribeHaVipsRequest;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const DescribeImageResponse = models.DescribeImageResponse;
 const ListenerBackend = models.ListenerBackend;
@@ -255,9 +303,11 @@ const TagInfo = models.TagInfo;
 const DeleteImageResponse = models.DeleteImageResponse;
 const Address = models.Address;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
+const DeleteHaVipRequest = models.DeleteHaVipRequest;
 const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
+const InstanceNetworkLimitConfig = models.InstanceNetworkLimitConfig;
 const OperatorAction = models.OperatorAction;
 const CreateVpcRequest = models.CreateVpcRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
@@ -265,8 +315,11 @@ const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DescribeSecurityGroupAssociationStatisticsRequest = models.DescribeSecurityGroupAssociationStatisticsRequest;
 const Country = models.Country;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const DescribeRouteTablesResponse = models.DescribeRouteTablesResponse;
+const StopInstancesRequest = models.StopInstancesRequest;
 const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const AllocateAddressesResponse = models.AllocateAddressesResponse;
+const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
@@ -277,14 +330,18 @@ const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
+const ModifyRouteTableAttributeResponse = models.ModifyRouteTableAttributeResponse;
 const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
 const DeleteListenerResponse = models.DeleteListenerResponse;
 const DeleteImageRequest = models.DeleteImageRequest;
 const Module = models.Module;
 const DescribeBaseOverviewResponse = models.DescribeBaseOverviewResponse;
+const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const TargetHealth = models.TargetHealth;
 const ListenerHealth = models.ListenerHealth;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const DescribeRouteConflictsRequest = models.DescribeRouteConflictsRequest;
+const ReleaseIpv6AddressesResponse = models.ReleaseIpv6AddressesResponse;
 const LoadBalancer = models.LoadBalancer;
 const AddressInfo = models.AddressInfo;
 
@@ -344,6 +401,28 @@ class EcmClient extends AbstractClient {
     }
 
     /**
+     * 查询路由表对象列表
+     * @param {DescribeRouteTablesRequest} req
+     * @param {function(string, DescribeRouteTablesResponse):void} cb
+     * @public
+     */
+    DescribeRouteTables(req, cb) {
+        let resp = new DescribeRouteTablesResponse();
+        this.request("DescribeRouteTables", req, resp, cb);
+    }
+
+    /**
+     * 创建了VPC后，系统会创建一个默认路由表，所有新建的子网都会关联到默认路由表。默认情况下您可以直接使用默认路由表来管理您的路由策略。当您的路由策略较多时，您可以调用创建路由表接口创建更多路由表管理您的路由策略。
+     * @param {CreateRouteTableRequest} req
+     * @param {function(string, CreateRouteTableResponse):void} cb
+     * @public
+     */
+    CreateRouteTable(req, cb) {
+        let resp = new CreateRouteTableResponse();
+        this.request("CreateRouteTable", req, resp, cb);
+    }
+
+    /**
      * 批量解绑后端服务。
      * @param {BatchDeregisterTargetsRequest} req
      * @param {function(string, BatchDeregisterTargetsResponse):void} cb
@@ -366,7 +445,29 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 创建ECM实例
+     * 对某个路由表名称和所有路由策略（Route）进行重新设置
+     * @param {ResetRoutesRequest} req
+     * @param {function(string, ResetRoutesResponse):void} cb
+     * @public
+     */
+    ResetRoutes(req, cb) {
+        let resp = new ResetRoutesResponse();
+        this.request("ResetRoutes", req, resp, cb);
+    }
+
+    /**
+     * 用于修改弹性网卡内网IP属性。
+     * @param {ModifyPrivateIpAddressesAttributeRequest} req
+     * @param {function(string, ModifyPrivateIpAddressesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyPrivateIpAddressesAttribute(req, cb) {
+        let resp = new ModifyPrivateIpAddressesAttributeResponse();
+        this.request("ModifyPrivateIpAddressesAttribute", req, resp, cb);
+    }
+
+    /**
+     * 创建ECM实例。
      * @param {RunInstancesRequest} req
      * @param {function(string, RunInstancesResponse):void} cb
      * @public
@@ -454,14 +555,25 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 修改负载均衡实例的属性。
-     * @param {ModifyLoadBalancerAttributesRequest} req
-     * @param {function(string, ModifyLoadBalancerAttributesResponse):void} cb
+     * 修改子网关联的路由表，一个子网只能关联一个路由表。
+     * @param {ReplaceRouteTableAssociationRequest} req
+     * @param {function(string, ReplaceRouteTableAssociationResponse):void} cb
      * @public
      */
-    ModifyLoadBalancerAttributes(req, cb) {
-        let resp = new ModifyLoadBalancerAttributesResponse();
-        this.request("ModifyLoadBalancerAttributes", req, resp, cb);
+    ReplaceRouteTableAssociation(req, cb) {
+        let resp = new ReplaceRouteTableAssociationResponse();
+        this.request("ReplaceRouteTableAssociation", req, resp, cb);
+    }
+
+    /**
+     * 查询负载均衡实例列表。
+     * @param {DescribeLoadBalancersRequest} req
+     * @param {function(string, DescribeLoadBalancersResponse):void} cb
+     * @public
+     */
+    DescribeLoadBalancers(req, cb) {
+        let resp = new DescribeLoadBalancersResponse();
+        this.request("DescribeLoadBalancers", req, resp, cb);
     }
 
     /**
@@ -624,6 +736,28 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
+     * 修改负载均衡实例的属性。
+     * @param {ModifyLoadBalancerAttributesRequest} req
+     * @param {function(string, ModifyLoadBalancerAttributesResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancerAttributes(req, cb) {
+        let resp = new ModifyLoadBalancerAttributesResponse();
+        this.request("ModifyLoadBalancerAttributes", req, resp, cb);
+    }
+
+    /**
+     * 设置负载均衡实例的安全组。
+     * @param {SetLoadBalancerSecurityGroupsRequest} req
+     * @param {function(string, SetLoadBalancerSecurityGroupsResponse):void} cb
+     * @public
+     */
+    SetLoadBalancerSecurityGroups(req, cb) {
+        let resp = new SetLoadBalancerSecurityGroupsResponse();
+        this.request("SetLoadBalancerSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * 申请一个或多个弹性公网IP（简称 EIP）
      * @param {AllocateAddressesRequest} req
      * @param {function(string, AllocateAddressesResponse):void} cb
@@ -632,6 +766,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
     AllocateAddresses(req, cb) {
         let resp = new AllocateAddressesResponse();
         this.request("AllocateAddresses", req, resp, cb);
+    }
+
+    /**
+     * 修改模块是否禁止分配外网ip的属性。
+     * @param {ModifyModuleDisableWanIpRequest} req
+     * @param {function(string, ModifyModuleDisableWanIpResponse):void} cb
+     * @public
+     */
+    ModifyModuleDisableWanIp(req, cb) {
+        let resp = new ModifyModuleDisableWanIpResponse();
+        this.request("ModifyModuleDisableWanIp", req, resp, cb);
     }
 
     /**
@@ -648,11 +793,8 @@ EIP 如果被封堵，则不能进行解绑定操作。
     /**
      * 将弹性公网IP（简称 EIP）绑定到实例或弹性网卡的指定内网 IP 上。
 将 EIP 绑定到实例（ECM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
-将 EIP 绑定到主网卡的主内网IP上，绑定过程会把其上绑定的普通公网 IP 自动解绑并释放。
-将 EIP 绑定到指定网卡的内网 IP上（非主网卡的主内网IP），则必须先解绑该 EIP，才能再绑定新的。
-将 EIP 绑定到NAT网关，请使用接口EipBindNatGateway
-EIP 如果欠费或被封堵，则不能被绑定。
-只有状态为 UNBIND 的 EIP 才能够被绑定。
+将 EIP 绑定到指定网卡的内网 IP上，内网IP已经绑定了EIP或普通公网IP，则反馈失败。必须先解绑该 EIP，才能再绑定新的。
+只有状态为 UNBIND 的 EIP 才能够绑定内网IP。
      * @param {AssociateAddressRequest} req
      * @param {function(string, AssociateAddressResponse):void} cb
      * @public
@@ -660,6 +802,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     AssociateAddress(req, cb) {
         let resp = new AssociateAddressResponse();
         this.request("AssociateAddress", req, resp, cb);
+    }
+
+    /**
+     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+     * @param {ModifyDefaultSubnetRequest} req
+     * @param {function(string, ModifyDefaultSubnetResponse):void} cb
+     * @public
+     */
+    ModifyDefaultSubnet(req, cb) {
+        let resp = new ModifyDefaultSubnetResponse();
+        this.request("ModifyDefaultSubnet", req, resp, cb);
     }
 
     /**
@@ -731,6 +884,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 获取客户节点上的出入带宽月峰和计费带宽信息
+     * @param {DescribeMonthPeakNetworkRequest} req
+     * @param {function(string, DescribeMonthPeakNetworkResponse):void} cb
+     * @public
+     */
+    DescribeMonthPeakNetwork(req, cb) {
+        let resp = new DescribeMonthPeakNetworkResponse();
+        this.request("DescribeMonthPeakNetwork", req, resp, cb);
+    }
+
+    /**
      * 弹性网卡解绑云主机
      * @param {DetachNetworkInterfaceRequest} req
      * @param {function(string, DetachNetworkInterfaceResponse):void} cb
@@ -786,14 +950,47 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 修改模块IP直通。
-     * @param {ModifyModuleIpDirectRequest} req
-     * @param {function(string, ModifyModuleIpDirectResponse):void} cb
+     * 本接口（UnassignIpv6Addresses）用于释放弹性网卡IPv6地址。
+     * @param {ReleaseIpv6AddressesRequest} req
+     * @param {function(string, ReleaseIpv6AddressesResponse):void} cb
      * @public
      */
-    ModifyModuleIpDirect(req, cb) {
-        let resp = new ModifyModuleIpDirectResponse();
-        this.request("ModifyModuleIpDirect", req, resp, cb);
+    ReleaseIpv6Addresses(req, cb) {
+        let resp = new ReleaseIpv6AddressesResponse();
+        this.request("ReleaseIpv6Addresses", req, resp, cb);
+    }
+
+    /**
+     * 获取负载均衡后端服务的健康检查状态。
+     * @param {DescribeTargetHealthRequest} req
+     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * @public
+     */
+    DescribeTargetHealth(req, cb) {
+        let resp = new DescribeTargetHealthResponse();
+        this.request("DescribeTargetHealth", req, resp, cb);
+    }
+
+    /**
+     * 替换路由策略
+     * @param {ReplaceRoutesRequest} req
+     * @param {function(string, ReplaceRoutesResponse):void} cb
+     * @public
+     */
+    ReplaceRoutes(req, cb) {
+        let resp = new ReplaceRoutesResponse();
+        this.request("ReplaceRoutes", req, resp, cb);
+    }
+
+    /**
+     * 查询自定义路由策略与云联网路由策略冲突列表
+     * @param {DescribeRouteConflictsRequest} req
+     * @param {function(string, DescribeRouteConflictsResponse):void} cb
+     * @public
+     */
+    DescribeRouteConflicts(req, cb) {
+        let resp = new DescribeRouteConflictsResponse();
+        this.request("DescribeRouteConflicts", req, resp, cb);
     }
 
     /**
@@ -806,6 +1003,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     RemovePrivateIpAddresses(req, cb) {
         let resp = new RemovePrivateIpAddressesResponse();
         this.request("RemovePrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * 禁用已启用的子网路由
+     * @param {DisableRoutesRequest} req
+     * @param {function(string, DisableRoutesResponse):void} cb
+     * @public
+     */
+    DisableRoutes(req, cb) {
+        let resp = new DisableRoutesResponse();
+        this.request("DisableRoutes", req, resp, cb);
     }
 
     /**
@@ -894,6 +1102,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     DescribeInstanceTypeConfig(req, cb) {
         let resp = new DescribeInstanceTypeConfigResponse();
         this.request("DescribeInstanceTypeConfig", req, resp, cb);
+    }
+
+    /**
+     * 对某个路由表批量删除路由策略
+     * @param {DeleteRoutesRequest} req
+     * @param {function(string, DeleteRoutesResponse):void} cb
+     * @public
+     */
+    DeleteRoutes(req, cb) {
+        let resp = new DeleteRoutesResponse();
+        this.request("DeleteRoutes", req, resp, cb);
     }
 
     /**
@@ -1018,6 +1237,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 删除路由表
+     * @param {DeleteRouteTableRequest} req
+     * @param {function(string, DeleteRouteTableResponse):void} cb
+     * @public
+     */
+    DeleteRouteTable(req, cb) {
+        let resp = new DeleteRouteTableResponse();
+        this.request("DeleteRouteTable", req, resp, cb);
+    }
+
+    /**
      * 查询用户安全组配额
      * @param {DescribeSecurityGroupLimitsRequest} req
      * @param {function(string, DescribeSecurityGroupLimitsResponse):void} cb
@@ -1029,14 +1259,25 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
-     * @param {ModifyDefaultSubnetRequest} req
-     * @param {function(string, ModifyDefaultSubnetResponse):void} cb
+     * 绑定或解绑一个安全组到多个负载均衡实例。
+     * @param {SetSecurityGroupForLoadbalancersRequest} req
+     * @param {function(string, SetSecurityGroupForLoadbalancersResponse):void} cb
      * @public
      */
-    ModifyDefaultSubnet(req, cb) {
-        let resp = new ModifyDefaultSubnetResponse();
-        this.request("ModifyDefaultSubnet", req, resp, cb);
+    SetSecurityGroupForLoadbalancers(req, cb) {
+        let resp = new SetSecurityGroupForLoadbalancersResponse();
+        this.request("SetSecurityGroupForLoadbalancers", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
+     * @param {ModifyIpv6AddressesAttributeRequest} req
+     * @param {function(string, ModifyIpv6AddressesAttributeResponse):void} cb
+     * @public
+     */
+    ModifyIpv6AddressesAttribute(req, cb) {
+        let resp = new ModifyIpv6AddressesAttributeResponse();
+        this.request("ModifyIpv6AddressesAttribute", req, resp, cb);
     }
 
     /**
@@ -1048,6 +1289,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     RebootInstances(req, cb) {
         let resp = new RebootInstancesResponse();
         this.request("RebootInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（AssignIpv6Addresses）用于弹性网卡申请IPv6地址。
+     * @param {AssignIpv6AddressesRequest} req
+     * @param {function(string, AssignIpv6AddressesResponse):void} cb
+     * @public
+     */
+    AssignIpv6Addresses(req, cb) {
+        let resp = new AssignIpv6AddressesResponse();
+        this.request("AssignIpv6Addresses", req, resp, cb);
     }
 
     /**
@@ -1086,6 +1338,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 用于查询高可用虚拟IP（HAVIP）列表。
+     * @param {DescribeHaVipsRequest} req
+     * @param {function(string, DescribeHaVipsResponse):void} cb
+     * @public
+     */
+    DescribeHaVips(req, cb) {
+        let resp = new DescribeHaVipsResponse();
+        this.request("DescribeHaVips", req, resp, cb);
+    }
+
+    /**
      * 弹性网卡申请内网 IP
      * @param {AssignPrivateIpAddressesRequest} req
      * @param {function(string, AssignPrivateIpAddressesResponse):void} cb
@@ -1094,6 +1357,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     AssignPrivateIpAddresses(req, cb) {
         let resp = new AssignPrivateIpAddressesResponse();
         this.request("AssignPrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * 用于删除高可用虚拟IP（HAVIP）
+     * @param {DeleteHaVipRequest} req
+     * @param {function(string, DeleteHaVipResponse):void} cb
+     * @public
+     */
+    DeleteHaVip(req, cb) {
+        let resp = new DeleteHaVipResponse();
+        this.request("DeleteHaVip", req, resp, cb);
     }
 
     /**
@@ -1207,14 +1481,26 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 查询负载均衡实例列表。
-     * @param {DescribeLoadBalancersRequest} req
-     * @param {function(string, DescribeLoadBalancersResponse):void} cb
+     * 启用已禁用的子网路由。
+本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
+     * @param {EnableRoutesRequest} req
+     * @param {function(string, EnableRoutesResponse):void} cb
      * @public
      */
-    DescribeLoadBalancers(req, cb) {
-        let resp = new DescribeLoadBalancersResponse();
-        this.request("DescribeLoadBalancers", req, resp, cb);
+    EnableRoutes(req, cb) {
+        let resp = new EnableRoutesResponse();
+        this.request("EnableRoutes", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
+     * @param {CreateHaVipRequest} req
+     * @param {function(string, CreateHaVipResponse):void} cb
+     * @public
+     */
+    CreateHaVip(req, cb) {
+        let resp = new CreateHaVipResponse();
+        this.request("CreateHaVip", req, resp, cb);
     }
 
     /**
@@ -1240,6 +1526,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 修改路由表属性
+     * @param {ModifyRouteTableAttributeRequest} req
+     * @param {function(string, ModifyRouteTableAttributeResponse):void} cb
+     * @public
+     */
+    ModifyRouteTableAttribute(req, cb) {
+        let resp = new ModifyRouteTableAttributeResponse();
+        this.request("ModifyRouteTableAttribute", req, resp, cb);
+    }
+
+    /**
      * 修改监听器绑定的后端机器的转发权重。
      * @param {ModifyTargetWeightRequest} req
      * @param {function(string, ModifyTargetWeightResponse):void} cb
@@ -1262,6 +1559,28 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 创建路由策略
+     * @param {CreateRoutesRequest} req
+     * @param {function(string, CreateRoutesResponse):void} cb
+     * @public
+     */
+    CreateRoutes(req, cb) {
+        let resp = new CreateRoutesResponse();
+        this.request("CreateRoutes", req, resp, cb);
+    }
+
+    /**
+     * 用于修改高可用虚拟IP（HAVIP）属性
+     * @param {ModifyHaVipAttributeRequest} req
+     * @param {function(string, ModifyHaVipAttributeResponse):void} cb
+     * @public
+     */
+    ModifyHaVipAttribute(req, cb) {
+        let resp = new ModifyHaVipAttributeResponse();
+        this.request("ModifyHaVipAttribute", req, resp, cb);
+    }
+
+    /**
      * 释放一个或多个弹性公网IP（简称 EIP）。
 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
 只有状态为 UNBIND 的 EIP 才能进行释放操作。
@@ -1275,14 +1594,14 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 获取负载均衡后端服务的健康检查状态。
-     * @param {DescribeTargetHealthRequest} req
-     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * 修改模块IP直通。
+     * @param {ModifyModuleIpDirectRequest} req
+     * @param {function(string, ModifyModuleIpDirectResponse):void} cb
      * @public
      */
-    DescribeTargetHealth(req, cb) {
-        let resp = new DescribeTargetHealthResponse();
-        this.request("DescribeTargetHealth", req, resp, cb);
+    ModifyModuleIpDirect(req, cb) {
+        let resp = new ModifyModuleIpDirectResponse();
+        this.request("ModifyModuleIpDirect", req, resp, cb);
     }
 
     /**
@@ -1297,14 +1616,14 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 删除镜像
-     * @param {DeleteImageRequest} req
-     * @param {function(string, DeleteImageResponse):void} cb
+     * 修改私有网络（VPC）的相关属性
+     * @param {ModifyVpcAttributeRequest} req
+     * @param {function(string, ModifyVpcAttributeResponse):void} cb
      * @public
      */
-    DeleteImage(req, cb) {
-        let resp = new DeleteImageResponse();
-        this.request("DeleteImage", req, resp, cb);
+    ModifyVpcAttribute(req, cb) {
+        let resp = new ModifyVpcAttributeResponse();
+        this.request("ModifyVpcAttribute", req, resp, cb);
     }
 
     /**
@@ -1341,18 +1660,20 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 在 SecurityGroupPolicySet 参数中：
-
-Version 安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
-在创建出站和入站规则（Egress 和 Ingress）时：
-Protocol 字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
-CidrBlock 字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果 CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-Ipv6CidrBlock 字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-SecurityGroupId 字段允许输入与待修改的安全组位于相同项目中的安全组 ID，包括这个安全组 ID 本身，代表安全组下所有云服务器的内网 IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个 ID 所关联的云服务器变化而变化，不需要重新修改。
-Port 字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当 Protocol 字段是 TCP 或 UDP 时，Port 字段才被接受，即 Protocol 字段不是 TCP 或 UDP 时，Protocol 和 Port 排他关系，不允许同时输入，否则会接口报错。
-Action 字段只允许输入 ACCEPT 或 DROP。
-CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。
-一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
+     * <p>本接口（CreateSecurityGroupPolicies）用于创建安全组规则（SecurityGroupPolicy）。</p>
+<p>在 SecurityGroupPolicySet 参数中：</p>
+<ul>
+<li>Version 安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。</li>
+<li>在创建出站和入站规则（Egress 和 Ingress）时：<ul>
+<li>Protocol 字段支持输入TCP, UDP, ICMP, GRE, ALL。</li>
+<li>CidrBlock 字段允许输入符合cidr格式标准的任意字符串。在基础网络中，如果 CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。</li>
+<li>SecurityGroupId 字段允许输入与待修改的安全组位于相同项目中的安全组 ID，包括这个安全组 ID 本身，代表安全组下所有云服务器的内网 IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个 ID 所关联的云服务器变化而变化，不需要重新修改。</li>
+<li>Port 字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当 Protocol 字段是 TCP 或 UDP 时，Port 字段才被接受，即 Protocol 字段不是 TCP 或 UDP 时，Protocol 和 Port 排他关系，不允许同时输入，否则会接口报错。</li>
+<li>Action 字段只允许输入 ACCEPT 或 DROP。</li>
+<li>CidrBlock, SecurityGroupId, AddressTemplate 是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。</li>
+<li>一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。</li>
+</ul></li></ul>
+<p>默认接口请求频率限制：20次/秒。</p>
      * @param {CreateSecurityGroupPoliciesRequest} req
      * @param {function(string, CreateSecurityGroupPoliciesResponse):void} cb
      * @public
@@ -1363,14 +1684,14 @@ CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系
     }
 
     /**
-     * 修改私有网络（VPC）的相关属性
-     * @param {ModifyVpcAttributeRequest} req
-     * @param {function(string, ModifyVpcAttributeResponse):void} cb
+     * 删除镜像
+     * @param {DeleteImageRequest} req
+     * @param {function(string, DeleteImageResponse):void} cb
      * @public
      */
-    ModifyVpcAttribute(req, cb) {
-        let resp = new ModifyVpcAttributeResponse();
-        this.request("ModifyVpcAttribute", req, resp, cb);
+    DeleteImage(req, cb) {
+        let resp = new DeleteImageResponse();
+        this.request("DeleteImage", req, resp, cb);
     }
 
 

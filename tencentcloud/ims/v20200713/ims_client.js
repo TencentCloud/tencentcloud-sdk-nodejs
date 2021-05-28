@@ -16,19 +16,29 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeImageStatRequest = models.DescribeImageStatRequest;
+const TrendCount = models.TrendCount;
+const Location = models.Location;
+const LabelDetailItem = models.LabelDetailItem;
+const ImageModerationResponse = models.ImageModerationResponse;
 const ImageModerationRequest = models.ImageModerationRequest;
+const DescribeImsListResponse = models.DescribeImsListResponse;
+const OcrResult = models.OcrResult;
+const User = models.User;
+const LabelResult = models.LabelResult;
+const Device = models.Device;
+const ImsDetail = models.ImsDetail;
+const EvilCount = models.EvilCount;
 const ObjectResult = models.ObjectResult;
 const OcrTextDetail = models.OcrTextDetail;
 const ObjectDetail = models.ObjectDetail;
-const OcrResult = models.OcrResult;
-const LibDetail = models.LibDetail;
-const Location = models.Location;
-const LabelResult = models.LabelResult;
-const LabelDetailItem = models.LabelDetailItem;
-const Device = models.Device;
+const Filter = models.Filter;
+const DescribeImageStatResponse = models.DescribeImageStatResponse;
+const DescribeImsListRequest = models.DescribeImsListRequest;
 const LibResult = models.LibResult;
-const ImageModerationResponse = models.ImageModerationResponse;
-const User = models.User;
+const Overview = models.Overview;
+const LibDetail = models.LibDetail;
+const Filters = models.Filters;
 
 
 /**
@@ -42,7 +52,7 @@ class ImsClient extends AbstractClient {
     }
     
     /**
-     * 图片内容检测服务（Image Moderation, IM）能自动扫描图片，识别涉黄、涉恐、涉政、涉毒等有害内容，同时支持用户配置图片黑名单，打击自定义的违规图片。
+     * 图片内容检测服务（Image Moderation, IM）能自动扫描图片，识别可能令人反感、不安全或不适宜的内容，同时支持用户配置图片黑名单，打击自定义识别类型的图片。
 
 <div class="rno-api-explorer" style="margin-bottom:20px">
     <div class="rno-api-explorer-inner">
@@ -54,7 +64,7 @@ class ImsClient extends AbstractClient {
         <div class="rno-api-explorer-body">
             <div class="rno-api-explorer-cont">
                 <p>当前页面版本为图片内容安全2020版本，2020.11.3日前接入的图片内容安全接口为2019版本，在此时间前接入的用户可直接访问以下链接进行维护操作：<a href="https://cloud.tencent.com/document/product/1125/38206" target="_blank">图片内容安全-2019版本</a></p>
-                <p>2020版本相对2019版本进行了升级，支持更灵活的多场景业务策略配置以及更丰富的识别回调信息，满足不同业务的审核需求，建议按照2020版本接入指引进行接口升级；同时，2019版本也会持续维护直至用户不再使用为止。</p>
+                <p>2020版本相对2019版本进行了升级，支持更灵活的多场景业务策略配置以及更丰富的识别回调信息，满足不同业务的识别需求，建议按照2020版本接入指引进行接口升级；同时，2019版本也会持续维护直至用户不再使用为止。</p>
             </div>
         </div>
     </div>
@@ -66,6 +76,28 @@ class ImsClient extends AbstractClient {
     ImageModeration(req, cb) {
         let resp = new ImageModerationResponse();
         this.request("ImageModeration", req, resp, cb);
+    }
+
+    /**
+     * 图片机器审核明细
+     * @param {DescribeImsListRequest} req
+     * @param {function(string, DescribeImsListResponse):void} cb
+     * @public
+     */
+    DescribeImsList(req, cb) {
+        let resp = new DescribeImsListResponse();
+        this.request("DescribeImsList", req, resp, cb);
+    }
+
+    /**
+     * 控制台识别统计
+     * @param {DescribeImageStatRequest} req
+     * @param {function(string, DescribeImageStatResponse):void} cb
+     * @public
+     */
+    DescribeImageStat(req, cb) {
+        let resp = new DescribeImageStatResponse();
+        this.request("DescribeImageStat", req, resp, cb);
     }
 
 

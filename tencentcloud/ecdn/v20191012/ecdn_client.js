@@ -21,7 +21,7 @@ const DescribeEcdnStatisticsRequest = models.DescribeEcdnStatisticsRequest;
 const StartEcdnDomainRequest = models.StartEcdnDomainRequest;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
 const Https = models.Https;
-const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
+const CreateVerifyRecordResponse = models.CreateVerifyRecordResponse;
 const ResourceData = models.ResourceData;
 const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
@@ -36,6 +36,7 @@ const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const DescribeEcdnStatisticsResponse = models.DescribeEcdnStatisticsResponse;
 const DomainLogs = models.DomainLogs;
 const Hsts = models.Hsts;
+const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
 const DetailData = models.DetailData;
@@ -49,6 +50,7 @@ const DomainBriefInfo = models.DomainBriefInfo;
 const StartEcdnDomainResponse = models.StartEcdnDomainResponse;
 const DeleteEcdnDomainResponse = models.DeleteEcdnDomainResponse;
 const Tag = models.Tag;
+const WebSocket = models.WebSocket;
 const StopEcdnDomainResponse = models.StopEcdnDomainResponse;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
@@ -73,6 +75,7 @@ const DescribeEcdnDomainLogsRequest = models.DescribeEcdnDomainLogsRequest;
 const DomainDetailInfo = models.DomainDetailInfo;
 const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
+const CreateVerifyRecordRequest = models.CreateVerifyRecordRequest;
 
 
 /**
@@ -97,7 +100,9 @@ class EcdnClient extends AbstractClient {
     }
 
     /**
-     * DescribeIpStatus 用于查询域名所在加速平台的所有节点明细。
+     * DescribeIpStatus 用于查询域名所在加速平台的所有节点信息, 如果您的源站有白名单设置,可以通过本接口获取ECDN服务的节点IP进行加白, 本接口为内测接口,请联系腾讯云工程师开白。
+
+由于产品服务节点常有更新，对于源站开白的使用场景，请定期调用接口获取最新节点信息，若新增服务节点发布7日后您尚未更新加白导致回源失败等问题，ECDN侧不对此承担责任。
      * @param {DescribeIpStatusRequest} req
      * @param {function(string, DescribeIpStatusResponse):void} cb
      * @public
@@ -230,23 +235,14 @@ class EcdnClient extends AbstractClient {
     }
 
     /**
-     * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
-
-+ 流量（单位为 byte）
-+ 带宽（单位为 bps）
-+ 请求数（单位为 次）
-+ 响应时间（单位为ms）
-+ 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
-+ 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
-+ 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
-+ 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
-     * @param {DescribeEcdnStatisticsRequest} req
-     * @param {function(string, DescribeEcdnStatisticsResponse):void} cb
+     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+     * @param {CreateVerifyRecordRequest} req
+     * @param {function(string, CreateVerifyRecordResponse):void} cb
      * @public
      */
-    DescribeEcdnStatistics(req, cb) {
-        let resp = new DescribeEcdnStatisticsResponse();
-        this.request("DescribeEcdnStatistics", req, resp, cb);
+    CreateVerifyRecord(req, cb) {
+        let resp = new CreateVerifyRecordResponse();
+        this.request("CreateVerifyRecord", req, resp, cb);
     }
 
     /**
@@ -258,6 +254,25 @@ class EcdnClient extends AbstractClient {
     DescribeEcdnDomainStatistics(req, cb) {
         let resp = new DescribeEcdnDomainStatisticsResponse();
         this.request("DescribeEcdnDomainStatistics", req, resp, cb);
+    }
+
+    /**
+     * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
+
++ 流量（单位为 byte）
++ 带宽（单位为 bps）
++ 请求数（单位为 次）
++ 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
++ 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
++ 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
++ 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
+     * @param {DescribeEcdnStatisticsRequest} req
+     * @param {function(string, DescribeEcdnStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeEcdnStatistics(req, cb) {
+        let resp = new DescribeEcdnStatisticsResponse();
+        this.request("DescribeEcdnStatistics", req, resp, cb);
     }
 
 

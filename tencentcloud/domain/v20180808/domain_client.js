@@ -26,11 +26,13 @@ const CreateDomainBatchResponse = models.CreateDomainBatchResponse;
 const DomainBatchDetailSet = models.DomainBatchDetailSet;
 const ModifyDomainDNSBatchResponse = models.ModifyDomainDNSBatchResponse;
 const RenewDomainBatchRequest = models.RenewDomainBatchRequest;
-const TransferInDomainBatchResponse = models.TransferInDomainBatchResponse;
+const DescribeTemplateResponse = models.DescribeTemplateResponse;
 const UpdateProhibitionBatchResponse = models.UpdateProhibitionBatchResponse;
 const CheckDomainResponse = models.CheckDomainResponse;
 const RenewDomainBatchResponse = models.RenewDomainBatchResponse;
 const PriceInfo = models.PriceInfo;
+const DescribeTemplateRequest = models.DescribeTemplateRequest;
+const TransferInDomainBatchResponse = models.TransferInDomainBatchResponse;
 const BatchModifyDomainInfoResponse = models.BatchModifyDomainInfoResponse;
 const DescribeDomainBaseInfoResponse = models.DescribeDomainBaseInfoResponse;
 const DescribeTemplateListResponse = models.DescribeTemplateListResponse;
@@ -78,7 +80,7 @@ class DomainClient extends AbstractClient {
     }
     
     /**
-     * 本接口 (  DescribeDomainNameList ) 获取域名列表。
+     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
      * @param {DescribeDomainNameListRequest} req
      * @param {function(string, DescribeDomainNameListResponse):void} cb
@@ -90,7 +92,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( UploadImage ) 用于上传资质照片 。
+     * 本接口 ( UploadImage ) 用于证件图片上传 。
      * @param {UploadImageRequest} req
      * @param {function(string, UploadImageResponse):void} cb
      * @public
@@ -112,16 +114,14 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
-
-默认接口请求频率限制：20次/秒。
-     * @param {TransferProhibitionBatchRequest} req
-     * @param {function(string, TransferProhibitionBatchResponse):void} cb
+     * 本接口 (DescribeTemplate) 用于获取模板信息。
+     * @param {DescribeTemplateRequest} req
+     * @param {function(string, DescribeTemplateResponse):void} cb
      * @public
      */
-    TransferProhibitionBatch(req, cb) {
-        let resp = new TransferProhibitionBatchResponse();
-        this.request("TransferProhibitionBatch", req, resp, cb);
+    DescribeTemplate(req, cb) {
+        let resp = new DescribeTemplateResponse();
+        this.request("DescribeTemplate", req, resp, cb);
     }
 
     /**
@@ -136,9 +136,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( CreateDomainBatch ) 用于批量注册域名 。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 ( CreateDomainBatch ) 用于批量域名注册 。
      * @param {CreateDomainBatchRequest} req
      * @param {function(string, CreateDomainBatchResponse):void} cb
      * @public
@@ -149,9 +147,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 (  DescribeDomainBaseInfo) 获取域名基本信息。
 
      * @param {DescribeDomainBaseInfoRequest} req
      * @param {function(string, DescribeDomainBaseInfoResponse):void} cb
@@ -185,7 +181,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+     * 本接口 ( DeleteTemplate ) 用于删除信息模板。
      * @param {DeleteTemplateRequest} req
      * @param {function(string, DeleteTemplateResponse):void} cb
      * @public
@@ -196,7 +192,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DescribeTemplateList) 用于获取模板列表。
+     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
 
      * @param {DescribeTemplateListRequest} req
      * @param {function(string, DescribeTemplateListResponse):void} cb
@@ -210,8 +206,6 @@ class DomainClient extends AbstractClient {
     /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
 
-默认接口请求频率限制：20次/秒。
-
      * @param {RenewDomainBatchRequest} req
      * @param {function(string, RenewDomainBatchResponse):void} cb
      * @public
@@ -219,6 +213,17 @@ class DomainClient extends AbstractClient {
     RenewDomainBatch(req, cb) {
         let resp = new RenewDomainBatchResponse();
         this.request("RenewDomainBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+     * @param {TransferProhibitionBatchRequest} req
+     * @param {function(string, TransferProhibitionBatchResponse):void} cb
+     * @public
+     */
+    TransferProhibitionBatch(req, cb) {
+        let resp = new TransferProhibitionBatchResponse();
+        this.request("TransferProhibitionBatch", req, resp, cb);
     }
 
     /**
@@ -245,8 +250,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
-
-默认接口请求频率限制：20次/秒。
      * @param {CheckBatchStatusRequest} req
      * @param {function(string, CheckBatchStatusResponse):void} cb
      * @public
@@ -269,8 +272,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
-
-默认接口请求频率限制：20次/秒。
      * @param {TransferInDomainBatchRequest} req
      * @param {function(string, TransferInDomainBatchResponse):void} cb
      * @public
@@ -281,7 +282,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+     * 本接口 ( UpdateProhibitionBatch ) 用于批量禁止更新锁。
      * @param {UpdateProhibitionBatchRequest} req
      * @param {function(string, UpdateProhibitionBatchResponse):void} cb
      * @public
@@ -292,9 +293,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量修改域名DNS信息 。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
      * @param {ModifyDomainDNSBatchRequest} req
      * @param {function(string, ModifyDomainDNSBatchResponse):void} cb
      * @public
@@ -306,8 +305,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
-
-默认接口请求频率限制：20次/秒。
      * @param {SetDomainAutoRenewRequest} req
      * @param {function(string, SetDomainAutoRenewResponse):void} cb
      * @public

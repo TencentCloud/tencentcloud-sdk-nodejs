@@ -16,30 +16,35 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
 const KillOpsRequest = models.KillOpsRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
-const KillOpsResponse = models.KillOpsResponse;
+const DescribeSecurityGroupResponse = models.DescribeSecurityGroupResponse;
 const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
-const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
+const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const BackupDownloadTaskStatus = models.BackupDownloadTaskStatus;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
-const BackupFile = models.BackupFile;
+const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
 const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
 const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
-const SlowLogPattern = models.SlowLogPattern;
+const ReplicaSetInfo = models.ReplicaSetInfo;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
 const AssignProjectRequest = models.AssignProjectRequest;
-const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
+const SecurityGroupBound = models.SecurityGroupBound;
+const CreateBackupDownloadTaskResponse = models.CreateBackupDownloadTaskResponse;
 const ClientConnection = models.ClientConnection;
 const InquirePriceModifyDBInstanceSpecRequest = models.InquirePriceModifyDBInstanceSpecRequest;
 const BackupInfo = models.BackupInfo;
 const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
+const KillOpsResponse = models.KillOpsResponse;
 const SpecificationInfo = models.SpecificationInfo;
-const CurrentOp = models.CurrentOp;
+const CreateBackupDownloadTaskRequest = models.CreateBackupDownloadTaskRequest;
 const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
+const DescribeSlowLogsResponse = models.DescribeSlowLogsResponse;
 const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
 const SpecItem = models.SpecItem;
@@ -54,32 +59,38 @@ const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CreateDBInstanceResponse = models.CreateDBInstanceResponse;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const AssignProjectResponse = models.AssignProjectResponse;
+const BackupDownloadTask = models.BackupDownloadTask;
 const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
 const DescribeClientConnectionsRequest = models.DescribeClientConnectionsRequest;
 const DescribeDBInstanceDealResponse = models.DescribeDBInstanceDealResponse;
 const ModifyDBInstanceSpecResponse = models.ModifyDBInstanceSpecResponse;
-const ShardInfo = models.ShardInfo;
+const SecurityGroup = models.SecurityGroup;
 const OfflineIsolatedDBInstanceResponse = models.OfflineIsolatedDBInstanceResponse;
-const IsolateDBInstanceResponse = models.IsolateDBInstanceResponse;
+const DescribeBackupDownloadTaskRequest = models.DescribeBackupDownloadTaskRequest;
 const DescribeBackupAccessRequest = models.DescribeBackupAccessRequest;
 const RenameInstanceRequest = models.RenameInstanceRequest;
+const DescribeSecurityGroupRequest = models.DescribeSecurityGroupRequest;
 const RenewDBInstancesResponse = models.RenewDBInstancesResponse;
+const DescribeBackupDownloadTaskResponse = models.DescribeBackupDownloadTaskResponse;
 const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
 const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DBInstanceInfo = models.DBInstanceInfo;
-const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
-const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
+const CurrentOp = models.CurrentOp;
+const BackupFile = models.BackupFile;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
+const SlowLogPattern = models.SlowLogPattern;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
 const Operation = models.Operation;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
+const ShardInfo = models.ShardInfo;
 
 
 /**
@@ -137,6 +148,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * 查询实例绑定的安全组
+     * @param {DescribeSecurityGroupRequest} req
+     * @param {function(string, DescribeSecurityGroupResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroup(req, cb) {
+        let resp = new DescribeSecurityGroupResponse();
+        this.request("DescribeSecurityGroup", req, resp, cb);
+    }
+
+    /**
      * 在所有mongos上执行FlushRouterConfig命令
      * @param {FlushInstanceRouterConfigRequest} req
      * @param {function(string, FlushInstanceRouterConfigResponse):void} cb
@@ -170,7 +192,9 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeBackupAccess）用于获取备份文件的下载授权，具体的备份文件信息可通过查询实例备份列表（DescribeDBBackups）接口获取
+     * 备份下载功能已调整，此接口即将下线
+
+本接口（DescribeBackupAccess）用于获取备份文件的下载授权，具体的备份文件信息可通过查询实例备份列表（DescribeDBBackups）接口获取
      * @param {DescribeBackupAccessRequest} req
      * @param {function(string, DescribeBackupAccessResponse):void} cb
      * @public
@@ -222,6 +246,17 @@ class MongodbClient extends AbstractClient {
     RenewDBInstances(req, cb) {
         let resp = new RenewDBInstancesResponse();
         this.request("RenewDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口用来创建某个备份文件的下载任务
+     * @param {CreateBackupDownloadTaskRequest} req
+     * @param {function(string, CreateBackupDownloadTaskResponse):void} cb
+     * @public
+     */
+    CreateBackupDownloadTask(req, cb) {
+        let resp = new CreateBackupDownloadTaskResponse();
+        this.request("CreateBackupDownloadTask", req, resp, cb);
     }
 
     /**
@@ -299,6 +334,17 @@ class MongodbClient extends AbstractClient {
     DescribeSpecInfo(req, cb) {
         let resp = new DescribeSpecInfoResponse();
         this.request("DescribeSpecInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询备份下载任务信息
+     * @param {DescribeBackupDownloadTaskRequest} req
+     * @param {function(string, DescribeBackupDownloadTaskResponse):void} cb
+     * @public
+     */
+    DescribeBackupDownloadTask(req, cb) {
+        let resp = new DescribeBackupDownloadTaskResponse();
+        this.request("DescribeBackupDownloadTask", req, resp, cb);
     }
 
     /**

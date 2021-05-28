@@ -802,10 +802,13 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -839,6 +842,7 @@ class AiReviewTaskProhibitedAsrResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -1007,10 +1011,13 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1044,6 +1051,7 @@ class AiReviewTaskProhibitedOcrResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -1289,7 +1297,13 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1323,6 +1337,7 @@ class AiAnalysisTaskCoverResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -1778,13 +1793,19 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
         super();
 
         /**
-         * 任务状态，有 PROCESSING，SUCCESS �� FAIL 三种。
+         * 任务状态，有 PROCESSING，SUCCESS，FAIL 三种。
          * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -1818,6 +1839,7 @@ class AiReviewTaskPoliticalOcrResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -1846,7 +1868,11 @@ class ManageTaskRequest extends  AbstractModel {
 
         /**
          * 操作类型，取值范围：
-<li>Abort：终止任务。</li>
+<ul>
+<li>Abort：终止任务。使用说明：
+<ul><li>若 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为直播流处理任务（LiveStreamProcessTask），支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）或处理中（PROCESSING）的任务；</li>
+<li>否则，对于其他 [任务类型](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0)，只支持终止 [任务状态](/document/product/862/37614#3.-.E8.BE.93.E5.87.BA.E5.8F.82.E6.95.B0) 为等待中（WAITING）的任务。</li></ul>
+</li></ul>
          * @type {string || null}
          */
         this.OperationType = null;
@@ -2492,7 +2518,7 @@ class DeletePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * 人物 ID。
+         * 素材 ID。
          * @type {string || null}
          */
         this.PersonId = null;
@@ -3006,7 +3032,13 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -3040,6 +3072,7 @@ class AiRecognitionTaskFaceResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -3163,7 +3196,8 @@ class TerrorismImgReviewTemplateInfoForUpdate extends  AbstractModel {
 <li>banners：暴恐旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：暴恐人物；</li>
+<li>scenario：暴恐画面。</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -3435,35 +3469,35 @@ class CreatePersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * 人物名称，长度限制：20 个字符。
+         * 素材名称，长度限制：20 个字符。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 人物应用场景，可选值：
+         * 素材应用场景，可选值：
 1. Recognition：用于内容识别，等价于 Recognition.Face。
-2. Review：用于内容审核，等价于 Review.Face。
-3. All：用于内容识别、内容审核，等价于 1+2。
+2. Review：用于不适宜内容识别，等价于 Review.Face。
+3. All：包含以上全部，等价于 1+2。
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * 人物描述，长度限制：1024 个字符。
+         * 素材描述，长度限制：1024 个字符。
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
-注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
+         * 素材图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
+注意：图片必须是单人像五官较清晰的照片，像素不低于 200*200。
          * @type {Array.<string> || null}
          */
         this.FaceContents = null;
 
         /**
-         * 人物标签
+         * 素材标签
 <li>数组长度限制：20 个标签；</li>
 <li>单个标签长度限制：128 个字符。</li>
          * @type {Array.<string> || null}
@@ -4087,6 +4121,63 @@ class AiAnalysisTaskFrameTagOutput extends  AbstractModel {
 }
 
 /**
+ * RecognizeMediaForZhiXue请求参数结构体
+ * @class
+ */
+class RecognizeMediaForZhiXueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入媒体文件存储信息。
+         * @type {MediaInputInfo || null}
+         */
+        this.InputInfo = null;
+
+        /**
+         * 表情识别参数配置。默认开启。
+         * @type {ExpressionConfigInfo || null}
+         */
+        this.ExpressionConfig = null;
+
+        /**
+         * 动作识别参数配置。默认开启。
+         * @type {ActionConfigInfo || null}
+         */
+        this.ActionConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InputInfo) {
+            let obj = new MediaInputInfo();
+            obj.deserialize(params.InputInfo)
+            this.InputInfo = obj;
+        }
+
+        if (params.ExpressionConfig) {
+            let obj = new ExpressionConfigInfo();
+            obj.deserialize(params.ExpressionConfig)
+            this.ExpressionConfig = obj;
+        }
+
+        if (params.ActionConfig) {
+            let obj = new ActionConfigInfo();
+            obj.deserialize(params.ActionConfig)
+            this.ActionConfig = obj;
+        }
+
+    }
+}
+
+/**
  * 对视频转自适应码流任务结果类型
  * @class
  */
@@ -4101,7 +4192,13 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -4135,6 +4232,7 @@ class MediaProcessTaskAdaptiveDynamicStreamingResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -5049,13 +5147,13 @@ class CreateWordSamplesRequest extends  AbstractModel {
         /**
          * <b>关键词应用场景，可选值：</b>
 1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
-2. Recognition.Asr：通过语音识别技术，进行内容识别；
-3. Review.Ocr：通过光学字符识别技术，进行内容审核；
-4. Review.Asr：通过语音识别技术，进行内容审核；
+2. Recognition.Asr：通过音频识别技术，进行内容识别；
+3. Review.Ocr：通过光学字符识别技术，进行不适宜内容识别；
+4. Review.Asr：通过音频识别技术，进行不适宜内容识别；
 <b>可合并简写为：</b>
-5. Recognition：通过光学字符识别技术、语音识别技术，进行内容识别，等价于 1+2；
-6. Review：通过光学字符识别技术、语音识别技术，进行内容审核，等价于 3+4；
-7. All：通过光学字符识别技术、语音识别技术，进行内容识别、内容审核，等价于 1+2+3+4。
+5. Recognition：通过光学字符识别技术、音频识别技术，进行内容识别，等价于 1+2；
+6. Review：通过光学字符识别技术、音频识别技术，进行不适宜内容识别，等价于 3+4；
+7. All：通过光学字符识别技术、音频识别技术，进行内容识别、不适宜内容识别，等价于 1+2+3+4。
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -5244,10 +5342,13 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5281,6 +5382,7 @@ class AiReviewTaskTerrorismOcrResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -5314,7 +5416,13 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5348,6 +5456,7 @@ class AiRecognitionTaskOcrWordsResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -5744,10 +5853,13 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -5781,6 +5893,7 @@ class MediaProcessTaskImageSpriteResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -6041,6 +6154,15 @@ class ImageWatermarkInput extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束（默认值）。</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -6053,6 +6175,7 @@ class ImageWatermarkInput extends  AbstractModel {
         this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -6104,13 +6227,13 @@ class CreatePersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * 人物信息。
+         * 素材信息。
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * 处理失败的人脸信息。
+         * 处理失败的五官定位信息。
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
         this.FailFaceInfoSet = null;
@@ -6159,7 +6282,7 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
         super();
 
         /**
-         * 内容审核模板唯一标识。
+         * 内容智能识别模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
@@ -6635,7 +6758,13 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -6669,6 +6798,7 @@ class AiReviewTaskPornOcrResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -7154,13 +7284,13 @@ class ModifyWordSampleRequest extends  AbstractModel {
         /**
          * <b>关键词应用场景，可选值：</b>
 1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
-2. Recognition.Asr：通过语音识别技术，进行内容识别；
-3. Review.Ocr：通过光学字符识别技术，进行内容审核；
-4. Review.Asr：通过语音识别技术，进行内容审核；
+2. Recognition.Asr：通过音频识别技术，进行内容识别；
+3. Review.Ocr：通过光学字符识别技术，进行不适宜的内容识别；
+4. Review.Asr：通过音频识别技术，进行不适宜的音频识别；
 <b>可合并简写为：</b>
-5. Recognition：通过光学字符识别技术、语音识别技术，进行内容识别，等价于 1+2；
-6. Review：通过光学字符识别技术、语音识别技术，进行内容审核，等价于 3+4；
-7. All：通过光学字符识别技术、语音识别技术，进行内容识别、内容审核，等价于 1+2+3+4。
+5. Recognition：通过光学字符识别技术、音频识别技术，进行内容识别，等价于 1+2；
+6. Review：通过光学字符识别技术、音频识别技术，进行不适宜的内容识别，等价于 3+4；
+7. All：包含以上全部，等价于 1+2+3+4。
          * @type {Array.<string> || null}
          */
         this.Usages = null;
@@ -7207,10 +7337,13 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7244,6 +7377,7 @@ class MediaProcessTaskAnimatedGraphicResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -7277,7 +7411,13 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7311,6 +7451,7 @@ class AiAnalysisTaskTagResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -7513,7 +7654,13 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7547,6 +7694,7 @@ class AiRecognitionTaskOcrFullTextResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -7580,10 +7728,13 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7617,6 +7768,7 @@ class MediaProcessTaskSnapshotByTimeOffsetResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -7863,10 +8015,13 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -7900,6 +8055,7 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -8137,6 +8293,15 @@ class ImageWatermarkTemplate extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束。</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -8149,6 +8314,7 @@ class ImageWatermarkTemplate extends  AbstractModel {
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -8236,6 +8402,41 @@ class LiveStreamAsrWordsRecognitionResult extends  AbstractModel {
         this.StartPtsTime = 'StartPtsTime' in params ? params.StartPtsTime : null;
         this.EndPtsTime = 'EndPtsTime' in params ? params.EndPtsTime : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * RecognizeMediaForZhiXue返回参数结构体
+ * @class
+ */
+class RecognizeMediaForZhiXueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID，可以通过该 ID 查询任务状态和结果。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9169,7 +9370,7 @@ class DeleteContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容审核模板唯一标识。
+         * 内容智能识别模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
@@ -9328,6 +9529,15 @@ class RawImageWatermarkInput extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束（默认值）。</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -9345,6 +9555,7 @@ class RawImageWatermarkInput extends  AbstractModel {
         }
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -9531,6 +9742,7 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
 <li>terrorists：暴恐人物。</li>
+<li>scenario：暴恐画面。</li>
          * @type {string || null}
          */
         this.Label = null;
@@ -10040,7 +10252,13 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -10074,6 +10292,7 @@ class AiReviewTaskTerrorismResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -10394,37 +10613,37 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容审核模板唯一标识。
+         * 内容智能识别模板唯一标识。
          * @type {number || null}
          */
         this.Definition = null;
 
         /**
-         * 内容审核模板名称，长度限制：64 个字符。
+         * 内容智能识别模板名称，长度限制：64 个字符。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 内容审核模板描述信息，长度限制：256 个字符。
+         * 内容智能识别模板描述信息，长度限制：256 个字符。
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * 鉴黄控制参数。
+         * 令人反感的信息的控制参数。
          * @type {PornConfigureInfoForUpdate || null}
          */
         this.PornConfigure = null;
 
         /**
-         * 鉴恐控制参数。
+         * 令人不安全的信息的控制参数。
          * @type {TerrorismConfigureInfoForUpdate || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * 鉴政控制参数。
+         * 令人不适宜的控制参数。
          * @type {PoliticalConfigureInfoForUpdate || null}
          */
         this.PoliticalConfigure = null;
@@ -10439,7 +10658,7 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
         this.ProhibitedConfigure = null;
 
         /**
-         * 用户自定义内容审核控制参数。
+         * 用户自定义内容智能识别控制参数。
          * @type {UserDefineConfigureInfoForUpdate || null}
          */
         this.UserDefineConfigure = null;
@@ -10521,6 +10740,15 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
          */
         this.Height = null;
 
+        /**
+         * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束。</li>
+         * @type {string || null}
+         */
+        this.RepeatType = null;
+
     }
 
     /**
@@ -10533,6 +10761,7 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         this.ImageContent = 'ImageContent' in params ? params.ImageContent : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.Height = 'Height' in params ? params.Height : null;
+        this.RepeatType = 'RepeatType' in params ? params.RepeatType : null;
 
     }
 }
@@ -11045,6 +11274,36 @@ class AiReviewPoliticalAsrTaskInput extends  AbstractModel {
 }
 
 /**
+ * 动作识别参数配置
+ * @class
+ */
+class ActionConfigInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 动作识别任务开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * 智能标签结果信息
  * @class
  */
@@ -11274,7 +11533,13 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -11308,6 +11573,7 @@ class AiReviewTaskPoliticalAsrResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -11586,7 +11852,13 @@ class AiReviewTaskPornResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -11620,6 +11892,7 @@ class AiReviewTaskPornResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -12222,6 +12495,24 @@ class TranscodeTaskInput extends  AbstractModel {
         this.MosaicSet = null;
 
         /**
+         * 转码后的视频的起始时间偏移，单位：秒。
+<li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
+
+        /**
+         * 转码后视频的终止时间偏移，单位：秒。
+<li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
          * 转码后文件的目标存储，不填则继承上层的 OutputStorage 值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {TaskOutputStorage || null}
@@ -12287,6 +12578,8 @@ class TranscodeTaskInput extends  AbstractModel {
                 this.MosaicSet.push(obj);
             }
         }
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
 
         if (params.OutputStorage) {
             let obj = new TaskOutputStorage();
@@ -12562,10 +12855,13 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -12599,6 +12895,7 @@ class MediaProcessTaskSampleSnapshotResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -12822,7 +13119,7 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         super();
 
         /**
-         * 人物 ID。
+         * 素材 ID。
          * @type {string || null}
          */
         this.PersonId = null;
@@ -12840,16 +13137,16 @@ class ModifyPersonSampleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 人物应用场景，可选值：
+         * 素材应用场景，可选值：
 1. Recognition：用于内容识别，等价于 Recognition.Face。
-2. Review：用于内容审核，等价于 Review.Face。
-3. All：用于内容识别、内容审核，等价于 1+2。
+2. Review：用于不适宜的内容识别，等价于 Review.Face。
+3. All：用于内容识别、不适宜的内容识别，等价于 1+2。
          * @type {Array.<string> || null}
          */
         this.Usages = null;
 
         /**
-         * 人脸操作信息。
+         * 五官操作信息。
          * @type {AiSampleFaceOperation || null}
          */
         this.FaceOperationInfo = null;
@@ -13105,7 +13402,13 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -13139,6 +13442,7 @@ class AiAnalysisTaskFrameTagResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -13271,7 +13575,13 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -13305,6 +13615,7 @@ class AiRecognitionTaskAsrFullTextResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -14194,6 +14505,36 @@ class MediaMetaData extends  AbstractModel {
 }
 
 /**
+ * 表情识别参数配置
+ * @class
+ */
+class ExpressionConfigInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表情识别任务开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * 视频流配置参数
  * @class
  */
@@ -14303,31 +14644,31 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容审核模板名称，长度限制：64 个字符。
+         * 内容智能识别模板名称，长度限制：64 个字符。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 内容审核模板描述信息，长度限制：256 个字符。
+         * 内容智能识别模板描述信息，长度限制：256 个字符。
          * @type {string || null}
          */
         this.Comment = null;
 
         /**
-         * 鉴黄控制参数。
+         * 令人反感的信息的控制参数。
          * @type {PornConfigureInfo || null}
          */
         this.PornConfigure = null;
 
         /**
-         * 鉴恐控制参数。
+         * 令人不安全的信息的控制参数。
          * @type {TerrorismConfigureInfo || null}
          */
         this.TerrorismConfigure = null;
 
         /**
-         * 鉴政控制参数。
+         * 令人不适宜的信息的控制参数。
          * @type {PoliticalConfigureInfo || null}
          */
         this.PoliticalConfigure = null;
@@ -14342,7 +14683,7 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
         this.ProhibitedConfigure = null;
 
         /**
-         * 用户自定义内容审核控制参数。
+         * 用户自定义内容智能识别控制参数。
          * @type {UserDefineConfigureInfo || null}
          */
         this.UserDefineConfigure = null;
@@ -14401,7 +14742,7 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 内容审核模板唯一标识过滤条件，数组长度限制：50。
+         * 内容智能识别模板唯一标识过滤条件，数组长度限制：50。
          * @type {Array.<number> || null}
          */
         this.Definitions = null;
@@ -14632,7 +14973,13 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -14666,6 +15013,7 @@ class AiReviewTaskPoliticalResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -16748,24 +17096,24 @@ class DescribeWordSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * <b>关键词应用场景过滤条件，可选值：</b>
-1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
-2. Recognition.Asr：通过语音识别技术，进行内容识别；
-3. Review.Ocr：通过光学字符识别技术，进行内容审核；
-4. Review.Asr：通过语音识别技术，进行内容审核；
-<b>可合并简写为：</b>
-5. Recognition：通过光学字符识别技术、语音识别技术，进行内容识别，等价于 1+2；
-6. Review：通过光学字符识别技术、语音识别技术，进行内容审核，等价于 3+4；
-可多选，元素间关系为 or，即关键词的应用场景包含该字段集合中任意元素的记录，均符合该条件。
-         * @type {Array.<string> || null}
-         */
-        this.Usages = null;
-
-        /**
          * 关键词过滤条件，数组长度限制：100 个词。
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
+
+        /**
+         * <b>关键词应用场景过滤条件，可选值：</b>
+1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
+2. Recognition.Asr：通过音频识别技术，进行内容识别；
+3. Review.Ocr：通过光学字符识别技术，进行不适宜内容的识别；
+4. Review.Asr：通过音频识别技术，进行不适宜内容的识别；
+<b>可合并简写为：</b>
+5. Recognition：通过光学字符识别技术、音频识别技术，进行内容识别，等价于 1+2；
+6. Review：通过光学字符识别技术、音频识别技术，进行不适宜内容的识别，等价于 3+4；
+可多选，元素间关系为 or，即关键词的应用场景包含该字段集合中任意元素的记录，均符合该条件。
+         * @type {Array.<string> || null}
+         */
+        this.Usages = null;
 
         /**
          * 标签过滤条件，数组长度限制：20 个词。
@@ -16794,8 +17142,8 @@ class DescribeWordSamplesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Usages = 'Usages' in params ? params.Usages : null;
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Usages = 'Usages' in params ? params.Usages : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
@@ -17278,7 +17626,8 @@ class TerrorismImgReviewTemplateInfo extends  AbstractModel {
 <li>banners：暴恐旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：暴恐人物；</li>
+<li>scenario：暴恐画面。</li>
          * @type {Array.<string> || null}
          */
         this.LabelSet = null;
@@ -17680,13 +18029,13 @@ class ModifyPersonSampleResponse extends  AbstractModel {
         super();
 
         /**
-         * 人物信息。
+         * 素材信息。
          * @type {AiSamplePerson || null}
          */
         this.Person = null;
 
         /**
-         * 处理失败的人脸信息。
+         * 处理失败的五官信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<AiSampleFailFaceInfo> || null}
          */
@@ -17896,7 +18245,7 @@ class DescribePersonSamplesResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 人物信息。
+         * 素材信息。
          * @type {Array.<AiSamplePerson> || null}
          */
         this.PersonSet = null;
@@ -18169,7 +18518,13 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -18203,6 +18558,7 @@ class AiRecognitionTaskAsrWordsResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -18479,7 +18835,13 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -18513,6 +18875,7 @@ class AiReviewTaskPornAsrResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -19365,7 +19728,13 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 错误码，0：成功，其他值：失败。
+         * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+         * @type {string || null}
+         */
+        this.ErrCodeExt = null;
+
+        /**
+         * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
          * @type {number || null}
          */
         this.ErrCode = null;
@@ -19399,6 +19768,7 @@ class AiAnalysisTaskClassificationResult extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrCodeExt = 'ErrCodeExt' in params ? params.ErrCodeExt : null;
         this.ErrCode = 'ErrCode' in params ? params.ErrCode : null;
         this.Message = 'Message' in params ? params.Message : null;
 
@@ -19501,30 +19871,30 @@ class DescribePersonSamplesRequest extends  AbstractModel {
         super();
 
         /**
-         * 拉取的人物类型，可选值：
-<li>UserDefine：用户自定义人物库；</li>
-<li>Default：系统默认人物库。</li>
+         * 拉取的素材类型，可选值：
+<li>UserDefine：用户自定义素材库；</li>
+<li>Default：系统默认素材库。</li>
 
-默认值：UserDefine，拉取用户自定义人物库人物。
-说明：如果是拉取系统默认人物库，只能使用人物名字或者人物 ID + 人物名字的方式进行拉取，且人脸图片只返回一张。
+默认值：UserDefine，拉取用户自定义素材库素材。
+说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且人脸图片只返回一张。
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 人物 ID，数组长度限制：100。
+         * 素材 ID，数组长度限制：100。
          * @type {Array.<string> || null}
          */
         this.PersonIds = null;
 
         /**
-         * 人物名称，数组长度限制：20。
+         * 素材名称，数组长度限制：20。
          * @type {Array.<string> || null}
          */
         this.Names = null;
 
         /**
-         * 人物标签，数组长度限制：20。
+         * 素材标签，数组长度限制：20。
          * @type {Array.<string> || null}
          */
         this.Tags = null;
@@ -20068,6 +20438,7 @@ module.exports = {
     UserDefineAsrTextReviewTemplateInfo: UserDefineAsrTextReviewTemplateInfo,
     DescribeWordSamplesResponse: DescribeWordSamplesResponse,
     AiAnalysisTaskFrameTagOutput: AiAnalysisTaskFrameTagOutput,
+    RecognizeMediaForZhiXueRequest: RecognizeMediaForZhiXueRequest,
     MediaProcessTaskAdaptiveDynamicStreamingResult: MediaProcessTaskAdaptiveDynamicStreamingResult,
     OcrWordsConfigureInfoForUpdate: OcrWordsConfigureInfoForUpdate,
     WatermarkTemplate: WatermarkTemplate,
@@ -20147,6 +20518,7 @@ module.exports = {
     ImageWatermarkTemplate: ImageWatermarkTemplate,
     AsrWordsConfigureInfo: AsrWordsConfigureInfo,
     LiveStreamAsrWordsRecognitionResult: LiveStreamAsrWordsRecognitionResult,
+    RecognizeMediaForZhiXueResponse: RecognizeMediaForZhiXueResponse,
     AiSamplePerson: AiSamplePerson,
     DescribeWorkflowsResponse: DescribeWorkflowsResponse,
     AsrWordsConfigureInfoForUpdate: AsrWordsConfigureInfoForUpdate,
@@ -20198,6 +20570,7 @@ module.exports = {
     CreateSampleSnapshotTemplateResponse: CreateSampleSnapshotTemplateResponse,
     ProhibitedAsrReviewTemplateInfo: ProhibitedAsrReviewTemplateInfo,
     AiReviewPoliticalAsrTaskInput: AiReviewPoliticalAsrTaskInput,
+    ActionConfigInfo: ActionConfigInfo,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
     TranscodeTemplate: TranscodeTemplate,
     PornOcrReviewTemplateInfo: PornOcrReviewTemplateInfo,
@@ -20251,6 +20624,7 @@ module.exports = {
     LiveStreamOcrFullTextRecognitionResult: LiveStreamOcrFullTextRecognitionResult,
     ModifyTranscodeTemplateResponse: ModifyTranscodeTemplateResponse,
     MediaMetaData: MediaMetaData,
+    ExpressionConfigInfo: ExpressionConfigInfo,
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
     DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,

@@ -463,54 +463,42 @@ class ModifyInstancesChargeTypeResponse extends  AbstractModel {
 }
 
 /**
- * CreateDisasterRecoverGroup返回参数结构体
+ * 配额详情
  * @class
  */
-class CreateDisasterRecoverGroupResponse extends  AbstractModel {
+class AccountQuota extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分散置放群组ID列表。
-         * @type {string || null}
+         * 后付费配额列表
+         * @type {Array.<PostPaidQuota> || null}
          */
-        this.DisasterRecoverGroupId = null;
+        this.PostPaidQuotaSet = null;
 
         /**
-         * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
-         * @type {string || null}
+         * 预付费配额列表
+         * @type {Array.<PrePaidQuota> || null}
          */
-        this.Type = null;
+        this.PrePaidQuotaSet = null;
 
         /**
-         * 分散置放群组名称，长度1-60个字符，支持中、英文。
-         * @type {string || null}
+         * spot配额列表
+         * @type {Array.<SpotPaidQuota> || null}
          */
-        this.Name = null;
+        this.SpotPaidQuotaSet = null;
 
         /**
-         * 置放群组内可容纳的云服务器数量。
-         * @type {number || null}
+         * 镜像配额列表
+         * @type {Array.<ImageQuota> || null}
          */
-        this.CvmQuotaTotal = null;
+        this.ImageQuotaSet = null;
 
         /**
-         * 置放群组内已有的云服务器数量。
-         * @type {number || null}
+         * 置放群组配额列表
+         * @type {Array.<DisasterRecoverGroupQuota> || null}
          */
-        this.CurrentNum = null;
-
-        /**
-         * 置放群组创建时间。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.DisasterRecoverGroupQuotaSet = null;
 
     }
 
@@ -521,13 +509,51 @@ class CreateDisasterRecoverGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.CvmQuotaTotal = 'CvmQuotaTotal' in params ? params.CvmQuotaTotal : null;
-        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.PostPaidQuotaSet) {
+            this.PostPaidQuotaSet = new Array();
+            for (let z in params.PostPaidQuotaSet) {
+                let obj = new PostPaidQuota();
+                obj.deserialize(params.PostPaidQuotaSet[z]);
+                this.PostPaidQuotaSet.push(obj);
+            }
+        }
+
+        if (params.PrePaidQuotaSet) {
+            this.PrePaidQuotaSet = new Array();
+            for (let z in params.PrePaidQuotaSet) {
+                let obj = new PrePaidQuota();
+                obj.deserialize(params.PrePaidQuotaSet[z]);
+                this.PrePaidQuotaSet.push(obj);
+            }
+        }
+
+        if (params.SpotPaidQuotaSet) {
+            this.SpotPaidQuotaSet = new Array();
+            for (let z in params.SpotPaidQuotaSet) {
+                let obj = new SpotPaidQuota();
+                obj.deserialize(params.SpotPaidQuotaSet[z]);
+                this.SpotPaidQuotaSet.push(obj);
+            }
+        }
+
+        if (params.ImageQuotaSet) {
+            this.ImageQuotaSet = new Array();
+            for (let z in params.ImageQuotaSet) {
+                let obj = new ImageQuota();
+                obj.deserialize(params.ImageQuotaSet[z]);
+                this.ImageQuotaSet.push(obj);
+            }
+        }
+
+        if (params.DisasterRecoverGroupQuotaSet) {
+            this.DisasterRecoverGroupQuotaSet = new Array();
+            for (let z in params.DisasterRecoverGroupQuotaSet) {
+                let obj = new DisasterRecoverGroupQuota();
+                obj.deserialize(params.DisasterRecoverGroupQuotaSet[z]);
+                this.DisasterRecoverGroupQuotaSet.push(obj);
+            }
+        }
 
     }
 }
@@ -645,6 +671,55 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 后付费实例配额
+ * @class
+ */
+class PostPaidQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 累计已使用配额
+         * @type {number || null}
+         */
+        this.UsedQuota = null;
+
+        /**
+         * 剩余配额
+         * @type {number || null}
+         */
+        this.RemainingQuota = null;
+
+        /**
+         * 总配额
+         * @type {number || null}
+         */
+        this.TotalQuota = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedQuota = 'UsedQuota' in params ? params.UsedQuota : null;
+        this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
+        this.TotalQuota = 'TotalQuota' in params ? params.TotalQuota : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
 
     }
 }
@@ -972,6 +1047,12 @@ class SystemDisk extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * 所属的独享集群ID。
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -984,6 +1065,7 @@ class SystemDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -1391,7 +1473,7 @@ class RebootInstancesRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 是否在正常重启失败后选择强制重启实例。取值范围：<br><li>TRUE：表示在正常重启失败后进行强制重启<br><li>FALSE：表示在正常重启失败后不进行强制重启<br><br>默认取值：FALSE。
+         * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常重启失败后选择强制重启实例。取值范围：<br><li>TRUE：表示在正常重启失败后进行强制重启<br><li>FALSE：表示在正常重启失败后不进行强制重启<br><br>默认取值：FALSE。
          * @type {boolean || null}
          */
         this.ForceReboot = null;
@@ -1558,10 +1640,12 @@ class ZoneInfo extends  AbstractModel {
 全网可用区名称如下：
 <li> ap-chongqing-1 </li>
 <li> ap-seoul-1 </li>
+<li> ap-seoul-2 </li>
 <li> ap-chengdu-1 </li>
 <li> ap-chengdu-2 </li>
 <li> ap-hongkong-1 </li>
 <li> ap-hongkong-2 </li>
+<li> ap-hongkong-3 </li>
 <li> ap-shenzhen-fsi-1 </li>
 <li> ap-shenzhen-fsi-2 </li>
 <li> ap-shenzhen-fsi-3 </li>
@@ -1571,8 +1655,10 @@ class ZoneInfo extends  AbstractModel {
 <li> ap-guangzhou-4 </li>
 <li> ap-guangzhou-6 </li>
 <li> ap-tokyo-1 </li>
+<li> ap-tokyo-2 </li>
 <li> ap-singapore-1 </li>
 <li> ap-singapore-2 </li>
+<li> ap-singapore-3 </li>
 <li> ap-shanghai-fsi-1 </li>
 <li> ap-shanghai-fsi-2 </li>
 <li> ap-shanghai-fsi-3 </li>
@@ -1590,6 +1676,8 @@ class ZoneInfo extends  AbstractModel {
 <li> ap-beijing-3 </li>
 <li> ap-beijing-4 </li>
 <li> ap-beijing-5 </li>
+<li> ap-beijing-6 </li>
+<li> ap-beijing-7 </li>
 <li> na-siliconvalley-1 </li>
 <li> na-siliconvalley-2 </li>
 <li> eu-frankfurt-1 </li>
@@ -1598,6 +1686,7 @@ class ZoneInfo extends  AbstractModel {
 <li> na-ashburn-2 </li>
 <li> ap-nanjing-1 </li>
 <li> ap-nanjing-2 </li>
+<li> ap-jakarta-1 </li>
          * @type {string || null}
          */
         this.Zone = null;
@@ -1963,34 +2052,6 @@ class DescribeInstancesOperationLimitRequest extends  AbstractModel {
 }
 
 /**
- * DescribeSpotTypeConfig返回参数结构体
- * @class
- */
-class DescribeSpotTypeConfigResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * ModifyInstancesChargeType请求参数结构体
  * @class
  */
@@ -2270,18 +2331,42 @@ class ReservedInstancePrice extends  AbstractModel {
 }
 
 /**
- * ResetInstancesInternetMaxBandwidth返回参数结构体
+ * 置放群组配置数据
  * @class
  */
-class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
+class DisasterRecoverGroupQuota extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 可创建置放群组数量的上限。
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.GroupQuota = null;
+
+        /**
+         * 当前用户已经创建的置放群组数量。
+         * @type {number || null}
+         */
+        this.CurrentNum = null;
+
+        /**
+         * 物理机类型容灾组内实例的配额数。
+         * @type {number || null}
+         */
+        this.CvmInHostGroupQuota = null;
+
+        /**
+         * 交换机类型容灾组内实例的配额数。
+         * @type {number || null}
+         */
+        this.CvmInSwitchGroupQuota = null;
+
+        /**
+         * 机架类型容灾组内实例的配额数。
+         * @type {number || null}
+         */
+        this.CvmInRackGroupQuota = null;
 
     }
 
@@ -2292,7 +2377,11 @@ class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.GroupQuota = 'GroupQuota' in params ? params.GroupQuota : null;
+        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
+        this.CvmInHostGroupQuota = 'CvmInHostGroupQuota' in params ? params.CvmInHostGroupQuota : null;
+        this.CvmInSwitchGroupQuota = 'CvmInSwitchGroupQuota' in params ? params.CvmInSwitchGroupQuota : null;
+        this.CvmInRackGroupQuota = 'CvmInRackGroupQuota' in params ? params.CvmInRackGroupQuota : null;
 
     }
 }
@@ -2950,6 +3039,83 @@ class DescribeImageQuotaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * 竞价实例配额
+ * @class
+ */
+class SpotPaidQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已使用配额，单位：vCPU核心数
+         * @type {number || null}
+         */
+        this.UsedQuota = null;
+
+        /**
+         * 剩余配额，单位：vCPU核心数
+         * @type {number || null}
+         */
+        this.RemainingQuota = null;
+
+        /**
+         * 总配额，单位：vCPU核心数
+         * @type {number || null}
+         */
+        this.TotalQuota = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedQuota = 'UsedQuota' in params ? params.UsedQuota : null;
+        this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
+        this.TotalQuota = 'TotalQuota' in params ? params.TotalQuota : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * ResetInstancesInternetMaxBandwidth返回参数结构体
+ * @class
+ */
+class ResetInstancesInternetMaxBandwidthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3857,6 +4023,62 @@ class InquirePricePurchaseReservedInstancesOfferingRequest extends  AbstractMode
 }
 
 /**
+ * 预付费实例配额
+ * @class
+ */
+class PrePaidQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当月已使用配额
+         * @type {number || null}
+         */
+        this.UsedQuota = null;
+
+        /**
+         * 单次购买最大数量
+         * @type {number || null}
+         */
+        this.OnceQuota = null;
+
+        /**
+         * 剩余配额
+         * @type {number || null}
+         */
+        this.RemainingQuota = null;
+
+        /**
+         * 总配额
+         * @type {number || null}
+         */
+        this.TotalQuota = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedQuota = 'UsedQuota' in params ? params.UsedQuota : null;
+        this.OnceQuota = 'OnceQuota' in params ? params.OnceQuota : null;
+        this.RemainingQuota = 'RemainingQuota' in params ? params.RemainingQuota : null;
+        this.TotalQuota = 'TotalQuota' in params ? params.TotalQuota : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
  * 描述了数据盘的信息
  * @class
  */
@@ -3871,7 +4093,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3920,6 +4142,20 @@ class DataDisk extends  AbstractModel {
          */
         this.KmsKeyId = null;
 
+        /**
+         * 云硬盘性能，单位：MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
+        /**
+         * 所属的独享集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -3936,6 +4172,8 @@ class DataDisk extends  AbstractModel {
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -4993,6 +5231,41 @@ class ReservedInstanceFamilyItem extends  AbstractModel {
 }
 
 /**
+ * 镜像配额
+ * @class
+ */
+class ImageQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已使用配额
+         * @type {number || null}
+         */
+        this.UsedQuota = null;
+
+        /**
+         * 总配额
+         * @type {number || null}
+         */
+        this.TotalQuota = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UsedQuota = 'UsedQuota' in params ? params.UsedQuota : null;
+        this.TotalQuota = 'TotalQuota' in params ? params.TotalQuota : null;
+
+    }
+}
+
+/**
  * DescribeDisasterRecoverGroups返回参数结构体
  * @class
  */
@@ -5179,7 +5452,7 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * 标签绑定的资源类型，当前支持类型："instance"和"host"
+         * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -5761,18 +6034,6 @@ class RunInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
-         * @type {Placement || null}
-         */
-        this.Placement = null;
-
-        /**
-         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
-         * @type {string || null}
-         */
-        this.ImageId = null;
-
-        /**
          * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
          * @type {string || null}
          */
@@ -5785,11 +6046,23 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceChargePrepaid = null;
 
         /**
+         * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
          * 实例机型。不同实例机型指定了不同的资源规格。
 <br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
          * @type {string || null}
          */
         this.InstanceType = null;
+
+        /**
+         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
+         * @type {string || null}
+         */
+        this.ImageId = null;
 
         /**
          * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
@@ -5870,7 +6143,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。
+         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的云服务器、云硬盘实例。
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
@@ -5918,13 +6191,6 @@ false（默认）：发送正常请求，通过检查后直接创建实例
         if (!params) {
             return;
         }
-
-        if (params.Placement) {
-            let obj = new Placement();
-            obj.deserialize(params.Placement)
-            this.Placement = obj;
-        }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.InstanceChargeType = 'InstanceChargeType' in params ? params.InstanceChargeType : null;
 
         if (params.InstanceChargePrepaid) {
@@ -5932,7 +6198,14 @@ false（默认）：发送正常请求，通过检查后直接创建实例
             obj.deserialize(params.InstanceChargePrepaid)
             this.InstanceChargePrepaid = obj;
         }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
 
         if (params.SystemDisk) {
             let obj = new SystemDisk();
@@ -6351,6 +6624,46 @@ class DescribeInternetChargeTypeConfigsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 配额详情概览
+ * @class
+ */
+class AccountQuotaOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 配额数据
+         * @type {AccountQuota || null}
+         */
+        this.AccountQuota = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.AccountQuota) {
+            let obj = new AccountQuota();
+            obj.deserialize(params.AccountQuota)
+            this.AccountQuota = obj;
+        }
 
     }
 }
@@ -7082,6 +7395,45 @@ class DescribeHostsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAccountQuota请求参数结构体
+ * @class
+ */
+class DescribeAccountQuotaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>quota-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>配额类型</strong>】进行过滤。配额类型形如：PostPaidQuotaSet。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：PostPaidQuotaSet,DisasterRecoverGroupQuotaSet,PrePaidQuotaSet,SpotPaidQuotaSet</p>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyInstancesRenewFlag返回参数结构体
  * @class
  */
@@ -7559,12 +7911,54 @@ class RebootInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSpotTypeConfig请求参数结构体
+ * CreateDisasterRecoverGroup返回参数结构体
  * @class
  */
-class DescribeSpotTypeConfigRequest extends  AbstractModel {
+class CreateDisasterRecoverGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 分散置放群组ID列表。
+         * @type {string || null}
+         */
+        this.DisasterRecoverGroupId = null;
+
+        /**
+         * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 分散置放群组名称，长度1-60个字符，支持中、英文。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 置放群组内可容纳的云服务器数量。
+         * @type {number || null}
+         */
+        this.CvmQuotaTotal = null;
+
+        /**
+         * 置放群组内已有的云服务器数量。
+         * @type {number || null}
+         */
+        this.CurrentNum = null;
+
+        /**
+         * 置放群组创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -7575,6 +7969,13 @@ class DescribeSpotTypeConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CvmQuotaTotal = 'CvmQuotaTotal' in params ? params.CvmQuotaTotal : null;
+        this.CurrentNum = 'CurrentNum' in params ? params.CurrentNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7877,6 +8278,8 @@ class DescribeInstancesRequest extends  AbstractModel {
 <p style="padding-left: 30px;">按照【<strong>实例主网卡的内网IP</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>public-ip-address</strong></li>
 <p style="padding-left: 30px;">按照【<strong>实例主网卡的公网IP</strong>】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>ipv6-address</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例的IPv6地址</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag-key</strong></li>
 <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag-value</strong></li>
@@ -8495,6 +8898,53 @@ class RenewInstancesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAccountQuota返回参数结构体
+ * @class
+ */
+class DescribeAccountQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户appid
+         * @type {string || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 配额数据
+         * @type {AccountQuotaOverview || null}
+         */
+        this.AccountQuotaOverview = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+
+        if (params.AccountQuotaOverview) {
+            let obj = new AccountQuotaOverview();
+            obj.deserialize(params.AccountQuotaOverview)
+            this.AccountQuotaOverview = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -9180,10 +9630,11 @@ module.exports = {
     DeleteKeyPairsResponse: DeleteKeyPairsResponse,
     TerminateInstancesResponse: TerminateInstancesResponse,
     ModifyInstancesChargeTypeResponse: ModifyInstancesChargeTypeResponse,
-    CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
+    AccountQuota: AccountQuota,
     InquiryPriceResetInstancesInternetMaxBandwidthResponse: InquiryPriceResetInstancesInternetMaxBandwidthResponse,
     ModifyKeyPairAttributeRequest: ModifyKeyPairAttributeRequest,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
+    PostPaidQuota: PostPaidQuota,
     ResetInstancesTypeRequest: ResetInstancesTypeRequest,
     InquiryPriceResetInstanceRequest: InquiryPriceResetInstanceRequest,
     ModifyImageSharePermissionResponse: ModifyImageSharePermissionResponse,
@@ -9211,7 +9662,6 @@ module.exports = {
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
     InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     DescribeInstancesOperationLimitRequest: DescribeInstancesOperationLimitRequest,
-    DescribeSpotTypeConfigResponse: DescribeSpotTypeConfigResponse,
     ModifyInstancesChargeTypeRequest: ModifyInstancesChargeTypeRequest,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
@@ -9219,7 +9669,7 @@ module.exports = {
     InquiryPriceResizeInstanceDisksRequest: InquiryPriceResizeInstanceDisksRequest,
     RunInstancesResponse: RunInstancesResponse,
     ReservedInstancePrice: ReservedInstancePrice,
-    ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
+    DisasterRecoverGroupQuota: DisasterRecoverGroupQuota,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     InquiryPriceModifyInstancesChargeTypeResponse: InquiryPriceModifyInstancesChargeTypeResponse,
     DescribeInstancesOperationLimitResponse: DescribeInstancesOperationLimitResponse,
@@ -9238,6 +9688,8 @@ module.exports = {
     SyncImagesRequest: SyncImagesRequest,
     DisassociateInstancesKeyPairsRequest: DisassociateInstancesKeyPairsRequest,
     DescribeImageQuotaRequest: DescribeImageQuotaRequest,
+    SpotPaidQuota: SpotPaidQuota,
+    ResetInstancesInternetMaxBandwidthResponse: ResetInstancesInternetMaxBandwidthResponse,
     DescribeInstanceFamilyConfigsResponse: DescribeInstanceFamilyConfigsResponse,
     CreateImageResponse: CreateImageResponse,
     StopInstancesResponse: StopInstancesResponse,
@@ -9253,6 +9705,7 @@ module.exports = {
     DescribeReservedInstancesResponse: DescribeReservedInstancesResponse,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     InquirePricePurchaseReservedInstancesOfferingRequest: InquirePricePurchaseReservedInstancesOfferingRequest,
+    PrePaidQuota: PrePaidQuota,
     DataDisk: DataDisk,
     DescribeKeyPairsRequest: DescribeKeyPairsRequest,
     OperationCountLimit: OperationCountLimit,
@@ -9268,6 +9721,7 @@ module.exports = {
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
     ReservedInstanceFamilyItem: ReservedInstanceFamilyItem,
+    ImageQuota: ImageQuota,
     DescribeDisasterRecoverGroupsResponse: DescribeDisasterRecoverGroupsResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ActionTimer: ActionTimer,
@@ -9295,6 +9749,7 @@ module.exports = {
     ModifyInstancesVpcAttributeRequest: ModifyInstancesVpcAttributeRequest,
     DescribeReservedInstancesRequest: DescribeReservedInstancesRequest,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
+    AccountQuotaOverview: AccountQuotaOverview,
     DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     ItemPrice: ItemPrice,
@@ -9303,6 +9758,7 @@ module.exports = {
     ReservedInstanceTypeItem: ReservedInstanceTypeItem,
     InquiryPriceRunInstancesResponse: InquiryPriceRunInstancesResponse,
     DescribeHostsRequest: DescribeHostsRequest,
+    DescribeAccountQuotaRequest: DescribeAccountQuotaRequest,
     ModifyInstancesRenewFlagResponse: ModifyInstancesRenewFlagResponse,
     DescribeInstancesStatusRequest: DescribeInstancesStatusRequest,
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
@@ -9314,7 +9770,7 @@ module.exports = {
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
     ReservedInstancePriceItem: ReservedInstancePriceItem,
     RebootInstancesResponse: RebootInstancesResponse,
-    DescribeSpotTypeConfigRequest: DescribeSpotTypeConfigRequest,
+    CreateDisasterRecoverGroupResponse: CreateDisasterRecoverGroupResponse,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
     ReservedInstancesOffering: ReservedInstancesOffering,
     OsVersion: OsVersion,
@@ -9334,6 +9790,7 @@ module.exports = {
     KeyPair: KeyPair,
     DescribeReservedInstancesOfferingsResponse: DescribeReservedInstancesOfferingsResponse,
     RenewInstancesResponse: RenewInstancesResponse,
+    DescribeAccountQuotaResponse: DescribeAccountQuotaResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
     VirtualPrivateCloud: VirtualPrivateCloud,

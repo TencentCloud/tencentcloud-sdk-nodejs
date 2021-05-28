@@ -26,6 +26,7 @@ const TaskInfoDetail = models.TaskInfoDetail;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const UpgradeInstanceVersionResponse = models.UpgradeInstanceVersionResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
+const DescribeInstanceZoneInfoRequest = models.DescribeInstanceZoneInfoRequest;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
 const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
@@ -41,7 +42,7 @@ const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse
 const RedisNodeInfo = models.RedisNodeInfo;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const InstanceEnumParam = models.InstanceEnumParam;
+const DescribeInstanceZoneInfoResponse = models.DescribeInstanceZoneInfoResponse;
 const Account = models.Account;
 const InstanceProxySlowlogDetail = models.InstanceProxySlowlogDetail;
 const SecurityGroupsInboundAndOutbound = models.SecurityGroupsInboundAndOutbound;
@@ -50,10 +51,12 @@ const ClearInstanceRequest = models.ClearInstanceRequest;
 const RegionConf = models.RegionConf;
 const BigKeyInfo = models.BigKeyInfo;
 const RenewInstanceRequest = models.RenewInstanceRequest;
+const UpgradeVersionToMultiAvailabilityZonesResponse = models.UpgradeVersionToMultiAvailabilityZonesResponse;
 const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
 const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
 const InstanceMultiParam = models.InstanceMultiParam;
 const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
+const RedisNode = models.RedisNode;
 const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
@@ -70,6 +73,7 @@ const SourceInfo = models.SourceInfo;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
 const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
+const DescribeTendisSlowLogResponse = models.DescribeTendisSlowLogResponse;
 const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
 const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
 const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
@@ -84,6 +88,7 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTookDistResponse;
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const InstanceIntegerParam = models.InstanceIntegerParam;
+const UpgradeVersionToMultiAvailabilityZonesRequest = models.UpgradeVersionToMultiAvailabilityZonesRequest;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
 const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
 const InstanceTextParam = models.InstanceTextParam;
@@ -119,7 +124,9 @@ const ModifyConnectionConfigRequest = models.ModifyConnectionConfigRequest;
 const InstanceNode = models.InstanceNode;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
+const ResourceTag = models.ResourceTag;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const ReplicaGroup = models.ReplicaGroup;
 const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
 const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
 const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
@@ -149,6 +156,7 @@ const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
+const DescribeTendisSlowLogRequest = models.DescribeTendisSlowLogRequest;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
 const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
@@ -161,6 +169,7 @@ const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const StartupInstanceRequest = models.StartupInstanceRequest;
 const HotKeyInfo = models.HotKeyInfo;
+const InstanceEnumParam = models.InstanceEnumParam;
 const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
 const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
 const SecurityGroupDetail = models.SecurityGroupDetail;
@@ -168,6 +177,7 @@ const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceRe
 const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
 const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
 const InstanceClusterShard = models.InstanceClusterShard;
+const TendisSlowLogDetail = models.TendisSlowLogDetail;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
 const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
@@ -564,6 +574,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * 查询Tendis慢查询
+     * @param {DescribeTendisSlowLogRequest} req
+     * @param {function(string, DescribeTendisSlowLogResponse):void} cb
+     * @public
+     */
+    DescribeTendisSlowLog(req, cb) {
+        let resp = new DescribeTendisSlowLogResponse();
+        this.request("DescribeTendisSlowLog", req, resp, cb);
+    }
+
+    /**
      * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定多个指定实例。
      * @param {AssociateSecurityGroupsRequest} req
      * @param {function(string, AssociateSecurityGroupsResponse):void} cb
@@ -663,7 +684,18 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询Redis实例列表信息
+     * 升级实例支持多AZ
+     * @param {UpgradeVersionToMultiAvailabilityZonesRequest} req
+     * @param {function(string, UpgradeVersionToMultiAvailabilityZonesResponse):void} cb
+     * @public
+     */
+    UpgradeVersionToMultiAvailabilityZones(req, cb) {
+        let resp = new UpgradeVersionToMultiAvailabilityZonesResponse();
+        this.request("UpgradeVersionToMultiAvailabilityZones", req, resp, cb);
+    }
+
+    /**
+     * 查询Redis实例列表信息。该接口已废弃。
      * @param {DescribeCommonDBInstancesRequest} req
      * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
      * @public
@@ -770,6 +802,17 @@ class RedisClient extends AbstractClient {
     ClearInstance(req, cb) {
         let resp = new ClearInstanceResponse();
         this.request("ClearInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询Redis节点信息
+     * @param {DescribeInstanceZoneInfoRequest} req
+     * @param {function(string, DescribeInstanceZoneInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceZoneInfo(req, cb) {
+        let resp = new DescribeInstanceZoneInfoResponse();
+        this.request("DescribeInstanceZoneInfo", req, resp, cb);
     }
 
     /**

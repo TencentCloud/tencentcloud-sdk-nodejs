@@ -16,9 +16,10 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const InputKolDataList = models.InputKolDataList;
+const OutputRecognizeEffectiveFlowValue = models.OutputRecognizeEffectiveFlowValue;
 const OutputKolData = models.OutputKolData;
 const InputKolBspData = models.InputKolBspData;
+const RecognizeEffectiveFlowRequest = models.RecognizeEffectiveFlowRequest;
 const EnhanceTaDegreeRequest = models.EnhanceTaDegreeRequest;
 const OutputRecognizeTargetAudienceValue = models.OutputRecognizeTargetAudienceValue;
 const SendTrafficSecuritySmsMessageRequest = models.SendTrafficSecuritySmsMessageRequest;
@@ -28,15 +29,19 @@ const OutputKolValue = models.OutputKolValue;
 const EnhanceTaDegreeResponse = models.EnhanceTaDegreeResponse;
 const InputTaBspData = models.InputTaBspData;
 const OutputSendTrafficSecuritySmsMsg = models.OutputSendTrafficSecuritySmsMsg;
+const RecognizeEffectiveFlowResponse = models.RecognizeEffectiveFlowResponse;
 const SendTrafficSecuritySmsMessageResponse = models.SendTrafficSecuritySmsMessageResponse;
 const DetectFraudKOLRequest = models.DetectFraudKOLRequest;
 const RecognizeCustomizedAudienceRequest = models.RecognizeCustomizedAudienceRequest;
+const RecognizeTargetAudienceRequest = models.RecognizeTargetAudienceRequest;
 const RecognizeTargetAudienceResponse = models.RecognizeTargetAudienceResponse;
+const OutputRecognizeEffectiveFlow = models.OutputRecognizeEffectiveFlow;
 const InputRecognizeTargetAudience = models.InputRecognizeTargetAudience;
 const OutputTaData = models.OutputTaData;
 const OutputTaValue = models.OutputTaValue;
 const RecognizePreciseTargetAudienceRequest = models.RecognizePreciseTargetAudienceRequest;
-const RecognizeTargetAudienceRequest = models.RecognizeTargetAudienceRequest;
+const InputKolDataList = models.InputKolDataList;
+const InputRecognizeEffectiveFlow = models.InputRecognizeEffectiveFlow;
 const RecognizePreciseTargetAudienceResponse = models.RecognizePreciseTargetAudienceResponse;
 const OutputRecognizeTargetAudience = models.OutputRecognizeTargetAudience;
 const InputSendTrafficSecuritySmsMsg = models.InputSendTrafficSecuritySmsMsg;
@@ -72,6 +77,19 @@ class TafClient extends AbstractClient {
     RecognizeTargetAudience(req, cb) {
         let resp = new RecognizeTargetAudienceResponse();
         this.request("RecognizeTargetAudience", req, resp, cb);
+    }
+
+    /**
+     * 该服务已不再对外提供能力
+
+筛选敏感易骚扰人群
+     * @param {RecognizeEffectiveFlowRequest} req
+     * @param {function(string, RecognizeEffectiveFlowResponse):void} cb
+     * @public
+     */
+    RecognizeEffectiveFlow(req, cb) {
+        let resp = new RecognizeEffectiveFlowResponse();
+        this.request("RecognizeEffectiveFlow", req, resp, cb);
     }
 
     /**

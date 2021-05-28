@@ -20,9 +20,11 @@ const DetectInfoVideoData = models.DetectInfoVideoData;
 const GetDetectInfoEnhancedRequest = models.GetDetectInfoEnhancedRequest;
 const GetFaceIdTokenRequest = models.GetFaceIdTokenRequest;
 const LivenessRequest = models.LivenessRequest;
+const Encryption = models.Encryption;
 const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
 const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
+const GetEidResultResponse = models.GetEidResultResponse;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const CheckBankCardInformationResponse = models.CheckBankCardInformationResponse;
@@ -30,28 +32,36 @@ const DetectInfoBestFrame = models.DetectInfoBestFrame;
 const CheckIdCardInformationResponse = models.CheckIdCardInformationResponse;
 const GetDetectInfoEnhancedResponse = models.GetDetectInfoEnhancedResponse;
 const PhoneVerificationRequest = models.PhoneVerificationRequest;
+const GetEidResultRequest = models.GetEidResultRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
 const PhoneVerificationResponse = models.PhoneVerificationResponse;
+const GetEidTokenRequest = models.GetEidTokenRequest;
 const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
+const CheckPhoneAndNameResponse = models.CheckPhoneAndNameResponse;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
 const MobileStatusRequest = models.MobileStatusRequest;
-const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
+const GetRealNameAuthTokenRequest = models.GetRealNameAuthTokenRequest;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
+const EidInfo = models.EidInfo;
 const GetFaceIdTokenResponse = models.GetFaceIdTokenResponse;
-const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
+const GetEidTokenConfig = models.GetEidTokenConfig;
 const MobileStatusResponse = models.MobileStatusResponse;
+const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
+const GetRealNameAuthTokenResponse = models.GetRealNameAuthTokenResponse;
 const LivenessResponse = models.LivenessResponse;
 const CheckIdCardInformationRequest = models.CheckIdCardInformationRequest;
 const DetectInfoText = models.DetectInfoText;
 const DetectAuthRequest = models.DetectAuthRequest;
 const MinorsVerificationResponse = models.MinorsVerificationResponse;
 const BankCardVerificationResponse = models.BankCardVerificationResponse;
+const GetRealNameAuthResultRequest = models.GetRealNameAuthResultRequest;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
 const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificationRequest;
 const GetFaceIdResultRequest = models.GetFaceIdResultRequest;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
+const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
 const MinorsVerificationRequest = models.MinorsVerificationRequest;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
 const GetActionSequenceRequest = models.GetActionSequenceRequest;
@@ -62,9 +72,14 @@ const GetDetectInfoRequest = models.GetDetectInfoRequest;
 const BankCard2EVerificationResponse = models.BankCard2EVerificationResponse;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
 const DetectInfoIdCardData = models.DetectInfoIdCardData;
+const CheckPhoneAndNameRequest = models.CheckPhoneAndNameRequest;
+const GetEidTokenResponse = models.GetEidTokenResponse;
 const LivenessCompareRequest = models.LivenessCompareRequest;
 const DetectDetail = models.DetectDetail;
 const GetFaceIdResultResponse = models.GetFaceIdResultResponse;
+const EncryptedPhoneVerificationRequest = models.EncryptedPhoneVerificationRequest;
+const GetRealNameAuthResultResponse = models.GetRealNameAuthResultResponse;
+const EncryptedPhoneVerificationResponse = models.EncryptedPhoneVerificationResponse;
 
 
 /**
@@ -100,14 +115,14 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
-     * @param {LivenessCompareRequest} req
-     * @param {function(string, LivenessCompareResponse):void} cb
+     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
+     * @param {CheckIdCardInformationRequest} req
+     * @param {function(string, CheckIdCardInformationResponse):void} cb
      * @public
      */
-    LivenessCompare(req, cb) {
-        let resp = new LivenessCompareResponse();
-        this.request("LivenessCompare", req, resp, cb);
+    CheckIdCardInformation(req, cb) {
+        let resp = new CheckIdCardInformationResponse();
+        this.request("CheckIdCardInformation", req, resp, cb);
     }
 
     /**
@@ -122,7 +137,29 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取FaceIdToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持MD5加密传输。
+     * @param {EncryptedPhoneVerificationRequest} req
+     * @param {function(string, EncryptedPhoneVerificationResponse):void} cb
+     * @public
+     */
+    EncryptedPhoneVerification(req, cb) {
+        let resp = new EncryptedPhoneVerificationResponse();
+        this.request("EncryptedPhoneVerification", req, resp, cb);
+    }
+
+    /**
+     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     * @param {GetDetectInfoEnhancedRequest} req
+     * @param {function(string, GetDetectInfoEnhancedResponse):void} cb
+     * @public
+     */
+    GetDetectInfoEnhanced(req, cb) {
+        let resp = new GetDetectInfoEnhancedResponse();
+        this.request("GetDetectInfoEnhanced", req, resp, cb);
+    }
+
+    /**
+     * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
      * @param {GetFaceIdTokenRequest} req
      * @param {function(string, GetFaceIdTokenResponse):void} cb
      * @public
@@ -133,14 +170,15 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于查询手机号在网时长，输入手机号进行查询。
-     * @param {MobileNetworkTimeVerificationRequest} req
-     * @param {function(string, MobileNetworkTimeVerificationResponse):void} cb
+     * 手机号二要素核验接口用于校验手机号和姓名的真实性和一致性，支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+
+     * @param {CheckPhoneAndNameRequest} req
+     * @param {function(string, CheckPhoneAndNameResponse):void} cb
      * @public
      */
-    MobileNetworkTimeVerification(req, cb) {
-        let resp = new MobileNetworkTimeVerificationResponse();
-        this.request("MobileNetworkTimeVerification", req, resp, cb);
+    CheckPhoneAndName(req, cb) {
+        let resp = new CheckPhoneAndNameResponse();
+        this.request("CheckPhoneAndName", req, resp, cb);
     }
 
     /**
@@ -155,14 +193,26 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
-     * @param {CheckIdCardInformationRequest} req
-     * @param {function(string, CheckIdCardInformationResponse):void} cb
+     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+     * @param {LivenessCompareRequest} req
+     * @param {function(string, LivenessCompareResponse):void} cb
      * @public
      */
-    CheckIdCardInformation(req, cb) {
-        let resp = new CheckIdCardInformationResponse();
-        this.request("CheckIdCardInformation", req, resp, cb);
+    LivenessCompare(req, cb) {
+        let resp = new LivenessCompareResponse();
+        this.request("LivenessCompare", req, resp, cb);
+    }
+
+    /**
+     * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
+
+     * @param {GetRealNameAuthTokenRequest} req
+     * @param {function(string, GetRealNameAuthTokenResponse):void} cb
+     * @public
+     */
+    GetRealNameAuthToken(req, cb) {
+        let resp = new GetRealNameAuthTokenResponse();
+        this.request("GetRealNameAuthToken", req, resp, cb);
     }
 
     /**
@@ -199,7 +249,18 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。
+     * 每次调用E证通小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * @param {GetEidTokenRequest} req
+     * @param {function(string, GetEidTokenResponse):void} cb
+     * @public
+     */
+    GetEidToken(req, cb) {
+        let resp = new GetEidTokenResponse();
+        this.request("GetEidToken", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      * @param {PhoneVerificationRequest} req
      * @param {function(string, PhoneVerificationResponse):void} cb
      * @public
@@ -265,6 +326,28 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于查询手机号在网时长，输入手机号进行查询。
+     * @param {MobileNetworkTimeVerificationRequest} req
+     * @param {function(string, MobileNetworkTimeVerificationResponse):void} cb
+     * @public
+     */
+    MobileNetworkTimeVerification(req, cb) {
+        let resp = new MobileNetworkTimeVerificationResponse();
+        this.request("MobileNetworkTimeVerification", req, resp, cb);
+    }
+
+    /**
+     * 完成验证后，用EidToken调用本接口获取结果信息，EidToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     * @param {GetEidResultRequest} req
+     * @param {function(string, GetEidResultResponse):void} cb
+     * @public
+     */
+    GetEidResult(req, cb) {
+        let resp = new GetEidResultResponse();
+        this.request("GetEidResult", req, resp, cb);
+    }
+
+    /**
      * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
      * @param {DetectAuthRequest} req
      * @param {function(string, DetectAuthResponse):void} cb
@@ -273,17 +356,6 @@ class FaceidClient extends AbstractClient {
     DetectAuth(req, cb) {
         let resp = new DetectAuthResponse();
         this.request("DetectAuth", req, resp, cb);
-    }
-
-    /**
-     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
-     * @param {GetDetectInfoEnhancedRequest} req
-     * @param {function(string, GetDetectInfoEnhancedResponse):void} cb
-     * @public
-     */
-    GetDetectInfoEnhanced(req, cb) {
-        let resp = new GetDetectInfoEnhancedResponse();
-        this.request("GetDetectInfoEnhanced", req, resp, cb);
     }
 
     /**
@@ -317,6 +389,17 @@ class FaceidClient extends AbstractClient {
     BankCard2EVerification(req, cb) {
         let resp = new BankCard2EVerificationResponse();
         this.request("BankCard2EVerification", req, resp, cb);
+    }
+
+    /**
+     * 获取微信实名认证结果
+     * @param {GetRealNameAuthResultRequest} req
+     * @param {function(string, GetRealNameAuthResultResponse):void} cb
+     * @public
+     */
+    GetRealNameAuthResult(req, cb) {
+        let resp = new GetRealNameAuthResultResponse();
+        this.request("GetRealNameAuthResult", req, resp, cb);
     }
 
 

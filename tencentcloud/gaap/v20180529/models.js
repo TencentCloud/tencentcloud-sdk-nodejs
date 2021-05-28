@@ -1943,6 +1943,18 @@ class DescribeRuleRealServersRequest extends  AbstractModel {
          */
         this.RuleId = null;
 
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为1000。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
     }
 
     /**
@@ -1953,6 +1965,8 @@ class DescribeRuleRealServersRequest extends  AbstractModel {
             return;
         }
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2081,6 +2095,18 @@ class CreateTCPListenersRequest extends  AbstractModel {
          */
         this.RealServerPorts = null;
 
+        /**
+         * 监听器获取客户端 IP 的方式，0表示 TOA, 1表示Proxy Protocol
+         * @type {number || null}
+         */
+        this.ClientIPMethod = null;
+
+        /**
+         * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
     }
 
     /**
@@ -2100,6 +2126,8 @@ class CreateTCPListenersRequest extends  AbstractModel {
         this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
         this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
         this.RealServerPorts = 'RealServerPorts' in params ? params.RealServerPorts : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
 
     }
 }
@@ -2472,6 +2500,12 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
          */
         this.HealthCheck = null;
 
+        /**
+         * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+         * @type {number || null}
+         */
+        this.FailoverSwitch = null;
+
     }
 
     /**
@@ -2489,6 +2523,7 @@ class ModifyTCPListenerAttributeRequest extends  AbstractModel {
         this.DelayLoop = 'DelayLoop' in params ? params.DelayLoop : null;
         this.ConnectTimeout = 'ConnectTimeout' in params ? params.ConnectTimeout : null;
         this.HealthCheck = 'HealthCheck' in params ? params.HealthCheck : null;
+        this.FailoverSwitch = 'FailoverSwitch' in params ? params.FailoverSwitch : null;
 
     }
 }
@@ -4105,6 +4140,13 @@ lc表示最小连接数。
          */
         this.CreateTime = null;
 
+        /**
+         * 监听器获取客户端 IP 的方式，0表示TOA, 1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ClientIPMethod = null;
+
     }
 
     /**
@@ -4136,6 +4178,7 @@ lc表示最小连接数。
             }
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
 
     }
 }
@@ -5081,6 +5124,34 @@ class ModifySecurityRuleRequest extends  AbstractModel {
          */
         this.PolicyId = null;
 
+        /**
+         * 安全规则动作
+         * @type {string || null}
+         */
+        this.RuleAction = null;
+
+        /**
+         * 规则关联地址，格式需要满足CIDR网络地址规范
+         * @type {string || null}
+         */
+        this.SourceCidr = null;
+
+        /**
+         * 协议类型
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口范围，支持以下格式
+单个端口: 80
+多个端口: 80,443
+连续端口: 3306-20000
+所有端口: ALL
+         * @type {string || null}
+         */
+        this.DestPortRange = null;
+
     }
 
     /**
@@ -5093,6 +5164,10 @@ class ModifySecurityRuleRequest extends  AbstractModel {
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.AliasName = 'AliasName' in params ? params.AliasName : null;
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.RuleAction = 'RuleAction' in params ? params.RuleAction : null;
+        this.SourceCidr = 'SourceCidr' in params ? params.SourceCidr : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.DestPortRange = 'DestPortRange' in params ? params.DestPortRange : null;
 
     }
 }
@@ -6362,6 +6437,27 @@ class ProxyGroupDetail extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * 安全策略ID，当设置了安全策略时，存在该字段。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 通道组版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.ClientIPMethod = null;
+
     }
 
     /**
@@ -6397,6 +6493,9 @@ class ProxyGroupDetail extends  AbstractModel {
                 this.TagSet.push(obj);
             }
         }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
 
     }
 }
@@ -7488,6 +7587,27 @@ class RuleCheckParams extends  AbstractModel {
          */
         this.Domain = null;
 
+        /**
+         * 源站服务失败统计频率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailedCountInter = null;
+
+        /**
+         * 源站健康性检查阀值，超过该阀值会屏蔽服务
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailedThreshold = null;
+
+        /**
+         * 源站健康性检测超出阀值后，屏蔽的时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BlockInter = null;
+
     }
 
     /**
@@ -7503,6 +7623,9 @@ class RuleCheckParams extends  AbstractModel {
         this.Method = 'Method' in params ? params.Method : null;
         this.StatusCode = 'StatusCode' in params ? params.StatusCode : null;
         this.Domain = 'Domain' in params ? params.Domain : null;
+        this.FailedCountInter = 'FailedCountInter' in params ? params.FailedCountInter : null;
+        this.FailedThreshold = 'FailedThreshold' in params ? params.FailedThreshold : null;
+        this.BlockInter = 'BlockInter' in params ? params.BlockInter : null;
 
     }
 }
@@ -8637,6 +8760,16 @@ class DomainRuleSet extends  AbstractModel {
          */
         this.PolyRealServerCertificateAliasInfo = null;
 
+        /**
+         * 域名的状态。
+0表示运行中，
+1表示变更中，
+2表示删除中。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DomainStatus = null;
+
     }
 
     /**
@@ -8688,6 +8821,7 @@ class DomainRuleSet extends  AbstractModel {
                 this.PolyRealServerCertificateAliasInfo.push(obj);
             }
         }
+        this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
 
     }
 }
@@ -10140,11 +10274,18 @@ UNKNOWN表示未知状态。
         this.ModifyConfigTime = null;
 
         /**
-         * 通道类型
+         * 通道类型，104表示新的银牌质量通道类型
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ProxyType = null;
+
+        /**
+         * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.ClientIPMethod = null;
 
     }
 
@@ -10199,6 +10340,7 @@ UNKNOWN表示未知状态。
         this.RelatedGlobalDomains = 'RelatedGlobalDomains' in params ? params.RelatedGlobalDomains : null;
         this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
         this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
+        this.ClientIPMethod = 'ClientIPMethod' in params ? params.ClientIPMethod : null;
 
     }
 }
@@ -10260,7 +10402,7 @@ class DescribeRulesByRuleIdsRequest extends  AbstractModel {
 }
 
 /**
- * RealServerBindSetReq
+ * 绑定的源站信息
  * @class
  */
 class RealServerBindSetReq extends  AbstractModel {
@@ -10291,6 +10433,12 @@ class RealServerBindSetReq extends  AbstractModel {
          */
         this.RealServerWeight = null;
 
+        /**
+         * 源站主备角色：master主，slave备，该参数必须在监听器打开了源站主备模式，且监听器类型为TCP监听器
+         * @type {string || null}
+         */
+        this.RealServerFailoverRole = null;
+
     }
 
     /**
@@ -10304,6 +10452,7 @@ class RealServerBindSetReq extends  AbstractModel {
         this.RealServerPort = 'RealServerPort' in params ? params.RealServerPort : null;
         this.RealServerIP = 'RealServerIP' in params ? params.RealServerIP : null;
         this.RealServerWeight = 'RealServerWeight' in params ? params.RealServerWeight : null;
+        this.RealServerFailoverRole = 'RealServerFailoverRole' in params ? params.RealServerFailoverRole : null;
 
     }
 }

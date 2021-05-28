@@ -744,6 +744,12 @@ class SystemDisk extends  AbstractModel {
          */
         this.DiskSize = null;
 
+        /**
+         * 所属的独享集群ID。
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -756,6 +762,7 @@ class SystemDisk extends  AbstractModel {
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }
@@ -3748,7 +3755,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -3797,6 +3804,20 @@ class DataDisk extends  AbstractModel {
          */
         this.KmsKeyId = null;
 
+        /**
+         * 云硬盘性能，单位：MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ThroughputPerformance = null;
+
+        /**
+         * 所属的独享集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CdcId = null;
+
     }
 
     /**
@@ -3813,6 +3834,8 @@ class DataDisk extends  AbstractModel {
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
+        this.ThroughputPerformance = 'ThroughputPerformance' in params ? params.ThroughputPerformance : null;
+        this.CdcId = 'CdcId' in params ? params.CdcId : null;
 
     }
 }

@@ -19,27 +19,32 @@ const AbstractClient = require('../../common/abstract_client')
 const SegmentPortraitPicResponse = models.SegmentPortraitPicResponse;
 const DetectBodyJointsResponse = models.DetectBodyJointsResponse;
 const Candidate = models.Candidate;
+const VideoBasicInformation = models.VideoBasicInformation;
 const DeletePersonRequest = models.DeletePersonRequest;
 const ModifyGroupResponse = models.ModifyGroupResponse;
-const UpperBodyClothSleeve = models.UpperBodyClothSleeve;
+const TerminateSegmentationTaskResponse = models.TerminateSegmentationTaskResponse;
 const BodyAttributeInfo = models.BodyAttributeInfo;
 const GetGroupListResponse = models.GetGroupListResponse;
 const GroupInfo = models.GroupInfo;
+const DescribeSegmentationTaskRequest = models.DescribeSegmentationTaskRequest;
 const SegmentationOptions = models.SegmentationOptions;
+const UpperBodyClothTexture = models.UpperBodyClothTexture;
+const TerminateSegmentationTaskRequest = models.TerminateSegmentationTaskRequest;
 const ModifyGroupRequest = models.ModifyGroupRequest;
 const CreatePersonRequest = models.CreatePersonRequest;
 const ModifyPersonInfoResponse = models.ModifyPersonInfoResponse;
-const Trace = models.Trace;
+const CreateSegmentationTaskResponse = models.CreateSegmentationTaskResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const ModifyPersonInfoRequest = models.ModifyPersonInfoRequest;
 const Gender = models.Gender;
 const SegmentCustomizedPortraitPicRequest = models.SegmentCustomizedPortraitPicRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const LowerBodyCloth = models.LowerBodyCloth;
-const UpperBodyClothTexture = models.UpperBodyClothTexture;
+const CreateSegmentationTaskRequest = models.CreateSegmentationTaskRequest;
 const TraceInfo = models.TraceInfo;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const BodyRect = models.BodyRect;
+const DescribeSegmentationTaskResponse = models.DescribeSegmentationTaskResponse;
 const DetectBodyRequest = models.DetectBodyRequest;
 const Age = models.Age;
 const SearchTraceRequest = models.SearchTraceRequest;
@@ -48,13 +53,16 @@ const DetectBodyResponse = models.DetectBodyResponse;
 const PersonInfo = models.PersonInfo;
 const Bag = models.Bag;
 const SegmentCustomizedPortraitPicResponse = models.SegmentCustomizedPortraitPicResponse;
+const Trace = models.Trace;
 const DetectBodyJointsRequest = models.DetectBodyJointsRequest;
 const SegmentPortraitPicRequest = models.SegmentPortraitPicRequest;
 const UpperBodyClothColor = models.UpperBodyClothColor;
 const GetGroupListRequest = models.GetGroupListRequest;
+const ImageRect = models.ImageRect;
 const BodyDetectResult = models.BodyDetectResult;
 const Orientation = models.Orientation;
 const BodyJointsResult = models.BodyJointsResult;
+const UpperBodyClothSleeve = models.UpperBodyClothSleeve;
 const UpperBodyCloth = models.UpperBodyCloth;
 const LowerBodyClothLength = models.LowerBodyClothLength;
 const SearchTraceResponse = models.SearchTraceResponse;
@@ -97,6 +105,17 @@ class BdaClient extends AbstractClient {
     SearchTrace(req, cb) {
         let resp = new SearchTraceResponse();
         this.request("SearchTrace", req, resp, cb);
+    }
+
+    /**
+     * 终止指定视频人像分割处理任务
+     * @param {TerminateSegmentationTaskRequest} req
+     * @param {function(string, TerminateSegmentationTaskResponse):void} cb
+     * @public
+     */
+    TerminateSegmentationTask(req, cb) {
+        let resp = new TerminateSegmentationTaskResponse();
+        this.request("TerminateSegmentationTask", req, resp, cb);
     }
 
     /**
@@ -209,6 +228,17 @@ class BdaClient extends AbstractClient {
     }
 
     /**
+     * 可以查看单条任务的处理情况，包括处理状态，处理结果。
+     * @param {DescribeSegmentationTaskRequest} req
+     * @param {function(string, DescribeSegmentationTaskResponse):void} cb
+     * @public
+     */
+    DescribeSegmentationTask(req, cb) {
+        let resp = new DescribeSegmentationTaskResponse();
+        this.request("DescribeSegmentationTask", req, resp, cb);
+    }
+
+    /**
      * 用于创建一个空的人体库，如果人体库已存在返回错误。
 
 1个APPID下最多有2000W个人体轨迹（Trace），最多1W个人体库（Group）。
@@ -263,6 +293,17 @@ class BdaClient extends AbstractClient {
     GetPersonList(req, cb) {
         let resp = new GetPersonListResponse();
         this.request("GetPersonList", req, resp, cb);
+    }
+
+    /**
+     * 本接口为离线人像分割处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
+     * @param {CreateSegmentationTaskRequest} req
+     * @param {function(string, CreateSegmentationTaskResponse):void} cb
+     * @public
+     */
+    CreateSegmentationTask(req, cb) {
+        let resp = new CreateSegmentationTaskResponse();
+        this.request("CreateSegmentationTask", req, resp, cb);
     }
 
 

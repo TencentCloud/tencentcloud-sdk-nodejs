@@ -17,22 +17,30 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ApplyCertificateResponse = models.ApplyCertificateResponse;
+const ManagerInfo = models.ManagerInfo;
 const CompleteCertificateRequest = models.CompleteCertificateRequest;
 const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
 const CommitCertificateInformationRequest = models.CommitCertificateInformationRequest;
 const DownloadCertificateResponse = models.DownloadCertificateResponse;
 const ReplaceCertificateResponse = models.ReplaceCertificateResponse;
+const SubmitAuditManagerResponse = models.SubmitAuditManagerResponse;
 const DownloadCertificateRequest = models.DownloadCertificateRequest;
 const CancelCertificateOrderRequest = models.CancelCertificateOrderRequest;
 const ModifyCertificateProjectResponse = models.ModifyCertificateProjectResponse;
 const Certificates = models.Certificates;
 const CertificateExtra = models.CertificateExtra;
+const CompanyInfo = models.CompanyInfo;
+const DescribeManagersResponse = models.DescribeManagersResponse;
 const DescribeCertificateResponse = models.DescribeCertificateResponse;
-const OperationLog = models.OperationLog;
 const UploadCertificateRequest = models.UploadCertificateRequest;
 const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
+const OperationLog = models.OperationLog;
+const VerifyManagerResponse = models.VerifyManagerResponse;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
+const Tags = models.Tags;
+const SubmitAuditManagerRequest = models.SubmitAuditManagerRequest;
+const DeleteManagerRequest = models.DeleteManagerRequest;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
 const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
 const UploadRevokeLetterResponse = models.UploadRevokeLetterResponse;
@@ -47,6 +55,7 @@ const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
 const DvAuths = models.DvAuths;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
 const DescribeCertificateRequest = models.DescribeCertificateRequest;
+const DescribeManagerDetailRequest = models.DescribeManagerDetailRequest;
 const DvAuthDetail = models.DvAuthDetail;
 const ProjectInfo = models.ProjectInfo;
 const DescribeCertificateOperateLogsRequest = models.DescribeCertificateOperateLogsRequest;
@@ -55,12 +64,16 @@ const CreateCertificateRequest = models.CreateCertificateRequest;
 const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
 const CommitCertificateInformationResponse = models.CommitCertificateInformationResponse;
 const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
+const DeleteManagerResponse = models.DeleteManagerResponse;
+const VerifyManagerRequest = models.VerifyManagerRequest;
 const UploadCertificateResponse = models.UploadCertificateResponse;
 const CheckCertificateChainRequest = models.CheckCertificateChainRequest;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
-const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
+const DescribeManagerDetailResponse = models.DescribeManagerDetailResponse;
 const SubmittedData = models.SubmittedData;
+const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
+const DescribeManagersRequest = models.DescribeManagersRequest;
 const CompleteCertificateResponse = models.CompleteCertificateResponse;
 const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
 const RevokeCertificateRequest = models.RevokeCertificateRequest;
@@ -99,6 +112,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * 删除管理人
+     * @param {DeleteManagerRequest} req
+     * @param {function(string, DeleteManagerResponse):void} cb
+     * @public
+     */
+    DeleteManager(req, cb) {
+        let resp = new DeleteManagerResponse();
+        this.request("DeleteManager", req, resp, cb);
+    }
+
+    /**
      * 本接口（UploadConfirmLetter）用于上传证书确认函。
      * @param {UploadConfirmLetterRequest} req
      * @param {function(string, UploadConfirmLetterResponse):void} cb
@@ -110,25 +134,36 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateCertificate）用于创建付费证书。
-     * @param {CreateCertificateRequest} req
-     * @param {function(string, CreateCertificateResponse):void} cb
+     * 重新提交审核管理人
+     * @param {SubmitAuditManagerRequest} req
+     * @param {function(string, SubmitAuditManagerResponse):void} cb
      * @public
      */
-    CreateCertificate(req, cb) {
-        let resp = new CreateCertificateResponse();
-        this.request("CreateCertificate", req, resp, cb);
+    SubmitAuditManager(req, cb) {
+        let resp = new SubmitAuditManagerResponse();
+        this.request("SubmitAuditManager", req, resp, cb);
     }
 
     /**
-     * 批量修改证书所属项目。
-     * @param {ModifyCertificateProjectRequest} req
-     * @param {function(string, ModifyCertificateProjectResponse):void} cb
+     * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
+     * @param {SubmitCertificateInformationRequest} req
+     * @param {function(string, SubmitCertificateInformationResponse):void} cb
      * @public
      */
-    ModifyCertificateProject(req, cb) {
-        let resp = new ModifyCertificateProjectResponse();
-        this.request("ModifyCertificateProject", req, resp, cb);
+    SubmitCertificateInformation(req, cb) {
+        let resp = new SubmitCertificateInformationResponse();
+        this.request("SubmitCertificateInformation", req, resp, cb);
+    }
+
+    /**
+     * 重新核验管理人
+     * @param {VerifyManagerRequest} req
+     * @param {function(string, VerifyManagerResponse):void} cb
+     * @public
+     */
+    VerifyManager(req, cb) {
+        let resp = new VerifyManagerResponse();
+        this.request("VerifyManager", req, resp, cb);
     }
 
     /**
@@ -143,14 +178,14 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 提交证书订单。
-     * @param {CommitCertificateInformationRequest} req
-     * @param {function(string, CommitCertificateInformationResponse):void} cb
+     * 本接口（DownloadCertificate）用于下载证书。
+     * @param {DownloadCertificateRequest} req
+     * @param {function(string, DownloadCertificateResponse):void} cb
      * @public
      */
-    CommitCertificateInformation(req, cb) {
-        let resp = new CommitCertificateInformationResponse();
-        this.request("CommitCertificateInformation", req, resp, cb);
+    DownloadCertificate(req, cb) {
+        let resp = new DownloadCertificateResponse();
+        this.request("DownloadCertificate", req, resp, cb);
     }
 
     /**
@@ -165,7 +200,7 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CompleteCertificate）用于主动触发证书验证。
+     * 本接口（CompleteCertificate）用于主动触发证书验证。仅非DNSPod和Wotrus品牌证书支持使用此接口。
      * @param {CompleteCertificateRequest} req
      * @param {function(string, CompleteCertificateResponse):void} cb
      * @public
@@ -187,6 +222,61 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CheckCertificateChain）用于检查证书链是否完整。
+     * @param {CheckCertificateChainRequest} req
+     * @param {function(string, CheckCertificateChainResponse):void} cb
+     * @public
+     */
+    CheckCertificateChain(req, cb) {
+        let resp = new CheckCertificateChainResponse();
+        this.request("CheckCertificateChain", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeCertificate）用于获取证书信息。
+     * @param {DescribeCertificateRequest} req
+     * @param {function(string, DescribeCertificateResponse):void} cb
+     * @public
+     */
+    DescribeCertificate(req, cb) {
+        let resp = new DescribeCertificateResponse();
+        this.request("DescribeCertificate", req, resp, cb);
+    }
+
+    /**
+     * 获取证书详情。
+     * @param {DescribeCertificateDetailRequest} req
+     * @param {function(string, DescribeCertificateDetailResponse):void} cb
+     * @public
+     */
+    DescribeCertificateDetail(req, cb) {
+        let resp = new DescribeCertificateDetailResponse();
+        this.request("DescribeCertificateDetail", req, resp, cb);
+    }
+
+    /**
+     * 查询管理人详情
+     * @param {DescribeManagerDetailRequest} req
+     * @param {function(string, DescribeManagerDetailResponse):void} cb
+     * @public
+     */
+    DescribeManagerDetail(req, cb) {
+        let resp = new DescribeManagerDetailResponse();
+        this.request("DescribeManagerDetail", req, resp, cb);
+    }
+
+    /**
+     * 批量修改证书所属项目。
+     * @param {ModifyCertificateProjectRequest} req
+     * @param {function(string, ModifyCertificateProjectResponse):void} cb
+     * @public
+     */
+    ModifyCertificateProject(req, cb) {
+        let resp = new ModifyCertificateProjectResponse();
+        this.request("ModifyCertificateProject", req, resp, cb);
+    }
+
+    /**
      * 用户传入证书id和备注来修改证书备注。
      * @param {ModifyCertificateAliasRequest} req
      * @param {function(string, ModifyCertificateAliasResponse):void} cb
@@ -198,14 +288,36 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DownloadCertificate）用于下载证书。
-     * @param {DownloadCertificateRequest} req
-     * @param {function(string, DownloadCertificateResponse):void} cb
+     * 本接口（CreateCertificate）用于创建付费证书。
+     * @param {CreateCertificateRequest} req
+     * @param {function(string, CreateCertificateResponse):void} cb
      * @public
      */
-    DownloadCertificate(req, cb) {
-        let resp = new DownloadCertificateResponse();
-        this.request("DownloadCertificate", req, resp, cb);
+    CreateCertificate(req, cb) {
+        let resp = new CreateCertificateResponse();
+        this.request("CreateCertificate", req, resp, cb);
+    }
+
+    /**
+     * 提交证书订单。
+     * @param {CommitCertificateInformationRequest} req
+     * @param {function(string, CommitCertificateInformationResponse):void} cb
+     * @public
+     */
+    CommitCertificateInformation(req, cb) {
+        let resp = new CommitCertificateInformationResponse();
+        this.request("CommitCertificateInformation", req, resp, cb);
+    }
+
+    /**
+     * 获取用户账号下有关证书的操作日志。
+     * @param {DescribeCertificateOperateLogsRequest} req
+     * @param {function(string, DescribeCertificateOperateLogsResponse):void} cb
+     * @public
+     */
+    DescribeCertificateOperateLogs(req, cb) {
+        let resp = new DescribeCertificateOperateLogsResponse();
+        this.request("DescribeCertificateOperateLogs", req, resp, cb);
     }
 
     /**
@@ -217,17 +329,6 @@ class SslClient extends AbstractClient {
     ReplaceCertificate(req, cb) {
         let resp = new ReplaceCertificateResponse();
         this.request("ReplaceCertificate", req, resp, cb);
-    }
-
-    /**
-     * 本接口（CheckCertificateChain）用于检查证书链是否完整。
-     * @param {CheckCertificateChainRequest} req
-     * @param {function(string, CheckCertificateChainResponse):void} cb
-     * @public
-     */
-    CheckCertificateChain(req, cb) {
-        let resp = new CheckCertificateChainResponse();
-        this.request("CheckCertificateChain", req, resp, cb);
     }
 
     /**
@@ -253,47 +354,14 @@ class SslClient extends AbstractClient {
     }
 
     /**
-     * 获取用户账号下有关证书的操作日志。
-     * @param {DescribeCertificateOperateLogsRequest} req
-     * @param {function(string, DescribeCertificateOperateLogsResponse):void} cb
+     * 查询管理人列表
+     * @param {DescribeManagersRequest} req
+     * @param {function(string, DescribeManagersResponse):void} cb
      * @public
      */
-    DescribeCertificateOperateLogs(req, cb) {
-        let resp = new DescribeCertificateOperateLogsResponse();
-        this.request("DescribeCertificateOperateLogs", req, resp, cb);
-    }
-
-    /**
-     * 提交证书资料。
-     * @param {SubmitCertificateInformationRequest} req
-     * @param {function(string, SubmitCertificateInformationResponse):void} cb
-     * @public
-     */
-    SubmitCertificateInformation(req, cb) {
-        let resp = new SubmitCertificateInformationResponse();
-        this.request("SubmitCertificateInformation", req, resp, cb);
-    }
-
-    /**
-     * 获取证书详情。
-     * @param {DescribeCertificateDetailRequest} req
-     * @param {function(string, DescribeCertificateDetailResponse):void} cb
-     * @public
-     */
-    DescribeCertificateDetail(req, cb) {
-        let resp = new DescribeCertificateDetailResponse();
-        this.request("DescribeCertificateDetail", req, resp, cb);
-    }
-
-    /**
-     * 本接口（DescribeCertificate）用于获取证书信息。
-     * @param {DescribeCertificateRequest} req
-     * @param {function(string, DescribeCertificateResponse):void} cb
-     * @public
-     */
-    DescribeCertificate(req, cb) {
-        let resp = new DescribeCertificateResponse();
-        this.request("DescribeCertificate", req, resp, cb);
+    DescribeManagers(req, cb) {
+        let resp = new DescribeManagersResponse();
+        this.request("DescribeManagers", req, resp, cb);
     }
 
 

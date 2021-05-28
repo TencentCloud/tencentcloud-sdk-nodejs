@@ -17,11 +17,17 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const StopGameRequest = models.StopGameRequest;
+const SaveGameArchiveResponse = models.SaveGameArchiveResponse;
+const SwitchGameArchiveRequest = models.SwitchGameArchiveRequest;
 const TrylockWorkerResponse = models.TrylockWorkerResponse;
-const StopGameResponse = models.StopGameResponse;
-const CreateSessionResponse = models.CreateSessionResponse;
-const TrylockWorkerRequest = models.TrylockWorkerRequest;
+const DescribeInstancesCountResponse = models.DescribeInstancesCountResponse;
 const CreateSessionRequest = models.CreateSessionRequest;
+const CreateSessionResponse = models.CreateSessionResponse;
+const DescribeInstancesCountRequest = models.DescribeInstancesCountRequest;
+const SaveGameArchiveRequest = models.SaveGameArchiveRequest;
+const TrylockWorkerRequest = models.TrylockWorkerRequest;
+const SwitchGameArchiveResponse = models.SwitchGameArchiveResponse;
+const StopGameResponse = models.StopGameResponse;
 
 
 /**
@@ -35,14 +41,25 @@ class GsClient extends AbstractClient {
     }
     
     /**
-     * 创建会话
-     * @param {CreateSessionRequest} req
-     * @param {function(string, CreateSessionResponse):void} cb
+     * 获取实例总数和运行数
+     * @param {DescribeInstancesCountRequest} req
+     * @param {function(string, DescribeInstancesCountResponse):void} cb
      * @public
      */
-    CreateSession(req, cb) {
-        let resp = new CreateSessionResponse();
-        this.request("CreateSession", req, resp, cb);
+    DescribeInstancesCount(req, cb) {
+        let resp = new DescribeInstancesCountResponse();
+        this.request("DescribeInstancesCount", req, resp, cb);
+    }
+
+    /**
+     * 尝试锁定机器
+     * @param {TrylockWorkerRequest} req
+     * @param {function(string, TrylockWorkerResponse):void} cb
+     * @public
+     */
+    TrylockWorker(req, cb) {
+        let resp = new TrylockWorkerResponse();
+        this.request("TrylockWorker", req, resp, cb);
     }
 
     /**
@@ -57,14 +74,36 @@ class GsClient extends AbstractClient {
     }
 
     /**
-     * 尝试锁定机器
-     * @param {TrylockWorkerRequest} req
-     * @param {function(string, TrylockWorkerResponse):void} cb
+     * 保存游戏存档
+     * @param {SaveGameArchiveRequest} req
+     * @param {function(string, SaveGameArchiveResponse):void} cb
      * @public
      */
-    TrylockWorker(req, cb) {
-        let resp = new TrylockWorkerResponse();
-        this.request("TrylockWorker", req, resp, cb);
+    SaveGameArchive(req, cb) {
+        let resp = new SaveGameArchiveResponse();
+        this.request("SaveGameArchive", req, resp, cb);
+    }
+
+    /**
+     * 切换游戏存档
+     * @param {SwitchGameArchiveRequest} req
+     * @param {function(string, SwitchGameArchiveResponse):void} cb
+     * @public
+     */
+    SwitchGameArchive(req, cb) {
+        let resp = new SwitchGameArchiveResponse();
+        this.request("SwitchGameArchive", req, resp, cb);
+    }
+
+    /**
+     * 创建会话
+     * @param {CreateSessionRequest} req
+     * @param {function(string, CreateSessionResponse):void} cb
+     * @public
+     */
+    CreateSession(req, cb) {
+        let resp = new CreateSessionResponse();
+        this.request("CreateSession", req, resp, cb);
     }
 
 

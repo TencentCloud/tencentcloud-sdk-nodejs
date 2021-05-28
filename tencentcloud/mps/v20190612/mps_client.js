@@ -90,6 +90,7 @@ const EditMediaTaskInput = models.EditMediaTaskInput;
 const UserDefineAsrTextReviewTemplateInfo = models.UserDefineAsrTextReviewTemplateInfo;
 const DescribeWordSamplesResponse = models.DescribeWordSamplesResponse;
 const AiAnalysisTaskFrameTagOutput = models.AiAnalysisTaskFrameTagOutput;
+const RecognizeMediaForZhiXueRequest = models.RecognizeMediaForZhiXueRequest;
 const MediaProcessTaskAdaptiveDynamicStreamingResult = models.MediaProcessTaskAdaptiveDynamicStreamingResult;
 const OcrWordsConfigureInfoForUpdate = models.OcrWordsConfigureInfoForUpdate;
 const WatermarkTemplate = models.WatermarkTemplate;
@@ -169,6 +170,7 @@ const DeleteContentReviewTemplateResponse = models.DeleteContentReviewTemplateRe
 const ImageWatermarkTemplate = models.ImageWatermarkTemplate;
 const AsrWordsConfigureInfo = models.AsrWordsConfigureInfo;
 const LiveStreamAsrWordsRecognitionResult = models.LiveStreamAsrWordsRecognitionResult;
+const RecognizeMediaForZhiXueResponse = models.RecognizeMediaForZhiXueResponse;
 const AiSamplePerson = models.AiSamplePerson;
 const DescribeWorkflowsResponse = models.DescribeWorkflowsResponse;
 const AsrWordsConfigureInfoForUpdate = models.AsrWordsConfigureInfoForUpdate;
@@ -220,6 +222,7 @@ const AiReviewPornOcrTaskOutput = models.AiReviewPornOcrTaskOutput;
 const CreateSampleSnapshotTemplateResponse = models.CreateSampleSnapshotTemplateResponse;
 const ProhibitedAsrReviewTemplateInfo = models.ProhibitedAsrReviewTemplateInfo;
 const AiReviewPoliticalAsrTaskInput = models.AiReviewPoliticalAsrTaskInput;
+const ActionConfigInfo = models.ActionConfigInfo;
 const MediaAiAnalysisTagItem = models.MediaAiAnalysisTagItem;
 const TranscodeTemplate = models.TranscodeTemplate;
 const PornOcrReviewTemplateInfo = models.PornOcrReviewTemplateInfo;
@@ -273,6 +276,7 @@ const ProhibitedOcrReviewTemplateInfo = models.ProhibitedOcrReviewTemplateInfo;
 const LiveStreamOcrFullTextRecognitionResult = models.LiveStreamOcrFullTextRecognitionResult;
 const ModifyTranscodeTemplateResponse = models.ModifyTranscodeTemplateResponse;
 const MediaMetaData = models.MediaMetaData;
+const ExpressionConfigInfo = models.ExpressionConfigInfo;
 const VideoTemplateInfoForUpdate = models.VideoTemplateInfoForUpdate;
 const CreateContentReviewTemplateRequest = models.CreateContentReviewTemplateRequest;
 const DescribeContentReviewTemplatesRequest = models.DescribeContentReviewTemplatesRequest;
@@ -408,7 +412,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 修改用户自定义内容审核模板。
+     * 修改用户自定义内容智能识别模板。
      * @param {ModifyContentReviewTemplateRequest} req
      * @param {function(string, ModifyContentReviewTemplateResponse):void} cb
      * @public
@@ -419,7 +423,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 创建用户自定义内容审核模板，数量上限：50。
+     * 创建用户自定义内容智能识别模板，数量上限：50。
      * @param {CreateContentReviewTemplateRequest} req
      * @param {function(string, CreateContentReviewTemplateResponse):void} cb
      * @public
@@ -613,7 +617,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于根据人物 ID，删除人物样本。
+     * 该接口用于根据素材 ID，删除素材样本。
      * @param {DeletePersonSampleRequest} req
      * @param {function(string, DeletePersonSampleResponse):void} cb
      * @public
@@ -756,7 +760,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于查询人物样本信息，支持根据人物 ID、名称、标签，分页查询。
+     * 该接口用于查询素材样本信息，支持根据素材 ID、名称、标签，分页查询。
      * @param {DescribePersonSamplesRequest} req
      * @param {function(string, DescribePersonSamplesResponse):void} cb
      * @public
@@ -822,8 +826,18 @@ class MpsClient extends AbstractClient {
     }
 
     /**
+     * 智能媒体识别，包含表情和动作识别。仅用于智学，其他调用无效。
+     * @param {RecognizeMediaForZhiXueRequest} req
+     * @param {function(string, RecognizeMediaForZhiXueResponse):void} cb
+     * @public
+     */
+    RecognizeMediaForZhiXue(req, cb) {
+        let resp = new RecognizeMediaForZhiXueResponse();
+        this.request("RecognizeMediaForZhiXue", req, resp, cb);
+    }
+
+    /**
      * 对已发起的任务进行管理。
-> 注意：目前仅支持终止执行中的直播流处理任务。
      * @param {ManageTaskRequest} req
      * @param {function(string, ManageTaskResponse):void} cb
      * @public
@@ -871,7 +885,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行内容审核、内容识别等视频处理。
+     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
      * @param {CreateWordSamplesRequest} req
      * @param {function(string, CreateWordSamplesResponse):void} cb
      * @public
@@ -882,7 +896,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于创建人物样本，用于通过人脸识别等技术，进行内容识别、内容审核等视频处理。
+     * 该接口用于创建素材样本，用于通过五官定位等技术，进行内容识别、内容不适宜等视频处理。
      * @param {CreatePersonSampleRequest} req
      * @param {function(string, CreatePersonSampleResponse):void} cb
      * @public
@@ -904,7 +918,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 该接口用于根据人物 ID，修改人物样本信息，包括名称、描述的修改，以及人脸、标签的添加、删除、重置操作。人脸删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+     * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
      * @param {ModifyPersonSampleRequest} req
      * @param {function(string, ModifyPersonSampleResponse):void} cb
      * @public
@@ -1039,7 +1053,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 删除用户自定义内容审核模板。
+     * 删除用户自定义内容智能识别模板。
      * @param {DeleteContentReviewTemplateRequest} req
      * @param {function(string, DeleteContentReviewTemplateResponse):void} cb
      * @public
@@ -1116,7 +1130,7 @@ class MpsClient extends AbstractClient {
     }
 
     /**
-     * 根据内容审核模板唯一标识，获取内容审核模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置内容审核模板。
+     * 根据内容智能识别模板唯一标识，获取内容智能识别模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置内容智能识别模板。
      * @param {DescribeContentReviewTemplatesRequest} req
      * @param {function(string, DescribeContentReviewTemplatesResponse):void} cb
      * @public

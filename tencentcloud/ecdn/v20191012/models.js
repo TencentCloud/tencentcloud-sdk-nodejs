@@ -76,17 +76,10 @@ class DescribeEcdnStatisticsRequest extends  AbstractModel {
 flux：流量，单位为 byte
 bandwidth：带宽，单位为 bps
 request：请求数，单位为 次
-delay：响应时间，单位为ms
 2xx：返回 2xx 状态码汇总或者 2 开头状态码数据，单位为 个
 3xx：返回 3xx 状态码汇总或者 3 开头状态码数据，单位为 个
 4xx：返回 4xx 状态码汇总或者 4 开头状态码数据，单位为 个
 5xx：返回 5xx 状态码汇总或者 5 开头状态码数据，单位为 个
-static_request ： 静态请求数，单位为 次
-static_flux：静态流量，单位为 byte
-static_bandwidth ： 静态带宽，单位为 bps
-dynamic_request：动态请求数，单位为 次
-dynamic_flux：动态流量，单位为 byte
-dynamic_bandwidth：动态带宽，单位为 bps
          * @type {Array.<string> || null}
          */
         this.Metrics = null;
@@ -116,6 +109,16 @@ dynamic_bandwidth：动态带宽，单位为 bps
          */
         this.Projects = null;
 
+        /**
+         * 统计区域:
+mainland: 境内
+oversea: 境外
+global: 全部
+默认 global
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -131,6 +134,7 @@ dynamic_bandwidth：动态带宽，单位为 bps
         this.Interval = 'Interval' in params ? params.Interval : null;
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.Projects = 'Projects' in params ? params.Projects : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -322,18 +326,36 @@ class Https extends  AbstractModel {
 }
 
 /**
- * PurgeUrlsCache请求参数结构体
+ * CreateVerifyRecord返回参数结构体
  * @class
  */
-class PurgeUrlsCacheRequest extends  AbstractModel {
+class CreateVerifyRecordResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要刷新的Url列表，必须包含协议头部。
-         * @type {Array.<string> || null}
+         * 子解析
+         * @type {string || null}
          */
-        this.Urls = null;
+        this.SubDomain = null;
+
+        /**
+         * 解析值
+         * @type {string || null}
+         */
+        this.Record = null;
+
+        /**
+         * 解析类型
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -344,7 +366,10 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
+        this.Record = 'Record' in params ? params.Record : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -974,6 +999,34 @@ class Hsts extends  AbstractModel {
 }
 
 /**
+ * PurgeUrlsCache请求参数结构体
+ * @class
+ */
+class PurgeUrlsCacheRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要刷新的Url列表，必须包含协议头部。
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Urls = 'Urls' in params ? params.Urls : null;
+
+    }
+}
+
+/**
  * 分路径的http头部设置规则。
  * @class
  */
@@ -1287,6 +1340,12 @@ class UpdateDomainConfigRequest extends  AbstractModel {
          */
         this.Area = null;
 
+        /**
+         * WebSocket配置
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
+
     }
 
     /**
@@ -1347,6 +1406,12 @@ class UpdateDomainConfigRequest extends  AbstractModel {
             this.ForceRedirect = obj;
         }
         this.Area = 'Area' in params ? params.Area : null;
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
+        }
 
     }
 }
@@ -1670,6 +1735,44 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * WebSocket配置。
+ * @class
+ */
+class WebSocket extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * WebSocket 超时配置开关, 开关为off时，平台仍支持WebSocket连接，此时超时时间默认为15秒，若需要调整超时时间，将开关置为on.
+
+* WebSocket 为内测功能,如需使用,请联系腾讯云工程师开白.
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 设置超时时间，单位为秒，最大超时时间65秒。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Timeout = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Timeout = 'Timeout' in params ? params.Timeout : null;
+
+    }
+}
+
+/**
  * StopEcdnDomain返回参数结构体
  * @class
  */
@@ -1891,6 +1994,12 @@ class AddEcdnDomainRequest extends  AbstractModel {
          */
         this.Tag = null;
 
+        /**
+         * WebSocket配置
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
+
     }
 
     /**
@@ -1959,6 +2068,12 @@ class AddEcdnDomainRequest extends  AbstractModel {
                 obj.deserialize(params.Tag[z]);
                 this.Tag.push(obj);
             }
+        }
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
         }
 
     }
@@ -2204,6 +2319,12 @@ offline：下线状态
          */
         this.Status = null;
 
+        /**
+         * 节点 IP 添加时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
     }
 
     /**
@@ -2218,6 +2339,7 @@ offline：下线状态
         this.Isp = 'Isp' in params ? params.Isp : null;
         this.City = 'City' in params ? params.City : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2386,8 +2508,7 @@ class Origin extends  AbstractModel {
         super();
 
         /**
-         * 主源站列表，默认格式为 ["ip1:port1", "ip2:port2"]。
-支持在源站列表中配置权重，配置IP源站权重格式为 ["ip1:port1:weight1", "ip2:port2:weight2"]。
+         * 主源站列表，IP与域名源站不可混填。配置源站端口["origin1:port1", "origin2:port2"]，配置回源权重["origin1::weight1", "origin2::weight2"]，同时配置端口与权重 ["origin1:port1:weight1", "origin2:port2:weight2"]，权重值有效范围为0-100。
          * @type {Array.<string> || null}
          */
         this.Origins = null;
@@ -2409,6 +2530,7 @@ class Origin extends  AbstractModel {
 
         /**
          * 回源协议类型，支持http，follow，https，分别表示强制http回源，协议跟随回源，https回源。
+不传入的情况下默认为http回源.
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2627,16 +2749,10 @@ class DescribeEcdnDomainStatisticsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 统计指标名称。flux：流量，单位为 byte
+         * 统计指标名称:
+flux：流量，单位为 byte
 bandwidth：带宽，单位为 bps
 request：请求数，单位为 次
-delay：响应时间，单位为ms
-static_request ： 静态请求数，单位为 次
-static_flux：静态流量，单位为 byte
-static_bandwidth ： 静态带宽，单位为 bps
-dynamic_request：动态请求数，单位为 次
-dynamic_flux：动态流量，单位为 byte
-dynamic_bandwidth：动态带宽，单位为 bps
          * @type {Array.<string> || null}
          */
         this.Metrics = null;
@@ -2666,6 +2782,16 @@ dynamic_bandwidth：动态带宽，单位为 bps
          */
         this.Limit = null;
 
+        /**
+         * 统计区域:
+mainland: 境内
+oversea: 境外
+global: 全部
+默认 global
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -2682,6 +2808,7 @@ dynamic_bandwidth：动态带宽，单位为 bps
         this.Projects = 'Projects' in params ? params.Projects : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -2918,11 +3045,18 @@ class DomainDetailInfo extends  AbstractModel {
         this.Readonly = null;
 
         /**
-         * 域名标签
+         * 域名标签。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Tag> || null}
          */
         this.Tag = null;
+
+        /**
+         * WebSocket配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WebSocket || null}
+         */
+        this.WebSocket = null;
 
     }
 
@@ -3000,6 +3134,12 @@ class DomainDetailInfo extends  AbstractModel {
                 obj.deserialize(params.Tag[z]);
                 this.Tag.push(obj);
             }
+        }
+
+        if (params.WebSocket) {
+            let obj = new WebSocket();
+            obj.deserialize(params.WebSocket)
+            this.WebSocket = obj;
         }
 
     }
@@ -3093,13 +3233,41 @@ class DescribeDomainsRequest extends  AbstractModel {
     }
 }
 
+/**
+ * CreateVerifyRecord请求参数结构体
+ * @class
+ */
+class CreateVerifyRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要取回的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
 module.exports = {
     PurgePathCacheRequest: PurgePathCacheRequest,
     DescribeEcdnStatisticsRequest: DescribeEcdnStatisticsRequest,
     StartEcdnDomainRequest: StartEcdnDomainRequest,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
     Https: Https,
-    PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
+    CreateVerifyRecordResponse: CreateVerifyRecordResponse,
     ResourceData: ResourceData,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
@@ -3114,6 +3282,7 @@ module.exports = {
     DescribeEcdnStatisticsResponse: DescribeEcdnStatisticsResponse,
     DomainLogs: DomainLogs,
     Hsts: Hsts,
+    PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     HttpHeaderPathRule: HttpHeaderPathRule,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
     DetailData: DetailData,
@@ -3127,6 +3296,7 @@ module.exports = {
     StartEcdnDomainResponse: StartEcdnDomainResponse,
     DeleteEcdnDomainResponse: DeleteEcdnDomainResponse,
     Tag: Tag,
+    WebSocket: WebSocket,
     StopEcdnDomainResponse: StopEcdnDomainResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
@@ -3151,5 +3321,6 @@ module.exports = {
     DomainDetailInfo: DomainDetailInfo,
     DescribeIpStatusRequest: DescribeIpStatusRequest,
     DescribeDomainsRequest: DescribeDomainsRequest,
+    CreateVerifyRecordRequest: CreateVerifyRecordRequest,
 
 }

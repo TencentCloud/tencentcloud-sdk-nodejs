@@ -16,88 +16,119 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DuplicateImagePersonalRequest = models.DuplicateImagePersonalRequest;
+const ManageExternalEndpointRequest = models.ManageExternalEndpointRequest;
 const DescribeImagePersonalResponse = models.DescribeImagePersonalResponse;
 const DescribeUserQuotaPersonalRequest = models.DescribeUserQuotaPersonalRequest;
 const WebhookTarget = models.WebhookTarget;
 const DescribeReplicationInstancesResponse = models.DescribeReplicationInstancesResponse;
 const DescribeReplicationInstanceCreateTasksResponse = models.DescribeReplicationInstanceCreateTasksResponse;
 const WebhookTriggerLog = models.WebhookTriggerLog;
+const AccessVpc = models.AccessVpc;
+const ModifyTagRetentionRuleRequest = models.ModifyTagRetentionRuleRequest;
 const ModifyRepositoryResponse = models.ModifyRepositoryResponse;
 const TriggerInvokePara = models.TriggerInvokePara;
 const DescribeNamespacesResponse = models.DescribeNamespacesResponse;
 const TriggerLogResp = models.TriggerLogResp;
-const TagInfoResp = models.TagInfoResp;
+const DownloadHelmChartRequest = models.DownloadHelmChartRequest;
+const RetentionRule = models.RetentionRule;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DeleteInstanceTokenRequest = models.DeleteInstanceTokenRequest;
 const TaskDetail = models.TaskDetail;
 const ModifyRepositoryRequest = models.ModifyRepositoryRequest;
-const DescribeWebhookTriggerLogResponse = models.DescribeWebhookTriggerLogResponse;
+const RegistryCondition = models.RegistryCondition;
+const DescribeInternalEndpointDnsStatusRequest = models.DescribeInternalEndpointDnsStatusRequest;
 const CreateApplicationTriggerPersonalRequest = models.CreateApplicationTriggerPersonalRequest;
 const AutoDelStrategyInfo = models.AutoDelStrategyInfo;
+const DeleteInternalEndpointDnsRequest = models.DeleteInternalEndpointDnsRequest;
 const ValidateNamespaceExistPersonalRequest = models.ValidateNamespaceExistPersonalRequest;
+const RegistryChargePrepaid = models.RegistryChargePrepaid;
+const RenewInstanceResponse = models.RenewInstanceResponse;
 const Registry = models.Registry;
 const DescribeRepositoriesResponse = models.DescribeRepositoriesResponse;
+const VpcAndDomainInfo = models.VpcAndDomainInfo;
 const DeleteInstanceTokenResponse = models.DeleteInstanceTokenResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const CreateReplicationInstanceRequest = models.CreateReplicationInstanceRequest;
 const ModifyInstanceTokenResponse = models.ModifyInstanceTokenResponse;
-const DescribeApplicationTriggerLogPersonalResponse = models.DescribeApplicationTriggerLogPersonalResponse;
-const FavorResp = models.FavorResp;
 const DescribeApplicationTriggerPersonalRequest = models.DescribeApplicationTriggerPersonalRequest;
+const FavorResp = models.FavorResp;
 const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
 const NamespaceInfo = models.NamespaceInfo;
+const RenewInstanceRequest = models.RenewInstanceRequest;
+const CreateTagRetentionRuleResponse = models.CreateTagRetentionRuleResponse;
 const Limit = models.Limit;
-const DescribeReplicationInstancesRequest = models.DescribeReplicationInstancesRequest;
+const DescribeChartDownloadInfoResponse = models.DescribeChartDownloadInfoResponse;
+const DescribeExternalEndpointStatusRequest = models.DescribeExternalEndpointStatusRequest;
 const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
 const DeleteImagePersonalResponse = models.DeleteImagePersonalResponse;
-const RegistryCondition = models.RegistryCondition;
+const DownloadHelmChartResponse = models.DownloadHelmChartResponse;
+const ManageReplicationRequest = models.ManageReplicationRequest;
 const DeleteWebhookTriggerResponse = models.DeleteWebhookTriggerResponse;
 const DeleteImageLifecycleGlobalPersonalResponse = models.DeleteImageLifecycleGlobalPersonalResponse;
-const DuplicateImagePersonalResponse = models.DuplicateImagePersonalResponse;
+const DescribeReplicationInstanceSyncStatusResponse = models.DescribeReplicationInstanceSyncStatusResponse;
 const Tag = models.Tag;
 const DupImageTagResp = models.DupImageTagResp;
-const DescribeImagesResponse = models.DescribeImagesResponse;
+const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
 const DescribeRepositoryFilterPersonalRequest = models.DescribeRepositoryFilterPersonalRequest;
+const DescribeTagRetentionExecutionTaskResponse = models.DescribeTagRetentionExecutionTaskResponse;
+const DescribeInternalEndpointsResponse = models.DescribeInternalEndpointsResponse;
 const DescribeRepositoryPersonalRequest = models.DescribeRepositoryPersonalRequest;
 const AutoDelStrategyInfoResp = models.AutoDelStrategyInfoResp;
+const TriggerResp = models.TriggerResp;
 const DeleteApplicationTriggerPersonalRequest = models.DeleteApplicationTriggerPersonalRequest;
 const SearchUserRepositoryResp = models.SearchUserRepositoryResp;
+const CreateTagRetentionRuleRequest = models.CreateTagRetentionRuleRequest;
+const DuplicateImagePersonalResponse = models.DuplicateImagePersonalResponse;
 const DescribeImageLifecyclePersonalResponse = models.DescribeImageLifecyclePersonalResponse;
 const ModifyInstanceTokenRequest = models.ModifyInstanceTokenRequest;
 const DeleteImageLifecyclePersonalResponse = models.DeleteImageLifecyclePersonalResponse;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
 const DescribeRepositoryOwnerPersonalResponse = models.DescribeRepositoryOwnerPersonalResponse;
-const ModifyWebhookTriggerResponse = models.ModifyWebhookTriggerResponse;
+const VpcPrivateDomainStatus = models.VpcPrivateDomainStatus;
+const DescribeSecurityPoliciesResponse = models.DescribeSecurityPoliciesResponse;
+const DescribeReplicationInstancesRequest = models.DescribeReplicationInstancesRequest;
 const CreateImageLifecyclePersonalResponse = models.CreateImageLifecyclePersonalResponse;
 const RepoIsExistResp = models.RepoIsExistResp;
 const TcrImageInfo = models.TcrImageInfo;
 const DescribeImageLifecycleGlobalPersonalResponse = models.DescribeImageLifecycleGlobalPersonalResponse;
 const CreateNamespacePersonalResponse = models.CreateNamespacePersonalResponse;
+const DescribeReplicationInstanceSyncStatusRequest = models.DescribeReplicationInstanceSyncStatusRequest;
+const DeleteInstanceResponse = models.DeleteInstanceResponse;
 const DeleteImageLifecycleGlobalPersonalRequest = models.DeleteImageLifecycleGlobalPersonalRequest;
 const DescribeInstanceStatusRequest = models.DescribeInstanceStatusRequest;
 const ModifyWebhookTriggerRequest = models.ModifyWebhookTriggerRequest;
 const DescribeInstanceStatusResponse = models.DescribeInstanceStatusResponse;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
+const TagInfoResp = models.TagInfoResp;
 const Favors = models.Favors;
 const DescribeRepositoryPersonalResponse = models.DescribeRepositoryPersonalResponse;
+const CreateSecurityPolicyResponse = models.CreateSecurityPolicyResponse;
 const DescribeRepositoriesRequest = models.DescribeRepositoriesRequest;
 const DescribeImageFilterPersonalRequest = models.DescribeImageFilterPersonalRequest;
 const ModifyNamespaceResponse = models.ModifyNamespaceResponse;
 const ValidateRepositoryExistPersonalRequest = models.ValidateRepositoryExistPersonalRequest;
 const ModifyUserPasswordPersonalResponse = models.ModifyUserPasswordPersonalResponse;
 const TcrNamespaceInfo = models.TcrNamespaceInfo;
-const DeleteApplicationTriggerPersonalResponse = models.DeleteApplicationTriggerPersonalResponse;
+const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyRepositoryInfoPersonalResponse = models.ModifyRepositoryInfoPersonalResponse;
 const DescribeWebhookTriggerLogRequest = models.DescribeWebhookTriggerLogRequest;
 const CreateUserPersonalRequest = models.CreateUserPersonalRequest;
+const DescribeTagRetentionExecutionTaskRequest = models.DescribeTagRetentionExecutionTaskRequest;
+const ReplicationRule = models.ReplicationRule;
 const RepoInfoResp = models.RepoInfoResp;
-const ManageImageLifecycleGlobalPersonalResponse = models.ManageImageLifecycleGlobalPersonalResponse;
+const DeleteTagRetentionRuleResponse = models.DeleteTagRetentionRuleResponse;
+const DeleteSecurityPolicyResponse = models.DeleteSecurityPolicyResponse;
+const DescribeInternalEndpointDnsStatusResponse = models.DescribeInternalEndpointDnsStatusResponse;
 const RegistryStatus = models.RegistryStatus;
+const SecurityPolicy = models.SecurityPolicy;
 const DescribeNamespacePersonalRequest = models.DescribeNamespacePersonalRequest;
 const DeleteRepositoryPersonalResponse = models.DeleteRepositoryPersonalResponse;
 const CreateInstanceTokenResponse = models.CreateInstanceTokenResponse;
 const DescribeApplicationTriggerLogPersonalResp = models.DescribeApplicationTriggerLogPersonalResp;
 const DeleteImagePersonalRequest = models.DeleteImagePersonalRequest;
 const DescribeApplicationTriggerPersonalResponse = models.DescribeApplicationTriggerPersonalResponse;
+const RetentionTask = models.RetentionTask;
 const NamespaceInfoResp = models.NamespaceInfoResp;
 const CreateRepositoryPersonalRequest = models.CreateRepositoryPersonalRequest;
 const DescribeImageFilterPersonalResponse = models.DescribeImageFilterPersonalResponse;
@@ -108,10 +139,13 @@ const CreateUserPersonalResponse = models.CreateUserPersonalResponse;
 const DescribeWebhookTriggerResponse = models.DescribeWebhookTriggerResponse;
 const DescribeImageManifestsRequest = models.DescribeImageManifestsRequest;
 const ModifyNamespaceRequest = models.ModifyNamespaceRequest;
+const DeleteImageRequest = models.DeleteImageRequest;
 const ModifyRepositoryAccessPersonalRequest = models.ModifyRepositoryAccessPersonalRequest;
 const TagSpecification = models.TagSpecification;
+const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
 const DescribeImageLifecycleGlobalPersonalRequest = models.DescribeImageLifecycleGlobalPersonalRequest;
 const DescribeImageLifecyclePersonalRequest = models.DescribeImageLifecyclePersonalRequest;
+const DeleteSecurityPolicyRequest = models.DeleteSecurityPolicyRequest;
 const RepositoryInfoResp = models.RepositoryInfoResp;
 const CreateInstanceRequest = models.CreateInstanceRequest;
 const DescribeInstanceTokenRequest = models.DescribeInstanceTokenRequest;
@@ -119,35 +153,57 @@ const BatchDeleteRepositoryPersonalResponse = models.BatchDeleteRepositoryPerson
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const BatchDeleteRepositoryPersonalRequest = models.BatchDeleteRepositoryPersonalRequest;
 const TriggerInvokeCondition = models.TriggerInvokeCondition;
+const DescribeChartDownloadInfoRequest = models.DescribeChartDownloadInfoRequest;
 const ValidateRepositoryExistPersonalResponse = models.ValidateRepositoryExistPersonalResponse;
+const DescribeExternalEndpointStatusResponse = models.DescribeExternalEndpointStatusResponse;
+const ModifySecurityPolicyRequest = models.ModifySecurityPolicyRequest;
 const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const CreateInternalEndpointDnsRequest = models.CreateInternalEndpointDnsRequest;
 const Filter = models.Filter;
+const RetentionExecution = models.RetentionExecution;
+const ManageReplicationResponse = models.ManageReplicationResponse;
 const DescribeReplicationInstanceCreateTasksRequest = models.DescribeReplicationInstanceCreateTasksRequest;
+const ModifyWebhookTriggerResponse = models.ModifyWebhookTriggerResponse;
 const RepoInfo = models.RepoInfo;
 const ManageImageLifecycleGlobalPersonalRequest = models.ManageImageLifecycleGlobalPersonalRequest;
 const DescribeUserQuotaPersonalResponse = models.DescribeUserQuotaPersonalResponse;
 const DescribeImagePersonalRequest = models.DescribeImagePersonalRequest;
+const ModifySecurityPolicyResponse = models.ModifySecurityPolicyResponse;
 const DeleteImageLifecyclePersonalRequest = models.DeleteImageLifecyclePersonalRequest;
 const ModifyApplicationTriggerPersonalResponse = models.ModifyApplicationTriggerPersonalResponse;
+const DeleteInstanceRequest = models.DeleteInstanceRequest;
 const DescribeImageManifestsResponse = models.DescribeImageManifestsResponse;
 const DescribeNamespacePersonalResponse = models.DescribeNamespacePersonalResponse;
 const DeleteNamespacePersonalResponse = models.DeleteNamespacePersonalResponse;
 const Header = models.Header;
+const RetentionPolicy = models.RetentionPolicy;
+const CreateSecurityPolicyRequest = models.CreateSecurityPolicyRequest;
 const CreateWebhookTriggerRequest = models.CreateWebhookTriggerRequest;
 const DescribeRepositoryOwnerPersonalRequest = models.DescribeRepositoryOwnerPersonalRequest;
 const ModifyRepositoryInfoPersonalRequest = models.ModifyRepositoryInfoPersonalRequest;
 const DescribeApplicationTriggerLogPersonalRequest = models.DescribeApplicationTriggerLogPersonalRequest;
 const DescribeFavorRepositoryPersonalRequest = models.DescribeFavorRepositoryPersonalRequest;
-const DescribeNamespacesRequest = models.DescribeNamespacesRequest;
+const DescribeApplicationTriggerLogPersonalResponse = models.DescribeApplicationTriggerLogPersonalResponse;
+const ManageInternalEndpointResponse = models.ManageInternalEndpointResponse;
+const CreateRepositoryPersonalResponse = models.CreateRepositoryPersonalResponse;
 const DescribeRepositoryFilterPersonalResponse = models.DescribeRepositoryFilterPersonalResponse;
+const CreateTagRetentionExecutionResponse = models.CreateTagRetentionExecutionResponse;
 const DescribeFavorRepositoryPersonalResponse = models.DescribeFavorRepositoryPersonalResponse;
+const CheckInstanceNameResponse = models.CheckInstanceNameResponse;
+const ManageImageLifecycleGlobalPersonalResponse = models.ManageImageLifecycleGlobalPersonalResponse;
+const DescribeTagRetentionRulesResponse = models.DescribeTagRetentionRulesResponse;
 const ModifyRepositoryAccessPersonalResponse = models.ModifyRepositoryAccessPersonalResponse;
+const ManageExternalEndpointResponse = models.ManageExternalEndpointResponse;
 const ModifyApplicationTriggerPersonalRequest = models.ModifyApplicationTriggerPersonalRequest;
+const CreateReplicationInstanceResponse = models.CreateReplicationInstanceResponse;
 const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
 const ModifyUserPasswordPersonalRequest = models.ModifyUserPasswordPersonalRequest;
+const DescribeSecurityPoliciesRequest = models.DescribeSecurityPoliciesRequest;
 const ReplicationRegistry = models.ReplicationRegistry;
+const DescribeInternalEndpointsRequest = models.DescribeInternalEndpointsRequest;
 const ValidateNamespaceExistPersonalResponse = models.ValidateNamespaceExistPersonalResponse;
+const DescribeWebhookTriggerLogResponse = models.DescribeWebhookTriggerLogResponse;
 const DescribeApplicationTriggerPersonalResp = models.DescribeApplicationTriggerPersonalResp;
 const TagInfo = models.TagInfo;
 const CreateRepositoryRequest = models.CreateRepositoryRequest;
@@ -156,22 +212,29 @@ const DescribeWebhookTriggerRequest = models.DescribeWebhookTriggerRequest;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const BatchDeleteImagePersonalRequest = models.BatchDeleteImagePersonalRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
-const TriggerResp = models.TriggerResp;
+const ModifyTagRetentionRuleResponse = models.ModifyTagRetentionRuleResponse;
+const DescribeTagRetentionExecutionRequest = models.DescribeTagRetentionExecutionRequest;
 const CreateRepositoryResponse = models.CreateRepositoryResponse;
+const DescribeTagRetentionRulesRequest = models.DescribeTagRetentionRulesRequest;
 const RespLimit = models.RespLimit;
-const DuplicateImagePersonalRequest = models.DuplicateImagePersonalRequest;
+const CheckInstanceNameRequest = models.CheckInstanceNameRequest;
 const DescribeInstanceTokenResponse = models.DescribeInstanceTokenResponse;
 const SameImagesResp = models.SameImagesResp;
+const DescribeTagRetentionExecutionResponse = models.DescribeTagRetentionExecutionResponse;
 const CreateNamespacePersonalRequest = models.CreateNamespacePersonalRequest;
 const WebhookTrigger = models.WebhookTrigger;
 const CreateWebhookTriggerResponse = models.CreateWebhookTriggerResponse;
+const ReplicationFilter = models.ReplicationFilter;
+const DeleteTagRetentionRuleRequest = models.DeleteTagRetentionRuleRequest;
 const TcrRepositoryInfo = models.TcrRepositoryInfo;
 const TcrInstanceToken = models.TcrInstanceToken;
 const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
-const DeleteImageRequest = models.DeleteImageRequest;
-const CreateRepositoryPersonalResponse = models.CreateRepositoryPersonalResponse;
+const CreateInternalEndpointDnsResponse = models.CreateInternalEndpointDnsResponse;
+const CreateTagRetentionExecutionRequest = models.CreateTagRetentionExecutionRequest;
 const CreateApplicationTriggerPersonalResponse = models.CreateApplicationTriggerPersonalResponse;
+const ManageInternalEndpointRequest = models.ManageInternalEndpointRequest;
 const BatchDeleteImagePersonalResponse = models.BatchDeleteImagePersonalResponse;
+const DeleteInternalEndpointDnsResponse = models.DeleteInternalEndpointDnsResponse;
 const DeleteRepositoryPersonalRequest = models.DeleteRepositoryPersonalRequest;
 
 
@@ -194,6 +257,17 @@ class TcrClient extends AbstractClient {
     ModifyNamespace(req, cb) {
         let resp = new ModifyNamespaceResponse();
         this.request("ModifyNamespace", req, resp, cb);
+    }
+
+    /**
+     * 查询触发器
+     * @param {DescribeWebhookTriggerRequest} req
+     * @param {function(string, DescribeWebhookTriggerResponse):void} cb
+     * @public
+     */
+    DescribeWebhookTrigger(req, cb) {
+        let resp = new DescribeWebhookTriggerResponse();
+        this.request("DescribeWebhookTrigger", req, resp, cb);
     }
 
     /**
@@ -230,6 +304,50 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 创建实例公网访问白名单策略
+     * @param {CreateSecurityPolicyRequest} req
+     * @param {function(string, CreateSecurityPolicyResponse):void} cb
+     * @public
+     */
+    CreateSecurityPolicy(req, cb) {
+        let resp = new CreateSecurityPolicyResponse();
+        this.request("CreateSecurityPolicy", req, resp, cb);
+    }
+
+    /**
+     * 删除实例公网访问白名单策略
+     * @param {DeleteSecurityPolicyRequest} req
+     * @param {function(string, DeleteSecurityPolicyResponse):void} cb
+     * @public
+     */
+    DeleteSecurityPolicy(req, cb) {
+        let resp = new DeleteSecurityPolicyResponse();
+        this.request("DeleteSecurityPolicy", req, resp, cb);
+    }
+
+    /**
+     * 管理实例内网访问VPC链接
+     * @param {ManageInternalEndpointRequest} req
+     * @param {function(string, ManageInternalEndpointResponse):void} cb
+     * @public
+     */
+    ManageInternalEndpoint(req, cb) {
+        let resp = new ManageInternalEndpointResponse();
+        this.request("ManageInternalEndpoint", req, resp, cb);
+    }
+
+    /**
+     * 查询版本保留规则
+     * @param {DescribeTagRetentionRulesRequest} req
+     * @param {function(string, DescribeTagRetentionRulesResponse):void} cb
+     * @public
+     */
+    DescribeTagRetentionRules(req, cb) {
+        let resp = new DescribeTagRetentionRulesResponse();
+        this.request("DescribeTagRetentionRules", req, resp, cb);
+    }
+
+    /**
      * 用于获取个人版镜像仓库tag列表
      * @param {DescribeImagePersonalRequest} req
      * @param {function(string, DescribeImagePersonalResponse):void} cb
@@ -263,6 +381,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 创建个人版镜像仓库命名空间，此命名空间全局唯一
+     * @param {CreateNamespacePersonalRequest} req
+     * @param {function(string, CreateNamespacePersonalResponse):void} cb
+     * @public
+     */
+    CreateNamespacePersonal(req, cb) {
+        let resp = new CreateNamespacePersonalResponse();
+        this.request("CreateNamespacePersonal", req, resp, cb);
+    }
+
+    /**
      * 用于在企业版中创建命名空间
      * @param {CreateNamespaceRequest} req
      * @param {function(string, CreateNamespaceResponse):void} cb
@@ -274,14 +403,36 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于修改应用更新触发器
-     * @param {ModifyApplicationTriggerPersonalRequest} req
-     * @param {function(string, ModifyApplicationTriggerPersonalResponse):void} cb
+     * 删除版本保留规则
+     * @param {DeleteTagRetentionRuleRequest} req
+     * @param {function(string, DeleteTagRetentionRuleResponse):void} cb
      * @public
      */
-    ModifyApplicationTriggerPersonal(req, cb) {
-        let resp = new ModifyApplicationTriggerPersonalResponse();
-        this.request("ModifyApplicationTriggerPersonal", req, resp, cb);
+    DeleteTagRetentionRule(req, cb) {
+        let resp = new DeleteTagRetentionRuleResponse();
+        this.request("DeleteTagRetentionRule", req, resp, cb);
+    }
+
+    /**
+     * 查询版本保留执行记录
+     * @param {DescribeTagRetentionExecutionRequest} req
+     * @param {function(string, DescribeTagRetentionExecutionResponse):void} cb
+     * @public
+     */
+    DescribeTagRetentionExecution(req, cb) {
+        let resp = new DescribeTagRetentionExecutionResponse();
+        this.request("DescribeTagRetentionExecution", req, resp, cb);
+    }
+
+    /**
+     * 查询个人用户配额
+     * @param {DescribeUserQuotaPersonalRequest} req
+     * @param {function(string, DescribeUserQuotaPersonalResponse):void} cb
+     * @public
+     */
+    DescribeUserQuotaPersonal(req, cb) {
+        let resp = new DescribeUserQuotaPersonalResponse();
+        this.request("DescribeUserQuotaPersonal", req, resp, cb);
     }
 
     /**
@@ -296,14 +447,25 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于个人版镜像仓库中删除
-     * @param {DeleteRepositoryPersonalRequest} req
-     * @param {function(string, DeleteRepositoryPersonalResponse):void} cb
+     * 用于在企业版中返回Chart的下载信息
+     * @param {DescribeChartDownloadInfoRequest} req
+     * @param {function(string, DescribeChartDownloadInfoResponse):void} cb
      * @public
      */
-    DeleteRepositoryPersonal(req, cb) {
-        let resp = new DeleteRepositoryPersonalResponse();
-        this.request("DeleteRepositoryPersonal", req, resp, cb);
+    DescribeChartDownloadInfo(req, cb) {
+        let resp = new DescribeChartDownloadInfoResponse();
+        this.request("DescribeChartDownloadInfo", req, resp, cb);
+    }
+
+    /**
+     * 删除命名空间
+     * @param {DeleteNamespaceRequest} req
+     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * @public
+     */
+    DeleteNamespace(req, cb) {
+        let resp = new DeleteNamespaceResponse();
+        this.request("DeleteNamespace", req, resp, cb);
     }
 
     /**
@@ -315,6 +477,17 @@ class TcrClient extends AbstractClient {
     DeleteRepository(req, cb) {
         let resp = new DeleteRepositoryResponse();
         this.request("DeleteRepository", req, resp, cb);
+    }
+
+    /**
+     * 删除镜像仓库企业版实例
+     * @param {DeleteInstanceRequest} req
+     * @param {function(string, DeleteInstanceResponse):void} cb
+     * @public
+     */
+    DeleteInstance(req, cb) {
+        let resp = new DeleteInstanceResponse();
+        this.request("DeleteInstance", req, resp, cb);
     }
 
     /**
@@ -340,6 +513,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 用于修改应用更新触发器
+     * @param {ModifyApplicationTriggerPersonalRequest} req
+     * @param {function(string, ModifyApplicationTriggerPersonalResponse):void} cb
+     * @public
+     */
+    ModifyApplicationTriggerPersonal(req, cb) {
+        let resp = new ModifyApplicationTriggerPersonalResponse();
+        this.request("ModifyApplicationTriggerPersonal", req, resp, cb);
+    }
+
+    /**
      * 用于在个人版镜像仓库中更新容器镜像描述
      * @param {ModifyRepositoryInfoPersonalRequest} req
      * @param {function(string, ModifyRepositoryInfoPersonalResponse):void} cb
@@ -351,14 +535,25 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 获取触发器日志
-     * @param {DescribeWebhookTriggerLogRequest} req
-     * @param {function(string, DescribeWebhookTriggerLogResponse):void} cb
+     * 手动执行版本保留
+     * @param {CreateTagRetentionExecutionRequest} req
+     * @param {function(string, CreateTagRetentionExecutionResponse):void} cb
      * @public
      */
-    DescribeWebhookTriggerLog(req, cb) {
-        let resp = new DescribeWebhookTriggerLogResponse();
-        this.request("DescribeWebhookTriggerLog", req, resp, cb);
+    CreateTagRetentionExecution(req, cb) {
+        let resp = new CreateTagRetentionExecutionResponse();
+        this.request("CreateTagRetentionExecution", req, resp, cb);
+    }
+
+    /**
+     * 检查待创建的实例名称是否符合规范
+     * @param {CheckInstanceNameRequest} req
+     * @param {function(string, CheckInstanceNameResponse):void} cb
+     * @public
+     */
+    CheckInstanceName(req, cb) {
+        let resp = new CheckInstanceNameResponse();
+        this.request("CheckInstanceName", req, resp, cb);
     }
 
     /**
@@ -384,14 +579,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 删除命名空间
-     * @param {DeleteNamespaceRequest} req
-     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * 用于个人版镜像仓库中删除
+     * @param {DeleteRepositoryPersonalRequest} req
+     * @param {function(string, DeleteRepositoryPersonalResponse):void} cb
      * @public
      */
-    DeleteNamespace(req, cb) {
-        let resp = new DeleteNamespaceResponse();
-        this.request("DeleteNamespace", req, resp, cb);
+    DeleteRepositoryPersonal(req, cb) {
+        let resp = new DeleteRepositoryPersonalResponse();
+        this.request("DeleteRepositoryPersonal", req, resp, cb);
     }
 
     /**
@@ -428,6 +623,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 用于在TCR中下载helm chart
+     * @param {DownloadHelmChartRequest} req
+     * @param {function(string, DownloadHelmChartResponse):void} cb
+     * @public
+     */
+    DownloadHelmChart(req, cb) {
+        let resp = new DownloadHelmChartResponse();
+        this.request("DownloadHelmChart", req, resp, cb);
+    }
+
+    /**
      * 用于设置个人版全局镜像版本自动清理策略
      * @param {ManageImageLifecycleGlobalPersonalRequest} req
      * @param {function(string, ManageImageLifecycleGlobalPersonalResponse):void} cb
@@ -447,6 +653,17 @@ class TcrClient extends AbstractClient {
     DescribeApplicationTriggerLogPersonal(req, cb) {
         let resp = new DescribeApplicationTriggerLogPersonalResponse();
         this.request("DescribeApplicationTriggerLogPersonal", req, resp, cb);
+    }
+
+    /**
+     * 预付费实例续费，同时支持按量计费转包年包月
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
+     * @public
+     */
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
     }
 
     /**
@@ -483,14 +700,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 查询触发器
-     * @param {DescribeWebhookTriggerRequest} req
-     * @param {function(string, DescribeWebhookTriggerResponse):void} cb
+     * 创建tcr内网私有域名解析
+     * @param {CreateInternalEndpointDnsRequest} req
+     * @param {function(string, CreateInternalEndpointDnsResponse):void} cb
      * @public
      */
-    DescribeWebhookTrigger(req, cb) {
-        let resp = new DescribeWebhookTriggerResponse();
-        this.request("DescribeWebhookTrigger", req, resp, cb);
+    CreateInternalEndpointDns(req, cb) {
+        let resp = new CreateInternalEndpointDnsResponse();
+        this.request("CreateInternalEndpointDns", req, resp, cb);
     }
 
     /**
@@ -502,6 +719,17 @@ class TcrClient extends AbstractClient {
     DeleteImagePersonal(req, cb) {
         let resp = new DeleteImagePersonalResponse();
         this.request("DeleteImagePersonal", req, resp, cb);
+    }
+
+    /**
+     * 获取触发器日志
+     * @param {DescribeWebhookTriggerLogRequest} req
+     * @param {function(string, DescribeWebhookTriggerLogResponse):void} cb
+     * @public
+     */
+    DescribeWebhookTriggerLog(req, cb) {
+        let resp = new DescribeWebhookTriggerLogResponse();
+        this.request("DescribeWebhookTriggerLog", req, resp, cb);
     }
 
     /**
@@ -538,14 +766,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 查询从实例列表
-     * @param {DescribeReplicationInstancesRequest} req
-     * @param {function(string, DescribeReplicationInstancesResponse):void} cb
+     * 查询创建从实例任务状态
+     * @param {DescribeReplicationInstanceCreateTasksRequest} req
+     * @param {function(string, DescribeReplicationInstanceCreateTasksResponse):void} cb
      * @public
      */
-    DescribeReplicationInstances(req, cb) {
-        let resp = new DescribeReplicationInstancesResponse();
-        this.request("DescribeReplicationInstances", req, resp, cb);
+    DescribeReplicationInstanceCreateTasks(req, cb) {
+        let resp = new DescribeReplicationInstanceCreateTasksResponse();
+        this.request("DescribeReplicationInstanceCreateTasks", req, resp, cb);
     }
 
     /**
@@ -571,6 +799,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 查询实例公网访问白名单策略
+     * @param {DescribeSecurityPoliciesRequest} req
+     * @param {function(string, DescribeSecurityPoliciesResponse):void} cb
+     * @public
+     */
+    DescribeSecurityPolicies(req, cb) {
+        let resp = new DescribeSecurityPoliciesResponse();
+        this.request("DescribeSecurityPolicies", req, resp, cb);
+    }
+
+    /**
      * 用于个人版镜像仓库中批量删除镜像仓库
      * @param {BatchDeleteRepositoryPersonalRequest} req
      * @param {function(string, BatchDeleteRepositoryPersonalResponse):void} cb
@@ -582,14 +821,25 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 查询个人用户配额
-     * @param {DescribeUserQuotaPersonalRequest} req
-     * @param {function(string, DescribeUserQuotaPersonalResponse):void} cb
+     * 更新版本保留规则
+     * @param {ModifyTagRetentionRuleRequest} req
+     * @param {function(string, ModifyTagRetentionRuleResponse):void} cb
      * @public
      */
-    DescribeUserQuotaPersonal(req, cb) {
-        let resp = new DescribeUserQuotaPersonalResponse();
-        this.request("DescribeUserQuotaPersonal", req, resp, cb);
+    ModifyTagRetentionRule(req, cb) {
+        let resp = new ModifyTagRetentionRuleResponse();
+        this.request("ModifyTagRetentionRule", req, resp, cb);
+    }
+
+    /**
+     * 查询版本保留执行任务
+     * @param {DescribeTagRetentionExecutionTaskRequest} req
+     * @param {function(string, DescribeTagRetentionExecutionTaskResponse):void} cb
+     * @public
+     */
+    DescribeTagRetentionExecutionTask(req, cb) {
+        let resp = new DescribeTagRetentionExecutionTaskResponse();
+        this.request("DescribeTagRetentionExecutionTask", req, resp, cb);
     }
 
     /**
@@ -604,14 +854,25 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 查询创建从实例任务状态
-     * @param {DescribeReplicationInstanceCreateTasksRequest} req
-     * @param {function(string, DescribeReplicationInstanceCreateTasksResponse):void} cb
+     * 创建从实例
+     * @param {CreateReplicationInstanceRequest} req
+     * @param {function(string, CreateReplicationInstanceResponse):void} cb
      * @public
      */
-    DescribeReplicationInstanceCreateTasks(req, cb) {
-        let resp = new DescribeReplicationInstanceCreateTasksResponse();
-        this.request("DescribeReplicationInstanceCreateTasks", req, resp, cb);
+    CreateReplicationInstance(req, cb) {
+        let resp = new CreateReplicationInstanceResponse();
+        this.request("CreateReplicationInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询实例内网访问VPC链接
+     * @param {DescribeInternalEndpointsRequest} req
+     * @param {function(string, DescribeInternalEndpointsResponse):void} cb
+     * @public
+     */
+    DescribeInternalEndpoints(req, cb) {
+        let resp = new DescribeInternalEndpointsResponse();
+        this.request("DescribeInternalEndpoints", req, resp, cb);
     }
 
     /**
@@ -623,6 +884,17 @@ class TcrClient extends AbstractClient {
     CreateRepository(req, cb) {
         let resp = new CreateRepositoryResponse();
         this.request("CreateRepository", req, resp, cb);
+    }
+
+    /**
+     * 管理实例公网访问
+     * @param {ManageExternalEndpointRequest} req
+     * @param {function(string, ManageExternalEndpointResponse):void} cb
+     * @public
+     */
+    ManageExternalEndpoint(req, cb) {
+        let resp = new ManageExternalEndpointResponse();
+        this.request("ManageExternalEndpoint", req, resp, cb);
     }
 
     /**
@@ -692,6 +964,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 批量查询vpc是否已经添加私有域名解析
+     * @param {DescribeInternalEndpointDnsStatusRequest} req
+     * @param {function(string, DescribeInternalEndpointDnsStatusResponse):void} cb
+     * @public
+     */
+    DescribeInternalEndpointDnsStatus(req, cb) {
+        let resp = new DescribeInternalEndpointDnsStatusResponse();
+        this.request("DescribeInternalEndpointDnsStatus", req, resp, cb);
+    }
+
+    /**
      * 用于在个人版镜像仓库中复制镜像版本
      * @param {DuplicateImagePersonalRequest} req
      * @param {function(string, DuplicateImagePersonalResponse):void} cb
@@ -700,6 +983,28 @@ class TcrClient extends AbstractClient {
     DuplicateImagePersonal(req, cb) {
         let resp = new DuplicateImagePersonalResponse();
         this.request("DuplicateImagePersonal", req, resp, cb);
+    }
+
+    /**
+     * 管理实例同步
+     * @param {ManageReplicationRequest} req
+     * @param {function(string, ManageReplicationResponse):void} cb
+     * @public
+     */
+    ManageReplication(req, cb) {
+        let resp = new ManageReplicationResponse();
+        this.request("ManageReplication", req, resp, cb);
+    }
+
+    /**
+     * 更新实例公网访问白名单
+     * @param {ModifySecurityPolicyRequest} req
+     * @param {function(string, ModifySecurityPolicyResponse):void} cb
+     * @public
+     */
+    ModifySecurityPolicy(req, cb) {
+        let resp = new ModifySecurityPolicyResponse();
+        this.request("ModifySecurityPolicy", req, resp, cb);
     }
 
     /**
@@ -725,14 +1030,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 创建个人版镜像仓库命名空间，此命名空间全局唯一
-     * @param {CreateNamespacePersonalRequest} req
-     * @param {function(string, CreateNamespacePersonalResponse):void} cb
+     * 创建版本保留规则
+     * @param {CreateTagRetentionRuleRequest} req
+     * @param {function(string, CreateTagRetentionRuleResponse):void} cb
      * @public
      */
-    CreateNamespacePersonal(req, cb) {
-        let resp = new CreateNamespacePersonalResponse();
-        this.request("CreateNamespacePersonal", req, resp, cb);
+    CreateTagRetentionRule(req, cb) {
+        let resp = new CreateTagRetentionRuleResponse();
+        this.request("CreateTagRetentionRule", req, resp, cb);
     }
 
     /**
@@ -747,6 +1052,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 查询实例公网访问入口状态
+     * @param {DescribeExternalEndpointStatusRequest} req
+     * @param {function(string, DescribeExternalEndpointStatusResponse):void} cb
+     * @public
+     */
+    DescribeExternalEndpointStatus(req, cb) {
+        let resp = new DescribeExternalEndpointStatusResponse();
+        this.request("DescribeExternalEndpointStatus", req, resp, cb);
+    }
+
+    /**
      * 用于删除个人版全局镜像版本自动清理策略
      * @param {DeleteImageLifecycleGlobalPersonalRequest} req
      * @param {function(string, DeleteImageLifecycleGlobalPersonalResponse):void} cb
@@ -755,6 +1071,17 @@ class TcrClient extends AbstractClient {
     DeleteImageLifecycleGlobalPersonal(req, cb) {
         let resp = new DeleteImageLifecycleGlobalPersonalResponse();
         this.request("DeleteImageLifecycleGlobalPersonal", req, resp, cb);
+    }
+
+    /**
+     * 查询从实例同步状态
+     * @param {DescribeReplicationInstanceSyncStatusRequest} req
+     * @param {function(string, DescribeReplicationInstanceSyncStatusResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstanceSyncStatus(req, cb) {
+        let resp = new DescribeReplicationInstanceSyncStatusResponse();
+        this.request("DescribeReplicationInstanceSyncStatus", req, resp, cb);
     }
 
     /**
@@ -777,6 +1104,17 @@ class TcrClient extends AbstractClient {
     ModifyRepositoryAccessPersonal(req, cb) {
         let resp = new ModifyRepositoryAccessPersonalResponse();
         this.request("ModifyRepositoryAccessPersonal", req, resp, cb);
+    }
+
+    /**
+     * 删除tcr内网私有域名解析
+     * @param {DeleteInternalEndpointDnsRequest} req
+     * @param {function(string, DeleteInternalEndpointDnsResponse):void} cb
+     * @public
+     */
+    DeleteInternalEndpointDns(req, cb) {
+        let resp = new DeleteInternalEndpointDnsResponse();
+        this.request("DeleteInternalEndpointDns", req, resp, cb);
     }
 
     /**
@@ -810,6 +1148,17 @@ class TcrClient extends AbstractClient {
     DeleteImage(req, cb) {
         let resp = new DeleteImageResponse();
         this.request("DeleteImage", req, resp, cb);
+    }
+
+    /**
+     * 查询从实例列表
+     * @param {DescribeReplicationInstancesRequest} req
+     * @param {function(string, DescribeReplicationInstancesResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstances(req, cb) {
+        let resp = new DescribeReplicationInstancesResponse();
+        this.request("DescribeReplicationInstances", req, resp, cb);
     }
 
     /**

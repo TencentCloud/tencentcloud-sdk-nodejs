@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CostComponentSet = models.CostComponentSet;
 const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
+const ConsumptionSummaryTotal = models.ConsumptionSummaryTotal;
 const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProjectResponse;
 const DescribeDosageDetailByDateRequest = models.DescribeDosageDetailByDateRequest;
 const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
@@ -53,11 +54,13 @@ const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionReq
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
 const DescribeCostSummaryByProjectRequest = models.DescribeCostSummaryByProjectRequest;
 const ConsumptionRegionSummaryDataItem = models.ConsumptionRegionSummaryDataItem;
+const DescribeDosageCosDetailByDateResponse = models.DescribeDosageCosDetailByDateResponse;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
 const ConditionPayMode = models.ConditionPayMode;
 const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
+const PayDealsRequest = models.PayDealsRequest;
 const DescribeBillListRequest = models.DescribeBillListRequest;
 const PayDealsResponse = models.PayDealsResponse;
 const BillDetail = models.BillDetail;
@@ -70,13 +73,13 @@ const Deal = models.Deal;
 const DescribeCostDetailRequest = models.DescribeCostDetailRequest;
 const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
 const ConditionProject = models.ConditionProject;
-const ConsumptionSummaryTotal = models.ConsumptionSummaryTotal;
+const CosDetailSets = models.CosDetailSets;
 const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
 const ConditionBusiness = models.ConditionBusiness;
 const DescribeCostSummaryByResourceRequest = models.DescribeCostSummaryByResourceRequest;
 const DescribeCostDetailResponse = models.DescribeCostDetailResponse;
-const PayDealsRequest = models.PayDealsRequest;
+const DescribeDosageCosDetailByDateRequest = models.DescribeDosageCosDetailByDateRequest;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
 const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
@@ -266,6 +269,17 @@ class BillingClient extends AbstractClient {
     DescribeCostDetail(req, cb) {
         let resp = new DescribeCostDetailResponse();
         this.request("DescribeCostDetail", req, resp, cb);
+    }
+
+    /**
+     * 获取COS产品用量明细
+     * @param {DescribeDosageCosDetailByDateRequest} req
+     * @param {function(string, DescribeDosageCosDetailByDateResponse):void} cb
+     * @public
+     */
+    DescribeDosageCosDetailByDate(req, cb) {
+        let resp = new DescribeDosageCosDetailByDateResponse();
+        this.request("DescribeDosageCosDetailByDate", req, resp, cb);
     }
 
     /**

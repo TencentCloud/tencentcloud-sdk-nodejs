@@ -160,6 +160,160 @@ class DescribeAbnormalEventRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTrtcInteractiveTime返回参数结构体
+ * @class
+ */
+class DescribeTrtcInteractiveTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的用量信息数组。
+         * @type {Array.<OneSdkAppIdUsagesInfo> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Usages) {
+            this.Usages = new Array();
+            for (let z in params.Usages) {
+                let obj = new OneSdkAppIdUsagesInfo();
+                obj.deserialize(params.Usages[z]);
+                this.Usages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyPicture返回参数结构体
+ * @class
+ */
+class ModifyPictureResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartMCUMixTranscodeByStrRoomId请求参数结构体
+ * @class
+ */
+class StartMCUMixTranscodeByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 字符串房间号。
+         * @type {string || null}
+         */
+        this.StrRoomId = null;
+
+        /**
+         * 混流输出控制参数。
+         * @type {OutputParams || null}
+         */
+        this.OutputParams = null;
+
+        /**
+         * 混流输出编码参数。
+         * @type {EncodeParams || null}
+         */
+        this.EncodeParams = null;
+
+        /**
+         * 混流输出布局参数。
+         * @type {LayoutParams || null}
+         */
+        this.LayoutParams = null;
+
+        /**
+         * 第三方CDN转推参数。
+         * @type {PublishCdnParams || null}
+         */
+        this.PublishCdnParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
+
+        if (params.OutputParams) {
+            let obj = new OutputParams();
+            obj.deserialize(params.OutputParams)
+            this.OutputParams = obj;
+        }
+
+        if (params.EncodeParams) {
+            let obj = new EncodeParams();
+            obj.deserialize(params.EncodeParams)
+            this.EncodeParams = obj;
+        }
+
+        if (params.LayoutParams) {
+            let obj = new LayoutParams();
+            obj.deserialize(params.LayoutParams)
+            this.LayoutParams = obj;
+        }
+
+        if (params.PublishCdnParams) {
+            let obj = new PublishCdnParams();
+            obj.deserialize(params.PublishCdnParams)
+            this.PublishCdnParams = obj;
+        }
+
+    }
+}
+
+/**
  * MCU混流布局参数
  * @class
  */
@@ -168,7 +322,7 @@ class LayoutParams extends  AbstractModel {
         super();
 
         /**
-         * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板。
+         * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
          * @type {number || null}
          */
         this.Template = null;
@@ -203,6 +357,30 @@ class LayoutParams extends  AbstractModel {
          */
         this.MixVideoUids = null;
 
+        /**
+         * 自定义模板中有效，指定用户视频在混合画面中的位置。
+         * @type {Array.<PresetLayoutConfig> || null}
+         */
+        this.PresetLayoutConfig = null;
+
+        /**
+         * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+         * @type {number || null}
+         */
+        this.PlaceHolderMode = null;
+
+        /**
+         * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
+         * @type {number || null}
+         */
+        this.PureAudioHoldPlaceMode = null;
+
+        /**
+         * 水印参数。
+         * @type {WaterMarkParams || null}
+         */
+        this.WaterMarkParams = null;
+
     }
 
     /**
@@ -223,6 +401,23 @@ class LayoutParams extends  AbstractModel {
         }
         this.MainVideoRightAlign = 'MainVideoRightAlign' in params ? params.MainVideoRightAlign : null;
         this.MixVideoUids = 'MixVideoUids' in params ? params.MixVideoUids : null;
+
+        if (params.PresetLayoutConfig) {
+            this.PresetLayoutConfig = new Array();
+            for (let z in params.PresetLayoutConfig) {
+                let obj = new PresetLayoutConfig();
+                obj.deserialize(params.PresetLayoutConfig[z]);
+                this.PresetLayoutConfig.push(obj);
+            }
+        }
+        this.PlaceHolderMode = 'PlaceHolderMode' in params ? params.PlaceHolderMode : null;
+        this.PureAudioHoldPlaceMode = 'PureAudioHoldPlaceMode' in params ? params.PureAudioHoldPlaceMode : null;
+
+        if (params.WaterMarkParams) {
+            let obj = new WaterMarkParams();
+            obj.deserialize(params.WaterMarkParams)
+            this.WaterMarkParams = obj;
+        }
 
     }
 }
@@ -263,18 +458,54 @@ class TimeValue extends  AbstractModel {
 }
 
 /**
- * StopMCUMixTranscode返回参数结构体
+ * CreatePicture请求参数结构体
  * @class
  */
-class StopMCUMixTranscodeResponse extends  AbstractModel {
+class CreatePictureRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 应用id
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 图片内容经base64编码后的string格式
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Content = null;
+
+        /**
+         * 图片后缀名
+         * @type {string || null}
+         */
+        this.Suffix = null;
+
+        /**
+         * 图片长度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 图片宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 显示位置x轴方向
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * 显示位置y轴方向
+         * @type {number || null}
+         */
+        this.YPosition = null;
 
     }
 
@@ -285,7 +516,155 @@ class StopMCUMixTranscodeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.Suffix = 'Suffix' in params ? params.Suffix : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+
+    }
+}
+
+/**
+ * DescribeTrtcMcuTranscodeTime请求参数结构体
+ * @class
+ */
+class DescribeTrtcMcuTranscodeTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询开始时间，格式为YYYY-MM-DD。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * 查询旁路转码计费时长。
+查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+ * @class
+ */
+class SdkAppIdTrtcMcuTranscodeTimeUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * 语音时长，单位：秒。
+         * @type {number || null}
+         */
+        this.AudioTime = null;
+
+        /**
+         * 视频时长-标清SD，单位：秒。
+         * @type {number || null}
+         */
+        this.VideoTimeSd = null;
+
+        /**
+         * 视频时长-高清HD，单位：秒。
+         * @type {number || null}
+         */
+        this.VideoTimeHd = null;
+
+        /**
+         * 视频时长-全高清FHD，单位：秒。
+         * @type {number || null}
+         */
+        this.VideoTimeFhd = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
+        this.VideoTimeSd = 'VideoTimeSd' in params ? params.VideoTimeSd : null;
+        this.VideoTimeHd = 'VideoTimeHd' in params ? params.VideoTimeHd : null;
+        this.VideoTimeFhd = 'VideoTimeFhd' in params ? params.VideoTimeFhd : null;
+
+    }
+}
+
+/**
+ * RemoveUserByStrRoomId请求参数结构体
+ * @class
+ */
+class RemoveUserByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号。
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 要移出的用户列表，最多10个。
+         * @type {Array.<string> || null}
+         */
+        this.UserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
 
     }
 }
@@ -405,6 +784,49 @@ class DescribeRealtimeNetworkResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRecordStatistic请求参数结构体
+ * @class
+ */
+class DescribeRecordStatisticRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询开始日期，格式为YYYY-MM-DD。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束日期，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
  * DescribeUserInformation请求参数结构体
  * @class
  */
@@ -419,7 +841,7 @@ class DescribeUserInformationRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+         * 查询开始时间，14天内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
@@ -489,7 +911,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+         * 查询开始时间，14天内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
@@ -675,13 +1097,13 @@ class EncodeParams extends  AbstractModel {
         super();
 
         /**
-         * 混流-输出流音频采样率。取值为[48000, 44100, 32000,24000,, 16000, 12000, 8000]，单位是Hz。
+         * 混流-输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。
          * @type {number || null}
          */
         this.AudioSampleRate = null;
 
         /**
-         * 混流-输出流音频码率。取值范围[8,500]，单位为Kbps。
+         * 混流-输出流音频码率。取值范围[8,500]，单位为kbps。
          * @type {number || null}
          */
         this.AudioBitrate = null;
@@ -705,7 +1127,7 @@ class EncodeParams extends  AbstractModel {
         this.VideoHeight = null;
 
         /**
-         * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为Kbps。
+         * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为kbps。
          * @type {number || null}
          */
         this.VideoBitrate = null;
@@ -723,7 +1145,14 @@ class EncodeParams extends  AbstractModel {
         this.VideoGop = null;
 
         /**
-         * 混流-输出流背景色。
+         * 混流-输出流背景色，取值是十进制整数。常用的颜色有：
+红色：0xff0000，对应的十进制整数是16724736。
+黄色：0xffff00。对应的十进制整数是16776960。
+绿色：0x33cc00。对应的十进制整数是3394560。
+蓝色：0x0066ff。对应的十进制整数是26367。
+黑色：0x000000。对应的十进制整数是0。
+白色：0xFFFFFF。对应的十进制整数是16777215。
+灰色：0x999999。对应的十进制整数是10066329。
          * @type {number || null}
          */
         this.BackgroundColor = null;
@@ -733,6 +1162,12 @@ class EncodeParams extends  AbstractModel {
          * @type {number || null}
          */
         this.BackgroundImageId = null;
+
+        /**
+         * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]
+         * @type {number || null}
+         */
+        this.AudioCodec = null;
 
     }
 
@@ -753,6 +1188,35 @@ class EncodeParams extends  AbstractModel {
         this.VideoGop = 'VideoGop' in params ? params.VideoGop : null;
         this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
         this.BackgroundImageId = 'BackgroundImageId' in params ? params.BackgroundImageId : null;
+        this.AudioCodec = 'AudioCodec' in params ? params.AudioCodec : null;
+
+    }
+}
+
+/**
+ * RemoveUserByStrRoomId返回参数结构体
+ * @class
+ */
+class RemoveUserByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -795,6 +1259,12 @@ class StartMCUMixTranscodeRequest extends  AbstractModel {
          */
         this.LayoutParams = null;
 
+        /**
+         * 第三方CDN转推参数。
+         * @type {PublishCdnParams || null}
+         */
+        this.PublishCdnParams = null;
+
     }
 
     /**
@@ -823,6 +1293,12 @@ class StartMCUMixTranscodeRequest extends  AbstractModel {
             let obj = new LayoutParams();
             obj.deserialize(params.LayoutParams)
             this.LayoutParams = obj;
+        }
+
+        if (params.PublishCdnParams) {
+            let obj = new PublishCdnParams();
+            obj.deserialize(params.PublishCdnParams)
+            this.PublishCdnParams = obj;
         }
 
     }
@@ -1026,6 +1502,41 @@ class DescribeHistoryScaleRequest extends  AbstractModel {
 }
 
 /**
+ * DeletePicture请求参数结构体
+ * @class
+ */
+class DeletePictureRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片id
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * 应用id
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
  * DescribeRoomInformation返回参数结构体
  * @class
  */
@@ -1034,7 +1545,7 @@ class DescribeRoomInformationResponse extends  AbstractModel {
         super();
 
         /**
-         * 返回的数据总条数
+         * 返回当页数据总数
          * @type {number || null}
          */
         this.Total = null;
@@ -1071,6 +1582,62 @@ class DescribeRoomInformationResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 录制的使用信息。
+ * @class
+ */
+class RecordUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本组数据对应的时间点，格式如:2020-09-07或2020-09-07 00:05:05。
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * 视频时长-标清SD，单位：秒。
+         * @type {number || null}
+         */
+        this.Class1VideoTime = null;
+
+        /**
+         * 视频时长-高清HD，单位：秒。
+         * @type {number || null}
+         */
+        this.Class2VideoTime = null;
+
+        /**
+         * 视频时长-超清HD，单位：秒。
+         * @type {number || null}
+         */
+        this.Class3VideoTime = null;
+
+        /**
+         * 语音时长，单位：秒。
+         * @type {number || null}
+         */
+        this.AudioTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.Class1VideoTime = 'Class1VideoTime' in params ? params.Class1VideoTime : null;
+        this.Class2VideoTime = 'Class2VideoTime' in params ? params.Class2VideoTime : null;
+        this.Class3VideoTime = 'Class3VideoTime' in params ? params.Class3VideoTime : null;
+        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
 
     }
 }
@@ -1138,13 +1705,13 @@ class OutputParams extends  AbstractModel {
         this.PureAudioStream = null;
 
         /**
-         * 自定义录制文件名
+         * 自定义录制文件名称前缀。请先在实时音视频控制台开通录制功能，https://cloud.tencent.com/document/product/647/50768
          * @type {string || null}
          */
         this.RecordId = null;
 
         /**
-         * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3
+         * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3。此参数不建议使用，建议在实时音视频控制台配置纯音频录制模板。
          * @type {number || null}
          */
         this.RecordAudioOnly = null;
@@ -1227,6 +1794,69 @@ class EventMessage extends  AbstractModel {
 }
 
 /**
+ * ModifyPicture请求参数结构体
+ * @class
+ */
+class ModifyPictureRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片id
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * 应用id
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 图片长度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 图片宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 显示位置x轴方向
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * 显示位置y轴方向
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+
+    }
+}
+
+/**
  * CreateTroubleInfo返回参数结构体
  * @class
  */
@@ -1250,6 +1880,41 @@ class CreateTroubleInfoResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopMCUMixTranscodeByStrRoomId请求参数结构体
+ * @class
+ */
+class StopMCUMixTranscodeByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 字符串房间号。
+         * @type {string || null}
+         */
+        this.StrRoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StrRoomId = 'StrRoomId' in params ? params.StrRoomId : null;
 
     }
 }
@@ -1349,6 +2014,34 @@ class AbnormalEvent extends  AbstractModel {
 }
 
 /**
+ * StopMCUMixTranscodeByStrRoomId返回参数结构体
+ * @class
+ */
+class StopMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRealtimeQuality请求参数结构体
  * @class
  */
@@ -1402,39 +2095,18 @@ audioBlockPercent：音频卡顿率
 }
 
 /**
- * 历史规模信息
+ * DeletePicture返回参数结构体
  * @class
  */
-class ScaleInfomation extends  AbstractModel {
+class DeletePictureResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 每天开始的时间
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Time = null;
-
-        /**
-         * 房间人数，用户重复进入同一个房间为1次
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UserNumber = null;
-
-        /**
-         * 房间人次，用户每次进入房间为一次
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UserCount = null;
-
-        /**
-         * sdkappid下一天内的房间数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RoomNumbers = null;
+        this.RequestId = null;
 
     }
 
@@ -1445,10 +2117,35 @@ class ScaleInfomation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Time = 'Time' in params ? params.Time : null;
-        this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
-        this.UserCount = 'UserCount' in params ? params.UserCount : null;
-        this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopMCUMixTranscode返回参数结构体
+ * @class
+ */
+class StopMCUMixTranscodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1660,6 +2357,41 @@ class DescribeDetailEventResponse extends  AbstractModel {
 }
 
 /**
+ * DismissRoomByStrRoomId请求参数结构体
+ * @class
+ */
+class DismissRoomByStrRoomIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号。
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+    }
+}
+
+/**
  * StartMCUMixTranscode返回参数结构体
  * @class
  */
@@ -1683,6 +2415,241 @@ class StartMCUMixTranscodeResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 旁路转码时长的查询结果
+ * @class
+ */
+class OneSdkAppIdTranscodeTimeUsagesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 旁路转码时长查询结果数组
+         * @type {Array.<SdkAppIdTrtcMcuTranscodeTimeUsage> || null}
+         */
+        this.SdkAppIdTranscodeTimeUsages = null;
+
+        /**
+         * 查询记录数量
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SdkAppIdTranscodeTimeUsages) {
+            this.SdkAppIdTranscodeTimeUsages = new Array();
+            for (let z in params.SdkAppIdTranscodeTimeUsages) {
+                let obj = new SdkAppIdTrtcMcuTranscodeTimeUsage();
+                obj.deserialize(params.SdkAppIdTranscodeTimeUsages[z]);
+                this.SdkAppIdTranscodeTimeUsages.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * DescribeTrtcMcuTranscodeTime返回参数结构体
+ * @class
+ */
+class DescribeTrtcMcuTranscodeTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的用量信息数组。
+         * @type {Array.<OneSdkAppIdTranscodeTimeUsagesInfo> || null}
+         */
+        this.Usages = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Usages) {
+            this.Usages = new Array();
+            for (let z in params.Usages) {
+                let obj = new OneSdkAppIdTranscodeTimeUsagesInfo();
+                obj.deserialize(params.Usages[z]);
+                this.Usages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePicture请求参数结构体
+ * @class
+ */
+class DescribePictureRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 图片ID，不填时返回该应用下所有图片
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * 每页数量，不填时默认为10
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 页码，不填时默认为1
+         * @type {number || null}
+         */
+        this.PageNo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.PageNo = 'PageNo' in params ? params.PageNo : null;
+
+    }
+}
+
+/**
+ * SdkAppId级别录制时长数据。
+ * @class
+ */
+class SdkAppIdRecordUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SdkAppId的值。
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 统计的时间点数据。
+         * @type {Array.<RecordUsage> || null}
+         */
+        this.Usages = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+        if (params.Usages) {
+            this.Usages = new Array();
+            for (let z in params.Usages) {
+                let obj = new RecordUsage();
+                obj.deserialize(params.Usages[z]);
+                this.Usages.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 单个SdkAppId的音视频互动计费时长用量数组和数组长度。
+ * @class
+ */
+class OneSdkAppIdUsagesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该 SdkAppId 对应的用量记录数长度
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 用量数组
+         * @type {Array.<SdkAppIdTrtcUsage> || null}
+         */
+        this.SdkAppIdTrtcTimeUsages = null;
+
+        /**
+         * 应用ID
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.SdkAppIdTrtcTimeUsages) {
+            this.SdkAppIdTrtcTimeUsages = new Array();
+            for (let z in params.SdkAppIdTrtcTimeUsages) {
+                let obj = new SdkAppIdTrtcUsage();
+                obj.deserialize(params.SdkAppIdTrtcTimeUsages[z]);
+                this.SdkAppIdTrtcTimeUsages.push(obj);
+            }
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
 
     }
 }
@@ -1746,6 +2713,125 @@ class SmallVideoLayoutParams extends  AbstractModel {
         this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
         this.LocationX = 'LocationX' in params ? params.LocationX : null;
         this.LocationY = 'LocationY' in params ? params.LocationY : null;
+
+    }
+}
+
+/**
+ * RemoveUser返回参数结构体
+ * @class
+ */
+class RemoveUserResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 自定义模板中有效，指定用户视频在混合画面中的位置。
+ * @class
+ */
+class PresetLayoutConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定显示在该画面上的用户ID。如果不指定用户ID，会按照用户加入房间的顺序自动匹配PresetLayoutConfig中的画面设置。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 当该画面指定用户时，代表用户的流类型。0为摄像头，1为屏幕分享。小画面为web用户时此值填0。
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * 该画面在输出时的宽度，单位为像素值，不填默认为0。
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * 该画面在输出时的高度，单位为像素值，不填默认为0。
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * 该画面在输出时的X偏移，单位为像素值，LocationX与ImageWidth之和不能超过混流输出的总宽度，不填默认为0。
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * 该画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+        /**
+         * 该画面在输出时的层级，不填默认为0。
+         * @type {number || null}
+         */
+        this.ZOrder = null;
+
+        /**
+         * 该画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底。不填默认为0。
+         * @type {number || null}
+         */
+        this.RenderMode = null;
+
+        /**
+         * 该当前位置用户混入的流类型：0为混入音视频，1为只混入视频，2为只混入音频。默认为0，建议配合指定用户ID使用。
+         * @type {number || null}
+         */
+        this.MixInputType = null;
+
+        /**
+         * 占位图ID。启用占位图功能时，在当前位置的用户没有上行视频时显示占位图。占位图在实时音视频控制台上传并生成，https://cloud.tencent.com/document/product/647/50769
+         * @type {number || null}
+         */
+        this.PlaceImageId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+        this.ZOrder = 'ZOrder' in params ? params.ZOrder : null;
+        this.RenderMode = 'RenderMode' in params ? params.RenderMode : null;
+        this.MixInputType = 'MixInputType' in params ? params.MixInputType : null;
+        this.PlaceImageId = 'PlaceImageId' in params ? params.PlaceImageId : null;
 
     }
 }
@@ -1869,6 +2955,199 @@ class DescribeCallDetailResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePicture返回参数结构体
+ * @class
+ */
+class DescribePictureResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的图片记录数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 图片信息列表
+         * @type {Array.<PictureInfo> || null}
+         */
+        this.PictureInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.PictureInfo) {
+            this.PictureInfo = new Array();
+            for (let z in params.PictureInfo) {
+                let obj = new PictureInfo();
+                obj.deserialize(params.PictureInfo[z]);
+                this.PictureInfo.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 查询音视频互动时长的输出数据。
+查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+ * @class
+ */
+class SdkAppIdTrtcUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
+         * @type {string || null}
+         */
+        this.TimeKey = null;
+
+        /**
+         * 语音时长，单位：秒。
+         * @type {number || null}
+         */
+        this.AudioTime = null;
+
+        /**
+         * 音视频时长，单位：秒。
+2019年10月11日前注册，没有变更为 [新计费模式](https://cloud.tencent.com/document/product/647/17157) 的用户才会返回此值。
+         * @type {number || null}
+         */
+        this.AudioVideoTime = null;
+
+        /**
+         * 视频时长-标清SD，单位：秒。
+         * @type {number || null}
+         */
+        this.VideoTimeSd = null;
+
+        /**
+         * 视频时长-高清HD，单位：秒。
+         * @type {number || null}
+         */
+        this.VideoTimeHd = null;
+
+        /**
+         * 视频时长-超清HD，单位：秒。
+         * @type {number || null}
+         */
+        this.VideoTimeHdp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeKey = 'TimeKey' in params ? params.TimeKey : null;
+        this.AudioTime = 'AudioTime' in params ? params.AudioTime : null;
+        this.AudioVideoTime = 'AudioVideoTime' in params ? params.AudioVideoTime : null;
+        this.VideoTimeSd = 'VideoTimeSd' in params ? params.VideoTimeSd : null;
+        this.VideoTimeHd = 'VideoTimeHd' in params ? params.VideoTimeHd : null;
+        this.VideoTimeHdp = 'VideoTimeHdp' in params ? params.VideoTimeHdp : null;
+
+    }
+}
+
+/**
+ * DescribeTrtcInteractiveTime请求参数结构体
+ * @class
+ */
+class DescribeTrtcInteractiveTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询开始时间，格式为YYYY-MM-DD。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回所有应用的合计值。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+    }
+}
+
+/**
+ * 第三方CDN转推参数
+ * @class
+ */
+class PublishCdnParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 腾讯云直播BizId。
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 第三方CDN转推的目的地址，同时只支持转推一个第三方CDN地址。
+         * @type {Array.<string> || null}
+         */
+        this.PublishCdnUrls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.PublishCdnUrls = 'PublishCdnUrls' in params ? params.PublishCdnUrls : null;
+
+    }
+}
+
+/**
  * DescribeRoomInformation请求参数结构体
  * @class
  */
@@ -1883,7 +3162,7 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.SdkAppId = null;
 
         /**
-         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+         * 查询开始时间，14天内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
@@ -1895,7 +3174,7 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 数字房间号
+         * 字符串房间号
          * @type {string || null}
          */
         this.RoomId = null;
@@ -1932,6 +3211,58 @@ class DescribeRoomInformationRequest extends  AbstractModel {
 }
 
 /**
+ * 历史规模信息
+ * @class
+ */
+class ScaleInfomation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 每天开始的时间
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * 房间人数，用户重复进入同一个房间为1次
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UserNumber = null;
+
+        /**
+         * 房间人次，用户每次进入房间为一次
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UserCount = null;
+
+        /**
+         * sdkappid下一天内的房间数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RoomNumbers = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.UserNumber = 'UserNumber' in params ? params.UserNumber : null;
+        this.UserCount = 'UserCount' in params ? params.UserCount : null;
+        this.RoomNumbers = 'RoomNumbers' in params ? params.RoomNumbers : null;
+
+    }
+}
+
+/**
  * DescribeDetailEvent请求参数结构体
  * @class
  */
@@ -1946,7 +3277,7 @@ class DescribeDetailEventRequest extends  AbstractModel {
         this.CommId = null;
 
         /**
-         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+         * 查询开始时间，14天内。本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
@@ -2115,10 +3446,144 @@ class RoomState extends  AbstractModel {
 }
 
 /**
- * RemoveUser返回参数结构体
+ * CreatePicture返回参数结构体
  * @class
  */
-class RemoveUserResponse extends  AbstractModel {
+class CreatePictureResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片id
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * MCU混流水印参数
+ * @class
+ */
+class WaterMarkParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 混流-水印图片ID。取值为实时音视频控制台上传的图片ID。
+         * @type {number || null}
+         */
+        this.WaterMarkId = null;
+
+        /**
+         * 混流-水印宽。单位为像素值。
+         * @type {number || null}
+         */
+        this.WaterMarkWidth = null;
+
+        /**
+         * 混流-水印高。单位为像素值。
+         * @type {number || null}
+         */
+        this.WaterMarkHeight = null;
+
+        /**
+         * 水印在输出时的X偏移。单位为像素值。
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * 水印在输出时的Y偏移。单位为像素值。
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WaterMarkId = 'WaterMarkId' in params ? params.WaterMarkId : null;
+        this.WaterMarkWidth = 'WaterMarkWidth' in params ? params.WaterMarkWidth : null;
+        this.WaterMarkHeight = 'WaterMarkHeight' in params ? params.WaterMarkHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+
+    }
+}
+
+/**
+ * DescribeRecordStatistic返回参数结构体
+ * @class
+ */
+class DescribeRecordStatisticResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的用量信息数组。
+         * @type {Array.<SdkAppIdRecordUsage> || null}
+         */
+        this.SdkAppIdUsages = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SdkAppIdUsages) {
+            this.SdkAppIdUsages = new Array();
+            for (let z in params.SdkAppIdUsages) {
+                let obj = new SdkAppIdRecordUsage();
+                obj.deserialize(params.SdkAppIdUsages[z]);
+                this.SdkAppIdUsages.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DismissRoomByStrRoomId返回参数结构体
+ * @class
+ */
+class DismissRoomByStrRoomIdResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2193,48 +3658,171 @@ class DescribeHistoryScaleResponse extends  AbstractModel {
     }
 }
 
+/**
+ * StartMCUMixTranscodeByStrRoomId返回参数结构体
+ * @class
+ */
+class StartMCUMixTranscodeByStrRoomIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 图片列表信息
+ * @class
+ */
+class PictureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片长度
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 图片宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 显示位置x轴方向
+         * @type {number || null}
+         */
+        this.XPosition = null;
+
+        /**
+         * 显示位置y轴方向
+         * @type {number || null}
+         */
+        this.YPosition = null;
+
+        /**
+         * 应用id
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 图片id
+         * @type {number || null}
+         */
+        this.PictureId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.XPosition = 'XPosition' in params ? params.XPosition : null;
+        this.YPosition = 'YPosition' in params ? params.YPosition : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.PictureId = 'PictureId' in params ? params.PictureId : null;
+
+    }
+}
+
 module.exports = {
     DescribeAbnormalEventResponse: DescribeAbnormalEventResponse,
     RealtimeData: RealtimeData,
     DescribeAbnormalEventRequest: DescribeAbnormalEventRequest,
+    DescribeTrtcInteractiveTimeResponse: DescribeTrtcInteractiveTimeResponse,
+    ModifyPictureResponse: ModifyPictureResponse,
+    StartMCUMixTranscodeByStrRoomIdRequest: StartMCUMixTranscodeByStrRoomIdRequest,
     LayoutParams: LayoutParams,
     TimeValue: TimeValue,
-    StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
+    CreatePictureRequest: CreatePictureRequest,
+    DescribeTrtcMcuTranscodeTimeRequest: DescribeTrtcMcuTranscodeTimeRequest,
+    SdkAppIdTrtcMcuTranscodeTimeUsage: SdkAppIdTrtcMcuTranscodeTimeUsage,
+    RemoveUserByStrRoomIdRequest: RemoveUserByStrRoomIdRequest,
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
     DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
+    DescribeRecordStatisticRequest: DescribeRecordStatisticRequest,
     DescribeUserInformationRequest: DescribeUserInformationRequest,
     DescribeCallDetailRequest: DescribeCallDetailRequest,
     DescribeRealtimeNetworkRequest: DescribeRealtimeNetworkRequest,
     DescribeUserInformationResponse: DescribeUserInformationResponse,
     EncodeParams: EncodeParams,
+    RemoveUserByStrRoomIdResponse: RemoveUserByStrRoomIdResponse,
     StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
     DescribeRealtimeQualityResponse: DescribeRealtimeQualityResponse,
     StopMCUMixTranscodeRequest: StopMCUMixTranscodeRequest,
     UserInformation: UserInformation,
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
+    DeletePictureRequest: DeletePictureRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
+    RecordUsage: RecordUsage,
     RemoveUserRequest: RemoveUserRequest,
     OutputParams: OutputParams,
     EventMessage: EventMessage,
+    ModifyPictureRequest: ModifyPictureRequest,
     CreateTroubleInfoResponse: CreateTroubleInfoResponse,
+    StopMCUMixTranscodeByStrRoomIdRequest: StopMCUMixTranscodeByStrRoomIdRequest,
     QualityData: QualityData,
     AbnormalEvent: AbnormalEvent,
+    StopMCUMixTranscodeByStrRoomIdResponse: StopMCUMixTranscodeByStrRoomIdResponse,
     DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
-    ScaleInfomation: ScaleInfomation,
+    DeletePictureResponse: DeletePictureResponse,
+    StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
     EventList: EventList,
     DismissRoomRequest: DismissRoomRequest,
     DescribeDetailEventResponse: DescribeDetailEventResponse,
+    DismissRoomByStrRoomIdRequest: DismissRoomByStrRoomIdRequest,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
+    OneSdkAppIdTranscodeTimeUsagesInfo: OneSdkAppIdTranscodeTimeUsagesInfo,
+    DescribeTrtcMcuTranscodeTimeResponse: DescribeTrtcMcuTranscodeTimeResponse,
+    DescribePictureRequest: DescribePictureRequest,
+    SdkAppIdRecordUsage: SdkAppIdRecordUsage,
+    OneSdkAppIdUsagesInfo: OneSdkAppIdUsagesInfo,
     SmallVideoLayoutParams: SmallVideoLayoutParams,
+    RemoveUserResponse: RemoveUserResponse,
+    PresetLayoutConfig: PresetLayoutConfig,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
+    DescribePictureResponse: DescribePictureResponse,
+    SdkAppIdTrtcUsage: SdkAppIdTrtcUsage,
+    DescribeTrtcInteractiveTimeRequest: DescribeTrtcInteractiveTimeRequest,
+    PublishCdnParams: PublishCdnParams,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,
+    ScaleInfomation: ScaleInfomation,
     DescribeDetailEventRequest: DescribeDetailEventRequest,
     AbnormalExperience: AbnormalExperience,
     RoomState: RoomState,
-    RemoveUserResponse: RemoveUserResponse,
+    CreatePictureResponse: CreatePictureResponse,
+    WaterMarkParams: WaterMarkParams,
+    DescribeRecordStatisticResponse: DescribeRecordStatisticResponse,
+    DismissRoomByStrRoomIdResponse: DismissRoomByStrRoomIdResponse,
     DescribeHistoryScaleResponse: DescribeHistoryScaleResponse,
+    StartMCUMixTranscodeByStrRoomIdResponse: StartMCUMixTranscodeByStrRoomIdResponse,
+    PictureInfo: PictureInfo,
 
 }

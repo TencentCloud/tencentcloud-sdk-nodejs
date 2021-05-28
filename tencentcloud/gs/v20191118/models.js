@@ -31,7 +31,7 @@ class StopGameRequest extends  AbstractModel {
         this.UserId = null;
 
         /**
-         * 用于多人游戏，游戏主机用户ID
+         * 【多人游戏】游戏主机用户ID
          * @type {string || null}
          */
         this.HostUserId = null;
@@ -52,10 +52,479 @@ class StopGameRequest extends  AbstractModel {
 }
 
 /**
+ * SaveGameArchive返回参数结构体
+ * @class
+ */
+class SaveGameArchiveResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SwitchGameArchive请求参数结构体
+ * @class
+ */
+class SwitchGameArchiveRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 游戏ID
+         * @type {string || null}
+         */
+        this.GameId = null;
+
+        /**
+         * 游戏存档Url
+         * @type {string || null}
+         */
+        this.GameArchiveUrl = null;
+
+        /**
+         * 游戏相关参数
+         * @type {string || null}
+         */
+        this.GameContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.GameId = 'GameId' in params ? params.GameId : null;
+        this.GameArchiveUrl = 'GameArchiveUrl' in params ? params.GameArchiveUrl : null;
+        this.GameContext = 'GameContext' in params ? params.GameContext : null;
+
+    }
+}
+
+/**
  * TrylockWorker返回参数结构体
  * @class
  */
 class TrylockWorkerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesCount返回参数结构体
+ * @class
+ */
+class DescribeInstancesCountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的实例总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 客户的实例运行数
+         * @type {number || null}
+         */
+        this.Running = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Running = 'Running' in params ? params.Running : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSession请求参数结构体
+ * @class
+ */
+class CreateSessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户端session信息，从JSSDK请求中获得
+         * @type {string || null}
+         */
+        this.ClientSession = null;
+
+        /**
+         * 游戏用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 游戏ID
+         * @type {string || null}
+         */
+        this.GameId = null;
+
+        /**
+         * 【已废弃】只在TrylockWorker时生效
+         * @type {string || null}
+         */
+        this.GameRegion = null;
+
+        /**
+         * 游戏参数
+         * @type {string || null}
+         */
+        this.GameParas = null;
+
+        /**
+         * 分辨率,，可设置为1080p或720p或1920x1080格式
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+        /**
+         * 背景图url，格式为png或jpeg，宽高1920*1080
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 【已废弃】
+         * @type {number || null}
+         */
+        this.SetNo = null;
+
+        /**
+         * 单位Mbps，固定码率，有一定浮动范围，后端不动态调整(MaxBitrate和MinBitrate将无效)
+         * @type {number || null}
+         */
+        this.Bitrate = null;
+
+        /**
+         * 单位Mbps，动态调整最大码率，有一定浮动范围
+         * @type {number || null}
+         */
+        this.MaxBitrate = null;
+
+        /**
+         * 单位Mbps，动态调整最小码率，有一定浮动范围
+         * @type {number || null}
+         */
+        this.MinBitrate = null;
+
+        /**
+         * 帧率，可设置为30、45、60、90、120、144
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 【已废弃】只在TrylockWorker时生效
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * 【已废弃】优化项，便于客户灰度开启新的优化项，默认为0
+         * @type {number || null}
+         */
+        this.Optimization = null;
+
+        /**
+         * 【互动云游】游戏主机用户ID
+         * @type {string || null}
+         */
+        this.HostUserId = null;
+
+        /**
+         * 【互动云游】角色；Player表示玩家；Viewer表示观察者
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * 游戏相关参数
+         * @type {string || null}
+         */
+        this.GameContext = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientSession = 'ClientSession' in params ? params.ClientSession : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.GameId = 'GameId' in params ? params.GameId : null;
+        this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
+        this.GameParas = 'GameParas' in params ? params.GameParas : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.SetNo = 'SetNo' in params ? params.SetNo : null;
+        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
+        this.MaxBitrate = 'MaxBitrate' in params ? params.MaxBitrate : null;
+        this.MinBitrate = 'MinBitrate' in params ? params.MinBitrate : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.Optimization = 'Optimization' in params ? params.Optimization : null;
+        this.HostUserId = 'HostUserId' in params ? params.HostUserId : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.GameContext = 'GameContext' in params ? params.GameContext : null;
+
+    }
+}
+
+/**
+ * CreateSession返回参数结构体
+ * @class
+ */
+class CreateSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务端session信息，返回给JSSDK
+         * @type {string || null}
+         */
+        this.ServerSession = null;
+
+        /**
+         * 【已废弃】
+         * @type {string || null}
+         */
+        this.RoleNumber = null;
+
+        /**
+         * 【互动云游】角色；Player表示玩家；Viewer表示观察者
+         * @type {string || null}
+         */
+        this.Role = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServerSession = 'ServerSession' in params ? params.ServerSession : null;
+        this.RoleNumber = 'RoleNumber' in params ? params.RoleNumber : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesCount请求参数结构体
+ * @class
+ */
+class DescribeInstancesCountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏ID
+         * @type {string || null}
+         */
+        this.GameId = null;
+
+        /**
+         * 实例分组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GameId = 'GameId' in params ? params.GameId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * SaveGameArchive请求参数结构体
+ * @class
+ */
+class SaveGameArchiveRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 游戏ID
+         * @type {string || null}
+         */
+        this.GameId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.GameId = 'GameId' in params ? params.GameId : null;
+
+    }
+}
+
+/**
+ * TrylockWorker请求参数结构体
+ * @class
+ */
+class TrylockWorkerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 游戏ID
+         * @type {string || null}
+         */
+        this.GameId = null;
+
+        /**
+         * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等，如果不为空，优先按照该区域进行调度分配机器
+         * @type {string || null}
+         */
+        this.GameRegion = null;
+
+        /**
+         * 【废弃】资源池编号
+         * @type {number || null}
+         */
+        this.SetNo = null;
+
+        /**
+         * 游戏用户IP，用于就近调度，例如125.127.178.228
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * 分组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.GameId = 'GameId' in params ? params.GameId : null;
+        this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
+        this.SetNo = 'SetNo' in params ? params.SetNo : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * SwitchGameArchive返回参数结构体
+ * @class
+ */
+class SwitchGameArchiveResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -107,250 +576,18 @@ class StopGameResponse extends  AbstractModel {
     }
 }
 
-/**
- * CreateSession返回参数结构体
- * @class
- */
-class CreateSessionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 服务端session信息，返回给JSSDK
-         * @type {string || null}
-         */
-        this.ServerSession = null;
-
-        /**
-         * 【多人游戏】角色编号；比如Player1、Player2、Viewer1
-         * @type {string || null}
-         */
-        this.RoleNumber = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ServerSession = 'ServerSession' in params ? params.ServerSession : null;
-        this.RoleNumber = 'RoleNumber' in params ? params.RoleNumber : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * TrylockWorker请求参数结构体
- * @class
- */
-class TrylockWorkerRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 游戏用户ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * 游戏ID
-         * @type {string || null}
-         */
-        this.GameId = null;
-
-        /**
-         * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等
-         * @type {string || null}
-         */
-        this.GameRegion = null;
-
-        /**
-         * 资源池编号，1表示共用，2表示测试
-         * @type {number || null}
-         */
-        this.SetNo = null;
-
-        /**
-         * 游戏用户IP，用于就近调度，例如125.127.178.228
-         * @type {string || null}
-         */
-        this.UserIp = null;
-
-        /**
-         * 分组ID
-         * @type {string || null}
-         */
-        this.GroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.GameId = 'GameId' in params ? params.GameId : null;
-        this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
-        this.SetNo = 'SetNo' in params ? params.SetNo : null;
-        this.UserIp = 'UserIp' in params ? params.UserIp : null;
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
- * CreateSession请求参数结构体
- * @class
- */
-class CreateSessionRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 客户端session信息，从JSSDK请求中获得
-         * @type {string || null}
-         */
-        this.ClientSession = null;
-
-        /**
-         * 游戏用户ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * 游戏ID
-         * @type {string || null}
-         */
-        this.GameId = null;
-
-        /**
-         * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing、ap-chengdu、ap-chongqing、ap-nanjing等
-         * @type {string || null}
-         */
-        this.GameRegion = null;
-
-        /**
-         * 游戏参数
-         * @type {string || null}
-         */
-        this.GameParas = null;
-
-        /**
-         * 分辨率,，可设置为1080p或720p
-         * @type {string || null}
-         */
-        this.Resolution = null;
-
-        /**
-         * 背景图url，格式为png或jpeg，宽高1920*1080
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 【将废弃】资源池编号，比如1表示正式，2表示测试
-         * @type {number || null}
-         */
-        this.SetNo = null;
-
-        /**
-         * 单位Mbps，固定码率，后端不动态调整(MaxBitrate和MinBitrate将无效)
-         * @type {number || null}
-         */
-        this.Bitrate = null;
-
-        /**
-         * 单位Mbps，动态调整最大码率
-         * @type {number || null}
-         */
-        this.MaxBitrate = null;
-
-        /**
-         * 单位Mbps，动态调整最小码率
-         * @type {number || null}
-         */
-        this.MinBitrate = null;
-
-        /**
-         * 帧率，可设置为30、45、60、90、120、144
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * 游戏用户IP，用于就近调度，例如125.127.178.228
-         * @type {string || null}
-         */
-        this.UserIp = null;
-
-        /**
-         * 优化项，便于客户灰度开启新的优化项，默认为0
-         * @type {number || null}
-         */
-        this.Optimization = null;
-
-        /**
-         * 【多人云游】游戏主机用户ID
-         * @type {string || null}
-         */
-        this.HostUserId = null;
-
-        /**
-         * 【多人云游】角色；Player表示玩家；Viewer表示观察者
-         * @type {string || null}
-         */
-        this.Role = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ClientSession = 'ClientSession' in params ? params.ClientSession : null;
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.GameId = 'GameId' in params ? params.GameId : null;
-        this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
-        this.GameParas = 'GameParas' in params ? params.GameParas : null;
-        this.Resolution = 'Resolution' in params ? params.Resolution : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.SetNo = 'SetNo' in params ? params.SetNo : null;
-        this.Bitrate = 'Bitrate' in params ? params.Bitrate : null;
-        this.MaxBitrate = 'MaxBitrate' in params ? params.MaxBitrate : null;
-        this.MinBitrate = 'MinBitrate' in params ? params.MinBitrate : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.UserIp = 'UserIp' in params ? params.UserIp : null;
-        this.Optimization = 'Optimization' in params ? params.Optimization : null;
-        this.HostUserId = 'HostUserId' in params ? params.HostUserId : null;
-        this.Role = 'Role' in params ? params.Role : null;
-
-    }
-}
-
 module.exports = {
     StopGameRequest: StopGameRequest,
+    SaveGameArchiveResponse: SaveGameArchiveResponse,
+    SwitchGameArchiveRequest: SwitchGameArchiveRequest,
     TrylockWorkerResponse: TrylockWorkerResponse,
-    StopGameResponse: StopGameResponse,
-    CreateSessionResponse: CreateSessionResponse,
-    TrylockWorkerRequest: TrylockWorkerRequest,
+    DescribeInstancesCountResponse: DescribeInstancesCountResponse,
     CreateSessionRequest: CreateSessionRequest,
+    CreateSessionResponse: CreateSessionResponse,
+    DescribeInstancesCountRequest: DescribeInstancesCountRequest,
+    SaveGameArchiveRequest: SaveGameArchiveRequest,
+    TrylockWorkerRequest: TrylockWorkerRequest,
+    SwitchGameArchiveResponse: SwitchGameArchiveResponse,
+    StopGameResponse: StopGameResponse,
 
 }

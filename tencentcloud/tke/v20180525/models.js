@@ -17,6 +17,62 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * EnableVpcCniNetworkType请求参数结构体
+ * @class
+ */
+class EnableVpcCniNetworkTypeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 开启vpc-cni的模式，tke-route-eni开启的是策略路由模式，tke-direct-eni开启的是独立网卡模式
+         * @type {string || null}
+         */
+        this.VpcCniType = null;
+
+        /**
+         * 是否开启固定IP模式
+         * @type {boolean || null}
+         */
+        this.EnableStaticIp = null;
+
+        /**
+         * 使用的容器子网
+         * @type {Array.<string> || null}
+         */
+        this.Subnets = null;
+
+        /**
+         * 在固定IP模式下，Pod销毁后退还IP的时间，传参必须大于300；不传默认IP永不销毁。
+         * @type {number || null}
+         */
+        this.ExpiredSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
+        this.EnableStaticIp = 'EnableStaticIp' in params ? params.EnableStaticIp : null;
+        this.Subnets = 'Subnets' in params ? params.Subnets : null;
+        this.ExpiredSeconds = 'ExpiredSeconds' in params ? params.ExpiredSeconds : null;
+
+    }
+}
+
+/**
  * DescribeClusterEndpointVipStatus请求参数结构体
  * @class
  */
@@ -213,6 +269,62 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
         this.SuccInstanceIds = 'SuccInstanceIds' in params ? params.SuccInstanceIds : null;
         this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
         this.NotFoundInstanceIds = 'NotFoundInstanceIds' in params ? params.NotFoundInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNodePoolDesiredCapacityAboutAsg返回参数结构体
+ * @class
+ */
+class ModifyNodePoolDesiredCapacityAboutAsgResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyClusterNodePool返回参数结构体
+ * @class
+ */
+class ModifyClusterNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -529,6 +641,158 @@ class AutoscalingAdded extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusTemplateSync返回参数结构体
+ * @class
+ */
+class DescribePrometheusTemplateSyncResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 同步目标详情
+         * @type {Array.<PrometheusTemplateSyncTarget> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new PrometheusTemplateSyncTarget();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateEKSCluster请求参数结构体
+ * @class
+ */
+class UpdateEKSClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 弹性集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 弹性集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 弹性集群描述信息
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
+
+        /**
+         * 子网Id 列表
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * 弹性容器集群公网访问LB信息
+         * @type {ClusterPublicLB || null}
+         */
+        this.PublicLB = null;
+
+        /**
+         * 弹性容器集群内网访问LB信息
+         * @type {ClusterInternalLB || null}
+         */
+        this.InternalLB = null;
+
+        /**
+         * Service 子网Id
+         * @type {string || null}
+         */
+        this.ServiceSubnetId = null;
+
+        /**
+         * 集群自定义的dns 服务器信息
+         * @type {Array.<DnsServerConf> || null}
+         */
+        this.DnsServers = null;
+
+        /**
+         * 是否清空自定义dns 服务器设置。为1 表示 是。其他表示 否。
+         * @type {string || null}
+         */
+        this.ClearDnsServer = null;
+
+        /**
+         * 将来删除集群时是否要删除cbs。默认为 FALSE
+         * @type {boolean || null}
+         */
+        this.NeedDeleteCbs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+
+        if (params.PublicLB) {
+            let obj = new ClusterPublicLB();
+            obj.deserialize(params.PublicLB)
+            this.PublicLB = obj;
+        }
+
+        if (params.InternalLB) {
+            let obj = new ClusterInternalLB();
+            obj.deserialize(params.InternalLB)
+            this.InternalLB = obj;
+        }
+        this.ServiceSubnetId = 'ServiceSubnetId' in params ? params.ServiceSubnetId : null;
+
+        if (params.DnsServers) {
+            this.DnsServers = new Array();
+            for (let z in params.DnsServers) {
+                let obj = new DnsServerConf();
+                obj.deserialize(params.DnsServers[z]);
+                this.DnsServers.push(obj);
+            }
+        }
+        this.ClearDnsServer = 'ClearDnsServer' in params ? params.ClearDnsServer : null;
+        this.NeedDeleteCbs = 'NeedDeleteCbs' in params ? params.NeedDeleteCbs : null;
+
+    }
+}
+
+/**
  * CreateClusterRouteTable返回参数结构体
  * @class
  */
@@ -552,6 +816,48 @@ class CreateClusterRouteTableResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterCommonNames请求参数结构体
+ * @class
+ */
+class DescribeClusterCommonNamesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 子账户列表，不可超出最大值50
+         * @type {Array.<string> || null}
+         */
+        this.SubaccountUins = null;
+
+        /**
+         * 角色ID列表，不可超出最大值50
+         * @type {Array.<string> || null}
+         */
+        this.RoleIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SubaccountUins = 'SubaccountUins' in params ? params.SubaccountUins : null;
+        this.RoleIds = 'RoleIds' in params ? params.RoleIds : null;
 
     }
 }
@@ -585,10 +891,683 @@ class DeleteClusterEndpointResponse extends  AbstractModel {
 }
 
 /**
- * 集群路由对象
+ * 云原生Prometheus模板可修改项
  * @class
  */
-class RouteInfo extends  AbstractModel {
+class PrometheusTemplateModify extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 修改名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 修改描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * 修改内容，只有当模板类型是Alert时生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusAlertRule> || null}
+         */
+        this.AlertRules = null;
+
+        /**
+         * 当Level为instance时有效，
+模板中的聚合规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.RecordRules = null;
+
+        /**
+         * 当Level为cluster时有效，
+模板中的ServiceMonitor规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.ServiceMonitors = null;
+
+        /**
+         * 当Level为cluster时有效，
+模板中的PodMonitors规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.PodMonitors = null;
+
+        /**
+         * 当Level为cluster时有效，
+模板中的RawJobs规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.RawJobs = null;
+
+        /**
+         * 修改内容，只有当模板类型是Alert时生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusAlertRuleDetail> || null}
+         */
+        this.AlertDetailRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+
+        if (params.AlertRules) {
+            this.AlertRules = new Array();
+            for (let z in params.AlertRules) {
+                let obj = new PrometheusAlertRule();
+                obj.deserialize(params.AlertRules[z]);
+                this.AlertRules.push(obj);
+            }
+        }
+
+        if (params.RecordRules) {
+            this.RecordRules = new Array();
+            for (let z in params.RecordRules) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RecordRules[z]);
+                this.RecordRules.push(obj);
+            }
+        }
+
+        if (params.ServiceMonitors) {
+            this.ServiceMonitors = new Array();
+            for (let z in params.ServiceMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.ServiceMonitors[z]);
+                this.ServiceMonitors.push(obj);
+            }
+        }
+
+        if (params.PodMonitors) {
+            this.PodMonitors = new Array();
+            for (let z in params.PodMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.PodMonitors[z]);
+                this.PodMonitors.push(obj);
+            }
+        }
+
+        if (params.RawJobs) {
+            this.RawJobs = new Array();
+            for (let z in params.RawJobs) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RawJobs[z]);
+                this.RawJobs.push(obj);
+            }
+        }
+
+        if (params.AlertDetailRules) {
+            this.AlertDetailRules = new Array();
+            for (let z in params.AlertDetailRules) {
+                let obj = new PrometheusAlertRuleDetail();
+                obj.deserialize(params.AlertDetailRules[z]);
+                this.AlertDetailRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * amp告警渠道配置
+ * @class
+ */
+class PrometheusNotification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否启用
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 收敛时间
+         * @type {string || null}
+         */
+        this.RepeatInterval = null;
+
+        /**
+         * 生效起始时间
+         * @type {string || null}
+         */
+        this.TimeRangeStart = null;
+
+        /**
+         * 生效结束时间
+         * @type {string || null}
+         */
+        this.TimeRangeEnd = null;
+
+        /**
+         * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
+分别代表：短信、邮件、电话、微信
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.NotifyWay = null;
+
+        /**
+         * 告警接收组（用户组）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.ReceiverGroups = null;
+
+        /**
+         * 电话告警顺序。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.PhoneNotifyOrder = null;
+
+        /**
+         * 电话告警次数。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PhoneCircleTimes = null;
+
+        /**
+         * 电话告警轮内间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PhoneInnerInterval = null;
+
+        /**
+         * 电话告警轮外间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PhoneCircleInterval = null;
+
+        /**
+         * 电话告警触达通知
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.PhoneArriveNotice = null;
+
+        /**
+         * 通道类型，默认为amp，支持以下
+amp
+webhook
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 如果Type为webhook, 则该字段为必填项
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WebHook = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.RepeatInterval = 'RepeatInterval' in params ? params.RepeatInterval : null;
+        this.TimeRangeStart = 'TimeRangeStart' in params ? params.TimeRangeStart : null;
+        this.TimeRangeEnd = 'TimeRangeEnd' in params ? params.TimeRangeEnd : null;
+        this.NotifyWay = 'NotifyWay' in params ? params.NotifyWay : null;
+        this.ReceiverGroups = 'ReceiverGroups' in params ? params.ReceiverGroups : null;
+        this.PhoneNotifyOrder = 'PhoneNotifyOrder' in params ? params.PhoneNotifyOrder : null;
+        this.PhoneCircleTimes = 'PhoneCircleTimes' in params ? params.PhoneCircleTimes : null;
+        this.PhoneInnerInterval = 'PhoneInnerInterval' in params ? params.PhoneInnerInterval : null;
+        this.PhoneCircleInterval = 'PhoneCircleInterval' in params ? params.PhoneCircleInterval : null;
+        this.PhoneArriveNotice = 'PhoneArriveNotice' in params ? params.PhoneArriveNotice : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.WebHook = 'WebHook' in params ? params.WebHook : null;
+
+    }
+}
+
+/**
+ * 集群版本信息
+ * @class
+ */
+class ClusterVersion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群主版本号列表，例如1.18.4
+         * @type {Array.<string> || null}
+         */
+        this.Versions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Versions = 'Versions' in params ? params.Versions : null;
+
+    }
+}
+
+/**
+ * CreatePrometheusTemplate请求参数结构体
+ * @class
+ */
+class CreatePrometheusTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板设置
+         * @type {PrometheusTemplate || null}
+         */
+        this.Template = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Template) {
+            let obj = new PrometheusTemplate();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
+
+    }
+}
+
+/**
+ * DeletePrometheusTemplate请求参数结构体
+ * @class
+ */
+class DeletePrometheusTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板id
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * 某个节点的升级进度
+ * @class
+ */
+class InstanceUpgradeProgressItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点instanceID
+         * @type {string || null}
+         */
+        this.InstanceID = null;
+
+        /**
+         * 任务生命周期
+process 运行中
+paused 已停止
+pauing 正在停止
+done  已完成
+timeout 已超时
+aborted 已取消
+pending 还未开始
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * 升级开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartAt = null;
+
+        /**
+         * 升级结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndAt = null;
+
+        /**
+         * 升级前检查结果
+         * @type {InstanceUpgradePreCheckResult || null}
+         */
+        this.CheckResult = null;
+
+        /**
+         * 升级步骤详情
+         * @type {Array.<TaskStepInfo> || null}
+         */
+        this.Detail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceID = 'InstanceID' in params ? params.InstanceID : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+        this.StartAt = 'StartAt' in params ? params.StartAt : null;
+        this.EndAt = 'EndAt' in params ? params.EndAt : null;
+
+        if (params.CheckResult) {
+            let obj = new InstanceUpgradePreCheckResult();
+            obj.deserialize(params.CheckResult)
+            this.CheckResult = obj;
+        }
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new TaskStepInfo();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 节点池描述
+ * @class
+ */
+class NodePool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * NodePoolId 资源池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Name 资源池名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * ClusterInstanceId 集群实例id
+         * @type {string || null}
+         */
+        this.ClusterInstanceId = null;
+
+        /**
+         * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * LaunchConfigurationId 配置
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * AutoscalingGroupId 分组id
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+        /**
+         * Labels 标签
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Taints 污点标记
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * NodeCountSummary 节点列表
+         * @type {NodeCountSummary || null}
+         */
+        this.NodeCountSummary = null;
+
+        /**
+         * 状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AutoscalingGroupStatus = null;
+
+        /**
+         * 最大节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxNodesNum = null;
+
+        /**
+         * 最小节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MinNodesNum = null;
+
+        /**
+         * 期望的节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DesiredNodesNum = null;
+
+        /**
+         * 节点池osName
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodePoolOs = null;
+
+        /**
+         * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
+        /**
+         * 镜像id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DesiredPodNum = null;
+
+        /**
+         * 用户自定义脚本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ClusterInstanceId = 'ClusterInstanceId' in params ? params.ClusterInstanceId : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+
+        if (params.NodeCountSummary) {
+            let obj = new NodeCountSummary();
+            obj.deserialize(params.NodeCountSummary)
+            this.NodeCountSummary = obj;
+        }
+        this.AutoscalingGroupStatus = 'AutoscalingGroupStatus' in params ? params.AutoscalingGroupStatus : null;
+        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
+        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
+        this.DesiredNodesNum = 'DesiredNodesNum' in params ? params.DesiredNodesNum : null;
+        this.NodePoolOs = 'NodePoolOs' in params ? params.NodePoolOs : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.DesiredPodNum = 'DesiredPodNum' in params ? params.DesiredPodNum : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+
+    }
+}
+
+/**
+ * DescribeEKSClusters返回参数结构体
+ * @class
+ */
+class DescribeEKSClustersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群总个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 集群信息列表
+         * @type {Array.<EksCluster> || null}
+         */
+        this.Clusters = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Clusters) {
+            this.Clusters = new Array();
+            for (let z in params.Clusters) {
+                let obj = new EksCluster();
+                obj.deserialize(params.Clusters[z]);
+                this.Clusters.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 集群路由表对象
+ * @class
+ */
+class RouteTableInfo extends  AbstractModel {
     constructor(){
         super();
 
@@ -599,16 +1578,16 @@ class RouteInfo extends  AbstractModel {
         this.RouteTableName = null;
 
         /**
-         * 目的端CIDR。
+         * 路由表CIDR。
          * @type {string || null}
          */
-        this.DestinationCidrBlock = null;
+        this.RouteTableCidrBlock = null;
 
         /**
-         * 下一跳地址。
+         * VPC实例ID。
          * @type {string || null}
          */
-        this.GatewayIp = null;
+        this.VpcId = null;
 
     }
 
@@ -620,8 +1599,50 @@ class RouteInfo extends  AbstractModel {
             return;
         }
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
-        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
-        this.GatewayIp = 'GatewayIp' in params ? params.GatewayIp : null;
+        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+    }
+}
+
+/**
+ * IP 地址
+ * @class
+ */
+class IPAddress extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Ip 地址的类型。可为 advertise, public 等
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Ip 地址
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 网络端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
 
     }
 }
@@ -677,30 +1698,51 @@ class DeleteClusterRequest extends  AbstractModel {
 }
 
 /**
- * 不同角色的节点配置参数
+ * prometheus一个抓取目标的信息
  * @class
  */
-class RunInstancesForNode extends  AbstractModel {
+class PrometheusTarget extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD节点最小配置为4C8G。
+         * 抓取目标的URL
          * @type {string || null}
          */
-        this.NodeRole = null;
+        this.Url = null;
 
         /**
-         * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口，传入公共参数外的其他参数即可，其中ImageId会替换为TKE集群OS对应的镜像。
-         * @type {Array.<string> || null}
+         * target当前状态,当前支持
+up = 健康
+down = 不健康
+unknown = 未知
+         * @type {string || null}
          */
-        this.RunInstancesPara = null;
+        this.State = null;
 
         /**
-         * 节点高级设置，该参数会覆盖集群级别设置的InstanceAdvancedSettings，和上边的RunInstancesPara按照顺序一一对应（当前只对节点自定义参数ExtraArgs生效）。
-         * @type {Array.<InstanceAdvancedSettings> || null}
+         * target的元label
+         * @type {Array.<Label> || null}
          */
-        this.InstanceAdvancedSettingsOverrides = null;
+        this.Labels = null;
+
+        /**
+         * 上一次抓取的时间
+         * @type {string || null}
+         */
+        this.LastScrape = null;
+
+        /**
+         * 上一次抓取的耗时，单位是s
+         * @type {number || null}
+         */
+        this.ScrapeDuration = null;
+
+        /**
+         * 上一次抓取如果错误，该字段存储错误信息
+         * @type {string || null}
+         */
+        this.Error = null;
 
     }
 
@@ -711,15 +1753,125 @@ class RunInstancesForNode extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
-        this.RunInstancesPara = 'RunInstancesPara' in params ? params.RunInstancesPara : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.State = 'State' in params ? params.State : null;
 
-        if (params.InstanceAdvancedSettingsOverrides) {
-            this.InstanceAdvancedSettingsOverrides = new Array();
-            for (let z in params.InstanceAdvancedSettingsOverrides) {
-                let obj = new InstanceAdvancedSettings();
-                obj.deserialize(params.InstanceAdvancedSettingsOverrides[z]);
-                this.InstanceAdvancedSettingsOverrides.push(obj);
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.LastScrape = 'LastScrape' in params ? params.LastScrape : null;
+        this.ScrapeDuration = 'ScrapeDuration' in params ? params.ScrapeDuration : null;
+        this.Error = 'Error' in params ? params.Error : null;
+
+    }
+}
+
+/**
+ * CreateEKSCluster请求参数结构体
+ * @class
+ */
+class CreateEKSClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * k8s版本号。可为1.14.4, 1.12.8。
+         * @type {string || null}
+         */
+        this.K8SVersion = null;
+
+        /**
+         * vpc 的Id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 子网Id 列表
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * 集群描述信息
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
+
+        /**
+         * Serivce 所在子网Id
+         * @type {string || null}
+         */
+        this.ServiceSubnetId = null;
+
+        /**
+         * 集群自定义的Dns服务器信息
+         * @type {Array.<DnsServerConf> || null}
+         */
+        this.DnsServers = null;
+
+        /**
+         * 扩展参数。须是map[string]string 的json 格式。
+         * @type {string || null}
+         */
+        this.ExtraParam = null;
+
+        /**
+         * 是否在用户集群内开启Dns。默认为true
+         * @type {boolean || null}
+         */
+        this.EnableVpcCoreDNS = null;
+
+        /**
+         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到集群实例。
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.TagSpecification = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.K8SVersion = 'K8SVersion' in params ? params.K8SVersion : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.ServiceSubnetId = 'ServiceSubnetId' in params ? params.ServiceSubnetId : null;
+
+        if (params.DnsServers) {
+            this.DnsServers = new Array();
+            for (let z in params.DnsServers) {
+                let obj = new DnsServerConf();
+                obj.deserialize(params.DnsServers[z]);
+                this.DnsServers.push(obj);
+            }
+        }
+        this.ExtraParam = 'ExtraParam' in params ? params.ExtraParam : null;
+        this.EnableVpcCoreDNS = 'EnableVpcCoreDNS' in params ? params.EnableVpcCoreDNS : null;
+
+        if (params.TagSpecification) {
+            this.TagSpecification = new Array();
+            for (let z in params.TagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.TagSpecification[z]);
+                this.TagSpecification.push(obj);
             }
         }
 
@@ -818,6 +1970,12 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 根据多个实例IP进行过滤
+         * @type {Array.<string> || null}
+         */
+        this.IpAddresses = null;
+
     }
 
     /**
@@ -842,6 +2000,42 @@ class DescribeExistedInstancesRequest extends  AbstractModel {
         this.VagueInstanceName = 'VagueInstanceName' in params ? params.VagueInstanceName : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.IpAddresses = 'IpAddresses' in params ? params.IpAddresses : null;
+
+    }
+}
+
+/**
+ * 标签绑定的资源类型，当前支持类型："cluster"
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -899,6 +2093,80 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * prometheus告警历史
+ * @class
+ */
+class PrometheusAlertHistoryItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 告警开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 告警内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 告警状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 触发的规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleItem = null;
+
+        /**
+         * 告警渠道的id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 告警渠道的名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.State = 'State' in params ? params.State : null;
+        this.RuleItem = 'RuleItem' in params ? params.RuleItem : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+
+    }
+}
+
+/**
  * CreateClusterRoute返回参数结构体
  * @class
  */
@@ -922,6 +2190,143 @@ class CreateClusterRouteResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 云原生Prometheus模板同步目标
+ * @class
+ */
+class PrometheusTemplateSyncTarget extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标所在地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 目标实例
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 集群id，只有当采集模板的Level为cluster的时候需要
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 最后一次同步时间， 用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SyncTime = null;
+
+        /**
+         * 当前使用的模板版本，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 集群类型，只有当采集模板的Level为cluster的时候需要
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 用于出参，实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 用于出参，集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SyncTime = 'SyncTime' in params ? params.SyncTime : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusTemplates请求参数结构体
+ * @class
+ */
+class DescribePrometheusTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模糊过滤条件，支持
+Level 按模板级别过滤
+Name 按名称过滤
+Describe 按描述过滤
+ID 按templateId过滤
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 分页偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 总数限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -969,94 +2374,18 @@ class AddNodeToNodePoolRequest extends  AbstractModel {
 }
 
 /**
- * 节点池描述
+ * EnableVpcCniNetworkType返回参数结构体
  * @class
  */
-class NodePool extends  AbstractModel {
+class EnableVpcCniNetworkTypeResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * NodePoolId 资源池id
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.NodePoolId = null;
-
-        /**
-         * Name 资源池名称
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * ClusterInstanceId 集群实例id
-         * @type {string || null}
-         */
-        this.ClusterInstanceId = null;
-
-        /**
-         * LifeState 状态
-         * @type {string || null}
-         */
-        this.LifeState = null;
-
-        /**
-         * LaunchConfigurationId 配置
-         * @type {string || null}
-         */
-        this.LaunchConfigurationId = null;
-
-        /**
-         * AutoscalingGroupId 分组id
-         * @type {string || null}
-         */
-        this.AutoscalingGroupId = null;
-
-        /**
-         * Labels 标签
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * Taints 污点标记
-         * @type {Array.<Taint> || null}
-         */
-        this.Taints = null;
-
-        /**
-         * NodeCountSummary 节点列表
-         * @type {NodeCountSummary || null}
-         */
-        this.NodeCountSummary = null;
-
-        /**
-         * 状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AutoscalingGroupStatus = null;
-
-        /**
-         * 最大节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MaxNodesNum = null;
-
-        /**
-         * 最小节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MinNodesNum = null;
-
-        /**
-         * 期望的节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.DesiredNodesNum = null;
+        this.RequestId = null;
 
     }
 
@@ -1067,69 +2396,36 @@ class NodePool extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.ClusterInstanceId = 'ClusterInstanceId' in params ? params.ClusterInstanceId : null;
-        this.LifeState = 'LifeState' in params ? params.LifeState : null;
-        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
-        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-
-        if (params.Taints) {
-            this.Taints = new Array();
-            for (let z in params.Taints) {
-                let obj = new Taint();
-                obj.deserialize(params.Taints[z]);
-                this.Taints.push(obj);
-            }
-        }
-
-        if (params.NodeCountSummary) {
-            let obj = new NodeCountSummary();
-            obj.deserialize(params.NodeCountSummary)
-            this.NodeCountSummary = obj;
-        }
-        this.AutoscalingGroupStatus = 'AutoscalingGroupStatus' in params ? params.AutoscalingGroupStatus : null;
-        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
-        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
-        this.DesiredNodesNum = 'DesiredNodesNum' in params ? params.DesiredNodesNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 集群路由表对象
+ * DescribePrometheusAlertRule返回参数结构体
  * @class
  */
-class RouteTableInfo extends  AbstractModel {
+class DescribePrometheusAlertRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由表名称。
-         * @type {string || null}
+         * 告警详情
+         * @type {Array.<PrometheusAlertRuleDetail> || null}
          */
-        this.RouteTableName = null;
+        this.AlertRules = null;
 
         /**
-         * 路由表CIDR。
-         * @type {string || null}
+         * 总数
+         * @type {number || null}
          */
-        this.RouteTableCidrBlock = null;
+        this.Total = null;
 
         /**
-         * VPC实例ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.VpcId = null;
+        this.RequestId = null;
 
     }
 
@@ -1140,9 +2436,17 @@ class RouteTableInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
-        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+        if (params.AlertRules) {
+            this.AlertRules = new Array();
+            for (let z in params.AlertRules) {
+                let obj = new PrometheusAlertRuleDetail();
+                obj.deserialize(params.AlertRules[z]);
+                this.AlertRules.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1315,6 +2619,134 @@ class Instance extends  AbstractModel {
 }
 
 /**
+ * 托管prometheus告警配置实例
+ * @class
+ */
+class PrometheusAlertRuleDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 规则列表
+         * @type {Array.<PrometheusAlertRule> || null}
+         */
+        this.Rules = null;
+
+        /**
+         * 最后修改时间
+         * @type {string || null}
+         */
+        this.UpdatedAt = null;
+
+        /**
+         * 告警渠道
+         * @type {PrometheusNotification || null}
+         */
+        this.Notification = null;
+
+        /**
+         * 告警 id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 如果该告警来至模板下发，则TemplateId为模板id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 计算周期
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new PrometheusAlertRule();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
+        this.UpdatedAt = 'UpdatedAt' in params ? params.UpdatedAt : null;
+
+        if (params.Notification) {
+            let obj = new PrometheusNotification();
+            obj.deserialize(params.Notification)
+            this.Notification = obj;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+    }
+}
+
+/**
+ * 可升级节点信息
+ * @class
+ */
+class UpgradeAbleInstancesItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点的当前版本
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 当前版本的最新小版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.LatestVersion = 'LatestVersion' in params ? params.LatestVersion : null;
+
+    }
+}
+
+/**
  * CreateClusterNodePoolFromExistingAsg请求参数结构体
  * @class
  */
@@ -1350,24 +2782,49 @@ class CreateClusterNodePoolFromExistingAsgRequest extends  AbstractModel {
 }
 
 /**
- * 标签绑定的资源类型，当前支持类型："cluster"
+ * Prometheus告警规则
  * @class
  */
-class Tag extends  AbstractModel {
+class PrometheusAlertRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签键
+         * 规则名称
          * @type {string || null}
          */
-        this.Key = null;
+        this.Name = null;
 
         /**
-         * 标签值
+         * prometheus语句
          * @type {string || null}
          */
-        this.Value = null;
+        this.Rule = null;
+
+        /**
+         * 额外标签
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 告警发送模板
+         * @type {string || null}
+         */
+        this.Template = null;
+
+        /**
+         * 持续时间
+         * @type {string || null}
+         */
+        this.For = null;
+
+        /**
+         * 该条规则的描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Describe = null;
 
     }
 
@@ -1378,8 +2835,20 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Rule = 'Rule' in params ? params.Rule : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.Template = 'Template' in params ? params.Template : null;
+        this.For = 'For' in params ? params.For : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
 
     }
 }
@@ -1463,6 +2932,27 @@ class ClusterNetworkSettings extends  AbstractModel {
          */
         this.Cni = null;
 
+        /**
+         * service的网络模式，当前参数只适用于ipvs+bpf模式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KubeProxyMode = null;
+
+        /**
+         * 用于分配service的IP range，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceCIDR = null;
+
+        /**
+         * 集群关联的容器子网
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Subnets = null;
+
     }
 
     /**
@@ -1479,6 +2969,9 @@ class ClusterNetworkSettings extends  AbstractModel {
         this.Ipvs = 'Ipvs' in params ? params.Ipvs : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Cni = 'Cni' in params ? params.Cni : null;
+        this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
+        this.ServiceCIDR = 'ServiceCIDR' in params ? params.ServiceCIDR : null;
+        this.Subnets = 'Subnets' in params ? params.Subnets : null;
 
     }
 }
@@ -1648,6 +3141,34 @@ class DeleteClusterRouteResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterEndpointSP返回参数结构体
+ * @class
+ */
+class ModifyClusterEndpointSPResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterEndpointVip返回参数结构体
  * @class
  */
@@ -1786,6 +3307,136 @@ class DescribeClustersRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * UpgradeClusterInstances请求参数结构体
+ * @class
+ */
+class UpgradeClusterInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * create 表示开始一次升级任务
+pause 表示停止任务
+resume表示继续任务
+abort表示终止任务
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 升级类型，只有Operation是create需要设置
+reset 大版本重装升级
+hot 小版本热升级
+major 大版本原地升级
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+        /**
+         * 需要升级的节点列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
+         * @type {UpgradeNodeResetParam || null}
+         */
+        this.ResetParam = null;
+
+        /**
+         * 是否忽略节点升级前检查
+         * @type {boolean || null}
+         */
+        this.SkipPreCheck = null;
+
+        /**
+         * 最大可容忍的不可用Pod比例
+         * @type {number || null}
+         */
+        this.MaxNotReadyPercent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.ResetParam) {
+            let obj = new UpgradeNodeResetParam();
+            obj.deserialize(params.ResetParam)
+            this.ResetParam = obj;
+        }
+        this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
+        this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
+
+    }
+}
+
+/**
+ * 弹性容器集群公网访问负载均衡信息
+ * @class
+ */
+class ClusterPublicLB extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启公网访问LB
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 允许访问的来源CIDR列表
+         * @type {Array.<string> || null}
+         */
+        this.AllowFromCidrs = null;
+
+        /**
+         * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+         * @type {Array.<string> || null}
+         */
+        this.SecurityPolicies = null;
+
+        /**
+         * 外网访问相关的扩展参数，格式为json
+         * @type {string || null}
+         */
+        this.ExtraParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.AllowFromCidrs = 'AllowFromCidrs' in params ? params.AllowFromCidrs : null;
+        this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
+        this.ExtraParam = 'ExtraParam' in params ? params.ExtraParam : null;
 
     }
 }
@@ -1930,6 +3581,213 @@ class Label extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusAlertHistory请求参数结构体
+ * @class
+ */
+class DescribePrometheusAlertHistoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 告警名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * label集合
+         * @type {string || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 分片
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分片
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Labels = 'Labels' in params ? params.Labels : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DeletePrometheusTemplateSync请求参数结构体
+ * @class
+ */
+class DeletePrometheusTemplateSyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板id
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 取消同步的对象列表
+         * @type {Array.<PrometheusTemplateSyncTarget> || null}
+         */
+        this.Targets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new PrometheusTemplateSyncTarget();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * SetNodePoolNodeProtection返回参数结构体
+ * @class
+ */
+class SetNodePoolNodeProtectionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功设置的节点id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SucceedInstanceIds = null;
+
+        /**
+         * 没有成功设置的节点id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailedInstanceIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SucceedInstanceIds = 'SucceedInstanceIds' in params ? params.SucceedInstanceIds : null;
+        this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusTemplates返回参数结构体
+ * @class
+ */
+class DescribePrometheusTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板列表
+         * @type {Array.<PrometheusTemplate> || null}
+         */
+        this.Templates = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Templates) {
+            this.Templates = new Array();
+            for (let z in params.Templates) {
+                let obj = new PrometheusTemplate();
+                obj.deserialize(params.Templates[z]);
+                this.Templates.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteClusterEndpointVip返回参数结构体
  * @class
  */
@@ -1953,6 +3811,49 @@ class DeleteClusterEndpointVipResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SyncPrometheusTemplate请求参数结构体
+ * @class
+ */
+class SyncPrometheusTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 同步目标
+         * @type {Array.<PrometheusTemplateSyncTarget> || null}
+         */
+        this.Targets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new PrometheusTemplateSyncTarget();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
 
     }
 }
@@ -2078,39 +3979,42 @@ class CreatePrometheusDashboardResponse extends  AbstractModel {
 }
 
 /**
- * 路由表冲突对象
+ * DescribeEKSClusterCredential返回参数结构体
  * @class
  */
-class RouteTableConflict extends  AbstractModel {
+class DescribeEKSClusterCredentialResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由表类型。
-         * @type {string || null}
+         * 集群的接入地址信息
+         * @type {Array.<IPAddress> || null}
          */
-        this.RouteTableType = null;
+        this.Addresses = null;
 
         /**
-         * 路由表CIDR。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 集群的认证信息
+         * @type {ClusterCredential || null}
          */
-        this.RouteTableCidrBlock = null;
+        this.Credential = null;
 
         /**
-         * 路由表名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 集群的公网访问信息
+         * @type {ClusterPublicLB || null}
          */
-        this.RouteTableName = null;
+        this.PublicLB = null;
 
         /**
-         * 路由表ID。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 集群的内网访问信息
+         * @type {ClusterInternalLB || null}
+         */
+        this.InternalLB = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RouteTableId = null;
+        this.RequestId = null;
 
     }
 
@@ -2121,10 +4025,34 @@ class RouteTableConflict extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableType = 'RouteTableType' in params ? params.RouteTableType : null;
-        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
-        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
-        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+
+        if (params.Addresses) {
+            this.Addresses = new Array();
+            for (let z in params.Addresses) {
+                let obj = new IPAddress();
+                obj.deserialize(params.Addresses[z]);
+                this.Addresses.push(obj);
+            }
+        }
+
+        if (params.Credential) {
+            let obj = new ClusterCredential();
+            obj.deserialize(params.Credential)
+            this.Credential = obj;
+        }
+
+        if (params.PublicLB) {
+            let obj = new ClusterPublicLB();
+            obj.deserialize(params.PublicLB)
+            this.PublicLB = obj;
+        }
+
+        if (params.InternalLB) {
+            let obj = new ClusterInternalLB();
+            obj.deserialize(params.InternalLB)
+            this.InternalLB = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2174,6 +4102,70 @@ class DeleteClusterInstancesRequest extends  AbstractModel {
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.InstanceDeleteMode = 'InstanceDeleteMode' in params ? params.InstanceDeleteMode : null;
         this.ForceDelete = 'ForceDelete' in params ? params.ForceDelete : null;
+
+    }
+}
+
+/**
+ * 节点升级重装参数
+ * @class
+ */
+class UpgradeNodeResetParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例额外需要设置参数信息
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+         * @type {EnhancedService || null}
+         */
+        this.EnhancedService = null;
+
+        /**
+         * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+        /**
+         * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+
+        if (params.EnhancedService) {
+            let obj = new EnhancedService();
+            obj.deserialize(params.EnhancedService)
+            this.EnhancedService = obj;
+        }
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -2232,6 +4224,12 @@ class CreateClusterInstancesRequest extends  AbstractModel {
          */
         this.InstanceAdvancedSettings = null;
 
+        /**
+         * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
+         * @type {Array.<string> || null}
+         */
+        this.SkipValidateOptions = null;
+
     }
 
     /**
@@ -2249,6 +4247,7 @@ class CreateClusterInstancesRequest extends  AbstractModel {
             obj.deserialize(params.InstanceAdvancedSettings)
             this.InstanceAdvancedSettings = obj;
         }
+        this.SkipValidateOptions = 'SkipValidateOptions' in params ? params.SkipValidateOptions : null;
 
     }
 }
@@ -2262,7 +4261,7 @@ class ManuallyAdded extends  AbstractModel {
         super();
 
         /**
-         * 加入中节的点数量
+         * 加入中的节点数量
          * @type {number || null}
          */
         this.Joining = null;
@@ -2303,24 +4302,12 @@ class ManuallyAdded extends  AbstractModel {
 }
 
 /**
- * DescribeClusterRouteTables返回参数结构体
+ * DeleteEKSCluster返回参数结构体
  * @class
  */
-class DescribeClusterRouteTablesResponse extends  AbstractModel {
+class DeleteEKSClusterResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 符合条件的实例数量。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 集群路由表对象。
-         * @type {Array.<RouteTableInfo> || null}
-         */
-        this.RouteTableSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2337,17 +4324,92 @@ class DescribeClusterRouteTablesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.RouteTableSet) {
-            this.RouteTableSet = new Array();
-            for (let z in params.RouteTableSet) {
-                let obj = new RouteTableInfo();
-                obj.deserialize(params.RouteTableSet[z]);
-                this.RouteTableSet.push(obj);
-            }
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * prometheus配置
+ * @class
+ */
+class PrometheusConfigItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 配置内容
+         * @type {string || null}
+         */
+        this.Config = null;
+
+        /**
+         * 用于出参，如果该配置来至模板，则为模板id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Config = 'Config' in params ? params.Config : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
+ * DeleteClusterNodePool请求参数结构体
+ * @class
+ */
+class DeleteClusterNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点池对应的 ClusterId
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 需要删除的节点池 Id 列表
+         * @type {Array.<string> || null}
+         */
+        this.NodePoolIds = null;
+
+        /**
+         * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
+         * @type {boolean || null}
+         */
+        this.KeepInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolIds = 'NodePoolIds' in params ? params.NodePoolIds : null;
+        this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
 
     }
 }
@@ -2451,6 +4513,41 @@ class ClusterCIDRSettings extends  AbstractModel {
 }
 
 /**
+ * CreatePrometheusTemplate返回参数结构体
+ * @class
+ */
+class CreatePrometheusTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板Id
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterEndpointVip请求参数结构体
  * @class
  */
@@ -2481,6 +4578,83 @@ class CreateClusterEndpointVipRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.SecurityPolicies = 'SecurityPolicies' in params ? params.SecurityPolicies : null;
+
+    }
+}
+
+/**
+ * 集群路由对象
+ * @class
+ */
+class RouteInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由表名称。
+         * @type {string || null}
+         */
+        this.RouteTableName = null;
+
+        /**
+         * 目的端CIDR。
+         * @type {string || null}
+         */
+        this.DestinationCidrBlock = null;
+
+        /**
+         * 下一跳地址。
+         * @type {string || null}
+         */
+        this.GatewayIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
+        this.GatewayIp = 'GatewayIp' in params ? params.GatewayIp : null;
+
+    }
+}
+
+/**
+ * 弹性容器集群内网访问LB信息
+ * @class
+ */
+class ClusterInternalLB extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启内网访问LB
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 内网访问LB关联的子网Id
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -2523,6 +4697,77 @@ class Taint extends  AbstractModel {
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
         this.Effect = 'Effect' in params ? params.Effect : null;
+
+    }
+}
+
+/**
+ * CheckInstancesUpgradeAble请求参数结构体
+ * @class
+ */
+class CheckInstancesUpgradeAbleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点列表，空为全部节点
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 升级类型
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+        /**
+         * 分页Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤
+         * @type {Array.<Filter> || null}
+         */
+        this.Filter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new Filter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
 
     }
 }
@@ -2712,10 +4957,206 @@ class DescribeClusterNodePoolsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusAlertRule请求参数结构体
+ * @class
+ */
+class DescribePrometheusAlertRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 分页
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤
+支持ID，Name
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeEKSClusterCredential请求参数结构体
+ * @class
+ */
+class DescribeEKSClusterCredentialRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * GetUpgradeInstanceProgress请求参数结构体
+ * @class
+ */
+class GetUpgradeInstanceProgressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 最多获取多少个节点的进度
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 从第几个节点开始获取进度
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * ModifyPrometheusTemplate请求参数结构体
+ * @class
+ */
+class ModifyPrometheusTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 修改内容
+         * @type {PrometheusTemplateModify || null}
+         */
+        this.Template = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+        if (params.Template) {
+            let obj = new PrometheusTemplateModify();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
+
+    }
+}
+
+/**
  * AddNodeToNodePool返回参数结构体
  * @class
  */
 class AddNodeToNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateEKSCluster返回参数结构体
+ * @class
+ */
+class UpdateEKSClusterResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2856,6 +5297,138 @@ class DescribeClustersResponse extends  AbstractModel {
 }
 
 /**
+ * 接入k8s 的认证信息
+ * @class
+ */
+class ClusterCredential extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CA 根证书
+         * @type {string || null}
+         */
+        this.CACert = null;
+
+        /**
+         * 认证用的Token
+         * @type {string || null}
+         */
+        this.Token = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CACert = 'CACert' in params ? params.CACert : null;
+        this.Token = 'Token' in params ? params.Token : null;
+
+    }
+}
+
+/**
+ * 描述了实例登录相关配置与信息。
+ * @class
+ */
+class LoginSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.KeyIds = null;
+
+        /**
+         * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeepImageLogin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Password = 'Password' in params ? params.Password : null;
+        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusOverviews请求参数结构体
+ * @class
+ */
+class DescribePrometheusOverviewsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于分页
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 用于分页
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤实例，目前支持：
+ID: 通过实例ID来过滤 
+Name: 通过实例名称来过滤
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 集群master自定义参数
  * @class
  */
@@ -2884,6 +5457,13 @@ class ClusterExtraArgs extends  AbstractModel {
          */
         this.KubeScheduler = null;
 
+        /**
+         * etcd自定义参数，只支持独立集群
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Etcd = null;
+
     }
 
     /**
@@ -2896,6 +5476,70 @@ class ClusterExtraArgs extends  AbstractModel {
         this.KubeAPIServer = 'KubeAPIServer' in params ? params.KubeAPIServer : null;
         this.KubeControllerManager = 'KubeControllerManager' in params ? params.KubeControllerManager : null;
         this.KubeScheduler = 'KubeScheduler' in params ? params.KubeScheduler : null;
+        this.Etcd = 'Etcd' in params ? params.Etcd : null;
+
+    }
+}
+
+/**
+ * DescribeRouteTableConflicts请求参数结构体
+ * @class
+ */
+class DescribeRouteTableConflictsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由表CIDR
+         * @type {string || null}
+         */
+        this.RouteTableCidrBlock = null;
+
+        /**
+         * 路由表绑定的VPC
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+    }
+}
+
+/**
+ * SyncPrometheusTemplate返回参数结构体
+ * @class
+ */
+class SyncPrometheusTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2962,12 +5606,76 @@ class DataDisk extends  AbstractModel {
 }
 
 /**
- * ModifyClusterNodePool返回参数结构体
+ * DeleteEKSCluster请求参数结构体
  * @class
  */
-class ModifyClusterNodePoolResponse extends  AbstractModel {
+class DeleteEKSClusterRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 弹性集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * GetUpgradeInstanceProgress返回参数结构体
+ * @class
+ */
+class GetUpgradeInstanceProgressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 升级节点总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 已升级节点总数
+         * @type {number || null}
+         */
+        this.Done = null;
+
+        /**
+         * 升级任务生命周期
+process 运行中
+paused 已停止
+pauing 正在停止
+done  已完成
+timeout 已超时
+aborted 已取消
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * 各节点升级进度详情
+         * @type {Array.<InstanceUpgradeProgressItem> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 集群当前状态
+         * @type {InstanceUpgradeClusterStatus || null}
+         */
+        this.ClusterStatus = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2983,6 +5691,24 @@ class ModifyClusterNodePoolResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Done = 'Done' in params ? params.Done : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new InstanceUpgradeProgressItem();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+
+        if (params.ClusterStatus) {
+            let obj = new InstanceUpgradeClusterStatus();
+            obj.deserialize(params.ClusterStatus)
+            this.ClusterStatus = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3041,6 +5767,99 @@ class DescribeExistedInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * CreateEKSCluster返回参数结构体
+ * @class
+ */
+class CreateEKSClusterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 弹性集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeEKSClusters请求参数结构体
+ * @class
+ */
+class DescribeEKSClustersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID列表(为空时，
+表示获取账号下所有集群)
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+        /**
+         * 偏移量,默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 最大输出条数，默认20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 资源删除选项
  * @class
  */
@@ -3076,33 +5895,24 @@ class ResourceDeleteOption extends  AbstractModel {
 }
 
 /**
- * 描述了实例登录相关配置与信息。
+ * Eks 自定义域名服务器 配置
  * @class
  */
-class LoginSettings extends  AbstractModel {
+class DnsServerConf extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 域名。空字符串表示所有域名。
          * @type {string || null}
          */
-        this.Password = null;
+        this.Domain = null;
 
         /**
-         * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
-注意：此字段可能返回 null，表示取不到有效值。
+         * dns 服务器地址列表。地址格式 ip:port
          * @type {Array.<string> || null}
          */
-        this.KeyIds = null;
-
-        /**
-         * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.KeepImageLogin = null;
+        this.DnsServers = null;
 
     }
 
@@ -3113,9 +5923,137 @@ class LoginSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Password = 'Password' in params ? params.Password : null;
-        this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
-        this.KeepImageLogin = 'KeepImageLogin' in params ? params.KeepImageLogin : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.DnsServers = 'DnsServers' in params ? params.DnsServers : null;
+
+    }
+}
+
+/**
+ * 弹性集群信息
+ * @class
+ */
+class EksCluster extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * Vpc Id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网列表
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * k8s 版本号
+         * @type {string || null}
+         */
+        this.K8SVersion = null;
+
+        /**
+         * 集群状态(running运行中，initializing 初始化中，failed异常)
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 集群描述信息
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
+
+        /**
+         * 集群创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * Service 子网Id
+         * @type {string || null}
+         */
+        this.ServiceSubnetId = null;
+
+        /**
+         * 集群的自定义dns 服务器信息
+         * @type {Array.<DnsServerConf> || null}
+         */
+        this.DnsServers = null;
+
+        /**
+         * 将来删除集群时是否要删除cbs。默认为 FALSE
+         * @type {boolean || null}
+         */
+        this.NeedDeleteCbs = null;
+
+        /**
+         * 是否在用户集群内开启Dns。默认为TRUE
+         * @type {boolean || null}
+         */
+        this.EnableVpcCoreDNS = null;
+
+        /**
+         * 标签描述列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.TagSpecification = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.K8SVersion = 'K8SVersion' in params ? params.K8SVersion : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.ServiceSubnetId = 'ServiceSubnetId' in params ? params.ServiceSubnetId : null;
+
+        if (params.DnsServers) {
+            this.DnsServers = new Array();
+            for (let z in params.DnsServers) {
+                let obj = new DnsServerConf();
+                obj.deserialize(params.DnsServers[z]);
+                this.DnsServers.push(obj);
+            }
+        }
+        this.NeedDeleteCbs = 'NeedDeleteCbs' in params ? params.NeedDeleteCbs : null;
+        this.EnableVpcCoreDNS = 'EnableVpcCoreDNS' in params ? params.EnableVpcCoreDNS : null;
+
+        if (params.TagSpecification) {
+            this.TagSpecification = new Array();
+            for (let z in params.TagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.TagSpecification[z]);
+                this.TagSpecification.push(obj);
+            }
+        }
 
     }
 }
@@ -3151,6 +6089,34 @@ class CreateClusterNodePoolFromExistingAsgResponse extends  AbstractModel {
         }
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeEnableVpcCniProgress请求参数结构体
+ * @class
+ */
+class DescribeEnableVpcCniProgressRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开启vpc-cni的集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -3443,6 +6409,69 @@ class CreateClusterResponse extends  AbstractModel {
 }
 
 /**
+ * 任务步骤信息
+ * @class
+ */
+class TaskStepInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 步骤名称
+         * @type {string || null}
+         */
+        this.Step = null;
+
+        /**
+         * 生命周期
+pending : 步骤未开始
+running: 步骤执行中
+success: 步骤成功完成
+failed: 步骤失败
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * 步骤开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartAt = null;
+
+        /**
+         * 步骤结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndAt = null;
+
+        /**
+         * 若步骤生命周期为failed,则此字段显示错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FailedMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Step = 'Step' in params ? params.Step : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+        this.StartAt = 'StartAt' in params ? params.StartAt : null;
+        this.EndAt = 'EndAt' in params ? params.EndAt : null;
+        this.FailedMsg = 'FailedMsg' in params ? params.FailedMsg : null;
+
+    }
+}
+
+/**
  * 描述了 “云安全” 服务相关的信息
  * @class
  */
@@ -3494,6 +6523,41 @@ class DeleteClusterRouteTableRequest extends  AbstractModel {
             return;
         }
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+
+    }
+}
+
+/**
+ * DescribeAvailableClusterVersion请求参数结构体
+ * @class
+ */
+class DescribeAvailableClusterVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群 Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群 Id 列表
+         * @type {Array.<string> || null}
+         */
+        this.ClusterIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterIds = 'ClusterIds' in params ? params.ClusterIds : null;
 
     }
 }
@@ -3826,7 +6890,7 @@ class InstanceAdvancedSettings extends  AbstractModel {
         super();
 
         /**
-         * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
+         * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 (tlinux系统格式化成xfs)并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
 注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
@@ -3861,7 +6925,7 @@ class InstanceAdvancedSettings extends  AbstractModel {
         this.Labels = null;
 
         /**
-         * 多盘数据盘挂载信息，同时请确保购买CVM的参数传递了购买多个数据盘的信息，如添加节点CreateClusterInstances API的RunInstancesPara下的DataDisks也设置了购买多个数据盘, 具体可以参考CreateClusterInstances接口的，添加集群节点(多块数据盘)样例
+         * 多盘数据盘挂载信息，同时请确保购买CVM的参数传递了购买多个数据盘的信息，如添加节点CreateClusterInstances API的RunInstancesPara下的DataDisks也设置了购买多个数据盘, 具体可以参考CreateClusterInstances接口的，添加集群节点(多块数据盘)样例；注意：此参数在调用接口AddExistedInstances时不起作用
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DataDisk> || null}
          */
@@ -3873,6 +6937,13 @@ class InstanceAdvancedSettings extends  AbstractModel {
          * @type {InstanceExtraArgs || null}
          */
         this.ExtraArgs = null;
+
+        /**
+         * 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DesiredPodNumber = null;
 
     }
 
@@ -3911,6 +6982,143 @@ class InstanceAdvancedSettings extends  AbstractModel {
             obj.deserialize(params.ExtraArgs)
             this.ExtraArgs = obj;
         }
+        this.DesiredPodNumber = 'DesiredPodNumber' in params ? params.DesiredPodNumber : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusAgents请求参数结构体
+ * @class
+ */
+class DescribePrometheusAgentsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 用于分页
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 用于分页
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeEnableVpcCniProgress返回参数结构体
+ * @class
+ */
+class DescribeEnableVpcCniProgressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务进度的描述：Running/Succeed/Failed
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMessage = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMessage = 'ErrorMessage' in params ? params.ErrorMessage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 托管prometheus agent概览
+ * @class
+ */
+class PrometheusAgentOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群类型
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * agent状态
+normal = 正常
+abnormal = 异常
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
 
     }
 }
@@ -4017,6 +7225,18 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
          */
         this.EnableAutoscale = null;
 
+        /**
+         * 操作系统名称
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
     }
 
     /**
@@ -4050,6 +7270,8 @@ class ModifyClusterNodePoolRequest extends  AbstractModel {
             }
         }
         this.EnableAutoscale = 'EnableAutoscale' in params ? params.EnableAutoscale : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
     }
 }
@@ -4191,6 +7413,18 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
          */
         this.Taints = null;
 
+        /**
+         * 节点池os
+         * @type {string || null}
+         */
+        this.NodePoolOs = null;
+
+        /**
+         * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
     }
 
     /**
@@ -4229,6 +7463,8 @@ class CreateClusterNodePoolRequest extends  AbstractModel {
                 this.Taints.push(obj);
             }
         }
+        this.NodePoolOs = 'NodePoolOs' in params ? params.NodePoolOs : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
     }
 }
@@ -4290,7 +7526,13 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.DeletionProtection = null;
 
         /**
-         * 集群的网络代理模型
+         * 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：
+iptables模式：IPVS和KubeProxyMode都不设置
+ipvs模式: 设置IPVS为true, KubeProxyMode不设置
+ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
+使用ipvs-bpf的网络模式需要满足以下条件：
+1. 集群版本必须为1.14及以上；
+2. 系统镜像必须是: Tencent Linux 2.4；
          * @type {string || null}
          */
         this.KubeProxyMode = null;
@@ -4319,6 +7561,24 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.VpcCniType = null;
 
+        /**
+         * 运行时版本
+         * @type {string || null}
+         */
+        this.RuntimeVersion = null;
+
+        /**
+         * 是否开节点podCIDR大小的自定义模式
+         * @type {boolean || null}
+         */
+        this.EnableCustomizedPodCIDR = null;
+
+        /**
+         * 自定义模式下的基础pod数量
+         * @type {number || null}
+         */
+        this.BasePodNumber = null;
+
     }
 
     /**
@@ -4346,6 +7606,9 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
         this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
         this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
+        this.RuntimeVersion = 'RuntimeVersion' in params ? params.RuntimeVersion : null;
+        this.EnableCustomizedPodCIDR = 'EnableCustomizedPodCIDR' in params ? params.EnableCustomizedPodCIDR : null;
+        this.BasePodNumber = 'BasePodNumber' in params ? params.BasePodNumber : null;
 
     }
 }
@@ -4379,30 +7642,18 @@ class AcquireClusterAdminRoleResponse extends  AbstractModel {
 }
 
 /**
- * DeleteClusterNodePool请求参数结构体
+ * ModifyPrometheusTemplate返回参数结构体
  * @class
  */
-class DeleteClusterNodePoolRequest extends  AbstractModel {
+class ModifyPrometheusTemplateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 节点池对应的 ClusterId
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ClusterId = null;
-
-        /**
-         * 需要删除的节点池 Id 列表
-         * @type {Array.<string> || null}
-         */
-        this.NodePoolIds = null;
-
-        /**
-         * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
-         * @type {boolean || null}
-         */
-        this.KeepInstance = null;
+        this.RequestId = null;
 
     }
 
@@ -4413,9 +7664,63 @@ class DeleteClusterNodePoolRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NodePoolIds = 'NodePoolIds' in params ? params.NodePoolIds : null;
-        this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeletePrometheusTemplate返回参数结构体
+ * @class
+ */
+class DeletePrometheusTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusTemplateSync请求参数结构体
+ * @class
+ */
+class DescribePrometheusTemplateSyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -4444,6 +7749,72 @@ class DeleteClusterEndpointVipRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * CheckInstancesUpgradeAble返回参数结构体
+ * @class
+ */
+class CheckInstancesUpgradeAbleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群master当前小版本
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
+        /**
+         * 集群master对应的大版本目前最新小版本
+         * @type {string || null}
+         */
+        this.LatestVersion = null;
+
+        /**
+         * 可升级节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<UpgradeAbleInstancesItem> || null}
+         */
+        this.UpgradeAbleInstances = null;
+
+        /**
+         * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+        this.LatestVersion = 'LatestVersion' in params ? params.LatestVersion : null;
+
+        if (params.UpgradeAbleInstances) {
+            this.UpgradeAbleInstances = new Array();
+            for (let z in params.UpgradeAbleInstances) {
+                let obj = new UpgradeAbleInstancesItem();
+                obj.deserialize(params.UpgradeAbleInstances[z]);
+                this.UpgradeAbleInstances.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4624,11 +7995,18 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * 查询集群访问端口状态（Created 开启成功，Creating 开启中中，NotFound 未开启）
+         * 查询集群访问端口状态（Created 开启成功，Creating 开启中，NotFound 未开启）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Status = null;
+
+        /**
+         * 开启访问入口失败信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrorMsg = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4646,6 +8024,35 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.ErrorMsg = 'ErrorMsg' in params ? params.ErrorMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeClusterInstances返回参数结构体
+ * @class
+ */
+class UpgradeClusterInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4690,6 +8097,56 @@ class CreatePrometheusDashboardRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.DashboardName = 'DashboardName' in params ? params.DashboardName : null;
         this.Contents = 'Contents' in params ? params.Contents : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusAgents返回参数结构体
+ * @class
+ */
+class DescribePrometheusAgentsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 被关联集群信息
+         * @type {Array.<PrometheusAgentOverview> || null}
+         */
+        this.Agents = null;
+
+        /**
+         * 被关联集群总量
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Agents) {
+            this.Agents = new Array();
+            for (let z in params.Agents) {
+                let obj = new PrometheusAgentOverview();
+                obj.deserialize(params.Agents[z]);
+                this.Agents.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4777,6 +8234,41 @@ class DeleteClusterRouteTableResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateClusterInstances返回参数结构体
+ * @class
+ */
+class CreateClusterInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点实例ID
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4889,6 +8381,91 @@ class CreateClusterEndpointRequest extends  AbstractModel {
 }
 
 /**
+ * prometheus一个job的targets
+ * @class
+ */
+class PrometheusJobTargets extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该Job的targets列表
+         * @type {Array.<PrometheusTarget> || null}
+         */
+        this.Targets = null;
+
+        /**
+         * job的名称
+         * @type {string || null}
+         */
+        this.JobName = null;
+
+        /**
+         * targets总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 健康的target总数
+         * @type {number || null}
+         */
+        this.Up = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new PrometheusTarget();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+        this.JobName = 'JobName' in params ? params.JobName : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Up = 'Up' in params ? params.Up : null;
+
+    }
+}
+
+/**
+ * ModifyClusterAsGroupOptionAttribute返回参数结构体
+ * @class
+ */
+class ModifyClusterAsGroupOptionAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AddExistedInstances请求参数结构体
  * @class
  */
@@ -4903,13 +8480,13 @@ class AddExistedInstancesRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 实例列表
+         * 实例列表，不支持竞价实例
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 实例额外需要设置参数信息
+         * 实例额外需要设置参数信息(默认值)
          * @type {InstanceAdvancedSettings || null}
          */
         this.InstanceAdvancedSettings = null;
@@ -4927,16 +8504,36 @@ class AddExistedInstancesRequest extends  AbstractModel {
         this.LoginSettings = null;
 
         /**
+         * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
+         * @type {string || null}
+         */
+        this.HostName = null;
+
+        /**
          * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
 
         /**
-         * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
-         * @type {string || null}
+         * 节点池选项
+         * @type {NodePoolOption || null}
          */
-        this.HostName = null;
+        this.NodePool = null;
+
+        /**
+         * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
+         * @type {Array.<string> || null}
+         */
+        this.SkipValidateOptions = null;
+
+        /**
+         * 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。
+
+参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instace将使用默认配置。
+         * @type {Array.<InstanceAdvancedSettings> || null}
+         */
+        this.InstanceAdvancedSettingsOverrides = null;
 
     }
 
@@ -4967,8 +8564,24 @@ class AddExistedInstancesRequest extends  AbstractModel {
             obj.deserialize(params.LoginSettings)
             this.LoginSettings = obj;
         }
-        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.NodePool) {
+            let obj = new NodePoolOption();
+            obj.deserialize(params.NodePool)
+            this.NodePool = obj;
+        }
+        this.SkipValidateOptions = 'SkipValidateOptions' in params ? params.SkipValidateOptions : null;
+
+        if (params.InstanceAdvancedSettingsOverrides) {
+            this.InstanceAdvancedSettingsOverrides = new Array();
+            for (let z in params.InstanceAdvancedSettingsOverrides) {
+                let obj = new InstanceAdvancedSettings();
+                obj.deserialize(params.InstanceAdvancedSettingsOverrides[z]);
+                this.InstanceAdvancedSettingsOverrides.push(obj);
+            }
+        }
 
     }
 }
@@ -5099,18 +8712,12 @@ class ClusterAsGroupOption extends  AbstractModel {
 }
 
 /**
- * CreateClusterInstances返回参数结构体
+ * AddVpcCniSubnets返回参数结构体
  * @class
  */
-class CreateClusterInstancesResponse extends  AbstractModel {
+class AddVpcCniSubnetsResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 节点实例ID
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIdSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5127,8 +8734,49 @@ class CreateClusterInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNodePoolDesiredCapacityAboutAsg请求参数结构体
+ * @class
+ */
+class ModifyNodePoolDesiredCapacityAboutAsgRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 节点池所关联的伸缩组的期望实例数
+         * @type {number || null}
+         */
+        this.DesiredCapacity = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.DesiredCapacity = 'DesiredCapacity' in params ? params.DesiredCapacity : null;
 
     }
 }
@@ -5183,6 +8831,46 @@ class DescribeClusterRouteTablesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterAsGroupOptionAttribute请求参数结构体
+ * @class
+ */
+class ModifyClusterAsGroupOptionAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群弹性伸缩属性
+         * @type {ClusterAsGroupOption || null}
+         */
+        this.ClusterAsGroupOption = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.ClusterAsGroupOption) {
+            let obj = new ClusterAsGroupOption();
+            obj.deserialize(params.ClusterAsGroupOption)
+            this.ClusterAsGroupOption = obj;
+        }
+
+    }
+}
+
+/**
  * 不同角色的已存在节点配置参数
  * @class
  */
@@ -5208,6 +8896,12 @@ class ExistedInstancesForNode extends  AbstractModel {
          */
         this.InstanceAdvancedSettingsOverride = null;
 
+        /**
+         * 自定义模式集群，可指定每个节点的pod数量
+         * @type {Array.<number> || null}
+         */
+        this.DesiredPodNumbers = null;
+
     }
 
     /**
@@ -5229,6 +8923,92 @@ class ExistedInstancesForNode extends  AbstractModel {
             let obj = new InstanceAdvancedSettings();
             obj.deserialize(params.InstanceAdvancedSettingsOverride)
             this.InstanceAdvancedSettingsOverride = obj;
+        }
+        this.DesiredPodNumbers = 'DesiredPodNumbers' in params ? params.DesiredPodNumbers : null;
+
+    }
+}
+
+/**
+ * 节点升级过程中集群当前状态
+ * @class
+ */
+class InstanceUpgradeClusterStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * pod总数
+         * @type {number || null}
+         */
+        this.PodTotal = null;
+
+        /**
+         * NotReady pod总数
+         * @type {number || null}
+         */
+        this.NotReadyPod = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PodTotal = 'PodTotal' in params ? params.PodTotal : null;
+        this.NotReadyPod = 'NotReadyPod' in params ? params.NotReadyPod : null;
+
+    }
+}
+
+/**
+ * 不同角色的节点配置参数
+ * @class
+ */
+class RunInstancesForNode extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD节点最小配置为4C8G。
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+        /**
+         * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口，传入公共参数外的其他参数即可，其中ImageId会替换为TKE集群OS对应的镜像。
+         * @type {Array.<string> || null}
+         */
+        this.RunInstancesPara = null;
+
+        /**
+         * 节点高级设置，该参数会覆盖集群级别设置的InstanceAdvancedSettings，和上边的RunInstancesPara按照顺序一一对应（当前只对节点自定义参数ExtraArgs生效）。
+         * @type {Array.<InstanceAdvancedSettings> || null}
+         */
+        this.InstanceAdvancedSettingsOverrides = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.RunInstancesPara = 'RunInstancesPara' in params ? params.RunInstancesPara : null;
+
+        if (params.InstanceAdvancedSettingsOverrides) {
+            this.InstanceAdvancedSettingsOverrides = new Array();
+            for (let z in params.InstanceAdvancedSettingsOverrides) {
+                let obj = new InstanceAdvancedSettings();
+                obj.deserialize(params.InstanceAdvancedSettingsOverrides[z]);
+                this.InstanceAdvancedSettingsOverrides.push(obj);
+            }
         }
 
     }
@@ -5320,6 +9100,57 @@ class DeleteClusterRouteRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusOverviews返回参数结构体
+ * @class
+ */
+class DescribePrometheusOverviewsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例列表
+         * @type {Array.<PrometheusInstanceOverview> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new PrometheusInstanceOverview();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteClusterEndpoint请求参数结构体
  * @class
  */
@@ -5355,6 +9186,108 @@ class DeleteClusterEndpointRequest extends  AbstractModel {
 }
 
 /**
+ * DescribePrometheusTargets请求参数结构体
+ * @class
+ */
+class DescribePrometheusTargetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 集群类型
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 过滤条件，当前支持
+Name=state
+Value=up, down, unknown
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribePrometheusTargets返回参数结构体
+ * @class
+ */
+class DescribePrometheusTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 所有Job的targets信息
+         * @type {Array.<PrometheusJobTargets> || null}
+         */
+        this.Jobs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Jobs) {
+            this.Jobs = new Array();
+            for (let z in params.Jobs) {
+                let obj = new PrometheusJobTargets();
+                obj.deserialize(params.Jobs[z]);
+                this.Jobs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeClusterNodePoolDetail请求参数结构体
  * @class
  */
@@ -5385,6 +9318,83 @@ class DescribeClusterNodePoolDetailRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+
+    }
+}
+
+/**
+ * SetNodePoolNodeProtection请求参数结构体
+ * @class
+ */
+class SetNodePoolNodeProtectionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 节点id
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 节点是否需要移出保护
+         * @type {boolean || null}
+         */
+        this.ProtectedFromScaleIn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.ProtectedFromScaleIn = 'ProtectedFromScaleIn' in params ? params.ProtectedFromScaleIn : null;
+
+    }
+}
+
+/**
+ * DeletePrometheusTemplateSync返回参数结构体
+ * @class
+ */
+class DeletePrometheusTemplateSyncResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5434,6 +9444,48 @@ class CreateClusterRouteTableRequest extends  AbstractModel {
         this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.IgnoreClusterCidrConflict = 'IgnoreClusterCidrConflict' in params ? params.IgnoreClusterCidrConflict : null;
+
+    }
+}
+
+/**
+ * RemoveNodeFromNodePool请求参数结构体
+ * @class
+ */
+class RemoveNodeFromNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 节点id列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -5509,12 +9561,26 @@ class DescribeImagesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyClusterEndpointSP返回参数结构体
+ * DescribeAvailableClusterVersion返回参数结构体
  * @class
  */
-class ModifyClusterEndpointSPResponse extends  AbstractModel {
+class DescribeAvailableClusterVersionResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 可升级的集群版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Versions = null;
+
+        /**
+         * 集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ClusterVersion> || null}
+         */
+        this.Clusters = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5531,27 +9597,93 @@ class ModifyClusterEndpointSPResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Versions = 'Versions' in params ? params.Versions : null;
+
+        if (params.Clusters) {
+            this.Clusters = new Array();
+            for (let z in params.Clusters) {
+                let obj = new ClusterVersion();
+                obj.deserialize(params.Clusters[z]);
+                this.Clusters.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * DescribeRouteTableConflicts请求参数结构体
+ * DescribeClusterRouteTables返回参数结构体
  * @class
  */
-class DescribeRouteTableConflictsRequest extends  AbstractModel {
+class DescribeClusterRouteTablesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由表CIDR
-         * @type {string || null}
+         * 符合条件的实例数量。
+         * @type {number || null}
          */
-        this.RouteTableCidrBlock = null;
+        this.TotalCount = null;
 
         /**
-         * 路由表绑定的VPC
+         * 集群路由表对象。
+         * @type {Array.<RouteTableInfo> || null}
+         */
+        this.RouteTableSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.RouteTableSet) {
+            this.RouteTableSet = new Array();
+            for (let z in params.RouteTableSet) {
+                let obj = new RouteTableInfo();
+                obj.deserialize(params.RouteTableSet[z]);
+                this.RouteTableSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddVpcCniSubnets请求参数结构体
+ * @class
+ */
+class AddVpcCniSubnetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 为集群容器网络增加的子网列表
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * 集群所属的VPC的ID
          * @type {string || null}
          */
         this.VpcId = null;
@@ -5565,8 +9697,165 @@ class DescribeRouteTableConflictsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+    }
+}
+
+/**
+ * 节点升级检查项结果
+ * @class
+ */
+class InstanceUpgradePreCheckResultItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作负载的命名空间
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 工作负载类型
+         * @type {string || null}
+         */
+        this.WorkLoadKind = null;
+
+        /**
+         * 工作负载名称
+         * @type {string || null}
+         */
+        this.WorkLoadName = null;
+
+        /**
+         * 驱逐节点前工作负载running的pod数目
+         * @type {number || null}
+         */
+        this.Before = null;
+
+        /**
+         * 驱逐节点后工作负载running的pod数目
+         * @type {number || null}
+         */
+        this.After = null;
+
+        /**
+         * 工作负载在本节点上的pod列表
+         * @type {Array.<string> || null}
+         */
+        this.Pods = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.WorkLoadKind = 'WorkLoadKind' in params ? params.WorkLoadKind : null;
+        this.WorkLoadName = 'WorkLoadName' in params ? params.WorkLoadName : null;
+        this.Before = 'Before' in params ? params.Before : null;
+        this.After = 'After' in params ? params.After : null;
+        this.Pods = 'Pods' in params ? params.Pods : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusAlertHistory返回参数结构体
+ * @class
+ */
+class DescribePrometheusAlertHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 告警历史
+         * @type {Array.<PrometheusAlertHistoryItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new PrometheusAlertHistoryItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterCommonNames返回参数结构体
+ * @class
+ */
+class DescribeClusterCommonNamesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子账户Uin与其客户端证书的CN字段映射
+         * @type {Array.<CommonName> || null}
+         */
+        this.CommonNames = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CommonNames) {
+            this.CommonNames = new Array();
+            for (let z in params.CommonNames) {
+                let obj = new CommonName();
+                obj.deserialize(params.CommonNames[z]);
+                this.CommonNames.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5645,6 +9934,41 @@ class ExistedInstancesPara extends  AbstractModel {
         }
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
+
+    }
+}
+
+/**
+ * 账户UIN与客户端证书CommonName的映射
+ * @class
+ */
+class CommonName extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子账户UIN
+         * @type {string || null}
+         */
+        this.SubaccountUin = null;
+
+        /**
+         * 子账户客户端证书中的CommonName字段
+         * @type {string || null}
+         */
+        this.CN = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubaccountUin = 'SubaccountUin' in params ? params.SubaccountUin : null;
+        this.CN = 'CN' in params ? params.CN : null;
 
     }
 }
@@ -5766,6 +10090,185 @@ class DeleteClusterNodePoolResponse extends  AbstractModel {
 }
 
 /**
+ * 模板实例
+ * @class
+ */
+class PrometheusTemplate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板维度，支持以下类型
+instance 实例级别
+cluster 集群级别
+         * @type {string || null}
+         */
+        this.Level = null;
+
+        /**
+         * 模板描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Describe = null;
+
+        /**
+         * 当Level为instance时有效，
+模板中的告警配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusAlertRule> || null}
+         */
+        this.AlertRules = null;
+
+        /**
+         * 当Level为instance时有效，
+模板中的聚合规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.RecordRules = null;
+
+        /**
+         * 当Level为cluster时有效，
+模板中的ServiceMonitor规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.ServiceMonitors = null;
+
+        /**
+         * 当Level为cluster时有效，
+模板中的PodMonitors规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.PodMonitors = null;
+
+        /**
+         * 当Level为cluster时有效，
+模板中的RawJobs规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusConfigItem> || null}
+         */
+        this.RawJobs = null;
+
+        /**
+         * 模板的ID, 用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 最近更新时间，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 当前版本，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 是否系统提供的默认模板，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 当Level为instance时有效，
+模板中的告警配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrometheusAlertRuleDetail> || null}
+         */
+        this.AlertDetailRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Describe = 'Describe' in params ? params.Describe : null;
+
+        if (params.AlertRules) {
+            this.AlertRules = new Array();
+            for (let z in params.AlertRules) {
+                let obj = new PrometheusAlertRule();
+                obj.deserialize(params.AlertRules[z]);
+                this.AlertRules.push(obj);
+            }
+        }
+
+        if (params.RecordRules) {
+            this.RecordRules = new Array();
+            for (let z in params.RecordRules) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RecordRules[z]);
+                this.RecordRules.push(obj);
+            }
+        }
+
+        if (params.ServiceMonitors) {
+            this.ServiceMonitors = new Array();
+            for (let z in params.ServiceMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.ServiceMonitors[z]);
+                this.ServiceMonitors.push(obj);
+            }
+        }
+
+        if (params.PodMonitors) {
+            this.PodMonitors = new Array();
+            for (let z in params.PodMonitors) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.PodMonitors[z]);
+                this.PodMonitors.push(obj);
+            }
+        }
+
+        if (params.RawJobs) {
+            this.RawJobs = new Array();
+            for (let z in params.RawJobs) {
+                let obj = new PrometheusConfigItem();
+                obj.deserialize(params.RawJobs[z]);
+                this.RawJobs.push(obj);
+            }
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+
+        if (params.AlertDetailRules) {
+            this.AlertDetailRules = new Array();
+            for (let z in params.AlertDetailRules) {
+                let obj = new PrometheusAlertRuleDetail();
+                obj.deserialize(params.AlertDetailRules[z]);
+                this.AlertDetailRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 描述了 “云监控” 服务相关的信息
  * @class
  */
@@ -5789,6 +10292,86 @@ class RunMonitorServiceEnabled extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
+ * UpdateClusterVersion返回参数结构体
+ * @class
+ */
+class UpdateClusterVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 路由表冲突对象
+ * @class
+ */
+class RouteTableConflict extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由表类型。
+         * @type {string || null}
+         */
+        this.RouteTableType = null;
+
+        /**
+         * 路由表CIDR。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RouteTableCidrBlock = null;
+
+        /**
+         * 路由表名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RouteTableName = null;
+
+        /**
+         * 路由表ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RouteTableId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteTableType = 'RouteTableType' in params ? params.RouteTableType : null;
+        this.RouteTableCidrBlock = 'RouteTableCidrBlock' in params ? params.RouteTableCidrBlock : null;
+        this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+        this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
 
     }
 }
@@ -5829,6 +10412,48 @@ class CreateClusterNodePoolResponse extends  AbstractModel {
 }
 
 /**
+ * 加入存量节点时的节点池选项
+ * @class
+ */
+class NodePoolOption extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否加入节点池
+         * @type {boolean || null}
+         */
+        this.AddToNodePool = null;
+
+        /**
+         * 节点池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 是否继承节点池相关配置
+         * @type {boolean || null}
+         */
+        this.InheritConfigurationFromNodePool = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddToNodePool = 'AddToNodePool' in params ? params.AddToNodePool : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InheritConfigurationFromNodePool = 'InheritConfigurationFromNodePool' in params ? params.InheritConfigurationFromNodePool : null;
+
+    }
+}
+
+/**
  * ModifyClusterAsGroupAttribute请求参数结构体
  * @class
  */
@@ -5864,6 +10489,67 @@ class ModifyClusterAsGroupAttributeRequest extends  AbstractModel {
             obj.deserialize(params.ClusterAsGroupAttribute)
             this.ClusterAsGroupAttribute = obj;
         }
+
+    }
+}
+
+/**
+ * UpdateClusterVersion请求参数结构体
+ * @class
+ */
+class UpdateClusterVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群 Id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 需要升级到的版本
+         * @type {string || null}
+         */
+        this.DstVersion = null;
+
+        /**
+         * 集群自定义参数
+         * @type {ClusterExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+        /**
+         * 可容忍的最大不可用pod数目
+         * @type {number || null}
+         */
+        this.MaxNotReadyPercent = null;
+
+        /**
+         * 是否跳过预检查阶段
+         * @type {boolean || null}
+         */
+        this.SkipPreCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.DstVersion = 'DstVersion' in params ? params.DstVersion : null;
+
+        if (params.ExtraArgs) {
+            let obj = new ClusterExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
+        this.MaxNotReadyPercent = 'MaxNotReadyPercent' in params ? params.MaxNotReadyPercent : null;
+        this.SkipPreCheck = 'SkipPreCheck' in params ? params.SkipPreCheck : null;
 
     }
 }
@@ -5914,6 +10600,72 @@ class InstanceDataDiskMountSetting extends  AbstractModel {
             }
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * 托管prometheus实例概览
+ * @class
+ */
+class PrometheusInstanceOverview extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 实例vpcId
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 实例子网Id
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 实例当前的状态
+prepare_env = 初始化环境
+install_suit = 安装组件
+running = 运行中
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * COS桶存储
+         * @type {string || null}
+         */
+        this.COSBucket = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.COSBucket = 'COSBucket' in params ? params.COSBucket : null;
 
     }
 }
@@ -6016,30 +10768,30 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
 }
 
 /**
- * RemoveNodeFromNodePool请求参数结构体
+ * 某个节点升级前检查结果
  * @class
  */
-class RemoveNodeFromNodePoolRequest extends  AbstractModel {
+class InstanceUpgradePreCheckResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群id
-         * @type {string || null}
+         * 检查是否通过
+         * @type {boolean || null}
          */
-        this.ClusterId = null;
+        this.CheckPass = null;
 
         /**
-         * 节点池id
-         * @type {string || null}
+         * 检查项数组
+         * @type {Array.<InstanceUpgradePreCheckResultItem> || null}
          */
-        this.NodePoolId = null;
+        this.Items = null;
 
         /**
-         * 节点id列表
+         * 本节点独立pod列表
          * @type {Array.<string> || null}
          */
-        this.InstanceIds = null;
+        this.SinglePods = null;
 
     }
 
@@ -6050,9 +10802,17 @@ class RemoveNodeFromNodePoolRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.CheckPass = 'CheckPass' in params ? params.CheckPass : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new InstanceUpgradePreCheckResultItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.SinglePods = 'SinglePods' in params ? params.SinglePods : null;
 
     }
 }
@@ -6098,10 +10858,13 @@ class DescribeClusterNodePoolDetailResponse extends  AbstractModel {
 }
 
 module.exports = {
+    EnableVpcCniNetworkTypeRequest: EnableVpcCniNetworkTypeRequest,
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
+    ModifyNodePoolDesiredCapacityAboutAsgResponse: ModifyNodePoolDesiredCapacityAboutAsgResponse,
+    ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
     DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
     RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
     CreateClusterRouteRequest: CreateClusterRouteRequest,
@@ -6110,68 +10873,119 @@ module.exports = {
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     DeleteClusterResponse: DeleteClusterResponse,
     AutoscalingAdded: AutoscalingAdded,
+    DescribePrometheusTemplateSyncResponse: DescribePrometheusTemplateSyncResponse,
+    UpdateEKSClusterRequest: UpdateEKSClusterRequest,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
+    DescribeClusterCommonNamesRequest: DescribeClusterCommonNamesRequest,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
-    RouteInfo: RouteInfo,
+    PrometheusTemplateModify: PrometheusTemplateModify,
+    PrometheusNotification: PrometheusNotification,
+    ClusterVersion: ClusterVersion,
+    CreatePrometheusTemplateRequest: CreatePrometheusTemplateRequest,
+    DeletePrometheusTemplateRequest: DeletePrometheusTemplateRequest,
+    InstanceUpgradeProgressItem: InstanceUpgradeProgressItem,
+    NodePool: NodePool,
+    DescribeEKSClustersResponse: DescribeEKSClustersResponse,
+    RouteTableInfo: RouteTableInfo,
+    IPAddress: IPAddress,
     DeleteClusterRequest: DeleteClusterRequest,
-    RunInstancesForNode: RunInstancesForNode,
+    PrometheusTarget: PrometheusTarget,
+    CreateEKSClusterRequest: CreateEKSClusterRequest,
     DeleteClusterAsGroupsRequest: DeleteClusterAsGroupsRequest,
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
+    Tag: Tag,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    PrometheusAlertHistoryItem: PrometheusAlertHistoryItem,
     CreateClusterRouteResponse: CreateClusterRouteResponse,
+    PrometheusTemplateSyncTarget: PrometheusTemplateSyncTarget,
+    DescribePrometheusTemplatesRequest: DescribePrometheusTemplatesRequest,
     AddNodeToNodePoolRequest: AddNodeToNodePoolRequest,
-    NodePool: NodePool,
-    RouteTableInfo: RouteTableInfo,
+    EnableVpcCniNetworkTypeResponse: EnableVpcCniNetworkTypeResponse,
+    DescribePrometheusAlertRuleResponse: DescribePrometheusAlertRuleResponse,
     ClusterAsGroup: ClusterAsGroup,
     Instance: Instance,
+    PrometheusAlertRuleDetail: PrometheusAlertRuleDetail,
+    UpgradeAbleInstancesItem: UpgradeAbleInstancesItem,
     CreateClusterNodePoolFromExistingAsgRequest: CreateClusterNodePoolFromExistingAsgRequest,
-    Tag: Tag,
+    PrometheusAlertRule: PrometheusAlertRule,
     DescribePrometheusAgentInstancesRequest: DescribePrometheusAgentInstancesRequest,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DescribeImagesResponse: DescribeImagesResponse,
     AutoScalingGroupRange: AutoScalingGroupRange,
     ModifyClusterAttributeRequest: ModifyClusterAttributeRequest,
     DeleteClusterRouteResponse: DeleteClusterRouteResponse,
+    ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
+    UpgradeClusterInstancesRequest: UpgradeClusterInstancesRequest,
+    ClusterPublicLB: ClusterPublicLB,
     ExtensionAddon: ExtensionAddon,
     RegionInstance: RegionInstance,
     Label: Label,
+    DescribePrometheusAlertHistoryRequest: DescribePrometheusAlertHistoryRequest,
+    DeletePrometheusTemplateSyncRequest: DeletePrometheusTemplateSyncRequest,
+    SetNodePoolNodeProtectionResponse: SetNodePoolNodeProtectionResponse,
+    DescribePrometheusTemplatesResponse: DescribePrometheusTemplatesResponse,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
+    SyncPrometheusTemplateRequest: SyncPrometheusTemplateRequest,
     ClusterBasicSettings: ClusterBasicSettings,
     CreatePrometheusDashboardResponse: CreatePrometheusDashboardResponse,
-    RouteTableConflict: RouteTableConflict,
+    DescribeEKSClusterCredentialResponse: DescribeEKSClusterCredentialResponse,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
+    UpgradeNodeResetParam: UpgradeNodeResetParam,
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     ManuallyAdded: ManuallyAdded,
-    DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
+    DeleteEKSClusterResponse: DeleteEKSClusterResponse,
+    PrometheusConfigItem: PrometheusConfigItem,
+    DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
+    CreatePrometheusTemplateResponse: CreatePrometheusTemplateResponse,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
+    RouteInfo: RouteInfo,
+    ClusterInternalLB: ClusterInternalLB,
     Taint: Taint,
+    CheckInstancesUpgradeAbleRequest: CheckInstancesUpgradeAbleRequest,
     ExistedInstance: ExistedInstance,
     DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
+    DescribePrometheusAlertRuleRequest: DescribePrometheusAlertRuleRequest,
+    DescribeEKSClusterCredentialRequest: DescribeEKSClusterCredentialRequest,
+    GetUpgradeInstanceProgressRequest: GetUpgradeInstanceProgressRequest,
+    ModifyPrometheusTemplateRequest: ModifyPrometheusTemplateRequest,
     AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
+    UpdateEKSClusterResponse: UpdateEKSClusterResponse,
     TagSpecification: TagSpecification,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
-    ClusterExtraArgs: ClusterExtraArgs,
-    DataDisk: DataDisk,
-    ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
-    DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
-    ResourceDeleteOption: ResourceDeleteOption,
+    ClusterCredential: ClusterCredential,
     LoginSettings: LoginSettings,
+    DescribePrometheusOverviewsRequest: DescribePrometheusOverviewsRequest,
+    ClusterExtraArgs: ClusterExtraArgs,
+    DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
+    SyncPrometheusTemplateResponse: SyncPrometheusTemplateResponse,
+    DataDisk: DataDisk,
+    DeleteEKSClusterRequest: DeleteEKSClusterRequest,
+    GetUpgradeInstanceProgressResponse: GetUpgradeInstanceProgressResponse,
+    DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
+    CreateEKSClusterResponse: CreateEKSClusterResponse,
+    DescribeEKSClustersRequest: DescribeEKSClustersRequest,
+    ResourceDeleteOption: ResourceDeleteOption,
+    DnsServerConf: DnsServerConf,
+    EksCluster: EksCluster,
     CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
+    DescribeEnableVpcCniProgressRequest: DescribeEnableVpcCniProgressRequest,
     DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
     ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     EnhancedService: EnhancedService,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
     DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     CreateClusterResponse: CreateClusterResponse,
+    TaskStepInfo: TaskStepInfo,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
+    DescribeAvailableClusterVersionRequest: DescribeAvailableClusterVersionRequest,
     CreateClusterRequest: CreateClusterRequest,
     InstanceExtraArgs: InstanceExtraArgs,
     AcquireClusterAdminRoleRequest: AcquireClusterAdminRoleRequest,
@@ -6179,6 +10993,9 @@ module.exports = {
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     InstanceAdvancedSettings: InstanceAdvancedSettings,
+    DescribePrometheusAgentsRequest: DescribePrometheusAgentsRequest,
+    DescribeEnableVpcCniProgressResponse: DescribeEnableVpcCniProgressResponse,
+    PrometheusAgentOverview: PrometheusAgentOverview,
     Filter: Filter,
     ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
     ImageInstance: ImageInstance,
@@ -6186,42 +11003,71 @@ module.exports = {
     CreateClusterNodePoolRequest: CreateClusterNodePoolRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
-    DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
+    ModifyPrometheusTemplateResponse: ModifyPrometheusTemplateResponse,
+    DeletePrometheusTemplateResponse: DeletePrometheusTemplateResponse,
+    DescribePrometheusTemplateSyncRequest: DescribePrometheusTemplateSyncRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
+    CheckInstancesUpgradeAbleResponse: CheckInstancesUpgradeAbleResponse,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
+    UpgradeClusterInstancesResponse: UpgradeClusterInstancesResponse,
     CreatePrometheusDashboardRequest: CreatePrometheusDashboardRequest,
+    DescribePrometheusAgentsResponse: DescribePrometheusAgentsResponse,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
+    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
     DescribePrometheusAgentInstancesResponse: DescribePrometheusAgentInstancesResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
+    PrometheusJobTargets: PrometheusJobTargets,
+    ModifyClusterAsGroupOptionAttributeResponse: ModifyClusterAsGroupOptionAttributeResponse,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
-    CreateClusterInstancesResponse: CreateClusterInstancesResponse,
+    AddVpcCniSubnetsResponse: AddVpcCniSubnetsResponse,
+    ModifyNodePoolDesiredCapacityAboutAsgRequest: ModifyNodePoolDesiredCapacityAboutAsgRequest,
     DescribeClusterNodePoolsRequest: DescribeClusterNodePoolsRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
+    ModifyClusterAsGroupOptionAttributeRequest: ModifyClusterAsGroupOptionAttributeRequest,
     ExistedInstancesForNode: ExistedInstancesForNode,
+    InstanceUpgradeClusterStatus: InstanceUpgradeClusterStatus,
+    RunInstancesForNode: RunInstancesForNode,
     DescribeClusterRoutesRequest: DescribeClusterRoutesRequest,
     DeleteClusterRouteRequest: DeleteClusterRouteRequest,
+    DescribePrometheusOverviewsResponse: DescribePrometheusOverviewsResponse,
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
+    DescribePrometheusTargetsRequest: DescribePrometheusTargetsRequest,
+    DescribePrometheusTargetsResponse: DescribePrometheusTargetsResponse,
     DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
+    SetNodePoolNodeProtectionRequest: SetNodePoolNodeProtectionRequest,
+    DeletePrometheusTemplateSyncResponse: DeletePrometheusTemplateSyncResponse,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
+    RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
     DescribeImagesRequest: DescribeImagesRequest,
-    ModifyClusterEndpointSPResponse: ModifyClusterEndpointSPResponse,
-    DescribeRouteTableConflictsRequest: DescribeRouteTableConflictsRequest,
+    DescribeAvailableClusterVersionResponse: DescribeAvailableClusterVersionResponse,
+    DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
+    AddVpcCniSubnetsRequest: AddVpcCniSubnetsRequest,
+    InstanceUpgradePreCheckResultItem: InstanceUpgradePreCheckResultItem,
+    DescribePrometheusAlertHistoryResponse: DescribePrometheusAlertHistoryResponse,
+    DescribeClusterCommonNamesResponse: DescribeClusterCommonNamesResponse,
     ExistedInstancesPara: ExistedInstancesPara,
+    CommonName: CommonName,
     DescribeClusterAsGroupOptionResponse: DescribeClusterAsGroupOptionResponse,
     ClusterAsGroupAttribute: ClusterAsGroupAttribute,
     DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,
+    PrometheusTemplate: PrometheusTemplate,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
+    UpdateClusterVersionResponse: UpdateClusterVersionResponse,
+    RouteTableConflict: RouteTableConflict,
     CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
+    NodePoolOption: NodePoolOption,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
+    UpdateClusterVersionRequest: UpdateClusterVersionRequest,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
+    PrometheusInstanceOverview: PrometheusInstanceOverview,
     NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,
-    RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
+    InstanceUpgradePreCheckResult: InstanceUpgradePreCheckResult,
     DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
 
 }

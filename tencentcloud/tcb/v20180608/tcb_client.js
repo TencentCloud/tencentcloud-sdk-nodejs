@@ -16,91 +16,140 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CreateHostingDomainResponse = models.CreateHostingDomainResponse;
-const CreateStaticStoreResponse = models.CreateStaticStoreResponse;
-const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
-const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
-const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
-const CreateCloudBaseRunServerVersionRequest = models.CreateCloudBaseRunServerVersionRequest;
-const StorageInfo = models.StorageInfo;
-const DescribeCloudBaseRunVersionSnapshotRequest = models.DescribeCloudBaseRunVersionSnapshotRequest;
-const KVPair = models.KVPair;
-const DescribeCloudBaseRunServerVersionRequest = models.DescribeCloudBaseRunServerVersionRequest;
-const FunctionInfo = models.FunctionInfo;
-const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
-const DescribeCloudBaseRunServerVersionResponse = models.DescribeCloudBaseRunServerVersionResponse;
-const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
-const PostpayEnvQuota = models.PostpayEnvQuota;
-const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
-const AuthDomain = models.AuthDomain;
-const LogServiceInfo = models.LogServiceInfo;
-const EstablishCloudBaseRunServerRequest = models.EstablishCloudBaseRunServerRequest;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
-const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
-const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
-const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
-const DescribeExtraPkgBillingInfoResponse = models.DescribeExtraPkgBillingInfoResponse;
-const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
-const DescribePostpayPackageFreeQuotasRequest = models.DescribePostpayPackageFreeQuotasRequest;
-const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
-const DescribeCloudBaseBuildServiceResponse = models.DescribeCloudBaseBuildServiceResponse;
-const ModifyEnvRequest = models.ModifyEnvRequest;
-const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
-const DescribeDownloadFileRequest = models.DescribeDownloadFileRequest;
-const DescribeEnvsRequest = models.DescribeEnvsRequest;
-const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
-const DescribeCloudBaseBuildServiceRequest = models.DescribeCloudBaseBuildServiceRequest;
-const DescribeEndUserStatisticRequest = models.DescribeEndUserStatisticRequest;
-const PackageFreeQuotaInfo = models.PackageFreeQuotaInfo;
-const CloudBaseCodeRepoDetail = models.CloudBaseCodeRepoDetail;
-const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
-const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
-const StaticStorageInfo = models.StaticStorageInfo;
 const OrderInfo = models.OrderInfo;
+const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
+const DescribeCloudBaseRunServerVersionRequest = models.DescribeCloudBaseRunServerVersionRequest;
+const DescribeExtensionUploadInfoRequest = models.DescribeExtensionUploadInfoRequest;
+const DescribeCloudBaseRunServerVersionResponse = models.DescribeCloudBaseRunServerVersionResponse;
+const CloudBaseRunSideSpec = models.CloudBaseRunSideSpec;
+const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
+const DescribePostpayPackageFreeQuotasRequest = models.DescribePostpayPackageFreeQuotasRequest;
+const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
+const DescribeCloudBaseBuildServiceResponse = models.DescribeCloudBaseBuildServiceResponse;
+const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
+const DescribeEndUserStatisticRequest = models.DescribeEndUserStatisticRequest;
 const CloudRunServiceSimpleVersionSnapshot = models.CloudRunServiceSimpleVersionSnapshot;
-const DescribeExtraPkgBillingInfoRequest = models.DescribeExtraPkgBillingInfoRequest;
-const CreateCloudBaseRunResourceRequest = models.CreateCloudBaseRunResourceRequest;
-const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
-const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
-const DatabasesInfo = models.DatabasesInfo;
-const LoginStatistic = models.LoginStatistic;
-const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
-const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
-const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
-const CloudBaseRunVolumeMount = models.CloudBaseRunVolumeMount;
-const ReinstateEnvRequest = models.ReinstateEnvRequest;
-const CreateCloudBaseRunResourceResponse = models.CreateCloudBaseRunResourceResponse;
-const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
-const PlatformStatistic = models.PlatformStatistic;
-const CreateHostingDomainRequest = models.CreateHostingDomainRequest;
-const CreateCloudBaseRunServerVersionResponse = models.CreateCloudBaseRunServerVersionResponse;
-const DeleteEndUserResponse = models.DeleteEndUserResponse;
-const EnvBillingInfoItem = models.EnvBillingInfoItem;
-const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
-const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
-const CloudBaseEsInfo = models.CloudBaseEsInfo;
-const ModifyEnvResponse = models.ModifyEnvResponse;
+const CreateWxCloudBaseRunServerDBClusterResponse = models.CreateWxCloudBaseRunServerDBClusterResponse;
+const LogServiceInfo = models.LogServiceInfo;
+const DescribeCloudBaseRunResourceForExtendRequest = models.DescribeCloudBaseRunResourceForExtendRequest;
 const ModifyEndUserRequest = models.ModifyEndUserRequest;
-const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
-const ReinstateEnvResponse = models.ReinstateEnvResponse;
-const CloudBaseRunNfsVolumeSource = models.CloudBaseRunNfsVolumeSource;
-const EstablishCloudBaseRunServerResponse = models.EstablishCloudBaseRunServerResponse;
-const EnvInfo = models.EnvInfo;
+const RollUpdateCloudBaseRunServerVersionResponse = models.RollUpdateCloudBaseRunServerVersionResponse;
+const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
+const DescribeWxCloudBaseRunEnvsResponse = models.DescribeWxCloudBaseRunEnvsResponse;
+const CreateHostingDomainRequest = models.CreateHostingDomainRequest;
+const DescribeCloudBaseRunResourceRequest = models.DescribeCloudBaseRunResourceRequest;
+const CloudBaseRunEmptyDirVolumeSource = models.CloudBaseRunEmptyDirVolumeSource;
+const CloudBaseRunVolumeMount = models.CloudBaseRunVolumeMount;
+const DescribePostpayFreeQuotasRequest = models.DescribePostpayFreeQuotasRequest;
 const CloudBaseRunImageInfo = models.CloudBaseRunImageInfo;
-const DestroyEnvResponse = models.DestroyEnvResponse;
 const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
 const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
-const ModifyEndUserResponse = models.ModifyEndUserResponse;
 const EndUserInfo = models.EndUserInfo;
+const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
+const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
+const KVPair = models.KVPair;
+const SmsFreeQuota = models.SmsFreeQuota;
+const FunctionInfo = models.FunctionInfo;
+const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
+const CreateWxCloudBaseRunEnvRequest = models.CreateWxCloudBaseRunEnvRequest;
+const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
+const CreateWxCloudBaseRunServerDBClusterRequest = models.CreateWxCloudBaseRunServerDBClusterRequest;
+const DeleteCloudBaseProjectLatestVersionResponse = models.DeleteCloudBaseProjectLatestVersionResponse;
+const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
+const DescribeEnvsRequest = models.DescribeEnvsRequest;
+const Tag = models.Tag;
+const DeleteWxGatewayRouteRequest = models.DeleteWxGatewayRouteRequest;
+const DescribeExtraPkgBillingInfoRequest = models.DescribeExtraPkgBillingInfoRequest;
+const DescribeWxCloudBaseRunSubNetsResponse = models.DescribeWxCloudBaseRunSubNetsResponse;
+const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
+const CloudBaseCapabilities = models.CloudBaseCapabilities;
+const DeleteEndUserRequest = models.DeleteEndUserRequest;
+const CreateCloudBaseRunResourceResponse = models.CreateCloudBaseRunResourceResponse;
+const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
+const DeleteEndUserResponse = models.DeleteEndUserResponse;
+const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
+const CloudBaseEsInfo = models.CloudBaseEsInfo;
+const EstablishCloudBaseRunServerResponse = models.EstablishCloudBaseRunServerResponse;
+const EnvInfo = models.EnvInfo;
+const DestroyEnvRequest = models.DestroyEnvRequest;
+const DestroyEnvResponse = models.DestroyEnvResponse;
+const DescribeCloudBaseProjectVersionListRequest = models.DescribeCloudBaseProjectVersionListRequest;
+const CodeSource = models.CodeSource;
+const DescribeEnvsResponse = models.DescribeEnvsResponse;
+const CreateAuthDomainRequest = models.CreateAuthDomainRequest;
+const CreateHostingDomainResponse = models.CreateHostingDomainResponse;
+const EstablishWxGatewayRouteResponse = models.EstablishWxGatewayRouteResponse;
+const CreateWxCloudBaseRunEnvResponse = models.CreateWxCloudBaseRunEnvResponse;
+const EstablishWxGatewayRouteRequest = models.EstablishWxGatewayRouteRequest;
+const CreateCloudBaseRunServerVersionRequest = models.CreateCloudBaseRunServerVersionRequest;
+const LoginStatistic = models.LoginStatistic;
+const DescribeWxCloudBaseRunSubNetsRequest = models.DescribeWxCloudBaseRunSubNetsRequest;
+const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
+const DeleteWxGatewayRouteResponse = models.DeleteWxGatewayRouteResponse;
+const EstablishCloudBaseRunServerRequest = models.EstablishCloudBaseRunServerRequest;
+const CloudBaseRunServiceVolumeMount = models.CloudBaseRunServiceVolumeMount;
+const DescribeCloudBaseProjectVersionListResponse = models.DescribeCloudBaseProjectVersionListResponse;
+const DescribeDownloadFileRequest = models.DescribeDownloadFileRequest;
+const ReinstateEnvResponse = models.ReinstateEnvResponse;
+const CloudBaseRunVpcSubnet = models.CloudBaseRunVpcSubnet;
+const PackageFreeQuotaInfo = models.PackageFreeQuotaInfo;
+const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
+const CreateAndDeployCloudBaseProjectResponse = models.CreateAndDeployCloudBaseProjectResponse;
+const StaticStorageInfo = models.StaticStorageInfo;
+const DescribeCloudBaseRunResourceForExtendResponse = models.DescribeCloudBaseRunResourceForExtendResponse;
+const CreateAndDeployCloudBaseProjectRequest = models.CreateAndDeployCloudBaseProjectRequest;
+const DescribeCloudBaseRunVersionRequest = models.DescribeCloudBaseRunVersionRequest;
+const DatabasesInfo = models.DatabasesInfo;
+const CloudBaseSecurityContext = models.CloudBaseSecurityContext;
+const ExtensionFile = models.ExtensionFile;
+const ReinstateEnvRequest = models.ReinstateEnvRequest;
+const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
+const CreateCloudBaseRunServerVersionResponse = models.CreateCloudBaseRunServerVersionResponse;
+const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
+const PlatformStatistic = models.PlatformStatistic;
+const DeleteCloudBaseProjectLatestVersionRequest = models.DeleteCloudBaseProjectLatestVersionRequest;
+const DescribeCloudBaseProjectLatestVersionListResponse = models.DescribeCloudBaseProjectLatestVersionListResponse;
+const CloudBaseRunNfsVolumeSource = models.CloudBaseRunNfsVolumeSource;
+const DescribeSmsQuotasResponse = models.DescribeSmsQuotasResponse;
+const DescribeWxCloudBaseRunEnvsRequest = models.DescribeWxCloudBaseRunEnvsRequest;
+const CloudBaseRunImageSecretInfo = models.CloudBaseRunImageSecretInfo;
+const ModifyEnvResponse = models.ModifyEnvResponse;
+const DescribeDownloadFileResponse = models.DescribeDownloadFileResponse;
+const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
+const CreateStaticStoreResponse = models.CreateStaticStoreResponse;
+const CloudBaseRunVpcInfo = models.CloudBaseRunVpcInfo;
+const DescribeCloudBaseRunResourceResponse = models.DescribeCloudBaseRunResourceResponse;
+const StorageInfo = models.StorageInfo;
+const DescribeCloudBaseRunVersionSnapshotRequest = models.DescribeCloudBaseRunVersionSnapshotRequest;
+const FreequotaInfo = models.FreequotaInfo;
+const DescribePostpayFreeQuotasResponse = models.DescribePostpayFreeQuotasResponse;
+const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
+const AuthDomain = models.AuthDomain;
+const DescribeCloudBaseProjectLatestVersionListRequest = models.DescribeCloudBaseProjectLatestVersionListRequest;
+const EnvBillingInfoItem = models.EnvBillingInfoItem;
+const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
+const DescribeSmsQuotasRequest = models.DescribeSmsQuotasRequest;
+const DescribeCloudBaseRunVersionResponse = models.DescribeCloudBaseRunVersionResponse;
+const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
+const DescribeCloudBaseBuildServiceRequest = models.DescribeCloudBaseBuildServiceRequest;
+const CloudBaseCodeRepoDetail = models.CloudBaseCodeRepoDetail;
+const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
+const CreateCloudBaseRunResourceRequest = models.CreateCloudBaseRunResourceRequest;
+const ModifyEndUserResponse = models.ModifyEndUserResponse;
+const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
+const CloudRunServiceVolume = models.CloudRunServiceVolume;
+const ExtensionFileInfo = models.ExtensionFileInfo;
+const CloudBaseProjectVersion = models.CloudBaseProjectVersion;
+const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
+const DescribeExtensionUploadInfoResponse = models.DescribeExtensionUploadInfoResponse;
+const ModifyEnvRequest = models.ModifyEnvRequest;
+const PostpayEnvQuota = models.PostpayEnvQuota;
 const DescribeCloudBaseRunVersionSnapshotResponse = models.DescribeCloudBaseRunVersionSnapshotResponse;
 const DescribePostpayPackageFreeQuotasResponse = models.DescribePostpayPackageFreeQuotasResponse;
-const DeleteEndUserRequest = models.DeleteEndUserRequest;
-const CloudBaseRunImageSecretInfo = models.CloudBaseRunImageSecretInfo;
-const DescribeEnvsResponse = models.DescribeEnvsResponse;
+const DescribeExtraPkgBillingInfoResponse = models.DescribeExtraPkgBillingInfoResponse;
 const CloudBaseCodeRepoName = models.CloudBaseCodeRepoName;
-const DescribeDownloadFileResponse = models.DescribeDownloadFileResponse;
-const CreateAuthDomainRequest = models.CreateAuthDomainRequest;
-const DestroyEnvRequest = models.DestroyEnvRequest;
+const RollUpdateCloudBaseRunServerVersionRequest = models.RollUpdateCloudBaseRunServerVersionRequest;
 
 
 /**
@@ -114,14 +163,14 @@ class TcbClient extends AbstractClient {
     }
     
     /**
-     * 查询版本历史
-     * @param {DescribeCloudBaseRunVersionSnapshotRequest} req
-     * @param {function(string, DescribeCloudBaseRunVersionSnapshotResponse):void} cb
+     * 查询微信云托管子网
+     * @param {DescribeWxCloudBaseRunSubNetsRequest} req
+     * @param {function(string, DescribeWxCloudBaseRunSubNetsResponse):void} cb
      * @public
      */
-    DescribeCloudBaseRunVersionSnapshot(req, cb) {
-        let resp = new DescribeCloudBaseRunVersionSnapshotResponse();
-        this.request("DescribeCloudBaseRunVersionSnapshot", req, resp, cb);
+    DescribeWxCloudBaseRunSubNets(req, cb) {
+        let resp = new DescribeWxCloudBaseRunSubNetsResponse();
+        this.request("DescribeWxCloudBaseRunSubNets", req, resp, cb);
     }
 
     /**
@@ -136,6 +185,17 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 删除安全网关路由
+     * @param {DeleteWxGatewayRouteRequest} req
+     * @param {function(string, DeleteWxGatewayRouteResponse):void} cb
+     * @public
+     */
+    DeleteWxGatewayRoute(req, cb) {
+        let resp = new DeleteWxGatewayRouteResponse();
+        this.request("DeleteWxGatewayRoute", req, resp, cb);
+    }
+
+    /**
      * 获取终端用户列表
      * @param {DescribeEndUsersRequest} req
      * @param {function(string, DescribeEndUsersResponse):void} cb
@@ -147,6 +207,75 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 查询微信云托管环境信息
+     * @param {DescribeWxCloudBaseRunEnvsRequest} req
+     * @param {function(string, DescribeWxCloudBaseRunEnvsResponse):void} cb
+     * @public
+     */
+    DescribeWxCloudBaseRunEnvs(req, cb) {
+        let resp = new DescribeWxCloudBaseRunEnvsResponse();
+        this.request("DescribeWxCloudBaseRunEnvs", req, resp, cb);
+    }
+
+    /**
+     * 查询后付费短信资源量
+1 有免费包的返回SmsFreeQuota结构所有字段
+2 没有免费包，有付费包，付费返回复用SmsFreeQuota结构，其中只有 TodayUsedQuota 字段有效
+3 都没有返回为空数组
+     * @param {DescribeSmsQuotasRequest} req
+     * @param {function(string, DescribeSmsQuotasResponse):void} cb
+     * @public
+     */
+    DescribeSmsQuotas(req, cb) {
+        let resp = new DescribeSmsQuotasResponse();
+        this.request("DescribeSmsQuotas", req, resp, cb);
+    }
+
+    /**
+     * 针对特定的版本，进行滚动更新
+     * @param {RollUpdateCloudBaseRunServerVersionRequest} req
+     * @param {function(string, RollUpdateCloudBaseRunServerVersionResponse):void} cb
+     * @public
+     */
+    RollUpdateCloudBaseRunServerVersion(req, cb) {
+        let resp = new RollUpdateCloudBaseRunServerVersionResponse();
+        this.request("RollUpdateCloudBaseRunServerVersion", req, resp, cb);
+    }
+
+    /**
+     * 开通微信云托管MySQL数据库服务
+     * @param {CreateWxCloudBaseRunServerDBClusterRequest} req
+     * @param {function(string, CreateWxCloudBaseRunServerDBClusterResponse):void} cb
+     * @public
+     */
+    CreateWxCloudBaseRunServerDBCluster(req, cb) {
+        let resp = new CreateWxCloudBaseRunServerDBClusterResponse();
+        this.request("CreateWxCloudBaseRunServerDBCluster", req, resp, cb);
+    }
+
+    /**
+     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+     * @param {DescribeEnvsRequest} req
+     * @param {function(string, DescribeEnvsResponse):void} cb
+     * @public
+     */
+    DescribeEnvs(req, cb) {
+        let resp = new DescribeEnvsResponse();
+        this.request("DescribeEnvs", req, resp, cb);
+    }
+
+    /**
+     * 创建微信云托管
+     * @param {CreateWxCloudBaseRunEnvRequest} req
+     * @param {function(string, CreateWxCloudBaseRunEnvResponse):void} cb
+     * @public
+     */
+    CreateWxCloudBaseRunEnv(req, cb) {
+        let resp = new CreateWxCloudBaseRunEnvResponse();
+        this.request("CreateWxCloudBaseRunEnv", req, resp, cb);
+    }
+
+    /**
      * 增加安全域名
      * @param {CreateAuthDomainRequest} req
      * @param {function(string, CreateAuthDomainResponse):void} cb
@@ -155,6 +284,17 @@ class TcbClient extends AbstractClient {
     CreateAuthDomain(req, cb) {
         let resp = new CreateAuthDomainResponse();
         this.request("CreateAuthDomain", req, resp, cb);
+    }
+
+    /**
+     * 获取后付费免费额度
+     * @param {DescribePostpayPackageFreeQuotasRequest} req
+     * @param {function(string, DescribePostpayPackageFreeQuotasResponse):void} cb
+     * @public
+     */
+    DescribePostpayPackageFreeQuotas(req, cb) {
+        let resp = new DescribePostpayPackageFreeQuotasResponse();
+        this.request("DescribePostpayPackageFreeQuotas", req, resp, cb);
     }
 
     /**
@@ -180,14 +320,14 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-     * @param {DescribeEnvsRequest} req
-     * @param {function(string, DescribeEnvsResponse):void} cb
+     * 获取安全域名列表
+     * @param {DescribeAuthDomainsRequest} req
+     * @param {function(string, DescribeAuthDomainsResponse):void} cb
      * @public
      */
-    DescribeEnvs(req, cb) {
-        let resp = new DescribeEnvsResponse();
-        this.request("DescribeEnvs", req, resp, cb);
+    DescribeAuthDomains(req, cb) {
+        let resp = new DescribeAuthDomainsResponse();
+        this.request("DescribeAuthDomains", req, resp, cb);
     }
 
     /**
@@ -202,6 +342,39 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 查看容器托管的集群状态
+     * @param {DescribeCloudBaseRunResourceRequest} req
+     * @param {function(string, DescribeCloudBaseRunResourceResponse):void} cb
+     * @public
+     */
+    DescribeCloudBaseRunResource(req, cb) {
+        let resp = new DescribeCloudBaseRunResourceResponse();
+        this.request("DescribeCloudBaseRunResource", req, resp, cb);
+    }
+
+    /**
+     * 云项目部署列表
+     * @param {DescribeCloudBaseProjectVersionListRequest} req
+     * @param {function(string, DescribeCloudBaseProjectVersionListResponse):void} cb
+     * @public
+     */
+    DescribeCloudBaseProjectVersionList(req, cb) {
+        let resp = new DescribeCloudBaseProjectVersionListResponse();
+        this.request("DescribeCloudBaseProjectVersionList", req, resp, cb);
+    }
+
+    /**
+     * 获取云开发项目列表
+     * @param {DescribeCloudBaseProjectLatestVersionListRequest} req
+     * @param {function(string, DescribeCloudBaseProjectLatestVersionListResponse):void} cb
+     * @public
+     */
+    DescribeCloudBaseProjectLatestVersionList(req, cb) {
+        let resp = new DescribeCloudBaseProjectLatestVersionListResponse();
+        this.request("DescribeCloudBaseProjectLatestVersionList", req, resp, cb);
+    }
+
+    /**
      * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
      * @param {ReinstateEnvRequest} req
      * @param {function(string, ReinstateEnvResponse):void} cb
@@ -213,14 +386,25 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取终端用户总量与平台分布情况
-     * @param {DescribeEndUserStatisticRequest} req
-     * @param {function(string, DescribeEndUserStatisticResponse):void} cb
+     * 获取数据库权限
+     * @param {DescribeDatabaseACLRequest} req
+     * @param {function(string, DescribeDatabaseACLResponse):void} cb
      * @public
      */
-    DescribeEndUserStatistic(req, cb) {
-        let resp = new DescribeEndUserStatisticResponse();
-        this.request("DescribeEndUserStatistic", req, resp, cb);
+    DescribeDatabaseACL(req, cb) {
+        let resp = new DescribeDatabaseACLResponse();
+        this.request("DescribeDatabaseACL", req, resp, cb);
+    }
+
+    /**
+     * 查看容器托管的集群状态扩展使用
+     * @param {DescribeCloudBaseRunResourceForExtendRequest} req
+     * @param {function(string, DescribeCloudBaseRunResourceForExtendResponse):void} cb
+     * @public
+     */
+    DescribeCloudBaseRunResourceForExtend(req, cb) {
+        let resp = new DescribeCloudBaseRunResourceForExtendResponse();
+        this.request("DescribeCloudBaseRunResourceForExtend", req, resp, cb);
     }
 
     /**
@@ -235,25 +419,25 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取下载文件信息
-     * @param {DescribeDownloadFileRequest} req
-     * @param {function(string, DescribeDownloadFileResponse):void} cb
+     * 获取增值包计费相关信息
+     * @param {DescribeExtraPkgBillingInfoRequest} req
+     * @param {function(string, DescribeExtraPkgBillingInfoResponse):void} cb
      * @public
      */
-    DescribeDownloadFile(req, cb) {
-        let resp = new DescribeDownloadFileResponse();
-        this.request("DescribeDownloadFile", req, resp, cb);
+    DescribeExtraPkgBillingInfo(req, cb) {
+        let resp = new DescribeExtraPkgBillingInfoResponse();
+        this.request("DescribeExtraPkgBillingInfo", req, resp, cb);
     }
 
     /**
-     * 获取后付费免费额度
-     * @param {DescribePostpayPackageFreeQuotasRequest} req
-     * @param {function(string, DescribePostpayPackageFreeQuotasResponse):void} cb
+     * 描述扩展上传文件信息
+     * @param {DescribeExtensionUploadInfoRequest} req
+     * @param {function(string, DescribeExtensionUploadInfoResponse):void} cb
      * @public
      */
-    DescribePostpayPackageFreeQuotas(req, cb) {
-        let resp = new DescribePostpayPackageFreeQuotasResponse();
-        this.request("DescribePostpayPackageFreeQuotas", req, resp, cb);
+    DescribeExtensionUploadInfo(req, cb) {
+        let resp = new DescribeExtensionUploadInfoResponse();
+        this.request("DescribeExtensionUploadInfo", req, resp, cb);
     }
 
     /**
@@ -276,6 +460,17 @@ class TcbClient extends AbstractClient {
     CommonServiceAPI(req, cb) {
         let resp = new CommonServiceAPIResponse();
         this.request("CommonServiceAPI", req, resp, cb);
+    }
+
+    /**
+     * 创建云开发项目
+     * @param {CreateAndDeployCloudBaseProjectRequest} req
+     * @param {function(string, CreateAndDeployCloudBaseProjectResponse):void} cb
+     * @public
+     */
+    CreateAndDeployCloudBaseProject(req, cb) {
+        let resp = new CreateAndDeployCloudBaseProjectResponse();
+        this.request("CreateAndDeployCloudBaseProject", req, resp, cb);
     }
 
     /**
@@ -312,6 +507,17 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 创建或修改安全网关路由
+     * @param {EstablishWxGatewayRouteRequest} req
+     * @param {function(string, EstablishWxGatewayRouteResponse):void} cb
+     * @public
+     */
+    EstablishWxGatewayRoute(req, cb) {
+        let resp = new EstablishWxGatewayRouteResponse();
+        this.request("EstablishWxGatewayRoute", req, resp, cb);
+    }
+
+    /**
      * 查询指定指标的配额使用量
      * @param {DescribeQuotaDataRequest} req
      * @param {function(string, DescribeQuotaDataResponse):void} cb
@@ -334,14 +540,25 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取增值包计费相关信息
-     * @param {DescribeExtraPkgBillingInfoRequest} req
-     * @param {function(string, DescribeExtraPkgBillingInfoResponse):void} cb
+     * 删除云项目
+     * @param {DeleteCloudBaseProjectLatestVersionRequest} req
+     * @param {function(string, DeleteCloudBaseProjectLatestVersionResponse):void} cb
      * @public
      */
-    DescribeExtraPkgBillingInfo(req, cb) {
-        let resp = new DescribeExtraPkgBillingInfoResponse();
-        this.request("DescribeExtraPkgBillingInfo", req, resp, cb);
+    DeleteCloudBaseProjectLatestVersion(req, cb) {
+        let resp = new DeleteCloudBaseProjectLatestVersionResponse();
+        this.request("DeleteCloudBaseProjectLatestVersion", req, resp, cb);
+    }
+
+    /**
+     * 获取下载文件信息
+     * @param {DescribeDownloadFileRequest} req
+     * @param {function(string, DescribeDownloadFileResponse):void} cb
+     * @public
+     */
+    DescribeDownloadFile(req, cb) {
+        let resp = new DescribeDownloadFileResponse();
+        this.request("DescribeDownloadFile", req, resp, cb);
     }
 
     /**
@@ -356,14 +573,14 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取数据库权限
-     * @param {DescribeDatabaseACLRequest} req
-     * @param {function(string, DescribeDatabaseACLResponse):void} cb
+     * 获取终端用户总量与平台分布情况
+     * @param {DescribeEndUserStatisticRequest} req
+     * @param {function(string, DescribeEndUserStatisticResponse):void} cb
      * @public
      */
-    DescribeDatabaseACL(req, cb) {
-        let resp = new DescribeDatabaseACLResponse();
-        this.request("DescribeDatabaseACL", req, resp, cb);
+    DescribeEndUserStatistic(req, cb) {
+        let resp = new DescribeEndUserStatisticResponse();
+        this.request("DescribeEndUserStatistic", req, resp, cb);
     }
 
     /**
@@ -389,14 +606,25 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取安全域名列表
-     * @param {DescribeAuthDomainsRequest} req
-     * @param {function(string, DescribeAuthDomainsResponse):void} cb
+     * 查询版本历史
+     * @param {DescribeCloudBaseRunVersionSnapshotRequest} req
+     * @param {function(string, DescribeCloudBaseRunVersionSnapshotResponse):void} cb
      * @public
      */
-    DescribeAuthDomains(req, cb) {
-        let resp = new DescribeAuthDomainsResponse();
-        this.request("DescribeAuthDomains", req, resp, cb);
+    DescribeCloudBaseRunVersionSnapshot(req, cb) {
+        let resp = new DescribeCloudBaseRunVersionSnapshotResponse();
+        this.request("DescribeCloudBaseRunVersionSnapshot", req, resp, cb);
+    }
+
+    /**
+     * 查询服务版本详情(新)
+     * @param {DescribeCloudBaseRunVersionRequest} req
+     * @param {function(string, DescribeCloudBaseRunVersionResponse):void} cb
+     * @public
+     */
+    DescribeCloudBaseRunVersion(req, cb) {
+        let resp = new DescribeCloudBaseRunVersionResponse();
+        this.request("DescribeCloudBaseRunVersion", req, resp, cb);
     }
 
     /**
@@ -441,6 +669,17 @@ class TcbClient extends AbstractClient {
     DescribeEnvLimit(req, cb) {
         let resp = new DescribeEnvLimitResponse();
         this.request("DescribeEnvLimit", req, resp, cb);
+    }
+
+    /**
+     * 查询后付费资源免费量
+     * @param {DescribePostpayFreeQuotasRequest} req
+     * @param {function(string, DescribePostpayFreeQuotasResponse):void} cb
+     * @public
+     */
+    DescribePostpayFreeQuotas(req, cb) {
+        let resp = new DescribePostpayFreeQuotasResponse();
+        this.request("DescribePostpayFreeQuotas", req, resp, cb);
     }
 
     /**

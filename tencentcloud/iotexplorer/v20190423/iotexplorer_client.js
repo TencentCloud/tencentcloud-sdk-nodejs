@@ -16,72 +16,114 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeProjectResponse = models.DescribeProjectResponse;
-const ControlDeviceDataResponse = models.ControlDeviceDataResponse;
-const DescribeDeviceDataHistoryRequest = models.DescribeDeviceDataHistoryRequest;
-const SearchStudioProductResponse = models.SearchStudioProductResponse;
-const DeviceData = models.DeviceData;
-const DescribeStudioProductRequest = models.DescribeStudioProductRequest;
 const DeleteProjectRequest = models.DeleteProjectRequest;
-const ListEventHistoryRequest = models.ListEventHistoryRequest;
-const ListEventHistoryResponse = models.ListEventHistoryResponse;
-const DeviceDataHistoryItem = models.DeviceDataHistoryItem;
-const ProductEntry = models.ProductEntry;
-const GetStudioProductListResponse = models.GetStudioProductListResponse;
-const DescribeModelDefinitionResponse = models.DescribeModelDefinitionResponse;
-const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
-const GetLoRaGatewayListResponse = models.GetLoRaGatewayListResponse;
 const ProjectEntry = models.ProjectEntry;
-const GetProjectListRequest = models.GetProjectListRequest;
-const DeleteStudioProductResponse = models.DeleteStudioProductResponse;
-const EventHistoryItem = models.EventHistoryItem;
-const DeleteDeviceRequest = models.DeleteDeviceRequest;
-const GetDeviceListResponse = models.GetDeviceListResponse;
+const DescribeModelDefinitionResponse = models.DescribeModelDefinitionResponse;
 const ModifyStudioProductResponse = models.ModifyStudioProductResponse;
+const DeleteStudioProductResponse = models.DeleteStudioProductResponse;
+const GetDeviceListResponse = models.GetDeviceListResponse;
 const ControlDeviceDataRequest = models.ControlDeviceDataRequest;
-const SearchStudioProductRequest = models.SearchStudioProductRequest;
-const ReleaseStudioProductResponse = models.ReleaseStudioProductResponse;
-const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
-const DeleteLoRaGatewayRequest = models.DeleteLoRaGatewayRequest;
-const ModifyProjectResponse = models.ModifyProjectResponse;
+const DeleteLoRaFrequencyResponse = models.DeleteLoRaFrequencyResponse;
+const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
 const ModifyModelDefinitionRequest = models.ModifyModelDefinitionRequest;
-const LoRaGatewayLocation = models.LoRaGatewayLocation;
 const CreateStudioProductResponse = models.CreateStudioProductResponse;
 const CallDeviceActionSyncRequest = models.CallDeviceActionSyncRequest;
-const DeleteStudioProductRequest = models.DeleteStudioProductRequest;
-const ModifyProjectRequest = models.ModifyProjectRequest;
-const ModifyLoRaGatewayResponse = models.ModifyLoRaGatewayResponse;
-const CallDeviceActionSyncResponse = models.CallDeviceActionSyncResponse;
-const CreateLoRaGatewayRequest = models.CreateLoRaGatewayRequest;
+const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
+const UpdateFirmwareResponse = models.UpdateFirmwareResponse;
 const ModifyStudioProductRequest = models.ModifyStudioProductRequest;
-const DescribeDeviceDataHistoryResponse = models.DescribeDeviceDataHistoryResponse;
 const CreateStudioProductRequest = models.CreateStudioProductRequest;
 const ProductModelDefinition = models.ProductModelDefinition;
-const CreateProjectResponse = models.CreateProjectResponse;
 const ReleaseStudioProductRequest = models.ReleaseStudioProductRequest;
-const DescribeModelDefinitionRequest = models.DescribeModelDefinitionRequest;
-const DeleteProjectResponse = models.DeleteProjectResponse;
-const CallDeviceActionAsyncResponse = models.CallDeviceActionAsyncResponse;
-const CallDeviceActionAsyncRequest = models.CallDeviceActionAsyncRequest;
-const ProjectEntryEx = models.ProjectEntryEx;
-const DescribeDeviceDataResponse = models.DescribeDeviceDataResponse;
-const CreateDeviceResponse = models.CreateDeviceResponse;
-const GetLoRaGatewayListRequest = models.GetLoRaGatewayListRequest;
-const CreateDeviceRequest = models.CreateDeviceRequest;
-const DescribeProjectRequest = models.DescribeProjectRequest;
-const GetStudioProductListRequest = models.GetStudioProductListRequest;
+const SearchTopicRuleRequest = models.SearchTopicRuleRequest;
 const DescribeDeviceDataRequest = models.DescribeDeviceDataRequest;
+const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
+const DescribeProjectResponse = models.DescribeProjectResponse;
+const DeviceData = models.DeviceData;
+const DeviceDataHistoryItem = models.DeviceDataHistoryItem;
+const ProductEntry = models.ProductEntry;
+const ProjectEntryEx = models.ProjectEntryEx;
+const DescribeLoRaFrequencyRequest = models.DescribeLoRaFrequencyRequest;
+const DeleteDeviceRequest = models.DeleteDeviceRequest;
+const DeleteLoRaFrequencyRequest = models.DeleteLoRaFrequencyRequest;
+const ListEventHistoryRequest = models.ListEventHistoryRequest;
+const ListFirmwaresResponse = models.ListFirmwaresResponse;
+const ReleaseStudioProductResponse = models.ReleaseStudioProductResponse;
+const DeleteLoRaGatewayRequest = models.DeleteLoRaGatewayRequest;
+const LoRaFrequencyEntry = models.LoRaFrequencyEntry;
+const SearchTopicRuleResponse = models.SearchTopicRuleResponse;
+const DescribeTopicRuleRequest = models.DescribeTopicRuleRequest;
+const CallDeviceActionSyncResponse = models.CallDeviceActionSyncResponse;
+const CreateLoRaGatewayRequest = models.CreateLoRaGatewayRequest;
+const CreateProjectResponse = models.CreateProjectResponse;
+const ModifyTopicRuleRequest = models.ModifyTopicRuleRequest;
+const DeleteProjectResponse = models.DeleteProjectResponse;
+const CallDeviceActionAsyncRequest = models.CallDeviceActionAsyncRequest;
+const CreateDeviceResponse = models.CreateDeviceResponse;
+const CreateDeviceRequest = models.CreateDeviceRequest;
+const GetProjectListResponse = models.GetProjectListResponse;
+const GetStudioProductListRequest = models.GetStudioProductListRequest;
+const DescribeFirmwareTaskResponse = models.DescribeFirmwareTaskResponse;
+const FirmwareInfo = models.FirmwareInfo;
+const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
+const TopicRuleInfo = models.TopicRuleInfo;
+const GetCOSURLRequest = models.GetCOSURLRequest;
+const CreateProjectRequest = models.CreateProjectRequest;
+const DescribeDeviceResponse = models.DescribeDeviceResponse;
+const ListFirmwaresRequest = models.ListFirmwaresRequest;
+const GetStudioProductListResponse = models.GetStudioProductListResponse;
+const PublishMessageRequest = models.PublishMessageRequest;
+const UploadFirmwareRequest = models.UploadFirmwareRequest;
+const GetDeviceListRequest = models.GetDeviceListRequest;
+const GetCOSURLResponse = models.GetCOSURLResponse;
+const GetTopicRuleListResponse = models.GetTopicRuleListResponse;
+const DisableTopicRuleRequest = models.DisableTopicRuleRequest;
+const EventHistoryItem = models.EventHistoryItem;
+const TopicRule = models.TopicRule;
+const TopicRulePayload = models.TopicRulePayload;
+const CallDeviceActionAsyncResponse = models.CallDeviceActionAsyncResponse;
+const DescribeTopicRuleResponse = models.DescribeTopicRuleResponse;
+const UpdateFirmwareRequest = models.UpdateFirmwareRequest;
+const LoRaGatewayLocation = models.LoRaGatewayLocation;
+const DescribeDeviceRequest = models.DescribeDeviceRequest;
+const ModifyTopicRuleResponse = models.ModifyTopicRuleResponse;
+const DescribeLoRaFrequencyResponse = models.DescribeLoRaFrequencyResponse;
+const SearchStudioProductResponse = models.SearchStudioProductResponse;
+const GetLoRaGatewayListRequest = models.GetLoRaGatewayListRequest;
+const DescribeProjectRequest = models.DescribeProjectRequest;
+const UploadFirmwareResponse = models.UploadFirmwareResponse;
+const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
+const CreateLoRaGatewayResponse = models.CreateLoRaGatewayResponse;
+const DeleteLoRaGatewayResponse = models.DeleteLoRaGatewayResponse;
+const CreateLoRaFrequencyRequest = models.CreateLoRaFrequencyRequest;
+const LoRaGatewayItem = models.LoRaGatewayItem;
+const ControlDeviceDataResponse = models.ControlDeviceDataResponse;
+const DescribeDeviceDataHistoryRequest = models.DescribeDeviceDataHistoryRequest;
+const DescribeStudioProductRequest = models.DescribeStudioProductRequest;
+const ModifyLoRaFrequencyRequest = models.ModifyLoRaFrequencyRequest;
+const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
+const GetProjectListRequest = models.GetProjectListRequest;
+const CreateLoRaFrequencyResponse = models.CreateLoRaFrequencyResponse;
+const SearchStudioProductRequest = models.SearchStudioProductRequest;
+const GetTopicRuleListRequest = models.GetTopicRuleListRequest;
+const ModifyProjectResponse = models.ModifyProjectResponse;
+const DeleteStudioProductRequest = models.DeleteStudioProductRequest;
+const ModifyProjectRequest = models.ModifyProjectRequest;
+const PublishMessageResponse = models.PublishMessageResponse;
+const ModifyLoRaGatewayResponse = models.ModifyLoRaGatewayResponse;
+const DescribeDeviceDataHistoryResponse = models.DescribeDeviceDataHistoryResponse;
+const SearchKeyword = models.SearchKeyword;
+const DescribeModelDefinitionRequest = models.DescribeModelDefinitionRequest;
+const GetLoRaGatewayListResponse = models.GetLoRaGatewayListResponse;
+const CreateTopicRuleResponse = models.CreateTopicRuleResponse;
+const DescribeDeviceDataResponse = models.DescribeDeviceDataResponse;
+const CreateTopicRuleRequest = models.CreateTopicRuleRequest;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const DeviceInfo = models.DeviceInfo;
-const CreateLoRaGatewayResponse = models.CreateLoRaGatewayResponse;
-const DescribeDeviceRequest = models.DescribeDeviceRequest;
-const GetDeviceListRequest = models.GetDeviceListRequest;
+const ModifyLoRaFrequencyResponse = models.ModifyLoRaFrequencyResponse;
 const ModifyLoRaGatewayRequest = models.ModifyLoRaGatewayRequest;
-const DeleteLoRaGatewayResponse = models.DeleteLoRaGatewayResponse;
-const LoRaGatewayItem = models.LoRaGatewayItem;
-const DescribeDeviceResponse = models.DescribeDeviceResponse;
-const GetProjectListResponse = models.GetProjectListResponse;
-const CreateProjectRequest = models.CreateProjectRequest;
+const ListEventHistoryResponse = models.ListEventHistoryResponse;
+const EnableTopicRuleRequest = models.EnableTopicRuleRequest;
+const DescribeFirmwareTaskRequest = models.DescribeFirmwareTaskRequest;
 
 
 /**
@@ -94,6 +136,28 @@ class IotexplorerClient extends AbstractClient {
         super("iotexplorer.tencentcloudapi.com", "2019-04-23", credential, region, profile);
     }
     
+    /**
+     * 获取规则列表
+     * @param {GetTopicRuleListRequest} req
+     * @param {function(string, GetTopicRuleListResponse):void} cb
+     * @public
+     */
+    GetTopicRuleList(req, cb) {
+        let resp = new GetTopicRuleListResponse();
+        this.request("GetTopicRuleList", req, resp, cb);
+    }
+
+    /**
+     * 本接口（GetCOSURL）用于获取固件存储在COS的URL 
+     * @param {GetCOSURLRequest} req
+     * @param {function(string, GetCOSURLResponse):void} cb
+     * @public
+     */
+    GetCOSURL(req, cb) {
+        let resp = new GetCOSURLResponse();
+        this.request("GetCOSURL", req, resp, cb);
+    }
+
     /**
      * 提供修改产品的名称和描述等信息的能力，对于已发布产品不允许进行修改。
      * @param {ModifyStudioProductRequest} req
@@ -150,6 +214,17 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
+     * 修改LoRa自定义频点
+     * @param {ModifyLoRaFrequencyRequest} req
+     * @param {function(string, ModifyLoRaFrequencyResponse):void} cb
+     * @public
+     */
+    ModifyLoRaFrequency(req, cb) {
+        let resp = new ModifyLoRaFrequencyResponse();
+        this.request("ModifyLoRaFrequency", req, resp, cb);
+    }
+
+    /**
      * 用于查看某个设备的详细信息
      * @param {DescribeDeviceRequest} req
      * @param {function(string, DescribeDeviceResponse):void} cb
@@ -172,6 +247,50 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
+     * 创建规则
+     * @param {CreateTopicRuleRequest} req
+     * @param {function(string, CreateTopicRuleResponse):void} cb
+     * @public
+     */
+    CreateTopicRule(req, cb) {
+        let resp = new CreateTopicRuleResponse();
+        this.request("CreateTopicRule", req, resp, cb);
+    }
+
+    /**
+     * 创建 LoRa 自定义频点
+     * @param {CreateLoRaFrequencyRequest} req
+     * @param {function(string, CreateLoRaFrequencyResponse):void} cb
+     * @public
+     */
+    CreateLoRaFrequency(req, cb) {
+        let resp = new CreateLoRaFrequencyResponse();
+        this.request("CreateLoRaFrequency", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求 
+     * @param {UpdateFirmwareRequest} req
+     * @param {function(string, UpdateFirmwareResponse):void} cb
+     * @public
+     */
+    UpdateFirmware(req, cb) {
+        let resp = new UpdateFirmwareResponse();
+        this.request("UpdateFirmware", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件至平台
+     * @param {UploadFirmwareRequest} req
+     * @param {function(string, UploadFirmwareResponse):void} cb
+     * @public
+     */
+    UploadFirmware(req, cb) {
+        let resp = new UploadFirmwareResponse();
+        this.request("UploadFirmware", req, resp, cb);
+    }
+
+    /**
      * 修改 LoRa 网关信息
      * @param {ModifyLoRaGatewayRequest} req
      * @param {function(string, ModifyLoRaGatewayResponse):void} cb
@@ -191,6 +310,17 @@ class IotexplorerClient extends AbstractClient {
     SearchStudioProduct(req, cb) {
         let resp = new SearchStudioProductResponse();
         this.request("SearchStudioProduct", req, resp, cb);
+    }
+
+    /**
+     * 修改规则
+     * @param {ModifyTopicRuleRequest} req
+     * @param {function(string, ModifyTopicRuleResponse):void} cb
+     * @public
+     */
+    ModifyTopicRule(req, cb) {
+        let resp = new ModifyTopicRuleResponse();
+        this.request("ModifyTopicRule", req, resp, cb);
     }
 
     /**
@@ -227,14 +357,14 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
-     * @param {DescribeStudioProductRequest} req
-     * @param {function(string, DescribeStudioProductResponse):void} cb
+     * 删除设备
+     * @param {DeleteDeviceRequest} req
+     * @param {function(string, DeleteDeviceResponse):void} cb
      * @public
      */
-    DescribeStudioProduct(req, cb) {
-        let resp = new DescribeStudioProductResponse();
-        this.request("DescribeStudioProduct", req, resp, cb);
+    DeleteDevice(req, cb) {
+        let resp = new DeleteDeviceResponse();
+        this.request("DeleteDevice", req, resp, cb);
     }
 
     /**
@@ -246,6 +376,39 @@ class IotexplorerClient extends AbstractClient {
     ModifyProject(req, cb) {
         let resp = new ModifyProjectResponse();
         this.request("ModifyProject", req, resp, cb);
+    }
+
+    /**
+     * 提供删除LoRa自定义频点的能力
+     * @param {DeleteLoRaFrequencyRequest} req
+     * @param {function(string, DeleteLoRaFrequencyResponse):void} cb
+     * @public
+     */
+    DeleteLoRaFrequency(req, cb) {
+        let resp = new DeleteLoRaFrequencyResponse();
+        this.request("DeleteLoRaFrequency", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ListFirmwares）用于获取固件列表 
+     * @param {ListFirmwaresRequest} req
+     * @param {function(string, ListFirmwaresResponse):void} cb
+     * @public
+     */
+    ListFirmwares(req, cb) {
+        let resp = new ListFirmwaresResponse();
+        this.request("ListFirmwares", req, resp, cb);
+    }
+
+    /**
+     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     * @param {PublishMessageRequest} req
+     * @param {function(string, PublishMessageResponse):void} cb
+     * @public
+     */
+    PublishMessage(req, cb) {
+        let resp = new PublishMessageResponse();
+        this.request("PublishMessage", req, resp, cb);
     }
 
     /**
@@ -282,14 +445,14 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 删除设备
-     * @param {DeleteDeviceRequest} req
-     * @param {function(string, DeleteDeviceResponse):void} cb
+     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+     * @param {DescribeStudioProductRequest} req
+     * @param {function(string, DescribeStudioProductResponse):void} cb
      * @public
      */
-    DeleteDevice(req, cb) {
-        let resp = new DeleteDeviceResponse();
-        this.request("DeleteDevice", req, resp, cb);
+    DescribeStudioProduct(req, cb) {
+        let resp = new DescribeStudioProductResponse();
+        this.request("DescribeStudioProduct", req, resp, cb);
     }
 
     /**
@@ -312,6 +475,50 @@ class IotexplorerClient extends AbstractClient {
     ReleaseStudioProduct(req, cb) {
         let resp = new ReleaseStudioProductResponse();
         this.request("ReleaseStudioProduct", req, resp, cb);
+    }
+
+    /**
+     * 查询固件升级任务列表
+     * @param {DescribeFirmwareTaskRequest} req
+     * @param {function(string, DescribeFirmwareTaskResponse):void} cb
+     * @public
+     */
+    DescribeFirmwareTask(req, cb) {
+        let resp = new DescribeFirmwareTaskResponse();
+        this.request("DescribeFirmwareTask", req, resp, cb);
+    }
+
+    /**
+     * 提供查询LoRa自定义频点详情的能力
+     * @param {DescribeLoRaFrequencyRequest} req
+     * @param {function(string, DescribeLoRaFrequencyResponse):void} cb
+     * @public
+     */
+    DescribeLoRaFrequency(req, cb) {
+        let resp = new DescribeLoRaFrequencyResponse();
+        this.request("DescribeLoRaFrequency", req, resp, cb);
+    }
+
+    /**
+     * 搜索规则
+     * @param {SearchTopicRuleRequest} req
+     * @param {function(string, SearchTopicRuleResponse):void} cb
+     * @public
+     */
+    SearchTopicRule(req, cb) {
+        let resp = new SearchTopicRuleResponse();
+        this.request("SearchTopicRule", req, resp, cb);
+    }
+
+    /**
+     * 提供查询某个项目下所有产品信息的能力。
+     * @param {GetStudioProductListRequest} req
+     * @param {function(string, GetStudioProductListResponse):void} cb
+     * @public
+     */
+    GetStudioProductList(req, cb) {
+        let resp = new GetStudioProductListResponse();
+        this.request("GetStudioProductList", req, resp, cb);
     }
 
     /**
@@ -359,6 +566,17 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
+     * 禁用规则
+     * @param {DisableTopicRuleRequest} req
+     * @param {function(string, DisableTopicRuleResponse):void} cb
+     * @public
+     */
+    DisableTopicRule(req, cb) {
+        let resp = new DisableTopicRuleResponse();
+        this.request("DisableTopicRule", req, resp, cb);
+    }
+
+    /**
      * 提供给用户异步调用设备行为的能力
      * @param {CallDeviceActionAsyncRequest} req
      * @param {function(string, CallDeviceActionAsyncResponse):void} cb
@@ -367,6 +585,17 @@ class IotexplorerClient extends AbstractClient {
     CallDeviceActionAsync(req, cb) {
         let resp = new CallDeviceActionAsyncResponse();
         this.request("CallDeviceActionAsync", req, resp, cb);
+    }
+
+    /**
+     * 启用规则
+     * @param {EnableTopicRuleRequest} req
+     * @param {function(string, EnableTopicRuleResponse):void} cb
+     * @public
+     */
+    EnableTopicRule(req, cb) {
+        let resp = new EnableTopicRuleResponse();
+        this.request("EnableTopicRule", req, resp, cb);
     }
 
     /**
@@ -392,14 +621,25 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 提供查询某个项目下所有产品信息的能力。
-     * @param {GetStudioProductListRequest} req
-     * @param {function(string, GetStudioProductListResponse):void} cb
+     * 获取规则信息
+     * @param {DescribeTopicRuleRequest} req
+     * @param {function(string, DescribeTopicRuleResponse):void} cb
      * @public
      */
-    GetStudioProductList(req, cb) {
-        let resp = new GetStudioProductListResponse();
-        this.request("GetStudioProductList", req, resp, cb);
+    DescribeTopicRule(req, cb) {
+        let resp = new DescribeTopicRuleResponse();
+        this.request("DescribeTopicRule", req, resp, cb);
+    }
+
+    /**
+     * 删除规则
+     * @param {DeleteTopicRuleRequest} req
+     * @param {function(string, DeleteTopicRuleResponse):void} cb
+     * @public
+     */
+    DeleteTopicRule(req, cb) {
+        let resp = new DeleteTopicRuleResponse();
+        this.request("DeleteTopicRule", req, resp, cb);
     }
 
 

@@ -67,7 +67,7 @@ class DetachResourcesTagRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源所属业务名称
+         * 资源所属业务名称（资源六段式中的第三段）
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -85,13 +85,13 @@ class DetachResourcesTagRequest extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * 资源所在地域不区分地域的资源不需要传入该字段
+         * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
          * @type {string || null}
          */
         this.ResourceRegion = null;
 
         /**
-         * 资源前缀，cos存储桶不需要传入该字段
+         * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
          * @type {string || null}
          */
         this.ResourcePrefix = null;
@@ -1128,7 +1128,7 @@ class ModifyResourcesTagValueRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源所属业务名称
+         * 资源所属业务名称（资源六段式中的第三段）
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -1152,13 +1152,13 @@ class ModifyResourcesTagValueRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * 资源所在地域，不区分地域的资源不需要传入该字段
+         * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
          * @type {string || null}
          */
         this.ResourceRegion = null;
 
         /**
-         * 资源前缀，cos存储桶不需要传入该字段
+         * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
          * @type {string || null}
          */
         this.ResourcePrefix = null;
@@ -1720,7 +1720,7 @@ class AttachResourcesTagRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源所属业务名称
+         * 资源所属业务名称（资源六段式中的第三段）
          * @type {string || null}
          */
         this.ServiceType = null;
@@ -1744,13 +1744,13 @@ class AttachResourcesTagRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * 资源所在地域，不区分地域的资源不需要传入该字段
+         * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
          * @type {string || null}
          */
         this.ResourceRegion = null;
 
         /**
-         * 资源前缀，cos存储桶不需要传入该字段
+         * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
          * @type {string || null}
          */
         this.ResourcePrefix = null;
@@ -2267,7 +2267,7 @@ class DescribeResourceTagsRequest extends  AbstractModel {
         this.ResourcePrefix = null;
 
         /**
-         * 资源唯一标识
+         * 资源唯一标识。只输入ResourceId进行查询可能会查询较慢，或者无法匹配到结果，建议在输入ResourceId的同时也输入ServiceType、ResourcePrefix和ResourceRegion（不区分地域的资源可忽略该参数）
          * @type {string || null}
          */
         this.ResourceId = null;

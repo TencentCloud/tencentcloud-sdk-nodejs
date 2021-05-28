@@ -163,6 +163,41 @@ class ModifyAppStatusRequest extends  AbstractModel {
 }
 
 /**
+ * 用户进出房间信息
+ * @class
+ */
+class InOutTimeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 进入房间时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 退出房间时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * DescribeScanResultList返回参数结构体
  * @class
  */
@@ -202,6 +237,48 @@ class DescribeScanResultListResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeApplicationData请求参数结构体
+ * @class
+ */
+class DescribeApplicationDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 数据开始时间，格式为 年-月-日，如: 2018-07-13
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 数据结束时间，格式为 年-月-日，如: 2018-07-13
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
 
     }
 }
@@ -293,6 +370,77 @@ class VoiceMessageStatisticsItem extends  AbstractModel {
             return;
         }
         this.Dau = 'Dau' in params ? params.Dau : null;
+
+    }
+}
+
+/**
+ * 房间内用户信息
+ * @class
+ */
+class RoomUser extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 房间id
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 房间里用户uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.Uins = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Uins = 'Uins' in params ? params.Uins : null;
+
+    }
+}
+
+/**
+ * DescribeRoomInfo请求参数结构体
+ * @class
+ */
+class DescribeRoomInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号列表，最大不能超过10个
+         * @type {Array.<number> || null}
+         */
+        this.RoomIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomIds = 'RoomIds' in params ? params.RoomIds : null;
 
     }
 }
@@ -503,6 +651,190 @@ class VoiceMessageConf extends  AbstractModel {
 }
 
 /**
+ * 应用统计数据
+ * @class
+ */
+class ApplicationDataStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * Dau统计项数目
+         * @type {number || null}
+         */
+        this.DauDataNum = null;
+
+        /**
+         * 大陆地区Dau统计数据，单位人
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DauDataMainland = null;
+
+        /**
+         * 海外地区Dau统计数据，单位人
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DauDataOversea = null;
+
+        /**
+         * 大陆和海外地区Dau统计数据汇总，单位人
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DauDataSum = null;
+
+        /**
+         * 实时语音时长统计项数目
+         * @type {number || null}
+         */
+        this.DurationDataNum = null;
+
+        /**
+         * 大陆地区实时语音时长统计数据，单位分钟
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DurationDataMainland = null;
+
+        /**
+         * 海外地区实时语音时长统计数据，单位分钟
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DurationDataOversea = null;
+
+        /**
+         * 大陆和海外地区实时语音时长统计数据汇总，单位分钟
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.DurationDataSum = null;
+
+        /**
+         * Pcu统计项数目
+         * @type {number || null}
+         */
+        this.PcuDataNum = null;
+
+        /**
+         * 大陆地区Pcu统计数据，单位人
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.PcuDataMainland = null;
+
+        /**
+         * 海外地区Pcu统计数据，单位人
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.PcuDataOversea = null;
+
+        /**
+         * 大陆和海外地区Pcu统计数据汇总，单位人
+         * @type {Array.<StatisticsItem> || null}
+         */
+        this.PcuDataSum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.DauDataNum = 'DauDataNum' in params ? params.DauDataNum : null;
+
+        if (params.DauDataMainland) {
+            this.DauDataMainland = new Array();
+            for (let z in params.DauDataMainland) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DauDataMainland[z]);
+                this.DauDataMainland.push(obj);
+            }
+        }
+
+        if (params.DauDataOversea) {
+            this.DauDataOversea = new Array();
+            for (let z in params.DauDataOversea) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DauDataOversea[z]);
+                this.DauDataOversea.push(obj);
+            }
+        }
+
+        if (params.DauDataSum) {
+            this.DauDataSum = new Array();
+            for (let z in params.DauDataSum) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DauDataSum[z]);
+                this.DauDataSum.push(obj);
+            }
+        }
+        this.DurationDataNum = 'DurationDataNum' in params ? params.DurationDataNum : null;
+
+        if (params.DurationDataMainland) {
+            this.DurationDataMainland = new Array();
+            for (let z in params.DurationDataMainland) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DurationDataMainland[z]);
+                this.DurationDataMainland.push(obj);
+            }
+        }
+
+        if (params.DurationDataOversea) {
+            this.DurationDataOversea = new Array();
+            for (let z in params.DurationDataOversea) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DurationDataOversea[z]);
+                this.DurationDataOversea.push(obj);
+            }
+        }
+
+        if (params.DurationDataSum) {
+            this.DurationDataSum = new Array();
+            for (let z in params.DurationDataSum) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.DurationDataSum[z]);
+                this.DurationDataSum.push(obj);
+            }
+        }
+        this.PcuDataNum = 'PcuDataNum' in params ? params.PcuDataNum : null;
+
+        if (params.PcuDataMainland) {
+            this.PcuDataMainland = new Array();
+            for (let z in params.PcuDataMainland) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.PcuDataMainland[z]);
+                this.PcuDataMainland.push(obj);
+            }
+        }
+
+        if (params.PcuDataOversea) {
+            this.PcuDataOversea = new Array();
+            for (let z in params.PcuDataOversea) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.PcuDataOversea[z]);
+                this.PcuDataOversea.push(obj);
+            }
+        }
+
+        if (params.PcuDataSum) {
+            this.PcuDataSum = new Array();
+            for (let z in params.PcuDataSum) {
+                let obj = new StatisticsItem();
+                obj.deserialize(params.PcuDataSum[z]);
+                this.PcuDataSum.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeFilterResultList返回参数结构体
  * @class
  */
@@ -591,6 +923,46 @@ class DescribeAppStatisticsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeApplicationData返回参数结构体
+ * @class
+ */
+class DescribeApplicationDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用统计数据
+         * @type {ApplicationDataStatistics || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new ApplicationDataStatistics();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 语音检测任务列表
  * @class
  */
@@ -663,6 +1035,143 @@ class VoiceFilterStatisticsItem extends  AbstractModel {
             return;
         }
         this.Duration = 'Duration' in params ? params.Duration : null;
+
+    }
+}
+
+/**
+ * 用量数据单元
+ * @class
+ */
+class StatisticsItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日期，格式为年-月-日，如2018-07-13
+         * @type {string || null}
+         */
+        this.StatDate = null;
+
+        /**
+         * 统计值
+         * @type {number || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StatDate = 'StatDate' in params ? params.StatDate : null;
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * DescribeRoomInfo返回参数结构体
+ * @class
+ */
+class DescribeRoomInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作结果, 0成功, 非0失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * 房间用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RoomUser> || null}
+         */
+        this.RoomUsers = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+
+        if (params.RoomUsers) {
+            this.RoomUsers = new Array();
+            for (let z in params.RoomUsers) {
+                let obj = new RoomUser();
+                obj.deserialize(params.RoomUsers[z]);
+                this.RoomUsers.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeUserInAndOutTime返回参数结构体
+ * @class
+ */
+class DescribeUserInAndOutTimeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户在房间得进出时间列表
+         * @type {Array.<InOutTimeInfo> || null}
+         */
+        this.InOutList = null;
+
+        /**
+         * 用户在房间中总时长
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InOutList) {
+            this.InOutList = new Array();
+            for (let z in params.InOutList) {
+                let obj = new InOutTimeInfo();
+                obj.deserialize(params.InOutList[z]);
+                this.InOutList.push(obj);
+            }
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -780,6 +1289,50 @@ class DescribeFilterResultResponse extends  AbstractModel {
             obj.deserialize(params.Data)
             this.Data = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyRoomInfo返回参数结构体
+ * @class
+ */
+class ModifyRoomInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作结果, 0成功, 非0失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Result = null;
+
+        /**
+         * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1048,6 +1601,50 @@ class ScanDetail extends  AbstractModel {
         this.KeyWord = 'KeyWord' in params ? params.KeyWord : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * ModifyRoomInfo请求参数结构体
+ * @class
+ */
+class ModifyRoomInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间id
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 301 启动推流
+302 停止推流
+303 重置RTMP连接
+         * @type {number || null}
+         */
+        this.OperationType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.OperationType = 'OperationType' in params ? params.OperationType : null;
 
     }
 }
@@ -1506,69 +2103,6 @@ class ModifyAppStatusResponse extends  AbstractModel {
 }
 
 /**
- * DescribeFilterResult请求参数结构体
- * @class
- */
-class DescribeFilterResultRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 应用ID
-         * @type {number || null}
-         */
-        this.BizId = null;
-
-        /**
-         * 文件ID
-         * @type {string || null}
-         */
-        this.FileId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.BizId = 'BizId' in params ? params.BizId : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-
-    }
-}
-
-/**
- * 语音过滤服务配置数据
- * @class
- */
-class VoiceFilterConf extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 语音过滤服务开关，取值：open/close
-         * @type {string || null}
-         */
-        this.Status = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Status = 'Status' in params ? params.Status : null;
-
-    }
-}
-
-/**
  * ScanVoice请求参数结构体
  * @class
  */
@@ -1634,28 +2168,144 @@ class ScanVoiceRequest extends  AbstractModel {
     }
 }
 
+/**
+ * 语音过滤服务配置数据
+ * @class
+ */
+class VoiceFilterConf extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 语音过滤服务开关，取值：open/close
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DescribeFilterResult请求参数结构体
+ * @class
+ */
+class DescribeFilterResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 文件ID
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+
+    }
+}
+
+/**
+ * DescribeUserInAndOutTime请求参数结构体
+ * @class
+ */
+class DescribeUserInAndOutTimeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.BizId = null;
+
+        /**
+         * 房间ID
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 用户ID
+         * @type {number || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BizId = 'BizId' in params ? params.BizId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
 module.exports = {
     ScanVoiceResponse: ScanVoiceResponse,
     AppStatisticsItem: AppStatisticsItem,
     ModifyAppStatusRequest: ModifyAppStatusRequest,
+    InOutTimeInfo: InOutTimeInfo,
     DescribeScanResultListResponse: DescribeScanResultListResponse,
+    DescribeApplicationDataRequest: DescribeApplicationDataRequest,
     VoiceFilterRequest: VoiceFilterRequest,
     VoiceMessageStatisticsItem: VoiceMessageStatisticsItem,
+    RoomUser: RoomUser,
+    DescribeRoomInfoRequest: DescribeRoomInfoRequest,
     DescribeScanResultListRequest: DescribeScanResultListRequest,
     RealTimeSpeechStatisticsItem: RealTimeSpeechStatisticsItem,
     VoiceFilterResponse: VoiceFilterResponse,
     Tag: Tag,
     VoiceMessageConf: VoiceMessageConf,
+    ApplicationDataStatistics: ApplicationDataStatistics,
     DescribeFilterResultListResponse: DescribeFilterResultListResponse,
     DescribeAppStatisticsResponse: DescribeAppStatisticsResponse,
+    DescribeApplicationDataResponse: DescribeApplicationDataResponse,
     Task: Task,
     VoiceFilterStatisticsItem: VoiceFilterStatisticsItem,
+    StatisticsItem: StatisticsItem,
+    DescribeRoomInfoResponse: DescribeRoomInfoResponse,
+    DescribeUserInAndOutTimeResponse: DescribeUserInAndOutTimeResponse,
     VoiceFilterInfo: VoiceFilterInfo,
     DescribeFilterResultResponse: DescribeFilterResultResponse,
+    ModifyRoomInfoResponse: ModifyRoomInfoResponse,
     DescribeScanResult: DescribeScanResult,
     DescribeFilterResultListRequest: DescribeFilterResultListRequest,
     VoiceFilter: VoiceFilter,
     ScanDetail: ScanDetail,
+    ModifyRoomInfoRequest: ModifyRoomInfoRequest,
     CreateAppRequest: CreateAppRequest,
     RealtimeSpeechConf: RealtimeSpeechConf,
     ScanVoiceResult: ScanVoiceResult,
@@ -1663,8 +2313,9 @@ module.exports = {
     DescribeAppStatisticsRequest: DescribeAppStatisticsRequest,
     ScanPiece: ScanPiece,
     ModifyAppStatusResponse: ModifyAppStatusResponse,
-    DescribeFilterResultRequest: DescribeFilterResultRequest,
-    VoiceFilterConf: VoiceFilterConf,
     ScanVoiceRequest: ScanVoiceRequest,
+    VoiceFilterConf: VoiceFilterConf,
+    DescribeFilterResultRequest: DescribeFilterResultRequest,
+    DescribeUserInAndOutTimeRequest: DescribeUserInAndOutTimeRequest,
 
 }

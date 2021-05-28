@@ -87,6 +87,27 @@ class CreateCustomizationResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAsyncRecognitionTasks请求参数结构体
+ * @class
+ */
+class DescribeAsyncRecognitionTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * ModifyCustomizationState请求参数结构体
  * @class
  */
@@ -202,6 +223,101 @@ class GetAsrVocabResponse extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.State = 'State' in params ? params.State : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateAsyncRecognitionTask请求参数结构体
+ * @class
+ */
+class CreateAsyncRecognitionTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 引擎模型类型。
+• 16k_zh：16k 中文普通话通用；
+• 16k_zh_video：16k 音视频领域；
+• 16k_en：16k 英语；
+• 16k_ca：16k 粤语；
+         * @type {string || null}
+         */
+        this.EngineType = null;
+
+        /**
+         * 语音流地址，支持rtmp、hls、rtsp等流媒体协议，以及各类基于http协议的直播流
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 支持HTTP和HTTPS协议，用于接收识别结果，您需要自行搭建公网可调用的服务。回调格式&内容详见：[语音流异步识别回调说明](https://cloud.tencent.com/document/product/1093/52633)
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * 用于生成回调通知中的签名
+         * @type {string || null}
+         */
+        this.SignToken = null;
+
+        /**
+         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0
+         * @type {number || null}
+         */
+        this.FilterDirty = null;
+
+        /**
+         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0
+         * @type {number || null}
+         */
+        this.FilterModal = null;
+
+        /**
+         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0
+         * @type {number || null}
+         */
+        this.FilterPunc = null;
+
+        /**
+         * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
+         * @type {number || null}
+         */
+        this.ConvertNumMode = null;
+
+        /**
+         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。默认为0
+         * @type {number || null}
+         */
+        this.WordInfo = null;
+
+        /**
+         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+         * @type {string || null}
+         */
+        this.HotwordId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EngineType = 'EngineType' in params ? params.EngineType : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.SignToken = 'SignToken' in params ? params.SignToken : null;
+        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
+        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
+        this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
+        this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
+        this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
+        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
 
     }
 }
@@ -339,7 +455,8 @@ class SentenceRecognitionRequest extends  AbstractModel {
 • 16k_en：16k 英语；
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
-•16k_wuu-SH：16k 上海话方言。
+•16k_wuu-SH：16k 上海话方言；
+•16k_zh_medical：16k 医疗。
          * @type {string || null}
          */
         this.EngSerViceType = null;
@@ -387,31 +504,31 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.HotwordId = null;
 
         /**
-         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。
+         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
          * @type {number || null}
          */
         this.FilterDirty = null;
 
         /**
-         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。
+         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
          * @type {number || null}
          */
         this.FilterModal = null;
 
         /**
-         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
+         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认值为 0。
          * @type {number || null}
          */
         this.FilterPunc = null;
 
         /**
-         * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
+         * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1。
          * @type {number || null}
          */
         this.ConvertNumMode = null;
 
         /**
-         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH
+         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH。默认值为 0。
          * @type {number || null}
          */
         this.WordInfo = null;
@@ -440,6 +557,34 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
         this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
         this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
+
+    }
+}
+
+/**
+ * CloseAsyncRecognitionTask返回参数结构体
+ * @class
+ */
+class CloseAsyncRecognitionTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -501,7 +646,7 @@ class CreateCustomizationRequest extends  AbstractModel {
         this.ModelName = null;
 
         /**
-         * 文本文件的下载地址，服务会从该地址下载文件， 以训练模型，目前仅支持腾讯云cos
+         * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
          * @type {string || null}
          */
         this.TextUrl = null;
@@ -646,18 +791,18 @@ class ModifyCustomizationResponse extends  AbstractModel {
 }
 
 /**
- * ModifyCustomizationState返回参数结构体
+ * CreateAsyncRecognitionTask返回参数结构体
  * @class
  */
-class ModifyCustomizationStateResponse extends  AbstractModel {
+class CreateAsyncRecognitionTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 自学习模型ID
-         * @type {string || null}
+         * 请求返回结果，包含本次的任务ID(TaskId)
+         * @type {Task || null}
          */
-        this.ModelId = null;
+        this.Data = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -674,7 +819,12 @@ class ModifyCustomizationStateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+
+        if (params.Data) {
+            let obj = new Task();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -744,6 +894,153 @@ class DownloadCustomizationResponse extends  AbstractModel {
 }
 
 /**
+ * CreateRecTask请求参数结构体
+ * @class
+ */
+class CreateRecTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 引擎模型类型。
+电话场景：
+• 8k_en：电话 8k 英语；
+• 8k_zh：电话 8k 中文普通话通用；
+非电话场景：
+• 16k_zh：16k 中文普通话通用；
+• 16k_zh_video：16k 音视频领域；
+• 16k_en：16k 英语；
+• 16k_ca：16k 粤语；
+• 16k_ja：16k 日语；
+• 16k_zh_edu 中文教育；
+• 16k_en_edu 英文教育；
+• 16k_zh_medical  医疗；
+• 16k_th 泰语；
+         * @type {string || null}
+         */
+        this.EngineModelType = null;
+
+        /**
+         * 识别声道数。1：单声道；2：双声道（仅支持 8k_zh 引擎模）。注意：录音识别会自动将音频转码为填写的识别声道数
+         * @type {number || null}
+         */
+        this.ChannelNum = null;
+
+        /**
+         * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824#SentenceDetail)(不含标点，含语速值)；2：词级别粒度的详细识别结果（包含标点、语速值）
+         * @type {number || null}
+         */
+        this.ResTextFormat = null;
+
+        /**
+         * 语音数据来源。0：语音 URL；1：语音数据（post body）。
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 是否开启说话人分离，0：不开启，1：开启(仅支持8k_zh，16k_zh，16k_zh_video引擎模型，单声道音频)，默认值为 0。
+         * @type {number || null}
+         */
+        this.SpeakerDiarization = null;
+
+        /**
+         * 说话人分离人数（需配合开启说话人分离使用），取值范围：0-10，0代表自动分离（目前仅支持≤6个人），1-10代表指定说话人数分离。默认值为 0。
+注：话者分离目前是beta版本，请根据您的需要谨慎使用
+         * @type {number || null}
+         */
+        this.SpeakerNumber = null;
+
+        /**
+         * 回调 URL，用户自行搭建的用于接收识别结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。回调格式&内容详见：[录音识别回调说明](https://cloud.tencent.com/document/product/1093/52632)
+         * @type {string || null}
+         */
+        this.CallbackUrl = null;
+
+        /**
+         * 语音的URL地址，需要公网可下载。长度小于2048字节，当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写。注意：请确保录音文件时长在5个小时之内，否则可能识别失败。请保证文件的下载速度，否则可能下载失败。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。音频数据要小于5MB。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 数据长度，非必填（此数据长度为数据未进行base64编码时的数据长度）。
+         * @type {number || null}
+         */
+        this.DataLen = null;
+
+        /**
+         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+         * @type {string || null}
+         */
+        this.HotwordId = null;
+
+        /**
+         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
+         * @type {number || null}
+         */
+        this.FilterDirty = null;
+
+        /**
+         * 是否过滤语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
+         * @type {number || null}
+         */
+        this.FilterModal = null;
+
+        /**
+         * 是否进行阿拉伯数字智能转换（目前支持中文普通话引擎）。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字，3: 打开数学相关数字转换。默认值为 1。
+         * @type {number || null}
+         */
+        this.ConvertNumMode = null;
+
+        /**
+         * 附加参数(该参数无意义，忽略即可)
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认值为 0。
+         * @type {number || null}
+         */
+        this.FilterPunc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EngineModelType = 'EngineModelType' in params ? params.EngineModelType : null;
+        this.ChannelNum = 'ChannelNum' in params ? params.ChannelNum : null;
+        this.ResTextFormat = 'ResTextFormat' in params ? params.ResTextFormat : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.SpeakerDiarization = 'SpeakerDiarization' in params ? params.SpeakerDiarization : null;
+        this.SpeakerNumber = 'SpeakerNumber' in params ? params.SpeakerNumber : null;
+        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.DataLen = 'DataLen' in params ? params.DataLen : null;
+        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
+        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
+        this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
+
+    }
+}
+
+/**
  * GetAsrVocabList请求参数结构体
  * @class
  */
@@ -781,151 +1078,6 @@ class GetAsrVocabListRequest extends  AbstractModel {
         this.TagInfos = 'TagInfos' in params ? params.TagInfos : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * CreateRecTask请求参数结构体
- * @class
- */
-class CreateRecTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 引擎模型类型。
-电话场景：
-• 8k_en：电话 8k 英语；
-• 8k_zh：电话 8k 中文普通话通用（可用于双声道音频）；
-• 8k_zh_s：电话 8k 中文普通话话者分离（仅适用于单声道音频）；
-非电话场景：
-• 16k_zh：16k 中文普通话通用；
-• 16k_zh_video：16k 音视频领域；
-• 16k_en：16k 英语；
-• 16k_ca：16k 粤语；
-• 16k_ja：16k 日语；
-• 16k_wuu-SH：16k 上海话方言；
-         * @type {string || null}
-         */
-        this.EngineModelType = null;
-
-        /**
-         * 语音声道数。1：单声道；2：双声道（仅支持 8k_zh 引擎模型）。
-         * @type {number || null}
-         */
-        this.ChannelNum = null;
-
-        /**
-         * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824#SentenceDetail)(不含标点，词时间戳列表，一般用于生成字幕场景)；2：词级别粒度的详细识别结果（包含标点）
-         * @type {number || null}
-         */
-        this.ResTextFormat = null;
-
-        /**
-         * 语音数据来源。0：语音 URL；1：语音数据（post body）。
-         * @type {number || null}
-         */
-        this.SourceType = null;
-
-        /**
-         * 回调 URL，用户自行搭建的用于接收识别结果的服务器地址， 长度小于2048字节。如果用户使用回调方式获取识别结果，需提交该参数；如果用户使用轮询方式获取识别结果，则无需提交该参数。
-         * @type {string || null}
-         */
-        this.CallbackUrl = null;
-
-        /**
-         * 语音的URL地址，需要公网可下载。长度小于2048字节，当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写。注意：请确保录音文件时长在5个小时之内，否则可能识别失败。请保证文件的下载速度，否则可能下载失败。
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 语音数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。音频数据要小于5MB。
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 数据长度，非必填（此数据长度为数据未进行base64编码时的数据长度）。
-         * @type {number || null}
-         */
-        this.DataLen = null;
-
-        /**
-         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
-         * @type {string || null}
-         */
-        this.HotwordId = null;
-
-        /**
-         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
-         * @type {number || null}
-         */
-        this.FilterDirty = null;
-
-        /**
-         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
-         * @type {number || null}
-         */
-        this.FilterModal = null;
-
-        /**
-         * 是否进行阿拉伯数字智能转换（目前支持中文普通话引擎）。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为 1。
-         * @type {number || null}
-         */
-        this.ConvertNumMode = null;
-
-        /**
-         * 附加参数
-         * @type {string || null}
-         */
-        this.Extra = null;
-
-        /**
-         * 是否开启话者分离，0：不开启，1：开启(仅支持8k_zh/16k_zh引擎模型，单声道音频)
-         * @type {number || null}
-         */
-        this.SpeakerDiarization = null;
-
-        /**
-         * 话者分离人数（需配合开启话者分离使用），支持2-10（8k_zh仅支持2， 16k_zh支持2-10）
-注：话者分离目前是beta版本，请根据您的需要谨慎使用
-         * @type {number || null}
-         */
-        this.SpeakerNumber = null;
-
-        /**
-         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
-         * @type {number || null}
-         */
-        this.FilterPunc = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EngineModelType = 'EngineModelType' in params ? params.EngineModelType : null;
-        this.ChannelNum = 'ChannelNum' in params ? params.ChannelNum : null;
-        this.ResTextFormat = 'ResTextFormat' in params ? params.ResTextFormat : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.CallbackUrl = 'CallbackUrl' in params ? params.CallbackUrl : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Data = 'Data' in params ? params.Data : null;
-        this.DataLen = 'DataLen' in params ? params.DataLen : null;
-        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
-        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
-        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
-        this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
-        this.Extra = 'Extra' in params ? params.Extra : null;
-        this.SpeakerDiarization = 'SpeakerDiarization' in params ? params.SpeakerDiarization : null;
-        this.SpeakerNumber = 'SpeakerNumber' in params ? params.SpeakerNumber : null;
-        this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
 
     }
 }
@@ -1132,15 +1284,15 @@ class Vocab extends  AbstractModel {
 }
 
 /**
- * 录音文件识别、实时语音异步识别请求的返回数据
+ * CloseAsyncRecognitionTask请求参数结构体
  * @class
  */
-class Task extends  AbstractModel {
+class CloseAsyncRecognitionTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务ID，可通过此ID在轮询接口获取识别状态与结果
+         * 语音流异步识别任务的唯一标识，在创建任务时会返回
          * @type {number || null}
          */
         this.TaskId = null;
@@ -1155,6 +1307,71 @@ class Task extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * 录音文件识别、实时语音异步识别请求的返回数据
+ * @class
+ */
+class Task extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID，可通过此ID在轮询接口获取识别状态与结果。注意：TaskId数据类型为uint64
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * 音频流异步识别任务列表
+ * @class
+ */
+class AsyncRecognitionTasks extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AsyncRecognitionTaskInfo> || null}
+         */
+        this.Tasks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Tasks) {
+            this.Tasks = new Array();
+            for (let z in params.Tasks) {
+                let obj = new AsyncRecognitionTaskInfo();
+                obj.deserialize(params.Tasks[z]);
+                this.Tasks.push(obj);
+            }
+        }
 
     }
 }
@@ -1351,13 +1568,13 @@ class GetCustomizationListRequest extends  AbstractModel {
         this.TagInfos = null;
 
         /**
-         * 分页大小
+         * 分页大小，默认1000
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 分页offset
+         * 分页offset，默认0
          * @type {number || null}
          */
         this.Offset = null;
@@ -1414,18 +1631,24 @@ class UpdateAsrVocabResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTaskStatus请求参数结构体
+ * CreateAsrVocab返回参数结构体
  * @class
  */
-class DescribeTaskStatusRequest extends  AbstractModel {
+class CreateAsrVocabResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
-         * @type {number || null}
+         * 词表ID，可用于获取词表信息
+         * @type {string || null}
          */
-        this.TaskId = null;
+        this.VocabId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1436,7 +1659,8 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1677,7 +1901,7 @@ class UpdateAsrVocabRequest extends  AbstractModel {
         this.VocabId = null;
 
         /**
-         * 热词表名称
+         * 热词表名称，长度在1-255之间
          * @type {string || null}
          */
         this.Name = null;
@@ -1696,7 +1920,7 @@ class UpdateAsrVocabRequest extends  AbstractModel {
         this.WordWeightStr = null;
 
         /**
-         * 热词表描述
+         * 热词表描述，长度在0-1000之间
          * @type {string || null}
          */
         this.Description = null;
@@ -1728,24 +1952,18 @@ class UpdateAsrVocabRequest extends  AbstractModel {
 }
 
 /**
- * CreateAsrVocab返回参数结构体
+ * DescribeTaskStatus请求参数结构体
  * @class
  */
-class CreateAsrVocabResponse extends  AbstractModel {
+class DescribeTaskStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 词表ID，可用于获取词表信息
-         * @type {string || null}
+         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
+         * @type {number || null}
          */
-        this.VocabId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.TaskId = null;
 
     }
 
@@ -1756,8 +1974,7 @@ class CreateAsrVocabResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VocabId = 'VocabId' in params ? params.VocabId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -1852,6 +2069,117 @@ class DeleteCustomizationRequest extends  AbstractModel {
             return;
         }
         this.ModelId = 'ModelId' in params ? params.ModelId : null;
+
+    }
+}
+
+/**
+ * 音频流异步识别任务信息
+ * @class
+ */
+class AsyncRecognitionTaskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 音频流Url
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * ModifyCustomizationState返回参数结构体
+ * @class
+ */
+class ModifyCustomizationStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自学习模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRecognitionTasks返回参数结构体
+ * @class
+ */
+class DescribeAsyncRecognitionTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AsyncRecognitionTasks || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new AsyncRecognitionTasks();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1982,41 +2310,49 @@ class DownloadCustomizationRequest extends  AbstractModel {
 module.exports = {
     SetVocabStateResponse: SetVocabStateResponse,
     CreateCustomizationResponse: CreateCustomizationResponse,
+    DescribeAsyncRecognitionTasksRequest: DescribeAsyncRecognitionTasksRequest,
     ModifyCustomizationStateRequest: ModifyCustomizationStateRequest,
     GetAsrVocabResponse: GetAsrVocabResponse,
+    CreateAsyncRecognitionTaskRequest: CreateAsyncRecognitionTaskRequest,
     HotWord: HotWord,
     GetAsrVocabRequest: GetAsrVocabRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     SentenceRecognitionRequest: SentenceRecognitionRequest,
+    CloseAsyncRecognitionTaskResponse: CloseAsyncRecognitionTaskResponse,
     SentenceWord: SentenceWord,
     CreateCustomizationRequest: CreateCustomizationRequest,
     DownloadAsrVocabResponse: DownloadAsrVocabResponse,
     CreateRecTaskResponse: CreateRecTaskResponse,
     ModifyCustomizationResponse: ModifyCustomizationResponse,
-    ModifyCustomizationStateResponse: ModifyCustomizationStateResponse,
+    CreateAsyncRecognitionTaskResponse: CreateAsyncRecognitionTaskResponse,
     DeleteAsrVocabResponse: DeleteAsrVocabResponse,
     DownloadCustomizationResponse: DownloadCustomizationResponse,
-    GetAsrVocabListRequest: GetAsrVocabListRequest,
     CreateRecTaskRequest: CreateRecTaskRequest,
+    GetAsrVocabListRequest: GetAsrVocabListRequest,
     GetCustomizationListResponse: GetCustomizationListResponse,
     DownloadAsrVocabRequest: DownloadAsrVocabRequest,
     SetVocabStateRequest: SetVocabStateRequest,
     Vocab: Vocab,
+    CloseAsyncRecognitionTaskRequest: CloseAsyncRecognitionTaskRequest,
     Task: Task,
+    AsyncRecognitionTasks: AsyncRecognitionTasks,
     ModifyCustomizationRequest: ModifyCustomizationRequest,
     DeleteCustomizationResponse: DeleteCustomizationResponse,
     TaskStatus: TaskStatus,
     DeleteAsrVocabRequest: DeleteAsrVocabRequest,
     GetCustomizationListRequest: GetCustomizationListRequest,
     UpdateAsrVocabResponse: UpdateAsrVocabResponse,
-    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    CreateAsrVocabResponse: CreateAsrVocabResponse,
     Model: Model,
     CreateAsrVocabRequest: CreateAsrVocabRequest,
     SentenceDetail: SentenceDetail,
     UpdateAsrVocabRequest: UpdateAsrVocabRequest,
-    CreateAsrVocabResponse: CreateAsrVocabResponse,
+    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     SentenceRecognitionResponse: SentenceRecognitionResponse,
     DeleteCustomizationRequest: DeleteCustomizationRequest,
+    AsyncRecognitionTaskInfo: AsyncRecognitionTaskInfo,
+    ModifyCustomizationStateResponse: ModifyCustomizationStateResponse,
+    DescribeAsyncRecognitionTasksResponse: DescribeAsyncRecognitionTasksResponse,
     GetAsrVocabListResponse: GetAsrVocabListResponse,
     SentenceWords: SentenceWords,
     DownloadCustomizationRequest: DownloadCustomizationRequest,

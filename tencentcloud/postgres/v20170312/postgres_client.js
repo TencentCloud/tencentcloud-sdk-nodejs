@@ -17,89 +17,114 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
-const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
-const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
-const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
-const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const SetAutoRenewFlagRequest = models.SetAutoRenewFlagRequest;
-const DescribeOrdersResponse = models.DescribeOrdersResponse;
-const DeleteServerlessDBInstanceRequest = models.DeleteServerlessDBInstanceRequest;
-const DescribeDBXlogsRequest = models.DescribeDBXlogsRequest;
-const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
-const AccountInfo = models.AccountInfo;
-const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
-const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
-const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
-const SpecItemInfo = models.SpecItemInfo;
-const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
-const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
-const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
-const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
-const ErrLogDetail = models.ErrLogDetail;
-const ServerlessDBInstance = models.ServerlessDBInstance;
-const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
-const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
-const RenewInstanceResponse = models.RenewInstanceResponse;
-const DescribeZonesRequest = models.DescribeZonesRequest;
-const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
-const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
-const RegionInfo = models.RegionInfo;
-const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResponse;
-const SlowlogDetail = models.SlowlogDetail;
-const InitDBInstancesRequest = models.InitDBInstancesRequest;
-const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
-const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
-const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
-const SpecInfo = models.SpecInfo;
-const DBInstance = models.DBInstance;
-const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
-const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
-const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
-const DescribeOrdersRequest = models.DescribeOrdersRequest;
-const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
-const InitDBInstancesResponse = models.InitDBInstancesResponse;
-const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
-const ServerlessDBAccount = models.ServerlessDBAccount;
-const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
-const Filter = models.Filter;
-const RenewInstanceRequest = models.RenewInstanceRequest;
-const Tag = models.Tag;
-const PgDeal = models.PgDeal;
-const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
-const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
-const ZoneInfo = models.ZoneInfo;
-const DBBackup = models.DBBackup;
+const DescribeDBXlogsRequest = models.DescribeDBXlogsRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const DeleteReadOnlyGroupResponse = models.DeleteReadOnlyGroupResponse;
+const CreateInstancesRequest = models.CreateInstancesRequest;
+const SpecItemInfo = models.SpecItemInfo;
+const ModifyDBInstanceReadOnlyGroupResponse = models.ModifyDBInstanceReadOnlyGroupResponse;
+const OpenServerlessDBExtranetAccessRequest = models.OpenServerlessDBExtranetAccessRequest;
+const RenewInstanceResponse = models.RenewInstanceResponse;
+const DeleteServerlessDBInstanceResponse = models.DeleteServerlessDBInstanceResponse;
+const ModifyReadOnlyGroupConfigRequest = models.ModifyReadOnlyGroupConfigRequest;
+const AddDBInstanceToReadOnlyGroupRequest = models.AddDBInstanceToReadOnlyGroupRequest;
+const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
+const InitDBInstancesResponse = models.InitDBInstancesResponse;
+const RenewInstanceRequest = models.RenewInstanceRequest;
+const RebalanceReadOnlyGroupRequest = models.RebalanceReadOnlyGroupRequest;
+const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DBInstanceNetInfo = models.DBInstanceNetInfo;
-const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const ZoneInfo = models.ZoneInfo;
+const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
+const NormalQueryItem = models.NormalQueryItem;
+const Tag = models.Tag;
+const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
+const ModifyDBInstancesProjectResponse = models.ModifyDBInstancesProjectResponse;
+const ServerlessDBAccount = models.ServerlessDBAccount;
+const ModifyDBInstanceReadOnlyGroupRequest = models.ModifyDBInstanceReadOnlyGroupRequest;
+const AddDBInstanceToReadOnlyGroupResponse = models.AddDBInstanceToReadOnlyGroupResponse;
+const CreateReadOnlyDBInstanceResponse = models.CreateReadOnlyDBInstanceResponse;
+const CreateInstancesResponse = models.CreateInstancesResponse;
+const DescribeOrdersResponse = models.DescribeOrdersResponse;
+const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const DisIsolateDBInstancesRequest = models.DisIsolateDBInstancesRequest;
 const ServerlessDBInstanceNetInfo = models.ServerlessDBInstanceNetInfo;
-const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
-const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
+const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const DescribeZonesRequest = models.DescribeZonesRequest;
+const DescribeReadOnlyGroupsResponse = models.DescribeReadOnlyGroupsResponse;
+const SetAutoRenewFlagResponse = models.SetAutoRenewFlagResponse;
+const SpecInfo = models.SpecInfo;
+const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const CloseServerlessDBExtranetAccessRequest = models.CloseServerlessDBExtranetAccessRequest;
+const ReadOnlyGroup = models.ReadOnlyGroup;
+const PgDeal = models.PgDeal;
+const DescribeDBErrlogsRequest = models.DescribeDBErrlogsRequest;
+const DestroyDBInstanceRequest = models.DestroyDBInstanceRequest;
 const OpenServerlessDBExtranetAccessResponse = models.OpenServerlessDBExtranetAccessResponse;
-const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
-const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
-const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
-const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
+const Xlog = models.Xlog;
 const DescribeServerlessDBInstancesRequest = models.DescribeServerlessDBInstancesRequest;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const ServerlessDBInstance = models.ServerlessDBInstance;
+const CreateReadOnlyGroupRequest = models.CreateReadOnlyGroupRequest;
+const CloseServerlessDBExtranetAccessResponse = models.CloseServerlessDBExtranetAccessResponse;
+const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const IsolateDBInstancesResponse = models.IsolateDBInstancesResponse;
+const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
+const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
+const RebalanceReadOnlyGroupResponse = models.RebalanceReadOnlyGroupResponse;
+const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
+const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
+const ErrLogDetail = models.ErrLogDetail;
+const DescribeServerlessDBInstancesResponse = models.DescribeServerlessDBInstancesResponse;
+const IsolateDBInstancesRequest = models.IsolateDBInstancesRequest;
+const InitDBInstancesRequest = models.InitDBInstancesRequest;
+const DBInstance = models.DBInstance;
+const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
+const DeleteReadOnlyGroupRequest = models.DeleteReadOnlyGroupRequest;
+const DescribeDBBackupsRequest = models.DescribeDBBackupsRequest;
+const Filter = models.Filter;
+const DisIsolateDBInstancesResponse = models.DisIsolateDBInstancesResponse;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const SlowlogDetail = models.SlowlogDetail;
+const RemoveDBInstanceFromReadOnlyGroupRequest = models.RemoveDBInstanceFromReadOnlyGroupRequest;
+const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
+const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
+const CreateReadOnlyDBInstanceRequest = models.CreateReadOnlyDBInstanceRequest;
 const DescribeZonesResponse = models.DescribeZonesResponse;
-const NormalQueryItem = models.NormalQueryItem;
 const CreateServerlessDBInstanceResponse = models.CreateServerlessDBInstanceResponse;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
-const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
-const DescribeDBInstanceAttributeRequest = models.DescribeDBInstanceAttributeRequest;
-const CloseServerlessDBExtranetAccessRequest = models.CloseServerlessDBExtranetAccessRequest;
-const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
-const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
+const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
-const Xlog = models.Xlog;
+const CreateServerlessDBInstanceRequest = models.CreateServerlessDBInstanceRequest;
+const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
+const CreateReadOnlyGroupResponse = models.CreateReadOnlyGroupResponse;
+const DeleteServerlessDBInstanceRequest = models.DeleteServerlessDBInstanceRequest;
+const ModifyReadOnlyGroupConfigResponse = models.ModifyReadOnlyGroupConfigResponse;
+const AccountInfo = models.AccountInfo;
+const DBBackup = models.DBBackup;
+const DescribeDBErrlogsResponse = models.DescribeDBErrlogsResponse;
+const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
+const RegionInfo = models.RegionInfo;
+const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
+const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
+const RemoveDBInstanceFromReadOnlyGroupResponse = models.RemoveDBInstanceFromReadOnlyGroupResponse;
+const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const DescribeReadOnlyGroupsRequest = models.DescribeReadOnlyGroupsRequest;
+const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
+const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const DescribeDBSlowlogsRequest = models.DescribeDBSlowlogsRequest;
+const DestroyDBInstanceResponse = models.DestroyDBInstanceResponse;
+const DescribeDBInstanceAttributeResponse = models.DescribeDBInstanceAttributeResponse;
+const DescribeDBXlogsResponse = models.DescribeDBXlogsResponse;
+const DescribeDBSlowlogsResponse = models.DescribeDBSlowlogsResponse;
+const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 
 
 /**
@@ -113,6 +138,17 @@ class PostgresClient extends AbstractClient {
     }
     
     /**
+     * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
+     * @param {ModifyDBInstancesProjectRequest} req
+     * @param {function(string, ModifyDBInstancesProjectResponse):void} cb
+     * @public
+     */
+    ModifyDBInstancesProject(req, cb) {
+        let resp = new ModifyDBInstancesProjectResponse();
+        this.request("ModifyDBInstancesProject", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeOrders）用于获取订单信息。
      * @param {DescribeOrdersRequest} req
      * @param {function(string, DescribeOrdersResponse):void} cb
@@ -124,7 +160,7 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。
+     * 本接口 (DestroyDBInstance) 用于彻底下线指定DBInstanceId对应的实例，下线后实例数据将彻底删除，无法找回，只能下线隔离中的实例。
      * @param {DestroyDBInstanceRequest} req
      * @param {function(string, DestroyDBInstanceResponse):void} cb
      * @public
@@ -212,14 +248,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
-     * @param {ModifyDBInstancesProjectRequest} req
-     * @param {function(string, ModifyDBInstancesProjectResponse):void} cb
+     * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
+     * @param {DeleteReadOnlyGroupRequest} req
+     * @param {function(string, DeleteReadOnlyGroupResponse):void} cb
      * @public
      */
-    ModifyDBInstancesProject(req, cb) {
-        let resp = new ModifyDBInstancesProjectResponse();
-        this.request("ModifyDBInstancesProject", req, resp, cb);
+    DeleteReadOnlyGroup(req, cb) {
+        let resp = new DeleteReadOnlyGroupResponse();
+        this.request("DeleteReadOnlyGroup", req, resp, cb);
     }
 
     /**
@@ -278,7 +314,18 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例。
+     * 本接口（UpgradeDBInstance）用于升级实例。
+     * @param {UpgradeDBInstanceRequest} req
+     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeDBInstance(req, cb) {
+        let resp = new UpgradeDBInstanceResponse();
+        this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。
      * @param {CreateDBInstancesRequest} req
      * @param {function(string, CreateDBInstancesResponse):void} cb
      * @public
@@ -322,6 +369,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * 本接口（IsolateDBInstances）用于隔离实例
+     * @param {IsolateDBInstancesRequest} req
+     * @param {function(string, IsolateDBInstancesResponse):void} cb
+     * @public
+     */
+    IsolateDBInstances(req, cb) {
+        let resp = new IsolateDBInstancesResponse();
+        this.request("IsolateDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
      * @param {DeleteServerlessDBInstanceRequest} req
      * @param {function(string, DeleteServerlessDBInstanceResponse):void} cb
@@ -355,6 +413,28 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+     * @param {RemoveDBInstanceFromReadOnlyGroupRequest} req
+     * @param {function(string, RemoveDBInstanceFromReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    RemoveDBInstanceFromReadOnlyGroup(req, cb) {
+        let resp = new RemoveDBInstanceFromReadOnlyGroupResponse();
+        this.request("RemoveDBInstanceFromReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateReadOnlyGroup）用于创建只读组
+     * @param {CreateReadOnlyGroupRequest} req
+     * @param {function(string, CreateReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    CreateReadOnlyGroup(req, cb) {
+        let resp = new CreateReadOnlyGroupResponse();
+        this.request("CreateReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeRegions) 用于查询售卖地域信息。
      * @param {DescribeRegionsRequest} req
      * @param {function(string, DescribeRegionsResponse):void} cb
@@ -377,6 +457,17 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyDBInstanceReadOnlyGroup）用于修改实例所属的只读组
+     * @param {ModifyDBInstanceReadOnlyGroupRequest} req
+     * @param {function(string, ModifyDBInstanceReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceReadOnlyGroup(req, cb) {
+        let resp = new ModifyDBInstanceReadOnlyGroupResponse();
+        this.request("ModifyDBInstanceReadOnlyGroup", req, resp, cb);
+    }
+
+    /**
      * 本接口（CloseDBExtranetAccess）用于关闭实例外网链接。
      * @param {CloseDBExtranetAccessRequest} req
      * @param {function(string, CloseDBExtranetAccessResponse):void} cb
@@ -385,6 +476,17 @@ class PostgresClient extends AbstractClient {
     CloseDBExtranetAccess(req, cb) {
         let resp = new CloseDBExtranetAccessResponse();
         this.request("CloseDBExtranetAccess", req, resp, cb);
+    }
+
+    /**
+     * 本接口（AddDBInstanceToReadOnlyGroup）用于添加只读实例到只读组
+     * @param {AddDBInstanceToReadOnlyGroupRequest} req
+     * @param {function(string, AddDBInstanceToReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    AddDBInstanceToReadOnlyGroup(req, cb) {
+        let resp = new AddDBInstanceToReadOnlyGroupResponse();
+        this.request("AddDBInstanceToReadOnlyGroup", req, resp, cb);
     }
 
     /**
@@ -399,14 +501,14 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 开通serverlessDB实例外网
-     * @param {OpenServerlessDBExtranetAccessRequest} req
-     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
+     * 本接口（DisIsolateDBInstances）用于解隔离实例
+     * @param {DisIsolateDBInstancesRequest} req
+     * @param {function(string, DisIsolateDBInstancesResponse):void} cb
      * @public
      */
-    OpenServerlessDBExtranetAccess(req, cb) {
-        let resp = new OpenServerlessDBExtranetAccessResponse();
-        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
+    DisIsolateDBInstances(req, cb) {
+        let resp = new DisIsolateDBInstancesResponse();
+        this.request("DisIsolateDBInstances", req, resp, cb);
     }
 
     /**
@@ -418,6 +520,17 @@ class PostgresClient extends AbstractClient {
     DescribeServerlessDBInstances(req, cb) {
         let resp = new DescribeServerlessDBInstancesResponse();
         this.request("DescribeServerlessDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+     * @param {RebalanceReadOnlyGroupRequest} req
+     * @param {function(string, RebalanceReadOnlyGroupResponse):void} cb
+     * @public
+     */
+    RebalanceReadOnlyGroup(req, cb) {
+        let resp = new RebalanceReadOnlyGroupResponse();
+        this.request("RebalanceReadOnlyGroup", req, resp, cb);
     }
 
     /**
@@ -443,14 +556,47 @@ class PostgresClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpgradeDBInstance）用于升级实例。
-     * @param {UpgradeDBInstanceRequest} req
-     * @param {function(string, UpgradeDBInstanceResponse):void} cb
+     * 本接口(CreateReadOnlyDBInstance)用于创建只读实例
+     * @param {CreateReadOnlyDBInstanceRequest} req
+     * @param {function(string, CreateReadOnlyDBInstanceResponse):void} cb
      * @public
      */
-    UpgradeDBInstance(req, cb) {
-        let resp = new UpgradeDBInstanceResponse();
-        this.request("UpgradeDBInstance", req, resp, cb);
+    CreateReadOnlyDBInstance(req, cb) {
+        let resp = new CreateReadOnlyDBInstanceResponse();
+        this.request("CreateReadOnlyDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+     * @param {DescribeReadOnlyGroupsRequest} req
+     * @param {function(string, DescribeReadOnlyGroupsResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroups(req, cb) {
+        let resp = new DescribeReadOnlyGroupsResponse();
+        this.request("DescribeReadOnlyGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyReadOnlyGroupConfig)用于更新只读组配置信息
+     * @param {ModifyReadOnlyGroupConfigRequest} req
+     * @param {function(string, ModifyReadOnlyGroupConfigResponse):void} cb
+     * @public
+     */
+    ModifyReadOnlyGroupConfig(req, cb) {
+        let resp = new ModifyReadOnlyGroupConfigResponse();
+        this.request("ModifyReadOnlyGroupConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (CreateInstances) 用于创建一个或者多个PostgreSQL实例，通过此接口创建的实例无需进行初始化，可直接使用。
+     * @param {CreateInstancesRequest} req
+     * @param {function(string, CreateInstancesResponse):void} cb
+     * @public
+     */
+    CreateInstances(req, cb) {
+        let resp = new CreateInstancesResponse();
+        this.request("CreateInstances", req, resp, cb);
     }
 
     /**
@@ -473,6 +619,17 @@ class PostgresClient extends AbstractClient {
     DescribeDBSlowlogs(req, cb) {
         let resp = new DescribeDBSlowlogsResponse();
         this.request("DescribeDBSlowlogs", req, resp, cb);
+    }
+
+    /**
+     * 开通serverlessDB实例外网
+     * @param {OpenServerlessDBExtranetAccessRequest} req
+     * @param {function(string, OpenServerlessDBExtranetAccessResponse):void} cb
+     * @public
+     */
+    OpenServerlessDBExtranetAccess(req, cb) {
+        let resp = new OpenServerlessDBExtranetAccessResponse();
+        this.request("OpenServerlessDBExtranetAccess", req, resp, cb);
     }
 
 

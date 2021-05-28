@@ -17,6 +17,35 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 基于规则的动态扩缩容配置项
+ * @class
+ */
+class TargetConfiguration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预留存率
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TargetValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetValue = 'TargetValue' in params ? params.TargetValue : null;
+
+    }
+}
+
+/**
  * DeleteGameServerSessionQueue请求参数结构体
  * @class
  */
@@ -161,6 +190,41 @@ class FleetAttributes extends  AbstractModel {
          */
         this.BillingStatus = null;
 
+        /**
+         * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 数据盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-32000GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，10-32000GB；容量以10为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DiskInfo> || null}
+         */
+        this.DataDiskInfo = null;
+
+        /**
+         * 系统盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-500GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，50-500GB；容量以1为单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {DiskInfo || null}
+         */
+        this.SystemDiskInfo = null;
+
+        /**
+         * 云联网相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RelatedCcnInfo> || null}
+         */
+        this.RelatedCcnInfos = null;
+
+        /**
+         * fleet公网出带宽最大值，默认100Mbps，范围1-200Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
     }
 
     /**
@@ -191,6 +255,40 @@ class FleetAttributes extends  AbstractModel {
         this.TerminationTime = 'TerminationTime' in params ? params.TerminationTime : null;
         this.GameServerSessionProtectionTimeLimit = 'GameServerSessionProtectionTimeLimit' in params ? params.GameServerSessionProtectionTimeLimit : null;
         this.BillingStatus = 'BillingStatus' in params ? params.BillingStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.DataDiskInfo) {
+            this.DataDiskInfo = new Array();
+            for (let z in params.DataDiskInfo) {
+                let obj = new DiskInfo();
+                obj.deserialize(params.DataDiskInfo[z]);
+                this.DataDiskInfo.push(obj);
+            }
+        }
+
+        if (params.SystemDiskInfo) {
+            let obj = new DiskInfo();
+            obj.deserialize(params.SystemDiskInfo)
+            this.SystemDiskInfo = obj;
+        }
+
+        if (params.RelatedCcnInfos) {
+            this.RelatedCcnInfos = new Array();
+            for (let z in params.RelatedCcnInfos) {
+                let obj = new RelatedCcnInfo();
+                obj.deserialize(params.RelatedCcnInfos[z]);
+                this.RelatedCcnInfos.push(obj);
+            }
+        }
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
 
     }
 }
@@ -400,6 +498,25 @@ class Asset extends  AbstractModel {
          */
         this.OsType = null;
 
+        /**
+         * 生成包资源类型，ASSET 或者 IMAGE；ASSET 代表是原有生成包类型，IMAGE 为扩充使用镜像类型
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 镜像资源共享类型，当 ResourceType 为 IMAGE 时该字段有意义，SHARED 表示共享、SHARED_IMAGE 表示未共享；ResourceType 为 ASSET 时这里返回 UNKNOWN_SHARED 用于占位
+         * @type {string || null}
+         */
+        this.SharingStatus = null;
+
+        /**
+         * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -420,6 +537,17 @@ class Asset extends  AbstractModel {
         this.AssetArn = 'AssetArn' in params ? params.AssetArn : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.OsType = 'OsType' in params ? params.OsType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.SharingStatus = 'SharingStatus' in params ? params.SharingStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -470,6 +598,34 @@ class ListAliasesResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateBucketCORSOpt返回参数结构体
+ * @class
+ */
+class UpdateBucketCORSOptResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -569,6 +725,56 @@ class ResolveAliasRequest extends  AbstractModel {
             return;
         }
         this.AliasId = 'AliasId' in params ? params.AliasId : null;
+
+    }
+}
+
+/**
+ * GetGameServerInstanceLogUrl返回参数结构体
+ * @class
+ */
+class GetGameServerInstanceLogUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志下载URL的数组，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.PresignedUrls = null;
+
+        /**
+         * 总条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 是否还有没拉取完的
+         * @type {boolean || null}
+         */
+        this.HasNext = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PresignedUrls = 'PresignedUrls' in params ? params.PresignedUrls : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.HasNext = 'HasNext' in params ? params.HasNext : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -819,6 +1025,36 @@ class CreateFleetRequest extends  AbstractModel {
          */
         this.GameServerSessionProtectionTimeLimit = null;
 
+        /**
+         * 标签列表，最大长度50组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 系统盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-500GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，50-500GB；容量以1为单位
+         * @type {DiskInfo || null}
+         */
+        this.SystemDiskInfo = null;
+
+        /**
+         * 数据盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-32000GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，10-32000GB；容量以10为单位
+         * @type {Array.<DiskInfo> || null}
+         */
+        this.DataDiskInfo = null;
+
+        /**
+         * 云联网信息，包含对应的账号信息及所属id
+         * @type {Array.<CcnInfo> || null}
+         */
+        this.CcnInfos = null;
+
+        /**
+         * fleet公网出带宽最大值，默认100Mbps，范围1-200Mbps
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
     }
 
     /**
@@ -858,6 +1094,40 @@ class CreateFleetRequest extends  AbstractModel {
         }
         this.SubNetId = 'SubNetId' in params ? params.SubNetId : null;
         this.GameServerSessionProtectionTimeLimit = 'GameServerSessionProtectionTimeLimit' in params ? params.GameServerSessionProtectionTimeLimit : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.SystemDiskInfo) {
+            let obj = new DiskInfo();
+            obj.deserialize(params.SystemDiskInfo)
+            this.SystemDiskInfo = obj;
+        }
+
+        if (params.DataDiskInfo) {
+            this.DataDiskInfo = new Array();
+            for (let z in params.DataDiskInfo) {
+                let obj = new DiskInfo();
+                obj.deserialize(params.DataDiskInfo[z]);
+                this.DataDiskInfo.push(obj);
+            }
+        }
+
+        if (params.CcnInfos) {
+            this.CcnInfos = new Array();
+            for (let z in params.CcnInfos) {
+                let obj = new CcnInfo();
+                obj.deserialize(params.CcnInfos[z]);
+                this.CcnInfos.push(obj);
+            }
+        }
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
 
     }
 }
@@ -1108,6 +1378,50 @@ class DescribeFleetUtilizationResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFleetRelatedResources返回参数结构体
+ * @class
+ */
+class DescribeFleetRelatedResourcesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 与服务器舰队关联的资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FleetRelatedResource> || null}
+         */
+        this.Resources = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Resources) {
+            this.Resources = new Array();
+            for (let z in params.Resources) {
+                let obj = new FleetRelatedResource();
+                obj.deserialize(params.Resources[z]);
+                this.Resources.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeScalingPolicies请求参数结构体
  * @class
  */
@@ -1180,6 +1494,77 @@ class DeleteFleetRequest extends  AbstractModel {
             return;
         }
         this.FleetId = 'FleetId' in params ? params.FleetId : null;
+
+    }
+}
+
+/**
+ * 定时器策略消息
+ * @class
+ */
+class TimerScalingPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 定时器ID，进行encode，填写时更新
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimerId = null;
+
+        /**
+         * 定时器名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimerName = null;
+
+        /**
+         * 定时器状态(未定义0、未生效1、生效中2、已停止3、已过期4)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimerStatus = null;
+
+        /**
+         * 定时器弹性伸缩策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TimerFleetCapacity || null}
+         */
+        this.TimerFleetCapacity = null;
+
+        /**
+         * 重复周期配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TimerConfiguration || null}
+         */
+        this.TimerConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimerId = 'TimerId' in params ? params.TimerId : null;
+        this.TimerName = 'TimerName' in params ? params.TimerName : null;
+        this.TimerStatus = 'TimerStatus' in params ? params.TimerStatus : null;
+
+        if (params.TimerFleetCapacity) {
+            let obj = new TimerFleetCapacity();
+            obj.deserialize(params.TimerFleetCapacity)
+            this.TimerFleetCapacity = obj;
+        }
+
+        if (params.TimerConfiguration) {
+            let obj = new TimerConfiguration();
+            obj.deserialize(params.TimerConfiguration)
+            this.TimerConfiguration = obj;
+        }
 
     }
 }
@@ -1320,24 +1705,24 @@ class UpdateAssetRequest extends  AbstractModel {
 }
 
 /**
- * 玩家游戏会话信息
+ * 云联网相关信息
  * @class
  */
-class DesiredPlayerSession extends  AbstractModel {
+class CcnInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 与玩家会话关联的唯一玩家标识
+         * 云联网所属账号
          * @type {string || null}
          */
-        this.PlayerId = null;
+        this.AccountId = null;
 
         /**
-         * 开发人员定义的玩家数据
+         * 云联网id
          * @type {string || null}
          */
-        this.PlayerData = null;
+        this.CcnId = null;
 
     }
 
@@ -1348,8 +1733,8 @@ class DesiredPlayerSession extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
-        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
 
     }
 }
@@ -1413,42 +1798,47 @@ class UpdateFleetPortSettingsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeFleetStatisticFlows请求参数结构体
+ * 云联网实例信息
  * @class
  */
-class DescribeFleetStatisticFlowsRequest extends  AbstractModel {
+class CcnInstanceSets extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器舰队ID
+         * 云联网账号 Uin
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.FleetId = null;
+        this.AccountId = null;
 
         /**
-         * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
+         * 云联网 Id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.BeginTime = null;
+        this.CcnId = null;
 
         /**
-         * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
+         * 云联网关联时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.EndTime = null;
+        this.CreateTime = null;
 
         /**
-         * 结果返回最大数量，最小值0，最大值100
-         * @type {number || null}
+         * 云联网实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Limit = null;
+        this.InstanceName = null;
 
         /**
-         * 返回结果偏移，最小值0
-         * @type {number || null}
+         * 云联网状态：申请中、已连接、已过期、已拒绝、已删除、失败的、关联中、解关联中、解关联失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.State = null;
 
     }
 
@@ -1459,11 +1849,11 @@ class DescribeFleetStatisticFlowsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FleetId = 'FleetId' in params ? params.FleetId : null;
-        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.State = 'State' in params ? params.State : null;
 
     }
 }
@@ -1785,6 +2175,13 @@ class GameServerSessionQueue extends  AbstractModel {
          */
         this.TimeoutInSeconds = null;
 
+        /**
+         * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1815,6 +2212,15 @@ class GameServerSessionQueue extends  AbstractModel {
             }
         }
         this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2285,6 +2691,41 @@ class DescribeFleetStatisticSummaryRequest extends  AbstractModel {
 }
 
 /**
+ * 标签结构体
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键，最大长度127字节
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值，最大长度255字节
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * 玩家自定义数据
  * @class
  */
@@ -2495,25 +2936,18 @@ class Event extends  AbstractModel {
 }
 
 /**
- * UpdateRuntimeConfiguration返回参数结构体
+ * PutTimerScalingPolicy请求参数结构体
  * @class
  */
-class UpdateRuntimeConfigurationResponse extends  AbstractModel {
+class PutTimerScalingPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器舰队配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {RuntimeConfiguration || null}
+         * 定时器策略消息
+         * @type {TimerScalingPolicy || null}
          */
-        this.RuntimeConfiguration = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.TimerScalingPolicy = null;
 
     }
 
@@ -2525,12 +2959,53 @@ class UpdateRuntimeConfigurationResponse extends  AbstractModel {
             return;
         }
 
-        if (params.RuntimeConfiguration) {
-            let obj = new RuntimeConfiguration();
-            obj.deserialize(params.RuntimeConfiguration)
-            this.RuntimeConfiguration = obj;
+        if (params.TimerScalingPolicy) {
+            let obj = new TimerScalingPolicy();
+            obj.deserialize(params.TimerScalingPolicy)
+            this.TimerScalingPolicy = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 云联网相关信息描述
+ * @class
+ */
+class RelatedCcnInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云联网所属账号
+         * @type {string || null}
+         */
+        this.AccountId = null;
+
+        /**
+         * 云联网 ID
+         * @type {string || null}
+         */
+        this.CcnId = null;
+
+        /**
+         * 关联云联网状态
+         * @type {string || null}
+         */
+        this.AttachType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.AttachType = 'AttachType' in params ? params.AttachType : null;
 
     }
 }
@@ -2631,6 +3106,97 @@ class AssetSupportSys extends  AbstractModel {
         this.OsType = 'OsType' in params ? params.OsType : null;
         this.OsBit = 'OsBit' in params ? params.OsBit : null;
         this.OsVersion = 'OsVersion' in params ? params.OsVersion : null;
+
+    }
+}
+
+/**
+ * DeleteTimerScalingPolicy返回参数结构体
+ * @class
+ */
+class DeleteTimerScalingPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTimerScalingPolicies请求参数结构体
+ * @class
+ */
+class DescribeTimerScalingPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扩缩容配置服务器舰队ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 定时器名称
+         * @type {string || null}
+         */
+        this.TimerName = null;
+
+        /**
+         * 定时器开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 定时器结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 分页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 页大小
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.TimerName = 'TimerName' in params ? params.TimerName : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -2940,6 +3506,62 @@ class DeleteAliasRequest extends  AbstractModel {
             return;
         }
         this.AliasId = 'AliasId' in params ? params.AliasId : null;
+
+    }
+}
+
+/**
+ * UpdateBucketCORSOpt请求参数结构体
+ * @class
+ */
+class UpdateBucketCORSOptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 允许的访问来源;具体参见 [cos文档](https://cloud.tencent.com/document/product/436/8279)
+         * @type {Array.<string> || null}
+         */
+        this.AllowedOrigins = null;
+
+        /**
+         * 允许的 HTTP 操作方法;可以配置多个:PUT、GET、POST、HEAD。[cos文档](https://cloud.tencent.com/document/product/436/8279)
+         * @type {Array.<string> || null}
+         */
+        this.AllowedMethods = null;
+
+        /**
+         * 用于指定允许浏览器发送 CORS 请求时携带的自定义 HTTP 请求头部;可以配置*，代表允许所有头部，为了避免遗漏，推荐配置为*。[cos文档](https://cloud.tencent.com/document/product/436/8279)
+         * @type {Array.<string> || null}
+         */
+        this.AllowedHeaders = null;
+
+        /**
+         * 跨域资源共享配置的有效时间，单位为秒。[cos文档](https://cloud.tencent.com/document/product/436/8279)
+         * @type {number || null}
+         */
+        this.MaxAgeSeconds = null;
+
+        /**
+         * 允许浏览器获取的 CORS 请求响应中的头部，不区分大小写；默认情况下浏览器只能访问简单响应头部：Cache-Control、Content-Type、Expires、Last-Modified，如果需要访问其他响应头部，需要添加 ExposeHeader 配置。[cos文档](https://cloud.tencent.com/document/product/436/8279)
+         * @type {Array.<string> || null}
+         */
+        this.ExposeHeaders = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllowedOrigins = 'AllowedOrigins' in params ? params.AllowedOrigins : null;
+        this.AllowedMethods = 'AllowedMethods' in params ? params.AllowedMethods : null;
+        this.AllowedHeaders = 'AllowedHeaders' in params ? params.AllowedHeaders : null;
+        this.MaxAgeSeconds = 'MaxAgeSeconds' in params ? params.MaxAgeSeconds : null;
+        this.ExposeHeaders = 'ExposeHeaders' in params ? params.ExposeHeaders : null;
 
     }
 }
@@ -3754,36 +4376,30 @@ class DescribeFleetStatisticDetailsResponse extends  AbstractModel {
 }
 
 /**
- * UpdateGameServerSessionQueue请求参数结构体
+ * DeleteTimerScalingPolicy请求参数结构体
  * @class
  */
-class UpdateGameServerSessionQueueRequest extends  AbstractModel {
+class DeleteTimerScalingPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 游戏服务器会话队列名字，长度1~128
+         * 定时器ID, 进行encode
          * @type {string || null}
          */
-        this.Name = null;
+        this.TimerId = null;
 
         /**
-         * 目的服务器舰队（可为别名）列表
-         * @type {Array.<GameServerSessionQueueDestination> || null}
+         * 扩缩容配置服务器舰队ID
+         * @type {string || null}
          */
-        this.Destinations = null;
+        this.FleetId = null;
 
         /**
-         * 延迟策略集合
-         * @type {Array.<PlayerLatencyPolicy> || null}
+         * 定时器名称
+         * @type {string || null}
          */
-        this.PlayerLatencyPolicies = null;
-
-        /**
-         * 超时时间
-         * @type {number || null}
-         */
-        this.TimeoutInSeconds = null;
+        this.TimerName = null;
 
     }
 
@@ -3794,26 +4410,9 @@ class UpdateGameServerSessionQueueRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.Destinations) {
-            this.Destinations = new Array();
-            for (let z in params.Destinations) {
-                let obj = new GameServerSessionQueueDestination();
-                obj.deserialize(params.Destinations[z]);
-                this.Destinations.push(obj);
-            }
-        }
-
-        if (params.PlayerLatencyPolicies) {
-            this.PlayerLatencyPolicies = new Array();
-            for (let z in params.PlayerLatencyPolicies) {
-                let obj = new PlayerLatencyPolicy();
-                obj.deserialize(params.PlayerLatencyPolicies[z]);
-                this.PlayerLatencyPolicies.push(obj);
-            }
-        }
-        this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
+        this.TimerId = 'TimerId' in params ? params.TimerId : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.TimerName = 'TimerName' in params ? params.TimerName : null;
 
     }
 }
@@ -3902,19 +4501,18 @@ class AssetCredentials extends  AbstractModel {
 }
 
 /**
- * 基于规则的动态扩缩容配置项
+ * DescribeFleetRelatedResources请求参数结构体
  * @class
  */
-class TargetConfiguration extends  AbstractModel {
+class DescribeFleetRelatedResourcesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 预留存率
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 服务器舰队 Id
+         * @type {string || null}
          */
-        this.TargetValue = null;
+        this.FleetId = null;
 
     }
 
@@ -3925,7 +4523,7 @@ class TargetConfiguration extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TargetValue = 'TargetValue' in params ? params.TargetValue : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
 
     }
 }
@@ -3991,6 +4589,71 @@ class GameServerSessionQueueDestination extends  AbstractModel {
         }
         this.DestinationArn = 'DestinationArn' in params ? params.DestinationArn : null;
         this.FleetStatus = 'FleetStatus' in params ? params.FleetStatus : null;
+
+    }
+}
+
+/**
+ * UpdateGameServerSessionQueue请求参数结构体
+ * @class
+ */
+class UpdateGameServerSessionQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话队列名字，长度1~128
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 目的服务器舰队（可为别名）列表
+         * @type {Array.<GameServerSessionQueueDestination> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * 延迟策略集合
+         * @type {Array.<PlayerLatencyPolicy> || null}
+         */
+        this.PlayerLatencyPolicies = null;
+
+        /**
+         * 超时时间
+         * @type {number || null}
+         */
+        this.TimeoutInSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new GameServerSessionQueueDestination();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+
+        if (params.PlayerLatencyPolicies) {
+            this.PlayerLatencyPolicies = new Array();
+            for (let z in params.PlayerLatencyPolicies) {
+                let obj = new PlayerLatencyPolicy();
+                obj.deserialize(params.PlayerLatencyPolicies[z]);
+                this.PlayerLatencyPolicies.push(obj);
+            }
+        }
+        this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
 
     }
 }
@@ -4127,6 +4790,34 @@ class GetGameServerSessionLogUrlResponse extends  AbstractModel {
         }
         this.PreSignedUrl = 'PreSignedUrl' in params ? params.PreSignedUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateBucketAccelerateOpt请求参数结构体
+ * @class
+ */
+class UpdateBucketAccelerateOptRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true为开启全球加速，false为关闭
+         * @type {boolean || null}
+         */
+        this.Allowed = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Allowed = 'Allowed' in params ? params.Allowed : null;
 
     }
 }
@@ -4350,6 +5041,47 @@ class DescribeGameServerSessionPlacementResponse extends  AbstractModel {
             let obj = new GameServerSessionPlacement();
             obj.deserialize(params.GameServerSessionPlacement)
             this.GameServerSessionPlacement = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateRuntimeConfiguration返回参数结构体
+ * @class
+ */
+class UpdateRuntimeConfigurationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RuntimeConfiguration || null}
+         */
+        this.RuntimeConfiguration = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RuntimeConfiguration) {
+            let obj = new RuntimeConfiguration();
+            obj.deserialize(params.RuntimeConfiguration)
+            this.RuntimeConfiguration = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4888,6 +5620,27 @@ class Instance extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 实例权重
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * 实例是否保留, 1-保留，0-不保留,默认
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReserveValue = null;
+
+        /**
+         * 实例的私有IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PrivateIpAddress = null;
+
     }
 
     /**
@@ -4905,6 +5658,9 @@ class Instance extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.ReserveValue = 'ReserveValue' in params ? params.ReserveValue : null;
+        this.PrivateIpAddress = 'PrivateIpAddress' in params ? params.PrivateIpAddress : null;
 
     }
 }
@@ -5221,6 +5977,34 @@ class PlayerLatency extends  AbstractModel {
 }
 
 /**
+ * SetServerReserved返回参数结构体
+ * @class
+ */
+class SetServerReservedResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopGameServerSessionPlacement请求参数结构体
  * @class
  */
@@ -5272,6 +6056,88 @@ class UpdateFleetNameResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 定时器弹性伸缩策略
+ * @class
+ */
+class TimerFleetCapacity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扩缩容配置服务器舰队ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 期望实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DesiredInstances = null;
+
+        /**
+         * 最小实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 最大实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * 伸缩容间隔，单位：分钟
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ScalingInterval = null;
+
+        /**
+         * 扩缩容类型（手动1，自动2、未定义0）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ScalingType = null;
+
+        /**
+         * 基于目标的扩展策略的设置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TargetConfiguration || null}
+         */
+        this.TargetConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.DesiredInstances = 'DesiredInstances' in params ? params.DesiredInstances : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.ScalingInterval = 'ScalingInterval' in params ? params.ScalingInterval : null;
+        this.ScalingType = 'ScalingType' in params ? params.ScalingType : null;
+
+        if (params.TargetConfiguration) {
+            let obj = new TargetConfiguration();
+            obj.deserialize(params.TargetConfiguration)
+            this.TargetConfiguration = obj;
+        }
 
     }
 }
@@ -5330,6 +6196,12 @@ class CreateAliasRequest extends  AbstractModel {
          */
         this.Description = null;
 
+        /**
+         * 标签列表，最大长度50组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5347,6 +6219,119 @@ class CreateAliasRequest extends  AbstractModel {
             this.RoutingStrategy = obj;
         }
         this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 定时器取值配置
+ * @class
+ */
+class TimerValue extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 每X天，执行一次(重复周期-按天/单次)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Day = null;
+
+        /**
+         * 每月从第x天，执行一次(重复周期-按月)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FromDay = null;
+
+        /**
+         * 每月到第x天，执行一次(重复周期-按月)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ToDay = null;
+
+        /**
+         * 重复周期-按周，周几（多个值,取值周一(1,2,3,4,5,6,7)周日）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.WeekDays = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Day = 'Day' in params ? params.Day : null;
+        this.FromDay = 'FromDay' in params ? params.FromDay : null;
+        this.ToDay = 'ToDay' in params ? params.ToDay : null;
+        this.WeekDays = 'WeekDays' in params ? params.WeekDays : null;
+
+    }
+}
+
+/**
+ * CopyFleet返回参数结构体
+ * @class
+ */
+class CopyFleetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FleetAttributes> || null}
+         */
+        this.FleetAttributes = null;
+
+        /**
+         * 服务器舰队数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FleetAttributes) {
+            this.FleetAttributes = new Array();
+            for (let z in params.FleetAttributes) {
+                let obj = new FleetAttributes();
+                obj.deserialize(params.FleetAttributes[z]);
+                this.FleetAttributes.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5518,7 +6503,7 @@ class CreateAssetRequest extends  AbstractModel {
         this.AssetRegion = null;
 
         /**
-         * 生成包可运行的操作系统，若传入参数为CentOS7.16则不需要传入ImageId字段，否则，需要传入Imageid字段（该方式是为了兼容之前的版本，后续建议使用ImageId来替代该字段）
+         * 生成包可运行的操作系统，若传入参数为CentOS7.16则不需要传入ImageId字段，否则，需要传入Imageid字段（该方式是为了兼容之前的版本，后续建议使用ImageId来替代该字段）。这里可通过[DescribeAssetSystems](https://cloud.tencent.com/document/product/1165/49191)接口获取asset支持的操作系统进行传入（使用AssetSupportSys的OsVersion字段）
          * @type {string || null}
          */
         this.OperateSystem = null;
@@ -5528,6 +6513,12 @@ class CreateAssetRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.ImageId = null;
+
+        /**
+         * 标签列表，最大长度50组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -5544,6 +6535,15 @@ class CreateAssetRequest extends  AbstractModel {
         this.AssetRegion = 'AssetRegion' in params ? params.AssetRegion : null;
         this.OperateSystem = 'OperateSystem' in params ? params.OperateSystem : null;
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5785,6 +6785,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * CVM实例公网IP
+         * @type {string || null}
+         */
+        this.IpAddress = null;
+
     }
 
     /**
@@ -5798,6 +6804,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
 
     }
 }
@@ -5932,61 +6939,24 @@ class DescribeFleetStatisticFlowsResponse extends  AbstractModel {
 }
 
 /**
- * 服务器实例统计数据
+ * 磁盘存储信息
  * @class
  */
-class InstanceCounts extends  AbstractModel {
+class DiskInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 活跃的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 磁盘类型，支持：高性能云硬盘（CLOUD_PREMIUM）、SSD云硬盘（CLOUD_SSD）
+         * @type {string || null}
          */
-        this.Active = null;
+        this.DiskType = null;
 
         /**
-         * 期望的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
+         * 系统盘：可选硬盘容量，50-500GB，数字以1为单位，数据盘：可选硬盘容量：10-32000GB，数字以10为单位；当磁盘类型为SSD云硬盘（CLOUD_SSD）最小大小为 100GB
          * @type {number || null}
          */
-        this.Desired = null;
-
-        /**
-         * 空闲的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Idle = null;
-
-        /**
-         * 服务器实例数最大限制
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MaxiNum = null;
-
-        /**
-         * 服务器实例数最小限制
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.MiniNum = null;
-
-        /**
-         * 已开始创建，但未激活的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Pending = null;
-
-        /**
-         * 结束中的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Terminating = null;
+        this.DiskSize = null;
 
     }
 
@@ -5997,36 +6967,47 @@ class InstanceCounts extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Active = 'Active' in params ? params.Active : null;
-        this.Desired = 'Desired' in params ? params.Desired : null;
-        this.Idle = 'Idle' in params ? params.Idle : null;
-        this.MaxiNum = 'MaxiNum' in params ? params.MaxiNum : null;
-        this.MiniNum = 'MiniNum' in params ? params.MiniNum : null;
-        this.Pending = 'Pending' in params ? params.Pending : null;
-        this.Terminating = 'Terminating' in params ? params.Terminating : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
     }
 }
 
 /**
- * UpdateFleetName请求参数结构体
+ * 重复周期配置
  * @class
  */
-class UpdateFleetNameRequest extends  AbstractModel {
+class TimerConfiguration extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器舰队 Id
-         * @type {string || null}
+         * 定时器重复周期类型（未定义0，单次1、按天2、按月3、按周4）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.FleetId = null;
+        this.TimerType = null;
 
         /**
-         * 服务器舰队名称，最小长度1，最大长度50
+         * 定时器取值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TimerValue || null}
+         */
+        this.TimerValue = null;
+
+        /**
+         * 定时器开始时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Name = null;
+        this.BeginTime = null;
+
+        /**
+         * 定时器结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -6037,8 +7018,15 @@ class UpdateFleetNameRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FleetId = 'FleetId' in params ? params.FleetId : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.TimerType = 'TimerType' in params ? params.TimerType : null;
+
+        if (params.TimerValue) {
+            let obj = new TimerValue();
+            obj.deserialize(params.TimerValue)
+            this.TimerValue = obj;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -6179,6 +7167,85 @@ class DescribeFleetUtilizationRequest extends  AbstractModel {
             return;
         }
         this.FleetIds = 'FleetIds' in params ? params.FleetIds : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceTypes返回参数结构体
+ * @class
+ */
+class DescribeInstanceTypesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器实例类型列表
+         * @type {Array.<InstanceTypeInfo> || null}
+         */
+        this.InstanceTypeList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstanceTypeList) {
+            this.InstanceTypeList = new Array();
+            for (let z in params.InstanceTypeList) {
+                let obj = new InstanceTypeInfo();
+                obj.deserialize(params.InstanceTypeList[z]);
+                this.InstanceTypeList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StartFleetActions返回参数结构体
+ * @class
+ */
+class StartFleetActionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队 Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6481,6 +7548,53 @@ class PlayerLatencyPolicy extends  AbstractModel {
 }
 
 /**
+ * 与服务器舰队关联的资源，如别名和队列
+ * @class
+ */
+class FleetRelatedResource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类型。
+- ALIAS：别名
+- QUEUE：队列
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 资源ID，目前仅支持别名ID和队列名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+        /**
+         * 资源所在区域，如ap-shanghai、na-siliconvalley等
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.ResourceRegion = 'ResourceRegion' in params ? params.ResourceRegion : null;
+
+    }
+}
+
+/**
  * UpdateRuntimeConfiguration请求参数结构体
  * @class
  */
@@ -6725,6 +7839,12 @@ class DescribeInstancesExtendRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * CVM实例公网IP
+         * @type {string || null}
+         */
+        this.IpAddress = null;
+
     }
 
     /**
@@ -6737,6 +7857,7 @@ class DescribeInstancesExtendRequest extends  AbstractModel {
         this.FleetId = 'FleetId' in params ? params.FleetId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
 
     }
 }
@@ -6794,19 +7915,89 @@ class DescribeGameServerSessionsResponse extends  AbstractModel {
 }
 
 /**
- * StartFleetActions返回参数结构体
+ * 服务器实例统计数据
  * @class
  */
-class StartFleetActionsResponse extends  AbstractModel {
+class InstanceCounts extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器舰队 Id
+         * 活跃的服务器实例数
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {number || null}
          */
-        this.FleetId = null;
+        this.Active = null;
+
+        /**
+         * 期望的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Desired = null;
+
+        /**
+         * 空闲的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Idle = null;
+
+        /**
+         * 服务器实例数最大限制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxiNum = null;
+
+        /**
+         * 服务器实例数最小限制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MiniNum = null;
+
+        /**
+         * 已开始创建，但未激活的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Pending = null;
+
+        /**
+         * 结束中的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Terminating = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Active = 'Active' in params ? params.Active : null;
+        this.Desired = 'Desired' in params ? params.Desired : null;
+        this.Idle = 'Idle' in params ? params.Idle : null;
+        this.MaxiNum = 'MaxiNum' in params ? params.MaxiNum : null;
+        this.MiniNum = 'MiniNum' in params ? params.MiniNum : null;
+        this.Pending = 'Pending' in params ? params.Pending : null;
+        this.Terminating = 'Terminating' in params ? params.Terminating : null;
+
+    }
+}
+
+/**
+ * UpdateBucketAccelerateOpt返回参数结构体
+ * @class
+ */
+class UpdateBucketAccelerateOptResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6823,7 +8014,6 @@ class StartFleetActionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FleetId = 'FleetId' in params ? params.FleetId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6944,18 +8134,26 @@ class GetUploadFederationTokenRequest extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceTypes返回参数结构体
+ * DescribeTimerScalingPolicies返回参数结构体
  * @class
  */
-class DescribeInstanceTypesResponse extends  AbstractModel {
+class DescribeTimerScalingPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器实例类型列表
-         * @type {Array.<InstanceTypeInfo> || null}
+         * 定时器扩缩容策略配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TimerScalingPolicy> || null}
          */
-        this.InstanceTypeList = null;
+        this.TimerScalingPolicies = null;
+
+        /**
+         * 定时器总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6973,15 +8171,224 @@ class DescribeInstanceTypesResponse extends  AbstractModel {
             return;
         }
 
-        if (params.InstanceTypeList) {
-            this.InstanceTypeList = new Array();
-            for (let z in params.InstanceTypeList) {
-                let obj = new InstanceTypeInfo();
-                obj.deserialize(params.InstanceTypeList[z]);
-                this.InstanceTypeList.push(obj);
+        if (params.TimerScalingPolicies) {
+            this.TimerScalingPolicies = new Array();
+            for (let z in params.TimerScalingPolicies) {
+                let obj = new TimerScalingPolicy();
+                obj.deserialize(params.TimerScalingPolicies[z]);
+                this.TimerScalingPolicies.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CopyFleet请求参数结构体
+ * @class
+ */
+class CopyFleetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队 Id
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 复制数量，最小值1，最大值为剩余配额，可以根据[获取用户配额](https://cloud.tencent.com/document/product/1165/48732)接口获取。
+         * @type {number || null}
+         */
+        this.CopyNumber = null;
+
+        /**
+         * 生成包 Id
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * 描述，最小长度0，最大长度100
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 网络配置
+         * @type {Array.<InboundPermission> || null}
+         */
+        this.InboundPermissions = null;
+
+        /**
+         * 服务器类型，参数根据[获取服务器实例类型列表](https://cloud.tencent.com/document/product/1165/48732)接口获取。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 服务器舰队类型，目前只支持ON_DEMAND类型
+         * @type {string || null}
+         */
+        this.FleetType = null;
+
+        /**
+         * 服务器舰队名称，最小长度1，最大长度50
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 保护策略：不保护NoProtection、完全保护FullProtection、时限保护TimeLimitProtection
+         * @type {string || null}
+         */
+        this.NewGameServerSessionProtectionPolicy = null;
+
+        /**
+         * 资源创建限制策略
+         * @type {ResourceCreationLimitPolicy || null}
+         */
+        this.ResourceCreationLimitPolicy = null;
+
+        /**
+         * 进程配置
+         * @type {RuntimeConfiguration || null}
+         */
+        this.RuntimeConfiguration = null;
+
+        /**
+         * 时限保护超时时间，默认60分钟，最小值5，最大值1440；当NewGameSessionProtectionPolicy为TimeLimitProtection时参数有效
+         * @type {number || null}
+         */
+        this.GameServerSessionProtectionTimeLimit = null;
+
+        /**
+         * 是否选择扩缩容：SCALING_SELECTED 或者 SCALING_UNSELECTED；默认是 SCALING_UNSELECTED
+         * @type {string || null}
+         */
+        this.SelectedScalingType = null;
+
+        /**
+         * 是否选择云联网：CCN_SELECTED_BEFORE_CREATE（创建前关联）， CCN_SELECTED_AFTER_CREATE（创建后关联）或者 CCN_UNSELECTED（不关联）；默认是 CCN_UNSELECTED
+         * @type {string || null}
+         */
+        this.SelectedCcnType = null;
+
+        /**
+         * 标签列表，最大长度50组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 系统盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-500GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，50-500GB；容量以1为单位
+         * @type {DiskInfo || null}
+         */
+        this.SystemDiskInfo = null;
+
+        /**
+         * 数据盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-32000GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，10-32000GB；容量以10为单位
+         * @type {Array.<DiskInfo> || null}
+         */
+        this.DataDiskInfo = null;
+
+        /**
+         * 是否选择复制定时器策略：TIMER_SELECTED 或者 TIMER_UNSELECTED；默认是 TIMER_UNSELECTED
+         * @type {string || null}
+         */
+        this.SelectedTimerType = null;
+
+        /**
+         * 云联网信息，包含对应的账号信息及所属id
+         * @type {Array.<CcnInfo> || null}
+         */
+        this.CcnInfos = null;
+
+        /**
+         * fleet公网出带宽最大值，默认100Mbps，范围1-200Mbps
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.CopyNumber = 'CopyNumber' in params ? params.CopyNumber : null;
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.InboundPermissions) {
+            this.InboundPermissions = new Array();
+            for (let z in params.InboundPermissions) {
+                let obj = new InboundPermission();
+                obj.deserialize(params.InboundPermissions[z]);
+                this.InboundPermissions.push(obj);
+            }
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.FleetType = 'FleetType' in params ? params.FleetType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NewGameServerSessionProtectionPolicy = 'NewGameServerSessionProtectionPolicy' in params ? params.NewGameServerSessionProtectionPolicy : null;
+
+        if (params.ResourceCreationLimitPolicy) {
+            let obj = new ResourceCreationLimitPolicy();
+            obj.deserialize(params.ResourceCreationLimitPolicy)
+            this.ResourceCreationLimitPolicy = obj;
+        }
+
+        if (params.RuntimeConfiguration) {
+            let obj = new RuntimeConfiguration();
+            obj.deserialize(params.RuntimeConfiguration)
+            this.RuntimeConfiguration = obj;
+        }
+        this.GameServerSessionProtectionTimeLimit = 'GameServerSessionProtectionTimeLimit' in params ? params.GameServerSessionProtectionTimeLimit : null;
+        this.SelectedScalingType = 'SelectedScalingType' in params ? params.SelectedScalingType : null;
+        this.SelectedCcnType = 'SelectedCcnType' in params ? params.SelectedCcnType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+        if (params.SystemDiskInfo) {
+            let obj = new DiskInfo();
+            obj.deserialize(params.SystemDiskInfo)
+            this.SystemDiskInfo = obj;
+        }
+
+        if (params.DataDiskInfo) {
+            this.DataDiskInfo = new Array();
+            for (let z in params.DataDiskInfo) {
+                let obj = new DiskInfo();
+                obj.deserialize(params.DataDiskInfo[z]);
+                this.DataDiskInfo.push(obj);
+            }
+        }
+        this.SelectedTimerType = 'SelectedTimerType' in params ? params.SelectedTimerType : null;
+
+        if (params.CcnInfos) {
+            this.CcnInfos = new Array();
+            for (let z in params.CcnInfos) {
+                let obj = new CcnInfo();
+                obj.deserialize(params.CcnInfos[z]);
+                this.CcnInfos.push(obj);
+            }
+        }
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
 
     }
 }
@@ -7033,6 +8440,34 @@ class SearchGameServerSessionsResponse extends  AbstractModel {
             }
         }
         this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PutTimerScalingPolicy返回参数结构体
+ * @class
+ */
+class PutTimerScalingPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7128,6 +8563,62 @@ class RoutingStrategy extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.FleetId = 'FleetId' in params ? params.FleetId : null;
         this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * GetGameServerInstanceLogUrl请求参数结构体
+ * @class
+ */
+class GetGameServerInstanceLogUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏舰队ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例IP
+         * @type {string || null}
+         */
+        this.ServerIp = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 每次条数
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ServerIp = 'ServerIp' in params ? params.ServerIp : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
@@ -7251,6 +8742,24 @@ class DescribeFleetEventsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 事件代码
+         * @type {string || null}
+         */
+        this.EventCode = null;
+
+        /**
+         * 发生事件的开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 发生事件的结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -7263,6 +8772,9 @@ class DescribeFleetEventsRequest extends  AbstractModel {
         this.FleetId = 'FleetId' in params ? params.FleetId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.EventCode = 'EventCode' in params ? params.EventCode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -7549,6 +9061,12 @@ class CreateGameServerSessionQueueRequest extends  AbstractModel {
          */
         this.TimeoutInSeconds = null;
 
+        /**
+         * 标签列表，最大长度50组
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -7578,6 +9096,50 @@ class CreateGameServerSessionQueueRequest extends  AbstractModel {
             }
         }
         this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * UpdateFleetName请求参数结构体
+ * @class
+ */
+class UpdateFleetNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队 Id
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 服务器舰队名称，最小长度1，最大长度50
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
@@ -7633,6 +9195,13 @@ class Alias extends  AbstractModel {
          */
         this.LastUpdatedTime = null;
 
+        /**
+         * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -7654,6 +9223,15 @@ class Alias extends  AbstractModel {
         }
         this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
         this.LastUpdatedTime = 'LastUpdatedTime' in params ? params.LastUpdatedTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -8093,6 +9671,41 @@ class FleetStatisticDetail extends  AbstractModel {
 }
 
 /**
+ * 玩家游戏会话信息
+ * @class
+ */
+class DesiredPlayerSession extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 与玩家会话关联的唯一玩家标识
+         * @type {string || null}
+         */
+        this.PlayerId = null;
+
+        /**
+         * 开发人员定义的玩家数据
+         * @type {string || null}
+         */
+        this.PlayerData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
+        this.PlayerData = 'PlayerData' in params ? params.PlayerData : null;
+
+    }
+}
+
+/**
  * JoinGameServerSessionBatch返回参数结构体
  * @class
  */
@@ -8132,6 +9745,48 @@ class JoinGameServerSessionBatchResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetServerReserved请求参数结构体
+ * @class
+ */
+class SetServerReservedRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扩缩容配置服务器舰队ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例是否保留, 1-保留，0-不保留,默认
+         * @type {number || null}
+         */
+        this.ReserveValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ReserveValue = 'ReserveValue' in params ? params.ReserveValue : null;
 
     }
 }
@@ -8366,47 +10021,42 @@ class StopGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
- * 云联网实例信息
+ * DescribeFleetStatisticFlows请求参数结构体
  * @class
  */
-class CcnInstanceSets extends  AbstractModel {
+class DescribeFleetStatisticFlowsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云联网账号 Uin
-注意：此字段可能返回 null，表示取不到有效值。
+         * 服务器舰队ID
          * @type {string || null}
          */
-        this.AccountId = null;
+        this.FleetId = null;
 
         /**
-         * 云联网 Id
-注意：此字段可能返回 null，表示取不到有效值。
+         * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
-        this.CcnId = null;
+        this.BeginTime = null;
 
         /**
-         * 云联网关联时间
-注意：此字段可能返回 null，表示取不到有效值。
+         * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.EndTime = null;
 
         /**
-         * 云联网实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 结果返回最大数量，最小值0，最大值100
+         * @type {number || null}
          */
-        this.InstanceName = null;
+        this.Limit = null;
 
         /**
-         * 云联网状态：申请中、已连接、已过期、已拒绝、已删除、失败的、关联中、解关联中、解关联失败
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 返回结果偏移，最小值0
+         * @type {number || null}
          */
-        this.State = null;
+        this.Offset = null;
 
     }
 
@@ -8417,16 +10067,17 @@ class CcnInstanceSets extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountId = 'AccountId' in params ? params.AccountId : null;
-        this.CcnId = 'CcnId' in params ? params.CcnId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.State = 'State' in params ? params.State : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
 
 module.exports = {
+    TargetConfiguration: TargetConfiguration,
     DeleteGameServerSessionQueueRequest: DeleteGameServerSessionQueueRequest,
     FleetAttributes: FleetAttributes,
     CreateAssetResponse: CreateAssetResponse,
@@ -8434,9 +10085,11 @@ module.exports = {
     GetInstanceAccessResponse: GetInstanceAccessResponse,
     Asset: Asset,
     ListAliasesResponse: ListAliasesResponse,
+    UpdateBucketCORSOptResponse: UpdateBucketCORSOptResponse,
     DeleteGameServerSessionQueueResponse: DeleteGameServerSessionQueueResponse,
     DescribeFleetAttributesRequest: DescribeFleetAttributesRequest,
     ResolveAliasRequest: ResolveAliasRequest,
+    GetGameServerInstanceLogUrlResponse: GetGameServerInstanceLogUrlResponse,
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
     DescribeFleetStatisticDetailsRequest: DescribeFleetStatisticDetailsRequest,
     DescribeAssetSystemsRequest: DescribeAssetSystemsRequest,
@@ -8448,15 +10101,17 @@ module.exports = {
     ListFleetsResponse: ListFleetsResponse,
     DeleteAssetResponse: DeleteAssetResponse,
     DescribeFleetUtilizationResponse: DescribeFleetUtilizationResponse,
+    DescribeFleetRelatedResourcesResponse: DescribeFleetRelatedResourcesResponse,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,
     DeleteFleetRequest: DeleteFleetRequest,
+    TimerScalingPolicy: TimerScalingPolicy,
     DetachCcnInstancesResponse: DetachCcnInstancesResponse,
     DescribeFleetPortSettingsResponse: DescribeFleetPortSettingsResponse,
     DescribeUserQuotasRequest: DescribeUserQuotasRequest,
     UpdateAssetRequest: UpdateAssetRequest,
-    DesiredPlayerSession: DesiredPlayerSession,
+    CcnInfo: CcnInfo,
     UpdateFleetPortSettingsRequest: UpdateFleetPortSettingsRequest,
-    DescribeFleetStatisticFlowsRequest: DescribeFleetStatisticFlowsRequest,
+    CcnInstanceSets: CcnInstanceSets,
     UpdateAliasRequest: UpdateAliasRequest,
     GameServerSessionPlacement: GameServerSessionPlacement,
     JoinGameServerSessionBatchRequest: JoinGameServerSessionBatchRequest,
@@ -8471,13 +10126,17 @@ module.exports = {
     GetUploadFederationTokenResponse: GetUploadFederationTokenResponse,
     DeleteScalingPolicyResponse: DeleteScalingPolicyResponse,
     DescribeFleetStatisticSummaryRequest: DescribeFleetStatisticSummaryRequest,
+    Tag: Tag,
     PlayerDataMap: PlayerDataMap,
     ResolveAliasResponse: ResolveAliasResponse,
     DescribeInstancesExtendResponse: DescribeInstancesExtendResponse,
     Event: Event,
-    UpdateRuntimeConfigurationResponse: UpdateRuntimeConfigurationResponse,
+    PutTimerScalingPolicyRequest: PutTimerScalingPolicyRequest,
+    RelatedCcnInfo: RelatedCcnInfo,
     DescribeCcnInstancesResponse: DescribeCcnInstancesResponse,
     AssetSupportSys: AssetSupportSys,
+    DeleteTimerScalingPolicyResponse: DeleteTimerScalingPolicyResponse,
+    DescribeTimerScalingPoliciesRequest: DescribeTimerScalingPoliciesRequest,
     DescribeInstanceLimitResponse: DescribeInstanceLimitResponse,
     DescribeAssetResponse: DescribeAssetResponse,
     PlacedPlayerSession: PlacedPlayerSession,
@@ -8485,6 +10144,7 @@ module.exports = {
     FleetUtilization: FleetUtilization,
     DescribeGameServerSessionQueuesResponse: DescribeGameServerSessionQueuesResponse,
     DeleteAliasRequest: DeleteAliasRequest,
+    UpdateBucketCORSOptRequest: UpdateBucketCORSOptRequest,
     DescribeAssetSystemsResponse: DescribeAssetSystemsResponse,
     DescribeFleetAttributesResponse: DescribeFleetAttributesResponse,
     GetUploadCredentialsResponse: GetUploadCredentialsResponse,
@@ -8501,19 +10161,22 @@ module.exports = {
     DescribeFleetCapacityRequest: DescribeFleetCapacityRequest,
     DescribeCcnInstancesRequest: DescribeCcnInstancesRequest,
     DescribeFleetStatisticDetailsResponse: DescribeFleetStatisticDetailsResponse,
-    UpdateGameServerSessionQueueRequest: UpdateGameServerSessionQueueRequest,
+    DeleteTimerScalingPolicyRequest: DeleteTimerScalingPolicyRequest,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
     AssetCredentials: AssetCredentials,
-    TargetConfiguration: TargetConfiguration,
+    DescribeFleetRelatedResourcesRequest: DescribeFleetRelatedResourcesRequest,
     DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
     GameServerSessionQueueDestination: GameServerSessionQueueDestination,
+    UpdateGameServerSessionQueueRequest: UpdateGameServerSessionQueueRequest,
     FleetCapacity: FleetCapacity,
     SetServerWeightRequest: SetServerWeightRequest,
     GetGameServerSessionLogUrlResponse: GetGameServerSessionLogUrlResponse,
+    UpdateBucketAccelerateOptRequest: UpdateBucketAccelerateOptRequest,
     DeleteFleetResponse: DeleteFleetResponse,
     StartGameServerSessionPlacementRequest: StartGameServerSessionPlacementRequest,
     InstanceTypeInfo: InstanceTypeInfo,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
+    UpdateRuntimeConfigurationResponse: UpdateRuntimeConfigurationResponse,
     CreateAliasResponse: CreateAliasResponse,
     ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,
     ListFleetsRequest: ListFleetsRequest,
@@ -8534,10 +10197,14 @@ module.exports = {
     CreateGameServerSessionQueueResponse: CreateGameServerSessionQueueResponse,
     DescribeInstanceTypesRequest: DescribeInstanceTypesRequest,
     PlayerLatency: PlayerLatency,
+    SetServerReservedResponse: SetServerReservedResponse,
     StopGameServerSessionPlacementRequest: StopGameServerSessionPlacementRequest,
     UpdateFleetNameResponse: UpdateFleetNameResponse,
+    TimerFleetCapacity: TimerFleetCapacity,
     DescribeAliasRequest: DescribeAliasRequest,
     CreateAliasRequest: CreateAliasRequest,
+    TimerValue: TimerValue,
+    CopyFleetResponse: CopyFleetResponse,
     UpdateGameServerSessionRequest: UpdateGameServerSessionRequest,
     ListAliasesRequest: ListAliasesRequest,
     CreateAssetRequest: CreateAssetRequest,
@@ -8549,15 +10216,18 @@ module.exports = {
     DescribeInstancesRequest: DescribeInstancesRequest,
     QuotaResource: QuotaResource,
     DescribeFleetStatisticFlowsResponse: DescribeFleetStatisticFlowsResponse,
-    InstanceCounts: InstanceCounts,
-    UpdateFleetNameRequest: UpdateFleetNameRequest,
+    DiskInfo: DiskInfo,
+    TimerConfiguration: TimerConfiguration,
     CreateFleetResponse: CreateFleetResponse,
     Filter: Filter,
     UpdateFleetAttributesResponse: UpdateFleetAttributesResponse,
     DescribeFleetUtilizationRequest: DescribeFleetUtilizationRequest,
+    DescribeInstanceTypesResponse: DescribeInstanceTypesResponse,
+    StartFleetActionsResponse: StartFleetActionsResponse,
     DescribeGameServerSessionDetailsRequest: DescribeGameServerSessionDetailsRequest,
     GameServerSession: GameServerSession,
     PlayerLatencyPolicy: PlayerLatencyPolicy,
+    FleetRelatedResource: FleetRelatedResource,
     UpdateRuntimeConfigurationRequest: UpdateRuntimeConfigurationRequest,
     GameProperty: GameProperty,
     CreateAssetWithImageResponse: CreateAssetWithImageResponse,
@@ -8566,14 +10236,18 @@ module.exports = {
     DescribeAssetRequest: DescribeAssetRequest,
     DescribeInstancesExtendRequest: DescribeInstancesExtendRequest,
     DescribeGameServerSessionsResponse: DescribeGameServerSessionsResponse,
-    StartFleetActionsResponse: StartFleetActionsResponse,
+    InstanceCounts: InstanceCounts,
+    UpdateBucketAccelerateOptResponse: UpdateBucketAccelerateOptResponse,
     JoinGameServerSessionRequest: JoinGameServerSessionRequest,
     DescribeUserQuotasResponse: DescribeUserQuotasResponse,
     GetUploadFederationTokenRequest: GetUploadFederationTokenRequest,
-    DescribeInstanceTypesResponse: DescribeInstanceTypesResponse,
+    DescribeTimerScalingPoliciesResponse: DescribeTimerScalingPoliciesResponse,
+    CopyFleetRequest: CopyFleetRequest,
     SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
+    PutTimerScalingPolicyResponse: PutTimerScalingPolicyResponse,
     DescribeFleetEventsResponse: DescribeFleetEventsResponse,
     RoutingStrategy: RoutingStrategy,
+    GetGameServerInstanceLogUrlRequest: GetGameServerInstanceLogUrlRequest,
     DescribeFleetCapacityResponse: DescribeFleetCapacityResponse,
     DescribeUserQuotaResponse: DescribeUserQuotaResponse,
     DescribeFleetEventsRequest: DescribeFleetEventsRequest,
@@ -8582,6 +10256,7 @@ module.exports = {
     PlayerSession: PlayerSession,
     PutScalingPolicyResponse: PutScalingPolicyResponse,
     CreateGameServerSessionQueueRequest: CreateGameServerSessionQueueRequest,
+    UpdateFleetNameRequest: UpdateFleetNameRequest,
     Alias: Alias,
     DescribeRuntimeConfigurationRequest: DescribeRuntimeConfigurationRequest,
     RuntimeConfiguration: RuntimeConfiguration,
@@ -8592,10 +10267,12 @@ module.exports = {
     InstanceAccess: InstanceAccess,
     UpdateFleetCapacityRequest: UpdateFleetCapacityRequest,
     FleetStatisticDetail: FleetStatisticDetail,
+    DesiredPlayerSession: DesiredPlayerSession,
     JoinGameServerSessionBatchResponse: JoinGameServerSessionBatchResponse,
+    SetServerReservedRequest: SetServerReservedRequest,
     InstanceExtend: InstanceExtend,
     PutScalingPolicyRequest: PutScalingPolicyRequest,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
-    CcnInstanceSets: CcnInstanceSets,
+    DescribeFleetStatisticFlowsRequest: DescribeFleetStatisticFlowsRequest,
 
 }
