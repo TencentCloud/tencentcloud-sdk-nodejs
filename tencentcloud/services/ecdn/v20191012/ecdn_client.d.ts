@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { PurgePathCacheRequest, DescribeEcdnStatisticsRequest, StartEcdnDomainRequest, DescribeDomainsConfigResponse, PurgeUrlsCacheRequest, DescribePurgeQuotaResponse, DescribeEcdnDomainStatisticsResponse, StopEcdnDomainRequest, DescribePurgeTasksRequest, DescribeEcdnStatisticsResponse, UpdateDomainConfigResponse, DescribePurgeQuotaRequest, DescribeEcdnDomainLogsResponse, UpdateDomainConfigRequest, DescribeDomainsConfigRequest, StartEcdnDomainResponse, DeleteEcdnDomainResponse, StopEcdnDomainResponse, PurgePathCacheResponse, PurgeUrlsCacheResponse, AddEcdnDomainRequest, DescribeDomainsResponse, DeleteEcdnDomainRequest, DescribePurgeTasksResponse, AddEcdnDomainResponse, DescribeIpStatusResponse, DescribeEcdnDomainStatisticsRequest, DescribeEcdnDomainLogsRequest, DescribeIpStatusRequest, DescribeDomainsRequest } from "./ecdn_models";
+import { PurgePathCacheRequest, DescribeEcdnStatisticsRequest, StartEcdnDomainRequest, DescribeDomainsConfigResponse, CreateVerifyRecordResponse, DescribePurgeQuotaResponse, DescribeEcdnDomainStatisticsResponse, StopEcdnDomainRequest, DescribePurgeTasksRequest, DescribeEcdnStatisticsResponse, PurgeUrlsCacheRequest, UpdateDomainConfigResponse, DescribePurgeQuotaRequest, DescribeEcdnDomainLogsResponse, UpdateDomainConfigRequest, DescribeDomainsConfigRequest, StartEcdnDomainResponse, DeleteEcdnDomainResponse, StopEcdnDomainResponse, PurgePathCacheResponse, PurgeUrlsCacheResponse, AddEcdnDomainRequest, DescribeDomainsResponse, DeleteEcdnDomainRequest, DescribePurgeTasksResponse, AddEcdnDomainResponse, DescribeIpStatusResponse, DescribeEcdnDomainStatisticsRequest, DescribeEcdnDomainLogsRequest, DescribeIpStatusRequest, DescribeDomainsRequest, CreateVerifyRecordRequest } from "./ecdn_models";
 /**
  * ecdn client
  * @class
@@ -63,6 +63,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomains(req: DescribeDomainsRequest, cb?: (error: string, rep: DescribeDomainsResponse) => void): Promise<DescribeDomainsResponse>;
     /**
+     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+     */
+    CreateVerifyRecord(req: CreateVerifyRecordRequest, cb?: (error: string, rep: CreateVerifyRecordResponse) => void): Promise<CreateVerifyRecordResponse>;
+    /**
+     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
+     */
+    DescribeEcdnDomainStatistics(req: DescribeEcdnDomainStatisticsRequest, cb?: (error: string, rep: DescribeEcdnDomainStatisticsResponse) => void): Promise<DescribeEcdnDomainStatisticsResponse>;
+    /**
      * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
 
 + 流量（单位为 byte）
@@ -74,8 +82,4 @@ export declare class Client extends AbstractClient {
 + 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
      */
     DescribeEcdnStatistics(req: DescribeEcdnStatisticsRequest, cb?: (error: string, rep: DescribeEcdnStatisticsResponse) => void): Promise<DescribeEcdnStatisticsResponse>;
-    /**
-     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
-     */
-    DescribeEcdnDomainStatistics(req: DescribeEcdnDomainStatisticsRequest, cb?: (error: string, rep: DescribeEcdnDomainStatisticsResponse) => void): Promise<DescribeEcdnDomainStatisticsResponse>;
 }

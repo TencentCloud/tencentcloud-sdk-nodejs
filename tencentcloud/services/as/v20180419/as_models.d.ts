@@ -186,6 +186,19 @@ export interface ModifyAutoScalingGroupRequest {
     MultiZoneSubnetPolicy?: string;
 }
 /**
+ * ScaleOutInstances请求参数结构体
+ */
+export interface ScaleOutInstancesRequest {
+    /**
+      * 伸缩组ID。
+      */
+    AutoScalingGroupId: string;
+    /**
+      * 希望扩容的实例数量。
+      */
+    ScaleOutNumber: number;
+}
+/**
  * 弹性伸缩事件通知
  */
 export interface AutoScalingNotification {
@@ -2010,6 +2023,19 @@ export interface CompleteLifecycleActionResponse {
     RequestId?: string;
 }
 /**
+ * ScaleOutInstances返回参数结构体
+ */
+export interface ScaleOutInstancesResponse {
+    /**
+      * 伸缩活动ID。
+      */
+    ActivityId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
@@ -2287,6 +2313,19 @@ export interface CreateScalingPolicyRequest {
     NotificationUserGroupIds?: Array<string>;
 }
 /**
+ * ScaleInInstances返回参数结构体
+ */
+export interface ScaleInInstancesResponse {
+    /**
+      * 伸缩活动ID。
+      */
+    ActivityId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteNotificationConfiguration请求参数结构体
  */
 export interface DeleteNotificationConfigurationRequest {
@@ -2447,6 +2486,19 @@ export interface DescribeNotificationConfigurationsRequest {
       * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
     Offset?: number;
+}
+/**
+ * ScaleInInstances请求参数结构体
+ */
+export interface ScaleInInstancesRequest {
+    /**
+      * 伸缩组ID。
+      */
+    AutoScalingGroupId: string;
+    /**
+      * 希望缩容的实例数量。
+      */
+    ScaleInNumber: number;
 }
 /**
  * 生命周期挂钩

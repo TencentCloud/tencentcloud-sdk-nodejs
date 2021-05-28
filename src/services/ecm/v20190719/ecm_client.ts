@@ -458,7 +458,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建ECM实例
+   * 创建ECM实例。
    */
   async RunInstances(
     req: RunInstancesRequest,

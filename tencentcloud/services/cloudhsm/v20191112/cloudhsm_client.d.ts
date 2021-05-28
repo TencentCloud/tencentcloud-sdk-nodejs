@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSubnetRequest, DescribeVsmsResponse, InquiryPriceBuyVsmRequest, DescribeVpcResponse, ModifyVsmAttributesRequest, DescribeSubnetResponse, DescribeHSMByVpcIdRequest, DescribeHSMByVpcIdResponse, DescribeUsgRuleResponse, DescribeVpcRequest, DescribeUsgRequest, DescribeVsmAttributesResponse, InquiryPriceBuyVsmResponse, DescribeHSMBySubnetIdResponse, DescribeUsgResponse, DescribeHSMBySubnetIdRequest, DescribeVsmsRequest, DescribeUsgRuleRequest, ModifyVsmAttributesResponse, DescribeVsmAttributesRequest } from "./cloudhsm_models";
+import { DescribeSubnetRequest, DescribeVsmsResponse, DescribeSupportedHsmResponse, InquiryPriceBuyVsmRequest, DescribeVpcResponse, ModifyVsmAttributesRequest, DescribeSubnetResponse, DescribeSupportedHsmRequest, DescribeHSMByVpcIdResponse, DescribeUsgRuleResponse, DescribeVpcRequest, DescribeUsgRequest, DescribeVsmAttributesResponse, DescribeHSMByVpcIdRequest, InquiryPriceBuyVsmResponse, DescribeHSMBySubnetIdResponse, DescribeUsgResponse, DescribeHSMBySubnetIdRequest, DescribeVsmsRequest, DescribeUsgRuleRequest, ModifyVsmAttributesResponse, DescribeVsmAttributesRequest } from "./cloudhsm_models";
 /**
  * cloudhsm client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 查询子网列表
      */
     DescribeSubnet(req: DescribeSubnetRequest, cb?: (error: string, rep: DescribeSubnetResponse) => void): Promise<DescribeSubnetResponse>;
+    /**
+     * 获取当前地域所支持的设备列表
+     */
+    DescribeSupportedHsm(req?: DescribeSupportedHsmRequest, cb?: (error: string, rep: DescribeSupportedHsmResponse) => void): Promise<DescribeSupportedHsmResponse>;
     /**
      * 购买询价接口
      */

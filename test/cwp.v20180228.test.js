@@ -738,6 +738,16 @@ it("cwp.v20180228.DescribeBruteAttacks", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeBruteAttackList", async function () {
+    try {
+       const data = await client.DescribeBruteAttackList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.OpenProVersionPrepaid", async function () {
     try {
        const data = await client.OpenProVersionPrepaid({})

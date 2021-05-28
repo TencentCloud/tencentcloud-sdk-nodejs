@@ -88,6 +88,16 @@ it("as.v20180419.DeleteAutoScalingGroup", async function () {
     }
 })
 
+it("as.v20180419.ScaleOutInstances", async function () {
+    try {
+       const data = await client.ScaleOutInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.StartAutoScalingInstances", async function () {
     try {
        const data = await client.StartAutoScalingInstances({})
@@ -151,6 +161,16 @@ it("as.v20180419.DeleteScheduledAction", async function () {
 it("as.v20180419.DetachInstances", async function () {
     try {
        const data = await client.DetachInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("as.v20180419.ScaleInInstances", async function () {
+    try {
+       const data = await client.ScaleInInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

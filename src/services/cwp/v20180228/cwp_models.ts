@@ -1382,6 +1382,28 @@ export interface OpenPortStatistics {
 }
 
 /**
+ * DescribeBruteAttackList返回参数结构体
+ */
+export interface DescribeBruteAttackListResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 密码破解列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BruteAttackList: Array<BruteAttackInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeExportMachines返回参数结构体
  */
 export interface DescribeExportMachinesResponse {
@@ -5254,6 +5276,33 @@ export interface DescribeReverseShellRulesResponse {
 }
 
 /**
+ * DescribeBruteAttackList请求参数结构体
+ */
+export interface DescribeBruteAttackListRequest {
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+      * 过滤条件。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>Status - String - 是否必填：否 - 状态筛选：失败：FAILED 成功：SUCCESS</li>
+<li>UserName - String - 是否必填：否 - UserName筛选</li>
+<li>SrcIp - String - 是否必填：否 - 来源ip筛选</li>
+<li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选，开始时间</li>
+<li>CreateEndTime - String - 是否必填：否 - 创建时间筛选，结束时间</li>
+<li>Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-已阻断，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断</li>
+      */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeComponentInfo请求参数结构体
  */
 export interface DescribeComponentInfoRequest {
@@ -6087,73 +6136,121 @@ export interface DescribeHistoryAccountsRequest {
 }
 
 /**
- * DescribeSecurityEventsCnt返回参数结构体
+ * 密码破解列表实体
  */
-export interface DescribeSecurityEventsCntResponse {
+export interface BruteAttackInfo {
   /**
-   * 木马文件相关风险事件
+   * 唯一Id
    */
-  Malware?: SecurityEventInfo
+  Id: number
 
   /**
-   * 登录审计相关风险事件
-   */
-  HostLogin?: SecurityEventInfo
+      * 云镜客户端唯一标识UUID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uuid: string
 
   /**
-   * 密码破解相关风险事件
-   */
-  BruteAttack?: SecurityEventInfo
+      * 主机ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineIp: string
 
   /**
-   * 恶意请求相关风险事件
-   */
-  RiskDns?: SecurityEventInfo
+      * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineName: string
 
   /**
-   * 高危命令相关风险事件
-   */
-  Bash?: SecurityEventInfo
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
 
   /**
-   * 本地提权相关风险事件
-   */
-  PrivilegeRules?: SecurityEventInfo
+      * 来源ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SrcIp: string
 
   /**
-   * 反弹Shell相关风险事件
-   */
-  ReverseShell?: SecurityEventInfo
+      * 失败：FAILED；成功：SUCCESS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 
   /**
-   * 系统组件相关风险事件
-   */
-  SysVul?: SecurityEventInfo
+      * 国家id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Country: number
 
   /**
-   * Web应用漏洞相关风险事件
-   */
-  WebVul?: SecurityEventInfo
+      * 城市id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  City: number
 
   /**
-   * 应急漏洞相关风险事件
-   */
-  EmergencyVul?: SecurityEventInfo
+      * 省份id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Province: number
 
   /**
-   * 安全基线相关风险事件
-   */
-  BaseLine?: SecurityEventInfo
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
 
   /**
-   * 攻击检测相关风险事件
-   */
-  AttackLogs?: SecurityEventInfo
+      * 阻断状态：0-未阻断；1-已阻断；2-阻断失败；3-内网攻击暂不支持阻断；4-安平暂不支持阻断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BanStatus: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventType: number
+
+  /**
+      * 发生次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Count: number
+
+  /**
+      * 机器UUID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Quuid: string
+
+  /**
+      * 是否为专业版（true/false）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsProVersion: boolean
+
+  /**
+      * 被攻击的服务的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol: string
+
+  /**
+      * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: number
+
+  /**
+      * 最近攻击时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyTime: string
 }
 
 /**
@@ -6716,6 +6813,76 @@ export interface DescribeMachinesRequest {
  * ModifyAlarmAttribute返回参数结构体
  */
 export interface ModifyAlarmAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityEventsCnt返回参数结构体
+ */
+export interface DescribeSecurityEventsCntResponse {
+  /**
+   * 木马文件相关风险事件
+   */
+  Malware?: SecurityEventInfo
+
+  /**
+   * 登录审计相关风险事件
+   */
+  HostLogin?: SecurityEventInfo
+
+  /**
+   * 密码破解相关风险事件
+   */
+  BruteAttack?: SecurityEventInfo
+
+  /**
+   * 恶意请求相关风险事件
+   */
+  RiskDns?: SecurityEventInfo
+
+  /**
+   * 高危命令相关风险事件
+   */
+  Bash?: SecurityEventInfo
+
+  /**
+   * 本地提权相关风险事件
+   */
+  PrivilegeRules?: SecurityEventInfo
+
+  /**
+   * 反弹Shell相关风险事件
+   */
+  ReverseShell?: SecurityEventInfo
+
+  /**
+   * 系统组件相关风险事件
+   */
+  SysVul?: SecurityEventInfo
+
+  /**
+   * Web应用漏洞相关风险事件
+   */
+  WebVul?: SecurityEventInfo
+
+  /**
+   * 应急漏洞相关风险事件
+   */
+  EmergencyVul?: SecurityEventInfo
+
+  /**
+   * 安全基线相关风险事件
+   */
+  BaseLine?: SecurityEventInfo
+
+  /**
+   * 攻击检测相关风险事件
+   */
+  AttackLogs?: SecurityEventInfo
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

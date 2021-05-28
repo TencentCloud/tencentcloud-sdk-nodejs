@@ -461,6 +461,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBruteAttacks", req, cb);
     }
     /**
+     * 获取密码破解列表
+     */
+    async DescribeBruteAttackList(req, cb) {
+        return this.request("DescribeBruteAttackList", req, cb);
+    }
+    /**
      * 本接口 (OpenProVersionPrepaid) 用于开通专业版(包年包月)。
      */
     async OpenProVersionPrepaid(req, cb) {

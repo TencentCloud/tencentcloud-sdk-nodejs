@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSubnet", req, cb);
     }
     /**
+     * 获取当前地域所支持的设备列表
+     */
+    async DescribeSupportedHsm(req, cb) {
+        return this.request("DescribeSupportedHsm", req, cb);
+    }
+    /**
      * 购买询价接口
      */
     async InquiryPriceBuyVsm(req, cb) {

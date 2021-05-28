@@ -109,6 +109,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomains", req, cb);
     }
     /**
+     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+     */
+    async CreateVerifyRecord(req, cb) {
+        return this.request("CreateVerifyRecord", req, cb);
+    }
+    /**
+     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
+     */
+    async DescribeEcdnDomainStatistics(req, cb) {
+        return this.request("DescribeEcdnDomainStatistics", req, cb);
+    }
+    /**
      * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
 
 + 流量（单位为 byte）
@@ -121,12 +133,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEcdnStatistics(req, cb) {
         return this.request("DescribeEcdnStatistics", req, cb);
-    }
-    /**
-     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
-     */
-    async DescribeEcdnDomainStatistics(req, cb) {
-        return this.request("DescribeEcdnDomainStatistics", req, cb);
     }
 }
 exports.Client = Client;

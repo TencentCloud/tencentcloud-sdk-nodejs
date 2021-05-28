@@ -1004,19 +1004,19 @@ export interface ServerlessDBInstanceNetInfo {
  */
 export interface DescribeDBInstancesRequest {
   /**
-   * 过滤条件，目前支持：db-instance-id、db-instance-name、db-project-id、db-pay-mode、db-tag-key。
-   */
+      * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
+db-instance-id：按照实例ID过滤，类型为string
+db-instance-name：按照实例名过滤，类型为string
+db-project-id：按照项目ID过滤，类型为integer
+db-pay-mode：按照付费模式过滤，类型为string
+db-tag-key：按照标签键过滤，类型为string
+      */
   Filters?: Array<Filter>
 
   /**
-   * 每页显示数量，默认返回10条。
+   * 每页显示数量，取值范围为1-100，默认为返回10条。
    */
   Limit?: number
-
-  /**
-   * 数据偏移量，从0开始。
-   */
-  Offset?: number
 
   /**
    * 排序指标，如实例名、创建时间等，支持DBInstanceId,CreateTime,Name,EndTime
@@ -1024,7 +1024,12 @@ export interface DescribeDBInstancesRequest {
   OrderBy?: string
 
   /**
-   * 排序方式，包括升序、降序
+   * 页码偏移量，从0开始。
+   */
+  Offset?: number
+
+  /**
+   * 排序方式，包括升序：asc、降序：desc。
    */
   OrderByType?: string
 }
@@ -2612,12 +2617,12 @@ export interface DescribeDBInstancesResponse {
   /**
    * 查询到的实例数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例详细信息集合。
    */
-  DBInstanceSet?: Array<DBInstance>
+  DBInstanceSet: Array<DBInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

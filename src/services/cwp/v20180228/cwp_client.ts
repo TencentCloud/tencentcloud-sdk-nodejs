@@ -78,6 +78,7 @@ import {
   DescribeMaliciousRequestsResponse,
   ReverseShellRule,
   OpenPortStatistics,
+  DescribeBruteAttackListResponse,
   DescribeExportMachinesResponse,
   DescribeVulInfoResponse,
   EditPrivilegeRuleResponse,
@@ -256,6 +257,7 @@ import {
   ImpactedHost,
   DescribeESAggregationsRequest,
   DescribeReverseShellRulesResponse,
+  DescribeBruteAttackListRequest,
   DescribeComponentInfoRequest,
   DeleteNonlocalLoginPlacesRequest,
   EditPrivilegeRuleRequest,
@@ -284,7 +286,7 @@ import {
   DescribeProcessStatisticsRequest,
   DeleteMachineTagResponse,
   DescribeHistoryAccountsRequest,
-  DescribeSecurityEventsCntResponse,
+  BruteAttackInfo,
   DescribeMachineInfoResponse,
   OpenProVersionRequest,
   DescribeImpactedHostsRequest,
@@ -314,6 +316,7 @@ import {
   DeleteMaliciousRequestsRequest,
   DescribeMachinesRequest,
   ModifyAlarmAttributeResponse,
+  DescribeSecurityEventsCntResponse,
   Filters,
   BashEvent,
   DeleteMalwaresRequest,
@@ -1051,6 +1054,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBruteAttacksResponse) => void
   ): Promise<DescribeBruteAttacksResponse> {
     return this.request("DescribeBruteAttacks", req, cb)
+  }
+
+  /**
+   * 获取密码破解列表
+   */
+  async DescribeBruteAttackList(
+    req: DescribeBruteAttackListRequest,
+    cb?: (error: string, rep: DescribeBruteAttackListResponse) => void
+  ): Promise<DescribeBruteAttackListResponse> {
+    return this.request("DescribeBruteAttackList", req, cb)
   }
 
   /**

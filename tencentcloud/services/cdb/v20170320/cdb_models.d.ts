@@ -736,7 +736,7 @@ export interface CreateDeployGroupResponse {
     /**
       * 置放群组ID。
       */
-    DeployGroupId?: string;
+    DeployGroupId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1765,12 +1765,12 @@ export interface DescribeErrorLogDataResponse {
     /**
       * 符合条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 返回的记录。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Items?: Array<ErrlogItem>;
+    Items: Array<ErrlogItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4101,12 +4101,12 @@ export interface DescribeDeployGroupListResponse {
     /**
       * 符合条件的记录总数。
       */
-    Total?: number;
+    Total: number;
     /**
       * 返回列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Items?: Array<DeployGroupInfo>;
+    Items: Array<DeployGroupInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

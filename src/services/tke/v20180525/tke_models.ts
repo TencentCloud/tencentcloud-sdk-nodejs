@@ -1452,6 +1452,24 @@ export interface ClusterNetworkSettings {
    * 网络插件是否启用CNI(默认开启)
    */
   Cni?: boolean
+
+  /**
+      * service的网络模式，当前参数只适用于ipvs+bpf模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KubeProxyMode: string
+
+  /**
+      * 用于分配service的IP range，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceCIDR: string
+
+  /**
+      * 集群关联的容器子网
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Subnets: Array<string>
 }
 
 /**
@@ -2612,6 +2630,21 @@ export interface ClusterExtraArgs {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Etcd?: Array<string>
+}
+
+/**
+ * DescribeRouteTableConflicts请求参数结构体
+ */
+export interface DescribeRouteTableConflictsRequest {
+  /**
+   * 路由表CIDR
+   */
+  RouteTableCidrBlock: string
+
+  /**
+   * 路由表绑定的VPC
+   */
+  VpcId: string
 }
 
 /**
@@ -3914,6 +3947,21 @@ export interface DeleteClusterRouteTableResponse {
 }
 
 /**
+ * CreateClusterInstances返回参数结构体
+ */
+export interface CreateClusterInstancesResponse {
+  /**
+   * 节点实例ID
+   */
+  InstanceIdSet?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterAsGroupOption请求参数结构体
  */
 export interface DescribeClusterAsGroupOptionRequest {
@@ -4135,14 +4183,9 @@ export interface ClusterAsGroupOption {
 }
 
 /**
- * CreateClusterInstances返回参数结构体
+ * AddVpcCniSubnets返回参数结构体
  */
-export interface CreateClusterInstancesResponse {
-  /**
-   * 节点实例ID
-   */
-  InstanceIdSet?: Array<string>
-
+export interface AddVpcCniSubnetsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4540,16 +4583,21 @@ export interface DescribeClusterRouteTablesResponse {
 }
 
 /**
- * DescribeRouteTableConflicts请求参数结构体
+ * AddVpcCniSubnets请求参数结构体
  */
-export interface DescribeRouteTableConflictsRequest {
+export interface AddVpcCniSubnetsRequest {
   /**
-   * 路由表CIDR
+   * 集群ID
    */
-  RouteTableCidrBlock: string
+  ClusterId: string
 
   /**
-   * 路由表绑定的VPC
+   * 为集群容器网络增加的子网列表
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * 集群所属的VPC的ID
    */
   VpcId: string
 }

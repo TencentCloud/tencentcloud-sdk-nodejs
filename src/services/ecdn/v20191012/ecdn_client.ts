@@ -23,7 +23,7 @@ import {
   StartEcdnDomainRequest,
   DescribeDomainsConfigResponse,
   Https,
-  PurgeUrlsCacheRequest,
+  CreateVerifyRecordResponse,
   ResourceData,
   Cache,
   ForceRedirect,
@@ -38,6 +38,7 @@ import {
   DescribeEcdnStatisticsResponse,
   DomainLogs,
   Hsts,
+  PurgeUrlsCacheRequest,
   HttpHeaderPathRule,
   UpdateDomainConfigResponse,
   DetailData,
@@ -76,6 +77,7 @@ import {
   DomainDetailInfo,
   DescribeIpStatusRequest,
   DescribeDomainsRequest,
+  CreateVerifyRecordRequest,
 } from "./ecdn_models"
 
 /**
@@ -221,6 +223,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+   */
+  async CreateVerifyRecord(
+    req: CreateVerifyRecordRequest,
+    cb?: (error: string, rep: CreateVerifyRecordResponse) => void
+  ): Promise<CreateVerifyRecordResponse> {
+    return this.request("CreateVerifyRecord", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
+   */
+  async DescribeEcdnDomainStatistics(
+    req: DescribeEcdnDomainStatisticsRequest,
+    cb?: (error: string, rep: DescribeEcdnDomainStatisticsResponse) => void
+  ): Promise<DescribeEcdnDomainStatisticsResponse> {
+    return this.request("DescribeEcdnDomainStatistics", req, cb)
+  }
+
+  /**
      * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
 
 + 流量（单位为 byte）
@@ -236,15 +258,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEcdnStatisticsResponse) => void
   ): Promise<DescribeEcdnStatisticsResponse> {
     return this.request("DescribeEcdnStatistics", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
-   */
-  async DescribeEcdnDomainStatistics(
-    req: DescribeEcdnDomainStatisticsRequest,
-    cb?: (error: string, rep: DescribeEcdnDomainStatisticsResponse) => void
-  ): Promise<DescribeEcdnDomainStatisticsResponse> {
-    return this.request("DescribeEcdnDomainStatistics", req, cb)
   }
 }

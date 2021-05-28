@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyPrivateIpAddressesAttribute(req: ModifyPrivateIpAddressesAttributeRequest, cb?: (error: string, rep: ModifyPrivateIpAddressesAttributeResponse) => void): Promise<ModifyPrivateIpAddressesAttributeResponse>;
     /**
-     * 创建ECM实例
+     * 创建ECM实例。
      */
     RunInstances(req: RunInstancesRequest, cb?: (error: string, rep: RunInstancesResponse) => void): Promise<RunInstancesResponse>;
     /**

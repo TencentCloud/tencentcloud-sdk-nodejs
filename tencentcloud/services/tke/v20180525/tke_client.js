@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterEndpointVipStatus", req, cb);
     }
     /**
+     * 针对VPC-CNI模式的集群，增加集群容器网络可使用的子网
+     */
+    async AddVpcCniSubnets(req, cb) {
+        return this.request("AddVpcCniSubnets", req, cb);
+    }
+    /**
      * 删除集群(YUNAPI V3版本)
      */
     async DeleteCluster(req, cb) {

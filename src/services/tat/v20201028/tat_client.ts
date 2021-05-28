@@ -46,6 +46,7 @@ import {
   DeleteCommandRequest,
   InvokeCommandRequest,
   DescribeRegionsRequest,
+  Tag,
   RunCommandResponse,
   DescribeRegionsResponse,
   CreateCommandRequest,

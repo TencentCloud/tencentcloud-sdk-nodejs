@@ -123,6 +123,7 @@ import {
   LoginSettings,
   DescribePrometheusOverviewsRequest,
   ClusterExtraArgs,
+  DescribeRouteTableConflictsRequest,
   SyncPrometheusTemplateResponse,
   DataDisk,
   DeleteEKSClusterRequest,
@@ -174,6 +175,7 @@ import {
   DescribePrometheusAgentsResponse,
   AddExistedInstancesResponse,
   DeleteClusterRouteTableResponse,
+  CreateClusterInstancesResponse,
   DescribeClusterAsGroupOptionRequest,
   DescribePrometheusAgentInstancesResponse,
   CreateClusterEndpointRequest,
@@ -181,7 +183,7 @@ import {
   ModifyClusterAsGroupOptionAttributeResponse,
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
-  CreateClusterInstancesResponse,
+  AddVpcCniSubnetsResponse,
   ModifyNodePoolDesiredCapacityAboutAsgRequest,
   DescribeClusterNodePoolsRequest,
   DescribeClusterRouteTablesRequest,
@@ -204,7 +206,7 @@ import {
   DescribeImagesRequest,
   DescribeAvailableClusterVersionResponse,
   DescribeClusterRouteTablesResponse,
-  DescribeRouteTableConflictsRequest,
+  AddVpcCniSubnetsRequest,
   InstanceUpgradePreCheckResultItem,
   DescribePrometheusAlertHistoryResponse,
   DescribeClusterCommonNamesResponse,
@@ -476,6 +478,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterEndpointVipStatusResponse) => void
   ): Promise<DescribeClusterEndpointVipStatusResponse> {
     return this.request("DescribeClusterEndpointVipStatus", req, cb)
+  }
+
+  /**
+   * 针对VPC-CNI模式的集群，增加集群容器网络可使用的子网
+   */
+  async AddVpcCniSubnets(
+    req: AddVpcCniSubnetsRequest,
+    cb?: (error: string, rep: AddVpcCniSubnetsResponse) => void
+  ): Promise<AddVpcCniSubnetsResponse> {
+    return this.request("AddVpcCniSubnets", req, cb)
   }
 
   /**

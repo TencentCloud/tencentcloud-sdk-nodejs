@@ -139,13 +139,25 @@ export interface Https {
     Hsts?: Hsts;
 }
 /**
- * PurgeUrlsCache请求参数结构体
+ * CreateVerifyRecord返回参数结构体
  */
-export interface PurgeUrlsCacheRequest {
+export interface CreateVerifyRecordResponse {
     /**
-      * 要刷新的Url列表，必须包含协议头部。
+      * 子解析
       */
-    Urls: Array<string>;
+    SubDomain: string;
+    /**
+      * 解析值
+      */
+    Record: string;
+    /**
+      * 解析类型
+      */
+    RecordType: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询对象及其对应的访问明细数据
@@ -385,6 +397,15 @@ export interface Hsts {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IncludeSubDomains?: string;
+}
+/**
+ * PurgeUrlsCache请求参数结构体
+ */
+export interface PurgeUrlsCacheRequest {
+    /**
+      * 要刷新的Url列表，必须包含协议头部。
+      */
+    Urls: Array<string>;
 }
 /**
  * 分路径的http头部设置规则。
@@ -1281,4 +1302,13 @@ export interface DescribeDomainsRequest {
       * 查询条件过滤器。
       */
     Filters?: Array<DomainFilter>;
+}
+/**
+ * CreateVerifyRecord请求参数结构体
+ */
+export interface CreateVerifyRecordRequest {
+    /**
+      * 要取回的域名
+      */
+    Domain: string;
 }

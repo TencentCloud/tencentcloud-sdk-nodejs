@@ -148,9 +148,9 @@ it("ecdn.v20191012.DescribeDomains", async function () {
     }
 })
 
-it("ecdn.v20191012.DescribeEcdnStatistics", async function () {
+it("ecdn.v20191012.CreateVerifyRecord", async function () {
     try {
-       const data = await client.DescribeEcdnStatistics({})
+       const data = await client.CreateVerifyRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +161,16 @@ it("ecdn.v20191012.DescribeEcdnStatistics", async function () {
 it("ecdn.v20191012.DescribeEcdnDomainStatistics", async function () {
     try {
        const data = await client.DescribeEcdnDomainStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecdn.v20191012.DescribeEcdnStatistics", async function () {
+    try {
+       const data = await client.DescribeEcdnStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

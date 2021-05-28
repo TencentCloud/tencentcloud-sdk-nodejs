@@ -98,6 +98,16 @@ it("cloudhsm.v20191112.DescribeSubnet", async function () {
     }
 })
 
+it("cloudhsm.v20191112.DescribeSupportedHsm", async function () {
+    try {
+       const data = await client.DescribeSupportedHsm({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudhsm.v20191112.InquiryPriceBuyVsm", async function () {
     try {
        const data = await client.InquiryPriceBuyVsm({})

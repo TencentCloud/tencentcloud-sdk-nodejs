@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrivateIpAddressesAttribute", req, cb);
     }
     /**
-     * 创建ECM实例
+     * 创建ECM实例。
      */
     async RunInstances(req, cb) {
         return this.request("RunInstances", req, cb);

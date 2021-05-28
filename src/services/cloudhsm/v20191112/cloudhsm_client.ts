@@ -21,11 +21,14 @@ import {
   Subnet,
   DescribeSubnetRequest,
   DescribeVsmsResponse,
+  DescribeSupportedHsmResponse,
   InquiryPriceBuyVsmRequest,
   DescribeVpcResponse,
   ModifyVsmAttributesRequest,
   DescribeSubnetResponse,
-  DescribeHSMByVpcIdRequest,
+  VsmInfo,
+  DescribeSupportedHsmRequest,
+  SgUnit,
   DescribeHSMByVpcIdResponse,
   DescribeUsgRuleResponse,
   Tag,
@@ -35,13 +38,15 @@ import {
   DescribeUsgRequest,
   DescribeVsmAttributesResponse,
   TagFilter,
-  SgUnit,
+  DescribeHSMByVpcIdRequest,
   UsgRuleDetail,
   InquiryPriceBuyVsmResponse,
   DescribeHSMBySubnetIdResponse,
+  HsmInfo,
   DescribeUsgResponse,
   DescribeHSMBySubnetIdRequest,
   DescribeVsmsRequest,
+  DeviceInfo,
   DescribeUsgRuleRequest,
   ModifyVsmAttributesResponse,
   DescribeVsmAttributesRequest,
@@ -135,6 +140,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSubnetResponse) => void
   ): Promise<DescribeSubnetResponse> {
     return this.request("DescribeSubnet", req, cb)
+  }
+
+  /**
+   * 获取当前地域所支持的设备列表
+   */
+  async DescribeSupportedHsm(
+    req?: DescribeSupportedHsmRequest,
+    cb?: (error: string, rep: DescribeSupportedHsmResponse) => void
+  ): Promise<DescribeSupportedHsmResponse> {
+    return this.request("DescribeSupportedHsm", req, cb)
   }
 
   /**

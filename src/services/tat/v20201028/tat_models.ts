@@ -663,6 +663,11 @@ export interface Command {
    * 命令创建者。TAT 代表公共命令，USER 代表个人命令。
    */
   CreatedBy: string
+
+  /**
+   * 命令关联的标签列表。
+   */
+  Tags: Array<Tag>
 }
 
 /**
@@ -821,6 +826,21 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
  * DescribeRegions请求参数结构体
  */
 export type DescribeRegionsRequest = null
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签键。
+   */
+  Key: string
+
+  /**
+   * 标签值。
+   */
+  Value: string
+}
 
 /**
  * RunCommand返回参数结构体

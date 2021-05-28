@@ -88,6 +88,19 @@ export interface DescribeVsmsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSupportedHsm返回参数结构体
+ */
+export interface DescribeSupportedHsmResponse {
+    /**
+      * 当前地域所支持的设备列表
+      */
+    DeviceTypes: Array<DeviceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * InquiryPriceBuyVsm请求参数结构体
  */
 export interface InquiryPriceBuyVsmRequest {
@@ -185,13 +198,46 @@ export interface DescribeSubnetResponse {
     RequestId?: string;
 }
 /**
- * DescribeHSMByVpcId请求参数结构体
+ * 支持的Vsm类型信息
  */
-export interface DescribeHSMByVpcIdRequest {
+export interface VsmInfo {
     /**
-      * VPC标识符
+      * VSM类型名称
       */
-    VpcId: string;
+    TypeName: string;
+    /**
+      * VSM类型值
+      */
+    TypeID: number;
+}
+/**
+ * DescribeSupportedHsm请求参数结构体
+ */
+export declare type DescribeSupportedHsmRequest = null;
+/**
+ * 安全组基础信息
+ */
+export interface SgUnit {
+    /**
+      * 安全组Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SgId: string;
+    /**
+      * 安全组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SgName: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SgRemark: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
 }
 /**
  * DescribeHSMByVpcId返回参数结构体
@@ -351,6 +397,11 @@ export interface ResourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<Tag>;
+    /**
+      * 厂商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Manufacturer: string;
 }
 /**
  * DescribeVpc请求参数结构体
@@ -515,6 +566,11 @@ export interface DescribeVsmAttributesResponse {
       */
     RenewFlag: number;
     /**
+      * 厂商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Manufacturer: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -533,29 +589,13 @@ export interface TagFilter {
     TagValue?: Array<string>;
 }
 /**
- * 安全组基础信息
+ * DescribeHSMByVpcId请求参数结构体
  */
-export interface SgUnit {
+export interface DescribeHSMByVpcIdRequest {
     /**
-      * 安全组Id
-注意：此字段可能返回 null，表示取不到有效值。
+      * VPC标识符
       */
-    SgId: string;
-    /**
-      * 安全组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SgName: string;
-    /**
-      * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SgRemark: string;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
+    VpcId: string;
 }
 /**
  * 安全组规则详情
@@ -649,6 +689,19 @@ export interface DescribeHSMBySubnetIdResponse {
     RequestId?: string;
 }
 /**
+ * 支持的加密机类型信息
+ */
+export interface HsmInfo {
+    /**
+      * 加密机型号
+      */
+    Model: string;
+    /**
+      * 此类型的加密机所支持的VSM类型列表
+      */
+    VsmTypes: Array<VsmInfo>;
+}
+/**
  * DescribeUsg返回参数结构体
  */
 export interface DescribeUsgResponse {
@@ -695,6 +748,23 @@ export interface DescribeVsmsRequest {
       * 标签过滤条件
       */
     TagFilters?: Array<TagFilter>;
+    /**
+      * 设备所属的厂商名称，根据厂商来进行筛选
+      */
+    Manufacturer?: string;
+}
+/**
+ * 设备厂商信息
+ */
+export interface DeviceInfo {
+    /**
+      * 厂商名称
+      */
+    Manufacturer: string;
+    /**
+      * 此厂商旗下的设备信息列表
+      */
+    HsmTypes: Array<HsmInfo>;
 }
 /**
  * DescribeUsgRule请求参数结构体

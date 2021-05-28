@@ -802,6 +802,36 @@ export interface MusicDetailInfo {
    * 商业化权益
    */
   Score?: number
+
+  /**
+   * 场景信息
+   */
+  Scene?: Array<string>
+
+  /**
+   * 应用地域
+   */
+  Region?: Array<string>
+
+  /**
+   * 授权期限
+   */
+  AuthPeriod?: string
+
+  /**
+   * 商业化权益
+   */
+  Commercialization?: string
+
+  /**
+   * 跨平台传播权益
+   */
+  Platform?: string
+
+  /**
+   * 传播渠道
+   */
+  Channel?: string
 }
 
 /**
@@ -910,8 +940,11 @@ export interface DescribeCloudMusicRequest {
   MusicId: string
 
   /**
-      * MP3-320K-FTD-P  为获取320kbps歌曲热门片段。
-MP3-320K-FTD 为获取320kbps已核验歌曲完整资源。
+      * 歌曲类型，可选值有：
+<li>MP3-128K-FTW：含有水印的试听资源；</li>
+<li>MP3-320K-FTD-P：320kbps歌曲热门片段；</li>
+<li>MP3-320K-FTD：320kbps已核验歌曲完整资源。</li>
+默认为：MP3-128K-FTW
       */
   MusicType?: string
 }
