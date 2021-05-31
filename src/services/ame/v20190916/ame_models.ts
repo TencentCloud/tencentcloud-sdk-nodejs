@@ -146,6 +146,16 @@ Unit :ms
 }
 
 /**
+ * DescribeKTVMusicDetail请求参数结构体
+ */
+export interface DescribeKTVMusicDetailRequest {
+  /**
+   * 曲目 Id
+   */
+  MusicId: string
+}
+
+/**
  * DescribeStations返回参数结构体
  */
 export interface DescribeStationsResponse {
@@ -294,62 +304,38 @@ export interface DataInfo {
 }
 
 /**
- * 对外开放信息
+ * KTV 曲目基础信息
  */
-export interface MusicOpenDetail {
+export interface KTVMusicBaseInfo {
   /**
-      * 音乐Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 歌曲 Id
+   */
   MusicId: string
 
   /**
-      * 专辑名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AlbumName: string
+   * 歌曲名称
+   */
+  Name: string
 
   /**
-      * 专辑图片路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AlbumImageUrl: string
+   * 演唱者列表
+   */
+  SingerSet: Array<string>
 
   /**
-      * 音乐名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MusicName: string
+   * 作词者列表
+   */
+  LyricistSet: Array<string>
 
   /**
-      * 音乐图片路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MusicImageUrl: string
+   * 作曲者列表
+   */
+  ComposerSet: Array<string>
 
   /**
-      * 歌手
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Singers: Array<string>
-
-  /**
-      * 播放时长
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Duration: number
-
-  /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<string>
-
-  /**
-      * 歌词url
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LyricUrl: string
+   * 标签列表
+   */
+  TagSet: Array<string>
 }
 
 /**
@@ -512,6 +498,26 @@ export interface TakeMusicOffShelvesRequest {
    * 资源方下架必传结构
    */
   TakeMusicOffShelves: Array<TakeMusicOffShelves>
+}
+
+/**
+ * SearchKTVMusics返回参数结构体
+ */
+export interface SearchKTVMusicsResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount: number
+
+  /**
+   * KTV 曲目列表
+   */
+  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -755,6 +761,65 @@ export interface DescribeCloudMusicResponse {
 }
 
 /**
+ * 对外开放信息
+ */
+export interface MusicOpenDetail {
+  /**
+      * 音乐Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicId: string
+
+  /**
+      * 专辑名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlbumName: string
+
+  /**
+      * 专辑图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlbumImageUrl: string
+
+  /**
+      * 音乐名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicName: string
+
+  /**
+      * 音乐图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicImageUrl: string
+
+  /**
+      * 歌手
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Singers: Array<string>
+
+  /**
+      * 播放时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration: number
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 歌词url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LyricUrl: string
+}
+
+/**
  * DescribePackages请求参数结构体
  */
 export interface DescribePackagesRequest {
@@ -832,6 +897,26 @@ export interface MusicDetailInfo {
    * 传播渠道
    */
   Channel?: string
+}
+
+/**
+ * SearchKTVMusics请求参数结构体
+ */
+export interface SearchKTVMusicsRequest {
+  /**
+   * 搜索关键词
+   */
+  KeyWord: string
+
+  /**
+   * 分页游标
+   */
+  Offset: number
+
+  /**
+   * 分页页长
+   */
+  Limit: number
 }
 
 /**
@@ -1008,6 +1093,26 @@ export interface DescribeLyricRequest {
    * 歌词格式，可选项，可不填写，目前填写只能填LRC-LRC。该字段为预留的扩展字段。后续如果不填，会返回歌曲的所有格式的歌词。如果填写某个正确的格式，则只返回该格式的歌词。
    */
   SubItemType?: string
+}
+
+/**
+ * DescribeKTVMusicDetail返回参数结构体
+ */
+export interface DescribeKTVMusicDetailResponse {
+  /**
+   * 歌曲基础信息
+   */
+  KTVMusicBaseInfo: KTVMusicBaseInfo
+
+  /**
+   * 播放凭证
+   */
+  PlayToken: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

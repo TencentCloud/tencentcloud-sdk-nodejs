@@ -788,6 +788,14 @@ export interface CynosdbClusterDetail {
       * 实例绑定的tag数组信息
       */
     ResourceTags: Array<Tag>;
+    /**
+      * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
+resume
+resuming
+pause
+pausing
+      */
+    ServerlessStatus: string;
 }
 /**
  * 集群实例信息

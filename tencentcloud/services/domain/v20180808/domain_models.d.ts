@@ -926,7 +926,7 @@ export interface CheckDomainRequest {
       */
     DomainName: string;
     /**
-      * 年限
+      * 年限。该参数为空时无法查询溢价词域名
       */
     Period?: string;
 }

@@ -18,9 +18,9 @@ const client = new tencentcloud.ame.v20190916.Client({
 })
 describe("ame.v20190916.test.js", function () {
 
-it("ame.v20190916.PutMusicOnTheShelves", async function () {
+it("ame.v20190916.DescribeKTVMusicDetail", async function () {
     try {
-       const data = await client.PutMusicOnTheShelves({})
+       const data = await client.DescribeKTVMusicDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +151,26 @@ it("ame.v20190916.DescribeCloudMusicPurchased", async function () {
 it("ame.v20190916.DescribeStations", async function () {
     try {
        const data = await client.DescribeStations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.PutMusicOnTheShelves", async function () {
+    try {
+       const data = await client.PutMusicOnTheShelves({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.SearchKTVMusics", async function () {
+    try {
+       const data = await client.SearchKTVMusics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

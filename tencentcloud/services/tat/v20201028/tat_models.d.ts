@@ -114,6 +114,10 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
       */
     Parameters?: string;
+    /**
+      * 如果保存命令，可为命令设置标签。列表长度不超过10。
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeInvocationTasks请求参数结构体
@@ -378,7 +382,15 @@ export interface DescribeCommandsRequest {
       */
     CommandIds?: Array<string>;
     /**
-      * 过滤条件。<br> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。<br> <li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。<br> <li> created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `CommandIds` 和 `Filters` 。
+      * 过滤条件。
+<li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。
+<li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。
+<li> created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例4</li>
+
+每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `CommandIds` 和 `Filters` 。
       */
     Filters?: Array<Filter>;
     /**
@@ -777,4 +789,8 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
       */
     DefaultParameters?: string;
+    /**
+      * 为命令关联的标签，列表长度不超过10。
+      */
+    Tags?: Array<Tag>;
 }

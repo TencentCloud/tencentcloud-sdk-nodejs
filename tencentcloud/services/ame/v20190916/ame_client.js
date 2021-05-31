@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("ame.tencentcloudapi.com", "2019-09-16", clientConfig);
     }
     /**
-     * 根据资源方所传歌曲信息，进行歌曲上架，多个歌曲同时请求时，需构造复合结构进行请求
+     * 根据 Id 查询歌曲的详细信息，包含基础信息及播放信息。
      */
-    async PutMusicOnTheShelves(req, cb) {
-        return this.request("PutMusicOnTheShelves", req, cb);
+    async DescribeKTVMusicDetail(req, cb) {
+        return this.request("DescribeKTVMusicDetail", req, cb);
     }
     /**
      * 根据歌曲ID查询歌曲信息
@@ -110,6 +110,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeStations(req, cb) {
         return this.request("DescribeStations", req, cb);
+    }
+    /**
+     * 根据资源方所传歌曲信息，进行歌曲上架，多个歌曲同时请求时，需构造复合结构进行请求
+     */
+    async PutMusicOnTheShelves(req, cb) {
+        return this.request("PutMusicOnTheShelves", req, cb);
+    }
+    /**
+     * 根据搜索条件，返回匹配的歌曲列表。
+     */
+    async SearchKTVMusics(req, cb) {
+        return this.request("SearchKTVMusics", req, cb);
     }
 }
 exports.Client = Client;

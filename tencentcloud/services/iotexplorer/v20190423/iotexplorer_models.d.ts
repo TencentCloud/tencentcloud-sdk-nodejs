@@ -962,6 +962,11 @@ export interface FirmwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProductId: string;
+    /**
+      * 固件升级模块
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FwType: string;
 }
 /**
  * DisableTopicRule返回参数结构体
@@ -1135,6 +1140,10 @@ export interface UploadFirmwareRequest {
       * 固件描述
       */
     FirmwareDescription?: string;
+    /**
+      * 固件升级模块；可选值 mcu|moudule
+      */
+    FwType?: string;
 }
 /**
  * GetDeviceList请求参数结构体

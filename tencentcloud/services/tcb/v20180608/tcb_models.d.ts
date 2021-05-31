@@ -1840,6 +1840,10 @@ export interface EstablishCloudBaseRunServerRequest {
       * 0/1=允许公网访问;2=关闭公网访问
       */
     PublicAccess?: number;
+    /**
+      * OA PUBLIC MINIAPP VPC
+      */
+    OpenAccessTypes?: Array<string>;
 }
 /**
  * 对标 EKS VolumeMount

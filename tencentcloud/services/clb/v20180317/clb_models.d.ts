@@ -564,27 +564,27 @@ export interface ClassicalTarget {
  */
 export interface RsWeightRule {
     /**
-      * 负载均衡监听器 ID
+      * 负载均衡监听器 ID。
       */
     ListenerId: string;
     /**
-      * 要修改权重的后端机器列表
+      * 要修改权重的后端机器列表。
       */
     Targets: Array<Target>;
     /**
-      * 转发规则的ID，七层规则时需要此参数，4层规则不需要
+      * 转发规则的ID，七层规则时需要此参数，4层规则不需要。
       */
     LocationId?: string;
     /**
-      * 目标规则的域名，提供LocationId参数时本参数不生效
+      * 目标规则的域名，提供LocationId参数时本参数不生效。
       */
     Domain?: string;
     /**
-      * 目标规则的URL，提供LocationId参数时本参数不生效
+      * 目标规则的URL，提供LocationId参数时本参数不生效。
       */
     Url?: string;
     /**
-      * 后端服务新的转发权重，取值范围：0~100。
+      * 后端服务修改后的转发权重，取值范围：[0，100]。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694#Target)中的Weight参数，即最终的权重值以Target中的Weight参数值为准，仅当Target中的Weight参数为空时，才以RsWeightRule中的Weight参数为准。
       */
     Weight?: number;
 }
@@ -1056,7 +1056,7 @@ export interface Target {
       */
     InstanceId?: string;
     /**
-      * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+      * 后端服务修改后的转发权重，取值范围：[0, 100]，默认为 10。此参数的优先级高于[RsWeightRule](https://cloud.tencent.com/document/api/214/30694#RsWeightRule)中的Weight参数，即最终的权重值以此Weight参数值为准，仅当此Weight参数为空时，才以RsWeightRule中的Weight参数为准。
       */
     Weight?: number;
     /**

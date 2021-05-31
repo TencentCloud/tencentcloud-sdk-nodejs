@@ -807,6 +807,11 @@ export interface EditFirmwareRequest {
    * 固件描述
    */
   FirmwareDescription?: string
+
+  /**
+   * 固件类型：选填 mcu、moudule。默认：mcu
+   */
+  FwType?: string
 }
 
 /**
@@ -971,41 +976,46 @@ export interface DescribeFirmwareResponse {
   /**
    * 固件版本号
    */
-  Version?: string
+  Version: string
 
   /**
    * 产品ID
    */
-  ProductId?: string
+  ProductId: string
 
   /**
       * 固件名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Name?: string
+  Name: string
 
   /**
       * 固件描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description?: string
+  Description: string
 
   /**
       * 固件Md5值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Md5sum?: string
+  Md5sum: string
 
   /**
       * 固件上传的秒级时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Createtime?: number
+  Createtime: number
 
   /**
    * 产品名称
    */
-  ProductName?: string
+  ProductName: string
+
+  /**
+   * 固件类型。选项：mcu、module
+   */
+  FwType: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3157,6 +3167,11 @@ export interface UploadFirmwareRequest {
    * 固件描述
    */
   FirmwareDescription?: string
+
+  /**
+   * 固件类型：选填 mcu、moudule。默认：mcu
+   */
+  FwType?: string
 }
 
 /**

@@ -412,7 +412,7 @@ export interface ModifyDomainStatusRequest {
       */
     Domain: string;
     /**
-      * 域名状态，”enable” 、”disable” 分别代表启用和暂
+      * 域名状态，”enable” 、”disable” 分别代表启用和暂停
       */
     Status: string;
     /**
@@ -707,15 +707,15 @@ export interface ModifyRecordRemarkResponse {
  */
 export interface DescribeDomainListRequest {
     /**
-      * 域名分组类型，默认为ALL
+      * 域名分组类型，默认为ALL。可取值为ALL，MINE，SHARE，ISMARK，PAUSE，VIP，RECENT，SHARE_OUT。
       */
     Type?: string;
     /**
-      * 记录开始的偏移, 第一条记录为 0, 依次类推
+      * 记录开始的偏移, 第一条记录为 0, 依次类推。默认值为0。
       */
     Offset?: number;
     /**
-      * 要获取的域名数量, 比如获取20个, 则为20
+      * 要获取的域名数量, 比如获取20个, 则为20。默认值为3000。
       */
     Limit?: number;
     /**
@@ -1075,19 +1075,19 @@ export interface DescribeRecordListRequest {
       */
     Keyword?: string;
     /**
-      * 排序字段，支持 name,line,type,value,weight,mx,ttl,updated_on 几个字段
+      * 排序字段，支持 name,line,type,value,weight,mx,ttl,updated_on 几个字段。默认值为updated_on。
       */
     SortField?: string;
     /**
-      * 排序方式，正序：ASC，逆序：DESC
+      * 排序方式，正序：ASC，逆序：DESC。默认值为ASC。
       */
     SortType?: string;
     /**
-      * 偏移量
+      * 偏移量，默认值为0。
       */
     Offset?: number;
     /**
-      * 限制数量，当前Limit最大支持3000
+      * 限制数量，当前Limit最大支持3000。默认值为3000。
       */
     Limit?: number;
 }
@@ -1960,7 +1960,7 @@ export interface CreateDomainAliasRequest {
       */
     Domain: string;
     /**
-      * 域名ID,域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
+      * 域名ID，参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain
       */
     DomainId?: number;
 }
