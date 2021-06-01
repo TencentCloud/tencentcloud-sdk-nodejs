@@ -310,6 +310,19 @@ export interface DescribeDBParametersResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFlow返回参数结构体
+ */
+export interface DescribeFlowResponse {
+    /**
+      * 流程状态，0：成功，1：失败，2：运行中
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CloneAccount返回参数结构体
  */
 export interface CloneAccountResponse {
@@ -326,6 +339,19 @@ export interface CloneAccountResponse {
  * ModifyAccountDescription返回参数结构体
  */
 export interface ModifyAccountDescriptionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CloseDBExtranetAccess返回参数结构体
+ */
+export interface CloseDBExtranetAccessResponse {
+    /**
+      * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+      */
+    FlowId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -762,6 +788,43 @@ export interface ShardZoneChooseInfo {
     SlaveZones: Array<ZonesInfo>;
 }
 /**
+ * DescribeDBLogFiles返回参数结构体
+ */
+export interface DescribeDBLogFilesResponse {
+    /**
+      * 实例 ID，形如：dcdbt-ow728lmc。
+      */
+    InstanceId?: string;
+    /**
+      * 请求日志类型。1-binlog，2-冷备，3-errlog，4-slowlog。
+      */
+    Type?: number;
+    /**
+      * 请求日志总数
+      */
+    Total?: number;
+    /**
+      * 日志文件列表
+      */
+    Files?: Array<LogFileInfo>;
+    /**
+      * 如果是VPC网络的实例，做用本前缀加上URI为下载地址
+      */
+    VpcPrefix?: string;
+    /**
+      * 如果是普通网络的实例，做用本前缀加上URI为下载地址
+      */
+    NormalPrefix?: string;
+    /**
+      * 分片 ID，形如：shard-7noic7tv
+      */
+    ShardId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 数据库表信息
  */
 export interface DatabaseTable {
@@ -978,7 +1041,7 @@ export interface DCDBInstanceInfo {
       */
     StatusDesc: string;
     /**
-      * 状态
+      * 实例状态：0 创建中，1 流程处理中， 2 运行中，3 实例未初始化，-1 实例已隔离，-2 实例已删除，4 实例初始化中，5 实例删除中，6 实例重启中，7 数据迁移中
       */
     Status: number;
     /**
@@ -1699,6 +1762,19 @@ export interface DescribeDCDBSaleInfoResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBInstancesProject请求参数结构体
+ */
+export interface ModifyDBInstancesProjectRequest {
+    /**
+      * 待修改的实例ID列表。实例 ID 形如：dcdbt-ow728lmc。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 要分配的项目 ID，可以通过 DescribeProjects 查询项目列表接口获取。
+      */
+    ProjectId: number;
+}
+/**
  * ModifyDBInstanceSecurityGroups返回参数结构体
  */
 export interface ModifyDBInstanceSecurityGroupsResponse {
@@ -1717,17 +1793,13 @@ export interface DescribeDBSyncModeRequest {
     InstanceId: string;
 }
 /**
- * CloseDBExtranetAccess返回参数结构体
+ * DestroyDCDBInstance请求参数结构体
  */
-export interface CloseDBExtranetAccessResponse {
+export interface DestroyDCDBInstanceRequest {
     /**
-      * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+      * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
       */
-    FlowId?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
  * ModifyAccountDescription请求参数结构体
@@ -1794,37 +1866,17 @@ export interface DescribeOrdersRequest {
     DealNames: Array<string>;
 }
 /**
- * DescribeDBLogFiles返回参数结构体
+ * DestroyDCDBInstance返回参数结构体
  */
-export interface DescribeDBLogFilesResponse {
+export interface DestroyDCDBInstanceResponse {
     /**
-      * 实例 ID，形如：dcdbt-ow728lmc。
+      * 实例 ID，与入参InstanceId一致。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
-      * 请求日志类型。1-binlog，2-冷备，3-errlog，4-slowlog。
+      * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
       */
-    Type?: number;
-    /**
-      * 请求日志总数
-      */
-    Total?: number;
-    /**
-      * 日志文件列表
-      */
-    Files?: Array<LogFileInfo>;
-    /**
-      * 如果是VPC网络的实例，做用本前缀加上URI为下载地址
-      */
-    VpcPrefix?: string;
-    /**
-      * 如果是普通网络的实例，做用本前缀加上URI为下载地址
-      */
-    NormalPrefix?: string;
-    /**
-      * 分片 ID，形如：shard-7noic7tv
-      */
-    ShardId?: string;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1926,15 +1978,24 @@ export interface DescribeDCDBInstancesResponse {
     /**
       * 符合条件的实例数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例详细信息列表
       */
-    Instances?: Array<DCDBInstanceInfo>;
+    Instances: Array<DCDBInstanceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeFlow请求参数结构体
+ */
+export interface DescribeFlowRequest {
+    /**
+      * 异步请求接口返回的任务流程号。
+      */
+    FlowId: number;
 }
 /**
  * CreateDCDBInstance请求参数结构体
@@ -2016,6 +2077,10 @@ export interface CreateDCDBInstanceRequest {
       * 标签键值对数组
       */
     ResourceTags?: Array<ResourceTag>;
+    /**
+      * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
+      */
+    InitParams?: Array<DBParamValue>;
 }
 /**
  * DescribeDCDBUpgradePrice请求参数结构体
@@ -2244,6 +2309,23 @@ export interface UpgradeDCDBInstanceRequest {
       * 代金券ID列表，目前仅支持指定一张代金券。
       */
     VoucherIds?: Array<string>;
+}
+/**
+ * DestroyHourDCDBInstance返回参数结构体
+ */
+export interface DestroyHourDCDBInstanceResponse {
+    /**
+      * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
+      */
+    FlowId: number;
+    /**
+      * 实例 ID，与入参InstanceId一致。
+      */
+    InstanceId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 约束类型值的范围
@@ -2519,6 +2601,14 @@ export interface DescribeDCDBInstancesRequest {
       * 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔
       */
     FilterInstanceType?: string;
+    /**
+      * 按实例状态筛选
+      */
+    Status?: Array<number>;
+    /**
+      * 排除实例状态
+      */
+    ExcludeStatus?: Array<number>;
 }
 /**
  * 项目信息描述
@@ -2570,17 +2660,13 @@ export interface Project {
     Info: string;
 }
 /**
- * ModifyDBInstancesProject请求参数结构体
+ * DestroyHourDCDBInstance请求参数结构体
  */
-export interface ModifyDBInstancesProjectRequest {
+export interface DestroyHourDCDBInstanceRequest {
     /**
-      * 待修改的实例ID列表。实例 ID 形如：dcdbt-ow728lmc。
+      * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
       */
-    InstanceIds: Array<string>;
-    /**
-      * 要分配的项目 ID，可以通过 DescribeProjects 查询项目列表接口获取。
-      */
-    ProjectId: number;
+    InstanceId: string;
 }
 /**
  * FlushBinlog请求参数结构体

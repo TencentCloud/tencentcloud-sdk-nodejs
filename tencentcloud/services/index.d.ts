@@ -40,6 +40,7 @@ export { ckafka } from "./ckafka";
 export { clb } from "./clb";
 export { cloudaudit } from "./cloudaudit";
 export { cloudhsm } from "./cloudhsm";
+export { cls } from "./cls";
 export { cme } from "./cme";
 export { cmq } from "./cmq";
 export { cms } from "./cms";

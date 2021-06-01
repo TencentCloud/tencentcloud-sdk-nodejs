@@ -104,10 +104,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDCDBSaleInfo", req, cb);
     }
     /**
-     * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
+     * 本接口（DescribeFlow）用于查询流程状态
      */
-    async OpenDBExtranetAccess(req, cb) {
-        return this.request("OpenDBExtranetAccess", req, cb);
+    async DescribeFlow(req, cb) {
+        return this.request("DescribeFlow", req, cb);
     }
     /**
      * 本接口(InitDCDBInstances)用于初始化云数据库实例，包括设置默认字符集、表名大小写敏感等。
@@ -195,10 +195,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("KillSession", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
      */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    async OpenDBExtranetAccess(req, cb) {
+        return this.request("OpenDBExtranetAccess", req, cb);
+    }
+    /**
+     * 本接口(DestroyDCDBInstance)用于销毁已隔离的包年包月实例。
+     */
+    async DestroyDCDBInstance(req, cb) {
+        return this.request("DestroyDCDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDCDBInstanceNodeInfo）用于获取实例节点信息
@@ -268,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDCDBInstance", req, cb);
     }
     /**
+     * 本接口（DestroyHourDCDBInstance）用于销毁按量计费实例。
+     */
+    async DestroyHourDCDBInstance(req, cb) {
+        return this.request("DestroyHourDCDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      */
     async DescribeDBSecurityGroups(req, cb) {
@@ -296,6 +308,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDCDBRenewalPrice(req, cb) {
         return this.request("DescribeDCDBRenewalPrice", req, cb);
+    }
+    /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
 }
 exports.Client = Client;

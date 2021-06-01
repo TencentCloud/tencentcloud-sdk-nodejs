@@ -77,6 +77,11 @@ yc1w7d : 全时7天存储周套餐。
 ye1w7d : 事件7天存储周套餐。
       */
   PackageId: string
+
+  /**
+   * 如果当前设备已开启云存套餐，Override=1会使用新套餐覆盖原有套餐。不传此参数则默认为0。
+   */
+  Override?: number
 }
 
 /**

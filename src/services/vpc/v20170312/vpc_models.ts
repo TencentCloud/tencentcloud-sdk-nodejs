@@ -2617,7 +2617,7 @@ export interface SetCcnRegionBandwidthLimitsRequest {
   CcnRegionBandwidthLimits: Array<CcnRegionBandwidthLimit>
 
   /**
-   * 是否设置带宽为默认值。
+   * 是否恢复云联网地域出口/地域间带宽限速为默认值（1Gbps）。false表示不恢复；true表示恢复。恢复默认值后，限速实例将不在控制台展示。该参数默认为 false，不恢复。
    */
   SetDefaultLimitFlag?: boolean
 }

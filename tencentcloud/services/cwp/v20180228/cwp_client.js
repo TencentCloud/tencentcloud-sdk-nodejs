@@ -359,6 +359,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivilegeRules", req, cb);
     }
     /**
+     * 导出资产管理内核模块列表
+     */
+    async ExportAssetCoreModuleList(req, cb) {
+        return this.request("ExportAssetCoreModuleList", req, cb);
+    }
+    /**
      * 本接口 (DeleteMalwares) 用于删除木马记录。
      */
     async DeleteMalwares(req, cb) {

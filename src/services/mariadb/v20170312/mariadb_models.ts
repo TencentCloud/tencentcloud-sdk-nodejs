@@ -106,6 +106,11 @@ export interface CreateDBInstanceRequest {
    * 标签键值对数组
    */
   ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
+   */
+  InitParams?: Array<DBParamValue>
 }
 
 /**
@@ -225,6 +230,26 @@ export interface DescribeAccountsRequest {
 }
 
 /**
+ * 存储过程权限信息
+ */
+export interface ProcedurePrivilege {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库存储过程名
+   */
+  Procedure: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+}
+
+/**
  * DescribeRenewalPrice返回参数结构体
  */
 export interface DescribeRenewalPriceResponse {
@@ -260,18 +285,13 @@ export interface CreateTmpInstancesRequest {
 }
 
 /**
- * RestartDBInstances返回参数结构体
+ * DestroyHourDBInstance请求参数结构体
  */
-export interface RestartDBInstancesResponse {
+export interface DestroyHourDBInstanceRequest {
   /**
-   * 异步任务ID
+   * 实例 ID，格式如：tdsql-avw0207d，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  FlowId?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -393,6 +413,41 @@ export interface DescribeDBInstanceSpecsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DestroyHourDBInstance返回参数结构体
+ */
+export interface DestroyHourDBInstanceResponse {
+  /**
+   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
+   */
+  FlowId: number
+
+  /**
+   * 实例 ID，与入参InstanceId一致。
+   */
+  InstanceId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据库账号信息
+ */
+export interface Account {
+  /**
+   * 账户的名称
+   */
+  User: string
+
+  /**
+   * 账户的域名
+   */
+  Host: string
 }
 
 /**
@@ -1089,6 +1144,16 @@ export interface DescribeDBInstancesRequest {
    * 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔
    */
   FilterInstanceType?: string
+
+  /**
+   * 按照实例状态进行筛选
+   */
+  Status?: Array<number>
+
+  /**
+   * 排除实例状态
+   */
+  ExcludeStatus?: Array<number>
 }
 
 /**
@@ -1134,6 +1199,26 @@ export interface RenewDBInstanceRequest {
    * 代金券ID列表，目前仅支持指定一张代金券。
    */
   VoucherIds?: Array<string>
+}
+
+/**
+ * 数据库表权限
+ */
+export interface TablePrivilege {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库表名
+   */
+  Table: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
 }
 
 /**
@@ -1259,6 +1344,21 @@ export interface DescribeBackupTimeRequest {
    * 实例ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * RestartDBInstances返回参数结构体
+ */
+export interface RestartDBInstancesResponse {
+  /**
+   * 异步任务ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1709,6 +1809,31 @@ export interface SecurityGroupBound {
 }
 
 /**
+ * 列权限信息
+ */
+export interface ColumnPrivilege {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库表名
+   */
+  Table: string
+
+  /**
+   * 数据库列名
+   */
+  Column: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+}
+
+/**
  * DescribeUpgradePrice返回参数结构体
  */
 export interface DescribeUpgradePriceResponse {
@@ -1783,7 +1908,7 @@ export interface DBInstance {
   SubnetId: number
 
   /**
-   * 实例状态：0 创建中，1 流程处理中， 2 运行中，3 实例未初始化，-1 实例已隔离，-2 实例已删除
+   * 实例状态：0 创建中，1 流程处理中， 2 运行中，3 实例未初始化，-1 实例已隔离，-2 实例已删除，4 实例初始化中，5 实例删除中，6 实例重启中，7 数据迁移中
    */
   Status: number
 
@@ -2043,6 +2168,21 @@ export interface InitDBInstancesRequest {
 }
 
 /**
+ * ModifyAccountPrivileges返回参数结构体
+ */
+export interface ModifyAccountPrivilegesResponse {
+  /**
+   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyBackupTime返回参数结构体
  */
 export interface ModifyBackupTimeResponse {
@@ -2093,6 +2233,21 @@ export interface OpenDBExtranetAccessRequest {
 }
 
 /**
+ * 数据库权限
+ */
+export interface DatabasePrivilege {
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+
+  /**
+   * 数据库名
+   */
+  Database: string
+}
+
+/**
  * ModifyDBInstanceSecurityGroups返回参数结构体
  */
 export interface ModifyDBInstanceSecurityGroupsResponse {
@@ -2130,6 +2285,26 @@ export interface CloseDBExtranetAccessResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 函数权限信息
+ */
+export interface FunctionPrivilege {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库函数名
+   */
+  FunctionName: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
 }
 
 /**
@@ -2351,6 +2526,26 @@ export interface DescribeDatabasesResponse {
 }
 
 /**
+ * 视图权限信息
+ */
+export interface ViewPrivileges {
+  /**
+   * 数据库名
+   */
+  Database: string
+
+  /**
+   * 数据库视图名
+   */
+  View: string
+
+  /**
+   * 权限信息
+   */
+  Privileges: Array<string>
+}
+
+/**
  * DescribeOrders请求参数结构体
  */
 export interface DescribeOrdersRequest {
@@ -2508,6 +2703,63 @@ export interface DescribeFlowRequest {
    * 异步请求接口返回的任务流程号。
    */
   FlowId: number
+}
+
+/**
+ * ModifyAccountPrivileges请求参数结构体
+ */
+export interface ModifyAccountPrivilegesRequest {
+  /**
+   * 实例 ID，格式如：tdsql-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * 数据库的账号，包括用户名和域名。
+   */
+  Accounts: Array<Account>
+
+  /**
+      * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，该字段传空数组。
+      */
+  GlobalPrivileges?: Array<string>
+
+  /**
+      * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  DatabasePrivileges?: Array<DatabasePrivilege>
+
+  /**
+      * 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  TablePrivileges?: Array<TablePrivilege>
+
+  /**
+      * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  ColumnPrivileges?: Array<ColumnPrivilege>
+
+  /**
+      * 数据库视图的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  ViewPrivileges?: Array<ViewPrivileges>
+
+  /**
+      * 数据库函数的权限。Privileges 权限的可选值为：权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  FunctionPrivileges?: Array<FunctionPrivilege>
+
+  /**
+      * 数据库存储过程的权限。Privileges 权限的可选值为：权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
+注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
+      */
+  ProcedurePrivileges?: Array<ProcedurePrivilege>
 }
 
 /**
@@ -2677,12 +2929,12 @@ export interface DescribeDBInstancesResponse {
   /**
    * 符合条件的实例数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例详细信息列表
    */
-  Instances?: Array<DBInstance>
+  Instances: Array<DBInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2768,6 +3020,11 @@ export interface RestartDBInstancesRequest {
    * 实例ID的数组
    */
   InstanceIds: Array<string>
+
+  /**
+   * 重启时间
+   */
+  RestartTime?: string
 }
 
 /**

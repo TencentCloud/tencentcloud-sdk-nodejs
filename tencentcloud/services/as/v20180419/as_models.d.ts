@@ -2591,7 +2591,7 @@ export interface PreviewPaiDomainNameResponse {
     /**
       * 可用的PAI域名
       */
-    DomainName?: string;
+    DomainName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

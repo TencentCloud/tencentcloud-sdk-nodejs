@@ -138,9 +138,9 @@ it("dcdb.v20180411.DescribeDCDBSaleInfo", async function () {
     }
 })
 
-it("dcdb.v20180411.OpenDBExtranetAccess", async function () {
+it("dcdb.v20180411.DescribeFlow", async function () {
     try {
-       const data = await client.OpenDBExtranetAccess({})
+       const data = await client.DescribeFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +288,19 @@ it("dcdb.v20180411.KillSession", async function () {
     }
 })
 
-it("dcdb.v20180411.ModifyDBInstanceSecurityGroups", async function () {
+it("dcdb.v20180411.OpenDBExtranetAccess", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.OpenDBExtranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.DestroyDCDBInstance", async function () {
+    try {
+       const data = await client.DestroyDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +418,16 @@ it("dcdb.v20180411.CreateDCDBInstance", async function () {
     }
 })
 
+it("dcdb.v20180411.DestroyHourDCDBInstance", async function () {
+    try {
+       const data = await client.DestroyHourDCDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeDBSecurityGroups", async function () {
     try {
        const data = await client.DescribeDBSecurityGroups({})
@@ -451,6 +471,16 @@ it("dcdb.v20180411.DisassociateSecurityGroups", async function () {
 it("dcdb.v20180411.DescribeDCDBRenewalPrice", async function () {
     try {
        const data = await client.DescribeDCDBRenewalPrice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -188,7 +188,7 @@ export interface AuditLogInfo {
  */
 export interface DescribeRequestDataRequest {
   /**
-   * 请求量统计起始时间
+   * 请求量统计起始时间，格式：2020-11-22 00:00:00
    */
   TimeRangeBegin: string
 
@@ -198,7 +198,7 @@ export interface DescribeRequestDataRequest {
   Filters?: Array<Filter>
 
   /**
-   * 请求量统计结束时间
+   * 请求量统计结束时间，格式：2020-11-22 23:59:59
    */
   TimeRangeEnd?: string
 }
@@ -258,7 +258,7 @@ export interface DescribeRequestDataResponse {
  */
 export interface ModifyPrivateZoneRequest {
   /**
-   * 域名，格式必须是标准的TLD
+   * 私有域ID
    */
   ZoneId: string
 
@@ -313,7 +313,7 @@ export interface CreatePrivateZoneRequest {
   Remark?: string
 
   /**
-   * 是否开启子域名递归, ENABLED， DISABLED
+   * 是否开启子域名递归, ENABLED， DISABLED。默认值为DISABLED
    */
   DnsForwardStatus?: string
 
@@ -443,7 +443,7 @@ export interface CreatePrivateZoneRecordResponse {
  */
 export interface DescribePrivateZoneServiceResponse {
   /**
-   * 私有域解析服务开通状态
+   * 私有域解析服务开通状态。ENABLED已开通，DISABLED未开通
    */
   ServiceStatus: string
 
@@ -478,7 +478,7 @@ export interface DescribeAuditLogRequest {
   TimeRangeBegin: string
 
   /**
-   * 筛选参数：
+   * 筛选参数：ZoneId：私有域ID；Domain：私有域；OperatorUin：操作者账号ID
    */
   Filters?: Array<Filter>
 

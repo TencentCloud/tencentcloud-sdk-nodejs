@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserTasksResponse, InitDCDBInstancesResponse, UpgradeDCDBInstanceResponse, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeDCDBPriceResponse, AssociateSecurityGroupsRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, DescribeDBSyncModeResponse, DescribeProjectSecurityGroupsRequest, DescribeDCDBUpgradePriceResponse, CreateAccountRequest, DescribeDBParametersResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, OpenDBExtranetAccessResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, DescribeDCDBInstanceNodeInfoRequest, DescribeDBLogFilesRequest, DescribeOrdersResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBRenewalPriceRequest, DescribeDBSecurityGroupsRequest, DescribeDCDBPriceRequest, DescribeProjectSecurityGroupsResponse, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, RenewDCDBInstanceRequest, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, DescribeDcnDetailRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, DescribeDCDBInstanceNodeInfoResponse, KillSessionRequest, DescribeDatabaseObjectsResponse, DescribeDcnDetailResponse, RenewDCDBInstanceResponse, DescribeShardSpecResponse, AssociateSecurityGroupsResponse, DescribeDCDBRenewalPriceResponse, DescribeDCDBShardsResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, DescribeDCDBSaleInfoResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeDBSyncModeRequest, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeProjectsRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeDCDBInstancesResponse, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, ModifyDBSyncModeRequest, DescribeProjectsResponse, CreateAccountResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, DisassociateSecurityGroupsRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDCDBInstancesRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyDBSyncModeResponse, DisassociateSecurityGroupsResponse, DescribeUserTasksRequest, DeleteAccountResponse } from "./dcdb_models";
+import { DescribeUserTasksResponse, InitDCDBInstancesResponse, UpgradeDCDBInstanceResponse, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeDCDBPriceResponse, AssociateSecurityGroupsRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, DescribeDBSyncModeResponse, DescribeProjectSecurityGroupsRequest, DescribeDCDBUpgradePriceResponse, CreateAccountRequest, DescribeDBParametersResponse, DescribeFlowResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, CloseDBExtranetAccessResponse, OpenDBExtranetAccessResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, DescribeDCDBInstanceNodeInfoRequest, DescribeDBLogFilesRequest, DescribeOrdersResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBRenewalPriceRequest, DescribeDBSecurityGroupsRequest, DescribeDCDBPriceRequest, DescribeProjectSecurityGroupsResponse, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, RenewDCDBInstanceRequest, DescribeDBLogFilesResponse, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, DescribeDcnDetailRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, DescribeDCDBInstanceNodeInfoResponse, KillSessionRequest, DescribeDatabaseObjectsResponse, DescribeDcnDetailResponse, RenewDCDBInstanceResponse, DescribeShardSpecResponse, AssociateSecurityGroupsResponse, DescribeDCDBRenewalPriceResponse, DescribeDCDBShardsResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, DescribeDCDBSaleInfoResponse, ModifyDBInstancesProjectRequest, ModifyDBInstanceSecurityGroupsResponse, DescribeDBSyncModeRequest, DestroyDCDBInstanceRequest, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeProjectsRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DestroyDCDBInstanceResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeDCDBInstancesResponse, DescribeFlowRequest, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, ModifyDBSyncModeRequest, DescribeProjectsResponse, CreateAccountResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, DestroyHourDCDBInstanceResponse, DisassociateSecurityGroupsRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDCDBInstancesRequest, DestroyHourDCDBInstanceRequest, FlushBinlogRequest, ModifyDBSyncModeResponse, DisassociateSecurityGroupsResponse, DescribeUserTasksRequest, DeleteAccountResponse } from "./dcdb_models";
 /**
  * dcdb client
  * @class
@@ -60,9 +60,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDCDBSaleInfo(req?: DescribeDCDBSaleInfoRequest, cb?: (error: string, rep: DescribeDCDBSaleInfoResponse) => void): Promise<DescribeDCDBSaleInfoResponse>;
     /**
-     * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
+     * 本接口（DescribeFlow）用于查询流程状态
      */
-    OpenDBExtranetAccess(req: OpenDBExtranetAccessRequest, cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void): Promise<OpenDBExtranetAccessResponse>;
+    DescribeFlow(req: DescribeFlowRequest, cb?: (error: string, rep: DescribeFlowResponse) => void): Promise<DescribeFlowResponse>;
     /**
      * 本接口(InitDCDBInstances)用于初始化云数据库实例，包括设置默认字符集、表名大小写敏感等。
      */
@@ -121,9 +121,13 @@ export declare class Client extends AbstractClient {
      */
     KillSession(req: KillSessionRequest, cb?: (error: string, rep: KillSessionResponse) => void): Promise<KillSessionResponse>;
     /**
-     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
      */
-    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
+    OpenDBExtranetAccess(req: OpenDBExtranetAccessRequest, cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void): Promise<OpenDBExtranetAccessResponse>;
+    /**
+     * 本接口(DestroyDCDBInstance)用于销毁已隔离的包年包月实例。
+     */
+    DestroyDCDBInstance(req: DestroyDCDBInstanceRequest, cb?: (error: string, rep: DestroyDCDBInstanceResponse) => void): Promise<DestroyDCDBInstanceResponse>;
     /**
      * 本接口（DescribeDCDBInstanceNodeInfo）用于获取实例节点信息
      */
@@ -170,6 +174,10 @@ export declare class Client extends AbstractClient {
      */
     CreateDCDBInstance(req: CreateDCDBInstanceRequest, cb?: (error: string, rep: CreateDCDBInstanceResponse) => void): Promise<CreateDCDBInstanceResponse>;
     /**
+     * 本接口（DestroyHourDCDBInstance）用于销毁按量计费实例。
+     */
+    DestroyHourDCDBInstance(req: DestroyHourDCDBInstanceRequest, cb?: (error: string, rep: DestroyHourDCDBInstanceResponse) => void): Promise<DestroyHourDCDBInstanceResponse>;
+    /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      */
     DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
@@ -189,4 +197,8 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeDCDBRenewalPrice）用于在续费分布式数据库实例时，查询续费的价格。
      */
     DescribeDCDBRenewalPrice(req: DescribeDCDBRenewalPriceRequest, cb?: (error: string, rep: DescribeDCDBRenewalPriceResponse) => void): Promise<DescribeDCDBRenewalPriceResponse>;
+    /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     */
+    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
 }

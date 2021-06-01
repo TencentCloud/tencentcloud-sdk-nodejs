@@ -36,8 +36,10 @@ import {
   DescribeDCDBUpgradePriceResponse,
   CreateAccountRequest,
   DescribeDBParametersResponse,
+  DescribeFlowResponse,
   CloneAccountResponse,
   ModifyAccountDescriptionResponse,
+  CloseDBExtranetAccessResponse,
   OpenDBExtranetAccessResponse,
   CreateDCDBInstanceResponse,
   BriefNodeInfo,
@@ -63,6 +65,7 @@ import {
   ExpandShardConfig,
   RenewDCDBInstanceRequest,
   ShardZoneChooseInfo,
+  DescribeDBLogFilesResponse,
   DatabaseTable,
   Deal,
   GrantAccountPrivilegesRequest,
@@ -97,21 +100,23 @@ import {
   ShardInfo,
   OpenDBExtranetAccessRequest,
   DescribeDCDBSaleInfoResponse,
+  ModifyDBInstancesProjectRequest,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeDBSyncModeRequest,
-  CloseDBExtranetAccessResponse,
+  DestroyDCDBInstanceRequest,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
   DescribeProjectsRequest,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
-  DescribeDBLogFilesResponse,
+  DestroyDCDBInstanceResponse,
   CloseDBExtranetAccessRequest,
   InitDCDBInstancesRequest,
   ResourceTag,
   DescribeSqlLogsResponse,
   DeleteAccountRequest,
   DescribeDCDBInstancesResponse,
+  DescribeFlowRequest,
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
   UserTaskInfo,
@@ -123,6 +128,7 @@ import {
   RegionInfo,
   DescribeDatabaseObjectsRequest,
   UpgradeDCDBInstanceRequest,
+  DestroyHourDCDBInstanceResponse,
   ConstraintRange,
   LogFileInfo,
   DisassociateSecurityGroupsRequest,
@@ -133,7 +139,7 @@ import {
   DescribeAccountsResponse,
   DescribeDCDBInstancesRequest,
   Project,
-  ModifyDBInstancesProjectRequest,
+  DestroyHourDCDBInstanceRequest,
   FlushBinlogRequest,
   ModifyDBSyncModeResponse,
   DisassociateSecurityGroupsResponse,
@@ -275,13 +281,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
+   * 本接口（DescribeFlow）用于查询流程状态
    */
-  async OpenDBExtranetAccess(
-    req: OpenDBExtranetAccessRequest,
-    cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
-  ): Promise<OpenDBExtranetAccessResponse> {
-    return this.request("OpenDBExtranetAccess", req, cb)
+  async DescribeFlow(
+    req: DescribeFlowRequest,
+    cb?: (error: string, rep: DescribeFlowResponse) => void
+  ): Promise<DescribeFlowResponse> {
+    return this.request("DescribeFlow", req, cb)
   }
 
   /**
@@ -426,13 +432,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+   * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async OpenDBExtranetAccess(
+    req: OpenDBExtranetAccessRequest,
+    cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
+  ): Promise<OpenDBExtranetAccessResponse> {
+    return this.request("OpenDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 本接口(DestroyDCDBInstance)用于销毁已隔离的包年包月实例。
+   */
+  async DestroyDCDBInstance(
+    req: DestroyDCDBInstanceRequest,
+    cb?: (error: string, rep: DestroyDCDBInstanceResponse) => void
+  ): Promise<DestroyDCDBInstanceResponse> {
+    return this.request("DestroyDCDBInstance", req, cb)
   }
 
   /**
@@ -547,6 +563,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DestroyHourDCDBInstance）用于销毁按量计费实例。
+   */
+  async DestroyHourDCDBInstance(
+    req: DestroyHourDCDBInstanceRequest,
+    cb?: (error: string, rep: DestroyHourDCDBInstanceResponse) => void
+  ): Promise<DestroyHourDCDBInstanceResponse> {
+    return this.request("DestroyHourDCDBInstance", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
    */
   async DescribeDBSecurityGroups(
@@ -594,5 +620,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDCDBRenewalPriceResponse) => void
   ): Promise<DescribeDCDBRenewalPriceResponse> {
     return this.request("DescribeDCDBRenewalPrice", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 }

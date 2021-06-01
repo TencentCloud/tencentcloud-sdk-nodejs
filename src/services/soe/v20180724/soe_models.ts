@@ -504,6 +504,7 @@ export interface TransmitOralProcessWithInitRequest {
   /**
       * 被评估语音对应的文本，仅支持中文和英文。
 句子模式下不超过个 30 单词或者中文文字，段落模式不超过 120 单词或者中文文字，中文评估使用 utf-8 编码，自由说模式该值无效。
+关于RefText的文本键入要求，请参考[评测模式介绍](https://cloud.tencent.com/document/product/884/56131)。
 如需要在评测模式下使用自定义注音（支持中英文），可以通过设置「TextMode」参数实现，设置方式请参考[音素标注](https://cloud.tencent.com/document/product/884/33698)。
       */
   RefText: string
@@ -527,6 +528,7 @@ export interface TransmitOralProcessWithInitRequest {
 6：句子多分支评测模式
 7：单词实时评测模式
 8：拼音评测模式
+关于每种评测模式的详细介绍，以及适用场景，请参考[评测模式介绍](https://cloud.tencent.com/document/product/884/56131)。
       */
   EvalMode: number
 

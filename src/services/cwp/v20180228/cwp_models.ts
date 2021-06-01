@@ -664,6 +664,66 @@ export interface DescribeProcessesResponse {
 }
 
 /**
+ * 反弹Shell规则
+ */
+export interface ReverseShellRule {
+  /**
+   * 规则ID
+   */
+  Id: number
+
+  /**
+   * 客户端ID
+   */
+  Uuid: string
+
+  /**
+   * 进程名称
+   */
+  ProcessName: string
+
+  /**
+   * 目标IP
+   */
+  DestIp: string
+
+  /**
+   * 目标端口
+   */
+  DestPort: string
+
+  /**
+   * 操作人
+   */
+  Operator: string
+
+  /**
+   * 是否全局规则
+   */
+  IsGlobal: number
+
+  /**
+   * 状态 (0: 有效 1: 无效)
+   */
+  Status: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
+
+  /**
+   * 主机IP
+   */
+  Hostip: string
+}
+
+/**
  * DeleteBashEvents返回参数结构体
  */
 export interface DeleteBashEventsResponse {
@@ -1307,63 +1367,18 @@ export interface DescribeMaliciousRequestsResponse {
 }
 
 /**
- * 反弹Shell规则
+ * ExportAssetCoreModuleList返回参数结构体
  */
-export interface ReverseShellRule {
+export interface ExportAssetCoreModuleListResponse {
   /**
-   * 规则ID
+   * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  Id: number
+  TaskId: string
 
   /**
-   * 客户端ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Uuid: string
-
-  /**
-   * 进程名称
-   */
-  ProcessName: string
-
-  /**
-   * 目标IP
-   */
-  DestIp: string
-
-  /**
-   * 目标端口
-   */
-  DestPort: string
-
-  /**
-   * 操作人
-   */
-  Operator: string
-
-  /**
-   * 是否全局规则
-   */
-  IsGlobal: number
-
-  /**
-   * 状态 (0: 有效 1: 无效)
-   */
-  Status: number
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 修改时间
-   */
-  ModifyTime: string
-
-  /**
-   * 主机IP
-   */
-  Hostip: string
+  RequestId?: string
 }
 
 /**
@@ -2803,6 +2818,38 @@ export interface DeleteMachineRequest {
    * 云镜客户端Uuid。
    */
   Uuid: string
+}
+
+/**
+ * ExportAssetCoreModuleList请求参数结构体
+ */
+export interface ExportAssetCoreModuleListRequest {
+  /**
+      * 过滤条件。
+<li>Name- string - 是否必填：否 - 包名</li>
+<li>User- string - 是否必填：否 - 用户</li>
+      */
+  Filters?: Array<AssetFilters>
+
+  /**
+   * 排序方式，asc升序 或 desc降序
+   */
+  Order?: string
+
+  /**
+   * 排序依据:Size,ProcessCount,ModuleCount
+   */
+  By?: string
+
+  /**
+   * 服务器Uuid
+   */
+  Uuid?: string
+
+  /**
+   * 服务器Quuid
+   */
+  Quuid?: string
 }
 
 /**
@@ -4595,6 +4642,11 @@ export interface DescribeMachineInfoRequest {
    * 云镜客户端唯一Uuid。
    */
   Uuid?: string
+
+  /**
+   * cvm id， quuid、uuid必填一个
+   */
+  Quuid?: string
 }
 
 /**
@@ -6260,100 +6312,105 @@ export interface DescribeMachineInfoResponse {
   /**
    * 机器ip。
    */
-  MachineIp?: string
+  MachineIp: string
 
   /**
    * 受云镜保护天数。
    */
-  ProtectDays?: number
+  ProtectDays: number
 
   /**
    * 操作系统。
    */
-  MachineOs?: string
+  MachineOs: string
 
   /**
    * 主机名称。
    */
-  MachineName?: string
+  MachineName: string
 
   /**
       * 在线状态。
 <li>ONLINE： 在线</li>
 <li>OFFLINE：离线</li>
       */
-  MachineStatus?: string
+  MachineStatus: string
 
   /**
    * CVM或BM主机唯一标识。
    */
-  InstanceId?: string
+  InstanceId: string
 
   /**
    * 主机外网IP。
    */
-  MachineWanIp?: string
+  MachineWanIp: string
 
   /**
    * CVM或BM主机唯一Uuid。
    */
-  Quuid?: string
+  Quuid: string
 
   /**
    * 云镜客户端唯一Uuid。
    */
-  Uuid?: string
+  Uuid: string
 
   /**
       * 是否开通专业版。
 <li>true：是</li>
 <li>false：否</li>
       */
-  IsProVersion?: boolean
+  IsProVersion: boolean
 
   /**
    * 专业版开通时间。
    */
-  ProVersionOpenDate?: string
+  ProVersionOpenDate: string
 
   /**
       * 云主机类型。
 <li>CVM: 虚拟主机</li>
 <li>BM: 黑石物理机</li>
       */
-  MachineType?: string
+  MachineType: string
 
   /**
    * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
-  MachineRegion?: string
+  MachineRegion: string
 
   /**
       * 主机状态。
 <li>POSTPAY: 表示后付费，即按量计费  </li>
 <li>PREPAY: 表示预付费，即包年包月</li>
       */
-  PayMode?: string
+  PayMode: string
 
   /**
    * 免费木马剩余检测数量。
    */
-  FreeMalwaresLeft?: number
+  FreeMalwaresLeft: number
 
   /**
    * 免费漏洞剩余检测数量。
    */
-  FreeVulsLeft?: number
+  FreeVulsLeft: number
 
   /**
    * agent版本号
    */
-  AgentVersion?: string
+  AgentVersion: string
 
   /**
    * 专业版到期时间(仅预付费)
    */
-  ProVersionDeadline?: string
+  ProVersionDeadline: string
+
+  /**
+   * 是否有资产扫描记录，0无，1有
+   */
+  HasAssetScan: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

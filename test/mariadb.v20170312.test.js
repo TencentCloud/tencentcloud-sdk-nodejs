@@ -238,6 +238,16 @@ it("mariadb.v20170312.DescribeDBLogFiles", async function () {
     }
 })
 
+it("mariadb.v20170312.DestroyHourDBInstance", async function () {
+    try {
+       const data = await client.DestroyHourDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeDBInstanceSpecs", async function () {
     try {
        const data = await client.DescribeDBInstanceSpecs({})
@@ -331,6 +341,16 @@ it("mariadb.v20170312.InitDBInstances", async function () {
 it("mariadb.v20170312.CreateDBInstance", async function () {
     try {
        const data = await client.CreateDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyAccountPrivileges", async function () {
+    try {
+       const data = await client.ModifyAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

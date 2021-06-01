@@ -163,6 +163,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBLogFiles", req, cb);
     }
     /**
+     * 本接口（DestroyHourDBInstance）用于销毁按量计费实例。
+     */
+    async DestroyHourDBInstance(req, cb) {
+        return this.request("DestroyHourDBInstance", req, cb);
+    }
+    /**
      * 本接口(DescribeDBInstanceSpecs)用于查询可创建的云数据库可售卖的规格配置。
      */
     async DescribeDBInstanceSpecs(req, cb) {
@@ -222,6 +228,17 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateDBInstance(req, cb) {
         return this.request("CreateDBInstance", req, cb);
+    }
+    /**
+     * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
+
+**注意**
+- 系统保留库："mysql"，只开放["SELECT"]权限
+- 只读账号授予读写权限会报错
+- 不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组
+     */
+    async ModifyAccountPrivileges(req, cb) {
+        return this.request("ModifyAccountPrivileges", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组

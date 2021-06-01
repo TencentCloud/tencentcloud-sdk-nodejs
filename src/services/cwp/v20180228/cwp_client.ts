@@ -50,6 +50,7 @@ import {
   DescribeSearchTemplatesRequest,
   ExportMalwaresRequest,
   DescribeProcessesResponse,
+  ReverseShellRule,
   DeleteBashEventsResponse,
   DescribeMalwareInfoResponse,
   ExportPrivilegeEventsRequest,
@@ -76,7 +77,7 @@ import {
   DeleteMachineTagRequest,
   CreateBaselineStrategyResponse,
   DescribeMaliciousRequestsResponse,
-  ReverseShellRule,
+  ExportAssetCoreModuleListResponse,
   OpenPortStatistics,
   DescribeBruteAttackListResponse,
   DescribeExportMachinesResponse,
@@ -139,6 +140,7 @@ import {
   ExportAttackLogsRequest,
   ModifyMalwareTimingScanSettingsRequest,
   DeleteMachineRequest,
+  ExportAssetCoreModuleListRequest,
   SetBashEventsStatusResponse,
   DescribeVulInfoRequest,
   UntrustMaliciousRequestResponse,
@@ -884,6 +886,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrivilegeRulesResponse) => void
   ): Promise<DeletePrivilegeRulesResponse> {
     return this.request("DeletePrivilegeRules", req, cb)
+  }
+
+  /**
+   * 导出资产管理内核模块列表
+   */
+  async ExportAssetCoreModuleList(
+    req: ExportAssetCoreModuleListRequest,
+    cb?: (error: string, rep: ExportAssetCoreModuleListResponse) => void
+  ): Promise<ExportAssetCoreModuleListResponse> {
+    return this.request("ExportAssetCoreModuleList", req, cb)
   }
 
   /**

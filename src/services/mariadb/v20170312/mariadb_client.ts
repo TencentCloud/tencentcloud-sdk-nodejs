@@ -25,15 +25,18 @@ import {
   ParamDesc,
   DescribeDBParametersRequest,
   DescribeAccountsRequest,
+  ProcedurePrivilege,
   DescribeRenewalPriceResponse,
   CreateTmpInstancesRequest,
-  RestartDBInstancesResponse,
+  DestroyHourDBInstanceRequest,
   AssociateSecurityGroupsRequest,
   DescribeUpgradePriceRequest,
   FlushBinlogResponse,
   DescribeDBSecurityGroupsResponse,
   DescribeDBResourceUsageDetailsResponse,
   DescribeDBInstanceSpecsResponse,
+  DestroyHourDBInstanceResponse,
+  Account,
   DescribeProjectSecurityGroupsRequest,
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
@@ -64,6 +67,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   DescribeSaleInfoRequest,
   RenewDBInstanceRequest,
+  TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
   DescribeSqlLogsRequest,
   ResetAccountPasswordResponse,
@@ -71,6 +75,7 @@ import {
   DescribePriceRequest,
   CreateDBInstanceResponse,
   DescribeBackupTimeRequest,
+  RestartDBInstancesResponse,
   DescribeSaleInfoResponse,
   Deal,
   GrantAccountPrivilegesRequest,
@@ -89,18 +94,22 @@ import {
   CreateTmpInstancesResponse,
   UpgradeDBInstanceRequest,
   SecurityGroupBound,
+  ColumnPrivilege,
   DescribeUpgradePriceResponse,
   AssociateSecurityGroupsResponse,
   DBInstance,
   DescribePriceResponse,
   InitDBInstancesRequest,
+  ModifyAccountPrivilegesResponse,
   ModifyBackupTimeResponse,
   Database,
   GrantAccountPrivilegesResponse,
   OpenDBExtranetAccessRequest,
+  DatabasePrivilege,
   ModifyDBInstanceSecurityGroupsResponse,
   ModifyDBInstanceNameResponse,
   CloseDBExtranetAccessResponse,
+  FunctionPrivilege,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
   DescribeDBPerformanceDetailsRequest,
@@ -108,6 +117,7 @@ import {
   SlowLogData,
   RenewDBInstanceResponse,
   DescribeDatabasesResponse,
+  ViewPrivileges,
   DescribeOrdersRequest,
   DescribeDBLogFilesResponse,
   CloseDBExtranetAccessRequest,
@@ -116,6 +126,7 @@ import {
   DescribeDcnDetailResponse,
   InstanceSpec,
   DescribeFlowRequest,
+  ModifyAccountPrivilegesRequest,
   DescribeDBPerformanceResponse,
   DescribeInstanceNodeInfoRequest,
   CreateAccountResponse,
@@ -379,6 +390,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DestroyHourDBInstance）用于销毁按量计费实例。
+   */
+  async DestroyHourDBInstance(
+    req: DestroyHourDBInstanceRequest,
+    cb?: (error: string, rep: DestroyHourDBInstanceResponse) => void
+  ): Promise<DestroyHourDBInstanceResponse> {
+    return this.request("DestroyHourDBInstance", req, cb)
+  }
+
+  /**
    * 本接口(DescribeDBInstanceSpecs)用于查询可创建的云数据库可售卖的规格配置。
    */
   async DescribeDBInstanceSpecs(
@@ -477,6 +498,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDBInstanceResponse) => void
   ): Promise<CreateDBInstanceResponse> {
     return this.request("CreateDBInstance", req, cb)
+  }
+
+  /**
+     * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
+
+**注意**
+- 系统保留库："mysql"，只开放["SELECT"]权限
+- 只读账号授予读写权限会报错
+- 不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组
+     */
+  async ModifyAccountPrivileges(
+    req: ModifyAccountPrivilegesRequest,
+    cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void
+  ): Promise<ModifyAccountPrivilegesResponse> {
+    return this.request("ModifyAccountPrivileges", req, cb)
   }
 
   /**

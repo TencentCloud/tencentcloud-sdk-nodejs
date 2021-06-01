@@ -5,35 +5,43 @@ export interface DescribeEnvLimitResponse {
     /**
       * 环境总数上限
       */
-    MaxEnvNum?: number;
+    MaxEnvNum: number;
     /**
       * 目前环境总数
       */
-    CurrentEnvNum?: number;
+    CurrentEnvNum: number;
     /**
       * 免费环境数量上限
       */
-    MaxFreeEnvNum?: number;
+    MaxFreeEnvNum: number;
     /**
       * 目前免费环境数量
       */
-    CurrentFreeEnvNum?: number;
+    CurrentFreeEnvNum: number;
     /**
       * 总计允许销毁环境次数上限
       */
-    MaxDeleteTotal?: number;
+    MaxDeleteTotal: number;
     /**
       * 目前已销毁环境次数
       */
-    CurrentDeleteTotal?: number;
+    CurrentDeleteTotal: number;
     /**
       * 每月允许销毁环境次数上限
       */
-    MaxDeleteMonthly?: number;
+    MaxDeleteMonthly: number;
     /**
       * 本月已销毁环境次数
       */
-    CurrentDeleteMonthly?: number;
+    CurrentDeleteMonthly: number;
+    /**
+      * 微信网关体验版可购买月份数
+      */
+    MaxFreeTrialNum: number;
+    /**
+      * 微信网关体验版已购买月份数
+      */
+    CurrentFreeTrialNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1772,12 +1780,12 @@ export interface CreatePostpayPackageResponse {
     /**
       * 后付费订单号
       */
-    TranId?: string;
+    TranId: string;
     /**
       * 环境ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnvId?: string;
+    EnvId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
