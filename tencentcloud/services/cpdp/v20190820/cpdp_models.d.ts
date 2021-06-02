@@ -794,6 +794,10 @@ development: 开发环境
 缺省: release
       */
     MidasEnvironment?: string;
+    /**
+      * 经办人信息
+      */
+    AgencyClientInfo?: AgencyClientInfo;
 }
 /**
  * ReviseMbrProperty请求参数结构体
@@ -1223,65 +1227,25 @@ development: 开发环境
     ContractDisplayName?: string;
 }
 /**
- * WithdrawCashMembership请求参数结构体
+ * 经办人信息
  */
-export interface WithdrawCashMembershipRequest {
+export interface AgencyClientInfo {
     /**
-      * String(22)，商户号（签约客户号）
+      * 经办人姓名，存在经办人必输
       */
-    MrchCode: string;
+    AgencyClientName: string;
     /**
-      * STRING(150)，交易网名称（市场名称）
+      * 经办人证件类型，存在经办人必输
       */
-    TranWebName: string;
+    AgencyClientGlobalType: string;
     /**
-      * STRING(5)，会员证件类型（详情见“常见问题”）
+      * 经办人证件号，存在经办人必输
       */
-    MemberGlobalType: string;
+    AgencyClientGlobalId: string;
     /**
-      * STRING(32)，会员证件号码
+      * 经办人手机号，存在经办人必输
       */
-    MemberGlobalId: string;
-    /**
-      * STRING(32)，交易网会员代码
-      */
-    TranNetMemberCode: string;
-    /**
-      * STRING(150)，会员名称
-      */
-    MemberName: string;
-    /**
-      * STRING(50)，提现账号（银行卡）
-      */
-    TakeCashAcctNo: string;
-    /**
-      * STRING(150)，出金账户名称（银行卡户名）
-      */
-    OutAmtAcctName: string;
-    /**
-      * STRING(3)，币种（默认为RMB）
-      */
-    Ccy: string;
-    /**
-      * STRING(20)，可提现金额
-      */
-    CashAmt: string;
-    /**
-      * STRING(300)，备注（建议可送订单号，可在对账文件的备注字段获取到）
-      */
-    Remark?: string;
-    /**
-      * STRING(1027)，保留域
-      */
-    ReservedMsg?: string;
-    /**
-      * STRING(300)，网银签名
-      */
-    WebSign?: string;
-    /**
-      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
-      */
-    Profile?: string;
+    AgencyClientMobile: string;
 }
 /**
  * 退款子订单列表
@@ -2052,6 +2016,7 @@ export interface CreateAcctRequest {
       * 子商户类型：
 个人: personal
 企业: enterprise
+个体工商户: individual
 缺省: enterprise
       */
     SubMchType?: string;
@@ -2095,6 +2060,15 @@ development: 开发环境
 缺省: release
       */
     MidasEnvironment?: string;
+    /**
+      * 店铺名称
+企业、个体工商户必输
+      */
+    SubMerchantStoreName?: string;
+    /**
+      * 公司信息
+      */
+    OrganizationInfo?: OrganizationInfo;
 }
 /**
  * CreateSinglePay请求参数结构体
@@ -3182,6 +3156,35 @@ export interface ExecuteMemberTransactionResponse {
     RequestId?: string;
 }
 /**
+ * 公司信息
+ */
+export interface OrganizationInfo {
+    /**
+      * 公司名称，个体工商户必输
+      */
+    OrganizationName?: string;
+    /**
+      * 公司证件类型，个体工商户必输，证件类型仅支持73
+      */
+    OrganizationType?: string;
+    /**
+      * 公司证件号码，个体工商户必输
+      */
+    OrganizationCode?: string;
+    /**
+      * 法人名称，如果SubMchName不是法人，需要另外送入法人信息（企业必输）
+      */
+    LegalPersonName?: string;
+    /**
+      * 法人证件类型，如果SubMchName不是法人，需要另外送入法人信息（企业必输）
+      */
+    LegalPersonIdType?: string;
+    /**
+      * 法人证件号码，如果SubMchName不是法人，需要另外送入法人信息（企业必输）
+      */
+    LegalPersonIdCode?: string;
+}
+/**
  * BindRelateAcctUnionPay请求参数结构体
  */
 export interface BindRelateAcctUnionPayRequest {
@@ -3531,6 +3534,28 @@ export interface CreateInvoiceResultV2 {
       * 发票ID
       */
     InvoiceId: string;
+}
+/**
+ * RegisterBehavior返回参数结构体
+ */
+export interface RegisterBehaviorResponse {
+    /**
+      * 补录是否成功标志
+功能标志为2时存在。
+S：成功
+F：失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReplenishSuccessFlag: string;
+    /**
+      * 签约信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegisterInfo: RegisterInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询发票结果数据
@@ -4293,11 +4318,11 @@ export interface CreateAcctResponse {
     /**
       * 聚鑫计费SubAppId，代表子商户
       */
-    SubAppId?: string;
+    SubAppId: string;
     /**
       * 银行生成的子商户账户
       */
-    SubAcctNo?: string;
+    SubAcctNo: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5139,6 +5164,67 @@ export interface RegisterBillResponse {
     RequestId?: string;
 }
 /**
+ * WithdrawCashMembership请求参数结构体
+ */
+export interface WithdrawCashMembershipRequest {
+    /**
+      * String(22)，商户号（签约客户号）
+      */
+    MrchCode: string;
+    /**
+      * STRING(150)，交易网名称（市场名称）
+      */
+    TranWebName: string;
+    /**
+      * STRING(5)，会员证件类型（详情见“常见问题”）
+      */
+    MemberGlobalType: string;
+    /**
+      * STRING(32)，会员证件号码
+      */
+    MemberGlobalId: string;
+    /**
+      * STRING(32)，交易网会员代码
+      */
+    TranNetMemberCode: string;
+    /**
+      * STRING(150)，会员名称
+      */
+    MemberName: string;
+    /**
+      * STRING(50)，提现账号（银行卡）
+      */
+    TakeCashAcctNo: string;
+    /**
+      * STRING(150)，出金账户名称（银行卡户名）
+      */
+    OutAmtAcctName: string;
+    /**
+      * STRING(3)，币种（默认为RMB）
+      */
+    Ccy: string;
+    /**
+      * STRING(20)，可提现金额
+      */
+    CashAmt: string;
+    /**
+      * STRING(300)，备注（建议可送订单号，可在对账文件的备注字段获取到）
+      */
+    Remark?: string;
+    /**
+      * STRING(1027)，保留域
+      */
+    ReservedMsg?: string;
+    /**
+      * STRING(300)，网银签名
+      */
+    WebSign?: string;
+    /**
+      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+      */
+    Profile?: string;
+}
+/**
  * ApplyOutwardOrder请求参数结构体
  */
 export interface ApplyOutwardOrderRequest {
@@ -5385,6 +5471,41 @@ export interface AgentTaxPaymentBatch {
       * 0-视同，1-个体工商户
       */
     Type: number;
+}
+/**
+ * 签约信息
+ */
+export interface RegisterInfo {
+    /**
+      * 法人证件号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LegalPersonIdCode: string;
+    /**
+      * 法人证件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LegalPersonIdType: string;
+    /**
+      * 法人名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LegalPersonName: string;
+    /**
+      * 公司证件号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationCode: string;
+    /**
+      * 公司名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationName: string;
+    /**
+      * 公司证件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationType: string;
 }
 /**
  * CreateInvoice请求参数结构体
@@ -5910,6 +6031,66 @@ export interface QueryAgentStatementsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RegisterBehavior请求参数结构体
+ */
+export interface RegisterBehaviorRequest {
+    /**
+      * 聚鑫分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 聚鑫计费SubAppId，代表子商户
+      */
+    SubAppId: string;
+    /**
+      * 聚鑫分配的安全ID
+      */
+    MidasSecretId: string;
+    /**
+      * 按照聚鑫安全密钥计算的签名
+      */
+    MidasSignature: string;
+    /**
+      * 功能标志
+1：登记行为记录信息
+2：查询补录信息
+      */
+    FunctionFlag: number;
+    /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+    MidasEnvironment?: string;
+    /**
+      * 操作点击时间
+yyyyMMddHHmmss
+功能标志FunctionFlag=1时必输
+      */
+    OperationClickTime?: string;
+    /**
+      * IP地址
+功能标志FunctionFlag=1时必输
+      */
+    IpAddress?: string;
+    /**
+      * MAC地址
+功能标志FunctionFlag=1时必输
+      */
+    MacAddress?: string;
+    /**
+      * 签约渠道
+1:  App
+2:  平台H5网页
+3：公众号
+4：小程序
+功能标志FunctionFlag=1时必输
+      */
+    SignChannel?: number;
 }
 /**
  * ReviseMbrProperty返回参数结构体

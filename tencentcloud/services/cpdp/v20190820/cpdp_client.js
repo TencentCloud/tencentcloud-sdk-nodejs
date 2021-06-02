@@ -184,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAgentTaxPaymentInfos", req, cb);
     }
     /**
+     * 商户查询是否签约和签约行为上报
+     */
+    async RegisterBehavior(req, cb) {
+        return this.request("RegisterBehavior", req, cb);
+    }
+    /**
      * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
      */
     async RegisterBillSupportWithdraw(req, cb) {

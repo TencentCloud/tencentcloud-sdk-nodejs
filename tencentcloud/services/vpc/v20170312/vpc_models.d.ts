@@ -7721,11 +7721,11 @@ export interface DeleteNetDetectRequest {
  */
 export interface IPSECOptionsSpecification {
     /**
-      * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'NULL'， 默认为AES-CBC-128
+      * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'， 默认为AES-CBC-128
       */
     EncryptAlgorithm?: string;
     /**
-      * 认证算法：可选值：'MD5', 'SHA1'，默认为
+      * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为
       */
     IntegrityAlgorith?: string;
     /**

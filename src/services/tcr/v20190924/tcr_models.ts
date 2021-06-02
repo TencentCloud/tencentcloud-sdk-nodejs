@@ -938,23 +938,18 @@ export interface NamespaceInfo {
 }
 
 /**
- * RenewInstance请求参数结构体
+ * CreateMultipleSecurityPolicy返回参数结构体
  */
-export interface RenewInstanceRequest {
+export interface CreateMultipleSecurityPolicyResponse {
   /**
    * 实例Id
    */
   RegistryId: string
 
   /**
-   * 预付费自动续费标识和购买时长
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  RegistryChargePrepaid: RegistryChargePrepaid
-
-  /**
-   * 0 续费， 1按量转包年包月
-   */
-  Flag: number
+  RequestId?: string
 }
 
 /**
@@ -1993,6 +1988,26 @@ export interface DescribeWebhookTriggerLogRequest {
 }
 
 /**
+ * RenewInstance请求参数结构体
+ */
+export interface RenewInstanceRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+
+  /**
+   * 预付费自动续费标识和购买时长
+   */
+  RegistryChargePrepaid: RegistryChargePrepaid
+
+  /**
+   * 0 续费， 1按量转包年包月
+   */
+  Flag: number
+}
+
+/**
  * CreateUserPersonal请求参数结构体
  */
 export interface CreateUserPersonalRequest {
@@ -2088,6 +2103,21 @@ export interface DeleteTagRetentionRuleResponse {
 }
 
 /**
+ * DeleteMultipleSecurityPolicy请求参数结构体
+ */
+export interface DeleteMultipleSecurityPolicyRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+
+  /**
+   * 安全组策略
+   */
+  SecurityGroupPolicySet: Array<SecurityPolicy>
+}
+
+/**
  * DeleteSecurityPolicy返回参数结构体
  */
 export interface DeleteSecurityPolicyResponse {
@@ -2146,22 +2176,22 @@ export interface SecurityPolicy {
   /**
    * 策略索引
    */
-  PolicyIndex: number
+  PolicyIndex?: number
 
   /**
    * 备注
    */
-  Description: string
+  Description?: string
 
   /**
-   * 192.168.1.0/24
+   * 运行访问的公网IP地址端
    */
-  CidrBlock: string
+  CidrBlock?: string
 
   /**
    * 安全策略的版本
    */
-  PolicyVersion: string
+  PolicyVersion?: string
 }
 
 /**
@@ -2554,6 +2584,21 @@ export interface TagSpecification {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+}
+
+/**
+ * CreateMultipleSecurityPolicy请求参数结构体
+ */
+export interface CreateMultipleSecurityPolicyRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+
+  /**
+   * 安全组策略
+   */
+  SecurityGroupPolicySet: Array<SecurityPolicy>
 }
 
 /**
@@ -3405,6 +3450,21 @@ export interface DescribeApplicationTriggerLogPersonalResponse {
    * 触发日志返回值
    */
   Data?: DescribeApplicationTriggerLogPersonalResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteMultipleSecurityPolicy返回参数结构体
+ */
+export interface DeleteMultipleSecurityPolicyResponse {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

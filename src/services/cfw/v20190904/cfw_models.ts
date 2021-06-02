@@ -1500,7 +1500,7 @@ export interface ModifyBlockIgnoreListRequest {
   IOC: Array<IocListData>
 
   /**
-   * 默认值:delete（删除）、edit（编辑）、add（添加）  其他值无效
+   * 可选值：delete（删除）、edit（编辑）、add（添加）  其他值无效
    */
   IocAction: string
 

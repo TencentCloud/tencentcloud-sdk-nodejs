@@ -51,7 +51,7 @@ import {
   QueryBankWithdrawCashDetailsResponse,
   QueryItem,
   ContractOrderRequest,
-  WithdrawCashMembershipRequest,
+  AgencyClientInfo,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
   WithdrawBill,
@@ -107,6 +107,7 @@ import {
   ContractInfo,
   ExternalReturnContractInfo,
   ExecuteMemberTransactionResponse,
+  OrganizationInfo,
   BindRelateAcctUnionPayRequest,
   CreateInvoiceResultData,
   TransferDetailRequest,
@@ -121,6 +122,7 @@ import {
   SceneInfo,
   QueryContractResponse,
   CreateInvoiceResultV2,
+  RegisterBehaviorResponse,
   QueryInvoiceResultData,
   QueryBillDownloadURLData,
   QuerySingleTransactionStatusResponse,
@@ -167,12 +169,14 @@ import {
   RefundMemberTransactionRequest,
   Order,
   RegisterBillResponse,
+  WithdrawCashMembershipRequest,
   ApplyOutwardOrderRequest,
   UnbindRelateAcctResponse,
   RechargeByThirdPayResponse,
   CheckAmountRequest,
   ApplyReWithdrawalRequest,
   AgentTaxPaymentBatch,
+  RegisterInfo,
   CreateInvoiceRequest,
   TransferSinglePayResponse,
   QueryTradeResult,
@@ -187,6 +191,7 @@ import {
   CreateRedInvoiceV2Response,
   QueryCommonTransferRechargeRequest,
   QueryAgentStatementsResponse,
+  RegisterBehaviorRequest,
   ReviseMbrPropertyResponse,
   QueryTransferDetailRequest,
   QueryOrderRequest,
@@ -535,6 +540,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAgentTaxPaymentInfosResponse) => void
   ): Promise<DeleteAgentTaxPaymentInfosResponse> {
     return this.request("DeleteAgentTaxPaymentInfos", req, cb)
+  }
+
+  /**
+   * 商户查询是否签约和签约行为上报
+   */
+  async RegisterBehavior(
+    req: RegisterBehaviorRequest,
+    cb?: (error: string, rep: RegisterBehaviorResponse) => void
+  ): Promise<RegisterBehaviorResponse> {
+    return this.request("RegisterBehavior", req, cb)
   }
 
   /**

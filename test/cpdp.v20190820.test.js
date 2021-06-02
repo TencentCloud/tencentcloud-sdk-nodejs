@@ -278,6 +278,16 @@ it("cpdp.v20190820.DeleteAgentTaxPaymentInfos", async function () {
     }
 })
 
+it("cpdp.v20190820.RegisterBehavior", async function () {
+    try {
+       const data = await client.RegisterBehavior({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
     try {
        const data = await client.RegisterBillSupportWithdraw({})
