@@ -170,6 +170,7 @@ import {
   PlayerLatencyPolicy,
   FleetRelatedResource,
   UpdateRuntimeConfigurationRequest,
+  EndGameServerSessionAndProcessRequest,
   GameProperty,
   CreateAssetWithImageResponse,
   FleetStatisticTimes,
@@ -184,6 +185,7 @@ import {
   GetUploadFederationTokenRequest,
   DescribeTimerScalingPoliciesResponse,
   CopyFleetRequest,
+  EndGameServerSessionAndProcessResponse,
   SearchGameServerSessionsResponse,
   PutTimerScalingPolicyResponse,
   DescribeFleetEventsResponse,
@@ -640,6 +642,16 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
+   * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+   */
+  async ResolveAlias(
+    req: ResolveAliasRequest,
+    cb?: (error: string, rep: ResolveAliasResponse) => void
+  ): Promise<ResolveAliasResponse> {
+    return this.request("ResolveAlias", req, cb)
+  }
+
+  /**
    * 本接口（DeleteAlias）用于删除别名。
    */
   async DeleteAlias(
@@ -1055,13 +1067,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+   * 本接口（EndGameServerSessionAndProcess）用于终止游戏服务器会话和对应的进程。
    */
-  async ResolveAlias(
-    req: ResolveAliasRequest,
-    cb?: (error: string, rep: ResolveAliasResponse) => void
-  ): Promise<ResolveAliasResponse> {
-    return this.request("ResolveAlias", req, cb)
+  async EndGameServerSessionAndProcess(
+    req: EndGameServerSessionAndProcessRequest,
+    cb?: (error: string, rep: EndGameServerSessionAndProcessResponse) => void
+  ): Promise<EndGameServerSessionAndProcessResponse> {
+    return this.request("EndGameServerSessionAndProcess", req, cb)
   }
 
   /**

@@ -3611,6 +3611,26 @@ export interface UpdateRuntimeConfigurationRequest {
 }
 
 /**
+ * EndGameServerSessionAndProcess请求参数结构体
+ */
+export interface EndGameServerSessionAndProcessRequest {
+  /**
+   * 游戏服务器会话ID
+   */
+  GameServerSessionId?: string
+
+  /**
+   * CVM的公网IP地址
+   */
+  IpAddress?: string
+
+  /**
+   * 端口号，最小值不小于1，最大值不超过60000
+   */
+  Port?: number
+}
+
+/**
  * 游戏属性详情
  */
 export interface GameProperty {
@@ -3964,6 +3984,16 @@ export interface CopyFleetRequest {
    * fleet公网出带宽最大值，默认100Mbps，范围1-200Mbps
    */
   InternetMaxBandwidthOut?: number
+}
+
+/**
+ * EndGameServerSessionAndProcess返回参数结构体
+ */
+export interface EndGameServerSessionAndProcessResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

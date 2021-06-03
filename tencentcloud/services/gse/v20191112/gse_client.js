@@ -321,6 +321,12 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DescribeFleetStatisticSummary", req, cb);
     }
     /**
+     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+     */
+    async ResolveAlias(req, cb) {
+        return this.request("ResolveAlias", req, cb);
+    }
+    /**
      * 本接口（DeleteAlias）用于删除别名。
      */
     async DeleteAlias(req, cb) {
@@ -572,10 +578,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+     * 本接口（EndGameServerSessionAndProcess）用于终止游戏服务器会话和对应的进程。
      */
-    async ResolveAlias(req, cb) {
-        return this.request("ResolveAlias", req, cb);
+    async EndGameServerSessionAndProcess(req, cb) {
+        return this.request("EndGameServerSessionAndProcess", req, cb);
     }
     /**
      * 本接口（PutTimerScalingPolicy）用于给fleet创建或更新定时器。

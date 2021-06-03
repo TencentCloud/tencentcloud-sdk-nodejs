@@ -863,12 +863,13 @@ export interface DescribeOnlineRecordResponse {
 - AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止录制
 - USER_CALL: 主动调用了停止录制接口
 - EXCEPTION: 录制异常结束
+- FORCE_STOP: 强制停止录制，一般是因为暂停超过90分钟或者录制总时长超过24小时。
       */
-    FinishReason?: string;
+    FinishReason: string;
     /**
       * 需要查询结果的录制任务Id
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 录制任务状态
 - PREPARED: 表示录制正在准备中（进房/启动录制服务等操作）
@@ -877,48 +878,48 @@ export interface DescribeOnlineRecordResponse {
 - STOPPED: 表示录制已停止，正在处理并上传视频
 - FINISHED: 表示视频处理并上传完成，成功生成录制结果
       */
-    Status?: string;
+    Status: string;
     /**
       * 房间号
       */
-    RoomId?: number;
+    RoomId: number;
     /**
       * 白板的群组 Id
       */
-    GroupId?: string;
+    GroupId: string;
     /**
       * 录制用户Id
       */
-    RecordUserId?: string;
+    RecordUserId: string;
     /**
       * 实际开始录制时间，Unix 时间戳，单位秒
       */
-    RecordStartTime?: number;
+    RecordStartTime: number;
     /**
       * 实际停止录制时间，Unix 时间戳，单位秒
       */
-    RecordStopTime?: number;
+    RecordStopTime: number;
     /**
       * 回放视频总时长（单位：毫秒）
       */
-    TotalTime?: number;
+    TotalTime: number;
     /**
       * 录制过程中出现异常的次数
       */
-    ExceptionCnt?: number;
+    ExceptionCnt: number;
     /**
       * 拼接视频中被忽略的时间段，只有开启视频拼接功能的时候，这个参数才是有效的
       */
-    OmittedDurations?: Array<OmittedDuration>;
+    OmittedDurations: Array<OmittedDuration>;
     /**
       * 录制视频列表
       */
-    VideoInfos?: Array<VideoInfo>;
+    VideoInfos: Array<VideoInfo>;
     /**
       * 回放URL，需配合信令播放器使用。此字段仅适用于`视频生成模式`
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReplayUrl?: string;
+    ReplayUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

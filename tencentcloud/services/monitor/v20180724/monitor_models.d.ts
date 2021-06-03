@@ -298,13 +298,17 @@ export interface DescribePolicyGroupListResponse {
  */
 export interface BindingPolicyObjectRequest {
     /**
+      * 必填。固定值"monitor"
+      */
+    Module: string;
+    /**
       * 策略组id，如传入 PolicyId 则该字段会被忽略可传入任意值如 0
       */
     GroupId: number;
     /**
-      * 必填。固定值"monitor"
+      * 告警策略ID，使用此字段时 GroupId 会被忽略
       */
-    Module: string;
+    PolicyId?: string;
     /**
       * 实例分组ID
       */
@@ -313,10 +317,6 @@ export interface BindingPolicyObjectRequest {
       * 需要绑定的对象维度信息
       */
     Dimensions?: Array<BindingPolicyObjectDimension>;
-    /**
-      * 告警策略ID，使用此字段时 GroupId 会被忽略
-      */
-    PolicyId?: string;
 }
 /**
  * CreateServiceDiscovery返回参数结构体

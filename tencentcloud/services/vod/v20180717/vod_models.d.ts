@@ -9455,11 +9455,11 @@ export interface DescribeSubAppIdsResponse {
     /**
       * 子应用信息集合。
       */
-    SubAppIdInfoSet?: Array<SubAppIdInfo>;
+    SubAppIdInfoSet: Array<SubAppIdInfo>;
     /**
       * 子应用总数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteAttackDownloadRecordRequest, AddCustomRuleRequest, ModifyCustomRuleStatusRequest, DescribeCustomRulesRequest, DeleteSessionRequest, DeleteDownloadRecordResponse, DescribeCustomRulesResponse, DeleteDownloadRecordRequest, ModifyCustomRuleStatusResponse, DescribeUserClbWafRegionsRequest, DescribeUserClbWafRegionsResponse, DeleteAttackDownloadRecordResponse, CreateAttackDownloadTaskRequest, CreateAttackDownloadTaskResponse, DeleteSessionResponse, AddCustomRuleResponse } from "./waf_models";
+import { DescribeUserClbWafRegionsResponse, ModifyCustomRuleStatusResponse, DeleteAttackDownloadRecordResponse, DescribeFlowTrendRequest, ModifyCustomRuleStatusRequest, DeleteDownloadRecordResponse, DescribeUserClbWafRegionsRequest, DeleteAttackDownloadRecordRequest, DeleteSessionResponse, DescribeCustomRulesResponse, DeleteSessionRequest, CreateAttackDownloadTaskResponse, AddCustomRuleResponse, DescribeFlowTrendResponse, AddCustomRuleRequest, DescribeCustomRulesRequest, DeleteDownloadRecordRequest, CreateAttackDownloadTaskRequest } from "./waf_models";
 /**
  * waf client
  * @class
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 删除CC攻击的session设置
      */
     DeleteSession(req: DeleteSessionRequest, cb?: (error: string, rep: DeleteSessionResponse) => void): Promise<DeleteSessionResponse>;
+    /**
+     * 获取waf流量访问趋势
+     */
+    DescribeFlowTrend(req: DescribeFlowTrendRequest, cb?: (error: string, rep: DescribeFlowTrendResponse) => void): Promise<DescribeFlowTrendResponse>;
     /**
      * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
      */

@@ -100,14 +100,19 @@ export interface DeployServiceV2Response {
  */
 export interface IngressTls {
   /**
-   * host 数组
+   * host 数组, 空数组表示全部域名的默认证书
    */
   Hosts: Array<string>
 
   /**
-   * secret name
+   * secret name，如使用证书，则填空字符串
    */
   SecretName: string
+
+  /**
+   * SSL Certificate Id
+   */
+  CertificateId?: string
 }
 
 /**
@@ -685,6 +690,17 @@ export interface IngressInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Vip?: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: string
+
+  /**
+   * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
+   */
+  Mixed?: boolean
 }
 
 /**
@@ -797,6 +813,11 @@ export interface IngressRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Host?: string
+
+  /**
+   * 协议，选项为 http， https，默认为 http
+   */
+  Protocol?: string
 }
 
 /**
@@ -876,9 +897,21 @@ export interface RunVersionPod {
   CreateTime: string
 
   /**
-   * pod的ip
+   * 实例的ip
    */
   PodIp: string
+
+  /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
+
+  /**
+      * 部署版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployVersion: string
 }
 
 /**

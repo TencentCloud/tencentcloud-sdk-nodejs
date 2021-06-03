@@ -318,6 +318,16 @@ it("gse.v20191112.DescribeFleetStatisticSummary", async function () {
     }
 })
 
+it("gse.v20191112.ResolveAlias", async function () {
+    try {
+       const data = await client.ResolveAlias({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gse.v20191112.DeleteAlias", async function () {
     try {
        const data = await client.DeleteAlias({})
@@ -728,9 +738,9 @@ it("gse.v20191112.DescribeInstances", async function () {
     }
 })
 
-it("gse.v20191112.ResolveAlias", async function () {
+it("gse.v20191112.EndGameServerSessionAndProcess", async function () {
     try {
-       const data = await client.ResolveAlias({})
+       const data = await client.EndGameServerSessionAndProcess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

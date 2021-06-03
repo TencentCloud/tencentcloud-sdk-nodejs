@@ -238,19 +238,19 @@ export interface IHCInfo {
   Index: Array<number>
 
   /**
-      * “”
+      * 原文
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Src: string
 
   /**
-      * “”
+      * 名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Name: string
 
   /**
-   * “”
+   * 值
    */
   Value: Value
 }
@@ -305,7 +305,7 @@ export interface HandleParam {
  */
 export interface ImageToObjectRequest {
   /**
-   * 图片列表
+   * 图片列表，允许传入多张图片，支持传入图片的url或base64编码
    */
   ImageInfoList: Array<ImageInfo>
 
@@ -444,7 +444,7 @@ export interface TuberInfo {
   Size: Array<Size>
 
   /**
-      * 数量
+      * 多发
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Multiple: Multiple
@@ -474,31 +474,31 @@ export interface TuberInfo {
   RearEcho: BlockInfo
 
   /**
-      * 质地
+      * 质地弹性
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Elastic: Elastic
 
   /**
-      * 形态
+      * 形状
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Shape: BlockInfo
 
   /**
-      * 形态属性
+      * 形态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ShapeAttr: BlockInfo
 
   /**
-      * “”
+      * 皮髓质信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SkinMedulla: BlockInfo
 
   /**
-      * “”
+      * 变化趋势
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Trend: BlockInfo
@@ -540,13 +540,13 @@ export interface TuberInfo {
   Activity: BlockInfo
 
   /**
-      * “”
+      * 手术情况
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Operation: BlockInfo
 
   /**
-      * “”
+      * 血液cdfi
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CDFI: BlockInfo
@@ -558,67 +558,67 @@ export interface TuberInfo {
   Index: Array<number>
 
   /**
-      * “”
+      * 大小状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SizeStatus: BlockInfo
 
   /**
-      * “”
+      * 内部回声分布
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InnerEchoDistribution: BlockInfo
 
   /**
-      * “”
+      * 内部回声类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InnerEchoType: Array<BlockInfo>
 
   /**
-      * “”
+      * 轮廓
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Outline: BlockInfo
 
   /**
-      * “”
+      * 结构
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Structure: BlockInfo
 
   /**
-      * “”
+      * 密度
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Density: BlockInfo
 
   /**
-      * “”
+      * 血管
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Vas: BlockInfo
 
   /**
-      * “”
+      * 囊壁
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Cysticwall: BlockInfo
 
   /**
-      * “”
+      * 被膜
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Capsule: BlockInfo
 
   /**
-      * “”
+      * 峡部厚度
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsthmusThicknese: Size
 
   /**
-      * “”
+      * 原文
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Src: string
@@ -681,19 +681,19 @@ export interface Multiple {
  */
 export interface FamilyMedicalHistory {
   /**
-      * ""
+      * 家族成员史
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RelativeHistory: string
 
   /**
-      * ""
+      * 家族肿瘤史
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RelativeCancerHistory: string
 
   /**
-      * ""
+      * 家族遗传史
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GeneticHistory: string
@@ -865,45 +865,45 @@ export interface NormPart {
  */
 export interface MedDoc {
   /**
-      * “”
+      * 建议
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Advice: Advice
 
   /**
-      * “”
+      * 诊断结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Diagnosis: Array<DiagCertItem>
 
   /**
-      * “”
+      * 疾病史
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DiseaseMedicalHistory: DiseaseMedicalHistory
 
   /**
-   * “”
+   * 个人史
    */
   PersonalMedicalHistory: PersonalMedicalHistory
 
   /**
-   * “”
+   * 婚孕史
    */
   ObstericalMedicalHistory: ObstericalMedicalHistory
 
   /**
-   * “”
+   * 家族史
    */
   FamilyMedicalHistory: FamilyMedicalHistory
 
   /**
-   * “”
+   * 月经史
    */
   MenstrualMedicalHistory: MenstrualMedicalHistory
 
   /**
-   * “”
+   * 诊疗记录
    */
   TreatmentRecord: TreatmentRecord
 }
@@ -1024,109 +1024,109 @@ export interface Organ {
   Size: Array<Size>
 
   /**
-      * ""
+      * 包膜
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Envelope: BlockInfo
 
   /**
-      * ""
+      * 边缘
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Edge: BlockInfo
 
   /**
-      * ""
+      * 内部回声
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InnerEcho: BlockInfo
 
   /**
-      * ""
+      * 腺体
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Gland: BlockInfo
 
   /**
-      * ""
+      * 形状
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Shape: BlockInfo
 
   /**
-      * ""
+      * 厚度
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Thickness: BlockInfo
 
   /**
-      * ""
+      * 形态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ShapeAttr: BlockInfo
 
   /**
-      * ""
+      * 血液cdfi
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CDFI: BlockInfo
 
   /**
-      * ""
+      * 描述信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SymDesc: BlockInfo
 
   /**
-      * ""
+      * 大小状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SizeStatus: BlockInfo
 
   /**
-      * ""
+      * 轮廓
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Outline: BlockInfo
 
   /**
-      * ""
+      * 结构
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Structure: BlockInfo
 
   /**
-      * ""
+      * 密度
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Density: BlockInfo
 
   /**
-      * ""
+      * 血管
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Vas: BlockInfo
 
   /**
-      * ""
+      * 囊壁
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Cysticwall: BlockInfo
 
   /**
-      * ""
+      * 被膜
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Capsule: BlockInfo
 
   /**
-      * ""
+      * 峡部厚度
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsthmusThicknese: Size
 
   /**
-      * ""
+      * 内部回声分布
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InnerEchoDistribution: BlockInfo
@@ -1166,163 +1166,163 @@ export interface DiagCert {
  */
 export interface TreatmentRecord {
   /**
-      * ""
+      * 入院
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DmissionCondition: string
 
   /**
-      * ""
+      * 主诉
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ChiefComplaint: string
 
   /**
-      * ""
+      * 现病史
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DiseasePresent: string
 
   /**
-      * ""
+      * 主要症状体征
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SymptomsAndSigns: string
 
   /**
-      * “”
+      * 辅助检查
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AuxiliaryExamination: string
 
   /**
-      * “”
+      * 体格检查
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BodyExamination: string
 
   /**
-      * “”
+      * 专科检查
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SpecialistExamination: string
 
   /**
-      * “”
+      * 精神检查
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MentalExamination: string
 
   /**
-      * “”
+      * 检查记录
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CheckRecord: string
 
   /**
-      * “”
+      * 化验结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InspectResult: string
 
   /**
-      * “”
+      * 切口愈合情况
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IncisionHealing: string
 
   /**
-      * “”
+      * 处理意见
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TreatmentSuggestion: string
 
   /**
-      * “”
+      * 门诊随访要求
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FollowUpRequirements: string
 
   /**
-      * “”
+      * 诊疗经过
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CheckAndTreatmentProcess: string
 
   /**
-      * “”
+      * 手术经过
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SurgeryCondition: string
 
   /**
-      * “”
+      * 入院情况
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ConditionChanges: string
 
   /**
-      * “”
+      * 出院情况
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DischargeCondition: string
 
   /**
-      * “”
+      * pTNM信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PTNM: string
 
   /**
-      * “”
+      * pTNMM信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PTNMM: string
 
   /**
-      * “”
+      * pTNMN信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PTNMN: string
 
   /**
-      * “”
+      * pTNMT信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PTNMT: string
 
   /**
-      * “”
+      * ECOG信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ECOG: string
 
   /**
-      * “”
+      * NRS信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NRS: string
 
   /**
-      * “”
+      * KPS信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KPS: string
 
   /**
-      * “”
+      * 死亡日期
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeathDate: string
 
   /**
-      * “”
+      * 复发日期
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RelapseDate: string
 
   /**
-      * “”
+      * 观测天数
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ObservationDays: string
@@ -1333,13 +1333,13 @@ export interface TreatmentRecord {
  */
 export interface Value {
   /**
-      * “”
+      * 等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Grade: string
 
   /**
-      * “”
+      * 百分比
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Percent: Array<number>
@@ -1362,25 +1362,25 @@ export interface DischargeDiagnosis {
   TableIndex: number
 
   /**
-      * ""
+      * 出院诊断
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OutDiagnosis: BlockInfo
 
   /**
-      * ""
+      * 疾病编码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DiseaseCode: BlockInfo
 
   /**
-      * ""
+      * 入院情况
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InStatus: BlockInfo
 
   /**
-      * ""
+      * 出院情况
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OutStatus: BlockInfo
@@ -1426,13 +1426,13 @@ export interface DiseaseMedicalHistory {
  */
 export interface PathologyReport {
   /**
-      * ""
+      * 癌症部位
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CancerPart: Part
 
   /**
-      * ""
+      * 癌症部位大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CancerSize: Array<Size>
@@ -1444,67 +1444,67 @@ export interface PathologyReport {
   DescText: string
 
   /**
-      * 癌症
+      * 组织学等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HistologyLevel: HistologyLevel
 
   /**
-      * 扩散
+      * 组织学类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HistologyType: HistologyType
 
   /**
-      * 淋巴
+      * IHC信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IHC: Array<IHCInfo>
 
   /**
-      * ""
+      * 浸润深度
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InfiltrationDepth: BlockInfo
 
   /**
-      * ""
+      * 肿瘤扩散
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Invasive: Array<Invas>
 
   /**
-      * ""
+      * 淋巴结
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LymphNodes: Array<Lymph>
 
   /**
-      * ""
+      * PTNM信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PTNM: BlockInfo
 
   /**
-      * ""
+      * 病理报告类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PathologicalReportType: BlockInfo
 
   /**
-      * ""
+      * 报告原文
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReportText: string
 
   /**
-      * ""
+      * 标本类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SampleType: BlockInfo
 
   /**
-      * ""
+      * 结论文本
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SummaryText: string
@@ -1530,7 +1530,7 @@ export interface TextToClassResponse {
  */
 export interface HistologyType {
   /**
-      * “”
+      * 浸润
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Infiltration: string
@@ -1640,7 +1640,7 @@ export interface TextType {
  */
 export interface HistologyLevel {
   /**
-      * “”
+      * 等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Grade: string
@@ -1663,49 +1663,49 @@ export interface HistologyLevel {
  */
 export interface IndicatorItem {
   /**
-      * “”
+      * 英文缩写
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Code: string
 
   /**
-      * “”
+      * 标准缩写
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Scode: string
 
   /**
-      * “”
+      * 项目名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Name: string
 
   /**
-      * “”
+      * 标准名
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Sname: string
 
   /**
-      * “”
+      * 结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result: string
 
   /**
-      * “”
+      * 单位
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Unit: string
 
   /**
-      * “”
+      * 参考范围
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Range: string
 
   /**
-      * “”
+      * 上下箭头
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Arrow: string
@@ -1765,37 +1765,37 @@ export interface DiagCertItem {
  */
 export interface MenstrualMedicalHistory {
   /**
-      * “”
+      * 末次月经时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LastMenstrualPeriod: string
 
   /**
-      * “”
+      * 经量
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MenstrualFlow: string
 
   /**
-      * “”
+      * 月经初潮年龄
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MenarcheAge: string
 
   /**
-      * “”
+      * 是否来月经
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MenstruationOrNot: string
 
   /**
-      * “”
+      * 月经周期
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MenstrualCycles: string
 
   /**
-      * “”
+      * 月经持续天数
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MenstrualPeriod: string
@@ -1806,7 +1806,7 @@ export interface MenstrualMedicalHistory {
  */
 export interface ImageToClassRequest {
   /**
-   * 图片列表
+   * 图片列表，允许传入多张图片，支持传入图片的url或base64编码
    */
   ImageInfoList: Array<ImageInfo>
 

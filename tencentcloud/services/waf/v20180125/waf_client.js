@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSession", req, cb);
     }
     /**
+     * 获取waf流量访问趋势
+     */
+    async DescribeFlowTrend(req, cb) {
+        return this.request("DescribeFlowTrend", req, cb);
+    }
+    /**
      * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
      */
     async DescribeUserClbWafRegions(req, cb) {

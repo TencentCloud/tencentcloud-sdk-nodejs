@@ -18,26 +18,29 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DeleteAttackDownloadRecordRequest,
-  ResponseCode,
-  AddCustomRuleRequest,
-  Strategy,
-  ModifyCustomRuleStatusRequest,
-  DescribeCustomRulesRequest,
-  DeleteSessionRequest,
-  DescribeCustomRulesPagingInfo,
-  DeleteDownloadRecordResponse,
-  DescribeCustomRulesResponse,
-  DeleteDownloadRecordRequest,
-  ModifyCustomRuleStatusResponse,
-  DescribeUserClbWafRegionsRequest,
   DescribeUserClbWafRegionsResponse,
-  DeleteAttackDownloadRecordResponse,
   DescribeCustomRulesRspRuleListItem,
-  CreateAttackDownloadTaskRequest,
-  CreateAttackDownloadTaskResponse,
+  ModifyCustomRuleStatusResponse,
+  ResponseCode,
+  DeleteAttackDownloadRecordResponse,
+  DescribeFlowTrendRequest,
+  ModifyCustomRuleStatusRequest,
+  DeleteDownloadRecordResponse,
+  DescribeUserClbWafRegionsRequest,
+  DeleteAttackDownloadRecordRequest,
   DeleteSessionResponse,
+  BotStatPointItem,
+  DescribeCustomRulesResponse,
+  DeleteSessionRequest,
+  CreateAttackDownloadTaskResponse,
+  Strategy,
   AddCustomRuleResponse,
+  DescribeFlowTrendResponse,
+  AddCustomRuleRequest,
+  DescribeCustomRulesRequest,
+  DescribeCustomRulesPagingInfo,
+  DeleteDownloadRecordRequest,
+  CreateAttackDownloadTaskRequest,
 } from "./waf_models"
 
 /**
@@ -107,6 +110,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSessionResponse) => void
   ): Promise<DeleteSessionResponse> {
     return this.request("DeleteSession", req, cb)
+  }
+
+  /**
+   * 获取waf流量访问趋势
+   */
+  async DescribeFlowTrend(
+    req: DescribeFlowTrendRequest,
+    cb?: (error: string, rep: DescribeFlowTrendResponse) => void
+  ): Promise<DescribeFlowTrendResponse> {
+    return this.request("DescribeFlowTrend", req, cb)
   }
 
   /**
