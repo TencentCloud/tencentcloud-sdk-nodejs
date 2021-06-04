@@ -267,7 +267,7 @@ export interface RegionInfo {
       */
     RegionName: string;
     /**
-      * 地域是否可用状态
+      * 地域是否可用状态，AVAILABLE 代表可用
       */
     RegionState: string;
 }

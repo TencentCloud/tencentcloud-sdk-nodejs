@@ -1781,6 +1781,11 @@ export interface PublishBroadcastMessageRequest {
    * 消息质量等级
    */
   Qos: number
+
+  /**
+   * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+   */
+  PayloadEncoding?: string
 }
 
 /**
@@ -2128,7 +2133,7 @@ export interface PublishBroadcastMessageResponse {
   /**
    * 广播消息任务ID
    */
-  TaskId?: number
+  TaskId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -3569,6 +3569,11 @@ export interface DescribeImportMachineInfoRequest {
    * 批量导入的数据类型：Ip、Name、Id 三选一
    */
   ImportType: string
+
+  /**
+   * 是否仅支持专业版机器的查询（true：仅专业版   false：专业版+基础版）
+   */
+  IsQueryProMachine?: boolean
 }
 
 /**
@@ -4215,6 +4220,12 @@ export interface EffectiveMachineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Quuid: string
+
+  /**
+      * 云镜Uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uuid: string
 }
 
 /**

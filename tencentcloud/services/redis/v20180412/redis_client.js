@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTopNCmdTook", req, cb);
     }
     /**
+     * 该接口仅支持多AZ实例副本组提主
+     */
+    async ChangeReplicaToMaster(req, cb) {
+        return this.request("ChangeReplicaToMaster", req, cb);
+    }
+    /**
      * 设置自动备份时间
      */
     async ModifyAutoBackupConfig(req, cb) {

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, CreateServiceV2Response, CreateCosTokenV2Request, DeployServiceV2Response, DescribeNamespacesResponse, ModifyIngressResponse, DeleteIngressRequest, CreateNamespaceResponse, DescribeNamespacesRequest, CreateCosTokenRequest, DeployServiceV2Request, ModifyIngressRequest, CreateNamespaceRequest, DescribeIngressesRequest, DescribeServiceRunPodListV2Request, DescribeIngressesResponse, DeleteIngressResponse, ModifyNamespaceRequest, DescribeIngressResponse, CreateCosTokenResponse, ModifyNamespaceResponse, CreateResourceResponse, DescribeServiceRunPodListV2Response, CreateCosTokenV2Response, DescribeIngressRequest, CreateServiceV2Request } from "./tem_models";
+import { ModifyServiceInfoResponse, CreateResourceRequest, CreateServiceV2Response, CreateCosTokenV2Request, DeployServiceV2Response, DescribeNamespacesResponse, RestartServiceRunPodRequest, ModifyIngressResponse, DeleteIngressRequest, ModifyServiceInfoRequest, CreateNamespaceResponse, DescribeRelatedIngressesRequest, DescribeNamespacesRequest, CreateCosTokenRequest, DeployServiceV2Request, ModifyIngressRequest, DescribeRelatedIngressesResponse, CreateNamespaceRequest, DescribeIngressesRequest, DescribeServiceRunPodListV2Request, DescribeIngressesResponse, DeleteIngressResponse, RestartServiceRunPodResponse, ModifyNamespaceRequest, DescribeIngressResponse, CreateCosTokenResponse, ModifyNamespaceResponse, CreateResourceResponse, DescribeServiceRunPodListV2Response, CreateCosTokenV2Response, DescribeIngressRequest, CreateServiceV2Request } from "./tem_models";
 /**
  * tem client
  * @class
@@ -39,6 +39,18 @@ export declare class Client extends AbstractClient {
      * 创建服务
      */
     CreateServiceV2(req: CreateServiceV2Request, cb?: (error: string, rep: CreateServiceV2Response) => void): Promise<CreateServiceV2Response>;
+    /**
+     * 查询服务关联的 Ingress 规则列表
+     */
+    DescribeRelatedIngresses(req: DescribeRelatedIngressesRequest, cb?: (error: string, rep: DescribeRelatedIngressesResponse) => void): Promise<DescribeRelatedIngressesResponse>;
+    /**
+     * 修改服务基本信息
+     */
+    ModifyServiceInfo(req: ModifyServiceInfoRequest, cb?: (error: string, rep: ModifyServiceInfoResponse) => void): Promise<ModifyServiceInfoResponse>;
+    /**
+     * 重启实例
+     */
+    RestartServiceRunPod(req: RestartServiceRunPodRequest, cb?: (error: string, rep: RestartServiceRunPodResponse) => void): Promise<RestartServiceRunPodResponse>;
     /**
      * 绑定云资源
      */

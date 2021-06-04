@@ -414,7 +414,7 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 本接口（EndGameServerSessionAndProcess）用于终止游戏服务器会话和对应的进程。
+     * 本接口（EndGameServerSessionAndProcess）用于终止游戏服务器会话和对应的进程，适用于时限保护和不保护。
      */
     EndGameServerSessionAndProcess(req: EndGameServerSessionAndProcessRequest, cb?: (error: string, rep: EndGameServerSessionAndProcessResponse) => void): Promise<EndGameServerSessionAndProcessResponse>;
     /**

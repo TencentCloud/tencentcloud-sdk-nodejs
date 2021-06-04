@@ -64,12 +64,13 @@ import {
   DescribeInstanceShardsResponse,
   DestroyPrepaidInstanceRequest,
   ManualBackupInstanceResponse,
+  DisableReplicaReadonlyResponse,
   InstanceTagInfo,
   DescribeInstanceDTSInfoResponse,
   DestroyPostpaidInstanceResponse,
-  ModifyInstanceResponse,
+  ChangeReplicaToMasterRequest,
   ProxyNodes,
-  TradeDealDetail,
+  ModifyInstanceResponse,
   RedisCommonInstanceList,
   SourceInfo,
   ModifyDBInstanceSecurityGroupsResponse,
@@ -99,7 +100,7 @@ import {
   DescribeInstanceAccountRequest,
   DescribeInstanceParamRecordsRequest,
   DescribeTaskListRequest,
-  DisableReplicaReadonlyResponse,
+  ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
   DescribeTaskInfoRequest,
   RedisNodes,
@@ -126,6 +127,7 @@ import {
   InstanceNode,
   StartupInstanceResponse,
   DescribeInstanceDTSInstanceInfo,
+  TradeDealDetail,
   ResourceTag,
   AssociateSecurityGroupsResponse,
   ReplicaGroup,
@@ -328,6 +330,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdTookResponse) => void
   ): Promise<DescribeInstanceMonitorTopNCmdTookResponse> {
     return this.request("DescribeInstanceMonitorTopNCmdTook", req, cb)
+  }
+
+  /**
+   * 该接口仅支持多AZ实例副本组提主
+   */
+  async ChangeReplicaToMaster(
+    req: ChangeReplicaToMasterRequest,
+    cb?: (error: string, rep: ChangeReplicaToMasterResponse) => void
+  ): Promise<ChangeReplicaToMasterResponse> {
+    return this.request("ChangeReplicaToMaster", req, cb)
   }
 
   /**

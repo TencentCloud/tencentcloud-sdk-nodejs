@@ -18,22 +18,27 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyServiceInfoResponse,
+  StorageMountConf,
   CreateResourceRequest,
   CreateServiceV2Response,
   CreateCosTokenV2Request,
   DeployServiceV2Response,
   IngressTls,
   DescribeNamespacesResponse,
+  PortMapping,
+  RestartServiceRunPodRequest,
   ModifyIngressResponse,
   DeleteIngressRequest,
+  ModifyServiceInfoRequest,
   CreateNamespaceResponse,
-  StorageMountConf,
+  DescribeRelatedIngressesRequest,
   CosToken,
   DescribeNamespacesRequest,
   CreateCosTokenRequest,
   DeployServiceV2Request,
   ModifyIngressRequest,
-  Pair,
+  DescribeRelatedIngressesResponse,
   CreateNamespaceRequest,
   DescribeIngressesRequest,
   DescribeRunPodPage,
@@ -42,6 +47,7 @@ import {
   DescribeIngressesResponse,
   IngressInfo,
   DeleteIngressResponse,
+  RestartServiceRunPodResponse,
   ModifyNamespaceRequest,
   IngressRuleBackend,
   DescribeIngressResponse,
@@ -60,6 +66,7 @@ import {
   EsInfo,
   DescribeIngressRequest,
   CreateServiceV2Request,
+  Pair,
 } from "./tem_models"
 
 /**
@@ -149,6 +156,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateServiceV2Response) => void
   ): Promise<CreateServiceV2Response> {
     return this.request("CreateServiceV2", req, cb)
+  }
+
+  /**
+   * 查询服务关联的 Ingress 规则列表
+   */
+  async DescribeRelatedIngresses(
+    req: DescribeRelatedIngressesRequest,
+    cb?: (error: string, rep: DescribeRelatedIngressesResponse) => void
+  ): Promise<DescribeRelatedIngressesResponse> {
+    return this.request("DescribeRelatedIngresses", req, cb)
+  }
+
+  /**
+   * 修改服务基本信息
+   */
+  async ModifyServiceInfo(
+    req: ModifyServiceInfoRequest,
+    cb?: (error: string, rep: ModifyServiceInfoResponse) => void
+  ): Promise<ModifyServiceInfoResponse> {
+    return this.request("ModifyServiceInfo", req, cb)
+  }
+
+  /**
+   * 重启实例
+   */
+  async RestartServiceRunPod(
+    req: RestartServiceRunPodRequest,
+    cb?: (error: string, rep: RestartServiceRunPodResponse) => void
+  ): Promise<RestartServiceRunPodResponse> {
+    return this.request("RestartServiceRunPod", req, cb)
   }
 
   /**

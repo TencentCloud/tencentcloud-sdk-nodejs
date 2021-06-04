@@ -1148,6 +1148,11 @@ export interface DescribeKeyPairsRequest {
    * 返回数量，默认为 20，最大值为 100。
    */
   Limit?: number
+
+  /**
+   * 过滤条件，每次请求的 Filters 的上限为10， Filters.Values 的上限为5。参数不可以同时指定 KeyIds 和 Filters 。详细的过滤条件如下： key-id - String - 是否必填： 否 - （过滤条件）按照KeyID进行过滤; key-name - String - 是否必填： 否 - （过滤条件）按照KeyName进行过滤。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2384,7 +2389,7 @@ export interface InquirePriceCreateInstancesRequest {
   InstanceChargePrepaid?: InstanceChargePrepaid
 
   /**
-   * 应用镜像 ID，使用收费应用镜像时必填。
+   * 应用镜像 ID，使用收费应用镜像时必填。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
    */
   BlueprintId?: string
 }

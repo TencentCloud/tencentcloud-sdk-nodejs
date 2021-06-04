@@ -1184,6 +1184,21 @@ export interface ManualBackupInstanceResponse {
 }
 
 /**
+ * DisableReplicaReadonly返回参数结构体
+ */
+export interface DisableReplicaReadonlyResponse {
+  /**
+   * 失败:ERROR，成功:OK
+   */
+  Status?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例标签信息
  */
 export interface InstanceTagInfo {
@@ -1272,13 +1287,18 @@ export interface DestroyPostpaidInstanceResponse {
 }
 
 /**
- * ModifyInstance返回参数结构体
+ * ChangeReplicaToMaster请求参数结构体
  */
-export interface ModifyInstanceResponse {
+export interface ChangeReplicaToMasterRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例Id
    */
-  RequestId?: string
+  InstanceId: string
+
+  /**
+   * 副本Id
+   */
+  GroupId: number
 }
 
 /**
@@ -1293,68 +1313,13 @@ export interface ProxyNodes {
 }
 
 /**
- * 订单交易信息
+ * ModifyInstance返回参数结构体
  */
-export interface TradeDealDetail {
+export interface ModifyInstanceResponse {
   /**
-   * 订单号ID，调用云API时使用此ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DealId: string
-
-  /**
-   * 长订单ID，反馈订单问题给官方客服使用此ID
-   */
-  DealName: string
-
-  /**
-   * 可用区id
-   */
-  ZoneId: number
-
-  /**
-   * 订单关联的实例数
-   */
-  GoodsNum: number
-
-  /**
-   * 创建用户uin
-   */
-  Creater: string
-
-  /**
-   * 订单创建时间
-   */
-  CreatTime: string
-
-  /**
-   * 订单超时时间
-   */
-  OverdueTime: string
-
-  /**
-   * 订单完成时间
-   */
-  EndTime: string
-
-  /**
-   * 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中
-   */
-  Status: number
-
-  /**
-   * 订单状态描述
-   */
-  Description: string
-
-  /**
-   * 订单实际总价，单位：分
-   */
-  Price: number
-
-  /**
-   * 实例ID
-   */
-  InstanceIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -2032,13 +1997,13 @@ export interface DescribeTaskListRequest {
 }
 
 /**
- * DisableReplicaReadonly返回参数结构体
+ * ChangeReplicaToMaster返回参数结构体
  */
-export interface DisableReplicaReadonlyResponse {
+export interface ChangeReplicaToMasterResponse {
   /**
-   * 失败:ERROR，成功:OK
+   * 异步任务ID
    */
-  Status?: string
+  TaskId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2679,6 +2644,71 @@ export interface DescribeInstanceDTSInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+}
+
+/**
+ * 订单交易信息
+ */
+export interface TradeDealDetail {
+  /**
+   * 订单号ID，调用云API时使用此ID
+   */
+  DealId: string
+
+  /**
+   * 长订单ID，反馈订单问题给官方客服使用此ID
+   */
+  DealName: string
+
+  /**
+   * 可用区id
+   */
+  ZoneId: number
+
+  /**
+   * 订单关联的实例数
+   */
+  GoodsNum: number
+
+  /**
+   * 创建用户uin
+   */
+  Creater: string
+
+  /**
+   * 订单创建时间
+   */
+  CreatTime: string
+
+  /**
+   * 订单超时时间
+   */
+  OverdueTime: string
+
+  /**
+   * 订单完成时间
+   */
+  EndTime: string
+
+  /**
+   * 订单状态 1：未支付 2:已支付，未发货 3:发货中 4:发货成功 5:发货失败 6:已退款 7:已关闭订单 8:订单过期 9:订单已失效 10:产品已失效 11:代付拒绝 12:支付中
+   */
+  Status: number
+
+  /**
+   * 订单状态描述
+   */
+  Description: string
+
+  /**
+   * 订单实际总价，单位：分
+   */
+  Price: number
+
+  /**
+   * 实例ID
+   */
+  InstanceIds: Array<string>
 }
 
 /**

@@ -98,6 +98,36 @@ it("tem.v20201221.CreateServiceV2", async function () {
     }
 })
 
+it("tem.v20201221.DescribeRelatedIngresses", async function () {
+    try {
+       const data = await client.DescribeRelatedIngresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20201221.ModifyServiceInfo", async function () {
+    try {
+       const data = await client.ModifyServiceInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tem.v20201221.RestartServiceRunPod", async function () {
+    try {
+       const data = await client.RestartServiceRunPod({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20201221.CreateResource", async function () {
     try {
        const data = await client.CreateResource({})

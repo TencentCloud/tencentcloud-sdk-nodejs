@@ -16,6 +16,37 @@
  */
 
 /**
+ * ModifyServiceInfo返回参数结构体
+ */
+export interface ModifyServiceInfoResponse {
+  /**
+      * 成功与否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据卷挂载信息
+ */
+export interface StorageMountConf {
+  /**
+   * 数据卷名
+   */
+  VolumeName: string
+
+  /**
+   * 数据卷绑定路径
+   */
+  MountPath: string
+}
+
+/**
  * CreateResource请求参数结构体
  */
 export interface CreateResourceRequest {
@@ -131,6 +162,66 @@ export interface DescribeNamespacesResponse {
 }
 
 /**
+ * 服务端口映射
+ */
+export interface PortMapping {
+  /**
+   * 端口
+   */
+  Port: number
+
+  /**
+   * 映射端口
+   */
+  TargetPort: number
+
+  /**
+   * 协议栈 TCP/UDP
+   */
+  Protocol: string
+}
+
+/**
+ * RestartServiceRunPod请求参数结构体
+ */
+export interface RestartServiceRunPodRequest {
+  /**
+   * 环境id
+   */
+  NamespaceId: string
+
+  /**
+   * 服务名id
+   */
+  ServiceId: string
+
+  /**
+   * 名字
+   */
+  PodName: string
+
+  /**
+   * 单页条数
+   */
+  Limit?: number
+
+  /**
+   * 分页下标
+   */
+  Offset?: number
+
+  /**
+   * pod状态
+   */
+  Status?: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+}
+
+/**
  * ModifyIngress返回参数结构体
  */
 export interface ModifyIngressResponse {
@@ -172,6 +263,26 @@ export interface DeleteIngressRequest {
 }
 
 /**
+ * ModifyServiceInfo请求参数结构体
+ */
+export interface ModifyServiceInfoRequest {
+  /**
+   * 服务ID
+   */
+  ServiceId: string
+
+  /**
+   * 描述
+   */
+  Description: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+}
+
+/**
  * CreateNamespace返回参数结构体
  */
 export interface CreateNamespaceResponse {
@@ -188,18 +299,28 @@ export interface CreateNamespaceResponse {
 }
 
 /**
- * 数据卷挂载信息
+ * DescribeRelatedIngresses请求参数结构体
  */
-export interface StorageMountConf {
+export interface DescribeRelatedIngressesRequest {
   /**
-   * 数据卷名
+   * 环境 id
    */
-  VolumeName: string
+  NamespaceId?: string
 
   /**
-   * 数据卷绑定路径
+   * EKS namespace
    */
-  MountPath: string
+  EksNamespace?: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 服务 ID
+   */
+  ServiceId?: string
 }
 
 /**
@@ -431,6 +552,16 @@ export interface DeployServiceV2Request {
    * 镜像命令参数
    */
   ImageArgs?: Array<string>
+
+  /**
+   * 服务端口映射
+   */
+  PortMappings?: Array<PortMapping>
+
+  /**
+   * 是否添加默认注册中心配置
+   */
+  UseRegistryDefaultConfig?: boolean
 }
 
 /**
@@ -449,18 +580,19 @@ export interface ModifyIngressRequest {
 }
 
 /**
- * 键值对
+ * DescribeRelatedIngresses返回参数结构体
  */
-export interface Pair {
+export interface DescribeRelatedIngressesResponse {
   /**
-   * 建
-   */
-  Key: string
+      * ingress 数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<IngressInfo>
 
   /**
-   * 值
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: string
+  RequestId?: string
 }
 
 /**
@@ -496,6 +628,11 @@ export interface CreateNamespaceRequest {
    * 来源渠道
    */
   SourceChannel?: number
+
+  /**
+   * 是否开启tsw服务
+   */
+  EnableTswTraceService?: boolean
 }
 
 /**
@@ -516,6 +653,11 @@ export interface DescribeIngressesRequest {
    * 来源渠道
    */
   SourceChannel?: number
+
+  /**
+   * ingress 规则名列表
+   */
+  Names?: Array<string>
 }
 
 /**
@@ -710,6 +852,22 @@ export interface DeleteIngressResponse {
   /**
    * 是否删除成功
    */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestartServiceRunPod返回参数结构体
+ */
+export interface RestartServiceRunPodResponse {
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Result: boolean
 
   /**
@@ -1205,4 +1363,19 @@ export interface CreateServiceV2Request {
 - WAR
       */
   DeployMode?: string
+}
+
+/**
+ * 键值对
+ */
+export interface Pair {
+  /**
+   * 建
+   */
+  Key: string
+
+  /**
+   * 值
+   */
+  Value: string
 }

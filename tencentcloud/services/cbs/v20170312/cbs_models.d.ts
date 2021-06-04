@@ -416,7 +416,11 @@ export interface ModifyDisksChargeTypeRequest {
     /**
       * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
       */
-    DiskChargePrepaid: DiskChargePrepaid;
+    DiskChargePrepaid?: DiskChargePrepaid;
+    /**
+      * 后付费模式
+      */
+    DiskChargePostpaid?: boolean;
 }
 /**
  * ModifyDiskExtraPerformance返回参数结构体

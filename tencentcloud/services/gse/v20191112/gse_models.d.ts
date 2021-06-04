@@ -3074,15 +3074,15 @@ export interface UpdateRuntimeConfigurationRequest {
  */
 export interface EndGameServerSessionAndProcessRequest {
     /**
-      * 游戏服务器会话ID
+      * 游戏服务器会话ID，如果传入游戏服务器会话ID，结束对应进程以及游戏服务器会话和玩家会话。
       */
     GameServerSessionId?: string;
     /**
-      * CVM的公网IP地址
+      * CVM的公网IP地址，需同时传入IpAddress和Port，结束IpAddress和Port对应的进程以及游戏服务器会话（如果存在）和玩家会话（如果存在），单独传入IpAddress不生效。
       */
     IpAddress?: string;
     /**
-      * 端口号，最小值不小于1，最大值不超过60000
+      * 端口号，取值范围1025-60000，需同时传入IpAddress和Port，结束IpAddress和Port对应的进程以及游戏服务器会话（如果存在）和玩家会话（如果存在），单独传入Port不生效。
       */
     Port?: number;
 }

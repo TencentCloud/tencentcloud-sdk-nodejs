@@ -76,6 +76,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceV2", req, cb);
     }
     /**
+     * 查询服务关联的 Ingress 规则列表
+     */
+    async DescribeRelatedIngresses(req, cb) {
+        return this.request("DescribeRelatedIngresses", req, cb);
+    }
+    /**
+     * 修改服务基本信息
+     */
+    async ModifyServiceInfo(req, cb) {
+        return this.request("ModifyServiceInfo", req, cb);
+    }
+    /**
+     * 重启实例
+     */
+    async RestartServiceRunPod(req, cb) {
+        return this.request("RestartServiceRunPod", req, cb);
+    }
+    /**
      * 绑定云资源
      */
     async CreateResource(req, cb) {

@@ -148,6 +148,16 @@ it("redis.v20180412.DescribeInstanceMonitorTopNCmdTook", async function () {
     }
 })
 
+it("redis.v20180412.ChangeReplicaToMaster", async function () {
+    try {
+       const data = await client.ChangeReplicaToMaster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ModifyAutoBackupConfig", async function () {
     try {
        const data = await client.ModifyAutoBackupConfig({})
