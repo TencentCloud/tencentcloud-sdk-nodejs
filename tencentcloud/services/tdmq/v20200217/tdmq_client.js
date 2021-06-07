@@ -148,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
+     * 此接口仅用于测试发生消息，不能作为现网正式生产使用
+     */
+    async SendMsg(req, cb) {
+        return this.request("SendMsg", req, cb);
+    }
+    /**
      * 新增指定分区、类型的消息主题
      */
     async CreateTopic(req, cb) {

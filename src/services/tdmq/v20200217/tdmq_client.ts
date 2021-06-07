@@ -40,6 +40,7 @@ import {
   CreateEnvironmentResponse,
   Producer,
   CreateSubscriptionResponse,
+  SendMsgResponse,
   ModifyCmqTopicAttributeResponse,
   DescribeCmqSubscriptionDetailRequest,
   Topic,
@@ -112,6 +113,7 @@ import {
   DeleteSubscriptionsResponse,
   ConsumersSchedule,
   Cluster,
+  SendMsgRequest,
   DescribeCmqQueueDetailRequest,
   ClearCmqQueueResponse,
   DescribeBindClustersRequest,
@@ -340,6 +342,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 此接口仅用于测试发生消息，不能作为现网正式生产使用
+   */
+  async SendMsg(
+    req: SendMsgRequest,
+    cb?: (error: string, rep: SendMsgResponse) => void
+  ): Promise<SendMsgResponse> {
+    return this.request("SendMsg", req, cb)
   }
 
   /**

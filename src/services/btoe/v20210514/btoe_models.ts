@@ -301,7 +301,7 @@ export interface GetDepositFileRequest {
  */
 export interface VerifyEvidenceBlockChainTxHashRequest {
   /**
-   * ‘区块链交易hash，在"存证基本信息查询”中可以获取
+   * 区块链交易 hash，在“存证基本信息查询（GetDepositInfo）”接口中可以获取。
    */
   EvidenceTxHash: string
 }

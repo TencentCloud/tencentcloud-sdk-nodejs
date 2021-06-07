@@ -778,8 +778,8 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
   LivenessType: string
 
   /**
-      * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
-动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
+      * 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
+动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
 静默模式传参：空。
       */
   ValidateData?: string
@@ -787,7 +787,7 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
   /**
       * 额外配置，传入JSON字符串。
 {
-"BestFrameNum": 2  //需要返回多张最佳截图，取值范围1-10
+"BestFrameNum": 2  //需要返回多张最佳截图，取值范围2-10
 }
       */
   Optional?: string
@@ -1429,28 +1429,28 @@ export interface LivenessRecognitionResponse {
       * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BestFrameBase64?: string
+  BestFrameBase64: string
 
   /**
    * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
    */
-  Sim?: number
+  Sim: number
 
   /**
    * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
    */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
       * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BestFrameList?: Array<string>
+  BestFrameList: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1822,8 +1822,8 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
   LivenessType: string
 
   /**
-      * 数字模式传参：数字验证码(1234)，需先调用接口获取数字验证码；
-动作模式传参：传动作顺序(2,1 or 1,2)，需先调用接口获取动作顺序；
+      * 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
+动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
 静默模式传参：空。
       */
   ValidateData?: string
@@ -1831,7 +1831,7 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
   /**
       * 额外配置，传入JSON字符串。
 {
-"BestFrameNum": 2  //需要返回多张最佳截图，取值范围1-10
+"BestFrameNum": 2  //需要返回多张最佳截图，取值范围2-10
 }
       */
   Optional?: string

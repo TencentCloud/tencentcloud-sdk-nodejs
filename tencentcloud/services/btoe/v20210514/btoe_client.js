@@ -83,7 +83,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateHashDepositNoSeal", req, cb);
     }
     /**
-     * 用户向BTOE核验存证结果中的区块链交易hash
+     * 用户向BTOE核验存证结果中的区块链交易hash的真实性
      */
     async VerifyEvidenceBlockChainTxHash(req, cb) {
         return this.request("VerifyEvidenceBlockChainTxHash", req, cb);

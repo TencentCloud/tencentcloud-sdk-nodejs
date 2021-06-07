@@ -45,7 +45,7 @@ export declare class Client extends AbstractClient {
      */
     CreateHashDepositNoSeal(req: CreateHashDepositNoSealRequest, cb?: (error: string, rep: CreateHashDepositNoSealResponse) => void): Promise<CreateHashDepositNoSealResponse>;
     /**
-     * 用户向BTOE核验存证结果中的区块链交易hash
+     * 用户向BTOE核验存证结果中的区块链交易hash的真实性
      */
     VerifyEvidenceBlockChainTxHash(req: VerifyEvidenceBlockChainTxHashRequest, cb?: (error: string, rep: VerifyEvidenceBlockChainTxHashResponse) => void): Promise<VerifyEvidenceBlockChainTxHashResponse>;
     /**

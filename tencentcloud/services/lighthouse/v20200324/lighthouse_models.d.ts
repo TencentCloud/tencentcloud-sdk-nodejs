@@ -98,7 +98,7 @@ export interface RegionInfo {
       */
     RegionName: string;
     /**
-      * 地域是否可用状态。
+      * 地域是否可用状态，取值为AVAILABLE。
       */
     RegionState: string;
     /**
@@ -1223,7 +1223,7 @@ export interface Blueprint {
       */
     ImageUrl: string;
     /**
-      * 镜像所需系统盘大小。
+      * 镜像所需系统盘大小，单位 GB。
       */
     RequiredSystemDiskSize: number;
     /**

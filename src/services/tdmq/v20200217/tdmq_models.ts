@@ -696,6 +696,16 @@ export interface CreateSubscriptionResponse {
 }
 
 /**
+ * SendMsg返回参数结构体
+ */
+export interface SendMsgResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCmqTopicAttribute返回参数结构体
  */
 export interface ModifyCmqTopicAttributeResponse {
@@ -2621,6 +2631,31 @@ export interface Cluster {
    * 最大存储容量
    */
   MaxStorageCapacity: number
+}
+
+/**
+ * SendMsg请求参数结构体
+ */
+export interface SendMsgRequest {
+  /**
+   * 环境（命名空间）名称。
+   */
+  EnvironmentId: string
+
+  /**
+   * 主题名称，如果是分区topic需要指定具体分区，如果没有指定则默认发到0分区，例如：my_topic-partition-0。
+   */
+  TopicName: string
+
+  /**
+   * 消息内容，不能为空且大小不得大于5242880个byte。
+   */
+  MsgContent: string
+
+  /**
+   * Pulsar 集群的ID
+   */
+  ClusterId?: string
 }
 
 /**

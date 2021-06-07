@@ -18,8 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  TextResult,
   DescribeTasksRequest,
   StorageInfo,
+  CreateAudioModerationSyncTaskRequest,
   BucketInfo,
   CreateAudioModerationTaskResponse,
   TaskResult,
@@ -28,11 +30,13 @@ import {
   CreateAudioModerationTaskRequest,
   TaskInput,
   DescribeTaskDetailRequest,
+  CreateAudioModerationSyncTaskResponse,
   TaskLabel,
   TaskFilter,
   InputInfo,
   DescribeTasksResponse,
   AudioResultDetailLanguageResult,
+  MoanResult,
   CancelTaskResponse,
   AudioResultDetailTextResult,
   AudioResult,
@@ -82,6 +86,28 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAudioModerationTaskResponse) => void
   ): Promise<CreateAudioModerationTaskResponse> {
     return this.request("CreateAudioModerationTask", req, cb)
+  }
+
+  /**
+     * 本接口（CreateAudioModerationSyncTask） 用于提交短音频内容进行智能审核任务，使用前请您登陆控制台开通音频内容安全服务。
+
+功能使用说明：
+前往“内容安全控制台-音频内容安全”开启使用音频内容安全服务，首次开通可获得10小时免费调用时长；
+
+接口限制：
+- 音频文件大小支持：文件 < 5M;
+- 音频文件时长小于60s，超过60s音频调用则报错；
+- 音频码率类型支持：8Kbps - 16Kbps；
+- 音频文件支持格式：wav、mp3；
+- 接口仅限音频文件传入，视频文件传入请调用长音频异步接口；
+- 接口默认QPS为10，默认接口请求频率限制20次/秒，如需要更高的并发或请求频率，请工单咨询；
+- 接口超时为5s，每一次请求超过该时长会报错；
+     */
+  async CreateAudioModerationSyncTask(
+    req: CreateAudioModerationSyncTaskRequest,
+    cb?: (error: string, rep: CreateAudioModerationSyncTaskResponse) => void
+  ): Promise<CreateAudioModerationSyncTaskResponse> {
+    return this.request("CreateAudioModerationSyncTask", req, cb)
   }
 
   /**

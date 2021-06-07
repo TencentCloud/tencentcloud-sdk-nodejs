@@ -218,6 +218,16 @@ it("tdmq.v20200217.DescribeClusters", async function () {
     }
 })
 
+it("tdmq.v20200217.SendMsg", async function () {
+    try {
+       const data = await client.SendMsg({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})

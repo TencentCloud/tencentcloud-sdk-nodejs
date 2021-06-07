@@ -28,6 +28,16 @@ it("ams.v20201229.CreateAudioModerationTask", async function () {
     }
 })
 
+it("ams.v20201229.CreateAudioModerationSyncTask", async function () {
+    try {
+       const data = await client.CreateAudioModerationSyncTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ams.v20201229.DescribeTaskDetail", async function () {
     try {
        const data = await client.DescribeTaskDetail({})
