@@ -164,6 +164,7 @@ export { vms } from "./vms";
 export { vod } from "./vod";
 export { vpc } from "./vpc";
 export { waf } from "./waf";
+export { wav } from "./wav";
 export { wss } from "./wss";
 export { youmall } from "./youmall";
 export { yunjing } from "./yunjing";

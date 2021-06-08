@@ -615,7 +615,7 @@ REJECTED:拒绝
       */
     CustomerIPv6Address: string;
     /**
-      * 专线通道是否支持巨帧。1 支持，0 不支持
+      * 专用通道是否支持巨帧。1 支持，0 不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
     JumboEnable: number;

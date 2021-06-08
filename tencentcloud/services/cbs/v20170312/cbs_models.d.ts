@@ -1355,7 +1355,7 @@ export interface DescribeInstancesDiskNumResponse {
     /**
       * 各个云服务器已挂载和可挂载弹性云盘的数量。
       */
-    AttachDetail?: Array<AttachDetail>;
+    AttachDetail: Array<AttachDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

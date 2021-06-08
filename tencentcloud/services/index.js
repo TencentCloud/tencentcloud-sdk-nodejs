@@ -332,6 +332,8 @@ var vpc_1 = require("./vpc");
 Object.defineProperty(exports, "vpc", { enumerable: true, get: function () { return vpc_1.vpc; } });
 var waf_1 = require("./waf");
 Object.defineProperty(exports, "waf", { enumerable: true, get: function () { return waf_1.waf; } });
+var wav_1 = require("./wav");
+Object.defineProperty(exports, "wav", { enumerable: true, get: function () { return wav_1.wav; } });
 var wss_1 = require("./wss");
 Object.defineProperty(exports, "wss", { enumerable: true, get: function () { return wss_1.wss; } });
 var youmall_1 = require("./youmall");

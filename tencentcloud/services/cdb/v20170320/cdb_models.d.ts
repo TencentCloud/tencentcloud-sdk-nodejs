@@ -362,6 +362,14 @@ export interface UpgradeDBInstanceRequest {
       * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
       */
     InstanceRole?: string;
+    /**
+      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。
+      */
+    DeviceType?: string;
+    /**
+      * 升级后的实例cpu核数， 如果不传将根据 Memory 指定的内存值自动填充对应的cpu值。
+      */
+    Cpu?: number;
 }
 /**
  * DescribeBackupConfig请求参数结构体
@@ -5185,11 +5193,11 @@ export interface UpgradeDBInstanceResponse {
     /**
       * 订单 ID。
       */
-    DealIds?: Array<string>;
+    DealIds: Array<string>;
     /**
       * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
