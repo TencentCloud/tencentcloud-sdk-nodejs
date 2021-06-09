@@ -1106,6 +1106,11 @@ export interface RedisNode {
    * 节点的状态
    */
   Status: string
+
+  /**
+   * 节点角色
+   */
+  Role: string
 }
 
 /**
@@ -2059,6 +2064,11 @@ export interface RedisNodes {
    * 分片ID
    */
   ClusterId: number
+
+  /**
+   * 可用区ID
+   */
+  ZoneId: number
 }
 
 /**

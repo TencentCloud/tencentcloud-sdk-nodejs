@@ -1093,6 +1093,11 @@ export interface CreateBindingRequest {
    * 设备昵称，最多不超过64个字符
    */
   Nick?: string
+
+  /**
+   * 绑定过程中的会话token，由设备通过SDK接口确认是否允许绑定的token，用于增加设备被绑定的安全性
+   */
+  BindToken?: string
 }
 
 /**

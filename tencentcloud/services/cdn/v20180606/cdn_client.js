@@ -345,6 +345,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateImageConfig", req, cb);
     }
     /**
+     * ModifyPurgeFetchTaskStatus 用于上报定时刷新预热任务执行状态
+     */
+    async ModifyPurgeFetchTaskStatus(req, cb) {
+        return this.request("ModifyPurgeFetchTaskStatus", req, cb);
+    }
+    /**
      * CreateScdnFailedLogTask 用于重试创建失败的事件日志任务
      */
     async CreateScdnFailedLogTask(req, cb) {

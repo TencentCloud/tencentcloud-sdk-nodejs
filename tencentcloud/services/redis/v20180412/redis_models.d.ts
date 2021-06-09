@@ -916,6 +916,10 @@ export interface RedisNode {
       * 节点的状态
       */
     Status: string;
+    /**
+      * 节点角色
+      */
+    Role: string;
 }
 /**
  * DescribeProjectSecurityGroup请求参数结构体
@@ -1727,6 +1731,10 @@ export interface RedisNodes {
       * 分片ID
       */
     ClusterId: number;
+    /**
+      * 可用区ID
+      */
+    ZoneId: number;
 }
 /**
  * DescribeInstanceMonitorTopNCmd请求参数结构体

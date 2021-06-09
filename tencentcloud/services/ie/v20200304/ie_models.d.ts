@@ -1,4 +1,21 @@
 /**
+ * 视频超分
+ */
+export interface VideoSuperResolution {
+    /**
+      * 超分视频类型：可选值：lq,hq
+lq: 针对低清晰度有较多噪声视频的超分;
+hq: 针对高清晰度视频超分;
+默认取值：lq。
+      */
+    Type?: string;
+    /**
+      * 超分倍数，可选值：2。
+注意：当前只支持两倍超分。
+      */
+    Size?: number;
+}
+/**
  * 编辑处理/拼接任务/处理结果
  */
 export interface MediaJoiningTaskResult {
@@ -544,8 +561,7 @@ export interface ArtifactReduction {
 edaf,
 wdaf，
 默认edaf。
-注意：edaf：速度快，去毛刺效果强，保护边缘效果较弱；
-wdaf：速度慢，保护边缘效果好
+注意：此参数已经弃用
       */
     Algorithm?: string;
 }
@@ -1589,6 +1605,7 @@ export interface VideoEnhance {
     Sharp?: Sharp;
     /**
       * 超分参数，可选项：2，目前仅支持2倍超分。
+注意：此参数已经弃用，超分可以使用VideoSuperResolution参数
       */
     WdSuperResolution?: number;
     /**
@@ -1608,6 +1625,24 @@ export interface VideoEnhance {
       * 低光照增强参数
       */
     LowLightEnhance?: LowLightEnhance;
+    /**
+      * 视频超分参数
+      */
+    VideoSuperResolution?: VideoSuperResolution;
+    /**
+      * 视频画质修复参数
+      */
+    VideoRepair?: VideoRepair;
+}
+/**
+ * 综合画质修复，包括：去噪，去毛刺，细节增强，主观画质提升。
+ */
+export interface VideoRepair {
+    /**
+      * 画质修复类型，可选值：weak，normal，strong;
+默认值: weak
+      */
+    Type?: string;
 }
 /**
  * 质检结果项数组

@@ -44,6 +44,7 @@ import {
   FollowRedirect,
   RequestHeader,
   DescribePurgeQuotaRequest,
+  ModifyPurgeFetchTaskStatusRequest,
   Referer,
   StartScdnDomainRequest,
   PostSize,
@@ -144,6 +145,7 @@ import {
   CreateScdnLogTaskRequest,
   DistrictIspInfo,
   SimpleCacheRule,
+  ModifyPurgeFetchTaskStatusResponse,
   DisableClsLogTopicResponse,
   Hsts,
   DescribeIpStatusRequest,
@@ -799,6 +801,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateImageConfigResponse) => void
   ): Promise<UpdateImageConfigResponse> {
     return this.request("UpdateImageConfig", req, cb)
+  }
+
+  /**
+   * ModifyPurgeFetchTaskStatus 用于上报定时刷新预热任务执行状态
+   */
+  async ModifyPurgeFetchTaskStatus(
+    req: ModifyPurgeFetchTaskStatusRequest,
+    cb?: (error: string, rep: ModifyPurgeFetchTaskStatusResponse) => void
+  ): Promise<ModifyPurgeFetchTaskStatusResponse> {
+    return this.request("ModifyPurgeFetchTaskStatus", req, cb)
   }
 
   /**

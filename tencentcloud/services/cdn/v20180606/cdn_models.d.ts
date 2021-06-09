@@ -636,6 +636,29 @@ off：关闭
  */
 export declare type DescribePurgeQuotaRequest = null;
 /**
+ * ModifyPurgeFetchTaskStatus请求参数结构体
+ */
+export interface ModifyPurgeFetchTaskStatusRequest {
+    /**
+      * 执行时间
+      */
+    ExecutionTime: string;
+    /**
+      * 执行状态
+success: 成功
+failed: 失败
+      */
+    ExecutionStatus: string;
+    /**
+      * 任务 ID
+      */
+    Id: string;
+    /**
+      * 执行状态详情
+      */
+    ExecutionStatusDesc?: string;
+}
+/**
  * Referer 黑白名单配置，默认为关闭状态
  */
 export interface Referer {
@@ -3473,6 +3496,15 @@ index 时填充 /
 单位为秒，最大可设置为 365 天
       */
     CacheTime: number;
+}
+/**
+ * ModifyPurgeFetchTaskStatus返回参数结构体
+ */
+export interface ModifyPurgeFetchTaskStatusResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DisableClsLogTopic返回参数结构体

@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  VideoSuperResolution,
   MediaJoiningTaskResult,
   Denoise,
   StripTaskResultItem,
@@ -95,6 +96,7 @@ import {
   ResultAudioInfo,
   OpeningEndingTaskResult,
   VideoEnhance,
+  VideoRepair,
   QualityControlResultItems,
   FrameTagItem,
   QualityControlItem,
