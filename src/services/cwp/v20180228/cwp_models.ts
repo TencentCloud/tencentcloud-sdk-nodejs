@@ -269,33 +269,18 @@ export interface AddMachineTagResponse {
 }
 
 /**
- * 常用登录地
+ * DescribeESAggregations返回参数结构体
  */
-export interface UsualPlace {
+export interface DescribeESAggregationsResponse {
   /**
-   * ID。
+   * ES聚合结果JSON
    */
-  Id: number
+  Data: string
 
   /**
-   * 云镜客户端唯一标识UUID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Uuid: string
-
-  /**
-   * 国家 ID。
-   */
-  CountryId: number
-
-  /**
-   * 省份 ID。
-   */
-  ProvinceId: number
-
-  /**
-   * 城市 ID。
-   */
-  CityId: number
+  RequestId?: string
 }
 
 /**
@@ -428,14 +413,9 @@ export interface WeeklyReportVul {
 }
 
 /**
- * DescribeWeeklyReportBruteAttacks请求参数结构体
+ * DescribePrivilegeEvents请求参数结构体
  */
-export interface DescribeWeeklyReportBruteAttacksRequest {
-  /**
-   * 专业周报开始时间。
-   */
-  BeginDate: string
-
+export interface DescribePrivilegeEventsRequest {
   /**
    * 返回数量，默认为10，最大值为100。
    */
@@ -445,6 +425,12 @@ export interface DescribeWeeklyReportBruteAttacksRequest {
    * 偏移量，默认为0。
    */
   Offset?: number
+
+  /**
+      * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1327,6 +1313,16 @@ export interface DescribeNonlocalLoginPlacesRequest {
 }
 
 /**
+ * SyncAssetScan请求参数结构体
+ */
+export interface SyncAssetScanRequest {
+  /**
+   * 是否同步
+   */
+  Sync: boolean
+}
+
+/**
  * DeleteMachineTag请求参数结构体
  */
 export interface DeleteMachineTagRequest {
@@ -1419,19 +1415,9 @@ export interface DescribeBruteAttackListResponse {
 }
 
 /**
- * DescribeExportMachines返回参数结构体
+ * DescribeAssetInfo请求参数结构体
  */
-export interface DescribeExportMachinesResponse {
-  /**
-   * 任务id
-   */
-  TaskId?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeAssetInfoRequest = null
 
 /**
  * DescribeVulInfo返回参数结构体
@@ -1605,23 +1591,23 @@ export interface DescribeVulsResponse {
 }
 
 /**
- * DescribeAccounts返回参数结构体
+ * DescribeWeeklyReportVuls请求参数结构体
  */
-export interface DescribeAccountsResponse {
+export interface DescribeWeeklyReportVulsRequest {
   /**
-   * 帐号列表记录总数。
+   * 专业版周报开始时间。
    */
-  TotalCount?: number
+  BeginDate: string
 
   /**
-   * 帐号数据列表。
+   * 返回数量，默认为10，最大值为100。
    */
-  Accounts?: Array<Account>
+  Limit?: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 偏移量，默认为0。
    */
-  RequestId?: string
+  Offset?: number
 }
 
 /**
@@ -1927,24 +1913,18 @@ export interface DescribeTagsResponse {
 }
 
 /**
- * DescribePrivilegeEvents请求参数结构体
+ * DescribeExportMachines返回参数结构体
  */
-export interface DescribePrivilegeEventsRequest {
+export interface DescribeExportMachinesResponse {
   /**
-   * 返回数量，默认为10，最大值为100。
+   * 任务id
    */
-  Limit?: number
+  TaskId?: string
 
   /**
-   * 偏移量，默认为0。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
-      */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**
@@ -2058,13 +2038,23 @@ export interface OsName {
 }
 
 /**
- * ExportBruteAttacks请求参数结构体
+ * DescribeWeeklyReportBruteAttacks请求参数结构体
  */
-export interface ExportBruteAttacksRequest {
+export interface DescribeWeeklyReportBruteAttacksRequest {
   /**
-   * 过滤参数
+   * 专业周报开始时间。
    */
-  Filters?: Array<Filters>
+  BeginDate: string
+
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -2330,6 +2320,21 @@ export interface RecoverMalwaresRequest {
    * 木马Id数组,单次最大删除不能超过200条
    */
   Ids: Array<number>
+}
+
+/**
+ * DescribeSecurityDynamics请求参数结构体
+ */
+export interface DescribeSecurityDynamicsRequest {
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -2734,30 +2739,116 @@ export interface DescribeOpenPortStatisticsRequest {
 }
 
 /**
- * ExportAttackLogs请求参数结构体
+ * DescribeMachineInfo返回参数结构体
  */
-export interface ExportAttackLogsRequest {
+export interface DescribeMachineInfoResponse {
   /**
-      * 过滤条件。
-<li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
-<li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
-<li>VulType - String 威胁类型 - 是否必填: 否</li>
-<li>SrcIp - String 攻击源IP - 是否必填: 否</li>
-<li>DstIp - String 攻击目标IP - 是否必填: 否</li>
-<li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
-<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
+   * 机器ip。
+   */
+  MachineIp: string
+
+  /**
+   * 受云镜保护天数。
+   */
+  ProtectDays: number
+
+  /**
+   * 操作系统。
+   */
+  MachineOs: string
+
+  /**
+   * 主机名称。
+   */
+  MachineName: string
+
+  /**
+      * 在线状态。
+<li>ONLINE： 在线</li>
+<li>OFFLINE：离线</li>
       */
-  Filters?: Array<Filters>
+  MachineStatus: string
 
   /**
-   * 主机安全客户端ID
+   * CVM或BM主机唯一标识。
    */
-  Uuid?: string
+  InstanceId: string
 
   /**
-   * 云主机机器ID
+   * 主机外网IP。
    */
-  Quuid?: string
+  MachineWanIp: string
+
+  /**
+   * CVM或BM主机唯一Uuid。
+   */
+  Quuid: string
+
+  /**
+   * 云镜客户端唯一Uuid。
+   */
+  Uuid: string
+
+  /**
+      * 是否开通专业版。
+<li>true：是</li>
+<li>false：否</li>
+      */
+  IsProVersion: boolean
+
+  /**
+   * 专业版开通时间。
+   */
+  ProVersionOpenDate: string
+
+  /**
+      * 云主机类型。
+<li>CVM: 虚拟主机</li>
+<li>BM: 黑石物理机</li>
+      */
+  MachineType: string
+
+  /**
+   * 机器所属地域。如：ap-guangzhou，ap-shanghai
+   */
+  MachineRegion: string
+
+  /**
+      * 主机状态。
+<li>POSTPAY: 表示后付费，即按量计费  </li>
+<li>PREPAY: 表示预付费，即包年包月</li>
+      */
+  PayMode: string
+
+  /**
+   * 免费木马剩余检测数量。
+   */
+  FreeMalwaresLeft: number
+
+  /**
+   * 免费漏洞剩余检测数量。
+   */
+  FreeVulsLeft: number
+
+  /**
+   * agent版本号
+   */
+  AgentVersion: string
+
+  /**
+   * 专业版到期时间(仅预付费)
+   */
+  ProVersionDeadline: string
+
+  /**
+   * 是否有资产扫描记录，0无，1有
+   */
+  HasAssetScan: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3275,39 +3366,18 @@ export interface CreateOpenPortTaskResponse {
 }
 
 /**
- * DescribeMachineList请求参数结构体
+ * DescribeAssetRecentMachineInfo请求参数结构体
  */
-export interface DescribeMachineListRequest {
+export interface DescribeAssetRecentMachineInfoRequest {
   /**
-      * 云主机类型。
-<li>CVM：表示虚拟主机</li>
-<li>BM:  表示黑石物理机</li>
-      */
-  MachineType: string
-
-  /**
-   * 机器所属地域。如：ap-guangzhou，ap-shanghai
+   * 开始时间。
    */
-  MachineRegion: string
+  BeginDate: string
 
   /**
-   * 返回数量，默认为10，最大值为100。
+   * 结束时间。
    */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-
-  /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
-<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
-每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
-      */
-  Filters?: Array<AssetFilters>
+  EndDate: string
 }
 
 /**
@@ -3717,18 +3787,18 @@ export interface DescribeWeeklyReportMalwaresRequest {
 }
 
 /**
- * DescribeBruteAttacks返回参数结构体
+ * DescribeAccounts返回参数结构体
  */
-export interface DescribeBruteAttacksResponse {
+export interface DescribeAccountsResponse {
   /**
-   * 事件数量
+   * 帐号列表记录总数。
    */
   TotalCount?: number
 
   /**
-   * 暴力破解事件列表
+   * 帐号数据列表。
    */
-  BruteAttacks?: Array<BruteAttack>
+  Accounts?: Array<Account>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3873,6 +3943,16 @@ export interface DescribeLoginWhiteListResponse {
 }
 
 /**
+ * ExportBruteAttacks请求参数结构体
+ */
+export interface ExportBruteAttacksRequest {
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<Filters>
+}
+
+/**
  * DescribeMachineRegions返回参数结构体
  */
 export interface DescribeMachineRegionsResponse {
@@ -3883,18 +3963,13 @@ export interface DescribeMachineRegionsResponse {
 }
 
 /**
- * OpenProVersionPrepaid请求参数结构体
+ * ExportMaliciousRequests请求参数结构体
  */
-export interface OpenProVersionPrepaidRequest {
+export interface ExportMaliciousRequestsRequest {
   /**
-   * 购买相关参数。
+   * 过滤参数
    */
-  ChargePrepaid: ChargePrepaid
-
-  /**
-   * 需要开通专业版主机信息数组。
-   */
-  Machines: Array<ProVersionMachine>
+  Filters?: Array<Filters>
 }
 
 /**
@@ -3968,18 +4043,24 @@ export interface EditReverseShellRuleRequest {
 }
 
 /**
- * DescribeESAggregations返回参数结构体
+ * key-val类型的通用数据结构
  */
-export interface DescribeESAggregationsResponse {
+export interface AssetKeyVal {
   /**
-   * ES聚合结果JSON
+   * 标签
    */
-  Data: string
+  Key: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数量
    */
-  RequestId?: string
+  Value: number
+
+  /**
+      * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Desc: string
 }
 
 /**
@@ -4058,23 +4139,13 @@ export interface DeleteBruteAttacksRequest {
 }
 
 /**
- * DescribeWeeklyReportVuls请求参数结构体
+ * ExportNonlocalLoginPlaces请求参数结构体
  */
-export interface DescribeWeeklyReportVulsRequest {
+export interface ExportNonlocalLoginPlacesRequest {
   /**
-   * 专业版周报开始时间。
+   * <li>Status - int - 是否必填：否 - 状态筛选1:正常登录；2：异地登录</li>
    */
-  BeginDate: string
-
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
+  Filters?: Array<Filter>
 }
 
 /**
@@ -5221,19 +5292,9 @@ export interface DescribeReverseShellRulesRequest {
 }
 
 /**
- * DescribeSecurityDynamics请求参数结构体
+ * DescribeAlarmAttribute请求参数结构体
  */
-export interface DescribeSecurityDynamicsRequest {
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-}
+export type DescribeAlarmAttributeRequest = null
 
 /**
  * ExportBashEvents返回参数结构体
@@ -5436,13 +5497,39 @@ export interface EditPrivilegeRuleRequest {
 }
 
 /**
- * ExportMaliciousRequests请求参数结构体
+ * DescribeMachineList请求参数结构体
  */
-export interface ExportMaliciousRequestsRequest {
+export interface DescribeMachineListRequest {
   /**
-   * 过滤参数
+      * 云主机类型。
+<li>CVM：表示虚拟主机</li>
+<li>BM:  表示黑石物理机</li>
+      */
+  MachineType: string
+
+  /**
+   * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
-  Filters?: Array<Filters>
+  MachineRegion: string
+
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+      * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 查询关键字 </li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+      */
+  Filters?: Array<AssetFilters>
 }
 
 /**
@@ -5511,13 +5598,30 @@ export interface DescribePrivilegeRulesResponse {
 }
 
 /**
- * ExportNonlocalLoginPlaces请求参数结构体
+ * ExportAttackLogs请求参数结构体
  */
-export interface ExportNonlocalLoginPlacesRequest {
+export interface ExportAttackLogsRequest {
   /**
-   * <li>Status - int - 是否必填：否 - 状态筛选1:正常登录；2：异地登录</li>
+      * 过滤条件。
+<li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
+<li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
+<li>VulType - String 威胁类型 - 是否必填: 否</li>
+<li>SrcIp - String 攻击源IP - 是否必填: 否</li>
+<li>DstIp - String 攻击目标IP - 是否必填: 否</li>
+<li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
+<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
+      */
+  Filters?: Array<Filters>
+
+  /**
+   * 主机安全客户端ID
    */
-  Filters?: Array<Filter>
+  Uuid?: string
+
+  /**
+   * 云主机机器ID
+   */
+  Quuid?: string
 }
 
 /**
@@ -5708,6 +5812,36 @@ export interface Malware {
 }
 
 /**
+ * 常用登录地
+ */
+export interface UsualPlace {
+  /**
+   * ID。
+   */
+  Id: number
+
+  /**
+   * 云镜客户端唯一标识UUID。
+   */
+  Uuid: string
+
+  /**
+   * 国家 ID。
+   */
+  CountryId: number
+
+  /**
+   * 省份 ID。
+   */
+  ProvinceId: number
+
+  /**
+   * 城市 ID。
+   */
+  CityId: number
+}
+
+/**
  * DescribeWeeklyReportVuls返回参数结构体
  */
 export interface DescribeWeeklyReportVulsResponse {
@@ -5833,6 +5967,21 @@ export interface DefendAttackLog {
 }
 
 /**
+ * OpenProVersionPrepaid请求参数结构体
+ */
+export interface OpenProVersionPrepaidRequest {
+  /**
+   * 购买相关参数。
+   */
+  ChargePrepaid: ChargePrepaid
+
+  /**
+   * 需要开通专业版主机信息数组。
+   */
+  Machines: Array<ProVersionMachine>
+}
+
+/**
  * 本地提权规则
  */
 export interface PrivilegeRule {
@@ -5928,6 +6077,26 @@ export interface HistoryAccount {
    * 变更时间。
    */
   ModifyTime: string
+}
+
+/**
+ * DescribeBruteAttacks返回参数结构体
+ */
+export interface DescribeBruteAttacksResponse {
+  /**
+   * 事件数量
+   */
+  TotalCount?: number
+
+  /**
+   * 暴力破解事件列表
+   */
+  BruteAttacks?: Array<BruteAttack>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6317,111 +6486,58 @@ export interface BruteAttackInfo {
 }
 
 /**
- * DescribeMachineInfo返回参数结构体
+ * DescribeAssetInfo返回参数结构体
  */
-export interface DescribeMachineInfoResponse {
+export interface DescribeAssetInfoResponse {
   /**
-   * 机器ip。
+   * 主机数
    */
-  MachineIp: string
+  MachineCount: number
 
   /**
-   * 受云镜保护天数。
+   * 账号数
    */
-  ProtectDays: number
+  AccountCount: number
 
   /**
-   * 操作系统。
+   * 端口数
    */
-  MachineOs: string
+  PortCount: number
 
   /**
-   * 主机名称。
+   * 进程数
    */
-  MachineName: string
+  ProcessCount: number
 
   /**
-      * 在线状态。
-<li>ONLINE： 在线</li>
-<li>OFFLINE：离线</li>
-      */
-  MachineStatus: string
-
-  /**
-   * CVM或BM主机唯一标识。
+   * 软件数
    */
-  InstanceId: string
+  SoftwareCount: number
 
   /**
-   * 主机外网IP。
+   * 数据库数
    */
-  MachineWanIp: string
+  DatabaseCount: number
 
   /**
-   * CVM或BM主机唯一Uuid。
+   * Web应用数
    */
-  Quuid: string
+  WebAppCount: number
 
   /**
-   * 云镜客户端唯一Uuid。
+   * Web框架数
    */
-  Uuid: string
+  WebFrameCount: number
 
   /**
-      * 是否开通专业版。
-<li>true：是</li>
-<li>false：否</li>
-      */
-  IsProVersion: boolean
-
-  /**
-   * 专业版开通时间。
+   * Web服务数
    */
-  ProVersionOpenDate: string
+  WebServiceCount: number
 
   /**
-      * 云主机类型。
-<li>CVM: 虚拟主机</li>
-<li>BM: 黑石物理机</li>
-      */
-  MachineType: string
-
-  /**
-   * 机器所属地域。如：ap-guangzhou，ap-shanghai
+   * Web站点数
    */
-  MachineRegion: string
-
-  /**
-      * 主机状态。
-<li>POSTPAY: 表示后付费，即按量计费  </li>
-<li>PREPAY: 表示预付费，即包年包月</li>
-      */
-  PayMode: string
-
-  /**
-   * 免费木马剩余检测数量。
-   */
-  FreeMalwaresLeft: number
-
-  /**
-   * 免费漏洞剩余检测数量。
-   */
-  FreeVulsLeft: number
-
-  /**
-   * agent版本号
-   */
-  AgentVersion: string
-
-  /**
-   * 专业版到期时间(仅预付费)
-   */
-  ProVersionDeadline: string
-
-  /**
-   * 是否有资产扫描记录，0无，1有
-   */
-  HasAssetScan: number
+  WebLocationCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6782,9 +6898,48 @@ export interface IgnoreImpactedHostsRequest {
 }
 
 /**
- * DescribeAlarmAttribute请求参数结构体
+ * SyncAssetScan返回参数结构体
  */
-export type DescribeAlarmAttributeRequest = null
+export interface SyncAssetScanResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAssetRecentMachineInfo返回参数结构体
+ */
+export interface DescribeAssetRecentMachineInfoResponse {
+  /**
+      * 总数量列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalList: Array<AssetKeyVal>
+
+  /**
+      * 在线数量列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LiveList: Array<AssetKeyVal>
+
+  /**
+      * 离线数量列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OfflineList: Array<AssetKeyVal>
+
+  /**
+      * 风险数量列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskList: Array<AssetKeyVal>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeMalwares请求参数结构体

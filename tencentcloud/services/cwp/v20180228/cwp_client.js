@@ -226,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProcesses", req, cb);
     }
     /**
+     * 同步资产扫描信息
+     */
+    async SyncAssetScan(req, cb) {
+        return this.request("SyncAssetScan", req, cb);
+    }
+    /**
      * 本接口（DescribeMalwares）用于获取木马事件列表。
      */
     async DescribeMalwares(req, cb) {
@@ -545,6 +551,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoOpenProVersionConfig", req, cb);
     }
     /**
+     * 获取主机最近趋势情况
+     */
+    async DescribeAssetRecentMachineInfo(req, cb) {
+        return this.request("DescribeAssetRecentMachineInfo", req, cb);
+    }
+    /**
      * 本接口 (DescribeAgentVuls) 用于获取单台主机的漏洞列表。
      */
     async DescribeAgentVuls(req, cb) {
@@ -761,6 +773,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAttackLogInfo(req, cb) {
         return this.request("DescribeAttackLogInfo", req, cb);
+    }
+    /**
+     * 获取资产数量： 主机数、账号数、端口数、进程数、软件数、数据库数、Web应用数、Web框架数、Web服务数、Web站点数
+     */
+    async DescribeAssetInfo(req, cb) {
+        return this.request("DescribeAssetInfo", req, cb);
     }
     /**
      * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。

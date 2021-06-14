@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  MountedSettingConf,
   ModifyServiceInfoResponse,
   StorageMountConf,
   CreateResourceRequest,
@@ -66,6 +67,7 @@ import {
   EsInfo,
   DescribeIngressRequest,
   CreateServiceV2Request,
+  EksService,
   Pair,
 } from "./tem_models"
 

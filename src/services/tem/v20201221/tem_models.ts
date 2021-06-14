@@ -16,6 +16,26 @@
  */
 
 /**
+ * 挂载配置信息
+ */
+export interface MountedSettingConf {
+  /**
+   * 配置名称
+   */
+  ConfigDataName: string
+
+  /**
+   * 挂载路径
+   */
+  MountedPath: string
+
+  /**
+   * 配置内容
+   */
+  Data?: Array<Pair>
+}
+
+/**
  * ModifyServiceInfo返回参数结构体
  */
 export interface ModifyServiceInfoResponse {
@@ -562,6 +582,16 @@ export interface DeployServiceV2Request {
    * 是否添加默认注册中心配置
    */
   UseRegistryDefaultConfig?: boolean
+
+  /**
+   * 挂载配置信息
+   */
+  SettingConfs?: Array<MountedSettingConf>
+
+  /**
+   * eks 访问设置
+   */
+  EksService?: EksService
 }
 
 /**
@@ -1363,6 +1393,77 @@ export interface CreateServiceV2Request {
 - WAR
       */
   DeployMode?: string
+}
+
+/**
+ * eks service info
+ */
+export interface EksService {
+  /**
+   * service name
+   */
+  Name?: string
+
+  /**
+   * 可用端口
+   */
+  Ports?: Array<number>
+
+  /**
+   * yaml 内容
+   */
+  Yaml?: string
+
+  /**
+      * 服务名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceName?: string
+
+  /**
+      * 版本名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionName?: string
+
+  /**
+      * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterIp?: Array<string>
+
+  /**
+      * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalIp?: string
+
+  /**
+      * 访问类型，可选值：
+- EXTERNAL（公网访问）
+- VPC（vpc内访问）
+- CLUSTER（集群内访问）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 子网ID，只在类型为vpc访问时才有值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId?: string
+
+  /**
+      * 负载均衡ID，只在外网访问和vpc内访问才有值，默认自动创建
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalanceId?: string
+
+  /**
+      * 端口映射
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PortMappings?: Array<PortMapping>
 }
 
 /**

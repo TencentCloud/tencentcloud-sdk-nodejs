@@ -31,13 +31,13 @@ import {
   AssetFilters,
   DescribeTagsRequest,
   AddMachineTagResponse,
-  UsualPlace,
+  DescribeESAggregationsResponse,
   DescribeProcessTaskStatusResponse,
   SetBashEventsStatusRequest,
   DescribeAccountsRequest,
   DescribeReverseShellEventsRequest,
   WeeklyReportVul,
-  DescribeWeeklyReportBruteAttacksRequest,
+  DescribePrivilegeEventsRequest,
   CreateSearchTemplateResponse,
   CreateUsualLoginPlacesRequest,
   DescribeProcessTaskStatusRequest,
@@ -74,13 +74,14 @@ import {
   RenewProVersionRequest,
   DescribeComponentsRequest,
   DescribeNonlocalLoginPlacesRequest,
+  SyncAssetScanRequest,
   DeleteMachineTagRequest,
   CreateBaselineStrategyResponse,
   DescribeMaliciousRequestsResponse,
   ExportAssetCoreModuleListResponse,
   OpenPortStatistics,
   DescribeBruteAttackListResponse,
-  DescribeExportMachinesResponse,
+  DescribeAssetInfoRequest,
   DescribeVulInfoResponse,
   EditPrivilegeRuleResponse,
   UntrustMaliciousRequestRequest,
@@ -88,7 +89,7 @@ import {
   AgentVul,
   UntrustMalwaresRequest,
   DescribeVulsResponse,
-  DescribeAccountsResponse,
+  DescribeWeeklyReportVulsRequest,
   DescribeLoginWhiteListRequest,
   ReverseShell,
   SecurityDynamic,
@@ -100,7 +101,7 @@ import {
   DescribeSearchExportListRequest,
   ModifyLoginWhiteListResponse,
   DescribeTagsResponse,
-  DescribePrivilegeEventsRequest,
+  DescribeExportMachinesResponse,
   DescribeProVersionInfoRequest,
   CreateProcessTaskRequest,
   DeleteMaliciousRequestsResponse,
@@ -108,7 +109,7 @@ import {
   SearchTemplate,
   EditReverseShellRuleResponse,
   OsName,
-  ExportBruteAttacksRequest,
+  DescribeWeeklyReportBruteAttacksRequest,
   DeleteMachineResponse,
   DeleteLoginWhiteListRequest,
   MachineTag,
@@ -118,6 +119,7 @@ import {
   WeeklyReportNonlocalLoginPlace,
   DescribeOverviewStatisticsResponse,
   RecoverMalwaresRequest,
+  DescribeSecurityDynamicsRequest,
   MaliciousRequest,
   TrustMalwaresResponse,
   TagMachine,
@@ -137,7 +139,7 @@ import {
   DescribeBashEventsRequest,
   DeleteTagsRequest,
   DescribeOpenPortStatisticsRequest,
-  ExportAttackLogsRequest,
+  DescribeMachineInfoResponse,
   ModifyMalwareTimingScanSettingsRequest,
   DeleteMachineRequest,
   ExportAssetCoreModuleListRequest,
@@ -163,7 +165,7 @@ import {
   RenewProVersionResponse,
   DeletePrivilegeRulesResponse,
   CreateOpenPortTaskResponse,
-  DescribeMachineListRequest,
+  DescribeAssetRecentMachineInfoRequest,
   EditBashRuleRequest,
   ExportVulDetectionExcelResponse,
   SeparateMalwaresResponse,
@@ -183,7 +185,7 @@ import {
   DescribeSearchLogsRequest,
   DescribeAttackLogInfoRequest,
   DescribeWeeklyReportMalwaresRequest,
-  DescribeBruteAttacksResponse,
+  DescribeAccountsResponse,
   ModifyProVersionRenewFlagResponse,
   RegionInfo,
   ExportNonlocalLoginPlacesResponse,
@@ -192,16 +194,17 @@ import {
   DescribeOpenPortStatisticsResponse,
   DeleteAttackLogsResponse,
   DescribeLoginWhiteListResponse,
+  ExportBruteAttacksRequest,
   DescribeMachineRegionsResponse,
-  OpenProVersionPrepaidRequest,
+  ExportMaliciousRequestsRequest,
   DescribeScanMalwareScheduleResponse,
   EditReverseShellRuleRequest,
-  DescribeESAggregationsResponse,
+  AssetKeyVal,
   DeleteTagsResponse,
   DescribeSecurityEventsCntRequest,
   UpdateBaselineStrategyRequest,
   DeleteBruteAttacksRequest,
-  DescribeWeeklyReportVulsRequest,
+  ExportNonlocalLoginPlacesRequest,
   AddLoginWhiteListResponse,
   BashRule,
   DescribeIndexListRequest,
@@ -254,7 +257,7 @@ import {
   ExportVulDetectionReportRequest,
   DescribeWeeklyReportMalwaresResponse,
   DescribeReverseShellRulesRequest,
-  DescribeSecurityDynamicsRequest,
+  DescribeAlarmAttributeRequest,
   ExportBashEventsResponse,
   ImpactedHost,
   DescribeESAggregationsRequest,
@@ -263,20 +266,23 @@ import {
   DescribeComponentInfoRequest,
   DeleteNonlocalLoginPlacesRequest,
   EditPrivilegeRuleRequest,
-  ExportMaliciousRequestsRequest,
+  DescribeMachineListRequest,
   AccountStatistics,
   DescribeMachinesResponse,
   CreateUsualLoginPlacesResponse,
   DescribePrivilegeRulesResponse,
-  ExportNonlocalLoginPlacesRequest,
+  ExportAttackLogsRequest,
   Machine,
   DeleteSearchTemplateResponse,
   Malware,
+  UsualPlace,
   DescribeWeeklyReportVulsResponse,
   WeeklyReportBruteAttack,
   DefendAttackLog,
+  OpenProVersionPrepaidRequest,
   PrivilegeRule,
   HistoryAccount,
+  DescribeBruteAttacksResponse,
   ModifyProVersionRenewFlagRequest,
   DescribeESHitsRequest,
   DescribeUsualLoginPlacesRequest,
@@ -289,7 +295,7 @@ import {
   DeleteMachineTagResponse,
   DescribeHistoryAccountsRequest,
   BruteAttackInfo,
-  DescribeMachineInfoResponse,
+  DescribeAssetInfoResponse,
   OpenProVersionRequest,
   DescribeImpactedHostsRequest,
   IgnoreImpactedHostsResponse,
@@ -312,7 +318,8 @@ import {
   ExportAttackLogsResponse,
   EditTagsResponse,
   IgnoreImpactedHostsRequest,
-  DescribeAlarmAttributeRequest,
+  SyncAssetScanResponse,
+  DescribeAssetRecentMachineInfoResponse,
   DescribeMalwaresRequest,
   DeleteBruteAttacksResponse,
   DeleteMaliciousRequestsRequest,
@@ -665,6 +672,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProcessesResponse) => void
   ): Promise<DescribeProcessesResponse> {
     return this.request("DescribeProcesses", req, cb)
+  }
+
+  /**
+   * 同步资产扫描信息
+   */
+  async SyncAssetScan(
+    req: SyncAssetScanRequest,
+    cb?: (error: string, rep: SyncAssetScanResponse) => void
+  ): Promise<SyncAssetScanResponse> {
+    return this.request("SyncAssetScan", req, cb)
   }
 
   /**
@@ -1199,6 +1216,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取主机最近趋势情况
+   */
+  async DescribeAssetRecentMachineInfo(
+    req: DescribeAssetRecentMachineInfoRequest,
+    cb?: (error: string, rep: DescribeAssetRecentMachineInfoResponse) => void
+  ): Promise<DescribeAssetRecentMachineInfoResponse> {
+    return this.request("DescribeAssetRecentMachineInfo", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeAgentVuls) 用于获取单台主机的漏洞列表。
    */
   async DescribeAgentVuls(
@@ -1558,6 +1585,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAttackLogInfoResponse) => void
   ): Promise<DescribeAttackLogInfoResponse> {
     return this.request("DescribeAttackLogInfo", req, cb)
+  }
+
+  /**
+   * 获取资产数量： 主机数、账号数、端口数、进程数、软件数、数据库数、Web应用数、Web框架数、Web服务数、Web站点数
+   */
+  async DescribeAssetInfo(
+    req?: DescribeAssetInfoRequest,
+    cb?: (error: string, rep: DescribeAssetInfoResponse) => void
+  ): Promise<DescribeAssetInfoResponse> {
+    return this.request("DescribeAssetInfo", req, cb)
   }
 
   /**
