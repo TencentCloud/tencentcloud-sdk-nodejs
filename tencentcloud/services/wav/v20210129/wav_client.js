@@ -28,10 +28,64 @@ class Client extends abstract_client_1.AbstractClient {
         super("wav.tencentcloudapi.com", "2021-01-29", clientConfig);
     }
     /**
+     * 根据游标拉取渠道活码列表信息
+     */
+    async QueryChannelCodeList(req, cb) {
+        return this.request("QueryChannelCodeList", req, cb);
+    }
+    /**
      * 根据游标拉取活动活码列表信息
      */
     async QueryActivityLiveCodeList(req, cb) {
         return this.request("QueryActivityLiveCodeList", req, cb);
+    }
+    /**
+     * 企业可通过此接口，根据外部联系人的userid，拉取客户详情
+     */
+    async QueryExternalContactDetail(req, cb) {
+        return this.request("QueryExternalContactDetail", req, cb);
+    }
+    /**
+     * 根据游标拉取活动列表信息
+     */
+    async QueryActivityList(req, cb) {
+        return this.request("QueryActivityList", req, cb);
+    }
+    /**
+     * 根据游标拉取会话存档列表信息
+     */
+    async QueryChatArchivingList(req, cb) {
+        return this.request("QueryChatArchivingList", req, cb);
+    }
+    /**
+     * 企业可通过此接口获取指定成员添加的客户列表。客户是指配置了客户联系功能的成员所添加的外部联系人。没有配置客户联系功能的成员，所添加的外部联系人将不会作为客户返回。
+     */
+    async QueryExternalContactList(req, cb) {
+        return this.request("QueryExternalContactList", req, cb);
+    }
+    /**
+     * 该接口用户设置标签库, 每个企业最多可配置3000个企业标签。
+     */
+    async CreateCorpTag(req, cb) {
+        return this.request("CreateCorpTag", req, cb);
+    }
+    /**
+     * 新增渠道活码接口
+     */
+    async CreateChannelCode(req, cb) {
+        return this.request("CreateChannelCode", req, cb);
+    }
+    /**
+     * 根据游标拉取活动参与列表信息
+     */
+    async QueryActivityJoinList(req, cb) {
+        return this.request("QueryActivityJoinList", req, cb);
+    }
+    /**
+     * 查询小程序码列表接口
+     */
+    async QueryMiniAppCodeList(req, cb) {
+        return this.request("QueryMiniAppCodeList", req, cb);
     }
 }
 exports.Client = Client;

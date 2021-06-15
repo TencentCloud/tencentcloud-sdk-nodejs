@@ -18,9 +18,41 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  QueryActivityLiveCodeListRequest,
-  QueryActivityLiveCodeListResponse,
+  ActivityJoinDetail,
+  CreateCorpTagResponse,
+  QueryChatArchivingListResponse,
+  QueryExternalContactDetailRequest,
+  ChannelCodeInnerDetail,
+  ExternalContact,
+  ExternalContactSimpleInfo,
+  TagInfo,
+  TagDetailInfo,
+  ChatArchivingMsgTypeVideo,
+  QueryExternalContactListRequest,
+  MiniAppCodeInfo,
+  CreateChannelCodeRequest,
+  QueryExternalContactDetailResponse,
   LiveCodeDetail,
+  QueryExternalContactListResponse,
+  FollowUser,
+  QueryActivityLiveCodeListResponse,
+  QueryActivityJoinListResponse,
+  QueryMiniAppCodeListResponse,
+  ActivityDetail,
+  ExternalContactTag,
+  ChatArchivingDetail,
+  QueryActivityListResponse,
+  QueryActivityJoinListRequest,
+  TagGroup,
+  QueryChannelCodeListRequest,
+  WeComTagDetail,
+  QueryActivityLiveCodeListRequest,
+  CreateCorpTagRequest,
+  CreateChannelCodeResponse,
+  QueryActivityListRequest,
+  QueryMiniAppCodeListRequest,
+  QueryChatArchivingListRequest,
+  QueryChannelCodeListResponse,
 } from "./wav_models"
 
 /**
@@ -33,6 +65,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据游标拉取渠道活码列表信息
+   */
+  async QueryChannelCodeList(
+    req: QueryChannelCodeListRequest,
+    cb?: (error: string, rep: QueryChannelCodeListResponse) => void
+  ): Promise<QueryChannelCodeListResponse> {
+    return this.request("QueryChannelCodeList", req, cb)
+  }
+
+  /**
    * 根据游标拉取活动活码列表信息
    */
   async QueryActivityLiveCodeList(
@@ -40,5 +82,85 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryActivityLiveCodeListResponse) => void
   ): Promise<QueryActivityLiveCodeListResponse> {
     return this.request("QueryActivityLiveCodeList", req, cb)
+  }
+
+  /**
+   * 企业可通过此接口，根据外部联系人的userid，拉取客户详情
+   */
+  async QueryExternalContactDetail(
+    req: QueryExternalContactDetailRequest,
+    cb?: (error: string, rep: QueryExternalContactDetailResponse) => void
+  ): Promise<QueryExternalContactDetailResponse> {
+    return this.request("QueryExternalContactDetail", req, cb)
+  }
+
+  /**
+   * 根据游标拉取活动列表信息
+   */
+  async QueryActivityList(
+    req: QueryActivityListRequest,
+    cb?: (error: string, rep: QueryActivityListResponse) => void
+  ): Promise<QueryActivityListResponse> {
+    return this.request("QueryActivityList", req, cb)
+  }
+
+  /**
+   * 根据游标拉取会话存档列表信息
+   */
+  async QueryChatArchivingList(
+    req: QueryChatArchivingListRequest,
+    cb?: (error: string, rep: QueryChatArchivingListResponse) => void
+  ): Promise<QueryChatArchivingListResponse> {
+    return this.request("QueryChatArchivingList", req, cb)
+  }
+
+  /**
+   * 企业可通过此接口获取指定成员添加的客户列表。客户是指配置了客户联系功能的成员所添加的外部联系人。没有配置客户联系功能的成员，所添加的外部联系人将不会作为客户返回。
+   */
+  async QueryExternalContactList(
+    req: QueryExternalContactListRequest,
+    cb?: (error: string, rep: QueryExternalContactListResponse) => void
+  ): Promise<QueryExternalContactListResponse> {
+    return this.request("QueryExternalContactList", req, cb)
+  }
+
+  /**
+   * 该接口用户设置标签库, 每个企业最多可配置3000个企业标签。
+   */
+  async CreateCorpTag(
+    req: CreateCorpTagRequest,
+    cb?: (error: string, rep: CreateCorpTagResponse) => void
+  ): Promise<CreateCorpTagResponse> {
+    return this.request("CreateCorpTag", req, cb)
+  }
+
+  /**
+   * 新增渠道活码接口
+   */
+  async CreateChannelCode(
+    req: CreateChannelCodeRequest,
+    cb?: (error: string, rep: CreateChannelCodeResponse) => void
+  ): Promise<CreateChannelCodeResponse> {
+    return this.request("CreateChannelCode", req, cb)
+  }
+
+  /**
+   * 根据游标拉取活动参与列表信息
+   */
+  async QueryActivityJoinList(
+    req: QueryActivityJoinListRequest,
+    cb?: (error: string, rep: QueryActivityJoinListResponse) => void
+  ): Promise<QueryActivityJoinListResponse> {
+    return this.request("QueryActivityJoinList", req, cb)
+  }
+
+  /**
+   * 查询小程序码列表接口
+   */
+  async QueryMiniAppCodeList(
+    req: QueryMiniAppCodeListRequest,
+    cb?: (error: string, rep: QueryMiniAppCodeListResponse) => void
+  ): Promise<QueryMiniAppCodeListResponse> {
+    return this.request("QueryMiniAppCodeList", req, cb)
   }
 }

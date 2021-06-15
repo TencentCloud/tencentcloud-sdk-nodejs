@@ -18,9 +18,99 @@ const client = new tencentcloud.wav.v20210129.Client({
 })
 describe("wav.v20210129.test.js", function () {
 
+it("wav.v20210129.QueryChannelCodeList", async function () {
+    try {
+       const data = await client.QueryChannelCodeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wav.v20210129.QueryActivityLiveCodeList", async function () {
     try {
        const data = await client.QueryActivityLiveCodeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryExternalContactDetail", async function () {
+    try {
+       const data = await client.QueryExternalContactDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryActivityList", async function () {
+    try {
+       const data = await client.QueryActivityList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryChatArchivingList", async function () {
+    try {
+       const data = await client.QueryChatArchivingList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryExternalContactList", async function () {
+    try {
+       const data = await client.QueryExternalContactList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.CreateCorpTag", async function () {
+    try {
+       const data = await client.CreateCorpTag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.CreateChannelCode", async function () {
+    try {
+       const data = await client.CreateChannelCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryActivityJoinList", async function () {
+    try {
+       const data = await client.QueryActivityJoinList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryMiniAppCodeList", async function () {
+    try {
+       const data = await client.QueryMiniAppCodeList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
