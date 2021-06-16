@@ -57,12 +57,12 @@ export interface ExportReverseShellEventsResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 任务id
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -113,12 +113,12 @@ export interface ExportPrivilegeEventsResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 导出任务ID
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -539,6 +539,22 @@ export interface DescribeAttackLogsRequest {
    * 云主机机器ID
    */
   Quuid?: string
+}
+
+/**
+ * ScanVul返回参数结构体
+ */
+export interface ScanVulResponse {
+  /**
+      * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1254,6 +1270,11 @@ export interface RenewProVersionRequest {
 }
 
 /**
+ * DescribeWebPageGeneralize请求参数结构体
+ */
+export type DescribeWebPageGeneralizeRequest = null
+
+/**
  * DescribeComponents请求参数结构体
  */
 export interface DescribeComponentsRequest {
@@ -1283,6 +1304,16 @@ export interface DescribeComponentsRequest {
 <li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
       */
   Filters?: Array<Filter>
+}
+
+/**
+ * ModifyWebPageProtectSetting返回参数结构体
+ */
+export interface ModifyWebPageProtectSettingResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1777,12 +1808,12 @@ export interface ExportBruteAttacksResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 导出任务ID
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3266,6 +3297,26 @@ export interface DeleteNonlocalLoginPlacesResponse {
 }
 
 /**
+ * ModifyWebPageProtectSetting请求参数结构体
+ */
+export interface ModifyWebPageProtectSettingRequest {
+  /**
+   * 需要操作的类型1 目录名称 2 防护文件类型
+   */
+  ModifyType: number
+
+  /**
+   * 提交值
+   */
+  Value: string
+
+  /**
+   * 配置对应的protect_path
+   */
+  Id: string
+}
+
+/**
  * DescribeNonlocalLoginPlaces返回参数结构体
  */
 export interface DescribeNonlocalLoginPlacesResponse {
@@ -3302,12 +3353,12 @@ export interface ExportMalwaresResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 任务id
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3743,7 +3794,7 @@ export interface ExportMaliciousRequestsResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3767,23 +3818,48 @@ export interface DescribeAttackLogInfoRequest {
 }
 
 /**
- * DescribeWeeklyReportMalwares请求参数结构体
+ * DescribeWebPageGeneralize返回参数结构体
  */
-export interface DescribeWeeklyReportMalwaresRequest {
+export interface DescribeWebPageGeneralizeResponse {
   /**
-   * 专业周报开始时间。
+   * 防护监测 0 未开启 1 已开启 2 异常
    */
-  BeginDate: string
+  ProtectMonitor: number
 
   /**
-   * 返回数量，默认为10，最大值为100。
+   * 防护目录数
    */
-  Limit?: number
+  ProtectDirNum: number
 
   /**
-   * 偏移量，默认为0。
+   * 防护文件数
    */
-  Offset?: number
+  ProtectFileNum: number
+
+  /**
+   * 篡改文件数
+   */
+  TamperFileNum: number
+
+  /**
+   * 篡改数
+   */
+  TamperNum: number
+
+  /**
+   * 今日防护
+   */
+  ProtectToday: number
+
+  /**
+   * 防护主机数
+   */
+  ProtectHostNum: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3853,12 +3929,12 @@ export interface ExportNonlocalLoginPlacesResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 导出任务ID
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4597,6 +4673,16 @@ export interface DeleteBashRulesRequest {
 }
 
 /**
+ * CreateProtectServer返回参数结构体
+ */
+export interface CreateProtectServerResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 端口列表
  */
 export interface OpenPort {
@@ -4714,6 +4800,26 @@ export interface OpenProVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeWeeklyReportMalwares请求参数结构体
+ */
+export interface DescribeWeeklyReportMalwaresRequest {
+  /**
+   * 专业周报开始时间。
+   */
+  BeginDate: string
+
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -5303,12 +5409,12 @@ export interface ExportBashEventsResponse {
   /**
    * 导出文件下载链接地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 导出任务ID
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5370,6 +5476,21 @@ export interface ImpactedHost {
 }
 
 /**
+ * CreateProtectServer请求参数结构体
+ */
+export interface CreateProtectServerRequest {
+  /**
+   * 防护目录地址
+   */
+  ProtectDir: string
+
+  /**
+   * 防护机器 信息
+   */
+  ProtectHostConfig: Array<ProtectHostConfig>
+}
+
+/**
  * DescribeESAggregations请求参数结构体
  */
 export interface DescribeESAggregationsRequest {
@@ -5377,6 +5498,16 @@ export interface DescribeESAggregationsRequest {
    * ES聚合条件JSON
    */
   Query: string
+}
+
+/**
+ * DeleteWebPageEventLog返回参数结构体
+ */
+export interface DeleteWebPageEventLogResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5965,6 +6096,31 @@ export interface DefendAttackLog {
    */
   HttpContent: string
 }
+
+/**
+ * 防护机器信息
+ */
+export interface ProtectHostConfig {
+  /**
+   * 机器唯一ID
+   */
+  Quuid: string
+
+  /**
+   * 防护开关 0  关闭 1开启
+   */
+  ProtectSwitch: number
+
+  /**
+   * 自动恢复开关 0 关闭 1开启
+   */
+  AutoRecovery: number
+}
+
+/**
+ * DeleteWebPageEventLog请求参数结构体
+ */
+export type DeleteWebPageEventLogRequest = null
 
 /**
  * OpenProVersionPrepaid请求参数结构体
@@ -6693,6 +6849,36 @@ export interface ExportTasksRequest {
    * 任务ID
    */
   TaskId: string
+}
+
+/**
+ * ScanVul请求参数结构体
+ */
+export interface ScanVulRequest {
+  /**
+   * 漏洞类型：1: web应用漏洞 2:系统组件漏洞 (多选英文;分隔)
+   */
+  VulCategories: string
+
+  /**
+   * 危害等级：1-低危；2-中危；3-高危；4-严重 (多选英文;分隔)
+   */
+  VulLevels: string
+
+  /**
+   * 服务器分类：1:专业版服务器；2:自选服务器
+   */
+  HostType: number
+
+  /**
+   * 自选服务器时生效，主机quuid的string数组
+   */
+  QuuidList?: Array<string>
+
+  /**
+   * 是否是应急漏洞 0 否 1 是
+   */
+  VulEmergency?: number
 }
 
 /**

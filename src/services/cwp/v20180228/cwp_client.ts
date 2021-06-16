@@ -45,6 +45,7 @@ import {
   DescribeLogStorageStatisticRequest,
   ModifyAlarmAttributeRequest,
   DescribeAttackLogsRequest,
+  ScanVulResponse,
   ComponentStatistics,
   InquiryPriceOpenProVersionPrepaidRequest,
   DescribeSearchTemplatesRequest,
@@ -72,7 +73,9 @@ import {
   CreateProcessTaskResponse,
   DescribeHistoryServiceResponse,
   RenewProVersionRequest,
+  DescribeWebPageGeneralizeRequest,
   DescribeComponentsRequest,
+  ModifyWebPageProtectSettingResponse,
   DescribeNonlocalLoginPlacesRequest,
   SyncAssetScanRequest,
   DeleteMachineTagRequest,
@@ -157,6 +160,7 @@ import {
   DescribeSearchExportListResponse,
   DeleteSearchTemplateRequest,
   DeleteNonlocalLoginPlacesResponse,
+  ModifyWebPageProtectSettingRequest,
   DescribeNonlocalLoginPlacesResponse,
   DeleteReverseShellRulesResponse,
   ExportMalwaresResponse,
@@ -184,7 +188,7 @@ import {
   ExportMaliciousRequestsResponse,
   DescribeSearchLogsRequest,
   DescribeAttackLogInfoRequest,
-  DescribeWeeklyReportMalwaresRequest,
+  DescribeWebPageGeneralizeResponse,
   DescribeAccountsResponse,
   ModifyProVersionRenewFlagResponse,
   RegionInfo,
@@ -222,6 +226,7 @@ import {
   DeleteReverseShellEventsResponse,
   DeletePrivilegeEventsRequest,
   DeleteBashRulesRequest,
+  CreateProtectServerResponse,
   OpenPort,
   TrustMalwaresRequest,
   CloseProVersionResponse,
@@ -229,6 +234,7 @@ import {
   DescribeOpenPortsResponse,
   EditBashRuleResponse,
   OpenProVersionResponse,
+  DescribeWeeklyReportMalwaresRequest,
   DescribeMachineInfoRequest,
   DescribeMaliciousRequestsRequest,
   DescribeProcessesRequest,
@@ -260,7 +266,9 @@ import {
   DescribeAlarmAttributeRequest,
   ExportBashEventsResponse,
   ImpactedHost,
+  CreateProtectServerRequest,
   DescribeESAggregationsRequest,
+  DeleteWebPageEventLogResponse,
   DescribeReverseShellRulesResponse,
   DescribeBruteAttackListRequest,
   DescribeComponentInfoRequest,
@@ -279,6 +287,8 @@ import {
   DescribeWeeklyReportVulsResponse,
   WeeklyReportBruteAttack,
   DefendAttackLog,
+  ProtectHostConfig,
+  DeleteWebPageEventLogRequest,
   OpenProVersionPrepaidRequest,
   PrivilegeRule,
   HistoryAccount,
@@ -305,6 +315,7 @@ import {
   RescanImpactedHostResponse,
   SecurityTrend,
   ExportTasksRequest,
+  ScanVulRequest,
   DescribeVulScanResultResponse,
   ModifyAutoOpenProVersionConfigRequest,
   AddMachineTagRequest,
@@ -1096,6 +1107,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 网站防篡改-修改网站防护设置
+   */
+  async ModifyWebPageProtectSetting(
+    req: ModifyWebPageProtectSettingRequest,
+    cb?: (error: string, rep: ModifyWebPageProtectSettingResponse) => void
+  ): Promise<ModifyWebPageProtectSettingResponse> {
+    return this.request("ModifyWebPageProtectSetting", req, cb)
+  }
+
+  /**
    * 本接口 (OpenProVersionPrepaid) 用于开通专业版(包年包月)。
    */
   async OpenProVersionPrepaid(
@@ -1153,6 +1174,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddLoginWhiteListResponse) => void
   ): Promise<AddLoginWhiteListResponse> {
     return this.request("AddLoginWhiteList", req, cb)
+  }
+
+  /**
+   * 漏洞管理 - 一键检测
+   */
+  async ScanVul(
+    req: ScanVulRequest,
+    cb?: (error: string, rep: ScanVulResponse) => void
+  ): Promise<ScanVulResponse> {
+    return this.request("ScanVul", req, cb)
   }
 
   /**
@@ -1216,6 +1247,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
+   */
+  async IgnoreImpactedHosts(
+    req: IgnoreImpactedHostsRequest,
+    cb?: (error: string, rep: IgnoreImpactedHostsResponse) => void
+  ): Promise<IgnoreImpactedHostsResponse> {
+    return this.request("IgnoreImpactedHosts", req, cb)
+  }
+
+  /**
    * 获取主机最近趋势情况
    */
   async DescribeAssetRecentMachineInfo(
@@ -1273,6 +1314,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeESHitsResponse) => void
   ): Promise<DescribeESHitsResponse> {
     return this.request("DescribeESHits", req, cb)
+  }
+
+  /**
+   * 查询网站防篡改 概览信息
+   */
+  async DescribeWebPageGeneralize(
+    req?: DescribeWebPageGeneralizeRequest,
+    cb?: (error: string, rep: DescribeWebPageGeneralizeResponse) => void
+  ): Promise<DescribeWebPageGeneralizeResponse> {
+    return this.request("DescribeWebPageGeneralize", req, cb)
   }
 
   /**
@@ -1384,6 +1435,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHistoryAccountsResponse) => void
   ): Promise<DescribeHistoryAccountsResponse> {
     return this.request("DescribeHistoryAccounts", req, cb)
+  }
+
+  /**
+   * 添加房展防护服务器
+   */
+  async CreateProtectServer(
+    req: CreateProtectServerRequest,
+    cb?: (error: string, rep: CreateProtectServerResponse) => void
+  ): Promise<CreateProtectServerResponse> {
+    return this.request("CreateProtectServer", req, cb)
   }
 
   /**
@@ -1598,13 +1659,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
+   * 网站防篡改-删除事件记录
    */
-  async IgnoreImpactedHosts(
-    req: IgnoreImpactedHostsRequest,
-    cb?: (error: string, rep: IgnoreImpactedHostsResponse) => void
-  ): Promise<IgnoreImpactedHostsResponse> {
-    return this.request("IgnoreImpactedHosts", req, cb)
+  async DeleteWebPageEventLog(
+    req?: DeleteWebPageEventLogRequest,
+    cb?: (error: string, rep: DeleteWebPageEventLogResponse) => void
+  ): Promise<DeleteWebPageEventLogResponse> {
+    return this.request("DeleteWebPageEventLog", req, cb)
   }
 
   /**

@@ -52,7 +52,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnBindingPolicyObject", req, cb);
     }
     /**
-     * 创建 Prometheus 告警规则
+     * 创建 Prometheus 告警规则。
+
+请注意，**告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description**，，请参考 [Prometheus Rule更多配置请参考](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
      */
     async CreateAlertRule(req, cb) {
         return this.request("CreateAlertRule", req, cb);
@@ -235,7 +237,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMonitorTypes", req, cb);
     }
     /**
-     * 更新 Prometheus 的报警规则
+     * 更新 Prometheus 的报警规则。
+
+请注意，**告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description**，，请参考 [Prometheus Rule更多配置请参考](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
      */
     async UpdateAlertRule(req, cb) {
         return this.request("UpdateAlertRule", req, cb);

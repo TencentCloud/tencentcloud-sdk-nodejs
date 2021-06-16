@@ -140,17 +140,17 @@ export interface CreateSessionRequest {
   SetNo?: number
 
   /**
-   * 单位Mbps，固定码率，有一定浮动范围，后端不动态调整(MaxBitrate和MinBitrate将无效)
+   * 单位Mbps，固定码率建议值，有一定浮动范围，后端不动态调整(MaxBitrate和MinBitrate将无效)
    */
   Bitrate?: number
 
   /**
-   * 单位Mbps，动态调整最大码率，有一定浮动范围
+   * 单位Mbps，动态调整最大码率建议值，会按实际情况调整
    */
   MaxBitrate?: number
 
   /**
-   * 单位Mbps，动态调整最小码率，有一定浮动范围
+   * 单位Mbps，动态调整最小码率建议值，会按实际情况调整
    */
   MinBitrate?: number
 

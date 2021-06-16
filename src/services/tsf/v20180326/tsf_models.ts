@@ -525,6 +525,22 @@ export interface ModifyContainerReplicasRequest {
 }
 
 /**
+ * SearchStdoutLog返回参数结构体
+ */
+export interface SearchStdoutLogResponse {
+  /**
+      * 标准输出日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: TsfPageStdoutLogV2
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateGatewayApi返回参数结构体
  */
 export interface CreateGatewayApiResponse {
@@ -2350,6 +2366,22 @@ export interface DescribeCreateGatewayApiStatusRequest {
 }
 
 /**
+ * RevocationPublicConfig返回参数结构体
+ */
+export interface RevocationPublicConfigResponse {
+  /**
+      * true：撤销成功；false：撤销失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeConfigReleaseLogs请求参数结构体
  */
 export interface DescribeConfigReleaseLogsRequest {
@@ -3170,19 +3202,44 @@ export interface EnableTaskRequest {
 }
 
 /**
- * RevocationPublicConfig返回参数结构体
+ * 业务日志
  */
-export interface RevocationPublicConfigResponse {
+export interface BusinessLogV2 {
   /**
-      * true：撤销成功；false：撤销失败
+      * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: boolean
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 日志内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: string
+
+  /**
+      * 日志时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamp: number
+
+  /**
+      * 实例IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceIp: string
+
+  /**
+      * 日志ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogId: string
+
+  /**
+      * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
 }
 
 /**
@@ -4205,6 +4262,76 @@ export interface ExecuteTaskFlowResponse {
 }
 
 /**
+ * SearchBusinessLog请求参数结构体
+ */
+export interface SearchBusinessLogRequest {
+  /**
+   * 日志配置项ID
+   */
+  ConfigId: string
+
+  /**
+   * 机器实例ID，不传表示全部实例
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 请求偏移量，取值范围大于等于0，默认值为0
+   */
+  Offset?: number
+
+  /**
+   * 单页请求配置数量，取值范围[1, 200]，默认值为50
+   */
+  Limit?: number
+
+  /**
+   * 排序规则，默认值"time"
+   */
+  OrderBy?: string
+
+  /**
+   * 排序方式，取值"asc"或"desc"，默认值"desc"
+   */
+  OrderType?: string
+
+  /**
+   * 检索关键词
+   */
+  SearchWords?: Array<string>
+
+  /**
+   * 部署组ID列表，不传表示全部部署组
+   */
+  GroupIds?: Array<string>
+
+  /**
+   * 检索类型，取值"LUCENE", "REGEXP", "NORMAL"
+   */
+  SearchWordType?: string
+
+  /**
+   * 批量请求类型，取值"page"或"scroll"
+   */
+  BatchType?: string
+
+  /**
+   * 游标ID
+   */
+  ScrollId?: string
+}
+
+/**
  * ExpandGroup返回参数结构体
  */
 export interface ExpandGroupResponse {
@@ -4495,6 +4622,22 @@ export interface ModifyTaskResponse {
    * 更新是否成功
    */
   Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchBusinessLog返回参数结构体
+ */
+export interface SearchBusinessLogResponse {
+  /**
+      * 业务日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: TsfPageBusinessLogV2
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5082,6 +5225,35 @@ export interface ShrinkGroupRequest {
    * 部署组ID
    */
   GroupId: string
+}
+
+/**
+ * 标准输出日志列表
+ */
+export interface TsfPageStdoutLogV2 {
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 标准输出日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<StdoutLogV2>
+
+  /**
+      * 游标ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScrollId: string
+
+  /**
+      * 查询状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 }
 
 /**
@@ -6381,6 +6553,31 @@ export interface ModifyLaneResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDownloadInfo请求参数结构体
+ */
+export interface DescribeDownloadInfoRequest {
+  /**
+   * 应用ID
+   */
+  ApplicationId: string
+
+  /**
+   * 程序包ID
+   */
+  PkgId: string
+
+  /**
+   * 程序包仓库ID
+   */
+  RepositoryId?: string
+
+  /**
+   * 程序包仓库类型
+   */
+  RepositoryType?: string
 }
 
 /**
@@ -8588,28 +8785,19 @@ export interface DescribeGroupInstancesResponse {
 }
 
 /**
- * DescribeDownloadInfo请求参数结构体
+ * DescribePublicConfigReleaseLogs返回参数结构体
  */
-export interface DescribeDownloadInfoRequest {
+export interface DescribePublicConfigReleaseLogsResponse {
   /**
-   * 应用ID
-   */
-  ApplicationId: string
+      * 分页后的公共配置项发布历史列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: TsfPageConfigReleaseLog
 
   /**
-   * 程序包ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PkgId: string
-
-  /**
-   * 程序包仓库ID
-   */
-  RepositoryId?: string
-
-  /**
-   * 程序包仓库类型
-   */
-  RepositoryType?: string
+  RequestId?: string
 }
 
 /**
@@ -9070,6 +9258,35 @@ export interface DescribeConfigReleasesRequest {
    * 应用ID，不传入时查询全量
    */
   ApplicationId?: string
+}
+
+/**
+ * 标准输出日志
+ */
+export interface StdoutLogV2 {
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 日志内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: string
+
+  /**
+      * 日志时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamp: number
+
+  /**
+      * 实例IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceIp: string
 }
 
 /**
@@ -10015,22 +10232,6 @@ export interface DeleteConfigRequest {
 }
 
 /**
- * DescribePublicConfigReleaseLogs返回参数结构体
- */
-export interface DescribePublicConfigReleaseLogsResponse {
-  /**
-      * 分页后的公共配置项发布历史列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result?: TsfPageConfigReleaseLog
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ExecuteTask返回参数结构体
  */
 export interface ExecuteTaskResponse {
@@ -10186,6 +10387,35 @@ export interface DescribeApiUseDetailRequest {
    * 查询的日期,格式：yyyy-MM-dd HH:mm:ss
    */
   EndTime: string
+}
+
+/**
+ * 业务日志列表
+ */
+export interface TsfPageBusinessLogV2 {
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 业务日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<BusinessLogV2>
+
+  /**
+      * 游标ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScrollId: string
+
+  /**
+      * 查询状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 }
 
 /**
@@ -11194,6 +11424,75 @@ export interface DeleteNamespaceRequest {
    * 集群ID
    */
   ClusterId?: string
+}
+
+/**
+ * SearchStdoutLog请求参数结构体
+ */
+export interface SearchStdoutLogRequest {
+  /**
+   * 机器实例ID
+   */
+  InstanceId?: string
+
+  /**
+   * 单页请求配置数量，取值范围[1, 500]，默认值为100
+   */
+  Limit?: number
+
+  /**
+   * 检索关键词
+   */
+  SearchWords?: Array<string>
+
+  /**
+   * 查询起始时间
+   */
+  StartTime?: string
+
+  /**
+   * 部署组ID
+   */
+  GroupId?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+
+  /**
+      * 请求偏移量，取值范围大于等于0，默认值为
+0
+      */
+  Offset?: number
+
+  /**
+   * 排序规则，默认值"time"
+   */
+  OrderBy?: string
+
+  /**
+      * 排序方式，取值"asc"或"desc"，默认
+值"desc"
+      */
+  OrderType?: string
+
+  /**
+      * 检索类型，取值"LUCENE", "REGEXP",
+"NORMAL"
+      */
+  SearchWordType?: string
+
+  /**
+      * 批量请求类型，取值"page"或"scroll"，默认
+值"page"
+      */
+  BatchType?: string
+
+  /**
+   * 游标ID
+   */
+  ScrollId?: string
 }
 
 /**

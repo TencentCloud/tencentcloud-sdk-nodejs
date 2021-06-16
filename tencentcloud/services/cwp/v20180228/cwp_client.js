@@ -479,6 +479,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBruteAttackList", req, cb);
     }
     /**
+     * 网站防篡改-修改网站防护设置
+     */
+    async ModifyWebPageProtectSetting(req, cb) {
+        return this.request("ModifyWebPageProtectSetting", req, cb);
+    }
+    /**
      * 本接口 (OpenProVersionPrepaid) 用于开通专业版(包年包月)。
      */
     async OpenProVersionPrepaid(req, cb) {
@@ -513,6 +519,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddLoginWhiteList(req, cb) {
         return this.request("AddLoginWhiteList", req, cb);
+    }
+    /**
+     * 漏洞管理 - 一键检测
+     */
+    async ScanVul(req, cb) {
+        return this.request("ScanVul", req, cb);
     }
     /**
      * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
@@ -551,6 +563,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoOpenProVersionConfig", req, cb);
     }
     /**
+     * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
+     */
+    async IgnoreImpactedHosts(req, cb) {
+        return this.request("IgnoreImpactedHosts", req, cb);
+    }
+    /**
      * 获取主机最近趋势情况
      */
     async DescribeAssetRecentMachineInfo(req, cb) {
@@ -585,6 +603,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeESHits(req, cb) {
         return this.request("DescribeESHits", req, cb);
+    }
+    /**
+     * 查询网站防篡改 概览信息
+     */
+    async DescribeWebPageGeneralize(req, cb) {
+        return this.request("DescribeWebPageGeneralize", req, cb);
     }
     /**
      * 概览页抽屉侧边弹窗：安全概览“立即处理”页面中的相关事件数统计接口。
@@ -652,6 +676,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeHistoryAccounts(req, cb) {
         return this.request("DescribeHistoryAccounts", req, cb);
+    }
+    /**
+     * 添加房展防护服务器
+     */
+    async CreateProtectServer(req, cb) {
+        return this.request("CreateProtectServer", req, cb);
     }
     /**
      * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
@@ -781,10 +811,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetInfo", req, cb);
     }
     /**
-     * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
+     * 网站防篡改-删除事件记录
      */
-    async IgnoreImpactedHosts(req, cb) {
-        return this.request("IgnoreImpactedHosts", req, cb);
+    async DeleteWebPageEventLog(req, cb) {
+        return this.request("DeleteWebPageEventLog", req, cb);
     }
     /**
      * 导出本次漏洞检测Excel

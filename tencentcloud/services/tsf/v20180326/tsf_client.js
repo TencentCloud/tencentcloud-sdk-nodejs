@@ -799,10 +799,22 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("StartContainerGroup", req, cb);
     }
     /**
+     * 业务日志搜索
+     */
+    async SearchBusinessLog(req, cb) {
+        return this.request("SearchBusinessLog", req, cb);
+    }
+    /**
      * 部署容器应用
      */
     async DeployContainerGroup(req, cb) {
         return this.request("DeployContainerGroup", req, cb);
+    }
+    /**
+     * 标准输出日志搜索
+     */
+    async SearchStdoutLog(req, cb) {
+        return this.request("SearchStdoutLog", req, cb);
     }
     /**
      * 创建工作流

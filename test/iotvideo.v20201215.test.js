@@ -358,6 +358,16 @@ it("iotvideo.v20201215.DescribeCategory", async function () {
     }
 })
 
+it("iotvideo.v20201215.PublishMessage", async function () {
+    try {
+       const data = await client.PublishMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeFirmwareTaskDistribution", async function () {
     try {
        const data = await client.DescribeFirmwareTaskDistribution({})
@@ -541,6 +551,16 @@ it("iotvideo.v20201215.DeleteFirmware", async function () {
 it("iotvideo.v20201215.DescribeFirmwareTasks", async function () {
     try {
        const data = await client.DescribeFirmwareTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.ControlDeviceData", async function () {
+    try {
+       const data = await client.ControlDeviceData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

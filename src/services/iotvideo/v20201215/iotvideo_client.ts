@@ -57,6 +57,7 @@ import {
   BatchUpdateFirmwareResponse,
   DeleteProductRequest,
   StatusStatistic,
+  PublishMessageResponse,
   SetForwardAuthResponse,
   EditFirmwareRequest,
   DeviceDataHistoryItem,
@@ -67,6 +68,7 @@ import {
   DescribeDeviceCommLogResponse,
   DeleteDeviceRequest,
   GenerateSignedVideoURLResponse,
+  ControlDeviceDataRequest,
   ListFirmwaresResponse,
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
@@ -87,6 +89,7 @@ import {
   DescribeDeviceResponse,
   DescribeCloudStorageEventsRequest,
   ListFirmwaresRequest,
+  PublishMessageRequest,
   RetryDeviceFirmwareTaskRequest,
   DescribeBalanceResponse,
   UploadFirmwareRequest,
@@ -112,10 +115,11 @@ import {
   CancelDeviceFirmwareTaskRequest,
   CancelDeviceFirmwareTaskResponse,
   DeleteDeviceResponse,
+  ControlDeviceDataResponse,
   DescribeDeviceDataHistoryRequest,
   EventHistoryItem,
   CreateForwardRuleRequest,
-  CreateTaskFileUrlResponse,
+  DeviceInfo,
   SetForwardAuthRequest,
   DescribeBalanceTransactionsResponse,
   ModifyDeviceResponse,
@@ -139,7 +143,7 @@ import {
   TransferCloudStorageRequest,
   DescribeFirmwareTaskStatisticsRequest,
   DescribeBatchsRequest,
-  DeviceInfo,
+  CreateTaskFileUrlResponse,
   ModifyModelDefinitionResponse,
   ResetCloudStorageRequest,
   DescribeFirmwareTaskRequest,
@@ -496,6 +500,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+   */
+  async PublishMessage(
+    req: PublishMessageRequest,
+    cb?: (error: string, rep: PublishMessageResponse) => void
+  ): Promise<PublishMessageResponse> {
+    return this.request("PublishMessage", req, cb)
+  }
+
+  /**
    * 本接口用于查询固件升级任务状态分布
    */
   async DescribeFirmwareTaskDistribution(
@@ -683,6 +697,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
   ): Promise<DescribeFirmwareTasksResponse> {
     return this.request("DescribeFirmwareTasks", req, cb)
+  }
+
+  /**
+   * 根据设备产品ID、设备名称，设置控制设备的属性数据。
+   */
+  async ControlDeviceData(
+    req: ControlDeviceDataRequest,
+    cb?: (error: string, rep: ControlDeviceDataResponse) => void
+  ): Promise<ControlDeviceDataResponse> {
+    return this.request("ControlDeviceData", req, cb)
   }
 
   /**

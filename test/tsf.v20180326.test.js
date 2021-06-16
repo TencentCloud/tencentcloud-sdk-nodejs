@@ -1298,9 +1298,29 @@ it("tsf.v20180326.StartContainerGroup", async function () {
     }
 })
 
+it("tsf.v20180326.SearchBusinessLog", async function () {
+    try {
+       const data = await client.SearchBusinessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DeployContainerGroup", async function () {
     try {
        const data = await client.DeployContainerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.SearchStdoutLog", async function () {
+    try {
+       const data = await client.SearchStdoutLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

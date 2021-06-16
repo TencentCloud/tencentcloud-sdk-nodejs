@@ -232,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCategory", req, cb);
     }
     /**
+     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     */
+    async PublishMessage(req, cb) {
+        return this.request("PublishMessage", req, cb);
+    }
+    /**
      * 本接口用于查询固件升级任务状态分布
      */
     async DescribeFirmwareTaskDistribution(req, cb) {
@@ -344,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFirmwareTasks(req, cb) {
         return this.request("DescribeFirmwareTasks", req, cb);
+    }
+    /**
+     * 根据设备产品ID、设备名称，设置控制设备的属性数据。
+     */
+    async ControlDeviceData(req, cb) {
+        return this.request("ControlDeviceData", req, cb);
     }
     /**
      * 拉取云存事件缩略图

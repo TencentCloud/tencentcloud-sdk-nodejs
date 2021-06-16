@@ -21,6 +21,7 @@ import {
   DatabaseInfo,
   DescribeTasksRequest,
   Script,
+  KVPair,
   DescribeDatabasesRequest,
   DescribeTableRequest,
   Other,
@@ -30,22 +31,24 @@ import {
   Property,
   DeleteScriptRequest,
   DescribeTableResponse,
-  CreateTaskRequest,
+  CreateStoreLocationResponse,
   TableResponseInfo,
   CreateScriptResponse,
   Task,
-  DescribeTablesResponse,
+  DescribeDatabasesResponse,
   Execution,
   DeleteScriptResponse,
   CreateTableResponse,
   CreateDatabaseResponse,
+  DescribeTablesResponse,
+  DescribeTasksResponse,
   CreateScriptRequest,
   Partition,
   TableInfo,
   Column,
-  DescribeTasksResponse,
+  CreateStoreLocationRequest,
   Filter,
-  DescribeScriptsResponse,
+  CreateTaskRequest,
   TableBaseInfo,
   ViewResponseInfo,
   TextFile,
@@ -58,7 +61,7 @@ import {
   DescribeTablesRequest,
   CreateDatabaseRequest,
   DescribeViewsRequest,
-  DescribeDatabasesResponse,
+  DescribeScriptsResponse,
   DatabaseResponseInfo,
   ViewBaseInfo,
 } from "./dlc_models"
@@ -90,6 +93,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabasesResponse) => void
   ): Promise<DescribeDatabasesResponse> {
     return this.request("DescribeDatabases", req, cb)
+  }
+
+  /**
+   * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
+   */
+  async CreateStoreLocation(
+    req: CreateStoreLocationRequest,
+    cb?: (error: string, rep: CreateStoreLocationResponse) => void
+  ): Promise<CreateStoreLocationResponse> {
+    return this.request("CreateStoreLocation", req, cb)
   }
 
   /**

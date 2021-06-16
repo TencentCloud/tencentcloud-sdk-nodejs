@@ -83,10 +83,28 @@ export interface Template {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReportType: string
+
+  /**
+      * 门诊病历信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MedicalRecordInfo: MedicalRecordInfo
+
+  /**
+      * 出入院信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Hospitalization: Hospitalization
+
+  /**
+      * 手术记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Surgery: Surgery
 }
 
 /**
- * 质地
+ * 弹性质地
  */
 export interface Elastic {
   /**
@@ -225,6 +243,12 @@ export interface ReportInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UltraNum: string
+
+  /**
+      * 临床诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Diagnose: string
 }
 
 /**
@@ -253,6 +277,47 @@ export interface IHCInfo {
    * 值
    */
   Value: Value
+}
+
+/**
+ * 手术史
+ */
+export interface SurgeryHistory {
+  /**
+      * 手术名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SurgeryName: SurgeryAttr
+
+  /**
+      * 手术日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SurgeryDate: SurgeryAttr
+
+  /**
+      * 术前诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PreoperativePathology: SurgeryAttr
+
+  /**
+      * 术中诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntraoperativePathology: SurgeryAttr
+
+  /**
+      * 术后诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostoperativePathology: SurgeryAttr
+
+  /**
+      * 出院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DischargeDiagnosis: SurgeryAttr
 }
 
 /**
@@ -315,13 +380,14 @@ export interface ImageToObjectRequest {
   HandleParam: HandleParam
 
   /**
-   * 图片类别
+   * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
    */
   Type: number
 
   /**
-   * 是否使用分类引擎
-   */
+      * 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为 False，则 Type 字段不能为 0，否则无法输出结果。
+注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
+      */
   IsUsedClassify: boolean
 }
 
@@ -335,18 +401,19 @@ export interface TextToObjectRequest {
   Text: string
 
   /**
-   * 报告类型，目前支持12（检查报告单），15（病理报告），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
+   * 报告类型，目前支持12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
    */
   Type: number
 
   /**
-   * 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为False，则Type字段不能为0，否则无法输出结果。
-   */
+      * 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为False，则Type字段不能为0，否则无法输出结果。
+注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
+      */
   IsUsedClassify: boolean
 }
 
 /**
- * 横纵比
+ * 纵横比
  */
 export interface AspectRatio {
   /**
@@ -381,7 +448,7 @@ export interface AspectRatio {
 }
 
 /**
- * 病症描述
+ * 病症描述信息
  */
 export interface SymptomInfo {
   /**
@@ -474,7 +541,7 @@ export interface TuberInfo {
   RearEcho: BlockInfo
 
   /**
-      * 质地弹性
+      * 弹性质地
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Elastic: Elastic
@@ -642,7 +709,7 @@ export interface ObstericalMedicalHistory {
 }
 
 /**
- * 数量
+ * 多发
  */
 export interface Multiple {
   /**
@@ -674,6 +741,59 @@ export interface Multiple {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Name: string
+}
+
+/**
+ * 出入院信息
+ */
+export interface Hospitalization {
+  /**
+      * 入院时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdmissionTime: string
+
+  /**
+      * 出院时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DischargeTime: string
+
+  /**
+      * 住院天数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdmissionDays: string
+
+  /**
+      * 入院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdmissionDignosis: string
+
+  /**
+      * 入院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdmissionCondition: string
+
+  /**
+      * 诊疗经过
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnosisTreatment: string
+
+  /**
+      * 出院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DischargeDiagnosis: string
+
+  /**
+      * 出院医嘱
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DischargeInstruction: string
 }
 
 /**
@@ -711,7 +831,24 @@ export interface Advice {
 }
 
 /**
- * 部位
+ * 手术记录属性
+ */
+export interface SurgeryAttr {
+  /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+}
+
+/**
+ * 部位信息
  */
 export interface Part {
   /**
@@ -797,7 +934,7 @@ export interface Lymph {
 }
 
 /**
- * Invasive
+ * 侵犯扩散
  */
 export interface Invas {
   /**
@@ -826,7 +963,60 @@ export interface Invas {
 }
 
 /**
- * 部位
+ * 门诊病历信息
+ */
+export interface MedicalRecordInfo {
+  /**
+      * 就诊日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnosisTime: string
+
+  /**
+      * 就诊科室
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnosisDepartmentName: string
+
+  /**
+      * 就诊医生
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnosisDoctorName: string
+
+  /**
+      * 临床诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClinicalDiagnosis: string
+
+  /**
+      * 主述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MainNarration: string
+
+  /**
+      * 体格检查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhysicalExamination: string
+
+  /**
+      * 检查结论
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InspectionFindings: string
+
+  /**
+      * 治疗意见
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TreatmentOpinion: string
+}
+
+/**
+ * 标准部位
  */
 export interface NormPart {
   /**
@@ -970,6 +1160,66 @@ export interface PatientInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IdCard: string
+
+  /**
+      * 健康卡号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthCardNo: string
+
+  /**
+      * 社保卡号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SocialSecurityCardNo: string
+
+  /**
+      * 出生日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Birthday: string
+
+  /**
+      * 民族
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ethnicity: string
+
+  /**
+      * 婚姻状况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Married: string
+
+  /**
+      * 职业
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Profession: string
+
+  /**
+      * 教育程度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EducationBackground: string
+
+  /**
+      * 国籍
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Nationality: string
+
+  /**
+      * 籍贯
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BirthPlace: string
+
+  /**
+      * 医保类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MedicalInsuranceType: string
 }
 
 /**
@@ -1526,7 +1776,7 @@ export interface TextToClassResponse {
 }
 
 /**
- * 类型
+ * 组织学类型
  */
 export interface HistologyType {
   /**
@@ -1596,7 +1846,7 @@ export interface BlockInfo {
 }
 
 /**
- * 总结
+ * 结论
  */
 export interface Summary {
   /**
@@ -1636,7 +1886,7 @@ export interface TextType {
 }
 
 /**
- * 等级
+ * 组织学等级
  */
 export interface HistologyLevel {
   /**
@@ -1659,7 +1909,7 @@ export interface HistologyLevel {
 }
 
 /**
- * 指标项
+ * 检验指标项
  */
 export interface IndicatorItem {
   /**
@@ -1816,7 +2066,7 @@ export interface ImageToClassRequest {
   HandleParam: HandleParam
 
   /**
-   * 图片类型
+   * 图片类型，目前支持11（检验报告），12（检查报告），15（病理报告），218（诊断证明）。
    */
   Type: number
 }
@@ -1907,6 +2157,17 @@ export interface TextToClassRequest {
    * 报告文本
    */
   Text: string
+}
+
+/**
+ * 手术记录
+ */
+export interface Surgery {
+  /**
+      * 手术史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SurgeryHistory: SurgeryHistory
 }
 
 /**

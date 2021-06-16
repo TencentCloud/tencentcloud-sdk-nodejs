@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTasksRequest, DescribeDatabasesRequest, DescribeTableRequest, DescribeViewsResponse, CreateTaskResponse, DeleteScriptRequest, DescribeTableResponse, CreateTaskRequest, CreateScriptResponse, DescribeTablesResponse, DeleteScriptResponse, CreateTableResponse, CreateDatabaseResponse, CreateScriptRequest, DescribeTasksResponse, DescribeScriptsResponse, CreateTableRequest, DescribeScriptsRequest, DescribeTablesRequest, CreateDatabaseRequest, DescribeViewsRequest, DescribeDatabasesResponse } from "./dlc_models";
+import { DescribeTasksRequest, DescribeDatabasesRequest, DescribeTableRequest, DescribeViewsResponse, CreateTaskResponse, DeleteScriptRequest, DescribeTableResponse, CreateStoreLocationResponse, CreateScriptResponse, DescribeDatabasesResponse, DeleteScriptResponse, CreateTableResponse, CreateDatabaseResponse, DescribeTablesResponse, DescribeTasksResponse, CreateScriptRequest, CreateStoreLocationRequest, CreateTaskRequest, CreateTableRequest, DescribeScriptsRequest, DescribeTablesRequest, CreateDatabaseRequest, DescribeViewsRequest, DescribeScriptsResponse } from "./dlc_models";
 /**
  * dlc client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeDatabases）用于查询数据库列表。
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
+    /**
+     * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
+     */
+    CreateStoreLocation(req: CreateStoreLocationRequest, cb?: (error: string, rep: CreateStoreLocationResponse) => void): Promise<CreateStoreLocationResponse>;
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
      */

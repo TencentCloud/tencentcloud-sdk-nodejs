@@ -661,7 +661,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询重置实例的镜像信息
+   * 本接口（DescribeResetInstanceBlueprints）查询重置实例的镜像信息。
    */
   async DescribeResetInstanceBlueprints(
     req: DescribeResetInstanceBlueprintsRequest,

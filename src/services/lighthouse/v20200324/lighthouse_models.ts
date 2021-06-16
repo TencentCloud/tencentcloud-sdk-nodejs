@@ -130,7 +130,7 @@ export interface RegionInfo {
   RegionName: string
 
   /**
-   * 地域是否可用状态，取值为AVAILABLE。
+   * 地域是否可用状态，取值仅为AVAILABLE。
    */
   RegionState: string
 
@@ -1117,12 +1117,12 @@ export interface DescribeBlueprintsResponse {
   /**
    * 符合条件的镜像数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 镜像详细信息列表。
    */
-  BlueprintSet?: Array<Blueprint>
+  BlueprintSet: Array<Blueprint>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2043,7 +2043,7 @@ export interface DescribeResetInstanceBlueprintsRequest {
 类型：String
 必选：否
 <li>blueprint-type</li>按照【镜像类型】进行过滤。
-取值： APP_OS（预置应用的系统 ）；PURE_OS（纯净的 OS 系统）。
+取值： APP_OS（预置应用的系统 ）；PURE_OS（纯净的 OS 系统）；PRIVATE（自定义镜像）。
 类型：String
 必选：否
 <li>platform-type</li>按照【镜像平台类型】进行过滤。
@@ -2095,7 +2095,7 @@ export interface TerminateInstancesRequest {
  */
 export interface InternetAccessible {
   /**
-      * 网络计费类型,，取值范围：
+      * 网络计费类型，取值范围：
 <li>按流量包付费：TRAFFIC_POSTPAID_BY_HOUR</li>
 <li>按带宽付费： BANDWIDTH_POSTPAID_BY_HOUR</li>
       */

@@ -263,7 +263,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeKeyPairs(req: DescribeKeyPairsRequest, cb?: (error: string, rep: DescribeKeyPairsResponse) => void): Promise<DescribeKeyPairsResponse>;
     /**
-     * 查询重置实例的镜像信息
+     * 本接口（DescribeResetInstanceBlueprints）查询重置实例的镜像信息。
      */
     DescribeResetInstanceBlueprints(req: DescribeResetInstanceBlueprintsRequest, cb?: (error: string, rep: DescribeResetInstanceBlueprintsResponse) => void): Promise<DescribeResetInstanceBlueprintsResponse>;
     /**

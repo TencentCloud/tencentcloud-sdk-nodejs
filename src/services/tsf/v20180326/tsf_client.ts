@@ -40,6 +40,7 @@ import {
   DescribePathRewriteResponse,
   DescribeConfigsResponse,
   ModifyContainerReplicasRequest,
+  SearchStdoutLogResponse,
   CreateGatewayApiResponse,
   DescribeApiVersionsRequest,
   TsfPageConfigReleaseLog,
@@ -112,6 +113,7 @@ import {
   TsfPageVmGroup,
   CreateConfigResponse,
   DescribeCreateGatewayApiStatusRequest,
+  RevocationPublicConfigResponse,
   DescribeConfigReleaseLogsRequest,
   ModifyContainerGroupRequest,
   UpdateRepositoryResponse,
@@ -140,7 +142,7 @@ import {
   DescribeUploadInfoResponse,
   DescribeMsApiListResponse,
   EnableTaskRequest,
-  RevocationPublicConfigResponse,
+  BusinessLogV2,
   DisableTaskResponse,
   DescribeMicroserviceRequest,
   DescribePodInstancesResponse,
@@ -189,6 +191,7 @@ import {
   UpdateApiTimeoutsRequest,
   DescribeSimpleNamespacesRequest,
   ExecuteTaskFlowResponse,
+  SearchBusinessLogRequest,
   ExpandGroupResponse,
   DescribePublicConfigsResponse,
   DescribeUnitNamespacesResponse,
@@ -205,6 +208,7 @@ import {
   DescribeGroupsWithPluginRequest,
   ImageRepositoryResult,
   ModifyTaskResponse,
+  SearchBusinessLogResponse,
   DeleteUnitNamespacesRequest,
   DescribeGroupRequest,
   UnitRuleItem,
@@ -220,6 +224,7 @@ import {
   StartGroupResponse,
   DescribePathRewritesRequest,
   ShrinkGroupRequest,
+  TsfPageStdoutLogV2,
   RepositoryList,
   CreateLaneRuleResponse,
   CreateTaskResponse,
@@ -266,6 +271,7 @@ import {
   UpdateGatewayApiResponse,
   ContainerEvent,
   ModifyLaneResponse,
+  DescribeDownloadInfoRequest,
   DescribePublicConfigSummaryResponse,
   DescribePublicConfigReleaseLogsRequest,
   CreateServerlessGroupResponse,
@@ -350,7 +356,7 @@ import {
   UpdateApiRateLimitRulesResponse,
   GroupUnitApiUseStatistics,
   DescribeGroupInstancesResponse,
-  DescribeDownloadInfoRequest,
+  DescribePublicConfigReleaseLogsResponse,
   DeleteApiGroupRequest,
   ReleaseApiGroupRequest,
   StartGroupRequest,
@@ -370,6 +376,7 @@ import {
   CreateRepositoryRequest,
   ModifyMicroserviceRequest,
   DescribeConfigReleasesRequest,
+  StdoutLogV2,
   GroupDailyUseStatistics,
   DescribeEnabledUnitRuleRequest,
   DescribeApiGroupResponse,
@@ -399,12 +406,12 @@ import {
   EnableUnitRouteRequest,
   TsfPageApplication,
   DeleteConfigRequest,
-  DescribePublicConfigReleaseLogsResponse,
   ExecuteTaskResponse,
   CreateApiRateLimitRuleResponse,
   Config,
   ProtocolPort,
   DescribeApiUseDetailRequest,
+  TsfPageBusinessLogV2,
   FieldRef,
   CreateClusterRequest,
   TsfPageMicroservice,
@@ -444,6 +451,7 @@ import {
   OperationInfoDetail,
   CreatePathRewritesRequest,
   DeleteNamespaceRequest,
+  SearchStdoutLogRequest,
   RedoTaskBatchResponse,
   DescribeMicroserviceResponse,
   DescribeImageRepositoryResponse,
@@ -1758,6 +1766,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 业务日志搜索
+   */
+  async SearchBusinessLog(
+    req: SearchBusinessLogRequest,
+    cb?: (error: string, rep: SearchBusinessLogResponse) => void
+  ): Promise<SearchBusinessLogResponse> {
+    return this.request("SearchBusinessLog", req, cb)
+  }
+
+  /**
    * 部署容器应用
    */
   async DeployContainerGroup(
@@ -1765,6 +1783,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DeployContainerGroupResponse) => void
   ): Promise<DeployContainerGroupResponse> {
     return this.request("DeployContainerGroup", req, cb)
+  }
+
+  /**
+   * 标准输出日志搜索
+   */
+  async SearchStdoutLog(
+    req: SearchStdoutLogRequest,
+    cb?: (error: string, rep: SearchStdoutLogResponse) => void
+  ): Promise<SearchStdoutLogResponse> {
+    return this.request("SearchStdoutLog", req, cb)
   }
 
   /**

@@ -367,7 +367,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKeyPairs", req, cb);
     }
     /**
-     * 查询重置实例的镜像信息
+     * 本接口（DescribeResetInstanceBlueprints）查询重置实例的镜像信息。
      */
     async DescribeResetInstanceBlueprints(req, cb) {
         return this.request("DescribeResetInstanceBlueprints", req, cb);

@@ -949,6 +949,16 @@ export interface StatusStatistic {
 }
 
 /**
+ * PublishMessage返回参数结构体
+ */
+export interface PublishMessageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SetForwardAuth返回参数结构体
  */
 export interface SetForwardAuthResponse {
@@ -1166,6 +1176,36 @@ export interface GenerateSignedVideoURLResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ControlDeviceData请求参数结构体
+ */
+export interface ControlDeviceDataRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
+   */
+  Data: string
+
+  /**
+   * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
+   */
+  Method?: string
+
+  /**
+   * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
+   */
+  DataTimestamp?: number
 }
 
 /**
@@ -1739,6 +1779,41 @@ export interface ListFirmwaresRequest {
    * 搜索过滤条件
    */
   Filters?: Array<SearchKeyword>
+}
+
+/**
+ * PublishMessage请求参数结构体
+ */
+export interface PublishMessageRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 消息发往的主题
+   */
+  Topic: string
+
+  /**
+   * 云端下发到设备的控制报文
+   */
+  Payload: string
+
+  /**
+   * 消息服务质量等级，取值为0或1
+   */
+  Qos?: number
+
+  /**
+   * Payload的内容编码格式，取值为base64或空。base64表示云端将接收到的base64编码后的报文再转换成二进制报文下发至设备，为空表示不作转换，透传下发至设备
+   */
+  PayloadEncoding?: string
 }
 
 /**
@@ -2351,6 +2426,28 @@ export interface DeleteDeviceResponse {
 }
 
 /**
+ * ControlDeviceData返回参数结构体
+ */
+export interface ControlDeviceDataResponse {
+  /**
+   * 返回信息
+   */
+  Data: string
+
+  /**
+      * JSON字符串， 返回下发控制的结果信息, 
+Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDeviceDataHistory请求参数结构体
  */
 export interface DescribeDeviceDataHistoryRequest {
@@ -2487,23 +2584,38 @@ export interface CreateForwardRuleRequest {
 }
 
 /**
- * CreateTaskFileUrl返回参数结构体
+ * 设备详细信息
  */
-export interface CreateTaskFileUrlResponse {
+export interface DeviceInfo {
   /**
-   * 任务文件上传链接
+   * 设备名
    */
-  Url: string
+  DeviceName: string
 
   /**
-   * 任务文件名
+   * 设备是否在线，0不在线，1在线，2获取失败，3未激活
    */
-  FileName: string
+  Online: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 设备最后上线时间
    */
-  RequestId?: string
+  LoginTime: number
+
+  /**
+   * 设备密钥
+   */
+  DevicePsk: string
+
+  /**
+   * 设备启用状态
+   */
+  EnableState: number
+
+  /**
+   * 设备过期时间
+   */
+  ExpireTime: number
 }
 
 /**
@@ -2966,38 +3078,23 @@ export interface DescribeBatchsRequest {
 }
 
 /**
- * 设备详细信息
+ * CreateTaskFileUrl返回参数结构体
  */
-export interface DeviceInfo {
+export interface CreateTaskFileUrlResponse {
   /**
-   * 设备名
+   * 任务文件上传链接
    */
-  DeviceName: string
+  Url: string
 
   /**
-   * 设备是否在线，0不在线，1在线，2获取失败，3未激活
+   * 任务文件名
    */
-  Online: number
+  FileName: string
 
   /**
-   * 设备最后上线时间
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  LoginTime: number
-
-  /**
-   * 设备密钥
-   */
-  DevicePsk: string
-
-  /**
-   * 设备启用状态
-   */
-  EnableState: number
-
-  /**
-   * 设备过期时间
-   */
-  ExpireTime: number
+  RequestId?: string
 }
 
 /**

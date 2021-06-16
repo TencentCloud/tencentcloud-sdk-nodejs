@@ -89,6 +89,21 @@ export interface Script {
     UpdateTime: number;
 }
 /**
+ * 配置格式
+ */
+export interface KVPair {
+    /**
+      * 配置的key值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Key: string;
+    /**
+      * 配置的value值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+}
+/**
  * DescribeDatabases请求参数结构体
  */
 export interface DescribeDatabasesRequest {
@@ -104,6 +119,10 @@ export interface DescribeDatabasesRequest {
       * 模糊匹配，库名关键字。
       */
     KeyWord?: string;
+    /**
+      * 数据源唯名称，该名称可以通过DescribeDatasourceConnection接口查询到。默认为CosDataCatalog
+      */
+    DatasourceConnectionName?: string;
 }
 /**
  * DescribeTable请求参数结构体
@@ -117,6 +136,10 @@ export interface DescribeTableRequest {
       * 查询表所在的数据库名称。
       */
     DatabaseName: string;
+    /**
+      * 查询表所在的数据源名称
+      */
+    DatasourceConnectionName?: string;
 }
 /**
  * 数据格式其它类型。
@@ -192,6 +215,10 @@ export interface TaskResponseInfo {
       * 任务执行输出信息。
       */
     OutputMessage: string;
+    /**
+      * 执行SQL的引擎类型
+      */
+    TaskType: string;
 }
 /**
  * DescribeViews返回参数结构体
@@ -260,17 +287,13 @@ export interface DescribeTableResponse {
     RequestId?: string;
 }
 /**
- * CreateTask请求参数结构体
+ * CreateStoreLocation返回参数结构体
  */
-export interface CreateTaskRequest {
+export interface CreateStoreLocationResponse {
     /**
-      * 计算任务，该参数中包含任务类型及其相关配置信息
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Task: Task;
-    /**
-      * 数据库名称。任务在执行前均会USE该数据库， 除了首次建库时，其他情况建议均添加上。
-      */
-    DatabaseName?: string;
+    RequestId?: string;
 }
 /**
  * 查询表信息对象
@@ -332,16 +355,20 @@ export interface Task {
     /**
       * SQL查询任务
       */
-    SQLTask: SQLTask;
+    SQLTask?: SQLTask;
+    /**
+      * Spark SQL查询任务
+      */
+    SparkSQLTask?: SQLTask;
 }
 /**
- * DescribeTables返回参数结构体
+ * DescribeDatabases返回参数结构体
  */
-export interface DescribeTablesResponse {
+export interface DescribeDatabasesResponse {
     /**
-      * 数据表对象列表。
+      * 数据库对象列表。
       */
-    TableList: Array<TableResponseInfo>;
+    DatabaseList: Array<DatabaseResponseInfo>;
     /**
       * 实例总数。
       */
@@ -394,6 +421,40 @@ export interface CreateDatabaseResponse {
       * 生成的建库执行语句对象。
       */
     Execution: Execution;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTables返回参数结构体
+ */
+export interface DescribeTablesResponse {
+    /**
+      * 数据表对象列表。
+      */
+    TableList: Array<TableResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTasks返回参数结构体
+ */
+export interface DescribeTasksResponse {
+    /**
+      * 任务对象列表。
+      */
+    TaskList: Array<TaskResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -482,21 +543,13 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
     Comment?: string;
 }
 /**
- * DescribeTasks返回参数结构体
+ * CreateStoreLocation请求参数结构体
  */
-export interface DescribeTasksResponse {
+export interface CreateStoreLocationRequest {
     /**
-      * 任务对象列表。
+      * 计算结果存储cos路径，如：cosn://bucketname/
       */
-    TaskList: Array<TaskResponseInfo>;
-    /**
-      * 实例总数。
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    StoreLocation: string;
 }
 /**
  * 查询列表过滤条件参数
@@ -512,22 +565,21 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * DescribeScripts返回参数结构体
+ * CreateTask请求参数结构体
  */
-export interface DescribeScriptsResponse {
+export interface CreateTaskRequest {
     /**
-      * Script列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 计算任务，该参数中包含任务类型及其相关配置信息
       */
-    Scripts: Array<Script>;
+    Task: Task;
     /**
-      * 实例总数
+      * 数据库名称。任务在执行前均会USE该数据库， 除了首次建库时，其他情况建议均添加上。
       */
-    TotalCount: number;
+    DatabaseName?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 默认数据源名称。
       */
-    RequestId?: string;
+    DatasourceConnectionName?: string;
 }
 /**
  * 数据表配置信息
@@ -541,6 +593,11 @@ export interface TableBaseInfo {
       * 数据表名字
       */
     TableName: string;
+    /**
+      * 该数据表所属数据源名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionName?: string;
 }
 /**
  * 查询视图信息对象
@@ -658,6 +715,10 @@ export interface SQLTask {
       * base64加密后的SQL语句
       */
     SQL: string;
+    /**
+      * 任务的配置信息
+      */
+    Config?: Array<KVPair>;
 }
 /**
  * DescribeScripts请求参数结构体
@@ -725,6 +786,10 @@ table-name - String - （过滤条件）数据表名称,形如：table-001。
 table-id - String - （过滤条件）table id形如：12342。
       */
     Filters?: Array<Filter>;
+    /**
+      * 指定查询的数据源名称，默认为CosDataCatalog
+      */
+    DatasourceConnectionName?: string;
 }
 /**
  * CreateDatabase请求参数结构体
@@ -734,6 +799,10 @@ export interface CreateDatabaseRequest {
       * 数据库基础信息
       */
     DatabaseInfo: DatabaseInfo;
+    /**
+      * 数据源名称，默认为CosDataCatalog
+      */
+    DatasourceConnectionName?: string;
 }
 /**
  * DescribeViews请求参数结构体
@@ -757,17 +826,22 @@ view-name - String - （过滤条件）数据表名称,形如：view-001。
 view-id - String - （过滤条件）view id形如：12342。
       */
     Filters?: Array<Filter>;
+    /**
+      * 数据库所属的数据源名称
+      */
+    DatasourceConnectionName?: string;
 }
 /**
- * DescribeDatabases返回参数结构体
+ * DescribeScripts返回参数结构体
  */
-export interface DescribeDatabasesResponse {
+export interface DescribeScriptsResponse {
     /**
-      * 数据库对象列表。
+      * Script列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DatabaseList: Array<DatabaseResponseInfo>;
+    Scripts: Array<Script>;
     /**
-      * 实例总数。
+      * 实例总数
       */
     TotalCount: number;
     /**

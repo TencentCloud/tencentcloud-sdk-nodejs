@@ -2550,13 +2550,18 @@ export interface OtherMaterial {
 export interface EventContent {
     /**
       * 事件类型，可取值为：
-<li>Storage.NewFileCreated：新文件产生。</li>
+<li>Storage.NewFileCreated：新文件产生；</li>
+<li>Project.StreamConnect.StatusChanged：云转推项目状态变更。</li>
       */
     EventType: string;
     /**
       * 新文件产生事件信息。仅当 EventType 为 Storage.NewFileCreated 时有效。
       */
     StorageNewFileCreatedEvent: StorageNewFileCreatedEvent;
+    /**
+      * 云转推项目状态变更事件信息。仅当 EventType 为 Project.StreamConnect.StatusChanged 时有效。
+      */
+    ProjectStreamConnectStatusChangedEvent: ProjectStreamConnectStatusChangedEvent;
 }
 /**
  * 视频素材信息
@@ -2723,24 +2728,19 @@ export interface DescribeLoginStatusResponse {
     RequestId?: string;
 }
 /**
- * 团队成员信息
+ * 云转推项目状态变更事件。
  */
-export interface TeamMemberInfo {
+export interface ProjectStreamConnectStatusChangedEvent {
     /**
-      * 团队成员 ID。
+      * 项目 Id。
       */
-    MemberId: string;
+    ProjectId: string;
     /**
-      * 团队成员备注。
+      * 项目状态，取值有：
+<li>Working：云转推推流开始；</li>
+<li>Stopped：云转推推流结束。</li>
       */
-    Remark?: string;
-    /**
-      * 团队成员角色，取值：
-<li>Owner：团队所有者，添加团队成员及修改团队成员解决时不能填此角色；</li>
-<li>Admin：团队管理员；</li>
-<li>Member：普通成员。</li>
-      */
-    Role?: string;
+    Status: string;
 }
 /**
  * DescribeJoinTeams返回参数结构体
@@ -2939,6 +2939,26 @@ export interface DescribeTaskDetailRequest {
       * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
       */
     Operator?: string;
+}
+/**
+ * 团队成员信息
+ */
+export interface TeamMemberInfo {
+    /**
+      * 团队成员 ID。
+      */
+    MemberId: string;
+    /**
+      * 团队成员备注。
+      */
+    Remark?: string;
+    /**
+      * 团队成员角色，取值：
+<li>Owner：团队所有者，添加团队成员及修改团队成员解决时不能填此角色；</li>
+<li>Admin：团队管理员；</li>
+<li>Member：普通成员。</li>
+      */
+    Role?: string;
 }
 /**
  * COS 发布信息。

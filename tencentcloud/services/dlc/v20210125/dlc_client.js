@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
+     * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
+     */
+    async CreateStoreLocation(req, cb) {
+        return this.request("CreateStoreLocation", req, cb);
+    }
+    /**
      * 本接口（DescribeViews）用于查询数据视图列表。
      */
     async DescribeViews(req, cb) {

@@ -144,7 +144,7 @@ export interface DescribeAgentAuditedClientsRequest {
       */
     Limit?: number;
     /**
-      * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/空
+      * 客户类型：可以为new(新拓)/assign(指定)/old(存量已关联)/old_newchecking(存量-新关联考核中)/old_newnotpass(存量-新关联未达标)/direct(直销)/direct_newopp(直销(新商机))/空
       */
     ClientType?: string;
     /**
@@ -483,11 +483,11 @@ export interface DescribeAgentAuditedClientsResponse {
     /**
       * 已审核代客列表
       */
-    AgentClientSet?: Array<AgentAuditedClient>;
+    AgentClientSet: Array<AgentAuditedClient>;
     /**
       * 符合条件的代客总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -861,7 +861,7 @@ export interface AgentAuditedClient {
       */
     HasOverdueBill: number;
     /**
-      * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/direct(直销)/direct_newopp(直销(新商机))/空
+      * 客户类型：可以为new(新拓)/assign(指定)/old(存量已关联)/old_newchecking(存量-新关联考核中)/old_newnotpass(存量-新关联未达标)/direct(直销)/direct_newopp(直销(新商机))/空
       */
     ClientType: string;
     /**
