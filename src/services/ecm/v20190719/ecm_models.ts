@@ -4931,6 +4931,12 @@ export interface SecurityGroupPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModifyTime?: string
+
+  /**
+      * 网段或IPv6(互斥)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6CidrBlock?: string
 }
 
 /**

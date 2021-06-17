@@ -106,13 +106,13 @@ export interface SendBatchMessagesResponse {
     RequestId?: string;
 }
 /**
- * DescribeClusterDetail请求参数结构体
+ * ModifyCmqSubscriptionAttribute返回参数结构体
  */
-export interface DescribeClusterDetailRequest {
+export interface ModifyCmqSubscriptionAttributeResponse {
     /**
-      * 集群的ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ClusterId: string;
+    RequestId?: string;
 }
 /**
  * CreateCmqTopic请求参数结构体
@@ -138,6 +138,27 @@ export interface CreateCmqTopicRequest {
       * 是否开启消息轨迹标识，true表示开启，false表示不开启，不填表示不开启。
       */
     Trace?: boolean;
+}
+/**
+ * ReceiveMessage请求参数结构体
+ */
+export interface ReceiveMessageRequest {
+    /**
+      * 接收消息的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
+      */
+    Topic: string;
+    /**
+      * 订阅者的名字
+      */
+    SubscriptionName: string;
+    /**
+      * 默认值为1000，consumer接收的消息会首先存储到receiverQueueSize这个队列中，用作调优接收消息的速率
+      */
+    ReceiverQueueSize?: number;
+    /**
+      * 默认值为：Latest。用作判定consumer初始接收消息的位置，可选参数为：Earliest, Latest
+      */
+    SubInitialPosition?: string;
 }
 /**
  * 用户专享集群信息
@@ -930,6 +951,23 @@ export interface DescribeEnvironmentAttributesRequest {
     ClusterId?: string;
 }
 /**
+ * AcknowledgeMessage请求参数结构体
+ */
+export interface AcknowledgeMessageRequest {
+    /**
+      * 用作标识消息的唯一的ID（可从 receiveMessage 的返回值中获得）
+      */
+    MessageId: string;
+    /**
+      * Topic 名字（可从 receiveMessage 的返回值中获得）这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
+      */
+    AckTopic: string;
+    /**
+      * 订阅者的名字，可以从receiveMessage的返回值中获取到。这里尽量与receiveMessage中的订阅者保持一致，否则没办法正确ack 接收回来的消息。
+      */
+    SubName: string;
+}
+/**
  * DescribeTopics返回参数结构体
  */
 export interface DescribeTopicsResponse {
@@ -981,13 +1019,27 @@ export interface SendCmqMsgRequest {
     DelaySeconds: number;
 }
 /**
- * ModifyCmqSubscriptionAttribute返回参数结构体
+ * AcknowledgeMessage返回参数结构体
  */
-export interface ModifyCmqSubscriptionAttributeResponse {
+export interface AcknowledgeMessageResponse {
+    /**
+      * 如果为“”，则说明没有错误返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMsg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeClusterDetail请求参数结构体
+ */
+export interface DescribeClusterDetailRequest {
+    /**
+      * 集群的ID
+      */
+    ClusterId: string;
 }
 /**
  * 标签的key/value的类型
@@ -1016,17 +1068,17 @@ export interface DeleteCmqQueueResponse {
  */
 export interface SendMessagesRequest {
     /**
-      * Token 是用来做鉴权使用的
-      */
-    StringToken: string;
-    /**
-      * 消息要发送的topic的名字
+      * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
       */
     Topic: string;
     /**
       * 要发送的消息的内容
       */
     Payload: string;
+    /**
+      * Token 是用来做鉴权使用的，可以不填，系统会自动获取
+      */
+    StringToken?: string;
     /**
       * 设置 producer 的名字，要求全局唯一，用户不配置，系统会随机生成
       */
@@ -1858,6 +1910,37 @@ export interface ModifyTopicResponse {
     RequestId?: string;
 }
 /**
+ * ReceiveMessage返回参数结构体
+ */
+export interface ReceiveMessageResponse {
+    /**
+      * 用作标识消息的唯一主键
+      */
+    MessageID: string;
+    /**
+      * 接收消息的内容
+      */
+    MessagePayload: string;
+    /**
+      * 提供给 Ack 接口，用来Ack哪一个topic中的消息
+      */
+    AckTopic: string;
+    /**
+      * 返回的错误信息，如果为空，说明没有错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMsg: string;
+    /**
+      * 返回订阅者的名字，用来创建 ack consumer时使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubName: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateCmqTopic返回参数结构体
  */
 export interface CreateCmqTopicResponse {
@@ -2461,7 +2544,7 @@ export interface DescribeProducersResponse {
  */
 export interface SendBatchMessagesRequest {
     /**
-      * Topic name
+      * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
       */
     Topic: string;
     /**
@@ -2469,9 +2552,9 @@ export interface SendBatchMessagesRequest {
       */
     Payload: string;
     /**
-      * String 类型的 token，用来校验客户端和服务端之间的连接
+      * String 类型的 token，可以不填，系统会自动获取
       */
-    StringToken: string;
+    StringToken?: string;
     /**
       * producer 的名字，要求全局是唯一的，如果不设置，系统会自动生成
       */

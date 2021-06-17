@@ -467,38 +467,38 @@ export interface GetUpgradeGroupFaceModelVersionResultResponse {
 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。
 如果为0表示这个任务已经执行完毕。
       */
-    EndTimestamp?: number;
+    EndTimestamp: number;
     /**
       * 升级任务完成进度。取值[0.0，100.0]。
       */
-    Progress?: number;
+    Progress: number;
     /**
       * 0表示升级中，1表示升级完毕，2表示回滚完毕。
       */
-    Status?: number;
+    Status: number;
     /**
       * 升级起始时间。
 StartTime的值是自 Unix 纪元时间到Group创建时间的毫秒数。
 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。
 有关更多信息，请参阅 Unix 时间。
       */
-    StartTime?: number;
+    StartTime: number;
     /**
       * 当前算法模型版本。
       */
-    FromFaceModelVersion?: string;
+    FromFaceModelVersion: string;
     /**
       * 目标算法模型版本。
       */
-    ToFaceModelVersion?: string;
+    ToFaceModelVersion: string;
     /**
       * 人员库ID。
       */
-    GroupId?: string;
+    GroupId: string;
     /**
-      * 无法升级的人脸Id信息，文件格式
+      * 无法升级的人脸Id信息，文件格式为json。半小时有效
       */
-    FailedFacesUrl?: string;
+    FailedFacesUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -753,7 +753,7 @@ export interface UpgradeGroupFaceModelVersionRequest {
       */
     GroupId: string;
     /**
-      * 需要升级至的算法模型版本。默认为最新版本。
+      * 需要升级至的算法模型版本。默认为最新版本。不可逆向升级
       */
     FaceModelVersion: string;
 }
@@ -1318,7 +1318,7 @@ export interface UpgradeGroupFaceModelVersionResponse {
     /**
       * 升级任务ID，用于查询、获取升级的进度和结果。
       */
-    JobId?: string;
+    JobId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

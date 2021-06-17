@@ -93,6 +93,7 @@ export { lighthouse } from "./lighthouse";
 export { live } from "./live";
 export { lp } from "./lp";
 export { mariadb } from "./mariadb";
+export { market } from "./market";
 export { memcached } from "./memcached";
 export { mgobe } from "./mgobe";
 export { mna } from "./mna";

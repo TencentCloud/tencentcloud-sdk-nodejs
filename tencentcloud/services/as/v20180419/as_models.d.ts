@@ -184,6 +184,14 @@ export interface ModifyAutoScalingGroupRequest {
 <br><li> 无论使用哪种策略，单次伸缩活动总是优先保持使用一种具体配置（机型 * 可用区/子网）。
       */
     MultiZoneSubnetPolicy?: string;
+    /**
+      * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097)
+      */
+    HealthCheckType?: string;
+    /**
+      * CLB健康检查宽限期。
+      */
+    LoadBalancerHealthCheckGracePeriod?: number;
 }
 /**
  * ScaleOutInstances请求参数结构体
@@ -1473,6 +1481,14 @@ export interface CreateAutoScalingGroupRequest {
 <br><li> 无论使用哪种策略，单次伸缩活动总是优先保持使用一种具体配置（机型 * 可用区/子网）。
       */
     MultiZoneSubnetPolicy?: string;
+    /**
+      * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097) <br>如果选择了`CLB`类型，伸缩组将同时检查实例网络状态与CLB健康检查状态，如果出现实例网络状态不健康，实例将被标记为 UNHEALTHY 状态；如果出现 CLB 健康检查状态异常，实例将被标记为CLB_UNHEALTHY 状态，如果两个异常状态同时出现，实例`HealthStatus`字段将返回 UNHEALTHY|CLB_UNHEALTHY。默认值：CLB
+      */
+    HealthCheckType?: string;
+    /**
+      * CLB健康检查宽限期，当扩容的实例进入`IN_SERVICE`后，在宽限期时间范围内将不会被标记为不健康`CLB_UNHEALTHY`。<br>默认值：0。取值范围[0, 7200]，单位：秒。
+      */
+    LoadBalancerHealthCheckGracePeriod?: number;
 }
 /**
  * DeleteScheduledAction返回参数结构体
@@ -2103,6 +2119,10 @@ WAKE_UP_STOPPED_SCALING：扩容优先开机。扩容时优先对已关机的实
 默认取值：CLASSIC_SCALING
       */
     ScalingMode?: string;
+    /**
+      * 开启负载均衡不健康替换服务。若开启则对于负载均衡健康检查判断不健康的实例，弹性伸缩服务会进行替换。若不指定该参数，则默认为 False。
+      */
+    ReplaceLoadBalancerUnhealthy?: boolean;
 }
 /**
  * 符合条件的启动配置信息的集合。

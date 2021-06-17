@@ -190,6 +190,8 @@ var lp_1 = require("./lp");
 Object.defineProperty(exports, "lp", { enumerable: true, get: function () { return lp_1.lp; } });
 var mariadb_1 = require("./mariadb");
 Object.defineProperty(exports, "mariadb", { enumerable: true, get: function () { return mariadb_1.mariadb; } });
+var market_1 = require("./market");
+Object.defineProperty(exports, "market", { enumerable: true, get: function () { return market_1.market; } });
 var memcached_1 = require("./memcached");
 Object.defineProperty(exports, "memcached", { enumerable: true, get: function () { return memcached_1.memcached; } });
 var mgobe_1 = require("./mgobe");

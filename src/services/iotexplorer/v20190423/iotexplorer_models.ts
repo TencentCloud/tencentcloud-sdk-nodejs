@@ -608,6 +608,18 @@ export interface ProjectEntryEx {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceId: string
+
+  /**
+      * 应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationCount: number
+
+  /**
+      * 设备注册总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceCount: number
 }
 
 /**
@@ -1014,13 +1026,13 @@ export interface GetProjectListResponse {
       * 项目列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Projects?: Array<ProjectEntryEx>
+  Projects: Array<ProjectEntryEx>
 
   /**
       * 列表项个数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1737,12 +1749,12 @@ export interface SearchStudioProductResponse {
   /**
    * 产品列表
    */
-  Products?: Array<ProductEntry>
+  Products: Array<ProductEntry>
 
   /**
    * 产品数量
    */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2080,6 +2092,26 @@ export interface GetProjectListRequest {
    * 实例ID
    */
   InstanceId?: string
+
+  /**
+   * 按项目D搜索
+   */
+  ProjectId?: string
+
+  /**
+   * 按产品ID搜索
+   */
+  ProductId?: string
+
+  /**
+   * 加载 ProductCount、DeviceCount、ApplicationCount，可选值：ProductCount、DeviceCount、ApplicationCount，可多选
+   */
+  Includes?: Array<string>
+
+  /**
+   * 按项目名称搜索
+   */
+  ProjectName?: string
 }
 
 /**
@@ -2125,6 +2157,11 @@ export interface SearchStudioProductRequest {
    * 产品Status
    */
   DevStatus?: string
+
+  /**
+   * 产品ID
+   */
+  ProductId?: string
 }
 
 /**

@@ -23,8 +23,9 @@ import {
   DescribeSubscriptionsRequest,
   DeleteClusterResponse,
   SendBatchMessagesResponse,
-  DescribeClusterDetailRequest,
+  ModifyCmqSubscriptionAttributeResponse,
   CreateCmqTopicRequest,
+  ReceiveMessageRequest,
   BindCluster,
   ModifyClusterResponse,
   DescribeCmqQueuesResponse,
@@ -55,10 +56,12 @@ import {
   RewindCmqQueueRequest,
   ModifyClusterRequest,
   DescribeEnvironmentAttributesRequest,
+  AcknowledgeMessageRequest,
   DescribeTopicsResponse,
   PublishCmqMsgResponse,
   SendCmqMsgRequest,
-  ModifyCmqSubscriptionAttributeResponse,
+  AcknowledgeMessageResponse,
+  DescribeClusterDetailRequest,
   Tag,
   DeleteCmqQueueResponse,
   SendMessagesRequest,
@@ -96,6 +99,7 @@ import {
   DescribeEnvironmentsResponse,
   ModifyCmqSubscriptionAttributeRequest,
   ModifyTopicResponse,
+  ReceiveMessageResponse,
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
   ClearCmqSubscriptionFilterTagsResponse,
@@ -425,6 +429,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据提供的 MessageID 确认指定 topic 中的消息
+   */
+  async AcknowledgeMessage(
+    req: AcknowledgeMessageRequest,
+    cb?: (error: string, rep: AcknowledgeMessageResponse) => void
+  ): Promise<AcknowledgeMessageResponse> {
+    return this.request("AcknowledgeMessage", req, cb)
+  }
+
+  /**
    * 查询cmq主题详情
    */
   async DescribeCmqTopicDetail(
@@ -452,6 +466,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProducersResponse) => void
   ): Promise<DescribeProducersResponse> {
     return this.request("DescribeProducers", req, cb)
+  }
+
+  /**
+   * 接收发送到指定 topic 中的消息
+   */
+  async ReceiveMessage(
+    req: ReceiveMessageRequest,
+    cb?: (error: string, rep: ReceiveMessageResponse) => void
+  ): Promise<ReceiveMessageResponse> {
+    return this.request("ReceiveMessage", req, cb)
   }
 
   /**

@@ -2325,8 +2325,8 @@ export interface CheckAcctRequest {
       */
     MidasSignature: string;
     /**
-      * 短信验证码
-BindType==2必填
+      * 短信验证码或指令号
+BindType==2必填，平安渠道必填
       */
     CheckCode?: string;
     /**
@@ -6568,7 +6568,7 @@ export interface CheckAcctResponse {
     /**
       * 前置流水号，请保存
       */
-    FrontSeqNo?: string;
+    FrontSeqNo: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

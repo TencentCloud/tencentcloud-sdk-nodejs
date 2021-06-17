@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCmqSubscribe", req, cb);
     }
     /**
+     * 根据提供的 MessageID 确认指定 topic 中的消息
+     */
+    async AcknowledgeMessage(req, cb) {
+        return this.request("AcknowledgeMessage", req, cb);
+    }
+    /**
      * 查询cmq主题详情
      */
     async DescribeCmqTopicDetail(req, cb) {
@@ -212,6 +218,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProducers(req, cb) {
         return this.request("DescribeProducers", req, cb);
+    }
+    /**
+     * 接收发送到指定 topic 中的消息
+     */
+    async ReceiveMessage(req, cb) {
+        return this.request("ReceiveMessage", req, cb);
     }
     /**
      * 获取环境下主题列表

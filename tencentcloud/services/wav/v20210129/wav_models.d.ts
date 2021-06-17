@@ -124,11 +124,11 @@ export interface QueryExternalContactDetailRequest {
       */
     ExternalUserId: string;
     /**
-      * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+      * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填。当客户在企业内的跟进人超过500人时需要使用cursor参数进行分页获取
       */
     Cursor?: string;
     /**
-      * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+      * 当前接口Limit不需要传参， 保留Limit只是为了保持向后兼容性， Limit默认值为500，当返回结果超过500时， NextCursor才有返回值
       */
     Limit?: number;
 }
@@ -699,10 +699,15 @@ https://open.work.weixin.qq.com/api/doc/90000/90135/91774
       */
     MsgTime: number;
     /**
-      * MsgType=video时的消息体
+      * MsgType=video时的消息体，忽略此字段，见BodyJson字段
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Video: ChatArchivingMsgTypeVideo;
+    /**
+      * 根据MsgType的不同取值，解析内容不同，参考：https://open.work.weixin.qq.com/api/doc/90000/90135/91774
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BodyJson: string;
 }
 /**
  * QueryActivityList返回参数结构体

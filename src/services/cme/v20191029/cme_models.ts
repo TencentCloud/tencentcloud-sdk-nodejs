@@ -3356,6 +3356,11 @@ export interface VideoEditTemplateMaterial {
    * 卡槽信息。
    */
   SlotSet: Array<SlotInfo>
+
+  /**
+   * 模板预览视频 URL 地址 。
+   */
+  PreviewVideoUrl: string
 }
 
 /**

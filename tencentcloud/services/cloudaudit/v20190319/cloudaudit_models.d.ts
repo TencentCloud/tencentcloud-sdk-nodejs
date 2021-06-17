@@ -363,6 +363,10 @@ export interface DescribeEventsRequest {
       * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码）
       */
     LookupAttributes?: Array<LookupAttribute>;
+    /**
+      * 是否返回 IP 归属地（1 返回，0 不返回）
+      */
+    IsReturnLocation?: number;
 }
 /**
  * UpdateAudit返回参数结构体

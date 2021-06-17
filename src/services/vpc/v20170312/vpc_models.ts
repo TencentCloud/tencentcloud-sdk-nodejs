@@ -2307,6 +2307,16 @@ export interface DescribeCrossBorderComplianceRequest {
    * （精确匹配）状态。待审批：`PENDING`，通过：`APPROVED `，拒绝：`DENY`。
    */
   State?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 返回数量
+   */
+  Limit?: number
 }
 
 /**
@@ -6372,12 +6382,12 @@ export interface DescribeCrossBorderComplianceResponse {
   /**
    * 合规化审批单列表。
    */
-  CrossBorderComplianceSet?: Array<CrossBorderCompliance>
+  CrossBorderComplianceSet: Array<CrossBorderCompliance>
 
   /**
    * 合规化审批单总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

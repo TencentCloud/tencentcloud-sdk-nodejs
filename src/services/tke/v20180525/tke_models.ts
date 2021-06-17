@@ -3827,6 +3827,12 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeletionProtection: boolean
+
+  /**
+      * 集群是否开启第三方节点支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableExternalNode: boolean
 }
 
 /**
