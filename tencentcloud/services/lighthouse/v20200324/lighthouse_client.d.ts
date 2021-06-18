@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, DescribeInstancesTrafficPackagesResponse, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, TerminateInstancesResponse, DescribeBlueprintInstancesResponse, CreateInstanceSnapshotResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, DescribeGeneralResourceQuotasRequest, DeleteKeyPairsRequest, ResetInstanceRequest, DescribeBundlesResponse, InquirePriceRenewInstancesRequest, DescribeRegionsResponse, RebootInstancesRequest, AssociateInstancesKeyPairsRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, StartInstancesResponse, DisassociateInstancesKeyPairsResponse, DescribeResetInstanceBlueprintsResponse, DescribeInstancesDeniedActionsResponse, ModifyInstancesAttributeRequest, DescribeSnapshotsDeniedActionsResponse, StartInstancesRequest, DeleteSnapshotsRequest, ModifySnapshotAttributeRequest, DescribeBundleDiscountResponse, DeleteSnapshotsResponse, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, StopInstancesResponse, ModifyBlueprintAttributeResponse, DescribeModifyInstanceBundlesRequest, DescribeRegionsRequest, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, StopInstancesRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, ResetInstancesPasswordResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeBundlesRequest, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceCreateInstancesResponse, DescribeSnapshotsDeniedActionsRequest, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, InquirePriceCreateBlueprintRequest, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeInstancesResponse, CreateBlueprintResponse, DescribeResetInstanceBlueprintsRequest, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, TerminateInstancesRequest, RebootInstancesResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeBlueprintsRequest, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, DescribeFirewallRulesTemplateResponse, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, CreateInstanceSnapshotRequest, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
+import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, DescribeInstancesTrafficPackagesResponse, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, TerminateInstancesResponse, DescribeSnapshotsDeniedActionsResponse, DescribeBlueprintInstancesResponse, CreateInstanceSnapshotResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, DescribeGeneralResourceQuotasRequest, DeleteKeyPairsRequest, ResetInstanceRequest, DescribeBundlesResponse, InquirePriceRenewInstancesRequest, DescribeRegionsResponse, RebootInstancesRequest, AssociateInstancesKeyPairsRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, StartInstancesResponse, DisassociateInstancesKeyPairsResponse, DescribeResetInstanceBlueprintsResponse, DescribeInstancesDeniedActionsResponse, ModifyInstancesAttributeRequest, DescribeZonesRequest, StartInstancesRequest, DeleteSnapshotsRequest, ModifySnapshotAttributeRequest, DescribeBundleDiscountResponse, DeleteSnapshotsResponse, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, StopInstancesResponse, ModifyBlueprintAttributeResponse, DescribeModifyInstanceBundlesRequest, DescribeRegionsRequest, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, StopInstancesRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, ResetInstancesPasswordResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeBundlesRequest, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceCreateInstancesResponse, DescribeSnapshotsDeniedActionsRequest, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, InquirePriceCreateBlueprintRequest, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeInstancesResponse, DescribeZonesResponse, CreateBlueprintResponse, DescribeResetInstanceBlueprintsRequest, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, TerminateInstancesRequest, RebootInstancesResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeBlueprintsRequest, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, DescribeFirewallRulesTemplateResponse, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, CreateInstanceSnapshotRequest, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
 /**
  * lighthouse client
  * @class
@@ -15,6 +15,19 @@ export declare class Client extends AbstractClient {
 * 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
      */
     StopInstances(req: StopInstancesRequest, cb?: (error: string, rep: StopInstancesResponse) => void): Promise<StopInstancesResponse>;
+    /**
+     * 本接口（ModifyFirewallRuleDescription）用于修改单条防火墙规则描述。
+
+* FirewallVersion 用于指定要操作的防火墙的版本。传入 FirewallVersion 版本号若不等于当前防火墙的最新版本，将返回失败；若不传 FirewallVersion 则直接修改防火墙规则备注。
+
+在 FirewallRule 参数中：
+* Protocol 字段支持输入 TCP，UDP，ICMP，ALL。
+* Port 字段允许输入 ALL，或者一个单独的端口号，或者用逗号分隔的离散端口号，或者用减号分隔的两个端口号代表的端口范围。当 Port 为范围时，减号分隔的第一个端口号小于第二个端口号。当 Protocol 字段不是 TCP 或 UDP 时，Port 字段只能为空或 ALL。Port 字段长度不得超过 64。
+* CidrBlock 字段允许输入符合 cidr 格式标准的任意字符串。租户之间网络隔离规则优先于防火墙中的内网规则。
+* Action 字段只允许输入 ACCEPT 或 DROP。
+* FirewallRuleDescription 字段长度不得超过 64。
+     */
+    ModifyFirewallRuleDescription(req: ModifyFirewallRuleDescriptionRequest, cb?: (error: string, rep: ModifyFirewallRuleDescriptionResponse) => void): Promise<ModifyFirewallRuleDescriptionResponse>;
     /**
      * 本接口 (DeleteBlueprints) 用于删除镜像。
      */
@@ -271,18 +284,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeSnapshotsDeniedActions(req: DescribeSnapshotsDeniedActionsRequest, cb?: (error: string, rep: DescribeSnapshotsDeniedActionsResponse) => void): Promise<DescribeSnapshotsDeniedActionsResponse>;
     /**
-     * 本接口（ModifyFirewallRuleDescription）用于修改单条防火墙规则描述。
-
-* FirewallVersion 用于指定要操作的防火墙的版本。传入 FirewallVersion 版本号若不等于当前防火墙的最新版本，将返回失败；若不传 FirewallVersion 则直接修改防火墙规则备注。
-
-在 FirewallRule 参数中：
-* Protocol 字段支持输入 TCP，UDP，ICMP，ALL。
-* Port 字段允许输入 ALL，或者一个单独的端口号，或者用逗号分隔的离散端口号，或者用减号分隔的两个端口号代表的端口范围。当 Port 为范围时，减号分隔的第一个端口号小于第二个端口号。当 Protocol 字段不是 TCP 或 UDP 时，Port 字段只能为空或 ALL。Port 字段长度不得超过 64。
-* CidrBlock 字段允许输入符合 cidr 格式标准的任意字符串。租户之间网络隔离规则优先于防火墙中的内网规则。
-* Action 字段只允许输入 ACCEPT 或 DROP。
-* FirewallRuleDescription 字段长度不得超过 64。
+     * 查询地域下可用区
      */
-    ModifyFirewallRuleDescription(req: ModifyFirewallRuleDescriptionRequest, cb?: (error: string, rep: ModifyFirewallRuleDescriptionResponse) => void): Promise<ModifyFirewallRuleDescriptionResponse>;
+    DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
     /**
      * 本接口（RebootInstances）用于重启实例。
 

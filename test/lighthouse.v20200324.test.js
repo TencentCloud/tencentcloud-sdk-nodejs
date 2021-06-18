@@ -28,6 +28,16 @@ it("lighthouse.v20200324.StopInstances", async function () {
     }
 })
 
+it("lighthouse.v20200324.ModifyFirewallRuleDescription", async function () {
+    try {
+       const data = await client.ModifyFirewallRuleDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DeleteBlueprints", async function () {
     try {
        const data = await client.DeleteBlueprints({})
@@ -458,9 +468,9 @@ it("lighthouse.v20200324.DescribeSnapshotsDeniedActions", async function () {
     }
 })
 
-it("lighthouse.v20200324.ModifyFirewallRuleDescription", async function () {
+it("lighthouse.v20200324.DescribeZones", async function () {
     try {
-       const data = await client.ModifyFirewallRuleDescription({})
+       const data = await client.DescribeZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

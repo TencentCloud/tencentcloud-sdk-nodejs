@@ -145,6 +145,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseProjectLatestVersionList", req, cb);
     }
     /**
+     * 查询静态托管域名任务状态
+     */
+    async DescribeHostingDomainTask(req, cb) {
+        return this.request("DescribeHostingDomainTask", req, cb);
+    }
+    /**
      * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
      */
     async ReinstateEnv(req, cb) {

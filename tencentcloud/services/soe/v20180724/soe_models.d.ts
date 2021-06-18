@@ -283,7 +283,7 @@ export interface PhoneInfo {
       */
     DetectedStress: boolean;
     /**
-      * 当前音节
+      * 当前音节，当前评测识别的音素
       */
     Phone: string;
     /**
@@ -298,6 +298,10 @@ export interface PhoneInfo {
       * 当前词与输入语句的匹配情况，0：匹配单词、1：新增单词、2：缺少单词、3：错读的词、4：未录入单词。
       */
     MatchTag: number;
+    /**
+      * 参考字符，在单词诊断模式下，代表音素对应的原始文本
+      */
+    ReferenceLetter: string;
 }
 /**
  * 单词评分细则

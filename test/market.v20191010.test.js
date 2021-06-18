@@ -38,4 +38,14 @@ it("market.v20191010.GetUsagePlanUsageAmount", async function () {
     }
 })
 
+it("market.v20191010.FlowProductRemind", async function () {
+    try {
+       const data = await client.FlowProductRemind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

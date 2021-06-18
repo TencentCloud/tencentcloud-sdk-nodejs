@@ -25,6 +25,7 @@ import {
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
   TerminateInstancesResponse,
+  DescribeSnapshotsDeniedActionsResponse,
   RegionInfo,
   DescribeBlueprintInstancesResponse,
   InstanceDeniedActions,
@@ -44,6 +45,7 @@ import {
   AssociateInstancesKeyPairsRequest,
   ImportKeyPairResponse,
   DescribeSnapshotsRequest,
+  ZoneInfo,
   KeyPair,
   DescribeFirewallRulesTemplateRequest,
   DescribeKeyPairsResponse,
@@ -63,7 +65,7 @@ import {
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
   ModifyInstancesAttributeRequest,
-  DescribeSnapshotsDeniedActionsResponse,
+  DescribeZonesRequest,
   StartInstancesRequest,
   SnapshotDeniedActions,
   DeleteSnapshotsRequest,
@@ -113,6 +115,7 @@ import {
   FirewallRuleInfo,
   CreateFirewallRulesResponse,
   DescribeInstancesResponse,
+  DescribeZonesResponse,
   CreateBlueprintResponse,
   PolicyDetail,
   DescribeResetInstanceBlueprintsRequest,
@@ -165,6 +168,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopInstancesResponse) => void
   ): Promise<StopInstancesResponse> {
     return this.request("StopInstances", req, cb)
+  }
+
+  /**
+     * 本接口（ModifyFirewallRuleDescription）用于修改单条防火墙规则描述。
+
+* FirewallVersion 用于指定要操作的防火墙的版本。传入 FirewallVersion 版本号若不等于当前防火墙的最新版本，将返回失败；若不传 FirewallVersion 则直接修改防火墙规则备注。
+
+在 FirewallRule 参数中：
+* Protocol 字段支持输入 TCP，UDP，ICMP，ALL。
+* Port 字段允许输入 ALL，或者一个单独的端口号，或者用逗号分隔的离散端口号，或者用减号分隔的两个端口号代表的端口范围。当 Port 为范围时，减号分隔的第一个端口号小于第二个端口号。当 Protocol 字段不是 TCP 或 UDP 时，Port 字段只能为空或 ALL。Port 字段长度不得超过 64。
+* CidrBlock 字段允许输入符合 cidr 格式标准的任意字符串。租户之间网络隔离规则优先于防火墙中的内网规则。
+* Action 字段只允许输入 ACCEPT 或 DROP。
+* FirewallRuleDescription 字段长度不得超过 64。
+     */
+  async ModifyFirewallRuleDescription(
+    req: ModifyFirewallRuleDescriptionRequest,
+    cb?: (error: string, rep: ModifyFirewallRuleDescriptionResponse) => void
+  ): Promise<ModifyFirewallRuleDescriptionResponse> {
+    return this.request("ModifyFirewallRuleDescription", req, cb)
   }
 
   /**
@@ -681,22 +703,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（ModifyFirewallRuleDescription）用于修改单条防火墙规则描述。
-
-* FirewallVersion 用于指定要操作的防火墙的版本。传入 FirewallVersion 版本号若不等于当前防火墙的最新版本，将返回失败；若不传 FirewallVersion 则直接修改防火墙规则备注。
-
-在 FirewallRule 参数中：
-* Protocol 字段支持输入 TCP，UDP，ICMP，ALL。
-* Port 字段允许输入 ALL，或者一个单独的端口号，或者用逗号分隔的离散端口号，或者用减号分隔的两个端口号代表的端口范围。当 Port 为范围时，减号分隔的第一个端口号小于第二个端口号。当 Protocol 字段不是 TCP 或 UDP 时，Port 字段只能为空或 ALL。Port 字段长度不得超过 64。
-* CidrBlock 字段允许输入符合 cidr 格式标准的任意字符串。租户之间网络隔离规则优先于防火墙中的内网规则。
-* Action 字段只允许输入 ACCEPT 或 DROP。
-* FirewallRuleDescription 字段长度不得超过 64。
-     */
-  async ModifyFirewallRuleDescription(
-    req: ModifyFirewallRuleDescriptionRequest,
-    cb?: (error: string, rep: ModifyFirewallRuleDescriptionResponse) => void
-  ): Promise<ModifyFirewallRuleDescriptionResponse> {
-    return this.request("ModifyFirewallRuleDescription", req, cb)
+   * 查询地域下可用区
+   */
+  async DescribeZones(
+    req?: DescribeZonesRequest,
+    cb?: (error: string, rep: DescribeZonesResponse) => void
+  ): Promise<DescribeZonesResponse> {
+    return this.request("DescribeZones", req, cb)
   }
 
   /**

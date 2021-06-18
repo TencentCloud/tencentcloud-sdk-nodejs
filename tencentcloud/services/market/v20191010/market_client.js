@@ -36,10 +36,15 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 该接口可以根据InstanceId查询实例的api的使用情况。
 
-默认接口请求频率限制：20次/秒。
      */
     async GetUsagePlanUsageAmount(req, cb) {
         return this.request("GetUsagePlanUsageAmount", req, cb);
+    }
+    /**
+     * 计量商品用量提醒，用于服务商调用云服务，云服务向客户发送提醒信息
+     */
+    async FlowProductRemind(req, cb) {
+        return this.request("FlowProductRemind", req, cb);
     }
 }
 exports.Client = Client;

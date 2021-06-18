@@ -18,10 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  GetUsagePlanUsageAmountResponse,
-  GetCateTreeResponse,
-  GetUsagePlanUsageAmountRequest,
   GetCateTreeRequest,
+  FlowProductRemindResponse,
+  GetCateTreeResponse,
+  GetUsagePlanUsageAmountResponse,
+  FlowProductRemindRequest,
+  GetUsagePlanUsageAmountRequest,
 } from "./market_models"
 
 /**
@@ -46,12 +48,21 @@ export class Client extends AbstractClient {
   /**
      * 该接口可以根据InstanceId查询实例的api的使用情况。
 
-默认接口请求频率限制：20次/秒。
      */
   async GetUsagePlanUsageAmount(
     req: GetUsagePlanUsageAmountRequest,
     cb?: (error: string, rep: GetUsagePlanUsageAmountResponse) => void
   ): Promise<GetUsagePlanUsageAmountResponse> {
     return this.request("GetUsagePlanUsageAmount", req, cb)
+  }
+
+  /**
+   * 计量商品用量提醒，用于服务商调用云服务，云服务向客户发送提醒信息
+   */
+  async FlowProductRemind(
+    req: FlowProductRemindRequest,
+    cb?: (error: string, rep: FlowProductRemindResponse) => void
+  ): Promise<FlowProductRemindResponse> {
+    return this.request("FlowProductRemind", req, cb)
   }
 }

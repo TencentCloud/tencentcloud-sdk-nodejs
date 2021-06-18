@@ -165,8 +165,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 国际站根据UIN查询代客基础信息【本接口仅限主账号访问】
-   */
+     * 该接口即将下线，请切换调用DescribeClientBasicInfo。
+
+国际站根据UIN查询代客基础信息【本接口仅限主账号访问】
+     */
   async DescribeClientBaseInfo(
     req: DescribeClientBaseInfoRequest,
     cb?: (error: string, rep: DescribeClientBaseInfoResponse) => void

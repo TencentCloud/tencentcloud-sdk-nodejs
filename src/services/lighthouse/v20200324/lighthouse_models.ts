@@ -116,6 +116,21 @@ export interface TerminateInstancesResponse {
 }
 
 /**
+ * DescribeSnapshotsDeniedActions返回参数结构体
+ */
+export interface DescribeSnapshotsDeniedActionsResponse {
+  /**
+   * 快照操作限制列表详细信息。
+   */
+  SnapshotDeniedActionSet: Array<SnapshotDeniedActions>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述地域信息。
  */
 export interface RegionInfo {
@@ -464,6 +479,21 @@ export interface DescribeSnapshotsRequest {
    * 返回数量，默认为 20，最大值为 100。
    */
   Limit?: number
+}
+
+/**
+ * 可用区详细信息
+ */
+export interface ZoneInfo {
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * 可用区中文名称
+   */
+  ZoneName: string
 }
 
 /**
@@ -828,19 +858,9 @@ export interface ModifyInstancesAttributeRequest {
 }
 
 /**
- * DescribeSnapshotsDeniedActions返回参数结构体
+ * DescribeZones请求参数结构体
  */
-export interface DescribeSnapshotsDeniedActionsResponse {
-  /**
-   * 快照操作限制列表详细信息。
-   */
-  SnapshotDeniedActionSet: Array<SnapshotDeniedActions>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeZonesRequest = null
 
 /**
  * StartInstances请求参数结构体
@@ -1976,6 +1996,26 @@ export interface DescribeInstancesResponse {
    * 实例详细信息列表。
    */
   InstanceSet: Array<Instance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeZones返回参数结构体
+ */
+export interface DescribeZonesResponse {
+  /**
+   * 可用区数量
+   */
+  TotalCount: number
+
+  /**
+   * 可用区详细信息列表
+   */
+  ZoneInfoSet: Array<ZoneInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -49,6 +49,7 @@ import {
   DestroyStaticStoreRequest,
   EndUserInfo,
   DescribeEndUserLoginStatisticResponse,
+  DescribeHostingDomainTaskRequest,
   DescribeQuotaDataResponse,
   KVPair,
   SmsFreeQuota,
@@ -129,6 +130,7 @@ import {
   DescribeEndUsersResponse,
   AuthDomain,
   DescribeCloudBaseProjectLatestVersionListRequest,
+  DescribeHostingDomainTaskResponse,
   EnvBillingInfoItem,
   DescribeEndUserStatisticResponse,
   DescribeSmsQuotasRequest,
@@ -354,6 +356,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudBaseProjectLatestVersionListResponse) => void
   ): Promise<DescribeCloudBaseProjectLatestVersionListResponse> {
     return this.request("DescribeCloudBaseProjectLatestVersionList", req, cb)
+  }
+
+  /**
+   * 查询静态托管域名任务状态
+   */
+  async DescribeHostingDomainTask(
+    req: DescribeHostingDomainTaskRequest,
+    cb?: (error: string, rep: DescribeHostingDomainTaskResponse) => void
+  ): Promise<DescribeHostingDomainTaskResponse> {
+    return this.request("DescribeHostingDomainTask", req, cb)
   }
 
   /**

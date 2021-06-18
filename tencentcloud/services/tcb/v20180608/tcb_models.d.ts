@@ -921,6 +921,15 @@ export interface DescribeEndUserLoginStatisticResponse {
     RequestId?: string;
 }
 /**
+ * DescribeHostingDomainTask请求参数结构体
+ */
+export interface DescribeHostingDomainTaskRequest {
+    /**
+      * 环境ID
+      */
+    EnvId: string;
+}
+/**
  * DescribeQuotaData返回参数结构体
  */
 export interface DescribeQuotaDataResponse {
@@ -2723,6 +2732,19 @@ export interface DescribeCloudBaseProjectLatestVersionListRequest {
       * 标签
       */
     Tags?: Array<string>;
+}
+/**
+ * DescribeHostingDomainTask返回参数结构体
+ */
+export interface DescribeHostingDomainTaskResponse {
+    /**
+      * todo/doing/done/error
+      */
+    Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 环境计费信息
