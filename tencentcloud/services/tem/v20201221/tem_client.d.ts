@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyServiceInfoResponse, CreateResourceRequest, CreateServiceV2Response, CreateCosTokenV2Request, DeployServiceV2Response, DescribeNamespacesResponse, RestartServiceRunPodRequest, ModifyIngressResponse, DeleteIngressRequest, ModifyServiceInfoRequest, CreateNamespaceResponse, DescribeRelatedIngressesRequest, DescribeNamespacesRequest, CreateCosTokenRequest, DeployServiceV2Request, ModifyIngressRequest, DescribeRelatedIngressesResponse, CreateNamespaceRequest, DescribeIngressesRequest, DescribeServiceRunPodListV2Request, DescribeIngressesResponse, DeleteIngressResponse, RestartServiceRunPodResponse, ModifyNamespaceRequest, DescribeIngressResponse, CreateCosTokenResponse, ModifyNamespaceResponse, CreateResourceResponse, DescribeServiceRunPodListV2Response, CreateCosTokenV2Response, DescribeIngressRequest, CreateServiceV2Request } from "./tem_models";
+import { ModifyServiceInfoResponse, CreateResourceRequest, CreateServiceV2Response, CreateCosTokenV2Request, DeployServiceV2Response, DescribeNamespacesResponse, RestartServiceRunPodRequest, ModifyIngressResponse, DeleteIngressRequest, ModifyServiceInfoRequest, CreateNamespaceResponse, DescribeRelatedIngressesRequest, DescribeNamespacesRequest, CreateCosTokenRequest, DeployServiceV2Request, ModifyIngressRequest, GenerateDownloadUrlResponse, DescribeRelatedIngressesResponse, CreateNamespaceRequest, DescribeIngressesRequest, DescribeServiceRunPodListV2Request, DescribeIngressesResponse, DeleteIngressResponse, RestartServiceRunPodResponse, ModifyNamespaceRequest, DescribeIngressResponse, CreateCosTokenResponse, ModifyNamespaceResponse, CreateResourceResponse, DescribeServiceRunPodListV2Response, CreateCosTokenV2Response, GenerateDownloadUrlRequest, DescribeIngressRequest, CreateServiceV2Request } from "./tem_models";
 /**
  * tem client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 创建或者更新 Ingress 规则
      */
     ModifyIngress(req: ModifyIngressRequest, cb?: (error: string, rep: ModifyIngressResponse) => void): Promise<ModifyIngressResponse>;
+    /**
+     * 生成包预签名下载链接
+     */
+    GenerateDownloadUrl(req: GenerateDownloadUrlRequest, cb?: (error: string, rep: GenerateDownloadUrlResponse) => void): Promise<GenerateDownloadUrlResponse>;
     /**
      * 生成Cos临时秘钥
      */

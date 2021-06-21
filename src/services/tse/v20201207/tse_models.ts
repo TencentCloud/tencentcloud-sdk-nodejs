@@ -138,6 +138,18 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Paymode: string
+
+  /**
+      * EKS集群的ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EKSClusterID: string
+
+  /**
+      * 集群创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
 }
 
 /**

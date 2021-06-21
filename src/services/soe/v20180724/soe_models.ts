@@ -210,7 +210,7 @@ export interface TransmitOralProcessRequest {
   IsEnd: number
 
   /**
-   * 语音文件类型 	1:raw, 2:wav, 3:mp3(三种格式目前仅支持16k采样率16bit编码单声道，如有不一致可能导致评估不准确或失败)。
+   * 语音文件类型 	1: raw, 2: wav, 3: mp3, 4: speex (语言文件格式目前仅支持 16k 采样率 16bit 编码单声道，如有不一致可能导致评估不准确或失败)。
    */
   VoiceFileType: number
 
@@ -252,47 +252,47 @@ export interface TransmitOralProcessResponse {
   /**
    * 发音精准度，取值范围[-1, 100]，当取-1时指完全不匹配，当为句子模式时，是所有已识别单词准确度的加权平均值，在reftext中但未识别出来的词不计入分数中。当为流式模式且请求中IsEnd未置1时，取值无意义。
    */
-  PronAccuracy?: number
+  PronAccuracy: number
 
   /**
    * 发音流利度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
    */
-  PronFluency?: number
+  PronFluency: number
 
   /**
    * 发音完整度，取值范围[0, 1]，当为词模式时，取值无意义；当为流式模式且请求中IsEnd未置1时，取值无意义
    */
-  PronCompletion?: number
+  PronCompletion: number
 
   /**
    * 详细发音评估结果
    */
-  Words?: Array<WordRsp>
+  Words: Array<WordRsp>
 
   /**
    * 语音段唯一标识，一段语音一个SessionId
    */
-  SessionId?: string
+  SessionId: string
 
   /**
    * 保存语音音频文件下载地址
    */
-  AudioUrl?: string
+  AudioUrl: string
 
   /**
    * 断句中间结果，中间结果是局部最优而非全局最优的结果，所以中间结果有可能和最终整体结果对应部分不一致；中间结果的输出便于客户端UI更新；待用户发音完全结束后，系统会给出一个综合所有句子的整体结果。
    */
-  SentenceInfoSet?: Array<SentenceInfo>
+  SentenceInfoSet: Array<SentenceInfo>
 
   /**
    * 评估 session 状态，“Evaluating"：评估中、"Failed"：评估失败、"Finished"：评估完成
    */
-  Status?: string
+  Status: string
 
   /**
    * 建议评分，取值范围[0,100]，评分方式为建议评分 = 准确度（PronAccuracyfloat）× 完整度（PronCompletionfloat）×（2 - 完整度（PronCompletionfloat）），如若评分策略不符合请参考Words数组中的详细分数自定义评分逻辑。
    */
-  SuggestedScore?: number
+  SuggestedScore: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -307,7 +307,7 @@ export interface InitOralProcessResponse {
   /**
    * 语音段唯一标识，一个完整语音一个SessionId
    */
-  SessionId?: string
+  SessionId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -322,12 +322,12 @@ export interface KeywordEvaluateResponse {
   /**
    * 关键词得分
    */
-  KeywordScores?: Array<KeywordScore>
+  KeywordScores: Array<KeywordScore>
 
   /**
    * 语音段唯一标识，一段语音一个SessionId
    */
-  SessionId?: string
+  SessionId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

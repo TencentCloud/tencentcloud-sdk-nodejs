@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIngress", req, cb);
     }
     /**
+     * 生成包预签名下载链接
+     */
+    async GenerateDownloadUrl(req, cb) {
+        return this.request("GenerateDownloadUrl", req, cb);
+    }
+    /**
      * 生成Cos临时秘钥
      */
     async CreateCosToken(req, cb) {

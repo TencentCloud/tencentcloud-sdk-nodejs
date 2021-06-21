@@ -129,6 +129,11 @@ export interface CreateCosTokenV2Request {
    * 来源 channel
    */
   SourceChannel?: number
+
+  /**
+   * 充当deployVersion入参
+   */
+  TimeVersion?: string
 }
 
 /**
@@ -592,6 +597,11 @@ export interface DeployServiceV2Request {
    * eks 访问设置
    */
   EksService?: EksService
+
+  /**
+   * 要回滚到的历史版本id
+   */
+  VersionId?: string
 }
 
 /**
@@ -607,6 +617,22 @@ export interface ModifyIngressRequest {
    * 来源渠道
    */
   SourceChannel?: number
+}
+
+/**
+ * GenerateDownloadUrl返回参数结构体
+ */
+export interface GenerateDownloadUrlResponse {
+  /**
+      * 包下载临时链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1273,6 +1299,31 @@ export interface CreateCosTokenV2Response {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GenerateDownloadUrl请求参数结构体
+ */
+export interface GenerateDownloadUrlRequest {
+  /**
+   * 服务ID
+   */
+  ServiceId: string
+
+  /**
+   * 包名
+   */
+  PkgName: string
+
+  /**
+   * 需要下载的包版本
+   */
+  DeployVersion: string
+
+  /**
+   * 来源 channel
+   */
+  SourceChannel?: number
 }
 
 /**

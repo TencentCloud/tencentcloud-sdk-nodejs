@@ -48,6 +48,16 @@ it("tem.v20201221.ModifyIngress", async function () {
     }
 })
 
+it("tem.v20201221.GenerateDownloadUrl", async function () {
+    try {
+       const data = await client.GenerateDownloadUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20201221.CreateCosToken", async function () {
     try {
        const data = await client.CreateCosToken({})

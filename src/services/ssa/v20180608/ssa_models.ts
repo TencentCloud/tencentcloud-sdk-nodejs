@@ -405,17 +405,17 @@ export interface DescribeAssetListResponse {
   /**
    * 资产列表
    */
-  AssetList?: AssetList
+  AssetList: AssetList
 
   /**
    * 聚合数据
    */
-  AggregationData?: Array<AggregationObj>
+  AggregationData: Array<AggregationObj>
 
   /**
    * 命名空间数据
    */
-  NamespaceData?: Array<string>
+  NamespaceData: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

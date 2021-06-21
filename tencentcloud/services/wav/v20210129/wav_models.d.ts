@@ -226,6 +226,11 @@ export interface ExternalContact {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnionId: string;
+    /**
+      * 外部联系人联系电话
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Phone: string;
 }
 /**
  * 列部联系人简短信息
@@ -239,6 +244,11 @@ export interface ExternalContactSimpleInfo {
       * 添加了此外部联系人的企业成员userId
       */
     UserId: string;
+    /**
+      * 添加了此外部联系人的企业成员的姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SalesName: string;
 }
 /**
  * 标签信息

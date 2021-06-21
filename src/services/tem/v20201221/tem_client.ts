@@ -39,6 +39,7 @@ import {
   CreateCosTokenRequest,
   DeployServiceV2Request,
   ModifyIngressRequest,
+  GenerateDownloadUrlResponse,
   DescribeRelatedIngressesResponse,
   CreateNamespaceRequest,
   DescribeIngressesRequest,
@@ -64,6 +65,7 @@ import {
   TemNamespaceInfo,
   NamespacePage,
   CreateCosTokenV2Response,
+  GenerateDownloadUrlRequest,
   EsInfo,
   DescribeIngressRequest,
   CreateServiceV2Request,
@@ -108,6 +110,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyIngressResponse) => void
   ): Promise<ModifyIngressResponse> {
     return this.request("ModifyIngress", req, cb)
+  }
+
+  /**
+   * 生成包预签名下载链接
+   */
+  async GenerateDownloadUrl(
+    req: GenerateDownloadUrlRequest,
+    cb?: (error: string, rep: GenerateDownloadUrlResponse) => void
+  ): Promise<GenerateDownloadUrlResponse> {
+    return this.request("GenerateDownloadUrl", req, cb)
   }
 
   /**

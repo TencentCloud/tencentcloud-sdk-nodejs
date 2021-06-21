@@ -12,6 +12,8 @@ var ame_1 = require("./ame");
 Object.defineProperty(exports, "ame", { enumerable: true, get: function () { return ame_1.ame; } });
 var ams_1 = require("./ams");
 Object.defineProperty(exports, "ams", { enumerable: true, get: function () { return ams_1.ams; } });
+var antiddos_1 = require("./antiddos");
+Object.defineProperty(exports, "antiddos", { enumerable: true, get: function () { return antiddos_1.antiddos; } });
 var apcas_1 = require("./apcas");
 Object.defineProperty(exports, "apcas", { enumerable: true, get: function () { return apcas_1.apcas; } });
 var ape_1 = require("./ape");
