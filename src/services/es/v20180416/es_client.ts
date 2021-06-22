@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  WebNodeTypeInfo,
   InstanceLog,
   LocalDiskInfo,
   TaskDetail,
@@ -54,6 +55,7 @@ import {
   RestartNodesRequest,
   UpdatePluginsRequest,
   UpdateRequestTargetNodeTypesResponse,
+  KibanaNodeInfo,
   UpdateDiagnoseSettingsResponse,
   UpgradeLicenseResponse,
   EsAcl,

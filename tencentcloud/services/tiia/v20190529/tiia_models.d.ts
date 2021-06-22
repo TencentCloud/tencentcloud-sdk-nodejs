@@ -7,12 +7,17 @@ export interface DetectProductBetaResponse {
 当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。
 最多可以输出__3组__检测结果。
       */
-    RegionDetected?: Array<RegionDetected>;
+    RegionDetected: Array<RegionDetected>;
     /**
       * 图像识别出的商品的详细信息。
 当图像中检测到多个物品时，会对显著性最高的进行识别。
       */
-    ProductInfo?: ProductInfo;
+    ProductInfo: ProductInfo;
+    /**
+      * 相似商品信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductInfoList: Array<ProductInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

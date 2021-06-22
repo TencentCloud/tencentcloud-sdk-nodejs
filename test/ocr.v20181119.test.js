@@ -338,6 +338,16 @@ it("ocr.v20181119.OrgCodeCertOCR", async function () {
     }
 })
 
+it("ocr.v20181119.TextDetect", async function () {
+    try {
+       const data = await client.TextDetect({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.FinanBillSliceOCR", async function () {
     try {
        const data = await client.FinanBillSliceOCR({})
@@ -468,9 +478,9 @@ it("ocr.v20181119.TrainTicketOCR", async function () {
     }
 })
 
-it("ocr.v20181119.TextDetect", async function () {
+it("ocr.v20181119.BankSlipOCR", async function () {
     try {
-       const data = await client.TextDetect({})
+       const data = await client.BankSlipOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

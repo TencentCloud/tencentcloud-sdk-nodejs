@@ -399,6 +399,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OrgCodeCertOCR", req, cb);
     }
     /**
+     * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
+     */
+    async TextDetect(req, cb) {
+        return this.request("TextDetect", req, cb);
+    }
+    /**
      * 本接口支持常见银行票据的自动分类和识别。切片识别包括金融行业常见票据的重要切片字段识别，包括金额、账号、日期、凭证号码等。（金融票据切片：金融票据中待识别字段及其周围局部区域的裁剪图像。）
      */
     async FinanBillSliceOCR(req, cb) {
@@ -486,10 +492,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TrainTicketOCR", req, cb);
     }
     /**
-     * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
+     * 本接口支持银行回单全字段的识别，包括付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
+           
      */
-    async TextDetect(req, cb) {
-        return this.request("TextDetect", req, cb);
+    async BankSlipOCR(req, cb) {
+        return this.request("BankSlipOCR", req, cb);
     }
     /**
      * 本接口支持图像整体文字的检测和识别。支持中文、英文、中英文、数字和特殊字符号的识别，并返回文字框位置和文字内容。

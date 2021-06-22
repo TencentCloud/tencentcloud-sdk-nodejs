@@ -18,7 +18,8 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  VerifyBizLicenseRequest,
+  TextWaybill,
+  BankSlipOCRRequest,
   BusinessCardOCRResponse,
   TextArithmetic,
   HKIDCardOCRRequest,
@@ -34,6 +35,7 @@ import {
   FinanBillSliceOCRResponse,
   DriverLicenseOCRResponse,
   Words,
+  VerifyBizLicenseRequest,
   TextDetectionEn,
   PermitOCRResponse,
   InvoiceGeneralOCRRequest,
@@ -64,6 +66,7 @@ import {
   FinanBillInfo,
   TrainTicketOCRResponse,
   TollInvoiceInfo,
+  BankSlipInfo,
   ArithmeticOCRResponse,
   FormulaOCRResponse,
   BusInvoiceInfo,
@@ -73,7 +76,7 @@ import {
   MixedInvoiceDetectResponse,
   VatInvoiceUserInfo,
   InsuranceBillOCRResponse,
-  GeneralEfficientOCRResponse,
+  GeneralAccurateOCRResponse,
   HmtResidentPermitOCRRequest,
   QrcodeOCRRequest,
   TaxiInvoiceOCRResponse,
@@ -104,6 +107,7 @@ import {
   TextGeneralHandwriting,
   TableOCRRequest,
   QrcodeImgSize,
+  PassportOCRResponse,
   VerifyBasicBizLicenseResponse,
   VehicleRegCertOCRRequest,
   WaybillOCRRequest,
@@ -117,7 +121,7 @@ import {
   Detail,
   EnglishOCRRequest,
   VatInvoiceVerifyResponse,
-  PassportOCRResponse,
+  DetectedWords,
   VerifyEnterpriseFourFactorsRequest,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
@@ -140,7 +144,7 @@ import {
   DutyPaidProofInfo,
   FinanBillOCRResponse,
   ShipInvoiceOCRRequest,
-  TextWaybill,
+  BankSlipOCRResponse,
   QuestionObj,
   VinOCRResponse,
   EduPaperOCRRequest,
@@ -161,7 +165,7 @@ import {
   InsuranceBillInfo,
   VehicleRegCertOCRResponse,
   ClassifyDetectInfo,
-  GeneralAccurateOCRResponse,
+  GeneralEfficientOCRResponse,
   SealOCRRequest,
   VerifyOfdVatInvoiceOCRResponse,
   TextTable,
@@ -181,6 +185,7 @@ import {
   GeneralHandwritingOCRResponse,
   TableCell,
   TableOCRResponse,
+  DetectedWordCoordPoint,
   QuestionBlockObj,
   AdvertiseOCRResponse,
   VatRollInvoiceInfo,
@@ -713,6 +718,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
+   */
+  async TextDetect(
+    req: TextDetectRequest,
+    cb?: (error: string, rep: TextDetectResponse) => void
+  ): Promise<TextDetectResponse> {
+    return this.request("TextDetect", req, cb)
+  }
+
+  /**
    * 本接口支持常见银行票据的自动分类和识别。切片识别包括金融行业常见票据的重要切片字段识别，包括金额、账号、日期、凭证号码等。（金融票据切片：金融票据中待识别字段及其周围局部区域的裁剪图像。）
    */
   async FinanBillSliceOCR(
@@ -852,13 +867,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
-   */
-  async TextDetect(
-    req: TextDetectRequest,
-    cb?: (error: string, rep: TextDetectResponse) => void
-  ): Promise<TextDetectResponse> {
-    return this.request("TextDetect", req, cb)
+     * 本接口支持银行回单全字段的识别，包括付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
+           
+     */
+  async BankSlipOCR(
+    req: BankSlipOCRRequest,
+    cb?: (error: string, rep: BankSlipOCRResponse) => void
+  ): Promise<BankSlipOCRResponse> {
+    return this.request("BankSlipOCR", req, cb)
   }
 
   /**

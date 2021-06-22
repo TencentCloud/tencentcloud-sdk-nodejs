@@ -2185,6 +2185,21 @@ export interface UnassignIpv6CidrBlockResponse {
 }
 
 /**
+ * ModifyVpnGatewayRoutes请求参数结构体
+ */
+export interface ModifyVpnGatewayRoutesRequest {
+  /**
+   * Vpn网关id
+   */
+  VpnGatewayId: string
+
+  /**
+   * 路由修改参数
+   */
+  Routes: Array<VpnGatewayRouteModify>
+}
+
+/**
  * HaVipAssociateAddressIp请求参数结构体
  */
 export interface HaVipAssociateAddressIpRequest {
@@ -2593,13 +2608,18 @@ export interface ModifyNetworkAclAttributeResponse {
 }
 
 /**
- * AddBandwidthPackageResources返回参数结构体
+ * CreateVpnGatewayRoutes请求参数结构体
  */
-export interface AddBandwidthPackageResourcesResponse {
+export interface CreateVpnGatewayRoutesRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * VPN网关的ID
    */
-  RequestId?: string
+  VpnGatewayId: string
+
+  /**
+   * VPN网关目的路由列表
+   */
+  Routes: Array<VpnGatewayRoute>
 }
 
 /**
@@ -2718,53 +2738,13 @@ export interface DescribeDirectConnectGatewaysResponse {
 }
 
 /**
- * ModifyVpnConnectionAttribute请求参数结构体
+ * AddBandwidthPackageResources返回参数结构体
  */
-export interface ModifyVpnConnectionAttributeRequest {
+export interface AddBandwidthPackageResourcesResponse {
   /**
-   * VPN通道实例ID。形如：vpnx-f49l6u0z。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  VpnConnectionId: string
-
-  /**
-   * VPN通道名称，可任意命名，但不得超过60个字符。
-   */
-  VpnConnectionName?: string
-
-  /**
-   * 预共享密钥。
-   */
-  PreShareKey?: string
-
-  /**
-   * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
-   */
-  SecurityPolicyDatabases?: Array<SecurityPolicyDatabase>
-
-  /**
-   * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
-   */
-  IKEOptionsSpecification?: IKEOptionsSpecification
-
-  /**
-   * IPSec配置，腾讯云提供IPSec安全会话设置。
-   */
-  IPSECOptionsSpecification?: IPSECOptionsSpecification
-
-  /**
-   * 是否启用通道健康检查
-   */
-  EnableHealthCheck?: boolean
-
-  /**
-   * 本端通道探测ip
-   */
-  HealthCheckLocalIp?: string
-
-  /**
-   * 对端通道探测ip
-   */
-  HealthCheckRemoteIp?: string
+  RequestId?: string
 }
 
 /**
@@ -3957,6 +3937,56 @@ export interface ModifyCcnRegionBandwidthLimitsTypeRequest {
 }
 
 /**
+ * Vpn网关目的路由
+ */
+export interface VpnGatewayRoute {
+  /**
+   * 目的端IDC网段
+   */
+  DestinationCidrBlock: string
+
+  /**
+   * 下一跳类型（关联实例类型）可选值:"VPNCONN"(VPN通道), "CCN"(CCN实例)
+   */
+  InstanceType: string
+
+  /**
+   * 下一跳实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 优先级, 可选值: 0, 100
+   */
+  Priority: number
+
+  /**
+   * 启用状态, 可选值: "ENABLE"(启用), "DISABLE"(禁用)
+   */
+  Status: string
+
+  /**
+   * 路由条目ID
+   */
+  RouteId?: string
+
+  /**
+   * 路由类型, 可选值: "VPC"(VPC路由), "CCN"(云联网传播路由), "Static"(静态路由), "BGP"(BGP路由)
+   */
+  Type?: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
  * DescribeVpcResourceDashboard请求参数结构体
  */
 export interface DescribeVpcResourceDashboardRequest {
@@ -5049,6 +5079,21 @@ CCN：云联网网关；
 }
 
 /**
+ * 修改VPN状态参数
+ */
+export interface VpnGatewayRouteModify {
+  /**
+   * Vpn网关路由ID
+   */
+  RouteId: string
+
+  /**
+   * Vpn网关状态, ENABEL 启用, DISABLE禁用
+   */
+  Status: string
+}
+
+/**
  * ModifyIpv6AddressesAttribute返回参数结构体
  */
 export interface ModifyIpv6AddressesAttributeResponse {
@@ -5332,6 +5377,21 @@ export interface HaVipAssociateAddressIpResponse {
  * DeleteCustomerGateway返回参数结构体
  */
 export interface DeleteCustomerGatewayResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateVpnGatewayRoutes返回参数结构体
+ */
+export interface CreateVpnGatewayRoutesResponse {
+  /**
+   * VPN网关目的路由
+   */
+  Routes: Array<VpnGatewayRoute>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6570,6 +6630,26 @@ export interface DetachCcnInstancesRequest {
    * 要解关联网络实例列表
    */
   Instances: Array<CcnInstance>
+}
+
+/**
+ * ModifyVpcEndPointServiceWhiteList请求参数结构体
+ */
+export interface ModifyVpcEndPointServiceWhiteListRequest {
+  /**
+   * 用户UIN。
+   */
+  UserUin: string
+
+  /**
+   * 终端节点服务ID。
+   */
+  EndPointServiceId: string
+
+  /**
+   * 白名单描述信息。
+   */
+  Description?: string
 }
 
 /**
@@ -8173,6 +8253,21 @@ export interface AddressChargePrepaid {
 }
 
 /**
+ * DescribeVpnGatewayRoutes返回参数结构体
+ */
+export interface DescribeVpnGatewayRoutesResponse {
+  /**
+   * VPN网关目的路由
+   */
+  Routes: Array<VpnGatewayRoute>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNetworkAcls返回参数结构体
  */
 export interface DescribeNetworkAclsResponse {
@@ -9647,6 +9742,22 @@ export interface CreateSecurityGroupPoliciesRequest {
 }
 
 /**
+ * ModifyVpnGatewayRoutes返回参数结构体
+ */
+export interface ModifyVpnGatewayRoutesResponse {
+  /**
+      * VPN路由信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Routes: Array<VpnGatewayRoute>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRouteTableAttribute返回参数结构体
  */
 export interface ModifyRouteTableAttributeResponse {
@@ -10275,6 +10386,81 @@ DISABLE：不启用该路由
 }
 
 /**
+ * ModifyVpnConnectionAttribute请求参数结构体
+ */
+export interface ModifyVpnConnectionAttributeRequest {
+  /**
+   * VPN通道实例ID。形如：vpnx-f49l6u0z。
+   */
+  VpnConnectionId: string
+
+  /**
+   * VPN通道名称，可任意命名，但不得超过60个字符。
+   */
+  VpnConnectionName?: string
+
+  /**
+   * 预共享密钥。
+   */
+  PreShareKey?: string
+
+  /**
+   * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
+   */
+  SecurityPolicyDatabases?: Array<SecurityPolicyDatabase>
+
+  /**
+   * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
+   */
+  IKEOptionsSpecification?: IKEOptionsSpecification
+
+  /**
+   * IPSec配置，腾讯云提供IPSec安全会话设置。
+   */
+  IPSECOptionsSpecification?: IPSECOptionsSpecification
+
+  /**
+   * 是否启用通道健康检查
+   */
+  EnableHealthCheck?: boolean
+
+  /**
+   * 本端通道探测ip
+   */
+  HealthCheckLocalIp?: string
+
+  /**
+   * 对端通道探测ip
+   */
+  HealthCheckRemoteIp?: string
+}
+
+/**
+ * DeleteNetworkInterface请求参数结构体
+ */
+export interface DeleteNetworkInterfaceRequest {
+  /**
+   * 弹性网卡实例ID，例如：eni-m6dyj72l。
+   */
+  NetworkInterfaceId: string
+}
+
+/**
+ * InquiryPriceResetVpnGatewayInternetMaxBandwidth返回参数结构体
+ */
+export interface InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse {
+  /**
+   * 商品价格。
+   */
+  Price?: Price
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 路由表对象
  */
 export interface RouteTable {
@@ -10323,31 +10509,6 @@ export interface RouteTable {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LocalCidrForCcn: Array<CidrForCcn>
-}
-
-/**
- * DeleteNetworkInterface请求参数结构体
- */
-export interface DeleteNetworkInterfaceRequest {
-  /**
-   * 弹性网卡实例ID，例如：eni-m6dyj72l。
-   */
-  NetworkInterfaceId: string
-}
-
-/**
- * InquiryPriceResetVpnGatewayInternetMaxBandwidth返回参数结构体
- */
-export interface InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse {
-  /**
-   * 商品价格。
-   */
-  Price?: Price
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -11333,6 +11494,31 @@ export interface DisassociateAddressResponse {
 }
 
 /**
+ * DescribeVpnGatewayRoutes请求参数结构体
+ */
+export interface DescribeVpnGatewayRoutesRequest {
+  /**
+   * VPN网关的ID
+   */
+  VpnGatewayId: string
+
+  /**
+   * 过滤条件,  条件包括(DestinationCidr, InstanceId,InstanceType)
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量, 默认0
+   */
+  Offset?: number
+
+  /**
+   * 单页个数, 默认20, 最大值100
+   */
+  Limit?: number
+}
+
+/**
  * GetCcnRegionBandwidthLimits返回参数结构体
  */
 export interface GetCcnRegionBandwidthLimitsResponse {
@@ -11631,23 +11817,18 @@ export interface UnassignPrivateIpAddressesRequest {
 }
 
 /**
- * ModifyVpcEndPointServiceWhiteList请求参数结构体
+ * DeleteVpnGatewayRoutes请求参数结构体
  */
-export interface ModifyVpcEndPointServiceWhiteListRequest {
+export interface DeleteVpnGatewayRoutesRequest {
   /**
-   * 用户UIN。
+   * VPN网关实例ID
    */
-  UserUin: string
+  VpnGatewayId: string
 
   /**
-   * 终端节点服务ID。
+   * 路由ID信息列表
    */
-  EndPointServiceId: string
-
-  /**
-   * 白名单描述信息。
-   */
-  Description?: string
+  RouteIds: Array<string>
 }
 
 /**
@@ -11885,6 +12066,16 @@ export interface AssociateNetworkInterfaceSecurityGroupsRequest {
    * 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。
    */
   SecurityGroupIds: Array<string>
+}
+
+/**
+ * DeleteVpnGatewayRoutes返回参数结构体
+ */
+export interface DeleteVpnGatewayRoutesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

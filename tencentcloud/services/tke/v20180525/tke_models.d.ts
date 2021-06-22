@@ -1174,6 +1174,11 @@ export interface PrometheusAlertRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Describe?: string;
+    /**
+      * 参考prometheus rule中的annotations
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Annotations?: Array<Label>;
 }
 /**
  * DescribePrometheusAgentInstances请求参数结构体

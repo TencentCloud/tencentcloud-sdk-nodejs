@@ -418,6 +418,26 @@ it("vpc.v20170312.ModifyVpcEndPointAttribute", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeVpnGatewayRoutes", async function () {
+    try {
+       const data = await client.DescribeVpnGatewayRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyVpnGatewayRoutes", async function () {
+    try {
+       const data = await client.ModifyVpnGatewayRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DisassociateVpcEndPointSecurityGroups", async function () {
     try {
        const data = await client.DisassociateVpcEndPointSecurityGroups({})
@@ -1088,9 +1108,9 @@ it("vpc.v20170312.DeleteAssistantCidr", async function () {
     }
 })
 
-it("vpc.v20170312.UnassignIpv6CidrBlock", async function () {
+it("vpc.v20170312.DeleteVpnGatewayRoutes", async function () {
     try {
-       const data = await client.UnassignIpv6CidrBlock({})
+       const data = await client.DeleteVpnGatewayRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1628,6 +1648,16 @@ it("vpc.v20170312.AssociateNetworkAclSubnets", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeIp6TranslatorQuota", async function () {
+    try {
+       const data = await client.DescribeIp6TranslatorQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeVpnGateways", async function () {
     try {
        const data = await client.DescribeVpnGateways({})
@@ -1781,6 +1811,16 @@ it("vpc.v20170312.DescribeIpGeolocationInfos", async function () {
 it("vpc.v20170312.DescribeServiceTemplates", async function () {
     try {
        const data = await client.DescribeServiceTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.UnassignIpv6CidrBlock", async function () {
+    try {
+       const data = await client.UnassignIpv6CidrBlock({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2448,9 +2488,9 @@ it("vpc.v20170312.DetachClassicLinkVpc", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeIp6TranslatorQuota", async function () {
+it("vpc.v20170312.CreateSecurityGroupWithPolicies", async function () {
     try {
-       const data = await client.DescribeIp6TranslatorQuota({})
+       const data = await client.CreateSecurityGroupWithPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2508,9 +2548,9 @@ it("vpc.v20170312.DescribeVpcEndPoint", async function () {
     }
 })
 
-it("vpc.v20170312.CreateSecurityGroupWithPolicies", async function () {
+it("vpc.v20170312.CreateVpnGatewayRoutes", async function () {
     try {
-       const data = await client.CreateSecurityGroupWithPolicies({})
+       const data = await client.CreateVpnGatewayRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

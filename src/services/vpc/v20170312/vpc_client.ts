@@ -121,6 +121,7 @@ import {
   AssignIpv6CidrBlockRequest,
   CreateSecurityGroupPoliciesResponse,
   UnassignIpv6CidrBlockResponse,
+  ModifyVpnGatewayRoutesRequest,
   HaVipAssociateAddressIpRequest,
   DisassociateNatGatewayAddressResponse,
   DeleteRoutesResponse,
@@ -140,14 +141,14 @@ import {
   DescribeSecurityGroupsRequest,
   DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest,
   ModifyNetworkAclAttributeResponse,
-  AddBandwidthPackageResourcesResponse,
+  CreateVpnGatewayRoutesRequest,
   DisassociateNetworkAclSubnetsResponse,
   SetCcnRegionBandwidthLimitsRequest,
   ModifyAddressInternetChargeTypeRequest,
   ModifyIp6AddressesBandwidthRequest,
   CreateLocalGatewayRequest,
   DescribeDirectConnectGatewaysResponse,
-  ModifyVpnConnectionAttributeRequest,
+  AddBandwidthPackageResourcesResponse,
   Ip6RuleInfo,
   CreateSecurityGroupWithPoliciesResponse,
   DeleteAddressTemplateResponse,
@@ -195,6 +196,7 @@ import {
   ResetAttachCcnInstancesResponse,
   RejectAttachCcnInstancesRequest,
   ModifyCcnRegionBandwidthLimitsTypeRequest,
+  VpnGatewayRoute,
   DescribeVpcResourceDashboardRequest,
   ModifyIp6RuleRequest,
   ReplaceRouteTableAssociationRequest,
@@ -246,6 +248,7 @@ import {
   AssignIpv6AddressesRequest,
   CreateServiceTemplateGroupResponse,
   NetDetect,
+  VpnGatewayRouteModify,
   ModifyIpv6AddressesAttributeResponse,
   ReplaceSecurityGroupPolicyRequest,
   ModifyVpcEndPointServiceAttributeResponse,
@@ -253,6 +256,7 @@ import {
   DescribeVpcPrivateIpAddressesResponse,
   HaVipAssociateAddressIpResponse,
   DeleteCustomerGatewayResponse,
+  CreateVpnGatewayRoutesResponse,
   CreateNetDetectRequest,
   CreateAddressTemplateResponse,
   CreateNatGatewayDestinationIpPortTranslationNatRuleResponse,
@@ -310,6 +314,7 @@ import {
   DescribeClassicLinkInstancesResponse,
   DescribeVpnGatewayCcnRoutesResponse,
   DetachCcnInstancesRequest,
+  ModifyVpcEndPointServiceWhiteListRequest,
   Filter,
   CreateFlowLogResponse,
   DeleteDirectConnectGatewayRequest,
@@ -382,6 +387,7 @@ import {
   DeleteLocalGatewayRequest,
   ResetVpnGatewayInternetMaxBandwidthResponse,
   AddressChargePrepaid,
+  DescribeVpnGatewayRoutesResponse,
   DescribeNetworkAclsResponse,
   DeleteFlowLogResponse,
   AttachCcnInstancesResponse,
@@ -455,6 +461,7 @@ import {
   ModifyVpcAttributeRequest,
   DescribeIp6TranslatorsResponse,
   CreateSecurityGroupPoliciesRequest,
+  ModifyVpnGatewayRoutesResponse,
   ModifyRouteTableAttributeResponse,
   DescribeSecurityGroupReferencesResponse,
   AddIp6RulesResponse,
@@ -491,9 +498,10 @@ import {
   AssociateNatGatewayAddressResponse,
   RemoveBandwidthPackageResourcesRequest,
   VpngwCcnRoutes,
-  RouteTable,
+  ModifyVpnConnectionAttributeRequest,
   DeleteNetworkInterfaceRequest,
   InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse,
+  RouteTable,
   DescribeVpcEndPointServiceWhiteListRequest,
   DeleteAddressTemplateGroupResponse,
   ModifyNetworkInterfaceQosRequest,
@@ -545,6 +553,7 @@ import {
   SecurityGroup,
   DisableGatewayFlowMonitorResponse,
   DisassociateAddressResponse,
+  DescribeVpnGatewayRoutesRequest,
   GetCcnRegionBandwidthLimitsResponse,
   DeleteRoutesRequest,
   AssociateAddressRequest,
@@ -562,7 +571,7 @@ import {
   DetachClassicLinkVpcResponse,
   MigrateNetworkInterfaceResponse,
   UnassignPrivateIpAddressesRequest,
-  ModifyVpcEndPointServiceWhiteListRequest,
+  DeleteVpnGatewayRoutesRequest,
   DescribeProductQuotaRequest,
   ModifyNetDetectResponse,
   CreateHaVipRequest,
@@ -577,6 +586,7 @@ import {
   ModifyPrivateIpAddressesAttributeRequest,
   ResetNatGatewayConnectionResponse,
   AssociateNetworkInterfaceSecurityGroupsRequest,
+  DeleteVpnGatewayRoutesResponse,
   CreateSecurityGroupRequest,
   ModifyCcnAttributeResponse,
   DescribeSecurityGroupLimitsRequest,
@@ -1044,6 +1054,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyVpcEndPointAttributeResponse) => void
   ): Promise<ModifyVpcEndPointAttributeResponse> {
     return this.request("ModifyVpcEndPointAttribute", req, cb)
+  }
+
+  /**
+   * 查询路由型VPN网关的目的路由
+   */
+  async DescribeVpnGatewayRoutes(
+    req: DescribeVpnGatewayRoutesRequest,
+    cb?: (error: string, rep: DescribeVpnGatewayRoutesResponse) => void
+  ): Promise<DescribeVpnGatewayRoutesResponse> {
+    return this.request("DescribeVpnGatewayRoutes", req, cb)
+  }
+
+  /**
+   * 修改VPN路由是否启用
+   */
+  async ModifyVpnGatewayRoutes(
+    req: ModifyVpnGatewayRoutesRequest,
+    cb?: (error: string, rep: ModifyVpnGatewayRoutesResponse) => void
+  ): Promise<ModifyVpnGatewayRoutesResponse> {
+    return this.request("ModifyVpnGatewayRoutes", req, cb)
   }
 
   /**
@@ -1791,14 +1821,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（UnassignIpv6CidrBlock）用于释放IPv6网段。<br />
-网段如果还有IP占用且未回收，则网段无法释放。
-     */
-  async UnassignIpv6CidrBlock(
-    req: UnassignIpv6CidrBlockRequest,
-    cb?: (error: string, rep: UnassignIpv6CidrBlockResponse) => void
-  ): Promise<UnassignIpv6CidrBlockResponse> {
-    return this.request("UnassignIpv6CidrBlock", req, cb)
+   * 本接口（DeleteVpnGatewayCcnRoutes）用于删除VPN网关路由
+   */
+  async DeleteVpnGatewayRoutes(
+    req: DeleteVpnGatewayRoutesRequest,
+    cb?: (error: string, rep: DeleteVpnGatewayRoutesResponse) => void
+  ): Promise<DeleteVpnGatewayRoutesResponse> {
+    return this.request("DeleteVpnGatewayRoutes", req, cb)
   }
 
   /**
@@ -2364,6 +2393,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询账户在指定地域IPV6转换实例和规则的配额
+   */
+  async DescribeIp6TranslatorQuota(
+    req: DescribeIp6TranslatorQuotaRequest,
+    cb?: (error: string, rep: DescribeIp6TranslatorQuotaResponse) => void
+  ): Promise<DescribeIp6TranslatorQuotaResponse> {
+    return this.request("DescribeIp6TranslatorQuota", req, cb)
+  }
+
+  /**
    * 本接口（DescribeVpnGateways）用于查询VPN网关列表。
    */
   async DescribeVpnGateways(
@@ -2534,6 +2573,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeServiceTemplatesResponse) => void
   ): Promise<DescribeServiceTemplatesResponse> {
     return this.request("DescribeServiceTemplates", req, cb)
+  }
+
+  /**
+     * 本接口（UnassignIpv6CidrBlock）用于释放IPv6网段。<br />
+网段如果还有IP占用且未回收，则网段无法释放。
+     */
+  async UnassignIpv6CidrBlock(
+    req: UnassignIpv6CidrBlockRequest,
+    cb?: (error: string, rep: UnassignIpv6CidrBlockResponse) => void
+  ): Promise<UnassignIpv6CidrBlockResponse> {
+    return this.request("UnassignIpv6CidrBlock", req, cb)
   }
 
   /**
@@ -3245,13 +3295,26 @@ LimitTypes取值范围：
   }
 
   /**
-   * 查询账户在指定地域IPV6转换实例和规则的配额
-   */
-  async DescribeIp6TranslatorQuota(
-    req: DescribeIp6TranslatorQuotaRequest,
-    cb?: (error: string, rep: DescribeIp6TranslatorQuotaResponse) => void
-  ): Promise<DescribeIp6TranslatorQuotaResponse> {
-    return this.request("DescribeIp6TranslatorQuota", req, cb)
+     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
+* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
+* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
+
+安全组规则说明：
+* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
+* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
+* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
+* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
+* Action字段只允许输入ACCEPT或DROP。
+* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
+* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
+     */
+  async CreateSecurityGroupWithPolicies(
+    req: CreateSecurityGroupWithPoliciesRequest,
+    cb?: (error: string, rep: CreateSecurityGroupWithPoliciesResponse) => void
+  ): Promise<CreateSecurityGroupWithPoliciesResponse> {
+    return this.request("CreateSecurityGroupWithPolicies", req, cb)
   }
 
   /**
@@ -3319,26 +3382,13 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
-* 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
-* 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
-
-安全组规则说明：
-* Version安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
-* Protocol字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
-* CidrBlock字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* Ipv6CidrBlock字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock包含您的账户内的云服务器之外的设备在腾讯云的内网IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-* SecurityGroupId字段允许输入与待修改的安全组位于相同项目中的安全组ID，包括这个安全组ID本身，代表安全组下所有云服务器的内网IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。
-* Port字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当Protocol字段是TCP或UDP时，Port字段才被接受，即Protocol字段不是TCP或UDP时，Protocol和Port排他关系，不允许同时输入，否则会接口报错。
-* Action字段只允许输入ACCEPT或DROP。
-* CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate四者是排他关系，不允许同时输入，Protocol + Port和ServiceTemplate二者是排他关系，不允许同时输入。
-* 一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
-     */
-  async CreateSecurityGroupWithPolicies(
-    req: CreateSecurityGroupWithPoliciesRequest,
-    cb?: (error: string, rep: CreateSecurityGroupWithPoliciesResponse) => void
-  ): Promise<CreateSecurityGroupWithPoliciesResponse> {
-    return this.request("CreateSecurityGroupWithPolicies", req, cb)
+   * 创建路由型VPN网关的目的路由
+   */
+  async CreateVpnGatewayRoutes(
+    req: CreateVpnGatewayRoutesRequest,
+    cb?: (error: string, rep: CreateVpnGatewayRoutesResponse) => void
+  ): Promise<CreateVpnGatewayRoutesResponse> {
+    return this.request("CreateVpnGatewayRoutes", req, cb)
   }
 
   /**

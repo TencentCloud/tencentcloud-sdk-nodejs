@@ -175,6 +175,7 @@ import {
   ExportVideoByEditorTrackDataResponse,
   MediaImageSpriteInfo,
   ImportMaterialRequest,
+  TextReplacementInfo,
   DescribeMaterialsRequest,
 } from "./cme_models"
 

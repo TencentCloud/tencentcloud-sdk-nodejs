@@ -16,48 +16,60 @@
  */
 
 /**
- * VerifyBizLicense请求参数结构体
+ * 运单识别结果
  */
-export interface VerifyBizLicenseRequest {
+export interface TextWaybill {
   /**
-      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+   * 收件人姓名
+   */
+  RecName: WaybillObj
+
+  /**
+   * 收件人手机号
+   */
+  RecNum: WaybillObj
+
+  /**
+   * 收件人地址
+   */
+  RecAddr: WaybillObj
+
+  /**
+   * 寄件人姓名
+   */
+  SenderName: WaybillObj
+
+  /**
+   * 寄件人手机号
+   */
+  SenderNum: WaybillObj
+
+  /**
+   * 寄件人地址
+   */
+  SenderAddr: WaybillObj
+
+  /**
+   * 运单号
+   */
+  WaybillNum: WaybillObj
+}
+
+/**
+ * BankSlipOCR请求参数结构体
+ */
+export interface BankSlipOCRRequest {
+  /**
+      * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
 
   /**
-      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+      * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
       */
   ImageUrl?: string
-
-  /**
-      * 用于入参是营业执照图片的场景，表示需要校验的参数：RegNum（注册号或者统一社会信用代码），Name（企业名称），Address（经营地址）。选择后会返回相关参数校验结果。RegNum为必选，Name和Address可选。
-格式为{RegNum: true, Name:true/false, Address:true/false}
-
-设置方式参考：
-Config = Json.stringify({"Name":true,"Address":true})
-API 3.0 Explorer 设置方式参考：
-Config = {"Name":true,"Address":true}
-      */
-  ImageConfig?: string
-
-  /**
-   * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。若没有传入营业执照图片，则RegNum为必选项，若图片和RegNum都传入，则只使用RegNum。
-   */
-  RegNum?: string
-
-  /**
-   * 用于入参是文本的场景，Name表示企业名称。Name为可选项，填写后会返回Name的校验结果。
-   */
-  Name?: string
-
-  /**
-   * 用于入参是文本的场景，Address表示经营地址，填写后会返回Address的校验结果。
-   */
-  Address?: string
 }
 
 /**
@@ -708,6 +720,51 @@ export interface Words {
 }
 
 /**
+ * VerifyBizLicense请求参数结构体
+ */
+export interface VerifyBizLicenseRequest {
+  /**
+      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+      */
+  ImageBase64?: string
+
+  /**
+      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+      */
+  ImageUrl?: string
+
+  /**
+      * 用于入参是营业执照图片的场景，表示需要校验的参数：RegNum（注册号或者统一社会信用代码），Name（企业名称），Address（经营地址）。选择后会返回相关参数校验结果。RegNum为必选，Name和Address可选。
+格式为{RegNum: true, Name:true/false, Address:true/false}
+
+设置方式参考：
+Config = Json.stringify({"Name":true,"Address":true})
+API 3.0 Explorer 设置方式参考：
+Config = {"Name":true,"Address":true}
+      */
+  ImageConfig?: string
+
+  /**
+   * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。若没有传入营业执照图片，则RegNum为必选项，若图片和RegNum都传入，则只使用RegNum。
+   */
+  RegNum?: string
+
+  /**
+   * 用于入参是文本的场景，Name表示企业名称。Name为可选项，填写后会返回Name的校验结果。
+   */
+  Name?: string
+
+  /**
+   * 用于入参是文本的场景，Address表示经营地址，填写后会返回Address的校验结果。
+   */
+  Address?: string
+}
+
+/**
  * 英文识别结果
  */
 export interface TextDetectionEn {
@@ -1176,6 +1233,16 @@ GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
    * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
    */
   ItemPolygon: ItemCoord
+
+  /**
+   * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
+   */
+  Words: Array<DetectedWords>
+
+  /**
+   * 单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
+   */
+  WordCoordPoint: Array<DetectedWordCoordPoint>
 }
 
 /**
@@ -1544,6 +1611,27 @@ export interface TollInvoiceInfo {
 }
 
 /**
+ * 银行回单识别出的字段
+ */
+export interface BankSlipInfo {
+  /**
+      * 识别出的字段名称(关键字)，支持以下字段：
+付款开户行、收款开户行、付款账号、收款账号、回单类型、回单编号、币种、流水号、凭证号码、交易机构、交易金额、手续费、日期等字段信息。
+      */
+  Name: string
+
+  /**
+   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+   */
+  Value: string
+
+  /**
+   * 文本行在旋转纠正之后的图像中的像素坐标。
+   */
+  Rect: Rect
+}
+
+/**
  * ArithmeticOCR返回参数结构体
  */
 export interface ArithmeticOCRResponse {
@@ -1738,18 +1826,18 @@ export interface InsuranceBillOCRResponse {
 }
 
 /**
- * GeneralEfficientOCR返回参数结构体
+ * GeneralAccurateOCR返回参数结构体
  */
-export interface GeneralEfficientOCRResponse {
+export interface GeneralAccurateOCRResponse {
   /**
    * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
    */
-  TextDetections?: Array<TextDetection>
+  TextDetections: Array<TextDetection>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel?: number
+  Angel: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1882,22 +1970,22 @@ export interface GeneralBasicOCRResponse {
   /**
    * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
    */
-  TextDetections?: Array<TextDetection>
+  TextDetections: Array<TextDetection>
 
   /**
    * 检测到的语言类型，目前支持的语言类型参考入参LanguageType说明。
    */
-  Language?: string
+  Language: string
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel?: number
+  Angel: number
 
   /**
    * 图片为PDF时，返回PDF的总页数，默认为0
    */
-  PdfPageSize?: number
+  PdfPageSize: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2680,6 +2768,91 @@ export interface QrcodeImgSize {
 }
 
 /**
+ * PassportOCR返回参数结构体
+ */
+export interface PassportOCRResponse {
+  /**
+   * 国家码
+   */
+  Country?: string
+
+  /**
+   * 护照号
+   */
+  PassportNo?: string
+
+  /**
+   * 性别
+   */
+  Sex?: string
+
+  /**
+   * 国籍
+   */
+  Nationality?: string
+
+  /**
+   * 出生日期
+   */
+  BirthDate?: string
+
+  /**
+   * 出生地点
+   */
+  BirthPlace?: string
+
+  /**
+   * 签发日期
+   */
+  IssueDate?: string
+
+  /**
+   * 签发地点
+   */
+  IssuePlace?: string
+
+  /**
+   * 有效期
+   */
+  ExpiryDate?: string
+
+  /**
+   * 持证人签名
+   */
+  Signature?: string
+
+  /**
+   * 最下方第一行 MRZ Code 序列
+   */
+  CodeSet?: string
+
+  /**
+   * 最下方第二行 MRZ Code 序列
+   */
+  CodeCrc?: string
+
+  /**
+   * 姓名
+   */
+  Name?: string
+
+  /**
+   * 姓
+   */
+  FamilyName?: string
+
+  /**
+   * 名
+   */
+  FirstName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * VerifyBasicBizLicense返回参数结构体
  */
 export interface VerifyBasicBizLicenseResponse {
@@ -3000,6 +3173,11 @@ nor\hun\tha\lat\ara
    * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
   PdfPageNumber?: number
+
+  /**
+   * 是否返回单字信息，默认关
+   */
+  IsWords?: boolean
 }
 
 /**
@@ -3205,88 +3383,18 @@ export interface VatInvoiceVerifyResponse {
 }
 
 /**
- * PassportOCR返回参数结构体
+ * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）
  */
-export interface PassportOCRResponse {
+export interface DetectedWords {
   /**
-   * 国家码
+   * 置信度 0 ~100
    */
-  Country?: string
+  Confidence: number
 
   /**
-   * 护照号
+   * 候选字Character
    */
-  PassportNo?: string
-
-  /**
-   * 性别
-   */
-  Sex?: string
-
-  /**
-   * 国籍
-   */
-  Nationality?: string
-
-  /**
-   * 出生日期
-   */
-  BirthDate?: string
-
-  /**
-   * 出生地点
-   */
-  BirthPlace?: string
-
-  /**
-   * 签发日期
-   */
-  IssueDate?: string
-
-  /**
-   * 签发地点
-   */
-  IssuePlace?: string
-
-  /**
-   * 有效期
-   */
-  ExpiryDate?: string
-
-  /**
-   * 持证人签名
-   */
-  Signature?: string
-
-  /**
-   * 最下方第一行 MRZ Code 序列
-   */
-  CodeSet?: string
-
-  /**
-   * 最下方第二行 MRZ Code 序列
-   */
-  CodeCrc?: string
-
-  /**
-   * 姓名
-   */
-  Name?: string
-
-  /**
-   * 姓
-   */
-  FamilyName?: string
-
-  /**
-   * 名
-   */
-  FirstName?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Character: string
 }
 
 /**
@@ -3331,6 +3439,11 @@ export interface GeneralAccurateOCRRequest {
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
   ImageUrl?: string
+
+  /**
+   * 是否返回单字信息，默认关
+   */
+  IsWords?: boolean
 }
 
 /**
@@ -3867,43 +3980,23 @@ export interface ShipInvoiceOCRRequest {
 }
 
 /**
- * 运单识别结果
+ * BankSlipOCR返回参数结构体
  */
-export interface TextWaybill {
+export interface BankSlipOCRResponse {
   /**
-   * 收件人姓名
+   * 银行回单识别结果，具体内容请点击左侧链接。
    */
-  RecName: WaybillObj
+  BankSlipInfos: Array<BankSlipInfo>
 
   /**
-   * 收件人手机号
+   * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  RecNum: WaybillObj
+  Angle: number
 
   /**
-   * 收件人地址
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  RecAddr: WaybillObj
-
-  /**
-   * 寄件人姓名
-   */
-  SenderName: WaybillObj
-
-  /**
-   * 寄件人手机号
-   */
-  SenderNum: WaybillObj
-
-  /**
-   * 寄件人地址
-   */
-  SenderAddr: WaybillObj
-
-  /**
-   * 运单号
-   */
-  WaybillNum: WaybillObj
+  RequestId?: string
 }
 
 /**
@@ -4434,9 +4527,9 @@ export interface ClassifyDetectInfo {
 }
 
 /**
- * GeneralAccurateOCR返回参数结构体
+ * GeneralEfficientOCR返回参数结构体
  */
-export interface GeneralAccurateOCRResponse {
+export interface GeneralEfficientOCRResponse {
   /**
    * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
    */
@@ -5213,6 +5306,16 @@ export interface TableOCRResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。
+ */
+export interface DetectedWordCoordPoint {
+  /**
+   * 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。
+   */
+  WordCoordinate: Array<Coord>
 }
 
 /**

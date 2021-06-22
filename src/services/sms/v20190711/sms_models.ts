@@ -37,7 +37,7 @@ export interface DeleteSmsTemplateResponse {
   /**
    * 删除模板响应
    */
-  DeleteTemplateStatus?: DeleteTemplateStatus
+  DeleteTemplateStatus: DeleteTemplateStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -103,6 +103,7 @@ export interface ModifySmsSignRequest {
       * 是否国际/港澳台短信：
 0：表示国内短信。
 1：表示国际/港澳台短信。
+注：需要和待修改签名International值保持一致，该参数不能直接修改国内签名到国际签名。
       */
   International: number
 
@@ -136,8 +137,9 @@ export interface ModifySmsSignRequest {
  */
 export interface AddSmsSignRequest {
   /**
-   * 签名名称。
-   */
+      * 签名名称。
+注：不能重复申请已通过或待审核的签名。
+      */
   SignName: string
 
   /**
@@ -214,7 +216,7 @@ export interface DescribeSmsTemplateListResponse {
   /**
    * 获取短信模板信息响应
    */
-  DescribeTemplateStatusSet?: Array<DescribeTemplateListStatus>
+  DescribeTemplateStatusSet: Array<DescribeTemplateListStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -375,7 +377,7 @@ export interface CallbackStatusStatisticsResponse {
   /**
    * 回执数据统计响应包体。
    */
-  CallbackStatusStatistics?: CallbackStatusStatistics
+  CallbackStatusStatistics: CallbackStatusStatistics
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -460,7 +462,7 @@ export interface PullSmsSendStatusByPhoneNumberResponse {
   /**
    * 下发状态响应集合。
    */
-  PullSmsSendStatusSet?: Array<PullSmsSendStatus>
+  PullSmsSendStatusSet: Array<PullSmsSendStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -530,7 +532,7 @@ export interface SendSmsResponse {
   /**
    * 短信发送状态。
    */
-  SendStatusSet?: Array<SendStatus>
+  SendStatusSet: Array<SendStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -545,7 +547,7 @@ export interface SendStatusStatisticsResponse {
   /**
    * 发送数据统计响应包体。
    */
-  SendStatusStatistics?: SendStatusStatistics
+  SendStatusStatistics: SendStatusStatistics
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -752,7 +754,7 @@ export interface AddSmsTemplateResponse {
   /**
    * 添加短信模板响应包体
    */
-  AddTemplateStatus?: AddTemplateStatus
+  AddTemplateStatus: AddTemplateStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -812,7 +814,7 @@ export interface DescribeSmsSignListResponse {
   /**
    * 获取签名信息响应
    */
-  DescribeSignListStatusSet?: Array<DescribeSignListStatus>
+  DescribeSignListStatusSet: Array<DescribeSignListStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -937,7 +939,7 @@ export interface PullSmsReplyStatusByPhoneNumberResponse {
   /**
    * 回复状态响应集合。
    */
-  PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>
+  PullSmsReplyStatusSet: Array<PullSmsReplyStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -992,7 +994,7 @@ export interface DeleteSmsSignResponse {
   /**
    * 删除签名响应
    */
-  DeleteSignStatus?: DeleteSignStatus
+  DeleteSignStatus: DeleteSignStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1007,7 +1009,7 @@ export interface AddSmsSignResponse {
   /**
    * 添加签名响应
    */
-  AddSignStatus?: AddSignStatus
+  AddSignStatus: AddSignStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1069,7 +1071,7 @@ export interface ModifySmsSignResponse {
   /**
    * 修改签名响应
    */
-  ModifySignStatus?: ModifySignStatus
+  ModifySignStatus: ModifySignStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1109,7 +1111,7 @@ export interface PullSmsSendStatusResponse {
   /**
    * 下发状态响应集合。
    */
-  PullSmsSendStatusSet?: Array<PullSmsSendStatus>
+  PullSmsSendStatusSet: Array<PullSmsSendStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1124,7 +1126,7 @@ export interface SmsPackagesStatisticsResponse {
   /**
    * 发送数据统计响应包体。
    */
-  SmsPackagesStatisticsSet?: Array<SmsPackagesStatistics>
+  SmsPackagesStatisticsSet: Array<SmsPackagesStatistics>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1154,7 +1156,7 @@ export interface PullSmsReplyStatusResponse {
   /**
    * 回复状态响应集合。
    */
-  PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>
+  PullSmsReplyStatusSet: Array<PullSmsReplyStatus>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

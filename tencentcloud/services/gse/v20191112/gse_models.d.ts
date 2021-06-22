@@ -539,11 +539,11 @@ export interface DescribeFleetUtilizationResponse {
       * 服务器舰队利用率
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FleetUtilization?: Array<FleetUtilization>;
+    FleetUtilization: Array<FleetUtilization>;
     /**
       * 总数，最小值0
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1202,11 +1202,11 @@ export interface DescribeCcnInstancesResponse {
       * 云联网实例信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CcnInstanceSets?: Array<CcnInstanceSets>;
+    CcnInstanceSets: Array<CcnInstanceSets>;
     /**
       * 云联网实例个数，最小值为0
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1322,12 +1322,12 @@ export interface DescribeFleetStatisticSummaryResponse {
       * 总时长，单位秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalUsedTimeSeconds?: string;
+    TotalUsedTimeSeconds: string;
     /**
       * 总流量，单位MB
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalUsedFlowMegaBytes?: number;
+    TotalUsedFlowMegaBytes: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1730,17 +1730,17 @@ export interface DescribeFleetStatisticDetailsResponse {
       * 服务部署统计详情列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DetailList?: Array<FleetStatisticDetail>;
+    DetailList: Array<FleetStatisticDetail>;
     /**
       * 记录总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 统计时间类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeType?: string;
+    TimeType: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2353,7 +2353,7 @@ export interface CreateGameServerSessionQueueResponse {
     /**
       * 游戏服务器会话队列
       */
-    GameServerSessionQueue?: GameServerSessionQueue;
+    GameServerSessionQueue: GameServerSessionQueue;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2747,22 +2747,22 @@ export interface DescribeFleetStatisticFlowsResponse {
       * 流量统计列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UsedFlowList?: Array<FleetStatisticFlows>;
+    UsedFlowList: Array<FleetStatisticFlows>;
     /**
       * 时长统计列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UsedTimeList?: Array<FleetStatisticTimes>;
+    UsedTimeList: Array<FleetStatisticTimes>;
     /**
       * 记录总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 统计时间类型，取值：小时和天
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeType?: string;
+    TimeType: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3493,12 +3493,12 @@ export interface DescribeFleetCapacityResponse {
       * 服务器舰队的容量配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FleetCapacity?: Array<FleetCapacity>;
+    FleetCapacity: Array<FleetCapacity>;
     /**
       * 结果返回最大数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

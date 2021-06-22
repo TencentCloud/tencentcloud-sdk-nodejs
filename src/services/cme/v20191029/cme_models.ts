@@ -3374,10 +3374,11 @@ export interface SlotReplacementInfo {
 
   /**
       * 替换类型，可取值有：
-<li> AUDIO :音频;</li>
-<li> VIDEO :视频;</li>
-<li> IMAGE :图片。</li>
-注意：这里必须保证替换的素材类型与模板轨道数据的素材类型一致。
+<li> AUDIO ：音频；</li>
+<li> VIDEO ：视频；</li>
+<li> IMAGE ：图片；</li>
+<li> TEXT ：文本。</li>
+注意：这里必须保证替换的素材类型与模板轨道数据的素材类型一致。如果替换的类型为Text,，则必须保证模板轨道数据中相应卡槽的位置标记的是文本。
       */
   ReplacementType: string
 
@@ -3385,6 +3386,11 @@ export interface SlotReplacementInfo {
    * 媒体替换信息，仅当要替换的媒体类型为音频、视频、图片时有效。
    */
   MediaReplacementInfo?: MediaReplacementInfo
+
+  /**
+   * 文本替换信息，仅当要替换的卡槽类型为文本时有效。
+   */
+  TextReplacementInfo?: TextReplacementInfo
 }
 
 /**
@@ -4007,6 +4013,16 @@ export interface ImportMaterialRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
    */
   Operator?: string
+}
+
+/**
+ * 模板插槽文本替换信息。
+ */
+export interface TextReplacementInfo {
+  /**
+   * 替换的文本信息。
+   */
+  Text: string
 }
 
 /**

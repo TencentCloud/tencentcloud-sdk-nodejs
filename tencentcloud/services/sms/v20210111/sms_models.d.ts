@@ -77,6 +77,7 @@ export interface ModifySmsSignRequest {
       * 是否国际/港澳台短信：
 0：表示国内短信。
 1：表示国际/港澳台短信。
+注：需要和待修改签名International值保持一致，该参数不能直接修改国内签名到国际签名。
       */
     International: number;
     /**
@@ -106,6 +107,7 @@ export interface ModifySmsSignRequest {
 export interface AddSmsSignRequest {
     /**
       * 签名名称。
+注：不能重复申请已通过或待审核的签名。
       */
     SignName: string;
     /**

@@ -1,4 +1,17 @@
 /**
+ * 可视化节点配置
+ */
+export interface WebNodeTypeInfo {
+    /**
+      * 可视化节点个数，固定为1
+      */
+    NodeNum: number;
+    /**
+      * 可视化节点规格
+      */
+    NodeType: string;
+}
+/**
  * ES集群日志详细信息
  */
 export interface InstanceLog {
@@ -209,7 +222,7 @@ export interface CreateInstanceResponse {
     /**
       * 实例ID
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -348,7 +361,7 @@ export interface CreateInstanceRequest {
       */
     Zone: string;
     /**
-      * 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"）
+      * 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"、"7.10.1"）
       */
     EsVersion: string;
     /**
@@ -463,6 +476,10 @@ export interface CreateInstanceRequest {
       * 场景化模板类型 0：不启用 1：通用 2：日志 3：搜索
       */
     SceneType?: number;
+    /**
+      * 可视化节点配置
+      */
+    WebNodeTypeInfo?: WebNodeTypeInfo;
 }
 /**
  * 实例详细信息
@@ -702,6 +719,11 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     KibanaConfig: string;
+    /**
+      * Kibana节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KibanaNodeInfo: KibanaNodeInfo;
 }
 /**
  * DeleteInstance返回参数结构体
@@ -1055,6 +1077,35 @@ export interface UpdateRequestTargetNodeTypesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 实例Kibana节点相关信息
+ */
+export interface KibanaNodeInfo {
+    /**
+      * Kibana节点规格
+      */
+    KibanaNodeType: string;
+    /**
+      * Kibana节点个数
+      */
+    KibanaNodeNum: number;
+    /**
+      * Kibana节点CPU数
+      */
+    KibanaNodeCpuNum: number;
+    /**
+      * Kibana节点内存GB
+      */
+    KibanaNodeMemSize: number;
+    /**
+      * Kibana节点磁盘类型
+      */
+    KibanaNodeDiskType: string;
+    /**
+      * Kibana节点磁盘大小
+      */
+    KibanaNodeDiskSize: number;
 }
 /**
  * UpdateDiagnoseSettings返回参数结构体

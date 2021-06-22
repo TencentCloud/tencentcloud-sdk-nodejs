@@ -2255,6 +2255,16 @@ export interface BGPInstance {
 ]
       */
   BoundStatus: string
+
+  /**
+   * 四层防护严格级别
+   */
+  DDoSLevel: string
+
+  /**
+   * CC防护开关
+   */
+  CCEnable: number
 }
 
 /**
