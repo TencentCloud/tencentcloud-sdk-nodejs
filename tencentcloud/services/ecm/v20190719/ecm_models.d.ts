@@ -4567,17 +4567,17 @@ export interface AssociateAddressResponse {
     RequestId?: string;
 }
 /**
- * 过滤器Filter;由Name和ValueSet组成，是string的key和字符串数组的value
+ * 描述键值对过滤器，用于条件过滤查询。
  */
 export interface Filter {
     /**
-      * 过滤字段名称
-      */
-    Name: string;
-    /**
-      * 过滤字段内容数组
+      * 一个或者多个过滤值。
       */
     Values: Array<string>;
+    /**
+      * 过滤键的名称。
+      */
+    Name: string;
 }
 /**
  * CreateRouteTable请求参数结构体

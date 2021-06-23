@@ -937,6 +937,21 @@ export interface DeleteClusterAsGroupsRequest {
 }
 
 /**
+ * DescribeClusterControllers返回参数结构体
+ */
+export interface DescribeClusterControllersResponse {
+  /**
+   * 描述集群中各个控制器的状态
+   */
+  ControllerStatusSet: Array<ControllerStatus>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeExistedInstances请求参数结构体
  */
 export interface DescribeExistedInstancesRequest {
@@ -3386,6 +3401,21 @@ abnormal = 异常
 }
 
 /**
+ * 集群中控制器的状态描述
+ */
+export interface ControllerStatus {
+  /**
+   * 控制器的名字
+   */
+  Name: string
+
+  /**
+   * 控制器是否开启
+   */
+  Enabled: boolean
+}
+
+/**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
@@ -5148,4 +5178,14 @@ export interface DescribeClusterNodePoolDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeClusterControllers请求参数结构体
+ */
+export interface DescribeClusterControllersRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }

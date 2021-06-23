@@ -52,6 +52,7 @@ import {
   PrometheusTarget,
   CreateEKSClusterRequest,
   DeleteClusterAsGroupsRequest,
+  DescribeClusterControllersResponse,
   DescribeExistedInstancesRequest,
   Tag,
   DescribeRegionsResponse,
@@ -156,6 +157,7 @@ import {
   DescribePrometheusAgentsRequest,
   DescribeEnableVpcCniProgressResponse,
   PrometheusAgentOverview,
+  ControllerStatus,
   Filter,
   ModifyClusterNodePoolRequest,
   ImageInstance,
@@ -229,6 +231,7 @@ import {
   DescribeClusterAsGroupsResponse,
   InstanceUpgradePreCheckResult,
   DescribeClusterNodePoolDetailResponse,
+  DescribeClusterControllersRequest,
 } from "./tke_models"
 
 /**
@@ -838,6 +841,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterEndpointVipResponse) => void
   ): Promise<DeleteClusterEndpointVipResponse> {
     return this.request("DeleteClusterEndpointVip", req, cb)
+  }
+
+  /**
+   * 用于查询Kubernetes的各个原生控制器是否开启
+   */
+  async DescribeClusterControllers(
+    req: DescribeClusterControllersRequest,
+    cb?: (error: string, rep: DescribeClusterControllersResponse) => void
+  ): Promise<DescribeClusterControllersResponse> {
+    return this.request("DescribeClusterControllers", req, cb)
   }
 
   /**

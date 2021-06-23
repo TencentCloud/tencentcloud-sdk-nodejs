@@ -26,21 +26,25 @@ import {
   CreateWaterPrintConfigRequest,
   DDoSGeoIPBlockConfig,
   CreateBlackWhiteIpListResponse,
+  IPAlarmThresholdRelation,
   ModifyDDoSGeoIPBlockConfigRequest,
+  DescribeL7RulesBySSLCertIdResponse,
   DescribeListDDoSSpeedLimitConfigRequest,
   InstanceRelation,
   DescribeListProtocolBlockConfigResponse,
   DescribeListBGPInstancesRequest,
   DeleteDDoSSpeedLimitConfigRequest,
   CreatePacketFilterConfigResponse,
+  CreateL7RuleCertsRequest,
   DescribeListSchedulingDomainResponse,
-  DescribeListPacketFilterConfigRequest,
+  CreateIPAlarmThresholdConfigRequest,
   DescribeDefaultAlarmThresholdResponse,
   CreateDDoSAIRequest,
   DescribeListProtectThresholdConfigRequest,
   CreateWaterPrintConfigResponse,
   DescribeListBGPIPInstancesRequest,
   StaticPackRelation,
+  DescribeL7RulesBySSLCertIdRequest,
   DescribeListPacketFilterConfigResponse,
   DeleteBlackWhiteIpListResponse,
   CreateSchedulingDomainRequest,
@@ -54,7 +58,7 @@ import {
   DeleteWaterPrintKeyResponse,
   EipAddressPackRelation,
   ProtocolBlockRelation,
-  IPAlarmThresholdRelation,
+  DescribeListPacketFilterConfigRequest,
   BGPIPInstanceUsages,
   ModifyPacketFilterConfigResponse,
   DescribeListDDoSGeoIPBlockConfigRequest,
@@ -91,10 +95,13 @@ import {
   EipAddressRelation,
   DescribeListListenerResponse,
   ProtectThresholdRelation,
+  CreateL7RuleCertsResponse,
   DDoSSpeedLimitConfig,
   DescribeListProtectThresholdConfigResponse,
+  CertIdInsL7Rules,
   CreateDefaultAlarmThresholdResponse,
   DescribeListIPAlarmConfigResponse,
+  SuccessCode,
   DescribeListBGPInstancesResponse,
   DescribeListDDoSAIRequest,
   DescribeListIPAlarmConfigRequest,
@@ -105,6 +112,7 @@ import {
   BGPInstanceSpecification,
   DisassociateDDoSEipAddressRequest,
   WaterPrintRelation,
+  InsL7Rules,
   DescribeListDDoSAIResponse,
   ModifyDDoSSpeedLimitConfigRequest,
   AssociateDDoSEipAddressRequest,
@@ -112,7 +120,7 @@ import {
   SpeedValue,
   DeleteDDoSGeoIPBlockConfigRequest,
   CreateSchedulingDomainResponse,
-  DescribeDefaultAlarmThresholdRequest,
+  EipProductInfo,
   CreateDDoSAIResponse,
   DDoSGeoIPBlockConfigRelation,
   DescribeListProtocolBlockConfigRequest,
@@ -120,7 +128,6 @@ import {
   DescribeListWaterPrintConfigRequest,
   ModifyDDoSGeoIPBlockConfigResponse,
   BGPInstance,
-  CreateIPAlarmThresholdConfigRequest,
   DescribeListWaterPrintConfigResponse,
   BGPInstanceUsages,
   DeleteDDoSSpeedLimitConfigResponse,
@@ -129,7 +136,7 @@ import {
   DescribeListBlackWhiteIpListRequest,
   ModifyDDoSSpeedLimitConfigResponse,
   SchedulingDomainInfo,
-  EipProductInfo,
+  DescribeDefaultAlarmThresholdRequest,
   WaterPrintKey,
   PacketFilterRelation,
   CreatePacketFilterConfigRequest,
@@ -192,6 +199,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDDoSSpeedLimitConfigResponse) => void
   ): Promise<ModifyDDoSSpeedLimitConfigResponse> {
     return this.request("ModifyDDoSSpeedLimitConfig", req, cb)
+  }
+
+  /**
+   * 查询与证书ID对于域名匹配的七层规则
+   */
+  async DescribeL7RulesBySSLCertId(
+    req?: DescribeL7RulesBySSLCertIdRequest,
+    cb?: (error: string, rep: DescribeL7RulesBySSLCertIdResponse) => void
+  ): Promise<DescribeL7RulesBySSLCertIdResponse> {
+    return this.request("DescribeL7RulesBySSLCertId", req, cb)
   }
 
   /**
@@ -504,6 +521,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProtocolBlockConfigResponse) => void
   ): Promise<CreateProtocolBlockConfigResponse> {
     return this.request("CreateProtocolBlockConfig", req, cb)
+  }
+
+  /**
+   * 批量配置L7转发规则的证书供SSL测调用
+   */
+  async CreateL7RuleCerts(
+    req?: CreateL7RuleCertsRequest,
+    cb?: (error: string, rep: CreateL7RuleCertsResponse) => void
+  ): Promise<CreateL7RuleCertsResponse> {
+    return this.request("CreateL7RuleCerts", req, cb)
   }
 
   /**

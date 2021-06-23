@@ -732,11 +732,11 @@ export interface ClassicalTargetInfo {
  */
 export interface DescribeTargetsRequest {
     /**
-      * 负载均衡实例ID。
+      * 负载均衡实例 ID。
       */
     LoadBalancerId: string;
     /**
-      * 监听器ID列表。
+      * 监听器 ID 列表。ID 数量上限为20个。
       */
     ListenerIds?: Array<string>;
     /**
@@ -853,7 +853,7 @@ export interface DeleteLoadBalancerListenersRequest {
       */
     LoadBalancerId: string;
     /**
-      * 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器。
+      * 指定删除的监听器ID数组，最大为20个。若不填则删除负载均衡的所有监听器。
       */
     ListenerIds?: Array<string>;
 }
@@ -3413,11 +3413,11 @@ export interface DeleteLoadBalancerListenersResponse {
  */
 export interface DescribeListenersRequest {
     /**
-      * 负载均衡实例ID。
+      * 负载均衡实例 ID。
       */
     LoadBalancerId: string;
     /**
-      * 要查询的负载均衡监听器ID数组。
+      * 要查询的负载均衡监听器 ID 数组，最大为100个。
       */
     ListenerIds?: Array<string>;
     /**

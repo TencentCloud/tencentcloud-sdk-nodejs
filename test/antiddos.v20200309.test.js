@@ -68,6 +68,16 @@ it("antiddos.v20200309.ModifyDDoSSpeedLimitConfig", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeL7RulesBySSLCertId", async function () {
+    try {
+       const data = await client.DescribeL7RulesBySSLCertId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DeleteDDoSGeoIPBlockConfig", async function () {
     try {
        const data = await client.DeleteDDoSGeoIPBlockConfig({})
@@ -371,6 +381,16 @@ it("antiddos.v20200309.CreateWaterPrintKey", async function () {
 it("antiddos.v20200309.CreateProtocolBlockConfig", async function () {
     try {
        const data = await client.CreateProtocolBlockConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.CreateL7RuleCerts", async function () {
+    try {
+       const data = await client.CreateL7RuleCerts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

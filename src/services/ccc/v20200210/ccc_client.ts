@@ -134,8 +134,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取坐席用户列表（废弃）
-   */
+     * 废弃接口下架
+
+获取坐席用户列表（废弃）
+     */
   async DescribeSeatUserList(
     req: DescribeSeatUserListRequest,
     cb?: (error: string, rep: DescribeSeatUserListResponse) => void

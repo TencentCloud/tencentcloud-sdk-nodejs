@@ -132,6 +132,26 @@ export interface CreateBlackWhiteIpListResponse {
     RequestId?: string;
 }
 /**
+ * 单IP告警阈值配置
+ */
+export interface IPAlarmThresholdRelation {
+    /**
+      * 告警阈值类型，取值[
+1(入流量告警阈值)
+2(攻击清洗流量告警阈值)
+]
+      */
+    AlarmType: number;
+    /**
+      * 告警阈值，单位Mbps，取值>=0；当作为输入参数时，设置0会删除告警阈值配置；
+      */
+    AlarmThreshold: number;
+    /**
+      * 告警阈值所属的资源实例
+      */
+    InstanceDetailList: Array<InstanceRelation>;
+}
+/**
  * ModifyDDoSGeoIPBlockConfig请求参数结构体
  */
 export interface ModifyDDoSGeoIPBlockConfigRequest {
@@ -143,6 +163,19 @@ export interface ModifyDDoSGeoIPBlockConfigRequest {
       * DDoS区域封禁配置，填写参数时配置ID不能为空
       */
     DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig;
+}
+/**
+ * DescribeL7RulesBySSLCertId返回参数结构体
+ */
+export interface DescribeL7RulesBySSLCertIdResponse {
+    /**
+      * 证书规则集合
+      */
+    CertSet: Array<CertIdInsL7Rules>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeListDDoSSpeedLimitConfig请求参数结构体
@@ -251,6 +284,10 @@ export interface CreatePacketFilterConfigResponse {
     RequestId?: string;
 }
 /**
+ * CreateL7RuleCerts请求参数结构体
+ */
+export declare type CreateL7RuleCertsRequest = null;
+/**
  * DescribeListSchedulingDomain返回参数结构体
  */
 export interface DescribeListSchedulingDomainResponse {
@@ -268,25 +305,13 @@ export interface DescribeListSchedulingDomainResponse {
     RequestId?: string;
 }
 /**
- * DescribeListPacketFilterConfig请求参数结构体
+ * CreateIPAlarmThresholdConfig请求参数结构体
  */
-export interface DescribeListPacketFilterConfigRequest {
+export interface CreateIPAlarmThresholdConfigRequest {
     /**
-      * 页起始偏移，取值为(页码-1)*一页条数
+      * IP告警阈值配置列表
       */
-    Offset: number;
-    /**
-      * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
-      */
-    Limit: number;
-    /**
-      * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
-      */
-    FilterInstanceId: string;
-    /**
-      * IP搜索
-      */
-    FilterIp?: string;
+    IpAlarmThresholdConfigList: Array<IPAlarmThresholdRelation>;
 }
 /**
  * DescribeDefaultAlarmThreshold返回参数结构体
@@ -432,6 +457,10 @@ export interface StaticPackRelation {
       */
     CurDeadline: string;
 }
+/**
+ * DescribeL7RulesBySSLCertId请求参数结构体
+ */
+export declare type DescribeL7RulesBySSLCertIdRequest = null;
 /**
  * DescribeListPacketFilterConfig返回参数结构体
  */
@@ -674,24 +703,25 @@ export interface ProtocolBlockRelation {
     InstanceDetailList: Array<InstanceRelation>;
 }
 /**
- * 单IP告警阈值配置
+ * DescribeListPacketFilterConfig请求参数结构体
  */
-export interface IPAlarmThresholdRelation {
+export interface DescribeListPacketFilterConfigRequest {
     /**
-      * 告警阈值类型，取值[
-1(入流量告警阈值)
-2(攻击清洗流量告警阈值)
-]
+      * 页起始偏移，取值为(页码-1)*一页条数
       */
-    AlarmType: number;
+    Offset: number;
     /**
-      * 告警阈值，单位Mbps，取值>=0；当作为输入参数时，设置0会删除告警阈值配置；
+      * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
       */
-    AlarmThreshold: number;
+    Limit: number;
     /**
-      * 告警阈值所属的资源实例
+      * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
       */
-    InstanceDetailList: Array<InstanceRelation>;
+    FilterInstanceId: string;
+    /**
+      * IP搜索
+      */
+    FilterIp?: string;
 }
 /**
  * 高防IP资产实例的使用信息统计
@@ -1283,6 +1313,19 @@ off(关闭)
     ListenerCcThresholdList: Array<ListenerCcThreholdConfig>;
 }
 /**
+ * CreateL7RuleCerts返回参数结构体
+ */
+export interface CreateL7RuleCertsResponse {
+    /**
+      * 成功码
+      */
+    Success: SuccessCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DDoS访问限速配置
  */
 export interface DDoSSpeedLimitConfig {
@@ -1339,6 +1382,19 @@ export interface DescribeListProtectThresholdConfigResponse {
     RequestId?: string;
 }
 /**
+ * 使用证书的规则集合
+ */
+export interface CertIdInsL7Rules {
+    /**
+      * 使用证书的规则列表
+      */
+    L7Rules: Array<InsL7Rules>;
+    /**
+      * 证书ID
+      */
+    CertId: string;
+}
+/**
  * CreateDefaultAlarmThreshold返回参数结构体
  */
 export interface CreateDefaultAlarmThresholdResponse {
@@ -1363,6 +1419,19 @@ export interface DescribeListIPAlarmConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 操作返回码，只用于返回成功的情况
+ */
+export interface SuccessCode {
+    /**
+      * 描述
+      */
+    Message: string;
+    /**
+      * 成功/错误码
+      */
+    Code: string;
 }
 /**
  * DescribeListBGPInstances返回参数结构体
@@ -1655,6 +1724,39 @@ export interface WaterPrintRelation {
     InstanceDetailList: Array<InstanceRelation>;
 }
 /**
+ * 实例7层规则
+ */
+export interface InsL7Rules {
+    /**
+      * 规则状态，0: 正常运行中, 1: 配置规则中(配置生效中), 2: 配置规则失败（配置生效失败）, 3: 删除规则中(删除生效中), 5: 删除规则失败(删除失败), 6: 等待添加规则, 7: 等待删除规则, 8: 等待上传证书, 9: 规则对应的资源不存在，被隔离, 10:等待修改规则, 11:配置修改中
+      */
+    Status: number;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 协议
+      */
+    Protocol: string;
+    /**
+      * 实例ID
+      */
+    InsId: string;
+    /**
+      * 用户AppID
+      */
+    AppId: string;
+    /**
+      * 高防端口
+      */
+    VirtualPort: string;
+    /**
+      * 证书ID
+      */
+    SSLId: string;
+}
+/**
  * DescribeListDDoSAI返回参数结构体
  */
 export interface DescribeListDDoSAIResponse {
@@ -1765,23 +1867,35 @@ export interface CreateSchedulingDomainResponse {
     RequestId?: string;
 }
 /**
- * DescribeDefaultAlarmThreshold请求参数结构体
+ * EIP所属的云产品信息
  */
-export interface DescribeDefaultAlarmThresholdRequest {
+export interface EipProductInfo {
     /**
-      * 产品类型，取值[
-bgp(表示高防包产品)
-bgpip(表示高防IP产品)
+      * IP地址
+      */
+    Ip: string;
+    /**
+      * 云产品类型，取值[
+public（CVM产品），
+bm（黑石产品），
+eni（弹性网卡），
+vpngw（VPN网关），
+ natgw（NAT网关），
+waf（Web应用安全产品），
+fpc（金融产品），
+gaap（GAAP产品）,
+other(托管IP)
 ]
       */
-    InstanceType: string;
+    BizType: string;
     /**
-      * 告警阈值类型搜索，取值[
-1(入流量告警阈值)
-2(攻击清洗流量告警阈值)
-]
+      * 云产品子类型，取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（黑石弹性IP）]
       */
-    FilterAlarmType: number;
+    DeviceType: string;
+    /**
+      * IP所属的云产品实例ID，例如是弹性网卡的IP，InstanceId为弹性网卡的ID(eni-*); 如果是托管IP没有对应的资源实例ID,InstanceId为""
+      */
+    InstanceId: string;
 }
 /**
  * CreateDDoSAI返回参数结构体
@@ -1935,15 +2049,6 @@ export interface BGPInstance {
     CCEnable: number;
 }
 /**
- * CreateIPAlarmThresholdConfig请求参数结构体
- */
-export interface CreateIPAlarmThresholdConfigRequest {
-    /**
-      * IP告警阈值配置列表
-      */
-    IpAlarmThresholdConfigList: Array<IPAlarmThresholdRelation>;
-}
-/**
  * DescribeListWaterPrintConfig返回参数结构体
  */
 export interface DescribeListWaterPrintConfigResponse {
@@ -2077,35 +2182,23 @@ export interface SchedulingDomainInfo {
     UsrDomainName: string;
 }
 /**
- * EIP所属的云产品信息
+ * DescribeDefaultAlarmThreshold请求参数结构体
  */
-export interface EipProductInfo {
+export interface DescribeDefaultAlarmThresholdRequest {
     /**
-      * IP地址
-      */
-    Ip: string;
-    /**
-      * 云产品类型，取值[
-public（CVM产品），
-bm（黑石产品），
-eni（弹性网卡），
-vpngw（VPN网关），
- natgw（NAT网关），
-waf（Web应用安全产品），
-fpc（金融产品），
-gaap（GAAP产品）,
-other(托管IP)
+      * 产品类型，取值[
+bgp(表示高防包产品)
+bgpip(表示高防IP产品)
 ]
       */
-    BizType: string;
+    InstanceType: string;
     /**
-      * 云产品子类型，取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（黑石弹性IP）]
+      * 告警阈值类型搜索，取值[
+1(入流量告警阈值)
+2(攻击清洗流量告警阈值)
+]
       */
-    DeviceType: string;
-    /**
-      * IP所属的云产品实例ID，例如是弹性网卡的IP，InstanceId为弹性网卡的ID(eni-*); 如果是托管IP没有对应的资源实例ID,InstanceId为""
-      */
-    InstanceId: string;
+    FilterAlarmType: number;
 }
 /**
  * 生成的水印密钥

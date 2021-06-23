@@ -234,7 +234,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlockIPList", req, cb);
     }
     /**
-     * DescribeListeners 接口可根据负载均衡器 ID，监听器的协议或端口作为过滤条件获取监听器列表。如果不指定任何过滤条件，则返回该负载均衡实例下的所有监听器。
+     * DescribeListeners 接口可根据负载均衡器 ID、监听器的协议或端口作为过滤条件获取监听器列表。如果不指定任何过滤条件，则返回该负载均衡实例下的所有监听器。
      */
     async DescribeListeners(req, cb) {
         return this.request("DescribeListeners", req, cb);

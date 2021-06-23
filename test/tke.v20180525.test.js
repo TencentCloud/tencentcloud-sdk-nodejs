@@ -618,6 +618,16 @@ it("tke.v20180525.DeleteClusterEndpointVip", async function () {
     }
 })
 
+it("tke.v20180525.DescribeClusterControllers", async function () {
+    try {
+       const data = await client.DescribeClusterControllers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DeleteClusterInstances", async function () {
     try {
        const data = await client.DeleteClusterInstances({})

@@ -70,7 +70,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSDKLoginToken", req, cb);
     }
     /**
-     * 获取坐席用户列表（废弃）
+     * 废弃接口下架
+
+获取坐席用户列表（废弃）
      */
     async DescribeSeatUserList(req, cb) {
         return this.request("DescribeSeatUserList", req, cb);

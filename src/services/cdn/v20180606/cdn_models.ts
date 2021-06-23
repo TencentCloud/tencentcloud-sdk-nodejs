@@ -1596,6 +1596,11 @@ export interface EnableCachesRequest {
    * 解封 URL 列表
    */
   Urls: Array<string>
+
+  /**
+   * URL封禁日期
+   */
+  Date?: string
 }
 
 /**
@@ -4145,6 +4150,11 @@ overseas: 海外节点
 global: 全球节点
       */
   Area?: string
+
+  /**
+   * 是否以IP段的格式返回。
+   */
+  Segment?: boolean
 }
 
 /**
@@ -5626,7 +5636,7 @@ export interface EnableCachesResponse {
       * 结果列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CacheOptResult?: CacheOptResult
+  CacheOptResult: CacheOptResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6079,12 +6089,12 @@ export interface DescribeIpStatusResponse {
   /**
    * 节点列表
    */
-  Ips?: Array<IpStatus>
+  Ips: Array<IpStatus>
 
   /**
    * 节点总个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

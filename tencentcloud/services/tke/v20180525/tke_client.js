@@ -388,6 +388,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterEndpointVip", req, cb);
     }
     /**
+     * 用于查询Kubernetes的各个原生控制器是否开启
+     */
+    async DescribeClusterControllers(req, cb) {
+        return this.request("DescribeClusterControllers", req, cb);
+    }
+    /**
      * 删除集群中的实例
      */
     async DeleteClusterInstances(req, cb) {

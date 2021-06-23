@@ -419,12 +419,12 @@ export interface DescribeUserInformationResponse {
     /**
       * 返回的用户总条数
       */
-    Total?: number;
+    Total: number;
     /**
       * 用户信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UserList?: Array<UserInformation>;
+    UserList: Array<UserInformation>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

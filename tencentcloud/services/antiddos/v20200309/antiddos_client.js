@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDDoSSpeedLimitConfig", req, cb);
     }
     /**
+     * 查询与证书ID对于域名匹配的七层规则
+     */
+    async DescribeL7RulesBySSLCertId(req, cb) {
+        return this.request("DescribeL7RulesBySSLCertId", req, cb);
+    }
+    /**
      * 删除DDoS防护的区域封禁配置
      */
     async DeleteDDoSGeoIPBlockConfig(req, cb) {
@@ -244,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateProtocolBlockConfig(req, cb) {
         return this.request("CreateProtocolBlockConfig", req, cb);
+    }
+    /**
+     * 批量配置L7转发规则的证书供SSL测调用
+     */
+    async CreateL7RuleCerts(req, cb) {
+        return this.request("CreateL7RuleCerts", req, cb);
     }
     /**
      * 修改DDoS防护的区域封禁配置
