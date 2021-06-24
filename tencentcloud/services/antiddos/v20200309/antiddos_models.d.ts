@@ -65,6 +65,31 @@ https(HTTPS协议)
     ProxyType: string;
 }
 /**
+ * CreateBoundIP请求参数结构体
+ */
+export interface CreateBoundIPRequest {
+    /**
+      * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包）
+      */
+    Business: string;
+    /**
+      * 资源实例ID
+      */
+    Id: string;
+    /**
+      * 绑定到资源实例的IP数组，当资源实例为高防包(独享包)时，数组只允许填1个IP；当没有要绑定的IP时可以为空数组；但是BoundDevList和UnBoundDevList至少有一个不为空；
+      */
+    BoundDevList?: Array<BoundIpInfo>;
+    /**
+      * 与资源实例解绑的IP数组，当资源实例为高防包(独享包)时，数组只允许填1个IP；当没有要解绑的IP时可以为空数组；但是BoundDevList和UnBoundDevList至少有一个不为空；
+      */
+    UnBoundDevList?: Array<BoundIpInfo>;
+    /**
+      * 已弃用，不填
+      */
+    CopyPolicy?: string;
+}
+/**
  * DescribeListSchedulingDomain请求参数结构体
  */
 export interface DescribeListSchedulingDomainRequest {
@@ -286,7 +311,16 @@ export interface CreatePacketFilterConfigResponse {
 /**
  * CreateL7RuleCerts请求参数结构体
  */
-export declare type CreateL7RuleCertsRequest = null;
+export interface CreateL7RuleCertsRequest {
+    /**
+      * SSL证书ID
+      */
+    CertId: string;
+    /**
+      * L7域名转发规则列表
+      */
+    L7Rules: Array<InsL7Rules>;
+}
 /**
  * DescribeListSchedulingDomain返回参数结构体
  */
@@ -460,7 +494,16 @@ export interface StaticPackRelation {
 /**
  * DescribeL7RulesBySSLCertId请求参数结构体
  */
-export declare type DescribeL7RulesBySSLCertIdRequest = null;
+export interface DescribeL7RulesBySSLCertIdRequest {
+    /**
+      * 域名状态，可取bindable, binded, opened, closed, all，all表示全部状态
+      */
+    Status: string;
+    /**
+      * 证书ID列表
+      */
+    CertIds: Array<string>;
+}
 /**
  * DescribeListPacketFilterConfig返回参数结构体
  */
@@ -491,6 +534,31 @@ export interface DeleteBlackWhiteIpListResponse {
  * CreateSchedulingDomain请求参数结构体
  */
 export declare type CreateSchedulingDomainRequest = null;
+/**
+ * 高防包绑定IP对象
+ */
+export interface BoundIpInfo {
+    /**
+      * IP地址
+      */
+    Ip: string;
+    /**
+      * 绑定的产品分类，取值[public（CVM、CLB产品），bm（黑石产品），eni（弹性网卡），vpngw（VPN网关）， natgw（NAT网关），waf（Web应用安全产品），fpc（金融产品），gaap（GAAP产品）, other(托管IP)]
+      */
+    BizType?: string;
+    /**
+      * IP所属的资源实例ID，当绑定新IP时必须填写此字段；例如是弹性网卡的IP，则InstanceId填写弹性网卡的ID(eni-*); 如果绑定的是托管IP没有对应的资源实例ID，请填写"none";
+      */
+    InstanceId?: string;
+    /**
+      * 产品分类下的子类型，取值[cvm（CVM），lb（负载均衡器），eni（弹性网卡），vpngw（VPN），natgw（NAT），waf（WAF），fpc（金融），gaap（GAAP），other（托管IP），eip（黑石弹性IP）]
+      */
+    DeviceType?: string;
+    /**
+      * 运营商，0：电信；1：联通；2：移动；5：BGP
+      */
+    IspCode?: number;
+}
 /**
  * DisassociateDDoSEipAddress返回参数结构体
  */
@@ -634,13 +702,17 @@ export interface ModifyDomainUsrNameResponse {
     RequestId?: string;
 }
 /**
- * CreateWaterPrintKey请求参数结构体
+ * DisassociateDDoSEipAddress请求参数结构体
  */
-export interface CreateWaterPrintKeyRequest {
+export interface DisassociateDDoSEipAddressRequest {
     /**
-      * 资源实例ID
+      * 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。
       */
     InstanceId: string;
+    /**
+      * 资源实例ID对应的高防弹性公网IP。
+      */
+    Eip: string;
 }
 /**
  * 黑白名单IP
@@ -1698,17 +1770,13 @@ export interface BGPInstanceSpecification {
     AutoRenewFlag: number;
 }
 /**
- * DisassociateDDoSEipAddress请求参数结构体
+ * CreateWaterPrintKey请求参数结构体
  */
-export interface DisassociateDDoSEipAddressRequest {
+export interface CreateWaterPrintKeyRequest {
     /**
-      * 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。
+      * 资源实例ID
       */
     InstanceId: string;
-    /**
-      * 资源实例ID对应的高防弹性公网IP。
-      */
-    Eip: string;
 }
 /**
  * 水印配置相关信息
@@ -1823,6 +1891,19 @@ export interface CreateBlackWhiteIpListRequest {
       * IP类型，取值[black(黑名单IP), white(白名单IP)]
       */
     Type: string;
+}
+/**
+ * CreateBoundIP返回参数结构体
+ */
+export interface CreateBoundIPResponse {
+    /**
+      * 成功码
+      */
+    Success: SuccessCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 限速值类型，例如：包速率pps、带宽bps

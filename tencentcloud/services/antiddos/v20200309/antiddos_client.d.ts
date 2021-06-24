@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDefaultAlarmThresholdRequest, DescribeListBGPIPInstancesResponse, DescribeBlackWhiteIpListResponse, DescribeListSchedulingDomainRequest, CreateWaterPrintConfigRequest, CreateBlackWhiteIpListResponse, ModifyDDoSGeoIPBlockConfigRequest, DescribeL7RulesBySSLCertIdResponse, DescribeListDDoSSpeedLimitConfigRequest, DescribeListProtocolBlockConfigResponse, DescribeListBGPInstancesRequest, DeleteDDoSSpeedLimitConfigRequest, CreatePacketFilterConfigResponse, CreateL7RuleCertsRequest, DescribeListSchedulingDomainResponse, CreateIPAlarmThresholdConfigRequest, DescribeDefaultAlarmThresholdResponse, CreateDDoSAIRequest, DescribeListProtectThresholdConfigRequest, CreateWaterPrintConfigResponse, DescribeListBGPIPInstancesRequest, DescribeL7RulesBySSLCertIdRequest, DescribeListPacketFilterConfigResponse, DeleteBlackWhiteIpListResponse, CreateSchedulingDomainRequest, DisassociateDDoSEipAddressResponse, DeleteBlackWhiteIpListRequest, ModifyDomainUsrNameResponse, CreateWaterPrintKeyRequest, DeleteWaterPrintKeyResponse, DescribeListPacketFilterConfigRequest, ModifyPacketFilterConfigResponse, DescribeListDDoSGeoIPBlockConfigRequest, CreateDDoSSpeedLimitConfigRequest, CreateDDoSGeoIPBlockConfigRequest, CreateProtocolBlockConfigRequest, DeleteWaterPrintKeyRequest, AssociateDDoSEipAddressResponse, ModifyPacketFilterConfigRequest, DescribeBlackWhiteIpListRequest, ModifyDomainUsrNameRequest, CreateDDoSSpeedLimitConfigResponse, DeletePacketFilterConfigRequest, DescribeListDDoSGeoIPBlockConfigResponse, DescribeListListenerRequest, DeleteWaterPrintConfigResponse, DeletePacketFilterConfigResponse, CreateProtocolBlockConfigResponse, CreateIPAlarmThresholdConfigResponse, DeleteWaterPrintConfigRequest, DescribeListBlackWhiteIpListResponse, DescribeListDDoSSpeedLimitConfigResponse, CreateDDoSGeoIPBlockConfigResponse, DescribeListListenerResponse, CreateL7RuleCertsResponse, DescribeListProtectThresholdConfigResponse, CreateDefaultAlarmThresholdResponse, DescribeListIPAlarmConfigResponse, DescribeListBGPInstancesResponse, DescribeListDDoSAIRequest, DescribeListIPAlarmConfigRequest, DisassociateDDoSEipAddressRequest, DescribeListDDoSAIResponse, ModifyDDoSSpeedLimitConfigRequest, AssociateDDoSEipAddressRequest, CreateBlackWhiteIpListRequest, DeleteDDoSGeoIPBlockConfigRequest, CreateSchedulingDomainResponse, CreateDDoSAIResponse, DescribeListProtocolBlockConfigRequest, DescribeListWaterPrintConfigRequest, ModifyDDoSGeoIPBlockConfigResponse, DescribeListWaterPrintConfigResponse, DeleteDDoSSpeedLimitConfigResponse, CreateWaterPrintKeyResponse, DeleteDDoSGeoIPBlockConfigResponse, DescribeListBlackWhiteIpListRequest, ModifyDDoSSpeedLimitConfigResponse, DescribeDefaultAlarmThresholdRequest, CreatePacketFilterConfigRequest } from "./antiddos_models";
+import { CreateDefaultAlarmThresholdRequest, DescribeListBGPIPInstancesResponse, DescribeBlackWhiteIpListResponse, CreateBoundIPRequest, DescribeListSchedulingDomainRequest, CreateWaterPrintConfigRequest, CreateBlackWhiteIpListResponse, ModifyDDoSGeoIPBlockConfigRequest, DescribeL7RulesBySSLCertIdResponse, DescribeListDDoSSpeedLimitConfigRequest, DescribeListProtocolBlockConfigResponse, DescribeListBGPInstancesRequest, DeleteDDoSSpeedLimitConfigRequest, CreatePacketFilterConfigResponse, CreateL7RuleCertsRequest, DescribeListSchedulingDomainResponse, CreateIPAlarmThresholdConfigRequest, DescribeDefaultAlarmThresholdResponse, CreateDDoSAIRequest, DescribeListProtectThresholdConfigRequest, CreateWaterPrintConfigResponse, DescribeListBGPIPInstancesRequest, DescribeL7RulesBySSLCertIdRequest, DescribeListPacketFilterConfigResponse, DeleteBlackWhiteIpListResponse, CreateSchedulingDomainRequest, DisassociateDDoSEipAddressResponse, DeleteBlackWhiteIpListRequest, ModifyDomainUsrNameResponse, DisassociateDDoSEipAddressRequest, DeleteWaterPrintKeyResponse, DescribeListPacketFilterConfigRequest, ModifyPacketFilterConfigResponse, DescribeListDDoSGeoIPBlockConfigRequest, CreateDDoSSpeedLimitConfigRequest, CreateDDoSGeoIPBlockConfigRequest, CreateProtocolBlockConfigRequest, DeleteWaterPrintKeyRequest, AssociateDDoSEipAddressResponse, ModifyPacketFilterConfigRequest, DescribeBlackWhiteIpListRequest, ModifyDomainUsrNameRequest, CreateDDoSSpeedLimitConfigResponse, DeletePacketFilterConfigRequest, DescribeListDDoSGeoIPBlockConfigResponse, DescribeListListenerRequest, DeleteWaterPrintConfigResponse, DeletePacketFilterConfigResponse, CreateProtocolBlockConfigResponse, CreateIPAlarmThresholdConfigResponse, DeleteWaterPrintConfigRequest, DescribeListBlackWhiteIpListResponse, DescribeListDDoSSpeedLimitConfigResponse, CreateDDoSGeoIPBlockConfigResponse, DescribeListListenerResponse, CreateL7RuleCertsResponse, DescribeListProtectThresholdConfigResponse, CreateDefaultAlarmThresholdResponse, DescribeListIPAlarmConfigResponse, DescribeListBGPInstancesResponse, DescribeListDDoSAIRequest, DescribeListIPAlarmConfigRequest, CreateWaterPrintKeyRequest, DescribeListDDoSAIResponse, ModifyDDoSSpeedLimitConfigRequest, AssociateDDoSEipAddressRequest, CreateBlackWhiteIpListRequest, CreateBoundIPResponse, DeleteDDoSGeoIPBlockConfigRequest, CreateSchedulingDomainResponse, CreateDDoSAIResponse, DescribeListProtocolBlockConfigRequest, DescribeListWaterPrintConfigRequest, ModifyDDoSGeoIPBlockConfigResponse, DescribeListWaterPrintConfigResponse, DeleteDDoSSpeedLimitConfigResponse, CreateWaterPrintKeyResponse, DeleteDDoSGeoIPBlockConfigResponse, DescribeListBlackWhiteIpListRequest, ModifyDDoSSpeedLimitConfigResponse, DescribeDefaultAlarmThresholdRequest, CreatePacketFilterConfigRequest } from "./antiddos_models";
 /**
  * antiddos client
  * @class
@@ -30,7 +30,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询与证书ID对于域名匹配的七层规则
      */
-    DescribeL7RulesBySSLCertId(req?: DescribeL7RulesBySSLCertIdRequest, cb?: (error: string, rep: DescribeL7RulesBySSLCertIdResponse) => void): Promise<DescribeL7RulesBySSLCertIdResponse>;
+    DescribeL7RulesBySSLCertId(req: DescribeL7RulesBySSLCertIdRequest, cb?: (error: string, rep: DescribeL7RulesBySSLCertIdResponse) => void): Promise<DescribeL7RulesBySSLCertIdResponse>;
     /**
      * 删除DDoS防护的区域封禁配置
      */
@@ -68,6 +68,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (DisassociateDDoSEipAddress) 用于解绑高防弹性公网IP。
      */
     DisassociateDDoSEipAddress(req: DisassociateDDoSEipAddressRequest, cb?: (error: string, rep: DisassociateDDoSEipAddressResponse) => void): Promise<DisassociateDDoSEipAddressResponse>;
+    /**
+     * 绑定IP到高防包实例，支持独享包、共享包；需要注意的是此接口绑定或解绑IP是异步接口，当处于绑定或解绑中时，则不允许再进行绑定或解绑，需要等待当前绑定或解绑完成。
+     */
+    CreateBoundIP(req: CreateBoundIPRequest, cb?: (error: string, rep: CreateBoundIPResponse) => void): Promise<CreateBoundIPResponse>;
     /**
      * 获取智能调度域名列表
      */
@@ -160,7 +164,7 @@ export declare class Client extends AbstractClient {
     /**
      * 批量配置L7转发规则的证书供SSL测调用
      */
-    CreateL7RuleCerts(req?: CreateL7RuleCertsRequest, cb?: (error: string, rep: CreateL7RuleCertsResponse) => void): Promise<CreateL7RuleCertsResponse>;
+    CreateL7RuleCerts(req: CreateL7RuleCertsRequest, cb?: (error: string, rep: CreateL7RuleCertsResponse) => void): Promise<CreateL7RuleCertsResponse>;
     /**
      * 修改DDoS防护的区域封禁配置
      */

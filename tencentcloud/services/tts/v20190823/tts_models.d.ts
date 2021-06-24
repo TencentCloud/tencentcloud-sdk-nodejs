@@ -122,7 +122,7 @@ export interface CreateTtsTaskRequest {
       */
     SampleRate?: number;
     /**
-      * 返回音频格式，可取值：mp3（默认），mp3，pcm
+      * 返回音频格式，可取值：mp3（默认），wav，pcm
       */
     Codec?: string;
     /**

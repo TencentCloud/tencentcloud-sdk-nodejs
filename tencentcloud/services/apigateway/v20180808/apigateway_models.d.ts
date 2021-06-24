@@ -1920,6 +1920,14 @@ export interface DomainSetList {
       * 网络类型（'INNER' 或 'OUTER'）。
       */
     NetType: string;
+    /**
+      * 是否将HTTP请求强制跳转 HTTPS，默认为false。参数为 true时，API网关会将所有使用该自定义域名的 HTTP 协议的请求重定向至 HTTPS 协议进行转发。
+      */
+    IsForcedHttps: boolean;
+    /**
+      * 域名备案注册状态
+      */
+    RegistrationStatus: boolean;
 }
 /**
  * 策略列表

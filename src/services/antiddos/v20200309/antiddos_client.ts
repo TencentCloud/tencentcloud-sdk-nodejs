@@ -22,6 +22,7 @@ import {
   DescribeListBGPIPInstancesResponse,
   DescribeBlackWhiteIpListResponse,
   ProxyTypeInfo,
+  CreateBoundIPRequest,
   DescribeListSchedulingDomainRequest,
   CreateWaterPrintConfigRequest,
   DDoSGeoIPBlockConfig,
@@ -48,12 +49,13 @@ import {
   DescribeListPacketFilterConfigResponse,
   DeleteBlackWhiteIpListResponse,
   CreateSchedulingDomainRequest,
+  BoundIpInfo,
   DisassociateDDoSEipAddressResponse,
   BGPIPInstance,
   DeleteBlackWhiteIpListRequest,
   SourceServer,
   ModifyDomainUsrNameResponse,
-  CreateWaterPrintKeyRequest,
+  DisassociateDDoSEipAddressRequest,
   BlackWhiteIpRelation,
   DeleteWaterPrintKeyResponse,
   EipAddressPackRelation,
@@ -110,13 +112,14 @@ import {
   DefaultAlarmThreshold,
   ForwardListener,
   BGPInstanceSpecification,
-  DisassociateDDoSEipAddressRequest,
+  CreateWaterPrintKeyRequest,
   WaterPrintRelation,
   InsL7Rules,
   DescribeListDDoSAIResponse,
   ModifyDDoSSpeedLimitConfigRequest,
   AssociateDDoSEipAddressRequest,
   CreateBlackWhiteIpListRequest,
+  CreateBoundIPResponse,
   SpeedValue,
   DeleteDDoSGeoIPBlockConfigRequest,
   CreateSchedulingDomainResponse,
@@ -205,7 +208,7 @@ export class Client extends AbstractClient {
    * 查询与证书ID对于域名匹配的七层规则
    */
   async DescribeL7RulesBySSLCertId(
-    req?: DescribeL7RulesBySSLCertIdRequest,
+    req: DescribeL7RulesBySSLCertIdRequest,
     cb?: (error: string, rep: DescribeL7RulesBySSLCertIdResponse) => void
   ): Promise<DescribeL7RulesBySSLCertIdResponse> {
     return this.request("DescribeL7RulesBySSLCertId", req, cb)
@@ -300,6 +303,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateDDoSEipAddressResponse) => void
   ): Promise<DisassociateDDoSEipAddressResponse> {
     return this.request("DisassociateDDoSEipAddress", req, cb)
+  }
+
+  /**
+   * 绑定IP到高防包实例，支持独享包、共享包；需要注意的是此接口绑定或解绑IP是异步接口，当处于绑定或解绑中时，则不允许再进行绑定或解绑，需要等待当前绑定或解绑完成。
+   */
+  async CreateBoundIP(
+    req: CreateBoundIPRequest,
+    cb?: (error: string, rep: CreateBoundIPResponse) => void
+  ): Promise<CreateBoundIPResponse> {
+    return this.request("CreateBoundIP", req, cb)
   }
 
   /**
@@ -527,7 +540,7 @@ export class Client extends AbstractClient {
    * 批量配置L7转发规则的证书供SSL测调用
    */
   async CreateL7RuleCerts(
-    req?: CreateL7RuleCertsRequest,
+    req: CreateL7RuleCertsRequest,
     cb?: (error: string, rep: CreateL7RuleCertsResponse) => void
   ): Promise<CreateL7RuleCertsResponse> {
     return this.request("CreateL7RuleCerts", req, cb)

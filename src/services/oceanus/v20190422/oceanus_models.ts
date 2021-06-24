@@ -273,6 +273,16 @@ export interface CreateJobConfigRequest {
    * 是否采集作业日志
    */
   LogCollect?: boolean
+
+  /**
+   * JobManager规格
+   */
+  JobManagerSpec?: number
+
+  /**
+   * TaskManager规格
+   */
+  TaskManagerSpec?: number
 }
 
 /**
@@ -1003,7 +1013,7 @@ export interface JobV1 {
   Name: string
 
   /**
-      * 作业类型
+      * 作业类型，1：sql作业，2：Jar作业
 注意：此字段可能返回 null，表示取不到有效值。
       */
   JobType: number
@@ -1121,6 +1131,12 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterStatus: number
+
+  /**
+      * 细粒度下的运行的CU数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunningCu: number
 }
 
 /**
@@ -1207,6 +1223,18 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxParallelism: number
+
+  /**
+      * JobManager规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobManagerSpec: number
+
+  /**
+      * TaskManager规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskManagerSpec: number
 }
 
 /**

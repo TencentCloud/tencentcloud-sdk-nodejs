@@ -615,12 +615,12 @@ export interface ActivityDetail {
       */
     ActivityType: number;
     /**
-      * 活动开始时间，单位：秒
+      * 活动开始时间戳，单位：秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StartTime: number;
     /**
-      * 活动结束时间，单位：秒
+      * 活动结束时间戳，单位：秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EndTime: number;
@@ -635,7 +635,7 @@ export interface ActivityDetail {
       */
     PrivacyAgreementId: string;
     /**
-      * 活动更新时间，单位：秒
+      * 活动更新时间戳，单位：秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime: number;

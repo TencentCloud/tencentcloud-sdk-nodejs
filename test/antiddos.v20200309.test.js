@@ -168,6 +168,16 @@ it("antiddos.v20200309.DisassociateDDoSEipAddress", async function () {
     }
 })
 
+it("antiddos.v20200309.CreateBoundIP", async function () {
+    try {
+       const data = await client.CreateBoundIP({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeListSchedulingDomain", async function () {
     try {
        const data = await client.DescribeListSchedulingDomain({})
