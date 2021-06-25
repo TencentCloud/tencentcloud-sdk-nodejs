@@ -583,6 +583,16 @@ export interface CreateAlarmPolicyRequest {
    * 触发任务列表
    */
   TriggerTasks?: Array<AlarmPolicyTriggerTask>
+
+  /**
+   * 全局过滤条件
+   */
+  Filter?: AlarmPolicyFilter
+
+  /**
+   * 聚合维度列表，指定按哪些维度 key 来做 group by
+   */
+  GroupBy?: Array<string>
 }
 
 /**
@@ -592,7 +602,7 @@ export interface DescribeAlarmEventsResponse {
   /**
    * 告警事件列表
    */
-  Events?: Array<AlarmEvent>
+  Events: Array<AlarmEvent>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2354,6 +2364,16 @@ export interface ModifyAlarmPolicyConditionRequest {
    * 事件触发条件
    */
   EventCondition?: AlarmPolicyEventCondition
+
+  /**
+   * 全局过滤条件
+   */
+  Filter?: AlarmPolicyFilter
+
+  /**
+   * 聚合维度列表，指定按哪些维度 key 来做 group by
+   */
+  GroupBy?: Array<string>
 }
 
 /**
@@ -3749,6 +3769,11 @@ export interface DescribeAlarmEventsRequest {
    * 告警策略类型，由 DescribeAllNamespaces 获得，例如 cvm_device
    */
   Namespace: string
+
+  /**
+   * 监控类型，如 MT_QCE。如果不填默认为 MT_QCE。
+   */
+  MonitorType?: string
 }
 
 /**

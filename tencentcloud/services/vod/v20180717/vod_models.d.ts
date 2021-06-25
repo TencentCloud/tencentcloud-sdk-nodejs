@@ -6318,7 +6318,7 @@ export interface CreateAIRecognitionTemplateResponse {
     /**
       * 视频内容识别模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11679,7 +11679,7 @@ export interface FaceConfigureInfoForUpdate {
     DefaultLibraryLabelSet?: Array<string>;
     /**
       * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
       */
     UserDefineLibraryLabelSet?: Array<string>;
     /**
@@ -12198,7 +12198,7 @@ export interface FaceConfigureInfo {
     DefaultLibraryLabelSet?: Array<string>;
     /**
       * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
       */
     UserDefineLibraryLabelSet?: Array<string>;
     /**

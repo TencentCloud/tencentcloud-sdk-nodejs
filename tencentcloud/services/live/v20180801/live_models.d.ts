@@ -1176,23 +1176,23 @@ export interface DescribeLiveTranscodeDetailInfoResponse {
     /**
       * 统计数据列表。
       */
-    DataInfoList?: Array<TranscodeDetailInfo>;
+    DataInfoList: Array<TranscodeDetailInfo>;
     /**
       * 页码。
       */
-    PageNum?: number;
+    PageNum: number;
     /**
       * 每页个数。
       */
-    PageSize?: number;
+    PageSize: number;
     /**
       * 总个数。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 总页数。
       */
-    TotalPage?: number;
+    TotalPage: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4185,7 +4185,7 @@ export interface DescribeLiveTranscodeDetailInfoRequest {
     /**
       * 查询时间，北京时间，
 格式：yyyymmdd。
-注意：支持查询近1个月内某天的详细数据。
+注意：支持查询近1个月内某天的详细数据，截止到昨天。
       */
     DayTime?: string;
     /**
@@ -4207,7 +4207,7 @@ export interface DescribeLiveTranscodeDetailInfoRequest {
     /**
       * 结束天时间，北京时间，
 格式：yyyymmdd。
-注意：支持查询近1个月内的详细数据，注意DayTime 与（StartDayTime，EndDayTime）必须要传一个，如果都传，会以DayTime为准 。
+注意：支持查询近1个月内的详细数据，截止到昨天，注意DayTime 与（StartDayTime，EndDayTime）必须要传一个，如果都传，会以DayTime为准 。
       */
     EndDayTime?: string;
 }
@@ -4802,13 +4802,13 @@ export interface RecordParam {
     /**
       * 录制间隔。
 单位秒，默认：1800。
-取值范围：300-7200。
+取值范围：60-7200。
 此参数对 HLS 无效，当录制 HLS 时从推流到断流生成一个文件。
       */
     RecordInterval?: number;
     /**
       * 录制存储时长。
-单位秒，取值范围： 0 - 93312000。
+单位秒，取值范围： 0 - 1500天。
 0：表示永久存储。
       */
     StorageTime?: number;
@@ -4842,6 +4842,23 @@ export interface RecordParam {
 若未设置默认录制文件名为{StreamID}_{StartYear}-{StartMonth}-{StartDay}-{StartHour}-{StartMinute}-{StartSecond}_{EndYear}-{EndMonth}-{EndDay}-{EndHour}-{EndMinute}-{EndSecond}
       */
     VodFileName?: string;
+    /**
+      * 任务流
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Procedure?: string;
+    /**
+      * 视频存储策略。
+normal：标准存储。
+cold：低频存储。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageMode?: string;
+    /**
+      * 点播应用分类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClassId?: number;
 }
 /**
  * 每个域名的统计信息。

@@ -2348,7 +2348,7 @@ export interface DescribeOverviewStatisticsResponse {
  */
 export interface RecoverMalwaresRequest {
   /**
-   * 木马Id数组,单次最大删除不能超过200条
+   * 木马Id数组（单次最大恢复不超过100条）
    */
   Ids: Array<number>
 }
@@ -3737,12 +3737,12 @@ export interface DescribeRiskDnsListRequest {
   Filters?: Array<Filter>
 
   /**
-   * 排序方式
+   * 排序方式：根据请求次数排序：asc-升序/desc-降序
    */
   Order?: string
 
   /**
-   * 排序字段
+   * 排序字段：AccessCount-请求次数
    */
   By?: string
 }
@@ -4053,24 +4053,24 @@ export interface ExportMaliciousRequestsRequest {
  */
 export interface DescribeScanMalwareScheduleResponse {
   /**
-   * 扫描进度
+   * 扫描进度（单位：%）
    */
-  Schedule?: number
+  Schedule: number
 
   /**
    * 风险文件数,当进度满了以后才有该值
    */
-  RiskFileNumber?: number
+  RiskFileNumber: number
 
   /**
    * 是否正在扫描中
    */
-  IsSchedule?: boolean
+  IsSchedule: boolean
 
   /**
    * 0 从未扫描过、 1 扫描中、 2扫描完成、 3停止中、 4停止完成
    */
-  ScanStatus?: number
+  ScanStatus: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4737,7 +4737,7 @@ export interface OpenPort {
  */
 export interface TrustMalwaresRequest {
   /**
-   * 木马ID数组。
+   * 木马ID数组（单次不超过的最大条数：100）
    */
   Ids: Array<number>
 }
@@ -5202,12 +5202,12 @@ export interface RecoverMalwaresResponse {
   /**
    * 恢复成功id数组
    */
-  SuccessIds?: Array<number>
+  SuccessIds: Array<number>
 
   /**
    * 恢复失败id数组
    */
-  FailedIds?: Array<number>
+  FailedIds: Array<number>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7408,12 +7408,12 @@ export interface DescribeMalwaresResponse {
   /**
    * 木马总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
-   * Malware数组。
+   * 木马相关信息。
    */
-  Malwares?: Array<Malware>
+  Malwares: Array<Malware>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

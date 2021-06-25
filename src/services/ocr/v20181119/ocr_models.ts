@@ -1456,6 +1456,11 @@ export interface BankCardOCRRequest {
    * 边框遮挡检测开关，如果输入的图片是银行卡边框被遮挡则返回告警，默认false。
    */
   EnableBorderCheck?: boolean
+
+  /**
+   * 是否返回图片质量分数（图片质量分数是评价一个图片的模糊程度的标准），默认false。
+   */
+  EnableQualityValue?: boolean
 }
 
 /**
@@ -3365,6 +3370,11 @@ export interface EnglishOCRRequest {
 该参数默认值为false。
       */
   EnableCandWord?: boolean
+
+  /**
+   * 预处理开关，功能是检测图片倾斜的角度，将原本倾斜的图片矫正。该参数默认值为true。
+   */
+  Preprocess?: boolean
 }
 
 /**
@@ -5036,12 +5046,12 @@ export interface EnglishOCRResponse {
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  TextDetections?: Array<TextDetectionEn>
+  TextDetections: Array<TextDetectionEn>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel?: number
+  Angel: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5818,39 +5828,39 @@ export interface BankCardOCRResponse {
   /**
    * 卡号
    */
-  CardNo?: string
+  CardNo: string
 
   /**
    * 银行信息
    */
-  BankInfo?: string
+  BankInfo: string
 
   /**
    * 有效期，格式如：07/2023
    */
-  ValidDate?: string
+  ValidDate: string
 
   /**
    * 卡类型
    */
-  CardType?: string
+  CardType: string
 
   /**
    * 卡名字
    */
-  CardName?: string
+  CardName: string
 
   /**
       * 切片图片数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BorderCutImage?: string
+  BorderCutImage: string
 
   /**
       * 卡号图片数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CardNoImage?: string
+  CardNoImage: string
 
   /**
       * WarningCode 告警码列表和释义：
@@ -5862,7 +5872,13 @@ export interface BankCardOCRResponse {
 （告警码可以同时存在多个）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WarningCode?: Array<number>
+  WarningCode: Array<number>
+
+  /**
+      * 图片质量分数，请求enable_quality_value时返回（取值范围：0-100，分数越低越模糊，建议阈值≥50）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QualityValue: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

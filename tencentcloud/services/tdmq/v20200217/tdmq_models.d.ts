@@ -144,7 +144,7 @@ export interface CreateCmqTopicRequest {
  */
 export interface ReceiveMessageRequest {
     /**
-      * 接收消息的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
+      * 接收消息的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，即：tenant/namespace/topic。默认使用的是：public/default
       */
     Topic: string;
     /**
@@ -959,7 +959,7 @@ export interface AcknowledgeMessageRequest {
       */
     MessageId: string;
     /**
-      * Topic 名字（可从 receiveMessage 的返回值中获得）这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
+      * Topic 名字（可从 receiveMessage 的返回值中获得）这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
       */
     AckTopic: string;
     /**
@@ -1068,7 +1068,7 @@ export interface DeleteCmqQueueResponse {
  */
 export interface SendMessagesRequest {
     /**
-      * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
+      * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
       */
     Topic: string;
     /**
@@ -2544,7 +2544,7 @@ export interface DescribeProducersResponse {
  */
 export interface SendBatchMessagesRequest {
     /**
-      * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，默认使用的是：public/default
+      * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
       */
     Topic: string;
     /**

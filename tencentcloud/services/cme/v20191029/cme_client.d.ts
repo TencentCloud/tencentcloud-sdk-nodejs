@@ -149,9 +149,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyProject(req: ModifyProjectRequest, cb?: (error: string, rep: ModifyProjectResponse) => void): Promise<ModifyProjectResponse>;
     /**
-     * 新增分类，用于管理素材。
-<li>分类层数不能超过10；</li>
-<li>子分类数不能超过10。</li>
+     * 新增分类，用于管理素材。分类层数不能超过20。
      */
     CreateClass(req: CreateClassRequest, cb?: (error: string, rep: CreateClassResponse) => void): Promise<CreateClassResponse>;
     /**

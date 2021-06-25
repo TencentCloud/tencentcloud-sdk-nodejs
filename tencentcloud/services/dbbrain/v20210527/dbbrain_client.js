@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopSpaceSchemas", req, cb);
     }
     /**
+     * 查询关系型数据库的实时线程列表。
+     */
+    async DescribeMySqlProcessList(req, cb) {
+        return this.request("DescribeMySqlProcessList", req, cb);
+    }
+    /**
      * 查询健康报告生成任务列表。
      */
     async DescribeDBDiagReportTasks(req, cb) {

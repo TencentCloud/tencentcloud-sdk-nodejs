@@ -516,11 +516,11 @@ export interface FollowUser {
       */
     Description: string;
     /**
-      * 该成员添加此外部联系人的时间,单位为秒
+      * 该成员添加此外部联系人的时间戳，单位为秒
       */
     CreateTime: number;
     /**
-      * 该成员添加此客户的来源，具体含义详见来<a href="https://work.weixin.qq.com/api/doc/90000/90135/92114#%E6%9D%A5%E6%BA%90%E5%AE%9A%E4%B9%89">来源定义</a>
+      * 该成员添加此客户的来源，具体含义详见<a href="https://work.weixin.qq.com/api/doc/90000/90135/92114#%E6%9D%A5%E6%BA%90%E5%AE%9A%E4%B9%89">来源定义</a>
       */
     AddWay: number;
     /**
@@ -683,7 +683,7 @@ export interface ChatArchivingDetail {
       */
     Action: string;
     /**
-      * 消息类型，当Action != "switch"时存在，比如video, text, voice 等，和企微开放文档一一对应
+      * 消息类型，当Action != "switch"时存在，例如video, text, voice 等，和企微开放文档一一对应
 https://open.work.weixin.qq.com/api/doc/90000/90135/91774
 注意：此字段可能返回 null，表示取不到有效值。
       */
