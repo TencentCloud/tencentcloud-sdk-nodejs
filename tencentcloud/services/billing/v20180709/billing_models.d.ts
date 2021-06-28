@@ -1348,12 +1348,12 @@ export interface DescribeBillResourceSummaryResponse {
     /**
       * 资源汇总列表
       */
-    ResourceSummarySet?: Array<BillResourceSummary>;
+    ResourceSummarySet: Array<BillResourceSummary>;
     /**
       * 资源汇总列表总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total?: number;
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1483,6 +1483,14 @@ export interface DescribeBillResourceSummaryRequest {
       * 查询交易类型。如 按量计费日结，按量计费小时结 等
       */
     ActionType?: string;
+    /**
+      * 查询指定资源信息
+      */
+    ResourceId?: string;
+    /**
+      * 付费模式 prePay/postPay
+      */
+    PayMode?: string;
 }
 /**
  * PayDeals请求参数结构体

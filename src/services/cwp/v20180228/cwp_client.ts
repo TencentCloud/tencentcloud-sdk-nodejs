@@ -74,6 +74,7 @@ import {
   DescribeHistoryServiceResponse,
   RenewProVersionRequest,
   DescribeWebPageGeneralizeRequest,
+  RiskDnsList,
   DescribeComponentsRequest,
   ModifyWebPageProtectSettingResponse,
   DescribeNonlocalLoginPlacesRequest,

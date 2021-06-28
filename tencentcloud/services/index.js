@@ -132,6 +132,8 @@ var ecdn_1 = require("./ecdn");
 Object.defineProperty(exports, "ecdn", { enumerable: true, get: function () { return ecdn_1.ecdn; } });
 var ecm_1 = require("./ecm");
 Object.defineProperty(exports, "ecm", { enumerable: true, get: function () { return ecm_1.ecm; } });
+var eiam_1 = require("./eiam");
+Object.defineProperty(exports, "eiam", { enumerable: true, get: function () { return eiam_1.eiam; } });
 var eis_1 = require("./eis");
 Object.defineProperty(exports, "eis", { enumerable: true, get: function () { return eis_1.eis; } });
 var emr_1 = require("./emr");

@@ -64,6 +64,7 @@ export { dts } from "./dts";
 export { ecc } from "./ecc";
 export { ecdn } from "./ecdn";
 export { ecm } from "./ecm";
+export { eiam } from "./eiam";
 export { eis } from "./eis";
 export { emr } from "./emr";
 export { es } from "./es";

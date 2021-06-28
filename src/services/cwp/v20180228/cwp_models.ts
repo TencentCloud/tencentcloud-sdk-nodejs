@@ -1158,6 +1158,17 @@ export interface DescribeProVersionInfoResponse {
  */
 export interface DescribeRiskDnsListResponse {
   /**
+      * 恶意请求列表数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskDnsList: Array<RiskDnsList>
+
+  /**
+   * 总数量
+   */
+  TotalCount: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1273,6 +1284,111 @@ export interface RenewProVersionRequest {
  * DescribeWebPageGeneralize请求参数结构体
  */
 export type DescribeWebPageGeneralizeRequest = null
+
+/**
+ * 恶意请求列表
+ */
+export interface RiskDnsList {
+  /**
+   * 对外访问域名
+   */
+  Url: string
+
+  /**
+   * 访问次数
+   */
+  AccessCount: number
+
+  /**
+   * 进程名
+   */
+  ProcessName: string
+
+  /**
+   * 进程MD5
+   */
+  ProcessMd5: string
+
+  /**
+   * 是否为全局规则，0否，1是
+   */
+  GlobalRuleId: number
+
+  /**
+   * 用户规则id
+   */
+  UserRuleId: number
+
+  /**
+   * 状态；0-待处理，2-已加白，3-非信任状态
+   */
+  Status: number
+
+  /**
+   * 首次访问时间
+   */
+  CreateTime: string
+
+  /**
+   * 最近访问时间
+   */
+  MergeTime: string
+
+  /**
+   * 唯一 Quuid
+   */
+  Quuid: string
+
+  /**
+   * 主机ip
+   */
+  HostIp: string
+
+  /**
+   * 别名
+   */
+  Alias: string
+
+  /**
+   * 描述
+   */
+  Description: string
+
+  /**
+   * 唯一ID
+   */
+  Id: number
+
+  /**
+   * 参考
+   */
+  Reference: string
+
+  /**
+   * 命令行
+   */
+  CmdLine: string
+
+  /**
+   * 进程号
+   */
+  Pid: number
+
+  /**
+   * 唯一UUID
+   */
+  Uuid: string
+
+  /**
+   * 建议方案
+   */
+  SuggestScheme: string
+
+  /**
+   * 标签特性
+   */
+  Tags: Array<string>
+}
 
 /**
  * DescribeComponents请求参数结构体

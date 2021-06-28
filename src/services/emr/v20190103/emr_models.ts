@@ -279,6 +279,18 @@ export interface EmrProductConfigOutter {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CbsEncrypt: number
+
+  /**
+      * 自定义应用角色。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationRole: string
+
+  /**
+      * 安全组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroups: Array<string>
 }
 
 /**
@@ -1243,19 +1255,19 @@ export interface DescribeInstancesResponse {
   /**
    * 符合条件的实例总数。
    */
-  TotalCnt?: number
+  TotalCnt: number
 
   /**
       * EMR实例详细信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClusterList?: Array<ClusterInstancesInfo>
+  ClusterList: Array<ClusterInstancesInfo>
 
   /**
       * 实例关联的标签键列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TagKeys?: Array<string>
+  TagKeys: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1824,6 +1836,12 @@ export interface ClusterInstancesInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProductId: number
+
+  /**
+      * 地区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
 }
 
 /**

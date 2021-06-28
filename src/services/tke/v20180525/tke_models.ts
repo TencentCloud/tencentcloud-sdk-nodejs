@@ -2711,6 +2711,12 @@ export interface DataDisk {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MountTarget?: string
+
+  /**
+      * 挂载设备名或分区名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskPartition: string
 }
 
 /**
