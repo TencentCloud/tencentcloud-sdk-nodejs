@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserGroup", req, cb);
     }
     /**
+     * 通过用户名或用户 id 冻结用户
+     */
+    async ModifyUserInfo(req, cb) {
+        return this.request("ModifyUserInfo", req, cb);
+    }
+    /**
      * 删除一个机构节点
      */
     async DeleteOrgNode(req, cb) {

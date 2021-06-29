@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalContactListRequest, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryMiniAppCodeListResponse, QueryActivityListResponse, QueryActivityJoinListRequest, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, CreateCorpTagRequest, CreateChannelCodeResponse, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryChannelCodeListResponse } from "./wav_models";
+import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryExternalContactListRequest, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryActivityListResponse, QueryActivityJoinListRequest, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, CreateCorpTagRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryExternalUserMappingInfoRequest, QueryChannelCodeListResponse } from "./wav_models";
 /**
  * wav client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 新增渠道活码接口
      */
     CreateChannelCode(req: CreateChannelCodeRequest, cb?: (error: string, rep: CreateChannelCodeResponse) => void): Promise<CreateChannelCodeResponse>;
+    /**
+     * 企业可通过此接口将企业主体对应的外部联系人id转换为乐销车应用主体对应的外部联系人。
+     */
+    QueryExternalUserMappingInfo(req: QueryExternalUserMappingInfoRequest, cb?: (error: string, rep: QueryExternalUserMappingInfoResponse) => void): Promise<QueryExternalUserMappingInfoResponse>;
     /**
      * 根据游标拉取活动参与列表信息
      */

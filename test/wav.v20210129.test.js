@@ -98,6 +98,16 @@ it("wav.v20210129.CreateChannelCode", async function () {
     }
 })
 
+it("wav.v20210129.QueryExternalUserMappingInfo", async function () {
+    try {
+       const data = await client.QueryExternalUserMappingInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wav.v20210129.QueryActivityJoinList", async function () {
     try {
        const data = await client.QueryActivityJoinList({})

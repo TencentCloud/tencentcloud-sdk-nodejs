@@ -24,6 +24,7 @@ import {
   DescribeOrgNodeResponse,
   CreateOrgNodeResponse,
   ListUsersInOrgNodeResponse,
+  ModifyUserInfoResponse,
   DeleteUserRequest,
   ListAuthorizedApplicationsToOrgNodeResponse,
   OrgNodeChildInfo,
@@ -63,6 +64,7 @@ import {
   ListAuthorizedApplicationsToOrgNodeRequest,
   CreateUserGroupRequest,
   DescribeOrgNodeRequest,
+  ModifyUserInfoRequest,
 } from "./eiam_models"
 
 /**
@@ -162,6 +164,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserGroupResponse) => void
   ): Promise<DescribeUserGroupResponse> {
     return this.request("DescribeUserGroup", req, cb)
+  }
+
+  /**
+   * 通过用户名或用户 id 冻结用户
+   */
+  async ModifyUserInfo(
+    req: ModifyUserInfoRequest,
+    cb?: (error: string, rep: ModifyUserInfoResponse) => void
+  ): Promise<ModifyUserInfoResponse> {
+    return this.request("ModifyUserInfo", req, cb)
   }
 
   /**

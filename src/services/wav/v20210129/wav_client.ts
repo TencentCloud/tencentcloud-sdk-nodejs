@@ -22,6 +22,7 @@ import {
   CreateCorpTagResponse,
   QueryChatArchivingListResponse,
   QueryExternalContactDetailRequest,
+  QueryExternalUserMappingInfoResponse,
   ChannelCodeInnerDetail,
   ExternalContact,
   ExternalContactSimpleInfo,
@@ -37,7 +38,7 @@ import {
   FollowUser,
   QueryActivityLiveCodeListResponse,
   QueryActivityJoinListResponse,
-  QueryMiniAppCodeListResponse,
+  ExternalUserMappingInfo,
   ActivityDetail,
   ExternalContactTag,
   ChatArchivingDetail,
@@ -48,10 +49,12 @@ import {
   WeComTagDetail,
   QueryActivityLiveCodeListRequest,
   CreateCorpTagRequest,
+  QueryMiniAppCodeListResponse,
   CreateChannelCodeResponse,
   QueryActivityListRequest,
   QueryMiniAppCodeListRequest,
   QueryChatArchivingListRequest,
+  QueryExternalUserMappingInfoRequest,
   QueryChannelCodeListResponse,
 } from "./wav_models"
 
@@ -142,6 +145,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateChannelCodeResponse) => void
   ): Promise<CreateChannelCodeResponse> {
     return this.request("CreateChannelCode", req, cb)
+  }
+
+  /**
+   * 企业可通过此接口将企业主体对应的外部联系人id转换为乐销车应用主体对应的外部联系人。
+   */
+  async QueryExternalUserMappingInfo(
+    req: QueryExternalUserMappingInfoRequest,
+    cb?: (error: string, rep: QueryExternalUserMappingInfoResponse) => void
+  ): Promise<QueryExternalUserMappingInfoResponse> {
+    return this.request("QueryExternalUserMappingInfo", req, cb)
   }
 
   /**

@@ -278,20 +278,20 @@ export interface DescribeResourcesByTagsResponse {
     /**
       * 结果总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 数据位移偏量
       */
-    Offset?: number;
+    Offset: number;
     /**
       * 每页大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Limit?: number;
+    Limit: number;
     /**
       * 资源标签
       */
-    Rows?: Array<ResourceTag>;
+    Rows: Array<ResourceTag>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

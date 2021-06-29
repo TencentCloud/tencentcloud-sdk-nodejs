@@ -108,6 +108,16 @@ it("eiam.v20210420.DescribeUserGroup", async function () {
     }
 })
 
+it("eiam.v20210420.ModifyUserInfo", async function () {
+    try {
+       const data = await client.ModifyUserInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.DeleteOrgNode", async function () {
     try {
        const data = await client.DeleteOrgNode({})

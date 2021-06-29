@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserGroupRequest, RemoveUserFromUserGroupResponse, DecribePublicKeyRequest, DescribeOrgNodeResponse, CreateOrgNodeResponse, ListUsersInOrgNodeResponse, DeleteUserRequest, ListAuthorizedApplicationsToOrgNodeResponse, ListAuthorizedApplicationsToUserRequest, DeleteOrgNodeResponse, AddUserToUserGroupResponse, CreateUserResponse, ListAuthorizedApplicationsToUserGroupRequest, ListUsersInOrgNodeRequest, CreateUserGroupResponse, DeleteUserResponse, ListUsersInUserGroupResponse, AddUserToUserGroupRequest, DescribeApplicationResponse, UpdateOrgNodeResponse, ListAuthorizedApplicationsToUserResponse, DeleteUserGroupResponse, DescribeApplicationRequest, UpdateOrgNodeRequest, DecribePublicKeyResponse, CreateUserRequest, ListUserGroupsOfUserResponse, DescribeUserInfoResponse, DeleteOrgNodeRequest, CreateOrgNodeRequest, RemoveUserFromUserGroupRequest, ListAuthorizedApplicationsToUserGroupResponse, DeleteUserGroupRequest, DescribeUserInfoRequest, DescribeUserGroupResponse, ListUserGroupsOfUserRequest, ListUsersInUserGroupRequest, ListAuthorizedApplicationsToOrgNodeRequest, CreateUserGroupRequest, DescribeOrgNodeRequest } from "./eiam_models";
+import { DescribeUserGroupRequest, RemoveUserFromUserGroupResponse, DecribePublicKeyRequest, DescribeOrgNodeResponse, CreateOrgNodeResponse, ListUsersInOrgNodeResponse, ModifyUserInfoResponse, DeleteUserRequest, ListAuthorizedApplicationsToOrgNodeResponse, ListAuthorizedApplicationsToUserRequest, DeleteOrgNodeResponse, AddUserToUserGroupResponse, CreateUserResponse, ListAuthorizedApplicationsToUserGroupRequest, ListUsersInOrgNodeRequest, CreateUserGroupResponse, DeleteUserResponse, ListUsersInUserGroupResponse, AddUserToUserGroupRequest, DescribeApplicationResponse, UpdateOrgNodeResponse, ListAuthorizedApplicationsToUserResponse, DeleteUserGroupResponse, DescribeApplicationRequest, UpdateOrgNodeRequest, DecribePublicKeyResponse, CreateUserRequest, ListUserGroupsOfUserResponse, DescribeUserInfoResponse, DeleteOrgNodeRequest, CreateOrgNodeRequest, RemoveUserFromUserGroupRequest, ListAuthorizedApplicationsToUserGroupResponse, DeleteUserGroupRequest, DescribeUserInfoRequest, DescribeUserGroupResponse, ListUserGroupsOfUserRequest, ListUsersInUserGroupRequest, ListAuthorizedApplicationsToOrgNodeRequest, CreateUserGroupRequest, DescribeOrgNodeRequest, ModifyUserInfoRequest } from "./eiam_models";
 /**
  * eiam client
  * @class
@@ -43,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 获取用户组信息
      */
     DescribeUserGroup(req: DescribeUserGroupRequest, cb?: (error: string, rep: DescribeUserGroupResponse) => void): Promise<DescribeUserGroupResponse>;
+    /**
+     * 通过用户名或用户 id 冻结用户
+     */
+    ModifyUserInfo(req: ModifyUserInfoRequest, cb?: (error: string, rep: ModifyUserInfoResponse) => void): Promise<ModifyUserInfoResponse>;
     /**
      * 删除一个机构节点
      */

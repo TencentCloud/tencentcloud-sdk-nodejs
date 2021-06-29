@@ -154,6 +154,16 @@ export interface ListUsersInOrgNodeResponse {
 }
 
 /**
+ * ModifyUserInfo返回参数结构体
+ */
+export interface ModifyUserInfoResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUser请求参数结构体
  */
 export interface DeleteUserRequest {
@@ -972,4 +982,59 @@ export interface DescribeOrgNodeRequest {
    * 是否读取其子节点信息。当读取层数为空或0时，默认仅读取当前机构节点信息。当读取层数为1时，读取本机构节点以及其第一层子节点信息。
    */
   IncludeOrgNodeChildInfo?: boolean
+}
+
+/**
+ * ModifyUserInfo请求参数结构体
+ */
+export interface ModifyUserInfoRequest {
+  /**
+   * 用户名，长度限制：32个字符。 Username 和 UserId 需选择一个作为搜索条件；如两个条件同时使用则默认使用Username作为搜索条件。
+   */
+  UserName?: string
+
+  /**
+   * 昵称，长度限制：64个字符。 默认与用户名相同。
+   */
+  DisplayName?: string
+
+  /**
+   * 用户备注，长度限制：512个字符。
+   */
+  Description?: string
+
+  /**
+   * 用户所属用户组ID列表。
+   */
+  UserGroupIds?: Array<string>
+
+  /**
+   * 用户 id。 Username 和 UserId 需选择一个作为搜索条件；如两个条件同时使用则默认使用Username作为搜索条件。
+   */
+  UserId?: string
+
+  /**
+   * 用户手机号。
+   */
+  Phone?: string
+
+  /**
+   * 用户过期时间，遵循 ISO 8601 标准。
+   */
+  ExpirationTime?: string
+
+  /**
+   * 用户密码， 需要符合密码策略的配置。
+   */
+  Password?: string
+
+  /**
+   * 用户邮箱。
+   */
+  Email?: string
+
+  /**
+   * 密码是否需要重置，为空默认为false不需要重置密码。
+   */
+  PwdNeedReset?: boolean
 }

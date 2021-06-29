@@ -133,6 +133,20 @@ export interface QueryExternalContactDetailRequest {
     Limit?: number;
 }
 /**
+ * QueryExternalUserMappingInfo返回参数结构体
+ */
+export interface QueryExternalUserMappingInfoResponse {
+    /**
+      * 外部联系人映射信息, 只返回映射成功的记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalUserIdMapping: Array<ExternalUserMappingInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 渠道活码详情
  */
 export interface ChannelCodeInnerDetail {
@@ -572,23 +586,18 @@ export interface QueryActivityJoinListResponse {
     RequestId?: string;
 }
 /**
- * QueryMiniAppCodeList返回参数结构体
+ * 外部联系人映射信息
  */
-export interface QueryMiniAppCodeListResponse {
+export interface ExternalUserMappingInfo {
     /**
-      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+      * 企业主体对应的外部联系人userId
+      */
+    CorpExternalUserId: string;
+    /**
+      * 乐销车应用主体对应的外部联系人, 当不存在好友关系时，该字段值为空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NextCursor: string;
-    /**
-      * 小程序码列表响应数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PageData: Array<MiniAppCodeInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    ExternalUserId: string;
 }
 /**
  * 活动详情
@@ -868,6 +877,25 @@ export interface CreateCorpTagRequest {
     Sort?: number;
 }
 /**
+ * QueryMiniAppCodeList返回参数结构体
+ */
+export interface QueryMiniAppCodeListResponse {
+    /**
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NextCursor: string;
+    /**
+      * 小程序码列表响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageData: Array<MiniAppCodeInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateChannelCode返回参数结构体
  */
 export interface CreateChannelCodeResponse {
@@ -914,6 +942,15 @@ export interface QueryChatArchivingListRequest {
       * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
       */
     Limit?: number;
+}
+/**
+ * QueryExternalUserMappingInfo请求参数结构体
+ */
+export interface QueryExternalUserMappingInfoRequest {
+    /**
+      * 企业主体对应的外部联系人id列表，列表长度限制最大为50。
+      */
+    CorpExternalUserIdList: Array<string>;
 }
 /**
  * QueryChannelCodeList返回参数结构体

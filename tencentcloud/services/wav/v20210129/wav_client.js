@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateChannelCode", req, cb);
     }
     /**
+     * 企业可通过此接口将企业主体对应的外部联系人id转换为乐销车应用主体对应的外部联系人。
+     */
+    async QueryExternalUserMappingInfo(req, cb) {
+        return this.request("QueryExternalUserMappingInfo", req, cb);
+    }
+    /**
      * 根据游标拉取活动参与列表信息
      */
     async QueryActivityJoinList(req, cb) {
