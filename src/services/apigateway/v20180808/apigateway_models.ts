@@ -22,7 +22,7 @@ export interface UnBindSubDomainResponse {
   /**
    * 解绑自定义域名操作是否成功。
    */
-  Result?: boolean
+  Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2111,7 +2111,7 @@ export interface ModifySubDomainResponse {
   /**
    * 修改自定义域名操作是否成功。
    */
-  Result?: boolean
+  Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3803,7 +3803,7 @@ export interface DescribeServiceSubDomainMappingsResponse {
   /**
    * 自定义路径映射列表。
    */
-  Result?: ServiceSubDomainMappings
+  Result: ServiceSubDomainMappings
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3914,7 +3914,7 @@ export interface DeleteServiceSubDomainMappingResponse {
   /**
    * 删除自定义域名的路径映射操作是否成功。
    */
-  Result?: boolean
+  Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4349,7 +4349,7 @@ export interface DescribeServiceSubDomainsResponse {
   /**
    * 查询服务自定义域名列表。
    */
-  Result?: DomainSets
+  Result: DomainSets
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
