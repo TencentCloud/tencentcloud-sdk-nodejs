@@ -269,7 +269,7 @@ export declare class Client extends AbstractClient {
     /**
      * 该接口（DescribeRegionAndPrice）用于获取源站区域和带宽梯度价格
      */
-    DescribeRegionAndPrice(req?: DescribeRegionAndPriceRequest, cb?: (error: string, rep: DescribeRegionAndPriceResponse) => void): Promise<DescribeRegionAndPriceResponse>;
+    DescribeRegionAndPrice(req: DescribeRegionAndPriceRequest, cb?: (error: string, rep: DescribeRegionAndPriceResponse) => void): Promise<DescribeRegionAndPriceResponse>;
     /**
      * 本接口（CreateCertificate）用于创建Gaap相关证书和配置文件，包括基础认证配置文件，客户端CA证书，服务器SSL证书，Gaap SSL证书以及源站CA证书。
      */

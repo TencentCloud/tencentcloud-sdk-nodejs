@@ -48,4 +48,14 @@ it("cii.v20210408.CreateStructureTask", async function () {
     }
 })
 
+it("cii.v20210408.DescribeStructureResult", async function () {
+    try {
+       const data = await client.DescribeStructureResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

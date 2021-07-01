@@ -659,12 +659,12 @@ export interface DescribeAccessRegionsByDestRegionResponse {
   /**
    * 可用加速区域数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 可用加速区域信息列表
    */
-  AccessRegionSet?: Array<AccessRegionDetial>
+  AccessRegionSet: Array<AccessRegionDetial>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -684,7 +684,7 @@ export interface CheckProxyCreateResponse {
   /**
    * 查询能否创建给定配置的通道，1可以创建，0不可创建。
    */
-  CheckFlag?: number
+  CheckFlag: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -782,17 +782,17 @@ export interface DescribeProxiesResponse {
   /**
    * 通道个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * （旧参数，请切换到ProxySet）通道实例信息列表。
    */
-  InstanceSet?: Array<ProxyInfo>
+  InstanceSet: Array<ProxyInfo>
 
   /**
    * （新参数）通道实例信息列表。
    */
-  ProxySet?: Array<ProxyInfo>
+  ProxySet: Array<ProxyInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1011,6 +1011,16 @@ export interface CreateTCPListenersRequest {
    * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
    */
   FailoverSwitch?: number
+
+  /**
+   * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
+   */
+  HealthyThreshold?: number
+
+  /**
+   * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
+   */
+  UnhealthyThreshold?: number
 }
 
 /**
@@ -1209,6 +1219,16 @@ export interface ModifyTCPListenerAttributeRequest {
    * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
    */
   FailoverSwitch?: number
+
+  /**
+   * 健康阈值，表示连续检查成功多少次数后认定源站健康。范围为1到10
+   */
+  HealthyThreshold?: number
+
+  /**
+   * 不健康阈值，表示连续检查失败次数后认定源站不健康。范围为1到10
+   */
+  UnhealthyThreshold?: number
 }
 
 /**
@@ -1350,6 +1370,11 @@ export interface CreateProxyGroupRequest {
    * 加速地域列表，包括加速地域名，及该地域对应的带宽和并发配置。
    */
   AccessRegionSet?: Array<AccessConfiguration>
+
+  /**
+   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   */
+  IPAddressVersion?: string
 }
 
 /**
@@ -1709,10 +1734,11 @@ export interface DescribeProxiesRequest {
   /**
       * 过滤条件。   
 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定InstanceIds和Filters。 
-ProjectId - String - 是否必填：否 -（过滤条件）按照项目ID过滤。    
+ProjectId - String - 是否必填：否 -（过滤条件）按照项目ID过滤。   
 AccessRegion - String - 是否必填：否 - （过滤条件）按照接入地域过滤。    
 RealServerRegion - String - 是否必填：否 - （过滤条件）按照源站地域过滤。
 GroupId - String - 是否必填：否 - （过滤条件）按照通道组ID过滤。
+IPAddressVersion - String - 是否必填：否 - （过滤条件）按照IP版本过滤。
       */
   Filters?: Array<Filter>
 
@@ -2000,6 +2026,18 @@ lc表示最小连接数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientIPMethod: number
+
+  /**
+      * 健康阈值，表示连续检查成功多少次后认定源站健康。范围为1到10
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthyThreshold: number
+
+  /**
+      * 不健康阈值，表示连续检查失败多少次数后认为源站不健康。范围为1到10
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnhealthyThreshold: number
 }
 
 /**
@@ -2081,13 +2119,13 @@ export interface DescribeProxyGroupListResponse {
   /**
    * 通道组总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 通道组列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProxyGroupList?: Array<ProxyGroupInfo>
+  ProxyGroupList: Array<ProxyGroupInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2506,6 +2544,11 @@ export interface DescribeAccessRegionsByDestRegionRequest {
    * 源站区域：接口DescribeDestRegions返回DestRegionSet中的RegionId字段值
    */
   DestRegion: string
+
+  /**
+   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   */
+  IPAddressVersion?: string
 }
 
 /**
@@ -2876,6 +2919,11 @@ export interface CreateProxyRequest {
    * 计费方式 (0:按带宽计费，1:按流量计费 默认按带宽计费）
    */
   BillingType?: number
+
+  /**
+   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   */
+  IPAddressVersion?: string
 }
 
 /**
@@ -3148,6 +3196,12 @@ export interface ProxyGroupDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientIPMethod: Array<number>
+
+  /**
+      * IP版本，可取值：IPv4、IPv6，默认值IPv4
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IPAddressVersion: string
 }
 
 /**
@@ -3197,24 +3251,24 @@ export interface DescribeRegionAndPriceResponse {
   /**
    * 源站区域总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 源站区域详情列表
    */
-  DestRegionSet?: Array<RegionDetail>
+  DestRegionSet: Array<RegionDetail>
 
   /**
    * 通道带宽费用梯度价格
    */
-  BandwidthUnitPrice?: Array<BandwidthPriceGradient>
+  BandwidthUnitPrice: Array<BandwidthPriceGradient>
 
   /**
       * 带宽价格货币类型：
 CNY 人民币
 USD 美元
       */
-  Currency?: string
+  Currency: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3462,35 +3516,35 @@ export interface InquiryPriceCreateProxyResponse {
   /**
    * 通道基础费用价格，单位：元/天。
    */
-  ProxyDailyPrice?: number
+  ProxyDailyPrice: number
 
   /**
       * 通道带宽费用梯度价格。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BandwidthUnitPrice?: Array<BandwidthPriceGradient>
+  BandwidthUnitPrice: Array<BandwidthPriceGradient>
 
   /**
    * 通道基础费用折扣价格，单位：元/天。
    */
-  DiscountProxyDailyPrice?: number
+  DiscountProxyDailyPrice: number
 
   /**
    * 价格使用的货币，支持人民币，美元等。
    */
-  Currency?: string
+  Currency: string
 
   /**
       * 通道的流量费用价格，单位: 元/GB
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FlowUnitPrice?: number
+  FlowUnitPrice: number
 
   /**
       * 通道的流量费用折扣价格，单位:元/GB
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountFlowUnitPrice?: number
+  DiscountFlowUnitPrice: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3873,7 +3927,7 @@ export interface CreateProxyGroupResponse {
   /**
    * 通道组ID
    */
-  GroupId?: string
+  GroupId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4033,7 +4087,7 @@ export interface DescribeProxyDetailResponse {
   /**
    * 通道详情信息。
    */
-  ProxyDetail?: ProxyInfo
+  ProxyDetail: ProxyInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4058,7 +4112,7 @@ export interface CreateUDPListenersResponse {
   /**
    * 返回监听器ID
    */
-  ListenerIds?: Array<string>
+  ListenerIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4470,12 +4524,22 @@ export interface CheckProxyCreateRequest {
    * 如果在通道组下创建通道，需要填写通道组的ID
    */
   GroupId?: string
+
+  /**
+   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   */
+  IPAddressVersion?: string
 }
 
 /**
  * DescribeRegionAndPrice请求参数结构体
  */
-export type DescribeRegionAndPriceRequest = null
+export interface DescribeRegionAndPriceRequest {
+  /**
+   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   */
+  IPAddressVersion?: string
+}
 
 /**
  * AddRealServers请求参数结构体
@@ -4698,7 +4762,7 @@ export interface CreateProxyResponse {
   /**
    * 通道的实例ID。
    */
-  InstanceId?: string
+  InstanceId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4765,6 +4829,11 @@ export interface InquiryPriceCreateProxyRequest {
    * 计费方式，0表示按带宽计费，1表示按流量计费。默认按带宽计费
    */
   BillingType?: number
+
+  /**
+   * IP版本，可取值：IPv4、IPv6，默认值IPv4
+   */
+  IPAddressVersion?: string
 }
 
 /**
@@ -4774,7 +4843,7 @@ export interface DescribeProxyGroupDetailsResponse {
   /**
    * 通道组详细信息。
    */
-  ProxyGroupDetail?: ProxyGroupDetail
+  ProxyGroupDetail: ProxyGroupDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5020,6 +5089,12 @@ UNKNOWN表示未知状态。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientIPMethod: Array<number>
+
+  /**
+      * IP版本：IPv4、IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IPAddressVersion: string
 }
 
 /**

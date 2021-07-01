@@ -101,6 +101,10 @@ LifeInsurance：寿险
 AccidentInsurance：意外险
       */
     InsuranceTypes?: Array<string>;
+    /**
+      * 回调地址，接收Post请求传送结果
+      */
+    CallbackUrl?: string;
 }
 /**
  * 结构化对比指标（准确率/召回率）数据
@@ -151,6 +155,26 @@ export interface ResultObject {
     StructureResult: string;
 }
 /**
+ * DescribeStructureResult返回参数结构体
+ */
+export interface DescribeStructureResultResponse {
+    /**
+      * 结果状态：
+0：返回成功
+1：结果未生成
+2：结果生成失败
+      */
+    Status: number;
+    /**
+      * 结构化结果
+      */
+    Results: Array<StructureResultObject>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeStructCompareData请求参数结构体
  */
 export interface DescribeStructCompareDataRequest {
@@ -168,7 +192,7 @@ export interface DescribeStructCompareDataRequest {
  */
 export interface CreateStructureTaskResponse {
     /**
-      * 创建的主任务号
+      * 创建的主任务号，用于查询结果
       */
     MainTaskId: string;
     /**
@@ -217,6 +241,32 @@ export interface DescribeStructureTaskResultResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 结构化结果
+ */
+export interface StructureResultObject {
+    /**
+      * 0表示正常返回
+      */
+    Code: number;
+    /**
+      * 报告类型
+      */
+    TaskType: string;
+    /**
+      * 结构化结果
+      */
+    StructureResult: string;
+}
+/**
+ * DescribeStructureResult请求参数结构体
+ */
+export interface DescribeStructureResultRequest {
+    /**
+      * 创建任务时返回的主任务ID
+      */
+    MainTaskId: string;
 }
 /**
  * 创建结构化任务子任务信息

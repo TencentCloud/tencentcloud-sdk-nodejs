@@ -39,8 +39,10 @@ import {
   Coord,
   Face,
   DetectProductResponse,
+  DetectLabelBetaRequest,
   DetectLabelItem,
   Location,
+  DetectLabelBetaResponse,
   Labels,
   Product,
   RegionDetected,
@@ -144,6 +146,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetectDisgustResponse) => void
   ): Promise<DetectDisgustResponse> {
     return this.request("DetectDisgust", req, cb)
+  }
+
+  /**
+     * 图像标签测试接口
+
+>     
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+  async DetectLabelBeta(
+    req: DetectLabelBetaRequest,
+    cb?: (error: string, rep: DetectLabelBetaResponse) => void
+  ): Promise<DetectLabelBetaResponse> {
+    return this.request("DetectLabelBeta", req, cb)
   }
 
   /**

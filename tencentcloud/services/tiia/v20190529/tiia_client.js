@@ -95,6 +95,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectDisgust", req, cb);
     }
     /**
+     * 图像标签测试接口
+
+>
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async DetectLabelBeta(req, cb) {
+        return this.request("DetectLabelBeta", req, cb);
+    }
+    /**
      * 根据输入的裁剪比例，智能判断一张图片的最佳裁剪区域，确保原图的主体区域不受影响。
 
 可以自动裁剪图片，适应不同平台、设备的展示要求，避免简单拉伸带来的变形。

@@ -68,6 +68,16 @@ it("tiia.v20190529.DetectDisgust", async function () {
     }
 })
 
+it("tiia.v20190529.DetectLabelBeta", async function () {
+    try {
+       const data = await client.DetectLabelBeta({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiia.v20190529.CropImage", async function () {
     try {
        const data = await client.CropImage({})

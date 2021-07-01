@@ -40,10 +40,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStructureTaskResult", req, cb);
     }
     /**
-     * 基于提供的客户及保单信息，启动结构化识别任务。
+     * 本接口(CreateStructureTask)基于提供的客户及保单信息，创建并启动结构化识别任务。
      */
     async CreateStructureTask(req, cb) {
         return this.request("CreateStructureTask", req, cb);
+    }
+    /**
+     * 本接口(DescribeStructureResult)用于查询结构化结果接口
+     */
+    async DescribeStructureResult(req, cb) {
+        return this.request("DescribeStructureResult", req, cb);
     }
 }
 exports.Client = Client;

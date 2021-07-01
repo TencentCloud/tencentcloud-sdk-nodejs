@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectProductBetaResponse, DetectDisgustRequest, DetectCelebrityResponse, CropImageRequest, DetectProductRequest, AssessQualityResponse, DetectDisgustResponse, DetectLabelRequest, DetectLabelResponse, EnhanceImageResponse, AssessQualityRequest, DetectProductBetaRequest, DetectMisbehaviorResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, RecognizeCarResponse, DetectMisbehaviorRequest } from "./tiia_models";
+import { DetectProductBetaResponse, DetectDisgustRequest, DetectCelebrityResponse, CropImageRequest, DetectProductRequest, AssessQualityResponse, DetectDisgustResponse, DetectLabelRequest, DetectLabelResponse, EnhanceImageResponse, AssessQualityRequest, DetectProductBetaRequest, DetectMisbehaviorResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, DetectLabelBetaRequest, DetectLabelBetaResponse, RecognizeCarResponse, DetectMisbehaviorRequest } from "./tiia_models";
 /**
  * tiia client
  * @class
@@ -64,6 +64,13 @@ export declare class Client extends AbstractClient {
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     DetectDisgust(req: DetectDisgustRequest, cb?: (error: string, rep: DetectDisgustResponse) => void): Promise<DetectDisgustResponse>;
+    /**
+     * 图像标签测试接口
+
+>
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    DetectLabelBeta(req: DetectLabelBetaRequest, cb?: (error: string, rep: DetectLabelBetaResponse) => void): Promise<DetectLabelBetaResponse>;
     /**
      * 根据输入的裁剪比例，智能判断一张图片的最佳裁剪区域，确保原图的主体区域不受影响。
 

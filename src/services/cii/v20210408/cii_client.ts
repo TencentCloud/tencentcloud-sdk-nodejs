@@ -23,10 +23,13 @@ import {
   CreateStructureTaskRequest,
   CompareMetricsData,
   ResultObject,
+  DescribeStructureResultResponse,
   DescribeStructCompareDataRequest,
   CreateStructureTaskResponse,
   ReviewDataTaskInfo,
   DescribeStructureTaskResultResponse,
+  StructureResultObject,
+  DescribeStructureResultRequest,
   CreateStructureTaskInfo,
 } from "./cii_models"
 
@@ -60,12 +63,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 基于提供的客户及保单信息，启动结构化识别任务。
+   * 本接口(CreateStructureTask)基于提供的客户及保单信息，创建并启动结构化识别任务。
    */
   async CreateStructureTask(
     req: CreateStructureTaskRequest,
     cb?: (error: string, rep: CreateStructureTaskResponse) => void
   ): Promise<CreateStructureTaskResponse> {
     return this.request("CreateStructureTask", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeStructureResult)用于查询结构化结果接口
+   */
+  async DescribeStructureResult(
+    req: DescribeStructureResultRequest,
+    cb?: (error: string, rep: DescribeStructureResultResponse) => void
+  ): Promise<DescribeStructureResultResponse> {
+    return this.request("DescribeStructureResult", req, cb)
   }
 }
