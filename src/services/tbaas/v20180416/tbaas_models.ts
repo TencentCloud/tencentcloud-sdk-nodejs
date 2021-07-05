@@ -1791,17 +1791,17 @@ export interface GetInvokeTxResponse {
   /**
    * 交易执行状态码
    */
-  TxValidationCode?: number
+  TxValidationCode: number
 
   /**
    * 交易执行消息
    */
-  TxValidationMsg?: string
+  TxValidationMsg: string
 
   /**
    * 交易所在区块ID
    */
-  BlockId?: number
+  BlockId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

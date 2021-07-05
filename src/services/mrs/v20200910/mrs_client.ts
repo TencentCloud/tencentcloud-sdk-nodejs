@@ -18,60 +18,90 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  PatientInfo,
   Indicator,
+  ReportTextStructuredResponse,
   Template,
   Elastic,
-  ReportInfo,
+  Metastasis,
+  DiseaseHistory,
   IHCInfo,
   SurgeryHistory,
-  HandleParam,
   ImageToObjectRequest,
-  TextToObjectRequest,
+  Summary,
+  Treatment,
+  HandleParam,
+  ReportImageStructuredRequest,
+  Finding,
+  TextReport,
   AspectRatio,
   SymptomInfo,
-  TuberInfo,
+  Conclusion,
   ObstericalMedicalHistory,
   Multiple,
   Hospitalization,
   FamilyMedicalHistory,
   Advice,
+  ImageText,
+  Symptom,
   SurgeryAttr,
+  Tuber,
+  MedicalRecordInfo,
   Part,
+  TuberInfo,
   ImageToClassResponse,
   Lymph,
   Invas,
-  MedicalRecordInfo,
+  ReportInfo,
+  BasicInfo,
   NormPart,
   MedDoc,
   Desc,
-  PatientInfo,
+  Case,
+  TestItem,
+  ImageToObjectResponse,
   PersonalMedicalHistory,
   Organ,
   DiagCert,
+  PersonalInfo,
   TreatmentRecord,
-  Value,
-  DischargeDiagnosis,
+  TextToClassRequest,
+  Check,
+  ReportTextStructuredRequest,
+  Invasive,
   DiseaseMedicalHistory,
   PathologyReport,
+  Size,
   TextToClassResponse,
+  Value,
+  PersonalHistory,
+  TextToObjectRequest,
   HistologyType,
   BlockInfo,
-  Summary,
+  MenstrualMedicalHistory,
+  Inspection,
+  Surgery,
   TextType,
   HistologyLevel,
   IndicatorItem,
   ImageInfo,
   DiagCertItem,
-  MenstrualMedicalHistory,
+  MarryHistory,
+  ReportImageStructuredResponse,
+  Attribute,
+  MenstrualHistory,
   ImageToClassRequest,
   NormSize,
   FirstPage,
-  Check,
+  CaseHistory,
   TextToObjectResponse,
-  TextToClassRequest,
-  Surgery,
-  ImageToObjectResponse,
-  Size,
+  FamilyHistory,
+  HealthHistory,
+  IHC,
+  Pathology,
+  KindItem,
+  DischargeDiagnosis,
+  ImageReport,
 } from "./mrs_models"
 
 /**
@@ -94,6 +124,28 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 文本转结构化对象
+   */
+  async TextToObject(
+    req: TextToObjectRequest,
+    cb?: (error: string, rep: TextToObjectResponse) => void
+  ): Promise<TextToObjectResponse> {
+    return this.request("TextToObject", req, cb)
+  }
+
+  /**
+     * 接口还未上线
+
+将输入的医疗报告文本内容进行结构化输出
+     */
+  async ReportTextStructured(
+    req: ReportTextStructuredRequest,
+    cb?: (error: string, rep: ReportTextStructuredResponse) => void
+  ): Promise<ReportTextStructuredResponse> {
+    return this.request("ReportTextStructured", req, cb)
+  }
+
+  /**
    * 图片转结构化对象
    */
   async ImageToObject(
@@ -104,6 +156,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 接口没有流量
+
+将输入的图片类型报告结构化
+     */
+  async ReportImageStructured(
+    req: ReportImageStructuredRequest,
+    cb?: (error: string, rep: ReportImageStructuredResponse) => void
+  ): Promise<ReportImageStructuredResponse> {
+    return this.request("ReportImageStructured", req, cb)
+  }
+
+  /**
    * 文本分类
    */
   async TextToClass(
@@ -111,15 +175,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextToClassResponse) => void
   ): Promise<TextToClassResponse> {
     return this.request("TextToClass", req, cb)
-  }
-
-  /**
-   * 文本转结构化对象
-   */
-  async TextToObject(
-    req: TextToObjectRequest,
-    cb?: (error: string, rep: TextToObjectResponse) => void
-  ): Promise<TextToObjectResponse> {
-    return this.request("TextToObject", req, cb)
   }
 }

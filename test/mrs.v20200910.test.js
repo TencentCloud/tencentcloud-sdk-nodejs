@@ -28,6 +28,26 @@ it("mrs.v20200910.ImageToClass", async function () {
     }
 })
 
+it("mrs.v20200910.TextToObject", async function () {
+    try {
+       const data = await client.TextToObject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mrs.v20200910.ReportTextStructured", async function () {
+    try {
+       const data = await client.ReportTextStructured({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mrs.v20200910.ImageToObject", async function () {
     try {
        const data = await client.ImageToObject({})
@@ -38,9 +58,9 @@ it("mrs.v20200910.ImageToObject", async function () {
     }
 })
 
-it("mrs.v20200910.TextToClass", async function () {
+it("mrs.v20200910.ReportImageStructured", async function () {
     try {
-       const data = await client.TextToClass({})
+       const data = await client.ReportImageStructured({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +68,9 @@ it("mrs.v20200910.TextToClass", async function () {
     }
 })
 
-it("mrs.v20200910.TextToObject", async function () {
+it("mrs.v20200910.TextToClass", async function () {
     try {
-       const data = await client.TextToObject({})
+       const data = await client.TextToClass({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -60,6 +60,7 @@ export { dnspod } from "./dnspod";
 export { domain } from "./domain";
 export { drm } from "./drm";
 export { ds } from "./ds";
+export { dtf } from "./dtf";
 export { dts } from "./dts";
 export { ecc } from "./ecc";
 export { ecdn } from "./ecdn";
