@@ -965,6 +965,21 @@ export interface DetachRolePolicyRequest {
 }
 
 /**
+ * ListPoliciesGrantingServiceAccess返回参数结构体
+ */
+export interface ListPoliciesGrantingServiceAccessResponse {
+  /**
+   * 列表
+   */
+  List: Array<ListGrantServiceAccessNode>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRolePermissionsBoundary请求参数结构体
  */
 export interface DeleteRolePermissionsBoundaryRequest {
@@ -1400,6 +1415,56 @@ export interface SAMLProviderInfo {
    * SAML身份提供商上次修改时间
    */
   ModifyTime: string
+}
+
+/**
+ * 用于ListPoliciesGrantingServiceAccess接口的Policy节点
+ */
+export interface ListGrantServiceAccessPolicy {
+  /**
+   * 策略ID
+   */
+  PolicyId: string
+
+  /**
+   * 策略名
+   */
+  PolicyName: string
+
+  /**
+   * 策略类型: Custom自定义策略，Presetting预设策略
+   */
+  PolicyType: string
+
+  /**
+   * 策略描述
+   */
+  PolicyDescription: string
+}
+
+/**
+ * ListPoliciesGrantingServiceAccess请求参数结构体
+ */
+export interface ListPoliciesGrantingServiceAccessRequest {
+  /**
+   * 子账号uin，与RoleId、GroupId三选一必传
+   */
+  TargetUin?: number
+
+  /**
+   * 角色ID，与TargetUin、GroupId三选一必传
+   */
+  RoleId?: number
+
+  /**
+   * 用户组ID，与TargetUin、RoleId三选一必传
+   */
+  GroupId?: number
+
+  /**
+   * 服务名，查看服务授权接口详情时需传该字段
+   */
+  ServiceType?: string
 }
 
 /**
@@ -1939,6 +2004,21 @@ export interface GetServiceLinkedRoleDeletionStatusRequest {
 }
 
 /**
+ * ListGrantServiceAccessAction节点
+ */
+export interface ListGrantServiceAccessActionNode {
+  /**
+   * 接口名
+   */
+  Name: string
+
+  /**
+   * 接口描述
+   */
+  Description: string
+}
+
+/**
  * DetachGroupPolicy返回参数结构体
  */
 export interface DetachGroupPolicyResponse {
@@ -2001,6 +2081,26 @@ export interface UpdateGroupRequest {
    * 用户组描述
    */
   Remark?: string
+}
+
+/**
+ * 用于ListPoliciesGrantingServiceAccess接口的List节点
+ */
+export interface ListGrantServiceAccessNode {
+  /**
+   * 服务
+   */
+  Service: ListGrantServiceAccessService
+
+  /**
+   * 接口信息
+   */
+  Action: Array<ListGrantServiceAccessActionNode>
+
+  /**
+   * 授权的策略
+   */
+  Policy: Array<ListGrantServiceAccessPolicy>
 }
 
 /**
@@ -2553,6 +2653,21 @@ export interface AddUserResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用于ListPoliciesGrantingServiceAccess接口的Service节点
+ */
+export interface ListGrantServiceAccessService {
+  /**
+   * 服务
+   */
+  ServiceType: string
+
+  /**
+   * 服务名
+   */
+  ServiceName: string
 }
 
 /**

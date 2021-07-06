@@ -219,6 +219,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceInternetBandwidthConfigs", req, cb);
     }
     /**
+     * 本接口 (InquiryPriceTerminateInstances) 用于退还实例询价。
+
+* 查询退还实例可以返还的费用。
+* 支持批量操作，每次请求批量实例的上限为100。如果批量实例存在不允许操作的实例，操作会以特定[错误码](#4.-.E9.94.99.E8.AF.AF.E7.A0.81)返回。
+     */
+    async InquiryPriceTerminateInstances(req, cb) {
+        return this.request("InquiryPriceTerminateInstances", req, cb);
+    }
+    /**
      * 本接口 (AssociateInstancesKeyPairs) 用于将密钥绑定到实例上。
 
 * 将密钥的公钥写入到实例的`SSH`配置当中，用户就可以通过该密钥的私钥来登录实例。

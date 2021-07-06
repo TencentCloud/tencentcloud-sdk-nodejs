@@ -128,6 +128,16 @@ it("tcr.v20190924.ManageImageLifecycleGlobalPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DeleteImmutableTagRules", async function () {
+    try {
+       const data = await client.DeleteImmutableTagRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteImagePersonal", async function () {
     try {
        const data = await client.DeleteImagePersonal({})
@@ -498,6 +508,16 @@ it("tcr.v20190924.ModifyNamespace", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeImmutableTagRules", async function () {
+    try {
+       const data = await client.DescribeImmutableTagRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.CreateSecurityPolicy", async function () {
     try {
        const data = await client.CreateSecurityPolicy({})
@@ -548,6 +568,16 @@ it("tcr.v20190924.DescribeUserQuotaPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.CreateImmutableTagRules", async function () {
+    try {
+       const data = await client.CreateImmutableTagRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeInstanceToken", async function () {
     try {
        const data = await client.DescribeInstanceToken({})
@@ -561,6 +591,16 @@ it("tcr.v20190924.DescribeInstanceToken", async function () {
 it("tcr.v20190924.DownloadHelmChart", async function () {
     try {
        const data = await client.DownloadHelmChart({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.ModifyImmutableTagRules", async function () {
+    try {
+       const data = await client.ModifyImmutableTagRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

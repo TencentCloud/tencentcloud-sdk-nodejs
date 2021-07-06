@@ -121,7 +121,7 @@ export interface CreateJobResponse {
  */
 export interface ResourceLoc {
     /**
-      * 资源位置的存储类型，目前只支持COS
+      * 资源位置的存储类型，目前只支持1:COS
       */
     StorageType: number;
     /**
@@ -409,7 +409,7 @@ export interface ResourceConfigItem {
  */
 export interface DescribeResourcesRequest {
     /**
-      * 需要查询的资源ID数组
+      * 需要查询的资源ID数组，数量不超过100个。如果填写了该参数则忽略Filters参数。
       */
     ResourceIds?: Array<string>;
     /**
@@ -421,7 +421,8 @@ export interface DescribeResourcesRequest {
       */
     Limit?: number;
     /**
-      * 查询资源配置列表， 如果不填写，返回该ResourceId下所有作业配置列表
+      * <li><strong>ResourceName</strong></li>
+<p style="padding-left: 30px;">按照资源名字过滤，支持模糊过滤。传入的过滤名字不超过5个</p><p style="padding-left: 30px;">类型: String</p><p style="padding-left: 30px;">必选: 否</p>
       */
     Filters?: Array<Filter>;
 }

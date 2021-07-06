@@ -1309,7 +1309,7 @@ export interface DescribeRecordListRequest {
   Offset?: number
 
   /**
-   * 限制数量，当前Limit最大支持3000。默认值为3000。
+   * 限制数量，当前Limit最大支持3000。默认值为100。
    */
   Limit?: number
 }

@@ -46,7 +46,7 @@ import {
   ValidateNamespaceExistPersonalRequest,
   RegistryChargePrepaid,
   RenewInstanceResponse,
-  Registry,
+  CreateImmutableTagRulesRequest,
   DescribeRepositoriesResponse,
   VpcAndDomainInfo,
   DeleteInstanceTokenResponse,
@@ -69,12 +69,14 @@ import {
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
   DescribeReplicationInstanceSyncStatusResponse,
+  ModifyImmutableTagRulesResponse,
   Tag,
   DupImageTagResp,
   DeleteApplicationTriggerPersonalResponse,
   DescribeRepositoryFilterPersonalRequest,
   DescribeTagRetentionExecutionTaskResponse,
   DescribeInternalEndpointsResponse,
+  DeleteImmutableTagRulesResponse,
   DescribeRepositoryPersonalRequest,
   AutoDelStrategyInfoResp,
   TriggerResp,
@@ -83,9 +85,11 @@ import {
   CreateTagRetentionRuleRequest,
   DuplicateImagePersonalResponse,
   DescribeImageLifecyclePersonalResponse,
+  DescribeInstanceStatusResponse,
   ModifyInstanceTokenRequest,
   DeleteImageLifecyclePersonalResponse,
   CreateNamespaceResponse,
+  ModifyImmutableTagRulesRequest,
   DescribeRepositoryOwnerPersonalResponse,
   VpcPrivateDomainStatus,
   DescribeSecurityPoliciesResponse,
@@ -100,14 +104,15 @@ import {
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
   ModifyWebhookTriggerRequest,
-  DescribeInstanceStatusResponse,
+  CheckInstanceNameRequest,
   DeleteNamespaceResponse,
   TagInfoResp,
   Favors,
+  CreateWebhookTriggerRequest,
   DescribeRepositoryPersonalResponse,
   CreateSecurityPolicyResponse,
   DescribeRepositoriesRequest,
-  DescribeImageFilterPersonalRequest,
+  CreateUserPersonalRequest,
   ModifyNamespaceResponse,
   ValidateRepositoryExistPersonalRequest,
   ModifyUserPasswordPersonalResponse,
@@ -116,7 +121,7 @@ import {
   ModifyRepositoryInfoPersonalResponse,
   DescribeWebhookTriggerLogRequest,
   RenewInstanceRequest,
-  CreateUserPersonalRequest,
+  DescribeImageFilterPersonalRequest,
   DescribeTagRetentionExecutionTaskRequest,
   ReplicationRule,
   RepoInfoResp,
@@ -124,6 +129,7 @@ import {
   DeleteMultipleSecurityPolicyRequest,
   DeleteSecurityPolicyResponse,
   DescribeInternalEndpointDnsStatusResponse,
+  WebhookTrigger,
   RegistryStatus,
   SecurityPolicy,
   DescribeNamespacePersonalRequest,
@@ -143,7 +149,6 @@ import {
   DescribeWebhookTriggerResponse,
   DescribeImageManifestsRequest,
   ModifyNamespaceRequest,
-  DeleteImageRequest,
   ModifyRepositoryAccessPersonalRequest,
   TagSpecification,
   CreateMultipleSecurityPolicyRequest,
@@ -157,7 +162,7 @@ import {
   BatchDeleteRepositoryPersonalResponse,
   CreateNamespaceRequest,
   BatchDeleteRepositoryPersonalRequest,
-  TriggerInvokeCondition,
+  Registry,
   DescribeChartDownloadInfoRequest,
   ValidateRepositoryExistPersonalResponse,
   DescribeExternalEndpointStatusResponse,
@@ -165,6 +170,8 @@ import {
   NamespaceIsExistsResp,
   DescribeInstancesRequest,
   CreateInternalEndpointDnsRequest,
+  TriggerInvokeCondition,
+  DescribeImmutableTagRulesRequest,
   Filter,
   RetentionExecution,
   ManageReplicationResponse,
@@ -181,10 +188,11 @@ import {
   DescribeImageManifestsResponse,
   DescribeNamespacePersonalResponse,
   DeleteNamespacePersonalResponse,
+  ImmutableTagRule,
   Header,
   RetentionPolicy,
   CreateSecurityPolicyRequest,
-  CreateWebhookTriggerRequest,
+  CreateInternalEndpointDnsResponse,
   DescribeRepositoryOwnerPersonalRequest,
   ModifyRepositoryInfoPersonalRequest,
   DescribeApplicationTriggerLogPersonalRequest,
@@ -201,6 +209,7 @@ import {
   DescribeTagRetentionRulesResponse,
   ModifyRepositoryAccessPersonalResponse,
   ManageExternalEndpointResponse,
+  DescribeImmutableTagRulesResponse,
   ModifyApplicationTriggerPersonalRequest,
   CreateReplicationInstanceResponse,
   CreateInstanceTokenRequest,
@@ -223,19 +232,19 @@ import {
   CreateRepositoryResponse,
   DescribeTagRetentionRulesRequest,
   RespLimit,
-  CheckInstanceNameRequest,
+  CreateImmutableTagRulesResponse,
   DescribeInstanceTokenResponse,
   SameImagesResp,
   DescribeTagRetentionExecutionResponse,
   CreateNamespacePersonalRequest,
-  WebhookTrigger,
+  DeleteImmutableTagRulesRequest,
   CreateWebhookTriggerResponse,
   ReplicationFilter,
   DeleteTagRetentionRuleRequest,
   TcrRepositoryInfo,
   TcrInstanceToken,
   DeleteRepositoryRequest,
-  CreateInternalEndpointDnsResponse,
+  DeleteImageRequest,
   CreateTagRetentionExecutionRequest,
   CreateApplicationTriggerPersonalResponse,
   ManageInternalEndpointRequest,
@@ -361,6 +370,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManageImageLifecycleGlobalPersonalResponse) => void
   ): Promise<ManageImageLifecycleGlobalPersonalResponse> {
     return this.request("ManageImageLifecycleGlobalPersonal", req, cb)
+  }
+
+  /**
+   *  删除镜像不可变规则
+   */
+  async DeleteImmutableTagRules(
+    req: DeleteImmutableTagRulesRequest,
+    cb?: (error: string, rep: DeleteImmutableTagRulesResponse) => void
+  ): Promise<DeleteImmutableTagRulesResponse> {
+    return this.request("DeleteImmutableTagRules", req, cb)
   }
 
   /**
@@ -734,6 +753,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 列出镜像不可变规则
+   */
+  async DescribeImmutableTagRules(
+    req: DescribeImmutableTagRulesRequest,
+    cb?: (error: string, rep: DescribeImmutableTagRulesResponse) => void
+  ): Promise<DescribeImmutableTagRulesResponse> {
+    return this.request("DescribeImmutableTagRules", req, cb)
+  }
+
+  /**
    * 创建实例公网访问白名单策略
    */
   async CreateSecurityPolicy(
@@ -784,6 +813,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建镜像不可变规则
+   */
+  async CreateImmutableTagRules(
+    req: CreateImmutableTagRulesRequest,
+    cb?: (error: string, rep: CreateImmutableTagRulesResponse) => void
+  ): Promise<CreateImmutableTagRulesResponse> {
+    return this.request("CreateImmutableTagRules", req, cb)
+  }
+
+  /**
    * 查询长期访问凭证信息
    */
   async DescribeInstanceToken(
@@ -801,6 +840,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DownloadHelmChartResponse) => void
   ): Promise<DownloadHelmChartResponse> {
     return this.request("DownloadHelmChart", req, cb)
+  }
+
+  /**
+   * 更新镜像不可变规则
+   */
+  async ModifyImmutableTagRules(
+    req: ModifyImmutableTagRulesRequest,
+    cb?: (error: string, rep: ModifyImmutableTagRulesResponse) => void
+  ): Promise<ModifyImmutableTagRulesResponse> {
+    return this.request("ModifyImmutableTagRules", req, cb)
   }
 
   /**

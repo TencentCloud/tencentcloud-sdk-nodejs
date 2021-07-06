@@ -1335,6 +1335,11 @@ FAILED：表示操作失败
    * 操作系统名称。
    */
   OsName: string
+
+  /**
+   * 可用区。
+   */
+  Zone: string
 }
 
 /**
@@ -1408,6 +1413,11 @@ export interface DescribeBundlesRequest {
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。
       */
   Filters?: Array<Filter>
+
+  /**
+   * 可用区列表。默认为全部可用区。
+   */
+  Zones?: Array<string>
 }
 
 /**

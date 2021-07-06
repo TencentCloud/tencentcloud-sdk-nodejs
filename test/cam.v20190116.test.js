@@ -318,6 +318,16 @@ it("cam.v20190116.GetServiceLinkedRoleDeletionStatus", async function () {
     }
 })
 
+it("cam.v20190116.ListPoliciesGrantingServiceAccess", async function () {
+    try {
+       const data = await client.ListPoliciesGrantingServiceAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.ConsumeCustomMFAToken", async function () {
     try {
        const data = await client.ConsumeCustomMFAToken({})

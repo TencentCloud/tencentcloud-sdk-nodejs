@@ -1,4 +1,21 @@
 /**
+ * BindStaffSkillGroupList请求参数结构体
+ */
+export interface BindStaffSkillGroupListRequest {
+    /**
+      * 实例ID
+      */
+    SdkAppId: number;
+    /**
+      * 坐席邮箱
+      */
+    StaffEmail: string;
+    /**
+      * 绑定技能组列表
+      */
+    SkillGroupList: Array<number>;
+}
+/**
  * DescribePSTNActiveSessionList请求参数结构体
  */
 export interface DescribePSTNActiveSessionListRequest {
@@ -73,9 +90,35 @@ export interface DescribeStaffInfoListResponse {
  */
 export interface CreateStaffResponse {
     /**
+      * 错误坐席列表及错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorStaffList: Array<ErrStaffItem>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 技能组信息
+ */
+export interface SkillGroupItem {
+    /**
+      * 技能组ID
+      */
+    SkillGroupId: number;
+    /**
+      * 技能组名称
+      */
+    SkillGroupName: string;
+    /**
+      * 优先级
+      */
+    Priority: number;
+    /**
+      * 类型：IM、TEL、ALL（全媒体）
+      */
+    Type: string;
 }
 /**
  * DescribeTelCdr返回参数结构体
@@ -95,21 +138,17 @@ export interface DescribeTelCdrResponse {
     RequestId?: string;
 }
 /**
- * DescribeIMCdrs返回参数结构体
+ * DeleteStaff请求参数结构体
  */
-export interface DescribeIMCdrsResponse {
+export interface DeleteStaffRequest {
     /**
-      * 总记录数
+      * 实例ID
       */
-    TotalCount?: number;
+    SdkAppId: number;
     /**
-      * 服务记录列表
+      * 待删除客服邮箱列表
       */
-    IMCdrs?: Array<IMCdrInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    StaffList: Array<string>;
 }
 /**
  * DescribeTelSession请求参数结构体
@@ -316,43 +355,18 @@ notInService       不在服务区
     SessionId: string;
 }
 /**
- * 带有技能组优先级的坐席信息
+ * DeleteStaff返回参数结构体
  */
-export interface StaffInfo {
+export interface DeleteStaffResponse {
     /**
-      * 坐席名称
+      * 无法删除的状态为在线的客服列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name: string;
+    OnlineStaffList: Array<string>;
     /**
-      * 坐席邮箱
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Mail: string;
-    /**
-      * 坐席电话号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Phone: string;
-    /**
-      * 坐席昵称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Nick: string;
-    /**
-      * 坐席工号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StaffNumber: string;
-    /**
-      * 所属技能组列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SkillGroupList: Array<SkillGroupItem>;
-    /**
-      * 最后修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastModifyTimestamp: number;
+    RequestId?: string;
 }
 /**
  * DescribeSkillGroupInfoList请求参数结构体
@@ -420,11 +434,11 @@ export interface DescribePSTNActiveSessionListResponse {
     /**
       * 列表总条数
       */
-    Total?: number;
+    Total: number;
     /**
       * 列表内容
       */
-    Sessions?: Array<PSTNSessionInfo>;
+    Sessions: Array<PSTNSessionInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -462,6 +476,23 @@ export interface IMCdrInfo {
       * 服务时间戳
       */
     Timestamp: number;
+}
+/**
+ * 批量添加客服时，返回出错客服的像个信息
+ */
+export interface ErrStaffItem {
+    /**
+      * 坐席邮箱地址
+      */
+    StaffEmail: string;
+    /**
+      * 错误码
+      */
+    Code: string;
+    /**
+      * 错误描述
+      */
+    Message: string;
 }
 /**
  * DescribeChatMessages请求参数结构体
@@ -629,6 +660,62 @@ export interface SkillGroupInfoItem {
     LastModifyTimestamp: number;
 }
 /**
+ * 带有技能组优先级的坐席信息
+ */
+export interface StaffInfo {
+    /**
+      * 坐席名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 坐席邮箱
+      */
+    Mail: string;
+    /**
+      * 坐席电话号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Phone: string;
+    /**
+      * 坐席昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Nick: string;
+    /**
+      * 坐席工号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StaffNumber: string;
+    /**
+      * 所属技能组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupList: Array<SkillGroupItem>;
+    /**
+      * 最后修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastModifyTimestamp: number;
+}
+/**
+ * UnbindStaffSkillGroupList请求参数结构体
+ */
+export interface UnbindStaffSkillGroupListRequest {
+    /**
+      * 实例ID
+      */
+    SdkAppId: number;
+    /**
+      * 客服邮箱
+      */
+    StaffEmail: string;
+    /**
+      * 解绑技能组列表
+      */
+    SkillGroupList: Array<number>;
+}
+/**
  * 参与者信息
  */
 export interface ServeParticipant {
@@ -782,6 +869,24 @@ export interface CreateStaffRequest {
     Staffs: Array<SeatUserInfo>;
 }
 /**
+ * BindStaffSkillGroupList返回参数结构体
+ */
+export interface BindStaffSkillGroupListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UnbindStaffSkillGroupList返回参数结构体
+ */
+export interface UnbindStaffSkillGroupListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeTelCdr请求参数结构体
  */
 export interface DescribeTelCdrRequest {
@@ -817,27 +922,6 @@ export interface DescribeTelCdrRequest {
       * 分页页码，从 0 开始
       */
     PageNumber?: number;
-}
-/**
- * 技能组信息
- */
-export interface SkillGroupItem {
-    /**
-      * 技能组ID
-      */
-    SkillGroupId: number;
-    /**
-      * 技能组名称
-      */
-    SkillGroupName: string;
-    /**
-      * 优先级
-      */
-    Priority: number;
-    /**
-      * 类型：IM、TEL、ALL（全媒体）
-      */
-    Type: string;
 }
 /**
  * 聊天消息
@@ -978,6 +1062,23 @@ export interface DescribeSkillGroupInfoListResponse {
       * 技能组信息列表
       */
     SkillGroupList: Array<SkillGroupInfoItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeIMCdrs返回参数结构体
+ */
+export interface DescribeIMCdrsResponse {
+    /**
+      * 总记录数
+      */
+    TotalCount?: number;
+    /**
+      * 服务记录列表
+      */
+    IMCdrs?: Array<IMCdrInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIMCdrs", req, cb);
     }
     /**
+     * 删除坐席信息
+     */
+    async DeleteStaff(req, cb) {
+        return this.request("DeleteStaff", req, cb);
+    }
+    /**
      * 获取技能组信息列表
      */
     async DescribeSkillGroupInfoList(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTelCallInfo(req, cb) {
         return this.request("DescribeTelCallInfo", req, cb);
+    }
+    /**
+     * 解绑坐席所属技能组
+     */
+    async UnbindStaffSkillGroupList(req, cb) {
+        return this.request("UnbindStaffSkillGroupList", req, cb);
     }
     /**
      * 获取 PSTN 会话信息
@@ -78,7 +90,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSeatUserList", req, cb);
     }
     /**
-     * 获取 PSTN 活动会话列表。
+     * 获取当前正在通话的会话列表
      */
     async DescribePSTNActiveSessionList(req, cb) {
         return this.request("DescribePSTNActiveSessionList", req, cb);
@@ -88,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateStaff(req, cb) {
         return this.request("CreateStaff", req, cb);
+    }
+    /**
+     * 绑定坐席所属技能组
+     */
+    async BindStaffSkillGroupList(req, cb) {
+        return this.request("BindStaffSkillGroupList", req, cb);
     }
     /**
      * 获取电话服务记录与录音

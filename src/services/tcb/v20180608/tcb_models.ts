@@ -2218,6 +2218,11 @@ export interface EstablishCloudBaseRunServerRequest {
    * OA PUBLIC MINIAPP VPC
    */
   OpenAccessTypes?: Array<string>
+
+  /**
+   * 是否创建Path 0未传默认创建 1创建 2不创建
+   */
+  IsCreatePath?: number
 }
 
 /**

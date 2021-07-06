@@ -31,6 +31,16 @@ export interface ChargePrepaid {
 }
 
 /**
+ * InquiryPriceTerminateInstances返回参数结构体
+ */
+export interface InquiryPriceTerminateInstancesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 本地磁盘规格
  */
 export interface LocalDiskType {
@@ -3370,6 +3380,16 @@ export interface InstanceTypeQuotaItem {
    * 实例备注信息。
    */
   Remark: string
+}
+
+/**
+ * InquiryPriceTerminateInstances请求参数结构体
+ */
+export interface InquiryPriceTerminateInstancesRequest {
+  /**
+   * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+   */
+  InstanceIds: Array<string>
 }
 
 /**

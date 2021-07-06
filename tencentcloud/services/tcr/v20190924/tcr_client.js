@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManageImageLifecycleGlobalPersonal", req, cb);
     }
     /**
+     *  删除镜像不可变规则
+     */
+    async DeleteImmutableTagRules(req, cb) {
+        return this.request("DeleteImmutableTagRules", req, cb);
+    }
+    /**
      * 用于在个人版中删除tag
      */
     async DeleteImagePersonal(req, cb) {
@@ -316,6 +322,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNamespace", req, cb);
     }
     /**
+     * 列出镜像不可变规则
+     */
+    async DescribeImmutableTagRules(req, cb) {
+        return this.request("DescribeImmutableTagRules", req, cb);
+    }
+    /**
      * 创建实例公网访问白名单策略
      */
     async CreateSecurityPolicy(req, cb) {
@@ -346,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserQuotaPersonal", req, cb);
     }
     /**
+     * 创建镜像不可变规则
+     */
+    async CreateImmutableTagRules(req, cb) {
+        return this.request("CreateImmutableTagRules", req, cb);
+    }
+    /**
      * 查询长期访问凭证信息
      */
     async DescribeInstanceToken(req, cb) {
@@ -356,6 +374,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DownloadHelmChart(req, cb) {
         return this.request("DownloadHelmChart", req, cb);
+    }
+    /**
+     * 更新镜像不可变规则
+     */
+    async ModifyImmutableTagRules(req, cb) {
+        return this.request("ModifyImmutableTagRules", req, cb);
     }
     /**
      * 用于删除应用更新触发器

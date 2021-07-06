@@ -562,73 +562,21 @@ export interface RenewInstanceResponse {
     RequestId?: string;
 }
 /**
- * 实例信息结构体
+ * CreateImmutableTagRules请求参数结构体
  */
-export interface Registry {
+export interface CreateImmutableTagRulesRequest {
     /**
-      * 实例ID
+      * 实例 Id
       */
     RegistryId: string;
     /**
-      * 实例名称
+      * 命名空间
       */
-    RegistryName: string;
+    NamespaceName: string;
     /**
-      * 实例规格
+      * 规则
       */
-    RegistryType: string;
-    /**
-      * 实例状态
-      */
-    Status: string;
-    /**
-      * 实例的公共访问地址
-      */
-    PublicDomain: string;
-    /**
-      * 实例创建时间
-      */
-    CreatedAt: string;
-    /**
-      * 地域名称
-      */
-    RegionName: string;
-    /**
-      * 地域Id
-      */
-    RegionId: number;
-    /**
-      * 是否支持匿名
-      */
-    EnableAnonymous: boolean;
-    /**
-      * Token有效时间
-      */
-    TokenValidTime: number;
-    /**
-      * 实例内部访问地址
-      */
-    InternalEndpoint: string;
-    /**
-      * 实例云标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TagSpecification: TagSpecification;
-    /**
-      * 实例过期时间（预付费）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExpiredAt: string;
-    /**
-      * 实例付费类型，0表示后付费，1表示预付费
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PayMod: number;
-    /**
-      * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RenewFlag: number;
+    Rule: ImmutableTagRule;
 }
 /**
  * DescribeRepositories返回参数结构体
@@ -960,6 +908,15 @@ export interface DescribeReplicationInstanceSyncStatusResponse {
     RequestId?: string;
 }
 /**
+ * ModifyImmutableTagRules返回参数结构体
+ */
+export interface ModifyImmutableTagRulesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 云标签Tag
  */
 export interface Tag {
@@ -1045,6 +1002,15 @@ export interface DescribeInternalEndpointsResponse {
       * 内网接入总数
       */
     TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteImmutableTagRules返回参数结构体
+ */
+export interface DeleteImmutableTagRulesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1195,6 +1161,20 @@ export interface DescribeImageLifecyclePersonalResponse {
     RequestId?: string;
 }
 /**
+ * DescribeInstanceStatus返回参数结构体
+ */
+export interface DescribeInstanceStatusResponse {
+    /**
+      * 实例的状态列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegistryStatusSet?: Array<RegistryStatus>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyInstanceToken请求参数结构体
  */
 export interface ModifyInstanceTokenRequest {
@@ -1236,6 +1216,27 @@ export interface CreateNamespaceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyImmutableTagRules请求参数结构体
+ */
+export interface ModifyImmutableTagRulesRequest {
+    /**
+      * 实例 Id
+      */
+    RegistryId: string;
+    /**
+      * 命名空间
+      */
+    NamespaceName: string;
+    /**
+      * 规则 Id
+      */
+    RuleId: number;
+    /**
+      * 规则
+      */
+    Rule: ImmutableTagRule;
 }
 /**
  * DescribeRepositoryOwnerPersonal返回参数结构体
@@ -1419,18 +1420,13 @@ export interface ModifyWebhookTriggerRequest {
     Namespace: string;
 }
 /**
- * DescribeInstanceStatus返回参数结构体
+ * CheckInstanceName请求参数结构体
  */
-export interface DescribeInstanceStatusResponse {
+export interface CheckInstanceNameRequest {
     /**
-      * 实例的状态列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 待创建的实例名称
       */
-    RegistryStatusSet?: Array<RegistryStatus>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    RegistryName: string;
 }
 /**
  * DeleteNamespace返回参数结构体
@@ -1514,6 +1510,23 @@ export interface Favors {
     RegionId: number;
 }
 /**
+ * CreateWebhookTrigger请求参数结构体
+ */
+export interface CreateWebhookTriggerRequest {
+    /**
+      * 实例 Id
+      */
+    RegistryId: string;
+    /**
+      * 触发器参数
+      */
+    Trigger: WebhookTrigger;
+    /**
+      * 命名空间
+      */
+    Namespace: string;
+}
+/**
  * DescribeRepositoryPersonal返回参数结构体
  */
 export interface DescribeRepositoryPersonalResponse {
@@ -1569,17 +1582,13 @@ export interface DescribeRepositoriesRequest {
     SortBy?: string;
 }
 /**
- * DescribeImageFilterPersonal请求参数结构体
+ * CreateUserPersonal请求参数结构体
  */
-export interface DescribeImageFilterPersonalRequest {
+export interface CreateUserPersonalRequest {
     /**
-      * 仓库名称
+      * 用户密码
       */
-    RepoName: string;
-    /**
-      * Tag名
-      */
-    Tag: string;
+    Password: string;
 }
 /**
  * ModifyNamespace返回参数结构体
@@ -1698,13 +1707,17 @@ export interface RenewInstanceRequest {
     Flag: number;
 }
 /**
- * CreateUserPersonal请求参数结构体
+ * DescribeImageFilterPersonal请求参数结构体
  */
-export interface CreateUserPersonalRequest {
+export interface DescribeImageFilterPersonalRequest {
     /**
-      * 用户密码
+      * 仓库名称
       */
-    Password: string;
+    RepoName: string;
+    /**
+      * Tag名
+      */
+    Tag: string;
 }
 /**
  * DescribeTagRetentionExecutionTask请求参数结构体
@@ -1817,6 +1830,43 @@ export interface DescribeInternalEndpointDnsStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Webhook 触发器
+ */
+export interface WebhookTrigger {
+    /**
+      * 触发器名称
+      */
+    Name: string;
+    /**
+      * 触发器目标
+      */
+    Targets: Array<WebhookTarget>;
+    /**
+      * 触发动作
+      */
+    EventTypes: Array<string>;
+    /**
+      * 触发规则
+      */
+    Condition: string;
+    /**
+      * 启用触发器
+      */
+    Enabled: boolean;
+    /**
+      * 触发器Id
+      */
+    Id?: number;
+    /**
+      * 触发器描述
+      */
+    Description?: string;
+    /**
+      * 触发器所属命名空间 Id
+      */
+    NamespaceId?: number;
 }
 /**
  * 实例状态
@@ -2144,27 +2194,6 @@ export interface ModifyNamespaceRequest {
     IsPublic: boolean;
 }
 /**
- * DeleteImage请求参数结构体
- */
-export interface DeleteImageRequest {
-    /**
-      * 实例Id
-      */
-    RegistryId: string;
-    /**
-      * 镜像仓库名称
-      */
-    RepositoryName: string;
-    /**
-      * 镜像版本
-      */
-    ImageVersion: string;
-    /**
-      * 命名空间名称
-      */
-    NamespaceName: string;
-}
-/**
  * ModifyRepositoryAccessPersonal请求参数结构体
  */
 export interface ModifyRepositoryAccessPersonalRequest {
@@ -2376,18 +2405,73 @@ export interface BatchDeleteRepositoryPersonalRequest {
     RepoNames: Array<string>;
 }
 /**
- * 触发器触发条件
+ * 实例信息结构体
  */
-export interface TriggerInvokeCondition {
+export interface Registry {
     /**
-      * 触发方式
+      * 实例ID
       */
-    InvokeMethod: string;
+    RegistryId: string;
     /**
-      * 触发表达式
+      * 实例名称
+      */
+    RegistryName: string;
+    /**
+      * 实例规格
+      */
+    RegistryType: string;
+    /**
+      * 实例状态
+      */
+    Status: string;
+    /**
+      * 实例的公共访问地址
+      */
+    PublicDomain: string;
+    /**
+      * 实例创建时间
+      */
+    CreatedAt: string;
+    /**
+      * 地域名称
+      */
+    RegionName: string;
+    /**
+      * 地域Id
+      */
+    RegionId: number;
+    /**
+      * 是否支持匿名
+      */
+    EnableAnonymous: boolean;
+    /**
+      * Token有效时间
+      */
+    TokenValidTime: number;
+    /**
+      * 实例内部访问地址
+      */
+    InternalEndpoint: string;
+    /**
+      * 实例云标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InvokeExpr: string;
+    TagSpecification: TagSpecification;
+    /**
+      * 实例过期时间（预付费）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpiredAt: string;
+    /**
+      * 实例付费类型，0表示后付费，1表示预付费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayMod: number;
+    /**
+      * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag: number;
 }
 /**
  * DescribeChartDownloadInfo请求参数结构体
@@ -2523,6 +2607,29 @@ false: 使用vpc域名
 默认为vpc域名
       */
     UsePublicDomain?: boolean;
+}
+/**
+ * 触发器触发条件
+ */
+export interface TriggerInvokeCondition {
+    /**
+      * 触发方式
+      */
+    InvokeMethod: string;
+    /**
+      * 触发表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvokeExpr: string;
+}
+/**
+ * DescribeImmutableTagRules请求参数结构体
+ */
+export interface DescribeImmutableTagRulesRequest {
+    /**
+      * 实例 Id
+      */
+    RegistryId: string;
 }
 /**
  * 过滤器
@@ -2773,6 +2880,39 @@ export interface DeleteNamespacePersonalResponse {
     RequestId?: string;
 }
 /**
+ * 镜像 tag 不可变规则
+ */
+export interface ImmutableTagRule {
+    /**
+      * 仓库匹配规则
+      */
+    RepositoryPattern: string;
+    /**
+      * Tag 匹配规则
+      */
+    TagPattern: string;
+    /**
+      * repoMatches或repoExcludes
+      */
+    RepositoryDecoration: string;
+    /**
+      * matches或excludes
+      */
+    TagDecoration: string;
+    /**
+      * 禁用规则
+      */
+    Disabled?: boolean;
+    /**
+      * 规则 Id
+      */
+    RuleId?: number;
+    /**
+      * 命名空间
+      */
+    NsName?: string;
+}
+/**
  * Header KV
  */
 export interface Header {
@@ -2832,21 +2972,13 @@ export interface CreateSecurityPolicyRequest {
     Description: string;
 }
 /**
- * CreateWebhookTrigger请求参数结构体
+ * CreateInternalEndpointDns返回参数结构体
  */
-export interface CreateWebhookTriggerRequest {
+export interface CreateInternalEndpointDnsResponse {
     /**
-      * 实例 Id
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RegistryId: string;
-    /**
-      * 触发器参数
-      */
-    Trigger: WebhookTrigger;
-    /**
-      * 命名空间
-      */
-    Namespace: string;
+    RequestId?: string;
 }
 /**
  * DescribeRepositoryOwnerPersonal请求参数结构体
@@ -3059,6 +3191,29 @@ export interface ManageExternalEndpointResponse {
       * 实例Id
       */
     RegistryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeImmutableTagRules返回参数结构体
+ */
+export interface DescribeImmutableTagRulesResponse {
+    /**
+      * 规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rules: Array<ImmutableTagRule>;
+    /**
+      * 未创建规则的命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EmptyNs: Array<string>;
+    /**
+      * 规则总量
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3484,13 +3639,13 @@ export interface RespLimit {
     LimitInfo: Array<Limit>;
 }
 /**
- * CheckInstanceName请求参数结构体
+ * CreateImmutableTagRules返回参数结构体
  */
-export interface CheckInstanceNameRequest {
+export interface CreateImmutableTagRulesResponse {
     /**
-      * 待创建的实例名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RegistryName: string;
+    RequestId?: string;
 }
 /**
  * DescribeInstanceToken返回参数结构体
@@ -3546,41 +3701,21 @@ export interface CreateNamespacePersonalRequest {
     Namespace: string;
 }
 /**
- * Webhook 触发器
+ * DeleteImmutableTagRules请求参数结构体
  */
-export interface WebhookTrigger {
+export interface DeleteImmutableTagRulesRequest {
     /**
-      * 触发器名称
+      * 实例 Id
       */
-    Name: string;
+    RegistryId: string;
     /**
-      * 触发器目标
+      * 命名空间
       */
-    Targets: Array<WebhookTarget>;
+    NamespaceName: string;
     /**
-      * 触发动作
+      * 规则 Id
       */
-    EventTypes: Array<string>;
-    /**
-      * 触发规则
-      */
-    Condition: string;
-    /**
-      * 启用触发器
-      */
-    Enabled: boolean;
-    /**
-      * 触发器Id
-      */
-    Id?: number;
-    /**
-      * 触发器描述
-      */
-    Description?: string;
-    /**
-      * 触发器所属命名空间 Id
-      */
-    NamespaceId?: number;
+    RuleId: number;
 }
 /**
  * CreateWebhookTrigger返回参数结构体
@@ -3703,13 +3838,25 @@ export interface DeleteRepositoryRequest {
     RepositoryName: string;
 }
 /**
- * CreateInternalEndpointDns返回参数结构体
+ * DeleteImage请求参数结构体
  */
-export interface CreateInternalEndpointDnsResponse {
+export interface DeleteImageRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例Id
       */
-    RequestId?: string;
+    RegistryId: string;
+    /**
+      * 镜像仓库名称
+      */
+    RepositoryName: string;
+    /**
+      * 镜像版本
+      */
+    ImageVersion: string;
+    /**
+      * 命名空间名称
+      */
+    NamespaceName: string;
 }
 /**
  * CreateTagRetentionExecution请求参数结构体

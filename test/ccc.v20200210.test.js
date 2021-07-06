@@ -38,6 +38,16 @@ it("ccc.v20200210.DescribeIMCdrs", async function () {
     }
 })
 
+it("ccc.v20200210.DeleteStaff", async function () {
+    try {
+       const data = await client.DeleteStaff({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
     try {
        const data = await client.DescribeSkillGroupInfoList({})
@@ -61,6 +71,16 @@ it("ccc.v20200210.DescribeStaffInfoList", async function () {
 it("ccc.v20200210.DescribeTelCallInfo", async function () {
     try {
        const data = await client.DescribeTelCallInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
+    try {
+       const data = await client.UnbindStaffSkillGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +131,16 @@ it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
 it("ccc.v20200210.CreateStaff", async function () {
     try {
        const data = await client.CreateStaff({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.BindStaffSkillGroupList", async function () {
+    try {
+       const data = await client.BindStaffSkillGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

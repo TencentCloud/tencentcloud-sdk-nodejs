@@ -208,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetServiceLinkedRoleDeletionStatus", req, cb);
     }
     /**
+     * 获取所有已授权服务
+     */
+    async ListPoliciesGrantingServiceAccess(req, cb) {
+        return this.request("ListPoliciesGrantingServiceAccess", req, cb);
+    }
+    /**
      * 验证自定义多因子Token
      */
     async ConsumeCustomMFAToken(req, cb) {

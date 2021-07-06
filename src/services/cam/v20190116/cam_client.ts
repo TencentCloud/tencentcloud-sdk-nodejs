@@ -67,6 +67,7 @@ import {
   ListAttachedRolePoliciesResponse,
   DeleteUserResponse,
   DetachRolePolicyRequest,
+  ListPoliciesGrantingServiceAccessResponse,
   DeleteRolePermissionsBoundaryRequest,
   StrategyInfo,
   DeletePolicyRequest,
@@ -86,6 +87,8 @@ import {
   SubAccountInfo,
   CreateGroupRequest,
   SAMLProviderInfo,
+  ListGrantServiceAccessPolicy,
+  ListPoliciesGrantingServiceAccessRequest,
   UpdateSAMLProviderResponse,
   UpdateUserRequest,
   ListWeChatWorkSubAccountsResponse,
@@ -115,10 +118,12 @@ import {
   ListEntitiesForPolicyRequest,
   ListPoliciesRequest,
   GetServiceLinkedRoleDeletionStatusRequest,
+  ListGrantServiceAccessActionNode,
   DetachGroupPolicyResponse,
   CreatePolicyRequest,
   DeletePolicyVersionRequest,
   UpdateGroupRequest,
+  ListGrantServiceAccessNode,
   GetPolicyVersionResponse,
   CreateRoleResponse,
   GetSAMLProviderResponse,
@@ -146,6 +151,7 @@ import {
   ListUsersForGroupResponse,
   PolicyVersionDetail,
   AddUserResponse,
+  ListGrantServiceAccessService,
   DescribeSubAccountsResponse,
   ListEntitiesForPolicyResponse,
   AddUserToGroupResponse,
@@ -469,6 +475,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetServiceLinkedRoleDeletionStatusResponse) => void
   ): Promise<GetServiceLinkedRoleDeletionStatusResponse> {
     return this.request("GetServiceLinkedRoleDeletionStatus", req, cb)
+  }
+
+  /**
+   * 获取所有已授权服务
+   */
+  async ListPoliciesGrantingServiceAccess(
+    req: ListPoliciesGrantingServiceAccessRequest,
+    cb?: (error: string, rep: ListPoliciesGrantingServiceAccessResponse) => void
+  ): Promise<ListPoliciesGrantingServiceAccessResponse> {
+    return this.request("ListPoliciesGrantingServiceAccess", req, cb)
   }
 
   /**
