@@ -21,6 +21,7 @@ import {
   DescribeEnvLimitResponse,
   OrderInfo,
   CheckTcbServiceResponse,
+  DescribeCloudBaseRunConfForGateWayRequest,
   DescribeCloudBaseRunServerVersionRequest,
   DescribeExtensionUploadInfoRequest,
   DescribeCloudBaseRunServerVersionResponse,
@@ -56,12 +57,13 @@ import {
   FunctionInfo,
   CommonServiceAPIRequest,
   CreateWxCloudBaseRunEnvRequest,
+  ModifyCloudBaseRunServerFlowConfRequest,
   CreateStaticStoreRequest,
   CreateWxCloudBaseRunServerDBClusterRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
   CreateAuthDomainResponse,
   DescribeEnvsRequest,
-  Tag,
+  CloudBaseRunVersionFlowItem,
   DeleteWxGatewayRouteRequest,
   DescribeExtraPkgBillingInfoRequest,
   DescribeWxCloudBaseRunSubNetsResponse,
@@ -73,6 +75,7 @@ import {
   DeleteEndUserResponse,
   ModifyDatabaseACLResponse,
   CloudBaseEsInfo,
+  ModifyCloudBaseRunServerFlowConfResponse,
   EstablishCloudBaseRunServerResponse,
   EnvInfo,
   DestroyEnvRequest,
@@ -103,6 +106,7 @@ import {
   DescribeCloudBaseRunResourceForExtendResponse,
   CreateAndDeployCloudBaseProjectRequest,
   DescribeCloudBaseRunVersionRequest,
+  DescribeCloudBaseRunConfForGateWayResponse,
   DatabasesInfo,
   CloudBaseSecurityContext,
   ExtensionFile,
@@ -139,11 +143,14 @@ import {
   DescribeCloudBaseBuildServiceRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
+  Tag,
   CreateCloudBaseRunResourceRequest,
   ModifyEndUserResponse,
   DescribeAuthDomainsRequest,
   CloudRunServiceVolume,
+  CloudBaseRunForGatewayConf,
   ExtensionFileInfo,
+  ObjectKV,
   CloudBaseProjectVersion,
   DescribeDatabaseACLResponse,
   DescribeExtensionUploadInfoResponse,
@@ -359,13 +366,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询静态托管域名任务状态
+   * 独立网关中拉取云托管服务对应的配置信息
    */
-  async DescribeHostingDomainTask(
-    req: DescribeHostingDomainTaskRequest,
-    cb?: (error: string, rep: DescribeHostingDomainTaskResponse) => void
-  ): Promise<DescribeHostingDomainTaskResponse> {
-    return this.request("DescribeHostingDomainTask", req, cb)
+  async DescribeCloudBaseRunConfForGateWay(
+    req: DescribeCloudBaseRunConfForGateWayRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunConfForGateWayResponse) => void
+  ): Promise<DescribeCloudBaseRunConfForGateWayResponse> {
+    return this.request("DescribeCloudBaseRunConfForGateWay", req, cb)
   }
 
   /**
@@ -386,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabaseACLResponse) => void
   ): Promise<DescribeDatabaseACLResponse> {
     return this.request("DescribeDatabaseACL", req, cb)
+  }
+
+  /**
+   * 修改容器内的版本流量配置
+   */
+  async ModifyCloudBaseRunServerFlowConf(
+    req: ModifyCloudBaseRunServerFlowConfRequest,
+    cb?: (error: string, rep: ModifyCloudBaseRunServerFlowConfResponse) => void
+  ): Promise<ModifyCloudBaseRunServerFlowConfResponse> {
+    return this.request("ModifyCloudBaseRunServerFlowConf", req, cb)
   }
 
   /**
@@ -486,6 +503,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEndUserLoginStatisticResponse) => void
   ): Promise<DescribeEndUserLoginStatisticResponse> {
     return this.request("DescribeEndUserLoginStatistic", req, cb)
+  }
+
+  /**
+   * 查询静态托管域名任务状态
+   */
+  async DescribeHostingDomainTask(
+    req: DescribeHostingDomainTaskRequest,
+    cb?: (error: string, rep: DescribeHostingDomainTaskResponse) => void
+  ): Promise<DescribeHostingDomainTaskResponse> {
+    return this.request("DescribeHostingDomainTask", req, cb)
   }
 
   /**

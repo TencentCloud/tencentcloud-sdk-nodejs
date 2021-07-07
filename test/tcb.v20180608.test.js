@@ -208,9 +208,9 @@ it("tcb.v20180608.DescribeCloudBaseProjectLatestVersionList", async function () 
     }
 })
 
-it("tcb.v20180608.DescribeHostingDomainTask", async function () {
+it("tcb.v20180608.DescribeCloudBaseRunConfForGateWay", async function () {
     try {
-       const data = await client.DescribeHostingDomainTask({})
+       const data = await client.DescribeCloudBaseRunConfForGateWay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +231,16 @@ it("tcb.v20180608.ReinstateEnv", async function () {
 it("tcb.v20180608.DescribeDatabaseACL", async function () {
     try {
        const data = await client.DescribeDatabaseACL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyCloudBaseRunServerFlowConf", async function () {
+    try {
+       const data = await client.ModifyCloudBaseRunServerFlowConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +341,16 @@ it("tcb.v20180608.DeleteEndUser", async function () {
 it("tcb.v20180608.DescribeEndUserLoginStatistic", async function () {
     try {
        const data = await client.DescribeEndUserLoginStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeHostingDomainTask", async function () {
+    try {
+       const data = await client.DescribeHostingDomainTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

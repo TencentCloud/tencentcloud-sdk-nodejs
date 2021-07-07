@@ -536,11 +536,11 @@ export interface DescribeCommonDBInstancesRequest {
       */
     Vips?: Array<string>;
     /**
-      * vpc网络统一Id列表
+      * vpc网络ID信息列表
       */
     UniqVpcIds?: Array<string>;
     /**
-      * 子网统一id列表
+      * 子网统一ID列表
       */
     UniqSubnetIds?: Array<string>;
     /**
@@ -1143,7 +1143,7 @@ export interface RedisCommonInstanceList {
       */
     SubnetId: string;
     /**
-      * 实例状态信息，0-创建中，1-运行中
+      * 实例状态信息，1-流程中 ,2-运行中, -2-实例已隔离 ,-3-实例待回收, -4-实例已删除
       */
     Status: string;
     /**
@@ -1409,11 +1409,11 @@ export interface DescribeProjectSecurityGroupsResponse {
     /**
       * 安全组规则。
       */
-    Groups?: Array<SecurityGroup>;
+    Groups: Array<SecurityGroup>;
     /**
       * 符合条件的安全组总数量。
       */
-    Total?: number;
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1582,7 +1582,7 @@ export interface DescribeInstanceMonitorTopNCmdTookResponse {
     /**
       * 耗时详细信息
       */
-    Data?: Array<CommandTake>;
+    Data: Array<CommandTake>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2023,7 +2023,13 @@ export interface CreateInstanceAccountRequest {
       */
     AccountName: string;
     /**
-      * 子账号密码
+      * 1.长度8-30位,推荐使用12位以上的密码
+2.不能以"/"开头
+3.至少包含两项
+    a.小写字母a-z
+    b.大写字母A-Z
+    c.数字0-9
+    d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/
       */
     AccountPassword: string;
     /**
@@ -2891,11 +2897,11 @@ export interface DescribeCommonDBInstancesResponse {
     /**
       * 实例数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例信息
       */
-    InstanceDetails?: Array<RedisCommonInstanceList>;
+    InstanceDetails: Array<RedisCommonInstanceList>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2906,7 +2912,7 @@ export interface DescribeCommonDBInstancesResponse {
  */
 export interface DescribeInstanceMonitorTopNCmdTookRequest {
     /**
-      * 实例Id
+      * 实例ID
       */
     InstanceId: string;
     /**
@@ -3369,7 +3375,7 @@ export interface CreateInstanceAccountResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVuls", req, cb);
     }
     /**
+     * DescribeScanTaskDetails 查询扫描任务详情 , 可以查询扫描进度信息/异常;
+     */
+    async DescribeScanTaskDetails(req, cb) {
+        return this.request("DescribeScanTaskDetails", req, cb);
+    }
+    /**
      * 本接口{MisAlarmNonlocalLoginPlaces}将设置当前地点为常用登录地。
      */
     async MisAlarmNonlocalLoginPlaces(req, cb) {
@@ -248,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateSearchLog(req, cb) {
         return this.request("CreateSearchLog", req, cb);
+    }
+    /**
+     * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
+     */
+    async IgnoreImpactedHosts(req, cb) {
+        return this.request("IgnoreImpactedHosts", req, cb);
     }
     /**
      * 本接口用于编辑异地登录白名单规则。
@@ -413,6 +425,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseProVersion", req, cb);
     }
     /**
+     * 定期扫描漏洞设置
+     */
+    async ScanVulSetting(req, cb) {
+        return this.request("ScanVulSetting", req, cb);
+    }
+    /**
      * 本接口 (DescribeAccountStatistics) 用于获取帐号统计列表数据。
      */
     async DescribeAccountStatistics(req, cb) {
@@ -521,7 +539,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddLoginWhiteList", req, cb);
     }
     /**
-     * 漏洞管理 - 一键检测
+     *  一键检测
      */
     async ScanVul(req, cb) {
         return this.request("ScanVul", req, cb);
@@ -551,6 +569,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBashRules", req, cb);
     }
     /**
+     * 漏洞管理-重新检测接口
+     */
+    async ScanVulAgain(req, cb) {
+        return this.request("ScanVulAgain", req, cb);
+    }
+    /**
      * 获取反弹Shell列表
      */
     async DescribeReverseShellEvents(req, cb) {
@@ -563,10 +587,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoOpenProVersionConfig", req, cb);
     }
     /**
-     * 本接口 (IgnoreImpactedHosts) 用于忽略漏洞。
+     * 查询定时扫描配置
      */
-    async IgnoreImpactedHosts(req, cb) {
-        return this.request("IgnoreImpactedHosts", req, cb);
+    async DescribeMalwareTimingScanSetting(req, cb) {
+        return this.request("DescribeMalwareTimingScanSetting", req, cb);
     }
     /**
      * 获取主机最近趋势情况
@@ -727,6 +751,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMalwareTimingScanSettings", req, cb);
     }
     /**
+     * 该接口可以对入侵检测-文件查杀扫描检测
+     */
+    async CreateScanMalwareSetting(req, cb) {
+        return this.request("CreateScanMalwareSetting", req, cb);
+    }
+    /**
      * 本接口 (DescribeComponentInfo) 用于获取组件信息数据。
      */
     async DescribeComponentInfo(req, cb) {
@@ -761,6 +791,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAttackLogs(req, cb) {
         return this.request("DeleteAttackLogs", req, cb);
+    }
+    /**
+     * 查询定期检测的配置
+     */
+    async DescribeScanVulSetting(req, cb) {
+        return this.request("DescribeScanVulSetting", req, cb);
     }
     /**
      * 本接口（DeleteMachine）用于卸载云镜客户端。
@@ -845,6 +881,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportVulDetectionReport(req, cb) {
         return this.request("ExportVulDetectionReport", req, cb);
+    }
+    /**
+     * 新增或修改高危命令规则
+     */
+    async EditBashRules(req, cb) {
+        return this.request("EditBashRules", req, cb);
     }
     /**
      * 本接口 (InquiryPriceOpenProVersionPrepaid) 用于开通专业版询价(预付费)。

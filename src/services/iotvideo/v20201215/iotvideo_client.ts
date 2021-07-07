@@ -23,22 +23,26 @@ import {
   CreateCloudStorageRequest,
   VideoBatch,
   ImportModelDefinitionResponse,
-  DescribeModelDefinitionResponse,
+  ApplyAIModelRequest,
   CreateBatchRequest,
+  CancelAIModelApplicationResponse,
   DescribeCloudStorageTimeResponse,
+  ReportAliveDeviceRequest,
   DescribeProductsRequest,
-  DescribeDeviceEventHistoryResponse,
+  DescribeAIModelChannelResponse,
   DescribeDeviceActionHistoryRequest,
   DescribeDevicesResponse,
   ModifyProductResponse,
   ModifyProductRequest,
   ModifyModelDefinitionRequest,
   DescribeBatchsResponse,
+  CancelAIModelApplicationRequest,
   TransferCloudStorageResponse,
   DescribeForwardRuleResponse,
   DescribeBatchRequest,
-  CloudStorageTimeInfo,
+  DescribeForwardRuleRequest,
   ModifyDeviceRequest,
+  CreateCOSCredentialsResponse,
   ProductModelDefinition,
   ActionHistory,
   DescribeFirmwareTaskStatisticsResponse,
@@ -50,17 +54,20 @@ import {
   CreateBatchResponse,
   DescribeDeviceActionHistoryResponse,
   GetAllFirmwareVersionRequest,
+  CreateCOSCredentialsRequest,
   DeviceCommLogItem,
   DeviceUpdateStatus,
   DeleteFirmwareResponse,
   CreateForwardRuleResponse,
   BatchUpdateFirmwareResponse,
+  DescribeModelDefinitionResponse,
   DeleteProductRequest,
   StatusStatistic,
   PublishMessageResponse,
   SetForwardAuthResponse,
   EditFirmwareRequest,
   DeviceDataHistoryItem,
+  ReportAliveDeviceResponse,
   DescribeDeviceEventHistoryRequest,
   DescribeCategoryResponse,
   DescribeBalanceRequest,
@@ -69,18 +76,22 @@ import {
   DeleteDeviceRequest,
   GenerateSignedVideoURLResponse,
   ControlDeviceDataRequest,
-  ListFirmwaresResponse,
+  AIModelUsageInfo,
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
   DescribeDeviceCommLogRequest,
   DeleteForwardRuleRequest,
+  UpdateAIModelChannelResponse,
+  DescribeAIModelUsageResponse,
   DescribeBalanceTransactionsRequest,
   CreateProductResponse,
   DescribeFirmwareTaskDevicesResponse,
   DescribeCloudStorageThumbnailResponse,
+  DescribeAIModelsRequest,
   RetryDeviceFirmwareTaskResponse,
   GenerateSignedVideoURLRequest,
   ResetCloudStorageResponse,
+  DescribeDeviceEventHistoryResponse,
   DescribeFirmwareTaskResponse,
   FirmwareInfo,
   CreateProductRequest,
@@ -101,20 +112,24 @@ import {
   ModifyForwardRuleResponse,
   BalanceTransaction,
   FirmwareTaskInfo,
+  AIModelApplication,
   DescribeFirmwareTaskDistributionResponse,
   DescribeBatchResponse,
   DescribeDeviceRequest,
   ModifyForwardRuleRequest,
+  CreateAIDetectionResponse,
   DescribeCloudStorageEventsResponse,
   VideoProduct,
   CloudStorageEvent,
   DescribeCloudStorageDateResponse,
-  DescribeForwardRuleRequest,
+  CloudStorageTimeInfo,
   UploadFirmwareResponse,
+  UpdateAIModelChannelRequest,
   CreateCloudStorageResponse,
   CancelDeviceFirmwareTaskRequest,
   CancelDeviceFirmwareTaskResponse,
   DeleteDeviceResponse,
+  ApplyAIModelResponse,
   ControlDeviceDataResponse,
   DescribeDeviceDataHistoryRequest,
   EventHistoryItem,
@@ -127,19 +142,26 @@ import {
   BatchUpdateFirmwareRequest,
   DescribeCloudStorageThumbnailRequest,
   GetFirmwareURLRequest,
+  CreateAIDetectionRequest,
   DescribeCloudStorageResponse,
   DescribeProductResponse,
+  DescribeAIModelsResponse,
+  DescribeAIModelChannelRequest,
+  DescribeAIModelUsageRequest,
   DescribeCategoryRequest,
   DeleteFirmwareRequest,
   DescribeCloudStorageRequest,
   GetAllFirmwareVersionResponse,
+  AIModelInfo,
   DescribeDeviceDataHistoryResponse,
   SearchKeyword,
   DescribeDevicesRequest,
   DescribeModelDefinitionRequest,
   CheckForwardAuthResponse,
+  DescribeAIModelApplicationsRequest,
   DescribeDeviceDataResponse,
   DeleteForwardRuleResponse,
+  ListFirmwaresResponse,
   TransferCloudStorageRequest,
   DescribeFirmwareTaskStatisticsRequest,
   DescribeBatchsRequest,
@@ -148,6 +170,7 @@ import {
   ResetCloudStorageRequest,
   DescribeFirmwareTaskRequest,
   DescribeCloudStorageTimeRequest,
+  DescribeAIModelApplicationsResponse,
 } from "./iotvideo_models"
 
 /**
@@ -220,6 +243,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 发起AI推理请求
+   */
+  async CreateAIDetection(
+    req: CreateAIDetectionRequest,
+    cb?: (error: string, rep: CreateAIDetectionResponse) => void
+  ): Promise<CreateAIDetectionResponse> {
+    return this.request("CreateAIDetection", req, cb)
+  }
+
+  /**
    * 本接口（DescribeFirmware）用于查询固件信息
    */
   async DescribeFirmware(
@@ -250,13 +283,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看设备详情
+   * 拉取AI模型列表
    */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
+  async DescribeAIModels(
+    req: DescribeAIModelsRequest,
+    cb?: (error: string, rep: DescribeAIModelsResponse) => void
+  ): Promise<DescribeAIModelsResponse> {
+    return this.request("DescribeAIModels", req, cb)
+  }
+
+  /**
+   * 用户AI模型申请记录
+   */
+  async DescribeAIModelApplications(
+    req: DescribeAIModelApplicationsRequest,
+    cb?: (error: string, rep: DescribeAIModelApplicationsResponse) => void
+  ): Promise<DescribeAIModelApplicationsResponse> {
+    return this.request("DescribeAIModelApplications", req, cb)
   }
 
   /**
@@ -267,6 +310,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductResponse) => void
   ): Promise<DescribeProductResponse> {
     return this.request("DescribeProduct", req, cb)
+  }
+
+  /**
+   * 查看AI模型资源包
+   */
+  async DescribeAIModelUsage(
+    req: DescribeAIModelUsageRequest,
+    cb?: (error: string, rep: DescribeAIModelUsageResponse) => void
+  ): Promise<DescribeAIModelUsageResponse> {
+    return this.request("DescribeAIModelUsage", req, cb)
   }
 
   /**
@@ -297,6 +350,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyForwardRuleResponse) => void
   ): Promise<ModifyForwardRuleResponse> {
     return this.request("ModifyForwardRule", req, cb)
+  }
+
+  /**
+   * 取消AI模型申请
+   */
+  async CancelAIModelApplication(
+    req: CancelAIModelApplicationRequest,
+    cb?: (error: string, rep: CancelAIModelApplicationResponse) => void
+  ): Promise<CancelAIModelApplicationResponse> {
+    return this.request("CancelAIModelApplication", req, cb)
   }
 
   /**
@@ -350,13 +413,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取账户流水
+   * 更新AI推理结果推送配置
    */
-  async DescribeBalanceTransactions(
-    req: DescribeBalanceTransactionsRequest,
-    cb?: (error: string, rep: DescribeBalanceTransactionsResponse) => void
-  ): Promise<DescribeBalanceTransactionsResponse> {
-    return this.request("DescribeBalanceTransactions", req, cb)
+  async UpdateAIModelChannel(
+    req: UpdateAIModelChannelRequest,
+    cb?: (error: string, rep: UpdateAIModelChannelResponse) => void
+  ): Promise<UpdateAIModelChannelResponse> {
+    return this.request("UpdateAIModelChannel", req, cb)
+  }
+
+  /**
+   * 创建COS上传密钥
+   */
+  async CreateCOSCredentials(
+    req: CreateCOSCredentialsRequest,
+    cb?: (error: string, rep: CreateCOSCredentialsResponse) => void
+  ): Promise<CreateCOSCredentialsResponse> {
+    return this.request("CreateCOSCredentials", req, cb)
   }
 
   /**
@@ -410,13 +483,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UploadFirmware）用于上传设备固件信息
+   * 本接口用于查询固件升级任务列表
    */
-  async UploadFirmware(
-    req: UploadFirmwareRequest,
-    cb?: (error: string, rep: UploadFirmwareResponse) => void
-  ): Promise<UploadFirmwareResponse> {
-    return this.request("UploadFirmware", req, cb)
+  async DescribeFirmwareTasks(
+    req: DescribeFirmwareTasksRequest,
+    cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
+  ): Promise<DescribeFirmwareTasksResponse> {
+    return this.request("DescribeFirmwareTasks", req, cb)
   }
 
   /**
@@ -530,6 +603,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 上报活跃设备
+   */
+  async ReportAliveDevice(
+    req: ReportAliveDeviceRequest,
+    cb?: (error: string, rep: ReportAliveDeviceResponse) => void
+  ): Promise<ReportAliveDeviceResponse> {
+    return this.request("ReportAliveDevice", req, cb)
+  }
+
+  /**
    * 获取设备的历史事件
    */
   async DescribeDeviceEventHistory(
@@ -570,6 +653,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UploadFirmware）用于上传设备固件信息
+   */
+  async UploadFirmware(
+    req: UploadFirmwareRequest,
+    cb?: (error: string, rep: UploadFirmwareResponse) => void
+  ): Promise<UploadFirmwareResponse> {
+    return this.request("UploadFirmware", req, cb)
+  }
+
+  /**
    * 重置云存服务
    */
   async ResetCloudStorage(
@@ -607,6 +700,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CancelDeviceFirmwareTaskResponse) => void
   ): Promise<CancelDeviceFirmwareTaskResponse> {
     return this.request("CancelDeviceFirmwareTask", req, cb)
+  }
+
+  /**
+   * 查看AI推理结果推送配置
+   */
+  async DescribeAIModelChannel(
+    req: DescribeAIModelChannelRequest,
+    cb?: (error: string, rep: DescribeAIModelChannelResponse) => void
+  ): Promise<DescribeAIModelChannelResponse> {
+    return this.request("DescribeAIModelChannel", req, cb)
   }
 
   /**
@@ -660,6 +763,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 申请AI模型
+   */
+  async ApplyAIModel(
+    req: ApplyAIModelRequest,
+    cb?: (error: string, rep: ApplyAIModelResponse) => void
+  ): Promise<ApplyAIModelResponse> {
+    return this.request("ApplyAIModel", req, cb)
+  }
+
+  /**
    * 查询账户余额
    */
   async DescribeBalance(
@@ -690,13 +803,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于查询固件升级任务列表
+   * 查看设备详情
    */
-  async DescribeFirmwareTasks(
-    req: DescribeFirmwareTasksRequest,
-    cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
-  ): Promise<DescribeFirmwareTasksResponse> {
-    return this.request("DescribeFirmwareTasks", req, cb)
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
+  }
+
+  /**
+   * 拉取账户流水
+   */
+  async DescribeBalanceTransactions(
+    req: DescribeBalanceTransactionsRequest,
+    cb?: (error: string, rep: DescribeBalanceTransactionsResponse) => void
+  ): Promise<DescribeBalanceTransactionsResponse> {
+    return this.request("DescribeBalanceTransactions", req, cb)
   }
 
   /**

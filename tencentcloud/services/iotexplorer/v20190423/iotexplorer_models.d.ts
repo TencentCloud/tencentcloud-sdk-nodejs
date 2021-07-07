@@ -459,6 +459,16 @@ export interface ProductEntry {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnableProductScript: string;
+    /**
+      * 创建人 UinId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateUserId: number;
+    /**
+      * 创建者昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatorNickName: string;
 }
 /**
  * 项目详情
@@ -977,6 +987,16 @@ export interface FirmwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FwType: string;
+    /**
+      * 创建者子 uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateUserId: number;
+    /**
+      * 创建者昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatorNickName: string;
 }
 /**
  * DisableTopicRule返回参数结构体
@@ -2092,6 +2112,16 @@ export interface DeviceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NwkSKey: string;
+    /**
+      * 创建人Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateUserId: number;
+    /**
+      * 创建人昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatorNickName: string;
 }
 /**
  * ModifyLoRaFrequency返回参数结构体

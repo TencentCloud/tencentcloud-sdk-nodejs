@@ -418,9 +418,9 @@ it("cam.v20190116.DescribeSafeAuthFlagColl", async function () {
     }
 })
 
-it("cam.v20190116.UpdatePolicy", async function () {
+it("cam.v20190116.GetSecurityLastUsed", async function () {
     try {
-       const data = await client.UpdatePolicy({})
+       const data = await client.GetSecurityLastUsed({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,6 +641,16 @@ it("cam.v20190116.DetachUserPolicy", async function () {
 it("cam.v20190116.ListGroupsForUser", async function () {
     try {
        const data = await client.ListGroupsForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.UpdatePolicy", async function () {
+    try {
+       const data = await client.UpdatePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

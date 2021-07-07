@@ -145,10 +145,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseProjectLatestVersionList", req, cb);
     }
     /**
-     * 查询静态托管域名任务状态
+     * 独立网关中拉取云托管服务对应的配置信息
      */
-    async DescribeHostingDomainTask(req, cb) {
-        return this.request("DescribeHostingDomainTask", req, cb);
+    async DescribeCloudBaseRunConfForGateWay(req, cb) {
+        return this.request("DescribeCloudBaseRunConfForGateWay", req, cb);
     }
     /**
      * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
@@ -161,6 +161,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDatabaseACL(req, cb) {
         return this.request("DescribeDatabaseACL", req, cb);
+    }
+    /**
+     * 修改容器内的版本流量配置
+     */
+    async ModifyCloudBaseRunServerFlowConf(req, cb) {
+        return this.request("ModifyCloudBaseRunServerFlowConf", req, cb);
     }
     /**
      * 查看容器托管的集群状态扩展使用
@@ -221,6 +227,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEndUserLoginStatistic(req, cb) {
         return this.request("DescribeEndUserLoginStatistic", req, cb);
+    }
+    /**
+     * 查询静态托管域名任务状态
+     */
+    async DescribeHostingDomainTask(req, cb) {
+        return this.request("DescribeHostingDomainTask", req, cb);
     }
     /**
      * 创建或修改安全网关路由

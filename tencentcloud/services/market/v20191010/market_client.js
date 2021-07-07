@@ -28,12 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("market.tencentcloudapi.com", "2019-10-10", clientConfig);
     }
     /**
-     * 获取分类名称
-     */
-    async GetCateTree(req, cb) {
-        return this.request("GetCateTree", req, cb);
-    }
-    /**
      * 该接口可以根据InstanceId查询实例的api的使用情况。
 
      */

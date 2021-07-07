@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TransferCloudStorage", req, cb);
     }
     /**
+     * 发起AI推理请求
+     */
+    async CreateAIDetection(req, cb) {
+        return this.request("CreateAIDetection", req, cb);
+    }
+    /**
      * 本接口（DescribeFirmware）用于查询固件信息
      */
     async DescribeFirmware(req, cb) {
@@ -82,16 +88,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RetryDeviceFirmwareTask", req, cb);
     }
     /**
-     * 查看设备详情
+     * 拉取AI模型列表
      */
-    async DescribeDevice(req, cb) {
-        return this.request("DescribeDevice", req, cb);
+    async DescribeAIModels(req, cb) {
+        return this.request("DescribeAIModels", req, cb);
+    }
+    /**
+     * 用户AI模型申请记录
+     */
+    async DescribeAIModelApplications(req, cb) {
+        return this.request("DescribeAIModelApplications", req, cb);
     }
     /**
      * 获取产品详情
      */
     async DescribeProduct(req, cb) {
         return this.request("DescribeProduct", req, cb);
+    }
+    /**
+     * 查看AI模型资源包
+     */
+    async DescribeAIModelUsage(req, cb) {
+        return this.request("DescribeAIModelUsage", req, cb);
     }
     /**
      * 获取批次详情
@@ -110,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyForwardRule(req, cb) {
         return this.request("ModifyForwardRule", req, cb);
+    }
+    /**
+     * 取消AI模型申请
+     */
+    async CancelAIModelApplication(req, cb) {
+        return this.request("CancelAIModelApplication", req, cb);
     }
     /**
      * 获取设备云存服务详情
@@ -142,10 +166,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceActionHistory", req, cb);
     }
     /**
-     * 拉取账户流水
+     * 更新AI推理结果推送配置
      */
-    async DescribeBalanceTransactions(req, cb) {
-        return this.request("DescribeBalanceTransactions", req, cb);
+    async UpdateAIModelChannel(req, cb) {
+        return this.request("UpdateAIModelChannel", req, cb);
+    }
+    /**
+     * 创建COS上传密钥
+     */
+    async CreateCOSCredentials(req, cb) {
+        return this.request("CreateCOSCredentials", req, cb);
     }
     /**
      * 查询产品配置的数据模板信息
@@ -178,10 +208,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceDataHistory", req, cb);
     }
     /**
-     * 本接口（UploadFirmware）用于上传设备固件信息
+     * 本接口用于查询固件升级任务列表
      */
-    async UploadFirmware(req, cb) {
-        return this.request("UploadFirmware", req, cb);
+    async DescribeFirmwareTasks(req, cb) {
+        return this.request("DescribeFirmwareTasks", req, cb);
     }
     /**
      * 本接口（GetFirmwareURL）用于获取固件存储的URL
@@ -250,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteProduct", req, cb);
     }
     /**
+     * 上报活跃设备
+     */
+    async ReportAliveDevice(req, cb) {
+        return this.request("ReportAliveDevice", req, cb);
+    }
+    /**
      * 获取设备的历史事件
      */
     async DescribeDeviceEventHistory(req, cb) {
@@ -274,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImportModelDefinition", req, cb);
     }
     /**
+     * 本接口（UploadFirmware）用于上传设备固件信息
+     */
+    async UploadFirmware(req, cb) {
+        return this.request("UploadFirmware", req, cb);
+    }
+    /**
      * 重置云存服务
      */
     async ResetCloudStorage(req, cb) {
@@ -296,6 +338,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CancelDeviceFirmwareTask(req, cb) {
         return this.request("CancelDeviceFirmwareTask", req, cb);
+    }
+    /**
+     * 查看AI推理结果推送配置
+     */
+    async DescribeAIModelChannel(req, cb) {
+        return this.request("DescribeAIModelChannel", req, cb);
     }
     /**
      * 获取某一天云存时间轴
@@ -328,6 +376,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyModelDefinition", req, cb);
     }
     /**
+     * 申请AI模型
+     */
+    async ApplyAIModel(req, cb) {
+        return this.request("ApplyAIModel", req, cb);
+    }
+    /**
      * 查询账户余额
      */
     async DescribeBalance(req, cb) {
@@ -346,10 +400,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteFirmware", req, cb);
     }
     /**
-     * 本接口用于查询固件升级任务列表
+     * 查看设备详情
      */
-    async DescribeFirmwareTasks(req, cb) {
-        return this.request("DescribeFirmwareTasks", req, cb);
+    async DescribeDevice(req, cb) {
+        return this.request("DescribeDevice", req, cb);
+    }
+    /**
+     * 拉取账户流水
+     */
+    async DescribeBalanceTransactions(req, cb) {
+        return this.request("DescribeBalanceTransactions", req, cb);
     }
     /**
      * 根据设备产品ID、设备名称，设置控制设备的属性数据。

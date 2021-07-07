@@ -150,18 +150,18 @@ export interface ImportModelDefinitionResponse {
 }
 
 /**
- * DescribeModelDefinition返回参数结构体
+ * ApplyAIModel请求参数结构体
  */
-export interface DescribeModelDefinitionResponse {
+export interface ApplyAIModelRequest {
   /**
-   * 产品数据模板
+   * AI模型ID
    */
-  Model: ProductModelDefinition
+  ModelId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 产品ID
    */
-  RequestId?: string
+  ProductId: string
 }
 
 /**
@@ -185,6 +185,16 @@ export interface CreateBatchRequest {
 }
 
 /**
+ * CancelAIModelApplication返回参数结构体
+ */
+export interface CancelAIModelApplicationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudStorageTime返回参数结构体
  */
 export interface DescribeCloudStorageTimeResponse {
@@ -197,6 +207,21 @@ export interface DescribeCloudStorageTimeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReportAliveDevice请求参数结构体
+ */
+export interface ReportAliveDeviceRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
 }
 
 /**
@@ -215,32 +240,43 @@ export interface DescribeProductsRequest {
 }
 
 /**
- * DescribeDeviceEventHistory返回参数结构体
+ * DescribeAIModelChannel返回参数结构体
  */
-export interface DescribeDeviceEventHistoryResponse {
+export interface DescribeAIModelChannelResponse {
   /**
-      * 搜索上下文, 用作查询游标
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Context: string
+   * 推送类型。ckafka：消息队列；forward：http/https推送
+   */
+  Type: string
 
   /**
-      * 搜索结果数量
+      * 第三方推送地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total: number
+  ForwardAddress: string
 
   /**
-      * 搜索结果是否已经结束
+      * 第三方推送密钥
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Listover: boolean
+  ForwardKey: string
 
   /**
-      * 搜集结果集
+      * ckafka地域
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EventHistory: Array<EventHistoryItem>
+  CKafkaRegion: string
+
+  /**
+      * ckafka实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CKafkaInstance: string
+
+  /**
+      * ckafka订阅主题
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CKafkaTopic: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -374,6 +410,21 @@ export interface DescribeBatchsResponse {
 }
 
 /**
+ * CancelAIModelApplication请求参数结构体
+ */
+export interface CancelAIModelApplicationRequest {
+  /**
+   * AI模型ID
+   */
+  ModelId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+}
+
+/**
  * TransferCloudStorage返回参数结构体
  */
 export interface TransferCloudStorageResponse {
@@ -464,18 +515,28 @@ export interface DescribeBatchRequest {
 }
 
 /**
- * 云存时间轴信息
+ * DescribeForwardRule请求参数结构体
  */
-export interface CloudStorageTimeInfo {
+export interface DescribeForwardRuleRequest {
   /**
-   * 开始时间
+   * 产品ID
    */
-  StartTime: number
+  ProductID: string
 
   /**
-   * 结束时间
+   * 控制台Skey
    */
-  EndTime: number
+  Skey: string
+
+  /**
+   * 队列类型，0：CMQ，1：Ckafka
+   */
+  QueueType: number
+
+  /**
+   * 临时密钥
+   */
+  Consecretid?: string
 }
 
 /**
@@ -496,6 +557,51 @@ export interface ModifyDeviceRequest {
    * 要设置的设备状态，1为启用，0为禁用
    */
   EnableState?: number
+}
+
+/**
+ * CreateCOSCredentials返回参数结构体
+ */
+export interface CreateCOSCredentialsResponse {
+  /**
+   * COS存储桶名称
+   */
+  StorageBucket: string
+
+  /**
+   * COS存储桶区域
+   */
+  StorageRegion: string
+
+  /**
+   * COS存储桶路径
+   */
+  StoragePath: string
+
+  /**
+   * COS上传用的SecretID
+   */
+  SecretID: string
+
+  /**
+   * COS上传用的SecretKey
+   */
+  SecretKey: string
+
+  /**
+   * COS上传用的Token
+   */
+  Token: string
+
+  /**
+   * 密钥信息过期时间
+   */
+  ExpiredTime: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -754,6 +860,21 @@ export interface GetAllFirmwareVersionRequest {
 }
 
 /**
+ * CreateCOSCredentials请求参数结构体
+ */
+export interface CreateCOSCredentialsRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+}
+
+/**
  * 设备通讯日志查询返回条目
  */
 export interface DeviceCommLogItem {
@@ -922,6 +1043,21 @@ export interface BatchUpdateFirmwareResponse {
 }
 
 /**
+ * DescribeModelDefinition返回参数结构体
+ */
+export interface DescribeModelDefinitionResponse {
+  /**
+   * 产品数据模板
+   */
+  Model: ProductModelDefinition
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteProduct请求参数结构体
  */
 export interface DeleteProductRequest {
@@ -1036,6 +1172,16 @@ export interface DeviceDataHistoryItem {
    * 字段取值
    */
   Value: string
+}
+
+/**
+ * ReportAliveDevice返回参数结构体
+ */
+export interface ReportAliveDeviceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1209,23 +1355,23 @@ export interface ControlDeviceDataRequest {
 }
 
 /**
- * ListFirmwares返回参数结构体
+ * AI模型资源使用信息
  */
-export interface ListFirmwaresResponse {
+export interface AIModelUsageInfo {
   /**
-   * 固件总数
+   * 开通时间
    */
-  TotalCount: number
+  CreateTime: number
 
   /**
-   * 固件列表
+   * 资源总量
    */
-  Firmwares: Array<FirmwareInfo>
+  Total: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 已使用资源数量
    */
-  RequestId?: string
+  Used: number
 }
 
 /**
@@ -1373,6 +1519,42 @@ export interface DeleteForwardRuleRequest {
 }
 
 /**
+ * UpdateAIModelChannel返回参数结构体
+ */
+export interface UpdateAIModelChannelResponse {
+  /**
+      * 第三方推送密钥，如果选择自动生成则会返回此字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ForwardKey: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAIModelUsage返回参数结构体
+ */
+export interface DescribeAIModelUsageResponse {
+  /**
+   * AI模型资源包总量
+   */
+  TotalCount: number
+
+  /**
+   * AI模型资源包信息数组
+   */
+  UsageInfo: Array<AIModelUsageInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBalanceTransactions请求参数结构体
  */
 export interface DescribeBalanceTransactionsRequest {
@@ -1449,6 +1631,31 @@ export interface DescribeCloudStorageThumbnailResponse {
 }
 
 /**
+ * DescribeAIModels请求参数结构体
+ */
+export interface DescribeAIModelsRequest {
+  /**
+   * 模型ID
+   */
+  ModelId: string
+
+  /**
+   * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
+   */
+  Status: number
+
+  /**
+   * 偏移量，Offset从0开始
+   */
+  Offset: number
+
+  /**
+   * 分页的大小，最大100
+   */
+  Limit: number
+}
+
+/**
  * RetryDeviceFirmwareTask返回参数结构体
  */
 export interface RetryDeviceFirmwareTaskResponse {
@@ -1477,6 +1684,40 @@ export interface GenerateSignedVideoURLRequest {
  * ResetCloudStorage返回参数结构体
  */
 export interface ResetCloudStorageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDeviceEventHistory返回参数结构体
+ */
+export interface DescribeDeviceEventHistoryResponse {
+  /**
+      * 搜索上下文, 用作查询游标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Context: string
+
+  /**
+      * 搜索结果数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+      * 搜索结果是否已经结束
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Listover: boolean
+
+  /**
+      * 搜集结果集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventHistory: Array<EventHistoryItem>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2101,6 +2342,26 @@ export interface FirmwareTaskInfo {
 }
 
 /**
+ * AI模型申请信息
+ */
+export interface AIModelApplication {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 产品名称
+   */
+  ProductName: string
+
+  /**
+   * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
+   */
+  Status: number
+}
+
+/**
  * DescribeFirmwareTaskDistribution返回参数结构体
  */
 export interface DescribeFirmwareTaskDistributionResponse {
@@ -2198,6 +2459,16 @@ export interface ModifyForwardRuleRequest {
    * 队列或主题名称
    */
   QueueName?: string
+}
+
+/**
+ * CreateAIDetection返回参数结构体
+ */
+export interface CreateAIDetectionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2336,28 +2607,18 @@ export interface DescribeCloudStorageDateResponse {
 }
 
 /**
- * DescribeForwardRule请求参数结构体
+ * 云存时间轴信息
  */
-export interface DescribeForwardRuleRequest {
+export interface CloudStorageTimeInfo {
   /**
-   * 产品ID
+   * 开始时间
    */
-  ProductID: string
+  StartTime: number
 
   /**
-   * 控制台Skey
+   * 结束时间
    */
-  Skey: string
-
-  /**
-   * 队列类型，0：CMQ，1：Ckafka
-   */
-  QueueType: number
-
-  /**
-   * 临时密钥
-   */
-  Consecretid?: string
+  EndTime: number
 }
 
 /**
@@ -2368,6 +2629,51 @@ export interface UploadFirmwareResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateAIModelChannel请求参数结构体
+ */
+export interface UpdateAIModelChannelRequest {
+  /**
+   * 模型ID
+   */
+  ModelId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 推送类型。ckafka：消息队列；forward：http/https推送
+   */
+  Type: string
+
+  /**
+   * 第三方推送地址
+   */
+  ForwardAddress?: string
+
+  /**
+   * 第三方推送密钥，不填写则腾讯云自动生成。
+   */
+  ForwardKey?: string
+
+  /**
+   * ckafka地域
+   */
+  CKafkaRegion?: string
+
+  /**
+   * ckafka实例
+   */
+  CKafkaInstance?: string
+
+  /**
+   * ckafka订阅主题
+   */
+  CKafkaTopic?: string
 }
 
 /**
@@ -2419,6 +2725,16 @@ export interface CancelDeviceFirmwareTaskResponse {
  * DeleteDevice返回参数结构体
  */
 export interface DeleteDeviceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ApplyAIModel返回参数结构体
+ */
+export interface ApplyAIModelResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2754,6 +3070,36 @@ export interface GetFirmwareURLRequest {
 }
 
 /**
+ * CreateAIDetection请求参数结构体
+ */
+export interface CreateAIDetectionRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * AI模型ID
+   */
+  ModelId: string
+
+  /**
+   * 图片上传的开始时间
+   */
+  StartTime: number
+
+  /**
+   * 图片上传的结束时间
+   */
+  EndTime: number
+}
+
+/**
  * DescribeCloudStorage返回参数结构体
  */
 export interface DescribeCloudStorageResponse {
@@ -2796,6 +3142,66 @@ export interface DescribeProductResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAIModels返回参数结构体
+ */
+export interface DescribeAIModelsResponse {
+  /**
+   * AI模型数量
+   */
+  TotalCount: number
+
+  /**
+   * AI模型信息数组
+   */
+  Models: Array<AIModelInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAIModelChannel请求参数结构体
+ */
+export interface DescribeAIModelChannelRequest {
+  /**
+   * 模型ID
+   */
+  ModelId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+}
+
+/**
+ * DescribeAIModelUsage请求参数结构体
+ */
+export interface DescribeAIModelUsageRequest {
+  /**
+   * 模型ID
+   */
+  ModelId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 偏移量，从0开始
+   */
+  Offset: number
+
+  /**
+   * 分页的大小，最大100
+   */
+  Limit: number
 }
 
 /**
@@ -2851,6 +3257,46 @@ export interface GetAllFirmwareVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI模型信息
+ */
+export interface AIModelInfo {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 产品名称
+   */
+  ProductName: string
+
+  /**
+   * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
+   */
+  Status: number
+
+  /**
+   * 可调用数量
+   */
+  Total: number
+
+  /**
+   * 已调用数量
+   */
+  Used: number
+
+  /**
+   * 申请时间
+   */
+  ApplyTime: number
+
+  /**
+   * 审批通过时间
+   */
+  ApprovalTime: number
 }
 
 /**
@@ -2973,6 +3419,31 @@ export interface CheckForwardAuthResponse {
 }
 
 /**
+ * DescribeAIModelApplications请求参数结构体
+ */
+export interface DescribeAIModelApplicationsRequest {
+  /**
+   * 模型ID
+   */
+  ModelId: string
+
+  /**
+   * 分页的大小，最大100
+   */
+  Limit: number
+
+  /**
+   * 偏移量，Offset从0开始
+   */
+  Offset: number
+
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+}
+
+/**
  * DescribeDeviceData返回参数结构体
  */
 export interface DescribeDeviceDataResponse {
@@ -3015,6 +3486,26 @@ export interface DeleteForwardRuleResponse {
    * 错误消息
    */
   ErrMsg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListFirmwares返回参数结构体
+ */
+export interface ListFirmwaresResponse {
+  /**
+   * 固件总数
+   */
+  TotalCount: number
+
+  /**
+   * 固件列表
+   */
+  Firmwares: Array<FirmwareInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3160,4 +3651,24 @@ export interface DescribeCloudStorageTimeRequest {
    * 云存日期，例如"2020-01-05"
    */
   Date: string
+}
+
+/**
+ * DescribeAIModelApplications返回参数结构体
+ */
+export interface DescribeAIModelApplicationsResponse {
+  /**
+   * 申请记录数量
+   */
+  TotalCount: number
+
+  /**
+   * 申请记录数组
+   */
+  Applications: Array<AIModelApplication>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

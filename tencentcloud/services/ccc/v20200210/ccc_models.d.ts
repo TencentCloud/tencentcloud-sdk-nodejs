@@ -922,6 +922,10 @@ export interface DescribeTelCdrRequest {
       * 分页页码，从 0 开始
       */
     PageNumber?: number;
+    /**
+      * 按手机号筛选
+      */
+    Phones?: Array<string>;
 }
 /**
  * 聊天消息

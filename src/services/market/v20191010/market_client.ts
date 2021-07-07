@@ -18,12 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  GetCateTreeRequest,
-  FlowProductRemindResponse,
-  GetCateTreeResponse,
   GetUsagePlanUsageAmountResponse,
-  FlowProductRemindRequest,
   GetUsagePlanUsageAmountRequest,
+  FlowProductRemindRequest,
+  FlowProductRemindResponse,
 } from "./market_models"
 
 /**
@@ -33,16 +31,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("market.tencentcloudapi.com", "2019-10-10", clientConfig)
-  }
-
-  /**
-   * 获取分类名称
-   */
-  async GetCateTree(
-    req: GetCateTreeRequest,
-    cb?: (error: string, rep: GetCateTreeResponse) => void
-  ): Promise<GetCateTreeResponse> {
-    return this.request("GetCateTree", req, cb)
   }
 
   /**

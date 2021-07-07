@@ -31,6 +31,7 @@ import {
   BankCardVerificationRequest,
   CheckBankCardInformationResponse,
   DetectInfoBestFrame,
+  GetEidTokenConfig,
   CheckIdCardInformationResponse,
   GetDetectInfoEnhancedResponse,
   PhoneVerificationRequest,
@@ -45,18 +46,18 @@ import {
   GetRealNameAuthTokenRequest,
   BankCard2EVerificationRequest,
   LivenessRecognitionRequest,
-  EidInfo,
+  CheckIdCardInformationRequest,
   GetFaceIdTokenResponse,
-  GetEidTokenConfig,
+  CheckEidTokenStatusResponse,
   MobileStatusResponse,
   IdCardOCRVerificationResponse,
   GetRealNameAuthTokenResponse,
   LivenessResponse,
-  CheckIdCardInformationRequest,
+  EidInfo,
   DetectInfoText,
   DetectAuthRequest,
   MinorsVerificationResponse,
-  BankCardVerificationResponse,
+  CheckEidTokenStatusRequest,
   GetRealNameAuthResultRequest,
   ImageRecognitionRequest,
   BankCard4EVerificationRequest,
@@ -64,6 +65,7 @@ import {
   GetFaceIdResultRequest,
   GetActionSequenceResponse,
   LivenessRecognitionResponse,
+  BankCardVerificationResponse,
   MinorsVerificationRequest,
   ImageRecognitionResponse,
   GetActionSequenceRequest,
@@ -121,6 +123,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckIdCardInformationResponse) => void
   ): Promise<CheckIdCardInformationResponse> {
     return this.request("CheckIdCardInformation", req, cb)
+  }
+
+  /**
+   * 用于轮询E证通H5场景EidToken验证状态。
+   */
+  async CheckEidTokenStatus(
+    req: CheckEidTokenStatusRequest,
+    cb?: (error: string, rep: CheckEidTokenStatusResponse) => void
+  ): Promise<CheckEidTokenStatusResponse> {
+    return this.request("CheckEidTokenStatus", req, cb)
   }
 
   /**
@@ -236,7 +248,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 每次调用E证通小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+   * 每次调用E证通服务前，需先调用本接口获取EidToken，用来串联E证通流程，在验证完成后，用于获取E证通结果信息。
    */
   async GetEidToken(
     req: GetEidTokenRequest,

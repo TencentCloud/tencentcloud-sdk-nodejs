@@ -156,6 +156,21 @@ export interface CheckTcbServiceResponse {
 }
 
 /**
+ * DescribeCloudBaseRunConfForGateWay请求参数结构体
+ */
+export interface DescribeCloudBaseRunConfForGateWayRequest {
+  /**
+   * 环境ID
+   */
+  EnvID: string
+
+  /**
+   * vpc信息
+   */
+  VpcID?: string
+}
+
+/**
  * DescribeCloudBaseRunServerVersion请求参数结构体
  */
 export interface DescribeCloudBaseRunServerVersionRequest {
@@ -1263,6 +1278,36 @@ Activity：活动来源
 }
 
 /**
+ * ModifyCloudBaseRunServerFlowConf请求参数结构体
+ */
+export interface ModifyCloudBaseRunServerFlowConfRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 服务名称
+   */
+  ServerName: string
+
+  /**
+   * 流量占比
+   */
+  VersionFlowItems?: Array<CloudBaseRunVersionFlowItem>
+
+  /**
+   * 流量类型（URL_PARAMS / FLOW / HEADERS)
+   */
+  TrafficType?: string
+
+  /**
+   * 操作备注
+   */
+  OperatorRemark?: string
+}
+
+/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -1339,18 +1384,38 @@ export interface DescribeEnvsRequest {
 }
 
 /**
- * 标签键值对
+ * 版本流量占比
  */
-export interface Tag {
+export interface CloudBaseRunVersionFlowItem {
   /**
-   * 标签键
-   */
-  Key: string
+      * 版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionName: string
 
   /**
-   * 标签值
-   */
-  Value: string
+      * 流量占比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowRatio?: number
+
+  /**
+      * 流量参数键值对（URL参数/HEADERS参数）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UrlParam?: ObjectKV
+
+  /**
+      * 优先级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Priority?: number
+
+  /**
+      * 是否是默认兜底版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDefaultPriority?: boolean
 }
 
 /**
@@ -1539,6 +1604,22 @@ export interface CloudBaseEsInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Password?: string
+}
+
+/**
+ * ModifyCloudBaseRunServerFlowConf返回参数结构体
+ */
+export interface ModifyCloudBaseRunServerFlowConfResponse {
+  /**
+      * 返回结果，succ代表成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2223,6 +2304,11 @@ export interface EstablishCloudBaseRunServerRequest {
    * 是否创建Path 0未传默认创建 1创建 2不创建
    */
   IsCreatePath?: number
+
+  /**
+   * 指定创建路径（如不存在，则创建。存在，则忽略）
+   */
+  ServerPath?: string
 }
 
 /**
@@ -2588,6 +2674,28 @@ export interface DescribeCloudBaseRunVersionRequest {
    * 版本名称
    */
   VersionName: string
+}
+
+/**
+ * DescribeCloudBaseRunConfForGateWay返回参数结构体
+ */
+export interface DescribeCloudBaseRunConfForGateWayResponse {
+  /**
+      * 最近更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastUpTime: string
+
+  /**
+      * 配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<CloudBaseRunForGatewayConf>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3652,6 +3760,21 @@ export interface CloudBaseCodeRepoDetail {
 export type CheckTcbServiceRequest = null
 
 /**
+ * 标签键值对
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key: string
+
+  /**
+   * 标签值
+   */
+  Value: string
+}
+
+/**
  * CreateCloudBaseRunResource请求参数结构体
  */
 export interface CreateCloudBaseRunResourceRequest {
@@ -3727,6 +3850,76 @@ export interface CloudRunServiceVolume {
 }
 
 /**
+ * 独立网关云托管服务配置信息
+ */
+export interface CloudBaseRunForGatewayConf {
+  /**
+   * 是否缩容到0
+   */
+  IsZero: boolean
+
+  /**
+   * 按百分比灰度的权重
+   */
+  Weight: number
+
+  /**
+   * 按请求/header参数的灰度Key
+   */
+  GrayKey: string
+
+  /**
+   * 按请求/header参数的灰度Value
+   */
+  GrayValue: string
+
+  /**
+   * 是否为默认版本(按请求/header参数)
+   */
+  IsDefault: boolean
+
+  /**
+   * 访问权限，对应二进制分多段，vpc内网｜公网｜oa
+   */
+  AccessType: number
+
+  /**
+   * 访问的URL（域名＋路径）列表
+   */
+  URLs: Array<string>
+
+  /**
+   * 环境ID
+   */
+  EnvId?: string
+
+  /**
+   * 服务名称
+   */
+  ServerName?: string
+
+  /**
+   * 版本名称
+   */
+  VersionName?: string
+
+  /**
+   * 灰度类型：FLOW(权重), URL_PARAMS/HEAD_PARAMS
+   */
+  GrayType?: string
+
+  /**
+   * CLB的IP:Port
+   */
+  LbAddr?: string
+
+  /**
+   * 0:http访问服务配置信息, 1: 服务域名
+   */
+  ConfigType?: number
+}
+
+/**
  * 扩展文件信息
  */
 export interface ExtensionFileInfo {
@@ -3749,6 +3942,21 @@ export interface ExtensionFileInfo {
    * 文件大小限制，单位M，客户端上传前需要主动检查文件大小，超过限制的文件会被删除。
    */
   MaxSize: number
+}
+
+/**
+ * Key-Value类型，模拟的 object 类型
+ */
+export interface ObjectKV {
+  /**
+   * object 的 key
+   */
+  Key: string
+
+  /**
+   * object key 对应的 value
+   */
+  Value: string
 }
 
 /**

@@ -557,6 +557,18 @@ export interface ProductEntry {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EnableProductScript: string
+
+  /**
+      * 创建人 UinId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateUserId: number
+
+  /**
+      * 创建者昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatorNickName: string
 }
 
 /**
@@ -1171,6 +1183,18 @@ export interface FirmwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FwType: string
+
+  /**
+      * 创建者子 uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateUserId: number
+
+  /**
+      * 创建者昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatorNickName: string
 }
 
 /**
@@ -2476,6 +2500,18 @@ export interface DeviceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NwkSKey: string
+
+  /**
+      * 创建人Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateUserId: number
+
+  /**
+      * 创建人昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatorNickName: string
 }
 
 /**

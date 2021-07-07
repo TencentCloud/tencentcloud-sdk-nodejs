@@ -38,41 +38,17 @@ export interface SubAccountUser {
     LastLoginTime: string;
 }
 /**
- * GetUser返回参数结构体
+ * ListAttachedRolePolicies返回参数结构体
  */
-export interface GetUserResponse {
+export interface ListAttachedRolePoliciesResponse {
     /**
-      * 子用户用户 UIN
+      * 角色关联的策略列表
       */
-    Uin?: number;
+    List?: Array<AttachedPolicyOfRole>;
     /**
-      * 子用户用户名
+      * 角色关联的策略总数
       */
-    Name?: string;
-    /**
-      * 子用户 UID
-      */
-    Uid?: number;
-    /**
-      * 子用户备注
-      */
-    Remark?: string;
-    /**
-      * 子用户能否登录控制台
-      */
-    ConsoleLogin?: number;
-    /**
-      * 手机号
-      */
-    PhoneNum?: string;
-    /**
-      * 区号
-      */
-    CountryCode?: string;
-    /**
-      * 邮箱
-      */
-    Email?: string;
+    TotalNum?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -257,6 +233,10 @@ export interface GetServiceLinkedRoleDeletionStatusResponse {
       */
     RequestId?: string;
 }
+/**
+ * GetSecurityLastUsed请求参数结构体
+ */
+export declare type GetSecurityLastUsedRequest = null;
 /**
  * DeleteUserPermissionsBoundary返回参数结构体
  */
@@ -764,17 +744,41 @@ export interface DeleteGroupRequest {
     GroupId: number;
 }
 /**
- * ListAttachedRolePolicies返回参数结构体
+ * GetUser返回参数结构体
  */
-export interface ListAttachedRolePoliciesResponse {
+export interface GetUserResponse {
     /**
-      * 角色关联的策略列表
+      * 子用户用户 UIN
       */
-    List?: Array<AttachedPolicyOfRole>;
+    Uin?: number;
     /**
-      * 角色关联的策略总数
+      * 子用户用户名
       */
-    TotalNum?: number;
+    Name?: string;
+    /**
+      * 子用户 UID
+      */
+    Uid?: number;
+    /**
+      * 子用户备注
+      */
+    Remark?: string;
+    /**
+      * 子用户能否登录控制台
+      */
+    ConsoleLogin?: number;
+    /**
+      * 手机号
+      */
+    PhoneNum?: string;
+    /**
+      * 区号
+      */
+    CountryCode?: string;
+    /**
+      * 邮箱
+      */
+    Email?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2398,6 +2402,15 @@ export interface ListAccessKeysResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AccessKeys?: Array<AccessKey>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetSecurityLastUsed返回参数结构体
+ */
+export interface GetSecurityLastUsedResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

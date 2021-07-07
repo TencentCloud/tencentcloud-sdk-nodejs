@@ -2060,28 +2060,28 @@ export interface DescribeUsagePlanSecretIdsResponse {
 }
 
 /**
- * UpdateService请求参数结构体
+ * CreatePlugin请求参数结构体
  */
-export interface UpdateServiceRequest {
+export interface CreatePluginRequest {
   /**
-   * 待切换服务的唯一 Id。
+   * 用户自定义的插件名称。最长50个字符，支持 a-z,A-Z,0-9,_, 必须字母开头，字母或者数字结尾。
    */
-  ServiceId: string
+  PluginName: string
 
   /**
-   * 待切换的环境名称，当前支持三个环境，test（测试环境）、prepub（预发布环境）和 release（发布环境）。
+   * 插件类型。目前支持IPControl。
    */
-  EnvironmentName: string
+  PluginType: string
 
   /**
-   * 切换的版本号。
+   * 插件定义语句，支持json。
    */
-  VersionName: string
+  PluginData: string
 
   /**
-   * 本次的切换描述。
+   * 插件描述，限定200字以内。
    */
-  UpdateDesc?: string
+  Description?: string
 }
 
 /**
@@ -3121,6 +3121,21 @@ export interface ServiceReleaseHistoryInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReleaseTime: string
+}
+
+/**
+ * CreatePlugin返回参数结构体
+ */
+export interface CreatePluginResponse {
+  /**
+   * 新建的插件详情。
+   */
+  Result: Plugin
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4510,6 +4525,31 @@ export interface BindIPStrategyRequest {
    * IP策略待绑定的API列表。
    */
   BindApiIds: Array<string>
+}
+
+/**
+ * UpdateService请求参数结构体
+ */
+export interface UpdateServiceRequest {
+  /**
+   * 待切换服务的唯一 Id。
+   */
+  ServiceId: string
+
+  /**
+   * 待切换的环境名称，当前支持三个环境，test（测试环境）、prepub（预发布环境）和 release（发布环境）。
+   */
+  EnvironmentName: string
+
+  /**
+   * 切换的版本号。
+   */
+  VersionName: string
+
+  /**
+   * 本次的切换描述。
+   */
+  UpdateDesc?: string
 }
 
 /**

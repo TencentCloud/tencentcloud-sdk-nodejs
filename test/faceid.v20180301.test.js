@@ -48,6 +48,16 @@ it("faceid.v20180301.CheckIdCardInformation", async function () {
     }
 })
 
+it("faceid.v20180301.CheckEidTokenStatus", async function () {
+    try {
+       const data = await client.CheckEidTokenStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.BankCard4EVerification", async function () {
     try {
        const data = await client.BankCard4EVerification({})

@@ -396,6 +396,12 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
         return this.request("DescribeApiKey", req, cb);
     }
     /**
+     * 创建API网关插件。
+     */
+    async CreatePlugin(req, cb) {
+        return this.request("CreatePlugin", req, cb);
+    }
+    /**
      * 展示插件列表和详情，支持分页，支持按照插件类型查询，支持按照插件ID批量查询，支持按照插件名称查询。
      */
     async DescribePlugins(req, cb) {

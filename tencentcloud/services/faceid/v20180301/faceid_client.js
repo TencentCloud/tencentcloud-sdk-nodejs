@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckIdCardInformation", req, cb);
     }
     /**
+     * 用于轮询E证通H5场景EidToken验证状态。
+     */
+    async CheckEidTokenStatus(req, cb) {
+        return this.request("CheckEidTokenStatus", req, cb);
+    }
+    /**
      * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      */
     async BankCard4EVerification(req, cb) {
@@ -114,7 +120,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageRecognition", req, cb);
     }
     /**
-     * 每次调用E证通小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 每次调用E证通服务前，需先调用本接口获取EidToken，用来串联E证通流程，在验证完成后，用于获取E证通结果信息。
      */
     async GetEidToken(req, cb) {
         return this.request("GetEidToken", req, cb);

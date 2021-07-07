@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   SubAccountUser,
-  GetUserResponse,
+  ListAttachedRolePoliciesResponse,
   ListAccessKeysRequest,
   SetMfaFlagResponse,
   DeleteUserRequest,
@@ -32,6 +32,7 @@ import {
   ListGroupsForUserRequest,
   AttachRolePolicyResponse,
   GetServiceLinkedRoleDeletionStatusResponse,
+  GetSecurityLastUsedRequest,
   DeleteUserPermissionsBoundaryResponse,
   ListUsersResponse,
   UpdateRoleDescriptionResponse,
@@ -64,7 +65,7 @@ import {
   DescribeSafeAuthFlagResponse,
   CreatePolicyVersionRequest,
   DeleteGroupRequest,
-  ListAttachedRolePoliciesResponse,
+  GetUserResponse,
   DeleteUserResponse,
   DetachRolePolicyRequest,
   ListPoliciesGrantingServiceAccessResponse,
@@ -162,6 +163,7 @@ import {
   SetMfaFlagRequest,
   ListCollaboratorsResponse,
   ListAccessKeysResponse,
+  GetSecurityLastUsedResponse,
   ListAttachedUserPoliciesRequest,
   UpdatePolicyRequest,
   GroupMemberInfo,
@@ -578,14 +580,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（UpdatePolicy ）可用于更新策略。
-如果已存在策略版本，本接口会直接更新策略的默认版本，不会创建新版本，如果不存在任何策略版本，则直接创建一个默认版本。
-     */
-  async UpdatePolicy(
-    req: UpdatePolicyRequest,
-    cb?: (error: string, rep: UpdatePolicyResponse) => void
-  ): Promise<UpdatePolicyResponse> {
-    return this.request("UpdatePolicy", req, cb)
+   * 获取密钥最近使用情况
+   */
+  async GetSecurityLastUsed(
+    req?: GetSecurityLastUsedRequest,
+    cb?: (error: string, rep: GetSecurityLastUsedResponse) => void
+  ): Promise<GetSecurityLastUsedResponse> {
+    return this.request("GetSecurityLastUsed", req, cb)
   }
 
   /**
@@ -806,5 +807,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListGroupsForUserResponse) => void
   ): Promise<ListGroupsForUserResponse> {
     return this.request("ListGroupsForUser", req, cb)
+  }
+
+  /**
+     * 本接口（UpdatePolicy ）可用于更新策略。
+如果已存在策略版本，本接口会直接更新策略的默认版本，不会创建新版本，如果不存在任何策略版本，则直接创建一个默认版本。
+     */
+  async UpdatePolicy(
+    req: UpdatePolicyRequest,
+    cb?: (error: string, rep: UpdatePolicyResponse) => void
+  ): Promise<UpdatePolicyResponse> {
+    return this.request("UpdatePolicy", req, cb)
   }
 }

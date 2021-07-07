@@ -128,6 +128,16 @@ it("cwp.v20180228.DescribeVuls", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeScanTaskDetails", async function () {
+    try {
+       const data = await client.DescribeScanTaskDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.MisAlarmNonlocalLoginPlaces", async function () {
     try {
        const data = await client.MisAlarmNonlocalLoginPlaces({})
@@ -381,6 +391,16 @@ it("cwp.v20180228.DescribeESAggregations", async function () {
 it("cwp.v20180228.CreateSearchLog", async function () {
     try {
        const data = await client.CreateSearchLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.IgnoreImpactedHosts", async function () {
+    try {
+       const data = await client.IgnoreImpactedHosts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,6 +678,16 @@ it("cwp.v20180228.CloseProVersion", async function () {
     }
 })
 
+it("cwp.v20180228.ScanVulSetting", async function () {
+    try {
+       const data = await client.ScanVulSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeAccountStatistics", async function () {
     try {
        const data = await client.DescribeAccountStatistics({})
@@ -888,6 +918,16 @@ it("cwp.v20180228.DeleteBashRules", async function () {
     }
 })
 
+it("cwp.v20180228.ScanVulAgain", async function () {
+    try {
+       const data = await client.ScanVulAgain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeReverseShellEvents", async function () {
     try {
        const data = await client.DescribeReverseShellEvents({})
@@ -908,9 +948,9 @@ it("cwp.v20180228.ModifyAutoOpenProVersionConfig", async function () {
     }
 })
 
-it("cwp.v20180228.IgnoreImpactedHosts", async function () {
+it("cwp.v20180228.DescribeMalwareTimingScanSetting", async function () {
     try {
-       const data = await client.IgnoreImpactedHosts({})
+       const data = await client.DescribeMalwareTimingScanSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,6 +1218,16 @@ it("cwp.v20180228.ModifyMalwareTimingScanSettings", async function () {
     }
 })
 
+it("cwp.v20180228.CreateScanMalwareSetting", async function () {
+    try {
+       const data = await client.CreateScanMalwareSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeComponentInfo", async function () {
     try {
        const data = await client.DescribeComponentInfo({})
@@ -1231,6 +1281,16 @@ it("cwp.v20180228.ExportReverseShellEvents", async function () {
 it("cwp.v20180228.DeleteAttackLogs", async function () {
     try {
        const data = await client.DeleteAttackLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeScanVulSetting", async function () {
+    try {
+       const data = await client.DescribeScanVulSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1371,6 +1431,16 @@ it("cwp.v20180228.CreateUsualLoginPlaces", async function () {
 it("cwp.v20180228.ExportVulDetectionReport", async function () {
     try {
        const data = await client.ExportVulDetectionReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.EditBashRules", async function () {
+    try {
+       const data = await client.EditBashRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

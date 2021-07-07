@@ -2380,6 +2380,11 @@ export interface IndicatorItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Normal: boolean;
+    /**
+      * 项目原文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ItemString: string;
 }
 /**
  * 图片信息

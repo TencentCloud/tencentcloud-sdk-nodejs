@@ -1,16 +1,12 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetCateTreeRequest, FlowProductRemindResponse, GetCateTreeResponse, GetUsagePlanUsageAmountResponse, FlowProductRemindRequest, GetUsagePlanUsageAmountRequest } from "./market_models";
+import { GetUsagePlanUsageAmountResponse, GetUsagePlanUsageAmountRequest, FlowProductRemindRequest, FlowProductRemindResponse } from "./market_models";
 /**
  * market client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
-    /**
-     * 获取分类名称
-     */
-    GetCateTree(req: GetCateTreeRequest, cb?: (error: string, rep: GetCateTreeResponse) => void): Promise<GetCateTreeResponse>;
     /**
      * 该接口可以根据InstanceId查询实例的api的使用情况。
 

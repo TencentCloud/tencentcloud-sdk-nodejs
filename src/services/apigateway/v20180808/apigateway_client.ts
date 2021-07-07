@@ -103,7 +103,7 @@ import {
   DescribeServiceRequest,
   CreateUsagePlanRequest,
   DescribeUsagePlanSecretIdsResponse,
-  UpdateServiceRequest,
+  CreatePluginRequest,
   MicroServiceReq,
   ModifySubDomainResponse,
   DescribePluginsRequest,
@@ -129,6 +129,7 @@ import {
   Environment,
   DescribeAPIDocsRequest,
   ServiceReleaseHistoryInfo,
+  CreatePluginResponse,
   DescribePluginsResponse,
   ReleaseServiceResponse,
   APIDocInfo,
@@ -177,6 +178,7 @@ import {
   CreateIPStrategyResponse,
   AttachedApiInfo,
   BindIPStrategyRequest,
+  UpdateServiceRequest,
   BuildAPIDocResponse,
   ErrorCodes,
   ServiceEnvironmentStrategyStatus,
@@ -825,6 +827,16 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
     cb?: (error: string, rep: DescribeApiKeyResponse) => void
   ): Promise<DescribeApiKeyResponse> {
     return this.request("DescribeApiKey", req, cb)
+  }
+
+  /**
+   * 创建API网关插件。
+   */
+  async CreatePlugin(
+    req: CreatePluginRequest,
+    cb?: (error: string, rep: CreatePluginResponse) => void
+  ): Promise<CreatePluginResponse> {
+    return this.request("CreatePlugin", req, cb)
   }
 
   /**

@@ -338,6 +338,22 @@ export interface DetectInfoBestFrame {
 }
 
 /**
+ * 获取token时的的配置
+ */
+export interface GetEidTokenConfig {
+  /**
+      * 姓名身份证输入方式。
+1：传身份证正反面OCR   
+2：传身份证正面OCR  
+3：用户手动输入  
+4：客户后台传入  
+默认1
+注：使用OCR时仅支持用户修改结果中的姓名
+      */
+  InputType?: string
+}
+
+/**
  * CheckIdCardInformation返回参数结构体
  */
 export interface CheckIdCardInformationResponse {
@@ -496,7 +512,7 @@ export interface PhoneVerificationRequest {
  */
 export interface GetEidResultRequest {
   /**
-   * 人脸核身流程的标识，调用GetEidToken接口时生成的。
+   * E证通流程的唯一标识，调用GetEidToken接口时生成。
    */
   EidToken: string
 
@@ -594,6 +610,11 @@ export interface GetEidTokenRequest {
    * 小程序模式配置，包括如何传入姓名身份证的配置。
    */
   Config?: GetEidTokenConfig
+
+  /**
+   * 最长长度1024位。用户从Url中进入核身认证结束后重定向的回调链接地址。EidToken会在该链接的query参数中。
+   */
+  RedirectUrl?: string
 }
 
 /**
@@ -794,18 +815,42 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * Eid出参
+ * CheckIdCardInformation请求参数结构体
  */
-export interface EidInfo {
+export interface CheckIdCardInformationRequest {
   /**
-   * 商户方 appeIDcode 的数字证书
-   */
-  EidCode: string
+      * 身份证人像面的 Base64 值
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
+      */
+  ImageBase64?: string
 
   /**
-   * eID 中心针对商户方EidCode的电子签名
-   */
-  EidSign: string
+      * 身份证人像面的 Url 地址
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
+
+  /**
+      * 以下可选字段均为bool 类型，默认false：
+CopyWarn，复印件告警
+BorderCheckWarn，边框和框内遮挡告警
+ReshootWarn，翻拍告警
+DetectPsWarn，PS检测告警
+TempIdWarn，临时身份证告警
+Quality，图片质量告警（评价图片模糊程度）
+
+SDK 设置方式参考：
+Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})
+API 3.0 Explorer 设置方式参考：
+Config = {"CopyWarn":true,"ReshootWarn":true}
+      */
+  Config?: string
 }
 
 /**
@@ -824,19 +869,22 @@ export interface GetFaceIdTokenResponse {
 }
 
 /**
- * 获取token时的的配置
+ * CheckEidTokenStatus返回参数结构体
  */
-export interface GetEidTokenConfig {
+export interface CheckEidTokenStatusResponse {
   /**
-      * 姓名身份证输入方式。
-1：传身份证正反面OCR   
-2：传身份证正面OCR  
-3：用户手动输入  
-4：客户后台传入  
-默认1
-注：使用OCR时仅支持用户修改结果中的姓名
+      * 枚举：
+init：token未验证
+doing: 验证中
+finished: 验证完成
+timeout: token已超时
       */
-  InputType?: string
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -991,42 +1039,18 @@ export interface LivenessResponse {
 }
 
 /**
- * CheckIdCardInformation请求参数结构体
+ * Eid出参
  */
-export interface CheckIdCardInformationRequest {
+export interface EidInfo {
   /**
-      * 身份证人像面的 Base64 值
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。
-请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
-      */
-  ImageBase64?: string
+   * 商户方 appeIDcode 的数字证书
+   */
+  EidCode: string
 
   /**
-      * 身份证人像面的 Url 地址
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-      */
-  ImageUrl?: string
-
-  /**
-      * 以下可选字段均为bool 类型，默认false：
-CopyWarn，复印件告警
-BorderCheckWarn，边框和框内遮挡告警
-ReshootWarn，翻拍告警
-DetectPsWarn，PS检测告警
-TempIdWarn，临时身份证告警
-Quality，图片质量告警（评价图片模糊程度）
-
-SDK 设置方式参考：
-Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})
-API 3.0 Explorer 设置方式参考：
-Config = {"CopyWarn":true,"ReshootWarn":true}
-      */
-  Config?: string
+   * eID 中心针对商户方EidCode的电子签名
+   */
+  EidSign: string
 }
 
 /**
@@ -1259,43 +1283,13 @@ export interface MinorsVerificationResponse {
 }
 
 /**
- * BankCardVerification返回参数结构体
+ * CheckEidTokenStatus请求参数结构体
  */
-export interface BankCardVerificationResponse {
+export interface CheckEidTokenStatusRequest {
   /**
-      * 认证结果码
-收费结果码：
-'0': '认证通过'
-'-1': '认证未通过'
-'-5': '持卡人信息有误'
-'-6': '未开通无卡支付'
-'-7': '此卡被没收'
-'-8': '无效卡号'
-'-9': '此卡无对应发卡行'
-'-10': '该卡未初始化或睡眠卡'
-'-11': '作弊卡、吞卡'
-'-12': '此卡已挂失'
-'-13': '该卡已过期'
-'-14': '受限制的卡'
-'-15': '密码错误次数超限'
-'-16': '发卡行不支持此交易'
-不收费结果码：
-'-2': '姓名校验不通过'
-'-3': '身份证号码有误'
-'-4': '银行卡号码有误'
-'-17': '验证中心服务繁忙'
-      */
-  Result: string
-
-  /**
-   * 业务结果描述。
+   * E证通流程的唯一标识，调用GetEidToken接口时生成。
    */
-  Description: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EidToken: string
 }
 
 /**
@@ -1451,6 +1445,46 @@ export interface LivenessRecognitionResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BestFrameList: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BankCardVerification返回参数结构体
+ */
+export interface BankCardVerificationResponse {
+  /**
+      * 认证结果码
+收费结果码：
+'0': '认证通过'
+'-1': '认证未通过'
+'-5': '持卡人信息有误'
+'-6': '未开通无卡支付'
+'-7': '此卡被没收'
+'-8': '无效卡号'
+'-9': '此卡无对应发卡行'
+'-10': '该卡未初始化或睡眠卡'
+'-11': '作弊卡、吞卡'
+'-12': '此卡已挂失'
+'-13': '该卡已过期'
+'-14': '受限制的卡'
+'-15': '密码错误次数超限'
+'-16': '发卡行不支持此交易'
+不收费结果码：
+'-2': '姓名校验不通过'
+'-3': '身份证号码有误'
+'-4': '银行卡号码有误'
+'-17': '验证中心服务繁忙'
+      */
+  Result: string
+
+  /**
+   * 业务结果描述。
+   */
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1786,10 +1820,15 @@ export interface CheckPhoneAndNameRequest {
  */
 export interface GetEidTokenResponse {
   /**
-      * 一次核身流程的标识，有效时间为7,200秒；
+      * 一次核身流程的标识，有效时间为600秒；
 完成核身后，可用该标识获取验证结果信息。
       */
   EidToken: string
+
+  /**
+   * 发起核身流程的URL，用于H5场景核身。
+   */
+  Url: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

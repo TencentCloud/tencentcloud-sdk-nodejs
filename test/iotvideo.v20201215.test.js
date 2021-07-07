@@ -78,6 +78,16 @@ it("iotvideo.v20201215.TransferCloudStorage", async function () {
     }
 })
 
+it("iotvideo.v20201215.CreateAIDetection", async function () {
+    try {
+       const data = await client.CreateAIDetection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeFirmware", async function () {
     try {
        const data = await client.DescribeFirmware({})
@@ -108,9 +118,19 @@ it("iotvideo.v20201215.RetryDeviceFirmwareTask", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeDevice", async function () {
+it("iotvideo.v20201215.DescribeAIModels", async function () {
     try {
-       const data = await client.DescribeDevice({})
+       const data = await client.DescribeAIModels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeAIModelApplications", async function () {
+    try {
+       const data = await client.DescribeAIModelApplications({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +141,16 @@ it("iotvideo.v20201215.DescribeDevice", async function () {
 it("iotvideo.v20201215.DescribeProduct", async function () {
     try {
        const data = await client.DescribeProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeAIModelUsage", async function () {
+    try {
+       const data = await client.DescribeAIModelUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +181,16 @@ it("iotvideo.v20201215.ModifyDevice", async function () {
 it("iotvideo.v20201215.ModifyForwardRule", async function () {
     try {
        const data = await client.ModifyForwardRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.CancelAIModelApplication", async function () {
+    try {
+       const data = await client.CancelAIModelApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +248,19 @@ it("iotvideo.v20201215.DescribeDeviceActionHistory", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeBalanceTransactions", async function () {
+it("iotvideo.v20201215.UpdateAIModelChannel", async function () {
     try {
-       const data = await client.DescribeBalanceTransactions({})
+       const data = await client.UpdateAIModelChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.CreateCOSCredentials", async function () {
+    try {
+       const data = await client.CreateCOSCredentials({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +318,9 @@ it("iotvideo.v20201215.DescribeDeviceDataHistory", async function () {
     }
 })
 
-it("iotvideo.v20201215.UploadFirmware", async function () {
+it("iotvideo.v20201215.DescribeFirmwareTasks", async function () {
     try {
-       const data = await client.UploadFirmware({})
+       const data = await client.DescribeFirmwareTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,6 +438,16 @@ it("iotvideo.v20201215.DeleteProduct", async function () {
     }
 })
 
+it("iotvideo.v20201215.ReportAliveDevice", async function () {
+    try {
+       const data = await client.ReportAliveDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeDeviceEventHistory", async function () {
     try {
        const data = await client.DescribeDeviceEventHistory({})
@@ -428,6 +488,16 @@ it("iotvideo.v20201215.ImportModelDefinition", async function () {
     }
 })
 
+it("iotvideo.v20201215.UploadFirmware", async function () {
+    try {
+       const data = await client.UploadFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.ResetCloudStorage", async function () {
     try {
        const data = await client.ResetCloudStorage({})
@@ -461,6 +531,16 @@ it("iotvideo.v20201215.DescribeFirmwareTaskDevices", async function () {
 it("iotvideo.v20201215.CancelDeviceFirmwareTask", async function () {
     try {
        const data = await client.CancelDeviceFirmwareTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeAIModelChannel", async function () {
+    try {
+       const data = await client.DescribeAIModelChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,6 +598,16 @@ it("iotvideo.v20201215.ModifyModelDefinition", async function () {
     }
 })
 
+it("iotvideo.v20201215.ApplyAIModel", async function () {
+    try {
+       const data = await client.ApplyAIModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeBalance", async function () {
     try {
        const data = await client.DescribeBalance({})
@@ -548,9 +638,19 @@ it("iotvideo.v20201215.DeleteFirmware", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeFirmwareTasks", async function () {
+it("iotvideo.v20201215.DescribeDevice", async function () {
     try {
-       const data = await client.DescribeFirmwareTasks({})
+       const data = await client.DescribeDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeBalanceTransactions", async function () {
+    try {
+       const data = await client.DescribeBalanceTransactions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

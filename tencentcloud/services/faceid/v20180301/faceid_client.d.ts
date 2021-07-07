@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, GetEidResultResponse, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, GetEidTokenRequest, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, GetRealNameAuthTokenRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, MobileStatusResponse, IdCardOCRVerificationResponse, GetRealNameAuthTokenResponse, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, BankCardVerificationResponse, GetRealNameAuthResultRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, LivenessRecognitionResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, GetEidTokenResponse, LivenessCompareRequest, GetFaceIdResultResponse, EncryptedPhoneVerificationRequest, GetRealNameAuthResultResponse, EncryptedPhoneVerificationResponse } from "./faceid_models";
+import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, GetEidResultResponse, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, GetEidTokenRequest, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, GetRealNameAuthTokenRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, CheckIdCardInformationRequest, GetFaceIdTokenResponse, CheckEidTokenStatusResponse, MobileStatusResponse, IdCardOCRVerificationResponse, GetRealNameAuthTokenResponse, LivenessResponse, DetectAuthRequest, MinorsVerificationResponse, CheckEidTokenStatusRequest, GetRealNameAuthResultRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, LivenessRecognitionResponse, BankCardVerificationResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, GetEidTokenResponse, LivenessCompareRequest, GetFaceIdResultResponse, EncryptedPhoneVerificationRequest, GetRealNameAuthResultResponse, EncryptedPhoneVerificationResponse } from "./faceid_models";
 /**
  * faceid client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
      */
     CheckIdCardInformation(req: CheckIdCardInformationRequest, cb?: (error: string, rep: CheckIdCardInformationResponse) => void): Promise<CheckIdCardInformationResponse>;
+    /**
+     * 用于轮询E证通H5场景EidToken验证状态。
+     */
+    CheckEidTokenStatus(req: CheckEidTokenStatusRequest, cb?: (error: string, rep: CheckEidTokenStatusResponse) => void): Promise<CheckEidTokenStatusResponse>;
     /**
      * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      */
@@ -66,7 +70,7 @@ export declare class Client extends AbstractClient {
      */
     ImageRecognition(req: ImageRecognitionRequest, cb?: (error: string, rep: ImageRecognitionResponse) => void): Promise<ImageRecognitionResponse>;
     /**
-     * 每次调用E证通小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 每次调用E证通服务前，需先调用本接口获取EidToken，用来串联E证通流程，在验证完成后，用于获取E证通结果信息。
      */
     GetEidToken(req: GetEidTokenRequest, cb?: (error: string, rep: GetEidTokenResponse) => void): Promise<GetEidTokenResponse>;
     /**

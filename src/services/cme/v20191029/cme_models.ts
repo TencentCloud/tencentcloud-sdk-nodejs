@@ -245,41 +245,41 @@ export interface DescribeTaskDetailResponse {
 <li>SUCCESS：成功；</li>
 <li>FAIL：失败。</li>
       */
-  Status?: string
+  Status: string
 
   /**
    * 任务进度，取值为：0~100。
    */
-  Progress?: number
+  Progress: number
 
   /**
       * 错误码。
 <li>0：成功；</li>
 <li>其他值：失败。</li>
       */
-  ErrCode?: number
+  ErrCode: number
 
   /**
    * 错误信息。
    */
-  ErrMsg?: string
+  ErrMsg: string
 
   /**
       * 任务类型，取值有：
 <li>VIDEO_EDIT_PROJECT_EXPORT：视频编辑项目导出。</li>
       */
-  TaskType?: string
+  TaskType: string
 
   /**
       * 导出项目输出信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VideoEditProjectOutput?: VideoEditProjectOutput
+  VideoEditProjectOutput: VideoEditProjectOutput
 
   /**
    * 创建时间，格式按照 ISO 8601 标准表示。
    */
-  CreateTime?: string
+  CreateTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
