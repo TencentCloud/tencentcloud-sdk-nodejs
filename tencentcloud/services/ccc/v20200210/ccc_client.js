@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIMCdrs", req, cb);
     }
     /**
+     * 创建用户数据签名
+     */
+    async CreateUserSig(req, cb) {
+        return this.request("CreateUserSig", req, cb);
+    }
+    /**
      * 删除坐席信息
      */
     async DeleteStaff(req, cb) {

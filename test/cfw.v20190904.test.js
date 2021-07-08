@@ -148,6 +148,16 @@ it("cfw.v20190904.DescribeRuleOverview", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeTLogInfo", async function () {
+    try {
+       const data = await client.DescribeTLogInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
     try {
        const data = await client.ModifyBlockIgnoreList({})
@@ -161,6 +171,16 @@ it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
 it("cfw.v20190904.DescribeGuideScanInfo", async function () {
     try {
        const data = await client.DescribeGuideScanInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
+    try {
+       const data = await client.DescribeUnHandleEventTabList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +221,16 @@ it("cfw.v20190904.SetNatFwDnatRule", async function () {
 it("cfw.v20190904.ModifyAllRuleStatus", async function () {
     try {
        const data = await client.ModifyAllRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyBlockTop", async function () {
+    try {
+       const data = await client.ModifyBlockTop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +288,16 @@ it("cfw.v20190904.DeleteSecurityGroupRule", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeTLogIpList", async function () {
+    try {
+       const data = await client.DescribeTLogIpList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeAcLists", async function () {
     try {
        const data = await client.DescribeAcLists({})
@@ -281,6 +321,26 @@ it("cfw.v20190904.DeleteAllAccessControlRule", async function () {
 it("cfw.v20190904.ExpandCfwVertical", async function () {
     try {
        const data = await client.ExpandCfwVertical({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeBlockByIpTimesList", async function () {
+    try {
+       const data = await client.DescribeBlockByIpTimesList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeBlockStaticList", async function () {
+    try {
+       const data = await client.DescribeBlockStaticList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

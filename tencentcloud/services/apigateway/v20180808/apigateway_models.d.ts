@@ -183,6 +183,19 @@ export interface ModifyAPIDocResponse {
     RequestId?: string;
 }
 /**
+ * 插件绑定的API列表
+ */
+export interface AttachedApiSummary {
+    /**
+      * 插件绑定的API数量。
+      */
+    TotalCount: number;
+    /**
+      * 插件绑定的API信息。
+      */
+    AttachedApis: Array<AttachedApiInfo>;
+}
+/**
  * DescribeUsagePlan请求参数结构体
  */
 export interface DescribeUsagePlanRequest {
@@ -235,6 +248,27 @@ export interface UnReleaseServiceRequest {
       * 保留字段，待下线的API列表。
       */
     ApiIds?: Array<string>;
+}
+/**
+ * DetachPlugin请求参数结构体
+ */
+export interface DetachPluginRequest {
+    /**
+      * 要解绑的API网关插件ID。
+      */
+    PluginId: string;
+    /**
+      * 要操作的服务ID。
+      */
+    ServiceId: string;
+    /**
+      * 要操作API的环境。
+      */
+    EnvironmentName: string;
+    /**
+      * 要解绑的API ID。
+      */
+    ApiId: string;
 }
 /**
  * ModifySubDomain请求参数结构体
@@ -608,6 +642,19 @@ export interface ModifyAPIDocRequest {
       * 生成文档的API列表
       */
     ApiIds?: Array<string>;
+}
+/**
+ * DescribePlugin返回参数结构体
+ */
+export interface DescribePluginResponse {
+    /**
+      * 插件详情。
+      */
+    Result: Plugin;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 自定义服务域名展示
@@ -1073,6 +1120,27 @@ export interface UnBindIPStrategyResponse {
     RequestId?: string;
 }
 /**
+ * ModifyPlugin请求参数结构体
+ */
+export interface ModifyPluginRequest {
+    /**
+      * 要修改的插件ID。
+      */
+    PluginId: string;
+    /**
+      * 要修改的API网关插件名称。最长50个字符，支持 a-z,A-Z,0-9,_, 必须字母开头，字母或者数字结尾。
+      */
+    PluginName?: string;
+    /**
+      * 要修改的插件描述，限定200字以内。
+      */
+    Description?: string;
+    /**
+      * 要修改的插件定义语句，支持json。
+      */
+    PluginData?: string;
+}
+/**
  * BindIPStrategy返回参数结构体
  */
 export interface BindIPStrategyResponse {
@@ -1085,6 +1153,41 @@ export interface BindIPStrategyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 插件相关的API信息。
+ */
+export interface AvailableApiInfo {
+    /**
+      * API ID。
+      */
+    ApiId: string;
+    /**
+      * API名称。
+      */
+    ApiName: string;
+    /**
+      * API类型。
+      */
+    ApiType: string;
+    /**
+      * API路径。
+      */
+    Path: string;
+    /**
+      * API方法。
+      */
+    Method: string;
+    /**
+      * API是否绑定其他插件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachedOtherPlugin: boolean;
+    /**
+      * API是否绑定当前插件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsAttached: boolean;
 }
 /**
  * DescribeApisStatus请求参数结构体
@@ -1172,6 +1275,23 @@ export interface DescribeIPStrategyResponse {
     RequestId?: string;
 }
 /**
+ * DescribePlugin请求参数结构体
+ */
+export interface DescribePluginRequest {
+    /**
+      * 要查询的插件ID。
+      */
+    PluginId: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
  * api文档下载
  */
 export interface DocumentSDK {
@@ -1185,18 +1305,43 @@ export interface DocumentSDK {
     SdkURL: string;
 }
 /**
- * DeleteApi返回参数结构体
+ * 插件绑定的API信息
  */
-export interface DeleteApiResponse {
+export interface AttachedApiInfo {
     /**
-      * 删除操作是否成功。
+      * API所在服务ID。
+      */
+    ServiceId: string;
+    /**
+      * API所在服务名称。
+      */
+    ServiceName: string;
+    /**
+      * API所在服务描述信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: boolean;
+    ServiceDesc: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * API ID。
       */
-    RequestId?: string;
+    ApiId: string;
+    /**
+      * API名称。
+      */
+    ApiName: string;
+    /**
+      * API描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiDesc: string;
+    /**
+      * 插件绑定API的环境。
+      */
+    Environment: string;
+    /**
+      * 插件和API绑定时间。
+      */
+    AttachedTime: string;
 }
 /**
  * CreateApi返回参数结构体
@@ -1360,6 +1505,15 @@ export interface ReqParameter {
       * API 的前端参数备注。
       */
     Desc: string;
+}
+/**
+ * DeletePlugin请求参数结构体
+ */
+export interface DeletePluginRequest {
+    /**
+      * 要删除的API网关插件的ID。
+      */
+    PluginId: string;
 }
 /**
  * Base64编码的header触发规则
@@ -1543,6 +1697,23 @@ export interface UnBindIPStrategyRequest {
       * 待解绑的 API 列表。
       */
     UnBindApiIds: Array<string>;
+}
+/**
+ * DescribePluginApis请求参数结构体
+ */
+export interface DescribePluginApisRequest {
+    /**
+      * 查询的插件ID。
+      */
+    PluginId: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
 }
 /**
  * 错误码入参
@@ -2165,6 +2336,19 @@ export interface ModifyApiRequest {
     Base64EncodedTriggerRules?: Array<Base64EncodedTriggerRule>;
 }
 /**
+ * DescribeAllPluginApis返回参数结构体
+ */
+export interface DescribeAllPluginApisResponse {
+    /**
+      * 插件相关API的列表。
+      */
+    Result: ApiInfoSummary;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyUsagePlan请求参数结构体
  */
 export interface ModifyUsagePlanRequest {
@@ -2226,6 +2410,31 @@ export interface ModifyServiceRequest {
       * 网络类型列表，用于指定支持的访问类型，INNER为内网访问，OUTER为外网访问。默认为OUTER。
       */
     NetTypes?: Array<string>;
+}
+/**
+ * DescribeAllPluginApis请求参数结构体
+ */
+export interface DescribeAllPluginApisRequest {
+    /**
+      * 要查询的服务ID。
+      */
+    ServiceId: string;
+    /**
+      * 要查询的插件ID。
+      */
+    PluginId: string;
+    /**
+      * 环境信息。
+      */
+    EnvironmentName: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
 }
 /**
  * API状态
@@ -2725,17 +2934,17 @@ export interface APIDocInfo {
     ApiNames: Array<string>;
 }
 /**
- * 插件列表详情。
+ * DescribePluginApis返回参数结构体
  */
-export interface PluginSummary {
+export interface DescribePluginApisResponse {
     /**
-      * 插件个数。
+      * 插件绑定的API列表信息。
       */
-    TotalCount: number;
+    Result: AttachedApiSummary;
     /**
-      * 插件详情。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PluginSet: Array<Plugin>;
+    RequestId?: string;
 }
 /**
  * ModifyApiIncrement请求参数结构体
@@ -3430,6 +3639,19 @@ export interface ModifyIPStrategyRequest {
     StrategyData: string;
 }
 /**
+ * ModifyPlugin返回参数结构体
+ */
+export interface ModifyPluginResponse {
+    /**
+      * 修改操作是否成功。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UnBindSecretIds请求参数结构体
  */
 export interface UnBindSecretIdsRequest {
@@ -3593,6 +3815,32 @@ export interface DescribeAPIDocsResponse {
     RequestId?: string;
 }
 /**
+ * DetachPlugin返回参数结构体
+ */
+export interface DetachPluginResponse {
+    /**
+      * 解绑操作是否成功。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeletePlugin返回参数结构体
+ */
+export interface DeletePluginResponse {
+    /**
+      * 删除操作是否成功。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyServiceEnvironmentStrategy请求参数结构体
  */
 export interface ModifyServiceEnvironmentStrategyRequest {
@@ -3688,6 +3936,27 @@ export interface DescribeServiceSubDomainsResponse {
     RequestId?: string;
 }
 /**
+ * AttachPlugin请求参数结构体
+ */
+export interface AttachPluginRequest {
+    /**
+      * 绑定的API网关插件ID。
+      */
+    PluginId: string;
+    /**
+      * 要操作的服务ID。
+      */
+    ServiceId: string;
+    /**
+      * 要操作API的环境。
+      */
+    EnvironmentName: string;
+    /**
+      * 要绑定的API列表。
+      */
+    ApiIds: Array<string>;
+}
+/**
  * BindSubDomain请求参数结构体
  */
 export interface BindSubDomainRequest {
@@ -3758,43 +4027,18 @@ export interface CreateIPStrategyResponse {
     RequestId?: string;
 }
 /**
- * 插件绑定的API信息
+ * DeleteApi返回参数结构体
  */
-export interface AttachedApiInfo {
+export interface DeleteApiResponse {
     /**
-      * API所在服务ID。
-      */
-    ServiceId: string;
-    /**
-      * API所在服务名称。
-      */
-    ServiceName: string;
-    /**
-      * API所在服务描述信息。
+      * 删除操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServiceDesc: string;
+    Result: boolean;
     /**
-      * API ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ApiId: string;
-    /**
-      * API名称。
-      */
-    ApiName: string;
-    /**
-      * API描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiDesc: string;
-    /**
-      * 插件绑定API的环境。
-      */
-    Environment: string;
-    /**
-      * 插件和API绑定时间。
-      */
-    AttachedTime: string;
+    RequestId?: string;
 }
 /**
  * BindIPStrategy请求参数结构体
@@ -3943,6 +4187,19 @@ export interface ApiEnvironmentStrategyStataus {
     ApiEnvironmentStrategySet: Array<ApiEnvironmentStrategy>;
 }
 /**
+ * 插件列表详情。
+ */
+export interface PluginSummary {
+    /**
+      * 插件个数。
+      */
+    TotalCount: number;
+    /**
+      * 插件详情。
+      */
+    PluginSet: Array<Plugin>;
+}
+/**
  * DeleteIPStrategy返回参数结构体
  */
 export interface DeleteIPStrategyResponse {
@@ -3955,6 +4212,19 @@ export interface DeleteIPStrategyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 插件相关的API列表信息。
+ */
+export interface ApiInfoSummary {
+    /**
+      * 插件相关的API总数。
+      */
+    TotalCount: number;
+    /**
+      * 插件相关的API信息。
+      */
+    ApiSet: Array<AvailableApiInfo>;
 }
 /**
  * 密钥详情
@@ -3998,6 +4268,19 @@ export interface DescribeUsagePlanResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result?: UsagePlanInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * AttachPlugin返回参数结构体
+ */
+export interface AttachPluginResponse {
+    /**
+      * 绑定操作是否成功。
+      */
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

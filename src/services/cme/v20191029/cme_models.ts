@@ -571,28 +571,33 @@ export interface StreamConnectOutput {
 }
 
 /**
- * 视频拆条项目的输入信息。
+ * CopyProject请求参数结构体
  */
-export interface VideoSegmentationProjectInput {
+export interface CopyProjectRequest {
   /**
-      * 画布宽高比，取值有：
-<li>16:9；</li>
-<li>9:16；</li>
-<li>2:1。</li>
-默认值 16:9 。
-      */
-  AspectRatio?: string
+   * 平台名称，指定访问的平台。
+   */
+  Platform: string
 
   /**
-      * 视频拆条处理模型，不填则默认为手工分割视频。取值 ：
-<li>AI.GameHighlights.PUBG：和平精英集锦 ;</li>
-<li>AI.GameHighlights.Honor OfKings：王者荣耀集锦 ;</li>
-<li>AI.SportHighlights.Football：足球集锦 </li>
-<li>AI.SportHighlights.Basketball：篮球集锦 ；</li>
-<li>AI.PersonSegmentation：人物集锦  ;</li>
-<li>AI.NewsSegmentation：新闻拆条。</li>
-      */
-  ProcessModel?: string
+   * 被复制的项目 ID。
+   */
+  ProjectId: string
+
+  /**
+   * 复制后的项目名称，不填为原项目名称+"(副本)"。
+   */
+  Name?: string
+
+  /**
+   * 复制后的项目归属者，不填为原项目归属者。
+   */
+  Owner?: Entity
+
+  /**
+   * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+   */
+  Operator?: string
 }
 
 /**
@@ -1699,6 +1704,31 @@ export interface DescribeJoinTeamsRequest {
 }
 
 /**
+ * 视频拆条项目的输入信息。
+ */
+export interface VideoSegmentationProjectInput {
+  /**
+      * 画布宽高比，取值有：
+<li>16:9；</li>
+<li>9:16；</li>
+<li>2:1。</li>
+默认值 16:9 。
+      */
+  AspectRatio?: string
+
+  /**
+      * 视频拆条处理模型，不填则默认为手工分割视频。取值 ：
+<li>AI.GameHighlights.PUBG：和平精英集锦 ;</li>
+<li>AI.GameHighlights.Honor OfKings：王者荣耀集锦 ;</li>
+<li>AI.SportHighlights.Football：足球集锦 </li>
+<li>AI.SportHighlights.Basketball：篮球集锦 ；</li>
+<li>AI.PersonSegmentation：人物集锦  ;</li>
+<li>AI.NewsSegmentation：新闻拆条。</li>
+      */
+  ProcessModel?: string
+}
+
+/**
  * DeleteMaterial请求参数结构体
  */
 export interface DeleteMaterialRequest {
@@ -2652,6 +2682,52 @@ export interface MediaReplacementInfo {
    * 替换媒体选取的开始时间，单位为秒，默认为 0。
    */
   StartTimeOffset?: number
+}
+
+/**
+ * 任务基础信息。
+ */
+export interface TaskBaseInfo {
+  /**
+   * 任务 Id。
+   */
+  TaskId: string
+
+  /**
+      * 任务类型，取值有：
+<li>VIDEO_EDIT_PROJECT_EXPORT：项目导出。</li>
+      */
+  TaskType: string
+
+  /**
+      * 任务状态，取值有：
+<li>PROCESSING：处理中：</li>
+<li>SUCCESS：成功；</li>
+<li>FAIL：失败。</li>
+      */
+  Status: string
+
+  /**
+   * 任务进度，取值为：0~100。
+   */
+  Progress: number
+
+  /**
+      * 错误码。
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+      */
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  ErrMsg: string
+
+  /**
+   * 创建时间，格式按照 ISO 8601 标准表示。
+   */
+  CreateTime: string
 }
 
 /**
@@ -3734,49 +3810,18 @@ export interface KuaishouPublishInfo {
 }
 
 /**
- * 任务基础信息。
+ * CopyProject返回参数结构体
  */
-export interface TaskBaseInfo {
+export interface CopyProjectResponse {
   /**
-   * 任务 Id。
+   * 复制后的项目 ID。
    */
-  TaskId: string
+  ProjectId: string
 
   /**
-      * 任务类型，取值有：
-<li>VIDEO_EDIT_PROJECT_EXPORT：项目导出。</li>
-      */
-  TaskType: string
-
-  /**
-      * 任务状态，取值有：
-<li>PROCESSING：处理中：</li>
-<li>SUCCESS：成功；</li>
-<li>FAIL：失败。</li>
-      */
-  Status: string
-
-  /**
-   * 任务进度，取值为：0~100。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Progress: number
-
-  /**
-      * 错误码。
-<li>0：成功；</li>
-<li>其他值：失败。</li>
-      */
-  ErrCode: number
-
-  /**
-   * 错误信息。
-   */
-  ErrMsg: string
-
-  /**
-   * 创建时间，格式按照 ISO 8601 标准表示。
-   */
-  CreateTime: string
+  RequestId?: string
 }
 
 /**

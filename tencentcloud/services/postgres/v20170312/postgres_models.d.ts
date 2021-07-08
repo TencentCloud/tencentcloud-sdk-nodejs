@@ -238,7 +238,7 @@ export interface CreateInstancesRequest {
       */
     Name?: string;
     /**
-      * 是否需要支持Ipv6，1：是，0：否。
+      * 是否需要支持Ipv6，1：是，0：否（默认）。
       */
     NeedSupportIpv6?: number;
     /**

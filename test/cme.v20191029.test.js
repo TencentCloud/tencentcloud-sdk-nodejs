@@ -18,9 +18,9 @@ const client = new tencentcloud.cme.v20191029.Client({
 })
 describe("cme.v20191029.test.js", function () {
 
-it("cme.v20191029.DescribeMaterials", async function () {
+it("cme.v20191029.DescribeTasks", async function () {
     try {
-       const data = await client.DescribeMaterials({})
+       const data = await client.DescribeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +288,19 @@ it("cme.v20191029.DescribeLoginStatus", async function () {
     }
 })
 
-it("cme.v20191029.DescribeTasks", async function () {
+it("cme.v20191029.DescribeMaterials", async function () {
     try {
-       const data = await client.DescribeTasks({})
+       const data = await client.DescribeMaterials({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cme.v20191029.HandleStreamConnectProject", async function () {
+    try {
+       const data = await client.HandleStreamConnectProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +448,9 @@ it("cme.v20191029.FlattenListMedia", async function () {
     }
 })
 
-it("cme.v20191029.HandleStreamConnectProject", async function () {
+it("cme.v20191029.CopyProject", async function () {
     try {
-       const data = await client.HandleStreamConnectProject({})
+       const data = await client.CopyProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

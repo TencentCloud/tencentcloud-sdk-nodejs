@@ -38,9 +38,9 @@ it("apigateway.v20180808.BuildAPIDoc", async function () {
     }
 })
 
-it("apigateway.v20180808.DescribeUsagePlansStatus", async function () {
+it("apigateway.v20180808.AttachPlugin", async function () {
     try {
-       const data = await client.DescribeUsagePlansStatus({})
+       const data = await client.AttachPlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("apigateway.v20180808.ModifySubDomain", async function () {
     }
 })
 
-it("apigateway.v20180808.ModifyApiEnvironmentStrategy", async function () {
+it("apigateway.v20180808.DescribeUsagePlansStatus", async function () {
     try {
-       const data = await client.ModifyApiEnvironmentStrategy({})
+       const data = await client.DescribeUsagePlansStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +211,16 @@ it("apigateway.v20180808.UpdateService", async function () {
 it("apigateway.v20180808.DescribeIPStrategyApisStatus", async function () {
     try {
        const data = await client.DescribeIPStrategyApisStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.ModifyPlugin", async function () {
+    try {
+       const data = await client.ModifyPlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +338,39 @@ it("apigateway.v20180808.CreateUsagePlan", async function () {
     }
 })
 
+it("apigateway.v20180808.UnBindEnvironment", async function () {
+    try {
+       const data = await client.UnBindEnvironment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeAllPluginApis", async function () {
+    try {
+       const data = await client.DescribeAllPluginApis({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.UpdateApiKey", async function () {
     try {
        const data = await client.UpdateApiKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DeletePlugin", async function () {
+    try {
+       const data = await client.DeletePlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,6 +528,16 @@ it("apigateway.v20180808.DeleteAPIDoc", async function () {
     }
 })
 
+it("apigateway.v20180808.DetachPlugin", async function () {
+    try {
+       const data = await client.DetachPlugin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DeleteIPStrategy", async function () {
     try {
        const data = await client.DeleteIPStrategy({})
@@ -501,6 +551,16 @@ it("apigateway.v20180808.DeleteIPStrategy", async function () {
 it("apigateway.v20180808.ReleaseService", async function () {
     try {
        const data = await client.ReleaseService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribePluginApis", async function () {
+    try {
+       const data = await client.DescribePluginApis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +588,9 @@ it("apigateway.v20180808.ModifyService", async function () {
     }
 })
 
-it("apigateway.v20180808.UnBindEnvironment", async function () {
+it("apigateway.v20180808.ModifyApiEnvironmentStrategy", async function () {
     try {
-       const data = await client.UnBindEnvironment({})
+       const data = await client.ModifyApiEnvironmentStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,6 +701,16 @@ it("apigateway.v20180808.UnBindSubDomain", async function () {
 it("apigateway.v20180808.BindSubDomain", async function () {
     try {
        const data = await client.BindSubDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribePlugin", async function () {
+    try {
+       const data = await client.DescribePlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

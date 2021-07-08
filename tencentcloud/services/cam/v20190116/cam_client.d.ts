@@ -170,7 +170,7 @@ export declare class Client extends AbstractClient {
     /**
      * 获取密钥最近使用情况
      */
-    GetSecurityLastUsed(req?: GetSecurityLastUsedRequest, cb?: (error: string, rep: GetSecurityLastUsedResponse) => void): Promise<GetSecurityLastUsedResponse>;
+    GetSecurityLastUsed(req: GetSecurityLastUsedRequest, cb?: (error: string, rep: GetSecurityLastUsedResponse) => void): Promise<GetSecurityLastUsedResponse>;
     /**
      * 该接口（ListPolicyVersions）用于获取策略版本列表
      */

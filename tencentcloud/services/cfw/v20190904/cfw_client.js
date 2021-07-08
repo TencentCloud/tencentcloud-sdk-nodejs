@@ -106,6 +106,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRuleOverview", req, cb);
     }
     /**
+     * DescribeTLogInfo告警中心概况
+
+     */
+    async DescribeTLogInfo(req, cb) {
+        return this.request("DescribeTLogInfo", req, cb);
+    }
+    /**
      * 支持对拦截列表、忽略列表如下操作：
 批量增加拦截IP、忽略IP/域名
 批量删除拦截IP、忽略IP/域名
@@ -119,6 +126,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeGuideScanInfo(req, cb) {
         return this.request("DescribeGuideScanInfo", req, cb);
+    }
+    /**
+     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
+
+     */
+    async DescribeUnHandleEventTabList(req, cb) {
+        return this.request("DescribeUnHandleEventTabList", req, cb);
     }
     /**
      * 修改规则执行顺序
@@ -143,6 +157,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAllRuleStatus(req, cb) {
         return this.request("ModifyAllRuleStatus", req, cb);
+    }
+    /**
+     * ModifyBlockTop取消置顶接口
+     */
+    async ModifyBlockTop(req, cb) {
+        return this.request("ModifyBlockTop", req, cb);
     }
     /**
      * 查询规则表状态
@@ -175,6 +195,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSecurityGroupRule", req, cb);
     }
     /**
+     * DescribeTLogIpList告警中心ip柱形图
+
+     */
+    async DescribeTLogIpList(req, cb) {
+        return this.request("DescribeTLogIpList", req, cb);
+    }
+    /**
      * 访问控制列表
      */
     async DescribeAcLists(req, cb) {
@@ -191,6 +218,20 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExpandCfwVertical(req, cb) {
         return this.request("ExpandCfwVertical", req, cb);
+    }
+    /**
+     * DescribeBlockByIpTimesList 告警中心阻断ip折线图
+
+     */
+    async DescribeBlockByIpTimesList(req, cb) {
+        return this.request("DescribeBlockByIpTimesList", req, cb);
+    }
+    /**
+     * DescribeBlockStaticList 告警中心柱形图
+
+     */
+    async DescribeBlockStaticList(req, cb) {
+        return this.request("DescribeBlockStaticList", req, cb);
     }
     /**
      * 修改单个防火墙开关

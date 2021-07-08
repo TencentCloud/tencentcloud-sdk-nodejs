@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, CreateSDKLoginTokenResponse, DescribeStaffInfoListResponse, CreateStaffResponse, DescribeTelCdrResponse, DeleteStaffRequest, DescribeTelSessionRequest, DescribeIMCdrsRequest, DeleteStaffResponse, DescribeSkillGroupInfoListRequest, DescribeTelCallInfoRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, UnbindStaffSkillGroupListRequest, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, CreateStaffRequest, BindStaffSkillGroupListResponse, UnbindStaffSkillGroupListResponse, DescribeTelCdrRequest, CreateSDKLoginTokenRequest, DescribeSkillGroupInfoListResponse, DescribeIMCdrsResponse } from "./ccc_models";
+import { BindStaffSkillGroupListRequest, DescribeStaffInfoListResponse, CreateSDKLoginTokenResponse, DescribePSTNActiveSessionListRequest, CreateStaffResponse, CreateUserSigRequest, CreateUserSigResponse, DeleteStaffRequest, DescribeTelSessionRequest, DescribeIMCdrsRequest, DeleteStaffResponse, DescribeSkillGroupInfoListRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, UnbindStaffSkillGroupListRequest, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, BindStaffSkillGroupListResponse, UnbindStaffSkillGroupListResponse, DescribeTelCdrRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, DescribeTelCdrResponse, DescribeSkillGroupInfoListResponse, DescribeIMCdrsResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 包括全媒体和文本两种类型
      */
     DescribeIMCdrs(req: DescribeIMCdrsRequest, cb?: (error: string, rep: DescribeIMCdrsResponse) => void): Promise<DescribeIMCdrsResponse>;
+    /**
+     * 创建用户数据签名
+     */
+    CreateUserSig(req: CreateUserSigRequest, cb?: (error: string, rep: CreateUserSigResponse) => void): Promise<CreateUserSigResponse>;
     /**
      * 删除坐席信息
      */

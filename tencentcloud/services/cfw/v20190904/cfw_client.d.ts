@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeVpcRuleOverviewResponse, SetNatFwDnatRuleRequest, DescribeSyncAssetStatusResponse, ModifyAllSwitchStatusRequest, ModifyAllRuleStatusResponse, DescribeGuideScanInfoRequest, DescribeRuleOverviewResponse, CreateSecurityGroupApiRulesRequest, DescribeSecurityGroupListResponse, ExpandCfwVerticalResponse, ModifyItemSwitchStatusRequest, ModifyItemSwitchStatusResponse, CreateSecurityGroupApiRulesResponse, ModifyAcRuleResponse, ModifySequenceRulesResponse, DescribeTableStatusResponse, DeleteAcRuleResponse, ModifySequenceRulesRequest, DescribeSwitchListsResponse, DescribeSyncAssetStatusRequest, ModifySecurityGroupAllRuleStatusResponse, DescribeCfwEipsResponse, DeleteAllAccessControlRuleRequest, RunSyncAssetResponse, RunSyncAssetRequest, DeleteSecurityGroupRuleRequest, ModifyTableStatusResponse, SetNatFwDnatRuleResponse, DescribeCfwEipsRequest, DescribeRuleOverviewRequest, DescribeVpcRuleOverviewRequest, DescribeAcListsRequest, DescribeTableStatusRequest, CreateAcRulesResponse, DescribeAssociatedInstanceListResponse, DescribeAssociatedInstanceListRequest, ModifyAcRuleRequest, DescribeNatRuleOverviewResponse, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, ModifyBlockIgnoreListResponse, DeleteSecurityGroupAllRuleResponse, ExpandCfwVerticalRequest, ModifyBlockIgnoreListRequest, CreateAcRulesRequest, DescribeSecurityGroupListRequest, DescribeSwitchListsRequest, ModifyTableStatusRequest, DeleteSecurityGroupRuleResponse, DescribeNatRuleOverviewRequest, ModifySecurityGroupAllRuleStatusRequest, DeleteSecurityGroupAllRuleRequest, ModifyAllRuleStatusRequest, DescribeGuideScanInfoResponse, DescribeAcListsResponse, ModifyAllSwitchStatusResponse } from "./cfw_models";
+import { DescribeVpcRuleOverviewResponse, SetNatFwDnatRuleRequest, DescribeSyncAssetStatusResponse, ModifyAllSwitchStatusRequest, DescribeUnHandleEventTabListResponse, ModifyAllRuleStatusResponse, DescribeGuideScanInfoRequest, DescribeRuleOverviewResponse, DescribeBlockByIpTimesListResponse, ModifySequenceRulesRequest, DescribeBlockByIpTimesListRequest, ExpandCfwVerticalResponse, DescribeBlockStaticListRequest, ModifyItemSwitchStatusRequest, ModifyItemSwitchStatusResponse, DescribeTableStatusResponse, CreateSecurityGroupApiRulesResponse, ModifyAcRuleResponse, ModifySequenceRulesResponse, ModifyBlockTopRequest, DescribeTLogInfoResponse, DeleteAcRuleResponse, DescribeTLogInfoRequest, DescribeSecurityGroupListResponse, DescribeSwitchListsResponse, DescribeSyncAssetStatusRequest, ModifySecurityGroupAllRuleStatusResponse, DescribeCfwEipsResponse, DeleteAllAccessControlRuleRequest, RunSyncAssetResponse, RunSyncAssetRequest, DeleteSecurityGroupRuleRequest, DescribeTLogIpListRequest, ModifySecurityGroupAllRuleStatusRequest, SetNatFwDnatRuleResponse, DescribeCfwEipsRequest, DescribeRuleOverviewRequest, DescribeVpcRuleOverviewRequest, DescribeAcListsRequest, DescribeTableStatusRequest, CreateAcRulesResponse, DescribeAssociatedInstanceListResponse, ModifyBlockTopResponse, DescribeAssociatedInstanceListRequest, ModifyAcRuleRequest, DescribeNatRuleOverviewResponse, ModifyTableStatusResponse, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, ModifyBlockIgnoreListResponse, DeleteSecurityGroupAllRuleResponse, ExpandCfwVerticalRequest, ModifyAllRuleStatusRequest, ModifyBlockIgnoreListRequest, CreateAcRulesRequest, DescribeSecurityGroupListRequest, DescribeSwitchListsRequest, ModifyTableStatusRequest, DeleteSecurityGroupRuleResponse, DescribeNatRuleOverviewRequest, DescribeUnHandleEventTabListRequest, CreateSecurityGroupApiRulesRequest, DeleteSecurityGroupAllRuleRequest, DescribeTLogIpListResponse, DescribeGuideScanInfoResponse, DescribeAcListsResponse, DescribeBlockStaticListResponse, ModifyAllSwitchStatusResponse } from "./cfw_models";
 /**
  * cfw client
  * @class
@@ -60,6 +60,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuleOverview(req: DescribeRuleOverviewRequest, cb?: (error: string, rep: DescribeRuleOverviewResponse) => void): Promise<DescribeRuleOverviewResponse>;
     /**
+     * DescribeTLogInfo告警中心概况
+
+     */
+    DescribeTLogInfo(req: DescribeTLogInfoRequest, cb?: (error: string, rep: DescribeTLogInfoResponse) => void): Promise<DescribeTLogInfoResponse>;
+    /**
      * 支持对拦截列表、忽略列表如下操作：
 批量增加拦截IP、忽略IP/域名
 批量删除拦截IP、忽略IP/域名
@@ -70,6 +75,11 @@ export declare class Client extends AbstractClient {
      * DescribeGuideScanInfo新手引导扫描接口信息
      */
     DescribeGuideScanInfo(req?: DescribeGuideScanInfoRequest, cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void): Promise<DescribeGuideScanInfoResponse>;
+    /**
+     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
+
+     */
+    DescribeUnHandleEventTabList(req: DescribeUnHandleEventTabListRequest, cb?: (error: string, rep: DescribeUnHandleEventTabListResponse) => void): Promise<DescribeUnHandleEventTabListResponse>;
     /**
      * 修改规则执行顺序
      */
@@ -86,6 +96,10 @@ export declare class Client extends AbstractClient {
      * 启用停用全部规则
      */
     ModifyAllRuleStatus(req: ModifyAllRuleStatusRequest, cb?: (error: string, rep: ModifyAllRuleStatusResponse) => void): Promise<ModifyAllRuleStatusResponse>;
+    /**
+     * ModifyBlockTop取消置顶接口
+     */
+    ModifyBlockTop(req: ModifyBlockTopRequest, cb?: (error: string, rep: ModifyBlockTopResponse) => void): Promise<ModifyBlockTopResponse>;
     /**
      * 查询规则表状态
      */
@@ -107,6 +121,11 @@ export declare class Client extends AbstractClient {
      */
     DeleteSecurityGroupRule(req: DeleteSecurityGroupRuleRequest, cb?: (error: string, rep: DeleteSecurityGroupRuleResponse) => void): Promise<DeleteSecurityGroupRuleResponse>;
     /**
+     * DescribeTLogIpList告警中心ip柱形图
+
+     */
+    DescribeTLogIpList(req: DescribeTLogIpListRequest, cb?: (error: string, rep: DescribeTLogIpListResponse) => void): Promise<DescribeTLogIpListResponse>;
+    /**
      * 访问控制列表
      */
     DescribeAcLists(req: DescribeAcListsRequest, cb?: (error: string, rep: DescribeAcListsResponse) => void): Promise<DescribeAcListsResponse>;
@@ -118,6 +137,16 @@ export declare class Client extends AbstractClient {
      * 防火墙垂直扩容
      */
     ExpandCfwVertical(req: ExpandCfwVerticalRequest, cb?: (error: string, rep: ExpandCfwVerticalResponse) => void): Promise<ExpandCfwVerticalResponse>;
+    /**
+     * DescribeBlockByIpTimesList 告警中心阻断ip折线图
+
+     */
+    DescribeBlockByIpTimesList(req: DescribeBlockByIpTimesListRequest, cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void): Promise<DescribeBlockByIpTimesListResponse>;
+    /**
+     * DescribeBlockStaticList 告警中心柱形图
+
+     */
+    DescribeBlockStaticList(req: DescribeBlockStaticListRequest, cb?: (error: string, rep: DescribeBlockStaticListResponse) => void): Promise<DescribeBlockStaticListResponse>;
     /**
      * 修改单个防火墙开关
      */

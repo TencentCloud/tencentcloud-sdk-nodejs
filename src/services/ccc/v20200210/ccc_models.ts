@@ -36,23 +36,23 @@ export interface BindStaffSkillGroupListRequest {
 }
 
 /**
- * DescribePSTNActiveSessionList请求参数结构体
+ * DescribeStaffInfoList返回参数结构体
  */
-export interface DescribePSTNActiveSessionListRequest {
+export interface DescribeStaffInfoListResponse {
   /**
-   * 应用 ID
+   * 坐席用户总数
    */
-  SdkAppId: number
+  TotalCount: number
 
   /**
-   * 数据偏移
+   * 坐席用户信息列表
    */
-  Offset: number
+  StaffList: Array<StaffInfo>
 
   /**
-   * 返回的数据条数，最大 25
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit: number
+  RequestId?: string
 }
 
 /**
@@ -98,23 +98,23 @@ export interface CreateSDKLoginTokenResponse {
 }
 
 /**
- * DescribeStaffInfoList返回参数结构体
+ * DescribePSTNActiveSessionList请求参数结构体
  */
-export interface DescribeStaffInfoListResponse {
+export interface DescribePSTNActiveSessionListRequest {
   /**
-   * 坐席用户总数
+   * 应用 ID
    */
-  TotalCount: number
+  SdkAppId: number
 
   /**
-   * 坐席用户信息列表
+   * 数据偏移
    */
-  StaffList: Array<StaffInfo>
+  Offset: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 返回的数据条数，最大 25
    */
-  RequestId?: string
+  Limit: number
 }
 
 /**
@@ -131,6 +131,31 @@ export interface CreateStaffResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateUserSig请求参数结构体
+ */
+export interface CreateUserSigRequest {
+  /**
+   * 应用 ID
+   */
+  SdkAppId: number
+
+  /**
+   * 用户 ID
+   */
+  Uid: string
+
+  /**
+   * 有效期，单位秒，不超过 1 小时
+   */
+  ExpiredTime: number
+
+  /**
+   * 用户签名数据
+   */
+  ClientData?: string
 }
 
 /**
@@ -159,18 +184,13 @@ export interface SkillGroupItem {
 }
 
 /**
- * DescribeTelCdr返回参数结构体
+ * CreateUserSig返回参数结构体
  */
-export interface DescribeTelCdrResponse {
+export interface CreateUserSigResponse {
   /**
-   * 话单记录总数
+   * 签名结果
    */
-  TotalCount: number
-
-  /**
-   * 话单记录
-   */
-  TelCdrs: Array<TelCdrInfo>
+  UserSig: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -477,23 +497,18 @@ export interface DescribeSkillGroupInfoListRequest {
 }
 
 /**
- * DescribeTelCallInfo请求参数结构体
+ * CreateStaff请求参数结构体
  */
-export interface DescribeTelCallInfoRequest {
+export interface CreateStaffRequest {
   /**
-   * 起始时间戳，Unix 时间戳
+   * 应用ID
    */
-  StartTimeStamp: number
+  SdkAppId: number
 
   /**
-   * 结束时间戳，Unix 时间戳，查询时间范围最大为90天
+   * 客服信息，个数不超过 10
    */
-  EndTimeStamp: number
-
-  /**
-   * 应用ID列表，多个ID时，返回值为多个ID使用总和
-   */
-  SdkAppIdList: Array<number>
+  Staffs: Array<SeatUserInfo>
 }
 
 /**
@@ -1027,21 +1042,6 @@ export interface DescribeTelCallInfoResponse {
 }
 
 /**
- * CreateStaff请求参数结构体
- */
-export interface CreateStaffRequest {
-  /**
-   * 应用ID
-   */
-  SdkAppId: number
-
-  /**
-   * 客服信息，个数不超过 10
-   */
-  Staffs: Array<SeatUserInfo>
-}
-
-/**
  * BindStaffSkillGroupList返回参数结构体
  */
 export interface BindStaffSkillGroupListResponse {
@@ -1144,6 +1144,46 @@ export interface CreateSDKLoginTokenRequest {
    * 坐席账号。
    */
   SeatUserId: string
+}
+
+/**
+ * DescribeTelCallInfo请求参数结构体
+ */
+export interface DescribeTelCallInfoRequest {
+  /**
+   * 起始时间戳，Unix 时间戳
+   */
+  StartTimeStamp: number
+
+  /**
+   * 结束时间戳，Unix 时间戳，查询时间范围最大为90天
+   */
+  EndTimeStamp: number
+
+  /**
+   * 应用ID列表，多个ID时，返回值为多个ID使用总和
+   */
+  SdkAppIdList: Array<number>
+}
+
+/**
+ * DescribeTelCdr返回参数结构体
+ */
+export interface DescribeTelCdrResponse {
+  /**
+   * 话单记录总数
+   */
+  TotalCount: number
+
+  /**
+   * 话单记录
+   */
+  TelCdrs: Array<TelCdrInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

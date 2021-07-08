@@ -140,6 +140,28 @@ export interface ModifyAllSwitchStatusRequest {
     Area?: string;
 }
 /**
+ * DescribeUnHandleEventTabList返回参数结构体
+ */
+export interface DescribeUnHandleEventTabListResponse {
+    /**
+      * 租户伪攻击链未处置事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: UnHandleEvent;
+    /**
+      * 错误码，0成功 非0错误
+      */
+    ReturnCode: number;
+    /**
+      * 返回信息 success成功
+      */
+    ReturnMsg: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyAllRuleStatus返回参数结构体
  */
 export interface ModifyAllRuleStatusResponse {
@@ -173,6 +195,27 @@ export interface IocListData {
       * 待处置域名，IP/Domain字段二选一
       */
     Domain?: string;
+}
+/**
+ * 未处置事件详情
+ */
+export interface UnHandleEvent {
+    /**
+      * 伪攻击链类型
+      */
+    EventTableListStruct: Array<UnHandleEventDetail>;
+    /**
+      * 1 是  0否
+      */
+    BaseLineUser: number;
+    /**
+      * 1 打开 0 关闭
+      */
+    BaseLineInSwitch: number;
+    /**
+      * 1 打开 0 关闭
+      */
+    BaseLineOutSwitch: number;
 }
 /**
  * DescribeRuleOverview返回参数结构体
@@ -238,56 +281,227 @@ export interface CfwNatDnatRule {
     Description: string;
 }
 /**
- * CreateSecurityGroupApiRules请求参数结构体
+ * DescribeBlockByIpTimesList返回参数结构体
  */
-export interface CreateSecurityGroupApiRulesRequest {
+export interface DescribeBlockByIpTimesListResponse {
     /**
-      * 创建规则数据
+      * 返回数据
       */
-    Data: Array<SecurityGroupApiRuleData>;
-    /**
-      * 方向，0：出站，1：入站
-      */
-    Direction: number;
-    /**
-      * 插入类型，0：后插，1：前插，2：中插
-      */
-    Type?: number;
-    /**
-      * 腾讯云地域的英文简写
-      */
-    Area?: string;
-}
-/**
- * DescribeSecurityGroupList返回参数结构体
- */
-export interface DescribeSecurityGroupListResponse {
-    /**
-      * 列表当前规则总条数
-      */
-    Total: number;
-    /**
-      * 安全组规则列表数据
-      */
-    Data: Array<SecurityGroupListData>;
-    /**
-      * 不算筛选条数的总条数
-      */
-    AllTotal: number;
-    /**
-      * 访问控制规则全部启用/全部停用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Enable: number;
+    Data: Array<IpStatic>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
+ * 统计折线图通用结构体
+ */
+export interface IpStatic {
+    /**
+      * 值
+      */
+    Num: number;
+    /**
+      * 折线图横坐标时间
+      */
+    StatTime: string;
+}
+/**
+ * 未处置事件信息汇总
+ */
+export interface UnHandleEventDetail {
+    /**
+      * 安全事件名称
+      */
+    EventName: string;
+    /**
+      * 未处置事件数量
+      */
+    Total: number;
+}
+/**
+ * ModifySequenceRules请求参数结构体
+ */
+export interface ModifySequenceRulesRequest {
+    /**
+      * 边Id值
+      */
+    EdgeId?: string;
+    /**
+      * 修改数据
+      */
+    Data?: Array<SequenceData>;
+    /**
+      * NAT地域
+      */
+    Area?: string;
+    /**
+      * 方向，0：出向，1：入向
+      */
+    Direction?: number;
+}
+/**
+ * 告警中心概览数据
+
+ */
+export interface TLogInfo {
+    /**
+      * 失陷主机
+      */
+    OutNum: number;
+    /**
+      * 待处置告警
+      */
+    HandleNum: number;
+    /**
+      * 漏洞攻击
+      */
+    VulNum: number;
+    /**
+      * 网络探测
+      */
+    NetworkNum: number;
+    /**
+      * 封禁列表
+      */
+    BanNum: number;
+    /**
+      * 暴力破解
+      */
+    BruteForceNum: number;
+}
+/**
+ * DescribeBlockByIpTimesList请求参数结构体
+ */
+export interface DescribeBlockByIpTimesListRequest {
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * ip查询条件
+      */
+    Ip: string;
+    /**
+      * 地域
+      */
+    Zone?: string;
+    /**
+      * 方向
+      */
+    Direction?: string;
+    /**
+      * 来源
+      */
+    Source?: string;
+}
+/**
  * ExpandCfwVertical返回参数结构体
  */
 export interface ExpandCfwVerticalResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeBlockStaticList请求参数结构体
+ */
+export interface DescribeBlockStaticListRequest {
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 类型
+      */
+    QueryType: string;
+    /**
+      * top数
+      */
+    Top: number;
+    /**
+      * 查询条件
+      */
+    SearchValue?: string;
+}
+/**
+ * ModifyItemSwitchStatus请求参数结构体
+ */
+export interface ModifyItemSwitchStatusRequest {
+    /**
+      * id值
+      */
+    Id: number;
+    /**
+      * 状态值，0: 关闭 ,1:开启
+      */
+    Status: number;
+    /**
+      * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
+      */
+    Type?: number;
+}
+/**
+ * 执行顺序对象
+ */
+export interface SequenceData {
+    /**
+      * 规则Id值
+      */
+    Id: number;
+    /**
+      * 修改前执行顺序
+      */
+    OrderIndex: number;
+    /**
+      * 修改后执行顺序
+      */
+    NewOrderIndex: number;
+}
+/**
+ * ModifyItemSwitchStatus返回参数结构体
+ */
+export interface ModifyItemSwitchStatusResponse {
+    /**
+      * 修改成功与否状态值 0：修改成功，非 0：修改失败
+      */
+    Status?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTableStatus返回参数结构体
+ */
+export interface DescribeTableStatusResponse {
+    /**
+      * 0：正常，其它：不正常
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateSecurityGroupApiRules返回参数结构体
+ */
+export interface CreateSecurityGroupApiRulesResponse {
+    /**
+      * 状态值，0:添加成功，非0：添加失败
+      */
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -346,66 +560,6 @@ export interface AcListsData {
     LogId: string;
 }
 /**
- * ModifyItemSwitchStatus请求参数结构体
- */
-export interface ModifyItemSwitchStatusRequest {
-    /**
-      * id值
-      */
-    Id: number;
-    /**
-      * 状态值，0: 关闭 ,1:开启
-      */
-    Status: number;
-    /**
-      * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
-      */
-    Type?: number;
-}
-/**
- * 执行顺序对象
- */
-export interface SequenceData {
-    /**
-      * 规则Id值
-      */
-    Id: number;
-    /**
-      * 修改前执行顺序
-      */
-    OrderIndex: number;
-    /**
-      * 修改后执行顺序
-      */
-    NewOrderIndex: number;
-}
-/**
- * ModifyItemSwitchStatus返回参数结构体
- */
-export interface ModifyItemSwitchStatusResponse {
-    /**
-      * 修改成功与否状态值 0：修改成功，非 0：修改失败
-      */
-    Status?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateSecurityGroupApiRules返回参数结构体
- */
-export interface CreateSecurityGroupApiRulesResponse {
-    /**
-      * 状态值，0:添加成功，非0：添加失败
-      */
-    Status: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * ModifyAcRule返回参数结构体
  */
 export interface ModifyAcRuleResponse {
@@ -438,14 +592,26 @@ export interface ModifySequenceRulesResponse {
     RequestId?: string;
 }
 /**
- * DescribeTableStatus返回参数结构体
+ * ModifyBlockTop请求参数结构体
  */
-export interface DescribeTableStatusResponse {
+export interface ModifyBlockTopRequest {
     /**
-      * 0：正常，其它：不正常
-注意：此字段可能返回 null，表示取不到有效值。
+      * 记录id
       */
-    Status?: number;
+    UniqueId: string;
+    /**
+      * 操作类型 1 置顶 0取消
+      */
+    OpeType: string;
+}
+/**
+ * DescribeTLogInfo返回参数结构体
+ */
+export interface DescribeTLogInfoResponse {
+    /**
+      * 无
+      */
+    Data: TLogInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -470,44 +636,51 @@ export interface DeleteAcRuleResponse {
     RequestId?: string;
 }
 /**
- * ModifySequenceRules请求参数结构体
+ * DescribeTLogInfo请求参数结构体
  */
-export interface ModifySequenceRulesRequest {
+export interface DescribeTLogInfoRequest {
     /**
-      * 边Id值
+      * 开始时间
       */
-    EdgeId?: string;
+    StartTime: string;
     /**
-      * 修改数据
+      * 结束时间
       */
-    Data?: Array<SequenceData>;
+    EndTime: string;
     /**
-      * NAT地域
+      * 类型 1 告警 2阻断
       */
-    Area?: string;
+    QueryType: string;
     /**
-      * 方向，0：出向，1：入向
+      * 查询条件
       */
-    Direction?: number;
+    SearchValue?: string;
 }
 /**
- * Nat防火墙弹性公网ip列表
+ * DescribeSecurityGroupList返回参数结构体
  */
-export interface NatFwEipsInfo {
+export interface DescribeSecurityGroupListResponse {
     /**
-      * 弹性公网ip
+      * 列表当前规则总条数
       */
-    Eip: string;
+    Total: number;
     /**
-      * 所属的Nat网关Id
+      * 安全组规则列表数据
+      */
+    Data: Array<SecurityGroupListData>;
+    /**
+      * 不算筛选条数的总条数
+      */
+    AllTotal: number;
+    /**
+      * 访问控制规则全部启用/全部停用
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NatGatewayId: string;
+    Enable: number;
     /**
-      * Nat网关名称
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    NatGatewayName: string;
+    RequestId?: string;
 }
 /**
  * 添加安全组Api规则对象
@@ -648,6 +821,73 @@ export interface RunSyncAssetResponse {
     RequestId?: string;
 }
 /**
+ * 防火墙开关列表对象
+ */
+export interface SwitchListsData {
+    /**
+      * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicIp: string;
+    /**
+      * 内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntranetIp: string;
+    /**
+      * 实例名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName: string;
+    /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 资产类型
+      */
+    AssetType: string;
+    /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Area: string;
+    /**
+      * 防火墙开关
+      */
+    Switch: number;
+    /**
+      * id值
+      */
+    Id: number;
+    /**
+      * 公网 IP 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicIpType: number;
+    /**
+      * 风险端口数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PortTimes: number;
+    /**
+      * 最近扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastTime: string;
+    /**
+      * 扫描深度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScanMode: string;
+    /**
+      * 扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScanStatus: number;
+}
+/**
  * RunSyncAsset请求参数结构体
  */
 export interface RunSyncAssetRequest {
@@ -678,18 +918,50 @@ export interface DeleteSecurityGroupRuleRequest {
     IsDelReverse?: number;
 }
 /**
- * ModifyTableStatus返回参数结构体
+ * DescribeTLogIpList请求参数结构体
  */
-export interface ModifyTableStatusResponse {
+export interface DescribeTLogIpListRequest {
     /**
-      * 0：正常，-1：不正常
-注意：此字段可能返回 null，表示取不到有效值。
+      * 开始时间
       */
-    Status?: number;
+    StartTime: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 结束时间
       */
-    RequestId?: string;
+    EndTime: string;
+    /**
+      * 类型 1 告警 2阻断
+      */
+    QueryType: string;
+    /**
+      * top数
+      */
+    Top: number;
+    /**
+      * 查询条件
+      */
+    SearchValue?: string;
+}
+/**
+ * ModifySecurityGroupAllRuleStatus请求参数结构体
+ */
+export interface ModifySecurityGroupAllRuleStatusRequest {
+    /**
+      * 列表规则状态，0：全部停用，1：全部启用
+      */
+    Status: number;
+    /**
+      * 方向，0：出站，1：入站
+      */
+    Direction?: number;
+    /**
+      * Edge ID值
+      */
+    EdgeId?: string;
+    /**
+      * NAT地域, 腾讯云地域的英文简写
+      */
+    Area?: string;
 }
 /**
  * SetNatFwDnatRule返回参数结构体
@@ -833,6 +1105,15 @@ export interface DescribeAssociatedInstanceListResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Data?: Array<AssociatedInstanceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyBlockTop返回参数结构体
+ */
+export interface ModifyBlockTopResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -983,6 +1264,50 @@ export interface DescribeNatRuleOverviewResponse {
     RequestId?: string;
 }
 /**
+ * ModifyTableStatus返回参数结构体
+ */
+export interface ModifyTableStatusResponse {
+    /**
+      * 0：正常，-1：不正常
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * StaticInfo 告警柱形图统计信息
+ 
+ */
+export interface StaticInfo {
+    /**
+      * 数
+      */
+    Num: number;
+    /**
+      * 端口
+      */
+    Port: string;
+    /**
+      * ip信息
+      */
+    Ip: string;
+    /**
+      * 地址
+      */
+    Address: string;
+    /**
+      * 资产id
+      */
+    InsID: string;
+    /**
+      * 资产名称
+      */
+    InsName: string;
+}
+/**
  * DeleteAcRule请求参数结构体
  */
 export interface DeleteAcRuleRequest {
@@ -1055,6 +1380,25 @@ export interface DeleteSecurityGroupAllRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Nat防火墙弹性公网ip列表
+ */
+export interface NatFwEipsInfo {
+    /**
+      * 弹性公网ip
+      */
+    Eip: string;
+    /**
+      * 所属的Nat网关Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NatGatewayId: string;
+    /**
+      * Nat网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NatGatewayName: string;
 }
 /**
  * ExpandCfwVertical请求参数结构体
@@ -1236,6 +1580,27 @@ export interface SecurityGroupListData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Cidr: string;
+}
+/**
+ * ModifyAllRuleStatus请求参数结构体
+ */
+export interface ModifyAllRuleStatusRequest {
+    /**
+      * 状态，0：全部停用，1：全部启用
+      */
+    Status: number;
+    /**
+      * 方向，0：出站，1：入站
+      */
+    Direction?: number;
+    /**
+      * Edge ID值
+      */
+    EdgeId?: string;
+    /**
+      * NAT地域
+      */
+    Area?: string;
 }
 /**
  * ModifyBlockIgnoreList请求参数结构体
@@ -1437,23 +1802,40 @@ export interface DescribeNatRuleOverviewRequest {
     Area?: string;
 }
 /**
- * ModifySecurityGroupAllRuleStatus请求参数结构体
+ * DescribeUnHandleEventTabList请求参数结构体
  */
-export interface ModifySecurityGroupAllRuleStatusRequest {
+export interface DescribeUnHandleEventTabListRequest {
     /**
-      * 列表规则状态，0：全部停用，1：全部启用
+      * 开始时间
       */
-    Status: number;
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 查询示例ID
+      */
+    AssetID?: string;
+}
+/**
+ * CreateSecurityGroupApiRules请求参数结构体
+ */
+export interface CreateSecurityGroupApiRulesRequest {
+    /**
+      * 创建规则数据
+      */
+    Data: Array<SecurityGroupApiRuleData>;
     /**
       * 方向，0：出站，1：入站
       */
-    Direction?: number;
+    Direction: number;
     /**
-      * Edge ID值
+      * 插入类型，0：后插，1：前插，2：中插
       */
-    EdgeId?: string;
+    Type?: number;
     /**
-      * NAT地域, 腾讯云地域的英文简写
+      * 腾讯云地域的英文简写
       */
     Area?: string;
 }
@@ -1471,25 +1853,17 @@ export interface DeleteSecurityGroupAllRuleRequest {
     Area: string;
 }
 /**
- * ModifyAllRuleStatus请求参数结构体
+ * DescribeTLogIpList返回参数结构体
  */
-export interface ModifyAllRuleStatusRequest {
+export interface DescribeTLogIpListResponse {
     /**
-      * 状态，0：全部停用，1：全部启用
+      * 数据集合
       */
-    Status: number;
+    Data: Array<StaticInfo>;
     /**
-      * 方向，0：出站，1：入站
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Direction?: number;
-    /**
-      * Edge ID值
-      */
-    EdgeId?: string;
-    /**
-      * NAT地域
-      */
-    Area?: string;
+    RequestId?: string;
 }
 /**
  * DescribeGuideScanInfo返回参数结构体
@@ -1531,71 +1905,17 @@ export interface DescribeAcListsResponse {
     RequestId?: string;
 }
 /**
- * 防火墙开关列表对象
+ * DescribeBlockStaticList返回参数结构体
  */
-export interface SwitchListsData {
+export interface DescribeBlockStaticListResponse {
     /**
-      * 公网IP
-注意：此字段可能返回 null，表示取不到有效值。
+      * 无
       */
-    PublicIp: string;
+    Data: Array<StaticInfo>;
     /**
-      * 内网IP
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    IntranetIp: string;
-    /**
-      * 实例名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceName: string;
-    /**
-      * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceId: string;
-    /**
-      * 资产类型
-      */
-    AssetType: string;
-    /**
-      * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Area: string;
-    /**
-      * 防火墙开关
-      */
-    Switch: number;
-    /**
-      * id值
-      */
-    Id: number;
-    /**
-      * 公网 IP 类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PublicIpType: number;
-    /**
-      * 风险端口数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PortTimes: number;
-    /**
-      * 最近扫描时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastTime: string;
-    /**
-      * 扫描深度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ScanMode: string;
-    /**
-      * 扫描状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ScanStatus: number;
+    RequestId?: string;
 }
 /**
  * ModifyAllSwitchStatus返回参数结构体

@@ -24,25 +24,34 @@ import {
   SetNatFwDnatRuleRequest,
   DescribeSyncAssetStatusResponse,
   ModifyAllSwitchStatusRequest,
+  DescribeUnHandleEventTabListResponse,
   ModifyAllRuleStatusResponse,
   DescribeGuideScanInfoRequest,
   IocListData,
+  UnHandleEvent,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
-  CreateSecurityGroupApiRulesRequest,
-  DescribeSecurityGroupListResponse,
+  DescribeBlockByIpTimesListResponse,
+  IpStatic,
+  UnHandleEventDetail,
+  ModifySequenceRulesRequest,
+  TLogInfo,
+  DescribeBlockByIpTimesListRequest,
   ExpandCfwVerticalResponse,
-  AcListsData,
+  DescribeBlockStaticListRequest,
   ModifyItemSwitchStatusRequest,
   SequenceData,
   ModifyItemSwitchStatusResponse,
+  DescribeTableStatusResponse,
   CreateSecurityGroupApiRulesResponse,
+  AcListsData,
   ModifyAcRuleResponse,
   ModifySequenceRulesResponse,
-  DescribeTableStatusResponse,
+  ModifyBlockTopRequest,
+  DescribeTLogInfoResponse,
   DeleteAcRuleResponse,
-  ModifySequenceRulesRequest,
-  NatFwEipsInfo,
+  DescribeTLogInfoRequest,
+  DescribeSecurityGroupListResponse,
   SecurityGroupApiRuleData,
   DescribeSwitchListsResponse,
   DescribeSyncAssetStatusRequest,
@@ -50,9 +59,11 @@ import {
   DescribeCfwEipsResponse,
   DeleteAllAccessControlRuleRequest,
   RunSyncAssetResponse,
+  SwitchListsData,
   RunSyncAssetRequest,
   DeleteSecurityGroupRuleRequest,
-  ModifyTableStatusResponse,
+  DescribeTLogIpListRequest,
+  ModifySecurityGroupAllRuleStatusRequest,
   SetNatFwDnatRuleResponse,
   DescribeCfwEipsRequest,
   DescribeRuleOverviewRequest,
@@ -61,17 +72,22 @@ import {
   DescribeTableStatusRequest,
   CreateAcRulesResponse,
   DescribeAssociatedInstanceListResponse,
+  ModifyBlockTopResponse,
   AssociatedInstanceInfo,
   DescribeAssociatedInstanceListRequest,
   ModifyAcRuleRequest,
   DescribeNatRuleOverviewResponse,
+  ModifyTableStatusResponse,
+  StaticInfo,
   DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
   ModifyBlockIgnoreListResponse,
   DeleteSecurityGroupAllRuleResponse,
+  NatFwEipsInfo,
   ExpandCfwVerticalRequest,
   RuleInfoData,
   SecurityGroupListData,
+  ModifyAllRuleStatusRequest,
   ModifyBlockIgnoreListRequest,
   CreateAcRulesRequest,
   DescribeSecurityGroupListRequest,
@@ -79,12 +95,13 @@ import {
   ModifyTableStatusRequest,
   DeleteSecurityGroupRuleResponse,
   DescribeNatRuleOverviewRequest,
-  ModifySecurityGroupAllRuleStatusRequest,
+  DescribeUnHandleEventTabListRequest,
+  CreateSecurityGroupApiRulesRequest,
   DeleteSecurityGroupAllRuleRequest,
-  ModifyAllRuleStatusRequest,
+  DescribeTLogIpListResponse,
   DescribeGuideScanInfoResponse,
   DescribeAcListsResponse,
-  SwitchListsData,
+  DescribeBlockStaticListResponse,
   ModifyAllSwitchStatusResponse,
 } from "./cfw_models"
 
@@ -228,6 +245,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * DescribeTLogInfo告警中心概况
+
+     */
+  async DescribeTLogInfo(
+    req: DescribeTLogInfoRequest,
+    cb?: (error: string, rep: DescribeTLogInfoResponse) => void
+  ): Promise<DescribeTLogInfoResponse> {
+    return this.request("DescribeTLogInfo", req, cb)
+  }
+
+  /**
      * 支持对拦截列表、忽略列表如下操作：
 批量增加拦截IP、忽略IP/域名
 批量删除拦截IP、忽略IP/域名
@@ -248,6 +276,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void
   ): Promise<DescribeGuideScanInfoResponse> {
     return this.request("DescribeGuideScanInfo", req, cb)
+  }
+
+  /**
+     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
+
+     */
+  async DescribeUnHandleEventTabList(
+    req: DescribeUnHandleEventTabListRequest,
+    cb?: (error: string, rep: DescribeUnHandleEventTabListResponse) => void
+  ): Promise<DescribeUnHandleEventTabListResponse> {
+    return this.request("DescribeUnHandleEventTabList", req, cb)
   }
 
   /**
@@ -288,6 +327,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAllRuleStatusResponse) => void
   ): Promise<ModifyAllRuleStatusResponse> {
     return this.request("ModifyAllRuleStatus", req, cb)
+  }
+
+  /**
+   * ModifyBlockTop取消置顶接口
+   */
+  async ModifyBlockTop(
+    req: ModifyBlockTopRequest,
+    cb?: (error: string, rep: ModifyBlockTopResponse) => void
+  ): Promise<ModifyBlockTopResponse> {
+    return this.request("ModifyBlockTop", req, cb)
   }
 
   /**
@@ -341,6 +390,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * DescribeTLogIpList告警中心ip柱形图
+
+     */
+  async DescribeTLogIpList(
+    req: DescribeTLogIpListRequest,
+    cb?: (error: string, rep: DescribeTLogIpListResponse) => void
+  ): Promise<DescribeTLogIpListResponse> {
+    return this.request("DescribeTLogIpList", req, cb)
+  }
+
+  /**
    * 访问控制列表
    */
   async DescribeAcLists(
@@ -368,6 +428,28 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExpandCfwVerticalResponse) => void
   ): Promise<ExpandCfwVerticalResponse> {
     return this.request("ExpandCfwVertical", req, cb)
+  }
+
+  /**
+     * DescribeBlockByIpTimesList 告警中心阻断ip折线图
+
+     */
+  async DescribeBlockByIpTimesList(
+    req: DescribeBlockByIpTimesListRequest,
+    cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void
+  ): Promise<DescribeBlockByIpTimesListResponse> {
+    return this.request("DescribeBlockByIpTimesList", req, cb)
+  }
+
+  /**
+     * DescribeBlockStaticList 告警中心柱形图
+
+     */
+  async DescribeBlockStaticList(
+    req: DescribeBlockStaticListRequest,
+    cb?: (error: string, rep: DescribeBlockStaticListResponse) => void
+  ): Promise<DescribeBlockStaticListResponse> {
+    return this.request("DescribeBlockStaticList", req, cb)
   }
 
   /**

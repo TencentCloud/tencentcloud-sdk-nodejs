@@ -19,20 +19,21 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   BindStaffSkillGroupListRequest,
-  DescribePSTNActiveSessionListRequest,
+  DescribeStaffInfoListResponse,
   IVRKeyPressedElement,
   CreateSDKLoginTokenResponse,
-  DescribeStaffInfoListResponse,
+  DescribePSTNActiveSessionListRequest,
   CreateStaffResponse,
+  CreateUserSigRequest,
   SkillGroupItem,
-  DescribeTelCdrResponse,
+  CreateUserSigResponse,
   DeleteStaffRequest,
   DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
   TelCdrInfo,
   DeleteStaffResponse,
   DescribeSkillGroupInfoListRequest,
-  DescribeTelCallInfoRequest,
+  CreateStaffRequest,
   DescribeChatMessagesResponse,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
@@ -48,12 +49,13 @@ import {
   DescribeSeatUserListResponse,
   DescribeSeatUserListRequest,
   DescribeTelCallInfoResponse,
-  CreateStaffRequest,
   BindStaffSkillGroupListResponse,
   UnbindStaffSkillGroupListResponse,
   DescribeTelCdrRequest,
   MessageBody,
   CreateSDKLoginTokenRequest,
+  DescribeTelCallInfoRequest,
+  DescribeTelCdrResponse,
   SeatUserInfo,
   PSTNSessionInfo,
   Message,
@@ -88,6 +90,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIMCdrsResponse) => void
   ): Promise<DescribeIMCdrsResponse> {
     return this.request("DescribeIMCdrs", req, cb)
+  }
+
+  /**
+   * 创建用户数据签名
+   */
+  async CreateUserSig(
+    req: CreateUserSigRequest,
+    cb?: (error: string, rep: CreateUserSigResponse) => void
+  ): Promise<CreateUserSigResponse> {
+    return this.request("CreateUserSig", req, cb)
   }
 
   /**

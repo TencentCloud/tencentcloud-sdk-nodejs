@@ -293,7 +293,12 @@ export interface GetServiceLinkedRoleDeletionStatusResponse {
 /**
  * GetSecurityLastUsed请求参数结构体
  */
-export type GetSecurityLastUsedRequest = null
+export interface GetSecurityLastUsedRequest {
+  /**
+   * 查询密钥ID列表
+   */
+  SecretIdList: Array<string>
+}
 
 /**
  * DeleteUserPermissionsBoundary返回参数结构体
@@ -872,6 +877,22 @@ export interface CreatePolicyVersionRequest {
    * 是否设置为当前策略的版本
    */
   SetAsDefault: boolean
+}
+
+/**
+ * 密钥最后使用时间
+ */
+export interface SecretIdLastUsed {
+  /**
+   * 密钥ID
+   */
+  SecretId: string
+
+  /**
+      * 最后访问日期(有1天延迟)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastUsedDate: string
 }
 
 /**
@@ -2837,6 +2858,11 @@ export interface ListAccessKeysResponse {
  * GetSecurityLastUsed返回参数结构体
  */
 export interface GetSecurityLastUsedResponse {
+  /**
+   * 密钥ID最近访问列表
+   */
+  SecretIdLastUsedRows: Array<SecretIdLastUsed>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

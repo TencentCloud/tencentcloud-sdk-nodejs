@@ -64,6 +64,7 @@ import {
   RoleInfo,
   DescribeSafeAuthFlagResponse,
   CreatePolicyVersionRequest,
+  SecretIdLastUsed,
   DeleteGroupRequest,
   GetUserResponse,
   DeleteUserResponse,
@@ -583,7 +584,7 @@ export class Client extends AbstractClient {
    * 获取密钥最近使用情况
    */
   async GetSecurityLastUsed(
-    req?: GetSecurityLastUsedRequest,
+    req: GetSecurityLastUsedRequest,
     cb?: (error: string, rep: GetSecurityLastUsedResponse) => void
   ): Promise<GetSecurityLastUsedResponse> {
     return this.request("GetSecurityLastUsed", req, cb)

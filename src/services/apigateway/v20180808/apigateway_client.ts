@@ -26,10 +26,12 @@ import {
   DemoteServiceUsagePlanRequest,
   DescribeAPIDocDetailRequest,
   ModifyAPIDocResponse,
+  AttachedApiSummary,
   DescribeUsagePlanRequest,
   DeleteUsagePlanResponse,
   DisableApiKeyResponse,
   UnReleaseServiceRequest,
+  DetachPluginRequest,
   ModifySubDomainRequest,
   DescribeServiceUsagePlanRequest,
   DescribeServiceEnvironmentListResponse,
@@ -46,6 +48,7 @@ import {
   DescribeApiUsagePlanResponse,
   DeleteIPStrategyRequest,
   ModifyAPIDocRequest,
+  DescribePluginResponse,
   DomainSets,
   DeleteUsagePlanRequest,
   DeleteServiceRequest,
@@ -69,13 +72,16 @@ import {
   DisableApiKeyRequest,
   PathMapping,
   UnBindIPStrategyResponse,
+  ModifyPluginRequest,
   BindIPStrategyResponse,
+  AvailableApiInfo,
   DescribeApisStatusRequest,
   DeleteServiceSubDomainMappingRequest,
   IPStrategyApi,
   DescribeIPStrategyResponse,
+  DescribePluginRequest,
   DocumentSDK,
-  DeleteApiResponse,
+  AttachedApiInfo,
   CreateApiResponse,
   DescribeIPStrategyApisStatusRequest,
   UnBindEnvironmentRequest,
@@ -84,6 +90,7 @@ import {
   ModifyUsagePlanResponse,
   CreateUsagePlanResponse,
   ReqParameter,
+  DeletePluginRequest,
   Base64EncodedTriggerRule,
   RequestConfig,
   DeleteApiKeyResponse,
@@ -92,6 +99,7 @@ import {
   DescribeUsagePlanSecretIdsRequest,
   DescribeLogSearchResponse,
   UnBindIPStrategyRequest,
+  DescribePluginApisRequest,
   ResponseErrorCodeReq,
   CreateServiceRequest,
   DescribeServiceEnvironmentStrategyResponse,
@@ -117,9 +125,11 @@ import {
   DescribeApiKeyResponse,
   ModifyApiIncrementResponse,
   ModifyApiRequest,
+  DescribeAllPluginApisResponse,
   ModifyUsagePlanRequest,
   ApiRequestConfig,
   ModifyServiceRequest,
+  DescribeAllPluginApisRequest,
   ApiIdStatus,
   CreateApiRequest,
   DescribeServiceEnvironmentStrategyRequest,
@@ -133,7 +143,7 @@ import {
   DescribePluginsResponse,
   ReleaseServiceResponse,
   APIDocInfo,
-  PluginSummary,
+  DescribePluginApisResponse,
   ModifyApiIncrementRequest,
   GenerateApiDocumentRequest,
   ServiceUsagePlanSet,
@@ -160,6 +170,7 @@ import {
   DescribeUsagePlansStatusRequest,
   UsagePlanEnvironment,
   ModifyIPStrategyRequest,
+  ModifyPluginResponse,
   UnBindSecretIdsRequest,
   ApiEnvironmentStrategy,
   UnBindSecretIdsResponse,
@@ -167,16 +178,19 @@ import {
   ApiUsagePlan,
   BuildAPIDocRequest,
   DescribeAPIDocsResponse,
+  DetachPluginResponse,
+  DeletePluginResponse,
   ModifyServiceEnvironmentStrategyRequest,
   CreateAPIDocRequest,
   DescribeServiceSubDomainsRequest,
   GenerateApiDocumentResponse,
   DescribeUsagePlanEnvironmentsResponse,
   DescribeServiceSubDomainsResponse,
+  AttachPluginRequest,
   BindSubDomainRequest,
   IPStrategyApiStatus,
   CreateIPStrategyResponse,
-  AttachedApiInfo,
+  DeleteApiResponse,
   BindIPStrategyRequest,
   UpdateServiceRequest,
   BuildAPIDocResponse,
@@ -185,9 +199,12 @@ import {
   DescribeApiEnvironmentStrategyResponse,
   MicroService,
   ApiEnvironmentStrategyStataus,
+  PluginSummary,
   DeleteIPStrategyResponse,
+  ApiInfoSummary,
   ApiKey,
   DescribeUsagePlanResponse,
+  AttachPluginResponse,
   BindEnvironmentRequest,
   DescribeIPStrategyRequest,
   DescribeUsagePlanEnvironmentsRequest,
@@ -251,13 +268,13 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-   * 本接口（DescribeUsagePlanStatus）用于查询使用计划的列表。
+   * 绑定插件到API上。
    */
-  async DescribeUsagePlansStatus(
-    req: DescribeUsagePlansStatusRequest,
-    cb?: (error: string, rep: DescribeUsagePlansStatusResponse) => void
-  ): Promise<DescribeUsagePlansStatusResponse> {
-    return this.request("DescribeUsagePlansStatus", req, cb)
+  async AttachPlugin(
+    req: AttachPluginRequest,
+    cb?: (error: string, rep: AttachPluginResponse) => void
+  ): Promise<AttachPluginResponse> {
+    return this.request("AttachPlugin", req, cb)
   }
 
   /**
@@ -324,13 +341,13 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-   * 本接口（ModifyApiEnvironmentStrategy）用于修改API限流策略
+   * 本接口（DescribeUsagePlanStatus）用于查询使用计划的列表。
    */
-  async ModifyApiEnvironmentStrategy(
-    req: ModifyApiEnvironmentStrategyRequest,
-    cb?: (error: string, rep: ModifyApiEnvironmentStrategyResponse) => void
-  ): Promise<ModifyApiEnvironmentStrategyResponse> {
-    return this.request("ModifyApiEnvironmentStrategy", req, cb)
+  async DescribeUsagePlansStatus(
+    req: DescribeUsagePlansStatusRequest,
+    cb?: (error: string, rep: DescribeUsagePlansStatusResponse) => void
+  ): Promise<DescribeUsagePlansStatusResponse> {
+    return this.request("DescribeUsagePlansStatus", req, cb)
   }
 
   /**
@@ -433,6 +450,16 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
     cb?: (error: string, rep: DescribeIPStrategyApisStatusResponse) => void
   ): Promise<DescribeIPStrategyApisStatusResponse> {
     return this.request("DescribeIPStrategyApisStatus", req, cb)
+  }
+
+  /**
+   * 修改API网关插件。
+   */
+  async ModifyPlugin(
+    req: ModifyPluginRequest,
+    cb?: (error: string, rep: ModifyPluginResponse) => void
+  ): Promise<ModifyPluginResponse> {
+    return this.request("ModifyPlugin", req, cb)
   }
 
   /**
@@ -551,6 +578,26 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
   }
 
   /**
+   * 本接口（UnBindEnvironment）用于将使用计划从特定环境解绑。
+   */
+  async UnBindEnvironment(
+    req: UnBindEnvironmentRequest,
+    cb?: (error: string, rep: UnBindEnvironmentResponse) => void
+  ): Promise<UnBindEnvironmentResponse> {
+    return this.request("UnBindEnvironment", req, cb)
+  }
+
+  /**
+   * 展示插件相关的API列表，包括已绑定的和未绑定的API信息。
+   */
+  async DescribeAllPluginApis(
+    req: DescribeAllPluginApisRequest,
+    cb?: (error: string, rep: DescribeAllPluginApisResponse) => void
+  ): Promise<DescribeAllPluginApisResponse> {
+    return this.request("DescribeAllPluginApis", req, cb)
+  }
+
+  /**
    * 本接口（UpdateApiKey）用于更换用户已创建的一对 API 密钥。
    */
   async UpdateApiKey(
@@ -558,6 +605,16 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
     cb?: (error: string, rep: UpdateApiKeyResponse) => void
   ): Promise<UpdateApiKeyResponse> {
     return this.request("UpdateApiKey", req, cb)
+  }
+
+  /**
+   * 删除API网关插件
+   */
+  async DeletePlugin(
+    req: DeletePluginRequest,
+    cb?: (error: string, rep: DeletePluginResponse) => void
+  ): Promise<DeletePluginResponse> {
+    return this.request("DeletePlugin", req, cb)
   }
 
   /**
@@ -716,6 +773,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
+   * 解除插件与API绑定
+   */
+  async DetachPlugin(
+    req: DetachPluginRequest,
+    cb?: (error: string, rep: DetachPluginResponse) => void
+  ): Promise<DetachPluginResponse> {
+    return this.request("DetachPlugin", req, cb)
+  }
+
+  /**
    * 本接口（DeleteIPStrategy）用于删除服务IP策略。
    */
   async DeleteIPStrategy(
@@ -734,6 +801,16 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
     cb?: (error: string, rep: ReleaseServiceResponse) => void
   ): Promise<ReleaseServiceResponse> {
     return this.request("ReleaseService", req, cb)
+  }
+
+  /**
+   * 查询指定插件下绑定的API信息
+   */
+  async DescribePluginApis(
+    req: DescribePluginApisRequest,
+    cb?: (error: string, rep: DescribePluginApisResponse) => void
+  ): Promise<DescribePluginApisResponse> {
+    return this.request("DescribePluginApis", req, cb)
   }
 
   /**
@@ -757,13 +834,13 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
   }
 
   /**
-   * 本接口（UnBindEnvironment）用于将使用计划从特定环境解绑。
+   * 本接口（ModifyApiEnvironmentStrategy）用于修改API限流策略
    */
-  async UnBindEnvironment(
-    req: UnBindEnvironmentRequest,
-    cb?: (error: string, rep: UnBindEnvironmentResponse) => void
-  ): Promise<UnBindEnvironmentResponse> {
-    return this.request("UnBindEnvironment", req, cb)
+  async ModifyApiEnvironmentStrategy(
+    req: ModifyApiEnvironmentStrategyRequest,
+    cb?: (error: string, rep: ModifyApiEnvironmentStrategyResponse) => void
+  ): Promise<ModifyApiEnvironmentStrategyResponse> {
+    return this.request("ModifyApiEnvironmentStrategy", req, cb)
   }
 
   /**
@@ -879,6 +956,16 @@ API 网关中每个服务都会提供一个默认的域名供用户调用，但�
     cb?: (error: string, rep: BindSubDomainResponse) => void
   ): Promise<BindSubDomainResponse> {
     return this.request("BindSubDomain", req, cb)
+  }
+
+  /**
+   * 展示插件详情，支持按照插件ID进行。
+   */
+  async DescribePlugin(
+    req: DescribePluginRequest,
+    cb?: (error: string, rep: DescribePluginResponse) => void
+  ): Promise<DescribePluginResponse> {
+    return this.request("DescribePlugin", req, cb)
   }
 
   /**
