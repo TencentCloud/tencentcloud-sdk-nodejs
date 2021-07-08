@@ -5,7 +5,7 @@ export default function (url: string, options: RequestInit): Promise<Response> {
   const instanceOptions = options || {}
 
   if (!options.agent && process.env.http_proxy) {
-    instanceOptions.agent = new HttpsProxyAgent(process.env.http_proxy)
+    instanceOptions.agent = new (HttpsProxyAgent as any)(process.env.http_proxy)
   }
 
   return fetch(url, instanceOptions)
