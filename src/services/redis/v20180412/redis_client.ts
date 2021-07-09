@@ -36,7 +36,7 @@ import {
   AssociateSecurityGroupsRequest,
   DescribeTaskListResponse,
   ModifyInstanceRequest,
-  TendisNodes,
+  KillMasterGroupResponse,
   RenewInstanceResponse,
   DescribeSlowLogResponse,
   DescribeCommonDBInstancesRequest,
@@ -79,6 +79,7 @@ import {
   DescribeTendisSlowLogResponse,
   DescribeProductInfoResponse,
   ModifyInstanceAccountRequest,
+  ModifyMaintenanceWindowRequest,
   DescribeBackupUrlResponse,
   InquiryPriceRenewInstanceResponse,
   DescribeDBSecurityGroupsRequest,
@@ -93,7 +94,7 @@ import {
   InstanceIntegerParam,
   UpgradeVersionToMultiAvailabilityZonesRequest,
   DescribeInstanceMonitorTookDistRequest,
-  ModifyMaintenanceWindowRequest,
+  KillMasterGroupRequest,
   InstanceTextParam,
   DescribeInstanceMonitorTopNCmdTookResponse,
   DescribeInstanceMonitorBigKeySizeDistRequest,
@@ -125,6 +126,7 @@ import {
   ProductConf,
   ModifyConnectionConfigRequest,
   InstanceNode,
+  TendisNodes,
   StartupInstanceResponse,
   DescribeInstanceDTSInstanceInfo,
   TradeDealDetail,
@@ -640,6 +642,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorBigKeyTypeDistResponse) => void
   ): Promise<DescribeInstanceMonitorBigKeyTypeDistResponse> {
     return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb)
+  }
+
+  /**
+   * 模拟故障
+   */
+  async KillMasterGroup(
+    req: KillMasterGroupRequest,
+    cb?: (error: string, rep: KillMasterGroupResponse) => void
+  ): Promise<KillMasterGroupResponse> {
+    return this.request("KillMasterGroup", req, cb)
   }
 
   /**

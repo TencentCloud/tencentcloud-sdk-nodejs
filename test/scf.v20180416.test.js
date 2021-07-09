@@ -38,6 +38,16 @@ it("scf.v20180416.UpdateNamespace", async function () {
     }
 })
 
+it("scf.v20180416.InvokeFunction", async function () {
+    try {
+       const data = await client.InvokeFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.DeleteFunction", async function () {
     try {
        const data = await client.DeleteFunction({})

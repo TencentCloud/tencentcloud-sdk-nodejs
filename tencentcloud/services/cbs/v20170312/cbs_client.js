@@ -156,7 +156,7 @@ class Client extends abstract_client_1.AbstractClient {
      * 本接口（DeleteSnapshots）用于删除快照。
 
 * 快照必须处于NORMAL状态，快照状态可以通过[DescribeSnapshots](/document/product/362/15647)接口查询，见输出参数中SnapshotState字段解释。
-* 支持批量操作。如果多个快照存在无法删除的快照，则操作不执行，以返回特定的错误码返回。
+* 支持批量操作。如果多个快照存在无法删除的快照，则操作不执行，以特定的错误码返回。
      */
     async DeleteSnapshots(req, cb) {
         return this.request("DeleteSnapshots", req, cb);

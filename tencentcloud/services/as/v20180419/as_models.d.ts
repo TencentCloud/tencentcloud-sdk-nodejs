@@ -21,7 +21,7 @@ export interface ModifyLaunchConfigurationAttributesRequest {
     ImageId?: string;
     /**
       * 实例类型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。
-启动配置，通过 InstanceType 表示单一实例类型，通过 InstanceTypes 表示多实例类型。指定 InstanceTypes 成功启动配置后，原有的 InstanceType 自动失效。
+InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定多实例类型，并使原有的InstanceType失效。
       */
     InstanceTypes?: Array<string>;
     /**
@@ -38,7 +38,7 @@ export interface ModifyLaunchConfigurationAttributesRequest {
       */
     LaunchConfigurationName?: string;
     /**
-      * 经过 Base64 编码后的自定义数据，最大长度不超过16KB。如果要清空UserData，则指定其为空字符串
+      * 经过 Base64 编码后的自定义数据，最大长度不超过16KB。如果要清空UserData，则指定其为空字符串。
       */
     UserData?: string;
     /**
@@ -48,7 +48,7 @@ export interface ModifyLaunchConfigurationAttributesRequest {
     SecurityGroupIds?: Array<string>;
     /**
       * 公网带宽相关信息设置。
-本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+当公网出带宽上限为0Mbps时，不支持修改为开通分配公网IP；相应的，当前为开通分配公网IP时，修改的公网出带宽上限值必须大于0Mbps。
       */
     InternetAccessible?: InternetAccessible;
     /**
@@ -61,13 +61,15 @@ export interface ModifyLaunchConfigurationAttributesRequest {
     /**
       * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
 若修改实例的付费模式为预付费，则该参数必传；从预付费修改为其他付费模式时，本字段原信息会自动丢弃。
-本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+当新增该字段时，必须传递购买实例的时长，其它未传递字段会设置为默认值。
+当修改本字段时，当前付费模式必须为预付费。
       */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
       * 实例的市场相关选项，如竞价实例相关参数。
 若修改实例的付费模式为竞价付费，则该参数必传；从竞价付费修改为其他付费模式时，本字段原信息会自动丢弃。
-本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
+当新增该字段时，必须传递竞价相关选项下的竞价出价，其它未传递字段会设置为默认值。
+当修改本字段时，当前付费模式必须为竞价付费。
       */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
     /**
@@ -81,9 +83,23 @@ export interface ModifyLaunchConfigurationAttributesRequest {
       */
     SystemDisk?: SystemDisk;
     /**
-      * 实例数据盘配置信息。最多支持指定11块数据盘。采取整体修改，因此请提供修改后的全部值。
+      * 实例数据盘配置信息。
+最多支持指定11块数据盘。采取整体修改，因此请提供修改后的全部值。
+数据盘类型默认与系统盘类型保持一致。
       */
     DataDisks?: Array<DataDisk>;
+    /**
+      * 云服务器主机名（HostName）的相关设置。
+不支持windows实例设置主机名。
+新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。
+      */
+    HostNameSettings?: HostNameSettings;
+    /**
+      * 云服务器（InstanceName）实例名的相关设置。
+如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。
+新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。
+      */
+    InstanceNameSettings?: InstanceNameSettings;
 }
 /**
  * DisableAutoScalingGroup请求参数结构体
@@ -450,7 +466,7 @@ export interface CreatePaiInstanceRequest {
  */
 export interface SystemDisk {
     /**
-      * 系统盘类型。系统盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+      * 系统盘类型。系统盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：CLOUD_PREMIUM。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DiskType?: string;
@@ -1038,6 +1054,14 @@ export interface AutoScalingGroup {
 <br><li> EQUALITY：每次选择当前实例数最少的可用区/子网进行扩容，使得每个可用区/子网都有机会发生扩容，多次扩容出的实例会打散到多个可用区/子网。
       */
     MultiZoneSubnetPolicy: string;
+    /**
+      * 伸缩组实例健康检查类型，取值如下：<br><li>CVM：根据实例网络状态判断实例是否处于不健康状态，不健康的网络状态即发生实例 PING 不可达事件，详细判断标准可参考[实例健康检查](https://cloud.tencent.com/document/product/377/8553)<br><li>CLB：根据 CLB 的健康检查状态判断实例是否处于不健康状态，CLB健康检查原理可参考[健康检查](https://cloud.tencent.com/document/product/214/6097)
+      */
+    HealthCheckType: string;
+    /**
+      * CLB健康检查宽限期
+      */
+    LoadBalancerHealthCheckGracePeriod: number;
 }
 /**
  * AttachInstances返回参数结构体
@@ -1637,7 +1661,7 @@ export interface DescribeNotificationConfigurationsResponse {
  */
 export interface DataDisk {
     /**
-      * 数据盘类型。数据盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。
+      * 数据盘类型。数据盘类型限制详见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DiskType?: string;
@@ -2603,6 +2627,16 @@ export interface ClearLaunchConfigurationAttributesRequest {
 填 true 代表清空“数据盘”信息，清空后基于此新创建的云主机将不含有任何数据盘。
       */
     ClearDataDisks?: boolean;
+    /**
+      * 是否清空云服务器主机名相关设置信息，非必填，默认为 false。
+填 true 代表清空主机名设置信息，清空后基于此新创建的云主机将不设置主机名。
+      */
+    ClearHostNameSettings?: boolean;
+    /**
+      * 是否清空云服务器实例名相关设置信息，非必填，默认为 false。
+填 true 代表清空主机名设置信息，清空后基于此新创建的云主机将按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置。
+      */
+    ClearInstanceNameSettings?: boolean;
 }
 /**
  * PreviewPaiDomainName返回参数结构体

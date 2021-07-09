@@ -677,6 +677,12 @@ export interface FullTextInfo {
    * 全文索引的分词符，字符串中每个字符代表一个分词符
    */
   Tokenizer: string
+
+  /**
+      * 是否包含中文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainZH?: boolean
 }
 
 /**
@@ -1469,7 +1475,7 @@ export interface ModifyIndexRequest {
   TopicId: string
 
   /**
-   * 是否生效
+   * 默认不生效
    */
   Status?: boolean
 
@@ -1497,6 +1503,12 @@ export interface ValueInfo {
    * 字段是否开启分析功能
    */
   SqlFlag?: boolean
+
+  /**
+      * 是否包含中文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainZH?: boolean
 }
 
 /**

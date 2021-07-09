@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("tse.tencentcloudapi.com", "2020-12-07", clientConfig);
     }
     /**
-     * 用于查询微服务注册中心实例列表
+     * 用于查询微服务引擎实例列表
      */
     async DescribeSREInstances(req, cb) {
         return this.request("DescribeSREInstances", req, cb);

@@ -48,6 +48,7 @@ import {
   ListLayerVersionsResponse,
   DeleteFunctionRequest,
   CopyFunctionResponse,
+  InvokeFunctionResponse,
   Namespace,
   GetFunctionRequest,
   ListNamespacesRequest,
@@ -112,6 +113,7 @@ import {
   GetLayerVersionResponse,
   PutReservedConcurrencyConfigResponse,
   FunctionLog,
+  InvokeFunctionRequest,
   RetryConfig,
   GetFunctionAddressResponse,
   CfsInsInfo,
@@ -170,6 +172,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateNamespaceResponse) => void
   ): Promise<UpdateNamespaceResponse> {
     return this.request("UpdateNamespace", req, cb)
+  }
+
+  /**
+   *  SCF同步调用函数接口
+   */
+  async InvokeFunction(
+    req: InvokeFunctionRequest,
+    cb?: (error: string, rep: InvokeFunctionResponse) => void
+  ): Promise<InvokeFunctionResponse> {
+    return this.request("InvokeFunction", req, cb)
   }
 
   /**

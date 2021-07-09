@@ -635,6 +635,11 @@ export interface DeleteSnapshotsRequest {
    * 要删除的快照ID列表，可通过[DescribeSnapshots](/document/product/362/15647)查询。
    */
   SnapshotIds: Array<string>
+
+  /**
+   * 是否强制删除快照关联的镜像
+   */
+  DeleteBindImages?: boolean
 }
 
 /**

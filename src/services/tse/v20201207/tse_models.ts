@@ -33,6 +33,11 @@ export interface DescribeSREInstancesRequest {
    * 翻页单页偏移量，默认值0
    */
   Offset?: number
+
+  /**
+   * 查询类型
+   */
+  QueryType?: string
 }
 
 /**
@@ -150,6 +155,12 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateTime: string
+
+  /**
+      * 环境配置信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvInfos: Array<EnvInfo>
 }
 
 /**
@@ -258,6 +269,41 @@ export interface Filter {
 }
 
 /**
+ * 环境具体信息
+ */
+export interface EnvInfo {
+  /**
+   * 环境名称
+   */
+  EnvName: string
+
+  /**
+   * 环境对应的网络信息
+   */
+  VpcInfos: Array<VpcInfo>
+
+  /**
+   * 云硬盘容量
+   */
+  StorageCapacity: number
+
+  /**
+   * 运行状态
+   */
+  Status?: string
+
+  /**
+   * Admin service 访问地址
+   */
+  AdminServiceIp?: string
+
+  /**
+   * Config service访问地址
+   */
+  ConfigServiceIp?: string
+}
+
+/**
  * DescribeSREInstanceAccessAddress请求参数结构体
  */
 export interface DescribeSREInstanceAccessAddressRequest {
@@ -265,6 +311,21 @@ export interface DescribeSREInstanceAccessAddressRequest {
    * 注册引擎实例Id
    */
   InstanceId?: string
+}
+
+/**
+ * 私有网络信息
+ */
+export interface VpcInfo {
+  /**
+   * Vpc Id
+   */
+  VpcId: string
+
+  /**
+   * 子网ID
+   */
+  SubnetId: string
 }
 
 /**

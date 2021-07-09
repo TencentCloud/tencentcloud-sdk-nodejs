@@ -558,18 +558,18 @@ export interface ModifyInstanceRequest {
 }
 
 /**
- * tendis节点信息
+ * KillMasterGroup返回参数结构体
  */
-export interface TendisNodes {
+export interface KillMasterGroupResponse {
   /**
-   * 节点ID
+   * 异步任务ID
    */
-  NodeId: string
+  TaskId: number
 
   /**
-   * 节点角色
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NodeRole: string
+  RequestId?: string
 }
 
 /**
@@ -1533,6 +1533,26 @@ export interface ModifyInstanceAccountRequest {
 }
 
 /**
+ * ModifyMaintenanceWindow请求参数结构体
+ */
+export interface ModifyMaintenanceWindowRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 维护时间窗起始时间，如：17:00
+   */
+  StartTime: string
+
+  /**
+   * 维护时间窗结束时间，如：19:00
+   */
+  EndTime: string
+}
+
+/**
  * DescribeBackupUrl返回参数结构体
  */
 export interface DescribeBackupUrlResponse {
@@ -1817,23 +1837,24 @@ export interface DescribeInstanceMonitorTookDistRequest {
 }
 
 /**
- * ModifyMaintenanceWindow请求参数结构体
+ * KillMasterGroup请求参数结构体
  */
-export interface ModifyMaintenanceWindowRequest {
+export interface KillMasterGroupRequest {
   /**
    * 实例ID
    */
   InstanceId: string
 
   /**
-   * 维护时间窗起始时间，如：17:00
-   */
-  StartTime: string
-
-  /**
-   * 维护时间窗结束时间，如：19:00
-   */
-  EndTime: string
+      * 1.长度8-30位,推荐使用12位以上的密码
+2.不能以"/"开头
+3.至少包含两项
+    a.小写字母a-z
+    b.大写字母A-Z
+    c.数字0-9
+    d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/
+      */
+  Password?: string
 }
 
 /**
@@ -2592,6 +2613,21 @@ export interface InstanceNode {
    * 节点详细信息
    */
   InstanceClusterNode: Array<InstanceClusterNode>
+}
+
+/**
+ * tendis节点信息
+ */
+export interface TendisNodes {
+  /**
+   * 节点ID
+   */
+  NodeId: string
+
+  /**
+   * 节点角色
+   */
+  NodeRole: string
 }
 
 /**

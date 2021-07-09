@@ -8,7 +8,7 @@ import { DescribeSREInstancesRequest, ManageConfigRequest, DescribeSREInstanceAc
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 用于查询微服务注册中心实例列表
+     * 用于查询微服务引擎实例列表
      */
     DescribeSREInstances(req: DescribeSREInstancesRequest, cb?: (error: string, rep: DescribeSREInstancesResponse) => void): Promise<DescribeSREInstancesResponse>;
     /**

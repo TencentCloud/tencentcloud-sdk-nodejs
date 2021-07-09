@@ -17,15 +17,6 @@ export interface RemoveUserFromUserGroupResponse {
     RequestId?: string;
 }
 /**
- * DecribePublicKey请求参数结构体
- */
-export interface DecribePublicKeyRequest {
-    /**
-      * 应用ID，是应用的全局唯一标识。
-      */
-    ApplicationId: string;
-}
-/**
  * DescribeOrgNode返回参数结构体
  */
 export interface DescribeOrgNodeResponse {
@@ -239,26 +230,6 @@ export interface CreateUserResponse {
     RequestId?: string;
 }
 /**
- * 机构子节点下的用户信息列表
- */
-export interface OrgNodeChildUserInfo {
-    /**
-      * 机构ID，是机构节点全局唯一标识，长度限制：64个字符。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OrgNodeId: string;
-    /**
-      * 用户信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserInfo: Array<UserInfo>;
-    /**
-      * 当前机构节点下的用户总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalUserNum: number;
-}
-/**
  * ListAuthorizedApplicationsToUserGroup请求参数结构体
  */
 export interface ListAuthorizedApplicationsToUserGroupRequest {
@@ -356,6 +327,35 @@ export interface AddUserToUserGroupRequest {
     UserGroupId: string;
 }
 /**
+ * 应用信息列表。
+ */
+export interface ApplicationAuthorizationInfo {
+    /**
+      * 用户在被授权应用下对应的账号列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationAccounts: Array<string>;
+    /**
+      * 应用ID，是应用的全局唯一标识。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationId: string;
+    /**
+      * 展示用户所在的用户组、机构节点拥有该应用的访问权限的ID信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InheritedForm: InheritedForm;
+}
+/**
+ * UpdateOrgNode返回参数结构体
+ */
+export interface UpdateOrgNodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeApplication返回参数结构体
  */
 export interface DescribeApplicationResponse {
@@ -420,35 +420,6 @@ export interface DescribeApplicationResponse {
     RequestId?: string;
 }
 /**
- * UpdateOrgNode返回参数结构体
- */
-export interface UpdateOrgNodeResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 应用信息列表。
- */
-export interface ApplicationAuthorizationInfo {
-    /**
-      * 用户在被授权应用下对应的账号列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationAccounts: Array<string>;
-    /**
-      * 应用ID，是应用的全局唯一标识。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationId: string;
-    /**
-      * 展示用户所在的用户组、机构节点拥有该应用的访问权限的ID信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InheritedForm: InheritedForm;
-}
-/**
  * ListAuthorizedApplicationsToUser返回参数结构体
  */
 export interface ListAuthorizedApplicationsToUserResponse {
@@ -506,28 +477,24 @@ export interface UpdateOrgNodeRequest {
     CustomizedOrgNodeId?: string;
 }
 /**
- * DecribePublicKey返回参数结构体
+ * 机构子节点下的用户信息列表
  */
-export interface DecribePublicKeyResponse {
+export interface OrgNodeChildUserInfo {
     /**
-      * jwt验证签名所用的公钥信息。
+      * 机构ID，是机构节点全局唯一标识，长度限制：64个字符。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PublicKey: string;
+    OrgNodeId: string;
     /**
-      * jwt的密钥id。
+      * 用户信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    KeyId: string;
+    UserInfo: Array<UserInfo>;
     /**
-      * 应用ID，是应用的全局唯一标识。
+      * 当前机构节点下的用户总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    TotalUserNum: number;
 }
 /**
  * CreateUser请求参数结构体

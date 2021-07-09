@@ -20,7 +20,6 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeUserGroupRequest,
   RemoveUserFromUserGroupResponse,
-  DecribePublicKeyRequest,
   DescribeOrgNodeResponse,
   CreateOrgNodeResponse,
   ListUsersInOrgNodeResponse,
@@ -32,7 +31,6 @@ import {
   DeleteOrgNodeResponse,
   AddUserToUserGroupResponse,
   CreateUserResponse,
-  OrgNodeChildUserInfo,
   ListAuthorizedApplicationsToUserGroupRequest,
   ListUsersInOrgNodeRequest,
   InheritedForm,
@@ -40,14 +38,14 @@ import {
   DeleteUserResponse,
   ListUsersInUserGroupResponse,
   AddUserToUserGroupRequest,
-  DescribeApplicationResponse,
-  UpdateOrgNodeResponse,
   ApplicationAuthorizationInfo,
+  UpdateOrgNodeResponse,
+  DescribeApplicationResponse,
   ListAuthorizedApplicationsToUserResponse,
   DeleteUserGroupResponse,
   DescribeApplicationRequest,
   UpdateOrgNodeRequest,
-  DecribePublicKeyResponse,
+  OrgNodeChildUserInfo,
   CreateUserRequest,
   ListUserGroupsOfUserResponse,
   DescribeUserInfoResponse,
@@ -104,16 +102,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserGroupResponse) => void
   ): Promise<DeleteUserGroupResponse> {
     return this.request("DeleteUserGroup", req, cb)
-  }
-
-  /**
-   * 获取JWT公钥信息
-   */
-  async DecribePublicKey(
-    req: DecribePublicKeyRequest,
-    cb?: (error: string, rep: DecribePublicKeyResponse) => void
-  ): Promise<DecribePublicKeyResponse> {
-    return this.request("DecribePublicKey", req, cb)
   }
 
   /**

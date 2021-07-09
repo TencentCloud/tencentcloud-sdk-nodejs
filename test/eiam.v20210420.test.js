@@ -48,16 +48,6 @@ it("eiam.v20210420.DeleteUserGroup", async function () {
     }
 })
 
-it("eiam.v20210420.DecribePublicKey", async function () {
-    try {
-       const data = await client.DecribePublicKey({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("eiam.v20210420.ListUsersInUserGroup", async function () {
     try {
        const data = await client.ListUsersInUserGroup({})

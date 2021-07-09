@@ -46,12 +46,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUserGroup", req, cb);
     }
     /**
-     * 获取JWT公钥信息
-     */
-    async DecribePublicKey(req, cb) {
-        return this.request("DecribePublicKey", req, cb);
-    }
-    /**
      * 获取用户组中的用户列表
      */
     async ListUsersInUserGroup(req, cb) {

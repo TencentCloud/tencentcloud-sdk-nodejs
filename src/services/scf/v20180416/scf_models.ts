@@ -657,6 +657,21 @@ export interface CopyFunctionResponse {
 }
 
 /**
+ * InvokeFunction返回参数结构体
+ */
+export interface InvokeFunctionResponse {
+  /**
+   * 函数执行结果
+   */
+  Result: Result
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 命名空间
  */
 export interface Namespace {
@@ -2695,6 +2710,41 @@ export interface FunctionLog {
    * 重试次数
    */
   RetryNum: number
+}
+
+/**
+ * InvokeFunction请求参数结构体
+ */
+export interface InvokeFunctionRequest {
+  /**
+   * 函数名称
+   */
+  FunctionName: string
+
+  /**
+   * 触发函数的版本号或别名
+   */
+  Qualifier?: string
+
+  /**
+   * 运行函数时的参数，以json格式传入，最大支持的参数长度是 1M
+   */
+  Event?: string
+
+  /**
+   * 同步调用时指定该字段，返回值会包含4K的日志，可选值为None和Tail，默认值为None。当该值为Tail时，返回参数中的Log字段会包含对应的函数执行日志
+   */
+  LogType?: string
+
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+
+  /**
+   * 函数灰度流量控制调用，以json格式传入，例如{"k":"v"}，注意kv都需要是字符串类型，最大支持的参数长度是1024字节
+   */
+  RoutingKey?: string
 }
 
 /**

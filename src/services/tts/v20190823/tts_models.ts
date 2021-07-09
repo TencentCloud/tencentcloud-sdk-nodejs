@@ -169,6 +169,11 @@ export interface CreateTtsTaskRequest {
    * 回调 URL，用户自行搭建的用于接收识别结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。[回调说明](https://cloud.tencent.com/document/product/1073/55746)
    */
   CallbackUrl?: string
+
+  /**
+   * 旁白与对白文本解析，分别合成相应风格（仅适用于旁对白音色），默认 false
+   */
+  VoiceoverDialogueSplit?: boolean
 }
 
 /**

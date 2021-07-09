@@ -24,7 +24,7 @@ export interface SubAccountUser {
       */
     CreateTime: string;
     /**
-      * 用户类型(1:主账号;2:子用户;3:企业微信子用户;4:协作者;5:消息接收人)
+      * 用户类型(2:子用户;3:企业微信子用户;4:协作者;5:消息接收人)
       */
     UserType: number;
     /**
