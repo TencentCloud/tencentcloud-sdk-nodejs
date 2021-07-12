@@ -19,32 +19,43 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeUserGroupRequest,
-  RemoveUserFromUserGroupResponse,
+  ListApplicationAuthorizationsRequest,
   DescribeOrgNodeResponse,
   CreateOrgNodeResponse,
+  ListApplicationsRequest,
+  UserSearchCriteria,
   ListUsersInOrgNodeResponse,
   ModifyUserInfoResponse,
   DeleteUserRequest,
   ListAuthorizedApplicationsToOrgNodeResponse,
   OrgNodeChildInfo,
+  SortCondition,
+  InheritedForm,
   ListAuthorizedApplicationsToUserRequest,
   DeleteOrgNodeResponse,
   AddUserToUserGroupResponse,
   CreateUserResponse,
+  ListUsersResponse,
   ListAuthorizedApplicationsToUserGroupRequest,
-  ListUsersInOrgNodeRequest,
-  InheritedForm,
+  ListUserGroupsResponse,
+  DescribePublicKeyRequest,
+  AuthorizationInfo,
   CreateUserGroupResponse,
   DeleteUserResponse,
   ListUsersInUserGroupResponse,
+  ListUserGroupsRequest,
   AddUserToUserGroupRequest,
   ApplicationAuthorizationInfo,
-  UpdateOrgNodeResponse,
+  ApplicationInformation,
+  ListApplicationAuthorizationsResponse,
   DescribeApplicationResponse,
+  UserGroupInformation,
+  ApplicationInfoSearchCriteria,
   ListAuthorizedApplicationsToUserResponse,
   DeleteUserGroupResponse,
   DescribeApplicationRequest,
   UpdateOrgNodeRequest,
+  AuthorizationInfoSearchCriteria,
   OrgNodeChildUserInfo,
   CreateUserRequest,
   ListUserGroupsOfUserResponse,
@@ -52,17 +63,25 @@ import {
   DeleteOrgNodeRequest,
   CreateOrgNodeRequest,
   RemoveUserFromUserGroupRequest,
+  ListUsersInOrgNodeRequest,
   ListAuthorizedApplicationsToUserGroupResponse,
+  ListUsersRequest,
+  UpdateOrgNodeResponse,
+  DescribePublicKeyResponse,
   DeleteUserGroupRequest,
+  UserGroupInfoSearchCriteria,
   DescribeUserInfoRequest,
   DescribeUserGroupResponse,
   ListUserGroupsOfUserRequest,
+  UserInformation,
   ListUsersInUserGroupRequest,
   UserInfo,
   ListAuthorizedApplicationsToOrgNodeRequest,
   CreateUserGroupRequest,
   DescribeOrgNodeRequest,
   ModifyUserInfoRequest,
+  ListApplicationsResponse,
+  RemoveUserFromUserGroupResponse,
 } from "./eiam_models"
 
 /**
@@ -72,76 +91,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("eiam.tencentcloudapi.com", "2021-04-20", clientConfig)
-  }
-
-  /**
-   * 根据机构节点ID读取机构节点信息
-   */
-  async DescribeOrgNode(
-    req: DescribeOrgNodeRequest,
-    cb?: (error: string, rep: DescribeOrgNodeResponse) => void
-  ): Promise<DescribeOrgNodeResponse> {
-    return this.request("DescribeOrgNode", req, cb)
-  }
-
-  /**
-   * 通过用户名或用户 id 删除用户。
-   */
-  async DeleteUser(
-    req: DeleteUserRequest,
-    cb?: (error: string, rep: DeleteUserResponse) => void
-  ): Promise<DeleteUserResponse> {
-    return this.request("DeleteUser", req, cb)
-  }
-
-  /**
-   * 删除一个用户组
-   */
-  async DeleteUserGroup(
-    req: DeleteUserGroupRequest,
-    cb?: (error: string, rep: DeleteUserGroupResponse) => void
-  ): Promise<DeleteUserGroupResponse> {
-    return this.request("DeleteUserGroup", req, cb)
-  }
-
-  /**
-   * 获取用户组中的用户列表
-   */
-  async ListUsersInUserGroup(
-    req: ListUsersInUserGroupRequest,
-    cb?: (error: string, rep: ListUsersInUserGroupResponse) => void
-  ): Promise<ListUsersInUserGroupResponse> {
-    return this.request("ListUsersInUserGroup", req, cb)
-  }
-
-  /**
-   * 通过机构节点ID获得被授权访问的应用列表。
-   */
-  async ListAuthorizedApplicationsToOrgNode(
-    req: ListAuthorizedApplicationsToOrgNodeRequest,
-    cb?: (error: string, rep: ListAuthorizedApplicationsToOrgNodeResponse) => void
-  ): Promise<ListAuthorizedApplicationsToOrgNodeResponse> {
-    return this.request("ListAuthorizedApplicationsToOrgNode", req, cb)
-  }
-
-  /**
-   * 获取用户所在的用户组列表
-   */
-  async ListUserGroupsOfUser(
-    req: ListUserGroupsOfUserRequest,
-    cb?: (error: string, rep: ListUserGroupsOfUserResponse) => void
-  ): Promise<ListUserGroupsOfUserResponse> {
-    return this.request("ListUserGroupsOfUser", req, cb)
-  }
-
-  /**
-   * 通过用户ID获得被授权访问的应用列表。
-   */
-  async ListAuthorizedApplicationsToUser(
-    req: ListAuthorizedApplicationsToUserRequest,
-    cb?: (error: string, rep: ListAuthorizedApplicationsToUserResponse) => void
-  ): Promise<ListAuthorizedApplicationsToUserResponse> {
-    return this.request("ListAuthorizedApplicationsToUser", req, cb)
   }
 
   /**
@@ -155,6 +104,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取JWT公钥信息。
+   */
+  async DescribePublicKey(
+    req: DescribePublicKeyRequest,
+    cb?: (error: string, rep: DescribePublicKeyResponse) => void
+  ): Promise<DescribePublicKeyResponse> {
+    return this.request("DescribePublicKey", req, cb)
+  }
+
+  /**
+   * 获取用户列表信息。
+   */
+  async ListUsers(
+    req: ListUsersRequest,
+    cb?: (error: string, rep: ListUsersResponse) => void
+  ): Promise<ListUsersResponse> {
+    return this.request("ListUsers", req, cb)
+  }
+
+  /**
+   * 通过用户组ID获得被授权访问的应用列表。
+   */
+  async ListAuthorizedApplicationsToUserGroup(
+    req: ListAuthorizedApplicationsToUserGroupRequest,
+    cb?: (error: string, rep: ListAuthorizedApplicationsToUserGroupResponse) => void
+  ): Promise<ListAuthorizedApplicationsToUserGroupResponse> {
+    return this.request("ListAuthorizedApplicationsToUserGroup", req, cb)
+  }
+
+  /**
+   * 应用授权关系列表（含搜索条件匹配）。
+   */
+  async ListApplicationAuthorizations(
+    req: ListApplicationAuthorizationsRequest,
+    cb?: (error: string, rep: ListApplicationAuthorizationsResponse) => void
+  ): Promise<ListApplicationAuthorizationsResponse> {
+    return this.request("ListApplicationAuthorizations", req, cb)
+  }
+
+  /**
+   * 删除一个用户组
+   */
+  async DeleteUserGroup(
+    req: DeleteUserGroupRequest,
+    cb?: (error: string, rep: DeleteUserGroupResponse) => void
+  ): Promise<DeleteUserGroupResponse> {
+    return this.request("DeleteUserGroup", req, cb)
+  }
+
+  /**
    * 通过用户名或用户 id 冻结用户
    */
   async ModifyUserInfo(
@@ -165,13 +164,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除一个机构节点
+   * 获取用户组列表信息（包含查询条件）。
    */
-  async DeleteOrgNode(
-    req: DeleteOrgNodeRequest,
-    cb?: (error: string, rep: DeleteOrgNodeResponse) => void
-  ): Promise<DeleteOrgNodeResponse> {
-    return this.request("DeleteOrgNode", req, cb)
+  async ListUserGroups(
+    req: ListUserGroupsRequest,
+    cb?: (error: string, rep: ListUserGroupsResponse) => void
+  ): Promise<ListUserGroupsResponse> {
+    return this.request("ListUserGroups", req, cb)
   }
 
   /**
@@ -185,23 +184,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过用户名或用户 id 搜索用户
+   * 获取用户组中的用户列表
    */
-  async DescribeUserInfo(
-    req: DescribeUserInfoRequest,
-    cb?: (error: string, rep: DescribeUserInfoResponse) => void
-  ): Promise<DescribeUserInfoResponse> {
-    return this.request("DescribeUserInfo", req, cb)
-  }
-
-  /**
-   * 新建用户组
-   */
-  async CreateUserGroup(
-    req: CreateUserGroupRequest,
-    cb?: (error: string, rep: CreateUserGroupResponse) => void
-  ): Promise<CreateUserGroupResponse> {
-    return this.request("CreateUserGroup", req, cb)
+  async ListUsersInUserGroup(
+    req: ListUsersInUserGroupRequest,
+    cb?: (error: string, rep: ListUsersInUserGroupResponse) => void
+  ): Promise<ListUsersInUserGroupResponse> {
+    return this.request("ListUsersInUserGroup", req, cb)
   }
 
   /**
@@ -215,13 +204,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取一个应用的信息。
+   * 通过用户ID获得被授权访问的应用列表。
    */
-  async DescribeApplication(
-    req: DescribeApplicationRequest,
-    cb?: (error: string, rep: DescribeApplicationResponse) => void
-  ): Promise<DescribeApplicationResponse> {
-    return this.request("DescribeApplication", req, cb)
+  async ListAuthorizedApplicationsToUser(
+    req: ListAuthorizedApplicationsToUserRequest,
+    cb?: (error: string, rep: ListAuthorizedApplicationsToUserResponse) => void
+  ): Promise<ListAuthorizedApplicationsToUserResponse> {
+    return this.request("ListAuthorizedApplicationsToUser", req, cb)
+  }
+
+  /**
+   * 根据机构节点ID读取机构节点信息
+   */
+  async DescribeOrgNode(
+    req: DescribeOrgNodeRequest,
+    cb?: (error: string, rep: DescribeOrgNodeResponse) => void
+  ): Promise<DescribeOrgNodeResponse> {
+    return this.request("DescribeOrgNode", req, cb)
+  }
+
+  /**
+   * 通过用户名或用户 id 搜索用户
+   */
+  async DescribeUserInfo(
+    req: DescribeUserInfoRequest,
+    cb?: (error: string, rep: DescribeUserInfoResponse) => void
+  ): Promise<DescribeUserInfoResponse> {
+    return this.request("DescribeUserInfo", req, cb)
   }
 
   /**
@@ -232,6 +241,86 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RemoveUserFromUserGroupResponse) => void
   ): Promise<RemoveUserFromUserGroupResponse> {
     return this.request("RemoveUserFromUserGroup", req, cb)
+  }
+
+  /**
+   * 新建一个机构节点
+   */
+  async CreateOrgNode(
+    req: CreateOrgNodeRequest,
+    cb?: (error: string, rep: CreateOrgNodeResponse) => void
+  ): Promise<CreateOrgNodeResponse> {
+    return this.request("CreateOrgNode", req, cb)
+  }
+
+  /**
+   * 通过用户名或用户 id 删除用户。
+   */
+  async DeleteUser(
+    req: DeleteUserRequest,
+    cb?: (error: string, rep: DeleteUserResponse) => void
+  ): Promise<DeleteUserResponse> {
+    return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 获取应用列表信息。
+   */
+  async ListApplications(
+    req: ListApplicationsRequest,
+    cb?: (error: string, rep: ListApplicationsResponse) => void
+  ): Promise<ListApplicationsResponse> {
+    return this.request("ListApplications", req, cb)
+  }
+
+  /**
+   * 通过机构节点ID获得被授权访问的应用列表。
+   */
+  async ListAuthorizedApplicationsToOrgNode(
+    req: ListAuthorizedApplicationsToOrgNodeRequest,
+    cb?: (error: string, rep: ListAuthorizedApplicationsToOrgNodeResponse) => void
+  ): Promise<ListAuthorizedApplicationsToOrgNodeResponse> {
+    return this.request("ListAuthorizedApplicationsToOrgNode", req, cb)
+  }
+
+  /**
+   * 删除一个机构节点
+   */
+  async DeleteOrgNode(
+    req: DeleteOrgNodeRequest,
+    cb?: (error: string, rep: DeleteOrgNodeResponse) => void
+  ): Promise<DeleteOrgNodeResponse> {
+    return this.request("DeleteOrgNode", req, cb)
+  }
+
+  /**
+   * 新建用户组
+   */
+  async CreateUserGroup(
+    req: CreateUserGroupRequest,
+    cb?: (error: string, rep: CreateUserGroupResponse) => void
+  ): Promise<CreateUserGroupResponse> {
+    return this.request("CreateUserGroup", req, cb)
+  }
+
+  /**
+   * 获取用户所在的用户组列表
+   */
+  async ListUserGroupsOfUser(
+    req: ListUserGroupsOfUserRequest,
+    cb?: (error: string, rep: ListUserGroupsOfUserResponse) => void
+  ): Promise<ListUserGroupsOfUserResponse> {
+    return this.request("ListUserGroupsOfUser", req, cb)
+  }
+
+  /**
+   * 获取一个应用的信息。
+   */
+  async DescribeApplication(
+    req: DescribeApplicationRequest,
+    cb?: (error: string, rep: DescribeApplicationResponse) => void
+  ): Promise<DescribeApplicationResponse> {
+    return this.request("DescribeApplication", req, cb)
   }
 
   /**
@@ -252,25 +341,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateOrgNodeResponse) => void
   ): Promise<UpdateOrgNodeResponse> {
     return this.request("UpdateOrgNode", req, cb)
-  }
-
-  /**
-   * 通过用户组ID获得被授权访问的应用列表。
-   */
-  async ListAuthorizedApplicationsToUserGroup(
-    req: ListAuthorizedApplicationsToUserGroupRequest,
-    cb?: (error: string, rep: ListAuthorizedApplicationsToUserGroupResponse) => void
-  ): Promise<ListAuthorizedApplicationsToUserGroupResponse> {
-    return this.request("ListAuthorizedApplicationsToUserGroup", req, cb)
-  }
-
-  /**
-   * 新建一个机构节点
-   */
-  async CreateOrgNode(
-    req: CreateOrgNodeRequest,
-    cb?: (error: string, rep: CreateOrgNodeResponse) => void
-  ): Promise<CreateOrgNodeResponse> {
-    return this.request("CreateOrgNode", req, cb)
   }
 }

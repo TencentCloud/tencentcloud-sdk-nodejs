@@ -604,6 +604,21 @@ export interface CustomLayout {
     InputStreamList: Array<StreamLayout>;
 }
 /**
+ * 实时录制中出现的用户视频流断流次数统计
+ */
+export interface Interrupt {
+    /**
+      * 用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId: string;
+    /**
+      * 视频流断流次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+}
+/**
  * 视频信息
  */
 export interface VideoInfo {
@@ -926,6 +941,11 @@ export interface DescribeOnlineRecordResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReplayUrl: string;
+    /**
+      * 视频流在录制过程中断流次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Interrupts: Array<Interrupt>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

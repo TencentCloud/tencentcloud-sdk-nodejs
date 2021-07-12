@@ -23,25 +23,25 @@ export interface AddInstancesResponse {
       * 冻结流水，一次开通一个冻结流水。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranId?: string
+  TranId: string
 
   /**
       * 后付费订单号。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DealNames?: Array<string>
+  DealNames: Array<string>
 
   /**
       * 发货资源id列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResourceIds?: Array<string>
+  ResourceIds: Array<string>
 
   /**
       * 大订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BigDealIds?: Array<string>
+  BigDealIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -57,18 +57,18 @@ export interface UpgradeInstanceResponse {
       * 冻结流水ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranId?: string
+  TranId: string
 
   /**
       * 大订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BigDealIds?: Array<string>
+  BigDealIds: Array<string>
 
   /**
    * 订单号
    */
-  DealNames?: Array<string>
+  DealNames: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -172,7 +172,7 @@ export interface SetRenewFlagResponse {
   /**
    * 操作成功实例数
    */
-  Count?: number
+  Count: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -287,7 +287,7 @@ export interface DescribeResourcesByDealNameResponse {
   /**
    * 计费资源id信息数组
    */
-  BillingResourceInfos?: Array<BillingResourceInfo>
+  BillingResourceInfos: Array<BillingResourceInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -344,17 +344,17 @@ export interface DescribeMaintainPeriodResponse {
   /**
    * 维护week days
    */
-  MaintainWeekDays?: Array<string>
+  MaintainWeekDays: Array<string>
 
   /**
    * 维护开始时间，单位秒
    */
-  MaintainStartTime?: number
+  MaintainStartTime: number
 
   /**
    * 维护时长，单位秒
    */
-  MaintainDuration?: number
+  MaintainDuration: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -369,12 +369,12 @@ export interface DescribeBackupListResponse {
   /**
    * 总共备份文件个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 备份文件列表
    */
-  BackupList?: Array<BackupFileInfo>
+  BackupList: Array<BackupFileInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -389,12 +389,12 @@ export interface DescribeRollbackTimeRangeResponse {
   /**
    * 有效回归时间范围开始时间点
    */
-  TimeRangeStart?: string
+  TimeRangeStart: string
 
   /**
    * 有效回归时间范围结束时间点
    */
-  TimeRangeEnd?: string
+  TimeRangeEnd: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -515,12 +515,12 @@ export interface DescribeClusterInstanceGrpsResponse {
   /**
    * 实例组个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例组列表
    */
-  InstanceGrpInfoList?: Array<CynosdbInstanceGrp>
+  InstanceGrpInfoList: Array<CynosdbInstanceGrp>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -626,7 +626,7 @@ export interface DescribeProjectSecurityGroupsResponse {
   /**
    * 安全组详情
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -792,6 +792,23 @@ export interface CynosdbInstanceDetail {
    * 续费标志
    */
   RenewFlag: number
+
+  /**
+   * serverless实例cpu下限
+   */
+  MinCpu: number
+
+  /**
+   * serverless实例cpu上限
+   */
+  MaxCpu: number
+
+  /**
+      * serverless实例状态, 可能值：
+resume
+pause
+      */
+  ServerlessStatus: string
 }
 
 /**
@@ -801,7 +818,7 @@ export interface DescribeDBSecurityGroupsResponse {
   /**
    * 安全组信息
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -826,12 +843,12 @@ export interface DescribeInstancesResponse {
   /**
    * 实例个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例列表
    */
-  InstanceSet?: Array<CynosdbInstance>
+  InstanceSet: Array<CynosdbInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1167,7 +1184,7 @@ export interface DescribeInstancesRequest {
  */
 export interface DescribeResourcesByDealNameRequest {
   /**
-   * 计费订单id
+   * 计费订单id（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
    */
   DealName: string
 }
@@ -1179,13 +1196,13 @@ export interface IsolateInstanceResponse {
   /**
    * 任务流id
    */
-  FlowId?: number
+  FlowId: number
 
   /**
       * 隔离实例的订单id（预付费实例）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DealNames?: Array<string>
+  DealNames: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1211,6 +1228,12 @@ export interface DescribeBackupListRequest {
    * 备份文件列表起始
    */
   Offset: number
+
+  /**
+      * 数据库类型，取值范围: 
+<li> MYSQL </li>
+      */
+  DbType?: string
 }
 
 /**
@@ -1453,6 +1476,18 @@ resume
 pause
       */
   ServerlessStatus: string
+
+  /**
+      * 存储付费类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StoragePayMode: number
+
+  /**
+      * 预付费存储Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageId: string
 }
 
 /**
@@ -1462,7 +1497,7 @@ export interface DescribeAccountsResponse {
   /**
    * 数据库账号列表
    */
-  AccountSet?: Array<Account>
+  AccountSet: Array<Account>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1518,7 +1553,7 @@ export interface DescribeInstanceDetailResponse {
   /**
    * 实例详情
    */
-  Detail?: CynosdbInstanceDetail
+  Detail: CynosdbInstanceDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1563,7 +1598,7 @@ export interface OfflineClusterResponse {
   /**
    * 任务流ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1578,7 +1613,7 @@ export interface DescribeInstanceSpecsResponse {
   /**
    * 规格信息
    */
-  InstanceSpecSet?: Array<InstanceSpec>
+  InstanceSpecSet: Array<InstanceSpec>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1685,13 +1720,13 @@ export interface IsolateClusterResponse {
       * 任务流ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FlowId?: number
+  FlowId: number
 
   /**
       * 退款订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DealNames?: Array<string>
+  DealNames: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1707,31 +1742,31 @@ export interface CreateClustersResponse {
       * 冻结流水ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranId?: string
+  TranId: string
 
   /**
       * 订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DealNames?: Array<string>
+  DealNames: Array<string>
 
   /**
       * 资源ID列表（异步发货可能无法返回该字段, 强烈建议使用dealNames字段查询接口DescribeResourcesByDealName获取异步发货的资源ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResourceIds?: Array<string>
+  ResourceIds: Array<string>
 
   /**
       * 集群ID列表（异步发货可能不返回该字段, 强烈建议使用dealNames查询接口DescribeResourcesByDealName获取异步发货的集群ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClusterIds?: Array<string>
+  ClusterIds: Array<string>
 
   /**
       * 大订单号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BigDealIds?: Array<string>
+  BigDealIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1796,12 +1831,12 @@ export interface CreateClustersRequest {
   Cpu?: number
 
   /**
-   * 普通实例内存
+   * 普通实例内存,单位G
    */
   Memory?: number
 
   /**
-   * 存储
+   * 存储大小，单位G
    */
   Storage?: number
 
@@ -1811,7 +1846,7 @@ export interface CreateClustersRequest {
   ClusterName?: string
 
   /**
-   * 账号密码(8-64个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()~）中的两种)
+   * 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种)
    */
   AdminPassword?: string
 
@@ -1859,8 +1894,9 @@ timeRollback，时间点回档
   ExpectTimeThresh?: number
 
   /**
-   * 普通实例存储上限，单位GB
-   */
+      * 普通实例存储上限，单位GB
+当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
+      */
   StorageLimit?: number
 
   /**
@@ -1936,6 +1972,13 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
 默认值:600
       */
   AutoPauseDelay?: number
+
+  /**
+      * 集群存储计费模式，按量计费：0，包年包月：1。默认按量计费
+当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费
+回档与克隆均不支持包年包月存储
+      */
+  StoragePayMode?: number
 }
 
 /**
@@ -2083,6 +2126,31 @@ resume
 pause
       */
   ServerlessStatus?: string
+
+  /**
+   * 集群预付费存储值大小
+   */
+  Storage?: number
+
+  /**
+   * 集群存储为预付费时的存储ID，用于预付费存储变配
+   */
+  StorageId?: string
+
+  /**
+   * 集群存储付费模式。0-按量计费，1-包年包月
+   */
+  StoragePayMode?: number
+
+  /**
+   * 集群计算规格对应的最小存储值
+   */
+  MinStorageSize?: number
+
+  /**
+   * 集群计算规格对应的最大存储值
+   */
+  MaxStorageSize?: number
 }
 
 /**
@@ -2102,7 +2170,7 @@ export interface DescribeClusterDetailResponse {
   /**
    * 集群详细信息
    */
-  Detail?: CynosdbClusterDetail
+  Detail: CynosdbClusterDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2117,7 +2185,7 @@ export interface OfflineInstanceResponse {
   /**
    * 任务流ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2212,12 +2280,12 @@ export interface DescribeClustersResponse {
   /**
    * 集群数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 集群列表
    */
-  ClusterSet?: Array<CynosdbCluster>
+  ClusterSet: Array<CynosdbCluster>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2242,29 +2310,29 @@ export interface DescribeBackupConfigResponse {
   /**
    * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
    */
-  BackupTimeBeg?: number
+  BackupTimeBeg: number
 
   /**
    * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
    */
-  BackupTimeEnd?: number
+  BackupTimeEnd: number
 
   /**
    * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800
    */
-  ReserveDuration?: number
+  ReserveDuration: number
 
   /**
       * 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BackupFreq?: Array<string>
+  BackupFreq: Array<string>
 
   /**
       * 备份方式，logic-逻辑备份，snapshot-快照备份
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BackupType?: string
+  BackupType: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

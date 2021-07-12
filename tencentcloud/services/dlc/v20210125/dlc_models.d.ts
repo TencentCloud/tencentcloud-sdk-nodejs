@@ -1,21 +1,272 @@
 /**
- * 数据库对象
+ * DescribeDatabases请求参数结构体
  */
-export interface DatabaseInfo {
+export interface DescribeDatabasesRequest {
     /**
-      * 数据库名称。
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 数据偏移量，从0开始，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 模糊匹配，库名关键字。
+      */
+    KeyWord?: string;
+    /**
+      * 数据源唯名称，该名称可以通过DescribeDatasourceConnection接口查询到。默认为CosDataCatalog
+      */
+    DatasourceConnectionName?: string;
+}
+/**
+ * 工作组部分信息
+ */
+export interface WorkGroupMessage {
+    /**
+      * 工作组Id
+      */
+    WorkGroupId: number;
+    /**
+      * 工作组名称
+      */
+    WorkGroupName: string;
+    /**
+      * 工作组描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkGroupDescription: string;
+    /**
+      * 创建者
+      */
+    Creator: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+}
+/**
+ * DeleteUser请求参数结构体
+ */
+export interface DeleteUserRequest {
+    /**
+      * 需要删除的用户的Id
+      */
+    UserIds: Array<string>;
+}
+/**
+ * CreateStoreLocation返回参数结构体
+ */
+export interface CreateStoreLocationResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateScript返回参数结构体
+ */
+export interface CreateScriptResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTables返回参数结构体
+ */
+export interface DescribeTablesResponse {
+    /**
+      * 数据表对象列表。
+      */
+    TableList: Array<TableResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 工作组信息
+ */
+export interface WorkGroupInfo {
+    /**
+      * 工作组Id
+      */
+    WorkGroupId: number;
+    /**
+      * 工作组名称
+      */
+    WorkGroupName: string;
+    /**
+      * 工作组描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkGroupDescription: string;
+    /**
+      * 工作组关联的用户数量
+      */
+    UserNum: number;
+    /**
+      * 工作组关联的用户集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserSet: Array<UserMessage>;
+    /**
+      * 工作组绑定的权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicySet: Array<Policy>;
+    /**
+      * 创建者
+      */
+    Creator: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+}
+/**
+ * ModifyUser返回参数结构体
+ */
+export interface ModifyUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteScript返回参数结构体
+ */
+export interface DeleteScriptResponse {
+    /**
+      * 删除的脚本数量
+      */
+    ScriptsAffected: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 任务类型，任务如SQL查询等。
+ */
+export interface Task {
+    /**
+      * SQL查询任务
+      */
+    SQLTask?: SQLTask;
+    /**
+      * Spark SQL查询任务
+      */
+    SparkSQLTask?: SQLTask;
+}
+/**
+ * DetachUserPolicy请求参数结构体
+ */
+export interface DetachUserPolicyRequest {
+    /**
+      * 用户Id，和CAM侧Uin匹配
+      */
+    UserId: string;
+    /**
+      * 解绑的权限集合
+      */
+    PolicySet?: Array<Policy>;
+}
+/**
+ * DeleteWorkGroup返回参数结构体
+ */
+export interface DeleteWorkGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTasks返回参数结构体
+ */
+export interface DescribeTasksResponse {
+    /**
+      * 任务对象列表。
+      */
+    TaskList: Array<TaskResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DetachWorkGroupPolicy返回参数结构体
+ */
+export interface DetachWorkGroupPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CSV序列化及反序列化数据结构
+ */
+export interface CSVSerde {
+    /**
+      * CSV序列化转义符，默认为"\\"，最长8个字符，如 Escape: "/\"
+      */
+    Escape?: string;
+    /**
+      * CSV序列化字段域符，默认为"'"，最长8个字符, 如 Quote: "\""
+      */
+    Quote?: string;
+    /**
+      * CSV序列化分隔符，默认为"\t"，最长8个字符, 如 Separator: "\t"
+      */
+    Separator?: string;
+}
+/**
+ * CreateDatabase请求参数结构体
+ */
+export interface CreateDatabaseRequest {
+    /**
+      * 数据库基础信息
+      */
+    DatabaseInfo: DatabaseInfo;
+    /**
+      * 数据源名称，默认为CosDataCatalog
+      */
+    DatasourceConnectionName?: string;
+}
+/**
+ * 绑定到同一个工作组的用户Id的集合
+ */
+export interface UserIdSetOfWorkGroupId {
+    /**
+      * 工作组Id
+      */
+    WorkGroupId: number;
+    /**
+      * 用户Id集合，和CAM侧Uin匹配
+      */
+    UserIds: Array<string>;
+}
+/**
+ * 视图基本配置信息
+ */
+export interface ViewBaseInfo {
+    /**
+      * 该视图所属数据库名字
       */
     DatabaseName: string;
     /**
-      * 数据库描述信息，长度 0~256。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 视图名称
       */
-    Comment?: string;
-    /**
-      * 数据库属性列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Properties?: Array<Property>;
+    ViewName: string;
 }
 /**
  * DescribeTasks请求参数结构体
@@ -89,6 +340,15 @@ export interface Script {
     UpdateTime: number;
 }
 /**
+ * DeleteWorkGroup请求参数结构体
+ */
+export interface DeleteWorkGroupRequest {
+    /**
+      * 要删除的工作组Id集合
+      */
+    WorkGroupIds: Array<number>;
+}
+/**
  * 配置格式
  */
 export interface KVPair {
@@ -104,9 +364,218 @@ export interface KVPair {
     Value: string;
 }
 /**
- * DescribeDatabases请求参数结构体
+ * 数据表配置信息
  */
-export interface DescribeDatabasesRequest {
+export interface TableBaseInfo {
+    /**
+      * 该数据表所属数据库名字
+      */
+    DatabaseName: string;
+    /**
+      * 数据表名字
+      */
+    TableName: string;
+    /**
+      * 该数据表所属数据源名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DatasourceConnectionName?: string;
+}
+/**
+ * AttachWorkGroupPolicy请求参数结构体
+ */
+export interface AttachWorkGroupPolicyRequest {
+    /**
+      * 工作组Id
+      */
+    WorkGroupId: number;
+    /**
+      * 要绑定的策略集合
+      */
+    PolicySet?: Array<Policy>;
+}
+/**
+ * CreateUser返回参数结构体
+ */
+export interface CreateUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteUser返回参数结构体
+ */
+export interface DeleteUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateStoreLocation请求参数结构体
+ */
+export interface CreateStoreLocationRequest {
+    /**
+      * 计算结果存储cos路径，如：cosn://bucketname/
+      */
+    StoreLocation: string;
+}
+/**
+ * 数据表分块信息。
+ */
+export interface Partition {
+    /**
+      * 分区列名。
+      */
+    Name: string;
+    /**
+      * 分区类型。
+      */
+    Type: string;
+    /**
+      * 对分区的描述。
+      */
+    Comment: string;
+}
+/**
+ * CreateTask请求参数结构体
+ */
+export interface CreateTaskRequest {
+    /**
+      * 计算任务，该参数中包含任务类型及其相关配置信息
+      */
+    Task: Task;
+    /**
+      * 数据库名称。任务在执行前均会USE该数据库， 除了首次建库时，其他情况建议均添加上。
+      */
+    DatabaseName?: string;
+    /**
+      * 默认数据源名称。
+      */
+    DatasourceConnectionName?: string;
+}
+/**
+ * 数据库和数据表属性信息
+ */
+export interface Property {
+    /**
+      * 属性key名称。
+      */
+    Key: string;
+    /**
+      * 属性key对应的value。
+      */
+    Value: string;
+}
+/**
+ * CreateTable请求参数结构体
+ */
+export interface CreateTableRequest {
+    /**
+      * 数据表配置信息
+      */
+    TableInfo: TableInfo;
+}
+/**
+ * DescribeWorkGroups返回参数结构体
+ */
+export interface DescribeWorkGroupsResponse {
+    /**
+      * 工作组总数
+      */
+    TotalCount: number;
+    /**
+      * 工作组信息集合
+      */
+    WorkGroupSet: Array<WorkGroupInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUsers请求参数结构体
+ */
+export interface DescribeUsersRequest {
+    /**
+      * 查询的用户Id，和CAM侧Uin匹配
+      */
+    UserId?: string;
+    /**
+      * 偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认20，最大值100
+      */
+    Limit?: number;
+    /**
+      * 排序字段，支持如下字段类型，create-time
+      */
+    SortBy?: string;
+    /**
+      * 排序方式，desc表示正序，asc表示反序， 默认为asc
+      */
+    Sorting?: string;
+}
+/**
+ * DescribeScripts请求参数结构体
+ */
+export interface DescribeScriptsRequest {
+    /**
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 按字段排序，支持如下字段类型，update-time
+      */
+    SortBy?: string;
+    /**
+      * 排序方式，desc表示正序，asc表示反序
+      */
+    Sorting?: string;
+    /**
+      * 过滤条件，如下支持的过滤类型，传参Name应为其一
+script-id - String - （过滤条件）script-id取值形如：157de0d1-26b4-4df2-a2d0-b64afc406c25。
+script-name-keyword - String - （过滤条件）数据表名称,形如：script-test。
+      */
+    Filters?: Array<Filter>;
+}
+/**
+ * DeleteUsersFromWorkGroup返回参数结构体
+ */
+export interface DeleteUsersFromWorkGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * AddUsersToWorkGroup请求参数结构体
+ */
+export interface AddUsersToWorkGroupRequest {
+    /**
+      * 要操作的工作组和用户信息
+      */
+    AddInfo: UserIdSetOfWorkGroupId;
+}
+/**
+ * DescribeStoreLocation请求参数结构体
+ */
+export declare type DescribeStoreLocationRequest = null;
+/**
+ * DescribeViews请求参数结构体
+ */
+export interface DescribeViewsRequest {
+    /**
+      * 列出该数据库下所属数据表。
+      */
+    DatabaseName: string;
     /**
       * 返回数量，默认为10，最大值为100。
       */
@@ -116,39 +585,92 @@ export interface DescribeDatabasesRequest {
       */
     Offset?: number;
     /**
-      * 模糊匹配，库名关键字。
+      * 过滤条件，如下支持的过滤类型，传参Name应为其一
+view-name - String - （过滤条件）数据表名称,形如：view-001。
+view-id - String - （过滤条件）view id形如：12342。
       */
-    KeyWord?: string;
+    Filters?: Array<Filter>;
     /**
-      * 数据源唯名称，该名称可以通过DescribeDatasourceConnection接口查询到。默认为CosDataCatalog
+      * 数据库所属的数据源名称
       */
     DatasourceConnectionName?: string;
 }
 /**
- * DescribeTable请求参数结构体
+ * 授权用户信息
  */
-export interface DescribeTableRequest {
+export interface UserInfo {
     /**
-      * 查询对象表名称
+      * 用户Id，和CAM侧Uin匹配
       */
-    TableName: string;
+    UserId: string;
     /**
-      * 查询表所在的数据库名称。
+      * 用户描述
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DatabaseName: string;
+    UserDescription: string;
     /**
-      * 查询表所在的数据源名称
+      * 单独给用户绑定的权限集合
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DatasourceConnectionName?: string;
+    PolicySet: Array<Policy>;
+    /**
+      * 创建者
+      */
+    Creator: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 关联的工作组集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkGroupSet: Array<WorkGroupMessage>;
+    /**
+      * 是否是管理员账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsOwner: boolean;
 }
 /**
- * 数据格式其它类型。
+ * AttachWorkGroupPolicy返回参数结构体
  */
-export interface Other {
+export interface AttachWorkGroupPolicyResponse {
     /**
-      * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Format: string;
+    RequestId?: string;
+}
+/**
+ * ModifyWorkGroup返回参数结构体
+ */
+export interface ModifyWorkGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * AttachUserPolicy请求参数结构体
+ */
+export interface AttachUserPolicyRequest {
+    /**
+      * 用户Id，和CAM侧Uin匹配
+      */
+    UserId: string;
+    /**
+      * 鉴权策略集合
+      */
+    PolicySet?: Array<Policy>;
+}
+/**
+ * CancelTask请求参数结构体
+ */
+export interface CancelTaskRequest {
+    /**
+      * 任务Id，全局唯一
+      */
+    TaskId: string;
 }
 /**
  * 任务实例。
@@ -221,13 +743,339 @@ export interface TaskResponseInfo {
     TaskType: string;
 }
 /**
- * DescribeViews返回参数结构体
+ * 文本格式
  */
-export interface DescribeViewsResponse {
+export interface TextFile {
     /**
-      * 视图对象列表。
+      * 文本类型，本参数取值为TextFile。
       */
-    ViewList: Array<ViewResponseInfo>;
+    Format: string;
+    /**
+      * 处理文本用的正则表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Regex: string;
+}
+/**
+ * BindWorkGroupsToUser返回参数结构体
+ */
+export interface BindWorkGroupsToUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeStoreLocation返回参数结构体
+ */
+export interface DescribeStoreLocationResponse {
+    /**
+      * 返回用户设置的结果存储位置路径，如果未设置则返回空字符串：""
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StoreLocation: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteScript请求参数结构体
+ */
+export interface DeleteScriptRequest {
+    /**
+      * 脚本id，其可以通过DescribeScripts接口提取
+      */
+    ScriptIds: Array<string>;
+}
+/**
+ * SQL语句对象
+ */
+export interface Execution {
+    /**
+      * 自动生成SQL语句。
+      */
+    SQL: string;
+}
+/**
+ * CreateTable返回参数结构体
+ */
+export interface CreateTableResponse {
+    /**
+      * 生成的建表执行语句对象。
+      */
+    Execution: Execution;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateScript请求参数结构体
+ */
+export interface CreateScriptRequest {
+    /**
+      * 脚本名称，最大不能超过255个字符。
+      */
+    ScriptName: string;
+    /**
+      * base64编码后的sql语句
+      */
+    SQLStatement: string;
+    /**
+      * 脚本描述， 不能超过50个字符
+      */
+    ScriptDesc?: string;
+    /**
+      * 数据库名称
+      */
+    DatabaseName?: string;
+}
+/**
+ * BindWorkGroupsToUser请求参数结构体
+ */
+export interface BindWorkGroupsToUserRequest {
+    /**
+      * 绑定的用户和工作组信息
+      */
+    AddInfo: WorkGroupIdSetOfUserId;
+}
+/**
+ * 数据表列信息。
+ */
+export interface Column {
+    /**
+      * 列名称，不区分大小写，最大支持25个字符。
+      */
+    Name: string;
+    /**
+      * 列类型，支持如下类型定义:
+string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array<data_type>|map<primitive_type, data_type>|struct<col_name : data_type [COMMENT col_comment], ...>|uniontype<data_type, data_type, ...>。
+      */
+    Type: string;
+    /**
+      * 对该类的注释。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Comment?: string;
+}
+/**
+ * 查询列表过滤条件参数
+ */
+export interface Filter {
+    /**
+      * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑或（OR）关系。
+      */
+    Name: string;
+    /**
+      * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+      */
+    Values: Array<string>;
+}
+/**
+ * DescribeUsers返回参数结构体
+ */
+export interface DescribeUsersResponse {
+    /**
+      * 用户总数
+      */
+    TotalCount: number;
+    /**
+      * 用户集合
+      */
+    UserSet: Array<UserInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 数据表数据格式。
+ */
+export interface DataFormat {
+    /**
+      * 文本格式，TextFile。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TextFile: TextFile;
+    /**
+      * 文本格式，CSV。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CSV: CSV;
+    /**
+      * 文本格式，Json。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Json: Other;
+    /**
+      * Parquet格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Parquet: Other;
+    /**
+      * ORC格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ORC: Other;
+    /**
+      * AVRO格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AVRO: Other;
+}
+/**
+ * 查询视图信息对象
+ */
+export interface ViewResponseInfo {
+    /**
+      * 视图基本信息。
+      */
+    ViewBaseInfo: ViewBaseInfo;
+    /**
+      * 视图列信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Columns: Array<Column>;
+    /**
+      * 视图属性信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Properties: Array<Property>;
+    /**
+      * 视图创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 视图更新时间。
+      */
+    ModifiedTime: string;
+}
+/**
+ * CreateUser请求参数结构体
+ */
+export interface CreateUserRequest {
+    /**
+      * 用户Id，当前主账号的子账号Uin，和CAM侧匹配
+      */
+    UserId: string;
+    /**
+      * 用户描述
+      */
+    UserDescription?: string;
+    /**
+      * 绑定到用户的权限集合
+      */
+    PolicySet?: Array<Policy>;
+}
+/**
+ * ModifyWorkGroup请求参数结构体
+ */
+export interface ModifyWorkGroupRequest {
+    /**
+      * 工作组Id
+      */
+    WorkGroupId: number;
+    /**
+      * 工作组描述
+      */
+    WorkGroupDescription: string;
+}
+/**
+ * CancelTask返回参数结构体
+ */
+export interface CancelTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 返回数据表的相关信息。
+ */
+export interface TableInfo {
+    /**
+      * 数据表配置信息。
+      */
+    TableBaseInfo: TableBaseInfo;
+    /**
+      * 数据表格式。每次入参可选如下其一的KV结构，[TextFile，CSV，Json, Parquet, ORC, AVRD]。
+      */
+    DataFormat: DataFormat;
+    /**
+      * 数据表列信息。
+      */
+    Columns: Array<Column>;
+    /**
+      * 数据表分块信息。
+      */
+    Partitions: Array<Partition>;
+    /**
+      * 数据存储路径。当前仅支持cos路径，格式如下：cosn://bucket-name/filepath。
+      */
+    Location: string;
+}
+/**
+ * 同一个用户绑定的工作组集合
+ */
+export interface WorkGroupIdSetOfUserId {
+    /**
+      * 用户Id，和CAM侧Uin匹配
+      */
+    UserId: string;
+    /**
+      * 工作组Id集合
+      */
+    WorkGroupIds: Array<number>;
+}
+/**
+ * CreateWorkGroup返回参数结构体
+ */
+export interface CreateWorkGroupResponse {
+    /**
+      * 工作组Id，全局唯一
+      */
+    WorkGroupId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTables请求参数结构体
+ */
+export interface DescribeTablesRequest {
+    /**
+      * 列出该数据库下所属数据表。
+      */
+    DatabaseName: string;
+    /**
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 数据偏移量，从0开始，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件，如下支持的过滤类型，传参Name应为其一
+table-name - String - （过滤条件）数据表名称,形如：table-001。
+table-id - String - （过滤条件）table id形如：12342。
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 指定查询的数据源名称，默认为CosDataCatalog
+      */
+    DatasourceConnectionName?: string;
+}
+/**
+ * DescribeDatabases返回参数结构体
+ */
+export interface DescribeDatabasesResponse {
+    /**
+      * 数据库对象列表。
+      */
+    DatabaseList: Array<DatabaseResponseInfo>;
     /**
       * 实例总数。
       */
@@ -236,6 +1084,113 @@ export interface DescribeViewsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 数据库对象
+ */
+export interface DatabaseInfo {
+    /**
+      * 数据库名称。
+      */
+    DatabaseName: string;
+    /**
+      * 数据库描述信息，长度 0~256。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Comment?: string;
+    /**
+      * 数据库属性列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Properties?: Array<Property>;
+}
+/**
+ * UnbindWorkGroupsFromUser请求参数结构体
+ */
+export interface UnbindWorkGroupsFromUserRequest {
+    /**
+      * 解绑的工作组Id和用户Id的关联关系
+      */
+    AddInfo: WorkGroupIdSetOfUserId;
+}
+/**
+ * DescribeTable请求参数结构体
+ */
+export interface DescribeTableRequest {
+    /**
+      * 查询对象表名称
+      */
+    TableName: string;
+    /**
+      * 查询表所在的数据库名称。
+      */
+    DatabaseName: string;
+    /**
+      * 查询表所在的数据源名称
+      */
+    DatasourceConnectionName?: string;
+}
+/**
+ * 数据格式其它类型。
+ */
+export interface Other {
+    /**
+      * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
+      */
+    Format: string;
+}
+/**
+ * CSV类型数据格式
+ */
+export interface CSV {
+    /**
+      * 压缩格式，["Snappy", "Gzip", "None"选一]。
+      */
+    CodeCompress?: string;
+    /**
+      * CSV序列化及反序列化数据结构。
+      */
+    CSVSerde?: CSVSerde;
+    /**
+      * 标题行，默认为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeadLines?: number;
+    /**
+      * 格式，默认值为CSV
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Format?: string;
+}
+/**
+ * DeleteUsersFromWorkGroup请求参数结构体
+ */
+export interface DeleteUsersFromWorkGroupRequest {
+    /**
+      * 要删除的用户信息
+      */
+    AddInfo: UserIdSetOfWorkGroupId;
+}
+/**
+ * 权限对象
+ */
+export interface Policy {
+    /**
+      * 需要授权的数据源名称，*代表拥有全部数据源权限
+      */
+    Catalog: string;
+    /**
+      * 需要授权的数据库名称，*代表拥有全部数据库名称
+      */
+    Database: string;
+    /**
+      * 需要授权的表名称，*代表拥有全部表权限
+      */
+    Table: string;
+    /**
+      * 授权的操作，当前只支持“ALL”
+      */
+    Operation: string;
 }
 /**
  * CreateTask返回参数结构体
@@ -252,26 +1207,33 @@ export interface CreateTaskResponse {
     RequestId?: string;
 }
 /**
- * 数据库和数据表属性信息
+ * DescribeWorkGroups请求参数结构体
  */
-export interface Property {
+export interface DescribeWorkGroupsRequest {
     /**
-      * 属性key名称。
+      * 查询的工作组Id
       */
-    Key: string;
+    WorkGroupId?: number;
     /**
-      * 属性key对应的value。
+      * 过滤条件，当前仅支持按照工作组名称进行模糊搜索。Key为workgroup-name
       */
-    Value: string;
-}
-/**
- * DeleteScript请求参数结构体
- */
-export interface DeleteScriptRequest {
+    Filters?: Array<Filter>;
     /**
-      * 脚本id，其可以通过DescribeScripts接口提取
+      * 偏移量，默认为0
       */
-    ScriptIds: Array<string>;
+    Offset?: number;
+    /**
+      * 返回数量，默认20，最大值100
+      */
+    Limit?: number;
+    /**
+      * 排序字段，支持如下字段类型，create-time
+      */
+    SortBy?: string;
+    /**
+      * 排序方式，desc表示正序，asc表示反序， 默认为asc
+      */
+    Sorting?: string;
 }
 /**
  * DescribeTable返回参数结构体
@@ -281,15 +1243,6 @@ export interface DescribeTableResponse {
       * 数据表对象
       */
     Table: TableResponseInfo;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateStoreLocation返回参数结构体
- */
-export interface CreateStoreLocationResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -340,74 +1293,18 @@ export interface TableResponseInfo {
     InputFormat: string;
 }
 /**
- * CreateScript返回参数结构体
+ * AddUsersToWorkGroup返回参数结构体
  */
-export interface CreateScriptResponse {
+export interface AddUsersToWorkGroupResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * 任务类型，任务如SQL查询等。
+ * DetachUserPolicy返回参数结构体
  */
-export interface Task {
-    /**
-      * SQL查询任务
-      */
-    SQLTask?: SQLTask;
-    /**
-      * Spark SQL查询任务
-      */
-    SparkSQLTask?: SQLTask;
-}
-/**
- * DescribeDatabases返回参数结构体
- */
-export interface DescribeDatabasesResponse {
-    /**
-      * 数据库对象列表。
-      */
-    DatabaseList: Array<DatabaseResponseInfo>;
-    /**
-      * 实例总数。
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * SQL语句对象
- */
-export interface Execution {
-    /**
-      * 自动生成SQL语句。
-      */
-    SQL: string;
-}
-/**
- * DeleteScript返回参数结构体
- */
-export interface DeleteScriptResponse {
-    /**
-      * 删除的脚本数量
-      */
-    ScriptsAffected: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateTable返回参数结构体
- */
-export interface CreateTableResponse {
-    /**
-      * 生成的建表执行语句对象。
-      */
-    Execution: Execution;
+export interface DetachUserPolicyResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -427,285 +1324,30 @@ export interface CreateDatabaseResponse {
     RequestId?: string;
 }
 /**
- * DescribeTables返回参数结构体
+ * UnbindWorkGroupsFromUser返回参数结构体
  */
-export interface DescribeTablesResponse {
-    /**
-      * 数据表对象列表。
-      */
-    TableList: Array<TableResponseInfo>;
-    /**
-      * 实例总数。
-      */
-    TotalCount: number;
+export interface UnbindWorkGroupsFromUserResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * DescribeTasks返回参数结构体
+ * CreateWorkGroup请求参数结构体
  */
-export interface DescribeTasksResponse {
+export interface CreateWorkGroupRequest {
     /**
-      * 任务对象列表。
+      * 工作组名称
       */
-    TaskList: Array<TaskResponseInfo>;
+    WorkGroupName: string;
     /**
-      * 实例总数。
+      * 工作组描述
       */
-    TotalCount: number;
+    WorkGroupDescription?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 工作组绑定的鉴权策略集合
       */
-    RequestId?: string;
-}
-/**
- * CreateScript请求参数结构体
- */
-export interface CreateScriptRequest {
-    /**
-      * 脚本名称，最大不能超过255个字符。
-      */
-    ScriptName: string;
-    /**
-      * base64编码后的sql语句
-      */
-    SQLStatement: string;
-    /**
-      * 脚本描述， 不能超过50个字符
-      */
-    ScriptDesc?: string;
-    /**
-      * 数据库名称
-      */
-    DatabaseName?: string;
-}
-/**
- * 数据表分块信息。
- */
-export interface Partition {
-    /**
-      * 分区列名。
-      */
-    Name: string;
-    /**
-      * 分区类型。
-      */
-    Type: string;
-    /**
-      * 对分区的描述。
-      */
-    Comment: string;
-}
-/**
- * 返回数据表的相关信息。
- */
-export interface TableInfo {
-    /**
-      * 数据表配置信息。
-      */
-    TableBaseInfo: TableBaseInfo;
-    /**
-      * 数据表格式。每次入参可选如下其一的KV结构，[TextFile，CSV，Json, Parquet, ORC, AVRD]。
-      */
-    DataFormat: DataFormat;
-    /**
-      * 数据表列信息。
-      */
-    Columns: Array<Column>;
-    /**
-      * 数据表分块信息。
-      */
-    Partitions: Array<Partition>;
-    /**
-      * 数据存储路径。当前仅支持cos路径，格式如下：cosn://bucket-name/filepath。
-      */
-    Location: string;
-}
-/**
- * 数据表列信息。
- */
-export interface Column {
-    /**
-      * 列名称，不区分大小写，最大支持25个字符。
-      */
-    Name: string;
-    /**
-      * 列类型，支持如下类型定义:
-string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array<data_type>|map<primitive_type, data_type>|struct<col_name : data_type [COMMENT col_comment], ...>|uniontype<data_type, data_type, ...>。
-      */
-    Type: string;
-    /**
-      * 对该类的注释。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Comment?: string;
-}
-/**
- * CreateStoreLocation请求参数结构体
- */
-export interface CreateStoreLocationRequest {
-    /**
-      * 计算结果存储cos路径，如：cosn://bucketname/
-      */
-    StoreLocation: string;
-}
-/**
- * 查询列表过滤条件参数
- */
-export interface Filter {
-    /**
-      * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑或（OR）关系。
-      */
-    Name: string;
-    /**
-      * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
-      */
-    Values: Array<string>;
-}
-/**
- * CreateTask请求参数结构体
- */
-export interface CreateTaskRequest {
-    /**
-      * 计算任务，该参数中包含任务类型及其相关配置信息
-      */
-    Task: Task;
-    /**
-      * 数据库名称。任务在执行前均会USE该数据库， 除了首次建库时，其他情况建议均添加上。
-      */
-    DatabaseName?: string;
-    /**
-      * 默认数据源名称。
-      */
-    DatasourceConnectionName?: string;
-}
-/**
- * 数据表配置信息
- */
-export interface TableBaseInfo {
-    /**
-      * 该数据表所属数据库名字
-      */
-    DatabaseName: string;
-    /**
-      * 数据表名字
-      */
-    TableName: string;
-    /**
-      * 该数据表所属数据源名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DatasourceConnectionName?: string;
-}
-/**
- * 查询视图信息对象
- */
-export interface ViewResponseInfo {
-    /**
-      * 视图基本信息。
-      */
-    ViewBaseInfo: ViewBaseInfo;
-    /**
-      * 视图列信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Columns: Array<Column>;
-    /**
-      * 视图属性信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Properties: Array<Property>;
-    /**
-      * 视图创建时间。
-      */
-    CreateTime: string;
-    /**
-      * 视图更新时间。
-      */
-    ModifiedTime: string;
-}
-/**
- * 文本格式
- */
-export interface TextFile {
-    /**
-      * 文本类型，本参数取值为TextFile。
-      */
-    Format: string;
-    /**
-      * 处理文本用的正则表达式。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Regex: string;
-}
-/**
- * 数据表数据格式。
- */
-export interface DataFormat {
-    /**
-      * 文本格式，TextFile。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TextFile: TextFile;
-    /**
-      * 文本格式，CSV。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CSV: CSV;
-    /**
-      * 文本格式，Json。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Json: Other;
-    /**
-      * Parquet格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Parquet: Other;
-    /**
-      * ORC格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ORC: Other;
-    /**
-      * AVRO格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AVRO: Other;
-}
-/**
- * CSV类型数据格式
- */
-export interface CSV {
-    /**
-      * 压缩格式，["Snappy", "Gzip", "None"选一]。
-      */
-    CodeCompress?: string;
-    /**
-      * CSV序列化及反序列化数据结构。
-      */
-    CSVSerde?: CSVSerde;
-    /**
-      * 标题行，默认为0。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HeadLines?: number;
-    /**
-      * 格式，默认值为CSV
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Format?: string;
-}
-/**
- * CreateTable请求参数结构体
- */
-export interface CreateTableRequest {
-    /**
-      * 数据表配置信息
-      */
-    TableInfo: TableInfo;
+    PolicySet?: Array<Policy>;
 }
 /**
  *  SQL查询任务
@@ -721,115 +1363,35 @@ export interface SQLTask {
     Config?: Array<KVPair>;
 }
 /**
- * DescribeScripts请求参数结构体
+ * 用户部分信息
  */
-export interface DescribeScriptsRequest {
+export interface UserMessage {
     /**
-      * 返回数量，默认为10，最大值为100。
+      * 用户Id，和CAM侧Uin匹配
       */
-    Limit?: number;
+    UserId: string;
     /**
-      * 偏移量，默认为0。
+      * 用户描述
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Offset?: number;
+    UserDescription: string;
     /**
-      * 按字段排序，支持如下字段类型，update-time
+      * 创建者
       */
-    SortBy?: string;
+    Creator: string;
     /**
-      * 排序方式，desc表示正序，asc表示反序
+      * 创建时间
       */
-    Sorting?: string;
-    /**
-      * 过滤条件，如下支持的过滤类型，传参Name应为其一
-script-id - String - （过滤条件）script-id取值形如：157de0d1-26b4-4df2-a2d0-b64afc406c25。
-script-name-keyword - String - （过滤条件）数据表名称,形如：script-test。
-      */
-    Filters?: Array<Filter>;
+    CreateTime: string;
 }
 /**
- * CSV序列化及反序列化数据结构
+ * AttachUserPolicy返回参数结构体
  */
-export interface CSVSerde {
+export interface AttachUserPolicyResponse {
     /**
-      * CSV序列化转义符，默认为"\\"，最长8个字符，如 Escape: "/\"
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Escape?: string;
-    /**
-      * CSV序列化字段域符，默认为"'"，最长8个字符, 如 Quote: "\""
-      */
-    Quote?: string;
-    /**
-      * CSV序列化分隔符，默认为"\t"，最长8个字符, 如 Separator: "\t"
-      */
-    Separator?: string;
-}
-/**
- * DescribeTables请求参数结构体
- */
-export interface DescribeTablesRequest {
-    /**
-      * 列出该数据库下所属数据表。
-      */
-    DatabaseName: string;
-    /**
-      * 返回数量，默认为10，最大值为100。
-      */
-    Limit?: number;
-    /**
-      * 数据偏移量，从0开始，默认为0。
-      */
-    Offset?: number;
-    /**
-      * 过滤条件，如下支持的过滤类型，传参Name应为其一
-table-name - String - （过滤条件）数据表名称,形如：table-001。
-table-id - String - （过滤条件）table id形如：12342。
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 指定查询的数据源名称，默认为CosDataCatalog
-      */
-    DatasourceConnectionName?: string;
-}
-/**
- * CreateDatabase请求参数结构体
- */
-export interface CreateDatabaseRequest {
-    /**
-      * 数据库基础信息
-      */
-    DatabaseInfo: DatabaseInfo;
-    /**
-      * 数据源名称，默认为CosDataCatalog
-      */
-    DatasourceConnectionName?: string;
-}
-/**
- * DescribeViews请求参数结构体
- */
-export interface DescribeViewsRequest {
-    /**
-      * 列出该数据库下所属数据表。
-      */
-    DatabaseName: string;
-    /**
-      * 返回数量，默认为10，最大值为100。
-      */
-    Limit?: number;
-    /**
-      * 数据偏移量，从0开始，默认为0。
-      */
-    Offset?: number;
-    /**
-      * 过滤条件，如下支持的过滤类型，传参Name应为其一
-view-name - String - （过滤条件）数据表名称,形如：view-001。
-view-id - String - （过滤条件）view id形如：12342。
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 数据库所属的数据源名称
-      */
-    DatasourceConnectionName?: string;
+    RequestId?: string;
 }
 /**
  * DescribeScripts返回参数结构体
@@ -848,6 +1410,49 @@ export interface DescribeScriptsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DetachWorkGroupPolicy请求参数结构体
+ */
+export interface DetachWorkGroupPolicyRequest {
+    /**
+      * 工作组Id
+      */
+    WorkGroupId: number;
+    /**
+      * 解绑的权限集合
+      */
+    PolicySet?: Array<Policy>;
+}
+/**
+ * DescribeViews返回参数结构体
+ */
+export interface DescribeViewsResponse {
+    /**
+      * 视图对象列表。
+      */
+    ViewList: Array<ViewResponseInfo>;
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyUser请求参数结构体
+ */
+export interface ModifyUserRequest {
+    /**
+      * 用户Id，和CAM侧Uin匹配
+      */
+    UserId: string;
+    /**
+      * 用户描述
+      */
+    UserDescription: string;
 }
 /**
  * 数据库对象
@@ -877,17 +1482,4 @@ export interface DatabaseResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ModifiedTime?: string;
-}
-/**
- * 视图基本配置信息
- */
-export interface ViewBaseInfo {
-    /**
-      * 该视图所属数据库名字
-      */
-    DatabaseName: string;
-    /**
-      * 视图名称
-      */
-    ViewName: string;
 }

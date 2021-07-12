@@ -8,13 +8,29 @@ export interface DescribeUserGroupRequest {
     UserGroupId: string;
 }
 /**
- * RemoveUserFromUserGroup返回参数结构体
+ * ListApplicationAuthorizations请求参数结构体
  */
-export interface RemoveUserFromUserGroupResponse {
+export interface ListApplicationAuthorizationsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 查询类型，包含用户（User）、用户组（UserGroup）、组织机构（OrgNode）。
       */
-    RequestId?: string;
+    EntityType: string;
+    /**
+      * 查询条件，支持多搜索条件组合、多数据范围匹配的搜索。同时支持查询信息内容全匹配、部分匹配、范围匹配等多种查询方式，具体查询方式为：双引号（""）表示全匹配、以星号（* ) 结尾表示字段部分匹配。如果该字段为空，则默认查全量表。
+      */
+    SearchCondition?: AuthorizationInfoSearchCriteria;
+    /**
+      * 排序条件集合。可排序的属性支持：上次修改时间（lastModifiedDate）。如果该字段为空，则默认按照应用名称正向排序。
+      */
+    Sort?: SortCondition;
+    /**
+      * 分页偏移量。Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询。
+      */
+    Offset?: number;
+    /**
+      * 分页读取数量。Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询。
+      */
+    Limit?: number;
 }
 /**
  * DescribeOrgNode返回参数结构体
@@ -78,6 +94,60 @@ export interface CreateOrgNodeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ListApplications请求参数结构体
+ */
+export interface ListApplicationsRequest {
+    /**
+      * 查询条件，支持多搜索条件组合、多数据范围匹配的搜索。同时支持查询信息内容全匹配、部分匹配、范围匹配等多种查询方式，具体查询方式为：双引号（""）表示全匹配、以星号（* ) 结尾表示字段部分匹配。如果该字段为空，则默认查全量表。
+      */
+    SearchCondition?: ApplicationInfoSearchCriteria;
+    /**
+      * 排序条件集合。可排序的属性支持：应用名字（displayName）、创建时间（createdDate）、上次修改时间（lastModifiedDate）。如果该字段为空，则默认按照应用名字正向排序。
+      */
+    Sort?: SortCondition;
+    /**
+      * 分页偏移量。Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询。
+      */
+    Offset?: number;
+    /**
+      * 分页读取数量。Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询。
+      */
+    Limit?: number;
+}
+/**
+ * 用户属性搜索条件。
+ */
+export interface UserSearchCriteria {
+    /**
+      * 用户名，长度限制：64个字符。
+      */
+    UserName?: string;
+    /**
+      * 用户手机号。
+      */
+    Phone?: string;
+    /**
+      * 用户邮箱。
+      */
+    Email?: string;
+    /**
+      * 用户状态，取值 NORMAL （正常）、FREEZE （已冻结）、LOCKED （已锁定）或 NOT_ENABLED （未启用）。
+      */
+    Status?: string;
+    /**
+      * 用户创建时间，遵循 ISO 8601 标准。
+      */
+    CreationTime?: string;
+    /**
+      * 用户上次更新时间区间。
+      */
+    LastUpdateTime?: string;
+    /**
+      * 名称匹配搜索，匹配范围包括：用户名称、用户ID。
+      */
+    Keyword?: string;
 }
 /**
  * ListUsersInOrgNode返回参数结构体
@@ -185,6 +255,34 @@ export interface OrgNodeChildInfo {
     CreatedDate: string;
 }
 /**
+ * 排序条件。
+ */
+export interface SortCondition {
+    /**
+      * 排序属性。
+      */
+    SortKey: string;
+    /**
+      * 排序顺序，ASC为正向排序，DESC为反向排序。
+      */
+    SortOrder: string;
+}
+/**
+ * 应用信息列表。
+ */
+export interface InheritedForm {
+    /**
+      * 用户所在的用户组ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserGroupIds: Array<string>;
+    /**
+      * 用户所在的机构节点ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgNodeIds: Array<string>;
+}
+/**
  * ListAuthorizedApplicationsToUser请求参数结构体
  */
 export interface ListAuthorizedApplicationsToUserRequest {
@@ -230,6 +328,25 @@ export interface CreateUserResponse {
     RequestId?: string;
 }
 /**
+ * ListUsers返回参数结构体
+ */
+export interface ListUsersResponse {
+    /**
+      * 查询返回的相关用户列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserList: Array<UserInformation>;
+    /**
+      * 返回查询用户的总数量，仅当入参IncludeTotal等于true时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ListAuthorizedApplicationsToUserGroup请求参数结构体
  */
 export interface ListAuthorizedApplicationsToUserGroupRequest {
@@ -239,32 +356,61 @@ export interface ListAuthorizedApplicationsToUserGroupRequest {
     UserGroupId: string;
 }
 /**
- * ListUsersInOrgNode请求参数结构体
+ * ListUserGroups返回参数结构体
  */
-export interface ListUsersInOrgNodeRequest {
+export interface ListUserGroupsResponse {
     /**
-      * 机构节点ID，是机构节点全局唯一标识，长度限制：64个字符。如果为空默认读取机构根节点下用户信息。
+      * 返回的用户组列表。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    OrgNodeId?: string;
+    UserGroupList: Array<UserGroupInformation>;
     /**
-      * 限制读取子节点信息层数。当读取层数为空或0时，默认仅读取当前机构节点信息。当读取层数为1时，读取本机构节点以及其第一层子节点信息。
+      * 返回的用户组信息总数。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    IncludeOrgNodeChildInfo?: boolean;
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
- * 应用信息列表。
+ * DescribePublicKey请求参数结构体
  */
-export interface InheritedForm {
+export interface DescribePublicKeyRequest {
     /**
-      * 用户所在的用户组ID列表。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 应用ID，是应用的全局唯一标识。
       */
-    UserGroupIds: Array<string>;
+    ApplicationId: string;
+}
+/**
+ * 返回的授权关系信息。
+ */
+export interface AuthorizationInfo {
     /**
-      * 用户所在的机构节点ID列表。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 应用唯一ID。
       */
-    OrgNodeIds: Array<string>;
+    AppId: string;
+    /**
+      * 应用名称。
+      */
+    AppName: string;
+    /**
+      * 类型名称。
+      */
+    EntityName: string;
+    /**
+      * 类型唯一ID。
+      */
+    EntityId: string;
+    /**
+      * 上次更新时间，符合 ISO8601 标准。
+      */
+    LastModifiedDate: string;
+    /**
+      * 授权类型唯一ID。
+      */
+    AuthorizationId: string;
 }
 /**
  * CreateUserGroup返回参数结构体
@@ -314,6 +460,27 @@ export interface ListUsersInUserGroupResponse {
     RequestId?: string;
 }
 /**
+ * ListUserGroups请求参数结构体
+ */
+export interface ListUserGroupsRequest {
+    /**
+      * 查询条件，支持多搜索条件组合、多数据范围匹配的搜索。同时支持查询信息内容全匹配、部分匹配、范围匹配等多种查询方式，具体查询方式为：双引号（""）表示全匹配、以星号（* ) 结尾表示字段部分匹配。如果该字段为空，则默认查全量表。
+      */
+    SearchCondition?: UserGroupInfoSearchCriteria;
+    /**
+      * 排序条件集合。可排序的属性支持：用户组名称（DisplayName）、用户组ID（UserGroupId）、上次更新时间（LastModifiedDate）。如果该字段为空，则默认按照用户组名称正向排序。
+      */
+    Sort?: SortCondition;
+    /**
+      * 分页偏移量。Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询。
+      */
+    Offset?: number;
+    /**
+      * 分页读取数量。Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询。
+      */
+    Limit?: number;
+}
+/**
  * AddUserToUserGroup请求参数结构体
  */
 export interface AddUserToUserGroupRequest {
@@ -347,9 +514,63 @@ export interface ApplicationAuthorizationInfo {
     InheritedForm: InheritedForm;
 }
 /**
- * UpdateOrgNode返回参数结构体
+ * 应用信息列表。
  */
-export interface UpdateOrgNodeResponse {
+export interface ApplicationInformation {
+    /**
+      * 应用ID，是应用的全局唯一标识。
+      */
+    ApplicationId: string;
+    /**
+      * 应用展示名称，长度限制：64个字符。 默认与应用名字相同。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisplayName: string;
+    /**
+      * 应用创建时间，符合 ISO8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedDate: string;
+    /**
+      * 上次更新时间，符合 ISO8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastModifiedDate: string;
+    /**
+      * 应用状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppStatus: boolean;
+    /**
+      * 应用图标。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Icon: string;
+    /**
+      * 应用类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationType: string;
+    /**
+      * 客户端id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientId: string;
+}
+/**
+ * ListApplicationAuthorizations返回参数结构体
+ */
+export interface ListApplicationAuthorizationsResponse {
+    /**
+      * 返回的应用授权信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthorizationInfoList: Array<AuthorizationInfo>;
+    /**
+      * 返回的应用信息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -420,6 +641,37 @@ export interface DescribeApplicationResponse {
     RequestId?: string;
 }
 /**
+ * 返回的用户组列表。
+ */
+export interface UserGroupInformation {
+    /**
+      * 用户组ID。
+      */
+    UserGroupId: string;
+    /**
+      * 用户组名称。
+      */
+    UserGroupName: string;
+    /**
+      * 上次更新时间，符合 ISO8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastModifiedDate: string;
+}
+/**
+ * 应用属性搜索条件。
+ */
+export interface ApplicationInfoSearchCriteria {
+    /**
+      * 应用匹配搜索关键字，匹配范围包括：应用名称、应用ID。
+      */
+    Keyword?: string;
+    /**
+      * 应用类型。ApplicationType的取值范围有：OAUTH2、JWT、CAS、SAML2、FORM、OIDC、APIGW。
+      */
+    ApplicationType?: string;
+}
+/**
  * ListAuthorizedApplicationsToUser返回参数结构体
  */
 export interface ListAuthorizedApplicationsToUserResponse {
@@ -475,6 +727,16 @@ export interface UpdateOrgNodeRequest {
       * 用户自定义可选填的机构节点对外ID，如果非空则校验此ID的唯一性。
       */
     CustomizedOrgNodeId?: string;
+}
+/**
+ * 用户属性搜索条件。
+
+ */
+export interface AuthorizationInfoSearchCriteria {
+    /**
+      * 名称匹配搜索，当查询类型为用户时，匹配范围包括：用户名称、应用名称；当查询类型为用户组时，匹配范围包括：用户组名称、应用名称；当查询类型为组织机构时，匹配范围包括：组织机构名称、应用名称。
+      */
+    Keyword?: string;
 }
 /**
  * 机构子节点下的用户信息列表
@@ -673,6 +935,19 @@ export interface RemoveUserFromUserGroupRequest {
     UserGroupId: string;
 }
 /**
+ * ListUsersInOrgNode请求参数结构体
+ */
+export interface ListUsersInOrgNodeRequest {
+    /**
+      * 机构节点ID，是机构节点全局唯一标识，长度限制：64个字符。如果为空默认读取机构根节点下用户信息。
+      */
+    OrgNodeId?: string;
+    /**
+      * 限制读取子节点信息层数。当读取层数为空或0时，默认仅读取当前机构节点信息。当读取层数为1时，读取本机构节点以及其第一层子节点信息。
+      */
+    IncludeOrgNodeChildInfo?: boolean;
+}
+/**
  * ListAuthorizedApplicationsToUserGroup返回参数结构体
  */
 export interface ListAuthorizedApplicationsToUserGroupResponse {
@@ -687,6 +962,68 @@ export interface ListAuthorizedApplicationsToUserGroupResponse {
     RequestId?: string;
 }
 /**
+ * ListUsers请求参数结构体
+ */
+export interface ListUsersRequest {
+    /**
+      * 用户属性搜索条件，可查询条件包括：用户名、手机号码，邮箱、用户锁定状态、用户冻结状态、创建时间、上次修改时间，支持多种属性组合作为查询条件。同时支持查询信息内容全匹配、部分匹配、范围匹配等多种查询方式，具体查询方式为：双引号（“”）表示全匹配、以星号（*）结尾表示字段部分匹配、中括号以逗号分隔（[Min，Max]）表示闭区间查询、大括号以逗号分隔（{Min，Max}）表示开区间查询，中括号与大括号可以配合使用（例如：{Min，Max]表示最小值开区间，最大值闭区间查询）。范围匹配支持使用星号（例如{20,*]表示查询范围为大于20的所有数据）。范围查询同时支持时间段查询，支持的属性包括创建时间 （CreationTime）、上次修改时间（LastUpdateTime），查询的时间格式遵循 ISO 8601 标准，例如：2021-01-13T09:44:07.182+0000。
+      */
+    SearchCondition?: UserSearchCriteria;
+    /**
+      * 指定期望返回的用户属性，默认返回所有用户内置属性。内置用户属性包括：用户UUID（UserId）、用户昵称（DisplayName）、用户名字（UserName）、手机号（Phone）、邮箱（Email）、用户状态（Status）、用户组（SubjectGroups）机构路径（OrgPath）、备注（Description）、创建时间 （CreationTime）、上次修改时间（LastUpdateTime）、上次登录时间（LastLoginTime）。
+      */
+    ExpectedFields?: Array<string>;
+    /**
+      * 排序条件集合。可排序的属性支持：用户名字（UserName）、手机号（Phone）、邮箱（Email）、用户状态（Status）、创建时间 （CreationTime）、上次修改时间（LastUpdateTime）、上次登录时间（LastLoginTime）。
+      */
+    Sort?: SortCondition;
+    /**
+      * 分页偏移量，默认为0。Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询，即只返回最多1000个用户。
+      */
+    Offset?: number;
+    /**
+      * 分页读取数量，默认为50，最大值为100。 Offset 和 Limit 两个字段需配合使用，即其中一个指定了，另一个必须指定。 如果不指定以上参数，则表示不进行分页查询，即只返回最多1000个用户。
+      */
+    Limit?: number;
+    /**
+      * 是否查看搜索结果的总数，默认该选项为false不查看。
+      */
+    IncludeTotal?: boolean;
+}
+/**
+ * UpdateOrgNode返回参数结构体
+ */
+export interface UpdateOrgNodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePublicKey返回参数结构体
+ */
+export interface DescribePublicKeyResponse {
+    /**
+      * jwt验证签名所用的公钥信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicKey: string;
+    /**
+      * jwt的密钥id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyId: string;
+    /**
+      * 应用ID，是应用的全局唯一标识。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteUserGroup请求参数结构体
  */
 export interface DeleteUserGroupRequest {
@@ -694,6 +1031,15 @@ export interface DeleteUserGroupRequest {
       * 用户组ID，是用户组的全局唯一标识。
       */
     UserGroupId: string;
+}
+/**
+ * 用户组属性搜索条件。
+ */
+export interface UserGroupInfoSearchCriteria {
+    /**
+      * 名称匹配搜索，匹配范围包括：用户组名称、用户组ID。
+      */
+    Keyword?: string;
 }
 /**
  * DescribeUserInfo请求参数结构体
@@ -738,6 +1084,71 @@ export interface DescribeUserGroupResponse {
 export interface ListUserGroupsOfUserRequest {
     /**
       * 用户ID，是用户的全局唯一标识。
+      */
+    UserId: string;
+}
+/**
+ * 用户信息列表。
+ */
+export interface UserInformation {
+    /**
+      * 用户名，长度限制：32个字符。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
+    /**
+      * 用户状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 昵称，长度限制：64个字符。 默认与用户名相同。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisplayName: string;
+    /**
+      * 用户备注，长度限制：512个字符。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 用户上次更新时间，遵循 ISO 8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastUpdateTime: string;
+    /**
+      * 用户创建时间，遵循 ISO 8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime: string;
+    /**
+      * 用户所属组织机构路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgPath: string;
+    /**
+      * 带国家号的用户手机号，例如+86-00000000000。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Phone: string;
+    /**
+      * 用户所属用户组ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubjectGroups: Array<string>;
+    /**
+      * 用户邮箱。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Email: string;
+    /**
+      * 用户上次登录时间，遵循 ISO 8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastLoginTime: string;
+    /**
+      * 用户ID，是用户全局唯一标识，长度限制：64个字符。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     UserId: string;
 }
@@ -844,4 +1255,32 @@ export interface ModifyUserInfoRequest {
       * 密码是否需要重置，为空默认为false不需要重置密码。
       */
     PwdNeedReset?: boolean;
+}
+/**
+ * ListApplications返回参数结构体
+ */
+export interface ListApplicationsResponse {
+    /**
+      * 返回的应用信息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 返回的应用信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationInfoList: Array<ApplicationInformation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RemoveUserFromUserGroup返回参数结构体
+ */
+export interface RemoveUserFromUserGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }

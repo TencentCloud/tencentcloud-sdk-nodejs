@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWxCloudBaseRunSubNets", req, cb);
     }
     /**
+     * 创建或修改安全网关路由
+     */
+    async EstablishWxGatewayRoute(req, cb) {
+        return this.request("EstablishWxGatewayRoute", req, cb);
+    }
+    /**
      * 创建托管域名
      */
     async CreateHostingDomain(req, cb) {
@@ -235,10 +241,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostingDomainTask", req, cb);
     }
     /**
-     * 创建或修改安全网关路由
+     * 删除服务版本
      */
-    async EstablishWxGatewayRoute(req, cb) {
-        return this.request("EstablishWxGatewayRoute", req, cb);
+    async DeleteCloudBaseRunServerVersion(req, cb) {
+        return this.request("DeleteCloudBaseRunServerVersion", req, cb);
     }
     /**
      * 查询指定指标的配额使用量

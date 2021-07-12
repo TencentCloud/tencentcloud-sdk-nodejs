@@ -201,191 +201,14 @@ export interface DescribeExtensionUploadInfoRequest {
 }
 
 /**
- * DescribeCloudBaseRunServerVersion返回参数结构体
+ * DeleteCloudBaseRunServerVersion返回参数结构体
  */
-export interface DescribeCloudBaseRunServerVersionResponse {
+export interface DeleteCloudBaseRunServerVersionResponse {
   /**
-   * 版本名称
-   */
-  VersionName: string
-
-  /**
-      * 备注
+      * 返回结果，succ为成功
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark: string
-
-  /**
-      * Dockefile的路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DockerfilePath: string
-
-  /**
-      * DockerBuild的目录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BuildDir: string
-
-  /**
-   * 请使用CPUSize
-   */
-  Cpu: number
-
-  /**
-   * 请使用MemSize
-   */
-  Mem: number
-
-  /**
-   * 副本最小值
-   */
-  MinNum: number
-
-  /**
-   * 副本最大值
-   */
-  MaxNum: number
-
-  /**
-   * 策略类型
-   */
-  PolicyType: string
-
-  /**
-   * 策略阈值
-   */
-  PolicyThreshold: number
-
-  /**
-      * 环境变量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvParams: string
-
-  /**
-   * 创建时间
-   */
-  CreatedTime: string
-
-  /**
-   * 更新时间
-   */
-  UpdatedTime: string
-
-  /**
-      * 版本的IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VersionIP: string
-
-  /**
-      * 版本的端口号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VersionPort: number
-
-  /**
-      * 版本状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 代码包的名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PackageName: string
-
-  /**
-      * 代码版本的名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PackageVersion: string
-
-  /**
-      * 枚举（package/repository/image)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UploadType: string
-
-  /**
-      * Repo的类型(gitlab/github/coding)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RepoType: string
-
-  /**
-      * 地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Repo: string
-
-  /**
-      * 分支
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Branch: string
-
-  /**
-      * 服务名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServerName: string
-
-  /**
-      * 是否对于外网开放
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsPublic: boolean
-
-  /**
-      * vpc id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VpcId: string
-
-  /**
-      * 子网实例id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubnetIds: Array<string>
-
-  /**
-      * 日志采集路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CustomLogs: string
-
-  /**
-      * 监听端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContainerPort: number
-
-  /**
-      * 延迟多长时间开始健康检查（单位s）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InitialDelaySeconds: number
-
-  /**
-      * 镜像地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ImageUrl: string
-
-  /**
-      * CPU 大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CpuSize: number
-
-  /**
-      * MEM 大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MemSize: number
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1018,18 +841,196 @@ export interface ModifyDatabaseACLRequest {
 }
 
 /**
- * DestroyStaticStore请求参数结构体
+ * DescribeCloudBaseRunServerVersion返回参数结构体
  */
-export interface DestroyStaticStoreRequest {
+export interface DescribeCloudBaseRunServerVersionResponse {
   /**
-   * 环境ID
+   * 版本名称
    */
-  EnvId: string
+  VersionName: string
 
   /**
-   * cdn域名
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * Dockefile的路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DockerfilePath: string
+
+  /**
+      * DockerBuild的目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BuildDir: string
+
+  /**
+   * 请使用CPUSize
    */
-  CdnDomain?: string
+  Cpu: number
+
+  /**
+   * 请使用MemSize
+   */
+  Mem: number
+
+  /**
+   * 副本最小值
+   */
+  MinNum: number
+
+  /**
+   * 副本最大值
+   */
+  MaxNum: number
+
+  /**
+   * 策略类型
+   */
+  PolicyType: string
+
+  /**
+   * 策略阈值
+   */
+  PolicyThreshold: number
+
+  /**
+      * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvParams: string
+
+  /**
+   * 创建时间
+   */
+  CreatedTime: string
+
+  /**
+   * 更新时间
+   */
+  UpdatedTime: string
+
+  /**
+      * 版本的IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionIP: string
+
+  /**
+      * 版本的端口号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionPort: number
+
+  /**
+      * 版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 代码包的名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageName: string
+
+  /**
+      * 代码版本的名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageVersion: string
+
+  /**
+      * 枚举（package/repository/image)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UploadType: string
+
+  /**
+      * Repo的类型(gitlab/github/coding)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoType: string
+
+  /**
+      * 地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Repo: string
+
+  /**
+      * 分支
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Branch: string
+
+  /**
+      * 服务名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerName: string
+
+  /**
+      * 是否对于外网开放
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsPublic: boolean
+
+  /**
+      * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 子网实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetIds: Array<string>
+
+  /**
+      * 日志采集路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomLogs: string
+
+  /**
+      * 监听端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerPort: number
+
+  /**
+      * 延迟多长时间开始健康检查（单位s）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InitialDelaySeconds: number
+
+  /**
+      * 镜像地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageUrl: string
+
+  /**
+      * CPU 大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CpuSize: number
+
+  /**
+      * MEM 大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MemSize: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1238,6 +1239,21 @@ export interface CommonServiceAPIRequest {
    * 需要转发的云API参数，要转成JSON格式
    */
   JSONData?: string
+}
+
+/**
+ * DestroyStaticStore请求参数结构体
+ */
+export interface DestroyStaticStoreRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * cdn域名
+   */
+  CdnDomain?: string
 }
 
 /**
@@ -1937,33 +1953,38 @@ export interface CreateWxCloudBaseRunEnvResponse {
 }
 
 /**
- * EstablishWxGatewayRoute请求参数结构体
+ * DeleteCloudBaseRunServerVersion请求参数结构体
  */
-export interface EstablishWxGatewayRouteRequest {
+export interface DeleteCloudBaseRunServerVersionRequest {
   /**
-   * 网关id
+   * 环境ID
    */
-  GatewayId: string
+  EnvId: string
 
   /**
    * 服务名称
    */
-  GatewayRouteName: string
+  ServerName: string
 
   /**
-   * 服务地址
+   * 版本名称
    */
-  GatewayRouteAddr: string
+  VersionName: string
 
   /**
-   * 协议类型 http/https
+   * 是否删除服务，只有最后一个版本的时候，才生效。
    */
-  GatewayRouteProtocol: string
+  IsDeleteServer?: boolean
 
   /**
-   * 服务描述
+   * 只有删除服务的时候，才会起作用
    */
-  GatewayRouteDesc?: string
+  IsDeleteImage?: boolean
+
+  /**
+   * 操作备注
+   */
+  OperatorRemark?: string
 }
 
 /**
@@ -2674,6 +2695,36 @@ export interface DescribeCloudBaseRunVersionRequest {
    * 版本名称
    */
   VersionName: string
+}
+
+/**
+ * EstablishWxGatewayRoute请求参数结构体
+ */
+export interface EstablishWxGatewayRouteRequest {
+  /**
+   * 网关id
+   */
+  GatewayId: string
+
+  /**
+   * 服务名称
+   */
+  GatewayRouteName: string
+
+  /**
+   * 服务地址
+   */
+  GatewayRouteAddr: string
+
+  /**
+   * 协议类型 http/https
+   */
+  GatewayRouteProtocol: string
+
+  /**
+   * 服务描述
+   */
+  GatewayRouteDesc?: string
 }
 
 /**

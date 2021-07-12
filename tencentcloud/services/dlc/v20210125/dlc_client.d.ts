@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTasksRequest, DescribeDatabasesRequest, DescribeTableRequest, DescribeViewsResponse, CreateTaskResponse, DeleteScriptRequest, DescribeTableResponse, CreateStoreLocationResponse, CreateScriptResponse, DescribeDatabasesResponse, DeleteScriptResponse, CreateTableResponse, CreateDatabaseResponse, DescribeTablesResponse, DescribeTasksResponse, CreateScriptRequest, CreateStoreLocationRequest, CreateTaskRequest, CreateTableRequest, DescribeScriptsRequest, DescribeTablesRequest, CreateDatabaseRequest, DescribeViewsRequest, DescribeScriptsResponse } from "./dlc_models";
+import { DescribeDatabasesRequest, DeleteUserRequest, CreateStoreLocationResponse, CreateScriptResponse, DescribeTablesResponse, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DeleteWorkGroupResponse, DescribeTasksResponse, DetachWorkGroupPolicyResponse, CreateDatabaseRequest, DescribeTasksRequest, DeleteWorkGroupRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, CreateStoreLocationRequest, CreateTaskRequest, CreateTableRequest, DescribeWorkGroupsResponse, DescribeUsersRequest, DescribeScriptsRequest, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, DescribeViewsRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, AttachUserPolicyRequest, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeUsersResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, CreateWorkGroupResponse, DescribeTablesRequest, DescribeDatabasesResponse, UnbindWorkGroupsFromUserRequest, DescribeTableRequest, DeleteUsersFromWorkGroupRequest, CreateTaskResponse, DescribeWorkGroupsRequest, DescribeTableResponse, AddUsersToWorkGroupResponse, DetachUserPolicyResponse, CreateDatabaseResponse, UnbindWorkGroupsFromUserResponse, CreateWorkGroupRequest, AttachUserPolicyResponse, DescribeScriptsResponse, DetachWorkGroupPolicyRequest, DescribeViewsResponse, ModifyUserRequest } from "./dlc_models";
 /**
  * dlc client
  * @class
@@ -8,17 +8,77 @@ import { DescribeTasksRequest, DescribeDatabasesRequest, DescribeTableRequest, D
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 解绑工作组鉴权策略
+     */
+    DetachWorkGroupPolicy(req: DetachWorkGroupPolicyRequest, cb?: (error: string, rep: DetachWorkGroupPolicyResponse) => void): Promise<DetachWorkGroupPolicyResponse>;
+    /**
      * 本接口（CreateTask）用于创建sql查询任务。
      */
     CreateTask(req: CreateTaskRequest, cb?: (error: string, rep: CreateTaskResponse) => void): Promise<CreateTaskResponse>;
     /**
-     * 本接口（DescribeDatabases）用于查询数据库列表。
+     * 添加用户到工作组
      */
-    DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
+    AddUsersToWorkGroup(req: AddUsersToWorkGroupRequest, cb?: (error: string, rep: AddUsersToWorkGroupResponse) => void): Promise<AddUsersToWorkGroupResponse>;
+    /**
+     * 绑定工作组到用户
+     */
+    BindWorkGroupsToUser(req: BindWorkGroupsToUserRequest, cb?: (error: string, rep: BindWorkGroupsToUserResponse) => void): Promise<BindWorkGroupsToUserResponse>;
+    /**
+     * 本接口（CreateTable）用于生成建表SQL。
+     */
+    CreateTable(req: CreateTableRequest, cb?: (error: string, rep: CreateTableResponse) => void): Promise<CreateTableResponse>;
+    /**
+     * 获取用户列表信息
+     */
+    DescribeUsers(req: DescribeUsersRequest, cb?: (error: string, rep: DescribeUsersResponse) => void): Promise<DescribeUsersResponse>;
+    /**
+     * 该接口（DescribeScripts）用于获取所有SQL查询。
+     */
+    DescribeScripts(req: DescribeScriptsRequest, cb?: (error: string, rep: DescribeScriptsResponse) => void): Promise<DescribeScriptsResponse>;
+    /**
+     * 删除工作组
+     */
+    DeleteWorkGroup(req: DeleteWorkGroupRequest, cb?: (error: string, rep: DeleteWorkGroupResponse) => void): Promise<DeleteWorkGroupResponse>;
     /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
      */
     CreateStoreLocation(req: CreateStoreLocationRequest, cb?: (error: string, rep: CreateStoreLocationResponse) => void): Promise<CreateStoreLocationResponse>;
+    /**
+     * 从工作组中删除用户
+     */
+    DeleteUsersFromWorkGroup(req: DeleteUsersFromWorkGroupRequest, cb?: (error: string, rep: DeleteUsersFromWorkGroupResponse) => void): Promise<DeleteUsersFromWorkGroupResponse>;
+    /**
+     * 创建工作组
+     */
+    CreateWorkGroup(req: CreateWorkGroupRequest, cb?: (error: string, rep: CreateWorkGroupResponse) => void): Promise<CreateWorkGroupResponse>;
+    /**
+     * 解绑用户上的用户组
+     */
+    UnbindWorkGroupsFromUser(req: UnbindWorkGroupsFromUserRequest, cb?: (error: string, rep: UnbindWorkGroupsFromUserResponse) => void): Promise<UnbindWorkGroupsFromUserResponse>;
+    /**
+     * 绑定鉴权策略到工作组
+     */
+    AttachWorkGroupPolicy(req: AttachWorkGroupPolicyRequest, cb?: (error: string, rep: AttachWorkGroupPolicyResponse) => void): Promise<AttachWorkGroupPolicyResponse>;
+    /**
+     * 获取工作组列表
+     */
+    DescribeWorkGroups(req: DescribeWorkGroupsRequest, cb?: (error: string, rep: DescribeWorkGroupsResponse) => void): Promise<DescribeWorkGroupsResponse>;
+    /**
+     * 取消任务执行
+     */
+    CancelTask(req: CancelTaskRequest, cb?: (error: string, rep: CancelTaskResponse) => void): Promise<CancelTaskResponse>;
+    /**
+     * 该接口（CreateScript）用于创建sql脚本。
+     */
+    CreateScript(req: CreateScriptRequest, cb?: (error: string, rep: CreateScriptResponse) => void): Promise<CreateScriptResponse>;
+    /**
+     * 本接口（CreateDatabase）用于生成建库SQL语句。
+     */
+    CreateDatabase(req: CreateDatabaseRequest, cb?: (error: string, rep: CreateDatabaseResponse) => void): Promise<CreateDatabaseResponse>;
+    /**
+     * 修改工作组信息
+     */
+    ModifyWorkGroup(req: ModifyWorkGroupRequest, cb?: (error: string, rep: ModifyWorkGroupResponse) => void): Promise<ModifyWorkGroupResponse>;
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
      */
@@ -28,10 +88,6 @@ export declare class Client extends AbstractClient {
      */
     DescribeTable(req: DescribeTableRequest, cb?: (error: string, rep: DescribeTableResponse) => void): Promise<DescribeTableResponse>;
     /**
-     * 本接口（CreateTable）用于生成建表SQL。
-     */
-    CreateTable(req: CreateTableRequest, cb?: (error: string, rep: CreateTableResponse) => void): Promise<CreateTableResponse>;
-    /**
      * 该接口（DescribleTasks）用于查询任务列表
      */
     DescribeTasks(req: DescribeTasksRequest, cb?: (error: string, rep: DescribeTasksResponse) => void): Promise<DescribeTasksResponse>;
@@ -40,17 +96,33 @@ export declare class Client extends AbstractClient {
      */
     DeleteScript(req: DeleteScriptRequest, cb?: (error: string, rep: DeleteScriptResponse) => void): Promise<DeleteScriptResponse>;
     /**
-     * 该接口（CreateScript）用于创建sql脚本。
+     * 修改用户信息
      */
-    CreateScript(req: CreateScriptRequest, cb?: (error: string, rep: CreateScriptResponse) => void): Promise<CreateScriptResponse>;
+    ModifyUser(req: ModifyUserRequest, cb?: (error: string, rep: ModifyUserResponse) => void): Promise<ModifyUserResponse>;
     /**
-     * 该接口（DescribeScripts）用于获取所有SQL查询。
+     * 删除用户
      */
-    DescribeScripts(req: DescribeScriptsRequest, cb?: (error: string, rep: DescribeScriptsResponse) => void): Promise<DescribeScriptsResponse>;
+    DeleteUser(req: DeleteUserRequest, cb?: (error: string, rep: DeleteUserResponse) => void): Promise<DeleteUserResponse>;
     /**
-     * 本接口（CreateDatabase）用于生成建库SQL语句。
+     * 本接口（DescribeDatabases）用于查询数据库列表。
      */
-    CreateDatabase(req: CreateDatabaseRequest, cb?: (error: string, rep: CreateDatabaseResponse) => void): Promise<CreateDatabaseResponse>;
+    DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
+    /**
+     * 绑定鉴权策略到用户
+     */
+    AttachUserPolicy(req: AttachUserPolicyRequest, cb?: (error: string, rep: AttachUserPolicyResponse) => void): Promise<AttachUserPolicyResponse>;
+    /**
+     * 查询计算结果存储位置。
+     */
+    DescribeStoreLocation(req?: DescribeStoreLocationRequest, cb?: (error: string, rep: DescribeStoreLocationResponse) => void): Promise<DescribeStoreLocationResponse>;
+    /**
+     * 创建用户
+     */
+    CreateUser(req: CreateUserRequest, cb?: (error: string, rep: CreateUserResponse) => void): Promise<CreateUserResponse>;
+    /**
+     * 解绑用户鉴权策略
+     */
+    DetachUserPolicy(req: DetachUserPolicyRequest, cb?: (error: string, rep: DetachUserPolicyResponse) => void): Promise<DetachUserPolicyResponse>;
     /**
      * 本接口（DescribleTables）用于查询数据表列表。
      */

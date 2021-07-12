@@ -1854,7 +1854,7 @@ export interface KillMasterGroupRequest {
     c.数字0-9
     d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/
       */
-  Password?: string
+  Password: string
 }
 
 /**

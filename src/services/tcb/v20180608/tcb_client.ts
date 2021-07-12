@@ -24,7 +24,7 @@ import {
   DescribeCloudBaseRunConfForGateWayRequest,
   DescribeCloudBaseRunServerVersionRequest,
   DescribeExtensionUploadInfoRequest,
-  DescribeCloudBaseRunServerVersionResponse,
+  DeleteCloudBaseRunServerVersionResponse,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
   DescribePostpayPackageFreeQuotasRequest,
@@ -47,7 +47,7 @@ import {
   DescribePostpayFreeQuotasRequest,
   CloudBaseRunImageInfo,
   ModifyDatabaseACLRequest,
-  DestroyStaticStoreRequest,
+  DescribeCloudBaseRunServerVersionResponse,
   EndUserInfo,
   DescribeEndUserLoginStatisticResponse,
   DescribeHostingDomainTaskRequest,
@@ -56,6 +56,7 @@ import {
   SmsFreeQuota,
   FunctionInfo,
   CommonServiceAPIRequest,
+  DestroyStaticStoreRequest,
   CreateWxCloudBaseRunEnvRequest,
   ModifyCloudBaseRunServerFlowConfRequest,
   CreateStaticStoreRequest,
@@ -87,7 +88,7 @@ import {
   CreateHostingDomainResponse,
   EstablishWxGatewayRouteResponse,
   CreateWxCloudBaseRunEnvResponse,
-  EstablishWxGatewayRouteRequest,
+  DeleteCloudBaseRunServerVersionRequest,
   CreateCloudBaseRunServerVersionRequest,
   LoginStatistic,
   DescribeWxCloudBaseRunSubNetsRequest,
@@ -106,6 +107,7 @@ import {
   DescribeCloudBaseRunResourceForExtendResponse,
   CreateAndDeployCloudBaseProjectRequest,
   DescribeCloudBaseRunVersionRequest,
+  EstablishWxGatewayRouteRequest,
   DescribeCloudBaseRunConfForGateWayResponse,
   DatabasesInfo,
   CloudBaseSecurityContext,
@@ -180,6 +182,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWxCloudBaseRunSubNetsResponse) => void
   ): Promise<DescribeWxCloudBaseRunSubNetsResponse> {
     return this.request("DescribeWxCloudBaseRunSubNets", req, cb)
+  }
+
+  /**
+   * 创建或修改安全网关路由
+   */
+  async EstablishWxGatewayRoute(
+    req: EstablishWxGatewayRouteRequest,
+    cb?: (error: string, rep: EstablishWxGatewayRouteResponse) => void
+  ): Promise<EstablishWxGatewayRouteResponse> {
+    return this.request("EstablishWxGatewayRoute", req, cb)
   }
 
   /**
@@ -516,13 +528,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建或修改安全网关路由
+   * 删除服务版本
    */
-  async EstablishWxGatewayRoute(
-    req: EstablishWxGatewayRouteRequest,
-    cb?: (error: string, rep: EstablishWxGatewayRouteResponse) => void
-  ): Promise<EstablishWxGatewayRouteResponse> {
-    return this.request("EstablishWxGatewayRoute", req, cb)
+  async DeleteCloudBaseRunServerVersion(
+    req: DeleteCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: DeleteCloudBaseRunServerVersionResponse) => void
+  ): Promise<DeleteCloudBaseRunServerVersionResponse> {
+    return this.request("DeleteCloudBaseRunServerVersion", req, cb)
   }
 
   /**

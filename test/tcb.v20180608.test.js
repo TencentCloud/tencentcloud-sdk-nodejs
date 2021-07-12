@@ -28,6 +28,16 @@ it("tcb.v20180608.DescribeWxCloudBaseRunSubNets", async function () {
     }
 })
 
+it("tcb.v20180608.EstablishWxGatewayRoute", async function () {
+    try {
+       const data = await client.EstablishWxGatewayRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
@@ -358,9 +368,9 @@ it("tcb.v20180608.DescribeHostingDomainTask", async function () {
     }
 })
 
-it("tcb.v20180608.EstablishWxGatewayRoute", async function () {
+it("tcb.v20180608.DeleteCloudBaseRunServerVersion", async function () {
     try {
-       const data = await client.EstablishWxGatewayRoute({})
+       const data = await client.DeleteCloudBaseRunServerVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

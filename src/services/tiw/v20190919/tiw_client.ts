@@ -47,6 +47,7 @@ import {
   DescribeVideoGenerationTaskResponse,
   DescribeWhiteboardPushCallbackResponse,
   CustomLayout,
+  Interrupt,
   VideoInfo,
   SetTranscodeCallbackKeyResponse,
   Concat,

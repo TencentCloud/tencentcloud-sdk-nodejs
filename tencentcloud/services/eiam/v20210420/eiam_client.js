@@ -28,16 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("eiam.tencentcloudapi.com", "2021-04-20", clientConfig);
     }
     /**
-     * 根据机构节点ID读取机构节点信息
+     * 获取用户组信息
      */
-    async DescribeOrgNode(req, cb) {
-        return this.request("DescribeOrgNode", req, cb);
+    async DescribeUserGroup(req, cb) {
+        return this.request("DescribeUserGroup", req, cb);
     }
     /**
-     * 通过用户名或用户 id 删除用户。
+     * 获取JWT公钥信息。
      */
-    async DeleteUser(req, cb) {
-        return this.request("DeleteUser", req, cb);
+    async DescribePublicKey(req, cb) {
+        return this.request("DescribePublicKey", req, cb);
+    }
+    /**
+     * 获取用户列表信息。
+     */
+    async ListUsers(req, cb) {
+        return this.request("ListUsers", req, cb);
+    }
+    /**
+     * 通过用户组ID获得被授权访问的应用列表。
+     */
+    async ListAuthorizedApplicationsToUserGroup(req, cb) {
+        return this.request("ListAuthorizedApplicationsToUserGroup", req, cb);
+    }
+    /**
+     * 应用授权关系列表（含搜索条件匹配）。
+     */
+    async ListApplicationAuthorizations(req, cb) {
+        return this.request("ListApplicationAuthorizations", req, cb);
     }
     /**
      * 删除一个用户组
@@ -46,46 +64,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUserGroup", req, cb);
     }
     /**
-     * 获取用户组中的用户列表
-     */
-    async ListUsersInUserGroup(req, cb) {
-        return this.request("ListUsersInUserGroup", req, cb);
-    }
-    /**
-     * 通过机构节点ID获得被授权访问的应用列表。
-     */
-    async ListAuthorizedApplicationsToOrgNode(req, cb) {
-        return this.request("ListAuthorizedApplicationsToOrgNode", req, cb);
-    }
-    /**
-     * 获取用户所在的用户组列表
-     */
-    async ListUserGroupsOfUser(req, cb) {
-        return this.request("ListUserGroupsOfUser", req, cb);
-    }
-    /**
-     * 通过用户ID获得被授权访问的应用列表。
-     */
-    async ListAuthorizedApplicationsToUser(req, cb) {
-        return this.request("ListAuthorizedApplicationsToUser", req, cb);
-    }
-    /**
-     * 获取用户组信息
-     */
-    async DescribeUserGroup(req, cb) {
-        return this.request("DescribeUserGroup", req, cb);
-    }
-    /**
      * 通过用户名或用户 id 冻结用户
      */
     async ModifyUserInfo(req, cb) {
         return this.request("ModifyUserInfo", req, cb);
     }
     /**
-     * 删除一个机构节点
+     * 获取用户组列表信息（包含查询条件）。
      */
-    async DeleteOrgNode(req, cb) {
-        return this.request("DeleteOrgNode", req, cb);
+    async ListUserGroups(req, cb) {
+        return this.request("ListUserGroups", req, cb);
     }
     /**
      * 加入用户到用户组
@@ -94,16 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUserToUserGroup", req, cb);
     }
     /**
-     * 通过用户名或用户 id 搜索用户
+     * 获取用户组中的用户列表
      */
-    async DescribeUserInfo(req, cb) {
-        return this.request("DescribeUserInfo", req, cb);
-    }
-    /**
-     * 新建用户组
-     */
-    async CreateUserGroup(req, cb) {
-        return this.request("CreateUserGroup", req, cb);
+    async ListUsersInUserGroup(req, cb) {
+        return this.request("ListUsersInUserGroup", req, cb);
     }
     /**
      * 新建一个用户
@@ -112,16 +94,76 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUser", req, cb);
     }
     /**
-     * 获取一个应用的信息。
+     * 通过用户ID获得被授权访问的应用列表。
      */
-    async DescribeApplication(req, cb) {
-        return this.request("DescribeApplication", req, cb);
+    async ListAuthorizedApplicationsToUser(req, cb) {
+        return this.request("ListAuthorizedApplicationsToUser", req, cb);
+    }
+    /**
+     * 根据机构节点ID读取机构节点信息
+     */
+    async DescribeOrgNode(req, cb) {
+        return this.request("DescribeOrgNode", req, cb);
+    }
+    /**
+     * 通过用户名或用户 id 搜索用户
+     */
+    async DescribeUserInfo(req, cb) {
+        return this.request("DescribeUserInfo", req, cb);
     }
     /**
      * 从用户组中移除用户
      */
     async RemoveUserFromUserGroup(req, cb) {
         return this.request("RemoveUserFromUserGroup", req, cb);
+    }
+    /**
+     * 新建一个机构节点
+     */
+    async CreateOrgNode(req, cb) {
+        return this.request("CreateOrgNode", req, cb);
+    }
+    /**
+     * 通过用户名或用户 id 删除用户。
+     */
+    async DeleteUser(req, cb) {
+        return this.request("DeleteUser", req, cb);
+    }
+    /**
+     * 获取应用列表信息。
+     */
+    async ListApplications(req, cb) {
+        return this.request("ListApplications", req, cb);
+    }
+    /**
+     * 通过机构节点ID获得被授权访问的应用列表。
+     */
+    async ListAuthorizedApplicationsToOrgNode(req, cb) {
+        return this.request("ListAuthorizedApplicationsToOrgNode", req, cb);
+    }
+    /**
+     * 删除一个机构节点
+     */
+    async DeleteOrgNode(req, cb) {
+        return this.request("DeleteOrgNode", req, cb);
+    }
+    /**
+     * 新建用户组
+     */
+    async CreateUserGroup(req, cb) {
+        return this.request("CreateUserGroup", req, cb);
+    }
+    /**
+     * 获取用户所在的用户组列表
+     */
+    async ListUserGroupsOfUser(req, cb) {
+        return this.request("ListUserGroupsOfUser", req, cb);
+    }
+    /**
+     * 获取一个应用的信息。
+     */
+    async DescribeApplication(req, cb) {
+        return this.request("DescribeApplication", req, cb);
     }
     /**
      * 根据机构节点ID读取节点下用户
@@ -134,18 +176,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateOrgNode(req, cb) {
         return this.request("UpdateOrgNode", req, cb);
-    }
-    /**
-     * 通过用户组ID获得被授权访问的应用列表。
-     */
-    async ListAuthorizedApplicationsToUserGroup(req, cb) {
-        return this.request("ListAuthorizedApplicationsToUserGroup", req, cb);
-    }
-    /**
-     * 新建一个机构节点
-     */
-    async CreateOrgNode(req, cb) {
-        return this.request("CreateOrgNode", req, cb);
     }
 }
 exports.Client = Client;
