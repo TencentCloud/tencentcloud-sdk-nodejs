@@ -55,7 +55,9 @@ const clientConfig = {
 }
 // 实例化要请求产品(以cvm为例)的client对象
 const client = new CvmClient(clientConfig)
-// 通过client对象调用想要访问的接口，需要传入请求对象以及响应回调函数
+// 通过client对象调用想要访问的接口（Action），需要传入请求对象（Params）以及响应回调函数
+// 即：client.Action(Params).then(res => console.log(res), err => console.error(err))
+// 如：查询云服务器可用区列表
 client.DescribeZones().then(
   (data) => {
     console.log(data)
