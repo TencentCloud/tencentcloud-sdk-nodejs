@@ -268,10 +268,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSafeAuthFlagColl", req, cb);
     }
     /**
-     * 获取密钥最近使用情况
+     * 查询账户摘要
      */
-    async GetSecurityLastUsed(req, cb) {
-        return this.request("GetSecurityLastUsed", req, cb);
+    async GetAccountSummary(req, cb) {
+        return this.request("GetAccountSummary", req, cb);
     }
     /**
      * 该接口（ListPolicyVersions）用于获取策略版本列表
@@ -284,6 +284,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSafeAuthFlag(req, cb) {
         return this.request("DescribeSafeAuthFlag", req, cb);
+    }
+    /**
+     * 查询安全设置(国际站)
+     */
+    async DescribeSafeAuthFlagIntl(req, cb) {
+        return this.request("DescribeSafeAuthFlagIntl", req, cb);
     }
     /**
      * 本接口（GetRole）用于获取指定角色的详细信息。
@@ -368,6 +374,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListWeChatWorkSubAccounts(req, cb) {
         return this.request("ListWeChatWorkSubAccounts", req, cb);
+    }
+    /**
+     * 获取密钥最近使用情况
+     */
+    async GetSecurityLastUsed(req, cb) {
+        return this.request("GetSecurityLastUsed", req, cb);
     }
     /**
      * 本接口（AttachGroupPolicy）可用于绑定策略到用户组。

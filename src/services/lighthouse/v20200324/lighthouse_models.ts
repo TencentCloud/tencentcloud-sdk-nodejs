@@ -494,6 +494,11 @@ export interface ZoneInfo {
    * 可用区中文名称
    */
   ZoneName: string
+
+  /**
+   * 实例购买页可用区展示标签
+   */
+  InstanceDisplayLabel: string
 }
 
 /**

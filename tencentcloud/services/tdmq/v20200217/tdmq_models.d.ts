@@ -1221,11 +1221,11 @@ export interface DescribeSubscriptionsResponse {
     /**
       * 订阅者集合数组。
       */
-    SubscriptionSets?: Array<Subscription>;
+    SubscriptionSets: Array<Subscription>;
     /**
       * 数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1346,11 +1346,11 @@ export interface DescribeEnvironmentRolesResponse {
     /**
       * 记录数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 命名空间角色集合。
       */
-    EnvironmentRoleSets?: Array<EnvironmentRole>;
+    EnvironmentRoleSets: Array<EnvironmentRole>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1629,6 +1629,11 @@ export interface Environment {
       * 命名空间名称
       */
     NamespaceName: string;
+    /**
+      * Topic数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicNum: number;
 }
 /**
  * CreateCmqQueue返回参数结构体

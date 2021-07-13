@@ -164,6 +164,11 @@ export interface CheckBankCardInformationRequest {
    * 银行卡号。
    */
   BankCard: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -251,6 +256,11 @@ export interface IdCardVerificationRequest {
    * 姓名
    */
   Name: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -297,22 +307,22 @@ export interface CheckBankCardInformationResponse {
 -2：验证中心服务繁忙
 -3：银行卡不存在
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述
    */
-  Description?: string
+  Description: string
 
   /**
    * 开户行
    */
-  AccountBank?: string
+  AccountBank: string
 
   /**
    * 卡性质：1. 借记卡；2. 贷记卡
    */
-  AccountType?: number
+  AccountType: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -360,52 +370,52 @@ export interface CheckIdCardInformationResponse {
   /**
    * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
    */
-  Sim?: number
+  Sim: number
 
   /**
    * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
    */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
    * 姓名
    */
-  Name?: string
+  Name: string
 
   /**
    * 性别
    */
-  Sex?: string
+  Sex: string
 
   /**
    * 民族
    */
-  Nation?: string
+  Nation: string
 
   /**
    * 出生日期
    */
-  Birth?: string
+  Birth: string
 
   /**
    * 地址
    */
-  Address?: string
+  Address: string
 
   /**
    * 身份证号
    */
-  IdNum?: string
+  IdNum: string
 
   /**
    * 身份证头像照片的base64编码，如果抠图失败会拿整张身份证做比对并返回空。
    */
-  Portrait?: string
+  Portrait: string
 
   /**
       * 告警信息，当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息，Code 告警码列表和释义：
@@ -419,12 +429,18 @@ export interface CheckIdCardInformationResponse {
 -8001 图片模糊告警
 多个会 |  隔开如 "-9101|-9106|-9104"
       */
-  Warnings?: string
+  Warnings: string
 
   /**
    * 图片质量分数，当请求Config中配置图片模糊告警该参数才有意义，取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。
    */
-  Quality?: number
+  Quality: number
+
+  /**
+      * 敏感数据加密信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Encryption: Encryption
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -770,6 +786,11 @@ export interface BankCard2EVerificationRequest {
    * 银行卡
    */
   BankCard: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -812,6 +833,11 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
       */
   Optional?: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -851,6 +877,12 @@ API 3.0 Explorer 设置方式参考：
 Config = {"CopyWarn":true,"ReshootWarn":true}
       */
   Config?: string
+
+  /**
+      * 是否需要对返回中的敏感信息进行加密。默认false。
+其中敏感信息包括：Response.IdNum、Response.Name
+      */
+  IsEncrypt?: boolean
 }
 
 /**
@@ -1327,6 +1359,11 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
    * 本接口不需要传递此参数。
    */
   Optional?: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -1724,12 +1761,12 @@ export interface BankCard2EVerificationResponse {
   '-3': '银行卡号码有误'
   '-16': '验证中心服务繁忙'
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1752,12 +1789,12 @@ export interface IdCardVerificationResponse {
 -4: 证件库服务异常
 -5: 证件库中无此身份证记录
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1813,6 +1850,11 @@ export interface CheckPhoneAndNameRequest {
    * 姓名
    */
   Name: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**

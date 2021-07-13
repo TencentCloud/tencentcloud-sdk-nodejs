@@ -515,12 +515,12 @@ export interface ModifyIncrementalMigrationRequest {
   BackupMigrationId: string
 
   /**
-   * 增量导入任务ID
+   * 增量导入任务ID，由CreateIncrementalMigration接口返回
    */
   IncrementalMigrationId: string
 
   /**
-   * 是否需要恢复，NO-不需要，YES-需要
+   * 是否需要恢复，NO-不需要，YES-需要，默认不修改增量备份导入任务是否需要恢复的属性。
    */
   IsRecovery?: string
 
@@ -660,12 +660,12 @@ export interface DeleteIncrementalMigrationRequest {
   InstanceId: string
 
   /**
-   * 备份导入任务ID
+   * 备份导入任务ID，由CreateBackupMigration接口返回
    */
   BackupMigrationId: string
 
   /**
-   * 增量备份导入任务ID
+   * 增量备份导入任务ID，由CreateIncrementalMigration接口返回
    */
   IncrementalMigrationId: string
 }
@@ -875,27 +875,27 @@ export interface DescribeIncrementalMigrationRequest {
   StatusSet?: Array<number>
 
   /**
-   * 分页，页大小
+   * 分页，页大小，默认值：100
    */
   Limit?: number
 
   /**
-   * 分页，页数
+   * 分页，页数，默认值：0
    */
   Offset?: number
 
   /**
-   * 排序字段，name,createTime,startTime,endTime
+   * 排序字段，name；createTime；startTime；endTime，默认按照createTime递增排序。
    */
   OrderBy?: string
 
   /**
-   * 排序方式，desc,asc
+   * 排序方式，desc-递减排序，asc-递增排序。默认按照asc排序，且在OrderBy为有效值时，本参数有效
    */
   OrderByType?: string
 
   /**
-   * 增量备份导入任务ID
+   * 增量备份导入任务ID，由CreateIncrementalMigration接口返回
    */
   IncrementalMigrationId?: string
 }
@@ -3047,22 +3047,22 @@ export interface DescribeBackupMigrationRequest {
   UploadType?: string
 
   /**
-   * 分页，页大小
+   * 分页，页大小，默认值：100
    */
   Limit?: number
 
   /**
-   * 分页，页数
+   * 分页，页数，默认值：0
    */
   Offset?: number
 
   /**
-   * 排序字段，name,createTime,startTime,endTime
+   * 排序字段，name；createTime；startTime；endTime，默认按照createTime递增排序。
    */
   OrderBy?: string
 
   /**
-   * 排序方式，desc,asc
+   * 排序方式，desc-递减排序，asc-递增排序。默认按照asc排序，且在OrderBy为有效值时，本参数有效
    */
   OrderByType?: string
 }
@@ -3944,12 +3944,12 @@ export interface DescribeBackupMigrationResponse {
   /**
    * 迁移任务总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 迁移任务集合
    */
-  BackupMigrationSet?: Array<Migration>
+  BackupMigrationSet: Array<Migration>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4369,7 +4369,7 @@ export interface ModifyIncrementalMigrationResponse {
   /**
    * 增量备份导入任务ID
    */
-  IncrementalMigrationId?: string
+  IncrementalMigrationId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5219,12 +5219,12 @@ export interface DescribeIncrementalMigrationResponse {
   /**
    * 增量导入任务总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 增量导入任务集合
    */
-  IncrementalMigrationSet?: Array<Migration>
+  IncrementalMigrationSet: Array<Migration>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

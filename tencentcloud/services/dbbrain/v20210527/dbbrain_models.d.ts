@@ -203,11 +203,11 @@ export interface DescribeDBDiagEventResponse {
       */
     EventId: number;
     /**
-      * 事件详情。
+      * 诊断事件详情，若无附加解释信息则输出为空。
       */
     Explanation: string;
     /**
-      * 概要。
+      * 诊断概要。
       */
     Outline: string;
     /**
@@ -223,7 +223,7 @@ export interface DescribeDBDiagEventResponse {
       */
     StartTime: string;
     /**
-      * 建议。
+      * 诊断建议，若无建议则输出为空。
       */
     Suggestions: string;
     /**
@@ -691,7 +691,7 @@ export interface DiagHistoryEventItem {
       */
     StartTime: string;
     /**
-      * 事件 ID 。
+      * 事件唯一ID 。
       */
     EventId: number;
     /**
@@ -699,26 +699,24 @@ export interface DiagHistoryEventItem {
       */
     Severity: number;
     /**
-      * 概要。
+      * 诊断概要。
       */
     Outline: string;
     /**
-      * 诊断项。
+      * 诊断项说明。
       */
     DiagItem: string;
     /**
       * 实例 ID 。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceId: string;
     /**
-      * 保留字段
+      * 保留字段。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Metric: string;
     /**
-      * 地域
-注意：此字段可能返回 null，表示取不到有效值。
+      * 地域。
       */
     Region: string;
 }
@@ -1105,12 +1103,12 @@ export interface UserProfile {
       */
     ProfileId: string;
     /**
-      * 配置类型。
+      * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProfileType: string;
     /**
-      * 配置级别，"User"或"Instance"。
+      * 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProfileLevel: string;
@@ -1129,11 +1127,11 @@ export interface UserProfile {
  */
 export interface AddUserContactRequest {
     /**
-      * 联系人姓名，大小写字母+数字+下划线，最小 2 位最大 60 位的长度， 不能以"_"开头，且联系人名保持唯一。
+      * 联系人姓名，由中英文、数字、空格、!@#$%^&*()_+-=（）组成，不能以下划线开头，长度在20以内。
       */
     Name: string;
     /**
-      * 邮箱地址，大小写字母、数字及下划线组成， 不能以"_"开头。
+      * 邮箱地址，支持大小写字母、数字、下划线及@字符， 不能以下划线开头，邮箱地址不可重复。
       */
     ContactInfo: string;
     /**
@@ -1520,7 +1518,7 @@ export interface DescribeHealthScoreRequest {
       */
     InstanceId: string;
     /**
-      * 获取健康得分的时间。
+      * 获取健康得分的时间，时间格式如：2019-09-10 12:13:14。
       */
     Time: string;
     /**
@@ -1701,11 +1699,11 @@ export interface DescribeAllUserGroupResponse {
  */
 export interface DescribeUserSqlAdviceResponse {
     /**
-      * SQL优化建议，可解析为JSON数组。
+      * SQL优化建议，可解析为JSON数组，无需优化时输出为空。
       */
     Advices: string;
     /**
-      * SQL优化建议备注，可解析为String数组。
+      * SQL优化建议备注，可解析为String数组，无需优化时输出为空。
       */
     Comments: string;
     /**
@@ -1721,11 +1719,11 @@ export interface DescribeUserSqlAdviceResponse {
       */
     Tables: string;
     /**
-      * SQL执行计划，可解析为JSON。
+      * SQL执行计划，可解析为JSON，无需优化时输出为空。
       */
     SqlPlan: string;
     /**
-      * SQL优化后的成本节约详情，可解析为JSON。
+      * SQL优化后的成本节约详情，可解析为JSON，无需优化时输出为空。
       */
     Cost: string;
     /**

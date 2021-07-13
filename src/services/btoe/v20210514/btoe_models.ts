@@ -50,7 +50,7 @@ export interface CreateImageDepositRequest {
   FileContent: string
 
   /**
-   * 对应数据Base64文件名称 test.png
+   * 带后缀的文件名称，如 test.png
    */
   FileName: string
 
@@ -90,7 +90,7 @@ export interface CreateVideoDepositRequest {
   FileContent: string
 
   /**
-   * 对应数据Base64文件名称
+   * 带后缀的文件名称，如music.mkv
    */
   FileName: string
 
@@ -130,7 +130,7 @@ export interface CreateDocDepositRequest {
   FileContent: string
 
   /**
-   * 对应数据Base64文件名称
+   * 带后缀的文件名称，如 test.doc
    */
   FileName: string
 
@@ -261,7 +261,7 @@ export interface CreateAudioDepositRequest {
   FileContent: string
 
   /**
-   * 对应数据Base64文件名称
+   * 带后缀的文件名称，如music.mp3
    */
   FileName: string
 

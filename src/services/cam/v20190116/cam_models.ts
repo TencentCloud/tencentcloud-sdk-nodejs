@@ -83,6 +83,41 @@ export interface ListAttachedRolePoliciesResponse {
 }
 
 /**
+ * 登录和敏感操作flag
+ */
+export interface LoginActionFlagIntl {
+  /**
+   * 手机
+   */
+  Phone?: number
+
+  /**
+   * 硬token
+   */
+  Token?: number
+
+  /**
+   * 软token
+   */
+  Stoken?: number
+
+  /**
+   * 微信
+   */
+  Wechat?: number
+
+  /**
+   * 自定义
+   */
+  Custom?: number
+
+  /**
+   * 邮件
+   */
+  Mail?: number
+}
+
+/**
  * ListAccessKeys请求参数结构体
  */
 export interface ListAccessKeysRequest {
@@ -334,6 +369,11 @@ export interface UpdateRoleDescriptionResponse {
    */
   RequestId?: string
 }
+
+/**
+ * GetAccountSummary请求参数结构体
+ */
+export type GetAccountSummaryRequest = null
 
 /**
  * DetachUserPolicy请求参数结构体
@@ -1899,6 +1939,46 @@ export interface UpdateUserResponse {
 }
 
 /**
+ * GetAccountSummary返回参数结构体
+ */
+export interface GetAccountSummaryResponse {
+  /**
+   * 策略数
+   */
+  Policies: number
+
+  /**
+   * 角色数
+   */
+  Roles: number
+
+  /**
+   * 身份提供商数
+   */
+  Idps: number
+
+  /**
+   * 子账户数
+   */
+  User: number
+
+  /**
+   * 分组数
+   */
+  Group: number
+
+  /**
+   * 分组用户总数
+   */
+  Member: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateServiceLinkedRole返回参数结构体
  */
 export interface CreateServiceLinkedRoleResponse {
@@ -2197,6 +2277,31 @@ export interface GetSAMLProviderResponse {
 }
 
 /**
+ * DescribeSafeAuthFlagIntl返回参数结构体
+ */
+export interface DescribeSafeAuthFlagIntlResponse {
+  /**
+   * 登录保护设置
+   */
+  LoginFlag: LoginActionFlagIntl
+
+  /**
+   * 敏感操作保护设置
+   */
+  ActionFlag: LoginActionFlagIntl
+
+  /**
+   * 异地登录保护设置
+   */
+  OffsiteFlag: OffsiteFlag
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListPolicyVersions返回参数结构体
  */
 export interface ListPolicyVersionsResponse {
@@ -2221,6 +2326,11 @@ export interface GetPolicyRequest {
    */
   PolicyId: number
 }
+
+/**
+ * DescribeSafeAuthFlagIntl请求参数结构体
+ */
+export type DescribeSafeAuthFlagIntlRequest = null
 
 /**
  * SetDefaultPolicyVersion请求参数结构体

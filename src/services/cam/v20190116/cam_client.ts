@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   SubAccountUser,
   ListAttachedRolePoliciesResponse,
+  LoginActionFlagIntl,
   ListAccessKeysRequest,
   SetMfaFlagResponse,
   DeleteUserRequest,
@@ -36,6 +37,7 @@ import {
   DeleteUserPermissionsBoundaryResponse,
   ListUsersResponse,
   UpdateRoleDescriptionResponse,
+  GetAccountSummaryRequest,
   DetachUserPolicyRequest,
   ListGroupsResponse,
   ListPolicyVersionsRequest,
@@ -111,6 +113,7 @@ import {
   DeleteSAMLProviderRequest,
   DeleteSAMLProviderResponse,
   UpdateUserResponse,
+  GetAccountSummaryResponse,
   CreateServiceLinkedRoleResponse,
   ListUsersRequest,
   ListCollaboratorsRequest,
@@ -129,8 +132,10 @@ import {
   GetPolicyVersionResponse,
   CreateRoleResponse,
   GetSAMLProviderResponse,
+  DescribeSafeAuthFlagIntlResponse,
   ListPolicyVersionsResponse,
   GetPolicyRequest,
+  DescribeSafeAuthFlagIntlRequest,
   SetDefaultPolicyVersionRequest,
   AddUserToGroupRequest,
   RemoveUserFromGroupResponse,
@@ -581,13 +586,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取密钥最近使用情况
+   * 查询账户摘要
    */
-  async GetSecurityLastUsed(
-    req: GetSecurityLastUsedRequest,
-    cb?: (error: string, rep: GetSecurityLastUsedResponse) => void
-  ): Promise<GetSecurityLastUsedResponse> {
-    return this.request("GetSecurityLastUsed", req, cb)
+  async GetAccountSummary(
+    req?: GetAccountSummaryRequest,
+    cb?: (error: string, rep: GetAccountSummaryResponse) => void
+  ): Promise<GetAccountSummaryResponse> {
+    return this.request("GetAccountSummary", req, cb)
   }
 
   /**
@@ -608,6 +613,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSafeAuthFlagResponse) => void
   ): Promise<DescribeSafeAuthFlagResponse> {
     return this.request("DescribeSafeAuthFlag", req, cb)
+  }
+
+  /**
+   * 查询安全设置(国际站)
+   */
+  async DescribeSafeAuthFlagIntl(
+    req?: DescribeSafeAuthFlagIntlRequest,
+    cb?: (error: string, rep: DescribeSafeAuthFlagIntlResponse) => void
+  ): Promise<DescribeSafeAuthFlagIntlResponse> {
+    return this.request("DescribeSafeAuthFlagIntl", req, cb)
   }
 
   /**
@@ -748,6 +763,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListWeChatWorkSubAccountsResponse) => void
   ): Promise<ListWeChatWorkSubAccountsResponse> {
     return this.request("ListWeChatWorkSubAccounts", req, cb)
+  }
+
+  /**
+   * 获取密钥最近使用情况
+   */
+  async GetSecurityLastUsed(
+    req: GetSecurityLastUsedRequest,
+    cb?: (error: string, rep: GetSecurityLastUsedResponse) => void
+  ): Promise<GetSecurityLastUsedResponse> {
+    return this.request("GetSecurityLastUsed", req, cb)
   }
 
   /**

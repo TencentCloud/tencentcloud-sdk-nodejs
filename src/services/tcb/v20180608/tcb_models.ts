@@ -70,6 +70,26 @@ export interface DescribeEnvLimitResponse {
   CurrentFreeTrialNum: number
 
   /**
+   * 转支付限额总数
+   */
+  ChangePayTotal: number
+
+  /**
+   * 当前已用转支付次数
+   */
+  CurrentChangePayTotal: number
+
+  /**
+   * 转支付每月限额
+   */
+  ChangePayMonthly: number
+
+  /**
+   * 本月已用转支付额度
+   */
+  CurrentChangePayMonthly: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2911,6 +2931,11 @@ export interface DeleteCloudBaseProjectLatestVersionRequest {
    * 项目名
    */
   ProjectName: string
+
+  /**
+   * 是否保留资源
+   */
+  KeepResource?: boolean
 }
 
 /**

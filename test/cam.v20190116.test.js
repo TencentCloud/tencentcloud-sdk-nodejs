@@ -418,9 +418,9 @@ it("cam.v20190116.DescribeSafeAuthFlagColl", async function () {
     }
 })
 
-it("cam.v20190116.GetSecurityLastUsed", async function () {
+it("cam.v20190116.GetAccountSummary", async function () {
     try {
-       const data = await client.GetSecurityLastUsed({})
+       const data = await client.GetAccountSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -441,6 +441,16 @@ it("cam.v20190116.ListPolicyVersions", async function () {
 it("cam.v20190116.DescribeSafeAuthFlag", async function () {
     try {
        const data = await client.DescribeSafeAuthFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.DescribeSafeAuthFlagIntl", async function () {
+    try {
+       const data = await client.DescribeSafeAuthFlagIntl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -581,6 +591,16 @@ it("cam.v20190116.ListEntitiesForPolicy", async function () {
 it("cam.v20190116.ListWeChatWorkSubAccounts", async function () {
     try {
        const data = await client.ListWeChatWorkSubAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.GetSecurityLastUsed", async function () {
+    try {
+       const data = await client.GetSecurityLastUsed({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
