@@ -268,9 +268,9 @@ it("tsf.v20180326.DescribeImageTags", async function () {
     }
 })
 
-it("tsf.v20180326.ModifyUploadInfo", async function () {
+it("tsf.v20180326.DescribeFileConfigs", async function () {
     try {
-       const data = await client.ModifyUploadInfo({})
+       const data = await client.DescribeFileConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,6 +798,16 @@ it("tsf.v20180326.DescribeSimpleGroups", async function () {
     }
 })
 
+it("tsf.v20180326.ReleaseFileConfig", async function () {
+    try {
+       const data = await client.ReleaseFileConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeGroupGateways", async function () {
     try {
        const data = await client.DescribeGroupGateways({})
@@ -811,6 +821,16 @@ it("tsf.v20180326.DescribeGroupGateways", async function () {
 it("tsf.v20180326.DescribeUnitNamespaces", async function () {
     try {
        const data = await client.DescribeUnitNamespaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.ModifyUploadInfo", async function () {
+    try {
+       const data = await client.ModifyUploadInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -841,6 +861,16 @@ it("tsf.v20180326.DescribeConfigSummary", async function () {
 it("tsf.v20180326.DisableUnitRule", async function () {
     try {
        const data = await client.DisableUnitRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.CreateFileConfig", async function () {
+    try {
+       const data = await client.CreateFileConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

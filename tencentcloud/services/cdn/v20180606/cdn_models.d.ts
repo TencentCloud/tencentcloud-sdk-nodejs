@@ -6296,13 +6296,18 @@ export interface ScdnAclGroup {
       */
     Configure: Array<ScdnAclRule>;
     /**
-      * 规则行为，一般为refuse
+      * 规则行为，一般为refuse，重定向redirect
       */
     Result: string;
     /**
       * 规则是否生效中active|inactive
       */
     Status?: string;
+    /**
+      * 错误页面配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorPage?: ScdnErrorPage;
 }
 /**
  * Waf 规则信息

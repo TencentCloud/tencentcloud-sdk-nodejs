@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     RenewDBInstance(req: RenewDBInstanceRequest, cb?: (error: string, rep: RenewDBInstanceResponse) => void): Promise<RenewDBInstanceResponse>;
     /**
-     * 本接口（DescribeUpgradePrice）用于在扩容云数据库实例时，查询扩容的价格。
+     * 本接口（DescribeUpgradePrice）用于在扩容云数据库实例时，查询变配的价格。
      */
     DescribeUpgradePrice(req: DescribeUpgradePriceRequest, cb?: (error: string, rep: DescribeUpgradePriceResponse) => void): Promise<DescribeUpgradePriceResponse>;
     /**

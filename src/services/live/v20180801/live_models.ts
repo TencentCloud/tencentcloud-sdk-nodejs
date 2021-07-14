@@ -429,7 +429,7 @@ export interface DescribeLiveCallbackTemplateResponse {
   /**
    * 回调模板信息。
    */
-  Template?: CallBackTemplateInfo
+  Template: CallBackTemplateInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2091,14 +2091,14 @@ export interface CallBackTemplateInfo {
   StreamBeginNotifyUrl: string
 
   /**
+   * 混流回调 URL。(参数已弃用)。
+   */
+  StreamMixNotifyUrl: string
+
+  /**
    * 断流回调 URL。
    */
   StreamEndNotifyUrl: string
-
-  /**
-   * 混流回调 URL。
-   */
-  StreamMixNotifyUrl: string
 
   /**
    * 录制回调 URL。
@@ -2194,6 +2194,15 @@ export interface UnBindLiveDomainCertRequest {
    * 播放域名。
    */
   DomainName: string
+
+  /**
+      * 枚举值：
+gray: 解绑灰度规则
+formal(默认): 解绑正式规则
+
+不传则为formal
+      */
+  Type?: string
 }
 
 /**
@@ -2952,7 +2961,7 @@ export interface DescribeLiveCallbackTemplatesResponse {
   /**
    * 模板信息列表。
    */
-  Templates?: Array<CallBackTemplateInfo>
+  Templates: Array<CallBackTemplateInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

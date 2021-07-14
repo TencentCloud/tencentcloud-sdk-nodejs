@@ -286,7 +286,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
-     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+     * 本接口（DescribeDCDBUpgradePrice）用于查询变配分布式数据库实例价格。
      */
     async DescribeDCDBUpgradePrice(req, cb) {
         return this.request("DescribeDCDBUpgradePrice", req, cb);

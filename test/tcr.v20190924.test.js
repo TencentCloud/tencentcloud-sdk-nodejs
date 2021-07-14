@@ -358,6 +358,16 @@ it("tcr.v20190924.CheckInstanceName", async function () {
     }
 })
 
+it("tcr.v20190924.CheckInstance", async function () {
+    try {
+       const data = await client.CheckInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeNamespacePersonal", async function () {
     try {
        const data = await client.DescribeNamespacePersonal({})

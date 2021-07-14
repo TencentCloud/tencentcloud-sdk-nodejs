@@ -232,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckInstanceName", req, cb);
     }
     /**
+     * 用于校验企业版实例信息
+     */
+    async CheckInstance(req, cb) {
+        return this.request("CheckInstance", req, cb);
+    }
+    /**
      * 查询个人版命名空间信息
      */
     async DescribeNamespacePersonal(req, cb) {

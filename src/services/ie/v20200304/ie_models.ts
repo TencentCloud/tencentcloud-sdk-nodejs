@@ -345,8 +345,7 @@ export interface VideoInfo {
       * 编码器支持选项，可选值：
 h264,
 h265,
-av1
-。
+av1。
 不填默认h264。
       */
   VideoCodec?: string
@@ -1274,13 +1273,12 @@ export interface DescribeEditingTaskResultRequest {
  */
 export interface AudioInfoResultItem {
   /**
-   * 音频流的流id
+   * 音频流的流id。
    */
   Stream: number
 
   /**
       * 音频采样率 。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Sample: number
@@ -1288,13 +1286,11 @@ export interface AudioInfoResultItem {
   /**
       * 音频声道数。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Channel: number
 
   /**
       * 编码格式，如aac, mp3等。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Codec: string
@@ -1302,13 +1298,11 @@ export interface AudioInfoResultItem {
   /**
       * 码率，单位：bps。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Bitrate: number
 
   /**
       * 音频时长，单位：ms。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Duration: number
@@ -1671,7 +1665,6 @@ export interface SubTaskResultItem {
   /**
       * 子任务名称。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskName: string
 
@@ -1691,13 +1684,11 @@ export interface SubTaskResultItem {
   /**
       * 子任务进度。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   ProgressRate: number
 
   /**
       * 画质重生处理后文件的下载地址。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DownloadUrl: string
@@ -1705,13 +1696,11 @@ export interface SubTaskResultItem {
   /**
       * 画质重生处理后文件的MD5。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Md5: string
 
   /**
       * 画质重生处理后文件的详细信息。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FileInfo: FileInfo
@@ -1766,14 +1755,12 @@ export interface HighlightsEditingInfo {
 export interface FileInfo {
   /**
       * 任务结束后生成的文件大小。
-注意：此字段可能返回 null，表示取不到有效值 。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FileSize: number
 
   /**
       * 任务结束后生成的文件格式，例如：mp4,flv等等。
-注意：此字段可能返回 null，表示取不到有效值 。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FileType: string
@@ -1781,13 +1768,11 @@ export interface FileInfo {
   /**
       * 任务结束后生成的文件整体码率，单位：bps。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Bitrate: number
 
   /**
       * 任务结束后生成的文件时长，单位：ms。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Duration: number
@@ -1795,13 +1780,11 @@ export interface FileInfo {
   /**
       * 任务结束后生成的文件视频信息。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   VideoInfoResult: Array<VideoInfoResultItem>
 
   /**
       * 任务结束后生成的文件音频信息。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AudioInfoResult: Array<AudioInfoResultItem>
@@ -2260,13 +2243,11 @@ export interface VideoInfoResultItem {
   /**
       * 视频宽度。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Width: number
 
   /**
       * 视频高度。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Height: number
@@ -2274,13 +2255,11 @@ export interface VideoInfoResultItem {
   /**
       * 视频码率，单位：bps。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Bitrate: number
 
   /**
       * 视频帧率，用分数格式表示，如：25/1, 99/32等等。
-注意：此字段可能返回 null，表示取不到有效值 。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Fps: string
@@ -2288,13 +2267,11 @@ export interface VideoInfoResultItem {
   /**
       * 编码格式，如h264,h265等等 。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Codec: string
 
   /**
       * 播放旋转角度，可选值0-360。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Rotate: number
@@ -2302,13 +2279,11 @@ export interface VideoInfoResultItem {
   /**
       * 视频时长，单位：ms 。
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   Duration: number
 
   /**
       * 颜色空间，如yuv420p，yuv444p等等。
-注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PixFormat: string

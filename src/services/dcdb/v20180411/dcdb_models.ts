@@ -306,12 +306,17 @@ export interface DescribeDCDBUpgradePriceResponse {
   /**
    * 原价，单位：分
    */
-  OriginalPrice?: number
+  OriginalPrice: number
 
   /**
    * 实际价格，单位：分。受折扣等影响，可能和原价不同。
    */
-  Price?: number
+  Price: number
+
+  /**
+   * 变配明细计算公式
+   */
+  Formula: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -630,6 +635,41 @@ export interface DcnDetailItem {
    * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
    */
   DcnStatus: number
+
+  /**
+   * 实例CPU核数
+   */
+  Cpu: number
+
+  /**
+   * 实例内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 实例存储大小，单位 GB
+   */
+  Storage: number
+
+  /**
+   * 付费模式
+   */
+  PayMode: number
+
+  /**
+   * 实例创建时间，格式为 2006-01-02 15:04:05
+   */
+  CreateTime: string
+
+  /**
+   * 实例到期时间，格式为 2006-01-02 15:04:05
+   */
+  PeriodEndTime: string
+
+  /**
+   * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+   */
+  InstanceType: number
 }
 
 /**
@@ -1884,7 +1924,7 @@ export interface SplitShardConfig {
   ShardInstanceIds: Array<string>
 
   /**
-   * 数据切分比例
+   * 数据切分比例，固定50%
    */
   SplitRate: number
 
@@ -2241,7 +2281,7 @@ export interface DestroyDCDBInstanceResponse {
   InstanceId: string
 
   /**
-   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
+   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
    */
   FlowId: number
 
@@ -2765,7 +2805,7 @@ export interface UpgradeDCDBInstanceRequest {
  */
 export interface DestroyHourDCDBInstanceResponse {
   /**
-   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/237/16177)。
+   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
    */
   FlowId: number
 

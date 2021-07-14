@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribePublicConfigSummaryRequest,
+  TsfPageFileConfig,
   ModifyPathRewriteRequest,
   TsfPageContainerEvent,
   ApiDetailResponse,
@@ -40,8 +41,10 @@ import {
   DescribePathRewriteResponse,
   DescribeConfigsResponse,
   ModifyContainerReplicasRequest,
+  ReleaseFileConfigRequest,
   SearchStdoutLogResponse,
   CreateGatewayApiResponse,
+  DescribeFileConfigsResponse,
   DescribeApiVersionsRequest,
   TsfPageConfigReleaseLog,
   DescribeGroupBindedGatewaysResponse,
@@ -124,7 +127,7 @@ import {
   DeleteUnitNamespacesResponse,
   DisableTaskRequest,
   DescribeBasicResourceUsageResponse,
-  PkgBind,
+  CreateAllGatewayApiAsyncResponse,
   RemoveInstancesRequest,
   TsfPageInstance,
   DeleteGroupResponse,
@@ -136,6 +139,7 @@ import {
   UpdateUnitRuleRequest,
   ReleasePublicConfigResponse,
   ReleaseApiGroupResponse,
+  CreateFileConfigRequest,
   UpdateApiRateLimitRulesRequest,
   DescribeGroupInstancesRequest,
   DescribeMsApiListRequest,
@@ -156,7 +160,7 @@ import {
   DescribeGroupGatewaysResponse,
   RevocationConfigResponse,
   DeployServerlessGroupResponse,
-  CreateAllGatewayApiAsyncResponse,
+  PkgBind,
   DeleteTaskResponse,
   TsfPageMsInstance,
   DeleteMicroserviceRequest,
@@ -302,6 +306,7 @@ import {
   OperationInfo,
   DescribePublicConfigResponse,
   DescribeUsableUnitNamespacesResponse,
+  ReleaseFileConfigResponse,
   DescribeConfigResponse,
   SimpleGroup,
   DescribeContainerEventsResponse,
@@ -317,6 +322,7 @@ import {
   ApiRequestDescr,
   ApiVersionArray,
   ConfigReleaseLog,
+  CreateFileConfigResponse,
   CreateConfigRequest,
   DescribeUploadInfoRequest,
   TaskFlowLastBatchState,
@@ -406,6 +412,7 @@ import {
   EnableUnitRouteRequest,
   TsfPageApplication,
   DeleteConfigRequest,
+  DescribeFileConfigsRequest,
   ExecuteTaskResponse,
   CreateApiRateLimitRuleResponse,
   Config,
@@ -438,6 +445,7 @@ import {
   DescribeDownloadInfoResponse,
   GroupPodResult,
   DescribeApplicationRequest,
+  FileConfig,
   DeployContainerGroupResponse,
   DescribeBasicResourceUsageRequest,
   DeleteMicroserviceResponse,
@@ -733,14 +741,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
-调用此接口完成后，才标志上传包流程结束。
-     */
-  async ModifyUploadInfo(
-    req: ModifyUploadInfoRequest,
-    cb?: (error: string, rep: ModifyUploadInfoResponse) => void
-  ): Promise<ModifyUploadInfoResponse> {
-    return this.request("ModifyUploadInfo", req, cb)
+   * 查询文件配置项列表
+   */
+  async DescribeFileConfigs(
+    req: DescribeFileConfigsRequest,
+    cb?: (error: string, rep: DescribeFileConfigsResponse) => void
+  ): Promise<DescribeFileConfigsResponse> {
+    return this.request("DescribeFileConfigs", req, cb)
   }
 
   /**
@@ -1265,6 +1272,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 发布文件配置
+   */
+  async ReleaseFileConfig(
+    req: ReleaseFileConfigRequest,
+    cb?: (error: string, rep: ReleaseFileConfigResponse) => void
+  ): Promise<ReleaseFileConfigResponse> {
+    return this.request("ReleaseFileConfig", req, cb)
+  }
+
+  /**
    * 查询某个网关绑定的API 分组信息列表
    */
   async DescribeGroupGateways(
@@ -1282,6 +1299,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeUnitNamespacesResponse) => void
   ): Promise<DescribeUnitNamespacesResponse> {
     return this.request("DescribeUnitNamespaces", req, cb)
+  }
+
+  /**
+     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
+调用此接口完成后，才标志上传包流程结束。
+     */
+  async ModifyUploadInfo(
+    req: ModifyUploadInfoRequest,
+    cb?: (error: string, rep: ModifyUploadInfoResponse) => void
+  ): Promise<ModifyUploadInfoResponse> {
+    return this.request("ModifyUploadInfo", req, cb)
   }
 
   /**
@@ -1312,6 +1340,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DisableUnitRuleResponse) => void
   ): Promise<DisableUnitRuleResponse> {
     return this.request("DisableUnitRule", req, cb)
+  }
+
+  /**
+   * 创建文件配置项
+   */
+  async CreateFileConfig(
+    req: CreateFileConfigRequest,
+    cb?: (error: string, rep: CreateFileConfigResponse) => void
+  ): Promise<CreateFileConfigResponse> {
+    return this.request("CreateFileConfig", req, cb)
   }
 
   /**

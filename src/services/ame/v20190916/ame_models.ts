@@ -336,6 +336,11 @@ export interface KTVMusicBaseInfo {
    * 标签列表
    */
   TagSet: Array<string>
+
+  /**
+   * 歌曲时长
+   */
+  Duration: number
 }
 
 /**

@@ -16,6 +16,21 @@ export interface DescribePublicConfigSummaryRequest {
     Limit?: number;
 }
 /**
+ * 文件配置项列表
+ */
+export interface TsfPageFileConfig {
+    /**
+      * 总数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 文件配置数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content: Array<FileConfig>;
+}
+/**
  * ModifyPathRewrite请求参数结构体
  */
 export interface ModifyPathRewriteRequest {
@@ -435,6 +450,23 @@ export interface ModifyContainerReplicasRequest {
     InstanceNum: number;
 }
 /**
+ * ReleaseFileConfig请求参数结构体
+ */
+export interface ReleaseFileConfigRequest {
+    /**
+      * 配置ID
+      */
+    ConfigId: string;
+    /**
+      * 部署组ID
+      */
+    GroupId: string;
+    /**
+      * 发布描述
+      */
+    ReleaseDesc?: string;
+}
+/**
  * SearchStdoutLog返回参数结构体
  */
 export interface SearchStdoutLogResponse {
@@ -456,6 +488,20 @@ export interface CreateGatewayApiResponse {
       * 是否成功
       */
     Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeFileConfigs返回参数结构体
+ */
+export interface DescribeFileConfigsResponse {
+    /**
+      * 文件配置项列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: TsfPageFileConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2242,19 +2288,17 @@ export interface DescribeBasicResourceUsageResponse {
     RequestId?: string;
 }
 /**
- * 描述程序包关联信息
+ * CreateAllGatewayApiAsync返回参数结构体
  */
-export interface PkgBind {
+export interface CreateAllGatewayApiAsyncResponse {
     /**
-      * 应用id
-注意：此字段可能返回 null，表示取不到有效值。
+      * 是否成功
       */
-    ApplicationId: string;
+    Result?: boolean;
     /**
-      * 部署组id
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    GroupId: string;
+    RequestId?: string;
 }
 /**
  * RemoveInstances请求参数结构体
@@ -2609,6 +2653,51 @@ export interface ReleaseApiGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateFileConfig请求参数结构体
+ */
+export interface CreateFileConfigRequest {
+    /**
+      * 配置项名称
+      */
+    ConfigName: string;
+    /**
+      * 配置项版本
+      */
+    ConfigVersion: string;
+    /**
+      * 配置项文件名
+      */
+    ConfigFileName: string;
+    /**
+      * 配置项文件内容（原始内容编码需要 utf-8 格式，如果 ConfigFileCode 为 gbk，后台会进行转换）
+      */
+    ConfigFileValue: string;
+    /**
+      * 配置项关联应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 发布路径
+      */
+    ConfigFilePath: string;
+    /**
+      * 配置项版本描述
+      */
+    ConfigVersionDesc?: string;
+    /**
+      * 配置项文件编码，utf-8 或 gbk。注：如果选择 gbk，需要新版本 tsf-consul-template （公有云虚拟机需要使用 1.32 tsf-agent，容器需要从文档中获取最新的 tsf-consul-template-docker.tar.gz）的支持
+      */
+    ConfigFileCode?: string;
+    /**
+      * 后置命令
+      */
+    ConfigPostCmd?: string;
+    /**
+      * Base64编码的配置项
+      */
+    EncodeWithBase64?: boolean;
 }
 /**
  * UpdateApiRateLimitRules请求参数结构体
@@ -2967,17 +3056,19 @@ export interface DeployServerlessGroupResponse {
     RequestId?: string;
 }
 /**
- * CreateAllGatewayApiAsync返回参数结构体
+ * 描述程序包关联信息
  */
-export interface CreateAllGatewayApiAsyncResponse {
+export interface PkgBind {
     /**
-      * 是否成功
+      * 应用id
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    ApplicationId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    GroupId: string;
 }
 /**
  * DeleteTask返回参数结构体
@@ -6129,6 +6220,20 @@ export interface DescribeUsableUnitNamespacesResponse {
     RequestId?: string;
 }
 /**
+ * ReleaseFileConfig返回参数结构体
+ */
+export interface ReleaseFileConfigResponse {
+    /**
+      * 发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeConfig返回参数结构体
  */
 export interface DescribeConfigResponse {
@@ -6615,6 +6720,20 @@ export interface ConfigReleaseLog {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RollbackFlag: boolean;
+}
+/**
+ * CreateFileConfig返回参数结构体
+ */
+export interface CreateFileConfigResponse {
+    /**
+      * true：创建成功；false：创建失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateConfig请求参数结构体
@@ -8690,6 +8809,39 @@ export interface DeleteConfigRequest {
     ConfigId: string;
 }
 /**
+ * DescribeFileConfigs请求参数结构体
+ */
+export interface DescribeFileConfigsRequest {
+    /**
+      * 配置项ID
+      */
+    ConfigId?: string;
+    /**
+      * 配置项ID列表
+      */
+    ConfigIdList?: Array<string>;
+    /**
+      * 配置项名称
+      */
+    ConfigName?: string;
+    /**
+      * 应用ID
+      */
+    ApplicationId?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 每页条数
+      */
+    Limit?: number;
+    /**
+      * 配置项版本
+      */
+    ConfigVersion?: string;
+}
+/**
  * ExecuteTask返回参数结构体
  */
 export interface ExecuteTaskResponse {
@@ -9476,6 +9628,91 @@ export interface DescribeApplicationRequest {
       * 应用ID
       */
     ApplicationId: string;
+}
+/**
+ * 文件配置项
+ */
+export interface FileConfig {
+    /**
+      * 配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigId?: string;
+    /**
+      * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigName?: string;
+    /**
+      * 配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigVersion?: string;
+    /**
+      * 配置项版本描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigVersionDesc?: string;
+    /**
+      * 配置项文件名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigFileName?: string;
+    /**
+      * 配置项文件内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigFileValue?: string;
+    /**
+      * 配置项文件编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigFileCode?: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime?: string;
+    /**
+      * 配置项归属应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationId?: string;
+    /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationName?: string;
+    /**
+      * 删除标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteFlag?: boolean;
+    /**
+      * 配置项版本数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigVersionCount?: number;
+    /**
+      * 配置项最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastUpdateTime?: string;
+    /**
+      * 发布路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigFilePath?: string;
+    /**
+      * 后置命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigPostCmd?: string;
+    /**
+      * 配置项文件长度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigFileValueLength?: number;
 }
 /**
  * DeployContainerGroup返回参数结构体

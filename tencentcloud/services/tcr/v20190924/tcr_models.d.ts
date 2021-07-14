@@ -807,6 +807,23 @@ export interface DeleteImagePersonalResponse {
     RequestId?: string;
 }
 /**
+ * DescribeWebhookTriggerLog返回参数结构体
+ */
+export interface DescribeWebhookTriggerLogResponse {
+    /**
+      * 总数
+      */
+    TotalCount?: number;
+    /**
+      * 日志列表
+      */
+    Logs?: Array<WebhookTriggerLog>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DownloadHelmChart返回参数结构体
  */
 export interface DownloadHelmChartResponse {
@@ -871,6 +888,10 @@ export interface ManageReplicationRequest {
       * 目标实例的地域ID，如广州是1
       */
     DestinationRegionId?: number;
+    /**
+      * 开启跨主账号实例同步配置项
+      */
+    PeerReplicationOption?: PeerReplicationOption;
 }
 /**
  * DeleteWebhookTrigger返回参数结构体
@@ -889,6 +910,27 @@ export interface DeleteImageLifecycleGlobalPersonalResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifySecurityPolicy请求参数结构体
+ */
+export interface ModifySecurityPolicyRequest {
+    /**
+      * 实例的Id
+      */
+    RegistryId: string;
+    /**
+      * PolicyId
+      */
+    PolicyIndex: number;
+    /**
+      * 192.168.0.0/24 白名单Ip
+      */
+    CidrBlock: string;
+    /**
+      * 备注
+      */
+    Description: string;
 }
 /**
  * DescribeReplicationInstanceSyncStatus返回参数结构体
@@ -2526,25 +2568,21 @@ export interface DescribeExternalEndpointStatusResponse {
     RequestId?: string;
 }
 /**
- * ModifySecurityPolicy请求参数结构体
+ * CheckInstance返回参数结构体
  */
-export interface ModifySecurityPolicyRequest {
+export interface CheckInstanceResponse {
     /**
-      * 实例的Id
+      * 检查结果，true为合法，false为非法
       */
-    RegistryId: string;
+    IsValidated: boolean;
     /**
-      * PolicyId
+      * 实例所在的RegionId
       */
-    PolicyIndex: number;
+    RegionId: number;
     /**
-      * 192.168.0.0/24 白名单Ip
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CidrBlock: string;
-    /**
-      * 备注
-      */
-    Description: string;
+    RequestId?: string;
 }
 /**
  * NamespaceIsExists返回类型
@@ -2972,13 +3010,25 @@ export interface CreateSecurityPolicyRequest {
     Description: string;
 }
 /**
- * CreateInternalEndpointDns返回参数结构体
+ * DeleteImage请求参数结构体
  */
-export interface CreateInternalEndpointDnsResponse {
+export interface DeleteImageRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例Id
       */
-    RequestId?: string;
+    RegistryId: string;
+    /**
+      * 镜像仓库名称
+      */
+    RepositoryName: string;
+    /**
+      * 镜像版本
+      */
+    ImageVersion: string;
+    /**
+      * 命名空间名称
+      */
+    NamespaceName: string;
 }
 /**
  * DescribeRepositoryOwnerPersonal请求参数结构体
@@ -3308,6 +3358,23 @@ export interface ModifyUserPasswordPersonalRequest {
     Password: string;
 }
 /**
+ * 跨主账号实例同步参数
+ */
+export interface PeerReplicationOption {
+    /**
+      * 待同步实例的uin
+      */
+    PeerRegistryUin: string;
+    /**
+      * 待同步实例的访问永久Token
+      */
+    PeerRegistryToken: string;
+    /**
+      * 是否开启跨主账号实例同步
+      */
+    EnablePeerReplication: boolean;
+}
+/**
  * DescribeSecurityPolicies请求参数结构体
  */
 export interface DescribeSecurityPoliciesRequest {
@@ -3368,21 +3435,13 @@ export interface ValidateNamespaceExistPersonalResponse {
     RequestId?: string;
 }
 /**
- * DescribeWebhookTriggerLog返回参数结构体
+ * CheckInstance请求参数结构体
  */
-export interface DescribeWebhookTriggerLogResponse {
+export interface CheckInstanceRequest {
     /**
-      * 总数
+      * 待检测的实例Id
       */
-    TotalCount?: number;
-    /**
-      * 日志列表
-      */
-    Logs?: Array<WebhookTriggerLog>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    RegistryId: string;
 }
 /**
  * 拉取触发器列表返回值
@@ -3838,25 +3897,13 @@ export interface DeleteRepositoryRequest {
     RepositoryName: string;
 }
 /**
- * DeleteImage请求参数结构体
+ * CreateInternalEndpointDns返回参数结构体
  */
-export interface DeleteImageRequest {
+export interface CreateInternalEndpointDnsResponse {
     /**
-      * 实例Id
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RegistryId: string;
-    /**
-      * 镜像仓库名称
-      */
-    RepositoryName: string;
-    /**
-      * 镜像版本
-      */
-    ImageVersion: string;
-    /**
-      * 命名空间名称
-      */
-    NamespaceName: string;
+    RequestId?: string;
 }
 /**
  * CreateTagRetentionExecution请求参数结构体

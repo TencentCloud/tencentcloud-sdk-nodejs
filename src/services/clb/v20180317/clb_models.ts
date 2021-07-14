@@ -3415,6 +3415,12 @@ Public：公网属性， Private：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LoadBalancerPassToTarget: number
+
+  /**
+      * 后端目标健康状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetHealth: string
 }
 
 /**

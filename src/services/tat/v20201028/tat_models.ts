@@ -155,6 +155,12 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
    * 如果保存命令，可为命令设置标签。列表长度不超过10。
    */
   Tags?: Array<Tag>
+
+  /**
+      * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在Linux实例中以root用户执行命令。
+      */
+  Username?: string
 }
 
 /**
@@ -256,6 +262,11 @@ export interface Invocation {
    * 执行命令的实例类型，取值范围：CVM、LIGHTHOUSE。
    */
   InstanceKind: string
+
+  /**
+   * 在实例上执行命令时使用的用户名。
+   */
+  Username: string
 }
 
 /**
@@ -281,6 +292,11 @@ export interface CommandDocument {
    * 执行路径。
    */
   WorkingDirectory: string
+
+  /**
+   * 执行用户。
+   */
+  Username: string
 }
 
 /**
@@ -461,6 +477,12 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
       */
   DefaultParameters?: string
+
+  /**
+      * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在Linux实例中以root用户执行命令。
+      */
+  Username?: string
 }
 
 /**
@@ -690,6 +712,11 @@ export interface Command {
    * 命令关联的标签列表。
    */
   Tags: Array<Tag>
+
+  /**
+   * 在实例上执行命令的用户名。
+   */
+  Username: string
 }
 
 /**
@@ -842,6 +869,12 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
       */
   Parameters?: string
+
+  /**
+      * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。若不填，默认以 Command 配置的 Username 执行。
+      */
+  Username?: string
 }
 
 /**
@@ -958,4 +991,10 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
    * 为命令关联的标签，列表长度不超过10。
    */
   Tags?: Array<Tag>
+
+  /**
+      * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在Linux实例中以root用户执行命令。
+      */
+  Username?: string
 }

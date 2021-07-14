@@ -3719,6 +3719,21 @@ export interface NatGateway {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SecurityGroupSet: Array<string>;
+    /**
+      * NAT网关的SNAT转发规则。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceIpTranslationNatRuleSet: Array<SourceIpTranslationNatRule>;
+    /**
+      * 是否独享型NAT。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsExclusive: boolean;
+    /**
+      * 独享型NAT所在的网关集群的带宽(单位:Mbps)，当IsExclusive为false时无此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExclusiveGatewayBandwidth: number;
 }
 /**
  * AssociateDhcpIpWithAddressIp请求参数结构体

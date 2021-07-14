@@ -64,10 +64,12 @@ import {
   DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
+  DescribeWebhookTriggerLogResponse,
   DownloadHelmChartResponse,
   ManageReplicationRequest,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
+  ModifySecurityPolicyRequest,
   DescribeReplicationInstanceSyncStatusResponse,
   ModifyImmutableTagRulesResponse,
   Tag,
@@ -166,7 +168,7 @@ import {
   DescribeChartDownloadInfoRequest,
   ValidateRepositoryExistPersonalResponse,
   DescribeExternalEndpointStatusResponse,
-  ModifySecurityPolicyRequest,
+  CheckInstanceResponse,
   NamespaceIsExistsResp,
   DescribeInstancesRequest,
   CreateInternalEndpointDnsRequest,
@@ -192,7 +194,7 @@ import {
   Header,
   RetentionPolicy,
   CreateSecurityPolicyRequest,
-  CreateInternalEndpointDnsResponse,
+  DeleteImageRequest,
   DescribeRepositoryOwnerPersonalRequest,
   ModifyRepositoryInfoPersonalRequest,
   DescribeApplicationTriggerLogPersonalRequest,
@@ -214,11 +216,12 @@ import {
   CreateReplicationInstanceResponse,
   CreateInstanceTokenRequest,
   ModifyUserPasswordPersonalRequest,
+  PeerReplicationOption,
   DescribeSecurityPoliciesRequest,
   ReplicationRegistry,
   DescribeInternalEndpointsRequest,
   ValidateNamespaceExistPersonalResponse,
-  DescribeWebhookTriggerLogResponse,
+  CheckInstanceRequest,
   DescribeApplicationTriggerPersonalResp,
   TagInfo,
   CreateRepositoryRequest,
@@ -244,7 +247,7 @@ import {
   TcrRepositoryInfo,
   TcrInstanceToken,
   DeleteRepositoryRequest,
-  DeleteImageRequest,
+  CreateInternalEndpointDnsResponse,
   CreateTagRetentionExecutionRequest,
   CreateApplicationTriggerPersonalResponse,
   ManageInternalEndpointRequest,
@@ -600,6 +603,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckInstanceNameResponse) => void
   ): Promise<CheckInstanceNameResponse> {
     return this.request("CheckInstanceName", req, cb)
+  }
+
+  /**
+   * 用于校验企业版实例信息
+   */
+  async CheckInstance(
+    req: CheckInstanceRequest,
+    cb?: (error: string, rep: CheckInstanceResponse) => void
+  ): Promise<CheckInstanceResponse> {
+    return this.request("CheckInstance", req, cb)
   }
 
   /**

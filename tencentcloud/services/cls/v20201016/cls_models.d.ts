@@ -486,6 +486,11 @@ export interface TopicInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StorageType: string;
+    /**
+      * 生命周期，单位为天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Period: number;
 }
 /**
  * CreateIndex返回参数结构体

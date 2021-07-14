@@ -178,11 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageTags", req, cb);
     }
     /**
-     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
-调用此接口完成后，才标志上传包流程结束。
+     * 查询文件配置项列表
      */
-    async ModifyUploadInfo(req, cb) {
-        return this.request("ModifyUploadInfo", req, cb);
+    async DescribeFileConfigs(req, cb) {
+        return this.request("DescribeFileConfigs", req, cb);
     }
     /**
      * 查询简单集群列表
@@ -498,6 +497,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeSimpleGroups", req, cb);
     }
     /**
+     * 发布文件配置
+     */
+    async ReleaseFileConfig(req, cb) {
+        return this.request("ReleaseFileConfig", req, cb);
+    }
+    /**
      * 查询某个网关绑定的API 分组信息列表
      */
     async DescribeGroupGateways(req, cb) {
@@ -508,6 +513,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeUnitNamespaces(req, cb) {
         return this.request("DescribeUnitNamespaces", req, cb);
+    }
+    /**
+     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
+调用此接口完成后，才标志上传包流程结束。
+     */
+    async ModifyUploadInfo(req, cb) {
+        return this.request("ModifyUploadInfo", req, cb);
     }
     /**
      * 添加云主机节点至TSF集群
@@ -526,6 +538,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DisableUnitRule(req, cb) {
         return this.request("DisableUnitRule", req, cb);
+    }
+    /**
+     * 创建文件配置项
+     */
+    async CreateFileConfig(req, cb) {
+        return this.request("CreateFileConfig", req, cb);
     }
     /**
      * 重新执行任务
