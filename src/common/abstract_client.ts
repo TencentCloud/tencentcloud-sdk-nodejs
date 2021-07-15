@@ -43,7 +43,7 @@ export class AbstractClient {
    * @param {string} region 产品地域
    * @param {ClientProfile} profile 可选配置实例
    */
-  constructor(endpoint: string, version: string, { credential, region, profile }: ClientConfig) {
+  constructor(endpoint: string, version: string, { credential, region, profile = {} }: ClientConfig) {
     this.path = "/"
 
     /**
