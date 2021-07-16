@@ -58,9 +58,9 @@ it("apigateway.v20180808.DeleteUsagePlan", async function () {
     }
 })
 
-it("apigateway.v20180808.DescribeAPIDocDetail", async function () {
+it("apigateway.v20180808.BindApiApp", async function () {
     try {
-       const data = await client.DescribeAPIDocDetail({})
+       const data = await client.BindApiApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("apigateway.v20180808.ModifyApi", async function () {
     }
 })
 
-it("apigateway.v20180808.DemoteServiceUsagePlan", async function () {
+it("apigateway.v20180808.CreateApiApp", async function () {
     try {
-       const data = await client.DemoteServiceUsagePlan({})
+       const data = await client.CreateApiApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,29 @@ it("apigateway.v20180808.ModifySubDomain", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribeServiceSubDomains", async function () {
+    try {
+       const data = await client.DescribeServiceSubDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeUsagePlansStatus", async function () {
     try {
        const data = await client.DescribeUsagePlansStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeApiAppBindApisStatus", async function () {
+    try {
+       const data = await client.DescribeApiAppBindApisStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,9 @@ it("apigateway.v20180808.DescribeUsagePlanSecretIds", async function () {
     }
 })
 
-it("apigateway.v20180808.DescribeServiceSubDomains", async function () {
+it("apigateway.v20180808.DescribeServiceForApiApp", async function () {
     try {
-       const data = await client.DescribeServiceSubDomains({})
+       const data = await client.DescribeServiceForApiApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +198,16 @@ it("apigateway.v20180808.DeleteService", async function () {
     }
 })
 
+it("apigateway.v20180808.UnbindApiApp", async function () {
+    try {
+       const data = await client.UnbindApiApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.UnBindIPStrategy", async function () {
     try {
        const data = await client.UnBindIPStrategy({})
@@ -191,6 +221,16 @@ it("apigateway.v20180808.UnBindIPStrategy", async function () {
 it("apigateway.v20180808.CreateAPIDoc", async function () {
     try {
        const data = await client.CreateAPIDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.ModifyApiApp", async function () {
+    try {
+       const data = await client.ModifyApiApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +278,39 @@ it("apigateway.v20180808.UnReleaseService", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribeApiBindApiAppsStatus", async function () {
+    try {
+       const data = await client.DescribeApiBindApiAppsStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.ModifyApiIncrement", async function () {
     try {
        const data = await client.ModifyApiIncrement({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DeleteApiApp", async function () {
+    try {
+       const data = await client.DeleteApiApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeAPIDocDetail", async function () {
+    try {
+       const data = await client.DescribeAPIDocDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +408,16 @@ it("apigateway.v20180808.CreateUsagePlan", async function () {
     }
 })
 
+it("apigateway.v20180808.UpdateApiAppKey", async function () {
+    try {
+       const data = await client.UpdateApiAppKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.UnBindEnvironment", async function () {
     try {
        const data = await client.UnBindEnvironment({})
@@ -348,9 +428,9 @@ it("apigateway.v20180808.UnBindEnvironment", async function () {
     }
 })
 
-it("apigateway.v20180808.DescribeAllPluginApis", async function () {
+it("apigateway.v20180808.DemoteServiceUsagePlan", async function () {
     try {
-       const data = await client.DescribeAllPluginApis({})
+       const data = await client.DemoteServiceUsagePlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +548,9 @@ it("apigateway.v20180808.EnableApiKey", async function () {
     }
 })
 
-it("apigateway.v20180808.ResetAPIDocPassword", async function () {
+it("apigateway.v20180808.DescribeAllPluginApis", async function () {
     try {
-       const data = await client.ResetAPIDocPassword({})
+       const data = await client.DescribeAllPluginApis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,6 +688,16 @@ it("apigateway.v20180808.DescribeApiEnvironmentStrategy", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribeApiAppsStatus", async function () {
+    try {
+       const data = await client.DescribeApiAppsStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.BindSecretIds", async function () {
     try {
        const data = await client.BindSecretIds({})
@@ -631,6 +721,16 @@ it("apigateway.v20180808.DescribeServiceEnvironmentStrategy", async function () 
 it("apigateway.v20180808.DescribeService", async function () {
     try {
        const data = await client.DescribeService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeApiApp", async function () {
+    try {
+       const data = await client.DescribeApiApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +841,16 @@ it("apigateway.v20180808.DeleteApiKey", async function () {
 it("apigateway.v20180808.CreateApi", async function () {
     try {
        const data = await client.CreateApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.ResetAPIDocPassword", async function () {
+    try {
+       const data = await client.ResetAPIDocPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

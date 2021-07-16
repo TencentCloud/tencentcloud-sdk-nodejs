@@ -23,46 +23,50 @@ import {
   Service,
   DeleteAPIDocRequest,
   ApiUsagePlanSet,
-  DemoteServiceUsagePlanRequest,
   DescribeAPIDocDetailRequest,
   ModifyAPIDocResponse,
   AttachedApiSummary,
   DescribeUsagePlanRequest,
   DeleteUsagePlanResponse,
   DisableApiKeyResponse,
+  DescribeApiResponse,
   UnReleaseServiceRequest,
   DetachPluginRequest,
   ModifySubDomainRequest,
+  DescribeApiAppsStatusRequest,
   DescribeServiceUsagePlanRequest,
   DescribeServiceEnvironmentListResponse,
+  DescribeApiAppBindApisStatusRequest,
   ModifyApiResponse,
   ServiceEnvironmentStrategy,
-  DescribeApiResponse,
+  ApiInfo,
   TargetServicesReq,
+  ServiceEnvironmentSet,
   TsfLoadBalanceConfResp,
   CreateIPStrategyRequest,
   IPStrategy,
   DescribeUsagePlansStatusResponse,
   HealthCheckConf,
   Plugin,
+  UnbindApiAppResponse,
   DescribeApiUsagePlanResponse,
   DeleteIPStrategyRequest,
-  ModifyAPIDocRequest,
+  DescribeApiAppRequest,
   DescribePluginResponse,
   DomainSets,
   DeleteUsagePlanRequest,
   DeleteServiceRequest,
   DescribeApiEnvironmentStrategyRequest,
-  UpdateServiceResponse,
+  DescribeServiceForApiAppResponse,
   ServiceConfig,
-  ServiceEnvironmentSet,
+  DeleteApiAppResponse,
   DescribeServiceResponse,
   UsagePlanEnvironmentStatus,
   ModifyIPStrategyResponse,
   BindSubDomainResponse,
   BindEnvironmentResponse,
   Tag,
-  DescribeIPStrategysStatusRequest,
+  DescribeApiBindApiAppsStatusResponse,
   ConstantParameter,
   UsagePlansStatus,
   APIDocs,
@@ -77,6 +81,7 @@ import {
   AvailableApiInfo,
   DescribeApisStatusRequest,
   DeleteServiceSubDomainMappingRequest,
+  BindApiAppRequest,
   IPStrategyApi,
   DescribeIPStrategyResponse,
   DescribePluginRequest,
@@ -98,14 +103,16 @@ import {
   DescribeServiceReleaseVersionRequest,
   DescribeUsagePlanSecretIdsRequest,
   DescribeLogSearchResponse,
+  ModifyAPIDocRequest,
   UnBindIPStrategyRequest,
   DescribePluginApisRequest,
   ResponseErrorCodeReq,
   CreateServiceRequest,
-  DescribeServiceEnvironmentStrategyResponse,
+  DescribeIPStrategysStatusRequest,
   DemoteServiceUsagePlanResponse,
   EnableApiKeyResponse,
   ServiceReleaseHistory,
+  DeleteApiAppRequest,
   UnReleaseServiceResponse,
   CreateAPIDocResponse,
   DescribeServiceRequest,
@@ -120,6 +127,8 @@ import {
   UsagePlanBindSecret,
   DeleteApiKeyRequest,
   ModifyApiEnvironmentStrategyResponse,
+  ModifyApiAppResponse,
+  UpdateApiAppKeyRequest,
   DomainSetList,
   IPStrategysStatus,
   DescribeApiKeyResponse,
@@ -138,6 +147,7 @@ import {
   DescribeServiceEnvironmentReleaseHistoryResponse,
   Environment,
   DescribeAPIDocsRequest,
+  UsagePlanStatusInfo,
   ServiceReleaseHistoryInfo,
   CreatePluginResponse,
   DescribePluginsResponse,
@@ -150,20 +160,23 @@ import {
   DescribeIPStrategyApisStatusResponse,
   ModifyServiceEnvironmentStrategyResponse,
   UpdateApiKeyResponse,
+  DescribeApiBindApiAppsStatusRequest,
   DescribeApisStatusResponse,
   DescribeApiKeysStatusRequest,
-  ApiInfo,
+  DemoteServiceUsagePlanRequest,
   BindSecretIdsResponse,
   CreateApiRsp,
   UsagePlanBindEnvironment,
   DeleteApiRequest,
   DescribeServiceSubDomainMappingsRequest,
+  DescribeApiAppResponse,
   DescribeServiceSubDomainMappingsResponse,
-  DescribeServiceEnvironmentListRequest,
+  DescribeApiAppsStatusResponse,
   ServiceSubDomainMappings,
   DescribeApiKeyRequest,
   DescribeAPIDocDetailResponse,
   Filter,
+  BindApiAppResponse,
   UsagePlanBindSecretStatus,
   DeleteServiceSubDomainMappingResponse,
   CreateApiKeyResponse,
@@ -172,7 +185,7 @@ import {
   ModifyIPStrategyRequest,
   ModifyPluginResponse,
   UnBindSecretIdsRequest,
-  ApiEnvironmentStrategy,
+  DescribeApiRequest,
   UnBindSecretIdsResponse,
   ResetAPIDocPasswordRequest,
   ApiUsagePlan,
@@ -182,12 +195,16 @@ import {
   DeletePluginResponse,
   ModifyServiceEnvironmentStrategyRequest,
   CreateAPIDocRequest,
+  DescribeApiAppBindApisStatusResponse,
   DescribeServiceSubDomainsRequest,
+  ModifyApiAppRequest,
   GenerateApiDocumentResponse,
   DescribeUsagePlanEnvironmentsResponse,
   DescribeServiceSubDomainsResponse,
   AttachPluginRequest,
+  DescribeServiceForApiAppRequest,
   BindSubDomainRequest,
+  ApiAppInfos,
   IPStrategyApiStatus,
   CreateIPStrategyResponse,
   DeleteApiResponse,
@@ -195,27 +212,33 @@ import {
   UpdateServiceRequest,
   BuildAPIDocResponse,
   ErrorCodes,
+  DescribeServiceEnvironmentListRequest,
   ServiceEnvironmentStrategyStatus,
   DescribeApiEnvironmentStrategyResponse,
   MicroService,
   ApiEnvironmentStrategyStataus,
   PluginSummary,
+  ApiAppInfo,
   DeleteIPStrategyResponse,
   ApiInfoSummary,
   ApiKey,
+  ApiAppApiInfo,
   DescribeUsagePlanResponse,
   AttachPluginResponse,
   BindEnvironmentRequest,
   DescribeIPStrategyRequest,
+  EnvironmentStrategy,
   DescribeUsagePlanEnvironmentsRequest,
   DescribeServiceReleaseVersionResponse,
-  RequestParameter,
+  ApiAppApiInfos,
+  UpdateServiceResponse,
   UsagePlanInfo,
   DescribeServiceEnvironmentReleaseHistoryRequest,
-  UsagePlanStatusInfo,
+  UnbindApiAppRequest,
   ReleaseService,
   CreateServiceResponse,
   DeleteAPIDocResponse,
+  DescribeServiceEnvironmentStrategyResponse,
   DesApisStatus,
   DescribeApiKeysStatusResponse,
   ServicesStatus,
@@ -224,14 +247,17 @@ import {
   ApiKeysStatus,
   APIDoc,
   DescribeServiceUsagePlanResponse,
+  CreateApiAppResponse,
   DescribeApiUsagePlanRequest,
   UnBindSubDomainRequest,
-  DescribeApiRequest,
+  ApiEnvironmentStrategy,
   DescribeIPStrategysStatusResponse,
-  EnvironmentStrategy,
+  UpdateApiAppKeyResponse,
+  CreateApiAppRequest,
   EnableApiKeyRequest,
   ResetAPIDocPasswordResponse,
   DescribeServicesStatusRequest,
+  RequestParameter,
   ServiceReleaseVersion,
   DescribeServicesStatusResponse,
   CreateApiKeyRequest,
@@ -288,13 +314,13 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-   * 查询 API 文档详情
+   * 本接口（BindApiApp）用于绑定应用到API。
    */
-  async DescribeAPIDocDetail(
-    req: DescribeAPIDocDetailRequest,
-    cb?: (error: string, rep: DescribeAPIDocDetailResponse) => void
-  ): Promise<DescribeAPIDocDetailResponse> {
-    return this.request("DescribeAPIDocDetail", req, cb)
+  async BindApiApp(
+    req: BindApiAppRequest,
+    cb?: (error: string, rep: BindApiAppResponse) => void
+  ): Promise<BindApiAppResponse> {
+    return this.request("BindApiApp", req, cb)
   }
 
   /**
@@ -308,15 +334,13 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-     * 本接口（DemoteServiceUsagePlan）用于将某个服务在某个环境的使用计划，降级到API上。
-如果服务内没有API不允许进行此操作。
-如果当前环境没有发布，不允许进行此操作。
-     */
-  async DemoteServiceUsagePlan(
-    req: DemoteServiceUsagePlanRequest,
-    cb?: (error: string, rep: DemoteServiceUsagePlanResponse) => void
-  ): Promise<DemoteServiceUsagePlanResponse> {
-    return this.request("DemoteServiceUsagePlan", req, cb)
+   * 本接口（CreateApiApp）用于创建应用。
+   */
+  async CreateApiApp(
+    req: CreateApiAppRequest,
+    cb?: (error: string, rep: CreateApiAppResponse) => void
+  ): Promise<CreateApiAppResponse> {
+    return this.request("CreateApiApp", req, cb)
   }
 
   /**
@@ -341,6 +365,17 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
+     * 本接口（DescribeServiceSubDomains）用于查询自定义域名列表。
+API 网关可绑定自定义域名到服务，用于服务调用。此接口用于查询用户绑定在服务的自定义域名列表。
+     */
+  async DescribeServiceSubDomains(
+    req: DescribeServiceSubDomainsRequest,
+    cb?: (error: string, rep: DescribeServiceSubDomainsResponse) => void
+  ): Promise<DescribeServiceSubDomainsResponse> {
+    return this.request("DescribeServiceSubDomains", req, cb)
+  }
+
+  /**
    * 本接口（DescribeUsagePlanStatus）用于查询使用计划的列表。
    */
   async DescribeUsagePlansStatus(
@@ -348,6 +383,16 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
     cb?: (error: string, rep: DescribeUsagePlansStatusResponse) => void
   ): Promise<DescribeUsagePlansStatusResponse> {
     return this.request("DescribeUsagePlansStatus", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeApiAppBindApisStatus）查询应用绑定的Api列表。
+   */
+  async DescribeApiAppBindApisStatus(
+    req: DescribeApiAppBindApisStatusRequest,
+    cb?: (error: string, rep: DescribeApiAppBindApisStatusResponse) => void
+  ): Promise<DescribeApiAppBindApisStatusResponse> {
+    return this.request("DescribeApiAppBindApisStatus", req, cb)
   }
 
   /**
@@ -382,14 +427,13 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
   }
 
   /**
-     * 本接口（DescribeServiceSubDomains）用于查询自定义域名列表。
-API 网关可绑定自定义域名到服务，用于服务调用。此接口用于查询用户绑定在服务的自定义域名列表。
-     */
-  async DescribeServiceSubDomains(
-    req: DescribeServiceSubDomainsRequest,
-    cb?: (error: string, rep: DescribeServiceSubDomainsResponse) => void
-  ): Promise<DescribeServiceSubDomainsResponse> {
-    return this.request("DescribeServiceSubDomains", req, cb)
+   * 本接口（DescribeServiceForApiApp）用于应用使用者查询一个服务的详细信息、包括服务的描述、域名、协议等信息。
+   */
+  async DescribeServiceForApiApp(
+    req: DescribeServiceForApiAppRequest,
+    cb?: (error: string, rep: DescribeServiceForApiAppResponse) => void
+  ): Promise<DescribeServiceForApiAppResponse> {
+    return this.request("DescribeServiceForApiApp", req, cb)
   }
 
   /**
@@ -413,6 +457,16 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
   }
 
   /**
+   * 本接口（UnbindApiApp）用于解除应用和API绑定。
+   */
+  async UnbindApiApp(
+    req: UnbindApiAppRequest,
+    cb?: (error: string, rep: UnbindApiAppResponse) => void
+  ): Promise<UnbindApiAppResponse> {
+    return this.request("UnbindApiApp", req, cb)
+  }
+
+  /**
    * 本接口（UnBindIPStrategy）用于服务解绑IP策略。
    */
   async UnBindIPStrategy(
@@ -430,6 +484,16 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
     cb?: (error: string, rep: CreateAPIDocResponse) => void
   ): Promise<CreateAPIDocResponse> {
     return this.request("CreateAPIDoc", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyApiApp）用于修改已经创建的应用。
+   */
+  async ModifyApiApp(
+    req: ModifyApiAppRequest,
+    cb?: (error: string, rep: ModifyApiAppResponse) => void
+  ): Promise<ModifyApiAppResponse> {
+    return this.request("ModifyApiApp", req, cb)
   }
 
   /**
@@ -474,6 +538,16 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
   }
 
   /**
+   * 本接口（DescribeApiBindApiAppsStatus）查询Api绑定的应用列表。
+   */
+  async DescribeApiBindApiAppsStatus(
+    req: DescribeApiBindApiAppsStatusRequest,
+    cb?: (error: string, rep: DescribeApiBindApiAppsStatusResponse) => void
+  ): Promise<DescribeApiBindApiAppsStatusResponse> {
+    return this.request("DescribeApiBindApiAppsStatus", req, cb)
+  }
+
+  /**
    * 提供增量更新API能力，主要是给程序调用（区别于ModifyApi，该接口是需要传入API的全量参数，对console使用较友好）
    */
   async ModifyApiIncrement(
@@ -481,6 +555,26 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
     cb?: (error: string, rep: ModifyApiIncrementResponse) => void
   ): Promise<ModifyApiIncrementResponse> {
     return this.request("ModifyApiIncrement", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteApiApp）用于删除已经创建的应用。
+   */
+  async DeleteApiApp(
+    req: DeleteApiAppRequest,
+    cb?: (error: string, rep: DeleteApiAppResponse) => void
+  ): Promise<DeleteApiAppResponse> {
+    return this.request("DeleteApiApp", req, cb)
+  }
+
+  /**
+   * 查询 API 文档详情
+   */
+  async DescribeAPIDocDetail(
+    req: DescribeAPIDocDetailRequest,
+    cb?: (error: string, rep: DescribeAPIDocDetailResponse) => void
+  ): Promise<DescribeAPIDocDetailResponse> {
+    return this.request("DescribeAPIDocDetail", req, cb)
   }
 
   /**
@@ -578,6 +672,16 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
   }
 
   /**
+   * 本接口（UpdateApiAppKey）用于更新应用秘钥。
+   */
+  async UpdateApiAppKey(
+    req: UpdateApiAppKeyRequest,
+    cb?: (error: string, rep: UpdateApiAppKeyResponse) => void
+  ): Promise<UpdateApiAppKeyResponse> {
+    return this.request("UpdateApiAppKey", req, cb)
+  }
+
+  /**
    * 本接口（UnBindEnvironment）用于将使用计划从特定环境解绑。
    */
   async UnBindEnvironment(
@@ -588,13 +692,15 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
   }
 
   /**
-   * 展示插件相关的API列表，包括已绑定的和未绑定的API信息。
-   */
-  async DescribeAllPluginApis(
-    req: DescribeAllPluginApisRequest,
-    cb?: (error: string, rep: DescribeAllPluginApisResponse) => void
-  ): Promise<DescribeAllPluginApisResponse> {
-    return this.request("DescribeAllPluginApis", req, cb)
+     * 本接口（DemoteServiceUsagePlan）用于将某个服务在某个环境的使用计划，降级到API上。
+如果服务内没有API不允许进行此操作。
+如果当前环境没有发布，不允许进行此操作。
+     */
+  async DemoteServiceUsagePlan(
+    req: DemoteServiceUsagePlanRequest,
+    cb?: (error: string, rep: DemoteServiceUsagePlanResponse) => void
+  ): Promise<DemoteServiceUsagePlanResponse> {
+    return this.request("DemoteServiceUsagePlan", req, cb)
   }
 
   /**
@@ -712,13 +818,13 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 重置API文档密码
+   * 展示插件相关的API列表，包括已绑定的和未绑定的API信息。
    */
-  async ResetAPIDocPassword(
-    req: ResetAPIDocPasswordRequest,
-    cb?: (error: string, rep: ResetAPIDocPasswordResponse) => void
-  ): Promise<ResetAPIDocPasswordResponse> {
-    return this.request("ResetAPIDocPassword", req, cb)
+  async DescribeAllPluginApis(
+    req: DescribeAllPluginApisRequest,
+    cb?: (error: string, rep: DescribeAllPluginApisResponse) => void
+  ): Promise<DescribeAllPluginApisResponse> {
+    return this.request("DescribeAllPluginApis", req, cb)
   }
 
   /**
@@ -854,6 +960,16 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
   }
 
   /**
+   * 本接口（DescribeApiAppsStatus）查询应用列表。
+   */
+  async DescribeApiAppsStatus(
+    req: DescribeApiAppsStatusRequest,
+    cb?: (error: string, rep: DescribeApiAppsStatusResponse) => void
+  ): Promise<DescribeApiAppsStatusResponse> {
+    return this.request("DescribeApiAppsStatus", req, cb)
+  }
+
+  /**
      * 本接口（BindSecretIds）用于为使用计划绑定密钥。
 将密钥绑定到某个使用计划，并将此使用计划绑定到某个服务发布的环境上，调用者方可使用此密钥调用这个服务中的 API，可使用本接口为使用计划绑定密钥。
      */
@@ -882,6 +998,16 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
     cb?: (error: string, rep: DescribeServiceResponse) => void
   ): Promise<DescribeServiceResponse> {
     return this.request("DescribeService", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeApiApp）用于根据应用ID搜索应用。
+   */
+  async DescribeApiApp(
+    req: DescribeApiAppRequest,
+    cb?: (error: string, rep: DescribeApiAppResponse) => void
+  ): Promise<DescribeApiAppResponse> {
+    return this.request("DescribeApiApp", req, cb)
   }
 
   /**
@@ -996,6 +1122,16 @@ API 网关中每个服务都会提供一个默认的域名供用户调用，但�
     cb?: (error: string, rep: CreateApiResponse) => void
   ): Promise<CreateApiResponse> {
     return this.request("CreateApi", req, cb)
+  }
+
+  /**
+   * 重置API文档密码
+   */
+  async ResetAPIDocPassword(
+    req: ResetAPIDocPasswordRequest,
+    cb?: (error: string, rep: ResetAPIDocPasswordResponse) => void
+  ): Promise<ResetAPIDocPasswordResponse> {
+    return this.request("ResetAPIDocPassword", req, cb)
   }
 
   /**

@@ -14,6 +14,14 @@ export interface DescribePublicConfigSummaryRequest {
       * 每页条数，默认为20
       */
     Limit?: number;
+    /**
+      * 按时间排序：creation_time；按名称排序：config_name
+      */
+    OrderBy?: string;
+    /**
+      * 升序传 0，降序传 1
+      */
+    OrderType?: number;
 }
 /**
  * 文件配置项列表
@@ -5476,6 +5484,21 @@ export interface ServiceSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubnetId: string;
+    /**
+      * 是否创建 k8s service，默认为 false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisableService?: boolean;
+    /**
+      * service 是否为 headless 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeadlessService?: boolean;
+    /**
+      * 当为 true 且 DisableService 也为 true 时，会删除之前创建的 service，请小心使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AllowDeleteService?: boolean;
 }
 /**
  * ModifyUploadInfo请求参数结构体
@@ -5689,7 +5712,7 @@ export interface DescribePublicConfigSummaryResponse {
       * 分页的全局配置统计信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TsfPageConfig;
+    Result: TsfPageConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10084,7 +10107,7 @@ export interface DescribeConfigSummaryResponse {
     /**
       * 配置项分页对象
       */
-    Result?: TsfPageConfig;
+    Result: TsfPageConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10260,6 +10283,14 @@ export interface DescribeConfigSummaryRequest {
       * 每页条数，默认为20
       */
     Limit?: number;
+    /**
+      * 按时间排序：creation_time；按名称排序：config_name
+      */
+    OrderBy?: string;
+    /**
+      * 升序传 0，降序传 1
+      */
+    OrderType?: number;
 }
 /**
  * DeleteLane请求参数结构体

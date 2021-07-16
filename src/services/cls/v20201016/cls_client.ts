@@ -20,31 +20,46 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateAlarmResponse,
   AlarmInfo,
+  LogInfo,
   DeleteAlarmNoticeResponse,
   DescribeLogContextRequest,
-  ExportInfo,
+  DeleteShipperRequest,
+  ModifyTopicRequest,
+  DeleteLogsetResponse,
+  DescribeShipperTasksResponse,
   CreateMachineGroupResponse,
-  RuleTagInfo,
+  DescribeConfigMachineGroupsRequest,
+  CreateLogsetRequest,
+  LogItem,
   SearchLogResponse,
   DeleteTopicRequest,
   DescribePartitionsRequest,
   ModifyAlarmResponse,
+  DescribeShipperTasksRequest,
   DescribeAlarmsRequest,
-  MergePartitionRequest,
+  DescribeShippersResponse,
+  ModifyShipperResponse,
+  RetryShipperTaskRequest,
   CallBackInfo,
   AlarmTargetInfo,
   DescribeIndexRequest,
+  DescribeConfigsResponse,
+  CreateLogsetResponse,
   DeleteMachineGroupResponse,
   Tag,
-  LogInfo,
+  DescribeMachineGroupsRequest,
+  ExtractRuleInfo,
   TopicInfo,
+  ShipperTaskInfo,
   CreateIndexResponse,
-  DescribeExportsRequest,
+  DeleteConfigFromMachineGroupResponse,
   ModifyMachineGroupResponse,
   RuleInfo,
   DeleteMachineGroupRequest,
   FullTextInfo,
   DescribePartitionsResponse,
+  DescribeConfigMachineGroupsResponse,
+  ModifyAlarmRequest,
   DescribeTopicsResponse,
   LogItems,
   ModifyAlarmNoticeRequest,
@@ -52,57 +67,90 @@ import {
   CreateAlarmRequest,
   DeleteExportResponse,
   PartitionInfo,
-  LogItem,
-  ModifyAlarmRequest,
+  DescribeShippersRequest,
+  ExcludePathInfo,
+  FilterRuleInfo,
+  RetryShipperTaskResponse,
   SplitPartitionRequest,
   MachineGroupInfo,
+  RuleTagInfo,
   CreateIndexRequest,
   CreateTopicRequest,
   DescribeTopicsRequest,
   GetAlarmLogResponse,
-  DescribeMachineGroupsRequest,
+  DescribeConfigsRequest,
+  DescribeExportsRequest,
   AlarmTarget,
+  DeleteConfigResponse,
   ModifyIndexResponse,
   DeleteIndexRequest,
+  DeleteConfigRequest,
+  LogsetInfo,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
+  ModifyConfigRequest,
+  DescribeLogsetsResponse,
+  JsonInfo,
+  CreateShipperRequest,
   CreateTopicResponse,
   DeleteAlarmResponse,
   WebCallback,
   DescribeAlarmsResponse,
   CreateAlarmNoticeResponse,
   ModifyTopicResponse,
+  CreateConfigRequest,
+  CreateShipperResponse,
   DeleteIndexResponse,
   ModifyIndexRequest,
+  CompressInfo,
   ValueInfo,
   GetAlarmLogRequest,
-  Filter,
-  ModifyTopicRequest,
+  DeleteShipperResponse,
+  ExportInfo,
+  ConfigInfo,
   DeleteExportRequest,
   SplitPartitionResponse,
-  DeleteAlarmRequest,
+  LogContextInfo,
+  ModifyShipperRequest,
+  DescribeLogContextResponse,
   AlarmNotice,
+  ModifyConfigResponse,
   ModifyAlarmNoticeResponse,
   DescribeMachinesResponse,
-  MachineInfo,
-  LogContextInfo,
-  DescribeLogContextResponse,
+  ContentInfo,
+  ApplyConfigToMachineGroupResponse,
+  DeleteAlarmRequest,
+  CreateConfigResponse,
   MachineGroupTypeInfo,
+  DeleteConfigFromMachineGroupRequest,
+  ShipperInfo,
   KeyValueInfo,
   ModifyMachineGroupRequest,
   DescribeAlarmNoticesRequest,
   NoticeReceiver,
+  MergePartitionRequest,
   CreateExportResponse,
   DeleteAlarmNoticeRequest,
+  DeleteLogsetRequest,
+  MachineInfo,
+  ModifyLogsetResponse,
   MonitorTime,
   SearchLogRequest,
   CreateMachineGroupRequest,
   DescribeExportsResponse,
+  ApplyConfigToMachineGroupRequest,
+  DescribeMachineGroupConfigsResponse,
+  CsvInfo,
   CreateAlarmNoticeRequest,
   DescribeIndexResponse,
+  DescribeMachineGroupConfigsRequest,
+  ModifyLogsetRequest,
   DescribeMachineGroupsResponse,
+  DescribeLogsetsRequest,
   DeleteTopicResponse,
+  Filter,
   DescribeMachinesRequest,
+  KeyRegexInfo,
   MergePartitionResponse,
 } from "./cls_models"
 
@@ -167,13 +215,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改机器组
+   * 本接口用于获取日志集信息列表。
    */
-  async ModifyMachineGroup(
-    req: ModifyMachineGroupRequest,
-    cb?: (error: string, rep: ModifyMachineGroupResponse) => void
-  ): Promise<ModifyMachineGroupResponse> {
-    return this.request("ModifyMachineGroup", req, cb)
+  async DescribeLogsets(
+    req: DescribeLogsetsRequest,
+    cb?: (error: string, rep: DescribeLogsetsResponse) => void
+  ): Promise<DescribeLogsetsResponse> {
+    return this.request("DescribeLogsets", req, cb)
+  }
+
+  /**
+   * 本接口用于修改日志集信息
+   */
+  async ModifyLogset(
+    req: ModifyLogsetRequest,
+    cb?: (error: string, rep: ModifyLogsetResponse) => void
+  ): Promise<ModifyLogsetResponse> {
+    return this.request("ModifyLogset", req, cb)
   }
 
   /**
@@ -197,6 +255,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于获取主题分区列表。
+   */
+  async DescribePartitions(
+    req: DescribePartitionsRequest,
+    cb?: (error: string, rep: DescribePartitionsResponse) => void
+  ): Promise<DescribePartitionsResponse> {
+    return this.request("DescribePartitions", req, cb)
+  }
+
+  /**
    * 本接口用于创建索引
    */
   async CreateIndex(
@@ -207,6 +275,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除采集规则配置
+   */
+  async DeleteConfig(
+    req: DeleteConfigRequest,
+    cb?: (error: string, rep: DeleteConfigResponse) => void
+  ): Promise<DeleteConfigResponse> {
+    return this.request("DeleteConfig", req, cb)
+  }
+
+  /**
+   * 创建新的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   */
+  async CreateShipper(
+    req: CreateShipperRequest,
+    cb?: (error: string, rep: CreateShipperResponse) => void
+  ): Promise<CreateShipperResponse> {
+    return this.request("CreateShipper", req, cb)
+  }
+
+  /**
+   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   */
+  async ModifyShipper(
+    req: ModifyShipperRequest,
+    cb?: (error: string, rep: ModifyShipperResponse) => void
+  ): Promise<ModifyShipperResponse> {
+    return this.request("ModifyShipper", req, cb)
+  }
+
+  /**
    * 该接口用户创建告警通知模板。
    */
   async CreateAlarmNotice(
@@ -214,6 +312,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAlarmNoticeResponse) => void
   ): Promise<CreateAlarmNoticeResponse> {
     return this.request("CreateAlarmNotice", req, cb)
+  }
+
+  /**
+   * 获取采集规则配置
+   */
+  async DescribeConfigs(
+    req: DescribeConfigsRequest,
+    cb?: (error: string, rep: DescribeConfigsResponse) => void
+  ): Promise<DescribeConfigsResponse> {
+    return this.request("DescribeConfigs", req, cb)
   }
 
   /**
@@ -234,6 +342,66 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMachineGroupResponse) => void
   ): Promise<DeleteMachineGroupResponse> {
     return this.request("DeleteMachineGroup", req, cb)
+  }
+
+  /**
+   *  本接口用于获取日志主题列表，支持分页
+   */
+  async DescribeTopics(
+    req: DescribeTopicsRequest,
+    cb?: (error: string, rep: DescribeTopicsResponse) => void
+  ): Promise<DescribeTopicsResponse> {
+    return this.request("DescribeTopics", req, cb)
+  }
+
+  /**
+   * 本接口用于删除日志集。
+   */
+  async DeleteLogset(
+    req: DeleteLogsetRequest,
+    cb?: (error: string, rep: DeleteLogsetResponse) => void
+  ): Promise<DeleteLogsetResponse> {
+    return this.request("DeleteLogset", req, cb)
+  }
+
+  /**
+   * 获取投递规则信息列表
+   */
+  async DescribeShippers(
+    req: DescribeShippersRequest,
+    cb?: (error: string, rep: DescribeShippersResponse) => void
+  ): Promise<DescribeShippersResponse> {
+    return this.request("DescribeShippers", req, cb)
+  }
+
+  /**
+   * 修改机器组
+   */
+  async ModifyMachineGroup(
+    req: ModifyMachineGroupRequest,
+    cb?: (error: string, rep: ModifyMachineGroupResponse) => void
+  ): Promise<ModifyMachineGroupResponse> {
+    return this.request("ModifyMachineGroup", req, cb)
+  }
+
+  /**
+   * 删除应用到机器组的采集配置
+   */
+  async DeleteConfigFromMachineGroup(
+    req: DeleteConfigFromMachineGroupRequest,
+    cb?: (error: string, rep: DeleteConfigFromMachineGroupResponse) => void
+  ): Promise<DeleteConfigFromMachineGroupResponse> {
+    return this.request("DeleteConfigFromMachineGroup", req, cb)
+  }
+
+  /**
+   * 本接口用于创建日志集，返回新创建的日志集的 ID。
+   */
+  async CreateLogset(
+    req: CreateLogsetRequest,
+    cb?: (error: string, rep: CreateLogsetResponse) => void
+  ): Promise<CreateLogsetResponse> {
+    return this.request("CreateLogset", req, cb)
   }
 
   /**
@@ -267,13 +435,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取主题分区列表。
+   * 应用采集配置到指定机器组
    */
-  async DescribePartitions(
-    req: DescribePartitionsRequest,
-    cb?: (error: string, rep: DescribePartitionsResponse) => void
-  ): Promise<DescribePartitionsResponse> {
-    return this.request("DescribePartitions", req, cb)
+  async ApplyConfigToMachineGroup(
+    req: ApplyConfigToMachineGroupRequest,
+    cb?: (error: string, rep: ApplyConfigToMachineGroupResponse) => void
+  ): Promise<ApplyConfigToMachineGroupResponse> {
+    return this.request("ApplyConfigToMachineGroup", req, cb)
   }
 
   /**
@@ -307,13 +475,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  本接口用于获取日志主题列表，支持分页
+   * 修改采集规则配置
    */
-  async DescribeTopics(
-    req: DescribeTopicsRequest,
-    cb?: (error: string, rep: DescribeTopicsResponse) => void
-  ): Promise<DescribeTopicsResponse> {
-    return this.request("DescribeTopics", req, cb)
+  async ModifyConfig(
+    req: ModifyConfigRequest,
+    cb?: (error: string, rep: ModifyConfigResponse) => void
+  ): Promise<ModifyConfigResponse> {
+    return this.request("ModifyConfig", req, cb)
+  }
+
+  /**
+   * 获取投递任务列表
+   */
+  async DescribeShipperTasks(
+    req: DescribeShipperTasksRequest,
+    cb?: (error: string, rep: DescribeShipperTasksResponse) => void
+  ): Promise<DescribeShipperTasksResponse> {
+    return this.request("DescribeShipperTasks", req, cb)
+  }
+
+  /**
+   * 创建采集规则配置
+   */
+  async CreateConfig(
+    req: CreateConfigRequest,
+    cb?: (error: string, rep: CreateConfigResponse) => void
+  ): Promise<CreateConfigResponse> {
+    return this.request("CreateConfig", req, cb)
+  }
+
+  /**
+   * 获取机器组绑定的采集规则配置
+   */
+  async DescribeMachineGroupConfigs(
+    req: DescribeMachineGroupConfigsRequest,
+    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
+  ): Promise<DescribeMachineGroupConfigsResponse> {
+    return this.request("DescribeMachineGroupConfigs", req, cb)
+  }
+
+  /**
+   * 删除投递规则
+   */
+  async DeleteShipper(
+    req: DeleteShipperRequest,
+    cb?: (error: string, rep: DeleteShipperResponse) => void
+  ): Promise<DeleteShipperResponse> {
+    return this.request("DeleteShipper", req, cb)
   }
 
   /**
@@ -364,6 +572,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMachinesResponse) => void
   ): Promise<DescribeMachinesResponse> {
     return this.request("DescribeMachines", req, cb)
+  }
+
+  /**
+   * 重试失败的投递任务
+   */
+  async RetryShipperTask(
+    req: RetryShipperTaskRequest,
+    cb?: (error: string, rep: RetryShipperTaskResponse) => void
+  ): Promise<RetryShipperTaskResponse> {
+    return this.request("RetryShipperTask", req, cb)
+  }
+
+  /**
+   * 获取采集规则配置所绑定的机器组
+   */
+  async DescribeConfigMachineGroups(
+    req: DescribeConfigMachineGroupsRequest,
+    cb?: (error: string, rep: DescribeConfigMachineGroupsResponse) => void
+  ): Promise<DescribeConfigMachineGroupsResponse> {
+    return this.request("DescribeConfigMachineGroups", req, cb)
   }
 
   /**

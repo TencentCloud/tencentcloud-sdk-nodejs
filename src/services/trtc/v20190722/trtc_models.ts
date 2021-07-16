@@ -22,12 +22,12 @@ export interface DescribeAbnormalEventResponse {
   /**
    * 返回的数据总条数
    */
-  Total?: number
+  Total: number
 
   /**
    * 异常体验列表
    */
-  AbnormalExperienceList?: Array<AbnormalExperience>
+  AbnormalExperienceList: Array<AbnormalExperience>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -61,12 +61,12 @@ export interface DescribeAbnormalEventRequest {
   SdkAppId: string
 
   /**
-   * 查询开始时间
+   * 查询开始时间,本地unix时间戳（1588031999s）
    */
   StartTime: number
 
   /**
-   * 查询结束时间
+   * 查询结束时间,本地unix时间戳（1588031999s）
    */
   EndTime: number
 
@@ -429,7 +429,7 @@ export interface DescribeCallDetailRequest {
   CommId: string
 
   /**
-   * 查询开始时间，14天内。本地unix时间戳（1588031999s）
+   * 查询开始时间，14天内。本地unix时间戳（1588031999s），查询实时数据时，查询起止时间不超过1个小时。
    */
   StartTime: number
 
@@ -1125,7 +1125,7 @@ export interface DismissRoomRequest {
  */
 export interface DescribeDetailEventResponse {
   /**
-   * 返回的事件列表
+   * 返回的事件列表，若没有数据，会返回空数组。
    */
   Data: Array<EventList>
 
@@ -1389,19 +1389,19 @@ export interface DescribeCallDetailResponse {
   /**
    * 返回的用户总条数
    */
-  Total?: number
+  Total: number
 
   /**
       * 用户信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UserList?: Array<UserInformation>
+  UserList: Array<UserInformation>
 
   /**
       * 质量数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data?: Array<QualityData>
+  Data: Array<QualityData>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

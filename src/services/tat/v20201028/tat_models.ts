@@ -87,7 +87,7 @@ export interface RunCommandRequest {
   Content: string
 
   /**
-      * 待执行命令的实例ID列表。 支持实例类型：
+      * 待执行命令的实例ID列表，上限100。支持实例类型：
 <li> CVM
 <li> LIGHTHOUSE
       */
@@ -857,7 +857,7 @@ export interface InvokeCommandRequest {
   CommandId: string
 
   /**
-   * 待执行命令的实例ID列表。
+   * 待执行命令的实例ID列表，上限100。
    */
   InstanceIds: Array<string>
 

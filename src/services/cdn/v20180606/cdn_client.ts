@@ -252,6 +252,7 @@ import {
   ListTopDataResponse,
   MaxAge,
   UpdateDomainConfigResponse,
+  OssPrivateAccess,
   LogSetInfo,
   ListDiagnoseReportResponse,
   SearchClsLogRequest,

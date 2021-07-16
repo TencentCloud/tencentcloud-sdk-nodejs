@@ -59,10 +59,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIndex", req, cb);
     }
     /**
-     * 修改机器组
+     * 本接口用于获取日志集信息列表。
      */
-    async ModifyMachineGroup(req, cb) {
-        return this.request("ModifyMachineGroup", req, cb);
+    async DescribeLogsets(req, cb) {
+        return this.request("DescribeLogsets", req, cb);
+    }
+    /**
+     * 本接口用于修改日志集信息
+     */
+    async ModifyLogset(req, cb) {
+        return this.request("ModifyLogset", req, cb);
     }
     /**
      * 本接口用于获取日志导出列表
@@ -77,16 +83,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIndex", req, cb);
     }
     /**
+     * 本接口用于获取主题分区列表。
+     */
+    async DescribePartitions(req, cb) {
+        return this.request("DescribePartitions", req, cb);
+    }
+    /**
      * 本接口用于创建索引
      */
     async CreateIndex(req, cb) {
         return this.request("CreateIndex", req, cb);
     }
     /**
+     * 删除采集规则配置
+     */
+    async DeleteConfig(req, cb) {
+        return this.request("DeleteConfig", req, cb);
+    }
+    /**
+     * 创建新的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     */
+    async CreateShipper(req, cb) {
+        return this.request("CreateShipper", req, cb);
+    }
+    /**
+     * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     */
+    async ModifyShipper(req, cb) {
+        return this.request("ModifyShipper", req, cb);
+    }
+    /**
      * 该接口用户创建告警通知模板。
      */
     async CreateAlarmNotice(req, cb) {
         return this.request("CreateAlarmNotice", req, cb);
+    }
+    /**
+     * 获取采集规则配置
+     */
+    async DescribeConfigs(req, cb) {
+        return this.request("DescribeConfigs", req, cb);
     }
     /**
      * 本接口用于修改告警策略。需要至少修改一项有效内容。
@@ -99,6 +135,42 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteMachineGroup(req, cb) {
         return this.request("DeleteMachineGroup", req, cb);
+    }
+    /**
+     *  本接口用于获取日志主题列表，支持分页
+     */
+    async DescribeTopics(req, cb) {
+        return this.request("DescribeTopics", req, cb);
+    }
+    /**
+     * 本接口用于删除日志集。
+     */
+    async DeleteLogset(req, cb) {
+        return this.request("DeleteLogset", req, cb);
+    }
+    /**
+     * 获取投递规则信息列表
+     */
+    async DescribeShippers(req, cb) {
+        return this.request("DescribeShippers", req, cb);
+    }
+    /**
+     * 修改机器组
+     */
+    async ModifyMachineGroup(req, cb) {
+        return this.request("ModifyMachineGroup", req, cb);
+    }
+    /**
+     * 删除应用到机器组的采集配置
+     */
+    async DeleteConfigFromMachineGroup(req, cb) {
+        return this.request("DeleteConfigFromMachineGroup", req, cb);
+    }
+    /**
+     * 本接口用于创建日志集，返回新创建的日志集的 ID。
+     */
+    async CreateLogset(req, cb) {
+        return this.request("CreateLogset", req, cb);
     }
     /**
      * 本接口用于获取告警策略。
@@ -119,10 +191,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
-     * 本接口用于获取主题分区列表。
+     * 应用采集配置到指定机器组
      */
-    async DescribePartitions(req, cb) {
-        return this.request("DescribePartitions", req, cb);
+    async ApplyConfigToMachineGroup(req, cb) {
+        return this.request("ApplyConfigToMachineGroup", req, cb);
     }
     /**
      * 该接口用于删除告警通知模板
@@ -143,10 +215,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchLog", req, cb);
     }
     /**
-     *  本接口用于获取日志主题列表，支持分页
+     * 修改采集规则配置
      */
-    async DescribeTopics(req, cb) {
-        return this.request("DescribeTopics", req, cb);
+    async ModifyConfig(req, cb) {
+        return this.request("ModifyConfig", req, cb);
+    }
+    /**
+     * 获取投递任务列表
+     */
+    async DescribeShipperTasks(req, cb) {
+        return this.request("DescribeShipperTasks", req, cb);
+    }
+    /**
+     * 创建采集规则配置
+     */
+    async CreateConfig(req, cb) {
+        return this.request("CreateConfig", req, cb);
+    }
+    /**
+     * 获取机器组绑定的采集规则配置
+     */
+    async DescribeMachineGroupConfigs(req, cb) {
+        return this.request("DescribeMachineGroupConfigs", req, cb);
+    }
+    /**
+     * 删除投递规则
+     */
+    async DeleteShipper(req, cb) {
+        return this.request("DeleteShipper", req, cb);
     }
     /**
      * 本接口用于日志主题的索引配置
@@ -177,6 +273,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMachines(req, cb) {
         return this.request("DescribeMachines", req, cb);
+    }
+    /**
+     * 重试失败的投递任务
+     */
+    async RetryShipperTask(req, cb) {
+        return this.request("RetryShipperTask", req, cb);
+    }
+    /**
+     * 获取采集规则配置所绑定的机器组
+     */
+    async DescribeConfigMachineGroups(req, cb) {
+        return this.request("DescribeConfigMachineGroups", req, cb);
     }
     /**
      * 本接口用于删除日志导出

@@ -655,7 +655,7 @@ export interface DomainFilter {
 - status：域名状态，online，offline或processing。
 - serviceType：业务类型，web，download或media。
 - projectId：项目ID。
-- domainType：主源站类型，cname表示自有源，cos表示cos接入。
+- domainType：主源站类型，cname表示自有源，cos表示cos接入，third_party表示第三方对象存储。
 - fullUrlCache：全路径缓存，on或off。
 - https：是否配置https，on，off或processing。
 - originPullProtocol：回源协议类型，支持http，follow或https。
@@ -2758,6 +2758,16 @@ global：全球加速
    * QUIC正在内测中，请先提交内测申请，详情请前往QUIC产品文档。
    */
   Quic?: Quic
+
+  /**
+   * 回源S3私有鉴权
+   */
+  AwsPrivateAccess?: AwsPrivateAccess
+
+  /**
+   * 回源OSS私有鉴权
+   */
+  OssPrivateAccess?: OssPrivateAccess
 }
 
 /**
@@ -3003,6 +3013,11 @@ global：全球加速
    * QUIC正在内测中，请先提交内测申请，详情请前往QUIC产品文档。
    */
   Quic?: Quic
+
+  /**
+   * 回源OSS私有鉴权
+   */
+  OssPrivateAccess?: OssPrivateAccess
 }
 
 /**
@@ -4511,6 +4526,12 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Quic: Quic
+
+  /**
+      * 回源OSS私有鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OssPrivateAccess: OssPrivateAccess
 }
 
 /**
@@ -7121,6 +7142,28 @@ export interface UpdateDomainConfigResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * oss回源鉴权
+ */
+export interface OssPrivateAccess {
+  /**
+   * 开关， on/off。
+   */
+  Switch: string
+
+  /**
+      * 访问ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccessKey?: string
+
+  /**
+      * 密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecretKey?: string
 }
 
 /**

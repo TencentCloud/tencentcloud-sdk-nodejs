@@ -68,9 +68,9 @@ it("redis.v20180412.ModifyMaintenanceWindow", async function () {
     }
 })
 
-it("redis.v20180412.ModifyInstanceAccount", async function () {
+it("redis.v20180412.DescribeParamTemplates", async function () {
     try {
-       const data = await client.ModifyInstanceAccount({})
+       const data = await client.DescribeParamTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +111,16 @@ it("redis.v20180412.UpgradeInstance", async function () {
 it("redis.v20180412.CleanUpInstance", async function () {
     try {
        const data = await client.CleanUpInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeParamTemplateInfo", async function () {
+    try {
+       const data = await client.DescribeParamTemplateInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +208,9 @@ it("redis.v20180412.DescribeInstances", async function () {
     }
 })
 
-it("redis.v20180412.ResetPassword", async function () {
+it("redis.v20180412.DeleteParamTemplate", async function () {
     try {
-       const data = await client.ResetPassword({})
+       const data = await client.DeleteParamTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +231,16 @@ it("redis.v20180412.DescribeMaintenanceWindow", async function () {
 it("redis.v20180412.DescribeInstanceMonitorTopNCmd", async function () {
     try {
        const data = await client.DescribeInstanceMonitorTopNCmd({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.CreateParamTemplate", async function () {
+    try {
+       const data = await client.CreateParamTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +291,16 @@ it("redis.v20180412.DescribeInstanceMonitorSIP", async function () {
 it("redis.v20180412.CreateInstances", async function () {
     try {
        const data = await client.CreateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ModifyInstanceAccount", async function () {
+    try {
+       const data = await client.ModifyInstanceAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +428,16 @@ it("redis.v20180412.ModifyInstanceParams", async function () {
     }
 })
 
+it("redis.v20180412.ModifyParamTemplate", async function () {
+    try {
+       const data = await client.ModifyParamTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.InquiryPriceCreateInstance", async function () {
     try {
        const data = await client.InquiryPriceCreateInstance({})
@@ -451,6 +491,16 @@ it("redis.v20180412.DescribeInstanceSecurityGroup", async function () {
 it("redis.v20180412.DescribeInstanceMonitorBigKeyTypeDist", async function () {
     try {
        const data = await client.DescribeInstanceMonitorBigKeyTypeDist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ResetPassword", async function () {
+    try {
+       const data = await client.ResetPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +601,16 @@ it("redis.v20180412.DescribeDBSecurityGroups", async function () {
 it("redis.v20180412.DescribeInstanceParams", async function () {
     try {
        const data = await client.DescribeInstanceParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ApplyParamsTemplate", async function () {
+    try {
+       const data = await client.ApplyParamsTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

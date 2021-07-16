@@ -2576,8 +2576,7 @@ export interface CreateLiveCallbackTemplateRequest {
       */
     CallbackKey?: string;
     /**
-      * 混流回调 URL，
-相关协议文档：[事件消息通知](/document/product/267/32744)。
+      * 参数已弃用。
       */
     StreamMixNotifyUrl?: string;
 }

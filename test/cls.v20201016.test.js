@@ -68,9 +68,19 @@ it("cls.v20201016.ModifyIndex", async function () {
     }
 })
 
-it("cls.v20201016.ModifyMachineGroup", async function () {
+it("cls.v20201016.DescribeLogsets", async function () {
     try {
-       const data = await client.ModifyMachineGroup({})
+       const data = await client.DescribeLogsets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyLogset", async function () {
+    try {
+       const data = await client.ModifyLogset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,6 +108,16 @@ it("cls.v20201016.DescribeIndex", async function () {
     }
 })
 
+it("cls.v20201016.DescribePartitions", async function () {
+    try {
+       const data = await client.DescribePartitions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateIndex", async function () {
     try {
        const data = await client.CreateIndex({})
@@ -108,9 +128,49 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
+it("cls.v20201016.DeleteConfig", async function () {
+    try {
+       const data = await client.DeleteConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateShipper", async function () {
+    try {
+       const data = await client.CreateShipper({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyShipper", async function () {
+    try {
+       const data = await client.ModifyShipper({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateAlarmNotice", async function () {
     try {
        const data = await client.CreateAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConfigs", async function () {
+    try {
+       const data = await client.DescribeConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +191,66 @@ it("cls.v20201016.ModifyAlarm", async function () {
 it("cls.v20201016.DeleteMachineGroup", async function () {
     try {
        const data = await client.DeleteMachineGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeTopics", async function () {
+    try {
+       const data = await client.DescribeTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteLogset", async function () {
+    try {
+       const data = await client.DeleteLogset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeShippers", async function () {
+    try {
+       const data = await client.DescribeShippers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyMachineGroup", async function () {
+    try {
+       const data = await client.ModifyMachineGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteConfigFromMachineGroup", async function () {
+    try {
+       const data = await client.DeleteConfigFromMachineGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateLogset", async function () {
+    try {
+       const data = await client.CreateLogset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +288,9 @@ it("cls.v20201016.CreateTopic", async function () {
     }
 })
 
-it("cls.v20201016.DescribePartitions", async function () {
+it("cls.v20201016.ApplyConfigToMachineGroup", async function () {
     try {
-       const data = await client.DescribePartitions({})
+       const data = await client.ApplyConfigToMachineGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +328,49 @@ it("cls.v20201016.SearchLog", async function () {
     }
 })
 
-it("cls.v20201016.DescribeTopics", async function () {
+it("cls.v20201016.ModifyConfig", async function () {
     try {
-       const data = await client.DescribeTopics({})
+       const data = await client.ModifyConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeShipperTasks", async function () {
+    try {
+       const data = await client.DescribeShipperTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateConfig", async function () {
+    try {
+       const data = await client.CreateConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
+    try {
+       const data = await client.DescribeMachineGroupConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteShipper", async function () {
+    try {
+       const data = await client.DeleteShipper({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +421,26 @@ it("cls.v20201016.MergePartition", async function () {
 it("cls.v20201016.DescribeMachines", async function () {
     try {
        const data = await client.DescribeMachines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.RetryShipperTask", async function () {
+    try {
+       const data = await client.RetryShipperTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConfigMachineGroups", async function () {
+    try {
+       const data = await client.DescribeConfigMachineGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

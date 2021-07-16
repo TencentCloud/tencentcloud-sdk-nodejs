@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWxCloudBaseRunSubNets", req, cb);
     }
     /**
+     * 查询环境1分钱抵扣信息
+     */
+    async DescribeSpecialCostItems(req, cb) {
+        return this.request("DescribeSpecialCostItems", req, cb);
+    }
+    /**
      * 创建或修改安全网关路由
      */
     async EstablishWxGatewayRoute(req, cb) {
@@ -83,6 +89,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateWxCloudBaseRunServerDBCluster(req, cb) {
         return this.request("CreateWxCloudBaseRunServerDBCluster", req, cb);
+    }
+    /**
+     * 查询环境后付费计费详情
+     */
+    async DescribeEnvPostpaidDeduct(req, cb) {
+        return this.request("DescribeEnvPostpaidDeduct", req, cb);
     }
     /**
      * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数

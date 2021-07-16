@@ -3862,7 +3862,7 @@ export interface RemoveNodeFromNodePoolRequest {
       */
     NodePoolId: string;
     /**
-      * 节点id列表
+      * 节点id列表，一次最多支持100台
       */
     InstanceIds: Array<string>;
 }

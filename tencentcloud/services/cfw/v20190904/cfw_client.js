@@ -171,7 +171,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTableStatus", req, cb);
     }
     /**
-     * 查询防火墙弹性公网ip
+     * 查询防火墙弹性公网IP
      */
     async DescribeCfwEips(req, cb) {
         return this.request("DescribeCfwEips", req, cb);
@@ -195,7 +195,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSecurityGroupRule", req, cb);
     }
     /**
-     * DescribeTLogIpList告警中心ip柱形图
+     * DescribeTLogIpList告警中心IP柱形图
 
      */
     async DescribeTLogIpList(req, cb) {
@@ -220,7 +220,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExpandCfwVertical", req, cb);
     }
     /**
-     * DescribeBlockByIpTimesList 告警中心阻断ip折线图
+     * DescribeBlockByIpTimesList 告警中心阻断IP折线图
 
      */
     async DescribeBlockByIpTimesList(req, cb) {

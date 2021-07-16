@@ -205,33 +205,18 @@ export interface TaskInfoDetail {
 }
 
 /**
- * SwitchInstanceVip请求参数结构体
+ * ApplyParamsTemplate请求参数结构体
  */
-export interface SwitchInstanceVipRequest {
+export interface ApplyParamsTemplateRequest {
   /**
-   * 源实例ID
+   * 实例ID列表
    */
-  SrcInstanceId: string
+  InstanceIds: Array<string>
 
   /**
-   * 目标实例ID
+   * 应用的参数模板ID
    */
-  DstInstanceId: string
-
-  /**
-   * 单位为秒。源实例与目标实例间DTS已断开时间，如果DTS断开时间大于TimeDelay，则不切换VIP，建议尽量根据业务设置一个可接受的值。
-   */
-  TimeDelay?: number
-
-  /**
-   * 在DTS断开的情况下是否强制切换。1：强制切换，0：不强制切换
-   */
-  ForceSwitch?: number
-
-  /**
-   * now: 立即切换，syncComplete：等待同步完成后切换
-   */
-  SwitchTime?: string
+  TemplateId: string
 }
 
 /**
@@ -253,11 +238,6 @@ export interface UpgradeInstanceVersionResponse {
  * CreateInstances请求参数结构体
  */
 export interface CreateInstancesRequest {
-  /**
-   * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
-   */
-  ZoneId: number
-
   /**
    * 实例类型：2 – Redis2.8内存版(标准架构)，3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版(标准架构)，7 – Redis4.0内存版(集群架构)，8 – Redis5.0内存版(标准架构)，9 – Redis5.0内存版(集群架构)。
    */
@@ -283,6 +263,11 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    * 付费方式:0-按量计费，1-包年包月。
    */
   BillingMode: number
+
+  /**
+   * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+   */
+  ZoneId?: number
 
   /**
       * 实例密码，当输入参数NoAuth为true且使用私有网络VPC时，Password为非必填，否则Password为必填参数。
@@ -355,6 +340,16 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    * 购买实例绑定标签
    */
   ResourceTags?: Array<ResourceTag>
+
+  /**
+   * 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+   */
+  ZoneName?: string
+
+  /**
+   * 创建实例需要应用的参数模板ID，不传则应用默认的参数模板
+   */
+  TemplateId?: string
 }
 
 /**
@@ -693,6 +688,21 @@ export interface DescribeDBSecurityGroupsResponse {
 }
 
 /**
+ * RestoreInstance返回参数结构体
+ */
+export interface RestoreInstanceResponse {
+  /**
+   * 任务ID，可通过 DescribeTaskInfo 接口查询任务执行状态
+   */
+  TaskId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述Redis实例的主节点或者副本节点信息
  */
 export interface RedisNodeInfo {
@@ -702,14 +712,19 @@ export interface RedisNodeInfo {
   NodeType: number
 
   /**
-   * 主节点或者副本节点的可用区ID
-   */
-  ZoneId: number
-
-  /**
    * 主节点或者副本节点的ID，创建时不需要传递此参数。
    */
   NodeId?: number
+
+  /**
+   * 主节点或者副本节点的可用区ID
+   */
+  ZoneId?: number
+
+  /**
+   * 主节点或者副本节点的可用区名称
+   */
+  ZoneName?: string
 }
 
 /**
@@ -725,6 +740,16 @@ export interface DescribeBackupUrlRequest {
    * 备份ID，通过DescribeInstanceBackups接口可查
    */
   BackupId: string
+}
+
+/**
+ * DeleteParamTemplate返回参数结构体
+ */
+export interface DeleteParamTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -954,6 +979,26 @@ export interface BigKeyInfo {
 }
 
 /**
+ * DescribeParamTemplates请求参数结构体
+ */
+export interface DescribeParamTemplatesRequest {
+  /**
+   * 产品类型数组。产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+   */
+  ProductTypes?: Array<number>
+
+  /**
+   * 模板名称数组。
+   */
+  TemplateNames?: Array<string>
+
+  /**
+   * 模板ID数组。
+   */
+  TemplateIds?: Array<string>
+}
+
+/**
  * RenewInstance请求参数结构体
  */
 export interface RenewInstanceRequest {
@@ -1129,18 +1174,56 @@ export interface DescribeProjectSecurityGroupRequest {
 }
 
 /**
- * RestoreInstance返回参数结构体
+ * Redis参数模板参数详情
  */
-export interface RestoreInstanceResponse {
+export interface ParameterDetail {
   /**
-   * 任务ID，可通过 DescribeTaskInfo 接口查询任务执行状态
+   * 参数名称
    */
-  TaskId?: number
+  Name: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 参数类型
    */
-  RequestId?: string
+  ParamType: string
+
+  /**
+   * 参数默认值
+   */
+  Default: string
+
+  /**
+   * 参数描述
+   */
+  Description: string
+
+  /**
+   * 参数当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 修改参数后，是否需要重启数据库以使参数生效。可能的值包括：0-不需要重启；1-需要重启
+   */
+  NeedReboot: number
+
+  /**
+      * 参数允许的最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Max: string
+
+  /**
+      * 参数允许的最小值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Min: string
+
+  /**
+      * 参数的可选枚举值。如果为非枚举参数，则为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnumValue: Array<string>
 }
 
 /**
@@ -1196,6 +1279,21 @@ export interface DisableReplicaReadonlyResponse {
    * 失败:ERROR，成功:OK
    */
   Status?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateParamTemplate返回参数结构体
+ */
+export interface CreateParamTemplateResponse {
+  /**
+   * 参数模板 ID。
+   */
+  TemplateId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1289,6 +1387,36 @@ export interface DestroyPostpaidInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SwitchInstanceVip请求参数结构体
+ */
+export interface SwitchInstanceVipRequest {
+  /**
+   * 源实例ID
+   */
+  SrcInstanceId: string
+
+  /**
+   * 目标实例ID
+   */
+  DstInstanceId: string
+
+  /**
+   * 单位为秒。源实例与目标实例间DTS已断开时间，如果DTS断开时间大于TimeDelay，则不切换VIP，建议尽量根据业务设置一个可接受的值。
+   */
+  TimeDelay?: number
+
+  /**
+   * 在DTS断开的情况下是否强制切换。1：强制切换，0：不强制切换
+   */
+  ForceSwitch?: number
+
+  /**
+   * now: 立即切换，syncComplete：等待同步完成后切换
+   */
+  SwitchTime?: string
 }
 
 /**
@@ -1458,6 +1586,36 @@ export interface DescribeInstanceDTSInfoRequest {
 }
 
 /**
+ * CreateParamTemplate请求参数结构体
+ */
+export interface CreateParamTemplateRequest {
+  /**
+   * 参数模板名称。
+   */
+  Name: string
+
+  /**
+   * 参数模板描述。
+   */
+  Description?: string
+
+  /**
+   * 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）。创建模板时必填，从源模板复制则不需要传入该参数。
+   */
+  ProductType?: number
+
+  /**
+   * 源参数模板 ID。
+   */
+  TemplateId?: string
+
+  /**
+   * 参数列表。
+   */
+  ParamList?: Array<InstanceParam>
+}
+
+/**
  * DescribeTendisSlowLog返回参数结构体
  */
 export interface DescribeTendisSlowLogResponse {
@@ -1550,6 +1708,16 @@ export interface ModifyMaintenanceWindowRequest {
    * 维护时间窗结束时间，如：19:00
    */
   EndTime: string
+}
+
+/**
+ * DescribeParamTemplateInfo请求参数结构体
+ */
+export interface DescribeParamTemplateInfoRequest {
+  /**
+   * 参数模板 ID。
+   */
+  TemplateId: string
 }
 
 /**
@@ -1903,6 +2071,31 @@ export interface InstanceTextParam {
 }
 
 /**
+ * 参数模板信息
+ */
+export interface ParamTemplateInfo {
+  /**
+   * 参数模板ID
+   */
+  TemplateId: string
+
+  /**
+   * 参数模板名称
+   */
+  Name: string
+
+  /**
+   * 参数模板描述
+   */
+  Description: string
+
+  /**
+   * 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+   */
+  ProductType: number
+}
+
+/**
  * DescribeInstanceMonitorTopNCmdTook返回参数结构体
  */
 export interface DescribeInstanceMonitorTopNCmdTookResponse {
@@ -2068,6 +2261,21 @@ export interface DescribeTaskInfoRequest {
 }
 
 /**
+ * ApplyParamsTemplate返回参数结构体
+ */
+export interface ApplyParamsTemplateResponse {
+  /**
+   * 任务ID
+   */
+  TaskIds: Array<number>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Redis节点信息
  */
 export interface RedisNodes {
@@ -2223,6 +2431,26 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
 }
 
 /**
+ * DescribeParamTemplates返回参数结构体
+ */
+export interface DescribeParamTemplatesResponse {
+  /**
+   * 该用户的参数模板数量。
+   */
+  TotalCount: number
+
+  /**
+   * 参数模板详情。
+   */
+  Items: Array<ParamTemplateInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceShards请求参数结构体
  */
 export interface DescribeInstanceShardsRequest {
@@ -2330,6 +2558,16 @@ export interface InquiryPriceUpgradeInstanceRequest {
    * 副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
    */
   RedisReplicasNum?: number
+}
+
+/**
+ * ModifyParamTemplate返回参数结构体
+ */
+export interface ModifyParamTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3079,6 +3317,16 @@ export interface DescribeSlowLogRequest {
 }
 
 /**
+ * DeleteParamTemplate请求参数结构体
+ */
+export interface DeleteParamTemplateRequest {
+  /**
+   * 参数模板 ID。
+   */
+  TemplateId: string
+}
+
+/**
  * DescribeAutoBackupConfig请求参数结构体
  */
 export interface DescribeAutoBackupConfigRequest {
@@ -3156,6 +3404,31 @@ export interface ManualBackupInstanceRequest {
    * 备份的备注信息
    */
   Remark?: string
+}
+
+/**
+ * ModifyParamTemplate请求参数结构体
+ */
+export interface ModifyParamTemplateRequest {
+  /**
+   * 源参数模板 ID。
+   */
+  TemplateId: string
+
+  /**
+   * 参数模板名称。
+   */
+  Name?: string
+
+  /**
+   * 参数模板描述。
+   */
+  Description?: string
+
+  /**
+   * 参数列表。
+   */
+  ParamList?: Array<InstanceParam>
 }
 
 /**
@@ -3485,23 +3758,18 @@ export interface ModifyMaintenanceWindowResponse {
 }
 
 /**
- * DescribeCommonDBInstances返回参数结构体
+ * DescribeInstanceMonitorBigKeyTypeDist请求参数结构体
  */
-export interface DescribeCommonDBInstancesResponse {
+export interface DescribeInstanceMonitorBigKeyTypeDistRequest {
   /**
-   * 实例数
+   * 实例Id
    */
-  TotalCount: number
+  InstanceId: string
 
   /**
-   * 实例信息
+   * 时间；例如："20190219"
    */
-  InstanceDetails: Array<RedisCommonInstanceList>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Date: string
 }
 
 /**
@@ -3535,18 +3803,23 @@ export interface DestroyPrepaidInstanceResponse {
 }
 
 /**
- * DescribeInstanceMonitorBigKeyTypeDist请求参数结构体
+ * DescribeCommonDBInstances返回参数结构体
  */
-export interface DescribeInstanceMonitorBigKeyTypeDistRequest {
+export interface DescribeCommonDBInstancesResponse {
   /**
-   * 实例Id
+   * 实例数
    */
-  InstanceId: string
+  TotalCount: number
 
   /**
-   * 时间；例如："20190219"
+   * 实例信息
    */
-  Date: string
+  InstanceDetails: Array<RedisCommonInstanceList>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3900,6 +4173,46 @@ export interface DisableReplicaReadonlyRequest {
    * 实例序号ID
    */
   InstanceId: string
+}
+
+/**
+ * DescribeParamTemplateInfo返回参数结构体
+ */
+export interface DescribeParamTemplateInfoResponse {
+  /**
+   * 实例参数个数
+   */
+  TotalCount: number
+
+  /**
+   * 参数模板 ID。
+   */
+  TemplateId: string
+
+  /**
+   * 参数模板名称。
+   */
+  Name: string
+
+  /**
+   * 产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+   */
+  ProductType: number
+
+  /**
+   * 参数模板描述
+   */
+  Description: string
+
+  /**
+   * 参数详情
+   */
+  Items: Array<ParameterDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

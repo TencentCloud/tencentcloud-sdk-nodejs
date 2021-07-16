@@ -28,6 +28,16 @@ it("tcb.v20180608.DescribeWxCloudBaseRunSubNets", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeSpecialCostItems", async function () {
+    try {
+       const data = await client.DescribeSpecialCostItems({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.EstablishWxGatewayRoute", async function () {
     try {
        const data = await client.EstablishWxGatewayRoute({})
@@ -101,6 +111,16 @@ it("tcb.v20180608.RollUpdateCloudBaseRunServerVersion", async function () {
 it("tcb.v20180608.CreateWxCloudBaseRunServerDBCluster", async function () {
     try {
        const data = await client.CreateWxCloudBaseRunServerDBCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeEnvPostpaidDeduct", async function () {
+    try {
+       const data = await client.DescribeEnvPostpaidDeduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

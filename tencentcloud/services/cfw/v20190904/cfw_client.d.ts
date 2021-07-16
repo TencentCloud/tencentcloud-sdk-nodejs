@@ -105,7 +105,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTableStatus(req: DescribeTableStatusRequest, cb?: (error: string, rep: DescribeTableStatusResponse) => void): Promise<DescribeTableStatusResponse>;
     /**
-     * 查询防火墙弹性公网ip
+     * 查询防火墙弹性公网IP
      */
     DescribeCfwEips(req: DescribeCfwEipsRequest, cb?: (error: string, rep: DescribeCfwEipsResponse) => void): Promise<DescribeCfwEipsResponse>;
     /**
@@ -121,7 +121,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteSecurityGroupRule(req: DeleteSecurityGroupRuleRequest, cb?: (error: string, rep: DeleteSecurityGroupRuleResponse) => void): Promise<DeleteSecurityGroupRuleResponse>;
     /**
-     * DescribeTLogIpList告警中心ip柱形图
+     * DescribeTLogIpList告警中心IP柱形图
 
      */
     DescribeTLogIpList(req: DescribeTLogIpListRequest, cb?: (error: string, rep: DescribeTLogIpListResponse) => void): Promise<DescribeTLogIpListResponse>;
@@ -138,7 +138,7 @@ export declare class Client extends AbstractClient {
      */
     ExpandCfwVertical(req: ExpandCfwVerticalRequest, cb?: (error: string, rep: ExpandCfwVerticalResponse) => void): Promise<ExpandCfwVerticalResponse>;
     /**
-     * DescribeBlockByIpTimesList 告警中心阻断ip折线图
+     * DescribeBlockByIpTimesList 告警中心阻断IP折线图
 
      */
     DescribeBlockByIpTimesList(req: DescribeBlockByIpTimesListRequest, cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void): Promise<DescribeBlockByIpTimesListResponse>;

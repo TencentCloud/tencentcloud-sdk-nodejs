@@ -1120,7 +1120,7 @@ export interface ListUsersInOrgNodeRequest {
   OrgNodeId?: string
 
   /**
-   * 限制读取子节点信息层数。当读取层数为空或0时，默认仅读取当前机构节点信息。当读取层数为1时，读取本机构节点以及其第一层子节点信息。
+   * 是否读取其子节点信息。当其为空或false时，默认仅读取当前机构节点信息。当其为true时，读取本机构节点以及其第一层子节点信息。
    */
   IncludeOrgNodeChildInfo?: boolean
 }

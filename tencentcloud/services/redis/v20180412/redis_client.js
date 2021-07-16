@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMaintenanceWindow", req, cb);
     }
     /**
-     * 修改实例子账号
+     * 查询参数模板列表
      */
-    async ModifyInstanceAccount(req, cb) {
-        return this.request("ModifyInstanceAccount", req, cb);
+    async DescribeParamTemplates(req, cb) {
+        return this.request("DescribeParamTemplates", req, cb);
     }
     /**
      * 查询实例慢查询记录
@@ -86,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CleanUpInstance(req, cb) {
         return this.request("CleanUpInstance", req, cb);
+    }
+    /**
+     * 查询参数模板详情
+     */
+    async DescribeParamTemplateInfo(req, cb) {
+        return this.request("DescribeParamTemplateInfo", req, cb);
     }
     /**
      * 查看实例子账号信息
@@ -136,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 重置密码
+     * 删除参数模板
      */
-    async ResetPassword(req, cb) {
-        return this.request("ResetPassword", req, cb);
+    async DeleteParamTemplate(req, cb) {
+        return this.request("DeleteParamTemplate", req, cb);
     }
     /**
      * 查询实例维护时间窗，在实例需要进行版本升级或者架构升级的时候，会在维护时间窗时间内进行切换
@@ -152,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceMonitorTopNCmd(req, cb) {
         return this.request("DescribeInstanceMonitorTopNCmd", req, cb);
+    }
+    /**
+     * 创建参数模板
+     */
+    async CreateParamTemplate(req, cb) {
+        return this.request("CreateParamTemplate", req, cb);
     }
     /**
      * 禁用读写分离
@@ -182,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateInstances(req, cb) {
         return this.request("CreateInstances", req, cb);
+    }
+    /**
+     * 修改实例子账号
+     */
+    async ModifyInstanceAccount(req, cb) {
+        return this.request("ModifyInstanceAccount", req, cb);
     }
     /**
      * 将原本实例升级到高版本实例，或者将主从版实例升级到集群版实例
@@ -256,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceParams", req, cb);
     }
     /**
+     * 修改参数模板
+     */
+    async ModifyParamTemplate(req, cb) {
+        return this.request("ModifyParamTemplate", req, cb);
+    }
+    /**
      * 查询新购实例价格
      */
     async InquiryPriceCreateInstance(req, cb) {
@@ -290,6 +314,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
         return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb);
+    }
+    /**
+     * 重置密码
+     */
+    async ResetPassword(req, cb) {
+        return this.request("ResetPassword", req, cb);
     }
     /**
      * 模拟故障
@@ -350,6 +380,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceParams(req, cb) {
         return this.request("DescribeInstanceParams", req, cb);
+    }
+    /**
+     * 应用参数模板到实例
+     */
+    async ApplyParamsTemplate(req, cb) {
+        return this.request("ApplyParamsTemplate", req, cb);
     }
     /**
      * 包年包月实例退还

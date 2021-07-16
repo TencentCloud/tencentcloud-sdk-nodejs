@@ -1079,6 +1079,11 @@ export interface ExportVideoByEditorTrackDataRequest {
   TrackData: string
 
   /**
+   * 视频封面图片文件（如 jpeg, png 等）进行 Base64 编码后的字符串，仅支持 gif、jpeg、png 三种图片格式，原图片文件不能超过2 M大 小。
+   */
+  CoverData?: string
+
+  /**
    * 导出的云剪素材信息。指定 ExportDestination = CME 时有效。
    */
   CMEExportInfo?: CMEExportInfo

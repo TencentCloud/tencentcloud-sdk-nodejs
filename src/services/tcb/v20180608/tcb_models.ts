@@ -211,6 +211,47 @@ export interface DescribeCloudBaseRunServerVersionRequest {
 }
 
 /**
+ * 后付费计费详情
+ */
+export interface PostPaidEnvDeductInfo {
+  /**
+      * 资源方
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType: string
+
+  /**
+      * 指标名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricName: string
+
+  /**
+      * 按量计费详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResQuota: number
+
+  /**
+      * 资源包抵扣详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PkgQuota: number
+
+  /**
+      * 免费额度抵扣详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FreeQuota: number
+
+  /**
+      * 环境id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvId: string
+}
+
+/**
  * DescribeExtensionUploadInfo请求参数结构体
  */
 export interface DescribeExtensionUploadInfoRequest {
@@ -401,6 +442,26 @@ export interface DescribeEndUsersRequest {
    * 按照 uuid 列表过滤，最大个数为100
    */
   UUIds?: Array<string>
+}
+
+/**
+ * DescribeSpecialCostItems请求参数结构体
+ */
+export interface DescribeSpecialCostItemsRequest {
+  /**
+   * 环境id
+   */
+  EnvId?: string
+
+  /**
+   * 查询开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
 }
 
 /**
@@ -1470,6 +1531,31 @@ export interface DeleteWxGatewayRouteRequest {
 }
 
 /**
+ * DescribeEnvPostpaidDeduct请求参数结构体
+ */
+export interface DescribeEnvPostpaidDeductRequest {
+  /**
+   * 资源方列表
+   */
+  ResourceTypes: Array<string>
+
+  /**
+   * 环境id
+   */
+  EnvId?: string
+
+  /**
+   * 查询开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+}
+
+/**
  * DescribeExtraPkgBillingInfo请求参数结构体
  */
 export interface DescribeExtraPkgBillingInfoRequest {
@@ -1542,6 +1628,22 @@ export interface DeleteEndUserRequest {
    * 用户列表，每一项都是uuid
    */
   UserList: Array<string>
+}
+
+/**
+ * DescribeEnvPostpaidDeduct返回参数结构体
+ */
+export interface DescribeEnvPostpaidDeductResponse {
+  /**
+      * 指标抵扣详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostPaidEnvDeductInfoList: Array<PostPaidEnvDeductInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1656,6 +1758,35 @@ export interface ModifyCloudBaseRunServerFlowConfResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 1分钱计费详情
+ */
+export interface SpecialCostItem {
+  /**
+      * 上报日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportDate: string
+
+  /**
+      * 腾讯云uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
+
+  /**
+      * 资源id:环境id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvId: string
+
+  /**
+      * 上报任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 }
 
 /**
@@ -2383,6 +2514,22 @@ export interface CloudBaseRunServiceVolumeMount {
 }
 
 /**
+ * DescribeSpecialCostItems返回参数结构体
+ */
+export interface DescribeSpecialCostItemsResponse {
+  /**
+      * 1分钱抵扣详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecialCostItems: Array<SpecialCostItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudBaseProjectVersionList返回参数结构体
  */
 export interface DescribeCloudBaseProjectVersionListResponse {
@@ -2409,7 +2556,7 @@ export interface DescribeCloudBaseProjectVersionListResponse {
  */
 export interface DescribeDownloadFileRequest {
   /**
-   * 代码uri
+   * 代码uri，格式如：extension://abcdefhhxxx.zip，对应 DescribeExtensionUploadInfo 接口的返回值
    */
   CodeUri: string
 }
@@ -3056,13 +3203,13 @@ export interface ModifyEnvResponse {
  */
 export interface DescribeDownloadFileResponse {
   /**
-      * 文件路径
+      * 文件路径，该字段已废弃
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FilePath: string
 
   /**
-      * 加密key
+      * 加密key，用于计算下载加密文件的header。参考SSE-C https://cloud.tencent.com/document/product/436/7728#sse-c
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CustomKey: string

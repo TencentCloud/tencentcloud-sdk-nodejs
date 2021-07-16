@@ -2249,7 +2249,7 @@ export interface EditMediaResponse {
   /**
    * 编辑视频的任务 ID，可以通过该 ID 查询编辑任务的状态。
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2726,6 +2726,16 @@ export interface AiRecognitionTaskOcrFullTextSegmentItem {
 }
 
 /**
+ * 编辑视频的结果文件输出配置。
+ */
+export interface EditMediaOutputConfig {
+  /**
+   * 封装格式，可选值：mp4、hls、mov、flv、avi。默认是 mp4。
+   */
+  Container?: string
+}
+
+/**
  * Asr 文字涉黄信息
  */
 export interface AiReviewPornAsrTaskOutput {
@@ -2776,6 +2786,11 @@ export interface EditMediaRequest {
    * 视频处理输出文件的目标路径。
    */
   OutputObjectPath: string
+
+  /**
+   * 编辑后生成的文件配置。
+   */
+  OutputConfig?: EditMediaOutputConfig
 
   /**
    * 任务的事件通知信息，不填代表不获取事件通知。

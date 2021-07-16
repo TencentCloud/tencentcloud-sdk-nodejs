@@ -124,6 +124,7 @@ import {
   ModifyAnimatedGraphicsTemplateResponse,
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
+  EditMediaOutputConfig,
   AiReviewPornAsrTaskOutput,
   DeleteAIAnalysisTemplateRequest,
   EditMediaRequest,

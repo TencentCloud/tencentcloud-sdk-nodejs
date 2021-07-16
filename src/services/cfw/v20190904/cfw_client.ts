@@ -350,7 +350,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询防火墙弹性公网ip
+   * 查询防火墙弹性公网IP
    */
   async DescribeCfwEips(
     req: DescribeCfwEipsRequest,
@@ -390,7 +390,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * DescribeTLogIpList告警中心ip柱形图
+     * DescribeTLogIpList告警中心IP柱形图
 
      */
   async DescribeTLogIpList(
@@ -431,7 +431,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * DescribeBlockByIpTimesList 告警中心阻断ip折线图
+     * DescribeBlockByIpTimesList 告警中心阻断IP折线图
 
      */
   async DescribeBlockByIpTimesList(

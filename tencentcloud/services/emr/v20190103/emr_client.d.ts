@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceRenewInstance(req: InquiryPriceRenewInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void): Promise<InquiryPriceRenewInstanceResponse>;
     /**
-     * 创建EMR实例
+     * 创建EMR集群实例
      */
     CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
     /**

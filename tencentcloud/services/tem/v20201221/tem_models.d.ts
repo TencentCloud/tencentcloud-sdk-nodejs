@@ -115,21 +115,29 @@ export interface DeployServiceV2Response {
     RequestId?: string;
 }
 /**
- * ingress tls 配置
+ * 弹性伸缩配置
  */
-export interface IngressTls {
+export interface EsInfo {
     /**
-      * host 数组, 空数组表示全部域名的默认证书
+      * 最小实例数
       */
-    Hosts: Array<string>;
+    MinAliveInstances: number;
     /**
-      * secret name，如使用证书，则填空字符串
+      * 最大实例数
       */
-    SecretName: string;
+    MaxAliveInstances: number;
     /**
-      * SSL Certificate Id
+      * 弹性策略,1:cpu，2:内存
       */
-    CertificateId?: string;
+    EsStrategy: number;
+    /**
+      * 弹性扩缩容条件值
+      */
+    Threshold: number;
+    /**
+      * 版本Id
+      */
+    VersionId?: string;
 }
 /**
  * DescribeNamespaces返回参数结构体
@@ -490,6 +498,26 @@ export interface DeployServiceV2Request {
       * 要回滚到的历史版本id
       */
     VersionId?: string;
+    /**
+      * 启动后执行的脚本
+      */
+    PostStart?: string;
+    /**
+      * 停止前执行的脚本
+      */
+    PreStop?: string;
+    /**
+      * 分批发布策略配置
+      */
+    DeployStrategyConf?: DeployStrategyConf;
+    /**
+      * 存活探针配置
+      */
+    Liveness?: HealthCheckConfig;
+    /**
+      * 就绪探针配置
+      */
+    Readiness?: HealthCheckConfig;
 }
 /**
  * ModifyIngress请求参数结构体
@@ -934,6 +962,11 @@ export interface RunVersionPod {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeployVersion: string;
+    /**
+      * 重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RestartCount: number;
 }
 /**
  * Ingress Rule Value 配置
@@ -1067,6 +1100,43 @@ export interface NamespacePage {
     Pages: number;
 }
 /**
+ * 健康检查配置
+ */
+export interface HealthCheckConfig {
+    /**
+      * 支持的健康检查类型，如 HttpGet，TcpSocket，Exec
+      */
+    Type: string;
+    /**
+      * 仅当健康检查类型为 HttpGet 时有效，表示协议类型，如 HTTP，HTTPS
+      */
+    Protocol?: string;
+    /**
+      * 仅当健康检查类型为 HttpGet 时有效，表示请求路径
+      */
+    Path?: string;
+    /**
+      * 仅当健康检查类型为 Exec 时有效，表示执行的脚本内容
+      */
+    Exec?: string;
+    /**
+      * 仅当健康检查类型为 HttpGet\TcpSocket 时有效，表示请求路径
+      */
+    Port?: number;
+    /**
+      * 检查延迟开始时间，单位为秒，默认为 0
+      */
+    InitialDelaySeconds?: number;
+    /**
+      * 超时时间，单位为秒，默认为 1
+      */
+    TimeoutSeconds?: number;
+    /**
+      * 间隔时间，单位为秒，默认为 10
+      */
+    PeriodSeconds?: number;
+}
+/**
  * CreateCosTokenV2返回参数结构体
  */
 export interface CreateCosTokenV2Response {
@@ -1079,6 +1149,23 @@ export interface CreateCosTokenV2Response {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ingress tls 配置
+ */
+export interface IngressTls {
+    /**
+      * host 数组, 空数组表示全部域名的默认证书
+      */
+    Hosts: Array<string>;
+    /**
+      * secret name，如使用证书，则填空字符串
+      */
+    SecretName: string;
+    /**
+      * SSL Certificate Id
+      */
+    CertificateId?: string;
 }
 /**
  * GenerateDownloadUrl请求参数结构体
@@ -1102,29 +1189,25 @@ export interface GenerateDownloadUrlRequest {
     SourceChannel?: number;
 }
 /**
- * 弹性伸缩配置
+ * 分批发布策略配置
  */
-export interface EsInfo {
+export interface DeployStrategyConf {
     /**
-      * 最小实例数
+      * 总分批数
       */
-    MinAliveInstances: number;
+    TotalBatchCount?: number;
     /**
-      * 最大实例数
+      * beta分批实例数
       */
-    MaxAliveInstances: number;
+    BetaBatchNum?: number;
     /**
-      * 弹性策略,1:cpu，2:内存
+      * 分批策略：0-全自动，1-全手动，beta分批一定是手动的，这里的策略指定的是剩余批次
       */
-    EsStrategy: number;
+    DeployStrategyType?: number;
     /**
-      * 弹性扩缩容条件值
+      * 每批暂停间隔
       */
-    Threshold: number;
-    /**
-      * 版本Id
-      */
-    VersionId?: string;
+    BatchInterval?: number;
 }
 /**
  * DescribeIngress请求参数结构体

@@ -23,6 +23,7 @@ import {
   CheckTcbServiceResponse,
   DescribeCloudBaseRunConfForGateWayRequest,
   DescribeCloudBaseRunServerVersionRequest,
+  PostPaidEnvDeductInfo,
   DescribeExtensionUploadInfoRequest,
   DeleteCloudBaseRunServerVersionResponse,
   CloudBaseRunSideSpec,
@@ -31,6 +32,7 @@ import {
   DescribeEnvLimitRequest,
   DescribeCloudBaseBuildServiceResponse,
   DescribeEndUsersRequest,
+  DescribeSpecialCostItemsRequest,
   DescribeEndUserStatisticRequest,
   CloudRunServiceSimpleVersionSnapshot,
   CreateWxCloudBaseRunServerDBClusterResponse,
@@ -66,17 +68,20 @@ import {
   DescribeEnvsRequest,
   CloudBaseRunVersionFlowItem,
   DeleteWxGatewayRouteRequest,
+  DescribeEnvPostpaidDeductRequest,
   DescribeExtraPkgBillingInfoRequest,
   DescribeWxCloudBaseRunSubNetsResponse,
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
   DeleteEndUserRequest,
+  DescribeEnvPostpaidDeductResponse,
   CreateCloudBaseRunResourceResponse,
   DestroyStaticStoreResponse,
   DeleteEndUserResponse,
   ModifyDatabaseACLResponse,
   CloudBaseEsInfo,
   ModifyCloudBaseRunServerFlowConfResponse,
+  SpecialCostItem,
   EstablishCloudBaseRunServerResponse,
   EnvInfo,
   DestroyEnvRequest,
@@ -96,6 +101,7 @@ import {
   DeleteWxGatewayRouteResponse,
   EstablishCloudBaseRunServerRequest,
   CloudBaseRunServiceVolumeMount,
+  DescribeSpecialCostItemsResponse,
   DescribeCloudBaseProjectVersionListResponse,
   DescribeDownloadFileRequest,
   ReinstateEnvResponse,
@@ -185,6 +191,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询环境1分钱抵扣信息
+   */
+  async DescribeSpecialCostItems(
+    req: DescribeSpecialCostItemsRequest,
+    cb?: (error: string, rep: DescribeSpecialCostItemsResponse) => void
+  ): Promise<DescribeSpecialCostItemsResponse> {
+    return this.request("DescribeSpecialCostItems", req, cb)
+  }
+
+  /**
    * 创建或修改安全网关路由
    */
   async EstablishWxGatewayRoute(
@@ -265,6 +281,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWxCloudBaseRunServerDBClusterResponse) => void
   ): Promise<CreateWxCloudBaseRunServerDBClusterResponse> {
     return this.request("CreateWxCloudBaseRunServerDBCluster", req, cb)
+  }
+
+  /**
+   * 查询环境后付费计费详情
+   */
+  async DescribeEnvPostpaidDeduct(
+    req: DescribeEnvPostpaidDeductRequest,
+    cb?: (error: string, rep: DescribeEnvPostpaidDeductResponse) => void
+  ): Promise<DescribeEnvPostpaidDeductResponse> {
+    return this.request("DescribeEnvPostpaidDeduct", req, cb)
   }
 
   /**

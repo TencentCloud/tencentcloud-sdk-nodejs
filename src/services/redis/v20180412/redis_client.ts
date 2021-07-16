@@ -25,7 +25,7 @@ import {
   ModifyAutoBackupConfigResponse,
   RestoreInstanceRequest,
   TaskInfoDetail,
-  SwitchInstanceVipRequest,
+  ApplyParamsTemplateRequest,
   UpgradeInstanceVersionResponse,
   CreateInstancesRequest,
   DescribeInstanceZoneInfoRequest,
@@ -41,8 +41,10 @@ import {
   DescribeSlowLogResponse,
   DescribeCommonDBInstancesRequest,
   DescribeDBSecurityGroupsResponse,
+  RestoreInstanceResponse,
   RedisNodeInfo,
   DescribeBackupUrlRequest,
+  DeleteParamTemplateResponse,
   DescribeInstancesResponse,
   DescribeInstanceZoneInfoResponse,
   Account,
@@ -52,6 +54,7 @@ import {
   ClearInstanceRequest,
   RegionConf,
   BigKeyInfo,
+  DescribeParamTemplatesRequest,
   RenewInstanceRequest,
   UpgradeVersionToMultiAvailabilityZonesResponse,
   DescribeInstanceParamRecordsResponse,
@@ -60,14 +63,16 @@ import {
   DescribeInstanceDealDetailRequest,
   RedisNode,
   DescribeProjectSecurityGroupRequest,
-  RestoreInstanceResponse,
+  ParameterDetail,
   DescribeInstanceShardsResponse,
   DestroyPrepaidInstanceRequest,
   ManualBackupInstanceResponse,
   DisableReplicaReadonlyResponse,
+  CreateParamTemplateResponse,
   InstanceTagInfo,
   DescribeInstanceDTSInfoResponse,
   DestroyPostpaidInstanceResponse,
+  SwitchInstanceVipRequest,
   ChangeReplicaToMasterRequest,
   ProxyNodes,
   ModifyInstanceResponse,
@@ -76,10 +81,12 @@ import {
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeInstanceMonitorHotKeyRequest,
   DescribeInstanceDTSInfoRequest,
+  CreateParamTemplateRequest,
   DescribeTendisSlowLogResponse,
   DescribeProductInfoResponse,
   ModifyInstanceAccountRequest,
   ModifyMaintenanceWindowRequest,
+  DescribeParamTemplateInfoRequest,
   DescribeBackupUrlResponse,
   InquiryPriceRenewInstanceResponse,
   DescribeDBSecurityGroupsRequest,
@@ -96,6 +103,7 @@ import {
   DescribeInstanceMonitorTookDistRequest,
   KillMasterGroupRequest,
   InstanceTextParam,
+  ParamTemplateInfo,
   DescribeInstanceMonitorTopNCmdTookResponse,
   DescribeInstanceMonitorBigKeySizeDistRequest,
   DescribeInstanceAccountRequest,
@@ -104,6 +112,7 @@ import {
   ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
   DescribeTaskInfoRequest,
+  ApplyParamsTemplateResponse,
   RedisNodes,
   DescribeInstanceMonitorTopNCmdRequest,
   ModifyNetworkConfigRequest,
@@ -112,10 +121,12 @@ import {
   DescribeInstanceParamsRequest,
   CleanUpInstanceResponse,
   ModifyDBInstanceSecurityGroupsRequest,
+  DescribeParamTemplatesResponse,
   DescribeInstanceShardsRequest,
   Outbound,
   DescribeAutoBackupConfigResponse,
   InquiryPriceUpgradeInstanceRequest,
+  ModifyParamTemplateResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeInstanceMonitorBigKeySizeDistResponse,
   SecurityGroup,
@@ -141,21 +152,23 @@ import {
   SourceCommand,
   ModfiyInstancePasswordRequest,
   DescribeSlowLogRequest,
+  DeleteParamTemplateRequest,
   DescribeAutoBackupConfigRequest,
   DescribeInstanceMonitorSIPResponse,
   DestroyPostpaidInstanceRequest,
   DeleteInstanceAccountRequest,
   UpgradeInstanceResponse,
   ManualBackupInstanceRequest,
+  ModifyParamTemplateRequest,
   ModfiyInstancePasswordResponse,
   InstanceSet,
   InquiryPriceRenewInstanceRequest,
   ModifyConnectionConfigResponse,
   ModifyMaintenanceWindowResponse,
-  DescribeCommonDBInstancesResponse,
+  DescribeInstanceMonitorBigKeyTypeDistRequest,
   DescribeInstanceMonitorTopNCmdTookRequest,
   DestroyPrepaidInstanceResponse,
-  DescribeInstanceMonitorBigKeyTypeDistRequest,
+  DescribeCommonDBInstancesResponse,
   InquiryPriceCreateInstanceRequest,
   ModifyInstanceParamsRequest,
   BigKeyTypeInfo,
@@ -169,6 +182,7 @@ import {
   DescribeInstanceAccountResponse,
   DescribeInstanceMonitorBigKeyRequest,
   DisableReplicaReadonlyRequest,
+  DescribeParamTemplateInfoResponse,
   DescribeProductInfoRequest,
   SwitchInstanceVipResponse,
   DescribeInstanceParamsResponse,
@@ -255,13 +269,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例子账号
+   * 查询参数模板列表
    */
-  async ModifyInstanceAccount(
-    req: ModifyInstanceAccountRequest,
-    cb?: (error: string, rep: ModifyInstanceAccountResponse) => void
-  ): Promise<ModifyInstanceAccountResponse> {
-    return this.request("ModifyInstanceAccount", req, cb)
+  async DescribeParamTemplates(
+    req: DescribeParamTemplatesRequest,
+    cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
+  ): Promise<DescribeParamTemplatesResponse> {
+    return this.request("DescribeParamTemplates", req, cb)
   }
 
   /**
@@ -302,6 +316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CleanUpInstanceResponse) => void
   ): Promise<CleanUpInstanceResponse> {
     return this.request("CleanUpInstance", req, cb)
+  }
+
+  /**
+   * 查询参数模板详情
+   */
+  async DescribeParamTemplateInfo(
+    req: DescribeParamTemplateInfoRequest,
+    cb?: (error: string, rep: DescribeParamTemplateInfoResponse) => void
+  ): Promise<DescribeParamTemplateInfoResponse> {
+    return this.request("DescribeParamTemplateInfo", req, cb)
   }
 
   /**
@@ -385,13 +409,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置密码
+   * 删除参数模板
    */
-  async ResetPassword(
-    req: ResetPasswordRequest,
-    cb?: (error: string, rep: ResetPasswordResponse) => void
-  ): Promise<ResetPasswordResponse> {
-    return this.request("ResetPassword", req, cb)
+  async DeleteParamTemplate(
+    req: DeleteParamTemplateRequest,
+    cb?: (error: string, rep: DeleteParamTemplateResponse) => void
+  ): Promise<DeleteParamTemplateResponse> {
+    return this.request("DeleteParamTemplate", req, cb)
   }
 
   /**
@@ -412,6 +436,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdResponse) => void
   ): Promise<DescribeInstanceMonitorTopNCmdResponse> {
     return this.request("DescribeInstanceMonitorTopNCmd", req, cb)
+  }
+
+  /**
+   * 创建参数模板
+   */
+  async CreateParamTemplate(
+    req: CreateParamTemplateRequest,
+    cb?: (error: string, rep: CreateParamTemplateResponse) => void
+  ): Promise<CreateParamTemplateResponse> {
+    return this.request("CreateParamTemplate", req, cb)
   }
 
   /**
@@ -462,6 +496,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstancesResponse) => void
   ): Promise<CreateInstancesResponse> {
     return this.request("CreateInstances", req, cb)
+  }
+
+  /**
+   * 修改实例子账号
+   */
+  async ModifyInstanceAccount(
+    req: ModifyInstanceAccountRequest,
+    cb?: (error: string, rep: ModifyInstanceAccountResponse) => void
+  ): Promise<ModifyInstanceAccountResponse> {
+    return this.request("ModifyInstanceAccount", req, cb)
   }
 
   /**
@@ -585,6 +629,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改参数模板
+   */
+  async ModifyParamTemplate(
+    req: ModifyParamTemplateRequest,
+    cb?: (error: string, rep: ModifyParamTemplateResponse) => void
+  ): Promise<ModifyParamTemplateResponse> {
+    return this.request("ModifyParamTemplate", req, cb)
+  }
+
+  /**
    * 查询新购实例价格
    */
   async InquiryPriceCreateInstance(
@@ -642,6 +696,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorBigKeyTypeDistResponse) => void
   ): Promise<DescribeInstanceMonitorBigKeyTypeDistResponse> {
     return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb)
+  }
+
+  /**
+   * 重置密码
+   */
+  async ResetPassword(
+    req: ResetPasswordRequest,
+    cb?: (error: string, rep: ResetPasswordResponse) => void
+  ): Promise<ResetPasswordResponse> {
+    return this.request("ResetPassword", req, cb)
   }
 
   /**
@@ -742,6 +806,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
   ): Promise<DescribeInstanceParamsResponse> {
     return this.request("DescribeInstanceParams", req, cb)
+  }
+
+  /**
+   * 应用参数模板到实例
+   */
+  async ApplyParamsTemplate(
+    req: ApplyParamsTemplateRequest,
+    cb?: (error: string, rep: ApplyParamsTemplateResponse) => void
+  ): Promise<ApplyParamsTemplateResponse> {
+    return this.request("ApplyParamsTemplate", req, cb)
   }
 
   /**

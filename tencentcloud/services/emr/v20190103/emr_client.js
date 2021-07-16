@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceRenewInstance", req, cb);
     }
     /**
-     * 创建EMR实例
+     * 创建EMR集群实例
      */
     async CreateInstance(req, cb) {
         return this.request("CreateInstance", req, cb);

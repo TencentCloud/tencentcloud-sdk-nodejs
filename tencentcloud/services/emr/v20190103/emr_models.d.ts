@@ -450,17 +450,27 @@ export interface InquiryPriceCreateInstanceRequest {
  */
 export interface Resource {
     /**
-      * 节点规格描述
+      * 节点规格描述，如CVM.SA2。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Spec: string;
     /**
       * 存储类型
+取值范围：
+<li>4：表示云SSD。</li>
+<li>5：表示高效云盘。</li>
+<li>6：表示增强型SSD云硬盘。</li>
+<li>11：表示吞吐型云硬盘。</li>
+<li>12：表示极速型SSD云硬盘。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StorageType: number;
     /**
       * 磁盘类型
+取值范围：
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_BASIC：表示云硬盘。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DiskType: string;
@@ -495,17 +505,17 @@ export interface Resource {
       */
     Tags?: Array<Tag>;
     /**
-      * 规格类型
+      * 规格类型，如S2.MEDIUM8
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceType?: string;
     /**
-      * 本地盘数量
+      * 本地盘数量，该字段已废弃
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LocalDiskNum?: number;
     /**
-      * 盘数量
+      * 本地盘数量，如2
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DiskNum?: number;
@@ -570,6 +580,11 @@ export interface TerminateInstanceResponse {
  */
 export interface CreateInstanceResponse {
     /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -602,23 +617,23 @@ export interface InquiryPriceRenewInstanceResponse {
       * 原价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OriginalCost?: number;
+    OriginalCost: number;
     /**
       * 折扣价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiscountCost?: number;
+    DiscountCost: number;
     /**
       * 实例续费的时间单位。取值范围：
 <li>m：表示月份。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeUnit?: string;
+    TimeUnit: string;
     /**
       * 实例续费的时长。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeSpan?: number;
+    TimeSpan: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -835,6 +850,22 @@ export interface CreateInstanceRequest {
 <li>2：表示EMR-V2.0.1。</li>
 <li>4：表示EMR-V2.1.0。</li>
 <li>7：表示EMR-V3.0.0。</li>
+<li>9：表示EMR-V2.2.0。</li>
+<li>11：表示CLICKHOUSE-V1.0.0。</li>
+<li>13：表示DRUID-V1.0.0。</li>
+<li>15：表示EMR-V2.2.1。</li>
+<li>16：表示EMR-V2.3.0。</li>
+<li>17：表示CLICKHOUSE-V1.1.0。</li>
+<li>19：表示EMR-V2.4.0。</li>
+<li>20：表示EMR-V2.5.0。</li>
+<li>22：表示CLICKHOUSE-V1.2.0。</li>
+<li>24：表示EMR-TianQiong-V1.0.0。</li>
+<li>25：表示EMR-V3.1.0。</li>
+<li>26：表示DORIS-V1.0.0。</li>
+<li>27：表示KAFKA-V1.0.0。</li>
+<li>28：表示EMR-V3.2.0。</li>
+<li>29：表示EMR-V2.5.1。</li>
+<li>30：表示EMR-V2.6.0。</li>
       */
     ProductId: number;
     /**
@@ -842,11 +873,8 @@ export interface CreateInstanceRequest {
       */
     VPCSettings: VPCSettings;
     /**
-      * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：
-<li>ProductId为1的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为2的时候，必选组件包括：hadoop-2.7.3、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为4的时候，必选组件包括：hadoop-2.8.4、knox-1.2.0、zookeeper-3.4.9</li>
-<li>ProductId为7的时候，必选组件包括：hadoop-3.1.2、knox-1.2.0、zookeeper-3.4.9</li>
+      * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；
+填写实例值：hive、flink。
       */
     Software: Array<string>;
     /**
@@ -902,7 +930,7 @@ export interface CreateInstanceRequest {
       */
     SgId?: string;
     /**
-      * 引导操作脚本设置。
+      * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
       */
     PreExecutedFileSettings?: Array<PreExecuteFileSettings>;
     /**
@@ -939,6 +967,7 @@ export interface CreateInstanceRequest {
     Tags?: Array<Tag>;
     /**
       * 分散置放群组ID列表，当前只支持指定一个。
+该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/213/15486 ) 的返回值中的SecurityGroupId字段来获取。
       */
     DisasterRecoverGroupIds?: Array<string>;
     /**
@@ -948,7 +977,7 @@ export interface CreateInstanceRequest {
     /**
       * hive共享元数据库类型。取值范围：
 <li>EMR_NEW_META：表示集群默认创建</li>
-<li>EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。</li>
+<li>EMR_EXIT_META：表示集群使用指定EMR-MetaDB。</li>
 <li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
       */
     MetaType?: string;
@@ -1006,10 +1035,118 @@ export interface PodParameter {
     ClusterId: string;
     /**
       * 自定义权限
+如：
+{
+  "apiVersion": "v1",
+  "clusters": [
+    {
+      "cluster": {
+        "certificate-authority-data": "xxxxxx==",
+        "server": "https://xxxxx.com"
+      },
+      "name": "cls-xxxxx"
+    }
+  ],
+  "contexts": [
+    {
+      "context": {
+        "cluster": "cls-xxxxx",
+        "user": "100014xxxxx"
+      },
+      "name": "cls-a44yhcxxxxxxxxxx"
+    }
+  ],
+  "current-context": "cls-a4xxxx-context-default",
+  "kind": "Config",
+  "preferences": {},
+  "users": [
+    {
+      "name": "100014xxxxx",
+      "user": {
+        "client-certificate-data": "xxxxxx",
+        "client-key-data": "xxxxxx"
+      }
+    }
+  ]
+}
       */
     Config: string;
     /**
       * 自定义参数
+如：
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+      "name": "test-deployment",
+      "labels": {
+        "app": "test"
+      }
+    },
+    "spec": {
+      "replicas": 3,
+      "selector": {
+        "matchLabels": {
+          "app": "test-app"
+        }
+      },
+      "template": {
+        "metadata": {
+          "annotations": {
+            "your-organization.com/department-v1": "test-example-v1",
+            "your-organization.com/department-v2": "test-example-v2"
+          },
+          "labels": {
+            "app": "test-app",
+            "environment": "production"
+          }
+        },
+        "spec": {
+          "nodeSelector": {
+            "your-organization/node-test": "test-node"
+          },
+          "containers": [
+            {
+              "name": "nginx",
+              "image": "nginx:1.14.2",
+              "ports": [
+                {
+                  "containerPort": 80
+                }
+              ]
+            }
+          ],
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchExpressions": [
+                      {
+                        "key": "disk-type",
+                        "operator": "In",
+                        "values": [
+                          "ssd",
+                          "sas"
+                        ]
+                      },
+                      {
+                        "key": "cpu-num",
+                        "operator": "Gt",
+                        "values": [
+                          "6"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
       */
     Parameter: string;
 }
@@ -1600,13 +1737,26 @@ export interface PodSpec {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DynamicPodSpec?: DynamicPodSpec;
+    /**
+      * 代表vpc网络唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId?: string;
+    /**
+      * 代表vpc子网唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId?: string;
 }
 /**
  * 多云盘参数
  */
 export interface MultiDisk {
     /**
-      * 云盘类型("CLOUD_PREMIUM","CLOUD_SSD","CLOUD_BASIC")的一种
+      * 云盘类型
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_HSSD：表示增强型SSD云硬盘。</li>
       */
     DiskType?: string;
     /**
@@ -1874,22 +2024,22 @@ export interface DescribeClusterNodesResponse {
     /**
       * 查询到的节点总数
       */
-    TotalCnt?: number;
+    TotalCnt: number;
     /**
       * 节点详细信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NodeList?: Array<NodeHardwareInfo>;
+    NodeList: Array<NodeHardwareInfo>;
     /**
       * 用户所有的标签键列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TagKeys?: Array<string>;
+    TagKeys: Array<string>;
     /**
       * 资源类型列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HardwareResourceTypeList?: Array<string>;
+    HardwareResourceTypeList: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2095,6 +2245,11 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DynamicPodSpec: string;
+    /**
+      * 是否支持变更计费类型 1是，0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportModifyPayMode: number;
 }
 /**
  * InquiryPriceUpdateInstance返回参数结构体
@@ -2252,6 +2407,10 @@ export interface InquiryPriceRenewInstanceRequest {
 <li>CNY：表示人民币。</li>
       */
     Currency?: string;
+    /**
+      * 是否按量转包年包月。0：否，1：是。
+      */
+    ModifyPayMode?: number;
 }
 /**
  * 出参
@@ -2402,7 +2561,7 @@ export interface ScaleOutInstanceRequest {
       */
     Tags?: Array<Tag>;
     /**
-      * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群提供的资源
+      * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群或EKS集群提供的资源
       */
     HardwareResourceType?: string;
     /**
@@ -2427,6 +2586,13 @@ export interface ScaleOutInstanceRequest {
     PodParameter?: PodParameter;
     /**
       * 扩容的Master节点的数量。
+使用clickhouse集群扩容时，该参数不生效。
+使用kafka集群扩容时，该参数不生效。
+当HardwareResourceType=POD时，该参数不生效。
       */
     MasterCount?: number;
+    /**
+      * 扩容后是否启动服务，true：启动，false：不启动
+      */
+    StartServiceAfterScaleOut?: string;
 }

@@ -156,7 +156,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建EMR实例
+   * 创建EMR集群实例
    */
   async CreateInstance(
     req: CreateInstanceRequest,
