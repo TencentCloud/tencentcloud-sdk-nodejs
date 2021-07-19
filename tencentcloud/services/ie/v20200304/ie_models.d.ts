@@ -1152,7 +1152,7 @@ export interface DescribeEditingTaskResultResponse {
     /**
       * 编辑任务结果信息。
       */
-    TaskResult?: EditingTaskResult;
+    TaskResult: EditingTaskResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

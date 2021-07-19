@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteKeyPairs", req, cb);
     }
     /**
+     * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+     */
+    async DescribeCcnAttachedInstances(req, cb) {
+        return this.request("DescribeCcnAttachedInstances", req, cb);
+    }
+    /**
      * 本接口（DescribeInstances）用于查询一个或多个实例的详细信息。
 
 * 可以根据实例 ID、实例名称或者实例的内网 IP 查询实例的详细信息。
@@ -204,6 +210,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBundleDiscount", req, cb);
     }
     /**
+     * 本接口 (AttachCcn) 用于建立与云联网的关联。
+     */
+    async AttachCcn(req, cb) {
+        return this.request("AttachCcn", req, cb);
+    }
+    /**
      * 本接口（DescribeBlueprints）用于查询镜像信息。
      */
     async DescribeBlueprints(req, cb) {
@@ -254,10 +266,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBlueprintAttribute", req, cb);
     }
     /**
-     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
+     * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
      */
-    async CreateInstanceSnapshot(req, cb) {
-        return this.request("CreateInstanceSnapshot", req, cb);
+    async DescribeInstancesDeniedActions(req, cb) {
+        return this.request("DescribeInstancesDeniedActions", req, cb);
     }
     /**
      * 本接口（InquirePriceCreateInstances）用于续费实例询价。
@@ -279,10 +291,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceCreateInstances", req, cb);
     }
     /**
-     * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
+     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
      */
-    async DescribeInstancesDeniedActions(req, cb) {
-        return this.request("DescribeInstancesDeniedActions", req, cb);
+    async CreateInstanceSnapshot(req, cb) {
+        return this.request("CreateInstanceSnapshot", req, cb);
     }
     /**
      * 本接口（DescribeRegions）用于查询地域信息。
@@ -319,6 +331,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ApplyInstanceSnapshot(req, cb) {
         return this.request("ApplyInstanceSnapshot", req, cb);
+    }
+    /**
+     * 本接口 (AttachCcn) 用于解除与云联网的关联。
+     */
+    async DetachCcn(req, cb) {
+        return this.request("DetachCcn", req, cb);
     }
     /**
      * 本接口（DescribeSnapshots）用于查询快照的详细信息。
@@ -398,6 +416,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeZones(req, cb) {
         return this.request("DescribeZones", req, cb);
+    }
+    /**
+     * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
+     */
+    async ResetAttachCcn(req, cb) {
+        return this.request("ResetAttachCcn", req, cb);
     }
     /**
      * 本接口（RebootInstances）用于重启实例。

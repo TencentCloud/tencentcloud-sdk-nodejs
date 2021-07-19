@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, DescribeInstancesTrafficPackagesResponse, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, TerminateInstancesResponse, DescribeSnapshotsDeniedActionsResponse, DescribeBlueprintInstancesResponse, CreateInstanceSnapshotResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, DescribeGeneralResourceQuotasRequest, DeleteKeyPairsRequest, ResetInstanceRequest, DescribeBundlesResponse, InquirePriceRenewInstancesRequest, DescribeRegionsResponse, RebootInstancesRequest, AssociateInstancesKeyPairsRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, StartInstancesResponse, DisassociateInstancesKeyPairsResponse, DescribeResetInstanceBlueprintsResponse, DescribeInstancesDeniedActionsResponse, ModifyInstancesAttributeRequest, DescribeZonesRequest, StartInstancesRequest, DeleteSnapshotsRequest, ModifySnapshotAttributeRequest, DescribeBundleDiscountResponse, DeleteSnapshotsResponse, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, StopInstancesResponse, ModifyBlueprintAttributeResponse, DescribeModifyInstanceBundlesRequest, DescribeRegionsRequest, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, StopInstancesRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, ResetInstancesPasswordResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeBundlesRequest, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceCreateInstancesResponse, DescribeSnapshotsDeniedActionsRequest, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, InquirePriceCreateBlueprintRequest, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeInstancesResponse, DescribeZonesResponse, CreateBlueprintResponse, DescribeResetInstanceBlueprintsRequest, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, TerminateInstancesRequest, RebootInstancesResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeBlueprintsRequest, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, DescribeFirewallRulesTemplateResponse, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, CreateInstanceSnapshotRequest, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
+import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, DescribeInstancesTrafficPackagesResponse, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, AttachCcnRequest, DescribeSnapshotsDeniedActionsResponse, DescribeBlueprintInstancesResponse, DetachCcnResponse, CreateInstanceSnapshotResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, DescribeGeneralResourceQuotasRequest, DeleteKeyPairsRequest, ResetInstanceRequest, DescribeBundlesResponse, InquirePriceRenewInstancesRequest, DescribeRegionsResponse, AttachCcnResponse, RebootInstancesRequest, ResetAttachCcnRequest, AssociateInstancesKeyPairsRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, StartInstancesResponse, TerminateInstancesResponse, DisassociateInstancesKeyPairsResponse, DescribeBlueprintsRequest, DescribeInstancesDeniedActionsResponse, ModifyInstancesAttributeRequest, DescribeZonesRequest, StartInstancesRequest, DeleteSnapshotsRequest, ModifySnapshotAttributeRequest, DescribeBundleDiscountResponse, DeleteSnapshotsResponse, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, StopInstancesResponse, ModifyBlueprintAttributeResponse, DescribeModifyInstanceBundlesRequest, DescribeRegionsRequest, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, StopInstancesRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, DescribeCcnAttachedInstancesRequest, ResetInstancesPasswordResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeCcnAttachedInstancesResponse, DescribeBundlesRequest, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceCreateInstancesResponse, DescribeSnapshotsDeniedActionsRequest, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DetachCcnRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, InquirePriceCreateBlueprintRequest, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeInstancesResponse, DescribeZonesResponse, CreateBlueprintResponse, DescribeResetInstanceBlueprintsRequest, ResetAttachCcnResponse, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, TerminateInstancesRequest, RebootInstancesResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeResetInstanceBlueprintsResponse, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, DescribeFirewallRulesTemplateResponse, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, CreateInstanceSnapshotRequest, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
 /**
  * lighthouse client
  * @class
@@ -86,6 +86,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteKeyPairs(req: DeleteKeyPairsRequest, cb?: (error: string, rep: DeleteKeyPairsResponse) => void): Promise<DeleteKeyPairsResponse>;
     /**
+     * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+     */
+    DescribeCcnAttachedInstances(req?: DescribeCcnAttachedInstancesRequest, cb?: (error: string, rep: DescribeCcnAttachedInstancesResponse) => void): Promise<DescribeCcnAttachedInstancesResponse>;
+    /**
      * 本接口（DescribeInstances）用于查询一个或多个实例的详细信息。
 
 * 可以根据实例 ID、实例名称或者实例的内网 IP 查询实例的详细信息。
@@ -144,6 +148,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBundleDiscount(req: DescribeBundleDiscountRequest, cb?: (error: string, rep: DescribeBundleDiscountResponse) => void): Promise<DescribeBundleDiscountResponse>;
     /**
+     * 本接口 (AttachCcn) 用于建立与云联网的关联。
+     */
+    AttachCcn(req: AttachCcnRequest, cb?: (error: string, rep: AttachCcnResponse) => void): Promise<AttachCcnResponse>;
+    /**
      * 本接口（DescribeBlueprints）用于查询镜像信息。
      */
     DescribeBlueprints(req: DescribeBlueprintsRequest, cb?: (error: string, rep: DescribeBlueprintsResponse) => void): Promise<DescribeBlueprintsResponse>;
@@ -180,9 +188,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBlueprintAttribute(req: ModifyBlueprintAttributeRequest, cb?: (error: string, rep: ModifyBlueprintAttributeResponse) => void): Promise<ModifyBlueprintAttributeResponse>;
     /**
-     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
+     * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
      */
-    CreateInstanceSnapshot(req: CreateInstanceSnapshotRequest, cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void): Promise<CreateInstanceSnapshotResponse>;
+    DescribeInstancesDeniedActions(req: DescribeInstancesDeniedActionsRequest, cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void): Promise<DescribeInstancesDeniedActionsResponse>;
     /**
      * 本接口（InquirePriceCreateInstances）用于续费实例询价。
      */
@@ -197,9 +205,9 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceCreateInstances(req: InquirePriceCreateInstancesRequest, cb?: (error: string, rep: InquirePriceCreateInstancesResponse) => void): Promise<InquirePriceCreateInstancesResponse>;
     /**
-     * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
+     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
      */
-    DescribeInstancesDeniedActions(req: DescribeInstancesDeniedActionsRequest, cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void): Promise<DescribeInstancesDeniedActionsResponse>;
+    CreateInstanceSnapshot(req: CreateInstanceSnapshotRequest, cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void): Promise<CreateInstanceSnapshotResponse>;
     /**
      * 本接口（DescribeRegions）用于查询地域信息。
      */
@@ -226,6 +234,10 @@ export declare class Client extends AbstractClient {
 <li>回滚快照时，实例的状态必须为 STOPPED 或 RUNNING，可通过 DescribeInstances 接口查询实例状态。处于 RUNNING 状态的实例会强制关机，然后回滚快照。</li>
      */
     ApplyInstanceSnapshot(req: ApplyInstanceSnapshotRequest, cb?: (error: string, rep: ApplyInstanceSnapshotResponse) => void): Promise<ApplyInstanceSnapshotResponse>;
+    /**
+     * 本接口 (AttachCcn) 用于解除与云联网的关联。
+     */
+    DetachCcn(req: DetachCcnRequest, cb?: (error: string, rep: DetachCcnResponse) => void): Promise<DetachCcnResponse>;
     /**
      * 本接口（DescribeSnapshots）用于查询快照的详细信息。
      */
@@ -287,6 +299,10 @@ export declare class Client extends AbstractClient {
      * 查询地域下可用区
      */
     DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
+    /**
+     * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
+     */
+    ResetAttachCcn(req: ResetAttachCcnRequest, cb?: (error: string, rep: ResetAttachCcnResponse) => void): Promise<ResetAttachCcnResponse>;
     /**
      * 本接口（RebootInstances）用于重启实例。
 

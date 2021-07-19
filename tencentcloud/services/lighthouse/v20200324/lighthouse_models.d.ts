@@ -77,13 +77,13 @@ export interface DeleteKeyPairsResponse {
     RequestId?: string;
 }
 /**
- * TerminateInstances返回参数结构体
+ * AttachCcn请求参数结构体
  */
-export interface TerminateInstancesResponse {
+export interface AttachCcnRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 云联网实例ID。
       */
-    RequestId?: string;
+    CcnId: string;
 }
 /**
  * DescribeSnapshotsDeniedActions返回参数结构体
@@ -169,6 +169,15 @@ export interface ModifyBundle {
       * 套餐信息。
       */
     Bundle: Bundle;
+}
+/**
+ * DetachCcn返回参数结构体
+ */
+export interface DetachCcnResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateInstanceSnapshot返回参数结构体
@@ -333,6 +342,15 @@ export interface DescribeRegionsResponse {
     RequestId?: string;
 }
 /**
+ * AttachCcn返回参数结构体
+ */
+export interface AttachCcnResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * RebootInstances请求参数结构体
  */
 export interface RebootInstancesRequest {
@@ -340,6 +358,15 @@ export interface RebootInstancesRequest {
       * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
       */
     InstanceIds: Array<string>;
+}
+/**
+ * ResetAttachCcn请求参数结构体
+ */
+export interface ResetAttachCcnRequest {
+    /**
+      * 云联网实例ID。
+      */
+    CcnId: string;
 }
 /**
  * AssociateInstancesKeyPairs请求参数结构体
@@ -607,6 +634,15 @@ export interface StartInstancesResponse {
     RequestId?: string;
 }
 /**
+ * TerminateInstances返回参数结构体
+ */
+export interface TerminateInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 流量包详情
  */
 export interface TrafficPackage {
@@ -665,21 +701,37 @@ export interface DisassociateInstancesKeyPairsResponse {
     RequestId?: string;
 }
 /**
- * DescribeResetInstanceBlueprints返回参数结构体
+ * DescribeBlueprints请求参数结构体
  */
-export interface DescribeResetInstanceBlueprintsResponse {
+export interface DescribeBlueprintsRequest {
     /**
-      * 符合条件的镜像数量。
+      * 镜像 ID 列表。
       */
-    TotalCount: number;
+    BlueprintIds?: Array<string>;
     /**
-      * 镜像重置信息列表
+      * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
       */
-    ResetInstanceBlueprintSet: Array<ResetInstanceBlueprint>;
+    Offset?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 过滤器列表。
+<li>blueprint-id</li>按照【镜像 ID】进行过滤。
+类型：String
+必选：否
+<li>blueprint-type</li>按照【镜像类型】进行过滤。
+取值：APP_OS（预置应用的系统 ）；PURE_OS（纯净的 OS 系统）；PRIVATE（自定义镜像）。
+类型：String
+必选：否
+<li>platform-type</li>按照【镜像平台类型】进行过滤。
+取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 实例可退还信息。
@@ -1004,6 +1056,10 @@ export interface DescribeKeyPairsRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * DescribeCcnAttachedInstances请求参数结构体
+ */
+export declare type DescribeCcnAttachedInstancesRequest = null;
+/**
  * ResetInstancesPassword返回参数结构体
  */
 export interface ResetInstancesPasswordResponse {
@@ -1173,6 +1229,20 @@ export interface DescribeInstanceVncUrlResponse {
  * ModifyFirewallRules返回参数结构体
  */
 export interface ModifyFirewallRulesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCcnAttachedInstances返回参数结构体
+ */
+export interface DescribeCcnAttachedInstancesResponse {
+    /**
+      * 云联网关联的实例列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CcnAttachedInstanceSet: Array<CcnAttachedInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1453,6 +1523,15 @@ export interface DescribeInstancesRequest {
       * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
       */
     Limit?: number;
+}
+/**
+ * DetachCcn请求参数结构体
+ */
+export interface DetachCcnRequest {
+    /**
+      * 云联网实例ID。
+      */
+    CcnId: string;
 }
 /**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤名称等
@@ -1797,6 +1876,15 @@ export interface DescribeResetInstanceBlueprintsRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * ResetAttachCcn返回参数结构体
+ */
+export interface ResetAttachCcnResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyInstancesRenewFlag返回参数结构体
  */
 export interface ModifyInstancesRenewFlagResponse {
@@ -1923,37 +2011,21 @@ export interface GeneralResourceQuota {
     ResourceQuotaTotal: number;
 }
 /**
- * DescribeBlueprints请求参数结构体
+ * DescribeResetInstanceBlueprints返回参数结构体
  */
-export interface DescribeBlueprintsRequest {
+export interface DescribeResetInstanceBlueprintsResponse {
     /**
-      * 镜像 ID 列表。
+      * 符合条件的镜像数量。
       */
-    BlueprintIds?: Array<string>;
+    TotalCount: number;
     /**
-      * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+      * 镜像重置信息列表
       */
-    Offset?: number;
+    ResetInstanceBlueprintSet: Array<ResetInstanceBlueprint>;
     /**
-      * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Limit?: number;
-    /**
-      * 过滤器列表。
-<li>blueprint-id</li>按照【镜像 ID】进行过滤。
-类型：String
-必选：否
-<li>blueprint-type</li>按照【镜像类型】进行过滤。
-取值：APP_OS（预置应用的系统 ）；PURE_OS（纯净的 OS 系统）；PRIVATE（自定义镜像）。
-类型：String
-必选：否
-<li>platform-type</li>按照【镜像平台类型】进行过滤。
-取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。
-类型：String
-必选：否
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
-      */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * 描述镜像软件详细信息。
@@ -2091,6 +2163,42 @@ export interface InquirePriceCreateInstancesRequest {
       * 应用镜像 ID，使用收费应用镜像时必填。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
       */
     BlueprintId?: string;
+}
+/**
+ * 云联网关联的实例列表。
+ */
+export interface CcnAttachedInstance {
+    /**
+      * 云联网ID。
+      */
+    CcnId: string;
+    /**
+      * 关联实例CIDR。
+      */
+    CidrBlock: Array<string>;
+    /**
+      * 关联实例状态：
+
+•  PENDING：申请中
+•  ACTIVE：已连接
+•  EXPIRED：已过期
+•  REJECTED：已拒绝
+•  DELETED：已删除
+•  FAILED：失败的（2小时后将异步强制解关联）
+•  ATTACHING：关联中
+•  DETACHING：解关联中
+•  DETACHFAILED：解关联失败（2小时后将异步强制解关联）
+      */
+    State: string;
+    /**
+      * 关联时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachedTime: string;
+    /**
+      * 备注
+      */
+    Description: string;
 }
 /**
  * DescribeModifyInstanceBundles返回参数结构体

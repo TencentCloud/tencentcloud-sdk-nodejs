@@ -24,12 +24,13 @@ import {
   DescribeInstancesTrafficPackagesResponse,
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
-  TerminateInstancesResponse,
+  AttachCcnRequest,
   DescribeSnapshotsDeniedActionsResponse,
   RegionInfo,
   DescribeBlueprintInstancesResponse,
   InstanceDeniedActions,
   ModifyBundle,
+  DetachCcnResponse,
   CreateInstanceSnapshotResponse,
   InquirePriceRenewInstancesResponse,
   DeleteFirewallRulesResponse,
@@ -41,7 +42,9 @@ import {
   InquirePriceRenewInstancesRequest,
   DiscountDetail,
   DescribeRegionsResponse,
+  AttachCcnResponse,
   RebootInstancesRequest,
+  ResetAttachCcnRequest,
   AssociateInstancesKeyPairsRequest,
   ImportKeyPairResponse,
   DescribeSnapshotsRequest,
@@ -59,9 +62,10 @@ import {
   ModifyFirewallRuleDescriptionRequest,
   InstanceTrafficPackage,
   StartInstancesResponse,
+  TerminateInstancesResponse,
   TrafficPackage,
   DisassociateInstancesKeyPairsResponse,
-  DescribeResetInstanceBlueprintsResponse,
+  DescribeBlueprintsRequest,
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
   ModifyInstancesAttributeRequest,
@@ -86,12 +90,14 @@ import {
   StopInstancesRequest,
   DescribeBlueprintsResponse,
   DescribeKeyPairsRequest,
+  DescribeCcnAttachedInstancesRequest,
   ResetInstancesPasswordResponse,
   LoginSettings,
   Instance,
   CreateKeyPairResponse,
   DescribeInstanceVncUrlResponse,
   ModifyFirewallRulesResponse,
+  DescribeCcnAttachedInstancesResponse,
   DescribeBundlesRequest,
   Blueprint,
   DeniedAction,
@@ -102,6 +108,7 @@ import {
   ResetInstancesPasswordRequest,
   CreateKeyPairRequest,
   DescribeInstancesRequest,
+  DetachCcnRequest,
   Filter,
   DescribeSnapshotsResponse,
   Snapshot,
@@ -119,6 +126,7 @@ import {
   CreateBlueprintResponse,
   PolicyDetail,
   DescribeResetInstanceBlueprintsRequest,
+  ResetAttachCcnResponse,
   ModifyInstancesRenewFlagResponse,
   ApplyInstanceSnapshotRequest,
   TerminateInstancesRequest,
@@ -129,7 +137,7 @@ import {
   Price,
   BlueprintPrice,
   GeneralResourceQuota,
-  DescribeBlueprintsRequest,
+  DescribeResetInstanceBlueprintsResponse,
   SoftwareDetail,
   InstancePrice,
   ModifySnapshotAttributeResponse,
@@ -139,6 +147,7 @@ import {
   ResetInstanceResponse,
   DescribeFirewallRulesRequest,
   InquirePriceCreateInstancesRequest,
+  CcnAttachedInstance,
   DescribeModifyInstanceBundlesResponse,
   CreateInstanceSnapshotRequest,
   BlueprintInstance,
@@ -307,6 +316,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+   */
+  async DescribeCcnAttachedInstances(
+    req?: DescribeCcnAttachedInstancesRequest,
+    cb?: (error: string, rep: DescribeCcnAttachedInstancesResponse) => void
+  ): Promise<DescribeCcnAttachedInstancesResponse> {
+    return this.request("DescribeCcnAttachedInstances", req, cb)
+  }
+
+  /**
      * 本接口（DescribeInstances）用于查询一个或多个实例的详细信息。
 
 * 可以根据实例 ID、实例名称或者实例的内网 IP 查询实例的详细信息。
@@ -413,6 +432,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (AttachCcn) 用于建立与云联网的关联。
+   */
+  async AttachCcn(
+    req: AttachCcnRequest,
+    cb?: (error: string, rep: AttachCcnResponse) => void
+  ): Promise<AttachCcnResponse> {
+    return this.request("AttachCcn", req, cb)
+  }
+
+  /**
    * 本接口（DescribeBlueprints）用于查询镜像信息。
    */
   async DescribeBlueprints(
@@ -491,13 +520,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
+   * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
    */
-  async CreateInstanceSnapshot(
-    req: CreateInstanceSnapshotRequest,
-    cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void
-  ): Promise<CreateInstanceSnapshotResponse> {
-    return this.request("CreateInstanceSnapshot", req, cb)
+  async DescribeInstancesDeniedActions(
+    req: DescribeInstancesDeniedActionsRequest,
+    cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void
+  ): Promise<DescribeInstancesDeniedActionsResponse> {
+    return this.request("DescribeInstancesDeniedActions", req, cb)
   }
 
   /**
@@ -532,13 +561,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
+   * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
    */
-  async DescribeInstancesDeniedActions(
-    req: DescribeInstancesDeniedActionsRequest,
-    cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void
-  ): Promise<DescribeInstancesDeniedActionsResponse> {
-    return this.request("DescribeInstancesDeniedActions", req, cb)
+  async CreateInstanceSnapshot(
+    req: CreateInstanceSnapshotRequest,
+    cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void
+  ): Promise<CreateInstanceSnapshotResponse> {
+    return this.request("CreateInstanceSnapshot", req, cb)
   }
 
   /**
@@ -595,6 +624,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyInstanceSnapshotResponse) => void
   ): Promise<ApplyInstanceSnapshotResponse> {
     return this.request("ApplyInstanceSnapshot", req, cb)
+  }
+
+  /**
+   * 本接口 (AttachCcn) 用于解除与云联网的关联。
+   */
+  async DetachCcn(
+    req: DetachCcnRequest,
+    cb?: (error: string, rep: DetachCcnResponse) => void
+  ): Promise<DetachCcnResponse> {
+    return this.request("DetachCcn", req, cb)
   }
 
   /**
@@ -710,6 +749,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeZonesResponse) => void
   ): Promise<DescribeZonesResponse> {
     return this.request("DescribeZones", req, cb)
+  }
+
+  /**
+   * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
+   */
+  async ResetAttachCcn(
+    req: ResetAttachCcnRequest,
+    cb?: (error: string, rep: ResetAttachCcnResponse) => void
+  ): Promise<ResetAttachCcnResponse> {
+    return this.request("ResetAttachCcn", req, cb)
   }
 
   /**

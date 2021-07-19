@@ -138,6 +138,16 @@ it("lighthouse.v20200324.DeleteKeyPairs", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeCcnAttachedInstances", async function () {
+    try {
+       const data = await client.DescribeCcnAttachedInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
@@ -218,6 +228,16 @@ it("lighthouse.v20200324.DescribeBundleDiscount", async function () {
     }
 })
 
+it("lighthouse.v20200324.AttachCcn", async function () {
+    try {
+       const data = await client.AttachCcn({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeBlueprints", async function () {
     try {
        const data = await client.DescribeBlueprints({})
@@ -288,9 +308,9 @@ it("lighthouse.v20200324.ModifyBlueprintAttribute", async function () {
     }
 })
 
-it("lighthouse.v20200324.CreateInstanceSnapshot", async function () {
+it("lighthouse.v20200324.DescribeInstancesDeniedActions", async function () {
     try {
-       const data = await client.CreateInstanceSnapshot({})
+       const data = await client.DescribeInstancesDeniedActions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +348,9 @@ it("lighthouse.v20200324.InquirePriceCreateInstances", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeInstancesDeniedActions", async function () {
+it("lighthouse.v20200324.CreateInstanceSnapshot", async function () {
     try {
-       const data = await client.DescribeInstancesDeniedActions({})
+       const data = await client.CreateInstanceSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +401,16 @@ it("lighthouse.v20200324.DescribeBlueprintInstances", async function () {
 it("lighthouse.v20200324.ApplyInstanceSnapshot", async function () {
     try {
        const data = await client.ApplyInstanceSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DetachCcn", async function () {
+    try {
+       const data = await client.DetachCcn({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,6 +501,16 @@ it("lighthouse.v20200324.DescribeSnapshotsDeniedActions", async function () {
 it("lighthouse.v20200324.DescribeZones", async function () {
     try {
        const data = await client.DescribeZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ResetAttachCcn", async function () {
+    try {
+       const data = await client.ResetAttachCcn({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

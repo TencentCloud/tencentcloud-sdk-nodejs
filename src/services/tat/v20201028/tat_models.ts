@@ -786,6 +786,11 @@ export interface InvocationTask {
    * 执行任务所执行的命令详情。
    */
   CommandDocument: CommandDocument
+
+  /**
+   * 执行任务失败时的错误信息。
+   */
+  ErrorInfo: string
 }
 
 /**
