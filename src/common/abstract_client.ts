@@ -81,7 +81,7 @@ export class AbstractClient {
         },
         profile && profile.httpProfile
       ),
-      language: profile.language,
+      language: profile?.language,
     }
 
     if (this.profile.language && !SUPPORT_LANGUAGE_LIST.includes(this.profile.language)) {
