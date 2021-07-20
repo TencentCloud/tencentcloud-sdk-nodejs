@@ -28,6 +28,13 @@ class Client extends abstract_client_1.AbstractClient {
         super("ba.tencentcloudapi.com", "2020-07-20", clientConfig);
     }
     /**
+     * 将备案ICP订单下的一个网站信息 同步给订单下其他网站，需要被同步的网站被检查通过(isCheck:true)；
+只有指定的网站信息字段能被同步
+     */
+    async SyncIcpOrderWebInfo(req, cb) {
+        return this.request("SyncIcpOrderWebInfo", req, cb);
+    }
+    /**
      * 创建渠道备案小程序二维码
      */
     async CreateWeappQRUrl(req, cb) {

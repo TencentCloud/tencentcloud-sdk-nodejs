@@ -18,6 +18,16 @@ const client = new tencentcloud.ba.v20200720.Client({
 })
 describe("ba.v20200720.test.js", function () {
 
+it("ba.v20200720.SyncIcpOrderWebInfo", async function () {
+    try {
+       const data = await client.SyncIcpOrderWebInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ba.v20200720.CreateWeappQRUrl", async function () {
     try {
        const data = await client.CreateWeappQRUrl({})

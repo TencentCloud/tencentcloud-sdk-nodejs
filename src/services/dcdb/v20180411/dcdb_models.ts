@@ -260,6 +260,21 @@ export interface DescribeDBSecurityGroupsResponse {
 }
 
 /**
+ * CancelDcnJob返回参数结构体
+ */
+export interface CancelDcnJobResponse {
+  /**
+   * 流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBSyncMode返回参数结构体
  */
 export interface DescribeDBSyncModeResponse {
@@ -785,6 +800,16 @@ export interface DescribeDBSecurityGroupsRequest {
    * 实例ID。
    */
   InstanceId: string
+}
+
+/**
+ * 数据库存储过程信息
+ */
+export interface DatabaseProcedure {
+  /**
+   * 存储过程名称
+   */
+  Proc: string
 }
 
 /**
@@ -2067,6 +2092,16 @@ export interface GrantAccountPrivilegesResponse {
 }
 
 /**
+ * CancelDcnJob请求参数结构体
+ */
+export interface CancelDcnJobRequest {
+  /**
+   * 灾备实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * 分片信息
  */
 export interface ShardInfo {
@@ -2235,11 +2270,6 @@ export interface KillSessionResponse {
    */
   RequestId?: string
 }
-
-/**
- * DescribeProjects请求参数结构体
- */
-export type DescribeProjectsRequest = null
 
 /**
  * DescribeDatabases返回参数结构体
@@ -2623,14 +2653,9 @@ export interface UserTaskInfo {
 }
 
 /**
- * 数据库存储过程信息
+ * DescribeProjects请求参数结构体
  */
-export interface DatabaseProcedure {
-  /**
-   * 存储过程名称
-   */
-  Proc: string
-}
+export type DescribeProjectsRequest = null
 
 /**
  * 升级实例 -- 新增分片类型
@@ -2674,7 +2699,7 @@ export interface DescribeProjectsResponse {
   /**
    * 项目列表
    */
-  Projects?: Array<Project>
+  Projects: Array<Project>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

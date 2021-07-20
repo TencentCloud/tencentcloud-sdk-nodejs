@@ -134,6 +134,7 @@ import {
   RemoveInstancesRequest,
   StartAutoScalingInstancesRequest,
   AttachInstancesRequest,
+  SpotMixedAllocationPolicy,
   DescribeScalingPoliciesResponse,
   Activity,
   ModifyDesiredCapacityResponse,

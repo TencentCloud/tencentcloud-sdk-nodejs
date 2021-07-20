@@ -1271,8 +1271,7 @@ export interface CreateTopicRequest {
 1 ：全局顺序消息；
 2 ：局部顺序消息；
 3 ：重试队列；
-4 ：死信队列；
-5 ：事务消息。
+4 ：死信队列。
       */
     TopicType: number;
     /**

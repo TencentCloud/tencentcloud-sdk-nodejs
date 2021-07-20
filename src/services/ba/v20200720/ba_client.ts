@@ -17,7 +17,12 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { CreateWeappQRUrlRequest, CreateWeappQRUrlResponse } from "./ba_models"
+import {
+  SyncIcpOrderWebInfoRequest,
+  SyncIcpOrderWebInfoResponse,
+  CreateWeappQRUrlRequest,
+  CreateWeappQRUrlResponse,
+} from "./ba_models"
 
 /**
  * ba client
@@ -26,6 +31,17 @@ import { CreateWeappQRUrlRequest, CreateWeappQRUrlResponse } from "./ba_models"
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ba.tencentcloudapi.com", "2020-07-20", clientConfig)
+  }
+
+  /**
+     * 将备案ICP订单下的一个网站信息 同步给订单下其他网站，需要被同步的网站被检查通过(isCheck:true)；
+只有指定的网站信息字段能被同步
+     */
+  async SyncIcpOrderWebInfo(
+    req: SyncIcpOrderWebInfoRequest,
+    cb?: (error: string, rep: SyncIcpOrderWebInfoResponse) => void
+  ): Promise<SyncIcpOrderWebInfoResponse> {
+    return this.request("SyncIcpOrderWebInfo", req, cb)
   }
 
   /**

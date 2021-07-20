@@ -292,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDCDBUpgradePrice", req, cb);
     }
     /**
+     * 取消DCN同步
+     */
+    async CancelDcnJob(req, cb) {
+        return this.request("CancelDcnJob", req, cb);
+    }
+    /**
      * 本接口（CloneAccount）用于克隆实例账户。
      */
     async CloneAccount(req, cb) {

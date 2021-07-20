@@ -33,6 +33,7 @@ import {
   DescribeUpgradePriceRequest,
   FlushBinlogResponse,
   DescribeDBSecurityGroupsResponse,
+  CancelDcnJobResponse,
   DescribeDBResourceUsageDetailsResponse,
   DescribeDBInstanceSpecsResponse,
   DestroyHourDBInstanceResponse,
@@ -78,7 +79,7 @@ import {
   RestartDBInstancesResponse,
   DescribeSaleInfoResponse,
   Deal,
-  GrantAccountPrivilegesRequest,
+  DescribeDBPerformanceDetailsRequest,
   DBParamValue,
   SpecConfigInfo,
   ModifyDBParametersRequest,
@@ -104,6 +105,7 @@ import {
   ModifyBackupTimeResponse,
   Database,
   GrantAccountPrivilegesResponse,
+  CancelDcnJobRequest,
   OpenDBExtranetAccessRequest,
   DatabasePrivilege,
   ModifyDBInstanceSecurityGroupsResponse,
@@ -112,7 +114,7 @@ import {
   FunctionPrivilege,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
-  DescribeDBPerformanceDetailsRequest,
+  GrantAccountPrivilegesRequest,
   DescribeBackupTimeResponse,
   SlowLogData,
   RenewDBInstanceResponse,
@@ -625,6 +627,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
   ): Promise<DescribeDBSecurityGroupsResponse> {
     return this.request("DescribeDBSecurityGroups", req, cb)
+  }
+
+  /**
+   * 取消DCN同步
+   */
+  async CancelDcnJob(
+    req: CancelDcnJobRequest,
+    cb?: (error: string, rep: CancelDcnJobResponse) => void
+  ): Promise<CancelDcnJobResponse> {
+    return this.request("CancelDcnJob", req, cb)
   }
 
   /**

@@ -1776,6 +1776,14 @@ export interface DescribeCertificatesRequest {
       * 是否可部署，可选值：1 = 可部署，0 =  不可部署。
       */
     Deployable?: number;
+    /**
+      * 是否筛选上传托管的 1筛选，0不筛选
+      */
+    Upload?: number;
+    /**
+      * 是否筛选可续期证书 1筛选 0不筛选
+      */
+    Renew?: number;
 }
 /**
  * DescribeManagers请求参数结构体

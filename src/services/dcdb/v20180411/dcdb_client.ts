@@ -31,6 +31,7 @@ import {
   AssociateSecurityGroupsRequest,
   FlushBinlogResponse,
   DescribeDBSecurityGroupsResponse,
+  CancelDcnJobResponse,
   DescribeDBSyncModeResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeDCDBUpgradePriceResponse,
@@ -55,6 +56,7 @@ import {
   DescribeDCDBRenewalPriceRequest,
   ParamModifyResult,
   DescribeDBSecurityGroupsRequest,
+  DatabaseProcedure,
   DescribeDCDBPriceRequest,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
@@ -97,6 +99,7 @@ import {
   ZonesInfo,
   Database,
   GrantAccountPrivilegesResponse,
+  CancelDcnJobRequest,
   ShardInfo,
   OpenDBExtranetAccessRequest,
   DescribeDCDBSaleInfoResponse,
@@ -106,7 +109,6 @@ import {
   DestroyDCDBInstanceRequest,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
-  DescribeProjectsRequest,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
   DestroyDCDBInstanceResponse,
@@ -120,7 +122,7 @@ import {
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
   UserTaskInfo,
-  DatabaseProcedure,
+  DescribeProjectsRequest,
   AddShardConfig,
   ModifyDBSyncModeRequest,
   DescribeProjectsResponse,
@@ -590,6 +592,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDCDBUpgradePriceResponse) => void
   ): Promise<DescribeDCDBUpgradePriceResponse> {
     return this.request("DescribeDCDBUpgradePrice", req, cb)
+  }
+
+  /**
+   * 取消DCN同步
+   */
+  async CancelDcnJob(
+    req: CancelDcnJobRequest,
+    cb?: (error: string, rep: CancelDcnJobResponse) => void
+  ): Promise<CancelDcnJobResponse> {
+    return this.request("CancelDcnJob", req, cb)
   }
 
   /**

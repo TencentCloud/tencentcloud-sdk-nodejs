@@ -302,6 +302,19 @@ export interface DescribeDBSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
+ * CancelDcnJob返回参数结构体
+ */
+export interface CancelDcnJobResponse {
+    /**
+      * 流程ID
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBResourceUsageDetails返回参数结构体
  */
 export interface DescribeDBResourceUsageDetailsResponse {
@@ -1206,45 +1219,25 @@ export interface Deal {
     PayMode: number;
 }
 /**
- * GrantAccountPrivileges请求参数结构体
+ * DescribeDBPerformanceDetails请求参数结构体
  */
-export interface GrantAccountPrivilegesRequest {
+export interface DescribeDBPerformanceDetailsRequest {
     /**
-      * 实例 ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
+      * 实例 ID，形如：tdsql-ow728lmc。
       */
     InstanceId: string;
     /**
-      * 登录用户名。
+      * 开始日期，格式yyyy-mm-dd
       */
-    UserName: string;
+    StartTime: string;
     /**
-      * 用户允许的访问 host，用户名+host唯一确定一个账号。
+      * 结束日期，格式yyyy-mm-dd
       */
-    Host: string;
+    EndTime: string;
     /**
-      * 数据库名。如果为 \*，表示设置全局权限（即 \*.\*），此时忽略 Type 和 Object 参数。当DbName不为\*时，需要传入参 Type。
+      * 拉取的指标名，支持的值为：long_query,select_total,update_total,insert_total,delete_total,mem_hit_rate,disk_iops,conn_active,is_master_switched,slave_delay
       */
-    DbName: string;
-    /**
-      * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES
-库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER
-表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER
-存储过程/函数权限： ALTER ROUTINE，EXECUTE
-字段权限： INSERT，REFERENCES，SELECT，UPDATE
-      */
-    Privileges: Array<string>;
-    /**
-      * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
-      */
-    Type?: string;
-    /**
-      * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
-      */
-    Object?: string;
-    /**
-      * 当 Type=table 时，ColName 为 \* 表示对表授权，如果为具体字段名，表示对字段授权
-      */
-    ColName?: string;
+    MetricName?: string;
 }
 /**
  * 云数据库参数信息。
@@ -1884,6 +1877,15 @@ export interface GrantAccountPrivilegesResponse {
     RequestId?: string;
 }
 /**
+ * CancelDcnJob请求参数结构体
+ */
+export interface CancelDcnJobRequest {
+    /**
+      * 灾备实例ID
+      */
+    InstanceId: string;
+}
+/**
  * OpenDBExtranetAccess请求参数结构体
  */
 export interface OpenDBExtranetAccessRequest {
@@ -1996,25 +1998,45 @@ export interface KillSessionResponse {
     RequestId?: string;
 }
 /**
- * DescribeDBPerformanceDetails请求参数结构体
+ * GrantAccountPrivileges请求参数结构体
  */
-export interface DescribeDBPerformanceDetailsRequest {
+export interface GrantAccountPrivilegesRequest {
     /**
-      * 实例 ID，形如：tdsql-ow728lmc。
+      * 实例 ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
       */
     InstanceId: string;
     /**
-      * 开始日期，格式yyyy-mm-dd
+      * 登录用户名。
       */
-    StartTime: string;
+    UserName: string;
     /**
-      * 结束日期，格式yyyy-mm-dd
+      * 用户允许的访问 host，用户名+host唯一确定一个账号。
       */
-    EndTime: string;
+    Host: string;
     /**
-      * 拉取的指标名，支持的值为：long_query,select_total,update_total,insert_total,delete_total,mem_hit_rate,disk_iops,conn_active,is_master_switched,slave_delay
+      * 数据库名。如果为 \*，表示设置全局权限（即 \*.\*），此时忽略 Type 和 Object 参数。当DbName不为\*时，需要传入参 Type。
       */
-    MetricName?: string;
+    DbName: string;
+    /**
+      * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES
+库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER
+表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER
+存储过程/函数权限： ALTER ROUTINE，EXECUTE
+字段权限： INSERT，REFERENCES，SELECT，UPDATE
+      */
+    Privileges: Array<string>;
+    /**
+      * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
+      */
+    Type?: string;
+    /**
+      * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+      */
+    Object?: string;
+    /**
+      * 当 Type=table 时，ColName 为 \* 表示对表授权，如果为具体字段名，表示对字段授权
+      */
+    ColName?: string;
 }
 /**
  * DescribeBackupTime返回参数结构体

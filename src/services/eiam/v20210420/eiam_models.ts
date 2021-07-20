@@ -931,7 +931,7 @@ export interface CreateUserRequest {
   UserGroupIds?: Array<string>
 
   /**
-   * 用户手机号。
+   * 用户手机号。例如：+86-1xxxxxxxxxx。
    */
   Phone?: string
 
@@ -1426,7 +1426,7 @@ export interface DescribeOrgNodeRequest {
   OrgNodeId?: string
 
   /**
-   * 是否读取其子节点信息。当读取层数为空或0时，默认仅读取当前机构节点信息。当读取层数为1时，读取本机构节点以及其第一层子节点信息。
+   * 是否读取其子节点信息。当其为空或false时，默认仅读取当前机构节点信息。当其为true时，读取本机构节点以及其第一层子节点信息。
    */
   IncludeOrgNodeChildInfo?: boolean
 }
