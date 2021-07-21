@@ -880,6 +880,16 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。若不填，默认以 Command 配置的 Username 执行。
       */
   Username?: string
+
+  /**
+   * 命令执行路径, 默认以Command配置的WorkingDirectory执行。
+   */
+  WorkingDirectory?: string
+
+  /**
+   * 命令超时时间，取值范围[1, 86400]。默认以Command配置的Timeout执行。
+   */
+  Timeout?: number
 }
 
 /**

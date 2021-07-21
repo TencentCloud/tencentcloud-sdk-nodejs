@@ -1264,6 +1264,11 @@ export interface ModifyDomainOwnerBatchRequest {
    * 转入账户的uin。
    */
   NewOwnerUin: string
+
+  /**
+   * 是否同时转移对应的 DNS 解析域名，默认false
+   */
+  TransferDns?: boolean
 }
 
 /**

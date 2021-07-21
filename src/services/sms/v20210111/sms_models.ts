@@ -815,7 +815,7 @@ export interface DescribeSmsSignListResponse {
 export interface DescribeSmsTemplateListRequest {
   /**
       * 模板 ID 数组。
-注：默认数组长度最大100。
+<dx-alert infotype="notice" title="注意">默认数组长度最大100</dx-alert>
       */
   TemplateIdSet: Array<number>
 

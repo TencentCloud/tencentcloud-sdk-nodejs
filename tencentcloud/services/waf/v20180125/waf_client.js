@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSession", req, cb);
     }
     /**
+     * 本接口用于修改访问日志保存期限
+     */
+    async ModifyAccessPeriod(req, cb) {
+        return this.request("ModifyAccessPeriod", req, cb);
+    }
+    /**
      * 获取waf流量访问趋势
      */
     async DescribeFlowTrend(req, cb) {

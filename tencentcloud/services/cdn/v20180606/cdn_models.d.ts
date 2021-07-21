@@ -5041,17 +5041,17 @@ overseas：境外
  */
 export interface GetDisableRecordsRequest {
     /**
-      * 开始时间，如：2018-12-12 10:24:00。
-      */
-    StartTime: string;
-    /**
-      * 结束时间，如：2018-12-14 10:24:00。
-      */
-    EndTime: string;
-    /**
       * 指定 URL 查询
       */
     Url?: string;
+    /**
+      * 开始时间，如：2018-12-12 10:24:00。
+      */
+    StartTime?: string;
+    /**
+      * 结束时间，如：2018-12-14 10:24:00。
+      */
+    EndTime?: string;
     /**
       * URL 当前状态
 disable：当前仍为禁用状态，访问返回 403
@@ -5066,6 +5066,10 @@ enable：当前为可用状态，已解禁，可正常访问
       * 分页查询限制数目，默认为20。
       */
     Limit?: number;
+    /**
+      * 任务ID，任务ID和起始时间需要至少填写一项。
+      */
+    TaskId?: string;
 }
 /**
  * CreateDiagnoseUrl请求参数结构体
@@ -5172,6 +5176,11 @@ export interface DisableCachesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CacheOptResult: CacheOptResult;
+    /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

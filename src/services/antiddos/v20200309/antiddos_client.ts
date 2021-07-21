@@ -34,6 +34,7 @@ import {
   InstanceRelation,
   DescribeListProtocolBlockConfigResponse,
   DescribeListBGPInstancesRequest,
+  SwitchWaterPrintConfigRequest,
   DeleteDDoSSpeedLimitConfigRequest,
   CreatePacketFilterConfigResponse,
   CreateL7RuleCertsRequest,
@@ -112,6 +113,7 @@ import {
   DefaultAlarmThreshold,
   ForwardListener,
   BGPInstanceSpecification,
+  SwitchWaterPrintConfigResponse,
   CreateWaterPrintKeyRequest,
   WaterPrintRelation,
   InsL7Rules,
@@ -494,6 +496,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePacketFilterConfigResponse) => void
   ): Promise<DeletePacketFilterConfigResponse> {
     return this.request("DeletePacketFilterConfig", req, cb)
+  }
+
+  /**
+   * 开启或关闭DDoS防护的水印防护配置
+   */
+  async SwitchWaterPrintConfig(
+    req: SwitchWaterPrintConfigRequest,
+    cb?: (error: string, rep: SwitchWaterPrintConfigResponse) => void
+  ): Promise<SwitchWaterPrintConfigResponse> {
+    return this.request("SwitchWaterPrintConfig", req, cb)
   }
 
   /**

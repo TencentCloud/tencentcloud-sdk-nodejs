@@ -22,12 +22,12 @@ export interface DescribeBindClustersResponse {
   /**
    * 专享集群的数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 专享集群的列表
    */
-  ClusterSet?: Array<BindCluster>
+  ClusterSet: Array<BindCluster>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -654,23 +654,23 @@ export interface CreateEnvironmentResponse {
   /**
    * 环境（命名空间）名称。
    */
-  EnvironmentId?: string
+  EnvironmentId: string
 
   /**
    * 未消费消息过期时间，单位：秒。
    */
-  MsgTTL?: number
+  MsgTTL: number
 
   /**
       * 说明，128个字符以内。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark?: string
+  Remark: string
 
   /**
    * 命名空间ID
    */
-  NamespaceId?: string
+  NamespaceId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -712,7 +712,7 @@ export interface CreateSubscriptionResponse {
   /**
    * 创建结果。
    */
-  Result?: boolean
+  Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -982,7 +982,7 @@ export interface DeleteTopicsResponse {
   /**
    * 被删除的主题数组。
    */
-  TopicSets?: Array<TopicRecord>
+  TopicSets: Array<TopicRecord>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1585,7 +1585,7 @@ export interface DeleteEnvironmentsResponse {
   /**
    * 成功删除的环境（命名空间）数组。
    */
-  EnvironmentIds?: Array<string>
+  EnvironmentIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1822,12 +1822,12 @@ export interface DescribeClustersResponse {
   /**
    * 集群列表数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 集群信息列表
    */
-  ClusterSet?: Array<Cluster>
+  ClusterSet: Array<Cluster>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2047,7 +2047,7 @@ export interface ResetMsgSubOffsetByTimestampResponse {
       * 结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: boolean
+  Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2256,12 +2256,12 @@ export interface ModifyTopicResponse {
   /**
    * 分区数
    */
-  Partitions?: number
+  Partitions: number
 
   /**
    * 备注，128字符以内。
    */
-  Remark?: string
+  Remark: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2618,7 +2618,7 @@ export interface DeleteSubscriptionsResponse {
   /**
    * 成功删除的订阅关系数组。
    */
-  SubscriptionTopicSets?: Array<SubscriptionTopic>
+  SubscriptionTopicSets: Array<SubscriptionTopic>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2734,6 +2734,30 @@ export interface Cluster {
    * 最大存储容量
    */
   MaxStorageCapacity: number
+
+  /**
+      * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version: string
+
+  /**
+      * 公网访问接入点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicEndPoint: string
+
+  /**
+      * VPC访问接入点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcEndPoint: string
+
+  /**
+      * 命名空间数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceNum: number
 }
 
 /**
@@ -2793,7 +2817,7 @@ export interface DescribeClusterDetailResponse {
   /**
    * 集群的详细信息
    */
-  ClusterSet?: Cluster
+  ClusterSet: Cluster
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2933,42 +2957,42 @@ export interface DescribeEnvironmentAttributesResponse {
   /**
    * 未消费消息过期时间，单位：秒，最大1296000（15天）。
    */
-  MsgTTL?: number
+  MsgTTL: number
 
   /**
    * 消费速率限制，单位：byte/秒，0：不限速。
    */
-  RateInByte?: number
+  RateInByte: number
 
   /**
    * 消费速率限制，单位：个数/秒，0：不限速。
    */
-  RateInSize?: number
+  RateInSize: number
 
   /**
    * 已消费消息保存策略，单位：小时，0：消费完马上删除。
    */
-  RetentionHours?: number
+  RetentionHours: number
 
   /**
    * 已消费消息保存策略，单位：G，0：消费完马上删除。
    */
-  RetentionSize?: number
+  RetentionSize: number
 
   /**
    * 环境（命名空间）名称。
    */
-  EnvironmentId?: string
+  EnvironmentId: string
 
   /**
    * 副本数。
    */
-  Replicas?: number
+  Replicas: number
 
   /**
    * 备注。
    */
-  Remark?: string
+  Remark: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3003,12 +3027,12 @@ export interface DescribeProducersResponse {
   /**
    * 生产者集合数组。
    */
-  ProducerSets?: Array<Producer>
+  ProducerSets: Array<Producer>
 
   /**
    * 记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3203,24 +3227,24 @@ export interface ModifyEnvironmentAttributesResponse {
   /**
    * 命名空间名称。
    */
-  EnvironmentId?: string
+  EnvironmentId: string
 
   /**
    * 未消费消息过期时间，单位：秒。
    */
-  MsgTTL?: number
+  MsgTTL: number
 
   /**
       * 备注，字符串最长不超过128。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark?: string
+  Remark: string
 
   /**
       * 命名空间ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NamespaceId?: string
+  NamespaceId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

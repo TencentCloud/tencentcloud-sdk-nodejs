@@ -352,6 +352,21 @@ export interface DescribeListBGPInstancesRequest {
 }
 
 /**
+ * SwitchWaterPrintConfig请求参数结构体
+ */
+export interface SwitchWaterPrintConfigRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 水印开启/关闭状态，1表示开启；0表示关闭
+   */
+  OpenStatus: number
+}
+
+/**
  * DeleteDDoSSpeedLimitConfig请求参数结构体
  */
 export interface DeleteDDoSSpeedLimitConfigRequest {
@@ -1240,6 +1255,14 @@ export interface WaterPrintConfig {
    * 水印添加成功后生成的水印密钥列表，一条水印最少1个密钥，最多2个密钥
    */
   Keys?: Array<WaterPrintKey>
+
+  /**
+      * 水印检查模式, 取值[
+checkall（普通模式）
+shortfpcheckall（精简模式）
+]
+      */
+  Verify?: string
 }
 
 /**
@@ -1932,7 +1955,7 @@ pcre(正则表达式)
 
   /**
       * 检测值，关键字符串或正则表达式,取值[
-当检测类型为sunday时，请填写字符串或者16进制字节码，其中要填写16进制字节码时请以\x开头，例如\x313233对应的是字符串"123"的16进制字节码;
+当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;
 当检测类型为pcre时, 请填写正则表达式字符串;
 ]
       */
@@ -1982,7 +2005,7 @@ pcre(正则表达式)
 
   /**
       * 第二个检测值，关键字符串或正则表达式,取值[
-当检测类型为sunday时，请填写字符串或者16进制字节码，其中要填写16进制字节码时请以\x开头，例如\x313233对应的是字符串"123"的16进制字节码;
+当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;
 当检测类型为pcre时, 请填写正则表达式字符串;
 ]
       */
@@ -2035,7 +2058,7 @@ export interface DefaultAlarmThreshold {
  */
 export interface ForwardListener {
   /**
-   * 转发监听端口，取值1~65535
+   * 转发监听端口下限，取值1~65535
    */
   FrontendPort: number
 
@@ -2046,6 +2069,11 @@ UDP
 ]
       */
   ForwardProtocol: string
+
+  /**
+   * 转发监听端口上限，取值1~65535
+   */
+  FrontendPortEnd?: number
 }
 
 /**
@@ -2074,6 +2102,16 @@ export interface BGPInstanceSpecification {
 ]
       */
   AutoRenewFlag: number
+}
+
+/**
+ * SwitchWaterPrintConfig返回参数结构体
+ */
+export interface SwitchWaterPrintConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

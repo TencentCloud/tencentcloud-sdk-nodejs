@@ -16,19 +16,18 @@
  */
 
 /**
- * DescribeUserClbWafRegions返回参数结构体
+ * 响应体的返回码
  */
-export interface DescribeUserClbWafRegionsResponse {
+export interface ResponseCode {
   /**
-      * 地域（标准的ap-格式）列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<string>
+   * 如果成功则返回Success，失败则返回yunapi定义的错误码
+   */
+  Code: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
    */
-  RequestId?: string
+  Message: string
 }
 
 /**
@@ -102,24 +101,35 @@ export interface ModifyCustomRuleStatusResponse {
 }
 
 /**
- * 响应体的返回码
+ * DescribeUserClbWafRegions返回参数结构体
  */
-export interface ResponseCode {
+export interface DescribeUserClbWafRegionsResponse {
   /**
-   * 如果成功则返回Success，失败则返回yunapi定义的错误码
-   */
-  Code: string
+      * 地域（标准的ap-格式）列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<string>
 
   /**
-   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Message: string
+  RequestId?: string
 }
 
 /**
  * DeleteAttackDownloadRecord返回参数结构体
  */
 export interface DeleteAttackDownloadRecordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccessPeriod返回参数结构体
+ */
+export interface ModifyAccessPeriodResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -179,6 +189,21 @@ export interface DeleteDownloadRecordResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyAccessPeriod请求参数结构体
+ */
+export interface ModifyAccessPeriodRequest {
+  /**
+   * 访问日志保存期限，范围为[1, 30]
+   */
+  Period: number
+
+  /**
+   * 日志主题
+   */
+  TopicId: string
 }
 
 /**

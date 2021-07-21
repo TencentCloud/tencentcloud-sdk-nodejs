@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetTranscodeCallbackKey", req, cb);
     }
     /**
-     * 查询文档转码任务的执行进度与转码结果
+     * 创建白板板书生成任务, 在任务结束后，如果提供了回调地址，将通过回调地址通知板书生成结果
      */
-    async DescribeTranscode(req, cb) {
-        return this.request("DescribeTranscode", req, cb);
+    async CreateSnapshotTask(req, cb) {
+        return this.request("CreateSnapshotTask", req, cb);
     }
     /**
      * 查询录制任务状态与结果
@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetWhiteboardPushCallbackKey", req, cb);
     }
     /**
+     * 查询文档转码任务的执行进度与转码结果
+     */
+    async DescribeTranscode(req, cb) {
+        return this.request("DescribeTranscode", req, cb);
+    }
+    /**
      * 停止白板推流任务
      */
     async StopWhiteboardPush(req, cb) {
@@ -176,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVideoGenerationTask(req, cb) {
         return this.request("DescribeVideoGenerationTask", req, cb);
+    }
+    /**
+     * 获取指定白板板书生成任务信息
+     */
+    async DescribeSnapshotTask(req, cb) {
+        return this.request("DescribeSnapshotTask", req, cb);
     }
 }
 exports.Client = Client;

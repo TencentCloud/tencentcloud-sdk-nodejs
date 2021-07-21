@@ -258,7 +258,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchForUpgrade", req, cb);
     }
     /**
-     * 该接口（DeleteParamTemplate）用于删除参数模板。
+     * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数Region均为ap-guangzhou。
      */
     async DeleteParamTemplate(req, cb) {
         return this.request("DeleteParamTemplate", req, cb);
@@ -270,7 +270,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackups", req, cb);
     }
     /**
-     * 该接口（CreateParamTemplate）用于创建参数模板。
+     * 该接口（CreateParamTemplate）用于创建参数模板，全地域公共参数Region均为ap-guangzhou。
      */
     async CreateParamTemplate(req, cb) {
         return this.request("CreateParamTemplate", req, cb);
@@ -367,7 +367,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDBInstance", req, cb);
     }
     /**
-     * 该接口（ModifyParamTemplate）用于修改参数模板。
+     * 该接口（ModifyParamTemplate）用于修改参数模板，全地域公共参数Region均为ap-guangzhou。
      */
     async ModifyParamTemplate(req, cb) {
         return this.request("ModifyParamTemplate", req, cb);
@@ -421,7 +421,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupSummaries", req, cb);
     }
     /**
-     * 该接口（DescribeParamTemplateInfo）用于查询参数模板详情。
+     * 该接口（DescribeParamTemplateInfo）用于查询参数模板详情，全地域公共参数Region均为ap-guangzhou。
      */
     async DescribeParamTemplateInfo(req, cb) {
         return this.request("DescribeParamTemplateInfo", req, cb);

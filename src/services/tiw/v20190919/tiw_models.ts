@@ -400,6 +400,21 @@ export interface WhiteboardPushBackupParam {
 }
 
 /**
+ * DescribeSnapshotTask请求参数结构体
+ */
+export interface DescribeSnapshotTaskRequest {
+  /**
+   * 查询任务ID
+   */
+  TaskID: string
+
+  /**
+   * 任务SdkAppId
+   */
+  SdkAppId: number
+}
+
+/**
  * StartOnlineRecord请求参数结构体
  */
 export interface StartOnlineRecordRequest {
@@ -513,6 +528,48 @@ export interface DescribeVideoGenerationTaskCallbackResponse {
 }
 
 /**
+ * DescribeSnapshotTask返回参数结构体
+ */
+export interface DescribeSnapshotTaskResponse {
+  /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskID: string
+
+  /**
+      * 任务状态
+Running - 任务执行中
+Finished - 任务已结束
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 任务创建时间，单位s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: number
+
+  /**
+      * 任务完成时间，单位s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FinishTime: number
+
+  /**
+      * 任务结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: SnapshotResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartWhiteboardPush返回参数结构体
  */
 export interface StartWhiteboardPushResponse {
@@ -534,6 +591,21 @@ export interface StartWhiteboardPushResponse {
 }
 
 /**
+ * ResumeOnlineRecord请求参数结构体
+ */
+export interface ResumeOnlineRecordRequest {
+  /**
+   * 客户的SdkAppId
+   */
+  SdkAppId: number
+
+  /**
+   * 恢复录制的实时录制任务 Id
+   */
+  TaskId: string
+}
+
+/**
  * DescribeOnlineRecordCallback请求参数结构体
  */
 export interface DescribeOnlineRecordCallbackRequest {
@@ -541,6 +613,36 @@ export interface DescribeOnlineRecordCallbackRequest {
    * 应用的SdkAppId
    */
   SdkAppId: number
+}
+
+/**
+ * 板书文件存储cos参数
+ */
+export interface SnapshotCOS {
+  /**
+   * cos所在腾讯云帐号uin
+   */
+  Uin: number
+
+  /**
+   * cos所在地区
+   */
+  Region: string
+
+  /**
+   * cos存储桶名称
+   */
+  Bucket: string
+
+  /**
+   * 板书文件存储根目录
+   */
+  TargetDir?: string
+
+  /**
+   * CDN加速域名
+   */
+  Domain?: string
 }
 
 /**
@@ -604,6 +706,26 @@ export interface StopOnlineRecordRequest {
 }
 
 /**
+ * 生成白板板书时的白板参数，例如白板宽高等
+ */
+export interface SnapshotWhiteboard {
+  /**
+   * 白板宽度大小，默认为1280，有效取值范围[0，2560]
+   */
+  Width?: number
+
+  /**
+   * 白板高度大小，默认为720，有效取值范围[0，2560]
+   */
+  Height?: number
+
+  /**
+   * 白板初始化参数的JSON转义字符串，透传到白板 SDK
+   */
+  InitParams?: string
+}
+
+/**
  * SetVideoGenerationTaskCallbackKey返回参数结构体
  */
 export interface SetVideoGenerationTaskCallbackKeyResponse {
@@ -621,6 +743,21 @@ export interface CreateTranscodeResponse {
    * 文档转码任务的唯一标识Id，用于查询该任务的进度以及转码结果
    */
   TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSnapshotTask返回参数结构体
+ */
+export interface CreateSnapshotTaskResponse {
+  /**
+   * 白板板书生成任务ID，只有任务创建成功的时候才会返回此字段
+   */
+  TaskID: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -944,6 +1081,35 @@ export interface DescribeVideoGenerationTaskRequest {
    * 录制视频生成的任务Id
    */
   TaskId: string
+}
+
+/**
+ * 白板板书结果
+ */
+export interface SnapshotResult {
+  /**
+      * 任务执行错误码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorCode: string
+
+  /**
+      * 任务执行错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
+
+  /**
+      * 快照生成图片总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+      * 快照图片链接列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Snapshots: Array<string>
 }
 
 /**
@@ -1374,18 +1540,33 @@ export interface DescribeTranscodeCallbackRequest {
 }
 
 /**
- * ResumeOnlineRecord请求参数结构体
+ * CreateSnapshotTask请求参数结构体
  */
-export interface ResumeOnlineRecordRequest {
+export interface CreateSnapshotTaskRequest {
   /**
-   * 客户的SdkAppId
+   * 白板相关参数
+   */
+  Whiteboard: SnapshotWhiteboard
+
+  /**
+   * 白板房间SdkAppId
    */
   SdkAppId: number
 
   /**
-   * 恢复录制的实时录制任务 Id
+   * 白板房间号
    */
-  TaskId: string
+  RoomId: number
+
+  /**
+   * 白板板书生成结果通知回调地址
+   */
+  CallbackURL?: string
+
+  /**
+   * 白板板书文件COS存储参数， 不填默认存储在公共存储桶，公共存储桶的数据仅保存3天
+   */
+  COS?: SnapshotCOS
 }
 
 /**

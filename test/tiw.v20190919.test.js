@@ -88,9 +88,9 @@ it("tiw.v20190919.SetTranscodeCallbackKey", async function () {
     }
 })
 
-it("tiw.v20190919.DescribeTranscode", async function () {
+it("tiw.v20190919.CreateSnapshotTask", async function () {
     try {
-       const data = await client.DescribeTranscode({})
+       const data = await client.CreateSnapshotTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +198,16 @@ it("tiw.v20190919.SetWhiteboardPushCallbackKey", async function () {
     }
 })
 
+it("tiw.v20190919.DescribeTranscode", async function () {
+    try {
+       const data = await client.DescribeTranscode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.StopWhiteboardPush", async function () {
     try {
        const data = await client.StopWhiteboardPush({})
@@ -261,6 +271,16 @@ it("tiw.v20190919.DescribeWhiteboardPush", async function () {
 it("tiw.v20190919.DescribeVideoGenerationTask", async function () {
     try {
        const data = await client.DescribeVideoGenerationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.DescribeSnapshotTask", async function () {
+    try {
+       const data = await client.DescribeSnapshotTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

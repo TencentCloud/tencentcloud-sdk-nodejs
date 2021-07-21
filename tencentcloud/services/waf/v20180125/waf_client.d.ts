@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserClbWafRegionsResponse, ModifyCustomRuleStatusResponse, DeleteAttackDownloadRecordResponse, DescribeFlowTrendRequest, ModifyCustomRuleStatusRequest, DeleteDownloadRecordResponse, DescribeUserClbWafRegionsRequest, DeleteAttackDownloadRecordRequest, DeleteSessionResponse, DescribeCustomRulesResponse, DeleteSessionRequest, CreateAttackDownloadTaskResponse, AddCustomRuleResponse, DescribeFlowTrendResponse, AddCustomRuleRequest, DescribeCustomRulesRequest, DeleteDownloadRecordRequest, CreateAttackDownloadTaskRequest } from "./waf_models";
+import { ModifyCustomRuleStatusResponse, DescribeUserClbWafRegionsResponse, DeleteAttackDownloadRecordResponse, ModifyAccessPeriodResponse, DescribeFlowTrendRequest, ModifyCustomRuleStatusRequest, DeleteDownloadRecordResponse, ModifyAccessPeriodRequest, DescribeUserClbWafRegionsRequest, DeleteAttackDownloadRecordRequest, DeleteSessionResponse, DescribeCustomRulesResponse, DeleteSessionRequest, CreateAttackDownloadTaskResponse, AddCustomRuleResponse, DescribeFlowTrendResponse, AddCustomRuleRequest, DescribeCustomRulesRequest, DeleteDownloadRecordRequest, CreateAttackDownloadTaskRequest } from "./waf_models";
 /**
  * waf client
  * @class
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 删除CC攻击的session设置
      */
     DeleteSession(req: DeleteSessionRequest, cb?: (error: string, rep: DeleteSessionResponse) => void): Promise<DeleteSessionResponse>;
+    /**
+     * 本接口用于修改访问日志保存期限
+     */
+    ModifyAccessPeriod(req: ModifyAccessPeriodRequest, cb?: (error: string, rep: ModifyAccessPeriodResponse) => void): Promise<ModifyAccessPeriodResponse>;
     /**
      * 获取waf流量访问趋势
      */

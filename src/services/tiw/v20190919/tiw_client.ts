@@ -34,16 +34,22 @@ import {
   SetVideoGenerationTaskCallbackResponse,
   SetWhiteboardPushCallbackKeyResponse,
   WhiteboardPushBackupParam,
+  DescribeSnapshotTaskRequest,
   StartOnlineRecordRequest,
   DescribeVideoGenerationTaskCallbackResponse,
+  DescribeSnapshotTaskResponse,
   StartWhiteboardPushResponse,
+  ResumeOnlineRecordRequest,
   DescribeOnlineRecordCallbackRequest,
+  SnapshotCOS,
   DescribeOnlineRecordCallbackResponse,
   StopWhiteboardPushRequest,
   SetTranscodeCallbackResponse,
   StopOnlineRecordRequest,
+  SnapshotWhiteboard,
   SetVideoGenerationTaskCallbackKeyResponse,
   CreateTranscodeResponse,
+  CreateSnapshotTaskResponse,
   DescribeVideoGenerationTaskResponse,
   DescribeWhiteboardPushCallbackResponse,
   CustomLayout,
@@ -56,6 +62,7 @@ import {
   StartOnlineRecordResponse,
   SetOnlineRecordCallbackKeyResponse,
   DescribeVideoGenerationTaskRequest,
+  SnapshotResult,
   CreateVideoGenerationTaskResponse,
   PauseOnlineRecordResponse,
   CreateTranscodeRequest,
@@ -69,7 +76,7 @@ import {
   SetOnlineRecordCallbackKeyRequest,
   CreateVideoGenerationTaskRequest,
   DescribeTranscodeCallbackRequest,
-  ResumeOnlineRecordRequest,
+  CreateSnapshotTaskRequest,
   DescribeTranscodeCallbackResponse,
   SetTranscodeCallbackRequest,
   SetWhiteboardPushCallbackRequest,
@@ -164,13 +171,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询文档转码任务的执行进度与转码结果
+   * 创建白板板书生成任务, 在任务结束后，如果提供了回调地址，将通过回调地址通知板书生成结果
    */
-  async DescribeTranscode(
-    req: DescribeTranscodeRequest,
-    cb?: (error: string, rep: DescribeTranscodeResponse) => void
-  ): Promise<DescribeTranscodeResponse> {
-    return this.request("DescribeTranscode", req, cb)
+  async CreateSnapshotTask(
+    req: CreateSnapshotTaskRequest,
+    cb?: (error: string, rep: CreateSnapshotTaskResponse) => void
+  ): Promise<CreateSnapshotTaskResponse> {
+    return this.request("CreateSnapshotTask", req, cb)
   }
 
   /**
@@ -274,6 +281,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文档转码任务的执行进度与转码结果
+   */
+  async DescribeTranscode(
+    req: DescribeTranscodeRequest,
+    cb?: (error: string, rep: DescribeTranscodeResponse) => void
+  ): Promise<DescribeTranscodeResponse> {
+    return this.request("DescribeTranscode", req, cb)
+  }
+
+  /**
    * 停止白板推流任务
    */
   async StopWhiteboardPush(
@@ -341,5 +358,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoGenerationTaskResponse) => void
   ): Promise<DescribeVideoGenerationTaskResponse> {
     return this.request("DescribeVideoGenerationTask", req, cb)
+  }
+
+  /**
+   * 获取指定白板板书生成任务信息
+   */
+  async DescribeSnapshotTask(
+    req: DescribeSnapshotTaskRequest,
+    cb?: (error: string, rep: DescribeSnapshotTaskResponse) => void
+  ): Promise<DescribeSnapshotTaskResponse> {
+    return this.request("DescribeSnapshotTask", req, cb)
   }
 }

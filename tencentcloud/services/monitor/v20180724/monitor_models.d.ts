@@ -2609,20 +2609,20 @@ export interface DescribeBindingPolicyObjectListResponse {
       * 绑定的对象实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    List?: Array<DescribeBindingPolicyObjectListInstance>;
+    List: Array<DescribeBindingPolicyObjectListInstance>;
     /**
       * 绑定的对象实例总数
       */
-    Total?: number;
+    Total: number;
     /**
       * 未屏蔽的对象实例数
       */
-    NoShieldedSum?: number;
+    NoShieldedSum: number;
     /**
       * 绑定的实例分组信息，没有绑定实例分组则为空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceGroup?: DescribeBindingPolicyObjectListInstanceGroup;
+    InstanceGroup: DescribeBindingPolicyObjectListInstanceGroup;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2677,9 +2677,13 @@ export interface DescribeBindingPolicyObjectListRequest {
       */
     Module: string;
     /**
-      * 策略组id
+      * 策略组id，如果有形如 policy-xxxx 的 id，请填到 PolicyId 字段中，本字段填 0
       */
     GroupId: number;
+    /**
+      * 告警策略id，形如 policy-xxxx，如果填入，则GroupId可以填0
+      */
+    PolicyId?: string;
     /**
       * 分页参数，每页返回的数量，取值1~100，默认20
       */

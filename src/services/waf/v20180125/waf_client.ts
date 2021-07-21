@@ -18,14 +18,16 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeUserClbWafRegionsResponse,
+  ResponseCode,
   DescribeCustomRulesRspRuleListItem,
   ModifyCustomRuleStatusResponse,
-  ResponseCode,
+  DescribeUserClbWafRegionsResponse,
   DeleteAttackDownloadRecordResponse,
+  ModifyAccessPeriodResponse,
   DescribeFlowTrendRequest,
   ModifyCustomRuleStatusRequest,
   DeleteDownloadRecordResponse,
+  ModifyAccessPeriodRequest,
   DescribeUserClbWafRegionsRequest,
   DeleteAttackDownloadRecordRequest,
   DeleteSessionResponse,
@@ -110,6 +112,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSessionResponse) => void
   ): Promise<DeleteSessionResponse> {
     return this.request("DeleteSession", req, cb)
+  }
+
+  /**
+   * 本接口用于修改访问日志保存期限
+   */
+  async ModifyAccessPeriod(
+    req: ModifyAccessPeriodRequest,
+    cb?: (error: string, rep: ModifyAccessPeriodResponse) => void
+  ): Promise<ModifyAccessPeriodResponse> {
+    return this.request("ModifyAccessPeriod", req, cb)
   }
 
   /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetWhiteboardPushCallbackKeyRequest, SetVideoGenerationTaskCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, StartWhiteboardPushRequest, DescribeWhiteboardPushRequest, DescribeQualityMetricsResponse, ResumeOnlineRecordResponse, SetVideoGenerationTaskCallbackResponse, SetWhiteboardPushCallbackKeyResponse, StartOnlineRecordRequest, DescribeVideoGenerationTaskCallbackResponse, StartWhiteboardPushResponse, DescribeOnlineRecordCallbackRequest, DescribeOnlineRecordCallbackResponse, StopWhiteboardPushRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetVideoGenerationTaskCallbackKeyResponse, CreateTranscodeResponse, DescribeVideoGenerationTaskResponse, DescribeWhiteboardPushCallbackResponse, SetTranscodeCallbackKeyResponse, DescribeOnlineRecordRequest, DescribeWhiteboardPushResponse, StartOnlineRecordResponse, SetOnlineRecordCallbackKeyResponse, DescribeVideoGenerationTaskRequest, CreateVideoGenerationTaskResponse, PauseOnlineRecordResponse, CreateTranscodeRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, SetTranscodeCallbackKeyRequest, DescribeTranscodeRequest, DescribeTranscodeResponse, DescribeQualityMetricsRequest, SetOnlineRecordCallbackKeyRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, ResumeOnlineRecordRequest, DescribeTranscodeCallbackResponse, SetTranscodeCallbackRequest, SetWhiteboardPushCallbackRequest, SetWhiteboardPushCallbackResponse, SetOnlineRecordCallbackRequest, DescribeVideoGenerationTaskCallbackRequest, PauseOnlineRecordRequest, StopWhiteboardPushResponse, SetOnlineRecordCallbackResponse } from "./tiw_models";
+import { SetWhiteboardPushCallbackKeyRequest, SetVideoGenerationTaskCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, StartWhiteboardPushRequest, DescribeWhiteboardPushRequest, DescribeQualityMetricsResponse, ResumeOnlineRecordResponse, SetVideoGenerationTaskCallbackResponse, SetWhiteboardPushCallbackKeyResponse, DescribeSnapshotTaskRequest, StartOnlineRecordRequest, DescribeVideoGenerationTaskCallbackResponse, DescribeSnapshotTaskResponse, StartWhiteboardPushResponse, ResumeOnlineRecordRequest, DescribeOnlineRecordCallbackRequest, DescribeOnlineRecordCallbackResponse, StopWhiteboardPushRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetVideoGenerationTaskCallbackKeyResponse, CreateTranscodeResponse, CreateSnapshotTaskResponse, DescribeVideoGenerationTaskResponse, DescribeWhiteboardPushCallbackResponse, SetTranscodeCallbackKeyResponse, DescribeOnlineRecordRequest, DescribeWhiteboardPushResponse, StartOnlineRecordResponse, SetOnlineRecordCallbackKeyResponse, DescribeVideoGenerationTaskRequest, CreateVideoGenerationTaskResponse, PauseOnlineRecordResponse, CreateTranscodeRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, SetTranscodeCallbackKeyRequest, DescribeTranscodeRequest, DescribeTranscodeResponse, DescribeQualityMetricsRequest, SetOnlineRecordCallbackKeyRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, CreateSnapshotTaskRequest, DescribeTranscodeCallbackResponse, SetTranscodeCallbackRequest, SetWhiteboardPushCallbackRequest, SetWhiteboardPushCallbackResponse, SetOnlineRecordCallbackRequest, DescribeVideoGenerationTaskCallbackRequest, PauseOnlineRecordRequest, StopWhiteboardPushResponse, SetOnlineRecordCallbackResponse } from "./tiw_models";
 /**
  * tiw client
  * @class
@@ -36,9 +36,9 @@ export declare class Client extends AbstractClient {
      */
     SetTranscodeCallbackKey(req: SetTranscodeCallbackKeyRequest, cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void): Promise<SetTranscodeCallbackKeyResponse>;
     /**
-     * 查询文档转码任务的执行进度与转码结果
+     * 创建白板板书生成任务, 在任务结束后，如果提供了回调地址，将通过回调地址通知板书生成结果
      */
-    DescribeTranscode(req: DescribeTranscodeRequest, cb?: (error: string, rep: DescribeTranscodeResponse) => void): Promise<DescribeTranscodeResponse>;
+    CreateSnapshotTask(req: CreateSnapshotTaskRequest, cb?: (error: string, rep: CreateSnapshotTaskResponse) => void): Promise<CreateSnapshotTaskResponse>;
     /**
      * 查询录制任务状态与结果
      */
@@ -80,6 +80,10 @@ export declare class Client extends AbstractClient {
      */
     SetWhiteboardPushCallbackKey(req: SetWhiteboardPushCallbackKeyRequest, cb?: (error: string, rep: SetWhiteboardPushCallbackKeyResponse) => void): Promise<SetWhiteboardPushCallbackKeyResponse>;
     /**
+     * 查询文档转码任务的执行进度与转码结果
+     */
+    DescribeTranscode(req: DescribeTranscodeRequest, cb?: (error: string, rep: DescribeTranscodeResponse) => void): Promise<DescribeTranscodeResponse>;
+    /**
      * 停止白板推流任务
      */
     StopWhiteboardPush(req: StopWhiteboardPushRequest, cb?: (error: string, rep: StopWhiteboardPushResponse) => void): Promise<StopWhiteboardPushResponse>;
@@ -107,4 +111,8 @@ export declare class Client extends AbstractClient {
      * 查询录制视频生成任务状态与结果
      */
     DescribeVideoGenerationTask(req: DescribeVideoGenerationTaskRequest, cb?: (error: string, rep: DescribeVideoGenerationTaskResponse) => void): Promise<DescribeVideoGenerationTaskResponse>;
+    /**
+     * 获取指定白板板书生成任务信息
+     */
+    DescribeSnapshotTask(req: DescribeSnapshotTaskRequest, cb?: (error: string, rep: DescribeSnapshotTaskResponse) => void): Promise<DescribeSnapshotTaskResponse>;
 }

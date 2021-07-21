@@ -1809,7 +1809,7 @@ export interface CreateParamTemplateResponse {
   /**
    * 参数模板 ID。
    */
-  TemplateId?: number
+  TemplateId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1872,7 +1872,7 @@ export interface ModifyAccountMaxUserConnectionsRequest {
   InstanceId: string
 
   /**
-   * 设置账户最大可用连接数。
+   * 设置账户最大可用连接数，最大可设置值为10240。
    */
   MaxUserConnections: number
 }
@@ -2316,7 +2316,7 @@ export interface CreateAccountsRequest {
   Description?: string
 
   /**
-   * 新账户最大可用连接数。
+   * 新账户最大可用连接数，默认值为10240，最大可设置值为10240。
    */
   MaxUserConnections?: number
 }

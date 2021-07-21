@@ -709,7 +709,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DeleteParamTemplate）用于删除参数模板。
+   * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数Region均为ap-guangzhou。
    */
   async DeleteParamTemplate(
     req: DeleteParamTemplateRequest,
@@ -729,7 +729,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（CreateParamTemplate）用于创建参数模板。
+   * 该接口（CreateParamTemplate）用于创建参数模板，全地域公共参数Region均为ap-guangzhou。
    */
   async CreateParamTemplate(
     req: CreateParamTemplateRequest,
@@ -878,7 +878,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（ModifyParamTemplate）用于修改参数模板。
+   * 该接口（ModifyParamTemplate）用于修改参数模板，全地域公共参数Region均为ap-guangzhou。
    */
   async ModifyParamTemplate(
     req: ModifyParamTemplateRequest,
@@ -968,7 +968,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeParamTemplateInfo）用于查询参数模板详情。
+   * 该接口（DescribeParamTemplateInfo）用于查询参数模板详情，全地域公共参数Region均为ap-guangzhou。
    */
   async DescribeParamTemplateInfo(
     req: DescribeParamTemplateInfoRequest,

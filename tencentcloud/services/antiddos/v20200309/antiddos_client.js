@@ -234,6 +234,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePacketFilterConfig", req, cb);
     }
     /**
+     * 开启或关闭DDoS防护的水印防护配置
+     */
+    async SwitchWaterPrintConfig(req, cb) {
+        return this.request("SwitchWaterPrintConfig", req, cb);
+    }
+    /**
      * 获取DDoS防护的协议封禁配置列表
      */
     async DescribeListProtocolBlockConfig(req, cb) {
