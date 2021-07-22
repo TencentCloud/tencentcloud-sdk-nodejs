@@ -78,6 +78,16 @@ it("tdmq.v20200217.ClearCmqQueue", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeNodeHealthOpt", async function () {
+    try {
+       const data = await client.DescribeNodeHealthOpt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateCmqQueue", async function () {
     try {
        const data = await client.CreateCmqQueue({})
@@ -481,6 +491,16 @@ it("tdmq.v20200217.DeleteTopics", async function () {
 it("tdmq.v20200217.ResetMsgSubOffsetByTimestamp", async function () {
     try {
        const data = await client.ResetMsgSubOffsetByTimestamp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeNamespaceBundlesOpt", async function () {
+    try {
+       const data = await client.DescribeNamespaceBundlesOpt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

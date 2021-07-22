@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeBindClustersResponse,
   CmqDeadLetterPolicy,
+  BundleSetOpt,
   DescribeSubscriptionsRequest,
   DeleteClusterResponse,
   SendBatchMessagesResponse,
@@ -29,7 +30,7 @@ import {
   BindCluster,
   ModifyClusterResponse,
   DescribeCmqQueuesResponse,
-  PublishCmqMsgRequest,
+  DeleteCmqQueueResponse,
   CreateCmqSubscribeRequest,
   RewindCmqQueueResponse,
   DeleteClusterRequest,
@@ -63,7 +64,7 @@ import {
   AcknowledgeMessageResponse,
   DescribeClusterDetailRequest,
   Tag,
-  DeleteCmqQueueResponse,
+  DescribeNamespaceBundlesOptResponse,
   SendMessagesRequest,
   ModifyCmqTopicAttributeRequest,
   Subscription,
@@ -80,7 +81,7 @@ import {
   DescribeCmqTopicDetailRequest,
   CmqTopic,
   UnbindCmqDeadLetterResponse,
-  DeleteEnvironmentsRequest,
+  DescribeNodeHealthOptRequest,
   DescribeBindVpcsRequest,
   DescribeClustersResponse,
   ClearCmqSubscriptionFilterTagsRequest,
@@ -92,6 +93,7 @@ import {
   ResetMsgSubOffsetByTimestampResponse,
   CreateClusterResponse,
   DescribeCmqDeadLetterSourceQueuesRequest,
+  DescribeNodeHealthOptResponse,
   CreateClusterRequest,
   ModifyCmqQueueAttributeResponse,
   CreateTopicResponse,
@@ -108,6 +110,7 @@ import {
   Connection,
   DeleteTopicsRequest,
   CmqTransactionPolicy,
+  DescribeNamespaceBundlesOptRequest,
   ModifyTopicRequest,
   ResetMsgSubOffsetByTimestampRequest,
   Consumer,
@@ -120,6 +123,7 @@ import {
   SendMsgRequest,
   DescribeCmqQueueDetailRequest,
   ClearCmqQueueResponse,
+  DeleteEnvironmentsRequest,
   DescribeBindClustersRequest,
   DescribeClusterDetailResponse,
   CreateCmqQueueRequest,
@@ -131,6 +135,7 @@ import {
   SendBatchMessagesRequest,
   DeleteCmqTopicRequest,
   SendCmqMsgResponse,
+  PublishCmqMsgRequest,
   UnbindCmqDeadLetterRequest,
   ModifyCmqQueueAttributeRequest,
   DeleteCmqSubscribeResponse,
@@ -206,6 +211,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ClearCmqQueueResponse) => void
   ): Promise<ClearCmqQueueResponse> {
     return this.request("ClearCmqQueue", req, cb)
+  }
+
+  /**
+   * 运营端获节点健康状态
+   */
+  async DescribeNodeHealthOpt(
+    req: DescribeNodeHealthOptRequest,
+    cb?: (error: string, rep: DescribeNodeHealthOptResponse) => void
+  ): Promise<DescribeNodeHealthOptResponse> {
+    return this.request("DescribeNodeHealthOpt", req, cb)
   }
 
   /**
@@ -616,6 +631,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetMsgSubOffsetByTimestampResponse) => void
   ): Promise<ResetMsgSubOffsetByTimestampResponse> {
     return this.request("ResetMsgSubOffsetByTimestamp", req, cb)
+  }
+
+  /**
+   * 运营端获取命名空间bundle列表
+   */
+  async DescribeNamespaceBundlesOpt(
+    req: DescribeNamespaceBundlesOptRequest,
+    cb?: (error: string, rep: DescribeNamespaceBundlesOptResponse) => void
+  ): Promise<DescribeNamespaceBundlesOptResponse> {
+    return this.request("DescribeNamespaceBundlesOpt", req, cb)
   }
 
   /**

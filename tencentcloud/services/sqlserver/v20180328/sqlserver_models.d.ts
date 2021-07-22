@@ -932,6 +932,15 @@ export interface InquiryPriceCreateDBInstancesRequest {
     MachineType?: string;
 }
 /**
+ * RenewPostpaidDBInstance请求参数结构体
+ */
+export interface RenewPostpaidDBInstanceRequest {
+    /**
+      * 实例ID，格式如：mssql-3l3fgqn7 或 mssqlro-3l3fgqn7
+      */
+    InstanceId: string;
+}
+/**
  * StartIncrementalMigration请求参数结构体
  */
 export interface StartIncrementalMigrationRequest {
@@ -1136,6 +1145,19 @@ export interface DescribeFlowStatusRequest {
       * 流程ID
       */
     FlowId: number;
+}
+/**
+ * ResetAccountPassword返回参数结构体
+ */
+export interface ResetAccountPasswordResponse {
+    /**
+      * 修改帐号密码的异步任务流程ID
+      */
+    FlowId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * StartMigrationCheck返回参数结构体
@@ -1366,19 +1388,6 @@ export interface DBCreateInfo {
       * 备注
       */
     Remark?: string;
-}
-/**
- * 数据库账号权限信息。创建数据库时设置
- */
-export interface AccountPrivilege {
-    /**
-      * 数据库用户名
-      */
-    UserName: string;
-    /**
-      * 数据库权限。ReadWrite表示可读写，ReadOnly表示只读
-      */
-    Privilege: string;
 }
 /**
  * ModifyMigration返回参数结构体
@@ -1764,17 +1773,25 @@ export interface MigrateSource {
     UrlPassword?: string;
 }
 /**
- * ResetAccountPassword返回参数结构体
+ * ModifyDatabaseCT请求参数结构体
  */
-export interface ResetAccountPasswordResponse {
+export interface ModifyDatabaseCTRequest {
     /**
-      * 修改帐号密码的异步任务流程ID
+      * 数据库名数组
       */
-    FlowId?: number;
+    DBNames: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 启用、禁用数据库CT功能 enable；启用，disable：禁用
       */
-    RequestId?: string;
+    ModifyType: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 启用CT时额外保留天数，默认保留3天，最小3天，最大30天
+      */
+    ChangeRetentionDay?: number;
 }
 /**
  * ModifyBackupMigration返回参数结构体
@@ -1849,6 +1866,19 @@ export interface ReadOnlyGroup {
       * 只读实例副本集合
       */
     ReadOnlyInstanceSet: Array<ReadOnlyInstance>;
+}
+/**
+ * DescribeFlowStatus返回参数结构体
+ */
+export interface DescribeFlowStatusResponse {
+    /**
+      * 流程状态，0：成功，1：失败，2：运行中
+      */
+    Status?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * QueryMigrationCheckProcess返回参数结构体
@@ -1995,6 +2025,23 @@ export interface CreateBackupMigrationRequest {
     BackupFiles?: Array<string>;
 }
 /**
+ * DescribeDBsNormal返回参数结构体
+ */
+export interface DescribeDBsNormalResponse {
+    /**
+      * 表示当前实例下的数据库总个数
+      */
+    TotalCount: number;
+    /**
+      * 返回数据库的详细配置信息，比如：数据库是否开启CDC、CT等
+      */
+    DBList: Array<DbNormalDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeMigrations请求参数结构体
  */
 export interface DescribeMigrationsRequest {
@@ -2076,11 +2123,15 @@ export interface CompleteExpansionRequest {
     InstanceId: string;
 }
 /**
- * RenewPostpaidDBInstance请求参数结构体
+ * ModifyDatabaseMdf请求参数结构体
  */
-export interface RenewPostpaidDBInstanceRequest {
+export interface ModifyDatabaseMdfRequest {
     /**
-      * 实例ID，格式如：mssql-3l3fgqn7 或 mssqlro-3l3fgqn7
+      * 数据库名数组
+      */
+    DBNames: Array<string>;
+    /**
+      * 实例ID
       */
     InstanceId: string;
 }
@@ -2107,17 +2158,17 @@ export interface DescribeMaintenanceSpanRequest {
     InstanceId: string;
 }
 /**
- * DescribeFlowStatus返回参数结构体
+ * 数据库账号权限信息。创建数据库时设置
  */
-export interface DescribeFlowStatusResponse {
+export interface AccountPrivilege {
     /**
-      * 流程状态，0：成功，1：失败，2：运行中
+      * 数据库用户名
       */
-    Status?: number;
+    UserName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 数据库权限。ReadWrite表示可读写，ReadOnly表示只读
       */
-    RequestId?: string;
+    Privilege: string;
 }
 /**
  * StopMigration请求参数结构体
@@ -2260,6 +2311,15 @@ export interface CreateDBRequest {
       * 数据库创建信息
       */
     DBs: Array<DBCreateInfo>;
+}
+/**
+ * ModifyDBInstanceSecurityGroups返回参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeProjectSecurityGroups请求参数结构体
@@ -2612,6 +2672,23 @@ export interface DescribeBackupUploadSizeResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDatabaseCDC请求参数结构体
+ */
+export interface ModifyDatabaseCDCRequest {
+    /**
+      * 数据库名数组
+      */
+    DBNames: Array<string>;
+    /**
+      * 开启、关闭数据库CDC功能 enable；开启，disable：关闭
+      */
+    ModifyType: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+}
+/**
  * InquiryPriceRenewDBInstance请求参数结构体
  */
 export interface InquiryPriceRenewDBInstanceRequest {
@@ -2645,6 +2722,19 @@ export interface StartIncrementalMigrationResponse {
  * TerminateDBInstance返回参数结构体
  */
 export interface TerminateDBInstanceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyDatabaseCT返回参数结构体
+ */
+export interface ModifyDatabaseCTResponse {
+    /**
+      * 流程ID
+      */
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2729,6 +2819,19 @@ export interface AccountDetail {
       * 是否为管理员账户
       */
     IsAdmin: boolean;
+}
+/**
+ * ModifyDatabaseMdf返回参数结构体
+ */
+export interface ModifyDatabaseMdfResponse {
+    /**
+      * 流程ID
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateBackup返回参数结构体
@@ -3126,21 +3229,81 @@ export interface CosUploadBackupFile {
     Size: number;
 }
 /**
- * ModifyDBName请求参数结构体
+ * 数据库配置信息
  */
-export interface ModifyDBNameRequest {
+export interface DbNormalDetail {
     /**
-      * 实例ID
+      * 是否已订阅 0：否 1：是
       */
-    InstanceId: string;
+    IsSubscribed: string;
     /**
-      * 旧数据库名
+      * 数据库排序规则
       */
-    OldDBName: string;
+    CollationName: string;
     /**
-      * 新数据库名
+      * 开启CT之后是否自动清理 0：否 1：是
       */
-    NewDBName: string;
+    IsAutoCleanupOn: string;
+    /**
+      * 是否已启用代理  0：否 1：是
+      */
+    IsBrokerEnabled: string;
+    /**
+      * 是否已开启/关闭CDC 0：关闭 1：开启
+      */
+    IsCdcEnabled: string;
+    /**
+      * 是否已启用/ 禁用CT 0：禁用 1：启用
+      */
+    IsDbChainingOn: string;
+    /**
+      * 是否加密 0：否 1：是
+      */
+    IsEncrypted: string;
+    /**
+      * 是否全文启用 0：否 1：是
+      */
+    IsFulltextEnabled: string;
+    /**
+      * 是否是镜像 0：否 1：是
+      */
+    IsMirroring: string;
+    /**
+      * 是否已发布 0：否 1：是
+      */
+    IsPublished: string;
+    /**
+      * 是否开启快照 0：否 1：是
+      */
+    IsReadCommittedSnapshotOn: string;
+    /**
+      * 是否可信任 0：否 1：是
+      */
+    IsTrustworthyOn: string;
+    /**
+      * 镜像状态
+      */
+    MirroringState: string;
+    /**
+      * 数据库名称
+      */
+    Name: string;
+    /**
+      * 恢复模式
+      */
+    RecoveryModelDesc: string;
+    /**
+      * 保留天数
+      */
+    RetentionPeriod: string;
+    /**
+      * 数据库状态
+      */
+    StateDesc: string;
+    /**
+      * 用户类型
+      */
+    UserAccessDesc: string;
 }
 /**
  * ModifyDBInstanceRenewFlag请求参数结构体
@@ -3239,9 +3402,54 @@ export interface AccountRemark {
     Remark: string;
 }
 /**
- * ModifyDBInstanceSecurityGroups返回参数结构体
+ * DescribePublishSubscribe请求参数结构体
  */
-export interface ModifyDBInstanceSecurityGroupsResponse {
+export interface DescribePublishSubscribeRequest {
+    /**
+      * 实例ID，形如mssql-j8kv137v
+      */
+    InstanceId: string;
+    /**
+      * 订阅/发布实例ID，与InstanceId是发布实例还是订阅实例有关；当InstanceId为发布实例时，本字段按照订阅实例ID做筛选；当InstanceId为订阅实例时，本字段按照发布实例ID做筛选；
+      */
+    PubOrSubInstanceId?: string;
+    /**
+      * 订阅/发布实例内网IP，与InstanceId是发布实例还是订阅实例有关；当InstanceId为发布实例时，本字段按照订阅实例内网IP做筛选；当InstanceId为订阅实例时，本字段按照发布实例内网IP做筛选；
+      */
+    PubOrSubInstanceIp?: string;
+    /**
+      * 订阅发布ID，用于筛选
+      */
+    PublishSubscribeId?: number;
+    /**
+      * 订阅发布名字，用于筛选
+      */
+    PublishSubscribeName?: string;
+    /**
+      * 发布库名字，用于筛选
+      */
+    PublishDBName?: string;
+    /**
+      * 订阅库名字，用于筛选
+      */
+    SubscribeDBName?: string;
+    /**
+      * 分页，页数
+      */
+    Offset?: number;
+    /**
+      * 分页，页大小
+      */
+    Limit?: number;
+}
+/**
+ * ModifyDatabaseCDC返回参数结构体
+ */
+export interface ModifyDatabaseCDCResponse {
+    /**
+      * 流程ID
+      */
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3600,45 +3808,13 @@ export interface CreateBackupRequest {
     BackupName?: string;
 }
 /**
- * DescribePublishSubscribe请求参数结构体
+ * DescribeDBsNormal请求参数结构体
  */
-export interface DescribePublishSubscribeRequest {
+export interface DescribeDBsNormalRequest {
     /**
-      * 实例ID，形如mssql-j8kv137v
+      * 实例ID，形如mssql-7vfv3rk3
       */
     InstanceId: string;
-    /**
-      * 订阅/发布实例ID，与InstanceId是发布实例还是订阅实例有关；当InstanceId为发布实例时，本字段按照订阅实例ID做筛选；当InstanceId为订阅实例时，本字段按照发布实例ID做筛选；
-      */
-    PubOrSubInstanceId?: string;
-    /**
-      * 订阅/发布实例内网IP，与InstanceId是发布实例还是订阅实例有关；当InstanceId为发布实例时，本字段按照订阅实例内网IP做筛选；当InstanceId为订阅实例时，本字段按照发布实例内网IP做筛选；
-      */
-    PubOrSubInstanceIp?: string;
-    /**
-      * 订阅发布ID，用于筛选
-      */
-    PublishSubscribeId?: number;
-    /**
-      * 订阅发布名字，用于筛选
-      */
-    PublishSubscribeName?: string;
-    /**
-      * 发布库名字，用于筛选
-      */
-    PublishDBName?: string;
-    /**
-      * 订阅库名字，用于筛选
-      */
-    SubscribeDBName?: string;
-    /**
-      * 分页，页数
-      */
-    Offset?: number;
-    /**
-      * 分页，页大小
-      */
-    Limit?: number;
 }
 /**
  * ModifyAccountRemark请求参数结构体
@@ -4165,6 +4341,23 @@ export interface DescribeSlowlogsRequest {
       * 分页返回，页编号，默认值为第0页
       */
     Offset?: number;
+}
+/**
+ * ModifyDBName请求参数结构体
+ */
+export interface ModifyDBNameRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 旧数据库名
+      */
+    OldDBName: string;
+    /**
+      * 新数据库名
+      */
+    NewDBName: string;
 }
 /**
  * ModifyDBInstanceProject请求参数结构体

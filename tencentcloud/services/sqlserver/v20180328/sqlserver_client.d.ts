@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeReadOnlyGroupDetailsRequest, CreateDBInstancesRequest, CloneDBResponse, CreateBasicDBInstancesResponse, DescribeAccountsRequest, DescribeMaintenanceSpanResponse, CreatePublishSubscribeRequest, CreateMigrationResponse, QueryMigrationCheckProcessRequest, DeleteBackupMigrationRequest, ModifyBackupNameResponse, DeletePublishSubscribeRequest, ModifyMaintenanceSpanRequest, AssociateSecurityGroupsRequest, StartBackupMigrationResponse, ModifyReadOnlyGroupDetailsResponse, ModifyBackupStrategyResponse, ModifyIncrementalMigrationRequest, DescribeDBSecurityGroupsResponse, CreateIncrementalMigrationRequest, RunMigrationResponse, DescribeProductConfigRequest, ModifyPublishSubscribeNameResponse, DescribeCrossRegionZoneRequest, RollbackInstanceResponse, DeleteIncrementalMigrationRequest, RestartDBInstanceRequest, DescribeReadOnlyGroupListResponse, DescribeRegionsResponse, DescribeBackupsRequest, ModifyDBInstanceProjectResponse, DescribeRollbackTimeResponse, RestoreInstanceRequest, DescribeIncrementalMigrationRequest, DescribeReadOnlyGroupByReadOnlyInstanceResponse, RunMigrationRequest, RestoreInstanceResponse, ModifyMaintenanceSpanResponse, InquiryPriceCreateDBInstancesRequest, StartIncrementalMigrationRequest, ModifyDBInstanceNetworkRequest, DescribeBackupByFlowIdResponse, RecycleDBInstanceRequest, DescribeFlowStatusRequest, StartMigrationCheckResponse, DescribeOrdersResponse, InquiryPriceCreateDBInstancesResponse, CompleteMigrationRequest, ModifyAccountPrivilegeResponse, RemoveBackupsRequest, ModifyMigrationResponse, RecycleReadOnlyGroupResponse, DescribeZonesResponse, DescribeDBsResponse, DescribeDBInstancesRequest, DescribeDBSecurityGroupsRequest, ModifyAccountRemarkResponse, DescribeMigrationsResponse, ModifyBackupStrategyRequest, RenewDBInstanceRequest, DescribeZonesRequest, DeleteDBRequest, DescribeProjectSecurityGroupsResponse, DescribeCrossRegionZoneResponse, ModifyDBInstanceRenewFlagResponse, DescribeMigrationDatabasesResponse, CompleteExpansionResponse, ResetAccountPasswordResponse, ModifyBackupMigrationResponse, QueryMigrationCheckProcessResponse, CreateReadOnlyDBInstancesRequest, ModifyAccountPrivilegeRequest, CreateBackupMigrationRequest, DescribeMigrationsRequest, DescribeDBCharsetsRequest, DescribeUploadIncrementalInfoRequest, DescribeDBsRequest, CompleteExpansionRequest, RenewPostpaidDBInstanceRequest, DeleteIncrementalMigrationResponse, DescribeRegionsRequest, DescribeMaintenanceSpanRequest, DescribeFlowStatusResponse, StopMigrationRequest, CreateReadOnlyDBInstancesResponse, DeleteMigrationRequest, CompleteMigrationResponse, ModifyDBInstanceSecurityGroupsRequest, RemoveBackupsResponse, TerminateDBInstanceRequest, DescribeUploadIncrementalInfoResponse, CreateDBRequest, DescribeProjectSecurityGroupsRequest, InquiryPriceUpgradeDBInstanceRequest, ModifyDBRemarkRequest, ModifyDBInstanceNameRequest, DeleteMigrationResponse, DescribeBackupMigrationRequest, RecycleReadOnlyGroupRequest, DescribeBackupUploadSizeResponse, InquiryPriceRenewDBInstanceRequest, StartIncrementalMigrationResponse, TerminateDBInstanceResponse, ModifyDBInstanceNetworkResponse, AssociateSecurityGroupsResponse, CreateBackupResponse, DescribeProductConfigResponse, DescribeRollbackTimeRequest, DescribeUploadBackupInfoResponse, CreateMigrationRequest, StartMigrationCheckRequest, CreateBasicDBInstancesRequest, ModifyDBNameResponse, ModifyDBNameRequest, ModifyDBInstanceRenewFlagRequest, DescribeBackupCommandRequest, ModifyDBInstanceSecurityGroupsResponse, ModifyDBInstanceNameResponse, CreateIncrementalMigrationResponse, DescribeBackupMigrationResponse, RenewDBInstanceResponse, DescribeOrdersRequest, DescribeReadOnlyGroupDetailsResponse, DescribeBackupsResponse, CreateBackupMigrationResponse, RecycleDBInstanceResponse, DeleteAccountRequest, DescribeReadOnlyGroupByReadOnlyInstanceRequest, DeleteBackupMigrationResponse, DescribeBackupByFlowIdRequest, CreateBackupRequest, DescribePublishSubscribeRequest, ModifyAccountRemarkRequest, ModifyIncrementalMigrationResponse, ModifyPublishSubscribeNameRequest, DeletePublishSubscribeResponse, InquiryPriceUpgradeDBInstanceResponse, CloneDBRequest, DescribeMigrationDetailResponse, ModifyMigrationRequest, DescribeMigrationDatabasesRequest, DeleteDBInstanceRequest, CreateAccountResponse, RenewPostpaidDBInstanceResponse, DescribeBackupUploadSizeRequest, UpgradeDBInstanceRequest, CreateAccountRequest, DeleteDBResponse, CreateDBResponse, RestartDBInstanceResponse, InquiryPriceRenewDBInstanceResponse, DescribeDBInstancesResponse, DescribeSlowlogsResponse, ResetAccountPasswordRequest, ModifyReadOnlyGroupDetailsRequest, RollbackInstanceRequest, DescribeSlowlogsRequest, ModifyDBInstanceProjectRequest, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, StopMigrationResponse, CreatePublishSubscribeResponse, DescribeUploadBackupInfoRequest, DescribeAccountsResponse, DeleteDBInstanceResponse, UpgradeDBInstanceResponse, DescribeBackupCommandResponse, StartBackupMigrationRequest, DescribePublishSubscribeResponse, DescribeMigrationDetailRequest, DescribeReadOnlyGroupListRequest, DescribeIncrementalMigrationResponse, ModifyDBRemarkResponse, DisassociateSecurityGroupsResponse, CreateDBInstancesResponse, ModifyBackupMigrationRequest, DeleteAccountResponse, DescribeDBCharsetsResponse } from "./sqlserver_models";
+import { DescribeReadOnlyGroupDetailsRequest, CreateDBInstancesRequest, CloneDBResponse, CreateBasicDBInstancesResponse, DescribeAccountsRequest, DescribeMaintenanceSpanResponse, CreatePublishSubscribeRequest, CreateMigrationResponse, QueryMigrationCheckProcessRequest, DeleteBackupMigrationRequest, ModifyBackupNameResponse, DeletePublishSubscribeRequest, ModifyMaintenanceSpanRequest, AssociateSecurityGroupsRequest, StartBackupMigrationResponse, ModifyReadOnlyGroupDetailsResponse, ModifyBackupStrategyResponse, ModifyIncrementalMigrationRequest, DescribeDBSecurityGroupsResponse, CreateIncrementalMigrationRequest, RunMigrationResponse, DescribeProductConfigRequest, ModifyPublishSubscribeNameResponse, DescribeCrossRegionZoneRequest, RollbackInstanceResponse, DeleteIncrementalMigrationRequest, RestartDBInstanceRequest, DescribeReadOnlyGroupListResponse, DescribeRegionsResponse, DescribeBackupsRequest, ModifyDBInstanceProjectResponse, DescribeRollbackTimeResponse, RestoreInstanceRequest, DescribeIncrementalMigrationRequest, DescribeReadOnlyGroupByReadOnlyInstanceResponse, RunMigrationRequest, RestoreInstanceResponse, ModifyMaintenanceSpanResponse, InquiryPriceCreateDBInstancesRequest, RenewPostpaidDBInstanceRequest, StartIncrementalMigrationRequest, ModifyDBInstanceNetworkRequest, DescribeBackupByFlowIdResponse, RecycleDBInstanceRequest, DescribeFlowStatusRequest, ResetAccountPasswordResponse, StartMigrationCheckResponse, DescribeOrdersResponse, InquiryPriceCreateDBInstancesResponse, CompleteMigrationRequest, ModifyAccountPrivilegeResponse, RemoveBackupsRequest, ModifyMigrationResponse, RecycleReadOnlyGroupResponse, DescribeZonesResponse, DescribeDBsResponse, DescribeDBInstancesRequest, DescribeDBSecurityGroupsRequest, ModifyAccountRemarkResponse, DescribeMigrationsResponse, ModifyBackupStrategyRequest, RenewDBInstanceRequest, DescribeZonesRequest, DeleteDBRequest, DescribeProjectSecurityGroupsResponse, DescribeCrossRegionZoneResponse, ModifyDBInstanceRenewFlagResponse, DescribeMigrationDatabasesResponse, CompleteExpansionResponse, ModifyDatabaseCTRequest, ModifyBackupMigrationResponse, DescribeFlowStatusResponse, QueryMigrationCheckProcessResponse, CreateReadOnlyDBInstancesRequest, ModifyAccountPrivilegeRequest, CreateBackupMigrationRequest, DescribeDBsNormalResponse, DescribeMigrationsRequest, DescribeDBCharsetsRequest, DescribeUploadIncrementalInfoRequest, DescribeDBsRequest, CompleteExpansionRequest, ModifyDatabaseMdfRequest, DeleteIncrementalMigrationResponse, DescribeRegionsRequest, DescribeMaintenanceSpanRequest, StopMigrationRequest, CreateReadOnlyDBInstancesResponse, DeleteMigrationRequest, CompleteMigrationResponse, ModifyDBInstanceSecurityGroupsRequest, RemoveBackupsResponse, TerminateDBInstanceRequest, DescribeUploadIncrementalInfoResponse, CreateDBRequest, ModifyDBInstanceSecurityGroupsResponse, DescribeProjectSecurityGroupsRequest, InquiryPriceUpgradeDBInstanceRequest, ModifyDBRemarkRequest, ModifyDBInstanceNameRequest, DeleteMigrationResponse, DescribeBackupMigrationRequest, RecycleReadOnlyGroupRequest, DescribeBackupUploadSizeResponse, ModifyDatabaseCDCRequest, InquiryPriceRenewDBInstanceRequest, StartIncrementalMigrationResponse, TerminateDBInstanceResponse, ModifyDatabaseCTResponse, ModifyDBInstanceNetworkResponse, AssociateSecurityGroupsResponse, ModifyDatabaseMdfResponse, CreateBackupResponse, DescribeProductConfigResponse, DescribeRollbackTimeRequest, DescribeUploadBackupInfoResponse, CreateMigrationRequest, StartMigrationCheckRequest, CreateBasicDBInstancesRequest, ModifyDBNameResponse, ModifyDBInstanceRenewFlagRequest, DescribeBackupCommandRequest, DescribePublishSubscribeRequest, ModifyDatabaseCDCResponse, ModifyDBInstanceNameResponse, CreateIncrementalMigrationResponse, DescribeBackupMigrationResponse, RenewDBInstanceResponse, DescribeOrdersRequest, DescribeReadOnlyGroupDetailsResponse, DescribeBackupsResponse, CreateBackupMigrationResponse, RecycleDBInstanceResponse, DeleteAccountRequest, DescribeReadOnlyGroupByReadOnlyInstanceRequest, DeleteBackupMigrationResponse, DescribeBackupByFlowIdRequest, CreateBackupRequest, DescribeDBsNormalRequest, ModifyAccountRemarkRequest, ModifyIncrementalMigrationResponse, ModifyPublishSubscribeNameRequest, DeletePublishSubscribeResponse, InquiryPriceUpgradeDBInstanceResponse, CloneDBRequest, DescribeMigrationDetailResponse, ModifyMigrationRequest, DescribeMigrationDatabasesRequest, DeleteDBInstanceRequest, CreateAccountResponse, RenewPostpaidDBInstanceResponse, DescribeBackupUploadSizeRequest, UpgradeDBInstanceRequest, CreateAccountRequest, DeleteDBResponse, CreateDBResponse, RestartDBInstanceResponse, InquiryPriceRenewDBInstanceResponse, DescribeDBInstancesResponse, DescribeSlowlogsResponse, ResetAccountPasswordRequest, ModifyReadOnlyGroupDetailsRequest, RollbackInstanceRequest, DescribeSlowlogsRequest, ModifyDBNameRequest, ModifyDBInstanceProjectRequest, DisassociateSecurityGroupsRequest, ModifyBackupNameRequest, StopMigrationResponse, CreatePublishSubscribeResponse, DescribeUploadBackupInfoRequest, DescribeAccountsResponse, DeleteDBInstanceResponse, UpgradeDBInstanceResponse, DescribeBackupCommandResponse, StartBackupMigrationRequest, DescribePublishSubscribeResponse, DescribeMigrationDetailRequest, DescribeReadOnlyGroupListRequest, DescribeIncrementalMigrationResponse, ModifyDBRemarkResponse, DisassociateSecurityGroupsResponse, CreateDBInstancesResponse, ModifyBackupMigrationRequest, DeleteAccountResponse, DescribeDBCharsetsResponse } from "./sqlserver_models";
 /**
  * sqlserver client
  * @class
@@ -35,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeUploadIncrementalInfo）用于查询增量备份上传权限。
      */
     DescribeUploadIncrementalInfo(req: DescribeUploadIncrementalInfoRequest, cb?: (error: string, rep: DescribeUploadIncrementalInfoResponse) => void): Promise<DescribeUploadIncrementalInfoResponse>;
+    /**
+     * 本接口(ModifyDatabaseMdf)用于收缩数据库mdf(Shrink mdf)
+     */
+    ModifyDatabaseMdf(req: ModifyDatabaseMdfRequest, cb?: (error: string, rep: ModifyDatabaseMdfResponse) => void): Promise<ModifyDatabaseMdfResponse>;
     /**
      * 本接口（ModifyDBRemark）用于修改数据库备注。
      */
@@ -120,6 +124,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeCrossRegionZone(req: DescribeCrossRegionZoneRequest, cb?: (error: string, rep: DescribeCrossRegionZoneResponse) => void): Promise<DescribeCrossRegionZoneResponse>;
     /**
+     * 本接口(ModifyDatabaseCT)用于启用、禁用数据库数据变更跟踪(CT)
+     */
+    ModifyDatabaseCT(req: ModifyDatabaseCTRequest, cb?: (error: string, rep: ModifyDatabaseCTResponse) => void): Promise<ModifyDatabaseCTResponse>;
+    /**
      * 本接口(DescribeBackups)用于查询备份列表。
      */
     DescribeBackups(req: DescribeBackupsRequest, cb?: (error: string, rep: DescribeBackupsResponse) => void): Promise<DescribeBackupsResponse>;
@@ -143,6 +151,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeBackupMigration）用于创建增量备份导入任务。
      */
     DescribeBackupMigration(req: DescribeBackupMigrationRequest, cb?: (error: string, rep: DescribeBackupMigrationResponse) => void): Promise<DescribeBackupMigrationResponse>;
+    /**
+     * 本接口(ModifyDatabaseCDC)用于开启、关闭数据库数据变更捕获(CDC)
+     */
+    ModifyDatabaseCDC(req: ModifyDatabaseCDCRequest, cb?: (error: string, rep: ModifyDatabaseCDCResponse) => void): Promise<ModifyDatabaseCDCResponse>;
     /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
      */
@@ -168,9 +180,9 @@ export declare class Client extends AbstractClient {
      */
     CreateDB(req: CreateDBRequest, cb?: (error: string, rep: CreateDBResponse) => void): Promise<CreateDBResponse>;
     /**
-     * 本接口（CompleteMigration）作用是完成一个迁移任务
+     * 本接口（StartBackupMigration）用于启动备份导入任务。
      */
-    CompleteMigration(req: CompleteMigrationRequest, cb?: (error: string, rep: CompleteMigrationResponse) => void): Promise<CompleteMigrationResponse>;
+    StartBackupMigration(req: StartBackupMigrationRequest, cb?: (error: string, rep: StartBackupMigrationResponse) => void): Promise<StartBackupMigrationResponse>;
     /**
      * 本接口（RestoreInstance）用于根据备份文件恢复实例。
      */
@@ -300,6 +312,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupStrategy(req: ModifyBackupStrategyRequest, cb?: (error: string, rep: ModifyBackupStrategyResponse) => void): Promise<ModifyBackupStrategyResponse>;
     /**
+     * 本接口(DescribeDBsNormal)用于查询数据库配置信息，此接口不包含数据库的关联账号
+     */
+    DescribeDBsNormal(req: DescribeDBsNormalRequest, cb?: (error: string, rep: DescribeDBsNormalResponse) => void): Promise<DescribeDBsNormalResponse>;
+    /**
      * 本接口（ModifyAccountPrivilege）用于修改实例账户权限。
      */
     ModifyAccountPrivilege(req: ModifyAccountPrivilegeRequest, cb?: (error: string, rep: ModifyAccountPrivilegeResponse) => void): Promise<ModifyAccountPrivilegeResponse>;
@@ -332,9 +348,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupMigration(req: ModifyBackupMigrationRequest, cb?: (error: string, rep: ModifyBackupMigrationResponse) => void): Promise<ModifyBackupMigrationResponse>;
     /**
-     * 本接口（StartBackupMigration）用于启动备份导入任务。
+     * 本接口（CompleteMigration）作用是完成一个迁移任务
      */
-    StartBackupMigration(req: StartBackupMigrationRequest, cb?: (error: string, rep: StartBackupMigrationResponse) => void): Promise<StartBackupMigrationResponse>;
+    CompleteMigration(req: CompleteMigrationRequest, cb?: (error: string, rep: CompleteMigrationResponse) => void): Promise<CompleteMigrationResponse>;
     /**
      * 本接口(DescribeBackupByFlowId)用于通过备份创建流程的ID查询创建的备份详情，流程ID可从接口CreateBackup中获得。
      */

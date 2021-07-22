@@ -1466,6 +1466,16 @@ export interface DescribeIpGeolocationInfosResponse {
 }
 
 /**
+ * DescribeVpcTaskResult请求参数结构体
+ */
+export interface DescribeVpcTaskResultRequest {
+  /**
+   * 异步任务请求返回的RequestId。
+   */
+  TaskId: string
+}
+
+/**
  * AssociateNetworkAclSubnets返回参数结构体
  */
 export interface AssociateNetworkAclSubnetsResponse {
@@ -10357,6 +10367,26 @@ export interface DisassociateVpcEndPointSecurityGroupsResponse {
 }
 
 /**
+ * DescribeVpcTaskResult返回参数结构体
+ */
+export interface DescribeVpcTaskResultResponse {
+  /**
+   * 异步任务执行结果。结果：SUCCESS、FAILED、RUNNING。3者其中之一。其中SUCCESS表示任务执行成功，FAILED表示任务执行失败，RUNNING表示任务执行中。
+   */
+  Status: string
+
+  /**
+   * 异步任务执行输出。
+   */
+  Output: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AssociateNatGatewayAddress返回参数结构体
  */
 export interface AssociateNatGatewayAddressResponse {
@@ -11002,7 +11032,7 @@ export interface AssignIpv6AddressesResponse {
   /**
    * 分配给弹性网卡的`IPv6`地址列表。
    */
-  Ipv6AddressSet?: Array<Ipv6Address>
+  Ipv6AddressSet: Array<Ipv6Address>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

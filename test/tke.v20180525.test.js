@@ -568,6 +568,16 @@ it("tke.v20180525.DescribeClusterSecurity", async function () {
     }
 })
 
+it("tke.v20180525.DisableVpcCniNetworkType", async function () {
+    try {
+       const data = await client.DisableVpcCniNetworkType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeRouteTableConflicts", async function () {
     try {
        const data = await client.DescribeRouteTableConflicts({})
@@ -638,9 +648,9 @@ it("tke.v20180525.DeleteClusterInstances", async function () {
     }
 })
 
-it("tke.v20180525.DescribeAvailableClusterVersion", async function () {
+it("tke.v20180525.AddClusterCIDR", async function () {
     try {
-       const data = await client.DescribeAvailableClusterVersion({})
+       const data = await client.AddClusterCIDR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +701,16 @@ it("tke.v20180525.DescribeEKSClusterCredential", async function () {
 it("tke.v20180525.DescribePrometheusAlertRule", async function () {
     try {
        const data = await client.DescribePrometheusAlertRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeAvailableClusterVersion", async function () {
+    try {
+       const data = await client.DescribeAvailableClusterVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -71,11 +71,11 @@ export interface FaceFusionResponse {
     /**
       * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
       */
-    Image?: string;
+    Image: string;
     /**
       * 不适宜内容识别结果
       */
-    ReviewResultSet?: Array<FuseFaceReviewResult>;
+    ReviewResultSet: Array<FuseFaceReviewResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -124,13 +124,13 @@ export interface FaceFusionRequest {
       */
     ModelId: string;
     /**
-      * 图片 base64 数据。请确保人脸为正脸，无旋转。若某些手机拍摄后人脸被旋转，请使用图片的 EXIF 信息对图片进行旋转处理；请勿在 base64 数据中包含头部，如“data:image/jpeg;base64,”。
-      */
-    Image: string;
-    /**
-      * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
+      * 返回图像方式（url 或 base64) ，二选一。url有效期为7天。
       */
     RspImgType: string;
+    /**
+      * 图片 base64 数据。请确保人脸为正脸，无旋转。若某些手机拍摄后人脸被旋转，请使用图片的 EXIF 信息对图片进行旋转处理；请勿在 base64 数据中包含头部，如“data:image/jpeg;base64,”。
+      */
+    Image?: string;
     /**
       * 历史遗留字段，无需填写。因为融合只需提取人脸特征，不需要鉴黄。
       */
@@ -140,6 +140,10 @@ export interface FaceFusionRequest {
 请注意，不适宜内容识别服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
       */
     CelebrityIdentify?: number;
+    /**
+      * 图片Url地址
+      */
+    Url?: string;
 }
 /**
  * FaceFusionLite返回参数结构体
@@ -272,12 +276,12 @@ export interface FuseFaceResponse {
     /**
       * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
       */
-    FusedImage?: string;
+    FusedImage: string;
     /**
       * 不适宜内容识别结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReviewResultSet?: Array<FuseFaceReviewResult>;
+    ReviewResultSet: Array<FuseFaceReviewResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -296,7 +300,7 @@ export interface FuseFaceRequest {
       */
     ModelId: string;
     /**
-      * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
+      * 返回图像方式（url 或 base64) ，二选一。url有效期为7天。
       */
     RspImgType: string;
     /**

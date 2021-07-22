@@ -88,6 +88,16 @@ it("sqlserver.v20180328.DescribeUploadIncrementalInfo", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDatabaseMdf", async function () {
+    try {
+       const data = await client.ModifyDatabaseMdf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyDBRemark", async function () {
     try {
        const data = await client.ModifyDBRemark({})
@@ -298,6 +308,16 @@ it("sqlserver.v20180328.DescribeCrossRegionZone", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDatabaseCT", async function () {
+    try {
+       const data = await client.ModifyDatabaseCT({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DescribeBackups", async function () {
     try {
        const data = await client.DescribeBackups({})
@@ -351,6 +371,16 @@ it("sqlserver.v20180328.CreateBackup", async function () {
 it("sqlserver.v20180328.DescribeBackupMigration", async function () {
     try {
        const data = await client.DescribeBackupMigration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.ModifyDatabaseCDC", async function () {
+    try {
+       const data = await client.ModifyDatabaseCDC({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +448,9 @@ it("sqlserver.v20180328.CreateDB", async function () {
     }
 })
 
-it("sqlserver.v20180328.CompleteMigration", async function () {
+it("sqlserver.v20180328.StartBackupMigration", async function () {
     try {
-       const data = await client.CompleteMigration({})
+       const data = await client.StartBackupMigration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,6 +778,16 @@ it("sqlserver.v20180328.ModifyBackupStrategy", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeDBsNormal", async function () {
+    try {
+       const data = await client.DescribeDBsNormal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyAccountPrivilege", async function () {
     try {
        const data = await client.ModifyAccountPrivilege({})
@@ -828,9 +868,9 @@ it("sqlserver.v20180328.ModifyBackupMigration", async function () {
     }
 })
 
-it("sqlserver.v20180328.StartBackupMigration", async function () {
+it("sqlserver.v20180328.CompleteMigration", async function () {
     try {
-       const data = await client.StartBackupMigration({})
+       const data = await client.CompleteMigration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

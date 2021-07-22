@@ -88,6 +88,16 @@ it("postgres.v20170312.RestartDBInstance", async function () {
     }
 })
 
+it("postgres.v20170312.ModifySwitchTimePeriod", async function () {
+    try {
+       const data = await client.ModifySwitchTimePeriod({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.InquiryPriceCreateDBInstances", async function () {
     try {
        const data = await client.InquiryPriceCreateDBInstances({})

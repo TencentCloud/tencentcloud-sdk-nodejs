@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartDBInstance", req, cb);
     }
     /**
+     * 当升级完成后，对处于等待切换状态下的实例，强制实例立即切换。
+     */
+    async ModifySwitchTimePeriod(req, cb) {
+        return this.request("ModifySwitchTimePeriod", req, cb);
+    }
+    /**
      * 本接口 (InquiryPriceCreateDBInstances) 用于查询购买一个或多个实例的价格信息。
      */
     async InquiryPriceCreateDBInstances(req, cb) {
@@ -124,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
-     * 本接口（UpgradeDBInstance）用于升级实例。
+     * 本接口（UpgradeDBInstance）用于升级实例配置。
      */
     async UpgradeDBInstance(req, cb) {
         return this.request("UpgradeDBInstance", req, cb);

@@ -51,6 +51,7 @@ import {
   DeleteClusterRequest,
   PrometheusTarget,
   CreateEKSClusterRequest,
+  DisableVpcCniNetworkTypeResponse,
   DeleteClusterAsGroupsRequest,
   DescribeClusterControllersResponse,
   DescribeExistedInstancesRequest,
@@ -87,6 +88,7 @@ import {
   DescribePrometheusAlertHistoryRequest,
   DeletePrometheusTemplateSyncRequest,
   SetNodePoolNodeProtectionResponse,
+  DisableVpcCniNetworkTypeRequest,
   DescribePrometheusTemplatesResponse,
   DeleteClusterEndpointVipResponse,
   SyncPrometheusTemplateRequest,
@@ -110,6 +112,7 @@ import {
   Taint,
   CheckInstancesUpgradeAbleRequest,
   ExistedInstance,
+  AddClusterCIDRRequest,
   DescribeClusterNodePoolsResponse,
   DescribePrometheusAlertRuleRequest,
   DescribeEKSClusterCredentialRequest,
@@ -156,6 +159,7 @@ import {
   InstanceAdvancedSettings,
   DescribePrometheusAgentsRequest,
   DescribeEnableVpcCniProgressResponse,
+  AddClusterCIDRResponse,
   PrometheusAgentOverview,
   ControllerStatus,
   Filter,
@@ -794,6 +798,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提供给附加了VPC-CNI能力的Global-Route集群关闭VPC-CNI
+   */
+  async DisableVpcCniNetworkType(
+    req: DisableVpcCniNetworkTypeRequest,
+    cb?: (error: string, rep: DisableVpcCniNetworkTypeResponse) => void
+  ): Promise<DisableVpcCniNetworkTypeResponse> {
+    return this.request("DisableVpcCniNetworkType", req, cb)
+  }
+
+  /**
    * 查询路由表冲突列表
    */
   async DescribeRouteTableConflicts(
@@ -864,13 +878,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群可以升级的所有版本
+   * 给GR集群增加可用的ClusterCIDR
    */
-  async DescribeAvailableClusterVersion(
-    req: DescribeAvailableClusterVersionRequest,
-    cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
-  ): Promise<DescribeAvailableClusterVersionResponse> {
-    return this.request("DescribeAvailableClusterVersion", req, cb)
+  async AddClusterCIDR(
+    req: AddClusterCIDRRequest,
+    cb?: (error: string, rep: AddClusterCIDRResponse) => void
+  ): Promise<AddClusterCIDRResponse> {
+    return this.request("AddClusterCIDR", req, cb)
   }
 
   /**
@@ -921,6 +935,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusAlertRuleResponse) => void
   ): Promise<DescribePrometheusAlertRuleResponse> {
     return this.request("DescribePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 获取集群可以升级的所有版本
+   */
+  async DescribeAvailableClusterVersion(
+    req: DescribeAvailableClusterVersionRequest,
+    cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
+  ): Promise<DescribeAvailableClusterVersionResponse> {
+    return this.request("DescribeAvailableClusterVersion", req, cb)
   }
 
   /**

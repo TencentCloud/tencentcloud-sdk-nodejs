@@ -358,6 +358,16 @@ it("vpc.v20170312.DescribeAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeVpcTaskResult", async function () {
+    try {
+       const data = await client.DescribeVpcTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteLocalGateway", async function () {
     try {
        const data = await client.DeleteLocalGateway({})

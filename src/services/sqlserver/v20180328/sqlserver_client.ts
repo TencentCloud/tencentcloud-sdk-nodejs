@@ -67,6 +67,7 @@ import {
   ModifyMaintenanceSpanResponse,
   ZoneInfo,
   InquiryPriceCreateDBInstancesRequest,
+  RenewPostpaidDBInstanceRequest,
   StartIncrementalMigrationRequest,
   Migration,
   ModifyDBInstanceNetworkRequest,
@@ -74,6 +75,7 @@ import {
   DescribeBackupByFlowIdResponse,
   RecycleDBInstanceRequest,
   DescribeFlowStatusRequest,
+  ResetAccountPasswordResponse,
   StartMigrationCheckResponse,
   MigrateTask,
   SpecInfo,
@@ -83,7 +85,6 @@ import {
   ModifyAccountPrivilegeResponse,
   RemoveBackupsRequest,
   DBCreateInfo,
-  AccountPrivilege,
   ModifyMigrationResponse,
   RecycleReadOnlyGroupResponse,
   DescribeZonesResponse,
@@ -103,23 +104,25 @@ import {
   DescribeMigrationDatabasesResponse,
   CompleteExpansionResponse,
   MigrateSource,
-  ResetAccountPasswordResponse,
+  ModifyDatabaseCTRequest,
   ModifyBackupMigrationResponse,
   ReadOnlyGroup,
+  DescribeFlowStatusResponse,
   QueryMigrationCheckProcessResponse,
   CreateReadOnlyDBInstancesRequest,
   ModifyAccountPrivilegeRequest,
   CreateBackupMigrationRequest,
+  DescribeDBsNormalResponse,
   DescribeMigrationsRequest,
   DescribeDBCharsetsRequest,
   DescribeUploadIncrementalInfoRequest,
   DescribeDBsRequest,
   CompleteExpansionRequest,
-  RenewPostpaidDBInstanceRequest,
+  ModifyDatabaseMdfRequest,
   DeleteIncrementalMigrationResponse,
   DescribeRegionsRequest,
   DescribeMaintenanceSpanRequest,
-  DescribeFlowStatusResponse,
+  AccountPrivilege,
   StopMigrationRequest,
   CreateReadOnlyDBInstancesResponse,
   DeleteMigrationRequest,
@@ -130,6 +133,7 @@ import {
   TerminateDBInstanceRequest,
   DescribeUploadIncrementalInfoResponse,
   CreateDBRequest,
+  ModifyDBInstanceSecurityGroupsResponse,
   DescribeProjectSecurityGroupsRequest,
   InstanceDBDetail,
   SecurityGroup,
@@ -145,13 +149,16 @@ import {
   RecycleReadOnlyGroupRequest,
   StepDetail,
   DescribeBackupUploadSizeResponse,
+  ModifyDatabaseCDCRequest,
   InquiryPriceRenewDBInstanceRequest,
   StartIncrementalMigrationResponse,
   TerminateDBInstanceResponse,
+  ModifyDatabaseCTResponse,
   DbRollbackTimeInfo,
   ModifyDBInstanceNetworkResponse,
   AssociateSecurityGroupsResponse,
   AccountDetail,
+  ModifyDatabaseMdfResponse,
   CreateBackupResponse,
   DBInstance,
   DescribeProductConfigResponse,
@@ -162,12 +169,13 @@ import {
   CreateBasicDBInstancesRequest,
   ModifyDBNameResponse,
   CosUploadBackupFile,
-  ModifyDBNameRequest,
+  DbNormalDetail,
   ModifyDBInstanceRenewFlagRequest,
   Backup,
   DescribeBackupCommandRequest,
   AccountRemark,
-  ModifyDBInstanceSecurityGroupsResponse,
+  DescribePublishSubscribeRequest,
+  ModifyDatabaseCDCResponse,
   ModifyDBInstanceNameResponse,
   CreateIncrementalMigrationResponse,
   MigrationAction,
@@ -188,7 +196,7 @@ import {
   PublishSubscribe,
   DescribeBackupByFlowIdRequest,
   CreateBackupRequest,
-  DescribePublishSubscribeRequest,
+  DescribeDBsNormalRequest,
   ModifyAccountRemarkRequest,
   ModifyIncrementalMigrationResponse,
   ModifyPublishSubscribeNameRequest,
@@ -215,6 +223,7 @@ import {
   ModifyReadOnlyGroupDetailsRequest,
   RollbackInstanceRequest,
   DescribeSlowlogsRequest,
+  ModifyDBNameRequest,
   ModifyDBInstanceProjectRequest,
   DisassociateSecurityGroupsRequest,
   ModifyBackupNameRequest,
@@ -317,6 +326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUploadIncrementalInfoResponse) => void
   ): Promise<DescribeUploadIncrementalInfoResponse> {
     return this.request("DescribeUploadIncrementalInfo", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDatabaseMdf)用于收缩数据库mdf(Shrink mdf)
+   */
+  async ModifyDatabaseMdf(
+    req: ModifyDatabaseMdfRequest,
+    cb?: (error: string, rep: ModifyDatabaseMdfResponse) => void
+  ): Promise<ModifyDatabaseMdfResponse> {
+    return this.request("ModifyDatabaseMdf", req, cb)
   }
 
   /**
@@ -530,6 +549,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyDatabaseCT)用于启用、禁用数据库数据变更跟踪(CT)
+   */
+  async ModifyDatabaseCT(
+    req: ModifyDatabaseCTRequest,
+    cb?: (error: string, rep: ModifyDatabaseCTResponse) => void
+  ): Promise<ModifyDatabaseCTResponse> {
+    return this.request("ModifyDatabaseCT", req, cb)
+  }
+
+  /**
    * 本接口(DescribeBackups)用于查询备份列表。
    */
   async DescribeBackups(
@@ -587,6 +616,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupMigrationResponse) => void
   ): Promise<DescribeBackupMigrationResponse> {
     return this.request("DescribeBackupMigration", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDatabaseCDC)用于开启、关闭数据库数据变更捕获(CDC)
+   */
+  async ModifyDatabaseCDC(
+    req: ModifyDatabaseCDCRequest,
+    cb?: (error: string, rep: ModifyDatabaseCDCResponse) => void
+  ): Promise<ModifyDatabaseCDCResponse> {
+    return this.request("ModifyDatabaseCDC", req, cb)
   }
 
   /**
@@ -650,13 +689,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CompleteMigration）作用是完成一个迁移任务
+   * 本接口（StartBackupMigration）用于启动备份导入任务。
    */
-  async CompleteMigration(
-    req: CompleteMigrationRequest,
-    cb?: (error: string, rep: CompleteMigrationResponse) => void
-  ): Promise<CompleteMigrationResponse> {
-    return this.request("CompleteMigration", req, cb)
+  async StartBackupMigration(
+    req: StartBackupMigrationRequest,
+    cb?: (error: string, rep: StartBackupMigrationResponse) => void
+  ): Promise<StartBackupMigrationResponse> {
+    return this.request("StartBackupMigration", req, cb)
   }
 
   /**
@@ -980,6 +1019,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeDBsNormal)用于查询数据库配置信息，此接口不包含数据库的关联账号
+   */
+  async DescribeDBsNormal(
+    req: DescribeDBsNormalRequest,
+    cb?: (error: string, rep: DescribeDBsNormalResponse) => void
+  ): Promise<DescribeDBsNormalResponse> {
+    return this.request("DescribeDBsNormal", req, cb)
+  }
+
+  /**
    * 本接口（ModifyAccountPrivilege）用于修改实例账户权限。
    */
   async ModifyAccountPrivilege(
@@ -1060,13 +1109,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（StartBackupMigration）用于启动备份导入任务。
+   * 本接口（CompleteMigration）作用是完成一个迁移任务
    */
-  async StartBackupMigration(
-    req: StartBackupMigrationRequest,
-    cb?: (error: string, rep: StartBackupMigrationResponse) => void
-  ): Promise<StartBackupMigrationResponse> {
-    return this.request("StartBackupMigration", req, cb)
+  async CompleteMigration(
+    req: CompleteMigrationRequest,
+    cb?: (error: string, rep: CompleteMigrationResponse) => void
+  ): Promise<CompleteMigrationResponse> {
+    return this.request("CompleteMigration", req, cb)
   }
 
   /**

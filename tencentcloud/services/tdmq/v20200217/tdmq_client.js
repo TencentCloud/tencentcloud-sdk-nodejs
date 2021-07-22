@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClearCmqQueue", req, cb);
     }
     /**
+     * 运营端获节点健康状态
+     */
+    async DescribeNodeHealthOpt(req, cb) {
+        return this.request("DescribeNodeHealthOpt", req, cb);
+    }
+    /**
      * 创建cmq队列接口
      */
     async CreateCmqQueue(req, cb) {
@@ -308,6 +314,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ResetMsgSubOffsetByTimestamp(req, cb) {
         return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
+    }
+    /**
+     * 运营端获取命名空间bundle列表
+     */
+    async DescribeNamespaceBundlesOpt(req, cb) {
+        return this.request("DescribeNamespaceBundlesOpt", req, cb);
     }
     /**
      * 删除订阅关系

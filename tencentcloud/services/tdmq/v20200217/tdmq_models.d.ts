@@ -41,6 +41,10 @@ export interface CmqDeadLetterPolicy {
     MaxReceiveCount: number;
 }
 /**
+ * 运营端命名空间bundle实体
+ */
+export declare type BundleSetOpt = null;
+/**
  * DescribeSubscriptions请求参数结构体
  */
 export interface DescribeSubscriptionsRequest {
@@ -201,21 +205,13 @@ export interface DescribeCmqQueuesResponse {
     RequestId?: string;
 }
 /**
- * PublishCmqMsg请求参数结构体
+ * DeleteCmqQueue返回参数结构体
  */
-export interface PublishCmqMsgRequest {
+export interface DeleteCmqQueueResponse {
     /**
-      * 主题名
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TopicName: string;
-    /**
-      * 消息内容
-      */
-    MsgContent: string;
-    /**
-      * 消息标签
-      */
-    MsgTag?: Array<string>;
+    RequestId?: string;
 }
 /**
  * CreateCmqSubscribe请求参数结构体
@@ -1055,9 +1051,17 @@ export interface Tag {
     TagValue: string;
 }
 /**
- * DeleteCmqQueue返回参数结构体
+ * DescribeNamespaceBundlesOpt返回参数结构体
  */
-export interface DeleteCmqQueueResponse {
+export interface DescribeNamespaceBundlesOptResponse {
+    /**
+      * 记录条数
+      */
+    TotalCount: number;
+    /**
+      * bundle列表
+      */
+    BundleSet: Array<BundleSetOpt>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1499,17 +1503,13 @@ export interface UnbindCmqDeadLetterResponse {
     RequestId?: string;
 }
 /**
- * DeleteEnvironments请求参数结构体
+ * DescribeNodeHealthOpt请求参数结构体
  */
-export interface DeleteEnvironmentsRequest {
+export interface DescribeNodeHealthOptRequest {
     /**
-      * 环境（命名空间）数组，每次最多删除20个。
+      * 节点实例ID
       */
-    EnvironmentIds: Array<string>;
-    /**
-      * Pulsar 集群的ID
-      */
-    ClusterId?: string;
+    InstanceId: string;
 }
 /**
  * DescribeBindVpcs请求参数结构体
@@ -1764,6 +1764,23 @@ export interface DescribeCmqDeadLetterSourceQueuesRequest {
       * 根据SourceQueueName过滤
       */
     SourceQueueName?: string;
+}
+/**
+ * DescribeNodeHealthOpt返回参数结构体
+ */
+export interface DescribeNodeHealthOptResponse {
+    /**
+      * 0-异常；1-正常
+      */
+    NodeState: number;
+    /**
+      * 最近一次健康检查的时间
+      */
+    LatestHealthCheckTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateCluster请求参数结构体
@@ -2084,6 +2101,35 @@ export interface CmqTransactionPolicy {
     MaxQueryCount: number;
 }
 /**
+ * DescribeNamespaceBundlesOpt请求参数结构体
+ */
+export interface DescribeNamespaceBundlesOptRequest {
+    /**
+      * 物理集群名
+      */
+    ClusterName: string;
+    /**
+      * 虚拟集群（租户）ID
+      */
+    TenantId: string;
+    /**
+      * 命名空间名
+      */
+    NamespaceName: string;
+    /**
+      * 是否需要监控指标，若传false，则不需要传Limit和Offset分页参数
+      */
+    NeedMetrics: boolean;
+    /**
+      * 查询限制条数
+      */
+    Limit?: number;
+    /**
+      * 查询偏移量
+      */
+    Offset?: number;
+}
+/**
  * ModifyTopic请求参数结构体
  */
 export interface ModifyTopicRequest {
@@ -2369,6 +2415,19 @@ export interface ClearCmqQueueResponse {
     RequestId?: string;
 }
 /**
+ * DeleteEnvironments请求参数结构体
+ */
+export interface DeleteEnvironmentsRequest {
+    /**
+      * 环境（命名空间）数组，每次最多删除20个。
+      */
+    EnvironmentIds: Array<string>;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
+}
+/**
  * DescribeBindClusters请求参数结构体
  */
 export declare type DescribeBindClustersRequest = null;
@@ -2629,6 +2688,23 @@ export interface SendCmqMsgResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * PublishCmqMsg请求参数结构体
+ */
+export interface PublishCmqMsgRequest {
+    /**
+      * 主题名
+      */
+    TopicName: string;
+    /**
+      * 消息内容
+      */
+    MsgContent: string;
+    /**
+      * 消息标签
+      */
+    MsgTag?: Array<string>;
 }
 /**
  * UnbindCmqDeadLetter请求参数结构体

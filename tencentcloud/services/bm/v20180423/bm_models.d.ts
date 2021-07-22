@@ -193,11 +193,11 @@ export interface DescribeDevicesResponse {
     /**
       * 返回数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 物理机信息列表
       */
-    DeviceInfoSet?: Array<DeviceInfo>;
+    DeviceInfoSet: Array<DeviceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2710,7 +2710,7 @@ export interface DescribeDevicesRequest {
       */
     Offset: number;
     /**
-      * 返回数量
+      * 返回数量，默认为20，最大值为100。
       */
     Limit: number;
     /**
@@ -2777,6 +2777,10 @@ export interface DescribeDevicesRequest {
       * 排序方式，取值：0:增序(默认)，1:降序
       */
     Order?: number;
+    /**
+      * 按照维保方式过滤。可取值为 Maintain: 在保;  WillExpire: 即将过保; Expire: 已过保
+      */
+    MaintainStatus?: string;
 }
 /**
  * DescribeHardwareSpecification返回参数结构体
@@ -3014,6 +3018,16 @@ export interface DeviceInfo {
       * 标识是否是竞价实例。0: 普通设备; 1: 竞价实例设备
       */
     IsLuckyDevice: number;
+    /**
+      * 标识机器维保状态。Maintain: 在保;  WillExpire: 即将过保; Expire: 已过保
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaintainStatus: string;
+    /**
+      * 维保信息描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaintainMessage: string;
 }
 /**
  * ResetDevicePassword返回参数结构体

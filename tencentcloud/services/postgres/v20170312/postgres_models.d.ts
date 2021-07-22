@@ -772,6 +772,15 @@ export interface InquiryPriceCreateDBInstancesResponse {
     RequestId?: string;
 }
 /**
+ * ModifySwitchTimePeriod返回参数结构体
+ */
+export interface ModifySwitchTimePeriodResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DisIsolateDBInstances请求参数结构体
  */
 export interface DisIsolateDBInstancesRequest {
@@ -889,6 +898,18 @@ export interface UpgradeDBInstanceRequest {
       * 活动ID
       */
     ActivityId?: number;
+    /**
+      * 指定实例配置完成变更后的切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。
+      */
+    SwitchTag?: number;
+    /**
+      * 切换开始时间
+      */
+    SwitchStartTime?: string;
+    /**
+      * 切换截止时间
+      */
+    SwitchEndTime?: string;
 }
 /**
  * DescribeZones请求参数结构体
@@ -2139,6 +2160,19 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * ModifySwitchTimePeriod请求参数结构体
+ */
+export interface ModifySwitchTimePeriodRequest {
+    /**
+      * 处于等待切换状态中的实例ID
+      */
+    DBInstanceId: string;
+    /**
+      * 入参取值为 0 ，代表立即切换。
+      */
+    SwitchTag: number;
+}
+/**
  * 描述地域的编码和状态等信息
  */
 export interface RegionInfo {
@@ -2273,11 +2307,11 @@ export interface UpgradeDBInstanceResponse {
     /**
       * 交易名字。
       */
-    DealName?: string;
+    DealName: string;
     /**
       * 冻结流水号
       */
-    BillId?: string;
+    BillId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

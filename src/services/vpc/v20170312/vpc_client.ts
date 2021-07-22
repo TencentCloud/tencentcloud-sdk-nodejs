@@ -82,6 +82,7 @@ import {
   ModifyVpcEndPointServiceAttributeRequest,
   FilterObject,
   DescribeIpGeolocationInfosResponse,
+  DescribeVpcTaskResultRequest,
   AssociateNetworkAclSubnetsResponse,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest,
   ResetRoutesRequest,
@@ -495,6 +496,7 @@ import {
   DescribeAddressTemplateGroupsRequest,
   CheckNetDetectStateResponse,
   DisassociateVpcEndPointSecurityGroupsResponse,
+  DescribeVpcTaskResultResponse,
   AssociateNatGatewayAddressResponse,
   RemoveBandwidthPackageResourcesRequest,
   VpngwCcnRoutes,
@@ -923,7 +925,7 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口（UnassignIpv6Addresses）用于释放弹性网卡`IPv6`地址。<br />
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口。
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
   async UnassignIpv6Addresses(
     req: UnassignIpv6AddressesRequest,
@@ -991,6 +993,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAddressesResponse) => void
   ): Promise<DescribeAddressesResponse> {
     return this.request("DescribeAddresses", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeVpcTaskResult）用于查询VPC任务执行结果。
+   */
+  async DescribeVpcTaskResult(
+    req: DescribeVpcTaskResultRequest,
+    cb?: (error: string, rep: DescribeVpcTaskResultResponse) => void
+  ): Promise<DescribeVpcTaskResultResponse> {
+    return this.request("DescribeVpcTaskResult", req, cb)
   }
 
   /**
@@ -1770,8 +1782,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（HaVipDisassociateAddressIp）用于将高可用虚拟IP（HAVIP）已绑定的弹性公网IP（EIP）解除绑定<br />
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口
+     * 本接口（HaVipDisassociateAddressIp）用于将高可用虚拟IP（HAVIP）已绑定的弹性公网IP（EIP）解除绑定。<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
   async HaVipDisassociateAddressIp(
     req: HaVipDisassociateAddressIpRequest,
@@ -2529,7 +2541,7 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口（AssignIpv6Addresses）用于弹性网卡申请`IPv6`地址。<br />
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口。
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
 * 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
 * 可以指定`IPv6`地址申请，地址类型不能为主`IP`，`IPv6`地址暂时只支持作为辅助`IP`。
 * 地址必须要在弹性网卡所在子网内，而且不能被占用。
@@ -2646,8 +2658,8 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（HaVipAssociateAddressIp）用于高可用虚拟IP（HAVIP）绑定弹性公网IP（EIP）<br />
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口
+     * 本接口（HaVipAssociateAddressIp）用于高可用虚拟IP（HAVIP）绑定弹性公网IP（EIP）。<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
   async HaVipAssociateAddressIp(
     req: HaVipAssociateAddressIpRequest,
@@ -2718,8 +2730,8 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（DeleteHaVip）用于删除高可用虚拟IP（HAVIP）<br />
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`QueryTask`接口
+     * 本接口（DeleteHaVip）用于删除高可用虚拟IP（HAVIP）。<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
   async DeleteHaVip(
     req: DeleteHaVipRequest,

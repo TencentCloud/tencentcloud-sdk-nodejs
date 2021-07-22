@@ -358,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterSecurity", req, cb);
     }
     /**
+     * 提供给附加了VPC-CNI能力的Global-Route集群关闭VPC-CNI
+     */
+    async DisableVpcCniNetworkType(req, cb) {
+        return this.request("DisableVpcCniNetworkType", req, cb);
+    }
+    /**
      * 查询路由表冲突列表
      */
     async DescribeRouteTableConflicts(req, cb) {
@@ -400,10 +406,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterInstances", req, cb);
     }
     /**
-     * 获取集群可以升级的所有版本
+     * 给GR集群增加可用的ClusterCIDR
      */
-    async DescribeAvailableClusterVersion(req, cb) {
-        return this.request("DescribeAvailableClusterVersion", req, cb);
+    async AddClusterCIDR(req, cb) {
+        return this.request("AddClusterCIDR", req, cb);
     }
     /**
      * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
@@ -434,6 +440,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrometheusAlertRule(req, cb) {
         return this.request("DescribePrometheusAlertRule", req, cb);
+    }
+    /**
+     * 获取集群可以升级的所有版本
+     */
+    async DescribeAvailableClusterVersion(req, cb) {
+        return this.request("DescribeAvailableClusterVersion", req, cb);
     }
     /**
      * 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）

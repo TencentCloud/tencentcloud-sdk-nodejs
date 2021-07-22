@@ -764,6 +764,15 @@ export interface CreateEKSClusterRequest {
     TagSpecification?: Array<TagSpecification>;
 }
 /**
+ * DisableVpcCniNetworkType返回参数结构体
+ */
+export interface DisableVpcCniNetworkTypeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteClusterAsGroups请求参数结构体
  */
 export interface DeleteClusterAsGroupsRequest {
@@ -1561,6 +1570,15 @@ export interface SetNodePoolNodeProtectionResponse {
     RequestId?: string;
 }
 /**
+ * DisableVpcCniNetworkType请求参数结构体
+ */
+export interface DisableVpcCniNetworkTypeRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+}
+/**
  * DescribePrometheusTemplates返回参数结构体
  */
 export interface DescribePrometheusTemplatesResponse {
@@ -2029,6 +2047,23 @@ export interface ExistedInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceChargeType: string;
+}
+/**
+ * AddClusterCIDR请求参数结构体
+ */
+export interface AddClusterCIDRRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 增加的ClusterCIDR
+      */
+    ClusterCIDRs: Array<string>;
+    /**
+      * 是否忽略ClusterCIDR与VPC路由表的冲突
+      */
+    IgnoreClusterCIDRConflict?: boolean;
 }
 /**
  * DescribeClusterNodePools返回参数结构体
@@ -2855,6 +2890,15 @@ export interface DescribeEnableVpcCniProgressResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ErrorMessage: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * AddClusterCIDR返回参数结构体
+ */
+export interface AddClusterCIDRResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

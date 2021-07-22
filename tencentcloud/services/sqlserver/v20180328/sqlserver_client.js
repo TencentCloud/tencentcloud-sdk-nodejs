@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUploadIncrementalInfo", req, cb);
     }
     /**
+     * 本接口(ModifyDatabaseMdf)用于收缩数据库mdf(Shrink mdf)
+     */
+    async ModifyDatabaseMdf(req, cb) {
+        return this.request("ModifyDatabaseMdf", req, cb);
+    }
+    /**
      * 本接口（ModifyDBRemark）用于修改数据库备注。
      */
     async ModifyDBRemark(req, cb) {
@@ -196,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCrossRegionZone", req, cb);
     }
     /**
+     * 本接口(ModifyDatabaseCT)用于启用、禁用数据库数据变更跟踪(CT)
+     */
+    async ModifyDatabaseCT(req, cb) {
+        return this.request("ModifyDatabaseCT", req, cb);
+    }
+    /**
      * 本接口(DescribeBackups)用于查询备份列表。
      */
     async DescribeBackups(req, cb) {
@@ -230,6 +242,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBackupMigration(req, cb) {
         return this.request("DescribeBackupMigration", req, cb);
+    }
+    /**
+     * 本接口(ModifyDatabaseCDC)用于开启、关闭数据库数据变更捕获(CDC)
+     */
+    async ModifyDatabaseCDC(req, cb) {
+        return this.request("ModifyDatabaseCDC", req, cb);
     }
     /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
@@ -268,10 +286,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDB", req, cb);
     }
     /**
-     * 本接口（CompleteMigration）作用是完成一个迁移任务
+     * 本接口（StartBackupMigration）用于启动备份导入任务。
      */
-    async CompleteMigration(req, cb) {
-        return this.request("CompleteMigration", req, cb);
+    async StartBackupMigration(req, cb) {
+        return this.request("StartBackupMigration", req, cb);
     }
     /**
      * 本接口（RestoreInstance）用于根据备份文件恢复实例。
@@ -466,6 +484,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupStrategy", req, cb);
     }
     /**
+     * 本接口(DescribeDBsNormal)用于查询数据库配置信息，此接口不包含数据库的关联账号
+     */
+    async DescribeDBsNormal(req, cb) {
+        return this.request("DescribeDBsNormal", req, cb);
+    }
+    /**
      * 本接口（ModifyAccountPrivilege）用于修改实例账户权限。
      */
     async ModifyAccountPrivilege(req, cb) {
@@ -514,10 +538,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupMigration", req, cb);
     }
     /**
-     * 本接口（StartBackupMigration）用于启动备份导入任务。
+     * 本接口（CompleteMigration）作用是完成一个迁移任务
      */
-    async StartBackupMigration(req, cb) {
-        return this.request("StartBackupMigration", req, cb);
+    async CompleteMigration(req, cb) {
+        return this.request("CompleteMigration", req, cb);
     }
     /**
      * 本接口(DescribeBackupByFlowId)用于通过备份创建流程的ID查询创建的备份详情，流程ID可从接口CreateBackup中获得。

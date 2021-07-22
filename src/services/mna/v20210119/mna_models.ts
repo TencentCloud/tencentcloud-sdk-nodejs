@@ -196,4 +196,9 @@ BU4M：上行带宽保障4Mbps
    * 接口能力扩展，如果是电信用户，必须填充CTCC Token字段
    */
   Capacity?: Capacity
+
+  /**
+   * 应用模板ID
+   */
+  TemplateId?: string
 }
