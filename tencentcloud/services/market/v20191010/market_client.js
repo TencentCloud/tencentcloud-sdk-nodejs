@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("market.tencentcloudapi.com", "2019-10-10", clientConfig);
     }
     /**
+     * 同步企微的用户信息和订单信息到云市场
+     */
+    async SyncUserAndOrderInfo(req, cb) {
+        return this.request("SyncUserAndOrderInfo", req, cb);
+    }
+    /**
      * 该接口可以根据InstanceId查询实例的api的使用情况。
 
      */

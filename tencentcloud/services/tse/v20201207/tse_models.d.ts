@@ -20,31 +20,6 @@ export interface DescribeSREInstancesRequest {
     QueryType?: string;
 }
 /**
- * ManageConfig请求参数结构体
- */
-export interface ManageConfigRequest {
-    /**
-      * 实例ID
-      */
-    InstanceId: string;
-    /**
-      * 配置中心类型（consul、zookeeper、apollo等）
-      */
-    Type: string;
-    /**
-      * 请求命名 PUT GET DELETE
-      */
-    Command: string;
-    /**
-      * 配置的Key
-      */
-    Key: string;
-    /**
-      * 配置的Value
-      */
-    Value?: string;
-}
-/**
  * 微服务注册引擎实例
  */
 export interface SREInstance {
@@ -139,23 +114,6 @@ export interface DescribeSREInstanceAccessAddressResponse {
     RequestId?: string;
 }
 /**
- * DescribeConfig请求参数结构体
- */
-export interface DescribeConfigRequest {
-    /**
-      * 实例ID
-      */
-    InstanceId: string;
-    /**
-      * 配置中心类型（consul、zookeeper、apollo等）
-      */
-    Type: string;
-    /**
-      * 配置项的节点路径key
-      */
-    Key: string;
-}
-/**
  * DescribeSREInstances返回参数结构体
  */
 export interface DescribeSREInstancesResponse {
@@ -171,44 +129,6 @@ export interface DescribeSREInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeConfig返回参数结构体
- */
-export interface DescribeConfigResponse {
-    /**
-      * 配置项或路径key
-      */
-    Key: string;
-    /**
-      * 配置项的值
-      */
-    Value: string;
-    /**
-      * 当前key是否为路径
-      */
-    IsDir: boolean;
-    /**
-      * 当前key下的子路径
-      */
-    List: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 查询过滤通用对象
- */
-export interface Filter {
-    /**
-      * 过滤参数名
-      */
-    Name: string;
-    /**
-      * 过滤参数值
-      */
-    Values: Array<string>;
 }
 /**
  * 环境具体信息
@@ -240,13 +160,17 @@ export interface EnvInfo {
     ConfigServiceIp?: string;
 }
 /**
- * DescribeSREInstanceAccessAddress请求参数结构体
+ * 查询过滤通用对象
  */
-export interface DescribeSREInstanceAccessAddressRequest {
+export interface Filter {
     /**
-      * 注册引擎实例Id
+      * 过滤参数名
       */
-    InstanceId?: string;
+    Name: string;
+    /**
+      * 过滤参数值
+      */
+    Values: Array<string>;
 }
 /**
  * 私有网络信息
@@ -262,21 +186,11 @@ export interface VpcInfo {
     SubnetId: string;
 }
 /**
- * ManageConfig返回参数结构体
+ * DescribeSREInstanceAccessAddress请求参数结构体
  */
-export interface ManageConfigResponse {
+export interface DescribeSREInstanceAccessAddressRequest {
     /**
-      * 对配置中心操作配置之后的返回值
-注意：此字段可能返回 null，表示取不到有效值。
+      * 注册引擎实例Id
       */
-    Result: string;
-    /**
-      * 操作是否成功
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OpResult: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    InstanceId?: string;
 }

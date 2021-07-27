@@ -18,349 +18,263 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ExportBashEventsRequest,
-  DescribeSearchTemplatesResponse,
-  ExportReverseShellEventsResponse,
-  AssetKeyVal,
-  AddMachineTagResponse,
-  ScanVulAgainRequest,
-  DescribeWeeklyReportBruteAttacksRequest,
-  DescribeProcessTaskStatusRequest,
-  InquiryPriceOpenProVersionPrepaidRequest,
-  DeleteBashEventsResponse,
-  DescribeTagsRequest,
-  BruteAttack,
-  DeleteBashRulesResponse,
-  ExportVulDetectionExcelResponse,
-  CreateProcessTaskResponse,
-  DescribeHistoryServiceResponse,
-  ModifyWebPageProtectSettingResponse,
-  Tag,
-  AgentVul,
-  ExportAttackLogsResponse,
-  TrustMalwaresRequest,
-  UntrustMaliciousRequestRequest,
-  DescribeComponentInfoResponse,
-  DescribeProVersionInfoRequest,
-  CreateProcessTaskRequest,
-  DeleteLoginWhiteListRequest,
-  MachineTag,
-  DescribeAttackLogInfoResponse,
-  DescribePrivilegeEventsResponse,
-  DescribeOverviewStatisticsResponse,
-  ReverseShellRule,
-  DescribeBashRulesResponse,
-  ExportAssetCoreModuleListRequest,
-  DescribeVulInfoRequest,
-  DescribeComponentStatisticsResponse,
-  SwitchBashRulesResponse,
-  DeleteUsualLoginPlacesResponse,
-  DescribeSearchExportListResponse,
-  DescribeNonlocalLoginPlacesResponse,
-  DescribeWeeklyReportNonlocalLoginPlacesRequest,
-  CloseProVersionRequest,
-  DescribeUsualLoginPlacesResponse,
-  DescribeComponentInfoRequest,
-  EditBashRulesResponse,
-  DescribeWeeklyReportMalwaresRequest,
-  DescribeBruteAttacksResponse,
-  ScanVulResponse,
-  DescribeReverseShellEventsResponse,
-  OsName,
-  DescribeTagMachinesRequest,
-  DeleteSearchTemplateRequest,
-  DescribeOpenPortTaskStatusResponse,
-  LoginWhiteListsRule,
-  ExportAttackLogsRequest,
-  DescribeProcessesRequest,
-  ExportReverseShellEventsRequest,
-  DeleteLoginWhiteListResponse,
-  DescribeAttackLogsResponse,
-  DeleteMalwaresResponse,
-  ScanVulAgainResponse,
-  SeparateMalwaresResponse,
-  DescribeVulScanResultRequest,
-  DescribeRiskDnsListRequest,
-  DescribeSecurityDynamicsRequest,
-  ImpactedHost,
-  ExportNonlocalLoginPlacesResponse,
-  UntrustMaliciousRequestResponse,
-  ExportMaliciousRequestsRequest,
-  ModifyAutoOpenProVersionConfigRequest,
-  ExportVulDetectionReportRequest,
-  ExportMalwaresResponse,
-  DescribeScanVulSettingRequest,
-  DescribeESHitsRequest,
-  DescribeVulsRequest,
-  DescribeHistoryAccountsRequest,
-  ModifyAlarmAttributeResponse,
-  IgnoreImpactedHostsResponse,
-  RescanImpactedHostResponse,
-  DescribeVulScanResultResponse,
-  DeleteReverseShellEventsRequest,
-  DescribeMachineOsListResponse,
-  IgnoreImpactedHostsRequest,
-  DescribeMalwaresRequest,
-  DescribeMachinesRequest,
-  DeletePrivilegeRulesRequest,
   DescribeMalwareInfoRequest,
-  DescribeProcessTaskStatusResponse,
-  ExportPrivilegeEventsResponse,
-  DescribeWeeklyReportBruteAttacksResponse,
-  DescribeAgentVulsRequest,
-  UsualPlace,
-  DescribeReverseShellEventsRequest,
-  WeeklyReportVul,
-  DescribeWebPageGeneralizeResponse,
-  DescribeAttackVulTypeListRequest,
-  DescribeLogStorageStatisticRequest,
-  DescribeAssetRecentMachineInfoRequest,
-  ScanVulSettingResponse,
-  VulDetailInfo,
-  DescribeBruteAttacksRequest,
-  DescribePrivilegeRulesRequest,
-  DescribeOpenPortsRequest,
-  DescribeImpactedHostsRequest,
-  DescribeWebPageGeneralizeRequest,
-  DescribeComponentsRequest,
-  OpenPortStatistics,
-  DescribeBruteAttackListResponse,
-  DescribeAssetInfoRequest,
-  EditPrivilegeRuleResponse,
-  DescribeMalwareTimingScanSettingResponse,
-  UntrustMalwaresResponse,
-  DescribeAccountStatisticsResponse,
-  DescribeSearchExportListRequest,
-  DeleteMaliciousRequestsResponse,
-  ExportBruteAttacksResponse,
-  DeleteTagsResponse,
-  DeleteMachineResponse,
-  ScanVulRequest,
-  RecoverMalwaresRequest,
-  TagMachine,
-  DescribeScanMalwareScheduleRequest,
-  DescribeBashEventsResponse,
-  DescribeBashEventsRequest,
-  EditReverseShellRuleResponse,
-  DeleteMachineRequest,
-  PrivilegeEscalationProcess,
-  LoginWhiteLists,
-  DescribeESAggregationsResponse,
-  DeletePrivilegeRulesResponse,
-  CreateProtectServerRequest,
-  DescribeMachineListRequest,
-  DescribeIndexListResponse,
-  TrustMaliciousRequestRequest,
-  ReverseShell,
-  DescribeOpenPortStatisticsResponse,
-  DeleteAttackLogsResponse,
-  SecurityDynamic,
-  DescribeVulInfoResponse,
-  EditReverseShellRuleRequest,
-  DescribeProVersionInfoResponse,
-  ExportBruteAttacksRequest,
-  DescribeSecurityEventsCntRequest,
-  DescribeIndexListRequest,
-  EffectiveMachineInfo,
-  DescribeTagMachinesResponse,
-  ExportMaliciousRequestsResponse,
-  DescribeWeeklyReportInfoResponse,
-  DeleteBashRulesRequest,
-  CreateProtectServerResponse,
-  DescribeOpenPortsResponse,
-  OpenProVersionResponse,
-  DeleteUsualLoginPlacesRequest,
-  DescribeWeeklyReportVulsRequest,
-  CloseProVersionResponse,
-  DescribeHistoryServiceRequest,
-  SyncAssetScanRequest,
-  DescribeAssetRecentMachineInfoResponse,
-  DescribeESAggregationsRequest,
-  DescribeReverseShellRulesResponse,
-  DescribeBruteAttackListRequest,
-  Malware,
-  ModifyProVersionRenewFlagResponse,
-  Machine,
-  DefendAttackLog,
-  DescribeUsualLoginPlacesRequest,
-  Component,
-  DescribeAgentVulsResponse,
-  DescribeProcessStatisticsRequest,
-  CreateScanMalwareSettingResponse,
-  DescribeComponentsResponse,
-  ExportTasksRequest,
-  DescribeWeeklyReportsResponse,
-  DescribeAccountsResponse,
-  BashEvent,
-  DeleteMalwaresRequest,
-  RecoverMalwaresResponse,
-  DescribeReverseShellRulesRequest,
+  DescribeSearchTemplatesResponse,
+  DescribeMachineOsListRequest,
   DescribeScanVulSettingResponse,
+  DescribeBashRulesRequest,
+  ExportBashEventsRequest,
+  ExportPrivilegeEventsResponse,
+  AssetKeyVal,
+  DescribeImportMachineInfoResponse,
   AssetFilters,
+  UsualPlace,
+  DescribeReverseShellRulesRequest,
   SetBashEventsStatusRequest,
   DescribeAccountsRequest,
-  CreateUsualLoginPlacesRequest,
-  DescribeWeeklyReportsRequest,
-  DescribeAttackLogsRequest,
-  ComponentStatistics,
-  SetBashEventsStatusResponse,
-  AddLoginWhiteListRequest,
-  ExportPrivilegeEventsRequest,
-  Account,
-  DescribeMaliciousRequestsResponse,
-  DescribeRiskDnsListResponse,
-  ScanTaskDetails,
-  DescribeNonlocalLoginPlacesRequest,
-  DeleteMachineTagRequest,
-  UpdateBaselineStrategyRequest,
-  DescribeExportMachinesResponse,
-  OpenProVersionPrepaidRequest,
-  DescribeLogStorageStatisticResponse,
-  MaliciousRequest,
-  DescribeWeeklyReportInfoRequest,
-  EditTagsRequest,
-  DescribeProcessesResponse,
-  DeleteReverseShellRulesRequest,
-  DescribeOpenPortStatisticsRequest,
-  ModifyMalwareTimingScanSettingsResponse,
-  DeleteNonlocalLoginPlacesResponse,
-  ModifyWebPageProtectSettingRequest,
-  UpdateBaselineStrategyResponse,
-  CreateOpenPortTaskResponse,
-  EditBashRuleRequest,
-  DeletePrivilegeEventsResponse,
-  DescribeMachineInfoResponse,
-  DescribeImportMachineInfoRequest,
-  DescribeMachineRegionsRequest,
-  DescribeSearchLogsRequest,
-  DescribeAttackLogInfoRequest,
-  DescribeComponentStatisticsRequest,
-  RescanImpactedHostRequest,
-  DescribeLoginWhiteListResponse,
-  DescribeScanMalwareScheduleResponse,
-  DeleteBruteAttacksRequest,
-  DescribeMalwareTimingScanSettingRequest,
-  DeleteTagsRequest,
-  RenewProVersionResponse,
-  CreateSearchLogResponse,
-  DescribeSecurityTrendsResponse,
-  CreateOpenPortTaskRequest,
-  DescribeSecurityDynamicsResponse,
-  DeleteReverseShellEventsResponse,
-  DescribeMachineInfoRequest,
-  DescribeMaliciousRequestsRequest,
-  DescribeScanTaskDetailsResponse,
-  WeeklyReport,
-  DescribeGeneralStatRequest,
-  DescribeOpenPortTaskStatusRequest,
-  OpenProVersionPrepaidResponse,
-  DescribeMalwareInfoResponse,
-  Process,
+  DescribeReverseShellEventsRequest,
+  ScanVulAgainRequest,
   DescribePrivilegeEventsRequest,
-  DescribeWeeklyReportMalwaresResponse,
-  ExportBashEventsResponse,
-  DeleteWebPageEventLogResponse,
-  DescribeProcessStatisticsResponse,
-  DeleteNonlocalLoginPlacesRequest,
-  DescribeTagsResponse,
-  CreateUsualLoginPlacesResponse,
-  DeleteSearchTemplateResponse,
-  WeeklyReportBruteAttack,
-  ProtectHostConfig,
-  HistoryAccount,
-  CreateScanMalwareSettingRequest,
-  UntrustMalwaresRequest,
-  SecurityTrend,
-  Vul,
-  ExportVulDetectionExcelRequest,
-  ModifyAutoOpenProVersionConfigResponse,
-  DescribeAlarmAttributeRequest,
-  DeleteMaliciousRequestsRequest,
-  DeleteBruteAttacksResponse,
-  ExportTasksResponse,
-  DescribeMachineOsListRequest,
-  DescribeBashRulesRequest,
-  DescribeAlarmAttributeResponse,
-  DescribeImportMachineInfoResponse,
   CreateSearchTemplateResponse,
+  DescribeAttackVulTypeListRequest,
+  DescribeLogStorageStatisticRequest,
+  DescribeAttackLogsRequest,
+  ScanVulResponse,
+  ComponentStatistics,
+  InquiryPriceOpenProVersionPrepaidRequest,
+  DescribeSearchTemplatesRequest,
   ExportMalwaresRequest,
-  RegionInfo,
+  EditTagsResponse,
   SyncAssetScanResponse,
+  DeleteBashEventsResponse,
+  DescribeMalwareInfoResponse,
+  ExportPrivilegeEventsRequest,
+  VulDetailInfo,
   CreateBaselineStrategyRequest,
   DescribeSecurityTrendsRequest,
   DescribeAttackVulTypeListResponse,
-  DescribePrivilegeRulesResponse,
-  DescribeOverviewStatisticsRequest,
+  Account,
+  DescribeReverseShellEventsResponse,
+  DescribePrivilegeRulesRequest,
+  DeleteBashRulesResponse,
   DescribeSecurityEventsCntResponse,
-  NonLocalLoginPlace,
+  OsName,
+  DescribeRiskDnsListResponse,
   DescribeExportMachinesRequest,
-  DescribeAssetInfoResponse,
+  DescribeHistoryServiceResponse,
+  CreateScanMalwareSettingResponse,
   RenewProVersionRequest,
+  DescribeWebPageGeneralizeRequest,
   RiskDnsList,
+  UpdateBaselineStrategyRequest,
+  ModifyWebPageProtectSettingResponse,
+  DeleteMachineTagRequest,
   CreateBaselineStrategyResponse,
+  DescribeTagMachinesRequest,
   ExportAssetCoreModuleListResponse,
+  SwitchBashRulesResponse,
+  OpenPortStatistics,
+  DescribeBruteAttackListResponse,
+  DescribeExportMachinesResponse,
   DescribeHistoryAccountsResponse,
+  IgnoreImpactedHostsResponse,
+  ExportAttackLogsResponse,
+  UntrustMalwaresRequest,
   DescribeLoginWhiteListRequest,
+  ReverseShell,
+  SecurityDynamic,
+  ExportBruteAttacksResponse,
   ExportVulDetectionReportResponse,
+  DescribeAccountStatisticsResponse,
   EditBashRulesRequest,
-  ModifyLoginWhiteListResponse,
-  OpenPort,
+  DescribeSearchExportListRequest,
+  ScanAssetRequest,
+  DescribeAssetInfoRequest,
+  DescribeProVersionInfoRequest,
+  DescribeProVersionInfoResponse,
+  DeleteMaliciousRequestsResponse,
+  DescribeESHitsResponse,
   ScanVulSettingRequest,
-  WeeklyReportNonlocalLoginPlace,
+  ExportBruteAttacksRequest,
+  DeleteMachineResponse,
+  DeleteLoginWhiteListRequest,
+  MachineTag,
+  DescribeLogStorageStatisticResponse,
+  DescribeAttackLogInfoResponse,
+  DescribePrivilegeEventsResponse,
+  DescribeOverviewStatisticsResponse,
+  RecoverMalwaresRequest,
   TrustMalwaresResponse,
-  DescribeVulsResponse,
-  DescribeImpactedHostsResponse,
-  ModifyLoginWhiteListRequest,
+  TagMachine,
+  EditTagsRequest,
+  ReverseShellRule,
+  DeleteReverseShellRulesRequest,
+  DescribeBashRulesResponse,
+  DescribeScanMalwareScheduleRequest,
+  RescanImpactedHostRequest,
+  DescribeBashEventsResponse,
   CreateSearchTemplateRequest,
-  BashRule,
+  DescribeBashEventsRequest,
+  DeleteTagsRequest,
+  DescribeOpenPortStatisticsRequest,
+  DescribeMachineInfoResponse,
   ModifyMalwareTimingScanSettingsRequest,
+  DeleteMachineRequest,
+  ExportAssetCoreModuleListRequest,
+  SetBashEventsStatusResponse,
+  DescribeComponentStatisticsResponse,
   DescribeMachineListResponse,
   MalwareInfo,
+  ModifyMalwareTimingScanSettingsResponse,
   Place,
+  DescribeMachineRegionsRequest,
+  LoginWhiteLists,
+  TrustMalwaresRequest,
+  DescribeSearchExportListResponse,
+  DescribeESAggregationsResponse,
+  DeleteNonlocalLoginPlacesResponse,
+  ModifyWebPageProtectSettingRequest,
   DeleteReverseShellRulesResponse,
+  UpdateBaselineStrategyResponse,
+  UntrustMalwaresResponse,
   DescribeScanTaskDetailsRequest,
+  RenewProVersionResponse,
+  DeletePrivilegeRulesResponse,
+  CreateProtectServerRequest,
+  DescribeAssetRecentMachineInfoRequest,
+  ExportVulDetectionExcelResponse,
+  DeletePrivilegeEventsResponse,
   InquiryPriceOpenProVersionPrepaidResponse,
-  DescribeSearchLogsResponse,
-  SecurityEventInfo,
+  PrivilegeEscalationProcess,
+  CloseProVersionRequest,
+  DescribeIndexListResponse,
+  DescribeImportMachineInfoRequest,
+  DescribeUsualLoginPlacesResponse,
+  DescribeRiskDnsListRequest,
+  ExportNonlocalLoginPlacesResponse,
+  EditBashRulesResponse,
+  DescribeSearchLogsRequest,
+  DescribeAttackLogInfoRequest,
+  ScanVulSettingResponse,
+  DescribeWebPageGeneralizeResponse,
+  DescribeAccountsResponse,
+  ModifyProVersionRenewFlagResponse,
+  RegionInfo,
+  DescribeComponentStatisticsRequest,
+  DescribeOverviewStatisticsRequest,
+  DescribeOpenPortStatisticsResponse,
+  DeleteAttackLogsResponse,
+  DescribeLoginWhiteListResponse,
   DescribeMachineRegionsResponse,
-  AddLoginWhiteListResponse,
-  DeleteBashEventsRequest,
-  DescribeWeeklyReportNonlocalLoginPlacesResponse,
+  ExportMaliciousRequestsRequest,
+  DescribeScanMalwareScheduleResponse,
+  ScanAssetResponse,
+  DeleteSearchTemplateRequest,
+  DeleteTagsResponse,
+  DescribeSecurityEventsCntRequest,
+  DeleteBruteAttacksRequest,
+  DescribeMalwareTimingScanSettingRequest,
+  DescribeTagsResponse,
+  BashRule,
+  ExportMaliciousRequestsResponse,
   SeparateMalwaresRequest,
-  MisAlarmNonlocalLoginPlacesRequest,
+  EffectiveMachineInfo,
+  CreateSearchLogResponse,
+  DescribeTagMachinesResponse,
+  DescribeSecurityTrendsResponse,
   ProVersionMachine,
-  TrustMaliciousRequestResponse,
-  EditBashRuleResponse,
+  DescribeIndexListRequest,
+  ModifyAutoOpenProVersionConfigRequest,
+  DescribeSecurityDynamicsResponse,
+  DeleteReverseShellEventsResponse,
   DeletePrivilegeEventsRequest,
+  DeleteBashRulesRequest,
+  CreateProtectServerResponse,
+  CloseProVersionResponse,
   DeleteAttackLogsRequest,
   ModifyProVersionRenewFlagRequest,
+  ExportReverseShellEventsResponse,
+  ExportAttackLogsRequest,
+  OpenProVersionResponse,
+  DescribeMachineInfoRequest,
   SwitchBashRulesRequest,
+  DescribeScanTaskDetailsResponse,
+  DescribeGeneralStatRequest,
+  ExportReverseShellEventsRequest,
   Filter,
+  DeleteLoginWhiteListResponse,
   DescribeAccountStatisticsRequest,
-  DescribeESHitsResponse,
+  DescribeAttackLogsResponse,
+  SecurityEventInfo,
+  OpenProVersionPrepaidResponse,
+  DeleteMalwaresResponse,
   ChargePrepaid,
+  ScanVulAgainResponse,
+  SeparateMalwaresResponse,
   ProcessStatistics,
-  MisAlarmNonlocalLoginPlacesResponse,
-  WeeklyReportMalware,
-  EditPrivilegeRuleRequest,
+  DescribeTagsRequest,
+  DescribeHistoryServiceRequest,
+  ExportVulDetectionReportRequest,
+  SyncAssetScanRequest,
+  DescribeSecurityDynamicsRequest,
+  ExportBashEventsResponse,
+  DescribeESAggregationsRequest,
+  DeleteWebPageEventLogResponse,
+  DescribeReverseShellRulesResponse,
+  DescribeBruteAttackListRequest,
+  DescribeProcessStatisticsResponse,
+  DeleteNonlocalLoginPlacesRequest,
+  DescribeMachineListRequest,
   AccountStatistics,
   DescribeMachinesResponse,
-  DescribeWeeklyReportVulsResponse,
+  DescribePrivilegeRulesResponse,
+  ExportNonlocalLoginPlacesRequest,
+  Machine,
+  DeleteSearchTemplateResponse,
+  ExportMalwaresResponse,
+  DefendAttackLog,
+  ProtectHostConfig,
   DeleteWebPageEventLogRequest,
+  OpenProVersionPrepaidRequest,
+  DescribeScanVulSettingRequest,
   PrivilegeRule,
+  HistoryAccount,
+  DescribeESHitsRequest,
+  DescribeUsualLoginPlacesRequest,
   SearchTemplate,
   DescribeGeneralStatResponse,
-  ExportNonlocalLoginPlacesRequest,
+  DescribeProcessStatisticsRequest,
   DeleteMachineTagResponse,
+  DescribeHistoryAccountsRequest,
   BruteAttackInfo,
+  CreateScanMalwareSettingRequest,
+  DescribeAssetInfoResponse,
   OpenProVersionRequest,
-  AddMachineTagRequest,
-  EditTagsResponse,
-  ModifyAlarmAttributeRequest,
+  DescribeMalwareTimingScanSettingResponse,
+  DeleteBashEventsRequest,
+  Tag,
+  RescanImpactedHostResponse,
+  SecurityTrend,
+  ExportTasksRequest,
+  ScanVulRequest,
+  ExportVulDetectionExcelRequest,
+  DeleteReverseShellEventsRequest,
+  DescribeSearchLogsResponse,
+  ModifyAutoOpenProVersionConfigResponse,
+  DescribeMachineOsListResponse,
+  IgnoreImpactedHostsRequest,
+  DescribeAssetRecentMachineInfoResponse,
+  DeleteBruteAttacksResponse,
+  DeleteMaliciousRequestsRequest,
+  DescribeMachinesRequest,
   Filters,
-  DescribeMalwaresResponse,
+  BashEvent,
+  DeleteMalwaresRequest,
+  RecoverMalwaresResponse,
   CreateSearchLogRequest,
-  DescribeSearchTemplatesRequest,
+  DeletePrivilegeRulesRequest,
+  ExportTasksResponse,
+  ScanTaskDetails,
 } from "./cwp_models"
 
 /**
@@ -433,16 +347,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeWeeklyReportMalwares) 用于获取专业周报木马数据。
-   */
-  async DescribeWeeklyReportMalwares(
-    req: DescribeWeeklyReportMalwaresRequest,
-    cb?: (error: string, rep: DescribeWeeklyReportMalwaresResponse) => void
-  ): Promise<DescribeWeeklyReportMalwaresResponse> {
-    return this.request("DescribeWeeklyReportMalwares", req, cb)
-  }
-
-  /**
    * 删除检索模板
    */
   async DeleteSearchTemplate(
@@ -453,36 +357,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增或修改高危命令规则
-   */
-  async EditBashRule(
-    req: EditBashRuleRequest,
-    cb?: (error: string, rep: EditBashRuleResponse) => void
-  ): Promise<EditBashRuleResponse> {
-    return this.request("EditBashRule", req, cb)
-  }
-
-  /**
-   * 本接口（DeleteUsualLoginPlaces）用于删除常用登录地。
-   */
-  async DeleteUsualLoginPlaces(
-    req: DeleteUsualLoginPlacesRequest,
-    cb?: (error: string, rep: DeleteUsualLoginPlacesResponse) => void
-  ): Promise<DeleteUsualLoginPlacesResponse> {
-    return this.request("DeleteUsualLoginPlaces", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeVuls) 用于获取漏洞列表数据。
-   */
-  async DescribeVuls(
-    req: DescribeVulsRequest,
-    cb?: (error: string, rep: DescribeVulsResponse) => void
-  ): Promise<DescribeVulsResponse> {
-    return this.request("DescribeVuls", req, cb)
-  }
-
-  /**
    * DescribeScanTaskDetails 查询扫描任务详情 , 可以查询扫描进度信息/异常;
    */
   async DescribeScanTaskDetails(
@@ -490,16 +364,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanTaskDetailsResponse) => void
   ): Promise<DescribeScanTaskDetailsResponse> {
     return this.request("DescribeScanTaskDetails", req, cb)
-  }
-
-  /**
-   * 本接口{MisAlarmNonlocalLoginPlaces}将设置当前地点为常用登录地。
-   */
-  async MisAlarmNonlocalLoginPlaces(
-    req: MisAlarmNonlocalLoginPlacesRequest,
-    cb?: (error: string, rep: MisAlarmNonlocalLoginPlacesResponse) => void
-  ): Promise<MisAlarmNonlocalLoginPlacesResponse> {
-    return this.request("MisAlarmNonlocalLoginPlaces", req, cb)
   }
 
   /**
@@ -683,33 +547,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (CreateProcessTask) 用于创建实时拉取进程任务。
+   * 导出资产管理内核模块列表
    */
-  async CreateProcessTask(
-    req: CreateProcessTaskRequest,
-    cb?: (error: string, rep: CreateProcessTaskResponse) => void
-  ): Promise<CreateProcessTaskResponse> {
-    return this.request("CreateProcessTask", req, cb)
-  }
-
-  /**
-   * 编辑反弹Shell规则
-   */
-  async EditReverseShellRule(
-    req: EditReverseShellRuleRequest,
-    cb?: (error: string, rep: EditReverseShellRuleResponse) => void
-  ): Promise<EditReverseShellRuleResponse> {
-    return this.request("EditReverseShellRule", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeProcesses) 用于获取进程列表数据。
-   */
-  async DescribeProcesses(
-    req: DescribeProcessesRequest,
-    cb?: (error: string, rep: DescribeProcessesResponse) => void
-  ): Promise<DescribeProcessesResponse> {
-    return this.request("DescribeProcesses", req, cb)
+  async ExportAssetCoreModuleList(
+    req: ExportAssetCoreModuleListRequest,
+    cb?: (error: string, rep: ExportAssetCoreModuleListResponse) => void
+  ): Promise<ExportAssetCoreModuleListResponse> {
+    return this.request("ExportAssetCoreModuleList", req, cb)
   }
 
   /**
@@ -720,16 +564,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncAssetScanResponse) => void
   ): Promise<SyncAssetScanResponse> {
     return this.request("SyncAssetScan", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeMalwares）用于获取木马事件列表。
-   */
-  async DescribeMalwares(
-    req: DescribeMalwaresRequest,
-    cb?: (error: string, rep: DescribeMalwaresResponse) => void
-  ): Promise<DescribeMalwaresResponse> {
-    return this.request("DescribeMalwares", req, cb)
   }
 
   /**
@@ -763,16 +597,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于编辑异地登录白名单规则。
-   */
-  async ModifyLoginWhiteList(
-    req: ModifyLoginWhiteListRequest,
-    cb?: (error: string, rep: ModifyLoginWhiteListResponse) => void
-  ): Promise<ModifyLoginWhiteListResponse> {
-    return this.request("ModifyLoginWhiteList", req, cb)
-  }
-
-  /**
    * 获取本地提权规则列表
    */
   async DescribePrivilegeRules(
@@ -783,26 +607,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (UntrustMaliciousRequest) 用于取消信任恶意请求。
-   */
-  async UntrustMaliciousRequest(
-    req: UntrustMaliciousRequestRequest,
-    cb?: (error: string, rep: UntrustMaliciousRequestResponse) => void
-  ): Promise<UntrustMaliciousRequestResponse> {
-    return this.request("UntrustMaliciousRequest", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeImpactedHosts) 用于获取漏洞受影响机器列表。
-   */
-  async DescribeImpactedHosts(
-    req: DescribeImpactedHostsRequest,
-    cb?: (error: string, rep: DescribeImpactedHostsResponse) => void
-  ): Promise<DescribeImpactedHostsResponse> {
-    return this.request("DescribeImpactedHosts", req, cb)
-  }
-
-  /**
    * 本接口 (DeleteNonlocalLoginPlaces) 用于删除异地登录记录。
    */
   async DeleteNonlocalLoginPlaces(
@@ -810,17 +614,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteNonlocalLoginPlacesResponse) => void
   ): Promise<DeleteNonlocalLoginPlacesResponse> {
     return this.request("DeleteNonlocalLoginPlaces", req, cb)
-  }
-
-  /**
-     * 本接口 (DescribeOpenPorts) 用于获取端口列表数据。
-
-     */
-  async DescribeOpenPorts(
-    req: DescribeOpenPortsRequest,
-    cb?: (error: string, rep: DescribeOpenPortsResponse) => void
-  ): Promise<DescribeOpenPortsResponse> {
-    return this.request("DescribeOpenPorts", req, cb)
   }
 
   /**
@@ -844,23 +637,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+   *  一键检测
    */
-  async ModifyAlarmAttribute(
-    req: ModifyAlarmAttributeRequest,
-    cb?: (error: string, rep: ModifyAlarmAttributeResponse) => void
-  ): Promise<ModifyAlarmAttributeResponse> {
-    return this.request("ModifyAlarmAttribute", req, cb)
-  }
-
-  /**
-   * 本接口(DescribeNonlocalLoginPlaces)用于获取异地登录事件。
-   */
-  async DescribeNonlocalLoginPlaces(
-    req: DescribeNonlocalLoginPlacesRequest,
-    cb?: (error: string, rep: DescribeNonlocalLoginPlacesResponse) => void
-  ): Promise<DescribeNonlocalLoginPlacesResponse> {
-    return this.request("DescribeNonlocalLoginPlaces", req, cb)
+  async ScanVul(
+    req: ScanVulRequest,
+    cb?: (error: string, rep: ScanVulResponse) => void
+  ): Promise<ScanVulResponse> {
+    return this.request("ScanVul", req, cb)
   }
 
   /**
@@ -884,26 +667,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeVulInfo) 用于获取漏洞详情。
-   */
-  async DescribeVulInfo(
-    req: DescribeVulInfoRequest,
-    cb?: (error: string, rep: DescribeVulInfoResponse) => void
-  ): Promise<DescribeVulInfoResponse> {
-    return this.request("DescribeVulInfo", req, cb)
-  }
-
-  /**
-   * 获取网络攻击威胁类型列表
-   */
-  async DescribeAttackVulTypeList(
-    req?: DescribeAttackVulTypeListRequest,
-    cb?: (error: string, rep: DescribeAttackVulTypeListResponse) => void
-  ): Promise<DescribeAttackVulTypeListResponse> {
-    return this.request("DescribeAttackVulTypeList", req, cb)
-  }
-
-  /**
    * 添加检索模板
    */
   async CreateSearchTemplate(
@@ -914,13 +677,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeOpenPortTaskStatus) 用于获取实时拉取端口任务状态。
+   * 资产指纹启动扫描
    */
-  async DescribeOpenPortTaskStatus(
-    req: DescribeOpenPortTaskStatusRequest,
-    cb?: (error: string, rep: DescribeOpenPortTaskStatusResponse) => void
-  ): Promise<DescribeOpenPortTaskStatusResponse> {
-    return this.request("DescribeOpenPortTaskStatus", req, cb)
+  async ScanAsset(
+    req: ScanAssetRequest,
+    cb?: (error: string, rep: ScanAssetResponse) => void
+  ): Promise<ScanAssetResponse> {
+    return this.request("ScanAsset", req, cb)
   }
 
   /**
@@ -954,16 +717,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出资产管理内核模块列表
-   */
-  async ExportAssetCoreModuleList(
-    req: ExportAssetCoreModuleListRequest,
-    cb?: (error: string, rep: ExportAssetCoreModuleListResponse) => void
-  ): Promise<ExportAssetCoreModuleListResponse> {
-    return this.request("ExportAssetCoreModuleList", req, cb)
-  }
-
-  /**
    * 本接口 (DeleteMalwares) 用于删除木马记录。
    */
   async DeleteMalwares(
@@ -984,16 +737,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeWeeklyReportNonlocalLoginPlaces) 用于获取专业周报异地登录数据。
-   */
-  async DescribeWeeklyReportNonlocalLoginPlaces(
-    req: DescribeWeeklyReportNonlocalLoginPlacesRequest,
-    cb?: (error: string, rep: DescribeWeeklyReportNonlocalLoginPlacesResponse) => void
-  ): Promise<DescribeWeeklyReportNonlocalLoginPlacesResponse> {
-    return this.request("DescribeWeeklyReportNonlocalLoginPlaces", req, cb)
-  }
-
-  /**
    * 查询木马扫描进度
    */
   async DescribeScanMalwareSchedule(
@@ -1011,16 +754,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLoginWhiteListResponse) => void
   ): Promise<DeleteLoginWhiteListResponse> {
     return this.request("DeleteLoginWhiteList", req, cb)
-  }
-
-  /**
-   * 本接口 (CreateOpenPortTask) 用于创建实时获取端口任务。
-   */
-  async CreateOpenPortTask(
-    req: CreateOpenPortTaskRequest,
-    cb?: (error: string, rep: CreateOpenPortTaskResponse) => void
-  ): Promise<CreateOpenPortTaskResponse> {
-    return this.request("CreateOpenPortTask", req, cb)
   }
 
   /**
@@ -1094,16 +827,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (TrustMaliciousRequest) 用于恶意请求添加信任。
-   */
-  async TrustMaliciousRequest(
-    req: TrustMaliciousRequestRequest,
-    cb?: (error: string, rep: TrustMaliciousRequestResponse) => void
-  ): Promise<TrustMaliciousRequestResponse> {
-    return this.request("TrustMaliciousRequest", req, cb)
-  }
-
-  /**
    * 切换高危命令规则状态
    */
   async SwitchBashRules(
@@ -1114,16 +837,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增或修改本地提权规则
-   */
-  async EditPrivilegeRule(
-    req: EditPrivilegeRuleRequest,
-    cb?: (error: string, rep: EditPrivilegeRuleResponse) => void
-  ): Promise<EditPrivilegeRuleResponse> {
-    return this.request("EditPrivilegeRule", req, cb)
-  }
-
-  /**
    * 本接口 (ExportMalwares) 用于导出木马记录CSV文件。
    */
   async ExportMalwares(
@@ -1131,16 +844,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportMalwaresResponse) => void
   ): Promise<ExportMalwaresResponse> {
     return this.request("ExportMalwares", req, cb)
-  }
-
-  /**
-   * 本接口{DescribeBruteAttacks}用于获取暴力破解事件列表。
-   */
-  async DescribeBruteAttacks(
-    req: DescribeBruteAttacksRequest,
-    cb?: (error: string, rep: DescribeBruteAttacksResponse) => void
-  ): Promise<DescribeBruteAttacksResponse> {
-    return this.request("DescribeBruteAttacks", req, cb)
   }
 
   /**
@@ -1174,16 +877,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增加机器关联标签
-   */
-  async AddMachineTag(
-    req: AddMachineTagRequest,
-    cb?: (error: string, rep: AddMachineTagResponse) => void
-  ): Promise<AddMachineTagResponse> {
-    return this.request("AddMachineTag", req, cb)
-  }
-
-  /**
    * 获取快速检索列表
    */
   async DescribeSearchTemplates(
@@ -1214,26 +907,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于新增异地登录白名单规则。
-   */
-  async AddLoginWhiteList(
-    req: AddLoginWhiteListRequest,
-    cb?: (error: string, rep: AddLoginWhiteListResponse) => void
-  ): Promise<AddLoginWhiteListResponse> {
-    return this.request("AddLoginWhiteList", req, cb)
-  }
-
-  /**
-   *  一键检测
-   */
-  async ScanVul(
-    req: ScanVulRequest,
-    cb?: (error: string, rep: ScanVulResponse) => void
-  ): Promise<ScanVulResponse> {
-    return this.request("ScanVul", req, cb)
-  }
-
-  /**
    * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
    */
   async DescribeProcessStatistics(
@@ -1251,16 +924,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMalwareInfoResponse) => void
   ): Promise<DescribeMalwareInfoResponse> {
     return this.request("DescribeMalwareInfo", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeMaliciousRequests) 用于获取恶意请求数据。
-   */
-  async DescribeMaliciousRequests(
-    req: DescribeMaliciousRequestsRequest,
-    cb?: (error: string, rep: DescribeMaliciousRequestsResponse) => void
-  ): Promise<DescribeMaliciousRequestsResponse> {
-    return this.request("DescribeMaliciousRequests", req, cb)
   }
 
   /**
@@ -1324,33 +987,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeAgentVuls) 用于获取单台主机的漏洞列表。
-   */
-  async DescribeAgentVuls(
-    req: DescribeAgentVulsRequest,
-    cb?: (error: string, rep: DescribeAgentVulsResponse) => void
-  ): Promise<DescribeAgentVulsResponse> {
-    return this.request("DescribeAgentVuls", req, cb)
-  }
+     * 该接口已废弃
 
-  /**
-   * 本接口 (DescribeAccounts) 用于获取帐号列表数据。
-   */
+本接口 (DescribeAccounts) 用于获取帐号列表数据。
+     */
   async DescribeAccounts(
     req: DescribeAccountsRequest,
     cb?: (error: string, rep: DescribeAccountsResponse) => void
   ): Promise<DescribeAccountsResponse> {
     return this.request("DescribeAccounts", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeWeeklyReports) 用于获取周报列表数据。
-   */
-  async DescribeWeeklyReports(
-    req: DescribeWeeklyReportsRequest,
-    cb?: (error: string, rep: DescribeWeeklyReportsResponse) => void
-  ): Promise<DescribeWeeklyReportsResponse> {
-    return this.request("DescribeWeeklyReports", req, cb)
   }
 
   /**
@@ -1374,7 +1019,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询网站防篡改 概览信息
+   * 查询网站防篡改概览信息
    */
   async DescribeWebPageGeneralize(
     req?: DescribeWebPageGeneralizeRequest,
@@ -1384,7 +1029,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 概览页抽屉侧边弹窗：安全概览“立即处理”页面中的相关事件数统计接口。
+   * 获取安全概览相关事件统计数据接口
    */
   async DescribeSecurityEventsCnt(
     req?: DescribeSecurityEventsCntRequest,
@@ -1414,16 +1059,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeAlarmAttribute) 用于获取告警设置。
-   */
-  async DescribeAlarmAttribute(
-    req?: DescribeAlarmAttributeRequest,
-    cb?: (error: string, rep: DescribeAlarmAttributeResponse) => void
-  ): Promise<DescribeAlarmAttributeResponse> {
-    return this.request("DescribeAlarmAttribute", req, cb)
-  }
-
-  /**
    * 获取日志检索容量使用统计
    */
   async DescribeLogStorageStatistic(
@@ -1434,13 +1069,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeComponents) 用于获取组件列表数据。
+   * 获取网络攻击威胁类型列表
    */
-  async DescribeComponents(
-    req: DescribeComponentsRequest,
-    cb?: (error: string, rep: DescribeComponentsResponse) => void
-  ): Promise<DescribeComponentsResponse> {
-    return this.request("DescribeComponents", req, cb)
+  async DescribeAttackVulTypeList(
+    req?: DescribeAttackVulTypeListRequest,
+    cb?: (error: string, rep: DescribeAttackVulTypeListResponse) => void
+  ): Promise<DescribeAttackVulTypeListResponse> {
+    return this.request("DescribeAttackVulTypeList", req, cb)
   }
 
   /**
@@ -1461,17 +1096,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateBaselineStrategyResponse) => void
   ): Promise<UpdateBaselineStrategyResponse> {
     return this.request("UpdateBaselineStrategy", req, cb)
-  }
-
-  /**
-     * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
-
-     */
-  async DescribeVulScanResult(
-    req?: DescribeVulScanResultRequest,
-    cb?: (error: string, rep: DescribeVulScanResultResponse) => void
-  ): Promise<DescribeVulScanResultResponse> {
-    return this.request("DescribeVulScanResult", req, cb)
   }
 
   /**
@@ -1515,16 +1139,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeWeeklyReportBruteAttacks) 用于获取专业周报密码破解数据。
-   */
-  async DescribeWeeklyReportBruteAttacks(
-    req: DescribeWeeklyReportBruteAttacksRequest,
-    cb?: (error: string, rep: DescribeWeeklyReportBruteAttacksResponse) => void
-  ): Promise<DescribeWeeklyReportBruteAttacksResponse> {
-    return this.request("DescribeWeeklyReportBruteAttacks", req, cb)
-  }
-
-  /**
    * 本接口（UntrustMalwares）用于取消信任木马文件。
    */
   async UntrustMalwares(
@@ -1542,17 +1156,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenProVersionResponse) => void
   ): Promise<OpenProVersionResponse> {
     return this.request("OpenProVersion", req, cb)
-  }
-
-  /**
-     * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
-
-     */
-  async DescribeWeeklyReportVuls(
-    req: DescribeWeeklyReportVulsRequest,
-    cb?: (error: string, rep: DescribeWeeklyReportVulsResponse) => void
-  ): Promise<DescribeWeeklyReportVulsResponse> {
-    return this.request("DescribeWeeklyReportVuls", req, cb)
   }
 
   /**
@@ -1583,16 +1186,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateScanMalwareSettingResponse) => void
   ): Promise<CreateScanMalwareSettingResponse> {
     return this.request("CreateScanMalwareSetting", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeComponentInfo) 用于获取组件信息数据。
-   */
-  async DescribeComponentInfo(
-    req: DescribeComponentInfoRequest,
-    cb?: (error: string, rep: DescribeComponentInfoResponse) => void
-  ): Promise<DescribeComponentInfoResponse> {
-    return this.request("DescribeComponentInfo", req, cb)
   }
 
   /**
@@ -1666,16 +1259,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeProcessTaskStatus) 用于获取实时拉取进程任务状态。
-   */
-  async DescribeProcessTaskStatus(
-    req: DescribeProcessTaskStatusRequest,
-    cb?: (error: string, rep: DescribeProcessTaskStatusResponse) => void
-  ): Promise<DescribeProcessTaskStatusResponse> {
-    return this.request("DescribeProcessTaskStatus", req, cb)
-  }
-
-  /**
    * 本接口 (RescanImpactedHost) 用于漏洞重新检测。
    */
   async RescanImpactedHost(
@@ -1703,16 +1286,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityTrendsResponse) => void
   ): Promise<DescribeSecurityTrendsResponse> {
     return this.request("DescribeSecurityTrends", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
-   */
-  async DescribeWeeklyReportInfo(
-    req: DescribeWeeklyReportInfoRequest,
-    cb?: (error: string, rep: DescribeWeeklyReportInfoResponse) => void
-  ): Promise<DescribeWeeklyReportInfoResponse> {
-    return this.request("DescribeWeeklyReportInfo", req, cb)
   }
 
   /**
@@ -1773,16 +1346,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMachinesResponse) => void
   ): Promise<DescribeMachinesResponse> {
     return this.request("DescribeMachines", req, cb)
-  }
-
-  /**
-   * 此接口（CreateUsualLoginPlaces）用于添加常用登录地。
-   */
-  async CreateUsualLoginPlaces(
-    req: CreateUsualLoginPlacesRequest,
-    cb?: (error: string, rep: CreateUsualLoginPlacesResponse) => void
-  ): Promise<CreateUsualLoginPlacesResponse> {
-    return this.request("CreateUsualLoginPlaces", req, cb)
   }
 
   /**

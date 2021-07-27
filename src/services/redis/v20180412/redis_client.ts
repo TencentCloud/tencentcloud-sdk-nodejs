@@ -171,6 +171,7 @@ import {
   DescribeCommonDBInstancesResponse,
   InquiryPriceCreateInstanceRequest,
   ModifyInstanceParamsRequest,
+  BackupDownloadInfo,
   BigKeyTypeInfo,
   DescribeInstanceNodeInfoRequest,
   DescribeMaintenanceWindowRequest,

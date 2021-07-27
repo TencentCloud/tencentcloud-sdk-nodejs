@@ -211,45 +211,9 @@ export interface DescribeCloudBaseRunServerVersionRequest {
 }
 
 /**
- * 后付费计费详情
+ * DescribeEnvLimit请求参数结构体
  */
-export interface PostPaidEnvDeductInfo {
-  /**
-      * 资源方
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ResourceType: string
-
-  /**
-      * 指标名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MetricName: string
-
-  /**
-      * 按量计费详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ResQuota: number
-
-  /**
-      * 资源包抵扣详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgQuota: number
-
-  /**
-      * 免费额度抵扣详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FreeQuota: number
-
-  /**
-      * 环境id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvId: string
-}
+export type DescribeEnvLimitRequest = null
 
 /**
  * DescribeExtensionUploadInfo请求参数结构体
@@ -367,9 +331,21 @@ export interface DescribePostpayPackageFreeQuotasRequest {
 }
 
 /**
- * DescribeEnvLimit请求参数结构体
+ * DescribeEndUserLoginStatistic请求参数结构体
  */
-export type DescribeEnvLimitRequest = null
+export interface DescribeEndUserLoginStatisticRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+
+  /**
+      * 终端用户来源
+<li> qcloud </li>
+<li>miniapp</li>
+      */
+  Source?: string
+}
 
 /**
  * DescribeCloudBaseBuildService返回参数结构体
@@ -657,6 +633,16 @@ export interface CloudRunServiceSimpleVersionSnapshot {
  * CreateWxCloudBaseRunServerDBCluster返回参数结构体
  */
 export interface CreateWxCloudBaseRunServerDBClusterResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReplaceActivityRecord返回参数结构体
+ */
+export interface ReplaceActivityRecordResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1405,6 +1391,21 @@ export interface ModifyCloudBaseRunServerFlowConfRequest {
 }
 
 /**
+ * DescribeActivityRecord返回参数结构体
+ */
+export interface DescribeActivityRecordResponse {
+  /**
+   * 活动记录详情
+   */
+  ActivityRecords: Array<ActivityRecordItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -1745,6 +1746,47 @@ export interface CloudBaseEsInfo {
 }
 
 /**
+ * 后付费计费详情
+ */
+export interface PostPaidEnvDeductInfo {
+  /**
+      * 资源方
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType: string
+
+  /**
+      * 指标名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricName: string
+
+  /**
+      * 按量计费详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResQuota: number
+
+  /**
+      * 资源包抵扣详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PkgQuota: number
+
+  /**
+      * 免费额度抵扣详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FreeQuota: number
+
+  /**
+      * 环境id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvId: string
+}
+
+/**
  * ModifyCloudBaseRunServerFlowConf返回参数结构体
  */
 export interface ModifyCloudBaseRunServerFlowConfResponse {
@@ -2074,13 +2116,28 @@ export interface CreateHostingDomainResponse {
 }
 
 /**
- * EstablishWxGatewayRoute返回参数结构体
+ * DescribeActivityRecord请求参数结构体
  */
-export interface EstablishWxGatewayRouteResponse {
+export interface DescribeActivityRecordRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 渠道加密token
    */
-  RequestId?: string
+  ChannelToken: string
+
+  /**
+   * 渠道来源，每个来源对应不同secretKey
+   */
+  Channel: string
+
+  /**
+   * 活动id列表
+   */
+  ActivityIdList?: Array<number>
+
+  /**
+   * 过滤状态码
+   */
+  Status?: number
 }
 
 /**
@@ -2396,6 +2453,36 @@ export interface CreatePostpayPackageResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReplaceActivityRecord请求参数结构体
+ */
+export interface ReplaceActivityRecordRequest {
+  /**
+   * 活动id
+   */
+  ActivityId: number
+
+  /**
+   * 状态码
+   */
+  Status: number
+
+  /**
+   * 自定义子状态
+   */
+  SubStatus: string
+
+  /**
+   * 鉴权token
+   */
+  ChannelToken: string
+
+  /**
+   * 渠道名，不同渠道对应不同secretKey
+   */
+  Channel: string
 }
 
 /**
@@ -2983,6 +3070,16 @@ export interface ReinstateEnvRequest {
 }
 
 /**
+ * EstablishWxGatewayRoute返回参数结构体
+ */
+export interface EstablishWxGatewayRouteResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDatabaseACL请求参数结构体
  */
 export interface DescribeDatabaseACLRequest {
@@ -3023,23 +3120,6 @@ export interface CreateCloudBaseRunServerVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeEndUserLoginStatistic请求参数结构体
- */
-export interface DescribeEndUserLoginStatisticRequest {
-  /**
-   * 环境id
-   */
-  EnvId: string
-
-  /**
-      * 终端用户来源
-<li> qcloud </li>
-<li>miniapp</li>
-      */
-  Source?: string
 }
 
 /**
@@ -3475,23 +3555,32 @@ export interface DescribePostpayFreeQuotasResponse {
 }
 
 /**
- * DescribeEndUsers返回参数结构体
+ * 活动详情
  */
-export interface DescribeEndUsersResponse {
+export interface ActivityRecordItem {
   /**
-   * 用户总数
-   */
-  Total?: number
+      * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
 
   /**
-   * 用户列表
-   */
-  Users?: Array<EndUserInfo>
+      * 活动id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ActivityId: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 自定义状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+
+  /**
+      * 自定义子状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubStatus: string
 }
 
 /**
@@ -3566,6 +3655,26 @@ export interface DescribeCloudBaseProjectLatestVersionListRequest {
    * 标签
    */
   Tags?: Array<string>
+}
+
+/**
+ * DescribeEndUsers返回参数结构体
+ */
+export interface DescribeEndUsersResponse {
+  /**
+   * 用户总数
+   */
+  Total?: number
+
+  /**
+   * 用户列表
+   */
+  Users?: Array<EndUserInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

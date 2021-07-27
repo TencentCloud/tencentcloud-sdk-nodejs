@@ -428,6 +428,16 @@ it("sqlserver.v20180328.DescribeRegions", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeInstanceParams", async function () {
+    try {
+       const data = await client.DescribeInstanceParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.CompleteExpansion", async function () {
     try {
        const data = await client.CompleteExpansion({})
@@ -468,6 +478,16 @@ it("sqlserver.v20180328.RestoreInstance", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeInstanceParamRecords", async function () {
+    try {
+       const data = await client.DescribeInstanceParamRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.StartMigrationCheck", async function () {
     try {
        const data = await client.StartMigrationCheck({})
@@ -501,6 +521,16 @@ it("sqlserver.v20180328.DeletePublishSubscribe", async function () {
 it("sqlserver.v20180328.ResetAccountPassword", async function () {
     try {
        const data = await client.ResetAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.ModifyInstanceParam", async function () {
+    try {
+       const data = await client.ModifyInstanceParam({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

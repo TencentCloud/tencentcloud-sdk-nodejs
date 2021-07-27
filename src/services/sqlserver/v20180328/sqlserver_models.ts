@@ -201,6 +201,31 @@ export interface DealInfo {
 }
 
 /**
+ * RestoreInstance请求参数结构体
+ */
+export interface RestoreInstanceRequest {
+  /**
+   * 实例ID，形如mssql-j8kv137v
+   */
+  InstanceId: string
+
+  /**
+   * 备份文件ID，该ID可以通过DescribeBackups接口返回数据中的Id字段获得
+   */
+  BackupId: number
+
+  /**
+   * 备份恢复到的同一个APPID下的实例ID，不填则恢复到原实例ID
+   */
+  TargetInstanceId?: string
+
+  /**
+   * 按照ReNameRestoreDatabase中的库进行恢复，并重命名，不填则按照默认方式命名恢复的库，且恢复所有的库。
+   */
+  RenameRestore?: Array<RenameRestoreDatabase>
+}
+
+/**
  * CreateBasicDBInstances返回参数结构体
  */
 export interface CreateBasicDBInstancesResponse {
@@ -586,6 +611,16 @@ export interface CreateIncrementalMigrationRequest {
 }
 
 /**
+ * RunMigration请求参数结构体
+ */
+export interface RunMigrationRequest {
+  /**
+   * 迁移任务ID
+   */
+  MigrateId: number
+}
+
+/**
  * RunMigration返回参数结构体
  */
 export interface RunMigrationResponse {
@@ -633,6 +668,41 @@ export interface DescribeCrossRegionZoneRequest {
    * 实例ID，格式如：mssql-3l3fgqn7
    */
   InstanceId: string
+}
+
+/**
+ * 实例参数修改记录
+ */
+export interface ParamRecord {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 参数名称
+   */
+  ParamName: string
+
+  /**
+   * 参数修改前的值
+   */
+  OldValue: string
+
+  /**
+   * 参数修改后的值
+   */
+  NewValue: string
+
+  /**
+   * 参数修改状态，1-初始化等待被执行，2-执行成功，3-执行失败，4-参数修改中
+   */
+  Status: number
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
 }
 
 /**
@@ -826,28 +896,23 @@ export interface DescribeRollbackTimeResponse {
 }
 
 /**
- * RestoreInstance请求参数结构体
+ * DescribeInstanceParamRecords返回参数结构体
  */
-export interface RestoreInstanceRequest {
+export interface DescribeInstanceParamRecordsResponse {
   /**
-   * 实例ID，形如mssql-j8kv137v
+   * 符合条件的记录数
    */
-  InstanceId: string
+  TotalCount: number
 
   /**
-   * 备份文件ID，该ID可以通过DescribeBackups接口返回数据中的Id字段获得
+   * 参数修改记录
    */
-  BackupId: number
+  Items: Array<ParamRecord>
 
   /**
-   * 备份恢复到的同一个APPID下的实例ID，不填则恢复到原实例ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TargetInstanceId?: string
-
-  /**
-   * 按照ReNameRestoreDatabase中的库进行恢复，并重命名，不填则按照默认方式命名恢复的库，且恢复所有的库。
-   */
-  RenameRestore?: Array<RenameRestoreDatabase>
+  RequestId?: string
 }
 
 /**
@@ -971,13 +1036,18 @@ export interface DescribeReadOnlyGroupByReadOnlyInstanceResponse {
 }
 
 /**
- * RunMigration请求参数结构体
+ * RestoreInstance返回参数结构体
  */
-export interface RunMigrationRequest {
+export interface RestoreInstanceResponse {
   /**
-   * 迁移任务ID
+   * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
    */
-  MigrateId: number
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1011,18 +1081,78 @@ export interface SecurityGroupPolicy {
 }
 
 /**
- * RestoreInstance返回参数结构体
+ * 进度步骤详情
  */
-export interface RestoreInstanceResponse {
+export interface StepDetail {
   /**
-   * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
+   * 具体步骤返回信息
    */
-  FlowId?: number
+  Msg: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 当前步骤状态，0成功，-2未开始
    */
-  RequestId?: string
+  Status: number
+
+  /**
+   * 步骤名称
+   */
+  Name: string
+}
+
+/**
+ * 实例参数的详细描述
+ */
+export interface ParameterDetail {
+  /**
+   * 参数名称
+   */
+  Name: string
+
+  /**
+   * 参数类型，integer-整型，enum-枚举型
+   */
+  ParamType: string
+
+  /**
+   * 参数默认值
+   */
+  Default: string
+
+  /**
+   * 参数描述
+   */
+  Description: string
+
+  /**
+   * 参数当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 修改参数后，是否需要重启数据库以使参数生效，0-不需要重启，1-需要重启
+   */
+  NeedReboot: number
+
+  /**
+   * 参数允许的最大值
+   */
+  Max: number
+
+  /**
+   * 参数允许的最小值
+   */
+  Min: number
+
+  /**
+   * 参数允许的枚举类型
+   */
+  EnumValue: Array<string>
+
+  /**
+   * 参数状态 0-状态正常 1-在修改中
+   */
+  Status: number
 }
 
 /**
@@ -1131,23 +1261,23 @@ export interface RenewPostpaidDBInstanceRequest {
 }
 
 /**
- * StartIncrementalMigration请求参数结构体
+ * ModifyInstanceParam请求参数结构体
  */
-export interface StartIncrementalMigrationRequest {
+export interface ModifyInstanceParamRequest {
   /**
-   * 导入目标实例ID
+   * 实例短 ID 列表
    */
-  InstanceId: string
+  InstanceIds: Array<string>
 
   /**
-   * 备份导入任务ID，由CreateBackupMigration接口返回
+   * 要修改的参数列表。每一个元素是 Name 和 CurrentValue 的组合。Name 是参数名，CurrentValue 是要修改的值。<b>注意</b>：如果修改的参数需要<b>重启</b>实例，那么您的实例将会在执行修改时<b>重启</b>。您可以通过DescribeInstanceParams接口查询修改参数时是否会重启实例，以免导致您的实例不符合预期重启。
    */
-  BackupMigrationId: string
+  ParamList: Array<Parameter>
 
   /**
-   * 增量备份导入任务ID
+   * 执行参数调整任务的方式，默认为 0。支持值包括：0 - 立刻执行，1 - 时间窗执行。
    */
-  IncrementalMigrationId: string
+  WaitSwitch?: number
 }
 
 /**
@@ -1983,6 +2113,26 @@ export interface DeleteDBRequest {
 }
 
 /**
+ * StartIncrementalMigration请求参数结构体
+ */
+export interface StartIncrementalMigrationRequest {
+  /**
+   * 导入目标实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 备份导入任务ID，由CreateBackupMigration接口返回
+   */
+  BackupMigrationId: string
+
+  /**
+   * 增量备份导入任务ID
+   */
+  IncrementalMigrationId: string
+}
+
+/**
  * DescribeProjectSecurityGroups返回参数结构体
  */
 export interface DescribeProjectSecurityGroupsResponse {
@@ -2437,7 +2587,7 @@ export interface DescribeDBsNormalResponse {
   TotalCount: number
 
   /**
-   * 返回数据库的详细配置信息，比如：数据库是否开启CDC、CT等
+   * 返回数据库的详细配置信息，例如：数据库是否开启CDC、CT等
    */
   DBList: Array<DbNormalDetail>
 
@@ -2493,23 +2643,23 @@ export interface DescribeDBCharsetsRequest {
 }
 
 /**
- * DescribeUploadIncrementalInfo请求参数结构体
+ * DescribeInstanceParamRecords请求参数结构体
  */
-export interface DescribeUploadIncrementalInfoRequest {
+export interface DescribeInstanceParamRecordsRequest {
   /**
-   * 导入目标实例ID
+   * 实例 ID，格式如：mssql-dj5i29c5n，与云数据库控制台页面中显示的实例 ID 相同，可使用 DescribeDBInstances 接口获取，其值为输出参数中字段 InstanceId 的值。
    */
   InstanceId: string
 
   /**
-   * 备份导入任务ID，由CreateBackupMigration接口返回
+   * 分页，页数，默认0
    */
-  BackupMigrationId: string
+  Offset?: number
 
   /**
-   * 增量导入任务ID
+   * 分页，页大小，默认20，最大不超过100
    */
-  IncrementalMigrationId: string
+  Limit?: number
 }
 
 /**
@@ -2630,6 +2780,16 @@ export interface DeleteMigrationRequest {
    * 迁移任务ID
    */
   MigrateId: number
+}
+
+/**
+ * DescribeInstanceParams请求参数结构体
+ */
+export interface DescribeInstanceParamsRequest {
+  /**
+   * 实例 ID，格式如：mssql-dj5i29c5n，与云数据库控制台页面中显示的实例 ID 相同，可使用 DescribeDBInstances 接口获取，其值为输出参数中字段 InstanceId 的值。
+   */
+  InstanceId: string
 }
 
 /**
@@ -3153,23 +3313,23 @@ export interface RecycleReadOnlyGroupRequest {
 }
 
 /**
- * 进度步骤详情
+ * DescribeUploadIncrementalInfo请求参数结构体
  */
-export interface StepDetail {
+export interface DescribeUploadIncrementalInfoRequest {
   /**
-   * 具体步骤返回信息
+   * 导入目标实例ID
    */
-  Msg: string
+  InstanceId: string
 
   /**
-   * 当前步骤状态，0成功，-2未开始
+   * 备份导入任务ID，由CreateBackupMigration接口返回
    */
-  Status: number
+  BackupMigrationId: string
 
   /**
-   * 步骤名称
+   * 增量导入任务ID
    */
-  Name: string
+  IncrementalMigrationId: string
 }
 
 /**
@@ -3205,6 +3365,16 @@ export interface ModifyDatabaseCDCRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * ModifyInstanceParam返回参数结构体
+ */
+export interface ModifyInstanceParamResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4558,6 +4728,36 @@ export interface DescribeDBsNormalRequest {
 }
 
 /**
+ * DescribeSlowlogs请求参数结构体
+ */
+export interface DescribeSlowlogsRequest {
+  /**
+   * 实例ID，形如mssql-k8voqdlz
+   */
+  InstanceId: string
+
+  /**
+   * 查询开始时间
+   */
+  StartTime: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime: string
+
+  /**
+   * 分页返回，每页返回的数目，取值为1-100，默认值为20
+   */
+  Limit?: number
+
+  /**
+   * 分页返回，页编号，默认值为第0页
+   */
+  Offset?: number
+}
+
+/**
  * ModifyAccountRemark请求参数结构体
  */
 export interface ModifyAccountRemarkRequest {
@@ -4785,6 +4985,21 @@ export interface DescribeMigrationDatabasesRequest {
    * 迁移源实例密码
    */
   Password: string
+}
+
+/**
+ * 数据库实例参数
+ */
+export interface Parameter {
+  /**
+   * 参数名称
+   */
+  Name?: string
+
+  /**
+   * 参数值
+   */
+  CurrentValue?: string
 }
 
 /**
@@ -5153,33 +5368,23 @@ export interface RollbackInstanceRequest {
 }
 
 /**
- * DescribeSlowlogs请求参数结构体
+ * DescribeInstanceParams返回参数结构体
  */
-export interface DescribeSlowlogsRequest {
+export interface DescribeInstanceParamsResponse {
   /**
-   * 实例ID，形如mssql-k8voqdlz
+   * 实例的参数总数
    */
-  InstanceId: string
+  TotalCount: number
 
   /**
-   * 查询开始时间
+   * 参数详情
    */
-  StartTime: string
+  Items: Array<ParameterDetail>
 
   /**
-   * 查询结束时间
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-
-  /**
-   * 分页返回，每页返回的数目，取值为1-100，默认值为20
-   */
-  Limit?: number
-
-  /**
-   * 分页返回，页编号，默认值为第0页
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**

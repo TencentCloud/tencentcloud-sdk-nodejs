@@ -18,6 +18,16 @@ const client = new tencentcloud.market.v20191010.Client({
 })
 describe("market.v20191010.test.js", function () {
 
+it("market.v20191010.SyncUserAndOrderInfo", async function () {
+    try {
+       const data = await client.SyncUserAndOrderInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("market.v20191010.GetUsagePlanUsageAmount", async function () {
     try {
        const data = await client.GetUsagePlanUsageAmount({})

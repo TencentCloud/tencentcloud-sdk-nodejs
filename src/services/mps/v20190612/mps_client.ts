@@ -192,6 +192,7 @@ import {
   AnimatedGraphicTaskInput,
   DeleteContentReviewTemplateRequest,
   AIAnalysisTemplateItem,
+  HeadTailParameter,
   RawImageWatermarkInput,
   DescribeImageSpriteTemplatesRequest,
   AiSampleTagOperation,

@@ -253,6 +253,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostingDomainTask", req, cb);
     }
     /**
+     * 查询活动记录信息
+     */
+    async DescribeActivityRecord(req, cb) {
+        return this.request("DescribeActivityRecord", req, cb);
+    }
+    /**
      * 删除服务版本
      */
     async DeleteCloudBaseRunServerVersion(req, cb) {
@@ -299,6 +305,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DestroyEnv(req, cb) {
         return this.request("DestroyEnv", req, cb);
+    }
+    /**
+     * 更新活动详情
+     */
+    async ReplaceActivityRecord(req, cb) {
+        return this.request("ReplaceActivityRecord", req, cb);
     }
     /**
      * 获取云托管代码上传url

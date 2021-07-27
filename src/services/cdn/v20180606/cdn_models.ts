@@ -992,6 +992,7 @@ export interface DescribePayTypeResponse {
       * 计费类型：
 flux：流量计费
 bandwidth：带宽计费
+request：请求数计费
 日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。
       */
   PayType: string
@@ -1004,12 +1005,11 @@ month：月结计费
   BillingCycle: string
 
   /**
-      * 计费方式：
-monthMax：日峰值月平均计费，月结模式
-day95：日 95 带宽计费，月结模式
-month95：月95带宽计费，月结模式
-sum：总流量计费，日结与月结均有流量计费模式
-max：峰值带宽计费，日结模式
+      * monthMax：日峰值月平均，月结模式
+day95：日 95 带宽，月结模式
+month95：月95带宽，月结模式
+sum：总流量/总请求数，日结或月结模式
+max：峰值带宽，日结模式
       */
   StatType: string
 
@@ -1024,6 +1024,7 @@ multiple：分地区计费
       * 当前生效计费类型：
 flux：流量计费
 bandwidth：带宽计费
+request：请求数计费
       */
   CurrentPayType: string
 
@@ -1203,6 +1204,11 @@ server：指定查询服务地区（腾讯云 CDN 节点服务器所在地区）
 client：指定查询客户端地区（用户请求终端所在地区）数据，当 Metric 为 host 时仅支持 flux、request、bandwidth Filter
       */
   AreaType?: string
+
+  /**
+   * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
+   */
+  Product?: string
 }
 
 /**
@@ -1257,6 +1263,11 @@ overseas：境外计费方式查询
 未填充时默认为 mainland
       */
   Area?: string
+
+  /**
+   * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
+   */
+  Product?: string
 }
 
 /**
@@ -1707,6 +1718,11 @@ bandwidth：计费带宽
 默认为 bandwidth
       */
   Metric?: string
+
+  /**
+   * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
+   */
+  Product?: string
 }
 
 /**
@@ -1868,6 +1884,12 @@ export interface TopicInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateTime: string
+
+  /**
+      * 归属于cdn或ecdn
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Channel: string
 }
 
 /**
@@ -1991,6 +2013,11 @@ overseas：中国境外锁定
 global：全球锁定
       */
   Readonly: string
+
+  /**
+   * 域名所属产品，cdn/ecdn
+   */
+  Product: string
 }
 
 /**
@@ -3018,6 +3045,11 @@ global：全球加速
    * 回源OSS私有鉴权
    */
   OssPrivateAccess?: OssPrivateAccess
+
+  /**
+   * WebSocket配置
+   */
+  WebSocket?: WebSocket
 }
 
 /**
@@ -3135,7 +3167,17 @@ export interface DescribeCertDomainsRequest {
   /**
    * PEM格式证书Base64编码后的字符串
    */
-  Cert: string
+  Cert?: string
+
+  /**
+   * 托管证书ID，Cert和CertId不能均未空，都填写时以CerId为准。
+   */
+  CertId?: string
+
+  /**
+   * 域名所属产品，cdn或ecdn，默认cdn。
+   */
+  Product?: string
 }
 
 /**
@@ -3359,6 +3401,24 @@ export interface CreateScdnLogTaskResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * WebSocket配置
+ */
+export interface WebSocket {
+  /**
+      * WebSocket 超时配置开关, 开关为off时，平台仍支持WebSocket连接，此时超时时间默认为15秒，若需要调整超时时间，将开关置为on.
+
+* WebSocket 为内测功能,如需使用,请联系腾讯云工程师开白.
+      */
+  Switch: string
+
+  /**
+      * 设置超时时间，单位为秒，最大超时时间65秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timeout?: number
 }
 
 /**
@@ -4532,6 +4592,12 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OssPrivateAccess: OssPrivateAccess
+
+  /**
+      * WebSocket配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WebSocket: WebSocket
 }
 
 /**
@@ -7805,7 +7871,11 @@ export interface DescribeCdnDataRequest {
   /**
       * 指定查询指标，支持的类型有：
 flux：流量，单位为 byte
+fluxIn：上行流量，单位为 byte，该指标仅ecdn支持查询
+fluxOut：下行流量，单位为 byte，该指标仅ecdn支持查询
 bandwidth：带宽，单位为 bps
+bandwidthIn：上行带宽，单位为 bps，该指标仅ecdn支持查询
+bandwidthOut：下行带宽，单位为 bps，该指标仅ecdn支持查询
 request：请求数，单位为 次
 hitRequest：命中请求数，单位为 次
 requestHitRate：请求命中率，单位为 %，保留小数点后两位
@@ -7898,6 +7968,11 @@ server：指定查询服务地区（腾讯云 CDN 节点服务器所在地区）
 client：指定查询客户端地区（用户请求终端所在地区）数据
       */
   AreaType?: string
+
+  /**
+   * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
+   */
+  Product?: string
 }
 
 /**

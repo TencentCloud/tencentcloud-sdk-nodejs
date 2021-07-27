@@ -23,19 +23,20 @@ import {
   CheckTcbServiceResponse,
   DescribeCloudBaseRunConfForGateWayRequest,
   DescribeCloudBaseRunServerVersionRequest,
-  PostPaidEnvDeductInfo,
+  DescribeEnvLimitRequest,
   DescribeExtensionUploadInfoRequest,
   DeleteCloudBaseRunServerVersionResponse,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
   DescribePostpayPackageFreeQuotasRequest,
-  DescribeEnvLimitRequest,
+  DescribeEndUserLoginStatisticRequest,
   DescribeCloudBaseBuildServiceResponse,
   DescribeEndUsersRequest,
   DescribeSpecialCostItemsRequest,
   DescribeEndUserStatisticRequest,
   CloudRunServiceSimpleVersionSnapshot,
   CreateWxCloudBaseRunServerDBClusterResponse,
+  ReplaceActivityRecordResponse,
   LogServiceInfo,
   DescribeCloudBaseRunResourceForExtendRequest,
   ModifyEndUserRequest,
@@ -61,6 +62,7 @@ import {
   DestroyStaticStoreRequest,
   CreateWxCloudBaseRunEnvRequest,
   ModifyCloudBaseRunServerFlowConfRequest,
+  DescribeActivityRecordResponse,
   CreateStaticStoreRequest,
   CreateWxCloudBaseRunServerDBClusterRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
@@ -80,6 +82,7 @@ import {
   DeleteEndUserResponse,
   ModifyDatabaseACLResponse,
   CloudBaseEsInfo,
+  PostPaidEnvDeductInfo,
   ModifyCloudBaseRunServerFlowConfResponse,
   SpecialCostItem,
   EstablishCloudBaseRunServerResponse,
@@ -91,13 +94,14 @@ import {
   DescribeEnvsResponse,
   CreateAuthDomainRequest,
   CreateHostingDomainResponse,
-  EstablishWxGatewayRouteResponse,
+  DescribeActivityRecordRequest,
   CreateWxCloudBaseRunEnvResponse,
   DeleteCloudBaseRunServerVersionRequest,
   CreateCloudBaseRunServerVersionRequest,
   LoginStatistic,
   DescribeWxCloudBaseRunSubNetsRequest,
   CreatePostpayPackageResponse,
+  ReplaceActivityRecordRequest,
   DeleteWxGatewayRouteResponse,
   EstablishCloudBaseRunServerRequest,
   CloudBaseRunServiceVolumeMount,
@@ -119,9 +123,9 @@ import {
   CloudBaseSecurityContext,
   ExtensionFile,
   ReinstateEnvRequest,
+  EstablishWxGatewayRouteResponse,
   DescribeDatabaseACLRequest,
   CreateCloudBaseRunServerVersionResponse,
-  DescribeEndUserLoginStatisticRequest,
   PlatformStatistic,
   DeleteCloudBaseProjectLatestVersionRequest,
   DescribeCloudBaseProjectLatestVersionListResponse,
@@ -139,9 +143,10 @@ import {
   DescribeCloudBaseRunVersionSnapshotRequest,
   FreequotaInfo,
   DescribePostpayFreeQuotasResponse,
-  DescribeEndUsersResponse,
+  ActivityRecordItem,
   AuthDomain,
   DescribeCloudBaseProjectLatestVersionListRequest,
+  DescribeEndUsersResponse,
   DescribeHostingDomainTaskResponse,
   EnvBillingInfoItem,
   DescribeEndUserStatisticResponse,
@@ -554,6 +559,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询活动记录信息
+   */
+  async DescribeActivityRecord(
+    req: DescribeActivityRecordRequest,
+    cb?: (error: string, rep: DescribeActivityRecordResponse) => void
+  ): Promise<DescribeActivityRecordResponse> {
+    return this.request("DescribeActivityRecord", req, cb)
+  }
+
+  /**
    * 删除服务版本
    */
   async DeleteCloudBaseRunServerVersion(
@@ -631,6 +646,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyEnvResponse) => void
   ): Promise<DestroyEnvResponse> {
     return this.request("DestroyEnv", req, cb)
+  }
+
+  /**
+   * 更新活动详情
+   */
+  async ReplaceActivityRecord(
+    req: ReplaceActivityRecordRequest,
+    cb?: (error: string, rep: ReplaceActivityRecordResponse) => void
+  ): Promise<ReplaceActivityRecordResponse> {
+    return this.request("ReplaceActivityRecord", req, cb)
   }
 
   /**

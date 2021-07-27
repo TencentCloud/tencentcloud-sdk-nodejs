@@ -312,6 +312,10 @@ hlg。
       * 数字水印参数信息。
       */
     HiddenMarkInfo?: HiddenMarkInfo;
+    /**
+      * 文本水印参数信息。
+      */
+    TextMarkInfo?: Array<TextMarkInfoItem>;
 }
 /**
  * DescribeQualityControlTaskResult请求参数结构体
@@ -1793,6 +1797,39 @@ export interface FrameTagResult {
       * 帧标签结果数组
       */
     FrameTagItems: Array<FrameTagItem>;
+}
+/**
+ * 画质重生子任务文字水印信息
+ */
+export interface TextMarkInfoItem {
+    /**
+      * 文字内容。
+      */
+    Text: string;
+    /**
+      * 文字水印X坐标。
+      */
+    PosX: number;
+    /**
+      * 文字水印Y坐标。
+      */
+    PosY: number;
+    /**
+      * 文字大小
+      */
+    FontSize: number;
+    /**
+      * 字体，可选项：hei,song，simkai,arial；默认hei(黑体）。
+      */
+    FontFile?: string;
+    /**
+      * 字体颜色，颜色见附录，不填默认black。
+      */
+    FontColor?: string;
+    /**
+      * 文字透明度，可选值0-1。0：不透明，1：全透明。默认为0
+      */
+    FontAlpha?: number;
 }
 /**
  * 编辑处理/剪切任务/时间信息

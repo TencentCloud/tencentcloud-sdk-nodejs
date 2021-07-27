@@ -3189,12 +3189,12 @@ export interface DescribeBindingPolicyObjectListRequest {
   PolicyId?: string
 
   /**
-   * 分页参数，每页返回的数量，取值1~100，默认20
+   * 每次返回的数量，取值1~100，默认20
    */
   Limit?: number
 
   /**
-   * 分页参数，页偏移量，从0开始计数，默认0
+   * 偏移量，从0开始计数，默认0。举例来说，参数 Offset=0&Limit=20 返回第 0 到 19 项，Offset=20&Limit=20 返回第 20 到 39 项，以此类推
    */
   Offset?: number
 

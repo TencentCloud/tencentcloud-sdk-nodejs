@@ -951,6 +951,21 @@ export interface StrategyInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsServiceLinkedPolicy: number;
+    /**
+      * 关联策略实体数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachEntityCount: number;
+    /**
+      * 关联权限边界实体数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachEntityBoundaryCount: number;
+    /**
+      * 最后编辑时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
 }
 /**
  * DeletePolicy请求参数结构体

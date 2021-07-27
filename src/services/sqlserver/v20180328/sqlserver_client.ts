@@ -23,6 +23,7 @@ import {
   CloneDBResponse,
   InstanceRenewInfo,
   DealInfo,
+  RestoreInstanceRequest,
   CreateBasicDBInstancesResponse,
   DescribeAccountsRequest,
   DescribeMaintenanceSpanResponse,
@@ -44,10 +45,12 @@ import {
   DescribeDBSecurityGroupsResponse,
   MigrateDetail,
   CreateIncrementalMigrationRequest,
+  RunMigrationRequest,
   RunMigrationResponse,
   DescribeProductConfigRequest,
   ModifyPublishSubscribeNameResponse,
   DescribeCrossRegionZoneRequest,
+  ParamRecord,
   RollbackInstanceResponse,
   DeleteIncrementalMigrationRequest,
   DBRemark,
@@ -58,17 +61,18 @@ import {
   DescribeBackupsRequest,
   ModifyDBInstanceProjectResponse,
   DescribeRollbackTimeResponse,
-  RestoreInstanceRequest,
+  DescribeInstanceParamRecordsResponse,
   DescribeIncrementalMigrationRequest,
   DescribeReadOnlyGroupByReadOnlyInstanceResponse,
-  RunMigrationRequest,
-  SecurityGroupPolicy,
   RestoreInstanceResponse,
+  SecurityGroupPolicy,
+  StepDetail,
+  ParameterDetail,
   ModifyMaintenanceSpanResponse,
   ZoneInfo,
   InquiryPriceCreateDBInstancesRequest,
   RenewPostpaidDBInstanceRequest,
-  StartIncrementalMigrationRequest,
+  ModifyInstanceParamRequest,
   Migration,
   ModifyDBInstanceNetworkRequest,
   MigrationDetail,
@@ -98,6 +102,7 @@ import {
   RenewDBInstanceRequest,
   DescribeZonesRequest,
   DeleteDBRequest,
+  StartIncrementalMigrationRequest,
   DescribeProjectSecurityGroupsResponse,
   DescribeCrossRegionZoneResponse,
   ModifyDBInstanceRenewFlagResponse,
@@ -115,7 +120,7 @@ import {
   DescribeDBsNormalResponse,
   DescribeMigrationsRequest,
   DescribeDBCharsetsRequest,
-  DescribeUploadIncrementalInfoRequest,
+  DescribeInstanceParamRecordsRequest,
   DescribeDBsRequest,
   CompleteExpansionRequest,
   ModifyDatabaseMdfRequest,
@@ -126,6 +131,7 @@ import {
   StopMigrationRequest,
   CreateReadOnlyDBInstancesResponse,
   DeleteMigrationRequest,
+  DescribeInstanceParamsRequest,
   CompleteMigrationResponse,
   ModifyDBInstanceSecurityGroupsRequest,
   DBPrivilegeModifyInfo,
@@ -147,9 +153,10 @@ import {
   DeleteMigrationResponse,
   DescribeBackupMigrationRequest,
   RecycleReadOnlyGroupRequest,
-  StepDetail,
+  DescribeUploadIncrementalInfoRequest,
   DescribeBackupUploadSizeResponse,
   ModifyDatabaseCDCRequest,
+  ModifyInstanceParamResponse,
   InquiryPriceRenewDBInstanceRequest,
   StartIncrementalMigrationResponse,
   TerminateDBInstanceResponse,
@@ -197,6 +204,7 @@ import {
   DescribeBackupByFlowIdRequest,
   CreateBackupRequest,
   DescribeDBsNormalRequest,
+  DescribeSlowlogsRequest,
   ModifyAccountRemarkRequest,
   ModifyIncrementalMigrationResponse,
   ModifyPublishSubscribeNameRequest,
@@ -206,6 +214,7 @@ import {
   DescribeMigrationDetailResponse,
   ModifyMigrationRequest,
   DescribeMigrationDatabasesRequest,
+  Parameter,
   DeleteDBInstanceRequest,
   CreateAccountResponse,
   RenewPostpaidDBInstanceResponse,
@@ -222,7 +231,7 @@ import {
   ResetAccountPasswordRequest,
   ModifyReadOnlyGroupDetailsRequest,
   RollbackInstanceRequest,
-  DescribeSlowlogsRequest,
+  DescribeInstanceParamsResponse,
   ModifyDBNameRequest,
   ModifyDBInstanceProjectRequest,
   DisassociateSecurityGroupsRequest,
@@ -669,6 +678,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（DescribeInstanceParams）用于查询实例的参数列表。
+   */
+  async DescribeInstanceParams(
+    req: DescribeInstanceParamsRequest,
+    cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
+  ): Promise<DescribeInstanceParamsResponse> {
+    return this.request("DescribeInstanceParams", req, cb)
+  }
+
+  /**
    * 本接口（CompleteExpansion）在实例发起扩容后，实例状态处于“升级待切换”时，可立即完成实例升级切换操作，无需等待可维护时间窗。本接口需要在实例低峰时调用，在完全切换成功前，存在部分库不可访问的风险。
    */
   async CompleteExpansion(
@@ -709,6 +728,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（DescribeInstanceParamRecords）用于查询实例参数修改历史。
+   */
+  async DescribeInstanceParamRecords(
+    req: DescribeInstanceParamRecordsRequest,
+    cb?: (error: string, rep: DescribeInstanceParamRecordsResponse) => void
+  ): Promise<DescribeInstanceParamRecordsResponse> {
+    return this.request("DescribeInstanceParamRecords", req, cb)
+  }
+
+  /**
    * 本接口（StartMigrationCheck）的作用是启动一个迁移前的校验任务，适用于迁移源的类型为TencentDB for SQLServer 的迁移方式
    */
   async StartMigrationCheck(
@@ -746,6 +775,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetAccountPasswordResponse) => void
   ): Promise<ResetAccountPasswordResponse> {
     return this.request("ResetAccountPassword", req, cb)
+  }
+
+  /**
+     * 本接口(ModifyInstanceParam)用于修改云数据库实例的参数。
+<b>注意</b>：如果修改的参数是需要<b>重启实例</b>的，那么实例将会按照WaitSwitch参数的设置(可能是立即执行也可能在可维护时间窗内自动执行)在执行参数修改时<b>重启实例</b>。
+您可以通过DescribeInstanceParams接口查询修改参数时是否会重启实例，以免导致您的实例不符合预期重启。
+     */
+  async ModifyInstanceParam(
+    req: ModifyInstanceParamRequest,
+    cb?: (error: string, rep: ModifyInstanceParamResponse) => void
+  ): Promise<ModifyInstanceParamResponse> {
+    return this.request("ModifyInstanceParam", req, cb)
   }
 
   /**

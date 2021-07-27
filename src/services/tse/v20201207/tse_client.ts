@@ -19,17 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeSREInstancesRequest,
-  ManageConfigRequest,
   SREInstance,
   DescribeSREInstanceAccessAddressResponse,
-  DescribeConfigRequest,
   DescribeSREInstancesResponse,
-  DescribeConfigResponse,
-  Filter,
   EnvInfo,
-  DescribeSREInstanceAccessAddressRequest,
+  Filter,
   VpcInfo,
-  ManageConfigResponse,
+  DescribeSREInstanceAccessAddressRequest,
 } from "./tse_models"
 
 /**
@@ -39,26 +35,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tse.tencentcloudapi.com", "2020-12-07", clientConfig)
-  }
-
-  /**
-   * 用于查询微服务引擎实例列表
-   */
-  async DescribeSREInstances(
-    req: DescribeSREInstancesRequest,
-    cb?: (error: string, rep: DescribeSREInstancesResponse) => void
-  ): Promise<DescribeSREInstancesResponse> {
-    return this.request("DescribeSREInstances", req, cb)
-  }
-
-  /**
-   * 管理配置
-   */
-  async ManageConfig(
-    req: ManageConfigRequest,
-    cb?: (error: string, rep: ManageConfigResponse) => void
-  ): Promise<ManageConfigResponse> {
-    return this.request("ManageConfig", req, cb)
   }
 
   /**
@@ -72,12 +48,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看配置项
+   * 用于查询微服务引擎实例列表
    */
-  async DescribeConfig(
-    req: DescribeConfigRequest,
-    cb?: (error: string, rep: DescribeConfigResponse) => void
-  ): Promise<DescribeConfigResponse> {
-    return this.request("DescribeConfig", req, cb)
+  async DescribeSREInstances(
+    req: DescribeSREInstancesRequest,
+    cb?: (error: string, rep: DescribeSREInstancesResponse) => void
+  ): Promise<DescribeSREInstancesResponse> {
+    return this.request("DescribeSREInstances", req, cb)
   }
 }

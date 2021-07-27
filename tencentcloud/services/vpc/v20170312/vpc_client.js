@@ -427,6 +427,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（MigrateNetworkInterface）用于弹性网卡迁移。
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
     async MigrateNetworkInterface(req, cb) {
         return this.request("MigrateNetworkInterface", req, cb);
@@ -761,6 +762,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（DetachNetworkInterface）用于弹性网卡解绑云服务器。
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
     async DetachNetworkInterface(req, cb) {
         return this.request("DetachNetworkInterface", req, cb);
@@ -818,6 +820,8 @@ class Client extends abstract_client_1.AbstractClient {
      * 本接口（DeleteNetworkInterface）用于删除弹性网卡。
 * 弹性网卡上绑定了云服务器时，不能被删除。
 * 删除指定弹性网卡，弹性网卡必须先和子机解绑才能删除。删除之后弹性网卡上所有内网IP都将被退还。
+
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
     async DeleteNetworkInterface(req, cb) {
         return this.request("DeleteNetworkInterface", req, cb);
@@ -958,6 +962,8 @@ class Client extends abstract_client_1.AbstractClient {
 * 一个弹性网卡只能同时绑定一个云服务器。
 * 只有运行中或者已关机状态的云服务器才能绑定弹性网卡，查看云服务器状态详见<a href="https://cloud.tencent.com/document/api/213/9452#InstanceStatus">腾讯云服务器信息</a>。
 * 弹性网卡绑定的云服务器必须是私有网络的，而且云服务器所在可用区必须和弹性网卡子网的可用区相同。
+
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
     async AttachNetworkInterface(req, cb) {
         return this.request("AttachNetworkInterface", req, cb);
@@ -1229,9 +1235,10 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      *  本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
-
 * 该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
 * 迁移前后的弹性网卡必须在同一个子网内。
+
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
     async MigratePrivateIpAddress(req, cb) {
         return this.request("MigratePrivateIpAddress", req, cb);

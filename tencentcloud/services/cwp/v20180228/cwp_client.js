@@ -64,46 +64,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSearchExportList", req, cb);
     }
     /**
-     * 本接口 (DescribeWeeklyReportMalwares) 用于获取专业周报木马数据。
-     */
-    async DescribeWeeklyReportMalwares(req, cb) {
-        return this.request("DescribeWeeklyReportMalwares", req, cb);
-    }
-    /**
      * 删除检索模板
      */
     async DeleteSearchTemplate(req, cb) {
         return this.request("DeleteSearchTemplate", req, cb);
     }
     /**
-     * 新增或修改高危命令规则
-     */
-    async EditBashRule(req, cb) {
-        return this.request("EditBashRule", req, cb);
-    }
-    /**
-     * 本接口（DeleteUsualLoginPlaces）用于删除常用登录地。
-     */
-    async DeleteUsualLoginPlaces(req, cb) {
-        return this.request("DeleteUsualLoginPlaces", req, cb);
-    }
-    /**
-     * 本接口 (DescribeVuls) 用于获取漏洞列表数据。
-     */
-    async DescribeVuls(req, cb) {
-        return this.request("DescribeVuls", req, cb);
-    }
-    /**
      * DescribeScanTaskDetails 查询扫描任务详情 , 可以查询扫描进度信息/异常;
      */
     async DescribeScanTaskDetails(req, cb) {
         return this.request("DescribeScanTaskDetails", req, cb);
-    }
-    /**
-     * 本接口{MisAlarmNonlocalLoginPlaces}将设置当前地点为常用登录地。
-     */
-    async MisAlarmNonlocalLoginPlaces(req, cb) {
-        return this.request("MisAlarmNonlocalLoginPlaces", req, cb);
     }
     /**
      * 根据策略信息创建基线策略
@@ -214,34 +184,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportBashEvents", req, cb);
     }
     /**
-     * 本接口 (CreateProcessTask) 用于创建实时拉取进程任务。
+     * 导出资产管理内核模块列表
      */
-    async CreateProcessTask(req, cb) {
-        return this.request("CreateProcessTask", req, cb);
-    }
-    /**
-     * 编辑反弹Shell规则
-     */
-    async EditReverseShellRule(req, cb) {
-        return this.request("EditReverseShellRule", req, cb);
-    }
-    /**
-     * 本接口 (DescribeProcesses) 用于获取进程列表数据。
-     */
-    async DescribeProcesses(req, cb) {
-        return this.request("DescribeProcesses", req, cb);
+    async ExportAssetCoreModuleList(req, cb) {
+        return this.request("ExportAssetCoreModuleList", req, cb);
     }
     /**
      * 同步资产扫描信息
      */
     async SyncAssetScan(req, cb) {
         return this.request("SyncAssetScan", req, cb);
-    }
-    /**
-     * 本接口（DescribeMalwares）用于获取木马事件列表。
-     */
-    async DescribeMalwares(req, cb) {
-        return this.request("DescribeMalwares", req, cb);
     }
     /**
      * 获取ES字段聚合结果
@@ -262,41 +214,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IgnoreImpactedHosts", req, cb);
     }
     /**
-     * 本接口用于编辑异地登录白名单规则。
-     */
-    async ModifyLoginWhiteList(req, cb) {
-        return this.request("ModifyLoginWhiteList", req, cb);
-    }
-    /**
      * 获取本地提权规则列表
      */
     async DescribePrivilegeRules(req, cb) {
         return this.request("DescribePrivilegeRules", req, cb);
     }
     /**
-     * 本接口 (UntrustMaliciousRequest) 用于取消信任恶意请求。
-     */
-    async UntrustMaliciousRequest(req, cb) {
-        return this.request("UntrustMaliciousRequest", req, cb);
-    }
-    /**
-     * 本接口 (DescribeImpactedHosts) 用于获取漏洞受影响机器列表。
-     */
-    async DescribeImpactedHosts(req, cb) {
-        return this.request("DescribeImpactedHosts", req, cb);
-    }
-    /**
      * 本接口 (DeleteNonlocalLoginPlaces) 用于删除异地登录记录。
      */
     async DeleteNonlocalLoginPlaces(req, cb) {
         return this.request("DeleteNonlocalLoginPlaces", req, cb);
-    }
-    /**
-     * 本接口 (DescribeOpenPorts) 用于获取端口列表数据。
-
-     */
-    async DescribeOpenPorts(req, cb) {
-        return this.request("DescribeOpenPorts", req, cb);
     }
     /**
      * 本接口 (ExportMaliciousRequests) 用于导出下载恶意请求文件。
@@ -311,16 +238,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTagMachines", req, cb);
     }
     /**
-     * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+     *  一键检测
      */
-    async ModifyAlarmAttribute(req, cb) {
-        return this.request("ModifyAlarmAttribute", req, cb);
-    }
-    /**
-     * 本接口(DescribeNonlocalLoginPlaces)用于获取异地登录事件。
-     */
-    async DescribeNonlocalLoginPlaces(req, cb) {
-        return this.request("DescribeNonlocalLoginPlaces", req, cb);
+    async ScanVul(req, cb) {
+        return this.request("ScanVul", req, cb);
     }
     /**
      * 导出本地提权事件
@@ -335,28 +256,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOverviewStatistics", req, cb);
     }
     /**
-     * 本接口 (DescribeVulInfo) 用于获取漏洞详情。
-     */
-    async DescribeVulInfo(req, cb) {
-        return this.request("DescribeVulInfo", req, cb);
-    }
-    /**
-     * 获取网络攻击威胁类型列表
-     */
-    async DescribeAttackVulTypeList(req, cb) {
-        return this.request("DescribeAttackVulTypeList", req, cb);
-    }
-    /**
      * 添加检索模板
      */
     async CreateSearchTemplate(req, cb) {
         return this.request("CreateSearchTemplate", req, cb);
     }
     /**
-     * 本接口 (DescribeOpenPortTaskStatus) 用于获取实时拉取端口任务状态。
+     * 资产指纹启动扫描
      */
-    async DescribeOpenPortTaskStatus(req, cb) {
-        return this.request("DescribeOpenPortTaskStatus", req, cb);
+    async ScanAsset(req, cb) {
+        return this.request("ScanAsset", req, cb);
     }
     /**
      * 本接口 (DescribeSecurityDynamics) 用于获取安全事件消息数据。
@@ -377,12 +286,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivilegeRules", req, cb);
     }
     /**
-     * 导出资产管理内核模块列表
-     */
-    async ExportAssetCoreModuleList(req, cb) {
-        return this.request("ExportAssetCoreModuleList", req, cb);
-    }
-    /**
      * 本接口 (DeleteMalwares) 用于删除木马记录。
      */
     async DeleteMalwares(req, cb) {
@@ -395,12 +298,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMachineList", req, cb);
     }
     /**
-     * 本接口 (DescribeWeeklyReportNonlocalLoginPlaces) 用于获取专业周报异地登录数据。
-     */
-    async DescribeWeeklyReportNonlocalLoginPlaces(req, cb) {
-        return this.request("DescribeWeeklyReportNonlocalLoginPlaces", req, cb);
-    }
-    /**
      * 查询木马扫描进度
      */
     async DescribeScanMalwareSchedule(req, cb) {
@@ -411,12 +308,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLoginWhiteList(req, cb) {
         return this.request("DeleteLoginWhiteList", req, cb);
-    }
-    /**
-     * 本接口 (CreateOpenPortTask) 用于创建实时获取端口任务。
-     */
-    async CreateOpenPortTask(req, cb) {
-        return this.request("CreateOpenPortTask", req, cb);
     }
     /**
      * 本接口 (CloseProVersion) 用于关闭专业版。
@@ -461,34 +352,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportBruteAttacks", req, cb);
     }
     /**
-     * 本接口 (TrustMaliciousRequest) 用于恶意请求添加信任。
-     */
-    async TrustMaliciousRequest(req, cb) {
-        return this.request("TrustMaliciousRequest", req, cb);
-    }
-    /**
      * 切换高危命令规则状态
      */
     async SwitchBashRules(req, cb) {
         return this.request("SwitchBashRules", req, cb);
     }
     /**
-     * 新增或修改本地提权规则
-     */
-    async EditPrivilegeRule(req, cb) {
-        return this.request("EditPrivilegeRule", req, cb);
-    }
-    /**
      * 本接口 (ExportMalwares) 用于导出木马记录CSV文件。
      */
     async ExportMalwares(req, cb) {
         return this.request("ExportMalwares", req, cb);
-    }
-    /**
-     * 本接口{DescribeBruteAttacks}用于获取暴力破解事件列表。
-     */
-    async DescribeBruteAttacks(req, cb) {
-        return this.request("DescribeBruteAttacks", req, cb);
     }
     /**
      * 获取密码破解列表
@@ -509,12 +382,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenProVersionPrepaid", req, cb);
     }
     /**
-     * 增加机器关联标签
-     */
-    async AddMachineTag(req, cb) {
-        return this.request("AddMachineTag", req, cb);
-    }
-    /**
      * 获取快速检索列表
      */
     async DescribeSearchTemplates(req, cb) {
@@ -533,18 +400,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SeparateMalwares", req, cb);
     }
     /**
-     * 本接口用于新增异地登录白名单规则。
-     */
-    async AddLoginWhiteList(req, cb) {
-        return this.request("AddLoginWhiteList", req, cb);
-    }
-    /**
-     *  一键检测
-     */
-    async ScanVul(req, cb) {
-        return this.request("ScanVul", req, cb);
-    }
-    /**
      * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
      */
     async DescribeProcessStatistics(req, cb) {
@@ -555,12 +410,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMalwareInfo(req, cb) {
         return this.request("DescribeMalwareInfo", req, cb);
-    }
-    /**
-     * 本接口 (DescribeMaliciousRequests) 用于获取恶意请求数据。
-     */
-    async DescribeMaliciousRequests(req, cb) {
-        return this.request("DescribeMaliciousRequests", req, cb);
     }
     /**
      * 删除高危命令规则
@@ -599,22 +448,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetRecentMachineInfo", req, cb);
     }
     /**
-     * 本接口 (DescribeAgentVuls) 用于获取单台主机的漏洞列表。
-     */
-    async DescribeAgentVuls(req, cb) {
-        return this.request("DescribeAgentVuls", req, cb);
-    }
-    /**
-     * 本接口 (DescribeAccounts) 用于获取帐号列表数据。
+     * 该接口已废弃
+
+本接口 (DescribeAccounts) 用于获取帐号列表数据。
      */
     async DescribeAccounts(req, cb) {
         return this.request("DescribeAccounts", req, cb);
-    }
-    /**
-     * 本接口 (DescribeWeeklyReports) 用于获取周报列表数据。
-     */
-    async DescribeWeeklyReports(req, cb) {
-        return this.request("DescribeWeeklyReports", req, cb);
     }
     /**
      * 本接口 (DescribeProVersionInfo) 用于获取专业版信息。
@@ -629,13 +468,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeESHits", req, cb);
     }
     /**
-     * 查询网站防篡改 概览信息
+     * 查询网站防篡改概览信息
      */
     async DescribeWebPageGeneralize(req, cb) {
         return this.request("DescribeWebPageGeneralize", req, cb);
     }
     /**
-     * 概览页抽屉侧边弹窗：安全概览“立即处理”页面中的相关事件数统计接口。
+     * 获取安全概览相关事件统计数据接口
      */
     async DescribeSecurityEventsCnt(req, cb) {
         return this.request("DescribeSecurityEventsCnt", req, cb);
@@ -653,22 +492,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMachineInfo", req, cb);
     }
     /**
-     * 本接口 (DescribeAlarmAttribute) 用于获取告警设置。
-     */
-    async DescribeAlarmAttribute(req, cb) {
-        return this.request("DescribeAlarmAttribute", req, cb);
-    }
-    /**
      * 获取日志检索容量使用统计
      */
     async DescribeLogStorageStatistic(req, cb) {
         return this.request("DescribeLogStorageStatistic", req, cb);
     }
     /**
-     * 本接口 (DescribeComponents) 用于获取组件列表数据。
+     * 获取网络攻击威胁类型列表
      */
-    async DescribeComponents(req, cb) {
-        return this.request("DescribeComponents", req, cb);
+    async DescribeAttackVulTypeList(req, cb) {
+        return this.request("DescribeAttackVulTypeList", req, cb);
     }
     /**
      * 获取异地登录白名单列表
@@ -681,13 +514,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateBaselineStrategy(req, cb) {
         return this.request("UpdateBaselineStrategy", req, cb);
-    }
-    /**
-     * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
-
-     */
-    async DescribeVulScanResult(req, cb) {
-        return this.request("DescribeVulScanResult", req, cb);
     }
     /**
      * 入侵检测，获取恶意请求列表
@@ -714,12 +540,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportNonlocalLoginPlaces", req, cb);
     }
     /**
-     * 本接口 (DescribeWeeklyReportBruteAttacks) 用于获取专业周报密码破解数据。
-     */
-    async DescribeWeeklyReportBruteAttacks(req, cb) {
-        return this.request("DescribeWeeklyReportBruteAttacks", req, cb);
-    }
-    /**
      * 本接口（UntrustMalwares）用于取消信任木马文件。
      */
     async UntrustMalwares(req, cb) {
@@ -730,13 +550,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OpenProVersion(req, cb) {
         return this.request("OpenProVersion", req, cb);
-    }
-    /**
-     * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
-
-     */
-    async DescribeWeeklyReportVuls(req, cb) {
-        return this.request("DescribeWeeklyReportVuls", req, cb);
     }
     /**
      * 查询可筛选操作系统列表.
@@ -755,12 +568,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateScanMalwareSetting(req, cb) {
         return this.request("CreateScanMalwareSetting", req, cb);
-    }
-    /**
-     * 本接口 (DescribeComponentInfo) 用于获取组件信息数据。
-     */
-    async DescribeComponentInfo(req, cb) {
-        return this.request("DescribeComponentInfo", req, cb);
     }
     /**
      * 本接口 (ModifyProVersionRenewFlag) 用于修改专业版包年包月续费标识。
@@ -805,12 +612,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMachine", req, cb);
     }
     /**
-     * 本接口 (DescribeProcessTaskStatus) 用于获取实时拉取进程任务状态。
-     */
-    async DescribeProcessTaskStatus(req, cb) {
-        return this.request("DescribeProcessTaskStatus", req, cb);
-    }
-    /**
      * 本接口 (RescanImpactedHost) 用于漏洞重新检测。
      */
     async RescanImpactedHost(req, cb) {
@@ -827,12 +628,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSecurityTrends(req, cb) {
         return this.request("DescribeSecurityTrends", req, cb);
-    }
-    /**
-     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
-     */
-    async DescribeWeeklyReportInfo(req, cb) {
-        return this.request("DescribeWeeklyReportInfo", req, cb);
     }
     /**
      * 网络攻击日志详情
@@ -869,12 +664,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMachines(req, cb) {
         return this.request("DescribeMachines", req, cb);
-    }
-    /**
-     * 此接口（CreateUsualLoginPlaces）用于添加常用登录地。
-     */
-    async CreateUsualLoginPlaces(req, cb) {
-        return this.request("CreateUsualLoginPlaces", req, cb);
     }
     /**
      * 导出漏洞检测报告。

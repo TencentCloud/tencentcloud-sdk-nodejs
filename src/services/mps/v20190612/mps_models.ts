@@ -4594,6 +4594,21 @@ export interface AIAnalysisTemplateItem {
 }
 
 /**
+ * 片头片尾参数
+ */
+export interface HeadTailParameter {
+  /**
+   * 片头列表。
+   */
+  HeadSet?: Array<MediaInputInfo>
+
+  /**
+   * 片尾列表。
+   */
+  TailSet?: Array<MediaInputInfo>
+}
+
+/**
  * 图片水印模板输入参数
  */
 export interface RawImageWatermarkInput {
@@ -6147,6 +6162,12 @@ export interface TranscodeTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ObjectNumberFormat?: NumberFormat
+
+  /**
+      * 片头片尾参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HeadTailParameter?: HeadTailParameter
 }
 
 /**
@@ -7280,6 +7301,16 @@ export interface TaskNotifyConfig {
    * 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。
    */
   NotifyMode?: string
+
+  /**
+   * 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。
+   */
+  NotifyType?: string
+
+  /**
+   * HTTP回调地址，NotifyType为URL时必填。
+   */
+  NotifyUrl?: string
 }
 
 /**

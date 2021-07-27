@@ -1444,11 +1444,21 @@ export interface DescribeBackupUrlResponse {
     /**
       * 外网下载地址（6小时）
       */
-    DownloadUrl?: Array<string>;
+    DownloadUrl: Array<string>;
     /**
       * 内网下载地址（6小时）
       */
-    InnerDownloadUrl?: Array<string>;
+    InnerDownloadUrl: Array<string>;
+    /**
+      * 文件名称（仅tendis实例有值）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Filenames: Array<string>;
+    /**
+      * 备份文件信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupInfos: Array<BackupDownloadInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1489,7 +1499,7 @@ export interface InquiryPriceCreateInstanceResponse {
       * 价格，单位：分
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Price?: number;
+    Price: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3215,10 +3225,6 @@ export interface DescribeCommonDBInstancesResponse {
  */
 export interface InquiryPriceCreateInstanceRequest {
     /**
-      * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
-      */
-    ZoneId: number;
-    /**
       * 实例类型：2 – Redis2.8内存版(标准架构)，3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版(标准架构)，7 – Redis4.0内存版(集群架构)，8 – Redis5.0内存版(标准架构)，9 – Redis5.0内存版(集群架构)。
       */
     TypeId: number;
@@ -3240,6 +3246,10 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
       */
     BillingMode: number;
     /**
+      * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+      */
+    ZoneId?: number;
+    /**
       * 实例分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版、Redis4.0主从版不需要填写。
       */
     RedisShardNum?: number;
@@ -3251,6 +3261,10 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
       * 是否支持副本只读，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。
       */
     ReplicasReadonly?: boolean;
+    /**
+      * 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+      */
+    ZoneName?: string;
 }
 /**
  * ModifyInstanceParams请求参数结构体
@@ -3264,6 +3278,27 @@ export interface ModifyInstanceParamsRequest {
       * 实例修改的参数列表
       */
     InstanceParams: Array<InstanceParam>;
+}
+/**
+ * 备份文件下载信息
+ */
+export interface BackupDownloadInfo {
+    /**
+      * 备份文件名称
+      */
+    FileName: string;
+    /**
+      * 备份文件大小，单位B，如果为0，表示无效
+      */
+    FileSize: number;
+    /**
+      * 备份文件外网下载地址（6小时）
+      */
+    DownloadUrl: string;
+    /**
+      * 备份文件内网下载地址（6小时）
+      */
+    InnerDownloadUrl: string;
 }
 /**
  * 大Key类型分布详情

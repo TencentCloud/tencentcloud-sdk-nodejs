@@ -356,6 +356,11 @@ export interface CreateInstancePreData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DealNames: Array<string>;
+    /**
+      * 实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
 }
 /**
  * DescribeACL返回参数结构体
@@ -1340,6 +1345,34 @@ export interface CreateInstancePreRequest {
       * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
       */
     RenewFlag?: number;
+    /**
+      * 支持指定版本Kafka版本（0.10.2/1.1.1/2.4.2） 。指定专业版参数specificationsType=pro
+      */
+    KafkaVersion?: string;
+    /**
+      * 专业版必须填写 （专业版：profession、标准版：standard） 默认是standard。专业版填profession
+      */
+    SpecificationsType?: string;
+    /**
+      * 磁盘大小,专业版不填写默认最小磁盘,填写后根据磁盘带宽分区数弹性计算
+      */
+    DiskSize?: number;
+    /**
+      * 带宽,专业版不填写默认最小带宽,填写后根据磁盘带宽分区数弹性计算
+      */
+    BandWidth?: number;
+    /**
+      * 分区大小,专业版不填写默认最小分区数,填写后根据磁盘带宽分区数弹性计算
+      */
+    Partition?: number;
+    /**
+      * 标签
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 磁盘类型（ssd填写CLOUD_SSD，sata填写CLOUD_BASIC）
+      */
+    DiskType?: string;
 }
 /**
  * ModifyInstanceAttributes请求参数结构体

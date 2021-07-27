@@ -388,6 +388,16 @@ it("tcb.v20180608.DescribeHostingDomainTask", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeActivityRecord", async function () {
+    try {
+       const data = await client.DescribeActivityRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DeleteCloudBaseRunServerVersion", async function () {
     try {
        const data = await client.DeleteCloudBaseRunServerVersion({})
@@ -461,6 +471,16 @@ it("tcb.v20180608.DescribeEndUserStatistic", async function () {
 it("tcb.v20180608.DestroyEnv", async function () {
     try {
        const data = await client.DestroyEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ReplaceActivityRecord", async function () {
+    try {
+       const data = await client.ReplaceActivityRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

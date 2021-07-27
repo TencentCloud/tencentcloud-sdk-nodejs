@@ -18,26 +18,6 @@ const client = new tencentcloud.tse.v20201207.Client({
 })
 describe("tse.v20201207.test.js", function () {
 
-it("tse.v20201207.DescribeSREInstances", async function () {
-    try {
-       const data = await client.DescribeSREInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tse.v20201207.ManageConfig", async function () {
-    try {
-       const data = await client.ManageConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
     try {
        const data = await client.DescribeSREInstanceAccessAddress({})
@@ -48,9 +28,9 @@ it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
     }
 })
 
-it("tse.v20201207.DescribeConfig", async function () {
+it("tse.v20201207.DescribeSREInstances", async function () {
     try {
-       const data = await client.DescribeConfig({})
+       const data = await client.DescribeSREInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

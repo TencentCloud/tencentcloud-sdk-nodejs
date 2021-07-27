@@ -106,6 +106,7 @@ import {
   CosInfo,
   MediaResultInfo,
   FrameTagResult,
+  TextMarkInfoItem,
   MediaCuttingTimeInfo,
   TargetInfo,
   CreateMediaQualityRestorationTaskRequest,

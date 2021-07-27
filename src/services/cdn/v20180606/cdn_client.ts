@@ -121,6 +121,7 @@ import {
   AdvancedAuthenticationTypeB,
   WebpAdapter,
   CreateScdnLogTaskResponse,
+  WebSocket,
   MapInfo,
   DescribeCertDomainsResponse,
   ScdnBotConfig,

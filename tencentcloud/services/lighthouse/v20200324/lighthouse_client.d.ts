@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
     DescribeInstancesReturnable(req: DescribeInstancesReturnableRequest, cb?: (error: string, rep: DescribeInstancesReturnableResponse) => void): Promise<DescribeInstancesReturnableResponse>;
     /**
      * 本接口（ModifyInstancesAttribute）用于修改实例的属性。
-* “实例名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为提交工单或是进行实例管理操作的依据。
+* “实例名称”仅为方便用户自己管理之用。
 * 支持批量操作。每次请求批量实例的上限为 100。
 * 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
      */
@@ -220,7 +220,7 @@ export declare class Client extends AbstractClient {
     ModifyInstancesLoginKeyPairAttribute(req: ModifyInstancesLoginKeyPairAttributeRequest, cb?: (error: string, rep: ModifyInstancesLoginKeyPairAttributeResponse) => void): Promise<ModifyInstancesLoginKeyPairAttributeResponse>;
     /**
      * 本接口（ModifySnapshotAttribute）用于修改指定快照的属性。
-<li>“快照名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为提交工单或是进行快照管理操作的依据。</li>
+<li>“快照名称”仅为方便用户自己管理之用。</li>
      */
     ModifySnapshotAttribute(req: ModifySnapshotAttributeRequest, cb?: (error: string, rep: ModifySnapshotAttributeResponse) => void): Promise<ModifySnapshotAttributeResponse>;
     /**

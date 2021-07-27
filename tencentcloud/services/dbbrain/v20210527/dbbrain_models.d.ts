@@ -392,6 +392,10 @@ export interface SlowLogTopSqlItem {
       * 平均扫描行数
       */
     RowsExaminedAvg: number;
+    /**
+      * SOL模板的MD5值
+      */
+    Md5: string;
 }
 /**
  * DescribeMySqlProcessList返回参数结构体
@@ -1619,6 +1623,10 @@ export interface DescribeSlowLogUserHostStatsRequest {
       * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
       */
     Product?: string;
+    /**
+      * SOL模板的MD5值
+      */
+    Md5?: string;
 }
 /**
  * DescribeTopSpaceSchemas返回参数结构体
