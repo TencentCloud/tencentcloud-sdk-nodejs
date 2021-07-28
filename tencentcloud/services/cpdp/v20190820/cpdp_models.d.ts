@@ -1946,6 +1946,14 @@ ANONYMOUS: 匿名类型 USER_ID
 默认值为 USER_ID
       */
     UserType?: string;
+    /**
+      * 签约代扣穿透查询存量数据迁移模式
+      */
+    MigrateMode?: string;
+    /**
+      * 签约方式
+      */
+    ContractMethod?: string;
 }
 /**
  * QueryInvoiceV2返回参数结构体
@@ -6495,6 +6503,14 @@ ANONYMOUS: 匿名类型 USER_ID
 默认值为 USER_ID
       */
     UserType?: string;
+    /**
+      * 签约方式
+      */
+    ContractMethod?: string;
+    /**
+      * 签约代扣穿透查询存量数据迁移模式
+      */
+    MigrateMode?: string;
 }
 /**
  * QueryTransferBatch请求参数结构体

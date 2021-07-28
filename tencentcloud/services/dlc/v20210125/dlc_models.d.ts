@@ -73,6 +73,23 @@ export interface CreateScriptResponse {
     RequestId?: string;
 }
 /**
+ * CreateTasksInOrder返回参数结构体
+ */
+export interface CreateTasksInOrderResponse {
+    /**
+      * 本批次提交的任务的批次Id
+      */
+    BatchId: string;
+    /**
+      * 任务Id集合，按照执行顺序排列
+      */
+    TaskIdSet: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeTables返回参数结构体
  */
 export interface DescribeTablesResponse {
@@ -202,6 +219,23 @@ export interface DescribeTasksResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateTasksInOrder请求参数结构体
+ */
+export interface CreateTasksInOrderRequest {
+    /**
+      * 数据库名称。如果SQL语句中有数据库名称，优先使用SQL语句中的数据库，否则使用该参数指定的数据库。
+      */
+    DatabaseName: string;
+    /**
+      * SQL任务信息
+      */
+    Tasks: TasksInfo;
+    /**
+      * 数据源名称，默认为COSDataCatalog
+      */
+    DatasourceConnectionName?: string;
 }
 /**
  * DetachWorkGroupPolicy返回参数结构体
@@ -380,6 +414,27 @@ export interface TableBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DatasourceConnectionName?: string;
+}
+/**
+ * 批量顺序执行任务集合
+ */
+export interface TasksInfo {
+    /**
+      * 任务类型，SQLTask：SQL查询任务。SparkSQLTask：Spark SQL查询任务
+      */
+    TaskType: string;
+    /**
+      * 容错策略。Proceed：前面任务出错/取消后继续执行后面的任务。Terminate：前面的任务出错/取消之后终止后面任务的执行，后面的任务全部标记为已取消。
+      */
+    FailureTolerance: string;
+    /**
+      * base64加密后的SQL语句，用";"号分隔每个SQL语句，一次最多提交50个任务。严格按照前后顺序执行
+      */
+    SQL: string;
+    /**
+      * 任务的配置信息
+      */
+    Config?: Array<KVPair>;
 }
 /**
  * AttachWorkGroupPolicy请求参数结构体

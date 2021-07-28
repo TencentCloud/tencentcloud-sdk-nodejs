@@ -191,6 +191,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDDoSSpeedLimitConfig", req, cb);
     }
     /**
+     * 获取基础防护攻击状态
+     */
+    async DescribeBasicDeviceStatus(req, cb) {
+        return this.request("DescribeBasicDeviceStatus", req, cb);
+    }
+    /**
      * 获取高防包资产实例列表
 
      */

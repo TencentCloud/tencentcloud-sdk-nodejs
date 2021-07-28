@@ -1640,6 +1640,41 @@ export interface Quota {
 }
 
 /**
+ * CreateScdnDomain请求参数结构体
+ */
+export interface CreateScdnDomainRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * Web 攻击防护（WAF）配置
+   */
+  Waf?: ScdnWafConfig
+
+  /**
+   * 自定义防护策略配置
+   */
+  Acl?: ScdnAclConfig
+
+  /**
+   * CC 防护配置，目前 CC 防护默认开启
+   */
+  CC?: ScdnConfig
+
+  /**
+   * DDOS 防护配置，目前 DDoS 防护默认开启
+   */
+  Ddos?: ScdnDdosConfig
+
+  /**
+   * BOT 防护配置
+   */
+  Bot?: ScdnBotConfig
+}
+
+/**
  * 组成CacheKey
  */
 export interface HeaderKey {
@@ -5826,35 +5861,18 @@ export interface StatusCodeCacheRule {
 }
 
 /**
- * https 客户端证书配置
+ * CreateScdnDomain返回参数结构体
  */
-export interface ClientCert {
+export interface CreateScdnDomainResponse {
   /**
-      * 客户端证书
-PEM 格式，需要进行 Base 64 编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Certificate: string
+   * 创建结果，Success表示成功
+   */
+  Result: string
 
   /**
-      * 客户端证书名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertName?: string
-
-  /**
-      * 证书过期时间
-作为入参时无需填充
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExpireTime?: string
-
-  /**
-      * 证书颁发时间
-作为入参时无需填充
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeployTime?: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6481,6 +6499,38 @@ off：关闭全路径缓存（即开启参数过滤）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleTag: string
+}
+
+/**
+ * https 客户端证书配置
+ */
+export interface ClientCert {
+  /**
+      * 客户端证书
+PEM 格式，需要进行 Base 64 编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Certificate: string
+
+  /**
+      * 客户端证书名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertName?: string
+
+  /**
+      * 证书过期时间
+作为入参时无需填充
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime?: string
+
+  /**
+      * 证书颁发时间
+作为入参时无需填充
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployTime?: string
 }
 
 /**

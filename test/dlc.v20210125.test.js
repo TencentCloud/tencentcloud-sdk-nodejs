@@ -268,6 +268,16 @@ it("dlc.v20210125.DescribeDatabases", async function () {
     }
 })
 
+it("dlc.v20210125.CreateTasksInOrder", async function () {
+    try {
+       const data = await client.CreateTasksInOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.AttachUserPolicy", async function () {
     try {
        const data = await client.AttachUserPolicy({})

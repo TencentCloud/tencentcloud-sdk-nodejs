@@ -34,11 +34,11 @@ import {
   InstanceRelation,
   DescribeListProtocolBlockConfigResponse,
   DescribeListBGPInstancesRequest,
-  SwitchWaterPrintConfigRequest,
+  KeyValue,
   DeleteDDoSSpeedLimitConfigRequest,
   CreatePacketFilterConfigResponse,
   CreateL7RuleCertsRequest,
-  DescribeListSchedulingDomainResponse,
+  DeleteDDoSGeoIPBlockConfigRequest,
   CreateIPAlarmThresholdConfigRequest,
   DescribeDefaultAlarmThresholdResponse,
   CreateDDoSAIRequest,
@@ -79,6 +79,7 @@ import {
   CreateDDoSSpeedLimitConfigResponse,
   DeletePacketFilterConfigRequest,
   DescribeListDDoSGeoIPBlockConfigResponse,
+  DescribeBasicDeviceStatusResponse,
   WaterPrintConfig,
   ProtocolBlockConfig,
   DescribeListListenerRequest,
@@ -94,6 +95,7 @@ import {
   DescribeListDDoSSpeedLimitConfigResponse,
   CreateDDoSGeoIPBlockConfigResponse,
   ListenerCcThreholdConfig,
+  DescribeBasicDeviceStatusRequest,
   IPLineInfo,
   EipAddressRelation,
   DescribeListListenerResponse,
@@ -123,7 +125,8 @@ import {
   CreateBlackWhiteIpListRequest,
   CreateBoundIPResponse,
   SpeedValue,
-  DeleteDDoSGeoIPBlockConfigRequest,
+  SwitchWaterPrintConfigRequest,
+  DescribeListSchedulingDomainResponse,
   CreateSchedulingDomainResponse,
   EipProductInfo,
   CreateDDoSAIResponse,
@@ -425,6 +428,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDDoSSpeedLimitConfigResponse) => void
   ): Promise<CreateDDoSSpeedLimitConfigResponse> {
     return this.request("CreateDDoSSpeedLimitConfig", req, cb)
+  }
+
+  /**
+   * 获取基础防护攻击状态
+   */
+  async DescribeBasicDeviceStatus(
+    req: DescribeBasicDeviceStatusRequest,
+    cb?: (error: string, rep: DescribeBasicDeviceStatusResponse) => void
+  ): Promise<DescribeBasicDeviceStatusResponse> {
+    return this.request("DescribeBasicDeviceStatus", req, cb)
   }
 
   /**

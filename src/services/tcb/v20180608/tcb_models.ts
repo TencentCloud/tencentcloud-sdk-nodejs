@@ -2135,9 +2135,14 @@ export interface DescribeActivityRecordRequest {
   ActivityIdList?: Array<number>
 
   /**
-   * 过滤状态码
+   * 过滤状态码，已废弃
    */
   Status?: number
+
+  /**
+   * 状态码过滤数组，空数组时不过滤
+   */
+  Statuses?: Array<number>
 }
 
 /**

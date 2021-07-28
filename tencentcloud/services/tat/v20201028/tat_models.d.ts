@@ -211,6 +211,10 @@ export interface Invocation {
       * 在实例上执行命令时使用的用户名。
       */
     Username: string;
+    /**
+      * 调用来源。
+      */
+    InvocationSource: string;
 }
 /**
  * 命令执行详情。
@@ -656,6 +660,10 @@ export interface InvocationTask {
       * 执行任务失败时的错误信息。
       */
     ErrorInfo: string;
+    /**
+      * 调用来源。
+      */
+    InvocationSource: string;
 }
 /**
  * DescribeAutomationAgentStatus返回参数结构体

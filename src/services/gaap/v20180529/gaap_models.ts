@@ -490,6 +490,28 @@ export interface DescribeHTTPListenersRequest {
 }
 
 /**
+ * DescribeCustomHeader返回参数结构体
+ */
+export interface DescribeCustomHeaderResponse {
+  /**
+      * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleId: string
+
+  /**
+      * 自定义header列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Headers: Array<HttpHeaderParam>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRealServerName返回参数结构体
  */
 export interface ModifyRealServerNameResponse {
@@ -807,7 +829,7 @@ export interface CreateRuleResponse {
   /**
    * 创建转发规则成功返回规则ID
    */
-  RuleId?: string
+  RuleId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -828,6 +850,16 @@ export interface ModifyRealServerNameRequest {
    * 源站ID
    */
   RealServerId: string
+}
+
+/**
+ * ModifyGroupDomainConfig返回参数结构体
+ */
+export interface ModifyGroupDomainConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2113,6 +2145,11 @@ export interface DescribeCertificatesResponse {
 }
 
 /**
+ * DescribeCustomHeader请求参数结构体
+ */
+export type DescribeCustomHeaderRequest = null
+
+/**
  * DescribeProxyGroupList返回参数结构体
  */
 export interface DescribeProxyGroupListResponse {
@@ -2394,19 +2431,9 @@ UNKNOWN表示未知状态。
 }
 
 /**
- * DescribeGroupAndStatisticsProxy返回参数结构体
+ * DeleteSecurityPolicy返回参数结构体
  */
-export interface DescribeGroupAndStatisticsProxyResponse {
-  /**
-   * 可以统计的通道组信息
-   */
-  GroupSet?: Array<GroupStatisticsInfo>
-
-  /**
-   * 通道组数量
-   */
-  TotalCount?: number
-
+export interface DeleteSecurityPolicyResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2522,18 +2549,13 @@ export interface ModifySecurityRuleRequest {
 }
 
 /**
- * 就近接入的国家地区详情
+ * CreateCustomHeader返回参数结构体
  */
-export interface NationCountryInnerInfo {
+export interface CreateCustomHeaderResponse {
   /**
-   * 国家名
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NationCountryName: string
-
-  /**
-   * 国家内部编码
-   */
-  NationCountryInnerCode: string
+  RequestId?: string
 }
 
 /**
@@ -2626,6 +2648,21 @@ export interface StatisticsDataInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data: number
+}
+
+/**
+ * CreateCustomHeader请求参数结构体
+ */
+export interface CreateCustomHeaderRequest {
+  /**
+   * 规则id
+   */
+  RuleId: string
+
+  /**
+   * 新增的header名称和内容列表， ‘’$remote_addr‘’会被解析替换成客户端ip，其他值原样透传到源站。
+   */
+  Headers?: Array<HttpHeaderParam>
 }
 
 /**
@@ -3055,6 +3092,26 @@ export interface CreateRuleRequest {
 }
 
 /**
+ * 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息
+ */
+export interface ProxySimpleInfo {
+  /**
+   * 通道ID
+   */
+  ProxyId: string
+
+  /**
+   * 通道名称
+   */
+  ProxyName: string
+
+  /**
+   * 监听器列表
+   */
+  ListenerList: Array<ListenerInfo>
+}
+
+/**
  * DeleteSecurityPolicy请求参数结构体
  */
 export interface DeleteSecurityPolicyRequest {
@@ -3356,23 +3413,19 @@ export interface SecurityPolicyRuleIn {
 }
 
 /**
- * 内部接口使用，返回可以查询统计数据的通道和对应的监听器信息
+ * DescribeBlackHeader返回参数结构体
  */
-export interface ProxySimpleInfo {
+export interface DescribeBlackHeaderResponse {
   /**
-   * 通道ID
-   */
-  ProxyId: string
+      * 禁用的自定义header列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BlackHeaders: Array<string>
 
   /**
-   * 通道名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProxyName: string
-
-  /**
-   * 监听器列表
-   */
-  ListenerList: Array<ListenerInfo>
+  RequestId?: string
 }
 
 /**
@@ -4096,9 +4149,19 @@ export interface DescribeProxyDetailResponse {
 }
 
 /**
- * DeleteSecurityPolicy返回参数结构体
+ * DescribeGroupAndStatisticsProxy返回参数结构体
  */
-export interface DeleteSecurityPolicyResponse {
+export interface DescribeGroupAndStatisticsProxyResponse {
+  /**
+   * 可以统计的通道组信息
+   */
+  GroupSet?: Array<GroupStatisticsInfo>
+
+  /**
+   * 通道组数量
+   */
+  TotalCount?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4382,14 +4445,9 @@ export interface CreateCertificateResponse {
 }
 
 /**
- * ModifyGroupDomainConfig返回参数结构体
+ * DescribeBlackHeader请求参数结构体
  */
-export interface ModifyGroupDomainConfigResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeBlackHeaderRequest = null
 
 /**
  * DescribeProxyStatistics返回参数结构体
@@ -4728,6 +4786,21 @@ export interface OpenProxyGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 就近接入的国家地区详情
+ */
+export interface NationCountryInnerInfo {
+  /**
+   * 国家名
+   */
+  NationCountryName: string
+
+  /**
+   * 国家内部编码
+   */
+  NationCountryInnerCode: string
 }
 
 /**

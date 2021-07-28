@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
+     * 按顺序创建任务
+     */
+    async CreateTasksInOrder(req, cb) {
+        return this.request("CreateTasksInOrder", req, cb);
+    }
+    /**
      * 绑定鉴权策略到用户
      */
     async AttachUserPolicy(req, cb) {

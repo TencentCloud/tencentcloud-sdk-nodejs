@@ -23,6 +23,7 @@ import {
   DeleteUserRequest,
   CreateStoreLocationResponse,
   CreateScriptResponse,
+  CreateTasksInOrderResponse,
   DescribeTablesResponse,
   WorkGroupInfo,
   ModifyUserResponse,
@@ -31,6 +32,7 @@ import {
   DetachUserPolicyRequest,
   DeleteWorkGroupResponse,
   DescribeTasksResponse,
+  CreateTasksInOrderRequest,
   DetachWorkGroupPolicyResponse,
   CSVSerde,
   CreateDatabaseRequest,
@@ -41,6 +43,7 @@ import {
   DeleteWorkGroupRequest,
   KVPair,
   TableBaseInfo,
+  TasksInfo,
   AttachWorkGroupPolicyRequest,
   CreateUserResponse,
   DeleteUserResponse,
@@ -366,6 +369,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabasesResponse) => void
   ): Promise<DescribeDatabasesResponse> {
     return this.request("DescribeDatabases", req, cb)
+  }
+
+  /**
+   * 按顺序创建任务
+   */
+  async CreateTasksInOrder(
+    req: CreateTasksInOrderRequest,
+    cb?: (error: string, rep: CreateTasksInOrderResponse) => void
+  ): Promise<CreateTasksInOrderResponse> {
+    return this.request("CreateTasksInOrder", req, cb)
   }
 
   /**

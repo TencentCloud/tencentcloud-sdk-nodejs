@@ -3395,6 +3395,11 @@ export interface AlarmHistory {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MetricsInfo: Array<AlarmHistoryMetric>;
+    /**
+      * 告警实例的维度信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Dimensions: string;
 }
 /**
  * 策略类型

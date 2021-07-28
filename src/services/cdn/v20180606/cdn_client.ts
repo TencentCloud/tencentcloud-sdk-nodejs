@@ -75,6 +75,7 @@ import {
   TopData,
   EnableCachesRequest,
   Quota,
+  CreateScdnDomainRequest,
   HeaderKey,
   DescribeBillingDataRequest,
   SimpleCache,
@@ -193,7 +194,7 @@ import {
   DescribeIpVisitRequest,
   HttpHeaderRule,
   StatusCodeCacheRule,
-  ClientCert,
+  CreateScdnDomainResponse,
   ScdnTopData,
   ScdnConfig,
   DomainLog,
@@ -220,6 +221,7 @@ import {
   StopScdnDomainResponse,
   VerifyDomainRecordRequest,
   KeyRule,
+  ClientCert,
   CappingRule,
   DeleteScdnDomainResponse,
   ListClsLogTopicsRequest,
@@ -793,6 +795,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PushUrlsCacheResponse) => void
   ): Promise<PushUrlsCacheResponse> {
     return this.request("PushUrlsCache", req, cb)
+  }
+
+  /**
+   * CreateScdnDomain 用于创建 SCDN 加速域名
+   */
+  async CreateScdnDomain(
+    req: CreateScdnDomainRequest,
+    cb?: (error: string, rep: CreateScdnDomainResponse) => void
+  ): Promise<CreateScdnDomainResponse> {
+    return this.request("CreateScdnDomain", req, cb)
   }
 
   /**

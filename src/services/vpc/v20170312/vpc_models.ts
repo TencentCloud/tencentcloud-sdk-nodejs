@@ -142,12 +142,12 @@ export interface DescribeHaVipsResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * `HAVIP`对象数组。
    */
-  HaVipSet?: Array<HaVip>
+  HaVipSet: Array<HaVip>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2536,7 +2536,7 @@ export interface AssignPrivateIpAddressesResponse {
   /**
    * 内网IP详细信息。
    */
-  PrivateIpAddressSet?: Array<PrivateIpAddressSpecification>
+  PrivateIpAddressSet: Array<PrivateIpAddressSpecification>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

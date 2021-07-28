@@ -468,6 +468,16 @@ it("cdn.v20180606.PushUrlsCache", async function () {
     }
 })
 
+it("cdn.v20180606.CreateScdnDomain", async function () {
+    try {
+       const data = await client.CreateScdnDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.UpdateImageConfig", async function () {
     try {
        const data = await client.UpdateImageConfig({})

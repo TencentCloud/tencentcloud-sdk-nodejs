@@ -478,7 +478,7 @@ export declare class Client extends AbstractClient {
      * 本接口（ModifySecurityGroupPolicies）用于重置安全组出站和入站规则（SecurityGroupPolicy）。
 
 <ul>
-<li>接口是先删除当前所有的出入站规则，然后再添加 Egress 和 Ingress 规则，不支持自定义索引 PolicyIndex。</li>
+<li>该接口不支持自定义索引 PolicyIndex。</li>
 <li>在 SecurityGroupPolicySet 参数中：<ul>
     <li> 如果指定 SecurityGroupPolicySet.Version 为0, 表示清空所有规则，并忽略 Egress 和 Ingress。</li>
     <li> 如果指定 SecurityGroupPolicySet.Version 不为0, 在添加出站和入站规则（Egress 和 Ingress）时：<ul>
@@ -629,6 +629,8 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（UnassignPrivateIpAddresses）用于弹性网卡退还内网 IP。
 * 退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
     UnassignPrivateIpAddresses(req: UnassignPrivateIpAddressesRequest, cb?: (error: string, rep: UnassignPrivateIpAddressesResponse) => void): Promise<UnassignPrivateIpAddressesResponse>;
     /**

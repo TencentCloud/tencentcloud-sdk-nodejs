@@ -287,17 +287,17 @@ export interface DescribeListBGPInstancesRequest {
     FilterLine?: number;
 }
 /**
- * SwitchWaterPrintConfig请求参数结构体
+ * 字段值，K-V形式
  */
-export interface SwitchWaterPrintConfigRequest {
+export interface KeyValue {
     /**
-      * 资源实例ID
+      * 字段名称
       */
-    InstanceId: string;
+    Key: string;
     /**
-      * 水印开启/关闭状态，1表示开启；0表示关闭
+      * 字段取值
       */
-    OpenStatus: number;
+    Value: string;
 }
 /**
  * DeleteDDoSSpeedLimitConfig请求参数结构体
@@ -335,21 +335,17 @@ export interface CreateL7RuleCertsRequest {
     L7Rules: Array<InsL7Rules>;
 }
 /**
- * DescribeListSchedulingDomain返回参数结构体
+ * DeleteDDoSGeoIPBlockConfig请求参数结构体
  */
-export interface DescribeListSchedulingDomainResponse {
+export interface DeleteDDoSGeoIPBlockConfigRequest {
     /**
-      * 总数
+      * 资源实例ID
       */
-    Total: number;
+    InstanceId: string;
     /**
-      * 调度域名信息列表
+      * DDoS区域封禁配置，填写参数时配置ID不能为空
       */
-    DomainList: Array<SchedulingDomainInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig;
 }
 /**
  * CreateIPAlarmThresholdConfig请求参数结构体
@@ -410,7 +406,7 @@ export interface DescribeListProtectThresholdConfigRequest {
       */
     FilterIp?: string;
     /**
-      * 域名搜索（查询域名与协议的CC防护阈值时使用）
+      * 域名搜索(查询域名与协议的CC防护阈值时使用）
       */
     FilterDomain?: string;
     /**
@@ -1041,6 +1037,19 @@ export interface DescribeListDDoSGeoIPBlockConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBasicDeviceStatus返回参数结构体
+ */
+export interface DescribeBasicDeviceStatusResponse {
+    /**
+      * 返回资源及状态
+      */
+    Data: Array<KeyValue>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 水印防护配置
  */
 export interface WaterPrintConfig {
@@ -1294,6 +1303,15 @@ export interface ListenerCcThreholdConfig {
       * cc防护阈值
       */
     CCThreshold: number;
+}
+/**
+ * DescribeBasicDeviceStatus请求参数结构体
+ */
+export interface DescribeBasicDeviceStatusRequest {
+    /**
+      * IP 资源列表
+      */
+    IpList: Array<string>;
 }
 /**
  * IP线路信息
@@ -1955,17 +1973,34 @@ export interface SpeedValue {
     Value: number;
 }
 /**
- * DeleteDDoSGeoIPBlockConfig请求参数结构体
+ * SwitchWaterPrintConfig请求参数结构体
  */
-export interface DeleteDDoSGeoIPBlockConfigRequest {
+export interface SwitchWaterPrintConfigRequest {
     /**
       * 资源实例ID
       */
     InstanceId: string;
     /**
-      * DDoS区域封禁配置，填写参数时配置ID不能为空
+      * 水印开启/关闭状态，1表示开启；0表示关闭
       */
-    DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig;
+    OpenStatus: number;
+}
+/**
+ * DescribeListSchedulingDomain返回参数结构体
+ */
+export interface DescribeListSchedulingDomainResponse {
+    /**
+      * 总数
+      */
+    Total: number;
+    /**
+      * 调度域名信息列表
+      */
+    DomainList: Array<SchedulingDomainInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateSchedulingDomain返回参数结构体

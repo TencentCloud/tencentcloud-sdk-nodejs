@@ -1811,7 +1811,7 @@ export interface RepairTaskControlResponse {
       * 出参TaskId是黑石异步任务ID，不同于入参TaskId字段。
 此字段可作为DescriptionOperationResult查询异步任务状态接口的入参，查询异步任务执行结果。
       */
-  TaskId?: number
+  TaskId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

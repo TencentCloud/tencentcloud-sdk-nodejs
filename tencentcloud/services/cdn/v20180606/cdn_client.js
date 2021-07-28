@@ -339,6 +339,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PushUrlsCache", req, cb);
     }
     /**
+     * CreateScdnDomain 用于创建 SCDN 加速域名
+     */
+    async CreateScdnDomain(req, cb) {
+        return this.request("CreateScdnDomain", req, cb);
+    }
+    /**
      * UpdateImageConfig 用于更新控制台图片优化的相关配置，支持Webp、TPG 和 Guetzli。
      */
     async UpdateImageConfig(req, cb) {
