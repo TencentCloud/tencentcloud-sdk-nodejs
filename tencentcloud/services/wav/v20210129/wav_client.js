@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryActivityJoinList", req, cb);
     }
     /**
+     * 该接口获取license对应的详细信息
+     */
+    async QueryLicenseInfo(req, cb) {
+        return this.request("QueryLicenseInfo", req, cb);
+    }
+    /**
      * 查询小程序码列表接口
      */
     async QueryMiniAppCodeList(req, cb) {

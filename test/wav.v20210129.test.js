@@ -118,6 +118,16 @@ it("wav.v20210129.QueryActivityJoinList", async function () {
     }
 })
 
+it("wav.v20210129.QueryLicenseInfo", async function () {
+    try {
+       const data = await client.QueryLicenseInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wav.v20210129.QueryMiniAppCodeList", async function () {
     try {
        const data = await client.QueryMiniAppCodeList({})

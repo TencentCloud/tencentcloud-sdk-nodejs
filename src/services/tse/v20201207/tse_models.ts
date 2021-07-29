@@ -131,6 +131,18 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EnvInfos: Array<EnvInfo>
+
+  /**
+      * 引擎所在的区域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EngineRegion: string
+
+  /**
+      * 注册引擎是否开启公网
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableInternet: boolean
 }
 
 /**
@@ -146,6 +158,11 @@ export interface DescribeSREInstanceAccessAddressResponse {
    * 公网访问地址
    */
   InternetAddress: string
+
+  /**
+   * apollo多环境公网ip
+   */
+  EnvAddressInfos: Array<EnvAddressInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -206,6 +223,16 @@ export interface EnvInfo {
    * Config service访问地址
    */
   ConfigServiceIp?: string
+
+  /**
+   * 是否开启config-server公网
+   */
+  EnableConfigInternet?: boolean
+
+  /**
+   * config-server公网访问地址
+   */
+  ConfigInternetServiceIp?: string
 }
 
 /**
@@ -221,6 +248,26 @@ export interface Filter {
    * 过滤参数值
    */
   Values: Array<string>
+}
+
+/**
+ * 多环境网络信息
+ */
+export interface EnvAddressInfo {
+  /**
+   * 环境名
+   */
+  EnvName: string
+
+  /**
+   * 是否开启config公网
+   */
+  EnableConfigInternet: boolean
+
+  /**
+   * config公网ip
+   */
+  ConfigInternetServiceIp: string
 }
 
 /**

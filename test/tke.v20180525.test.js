@@ -98,6 +98,16 @@ it("tke.v20180525.DescribeClusterNodePoolDetail", async function () {
     }
 })
 
+it("tke.v20180525.DescribeVpcCniPodLimits", async function () {
+    try {
+       const data = await client.DescribeVpcCniPodLimits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DeletePrometheusTemplate", async function () {
     try {
        const data = await client.DeletePrometheusTemplate({})

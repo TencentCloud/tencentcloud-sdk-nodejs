@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachWorkGroupPolicy", req, cb);
     }
     /**
-     * 本接口（CreateTask）用于创建sql查询任务。
+     * 本接口（CreateTask）用于创建sql查询任务。（推荐使用CreateTasks接口）
      */
     async CreateTask(req, cb) {
         return this.request("CreateTask", req, cb);
@@ -62,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUsers(req, cb) {
         return this.request("DescribeUsers", req, cb);
+    }
+    /**
+     * 批量创建任务
+     */
+    async CreateTasks(req, cb) {
+        return this.request("CreateTasks", req, cb);
     }
     /**
      * 该接口（DescribeScripts）用于获取所有SQL查询。
@@ -178,7 +184,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * 按顺序创建任务
+     * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
      */
     async CreateTasksInOrder(req, cb) {
         return this.request("CreateTasksInOrder", req, cb);

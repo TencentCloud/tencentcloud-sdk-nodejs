@@ -154,6 +154,54 @@ export interface QueryChatArchivingListResponse {
 }
 
 /**
+ * license相关信息
+ */
+export interface LicenseInfo {
+  /**
+   * license编号
+   */
+  License: string
+
+  /**
+   * license版本；1-基础版，2-标准版，3-增值版
+   */
+  LicenseEdition: number
+
+  /**
+   * 生效开始时间, 格式yyyy-MM-dd HH:mm:ss
+   */
+  ResourceStartTime: string
+
+  /**
+   * 生效结束时间, 格式yyyy-MM-dd HH:mm:ss
+   */
+  ResourceEndTime: string
+
+  /**
+      * 隔离截止时间, 格式yyyy-MM-dd HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolationDeadline: string
+
+  /**
+      * 资源计划销毁时间, 格式yyyy-MM-dd HH:mm:ss
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DestroyTime: string
+
+  /**
+   * 资源状态，1.正常，2.隔离，3.销毁
+   */
+  Status: number
+
+  /**
+      * 扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Extra: string
+}
+
+/**
  * QueryExternalContactDetail请求参数结构体
  */
 export interface QueryExternalContactDetailRequest {
@@ -731,6 +779,22 @@ export interface ExternalUserMappingInfo {
 }
 
 /**
+ * QueryLicenseInfo返回参数结构体
+ */
+export interface QueryLicenseInfoResponse {
+  /**
+      * license响应信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicenseInfo: LicenseInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 活动详情
  */
 export interface ActivityDetail {
@@ -1086,6 +1150,16 @@ export interface CreateChannelCodeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryLicenseInfo请求参数结构体
+ */
+export interface QueryLicenseInfoRequest {
+  /**
+   * license编号
+   */
+  License: string
 }
 
 /**

@@ -1118,11 +1118,11 @@ export interface DescribeServiceForApiAppResponse {
     RequestId?: string;
 }
 /**
- * ServiceConfig
+ * ServiceConfig配置
  */
 export interface ServiceConfig {
     /**
-      * 后端类型。启用vpc时生效，目前支持的类型为clb。
+      * 后端类型。启用vpc时生效，目前支持的类型为clb和vpc通道
       */
     Product?: string;
     /**
@@ -1377,19 +1377,21 @@ export interface ConstantParameter {
     DefaultValue?: string;
 }
 /**
- * 使用计划列表
+ * DescribeApiForApiApp请求参数结构体
  */
-export interface UsagePlansStatus {
+export interface DescribeApiForApiAppRequest {
     /**
-      * 符合条件的使用计划数量。
-注意：此字段可能返回 null，表示取不到有效值。
+      * API 所在的服务唯一 ID。
       */
-    TotalCount: number;
+    ServiceId: string;
     /**
-      * 使用计划列表。
-注意：此字段可能返回 null，表示取不到有效值。
+      * API 接口唯一 ID。
       */
-    UsagePlanStatusSet: Array<UsagePlanStatusInfo>;
+    ApiId: string;
+    /**
+      * Api所属地域
+      */
+    ApiRegion: string;
 }
 /**
  * API文档列表
@@ -2320,6 +2322,21 @@ export interface DescribeServiceRequest {
     ServiceId: string;
 }
 /**
+ * 使用计划列表
+ */
+export interface UsagePlansStatus {
+    /**
+      * 符合条件的使用计划数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 使用计划列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanStatusSet: Array<UsagePlanStatusInfo>;
+}
+/**
  * CreateUsagePlan请求参数结构体
  */
 export interface CreateUsagePlanRequest {
@@ -3184,6 +3201,10 @@ export interface CreateApiRequest {
       * 是否打开Base64编码，只有后端是scf时才会生效。
       */
     IsBase64Encoded?: boolean;
+    /**
+      * scf函数类型。当后端类型是SCF时生效。支持事件触发(EVENT)，http直通云函数(HTTP)。
+      */
+    ServiceScfFunctionType?: string;
 }
 /**
  * DescribeServiceEnvironmentStrategy请求参数结构体
@@ -4806,6 +4827,19 @@ export interface DescribeIPStrategyRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * DescribeApiForApiApp返回参数结构体
+ */
+export interface DescribeApiForApiAppResponse {
+    /**
+      * API 详情。
+      */
+    Result: ApiInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 环境限流
  */
 export interface EnvironmentStrategy {
@@ -5140,7 +5174,7 @@ export interface DesApisStatus {
       */
     IsDebugAfterCharge: boolean;
     /**
-      * API 鉴权类型。取值为SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。
+      * API 鉴权类型。取值为SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH、EIAM。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AuthType: string;

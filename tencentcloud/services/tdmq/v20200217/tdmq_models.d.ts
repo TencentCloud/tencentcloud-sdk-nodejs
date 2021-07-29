@@ -378,6 +378,10 @@ export interface CreateSubscriptionRequest {
       * 是否自动创建死信和重试主题，True 表示创建，False表示不创建，默认自动创建死信和重试主题。
       */
     AutoCreatePolicyTopic?: boolean;
+    /**
+      * 指定死信和重试主题名称规范，LEGACY表示历史命名规则，COMMUNITY表示Pulsar社区命名规范
+      */
+    PostFixPattern?: string;
 }
 /**
  * DescribeCmqTopicDetail返回参数结构体

@@ -1259,8 +1259,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (RescanImpactedHost) 用于漏洞重新检测。
-   */
+     * 该接口已废弃
+
+本接口 (RescanImpactedHost) 用于漏洞重新检测。
+     */
   async RescanImpactedHost(
     req: RescanImpactedHostRequest,
     cb?: (error: string, rep: RescanImpactedHostResponse) => void

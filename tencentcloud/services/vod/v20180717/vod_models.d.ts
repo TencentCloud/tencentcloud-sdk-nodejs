@@ -534,8 +534,17 @@ export interface AiReviewTaskProhibitedOcrResult {
 export interface AiRecognitionTaskAsrFullTextResultOutput {
     /**
       * 语音全文识别片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<AiRecognitionTaskAsrFullTextSegmentItem>;
+    /**
+      * 语音全文识别片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 语音全文识别片段列表文件 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。。
+      */
+    SegmentSetFileUrlExpireTime: string;
     /**
       * 字幕文件 Url。
       */
@@ -2030,8 +2039,17 @@ export interface ModifySuperPlayerConfigResponse {
 export interface AiRecognitionTaskOcrWordsResultOutput {
     /**
       * 文本关键词识别结果集。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 ResultSetFileUrl 对应的文件中获取。
       */
     ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>;
+    /**
+      * 文本关键词识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达ResultSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    ResultSetFileUrl: string;
+    /**
+      * 文本关键词识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ResultSetFileUrlExpireTime: string;
 }
 /**
  * 视频拼接任务信息，该结构仅用于对 2017 版[视频拼接](https://cloud.tencent.com/document/product/266/7821)接口发起的任务。
@@ -2201,8 +2219,17 @@ export interface ResourceTag {
 export interface AiRecognitionTaskOcrFullTextResultOutput {
     /**
       * 文本全文识别结果集。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<AiRecognitionTaskOcrFullTextSegmentItem>;
+    /**
+      * 文本全文识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 文本全文识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 编辑视频任务的输入。
@@ -5023,8 +5050,17 @@ export interface ModifyEventConfigRequest {
 export interface AiRecognitionTaskAsrWordsResultOutput {
     /**
       * 语音关键词识别结果集。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 ResultSetFileUrl 对应的文件中获取。
       */
     ResultSet: Array<AiRecognitionTaskAsrWordsResultItem>;
+    /**
+      * 语音关键词识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达ResultSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    ResultSetFileUrl: string;
+    /**
+      * 语音关键词识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ResultSetFileUrlExpireTime: string;
 }
 /**
  * DescribeHeadTailTemplates请求参数结构体
@@ -7289,8 +7325,17 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
 export interface AiRecognitionTaskSegmentResultOutput {
     /**
       * 视频拆条片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<AiRecognitionTaskSegmentSegmentItem>;
+    /**
+      * 视频拆条片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 视频拆条片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 视频拆条任务识别控制参数
@@ -7955,8 +8000,17 @@ export interface AiReviewTaskPornResult {
 export interface AiRecognitionTaskObjectResultOutput {
     /**
       * 智能物体识别结果集。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 ResultSetFileUrl 对应的文件中获取。
       */
     ResultSet: Array<AiRecognitionTaskObjectResultItem>;
+    /**
+      * 智能物体识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达ResultSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    ResultSetFileUrl: string;
+    /**
+      * 智能物体识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ResultSetFileUrlExpireTime: string;
 }
 /**
  * Asr 文字涉违禁信息
@@ -12216,8 +12270,17 @@ export interface FaceConfigureInfo {
 export interface AiRecognitionTaskFaceResultOutput {
     /**
       * 智能人脸识别结果集。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 ResultSetFileUrl 对应的文件中获取。
       */
     ResultSet: Array<AiRecognitionTaskFaceResultItem>;
+    /**
+      * 智能人脸识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达ResultSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    ResultSetFileUrl: string;
+    /**
+      * 智能人脸识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ResultSetFileUrlExpireTime: string;
 }
 /**
  * DeleteImageProcessingTemplate返回参数结构体

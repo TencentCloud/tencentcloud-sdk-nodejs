@@ -950,6 +950,7 @@ NotUpload：未实名认证
 InAudit：实名审核中
 Approved：实名审核通过
 Reject：实名审核失败
+NoAudit: 无需实名认证
       */
   RealNameAuditStatus: string
 

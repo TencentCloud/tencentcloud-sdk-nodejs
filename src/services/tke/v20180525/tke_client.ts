@@ -66,6 +66,8 @@ import {
   DescribePrometheusAlertRuleResponse,
   ClusterAsGroup,
   Instance,
+  LoginSettings,
+  DescribeVpcCniPodLimitsResponse,
   PrometheusAlertRuleDetail,
   UpgradeAbleInstancesItem,
   CreateClusterNodePoolFromExistingAsgRequest,
@@ -119,12 +121,13 @@ import {
   GetUpgradeInstanceProgressRequest,
   ModifyPrometheusTemplateRequest,
   AddNodeToNodePoolResponse,
+  PodLimitsByType,
   UpdateEKSClusterResponse,
   TagSpecification,
   DescribeRegionsRequest,
   DescribeClustersResponse,
   ClusterCredential,
-  LoginSettings,
+  DescribeVpcCniPodLimitsRequest,
   DescribePrometheusOverviewsRequest,
   ClusterExtraArgs,
   DescribeRouteTableConflictsRequest,
@@ -157,6 +160,7 @@ import {
   DeleteClusterAsGroupsResponse,
   DescribeClusterInstancesRequest,
   InstanceAdvancedSettings,
+  PodLimitsInstance,
   DescribePrometheusAgentsRequest,
   DescribeEnableVpcCniProgressResponse,
   AddClusterCIDRResponse,
@@ -325,6 +329,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterNodePoolDetailResponse) => void
   ): Promise<DescribeClusterNodePoolDetailResponse> {
     return this.request("DescribeClusterNodePoolDetail", req, cb)
+  }
+
+  /**
+   * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
+   */
+  async DescribeVpcCniPodLimits(
+    req: DescribeVpcCniPodLimitsRequest,
+    cb?: (error: string, rep: DescribeVpcCniPodLimitsResponse) => void
+  ): Promise<DescribeVpcCniPodLimitsResponse> {
+    return this.request("DescribeVpcCniPodLimits", req, cb)
   }
 
   /**

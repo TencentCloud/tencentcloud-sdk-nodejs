@@ -45,7 +45,7 @@ export interface DescribeDatabasesRequest {
  */
 export interface WorkGroupMessage {
   /**
-   * 工作组Id
+   * 工作组唯一Id
    */
   WorkGroupId: number
 
@@ -66,7 +66,7 @@ export interface WorkGroupMessage {
   Creator: string
 
   /**
-   * 创建时间
+   * 工作组创建的时间，形如2021-07-28 16:19:32
    */
   CreateTime: string
 }
@@ -146,7 +146,7 @@ export interface DescribeTablesResponse {
  */
 export interface WorkGroupInfo {
   /**
-   * 工作组Id
+   * 查询到的工作组唯一Id
    */
   WorkGroupId: number
 
@@ -179,12 +179,12 @@ export interface WorkGroupInfo {
   PolicySet: Array<Policy>
 
   /**
-   * 创建者
+   * 工作组的创建人
    */
   Creator: string
 
   /**
-   * 创建时间
+   * 工作组的创建时间，形如2021-07-28 16:19:32
    */
   CreateTime: string
 }
@@ -370,6 +370,21 @@ export interface ViewBaseInfo {
 }
 
 /**
+ * CreateDatabase返回参数结构体
+ */
+export interface CreateDatabaseResponse {
+  /**
+   * 生成的建库执行语句对象。
+   */
+  Execution: Execution
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTasks请求参数结构体
  */
 export interface DescribeTasksRequest {
@@ -521,7 +536,7 @@ export interface TasksInfo {
   SQL: string
 
   /**
-   * 任务的配置信息
+   * 任务的配置信息，当前仅支持SparkSQLTask任务。
    */
   Config?: Array<KVPair>
 }
@@ -661,7 +676,7 @@ export interface DescribeWorkGroupsResponse {
  */
 export interface DescribeUsersRequest {
   /**
-   * 查询的用户Id，和CAM侧Uin匹配
+   * 指定查询的子用户uin，用户需要通过CreateUser接口创建。
    */
   UserId?: string
 
@@ -780,12 +795,12 @@ view-id - String - （过滤条件）view id形如：12342。
  */
 export interface UserInfo {
   /**
-   * 用户Id，和CAM侧Uin匹配
+   * 用户Id，和子用户uin相同
    */
   UserId: string
 
   /**
-      * 用户描述
+      * 用户描述信息，方便区分不同用户
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UserDescription: string
@@ -797,12 +812,12 @@ export interface UserInfo {
   PolicySet: Array<Policy>
 
   /**
-   * 创建者
+   * 当前用户的创建者
    */
   Creator: string
 
   /**
-   * 创建时间
+   * 创建时间，格式如2021-07-28 16:19:32
    */
   CreateTime: string
 
@@ -844,7 +859,7 @@ export interface ModifyWorkGroupResponse {
  */
 export interface AttachUserPolicyRequest {
   /**
-   * 用户Id，和CAM侧Uin匹配
+   * 用户Id，和子用户uin相同，需要先使用CreateUser接口创建用户。可以使用DescribeUsers接口查看。
    */
   UserId: string
 
@@ -1104,12 +1119,12 @@ export interface Filter {
  */
 export interface DescribeUsersResponse {
   /**
-   * 用户总数
+   * 查询到的用户总数
    */
   TotalCount: number
 
   /**
-   * 用户集合
+   * 查询到的授权用户信息集合
    */
   UserSet: Array<UserInfo>
 
@@ -1197,12 +1212,12 @@ export interface ViewResponseInfo {
  */
 export interface CreateUserRequest {
   /**
-   * 用户Id，当前主账号的子账号Uin，和CAM侧匹配
+   * 需要授权的子用户uin，可以通过腾讯云控制台右上角 → “账号信息” → “账号ID进行查看”。
    */
   UserId: string
 
   /**
-   * 用户描述
+   * 用户描述信息，方便区分不同用户
    */
   UserDescription?: string
 
@@ -1453,24 +1468,44 @@ export interface DeleteUsersFromWorkGroupRequest {
  */
 export interface Policy {
   /**
-   * 需要授权的数据源名称，*代表拥有全部数据源权限
+   * 需要授权的数据源名称，当前仅支持COSDataCatalog或者*
    */
   Catalog: string
 
   /**
-   * 需要授权的数据库名称，*代表拥有全部数据库名称
+   * 需要授权的数据库名，填*代表当前Catalog下所有数据库
    */
   Database: string
 
   /**
-   * 需要授权的表名称，*代表拥有全部表权限
+   * 需要授权的表名，填*代表当前Database下所有表
    */
   Table: string
 
   /**
-   * 授权的操作，当前只支持“ALL”
+   * 授权粒度，当前只支持ALL，即全部权限
    */
   Operation: string
+}
+
+/**
+ * CreateTasks请求参数结构体
+ */
+export interface CreateTasksRequest {
+  /**
+   * 数据库名称。如果SQL语句中有数据库名称，优先使用SQL语句中的数据库，否则使用该参数指定的数据库。
+   */
+  DatabaseName: string
+
+  /**
+   * SQL任务信息
+   */
+  Tasks: TasksInfo
+
+  /**
+   * 数据源名称，默认为COSDataCatalog
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -1494,7 +1529,7 @@ export interface CreateTaskResponse {
  */
 export interface DescribeWorkGroupsRequest {
   /**
-   * 查询的工作组Id
+   * 查询的工作组Id，不填或填0表示不过滤。
    */
   WorkGroupId?: number
 
@@ -1612,13 +1647,18 @@ export interface DetachUserPolicyResponse {
 }
 
 /**
- * CreateDatabase返回参数结构体
+ * CreateTasks返回参数结构体
  */
-export interface CreateDatabaseResponse {
+export interface CreateTasksResponse {
   /**
-   * 生成的建库执行语句对象。
+   * 本批次提交的任务的批次Id
    */
-  Execution: Execution
+  BatchId: string
+
+  /**
+   * 任务Id集合，按照执行顺序排列
+   */
+  TaskIdSet: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1676,7 +1716,7 @@ export interface SQLTask {
  */
 export interface UserMessage {
   /**
-   * 用户Id，和CAM侧Uin匹配
+   * 用户Id，和CAM侧子用户Uin匹配
    */
   UserId: string
 
@@ -1687,12 +1727,12 @@ export interface UserMessage {
   UserDescription: string
 
   /**
-   * 创建者
+   * 当前用户的创建者
    */
   Creator: string
 
   /**
-   * 创建时间
+   * 当前用户的创建时间，形如2021-07-28 16:19:32
    */
   CreateTime: string
 }

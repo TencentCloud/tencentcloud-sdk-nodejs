@@ -2837,11 +2837,11 @@ export interface DescribeAssistantCidrResponse {
       * 符合条件的辅助CIDR数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AssistantCidrSet?: Array<AssistantCidr>;
+    AssistantCidrSet: Array<AssistantCidr>;
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5226,7 +5226,7 @@ export interface DescribeAssistantCidrRequest {
       */
     VpcIds?: Array<string>;
     /**
-      * 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。
+      * 过滤条件，参数不支持同时指定VpcIds和Filters。
 <li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
       */
     Filters?: Array<Filter>;
@@ -5794,6 +5794,16 @@ export interface CcnAttachedInstance {
       * 备注
       */
     Description: string;
+    /**
+      * 路由表ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableId: string;
+    /**
+      * 路由表名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableName: string;
 }
 /**
  * SecurityPolicyDatabase策略
@@ -6815,6 +6825,11 @@ export interface CcnInstance {
       * 备注
       */
     Description?: string;
+    /**
+      * 实例关联的路由表ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableId?: string;
 }
 /**
  * DescribeLocalGateway返回参数结构体
@@ -8568,6 +8583,16 @@ export interface CCN {
       * 是否支持云联网路由优先级的功能。False：不支持，True：支持。
       */
     RoutePriorityFlag: boolean;
+    /**
+      * 实例关联的路由表个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableCount: number;
+    /**
+      * 是否开启云联网多路由表特性。False：未开启，True：开启。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableFlag: boolean;
 }
 /**
  * InquirePriceCreateDirectConnectGateway返回参数结构体

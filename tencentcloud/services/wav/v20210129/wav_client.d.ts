@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryExternalContactListRequest, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryActivityListResponse, QueryActivityJoinListRequest, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, CreateCorpTagRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryExternalUserMappingInfoRequest, QueryChannelCodeListResponse } from "./wav_models";
+import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryExternalContactListRequest, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryLicenseInfoResponse, QueryActivityListResponse, QueryActivityJoinListRequest, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, CreateCorpTagRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryExternalUserMappingInfoRequest, QueryChannelCodeListResponse } from "./wav_models";
 /**
  * wav client
  * @class
@@ -47,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 根据游标拉取活动参与列表信息
      */
     QueryActivityJoinList(req: QueryActivityJoinListRequest, cb?: (error: string, rep: QueryActivityJoinListResponse) => void): Promise<QueryActivityJoinListResponse>;
+    /**
+     * 该接口获取license对应的详细信息
+     */
+    QueryLicenseInfo(req: QueryLicenseInfoRequest, cb?: (error: string, rep: QueryLicenseInfoResponse) => void): Promise<QueryLicenseInfoResponse>;
     /**
      * 查询小程序码列表接口
      */

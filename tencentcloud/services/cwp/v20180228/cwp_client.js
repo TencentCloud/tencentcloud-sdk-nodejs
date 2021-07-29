@@ -612,7 +612,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMachine", req, cb);
     }
     /**
-     * 本接口 (RescanImpactedHost) 用于漏洞重新检测。
+     * 该接口已废弃
+
+本接口 (RescanImpactedHost) 用于漏洞重新检测。
      */
     async RescanImpactedHost(req, cb) {
         return this.request("RescanImpactedHost", req, cb);

@@ -2456,7 +2456,7 @@ export interface DeviceInfo {
       */
     DevicePsk: string;
     /**
-      * 设备启用状态
+      * 设备启用状态 0为停用 1为可用
       */
     EnableState: number;
     /**

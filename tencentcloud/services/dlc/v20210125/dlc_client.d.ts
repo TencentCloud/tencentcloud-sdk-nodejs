@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDatabasesRequest, DeleteUserRequest, CreateStoreLocationResponse, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DeleteWorkGroupResponse, DescribeTasksResponse, CreateTasksInOrderRequest, DetachWorkGroupPolicyResponse, CreateDatabaseRequest, DescribeTasksRequest, DeleteWorkGroupRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, CreateStoreLocationRequest, CreateTaskRequest, CreateTableRequest, DescribeWorkGroupsResponse, DescribeUsersRequest, DescribeScriptsRequest, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, DescribeViewsRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, AttachUserPolicyRequest, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeUsersResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, CreateWorkGroupResponse, DescribeTablesRequest, DescribeDatabasesResponse, UnbindWorkGroupsFromUserRequest, DescribeTableRequest, DeleteUsersFromWorkGroupRequest, CreateTaskResponse, DescribeWorkGroupsRequest, DescribeTableResponse, AddUsersToWorkGroupResponse, DetachUserPolicyResponse, CreateDatabaseResponse, UnbindWorkGroupsFromUserResponse, CreateWorkGroupRequest, AttachUserPolicyResponse, DescribeScriptsResponse, DetachWorkGroupPolicyRequest, DescribeViewsResponse, ModifyUserRequest } from "./dlc_models";
+import { DescribeDatabasesRequest, DeleteUserRequest, CreateStoreLocationResponse, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DeleteWorkGroupResponse, DescribeTasksResponse, CreateTasksInOrderRequest, DetachWorkGroupPolicyResponse, CreateDatabaseRequest, CreateDatabaseResponse, DescribeTasksRequest, DeleteWorkGroupRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, CreateStoreLocationRequest, CreateTaskRequest, CreateTableRequest, DescribeWorkGroupsResponse, DescribeUsersRequest, DescribeScriptsRequest, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, DescribeViewsRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, AttachUserPolicyRequest, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeUsersResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, CreateWorkGroupResponse, DescribeTablesRequest, DescribeDatabasesResponse, UnbindWorkGroupsFromUserRequest, DescribeTableRequest, DeleteUsersFromWorkGroupRequest, CreateTasksRequest, CreateTaskResponse, DescribeWorkGroupsRequest, DescribeTableResponse, AddUsersToWorkGroupResponse, DetachUserPolicyResponse, CreateTasksResponse, UnbindWorkGroupsFromUserResponse, CreateWorkGroupRequest, AttachUserPolicyResponse, DescribeScriptsResponse, DetachWorkGroupPolicyRequest, DescribeViewsResponse, ModifyUserRequest } from "./dlc_models";
 /**
  * dlc client
  * @class
@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     DetachWorkGroupPolicy(req: DetachWorkGroupPolicyRequest, cb?: (error: string, rep: DetachWorkGroupPolicyResponse) => void): Promise<DetachWorkGroupPolicyResponse>;
     /**
-     * 本接口（CreateTask）用于创建sql查询任务。
+     * 本接口（CreateTask）用于创建sql查询任务。（推荐使用CreateTasks接口）
      */
     CreateTask(req: CreateTaskRequest, cb?: (error: string, rep: CreateTaskResponse) => void): Promise<CreateTaskResponse>;
     /**
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 获取用户列表信息
      */
     DescribeUsers(req: DescribeUsersRequest, cb?: (error: string, rep: DescribeUsersResponse) => void): Promise<DescribeUsersResponse>;
+    /**
+     * 批量创建任务
+     */
+    CreateTasks(req: CreateTasksRequest, cb?: (error: string, rep: CreateTasksResponse) => void): Promise<CreateTasksResponse>;
     /**
      * 该接口（DescribeScripts）用于获取所有SQL查询。
      */
@@ -108,7 +112,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
-     * 按顺序创建任务
+     * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
      */
     CreateTasksInOrder(req: CreateTasksInOrderRequest, cb?: (error: string, rep: CreateTasksInOrderResponse) => void): Promise<CreateTasksInOrderResponse>;
     /**

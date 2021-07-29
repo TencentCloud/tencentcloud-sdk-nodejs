@@ -398,7 +398,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteMachine(req: DeleteMachineRequest, cb?: (error: string, rep: DeleteMachineResponse) => void): Promise<DeleteMachineResponse>;
     /**
-     * 本接口 (RescanImpactedHost) 用于漏洞重新检测。
+     * 该接口已废弃
+
+本接口 (RescanImpactedHost) 用于漏洞重新检测。
      */
     RescanImpactedHost(req: RescanImpactedHostRequest, cb?: (error: string, rep: RescanImpactedHostResponse) => void): Promise<RescanImpactedHostResponse>;
     /**

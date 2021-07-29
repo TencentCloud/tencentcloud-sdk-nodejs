@@ -24,6 +24,7 @@ import {
   DescribeSREInstancesResponse,
   EnvInfo,
   Filter,
+  EnvAddressInfo,
   VpcInfo,
   DescribeSREInstanceAccessAddressRequest,
 } from "./tse_models"
@@ -38,7 +39,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询微服务注册引擎实例访问地址
+   * 查询引擎实例访问地址
    */
   async DescribeSREInstanceAccessAddress(
     req: DescribeSREInstanceAccessAddressRequest,
@@ -48,7 +49,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询微服务引擎实例列表
+   * 用于查询引擎实例列表
    */
   async DescribeSREInstances(
     req: DescribeSREInstancesRequest,

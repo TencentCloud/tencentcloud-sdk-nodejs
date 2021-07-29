@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterNodePoolDetail", req, cb);
     }
     /**
+     * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
+     */
+    async DescribeVpcCniPodLimits(req, cb) {
+        return this.request("DescribeVpcCniPodLimits", req, cb);
+    }
+    /**
      * 删除一个云原生Prometheus配置模板
      */
     async DeletePrometheusTemplate(req, cb) {

@@ -1315,6 +1315,51 @@ export interface Instance {
 }
 
 /**
+ * 描述了实例登录相关配置与信息。
+ */
+export interface LoginSettings {
+  /**
+      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password?: string
+
+  /**
+      * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyIds?: Array<string>
+
+  /**
+      * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeepImageLogin?: string
+}
+
+/**
+ * DescribeVpcCniPodLimits返回参数结构体
+ */
+export interface DescribeVpcCniPodLimitsResponse {
+  /**
+      * 机型数据数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 机型信息及其可支持的最大VPC-CNI模式Pod数量信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodLimitsInstanceSet: Array<PodLimitsInstance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 托管prometheus告警配置实例
  */
 export interface PrometheusAlertRuleDetail {
@@ -2553,6 +2598,29 @@ export interface AddNodeToNodePoolResponse {
 }
 
 /**
+ * 某机型可支持的最大 VPC-CNI 模式的 Pod 数量
+ */
+export interface PodLimitsByType {
+  /**
+      * TKE共享网卡非固定IP模式可支持的Pod数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TKERouteENINonStaticIP: number
+
+  /**
+      * TKE共享网卡固定IP模式可支持的Pod数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TKERouteENIStaticIP: number
+
+  /**
+      * TKE独立网卡模式可支持的Pod数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TKEDirectENI: number
+}
+
+/**
  * UpdateEKSCluster返回参数结构体
  */
 export interface UpdateEKSClusterResponse {
@@ -2620,26 +2688,23 @@ export interface ClusterCredential {
 }
 
 /**
- * 描述了实例登录相关配置与信息。
+ * DescribeVpcCniPodLimits请求参数结构体
  */
-export interface LoginSettings {
+export interface DescribeVpcCniPodLimitsRequest {
   /**
-      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Password?: string
+   * 查询的机型所在可用区，如：ap-guangzhou-3，默认为空，即不按可用区过滤信息
+   */
+  Zone?: string
 
   /**
-      * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KeyIds?: Array<string>
+   * 查询的实例机型系列信息，如：S5，默认为空，即不按机型系列过滤信息
+   */
+  InstanceFamily?: string
 
   /**
-      * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KeepImageLogin?: string
+   * 查询的实例机型信息，如：S5.LARGE8，默认为空，即不按机型过滤信息
+   */
+  InstanceType?: string
 }
 
 /**
@@ -3376,6 +3441,35 @@ export interface InstanceAdvancedSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DesiredPodNumber: number
+}
+
+/**
+ * 机型信息和其可支持的最大VPC-CNI模式Pod数量信息
+ */
+export interface PodLimitsInstance {
+  /**
+      * 机型所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
+
+  /**
+      * 机型所属机型族
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceFamily: string
+
+  /**
+      * 实例机型名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: string
+
+  /**
+      * 机型可支持的最大VPC-CNI模式Pod数量信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodLimits: PodLimitsByType
 }
 
 /**

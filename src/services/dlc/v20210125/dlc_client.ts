@@ -38,6 +38,7 @@ import {
   CreateDatabaseRequest,
   UserIdSetOfWorkGroupId,
   ViewBaseInfo,
+  CreateDatabaseResponse,
   DescribeTasksRequest,
   Script,
   DeleteWorkGroupRequest,
@@ -93,13 +94,14 @@ import {
   CSV,
   DeleteUsersFromWorkGroupRequest,
   Policy,
+  CreateTasksRequest,
   CreateTaskResponse,
   DescribeWorkGroupsRequest,
   DescribeTableResponse,
   TableResponseInfo,
   AddUsersToWorkGroupResponse,
   DetachUserPolicyResponse,
-  CreateDatabaseResponse,
+  CreateTasksResponse,
   UnbindWorkGroupsFromUserResponse,
   CreateWorkGroupRequest,
   SQLTask,
@@ -132,7 +134,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateTask）用于创建sql查询任务。
+   * 本接口（CreateTask）用于创建sql查询任务。（推荐使用CreateTasks接口）
    */
   async CreateTask(
     req: CreateTaskRequest,
@@ -179,6 +181,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUsersResponse) => void
   ): Promise<DescribeUsersResponse> {
     return this.request("DescribeUsers", req, cb)
+  }
+
+  /**
+   * 批量创建任务
+   */
+  async CreateTasks(
+    req: CreateTasksRequest,
+    cb?: (error: string, rep: CreateTasksResponse) => void
+  ): Promise<CreateTasksResponse> {
+    return this.request("CreateTasks", req, cb)
   }
 
   /**
@@ -372,7 +384,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按顺序创建任务
+   * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
    */
   async CreateTasksInOrder(
     req: CreateTasksInOrderRequest,

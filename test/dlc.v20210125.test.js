@@ -78,6 +78,16 @@ it("dlc.v20210125.DescribeUsers", async function () {
     }
 })
 
+it("dlc.v20210125.CreateTasks", async function () {
+    try {
+       const data = await client.CreateTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeScripts", async function () {
     try {
        const data = await client.DescribeScripts({})

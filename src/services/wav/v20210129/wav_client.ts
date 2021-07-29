@@ -21,6 +21,7 @@ import {
   ActivityJoinDetail,
   CreateCorpTagResponse,
   QueryChatArchivingListResponse,
+  LicenseInfo,
   QueryExternalContactDetailRequest,
   QueryExternalUserMappingInfoResponse,
   ChannelCodeInnerDetail,
@@ -39,6 +40,7 @@ import {
   QueryActivityLiveCodeListResponse,
   QueryActivityJoinListResponse,
   ExternalUserMappingInfo,
+  QueryLicenseInfoResponse,
   ActivityDetail,
   ExternalContactTag,
   ChatArchivingDetail,
@@ -51,6 +53,7 @@ import {
   CreateCorpTagRequest,
   QueryMiniAppCodeListResponse,
   CreateChannelCodeResponse,
+  QueryLicenseInfoRequest,
   QueryActivityListRequest,
   QueryMiniAppCodeListRequest,
   QueryChatArchivingListRequest,
@@ -165,6 +168,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryActivityJoinListResponse) => void
   ): Promise<QueryActivityJoinListResponse> {
     return this.request("QueryActivityJoinList", req, cb)
+  }
+
+  /**
+   * 该接口获取license对应的详细信息
+   */
+  async QueryLicenseInfo(
+    req: QueryLicenseInfoRequest,
+    cb?: (error: string, rep: QueryLicenseInfoResponse) => void
+  ): Promise<QueryLicenseInfoResponse> {
+    return this.request("QueryLicenseInfo", req, cb)
   }
 
   /**

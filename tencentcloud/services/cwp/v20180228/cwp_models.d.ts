@@ -2253,6 +2253,10 @@ export interface Place {
       * 国家ID，暂只支持国内：1。
       */
     CountryId: number;
+    /**
+      * 位置名称
+      */
+    Location?: string;
 }
 /**
  * DescribeMachineRegions请求参数结构体
