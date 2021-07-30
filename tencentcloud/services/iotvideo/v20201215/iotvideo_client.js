@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TransferCloudStorage", req, cb);
     }
     /**
+     * 更新设备日志级别
+     */
+    async ModifyDeviceLogLevel(req, cb) {
+        return this.request("ModifyDeviceLogLevel", req, cb);
+    }
+    /**
      * 发起AI推理请求
      */
     async CreateAIDetection(req, cb) {
@@ -92,6 +98,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAIModels(req, cb) {
         return this.request("DescribeAIModels", req, cb);
+    }
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件信息
+     */
+    async UploadFirmware(req, cb) {
+        return this.request("UploadFirmware", req, cb);
     }
     /**
      * 用户AI模型申请记录
@@ -124,16 +136,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDevice", req, cb);
     }
     /**
-     * 修改转发规则
+     * 拉取云存用户列表
      */
-    async ModifyForwardRule(req, cb) {
-        return this.request("ModifyForwardRule", req, cb);
+    async DescribeCloudStorageUsers(req, cb) {
+        return this.request("DescribeCloudStorageUsers", req, cb);
     }
     /**
      * 取消AI模型申请
      */
     async CancelAIModelApplication(req, cb) {
         return this.request("CancelAIModelApplication", req, cb);
+    }
+    /**
+     * 修改数据转发
+     */
+    async ModifyDataForward(req, cb) {
+        return this.request("ModifyDataForward", req, cb);
     }
     /**
      * 获取设备云存服务详情
@@ -190,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteForwardRule", req, cb);
     }
     /**
+     * 继承云存用户
+     */
+    async InheritCloudStorageUser(req, cb) {
+        return this.request("InheritCloudStorageUser", req, cb);
+    }
+    /**
      * 创建批次
      */
     async CreateBatch(req, cb) {
@@ -218,6 +242,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetFirmwareURL(req, cb) {
         return this.request("GetFirmwareURL", req, cb);
+    }
+    /**
+     * 修改转发规则
+     */
+    async ModifyForwardRule(req, cb) {
+        return this.request("ModifyForwardRule", req, cb);
     }
     /**
      * 删除设备
@@ -280,16 +310,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteProduct", req, cb);
     }
     /**
-     * 上报活跃设备
+     * 获取设备sdk日志
      */
-    async ReportAliveDevice(req, cb) {
-        return this.request("ReportAliveDevice", req, cb);
+    async DescribeSDKLog(req, cb) {
+        return this.request("DescribeSDKLog", req, cb);
     }
     /**
      * 获取设备的历史事件
      */
     async DescribeDeviceEventHistory(req, cb) {
         return this.request("DescribeDeviceEventHistory", req, cb);
+    }
+    /**
+     * 设置数据转发状态
+     */
+    async ModifyDataForwardStatus(req, cb) {
+        return this.request("ModifyDataForwardStatus", req, cb);
     }
     /**
      * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
@@ -310,10 +346,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImportModelDefinition", req, cb);
     }
     /**
-     * 本接口（UploadFirmware）用于上传设备固件信息
+     * 上报活跃设备
      */
-    async UploadFirmware(req, cb) {
-        return this.request("UploadFirmware", req, cb);
+    async ReportAliveDevice(req, cb) {
+        return this.request("ReportAliveDevice", req, cb);
     }
     /**
      * 重置云存服务
@@ -322,10 +358,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetCloudStorage", req, cb);
     }
     /**
+     * 获取设备上下线日志
+     */
+    async DescribeDeviceStatusLog(req, cb) {
+        return this.request("DescribeDeviceStatusLog", req, cb);
+    }
+    /**
      * 拉取云存事件列表
      */
     async DescribeCloudStorageEvents(req, cb) {
         return this.request("DescribeCloudStorageEvents", req, cb);
+    }
+    /**
+     * 创建数据转发
+     */
+    async CreateDataForward(req, cb) {
+        return this.request("CreateDataForward", req, cb);
     }
     /**
      * 本接口用于查询固件升级任务的设备列表
@@ -344,6 +392,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAIModelChannel(req, cb) {
         return this.request("DescribeAIModelChannel", req, cb);
+    }
+    /**
+     * 获取数据转发列表
+     */
+    async DescribeDataForwardList(req, cb) {
+        return this.request("DescribeDataForwardList", req, cb);
     }
     /**
      * 获取某一天云存时间轴
@@ -382,10 +436,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyAIModel", req, cb);
     }
     /**
-     * 查询账户余额
+     * 绑定云存用户
      */
-    async DescribeBalance(req, cb) {
-        return this.request("DescribeBalance", req, cb);
+    async BindCloudStorageUser(req, cb) {
+        return this.request("BindCloudStorageUser", req, cb);
     }
     /**
      * 获取设备列表
@@ -422,6 +476,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudStorageThumbnail(req, cb) {
         return this.request("DescribeCloudStorageThumbnail", req, cb);
+    }
+    /**
+     * 查询账户余额
+     */
+    async DescribeBalance(req, cb) {
+        return this.request("DescribeBalance", req, cb);
+    }
+    /**
+     * 设备唤醒
+     */
+    async WakeUpDevice(req, cb) {
+        return this.request("WakeUpDevice", req, cb);
     }
 }
 exports.Client = Client;

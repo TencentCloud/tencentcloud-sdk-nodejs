@@ -5987,6 +5987,16 @@ export interface MediaProcessTaskTranscodeResult {
    * 转码进度，取值范围 [0-100] 。
    */
   Progress: number
+
+  /**
+   * 转码任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  BeginProcessTime: string
+
+  /**
+   * 转码任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  FinishTime: string
 }
 
 /**
@@ -8888,8 +8898,8 @@ export interface MediaBasicInfo {
 
   /**
       * 媒体文件的存储类别：
-<li>STANDARD：标准存储。</li>
-<li>STANDARD_IA：低频存储。</li>
+<li> STANDARD：标准存储。</li>
+<li> STANDARD_IA：低频存储。</li>
       */
   StorageClass: string
 }

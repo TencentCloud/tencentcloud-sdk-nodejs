@@ -40,5 +40,11 @@ class Client extends abstract_client_1.AbstractClient {
     async CreateWeappQRUrl(req, cb) {
         return this.request("CreateWeappQRUrl", req, cb);
     }
+    /**
+     * 获取实名认证信息
+     */
+    async DescribeGetAuthInfo(req, cb) {
+        return this.request("DescribeGetAuthInfo", req, cb);
+    }
 }
 exports.Client = Client;

@@ -18,10 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  SyncIcpOrderWebInfoRequest,
+  DescribeGetAuthInfoResponse,
   SyncIcpOrderWebInfoResponse,
+  SyncIcpOrderWebInfoRequest,
   CreateWeappQRUrlRequest,
   CreateWeappQRUrlResponse,
+  DescribeGetAuthInfoRequest,
 } from "./ba_models"
 
 /**
@@ -52,5 +54,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWeappQRUrlResponse) => void
   ): Promise<CreateWeappQRUrlResponse> {
     return this.request("CreateWeappQRUrl", req, cb)
+  }
+
+  /**
+   * 获取实名认证信息
+   */
+  async DescribeGetAuthInfo(
+    req?: DescribeGetAuthInfoRequest,
+    cb?: (error: string, rep: DescribeGetAuthInfoResponse) => void
+  ): Promise<DescribeGetAuthInfoResponse> {
+    return this.request("DescribeGetAuthInfo", req, cb)
   }
 }

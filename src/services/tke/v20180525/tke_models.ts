@@ -124,6 +124,21 @@ export interface DescribeClusterSecurityRequest {
 }
 
 /**
+ * ModifyPrometheusAlertRule请求参数结构体
+ */
+export interface ModifyPrometheusAlertRuleRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 告警配置
+   */
+  AlertRule: PrometheusAlertRuleDetail
+}
+
+/**
  * DeleteClusterInstances返回参数结构体
  */
 export interface DeleteClusterInstancesResponse {
@@ -308,18 +323,18 @@ export interface AutoscalingAdded {
 }
 
 /**
- * DescribePrometheusTemplateSync返回参数结构体
+ * CreatePrometheusAlertRule请求参数结构体
  */
-export interface DescribePrometheusTemplateSyncResponse {
+export interface CreatePrometheusAlertRuleRequest {
   /**
-   * 同步目标详情
+   * 实例id
    */
-  Targets?: Array<PrometheusTemplateSyncTarget>
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 告警配置
    */
-  RequestId?: string
+  AlertRule: PrometheusAlertRuleDetail
 }
 
 /**
@@ -1173,6 +1188,16 @@ ID 按templateId过滤
 }
 
 /**
+ * ModifyPrometheusAlertRule返回参数结构体
+ */
+export interface ModifyPrometheusAlertRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddNodeToNodePool请求参数结构体
  */
 export interface AddNodeToNodePoolRequest {
@@ -1209,12 +1234,12 @@ export interface DescribePrometheusAlertRuleResponse {
   /**
    * 告警详情
    */
-  AlertRules?: Array<PrometheusAlertRuleDetail>
+  AlertRules: Array<PrometheusAlertRuleDetail>
 
   /**
    * 总数
    */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1778,44 +1803,33 @@ export interface ExtensionAddon {
 }
 
 /**
- * 地域属性信息
+ * DeletePrometheusAlertRule请求参数结构体
  */
-export interface RegionInstance {
+export interface DeletePrometheusAlertRuleRequest {
   /**
-      * 地域名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RegionName: string
+   * 实例id
+   */
+  InstanceId: string
 
   /**
-      * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RegionId: number
+   * 告警规则id列表
+   */
+  AlertIds: Array<string>
+}
+
+/**
+ * DescribePrometheusTemplateSync返回参数结构体
+ */
+export interface DescribePrometheusTemplateSyncResponse {
+  /**
+   * 同步目标详情
+   */
+  Targets?: Array<PrometheusTemplateSyncTarget>
 
   /**
-      * 地域状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 地域特性开关(按照JSON的形式返回所有属性)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FeatureGates: string
-
-  /**
-      * 地域简称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Alias: string
-
-  /**
-      * 地域白名单
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Remark: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2631,20 +2645,14 @@ export interface UpdateEKSClusterResponse {
 }
 
 /**
- * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ * 节点自定义参数
  */
-export interface TagSpecification {
+export interface InstanceExtraArgs {
   /**
-      * 标签绑定的资源类型，当前支持类型："cluster"
+      * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResourceType?: string
-
-  /**
-      * 标签对列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags?: Array<Tag>
+  Kubelet?: Array<string>
 }
 
 /**
@@ -2935,6 +2943,21 @@ export interface DescribeEKSClustersRequest {
    * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * CreatePrometheusAlertRule返回参数结构体
+ */
+export interface CreatePrometheusAlertRuleResponse {
+  /**
+   * 告警id
+   */
+  Id: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3310,14 +3333,13 @@ export interface CreateClusterRequest {
 }
 
 /**
- * 节点自定义参数
+ * DeletePrometheusAlertRule返回参数结构体
  */
-export interface InstanceExtraArgs {
+export interface DeletePrometheusAlertRuleResponse {
   /**
-      * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Kubelet?: Array<string>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3358,6 +3380,16 @@ export interface DeleteClusterAsGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePrometheusInstance请求参数结构体
+ */
+export interface DescribePrometheusInstanceRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
 }
 
 /**
@@ -3441,6 +3473,47 @@ export interface InstanceAdvancedSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DesiredPodNumber: number
+}
+
+/**
+ * 地域属性信息
+ */
+export interface RegionInstance {
+  /**
+      * 地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionName: string
+
+  /**
+      * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionId: number
+
+  /**
+      * 地域状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 地域特性开关(按照JSON的形式返回所有属性)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FeatureGates: string
+
+  /**
+      * 地域简称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Alias: string
+
+  /**
+      * 地域白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
 }
 
 /**
@@ -3877,6 +3950,36 @@ export interface DescribePrometheusTemplateSyncRequest {
 }
 
 /**
+ * UpdateClusterVersion请求参数结构体
+ */
+export interface UpdateClusterVersionRequest {
+  /**
+   * 集群 Id
+   */
+  ClusterId: string
+
+  /**
+   * 需要升级到的版本
+   */
+  DstVersion: string
+
+  /**
+   * 集群自定义参数
+   */
+  ExtraArgs?: ClusterExtraArgs
+
+  /**
+   * 可容忍的最大不可用pod数目
+   */
+  MaxNotReadyPercent?: number
+
+  /**
+   * 是否跳过预检查阶段
+   */
+  SkipPreCheck?: boolean
+}
+
+/**
  * DeleteClusterEndpointVip请求参数结构体
  */
 export interface DeleteClusterEndpointVipRequest {
@@ -4233,6 +4336,58 @@ export interface PrometheusJobTargets {
  * ModifyClusterAsGroupOptionAttribute返回参数结构体
  */
 export interface ModifyClusterAsGroupOptionAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePrometheusInstance返回参数结构体
+ */
+export interface DescribePrometheusInstanceResponse {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  Name: string
+
+  /**
+   * 私有网络id
+   */
+  VpcId: string
+
+  /**
+   * 子网id
+   */
+  SubnetId: string
+
+  /**
+   * cos桶名称
+   */
+  COSBucket: string
+
+  /**
+   * 数据查询地址
+   */
+  QueryAddress: string
+
+  /**
+      * 实例中grafana相关的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Grafana: PrometheusGrafanaInfo
+
+  /**
+      * 用户自定义alertmanager
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertManagerUrl: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4760,6 +4915,23 @@ export interface DescribeAvailableClusterVersionResponse {
 }
 
 /**
+ * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ */
+export interface TagSpecification {
+  /**
+      * 标签绑定的资源类型，当前支持类型："cluster"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType?: string
+
+  /**
+      * 标签对列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags?: Array<Tag>
+}
+
+/**
  * DescribeClusterRouteTables返回参数结构体
  */
 export interface DescribeClusterRouteTablesResponse {
@@ -5153,33 +5325,36 @@ export interface ModifyClusterAsGroupAttributeRequest {
 }
 
 /**
- * UpdateClusterVersion请求参数结构体
+ * 托管prometheus中grafana的信息
  */
-export interface UpdateClusterVersionRequest {
+export interface PrometheusGrafanaInfo {
   /**
-   * 集群 Id
+   * 是否启用
    */
-  ClusterId: string
+  Enabled: boolean
 
   /**
-   * 需要升级到的版本
+   * 域名，只有开启外网访问才有效果
    */
-  DstVersion: string
+  Domain: string
 
   /**
-   * 集群自定义参数
+   * 内网地址，或者外网地址
    */
-  ExtraArgs?: ClusterExtraArgs
+  Address: string
 
   /**
-   * 可容忍的最大不可用pod数目
-   */
-  MaxNotReadyPercent?: number
+      * 是否开启了外网访问
+close = 未开启外网访问
+opening = 正在开启外网访问
+open  = 已开启外网访问
+      */
+  Internet: string
 
   /**
-   * 是否跳过预检查阶段
+   * grafana管理员用户名
    */
-  SkipPreCheck?: boolean
+  AdminUser: string
 }
 
 /**

@@ -72,6 +72,7 @@ import {
   DeleteWxGatewayRouteRequest,
   DescribeEnvPostpaidDeductRequest,
   DescribeExtraPkgBillingInfoRequest,
+  BindEnvGatewayResponse,
   DescribeWxCloudBaseRunSubNetsResponse,
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
@@ -133,6 +134,7 @@ import {
   DescribeSmsQuotasResponse,
   DescribeWxCloudBaseRunEnvsRequest,
   CloudBaseRunImageSecretInfo,
+  BindEnvGatewayRequest,
   ModifyEnvResponse,
   DescribeDownloadFileResponse,
   DescribeQuotaDataRequest,
@@ -236,13 +238,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取终端用户列表
+   * 绑定另外一个环境下的网关，callContainer请求可以访问到该网关
    */
-  async DescribeEndUsers(
-    req: DescribeEndUsersRequest,
-    cb?: (error: string, rep: DescribeEndUsersResponse) => void
-  ): Promise<DescribeEndUsersResponse> {
-    return this.request("DescribeEndUsers", req, cb)
+  async BindEnvGateway(
+    req: BindEnvGatewayRequest,
+    cb?: (error: string, rep: BindEnvGatewayResponse) => void
+  ): Promise<BindEnvGatewayResponse> {
+    return this.request("BindEnvGateway", req, cb)
   }
 
   /**
@@ -309,13 +311,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建微信云托管
+   * 查看容器托管的集群状态
    */
-  async CreateWxCloudBaseRunEnv(
-    req: CreateWxCloudBaseRunEnvRequest,
-    cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void
-  ): Promise<CreateWxCloudBaseRunEnvResponse> {
-    return this.request("CreateWxCloudBaseRunEnv", req, cb)
+  async DescribeCloudBaseRunResource(
+    req: DescribeCloudBaseRunResourceRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void
+  ): Promise<DescribeCloudBaseRunResourceResponse> {
+    return this.request("DescribeCloudBaseRunResource", req, cb)
   }
 
   /**
@@ -379,13 +381,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看容器托管的集群状态
+   * 创建微信云托管
    */
-  async DescribeCloudBaseRunResource(
-    req: DescribeCloudBaseRunResourceRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void
-  ): Promise<DescribeCloudBaseRunResourceResponse> {
-    return this.request("DescribeCloudBaseRunResource", req, cb)
+  async CreateWxCloudBaseRunEnv(
+    req: CreateWxCloudBaseRunEnvRequest,
+    cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void
+  ): Promise<CreateWxCloudBaseRunEnvResponse> {
+    return this.request("CreateWxCloudBaseRunEnv", req, cb)
   }
 
   /**
@@ -676,6 +678,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void
   ): Promise<DescribeCloudBaseRunVersionSnapshotResponse> {
     return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb)
+  }
+
+  /**
+   * 获取终端用户列表
+   */
+  async DescribeEndUsers(
+    req: DescribeEndUsersRequest,
+    cb?: (error: string, rep: DescribeEndUsersResponse) => void
+  ): Promise<DescribeEndUsersResponse> {
+    return this.request("DescribeEndUsers", req, cb)
   }
 
   /**

@@ -22,6 +22,7 @@ import {
   DescribeClusterEndpointVipStatusRequest,
   DescribeClusterSecurityResponse,
   DescribeClusterSecurityRequest,
+  ModifyPrometheusAlertRuleRequest,
   DeleteClusterInstancesResponse,
   ModifyNodePoolDesiredCapacityAboutAsgResponse,
   ModifyClusterNodePoolResponse,
@@ -33,7 +34,7 @@ import {
   DescribeClusterInstancesResponse,
   DeleteClusterResponse,
   AutoscalingAdded,
-  DescribePrometheusTemplateSyncResponse,
+  CreatePrometheusAlertRuleRequest,
   UpdateEKSClusterRequest,
   CreateClusterRouteTableResponse,
   DescribeClusterCommonNamesRequest,
@@ -61,6 +62,7 @@ import {
   CreateClusterRouteResponse,
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
+  ModifyPrometheusAlertRuleResponse,
   AddNodeToNodePoolRequest,
   EnableVpcCniNetworkTypeResponse,
   DescribePrometheusAlertRuleResponse,
@@ -85,7 +87,8 @@ import {
   UpgradeClusterInstancesRequest,
   ClusterPublicLB,
   ExtensionAddon,
-  RegionInstance,
+  DeletePrometheusAlertRuleRequest,
+  DescribePrometheusTemplateSyncResponse,
   Label,
   DescribePrometheusAlertHistoryRequest,
   DeletePrometheusTemplateSyncRequest,
@@ -123,7 +126,7 @@ import {
   AddNodeToNodePoolResponse,
   PodLimitsByType,
   UpdateEKSClusterResponse,
-  TagSpecification,
+  InstanceExtraArgs,
   DescribeRegionsRequest,
   DescribeClustersResponse,
   ClusterCredential,
@@ -138,6 +141,7 @@ import {
   DescribeExistedInstancesResponse,
   CreateEKSClusterResponse,
   DescribeEKSClustersRequest,
+  CreatePrometheusAlertRuleResponse,
   ResourceDeleteOption,
   DnsServerConf,
   EksCluster,
@@ -154,12 +158,14 @@ import {
   DeleteClusterRouteTableRequest,
   DescribeAvailableClusterVersionRequest,
   CreateClusterRequest,
-  InstanceExtraArgs,
+  DeletePrometheusAlertRuleResponse,
   AcquireClusterAdminRoleRequest,
   CreateClusterAsGroupResponse,
   DeleteClusterAsGroupsResponse,
+  DescribePrometheusInstanceRequest,
   DescribeClusterInstancesRequest,
   InstanceAdvancedSettings,
+  RegionInstance,
   PodLimitsInstance,
   DescribePrometheusAgentsRequest,
   DescribeEnableVpcCniProgressResponse,
@@ -176,6 +182,7 @@ import {
   ModifyPrometheusTemplateResponse,
   DeletePrometheusTemplateResponse,
   DescribePrometheusTemplateSyncRequest,
+  UpdateClusterVersionRequest,
   DeleteClusterEndpointVipRequest,
   CheckInstancesUpgradeAbleResponse,
   Cluster,
@@ -191,6 +198,7 @@ import {
   CreateClusterEndpointRequest,
   PrometheusJobTargets,
   ModifyClusterAsGroupOptionAttributeResponse,
+  DescribePrometheusInstanceResponse,
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
   AddVpcCniSubnetsResponse,
@@ -215,6 +223,7 @@ import {
   DescribeClusterAsGroupsRequest,
   DescribeImagesRequest,
   DescribeAvailableClusterVersionResponse,
+  TagSpecification,
   DescribeClusterRouteTablesResponse,
   AddVpcCniSubnetsRequest,
   InstanceUpgradePreCheckResultItem,
@@ -232,7 +241,7 @@ import {
   CreateClusterNodePoolResponse,
   NodePoolOption,
   ModifyClusterAsGroupAttributeRequest,
-  UpdateClusterVersionRequest,
+  PrometheusGrafanaInfo,
   InstanceDataDiskMountSetting,
   PrometheusInstanceOverview,
   NodeCountSummary,
@@ -349,6 +358,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrometheusTemplateResponse) => void
   ): Promise<DeletePrometheusTemplateResponse> {
     return this.request("DeletePrometheusTemplate", req, cb)
+  }
+
+  /**
+   * 修改节点池关联伸缩组的期望实例数
+   */
+  async ModifyNodePoolDesiredCapacityAboutAsg(
+    req: ModifyNodePoolDesiredCapacityAboutAsgRequest,
+    cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void
+  ): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse> {
+    return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb)
   }
 
   /**
@@ -472,13 +491,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改模板内容
+   * 获取实例详细信息
    */
-  async ModifyPrometheusTemplate(
-    req: ModifyPrometheusTemplateRequest,
-    cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void
-  ): Promise<ModifyPrometheusTemplateResponse> {
-    return this.request("ModifyPrometheusTemplate", req, cb)
+  async DescribePrometheusInstance(
+    req: DescribePrometheusInstanceRequest,
+    cb?: (error: string, rep: DescribePrometheusInstanceResponse) => void
+  ): Promise<DescribePrometheusInstanceResponse> {
+    return this.request("DescribePrometheusInstance", req, cb)
   }
 
   /**
@@ -572,13 +591,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询节点池列表
+   *  查询集群下节点实例信息
    */
-  async DescribeClusterNodePools(
-    req: DescribeClusterNodePoolsRequest,
-    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
-  ): Promise<DescribeClusterNodePoolsResponse> {
-    return this.request("DescribeClusterNodePools", req, cb)
+  async DescribeClusterInstances(
+    req: DescribeClusterInstancesRequest,
+    cb?: (error: string, rep: DescribeClusterInstancesResponse) => void
+  ): Promise<DescribeClusterInstancesResponse> {
+    return this.request("DescribeClusterInstances", req, cb)
   }
 
   /**
@@ -742,13 +761,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取模板同步信息
+   * 创建告警规则
    */
-  async DescribePrometheusTemplateSync(
-    req: DescribePrometheusTemplateSyncRequest,
-    cb?: (error: string, rep: DescribePrometheusTemplateSyncResponse) => void
-  ): Promise<DescribePrometheusTemplateSyncResponse> {
-    return this.request("DescribePrometheusTemplateSync", req, cb)
+  async CreatePrometheusAlertRule(
+    req: CreatePrometheusAlertRuleRequest,
+    cb?: (error: string, rep: CreatePrometheusAlertRuleResponse) => void
+  ): Promise<CreatePrometheusAlertRuleResponse> {
+    return this.request("CreatePrometheusAlertRule", req, cb)
   }
 
   /**
@@ -772,6 +791,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改告警规则
+   */
+  async ModifyPrometheusAlertRule(
+    req: ModifyPrometheusAlertRuleRequest,
+    cb?: (error: string, rep: ModifyPrometheusAlertRuleResponse) => void
+  ): Promise<ModifyPrometheusAlertRuleResponse> {
+    return this.request("ModifyPrometheusAlertRule", req, cb)
+  }
+
+  /**
    * 删除弹性集群(yunapiv3)
    */
   async DeleteEKSCluster(
@@ -782,23 +811,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改节点池关联伸缩组的期望实例数
+   * 查询节点池列表
    */
-  async ModifyNodePoolDesiredCapacityAboutAsg(
-    req: ModifyNodePoolDesiredCapacityAboutAsgRequest,
-    cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void
-  ): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse> {
-    return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb)
+  async DescribeClusterNodePools(
+    req: DescribeClusterNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
+  ): Promise<DescribeClusterNodePoolsResponse> {
+    return this.request("DescribeClusterNodePools", req, cb)
   }
 
   /**
-   * 移出节点池节点，但保留在集群内
+   * 修改模板内容
    */
-  async RemoveNodeFromNodePool(
-    req: RemoveNodeFromNodePoolRequest,
-    cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void
-  ): Promise<RemoveNodeFromNodePoolResponse> {
-    return this.request("RemoveNodeFromNodePool", req, cb)
+  async ModifyPrometheusTemplate(
+    req: ModifyPrometheusTemplateRequest,
+    cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void
+  ): Promise<ModifyPrometheusTemplateResponse> {
+    return this.request("ModifyPrometheusTemplate", req, cb)
   }
 
   /**
@@ -832,13 +861,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  查询集群下节点实例信息
+   * 删除告警规则
    */
-  async DescribeClusterInstances(
-    req: DescribeClusterInstancesRequest,
-    cb?: (error: string, rep: DescribeClusterInstancesResponse) => void
-  ): Promise<DescribeClusterInstancesResponse> {
-    return this.request("DescribeClusterInstances", req, cb)
+  async DeletePrometheusAlertRule(
+    req: DeletePrometheusAlertRuleRequest,
+    cb?: (error: string, rep: DeletePrometheusAlertRuleResponse) => void
+  ): Promise<DeletePrometheusAlertRuleResponse> {
+    return this.request("DeletePrometheusAlertRule", req, cb)
   }
 
   /**
@@ -892,6 +921,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取模板同步信息
+   */
+  async DescribePrometheusTemplateSync(
+    req: DescribePrometheusTemplateSyncRequest,
+    cb?: (error: string, rep: DescribePrometheusTemplateSyncResponse) => void
+  ): Promise<DescribePrometheusTemplateSyncResponse> {
+    return this.request("DescribePrometheusTemplateSync", req, cb)
+  }
+
+  /**
    * 给GR集群增加可用的ClusterCIDR
    */
   async AddClusterCIDR(
@@ -939,6 +978,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEKSClusterCredentialResponse) => void
   ): Promise<DescribeEKSClusterCredentialResponse> {
     return this.request("DescribeEKSClusterCredential", req, cb)
+  }
+
+  /**
+   * 移出节点池节点，但保留在集群内
+   */
+  async RemoveNodeFromNodePool(
+    req: RemoveNodeFromNodePoolRequest,
+    cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void
+  ): Promise<RemoveNodeFromNodePoolResponse> {
+    return this.request("RemoveNodeFromNodePool", req, cb)
   }
 
   /**

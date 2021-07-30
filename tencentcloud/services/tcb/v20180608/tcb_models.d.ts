@@ -1314,6 +1314,15 @@ export interface DescribeExtraPkgBillingInfoRequest {
     EnvId?: string;
 }
 /**
+ * BindEnvGateway返回参数结构体
+ */
+export interface BindEnvGatewayResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeWxCloudBaseRunSubNets返回参数结构体
  */
 export interface DescribeWxCloudBaseRunSubNetsResponse {
@@ -2761,6 +2770,15 @@ export interface CloudBaseRunImageSecretInfo {
       * 邮箱
       */
     Email?: string;
+}
+/**
+ * BindEnvGateway请求参数结构体
+ */
+export interface BindEnvGatewayRequest {
+    /**
+      * 子环境id
+      */
+    SubEnvId: string;
 }
 /**
  * ModifyEnv返回参数结构体

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncIcpOrderWebInfoRequest, SyncIcpOrderWebInfoResponse, CreateWeappQRUrlRequest, CreateWeappQRUrlResponse } from "./ba_models";
+import { DescribeGetAuthInfoResponse, SyncIcpOrderWebInfoResponse, SyncIcpOrderWebInfoRequest, CreateWeappQRUrlRequest, CreateWeappQRUrlResponse, DescribeGetAuthInfoRequest } from "./ba_models";
 /**
  * ba client
  * @class
@@ -16,4 +16,8 @@ export declare class Client extends AbstractClient {
      * 创建渠道备案小程序二维码
      */
     CreateWeappQRUrl(req: CreateWeappQRUrlRequest, cb?: (error: string, rep: CreateWeappQRUrlResponse) => void): Promise<CreateWeappQRUrlResponse>;
+    /**
+     * 获取实名认证信息
+     */
+    DescribeGetAuthInfo(req?: DescribeGetAuthInfoRequest, cb?: (error: string, rep: DescribeGetAuthInfoResponse) => void): Promise<DescribeGetAuthInfoResponse>;
 }

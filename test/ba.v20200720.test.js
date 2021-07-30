@@ -38,4 +38,14 @@ it("ba.v20200720.CreateWeappQRUrl", async function () {
     }
 })
 
+it("ba.v20200720.DescribeGetAuthInfo", async function () {
+    try {
+       const data = await client.DescribeGetAuthInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

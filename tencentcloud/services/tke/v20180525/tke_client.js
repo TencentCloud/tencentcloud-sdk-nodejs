@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusTemplate", req, cb);
     }
     /**
+     * 修改节点池关联伸缩组的期望实例数
+     */
+    async ModifyNodePoolDesiredCapacityAboutAsg(req, cb) {
+        return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb);
+    }
+    /**
      * 获取被关联集群列表
      */
     async DescribePrometheusAgents(req, cb) {
@@ -160,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableVpcCniNetworkType", req, cb);
     }
     /**
-     * 修改模板内容
+     * 获取实例详细信息
      */
-    async ModifyPrometheusTemplate(req, cb) {
-        return this.request("ModifyPrometheusTemplate", req, cb);
+    async DescribePrometheusInstance(req, cb) {
+        return this.request("DescribePrometheusInstance", req, cb);
     }
     /**
      * 仅能设置节点池中处于伸缩组的节点
@@ -220,10 +226,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterRoute", req, cb);
     }
     /**
-     * 查询节点池列表
+     *  查询集群下节点实例信息
      */
-    async DescribeClusterNodePools(req, cb) {
-        return this.request("DescribeClusterNodePools", req, cb);
+    async DescribeClusterInstances(req, cb) {
+        return this.request("DescribeClusterInstances", req, cb);
     }
     /**
      * 创建集群路由表
@@ -322,10 +328,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterRouteTables", req, cb);
     }
     /**
-     * 获取模板同步信息
+     * 创建告警规则
      */
-    async DescribePrometheusTemplateSync(req, cb) {
-        return this.request("DescribePrometheusTemplateSync", req, cb);
+    async CreatePrometheusAlertRule(req, cb) {
+        return this.request("CreatePrometheusAlertRule", req, cb);
     }
     /**
      * 获取容器服务支持的所有地域
@@ -340,22 +346,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddExistedInstances", req, cb);
     }
     /**
+     * 修改告警规则
+     */
+    async ModifyPrometheusAlertRule(req, cb) {
+        return this.request("ModifyPrometheusAlertRule", req, cb);
+    }
+    /**
      * 删除弹性集群(yunapiv3)
      */
     async DeleteEKSCluster(req, cb) {
         return this.request("DeleteEKSCluster", req, cb);
     }
     /**
-     * 修改节点池关联伸缩组的期望实例数
+     * 查询节点池列表
      */
-    async ModifyNodePoolDesiredCapacityAboutAsg(req, cb) {
-        return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb);
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
     }
     /**
-     * 移出节点池节点，但保留在集群内
+     * 修改模板内容
      */
-    async RemoveNodeFromNodePool(req, cb) {
-        return this.request("RemoveNodeFromNodePool", req, cb);
+    async ModifyPrometheusTemplate(req, cb) {
+        return this.request("ModifyPrometheusTemplate", req, cb);
     }
     /**
      * 集群的密钥信息
@@ -376,10 +388,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRouteTableConflicts", req, cb);
     }
     /**
-     *  查询集群下节点实例信息
+     * 删除告警规则
      */
-    async DescribeClusterInstances(req, cb) {
-        return this.request("DescribeClusterInstances", req, cb);
+    async DeletePrometheusAlertRule(req, cb) {
+        return this.request("DeletePrometheusAlertRule", req, cb);
     }
     /**
      * 删除节点池
@@ -412,6 +424,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterInstances", req, cb);
     }
     /**
+     * 获取模板同步信息
+     */
+    async DescribePrometheusTemplateSync(req, cb) {
+        return this.request("DescribePrometheusTemplateSync", req, cb);
+    }
+    /**
      * 给GR集群增加可用的ClusterCIDR
      */
     async AddClusterCIDR(req, cb) {
@@ -440,6 +458,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEKSClusterCredential(req, cb) {
         return this.request("DescribeEKSClusterCredential", req, cb);
+    }
+    /**
+     * 移出节点池节点，但保留在集群内
+     */
+    async RemoveNodeFromNodePool(req, cb) {
+        return this.request("RemoveNodeFromNodePool", req, cb);
     }
     /**
      * 获取告警规则列表

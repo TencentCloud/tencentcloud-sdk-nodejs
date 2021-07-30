@@ -16,6 +16,41 @@
  */
 
 /**
+ * DescribeGetAuthInfo返回参数结构体
+ */
+export interface DescribeGetAuthInfoResponse {
+  /**
+   * 实名认证状态：0未实名，1已实名
+   */
+  IsTenPayMasked: string
+
+  /**
+   * 实名认证类型：0个人，1企业
+   */
+  IsAuthenticated: string
+
+  /**
+   * 认证类型，个人0，企业1
+   */
+  Type: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SyncIcpOrderWebInfo返回参数结构体
+ */
+export interface SyncIcpOrderWebInfoResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SyncIcpOrderWebInfo请求参数结构体
  */
 export interface SyncIcpOrderWebInfoRequest {
@@ -46,16 +81,6 @@ export interface SyncIcpOrderWebInfoRequest {
 }
 
 /**
- * SyncIcpOrderWebInfo返回参数结构体
- */
-export interface SyncIcpOrderWebInfoResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateWeappQRUrl请求参数结构体
  */
 export interface CreateWeappQRUrlRequest {
@@ -79,3 +104,8 @@ export interface CreateWeappQRUrlResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeGetAuthInfo请求参数结构体
+ */
+export type DescribeGetAuthInfoRequest = null

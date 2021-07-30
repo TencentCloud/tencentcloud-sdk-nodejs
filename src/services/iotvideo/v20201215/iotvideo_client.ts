@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCloudStorageDateRequest,
   CloudStorageTimeData,
+  RetryDeviceFirmwareTaskRequest,
   CreateCloudStorageRequest,
   VideoBatch,
   ImportModelDefinitionResponse,
@@ -27,10 +28,12 @@ import {
   CreateBatchRequest,
   CancelAIModelApplicationResponse,
   DescribeCloudStorageTimeResponse,
+  DescribeDeviceStatusLogResponse,
   ReportAliveDeviceRequest,
   DescribeProductsRequest,
   DescribeAIModelChannelResponse,
   DescribeDeviceActionHistoryRequest,
+  ModifyDataForwardRequest,
   DescribeDevicesResponse,
   ModifyProductResponse,
   ModifyProductRequest,
@@ -39,14 +42,16 @@ import {
   CancelAIModelApplicationRequest,
   TransferCloudStorageResponse,
   DescribeForwardRuleResponse,
+  ModifyDeviceLogLevelRequest,
   DescribeBatchRequest,
   DescribeForwardRuleRequest,
   ModifyDeviceRequest,
   CreateCOSCredentialsResponse,
   ProductModelDefinition,
   ActionHistory,
-  DescribeFirmwareTaskStatisticsResponse,
+  CreateDataForwardResponse,
   DescribeFirmwareRequest,
+  DescribeCloudStorageUsersResponse,
   DescribeProductRequest,
   DescribeProductsResponse,
   CheckForwardAuthRequest,
@@ -57,6 +62,7 @@ import {
   CreateCOSCredentialsRequest,
   DeviceCommLogItem,
   DeviceUpdateStatus,
+  DescribeDataForwardListResponse,
   DeleteFirmwareResponse,
   CreateForwardRuleResponse,
   BatchUpdateFirmwareResponse,
@@ -70,8 +76,10 @@ import {
   ReportAliveDeviceResponse,
   DescribeDeviceEventHistoryRequest,
   DescribeCategoryResponse,
+  DescribeSDKLogRequest,
   DescribeBalanceRequest,
   ImportModelDefinitionRequest,
+  DescribeDataForwardListRequest,
   DescribeDeviceCommLogResponse,
   DeleteDeviceRequest,
   GenerateSignedVideoURLResponse,
@@ -80,31 +88,37 @@ import {
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
   DescribeDeviceCommLogRequest,
+  WakeUpDeviceResponse,
   DeleteForwardRuleRequest,
   UpdateAIModelChannelResponse,
   DescribeAIModelUsageResponse,
   DescribeBalanceTransactionsRequest,
+  BindCloudStorageUserRequest,
   CreateProductResponse,
   DescribeFirmwareTaskDevicesResponse,
+  ModifyDataForwardResponse,
   DescribeCloudStorageThumbnailResponse,
   DescribeAIModelsRequest,
   RetryDeviceFirmwareTaskResponse,
   GenerateSignedVideoURLRequest,
   ResetCloudStorageResponse,
+  InheritCloudStorageUserResponse,
   DescribeDeviceEventHistoryResponse,
   DescribeFirmwareTaskResponse,
   FirmwareInfo,
   CreateProductRequest,
   DescribeFirmwareTasksRequest,
   GetFirmwareURLResponse,
-  DescribeDeviceResponse,
+  DescribeAIModelApplicationsRequest,
   DescribeCloudStorageEventsRequest,
   ListFirmwaresRequest,
   PublishMessageRequest,
-  RetryDeviceFirmwareTaskRequest,
+  DescribeDeviceStatusLogRequest,
+  DescribeSDKLogResponse,
   DescribeBalanceResponse,
   UploadFirmwareRequest,
   DescribeFirmwareTasksResponse,
+  CloudStorageUserInfo,
   EditFirmwareResponse,
   DescribeFirmwareTaskDistributionRequest,
   ProductTemplate,
@@ -115,6 +129,7 @@ import {
   AIModelApplication,
   DescribeFirmwareTaskDistributionResponse,
   DescribeBatchResponse,
+  DataForward,
   DescribeDeviceRequest,
   ModifyForwardRuleRequest,
   CreateAIDetectionResponse,
@@ -122,13 +137,16 @@ import {
   VideoProduct,
   CloudStorageEvent,
   DescribeCloudStorageDateResponse,
+  ModifyDataForwardStatusResponse,
   CloudStorageTimeInfo,
   UploadFirmwareResponse,
   UpdateAIModelChannelRequest,
   CreateCloudStorageResponse,
+  BindCloudStorageUserResponse,
   CancelDeviceFirmwareTaskRequest,
   CancelDeviceFirmwareTaskResponse,
   DeleteDeviceResponse,
+  WakeUpDeviceRequest,
   ApplyAIModelResponse,
   ControlDeviceDataResponse,
   DescribeDeviceDataHistoryRequest,
@@ -139,13 +157,18 @@ import {
   DescribeBalanceTransactionsResponse,
   ModifyDeviceResponse,
   CreateTaskFileUrlRequest,
+  ModifyDeviceLogLevelResponse,
+  CreateDataForwardRequest,
   BatchUpdateFirmwareRequest,
   DescribeCloudStorageThumbnailRequest,
   GetFirmwareURLRequest,
   CreateAIDetectionRequest,
   DescribeCloudStorageResponse,
+  ResetCloudStorageRequest,
   DescribeProductResponse,
+  SDKLogItem,
   DescribeAIModelsResponse,
+  InheritCloudStorageUserRequest,
   DescribeAIModelChannelRequest,
   DescribeAIModelUsageRequest,
   DescribeCategoryRequest,
@@ -157,19 +180,22 @@ import {
   SearchKeyword,
   DescribeDevicesRequest,
   DescribeModelDefinitionRequest,
+  DescribeFirmwareTaskStatisticsResponse,
   CheckForwardAuthResponse,
-  DescribeAIModelApplicationsRequest,
+  DescribeDeviceResponse,
   DescribeDeviceDataResponse,
   DeleteForwardRuleResponse,
+  DeviceStatusLogItem,
   ListFirmwaresResponse,
   TransferCloudStorageRequest,
   DescribeFirmwareTaskStatisticsRequest,
   DescribeBatchsRequest,
   CreateTaskFileUrlResponse,
   ModifyModelDefinitionResponse,
-  ResetCloudStorageRequest,
-  DescribeFirmwareTaskRequest,
   DescribeCloudStorageTimeRequest,
+  ModifyDataForwardStatusRequest,
+  DescribeFirmwareTaskRequest,
+  DescribeCloudStorageUsersRequest,
   DescribeAIModelApplicationsResponse,
 } from "./iotvideo_models"
 
@@ -243,6 +269,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新设备日志级别
+   */
+  async ModifyDeviceLogLevel(
+    req: ModifyDeviceLogLevelRequest,
+    cb?: (error: string, rep: ModifyDeviceLogLevelResponse) => void
+  ): Promise<ModifyDeviceLogLevelResponse> {
+    return this.request("ModifyDeviceLogLevel", req, cb)
+  }
+
+  /**
    * 发起AI推理请求
    */
   async CreateAIDetection(
@@ -290,6 +326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAIModelsResponse) => void
   ): Promise<DescribeAIModelsResponse> {
     return this.request("DescribeAIModels", req, cb)
+  }
+
+  /**
+   * 本接口（UploadFirmware）用于上传设备固件信息
+   */
+  async UploadFirmware(
+    req: UploadFirmwareRequest,
+    cb?: (error: string, rep: UploadFirmwareResponse) => void
+  ): Promise<UploadFirmwareResponse> {
+    return this.request("UploadFirmware", req, cb)
   }
 
   /**
@@ -343,13 +389,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改转发规则
+   * 拉取云存用户列表
    */
-  async ModifyForwardRule(
-    req: ModifyForwardRuleRequest,
-    cb?: (error: string, rep: ModifyForwardRuleResponse) => void
-  ): Promise<ModifyForwardRuleResponse> {
-    return this.request("ModifyForwardRule", req, cb)
+  async DescribeCloudStorageUsers(
+    req: DescribeCloudStorageUsersRequest,
+    cb?: (error: string, rep: DescribeCloudStorageUsersResponse) => void
+  ): Promise<DescribeCloudStorageUsersResponse> {
+    return this.request("DescribeCloudStorageUsers", req, cb)
   }
 
   /**
@@ -360,6 +406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CancelAIModelApplicationResponse) => void
   ): Promise<CancelAIModelApplicationResponse> {
     return this.request("CancelAIModelApplication", req, cb)
+  }
+
+  /**
+   * 修改数据转发
+   */
+  async ModifyDataForward(
+    req: ModifyDataForwardRequest,
+    cb?: (error: string, rep: ModifyDataForwardResponse) => void
+  ): Promise<ModifyDataForwardResponse> {
+    return this.request("ModifyDataForward", req, cb)
   }
 
   /**
@@ -453,6 +509,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 继承云存用户
+   */
+  async InheritCloudStorageUser(
+    req: InheritCloudStorageUserRequest,
+    cb?: (error: string, rep: InheritCloudStorageUserResponse) => void
+  ): Promise<InheritCloudStorageUserResponse> {
+    return this.request("InheritCloudStorageUser", req, cb)
+  }
+
+  /**
    * 创建批次
    */
   async CreateBatch(
@@ -500,6 +566,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFirmwareURLResponse) => void
   ): Promise<GetFirmwareURLResponse> {
     return this.request("GetFirmwareURL", req, cb)
+  }
+
+  /**
+   * 修改转发规则
+   */
+  async ModifyForwardRule(
+    req: ModifyForwardRuleRequest,
+    cb?: (error: string, rep: ModifyForwardRuleResponse) => void
+  ): Promise<ModifyForwardRuleResponse> {
+    return this.request("ModifyForwardRule", req, cb)
   }
 
   /**
@@ -603,13 +679,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上报活跃设备
+   * 获取设备sdk日志
    */
-  async ReportAliveDevice(
-    req: ReportAliveDeviceRequest,
-    cb?: (error: string, rep: ReportAliveDeviceResponse) => void
-  ): Promise<ReportAliveDeviceResponse> {
-    return this.request("ReportAliveDevice", req, cb)
+  async DescribeSDKLog(
+    req: DescribeSDKLogRequest,
+    cb?: (error: string, rep: DescribeSDKLogResponse) => void
+  ): Promise<DescribeSDKLogResponse> {
+    return this.request("DescribeSDKLog", req, cb)
   }
 
   /**
@@ -620,6 +696,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceEventHistoryResponse) => void
   ): Promise<DescribeDeviceEventHistoryResponse> {
     return this.request("DescribeDeviceEventHistory", req, cb)
+  }
+
+  /**
+   * 设置数据转发状态
+   */
+  async ModifyDataForwardStatus(
+    req: ModifyDataForwardStatusRequest,
+    cb?: (error: string, rep: ModifyDataForwardStatusResponse) => void
+  ): Promise<ModifyDataForwardStatusResponse> {
+    return this.request("ModifyDataForwardStatus", req, cb)
   }
 
   /**
@@ -653,13 +739,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UploadFirmware）用于上传设备固件信息
+   * 上报活跃设备
    */
-  async UploadFirmware(
-    req: UploadFirmwareRequest,
-    cb?: (error: string, rep: UploadFirmwareResponse) => void
-  ): Promise<UploadFirmwareResponse> {
-    return this.request("UploadFirmware", req, cb)
+  async ReportAliveDevice(
+    req: ReportAliveDeviceRequest,
+    cb?: (error: string, rep: ReportAliveDeviceResponse) => void
+  ): Promise<ReportAliveDeviceResponse> {
+    return this.request("ReportAliveDevice", req, cb)
   }
 
   /**
@@ -673,6 +759,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取设备上下线日志
+   */
+  async DescribeDeviceStatusLog(
+    req: DescribeDeviceStatusLogRequest,
+    cb?: (error: string, rep: DescribeDeviceStatusLogResponse) => void
+  ): Promise<DescribeDeviceStatusLogResponse> {
+    return this.request("DescribeDeviceStatusLog", req, cb)
+  }
+
+  /**
    * 拉取云存事件列表
    */
   async DescribeCloudStorageEvents(
@@ -680,6 +776,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageEventsResponse) => void
   ): Promise<DescribeCloudStorageEventsResponse> {
     return this.request("DescribeCloudStorageEvents", req, cb)
+  }
+
+  /**
+   * 创建数据转发
+   */
+  async CreateDataForward(
+    req: CreateDataForwardRequest,
+    cb?: (error: string, rep: CreateDataForwardResponse) => void
+  ): Promise<CreateDataForwardResponse> {
+    return this.request("CreateDataForward", req, cb)
   }
 
   /**
@@ -710,6 +816,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAIModelChannelResponse) => void
   ): Promise<DescribeAIModelChannelResponse> {
     return this.request("DescribeAIModelChannel", req, cb)
+  }
+
+  /**
+   * 获取数据转发列表
+   */
+  async DescribeDataForwardList(
+    req: DescribeDataForwardListRequest,
+    cb?: (error: string, rep: DescribeDataForwardListResponse) => void
+  ): Promise<DescribeDataForwardListResponse> {
+    return this.request("DescribeDataForwardList", req, cb)
   }
 
   /**
@@ -773,13 +889,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询账户余额
+   * 绑定云存用户
    */
-  async DescribeBalance(
-    req: DescribeBalanceRequest,
-    cb?: (error: string, rep: DescribeBalanceResponse) => void
-  ): Promise<DescribeBalanceResponse> {
-    return this.request("DescribeBalance", req, cb)
+  async BindCloudStorageUser(
+    req: BindCloudStorageUserRequest,
+    cb?: (error: string, rep: BindCloudStorageUserResponse) => void
+  ): Promise<BindCloudStorageUserResponse> {
+    return this.request("BindCloudStorageUser", req, cb)
   }
 
   /**
@@ -840,5 +956,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void
   ): Promise<DescribeCloudStorageThumbnailResponse> {
     return this.request("DescribeCloudStorageThumbnail", req, cb)
+  }
+
+  /**
+   * 查询账户余额
+   */
+  async DescribeBalance(
+    req: DescribeBalanceRequest,
+    cb?: (error: string, rep: DescribeBalanceResponse) => void
+  ): Promise<DescribeBalanceResponse> {
+    return this.request("DescribeBalance", req, cb)
+  }
+
+  /**
+   * 设备唤醒
+   */
+  async WakeUpDevice(
+    req: WakeUpDeviceRequest,
+    cb?: (error: string, rep: WakeUpDeviceResponse) => void
+  ): Promise<WakeUpDeviceResponse> {
+    return this.request("WakeUpDevice", req, cb)
   }
 }

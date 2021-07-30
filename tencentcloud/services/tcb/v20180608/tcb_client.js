@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWxGatewayRoute", req, cb);
     }
     /**
-     * 获取终端用户列表
+     * 绑定另外一个环境下的网关，callContainer请求可以访问到该网关
      */
-    async DescribeEndUsers(req, cb) {
-        return this.request("DescribeEndUsers", req, cb);
+    async BindEnvGateway(req, cb) {
+        return this.request("BindEnvGateway", req, cb);
     }
     /**
      * 查询微信云托管环境信息
@@ -103,10 +103,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvs", req, cb);
     }
     /**
-     * 创建微信云托管
+     * 查看容器托管的集群状态
      */
-    async CreateWxCloudBaseRunEnv(req, cb) {
-        return this.request("CreateWxCloudBaseRunEnv", req, cb);
+    async DescribeCloudBaseRunResource(req, cb) {
+        return this.request("DescribeCloudBaseRunResource", req, cb);
     }
     /**
      * 增加安全域名
@@ -145,10 +145,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePostpayPackage", req, cb);
     }
     /**
-     * 查看容器托管的集群状态
+     * 创建微信云托管
      */
-    async DescribeCloudBaseRunResource(req, cb) {
-        return this.request("DescribeCloudBaseRunResource", req, cb);
+    async CreateWxCloudBaseRunEnv(req, cb) {
+        return this.request("CreateWxCloudBaseRunEnv", req, cb);
     }
     /**
      * 云项目部署列表
@@ -323,6 +323,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudBaseRunVersionSnapshot(req, cb) {
         return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb);
+    }
+    /**
+     * 获取终端用户列表
+     */
+    async DescribeEndUsers(req, cb) {
+        return this.request("DescribeEndUsers", req, cb);
     }
     /**
      * 查询服务版本详情(新)

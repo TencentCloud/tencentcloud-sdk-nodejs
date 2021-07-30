@@ -68,9 +68,9 @@ it("tcb.v20180608.DeleteWxGatewayRoute", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEndUsers", async function () {
+it("tcb.v20180608.BindEnvGateway", async function () {
     try {
-       const data = await client.DescribeEndUsers({})
+       const data = await client.BindEnvGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +138,9 @@ it("tcb.v20180608.DescribeEnvs", async function () {
     }
 })
 
-it("tcb.v20180608.CreateWxCloudBaseRunEnv", async function () {
+it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
     try {
-       const data = await client.CreateWxCloudBaseRunEnv({})
+       const data = await client.DescribeCloudBaseRunResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +208,9 @@ it("tcb.v20180608.CreatePostpayPackage", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
+it("tcb.v20180608.CreateWxCloudBaseRunEnv", async function () {
     try {
-       const data = await client.DescribeCloudBaseRunResource({})
+       const data = await client.CreateWxCloudBaseRunEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +501,16 @@ it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
 it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
     try {
        const data = await client.DescribeCloudBaseRunVersionSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeEndUsers", async function () {
+    try {
+       const data = await client.DescribeEndUsers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

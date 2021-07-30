@@ -1583,6 +1583,12 @@ export interface Blueprint {
    * 镜像所需内存大小, 单位: GB
    */
   RequiredMemorySize: number
+
+  /**
+      * CVM镜像共享到轻量应用服务器轻量应用服务器后的CVM镜像ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId: string
 }
 
 /**

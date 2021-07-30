@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeEnvLimitResponse, CheckTcbServiceResponse, DescribeCloudBaseRunConfForGateWayRequest, DescribeCloudBaseRunServerVersionRequest, DescribeEnvLimitRequest, DescribeExtensionUploadInfoRequest, DeleteCloudBaseRunServerVersionResponse, CommonServiceAPIResponse, DescribePostpayPackageFreeQuotasRequest, DescribeEndUserLoginStatisticRequest, DescribeCloudBaseBuildServiceResponse, DescribeEndUsersRequest, DescribeSpecialCostItemsRequest, DescribeEndUserStatisticRequest, CreateWxCloudBaseRunServerDBClusterResponse, ReplaceActivityRecordResponse, DescribeCloudBaseRunResourceForExtendRequest, ModifyEndUserRequest, RollUpdateCloudBaseRunServerVersionResponse, DescribeAuthDomainsResponse, DescribeWxCloudBaseRunEnvsResponse, CreateHostingDomainRequest, DescribeCloudBaseRunResourceRequest, DescribePostpayFreeQuotasRequest, ModifyDatabaseACLRequest, DescribeCloudBaseRunServerVersionResponse, DescribeEndUserLoginStatisticResponse, DescribeHostingDomainTaskRequest, DescribeQuotaDataResponse, CommonServiceAPIRequest, DestroyStaticStoreRequest, CreateWxCloudBaseRunEnvRequest, ModifyCloudBaseRunServerFlowConfRequest, DescribeActivityRecordResponse, CreateStaticStoreRequest, CreateWxCloudBaseRunServerDBClusterRequest, DeleteCloudBaseProjectLatestVersionResponse, CreateAuthDomainResponse, DescribeEnvsRequest, DeleteWxGatewayRouteRequest, DescribeEnvPostpaidDeductRequest, DescribeExtraPkgBillingInfoRequest, DescribeWxCloudBaseRunSubNetsResponse, DescribeEnvFreeQuotaRequest, DeleteEndUserRequest, DescribeEnvPostpaidDeductResponse, CreateCloudBaseRunResourceResponse, DestroyStaticStoreResponse, DeleteEndUserResponse, ModifyDatabaseACLResponse, ModifyCloudBaseRunServerFlowConfResponse, EstablishCloudBaseRunServerResponse, DestroyEnvRequest, DestroyEnvResponse, DescribeCloudBaseProjectVersionListRequest, DescribeEnvsResponse, CreateAuthDomainRequest, CreateHostingDomainResponse, DescribeActivityRecordRequest, CreateWxCloudBaseRunEnvResponse, DeleteCloudBaseRunServerVersionRequest, CreateCloudBaseRunServerVersionRequest, DescribeWxCloudBaseRunSubNetsRequest, CreatePostpayPackageResponse, ReplaceActivityRecordRequest, DeleteWxGatewayRouteResponse, EstablishCloudBaseRunServerRequest, DescribeSpecialCostItemsResponse, DescribeCloudBaseProjectVersionListResponse, DescribeDownloadFileRequest, ReinstateEnvResponse, DescribeEnvFreeQuotaResponse, CreateAndDeployCloudBaseProjectResponse, DescribeCloudBaseRunResourceForExtendResponse, CreateAndDeployCloudBaseProjectRequest, DescribeCloudBaseRunVersionRequest, EstablishWxGatewayRouteRequest, DescribeCloudBaseRunConfForGateWayResponse, ReinstateEnvRequest, EstablishWxGatewayRouteResponse, DescribeDatabaseACLRequest, CreateCloudBaseRunServerVersionResponse, DeleteCloudBaseProjectLatestVersionRequest, DescribeCloudBaseProjectLatestVersionListResponse, DescribeSmsQuotasResponse, DescribeWxCloudBaseRunEnvsRequest, ModifyEnvResponse, DescribeDownloadFileResponse, DescribeQuotaDataRequest, CreateStaticStoreResponse, DescribeCloudBaseRunResourceResponse, DescribeCloudBaseRunVersionSnapshotRequest, DescribePostpayFreeQuotasResponse, DescribeCloudBaseProjectLatestVersionListRequest, DescribeEndUsersResponse, DescribeHostingDomainTaskResponse, DescribeEndUserStatisticResponse, DescribeSmsQuotasRequest, DescribeCloudBaseRunVersionResponse, CreatePostpayPackageRequest, DescribeCloudBaseBuildServiceRequest, CheckTcbServiceRequest, CreateCloudBaseRunResourceRequest, ModifyEndUserResponse, DescribeAuthDomainsRequest, DescribeDatabaseACLResponse, DescribeExtensionUploadInfoResponse, ModifyEnvRequest, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DescribeExtraPkgBillingInfoResponse, RollUpdateCloudBaseRunServerVersionRequest } from "./tcb_models";
+import { DescribeEnvLimitResponse, CheckTcbServiceResponse, DescribeCloudBaseRunConfForGateWayRequest, DescribeCloudBaseRunServerVersionRequest, DescribeEnvLimitRequest, DescribeExtensionUploadInfoRequest, DeleteCloudBaseRunServerVersionResponse, CommonServiceAPIResponse, DescribePostpayPackageFreeQuotasRequest, DescribeEndUserLoginStatisticRequest, DescribeCloudBaseBuildServiceResponse, DescribeEndUsersRequest, DescribeSpecialCostItemsRequest, DescribeEndUserStatisticRequest, CreateWxCloudBaseRunServerDBClusterResponse, ReplaceActivityRecordResponse, DescribeCloudBaseRunResourceForExtendRequest, ModifyEndUserRequest, RollUpdateCloudBaseRunServerVersionResponse, DescribeAuthDomainsResponse, DescribeWxCloudBaseRunEnvsResponse, CreateHostingDomainRequest, DescribeCloudBaseRunResourceRequest, DescribePostpayFreeQuotasRequest, ModifyDatabaseACLRequest, DescribeCloudBaseRunServerVersionResponse, DescribeEndUserLoginStatisticResponse, DescribeHostingDomainTaskRequest, DescribeQuotaDataResponse, CommonServiceAPIRequest, DestroyStaticStoreRequest, CreateWxCloudBaseRunEnvRequest, ModifyCloudBaseRunServerFlowConfRequest, DescribeActivityRecordResponse, CreateStaticStoreRequest, CreateWxCloudBaseRunServerDBClusterRequest, DeleteCloudBaseProjectLatestVersionResponse, CreateAuthDomainResponse, DescribeEnvsRequest, DeleteWxGatewayRouteRequest, DescribeEnvPostpaidDeductRequest, DescribeExtraPkgBillingInfoRequest, BindEnvGatewayResponse, DescribeWxCloudBaseRunSubNetsResponse, DescribeEnvFreeQuotaRequest, DeleteEndUserRequest, DescribeEnvPostpaidDeductResponse, CreateCloudBaseRunResourceResponse, DestroyStaticStoreResponse, DeleteEndUserResponse, ModifyDatabaseACLResponse, ModifyCloudBaseRunServerFlowConfResponse, EstablishCloudBaseRunServerResponse, DestroyEnvRequest, DestroyEnvResponse, DescribeCloudBaseProjectVersionListRequest, DescribeEnvsResponse, CreateAuthDomainRequest, CreateHostingDomainResponse, DescribeActivityRecordRequest, CreateWxCloudBaseRunEnvResponse, DeleteCloudBaseRunServerVersionRequest, CreateCloudBaseRunServerVersionRequest, DescribeWxCloudBaseRunSubNetsRequest, CreatePostpayPackageResponse, ReplaceActivityRecordRequest, DeleteWxGatewayRouteResponse, EstablishCloudBaseRunServerRequest, DescribeSpecialCostItemsResponse, DescribeCloudBaseProjectVersionListResponse, DescribeDownloadFileRequest, ReinstateEnvResponse, DescribeEnvFreeQuotaResponse, CreateAndDeployCloudBaseProjectResponse, DescribeCloudBaseRunResourceForExtendResponse, CreateAndDeployCloudBaseProjectRequest, DescribeCloudBaseRunVersionRequest, EstablishWxGatewayRouteRequest, DescribeCloudBaseRunConfForGateWayResponse, ReinstateEnvRequest, EstablishWxGatewayRouteResponse, DescribeDatabaseACLRequest, CreateCloudBaseRunServerVersionResponse, DeleteCloudBaseProjectLatestVersionRequest, DescribeCloudBaseProjectLatestVersionListResponse, DescribeSmsQuotasResponse, DescribeWxCloudBaseRunEnvsRequest, BindEnvGatewayRequest, ModifyEnvResponse, DescribeDownloadFileResponse, DescribeQuotaDataRequest, CreateStaticStoreResponse, DescribeCloudBaseRunResourceResponse, DescribeCloudBaseRunVersionSnapshotRequest, DescribePostpayFreeQuotasResponse, DescribeCloudBaseProjectLatestVersionListRequest, DescribeEndUsersResponse, DescribeHostingDomainTaskResponse, DescribeEndUserStatisticResponse, DescribeSmsQuotasRequest, DescribeCloudBaseRunVersionResponse, CreatePostpayPackageRequest, DescribeCloudBaseBuildServiceRequest, CheckTcbServiceRequest, CreateCloudBaseRunResourceRequest, ModifyEndUserResponse, DescribeAuthDomainsRequest, DescribeDatabaseACLResponse, DescribeExtensionUploadInfoResponse, ModifyEnvRequest, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DescribeExtraPkgBillingInfoResponse, RollUpdateCloudBaseRunServerVersionRequest } from "./tcb_models";
 /**
  * tcb client
  * @class
@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteWxGatewayRoute(req: DeleteWxGatewayRouteRequest, cb?: (error: string, rep: DeleteWxGatewayRouteResponse) => void): Promise<DeleteWxGatewayRouteResponse>;
     /**
-     * 获取终端用户列表
+     * 绑定另外一个环境下的网关，callContainer请求可以访问到该网关
      */
-    DescribeEndUsers(req: DescribeEndUsersRequest, cb?: (error: string, rep: DescribeEndUsersResponse) => void): Promise<DescribeEndUsersResponse>;
+    BindEnvGateway(req: BindEnvGatewayRequest, cb?: (error: string, rep: BindEnvGatewayResponse) => void): Promise<BindEnvGatewayResponse>;
     /**
      * 查询微信云托管环境信息
      */
@@ -59,9 +59,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEnvs(req: DescribeEnvsRequest, cb?: (error: string, rep: DescribeEnvsResponse) => void): Promise<DescribeEnvsResponse>;
     /**
-     * 创建微信云托管
+     * 查看容器托管的集群状态
      */
-    CreateWxCloudBaseRunEnv(req: CreateWxCloudBaseRunEnvRequest, cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void): Promise<CreateWxCloudBaseRunEnvResponse>;
+    DescribeCloudBaseRunResource(req: DescribeCloudBaseRunResourceRequest, cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void): Promise<DescribeCloudBaseRunResourceResponse>;
     /**
      * 增加安全域名
      */
@@ -87,9 +87,9 @@ export declare class Client extends AbstractClient {
      */
     CreatePostpayPackage(req: CreatePostpayPackageRequest, cb?: (error: string, rep: CreatePostpayPackageResponse) => void): Promise<CreatePostpayPackageResponse>;
     /**
-     * 查看容器托管的集群状态
+     * 创建微信云托管
      */
-    DescribeCloudBaseRunResource(req: DescribeCloudBaseRunResourceRequest, cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void): Promise<DescribeCloudBaseRunResourceResponse>;
+    CreateWxCloudBaseRunEnv(req: CreateWxCloudBaseRunEnvRequest, cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void): Promise<CreateWxCloudBaseRunEnvResponse>;
     /**
      * 云项目部署列表
      */
@@ -206,6 +206,10 @@ export declare class Client extends AbstractClient {
      * 查询版本历史
      */
     DescribeCloudBaseRunVersionSnapshot(req: DescribeCloudBaseRunVersionSnapshotRequest, cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void): Promise<DescribeCloudBaseRunVersionSnapshotResponse>;
+    /**
+     * 获取终端用户列表
+     */
+    DescribeEndUsers(req: DescribeEndUsersRequest, cb?: (error: string, rep: DescribeEndUsersResponse) => void): Promise<DescribeEndUsersResponse>;
     /**
      * 查询服务版本详情(新)
      */

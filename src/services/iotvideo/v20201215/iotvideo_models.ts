@@ -28,6 +28,11 @@ export interface DescribeCloudStorageDateRequest {
    * 设备名称
    */
   DeviceName: string
+
+  /**
+   * 用户ID
+   */
+  UserId?: string
 }
 
 /**
@@ -43,6 +48,31 @@ export interface CloudStorageTimeData {
    * 播放地址
    */
   VideoURL: string
+}
+
+/**
+ * RetryDeviceFirmwareTask请求参数结构体
+ */
+export interface RetryDeviceFirmwareTaskRequest {
+  /**
+   * 产品ID
+   */
+  ProductID: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 固件版本号
+   */
+  FirmwareVersion: string
+
+  /**
+   * 固件升级任务ID
+   */
+  TaskId: number
 }
 
 /**
@@ -210,6 +240,40 @@ export interface DescribeCloudStorageTimeResponse {
 }
 
 /**
+ * DescribeDeviceStatusLog返回参数结构体
+ */
+export interface DescribeDeviceStatusLogResponse {
+  /**
+      * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Listover: boolean
+
+  /**
+      * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Context: string
+
+  /**
+      * 日志数据结果数组，返回对应时间点及取值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Results: Array<DeviceStatusLogItem>
+
+  /**
+      * 日志数据结果总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReportAliveDevice请求参数结构体
  */
 export interface ReportAliveDeviceRequest {
@@ -314,7 +378,7 @@ export interface DescribeDeviceActionHistoryRequest {
   ActionId?: string
 
   /**
-   * 查询条数
+   * 查询条数 默认为0 最大不超过500
    */
   Limit?: number
 
@@ -322,6 +386,26 @@ export interface DescribeDeviceActionHistoryRequest {
    * 游标，标识查询位置。
    */
   Context?: string
+}
+
+/**
+ * ModifyDataForward请求参数结构体
+ */
+export interface ModifyDataForwardRequest {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+
+  /**
+   * 转发地址。
+   */
+  ForwardAddr: string
+
+  /**
+   * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
+   */
+  DataChose?: number
 }
 
 /**
@@ -364,12 +448,12 @@ export interface ModifyProductRequest {
   ProductId: string
 
   /**
-   * 修改的产品名称
+   * 修改的产品名称 （支持中文、英文、数字、下划线组合，最多不超过20个字符）
    */
   ProductName?: string
 
   /**
-   * 修改的产品描述
+   * 修改的产品描述 （最多不超过128个字符）
    */
   ProductDescription?: string
 }
@@ -454,12 +538,12 @@ export interface DescribeForwardRuleResponse {
   ProductID: string
 
   /**
-   * 消息类型
+   * 消息类型 1设备上报信息 2设备状态变化通知 3为全选
    */
   MsgType: number
 
   /**
-   * 结果
+   * 结果 2表示禁用 其他为成功
    */
   Result: number
 
@@ -502,6 +586,26 @@ export interface DescribeForwardRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDeviceLogLevel请求参数结构体
+ */
+export interface ModifyDeviceLogLevelRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 日志级别，0：关闭，1：错误，2：告警，3：信息，4：调试
+   */
+  LogLevel: number
 }
 
 /**
@@ -699,27 +803,9 @@ export interface ActionHistory {
 }
 
 /**
- * DescribeFirmwareTaskStatistics返回参数结构体
+ * CreateDataForward返回参数结构体
  */
-export interface DescribeFirmwareTaskStatisticsResponse {
-  /**
-      * 升级成功的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SuccessTotal: number
-
-  /**
-      * 升级失败的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailureTotal: number
-
-  /**
-      * 正在升级的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpgradingTotal: number
-
+export interface CreateDataForwardResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -739,6 +825,26 @@ export interface DescribeFirmwareRequest {
    * 固件版本号
    */
   FirmwareVersion: string
+}
+
+/**
+ * DescribeCloudStorageUsers返回参数结构体
+ */
+export interface DescribeCloudStorageUsersResponse {
+  /**
+   * 用户总数
+   */
+  TotalCount: number
+
+  /**
+   * 用户信息
+   */
+  Users: Array<CloudStorageUserInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -781,7 +887,7 @@ export interface CheckForwardAuthRequest {
   Skey: string
 
   /**
-   * 队列类型
+   * 队列类型 0.CMQ  1.Ckafka
    */
   QueueType: number
 }
@@ -945,6 +1051,22 @@ export interface DeviceUpdateStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskId: number
+}
+
+/**
+ * DescribeDataForwardList返回参数结构体
+ */
+export interface DescribeDataForwardListResponse {
+  /**
+      * 数据转发列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataForwardList: Array<DataForward>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1119,7 +1241,7 @@ export interface SetForwardAuthResponse {
   RoleID: number
 
   /**
-   * 消息队列类型
+   * 消息队列类型  0.CMQ 1.CKafka
    */
   QueueType: number
 
@@ -1245,6 +1367,40 @@ export interface DescribeCategoryResponse {
 }
 
 /**
+ * DescribeSDKLog请求参数结构体
+ */
+export interface DescribeSDKLogRequest {
+  /**
+   * 日志开始时间
+   */
+  MinTime: number
+
+  /**
+   * 日志结束时间
+   */
+  MaxTime: number
+
+  /**
+      * 查询关键字，可以同时支持键值查询和文本查询，
+例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。
+键值或文本可以包含多个，以空格隔开。
+其中可以索引的key包括：productid、devicename、loglevel
+一个典型的查询示例：productid:7JK1G72JNE devicename:name publish loglevel:WARN一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW publish
+      */
+  Keywords: string
+
+  /**
+   * 日志检索上下文
+   */
+  Context?: string
+
+  /**
+   * 查询条数
+   */
+  MaxNum?: number
+}
+
+/**
  * DescribeBalance请求参数结构体
  */
 export interface DescribeBalanceRequest {
@@ -1267,6 +1423,16 @@ export interface ImportModelDefinitionRequest {
    * 数据模板定义
    */
   ModelSchema: string
+}
+
+/**
+ * DescribeDataForwardList请求参数结构体
+ */
+export interface DescribeDataForwardListRequest {
+  /**
+   * 产品ID列表
+   */
+  ProductIds: string
 }
 
 /**
@@ -1394,12 +1560,12 @@ export interface DescribeFirmwareTaskDevicesRequest {
   Filters?: Array<SearchKeyword>
 
   /**
-   * 查询偏移量
+   * 查询偏移量 默认为0
    */
   Offset?: number
 
   /**
-   * 查询的数量
+   * 查询的数量 默认为50
    */
   Limit?: number
 }
@@ -1458,12 +1624,12 @@ export interface DescribeFirmwareResponse {
  */
 export interface DescribeDeviceCommLogRequest {
   /**
-   * 开始时间
+   * 开始时间 13位时间戳 单位毫秒
    */
   MinTime: number
 
   /**
-   * 结束时间
+   * 结束时间 13位时间戳 单位毫秒
    */
   MaxTime: number
 
@@ -1478,7 +1644,7 @@ export interface DescribeDeviceCommLogRequest {
   DeviceName: string
 
   /**
-   * 返回条数
+   * 返回条数 默认为50
    */
   Limit?: number
 
@@ -1488,9 +1654,19 @@ export interface DescribeDeviceCommLogRequest {
   Context?: string
 
   /**
-   * 类型：shadow 下行，device 上行
+   * 类型：shadow 下行，device 上行 默认为空则全部查询
    */
   Type?: string
+}
+
+/**
+ * WakeUpDevice返回参数结构体
+ */
+export interface WakeUpDeviceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1574,9 +1750,29 @@ export interface DescribeBalanceTransactionsRequest {
   Limit: number
 
   /**
-   * 流水类型：All-全部类型；Recharge-充值；CreateOrder-新购。
+   * 流水类型：All-全部类型；Recharge-充值；CreateOrder-新购。默认为All
    */
   Operation?: string
+}
+
+/**
+ * BindCloudStorageUser请求参数结构体
+ */
+export interface BindCloudStorageUserRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 用户ID
+   */
+  UserId: string
 }
 
 /**
@@ -1609,6 +1805,16 @@ export interface DescribeFirmwareTaskDevicesResponse {
    */
   Devices: Array<DeviceUpdateStatus>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDataForward返回参数结构体
+ */
+export interface ModifyDataForwardResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1684,6 +1890,16 @@ export interface GenerateSignedVideoURLRequest {
  * ResetCloudStorage返回参数结构体
  */
 export interface ResetCloudStorageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InheritCloudStorageUser返回参数结构体
+ */
+export interface InheritCloudStorageUserResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1832,7 +2048,7 @@ export interface CreateProductRequest {
   ProductName: string
 
   /**
-   * 产品设备类型
+   * 产品设备类型 1.普通设备 2.NVR设备
    */
   DeviceType: number
 
@@ -1842,12 +2058,12 @@ export interface CreateProductRequest {
   ProductVaildYears: number
 
   /**
-   * 设备功能码
+   * 设备功能码 ypsxth音频双向通话 spdxth视频单向通话
    */
   Features: Array<string>
 
   /**
-   * 设备操作系统
+   * 设备操作系统 android linux liteos
    */
   ChipOs: string
 
@@ -1867,7 +2083,7 @@ export interface CreateProductRequest {
   ProductDescription: string
 
   /**
-   * 认证方式。2 PSK
+   * 认证方式 只支持取值为2 psk认证
    */
   EncryptionType?: number
 }
@@ -1918,43 +2134,28 @@ export interface GetFirmwareURLResponse {
 }
 
 /**
- * DescribeDevice返回参数结构体
+ * DescribeAIModelApplications请求参数结构体
  */
-export interface DescribeDeviceResponse {
+export interface DescribeAIModelApplicationsRequest {
   /**
-   * 设备名
+   * 模型ID
    */
-  DeviceName: string
+  ModelId: string
 
   /**
-   * 设备是否在线，0不在线，1在线，2获取失败，3未激活
+   * 分页的大小，最大100
    */
-  Online: number
+  Limit: number
 
   /**
-   * 设备最后上线时间
+   * 偏移量，Offset从0开始
    */
-  LoginTime: number
+  Offset: number
 
   /**
-   * 设备密钥
+   * 产品ID
    */
-  DevicePsk: string
-
-  /**
-   * 设备启用状态
-   */
-  EnableState: number
-
-  /**
-   * 设备过期时间
-   */
-  ExpireTime: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ProductId?: string
 }
 
 /**
@@ -1995,6 +2196,11 @@ export interface DescribeCloudStorageEventsRequest {
    * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
    */
   EventId?: string
+
+  /**
+   * 用户ID
+   */
+  UserId?: string
 }
 
 /**
@@ -2058,13 +2264,23 @@ export interface PublishMessageRequest {
 }
 
 /**
- * RetryDeviceFirmwareTask请求参数结构体
+ * DescribeDeviceStatusLog请求参数结构体
  */
-export interface RetryDeviceFirmwareTaskRequest {
+export interface DescribeDeviceStatusLogRequest {
+  /**
+   * 开始时间（毫秒）
+   */
+  MinTime: number
+
+  /**
+   * 结束时间（毫秒）
+   */
+  MaxTime: number
+
   /**
    * 产品ID
    */
-  ProductID: string
+  ProductId: string
 
   /**
    * 设备名称
@@ -2072,14 +2288,39 @@ export interface RetryDeviceFirmwareTaskRequest {
   DeviceName: string
 
   /**
-   * 固件版本号
+   * 返回条数
    */
-  FirmwareVersion: string
+  Limit?: number
 
   /**
-   * 固件升级任务ID
+   * 检索上下文
    */
-  TaskId: number
+  Context?: string
+}
+
+/**
+ * DescribeSDKLog返回参数结构体
+ */
+export interface DescribeSDKLogResponse {
+  /**
+   * 日志检索上下文
+   */
+  Context: string
+
+  /**
+   * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+   */
+  Listover: boolean
+
+  /**
+   * 日志列表
+   */
+  Results: Array<SDKLogItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2152,6 +2393,16 @@ export interface DescribeFirmwareTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云存用户信息
+ */
+export interface CloudStorageUserInfo {
+  /**
+   * 用户ID
+   */
+  UserId: string
 }
 
 /**
@@ -2267,7 +2518,7 @@ export interface ModifyForwardRuleResponse {
   ErrMsg: string
 
   /**
-   * 队列类型
+   * 队列类型 0.CMQ 1.CKafka
    */
   QueueType: number
 
@@ -2392,6 +2643,42 @@ export interface DescribeBatchResponse {
 }
 
 /**
+ * 数据转发描述
+ */
+export interface DataForward {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+
+  /**
+   * 转发地址。
+   */
+  ForwardAddr: string
+
+  /**
+   * 转发状态。
+   */
+  Status: number
+
+  /**
+   * 创建时间。
+   */
+  CreateTime: number
+
+  /**
+   * 更新时间。
+   */
+  UpdateTime: number
+
+  /**
+      * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataChose: number
+}
+
+/**
  * DescribeDevice请求参数结构体
  */
 export interface DescribeDeviceRequest {
@@ -2431,7 +2718,7 @@ export interface ModifyForwardRuleRequest {
   QueueRegion: string
 
   /**
-   * 队列类型
+   * 队列类型 0.CMQ 1.CKafka
    */
   QueueType: number
 
@@ -2607,6 +2894,16 @@ export interface DescribeCloudStorageDateResponse {
 }
 
 /**
+ * ModifyDataForwardStatus返回参数结构体
+ */
+export interface ModifyDataForwardStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云存时间轴信息
  */
 export interface CloudStorageTimeInfo {
@@ -2687,6 +2984,16 @@ export interface CreateCloudStorageResponse {
 }
 
 /**
+ * BindCloudStorageUser返回参数结构体
+ */
+export interface BindCloudStorageUserResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CancelDeviceFirmwareTask请求参数结构体
  */
 export interface CancelDeviceFirmwareTaskRequest {
@@ -2729,6 +3036,21 @@ export interface DeleteDeviceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * WakeUpDevice请求参数结构体
+ */
+export interface WakeUpDeviceRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
 }
 
 /**
@@ -2869,7 +3191,7 @@ export interface CreateForwardRuleRequest {
   QueueRegion: string
 
   /**
-   * 队列类型
+   * 队列类型 0.CMQ  1.Ckafka
    */
   QueueType: number
 
@@ -2944,7 +3266,7 @@ export interface SetForwardAuthRequest {
   Skey: string
 
   /**
-   * 消息队列类型
+   * 消息队列类型  0.CMQ 1.CKafka
    */
   QueueType: number
 }
@@ -2987,6 +3309,36 @@ export interface CreateTaskFileUrlRequest {
    * 产品ID
    */
   ProductId: string
+}
+
+/**
+ * ModifyDeviceLogLevel返回参数结构体
+ */
+export interface ModifyDeviceLogLevelResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDataForward请求参数结构体
+ */
+export interface CreateDataForwardRequest {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+
+  /**
+   * 转发地址。
+   */
+  ForwardAddr: string
+
+  /**
+   * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
+   */
+  DataChose?: number
 }
 
 /**
@@ -3124,9 +3476,30 @@ export interface DescribeCloudStorageResponse {
   ShiftDuration: number
 
   /**
+      * 云存用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ResetCloudStorage请求参数结构体
+ */
+export interface ResetCloudStorageRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
 }
 
 /**
@@ -3142,6 +3515,36 @@ export interface DescribeProductResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SDK日志项
+ */
+export interface SDKLogItem {
+  /**
+   * 产品ID
+   */
+  ProductID: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 日志等级
+   */
+  Level: string
+
+  /**
+   * 日志时间
+   */
+  DateTime: string
+
+  /**
+   * 日志内容
+   */
+  Content: string
 }
 
 /**
@@ -3162,6 +3565,31 @@ export interface DescribeAIModelsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * InheritCloudStorageUser请求参数结构体
+ */
+export interface InheritCloudStorageUserRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 原始用户ID
+   */
+  UserId: string
+
+  /**
+   * 目标用户ID
+   */
+  ToUserId: string
 }
 
 /**
@@ -3242,6 +3670,11 @@ export interface DescribeCloudStorageRequest {
    * 设备名称
    */
   DeviceName: string
+
+  /**
+   * 云存用户ID
+   */
+  UserId?: string
 }
 
 /**
@@ -3249,7 +3682,7 @@ export interface DescribeCloudStorageRequest {
  */
 export interface GetAllFirmwareVersionResponse {
   /**
-   * 无
+   * 固件可用版本列表
    */
   Version: Array<string>
 
@@ -3384,6 +3817,34 @@ export interface DescribeModelDefinitionRequest {
 }
 
 /**
+ * DescribeFirmwareTaskStatistics返回参数结构体
+ */
+export interface DescribeFirmwareTaskStatisticsResponse {
+  /**
+      * 升级成功的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuccessTotal: number
+
+  /**
+      * 升级失败的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailureTotal: number
+
+  /**
+      * 正在升级的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpgradingTotal: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckForwardAuth返回参数结构体
  */
 export interface CheckForwardAuthResponse {
@@ -3408,7 +3869,7 @@ export interface CheckForwardAuthResponse {
   ErrMsg: string
 
   /**
-   * 队列类型
+   * 队列类型 0.CMQ  1.Ckafka
    */
   QueueType: number
 
@@ -3419,28 +3880,49 @@ export interface CheckForwardAuthResponse {
 }
 
 /**
- * DescribeAIModelApplications请求参数结构体
+ * DescribeDevice返回参数结构体
  */
-export interface DescribeAIModelApplicationsRequest {
+export interface DescribeDeviceResponse {
   /**
-   * 模型ID
+   * 设备名
    */
-  ModelId: string
+  DeviceName: string
 
   /**
-   * 分页的大小，最大100
+   * 设备是否在线，0不在线，1在线，2获取失败，3未激活
    */
-  Limit: number
+  Online: number
 
   /**
-   * 偏移量，Offset从0开始
+   * 设备最后上线时间
    */
-  Offset: number
+  LoginTime: number
 
   /**
-   * 产品ID
+   * 设备密钥
    */
-  ProductId?: string
+  DevicePsk: string
+
+  /**
+   * 设备启用状态
+   */
+  EnableState: number
+
+  /**
+   * 设备过期时间
+   */
+  ExpireTime: number
+
+  /**
+      * 设备的sdk日志等级，0：关闭，1：错误，2：告警，3：信息，4：调试
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogLevel: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3478,7 +3960,7 @@ export interface DeleteForwardRuleResponse {
   ProductID: string
 
   /**
-   * 删除结果
+   * 删除结果 0成功 其他不成功
    */
   Result: number
 
@@ -3491,6 +3973,26 @@ export interface DeleteForwardRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 设备上下线日志记录
+ */
+export interface DeviceStatusLogItem {
+  /**
+   * 时间
+   */
+  Time: string
+
+  /**
+   * 状态类型： Online 上线，Offline 下线
+   */
+  Type: string
+
+  /**
+   * 日志信息
+   */
+  Data: string
 }
 
 /**
@@ -3599,9 +4101,9 @@ export interface ModifyModelDefinitionResponse {
 }
 
 /**
- * ResetCloudStorage请求参数结构体
+ * DescribeCloudStorageTime请求参数结构体
  */
-export interface ResetCloudStorageRequest {
+export interface DescribeCloudStorageTimeRequest {
   /**
    * 产品ID
    */
@@ -3611,6 +4113,41 @@ export interface ResetCloudStorageRequest {
    * 设备名称
    */
   DeviceName: string
+
+  /**
+   * 云存日期，例如"2020-01-05"
+   */
+  Date: string
+
+  /**
+   * 开始时间，unix时间
+   */
+  StartTime?: number
+
+  /**
+   * 结束时间，unix时间
+   */
+  EndTime?: number
+
+  /**
+   * 用户ID
+   */
+  UserId?: string
+}
+
+/**
+ * ModifyDataForwardStatus请求参数结构体
+ */
+export interface ModifyDataForwardStatusRequest {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+
+  /**
+   * 转发状态，1启用，0禁用。
+   */
+  Status: number
 }
 
 /**
@@ -3634,9 +4171,9 @@ export interface DescribeFirmwareTaskRequest {
 }
 
 /**
- * DescribeCloudStorageTime请求参数结构体
+ * DescribeCloudStorageUsers请求参数结构体
  */
-export interface DescribeCloudStorageTimeRequest {
+export interface DescribeCloudStorageUsersRequest {
   /**
    * 产品ID
    */
@@ -3648,9 +4185,14 @@ export interface DescribeCloudStorageTimeRequest {
   DeviceName: string
 
   /**
-   * 云存日期，例如"2020-01-05"
+   * 分页拉取数量
    */
-  Date: string
+  Limit: number
+
+  /**
+   * 分页拉取偏移
+   */
+  Offset: number
 }
 
 /**

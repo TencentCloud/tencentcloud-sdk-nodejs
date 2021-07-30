@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCloudStorageDateRequest, CreateCloudStorageRequest, ImportModelDefinitionResponse, ApplyAIModelRequest, CreateBatchRequest, CancelAIModelApplicationResponse, DescribeCloudStorageTimeResponse, ReportAliveDeviceRequest, DescribeProductsRequest, DescribeAIModelChannelResponse, DescribeDeviceActionHistoryRequest, DescribeDevicesResponse, ModifyProductResponse, ModifyProductRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, CancelAIModelApplicationRequest, TransferCloudStorageResponse, DescribeForwardRuleResponse, DescribeBatchRequest, DescribeForwardRuleRequest, ModifyDeviceRequest, CreateCOSCredentialsResponse, DescribeFirmwareTaskStatisticsResponse, DescribeFirmwareRequest, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, DescribeDeviceDataRequest, CreateBatchResponse, DescribeDeviceActionHistoryResponse, GetAllFirmwareVersionRequest, CreateCOSCredentialsRequest, DeleteFirmwareResponse, CreateForwardRuleResponse, BatchUpdateFirmwareResponse, DescribeModelDefinitionResponse, DeleteProductRequest, PublishMessageResponse, SetForwardAuthResponse, EditFirmwareRequest, ReportAliveDeviceResponse, DescribeDeviceEventHistoryRequest, DescribeCategoryResponse, DescribeBalanceRequest, ImportModelDefinitionRequest, DescribeDeviceCommLogResponse, DeleteDeviceRequest, GenerateSignedVideoURLResponse, ControlDeviceDataRequest, DescribeFirmwareTaskDevicesRequest, DescribeFirmwareResponse, DescribeDeviceCommLogRequest, DeleteForwardRuleRequest, UpdateAIModelChannelResponse, DescribeAIModelUsageResponse, DescribeBalanceTransactionsRequest, CreateProductResponse, DescribeFirmwareTaskDevicesResponse, DescribeCloudStorageThumbnailResponse, DescribeAIModelsRequest, RetryDeviceFirmwareTaskResponse, GenerateSignedVideoURLRequest, ResetCloudStorageResponse, DescribeDeviceEventHistoryResponse, DescribeFirmwareTaskResponse, CreateProductRequest, DescribeFirmwareTasksRequest, GetFirmwareURLResponse, DescribeDeviceResponse, DescribeCloudStorageEventsRequest, ListFirmwaresRequest, PublishMessageRequest, RetryDeviceFirmwareTaskRequest, DescribeBalanceResponse, UploadFirmwareRequest, DescribeFirmwareTasksResponse, EditFirmwareResponse, DescribeFirmwareTaskDistributionRequest, DeleteProductResponse, ModifyForwardRuleResponse, DescribeFirmwareTaskDistributionResponse, DescribeBatchResponse, DescribeDeviceRequest, ModifyForwardRuleRequest, CreateAIDetectionResponse, DescribeCloudStorageEventsResponse, DescribeCloudStorageDateResponse, UploadFirmwareResponse, UpdateAIModelChannelRequest, CreateCloudStorageResponse, CancelDeviceFirmwareTaskRequest, CancelDeviceFirmwareTaskResponse, DeleteDeviceResponse, ApplyAIModelResponse, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, CreateForwardRuleRequest, SetForwardAuthRequest, DescribeBalanceTransactionsResponse, ModifyDeviceResponse, CreateTaskFileUrlRequest, BatchUpdateFirmwareRequest, DescribeCloudStorageThumbnailRequest, GetFirmwareURLRequest, CreateAIDetectionRequest, DescribeCloudStorageResponse, DescribeProductResponse, DescribeAIModelsResponse, DescribeAIModelChannelRequest, DescribeAIModelUsageRequest, DescribeCategoryRequest, DeleteFirmwareRequest, DescribeCloudStorageRequest, GetAllFirmwareVersionResponse, DescribeDeviceDataHistoryResponse, DescribeDevicesRequest, DescribeModelDefinitionRequest, CheckForwardAuthResponse, DescribeAIModelApplicationsRequest, DescribeDeviceDataResponse, DeleteForwardRuleResponse, ListFirmwaresResponse, TransferCloudStorageRequest, DescribeFirmwareTaskStatisticsRequest, DescribeBatchsRequest, CreateTaskFileUrlResponse, ModifyModelDefinitionResponse, ResetCloudStorageRequest, DescribeFirmwareTaskRequest, DescribeCloudStorageTimeRequest, DescribeAIModelApplicationsResponse } from "./iotvideo_models";
+import { DescribeCloudStorageDateRequest, RetryDeviceFirmwareTaskRequest, CreateCloudStorageRequest, ImportModelDefinitionResponse, ApplyAIModelRequest, CreateBatchRequest, CancelAIModelApplicationResponse, DescribeCloudStorageTimeResponse, DescribeDeviceStatusLogResponse, ReportAliveDeviceRequest, DescribeProductsRequest, DescribeAIModelChannelResponse, DescribeDeviceActionHistoryRequest, ModifyDataForwardRequest, DescribeDevicesResponse, ModifyProductResponse, ModifyProductRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, CancelAIModelApplicationRequest, TransferCloudStorageResponse, DescribeForwardRuleResponse, ModifyDeviceLogLevelRequest, DescribeBatchRequest, DescribeForwardRuleRequest, ModifyDeviceRequest, CreateCOSCredentialsResponse, CreateDataForwardResponse, DescribeFirmwareRequest, DescribeCloudStorageUsersResponse, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, DescribeDeviceDataRequest, CreateBatchResponse, DescribeDeviceActionHistoryResponse, GetAllFirmwareVersionRequest, CreateCOSCredentialsRequest, DescribeDataForwardListResponse, DeleteFirmwareResponse, CreateForwardRuleResponse, BatchUpdateFirmwareResponse, DescribeModelDefinitionResponse, DeleteProductRequest, PublishMessageResponse, SetForwardAuthResponse, EditFirmwareRequest, ReportAliveDeviceResponse, DescribeDeviceEventHistoryRequest, DescribeCategoryResponse, DescribeSDKLogRequest, DescribeBalanceRequest, ImportModelDefinitionRequest, DescribeDataForwardListRequest, DescribeDeviceCommLogResponse, DeleteDeviceRequest, GenerateSignedVideoURLResponse, ControlDeviceDataRequest, DescribeFirmwareTaskDevicesRequest, DescribeFirmwareResponse, DescribeDeviceCommLogRequest, WakeUpDeviceResponse, DeleteForwardRuleRequest, UpdateAIModelChannelResponse, DescribeAIModelUsageResponse, DescribeBalanceTransactionsRequest, BindCloudStorageUserRequest, CreateProductResponse, DescribeFirmwareTaskDevicesResponse, ModifyDataForwardResponse, DescribeCloudStorageThumbnailResponse, DescribeAIModelsRequest, RetryDeviceFirmwareTaskResponse, GenerateSignedVideoURLRequest, ResetCloudStorageResponse, InheritCloudStorageUserResponse, DescribeDeviceEventHistoryResponse, DescribeFirmwareTaskResponse, CreateProductRequest, DescribeFirmwareTasksRequest, GetFirmwareURLResponse, DescribeAIModelApplicationsRequest, DescribeCloudStorageEventsRequest, ListFirmwaresRequest, PublishMessageRequest, DescribeDeviceStatusLogRequest, DescribeSDKLogResponse, DescribeBalanceResponse, UploadFirmwareRequest, DescribeFirmwareTasksResponse, EditFirmwareResponse, DescribeFirmwareTaskDistributionRequest, DeleteProductResponse, ModifyForwardRuleResponse, DescribeFirmwareTaskDistributionResponse, DescribeBatchResponse, DescribeDeviceRequest, ModifyForwardRuleRequest, CreateAIDetectionResponse, DescribeCloudStorageEventsResponse, DescribeCloudStorageDateResponse, ModifyDataForwardStatusResponse, UploadFirmwareResponse, UpdateAIModelChannelRequest, CreateCloudStorageResponse, BindCloudStorageUserResponse, CancelDeviceFirmwareTaskRequest, CancelDeviceFirmwareTaskResponse, DeleteDeviceResponse, WakeUpDeviceRequest, ApplyAIModelResponse, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, CreateForwardRuleRequest, SetForwardAuthRequest, DescribeBalanceTransactionsResponse, ModifyDeviceResponse, CreateTaskFileUrlRequest, ModifyDeviceLogLevelResponse, CreateDataForwardRequest, BatchUpdateFirmwareRequest, DescribeCloudStorageThumbnailRequest, GetFirmwareURLRequest, CreateAIDetectionRequest, DescribeCloudStorageResponse, ResetCloudStorageRequest, DescribeProductResponse, DescribeAIModelsResponse, InheritCloudStorageUserRequest, DescribeAIModelChannelRequest, DescribeAIModelUsageRequest, DescribeCategoryRequest, DeleteFirmwareRequest, DescribeCloudStorageRequest, GetAllFirmwareVersionResponse, DescribeDeviceDataHistoryResponse, DescribeDevicesRequest, DescribeModelDefinitionRequest, DescribeFirmwareTaskStatisticsResponse, CheckForwardAuthResponse, DescribeDeviceResponse, DescribeDeviceDataResponse, DeleteForwardRuleResponse, ListFirmwaresResponse, TransferCloudStorageRequest, DescribeFirmwareTaskStatisticsRequest, DescribeBatchsRequest, CreateTaskFileUrlResponse, ModifyModelDefinitionResponse, DescribeCloudStorageTimeRequest, ModifyDataForwardStatusRequest, DescribeFirmwareTaskRequest, DescribeCloudStorageUsersRequest, DescribeAIModelApplicationsResponse } from "./iotvideo_models";
 /**
  * iotvideo client
  * @class
@@ -32,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     TransferCloudStorage(req: TransferCloudStorageRequest, cb?: (error: string, rep: TransferCloudStorageResponse) => void): Promise<TransferCloudStorageResponse>;
     /**
+     * 更新设备日志级别
+     */
+    ModifyDeviceLogLevel(req: ModifyDeviceLogLevelRequest, cb?: (error: string, rep: ModifyDeviceLogLevelResponse) => void): Promise<ModifyDeviceLogLevelResponse>;
+    /**
      * 发起AI推理请求
      */
     CreateAIDetection(req: CreateAIDetectionRequest, cb?: (error: string, rep: CreateAIDetectionResponse) => void): Promise<CreateAIDetectionResponse>;
@@ -51,6 +55,10 @@ export declare class Client extends AbstractClient {
      * 拉取AI模型列表
      */
     DescribeAIModels(req: DescribeAIModelsRequest, cb?: (error: string, rep: DescribeAIModelsResponse) => void): Promise<DescribeAIModelsResponse>;
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件信息
+     */
+    UploadFirmware(req: UploadFirmwareRequest, cb?: (error: string, rep: UploadFirmwareResponse) => void): Promise<UploadFirmwareResponse>;
     /**
      * 用户AI模型申请记录
      */
@@ -72,13 +80,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyDevice(req: ModifyDeviceRequest, cb?: (error: string, rep: ModifyDeviceResponse) => void): Promise<ModifyDeviceResponse>;
     /**
-     * 修改转发规则
+     * 拉取云存用户列表
      */
-    ModifyForwardRule(req: ModifyForwardRuleRequest, cb?: (error: string, rep: ModifyForwardRuleResponse) => void): Promise<ModifyForwardRuleResponse>;
+    DescribeCloudStorageUsers(req: DescribeCloudStorageUsersRequest, cb?: (error: string, rep: DescribeCloudStorageUsersResponse) => void): Promise<DescribeCloudStorageUsersResponse>;
     /**
      * 取消AI模型申请
      */
     CancelAIModelApplication(req: CancelAIModelApplicationRequest, cb?: (error: string, rep: CancelAIModelApplicationResponse) => void): Promise<CancelAIModelApplicationResponse>;
+    /**
+     * 修改数据转发
+     */
+    ModifyDataForward(req: ModifyDataForwardRequest, cb?: (error: string, rep: ModifyDataForwardResponse) => void): Promise<ModifyDataForwardResponse>;
     /**
      * 获取设备云存服务详情
      */
@@ -116,6 +128,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteForwardRule(req: DeleteForwardRuleRequest, cb?: (error: string, rep: DeleteForwardRuleResponse) => void): Promise<DeleteForwardRuleResponse>;
     /**
+     * 继承云存用户
+     */
+    InheritCloudStorageUser(req: InheritCloudStorageUserRequest, cb?: (error: string, rep: InheritCloudStorageUserResponse) => void): Promise<InheritCloudStorageUserResponse>;
+    /**
      * 创建批次
      */
     CreateBatch(req: CreateBatchRequest, cb?: (error: string, rep: CreateBatchResponse) => void): Promise<CreateBatchResponse>;
@@ -135,6 +151,10 @@ export declare class Client extends AbstractClient {
      * 本接口（GetFirmwareURL）用于获取固件存储的URL
      */
     GetFirmwareURL(req: GetFirmwareURLRequest, cb?: (error: string, rep: GetFirmwareURLResponse) => void): Promise<GetFirmwareURLResponse>;
+    /**
+     * 修改转发规则
+     */
+    ModifyForwardRule(req: ModifyForwardRuleRequest, cb?: (error: string, rep: ModifyForwardRuleResponse) => void): Promise<ModifyForwardRuleResponse>;
     /**
      * 删除设备
      */
@@ -176,13 +196,17 @@ export declare class Client extends AbstractClient {
      */
     DeleteProduct(req: DeleteProductRequest, cb?: (error: string, rep: DeleteProductResponse) => void): Promise<DeleteProductResponse>;
     /**
-     * 上报活跃设备
+     * 获取设备sdk日志
      */
-    ReportAliveDevice(req: ReportAliveDeviceRequest, cb?: (error: string, rep: ReportAliveDeviceResponse) => void): Promise<ReportAliveDeviceResponse>;
+    DescribeSDKLog(req: DescribeSDKLogRequest, cb?: (error: string, rep: DescribeSDKLogResponse) => void): Promise<DescribeSDKLogResponse>;
     /**
      * 获取设备的历史事件
      */
     DescribeDeviceEventHistory(req: DescribeDeviceEventHistoryRequest, cb?: (error: string, rep: DescribeDeviceEventHistoryResponse) => void): Promise<DescribeDeviceEventHistoryResponse>;
+    /**
+     * 设置数据转发状态
+     */
+    ModifyDataForwardStatus(req: ModifyDataForwardStatusRequest, cb?: (error: string, rep: ModifyDataForwardStatusResponse) => void): Promise<ModifyDataForwardStatusResponse>;
     /**
      * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
      */
@@ -196,17 +220,25 @@ export declare class Client extends AbstractClient {
      */
     ImportModelDefinition(req: ImportModelDefinitionRequest, cb?: (error: string, rep: ImportModelDefinitionResponse) => void): Promise<ImportModelDefinitionResponse>;
     /**
-     * 本接口（UploadFirmware）用于上传设备固件信息
+     * 上报活跃设备
      */
-    UploadFirmware(req: UploadFirmwareRequest, cb?: (error: string, rep: UploadFirmwareResponse) => void): Promise<UploadFirmwareResponse>;
+    ReportAliveDevice(req: ReportAliveDeviceRequest, cb?: (error: string, rep: ReportAliveDeviceResponse) => void): Promise<ReportAliveDeviceResponse>;
     /**
      * 重置云存服务
      */
     ResetCloudStorage(req: ResetCloudStorageRequest, cb?: (error: string, rep: ResetCloudStorageResponse) => void): Promise<ResetCloudStorageResponse>;
     /**
+     * 获取设备上下线日志
+     */
+    DescribeDeviceStatusLog(req: DescribeDeviceStatusLogRequest, cb?: (error: string, rep: DescribeDeviceStatusLogResponse) => void): Promise<DescribeDeviceStatusLogResponse>;
+    /**
      * 拉取云存事件列表
      */
     DescribeCloudStorageEvents(req: DescribeCloudStorageEventsRequest, cb?: (error: string, rep: DescribeCloudStorageEventsResponse) => void): Promise<DescribeCloudStorageEventsResponse>;
+    /**
+     * 创建数据转发
+     */
+    CreateDataForward(req: CreateDataForwardRequest, cb?: (error: string, rep: CreateDataForwardResponse) => void): Promise<CreateDataForwardResponse>;
     /**
      * 本接口用于查询固件升级任务的设备列表
      */
@@ -219,6 +251,10 @@ export declare class Client extends AbstractClient {
      * 查看AI推理结果推送配置
      */
     DescribeAIModelChannel(req: DescribeAIModelChannelRequest, cb?: (error: string, rep: DescribeAIModelChannelResponse) => void): Promise<DescribeAIModelChannelResponse>;
+    /**
+     * 获取数据转发列表
+     */
+    DescribeDataForwardList(req: DescribeDataForwardListRequest, cb?: (error: string, rep: DescribeDataForwardListResponse) => void): Promise<DescribeDataForwardListResponse>;
     /**
      * 获取某一天云存时间轴
      */
@@ -244,9 +280,9 @@ export declare class Client extends AbstractClient {
      */
     ApplyAIModel(req: ApplyAIModelRequest, cb?: (error: string, rep: ApplyAIModelResponse) => void): Promise<ApplyAIModelResponse>;
     /**
-     * 查询账户余额
+     * 绑定云存用户
      */
-    DescribeBalance(req: DescribeBalanceRequest, cb?: (error: string, rep: DescribeBalanceResponse) => void): Promise<DescribeBalanceResponse>;
+    BindCloudStorageUser(req: BindCloudStorageUserRequest, cb?: (error: string, rep: BindCloudStorageUserResponse) => void): Promise<BindCloudStorageUserResponse>;
     /**
      * 获取设备列表
      */
@@ -271,4 +307,12 @@ export declare class Client extends AbstractClient {
      * 拉取云存事件缩略图
      */
     DescribeCloudStorageThumbnail(req: DescribeCloudStorageThumbnailRequest, cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void): Promise<DescribeCloudStorageThumbnailResponse>;
+    /**
+     * 查询账户余额
+     */
+    DescribeBalance(req: DescribeBalanceRequest, cb?: (error: string, rep: DescribeBalanceResponse) => void): Promise<DescribeBalanceResponse>;
+    /**
+     * 设备唤醒
+     */
+    WakeUpDevice(req: WakeUpDeviceRequest, cb?: (error: string, rep: WakeUpDeviceResponse) => void): Promise<WakeUpDeviceResponse>;
 }

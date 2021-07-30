@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { EnableVpcCniNetworkTypeRequest, DescribeClusterEndpointVipStatusRequest, DescribeClusterSecurityResponse, DescribeClusterSecurityRequest, DeleteClusterInstancesResponse, ModifyNodePoolDesiredCapacityAboutAsgResponse, ModifyClusterNodePoolResponse, DescribeClusterKubeconfigResponse, RemoveNodeFromNodePoolResponse, CreateClusterRouteRequest, DescribeClusterEndpointVipStatusResponse, ModifyClusterEndpointSPRequest, DescribeClusterInstancesResponse, DeleteClusterResponse, DescribePrometheusTemplateSyncResponse, UpdateEKSClusterRequest, CreateClusterRouteTableResponse, DescribeClusterCommonNamesRequest, DeleteClusterEndpointResponse, CreatePrometheusTemplateRequest, DeletePrometheusTemplateRequest, DescribeEKSClustersResponse, DeleteClusterRequest, CreateEKSClusterRequest, DisableVpcCniNetworkTypeResponse, DeleteClusterAsGroupsRequest, DescribeClusterControllersResponse, DescribeExistedInstancesRequest, DescribeRegionsResponse, CreateClusterRouteResponse, DescribePrometheusTemplatesRequest, AddNodeToNodePoolRequest, EnableVpcCniNetworkTypeResponse, DescribePrometheusAlertRuleResponse, DescribeVpcCniPodLimitsResponse, CreateClusterNodePoolFromExistingAsgRequest, DescribePrometheusAgentInstancesRequest, DescribeImagesResponse, ModifyClusterAttributeRequest, DeleteClusterRouteResponse, ModifyClusterEndpointSPResponse, CreateClusterEndpointVipResponse, DescribeClusterRoutesResponse, DescribeClustersRequest, UpgradeClusterInstancesRequest, DescribePrometheusAlertHistoryRequest, DeletePrometheusTemplateSyncRequest, SetNodePoolNodeProtectionResponse, DisableVpcCniNetworkTypeRequest, DescribePrometheusTemplatesResponse, DeleteClusterEndpointVipResponse, SyncPrometheusTemplateRequest, CreatePrometheusDashboardResponse, DescribeEKSClusterCredentialResponse, DeleteClusterInstancesRequest, ModifyClusterAsGroupAttributeResponse, CreateClusterInstancesRequest, DeleteEKSClusterResponse, DeleteClusterNodePoolRequest, DescribeClusterKubeconfigRequest, CreatePrometheusTemplateResponse, CreateClusterEndpointVipRequest, CheckInstancesUpgradeAbleRequest, AddClusterCIDRRequest, DescribeClusterNodePoolsResponse, DescribePrometheusAlertRuleRequest, DescribeEKSClusterCredentialRequest, GetUpgradeInstanceProgressRequest, ModifyPrometheusTemplateRequest, AddNodeToNodePoolResponse, UpdateEKSClusterResponse, DescribeRegionsRequest, DescribeClustersResponse, DescribeVpcCniPodLimitsRequest, DescribePrometheusOverviewsRequest, DescribeRouteTableConflictsRequest, SyncPrometheusTemplateResponse, DeleteEKSClusterRequest, GetUpgradeInstanceProgressResponse, DescribeExistedInstancesResponse, CreateEKSClusterResponse, DescribeEKSClustersRequest, CreateClusterNodePoolFromExistingAsgResponse, DescribeEnableVpcCniProgressRequest, DescribeClusterEndpointStatusRequest, ModifyClusterAttributeResponse, CreateClusterAsGroupRequest, DescribeRouteTableConflictsResponse, CreateClusterResponse, DeleteClusterRouteTableRequest, DescribeAvailableClusterVersionRequest, CreateClusterRequest, AcquireClusterAdminRoleRequest, CreateClusterAsGroupResponse, DeleteClusterAsGroupsResponse, DescribeClusterInstancesRequest, DescribePrometheusAgentsRequest, DescribeEnableVpcCniProgressResponse, AddClusterCIDRResponse, ModifyClusterNodePoolRequest, CreateClusterEndpointResponse, CreateClusterNodePoolRequest, AcquireClusterAdminRoleResponse, ModifyPrometheusTemplateResponse, DeletePrometheusTemplateResponse, DescribePrometheusTemplateSyncRequest, DeleteClusterEndpointVipRequest, CheckInstancesUpgradeAbleResponse, DescribeClusterEndpointStatusResponse, UpgradeClusterInstancesResponse, CreatePrometheusDashboardRequest, DescribePrometheusAgentsResponse, AddExistedInstancesResponse, DeleteClusterRouteTableResponse, CreateClusterInstancesResponse, DescribeClusterAsGroupOptionRequest, DescribePrometheusAgentInstancesResponse, CreateClusterEndpointRequest, ModifyClusterAsGroupOptionAttributeResponse, AddExistedInstancesRequest, AddVpcCniSubnetsResponse, ModifyNodePoolDesiredCapacityAboutAsgRequest, DescribeClusterNodePoolsRequest, DescribeClusterRouteTablesRequest, ModifyClusterAsGroupOptionAttributeRequest, DescribeClusterRoutesRequest, DeleteClusterRouteRequest, DescribePrometheusOverviewsResponse, DeleteClusterEndpointRequest, DescribePrometheusTargetsRequest, DescribePrometheusTargetsResponse, DescribeClusterNodePoolDetailRequest, SetNodePoolNodeProtectionRequest, DeletePrometheusTemplateSyncResponse, CreateClusterRouteTableRequest, RemoveNodeFromNodePoolRequest, DescribeClusterAsGroupsRequest, DescribeImagesRequest, DescribeAvailableClusterVersionResponse, DescribeClusterRouteTablesResponse, AddVpcCniSubnetsRequest, DescribePrometheusAlertHistoryResponse, DescribeClusterCommonNamesResponse, DescribeClusterAsGroupOptionResponse, DeleteClusterNodePoolResponse, UpdateClusterVersionResponse, CreateClusterNodePoolResponse, ModifyClusterAsGroupAttributeRequest, UpdateClusterVersionRequest, DescribeClusterAsGroupsResponse, DescribeClusterNodePoolDetailResponse, DescribeClusterControllersRequest } from "./tke_models";
+import { EnableVpcCniNetworkTypeRequest, DescribeClusterEndpointVipStatusRequest, DescribeClusterSecurityResponse, DescribeClusterSecurityRequest, ModifyPrometheusAlertRuleRequest, DeleteClusterInstancesResponse, ModifyNodePoolDesiredCapacityAboutAsgResponse, ModifyClusterNodePoolResponse, DescribeClusterKubeconfigResponse, RemoveNodeFromNodePoolResponse, CreateClusterRouteRequest, DescribeClusterEndpointVipStatusResponse, ModifyClusterEndpointSPRequest, DescribeClusterInstancesResponse, DeleteClusterResponse, CreatePrometheusAlertRuleRequest, UpdateEKSClusterRequest, CreateClusterRouteTableResponse, DescribeClusterCommonNamesRequest, DeleteClusterEndpointResponse, CreatePrometheusTemplateRequest, DeletePrometheusTemplateRequest, DescribeEKSClustersResponse, DeleteClusterRequest, CreateEKSClusterRequest, DisableVpcCniNetworkTypeResponse, DeleteClusterAsGroupsRequest, DescribeClusterControllersResponse, DescribeExistedInstancesRequest, DescribeRegionsResponse, CreateClusterRouteResponse, DescribePrometheusTemplatesRequest, ModifyPrometheusAlertRuleResponse, AddNodeToNodePoolRequest, EnableVpcCniNetworkTypeResponse, DescribePrometheusAlertRuleResponse, DescribeVpcCniPodLimitsResponse, CreateClusterNodePoolFromExistingAsgRequest, DescribePrometheusAgentInstancesRequest, DescribeImagesResponse, ModifyClusterAttributeRequest, DeleteClusterRouteResponse, ModifyClusterEndpointSPResponse, CreateClusterEndpointVipResponse, DescribeClusterRoutesResponse, DescribeClustersRequest, UpgradeClusterInstancesRequest, DeletePrometheusAlertRuleRequest, DescribePrometheusTemplateSyncResponse, DescribePrometheusAlertHistoryRequest, DeletePrometheusTemplateSyncRequest, SetNodePoolNodeProtectionResponse, DisableVpcCniNetworkTypeRequest, DescribePrometheusTemplatesResponse, DeleteClusterEndpointVipResponse, SyncPrometheusTemplateRequest, CreatePrometheusDashboardResponse, DescribeEKSClusterCredentialResponse, DeleteClusterInstancesRequest, ModifyClusterAsGroupAttributeResponse, CreateClusterInstancesRequest, DeleteEKSClusterResponse, DeleteClusterNodePoolRequest, DescribeClusterKubeconfigRequest, CreatePrometheusTemplateResponse, CreateClusterEndpointVipRequest, CheckInstancesUpgradeAbleRequest, AddClusterCIDRRequest, DescribeClusterNodePoolsResponse, DescribePrometheusAlertRuleRequest, DescribeEKSClusterCredentialRequest, GetUpgradeInstanceProgressRequest, ModifyPrometheusTemplateRequest, AddNodeToNodePoolResponse, UpdateEKSClusterResponse, DescribeRegionsRequest, DescribeClustersResponse, DescribeVpcCniPodLimitsRequest, DescribePrometheusOverviewsRequest, DescribeRouteTableConflictsRequest, SyncPrometheusTemplateResponse, DeleteEKSClusterRequest, GetUpgradeInstanceProgressResponse, DescribeExistedInstancesResponse, CreateEKSClusterResponse, DescribeEKSClustersRequest, CreatePrometheusAlertRuleResponse, CreateClusterNodePoolFromExistingAsgResponse, DescribeEnableVpcCniProgressRequest, DescribeClusterEndpointStatusRequest, ModifyClusterAttributeResponse, CreateClusterAsGroupRequest, DescribeRouteTableConflictsResponse, CreateClusterResponse, DeleteClusterRouteTableRequest, DescribeAvailableClusterVersionRequest, CreateClusterRequest, DeletePrometheusAlertRuleResponse, AcquireClusterAdminRoleRequest, CreateClusterAsGroupResponse, DeleteClusterAsGroupsResponse, DescribePrometheusInstanceRequest, DescribeClusterInstancesRequest, DescribePrometheusAgentsRequest, DescribeEnableVpcCniProgressResponse, AddClusterCIDRResponse, ModifyClusterNodePoolRequest, CreateClusterEndpointResponse, CreateClusterNodePoolRequest, AcquireClusterAdminRoleResponse, ModifyPrometheusTemplateResponse, DeletePrometheusTemplateResponse, DescribePrometheusTemplateSyncRequest, UpdateClusterVersionRequest, DeleteClusterEndpointVipRequest, CheckInstancesUpgradeAbleResponse, DescribeClusterEndpointStatusResponse, UpgradeClusterInstancesResponse, CreatePrometheusDashboardRequest, DescribePrometheusAgentsResponse, AddExistedInstancesResponse, DeleteClusterRouteTableResponse, CreateClusterInstancesResponse, DescribeClusterAsGroupOptionRequest, DescribePrometheusAgentInstancesResponse, CreateClusterEndpointRequest, ModifyClusterAsGroupOptionAttributeResponse, DescribePrometheusInstanceResponse, AddExistedInstancesRequest, AddVpcCniSubnetsResponse, ModifyNodePoolDesiredCapacityAboutAsgRequest, DescribeClusterNodePoolsRequest, DescribeClusterRouteTablesRequest, ModifyClusterAsGroupOptionAttributeRequest, DescribeClusterRoutesRequest, DeleteClusterRouteRequest, DescribePrometheusOverviewsResponse, DeleteClusterEndpointRequest, DescribePrometheusTargetsRequest, DescribePrometheusTargetsResponse, DescribeClusterNodePoolDetailRequest, SetNodePoolNodeProtectionRequest, DeletePrometheusTemplateSyncResponse, CreateClusterRouteTableRequest, RemoveNodeFromNodePoolRequest, DescribeClusterAsGroupsRequest, DescribeImagesRequest, DescribeAvailableClusterVersionResponse, DescribeClusterRouteTablesResponse, AddVpcCniSubnetsRequest, DescribePrometheusAlertHistoryResponse, DescribeClusterCommonNamesResponse, DescribeClusterAsGroupOptionResponse, DeleteClusterNodePoolResponse, UpdateClusterVersionResponse, CreateClusterNodePoolResponse, ModifyClusterAsGroupAttributeRequest, DescribeClusterAsGroupsResponse, DescribeClusterNodePoolDetailResponse, DescribeClusterControllersRequest } from "./tke_models";
 /**
  * tke client
  * @class
@@ -47,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 删除一个云原生Prometheus配置模板
      */
     DeletePrometheusTemplate(req: DeletePrometheusTemplateRequest, cb?: (error: string, rep: DeletePrometheusTemplateResponse) => void): Promise<DeletePrometheusTemplateResponse>;
+    /**
+     * 修改节点池关联伸缩组的期望实例数
+     */
+    ModifyNodePoolDesiredCapacityAboutAsg(req: ModifyNodePoolDesiredCapacityAboutAsgRequest, cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse>;
     /**
      * 获取被关联集群列表
      */
@@ -96,9 +100,9 @@ export declare class Client extends AbstractClient {
      */
     EnableVpcCniNetworkType(req: EnableVpcCniNetworkTypeRequest, cb?: (error: string, rep: EnableVpcCniNetworkTypeResponse) => void): Promise<EnableVpcCniNetworkTypeResponse>;
     /**
-     * 修改模板内容
+     * 获取实例详细信息
      */
-    ModifyPrometheusTemplate(req: ModifyPrometheusTemplateRequest, cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void): Promise<ModifyPrometheusTemplateResponse>;
+    DescribePrometheusInstance(req: DescribePrometheusInstanceRequest, cb?: (error: string, rep: DescribePrometheusInstanceResponse) => void): Promise<DescribePrometheusInstanceResponse>;
     /**
      * 仅能设置节点池中处于伸缩组的节点
      */
@@ -136,9 +140,9 @@ export declare class Client extends AbstractClient {
      */
     CreateClusterRoute(req: CreateClusterRouteRequest, cb?: (error: string, rep: CreateClusterRouteResponse) => void): Promise<CreateClusterRouteResponse>;
     /**
-     * 查询节点池列表
+     *  查询集群下节点实例信息
      */
-    DescribeClusterNodePools(req: DescribeClusterNodePoolsRequest, cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void): Promise<DescribeClusterNodePoolsResponse>;
+    DescribeClusterInstances(req: DescribeClusterInstancesRequest, cb?: (error: string, rep: DescribeClusterInstancesResponse) => void): Promise<DescribeClusterInstancesResponse>;
     /**
      * 创建集群路由表
      */
@@ -204,9 +208,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterRouteTables(req?: DescribeClusterRouteTablesRequest, cb?: (error: string, rep: DescribeClusterRouteTablesResponse) => void): Promise<DescribeClusterRouteTablesResponse>;
     /**
-     * 获取模板同步信息
+     * 创建告警规则
      */
-    DescribePrometheusTemplateSync(req: DescribePrometheusTemplateSyncRequest, cb?: (error: string, rep: DescribePrometheusTemplateSyncResponse) => void): Promise<DescribePrometheusTemplateSyncResponse>;
+    CreatePrometheusAlertRule(req: CreatePrometheusAlertRuleRequest, cb?: (error: string, rep: CreatePrometheusAlertRuleResponse) => void): Promise<CreatePrometheusAlertRuleResponse>;
     /**
      * 获取容器服务支持的所有地域
      */
@@ -216,17 +220,21 @@ export declare class Client extends AbstractClient {
      */
     AddExistedInstances(req: AddExistedInstancesRequest, cb?: (error: string, rep: AddExistedInstancesResponse) => void): Promise<AddExistedInstancesResponse>;
     /**
+     * 修改告警规则
+     */
+    ModifyPrometheusAlertRule(req: ModifyPrometheusAlertRuleRequest, cb?: (error: string, rep: ModifyPrometheusAlertRuleResponse) => void): Promise<ModifyPrometheusAlertRuleResponse>;
+    /**
      * 删除弹性集群(yunapiv3)
      */
     DeleteEKSCluster(req: DeleteEKSClusterRequest, cb?: (error: string, rep: DeleteEKSClusterResponse) => void): Promise<DeleteEKSClusterResponse>;
     /**
-     * 修改节点池关联伸缩组的期望实例数
+     * 查询节点池列表
      */
-    ModifyNodePoolDesiredCapacityAboutAsg(req: ModifyNodePoolDesiredCapacityAboutAsgRequest, cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse>;
+    DescribeClusterNodePools(req: DescribeClusterNodePoolsRequest, cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void): Promise<DescribeClusterNodePoolsResponse>;
     /**
-     * 移出节点池节点，但保留在集群内
+     * 修改模板内容
      */
-    RemoveNodeFromNodePool(req: RemoveNodeFromNodePoolRequest, cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void): Promise<RemoveNodeFromNodePoolResponse>;
+    ModifyPrometheusTemplate(req: ModifyPrometheusTemplateRequest, cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void): Promise<ModifyPrometheusTemplateResponse>;
     /**
      * 集群的密钥信息
      */
@@ -240,9 +248,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRouteTableConflicts(req: DescribeRouteTableConflictsRequest, cb?: (error: string, rep: DescribeRouteTableConflictsResponse) => void): Promise<DescribeRouteTableConflictsResponse>;
     /**
-     *  查询集群下节点实例信息
+     * 删除告警规则
      */
-    DescribeClusterInstances(req: DescribeClusterInstancesRequest, cb?: (error: string, rep: DescribeClusterInstancesResponse) => void): Promise<DescribeClusterInstancesResponse>;
+    DeletePrometheusAlertRule(req: DeletePrometheusAlertRuleRequest, cb?: (error: string, rep: DeletePrometheusAlertRuleResponse) => void): Promise<DeletePrometheusAlertRuleResponse>;
     /**
      * 删除节点池
      */
@@ -264,6 +272,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteClusterInstances(req: DeleteClusterInstancesRequest, cb?: (error: string, rep: DeleteClusterInstancesResponse) => void): Promise<DeleteClusterInstancesResponse>;
     /**
+     * 获取模板同步信息
+     */
+    DescribePrometheusTemplateSync(req: DescribePrometheusTemplateSyncRequest, cb?: (error: string, rep: DescribePrometheusTemplateSyncResponse) => void): Promise<DescribePrometheusTemplateSyncResponse>;
+    /**
      * 给GR集群增加可用的ClusterCIDR
      */
     AddClusterCIDR(req: AddClusterCIDRRequest, cb?: (error: string, rep: AddClusterCIDRResponse) => void): Promise<AddClusterCIDRResponse>;
@@ -283,6 +295,10 @@ export declare class Client extends AbstractClient {
      * 获取弹性容器集群的接入认证信息
      */
     DescribeEKSClusterCredential(req: DescribeEKSClusterCredentialRequest, cb?: (error: string, rep: DescribeEKSClusterCredentialResponse) => void): Promise<DescribeEKSClusterCredentialResponse>;
+    /**
+     * 移出节点池节点，但保留在集群内
+     */
+    RemoveNodeFromNodePool(req: RemoveNodeFromNodePoolRequest, cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void): Promise<RemoveNodeFromNodePoolResponse>;
     /**
      * 获取告警规则列表
      */
