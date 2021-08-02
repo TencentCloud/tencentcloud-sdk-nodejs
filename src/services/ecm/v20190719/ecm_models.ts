@@ -896,13 +896,13 @@ export interface DescribeSubnetsResponse {
  */
 export interface Tag {
   /**
-      * 标签的键。
+      * 标签健。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Key: string
 
   /**
-      * 标签的值。
+      * 标签值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Value: string

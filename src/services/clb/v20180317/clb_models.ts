@@ -185,22 +185,22 @@ OPEN：公网属性， INTERNAL：内网属性。
   LoadBalancerName?: string
 
   /**
-   * 负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 DescribeVpcEx 接口获取。 不传此参数则默认为基础网络（"0"）。
+   * 负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 [DescribeVpcEx](https://cloud.tencent.com/document/product/215/1372) 接口获取。 不填此参数则默认为DefaultVPC。创建内网负载均衡实例时，此参数必填。
    */
   VpcId?: string
 
   /**
-   * 在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。
+   * 在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。创建内网负载均衡实例时，此参数必填。
    */
   SubnetId?: string
 
   /**
-   * 负载均衡实例所属的项目 ID，可以通过 DescribeProject 接口获取。不传此参数则视为默认项目。
+   * 负载均衡实例所属的项目 ID，可以通过 [DescribeProject](https://cloud.tencent.com/document/product/378/4400) 接口获取。不填此参数则视为默认项目。
    */
   ProjectId?: number
 
   /**
-   * 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPV6、IPv6FullChain，默认值 IPV4。
+   * 仅适用于公网负载均衡。IP版本，可取值：IPV4、IPV6、IPv6FullChain，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。
    */
   AddressIPVersion?: string
 
@@ -231,13 +231,16 @@ OPEN：公网属性， INTERNAL：内网属性。
   VipIsp?: string
 
   /**
-   * 购买负载均衡同时，给负载均衡打上标签。
+   * 购买负载均衡的同时，给负载均衡打上标签。
    */
   Tags?: Array<TagInfo>
 
   /**
-   * 指定Vip申请负载均衡。
-   */
+      * 指定VIP申请负载均衡。指定此参数后：
+<ul><li>若创建共享型集群的公网负载均衡实例，则上述的VpcId选填，若实例是IPv6类型的，则SubnetId必填；若是IPv4、IPv6 NAT64类型，则SubnetId不填。</li>
+<li>若创建独占型集群的公网负载均衡实例，则上述的VpcId选填，若实例是IPv6类型的，则SubnetId必填；若是IPv4、IPv6 NAT64类型，则SubnetId不填。
+</li></ul>
+      */
   Vip?: string
 
   /**
@@ -246,7 +249,7 @@ OPEN：公网属性， INTERNAL：内网属性。
   BandwidthPackageId?: string
 
   /**
-   * 独占集群信息。
+   * 独占集群信息。若创建独占集群负载均衡实例，则此参数必填。
    */
   ExclusiveCluster?: ExclusiveCluster
 
