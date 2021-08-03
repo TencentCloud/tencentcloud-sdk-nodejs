@@ -1470,19 +1470,19 @@ export interface DescribeAllNamespacesResponse {
     /**
       * 云产品的告警策略类型，已废弃
       */
-    QceNamespaces?: CommonNamespace;
+    QceNamespaces: CommonNamespace;
     /**
       * 其他告警策略类型，已废弃
       */
-    CustomNamespaces?: CommonNamespace;
+    CustomNamespaces: CommonNamespace;
     /**
       * 云产品的告警策略类型
       */
-    QceNamespacesNew?: Array<CommonNamespace>;
+    QceNamespacesNew: Array<CommonNamespace>;
     /**
       * 其他告警策略类型，暂不支持
       */
-    CustomNamespacesNew?: Array<CommonNamespace>;
+    CustomNamespacesNew: Array<CommonNamespace>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2868,7 +2868,7 @@ export interface DescribePolicyConditionListConfigManualPeriodNum {
  */
 export interface DescribeAllNamespacesRequest {
     /**
-      * 根据使用场景过滤 "ST_DASHBOARD"=Dashboard类型 或 "ST_ALARM"=告警类型
+      * 根据使用场景过滤 目前仅有"ST_ALARM"=告警类型
       */
     SceneType: string;
     /**

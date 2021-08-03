@@ -20,17 +20,21 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeStructCompareDataResponse,
   DescribeStructureTaskResultRequest,
+  DescribeStructureTaskResultTestResponse,
+  CreateStructureTaskResponse,
   CreateStructureTaskRequest,
   CompareMetricsData,
+  ReviewDataTaskInfo,
   ResultObject,
   DescribeStructureResultResponse,
   DescribeStructCompareDataRequest,
-  CreateStructureTaskResponse,
-  ReviewDataTaskInfo,
+  CreateStructureTaskTestResponse,
+  CreateStructureTaskTestRequest,
   DescribeStructureTaskResultResponse,
   StructureResultObject,
   DescribeStructureResultRequest,
   CreateStructureTaskInfo,
+  DescribeStructureTaskResultTestRequest,
 } from "./cii_models"
 
 /**
@@ -43,16 +47,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
-   */
-  async DescribeStructCompareData(
-    req: DescribeStructCompareDataRequest,
-    cb?: (error: string, rep: DescribeStructCompareDataResponse) => void
-  ): Promise<DescribeStructCompareDataResponse> {
-    return this.request("DescribeStructCompareData", req, cb)
-  }
-
-  /**
    * 依据任务ID获取结构化结果接口。
    */
   async DescribeStructureTaskResult(
@@ -60,6 +54,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStructureTaskResultResponse) => void
   ): Promise<DescribeStructureTaskResultResponse> {
     return this.request("DescribeStructureTaskResult", req, cb)
+  }
+
+  /**
+   * 本接口(CreateStructureTaskTest)基于提供的客户及保单信息，创建并启动结构化识别任务。用于路由到测试环境。
+   */
+  async CreateStructureTaskTest(
+    req: CreateStructureTaskTestRequest,
+    cb?: (error: string, rep: CreateStructureTaskTestResponse) => void
+  ): Promise<CreateStructureTaskTestResponse> {
+    return this.request("CreateStructureTaskTest", req, cb)
+  }
+
+  /**
+   * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
+   */
+  async DescribeStructCompareData(
+    req: DescribeStructCompareDataRequest,
+    cb?: (error: string, rep: DescribeStructCompareDataResponse) => void
+  ): Promise<DescribeStructCompareDataResponse> {
+    return this.request("DescribeStructCompareData", req, cb)
   }
 
   /**
@@ -80,5 +94,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStructureResultResponse) => void
   ): Promise<DescribeStructureResultResponse> {
     return this.request("DescribeStructureResult", req, cb)
+  }
+
+  /**
+   * 依据任务ID获取结构化结果接口，该接口用于路由到测试环境。
+   */
+  async DescribeStructureTaskResultTest(
+    req: DescribeStructureTaskResultTestRequest,
+    cb?: (error: string, rep: DescribeStructureTaskResultTestResponse) => void
+  ): Promise<DescribeStructureTaskResultTestResponse> {
+    return this.request("DescribeStructureTaskResultTest", req, cb)
   }
 }

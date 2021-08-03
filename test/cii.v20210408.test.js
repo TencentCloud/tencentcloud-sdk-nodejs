@@ -18,9 +18,9 @@ const client = new tencentcloud.cii.v20210408.Client({
 })
 describe("cii.v20210408.test.js", function () {
 
-it("cii.v20210408.DescribeStructCompareData", async function () {
+it("cii.v20210408.DescribeStructureTaskResult", async function () {
     try {
-       const data = await client.DescribeStructCompareData({})
+       const data = await client.DescribeStructureTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,19 @@ it("cii.v20210408.DescribeStructCompareData", async function () {
     }
 })
 
-it("cii.v20210408.DescribeStructureTaskResult", async function () {
+it("cii.v20210408.CreateStructureTaskTest", async function () {
     try {
-       const data = await client.DescribeStructureTaskResult({})
+       const data = await client.CreateStructureTaskTest({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cii.v20210408.DescribeStructCompareData", async function () {
+    try {
+       const data = await client.DescribeStructCompareData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +61,16 @@ it("cii.v20210408.CreateStructureTask", async function () {
 it("cii.v20210408.DescribeStructureResult", async function () {
     try {
        const data = await client.DescribeStructureResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cii.v20210408.DescribeStructureTaskResultTest", async function () {
+    try {
+       const data = await client.DescribeStructureTaskResultTest({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

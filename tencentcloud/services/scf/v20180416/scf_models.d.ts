@@ -2036,6 +2036,16 @@ export interface GetFunctionResponse {
       */
     StatusReasons: Array<StatusReason>;
     /**
+      * 是否开启异步属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRunEnable: string;
+    /**
+      * 是否开启事件追踪
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TraceEnable: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;

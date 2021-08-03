@@ -486,7 +486,7 @@ export interface ResetInstanceRequest {
   ImageId?: string
 
   /**
-   * 实例系统盘配置信息。系统盘为云盘的实例可以通过该参数指定重装后的系统盘大小来实现对系统盘的扩容操作，若不指定大小且原系统盘大小小于镜像大小，则会自动扩容，产生多余的磁盘费用。系统盘大小只支持扩容不支持缩容；重装只支持修改系统盘的大小，不能修改系统盘的类型。
+   * 实例系统盘配置信息。系统盘为云盘的实例可以通过该参数指定重装后的系统盘大小来实现对系统盘的扩容操作。系统盘大小只支持扩容不支持缩容；重装只支持修改系统盘的大小，不能修改系统盘的类型。
    */
   SystemDisk?: SystemDisk
 
@@ -1421,7 +1421,7 @@ export interface CreateImageResponse {
       * 镜像ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImageId?: string
+  ImageId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2121,7 +2121,7 @@ export interface CreateImageRequest {
   ImageName: string
 
   /**
-   * 需要制作镜像的实例ID。
+   * 需要制作镜像的实例ID。基于实例创建镜像时，为必填参数。
    */
   InstanceId?: string
 
@@ -2812,7 +2812,7 @@ export interface InquiryPriceResetInstanceResponse {
  */
 export interface RunInstancesRequest {
   /**
-   * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+   * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br><li>CDCPAID：专用集群付费<br>默认值：POSTPAID_BY_HOUR。
    */
   InstanceChargeType?: string
 

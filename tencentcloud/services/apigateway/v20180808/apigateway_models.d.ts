@@ -3399,7 +3399,7 @@ export interface ReleaseServiceResponse {
     /**
       * 发布信息。
       */
-    Result?: ReleaseService;
+    Result: ReleaseService;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4914,7 +4914,7 @@ export interface UpdateServiceResponse {
       * 切换版本操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

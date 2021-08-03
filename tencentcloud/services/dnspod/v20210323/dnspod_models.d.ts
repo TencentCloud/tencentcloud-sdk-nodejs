@@ -1075,7 +1075,7 @@ export interface DescribeRecordListRequest {
       */
     Keyword?: string;
     /**
-      * 排序字段，支持 name,line,type,value,weight,mx,ttl,updated_on 几个字段。默认值为updated_on。
+      * 排序字段，支持 name,line,type,value,weight,mx,ttl,updated_on 几个字段。
       */
     SortField?: string;
     /**

@@ -103,6 +103,45 @@ export interface DescribeStructureTaskResultRequest {
 }
 
 /**
+ * DescribeStructureTaskResultTest返回参数结构体
+ */
+export interface DescribeStructureTaskResultTestResponse {
+  /**
+      * 结果状态：
+0：返回成功
+1：结果未生成
+2：结果生成失败
+      */
+  Status: number
+
+  /**
+      * 结构化识别结果数组，每个数组元素对应一个图片的结构化结果，顺序和输入参数的ImageList或FileList对应。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Results: Array<ResultObject>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateStructureTask返回参数结构体
+ */
+export interface CreateStructureTaskResponse {
+  /**
+   * 创建的主任务号，用于查询结果
+   */
+  MainTaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateStructureTask请求参数结构体
  */
 export interface CreateStructureTaskRequest {
@@ -186,6 +225,31 @@ export interface CompareMetricsData {
 }
 
 /**
+ * 人工复核数据的子任务信息
+ */
+export interface ReviewDataTaskInfo {
+  /**
+   * 主任务号
+   */
+  MainTaskId: string
+
+  /**
+   * 子任务号
+   */
+  SubTaskId: string
+
+  /**
+   * 任务名
+   */
+  TaskName: string
+
+  /**
+   * 任务类型
+   */
+  TaskType: string
+}
+
+/**
  * 用于返回结构化任务结果
  */
 export interface ResultObject {
@@ -239,9 +303,9 @@ export interface DescribeStructCompareDataRequest {
 }
 
 /**
- * CreateStructureTask返回参数结构体
+ * CreateStructureTaskTest返回参数结构体
  */
-export interface CreateStructureTaskResponse {
+export interface CreateStructureTaskTestResponse {
   /**
    * 创建的主任务号，用于查询结果
    */
@@ -254,28 +318,45 @@ export interface CreateStructureTaskResponse {
 }
 
 /**
- * 人工复核数据的子任务信息
+ * CreateStructureTaskTest请求参数结构体
  */
-export interface ReviewDataTaskInfo {
+export interface CreateStructureTaskTestRequest {
   /**
-   * 主任务号
-   */
-  MainTaskId: string
+      * 服务类型
+Structured 仅结构化
+Underwrite 结构化+核保
+      */
+  ServiceType: string
 
   /**
-   * 子任务号
+   * 创建任务时可以上传多个报告，后台生成多个识别子任务，子任务的详细信息
    */
-  SubTaskId: string
+  TaskInfos: Array<CreateStructureTaskInfo>
 
   /**
-   * 任务名
+   * 保单号
    */
-  TaskName: string
+  PolicyId?: string
 
   /**
-   * 任务类型
+      * 核保触发方式
+Auto 自动
+Manual 手动
+      */
+  TriggerType?: string
+
+  /**
+      * 险种，如果是体检报告类型，此参数是必填，类型说明如下：
+CriticalDiseaseInsurance:重疾险
+LifeInsurance：寿险
+AccidentInsurance：意外险
+      */
+  InsuranceTypes?: Array<string>
+
+  /**
+   * 回调地址，接收Post请求传送结果
    */
-  TaskType: string
+  CallbackUrl?: string
 }
 
 /**
@@ -365,4 +446,14 @@ export interface CreateStructureTaskInfo {
    * 报告年份
    */
   Year?: string
+}
+
+/**
+ * DescribeStructureTaskResultTest请求参数结构体
+ */
+export interface DescribeStructureTaskResultTestRequest {
+  /**
+   * 结构化任务ID
+   */
+  MainTaskId: string
 }
