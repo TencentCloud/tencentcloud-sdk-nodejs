@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeEnvLimitResponse, CheckTcbServiceResponse, DescribeCloudBaseRunConfForGateWayRequest, DescribeCloudBaseRunServerVersionRequest, DescribeEnvLimitRequest, DescribeExtensionUploadInfoRequest, DeleteCloudBaseRunServerVersionResponse, CommonServiceAPIResponse, DescribePostpayPackageFreeQuotasRequest, DescribeEndUserLoginStatisticRequest, DescribeCloudBaseBuildServiceResponse, DescribeEndUsersRequest, DescribeSpecialCostItemsRequest, DescribeEndUserStatisticRequest, CreateWxCloudBaseRunServerDBClusterResponse, ReplaceActivityRecordResponse, DescribeCloudBaseRunResourceForExtendRequest, ModifyEndUserRequest, RollUpdateCloudBaseRunServerVersionResponse, DescribeAuthDomainsResponse, DescribeWxCloudBaseRunEnvsResponse, CreateHostingDomainRequest, DescribeCloudBaseRunResourceRequest, DescribePostpayFreeQuotasRequest, ModifyDatabaseACLRequest, DescribeCloudBaseRunServerVersionResponse, DescribeEndUserLoginStatisticResponse, DescribeHostingDomainTaskRequest, DescribeQuotaDataResponse, CommonServiceAPIRequest, DestroyStaticStoreRequest, CreateWxCloudBaseRunEnvRequest, ModifyCloudBaseRunServerFlowConfRequest, DescribeActivityRecordResponse, CreateStaticStoreRequest, CreateWxCloudBaseRunServerDBClusterRequest, DeleteCloudBaseProjectLatestVersionResponse, CreateAuthDomainResponse, DescribeEnvsRequest, DeleteWxGatewayRouteRequest, DescribeEnvPostpaidDeductRequest, DescribeExtraPkgBillingInfoRequest, BindEnvGatewayResponse, DescribeWxCloudBaseRunSubNetsResponse, DescribeEnvFreeQuotaRequest, DeleteEndUserRequest, DescribeEnvPostpaidDeductResponse, CreateCloudBaseRunResourceResponse, DestroyStaticStoreResponse, DeleteEndUserResponse, ModifyDatabaseACLResponse, ModifyCloudBaseRunServerFlowConfResponse, EstablishCloudBaseRunServerResponse, DestroyEnvRequest, DestroyEnvResponse, DescribeCloudBaseProjectVersionListRequest, DescribeEnvsResponse, CreateAuthDomainRequest, CreateHostingDomainResponse, DescribeActivityRecordRequest, CreateWxCloudBaseRunEnvResponse, DeleteCloudBaseRunServerVersionRequest, CreateCloudBaseRunServerVersionRequest, DescribeWxCloudBaseRunSubNetsRequest, CreatePostpayPackageResponse, ReplaceActivityRecordRequest, DeleteWxGatewayRouteResponse, EstablishCloudBaseRunServerRequest, DescribeSpecialCostItemsResponse, DescribeCloudBaseProjectVersionListResponse, DescribeDownloadFileRequest, ReinstateEnvResponse, DescribeEnvFreeQuotaResponse, CreateAndDeployCloudBaseProjectResponse, DescribeCloudBaseRunResourceForExtendResponse, CreateAndDeployCloudBaseProjectRequest, DescribeCloudBaseRunVersionRequest, EstablishWxGatewayRouteRequest, DescribeCloudBaseRunConfForGateWayResponse, ReinstateEnvRequest, EstablishWxGatewayRouteResponse, DescribeDatabaseACLRequest, CreateCloudBaseRunServerVersionResponse, DeleteCloudBaseProjectLatestVersionRequest, DescribeCloudBaseProjectLatestVersionListResponse, DescribeSmsQuotasResponse, DescribeWxCloudBaseRunEnvsRequest, BindEnvGatewayRequest, ModifyEnvResponse, DescribeDownloadFileResponse, DescribeQuotaDataRequest, CreateStaticStoreResponse, DescribeCloudBaseRunResourceResponse, DescribeCloudBaseRunVersionSnapshotRequest, DescribePostpayFreeQuotasResponse, DescribeCloudBaseProjectLatestVersionListRequest, DescribeEndUsersResponse, DescribeHostingDomainTaskResponse, DescribeEndUserStatisticResponse, DescribeSmsQuotasRequest, DescribeCloudBaseRunVersionResponse, CreatePostpayPackageRequest, DescribeCloudBaseBuildServiceRequest, CheckTcbServiceRequest, CreateCloudBaseRunResourceRequest, ModifyEndUserResponse, DescribeAuthDomainsRequest, DescribeDatabaseACLResponse, DescribeExtensionUploadInfoResponse, ModifyEnvRequest, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DescribeExtraPkgBillingInfoResponse, RollUpdateCloudBaseRunServerVersionRequest } from "./tcb_models";
+import { DescribeEnvLimitResponse, CheckTcbServiceResponse, DescribeCloudBaseRunConfForGateWayRequest, DescribeCloudBaseRunServerVersionRequest, TurnOnStandaloneGatewayResponse, DescribeEnvLimitRequest, DescribeExtensionUploadInfoRequest, DeleteCloudBaseRunServerVersionResponse, CommonServiceAPIResponse, DescribeStandaloneGatewayRequest, DescribeStandaloneGatewayPackageRequest, DescribePostpayPackageFreeQuotasRequest, DescribeEndUserLoginStatisticRequest, DescribeCloudBaseBuildServiceResponse, DescribeEndUsersRequest, DescribeSpecialCostItemsRequest, DescribeCloudBaseRunVersionRequest, DestroyStandaloneGatewayRequest, CreateWxCloudBaseRunServerDBClusterResponse, ReplaceActivityRecordResponse, DescribeCloudBaseRunResourceForExtendRequest, ModifyEndUserRequest, RollUpdateCloudBaseRunServerVersionResponse, DescribeAuthDomainsResponse, DescribeStandaloneGatewayResponse, DescribeWxCloudBaseRunEnvsResponse, CreateHostingDomainRequest, DescribeCloudBaseRunResourceRequest, DescribePostpayFreeQuotasRequest, DestroyStandaloneGatewayResponse, DescribeCloudBaseRunServerVersionResponse, DescribeEndUserLoginStatisticResponse, DescribeHostingDomainTaskRequest, DescribeQuotaDataResponse, CommonServiceAPIRequest, DestroyStaticStoreRequest, CreateWxCloudBaseRunEnvRequest, ModifyCloudBaseRunServerFlowConfRequest, DescribeActivityRecordResponse, CreateStaticStoreRequest, CreateWxCloudBaseRunServerDBClusterRequest, DeleteCloudBaseProjectLatestVersionResponse, CreateAuthDomainResponse, ModifyDatabaseACLRequest, DescribeEnvsRequest, DeleteWxGatewayRouteRequest, DescribeEnvPostpaidDeductRequest, DescribeExtraPkgBillingInfoRequest, BindEnvGatewayResponse, DescribeWxCloudBaseRunSubNetsResponse, DescribeEnvFreeQuotaRequest, DeleteEndUserRequest, DescribeEnvPostpaidDeductResponse, CreateCloudBaseRunResourceResponse, DescribeStandaloneGatewayPackageResponse, DestroyStaticStoreResponse, DeleteEndUserResponse, ModifyDatabaseACLResponse, ModifyCloudBaseRunServerFlowConfResponse, EstablishCloudBaseRunServerResponse, DestroyEnvRequest, DestroyEnvResponse, DescribeCloudBaseProjectVersionListRequest, TurnOffStandaloneGatewayResponse, DescribeEnvsResponse, CreateAuthDomainRequest, CreateHostingDomainResponse, DescribeActivityRecordRequest, CreateWxCloudBaseRunEnvResponse, DeleteCloudBaseRunServerVersionRequest, CreateCloudBaseRunServerVersionRequest, DescribeWxCloudBaseRunSubNetsRequest, CreatePostpayPackageResponse, ReplaceActivityRecordRequest, DeleteWxGatewayRouteResponse, EstablishCloudBaseRunServerRequest, DescribeSpecialCostItemsResponse, CreateStandaloneGatewayRequest, DescribeCloudBaseProjectVersionListResponse, DescribeDownloadFileRequest, ReinstateEnvResponse, DescribeEnvFreeQuotaResponse, CreateAndDeployCloudBaseProjectResponse, DescribeCloudBaseRunResourceForExtendResponse, CreateAndDeployCloudBaseProjectRequest, DescribeEndUserStatisticRequest, EstablishWxGatewayRouteRequest, DescribeCloudBaseRunConfForGateWayResponse, TurnOffStandaloneGatewayRequest, ReinstateEnvRequest, EstablishWxGatewayRouteResponse, DescribeDatabaseACLRequest, CreateCloudBaseRunServerVersionResponse, DeleteCloudBaseProjectLatestVersionRequest, DescribeCloudBaseProjectLatestVersionListResponse, DescribeSmsQuotasResponse, DescribeWxCloudBaseRunEnvsRequest, BindEnvGatewayRequest, ModifyEnvResponse, DescribeDownloadFileResponse, CreateStandaloneGatewayResponse, DescribeQuotaDataRequest, CreateStaticStoreResponse, DescribeCloudBaseRunResourceResponse, DescribeCloudBaseRunVersionSnapshotRequest, TurnOnStandaloneGatewayRequest, DescribePostpayFreeQuotasResponse, DescribeCloudBaseProjectLatestVersionListRequest, DescribeEndUsersResponse, DescribeHostingDomainTaskResponse, DescribeEndUserStatisticResponse, DescribeSmsQuotasRequest, DescribeCloudBaseRunVersionResponse, CreatePostpayPackageRequest, DescribeCloudBaseBuildServiceRequest, CheckTcbServiceRequest, CreateCloudBaseRunResourceRequest, ModifyEndUserResponse, DescribeAuthDomainsRequest, DescribeDatabaseACLResponse, DescribeExtensionUploadInfoResponse, ModifyEnvRequest, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DescribeExtraPkgBillingInfoResponse, RollUpdateCloudBaseRunServerVersionRequest } from "./tcb_models";
 /**
  * tcb client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 创建或修改安全网关路由
      */
     EstablishWxGatewayRoute(req: EstablishWxGatewayRouteRequest, cb?: (error: string, rep: EstablishWxGatewayRouteResponse) => void): Promise<EstablishWxGatewayRouteResponse>;
+    /**
+     * 本接口（DestroyStandaloneGateway）用于销毁小租户网关。
+     */
+    DestroyStandaloneGateway(req: DestroyStandaloneGatewayRequest, cb?: (error: string, rep: DestroyStandaloneGatewayResponse) => void): Promise<DestroyStandaloneGatewayResponse>;
     /**
      * 创建托管域名
      */
@@ -75,13 +79,21 @@ export declare class Client extends AbstractClient {
      */
     CreateCloudBaseRunServerVersion(req: CreateCloudBaseRunServerVersionRequest, cb?: (error: string, rep: CreateCloudBaseRunServerVersionResponse) => void): Promise<CreateCloudBaseRunServerVersionResponse>;
     /**
-     * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
+     * 本接口（CreateStandaloneGateway）用于创建独立网关。
      */
-    DescribeCloudBaseRunServerVersion(req: DescribeCloudBaseRunServerVersionRequest, cb?: (error: string, rep: DescribeCloudBaseRunServerVersionResponse) => void): Promise<DescribeCloudBaseRunServerVersionResponse>;
+    CreateStandaloneGateway(req: CreateStandaloneGatewayRequest, cb?: (error: string, rep: CreateStandaloneGatewayResponse) => void): Promise<CreateStandaloneGatewayResponse>;
     /**
      * 获取安全域名列表
      */
     DescribeAuthDomains(req: DescribeAuthDomainsRequest, cb?: (error: string, rep: DescribeAuthDomainsResponse) => void): Promise<DescribeAuthDomainsResponse>;
+    /**
+     * 本接口（TurnOnStandaloneGateway）用于开启小租户网关。
+     */
+    TurnOnStandaloneGateway(req: TurnOnStandaloneGatewayRequest, cb?: (error: string, rep: TurnOnStandaloneGatewayResponse) => void): Promise<TurnOnStandaloneGatewayResponse>;
+    /**
+     * 本接口（DescribeStandaloneGatewayPackage）用于查询小租户网关套餐信息。
+     */
+    DescribeStandaloneGatewayPackage(req: DescribeStandaloneGatewayPackageRequest, cb?: (error: string, rep: DescribeStandaloneGatewayPackageResponse) => void): Promise<DescribeStandaloneGatewayPackageResponse>;
     /**
      * 开通后付费资源
      */
@@ -90,6 +102,10 @@ export declare class Client extends AbstractClient {
      * 创建微信云托管
      */
     CreateWxCloudBaseRunEnv(req: CreateWxCloudBaseRunEnvRequest, cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void): Promise<CreateWxCloudBaseRunEnvResponse>;
+    /**
+     * 本接口（TurnOffStandaloneGateway）用于关闭小租户网关。
+     */
+    TurnOffStandaloneGateway(req: TurnOffStandaloneGatewayRequest, cb?: (error: string, rep: TurnOffStandaloneGatewayResponse) => void): Promise<TurnOffStandaloneGatewayResponse>;
     /**
      * 云项目部署列表
      */
@@ -111,6 +127,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabaseACL(req: DescribeDatabaseACLRequest, cb?: (error: string, rep: DescribeDatabaseACLResponse) => void): Promise<DescribeDatabaseACLResponse>;
     /**
+     * 本接口（DescribeStandaloneGateway）查询小租户网关套餐信息。
+     */
+    DescribeStandaloneGateway(req: DescribeStandaloneGatewayRequest, cb?: (error: string, rep: DescribeStandaloneGatewayResponse) => void): Promise<DescribeStandaloneGatewayResponse>;
+    /**
      * 修改容器内的版本流量配置
      */
     ModifyCloudBaseRunServerFlowConf(req: ModifyCloudBaseRunServerFlowConfRequest, cb?: (error: string, rep: ModifyCloudBaseRunServerFlowConfResponse) => void): Promise<ModifyCloudBaseRunServerFlowConfResponse>;
@@ -122,6 +142,10 @@ export declare class Client extends AbstractClient {
      * 管理终端用户
      */
     ModifyEndUser(req: ModifyEndUserRequest, cb?: (error: string, rep: ModifyEndUserResponse) => void): Promise<ModifyEndUserResponse>;
+    /**
+     * 销毁环境
+     */
+    DestroyEnv(req: DestroyEnvRequest, cb?: (error: string, rep: DestroyEnvResponse) => void): Promise<DestroyEnvResponse>;
     /**
      * 获取增值包计费相关信息
      */
@@ -191,9 +215,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEndUserStatistic(req: DescribeEndUserStatisticRequest, cb?: (error: string, rep: DescribeEndUserStatisticResponse) => void): Promise<DescribeEndUserStatisticResponse>;
     /**
-     * 销毁环境
+     * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
      */
-    DestroyEnv(req: DestroyEnvRequest, cb?: (error: string, rep: DestroyEnvResponse) => void): Promise<DestroyEnvResponse>;
+    DescribeCloudBaseRunServerVersion(req: DescribeCloudBaseRunServerVersionRequest, cb?: (error: string, rep: DescribeCloudBaseRunServerVersionResponse) => void): Promise<DescribeCloudBaseRunServerVersionResponse>;
     /**
      * 更新活动详情
      */

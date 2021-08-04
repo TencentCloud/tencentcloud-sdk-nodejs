@@ -151,6 +151,41 @@ POSTPAID_BY_HOUR 按量计费，默认方式。
 }
 
 /**
+ * 单个pod状态
+ */
+export interface PodState {
+  /**
+   * pod的名称
+   */
+  Name: string
+
+  /**
+   * pod uuid
+   */
+  Uuid: string
+
+  /**
+   * pod的状态
+   */
+  State: string
+
+  /**
+   * pod处于该状态原因
+   */
+  Reason: string
+
+  /**
+   * pod所属集群
+   */
+  OwnerCluster: string
+
+  /**
+   * pod内存大小
+   */
+  Memory: number
+}
+
+/**
  * 任务步骤结果描述
  */
 export interface JobResult {
@@ -181,116 +216,23 @@ export interface JobResult {
 }
 
 /**
- * EMR产品配置
+ * 用户自建Hive-MetaDB信息
  */
-export interface EmrProductConfigOutter {
+export interface CustomMetaInfo {
   /**
-      * 软件信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SoftInfo: Array<string>
+   * 自定义MetaDB的JDBC连接，请以 jdbc:mysql:// 开头
+   */
+  MetaDataJdbcUrl?: string
 
   /**
-      * Master节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MasterNodeSize: number
+   * 自定义MetaDB用户名
+   */
+  MetaDataUser?: string
 
   /**
-      * Core节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CoreNodeSize: number
-
-  /**
-      * Task节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaskNodeSize: number
-
-  /**
-      * Common节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ComNodeSize: number
-
-  /**
-      * Master节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MasterResource: OutterResource
-
-  /**
-      * Core节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CoreResource: OutterResource
-
-  /**
-      * Task节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaskResource: OutterResource
-
-  /**
-      * Common节点资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ComResource: OutterResource
-
-  /**
-      * 是否使用COS
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OnCos: boolean
-
-  /**
-      * 收费类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ChargeType: number
-
-  /**
-      * Router节点个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RouterNodeSize: number
-
-  /**
-      * 是否支持HA
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SupportHA: boolean
-
-  /**
-      * 是否支持安全模式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SecurityOn: boolean
-
-  /**
-      * 安全组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SecurityGroup: string
-
-  /**
-      * 是否开启Cbs加密
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CbsEncrypt: number
-
-  /**
-      * 自定义应用角色。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationRole: string
-
-  /**
-      * 安全组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SecurityGroups: Array<string>
+   * 自定义MetaDB密码
+   */
+  MetaDataPass?: string
 }
 
 /**
@@ -631,6 +573,89 @@ export interface Resource {
 }
 
 /**
+ * 询价资源
+ */
+export interface PriceResource {
+  /**
+      * 需要的规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Spec: string
+
+  /**
+      * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageType: number
+
+  /**
+      * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskType: string
+
+  /**
+      * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RootSize: number
+
+  /**
+      * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MemSize: number
+
+  /**
+      * 核心数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cpu: number
+
+  /**
+      * 硬盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskSize: number
+
+  /**
+      * 云盘列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MultiDisks: Array<MultiDisk>
+
+  /**
+      * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskCnt: number
+
+  /**
+      * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
+
+  /**
+      * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskNum: number
+
+  /**
+      * 本地盘的数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocalDiskNum: number
+}
+
+/**
  * TerminateInstance请求参数结构体
  */
 export interface TerminateInstanceRequest {
@@ -681,6 +706,16 @@ export interface PodVolume {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HostVolume?: HostVolumeContext
+}
+
+/**
+ * SyncPodState返回参数结构体
+ */
+export interface SyncPodStateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -893,6 +928,21 @@ export interface InstanceChargePrepaid {
 }
 
 /**
+ * DescribeCvmQuota请求参数结构体
+ */
+export interface DescribeCvmQuotaRequest {
+  /**
+   * EMR集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 区ID
+   */
+  ZoneId?: number
+}
+
+/**
  * DescribeClusterNodes请求参数结构体
  */
 export interface DescribeClusterNodesRequest {
@@ -1000,6 +1050,16 @@ export interface PreExecuteFileSettings {
    * cos的appid，已废弃
    */
   AppId?: string
+}
+
+/**
+ * SyncPodState请求参数结构体
+ */
+export interface SyncPodStateRequest {
+  /**
+   * EmrService中pod状态信息
+   */
+  Message: PodState
 }
 
 /**
@@ -1369,21 +1429,18 @@ export interface MetaDbInfo {
 }
 
 /**
- * 执行动作。
+ * 自定义配置参数
  */
-export interface Execution {
+export interface Configuration {
   /**
-      * 任务类型，目前支持以下类型。
-1. “MR”，将通过hadoop jar的方式提交。
-2. "HIVE"，将通过hive -f的方式提交。
-3. "SPARK"，将通过spark-submit的方式提交。
-      */
-  JobType: string
+   * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
+   */
+  Classification: string
 
   /**
-   * 任务参数，提供除提交指令以外的参数。
+   * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
    */
-  Args: Array<string>
+  Properties: string
 }
 
 /**
@@ -1596,23 +1653,116 @@ export interface DescribeInstancesRequest {
 }
 
 /**
- * 用户自建Hive-MetaDB信息
+ * EMR产品配置
  */
-export interface CustomMetaInfo {
+export interface EmrProductConfigOutter {
   /**
-   * 自定义MetaDB的JDBC连接，请以 jdbc:mysql:// 开头
-   */
-  MetaDataJdbcUrl?: string
+      * 软件信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SoftInfo: Array<string>
 
   /**
-   * 自定义MetaDB用户名
-   */
-  MetaDataUser?: string
+      * Master节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MasterNodeSize: number
 
   /**
-   * 自定义MetaDB密码
-   */
-  MetaDataPass?: string
+      * Core节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CoreNodeSize: number
+
+  /**
+      * Task节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskNodeSize: number
+
+  /**
+      * Common节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComNodeSize: number
+
+  /**
+      * Master节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MasterResource: OutterResource
+
+  /**
+      * Core节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CoreResource: OutterResource
+
+  /**
+      * Task节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskResource: OutterResource
+
+  /**
+      * Common节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComResource: OutterResource
+
+  /**
+      * 是否使用COS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OnCos: boolean
+
+  /**
+      * 收费类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeType: number
+
+  /**
+      * Router节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouterNodeSize: number
+
+  /**
+      * 是否支持HA
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SupportHA: boolean
+
+  /**
+      * 是否支持安全模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityOn: boolean
+
+  /**
+      * 安全组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroup: string
+
+  /**
+      * 是否开启Cbs加密
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CbsEncrypt: number
+
+  /**
+      * 自定义应用角色。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationRole: string
+
+  /**
+      * 安全组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroups: Array<string>
 }
 
 /**
@@ -1679,6 +1829,34 @@ export interface JobFlowResourceSpec {
    * Common节点配置。
    */
   CommonResourceSpec?: JobFlowResource
+}
+
+/**
+ * DescribeCvmQuota返回参数结构体
+ */
+export interface DescribeCvmQuotaResponse {
+  /**
+      * 后付费配额列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostPaidQuotaSet: Array<QuotaEntity>
+
+  /**
+      * 竞价实例配额列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpotPaidQuotaSet: Array<QuotaEntity>
+
+  /**
+      * eks配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EksQuotaSet: Array<PodSaleSpec>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2260,18 +2438,21 @@ export interface UpdateInstanceSettings {
 }
 
 /**
- * 自定义配置参数
+ * 执行动作。
  */
-export interface Configuration {
+export interface Execution {
   /**
-   * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
-   */
-  Classification: string
+      * 任务类型，目前支持以下类型。
+1. “MR”，将通过hadoop jar的方式提交。
+2. "HIVE"，将通过hive -f的方式提交。
+3. "SPARK"，将通过spark-submit的方式提交。
+      */
+  JobType: string
 
   /**
-   * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
+   * 任务参数，提供除提交指令以外的参数。
    */
-  Properties: string
+  Args: Array<string>
 }
 
 /**
@@ -2285,86 +2466,57 @@ export interface TerminateTasksResponse {
 }
 
 /**
- * 询价资源
+ * 获取CVM配额
  */
-export interface PriceResource {
+export interface QuotaEntity {
   /**
-      * 需要的规格
+      * 已使用配额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Spec: string
+  UsedQuota: number
 
   /**
-      * 硬盘类型
+      * 剩余配额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StorageType: number
+  RemainingQuota: number
 
   /**
-      * 硬盘类型
+      * 总配额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiskType: string
+  TotalQuota: number
 
   /**
-      * 系统盘大小
+      * 可用区
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RootSize: number
+  Zone: string
+}
+
+/**
+ * Pod资源售卖规格
+ */
+export interface PodSaleSpec {
+  /**
+   * 可售卖的资源规格，仅为以下值:"TASK","CORE","MASTER","ROUTER"。
+   */
+  NodeType: string
 
   /**
-      * 内存大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MemSize: number
-
-  /**
-      * 核心数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * Cpu核数。
+   */
   Cpu: number
 
   /**
-      * 硬盘大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiskSize: number
+   * 内存数量，单位为GB。
+   */
+  Memory: number
 
   /**
-      * 云盘列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MultiDisks: Array<MultiDisk>
-
-  /**
-      * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiskCnt: number
-
-  /**
-      * 规格
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceType: string
-
-  /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<Tag>
-
-  /**
-      * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiskNum: number
-
-  /**
-      * 本地盘的数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LocalDiskNum: number
+   * 该规格资源可申请的最大数量。
+   */
+  Number: number
 }
 
 /**

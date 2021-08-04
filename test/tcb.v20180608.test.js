@@ -48,6 +48,16 @@ it("tcb.v20180608.EstablishWxGatewayRoute", async function () {
     }
 })
 
+it("tcb.v20180608.DestroyStandaloneGateway", async function () {
+    try {
+       const data = await client.DestroyStandaloneGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
@@ -178,9 +188,9 @@ it("tcb.v20180608.CreateCloudBaseRunServerVersion", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
+it("tcb.v20180608.CreateStandaloneGateway", async function () {
     try {
-       const data = await client.DescribeCloudBaseRunServerVersion({})
+       const data = await client.CreateStandaloneGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +201,26 @@ it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
 it("tcb.v20180608.DescribeAuthDomains", async function () {
     try {
        const data = await client.DescribeAuthDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.TurnOnStandaloneGateway", async function () {
+    try {
+       const data = await client.TurnOnStandaloneGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeStandaloneGatewayPackage", async function () {
+    try {
+       const data = await client.DescribeStandaloneGatewayPackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +241,16 @@ it("tcb.v20180608.CreatePostpayPackage", async function () {
 it("tcb.v20180608.CreateWxCloudBaseRunEnv", async function () {
     try {
        const data = await client.CreateWxCloudBaseRunEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.TurnOffStandaloneGateway", async function () {
+    try {
+       const data = await client.TurnOffStandaloneGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +308,16 @@ it("tcb.v20180608.DescribeDatabaseACL", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeStandaloneGateway", async function () {
+    try {
+       const data = await client.DescribeStandaloneGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ModifyCloudBaseRunServerFlowConf", async function () {
     try {
        const data = await client.ModifyCloudBaseRunServerFlowConf({})
@@ -291,6 +341,16 @@ it("tcb.v20180608.DescribeCloudBaseRunResourceForExtend", async function () {
 it("tcb.v20180608.ModifyEndUser", async function () {
     try {
        const data = await client.ModifyEndUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DestroyEnv", async function () {
+    try {
+       const data = await client.DestroyEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +528,9 @@ it("tcb.v20180608.DescribeEndUserStatistic", async function () {
     }
 })
 
-it("tcb.v20180608.DestroyEnv", async function () {
+it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
     try {
-       const data = await client.DestroyEnv({})
+       const data = await client.DescribeCloudBaseRunServerVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

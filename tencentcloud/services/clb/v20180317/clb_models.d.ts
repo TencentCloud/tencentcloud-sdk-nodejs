@@ -2456,6 +2456,11 @@ export interface ClusterResource {
       * 集群名称。
       */
     ClusterName: string;
+    /**
+      * 互联网服务供应商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Isp: string;
 }
 /**
  * ModifyDomain返回参数结构体

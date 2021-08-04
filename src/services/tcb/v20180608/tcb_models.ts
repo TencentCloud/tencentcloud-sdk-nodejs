@@ -211,6 +211,21 @@ export interface DescribeCloudBaseRunServerVersionRequest {
 }
 
 /**
+ * TurnOnStandaloneGateway返回参数结构体
+ */
+export interface TurnOnStandaloneGatewayResponse {
+  /**
+   * 小租户网关开启状态
+   */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEnvLimit请求参数结构体
  */
 export type DescribeEnvLimitRequest = null
@@ -239,6 +254,61 @@ export interface DeleteCloudBaseRunServerVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 独立网关信息
+ */
+export interface StandaloneGatewayInfo {
+  /**
+   * 独立网关名称
+   */
+  GatewayName: string
+
+  /**
+   * CPU核心数
+   */
+  CPU: number
+
+  /**
+   * 内存大小，单位MB
+   */
+  Mem: number
+
+  /**
+   * 套餐包版本名称
+   */
+  PackageVersion: string
+
+  /**
+   * 网关别名
+   */
+  GatewayAlias: string
+
+  /**
+   * 私有网络ID
+   */
+  VpcId: string
+
+  /**
+   * 子网ID列表
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * 网关描述
+   */
+  GatewayDesc: string
+
+  /**
+   * 网关状态
+   */
+  GateWayStatus: string
+
+  /**
+   * 服务信息
+   */
+  ServiceInfo: BackendServiceInfo
 }
 
 /**
@@ -313,6 +383,41 @@ export interface CommonServiceAPIResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeStandaloneGateway请求参数结构体
+ */
+export interface DescribeStandaloneGatewayRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 网关名称
+   */
+  GatewayName?: string
+
+  /**
+   * 网关别名
+   */
+  GatewayAlias?: string
+}
+
+/**
+ * DescribeStandaloneGatewayPackage请求参数结构体
+ */
+export interface DescribeStandaloneGatewayPackageRequest {
+  /**
+   * 环境ID
+   */
+  EnvId?: string
+
+  /**
+   * 套餐版本，包含starter、basic、advanced、enterprise
+   */
+  PackageVersion?: string
 }
 
 /**
@@ -441,13 +546,43 @@ export interface DescribeSpecialCostItemsRequest {
 }
 
 /**
- * DescribeEndUserStatistic请求参数结构体
+ * DescribeCloudBaseRunVersion请求参数结构体
  */
-export interface DescribeEndUserStatisticRequest {
+export interface DescribeCloudBaseRunVersionRequest {
   /**
-   * 环境id
+   * 环境ID
    */
   EnvId: string
+
+  /**
+   * 服务名称
+   */
+  ServerName: string
+
+  /**
+   * 版本名称
+   */
+  VersionName: string
+}
+
+/**
+ * DestroyStandaloneGateway请求参数结构体
+ */
+export interface DestroyStandaloneGatewayRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 网名名称
+   */
+  GatewayName: string
+
+  /**
+   * 是否强制释放
+   */
+  IsForce: boolean
 }
 
 /**
@@ -754,6 +889,26 @@ export interface DescribeAuthDomainsResponse {
 }
 
 /**
+ * DescribeStandaloneGateway返回参数结构体
+ */
+export interface DescribeStandaloneGatewayResponse {
+  /**
+   * 独立网关信息列表
+   */
+  StandaloneGatewayList: Array<StandaloneGatewayInfo>
+
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeWxCloudBaseRunEnvs返回参数结构体
  */
 export interface DescribeWxCloudBaseRunEnvsResponse {
@@ -844,6 +999,21 @@ export interface CloudBaseRunVolumeMount {
 }
 
 /**
+ * 网关服务信息
+ */
+export interface BackendServiceInfo {
+  /**
+   * 服务名称
+   */
+  ServiceName: string
+
+  /**
+   * 服务状态
+   */
+  Status: string
+}
+
+/**
  * DescribePostpayFreeQuotas请求参数结构体
  */
 export interface DescribePostpayFreeQuotasRequest {
@@ -884,27 +1054,18 @@ export interface CloudBaseRunImageInfo {
 }
 
 /**
- * ModifyDatabaseACL请求参数结构体
+ * DestroyStandaloneGateway返回参数结构体
  */
-export interface ModifyDatabaseACLRequest {
+export interface DestroyStandaloneGatewayResponse {
   /**
-   * 环境ID
+   * 删除独立网关状态
    */
-  EnvId: string
+  Status: string
 
   /**
-   * 集合名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CollectionName: string
-
-  /**
-      * 权限标签。包含以下取值：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-      */
-  AclTag: string
+  RequestId?: string
 }
 
 /**
@@ -1461,6 +1622,30 @@ export interface CreateAuthDomainResponse {
 }
 
 /**
+ * ModifyDatabaseACL请求参数结构体
+ */
+export interface ModifyDatabaseACLRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 集合名称
+   */
+  CollectionName: string
+
+  /**
+      * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+      */
+  AclTag: string
+}
+
+/**
  * DescribeEnvs请求参数结构体
  */
 export interface DescribeEnvsRequest {
@@ -1666,6 +1851,26 @@ export interface CreateCloudBaseRunResourceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStandaloneGatewayPackage返回参数结构体
+ */
+export interface DescribeStandaloneGatewayPackageResponse {
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 套餐详情
+   */
+  StandaloneGatewayPackageList: Array<StandaloneGatewayPackageInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2083,6 +2288,21 @@ export interface CodeSource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Branch?: string
+}
+
+/**
+ * TurnOffStandaloneGateway返回参数结构体
+ */
+export interface TurnOffStandaloneGatewayResponse {
+  /**
+   * 关闭独立网关状态
+   */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2632,6 +2852,41 @@ export interface DescribeSpecialCostItemsResponse {
 }
 
 /**
+ * CreateStandaloneGateway请求参数结构体
+ */
+export interface CreateStandaloneGatewayRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 网关名
+   */
+  GatewayAlias: string
+
+  /**
+   * 私有网络ID
+   */
+  VpcId: string
+
+  /**
+   * 子网ID
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * 网关描述
+   */
+  GatewayDesc: string
+
+  /**
+   * 网关套餐版本
+   */
+  PackageVersion: string
+}
+
+/**
  * DescribeCloudBaseProjectVersionList返回参数结构体
  */
 export interface DescribeCloudBaseProjectVersionListResponse {
@@ -2674,50 +2929,143 @@ export interface ReinstateEnvResponse {
 }
 
 /**
- * 子网信息
+ * 云开发项目版本
  */
-export interface CloudBaseRunVpcSubnet {
+export interface CloudBaseProjectVersion {
   /**
-      * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Id: string
+   * 项目名
+   */
+  Name: string
 
   /**
-      * 子网的ipv4
+      * SAM json
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Cidr: string
+  Sam: string
 
   /**
-      * 可用区
+      * 来源类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Zone: string
+  Source: CodeSource
 
   /**
-      * 类型
+      * 创建时间, unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: number
+
+  /**
+      * 更新时间 ,unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: number
+
+  /**
+      * 项目状态, 枚举值: 
+        "creatingEnv"-创建环境中
+	"createEnvFail"-创建环境失败
+	"building"-构建中
+	"buildFail"-构建失败
+	"deploying"-部署中
+	 "deployFail"-部署失败
+	 "success"-部署成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Parameters: Array<KVPair>
+
+  /**
+      * 项目类型, 枚举值:
+"framework-oneclick" 控制台一键部署
+"framework-local-oneclick" cli本地一键部署
+"qci-extension-cicd" 内网coding ci cd
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type: string
 
   /**
-      * subnet类型
+      * ci的id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Target: string
+  CIId: string
 
   /**
-      * 地域
+      * cd的id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Region: string
+  CDId: string
 
   /**
-      * 名字
+      * 环境id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Name: string
+  EnvId: string
+
+  /**
+      * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionNum: number
+
+  /**
+      * 错误原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailReason: string
+
+  /**
+      * rc.json内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RcJson: string
+
+  /**
+      * 插件配置内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddonConfig: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 网络配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkConfig: string
+
+  /**
+      * 扩展id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtensionId: string
+
+  /**
+      * 错误类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailType: string
+
+  /**
+      * 私有仓库地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoUrl: string
+
+  /**
+      * 是否私有仓库代码变更触发自动部署
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoDeployOnCodeChange: boolean
 }
 
 /**
@@ -2947,23 +3295,13 @@ export interface CreateAndDeployCloudBaseProjectRequest {
 }
 
 /**
- * DescribeCloudBaseRunVersion请求参数结构体
+ * DescribeEndUserStatistic请求参数结构体
  */
-export interface DescribeCloudBaseRunVersionRequest {
+export interface DescribeEndUserStatisticRequest {
   /**
-   * 环境ID
+   * 环境id
    */
   EnvId: string
-
-  /**
-   * 服务名称
-   */
-  ServerName: string
-
-  /**
-   * 版本名称
-   */
-  VersionName: string
 }
 
 /**
@@ -3072,6 +3410,26 @@ export interface ExtensionFile {
    * 文件名，长度不超过24
    */
   FileName: string
+}
+
+/**
+ * TurnOffStandaloneGateway请求参数结构体
+ */
+export interface TurnOffStandaloneGatewayRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 网关名称
+   */
+  GatewayName: string
+
+  /**
+   * 服务名称列表
+   */
+  ServiceNameList: Array<string>
 }
 
 /**
@@ -3203,6 +3561,26 @@ export interface DescribeCloudBaseProjectLatestVersionListResponse {
 }
 
 /**
+ * 小租户网关套餐配置
+ */
+export interface StandaloneGatewayPackageInfo {
+  /**
+   * CPU核心数
+   */
+  CPU: number
+
+  /**
+   * 内存大小，单位MB
+   */
+  Mem: number
+
+  /**
+   * 套餐包版本名称
+   */
+  PackageVersion: string
+}
+
+/**
  * nfs挂载资源
  */
 export interface CloudBaseRunNfsVolumeSource {
@@ -3324,6 +3702,21 @@ export interface DescribeDownloadFileResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DownloadUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateStandaloneGateway返回参数结构体
+ */
+export interface CreateStandaloneGatewayResponse {
+  /**
+   * 网关名称
+   */
+  GatewayName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3561,6 +3954,26 @@ export interface FreequotaInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FreeQuotaType: string
+}
+
+/**
+ * TurnOnStandaloneGateway请求参数结构体
+ */
+export interface TurnOnStandaloneGatewayRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 网关名称
+   */
+  GatewayName: string
+
+  /**
+   * 服务名称列表
+   */
+  ServiceNameList: Array<string>
 }
 
 /**
@@ -4317,143 +4730,50 @@ export interface ObjectKV {
 }
 
 /**
- * 云开发项目版本
+ * 子网信息
  */
-export interface CloudBaseProjectVersion {
+export interface CloudBaseRunVpcSubnet {
   /**
-   * 项目名
-   */
-  Name: string
-
-  /**
-      * SAM json
+      * 子网id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Sam: string
+  Id: string
 
   /**
-      * 来源类型
+      * 子网的ipv4
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Source: CodeSource
+  Cidr: string
 
   /**
-      * 创建时间, unix时间戳
+      * 可用区
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CreateTime: number
+  Zone: string
 
   /**
-      * 更新时间 ,unix时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: number
-
-  /**
-      * 项目状态, 枚举值: 
-        "creatingEnv"-创建环境中
-	"createEnvFail"-创建环境失败
-	"building"-构建中
-	"buildFail"-构建失败
-	"deploying"-部署中
-	 "deployFail"-部署失败
-	 "success"-部署成功
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 环境变量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Parameters: Array<KVPair>
-
-  /**
-      * 项目类型, 枚举值:
-"framework-oneclick" 控制台一键部署
-"framework-local-oneclick" cli本地一键部署
-"qci-extension-cicd" 内网coding ci cd
+      * 类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type: string
 
   /**
-      * ci的id
+      * subnet类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CIId: string
+  Target: string
 
   /**
-      * cd的id
+      * 地域
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CDId: string
+  Region: string
 
   /**
-      * 环境id
+      * 名字
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EnvId: string
-
-  /**
-      * 版本号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VersionNum: number
-
-  /**
-      * 错误原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailReason: string
-
-  /**
-      * rc.json内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RcJson: string
-
-  /**
-      * 插件配置内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AddonConfig: string
-
-  /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<string>
-
-  /**
-      * 网络配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NetworkConfig: string
-
-  /**
-      * 扩展id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExtensionId: string
-
-  /**
-      * 错误类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailType: string
-
-  /**
-      * 私有仓库地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RepoUrl: string
-
-  /**
-      * 是否私有仓库代码变更触发自动部署
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AutoDeployOnCodeChange: boolean
+  Name: string
 }
 
 /**
@@ -4769,4 +5089,9 @@ export interface RollUpdateCloudBaseRunServerVersionRequest {
    * 服务路径（只会第一次生效）
    */
   ServerPath?: string
+
+  /**
+   * 是否更新Cls
+   */
+  IsUpdateCls?: boolean
 }

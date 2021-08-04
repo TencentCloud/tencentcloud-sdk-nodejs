@@ -21,8 +21,9 @@ import {
   InquirePriceRenewEmrResponse,
   MultiDiskMC,
   ClusterSetting,
+  PodState,
   JobResult,
-  EmrProductConfigOutter,
+  CustomMetaInfo,
   LoginSettings,
   RunJobFlowRequest,
   VPCSettings,
@@ -30,9 +31,11 @@ import {
   ScaleOutInstanceResponse,
   InquiryPriceCreateInstanceRequest,
   Resource,
+  PriceResource,
   TerminateInstanceRequest,
   TerminateTasksRequest,
   PodVolume,
+  SyncPodStateResponse,
   TerminateInstanceResponse,
   CreateInstanceResponse,
   PersistentVolumeContext,
@@ -43,13 +46,15 @@ import {
   HostVolumeContext,
   Step,
   InstanceChargePrepaid,
+  DescribeCvmQuotaRequest,
   DescribeClusterNodesRequest,
   PreExecuteFileSettings,
+  SyncPodStateRequest,
   CreateInstanceRequest,
   InquirePriceRenewEmrRequest,
   PodParameter,
   MetaDbInfo,
-  Execution,
+  Configuration,
   DescribeInstancesResponse,
   InquiryPriceScaleOutInstanceRequest,
   Tag,
@@ -57,9 +62,10 @@ import {
   SearchItem,
   DynamicPodSpec,
   DescribeInstancesRequest,
-  CustomMetaInfo,
+  EmrProductConfigOutter,
   DiskSpec,
   JobFlowResourceSpec,
+  DescribeCvmQuotaResponse,
   InquiryPriceUpdateInstanceRequest,
   DescribeInstanceRenewNodesResponse,
   COSSettings,
@@ -71,9 +77,10 @@ import {
   InquiryPriceScaleOutInstanceResponse,
   OutterResource,
   UpdateInstanceSettings,
-  Configuration,
+  Execution,
   TerminateTasksResponse,
-  PriceResource,
+  QuotaEntity,
+  PodSaleSpec,
   DescribeClusterNodesResponse,
   NodeHardwareInfo,
   InquiryPriceUpdateInstanceResponse,
@@ -203,6 +210,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeJobFlowResponse) => void
   ): Promise<DescribeJobFlowResponse> {
     return this.request("DescribeJobFlow", req, cb)
+  }
+
+  /**
+   * 获取账户的CVM配额
+   */
+  async DescribeCvmQuota(
+    req: DescribeCvmQuotaRequest,
+    cb?: (error: string, rep: DescribeCvmQuotaResponse) => void
+  ): Promise<DescribeCvmQuotaResponse> {
+    return this.request("DescribeCvmQuota", req, cb)
+  }
+
+  /**
+   * EMR同步TKE中POD状态
+   */
+  async SyncPodState(
+    req: SyncPodStateRequest,
+    cb?: (error: string, rep: SyncPodStateResponse) => void
+  ): Promise<SyncPodStateResponse> {
+    return this.request("SyncPodState", req, cb)
   }
 
   /**

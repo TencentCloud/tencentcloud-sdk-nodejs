@@ -657,6 +657,11 @@ export interface DeleteDeviceRequest {
    * 设备名称。
    */
   DeviceName: string
+
+  /**
+   * 是否删除绑定设备
+   */
+  ForceDelete?: boolean
 }
 
 /**
@@ -2401,13 +2406,13 @@ export interface DeleteDeviceResponse {
       * 删除的结果代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResultCode?: string
+  ResultCode: string
 
   /**
       * 删除的结果信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResultMessage?: string
+  ResultMessage: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

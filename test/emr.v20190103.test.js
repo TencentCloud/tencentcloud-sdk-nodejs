@@ -128,6 +128,26 @@ it("emr.v20190103.DescribeJobFlow", async function () {
     }
 })
 
+it("emr.v20190103.DescribeCvmQuota", async function () {
+    try {
+       const data = await client.DescribeCvmQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.SyncPodState", async function () {
+    try {
+       const data = await client.SyncPodState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.ScaleOutInstance", async function () {
     try {
        const data = await client.ScaleOutInstance({})

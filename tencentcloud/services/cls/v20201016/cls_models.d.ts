@@ -1,4 +1,13 @@
 /**
+ * UploadLog返回参数结构体
+ */
+export interface UploadLogResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateAlarm返回参数结构体
  */
 export interface CreateAlarmResponse {
@@ -1448,6 +1457,10 @@ export interface DeleteIndexRequest {
       */
     TopicId: string;
 }
+/**
+ * UploadLog请求参数结构体
+ */
+export declare type UploadLogRequest = null;
 /**
  * DeleteConfig请求参数结构体
  */

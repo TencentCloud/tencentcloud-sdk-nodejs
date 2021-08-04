@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EstablishWxGatewayRoute", req, cb);
     }
     /**
+     * 本接口（DestroyStandaloneGateway）用于销毁小租户网关。
+     */
+    async DestroyStandaloneGateway(req, cb) {
+        return this.request("DestroyStandaloneGateway", req, cb);
+    }
+    /**
      * 创建托管域名
      */
     async CreateHostingDomain(req, cb) {
@@ -127,16 +133,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudBaseRunServerVersion", req, cb);
     }
     /**
-     * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
+     * 本接口（CreateStandaloneGateway）用于创建独立网关。
      */
-    async DescribeCloudBaseRunServerVersion(req, cb) {
-        return this.request("DescribeCloudBaseRunServerVersion", req, cb);
+    async CreateStandaloneGateway(req, cb) {
+        return this.request("CreateStandaloneGateway", req, cb);
     }
     /**
      * 获取安全域名列表
      */
     async DescribeAuthDomains(req, cb) {
         return this.request("DescribeAuthDomains", req, cb);
+    }
+    /**
+     * 本接口（TurnOnStandaloneGateway）用于开启小租户网关。
+     */
+    async TurnOnStandaloneGateway(req, cb) {
+        return this.request("TurnOnStandaloneGateway", req, cb);
+    }
+    /**
+     * 本接口（DescribeStandaloneGatewayPackage）用于查询小租户网关套餐信息。
+     */
+    async DescribeStandaloneGatewayPackage(req, cb) {
+        return this.request("DescribeStandaloneGatewayPackage", req, cb);
     }
     /**
      * 开通后付费资源
@@ -149,6 +167,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateWxCloudBaseRunEnv(req, cb) {
         return this.request("CreateWxCloudBaseRunEnv", req, cb);
+    }
+    /**
+     * 本接口（TurnOffStandaloneGateway）用于关闭小租户网关。
+     */
+    async TurnOffStandaloneGateway(req, cb) {
+        return this.request("TurnOffStandaloneGateway", req, cb);
     }
     /**
      * 云项目部署列表
@@ -181,6 +205,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseACL", req, cb);
     }
     /**
+     * 本接口（DescribeStandaloneGateway）查询小租户网关套餐信息。
+     */
+    async DescribeStandaloneGateway(req, cb) {
+        return this.request("DescribeStandaloneGateway", req, cb);
+    }
+    /**
      * 修改容器内的版本流量配置
      */
     async ModifyCloudBaseRunServerFlowConf(req, cb) {
@@ -197,6 +227,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyEndUser(req, cb) {
         return this.request("ModifyEndUser", req, cb);
+    }
+    /**
+     * 销毁环境
+     */
+    async DestroyEnv(req, cb) {
+        return this.request("DestroyEnv", req, cb);
     }
     /**
      * 获取增值包计费相关信息
@@ -301,10 +337,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEndUserStatistic", req, cb);
     }
     /**
-     * 销毁环境
+     * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
      */
-    async DestroyEnv(req, cb) {
-        return this.request("DestroyEnv", req, cb);
+    async DescribeCloudBaseRunServerVersion(req, cb) {
+        return this.request("DescribeCloudBaseRunServerVersion", req, cb);
     }
     /**
      * 更新活动详情

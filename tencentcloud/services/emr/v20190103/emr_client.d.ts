@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquirePriceRenewEmrResponse, RunJobFlowRequest, DescribeInstanceRenewNodesRequest, ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateTasksRequest, TerminateInstanceResponse, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, DescribeClusterNodesRequest, CreateInstanceRequest, InquirePriceRenewEmrRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstanceRenewNodesResponse, RunJobFlowResponse, InquiryPriceScaleOutInstanceResponse, TerminateTasksResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, DescribeJobFlowResponse, InquiryPriceRenewInstanceRequest, ScaleOutInstanceRequest } from "./emr_models";
+import { InquirePriceRenewEmrResponse, RunJobFlowRequest, DescribeInstanceRenewNodesRequest, ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateTasksRequest, SyncPodStateResponse, TerminateInstanceResponse, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, InquirePriceRenewEmrRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, DescribeCvmQuotaResponse, InquiryPriceUpdateInstanceRequest, DescribeInstanceRenewNodesResponse, RunJobFlowResponse, InquiryPriceScaleOutInstanceResponse, TerminateTasksResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, DescribeJobFlowResponse, InquiryPriceRenewInstanceRequest, ScaleOutInstanceRequest } from "./emr_models";
 /**
  * emr client
  * @class
@@ -51,6 +51,14 @@ export declare class Client extends AbstractClient {
      * 查询流程任务
      */
     DescribeJobFlow(req: DescribeJobFlowRequest, cb?: (error: string, rep: DescribeJobFlowResponse) => void): Promise<DescribeJobFlowResponse>;
+    /**
+     * 获取账户的CVM配额
+     */
+    DescribeCvmQuota(req: DescribeCvmQuotaRequest, cb?: (error: string, rep: DescribeCvmQuotaResponse) => void): Promise<DescribeCvmQuotaResponse>;
+    /**
+     * EMR同步TKE中POD状态
+     */
+    SyncPodState(req: SyncPodStateRequest, cb?: (error: string, rep: SyncPodStateResponse) => void): Promise<SyncPodStateResponse>;
     /**
      * 实例扩容
      */

@@ -94,6 +94,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeJobFlow", req, cb);
     }
     /**
+     * 获取账户的CVM配额
+     */
+    async DescribeCvmQuota(req, cb) {
+        return this.request("DescribeCvmQuota", req, cb);
+    }
+    /**
+     * EMR同步TKE中POD状态
+     */
+    async SyncPodState(req, cb) {
+        return this.request("SyncPodState", req, cb);
+    }
+    /**
      * 实例扩容
      */
     async ScaleOutInstance(req, cb) {

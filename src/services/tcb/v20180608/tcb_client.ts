@@ -23,17 +23,22 @@ import {
   CheckTcbServiceResponse,
   DescribeCloudBaseRunConfForGateWayRequest,
   DescribeCloudBaseRunServerVersionRequest,
+  TurnOnStandaloneGatewayResponse,
   DescribeEnvLimitRequest,
   DescribeExtensionUploadInfoRequest,
   DeleteCloudBaseRunServerVersionResponse,
+  StandaloneGatewayInfo,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
+  DescribeStandaloneGatewayRequest,
+  DescribeStandaloneGatewayPackageRequest,
   DescribePostpayPackageFreeQuotasRequest,
   DescribeEndUserLoginStatisticRequest,
   DescribeCloudBaseBuildServiceResponse,
   DescribeEndUsersRequest,
   DescribeSpecialCostItemsRequest,
-  DescribeEndUserStatisticRequest,
+  DescribeCloudBaseRunVersionRequest,
+  DestroyStandaloneGatewayRequest,
   CloudRunServiceSimpleVersionSnapshot,
   CreateWxCloudBaseRunServerDBClusterResponse,
   ReplaceActivityRecordResponse,
@@ -42,14 +47,16 @@ import {
   ModifyEndUserRequest,
   RollUpdateCloudBaseRunServerVersionResponse,
   DescribeAuthDomainsResponse,
+  DescribeStandaloneGatewayResponse,
   DescribeWxCloudBaseRunEnvsResponse,
   CreateHostingDomainRequest,
   DescribeCloudBaseRunResourceRequest,
   CloudBaseRunEmptyDirVolumeSource,
   CloudBaseRunVolumeMount,
+  BackendServiceInfo,
   DescribePostpayFreeQuotasRequest,
   CloudBaseRunImageInfo,
-  ModifyDatabaseACLRequest,
+  DestroyStandaloneGatewayResponse,
   DescribeCloudBaseRunServerVersionResponse,
   EndUserInfo,
   DescribeEndUserLoginStatisticResponse,
@@ -67,6 +74,7 @@ import {
   CreateWxCloudBaseRunServerDBClusterRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
   CreateAuthDomainResponse,
+  ModifyDatabaseACLRequest,
   DescribeEnvsRequest,
   CloudBaseRunVersionFlowItem,
   DeleteWxGatewayRouteRequest,
@@ -79,6 +87,7 @@ import {
   DeleteEndUserRequest,
   DescribeEnvPostpaidDeductResponse,
   CreateCloudBaseRunResourceResponse,
+  DescribeStandaloneGatewayPackageResponse,
   DestroyStaticStoreResponse,
   DeleteEndUserResponse,
   ModifyDatabaseACLResponse,
@@ -92,6 +101,7 @@ import {
   DestroyEnvResponse,
   DescribeCloudBaseProjectVersionListRequest,
   CodeSource,
+  TurnOffStandaloneGatewayResponse,
   DescribeEnvsResponse,
   CreateAuthDomainRequest,
   CreateHostingDomainResponse,
@@ -107,22 +117,24 @@ import {
   EstablishCloudBaseRunServerRequest,
   CloudBaseRunServiceVolumeMount,
   DescribeSpecialCostItemsResponse,
+  CreateStandaloneGatewayRequest,
   DescribeCloudBaseProjectVersionListResponse,
   DescribeDownloadFileRequest,
   ReinstateEnvResponse,
-  CloudBaseRunVpcSubnet,
+  CloudBaseProjectVersion,
   PackageFreeQuotaInfo,
   DescribeEnvFreeQuotaResponse,
   CreateAndDeployCloudBaseProjectResponse,
   StaticStorageInfo,
   DescribeCloudBaseRunResourceForExtendResponse,
   CreateAndDeployCloudBaseProjectRequest,
-  DescribeCloudBaseRunVersionRequest,
+  DescribeEndUserStatisticRequest,
   EstablishWxGatewayRouteRequest,
   DescribeCloudBaseRunConfForGateWayResponse,
   DatabasesInfo,
   CloudBaseSecurityContext,
   ExtensionFile,
+  TurnOffStandaloneGatewayRequest,
   ReinstateEnvRequest,
   EstablishWxGatewayRouteResponse,
   DescribeDatabaseACLRequest,
@@ -130,6 +142,7 @@ import {
   PlatformStatistic,
   DeleteCloudBaseProjectLatestVersionRequest,
   DescribeCloudBaseProjectLatestVersionListResponse,
+  StandaloneGatewayPackageInfo,
   CloudBaseRunNfsVolumeSource,
   DescribeSmsQuotasResponse,
   DescribeWxCloudBaseRunEnvsRequest,
@@ -137,6 +150,7 @@ import {
   BindEnvGatewayRequest,
   ModifyEnvResponse,
   DescribeDownloadFileResponse,
+  CreateStandaloneGatewayResponse,
   DescribeQuotaDataRequest,
   CreateStaticStoreResponse,
   CloudBaseRunVpcInfo,
@@ -144,6 +158,7 @@ import {
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,
   FreequotaInfo,
+  TurnOnStandaloneGatewayRequest,
   DescribePostpayFreeQuotasResponse,
   ActivityRecordItem,
   AuthDomain,
@@ -166,7 +181,7 @@ import {
   CloudBaseRunForGatewayConf,
   ExtensionFileInfo,
   ObjectKV,
-  CloudBaseProjectVersion,
+  CloudBaseRunVpcSubnet,
   DescribeDatabaseACLResponse,
   DescribeExtensionUploadInfoResponse,
   ModifyEnvRequest,
@@ -215,6 +230,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EstablishWxGatewayRouteResponse) => void
   ): Promise<EstablishWxGatewayRouteResponse> {
     return this.request("EstablishWxGatewayRoute", req, cb)
+  }
+
+  /**
+   * 本接口（DestroyStandaloneGateway）用于销毁小租户网关。
+   */
+  async DestroyStandaloneGateway(
+    req: DestroyStandaloneGatewayRequest,
+    cb?: (error: string, rep: DestroyStandaloneGatewayResponse) => void
+  ): Promise<DestroyStandaloneGatewayResponse> {
+    return this.request("DestroyStandaloneGateway", req, cb)
   }
 
   /**
@@ -351,13 +376,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
+   * 本接口（CreateStandaloneGateway）用于创建独立网关。
    */
-  async DescribeCloudBaseRunServerVersion(
-    req: DescribeCloudBaseRunServerVersionRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunServerVersionResponse) => void
-  ): Promise<DescribeCloudBaseRunServerVersionResponse> {
-    return this.request("DescribeCloudBaseRunServerVersion", req, cb)
+  async CreateStandaloneGateway(
+    req: CreateStandaloneGatewayRequest,
+    cb?: (error: string, rep: CreateStandaloneGatewayResponse) => void
+  ): Promise<CreateStandaloneGatewayResponse> {
+    return this.request("CreateStandaloneGateway", req, cb)
   }
 
   /**
@@ -368,6 +393,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuthDomainsResponse) => void
   ): Promise<DescribeAuthDomainsResponse> {
     return this.request("DescribeAuthDomains", req, cb)
+  }
+
+  /**
+   * 本接口（TurnOnStandaloneGateway）用于开启小租户网关。
+   */
+  async TurnOnStandaloneGateway(
+    req: TurnOnStandaloneGatewayRequest,
+    cb?: (error: string, rep: TurnOnStandaloneGatewayResponse) => void
+  ): Promise<TurnOnStandaloneGatewayResponse> {
+    return this.request("TurnOnStandaloneGateway", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeStandaloneGatewayPackage）用于查询小租户网关套餐信息。
+   */
+  async DescribeStandaloneGatewayPackage(
+    req: DescribeStandaloneGatewayPackageRequest,
+    cb?: (error: string, rep: DescribeStandaloneGatewayPackageResponse) => void
+  ): Promise<DescribeStandaloneGatewayPackageResponse> {
+    return this.request("DescribeStandaloneGatewayPackage", req, cb)
   }
 
   /**
@@ -388,6 +433,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void
   ): Promise<CreateWxCloudBaseRunEnvResponse> {
     return this.request("CreateWxCloudBaseRunEnv", req, cb)
+  }
+
+  /**
+   * 本接口（TurnOffStandaloneGateway）用于关闭小租户网关。
+   */
+  async TurnOffStandaloneGateway(
+    req: TurnOffStandaloneGatewayRequest,
+    cb?: (error: string, rep: TurnOffStandaloneGatewayResponse) => void
+  ): Promise<TurnOffStandaloneGatewayResponse> {
+    return this.request("TurnOffStandaloneGateway", req, cb)
   }
 
   /**
@@ -441,6 +496,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeStandaloneGateway）查询小租户网关套餐信息。
+   */
+  async DescribeStandaloneGateway(
+    req: DescribeStandaloneGatewayRequest,
+    cb?: (error: string, rep: DescribeStandaloneGatewayResponse) => void
+  ): Promise<DescribeStandaloneGatewayResponse> {
+    return this.request("DescribeStandaloneGateway", req, cb)
+  }
+
+  /**
    * 修改容器内的版本流量配置
    */
   async ModifyCloudBaseRunServerFlowConf(
@@ -468,6 +533,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyEndUserResponse) => void
   ): Promise<ModifyEndUserResponse> {
     return this.request("ModifyEndUser", req, cb)
+  }
+
+  /**
+   * 销毁环境
+   */
+  async DestroyEnv(
+    req: DestroyEnvRequest,
+    cb?: (error: string, rep: DestroyEnvResponse) => void
+  ): Promise<DestroyEnvResponse> {
+    return this.request("DestroyEnv", req, cb)
   }
 
   /**
@@ -641,13 +716,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁环境
+   * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
    */
-  async DestroyEnv(
-    req: DestroyEnvRequest,
-    cb?: (error: string, rep: DestroyEnvResponse) => void
-  ): Promise<DestroyEnvResponse> {
-    return this.request("DestroyEnv", req, cb)
+  async DescribeCloudBaseRunServerVersion(
+    req: DescribeCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunServerVersionResponse) => void
+  ): Promise<DescribeCloudBaseRunServerVersionResponse> {
+    return this.request("DescribeCloudBaseRunServerVersion", req, cb)
   }
 
   /**

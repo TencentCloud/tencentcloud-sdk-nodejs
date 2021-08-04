@@ -338,6 +338,16 @@ it("cls.v20201016.ModifyConfig", async function () {
     }
 })
 
+it("cls.v20201016.UploadLog", async function () {
+    try {
+       const data = await client.UploadLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeShipperTasks", async function () {
     try {
        const data = await client.DescribeShipperTasks({})

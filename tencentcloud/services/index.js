@@ -242,6 +242,8 @@ var rkp_1 = require("./rkp");
 Object.defineProperty(exports, "rkp", { enumerable: true, get: function () { return rkp_1.rkp; } });
 var rp_1 = require("./rp");
 Object.defineProperty(exports, "rp", { enumerable: true, get: function () { return rp_1.rp; } });
+var rum_1 = require("./rum");
+Object.defineProperty(exports, "rum", { enumerable: true, get: function () { return rum_1.rum; } });
 var scf_1 = require("./scf");
 Object.defineProperty(exports, "scf", { enumerable: true, get: function () { return scf_1.scf; } });
 var ses_1 = require("./ses");
