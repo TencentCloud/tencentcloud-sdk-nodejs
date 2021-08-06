@@ -515,7 +515,7 @@ export interface DescribeNetworkInterfacesRequest {
 vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。
 subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。
 network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。
-attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。
+attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ein-3nqpdn3i。
 groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。
 network-interface-name - String - （过滤条件）网卡实例名称。
 network-interface-description - String - （过滤条件）网卡实例描述。
@@ -3304,6 +3304,10 @@ export interface Image {
       * 中间态和失败时候的任务ID
       */
     TaskId: string;
+    /**
+      * 是否支持CloudInit
+      */
+    IsSupportCloudInit: boolean;
 }
 /**
  * 资源类型的Tag
@@ -6039,61 +6043,65 @@ export interface DeleteImageRequest {
  */
 export interface Module {
     /**
-      * 模块Id
+      * 模块Id。
       */
     ModuleId: string;
     /**
-      * 模块名称
+      * 模块名称。
       */
     ModuleName: string;
     /**
       * 模块状态：
-NORMAL：正常
+NORMAL：正常。
 DELETING：删除中
-DELETEFAILED：删除失败
+DELETEFAILED：删除失败。
       */
     ModuleState: string;
     /**
-      * 默认系统盘大小
+      * 默认系统盘大小。
       */
     DefaultSystemDiskSize: number;
     /**
-      * 默认数据盘大小
+      * 默认数据盘大小。
       */
     DefaultDataDiskSize: number;
     /**
-      * 默认机型
+      * 默认机型。
       */
     InstanceTypeConfig: InstanceTypeConfig;
     /**
-      * 默认镜像
+      * 默认镜像。
       */
     DefaultImage: Image;
     /**
-      * 创建时间
+      * 创建时间。
       */
     CreateTime: string;
     /**
-      * 默认出带宽
+      * 默认出带宽。
       */
     DefaultBandwidth: number;
     /**
-      * 标签集合
+      * 标签集合。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagSet: Array<Tag>;
     /**
-      * 是否关闭IP直通
+      * 是否关闭IP直通。
       */
     CloseIpDirect: number;
     /**
-      * 默认安全组id列表
+      * 默认安全组id列表。
       */
     SecurityGroupIds: Array<string>;
     /**
-      * 默认入带宽
+      * 默认入带宽。
       */
     DefaultBandwidthIn: number;
+    /**
+      * 自定义脚本数据
+      */
+    UserData: string;
 }
 /**
  * DescribeBaseOverview返回参数结构体

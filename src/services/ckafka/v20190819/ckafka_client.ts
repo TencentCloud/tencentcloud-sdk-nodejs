@@ -31,6 +31,7 @@ import {
   DescribeConsumerGroupResponse,
   DeleteTopicRequest,
   DescribeInstancesResponse,
+  FetchMessageByOffsetResponse,
   GroupInfoTopics,
   TopicResult,
   Region,
@@ -68,6 +69,7 @@ import {
   DeleteAclResponse,
   DynamicRetentionTime,
   DescribeRouteRequest,
+  FetchMessageByOffsetRequest,
   DescribeRegionRequest,
   InstanceConfigDO,
   DeleteAclRuleResponse,
@@ -117,6 +119,7 @@ import {
   DescribeRouteResponse,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
+  ConsumerRecord,
   ModifyGroupOffsetsRequest,
   CreateTopicIpWhiteListRequest,
   Route,
@@ -270,6 +273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstancePreResponse) => void
   ): Promise<CreateInstancePreResponse> {
     return this.request("CreateInstancePre", req, cb)
+  }
+
+  /**
+   * 根据指定offset位置的消息
+   */
+  async FetchMessageByOffset(
+    req: FetchMessageByOffsetRequest,
+    cb?: (error: string, rep: FetchMessageByOffsetResponse) => void
+  ): Promise<FetchMessageByOffsetResponse> {
+    return this.request("FetchMessageByOffset", req, cb)
   }
 
   /**

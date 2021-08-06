@@ -204,10 +204,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListBGPInstances", req, cb);
     }
     /**
+     * 本接口 (AssociateDDoSEipLoadBalancer) 用于将高防弹性公网IP绑定到负载均衡指定内网 IP 上。
+     */
+    async AssociateDDoSEipLoadBalancer(req, cb) {
+        return this.request("AssociateDDoSEipLoadBalancer", req, cb);
+    }
+    /**
      * 添加DDoS防护的IP黑白名单
      */
     async CreateBlackWhiteIpList(req, cb) {
         return this.request("CreateBlackWhiteIpList", req, cb);
+    }
+    /**
+     * 修改边界防护L7转发规则
+     */
+    async ModifyL7RulesEdge(req, cb) {
+        return this.request("ModifyL7RulesEdge", req, cb);
     }
     /**
      * 删除DDoS防护的IP黑白名单

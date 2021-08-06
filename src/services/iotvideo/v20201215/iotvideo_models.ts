@@ -2063,7 +2063,7 @@ export interface CreateProductRequest {
   Features: Array<string>
 
   /**
-   * 设备操作系统 android linux liteos
+   * 设备操作系统 Linux
    */
   ChipOs: string
 

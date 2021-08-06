@@ -964,6 +964,75 @@ export interface InstitutionOCRResponse {
     RequestId?: string;
 }
 /**
+ * 机动车销售统一发票信息
+ */
+export interface VehicleInvoiceInfo {
+    /**
+      * 车辆类型
+      */
+    CarType: string;
+    /**
+      * 厂牌型号
+      */
+    PlateModel: string;
+    /**
+      * 产地
+      */
+    ProduceAddress: string;
+    /**
+      * 合格证号
+      */
+    CertificateNo: string;
+    /**
+      * 进口证明书号
+      */
+    ImportNo: string;
+    /**
+      * LSVCA2NP9HN0xxxxx
+      */
+    VinNo: string;
+    /**
+      * 完税证书号
+      */
+    PayTaxesNo: string;
+    /**
+      * 吨位
+      */
+    Tonnage: string;
+    /**
+      * 限乘人数
+      */
+    LimitCount: string;
+    /**
+      * 发动机号码
+      */
+    EngineNo: string;
+    /**
+      * 商检单号
+      */
+    BizCheckFormNo: string;
+    /**
+      * 主管税务机关代码
+      */
+    TaxtationOrgCode: string;
+    /**
+      * 主管税务机关名称
+      */
+    TaxtationOrgName: string;
+    /**
+      * 税率
+      */
+    MotorTaxRate: string;
+    /**
+      * 开户行
+      */
+    MotorBankName: string;
+    /**
+      * 账号
+      */
+    MotorBankAccount: string;
+}
+/**
  * DriverLicenseOCR请求参数结构体
  */
 export interface DriverLicenseOCRRequest {
@@ -2375,6 +2444,107 @@ export interface TableOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * 二手车销售统一发票信息
+ */
+export interface UsedVehicleInvoiceInfo {
+    /**
+      * 所属税局
+      */
+    TaxBureau: string;
+    /**
+      * 买方单位/个人
+      */
+    Buyer: string;
+    /**
+      * 买方单位代码/身份证号码
+      */
+    BuyerNo: string;
+    /**
+      * 买方单位/个人地址
+      */
+    BuyerAddress: string;
+    /**
+      * 买方单位电话
+      */
+    BuyerTel: string;
+    /**
+      * 卖方单位/个人
+      */
+    Seller: string;
+    /**
+      * 卖方单位代码/身份证号码
+      */
+    SellerNo: string;
+    /**
+      * 卖方单位/个人地址
+      */
+    SellerAddress: string;
+    /**
+      * 卖方单位电话
+      */
+    SellerTel: string;
+    /**
+      * 车牌照号
+      */
+    VehicleLicenseNo: string;
+    /**
+      * 登记证号
+      */
+    RegisterNo: string;
+    /**
+      * 车架号/车辆识别代码
+      */
+    VehicleIdentifyNo: string;
+    /**
+      * 转入地车辆管理所名称
+      */
+    ManagementOffice: string;
+    /**
+      * 车价合计
+      */
+    VehicleTotalPrice: string;
+    /**
+      * 经营、拍卖单位
+      */
+    Auctioneer: string;
+    /**
+      * 经营、拍卖单位地址
+      */
+    AuctioneerAddress: string;
+    /**
+      * 经营、拍卖单位纳税人识别号
+      */
+    AuctioneerTaxpayerNum: string;
+    /**
+      * 经营、拍卖单位开户银行、账号
+      */
+    AuctioneerBankAccount: string;
+    /**
+      * 经营、拍卖单位电话
+      */
+    AuctioneerTel: string;
+    /**
+      * 二手车市场
+      */
+    Market: string;
+    /**
+      * 二手车市场纳税人识别号
+      */
+    MarketTaxpayerNum: string;
+    /**
+      * 二手车市场地址
+      */
+    MarketAddress: string;
+    /**
+      * 二手车市场开户银行账号
+      */
+    MarketBankAccount: string;
+    /**
+      * 二手车市场电话
+      */
+    MarketTel: string;
+}
+/**
  * 图片大小
  */
 export interface QrcodeImgSize {
@@ -2919,7 +3089,15 @@ export interface VatInvoiceVerifyResponse {
     /**
       * 增值税发票信息，详情请点击左侧链接。
       */
-    Invoice?: VatInvoice;
+    Invoice: VatInvoice;
+    /**
+      * 机动车销售统一发票信息
+      */
+    VehicleInvoiceInfo: VehicleInvoiceInfo;
+    /**
+      * 二手车销售统一发票信息
+      */
+    UsedVehicleInvoiceInfo: UsedVehicleInvoiceInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

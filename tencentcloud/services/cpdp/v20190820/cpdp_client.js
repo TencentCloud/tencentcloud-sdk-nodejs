@@ -136,10 +136,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindRelateAcct", req, cb);
     }
     /**
-     * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+     * 商户新增的接口
      */
-    async ContractOrder(req, cb) {
-        return this.request("ContractOrder", req, cb);
+    async CreatePayMerchant(req, cb) {
+        return this.request("CreatePayMerchant", req, cb);
     }
     /**
      * 直播平台-上传代理商完税证明
@@ -184,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAgentTaxPaymentInfos", req, cb);
     }
     /**
+     * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+     */
+    async ContractOrder(req, cb) {
+        return this.request("ContractOrder", req, cb);
+    }
+    /**
      * 商户查询是否签约和签约行为上报
      */
     async RegisterBehavior(req, cb) {
@@ -206,6 +212,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UnBindAcct(req, cb) {
         return this.request("UnBindAcct", req, cb);
+    }
+    /**
+     * 云鉴-消费订单确认接口
+     */
+    async ConfirmOrder(req, cb) {
+        return this.request("ConfirmOrder", req, cb);
     }
     /**
      * 智慧零售-发票查询V2
@@ -250,6 +262,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckAcct", req, cb);
     }
     /**
+     * 云鉴-消费订单查询接口
+     */
+    async QueryMerchantOrder(req, cb) {
+        return this.request("QueryMerchantOrder", req, cb);
+    }
+    /**
      * 智慧零售-发票红冲V2
      */
     async CreateRedInvoiceV2(req, cb) {
@@ -260,6 +278,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SyncContractData(req, cb) {
         return this.request("SyncContractData", req, cb);
+    }
+    /**
+     * 云鉴-商户信息修改的接口
+     */
+    async ModifyMerchant(req, cb) {
+        return this.request("ModifyMerchant", req, cb);
     }
     /**
      * 直播平台-查询主播签约信息
@@ -289,11 +313,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindRelateAcctSmallAmount", req, cb);
     }
     /**
+     * 云鉴-消费订单发起的接口
+     */
+    async CreateOrder(req, cb) {
+        return this.request("CreateOrder", req, cb);
+    }
+    /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
     async QueryMemberBind(req, cb) {
         return this.request("QueryMemberBind", req, cb);
+    }
+    /**
+     * 云鉴-商户信息查询接口
+     */
+    async QueryMerchant(req, cb) {
+        return this.request("QueryMerchant", req, cb);
     }
     /**
      * 修改会员属性-普通商户子账户。修改会员的会员属性。
@@ -336,12 +372,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ApplyOutwardOrder(req, cb) {
         return this.request("ApplyOutwardOrder", req, cb);
-    }
-    /**
-     * 直播平台-上传代理商完税列表
-     */
-    async UploadTaxList(req, cb) {
-        return this.request("UploadTaxList", req, cb);
     }
     /**
      * 跨境-付款人申请。通过该接口提交付款人信息并进行 kyc 审核。
@@ -390,6 +420,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async Refund(req, cb) {
         return this.request("Refund", req, cb);
+    }
+    /**
+     * 直播平台-上传代理商完税列表
+     */
+    async UploadTaxList(req, cb) {
+        return this.request("UploadTaxList", req, cb);
     }
     /**
      * 见证宝-会员在途充值(经第三方支付渠道)
@@ -563,6 +599,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryReconciliationDocument(req, cb) {
         return this.request("QueryReconciliationDocument", req, cb);
+    }
+    /**
+     * 云鉴-消费订单退款的接口
+     */
+    async RefundOrder(req, cb) {
+        return this.request("RefundOrder", req, cb);
     }
 }
 exports.Client = Client;

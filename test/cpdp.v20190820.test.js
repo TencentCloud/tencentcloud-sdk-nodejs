@@ -198,9 +198,9 @@ it("cpdp.v20190820.UnbindRelateAcct", async function () {
     }
 })
 
-it("cpdp.v20190820.ContractOrder", async function () {
+it("cpdp.v20190820.CreatePayMerchant", async function () {
     try {
-       const data = await client.ContractOrder({})
+       const data = await client.CreatePayMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +278,16 @@ it("cpdp.v20190820.DeleteAgentTaxPaymentInfos", async function () {
     }
 })
 
+it("cpdp.v20190820.ContractOrder", async function () {
+    try {
+       const data = await client.ContractOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RegisterBehavior", async function () {
     try {
        const data = await client.RegisterBehavior({})
@@ -311,6 +321,16 @@ it("cpdp.v20190820.UnifiedOrder", async function () {
 it("cpdp.v20190820.UnBindAcct", async function () {
     try {
        const data = await client.UnBindAcct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.ConfirmOrder", async function () {
+    try {
+       const data = await client.ConfirmOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,6 +408,16 @@ it("cpdp.v20190820.CheckAcct", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryMerchantOrder", async function () {
+    try {
+       const data = await client.QueryMerchantOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CreateRedInvoiceV2", async function () {
     try {
        const data = await client.CreateRedInvoiceV2({})
@@ -401,6 +431,16 @@ it("cpdp.v20190820.CreateRedInvoiceV2", async function () {
 it("cpdp.v20190820.SyncContractData", async function () {
     try {
        const data = await client.SyncContractData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.ModifyMerchant", async function () {
+    try {
+       const data = await client.ModifyMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +488,29 @@ it("cpdp.v20190820.BindRelateAcctSmallAmount", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateOrder", async function () {
+    try {
+       const data = await client.CreateOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryMemberBind", async function () {
     try {
        const data = await client.QueryMemberBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryMerchant", async function () {
+    try {
+       const data = await client.QueryMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -521,16 +581,6 @@ it("cpdp.v20190820.QueryAcctBinding", async function () {
 it("cpdp.v20190820.ApplyOutwardOrder", async function () {
     try {
        const data = await client.ApplyOutwardOrder({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cpdp.v20190820.UploadTaxList", async function () {
-    try {
-       const data = await client.UploadTaxList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +661,16 @@ it("cpdp.v20190820.QueryApplicationMaterial", async function () {
 it("cpdp.v20190820.Refund", async function () {
     try {
        const data = await client.Refund({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.UploadTaxList", async function () {
+    try {
+       const data = await client.UploadTaxList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -891,6 +951,16 @@ it("cpdp.v20190820.QueryAgentStatements", async function () {
 it("cpdp.v20190820.QueryReconciliationDocument", async function () {
     try {
        const data = await client.QueryReconciliationDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.RefundOrder", async function () {
+    try {
+       const data = await client.RefundOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -23,7 +23,9 @@ import {
   QueryOrderOutOrderList,
   ApplyTradeRequest,
   QueryOutwardOrderResponse,
+  ConfirmOrderRequest,
   QueryExchangeRateResponse,
+  UploadTaxPaymentRequest,
   UnifiedOrderInSubOrderList,
   QueryAcctBindingRequest,
   ModifyMntMbrBindRelateAcctBankCodeRequest,
@@ -34,7 +36,7 @@ import {
   QueryTradeRequest,
   UnifiedOrderResponse,
   QueryBankWithdrawCashDetailsRequest,
-  ApplyPayerinfoResult,
+  CreateTransferBatchRequest,
   QueryCustAcctIdBalanceRequest,
   QueryPayerInfoResponse,
   WithdrawItem,
@@ -45,12 +47,13 @@ import {
   RevResigterBillSupportWithdrawRequest,
   CreateInvoiceResponse,
   AgentTaxPayment,
-  CreateRedInvoiceResultV2,
+  CreateOrderRequest,
   QueryAnchorContractInfoRequest,
   CreateRedInvoiceResult,
   QueryBankWithdrawCashDetailsResponse,
-  QueryItem,
+  CreatePayMerchantRequest,
   ContractOrderRequest,
+  ModifyAgentTaxPaymentInfoResponse,
   AgencyClientInfo,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
@@ -74,10 +77,10 @@ import {
   CreateAcctRequest,
   CreateSinglePayRequest,
   CreateAgentTaxPaymentInfosRequest,
-  Acct,
+  ConfirmOrderResponse,
   CloseOrderResponse,
   ApplyPayerinfoData,
-  UploadTaxPaymentRequest,
+  ModifyMerchantRequest,
   CreateRedInvoiceItem,
   CheckAcctRequest,
   CheckAmountResponse,
@@ -85,6 +88,7 @@ import {
   QueryOutwardOrderResult,
   CreateAgentTaxPaymentInfosResponse,
   RechargeByThirdPayRequest,
+  RevokeMemberRechargeThirdPayRequest,
   QueryPayerInfoRequest,
   QueryMerchantInfoForManagementResponse,
   CreateTransferBatchResponse,
@@ -94,7 +98,9 @@ import {
   DescribeOrderStatusRequest,
   QueryMemberTransactionResponse,
   QueryMerchantBalanceResult,
+  ModifyMerchantResponse,
   QuerySinglePayResult,
+  RefundOrderResponse,
   QuerySinglePayResponse,
   ResponseTerminateContract,
   QueryCustAcctIdBalanceResponse,
@@ -111,14 +117,14 @@ import {
   BindRelateAcctUnionPayRequest,
   CreateInvoiceResultData,
   TransferDetailRequest,
-  CreateTransferBatchRequest,
+  ApplyPayerinfoResult,
   RefundResponse,
   QueryAgentTaxPaymentBatchResponse,
   DeleteAgentTaxPaymentInfosResponse,
   ReturnContractInfo,
   RegisterBillSupportWithdrawResponse,
   QueryTransferResultResponse,
-  QuerySmallAmountTransferResponse,
+  QueryItem,
   SceneInfo,
   QueryContractResponse,
   CreateInvoiceResultV2,
@@ -133,7 +139,7 @@ import {
   TranItem,
   ClearItem,
   MerchantManagementResult,
-  ApplyWithdrawalResponse,
+  Acct,
   QueryBankTransactionDetailsResponse,
   QueryTransferResultRequest,
   SyncContractDataResponse,
@@ -149,10 +155,11 @@ import {
   CreateAcctResponse,
   DescribeChargeDetailRequest,
   BindAcctResponse,
+  CreateOrderResponse,
   CreateRedInvoiceResponse,
   QueryExchangerateData,
-  ModifyAgentTaxPaymentInfoResponse,
-  QueryRefundRequest,
+  CreateRedInvoiceResultV2,
+  QueryMerchantOrderRequest,
   QueryTransferResultData,
   QueryTransferDetailResponse,
   BindRelateAccReUnionPayRequest,
@@ -162,6 +169,7 @@ import {
   QueryAcctInfoResponse,
   MigrateOrderRefundQueryRequest,
   QueryAgentTaxPaymentBatchRequest,
+  QueryMerchantRequest,
   QueryPayerinfoResult,
   TransferItem,
   QueryInvoiceV2Request,
@@ -171,6 +179,7 @@ import {
   RegisterBillResponse,
   WithdrawCashMembershipRequest,
   ApplyOutwardOrderRequest,
+  CreatePayMerchantResponse,
   UnbindRelateAcctResponse,
   RechargeByThirdPayResponse,
   CheckAmountRequest,
@@ -198,7 +207,8 @@ import {
   CloseOrderRequest,
   RevResigterBillSupportWithdrawResponse,
   QueryBalanceResponse,
-  QueryOutwardOrderData,
+  ApplyWithdrawalResponse,
+  RefundOrderRequest,
   UnBindAcctRequest,
   TerminateContractRequest,
   QueryTransferBatchRequest,
@@ -214,6 +224,7 @@ import {
   QueryBillDownloadURLRequest,
   TransferSinglePayRequest,
   ApplyOutwardOrderResult,
+  QuerySmallAmountTransferResponse,
   ApplyPayerInfoRequest,
   CreateSinglePayResponse,
   RefundMemberTransactionResponse,
@@ -223,7 +234,7 @@ import {
   ApplyApplicationMaterialResponse,
   QueryBankTransactionDetailsRequest,
   DownloadBillRequest,
-  RevokeMemberRechargeThirdPayRequest,
+  QueryRefundRequest,
   CreateRedInvoiceResultData,
   QuerySinglePayRequest,
   ApplyTradeResponse,
@@ -262,6 +273,7 @@ import {
   BindRelateAcctUnionPayResponse,
   QueryReconciliationDocumentRequest,
   QueryOrderResponse,
+  QueryOutwardOrderData,
   UnifiedOrderRequest,
   BankCardItem,
   MigrateOrderRefundResponse,
@@ -270,6 +282,8 @@ import {
   RefundRequest,
   BindRelateAccReUnionPayResponse,
   ContractOrderResponse,
+  QueryMerchantOrderResponse,
+  QueryMerchantResponse,
   CreateInvoiceV2Request,
 } from "./cpdp_models"
 
@@ -463,13 +477,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+   * 商户新增的接口
    */
-  async ContractOrder(
-    req: ContractOrderRequest,
-    cb?: (error: string, rep: ContractOrderResponse) => void
-  ): Promise<ContractOrderResponse> {
-    return this.request("ContractOrder", req, cb)
+  async CreatePayMerchant(
+    req: CreatePayMerchantRequest,
+    cb?: (error: string, rep: CreatePayMerchantResponse) => void
+  ): Promise<CreatePayMerchantResponse> {
+    return this.request("CreatePayMerchant", req, cb)
   }
 
   /**
@@ -543,6 +557,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+   */
+  async ContractOrder(
+    req: ContractOrderRequest,
+    cb?: (error: string, rep: ContractOrderResponse) => void
+  ): Promise<ContractOrderResponse> {
+    return this.request("ContractOrder", req, cb)
+  }
+
+  /**
    * 商户查询是否签约和签约行为上报
    */
   async RegisterBehavior(
@@ -580,6 +604,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnBindAcctResponse) => void
   ): Promise<UnBindAcctResponse> {
     return this.request("UnBindAcct", req, cb)
+  }
+
+  /**
+   * 云鉴-消费订单确认接口
+   */
+  async ConfirmOrder(
+    req: ConfirmOrderRequest,
+    cb?: (error: string, rep: ConfirmOrderResponse) => void
+  ): Promise<ConfirmOrderResponse> {
+    return this.request("ConfirmOrder", req, cb)
   }
 
   /**
@@ -653,6 +687,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云鉴-消费订单查询接口
+   */
+  async QueryMerchantOrder(
+    req: QueryMerchantOrderRequest,
+    cb?: (error: string, rep: QueryMerchantOrderResponse) => void
+  ): Promise<QueryMerchantOrderResponse> {
+    return this.request("QueryMerchantOrder", req, cb)
+  }
+
+  /**
    * 智慧零售-发票红冲V2
    */
   async CreateRedInvoiceV2(
@@ -670,6 +714,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncContractDataResponse) => void
   ): Promise<SyncContractDataResponse> {
     return this.request("SyncContractData", req, cb)
+  }
+
+  /**
+   * 云鉴-商户信息修改的接口
+   */
+  async ModifyMerchant(
+    req: ModifyMerchantRequest,
+    cb?: (error: string, rep: ModifyMerchantResponse) => void
+  ): Promise<ModifyMerchantResponse> {
+    return this.request("ModifyMerchant", req, cb)
   }
 
   /**
@@ -716,6 +770,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云鉴-消费订单发起的接口
+   */
+  async CreateOrder(
+    req: CreateOrderRequest,
+    cb?: (error: string, rep: CreateOrderResponse) => void
+  ): Promise<CreateOrderResponse> {
+    return this.request("CreateOrder", req, cb)
+  }
+
+  /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
@@ -724,6 +788,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryMemberBindResponse) => void
   ): Promise<QueryMemberBindResponse> {
     return this.request("QueryMemberBind", req, cb)
+  }
+
+  /**
+   * 云鉴-商户信息查询接口
+   */
+  async QueryMerchant(
+    req: QueryMerchantRequest,
+    cb?: (error: string, rep: QueryMerchantResponse) => void
+  ): Promise<QueryMerchantResponse> {
+    return this.request("QueryMerchant", req, cb)
   }
 
   /**
@@ -794,16 +868,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyOutwardOrderResponse) => void
   ): Promise<ApplyOutwardOrderResponse> {
     return this.request("ApplyOutwardOrder", req, cb)
-  }
-
-  /**
-   * 直播平台-上传代理商完税列表
-   */
-  async UploadTaxList(
-    req: UploadTaxListRequest,
-    cb?: (error: string, rep: UploadTaxListResponse) => void
-  ): Promise<UploadTaxListResponse> {
-    return this.request("UploadTaxList", req, cb)
   }
 
   /**
@@ -884,6 +948,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RefundResponse) => void
   ): Promise<RefundResponse> {
     return this.request("Refund", req, cb)
+  }
+
+  /**
+   * 直播平台-上传代理商完税列表
+   */
+  async UploadTaxList(
+    req: UploadTaxListRequest,
+    cb?: (error: string, rep: UploadTaxListResponse) => void
+  ): Promise<UploadTaxListResponse> {
+    return this.request("UploadTaxList", req, cb)
   }
 
   /**
@@ -1169,5 +1243,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryReconciliationDocumentResponse) => void
   ): Promise<QueryReconciliationDocumentResponse> {
     return this.request("QueryReconciliationDocument", req, cb)
+  }
+
+  /**
+   * 云鉴-消费订单退款的接口
+   */
+  async RefundOrder(
+    req: RefundOrderRequest,
+    cb?: (error: string, rep: RefundOrderResponse) => void
+  ): Promise<RefundOrderResponse> {
+    return this.request("RefundOrder", req, cb)
   }
 }

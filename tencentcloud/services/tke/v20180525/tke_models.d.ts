@@ -1163,39 +1163,23 @@ export interface DescribeVpcCniPodLimitsResponse {
     RequestId?: string;
 }
 /**
- * 托管prometheus告警配置实例
+ * DescribeVersions返回参数结构体
  */
-export interface PrometheusAlertRuleDetail {
+export interface DescribeVersionsResponse {
     /**
-      * 规则名称
-      */
-    Name: string;
-    /**
-      * 规则列表
-      */
-    Rules: Array<PrometheusAlertRule>;
-    /**
-      * 最后修改时间
-      */
-    UpdatedAt?: string;
-    /**
-      * 告警渠道
-      */
-    Notification?: PrometheusNotification;
-    /**
-      * 告警 id
-      */
-    Id?: string;
-    /**
-      * 如果该告警来至模板下发，则TemplateId为模板id
+      * 版本数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TemplateId?: string;
+    TotalCount: number;
     /**
-      * 计算周期
+      * 版本列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Interval?: string;
+    VersionInstanceSet: Array<VersionInstance>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 可升级节点信息
@@ -1648,6 +1632,41 @@ export interface DescribePrometheusTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * 托管prometheus告警配置实例
+ */
+export interface PrometheusAlertRuleDetail {
+    /**
+      * 规则名称
+      */
+    Name: string;
+    /**
+      * 规则列表
+      */
+    Rules: Array<PrometheusAlertRule>;
+    /**
+      * 最后修改时间
+      */
+    UpdatedAt?: string;
+    /**
+      * 告警渠道
+      */
+    Notification?: PrometheusNotification;
+    /**
+      * 告警 id
+      */
+    Id?: string;
+    /**
+      * 如果该告警来至模板下发，则TemplateId为模板id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TemplateId?: string;
+    /**
+      * 计算周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Interval?: string;
+}
+/**
  * DeleteClusterEndpointVip返回参数结构体
  */
 export interface DeleteClusterEndpointVipResponse {
@@ -1845,6 +1864,26 @@ export interface DeleteEKSClusterResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 版本信息
+ */
+export interface VersionInstance {
+    /**
+      * 版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: string;
+    /**
+      * Remark
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
 }
 /**
  * prometheus配置
@@ -2705,6 +2744,10 @@ export interface DescribeRouteTableConflictsResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeVersions请求参数结构体
+ */
+export declare type DescribeVersionsRequest = null;
 /**
  * CreateCluster返回参数结构体
  */

@@ -259,6 +259,19 @@ export interface DescribeInstancesResponse {
     RequestId?: string;
 }
 /**
+ * FetchMessageByOffset返回参数结构体
+ */
+export interface FetchMessageByOffsetResponse {
+    /**
+      * 返回结果
+      */
+    Result: ConsumerRecord;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GroupInfo内部topic对象
  */
 export interface GroupInfoTopics {
@@ -941,6 +954,27 @@ export interface DescribeRouteRequest {
       * 实例唯一id
       */
     InstanceId: string;
+}
+/**
+ * FetchMessageByOffset请求参数结构体
+ */
+export interface FetchMessageByOffsetRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * 主题名
+      */
+    Topic: string;
+    /**
+      * 分区id
+      */
+    Partition: number;
+    /**
+      * 位点信息
+      */
+    Offset?: number;
 }
 /**
  * DescribeRegion请求参数结构体
@@ -2007,6 +2041,38 @@ export interface DescribeGroupOffsetsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 消息记录
+ */
+export interface ConsumerRecord {
+    /**
+      * 主题名
+      */
+    Topic: string;
+    /**
+      * 分区id
+      */
+    Partition: number;
+    /**
+      * 位点
+      */
+    Offset: number;
+    /**
+      * 消息key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Key: string;
+    /**
+      * 消息value
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+    /**
+      * 消息时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Timestamp: number;
 }
 /**
  * ModifyGroupOffsets请求参数结构体

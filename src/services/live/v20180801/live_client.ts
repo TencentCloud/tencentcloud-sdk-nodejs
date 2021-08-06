@@ -65,12 +65,14 @@ import {
   DescribePlayErrorCodeDetailInfoListRequest,
   DeleteLivePullStreamTaskRequest,
   CommonMixOutputParams,
+  DescribePushBandwidthAndFluxListResponse,
   DescribeUploadStreamNumsRequest,
   DescribeLiveSnapshotRulesResponse,
   DescribeLiveTranscodeDetailInfoResponse,
   DescribeLiveDomainRequest,
   DescribeLiveStreamPublishedListRequest,
   DeleteLiveTranscodeRuleRequest,
+  DescribePushBandwidthAndFluxListRequest,
   CreateLiveRecordRuleRequest,
   DescribeLiveSnapshotTemplatesRequest,
   AddLiveWatermarkResponse,
@@ -222,6 +224,7 @@ import {
   DescribePlayErrorCodeSumInfoListRequest,
   ModifyLiveCertRequest,
   CommonMixControlParams,
+  TranscodeTotalInfo,
   DescribeAreaBillBandwidthAndFluxListResponse,
   ForbidLiveDomainRequest,
   DescribeLiveRecordRulesRequest,
@@ -240,6 +243,7 @@ import {
   CreateLiveTranscodeTemplateRequest,
   DescribeLiveStreamPublishedListResponse,
   DeleteLiveDomainRequest,
+  ForbidLiveDomainResponse,
   AddDelayLiveStreamResponse,
   DescribeLiveTranscodeTemplatesResponse,
   DeleteLiveCallbackRuleRequest,
@@ -249,7 +253,7 @@ import {
   ModifyLiveCallbackTemplateResponse,
   EnableLiveDomainRequest,
   DescribeAllStreamPlayInfoListResponse,
-  ForbidLiveDomainResponse,
+  DescribeLiveTranscodeTotalInfoResponse,
   DescribeLiveSnapshotRulesRequest,
   CreateRecordTaskRequest,
   CreateLiveTranscodeRuleResponse,
@@ -296,6 +300,7 @@ import {
   DescribeLiveStreamEventListResponse,
   DescribePullStreamConfigsResponse,
   DescribeLiveCallbackRulesResponse,
+  DescribeLiveTranscodeTotalInfoRequest,
   CreateRecordTaskResponse,
   ForbidStreamInfo,
   ResumeDelayLiveStreamResponse,
@@ -792,6 +797,19 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 查询转码总量数据，可查询近30天内数据。
+注意：
+如果是查询某一天内，则返回5分钟粒度数据；
+如果是查询跨天或指定域名， 则返回1小时粒度数据。
+     */
+  async DescribeLiveTranscodeTotalInfo(
+    req: DescribeLiveTranscodeTotalInfoRequest,
+    cb?: (error: string, rep: DescribeLiveTranscodeTotalInfoResponse) => void
+  ): Promise<DescribeLiveTranscodeTotalInfoResponse> {
+    return this.request("DescribeLiveTranscodeTotalInfo", req, cb)
+  }
+
+  /**
    * 删除截图规则。
    */
   async DeleteLiveSnapshotRule(
@@ -830,8 +848,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
 1. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
 2. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
 3. 默认支持任务数上限20个，如有特殊需求，可通过提单到售后进行评估增加上限。
-4. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
-5. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
+4. 目前仅支持推流到腾讯云直播，暂不支持推到第三方。
+5. 过期不用的任务需自行清理，未清理的过期任务也会占用上限额度，如需要自动清理过期任务，可提单给售后进行配置。
+6. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
+7. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
 
      */
   async CreateLivePullStreamTask(
@@ -1210,6 +1230,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveStreamPublishedListResponse) => void
   ): Promise<DescribeLiveStreamPublishedListResponse> {
     return this.request("DescribeLiveStreamPublishedList", req, cb)
+  }
+
+  /**
+     * 直播推流带宽和流量数据查询。
+推流计费会先取全球推流用量和全球播放用量进行比较，满足计费条件后再按各地区用量出账。详情参见[计费文档](https://cloud.tencent.com/document/product/267/34175)。
+     */
+  async DescribePushBandwidthAndFluxList(
+    req: DescribePushBandwidthAndFluxListRequest,
+    cb?: (error: string, rep: DescribePushBandwidthAndFluxListResponse) => void
+  ): Promise<DescribePushBandwidthAndFluxListResponse> {
+    return this.request("DescribePushBandwidthAndFluxList", req, cb)
   }
 
   /**

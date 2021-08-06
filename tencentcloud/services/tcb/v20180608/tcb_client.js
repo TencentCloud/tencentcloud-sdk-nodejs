@@ -373,10 +373,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunVersion", req, cb);
     }
     /**
-     * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
+     * 根据用户传入的指标, 拉取一段时间内的监控数据。
      */
-    async DestroyStaticStore(req, cb) {
-        return this.request("DestroyStaticStore", req, cb);
+    async DescribeCurveData(req, cb) {
+        return this.request("DescribeCurveData", req, cb);
     }
     /**
      * 修改数据库权限
@@ -395,6 +395,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEnvLimit(req, cb) {
         return this.request("DescribeEnvLimit", req, cb);
+    }
+    /**
+     * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
+     */
+    async DestroyStaticStore(req, cb) {
+        return this.request("DestroyStaticStore", req, cb);
     }
     /**
      * 查询后付费资源免费量

@@ -1140,6 +1140,39 @@ export interface CommonMixOutputParams {
     MixSei?: string;
 }
 /**
+ * DescribePushBandwidthAndFluxList返回参数结构体
+ */
+export interface DescribePushBandwidthAndFluxListResponse {
+    /**
+      * 峰值带宽所在时间点，格式为 yyyy-mm-dd HH:MM:SS。
+      */
+    PeakBandwidthTime: string;
+    /**
+      * 峰值带宽，单位是 Mbps。
+      */
+    PeakBandwidth: number;
+    /**
+      * 95峰值带宽所在时间点，格式为 yyyy-mm-dd HH:MM:SS。
+      */
+    P95PeakBandwidthTime: string;
+    /**
+      * 95峰值带宽，单位是 Mbps。
+      */
+    P95PeakBandwidth: number;
+    /**
+      * 总流量，单位是 MB。
+      */
+    SumFlux: number;
+    /**
+      * 明细数据信息。
+      */
+    DataInfoList: Array<BillDataInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeUploadStreamNums请求参数结构体
  */
 export interface DescribeUploadStreamNumsRequest {
@@ -1276,6 +1309,38 @@ export interface DeleteLiveTranscodeRuleRequest {
       * 模板ID。
       */
     TemplateId: number;
+}
+/**
+ * DescribePushBandwidthAndFluxList请求参数结构体
+ */
+export interface DescribePushBandwidthAndFluxListRequest {
+    /**
+      * 起始时间点，格式为 yyyy-mm-dd HH:MM:SS。
+      */
+    StartTime: string;
+    /**
+      * 结束时间点，格式为 yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。
+      */
+    EndTime: string;
+    /**
+      * 域名，可以填多个，若不填，表示总体数据。
+      */
+    PushDomains?: Array<string>;
+    /**
+      * 可选值：
+Mainland：查询中国大陆（境内）数据，
+Oversea：则查询国际/港澳台（境外）数据，
+不填则默认查询全球地区（境内+境外）的数据。
+      */
+    MainlandOrOversea?: string;
+    /**
+      * 数据粒度，支持如下粒度：
+5：5分钟粒度，（跨度不支持超过1天），
+60：1小时粒度（跨度不支持超过一个月），
+1440：天粒度（跨度不支持超过一个月）。
+默认值：5。
+      */
+    Granularity?: number;
 }
 /**
  * CreateLiveRecordRule请求参数结构体
@@ -4756,6 +4821,34 @@ export interface CommonMixControlParams {
     PassInputSei?: number;
 }
 /**
+ * 转码总量数据
+ */
+export interface TranscodeTotalInfo {
+    /**
+      * 时间点，北京时间，
+示例：2019-03-01 00:00:00。
+      */
+    Time: string;
+    /**
+      * 转码时长，单位：分钟。
+      */
+    Duration: number;
+    /**
+      * 编码方式，带模块，
+示例：
+liveprocessor_H264 =》直播转码-H264，
+liveprocessor_H265 =》 直播转码-H265，
+topspeed_H264 =》极速高清-H264，
+topspeed_H265 =》极速高清-H265。
+      */
+    ModuleCodec: string;
+    /**
+      * 分辨率，
+示例：540*480。
+      */
+    Resolution: string;
+}
+/**
  * DescribeAreaBillBandwidthAndFluxList返回参数结构体
  */
 export interface DescribeAreaBillBandwidthAndFluxListResponse {
@@ -5177,6 +5270,15 @@ export interface DeleteLiveDomainRequest {
     DomainType: number;
 }
 /**
+ * ForbidLiveDomain返回参数结构体
+ */
+export interface ForbidLiveDomainResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AddDelayLiveStream返回参数结构体
  */
 export interface AddDelayLiveStreamResponse {
@@ -5385,9 +5487,14 @@ export interface DescribeAllStreamPlayInfoListResponse {
     RequestId?: string;
 }
 /**
- * ForbidLiveDomain返回参数结构体
+ * DescribeLiveTranscodeTotalInfo返回参数结构体
  */
-export interface ForbidLiveDomainResponse {
+export interface DescribeLiveTranscodeTotalInfoResponse {
+    /**
+      * 统计数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataInfoList: Array<TranscodeTotalInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5414,11 +5521,11 @@ export interface CreateRecordTaskRequest {
       */
     AppName: string;
     /**
-      * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime，且EndTime - StartTime不能超过24小时。
+      * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且EndTime - StartTime不能超过24小时。
       */
     EndTime: number;
     /**
-      * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。不超过从当前时间开始6天之内的时间。
+      * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。StartTime不能超过当前时间+6天。
       */
     StartTime?: number;
     /**
@@ -6369,13 +6476,40 @@ export interface DescribeLiveCallbackRulesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeLiveTranscodeTotalInfo请求参数结构体
+ */
+export interface DescribeLiveTranscodeTotalInfoRequest {
+    /**
+      * 开始时间，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+      */
+    EndTime: string;
+    /**
+      * 推流域名列表，若不填，表示查询所有域名总体数据。
+指定域名时返回1小时粒度数据。
+      */
+    PushDomains?: Array<string>;
+    /**
+      * 可选值：
+Mainland：查询中国大陆（境内）数据，
+Oversea：则查询国际/港澳台（境外）数据，
+默认：查询全球地区（境内+境外）的数据。
+      */
+    MainlandOrOversea?: string;
+}
+/**
  * CreateRecordTask返回参数结构体
  */
 export interface CreateRecordTaskResponse {
     /**
       * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

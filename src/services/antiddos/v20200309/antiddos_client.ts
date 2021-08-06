@@ -66,6 +66,7 @@ import {
   ModifyPacketFilterConfigResponse,
   DescribeListDDoSGeoIPBlockConfigRequest,
   Layer7Rule,
+  L4RuleSource,
   CreateDDoSSpeedLimitConfigRequest,
   CreateDDoSGeoIPBlockConfigRequest,
   CreateProtocolBlockConfigRequest,
@@ -78,6 +79,7 @@ import {
   ModifyDomainUsrNameRequest,
   CreateDDoSSpeedLimitConfigResponse,
   DeletePacketFilterConfigRequest,
+  ModifyL7RulesEdgeRequest,
   DescribeListDDoSGeoIPBlockConfigResponse,
   DescribeBasicDeviceStatusResponse,
   WaterPrintConfig,
@@ -100,8 +102,10 @@ import {
   EipAddressRelation,
   DescribeListListenerResponse,
   ProtectThresholdRelation,
+  ModifyL7RulesEdgeResponse,
   CreateL7RuleCertsResponse,
   DDoSSpeedLimitConfig,
+  AssociateDDoSEipLoadBalancerRequest,
   DescribeListProtectThresholdConfigResponse,
   CertIdInsL7Rules,
   CreateDefaultAlarmThresholdResponse,
@@ -122,6 +126,7 @@ import {
   DescribeListDDoSAIResponse,
   ModifyDDoSSpeedLimitConfigRequest,
   AssociateDDoSEipAddressRequest,
+  AssociateDDoSEipLoadBalancerResponse,
   CreateBlackWhiteIpListRequest,
   CreateBoundIPResponse,
   SpeedValue,
@@ -139,6 +144,7 @@ import {
   DescribeListWaterPrintConfigResponse,
   BGPInstanceUsages,
   DeleteDDoSSpeedLimitConfigResponse,
+  L7RuleEntry,
   CreateWaterPrintKeyResponse,
   DeleteDDoSGeoIPBlockConfigResponse,
   DescribeListBlackWhiteIpListRequest,
@@ -452,6 +458,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (AssociateDDoSEipLoadBalancer) 用于将高防弹性公网IP绑定到负载均衡指定内网 IP 上。
+   */
+  async AssociateDDoSEipLoadBalancer(
+    req: AssociateDDoSEipLoadBalancerRequest,
+    cb?: (error: string, rep: AssociateDDoSEipLoadBalancerResponse) => void
+  ): Promise<AssociateDDoSEipLoadBalancerResponse> {
+    return this.request("AssociateDDoSEipLoadBalancer", req, cb)
+  }
+
+  /**
    * 添加DDoS防护的IP黑白名单
    */
   async CreateBlackWhiteIpList(
@@ -459,6 +475,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBlackWhiteIpListResponse) => void
   ): Promise<CreateBlackWhiteIpListResponse> {
     return this.request("CreateBlackWhiteIpList", req, cb)
+  }
+
+  /**
+   * 修改边界防护L7转发规则
+   */
+  async ModifyL7RulesEdge(
+    req: ModifyL7RulesEdgeRequest,
+    cb?: (error: string, rep: ModifyL7RulesEdgeResponse) => void
+  ): Promise<ModifyL7RulesEdgeResponse> {
+    return this.request("ModifyL7RulesEdge", req, cb)
   }
 
   /**

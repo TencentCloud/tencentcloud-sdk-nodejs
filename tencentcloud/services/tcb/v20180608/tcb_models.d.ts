@@ -702,6 +702,39 @@ export interface ModifyEndUserRequest {
     Status?: string;
 }
 /**
+ * DescribeCurveData返回参数结构体
+ */
+export interface DescribeCurveDataResponse {
+    /**
+      * 开始时间, 会根据数据的统计周期进行取整.
+      */
+    StartTime: string;
+    /**
+      * 结束时间, 会根据数据的统计周期进行取整.
+      */
+    EndTime: string;
+    /**
+      * 指标名.
+      */
+    MetricName: string;
+    /**
+      * 统计周期(单位秒), 当时间区间为1天内, 统计周期为5分钟; 当时间区间选择为1天以上, 15天以下, 统计周期为1小时; 当时间区间选择为15天以上, 180天以下, 统计周期为1天.
+      */
+    Period: number;
+    /**
+      * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到.
+      */
+    Values: Array<number>;
+    /**
+      * 时间数据, 标识监控数据Values中的点是哪个时间段上报的.
+      */
+    Time: Array<number>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * RollUpdateCloudBaseRunServerVersion返回参数结构体
  */
 export interface RollUpdateCloudBaseRunServerVersionResponse {
@@ -723,6 +756,27 @@ export interface RollUpdateCloudBaseRunServerVersionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * cls日志信息
+ */
+export interface ClsInfo {
+    /**
+      * cls所属地域
+      */
+    ClsRegion: string;
+    /**
+      * cls日志集ID
+      */
+    ClsLogsetId: string;
+    /**
+      * cls日志主题ID
+      */
+    ClsTopicId: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
 }
 /**
  * DescribeAuthDomains返回参数结构体
@@ -1113,18 +1167,17 @@ export interface EndUserInfo {
     UserName: string;
 }
 /**
- * DescribeEndUserLoginStatistic返回参数结构体
+ * DeleteEndUser请求参数结构体
  */
-export interface DescribeEndUserLoginStatisticResponse {
+export interface DeleteEndUserRequest {
     /**
-      * 环境终端用户新增与登录统计
-注意：此字段可能返回 null，表示取不到有效值。
+      * 环境ID
       */
-    LoginStatistics?: Array<LoginStatistic>;
+    EnvId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用户列表，每一项都是uuid
       */
-    RequestId?: string;
+    UserList: Array<string>;
 }
 /**
  * DescribeHostingDomainTask请求参数结构体
@@ -1523,17 +1576,18 @@ export interface CloudBaseCapabilities {
     Drop?: Array<string>;
 }
 /**
- * DeleteEndUser请求参数结构体
+ * DescribeEndUserLoginStatistic返回参数结构体
  */
-export interface DeleteEndUserRequest {
+export interface DescribeEndUserLoginStatisticResponse {
     /**
-      * 环境ID
+      * 环境终端用户新增与登录统计
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnvId: string;
+    LoginStatistics?: Array<LoginStatistic>;
     /**
-      * 用户列表，每一项都是uuid
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    UserList: Array<string>;
+    RequestId?: string;
 }
 /**
  * DescribeEnvPostpaidDeduct返回参数结构体
@@ -1830,6 +1884,11 @@ export interface EnvInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<Tag>;
+    /**
+      * 自定义日志服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomLogServices: Array<ClsInfo>;
 }
 /**
  * DestroyEnv请求参数结构体
@@ -3069,6 +3128,50 @@ export interface DescribeWxCloudBaseRunEnvsRequest {
       * wx应用Id
       */
     WxAppId?: string;
+}
+/**
+ * DescribeCurveData请求参数结构体
+ */
+export interface DescribeCurveDataRequest {
+    /**
+      * 环境ID
+      */
+    EnvId: string;
+    /**
+      * <li> 指标名: </li>
+<li> StorageRead: 存储读请求次数 </li>
+<li> StorageWrite: 存储写请求次数 </li>
+<li> StorageCdnOriginFlux: CDN回源流量, 单位字节 </li>
+<li> CDNFlux: CDN回源流量, 单位字节 </li>
+<li> FunctionInvocation: 云函数调用次数 </li>
+<li> FunctionGBs: 云函数资源使用量, 单位Mb*Ms </li>
+<li> FunctionFlux: 云函数流量, 单位千字节(KB) </li>
+<li> FunctionError: 云函数调用错误次数 </li>
+<li> FunctionDuration: 云函数运行时间, 单位毫秒 </li>
+<li> DbRead: 数据库读请求数 </li>
+<li> DbWrite: 数据库写请求数 </li>
+<li> DbCostTime10ms: 数据库耗时在10ms~50ms请求数 </li>
+<li> DbCostTime50ms: 数据库耗时在50ms~100ms请求数 </li>
+<li> DbCostTime100ms: 数据库耗时在100ms以上请求数 </li>
+<li> TkeCpuRatio: 容器CPU占用率 </li>
+<li> TkeMemRatio: 容器内存占用率 </li>
+<li> TkeCpuUsed: 容器CPU使用量 </li>
+<li> TkeMemUsed: 容器内存使用量 </li>
+<li> TkeInvokeNum: 调用量 </li>
+      */
+    MetricName: string;
+    /**
+      * 开始时间，如2018-08-24 10:50:00, 开始时间需要早于结束时间至少五分钟(原因是因为目前统计粒度最小是5分钟).
+      */
+    StartTime: string;
+    /**
+      * 结束时间，如2018-08-24 10:50:00, 结束时间需要晚于开始时间至少五分钟(原因是因为目前统计粒度最小是5分钟)..
+      */
+    EndTime: string;
+    /**
+      * 资源ID, 目前仅对云函数、容器托管相关的指标有意义。云函数(FunctionInvocation, FunctionGBs, FunctionFlux, FunctionError, FunctionDuration)、容器托管（服务名称）, 如果想查询某个云函数的指标则在ResourceId中传入函数名; 如果只想查询整个namespace的指标, 则留空或不传.如果想查询数据库某个集合相关信息，传入集合名称
+      */
+    ResourceID?: string;
 }
 /**
  * ImageSecretInfo的信息

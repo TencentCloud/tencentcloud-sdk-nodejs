@@ -873,6 +873,19 @@ export interface Layer7Rule {
     InstanceDetails: Array<InstanceRelation>;
 }
 /**
+ * L4规则回源列表
+ */
+export interface L4RuleSource {
+    /**
+      * 回源IP或域名
+      */
+    Source: string;
+    /**
+      * 权重值，取值[0,100]
+      */
+    Weight: number;
+}
+/**
  * CreateDDoSSpeedLimitConfig请求参数结构体
  */
 export interface CreateDDoSSpeedLimitConfigRequest {
@@ -1018,6 +1031,23 @@ export interface DeletePacketFilterConfigRequest {
       * 特征过滤配置
       */
     PacketFilterConfig: PacketFilterConfig;
+}
+/**
+ * ModifyL7RulesEdge请求参数结构体
+ */
+export interface ModifyL7RulesEdgeRequest {
+    /**
+      * 大禹子产品代号（edge表示边界防护产品）
+      */
+    Business: string;
+    /**
+      * 资源ID
+      */
+    Id: string;
+    /**
+      * 规则
+      */
+    Rule: L7RuleEntry;
 }
 /**
  * DescribeListDDoSGeoIPBlockConfig返回参数结构体
@@ -1423,6 +1453,19 @@ off(关闭)
     ListenerCcThresholdList: Array<ListenerCcThreholdConfig>;
 }
 /**
+ * ModifyL7RulesEdge返回参数结构体
+ */
+export interface ModifyL7RulesEdgeResponse {
+    /**
+      * 成功码
+      */
+    Success: SuccessCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateL7RuleCerts返回参数结构体
  */
 export interface CreateL7RuleCertsResponse {
@@ -1473,6 +1516,27 @@ SMP(smp协议)
       * 端口范围列表，最多8个，多个;分隔，范围表示用-；此端口范围必须填写；填写样式1:0-65535，样式2:80;443;1000-2000
       */
     DstPortList?: string;
+}
+/**
+ * AssociateDDoSEipLoadBalancer请求参数结构体
+ */
+export interface AssociateDDoSEipLoadBalancerRequest {
+    /**
+      * 资源实例ID，实例ID形如：bgpip-0000011x。只能填写高防IP实例。
+      */
+    InstanceId: string;
+    /**
+      * 资源实例ID对应的高防弹性公网IP。
+      */
+    Eip: string;
+    /**
+      * 要绑定的负载均衡ID。负载均衡 ID 形如：lb-0000002i。可通过登录控制台查询，也可通过 DescribeLoadBalancers 接口返回值中的LoadBalancerId获取。
+      */
+    LoadBalancerID: string;
+    /**
+      * Clb所在地域，例如：ap-hongkong。
+      */
+    LoadBalancerRegion: string;
 }
 /**
  * DescribeListProtectThresholdConfig返回参数结构体
@@ -1927,6 +1991,15 @@ export interface AssociateDDoSEipAddressRequest {
     CvmRegion: string;
 }
 /**
+ * AssociateDDoSEipLoadBalancer返回参数结构体
+ */
+export interface AssociateDDoSEipLoadBalancerResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateBlackWhiteIpList请求参数结构体
  */
 export interface CreateBlackWhiteIpListRequest {
@@ -2239,6 +2312,93 @@ export interface DeleteDDoSSpeedLimitConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * L7规则
+ */
+export interface L7RuleEntry {
+    /**
+      * 会话保持时间，单位秒
+      */
+    KeepTime: number;
+    /**
+      * 转发域名
+      */
+    Domain: string;
+    /**
+      * 转发协议，取值[http, https]
+      */
+    Protocol: string;
+    /**
+      * 回源方式，取值[1(域名回源)，2(IP回源)]
+      */
+    SourceType: number;
+    /**
+      * 负载均衡方式，取值[1(加权轮询)]
+      */
+    LbType: number;
+    /**
+      * 回源列表
+      */
+    SourceList: Array<L4RuleSource>;
+    /**
+      * 会话保持开关，取值[0(会话保持关闭)，1(会话保持开启)]
+      */
+    KeepEnable: number;
+    /**
+      * 规则状态，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)]
+      */
+    Status?: number;
+    /**
+      * 规则ID，当添加新规则时可以不用填写此字段；当修改或者删除规则时需要填写此字段；
+      */
+    RuleId?: string;
+    /**
+      * HTTPS协议的CC防护阈值
+      */
+    CCThreshold?: number;
+    /**
+      * 当证书来源为自有证书时，此字段必须填写证书密钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
+      */
+    PrivateKey?: string;
+    /**
+      * HTTPS协议的CC防护状态，取值[0(关闭), 1(开启)]
+      */
+    CCEnable?: number;
+    /**
+      * 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HttpsToHttpEnable?: number;
+    /**
+      * 证书来源，当转发协议为https时必须填，取值[2(腾讯云托管证书)]，当转发协议为http时也可以填0
+      */
+    CertType?: number;
+    /**
+      * 当证书来源为自有证书时，此字段必须填写证书内容；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
+      */
+    Cert?: string;
+    /**
+      * HTTPS协议的CC防护等级
+      */
+    CCLevel?: string;
+    /**
+      * 规则描述
+      */
+    RuleName?: string;
+    /**
+      * cc防护状态，取值[0(关闭), 1(开启)]
+      */
+    CCStatus?: number;
+    /**
+      * 接入端口值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VirtualPort?: number;
+    /**
+      * 当证书来源为腾讯云托管证书时，此字段必须填写托管证书ID
+      */
+    SSLId?: string;
 }
 /**
  * CreateWaterPrintKey返回参数结构体

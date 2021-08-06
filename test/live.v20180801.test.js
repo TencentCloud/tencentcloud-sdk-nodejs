@@ -458,6 +458,16 @@ it("live.v20180801.DeleteLiveTranscodeRule", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveTranscodeTotalInfo", async function () {
+    try {
+       const data = await client.DescribeLiveTranscodeTotalInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveSnapshotRule", async function () {
     try {
        const data = await client.DeleteLiveSnapshotRule({})
@@ -851,6 +861,16 @@ it("live.v20180801.DescribePlayErrorCodeDetailInfoList", async function () {
 it("live.v20180801.DescribeLiveStreamPublishedList", async function () {
     try {
        const data = await client.DescribeLiveStreamPublishedList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribePushBandwidthAndFluxList", async function () {
+    try {
+       const data = await client.DescribePushBandwidthAndFluxList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -308,9 +308,29 @@ it("antiddos.v20200309.DescribeListBGPInstances", async function () {
     }
 })
 
+it("antiddos.v20200309.AssociateDDoSEipLoadBalancer", async function () {
+    try {
+       const data = await client.AssociateDDoSEipLoadBalancer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.CreateBlackWhiteIpList", async function () {
     try {
        const data = await client.CreateBlackWhiteIpList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.ModifyL7RulesEdge", async function () {
+    try {
+       const data = await client.ModifyL7RulesEdge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

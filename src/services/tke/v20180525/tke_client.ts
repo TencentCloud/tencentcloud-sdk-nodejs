@@ -70,7 +70,7 @@ import {
   Instance,
   LoginSettings,
   DescribeVpcCniPodLimitsResponse,
-  PrometheusAlertRuleDetail,
+  DescribeVersionsResponse,
   UpgradeAbleInstancesItem,
   CreateClusterNodePoolFromExistingAsgRequest,
   PrometheusAlertRule,
@@ -95,6 +95,7 @@ import {
   SetNodePoolNodeProtectionResponse,
   DisableVpcCniNetworkTypeRequest,
   DescribePrometheusTemplatesResponse,
+  PrometheusAlertRuleDetail,
   DeleteClusterEndpointVipResponse,
   SyncPrometheusTemplateRequest,
   ClusterBasicSettings,
@@ -106,6 +107,7 @@ import {
   CreateClusterInstancesRequest,
   ManuallyAdded,
   DeleteEKSClusterResponse,
+  VersionInstance,
   PrometheusConfigItem,
   DeleteClusterNodePoolRequest,
   DescribeClusterKubeconfigRequest,
@@ -152,6 +154,7 @@ import {
   EnhancedService,
   CreateClusterAsGroupRequest,
   DescribeRouteTableConflictsResponse,
+  DescribeVersionsRequest,
   CreateClusterResponse,
   TaskStepInfo,
   RunSecurityServiceEnabled,
@@ -878,6 +881,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterNodePoolResponse) => void
   ): Promise<DeleteClusterNodePoolResponse> {
     return this.request("DeleteClusterNodePool", req, cb)
+  }
+
+  /**
+   * 获取集群版本信息
+   */
+  async DescribeVersions(
+    req?: DescribeVersionsRequest,
+    cb?: (error: string, rep: DescribeVersionsResponse) => void
+  ): Promise<DescribeVersionsResponse> {
+    return this.request("DescribeVersions", req, cb)
   }
 
   /**

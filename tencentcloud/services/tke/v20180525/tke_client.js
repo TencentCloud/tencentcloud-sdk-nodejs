@@ -400,6 +400,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterNodePool", req, cb);
     }
     /**
+     * 获取集群版本信息
+     */
+    async DescribeVersions(req, cb) {
+        return this.request("DescribeVersions", req, cb);
+    }
+    /**
      * 修改集群伸缩组属性
      */
     async ModifyClusterAsGroupAttribute(req, cb) {

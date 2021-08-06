@@ -249,6 +249,19 @@ export interface QueryOutwardOrderResponse {
     RequestId?: string;
 }
 /**
+ * ConfirmOrder请求参数结构体
+ */
+export interface ConfirmOrderRequest {
+    /**
+      * 分配给商户的AppId
+      */
+    MerchantAppId: string;
+    /**
+      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
+      */
+    OrderNo: string;
+}
+/**
  * QueryExchangeRate返回参数结构体
  */
 export interface QueryExchangeRateResponse {
@@ -260,6 +273,23 @@ export interface QueryExchangeRateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UploadTaxPayment请求参数结构体
+ */
+export interface UploadTaxPaymentRequest {
+    /**
+      * 平台渠道
+      */
+    Channel: number;
+    /**
+      * 完税ID
+      */
+    TaxId: string;
+    /**
+      * 完税列表下载地址
+      */
+    FileUrl: string;
 }
 /**
  * 子订单列表
@@ -588,17 +618,63 @@ export interface QueryBankWithdrawCashDetailsRequest {
     Profile?: string;
 }
 /**
- * 付款人申请结果
+ * CreateTransferBatch请求参数结构体
  */
-export interface ApplyPayerinfoResult {
+export interface CreateTransferBatchRequest {
     /**
-      * 错误码
+      * 商户号。
+示例值：129284394
       */
-    Code: string;
+    MerchantId: string;
     /**
-      * 数据
+      * 转账明细列表。
+发起批量转账的明细列表，最多三千笔
       */
-    Data: ApplyPayerinfoData;
+    TransferDetails: Array<TransferDetailRequest>;
+    /**
+      * 直连商户appId。
+即商户号绑定的appid。
+示例值：wxf636efh567hg4356
+      */
+    MerchantAppId: string;
+    /**
+      * 商家批次单号。
+商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
+示例值：plfk2020042013
+      */
+    MerchantBatchNo: string;
+    /**
+      * 批次名称。
+批量转账的名称。
+示例值：2019年1月深圳分部报销单
+      */
+    BatchName: string;
+    /**
+      * 转账说明。
+UTF8编码，最多32个字符。
+示例值：2019年深圳分部报销单
+      */
+    BatchRemark: string;
+    /**
+      * 转账总金额。
+转账金额，单位为分。
+示例值：4000000
+      */
+    TotalAmount: number;
+    /**
+      * 转账总笔数。
+一个转账批次最多允许发起三千笔转账。
+示例值：200
+      */
+    TotalNum: number;
+    /**
+      * 环境名。
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+    Profile?: string;
 }
 /**
  * QueryCustAcctIdBalance请求参数结构体
@@ -959,13 +1035,33 @@ export interface AgentTaxPayment {
     Tax: number;
 }
 /**
- * 红票结果V2
+ * CreateOrder请求参数结构体
  */
-export interface CreateRedInvoiceResultV2 {
+export interface CreateOrderRequest {
     /**
-      * 红票ID
+      * 渠道编号。ZSB2B：招商银行B2B。
       */
-    InvoiceId: string;
+    ChannelCode: string;
+    /**
+      * 进件成功后返给商户方的 AppId。
+      */
+    MerchantAppId: string;
+    /**
+      * 交易金额。单位：元
+      */
+    Amount: string;
+    /**
+      * 商户流水号。商户唯一订单号由字母或数字组成。
+      */
+    TraceNo: string;
+    /**
+      * 通知地址。商户接收交易结果的通知地址。
+      */
+    NotifyUrl: string;
+    /**
+      * 返回地址。支付成功后，页面将跳 转返回到商户的该地址。
+      */
+    ReturnUrl: string;
 }
 /**
  * QueryAnchorContractInfo请求参数结构体
@@ -1050,42 +1146,30 @@ export interface QueryBankWithdrawCashDetailsResponse {
     RequestId?: string;
 }
 /**
- * 聚鑫商户余额查询输出项
+ * CreatePayMerchant请求参数结构体
  */
-export interface QueryItem {
+export interface CreatePayMerchantRequest {
     /**
-      * 子商户账户
+      * 平台编号
       */
-    SubAcctNo: string;
+    PlatformCode: string;
     /**
-      * 子账户属性
-1：普通会员子账号
-2：挂账子账号
-3：手续费子账号
-4：利息子账号
-5：平台担保子账号
+      * 渠道方收款商户编号，由渠道方(银行)提 供。
       */
-    SubAcctProperty: string;
+    ChannelMerchantNo: string;
     /**
-      * 业务平台的子商户Id，唯一
+      * 是否需要向渠道进行 商户信息验证 1:验证
+0:不验证
       */
-    SubMchId: string;
+    ChannelCheckFlag: string;
     /**
-      * 子账户名称
+      * 收款商户名称
       */
-    SubAcctName: string;
+    MerchantName: string;
     /**
-      * 账户可用余额
+      * 是否开通 B2B 支付 1:开通 0:不开通 缺省:1
       */
-    AcctAvailBal: string;
-    /**
-      * 可提现金额
-      */
-    CashAmt: string;
-    /**
-      * 维护日期 开户日期或修改日期
-      */
-    MaintenanceDate: string;
+    BusinessPayFlag?: string;
 }
 /**
  * ContractOrder请求参数结构体
@@ -1225,6 +1309,19 @@ development: 开发环境
       * 展示用的签约用户名称，若不传入时，默认取UserId
       */
     ContractDisplayName?: string;
+}
+/**
+ * ModifyAgentTaxPaymentInfo返回参数结构体
+ */
+export interface ModifyAgentTaxPaymentInfoResponse {
+    /**
+      * 代理商完税证明批次信息
+      */
+    AgentTaxPaymentBatch: AgentTaxPaymentBatch;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 经办人信息
@@ -2189,44 +2286,32 @@ export interface CreateAgentTaxPaymentInfosRequest {
     Profile?: string;
 }
 /**
- * 账户信息
+ * ConfirmOrder返回参数结构体
  */
-export interface Acct {
+export interface ConfirmOrderResponse {
     /**
-      * STRING(50)，见证子账户的账号（可重复）
+      * 分配给商户的AppId
+      */
+    MerchantAppId: string;
+    /**
+      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
+      */
+    OrderNo: string;
+    /**
+      * 订单确认状态。0-确认失败
+1-确认成功
+2-可疑状态
+      */
+    Status: string;
+    /**
+      * 订单确认状态描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubAcctNo: string;
+    Description: string;
     /**
-      * STRING(10)，见证子账户的属性（可重复。1: 普通会员子账号; 2: 挂账子账号; 3: 手续费子账号; 4: 利息子账号; 5: 平台担保子账号）
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SubAcctProperty: string;
-    /**
-      * STRING(32)，交易网会员代码（可重复）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TranNetMemberCode: string;
-    /**
-      * STRING(150)，见证子账户的名称（可重复）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubAcctName: string;
-    /**
-      * STRING(20)，见证子账户可用余额（可重复）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AcctAvailBal: string;
-    /**
-      * STRING(20)，见证子账户可提现金额（可重复。开户日期或修改日期）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CashAmt: string;
-    /**
-      * STRING(8)，维护日期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaintenanceDate: string;
+    RequestId?: string;
 }
 /**
  * CloseOrder返回参数结构体
@@ -2260,21 +2345,21 @@ export interface ApplyPayerinfoData {
     FailReason: string;
 }
 /**
- * UploadTaxPayment请求参数结构体
+ * ModifyMerchant请求参数结构体
  */
-export interface UploadTaxPaymentRequest {
+export interface ModifyMerchantRequest {
     /**
-      * 平台渠道
+      * 进件成功后返给商户的AppId
       */
-    Channel: number;
+    MerchantAppId: string;
     /**
-      * 完税ID
+      * 收款商户名称
       */
-    TaxId: string;
+    MerchantName: string;
     /**
-      * 完税列表下载地址
+      * B2B 支付标志。是否开通 B2B支付， 1:开通 0:不开通。
       */
-    FileUrl: string;
+    BusinessPayFlag: string;
 }
 /**
  * 创建红票明细
@@ -2567,6 +2652,59 @@ export interface RechargeByThirdPayRequest {
     Remark?: string;
 }
 /**
+ * RevokeMemberRechargeThirdPay请求参数结构体
+ */
+export interface RevokeMemberRechargeThirdPayRequest {
+    /**
+      * STRING(52)，原充值的前置流水号
+      */
+    OldFillFrontSeqNo: string;
+    /**
+      * STRING(20)，原充值的支付渠道类型
+      */
+    OldFillPayChannelType: string;
+    /**
+      * STRING(52)，原充值的支付渠道交易流水号
+      */
+    OldPayChannelTranSeqNo: string;
+    /**
+      * STRING(52)，原充值的电商见证宝订单号
+      */
+    OldFillEjzbOrderNo: string;
+    /**
+      * STRING(20)，申请撤销的会员金额
+      */
+    ApplyCancelMemberAmt: string;
+    /**
+      * STRING(20)，申请撤销的手续费金额
+      */
+    ApplyCancelCommission: string;
+    /**
+      * String(22)，商户号
+      */
+    MrchCode: string;
+    /**
+      * STRING(300)，备注
+      */
+    Remark?: string;
+    /**
+      * STRING(300)，保留域1
+      */
+    ReservedMsgOne?: string;
+    /**
+      * STRING(300)，保留域2
+      */
+    ReservedMsgTwo?: string;
+    /**
+      * STRING(300)，保留域3
+      */
+    ReservedMsgThree?: string;
+    /**
+      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+      */
+    Profile?: string;
+}
+/**
  * QueryPayerInfo请求参数结构体
  */
 export interface QueryPayerInfoRequest {
@@ -2805,6 +2943,15 @@ export interface QueryMerchantBalanceResult {
     Data: QueryMerchantBalanceData;
 }
 /**
+ * ModifyMerchant返回参数结构体
+ */
+export interface ModifyMerchantResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 银企直连-查询单笔支付状态结果
  */
 export interface QuerySinglePayResult {
@@ -2826,6 +2973,34 @@ export interface QuerySinglePayResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Items: Array<QuerySinglePayItem>;
+}
+/**
+ * RefundOrder返回参数结构体
+ */
+export interface RefundOrderResponse {
+    /**
+      * 进件成功后返给商户方的AppId
+      */
+    MerchantAppId: string;
+    /**
+      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
+      */
+    OrderNo: string;
+    /**
+      * 订单退款状态。0-退款失败
+1-退款成功
+2-可疑状态
+      */
+    Status: string;
+    /**
+      * 订单退款状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * QuerySinglePay返回参数结构体
@@ -3303,63 +3478,17 @@ export interface TransferDetailRequest {
     UserName: string;
 }
 /**
- * CreateTransferBatch请求参数结构体
+ * 付款人申请结果
  */
-export interface CreateTransferBatchRequest {
+export interface ApplyPayerinfoResult {
     /**
-      * 商户号。
-示例值：129284394
+      * 错误码
       */
-    MerchantId: string;
+    Code: string;
     /**
-      * 转账明细列表。
-发起批量转账的明细列表，最多三千笔
+      * 数据
       */
-    TransferDetails: Array<TransferDetailRequest>;
-    /**
-      * 直连商户appId。
-即商户号绑定的appid。
-示例值：wxf636efh567hg4356
-      */
-    MerchantAppId: string;
-    /**
-      * 商家批次单号。
-商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
-示例值：plfk2020042013
-      */
-    MerchantBatchNo: string;
-    /**
-      * 批次名称。
-批量转账的名称。
-示例值：2019年1月深圳分部报销单
-      */
-    BatchName: string;
-    /**
-      * 转账说明。
-UTF8编码，最多32个字符。
-示例值：2019年深圳分部报销单
-      */
-    BatchRemark: string;
-    /**
-      * 转账总金额。
-转账金额，单位为分。
-示例值：4000000
-      */
-    TotalAmount: number;
-    /**
-      * 转账总笔数。
-一个转账批次最多允许发起三千笔转账。
-示例值：200
-      */
-    TotalNum: number;
-    /**
-      * 环境名。
-release: 现网环境
-sandbox: 沙箱环境
-development: 开发环境
-缺省: release
-      */
-    Profile?: string;
+    Data: ApplyPayerinfoData;
 }
 /**
  * Refund返回参数结构体
@@ -3464,40 +3593,42 @@ export interface QueryTransferResultResponse {
     RequestId?: string;
 }
 /**
- * QuerySmallAmountTransfer返回参数结构体
+ * 聚鑫商户余额查询输出项
  */
-export interface QuerySmallAmountTransferResponse {
+export interface QueryItem {
     /**
-      * String(20)，返回码
+      * 子商户账户
       */
-    TxnReturnCode?: string;
+    SubAcctNo: string;
     /**
-      * String(100)，返回信息
+      * 子账户属性
+1：普通会员子账号
+2：挂账子账号
+3：手续费子账号
+4：利息子账号
+5：平台担保子账号
       */
-    TxnReturnMsg?: string;
+    SubAcctProperty: string;
     /**
-      * String(22)，交易流水号
+      * 业务平台的子商户Id，唯一
       */
-    CnsmrSeqNo?: string;
+    SubMchId: string;
     /**
-      * STRING(10)，返回状态（0: 成功; 1: 失败; 2: 待确认）
-注意：此字段可能返回 null，表示取不到有效值。
+      * 子账户名称
       */
-    ReturnStatus?: string;
+    SubAcctName: string;
     /**
-      * STRING(512)，返回信息（失败返回具体信息）
-注意：此字段可能返回 null，表示取不到有效值。
+      * 账户可用余额
       */
-    ReturnMsg?: string;
+    AcctAvailBal: string;
     /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
+      * 可提现金额
       */
-    ReservedMsg?: string;
+    CashAmt: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 维护日期 开户日期或修改日期
       */
-    RequestId?: string;
+    MaintenanceDate: string;
 }
 /**
  * 场景信息
@@ -3976,13 +4107,44 @@ export interface MerchantManagementResult {
     List: Array<MerchantManagementList>;
 }
 /**
- * ApplyWithdrawal返回参数结构体
+ * 账户信息
  */
-export interface ApplyWithdrawalResponse {
+export interface Acct {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * STRING(50)，见证子账户的账号（可重复）
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    SubAcctNo: string;
+    /**
+      * STRING(10)，见证子账户的属性（可重复。1: 普通会员子账号; 2: 挂账子账号; 3: 手续费子账号; 4: 利息子账号; 5: 平台担保子账号）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAcctProperty: string;
+    /**
+      * STRING(32)，交易网会员代码（可重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TranNetMemberCode: string;
+    /**
+      * STRING(150)，见证子账户的名称（可重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAcctName: string;
+    /**
+      * STRING(20)，见证子账户可用余额（可重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AcctAvailBal: string;
+    /**
+      * STRING(20)，见证子账户可提现金额（可重复。开户日期或修改日期）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CashAmt: string;
+    /**
+      * STRING(8)，维护日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaintenanceDate: string;
 }
 /**
  * QueryBankTransactionDetails返回参数结构体
@@ -4409,6 +4571,31 @@ export interface BindAcctResponse {
     RequestId?: string;
 }
 /**
+ * CreateOrder返回参数结构体
+ */
+export interface CreateOrderResponse {
+    /**
+      * 进件成功后返给商户方的AppId。
+      */
+    MerchantAppId: string;
+    /**
+      * 商户流水号，商户唯一订单号由字母或数字组成。
+      */
+    TraceNo: string;
+    /**
+      * 平台流水号，若下单成功则返回。
+      */
+    OrderNo: string;
+    /**
+      * 支付页面跳转地址，若下单成功则返回。
+      */
+    PayUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateRedInvoice返回参数结构体
  */
 export interface CreateRedInvoiceResponse {
@@ -4447,50 +4634,26 @@ export interface QueryExchangerateData {
     BaseCurrency: string;
 }
 /**
- * ModifyAgentTaxPaymentInfo返回参数结构体
+ * 红票结果V2
  */
-export interface ModifyAgentTaxPaymentInfoResponse {
+export interface CreateRedInvoiceResultV2 {
     /**
-      * 代理商完税证明批次信息
+      * 红票ID
       */
-    AgentTaxPaymentBatch: AgentTaxPaymentBatch;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    InvoiceId: string;
 }
 /**
- * QueryRefund请求参数结构体
+ * QueryMerchantOrder请求参数结构体
  */
-export interface QueryRefundRequest {
+export interface QueryMerchantOrderRequest {
     /**
-      * 用户ID，长度不小于5位，仅支持字母和数字的组合。
+      * 进件成功后返给商户方的AppId。
       */
-    UserId: string;
+    MerchantAppId: string;
     /**
-      * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
+      * 平台流水号。平台唯一订单号。
       */
-    RefundId: string;
-    /**
-      * 聚鑫分配的支付主MidasAppId
-      */
-    MidasAppId: string;
-    /**
-      * 聚鑫分配的安全ID
-      */
-    MidasSecretId: string;
-    /**
-      * 按照聚鑫安全密钥计算的签名
-      */
-    MidasSignature: string;
-    /**
-      * 环境名:
-release: 现网环境
-sandbox: 沙箱环境
-development: 开发环境
-缺省: release
-      */
-    MidasEnvironment?: string;
+    OrderNo: string;
 }
 /**
  * 智能代发-单笔代发转账查询接口返回内容
@@ -4840,6 +5003,15 @@ export interface QueryAgentTaxPaymentBatchRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
+}
+/**
+ * QueryMerchant请求参数结构体
+ */
+export interface QueryMerchantRequest {
+    /**
+      * 进件成功后返给商户方的 AppId
+      */
+    MerchantAppId: string;
 }
 /**
  * 付款人查询结果
@@ -5320,6 +5492,19 @@ export interface ApplyOutwardOrderRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
+}
+/**
+ * CreatePayMerchant返回参数结构体
+ */
+export interface CreatePayMerchantResponse {
+    /**
+      * 分配给商户的 AppId。该 AppId 为后续各项 交易的商户标识。
+      */
+    MerchantAppId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UnbindRelateAcct返回参数结构体
@@ -6327,71 +6512,26 @@ export interface QueryBalanceResponse {
     RequestId?: string;
 }
 /**
- * 查询汇出数据
+ * ApplyWithdrawal返回参数结构体
  */
-export interface QueryOutwardOrderData {
+export interface ApplyWithdrawalResponse {
     /**
-      * 商户号
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    MerchantId: string;
+    RequestId?: string;
+}
+/**
+ * RefundOrder请求参数结构体
+ */
+export interface RefundOrderRequest {
     /**
-      * 对接方汇出指令编号
+      * 进件成功后返给商户方的AppId
       */
-    TransactionId: string;
+    MerchantAppId: string;
     /**
-      * 财务日期
-注意：此字段可能返回 null，表示取不到有效值。
+      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
       */
-    AcctDate: string;
-    /**
-      * 定价币种
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PricingCurrency: string;
-    /**
-      * 源币种
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SourceCurrency: string;
-    /**
-      * 源金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SourceAmount: string;
-    /**
-      * 目的币种
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TargetCurrency: string;
-    /**
-      * 目的金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TargetAmount: string;
-    /**
-      * 汇率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FxRate: string;
-    /**
-      * 指令状态
-      */
-    Status: string;
-    /**
-      * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailReason: string;
-    /**
-      * 退汇金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RefundAmount: string;
-    /**
-      * 退汇币种
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RefundCurrency: string;
+    OrderNo: string;
 }
 /**
  * UnBindAcct请求参数结构体
@@ -6885,6 +7025,42 @@ export interface ApplyOutwardOrderResult {
     Code: string;
 }
 /**
+ * QuerySmallAmountTransfer返回参数结构体
+ */
+export interface QuerySmallAmountTransferResponse {
+    /**
+      * String(20)，返回码
+      */
+    TxnReturnCode?: string;
+    /**
+      * String(100)，返回信息
+      */
+    TxnReturnMsg?: string;
+    /**
+      * String(22)，交易流水号
+      */
+    CnsmrSeqNo?: string;
+    /**
+      * STRING(10)，返回状态（0: 成功; 1: 失败; 2: 待确认）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReturnStatus?: string;
+    /**
+      * STRING(512)，返回信息（失败返回具体信息）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReturnMsg?: string;
+    /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedMsg?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ApplyPayerInfo请求参数结构体
  */
 export interface ApplyPayerInfoRequest {
@@ -7137,57 +7313,37 @@ development: 开发环境
     MidasEnvironment?: string;
 }
 /**
- * RevokeMemberRechargeThirdPay请求参数结构体
+ * QueryRefund请求参数结构体
  */
-export interface RevokeMemberRechargeThirdPayRequest {
+export interface QueryRefundRequest {
     /**
-      * STRING(52)，原充值的前置流水号
+      * 用户ID，长度不小于5位，仅支持字母和数字的组合。
       */
-    OldFillFrontSeqNo: string;
+    UserId: string;
     /**
-      * STRING(20)，原充值的支付渠道类型
+      * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
       */
-    OldFillPayChannelType: string;
+    RefundId: string;
     /**
-      * STRING(52)，原充值的支付渠道交易流水号
+      * 聚鑫分配的支付主MidasAppId
       */
-    OldPayChannelTranSeqNo: string;
+    MidasAppId: string;
     /**
-      * STRING(52)，原充值的电商见证宝订单号
+      * 聚鑫分配的安全ID
       */
-    OldFillEjzbOrderNo: string;
+    MidasSecretId: string;
     /**
-      * STRING(20)，申请撤销的会员金额
+      * 按照聚鑫安全密钥计算的签名
       */
-    ApplyCancelMemberAmt: string;
+    MidasSignature: string;
     /**
-      * STRING(20)，申请撤销的手续费金额
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
       */
-    ApplyCancelCommission: string;
-    /**
-      * String(22)，商户号
-      */
-    MrchCode: string;
-    /**
-      * STRING(300)，备注
-      */
-    Remark?: string;
-    /**
-      * STRING(300)，保留域1
-      */
-    ReservedMsgOne?: string;
-    /**
-      * STRING(300)，保留域2
-      */
-    ReservedMsgTwo?: string;
-    /**
-      * STRING(300)，保留域3
-      */
-    ReservedMsgThree?: string;
-    /**
-      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
-      */
-    Profile?: string;
+    MidasEnvironment?: string;
 }
 /**
  * 红票结果数据
@@ -8540,6 +8696,73 @@ export interface QueryOrderResponse {
     RequestId?: string;
 }
 /**
+ * 查询汇出数据
+ */
+export interface QueryOutwardOrderData {
+    /**
+      * 商户号
+      */
+    MerchantId: string;
+    /**
+      * 对接方汇出指令编号
+      */
+    TransactionId: string;
+    /**
+      * 财务日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AcctDate: string;
+    /**
+      * 定价币种
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PricingCurrency: string;
+    /**
+      * 源币种
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceCurrency: string;
+    /**
+      * 源金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceAmount: string;
+    /**
+      * 目的币种
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetCurrency: string;
+    /**
+      * 目的金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetAmount: string;
+    /**
+      * 汇率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FxRate: string;
+    /**
+      * 指令状态
+      */
+    Status: string;
+    /**
+      * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailReason: string;
+    /**
+      * 退汇金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RefundAmount: string;
+    /**
+      * 退汇币种
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RefundCurrency: string;
+}
+/**
  * UnifiedOrder请求参数结构体
  */
 export interface UnifiedOrderRequest {
@@ -8867,6 +9090,48 @@ export interface ContractOrderResponse {
       * 外部签约协议号
       */
     OutContractCode: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * QueryMerchantOrder返回参数结构体
+ */
+export interface QueryMerchantOrderResponse {
+    /**
+      * 进件成功后返给商户方的AppId。
+      */
+    MerchantAppId: string;
+    /**
+      * 平台流水号。平台唯一订单号。
+      */
+    OrderNo: string;
+    /**
+      * 订单支付状态。0-下单失败 1-下单成功未支付 2-支付成功 3-支付失败 4-退款中 5-退款成功 6-退款失败 7-待付款 8-待确认。
+      */
+    Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * QueryMerchant返回参数结构体
+ */
+export interface QueryMerchantResponse {
+    /**
+      * 分配给商户的 AppId，该 AppId 为后续各项 交易的商户标识。
+      */
+    MerchantAppId: string;
+    /**
+      * 收款商户名称。
+      */
+    MerchantName: string;
+    /**
+      * B2B 支付标志。是否开通 B2B 支付， 1:开通 0:不开通。
+      */
+    BusinessPayFlag: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

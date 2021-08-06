@@ -3842,7 +3842,7 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
  */
 export interface ImageWatermarkInput {
     /**
-      * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+      * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png、gif 图片格式。
       */
     ImageContent: string;
     /**
@@ -12908,6 +12908,7 @@ export interface DescribeStorageDetailsRequest {
 <li>InfrequentStorage：低频存储。</li>
 <li>ArchiveStorage：归档存储。</li>
 <li>DeepArchiveStorage：深度归档存储。</li>
+<li>DeletedInfrequentStorage：低频存储提前删除量。</li>
 <li>DeletedArchiveStorage：归档提前删除量。</li>
 <li>DeletedDeepArchiveStorage：深度归档提前删除量。
 <li>ArchiveStandardRetrieval：归档标准取回量。</li>

@@ -5383,7 +5383,7 @@ export interface DescribeVpcPrivateIpAddressesResponse {
   /**
    * 内网`IP`地址信息列表。
    */
-  VpcPrivateIpAddressSet?: Array<VpcPrivateIpAddress>
+  VpcPrivateIpAddressSet: Array<VpcPrivateIpAddress>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstancePre", req, cb);
     }
     /**
+     * 根据指定offset位置的消息
+     */
+    async FetchMessageByOffset(req, cb) {
+        return this.request("FetchMessageByOffset", req, cb);
+    }
+    /**
      * 删除主题IP白名单
      */
     async DeleteTopicIpWhiteList(req, cb) {

@@ -638,6 +638,16 @@ it("tke.v20180525.DeleteClusterNodePool", async function () {
     }
 })
 
+it("tke.v20180525.DescribeVersions", async function () {
+    try {
+       const data = await client.DescribeVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.ModifyClusterAsGroupAttribute", async function () {
     try {
        const data = await client.ModifyClusterAsGroupAttribute({})

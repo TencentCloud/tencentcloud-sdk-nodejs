@@ -45,7 +45,9 @@ import {
   LogServiceInfo,
   DescribeCloudBaseRunResourceForExtendRequest,
   ModifyEndUserRequest,
+  DescribeCurveDataResponse,
   RollUpdateCloudBaseRunServerVersionResponse,
+  ClsInfo,
   DescribeAuthDomainsResponse,
   DescribeStandaloneGatewayResponse,
   DescribeWxCloudBaseRunEnvsResponse,
@@ -59,7 +61,7 @@ import {
   DestroyStandaloneGatewayResponse,
   DescribeCloudBaseRunServerVersionResponse,
   EndUserInfo,
-  DescribeEndUserLoginStatisticResponse,
+  DeleteEndUserRequest,
   DescribeHostingDomainTaskRequest,
   DescribeQuotaDataResponse,
   KVPair,
@@ -84,7 +86,7 @@ import {
   DescribeWxCloudBaseRunSubNetsResponse,
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
-  DeleteEndUserRequest,
+  DescribeEndUserLoginStatisticResponse,
   DescribeEnvPostpaidDeductResponse,
   CreateCloudBaseRunResourceResponse,
   DescribeStandaloneGatewayPackageResponse,
@@ -146,6 +148,7 @@ import {
   CloudBaseRunNfsVolumeSource,
   DescribeSmsQuotasResponse,
   DescribeWxCloudBaseRunEnvsRequest,
+  DescribeCurveDataRequest,
   CloudBaseRunImageSecretInfo,
   BindEnvGatewayRequest,
   ModifyEnvResponse,
@@ -776,13 +779,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
+   * 根据用户传入的指标, 拉取一段时间内的监控数据。
    */
-  async DestroyStaticStore(
-    req: DestroyStaticStoreRequest,
-    cb?: (error: string, rep: DestroyStaticStoreResponse) => void
-  ): Promise<DestroyStaticStoreResponse> {
-    return this.request("DestroyStaticStore", req, cb)
+  async DescribeCurveData(
+    req: DescribeCurveDataRequest,
+    cb?: (error: string, rep: DescribeCurveDataResponse) => void
+  ): Promise<DescribeCurveDataResponse> {
+    return this.request("DescribeCurveData", req, cb)
   }
 
   /**
@@ -813,6 +816,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvLimitResponse) => void
   ): Promise<DescribeEnvLimitResponse> {
     return this.request("DescribeEnvLimit", req, cb)
+  }
+
+  /**
+   * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
+   */
+  async DestroyStaticStore(
+    req: DestroyStaticStoreRequest,
+    cb?: (error: string, rep: DestroyStaticStoreResponse) => void
+  ): Promise<DestroyStaticStoreResponse> {
+    return this.request("DestroyStaticStore", req, cb)
   }
 
   /**

@@ -5361,6 +5361,7 @@ global：全球
 fail：预热失败
 done：预热成功
 process：预热中
+invalid: 预热无效(源站返回4xx或5xx状态码)
       */
   Status?: string
 }
@@ -6902,6 +6903,7 @@ export interface PushTask {
 fail：预热失败
 done：预热成功
 process：预热中
+invalid：预热无效(源站返回4xx或5xx状态码)
       */
   Status: string
 

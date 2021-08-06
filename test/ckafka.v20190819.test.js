@@ -148,6 +148,16 @@ it("ckafka.v20190819.CreateInstancePre", async function () {
     }
 })
 
+it("ckafka.v20190819.FetchMessageByOffset", async function () {
+    try {
+       const data = await client.FetchMessageByOffset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DeleteTopicIpWhiteList", async function () {
     try {
        const data = await client.DeleteTopicIpWhiteList({})

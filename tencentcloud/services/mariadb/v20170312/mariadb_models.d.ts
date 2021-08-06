@@ -77,6 +77,14 @@ export interface CreateDBInstanceRequest {
       * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
       */
     InitParams?: Array<DBParamValue>;
+    /**
+      * DCN源地域
+      */
+    DcnRegion?: string;
+    /**
+      * DCN源实例ID
+      */
+    DcnInstanceId?: string;
 }
 /**
  * 可用区信息
