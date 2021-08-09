@@ -85,7 +85,7 @@ export interface DescribeCardsResponse {
     /**
       * 卡片列表信息
       */
-    Data?: CardList;
+    Data: CardList;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -116,7 +116,7 @@ export interface DescribeCardResponse {
       * 卡片详细信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: CardInfo;
+    Data: CardInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -252,6 +252,11 @@ export interface CardInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CertificationState: number;
+    /**
+      * 其他流量信息,流量分离统计其他流量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OtherData: number;
 }
 /**
  * DescribeApp返回参数结构体

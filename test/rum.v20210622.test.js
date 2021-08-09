@@ -18,6 +18,16 @@ const client = new tencentcloud.rum.v20210622.Client({
 })
 describe("rum.v20210622.test.js", function () {
 
+it("rum.v20210622.DescribeDataPerformancePage", async function () {
+    try {
+       const data = await client.DescribeDataPerformancePage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.CreateProject", async function () {
     try {
        const data = await client.CreateProject({})

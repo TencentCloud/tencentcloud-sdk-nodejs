@@ -2539,7 +2539,7 @@ export interface DescribeLiveRecordTemplatesResponse {
     /**
       * 录制模板信息列表。
       */
-    Templates?: Array<RecordTemplateInfo>;
+    Templates: Array<RecordTemplateInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3291,7 +3291,7 @@ export interface DescribeLiveTranscodeRulesResponse {
     /**
       * 转码规则列表。
       */
-    Rules?: Array<RuleInfo>;
+    Rules: Array<RuleInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4898,7 +4898,7 @@ export interface CreateLiveRecordTemplateResponse {
     /**
       * 模板Id。
       */
-    TemplateId?: number;
+    TemplateId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5294,7 +5294,7 @@ export interface DescribeLiveTranscodeTemplatesResponse {
     /**
       * 转码模板列表。
       */
-    Templates?: Array<TemplateInfo>;
+    Templates: Array<TemplateInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5568,7 +5568,7 @@ export interface DescribeLiveRecordTemplateResponse {
     /**
       * 录制模板信息。
       */
-    Template?: RecordTemplateInfo;
+    Template: RecordTemplateInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5696,7 +5696,7 @@ export interface DescribeLiveRecordRulesResponse {
     /**
       * 规则列表。
       */
-    Rules?: Array<RuleInfo>;
+    Rules: Array<RuleInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

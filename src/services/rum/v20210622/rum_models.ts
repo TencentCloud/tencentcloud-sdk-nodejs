@@ -36,6 +36,21 @@ export interface CreateProjectResponse {
 }
 
 /**
+ * DescribeDataPerformancePage返回参数结构体
+ */
+export interface DescribeDataPerformancePageResponse {
+  /**
+   * 返回值
+   */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProject请求参数结构体
  */
 export interface CreateProjectRequest {
@@ -78,4 +93,114 @@ export interface CreateProjectRequest {
    * 创建的项目描述(可选，最长为 1000)
    */
   Desc?: string
+}
+
+/**
+ * DescribeDataPerformancePage请求参数结构体
+ */
+export interface DescribeDataPerformancePageRequest {
+  /**
+   * 项目ID
+   */
+  ID: number
+
+  /**
+   * 开始时间
+   */
+  StartTime: number
+
+  /**
+   * 结束时间
+   */
+  EndTime: number
+
+  /**
+   * ["pagepv", "allcount"]
+   */
+  Type: string
+
+  /**
+   * 日志等级
+   */
+  Level?: string
+
+  /**
+   * 运营商
+   */
+  Isp?: string
+
+  /**
+   * 地区
+   */
+  Area?: string
+
+  /**
+   * 网络类型
+   */
+  NetType?: string
+
+  /**
+   * 平台
+   */
+  Platform?: string
+
+  /**
+   * 机型
+   */
+  Device?: string
+
+  /**
+   * 版本
+   */
+  VersionNum?: string
+
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+
+  /**
+   * 是否海外
+   */
+  IsAbroad?: string
+
+  /**
+   * 浏览器
+   */
+  Browser?: string
+
+  /**
+   * 操作系统
+   */
+  Os?: string
+
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+
+  /**
+   * 品牌
+   */
+  Brand?: string
+
+  /**
+   * 来源页面
+   */
+  From?: string
+
+  /**
+   * 耗时计算方式
+   */
+  CostType?: string
 }

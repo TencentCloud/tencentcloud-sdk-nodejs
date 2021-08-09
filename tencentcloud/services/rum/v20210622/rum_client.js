@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("rum.tencentcloudapi.com", "2021-06-22", clientConfig);
     }
     /**
+     * 获取PerformancePage信息
+     */
+    async DescribeDataPerformancePage(req, cb) {
+        return this.request("DescribeDataPerformancePage", req, cb);
+    }
+    /**
      * 创建项目（归属于某个团队）
      */
     async CreateProject(req, cb) {
