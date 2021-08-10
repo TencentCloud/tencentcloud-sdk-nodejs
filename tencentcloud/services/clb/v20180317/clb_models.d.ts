@@ -357,6 +357,23 @@ export interface ModifyRuleRequest {
     TrpcFunc?: string;
 }
 /**
+ * DescribeCustomizedConfigList返回参数结构体
+ */
+export interface DescribeCustomizedConfigListResponse {
+    /**
+      * 配置列表
+      */
+    ConfigList: Array<ConfigListItem>;
+    /**
+      * 配置数目
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBlockIPList返回参数结构体
  */
 export interface DescribeBlockIPListResponse {
@@ -424,6 +441,19 @@ export interface DescribeTargetGroupInstancesRequest {
       * 显示的偏移量，默认为0
       */
     Offset?: number;
+}
+/**
+ * SetCustomizedConfigForLoadBalancer返回参数结构体
+ */
+export interface SetCustomizedConfigForLoadBalancerResponse {
+    /**
+      * 个性化配置ID，如：pz-1234abcd
+      */
+    ConfigId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AssociateTargetGroups请求参数结构体
@@ -896,22 +926,35 @@ export interface DescribeClassicalLBTargetsRequest {
     LoadBalancerId: string;
 }
 /**
- * DescribeListeners返回参数结构体
+ * DescribeCustomizedConfigList请求参数结构体
  */
-export interface DescribeListenersResponse {
+export interface DescribeCustomizedConfigListRequest {
     /**
-      * 监听器列表。
+      * 配置类型:CLB 负载均衡维度。 SERVER 域名维度。 LOCATION 规则维度。
       */
-    Listeners: Array<Listener>;
+    ConfigType: string;
     /**
-      * 总的监听器个数（根据端口、协议、监听器ID过滤后）。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 拉取页偏移，默认值0
       */
-    TotalCount: number;
+    Offset?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 拉取数目，默认值20
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 拉取指定配置名字，模糊匹配。
+      */
+    ConfigName?: string;
+    /**
+      * 配置ID
+      */
+    UconfigIds?: Array<string>;
+    /**
+      * 过滤条件如下：
+<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 负载均衡ID 过滤，如："lb-12345678"。</li>
+<li> vip - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip 过滤，如："1.1.1.1","2204::22:3"。</li>
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * AutoRewrite请求参数结构体
@@ -1245,6 +1288,36 @@ export interface LoadBalancerTraffic {
     OutBandwidth: number;
 }
 /**
+ * 配置内容
+ */
+export interface ConfigListItem {
+    /**
+      * 配置ID
+      */
+    UconfigId: string;
+    /**
+      * 配置类型
+      */
+    ConfigType: string;
+    /**
+      * 配置名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigName: string;
+    /**
+      * 配置内容
+      */
+    ConfigContent: string;
+    /**
+      * 增加配置时间
+      */
+    CreateTimestamp: string;
+    /**
+      * 修改配置时间
+      */
+    UpdateTimestamp: string;
+}
+/**
  * RegisterTargetsWithClassicalLB请求参数结构体
  */
 export interface RegisterTargetsWithClassicalLBRequest {
@@ -1517,6 +1590,27 @@ export interface ClassicalHealth {
       * 健康检查结果，1 表示健康，0 表示不健康
       */
     HealthStatus: number;
+}
+/**
+ * DescribeCustomizedConfigAssociateList请求参数结构体
+ */
+export interface DescribeCustomizedConfigAssociateListRequest {
+    /**
+      * 配置ID
+      */
+    UconfigId?: string;
+    /**
+      * 拉取绑定关系列表开始位置，默认值 0
+      */
+    Offset?: number;
+    /**
+      * 拉取绑定关系列表数目，默认值 20
+      */
+    Limit?: number;
+    /**
+      * 搜索域名
+      */
+    Domain?: string;
 }
 /**
  * ModifyTargetPort返回参数结构体
@@ -1990,6 +2084,48 @@ export interface CertificateInput {
     CertCaContent?: string;
 }
 /**
+ * DescribeCustomizedConfigAssociateList返回参数结构体
+ */
+export interface DescribeCustomizedConfigAssociateListResponse {
+    /**
+      * 绑定关系列表
+      */
+    BindList: Array<BindDetailItem>;
+    /**
+      * 绑定关系总数目
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SetCustomizedConfigForLoadBalancer请求参数结构体
+ */
+export interface SetCustomizedConfigForLoadBalancerRequest {
+    /**
+      * 操作类型：'ADD', 'DELETE', 'UPDATE', 'BIND', 'UNBIND'
+      */
+    OperationType: string;
+    /**
+      * 除了创建个性化配置外，必传此字段，如：pz-1234abcd
+      */
+    UconfigId?: string;
+    /**
+      * 创建个性化配置或修改个性化配置的内容时，必传此字段
+      */
+    ConfigContent?: string;
+    /**
+      * 创建个性化配置或修改个性化配置的名字时，必传此字段
+      */
+    ConfigName?: string;
+    /**
+      * 绑定解绑时，必传此字段
+      */
+    LoadBalancerIds?: Array<string>;
+}
+/**
  * CreateListener返回参数结构体
  */
 export interface CreateListenerResponse {
@@ -2037,6 +2173,24 @@ export interface ClassicalLoadBalancerInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LoadBalancerIds: Array<string>;
+}
+/**
+ * DescribeListeners返回参数结构体
+ */
+export interface DescribeListenersResponse {
+    /**
+      * 监听器列表。
+      */
+    Listeners: Array<Listener>;
+    /**
+      * 总的监听器个数（根据端口、协议、监听器ID过滤后）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * HTTP/HTTPS监听器的转发规则（输出）
@@ -2328,6 +2482,55 @@ export interface ClusterItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Zone?: string;
+}
+/**
+ * 绑定关系，包含监听器名字、协议、url、vport。
+ */
+export interface BindDetailItem {
+    /**
+      * 配置绑定的CLB ID
+      */
+    LoadBalancerId: string;
+    /**
+      * 配置绑定的监听器ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ListenerId: string;
+    /**
+      * 配置绑定的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain: string;
+    /**
+      * 配置绑定的规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocationId: string;
+    /**
+      * 监听器名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ListenerName: string;
+    /**
+      * 监听器协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 监听器端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vport: number;
+    /**
+      * location的url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
+    /**
+      * 配置ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UconfigId: string;
 }
 /**
  * CreateListener请求参数结构体

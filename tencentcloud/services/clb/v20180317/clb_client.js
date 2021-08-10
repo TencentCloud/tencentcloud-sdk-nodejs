@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClassicalLBListeners", req, cb);
     }
     /**
+     * 拉取配置绑定的 server 或 location，如果 domain 存在，结果将根据 domain 过滤。或拉取配置绑定的 loadbalancer。
+     */
+    async DescribeCustomizedConfigAssociateList(req, cb) {
+        return this.request("DescribeCustomizedConfigAssociateList", req, cb);
+    }
+    /**
      * 创建主题，默认开启全文索引和键值索引。如果不存在CLB专有日志集，则创建失败。
      */
     async CreateTopic(req, cb) {
@@ -185,6 +191,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDomainAttributes", req, cb);
     }
     /**
+     * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+    async ModifyTargetPort(req, cb) {
+        return this.request("ModifyTargetPort", req, cb);
+    }
+    /**
      * DeleteRule 接口用来删除负载均衡实例七层监听器下的转发规则。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
@@ -272,11 +285,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClsLogSet", req, cb);
     }
     /**
-     * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * 拉取个性化配置列表，返回用户 AppId 下指定类型的配置。
      */
-    async ModifyTargetPort(req, cb) {
-        return this.request("ModifyTargetPort", req, cb);
+    async DescribeCustomizedConfigList(req, cb) {
+        return this.request("DescribeCustomizedConfigList", req, cb);
     }
     /**
      * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
@@ -290,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTaskStatus(req, cb) {
         return this.request("DescribeTaskStatus", req, cb);
+    }
+    /**
+     * 负载均衡维度的个性化配置相关操作：创建、删除、修改、绑定、解绑
+     */
+    async SetCustomizedConfigForLoadBalancer(req, cb) {
+        return this.request("SetCustomizedConfigForLoadBalancer", req, cb);
     }
     /**
      * 查询独占集群中的资源列表，支持按集群ID、VIP、负载均衡ID、是否闲置为过滤条件检索。

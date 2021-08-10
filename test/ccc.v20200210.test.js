@@ -38,6 +38,16 @@ it("ccc.v20200210.DescribeIMCdrs", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeTelSession", async function () {
+    try {
+       const data = await client.DescribeTelSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateUserSig", async function () {
     try {
        const data = await client.CreateUserSig({})
@@ -98,9 +108,9 @@ it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelSession", async function () {
+it("ccc.v20200210.DescribeCallInMetrics", async function () {
     try {
-       const data = await client.DescribeTelSession({})
+       const data = await client.DescribeCallInMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +141,16 @@ it("ccc.v20200210.DescribeSeatUserList", async function () {
 it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
     try {
        const data = await client.DescribePSTNActiveSessionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
+    try {
+       const data = await client.DescribeStaffStatusMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -34,10 +34,12 @@ import {
   SetLoadBalancerClsLogResponse,
   DescribeLoadBalancerTrafficResponse,
   ModifyRuleRequest,
+  DescribeCustomizedConfigListResponse,
   DescribeBlockIPListResponse,
   DescribeRewriteRequest,
   ModifyLoadBalancerAttributesResponse,
   DescribeTargetGroupInstancesRequest,
+  SetCustomizedConfigForLoadBalancerResponse,
   AssociateTargetGroupsRequest,
   DescribeLoadBalancersRequest,
   ClassicalTarget,
@@ -63,7 +65,7 @@ import {
   BlockedIP,
   ModifyRuleResponse,
   DescribeClassicalLBTargetsRequest,
-  DescribeListenersResponse,
+  DescribeCustomizedConfigListRequest,
   AutoRewriteRequest,
   DescribeLoadBalancerListByCertIdResponse,
   ModifyTargetGroupInstancesWeightResponse,
@@ -79,6 +81,7 @@ import {
   DescribeClsLogSetRequest,
   Listener,
   LoadBalancerTraffic,
+  ConfigListItem,
   RegisterTargetsWithClassicalLBRequest,
   ModifyDomainAttributesResponse,
   ReplaceCertForLoadBalancersResponse,
@@ -91,6 +94,7 @@ import {
   CreateTopicRequest,
   DeleteListenerRequest,
   ClassicalHealth,
+  DescribeCustomizedConfigAssociateListRequest,
   ModifyTargetPortResponse,
   DescribeLoadBalancersDetailRequest,
   TargetGroupBackend,
@@ -109,10 +113,13 @@ import {
   ClassicalListener,
   DeleteLoadBalancerRequest,
   CertificateInput,
+  DescribeCustomizedConfigAssociateListResponse,
+  SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,
   CreateTargetGroupResponse,
   CreateLoadBalancerSnatIpsResponse,
   ClassicalLoadBalancerInfo,
+  DescribeListenersResponse,
   RuleOutput,
   CreateTopicResponse,
   CreateRuleRequest,
@@ -126,6 +133,7 @@ import {
   DescribeTargetGroupInstancesResponse,
   CreateTargetGroupRequest,
   ClusterItem,
+  BindDetailItem,
   CreateListenerRequest,
   CreateClsLogSetRequest,
   DisassociateTargetGroupsRequest,
@@ -234,6 +242,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClassicalLBListenersResponse) => void
   ): Promise<DescribeClassicalLBListenersResponse> {
     return this.request("DescribeClassicalLBListeners", req, cb)
+  }
+
+  /**
+   * 拉取配置绑定的 server 或 location，如果 domain 存在，结果将根据 domain 过滤。或拉取配置绑定的 loadbalancer。
+   */
+  async DescribeCustomizedConfigAssociateList(
+    req: DescribeCustomizedConfigAssociateListRequest,
+    cb?: (error: string, rep: DescribeCustomizedConfigAssociateListResponse) => void
+  ): Promise<DescribeCustomizedConfigAssociateListResponse> {
+    return this.request("DescribeCustomizedConfigAssociateList", req, cb)
   }
 
   /**
@@ -459,6 +477,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+  async ModifyTargetPort(
+    req: ModifyTargetPortRequest,
+    cb?: (error: string, rep: ModifyTargetPortResponse) => void
+  ): Promise<ModifyTargetPortResponse> {
+    return this.request("ModifyTargetPort", req, cb)
+  }
+
+  /**
      * DeleteRule 接口用来删除负载均衡实例七层监听器下的转发规则。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
@@ -598,14 +627,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     */
-  async ModifyTargetPort(
-    req: ModifyTargetPortRequest,
-    cb?: (error: string, rep: ModifyTargetPortResponse) => void
-  ): Promise<ModifyTargetPortResponse> {
-    return this.request("ModifyTargetPort", req, cb)
+   * 拉取个性化配置列表，返回用户 AppId 下指定类型的配置。
+   */
+  async DescribeCustomizedConfigList(
+    req: DescribeCustomizedConfigListRequest,
+    cb?: (error: string, rep: DescribeCustomizedConfigListResponse) => void
+  ): Promise<DescribeCustomizedConfigListResponse> {
+    return this.request("DescribeCustomizedConfigList", req, cb)
   }
 
   /**
@@ -627,6 +655,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskStatusResponse) => void
   ): Promise<DescribeTaskStatusResponse> {
     return this.request("DescribeTaskStatus", req, cb)
+  }
+
+  /**
+   * 负载均衡维度的个性化配置相关操作：创建、删除、修改、绑定、解绑
+   */
+  async SetCustomizedConfigForLoadBalancer(
+    req: SetCustomizedConfigForLoadBalancerRequest,
+    cb?: (error: string, rep: SetCustomizedConfigForLoadBalancerResponse) => void
+  ): Promise<SetCustomizedConfigForLoadBalancerResponse> {
+    return this.request("SetCustomizedConfigForLoadBalancer", req, cb)
   }
 
   /**

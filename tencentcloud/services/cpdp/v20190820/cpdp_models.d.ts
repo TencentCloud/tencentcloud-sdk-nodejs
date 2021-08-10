@@ -2899,35 +2899,21 @@ export interface DescribeOrderStatusRequest {
     TransDate?: string;
 }
 /**
- * QueryMemberTransaction返回参数结构体
+ * QueryDownloadBillURL请求参数结构体
  */
-export interface QueryMemberTransactionResponse {
+export interface QueryDownloadBillURLRequest {
     /**
-      * String(20)，返回码
+      * 分配给商户的AppId。进件成功后返给商户方的AppId。
       */
-    TxnReturnCode?: string;
+    MerchantAppId: string;
     /**
-      * String(100)，返回信息
+      * 渠道编号。固定值：ZSB2B
       */
-    TxnReturnMsg?: string;
+    ChannelCode: string;
     /**
-      * String(22)，交易流水号
+      * 对账单日期，格式yyyyMMdd
       */
-    CnsmrSeqNo?: string;
-    /**
-      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FrontSeqNo?: string;
-    /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReservedMsg?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    BillDate: string;
 }
 /**
  * 对接账户余额查询结果
@@ -5507,31 +5493,18 @@ export interface CreatePayMerchantResponse {
     RequestId?: string;
 }
 /**
- * UnbindRelateAcct返回参数结构体
+ * TerminateContract返回参数结构体
  */
-export interface UnbindRelateAcctResponse {
+export interface TerminateContractResponse {
     /**
-      * String(20)，返回码
+      * 解约数据
       */
-    TxnReturnCode?: string;
+    ContractTerminateData: ResponseTerminateContract;
     /**
-      * String(100)，返回信息
-      */
-    TxnReturnMsg?: string;
-    /**
-      * String(22)，交易流水号
-      */
-    CnsmrSeqNo?: string;
-    /**
-      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
+      * 请求处理信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FrontSeqNo?: string;
-    /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReservedMsg?: string;
+    Msg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5701,6 +5674,23 @@ export interface RegisterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OrganizationType: string;
+}
+/**
+ * QueryDownloadBillURL返回参数结构体
+ */
+export interface QueryDownloadBillURLResponse {
+    /**
+      * 分配给商户的AppId。进件成功后返给商户方的AppId。
+      */
+    MerchantAppId: string;
+    /**
+      * 对账单下载地址。
+      */
+    DownloadUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateInvoice请求参数结构体
@@ -7673,6 +7663,37 @@ export interface QuerySinglePayItem {
     BankRetMsg: string;
 }
 /**
+ * UnbindRelateAcct返回参数结构体
+ */
+export interface UnbindRelateAcctResponse {
+    /**
+      * String(20)，返回码
+      */
+    TxnReturnCode?: string;
+    /**
+      * String(100)，返回信息
+      */
+    TxnReturnMsg?: string;
+    /**
+      * String(22)，交易流水号
+      */
+    CnsmrSeqNo?: string;
+    /**
+      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrontSeqNo?: string;
+    /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedMsg?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ApplyApplicationMaterial请求参数结构体
  */
 export interface ApplyApplicationMaterialRequest {
@@ -8503,18 +8524,31 @@ export interface QueryDeclareData {
     Status: string;
 }
 /**
- * TerminateContract返回参数结构体
+ * QueryMemberTransaction返回参数结构体
  */
-export interface TerminateContractResponse {
+export interface QueryMemberTransactionResponse {
     /**
-      * 解约数据
+      * String(20)，返回码
       */
-    ContractTerminateData: ResponseTerminateContract;
+    TxnReturnCode?: string;
     /**
-      * 请求处理信息
+      * String(100)，返回信息
+      */
+    TxnReturnMsg?: string;
+    /**
+      * String(22)，交易流水号
+      */
+    CnsmrSeqNo?: string;
+    /**
+      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Msg: string;
+    FrontSeqNo?: string;
+    /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedMsg?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

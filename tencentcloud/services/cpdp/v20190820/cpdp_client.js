@@ -256,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryBankWithdrawCashDetails", req, cb);
     }
     /**
+     * 云鉴-查询对账单下载地址的接口
+     */
+    async QueryDownloadBillURL(req, cb) {
+        return this.request("QueryDownloadBillURL", req, cb);
+    }
+    /**
      * 商户绑定提现银行卡的验证接口
      */
     async CheckAcct(req, cb) {

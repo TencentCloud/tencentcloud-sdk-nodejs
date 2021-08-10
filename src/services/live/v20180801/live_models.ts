@@ -414,7 +414,7 @@ export interface DescribeLiveWatermarkRulesResponse {
   /**
    * 水印规则列表。
    */
-  Rules?: Array<RuleInfo>
+  Rules: Array<RuleInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1430,7 +1430,7 @@ export interface DescribeLiveSnapshotRulesResponse {
   /**
    * 规则列表。
    */
-  Rules?: Array<RuleInfo>
+  Rules: Array<RuleInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4499,7 +4499,7 @@ export interface DescribeLiveWatermarkResponse {
   /**
    * 水印信息。
    */
-  Watermark?: WatermarkInfo
+  Watermark: WatermarkInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5509,7 +5509,7 @@ export interface DescribeLiveTranscodeTemplateResponse {
   /**
    * 模板信息。
    */
-  Template?: TemplateInfo
+  Template: TemplateInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5524,7 +5524,7 @@ export interface CreateLiveSnapshotTemplateResponse {
   /**
    * 模板Id。
    */
-  TemplateId?: number
+  TemplateId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5910,7 +5910,7 @@ export interface DescribeLiveSnapshotTemplatesResponse {
   /**
    * 截图模板列表。
    */
-  Templates?: Array<SnapshotTemplateInfo>
+  Templates: Array<SnapshotTemplateInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

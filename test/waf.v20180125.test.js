@@ -38,6 +38,16 @@ it("waf.v20180125.ModifyCustomRuleStatus", async function () {
     }
 })
 
+it("waf.v20180125.DescribeAccessExports", async function () {
+    try {
+       const data = await client.DescribeAccessExports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeCustomRules", async function () {
     try {
        const data = await client.DescribeCustomRules({})
@@ -78,6 +88,36 @@ it("waf.v20180125.DeleteSession", async function () {
     }
 })
 
+it("waf.v20180125.SearchAccessLog", async function () {
+    try {
+       const data = await client.SearchAccessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteAccessExport", async function () {
+    try {
+       const data = await client.DeleteAccessExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeUserClbWafRegions", async function () {
+    try {
+       const data = await client.DescribeUserClbWafRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyAccessPeriod", async function () {
     try {
        const data = await client.ModifyAccessPeriod({})
@@ -98,9 +138,29 @@ it("waf.v20180125.DescribeFlowTrend", async function () {
     }
 })
 
-it("waf.v20180125.DescribeUserClbWafRegions", async function () {
+it("waf.v20180125.DescribeAccessFastAnalysis", async function () {
     try {
-       const data = await client.DescribeUserClbWafRegions({})
+       const data = await client.DescribeAccessFastAnalysis({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeAccessIndex", async function () {
+    try {
+       const data = await client.DescribeAccessIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreateAccessExport", async function () {
+    try {
+       const data = await client.CreateAccessExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

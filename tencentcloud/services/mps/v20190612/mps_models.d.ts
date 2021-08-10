@@ -6757,6 +6757,21 @@ export interface MediaVideoStreamItem {
       * 帧率，单位：hz。
       */
     Fps: number;
+    /**
+      * 色彩空间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColorPrimaries: string;
+    /**
+      * 色彩空间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColorSpace: string;
+    /**
+      * 色彩空间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColorTransfer: string;
 }
 /**
  * 时间点截图模板详情
@@ -7006,6 +7021,11 @@ export interface MediaAudioStreamItem {
       * 音频流的编码格式，例如 aac。
       */
     Codec: string;
+    /**
+      * 音频声道数，例如 2。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Channel: number;
 }
 /**
  * 直播 AI 内容审核图片鉴恐结果

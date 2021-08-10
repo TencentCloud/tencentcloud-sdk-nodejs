@@ -19,12 +19,16 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   BindStaffSkillGroupListRequest,
-  DescribeStaffInfoListResponse,
+  DescribePSTNActiveSessionListRequest,
   IVRKeyPressedElement,
   CreateSDKLoginTokenResponse,
-  DescribePSTNActiveSessionListRequest,
+  DescribeCallInMetricsResponse,
+  CallInMetrics,
+  DescribeStaffInfoListResponse,
   CreateStaffResponse,
   CreateUserSigRequest,
+  UnbindStaffSkillGroupListRequest,
+  DescribeStaffStatusMetricsRequest,
   SkillGroupItem,
   CreateUserSigResponse,
   DeleteStaffRequest,
@@ -32,9 +36,11 @@ import {
   DescribeIMCdrsRequest,
   TelCdrInfo,
   DeleteStaffResponse,
+  StaffStatusExtra,
   DescribeSkillGroupInfoListRequest,
   CreateStaffRequest,
   DescribeChatMessagesResponse,
+  CallInNumberMetrics,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
   ErrStaffItem,
@@ -44,11 +50,14 @@ import {
   DescribeStaffInfoListRequest,
   SkillGroupInfoItem,
   StaffInfo,
-  UnbindStaffSkillGroupListRequest,
+  PSTNSessionInfo,
   ServeParticipant,
+  DescribeStaffStatusMetricsResponse,
+  CallInSkillGroupMetrics,
   DescribeSeatUserListResponse,
   DescribeSeatUserListRequest,
   DescribeTelCallInfoResponse,
+  StaffStatusMetrics,
   BindStaffSkillGroupListResponse,
   UnbindStaffSkillGroupListResponse,
   DescribeTelCdrRequest,
@@ -57,7 +66,7 @@ import {
   DescribeTelCallInfoRequest,
   DescribeTelCdrResponse,
   SeatUserInfo,
-  PSTNSessionInfo,
+  DescribeCallInMetricsRequest,
   Message,
   DescribeSkillGroupInfoListResponse,
   DescribeIMCdrsResponse,
@@ -90,6 +99,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIMCdrsResponse) => void
   ): Promise<DescribeIMCdrsResponse> {
     return this.request("DescribeIMCdrs", req, cb)
+  }
+
+  /**
+   * 获取 PSTN 会话信息
+   */
+  async DescribeTelSession(
+    req: DescribeTelSessionRequest,
+    cb?: (error: string, rep: DescribeTelSessionResponse) => void
+  ): Promise<DescribeTelSessionResponse> {
+    return this.request("DescribeTelSession", req, cb)
   }
 
   /**
@@ -153,13 +172,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取 PSTN 会话信息
+   * 获取呼入实时数据统计指标
    */
-  async DescribeTelSession(
-    req: DescribeTelSessionRequest,
-    cb?: (error: string, rep: DescribeTelSessionResponse) => void
-  ): Promise<DescribeTelSessionResponse> {
-    return this.request("DescribeTelSession", req, cb)
+  async DescribeCallInMetrics(
+    req: DescribeCallInMetricsRequest,
+    cb?: (error: string, rep: DescribeCallInMetricsResponse) => void
+  ): Promise<DescribeCallInMetricsResponse> {
+    return this.request("DescribeCallInMetrics", req, cb)
   }
 
   /**
@@ -192,6 +211,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void
   ): Promise<DescribePSTNActiveSessionListResponse> {
     return this.request("DescribePSTNActiveSessionList", req, cb)
+  }
+
+  /**
+   * 获取坐席实时状态统计指标
+   */
+  async DescribeStaffStatusMetrics(
+    req: DescribeStaffStatusMetricsRequest,
+    cb?: (error: string, rep: DescribeStaffStatusMetricsResponse) => void
+  ): Promise<DescribeStaffStatusMetricsResponse> {
+    return this.request("DescribeStaffStatusMetrics", req, cb)
   }
 
   /**

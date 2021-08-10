@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { BindStaffSkillGroupListRequest, DescribeStaffInfoListResponse, CreateSDKLoginTokenResponse, DescribePSTNActiveSessionListRequest, CreateStaffResponse, CreateUserSigRequest, CreateUserSigResponse, DeleteStaffRequest, DescribeTelSessionRequest, DescribeIMCdrsRequest, DeleteStaffResponse, DescribeSkillGroupInfoListRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, UnbindStaffSkillGroupListRequest, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, BindStaffSkillGroupListResponse, UnbindStaffSkillGroupListResponse, DescribeTelCdrRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, DescribeTelCdrResponse, DescribeSkillGroupInfoListResponse, DescribeIMCdrsResponse } from "./ccc_models";
+import { BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, CreateSDKLoginTokenResponse, DescribeCallInMetricsResponse, DescribeStaffInfoListResponse, CreateStaffResponse, CreateUserSigRequest, UnbindStaffSkillGroupListRequest, DescribeStaffStatusMetricsRequest, CreateUserSigResponse, DeleteStaffRequest, DescribeTelSessionRequest, DescribeIMCdrsRequest, DeleteStaffResponse, DescribeSkillGroupInfoListRequest, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, DescribeStaffStatusMetricsResponse, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, BindStaffSkillGroupListResponse, UnbindStaffSkillGroupListResponse, DescribeTelCdrRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, DescribeTelCdrResponse, DescribeCallInMetricsRequest, DescribeSkillGroupInfoListResponse, DescribeIMCdrsResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 包括全媒体和文本两种类型
      */
     DescribeIMCdrs(req: DescribeIMCdrsRequest, cb?: (error: string, rep: DescribeIMCdrsResponse) => void): Promise<DescribeIMCdrsResponse>;
+    /**
+     * 获取 PSTN 会话信息
+     */
+    DescribeTelSession(req: DescribeTelSessionRequest, cb?: (error: string, rep: DescribeTelSessionResponse) => void): Promise<DescribeTelSessionResponse>;
     /**
      * 创建用户数据签名
      */
@@ -40,9 +44,9 @@ export declare class Client extends AbstractClient {
      */
     UnbindStaffSkillGroupList(req: UnbindStaffSkillGroupListRequest, cb?: (error: string, rep: UnbindStaffSkillGroupListResponse) => void): Promise<UnbindStaffSkillGroupListResponse>;
     /**
-     * 获取 PSTN 会话信息
+     * 获取呼入实时数据统计指标
      */
-    DescribeTelSession(req: DescribeTelSessionRequest, cb?: (error: string, rep: DescribeTelSessionResponse) => void): Promise<DescribeTelSessionResponse>;
+    DescribeCallInMetrics(req: DescribeCallInMetricsRequest, cb?: (error: string, rep: DescribeCallInMetricsResponse) => void): Promise<DescribeCallInMetricsResponse>;
     /**
      * 创建 SDK 登录 Token。
      */
@@ -57,6 +61,10 @@ export declare class Client extends AbstractClient {
      * 获取当前正在通话的会话列表
      */
     DescribePSTNActiveSessionList(req: DescribePSTNActiveSessionListRequest, cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void): Promise<DescribePSTNActiveSessionListResponse>;
+    /**
+     * 获取坐席实时状态统计指标
+     */
+    DescribeStaffStatusMetrics(req: DescribeStaffStatusMetricsRequest, cb?: (error: string, rep: DescribeStaffStatusMetricsResponse) => void): Promise<DescribeStaffStatusMetricsResponse>;
     /**
      * 创建客服账号。
      */

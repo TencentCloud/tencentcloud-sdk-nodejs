@@ -96,7 +96,7 @@ import {
   MerchantManagementList,
   CreateInvoiceResult,
   DescribeOrderStatusRequest,
-  QueryMemberTransactionResponse,
+  QueryDownloadBillURLRequest,
   QueryMerchantBalanceResult,
   ModifyMerchantResponse,
   QuerySinglePayResult,
@@ -180,12 +180,13 @@ import {
   WithdrawCashMembershipRequest,
   ApplyOutwardOrderRequest,
   CreatePayMerchantResponse,
-  UnbindRelateAcctResponse,
+  TerminateContractResponse,
   RechargeByThirdPayResponse,
   CheckAmountRequest,
   ApplyReWithdrawalRequest,
   AgentTaxPaymentBatch,
   RegisterInfo,
+  QueryDownloadBillURLResponse,
   CreateInvoiceRequest,
   TransferSinglePayResponse,
   QueryTradeResult,
@@ -248,6 +249,7 @@ import {
   ContractUserInfo,
   ApplyTradeData,
   QuerySinglePayItem,
+  UnbindRelateAcctResponse,
   ApplyApplicationMaterialRequest,
   QueryAcctItem,
   ChannelContractInfo,
@@ -266,7 +268,7 @@ import {
   QueryTransferBatchResponse,
   ContractOrderInSubOrder,
   QueryDeclareData,
-  TerminateContractResponse,
+  QueryMemberTransactionResponse,
   QueryMemberBindRequest,
   SyncContractDataRequest,
   QueryAgentStatementsRequest,
@@ -674,6 +676,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryBankWithdrawCashDetailsResponse) => void
   ): Promise<QueryBankWithdrawCashDetailsResponse> {
     return this.request("QueryBankWithdrawCashDetails", req, cb)
+  }
+
+  /**
+   * 云鉴-查询对账单下载地址的接口
+   */
+  async QueryDownloadBillURL(
+    req: QueryDownloadBillURLRequest,
+    cb?: (error: string, rep: QueryDownloadBillURLResponse) => void
+  ): Promise<QueryDownloadBillURLResponse> {
+    return this.request("QueryDownloadBillURL", req, cb)
   }
 
   /**

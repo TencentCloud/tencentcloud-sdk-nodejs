@@ -398,6 +398,16 @@ it("cpdp.v20190820.QueryBankWithdrawCashDetails", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryDownloadBillURL", async function () {
+    try {
+       const data = await client.QueryDownloadBillURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CheckAcct", async function () {
     try {
        const data = await client.CheckAcct({})

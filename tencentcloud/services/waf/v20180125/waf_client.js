@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomRuleStatus", req, cb);
     }
     /**
+     * 本接口用于获取访问日志导出列表
+     */
+    async DescribeAccessExports(req, cb) {
+        return this.request("DescribeAccessExports", req, cb);
+    }
+    /**
      * 获取防护配置中的自定义策略列表
      */
     async DescribeCustomRules(req, cb) {
@@ -64,6 +70,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSession", req, cb);
     }
     /**
+     * 本接口用于搜索WAF访问日志
+     */
+    async SearchAccessLog(req, cb) {
+        return this.request("SearchAccessLog", req, cb);
+    }
+    /**
+     * 本接口用于删除访问日志导出
+     */
+    async DeleteAccessExport(req, cb) {
+        return this.request("DeleteAccessExport", req, cb);
+    }
+    /**
+     * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
+     */
+    async DescribeUserClbWafRegions(req, cb) {
+        return this.request("DescribeUserClbWafRegions", req, cb);
+    }
+    /**
      * 本接口用于修改访问日志保存期限
      */
     async ModifyAccessPeriod(req, cb) {
@@ -76,10 +100,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowTrend", req, cb);
     }
     /**
-     * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
+     * 本接口用于访问日志的快速分析
      */
-    async DescribeUserClbWafRegions(req, cb) {
-        return this.request("DescribeUserClbWafRegions", req, cb);
+    async DescribeAccessFastAnalysis(req, cb) {
+        return this.request("DescribeAccessFastAnalysis", req, cb);
+    }
+    /**
+     * 本接口用于获取访问日志索引配置信息
+     */
+    async DescribeAccessIndex(req, cb) {
+        return this.request("DescribeAccessIndex", req, cb);
+    }
+    /**
+     * 本接口用于创建访问日志导出
+     */
+    async CreateAccessExport(req, cb) {
+        return this.request("CreateAccessExport", req, cb);
     }
     /**
      * 创建攻击日志下载任务

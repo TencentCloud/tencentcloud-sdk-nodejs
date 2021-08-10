@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIMCdrs", req, cb);
     }
     /**
+     * 获取 PSTN 会话信息
+     */
+    async DescribeTelSession(req, cb) {
+        return this.request("DescribeTelSession", req, cb);
+    }
+    /**
      * 创建用户数据签名
      */
     async CreateUserSig(req, cb) {
@@ -76,10 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindStaffSkillGroupList", req, cb);
     }
     /**
-     * 获取 PSTN 会话信息
+     * 获取呼入实时数据统计指标
      */
-    async DescribeTelSession(req, cb) {
-        return this.request("DescribeTelSession", req, cb);
+    async DescribeCallInMetrics(req, cb) {
+        return this.request("DescribeCallInMetrics", req, cb);
     }
     /**
      * 创建 SDK 登录 Token。
@@ -100,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePSTNActiveSessionList(req, cb) {
         return this.request("DescribePSTNActiveSessionList", req, cb);
+    }
+    /**
+     * 获取坐席实时状态统计指标
+     */
+    async DescribeStaffStatusMetrics(req, cb) {
+        return this.request("DescribeStaffStatusMetrics", req, cb);
     }
     /**
      * 创建客服账号。

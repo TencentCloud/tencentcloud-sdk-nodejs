@@ -18,31 +18,53 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ResponseCode,
+  DescribeAccessFastAnalysisResponse,
+  CreateAccessExportRequest,
   DescribeCustomRulesRspRuleListItem,
+  AccessFullTextInfo,
   ModifyCustomRuleStatusResponse,
+  ResponseCode,
   DescribeUserClbWafRegionsResponse,
   DeleteAttackDownloadRecordResponse,
   ModifyAccessPeriodResponse,
+  DescribeAccessExportsResponse,
   DescribeFlowTrendRequest,
+  AccessLogItems,
   ModifyCustomRuleStatusRequest,
+  AccessRuleKeyValueInfo,
+  SearchAccessLogResponse,
   DeleteDownloadRecordResponse,
+  DeleteAccessExportRequest,
   ModifyAccessPeriodRequest,
   DescribeUserClbWafRegionsRequest,
   DeleteAttackDownloadRecordRequest,
+  AccessRuleTagInfo,
+  DescribeAccessIndexRequest,
+  AccessRuleInfo,
+  DescribeAccessFastAnalysisRequest,
+  AccessValueInfo,
   DeleteSessionResponse,
-  BotStatPointItem,
-  DescribeCustomRulesResponse,
+  AccessLogItem,
+  AccessLogInfo,
   DeleteSessionRequest,
+  DescribeAccessExportsRequest,
+  DescribeAccessIndexResponse,
   CreateAttackDownloadTaskResponse,
-  Strategy,
+  CreateAccessExportResponse,
   AddCustomRuleResponse,
-  DescribeFlowTrendResponse,
+  AccessKeyValueInfo,
+  BotStatPointItem,
   AddCustomRuleRequest,
+  DescribeCustomRulesResponse,
+  DescribeFlowTrendResponse,
+  Strategy,
   DescribeCustomRulesRequest,
   DescribeCustomRulesPagingInfo,
   DeleteDownloadRecordRequest,
+  ExportAccessInfo,
+  DeleteAccessExportResponse,
   CreateAttackDownloadTaskRequest,
+  SearchAccessLogRequest,
 } from "./waf_models"
 
 /**
@@ -72,6 +94,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomRuleStatusResponse) => void
   ): Promise<ModifyCustomRuleStatusResponse> {
     return this.request("ModifyCustomRuleStatus", req, cb)
+  }
+
+  /**
+   * 本接口用于获取访问日志导出列表
+   */
+  async DescribeAccessExports(
+    req: DescribeAccessExportsRequest,
+    cb?: (error: string, rep: DescribeAccessExportsResponse) => void
+  ): Promise<DescribeAccessExportsResponse> {
+    return this.request("DescribeAccessExports", req, cb)
   }
 
   /**
@@ -115,6 +147,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于搜索WAF访问日志
+   */
+  async SearchAccessLog(
+    req: SearchAccessLogRequest,
+    cb?: (error: string, rep: SearchAccessLogResponse) => void
+  ): Promise<SearchAccessLogResponse> {
+    return this.request("SearchAccessLog", req, cb)
+  }
+
+  /**
+   * 本接口用于删除访问日志导出
+   */
+  async DeleteAccessExport(
+    req: DeleteAccessExportRequest,
+    cb?: (error: string, rep: DeleteAccessExportResponse) => void
+  ): Promise<DeleteAccessExportResponse> {
+    return this.request("DeleteAccessExport", req, cb)
+  }
+
+  /**
+   * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
+   */
+  async DescribeUserClbWafRegions(
+    req?: DescribeUserClbWafRegionsRequest,
+    cb?: (error: string, rep: DescribeUserClbWafRegionsResponse) => void
+  ): Promise<DescribeUserClbWafRegionsResponse> {
+    return this.request("DescribeUserClbWafRegions", req, cb)
+  }
+
+  /**
    * 本接口用于修改访问日志保存期限
    */
   async ModifyAccessPeriod(
@@ -135,13 +197,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表
+   * 本接口用于访问日志的快速分析
    */
-  async DescribeUserClbWafRegions(
-    req?: DescribeUserClbWafRegionsRequest,
-    cb?: (error: string, rep: DescribeUserClbWafRegionsResponse) => void
-  ): Promise<DescribeUserClbWafRegionsResponse> {
-    return this.request("DescribeUserClbWafRegions", req, cb)
+  async DescribeAccessFastAnalysis(
+    req?: DescribeAccessFastAnalysisRequest,
+    cb?: (error: string, rep: DescribeAccessFastAnalysisResponse) => void
+  ): Promise<DescribeAccessFastAnalysisResponse> {
+    return this.request("DescribeAccessFastAnalysis", req, cb)
+  }
+
+  /**
+   * 本接口用于获取访问日志索引配置信息
+   */
+  async DescribeAccessIndex(
+    req?: DescribeAccessIndexRequest,
+    cb?: (error: string, rep: DescribeAccessIndexResponse) => void
+  ): Promise<DescribeAccessIndexResponse> {
+    return this.request("DescribeAccessIndex", req, cb)
+  }
+
+  /**
+   * 本接口用于创建访问日志导出
+   */
+  async CreateAccessExport(
+    req: CreateAccessExportRequest,
+    cb?: (error: string, rep: CreateAccessExportResponse) => void
+  ): Promise<CreateAccessExportResponse> {
+    return this.request("CreateAccessExport", req, cb)
   }
 
   /**

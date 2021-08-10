@@ -48,6 +48,16 @@ it("clb.v20180317.DescribeClassicalLBListeners", async function () {
     }
 })
 
+it("clb.v20180317.DescribeCustomizedConfigAssociateList", async function () {
+    try {
+       const data = await client.DescribeCustomizedConfigAssociateList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
@@ -258,6 +268,16 @@ it("clb.v20180317.ModifyDomainAttributes", async function () {
     }
 })
 
+it("clb.v20180317.ModifyTargetPort", async function () {
+    try {
+       const data = await client.ModifyTargetPort({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DeleteRule", async function () {
     try {
        const data = await client.DeleteRule({})
@@ -388,9 +408,9 @@ it("clb.v20180317.DescribeClsLogSet", async function () {
     }
 })
 
-it("clb.v20180317.ModifyTargetPort", async function () {
+it("clb.v20180317.DescribeCustomizedConfigList", async function () {
     try {
-       const data = await client.ModifyTargetPort({})
+       const data = await client.DescribeCustomizedConfigList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -411,6 +431,16 @@ it("clb.v20180317.ModifyTargetWeight", async function () {
 it("clb.v20180317.DescribeTaskStatus", async function () {
     try {
        const data = await client.DescribeTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.SetCustomizedConfigForLoadBalancer", async function () {
+    try {
+       const data = await client.SetCustomizedConfigForLoadBalancer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
