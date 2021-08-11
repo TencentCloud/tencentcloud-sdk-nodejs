@@ -210,32 +210,28 @@ export interface MobileNetworkTimeVerificationResponse {
 export type GetLiveCodeRequest = null
 
 /**
- * GetEidResult返回参数结构体
+ * CheckIdNameDate返回参数结构体
  */
-export interface GetEidResultResponse {
+export interface CheckIdNameDateResponse {
   /**
-      * 文本类信息。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 认证结果码，收费情况如下。
+收费结果码：
+0: 一致
+-1: 不一致
+不收费结果码：
+-2: 非法身份证号（长度、校验位等不正确）
+-3: 非法姓名（长度、格式等不正确）
+-4: 非法有效期（长度、格式等不正确）
+-5: 身份信息无效
+-6: 证件库服务异常
+-7: 证件库中无此身份证记录
       */
-  Text: DetectInfoText
+  Result: string
 
   /**
-      * 身份证照片信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IdCardData: DetectInfoIdCardData
-
-  /**
-      * 最佳帧信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BestFrame: DetectInfoBestFrame
-
-  /**
-      * Eid信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EidInfo: EidInfo
+   * 业务结果描述。
+   */
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -774,6 +770,36 @@ export interface GetRealNameAuthTokenRequest {
 }
 
 /**
+ * CheckIdNameDate请求参数结构体
+ */
+export interface CheckIdNameDateRequest {
+  /**
+   * 姓名
+   */
+  Name: string
+
+  /**
+   * 身份证号
+   */
+  IdCard: string
+
+  /**
+   * 身份证有效期开始时间，格式：YYYYMMDD。如：20210701
+   */
+  ValidityBegin: string
+
+  /**
+   * 身份证有效期到期时间，格式：YYYYMMDD，长期用“00000000”代替；如：20210701
+   */
+  ValidityEnd: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
+}
+
+/**
  * BankCard2EVerification请求参数结构体
  */
 export interface BankCard2EVerificationRequest {
@@ -841,48 +867,18 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * CheckIdCardInformation请求参数结构体
+ * Eid出参
  */
-export interface CheckIdCardInformationRequest {
+export interface EidInfo {
   /**
-      * 身份证人像面的 Base64 值
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。
-请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
-      */
-  ImageBase64?: string
+   * 商户方 appeIDcode 的数字证书
+   */
+  EidCode: string
 
   /**
-      * 身份证人像面的 Url 地址
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-      */
-  ImageUrl?: string
-
-  /**
-      * 以下可选字段均为bool 类型，默认false：
-CopyWarn，复印件告警
-BorderCheckWarn，边框和框内遮挡告警
-ReshootWarn，翻拍告警
-DetectPsWarn，PS检测告警
-TempIdWarn，临时身份证告警
-Quality，图片质量告警（评价图片模糊程度）
-
-SDK 设置方式参考：
-Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})
-API 3.0 Explorer 设置方式参考：
-Config = {"CopyWarn":true,"ReshootWarn":true}
-      */
-  Config?: string
-
-  /**
-      * 是否需要对返回中的敏感信息进行加密。默认false。
-其中敏感信息包括：Response.IdNum、Response.Name
-      */
-  IsEncrypt?: boolean
+   * eID 中心针对商户方EidCode的电子签名
+   */
+  EidSign: string
 }
 
 /**
@@ -1071,18 +1067,48 @@ export interface LivenessResponse {
 }
 
 /**
- * Eid出参
+ * CheckIdCardInformation请求参数结构体
  */
-export interface EidInfo {
+export interface CheckIdCardInformationRequest {
   /**
-   * 商户方 appeIDcode 的数字证书
-   */
-  EidCode: string
+      * 身份证人像面的 Base64 值
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
+      */
+  ImageBase64?: string
 
   /**
-   * eID 中心针对商户方EidCode的电子签名
-   */
-  EidSign: string
+      * 身份证人像面的 Url 地址
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
+
+  /**
+      * 以下可选字段均为bool 类型，默认false：
+CopyWarn，复印件告警
+BorderCheckWarn，边框和框内遮挡告警
+ReshootWarn，翻拍告警
+DetectPsWarn，PS检测告警
+TempIdWarn，临时身份证告警
+Quality，图片质量告警（评价图片模糊程度）
+
+SDK 设置方式参考：
+Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})
+API 3.0 Explorer 设置方式参考：
+Config = {"CopyWarn":true,"ReshootWarn":true}
+      */
+  Config?: string
+
+  /**
+      * 是否需要对返回中的敏感信息进行加密。默认false。
+其中敏感信息包括：Response.IdNum、Response.Name
+      */
+  IsEncrypt?: boolean
 }
 
 /**
@@ -1322,6 +1348,40 @@ export interface CheckEidTokenStatusRequest {
    * E证通流程的唯一标识，调用GetEidToken接口时生成。
    */
   EidToken: string
+}
+
+/**
+ * GetEidResult返回参数结构体
+ */
+export interface GetEidResultResponse {
+  /**
+      * 文本类信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Text: DetectInfoText
+
+  /**
+      * 身份证照片信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdCardData: DetectInfoIdCardData
+
+  /**
+      * 最佳帧信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BestFrame: DetectInfoBestFrame
+
+  /**
+      * Eid信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EidInfo: EidInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

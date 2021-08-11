@@ -886,6 +886,15 @@ export interface CopyAccountPrivilegesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyRealServerAccessStrategy返回参数结构体
+ */
+export interface ModifyRealServerAccessStrategyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CloneAccount请求参数结构体
  */
 export interface CloneAccountRequest {
@@ -1160,6 +1169,19 @@ export interface CreateDBInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyRealServerAccessStrategy请求参数结构体
+ */
+export interface ModifyRealServerAccessStrategyRequest {
+    /**
+      * 实例 ID，格式如：tdsql-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
+    /**
+      * RS就近模式, 0-无策略, 1-可用区就近访问。
+      */
+    RsAccessStrategy: number;
 }
 /**
  * DescribeBackupTime请求参数结构体
@@ -2349,7 +2371,7 @@ export interface ModifyAccountPrivilegesRequest {
       */
     DatabasePrivileges?: Array<DatabasePrivilege>;
     /**
-      * 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+      * 数据库中表的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
 注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
       */
     TablePrivileges?: Array<TablePrivilege>;
@@ -2359,17 +2381,17 @@ export interface ModifyAccountPrivilegesRequest {
       */
     ColumnPrivileges?: Array<ColumnPrivilege>;
     /**
-      * 数据库视图的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+      * 数据库视图的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
 注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
       */
     ViewPrivileges?: Array<ViewPrivileges>;
     /**
-      * 数据库函数的权限。Privileges 权限的可选值为：权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
+      * 数据库函数的权限。Privileges 权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
 注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
       */
     FunctionPrivileges?: Array<FunctionPrivilege>;
     /**
-      * 数据库存储过程的权限。Privileges 权限的可选值为：权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
+      * 数据库存储过程的权限。Privileges 权限的可选值为："ALTER ROUTINE"，"EXECUTE"。
 注意，不传该参数表示保留现有权限，如需清除，请在复杂类型Privileges字段传空数组。
       */
     ProcedurePrivileges?: Array<ProcedurePrivilege>;

@@ -755,7 +755,7 @@ export interface BGPIPInstance {
   StaticPackRelation: StaticPackRelation
 
   /**
-      * 区分高防IP海外线路
+      * 区分高防IP境外线路
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ZoneId: number
@@ -791,6 +791,12 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EipAddressInfo: EipAddressRelation
+
+  /**
+      * 建议客户接入的域名，客户可使用域名接入。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
 }
 
 /**
@@ -1413,7 +1419,7 @@ export interface CreateProtocolBlockConfigResponse {
  */
 export interface BGPIPInstanceSpecification {
   /**
-   * 保底防护峰值，单位Gbps
+   * 保底防护峰值，单位Mbps
    */
   ProtectBandwidth: number
 
@@ -1452,7 +1458,7 @@ export interface BGPIPInstanceSpecification {
   Line: number
 
   /**
-   * 弹性防护峰值，单位Gbps
+   * 弹性防护峰值，单位Mbps
    */
   ElasticBandwidth: number
 }

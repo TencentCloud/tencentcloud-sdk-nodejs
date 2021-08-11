@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadLogResponse, CreateAlarmResponse, DeleteAlarmNoticeResponse, DescribeLogContextRequest, DeleteShipperRequest, ModifyTopicRequest, DeleteLogsetResponse, DescribeShipperTasksResponse, CreateMachineGroupResponse, DescribeConfigMachineGroupsRequest, CreateLogsetRequest, SearchLogResponse, DeleteTopicRequest, DescribePartitionsRequest, ModifyAlarmResponse, DescribeShipperTasksRequest, DescribeAlarmsRequest, DescribeShippersResponse, ModifyShipperResponse, RetryShipperTaskRequest, DescribeIndexRequest, DescribeConfigsResponse, CreateLogsetResponse, DeleteMachineGroupResponse, DescribeMachineGroupsRequest, CreateIndexResponse, DeleteConfigFromMachineGroupResponse, ModifyMachineGroupResponse, DeleteMachineGroupRequest, DescribePartitionsResponse, DescribeConfigMachineGroupsResponse, ModifyAlarmRequest, DescribeTopicsResponse, ModifyAlarmNoticeRequest, CreateAlarmRequest, DeleteExportResponse, DescribeShippersRequest, RetryShipperTaskResponse, SplitPartitionRequest, CreateIndexRequest, CreateTopicRequest, DescribeTopicsRequest, GetAlarmLogResponse, DescribeConfigsRequest, DescribeExportsRequest, DeleteConfigResponse, ModifyIndexResponse, DeleteIndexRequest, UploadLogRequest, DeleteConfigRequest, CreateExportRequest, DescribeAlarmNoticesResponse, ModifyConfigRequest, DescribeLogsetsResponse, CreateShipperRequest, CreateTopicResponse, DeleteAlarmResponse, DescribeAlarmsResponse, CreateAlarmNoticeResponse, ModifyTopicResponse, CreateConfigRequest, CreateShipperResponse, DeleteIndexResponse, ModifyIndexRequest, GetAlarmLogRequest, DeleteShipperResponse, DeleteExportRequest, SplitPartitionResponse, ModifyShipperRequest, DescribeLogContextResponse, ModifyConfigResponse, ModifyAlarmNoticeResponse, DescribeMachinesResponse, ApplyConfigToMachineGroupResponse, DeleteAlarmRequest, CreateConfigResponse, DeleteConfigFromMachineGroupRequest, ModifyMachineGroupRequest, DescribeAlarmNoticesRequest, MergePartitionRequest, CreateExportResponse, DeleteAlarmNoticeRequest, DeleteLogsetRequest, ModifyLogsetResponse, SearchLogRequest, CreateMachineGroupRequest, DescribeExportsResponse, ApplyConfigToMachineGroupRequest, DescribeMachineGroupConfigsResponse, CreateAlarmNoticeRequest, DescribeIndexResponse, DescribeMachineGroupConfigsRequest, ModifyLogsetRequest, DescribeMachineGroupsResponse, DescribeLogsetsRequest, DeleteTopicResponse, DescribeMachinesRequest, MergePartitionResponse } from "./cls_models";
+import { UploadLogResponse, CreateAlarmResponse, DeleteAlarmNoticeResponse, DescribeLogContextRequest, DeleteShipperRequest, ModifyTopicRequest, DeleteLogsetResponse, DescribeShipperTasksResponse, CreateMachineGroupResponse, DescribeConfigMachineGroupsRequest, DescribeAsyncContextResultResponse, UploadLogRequest, CreateAsyncContextTaskRequest, CreateLogsetRequest, SearchLogResponse, DeleteTopicRequest, DescribePartitionsRequest, ModifyAlarmResponse, DescribeShipperTasksRequest, DescribeAlarmsRequest, CreateAsyncContextTaskResponse, DescribeShippersResponse, ModifyShipperResponse, RetryShipperTaskRequest, DescribeIndexRequest, DescribeConfigsResponse, CreateLogsetResponse, DeleteAsyncContextTaskResponse, DeleteMachineGroupResponse, DescribeAsyncContextResultRequest, DeleteAsyncSearchTaskResponse, DescribeExportsRequest, CreateAsyncSearchTaskRequest, CreateIndexResponse, DeleteConfigFromMachineGroupResponse, ModifyMachineGroupResponse, DeleteMachineGroupRequest, DescribePartitionsResponse, DescribeConfigMachineGroupsResponse, ModifyAlarmRequest, DescribeTopicsResponse, ModifyAlarmNoticeRequest, CreateAlarmRequest, DeleteExportResponse, DescribeShippersRequest, RetryShipperTaskResponse, SplitPartitionRequest, DescribeMachineGroupsRequest, DescribeAsyncContextTasksResponse, CreateIndexRequest, CreateTopicRequest, DescribeTopicsRequest, GetAlarmLogResponse, DescribeAsyncSearchTasksRequest, DescribeConfigsRequest, DescribeAsyncSearchResultResponse, DescribeAsyncContextTasksRequest, DeleteConfigResponse, ModifyIndexResponse, DeleteIndexRequest, DeleteConfigRequest, CreateExportRequest, DescribeAlarmNoticesResponse, ModifyConfigRequest, DescribeLogsetsResponse, CreateShipperRequest, CreateTopicResponse, DeleteAlarmResponse, DescribeMachinesResponse, DescribeAlarmsResponse, CreateAlarmNoticeResponse, ModifyTopicResponse, CreateConfigRequest, CreateShipperResponse, DeleteIndexResponse, DeleteAsyncContextTaskRequest, ModifyIndexRequest, GetAlarmLogRequest, DescribeMachinesRequest, DeleteShipperResponse, DeleteExportRequest, SplitPartitionResponse, ModifyShipperRequest, DescribeLogContextResponse, DescribeAsyncSearchResultRequest, ModifyConfigResponse, ModifyAlarmNoticeResponse, DescribeAsyncSearchTasksResponse, ApplyConfigToMachineGroupResponse, DeleteAlarmRequest, CreateConfigResponse, DeleteConfigFromMachineGroupRequest, DeleteAsyncSearchTaskRequest, ModifyMachineGroupRequest, DescribeAlarmNoticesRequest, MergePartitionRequest, CreateAsyncSearchTaskResponse, DeleteAlarmNoticeRequest, DeleteLogsetRequest, ModifyLogsetResponse, SearchLogRequest, CreateMachineGroupRequest, DescribeExportsResponse, ApplyConfigToMachineGroupRequest, DescribeMachineGroupConfigsResponse, CreateAlarmNoticeRequest, DescribeIndexResponse, DescribeMachineGroupConfigsRequest, ModifyLogsetRequest, DescribeMachineGroupsResponse, DescribeLogsetsRequest, DeleteTopicResponse, CreateExportResponse, MergePartitionResponse } from "./cls_models";
 /**
  * cls client
  * @class
@@ -24,18 +24,21 @@ export declare class Client extends AbstractClient {
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
     /**
-     * 本接口用于修改索引配置
-
+     * 本接口用户获取异步上下文任务的结果
      */
-    ModifyIndex(req: ModifyIndexRequest, cb?: (error: string, rep: ModifyIndexResponse) => void): Promise<ModifyIndexResponse>;
+    DescribeAsyncContextResult(req: DescribeAsyncContextResultRequest, cb?: (error: string, rep: DescribeAsyncContextResultResponse) => void): Promise<DescribeAsyncContextResultResponse>;
+    /**
+     * 本接口用于获取异步上下文任务列表
+     */
+    DescribeAsyncContextTasks(req: DescribeAsyncContextTasksRequest, cb?: (error: string, rep: DescribeAsyncContextTasksResponse) => void): Promise<DescribeAsyncContextTasksResponse>;
     /**
      * 本接口用于获取日志集信息列表。
      */
     DescribeLogsets(req: DescribeLogsetsRequest, cb?: (error: string, rep: DescribeLogsetsResponse) => void): Promise<DescribeLogsetsResponse>;
     /**
-     * 本接口用于修改日志集信息
+     * 获取投递任务列表
      */
-    ModifyLogset(req: ModifyLogsetRequest, cb?: (error: string, rep: ModifyLogsetResponse) => void): Promise<ModifyLogsetResponse>;
+    DescribeShipperTasks(req: DescribeShipperTasksRequest, cb?: (error: string, rep: DescribeShipperTasksResponse) => void): Promise<DescribeShipperTasksResponse>;
     /**
      * 本接口用于获取日志导出列表
      */
@@ -53,6 +56,10 @@ export declare class Client extends AbstractClient {
      */
     CreateIndex(req: CreateIndexRequest, cb?: (error: string, rep: CreateIndexResponse) => void): Promise<CreateIndexResponse>;
     /**
+     * 本接口用户获取异步检索任务的结果
+     */
+    DescribeAsyncSearchResult(req: DescribeAsyncSearchResultRequest, cb?: (error: string, rep: DescribeAsyncSearchResultResponse) => void): Promise<DescribeAsyncSearchResultResponse>;
+    /**
      * 删除采集规则配置
      */
     DeleteConfig(req: DeleteConfigRequest, cb?: (error: string, rep: DeleteConfigResponse) => void): Promise<DeleteConfigResponse>;
@@ -64,6 +71,10 @@ export declare class Client extends AbstractClient {
      * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
      */
     ModifyShipper(req: ModifyShipperRequest, cb?: (error: string, rep: ModifyShipperResponse) => void): Promise<ModifyShipperResponse>;
+    /**
+     * 本接口用于删除异步检索任务
+     */
+    DeleteAsyncSearchTask(req: DeleteAsyncSearchTaskRequest, cb?: (error: string, rep: DeleteAsyncSearchTaskResponse) => void): Promise<DeleteAsyncSearchTaskResponse>;
     /**
      * 该接口用户创建告警通知模板。
      */
@@ -109,6 +120,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarms(req: DescribeAlarmsRequest, cb?: (error: string, rep: DescribeAlarmsResponse) => void): Promise<DescribeAlarmsResponse>;
     /**
+     * 本接口用于删除异步上下文任务
+     */
+    DeleteAsyncContextTask(req: DeleteAsyncContextTaskRequest, cb?: (error: string, rep: DeleteAsyncContextTaskResponse) => void): Promise<DeleteAsyncContextTaskResponse>;
+    /**
      * 该接口用于获取告警通知模板列表
      */
     DescribeAlarmNotices(req: DescribeAlarmNoticesRequest, cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void): Promise<DescribeAlarmNoticesResponse>;
@@ -124,6 +139,11 @@ export declare class Client extends AbstractClient {
      * 该接口用于删除告警通知模板
      */
     DeleteAlarmNotice(req: DeleteAlarmNoticeRequest, cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void): Promise<DeleteAlarmNoticeResponse>;
+    /**
+     * 本接口用于修改索引配置
+
+     */
+    ModifyIndex(req: ModifyIndexRequest, cb?: (error: string, rep: ModifyIndexResponse) => void): Promise<ModifyIndexResponse>;
     /**
      * 该接口用于修改告警通知模板。
      */
@@ -304,9 +324,9 @@ cls.pb.cc cls.pb.h cls.proto
      */
     UploadLog(req?: UploadLogRequest, cb?: (error: string, rep: UploadLogResponse) => void): Promise<UploadLogResponse>;
     /**
-     * 获取投递任务列表
+     * 本接口用于创建异步上下文任务
      */
-    DescribeShipperTasks(req: DescribeShipperTasksRequest, cb?: (error: string, rep: DescribeShipperTasksResponse) => void): Promise<DescribeShipperTasksResponse>;
+    CreateAsyncContextTask(req: CreateAsyncContextTaskRequest, cb?: (error: string, rep: CreateAsyncContextTaskResponse) => void): Promise<CreateAsyncContextTaskResponse>;
     /**
      * 创建采集规则配置
      */
@@ -323,6 +343,10 @@ cls.pb.cc cls.pb.h cls.proto
      * 本接口用于日志主题的索引配置
      */
     DeleteIndex(req: DeleteIndexRequest, cb?: (error: string, rep: DeleteIndexResponse) => void): Promise<DeleteIndexResponse>;
+    /**
+     * 本接口用户获取异步检索任务列表
+     */
+    DescribeAsyncSearchTasks(req: DescribeAsyncSearchTasksRequest, cb?: (error: string, rep: DescribeAsyncSearchTasksResponse) => void): Promise<DescribeAsyncSearchTasksResponse>;
     /**
      * 本接口用于删除告警策略。
      */
@@ -348,6 +372,10 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DescribeConfigMachineGroups(req: DescribeConfigMachineGroupsRequest, cb?: (error: string, rep: DescribeConfigMachineGroupsResponse) => void): Promise<DescribeConfigMachineGroupsResponse>;
     /**
+     * 本接口用于修改日志集信息
+     */
+    ModifyLogset(req: ModifyLogsetRequest, cb?: (error: string, rep: ModifyLogsetResponse) => void): Promise<ModifyLogsetResponse>;
+    /**
      * 本接口用于删除日志导出
      */
     DeleteExport(req: DeleteExportRequest, cb?: (error: string, rep: DeleteExportResponse) => void): Promise<DeleteExportResponse>;
@@ -367,4 +395,8 @@ cls.pb.cc cls.pb.h cls.proto
      * 本接口用于分裂主题分区
      */
     SplitPartition(req: SplitPartitionRequest, cb?: (error: string, rep: SplitPartitionResponse) => void): Promise<SplitPartitionResponse>;
+    /**
+     * 本接口用于创建异步检索任务
+     */
+    CreateAsyncSearchTask(req: CreateAsyncSearchTaskRequest, cb?: (error: string, rep: CreateAsyncSearchTaskResponse) => void): Promise<CreateAsyncSearchTaskResponse>;
 }

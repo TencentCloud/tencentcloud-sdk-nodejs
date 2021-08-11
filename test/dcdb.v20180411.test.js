@@ -88,6 +88,16 @@ it("dcdb.v20180411.DescribeDCDBInstances", async function () {
     }
 })
 
+it("dcdb.v20180411.ModifyRealServerAccessStrategy", async function () {
+    try {
+       const data = await client.ModifyRealServerAccessStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.ModifyAccountDescription", async function () {
     try {
        const data = await client.ModifyAccountDescription({})

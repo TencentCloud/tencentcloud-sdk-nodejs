@@ -26,7 +26,7 @@ import {
   CheckBankCardInformationRequest,
   MobileNetworkTimeVerificationResponse,
   GetLiveCodeRequest,
-  GetEidResultResponse,
+  CheckIdNameDateResponse,
   IdCardVerificationRequest,
   BankCardVerificationRequest,
   CheckBankCardInformationResponse,
@@ -44,20 +44,22 @@ import {
   BankCard4EVerificationResponse,
   MobileStatusRequest,
   GetRealNameAuthTokenRequest,
+  CheckIdNameDateRequest,
   BankCard2EVerificationRequest,
   LivenessRecognitionRequest,
-  CheckIdCardInformationRequest,
+  EidInfo,
   GetFaceIdTokenResponse,
   CheckEidTokenStatusResponse,
   MobileStatusResponse,
   IdCardOCRVerificationResponse,
   GetRealNameAuthTokenResponse,
   LivenessResponse,
-  EidInfo,
+  CheckIdCardInformationRequest,
   DetectInfoText,
   DetectAuthRequest,
   MinorsVerificationResponse,
   CheckEidTokenStatusRequest,
+  GetEidResultResponse,
   GetRealNameAuthResultRequest,
   ImageRecognitionRequest,
   BankCard4EVerificationRequest,
@@ -285,6 +287,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MinorsVerificationResponse) => void
   ): Promise<MinorsVerificationResponse> {
     return this.request("MinorsVerification", req, cb)
+  }
+
+  /**
+   * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+   */
+  async CheckIdNameDate(
+    req: CheckIdNameDateRequest,
+    cb?: (error: string, rep: CheckIdNameDateResponse) => void
+  ): Promise<CheckIdNameDateResponse> {
+    return this.request("CheckIdNameDate", req, cb)
   }
 
   /**

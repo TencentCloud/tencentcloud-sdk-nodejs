@@ -183,6 +183,16 @@ export interface SpecConfig {
 }
 
 /**
+ * ModifyRealServerAccessStrategy返回参数结构体
+ */
+export interface ModifyRealServerAccessStrategyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDCDBPrice返回参数结构体
  */
 export interface DescribeDCDBPriceResponse {
@@ -945,6 +955,21 @@ export interface ResetAccountPasswordResponse {
  * DescribeDCDBSaleInfo请求参数结构体
  */
 export type DescribeDCDBSaleInfoRequest = null
+
+/**
+ * ModifyRealServerAccessStrategy请求参数结构体
+ */
+export interface ModifyRealServerAccessStrategyRequest {
+  /**
+   * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * RS就近模式, 0-无策略, 1-可用区就近访问。
+   */
+  RsAccessStrategy: number
+}
 
 /**
  * 升级实例 -- 扩容分片类型

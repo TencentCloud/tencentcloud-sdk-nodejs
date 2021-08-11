@@ -144,6 +144,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MinorsVerification", req, cb);
     }
     /**
+     * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+     */
+    async CheckIdNameDate(req, cb) {
+        return this.request("CheckIdNameDate", req, cb);
+    }
+    /**
      * 活体检测
      */
     async Liveness(req, cb) {

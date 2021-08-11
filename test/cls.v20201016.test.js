@@ -58,9 +58,19 @@ it("cls.v20201016.ModifyTopic", async function () {
     }
 })
 
-it("cls.v20201016.ModifyIndex", async function () {
+it("cls.v20201016.DescribeAsyncContextResult", async function () {
     try {
-       const data = await client.ModifyIndex({})
+       const data = await client.DescribeAsyncContextResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeAsyncContextTasks", async function () {
+    try {
+       const data = await client.DescribeAsyncContextTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +88,9 @@ it("cls.v20201016.DescribeLogsets", async function () {
     }
 })
 
-it("cls.v20201016.ModifyLogset", async function () {
+it("cls.v20201016.DescribeShipperTasks", async function () {
     try {
-       const data = await client.ModifyLogset({})
+       const data = await client.DescribeShipperTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +138,16 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
+it("cls.v20201016.DescribeAsyncSearchResult", async function () {
+    try {
+       const data = await client.DescribeAsyncSearchResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteConfig", async function () {
     try {
        const data = await client.DeleteConfig({})
@@ -151,6 +171,16 @@ it("cls.v20201016.CreateShipper", async function () {
 it("cls.v20201016.ModifyShipper", async function () {
     try {
        const data = await client.ModifyShipper({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteAsyncSearchTask", async function () {
+    try {
+       const data = await client.DeleteAsyncSearchTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +298,16 @@ it("cls.v20201016.DescribeAlarms", async function () {
     }
 })
 
+it("cls.v20201016.DeleteAsyncContextTask", async function () {
+    try {
+       const data = await client.DeleteAsyncContextTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeAlarmNotices", async function () {
     try {
        const data = await client.DescribeAlarmNotices({})
@@ -301,6 +341,16 @@ it("cls.v20201016.ApplyConfigToMachineGroup", async function () {
 it("cls.v20201016.DeleteAlarmNotice", async function () {
     try {
        const data = await client.DeleteAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyIndex", async function () {
+    try {
+       const data = await client.ModifyIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +398,9 @@ it("cls.v20201016.UploadLog", async function () {
     }
 })
 
-it("cls.v20201016.DescribeShipperTasks", async function () {
+it("cls.v20201016.CreateAsyncContextTask", async function () {
     try {
-       const data = await client.DescribeShipperTasks({})
+       const data = await client.CreateAsyncContextTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +441,16 @@ it("cls.v20201016.DeleteShipper", async function () {
 it("cls.v20201016.DeleteIndex", async function () {
     try {
        const data = await client.DeleteIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeAsyncSearchTasks", async function () {
+    try {
+       const data = await client.DescribeAsyncSearchTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,6 +518,16 @@ it("cls.v20201016.DescribeConfigMachineGroups", async function () {
     }
 })
 
+it("cls.v20201016.ModifyLogset", async function () {
+    try {
+       const data = await client.ModifyLogset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteExport", async function () {
     try {
        const data = await client.DeleteExport({})
@@ -501,6 +571,16 @@ it("cls.v20201016.CreateExport", async function () {
 it("cls.v20201016.SplitPartition", async function () {
     try {
        const data = await client.SplitPartition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateAsyncSearchTask", async function () {
+    try {
+       const data = await client.CreateAsyncSearchTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

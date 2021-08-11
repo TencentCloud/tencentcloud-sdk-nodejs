@@ -208,6 +208,16 @@ it("faceid.v20180301.MinorsVerification", async function () {
     }
 })
 
+it("faceid.v20180301.CheckIdNameDate", async function () {
+    try {
+       const data = await client.CheckIdNameDate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.Liveness", async function () {
     try {
        const data = await client.Liveness({})
