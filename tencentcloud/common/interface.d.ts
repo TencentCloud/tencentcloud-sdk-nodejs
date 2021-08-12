@@ -59,6 +59,7 @@ export interface ClientProfile {
          */
         reqTimeout?: number;
     };
+    headers?: any;
     /**
      * api请求时附带的 language 字段
      * @type {"zh-CN" | "en-US"}

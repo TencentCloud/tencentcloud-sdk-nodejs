@@ -266,7 +266,7 @@ export interface DescribeAsyncContextResultResponse {
 /**
  * UploadLog请求参数结构体
  */
-export declare type UploadLogRequest = null;
+// export declare type UploadLogRequest = null;
 /**
  * CreateAsyncContextTask请求参数结构体
  */

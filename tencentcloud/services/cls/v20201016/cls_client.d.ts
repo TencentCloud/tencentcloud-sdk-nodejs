@@ -322,7 +322,7 @@ cls.pb.cc cls.pb.h cls.proto
 
 将生成的 cls.pb.h 头文件引入代码中，调用接口进行数据格式封装。
      */
-    UploadLog(req?: UploadLogRequest, cb?: (error: string, rep: UploadLogResponse) => void): Promise<UploadLogResponse>;
+    UploadLog(req?: any, cb?: (error: string, rep: UploadLogResponse) => void): Promise<UploadLogResponse>;
     /**
      * 本接口用于创建异步上下文任务
      */

@@ -18,7 +18,7 @@ class Sign {
         const hmac = crypto.createHmac(signMethodMap[signMethod], secretKey || "");
         return hmac.update(Buffer.from(signStr, "utf8")).digest("base64");
     }
-    static sign3({ method = "POST", url = "", payload, timestamp, service, secretId, secretKey, multipart, boundary, }) {
+    static sign3({ method = "POST", url = "", payload, timestamp, service, secretId, secretKey, multipart, boundary, isOctetStream = false}) {
         const urlObj = new url_1.URL(url);
         // 通用头部
         let headers = "";
@@ -31,6 +31,9 @@ class Sign {
             signedHeaders = "content-type";
             if (multipart) {
                 headers = `content-type:multipart/form-data; boundary=${boundary}\n`;
+            } 
+            else if (isOctetStream) {
+                headers = "content-type:application/octet-stream\n";
             }
             else {
                 headers = "content-type:application/json\n";
@@ -59,6 +62,8 @@ class Sign {
             }
             hash.update(`--\r\n`);
             payload_hash = hash.digest("hex");
+        } else if (isOctetStream) {
+            payload_hash = payload ? getHash(payload) : getHash("");
         }
         else {
             payload_hash = payload ? getHash(JSON.stringify(payload)) : getHash("");
@@ -88,6 +93,14 @@ class Sign {
         const signature = sha256(StringToSign, kSigning, "hex");
         return `TC3-HMAC-SHA256 Credential=${secretId}/${date}/${service}/tc3_request, SignedHeaders=${signedHeaders}, Signature=${signature}`;
     }
+}
+
+function Uint8ArrayToString(fileData){
+    var dataString = "";
+    for (var i = 0; i < fileData.length; i++) {
+      dataString += String.fromCharCode(fileData[i]);
+    }
+    return dataString  
 }
 exports.default = Sign;
 function sha256(message, secret = "", encoding) {
