@@ -58,6 +58,7 @@ export class HttpConnection {
     token,
     requestClient,
     language,
+    headers,
   }: {
     method: string
     url: string
@@ -73,6 +74,7 @@ export class HttpConnection {
     token: string
     requestClient: string
     language: string
+    headers?: any,
   }): Promise<Response> {
     // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
     // 所以这里把 readStream 转为 Buffer
@@ -130,17 +132,25 @@ export class HttpConnection {
     if (method === "GET") {
       config.headers["Content-Type"] = "application/x-www-form-urlencoded"
     }
-    if (method === "POST" && !multipart) {
-      config.body = JSON.stringify(data)
-      config.headers["Content-Type"] = "application/json"
-    }
-    if (method === "POST" && multipart) {
-      form = new FormData()
-      for (const key in data) {
-        form.append(key, data[key])
+    let isOctetStream = false;
+    if (method === "POST") {
+      if (multipart) {
+        form = new FormData()
+        for (const key in data) {
+          form.append(key, data[key])
+        } 
+        config.body = form
+        config.headers = Object.assign({}, config.headers, form.getHeaders())
+      } else if (headers !== null && headers !== undefined) {
+        config.body = data
+        config.headers = Object.assign({}, config.headers, headers)
+        if (config.headers["Content-Type"] == "application/octet-stream") {
+          isOctetStream = true
+        } else {
+          config.body = JSON.stringify(data);
+          config.headers["Content-Type"] = "application/json";
+        }
       }
-      config.body = form
-      config.headers = Object.assign({}, config.headers, form.getHeaders())
     }
 
     const signature = Sign.sign3({
@@ -153,6 +163,7 @@ export class HttpConnection {
       secretKey,
       multipart,
       boundary: form ? form.getBoundary() : undefined,
+      isOctetStream
     })
 
     config.headers["Authorization"] = signature

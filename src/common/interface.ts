@@ -66,6 +66,12 @@ export interface ClientProfile {
    * 非必选
    */
   language?: "zh-CN" | "en-US"
+  /**
+   * api请求时附带的 language 字段
+   * @type {"zh-CN" | "en-US"}
+   * 非必选
+   */
+  headers?: any
 }
 
 /**

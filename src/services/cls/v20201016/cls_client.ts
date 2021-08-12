@@ -721,7 +721,7 @@ cls.pb.cc cls.pb.h cls.proto
 将生成的 cls.pb.h 头文件引入代码中，调用接口进行数据格式封装。
      */
   async UploadLog(
-    req?: UploadLogRequest,
+    req?: any,
     cb?: (error: string, rep: UploadLogResponse) => void
   ): Promise<UploadLogResponse> {
     return this.request("UploadLog", req, cb)
