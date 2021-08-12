@@ -146,10 +146,10 @@ export class HttpConnection {
         config.headers = Object.assign({}, config.headers, headers)
         if (config.headers["Content-Type"] == "application/octet-stream") {
           isOctetStream = true
-        } else {
-          config.body = JSON.stringify(data);
-          config.headers["Content-Type"] = "application/json";
-        }
+        } 
+      } else {
+        config.body = JSON.stringify(data);
+        config.headers["Content-Type"] = "application/json";
       }
     }
 
