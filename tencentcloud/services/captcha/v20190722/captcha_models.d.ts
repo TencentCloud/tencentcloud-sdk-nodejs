@@ -351,7 +351,7 @@ export interface DescribeCaptchaMiniRiskResultRequest {
       */
     Ticket: string;
     /**
-      * 用户操作来源的外网 IP
+      * 业务侧获取到的验证码使用者的外网IP
       */
     UserIp: string;
     /**
@@ -543,19 +543,19 @@ export interface DescribeCaptchaMiniRiskResultResponse {
 26 system internal error 系统内部错误
 100 param err 参数校验错误
       */
-    CaptchaCode?: number;
+    CaptchaCode: number;
     /**
       * 状态描述及验证错误信息
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CaptchaMsg?: string;
+    CaptchaMsg: string;
     /**
       * 拦截策略返回信息
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ManageMarketingRiskValue?: OutputManageMarketingRiskValue;
+    ManageMarketingRiskValue: OutputManageMarketingRiskValue;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -636,7 +636,7 @@ export interface DescribeCaptchaResultRequest {
       */
     Ticket: string;
     /**
-      * 透传业务侧获取到的验证码使用者的IP
+      * 业务侧获取到的验证码使用者的外网IP
       */
     UserIp: string;
     /**
@@ -687,7 +687,7 @@ export interface DescribeCaptchaResultResponse {
 12 sig len error 签名长度错误
 13 verify ip no match ip不匹配，非法请求，可能存在不规范接入
 15 decrypt fail 验证码签名解密失败，票据校验失败，请检查Ticket票据是否与前端返回Ticket一致
-16 appid no match 验证码强校验appid错误，请检查CaptchaAppId是否为控制台基础配置界面系统分配的APPID
+16 appid no match 验证码强校验appid错误，前端代码 data-appid 和后端 CaptchaAppId 所填写的值，必须和 验证码控制台 中【验证详情】>【基础配置】内的 AppID 一致,请检查CaptchaAppId是否为控制台基础配置界面系统分配的APPID
 17 cmd no much 验证码系统命令不匹配
 18 uin no match 号码不匹配
 19 seq redirect 重定向验证
@@ -698,7 +698,7 @@ export interface DescribeCaptchaResultResponse {
 24 invalid pkg 非法请求包
 25 bad visitor 策略拦截
 26 system busy 系统内部错误
-100 param err appsecretkey 参数校验错误，请检查AppSecretKey是否与控制台基础配置界面系统分配的APPID、AppSecretKey相对应
+100 param err appsecretkey 参数校验错误，CaptchaAppId 与对应 AppSecretKey 不一致，需检查 AppSecretKey 参数是否有误。其中 CaptchaAppId、 AppSecretKey 在 验证码控制台 的【验证详情】>【基础配置】中获取
 104 Ticket Reuse 票据重复使用，同个票据验证多次，请重新生成Randstr、Ticket进行校验
       */
     CaptchaCode: number;
@@ -893,7 +893,7 @@ export interface DescribeCaptchaMiniResultRequest {
       */
     Ticket: string;
     /**
-      * 透传业务侧获取到的验证码使用者的IP
+      * 业务侧获取到的验证码使用者的外网IP
       */
     UserIp: string;
     /**

@@ -28,43 +28,52 @@ import {
   ModifyUserInfoResponse,
   DeleteUserRequest,
   ListAuthorizedApplicationsToOrgNodeResponse,
-  OrgNodeChildInfo,
+  AuthorizationUserResouceInfo,
   SortCondition,
   InheritedForm,
   ListAuthorizedApplicationsToUserRequest,
   DeleteOrgNodeResponse,
   AddUserToUserGroupResponse,
   CreateUserResponse,
+  DescribeUserResourcesAuthorizationResponse,
+  ListUsersInUserGroupResponse,
   ListUsersResponse,
-  ListAuthorizedApplicationsToUserGroupRequest,
-  ListUserGroupsResponse,
+  DescribeOrgNodeRequest,
+  ListUsersInOrgNodeRequest,
+  ListUserGroupsOfUserRequest,
+  ModifyApplicationResponse,
   DescribePublicKeyRequest,
   AuthorizationInfo,
   CreateUserGroupResponse,
+  DescribeUserGroupResourcesAuthorizationRequest,
   DeleteUserResponse,
-  ListUsersInUserGroupResponse,
+  ListAuthorizedApplicationsToUserGroupRequest,
   ListUserGroupsRequest,
   AddUserToUserGroupRequest,
   ApplicationAuthorizationInfo,
   ApplicationInformation,
+  DescribeUserGroupResourcesAuthorizationResponse,
   ListApplicationAuthorizationsResponse,
   DescribeApplicationResponse,
   UserGroupInformation,
-  ApplicationInfoSearchCriteria,
+  ListUserGroupsResponse,
   ListAuthorizedApplicationsToUserResponse,
+  AuthorizationResouceEntityInfo,
   DeleteUserGroupResponse,
-  DescribeApplicationRequest,
+  ApplicationInfoSearchCriteria,
   UpdateOrgNodeRequest,
   AuthorizationInfoSearchCriteria,
+  DescribeOrgResourcesAuthorizationRequest,
   OrgNodeChildUserInfo,
+  ModifyApplicationRequest,
   CreateUserRequest,
   ListUserGroupsOfUserResponse,
   DescribeUserInfoResponse,
   DeleteOrgNodeRequest,
   CreateOrgNodeRequest,
   RemoveUserFromUserGroupRequest,
-  ListUsersInOrgNodeRequest,
   ListAuthorizedApplicationsToUserGroupResponse,
+  DescribeUserResourcesAuthorizationRequest,
   ListUsersRequest,
   UpdateOrgNodeResponse,
   DescribePublicKeyResponse,
@@ -72,13 +81,14 @@ import {
   UserGroupInfoSearchCriteria,
   DescribeUserInfoRequest,
   DescribeUserGroupResponse,
-  ListUserGroupsOfUserRequest,
+  DescribeOrgResourcesAuthorizationResponse,
   UserInformation,
   ListUsersInUserGroupRequest,
   UserInfo,
   ListAuthorizedApplicationsToOrgNodeRequest,
   CreateUserGroupRequest,
-  DescribeOrgNodeRequest,
+  DescribeApplicationRequest,
+  OrgNodeChildInfo,
   ModifyUserInfoRequest,
   ListApplicationsResponse,
   RemoveUserFromUserGroupResponse,
@@ -101,6 +111,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserGroupResponse) => void
   ): Promise<DescribeUserGroupResponse> {
     return this.request("DescribeUserGroup", req, cb)
+  }
+
+  /**
+   * 查询指定机构下的资源授权列表
+   */
+  async DescribeOrgResourcesAuthorization(
+    req: DescribeOrgResourcesAuthorizationRequest,
+    cb?: (error: string, rep: DescribeOrgResourcesAuthorizationResponse) => void
+  ): Promise<DescribeOrgResourcesAuthorizationResponse> {
+    return this.request("DescribeOrgResourcesAuthorization", req, cb)
+  }
+
+  /**
+   * 通过用户名或用户 id 冻结用户
+   */
+  async ModifyUserInfo(
+    req: ModifyUserInfoRequest,
+    cb?: (error: string, rep: ModifyUserInfoResponse) => void
+  ): Promise<ModifyUserInfoResponse> {
+    return this.request("ModifyUserInfo", req, cb)
   }
 
   /**
@@ -144,6 +174,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定用户下的资源授权列表
+   */
+  async DescribeUserResourcesAuthorization(
+    req: DescribeUserResourcesAuthorizationRequest,
+    cb?: (error: string, rep: DescribeUserResourcesAuthorizationResponse) => void
+  ): Promise<DescribeUserResourcesAuthorizationResponse> {
+    return this.request("DescribeUserResourcesAuthorization", req, cb)
+  }
+
+  /**
    * 删除一个用户组
    */
   async DeleteUserGroup(
@@ -154,13 +194,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过用户名或用户 id 冻结用户
+   * 更新一个应用的信息
    */
-  async ModifyUserInfo(
-    req: ModifyUserInfoRequest,
-    cb?: (error: string, rep: ModifyUserInfoResponse) => void
-  ): Promise<ModifyUserInfoResponse> {
-    return this.request("ModifyUserInfo", req, cb)
+  async ModifyApplication(
+    req: ModifyApplicationRequest,
+    cb?: (error: string, rep: ModifyApplicationResponse) => void
+  ): Promise<ModifyApplicationResponse> {
+    return this.request("ModifyApplication", req, cb)
   }
 
   /**
@@ -181,6 +221,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddUserToUserGroupResponse) => void
   ): Promise<AddUserToUserGroupResponse> {
     return this.request("AddUserToUserGroup", req, cb)
+  }
+
+  /**
+   * 查询指定用户组下的资源授权列表
+   */
+  async DescribeUserGroupResourcesAuthorization(
+    req: DescribeUserGroupResourcesAuthorizationRequest,
+    cb?: (error: string, rep: DescribeUserGroupResourcesAuthorizationResponse) => void
+  ): Promise<DescribeUserGroupResourcesAuthorizationResponse> {
+    return this.request("DescribeUserGroupResourcesAuthorization", req, cb)
   }
 
   /**

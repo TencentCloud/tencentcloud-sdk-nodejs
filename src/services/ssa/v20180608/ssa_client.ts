@@ -22,6 +22,7 @@ import {
   DescribeVulListResponse,
   DescribeComplianceAssetListResponse,
   DataCheck,
+  SocProductionItem,
   DescribeCheckConfigAssetListRequest,
   Asset,
   DescribeComplianceListResponse,
@@ -29,6 +30,7 @@ import {
   AggregationObj,
   DescribeCheckConfigDetailResponse,
   DescribeAssetListResponse,
+  VulItem,
   DescribeCheckConfigAssetListResponse,
   DescribeCheckConfigDetailRequest,
   SaDivulgeDataQueryPub,
@@ -36,7 +38,7 @@ import {
   DescribeComplianceDetailResponse,
   DescribeAssetsMappingListResponse,
   Tag,
-  VulItem,
+  SocComplianceItem,
   DescribeComplianceListRequest,
   DescribeVulListRequest,
   DescribeLeakDetectionListRequest,
@@ -48,6 +50,7 @@ import {
   SaDivulgeDataQueryPubResponse,
   Bucket,
   DescribeConfigListRequest,
+  DescribeSocCspmComplianceResponse,
   Filter,
   AssetList,
   DataAssetMapping,
@@ -55,6 +58,7 @@ import {
   DescribeLeakDetectionListResponse,
   DataEvent,
   CheckConfigDetail,
+  SocCheckItem,
   DescribeEventDetailRequest,
   CheckAssetItem,
   SaDivulgeDataQueryPubRequest,
@@ -66,6 +70,8 @@ import {
   DescribeComplianceAssetListRequest,
   DescribeAssetDetailResponse,
   DescribeVulDetailResponse,
+  DescribeSocCspmComplianceRequest,
+  SocComplianceInfoResp,
 } from "./ssa_models"
 
 /**
@@ -165,6 +171,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetsMappingListResponse) => void
   ): Promise<DescribeAssetsMappingListResponse> {
     return this.request("DescribeAssetsMappingList", req, cb)
+  }
+
+  /**
+   * 合规详情项
+   */
+  async DescribeSocCspmCompliance(
+    req?: DescribeSocCspmComplianceRequest,
+    cb?: (error: string, rep: DescribeSocCspmComplianceResponse) => void
+  ): Promise<DescribeSocCspmComplianceResponse> {
+    return this.request("DescribeSocCspmCompliance", req, cb)
   }
 
   /**

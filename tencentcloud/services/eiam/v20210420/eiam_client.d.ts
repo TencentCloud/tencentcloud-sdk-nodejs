@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserGroupRequest, ListApplicationAuthorizationsRequest, DescribeOrgNodeResponse, CreateOrgNodeResponse, ListApplicationsRequest, ListUsersInOrgNodeResponse, ModifyUserInfoResponse, DeleteUserRequest, ListAuthorizedApplicationsToOrgNodeResponse, ListAuthorizedApplicationsToUserRequest, DeleteOrgNodeResponse, AddUserToUserGroupResponse, CreateUserResponse, ListUsersResponse, ListAuthorizedApplicationsToUserGroupRequest, ListUserGroupsResponse, DescribePublicKeyRequest, CreateUserGroupResponse, DeleteUserResponse, ListUsersInUserGroupResponse, ListUserGroupsRequest, AddUserToUserGroupRequest, ListApplicationAuthorizationsResponse, DescribeApplicationResponse, ListAuthorizedApplicationsToUserResponse, DeleteUserGroupResponse, DescribeApplicationRequest, UpdateOrgNodeRequest, CreateUserRequest, ListUserGroupsOfUserResponse, DescribeUserInfoResponse, DeleteOrgNodeRequest, CreateOrgNodeRequest, RemoveUserFromUserGroupRequest, ListUsersInOrgNodeRequest, ListAuthorizedApplicationsToUserGroupResponse, ListUsersRequest, UpdateOrgNodeResponse, DescribePublicKeyResponse, DeleteUserGroupRequest, DescribeUserInfoRequest, DescribeUserGroupResponse, ListUserGroupsOfUserRequest, ListUsersInUserGroupRequest, ListAuthorizedApplicationsToOrgNodeRequest, CreateUserGroupRequest, DescribeOrgNodeRequest, ModifyUserInfoRequest, ListApplicationsResponse, RemoveUserFromUserGroupResponse } from "./eiam_models";
+import { DescribeUserGroupRequest, ListApplicationAuthorizationsRequest, DescribeOrgNodeResponse, CreateOrgNodeResponse, ListApplicationsRequest, ListUsersInOrgNodeResponse, ModifyUserInfoResponse, DeleteUserRequest, ListAuthorizedApplicationsToOrgNodeResponse, ListAuthorizedApplicationsToUserRequest, DeleteOrgNodeResponse, AddUserToUserGroupResponse, CreateUserResponse, DescribeUserResourcesAuthorizationResponse, ListUsersInUserGroupResponse, ListUsersResponse, DescribeOrgNodeRequest, ListUsersInOrgNodeRequest, ListUserGroupsOfUserRequest, ModifyApplicationResponse, DescribePublicKeyRequest, CreateUserGroupResponse, DescribeUserGroupResourcesAuthorizationRequest, DeleteUserResponse, ListAuthorizedApplicationsToUserGroupRequest, ListUserGroupsRequest, AddUserToUserGroupRequest, DescribeUserGroupResourcesAuthorizationResponse, ListApplicationAuthorizationsResponse, DescribeApplicationResponse, ListUserGroupsResponse, ListAuthorizedApplicationsToUserResponse, DeleteUserGroupResponse, UpdateOrgNodeRequest, DescribeOrgResourcesAuthorizationRequest, ModifyApplicationRequest, CreateUserRequest, ListUserGroupsOfUserResponse, DescribeUserInfoResponse, DeleteOrgNodeRequest, CreateOrgNodeRequest, RemoveUserFromUserGroupRequest, ListAuthorizedApplicationsToUserGroupResponse, DescribeUserResourcesAuthorizationRequest, ListUsersRequest, UpdateOrgNodeResponse, DescribePublicKeyResponse, DeleteUserGroupRequest, DescribeUserInfoRequest, DescribeUserGroupResponse, DescribeOrgResourcesAuthorizationResponse, ListUsersInUserGroupRequest, ListAuthorizedApplicationsToOrgNodeRequest, CreateUserGroupRequest, DescribeApplicationRequest, ModifyUserInfoRequest, ListApplicationsResponse, RemoveUserFromUserGroupResponse } from "./eiam_models";
 /**
  * eiam client
  * @class
@@ -11,6 +11,14 @@ export declare class Client extends AbstractClient {
      * 获取用户组信息
      */
     DescribeUserGroup(req: DescribeUserGroupRequest, cb?: (error: string, rep: DescribeUserGroupResponse) => void): Promise<DescribeUserGroupResponse>;
+    /**
+     * 查询指定机构下的资源授权列表
+     */
+    DescribeOrgResourcesAuthorization(req: DescribeOrgResourcesAuthorizationRequest, cb?: (error: string, rep: DescribeOrgResourcesAuthorizationResponse) => void): Promise<DescribeOrgResourcesAuthorizationResponse>;
+    /**
+     * 通过用户名或用户 id 冻结用户
+     */
+    ModifyUserInfo(req: ModifyUserInfoRequest, cb?: (error: string, rep: ModifyUserInfoResponse) => void): Promise<ModifyUserInfoResponse>;
     /**
      * 获取JWT公钥信息。
      */
@@ -28,13 +36,17 @@ export declare class Client extends AbstractClient {
      */
     ListApplicationAuthorizations(req: ListApplicationAuthorizationsRequest, cb?: (error: string, rep: ListApplicationAuthorizationsResponse) => void): Promise<ListApplicationAuthorizationsResponse>;
     /**
+     * 查询指定用户下的资源授权列表
+     */
+    DescribeUserResourcesAuthorization(req: DescribeUserResourcesAuthorizationRequest, cb?: (error: string, rep: DescribeUserResourcesAuthorizationResponse) => void): Promise<DescribeUserResourcesAuthorizationResponse>;
+    /**
      * 删除一个用户组
      */
     DeleteUserGroup(req: DeleteUserGroupRequest, cb?: (error: string, rep: DeleteUserGroupResponse) => void): Promise<DeleteUserGroupResponse>;
     /**
-     * 通过用户名或用户 id 冻结用户
+     * 更新一个应用的信息
      */
-    ModifyUserInfo(req: ModifyUserInfoRequest, cb?: (error: string, rep: ModifyUserInfoResponse) => void): Promise<ModifyUserInfoResponse>;
+    ModifyApplication(req: ModifyApplicationRequest, cb?: (error: string, rep: ModifyApplicationResponse) => void): Promise<ModifyApplicationResponse>;
     /**
      * 获取用户组列表信息（包含查询条件）。
      */
@@ -43,6 +55,10 @@ export declare class Client extends AbstractClient {
      * 加入用户到用户组
      */
     AddUserToUserGroup(req: AddUserToUserGroupRequest, cb?: (error: string, rep: AddUserToUserGroupResponse) => void): Promise<AddUserToUserGroupResponse>;
+    /**
+     * 查询指定用户组下的资源授权列表
+     */
+    DescribeUserGroupResourcesAuthorization(req: DescribeUserGroupResourcesAuthorizationRequest, cb?: (error: string, rep: DescribeUserGroupResourcesAuthorizationResponse) => void): Promise<DescribeUserGroupResourcesAuthorizationResponse>;
     /**
      * 获取用户组中的用户列表
      */

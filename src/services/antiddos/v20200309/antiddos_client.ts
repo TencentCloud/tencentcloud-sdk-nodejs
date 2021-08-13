@@ -37,6 +37,7 @@ import {
   KeyValue,
   DeleteDDoSSpeedLimitConfigRequest,
   CreatePacketFilterConfigResponse,
+  DescribeListWaterPrintConfigRequest,
   CreateL7RuleCertsRequest,
   DeleteDDoSGeoIPBlockConfigRequest,
   CreateIPAlarmThresholdConfigRequest,
@@ -111,6 +112,7 @@ import {
   CreateDefaultAlarmThresholdResponse,
   DescribeListIPAlarmConfigResponse,
   SuccessCode,
+  ProtocolPort,
   DescribeListBGPInstancesResponse,
   DescribeListDDoSAIRequest,
   DescribeListIPAlarmConfigRequest,
@@ -128,25 +130,29 @@ import {
   AssociateDDoSEipAddressRequest,
   AssociateDDoSEipLoadBalancerResponse,
   CreateBlackWhiteIpListRequest,
+  DescribeBizTrendResponse,
   CreateBoundIPResponse,
   SpeedValue,
   SwitchWaterPrintConfigRequest,
   DescribeListSchedulingDomainResponse,
+  DescribeCCTrendResponse,
   CreateSchedulingDomainResponse,
   EipProductInfo,
   CreateDDoSAIResponse,
   DDoSGeoIPBlockConfigRelation,
   DescribeListProtocolBlockConfigRequest,
   RegionInfo,
-  DescribeListWaterPrintConfigRequest,
+  DescribeDDoSTrendRequest,
   ModifyDDoSGeoIPBlockConfigResponse,
   BGPInstance,
+  DescribeBizTrendRequest,
   DescribeListWaterPrintConfigResponse,
   BGPInstanceUsages,
   DeleteDDoSSpeedLimitConfigResponse,
   L7RuleEntry,
   CreateWaterPrintKeyResponse,
   DeleteDDoSGeoIPBlockConfigResponse,
+  DescribeDDoSTrendResponse,
   DescribeListBlackWhiteIpListRequest,
   ModifyDDoSSpeedLimitConfigResponse,
   SchedulingDomainInfo,
@@ -154,6 +160,7 @@ import {
   WaterPrintKey,
   PacketFilterRelation,
   CreatePacketFilterConfigRequest,
+  DescribeCCTrendRequest,
 } from "./antiddos_models"
 
 /**
@@ -216,13 +223,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询与证书ID对于域名匹配的七层规则
+   * 获取业务流量曲线
    */
-  async DescribeL7RulesBySSLCertId(
-    req: DescribeL7RulesBySSLCertIdRequest,
-    cb?: (error: string, rep: DescribeL7RulesBySSLCertIdResponse) => void
-  ): Promise<DescribeL7RulesBySSLCertIdResponse> {
-    return this.request("DescribeL7RulesBySSLCertId", req, cb)
+  async DescribeBizTrend(
+    req: DescribeBizTrendRequest,
+    cb?: (error: string, rep: DescribeBizTrendResponse) => void
+  ): Promise<DescribeBizTrendResponse> {
+    return this.request("DescribeBizTrend", req, cb)
   }
 
   /**
@@ -387,6 +394,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)
+   */
+  async DescribeCCTrend(
+    req: DescribeCCTrendRequest,
+    cb?: (error: string, rep: DescribeCCTrendResponse) => void
+  ): Promise<DescribeCCTrendResponse> {
+    return this.request("DescribeCCTrend", req, cb)
+  }
+
+  /**
    * 设置单IP告警阈值配置
    */
   async CreateIPAlarmThresholdConfig(
@@ -394,6 +411,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateIPAlarmThresholdConfigResponse) => void
   ): Promise<CreateIPAlarmThresholdConfigResponse> {
     return this.request("CreateIPAlarmThresholdConfig", req, cb)
+  }
+
+  /**
+   * 查询与证书ID对于域名匹配的七层规则
+   */
+  async DescribeL7RulesBySSLCertId(
+    req: DescribeL7RulesBySSLCertIdRequest,
+    cb?: (error: string, rep: DescribeL7RulesBySSLCertIdResponse) => void
+  ): Promise<DescribeL7RulesBySSLCertIdResponse> {
+    return this.request("DescribeL7RulesBySSLCertId", req, cb)
   }
 
   /**
@@ -485,6 +512,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyL7RulesEdgeResponse) => void
   ): Promise<ModifyL7RulesEdgeResponse> {
     return this.request("ModifyL7RulesEdge", req, cb)
+  }
+
+  /**
+   * 获取DDoS攻击流量带宽和攻击包速率数据
+   */
+  async DescribeDDoSTrend(
+    req: DescribeDDoSTrendRequest,
+    cb?: (error: string, rep: DescribeDDoSTrendResponse) => void
+  ): Promise<DescribeDDoSTrendResponse> {
+    return this.request("DescribeDDoSTrend", req, cb)
   }
 
   /**

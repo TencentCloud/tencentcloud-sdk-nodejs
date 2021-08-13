@@ -117,6 +117,7 @@ import {
   CreateTeamRequest,
   MaterialBasicInfo,
   ResourceInfo,
+  MediaPreprocessOperation,
   JoinTeamInfo,
   DescribeResourceAuthorizationRequest,
   CreateClassResponse,

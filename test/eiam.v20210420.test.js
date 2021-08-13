@@ -28,6 +28,26 @@ it("eiam.v20210420.DescribeUserGroup", async function () {
     }
 })
 
+it("eiam.v20210420.DescribeOrgResourcesAuthorization", async function () {
+    try {
+       const data = await client.DescribeOrgResourcesAuthorization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.ModifyUserInfo", async function () {
+    try {
+       const data = await client.ModifyUserInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.DescribePublicKey", async function () {
     try {
        const data = await client.DescribePublicKey({})
@@ -68,6 +88,16 @@ it("eiam.v20210420.ListApplicationAuthorizations", async function () {
     }
 })
 
+it("eiam.v20210420.DescribeUserResourcesAuthorization", async function () {
+    try {
+       const data = await client.DescribeUserResourcesAuthorization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.DeleteUserGroup", async function () {
     try {
        const data = await client.DeleteUserGroup({})
@@ -78,9 +108,9 @@ it("eiam.v20210420.DeleteUserGroup", async function () {
     }
 })
 
-it("eiam.v20210420.ModifyUserInfo", async function () {
+it("eiam.v20210420.ModifyApplication", async function () {
     try {
-       const data = await client.ModifyUserInfo({})
+       const data = await client.ModifyApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +131,16 @@ it("eiam.v20210420.ListUserGroups", async function () {
 it("eiam.v20210420.AddUserToUserGroup", async function () {
     try {
        const data = await client.AddUserToUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.DescribeUserGroupResourcesAuthorization", async function () {
+    try {
+       const data = await client.DescribeUserGroupResourcesAuthorization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

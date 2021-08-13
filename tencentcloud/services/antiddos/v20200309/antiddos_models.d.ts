@@ -322,6 +322,27 @@ export interface CreatePacketFilterConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeListWaterPrintConfig请求参数结构体
+ */
+export interface DescribeListWaterPrintConfigRequest {
+    /**
+      * 页起始偏移，取值为(页码-1)*一页条数
+      */
+    Offset: number;
+    /**
+      * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
+      */
+    Limit: number;
+    /**
+      * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
+      */
+    FilterInstanceId: string;
+    /**
+      * IP搜索
+      */
+    FilterIp?: string;
+}
+/**
  * CreateL7RuleCerts请求参数结构体
  */
 export interface CreateL7RuleCertsRequest {
@@ -1613,6 +1634,19 @@ export interface SuccessCode {
     Code: string;
 }
 /**
+ * Protocol、Port参数
+ */
+export interface ProtocolPort {
+    /**
+      * 协议（tcp；udp）
+      */
+    Protocol: string;
+    /**
+      * 端口
+      */
+    Port: number;
+}
+/**
  * DescribeListBGPInstances返回参数结构体
  */
 export interface DescribeListBGPInstancesResponse {
@@ -2022,6 +2056,23 @@ export interface CreateBlackWhiteIpListRequest {
     Type: string;
 }
 /**
+ * DescribeBizTrend返回参数结构体
+ */
+export interface DescribeBizTrendResponse {
+    /**
+      * 曲线图各个时间点的值
+      */
+    DataList: Array<number>;
+    /**
+      * 统计纬度
+      */
+    MetricName: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateBoundIP返回参数结构体
  */
 export interface CreateBoundIPResponse {
@@ -2075,6 +2126,52 @@ export interface DescribeListSchedulingDomainResponse {
       * 调度域名信息列表
       */
     DomainList: Array<SchedulingDomainInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCCTrend返回参数结构体
+ */
+export interface DescribeCCTrendResponse {
+    /**
+      * 值个数
+      */
+    Count: number;
+    /**
+      * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+      */
+    Business: string;
+    /**
+      * 资源的IP
+      */
+    Ip: string;
+    /**
+      * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
+      */
+    Period: number;
+    /**
+      * 统计开始时间
+      */
+    StartTime: string;
+    /**
+      * 统计结束时间
+      */
+    EndTime: string;
+    /**
+      * 值数组
+      */
+    Data: Array<number>;
+    /**
+      * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id: string;
+    /**
+      * 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))]
+      */
+    MetricName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2177,25 +2274,37 @@ export interface RegionInfo {
     Region: string;
 }
 /**
- * DescribeListWaterPrintConfig请求参数结构体
+ * DescribeDDoSTrend请求参数结构体
  */
-export interface DescribeListWaterPrintConfigRequest {
+export interface DescribeDDoSTrendRequest {
     /**
-      * 页起始偏移，取值为(页码-1)*一页条数
+      * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
       */
-    Offset: number;
+    Business: string;
     /**
-      * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
+      * 资源实例的IP
       */
-    Limit: number;
+    Ip: string;
     /**
-      * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
+      * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
       */
-    FilterInstanceId: string;
+    Period: number;
     /**
-      * IP搜索
+      * 统计开始时间
       */
-    FilterIp?: string;
+    StartTime: string;
+    /**
+      * 统计结束时间
+      */
+    EndTime: string;
+    /**
+      * 指标，取值[bps(攻击流量带宽，pps(攻击包速率))]
+      */
+    MetricName: string;
+    /**
+      * 资源实例ID，当Business为basic时，此字段不用填写（因为基础防护没有资源实例）
+      */
+    Id?: string;
 }
 /**
  * ModifyDDoSGeoIPBlockConfig返回参数结构体
@@ -2274,6 +2383,47 @@ export interface BGPInstance {
       * CC防护开关
       */
     CCEnable: number;
+}
+/**
+ * DescribeBizTrend请求参数结构体
+ */
+export interface DescribeBizTrendRequest {
+    /**
+      * 统计方式，可取值max, min, avg, sum, 如统计纬度是流量速率或包量速率，仅可取值max
+      */
+    Statistics: string;
+    /**
+      * 大禹子产品代号（bgpip表示高防IP）
+      */
+    Business: string;
+    /**
+      * 统计周期，可取值300，1800，3600，21600，86400，单位秒
+      */
+    Period: number;
+    /**
+      * 统计开始时间。 例：“2020-09-22 00:00:00”
+      */
+    StartTime: string;
+    /**
+      * 统计结束时间。 例：“2020-09-22 00:00:00”
+      */
+    EndTime: string;
+    /**
+      * 资源实例ID
+      */
+    Id: string;
+    /**
+      * 统计纬度，可取值connum, new_conn, inactive_conn, intraffic, outtraffic, inpkg, outpkg, qps
+      */
+    MetricName: string;
+    /**
+      * 统计纬度为qps时，可选特定域名查询
+      */
+    Domain?: string;
+    /**
+      * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
+      */
+    ProtoInfo?: Array<ProtocolPort>;
 }
 /**
  * DescribeListWaterPrintConfig返回参数结构体
@@ -2424,6 +2574,52 @@ export interface DeleteDDoSGeoIPBlockConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDDoSTrend返回参数结构体
+ */
+export interface DescribeDDoSTrendResponse {
+    /**
+      * 值个数
+      */
+    Count: number;
+    /**
+      * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+      */
+    Business: string;
+    /**
+      * 资源的IP
+      */
+    Ip: string;
+    /**
+      * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
+      */
+    Period: number;
+    /**
+      * 统计开始时间
+      */
+    StartTime: string;
+    /**
+      * 统计结束时间
+      */
+    EndTime: string;
+    /**
+      * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
+      */
+    Data: Array<number>;
+    /**
+      * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id: string;
+    /**
+      * 指标，取值[bps(攻击流量带宽，pps(攻击包速率))]
+      */
+    MetricName: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeListBlackWhiteIpList请求参数结构体
  */
 export interface DescribeListBlackWhiteIpListRequest {
@@ -2564,4 +2760,41 @@ export interface CreatePacketFilterConfigRequest {
       * 特征过滤规则
       */
     PacketFilterConfig: PacketFilterConfig;
+}
+/**
+ * DescribeCCTrend请求参数结构体
+ */
+export interface DescribeCCTrendRequest {
+    /**
+      * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+      */
+    Business: string;
+    /**
+      * 资源的IP
+      */
+    Ip: string;
+    /**
+      * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
+      */
+    Period: number;
+    /**
+      * 统计开始时间
+      */
+    StartTime: string;
+    /**
+      * 统计结束时间
+      */
+    EndTime: string;
+    /**
+      * 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))]
+      */
+    MetricName: string;
+    /**
+      * 域名，可选
+      */
+    Domain?: string;
+    /**
+      * 资源实例ID，当Business为basic时，此字段不用填写（因为基础防护没有资源实例）
+      */
+    Id?: string;
 }

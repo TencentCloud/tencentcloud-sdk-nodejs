@@ -540,6 +540,21 @@ export interface ZoneInfo {
 }
 
 /**
+ * DescribeTopicSubscribeGroup返回参数结构体
+ */
+export interface DescribeTopicSubscribeGroupResponse {
+  /**
+   * 返回结果
+   */
+  Result: TopicSubscribeGroup
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCkafkaZone请求参数结构体
  */
 export type DescribeCkafkaZoneRequest = null
@@ -1129,6 +1144,31 @@ export interface DynamicRetentionTime {
 }
 
 /**
+ * DescribeTopicSubscribeGroup请求参数结构体
+ */
+export interface DescribeTopicSubscribeGroupRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 主题名称
+   */
+  TopicName: string
+
+  /**
+   * 分页时的起始位置
+   */
+  Offset?: number
+
+  /**
+   * 分页时的个数
+   */
+  Limit?: number
+}
+
+/**
  * DescribeRoute请求参数结构体
  */
 export interface DescribeRouteRequest {
@@ -1512,6 +1552,33 @@ export interface TopicDetailResponse {
    * 符合条件的所有主题详情数量
    */
   TotalCount: number
+}
+
+/**
+ * DescribeTopicSubscribeGroup接口出参
+ */
+export interface TopicSubscribeGroup {
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 消费分组状态数量信息
+   */
+  StatusCountInfo: string
+
+  /**
+      * 消费分组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupsInfo: Array<GroupInfoResponse>
+
+  /**
+      * 此次请求是否异步的状态。实例里分组较少的会直接返回结果,Status为1。当分组较多时,会异步更新缓存，Status为0时不会返回分组信息，直至Status为1更新完毕返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
 }
 
 /**

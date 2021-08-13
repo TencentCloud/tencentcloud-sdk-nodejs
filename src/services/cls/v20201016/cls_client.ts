@@ -98,6 +98,7 @@ import {
   ExtractRuleInfo,
   AsyncContextTask,
   DeleteConfigRequest,
+  AnalysisDimensional,
   LogsetInfo,
   RuleTagInfo,
   CreateExportRequest,

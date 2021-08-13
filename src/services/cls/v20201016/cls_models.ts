@@ -110,6 +110,12 @@ export interface AlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CallBack: CallBackInfo
+
+  /**
+      * 多维分析设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Analysis: Array<AnalysisDimensional>
 }
 
 /**
@@ -1128,6 +1134,21 @@ export interface ModifyAlarmRequest {
    * 是否开启告警策略。
    */
   Status?: boolean
+
+  /**
+   * 用户自定义告警内容
+   */
+  MessageTemplate?: string
+
+  /**
+   * 用户自定义回调
+   */
+  CallBack?: CallBackInfo
+
+  /**
+   * 多维分析
+   */
+  Analysis?: Array<AnalysisDimensional>
 }
 
 /**
@@ -1251,6 +1272,21 @@ export interface CreateAlarmRequest {
    * 是否开启告警策略。默认值为true
    */
   Status?: boolean
+
+  /**
+   * 用户自定义告警内容
+   */
+  MessageTemplate?: string
+
+  /**
+   * 用户自定义回调
+   */
+  CallBack?: CallBackInfo
+
+  /**
+   * 多维分析
+   */
+  Analysis?: Array<AnalysisDimensional>
 }
 
 /**
@@ -2053,6 +2089,26 @@ export interface DeleteConfigRequest {
    * 采集规则配置ID
    */
   ConfigId: string
+}
+
+/**
+ * 多维分析的分析维度
+ */
+export interface AnalysisDimensional {
+  /**
+   * 分析名称
+   */
+  Name: string
+
+  /**
+   * 分析类型：query，field
+   */
+  Type: string
+
+  /**
+   * 分析内容
+   */
+  Content: string
 }
 
 /**

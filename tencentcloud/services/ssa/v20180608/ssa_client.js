@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetsMappingList", req, cb);
     }
     /**
+     * 合规详情项
+     */
+    async DescribeSocCspmCompliance(req, cb) {
+        return this.request("DescribeSocCspmCompliance", req, cb);
+    }
+    /**
      * 漏洞管理页，获取漏洞列表
      */
     async DescribeVulList(req, cb) {

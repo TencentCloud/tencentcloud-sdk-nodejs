@@ -68,9 +68,9 @@ it("antiddos.v20200309.ModifyDDoSSpeedLimitConfig", async function () {
     }
 })
 
-it("antiddos.v20200309.DescribeL7RulesBySSLCertId", async function () {
+it("antiddos.v20200309.DescribeBizTrend", async function () {
     try {
-       const data = await client.DescribeL7RulesBySSLCertId({})
+       const data = await client.DescribeBizTrend({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +238,29 @@ it("antiddos.v20200309.DescribeListDDoSAI", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeCCTrend", async function () {
+    try {
+       const data = await client.DescribeCCTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.CreateIPAlarmThresholdConfig", async function () {
     try {
        const data = await client.CreateIPAlarmThresholdConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.DescribeL7RulesBySSLCertId", async function () {
+    try {
+       const data = await client.DescribeL7RulesBySSLCertId({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +351,16 @@ it("antiddos.v20200309.CreateBlackWhiteIpList", async function () {
 it("antiddos.v20200309.ModifyL7RulesEdge", async function () {
     try {
        const data = await client.ModifyL7RulesEdge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.DescribeDDoSTrend", async function () {
+    try {
+       const data = await client.DescribeDDoSTrend({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

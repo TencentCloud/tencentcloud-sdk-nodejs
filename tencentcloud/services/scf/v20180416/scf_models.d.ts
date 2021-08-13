@@ -2278,7 +2278,7 @@ export interface InvokeFunctionRequest {
       */
     FunctionName: string;
     /**
-      * 触发函数的版本号或别名
+      * 触发函数的版本号或别名，默认值为$DEFAULT
       */
     Qualifier?: string;
     /**

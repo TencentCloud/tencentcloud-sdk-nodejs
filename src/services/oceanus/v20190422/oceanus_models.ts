@@ -98,6 +98,11 @@ export interface CreateJobRequest {
    * 作业的备注信息，可以随意设置
    */
   Remark?: string
+
+  /**
+   * 作业名所属文件夹ID，根目录为"root"
+   */
+  FolderId?: string
 }
 
 /**
@@ -147,7 +152,7 @@ export interface CreateJobResponse {
   /**
    * 作业Id
    */
-  JobId?: string
+  JobId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

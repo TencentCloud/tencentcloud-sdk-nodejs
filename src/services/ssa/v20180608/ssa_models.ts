@@ -123,6 +123,29 @@ export interface DataCheck {
 }
 
 /**
+ * soc产品购买信息
+ */
+export interface SocProductionItem {
+  /**
+      * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Index: number
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+}
+
+/**
  * DescribeCheckConfigAssetList请求参数结构体
  */
 export interface DescribeCheckConfigAssetListRequest {
@@ -424,6 +447,181 @@ export interface DescribeAssetListResponse {
 }
 
 /**
+ * 漏洞管理漏洞数据
+ */
+export interface VulItem {
+  /**
+   * 标识
+   */
+  Id: string
+
+  /**
+   * 漏洞名称
+   */
+  VulName: string
+
+  /**
+   * 漏洞类型
+   */
+  Type: number
+
+  /**
+   * 风险等级
+   */
+  Level: number
+
+  /**
+   * 处理状态
+   */
+  Status: number
+
+  /**
+   * 发现时间
+   */
+  Time: string
+
+  /**
+   * 影响资产数
+   */
+  ImpactAssetNum: number
+
+  /**
+   * 影响资产id
+   */
+  ImpactAsset: string
+
+  /**
+   * 影响资产名称
+   */
+  ImpactAssetName: string
+
+  /**
+   * 漏洞描述
+   */
+  VulDetail: string
+
+  /**
+   * 参考链接
+   */
+  VulRefLink: string
+
+  /**
+   * Md5值
+   */
+  OldIdMd5: string
+
+  /**
+   * 漏洞唯一标识
+   */
+  UniqId: string
+
+  /**
+   * 忽略时间
+   */
+  OperateTime: string
+
+  /**
+      * 受影响资产是否下线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAssetDeleted: string
+
+  /**
+   * 漏洞首次发现时间
+   */
+  DiscoverTime: string
+
+  /**
+   * 主机源信息标识符
+   */
+  OriginId: number
+
+  /**
+      * 资产区域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * 资产所属网络
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vpcid: string
+
+  /**
+      * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetType: string
+
+  /**
+      * 资产子类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetSubType: string
+
+  /**
+      * 资产IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetIpAll: Array<string>
+
+  /**
+      * cvm类型的公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicIpAddresses: Array<string>
+
+  /**
+      * cvm类型的内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateIpAddresses: Array<string>
+
+  /**
+      * 漏洞来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulSource: string
+
+  /**
+      * 影响URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AffectedUrl: string
+
+  /**
+      * 资产归属
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SsaAssetCategory: number
+
+  /**
+      * 影响url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulUrl: string
+
+  /**
+      * 是否扫描
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsOpen: boolean
+
+  /**
+      * 御知主机id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  YzHostId: number
+
+  /**
+      * 漏洞描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulRepairPlan: string
+}
+
+/**
  * DescribeCheckConfigAssetList返回参数结构体
  */
 export interface DescribeCheckConfigAssetListResponse {
@@ -606,178 +804,56 @@ export interface Tag {
 }
 
 /**
- * 漏洞管理漏洞数据
+ * soc合规信息
  */
-export interface VulItem {
+export interface SocComplianceItem {
   /**
-   * 标识
-   */
-  Id: string
-
-  /**
-   * 漏洞名称
-   */
-  VulName: string
-
-  /**
-   * 漏洞类型
-   */
-  Type: number
-
-  /**
-   * 风险等级
-   */
-  Level: number
-
-  /**
-   * 处理状态
-   */
-  Status: number
-
-  /**
-   * 发现时间
-   */
-  Time: string
-
-  /**
-   * 影响资产数
-   */
-  ImpactAssetNum: number
-
-  /**
-   * 影响资产id
-   */
-  ImpactAsset: string
-
-  /**
-   * 影响资产名称
-   */
-  ImpactAssetName: string
-
-  /**
-   * 漏洞描述
-   */
-  VulDetail: string
-
-  /**
-   * 参考链接
-   */
-  VulRefLink: string
-
-  /**
-   * Md5值
-   */
-  OldIdMd5: string
-
-  /**
-   * 漏洞唯一标识
-   */
-  UniqId: string
-
-  /**
-   * 忽略时间
-   */
-  OperateTime: string
-
-  /**
-      * 受影响资产是否下线
+      * 唯一id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsAssetDeleted: string
+  Item: string
 
   /**
-   * 漏洞首次发现时间
-   */
-  DiscoverTime: string
-
-  /**
-   * 主机源信息标识符
-   */
-  OriginId: number
-
-  /**
-      * 资产区域
+      * 描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Region: string
+  Description: string
 
   /**
-      * 资产所属网络
+      * 分类
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Vpcid: string
+  StandardItem: string
 
   /**
-      * 资产类型
+      * 结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AssetType: string
+  Result: number
 
   /**
-      * 资产子类型
+      * 建议
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AssetSubType: string
+  Suggestion: string
 
   /**
-      * 资产IP
+      * 产品字符
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AssetIpAll: Array<string>
+  ProStr: string
 
   /**
-      * cvm类型的公网ip
+      * 产品数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PublicIpAddresses: Array<string>
+  Production: Array<SocProductionItem>
 
   /**
-      * cvm类型的内网ip
+      * 配置项数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PrivateIpAddresses: Array<string>
-
-  /**
-      * 漏洞来源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulSource: string
-
-  /**
-      * 影响URL
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AffectedUrl: string
-
-  /**
-      * 资产归属
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SsaAssetCategory: number
-
-  /**
-      * 影响url
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulUrl: string
-
-  /**
-      * 是否扫描
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsOpen: boolean
-
-  /**
-      * 御知主机id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  YzHostId: number
-
-  /**
-      * 漏洞描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VulRepairPlan: string
+  CheckItems: Array<SocCheckItem>
 }
 
 /**
@@ -1090,6 +1166,22 @@ export interface DescribeConfigListRequest {
    * 搜索过滤条件
    */
   Filter?: string
+}
+
+/**
+ * DescribeSocCspmCompliance返回参数结构体
+ */
+export interface DescribeSocCspmComplianceResponse {
+  /**
+      * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: SocComplianceInfoResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1552,6 +1644,35 @@ export interface CheckConfigDetail {
    * 是否忽略
    */
   IsIgnore: number
+}
+
+/**
+ * SocCheckItem类型
+ */
+export interface SocCheckItem {
+  /**
+      * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LevelId: string
+
+  /**
+      * 成功数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuccessCount: number
+
+  /**
+      * 失败数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailCount: number
 }
 
 /**
@@ -2297,4 +2418,20 @@ export interface DescribeVulDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSocCspmCompliance请求参数结构体
+ */
+export type DescribeSocCspmComplianceRequest = null
+
+/**
+ * 返回结构
+ */
+export interface SocComplianceInfoResp {
+  /**
+      * 合格项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Items: Array<SocComplianceItem>
 }

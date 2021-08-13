@@ -215,44 +215,34 @@ export interface ListAuthorizedApplicationsToOrgNodeResponse {
     RequestId?: string;
 }
 /**
- * 当前机构节点下的子节点列表
+ * 返回符合条件的用户数据列表
  */
-export interface OrgNodeChildInfo {
+export interface AuthorizationUserResouceInfo {
     /**
-      * 机构节点展示名称，长度限制：64个字符。 默认与机构名相同。
+      * 资源ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DisplayName: string;
+    ResourceId: string;
     /**
-      * 机构节点最后修改时间，符合 ISO8601 标准。
+      * 资源类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LastModifiedDate: string;
+    ResourceType: string;
     /**
-      * 用户自定义可选填的机构节点对外ID。
+      * 授权资源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CustomizedOrgNodeId: string;
+    Resource: string;
     /**
-      * 当前机构节点的父节点ID。
+      * 继承关系
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ParentOrgNodeId: string;
+    InheritedForm: InheritedForm;
     /**
-      * 机构节点ID，是机构节点的全局唯一标识。
+      * 应用账户
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OrgNodeId: string;
-    /**
-      * 数据来源。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DataSource: string;
-    /**
-      * 机构节点创建时间，符合 ISO8601 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedDate: string;
+    ApplicationAccounts: Array<string>;
 }
 /**
  * 排序条件。
@@ -328,6 +318,63 @@ export interface CreateUserResponse {
     RequestId?: string;
 }
 /**
+ * DescribeUserResourcesAuthorization返回参数结构体
+ */
+export interface DescribeUserResourcesAuthorizationResponse {
+    /**
+      * 应用的唯一ID。
+      */
+    ApplicationId: string;
+    /**
+      * 应用账户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationAccounts: Array<string>;
+    /**
+      * 授权用户的唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId: string;
+    /**
+      * 授权的用户名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserName: string;
+    /**
+      * 返回的资源列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthorizationUserResourceList: Array<AuthorizationUserResouceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ListUsersInUserGroup返回参数结构体
+ */
+export interface ListUsersInUserGroupResponse {
+    /**
+      * 用户组ID，是用户组的全局唯一标识。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserGroupId: string;
+    /**
+      * 返回的用户信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserInfo: Array<UserInfo>;
+    /**
+      * 返回的用户信息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalNum: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ListUsers返回参数结构体
  */
 export interface ListUsersResponse {
@@ -347,28 +394,44 @@ export interface ListUsersResponse {
     RequestId?: string;
 }
 /**
- * ListAuthorizedApplicationsToUserGroup请求参数结构体
+ * DescribeOrgNode请求参数结构体
  */
-export interface ListAuthorizedApplicationsToUserGroupRequest {
+export interface DescribeOrgNodeRequest {
     /**
-      * 用户组 Id 。
+      * 机构节点ID，是机构节点全局唯一标识，长度限制：64个字符。如果为空默认读取机构根节点信息。
       */
-    UserGroupId: string;
+    OrgNodeId?: string;
+    /**
+      * 是否读取其子节点信息。当其为空或false时，默认仅读取当前机构节点信息。当其为true时，读取本机构节点以及其第一层子节点信息。
+      */
+    IncludeOrgNodeChildInfo?: boolean;
 }
 /**
- * ListUserGroups返回参数结构体
+ * ListUsersInOrgNode请求参数结构体
  */
-export interface ListUserGroupsResponse {
+export interface ListUsersInOrgNodeRequest {
     /**
-      * 返回的用户组列表。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 机构节点ID，是机构节点全局唯一标识，长度限制：64个字符。如果为空默认读取机构根节点下用户信息。
       */
-    UserGroupList: Array<UserGroupInformation>;
+    OrgNodeId?: string;
     /**
-      * 返回的用户组信息总数。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 是否读取其子节点信息。当其为空或false时，默认仅读取当前机构节点信息。当其为true时，读取本机构节点以及其第一层子节点信息。
       */
-    TotalCount: number;
+    IncludeOrgNodeChildInfo?: boolean;
+}
+/**
+ * ListUserGroupsOfUser请求参数结构体
+ */
+export interface ListUserGroupsOfUserRequest {
+    /**
+      * 用户ID，是用户的全局唯一标识。
+      */
+    UserId: string;
+}
+/**
+ * ModifyApplication返回参数结构体
+ */
+export interface ModifyApplicationResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -427,6 +490,19 @@ export interface CreateUserGroupResponse {
     RequestId?: string;
 }
 /**
+ * DescribeUserGroupResourcesAuthorization请求参数结构体
+ */
+export interface DescribeUserGroupResourcesAuthorizationRequest {
+    /**
+      * 应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 用户组ID
+      */
+    UserGroupId: string;
+}
+/**
  * DeleteUser返回参数结构体
  */
 export interface DeleteUserResponse {
@@ -436,28 +512,13 @@ export interface DeleteUserResponse {
     RequestId?: string;
 }
 /**
- * ListUsersInUserGroup返回参数结构体
+ * ListAuthorizedApplicationsToUserGroup请求参数结构体
  */
-export interface ListUsersInUserGroupResponse {
+export interface ListAuthorizedApplicationsToUserGroupRequest {
     /**
-      * 用户组ID，是用户组的全局唯一标识。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 用户组 Id 。
       */
     UserGroupId: string;
-    /**
-      * 返回的用户信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserInfo: Array<UserInfo>;
-    /**
-      * 返回的用户信息总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalNum: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * ListUserGroups请求参数结构体
@@ -558,6 +619,35 @@ export interface ApplicationInformation {
     ClientId: string;
 }
 /**
+ * DescribeUserGroupResourcesAuthorization返回参数结构体
+ */
+export interface DescribeUserGroupResourcesAuthorizationResponse {
+    /**
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationId: string;
+    /**
+      * 用户组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserGroupId: string;
+    /**
+      * 用户组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserGroupName: string;
+    /**
+      * 资源列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthorizationUserGroupResourceList: Array<AuthorizationResouceEntityInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ListApplicationAuthorizations返回参数结构体
  */
 export interface ListApplicationAuthorizationsResponse {
@@ -636,6 +726,26 @@ export interface DescribeApplicationResponse {
       */
     AuthorizeUrl: string;
     /**
+      * 应用图标图片访问地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IconUrl: string;
+    /**
+      * 安全等级。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecureLevel: string;
+    /**
+      * 应用状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppStatus: boolean;
+    /**
+      * 描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -659,17 +769,23 @@ export interface UserGroupInformation {
     LastModifiedDate: string;
 }
 /**
- * 应用属性搜索条件。
+ * ListUserGroups返回参数结构体
  */
-export interface ApplicationInfoSearchCriteria {
+export interface ListUserGroupsResponse {
     /**
-      * 应用匹配搜索关键字，匹配范围包括：应用名称、应用ID。
+      * 返回的用户组列表。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Keyword?: string;
+    UserGroupList: Array<UserGroupInformation>;
     /**
-      * 应用类型。ApplicationType的取值范围有：OAUTH2、JWT、CAS、SAML2、FORM、OIDC、APIGW。
+      * 返回的用户组信息总数。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationType?: string;
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ListAuthorizedApplicationsToUser返回参数结构体
@@ -686,6 +802,26 @@ export interface ListAuthorizedApplicationsToUserResponse {
     RequestId?: string;
 }
 /**
+ * 授权资源详情
+ */
+export interface AuthorizationResouceEntityInfo {
+    /**
+      * 授权关系的唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId: string;
+    /**
+      * 资源授权类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceType: string;
+    /**
+      * 授权的资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource: string;
+}
+/**
  * DeleteUserGroup返回参数结构体
  */
 export interface DeleteUserGroupResponse {
@@ -695,17 +831,17 @@ export interface DeleteUserGroupResponse {
     RequestId?: string;
 }
 /**
- * DescribeApplication请求参数结构体
+ * 应用属性搜索条件。
  */
-export interface DescribeApplicationRequest {
+export interface ApplicationInfoSearchCriteria {
     /**
-      * 应用id，是应用的全局唯一标识，与ClientId参数不能同时为空。
+      * 应用匹配搜索关键字，匹配范围包括：应用名称、应用ID。
       */
-    ApplicationId?: string;
+    Keyword?: string;
     /**
-      * 客户端id，与ApplicationId参数不能同时为空。
+      * 应用类型。ApplicationType的取值范围有：OAUTH2、JWT、CAS、SAML2、FORM、OIDC、APIGW。
       */
-    ClientId?: string;
+    ApplicationType?: string;
 }
 /**
  * UpdateOrgNode请求参数结构体
@@ -739,6 +875,19 @@ export interface AuthorizationInfoSearchCriteria {
     Keyword?: string;
 }
 /**
+ * DescribeOrgResourcesAuthorization请求参数结构体
+ */
+export interface DescribeOrgResourcesAuthorizationRequest {
+    /**
+      * 应用ID
+      */
+    ApplicationId: string;
+    /**
+      * 机构ID
+      */
+    OrgNodeId: string;
+}
+/**
  * 机构子节点下的用户信息列表
  */
 export interface OrgNodeChildUserInfo {
@@ -757,6 +906,35 @@ export interface OrgNodeChildUserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TotalUserNum: number;
+}
+/**
+ * ModifyApplication请求参数结构体
+ */
+export interface ModifyApplicationRequest {
+    /**
+      * 应用ID，是应用的全局唯一标识。
+      */
+    ApplicationId: string;
+    /**
+      * 安全级别。
+      */
+    SecureLevel?: string;
+    /**
+      * 应用展示名称，长度限制：32个字符。 默认与应用名字相同。
+      */
+    DisplayName?: string;
+    /**
+      * 应用状态
+      */
+    AppStatus?: boolean;
+    /**
+      * 应用图标图片访问地址。
+      */
+    IconUrl?: string;
+    /**
+      * 描述。长度不超过128。
+      */
+    Description?: string;
 }
 /**
  * CreateUser请求参数结构体
@@ -935,19 +1113,6 @@ export interface RemoveUserFromUserGroupRequest {
     UserGroupId: string;
 }
 /**
- * ListUsersInOrgNode请求参数结构体
- */
-export interface ListUsersInOrgNodeRequest {
-    /**
-      * 机构节点ID，是机构节点全局唯一标识，长度限制：64个字符。如果为空默认读取机构根节点下用户信息。
-      */
-    OrgNodeId?: string;
-    /**
-      * 是否读取其子节点信息。当其为空或false时，默认仅读取当前机构节点信息。当其为true时，读取本机构节点以及其第一层子节点信息。
-      */
-    IncludeOrgNodeChildInfo?: boolean;
-}
-/**
  * ListAuthorizedApplicationsToUserGroup返回参数结构体
  */
 export interface ListAuthorizedApplicationsToUserGroupResponse {
@@ -960,6 +1125,27 @@ export interface ListAuthorizedApplicationsToUserGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeUserResourcesAuthorization请求参数结构体
+ */
+export interface DescribeUserResourcesAuthorizationRequest {
+    /**
+      * 应用ID。
+      */
+    ApplicationId: string;
+    /**
+      * 用户ID。
+      */
+    UserId: string;
+    /**
+      * 用户名。
+      */
+    UserName?: string;
+    /**
+      * 查询范围是否包括用户关联的用户组、组织机构的应用访问权限。默认为不查询 ，传false表示不查询该范围，传true查询该范围。
+      */
+    IncludeInheritedAuthorizations?: boolean;
 }
 /**
  * ListUsers请求参数结构体
@@ -1079,13 +1265,37 @@ export interface DescribeUserGroupResponse {
     RequestId?: string;
 }
 /**
- * ListUserGroupsOfUser请求参数结构体
+ * DescribeOrgResourcesAuthorization返回参数结构体
  */
-export interface ListUserGroupsOfUserRequest {
+export interface DescribeOrgResourcesAuthorizationResponse {
     /**
-      * 用户ID，是用户的全局唯一标识。
+      * 应用ID
       */
-    UserId: string;
+    ApplicationId: string;
+    /**
+      * 授权机构ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgNodeId: string;
+    /**
+      * 机构名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgNodeName: string;
+    /**
+      * 机构目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgNodePath: string;
+    /**
+      * 资源列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthorizationOrgResourceList: Array<AuthorizationResouceEntityInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 用户信息列表。
@@ -1199,17 +1409,57 @@ export interface CreateUserGroupRequest {
     Description?: string;
 }
 /**
- * DescribeOrgNode请求参数结构体
+ * DescribeApplication请求参数结构体
  */
-export interface DescribeOrgNodeRequest {
+export interface DescribeApplicationRequest {
     /**
-      * 机构节点ID，是机构节点全局唯一标识，长度限制：64个字符。如果为空默认读取机构根节点信息。
+      * 应用id，是应用的全局唯一标识，与ClientId参数不能同时为空。
       */
-    OrgNodeId?: string;
+    ApplicationId?: string;
     /**
-      * 是否读取其子节点信息。当其为空或false时，默认仅读取当前机构节点信息。当其为true时，读取本机构节点以及其第一层子节点信息。
+      * 客户端id，与ApplicationId参数不能同时为空。
       */
-    IncludeOrgNodeChildInfo?: boolean;
+    ClientId?: string;
+}
+/**
+ * 当前机构节点下的子节点列表
+ */
+export interface OrgNodeChildInfo {
+    /**
+      * 机构节点展示名称，长度限制：64个字符。 默认与机构名相同。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisplayName: string;
+    /**
+      * 机构节点最后修改时间，符合 ISO8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastModifiedDate: string;
+    /**
+      * 用户自定义可选填的机构节点对外ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomizedOrgNodeId: string;
+    /**
+      * 当前机构节点的父节点ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParentOrgNodeId: string;
+    /**
+      * 机构节点ID，是机构节点的全局唯一标识。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgNodeId: string;
+    /**
+      * 数据来源。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataSource: string;
+    /**
+      * 机构节点创建时间，符合 ISO8601 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedDate: string;
 }
 /**
  * ModifyUserInfo请求参数结构体

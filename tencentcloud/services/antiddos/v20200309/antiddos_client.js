@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDDoSSpeedLimitConfig", req, cb);
     }
     /**
-     * 查询与证书ID对于域名匹配的七层规则
+     * 获取业务流量曲线
      */
-    async DescribeL7RulesBySSLCertId(req, cb) {
-        return this.request("DescribeL7RulesBySSLCertId", req, cb);
+    async DescribeBizTrend(req, cb) {
+        return this.request("DescribeBizTrend", req, cb);
     }
     /**
      * 删除DDoS防护的区域封禁配置
@@ -161,10 +161,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListDDoSAI", req, cb);
     }
     /**
+     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)
+     */
+    async DescribeCCTrend(req, cb) {
+        return this.request("DescribeCCTrend", req, cb);
+    }
+    /**
      * 设置单IP告警阈值配置
      */
     async CreateIPAlarmThresholdConfig(req, cb) {
         return this.request("CreateIPAlarmThresholdConfig", req, cb);
+    }
+    /**
+     * 查询与证书ID对于域名匹配的七层规则
+     */
+    async DescribeL7RulesBySSLCertId(req, cb) {
+        return this.request("DescribeL7RulesBySSLCertId", req, cb);
     }
     /**
      * 获取DDoS防护的特征过滤规则列表
@@ -220,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyL7RulesEdge(req, cb) {
         return this.request("ModifyL7RulesEdge", req, cb);
+    }
+    /**
+     * 获取DDoS攻击流量带宽和攻击包速率数据
+     */
+    async DescribeDDoSTrend(req, cb) {
+        return this.request("DescribeDDoSTrend", req, cb);
     }
     /**
      * 删除DDoS防护的IP黑白名单

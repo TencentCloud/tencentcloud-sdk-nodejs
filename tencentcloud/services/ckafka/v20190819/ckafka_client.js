@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeConsumerGroup", req, cb);
     }
     /**
+     * 查询订阅某主题消息分组信息
+     */
+    async DescribeTopicSubscribeGroup(req, cb) {
+        return this.request("DescribeTopicSubscribeGroup", req, cb);
+    }
+    /**
      * 本接口用于修改主题属性。
      */
     async ModifyTopicAttributes(req, cb) {

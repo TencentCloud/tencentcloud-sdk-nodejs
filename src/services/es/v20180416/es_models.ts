@@ -885,6 +885,18 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KibanaNodeInfo: KibanaNodeInfo
+
+  /**
+      * 可视化节点配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WebNodeTypeInfo: WebNodeTypeInfo
+
+  /**
+      * JDK类型，oracle或kona
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Jdk: string
 }
 
 /**
@@ -980,6 +992,11 @@ export interface RestartInstanceRequest {
    * 是否强制重启<li>true：强制重启</li><li>false：不强制重启</li>默认false
    */
   ForceRestart?: boolean
+
+  /**
+   * 重启模式：0 滚动重启； 1 全量重启
+   */
+  RestartMode?: number
 }
 
 /**
@@ -1196,6 +1213,11 @@ export interface UpdateInstanceRequest {
    * Kibana配置项（JSON格式字符串）
    */
   KibanaConfig?: string
+
+  /**
+   * 可视化节点配置
+   */
+  WebNodeTypeInfo?: WebNodeTypeInfo
 }
 
 /**

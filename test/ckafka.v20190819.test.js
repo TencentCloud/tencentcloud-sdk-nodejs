@@ -48,6 +48,16 @@ it("ckafka.v20190819.DescribeConsumerGroup", async function () {
     }
 })
 
+it("ckafka.v20190819.DescribeTopicSubscribeGroup", async function () {
+    try {
+       const data = await client.DescribeTopicSubscribeGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.ModifyTopicAttributes", async function () {
     try {
        const data = await client.ModifyTopicAttributes({})

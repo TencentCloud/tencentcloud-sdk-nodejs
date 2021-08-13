@@ -2192,6 +2192,21 @@ export interface ResourceInfo {
     Owner: Entity;
 }
 /**
+ * 媒体处理视频合成任务的预处理操作。
+ */
+export interface MediaPreprocessOperation {
+    /**
+      * 预处理操作的类型，取值范围：
+<li>ImageTextMask：图片文字遮罩。</li>
+      */
+    Type: string;
+    /**
+      * 预处理操作参数。
+当 Type 取值 ImageTextMask 时，参数为要保留的文字。
+      */
+    Args?: Array<string>;
+}
+/**
  * 加入的团队信息
  */
 export interface JoinTeamInfo {
@@ -2204,7 +2219,7 @@ export interface JoinTeamInfo {
       */
     Name: string;
     /**
-      * 团队成员个数
+      * 团队成员个数。
       */
     MemberCount: number;
     /**
@@ -2274,13 +2289,33 @@ export interface SlotInfo {
  */
 export interface MediaReplacementInfo {
     /**
-      * 素材 ID。
+      * 替换的媒体类型，取值有：
+<li>CMEMaterialId：替换的媒体类型为媒体 ID；</li>
+<li>ImageUrl：替换的媒体类型为图片 URL；</li>
+
+注：默认为 CMEMaterialId 。
       */
-    MaterialId: string;
+    MediaType?: string;
+    /**
+      * 媒体 ID。
+当媒体类型取值为 CMEMaterialId 时有效。
+      */
+    MaterialId?: string;
+    /**
+      * 媒体 URL。
+当媒体类型取值为 ImageUrl 时有效，
+图片仅支持 jpg、png 格式，且大小不超过 2M 。
+      */
+    MediaUrl?: string;
     /**
       * 替换媒体选取的开始时间，单位为秒，默认为 0。
       */
     StartTimeOffset?: number;
+    /**
+      * 预处理操作。
+注：目前该功能暂不支持，请勿使用。
+      */
+    PreprocessOperation?: MediaPreprocessOperation;
 }
 /**
  * 任务基础信息。

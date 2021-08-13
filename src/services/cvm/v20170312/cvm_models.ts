@@ -2207,7 +2207,7 @@ export interface Instance {
   SystemDisk?: SystemDisk
 
   /**
-   * 实例数据盘信息。只包含随实例购买的数据盘。
+   * 实例数据盘信息。
    */
   DataDisks?: Array<DataDisk>
 
@@ -2336,6 +2336,12 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RdmaIpAddresses: Array<string>
+
+  /**
+      * 实例隔离类型。取值范围：<br><li>ARREAR：表示欠费隔离<br></li><li>EXPIRE：表示到期隔离<br></li><li>MANMADE：表示主动退还隔离<br></li><li>NOTISOLATED：表示未隔离<br></li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolatedSource: string
 }
 
 /**

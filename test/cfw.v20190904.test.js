@@ -18,9 +18,29 @@ const client = new tencentcloud.cfw.v20190904.Client({
 })
 describe("cfw.v20190904.test.js", function () {
 
+it("cfw.v20190904.DescribeNatFwInfoCount", async function () {
+    try {
+       const data = await client.DescribeNatFwInfoCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeNatRuleOverview", async function () {
     try {
        const data = await client.DescribeNatRuleOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.StopSecurityGroupRuleDispatch", async function () {
+    try {
+       const data = await client.StopSecurityGroupRuleDispatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +58,39 @@ it("cfw.v20190904.ModifyTableStatus", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeNatFwVpcDnsLst", async function () {
+    try {
+       const data = await client.DescribeNatFwVpcDnsLst({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyAllPublicIPSwitchStatus", async function () {
+    try {
+       const data = await client.ModifyAllPublicIPSwitchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeAssociatedInstanceList", async function () {
     try {
        const data = await client.DescribeAssociatedInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateChooseVpcs", async function () {
+    try {
+       const data = await client.CreateChooseVpcs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,6 +118,16 @@ it("cfw.v20190904.DeleteAcRule", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyResourceGroup", async function () {
+    try {
+       const data = await client.ModifyResourceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.CreateSecurityGroupApiRules", async function () {
     try {
        const data = await client.CreateSecurityGroupApiRules({})
@@ -78,9 +138,9 @@ it("cfw.v20190904.CreateSecurityGroupApiRules", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeSyncAssetStatus", async function () {
+it("cfw.v20190904.DeleteAllAccessControlRule", async function () {
     try {
-       const data = await client.DescribeSyncAssetStatus({})
+       const data = await client.DeleteAllAccessControlRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +151,46 @@ it("cfw.v20190904.DescribeSyncAssetStatus", async function () {
 it("cfw.v20190904.DescribeSecurityGroupList", async function () {
     try {
        const data = await client.DescribeSecurityGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifySecurityGroupRule", async function () {
+    try {
+       const data = await client.ModifySecurityGroupRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeNatFwInstance", async function () {
+    try {
+       const data = await client.DescribeNatFwInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyAssetScan", async function () {
+    try {
+       const data = await client.ModifyAssetScan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeSwitchLists", async function () {
+    try {
+       const data = await client.DescribeSwitchLists({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +228,19 @@ it("cfw.v20190904.ModifySecurityGroupAllRuleStatus", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeSwitchLists", async function () {
+it("cfw.v20190904.DescribeAcLists", async function () {
     try {
-       const data = await client.DescribeSwitchLists({})
+       const data = await client.DescribeAcLists({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateSecurityGroupRules", async function () {
+    try {
+       const data = await client.CreateSecurityGroupRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +268,49 @@ it("cfw.v20190904.DescribeTLogInfo", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyNatFwVpcDnsSwitch", async function () {
+    try {
+       const data = await client.ModifyNatFwVpcDnsSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyVPCSwitchStatus", async function () {
+    try {
+       const data = await client.ModifyVPCSwitchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyAllVPCSwitchStatus", async function () {
+    try {
+       const data = await client.ModifyAllVPCSwitchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
     try {
        const data = await client.ModifyBlockIgnoreList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DeleteVpcInstance", async function () {
+    try {
+       const data = await client.DeleteVpcInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +338,9 @@ it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
     }
 })
 
-it("cfw.v20190904.ModifySequenceRules", async function () {
+it("cfw.v20190904.DescribeSourceAsset", async function () {
     try {
-       const data = await client.ModifySequenceRules({})
+       const data = await client.DescribeSourceAsset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +348,19 @@ it("cfw.v20190904.ModifySequenceRules", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyAllSwitchStatus", async function () {
+it("cfw.v20190904.DeleteResourceGroup", async function () {
     try {
-       const data = await client.ModifyAllSwitchStatus({})
+       const data = await client.DeleteResourceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateNatFwInstance", async function () {
+    try {
+       const data = await client.CreateNatFwInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,6 +388,26 @@ it("cfw.v20190904.ModifyAllRuleStatus", async function () {
     }
 })
 
+it("cfw.v20190904.ModifySequenceRules", async function () {
+    try {
+       const data = await client.ModifySequenceRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.SetNatFwEip", async function () {
+    try {
+       const data = await client.SetNatFwEip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyBlockTop", async function () {
     try {
        const data = await client.ModifyBlockTop({})
@@ -241,6 +421,46 @@ it("cfw.v20190904.ModifyBlockTop", async function () {
 it("cfw.v20190904.DescribeTableStatus", async function () {
     try {
        const data = await client.DescribeTableStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeNatFwInstancesInfo", async function () {
+    try {
+       const data = await client.DescribeNatFwInstancesInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyNatFwReSelect", async function () {
+    try {
+       const data = await client.ModifyNatFwReSelect({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeResourceGroup", async function () {
+    try {
+       const data = await client.DescribeResourceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeBlockStaticList", async function () {
+    try {
+       const data = await client.DescribeBlockStaticList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +508,26 @@ it("cfw.v20190904.DeleteSecurityGroupRule", async function () {
     }
 })
 
+it("cfw.v20190904.ModifySecurityGroupSequenceRules", async function () {
+    try {
+       const data = await client.ModifySecurityGroupSequenceRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyNatFwSwitch", async function () {
+    try {
+       const data = await client.ModifyNatFwSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeTLogIpList", async function () {
     try {
        const data = await client.DescribeTLogIpList({})
@@ -298,9 +538,9 @@ it("cfw.v20190904.DescribeTLogIpList", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeAcLists", async function () {
+it("cfw.v20190904.ModifySecurityGroupItemRuleStatus", async function () {
     try {
-       const data = await client.DescribeAcLists({})
+       const data = await client.ModifySecurityGroupItemRuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +548,39 @@ it("cfw.v20190904.DescribeAcLists", async function () {
     }
 })
 
-it("cfw.v20190904.DeleteAllAccessControlRule", async function () {
+it("cfw.v20190904.ModifyAllSwitchStatus", async function () {
     try {
-       const data = await client.DeleteAllAccessControlRule({})
+       const data = await client.ModifyAllSwitchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DeleteNatFwInstance", async function () {
+    try {
+       const data = await client.DeleteNatFwInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyPublicIPSwitchStatus", async function () {
+    try {
+       const data = await client.ModifyPublicIPSwitchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeSyncAssetStatus", async function () {
+    try {
+       const data = await client.DescribeSyncAssetStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +608,9 @@ it("cfw.v20190904.DescribeBlockByIpTimesList", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeBlockStaticList", async function () {
+it("cfw.v20190904.DescribeNatFwInstanceWithRegion", async function () {
     try {
-       const data = await client.DescribeBlockStaticList({})
+       const data = await client.DescribeNatFwInstanceWithRegion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

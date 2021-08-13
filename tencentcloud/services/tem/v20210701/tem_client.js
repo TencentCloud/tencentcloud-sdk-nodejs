@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("tem.tencentcloudapi.com", "2021-07-01", clientConfig);
     }
     /**
-     * 回滚分批发布
+     * 应用部署
      */
-    async RevertDeployApplication(req, cb) {
-        return this.request("RevertDeployApplication", req, cb);
+    async DeployApplication(req, cb) {
+        return this.request("DeployApplication", req, cb);
+    }
+    /**
+     * 重启应用实例
+     */
+    async RestartApplicationPod(req, cb) {
+        return this.request("RestartApplicationPod", req, cb);
     }
     /**
      * 获取分批发布详情
@@ -40,10 +46,100 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeployApplicationDetail", req, cb);
     }
     /**
+     * 创建环境
+     */
+    async CreateEnvironment(req, cb) {
+        return this.request("CreateEnvironment", req, cb);
+    }
+    /**
+     * 创建或者更新 Ingress 规则
+     */
+    async ModifyIngress(req, cb) {
+        return this.request("ModifyIngress", req, cb);
+    }
+    /**
+     * 编辑环境
+     */
+    async ModifyEnvironment(req, cb) {
+        return this.request("ModifyEnvironment", req, cb);
+    }
+    /**
+     * 获取租户环境列表
+     */
+    async DescribeEnvironments(req, cb) {
+        return this.request("DescribeEnvironments", req, cb);
+    }
+    /**
+     * 生成Cos临时秘钥
+     */
+    async CreateCosToken(req, cb) {
+        return this.request("CreateCosToken", req, cb);
+    }
+    /**
+     * 查询 Ingress 规则
+     */
+    async DescribeIngress(req, cb) {
+        return this.request("DescribeIngress", req, cb);
+    }
+    /**
+     * 回滚分批发布
+     */
+    async RevertDeployApplication(req, cb) {
+        return this.request("RevertDeployApplication", req, cb);
+    }
+    /**
+     * 查询应用关联的 Ingress 规则列表
+     */
+    async DescribeRelatedIngresses(req, cb) {
+        return this.request("DescribeRelatedIngresses", req, cb);
+    }
+    /**
+     * 生成应用程序包预签名下载链接
+     */
+    async GenerateApplicationPackageDownloadUrl(req, cb) {
+        return this.request("GenerateApplicationPackageDownloadUrl", req, cb);
+    }
+    /**
+     * 获取应用实例列表
+     */
+    async DescribeApplicationPods(req, cb) {
+        return this.request("DescribeApplicationPods", req, cb);
+    }
+    /**
+     * 绑定云资源
+     */
+    async CreateResource(req, cb) {
+        return this.request("CreateResource", req, cb);
+    }
+    /**
+     * 查询 Ingress 规则列表
+     */
+    async DescribeIngresses(req, cb) {
+        return this.request("DescribeIngresses", req, cb);
+    }
+    /**
+     * 创建应用
+     */
+    async CreateApplication(req, cb) {
+        return this.request("CreateApplication", req, cb);
+    }
+    /**
      * 开始下一批次发布
      */
     async ResumeDeployApplication(req, cb) {
         return this.request("ResumeDeployApplication", req, cb);
+    }
+    /**
+     * 修改应用基本信息
+     */
+    async ModifyApplicationInfo(req, cb) {
+        return this.request("ModifyApplicationInfo", req, cb);
+    }
+    /**
+     * 删除 Ingress 规则
+     */
+    async DeleteIngress(req, cb) {
+        return this.request("DeleteIngress", req, cb);
     }
 }
 exports.Client = Client;

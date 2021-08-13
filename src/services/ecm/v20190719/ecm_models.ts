@@ -1014,6 +1014,11 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
 该字段不填时，非GNR机型会默认选择0；GNR机型默认选择2。
       */
   InstanceChargeType?: number
+
+  /**
+   * 密钥对。
+   */
+  KeyIds?: Array<string>
 }
 
 /**

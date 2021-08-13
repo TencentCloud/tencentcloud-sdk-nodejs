@@ -40,6 +40,7 @@ import {
   DescribeACLResponse,
   JgwOperateResponse,
   ZoneInfo,
+  DescribeTopicSubscribeGroupResponse,
   DescribeCkafkaZoneRequest,
   Topic,
   Tag,
@@ -68,6 +69,7 @@ import {
   CreateTopicRequest,
   DeleteAclResponse,
   DynamicRetentionTime,
+  DescribeTopicSubscribeGroupRequest,
   DescribeRouteRequest,
   FetchMessageByOffsetRequest,
   DescribeRegionRequest,
@@ -88,6 +90,7 @@ import {
   Instance,
   DescribeInstanceAttributesResponse,
   TopicDetailResponse,
+  TopicSubscribeGroup,
   Config,
   ModifyPasswordRequest,
   CreateInstancePreRequest,
@@ -173,6 +176,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConsumerGroupResponse) => void
   ): Promise<DescribeConsumerGroupResponse> {
     return this.request("DescribeConsumerGroup", req, cb)
+  }
+
+  /**
+   * 查询订阅某主题消息分组信息
+   */
+  async DescribeTopicSubscribeGroup(
+    req: DescribeTopicSubscribeGroupRequest,
+    cb?: (error: string, rep: DescribeTopicSubscribeGroupResponse) => void
+  ): Promise<DescribeTopicSubscribeGroupResponse> {
+    return this.request("DescribeTopicSubscribeGroup", req, cb)
   }
 
   /**

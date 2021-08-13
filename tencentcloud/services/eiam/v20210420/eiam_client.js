@@ -34,6 +34,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserGroup", req, cb);
     }
     /**
+     * 查询指定机构下的资源授权列表
+     */
+    async DescribeOrgResourcesAuthorization(req, cb) {
+        return this.request("DescribeOrgResourcesAuthorization", req, cb);
+    }
+    /**
+     * 通过用户名或用户 id 冻结用户
+     */
+    async ModifyUserInfo(req, cb) {
+        return this.request("ModifyUserInfo", req, cb);
+    }
+    /**
      * 获取JWT公钥信息。
      */
     async DescribePublicKey(req, cb) {
@@ -58,16 +70,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListApplicationAuthorizations", req, cb);
     }
     /**
+     * 查询指定用户下的资源授权列表
+     */
+    async DescribeUserResourcesAuthorization(req, cb) {
+        return this.request("DescribeUserResourcesAuthorization", req, cb);
+    }
+    /**
      * 删除一个用户组
      */
     async DeleteUserGroup(req, cb) {
         return this.request("DeleteUserGroup", req, cb);
     }
     /**
-     * 通过用户名或用户 id 冻结用户
+     * 更新一个应用的信息
      */
-    async ModifyUserInfo(req, cb) {
-        return this.request("ModifyUserInfo", req, cb);
+    async ModifyApplication(req, cb) {
+        return this.request("ModifyApplication", req, cb);
     }
     /**
      * 获取用户组列表信息（包含查询条件）。
@@ -80,6 +98,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddUserToUserGroup(req, cb) {
         return this.request("AddUserToUserGroup", req, cb);
+    }
+    /**
+     * 查询指定用户组下的资源授权列表
+     */
+    async DescribeUserGroupResourcesAuthorization(req, cb) {
+        return this.request("DescribeUserGroupResourcesAuthorization", req, cb);
     }
     /**
      * 获取用户组中的用户列表

@@ -266,6 +266,10 @@ export interface AccessConfiguration {
       * 通道并发量上限，表示同时在线的连接数，单位：万。
       */
     Concurrent: number;
+    /**
+      * 网络类型，可取值：normal、cn2，默认值为normal
+      */
+    NetworkType?: string;
 }
 /**
  * DescribeCertificateDetail请求参数结构体
@@ -2506,6 +2510,10 @@ export interface CreateProxyRequest {
       * IP版本，可取值：IPv4、IPv6，默认值IPv4
       */
     IPAddressVersion?: string;
+    /**
+      * 网络类型，可取值：normal、cn2，默认值normal
+      */
+    NetworkType?: string;
 }
 /**
  * DeleteCertificate请求参数结构体
@@ -3048,6 +3056,16 @@ export interface InquiryPriceCreateProxyResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DiscountFlowUnitPrice: number;
+    /**
+      * 精品BGP的带宽费用价格，单位: 元/Mbps/天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cn2BandwidthPrice: number;
+    /**
+      * 精品BGP的折后带宽费用价格，单位: 元/Mbps/天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cn2BandwidthPriceWithDiscount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3890,6 +3908,10 @@ export interface CheckProxyCreateRequest {
       * IP版本，可取值：IPv4、IPv6，默认值IPv4
       */
     IPAddressVersion?: string;
+    /**
+      * 网络类型，可取值：normal、cn2，默认值normal
+      */
+    NetworkType?: string;
 }
 /**
  * DescribeRegionAndPrice请求参数结构体
@@ -4162,6 +4184,10 @@ export interface InquiryPriceCreateProxyRequest {
       * IP版本，可取值：IPv4、IPv6，默认值IPv4
       */
     IPAddressVersion?: string;
+    /**
+      * 网络类型，可取值：normal、cn2，默认值normal
+      */
+    NetworkType?: string;
 }
 /**
  * DescribeProxyGroupDetails返回参数结构体
@@ -4367,7 +4393,7 @@ UNKNOWN表示未知状态。
       */
     ModifyConfigTime: number;
     /**
-      * 通道类型，104表示新的银牌质量通道类型
+      * 通道类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProxyType: number;
@@ -4381,6 +4407,11 @@ UNKNOWN表示未知状态。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IPAddressVersion: string;
+    /**
+      * 网络类型：normal、cn2
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkType: string;
 }
 /**
  * RemoveRealServers返回参数结构体
