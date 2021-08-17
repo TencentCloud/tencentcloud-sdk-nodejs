@@ -23,7 +23,6 @@ import {
   QueryOrderOutOrderList,
   ApplyTradeRequest,
   QueryOutwardOrderResponse,
-  ConfirmOrderRequest,
   QueryExchangeRateResponse,
   UploadTaxPaymentRequest,
   UnifiedOrderInSubOrderList,
@@ -36,7 +35,7 @@ import {
   QueryTradeRequest,
   UnifiedOrderResponse,
   QueryBankWithdrawCashDetailsRequest,
-  CreateTransferBatchRequest,
+  ApplyPayerinfoResult,
   QueryCustAcctIdBalanceRequest,
   QueryPayerInfoResponse,
   WithdrawItem,
@@ -48,12 +47,13 @@ import {
   CreateInvoiceResponse,
   AgentTaxPayment,
   CreateOrderRequest,
-  QueryAnchorContractInfoRequest,
+  ModifyBindedAccountRequest,
   CreateRedInvoiceResult,
   QueryBankWithdrawCashDetailsResponse,
   CreatePayMerchantRequest,
   ContractOrderRequest,
   ModifyAgentTaxPaymentInfoResponse,
+  ExternalReturnContractInfo,
   AgencyClientInfo,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
@@ -74,8 +74,9 @@ import {
   RevokeRechargeByThirdPayResponse,
   QueryContractRequest,
   QueryInvoiceV2Response,
+  BindAccountResponse,
   CreateAcctRequest,
-  CreateSinglePayRequest,
+  CreateExternalAnchorRequest,
   CreateAgentTaxPaymentInfosRequest,
   ConfirmOrderResponse,
   CloseOrderResponse,
@@ -97,27 +98,30 @@ import {
   CreateInvoiceResult,
   DescribeOrderStatusRequest,
   QueryDownloadBillURLRequest,
-  QueryMerchantBalanceResult,
+  BindAccountRequest,
   ModifyMerchantResponse,
   QuerySinglePayResult,
   RefundOrderResponse,
   QuerySinglePayResponse,
   ResponseTerminateContract,
   QueryCustAcctIdBalanceResponse,
+  CreateExternalAnchorResponse,
   QueryTradeResponse,
   DownloadBillResponse,
   RevokeMemberRechargeThirdPayResponse,
   CreateRedInvoiceRequest,
   QueryAcctInfoListResponse,
   DeleteAgentTaxPaymentInfosRequest,
+  UploadExternalAnchorInfoResponse,
   ContractInfo,
-  ExternalReturnContractInfo,
+  QueryTransferBatchRequest,
+  CreateTransferBatchRequest,
   ExecuteMemberTransactionResponse,
   OrganizationInfo,
   BindRelateAcctUnionPayRequest,
   CreateInvoiceResultData,
   TransferDetailRequest,
-  ApplyPayerinfoResult,
+  ConfirmOrderRequest,
   RefundResponse,
   QueryAgentTaxPaymentBatchResponse,
   DeleteAgentTaxPaymentInfosResponse,
@@ -162,6 +166,7 @@ import {
   QueryMerchantOrderRequest,
   QueryTransferResultData,
   QueryTransferDetailResponse,
+  UploadExternalAnchorInfoRequest,
   BindRelateAccReUnionPayRequest,
   CreateCustAcctIdResponse,
   QueryMerchantBalanceResponse,
@@ -174,7 +179,7 @@ import {
   TransferItem,
   QueryInvoiceV2Request,
   OrderItem,
-  RefundMemberTransactionRequest,
+  CreateSinglePayRequest,
   Order,
   RegisterBillResponse,
   WithdrawCashMembershipRequest,
@@ -188,13 +193,15 @@ import {
   RegisterInfo,
   QueryDownloadBillURLResponse,
   CreateInvoiceRequest,
+  QueryAnchorContractInfoRequest,
   TransferSinglePayResponse,
   QueryTradeResult,
   QueryMemberBindResponse,
   AnchorContractInfo,
-  RegisterBillSupportWithdrawRequest,
+  QueryMerchantBalanceResult,
   QueryDeclareResult,
   CreateCustAcctIdRequest,
+  QueryBankClearResponse,
   ChannelReturnContractInfo,
   UnBindAcctResponse,
   MigrateOrderRefundRequest,
@@ -212,7 +219,7 @@ import {
   RefundOrderRequest,
   UnBindAcctRequest,
   TerminateContractRequest,
-  QueryTransferBatchRequest,
+  QueryInvoiceRequest,
   TransferSinglePayData,
   CheckAcctResponse,
   QueryReconciliationDocumentResponse,
@@ -231,15 +238,16 @@ import {
   RefundMemberTransactionResponse,
   CreateInvoiceV2Response,
   QueryBankClearRequest,
-  QueryInvoiceRequest,
+  ModifyBindedAccountResponse,
   ApplyApplicationMaterialResponse,
+  RefundMemberTransactionRequest,
   QueryBankTransactionDetailsRequest,
   DownloadBillRequest,
   QueryRefundRequest,
   CreateRedInvoiceResultData,
   QuerySinglePayRequest,
   ApplyTradeResponse,
-  QueryBankClearResponse,
+  CreateExternalAnchorData,
   RechargeMemberThirdPayResponse,
   DescribeOrderStatusResponse,
   WithdrawCashMembershipResponse,
@@ -256,6 +264,7 @@ import {
   ModifyAgentTaxPaymentInfoRequest,
   QuerySmallAmountTransferRequest,
   BindRelateAcctSmallAmountResponse,
+  RegisterBillSupportWithdrawRequest,
   ModifyMntMbrBindRelateAcctBankCodeResponse,
   QueryBalanceRequest,
   UploadTaxListRequest,
@@ -319,6 +328,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 灵云-主播入驻
+   */
+  async CreateExternalAnchor(
+    req: CreateExternalAnchorRequest,
+    cb?: (error: string, rep: CreateExternalAnchorResponse) => void
+  ): Promise<CreateExternalAnchorResponse> {
+    return this.request("CreateExternalAnchor", req, cb)
+  }
+
+  /**
    * 根据订单号，或者用户Id，查询支付订单状态
    */
   async QueryOrder(
@@ -326,6 +345,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryOrderResponse) => void
   ): Promise<QueryOrderResponse> {
     return this.request("QueryOrder", req, cb)
+  }
+
+  /**
+   * 灵云-上传主播信息
+   */
+  async UploadExternalAnchorInfo(
+    req: UploadExternalAnchorInfoRequest,
+    cb?: (error: string, rep: UploadExternalAnchorInfoResponse) => void
+  ): Promise<UploadExternalAnchorInfoResponse> {
+    return this.request("UploadExternalAnchorInfo", req, cb)
   }
 
   /**
@@ -376,6 +405,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryCustAcctIdBalanceResponse) => void
   ): Promise<QueryCustAcctIdBalanceResponse> {
     return this.request("QueryCustAcctIdBalance", req, cb)
+  }
+
+  /**
+   * 直播平台-查询主播签约信息
+   */
+  async QueryAnchorContractInfo(
+    req: QueryAnchorContractInfoRequest,
+    cb?: (error: string, rep: QueryAnchorContractInfoResponse) => void
+  ): Promise<QueryAnchorContractInfoResponse> {
+    return this.request("QueryAnchorContractInfo", req, cb)
   }
 
   /**
@@ -699,6 +738,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 灵云-绑定账号
+   */
+  async BindAccount(
+    req: BindAccountRequest,
+    cb?: (error: string, rep: BindAccountResponse) => void
+  ): Promise<BindAccountResponse> {
+    return this.request("BindAccount", req, cb)
+  }
+
+  /**
    * 云鉴-消费订单查询接口
    */
   async QueryMerchantOrder(
@@ -739,13 +788,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 直播平台-查询主播签约信息
+   * 灵云-重新绑定账号
    */
-  async QueryAnchorContractInfo(
-    req: QueryAnchorContractInfoRequest,
-    cb?: (error: string, rep: QueryAnchorContractInfoResponse) => void
-  ): Promise<QueryAnchorContractInfoResponse> {
-    return this.request("QueryAnchorContractInfo", req, cb)
+  async ModifyBindedAccount(
+    req: ModifyBindedAccountRequest,
+    cb?: (error: string, rep: ModifyBindedAccountResponse) => void
+  ): Promise<ModifyBindedAccountResponse> {
+    return this.request("ModifyBindedAccount", req, cb)
   }
 
   /**

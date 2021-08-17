@@ -68,6 +68,16 @@ it("ssm.v20190923.ListSecrets", async function () {
     }
 })
 
+it("ssm.v20190923.CreateSSHKeyPairSecret", async function () {
+    try {
+       const data = await client.CreateSSHKeyPairSecret({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssm.v20190923.UpdateRotationStatus", async function () {
     try {
        const data = await client.UpdateRotationStatus({})
@@ -148,9 +158,9 @@ it("ssm.v20190923.PutSecretValue", async function () {
     }
 })
 
-it("ssm.v20190923.EnableSecret", async function () {
+it("ssm.v20190923.DescribeSecret", async function () {
     try {
-       const data = await client.EnableSecret({})
+       const data = await client.DescribeSecret({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +171,16 @@ it("ssm.v20190923.EnableSecret", async function () {
 it("ssm.v20190923.DescribeRotationDetail", async function () {
     try {
        const data = await client.DescribeRotationDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssm.v20190923.GetSSHKeyPairValue", async function () {
+    try {
+       const data = await client.GetSSHKeyPairValue({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +208,9 @@ it("ssm.v20190923.CreateSecret", async function () {
     }
 })
 
-it("ssm.v20190923.DescribeSecret", async function () {
+it("ssm.v20190923.EnableSecret", async function () {
     try {
-       const data = await client.DescribeSecret({})
+       const data = await client.EnableSecret({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -40,10 +40,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMntMbrBindRelateAcctBankCode", req, cb);
     }
     /**
+     * 灵云-主播入驻
+     */
+    async CreateExternalAnchor(req, cb) {
+        return this.request("CreateExternalAnchor", req, cb);
+    }
+    /**
      * 根据订单号，或者用户Id，查询支付订单状态
      */
     async QueryOrder(req, cb) {
         return this.request("QueryOrder", req, cb);
+    }
+    /**
+     * 灵云-上传主播信息
+     */
+    async UploadExternalAnchorInfo(req, cb) {
+        return this.request("UploadExternalAnchorInfo", req, cb);
     }
     /**
      * 会员提现-不验证。此接口受理会员发起的提现申请。会员子账户的可提现余额、可用余额会减少，市场的资金汇总账户(监管账户)会减少相应的发生金额，提现到会员申请的收款账户。
@@ -74,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryCustAcctIdBalance(req, cb) {
         return this.request("QueryCustAcctIdBalance", req, cb);
+    }
+    /**
+     * 直播平台-查询主播签约信息
+     */
+    async QueryAnchorContractInfo(req, cb) {
+        return this.request("QueryAnchorContractInfo", req, cb);
     }
     /**
      * 跨境-付款人查询
@@ -268,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckAcct", req, cb);
     }
     /**
+     * 灵云-绑定账号
+     */
+    async BindAccount(req, cb) {
+        return this.request("BindAccount", req, cb);
+    }
+    /**
      * 云鉴-消费订单查询接口
      */
     async QueryMerchantOrder(req, cb) {
@@ -292,10 +316,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMerchant", req, cb);
     }
     /**
-     * 直播平台-查询主播签约信息
+     * 灵云-重新绑定账号
      */
-    async QueryAnchorContractInfo(req, cb) {
-        return this.request("QueryAnchorContractInfo", req, cb);
+    async ModifyBindedAccount(req, cb) {
+        return this.request("ModifyBindedAccount", req, cb);
     }
     /**
      * 验证鉴权金额。此接口可受理BindRelateAcctSmallAmount接口发起的转账金额（往账鉴权方式）的验证处理。若所回填的验证金额验证通过，则会绑定原申请中的银行账户作为提现账户。通过此接口也可以查得BindRelateAcctSmallAmount接口发起的来账鉴权方式的申请的当前状态。

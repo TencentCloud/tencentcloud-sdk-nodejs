@@ -6219,7 +6219,7 @@ export interface FinanBillOCRRequest {
  */
 export interface VerifyEnterpriseFourFactorsResponse {
   /**
-   * 核验一致性（1:一致，2:不一致）
+   * 核验一致性（1:一致，2:不一致，3:查询无记录）
    */
   State: number
 

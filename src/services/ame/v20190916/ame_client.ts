@@ -22,6 +22,8 @@ import {
   DescribeMusicResponse,
   DescribeLyricResponse,
   ModifyMusicOnShelvesResponse,
+  UseRange,
+  DescribeKTVPlaylistDetailRequest,
   Station,
   Music,
   DescribeKTVMusicDetailRequest,
@@ -30,32 +32,35 @@ import {
   DescribeCloudMusicPurchasedRequest,
   PackageItem,
   DescribeCloudMusicPurchasedResponse,
+  DescribeKTVPlaylistsRequest,
   DataInfo,
-  KTVMusicBaseInfo,
+  DescribeKTVPlaylistDetailResponse,
   Package,
   ReportDataResponse,
   ModifyMusicOnShelvesRequest,
   DescribePackageItemsRequest,
   AuthInfo,
   TakeMusicOffShelvesRequest,
-  SearchKTVMusicsResponse,
+  PutMusicOnTheShelvesResponse,
   TakeMusicOffShelves,
   Lyric,
   DescribeItemByIdRequest,
-  DescribeMusicRequest,
-  UseRange,
+  DescribeAuthInfoRequest,
+  DescribeKTVPlaylistsResponse,
   Artist,
   DescribeStationsRequest,
-  PutMusicOnTheShelvesResponse,
+  MusicOpenDetail,
+  SearchKTVMusicsResponse,
   DescribeItemsRequest,
   Item,
   DescribeCloudMusicResponse,
-  MusicOpenDetail,
+  KTVMusicBaseInfo,
   DescribePackagesRequest,
   MusicDetailInfo,
   SearchKTVMusicsRequest,
   ImagePath,
   DescribeItemsResponse,
+  KTVPlaylistBaseInfo,
   DescribeItemByIdResponse,
   PutMusicOnTheShelvesRequest,
   DescribePackagesResponse,
@@ -64,7 +69,7 @@ import {
   TakeMusicOffShelvesResponse,
   DescribeLyricRequest,
   DescribeKTVMusicDetailResponse,
-  DescribeAuthInfoRequest,
+  DescribeMusicRequest,
   ReportDataRequest,
 } from "./ame_models"
 
@@ -108,13 +113,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据接口的模式及歌曲ID来取得歌词信息。
+   * 根据接口的模式及歌曲ID来取得歌词信息或者波形图信息。
    */
   async DescribeLyric(
     req: DescribeLyricRequest,
     cb?: (error: string, rep: DescribeLyricResponse) => void
   ): Promise<DescribeLyricResponse> {
     return this.request("DescribeLyric", req, cb)
+  }
+
+  /**
+   * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
+   */
+  async DescribeKTVPlaylistDetail(
+    req: DescribeKTVPlaylistDetailRequest,
+    cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void
+  ): Promise<DescribeKTVPlaylistDetailResponse> {
+    return this.request("DescribeKTVPlaylistDetail", req, cb)
+  }
+
+  /**
+   * 获取曲库包下已核销歌曲列表接口
+   */
+  async DescribePackageItems(
+    req: DescribePackageItemsRequest,
+    cb?: (error: string, rep: DescribePackageItemsResponse) => void
+  ): Promise<DescribePackageItemsResponse> {
+    return this.request("DescribePackageItems", req, cb)
   }
 
   /**
@@ -178,13 +203,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取曲库包下已核销歌曲列表接口
+   * 获取即时广播曲库推荐歌单列表。
    */
-  async DescribePackageItems(
-    req: DescribePackageItemsRequest,
-    cb?: (error: string, rep: DescribePackageItemsResponse) => void
-  ): Promise<DescribePackageItemsResponse> {
-    return this.request("DescribePackageItems", req, cb)
+  async DescribeKTVPlaylists(
+    req: DescribeKTVPlaylistsRequest,
+    cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void
+  ): Promise<DescribeKTVPlaylistsResponse> {
+    return this.request("DescribeKTVPlaylists", req, cb)
   }
 
   /**

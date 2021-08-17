@@ -292,6 +292,8 @@ var tci_1 = require("./tci");
 Object.defineProperty(exports, "tci", { enumerable: true, get: function () { return tci_1.tci; } });
 var tcr_1 = require("./tcr");
 Object.defineProperty(exports, "tcr", { enumerable: true, get: function () { return tcr_1.tcr; } });
+var tdid_1 = require("./tdid");
+Object.defineProperty(exports, "tdid", { enumerable: true, get: function () { return tdid_1.tdid; } });
 var tdmq_1 = require("./tdmq");
 Object.defineProperty(exports, "tdmq", { enumerable: true, get: function () { return tdmq_1.tdmq; } });
 var tem_1 = require("./tem");

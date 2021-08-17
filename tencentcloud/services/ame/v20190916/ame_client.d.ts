@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMusicResponse, DescribeLyricResponse, ModifyMusicOnShelvesResponse, DescribeKTVMusicDetailRequest, DescribeStationsResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedRequest, DescribeCloudMusicPurchasedResponse, ReportDataResponse, ModifyMusicOnShelvesRequest, DescribePackageItemsRequest, TakeMusicOffShelvesRequest, SearchKTVMusicsResponse, DescribeItemByIdRequest, DescribeMusicRequest, DescribeStationsRequest, PutMusicOnTheShelvesResponse, DescribeItemsRequest, DescribeCloudMusicResponse, DescribePackagesRequest, SearchKTVMusicsRequest, DescribeItemsResponse, DescribeItemByIdResponse, PutMusicOnTheShelvesRequest, DescribePackagesResponse, DescribeCloudMusicRequest, DescribeAuthInfoResponse, TakeMusicOffShelvesResponse, DescribeLyricRequest, DescribeKTVMusicDetailResponse, DescribeAuthInfoRequest, ReportDataRequest } from "./ame_models";
+import { DescribeMusicResponse, DescribeLyricResponse, ModifyMusicOnShelvesResponse, DescribeKTVPlaylistDetailRequest, DescribeKTVMusicDetailRequest, DescribeStationsResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedRequest, DescribeCloudMusicPurchasedResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, ReportDataResponse, ModifyMusicOnShelvesRequest, DescribePackageItemsRequest, TakeMusicOffShelvesRequest, PutMusicOnTheShelvesResponse, DescribeItemByIdRequest, DescribeAuthInfoRequest, DescribeKTVPlaylistsResponse, DescribeStationsRequest, SearchKTVMusicsResponse, DescribeItemsRequest, DescribeCloudMusicResponse, DescribePackagesRequest, SearchKTVMusicsRequest, DescribeItemsResponse, DescribeItemByIdResponse, PutMusicOnTheShelvesRequest, DescribePackagesResponse, DescribeCloudMusicRequest, DescribeAuthInfoResponse, TakeMusicOffShelvesResponse, DescribeLyricRequest, DescribeKTVMusicDetailResponse, DescribeMusicRequest, ReportDataRequest } from "./ame_models";
 /**
  * ame client
  * @class
@@ -20,9 +20,17 @@ export declare class Client extends AbstractClient {
      */
     DescribePackages(req: DescribePackagesRequest, cb?: (error: string, rep: DescribePackagesResponse) => void): Promise<DescribePackagesResponse>;
     /**
-     * 根据接口的模式及歌曲ID来取得歌词信息。
+     * 根据接口的模式及歌曲ID来取得歌词信息或者波形图信息。
      */
     DescribeLyric(req: DescribeLyricRequest, cb?: (error: string, rep: DescribeLyricResponse) => void): Promise<DescribeLyricResponse>;
+    /**
+     * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
+     */
+    DescribeKTVPlaylistDetail(req: DescribeKTVPlaylistDetailRequest, cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void): Promise<DescribeKTVPlaylistDetailResponse>;
+    /**
+     * 获取曲库包下已核销歌曲列表接口
+     */
+    DescribePackageItems(req: DescribePackageItemsRequest, cb?: (error: string, rep: DescribePackageItemsResponse) => void): Promise<DescribePackageItemsResponse>;
     /**
      * 该服务后续会停用，不再建议使用
      */
@@ -48,9 +56,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyMusicOnShelves(req: ModifyMusicOnShelvesRequest, cb?: (error: string, rep: ModifyMusicOnShelvesResponse) => void): Promise<ModifyMusicOnShelvesResponse>;
     /**
-     * 获取曲库包下已核销歌曲列表接口
+     * 获取即时广播曲库推荐歌单列表。
      */
-    DescribePackageItems(req: DescribePackageItemsRequest, cb?: (error: string, rep: DescribePackageItemsResponse) => void): Promise<DescribePackageItemsResponse>;
+    DescribeKTVPlaylists(req: DescribeKTVPlaylistsRequest, cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void): Promise<DescribeKTVPlaylistsResponse>;
     /**
      * 根据资源方所传MusicId进行将歌曲进行下架，多个MusicId使用逗号隔开
      */

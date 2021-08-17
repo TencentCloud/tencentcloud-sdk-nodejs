@@ -266,6 +266,26 @@ export interface InquiryPriceResetInstancesInternetMaxBandwidthResponse {
 }
 
 /**
+ * 描述了按带宽计费的相关信息
+ */
+export interface InternetBandwidthConfig {
+  /**
+   * 开始时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   */
+  StartTime?: string
+
+  /**
+   * 结束时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   */
+  EndTime?: string
+
+  /**
+   * 实例带宽信息。
+   */
+  InternetAccessible?: InternetAccessible
+}
+
+/**
  * ModifyKeyPairAttribute请求参数结构体
  */
 export interface ModifyKeyPairAttributeRequest {
@@ -979,6 +999,16 @@ export interface DescribeInstanceVncUrlRequest {
 }
 
 /**
+ * StopInstances返回参数结构体
+ */
+export interface StopInstancesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyImageSharePermission请求参数结构体
  */
 export interface ModifyImageSharePermissionRequest {
@@ -1430,13 +1460,20 @@ export interface CreateImageResponse {
 }
 
 /**
- * StopInstances返回参数结构体
+ * DescribeInstancesModification请求参数结构体
  */
-export interface StopInstancesResponse {
+export interface DescribeInstancesModificationRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 一个或多个待查询的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为20。
    */
-  RequestId?: string
+  InstanceIds: Array<string>
+
+  /**
+      * <li><strong>status</strong></li>
+<p style="padding-left: 30px;">按照【<strong>配置规格状态</strong>】进行过滤。配置规格状态形如：SELL、UNAVAILABLE。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为2。
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1845,69 +1882,23 @@ export interface PrePaidQuota {
 }
 
 /**
- * 描述了数据盘的信息
+ * DescribeInstancesModification返回参数结构体
  */
-export interface DataDisk {
+export interface DescribeInstancesModificationResponse {
   /**
-   * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+   * 实例调整的机型配置的数量。
    */
-  DiskSize: number
+  TotalCount: number
 
   /**
-   * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+   * 实例支持调整的机型配置列表。
    */
-  DiskType?: string
+  InstanceTypeConfigStatusSet: Array<InstanceTypeConfigStatus>
 
   /**
-   * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DiskId?: string
-
-  /**
-      * 数据盘是否随子机销毁。取值范围：
-<li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘
-<li>FALSE：子机销毁时，保留数据盘<br>
-默认取值：TRUE<br>
-该参数目前仅用于 `RunInstances` 接口。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeleteWithInstance?: boolean
-
-  /**
-      * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SnapshotId?: string
-
-  /**
-      * 数据盘是加密。取值范围：
-<li>TRUE：加密
-<li>FALSE：不加密<br>
-默认取值：FALSE<br>
-该参数目前仅用于 `RunInstances` 接口。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Encrypt?: boolean
-
-  /**
-      * 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。
-
-该参数目前仅用于 `RunInstances` 接口。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KmsKeyId?: string
-
-  /**
-      * 云硬盘性能，单位：MB/s
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ThroughputPerformance?: number
-
-  /**
-      * 所属的独享集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CdcId?: string
+  RequestId?: string
 }
 
 /**
@@ -2137,8 +2128,11 @@ export interface CreateImageRequest {
   ForcePoweroff?: string
 
   /**
-   * 创建Windows镜像时是否启用Sysprep，关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)
-   */
+      * 创建Windows镜像时是否启用Sysprep。
+取值范围：TRUE或FALSE，默认取值为FALSE。
+
+关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)。
+      */
   Sysprep?: string
 
   /**
@@ -2482,12 +2476,12 @@ export interface DescribeDisasterRecoverGroupsResponse {
   /**
    * 分散置放群组信息列表。
    */
-  DisasterRecoverGroupSet?: Array<DisasterRecoverGroup>
+  DisasterRecoverGroupSet: Array<DisasterRecoverGroup>
 
   /**
    * 用户置放群组总量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3492,6 +3486,27 @@ export interface ReservedInstanceTypeItem {
 }
 
 /**
+ * 描述实例机型配置信息及状态信息
+ */
+export interface InstanceTypeConfigStatus {
+  /**
+   * 状态描述
+   */
+  Status: string
+
+  /**
+      * 状态描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+   * 配置信息
+   */
+  InstanceTypeConfig: InstanceTypeConfig
+}
+
+/**
  * InquiryPriceRunInstances返回参数结构体
  */
 export interface InquiryPriceRunInstancesResponse {
@@ -3586,7 +3601,7 @@ export interface InquiryPriceResizeInstanceDisksResponse {
   /**
    * 该参数表示磁盘扩容成对应配置的价格。
    */
-  Price?: Price
+  Price: Price
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3786,32 +3801,32 @@ export interface CreateDisasterRecoverGroupResponse {
   /**
    * 分散置放群组ID列表。
    */
-  DisasterRecoverGroupId?: string
+  DisasterRecoverGroupId: string
 
   /**
    * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
    */
-  Type?: string
+  Type: string
 
   /**
    * 分散置放群组名称，长度1-60个字符，支持中、英文。
    */
-  Name?: string
+  Name: string
 
   /**
    * 置放群组内可容纳的云服务器数量。
    */
-  CvmQuotaTotal?: number
+  CvmQuotaTotal: number
 
   /**
    * 置放群组内已有的云服务器数量。
    */
-  CurrentNum?: number
+  CurrentNum: number
 
   /**
    * 置放群组创建时间。
    */
-  CreateTime?: string
+  CreateTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4347,23 +4362,18 @@ export interface VirtualPrivateCloud {
 }
 
 /**
- * 描述了按带宽计费的相关信息
+ * 描述了实例的计费模式
  */
-export interface InternetBandwidthConfig {
+export interface InstanceChargePrepaid {
   /**
-   * 开始时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
    */
-  StartTime?: string
+  Period: number
 
   /**
-   * 结束时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
-  EndTime?: string
-
-  /**
-   * 实例带宽信息。
-   */
-  InternetAccessible?: InternetAccessible
+  RenewFlag?: string
 }
 
 /**
@@ -4542,18 +4552,69 @@ export interface ModifyInstancesProjectResponse {
 }
 
 /**
- * 描述了实例的计费模式
+ * 描述了数据盘的信息
  */
-export interface InstanceChargePrepaid {
+export interface DataDisk {
   /**
-   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
+   * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
    */
-  Period: number
+  DiskSize: number
 
   /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
    */
-  RenewFlag?: string
+  DiskType?: string
+
+  /**
+   * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
+   */
+  DiskId?: string
+
+  /**
+      * 数据盘是否随子机销毁。取值范围：
+<li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘
+<li>FALSE：子机销毁时，保留数据盘<br>
+默认取值：TRUE<br>
+该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeleteWithInstance?: boolean
+
+  /**
+      * 数据盘快照ID。选择的数据盘快照大小需小于数据盘大小。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SnapshotId?: string
+
+  /**
+      * 数据盘是加密。取值范围：
+<li>TRUE：加密
+<li>FALSE：不加密<br>
+默认取值：FALSE<br>
+该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Encrypt?: boolean
+
+  /**
+      * 自定义CMK对应的ID，取值为UUID或者类似kms-abcd1234。用于加密云盘。
+
+该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KmsKeyId?: string
+
+  /**
+      * 云硬盘性能，单位：MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ThroughputPerformance?: number
+
+  /**
+      * 所属的独享集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CdcId?: string
 }
 
 /**

@@ -521,8 +521,8 @@ export interface DeleteInternalEndpointDnsRequest {
       */
     EniLBIp: string;
     /**
-      * true：use instance name as subdomain
-false: use instancename+"-vpc" as subdomain
+      * true：使用默认域名
+false:  使用带有vpc的域名
       */
     UsePublicDomain?: boolean;
 }
@@ -555,7 +555,7 @@ export interface RenewInstanceResponse {
     /**
       * 企业版实例Id
       */
-    RegistryId?: string;
+    RegistryId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1172,7 +1172,7 @@ export interface CreateTagRetentionRuleRequest {
       */
     CronSetting: string;
     /**
-      * 是否禁用规则
+      * 是否禁用规则，默认值为false
       */
     Disabled?: boolean;
 }
@@ -1237,7 +1237,7 @@ export interface ModifyInstanceTokenRequest {
       */
     Desc?: string;
     /**
-      * 1为修改描述 2为启动禁用，不填写默认为修改启动禁用
+      * 1为修改描述 2为操作启动禁用，默认值为2
       */
     ModifyFlag?: number;
 }
@@ -1628,7 +1628,7 @@ export interface DescribeRepositoriesRequest {
  */
 export interface CreateUserPersonalRequest {
     /**
-      * 用户密码
+      * 用户密码，密码必须为8到16位
       */
     Password: string;
 }
@@ -1740,7 +1740,7 @@ export interface RenewInstanceRequest {
       */
     RegistryId: string;
     /**
-      * 预付费自动续费标识和购买时长
+      * 预付费自动续费标识和购买时长,0：手动续费，1：自动续费，2：不续费并且不通知;单位为月
       */
     RegistryChargePrepaid: RegistryChargePrepaid;
     /**
@@ -1983,20 +1983,20 @@ export interface CreateInstanceTokenResponse {
       * 用户名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Username?: string;
+    Username: string;
     /**
       * 访问凭证
       */
-    Token?: string;
+    Token: string;
     /**
-      * 访问凭证过期时间戳
+      * 访问凭证过期时间戳，是一个时间戳数字，无单位
       */
-    ExpTime?: number;
+    ExpTime: number;
     /**
       * 长期凭证的TokenId，短期凭证没有TokenId
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TokenId?: string;
+    TokenId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2114,9 +2114,9 @@ export interface CreateRepositoryPersonalRequest {
  */
 export interface DescribeImageFilterPersonalResponse {
     /**
-      * payload
+      * 返回tag镜像内容相同的tag列表
       */
-    Data?: SameImagesResp;
+    Data: SameImagesResp;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2244,7 +2244,7 @@ export interface ModifyRepositoryAccessPersonalRequest {
       */
     RepoName: string;
     /**
-      * 默认值为0
+      * 默认值为0, 1公共，0私有
       */
     Public: number;
 }
@@ -2429,7 +2429,7 @@ export interface CreateNamespaceRequest {
       */
     RegistryId: string;
     /**
-      * 命名空间的名称
+      * 命名空间的名称（长度2-30个字符，只能包含小写字母、数字及分隔符("."、"_"、"-")，且不能以分隔符开头、结尾或连续）
       */
     NamespaceName: string;
     /**
@@ -2541,9 +2541,9 @@ export interface DescribeChartDownloadInfoRequest {
  */
 export interface ValidateRepositoryExistPersonalResponse {
     /**
-      * 仓库是否存在
+      * 验证个人版仓库是否存在返回信息
       */
-    Data?: RepoIsExistResp;
+    Data: RepoIsExistResp;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2721,11 +2721,11 @@ export interface ManageReplicationResponse {
  */
 export interface DescribeReplicationInstanceCreateTasksRequest {
     /**
-      * 同步实例Id
+      * 同步实例Id，见实例返回列表中的同步实例ID
       */
     ReplicationRegistryId: string;
     /**
-      * 同步实例的地域ID
+      * 同步实例的地域ID，见实例返回列表中地域ID
       */
     ReplicationRegionId: number;
 }
@@ -3278,7 +3278,7 @@ export interface ModifyApplicationTriggerPersonalRequest {
       */
     RepoName?: string;
     /**
-      * 触发器名称
+      * 触发器名称，必填参数
       */
     TriggerName?: string;
     /**
@@ -3426,9 +3426,9 @@ export interface DescribeInternalEndpointsRequest {
  */
 export interface ValidateNamespaceExistPersonalResponse {
     /**
-      * 命名空间是否存在
+      * 验证命名空间是否存在返回信息
       */
-    Data?: NamespaceIsExistsResp;
+    Data: NamespaceIsExistsResp;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3892,7 +3892,7 @@ export interface DeleteRepositoryRequest {
       */
     NamespaceName: string;
     /**
-      * 仓库名称的名称
+      * 镜像仓库的名称
       */
     RepositoryName: string;
 }
@@ -3918,7 +3918,7 @@ export interface CreateTagRetentionExecutionRequest {
       */
     RetentionId: number;
     /**
-      * 是否模拟执行
+      * 是否模拟执行，默认值为false，即非模拟执行
       */
     DryRun?: boolean;
 }

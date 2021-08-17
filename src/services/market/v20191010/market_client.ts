@@ -18,17 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  SyncUserAndOrderInfoResponse,
-  SyncUserAndOrderInfoRequest,
-  OfflineProductDeal,
-  FlowProductRemindResponse,
-  WeChatUserInfo,
   GetUsagePlanUsageAmountResponse,
-  FlowProductRemindRequest,
   GetUsagePlanUsageAmountRequest,
-  Error,
-  SyncUserAndOrderInfoDetail,
-  WeChatOrderInfo,
+  FlowProductRemindRequest,
+  FlowProductRemindResponse,
 } from "./market_models"
 
 /**
@@ -38,16 +31,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("market.tencentcloudapi.com", "2019-10-10", clientConfig)
-  }
-
-  /**
-   * 同步企微的用户信息和订单信息到云市场
-   */
-  async SyncUserAndOrderInfo(
-    req: SyncUserAndOrderInfoRequest,
-    cb?: (error: string, rep: SyncUserAndOrderInfoResponse) => void
-  ): Promise<SyncUserAndOrderInfoResponse> {
-    return this.request("SyncUserAndOrderInfo", req, cb)
   }
 
   /**

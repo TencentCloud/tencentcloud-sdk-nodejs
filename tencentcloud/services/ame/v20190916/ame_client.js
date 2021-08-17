@@ -46,10 +46,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePackages", req, cb);
     }
     /**
-     * 根据接口的模式及歌曲ID来取得歌词信息。
+     * 根据接口的模式及歌曲ID来取得歌词信息或者波形图信息。
      */
     async DescribeLyric(req, cb) {
         return this.request("DescribeLyric", req, cb);
+    }
+    /**
+     * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
+     */
+    async DescribeKTVPlaylistDetail(req, cb) {
+        return this.request("DescribeKTVPlaylistDetail", req, cb);
+    }
+    /**
+     * 获取曲库包下已核销歌曲列表接口
+     */
+    async DescribePackageItems(req, cb) {
+        return this.request("DescribePackageItems", req, cb);
     }
     /**
      * 该服务后续会停用，不再建议使用
@@ -88,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMusicOnShelves", req, cb);
     }
     /**
-     * 获取曲库包下已核销歌曲列表接口
+     * 获取即时广播曲库推荐歌单列表。
      */
-    async DescribePackageItems(req, cb) {
-        return this.request("DescribePackageItems", req, cb);
+    async DescribeKTVPlaylists(req, cb) {
+        return this.request("DescribeKTVPlaylists", req, cb);
     }
     /**
      * 根据资源方所传MusicId进行将歌曲进行下架，多个MusicId使用逗号隔开

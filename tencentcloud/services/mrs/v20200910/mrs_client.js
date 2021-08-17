@@ -34,38 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageToClass", req, cb);
     }
     /**
-     * 文本转结构化对象
-     */
-    async TextToObject(req, cb) {
-        return this.request("TextToObject", req, cb);
-    }
-    /**
-     * 接口还未上线
-
-将输入的医疗报告文本内容进行结构化输出
-     */
-    async ReportTextStructured(req, cb) {
-        return this.request("ReportTextStructured", req, cb);
-    }
-    /**
      * 图片转结构化对象
      */
     async ImageToObject(req, cb) {
         return this.request("ImageToObject", req, cb);
     }
     /**
-     * 接口没有流量
-
-将输入的图片类型报告结构化
-     */
-    async ReportImageStructured(req, cb) {
-        return this.request("ReportImageStructured", req, cb);
-    }
-    /**
      * 文本分类
      */
     async TextToClass(req, cb) {
         return this.request("TextToClass", req, cb);
+    }
+    /**
+     * 文本转结构化对象
+     */
+    async TextToObject(req, cb) {
+        return this.request("TextToObject", req, cb);
     }
 }
 exports.Client = Client;

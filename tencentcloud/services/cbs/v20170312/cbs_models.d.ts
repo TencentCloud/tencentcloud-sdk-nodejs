@@ -18,7 +18,7 @@ export interface DescribeDiskOperationLogsResponse {
     /**
       * 云盘的操作日志列表。
       */
-    DiskOperationLogSet?: Array<DiskOperationLog>;
+    DiskOperationLogSet: Array<DiskOperationLog>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1028,6 +1028,17 @@ export interface ModifySnapshotsSharePermissionRequest {
  */
 export interface DiskOperationLog {
     /**
+      * 操作的状态。取值范围：
+SUCCESS :表示操作成功
+FAILED :表示操作失败
+PROCESSING :表示操作中。
+      */
+    OperationState: string;
+    /**
+      * 开始时间。
+      */
+    StartTime: string;
+    /**
       * 操作者的UIN。
       */
     Operator: string;
@@ -1045,24 +1056,13 @@ ASP_OPERATION_UNBIND：取消关联定期快照策略
       */
     Operation: string;
     /**
-      * 操作的云盘ID。
-      */
-    DiskId: string;
-    /**
-      * 操作的状态。取值范围：
-SUCCESS :表示操作成功
-FAILED :表示操作失败
-PROCESSING :表示操作中。
-      */
-    OperationState: string;
-    /**
-      * 开始时间。
-      */
-    StartTime: string;
-    /**
       * 结束时间。
       */
     EndTime: string;
+    /**
+      * 操作的云盘ID。
+      */
+    DiskId: string;
 }
 /**
  * UnbindAutoSnapshotPolicy请求参数结构体
@@ -1087,13 +1087,13 @@ export interface DescribeDiskOperationLogsRequest {
       */
     Filters: Array<Filter>;
     /**
-      * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
-      */
-    BeginTime?: string;
-    /**
       * 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59"
       */
     EndTime?: string;
+    /**
+      * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
+      */
+    BeginTime?: string;
 }
 /**
  * InquirePriceModifyDiskExtraPerformance返回参数结构体

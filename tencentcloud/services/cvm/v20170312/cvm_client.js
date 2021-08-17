@@ -82,10 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceModifyInstancesChargeType", req, cb);
     }
     /**
-     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
+     * 本接口 (DescribeInstancesModification) 用于查询指定实例支持调整的机型配置。
      */
-    async ModifyHostsAttribute(req, cb) {
-        return this.request("ModifyHostsAttribute", req, cb);
+    async DescribeInstancesModification(req, cb) {
+        return this.request("DescribeInstancesModification", req, cb);
     }
     /**
      * 本接口(DescribeImages) 用于查看镜像列表。
@@ -617,6 +617,12 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     async RebootInstances(req, cb) {
         return this.request("RebootInstances", req, cb);
+    }
+    /**
+     * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
+     */
+    async ModifyHostsAttribute(req, cb) {
+        return this.request("ModifyHostsAttribute", req, cb);
     }
     /**
      * 本接口 (DescribeInstanceTypeConfigs) 用于查询实例机型配置。

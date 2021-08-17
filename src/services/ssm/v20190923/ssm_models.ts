@@ -105,7 +105,7 @@ export interface DescribeSecretResponse {
   CreateTime: number
 
   /**
-      * 0 --  用户自定义凭据类型；1 -- 云产品凭据类型。
+      * 0 --  用户自定义凭据类型；1 -- 数据库凭据类型；2 -- SSH密钥对凭据类型。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SecretType: number
@@ -135,6 +135,24 @@ export interface DescribeSecretResponse {
   RotationFrequency: number
 
   /**
+      * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对凭据的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceName: string
+
+  /**
+      * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所属的项目ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectID: number
+
+  /**
+      * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所关联的CVM实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssociatedInstanceIDs: Array<string>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -146,6 +164,22 @@ export interface DescribeSecretResponse {
 export type DescribeSupportedProductsRequest = null
 
 /**
+ * GetSecretValue请求参数结构体
+ */
+export interface GetSecretValueRequest {
+  /**
+   * 指定凭据的名称。
+   */
+  SecretName: string
+
+  /**
+      * 指定对应凭据的版本号。
+对于云产品凭据如Mysql凭据，通过指定凭据名称和历史版本号来获取历史轮转凭据的明文信息，如果要获取当前正在使用的凭据版本的明文，需要将版本号指定为：SSM_Current。
+      */
+  VersionId: string
+}
+
+/**
  * DeleteSecret请求参数结构体
  */
 export interface DeleteSecretRequest {
@@ -155,9 +189,17 @@ export interface DeleteSecretRequest {
   SecretName: string
 
   /**
-   * 指定计划删除日期，单位（天），0（默认）表示立即删除， 1-30 表示预留的天数，超出该日期之后彻底删除。
-   */
+      * 指定计划删除日期，单位（天），0（默认）表示立即删除， 1-30 表示预留的天数，超出该日期之后彻底删除。
+当凭据类型为SSH密钥对凭据时，此字段只能取值只能为0。
+      */
   RecoveryWindowInDays?: number
+
+  /**
+      * 当凭据类型为SSH密钥对凭据时，此字段有效，取值：
+True -- 表示不仅仅清理此凭据中存储的SSH密钥信息，还会将SSH密钥对从CVM侧进行清理。注意，如果SSH密钥此时绑定了CVM实例，那么会清理失败。
+False --  表示仅仅清理此凭据中存储的SSH密钥信息，不在CVM进侧进行清理。
+      */
+  CleanSSHKey?: boolean
 }
 
 /**
@@ -436,6 +478,24 @@ export interface SecretMetadata {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProductName: string
+
+  /**
+      * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对凭据的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceName: string
+
+  /**
+      * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所属的项目ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectID: number
+
+  /**
+      * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所关联的CVM实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssociatedInstanceIDs: Array<string>
 }
 
 /**
@@ -459,13 +519,40 @@ export interface DescribeRotationDetailRequest {
 }
 
 /**
- * DescribeAsyncRequestInfo请求参数结构体
+ * CreateSSHKeyPairSecret返回参数结构体
  */
-export interface DescribeAsyncRequestInfoRequest {
+export interface CreateSSHKeyPairSecretResponse {
   /**
-   * 异步任务ID号。
+   * 创建的凭据名称。
    */
-  FlowID: number
+  SecretName: string
+
+  /**
+   * 创建的SSH密钥ID。
+   */
+  SSHKeyID: string
+
+  /**
+   * 创建的SSH密钥名称。
+   */
+  SSHKeyName: string
+
+  /**
+      * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagCode: number
+
+  /**
+      * 标签操作的返回信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagMsg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -609,7 +696,7 @@ export interface ListSecretsRequest {
   /**
       * 0  -- 表示用户自定义凭据，默认为0。
 1  -- 表示用户云产品凭据。
-这个参数只能在云产品凭据(1)和用户自定义凭据(0)中二选一。
+2 -- 表示SSH密钥对凭据。
       */
   SecretType?: number
 }
@@ -645,6 +732,38 @@ export interface EnableSecretResponse {
 }
 
 /**
+ * CreateSSHKeyPairSecret请求参数结构体
+ */
+export interface CreateSSHKeyPairSecretRequest {
+  /**
+   * 凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。
+   */
+  SecretName: string
+
+  /**
+   * 密钥对创建后所属的项目ID。
+   */
+  ProjectId: number
+
+  /**
+   * 描述信息，用于详细描述用途等，最大支持2048字节。
+   */
+  Description?: string
+
+  /**
+      * 指定对凭据进行加密的KMS CMK。
+如果为空则表示使用Secrets Manager为您默认创建的CMK进行加密。
+您也可以指定在同region 下自行创建的KMS CMK进行加密。
+      */
+  KmsKeyId?: string
+
+  /**
+   * 标签列表。
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * UpdateRotationStatus请求参数结构体
  */
 export interface UpdateRotationStatusRequest {
@@ -655,8 +774,8 @@ export interface UpdateRotationStatusRequest {
 
   /**
       * 是否开启轮转。
-True -- 开启轮转；
-False -- 禁止轮转。
+true -- 开启轮转；
+false -- 禁止轮转。
       */
   EnableRotation: boolean
 
@@ -667,7 +786,7 @@ False -- 禁止轮转。
 
   /**
       * 用户设置的期望开始轮转时间，格式为：2006-01-02 15:04:05。
-当EnableRotation为True时，如果不填RotationBeginTime，则默认填充为当前时间。
+当EnableRotation为true时，如果不填RotationBeginTime，则默认填充为当前时间。
       */
   RotationBeginTime?: string
 }
@@ -800,6 +919,26 @@ SecretBinary 和 SecretString 必须且只能设置一个。
 }
 
 /**
+ * PutSecretValue返回参数结构体
+ */
+export interface PutSecretValueResponse {
+  /**
+   * 凭据名称。
+   */
+  SecretName: string
+
+  /**
+   * 新增加的版本号。
+   */
+  VersionId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRotationHistory返回参数结构体
  */
 export interface DescribeRotationHistoryResponse {
@@ -820,19 +959,23 @@ export interface DescribeRotationHistoryResponse {
 }
 
 /**
- * GetSecretValue请求参数结构体
+ * GetSSHKeyPairValue请求参数结构体
  */
-export interface GetSecretValueRequest {
+export interface GetSSHKeyPairValueRequest {
   /**
-   * 指定凭据的名称。
+   * 凭据名称，此凭据只能为SSH密钥对凭据类型。
    */
   SecretName: string
+}
 
+/**
+ * DescribeAsyncRequestInfo请求参数结构体
+ */
+export interface DescribeAsyncRequestInfoRequest {
   /**
-      * 指定对应凭据的版本号。
-对于云产品凭据如Mysql凭据，通过指定凭据名称和历史版本号来获取历史轮转凭据的明文信息，如果要获取当前正在使用的凭据版本的明文，需要将版本号指定为：SSM_Current。
-      */
-  VersionId: string
+   * 异步任务ID号。
+   */
+  FlowID: number
 }
 
 /**
@@ -860,7 +1003,7 @@ export interface GetServiceStatusResponse {
  */
 export interface DescribeRotationDetailResponse {
   /**
-   * 否允许轮转，True表示开启轮转，False表示禁止轮转。
+   * 否允许轮转，true表示开启轮转，false表示禁止轮转。
    */
   EnableRotation: boolean
 
@@ -889,11 +1032,11 @@ export interface DescribeRotationDetailResponse {
 }
 
 /**
- * DescribeSecret请求参数结构体
+ * EnableSecret请求参数结构体
  */
-export interface DescribeSecretRequest {
+export interface EnableSecretRequest {
   /**
-   * 指定需要获取凭据详细信息的凭据名称。
+   * 指定启用凭据的名称。
    */
   SecretName: string
 }
@@ -964,18 +1107,40 @@ export interface DescribeRotationHistoryRequest {
 }
 
 /**
- * PutSecretValue返回参数结构体
+ * GetSSHKeyPairValue返回参数结构体
  */
-export interface PutSecretValueResponse {
+export interface GetSSHKeyPairValueResponse {
   /**
-   * 凭据名称。
+   * SSH密钥对ID。
    */
-  SecretName: string
+  SSHKeyID: string
 
   /**
-   * 新增加的版本号。
+   * 公钥明文，使用base64编码。
    */
-  VersionId: string
+  PublicKey: string
+
+  /**
+   * 私钥明文，使用base64编码
+   */
+  PrivateKey: string
+
+  /**
+   * 此密钥对所属的项目ID。
+   */
+  ProjectID: number
+
+  /**
+      * SSH密钥对的描述信息。
+用户可以在CVM侧控制台对密钥对的描述信息进行修改。
+      */
+  SSHKeyDescription: string
+
+  /**
+      * SSH密钥对的名称。
+用户可以在CVM侧控制台对密钥对的名称进行修改。
+      */
+  SSHKeyName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1067,11 +1232,11 @@ export interface ListSecretsResponse {
 }
 
 /**
- * EnableSecret请求参数结构体
+ * DescribeSecret请求参数结构体
  */
-export interface EnableSecretRequest {
+export interface DescribeSecretRequest {
   /**
-   * 指定启用凭据的名称。
+   * 指定需要获取凭据详细信息的凭据名称。
    */
   SecretName: string
 }

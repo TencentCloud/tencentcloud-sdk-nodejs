@@ -60,6 +60,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListSecrets", req, cb);
     }
     /**
+     * 创建用于托管SSH密钥对的凭据
+     */
+    async CreateSSHKeyPairSecret(req, cb) {
+        return this.request("CreateSSHKeyPairSecret", req, cb);
+    }
+    /**
      * 设置云产品凭据轮转策略，可以设置：
 是否开启轮转
 轮转周期
@@ -114,10 +120,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PutSecretValue", req, cb);
     }
     /**
-     * 该接口用于开启凭据，状态为Enabled。可以通过 GetSecretValue 接口获取凭据明文。处于PendingDelete状态的凭据不能直接开启，需要通过RestoreSecret 恢复后再开启使用。
+     * 获取凭据的详细属性信息。
      */
-    async EnableSecret(req, cb) {
-        return this.request("EnableSecret", req, cb);
+    async DescribeSecret(req, cb) {
+        return this.request("DescribeSecret", req, cb);
     }
     /**
      * 查询凭据轮转策略详情。
@@ -125,6 +131,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRotationDetail(req, cb) {
         return this.request("DescribeRotationDetail", req, cb);
+    }
+    /**
+     * 获取SSH密钥对凭据明文信息。
+     */
+    async GetSSHKeyPairValue(req, cb) {
+        return this.request("GetSSHKeyPairValue", req, cb);
     }
     /**
      * 该接口用于获取指定凭据下的版本列表信息
@@ -139,10 +151,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSecret", req, cb);
     }
     /**
-     * 获取凭据的详细属性信息。
+     * 该接口用于开启凭据，状态为Enabled。可以通过 GetSecretValue 接口获取凭据明文。处于PendingDelete状态的凭据不能直接开启，需要通过RestoreSecret 恢复后再开启使用。
      */
-    async DescribeSecret(req, cb) {
-        return this.request("DescribeSecret", req, cb);
+    async EnableSecret(req, cb) {
+        return this.request("EnableSecret", req, cb);
     }
     /**
      * 该接口用于恢复计划删除（PendingDelete状态）中的凭据，取消计划删除。取消计划删除的凭据将处于Disabled 状态，如需恢复使用，通过EnableSecret 接口开启凭据。

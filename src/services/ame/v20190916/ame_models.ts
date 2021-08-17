@@ -52,10 +52,10 @@ export interface DescribeMusicResponse {
  */
 export interface DescribeLyricResponse {
   /**
-      * 歌词详情
+      * 歌词或者波形图详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Lyric?: Lyric
+  Lyric: Lyric
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -71,6 +71,41 @@ export interface ModifyMusicOnShelvesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 曲库包用途信息
+ */
+export interface UseRange {
+  /**
+   * 用途id
+   */
+  UseRangeId: number
+
+  /**
+   * 用途范围名称
+   */
+  Name: string
+}
+
+/**
+ * DescribeKTVPlaylistDetail请求参数结构体
+ */
+export interface DescribeKTVPlaylistDetailRequest {
+  /**
+   * 歌单Id
+   */
+  PlaylistId: string
+
+  /**
+   * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
+   */
+  Offset?: number
+
+  /**
+   * 分页返回的记录条数，默认值：50。将返回第 Offset 到第 Offset+Limit-1 条。
+   */
+  Limit?: number
 }
 
 /**
@@ -274,6 +309,21 @@ export interface DescribeCloudMusicPurchasedResponse {
 }
 
 /**
+ * DescribeKTVPlaylists请求参数结构体
+ */
+export interface DescribeKTVPlaylistsRequest {
+  /**
+   * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
+   */
+  Offset?: number
+
+  /**
+   * 分页返回的记录条数，默认值：50。将返回第 Offset 到第 Offset+Limit-1 条。
+   */
+  Limit?: number
+}
+
+/**
  * 数据信息
  */
 export interface DataInfo {
@@ -304,43 +354,23 @@ export interface DataInfo {
 }
 
 /**
- * KTV 曲目基础信息
+ * DescribeKTVPlaylistDetail返回参数结构体
  */
-export interface KTVMusicBaseInfo {
+export interface DescribeKTVPlaylistDetailResponse {
   /**
-   * 歌曲 Id
+   * 歌曲基础信息列表
    */
-  MusicId: string
+  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
 
   /**
-   * 歌曲名称
+   * 歌单基础信息
    */
-  Name: string
+  PlaylistBaseInfo: KTVPlaylistBaseInfo
 
   /**
-   * 演唱者列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SingerSet: Array<string>
-
-  /**
-   * 作词者列表
-   */
-  LyricistSet: Array<string>
-
-  /**
-   * 作曲者列表
-   */
-  ComposerSet: Array<string>
-
-  /**
-   * 标签列表
-   */
-  TagSet: Array<string>
-
-  /**
-   * 歌曲时长
-   */
-  Duration: number
+  RequestId?: string
 }
 
 /**
@@ -506,18 +536,24 @@ export interface TakeMusicOffShelvesRequest {
 }
 
 /**
- * SearchKTVMusics返回参数结构体
+ * PutMusicOnTheShelves返回参数结构体
  */
-export interface SearchKTVMusicsResponse {
+export interface PutMusicOnTheShelvesResponse {
   /**
-   * 总记录数
+   * 操作成功数量
    */
-  TotalCount: number
+  SuccessNum: number
 
   /**
-   * KTV 曲目列表
+   * 操作失败数量
    */
-  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
+  FailedNum: number
+
+  /**
+      * 失败歌曲Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedMusicIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -572,45 +608,43 @@ export interface DescribeItemByIdRequest {
 }
 
 /**
- * DescribeMusic请求参数结构体
+ * DescribeAuthInfo请求参数结构体
  */
-export interface DescribeMusicRequest {
+export interface DescribeAuthInfoRequest {
   /**
-   * 歌曲ID
+   * 偏移量：Offset=Offset+Limit
    */
-  ItemId: string
+  Offset?: number
 
   /**
-   * 在应用前端播放音乐C端用户的唯一标识。无需是账户信息，用户唯一标识即可。
+   * 数据条数
    */
-  IdentityId: string
+  Limit?: number
 
   /**
-      * MP3-320K-FTD-P  为获取320kbps歌曲热门片段。
-MP3-320K-FTD 为获取320kbps已核验歌曲完整资源。
-      */
-  SubItemType?: string
-
-  /**
-      * CDN URL Protocol:HTTP or HTTPS/SSL
-Values:Y , N(default)
-      */
-  Ssl?: string
+   * 搜索关键字
+   */
+  Key?: string
 }
 
 /**
- * 曲库包用途信息
+ * DescribeKTVPlaylists返回参数结构体
  */
-export interface UseRange {
+export interface DescribeKTVPlaylistsResponse {
   /**
-   * 用途id
+   * 推荐歌单列表
    */
-  UseRangeId: number
+  PlaylistBaseInfoSet: Array<KTVPlaylistBaseInfo>
 
   /**
-   * 用途范围名称
+   * 推荐歌单列表总数
    */
-  Name: string
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -639,24 +673,83 @@ export interface DescribeStationsRequest {
 }
 
 /**
- * PutMusicOnTheShelves返回参数结构体
+ * 对外开放信息
  */
-export interface PutMusicOnTheShelvesResponse {
+export interface MusicOpenDetail {
   /**
-   * 操作成功数量
-   */
-  SuccessNum: number
-
-  /**
-   * 操作失败数量
-   */
-  FailedNum: number
-
-  /**
-      * 失败歌曲Id
+      * 音乐Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailedMusicIds: Array<string>
+  MusicId: string
+
+  /**
+      * 专辑名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlbumName: string
+
+  /**
+      * 专辑图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlbumImageUrl: string
+
+  /**
+      * 音乐名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicName: string
+
+  /**
+      * 音乐图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicImageUrl: string
+
+  /**
+      * 歌手
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Singers: Array<string>
+
+  /**
+      * 播放时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration: number
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 歌词url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LyricUrl: string
+
+  /**
+      * 波形图url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WaveformUrl: string
+}
+
+/**
+ * SearchKTVMusics返回参数结构体
+ */
+export interface SearchKTVMusicsResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount: number
+
+  /**
+   * KTV 曲目列表
+   */
+  KTVMusicInfoSet: Array<KTVMusicBaseInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -767,62 +860,43 @@ export interface DescribeCloudMusicResponse {
 }
 
 /**
- * 对外开放信息
+ * KTV 曲目基础信息
  */
-export interface MusicOpenDetail {
+export interface KTVMusicBaseInfo {
   /**
-      * 音乐Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 歌曲 Id
+   */
   MusicId: string
 
   /**
-      * 专辑名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AlbumName: string
+   * 歌曲名称
+   */
+  Name: string
 
   /**
-      * 专辑图片路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AlbumImageUrl: string
+   * 演唱者列表
+   */
+  SingerSet: Array<string>
 
   /**
-      * 音乐名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MusicName: string
+   * 作词者列表
+   */
+  LyricistSet: Array<string>
 
   /**
-      * 音乐图片路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MusicImageUrl: string
+   * 作曲者列表
+   */
+  ComposerSet: Array<string>
 
   /**
-      * 歌手
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Singers: Array<string>
+   * 标签列表
+   */
+  TagSet: Array<string>
 
   /**
-      * 播放时长
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 歌曲时长
+   */
   Duration: number
-
-  /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<string>
-
-  /**
-      * 歌词url
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LyricUrl: string
 }
 
 /**
@@ -980,6 +1054,31 @@ export interface DescribeItemsResponse {
 }
 
 /**
+ * 推荐歌单基础信息
+ */
+export interface KTVPlaylistBaseInfo {
+  /**
+   * 歌单Id
+   */
+  PlaylistId: string
+
+  /**
+   * 歌单标题
+   */
+  Title: string
+
+  /**
+   * 歌单介绍
+   */
+  Description: string
+
+  /**
+   * 歌曲数量
+   */
+  MusicNum: number
+}
+
+/**
  * DescribeItemById返回参数结构体
  */
 export interface DescribeItemByIdResponse {
@@ -1096,8 +1195,10 @@ export interface DescribeLyricRequest {
   ItemId: string
 
   /**
-   * 歌词格式，可选项，可不填写，目前填写只能填LRC-LRC。该字段为预留的扩展字段。后续如果不填，会返回歌曲的所有格式的歌词。如果填写某个正确的格式，则只返回该格式的歌词。
-   */
+      * 格式，可选项，可不填写，默认值为：LRC-LRC。
+<li>LRC-LRC：歌词；</li>
+<li>JSON-ST：波形图。</li>
+      */
   SubItemType?: string
 }
 
@@ -1127,23 +1228,30 @@ export interface DescribeKTVMusicDetailResponse {
 }
 
 /**
- * DescribeAuthInfo请求参数结构体
+ * DescribeMusic请求参数结构体
  */
-export interface DescribeAuthInfoRequest {
+export interface DescribeMusicRequest {
   /**
-   * 偏移量：Offset=Offset+Limit
+   * 歌曲ID
    */
-  Offset?: number
+  ItemId: string
 
   /**
-   * 数据条数
+   * 在应用前端播放音乐C端用户的唯一标识。无需是账户信息，用户唯一标识即可。
    */
-  Limit?: number
+  IdentityId: string
 
   /**
-   * 搜索关键字
-   */
-  Key?: string
+      * MP3-320K-FTD-P  为获取320kbps歌曲热门片段。
+MP3-320K-FTD 为获取320kbps已核验歌曲完整资源。
+      */
+  SubItemType?: string
+
+  /**
+      * CDN URL Protocol:HTTP or HTTPS/SSL
+Values:Y , N(default)
+      */
+  Ssl?: string
 }
 
 /**

@@ -554,14 +554,15 @@ export interface SendSmsRequest {
   TemplateId: string
 
   /**
-      * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可登录 [短信控制台](https://console.cloud.tencent.com/smsv2)  查看。
-注：国内短信为必填参数。
+      * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可登录 [短信控制台](https://console.cloud.tencent.com/smsv2) 查看。
+<dx-alert infotype="notice" title="注意">国内短信为必填参数。</dx-alert>
       */
   SignName?: string
 
   /**
-   * 模板参数，若无模板参数，则设置为空。
-   */
+      * 模板参数，若无模板参数，则设置为空。
+<dx-alert infotype="notice" title="注意">模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致。</dx-alert>
+      */
   TemplateParamSet?: Array<string>
 
   /**

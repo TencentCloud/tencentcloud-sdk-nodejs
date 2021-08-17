@@ -23,6 +23,7 @@ import {
   UpdateDescriptionResponse,
   DescribeSecretResponse,
   DescribeSupportedProductsRequest,
+  GetSecretValueRequest,
   DeleteSecretRequest,
   CreateSecretRequest,
   RotateProductSecretRequest,
@@ -34,7 +35,7 @@ import {
   SecretMetadata,
   ListSecretVersionIdsRequest,
   DescribeRotationDetailRequest,
-  DescribeAsyncRequestInfoRequest,
+  CreateSSHKeyPairSecretResponse,
   UpdateRotationStatusResponse,
   CreateSecretResponse,
   GetRegionsRequest,
@@ -44,6 +45,7 @@ import {
   ListSecretsRequest,
   UpdateDescriptionRequest,
   EnableSecretResponse,
+  CreateSSHKeyPairSecretRequest,
   UpdateRotationStatusRequest,
   UpdateSecretRequest,
   DescribeAsyncRequestInfoResponse,
@@ -52,19 +54,21 @@ import {
   VersionInfo,
   TagFilter,
   PutSecretValueRequest,
+  PutSecretValueResponse,
   DescribeRotationHistoryResponse,
-  GetSecretValueRequest,
+  GetSSHKeyPairValueRequest,
+  DescribeAsyncRequestInfoRequest,
   GetServiceStatusResponse,
   DescribeRotationDetailResponse,
-  DescribeSecretRequest,
+  EnableSecretRequest,
   ProductPrivilegeUnit,
   DescribeRotationHistoryRequest,
-  PutSecretValueResponse,
+  GetSSHKeyPairValueResponse,
   DeleteSecretResponse,
   DisableSecretRequest,
   CreateProductSecretResponse,
   ListSecretsResponse,
-  EnableSecretRequest,
+  DescribeSecretRequest,
   GetServiceStatusRequest,
   ListSecretVersionIdsResponse,
 } from "./ssm_models"
@@ -128,6 +132,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListSecretsResponse) => void
   ): Promise<ListSecretsResponse> {
     return this.request("ListSecrets", req, cb)
+  }
+
+  /**
+   * 创建用于托管SSH密钥对的凭据
+   */
+  async CreateSSHKeyPairSecret(
+    req: CreateSSHKeyPairSecretRequest,
+    cb?: (error: string, rep: CreateSSHKeyPairSecretResponse) => void
+  ): Promise<CreateSSHKeyPairSecretResponse> {
+    return this.request("CreateSSHKeyPairSecret", req, cb)
   }
 
   /**
@@ -217,13 +231,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于开启凭据，状态为Enabled。可以通过 GetSecretValue 接口获取凭据明文。处于PendingDelete状态的凭据不能直接开启，需要通过RestoreSecret 恢复后再开启使用。
+   * 获取凭据的详细属性信息。
    */
-  async EnableSecret(
-    req: EnableSecretRequest,
-    cb?: (error: string, rep: EnableSecretResponse) => void
-  ): Promise<EnableSecretResponse> {
-    return this.request("EnableSecret", req, cb)
+  async DescribeSecret(
+    req: DescribeSecretRequest,
+    cb?: (error: string, rep: DescribeSecretResponse) => void
+  ): Promise<DescribeSecretResponse> {
+    return this.request("DescribeSecret", req, cb)
   }
 
   /**
@@ -235,6 +249,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRotationDetailResponse) => void
   ): Promise<DescribeRotationDetailResponse> {
     return this.request("DescribeRotationDetail", req, cb)
+  }
+
+  /**
+   * 获取SSH密钥对凭据明文信息。
+   */
+  async GetSSHKeyPairValue(
+    req: GetSSHKeyPairValueRequest,
+    cb?: (error: string, rep: GetSSHKeyPairValueResponse) => void
+  ): Promise<GetSSHKeyPairValueResponse> {
+    return this.request("GetSSHKeyPairValue", req, cb)
   }
 
   /**
@@ -258,13 +282,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取凭据的详细属性信息。
+   * 该接口用于开启凭据，状态为Enabled。可以通过 GetSecretValue 接口获取凭据明文。处于PendingDelete状态的凭据不能直接开启，需要通过RestoreSecret 恢复后再开启使用。
    */
-  async DescribeSecret(
-    req: DescribeSecretRequest,
-    cb?: (error: string, rep: DescribeSecretResponse) => void
-  ): Promise<DescribeSecretResponse> {
-    return this.request("DescribeSecret", req, cb)
+  async EnableSecret(
+    req: EnableSecretRequest,
+    cb?: (error: string, rep: EnableSecretResponse) => void
+  ): Promise<EnableSecretResponse> {
+    return this.request("EnableSecret", req, cb)
   }
 
   /**

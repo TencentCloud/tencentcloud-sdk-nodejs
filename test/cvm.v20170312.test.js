@@ -78,9 +78,9 @@ it("cvm.v20170312.InquiryPriceModifyInstancesChargeType", async function () {
     }
 })
 
-it("cvm.v20170312.ModifyHostsAttribute", async function () {
+it("cvm.v20170312.DescribeInstancesModification", async function () {
     try {
-       const data = await client.ModifyHostsAttribute({})
+       const data = await client.DescribeInstancesModification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +681,16 @@ it("cvm.v20170312.DescribeInternetChargeTypeConfigs", async function () {
 it("cvm.v20170312.RebootInstances", async function () {
     try {
        const data = await client.RebootInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.ModifyHostsAttribute", async function () {
+    try {
+       const data = await client.ModifyHostsAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

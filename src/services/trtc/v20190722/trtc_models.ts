@@ -61,12 +61,12 @@ export interface DescribeAbnormalEventRequest {
   SdkAppId: string
 
   /**
-   * 查询开始时间,本地unix时间戳（1588031999s）
+   * 查询开始时间,本地unix时间戳（1592448600s）
    */
   StartTime: number
 
   /**
-   * 查询结束时间,本地unix时间戳（1588031999s）
+   * 查询结束时间,本地unix时间戳（1592449080s）
    */
   EndTime: number
 
@@ -83,7 +83,7 @@ export interface DescribeTrtcInteractiveTimeResponse {
   /**
    * 应用的用量信息数组。
    */
-  Usages?: Array<OneSdkAppIdUsagesInfo>
+  Usages: Array<OneSdkAppIdUsagesInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -389,17 +389,17 @@ export interface DescribeUserInformationRequest {
   CommId: string
 
   /**
-   * 查询开始时间，14天内。本地unix时间戳（1588031999s）
+   * 查询开始时间，14天内。本地unix时间戳（1590065777）
    */
   StartTime: number
 
   /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
+   * 查询结束时间，本地unix时间戳（1590065877）
    */
   EndTime: number
 
   /**
-   * 用户SDKAppID（1400188366）
+   * 用户SDKAppID（1400353843）
    */
   SdkAppId: string
 
@@ -429,17 +429,17 @@ export interface DescribeCallDetailRequest {
   CommId: string
 
   /**
-   * 查询开始时间，14天内。本地unix时间戳（1588031999s），查询实时数据时，查询起止时间不超过1个小时。
+   * 查询开始时间，14天内。本地unix时间戳（1590065777s），查询实时数据时，查询起止时间不超过1个小时。
    */
   StartTime: number
 
   /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
+   * 查询结束时间，本地unix时间戳（1590065877s）
    */
   EndTime: number
 
   /**
-   * 用户SDKAppID（1400188366）
+   * 用户SDKAppID（1400353843）
    */
   SdkAppId: string
 
@@ -717,17 +717,17 @@ export interface UserInformation {
  */
 export interface DescribeHistoryScaleRequest {
   /**
-   * 用户sdkappid
+   * 用户sdkappid(1400188366)
    */
   SdkAppId: string
 
   /**
-   * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+   * 查询开始时间，5天内。本地unix时间戳（1587571000s）
    */
   StartTime: number
 
   /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
+   * 查询结束时间，本地unix时间戳（1588034999s）
    */
   EndTime: number
 }
@@ -1187,7 +1187,7 @@ export interface DescribeTrtcMcuTranscodeTimeResponse {
   /**
    * 应用的用量信息数组。
    */
-  Usages?: Array<OneSdkAppIdTranscodeTimeUsagesInfo>
+  Usages: Array<OneSdkAppIdTranscodeTimeUsagesInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1512,12 +1512,12 @@ export interface DescribeRoomInformationRequest {
   SdkAppId: string
 
   /**
-   * 查询开始时间，14天内。本地unix时间戳（1588031999s）
+   * 查询开始时间，14天内。本地unix时间戳（1588031999）
    */
   StartTime: number
 
   /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
+   * 查询结束时间，本地unix时间戳（1588034999）
    */
   EndTime: number
 
@@ -1575,12 +1575,12 @@ export interface DescribeDetailEventRequest {
   CommId: string
 
   /**
-   * 查询开始时间，14天内。本地unix时间戳（1588031999s）
+   * 查询开始时间，14天内。本地unix时间戳（1588055615s）
    */
   StartTime: number
 
   /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
+   * 查询结束时间，本地unix时间戳（1588058615s）
    */
   EndTime: number
 
@@ -1737,13 +1737,13 @@ export interface DescribeHistoryScaleResponse {
   /**
    * 返回的数据条数
    */
-  Total?: number
+  Total: number
 
   /**
       * 返回的数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ScaleList?: Array<ScaleInfomation>
+  ScaleList: Array<ScaleInfomation>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

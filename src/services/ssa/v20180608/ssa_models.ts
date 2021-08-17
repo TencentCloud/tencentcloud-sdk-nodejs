@@ -1569,6 +1569,18 @@ export interface DataEvent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SsaEventId: string
+
+  /**
+      * 是否新接入的云防事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNewCfwEvent: boolean
+
+  /**
+      * 出入站方向
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Direction: string
 }
 
 /**

@@ -235,11 +235,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DescribeDiskOperationLogs）用于查询云盘操作日志列表。
-
-可根据云盘ID过滤。云盘ID形如：disk-a1kmcp13。
-
-     */
+   * 查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
+   */
   async DescribeDiskOperationLogs(
     req: DescribeDiskOperationLogsRequest,
     cb?: (error: string, rep: DescribeDiskOperationLogsResponse) => void

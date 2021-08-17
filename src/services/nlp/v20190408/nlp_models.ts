@@ -173,7 +173,7 @@ export interface KeywordsExtractionResponse {
       * 关键词提取结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Keywords?: Array<Keyword>
+  Keywords: Array<Keyword>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -237,7 +237,7 @@ export interface DescribeRelationRequest {
  */
 export interface KeywordsExtractionRequest {
   /**
-   * 待处理的文本（仅支持UTF-8格式，不超过10000字）
+   * 待处理的文本（仅支持UTF-8格式，不超过10000字符）
    */
   Text: string
 
@@ -654,7 +654,7 @@ export interface TextSimilarityRequest {
   SrcText: string
 
   /**
-   * 目标句子
+   * 目标句子（以句子数量为单位消耗资源包）
    */
   TargetText: Array<string>
 }

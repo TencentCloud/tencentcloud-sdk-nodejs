@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteSecretVersionResponse, RestoreSecretResponse, UpdateDescriptionResponse, DescribeSecretResponse, DescribeSupportedProductsRequest, DeleteSecretRequest, CreateSecretRequest, RotateProductSecretRequest, CreateProductSecretRequest, GetSecretValueResponse, GetRegionsResponse, DescribeSupportedProductsResponse, DeleteSecretVersionRequest, ListSecretVersionIdsRequest, DescribeRotationDetailRequest, DescribeAsyncRequestInfoRequest, UpdateRotationStatusResponse, CreateSecretResponse, GetRegionsRequest, UpdateSecretResponse, DisableSecretResponse, ListSecretsRequest, UpdateDescriptionRequest, EnableSecretResponse, UpdateRotationStatusRequest, UpdateSecretRequest, DescribeAsyncRequestInfoResponse, RestoreSecretRequest, RotateProductSecretResponse, PutSecretValueRequest, DescribeRotationHistoryResponse, GetSecretValueRequest, GetServiceStatusResponse, DescribeRotationDetailResponse, DescribeSecretRequest, DescribeRotationHistoryRequest, PutSecretValueResponse, DeleteSecretResponse, DisableSecretRequest, CreateProductSecretResponse, ListSecretsResponse, EnableSecretRequest, GetServiceStatusRequest, ListSecretVersionIdsResponse } from "./ssm_models";
+import { DeleteSecretVersionResponse, RestoreSecretResponse, UpdateDescriptionResponse, DescribeSecretResponse, DescribeSupportedProductsRequest, GetSecretValueRequest, DeleteSecretRequest, CreateSecretRequest, RotateProductSecretRequest, CreateProductSecretRequest, GetSecretValueResponse, GetRegionsResponse, DescribeSupportedProductsResponse, DeleteSecretVersionRequest, ListSecretVersionIdsRequest, DescribeRotationDetailRequest, CreateSSHKeyPairSecretResponse, UpdateRotationStatusResponse, CreateSecretResponse, GetRegionsRequest, UpdateSecretResponse, DisableSecretResponse, ListSecretsRequest, UpdateDescriptionRequest, EnableSecretResponse, CreateSSHKeyPairSecretRequest, UpdateRotationStatusRequest, UpdateSecretRequest, DescribeAsyncRequestInfoResponse, RestoreSecretRequest, RotateProductSecretResponse, PutSecretValueRequest, PutSecretValueResponse, DescribeRotationHistoryResponse, GetSSHKeyPairValueRequest, DescribeAsyncRequestInfoRequest, GetServiceStatusResponse, DescribeRotationDetailResponse, EnableSecretRequest, DescribeRotationHistoryRequest, GetSSHKeyPairValueResponse, DeleteSecretResponse, DisableSecretRequest, CreateProductSecretResponse, ListSecretsResponse, DescribeSecretRequest, GetServiceStatusRequest, ListSecretVersionIdsResponse } from "./ssm_models";
 /**
  * ssm client
  * @class
@@ -29,6 +29,10 @@ export declare class Client extends AbstractClient {
      * 该接口用于获取所有凭据的详细列表，可以指定过滤字段、排序方式等。
      */
     ListSecrets(req: ListSecretsRequest, cb?: (error: string, rep: ListSecretsResponse) => void): Promise<ListSecretsResponse>;
+    /**
+     * 创建用于托管SSH密钥对的凭据
+     */
+    CreateSSHKeyPairSecret(req: CreateSSHKeyPairSecretRequest, cb?: (error: string, rep: CreateSSHKeyPairSecretResponse) => void): Promise<CreateSSHKeyPairSecretResponse>;
     /**
      * 设置云产品凭据轮转策略，可以设置：
 是否开启轮转
@@ -68,14 +72,18 @@ export declare class Client extends AbstractClient {
      */
     PutSecretValue(req: PutSecretValueRequest, cb?: (error: string, rep: PutSecretValueResponse) => void): Promise<PutSecretValueResponse>;
     /**
-     * 该接口用于开启凭据，状态为Enabled。可以通过 GetSecretValue 接口获取凭据明文。处于PendingDelete状态的凭据不能直接开启，需要通过RestoreSecret 恢复后再开启使用。
+     * 获取凭据的详细属性信息。
      */
-    EnableSecret(req: EnableSecretRequest, cb?: (error: string, rep: EnableSecretResponse) => void): Promise<EnableSecretResponse>;
+    DescribeSecret(req: DescribeSecretRequest, cb?: (error: string, rep: DescribeSecretResponse) => void): Promise<DescribeSecretResponse>;
     /**
      * 查询凭据轮转策略详情。
 本接口只适用于云产品凭据。
      */
     DescribeRotationDetail(req: DescribeRotationDetailRequest, cb?: (error: string, rep: DescribeRotationDetailResponse) => void): Promise<DescribeRotationDetailResponse>;
+    /**
+     * 获取SSH密钥对凭据明文信息。
+     */
+    GetSSHKeyPairValue(req: GetSSHKeyPairValueRequest, cb?: (error: string, rep: GetSSHKeyPairValueResponse) => void): Promise<GetSSHKeyPairValueResponse>;
     /**
      * 该接口用于获取指定凭据下的版本列表信息
      */
@@ -85,9 +93,9 @@ export declare class Client extends AbstractClient {
      */
     CreateSecret(req: CreateSecretRequest, cb?: (error: string, rep: CreateSecretResponse) => void): Promise<CreateSecretResponse>;
     /**
-     * 获取凭据的详细属性信息。
+     * 该接口用于开启凭据，状态为Enabled。可以通过 GetSecretValue 接口获取凭据明文。处于PendingDelete状态的凭据不能直接开启，需要通过RestoreSecret 恢复后再开启使用。
      */
-    DescribeSecret(req: DescribeSecretRequest, cb?: (error: string, rep: DescribeSecretResponse) => void): Promise<DescribeSecretResponse>;
+    EnableSecret(req: EnableSecretRequest, cb?: (error: string, rep: EnableSecretResponse) => void): Promise<EnableSecretResponse>;
     /**
      * 该接口用于恢复计划删除（PendingDelete状态）中的凭据，取消计划删除。取消计划删除的凭据将处于Disabled 状态，如需恢复使用，通过EnableSecret 接口开启凭据。
      */

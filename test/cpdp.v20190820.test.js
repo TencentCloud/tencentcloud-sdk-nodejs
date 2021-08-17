@@ -38,9 +38,29 @@ it("cpdp.v20190820.ModifyMntMbrBindRelateAcctBankCode", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateExternalAnchor", async function () {
+    try {
+       const data = await client.CreateExternalAnchor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryOrder", async function () {
     try {
        const data = await client.QueryOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.UploadExternalAnchorInfo", async function () {
+    try {
+       const data = await client.UploadExternalAnchorInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +111,16 @@ it("cpdp.v20190820.DownloadBill", async function () {
 it("cpdp.v20190820.QueryCustAcctIdBalance", async function () {
     try {
        const data = await client.QueryCustAcctIdBalance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryAnchorContractInfo", async function () {
+    try {
+       const data = await client.QueryAnchorContractInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +448,16 @@ it("cpdp.v20190820.CheckAcct", async function () {
     }
 })
 
+it("cpdp.v20190820.BindAccount", async function () {
+    try {
+       const data = await client.BindAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryMerchantOrder", async function () {
     try {
        const data = await client.QueryMerchantOrder({})
@@ -458,9 +498,9 @@ it("cpdp.v20190820.ModifyMerchant", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryAnchorContractInfo", async function () {
+it("cpdp.v20190820.ModifyBindedAccount", async function () {
     try {
-       const data = await client.QueryAnchorContractInfo({})
+       const data = await client.ModifyBindedAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -199,6 +199,30 @@ export interface TemDeployApplicationDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CurrentBatchStatus: string
+
+  /**
+      * 新版本version
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewDeployVersion: string
+
+  /**
+      * 旧版本version
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldDeployVersion: string
+
+  /**
+      * 包名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewVersionPackageInfo: string
+
+  /**
+      * 下一批次开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextBatchStartTime: number
 }
 
 /**
@@ -291,6 +315,12 @@ export interface DeployServiceBatchDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NewPods?: Array<DeployServicePodDetail>
+
+  /**
+      * =0：手动确认批次；>0：下一批次开始时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextBatchStartTime?: number
 }
 
 /**

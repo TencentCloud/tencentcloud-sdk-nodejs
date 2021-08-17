@@ -33,6 +33,7 @@ import {
   ModifyInstancesChargeTypeResponse,
   AccountQuota,
   InquiryPriceResetInstancesInternetMaxBandwidthResponse,
+  InternetBandwidthConfig,
   ModifyKeyPairAttributeRequest,
   AssociateSecurityGroupsRequest,
   PostPaidQuota,
@@ -65,6 +66,7 @@ import {
   DescribeInstancesOperationLimitRequest,
   ModifyInstancesChargeTypeRequest,
   DescribeInstanceVncUrlRequest,
+  StopInstancesResponse,
   ModifyImageSharePermissionRequest,
   DisassociateInstancesKeyPairsResponse,
   InquiryPriceResizeInstanceDisksRequest,
@@ -93,7 +95,7 @@ import {
   ResetInstancesInternetMaxBandwidthResponse,
   DescribeInstanceFamilyConfigsResponse,
   CreateImageResponse,
-  StopInstancesResponse,
+  DescribeInstancesModificationRequest,
   InstanceMarketOptionsRequest,
   DescribeImageSharePermissionResponse,
   ResetInstancesPasswordResponse,
@@ -107,7 +109,7 @@ import {
   DescribeImportImageOsResponse,
   InquirePricePurchaseReservedInstancesOfferingRequest,
   PrePaidQuota,
-  DataDisk,
+  DescribeInstancesModificationResponse,
   DescribeKeyPairsRequest,
   OperationCountLimit,
   ReservedInstanceConfigInfoItem,
@@ -158,6 +160,7 @@ import {
   InquiryPriceTerminateInstancesRequest,
   ImageOsList,
   ReservedInstanceTypeItem,
+  InstanceTypeConfigStatus,
   InquiryPriceRunInstancesResponse,
   DescribeHostsRequest,
   DescribeAccountQuotaRequest,
@@ -196,7 +199,7 @@ import {
   RunMonitorServiceEnabled,
   ResetInstanceResponse,
   VirtualPrivateCloud,
-  InternetBandwidthConfig,
+  InstanceChargePrepaid,
   ModifyDisasterRecoverGroupAttributeResponse,
   DescribeInstanceTypeConfigsResponse,
   ResizeInstanceDisksRequest,
@@ -209,7 +212,7 @@ import {
   DisassociateSecurityGroupsResponse,
   Snapshot,
   ModifyInstancesProjectResponse,
-  InstanceChargePrepaid,
+  DataDisk,
   Price,
 } from "./cvm_models"
 
@@ -301,13 +304,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
+   * 本接口 (DescribeInstancesModification) 用于查询指定实例支持调整的机型配置。
    */
-  async ModifyHostsAttribute(
-    req: ModifyHostsAttributeRequest,
-    cb?: (error: string, rep: ModifyHostsAttributeResponse) => void
-  ): Promise<ModifyHostsAttributeResponse> {
-    return this.request("ModifyHostsAttribute", req, cb)
+  async DescribeInstancesModification(
+    req: DescribeInstancesModificationRequest,
+    cb?: (error: string, rep: DescribeInstancesModificationResponse) => void
+  ): Promise<DescribeInstancesModificationResponse> {
+    return this.request("DescribeInstancesModification", req, cb)
   }
 
   /**
@@ -1079,6 +1082,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: RebootInstancesResponse) => void
   ): Promise<RebootInstancesResponse> {
     return this.request("RebootInstances", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyHostsAttribute）用于修改CDH实例的属性，如实例名称和续费标记等。参数HostName和RenewFlag必须设置其中一个，但不能同时设置。
+   */
+  async ModifyHostsAttribute(
+    req: ModifyHostsAttributeRequest,
+    cb?: (error: string, rep: ModifyHostsAttributeResponse) => void
+  ): Promise<ModifyHostsAttributeResponse> {
+    return this.request("ModifyHostsAttribute", req, cb)
   }
 
   /**

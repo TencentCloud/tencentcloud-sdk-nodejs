@@ -1,89 +1,4 @@
 /**
- * 患者信息
- */
-export interface PatientInfo {
-    /**
-      * 患者姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 患者性别
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Sex: string;
-    /**
-      * 患者年龄
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Age: string;
-    /**
-      * 患者手机号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Phone: string;
-    /**
-      * 患者地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Address: string;
-    /**
-      * 患者身份证
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IdCard: string;
-    /**
-      * 健康卡号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HealthCardNo: string;
-    /**
-      * 社保卡号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SocialSecurityCardNo: string;
-    /**
-      * 出生日期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Birthday: string;
-    /**
-      * 民族
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Ethnicity: string;
-    /**
-      * 婚姻状况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Married: string;
-    /**
-      * 职业
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Profession: string;
-    /**
-      * 教育程度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EducationBackground: string;
-    /**
-      * 国籍
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Nationality: string;
-    /**
-      * 籍贯
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BirthPlace: string;
-    /**
-      * 医保类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MedicalInsuranceType: string;
-}
-/**
  * 检验报告
  */
 export interface Indicator {
@@ -92,19 +7,6 @@ export interface Indicator {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Indicators: Array<IndicatorItem>;
-}
-/**
- * ReportTextStructured返回参数结构体
- */
-export interface ReportTextStructuredResponse {
-    /**
-      * 报告内容
-      */
-    Report?: TextReport;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 报告模板
@@ -202,69 +104,99 @@ export interface Elastic {
     Name: string;
 }
 /**
- * 转移
+ * 报告基本信息
  */
-export interface Metastasis {
+export interface ReportInfo {
     /**
-      * 索引位置
+      * 医院名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Index: number;
+    Hospital: string;
     /**
-      * 原文
+      * 科室名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Text: string;
+    DepartmentName: string;
     /**
-      * 部位
+      * 申请时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Part: string;
+    BillingTime: string;
     /**
-      * 局部总数
+      * 报告时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalNum: string;
+    ReportTime: string;
     /**
-      * 转移数量
+      * 检查时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TransferNum: string;
-}
-/**
- * 病史
- */
-export interface DiseaseHistory {
+    InspectTime: string;
     /**
-      * 过敏史
+      * 检查号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Allergy: string;
+    CheckNum: string;
     /**
-      * 传染疾病史
+      * 影像号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Infect: string;
+    ImageNum: string;
     /**
-      * 主要病史
+      * 放射号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MainDisease: string;
+    RadiationNum: string;
     /**
-      * 手术外伤史
+      * 检验号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Operation: string;
+    TestNum: string;
     /**
-      * 输血史
+      * 门诊号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Transfusion: string;
+    OutpatientNum: string;
     /**
-      * 疾病史
+      * 病理号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Disease: string;
+    PathologyNum: string;
+    /**
+      * 住院号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InHospitalNum: string;
+    /**
+      * 样本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SampleNum: string;
+    /**
+      * 标本种类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SampleType: string;
+    /**
+      * 病历号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MedicalRecordNum: string;
+    /**
+      * 报告名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReportName: string;
+    /**
+      * 超声号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UltraNum: string;
+    /**
+      * 临床诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Diagnose: string;
 }
 /**
  * Ihc信息
@@ -326,58 +258,6 @@ export interface SurgeryHistory {
     DischargeDiagnosis: SurgeryAttr;
 }
 /**
- * ImageToObject请求参数结构体
- */
-export interface ImageToObjectRequest {
-    /**
-      * 图片列表，允许传入多张图片，支持传入图片的url或base64编码
-      */
-    ImageInfoList: Array<ImageInfo>;
-    /**
-      * 图片处理参数
-      */
-    HandleParam: HandleParam;
-    /**
-      * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
-      */
-    Type: number;
-    /**
-      * 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为 False，则 Type 字段不能为 0，否则无法输出结果。
-注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
-      */
-    IsUsedClassify: boolean;
-}
-/**
- * 结论
- */
-export interface Summary {
-    /**
-      * 症状
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Symptom: Array<SymptomInfo>;
-    /**
-      * 文本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Text: string;
-}
-/**
- * 诊治信息
- */
-export interface Treatment {
-    /**
-      * 主诉
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ChiefComplaint: string;
-    /**
-      * 入院诊断
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AdmissionDiagnosis: string;
-}
-/**
  * 图片处理参数
  */
 export interface HandleParam {
@@ -415,72 +295,44 @@ export interface HandleParam {
     ScaleTargetSize?: number;
 }
 /**
- * ReportImageStructured请求参数结构体
+ * ImageToObject请求参数结构体
  */
-export interface ReportImageStructuredRequest {
+export interface ImageToObjectRequest {
     /**
-      * 医疗报告图片URL
+      * 图片列表，允许传入多张图片，支持传入图片的url或base64编码
       */
-    ImageURL?: string;
+    ImageInfoList: Array<ImageInfo>;
     /**
-      * 医疗报告图片base64编码后内容
+      * 图片处理参数
       */
-    ImageBase64?: string;
+    HandleParam: HandleParam;
+    /**
+      * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
+      */
+    Type: number;
+    /**
+      * 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为 False，则 Type 字段不能为 0，否则无法输出结果。
+注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
+      */
+    IsUsedClassify: boolean;
 }
 /**
- * 检查所见内容，常见于病理，检查报告
+ * TextToObject请求参数结构体
  */
-export interface Finding {
+export interface TextToObjectRequest {
     /**
-      * 原文文本内容
-注意：此字段可能返回 null，表示取不到有效值。
+      * 报告文本
       */
     Text: string;
     /**
-      * 肿瘤结节列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 报告类型，目前支持12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
       */
-    TuberList: Array<Tuber>;
-}
-/**
- * 文本类型报告返回结果
- */
-export interface TextReport {
+    Type: number;
     /**
-      * 报告类别信息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为False，则Type字段不能为0，否则无法输出结果。
+注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
       */
-    KindSet: Array<KindItem>;
-    /**
-      * 基本信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BasicInfo: BasicInfo;
-    /**
-      * 个人隐私信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PersonalInfo: PersonalInfo;
-    /**
-      * 检验指标表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TestList: Array<TestItem>;
-    /**
-      * 检查报告内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Inspection: Inspection;
-    /**
-      * 病历资料
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CaseHistory: CaseHistory;
-    /**
-      * 病理检查内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Pathology: Pathology;
+    IsUsedClassify: boolean;
 }
 /**
  * 纵横比
@@ -546,359 +398,6 @@ export interface SymptomInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Src: string;
-}
-/**
- * 检查报告结论，常见于病理检查报告
- */
-export interface Conclusion {
-    /**
-      * 原文文本内容
-      */
-    Text: string;
-    /**
-      * 病症列表
-      */
-    SymptomList: Array<Symptom>;
-}
-/**
- * 孕产史
- */
-export interface ObstericalMedicalHistory {
-    /**
-      * 婚史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MarriageHistory: string;
-    /**
-      * 孕史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FertilityHistory: string;
-}
-/**
- * 多发
- */
-export interface Multiple {
-    /**
-      * 原文位置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Index: Array<number>;
-    /**
-      * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Src: string;
-    /**
-      * 值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: string;
-    /**
-      * 数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Count: number;
-    /**
-      * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-}
-/**
- * 出入院信息
- */
-export interface Hospitalization {
-    /**
-      * 入院时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AdmissionTime: string;
-    /**
-      * 出院时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DischargeTime: string;
-    /**
-      * 住院天数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AdmissionDays: string;
-    /**
-      * 入院诊断
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AdmissionDignosis: string;
-    /**
-      * 入院情况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AdmissionCondition: string;
-    /**
-      * 诊疗经过
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiagnosisTreatment: string;
-    /**
-      * 出院诊断
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DischargeDiagnosis: string;
-    /**
-      * 出院医嘱
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DischargeInstruction: string;
-}
-/**
- * 家族疾病史
- */
-export interface FamilyMedicalHistory {
-    /**
-      * 家族成员史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RelativeHistory: string;
-    /**
-      * 家族肿瘤史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RelativeCancerHistory: string;
-    /**
-      * 家族遗传史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GeneticHistory: string;
-}
-/**
- * 建议
- */
-export interface Advice {
-    /**
-      * 文本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Text: string;
-}
-/**
- * 报告图片信息
- */
-export interface ImageText {
-    /**
-      * 文字内容可信度，0-100评分
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Confidence: number;
-    /**
-      * 图片文本内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Text: string;
-    /**
-      * 文本旋转角度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RotateAngle: number;
-}
-/**
- * 可见病症内容
- */
-export interface Symptom {
-    /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Desc: Attribute;
-    /**
-      * 部位
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Part: Attribute;
-    /**
-      * 等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Grade: Attribute;
-    /**
-      * 性质
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AttrList: Array<Attribute>;
-}
-/**
- * 手术记录属性
- */
-export interface SurgeryAttr {
-    /**
-      * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: string;
-}
-/**
- * 肿瘤结节
- */
-export interface Tuber {
-    /**
-      * 部位信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Part: Attribute;
-    /**
-      * 类型信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type: Attribute;
-    /**
-      * 大小信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SizeList: Array<Attribute>;
-    /**
-      * 形态信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Shape: Attribute;
-    /**
-      * 边缘信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Edge: Attribute;
-    /**
-      * CDFI信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CDFI: Attribute;
-    /**
-      * 代谢信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Metabolism: Attribute;
-    /**
-      * 淋巴结信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LymphGland: Attribute;
-    /**
-      * 淋巴门信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LymphDoor: Attribute;
-    /**
-      * 皮髓质信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SkinMedulla: Attribute;
-    /**
-      * 内部回声信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InnerEcho: Attribute;
-    /**
-      * 外部回声信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RearEcho: Attribute;
-    /**
-      * 包膜信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Envelope: Attribute;
-    /**
-      * 钙化信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Calcification: Attribute;
-    /**
-      * 强化信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Enhancement: Attribute;
-    /**
-      * 纵横比信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AspectRatio: Attribute;
-}
-/**
- * 门诊病历信息
- */
-export interface MedicalRecordInfo {
-    /**
-      * 就诊日期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiagnosisTime: string;
-    /**
-      * 就诊科室
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiagnosisDepartmentName: string;
-    /**
-      * 就诊医生
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiagnosisDoctorName: string;
-    /**
-      * 临床诊断
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClinicalDiagnosis: string;
-    /**
-      * 主述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MainNarration: string;
-    /**
-      * 体格检查
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PhysicalExamination: string;
-    /**
-      * 检查结论
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InspectionFindings: string;
-    /**
-      * 治疗意见
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TreatmentOpinion: string;
-}
-/**
- * 部位信息
- */
-export interface Part {
-    /**
-      * 原文位置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Index: Array<number>;
-    /**
-      * 部位
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NormPart: NormPart;
-    /**
-      * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Src: string;
-    /**
-      * 值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: string;
-    /**
-      * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
 }
 /**
  * 结节
@@ -1071,6 +570,171 @@ export interface TuberInfo {
     Src: string;
 }
 /**
+ * 孕产史
+ */
+export interface ObstericalMedicalHistory {
+    /**
+      * 婚史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MarriageHistory: string;
+    /**
+      * 孕史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FertilityHistory: string;
+}
+/**
+ * 多发
+ */
+export interface Multiple {
+    /**
+      * 原文位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Index: Array<number>;
+    /**
+      * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Src: string;
+    /**
+      * 值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+    /**
+      * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+    /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+}
+/**
+ * 出入院信息
+ */
+export interface Hospitalization {
+    /**
+      * 入院时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdmissionTime: string;
+    /**
+      * 出院时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DischargeTime: string;
+    /**
+      * 住院天数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdmissionDays: string;
+    /**
+      * 入院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdmissionDignosis: string;
+    /**
+      * 入院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdmissionCondition: string;
+    /**
+      * 诊疗经过
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiagnosisTreatment: string;
+    /**
+      * 出院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DischargeDiagnosis: string;
+    /**
+      * 出院医嘱
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DischargeInstruction: string;
+}
+/**
+ * 家族疾病史
+ */
+export interface FamilyMedicalHistory {
+    /**
+      * 家族成员史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RelativeHistory: string;
+    /**
+      * 家族肿瘤史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RelativeCancerHistory: string;
+    /**
+      * 家族遗传史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GeneticHistory: string;
+}
+/**
+ * 建议
+ */
+export interface Advice {
+    /**
+      * 文本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Text: string;
+}
+/**
+ * 手术记录属性
+ */
+export interface SurgeryAttr {
+    /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+}
+/**
+ * 部位信息
+ */
+export interface Part {
+    /**
+      * 原文位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Index: Array<number>;
+    /**
+      * 部位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NormPart: NormPart;
+    /**
+      * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Src: string;
+    /**
+      * 值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+    /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+}
+/**
  * ImageToClass返回参数结构体
  */
 export interface ImageToClassResponse {
@@ -1140,184 +804,49 @@ export interface Invas {
     Src: string;
 }
 /**
- * 报告基本信息
+ * 门诊病历信息
  */
-export interface ReportInfo {
+export interface MedicalRecordInfo {
     /**
-      * 医院名称
+      * 就诊日期
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Hospital: string;
+    DiagnosisTime: string;
     /**
-      * 科室名称
+      * 就诊科室
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DepartmentName: string;
+    DiagnosisDepartmentName: string;
     /**
-      * 申请时间
+      * 就诊医生
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BillingTime: string;
-    /**
-      * 报告时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReportTime: string;
-    /**
-      * 检查时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InspectTime: string;
-    /**
-      * 检查号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CheckNum: string;
-    /**
-      * 影像号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ImageNum: string;
-    /**
-      * 放射号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RadiationNum: string;
-    /**
-      * 检验号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TestNum: string;
-    /**
-      * 门诊号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OutpatientNum: string;
-    /**
-      * 病理号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PathologyNum: string;
-    /**
-      * 住院号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InHospitalNum: string;
-    /**
-      * 样本号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SampleNum: string;
-    /**
-      * 标本种类
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SampleType: string;
-    /**
-      * 病历号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MedicalRecordNum: string;
-    /**
-      * 报告名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReportName: string;
-    /**
-      * 超声号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UltraNum: string;
+    DiagnosisDoctorName: string;
     /**
       * 临床诊断
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Diagnose: string;
-}
-/**
- * 报告基本信息
- */
-export interface BasicInfo {
+    ClinicalDiagnosis: string;
     /**
-      * 医院名称
+      * 主述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HospitalName: string;
+    MainNarration: string;
     /**
-      * 科室名称
+      * 体格检查
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DepartmentName: string;
+    PhysicalExamination: string;
     /**
-      * 报告名称
+      * 检查结论
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReportName: string;
+    InspectionFindings: string;
     /**
-      * 报告时间
+      * 治疗意见
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReportTime: string;
-    /**
-      * 门诊号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OutpatientNum: string;
-    /**
-      * 住院号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InHospitalNum: string;
-    /**
-      * 检查号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InspectionNum: string;
-    /**
-      * 影像号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ImageNum: string;
-    /**
-      * 放射号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RadiationNum: string;
-    /**
-      * 病理号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PathologyNum: string;
-    /**
-      * 床位号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BedNum: string;
-    /**
-      * 入院时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InHospitalTime: string;
-    /**
-      * 出院时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OutHospitalTime: string;
-    /**
-      * 住院治疗时长
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CureDuration: string;
-    /**
-      * 住院次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HospitalizationTimes: string;
-    /**
-      * 送检检查时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InspectionTime: string;
+    TreatmentOpinion: string;
 }
 /**
  * 标准部位
@@ -1410,93 +939,89 @@ export interface Desc {
     Tuber: Array<TuberInfo>;
 }
 /**
- * 医疗事例
+ * 患者信息
  */
-export interface Case {
+export interface PatientInfo {
     /**
-      * 时间发生时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Time: string;
-    /**
-      * 事件提取值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: string;
-    /**
-      * 事件类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type: string;
-    /**
-      * 类型描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Desc: string;
-    /**
-      * 对应原文内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Text: string;
-}
-/**
- * 检验指标内容
- */
-export interface TestItem {
-    /**
-      * 标准名称编号，利用该编号可以获取详细的指标含义和解释
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ID: number;
-    /**
-      * 英文名称或简称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Code: string;
-    /**
-      * 项目指标名称
+      * 患者姓名
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Name: string;
     /**
-      * 检验结果值
+      * 患者性别
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: string;
+    Sex: string;
     /**
-      * 正常结果范围
+      * 患者年龄
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Range: string;
+    Age: string;
     /**
-      * 指标单位
+      * 患者手机号码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Util: string;
+    Phone: string;
     /**
-      * 是否正常
+      * 患者地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsNormal: boolean;
+    Address: string;
     /**
-      * 是否超标
+      * 患者身份证
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsExceed: boolean;
-}
-/**
- * ImageToObject返回参数结构体
- */
-export interface ImageToObjectResponse {
+    IdCard: string;
     /**
-      * 报告结构化结果
+      * 健康卡号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Template: Template;
+    HealthCardNo: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 社保卡号
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    SocialSecurityCardNo: string;
+    /**
+      * 出生日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Birthday: string;
+    /**
+      * 民族
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ethnicity: string;
+    /**
+      * 婚姻状况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Married: string;
+    /**
+      * 职业
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Profession: string;
+    /**
+      * 教育程度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EducationBackground: string;
+    /**
+      * 国籍
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Nationality: string;
+    /**
+      * 籍贯
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BirthPlace: string;
+    /**
+      * 医保类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MedicalInsuranceType: string;
 }
 /**
  * 个人史
@@ -1659,106 +1184,6 @@ export interface DiagCert {
     Diagnosis: Array<DiagCertItem>;
 }
 /**
- * 个人信息
- */
-export interface PersonalInfo {
-    /**
-      * 姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 性别
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Gender: string;
-    /**
-      * 年龄
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Age: string;
-    /**
-      * 身份证号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IDCard: string;
-    /**
-      * 健康卡号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HealthCardNum: string;
-    /**
-      * 社保号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SocialSecurityCardNum: string;
-    /**
-      * 出生日期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Birthday: string;
-    /**
-      * 民族
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Ethnicity: string;
-    /**
-      * 国籍
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Nationality: string;
-    /**
-      * 婚姻状况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Married: string;
-    /**
-      * 职业
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Profession: string;
-    /**
-      * 教育程度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EducationBackground: string;
-    /**
-      * 籍贯
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BirthPlace: string;
-    /**
-      * 医保卡类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MedicalInsuranceType: string;
-    /**
-      * 联系电话
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LinkPhone: string;
-    /**
-      * 联系地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LinkAddress: string;
-    /**
-      * 家属姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    KinsfolkName: string;
-    /**
-      * 家属关系
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    KinsfolkRelation: string;
-    /**
-      * 家属联系电话
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    KinsfolkPhone: string;
-}
-/**
  * 病历
  */
 export interface TreatmentRecord {
@@ -1899,61 +1324,54 @@ export interface TreatmentRecord {
     ObservationDays: string;
 }
 /**
- * TextToClass请求参数结构体
+ * 值
  */
-export interface TextToClassRequest {
+export interface Value {
     /**
-      * 报告文本
-      */
-    Text: string;
-}
-/**
- * 检查报告单
- */
-export interface Check {
-    /**
-      * 描述
+      * 等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Desc: Desc;
+    Grade: string;
     /**
-      * 结论
+      * 百分比
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Summary: Summary;
-}
-/**
- * ReportTextStructured请求参数结构体
- */
-export interface ReportTextStructuredRequest {
+    Percent: Array<number>;
     /**
-      * 报告文本内容
-      */
-    Text: string;
-}
-/**
- * 侵犯扩散
- */
-export interface Invasive {
-    /**
-      * 索引
+      * 阳性
 注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Index: Array<number>;
-    /**
-      * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Text: string;
-    /**
-      * 部位
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Part: string;
-    /**
-      * 阴阳性
       */
     Positive: string;
+}
+/**
+ * 出入院诊断
+ */
+export interface DischargeDiagnosis {
+    /**
+      * 表格位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TableIndex: number;
+    /**
+      * 出院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutDiagnosis: BlockInfo;
+    /**
+      * 疾病编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiseaseCode: BlockInfo;
+    /**
+      * 入院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InStatus: BlockInfo;
+    /**
+      * 出院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutStatus: BlockInfo;
 }
 /**
  * 疾病史
@@ -2061,31 +1479,6 @@ export interface PathologyReport {
     SummaryText: string;
 }
 /**
- * 大小
- */
-export interface Size {
-    /**
-      * 原文位置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Index: Array<number>;
-    /**
-      * 标准大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NormSize: NormSize;
-    /**
-      * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Src: string;
-    /**
-      * 值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: string;
-}
-/**
  * TextToClass返回参数结构体
  */
 export interface TextToClassResponse {
@@ -2097,79 +1490,6 @@ export interface TextToClassResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 值
- */
-export interface Value {
-    /**
-      * 等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Grade: string;
-    /**
-      * 百分比
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Percent: Array<number>;
-    /**
-      * 阳性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Positive: string;
-}
-/**
- * 个人史
- */
-export interface PersonalHistory {
-    /**
-      * 出生地
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BirthPlace: string;
-    /**
-      * 工作史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Job: string;
-    /**
-      * 旅居史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LivePlace: string;
-    /**
-      * 个人史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Personal: string;
-    /**
-      * 吸烟史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Smoke: string;
-    /**
-      * 饮酒史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Alcoholic: string;
-}
-/**
- * TextToObject请求参数结构体
- */
-export interface TextToObjectRequest {
-    /**
-      * 报告文本
-      */
-    Text: string;
-    /**
-      * 报告类型，目前支持12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
-      */
-    Type: number;
-    /**
-      * 是否使用分类引擎，当不确定报告类型时，可以使用收费的报告分类引擎服务。若该字段为False，则Type字段不能为0，否则无法输出结果。
-注意：当 IsUsedClassify 为True 时，表示使用收费的报告分类服务，将会产生额外的费用，具体收费标准参见 [购买指南的产品价格](https://cloud.tencent.com/document/product/1314/54264)。
-      */
-    IsUsedClassify: boolean;
 }
 /**
  * 组织学类型
@@ -2232,64 +1552,19 @@ export interface BlockInfo {
     Name: string;
 }
 /**
- * 月经史
+ * 结论
  */
-export interface MenstrualMedicalHistory {
+export interface Summary {
     /**
-      * 末次月经时间
+      * 症状
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LastMenstrualPeriod: string;
+    Symptom: Array<SymptomInfo>;
     /**
-      * 经量
+      * 文本
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MenstrualFlow: string;
-    /**
-      * 月经初潮年龄
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MenarcheAge: string;
-    /**
-      * 是否来月经
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MenstruationOrNot: string;
-    /**
-      * 月经周期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MenstrualCycles: string;
-    /**
-      * 月经持续天数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MenstrualPeriod: string;
-}
-/**
- * 检查报告内容
- */
-export interface Inspection {
-    /**
-      * 检查所见
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Finding: Finding;
-    /**
-      * 检查结论
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Conclusion: Conclusion;
-}
-/**
- * 手术记录
- */
-export interface Surgery {
-    /**
-      * 手术史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SurgeryHistory: SurgeryHistory;
+    Text: string;
 }
 /**
  * 文本类型
@@ -2424,88 +1699,39 @@ export interface DiagCertItem {
     Value: Array<string>;
 }
 /**
- * 婚育史
- */
-export interface MarryHistory {
-    /**
-      * 结婚史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Marriage: string;
-    /**
-      * 生育史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Fertility: string;
-}
-/**
- * ReportImageStructured返回参数结构体
- */
-export interface ReportImageStructuredResponse {
-    /**
-      * 报告内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Report?: ImageReport;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 提取属性内容
- */
-export interface Attribute {
-    /**
-      * 原文文本内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Text: string;
-    /**
-      * 标准化提取值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: string;
-    /**
-      * 对应上级文本位置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Index: number;
-}
-/**
  * 月经史
  */
-export interface MenstrualHistory {
+export interface MenstrualMedicalHistory {
     /**
-      * 是否来月经
+      * 末次月经时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsOrNot: string;
+    LastMenstrualPeriod: string;
+    /**
+      * 经量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MenstrualFlow: string;
     /**
       * 月经初潮年龄
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MenarcheAge: string;
     /**
-      * 末次月经时间
+      * 是否来月经
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LastTime: string;
-    /**
-      * 经量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Flow: string;
+    MenstruationOrNot: string;
     /**
       * 月经周期
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Cycles: string;
+    MenstrualCycles: string;
     /**
-      * 行经天数
+      * 月经持续天数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Duration: string;
+    MenstrualPeriod: string;
 }
 /**
  * ImageToClass请求参数结构体
@@ -2565,23 +1791,19 @@ export interface FirstPage {
     ClinicalDiagnosis: BlockInfo;
 }
 /**
- * 病历资料
+ * 检查报告单
  */
-export interface CaseHistory {
+export interface Check {
     /**
-      * 诊治信息
+      * 描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Treatment: Treatment;
+    Desc: Desc;
     /**
-      * 健康史信息
+      * 结论
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HealthHistory: HealthHistory;
-    /**
-      * 病例时间轴
-      */
-    CaseHistoryList: Array<Case>;
+    Summary: Summary;
 }
 /**
  * TextToObject返回参数结构体
@@ -2597,254 +1819,60 @@ export interface TextToObjectResponse {
     RequestId?: string;
 }
 /**
- * 家族史
+ * TextToClass请求参数结构体
  */
-export interface FamilyHistory {
+export interface TextToClassRequest {
     /**
-      * 家族成员
-注意：此字段可能返回 null，表示取不到有效值。
+      * 报告文本
       */
-    RelativeMember: string;
-    /**
-      * 家族肿瘤史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RelativeCancer: string;
-    /**
-      * 家族遗传史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Genetic: string;
+    Text: string;
 }
 /**
- * 健康史信息
+ * 手术记录
  */
-export interface HealthHistory {
+export interface Surgery {
     /**
-      * 疾病史
+      * 手术史
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiseaseHistory: DiseaseHistory;
-    /**
-      * 家族史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FamilyHistory: FamilyHistory;
-    /**
-      * 婚育史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MarryHistory: MarryHistory;
-    /**
-      * 个人史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PersonalHistory: PersonalHistory;
-    /**
-      * 月经史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MenstrualHistory: MenstrualHistory;
+    SurgeryHistory: SurgeryHistory;
 }
 /**
- * 免疫组化项目
+ * ImageToObject返回参数结构体
  */
-export interface IHC {
+export interface ImageToObjectResponse {
     /**
-      * 索引位置
+      * 报告结构化结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Template: Template;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 大小
+ */
+export interface Size {
+    /**
+      * 原文位置
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Index: Array<number>;
     /**
+      * 标准大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NormSize: NormSize;
+    /**
       * 原文
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Text: string;
+    Src: string;
     /**
-      * 名称
+      * 值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name: string;
-    /**
-      * 等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Grade: string;
-    /**
-      * 百分比
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Percent: string;
-    /**
-      * 阴阳性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Positive: string;
-}
-/**
- * 病理内容
- */
-export interface Pathology {
-    /**
-      * 病理类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PathologicalType: string;
-    /**
-      * 侵润深度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InfiltrationDepth: string;
-    /**
-      * PTNM分期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PTNM: string;
-    /**
-      * 远处转移
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DistanceMetastasis: string;
-    /**
-      * 影像诊断
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SummaryText: string;
-    /**
-      * 影像所见
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DescText: string;
-    /**
-      * 组织学类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HistologyType: string;
-    /**
-      * 组织学等级
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HistologyLevel: string;
-    /**
-      * 标本类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SampleType: string;
-    /**
-      * 标本部位
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SamplePart: string;
-    /**
-      * 标本大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SampleSize: string;
-    /**
-      * 肿瘤扩散
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InvasiveList: Array<Invasive>;
-    /**
-      * 肿瘤转移
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MetastasisList: Array<Metastasis>;
-    /**
-      * 免疫组化信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IHCList: Array<IHC>;
-}
-/**
- * 类型描述
- */
-export interface KindItem {
-    /**
-      * 等级，分为1，2，3级别，类型逐级细分
-      */
-    Level: number;
-    /**
-      * 类型编号，对应唯一的类型编号
-      */
-    ID: number;
-    /**
-      * 类型名称
-      */
-    Name: string;
-}
-/**
- * 出入院诊断
- */
-export interface DischargeDiagnosis {
-    /**
-      * 表格位置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TableIndex: number;
-    /**
-      * 出院诊断
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OutDiagnosis: BlockInfo;
-    /**
-      * 疾病编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiseaseCode: BlockInfo;
-    /**
-      * 入院情况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InStatus: BlockInfo;
-    /**
-      * 出院情况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OutStatus: BlockInfo;
-}
-/**
- * 报告内容
- */
-export interface ImageReport {
-    /**
-      * 报告文本信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ImageText: ImageText;
-    /**
-      * 报告类别信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    KindSet: Array<KindItem>;
-    /**
-      * 基本信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BasicInfo: BasicInfo;
-    /**
-      * 个人隐私信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PersonalInfo: PersonalInfo;
-    /**
-      * 检验指标内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TestList: Array<TestItem>;
-    /**
-      * 检查报告内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Inspection: Inspection;
-    /**
-      * 病历资料内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CaseHistory: CaseHistory;
-    /**
-      * 病理报告内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Pathology: Pathology;
+    Value: string;
 }

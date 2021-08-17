@@ -1292,6 +1292,11 @@ export interface AccessPoint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Area: string;
+    /**
+      * 接入点类型。VXLAN/QCPL/QCAR
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessPointType: string;
 }
 /**
  * DescribeInternetAddressStatistics返回参数结构体

@@ -1428,7 +1428,7 @@ export interface DescribeLoginWhiteListRequest {
  */
 export interface ReverseShell {
   /**
-   * ID
+   * ID 主键
    */
   Id: number
 
@@ -1503,7 +1503,7 @@ export interface ReverseShell {
   ParentProcPath: string
 
   /**
-   * 处理状态
+   * 处理状态：0-待处理 2-白名单
    */
   Status: number
 
@@ -1521,6 +1521,11 @@ export interface ReverseShell {
    * 进程树
    */
   ProcTree: string
+
+  /**
+   * 检测方法
+   */
+  DetectBy: number
 }
 
 /**
@@ -2659,6 +2664,11 @@ export interface MalwareInfo {
    * 最近扫描时间
    */
   LatestScanTime: string
+
+  /**
+   * 参考链接
+   */
+  Reference: string
 }
 
 /**
@@ -3081,7 +3091,7 @@ export interface PrivilegeEscalationProcess {
   ProcTree: string
 
   /**
-   * 处理状态
+   * 处理状态：0-待处理 2-白名单
    */
   Status: number
 
@@ -3819,8 +3829,11 @@ export interface DescribeSecurityTrendsResponse {
 export interface ProVersionMachine {
   /**
       * 主机类型。
-<li>CVM: 虚拟主机</li>
+<li>CVM: 云服务器</li>
 <li>BM: 黑石物理机</li>
+<li>ECM: 边缘计算服务器</li>
+<li>LH: 轻量应用服务器</li>
+<li>Other: 混合云机器</li>
       */
   MachineType: string
 
@@ -3831,8 +3844,8 @@ export interface ProVersionMachine {
   MachineRegion: string
 
   /**
-      * 主机唯一标识Uuid。
-黑石的InstanceId，CVM的Uuid
+      * 主机唯一标识Uuid数组。
+黑石的InstanceId，CVM的Uuid ,边缘计算的Uuid , 轻量应用服务器的Uuid ,混合云机器的Quuid 。 当前参数最大长度限制20
       */
   Quuid: string
 }
@@ -4755,7 +4768,7 @@ export interface Machine {
   InstanceState: string
 
   /**
-   * 授权状态 1 授权 0 未授权
+   * 防篡改 授权状态 1 授权 0 未授权
    */
   LicenseStatus: number
 
@@ -4768,6 +4781,11 @@ export interface Machine {
    * 是否有资产扫描接口，0无，1有
    */
   HasAssetScan: number
+
+  /**
+   * 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区
+   */
+  MachineType: string
 }
 
 /**
@@ -5250,7 +5268,7 @@ export interface BruteAttackInfo {
   SrcIp: string
 
   /**
-      * 失败：FAILED；成功：SUCCESS
+      * SUCCESS：破解成功；FAILED：破解失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: string
@@ -5280,7 +5298,7 @@ export interface BruteAttackInfo {
   CreateTime: string
 
   /**
-      * 阻断状态：0-未阻断；1-已阻断；2-阻断失败；3-内网攻击暂不支持阻断；4-安平暂不支持阻断
+      * 阻断状态：1-阻断成功；非1-阻断失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BanStatus: number
@@ -5326,6 +5344,12 @@ export interface BruteAttackInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModifyTime: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
 }
 
 /**
