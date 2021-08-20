@@ -749,6 +749,11 @@ export interface ListNamespacesRequest {
    * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC
    */
   Order?: string
+
+  /**
+   * 关键字匹配搜索，Key 可选值为 Namespace 和 Description，多个搜索条件之间是与的关系
+   */
+  SearchKey?: Array<SearchKey>
 }
 
 /**
@@ -3318,6 +3323,21 @@ export interface DeleteTriggerResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 包含搜索关键字和对应的内容
+ */
+export interface SearchKey {
+  /**
+   * 搜索关键字
+   */
+  Key: string
+
+  /**
+   * 搜索内容
+   */
+  Value: string
 }
 
 /**

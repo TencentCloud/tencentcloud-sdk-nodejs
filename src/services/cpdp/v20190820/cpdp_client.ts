@@ -19,14 +19,16 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   QueryInvoiceResponse,
-  TransactionItem,
+  QueryPayerinfoData,
   QueryOrderOutOrderList,
   ApplyTradeRequest,
   QueryOutwardOrderResponse,
   QueryExchangeRateResponse,
   UploadTaxPaymentRequest,
+  QueryBatchPaymentResultRequest,
   UnifiedOrderInSubOrderList,
   QueryAcctBindingRequest,
+  QueryAgentStatementsResponse,
   ModifyMntMbrBindRelateAcctBankCodeRequest,
   CreateMerchantResult,
   ApplyPayerInfoResponse,
@@ -36,6 +38,7 @@ import {
   UnifiedOrderResponse,
   QueryBankWithdrawCashDetailsRequest,
   ApplyPayerinfoResult,
+  QueryBatchPaymentResultData,
   QueryCustAcctIdBalanceRequest,
   QueryPayerInfoResponse,
   WithdrawItem,
@@ -53,7 +56,7 @@ import {
   CreatePayMerchantRequest,
   ContractOrderRequest,
   ModifyAgentTaxPaymentInfoResponse,
-  ExternalReturnContractInfo,
+  CreateSinglePaymentRequest,
   AgencyClientInfo,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
@@ -64,18 +67,20 @@ import {
   DeleteAgentTaxPaymentInfoRequest,
   QueryInvoiceResult,
   QueryAcctBindingResponse,
+  QueryMerchantInfoForManagementRequest,
   QueryCommonTransferRechargeResponse,
   QueryTradeData,
   ApplyOutwardOrderResponse,
   ApplyReWithdrawalResponse,
+  QueryBatchPaymentResultResponse,
   RegisterBillRequest,
   CreateInvoiceItem,
   ApplyOutwardOrderData,
   RevokeRechargeByThirdPayResponse,
-  QueryContractRequest,
+  CreateBatchPaymentResponse,
   QueryInvoiceV2Response,
   BindAccountResponse,
-  CreateAcctRequest,
+  CreateInvoiceResultData,
   CreateExternalAnchorRequest,
   CreateAgentTaxPaymentInfosRequest,
   ConfirmOrderResponse,
@@ -86,6 +91,7 @@ import {
   CheckAcctRequest,
   CheckAmountResponse,
   QueryOrderOutSubOrderList,
+  ApplyReWithdrawalRequest,
   QueryOutwardOrderResult,
   CreateAgentTaxPaymentInfosResponse,
   RechargeByThirdPayRequest,
@@ -103,6 +109,7 @@ import {
   QuerySinglePayResult,
   RefundOrderResponse,
   QuerySinglePayResponse,
+  UploadExternalAnchorInfoResponse,
   ResponseTerminateContract,
   QueryCustAcctIdBalanceResponse,
   CreateExternalAnchorResponse,
@@ -112,14 +119,14 @@ import {
   CreateRedInvoiceRequest,
   QueryAcctInfoListResponse,
   DeleteAgentTaxPaymentInfosRequest,
-  UploadExternalAnchorInfoResponse,
+  BindRelateAcctSmallAmountResponse,
   ContractInfo,
   QueryTransferBatchRequest,
   CreateTransferBatchRequest,
   ExecuteMemberTransactionResponse,
   OrganizationInfo,
   BindRelateAcctUnionPayRequest,
-  CreateInvoiceResultData,
+  CreateAcctRequest,
   TransferDetailRequest,
   ConfirmOrderRequest,
   RefundResponse,
@@ -147,7 +154,7 @@ import {
   QueryBankTransactionDetailsResponse,
   QueryTransferResultRequest,
   SyncContractDataResponse,
-  QueryPayerinfoData,
+  CreateSinglePaymentData,
   QueryMerchantBalanceData,
   QueryMemberTransactionRequest,
   UploadTaxPaymentResponse,
@@ -155,9 +162,11 @@ import {
   QueryBillDownloadURLResponse,
   CreateRedInvoiceV2Request,
   QueryOutwardOrderRequest,
+  TransactionItem,
   QueryMerchantBalanceRequest,
   CreateAcctResponse,
   DescribeChargeDetailRequest,
+  RevResigterBillSupportWithdrawResponse,
   BindAcctResponse,
   CreateOrderResponse,
   CreateRedInvoiceResponse,
@@ -178,8 +187,10 @@ import {
   QueryPayerinfoResult,
   TransferItem,
   QueryInvoiceV2Request,
+  QuerySinglePaymentResultRequest,
   OrderItem,
   CreateSinglePayRequest,
+  QueryTransferBatchResponse,
   Order,
   RegisterBillResponse,
   WithdrawCashMembershipRequest,
@@ -188,7 +199,7 @@ import {
   TerminateContractResponse,
   RechargeByThirdPayResponse,
   CheckAmountRequest,
-  ApplyReWithdrawalRequest,
+  CreateMerchantResultData,
   AgentTaxPaymentBatch,
   RegisterInfo,
   QueryDownloadBillURLResponse,
@@ -207,26 +218,26 @@ import {
   MigrateOrderRefundRequest,
   CreateRedInvoiceV2Response,
   QueryCommonTransferRechargeRequest,
-  QueryAgentStatementsResponse,
+  CreateBatchPaymentData,
   RegisterBehaviorRequest,
   ReviseMbrPropertyResponse,
   QueryTransferDetailRequest,
   QueryOrderRequest,
   CloseOrderRequest,
-  RevResigterBillSupportWithdrawResponse,
+  QueryBankClearRequest,
   QueryBalanceResponse,
   ApplyWithdrawalResponse,
-  RefundOrderRequest,
+  QueryContractRequest,
   UnBindAcctRequest,
+  RefundOrderRequest,
   TerminateContractRequest,
   QueryInvoiceRequest,
   TransferSinglePayData,
   CheckAcctResponse,
   QueryReconciliationDocumentResponse,
   QueryApplicationMaterialResponse,
-  CreateMerchantResultData,
   QueryExchangeRateRequest,
-  QueryMerchantInfoForManagementRequest,
+  ExternalReturnContractInfo,
   FileItem,
   RechargeMemberThirdPayRequest,
   QueryBillDownloadURLRequest,
@@ -237,11 +248,12 @@ import {
   CreateSinglePayResponse,
   RefundMemberTransactionResponse,
   CreateInvoiceV2Response,
-  QueryBankClearRequest,
+  CreateBatchPaymentBatchData,
   ModifyBindedAccountResponse,
   ApplyApplicationMaterialResponse,
   RefundMemberTransactionRequest,
   QueryBankTransactionDetailsRequest,
+  QuerySinglePaymentResultData,
   DownloadBillRequest,
   QueryRefundRequest,
   CreateRedInvoiceResultData,
@@ -253,6 +265,7 @@ import {
   WithdrawCashMembershipResponse,
   QueryApplicationMaterialRequest,
   CreateMerchantResponse,
+  CreateSinglePaymentResponse,
   ExternalContractUserInfo,
   ContractUserInfo,
   ApplyTradeData,
@@ -263,8 +276,9 @@ import {
   ChannelContractInfo,
   ModifyAgentTaxPaymentInfoRequest,
   QuerySmallAmountTransferRequest,
-  BindRelateAcctSmallAmountResponse,
+  CreateBatchPaymentRecipient,
   RegisterBillSupportWithdrawRequest,
+  CreateBatchPaymentRequest,
   ModifyMntMbrBindRelateAcctBankCodeResponse,
   QueryBalanceRequest,
   UploadTaxListRequest,
@@ -274,7 +288,7 @@ import {
   BindRelateAcctSmallAmountRequest,
   QueryRefundResponse,
   ContractSyncInfo,
-  QueryTransferBatchResponse,
+  QuerySinglePaymentResultResponse,
   ContractOrderInSubOrder,
   QueryDeclareData,
   QueryMemberTransactionResponse,
@@ -288,6 +302,7 @@ import {
   UnifiedOrderRequest,
   BankCardItem,
   MigrateOrderRefundResponse,
+  QueryBatchPaymentResultDataInfo,
   QueryAnchorContractInfoResponse,
   DeleteAgentTaxPaymentInfoResponse,
   RefundRequest,
@@ -325,6 +340,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMntMbrBindRelateAcctBankCodeResponse) => void
   ): Promise<ModifyMntMbrBindRelateAcctBankCodeResponse> {
     return this.request("ModifyMntMbrBindRelateAcctBankCode", req, cb)
+  }
+
+  /**
+   * 灵云-批量主播转账接口
+   */
+  async CreateBatchPayment(
+    req: CreateBatchPaymentRequest,
+    cb?: (error: string, rep: CreateBatchPaymentResponse) => void
+  ): Promise<CreateBatchPaymentResponse> {
+    return this.request("CreateBatchPayment", req, cb)
   }
 
   /**
@@ -528,6 +553,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 灵云-单笔转账结果查询
+   */
+  async QuerySinglePaymentResult(
+    req: QuerySinglePaymentResultRequest,
+    cb?: (error: string, rep: QuerySinglePaymentResultResponse) => void
+  ): Promise<QuerySinglePaymentResultResponse> {
+    return this.request("QuerySinglePaymentResult", req, cb)
+  }
+
+  /**
    * 直播平台-上传代理商完税证明
    */
   async UploadTaxPayment(
@@ -558,13 +593,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 跨境-对接方账户余额查询
+   * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
    */
-  async QueryMerchantBalance(
-    req: QueryMerchantBalanceRequest,
-    cb?: (error: string, rep: QueryMerchantBalanceResponse) => void
-  ): Promise<QueryMerchantBalanceResponse> {
-    return this.request("QueryMerchantBalance", req, cb)
+  async RegisterBillSupportWithdraw(
+    req: RegisterBillSupportWithdrawRequest,
+    cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void
+  ): Promise<RegisterBillSupportWithdrawResponse> {
+    return this.request("RegisterBillSupportWithdraw", req, cb)
   }
 
   /**
@@ -618,13 +653,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+   * 跨境-对接方账户余额查询
    */
-  async RegisterBillSupportWithdraw(
-    req: RegisterBillSupportWithdrawRequest,
-    cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void
-  ): Promise<RegisterBillSupportWithdrawResponse> {
-    return this.request("RegisterBillSupportWithdraw", req, cb)
+  async QueryMerchantBalance(
+    req: QueryMerchantBalanceRequest,
+    cb?: (error: string, rep: QueryMerchantBalanceResponse) => void
+  ): Promise<QueryMerchantBalanceResponse> {
+    return this.request("QueryMerchantBalance", req, cb)
   }
 
   /**
@@ -1062,6 +1097,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 灵云-单笔主播转账接口
+   */
+  async CreateSinglePayment(
+    req: CreateSinglePaymentRequest,
+    cb?: (error: string, rep: CreateSinglePaymentResponse) => void
+  ): Promise<CreateSinglePaymentResponse> {
+    return this.request("CreateSinglePayment", req, cb)
+  }
+
+  /**
    * 登记挂账(支持撤销)
    */
   async RegisterBill(
@@ -1174,6 +1219,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryMemberTransactionResponse) => void
   ): Promise<QueryMemberTransactionResponse> {
     return this.request("QueryMemberTransaction", req, cb)
+  }
+
+  /**
+   * 灵云-批量转账结果查询
+   */
+  async QueryBatchPaymentResult(
+    req: QueryBatchPaymentResultRequest,
+    cb?: (error: string, rep: QueryBatchPaymentResultResponse) => void
+  ): Promise<QueryBatchPaymentResultResponse> {
+    return this.request("QueryBatchPaymentResult", req, cb)
   }
 
   /**

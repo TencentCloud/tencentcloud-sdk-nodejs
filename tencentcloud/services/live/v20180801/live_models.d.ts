@@ -5733,10 +5733,12 @@ export interface CreateLiveSnapshotTemplateRequest {
     SnapshotInterval?: number;
     /**
       * 截图宽度。默认：0（原始宽）。
+范围：0-3000 。
       */
     Width?: number;
     /**
       * 截图高度。默认：0（原始高）。
+范围：0-2000 。
       */
     Height?: number;
     /**

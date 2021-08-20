@@ -136,6 +136,7 @@ import {
   GetLayerVersionRequest,
   GetFunctionLogsResponse,
   DeleteTriggerResponse,
+  SearchKey,
   DeleteTriggerRequest,
   VpcConfig,
   GetProvisionedConcurrencyConfigResponse,

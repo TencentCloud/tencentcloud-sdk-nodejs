@@ -8,6 +8,7 @@ export interface ModifyAuditConfigRequest {
     InstanceId: string;
     /**
       * 审计日志保存时长。支持值包括：
+7 - 一周
 30 - 一个月；
 180 - 六个月；
 365 - 一年；
@@ -371,7 +372,7 @@ export interface UpgradeDBInstanceRequest {
       */
     Cpu?: number;
     /**
-      * 是否急速变配。0-普通升级，1-急速变配。选择急速变配会根据资源状况校验是否可以进行急速变配，满足条件则进行急速变配，不满足条件会返回报错信息。
+      * 是否极速变配。0-普通升级，1-极速变配。选择极速变配会根据资源状况校验是否可以进行极速变配，满足条件则进行极速变配，不满足条件会返回报错信息。
       */
     FastUpgrade?: number;
 }
@@ -2103,7 +2104,7 @@ export interface RollbackInstancesInfo {
       */
     InstanceId: string;
     /**
-      * 回档策略。可选值为：table、db、full；默认值为full。table - 急速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和binlog，速度较慢。
+      * 回档策略。可选值为：table、db、full；默认值为full。table - 极速回档模式，仅导入所选中表级别的备份和binlog，如有跨表操作，且关联表未被同时选中，将会导致回档失败，该模式下参数Databases必须为空；db - 快速模式，仅导入所选中库级别的备份和binlog，如有跨库操作，且关联库未被同时选中，将会导致回档失败；full - 普通回档模式，将导入整个实例的备份和binlog，速度较慢。
       */
     Strategy: string;
     /**
@@ -3014,6 +3015,7 @@ export interface CreateAuditPolicyRequest {
     InstanceId: string;
     /**
       * 审计日志保存时长。支持值包括：
+7 - 一周
 30 - 一个月；
 180 - 六个月；
 365 - 一年；
@@ -3077,7 +3079,7 @@ export interface CreateAuditPolicyResponse {
     /**
       * 审计策略 ID。
       */
-    PolicyId?: string;
+    PolicyId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5160,7 +5162,7 @@ export interface DescribeSlowLogDataRequest {
  */
 export interface DescribeAuditConfigResponse {
     /**
-      * 审计日志保存时长。目前支持的值包括：[0，30，180，365，1095，1825]。
+      * 审计日志保存时长。目前支持的值包括：[0，7，30，180，365，1095，1825]。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LogExpireDay: number;
@@ -5172,6 +5174,11 @@ export interface DescribeAuditConfigResponse {
       * 是否正在关闭审计。目前支持的值包括："false"-否，"true"-是
       */
     IsClosing: string;
+    /**
+      * 审计服务开通时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

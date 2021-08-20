@@ -190,6 +190,7 @@ import {
   CheckInstancesUpgradeAbleResponse,
   Cluster,
   DescribeClusterEndpointStatusResponse,
+  RunAutomationServiceEnabled,
   UpgradeClusterInstancesResponse,
   CreatePrometheusDashboardRequest,
   DescribePrometheusAgentsResponse,

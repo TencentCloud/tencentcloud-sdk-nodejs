@@ -1409,6 +1409,10 @@ export interface SecurityGroupListData {
       * 方向，0：出站，1：入站，默认1
       */
     Direction?: number;
+    /**
+      * 是否使用端口协议模板，0：否，1：是
+      */
+    ProtocolPortType?: number;
 }
 /**
  * ModifyAllRuleStatus请求参数结构体
@@ -2406,7 +2410,7 @@ export interface SecurityGroupBothWayInfo {
       */
     SourceId: string;
     /**
-      * 访问源类型，默认为0，1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 100:资源组
+      * 访问源类型，默认为0，0: IP, 1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 7: 参数模板, 100: 资产分组
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SourceType: number;
@@ -2416,7 +2420,7 @@ export interface SecurityGroupBothWayInfo {
       */
     TargetId: string;
     /**
-      * 访问目的类型，默认为0，1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 100:资源组
+      * 访问目的类型，默认为0，0: IP, 1: VPC, 2: SUBNET, 3: CVM, 4: CLB, 5: ENI, 6: CDB, 7: 参数模板, 100: 资产分组
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TargetType: number;
@@ -2475,7 +2479,7 @@ export interface SecurityGroupBothWayInfo {
       */
     SubnetId?: string;
     /**
-      * 子网ID
+      * 实例名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceName?: string;
@@ -2499,6 +2503,10 @@ export interface SecurityGroupBothWayInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServiceTemplateId?: string;
+    /**
+      * 是否使用端口协议模板，0：否，1：是
+      */
+    ProtocolPortType?: number;
 }
 /**
  * ModifyAllRuleStatus返回参数结构体

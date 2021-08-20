@@ -456,6 +456,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
+     * 修改告警设置
+     */
+    async ModifyWarningSetting(req, cb) {
+        return this.request("ModifyWarningSetting", req, cb);
+    }
+    /**
      * 本接口 (DescribeProVersionInfo) 用于获取专业版信息。
      */
     async DescribeProVersionInfo(req, cb) {

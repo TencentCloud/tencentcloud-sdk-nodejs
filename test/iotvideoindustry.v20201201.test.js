@@ -108,6 +108,16 @@ it("iotvideoindustry.v20201201.UpdateDevicePassWord", async function () {
     }
 })
 
+it("iotvideoindustry.v20201201.ControlRecordStream", async function () {
+    try {
+       const data = await client.ControlRecordStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideoindustry.v20201201.GetTimeTemplateById", async function () {
     try {
        const data = await client.GetTimeTemplateById({})

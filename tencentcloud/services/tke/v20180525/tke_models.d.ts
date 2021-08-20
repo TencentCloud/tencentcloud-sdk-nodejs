@@ -2700,6 +2700,10 @@ export interface EnhancedService {
       * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
       */
     MonitorService?: RunMonitorServiceEnabled;
+    /**
+      * 开启云自动化助手服务。若不指定该参数，则默认不开启云自动化助手服务。
+      */
+    AutomationService?: RunAutomationServiceEnabled;
 }
 /**
  * CreateClusterAsGroup请求参数结构体
@@ -3564,6 +3568,10 @@ export interface DescribeClusterEndpointStatusResponse {
       */
     RequestId?: string;
 }
+/**
+ * 描述了 “云自动化助手” 服务相关的信息
+ */
+export declare type RunAutomationServiceEnabled = null;
 /**
  * UpgradeClusterInstances返回参数结构体
  */

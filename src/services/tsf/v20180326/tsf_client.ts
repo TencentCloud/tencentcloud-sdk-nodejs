@@ -31,6 +31,7 @@ import {
   StopContainerGroupResponse,
   DeletePathRewritesRequest,
   DeleteLaneResponse,
+  DescribeGroupReleaseRequest,
   SimpleApplication,
   ContinueRunFailedTaskBatchRequest,
   DescribeSimpleClustersResponse,
@@ -79,12 +80,13 @@ import {
   MsInstance,
   GatewayPluginBoundParam,
   DescribeServerlessGroupsResponse,
-  ImageRepository,
+  ApplicationForPage,
   AddInstancesResponse,
   StartContainerGroupRequest,
   DescribeRepositoryResponse,
   Instance,
   UpdateHealthCheckSettingsRequest,
+  ScalableRule,
   EnableUnitRuleRequest,
   CreateClusterResponse,
   CreateMicroserviceResponse,
@@ -102,6 +104,7 @@ import {
   RepositoryInfo,
   DraftApiGroupRequest,
   CreateLaneResponse,
+  TcrRepoInfo,
   UpdateApiTimeoutsResponse,
   UnitRule,
   DescribePkgsResponse,
@@ -110,7 +113,7 @@ import {
   DescribeMicroservicesResponse,
   TaskLastExecuteStatus,
   DescribePublicConfigRequest,
-  OverviewBasicResourceUsage,
+  ImageRepository,
   CreatePublicConfigResponse,
   LaneRules,
   TsfPageVmGroup,
@@ -134,6 +137,7 @@ import {
   DescribeSimpleApplicationsResponse,
   DeployContainerGroupRequest,
   DescribeSimpleApplicationsRequest,
+  OperateApplicationTcrBindingRequest,
   ContainGroup,
   ContainGroupResult,
   UpdateUnitRuleRequest,
@@ -150,6 +154,7 @@ import {
   DisableTaskResponse,
   DescribeMicroserviceRequest,
   DescribePodInstancesResponse,
+  FileConfigRelease,
   DescribeRepositoriesResponse,
   MonitorOverview,
   CreateGroupRequest,
@@ -188,6 +193,7 @@ import {
   ShrinkInstancesRequest,
   ValueFrom,
   ShrinkInstancesResponse,
+  OverviewBasicResourceUsage,
   DescribeApiRateLimitRulesResponse,
   AddClusterInstancesRequest,
   DescribeGroupUseDetailResponse,
@@ -226,6 +232,7 @@ import {
   UpdateUnitRuleResponse,
   HealthCheckSettings,
   StartGroupResponse,
+  GroupRelease,
   DescribePathRewritesRequest,
   ShrinkGroupRequest,
   TsfPageStdoutLogV2,
@@ -246,6 +253,7 @@ import {
   TsfPageGatewayPlugin,
   ApiUseStatisticsEntity,
   UnbindApiGroupResponse,
+  DescribeGroupReleaseResponse,
   DescribePathRewriteRequest,
   CreateApplicationResponse,
   GatewayGroupIds,
@@ -270,7 +278,6 @@ import {
   DescribeApiUseDetailResponse,
   ServiceSetting,
   ModifyUploadInfoRequest,
-  ApplicationForPage,
   DescribeUnitRuleRequest,
   UpdateGatewayApiResponse,
   ContainerEvent,
@@ -362,6 +369,7 @@ import {
   UpdateApiRateLimitRulesResponse,
   GroupUnitApiUseStatistics,
   DescribeGroupInstancesResponse,
+  OperateApplicationTcrBindingResponse,
   DescribePublicConfigReleaseLogsResponse,
   DeleteApiGroupRequest,
   ReleaseApiGroupRequest,
@@ -521,13 +529,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对执行失败的任务批次执行续跑
+   * 获取微服务列表
    */
-  async ContinueRunFailedTaskBatch(
-    req: ContinueRunFailedTaskBatchRequest,
-    cb?: (error: string, rep: ContinueRunFailedTaskBatchResponse) => void
-  ): Promise<ContinueRunFailedTaskBatchResponse> {
-    return this.request("ContinueRunFailedTaskBatch", req, cb)
+  async DescribeMicroservices(
+    req: DescribeMicroservicesRequest,
+    cb?: (error: string, rep: DescribeMicroservicesResponse) => void
+  ): Promise<DescribeMicroservicesResponse> {
+    return this.request("DescribeMicroservices", req, cb)
   }
 
   /**
@@ -598,6 +606,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddClusterInstancesResponse) => void
   ): Promise<AddClusterInstancesResponse> {
     return this.request("AddClusterInstances", req, cb)
+  }
+
+  /**
+   * 查询部署组相关的发布信息
+   */
+  async DescribeGroupRelease(
+    req: DescribeGroupReleaseRequest,
+    cb?: (error: string, rep: DescribeGroupReleaseResponse) => void
+  ): Promise<DescribeGroupReleaseResponse> {
+    return this.request("DescribeGroupRelease", req, cb)
   }
 
   /**
@@ -1524,6 +1542,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 绑定解绑tcr仓库
+   */
+  async OperateApplicationTcrBinding(
+    req: OperateApplicationTcrBindingRequest,
+    cb?: (error: string, rep: OperateApplicationTcrBindingResponse) => void
+  ): Promise<OperateApplicationTcrBindingResponse> {
+    return this.request("OperateApplicationTcrBinding", req, cb)
+  }
+
+  /**
    * 虚拟机部署组添加实例
    */
   async ExpandGroup(
@@ -1944,13 +1972,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 获取微服务列表
+   * 对执行失败的任务批次执行续跑
    */
-  async DescribeMicroservices(
-    req: DescribeMicroservicesRequest,
-    cb?: (error: string, rep: DescribeMicroservicesResponse) => void
-  ): Promise<DescribeMicroservicesResponse> {
-    return this.request("DescribeMicroservices", req, cb)
+  async ContinueRunFailedTaskBatch(
+    req: ContinueRunFailedTaskBatchRequest,
+    cb?: (error: string, rep: ContinueRunFailedTaskBatchResponse) => void
+  ): Promise<ContinueRunFailedTaskBatchResponse> {
+    return this.request("ContinueRunFailedTaskBatch", req, cb)
   }
 
   /**

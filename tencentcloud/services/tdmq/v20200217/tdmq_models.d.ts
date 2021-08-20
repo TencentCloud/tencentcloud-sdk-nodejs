@@ -811,6 +811,10 @@ export interface CreateEnvironmentRequest {
       * Pulsar 集群的ID
       */
     ClusterId?: string;
+    /**
+      * 消息保留策略
+      */
+    RetentionPolicy?: RetentionPolicy;
 }
 /**
  * DeleteTopics返回参数结构体
@@ -858,6 +862,10 @@ export interface ModifyEnvironmentAttributesRequest {
       * 集群ID
       */
     ClusterId?: string;
+    /**
+      * 消息保留策略
+      */
+    RetentionPolicy?: RetentionPolicy;
 }
 /**
  * DescribeCmqSubscriptionDetail返回参数结构体
@@ -1599,6 +1607,13 @@ export interface DescribeEnvironmentRolesRequest {
       * 角色名称
       */
     RoleName?: string;
+    /**
+      * * RoleName
+按照角色名进行过滤，精确查询。
+类型：String
+必选：否
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 命名空间信息
@@ -2088,6 +2103,10 @@ export interface DeleteTopicsRequest {
       * 环境（命名空间）名称。
       */
     EnvironmentId?: string;
+    /**
+      * 是否强制删除，默认为false
+      */
+    Force?: boolean;
 }
 /**
  * cmq TransactionPolicy
@@ -2378,6 +2397,19 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NamespaceNum: number;
+}
+/**
+ * 消息保留策略
+ */
+export interface RetentionPolicy {
+    /**
+      * 消息保留时长
+      */
+    TimeInMinutes: number;
+    /**
+      * 消息保留大小
+      */
+    SizeInMB: number;
 }
 /**
  * SendMsg请求参数结构体
@@ -2836,6 +2868,10 @@ export interface DeleteSubscriptionsRequest {
       * 环境（命名空间）名称。
       */
     EnvironmentId?: string;
+    /**
+      * 是否强制删除，默认为false
+      */
+    Force?: boolean;
 }
 /**
  * 环境角色集合

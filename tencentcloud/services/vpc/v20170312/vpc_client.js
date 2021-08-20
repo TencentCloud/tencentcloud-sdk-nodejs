@@ -90,7 +90,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRouteTables", req, cb);
     }
     /**
-     * 接口支持创建[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[IP带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+     * 本接口 (CreateBandwidthPackage) 支持创建[设备带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)和[IP带宽包](https://cloud.tencent.com/document/product/684/15245#bwptype)。
      */
     async CreateBandwidthPackage(req, cb) {
         return this.request("CreateBandwidthPackage", req, cb);

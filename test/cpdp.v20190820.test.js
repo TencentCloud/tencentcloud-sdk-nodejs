@@ -38,6 +38,16 @@ it("cpdp.v20190820.ModifyMntMbrBindRelateAcctBankCode", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateBatchPayment", async function () {
+    try {
+       const data = await client.CreateBatchPayment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CreateExternalAnchor", async function () {
     try {
        const data = await client.CreateExternalAnchor({})
@@ -238,6 +248,16 @@ it("cpdp.v20190820.CreatePayMerchant", async function () {
     }
 })
 
+it("cpdp.v20190820.QuerySinglePaymentResult", async function () {
+    try {
+       const data = await client.QuerySinglePaymentResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.UploadTaxPayment", async function () {
     try {
        const data = await client.UploadTaxPayment({})
@@ -268,9 +288,9 @@ it("cpdp.v20190820.DescribeChargeDetail", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryMerchantBalance", async function () {
+it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
     try {
-       const data = await client.QueryMerchantBalance({})
+       const data = await client.RegisterBillSupportWithdraw({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +348,9 @@ it("cpdp.v20190820.RegisterBehavior", async function () {
     }
 })
 
-it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
+it("cpdp.v20190820.QueryMerchantBalance", async function () {
     try {
-       const data = await client.RegisterBillSupportWithdraw({})
+       const data = await client.QueryMerchantBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,6 +788,16 @@ it("cpdp.v20190820.ExecuteMemberTransaction", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateSinglePayment", async function () {
+    try {
+       const data = await client.CreateSinglePayment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RegisterBill", async function () {
     try {
        const data = await client.RegisterBill({})
@@ -871,6 +901,16 @@ it("cpdp.v20190820.BindRelateAcctUnionPay", async function () {
 it("cpdp.v20190820.QueryMemberTransaction", async function () {
     try {
        const data = await client.QueryMemberTransaction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryBatchPaymentResult", async function () {
+    try {
+       const data = await client.QueryBatchPaymentResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

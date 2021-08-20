@@ -1078,17 +1078,13 @@ export interface SwitchBashRulesResponse {
     RequestId?: string;
 }
 /**
- * 端口统计列表
+ * ModifyWarningSetting请求参数结构体
  */
-export interface OpenPortStatistics {
+export interface ModifyWarningSettingRequest {
     /**
-      * 端口号
+      * 告警设置的修改内容
       */
-    Port: number;
-    /**
-      * 主机数量
-      */
-    MachineNum: number;
+    WarningObjects: Array<WarningObject>;
 }
 /**
  * DescribeBruteAttackList返回参数结构体
@@ -1278,38 +1274,17 @@ export interface ReverseShell {
     DetectBy: number;
 }
 /**
- * 安全事件消息数据。
+ * 端口统计列表
  */
-export interface SecurityDynamic {
+export interface OpenPortStatistics {
     /**
-      * 云镜客户端UUID。
+      * 端口号
       */
-    Uuid: string;
+    Port: number;
     /**
-      * 安全事件发生时间。
+      * 主机数量
       */
-    EventTime: string;
-    /**
-      * 安全事件类型。
-<li>MALWARE：木马事件</li>
-<li>NON_LOCAL_LOGIN：异地登录</li>
-<li>BRUTEATTACK_SUCCESS：密码破解成功</li>
-<li>VUL：漏洞</li>
-<li>BASELINE：安全基线</li>
-      */
-    EventType: string;
-    /**
-      * 安全事件消息。
-      */
-    Message: string;
-    /**
-      * 安全事件等级。
-<li>RISK: 严重</li>
-<li>HIGH: 高危</li>
-<li>NORMAL: 中危</li>
-<li>LOW: 低危</li>
-      */
-    SecurityLevel: string;
+    MachineNum: number;
 }
 /**
  * ExportBruteAttacks返回参数结构体
@@ -3533,6 +3508,40 @@ export interface Filter {
     ExactMatch?: boolean;
 }
 /**
+ * 安全事件消息数据。
+ */
+export interface SecurityDynamic {
+    /**
+      * 云镜客户端UUID。
+      */
+    Uuid: string;
+    /**
+      * 安全事件发生时间。
+      */
+    EventTime: string;
+    /**
+      * 安全事件类型。
+<li>MALWARE：木马事件</li>
+<li>NON_LOCAL_LOGIN：异地登录</li>
+<li>BRUTEATTACK_SUCCESS：密码破解成功</li>
+<li>VUL：漏洞</li>
+<li>BASELINE：安全基线</li>
+      */
+    EventType: string;
+    /**
+      * 安全事件消息。
+      */
+    Message: string;
+    /**
+      * 安全事件等级。
+<li>RISK: 严重</li>
+<li>HIGH: 高危</li>
+<li>NORMAL: 中危</li>
+<li>LOW: 低危</li>
+      */
+    SecurityLevel: string;
+}
+/**
  * DeleteLoginWhiteList返回参数结构体
  */
 export interface DeleteLoginWhiteListResponse {
@@ -3576,6 +3585,40 @@ export interface DescribeAttackLogsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyWarningSetting返回参数结构体
+ */
+export interface ModifyWarningSettingResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 告警更新或插入的参数
+ */
+export interface WarningObject {
+    /**
+      * 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高位命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线
+      */
+    Type?: number;
+    /**
+      * 1: 关闭告警 0: 开启告警
+      */
+    DisablePhoneWarning?: number;
+    /**
+      * 开始时间，格式: HH:mm
+      */
+    BeginTime?: string;
+    /**
+      * 结束时间，格式: HH:mm
+      */
+    EndTime?: string;
+    /**
+      * 漏洞等级控制位二进制，每一位对应页面漏洞等级的开启关闭：低中高（0:关闭；1：开启），例如：101 → 同时勾选低+高；01→(登录审计)疑似不告警，高危告警
+      */
+    ControlBits?: string;
 }
 /**
  * 安全事件统计列表

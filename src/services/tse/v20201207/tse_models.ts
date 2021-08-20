@@ -143,6 +143,12 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EnableInternet: boolean
+
+  /**
+      * 私有网络列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcInfos: Array<VpcInfo>
 }
 
 /**
@@ -283,6 +289,12 @@ export interface VpcInfo {
    * 子网ID
    */
   SubnetId: string
+
+  /**
+      * 内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IntranetAddress?: string
 }
 
 /**
@@ -293,4 +305,14 @@ export interface DescribeSREInstanceAccessAddressRequest {
    * 注册引擎实例Id
    */
   InstanceId?: string
+
+  /**
+   * VPC ID
+   */
+  VpcId?: string
+
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
 }

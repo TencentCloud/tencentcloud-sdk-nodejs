@@ -267,6 +267,15 @@ export interface DeleteLaneResponse {
     RequestId?: string;
 }
 /**
+ * DescribeGroupRelease请求参数结构体
+ */
+export interface DescribeGroupReleaseRequest {
+    /**
+      * 部署组ID
+      */
+    GroupId: string;
+}
+/**
  * 简单应用
  */
 export interface SimpleApplication {
@@ -873,6 +882,10 @@ export interface DeleteImageTagsRequest {
       * 镜像版本数组
       */
     ImageTags: Array<DeleteImageTag>;
+    /**
+      * 企业: tcr ；个人: personal或者不填
+      */
+    RepoType?: string;
 }
 /**
  * DescribeRepositories请求参数结构体
@@ -1211,64 +1224,74 @@ export interface DescribeServerlessGroupsResponse {
     RequestId?: string;
 }
 /**
- * 镜像仓库
+ * 分页的应用描述信息字段
  */
-export interface ImageRepository {
+export interface ApplicationForPage {
     /**
-      * 仓库名,含命名空间,如tsf/nginx
+      * 应用ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Reponame: string;
+    ApplicationId: string;
     /**
-      * 仓库类型
+      * 应用名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Repotype: string;
+    ApplicationName: string;
     /**
-      * 镜像版本数
+      * 应用描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TagCount: number;
+    ApplicationDesc: string;
     /**
-      * 是否公共,1:公有,0:私有
+      * 应用类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsPublic: number;
+    ApplicationType: string;
     /**
-      * 是否被用户收藏。true：是，false：否
+      * 微服务类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsUserFavor: boolean;
+    MicroserviceType: string;
     /**
-      * 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否
+      * 编程语言
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsQcloudOfficial: boolean;
-    /**
-      * 被所有用户收藏次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FavorCount: number;
-    /**
-      * 拉取次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PullCount: number;
-    /**
-      * 描述内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Description: string;
+    ProgLang: string;
     /**
       * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CreationTime: string;
+    CreateTime: string;
     /**
       * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime: string;
+    /**
+      * 应用资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationResourceType: string;
+    /**
+      * 应用runtime类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationRuntimeType: string;
+    /**
+      * Apigateway的serviceId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApigatewayServiceId: string;
+    /**
+      * 应用备注名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationRemarkName: string;
+    /**
+      * 服务配置信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceConfigList: Array<ServiceConfig>;
 }
 /**
  * AddInstances返回参数结构体
@@ -1518,6 +1541,41 @@ export interface UpdateHealthCheckSettingsRequest {
       * 健康检查配置
       */
     HealthCheckSettings?: HealthCheckSettings;
+}
+/**
+ * ScalableRule值
+ */
+export interface ScalableRule {
+    /**
+      * RuleId值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleId: string;
+    /**
+      * Name值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * ExpandVmCountLimit值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpandVmCountLimit: number;
+    /**
+      * ShrinkVmCountLimit值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShrinkVmCountLimit: number;
+    /**
+      * GroupCount值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupCount: number;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Desc: string;
 }
 /**
  * EnableUnitRule请求参数结构体
@@ -1834,6 +1892,36 @@ export interface CreateLaneResponse {
     RequestId?: string;
 }
 /**
+ * tcr仓库信息
+ */
+export interface TcrRepoInfo {
+    /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region?: string;
+    /**
+      * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegistryId?: string;
+    /**
+      * 实例名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegistryName?: string;
+    /**
+      * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Namespace?: string;
+    /**
+      * 仓库名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepoName?: string;
+}
+/**
  * UpdateApiTimeouts返回参数结构体
  */
 export interface UpdateApiTimeoutsResponse {
@@ -1964,34 +2052,84 @@ export interface DescribePublicConfigRequest {
     ConfigId: string;
 }
 /**
- * TSF基本资源信息概览
+ * 镜像仓库
  */
-export interface OverviewBasicResourceUsage {
+export interface ImageRepository {
     /**
-      * 应用总数
+      * 仓库名,含命名空间,如tsf/nginx
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationCount: number;
+    Reponame: string;
     /**
-      * 命名空间总数
+      * 仓库类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NamespaceCount: number;
+    Repotype: string;
     /**
-      * 部署组个数
+      * 镜像版本数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupCount: number;
+    TagCount: number;
     /**
-      * 程序包存储空间用量，单位字节
+      * 是否公共,1:公有,0:私有
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PackageSpaceUsed: number;
+    IsPublic: number;
     /**
-      * 已注册实例数
+      * 是否被用户收藏。true：是，false：否
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ConsulInstanceCount: number;
+    IsUserFavor: boolean;
+    /**
+      * 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsQcloudOfficial: boolean;
+    /**
+      * 被所有用户收藏次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FavorCount: number;
+    /**
+      * 拉取次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PullCount: number;
+    /**
+      * 描述内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * TcrRepoInfo值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TcrRepoInfo: TcrRepoInfo;
+    /**
+      * TcrBindingId值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TcrBindingId: number;
+    /**
+      * applicationid值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationId: string;
+    /**
+      * ApplicationName值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationName: ScalableRule;
 }
 /**
  * CreatePublicConfig返回参数结构体
@@ -2403,11 +2541,11 @@ export interface DeployContainerGroupRequest {
       */
     JvmOpts?: string;
     /**
-      * 业务容器分配的 CPU 核数，对应 K8S 的 request
+      * 业务容器分配的 CPU 核数，对应 K8S 的 request，默认0.25
       */
     CpuRequest?: string;
     /**
-      * 业务容器分配的内存 MiB 数，对应 K8S 的 request
+      * 业务容器分配的内存 MiB 数，对应 K8S 的 request，默认640 MiB
       */
     MemRequest?: string;
     /**
@@ -2486,6 +2624,14 @@ export interface DeployContainerGroupRequest {
       * 节点调度策略。若不指定改参数，则默认不使用节点调度策略。
       */
     SchedulingStrategy?: SchedulingStrategy;
+    /**
+      * 是否进行增量部署，默认为false，全量更新
+      */
+    IncrementalDeployment?: boolean;
+    /**
+      * tcr或者不填
+      */
+    RepoType?: string;
 }
 /**
  * DescribeSimpleApplications请求参数结构体
@@ -2519,6 +2665,23 @@ export interface DescribeSimpleApplicationsRequest {
       * 通过id和name进行关键词过滤
       */
     SearchWord?: string;
+}
+/**
+ * OperateApplicationTcrBinding请求参数结构体
+ */
+export interface OperateApplicationTcrBindingRequest {
+    /**
+      * bind 或 unbind
+      */
+    Command?: string;
+    /**
+      * 应用id
+      */
+    ApplicationId?: string;
+    /**
+      * TcrRepoInfo值
+      */
+    TcrRepoInfo?: TcrRepoInfo;
 }
 /**
  * 部署组列表（应用下钻界面的）
@@ -2890,6 +3053,71 @@ export interface DescribePodInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 文件配置项发布信息
+ */
+export interface FileConfigRelease {
+    /**
+      * 配置项发布ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigReleaseId?: string;
+    /**
+      * 配置项ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigId?: string;
+    /**
+      * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigName?: string;
+    /**
+      * 配置项版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigVersion?: string;
+    /**
+      * 发布描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseDesc?: string;
+    /**
+      * 发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseTime?: string;
+    /**
+      * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupId?: string;
+    /**
+      * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupName?: string;
+    /**
+      * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceId?: string;
+    /**
+      * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceName?: string;
+    /**
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterId?: string;
+    /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterName?: string;
 }
 /**
  * DescribeRepositories返回参数结构体
@@ -3317,7 +3545,7 @@ export interface DeleteImageTagsResponse {
 true：成功。
 false：失败。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3549,6 +3777,36 @@ export interface ShrinkInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * TSF基本资源信息概览
+ */
+export interface OverviewBasicResourceUsage {
+    /**
+      * 应用总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplicationCount: number;
+    /**
+      * 命名空间总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceCount: number;
+    /**
+      * 部署组个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupCount: number;
+    /**
+      * 程序包存储空间用量，单位字节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageSpaceUsed: number;
+    /**
+      * 已注册实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsulInstanceCount: number;
 }
 /**
  * DescribeApiRateLimitRules返回参数结构体
@@ -3924,6 +4182,18 @@ export interface DescribeImageRepositoryRequest {
       * 分页个数，默认为20， 取值应为1~100
       */
     Limit?: number;
+    /**
+      * 企业: tcr ；个人: personal或者不填
+      */
+    RepoType?: string;
+    /**
+      * 应用id
+      */
+    ApplicationId?: string;
+    /**
+      * TcrRepoInfo值
+      */
+    TcrRepoInfo?: TcrRepoInfo;
 }
 /**
  * 单元化规则翻页对象
@@ -4511,6 +4781,51 @@ export interface StartGroupResponse {
     RequestId?: string;
 }
 /**
+ * 部署组配置发布相关信息
+ */
+export interface GroupRelease {
+    /**
+      * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageId: string;
+    /**
+      * 程序包名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageName: string;
+    /**
+      * 程序包版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageVersion: string;
+    /**
+      * 镜像名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepoName: string;
+    /**
+      * 镜像版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagName: string;
+    /**
+      * 已发布的全局配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicConfigReleaseList: Array<ConfigRelease>;
+    /**
+      * 已发布的应用配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigReleaseList: Array<ConfigRelease>;
+    /**
+      * 已发布的文件配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileConfigReleaseList: Array<FileConfigRelease>;
+}
+/**
  * DescribePathRewrites请求参数结构体
  */
 export interface DescribePathRewritesRequest {
@@ -4858,6 +5173,10 @@ export interface DeployGroupRequest {
       * 停止脚本 base64编码
       */
     StopScript?: string;
+    /**
+      * 是否进行增量部署，默认为false，全量更新
+      */
+    IncrementalDeployment?: boolean;
 }
 /**
  * 泳道分页查询
@@ -4948,6 +5267,20 @@ export interface UnbindApiGroupResponse {
       * 返回结果，成功失败
       */
     Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeGroupRelease返回参数结构体
+ */
+export interface DescribeGroupReleaseResponse {
+    /**
+      * 部署组发布的相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: GroupRelease;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5226,6 +5559,11 @@ export interface ImageTag {
       * 单位为字节
       */
     SizeByte: number;
+    /**
+      * TcrRepoInfo值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TcrRepoInfo: TcrRepoInfo;
 }
 /**
  * ExecuteTaskFlow请求参数结构体
@@ -5532,76 +5870,6 @@ export interface ModifyUploadInfoRequest {
       * 程序包仓库id
       */
     RepositoryId?: string;
-}
-/**
- * 分页的应用描述信息字段
- */
-export interface ApplicationForPage {
-    /**
-      * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationId: string;
-    /**
-      * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationName: string;
-    /**
-      * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationDesc: string;
-    /**
-      * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationType: string;
-    /**
-      * 微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MicroserviceType: string;
-    /**
-      * 编程语言
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProgLang: string;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
-    /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdateTime: string;
-    /**
-      * 应用资源类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationResourceType: string;
-    /**
-      * 应用runtime类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationRuntimeType: string;
-    /**
-      * Apigateway的serviceId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApigatewayServiceId: string;
-    /**
-      * 应用备注名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApplicationRemarkName: string;
-    /**
-      * 服务配置信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceConfigList: Array<ServiceConfig>;
 }
 /**
  * DescribeUnitRule请求参数结构体
@@ -5985,7 +6253,7 @@ export interface DescribeImageTagsResponse {
     /**
       * 查询的权限数据对象
       */
-    Result?: ImageTagsResult;
+    Result: ImageTagsResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7595,6 +7863,19 @@ export interface DescribeGroupInstancesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result?: TsfPageInstance;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * OperateApplicationTcrBinding返回参数结构体
+ */
+export interface OperateApplicationTcrBindingResponse {
+    /**
+      * 是否成功
+      */
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9746,7 +10027,7 @@ export interface DeployContainerGroupResponse {
 true：成功。
 false：失败。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10059,7 +10340,7 @@ export interface DescribeImageRepositoryResponse {
     /**
       * 查询的权限数据对象
       */
-    Result?: ImageRepositoryResult;
+    Result: ImageRepositoryResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10099,6 +10380,14 @@ export interface DescribeImageTagsRequest {
       * 可用于搜索的 tag 名字
       */
     SearchWord?: string;
+    /**
+      * 企业: tcr ；个人: personal或者不填
+      */
+    RepoType?: string;
+    /**
+      * TcrRepoInfo值
+      */
+    TcrRepoInfo?: TcrRepoInfo;
 }
 /**
  * DescribeConfigSummary返回参数结构体

@@ -358,8 +358,11 @@ export interface ChartHistogram {
  */
 export interface LimitInfo {
   /**
-   * 通知类型
-   */
+      * 通知类型：
+limit_emai：邮件
+limit_wechat：微信
+limit_phone：手机
+      */
   Type: string
 
   /**
@@ -403,7 +406,7 @@ export interface NoticeInfoResult {
   Id: number
 
   /**
-   * 通知开关信息
+   * 通知开关信息；0：关闭；15开启
    */
   NoticeType: number
 
@@ -433,7 +436,7 @@ export interface DescribeDomainCertsResponse {
  */
 export interface DomainSiteInfo {
   /**
-   * ID
+   * ID标识
    */
   Id: number
 
@@ -448,14 +451,23 @@ export interface DomainSiteInfo {
   Ip: string
 
   /**
-   * 是否自动获取IP
+   * 是否自动获取IP：true：是，false:否
    */
   AutoIP: boolean
 
   /**
-   * 监控服务类型
-   */
-  ServerType: number
+      * 评级
+"A+"，
+ "A"，
+"A-"，
+"B"，
+"C"，
+"D"，
+ "E"，
+ "F"，
+"T"，
+      */
+  Grade: string
 
   /**
    * 证书品牌
@@ -463,17 +475,31 @@ export interface DomainSiteInfo {
   Brand: string
 
   /**
-   * 评级
-   */
-  Grade: string
+      * 监控服务类型
+0 :Web
+1: SMTP
+2: IMAP
+3: POP3
+      */
+  ServerType: number
 
   /**
-   * 评级Code
-   */
+      * 评级Code
+0："unknown"，
+1："A+"，
+2： "A"，
+3："A-"，
+4："B"，
+5："C"，
+6："D"，
+7： "E"，
+8： "F"，
+9："T"，
+      */
   GradeCode: number
 
   /**
-   * 是否监控告警
+   * 是否监控告警；true：是，false:否
    */
   Notice: boolean
 
@@ -489,8 +515,19 @@ export interface DomainSiteInfo {
   Tags: Array<string>
 
   /**
-   * 域名状态
-   */
+      * 域名状态:
+连接异常，
+证书已过期，
+证书已吊销，
+证书黑名单，
+证书域名不匹配，
+证书不可信，
+证书密钥弱，
+证书即将过期，少于7天，
+证书即将过期，少于30天，
+正常，
+部分异常
+      */
   Status: string
 
   /**

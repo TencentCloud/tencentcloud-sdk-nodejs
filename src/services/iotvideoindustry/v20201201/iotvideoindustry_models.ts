@@ -16,6 +16,32 @@
  */
 
 /**
+ * ControlRecordStream请求参数结构体
+ */
+export interface ControlRecordStreamRequest {
+  /**
+   * 设备Id，设备的唯一标识
+   */
+  DeviceId: string
+
+  /**
+   * 流Id，流的唯一标识
+   */
+  StreamId: string
+
+  /**
+      * |控制参数，CmdJson结构转义的json字符串。| Action  | string  |是|控制动作，play(用于暂停后恢复播放)、pause（暂停）、teardown(停止)、jump(拖动播放)
+| Offset  | uint  |否|拖动播放时的时间偏移量（相对于起始时间）,单位：秒
+      */
+  Command: string
+
+  /**
+   * 通道唯一标识
+   */
+  ChannelId?: string
+}
+
+/**
  * DeleteTimeTemplate返回参数结构体
  */
 export interface DeleteTimeTemplateResponse {
@@ -131,6 +157,12 @@ export interface DeviceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeviceId?: string
+
+  /**
+      * 通道唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelId?: string
 }
 
 /**
@@ -203,6 +235,16 @@ export interface GetVideoListByConRequest {
 当LatestDay为空或为0时，本参数不允许为空。
       */
   Date?: string
+
+  /**
+   * 通道唯一标识
+   */
+  ChannelId?: string
+
+  /**
+   * 1: 云端录制 2: 本地录制
+   */
+  Type?: number
 }
 
 /**
@@ -392,6 +434,12 @@ export interface GroupDeviceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Recordable?: number
+
+  /**
+      * 设备接入协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol?: string
 }
 
 /**
@@ -488,6 +536,11 @@ export interface DescribeAllDeviceListRequest {
    * DeviceId列表，需要精确查找设备时为必填
    */
   DeviceIds?: Array<string>
+
+  /**
+   * 设备类型过滤
+   */
+  DeviceTypes?: Array<number>
 }
 
 /**
@@ -677,6 +730,8 @@ export interface DescribeStatisticDetailsRequest {
 2.非录制设备数：NonRecordingDevice
 3.观看流量总数：WatchFlux
 4.已用存储容量总数：StorageUsage
+5. X-P2P分享流量: P2PFluxTotal
+6. X-P2P峰值带宽: P2PPeakValue
       */
   StatisticField: string
 }
@@ -704,6 +759,11 @@ export interface CreateRecordPlanRequest {
    * 该录制计划绑定的设备列表
    */
   Devices?: Array<DeviceItem>
+
+  /**
+   * 存储周期
+   */
+  RecordStorageTime?: number
 }
 
 /**
@@ -864,6 +924,18 @@ export interface DescribeStatisticSummaryResponse {
   StorageUsage: number
 
   /**
+      * X-P2P分享流量。单位 Byte
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  P2PFluxTotal: number
+
+  /**
+      * X-P2P峰值带宽。 单位bps
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  P2PPeakValue: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -897,6 +969,11 @@ export interface DescribeRecordStreamRequest {
    * 录像流结束时间，当录像文件Id为空时有效
    */
   EndTime?: number
+
+  /**
+   * 通道唯一标识
+   */
+  ChannelId?: string
 }
 
 /**
@@ -976,6 +1053,11 @@ focusIn - 焦距变近
 focusOut - 焦距变远
       */
   Command: string
+
+  /**
+   * 通道唯一标识
+   */
+  ChannelId?: string
 }
 
 /**
@@ -1031,6 +1113,11 @@ export interface DescribeGroupDevicesRequest {
    * 过滤不可录制设备
    */
   Recordable?: number
+
+  /**
+   * 当Group是普通组的时候，支持根据deviceTypes筛选类型
+   */
+  DeviceTypes?: Array<number>
 }
 
 /**
@@ -1072,6 +1159,11 @@ export interface DescribeDeviceStreamsRequest {
    * 流地址失效时间
    */
   ExpireTime: number
+
+  /**
+   * 通道唯一标识
+   */
+  ChannelId?: string
 }
 
 /**
@@ -1167,6 +1259,24 @@ export interface AllDeviceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Recordable?: number
+
+  /**
+      * 设备接入协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol?: string
+
+  /**
+      * 组Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId?: string
+
+  /**
+      * 组名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName?: string
 }
 
 /**
@@ -1228,6 +1338,16 @@ export interface GetRecordDatesByDevRequest {
    * 限制量，默认200
    */
   Limit: number
+
+  /**
+   * 通道唯一标识
+   */
+  ChannelId?: string
+
+  /**
+   * 1: 云端录制 2: 本地录制
+   */
+  Type?: number
 }
 
 /**
@@ -1697,6 +1817,16 @@ export interface DescribeVideoListResponse {
    */
   RecordList: Array<RecordTaskItem>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ControlRecordStream返回参数结构体
+ */
+export interface ControlRecordStreamResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

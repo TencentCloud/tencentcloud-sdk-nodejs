@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMntMbrBindRelateAcctBankCode", req, cb);
     }
     /**
+     * 灵云-批量主播转账接口
+     */
+    async CreateBatchPayment(req, cb) {
+        return this.request("CreateBatchPayment", req, cb);
+    }
+    /**
      * 灵云-主播入驻
      */
     async CreateExternalAnchor(req, cb) {
@@ -160,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePayMerchant", req, cb);
     }
     /**
+     * 灵云-单笔转账结果查询
+     */
+    async QuerySinglePaymentResult(req, cb) {
+        return this.request("QuerySinglePaymentResult", req, cb);
+    }
+    /**
      * 直播平台-上传代理商完税证明
      */
     async UploadTaxPayment(req, cb) {
@@ -178,10 +190,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeChargeDetail", req, cb);
     }
     /**
-     * 跨境-对接方账户余额查询
+     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
      */
-    async QueryMerchantBalance(req, cb) {
-        return this.request("QueryMerchantBalance", req, cb);
+    async RegisterBillSupportWithdraw(req, cb) {
+        return this.request("RegisterBillSupportWithdraw", req, cb);
     }
     /**
      * 直播平台-删除代理商完税信息
@@ -214,10 +226,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterBehavior", req, cb);
     }
     /**
-     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+     * 跨境-对接方账户余额查询
      */
-    async RegisterBillSupportWithdraw(req, cb) {
-        return this.request("RegisterBillSupportWithdraw", req, cb);
+    async QueryMerchantBalance(req, cb) {
+        return this.request("QueryMerchantBalance", req, cb);
     }
     /**
      * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
@@ -482,6 +494,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExecuteMemberTransaction", req, cb);
     }
     /**
+     * 灵云-单笔主播转账接口
+     */
+    async CreateSinglePayment(req, cb) {
+        return this.request("CreateSinglePayment", req, cb);
+    }
+    /**
      * 登记挂账(支持撤销)
      */
     async RegisterBill(req, cb) {
@@ -551,6 +569,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryMemberTransaction(req, cb) {
         return this.request("QueryMemberTransaction", req, cb);
+    }
+    /**
+     * 灵云-批量转账结果查询
+     */
+    async QueryBatchPaymentResult(req, cb) {
+        return this.request("QueryBatchPaymentResult", req, cb);
     }
     /**
      * 获取单笔代发转账对账单下载URL

@@ -85,6 +85,12 @@ RecordId和StartTime/EndTime互斥
         return this.request("UpdateDevicePassWord", req, cb);
     }
     /**
+     * 对回放流进行控制，包括暂停、播放、拉动、结束等
+     */
+    async ControlRecordStream(req, cb) {
+        return this.request("ControlRecordStream", req, cb);
+    }
+    /**
      * 本接口(GetTimeTemplateById)用于根据模板ID获取时间模板详情。
      */
     async GetTimeTemplateById(req, cb) {

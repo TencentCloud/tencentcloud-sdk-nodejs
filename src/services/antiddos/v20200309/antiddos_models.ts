@@ -1295,8 +1295,11 @@ export interface DescribeListDDoSGeoIPBlockConfigResponse {
  */
 export interface DescribeBasicDeviceStatusResponse {
   /**
-   * 返回资源及状态
-   */
+      * 返回资源及状态，状态码：
+1 - 封堵状态
+2 - 正常状态
+3 - 攻击状态
+      */
   Data: Array<KeyValue>
 
   /**
@@ -3001,6 +3004,11 @@ export interface L7RuleEntry {
    * 当证书来源为腾讯云托管证书时，此字段必须填写托管证书ID
    */
   SSLId?: string
+
+  /**
+   * 同ruleId
+   */
+  Id?: string
 }
 
 /**

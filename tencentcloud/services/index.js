@@ -230,6 +230,8 @@ var organization_1 = require("./organization");
 Object.defineProperty(exports, "organization", { enumerable: true, get: function () { return organization_1.organization; } });
 var partners_1 = require("./partners");
 Object.defineProperty(exports, "partners", { enumerable: true, get: function () { return partners_1.partners; } });
+var pds_1 = require("./pds");
+Object.defineProperty(exports, "pds", { enumerable: true, get: function () { return pds_1.pds; } });
 var postgres_1 = require("./postgres");
 Object.defineProperty(exports, "postgres", { enumerable: true, get: function () { return postgres_1.postgres; } });
 var privatedns_1 = require("./privatedns");

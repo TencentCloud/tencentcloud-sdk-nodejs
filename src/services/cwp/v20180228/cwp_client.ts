@@ -73,7 +73,7 @@ import {
   DescribeTagMachinesRequest,
   ExportAssetCoreModuleListResponse,
   SwitchBashRulesResponse,
-  OpenPortStatistics,
+  ModifyWarningSettingRequest,
   DescribeBruteAttackListResponse,
   DescribeExportMachinesResponse,
   DescribeHistoryAccountsResponse,
@@ -82,7 +82,7 @@ import {
   UntrustMalwaresRequest,
   DescribeLoginWhiteListRequest,
   ReverseShell,
-  SecurityDynamic,
+  OpenPortStatistics,
   ExportBruteAttacksResponse,
   ExportVulDetectionReportResponse,
   DescribeAccountStatisticsResponse,
@@ -202,9 +202,12 @@ import {
   DescribeGeneralStatRequest,
   ExportReverseShellEventsRequest,
   Filter,
+  SecurityDynamic,
   DeleteLoginWhiteListResponse,
   DescribeAccountStatisticsRequest,
   DescribeAttackLogsResponse,
+  ModifyWarningSettingResponse,
+  WarningObject,
   SecurityEventInfo,
   OpenProVersionPrepaidResponse,
   DeleteMalwaresResponse,
@@ -996,6 +999,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountsResponse) => void
   ): Promise<DescribeAccountsResponse> {
     return this.request("DescribeAccounts", req, cb)
+  }
+
+  /**
+   * 修改告警设置
+   */
+  async ModifyWarningSetting(
+    req: ModifyWarningSettingRequest,
+    cb?: (error: string, rep: ModifyWarningSettingResponse) => void
+  ): Promise<ModifyWarningSettingResponse> {
+    return this.request("ModifyWarningSetting", req, cb)
   }
 
   /**

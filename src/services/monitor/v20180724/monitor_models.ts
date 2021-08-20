@@ -3589,6 +3589,11 @@ export interface DescribeAlarmPoliciesRequest {
    * 传 1 查询未配置通知规则的告警策略；不传或传其他数值，查询所有策略。
    */
   NotBindingNoticeRule?: number
+
+  /**
+   * 实例分组id
+   */
+  InstanceGroupId?: number
 }
 
 /**

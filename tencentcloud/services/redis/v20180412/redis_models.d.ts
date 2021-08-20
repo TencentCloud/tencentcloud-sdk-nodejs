@@ -877,7 +877,7 @@ export interface ModifyAutoBackupConfigRequest {
       */
     InstanceId: string;
     /**
-      * 日期 Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday
+      * 日期 Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday，该参数暂不支持修改。
       */
     WeekDays: Array<string>;
     /**
@@ -1024,11 +1024,11 @@ export interface DescribeInstanceShardsResponse {
     /**
       * 实例分片列表信息
       */
-    InstanceShards?: Array<InstanceClusterShard>;
+    InstanceShards: Array<InstanceClusterShard>;
     /**
       * 实例分片节点总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1355,11 +1355,11 @@ export interface DescribeTendisSlowLogResponse {
     /**
       * 慢查询总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 慢查询详情
       */
-    TendisSlowLogDetail?: Array<TendisSlowLogDetail>;
+    TendisSlowLogDetail: Array<TendisSlowLogDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1442,15 +1442,15 @@ export interface DescribeParamTemplateInfoRequest {
  */
 export interface DescribeBackupUrlResponse {
     /**
-      * 外网下载地址（6小时）
+      * 外网下载地址（6小时内链接有效），该字段正在逐步废弃中。
       */
     DownloadUrl: Array<string>;
     /**
-      * 内网下载地址（6小时）
+      * 内网下载地址（6小时内链接有效），该字段正在逐步废弃中。
       */
     InnerDownloadUrl: Array<string>;
     /**
-      * 文件名称（仅tendis实例有值）
+      * 文件名称，该字段正在逐步废弃中。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Filenames: Array<string>;
@@ -1496,7 +1496,7 @@ export interface DescribeDBSecurityGroupsRequest {
  */
 export interface InquiryPriceCreateInstanceResponse {
     /**
-      * 价格，单位：分
+      * 价格，单位：元
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Price: number;
@@ -2074,7 +2074,7 @@ export interface DescribeParamTemplatesResponse {
  */
 export interface DescribeInstanceShardsRequest {
     /**
-      * 实例id
+      * 实例ID
       */
     InstanceId: string;
     /**
@@ -2883,15 +2883,15 @@ export interface ModifyParamTemplateRequest {
       */
     TemplateId: string;
     /**
-      * 参数模板名称。
+      * 参数模板修改后的新名称。
       */
     Name?: string;
     /**
-      * 参数模板描述。
+      * 参数模板修改后的新描述。
       */
     Description?: string;
     /**
-      * 参数列表。
+      * 修改后的新参数列表。
       */
     ParamList?: Array<InstanceParam>;
 }
@@ -3250,15 +3250,15 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
       */
     ZoneId?: number;
     /**
-      * 实例分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版、Redis4.0主从版不需要填写。
+      * 实例分片数量，Redis2.8标准架构、CKV标准架构和Redis2.8单机版、Redis4.0标准架构不需要填写。
       */
     RedisShardNum?: number;
     /**
-      * 实例副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。
+      * 实例副本数量，Redis2.8标准架构、CKV标准架构和Redis2.8单机版不需要填写。
       */
     RedisReplicasNum?: number;
     /**
-      * 是否支持副本只读，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。
+      * 是否支持副本只读，Redis2.8标准架构、CKV标准架构和Redis2.8单机版不需要填写。
       */
     ReplicasReadonly?: boolean;
     /**
@@ -3425,7 +3425,7 @@ export interface DescribeTendisSlowLogRequest {
       */
     MinQueryTime?: number;
     /**
-      * 页面大小：20
+      * 页面大小：默认20
       */
     Limit?: number;
     /**
@@ -3919,15 +3919,15 @@ export interface UpgradeInstanceRequest {
       */
     InstanceId: string;
     /**
-      * 分片大小 单位 MB
+      * 分片大小 单位 MB。该参数不支持与RedisShardNum或RedisReplicasNum同时输入。
       */
     MemSize: number;
     /**
-      * 分片数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+      * 分片数量，标准架构不需要填写。该参数不支持与RedisReplicasNum或MemSize同时输入。
       */
     RedisShardNum?: number;
     /**
-      * 副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写
+      * 副本数量，标准架构不需要填写，多AZ实例修改副本时必须要传入NodeSet。该参数不支持与RedisShardNum或MemSize同时输入。
       */
     RedisReplicasNum?: number;
     /**

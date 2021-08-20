@@ -88,6 +88,7 @@ import {
   Instance,
   OutputMapping,
   EnhancedService,
+  RunAutomationServiceEnabled,
   DescribeJobSubmitInfoResponse,
   DescribeComputeEnvCreateInfosResponse,
   RunSecurityServiceEnabled,

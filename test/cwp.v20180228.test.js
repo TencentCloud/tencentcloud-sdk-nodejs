@@ -728,6 +728,16 @@ it("cwp.v20180228.DescribeAccounts", async function () {
     }
 })
 
+it("cwp.v20180228.ModifyWarningSetting", async function () {
+    try {
+       const data = await client.ModifyWarningSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeProVersionInfo", async function () {
     try {
        const data = await client.DescribeProVersionInfo({})

@@ -120,6 +120,7 @@ import {
   DeleteSubscriptionsResponse,
   ConsumersSchedule,
   Cluster,
+  RetentionPolicy,
   SendMsgRequest,
   DescribeCmqQueueDetailRequest,
   ClearCmqQueueResponse,

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("rum.tencentcloudapi.com", "2021-06-22", clientConfig);
     }
     /**
+     * 获取首页错误信息
+     */
+    async DescribeError(req, cb) {
+        return this.request("DescribeError", req, cb);
+    }
+    /**
      * 获取PerformancePage信息
      */
     async DescribeDataPerformancePage(req, cb) {
@@ -38,6 +44,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateProject(req, cb) {
         return this.request("CreateProject", req, cb);
+    }
+    /**
+     * 获取LogUrlStatistics信息
+     */
+    async DescribeDataLogUrlStatistics(req, cb) {
+        return this.request("DescribeDataLogUrlStatistics", req, cb);
     }
 }
 exports.Client = Client;

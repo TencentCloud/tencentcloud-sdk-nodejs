@@ -1989,6 +1989,11 @@ export interface CodeSource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Branch?: string;
+    /**
+      * coding项目ID，type为coding时需要填写
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectId?: number;
 }
 /**
  * TurnOffStandaloneGateway返回参数结构体

@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeConfig", req, cb);
     }
     /**
-     * 对执行失败的任务批次执行续跑
+     * 获取微服务列表
      */
-    async ContinueRunFailedTaskBatch(req, cb) {
-        return this.request("ContinueRunFailedTaskBatch", req, cb);
+    async DescribeMicroservices(req, cb) {
+        return this.request("DescribeMicroservices", req, cb);
     }
     /**
      * 修改容器部署组实例数
@@ -92,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddClusterInstances(req, cb) {
         return this.request("AddClusterInstances", req, cb);
+    }
+    /**
+     * 查询部署组相关的发布信息
+     */
+    async DescribeGroupRelease(req, cb) {
+        return this.request("DescribeGroupRelease", req, cb);
     }
     /**
      * 重新执行工作流批次
@@ -649,6 +655,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("RemoveInstances", req, cb);
     }
     /**
+     * 绑定解绑tcr仓库
+     */
+    async OperateApplicationTcrBinding(req, cb) {
+        return this.request("OperateApplicationTcrBinding", req, cb);
+    }
+    /**
      * 虚拟机部署组添加实例
      */
     async ExpandGroup(req, cb) {
@@ -901,10 +913,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("StopTaskBatch", req, cb);
     }
     /**
-     * 获取微服务列表
+     * 对执行失败的任务批次执行续跑
      */
-    async DescribeMicroservices(req, cb) {
-        return this.request("DescribeMicroservices", req, cb);
+    async ContinueRunFailedTaskBatch(req, cb) {
+        return this.request("ContinueRunFailedTaskBatch", req, cb);
     }
     /**
      * 查询API 版本

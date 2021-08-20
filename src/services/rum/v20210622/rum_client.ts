@@ -18,10 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateProjectResponse,
   DescribeDataPerformancePageResponse,
-  CreateProjectRequest,
   DescribeDataPerformancePageRequest,
+  DescribeErrorRequest,
+  DescribeDataLogUrlStatisticsResponse,
+  CreateProjectResponse,
+  DescribeErrorResponse,
+  DescribeDataLogUrlStatisticsRequest,
+  CreateProjectRequest,
 } from "./rum_models"
 
 /**
@@ -31,6 +35,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("rum.tencentcloudapi.com", "2021-06-22", clientConfig)
+  }
+
+  /**
+   * 获取首页错误信息
+   */
+  async DescribeError(
+    req: DescribeErrorRequest,
+    cb?: (error: string, rep: DescribeErrorResponse) => void
+  ): Promise<DescribeErrorResponse> {
+    return this.request("DescribeError", req, cb)
   }
 
   /**
@@ -51,5 +65,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProjectResponse) => void
   ): Promise<CreateProjectResponse> {
     return this.request("CreateProject", req, cb)
+  }
+
+  /**
+   * 获取LogUrlStatistics信息
+   */
+  async DescribeDataLogUrlStatistics(
+    req: DescribeDataLogUrlStatisticsRequest,
+    cb?: (error: string, rep: DescribeDataLogUrlStatisticsResponse) => void
+  ): Promise<DescribeDataLogUrlStatisticsResponse> {
+    return this.request("DescribeDataLogUrlStatistics", req, cb)
   }
 }

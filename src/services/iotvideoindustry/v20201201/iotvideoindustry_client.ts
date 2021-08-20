@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ControlRecordStreamRequest,
   DeleteTimeTemplateResponse,
   GetTimeTemplatesRequest,
   ServerConfiguration,
@@ -98,6 +99,7 @@ import {
   GroupItem,
   DeleteTimeTemplateRequest,
   DescribeVideoListResponse,
+  ControlRecordStreamResponse,
   BindGroupDevicesResponse,
   DescribeVideoListRequest,
   ModifyDeviceDataResponse,
@@ -206,6 +208,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: UpdateDevicePassWordResponse) => void
   ): Promise<UpdateDevicePassWordResponse> {
     return this.request("UpdateDevicePassWord", req, cb)
+  }
+
+  /**
+   * 对回放流进行控制，包括暂停、播放、拉动、结束等
+   */
+  async ControlRecordStream(
+    req: ControlRecordStreamRequest,
+    cb?: (error: string, rep: ControlRecordStreamResponse) => void
+  ): Promise<ControlRecordStreamResponse> {
+    return this.request("ControlRecordStream", req, cb)
   }
 
   /**

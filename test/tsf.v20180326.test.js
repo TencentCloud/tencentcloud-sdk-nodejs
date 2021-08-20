@@ -48,9 +48,9 @@ it("tsf.v20180326.DescribeConfig", async function () {
     }
 })
 
-it("tsf.v20180326.ContinueRunFailedTaskBatch", async function () {
+it("tsf.v20180326.DescribeMicroservices", async function () {
     try {
-       const data = await client.ContinueRunFailedTaskBatch({})
+       const data = await client.DescribeMicroservices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,16 @@ it("tsf.v20180326.CreateNamespace", async function () {
 it("tsf.v20180326.AddClusterInstances", async function () {
     try {
        const data = await client.AddClusterInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeGroupRelease", async function () {
+    try {
+       const data = await client.DescribeGroupRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1048,6 +1058,16 @@ it("tsf.v20180326.RemoveInstances", async function () {
     }
 })
 
+it("tsf.v20180326.OperateApplicationTcrBinding", async function () {
+    try {
+       const data = await client.OperateApplicationTcrBinding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.ExpandGroup", async function () {
     try {
        const data = await client.ExpandGroup({})
@@ -1468,9 +1488,9 @@ it("tsf.v20180326.StopTaskBatch", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeMicroservices", async function () {
+it("tsf.v20180326.ContinueRunFailedTaskBatch", async function () {
     try {
-       const data = await client.DescribeMicroservices({})
+       const data = await client.ContinueRunFailedTaskBatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

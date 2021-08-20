@@ -195,6 +195,7 @@ import {
   KeyPair,
   DescribeReservedInstancesOfferingsResponse,
   RenewInstancesResponse,
+  RunAutomationServiceEnabled,
   DescribeAccountQuotaResponse,
   RunMonitorServiceEnabled,
   ResetInstanceResponse,
