@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBInstancesRequest, SetAutoRenewFlagRequest, DescribeDatabasesRequest, DescribeDBXlogsRequest, DescribeAccountsRequest, DeleteReadOnlyGroupResponse, CreateInstancesRequest, ModifyDBInstanceReadOnlyGroupResponse, OpenServerlessDBExtranetAccessRequest, RenewInstanceResponse, DeleteServerlessDBInstanceResponse, ModifyReadOnlyGroupConfigRequest, AddDBInstanceToReadOnlyGroupRequest, DescribeProductConfigRequest, InitDBInstancesResponse, RenewInstanceRequest, RebalanceReadOnlyGroupRequest, DescribeRegionsResponse, InquiryPriceCreateDBInstancesRequest, DescribeDBInstanceAttributeRequest, ModifyDBInstancesProjectResponse, ModifyDBInstanceReadOnlyGroupRequest, AddDBInstanceToReadOnlyGroupResponse, CreateReadOnlyDBInstanceResponse, CreateInstancesResponse, DescribeOrdersResponse, InquiryPriceCreateDBInstancesResponse, ModifySwitchTimePeriodResponse, DisIsolateDBInstancesRequest, DescribeDBInstancesRequest, ModifyAccountRemarkResponse, UpgradeDBInstanceRequest, DescribeZonesRequest, DescribeReadOnlyGroupsResponse, SetAutoRenewFlagResponse, ResetAccountPasswordResponse, CloseServerlessDBExtranetAccessRequest, DescribeDBErrlogsRequest, DestroyDBInstanceRequest, OpenServerlessDBExtranetAccessResponse, DescribeServerlessDBInstancesRequest, DescribeDBBackupsResponse, DescribeRegionsRequest, CreateReadOnlyGroupRequest, CloseServerlessDBExtranetAccessResponse, RestartDBInstanceRequest, IsolateDBInstancesResponse, OpenDBExtranetAccessResponse, InquiryPriceUpgradeDBInstanceRequest, RebalanceReadOnlyGroupResponse, ModifyDBInstanceNameRequest, InquiryPriceRenewDBInstanceResponse, DescribeServerlessDBInstancesResponse, IsolateDBInstancesRequest, InitDBInstancesRequest, DescribeProductConfigResponse, DeleteReadOnlyGroupRequest, DescribeDBBackupsRequest, DisIsolateDBInstancesResponse, OpenDBExtranetAccessRequest, RemoveDBInstanceFromReadOnlyGroupRequest, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, CreateReadOnlyDBInstanceRequest, DescribeZonesResponse, CreateServerlessDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, ModifyAccountRemarkRequest, CloseDBExtranetAccessRequest, CreateServerlessDBInstanceRequest, InquiryPriceRenewDBInstanceRequest, CreateReadOnlyGroupResponse, DeleteServerlessDBInstanceRequest, ModifyReadOnlyGroupConfigResponse, DescribeDBErrlogsResponse, InquiryPriceUpgradeDBInstanceResponse, ModifySwitchTimePeriodRequest, RestartDBInstanceResponse, DescribeDBInstancesResponse, RemoveDBInstanceFromReadOnlyGroupResponse, ResetAccountPasswordRequest, DescribeReadOnlyGroupsRequest, DescribeAccountsResponse, UpgradeDBInstanceResponse, ModifyDBInstancesProjectRequest, DescribeDBSlowlogsRequest, DestroyDBInstanceResponse, DescribeDBInstanceAttributeResponse, DescribeDBXlogsResponse, DescribeDBSlowlogsResponse, CreateDBInstancesResponse } from "./postgres_models";
+import { CreateDBInstancesRequest, SetAutoRenewFlagRequest, DescribeDatabasesRequest, DescribeDBXlogsRequest, DescribeAccountsRequest, DeleteReadOnlyGroupResponse, CreateInstancesRequest, ModifyDBInstanceReadOnlyGroupResponse, OpenServerlessDBExtranetAccessRequest, RenewInstanceResponse, DeleteServerlessDBInstanceResponse, ModifyReadOnlyGroupConfigRequest, AddDBInstanceToReadOnlyGroupRequest, DescribeProductConfigRequest, InitDBInstancesResponse, RenewInstanceRequest, RebalanceReadOnlyGroupRequest, DescribeRegionsResponse, InquiryPriceCreateDBInstancesRequest, DescribeDBInstanceAttributeRequest, ModifyDBInstancesProjectResponse, ModifyDBInstanceReadOnlyGroupRequest, AddDBInstanceToReadOnlyGroupResponse, CreateReadOnlyDBInstanceResponse, DescribeOrdersResponse, InquiryPriceCreateDBInstancesResponse, ModifySwitchTimePeriodResponse, DisIsolateDBInstancesRequest, DescribeDBInstancesRequest, ModifyAccountRemarkResponse, UpgradeDBInstanceRequest, DescribeZonesRequest, DescribeReadOnlyGroupsResponse, SetAutoRenewFlagResponse, ResetAccountPasswordResponse, CloseServerlessDBExtranetAccessRequest, DescribeDBErrlogsRequest, DestroyDBInstanceRequest, CreateInstancesResponse, DescribeServerlessDBInstancesRequest, DescribeDBBackupsResponse, DescribeRegionsRequest, DescribeSlowQueryListResponse, CreateReadOnlyGroupRequest, CloseServerlessDBExtranetAccessResponse, RestartDBInstanceRequest, IsolateDBInstancesResponse, OpenDBExtranetAccessResponse, InquiryPriceUpgradeDBInstanceRequest, RebalanceReadOnlyGroupResponse, ModifyDBInstanceNameRequest, InquiryPriceRenewDBInstanceResponse, DescribeSlowQueryAnalysisRequest, DescribeServerlessDBInstancesResponse, IsolateDBInstancesRequest, InitDBInstancesRequest, DescribeProductConfigResponse, DeleteReadOnlyGroupRequest, DescribeDBBackupsRequest, DisIsolateDBInstancesResponse, OpenDBExtranetAccessRequest, RemoveDBInstanceFromReadOnlyGroupRequest, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, CreateReadOnlyDBInstanceRequest, DescribeZonesResponse, CreateServerlessDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, ModifyAccountRemarkRequest, CloseDBExtranetAccessRequest, CreateServerlessDBInstanceRequest, InquiryPriceRenewDBInstanceRequest, CreateReadOnlyGroupResponse, DeleteServerlessDBInstanceRequest, ModifyReadOnlyGroupConfigResponse, DescribeDBErrlogsResponse, InquiryPriceUpgradeDBInstanceResponse, ModifySwitchTimePeriodRequest, DescribeSlowQueryListRequest, RestartDBInstanceResponse, DescribeDBInstancesResponse, RemoveDBInstanceFromReadOnlyGroupResponse, ResetAccountPasswordRequest, DescribeSlowQueryAnalysisResponse, DescribeReadOnlyGroupsRequest, DescribeAccountsResponse, UpgradeDBInstanceResponse, ModifyDBInstancesProjectRequest, DescribeDBSlowlogsRequest, DestroyDBInstanceResponse, DescribeDBInstanceAttributeResponse, OpenServerlessDBExtranetAccessResponse, DescribeDBXlogsResponse, DescribeDBSlowlogsResponse, CreateDBInstancesResponse } from "./postgres_models";
 /**
  * postgres client
  * @class
@@ -32,9 +32,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBErrlogs(req: DescribeDBErrlogsRequest, cb?: (error: string, rep: DescribeDBErrlogsResponse) => void): Promise<DescribeDBErrlogsResponse>;
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
+     * 慢查询统计分析接口，根据SQL语句抽象参数之后，进行聚合分析，并返回对应结果
      */
-    RestartDBInstance(req: RestartDBInstanceRequest, cb?: (error: string, rep: RestartDBInstanceResponse) => void): Promise<RestartDBInstanceResponse>;
+    DescribeSlowQueryAnalysis(req: DescribeSlowQueryAnalysisRequest, cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void): Promise<DescribeSlowQueryAnalysisResponse>;
     /**
      * 当升级完成后，对处于等待切换状态下的实例，强制实例立即切换。
      */
@@ -96,6 +96,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
     /**
+     * 本接口（RestartDBInstance）用于重启实例。
+     */
+    RestartDBInstance(req: RestartDBInstanceRequest, cb?: (error: string, rep: RestartDBInstanceResponse) => void): Promise<RestartDBInstanceResponse>;
+    /**
      * 本接口（IsolateDBInstances）用于隔离实例
      */
     IsolateDBInstances(req: IsolateDBInstancesRequest, cb?: (error: string, rep: IsolateDBInstancesResponse) => void): Promise<IsolateDBInstancesResponse>;
@@ -124,9 +128,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**
-     * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
+     * 获取慢查询列表
      */
-    InquiryPriceRenewDBInstance(req: InquiryPriceRenewDBInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewDBInstanceResponse) => void): Promise<InquiryPriceRenewDBInstanceResponse>;
+    DescribeSlowQueryList(req: DescribeSlowQueryListRequest, cb?: (error: string, rep: DescribeSlowQueryListResponse) => void): Promise<DescribeSlowQueryListResponse>;
     /**
      * 本接口（ModifyDBInstanceReadOnlyGroup）用于修改实例所属的只读组
      */
@@ -139,6 +143,10 @@ export declare class Client extends AbstractClient {
      * 本接口（AddDBInstanceToReadOnlyGroup）用于添加只读实例到只读组
      */
     AddDBInstanceToReadOnlyGroup(req: AddDBInstanceToReadOnlyGroupRequest, cb?: (error: string, rep: AddDBInstanceToReadOnlyGroupResponse) => void): Promise<AddDBInstanceToReadOnlyGroupResponse>;
+    /**
+     * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
+     */
+    InquiryPriceRenewDBInstance(req: InquiryPriceRenewDBInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewDBInstanceResponse) => void): Promise<InquiryPriceRenewDBInstanceResponse>;
     /**
      * 本接口（DescribeAccounts）用于获取实例用户列表。
      */

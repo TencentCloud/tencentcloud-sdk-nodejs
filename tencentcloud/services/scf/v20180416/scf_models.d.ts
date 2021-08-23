@@ -2286,15 +2286,15 @@ export interface InvokeFunctionRequest {
       */
     Qualifier?: string;
     /**
-      * 运行函数时的参数，以json格式传入，最大支持的参数长度是 1M
+      * 运行函数时的参数，以json格式传入，最大支持的参数长度是 6MB
       */
     Event?: string;
     /**
-      * 同步调用时指定该字段，返回值会包含4K的日志，可选值为None和Tail，默认值为None。当该值为Tail时，返回参数中的Log字段会包含对应的函数执行日志
+      * 返回值会包含4KB的日志，可选值为None和Tail，默认值为None。当该值为Tail时，返回参数中的Log字段会包含对应的函数执行日志
       */
     LogType?: string;
     /**
-      * 命名空间
+      * 命名空间，不填默认为 default
       */
     Namespace?: string;
     /**

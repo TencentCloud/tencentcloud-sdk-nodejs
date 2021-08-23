@@ -1135,11 +1135,11 @@ export interface DescribeUserResourcesAuthorizationRequest {
       */
     ApplicationId: string;
     /**
-      * 用户ID。
+      * 用户ID。UserName 和 UserId 需至少一个不为空；都不为空时优先使用 UserName。
       */
-    UserId: string;
+    UserId?: string;
     /**
-      * 用户名。
+      * 用户名。UserName 和 UserId 需至少一个不为空；都不为空时优先使用 UserName。
       */
     UserName?: string;
     /**

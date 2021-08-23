@@ -48,7 +48,7 @@ import {
   ModifyDBInstanceReadOnlyGroupRequest,
   AddDBInstanceToReadOnlyGroupResponse,
   CreateReadOnlyDBInstanceResponse,
-  CreateInstancesResponse,
+  DurationAnalysis,
   DescribeOrdersResponse,
   InquiryPriceCreateDBInstancesResponse,
   ModifySwitchTimePeriodResponse,
@@ -67,21 +67,25 @@ import {
   PgDeal,
   DescribeDBErrlogsRequest,
   DestroyDBInstanceRequest,
-  OpenServerlessDBExtranetAccessResponse,
+  CreateInstancesResponse,
+  AnalysisItems,
   Xlog,
   DescribeServerlessDBInstancesRequest,
   DescribeDBBackupsResponse,
   DescribeRegionsRequest,
+  DescribeSlowQueryListResponse,
   ServerlessDBInstance,
   CreateReadOnlyGroupRequest,
   CloseServerlessDBExtranetAccessResponse,
   RestartDBInstanceRequest,
+  Detail,
   IsolateDBInstancesResponse,
   OpenDBExtranetAccessResponse,
   InquiryPriceUpgradeDBInstanceRequest,
   RebalanceReadOnlyGroupResponse,
   ModifyDBInstanceNameRequest,
   InquiryPriceRenewDBInstanceResponse,
+  DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
   DescribeServerlessDBInstancesResponse,
   IsolateDBInstancesRequest,
@@ -114,11 +118,14 @@ import {
   DescribeDBErrlogsResponse,
   InquiryPriceUpgradeDBInstanceResponse,
   ModifySwitchTimePeriodRequest,
+  DescribeSlowQueryListRequest,
   RegionInfo,
   RestartDBInstanceResponse,
   DescribeDBInstancesResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
   ResetAccountPasswordRequest,
+  DescribeSlowQueryAnalysisResponse,
+  RawSlowQuery,
   DescribeReadOnlyGroupsRequest,
   DescribeAccountsResponse,
   UpgradeDBInstanceResponse,
@@ -126,6 +133,7 @@ import {
   DescribeDBSlowlogsRequest,
   DestroyDBInstanceResponse,
   DescribeDBInstanceAttributeResponse,
+  OpenServerlessDBExtranetAccessResponse,
   DescribeDBXlogsResponse,
   DescribeDBSlowlogsResponse,
   CreateDBInstancesResponse,
@@ -201,13 +209,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RestartDBInstance）用于重启实例。
+   * 慢查询统计分析接口，根据SQL语句抽象参数之后，进行聚合分析，并返回对应结果
    */
-  async RestartDBInstance(
-    req: RestartDBInstanceRequest,
-    cb?: (error: string, rep: RestartDBInstanceResponse) => void
-  ): Promise<RestartDBInstanceResponse> {
-    return this.request("RestartDBInstance", req, cb)
+  async DescribeSlowQueryAnalysis(
+    req: DescribeSlowQueryAnalysisRequest,
+    cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void
+  ): Promise<DescribeSlowQueryAnalysisResponse> {
+    return this.request("DescribeSlowQueryAnalysis", req, cb)
   }
 
   /**
@@ -361,6 +369,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（RestartDBInstance）用于重启实例。
+   */
+  async RestartDBInstance(
+    req: RestartDBInstanceRequest,
+    cb?: (error: string, rep: RestartDBInstanceResponse) => void
+  ): Promise<RestartDBInstanceResponse> {
+    return this.request("RestartDBInstance", req, cb)
+  }
+
+  /**
    * 本接口（IsolateDBInstances）用于隔离实例
    */
   async IsolateDBInstances(
@@ -431,13 +449,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
+   * 获取慢查询列表
    */
-  async InquiryPriceRenewDBInstance(
-    req: InquiryPriceRenewDBInstanceRequest,
-    cb?: (error: string, rep: InquiryPriceRenewDBInstanceResponse) => void
-  ): Promise<InquiryPriceRenewDBInstanceResponse> {
-    return this.request("InquiryPriceRenewDBInstance", req, cb)
+  async DescribeSlowQueryList(
+    req: DescribeSlowQueryListRequest,
+    cb?: (error: string, rep: DescribeSlowQueryListResponse) => void
+  ): Promise<DescribeSlowQueryListResponse> {
+    return this.request("DescribeSlowQueryList", req, cb)
   }
 
   /**
@@ -468,6 +486,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddDBInstanceToReadOnlyGroupResponse) => void
   ): Promise<AddDBInstanceToReadOnlyGroupResponse> {
     return this.request("AddDBInstanceToReadOnlyGroup", req, cb)
+  }
+
+  /**
+   * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
+   */
+  async InquiryPriceRenewDBInstance(
+    req: InquiryPriceRenewDBInstanceRequest,
+    cb?: (error: string, rep: InquiryPriceRenewDBInstanceResponse) => void
+  ): Promise<InquiryPriceRenewDBInstanceResponse> {
+    return this.request("InquiryPriceRenewDBInstance", req, cb)
   }
 
   /**

@@ -78,9 +78,9 @@ it("postgres.v20170312.DescribeDBErrlogs", async function () {
     }
 })
 
-it("postgres.v20170312.RestartDBInstance", async function () {
+it("postgres.v20170312.DescribeSlowQueryAnalysis", async function () {
     try {
-       const data = await client.RestartDBInstance({})
+       const data = await client.DescribeSlowQueryAnalysis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +238,16 @@ it("postgres.v20170312.DescribeZones", async function () {
     }
 })
 
+it("postgres.v20170312.RestartDBInstance", async function () {
+    try {
+       const data = await client.RestartDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.IsolateDBInstances", async function () {
     try {
        const data = await client.IsolateDBInstances({})
@@ -308,9 +318,9 @@ it("postgres.v20170312.DescribeRegions", async function () {
     }
 })
 
-it("postgres.v20170312.InquiryPriceRenewDBInstance", async function () {
+it("postgres.v20170312.DescribeSlowQueryList", async function () {
     try {
-       const data = await client.InquiryPriceRenewDBInstance({})
+       const data = await client.DescribeSlowQueryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +351,16 @@ it("postgres.v20170312.CloseDBExtranetAccess", async function () {
 it("postgres.v20170312.AddDBInstanceToReadOnlyGroup", async function () {
     try {
        const data = await client.AddDBInstanceToReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.InquiryPriceRenewDBInstance", async function () {
+    try {
+       const data = await client.InquiryPriceRenewDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

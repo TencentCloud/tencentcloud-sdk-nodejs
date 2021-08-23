@@ -64,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBErrlogs", req, cb);
     }
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
+     * 慢查询统计分析接口，根据SQL语句抽象参数之后，进行聚合分析，并返回对应结果
      */
-    async RestartDBInstance(req, cb) {
-        return this.request("RestartDBInstance", req, cb);
+    async DescribeSlowQueryAnalysis(req, cb) {
+        return this.request("DescribeSlowQueryAnalysis", req, cb);
     }
     /**
      * 当升级完成后，对处于等待切换状态下的实例，强制实例立即切换。
@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeZones", req, cb);
     }
     /**
+     * 本接口（RestartDBInstance）用于重启实例。
+     */
+    async RestartDBInstance(req, cb) {
+        return this.request("RestartDBInstance", req, cb);
+    }
+    /**
      * 本接口（IsolateDBInstances）用于隔离实例
      */
     async IsolateDBInstances(req, cb) {
@@ -202,10 +208,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
-     * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
+     * 获取慢查询列表
      */
-    async InquiryPriceRenewDBInstance(req, cb) {
-        return this.request("InquiryPriceRenewDBInstance", req, cb);
+    async DescribeSlowQueryList(req, cb) {
+        return this.request("DescribeSlowQueryList", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceReadOnlyGroup）用于修改实例所属的只读组
@@ -224,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddDBInstanceToReadOnlyGroup(req, cb) {
         return this.request("AddDBInstanceToReadOnlyGroup", req, cb);
+    }
+    /**
+     * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
+     */
+    async InquiryPriceRenewDBInstance(req, cb) {
+        return this.request("InquiryPriceRenewDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeAccounts）用于获取实例用户列表。

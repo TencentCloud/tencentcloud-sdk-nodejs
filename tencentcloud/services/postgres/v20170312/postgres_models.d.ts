@@ -717,25 +717,17 @@ export interface CreateReadOnlyDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * CreateInstances返回参数结构体
+ * 慢SQL耗时分段分析
  */
-export interface CreateInstancesResponse {
+export interface DurationAnalysis {
     /**
-      * 订单号列表。每个实例对应一个订单号。
+      * 慢SQL耗时，时段
       */
-    DealNames: Array<string>;
+    TimeSegment: string;
     /**
-      * 冻结流水号。
+      * 对应时段区间慢SQL 条数
       */
-    BillId: string;
-    /**
-      * 创建成功的实例ID集合，只在后付费情景下有返回值。
-      */
-    DBInstanceIdSet: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Count: number;
 }
 /**
  * DescribeOrders返回参数结构体
@@ -1131,13 +1123,82 @@ export interface DestroyDBInstanceRequest {
     DBInstanceId: string;
 }
 /**
- * OpenServerlessDBExtranetAccess返回参数结构体
+ * CreateInstances返回参数结构体
  */
-export interface OpenServerlessDBExtranetAccessResponse {
+export interface CreateInstancesResponse {
+    /**
+      * 订单号列表。每个实例对应一个订单号。
+      */
+    DealNames: Array<string>;
+    /**
+      * 冻结流水号。
+      */
+    BillId: string;
+    /**
+      * 创建成功的实例ID集合，只在后付费情景下有返回值。
+      */
+    DBInstanceIdSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 慢查询分析接口返回的分析详情，按照参数抽象之后进行分类
+ */
+export interface AnalysisItems {
+    /**
+      * 慢SQL查询的数据库名
+      */
+    DatabaseName: string;
+    /**
+      * 慢SQL执行的用户名
+      */
+    UserName: string;
+    /**
+      * 抽象参数之后的慢SQL
+      */
+    NormalQuery: string;
+    /**
+      * 慢SQL执行的客户端地址
+      */
+    ClientAddr: string;
+    /**
+      * 在选定时间范围内慢SQL语句执行的次数
+      */
+    CallNum: number;
+    /**
+      * 在选定时间范围内，慢SQL语句执行的次数占所有慢SQL的比例（小数返回）
+      */
+    CallPercent: number;
+    /**
+      * 在选定时间范围内，慢SQL执行的总时间
+      */
+    CostTime: number;
+    /**
+      * 在选定时间范围内，慢SQL语句执行的总时间占所有慢SQL的比例（小数返回）
+      */
+    CostPercent: number;
+    /**
+      * 在选定时间范围内，慢SQL语句执行的耗时最短的时间（单位：ms）
+      */
+    MinCostTime: number;
+    /**
+      * 在选定时间范围内，慢SQL语句执行的耗时最长的时间（单位：ms）
+      */
+    MaxCostTime: number;
+    /**
+      * 在选定时间范围内，慢SQL语句执行的耗时平均时间（单位：ms）
+      */
+    AvgCostTime: number;
+    /**
+      * 在选定时间范围内，慢SQL第一条开始执行的时间戳
+      */
+    FirstTime: string;
+    /**
+      * 在选定时间范围内，慢SQL最后一条开始执行的时间戳
+      */
+    LastTime: string;
 }
 /**
  * 数据库Xlog信息
@@ -1214,6 +1275,29 @@ export interface DescribeDBBackupsResponse {
  * DescribeRegions请求参数结构体
  */
 export declare type DescribeRegionsRequest = null;
+/**
+ * DescribeSlowQueryList返回参数结构体
+ */
+export interface DescribeSlowQueryListResponse {
+    /**
+      * 选定时间范围内慢SQL总条数。
+      */
+    TotalCount: number;
+    /**
+      * 指定时间范围内，慢SQL耗时分段分析。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DurationAnalysis: Array<DurationAnalysis>;
+    /**
+      * 指定时间范围内 慢SQL流水。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RawSlowQueryList: Array<RawSlowQuery>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * serverless实例描述
  */
@@ -1362,6 +1446,24 @@ export interface RestartDBInstanceRequest {
     DBInstanceId: string;
 }
 /**
+ * 慢SQL 统计分析接口返回详情
+ */
+export interface Detail {
+    /**
+      * 输入时间范围内所有慢sql执行的总时间，单位毫秒（ms）
+      */
+    TotalTime: number;
+    /**
+      * 输入时间范围内所有慢sql总条数
+      */
+    TotalCallNum: number;
+    /**
+      * 慢SQL统计分析列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AnalysisItems: Array<AnalysisItems>;
+}
+/**
  * IsolateDBInstances返回参数结构体
  */
 export interface IsolateDBInstancesResponse {
@@ -1442,6 +1544,43 @@ export interface InquiryPriceRenewDBInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeSlowQueryAnalysis请求参数结构体
+ */
+export interface DescribeSlowQueryAnalysisRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 查询起始时间戳，格式 “YYYY-MM-DD HH:mm:ss” ，日志保留时间默认为7天，起始时间不能超出保留时间范围。
+      */
+    StartTime: string;
+    /**
+      * 查询j结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。
+      */
+    EndTime: string;
+    /**
+      * 根据数据库名进行筛选，可以为空。
+      */
+    DatabaseName?: string;
+    /**
+      * 排序维度。 可选参数，取值范围[CallNum,CostTime,AvgCostTime]。
+      */
+    OrderBy?: string;
+    /**
+      * 排序类型。升序asc、降序desc。
+      */
+    OrderByType?: string;
+    /**
+      * 分页大小。取值范围[1,100]。
+      */
+    Limit?: number;
+    /**
+      * 分页偏移。取值范围[0,INF)。
+      */
+    Offset?: number;
 }
 /**
  * 错误日志详情
@@ -2173,6 +2312,43 @@ export interface ModifySwitchTimePeriodRequest {
     SwitchTag: number;
 }
 /**
+ * DescribeSlowQueryList请求参数结构体
+ */
+export interface DescribeSlowQueryListRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
+    /**
+      * 查询起始时间戳，格式 “YYYY-MM-DD HH:mm:ss” ，日志保留时间默认为7天，起始时间不能超出保留时间范围。
+      */
+    StartTime: string;
+    /**
+      * 查询j结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。
+      */
+    EndTime: string;
+    /**
+      * 根据数据库名进行筛选，可以为空。
+      */
+    DatabaseName?: string;
+    /**
+      * 排序类型。升序asc、降序desc。默认为desc。
+      */
+    OrderByType?: string;
+    /**
+      * 排序维度。 可选参数，取值范围[SessionStartTime,Duration]，默认为SessionStartTime。
+      */
+    OrderBy?: string;
+    /**
+      * 分页大小。取值范围[1,100],默认为20。
+      */
+    Limit?: number;
+    /**
+      * 分页偏移。取值范围[0,INF)，默认为0。
+      */
+    Offset?: number;
+}
+/**
  * 描述地域的编码和状态等信息
  */
 export interface RegionInfo {
@@ -2257,6 +2433,52 @@ export interface ResetAccountPasswordRequest {
       * UserName账户对应的新密码
       */
     Password: string;
+}
+/**
+ * DescribeSlowQueryAnalysis返回参数结构体
+ */
+export interface DescribeSlowQueryAnalysisResponse {
+    /**
+      * 查询总条数。
+      */
+    TotalCount: number;
+    /**
+      * 慢SQL统计分析接口返回详情。
+      */
+    Detail: Detail;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 慢SQL查询接口返回 慢SQL列表详情
+ */
+export interface RawSlowQuery {
+    /**
+      * 慢SQL 语句
+      */
+    RawQuery: string;
+    /**
+      * 慢SQL 查询的数据库
+      */
+    DatabaseName: string;
+    /**
+      * 慢SQL执行 耗时
+      */
+    Duration: number;
+    /**
+      * 执行慢SQL的客户端
+      */
+    ClientAddr: string;
+    /**
+      * 执行慢SQL的用户名
+      */
+    UserName: string;
+    /**
+      * 慢SQL执行的开始时间
+      */
+    SessionStartTime: string;
 }
 /**
  * DescribeReadOnlyGroups请求参数结构体
@@ -2384,6 +2606,15 @@ export interface DescribeDBInstanceAttributeResponse {
       * 实例详细信息。
       */
     DBInstance?: DBInstance;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * OpenServerlessDBExtranetAccess返回参数结构体
+ */
+export interface OpenServerlessDBExtranetAccessResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

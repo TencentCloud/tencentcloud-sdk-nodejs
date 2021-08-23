@@ -1539,7 +1539,7 @@ export interface DescribeInstancesRequest {
       */
     Offset?: number;
     /**
-      * 返回数量，默认为 20，最大值为 200。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+      * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
       */
     Limit?: number;
 }
