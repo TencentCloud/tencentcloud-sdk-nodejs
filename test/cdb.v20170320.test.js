@@ -718,6 +718,16 @@ it("cdb.v20170320.DescribeRoMinScale", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyAccountHost", async function () {
+    try {
+       const data = await client.ModifyAccountHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeAuditConfig", async function () {
     try {
        const data = await client.DescribeAuditConfig({})

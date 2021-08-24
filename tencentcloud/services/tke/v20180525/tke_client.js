@@ -328,6 +328,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterRouteTables", req, cb);
     }
     /**
+     * 修改节点池的机型配置
+     */
+    async ModifyNodePoolInstanceTypes(req, cb) {
+        return this.request("ModifyNodePoolInstanceTypes", req, cb);
+    }
+    /**
      * 创建告警规则
      */
     async CreatePrometheusAlertRule(req, cb) {

@@ -21,8 +21,10 @@ import {
   PeerDetailForUser,
   GetBcosTransListRequest,
   QueryRequest,
+  QueryChainMakerContractRequest,
   DeployDynamicBcosContractResponse,
   GetClusterListForUserResponse,
+  SendTransactionHandlerRequest,
   GetBlockTransactionListForUserResponse,
   SendTransactionHandlerResponse,
   ApplyUserCertRequest,
@@ -39,27 +41,31 @@ import {
   GetPeerLogForUserResponse,
   GetBcosBlockListResponse,
   DownloadUserCertResponse,
+  QueryChainMakerBlockTransactionRequest,
   GetChaincodeLogForUserRequest,
   GetLatesdTransactionListRequest,
   InvokeResponse,
   GetTransactionDetailForUserRequest,
   GetBlockListResponse,
-  TransactionItem,
+  GetBlockTransactionListForUserRequest,
+  QueryChainMakerBlockTransactionResponse,
   GetBcosBlockListRequest,
   GetClusterSummaryRequest,
   BlockByNumberHandlerResponse,
   GetTransListHandlerRequest,
+  InvokeChainMakerContractResponse,
   GetTransByHashHandlerResponse,
   GetInvokeTxRequest,
   DeployDynamicContractHandlerRequest,
   ClusterDetailForUser,
   GetPeerLogForUserRequest,
   GetLatesdTransactionListResponse,
+  QueryChainMakerTransactionResponse,
   DownloadUserCertRequest,
   GetClusterSummaryResponse,
   TransByDynamicContractHandlerResponse,
   PeerSet,
-  GetBlockTransactionListForUserRequest,
+  ChainMakerTransactionResult,
   CreateChaincodeAndInstallForUserRequest,
   SrvInvokeResponse,
   GetBcosTransByHashResponse,
@@ -70,6 +76,7 @@ import {
   InitializeChaincodeForUserResponse,
   GroupDetailForUser,
   GetBcosBlockByNumberResponse,
+  ChainMakerContractResult,
   GetClusterListForUserRequest,
   Block,
   GetBlockListRequest,
@@ -79,11 +86,13 @@ import {
   GetInvokeTxResponse,
   GetBlockListHandlerResponse,
   GetTransactionDetailForUserResponse,
+  QueryChainMakerContractResponse,
   GetBcosTransByHashRequest,
   GetChannelListForUserResponse,
+  QueryChainMakerTransactionRequest,
   GetChaincodeCompileLogForUserResponse,
   DeployDynamicBcosContractRequest,
-  SendTransactionHandlerRequest,
+  InvokeChainMakerContractRequest,
   GetBcosTransListResponse,
   BlockByNumberHandlerRequest,
   BcosBlockObj,
@@ -93,6 +102,7 @@ import {
   GetChannelListForUserRequest,
   QueryResponse,
   EndorserGroup,
+  TransactionItem,
 } from "./tbaas_models"
 
 /**
@@ -115,6 +125,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过交易ID查询长安链交易
+   */
+  async QueryChainMakerTransaction(
+    req: QueryChainMakerTransactionRequest,
+    cb?: (error: string, rep: QueryChainMakerTransactionResponse) => void
+  ): Promise<QueryChainMakerTransactionResponse> {
+    return this.request("QueryChainMakerTransaction", req, cb)
+  }
+
+  /**
    * 使用块高查询Bcos区块信息
    */
   async GetBcosBlockByNumber(
@@ -122,6 +142,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetBcosBlockByNumberResponse) => void
   ): Promise<GetBcosBlockByNumberResponse> {
     return this.request("GetBcosBlockByNumber", req, cb)
+  }
+
+  /**
+   * 调用长安链合约查询
+   */
+  async QueryChainMakerContract(
+    req: QueryChainMakerContractRequest,
+    cb?: (error: string, rep: QueryChainMakerContractResponse) => void
+  ): Promise<QueryChainMakerContractResponse> {
+    return this.request("QueryChainMakerContract", req, cb)
   }
 
   /**
@@ -279,6 +309,16 @@ Bcos根据交易哈希查看交易详细信息
   }
 
   /**
+   * 调用长安链合约执行交易
+   */
+  async InvokeChainMakerContract(
+    req: InvokeChainMakerContractRequest,
+    cb?: (error: string, rep: InvokeChainMakerContractResponse) => void
+  ): Promise<InvokeChainMakerContractResponse> {
+    return this.request("InvokeChainMakerContract", req, cb)
+  }
+
+  /**
      * 版本升级
 
 Bcos根据块高查询区块信息
@@ -318,6 +358,16 @@ Bcos根据块高查询区块信息
     cb?: (error: string, rep: GetChannelListForUserResponse) => void
   ): Promise<GetChannelListForUserResponse> {
     return this.request("GetChannelListForUser", req, cb)
+  }
+
+  /**
+   * 查询长安链指定高度区块的交易
+   */
+  async QueryChainMakerBlockTransaction(
+    req: QueryChainMakerBlockTransactionRequest,
+    cb?: (error: string, rep: QueryChainMakerBlockTransactionResponse) => void
+  ): Promise<QueryChainMakerBlockTransactionResponse> {
+    return this.request("QueryChainMakerBlockTransaction", req, cb)
   }
 
   /**

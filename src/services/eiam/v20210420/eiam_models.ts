@@ -1094,7 +1094,7 @@ export interface ModifyApplicationRequest {
   DisplayName?: string
 
   /**
-   * 应用状态
+   * 应用状态，true表示启用，false表示禁用。
    */
   AppStatus?: boolean
 

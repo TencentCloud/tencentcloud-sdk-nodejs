@@ -568,6 +568,10 @@ export interface DeployApplicationRequest {
       * 定时弹性策略
       */
     CronHorizontalAutoscaler?: Array<CronHorizontalAutoscaler>;
+    /**
+      * 是否启用log，1为启用，0为不启用
+      */
+    LogEnable?: number;
 }
 /**
  * Ingress 配置

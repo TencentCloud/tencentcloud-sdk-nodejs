@@ -2140,6 +2140,23 @@ export interface ExistedInstance {
     InstanceChargeType: string;
 }
 /**
+ * ModifyNodePoolInstanceTypes请求参数结构体
+ */
+export interface ModifyNodePoolInstanceTypesRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 节点池id
+      */
+    NodePoolId: string;
+    /**
+      * 机型列表
+      */
+    InstanceTypes: Array<string>;
+}
+/**
  * AddClusterCIDR请求参数结构体
  */
 export interface AddClusterCIDRRequest {
@@ -2628,6 +2645,15 @@ export interface EksCluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagSpecification?: Array<TagSpecification>;
+}
+/**
+ * ModifyNodePoolInstanceTypes返回参数结构体
+ */
+export interface ModifyNodePoolInstanceTypesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateClusterNodePoolFromExistingAsg返回参数结构体

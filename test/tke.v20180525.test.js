@@ -518,6 +518,16 @@ it("tke.v20180525.DescribeClusterRouteTables", async function () {
     }
 })
 
+it("tke.v20180525.ModifyNodePoolInstanceTypes", async function () {
+    try {
+       const data = await client.ModifyNodePoolInstanceTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreatePrometheusAlertRule", async function () {
     try {
        const data = await client.CreatePrometheusAlertRule({})

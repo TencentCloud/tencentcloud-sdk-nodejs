@@ -2371,12 +2371,18 @@ export interface DescribeLiveDomainsResponse {
   /**
    * 总记录数。
    */
-  AllCount?: number
+  AllCount: number
 
   /**
    * 域名详细信息列表。
    */
-  DomainList?: Array<DomainInfo>
+  DomainList: Array<DomainInfo>
+
+  /**
+      * 可继续添加域名数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateLimitCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

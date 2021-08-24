@@ -34,10 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeBcosTrans", req, cb);
     }
     /**
+     * 通过交易ID查询长安链交易
+     */
+    async QueryChainMakerTransaction(req, cb) {
+        return this.request("QueryChainMakerTransaction", req, cb);
+    }
+    /**
      * 使用块高查询Bcos区块信息
      */
     async GetBcosBlockByNumber(req, cb) {
         return this.request("GetBcosBlockByNumber", req, cb);
+    }
+    /**
+     * 调用长安链合约查询
+     */
+    async QueryChainMakerContract(req, cb) {
+        return this.request("QueryChainMakerContract", req, cb);
     }
     /**
      * 获取合约容器日志
@@ -134,6 +146,12 @@ Bcos根据交易哈希查看交易详细信息
         return this.request("ApplyUserCert", req, cb);
     }
     /**
+     * 调用长安链合约执行交易
+     */
+    async InvokeChainMakerContract(req, cb) {
+        return this.request("InvokeChainMakerContract", req, cb);
+    }
+    /**
      * 版本升级
 
 Bcos根据块高查询区块信息
@@ -158,6 +176,12 @@ Bcos根据块高查询区块信息
      */
     async GetChannelListForUser(req, cb) {
         return this.request("GetChannelListForUser", req, cb);
+    }
+    /**
+     * 查询长安链指定高度区块的交易
+     */
+    async QueryChainMakerBlockTransaction(req, cb) {
+        return this.request("QueryChainMakerBlockTransaction", req, cb);
     }
     /**
      * 实例化合约

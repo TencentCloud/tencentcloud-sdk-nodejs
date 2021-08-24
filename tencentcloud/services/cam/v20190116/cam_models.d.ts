@@ -44,11 +44,11 @@ export interface ListAttachedRolePoliciesResponse {
     /**
       * 角色关联的策略列表
       */
-    List?: Array<AttachedPolicyOfRole>;
+    List: Array<AttachedPolicyOfRole>;
     /**
       * 角色关联的策略总数
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -135,11 +135,11 @@ export interface DescribeRoleListResponse {
       * 角色详情列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    List?: Array<RoleInfo>;
+    List: Array<RoleInfo>;
     /**
       * 角色总数
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -204,6 +204,10 @@ export interface ListAttachedGroupPoliciesRequest {
       * 每页大小，默认值是 20
       */
     Rp?: number;
+    /**
+      * 搜索关键字
+      */
+    Keyword?: string;
 }
 /**
  * ListGroupsForUser请求参数结构体
@@ -1522,11 +1526,11 @@ export interface ListAttachedGroupPoliciesResponse {
     /**
       * 策略总数
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 策略列表
       */
-    List?: Array<AttachPolicyInfo>;
+    List: Array<AttachPolicyInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2134,6 +2138,10 @@ export interface ListAttachedRolePoliciesRequest {
       * 按策略类型过滤，User表示仅查询自定义策略，QCS表示仅查询预设策略
       */
     PolicyType?: string;
+    /**
+      * 搜索关键字
+      */
+    Keyword?: string;
 }
 /**
  * GetSAMLProvider请求参数结构体

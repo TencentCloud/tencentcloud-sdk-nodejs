@@ -161,6 +161,21 @@ export interface VoiceFilterRequest {
 }
 
 /**
+ * CreateAgeDetectTask返回参数结构体
+ */
+export interface CreateAgeDetectTaskResponse {
+  /**
+   * 本次任务提交后唯一id，用于获取任务运行结果
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 语音消息用量统计信息
  */
 export interface VoiceMessageStatisticsItem {
@@ -202,6 +217,31 @@ export interface DescribeRoomInfoRequest {
 }
 
 /**
+ * 年龄语音任务结果
+ */
+export interface AgeDetectTaskResult {
+  /**
+   * 数据唯一ID
+   */
+  DataId: string
+
+  /**
+   * 数据文件的url
+   */
+  Url: string
+
+  /**
+   * 任务状态，0: 已创建，1:运行中，2:正常结束，3:异常结束，4:运行超时
+   */
+  Status: number
+
+  /**
+   * 任务结果：0: 成年，1:未成年，100:未知
+   */
+  Age: number
+}
+
+/**
  * DescribeScanResultList请求参数结构体
  */
 export interface DescribeScanResultListRequest {
@@ -219,6 +259,28 @@ export interface DescribeScanResultListRequest {
    * 任务返回结果数量，默认10，上限500。大文件任务忽略此参数，返回全量结果
    */
   Limit?: number
+}
+
+/**
+ * CreateAgeDetectTask请求参数结构体
+ */
+export interface CreateAgeDetectTaskRequest {
+  /**
+   * 应用id
+   */
+  BizId: number
+
+  /**
+      * 语音检测子任务列表，列表最多支持100个检测子任务。结构体中包含：
+<li>DataId：数据的唯一ID</li>
+<li>Url：数据文件的url，为 urlencode 编码，流式则为拉流地址</li>
+      */
+  Tasks: Array<AgeDetectTask>
+
+  /**
+   * 任务结束时gme后台会自动触发回调
+   */
+  Callback?: string
 }
 
 /**
@@ -281,6 +343,45 @@ export interface Tag {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagValue?: string
+}
+
+/**
+ * 年龄语音识别子任务
+ */
+export interface AgeDetectTask {
+  /**
+   * 数据唯一ID
+   */
+  DataId: string
+
+  /**
+   * 数据文件的url，为 urlencode 编码,音频文件格式支持的类型：.wav、.m4a、.amr、.mp3、.aac、.wma、.ogg
+   */
+  Url: string
+}
+
+/**
+ * DescribeAgeDetectTask返回参数结构体
+ */
+export interface DescribeAgeDetectTaskResponse {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+
+  /**
+      * 语音检测返回。Results 字段是 JSON 数组，每一个元素包含：
+DataId： 请求中对应的 DataId。
+Url ：该请求中对应的 Url。
+Status ：子任务状态，0:已创建，1:运行中，2:已完成，3:任务异常，4:任务超时。
+Age ：子任务完成后的结果，0:成年人，1:未成年人，100:未知结果。
+      */
+  Results: Array<AgeDetectTaskResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -485,6 +586,21 @@ export interface DescribeRoomInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAgeDetectTask请求参数结构体
+ */
+export interface DescribeAgeDetectTaskRequest {
+  /**
+   * 应用id
+   */
+  BizId: number
+
+  /**
+   * 创建年龄语音识别任务时返回的taskid
+   */
+  TaskId: string
 }
 
 /**
@@ -810,7 +926,7 @@ export interface RealtimeSpeechConf {
   Status?: string
 
   /**
-   * 实时语音音质类型，取值：high-高音质，ordinary-普通音质。默认高音质。普通音质仅白名单开放，如需要普通音质，请联系腾讯云商务。
+   * 实时语音音质类型，取值：high-高音质
    */
   Quality?: string
 }

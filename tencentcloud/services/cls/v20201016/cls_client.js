@@ -52,13 +52,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     * 本接口用户获取异步上下文任务的结果
+     * 本接口用户获取离线上下文任务的结果
      */
     async DescribeAsyncContextResult(req, cb) {
         return this.request("DescribeAsyncContextResult", req, cb);
     }
     /**
-     * 本接口用于获取异步上下文任务列表
+     * 本接口用于获取离线上下文任务列表
      */
     async DescribeAsyncContextTasks(req, cb) {
         return this.request("DescribeAsyncContextTasks", req, cb);
@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeShipperTasks", req, cb);
     }
     /**
-     * 本接口用于获取日志导出列表
+     * 本接口用于获取日志下载任务列表
      */
     async DescribeExports(req, cb) {
         return this.request("DescribeExports", req, cb);
@@ -100,7 +100,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
-     * 本接口用户获取异步检索任务的结果
+     * 本接口用户获取离线检索任务的结果
      */
     async DescribeAsyncSearchResult(req, cb) {
         return this.request("DescribeAsyncSearchResult", req, cb);
@@ -124,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyShipper", req, cb);
     }
     /**
-     * 本接口用于删除异步检索任务
+     * 本接口用于删除离线检索任务
      */
     async DeleteAsyncSearchTask(req, cb) {
         return this.request("DeleteAsyncSearchTask", req, cb);
@@ -196,7 +196,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarms", req, cb);
     }
     /**
-     * 本接口用于删除异步上下文任务
+     * 本接口用于删除离线上下文任务
      */
     async DeleteAsyncContextTask(req, cb) {
         return this.request("DeleteAsyncContextTask", req, cb);
@@ -420,7 +420,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("UploadLog", req, cb);
     }
     /**
-     * 本接口用于创建异步上下文任务
+     * 本接口用于创建离线上下文任务
      */
     async CreateAsyncContextTask(req, cb) {
         return this.request("CreateAsyncContextTask", req, cb);
@@ -450,7 +450,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteIndex", req, cb);
     }
     /**
-     * 本接口用户获取异步检索任务列表
+     * 本接口用户获取离线检索任务列表
      */
     async DescribeAsyncSearchTasks(req, cb) {
         return this.request("DescribeAsyncSearchTasks", req, cb);
@@ -498,7 +498,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("ModifyLogset", req, cb);
     }
     /**
-     * 本接口用于删除日志导出
+     * 本接口用于删除日志下载任务
      */
     async DeleteExport(req, cb) {
         return this.request("DeleteExport", req, cb);
@@ -516,7 +516,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteTopic", req, cb);
     }
     /**
-     * 本接口用于创建日志导出
+     * 本接口用于创建日志下载任务
      */
     async CreateExport(req, cb) {
         return this.request("CreateExport", req, cb);
@@ -528,7 +528,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("SplitPartition", req, cb);
     }
     /**
-     * 本接口用于创建异步检索任务
+     * 本接口用于创建离线检索任务
      */
     async CreateAsyncSearchTask(req, cb) {
         return this.request("CreateAsyncSearchTask", req, cb);

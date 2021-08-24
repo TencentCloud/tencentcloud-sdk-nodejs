@@ -255,22 +255,22 @@ export interface DescribeAgentClientGradeResponse {
   /**
    * 审核状态：0待审核，1，已审核
    */
-  AuditStatus?: number
+  AuditStatus: number
 
   /**
    * 实名认证状态：0，未实名认证，1实名认证
    */
-  AuthState?: number
+  AuthState: number
 
   /**
    * 客户级别
    */
-  ClientGrade?: string
+  ClientGrade: string
 
   /**
    * 客户类型：1，个人；2，企业；3，其他
    */
-  ClientType?: number
+  ClientType: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -617,12 +617,12 @@ export interface DescribeAgentBillsResponse {
   /**
    * 符合查询条件列表总数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 业务明细列表
    */
-  AgentBillSet?: Array<AgentBillElem>
+  AgentBillSet: Array<AgentBillElem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -712,12 +712,12 @@ export interface DescribeAgentClientsResponse {
   /**
    * 待审核代客列表
    */
-  AgentClientSet?: Array<AgentClientElem>
+  AgentClientSet: Array<AgentClientElem>
 
   /**
    * 符合条件的代客总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -991,12 +991,12 @@ export interface DescribeSalesmansResponse {
   /**
    * 业务员列表
    */
-  AgentSalesmanSet?: Array<AgentSalesmanElem>
+  AgentSalesmanSet: Array<AgentSalesmanElem>
 
   /**
    * 符合条件的代客总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1139,12 +1139,12 @@ export interface DescribeRebateInfosResponse {
   /**
    * 返佣信息列表
    */
-  RebateInfoSet?: Array<RebateInfoElem>
+  RebateInfoSet: Array<RebateInfoElem>
 
   /**
    * 符合查询条件返佣信息数目
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1324,12 +1324,12 @@ export interface DescribeUnbindClientListResponse {
   /**
    * 符合条件的解绑客户数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 符合条件的解绑客户列表
    */
-  UnbindClientList?: Array<UnbindClientElem>
+  UnbindClientList: Array<UnbindClientElem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1437,22 +1437,22 @@ export interface AuditApplyClientResponse {
   /**
    * 代理商账号ID
    */
-  Uin?: string
+  Uin: string
 
   /**
    * 客户账号ID
    */
-  ClientUin?: string
+  ClientUin: string
 
   /**
    * 审核结果，包括accept/reject/qcloudaudit（腾讯云审核）
    */
-  AuditResult?: string
+  AuditResult: string
 
   /**
    * 关联时间对应的时间戳
    */
-  AgentTime?: number
+  AgentTime: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

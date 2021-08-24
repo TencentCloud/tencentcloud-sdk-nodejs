@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetBcosTransListRequest, QueryRequest, DeployDynamicBcosContractResponse, GetClusterListForUserResponse, GetBlockTransactionListForUserResponse, SendTransactionHandlerResponse, ApplyUserCertRequest, TransByDynamicContractHandlerRequest, GetTransListHandlerResponse, InvokeBcosTransRequest, GetChaincodeInitializeResultForUserRequest, InitializeChaincodeForUserRequest, DeployDynamicContractHandlerResponse, SrvInvokeRequest, ApplyUserCertResponse, GetChaincodeCompileLogForUserRequest, GetBcosBlockByNumberRequest, GetPeerLogForUserResponse, GetBcosBlockListResponse, DownloadUserCertResponse, GetChaincodeLogForUserRequest, GetLatesdTransactionListRequest, InvokeResponse, GetTransactionDetailForUserRequest, GetBlockListResponse, GetBcosBlockListRequest, GetClusterSummaryRequest, BlockByNumberHandlerResponse, GetTransListHandlerRequest, GetTransByHashHandlerResponse, GetInvokeTxRequest, DeployDynamicContractHandlerRequest, GetPeerLogForUserRequest, GetLatesdTransactionListResponse, DownloadUserCertRequest, GetClusterSummaryResponse, TransByDynamicContractHandlerResponse, GetBlockTransactionListForUserRequest, CreateChaincodeAndInstallForUserRequest, SrvInvokeResponse, GetBcosTransByHashResponse, GetBlockListHandlerRequest, GetChaincodeLogForUserResponse, InvokeBcosTransResponse, InitializeChaincodeForUserResponse, GetBcosBlockByNumberResponse, GetClusterListForUserRequest, GetBlockListRequest, GetChaincodeInitializeResultForUserResponse, InvokeRequest, GetInvokeTxResponse, GetBlockListHandlerResponse, GetTransactionDetailForUserResponse, GetBcosTransByHashRequest, GetChannelListForUserResponse, GetChaincodeCompileLogForUserResponse, DeployDynamicBcosContractRequest, SendTransactionHandlerRequest, GetBcosTransListResponse, BlockByNumberHandlerRequest, GetTransByHashHandlerRequest, CreateChaincodeAndInstallForUserResponse, GetChannelListForUserRequest, QueryResponse } from "./tbaas_models";
+import { GetBcosTransListRequest, QueryRequest, QueryChainMakerContractRequest, DeployDynamicBcosContractResponse, GetClusterListForUserResponse, SendTransactionHandlerRequest, GetBlockTransactionListForUserResponse, SendTransactionHandlerResponse, ApplyUserCertRequest, TransByDynamicContractHandlerRequest, GetTransListHandlerResponse, InvokeBcosTransRequest, GetChaincodeInitializeResultForUserRequest, InitializeChaincodeForUserRequest, DeployDynamicContractHandlerResponse, SrvInvokeRequest, ApplyUserCertResponse, GetChaincodeCompileLogForUserRequest, GetBcosBlockByNumberRequest, GetPeerLogForUserResponse, GetBcosBlockListResponse, DownloadUserCertResponse, QueryChainMakerBlockTransactionRequest, GetChaincodeLogForUserRequest, GetLatesdTransactionListRequest, InvokeResponse, GetTransactionDetailForUserRequest, GetBlockListResponse, GetBlockTransactionListForUserRequest, QueryChainMakerBlockTransactionResponse, GetBcosBlockListRequest, GetClusterSummaryRequest, BlockByNumberHandlerResponse, GetTransListHandlerRequest, InvokeChainMakerContractResponse, GetTransByHashHandlerResponse, GetInvokeTxRequest, DeployDynamicContractHandlerRequest, GetPeerLogForUserRequest, GetLatesdTransactionListResponse, QueryChainMakerTransactionResponse, DownloadUserCertRequest, GetClusterSummaryResponse, TransByDynamicContractHandlerResponse, CreateChaincodeAndInstallForUserRequest, SrvInvokeResponse, GetBcosTransByHashResponse, GetBlockListHandlerRequest, GetChaincodeLogForUserResponse, InvokeBcosTransResponse, InitializeChaincodeForUserResponse, GetBcosBlockByNumberResponse, GetClusterListForUserRequest, GetBlockListRequest, GetChaincodeInitializeResultForUserResponse, InvokeRequest, GetInvokeTxResponse, GetBlockListHandlerResponse, GetTransactionDetailForUserResponse, QueryChainMakerContractResponse, GetBcosTransByHashRequest, GetChannelListForUserResponse, QueryChainMakerTransactionRequest, GetChaincodeCompileLogForUserResponse, DeployDynamicBcosContractRequest, InvokeChainMakerContractRequest, GetBcosTransListResponse, BlockByNumberHandlerRequest, GetTransByHashHandlerRequest, CreateChaincodeAndInstallForUserResponse, GetChannelListForUserRequest, QueryResponse } from "./tbaas_models";
 /**
  * tbaas client
  * @class
@@ -12,9 +12,17 @@ export declare class Client extends AbstractClient {
      */
     InvokeBcosTrans(req: InvokeBcosTransRequest, cb?: (error: string, rep: InvokeBcosTransResponse) => void): Promise<InvokeBcosTransResponse>;
     /**
+     * 通过交易ID查询长安链交易
+     */
+    QueryChainMakerTransaction(req: QueryChainMakerTransactionRequest, cb?: (error: string, rep: QueryChainMakerTransactionResponse) => void): Promise<QueryChainMakerTransactionResponse>;
+    /**
      * 使用块高查询Bcos区块信息
      */
     GetBcosBlockByNumber(req: GetBcosBlockByNumberRequest, cb?: (error: string, rep: GetBcosBlockByNumberResponse) => void): Promise<GetBcosBlockByNumberResponse>;
+    /**
+     * 调用长安链合约查询
+     */
+    QueryChainMakerContract(req: QueryChainMakerContractRequest, cb?: (error: string, rep: QueryChainMakerContractResponse) => void): Promise<QueryChainMakerContractResponse>;
     /**
      * 获取合约容器日志
      */
@@ -80,6 +88,10 @@ Bcos根据交易哈希查看交易详细信息
      */
     ApplyUserCert(req: ApplyUserCertRequest, cb?: (error: string, rep: ApplyUserCertResponse) => void): Promise<ApplyUserCertResponse>;
     /**
+     * 调用长安链合约执行交易
+     */
+    InvokeChainMakerContract(req: InvokeChainMakerContractRequest, cb?: (error: string, rep: InvokeChainMakerContractResponse) => void): Promise<InvokeChainMakerContractResponse>;
+    /**
      * 版本升级
 
 Bcos根据块高查询区块信息
@@ -97,6 +109,10 @@ Bcos根据块高查询区块信息
      * 获取通道列表
      */
     GetChannelListForUser(req: GetChannelListForUserRequest, cb?: (error: string, rep: GetChannelListForUserResponse) => void): Promise<GetChannelListForUserResponse>;
+    /**
+     * 查询长安链指定高度区块的交易
+     */
+    QueryChainMakerBlockTransaction(req: QueryChainMakerBlockTransactionRequest, cb?: (error: string, rep: QueryChainMakerBlockTransactionResponse) => void): Promise<QueryChainMakerBlockTransactionResponse>;
     /**
      * 实例化合约
      */

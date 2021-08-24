@@ -111,6 +111,36 @@ export interface QueryRequest {
 }
 
 /**
+ * QueryChainMakerContract请求参数结构体
+ */
+export interface QueryChainMakerContractRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 业务链编号，可在业务链列表中获取
+   */
+  ChainId: string
+
+  /**
+   * 合约名称，可在合约管理中获取
+   */
+  ContractName: string
+
+  /**
+   * 合约方法名
+   */
+  FuncName: string
+
+  /**
+   * 合约方法入参，json格式字符串，key/value都是string类型的map
+   */
+  FuncParam?: string
+}
+
+/**
  * DeployDynamicBcosContract返回参数结构体
  */
 export interface DeployDynamicBcosContractResponse {
@@ -143,6 +173,41 @@ export interface GetClusterListForUserResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SendTransactionHandler请求参数结构体
+ */
+export interface SendTransactionHandlerRequest {
+  /**
+   * 模块名，固定字段：transaction
+   */
+  Module: string
+
+  /**
+   * 操作名，固定字段：send_transaction
+   */
+  Operation: string
+
+  /**
+   * 群组编号
+   */
+  GroupPk: string
+
+  /**
+   * 合约编号
+   */
+  ContractId: number
+
+  /**
+   * 合约方法名
+   */
+  FuncName: string
+
+  /**
+   * 合约方法入参
+   */
+  FuncParam?: Array<string>
 }
 
 /**
@@ -621,6 +686,26 @@ export interface DownloadUserCertResponse {
 }
 
 /**
+ * QueryChainMakerBlockTransaction请求参数结构体
+ */
+export interface QueryChainMakerBlockTransactionRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 业务链编号，可在业务链列表中获取
+   */
+  ChainId: string
+
+  /**
+   * 区块高度，-1表示最新区块
+   */
+  BlockHeight: number
+}
+
+/**
  * GetChaincodeLogForUser请求参数结构体
  */
 export interface GetChaincodeLogForUserRequest {
@@ -806,48 +891,80 @@ export interface GetBlockListResponse {
 }
 
 /**
- * 交易列表项信息
+ * GetBlockTransactionListForUser请求参数结构体
  */
-export interface TransactionItem {
+export interface GetBlockTransactionListForUserRequest {
   /**
-   * 交易ID
+   * 模块名，固定字段：transaction
    */
-  TransactionId: string
+  Module: string
 
   /**
-   * 交易hash
+   * 操作名，固定字段：block_transaction_list_for_user
    */
-  TransactionHash: string
+  Operation: string
 
   /**
-   * 创建交易的组织名
+   * 区块链网络ID，可在区块链网络详情或列表中获取
    */
-  CreateOrgName: string
+  ClusterId: string
 
   /**
-   * 交易所在区块号
+   * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
+   */
+  GroupName: string
+
+  /**
+   * 业务所属通道名称，可在通道详情或列表中获取
+   */
+  ChannelName: string
+
+  /**
+   * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
    */
   BlockId: number
 
   /**
-   * 交易类型（普通交易和配置交易）
+   * 查询的交易列表起始偏移地址
    */
-  TransactionType: string
+  Offset?: number
 
   /**
-   * 交易创建时间
+   * 查询的交易列表数量
    */
-  CreateTime: string
+  Limit?: number
+}
+
+/**
+ * QueryChainMakerBlockTransaction返回参数结构体
+ */
+export interface QueryChainMakerBlockTransactionResponse {
+  /**
+      * 区块交易
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<ChainMakerTransactionResult>
 
   /**
-   * 交易所在区块高度
+   * 区块高度
    */
   BlockHeight: number
 
   /**
-   * 交易状态
+      * 交易数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TxCount: number
+
+  /**
+   * 区块时间戳
    */
-  TransactionStatus: string
+  BlockTimestamp: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -963,6 +1080,22 @@ export interface GetTransListHandlerRequest {
    * 交易哈希
    */
   TransHash?: string
+}
+
+/**
+ * InvokeChainMakerContract返回参数结构体
+ */
+export interface InvokeChainMakerContractResponse {
+  /**
+      * 交易结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: ChainMakerContractResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1146,6 +1279,22 @@ export interface GetLatesdTransactionListResponse {
 }
 
 /**
+ * QueryChainMakerTransaction返回参数结构体
+ */
+export interface QueryChainMakerTransactionResponse {
+  /**
+      * 交易结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: ChainMakerTransactionResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DownloadUserCert请求参数结构体
  */
 export interface DownloadUserCertRequest {
@@ -1296,48 +1445,55 @@ export interface PeerSet {
 }
 
 /**
- * GetBlockTransactionListForUser请求参数结构体
+ * 长安链交易查询结果
  */
-export interface GetBlockTransactionListForUserRequest {
+export interface ChainMakerTransactionResult {
   /**
-   * 模块名，固定字段：transaction
+   * 交易结果码
    */
-  Module: string
+  Code: number
 
   /**
-   * 操作名，固定字段：block_transaction_list_for_user
-   */
-  Operation: string
+      * 交易结果码含义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodeMessage: string
 
   /**
-   * 区块链网络ID，可在区块链网络详情或列表中获取
-   */
-  ClusterId: string
+      * 交易ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TxId: string
 
   /**
-   * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
-   */
-  GroupName: string
+      * Gas使用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GasUsed: number
 
   /**
-   * 业务所属通道名称，可在通道详情或列表中获取
-   */
-  ChannelName: string
+      * 区块高度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BlockHeight: number
 
   /**
-   * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
-   */
-  BlockId: number
+      * 合约执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContractEvent: string
 
   /**
-   * 查询的交易列表起始偏移地址
-   */
-  Offset?: number
+      * 合约返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
 
   /**
-   * 查询的交易列表数量
-   */
-  Limit?: number
+      * 交易时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Timestamp: number
 }
 
 /**
@@ -1562,6 +1718,46 @@ export interface GetBcosBlockByNumberResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 长安链合约执行结果
+ */
+export interface ChainMakerContractResult {
+  /**
+   * 交易结果码
+   */
+  Code: number
+
+  /**
+      * 交易结果码含义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodeMessage: string
+
+  /**
+      * 交易ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TxId: string
+
+  /**
+      * Gas使用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GasUsed: number
+
+  /**
+      * 合约返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
+
+  /**
+      * 合约函数返回，base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
 }
 
 /**
@@ -1910,6 +2106,22 @@ export interface GetTransactionDetailForUserResponse {
 }
 
 /**
+ * QueryChainMakerContract返回参数结构体
+ */
+export interface QueryChainMakerContractResponse {
+  /**
+      * 交易结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: ChainMakerContractResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetBcosTransByHash请求参数结构体
  */
 export interface GetBcosTransByHashRequest {
@@ -1947,6 +2159,26 @@ export interface GetChannelListForUserResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryChainMakerTransaction请求参数结构体
+ */
+export interface QueryChainMakerTransactionRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 业务链编号，可在业务链列表中获取
+   */
+  ChainId: string
+
+  /**
+   * 交易ID，通过调用合约的返回值获取
+   */
+  TxID: string
 }
 
 /**
@@ -2005,28 +2237,23 @@ export interface DeployDynamicBcosContractRequest {
 }
 
 /**
- * SendTransactionHandler请求参数结构体
+ * InvokeChainMakerContract请求参数结构体
  */
-export interface SendTransactionHandlerRequest {
+export interface InvokeChainMakerContractRequest {
   /**
-   * 模块名，固定字段：transaction
+   * 网络ID，可在区块链网络详情或列表中获取
    */
-  Module: string
+  ClusterId: string
 
   /**
-   * 操作名，固定字段：send_transaction
+   * 业务链编号，可在业务链列表中获取
    */
-  Operation: string
+  ChainId: string
 
   /**
-   * 群组编号
+   * 合约名称，可在合约管理中获取
    */
-  GroupPk: string
-
-  /**
-   * 合约编号
-   */
-  ContractId: number
+  ContractName: string
 
   /**
    * 合约方法名
@@ -2034,9 +2261,14 @@ export interface SendTransactionHandlerRequest {
   FuncName: string
 
   /**
-   * 合约方法入参
+   * 合约方法入参，json格式字符串，key/value都是string类型的map
    */
-  FuncParam?: Array<string>
+  FuncParam?: string
+
+  /**
+   * 是否异步执行，1为是，否则为0；如果异步执行，可使用返回值中的交易TxID查询执行结果
+   */
+  AsyncFlag?: number
 }
 
 /**
@@ -2242,4 +2474,49 @@ export interface EndorserGroup {
    * 背书节点列表
    */
   EndorserPeerList: Array<string>
+}
+
+/**
+ * 交易列表项信息
+ */
+export interface TransactionItem {
+  /**
+   * 交易ID
+   */
+  TransactionId: string
+
+  /**
+   * 交易hash
+   */
+  TransactionHash: string
+
+  /**
+   * 创建交易的组织名
+   */
+  CreateOrgName: string
+
+  /**
+   * 交易所在区块号
+   */
+  BlockId: number
+
+  /**
+   * 交易类型（普通交易和配置交易）
+   */
+  TransactionType: string
+
+  /**
+   * 交易创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 交易所在区块高度
+   */
+  BlockHeight: number
+
+  /**
+   * 交易状态
+   */
+  TransactionStatus: string
 }

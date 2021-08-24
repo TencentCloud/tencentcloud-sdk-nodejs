@@ -475,6 +475,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRoMinScale", req, cb);
     }
     /**
+     * 本接口(ModifyAccountHost)用于修改云数据库账户的主机。
+     */
+    async ModifyAccountHost(req, cb) {
+        return this.request("ModifyAccountHost", req, cb);
+    }
+    /**
      * 本接口(DescribeAuditConfig)用于查询云数据库审计策略的服务配置，包括审计日志保存时长等。
      */
     async DescribeAuditConfig(req, cb) {

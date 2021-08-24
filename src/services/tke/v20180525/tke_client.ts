@@ -119,6 +119,7 @@ import {
   Taint,
   CheckInstancesUpgradeAbleRequest,
   ExistedInstance,
+  ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
   DescribeClusterNodePoolsResponse,
   DescribePrometheusAlertRuleRequest,
@@ -147,6 +148,7 @@ import {
   ResourceDeleteOption,
   DnsServerConf,
   EksCluster,
+  ModifyNodePoolInstanceTypesResponse,
   CreateClusterNodePoolFromExistingAsgResponse,
   DescribeEnableVpcCniProgressRequest,
   DescribeClusterEndpointStatusRequest,
@@ -762,6 +764,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterRouteTablesResponse) => void
   ): Promise<DescribeClusterRouteTablesResponse> {
     return this.request("DescribeClusterRouteTables", req, cb)
+  }
+
+  /**
+   * 修改节点池的机型配置
+   */
+  async ModifyNodePoolInstanceTypes(
+    req: ModifyNodePoolInstanceTypesRequest,
+    cb?: (error: string, rep: ModifyNodePoolInstanceTypesResponse) => void
+  ): Promise<ModifyNodePoolInstanceTypesResponse> {
+    return this.request("ModifyNodePoolInstanceTypes", req, cb)
   }
 
   /**

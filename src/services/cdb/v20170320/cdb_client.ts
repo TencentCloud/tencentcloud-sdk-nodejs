@@ -72,6 +72,7 @@ import {
   DescribeDBInstanceGTIDResponse,
   OpenDBInstanceGTIDResponse,
   DescribeDBZoneConfigRequest,
+  VerifyRootAccountResponse,
   DescribeDBInstanceRebootTimeResponse,
   SwitchDrInstanceToMasterRequest,
   DeleteParamTemplateRequest,
@@ -210,7 +211,7 @@ import {
   DeviceCpuRateInfo,
   BackupConfig,
   ModifyAuditRuleRequest,
-  VerifyRootAccountResponse,
+  ModifyAccountHostResponse,
   DeviceCpuInfo,
   AuditPolicy,
   DescribeDeployGroupListResponse,
@@ -241,6 +242,7 @@ import {
   InitDBInstancesRequest,
   RoInstanceInfo,
   RollbackDBName,
+  ModifyAccountHostRequest,
   CreateParamTemplateRequest,
   DeleteAuditRuleResponse,
   IsolateDBInstanceRequest,
@@ -1055,6 +1057,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRoMinScaleResponse) => void
   ): Promise<DescribeRoMinScaleResponse> {
     return this.request("DescribeRoMinScale", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyAccountHost)用于修改云数据库账户的主机。
+   */
+  async ModifyAccountHost(
+    req: ModifyAccountHostRequest,
+    cb?: (error: string, rep: ModifyAccountHostResponse) => void
+  ): Promise<ModifyAccountHostResponse> {
+    return this.request("ModifyAccountHost", req, cb)
   }
 
   /**

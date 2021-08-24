@@ -1125,7 +1125,7 @@ export interface ModifyDBInstanceSpecResponse {
     /**
       * 订单ID
       */
-    DealId?: string;
+    DealId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1582,6 +1582,18 @@ export interface ModifyDBInstanceSpecRequest {
       * 实例配置变更后oplog的大小，单位：GB，默认为磁盘空间的10%，允许设置的最小值为磁盘的10%，最大值为磁盘的90%
       */
     OplogSize?: number;
+    /**
+      * 实例变更后的节点数，取值范围具体参照查询云数据库的售卖规格返回参数。默认为不变更节点数
+      */
+    NodeNum?: number;
+    /**
+      * 实例变更后的分片数，取值范围具体参照查询云数据库的售卖规格返回参数。只能增加不能减少，默认为不变更分片数
+      */
+    ReplicateSetNum?: number;
+    /**
+      * 实例配置变更的切换时间，参数为：0(默认)、1。0-调整完成时，1-维护时间内。注：调整节点数和分片数不支持在【维护时间内】变更。
+      */
+    InMaintenance?: number;
 }
 /**
  * 用于描述MongoDB数据库慢日志统计信息

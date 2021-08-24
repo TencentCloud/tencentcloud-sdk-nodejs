@@ -24,11 +24,11 @@ export declare class Client extends AbstractClient {
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
     /**
-     * 本接口用户获取异步上下文任务的结果
+     * 本接口用户获取离线上下文任务的结果
      */
     DescribeAsyncContextResult(req: DescribeAsyncContextResultRequest, cb?: (error: string, rep: DescribeAsyncContextResultResponse) => void): Promise<DescribeAsyncContextResultResponse>;
     /**
-     * 本接口用于获取异步上下文任务列表
+     * 本接口用于获取离线上下文任务列表
      */
     DescribeAsyncContextTasks(req: DescribeAsyncContextTasksRequest, cb?: (error: string, rep: DescribeAsyncContextTasksResponse) => void): Promise<DescribeAsyncContextTasksResponse>;
     /**
@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeShipperTasks(req: DescribeShipperTasksRequest, cb?: (error: string, rep: DescribeShipperTasksResponse) => void): Promise<DescribeShipperTasksResponse>;
     /**
-     * 本接口用于获取日志导出列表
+     * 本接口用于获取日志下载任务列表
      */
     DescribeExports(req: DescribeExportsRequest, cb?: (error: string, rep: DescribeExportsResponse) => void): Promise<DescribeExportsResponse>;
     /**
@@ -56,7 +56,7 @@ export declare class Client extends AbstractClient {
      */
     CreateIndex(req: CreateIndexRequest, cb?: (error: string, rep: CreateIndexResponse) => void): Promise<CreateIndexResponse>;
     /**
-     * 本接口用户获取异步检索任务的结果
+     * 本接口用户获取离线检索任务的结果
      */
     DescribeAsyncSearchResult(req: DescribeAsyncSearchResultRequest, cb?: (error: string, rep: DescribeAsyncSearchResultResponse) => void): Promise<DescribeAsyncSearchResultResponse>;
     /**
@@ -72,7 +72,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyShipper(req: ModifyShipperRequest, cb?: (error: string, rep: ModifyShipperResponse) => void): Promise<ModifyShipperResponse>;
     /**
-     * 本接口用于删除异步检索任务
+     * 本接口用于删除离线检索任务
      */
     DeleteAsyncSearchTask(req: DeleteAsyncSearchTaskRequest, cb?: (error: string, rep: DeleteAsyncSearchTaskResponse) => void): Promise<DeleteAsyncSearchTaskResponse>;
     /**
@@ -120,7 +120,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarms(req: DescribeAlarmsRequest, cb?: (error: string, rep: DescribeAlarmsResponse) => void): Promise<DescribeAlarmsResponse>;
     /**
-     * 本接口用于删除异步上下文任务
+     * 本接口用于删除离线上下文任务
      */
     DeleteAsyncContextTask(req: DeleteAsyncContextTaskRequest, cb?: (error: string, rep: DeleteAsyncContextTaskResponse) => void): Promise<DeleteAsyncContextTaskResponse>;
     /**
@@ -324,7 +324,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     UploadLog(req?: UploadLogRequest, cb?: (error: string, rep: UploadLogResponse) => void): Promise<UploadLogResponse>;
     /**
-     * 本接口用于创建异步上下文任务
+     * 本接口用于创建离线上下文任务
      */
     CreateAsyncContextTask(req: CreateAsyncContextTaskRequest, cb?: (error: string, rep: CreateAsyncContextTaskResponse) => void): Promise<CreateAsyncContextTaskResponse>;
     /**
@@ -344,7 +344,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DeleteIndex(req: DeleteIndexRequest, cb?: (error: string, rep: DeleteIndexResponse) => void): Promise<DeleteIndexResponse>;
     /**
-     * 本接口用户获取异步检索任务列表
+     * 本接口用户获取离线检索任务列表
      */
     DescribeAsyncSearchTasks(req: DescribeAsyncSearchTasksRequest, cb?: (error: string, rep: DescribeAsyncSearchTasksResponse) => void): Promise<DescribeAsyncSearchTasksResponse>;
     /**
@@ -376,7 +376,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     ModifyLogset(req: ModifyLogsetRequest, cb?: (error: string, rep: ModifyLogsetResponse) => void): Promise<ModifyLogsetResponse>;
     /**
-     * 本接口用于删除日志导出
+     * 本接口用于删除日志下载任务
      */
     DeleteExport(req: DeleteExportRequest, cb?: (error: string, rep: DeleteExportResponse) => void): Promise<DeleteExportResponse>;
     /**
@@ -388,7 +388,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
     /**
-     * 本接口用于创建日志导出
+     * 本接口用于创建日志下载任务
      */
     CreateExport(req: CreateExportRequest, cb?: (error: string, rep: CreateExportResponse) => void): Promise<CreateExportResponse>;
     /**
@@ -396,7 +396,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     SplitPartition(req: SplitPartitionRequest, cb?: (error: string, rep: SplitPartitionResponse) => void): Promise<SplitPartitionResponse>;
     /**
-     * 本接口用于创建异步检索任务
+     * 本接口用于创建离线检索任务
      */
     CreateAsyncSearchTask(req: CreateAsyncSearchTaskRequest, cb?: (error: string, rep: CreateAsyncSearchTaskResponse) => void): Promise<CreateAsyncSearchTaskResponse>;
 }

@@ -118,6 +118,7 @@ import {
   DeleteIndexResponse,
   DeleteAsyncContextTaskRequest,
   ModifyIndexRequest,
+  Column,
   CompressInfo,
   ValueInfo,
   GetAlarmLogRequest,
@@ -225,7 +226,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用户获取异步上下文任务的结果
+   * 本接口用户获取离线上下文任务的结果
    */
   async DescribeAsyncContextResult(
     req: DescribeAsyncContextResultRequest,
@@ -235,7 +236,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取异步上下文任务列表
+   * 本接口用于获取离线上下文任务列表
    */
   async DescribeAsyncContextTasks(
     req: DescribeAsyncContextTasksRequest,
@@ -265,7 +266,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取日志导出列表
+   * 本接口用于获取日志下载任务列表
    */
   async DescribeExports(
     req: DescribeExportsRequest,
@@ -305,7 +306,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用户获取异步检索任务的结果
+   * 本接口用户获取离线检索任务的结果
    */
   async DescribeAsyncSearchResult(
     req: DescribeAsyncSearchResultRequest,
@@ -345,7 +346,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于删除异步检索任务
+   * 本接口用于删除离线检索任务
    */
   async DeleteAsyncSearchTask(
     req: DeleteAsyncSearchTaskRequest,
@@ -465,7 +466,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于删除异步上下文任务
+   * 本接口用于删除离线上下文任务
    */
   async DeleteAsyncContextTask(
     req: DeleteAsyncContextTaskRequest,
@@ -729,7 +730,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建异步上下文任务
+   * 本接口用于创建离线上下文任务
    */
   async CreateAsyncContextTask(
     req: CreateAsyncContextTaskRequest,
@@ -779,7 +780,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用户获取异步检索任务列表
+   * 本接口用户获取离线检索任务列表
    */
   async DescribeAsyncSearchTasks(
     req: DescribeAsyncSearchTasksRequest,
@@ -859,7 +860,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于删除日志导出
+   * 本接口用于删除日志下载任务
    */
   async DeleteExport(
     req: DeleteExportRequest,
@@ -889,7 +890,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建日志导出
+   * 本接口用于创建日志下载任务
    */
   async CreateExport(
     req: CreateExportRequest,
@@ -909,7 +910,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建异步检索任务
+   * 本接口用于创建离线检索任务
    */
   async CreateAsyncSearchTask(
     req: CreateAsyncSearchTaskRequest,

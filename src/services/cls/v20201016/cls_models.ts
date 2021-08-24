@@ -443,6 +443,18 @@ export interface SearchLogResponse {
   AnalysisResults: Array<LogItems>
 
   /**
+      * 新的日志分析结果; UseNewAnalysis为true有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AnalysisRecords: Array<string>
+
+  /**
+      * 日志分析的列属性; UseNewAnalysis为true有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Columns: Array<Column>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2177,7 +2189,7 @@ export interface CreateExportRequest {
   Query: string
 
   /**
-   * 日志导出数量
+   * 日志导出数量,  最大值1000万
    */
   Count: number
 
@@ -2557,6 +2569,21 @@ export interface ModifyIndexRequest {
    * 索引规则，Rule和Effective两个必须有一个参数存在
    */
   Rule?: RuleInfo
+}
+
+/**
+ * 日志分析的列属性
+ */
+export interface Column {
+  /**
+   * 列的名字
+   */
+  Name?: string
+
+  /**
+   * 列的属性
+   */
+  Type?: string
 }
 
 /**
@@ -3629,6 +3656,11 @@ export interface SearchLogRequest {
    * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
    */
   Sort?: string
+
+  /**
+   * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
+   */
+  UseNewAnalysis?: boolean
 }
 
 /**

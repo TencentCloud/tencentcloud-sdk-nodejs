@@ -286,6 +286,10 @@ export interface DataInfo {
       * 试听结束时间
       */
     AuditionEnd: number;
+    /**
+      * 标签名称
+      */
+    TagNames: Array<string>;
 }
 /**
  * DescribeKTVPlaylistDetail返回参数结构体

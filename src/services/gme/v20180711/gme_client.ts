@@ -25,13 +25,18 @@ import {
   DescribeScanResultListResponse,
   DescribeApplicationDataRequest,
   VoiceFilterRequest,
+  CreateAgeDetectTaskResponse,
   VoiceMessageStatisticsItem,
   RoomUser,
   DescribeRoomInfoRequest,
+  AgeDetectTaskResult,
   DescribeScanResultListRequest,
+  CreateAgeDetectTaskRequest,
   RealTimeSpeechStatisticsItem,
   VoiceFilterResponse,
   Tag,
+  AgeDetectTask,
+  DescribeAgeDetectTaskResponse,
   VoiceMessageConf,
   ApplicationDataStatistics,
   DescribeFilterResultListResponse,
@@ -41,6 +46,7 @@ import {
   VoiceFilterStatisticsItem,
   StatisticsItem,
   DescribeRoomInfoResponse,
+  DescribeAgeDetectTaskRequest,
   DescribeUserInAndOutTimeResponse,
   VoiceFilterInfo,
   DescribeFilterResultResponse,
@@ -73,23 +79,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取房间内用户信息
+   * 根据应用ID和文件ID查询识别结果
    */
-  async DescribeRoomInfo(
-    req: DescribeRoomInfoRequest,
-    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
-  ): Promise<DescribeRoomInfoResponse> {
-    return this.request("DescribeRoomInfo", req, cb)
+  async DescribeFilterResult(
+    req: DescribeFilterResultRequest,
+    cb?: (error: string, rep: DescribeFilterResultResponse) => void
+  ): Promise<DescribeFilterResultResponse> {
+    return this.request("DescribeFilterResult", req, cb)
   }
 
   /**
-   * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
+   * 本接口(CreateApp)用于创建一个GME应用。
    */
-  async DescribeAppStatistics(
-    req: DescribeAppStatisticsRequest,
-    cb?: (error: string, rep: DescribeAppStatisticsResponse) => void
-  ): Promise<DescribeAppStatisticsResponse> {
-    return this.request("DescribeAppStatistics", req, cb)
+  async CreateApp(
+    req: CreateAppRequest,
+    cb?: (error: string, rep: CreateAppResponse) => void
+  ): Promise<CreateAppResponse> {
+    return this.request("CreateApp", req, cb)
   }
 
   /**
@@ -126,16 +132,6 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
   }
 
   /**
-   * 根据应用ID和文件ID查询识别结果
-   */
-  async DescribeFilterResult(
-    req: DescribeFilterResultRequest,
-    cb?: (error: string, rep: DescribeFilterResultResponse) => void
-  ): Promise<DescribeFilterResultResponse> {
-    return this.request("DescribeFilterResult", req, cb)
-  }
-
-  /**
    * 根据日期查询识别结果列表
    */
   async DescribeFilterResultList(
@@ -143,6 +139,16 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     cb?: (error: string, rep: DescribeFilterResultListResponse) => void
   ): Promise<DescribeFilterResultListResponse> {
     return this.request("DescribeFilterResultList", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
+   */
+  async DescribeAppStatistics(
+    req: DescribeAppStatisticsRequest,
+    cb?: (error: string, rep: DescribeAppStatisticsResponse) => void
+  ): Promise<DescribeAppStatisticsResponse> {
+    return this.request("DescribeAppStatistics", req, cb)
   }
 
   /**
@@ -302,13 +308,13 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
   }
 
   /**
-   * 本接口(CreateApp)用于创建一个GME应用。
+   * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
    */
-  async CreateApp(
-    req: CreateAppRequest,
-    cb?: (error: string, rep: CreateAppResponse) => void
-  ): Promise<CreateAppResponse> {
-    return this.request("CreateApp", req, cb)
+  async CreateAgeDetectTask(
+    req: CreateAgeDetectTaskRequest,
+    cb?: (error: string, rep: CreateAgeDetectTaskResponse) => void
+  ): Promise<CreateAgeDetectTaskResponse> {
+    return this.request("CreateAgeDetectTask", req, cb)
   }
 
   /**
@@ -329,5 +335,25 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     cb?: (error: string, rep: DescribeUserInAndOutTimeResponse) => void
   ): Promise<DescribeUserInAndOutTimeResponse> {
     return this.request("DescribeUserInAndOutTime", req, cb)
+  }
+
+  /**
+   * 获取房间内用户信息
+   */
+  async DescribeRoomInfo(
+    req: DescribeRoomInfoRequest,
+    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
+  ): Promise<DescribeRoomInfoResponse> {
+    return this.request("DescribeRoomInfo", req, cb)
+  }
+
+  /**
+   * 查询年龄语音识别任务结果，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
+   */
+  async DescribeAgeDetectTask(
+    req: DescribeAgeDetectTaskRequest,
+    cb?: (error: string, rep: DescribeAgeDetectTaskResponse) => void
+  ): Promise<DescribeAgeDetectTaskResponse> {
+    return this.request("DescribeAgeDetectTask", req, cb)
   }
 }

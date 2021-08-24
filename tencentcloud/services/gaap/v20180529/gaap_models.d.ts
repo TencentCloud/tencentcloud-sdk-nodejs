@@ -1187,6 +1187,10 @@ export interface CreateProxyGroupRequest {
       * IP版本，可取值：IPv4、IPv6，默认值IPv4
       */
     IPAddressVersion?: string;
+    /**
+      * 通道组套餐类型，可取值：Thunder、Accelerator，默认值Thunder
+      */
+    PackageType?: string;
 }
 /**
  * 7层监听器转发规则信息
@@ -2181,6 +2185,10 @@ export interface DescribeAccessRegionsByDestRegionRequest {
       * IP版本，可取值：IPv4、IPv6，默认值IPv4
       */
     IPAddressVersion?: string;
+    /**
+      * 通道组类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+      */
+    PackageType?: string;
 }
 /**
  * 查询监听器或者规则相关的源站信息，不包括tag信息
@@ -2766,6 +2774,11 @@ export interface ProxyGroupDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IPAddressVersion: string;
+    /**
+      * 通道组类型，可取值：Thunder、Accelerator，默认值Thunder
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageType: string;
 }
 /**
  * CreateHTTPListener请求参数结构体
@@ -3286,16 +3299,17 @@ export interface DescribeProxyGroupListRequest {
       */
     ProjectId: number;
     /**
+      * 过滤条件。
+每次请求的Filter.Values的上限为5。
+RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站地域过滤，可参考DescribeDestRegions接口返回结果中的RegionId。
+PackageType - String - 是否必填：否 - （过滤条件）通道组类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+      */
+    Filters?: Array<Filter>;
+    /**
       * 标签列表，当存在该字段时，拉取对应标签下的资源列表。
 最多支持5个标签，当存在两个或两个以上的标签时，满足其中任意一个标签时，该通道组会被拉取出来。
       */
     TagSet?: Array<TagPair>;
-    /**
-      * 过滤条件。
-每次请求的Filter.Values的上限为5。
-RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站地域过滤，可参考DescribeDestRegions接口返回结果中的RegionId。
-      */
-    Filters?: Array<Filter>;
 }
 /**
  * 安全策略规则（出参）
@@ -3912,6 +3926,10 @@ export interface CheckProxyCreateRequest {
       * 网络类型，可取值：normal、cn2，默认值normal
       */
     NetworkType?: string;
+    /**
+      * 通道组类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+      */
+    PackageType?: string;
 }
 /**
  * DescribeRegionAndPrice请求参数结构体
@@ -3921,6 +3939,10 @@ export interface DescribeRegionAndPriceRequest {
       * IP版本，可取值：IPv4、IPv6，默认值IPv4
       */
     IPAddressVersion?: string;
+    /**
+      * 通道组类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+      */
+    PackageType?: string;
 }
 /**
  * AddRealServers请求参数结构体
@@ -4188,6 +4210,10 @@ export interface InquiryPriceCreateProxyRequest {
       * 网络类型，可取值：normal、cn2，默认值normal
       */
     NetworkType?: string;
+    /**
+      * 通道组类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+      */
+    PackageType?: string;
 }
 /**
  * DescribeProxyGroupDetails返回参数结构体

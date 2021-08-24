@@ -28,9 +28,29 @@ it("tbaas.v20180416.InvokeBcosTrans", async function () {
     }
 })
 
+it("tbaas.v20180416.QueryChainMakerTransaction", async function () {
+    try {
+       const data = await client.QueryChainMakerTransaction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.GetBcosBlockByNumber", async function () {
     try {
        const data = await client.GetBcosBlockByNumber({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.QueryChainMakerContract", async function () {
+    try {
+       const data = await client.QueryChainMakerContract({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +208,16 @@ it("tbaas.v20180416.ApplyUserCert", async function () {
     }
 })
 
+it("tbaas.v20180416.InvokeChainMakerContract", async function () {
+    try {
+       const data = await client.InvokeChainMakerContract({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.BlockByNumberHandler", async function () {
     try {
        const data = await client.BlockByNumberHandler({})
@@ -221,6 +251,16 @@ it("tbaas.v20180416.GetChaincodeInitializeResultForUser", async function () {
 it("tbaas.v20180416.GetChannelListForUser", async function () {
     try {
        const data = await client.GetChannelListForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.QueryChainMakerBlockTransaction", async function () {
+    try {
+       const data = await client.QueryChainMakerBlockTransaction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1455,6 +1455,21 @@ export interface OpenDBInstanceGTIDResponse {
 export type DescribeDBZoneConfigRequest = null
 
 /**
+ * VerifyRootAccount返回参数结构体
+ */
+export interface VerifyRootAccountResponse {
+  /**
+   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果
+   */
+  AsyncRequestId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBInstanceRebootTime返回参数结构体
  */
 export interface DescribeDBInstanceRebootTimeResponse {
@@ -4806,13 +4821,13 @@ export interface ModifyAuditRuleRequest {
 }
 
 /**
- * VerifyRootAccount返回参数结构体
+ * ModifyAccountHost返回参数结构体
  */
-export interface VerifyRootAccountResponse {
+export interface ModifyAccountHostResponse {
   /**
-   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果
+   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5616,6 +5631,31 @@ export interface RollbackDBName {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NewDatabaseName: string
+}
+
+/**
+ * ModifyAccountHost请求参数结构体
+ */
+export interface ModifyAccountHostRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * 账户的名称
+   */
+  User: string
+
+  /**
+   * 账户的旧主机
+   */
+  Host: string
+
+  /**
+   * 账户的新主机
+   */
+  NewHost: string
 }
 
 /**

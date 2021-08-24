@@ -737,7 +737,7 @@ export interface FlowLog {
   FlowLogName?: string
 
   /**
-   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE
+   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN
    */
   ResourceType?: string
 
@@ -1370,14 +1370,14 @@ export interface SecurityGroupPolicySet {
  */
 export interface ModifyFlowLogAttributeRequest {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID
-   */
-  VpcId: string
-
-  /**
    * 流日志唯一ID
    */
   FlowLogId: string
+
+  /**
+   * 私用网络ID或者统一ID，建议使用统一ID，修改云联网流日志属性时可不填，其他流日志类型必填。
+   */
+  VpcId?: string
 
   /**
    * 流日志实例名字
@@ -2079,14 +2079,14 @@ export interface IpGeolocationInfo {
  */
 export interface DeleteFlowLogRequest {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID
-   */
-  VpcId: string
-
-  /**
    * 流日志唯一ID
    */
   FlowLogId: string
+
+  /**
+   * 私用网络ID或者统一ID，建议使用统一ID，删除云联网流日志时，可不填，其他流日志类型必填。
+   */
+  VpcId?: string
 }
 
 /**
@@ -6707,7 +6707,7 @@ export interface CreateFlowLogResponse {
   /**
    * 创建的流日志信息
    */
-  FlowLog?: Array<FlowLog>
+  FlowLog: Array<FlowLog>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8552,17 +8552,12 @@ export interface CreateNatGatewayDestinationIpPortTranslationNatRuleRequest {
  */
 export interface CreateFlowLogRequest {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID
-   */
-  VpcId: string
-
-  /**
    * 流日志实例名字
    */
   FlowLogName: string
 
   /**
-   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE
+   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN
    */
   ResourceType: string
 
@@ -8580,6 +8575,11 @@ export interface CreateFlowLogRequest {
    * 流日志存储ID
    */
   CloudLogId: string
+
+  /**
+   * 私用网络ID或者统一ID，建议使用统一ID，当ResourceType为CCN时不填，其他类型必填。
+   */
+  VpcId?: string
 
   /**
    * 流日志实例描述
