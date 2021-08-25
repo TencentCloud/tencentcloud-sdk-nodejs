@@ -1331,6 +1331,16 @@ export interface AuditLogFilter {
    * 影响行数。表示筛选影响行数大于该值的审计日志。
    */
   AffectRows?: number
+
+  /**
+   * SQL 类型。支持多个类型同时查询。目前支持："SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE"。
+   */
+  SqlTypes?: Array<string>
+
+  /**
+   * SQL 语句。支持传递多个sql语句。
+   */
+  Sqls?: Array<string>
 }
 
 /**

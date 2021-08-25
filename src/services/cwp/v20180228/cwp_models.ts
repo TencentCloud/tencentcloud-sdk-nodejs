@@ -2903,6 +2903,21 @@ export interface DeletePrivilegeRulesResponse {
 }
 
 /**
+ * ExportScanTaskDetails返回参数结构体
+ */
+export interface ExportScanTaskDetailsResponse {
+  /**
+   * 导出本次检测Excel的任务Id（不同于入参的本次检测任务id）
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProtectServer请求参数结构体
  */
 export interface CreateProtectServerRequest {
@@ -4681,6 +4696,26 @@ export interface DescribeMachinesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ExportScanTaskDetails请求参数结构体
+ */
+export interface ExportScanTaskDetailsRequest {
+  /**
+   * 本次检测的任务id（不同于出参的导出本次检测Excel的任务Id）
+   */
+  TaskId: number
+
+  /**
+   * 模块类型，当前提供：Malware 木马 , Vul 漏洞 , Baseline 基线
+   */
+  ModuleType: string
+
+  /**
+   * 过滤参数：ipOrAlias（服务器名/ip）
+   */
+  Filters?: Array<Filters>
 }
 
 /**

@@ -58,6 +58,16 @@ it("ame.v20190916.DescribeLyric", async function () {
     }
 })
 
+it("ame.v20190916.DescribeMusicSaleStatus", async function () {
+    try {
+       const data = await client.DescribeMusicSaleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.DescribeKTVPlaylistDetail", async function () {
     try {
        const data = await client.DescribeKTVPlaylistDetail({})

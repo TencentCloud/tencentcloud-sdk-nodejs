@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyDomainRecord", req, cb);
     }
     /**
+     * 获取Waf攻击Top数据
+     */
+    async ListTopWafData(req, cb) {
+        return this.request("ListTopWafData", req, cb);
+    }
+    /**
      * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
      */
     async DescribePurgeTasks(req, cb) {
@@ -181,6 +187,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListDiagnoseReport", req, cb);
     }
     /**
+     * 获取CC攻击Top数据
+     */
+    async ListTopCcData(req, cb) {
+        return this.request("ListTopCcData", req, cb);
+    }
+    /**
      * DescribePurgeQuota 用于查询账户刷新配额和每日可用量。
      */
     async DescribePurgeQuota(req, cb) {
@@ -197,6 +209,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListScdnLogTasks(req, cb) {
         return this.request("ListScdnLogTasks", req, cb);
+    }
+    /**
+     * 获取Bot攻击的Top信息
+     */
+    async ListTopBotData(req, cb) {
+        return this.request("ListTopBotData", req, cb);
     }
     /**
      * CreateScdnLogTask 用于创建事件日志任务
@@ -285,6 +303,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUrlViolations(req, cb) {
         return this.request("DescribeUrlViolations", req, cb);
+    }
+    /**
+     * 获取DDoS攻击Top数据
+     */
+    async ListTopDDoSData(req, cb) {
+        return this.request("ListTopDDoSData", req, cb);
     }
     /**
      * PurgeUrlsCache 用于批量提交 URL 进行刷新，根据 URL 中域名的当前加速区域进行对应区域的刷新。

@@ -32,9 +32,10 @@ import {
   DescribeScdnTopDataResponse,
   ImageOptimization,
   Https,
+  SearchClsLogResponse,
   RuleCache,
   DescribeCdnDomainLogsRequest,
-  DescribeTrafficPackagesRequest,
+  CcTopData,
   CreateClsLogTopicResponse,
   ScdnAclRule,
   PurgePathCacheResponse,
@@ -48,11 +49,13 @@ import {
   Referer,
   StartScdnDomainRequest,
   PostSize,
+  ListTopWafDataRequest,
   DescribeCdnDataResponse,
   EnableClsLogTopicRequest,
   UpdateImageConfigResponse,
   ScdnDomain,
   CacheConfigNoCache,
+  ListTopDDoSDataRequest,
   AccessControl,
   DeleteCdnDomainRequest,
   DescribePayTypeResponse,
@@ -81,6 +84,7 @@ import {
   SimpleCache,
   DeleteClsLogTopicRequest,
   UserAgentFilter,
+  ListTopCcDataRequest,
   DeleteScdnDomainRequest,
   DescribeDistrictIspDataResponse,
   DescribeCdnOriginIpRequest,
@@ -88,6 +92,7 @@ import {
   TopicInfo,
   DescribeDomainsConfigResponse,
   DescribeDiagnoseReportRequest,
+  ResourceBillingData,
   BriefDomain,
   TimestampData,
   TpgAdapter,
@@ -101,7 +106,7 @@ import {
   DescribeCdnIpRequest,
   Ipv6,
   WafSubRuleStatus,
-  ScdnEventLogConditions,
+  DescribeTrafficPackagesRequest,
   StatusCodeCache,
   DescribeIpVisitResponse,
   EnableClsLogTopicResponse,
@@ -109,6 +114,7 @@ import {
   OverseaConfig,
   AddCdnDomainRequest,
   UserAgentFilterRule,
+  ListTopBotDataResponse,
   UpdateDomainConfigRequest,
   Tag,
   CacheConfigFollowOrigin,
@@ -122,6 +128,7 @@ import {
   AdvancedAuthenticationTypeB,
   WebpAdapter,
   CreateScdnLogTaskResponse,
+  ScdnEventLogConditions,
   WebSocket,
   MapInfo,
   DescribeCertDomainsResponse,
@@ -163,13 +170,14 @@ import {
   ManageClsTopicDomainsRequest,
   ListDiagnoseReportRequest,
   ScdnWafConfig,
+  DomainBotCount,
   CreateScdnFailedLogTaskRequest,
   Cache,
   DiagnoseData,
   DescribeOriginDataRequest,
   RangeOriginPull,
   ListScdnLogTasksRequest,
-  SearchClsLogResponse,
+  ListTopCcDataResponse,
   PathBasedOriginRule,
   PushUrlsCacheRequest,
   MainlandConfig,
@@ -193,11 +201,12 @@ import {
   RuleQueryString,
   DescribeIpVisitRequest,
   HttpHeaderRule,
-  StatusCodeCacheRule,
+  ScdnTopDomainData,
   CreateScdnDomainResponse,
   ScdnTopData,
   ScdnConfig,
   DomainLog,
+  StopScdnDomainResponse,
   GetDisableRecordsRequest,
   CreateDiagnoseUrlRequest,
   PurgeUrlsCacheResponse,
@@ -218,7 +227,7 @@ import {
   UrlRedirect,
   DownstreamCapping,
   CookieKey,
-  StopScdnDomainResponse,
+  StatusCodeCacheRule,
   VerifyDomainRecordRequest,
   KeyRule,
   ClientCert,
@@ -245,10 +254,11 @@ import {
   DescribePushQuotaRequest,
   TopDetailData,
   ResponseHeaderCache,
-  ResourceBillingData,
+  ListTopWafDataResponse,
   Sort,
   ClientInfo,
   DescribePurgeTasksRequest,
+  ListTopBotDataRequest,
   PushUrlsCacheResponse,
   OriginCombine,
   QueryStringKey,
@@ -277,8 +287,10 @@ import {
   ErrorPageRule,
   DescribeOriginDataResponse,
   PurgeTask,
+  DDoSTopData,
   OriginPullTimeout,
   DeleteCdnDomainResponse,
+  ListTopDDoSDataResponse,
   OriginIp,
   CdnIp,
   DescribeCdnDataRequest,
@@ -354,6 +366,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: VerifyDomainRecordResponse) => void
   ): Promise<VerifyDomainRecordResponse> {
     return this.request("VerifyDomainRecord", req, cb)
+  }
+
+  /**
+   * 获取Waf攻击Top数据
+   */
+  async ListTopWafData(
+    req: ListTopWafDataRequest,
+    cb?: (error: string, rep: ListTopWafDataResponse) => void
+  ): Promise<ListTopWafDataResponse> {
+    return this.request("ListTopWafData", req, cb)
   }
 
   /**
@@ -552,6 +574,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取CC攻击Top数据
+   */
+  async ListTopCcData(
+    req: ListTopCcDataRequest,
+    cb?: (error: string, rep: ListTopCcDataResponse) => void
+  ): Promise<ListTopCcDataResponse> {
+    return this.request("ListTopCcData", req, cb)
+  }
+
+  /**
    * DescribePurgeQuota 用于查询账户刷新配额和每日可用量。
    */
   async DescribePurgeQuota(
@@ -579,6 +611,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListScdnLogTasksResponse) => void
   ): Promise<ListScdnLogTasksResponse> {
     return this.request("ListScdnLogTasks", req, cb)
+  }
+
+  /**
+   * 获取Bot攻击的Top信息
+   */
+  async ListTopBotData(
+    req: ListTopBotDataRequest,
+    cb?: (error: string, rep: ListTopBotDataResponse) => void
+  ): Promise<ListTopBotDataResponse> {
+    return this.request("ListTopBotData", req, cb)
   }
 
   /**
@@ -711,6 +753,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUrlViolationsResponse) => void
   ): Promise<DescribeUrlViolationsResponse> {
     return this.request("DescribeUrlViolations", req, cb)
+  }
+
+  /**
+   * 获取DDoS攻击Top数据
+   */
+  async ListTopDDoSData(
+    req: ListTopDDoSDataRequest,
+    cb?: (error: string, rep: ListTopDDoSDataResponse) => void
+  ): Promise<ListTopDDoSDataResponse> {
+    return this.request("ListTopDDoSData", req, cb)
   }
 
   /**

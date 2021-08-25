@@ -741,7 +741,7 @@ export interface CancelTaskRequest {
     TaskId: string;
 }
 /**
- * 任务实例。
+ * 任务实例
  */
 export interface TaskResponseInfo {
     /**
@@ -809,6 +809,11 @@ export interface TaskResponseInfo {
       * 执行SQL的引擎类型
       */
     TaskType: string;
+    /**
+      * 任务进度明细
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgressDetail: string;
 }
 /**
  * 文本格式

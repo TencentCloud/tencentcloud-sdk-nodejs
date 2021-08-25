@@ -105,6 +105,7 @@ import {
   DescribeOrderStatusRequest,
   QueryDownloadBillURLRequest,
   BindAccountRequest,
+  RegisterBillSupportWithdrawRequest,
   ModifyMerchantResponse,
   QuerySinglePayResult,
   RefundOrderResponse,
@@ -249,6 +250,7 @@ import {
   RefundMemberTransactionResponse,
   CreateInvoiceV2Response,
   CreateBatchPaymentBatchData,
+  DownloadReconciliationUrlResponse,
   ModifyBindedAccountResponse,
   ApplyApplicationMaterialResponse,
   RefundMemberTransactionRequest,
@@ -277,7 +279,7 @@ import {
   ModifyAgentTaxPaymentInfoRequest,
   QuerySmallAmountTransferRequest,
   CreateBatchPaymentRecipient,
-  RegisterBillSupportWithdrawRequest,
+  DownloadReconciliationUrlRequest,
   CreateBatchPaymentRequest,
   ModifyMntMbrBindRelateAcctBankCodeResponse,
   QueryBalanceRequest,
@@ -1195,6 +1197,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RevokeMemberRechargeThirdPayResponse) => void
   ): Promise<RevokeMemberRechargeThirdPayResponse> {
     return this.request("RevokeMemberRechargeThirdPay", req, cb)
+  }
+
+  /**
+   * 获取对账中心账单下载地址的接口
+   */
+  async DownloadReconciliationUrl(
+    req: DownloadReconciliationUrlRequest,
+    cb?: (error: string, rep: DownloadReconciliationUrlResponse) => void
+  ): Promise<DownloadReconciliationUrlResponse> {
+    return this.request("DownloadReconciliationUrl", req, cb)
   }
 
   /**

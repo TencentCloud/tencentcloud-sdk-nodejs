@@ -286,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivilegeRules", req, cb);
     }
     /**
+     * 根据任务id导出指定扫描任务详情
+     */
+    async ExportScanTaskDetails(req, cb) {
+        return this.request("ExportScanTaskDetails", req, cb);
+    }
+    /**
      * 本接口 (DeleteMalwares) 用于删除木马记录。
      */
     async DeleteMalwares(req, cb) {

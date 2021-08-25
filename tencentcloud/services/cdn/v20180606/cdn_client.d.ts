@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCdnDomainLogsResponse, DescribePushQuotaResponse, DescribePurgeQuotaResponse, DescribeScdnTopDataResponse, DescribeCdnDomainLogsRequest, DescribeTrafficPackagesRequest, CreateClsLogTopicResponse, PurgePathCacheResponse, DescribeCdnOriginIpResponse, DescribePurgeQuotaRequest, ModifyPurgeFetchTaskStatusRequest, StartScdnDomainRequest, DescribeCdnDataResponse, EnableClsLogTopicRequest, UpdateImageConfigResponse, DeleteCdnDomainRequest, DescribePayTypeResponse, ListTopDataRequest, ListClsTopicDomainsRequest, DescribeDomainsResponse, DescribePayTypeRequest, UpdateImageConfigRequest, DisableCachesRequest, StartCdnDomainResponse, UpdateScdnDomainResponse, DescribeDomainsConfigRequest, EnableCachesRequest, CreateScdnDomainRequest, DescribeBillingDataRequest, DeleteClsLogTopicRequest, DeleteScdnDomainRequest, DescribeDistrictIspDataResponse, DescribeCdnOriginIpRequest, UpdatePayTypeResponse, DescribeDomainsConfigResponse, DescribeDiagnoseReportRequest, DescribeReportDataResponse, DisableClsLogTopicRequest, ListClsTopicDomainsResponse, DescribeCdnIpRequest, DescribeIpVisitResponse, EnableClsLogTopicResponse, ListClsLogTopicsResponse, AddCdnDomainRequest, UpdateDomainConfigRequest, DescribeCertDomainsRequest, CreateScdnLogTaskResponse, DescribeCertDomainsResponse, DuplicateDomainConfigRequest, DescribePushTasksResponse, AddCdnDomainResponse, ListScdnDomainsResponse, VerifyDomainRecordResponse, ListScdnDomainsRequest, CreateScdnLogTaskRequest, ModifyPurgeFetchTaskStatusResponse, DisableClsLogTopicResponse, DescribeIpStatusRequest, GetDisableRecordsResponse, DuplicateDomainConfigResponse, UpdateScdnDomainRequest, UpdatePayTypeRequest, ManageClsTopicDomainsRequest, ListDiagnoseReportRequest, CreateScdnFailedLogTaskRequest, DescribeOriginDataRequest, ListScdnLogTasksRequest, SearchClsLogResponse, PushUrlsCacheRequest, DescribeReportDataRequest, DescribePushTasksRequest, DescribeScdnTopDataRequest, DescribeUrlViolationsRequest, CreateDiagnoseUrlResponse, CreateClsLogTopicRequest, CreateVerifyRecordResponse, StopCdnDomainRequest, DescribeMapInfoResponse, DescribeTrafficPackagesResponse, DescribeMapInfoRequest, EnableCachesResponse, DescribeIpVisitRequest, CreateScdnDomainResponse, GetDisableRecordsRequest, CreateDiagnoseUrlRequest, PurgeUrlsCacheResponse, StartScdnDomainResponse, DeleteClsLogTopicResponse, DescribeBillingDataResponse, DisableCachesResponse, DescribeImageConfigRequest, DescribeCdnIpResponse, DescribeIpStatusResponse, DescribeDistrictIspDataRequest, ListScdnLogTasksResponse, StopScdnDomainResponse, VerifyDomainRecordRequest, DeleteScdnDomainResponse, ListClsLogTopicsRequest, CreateVerifyRecordRequest, PurgePathCacheRequest, DescribeDiagnoseReportResponse, CreateScdnFailedLogTaskResponse, PurgeUrlsCacheRequest, StartCdnDomainRequest, CreateEdgePackTaskResponse, DescribeScdnConfigResponse, DescribePushQuotaRequest, DescribePurgeTasksRequest, PushUrlsCacheResponse, ListTopDataResponse, UpdateDomainConfigResponse, ListDiagnoseReportResponse, SearchClsLogRequest, ManageClsTopicDomainsResponse, DescribeUrlViolationsResponse, DescribePurgeTasksResponse, DescribeOriginDataResponse, DeleteCdnDomainResponse, DescribeCdnDataRequest, DescribeImageConfigResponse, DescribeScdnConfigRequest, StopScdnDomainRequest, DescribeDomainsRequest, CreateEdgePackTaskRequest, StopCdnDomainResponse } from "./cdn_models";
+import { DescribeCdnDomainLogsResponse, DescribePushQuotaResponse, DescribePurgeQuotaResponse, DescribeScdnTopDataResponse, SearchClsLogResponse, DescribeCdnDomainLogsRequest, CreateClsLogTopicResponse, PurgePathCacheResponse, DescribeCdnOriginIpResponse, DescribePurgeQuotaRequest, ModifyPurgeFetchTaskStatusRequest, StartScdnDomainRequest, ListTopWafDataRequest, DescribeCdnDataResponse, EnableClsLogTopicRequest, UpdateImageConfigResponse, ListTopDDoSDataRequest, DeleteCdnDomainRequest, DescribePayTypeResponse, ListTopDataRequest, ListClsTopicDomainsRequest, DescribeDomainsResponse, DescribePayTypeRequest, UpdateImageConfigRequest, DisableCachesRequest, StartCdnDomainResponse, UpdateScdnDomainResponse, DescribeDomainsConfigRequest, EnableCachesRequest, CreateScdnDomainRequest, DescribeBillingDataRequest, DeleteClsLogTopicRequest, ListTopCcDataRequest, DeleteScdnDomainRequest, DescribeDistrictIspDataResponse, DescribeCdnOriginIpRequest, UpdatePayTypeResponse, DescribeDomainsConfigResponse, DescribeDiagnoseReportRequest, DescribeReportDataResponse, DisableClsLogTopicRequest, ListClsTopicDomainsResponse, DescribeCdnIpRequest, DescribeTrafficPackagesRequest, DescribeIpVisitResponse, EnableClsLogTopicResponse, ListClsLogTopicsResponse, AddCdnDomainRequest, ListTopBotDataResponse, UpdateDomainConfigRequest, DescribeCertDomainsRequest, CreateScdnLogTaskResponse, DescribeCertDomainsResponse, DuplicateDomainConfigRequest, DescribePushTasksResponse, AddCdnDomainResponse, ListScdnDomainsResponse, VerifyDomainRecordResponse, ListScdnDomainsRequest, CreateScdnLogTaskRequest, ModifyPurgeFetchTaskStatusResponse, DisableClsLogTopicResponse, DescribeIpStatusRequest, GetDisableRecordsResponse, DuplicateDomainConfigResponse, UpdateScdnDomainRequest, UpdatePayTypeRequest, ManageClsTopicDomainsRequest, ListDiagnoseReportRequest, CreateScdnFailedLogTaskRequest, DescribeOriginDataRequest, ListScdnLogTasksRequest, ListTopCcDataResponse, PushUrlsCacheRequest, DescribeReportDataRequest, DescribePushTasksRequest, DescribeScdnTopDataRequest, DescribeUrlViolationsRequest, CreateDiagnoseUrlResponse, CreateClsLogTopicRequest, CreateVerifyRecordResponse, StopCdnDomainRequest, DescribeMapInfoResponse, DescribeTrafficPackagesResponse, DescribeMapInfoRequest, EnableCachesResponse, DescribeIpVisitRequest, CreateScdnDomainResponse, StopScdnDomainResponse, GetDisableRecordsRequest, CreateDiagnoseUrlRequest, PurgeUrlsCacheResponse, StartScdnDomainResponse, DeleteClsLogTopicResponse, DescribeBillingDataResponse, DisableCachesResponse, DescribeImageConfigRequest, DescribeCdnIpResponse, DescribeIpStatusResponse, DescribeDistrictIspDataRequest, ListScdnLogTasksResponse, VerifyDomainRecordRequest, DeleteScdnDomainResponse, ListClsLogTopicsRequest, CreateVerifyRecordRequest, PurgePathCacheRequest, DescribeDiagnoseReportResponse, CreateScdnFailedLogTaskResponse, PurgeUrlsCacheRequest, StartCdnDomainRequest, CreateEdgePackTaskResponse, DescribeScdnConfigResponse, DescribePushQuotaRequest, ListTopWafDataResponse, DescribePurgeTasksRequest, ListTopBotDataRequest, PushUrlsCacheResponse, ListTopDataResponse, UpdateDomainConfigResponse, ListDiagnoseReportResponse, SearchClsLogRequest, ManageClsTopicDomainsResponse, DescribeUrlViolationsResponse, DescribePurgeTasksResponse, DescribeOriginDataResponse, DeleteCdnDomainResponse, ListTopDDoSDataResponse, DescribeCdnDataRequest, DescribeImageConfigResponse, DescribeScdnConfigRequest, StopScdnDomainRequest, DescribeDomainsRequest, CreateEdgePackTaskRequest, StopCdnDomainResponse } from "./cdn_models";
 /**
  * cdn client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 验证域名解析值
      */
     VerifyDomainRecord(req: VerifyDomainRecordRequest, cb?: (error: string, rep: VerifyDomainRecordResponse) => void): Promise<VerifyDomainRecordResponse>;
+    /**
+     * 获取Waf攻击Top数据
+     */
+    ListTopWafData(req: ListTopWafDataRequest, cb?: (error: string, rep: ListTopWafDataResponse) => void): Promise<ListTopWafDataResponse>;
     /**
      * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 PurgePathCache 与 PurgeUrlsCache 接口提交的任务均可通过此接口进行查询。
      */
@@ -115,6 +119,10 @@ export declare class Client extends AbstractClient {
      */
     ListDiagnoseReport(req: ListDiagnoseReportRequest, cb?: (error: string, rep: ListDiagnoseReportResponse) => void): Promise<ListDiagnoseReportResponse>;
     /**
+     * 获取CC攻击Top数据
+     */
+    ListTopCcData(req: ListTopCcDataRequest, cb?: (error: string, rep: ListTopCcDataResponse) => void): Promise<ListTopCcDataResponse>;
+    /**
      * DescribePurgeQuota 用于查询账户刷新配额和每日可用量。
      */
     DescribePurgeQuota(req?: DescribePurgeQuotaRequest, cb?: (error: string, rep: DescribePurgeQuotaResponse) => void): Promise<DescribePurgeQuotaResponse>;
@@ -126,6 +134,10 @@ export declare class Client extends AbstractClient {
      * ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任务基本信息
      */
     ListScdnLogTasks(req: ListScdnLogTasksRequest, cb?: (error: string, rep: ListScdnLogTasksResponse) => void): Promise<ListScdnLogTasksResponse>;
+    /**
+     * 获取Bot攻击的Top信息
+     */
+    ListTopBotData(req: ListTopBotDataRequest, cb?: (error: string, rep: ListTopBotDataResponse) => void): Promise<ListTopBotDataResponse>;
     /**
      * CreateScdnLogTask 用于创建事件日志任务
      */
@@ -192,6 +204,10 @@ export declare class Client extends AbstractClient {
 对应内容分发网络控制台【图片鉴黄】页面。
      */
     DescribeUrlViolations(req: DescribeUrlViolationsRequest, cb?: (error: string, rep: DescribeUrlViolationsResponse) => void): Promise<DescribeUrlViolationsResponse>;
+    /**
+     * 获取DDoS攻击Top数据
+     */
+    ListTopDDoSData(req: ListTopDDoSDataRequest, cb?: (error: string, rep: ListTopDDoSDataResponse) => void): Promise<ListTopDDoSDataResponse>;
     /**
      * PurgeUrlsCache 用于批量提交 URL 进行刷新，根据 URL 中域名的当前加速区域进行对应区域的刷新。
 默认情况下境内、境外加速区域每日 URL 刷新额度各为 10000 条，每次最多可提交 1000 条。

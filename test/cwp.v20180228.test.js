@@ -448,6 +448,16 @@ it("cwp.v20180228.DeletePrivilegeRules", async function () {
     }
 })
 
+it("cwp.v20180228.ExportScanTaskDetails", async function () {
+    try {
+       const data = await client.ExportScanTaskDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteMalwares", async function () {
     try {
        const data = await client.DeleteMalwares({})

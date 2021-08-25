@@ -26,6 +26,7 @@ import {
   DescribeKTVPlaylistDetailRequest,
   Station,
   Music,
+  MusicDetailInfo,
   DescribeKTVMusicDetailRequest,
   DescribeStationsResponse,
   DescribePackageItemsResponse,
@@ -56,12 +57,14 @@ import {
   DescribeCloudMusicResponse,
   KTVMusicBaseInfo,
   DescribePackagesRequest,
-  MusicDetailInfo,
+  DescribeMusicSaleStatusRequest,
   SearchKTVMusicsRequest,
   ImagePath,
   DescribeItemsResponse,
   KTVPlaylistBaseInfo,
   DescribeItemByIdResponse,
+  MusicStatus,
+  DescribeMusicSaleStatusResponse,
   PutMusicOnTheShelvesRequest,
   DescribePackagesResponse,
   DescribeCloudMusicRequest,
@@ -120,6 +123,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLyricResponse) => void
   ): Promise<DescribeLyricResponse> {
     return this.request("DescribeLyric", req, cb)
+  }
+
+  /**
+   * 根据音乐信息查询音乐是否在售
+   */
+  async DescribeMusicSaleStatus(
+    req: DescribeMusicSaleStatusRequest,
+    cb?: (error: string, rep: DescribeMusicSaleStatusResponse) => void
+  ): Promise<DescribeMusicSaleStatusResponse> {
+    return this.request("DescribeMusicSaleStatus", req, cb)
   }
 
   /**

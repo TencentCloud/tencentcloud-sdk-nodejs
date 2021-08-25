@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMusicResponse, DescribeLyricResponse, ModifyMusicOnShelvesResponse, DescribeKTVPlaylistDetailRequest, DescribeKTVMusicDetailRequest, DescribeStationsResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedRequest, DescribeCloudMusicPurchasedResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, ReportDataResponse, ModifyMusicOnShelvesRequest, DescribePackageItemsRequest, TakeMusicOffShelvesRequest, PutMusicOnTheShelvesResponse, DescribeItemByIdRequest, DescribeAuthInfoRequest, DescribeKTVPlaylistsResponse, DescribeStationsRequest, SearchKTVMusicsResponse, DescribeItemsRequest, DescribeCloudMusicResponse, DescribePackagesRequest, SearchKTVMusicsRequest, DescribeItemsResponse, DescribeItemByIdResponse, PutMusicOnTheShelvesRequest, DescribePackagesResponse, DescribeCloudMusicRequest, DescribeAuthInfoResponse, TakeMusicOffShelvesResponse, DescribeLyricRequest, DescribeKTVMusicDetailResponse, DescribeMusicRequest, ReportDataRequest } from "./ame_models";
+import { DescribeMusicResponse, DescribeLyricResponse, ModifyMusicOnShelvesResponse, DescribeKTVPlaylistDetailRequest, DescribeKTVMusicDetailRequest, DescribeStationsResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedRequest, DescribeCloudMusicPurchasedResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, ReportDataResponse, ModifyMusicOnShelvesRequest, DescribePackageItemsRequest, TakeMusicOffShelvesRequest, PutMusicOnTheShelvesResponse, DescribeItemByIdRequest, DescribeAuthInfoRequest, DescribeKTVPlaylistsResponse, DescribeStationsRequest, SearchKTVMusicsResponse, DescribeItemsRequest, DescribeCloudMusicResponse, DescribePackagesRequest, DescribeMusicSaleStatusRequest, SearchKTVMusicsRequest, DescribeItemsResponse, DescribeItemByIdResponse, DescribeMusicSaleStatusResponse, PutMusicOnTheShelvesRequest, DescribePackagesResponse, DescribeCloudMusicRequest, DescribeAuthInfoResponse, TakeMusicOffShelvesResponse, DescribeLyricRequest, DescribeKTVMusicDetailResponse, DescribeMusicRequest, ReportDataRequest } from "./ame_models";
 /**
  * ame client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 根据接口的模式及歌曲ID来取得歌词信息或者波形图信息。
      */
     DescribeLyric(req: DescribeLyricRequest, cb?: (error: string, rep: DescribeLyricResponse) => void): Promise<DescribeLyricResponse>;
+    /**
+     * 根据音乐信息查询音乐是否在售
+     */
+    DescribeMusicSaleStatus(req: DescribeMusicSaleStatusRequest, cb?: (error: string, rep: DescribeMusicSaleStatusResponse) => void): Promise<DescribeMusicSaleStatusResponse>;
     /**
      * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
      */

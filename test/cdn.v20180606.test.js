@@ -68,6 +68,16 @@ it("cdn.v20180606.VerifyDomainRecord", async function () {
     }
 })
 
+it("cdn.v20180606.ListTopWafData", async function () {
+    try {
+       const data = await client.ListTopWafData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.DescribePurgeTasks", async function () {
     try {
        const data = await client.DescribePurgeTasks({})
@@ -248,6 +258,16 @@ it("cdn.v20180606.ListDiagnoseReport", async function () {
     }
 })
 
+it("cdn.v20180606.ListTopCcData", async function () {
+    try {
+       const data = await client.ListTopCcData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.DescribePurgeQuota", async function () {
     try {
        const data = await client.DescribePurgeQuota({})
@@ -271,6 +291,16 @@ it("cdn.v20180606.UpdateScdnDomain", async function () {
 it("cdn.v20180606.ListScdnLogTasks", async function () {
     try {
        const data = await client.ListScdnLogTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.ListTopBotData", async function () {
+    try {
+       const data = await client.ListTopBotData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +411,16 @@ it("cdn.v20180606.PurgePathCache", async function () {
 it("cdn.v20180606.DescribeUrlViolations", async function () {
     try {
        const data = await client.DescribeUrlViolations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.ListTopDDoSData", async function () {
+    try {
+       const data = await client.ListTopDDoSData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

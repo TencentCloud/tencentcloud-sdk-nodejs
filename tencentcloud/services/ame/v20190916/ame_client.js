@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLyric", req, cb);
     }
     /**
+     * 根据音乐信息查询音乐是否在售
+     */
+    async DescribeMusicSaleStatus(req, cb) {
+        return this.request("DescribeMusicSaleStatus", req, cb);
+    }
+    /**
      * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
      */
     async DescribeKTVPlaylistDetail(req, cb) {

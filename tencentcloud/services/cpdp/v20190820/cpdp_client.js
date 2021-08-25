@@ -555,6 +555,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeMemberRechargeThirdPay", req, cb);
     }
     /**
+     * 获取对账中心账单下载地址的接口
+     */
+    async DownloadReconciliationUrl(req, cb) {
+        return this.request("DownloadReconciliationUrl", req, cb);
+    }
+    /**
      * 会员绑定提现账户-银联鉴权。用于会员申请绑定提现账户，申请后银行前往银联验证卡信息：姓名、证件、卡号、银行预留手机是否相符，相符则发送给会员手机动态验证码并返回成功，不相符则返回失败。
 平台接收到银行返回成功后，进入输入动态验证码的页面，有效期120秒，若120秒未输入，客户可点击重新发送动态验证码，这个步骤重新调用该接口即可。
 平安银行的账户，大小额行号和超级网银号都不用送。

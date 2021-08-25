@@ -888,6 +888,16 @@ it("cpdp.v20190820.RevokeMemberRechargeThirdPay", async function () {
     }
 })
 
+it("cpdp.v20190820.DownloadReconciliationUrl", async function () {
+    try {
+       const data = await client.DownloadReconciliationUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.BindRelateAcctUnionPay", async function () {
     try {
        const data = await client.BindRelateAcctUnionPay({})

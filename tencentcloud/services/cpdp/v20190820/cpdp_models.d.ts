@@ -2910,6 +2910,51 @@ export interface BindAccountRequest {
     PhoneNum: string;
 }
 /**
+ * RegisterBillSupportWithdraw请求参数结构体
+ */
+export interface RegisterBillSupportWithdrawRequest {
+    /**
+      * STRING(32)，交易网会员代码
+      */
+    TranNetMemberCode: string;
+    /**
+      * STRING(50)，订单号
+      */
+    OrderNo: string;
+    /**
+      * STRING(20)，挂账金额（包含交易费用）
+      */
+    SuspendAmt: string;
+    /**
+      * STRING(20)，交易费用（暂未使用，默认传0.0）
+      */
+    TranFee: string;
+    /**
+      * String(22)，商户号（签约客户号）
+      */
+    MrchCode: string;
+    /**
+      * STRING(300)，备注
+      */
+    Remark?: string;
+    /**
+      * STRING(300)，保留域1
+      */
+    ReservedMsgOne?: string;
+    /**
+      * STRING(300)，保留域2
+      */
+    ReservedMsgTwo?: string;
+    /**
+      * STRING(300)，保留域3
+      */
+    ReservedMsgThree?: string;
+    /**
+      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+      */
+    Profile?: string;
+}
+/**
  * ModifyMerchant返回参数结构体
  */
 export interface ModifyMerchantResponse {
@@ -7650,6 +7695,28 @@ export interface CreateBatchPaymentBatchData {
     AgentName: string;
 }
 /**
+ * DownloadReconciliationUrl返回参数结构体
+ */
+export interface DownloadReconciliationUrlResponse {
+    /**
+      * 下载地址
+      */
+    DownloadUrl: string;
+    /**
+      * hash类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HashType: string;
+    /**
+      * hash值
+      */
+    HashValue: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyBindedAccount返回参数结构体
  */
 export interface ModifyBindedAccountResponse {
@@ -8469,49 +8536,25 @@ export interface CreateBatchPaymentRecipient {
     ReqReserved?: string;
 }
 /**
- * RegisterBillSupportWithdraw请求参数结构体
+ * DownloadReconciliationUrl请求参数结构体
  */
-export interface RegisterBillSupportWithdrawRequest {
+export interface DownloadReconciliationUrlRequest {
     /**
-      * STRING(32)，交易网会员代码
+      * 平台应用ID
       */
-    TranNetMemberCode: string;
+    MainAppId: string;
     /**
-      * STRING(50)，订单号
+      * 平台代码
       */
-    OrderNo: string;
+    AppCode: string;
     /**
-      * STRING(20)，挂账金额（包含交易费用）
+      * 账单日期，yyyy-MM-dd
       */
-    SuspendAmt: string;
+    BillDate: string;
     /**
-      * STRING(20)，交易费用（暂未使用，默认传0.0）
+      * 商户或者代理商ID
       */
-    TranFee: string;
-    /**
-      * String(22)，商户号（签约客户号）
-      */
-    MrchCode: string;
-    /**
-      * STRING(300)，备注
-      */
-    Remark?: string;
-    /**
-      * STRING(300)，保留域1
-      */
-    ReservedMsgOne?: string;
-    /**
-      * STRING(300)，保留域2
-      */
-    ReservedMsgTwo?: string;
-    /**
-      * STRING(300)，保留域3
-      */
-    ReservedMsgThree?: string;
-    /**
-      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
-      */
-    Profile?: string;
+    SubAppId?: string;
 }
 /**
  * CreateBatchPayment请求参数结构体

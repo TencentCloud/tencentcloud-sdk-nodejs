@@ -140,6 +140,7 @@ import {
   DescribeScanTaskDetailsRequest,
   RenewProVersionResponse,
   DeletePrivilegeRulesResponse,
+  ExportScanTaskDetailsResponse,
   CreateProtectServerRequest,
   DescribeAssetRecentMachineInfoRequest,
   ExportVulDetectionExcelResponse,
@@ -230,6 +231,7 @@ import {
   DescribeMachineListRequest,
   AccountStatistics,
   DescribeMachinesResponse,
+  ExportScanTaskDetailsRequest,
   DescribePrivilegeRulesResponse,
   ExportNonlocalLoginPlacesRequest,
   Machine,
@@ -717,6 +719,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrivilegeRulesResponse) => void
   ): Promise<DeletePrivilegeRulesResponse> {
     return this.request("DeletePrivilegeRules", req, cb)
+  }
+
+  /**
+   * 根据任务id导出指定扫描任务详情
+   */
+  async ExportScanTaskDetails(
+    req: ExportScanTaskDetailsRequest,
+    cb?: (error: string, rep: ExportScanTaskDetailsResponse) => void
+  ): Promise<ExportScanTaskDetailsResponse> {
+    return this.request("ExportScanTaskDetails", req, cb)
   }
 
   /**

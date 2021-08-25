@@ -1288,6 +1288,11 @@ export interface ModifyLoadBalancerAttributesRequest {
    * 是否开启SnatPro
    */
   SnatPro?: boolean
+
+  /**
+   * 是否开启删除保护
+   */
+  DeleteProtect?: boolean
 }
 
 /**

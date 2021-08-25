@@ -417,6 +417,19 @@ failed：部署失败
     TlsVersion?: Array<string>;
 }
 /**
+ * SearchClsLog返回参数结构体
+ */
+export interface SearchClsLogResponse {
+    /**
+      * 查询结果
+      */
+    Logs: ClsSearchLogs;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 缓存配置分路径版本。
 默认情况下所有文件缓存过期时间为 30 天
 默认情况下静态加速类型的域名 .php;.jsp;.asp;.aspx 不缓存
@@ -487,17 +500,34 @@ access：获取访问日志
     LogType?: string;
 }
 /**
- * DescribeTrafficPackages请求参数结构体
+ * CC攻击Top数据
  */
-export interface DescribeTrafficPackagesRequest {
+export interface CcTopData {
     /**
-      * 分页查询起始地址，默认 0
+      * 客户端Ip
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Offset?: number;
+    Ip: string;
     /**
-      * 分页查询记录个数，默认100，最大1000
+      * 访问URL
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Limit?: number;
+    Url: string;
+    /**
+      * 客户端UserAgent
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserAgent: string;
+    /**
+      * 请求数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: number;
+    /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain: string;
 }
 /**
  * CreateClsLogTopic返回参数结构体
@@ -699,6 +729,70 @@ export interface PostSize {
     MaxSize?: number;
 }
 /**
+ * ListTopWafData请求参数结构体
+ */
+export interface ListTopWafDataRequest {
+    /**
+      * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+      */
+    EndTime: string;
+    /**
+      * 指定域名查询，不填写查询整个AppID下数据
+      */
+    Domain?: string;
+    /**
+      * 指定攻击类型
+不填则查询所有攻击类型的数据总和
+AttackType 映射如下:
+"webshell" : Webshell检测防护
+"oa" : 常见OA漏洞防护
+"xss" : XSS跨站脚本攻击防护
+"xxe" : XXE攻击防护
+"webscan" : 扫描器攻击漏洞防护
+"cms" : 常见CMS漏洞防护
+"upload" : 恶意文件上传攻击防护
+"sql" : SQL注入攻击防护
+"cmd_inject": 命令/代码注入攻击防护
+"osc" : 开源组件漏洞防护
+"file_read" : 任意文件读取
+"ldap" : LDAP注入攻击防护
+"other" : 其它漏洞防护
+      */
+    AttackType?: string;
+    /**
+      * 指定防御模式
+不填则查询所有防御模式的数据总和
+DefenceMode 映射如下：
+  observe = '观察模式'
+  intercept = '拦截模式'
+      */
+    DefenceMode?: string;
+    /**
+      * 排序对象，支持以下几种形式：
+url：攻击目标 url 排序
+ip：攻击源 IP 排序
+attackType：攻击类型排序
+domain：当查询整个AppID下数据时，按照域名请求量排序
+      */
+    Metric?: string;
+    /**
+      * 地域：mainland 或 overseas
+      */
+    Area?: string;
+    /**
+      * 指定攻击类型列表，取值参考AttackType
+      */
+    AttackTypes?: Array<string>;
+    /**
+      * 指定域名列表查询，不填写查询整个AppID下数据
+      */
+    Domains?: Array<string>;
+}
+/**
  * DescribeCdnData返回参数结构体
  */
 export interface DescribeCdnDataResponse {
@@ -810,6 +904,24 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Revalidate: string;
+}
+/**
+ * ListTopDDoSData请求参数结构体
+ */
+export interface ListTopDDoSDataRequest {
+    /**
+      * 查询Top数据的开始时间，格式为：2020-01-01 00:00:00
+      */
+    StartTime: string;
+    /**
+      * 查询Top数据的结束时间，格式为：2020-01-01 23:59:59
+支持 90 天内数据查询，时间跨度要小于等于7天
+      */
+    EndTime: string;
+    /**
+      * 查询Top的数量，不填默认值为10
+      */
+    TopCount?: number;
 }
 /**
  * 请求头部及请求url访问控制
@@ -1605,6 +1717,50 @@ export interface UserAgentFilter {
     FilterRules?: Array<UserAgentFilterRule>;
 }
 /**
+ * ListTopCcData请求参数结构体
+ */
+export interface ListTopCcDataRequest {
+    /**
+      * 查询Top数据的开始时间，格式为：2020-01-01 00:00:00
+      */
+    StartTime: string;
+    /**
+      * 查询Top数据的结束时间，格式为：2020-01-01 23:59:59
+支持 90 天内数据查询，不传此参数，表示查当天数据
+时间跨度要小于等于7天
+      */
+    EndTime: string;
+    /**
+      * 域名，不传此参数，表示查询账号级别数据
+      */
+    Domain?: string;
+    /**
+      * 统计指标：
+ip_url : Top IP+URL 默认值
+ua :  Top UA
+      */
+    Metric?: string;
+    /**
+      * cdn表示CDN数据，默认值
+ecdn表示ECDN数据
+      */
+    Source?: string;
+    /**
+      * 域名列表，不传此参数，表示查询账号级别数据
+      */
+    Domains?: Array<string>;
+    /**
+      * 执行动作，取值为：intercept/redirect/observe
+分别表示：拦截/重定向/观察
+为空表示查询所有执行动作数据
+      */
+    ActionName?: string;
+    /**
+      * 地域：mainland或overseas，表示国内或海外，不填写默认表示国内
+      */
+    Area?: string;
+}
+/**
  * DeleteScdnDomain请求参数结构体
  */
 export interface DeleteScdnDomainRequest {
@@ -1693,6 +1849,23 @@ export interface DescribeDiagnoseReportRequest {
       * 报告ID
       */
     ReportId: string;
+}
+/**
+ * 计费数据明细
+ */
+export interface ResourceBillingData {
+    /**
+      * 资源名称，根据查询条件不同分为以下几类：
+某一个具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+某一个项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度数据明细
+      */
+    Resource: string;
+    /**
+      * 计费数据详情
+      */
+    BillingData: Array<CdnData>;
 }
 /**
  * 域名基础配置信息，含 CNAME、状态、业务类型、加速区域、创建时间、更新时间、源站配置等。
@@ -2067,21 +2240,17 @@ export interface WafSubRuleStatus {
     SubIds: Array<number>;
 }
 /**
- * SCDN 事件日志查询条件
+ * DescribeTrafficPackages请求参数结构体
  */
-export interface ScdnEventLogConditions {
+export interface DescribeTrafficPackagesRequest {
     /**
-      * 匹配关键字，ip, attack_location
+      * 分页查询起始地址，默认 0
       */
-    Key: string;
+    Offset?: number;
     /**
-      * 逻辑操作符，取值 exclude, include
+      * 分页查询记录个数，默认100，最大1000
       */
-    Operator: string;
-    /**
-      * 匹配值，允许使用通配符(*)查询，匹配零个、单个、多个字符，例如 1.2.*
-      */
-    Value: string;
+    Limit?: number;
 }
 /**
  * 状态码缓存过期配置，默认情况下会对 404 状态码缓存 10 秒
@@ -2460,6 +2629,19 @@ path: 根据完整访问路径生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FilterType: string;
+}
+/**
+ * ListTopBotData返回参数结构体
+ */
+export interface ListTopBotDataResponse {
+    /**
+      * 域名BOT次数列表
+      */
+    Data: Array<DomainBotCount>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpdateDomainConfig请求参数结构体
@@ -2940,6 +3122,23 @@ export interface CreateScdnLogTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SCDN 事件日志查询条件
+ */
+export interface ScdnEventLogConditions {
+    /**
+      * 匹配关键字，ip, attack_location
+      */
+    Key: string;
+    /**
+      * 逻辑操作符，取值 exclude, include
+      */
+    Operator: string;
+    /**
+      * 匹配值，允许使用通配符(*)查询，匹配零个、单个、多个字符，例如 1.2.*
+      */
+    Value: string;
 }
 /**
  * WebSocket配置
@@ -4175,6 +4374,39 @@ export interface ScdnWafConfig {
     SubRuleSwitch?: Array<WafSubRuleStatus>;
 }
 /**
+ * 域名及其他指标Bot次数
+ */
+export interface DomainBotCount {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * BOT次数
+      */
+    Count: number;
+    /**
+      * Top指标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+    /**
+      * 国家/地区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Country: string;
+    /**
+      * 省份
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Province: string;
+    /**
+      * 运营商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Isp: string;
+}
+/**
  * CreateScdnFailedLogTask请求参数结构体
  */
 export interface CreateScdnFailedLogTaskRequest {
@@ -4313,13 +4545,14 @@ export interface ListScdnLogTasksRequest {
     Area?: string;
 }
 /**
- * SearchClsLog返回参数结构体
+ * ListTopCcData返回参数结构体
  */
-export interface SearchClsLogResponse {
+export interface ListTopCcDataResponse {
     /**
-      * 查询结果
+      * Top数据
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Logs: ClsSearchLogs;
+    Data: Array<CcTopData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5020,18 +5253,21 @@ export interface HttpHeaderRule {
     HeaderValue: string;
 }
 /**
- * 状态码缓存过期时间规则配置
+ * SCDN攻击数据Top展示
  */
-export interface StatusCodeCacheRule {
+export interface ScdnTopDomainData {
     /**
-      * http 状态码
-支持 403、404 状态码
+      * 域名
       */
-    StatusCode: string;
+    Domain: string;
     /**
-      * 状态码缓存过期时间，单位秒
+      * 请求量
       */
-    CacheTime: number;
+    Value: number;
+    /**
+      * 百分比
+      */
+    Percent: number;
 }
 /**
  * CreateScdnDomain返回参数结构体
@@ -5111,6 +5347,19 @@ overseas：境外
       * 日志包文件名
       */
     LogName: string;
+}
+/**
+ * StopScdnDomain返回参数结构体
+ */
+export interface StopScdnDomainResponse {
+    /**
+      * 关闭结果，Success表示成功
+      */
+    Result?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetDisableRecords请求参数结构体
@@ -5522,17 +5771,18 @@ export interface CookieKey {
     Value?: string;
 }
 /**
- * StopScdnDomain返回参数结构体
+ * 状态码缓存过期时间规则配置
  */
-export interface StopScdnDomainResponse {
+export interface StatusCodeCacheRule {
     /**
-      * 关闭结果，Success表示成功
+      * http 状态码
+支持 403、404 状态码
       */
-    Result?: string;
+    StatusCode: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 状态码缓存过期时间，单位秒
       */
-    RequestId?: string;
+    CacheTime: number;
 }
 /**
  * VerifyDomainRecord请求参数结构体
@@ -6063,21 +6313,29 @@ off：关闭
     Switch: string;
 }
 /**
- * 计费数据明细
+ * ListTopWafData返回参数结构体
  */
-export interface ResourceBillingData {
+export interface ListTopWafDataResponse {
     /**
-      * 资源名称，根据查询条件不同分为以下几类：
-某一个具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-某一个项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度数据明细
+      * 攻击类型统计
       */
-    Resource: string;
+    TopTypeData: Array<ScdnTypeData>;
     /**
-      * 计费数据详情
+      * IP统计
       */
-    BillingData: Array<CdnData>;
+    TopIpData: Array<ScdnTopData>;
+    /**
+      * URL统计
+      */
+    TopUrlData: Array<ScdnTopUrlData>;
+    /**
+      * 域名统计
+      */
+    TopDomainData: Array<ScdnTopDomainData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询结果排序条件
@@ -6169,6 +6427,38 @@ overseas：境外
 global：全球
       */
     Area?: string;
+}
+/**
+ * ListTopBotData请求参数结构体
+ */
+export interface ListTopBotDataRequest {
+    /**
+      * 获取Top量，取值范围[1-10]
+      */
+    TopCount: number;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * session表示查询BOT会话的Top信息
+ip表示查询BOT客户端IP的Top信息
+
+不填代表获取会话信息
+      */
+    Metric?: string;
+    /**
+      * 域名，仅当Metric=ip时有效，不填写表示使用Domains参数
+      */
+    Domain?: string;
+    /**
+      * 域名，仅当Metric=ip，并且Domain为空时有效，不填写表示获取AppID信息
+      */
+    Domains?: Array<string>;
 }
 /**
  * PushUrlsCache返回参数结构体
@@ -6729,6 +7019,19 @@ delete：刷新全部资源
     CreateTime: string;
 }
 /**
+ * DDoS攻击Top数据
+ */
+export interface DDoSTopData {
+    /**
+      * 攻击类型
+      */
+    AttackType: string;
+    /**
+      * 攻击带宽，单位：bps
+      */
+    Value: number;
+}
+/**
  * 回源超时配置
  */
 export interface OriginPullTimeout {
@@ -6747,6 +7050,19 @@ export interface OriginPullTimeout {
  * DeleteCdnDomain返回参数结构体
  */
 export interface DeleteCdnDomainResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ListTopDDoSData返回参数结构体
+ */
+export interface ListTopDDoSDataResponse {
+    /**
+      * DDoS Top数据
+      */
+    Data: Array<DDoSTopData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

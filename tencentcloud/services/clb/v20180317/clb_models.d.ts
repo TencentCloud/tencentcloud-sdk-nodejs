@@ -1079,6 +1079,10 @@ export interface ModifyLoadBalancerAttributesRequest {
       * 是否开启SnatPro
       */
     SnatPro?: boolean;
+    /**
+      * 是否开启删除保护
+      */
+    DeleteProtect?: boolean;
 }
 /**
  * 转发目标，即绑定在负载均衡上的后端服务

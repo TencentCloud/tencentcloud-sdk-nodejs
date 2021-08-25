@@ -1651,17 +1651,17 @@ export interface GetPublicKeyResponse {
   /**
    * CMK的唯一标识。
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 经过base64编码的公钥内容。
    */
-  PublicKey?: string
+  PublicKey: string
 
   /**
    * PEM格式的公钥内容。
    */
-  PublicKeyPem?: string
+  PublicKeyPem: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

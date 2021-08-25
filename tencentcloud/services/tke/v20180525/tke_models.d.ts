@@ -3021,6 +3021,11 @@ export interface InstanceAdvancedSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DesiredPodNumber: number;
+    /**
+      * base64 编码的用户脚本，在初始化节点之前执行，目前只对添加已有节点生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PreStartUserScript: string;
 }
 /**
  * 地域属性信息
@@ -3597,7 +3602,12 @@ export interface DescribeClusterEndpointStatusResponse {
 /**
  * 描述了 “云自动化助手” 服务相关的信息
  */
-export declare type RunAutomationServiceEnabled = null;
+export interface RunAutomationServiceEnabled {
+    /**
+      * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+      */
+    Enabled?: boolean;
+}
 /**
  * UpgradeClusterInstances返回参数结构体
  */

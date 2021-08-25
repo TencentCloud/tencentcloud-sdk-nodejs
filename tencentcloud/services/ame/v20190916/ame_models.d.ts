@@ -141,6 +141,59 @@ Unit :ms
     FullUrl: string;
 }
 /**
+ * 歌曲变更细节
+ */
+export interface MusicDetailInfo {
+    /**
+      * 资源方音乐Id
+      */
+    MusicId: string;
+    /**
+      * 资源方识别信息
+      */
+    AmeId: string;
+    /**
+      * 分类标签
+      */
+    Tags?: Array<string>;
+    /**
+      * 关键词
+      */
+    HitWords?: Array<string>;
+    /**
+      * 节奏信息
+      */
+    Bpm?: number;
+    /**
+      * 商业化权益
+      */
+    Score?: number;
+    /**
+      * 应用歌曲信息,1.图文/短视频,2.网络直播,3.网络电台FM,4.免费游戏,5.商业游戏,6.网店网站设计,7.广告营销,8.网络长视频
+      */
+    Scene?: Array<string>;
+    /**
+      * 应用地域,1. 中国大陆,2. 中国含港澳台,3. 全球
+      */
+    Region?: Array<string>;
+    /**
+      * 授权时间,1. 1年, 5. 随片永久
+      */
+    AuthPeriod?: string;
+    /**
+      * 商业化授权，1. 支持商业化 ,2. 不支持商业化
+      */
+    Commercialization?: string;
+    /**
+      * 跨平台传播，1. 支持跨平台传播 ,2. 不支持跨平台传播
+      */
+    Platform?: string;
+    /**
+      * 传播渠道
+      */
+    Channel?: string;
+}
+/**
  * DescribeKTVMusicDetail请求参数结构体
  */
 export interface DescribeKTVMusicDetailRequest {
@@ -767,57 +820,17 @@ export interface DescribePackagesRequest {
     Length?: number;
 }
 /**
- * 歌曲变更细节
+ * DescribeMusicSaleStatus请求参数结构体
  */
-export interface MusicDetailInfo {
+export interface DescribeMusicSaleStatusRequest {
     /**
-      * 资源方音乐Id
+      * 歌曲Id集合，可传单个，也可传多个，上线查询单次50个
       */
-    MusicId: string;
+    MusicIds: Array<string>;
     /**
-      * 资源方识别信息
+      * 查询哪个渠道的数据，1为曲库包，2为单曲
       */
-    AmeId: string;
-    /**
-      * 分类标签
-      */
-    Tags?: Array<string>;
-    /**
-      * 关键词
-      */
-    HitWords?: Array<string>;
-    /**
-      * 节奏信息
-      */
-    Bpm?: number;
-    /**
-      * 商业化权益
-      */
-    Score?: number;
-    /**
-      * 应用歌曲信息,1.图文/短视频,2.网络直播,3.网络电台FM,4.免费游戏,5.商业游戏,6.网店网站设计,7.广告营销,8.网络长视频
-      */
-    Scene?: Array<string>;
-    /**
-      * 应用地域,1. 中国大陆,2. 中国含港澳台,3. 全球
-      */
-    Region?: Array<string>;
-    /**
-      * 授权时间,1. 1年, 5. 随片永久
-      */
-    AuthPeriod?: string;
-    /**
-      * 商业化授权，1. 支持商业化 ,2. 不支持商业化
-      */
-    Commercialization?: string;
-    /**
-      * 跨平台传播，1. 支持跨平台传播 ,2. 不支持跨平台传播
-      */
-    Platform?: string;
-    /**
-      * 传播渠道
-      */
-    Channel?: string;
+    PurchaseType: number;
 }
 /**
  * SearchKTVMusics请求参数结构体
@@ -912,6 +925,32 @@ export interface DescribeItemByIdResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Items?: Array<Item>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 返回单曲页面歌曲是否在售状态
+ */
+export interface MusicStatus {
+    /**
+      * 歌曲Id
+      */
+    MusicId: string;
+    /**
+      * 在售状态,0为在售，1为临时下架，2为永久下架
+      */
+    SaleStatus: number;
+}
+/**
+ * DescribeMusicSaleStatus返回参数结构体
+ */
+export interface DescribeMusicSaleStatusResponse {
+    /**
+      * musicId对应歌曲状态
+      */
+    MusicStatusSet: Array<MusicStatus>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
