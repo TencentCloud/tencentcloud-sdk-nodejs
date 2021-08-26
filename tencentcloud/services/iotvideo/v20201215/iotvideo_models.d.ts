@@ -325,7 +325,7 @@ export interface ModifyDataForwardRequest {
       */
     ProductId: string;
     /**
-      * 转发地址。
+      * 转发地址。如果有鉴权Token，则需要自行传入，例如 [{\"forward\":{\"api\":\"http://123.207.117.108:1080/sub.php\",\"token\":\"testtoken\"}}]
       */
     ForwardAddr: string;
     /**
@@ -1737,15 +1737,15 @@ export interface CreateProductRequest {
       */
     Features: Array<string>;
     /**
-      * 设备操作系统 Linux
+      * 设备操作系统，通用设备填default
       */
     ChipOs: string;
     /**
-      * 芯片厂商id
+      * 芯片厂商id，通用设备填default
       */
     ChipManufactureId: string;
     /**
-      * 芯片id
+      * 芯片id，通用设备填default
       */
     ChipId: string;
     /**
@@ -2807,7 +2807,7 @@ export interface CreateDataForwardRequest {
       */
     ProductId: string;
     /**
-      * 转发地址。
+      * 转发地址。如果有鉴权Token，则需要自行传入，例如 [{\"forward\":{\"api\":\"http://123.207.117.108:1080/sub.php\",\"token\":\"testtoken\"}}]
       */
     ForwardAddr: string;
     /**

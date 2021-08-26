@@ -30,7 +30,7 @@ export interface RefreshDomainResponse {
  */
 export interface DeleteDomainRequest {
   /**
-   * 域名ID，可通过搜索域名接口获得
+   * 域名ID，可通过<a href="https://cloud.tencent.com/document/api/1084/49339">搜索域名</a>接口获得
    */
   DomainId: number
 }
@@ -206,7 +206,7 @@ export interface CreateDomainRequest {
   IP?: string
 
   /**
-   * 是否开启通知告警
+   * 是否开启通知告警；true：开启通知告警，false：关闭通知告警
    */
   Notice?: boolean
 
@@ -388,7 +388,7 @@ export interface DescribeDomainsResponse {
   /**
    * 列表数据
    */
-  Data?: DescribeDomains
+  Data: DescribeDomains
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -576,8 +576,14 @@ export interface DescribeDomainsRequest {
   Limit: number
 
   /**
-   * 搜索的类型 Enums(none,tags,grade,brand,code,hash,limit)
-   */
+      * 搜索的类型有：none，tags，grade，brand，code，hash，limit。
+选tags，入参请填Tag，
+选grade，入参请填Grade，
+选brand，入参请填Brand，
+选code，入参请填Code，
+选hash，入参请填Hash
+选limit，标识只返回数量信息
+      */
   SearchType: string
 
   /**

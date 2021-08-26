@@ -2641,6 +2641,11 @@ export interface CreateExternalAnchorRequest {
    * 身份证反面图片下载链接
    */
   IdCardReverse?: string
+
+  /**
+   * 指定分配的代理商ID
+   */
+  AgentId?: string
 }
 
 /**

@@ -1753,6 +1753,16 @@ lc表示最小连接数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnhealthyThreshold: number;
+    /**
+      * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailoverSwitch: number;
+    /**
+      * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessionPersist: number;
 }
 /**
  * CreateSecurityRules返回参数结构体
@@ -2775,7 +2785,7 @@ export interface ProxyGroupDetail {
       */
     IPAddressVersion: string;
     /**
-      * 通道组类型，可取值：Thunder、Accelerator，默认值Thunder
+      * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示游戏加速器通道组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PackageType: string;
@@ -4291,6 +4301,11 @@ export interface UDPListener {
       * 监听器创建时间，Unix时间戳
       */
     CreateTime: number;
+    /**
+      * 是否开启会话保持选项：0关闭， 非0开启，非0值为会话保持时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessionPersist: number;
 }
 /**
  * 通道信息
@@ -4438,6 +4453,11 @@ UNKNOWN表示未知状态。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NetworkType: string;
+    /**
+      * 通道套餐类型：Thunder表示标准通道，Accelerator表示游戏加速器通道。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageType: string;
 }
 /**
  * RemoveRealServers返回参数结构体

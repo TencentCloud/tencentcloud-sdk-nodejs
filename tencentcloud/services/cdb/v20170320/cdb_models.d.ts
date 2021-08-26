@@ -1616,11 +1616,11 @@ export interface BinlogInfo {
       */
     Date: string;
     /**
-      * 内网下载地址
+      * 下载地址
       */
     IntranetUrl: string;
     /**
-      * 外网下载地址
+      * 下载地址
       */
     InternetUrl: string;
     /**
@@ -2177,11 +2177,11 @@ export interface BackupInfo {
       */
     Date: string;
     /**
-      * 内网下载地址
+      * 下载地址
       */
     IntranetUrl: string;
     /**
-      * 外网下载地址
+      * 下载地址
       */
     InternetUrl: string;
     /**

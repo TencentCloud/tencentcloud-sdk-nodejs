@@ -973,12 +973,12 @@ export interface UploadRevokeLetterResponse {
   /**
    * 证书 ID。
    */
-  CertificateId?: string
+  CertificateId: string
 
   /**
    * 是否成功。
    */
-  IsSuccess?: boolean
+  IsSuccess: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
