@@ -18,13 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UpdateDevicesEnableStateResponse,
   DeleteProjectRequest,
-  ProjectEntry,
+  DevicesItem,
   DescribeModelDefinitionResponse,
+  DeleteDevicesResponse,
   ModifyStudioProductResponse,
   DeleteStudioProductResponse,
   GetDeviceListResponse,
-  ControlDeviceDataRequest,
   DeleteLoRaFrequencyResponse,
   DeleteTopicRuleResponse,
   ModifyModelDefinitionRequest,
@@ -36,6 +37,7 @@ import {
   CreateStudioProductRequest,
   ProductModelDefinition,
   ReleaseStudioProductRequest,
+  ListEventHistoryRequest,
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   DescribeStudioProductResponse,
@@ -47,7 +49,7 @@ import {
   DescribeLoRaFrequencyRequest,
   DeleteDeviceRequest,
   DeleteLoRaFrequencyRequest,
-  ListEventHistoryRequest,
+  ControlDeviceDataRequest,
   ListFirmwaresResponse,
   ReleaseStudioProductResponse,
   DeleteLoRaGatewayRequest,
@@ -59,6 +61,7 @@ import {
   CreateProjectResponse,
   ModifyTopicRuleRequest,
   DeleteProjectResponse,
+  DeleteDevicesRequest,
   CallDeviceActionAsyncRequest,
   CreateDeviceResponse,
   CreateDeviceRequest,
@@ -79,6 +82,7 @@ import {
   GetCOSURLResponse,
   GetTopicRuleListResponse,
   DisableTopicRuleRequest,
+  ProjectEntry,
   EventHistoryItem,
   TopicRule,
   TopicRulePayload,
@@ -87,6 +91,7 @@ import {
   UpdateFirmwareRequest,
   LoRaGatewayLocation,
   DescribeDeviceRequest,
+  UpdateDevicesEnableStateRequest,
   ModifyTopicRuleResponse,
   DescribeLoRaFrequencyResponse,
   SearchStudioProductResponse,
@@ -195,6 +200,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLoRaGatewayResponse) => void
   ): Promise<DeleteLoRaGatewayResponse> {
     return this.request("DeleteLoRaGateway", req, cb)
+  }
+
+  /**
+   * 批量删除设备
+   */
+  async DeleteDevices(
+    req: DeleteDevicesRequest,
+    cb?: (error: string, rep: DeleteDevicesResponse) => void
+  ): Promise<DeleteDevicesResponse> {
+    return this.request("DeleteDevices", req, cb)
   }
 
   /**
@@ -325,6 +340,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceDataHistoryResponse) => void
   ): Promise<DescribeDeviceDataHistoryResponse> {
     return this.request("DescribeDeviceDataHistory", req, cb)
+  }
+
+  /**
+   * 批量禁用启用设备
+   */
+  async UpdateDevicesEnableState(
+    req: UpdateDevicesEnableStateRequest,
+    cb?: (error: string, rep: UpdateDevicesEnableStateResponse) => void
+  ): Promise<UpdateDevicesEnableStateResponse> {
+    return this.request("UpdateDevicesEnableState", req, cb)
   }
 
   /**

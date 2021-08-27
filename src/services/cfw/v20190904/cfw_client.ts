@@ -105,6 +105,8 @@ import {
   ModifyAllVPCSwitchStatusRequest,
   ModifySequenceRulesResponse,
   DeleteSecurityGroupAllRuleResponse,
+  DescribeResourceGroupNewResponse,
+  DescribeResourceGroupNewRequest,
   ModifyBlockTopRequest,
   DeleteAcRuleResponse,
   IocListData,
@@ -299,6 +301,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSecurityGroupApiRulesResponse) => void
   ): Promise<CreateSecurityGroupApiRulesResponse> {
     return this.request("CreateSecurityGroupApiRules", req, cb)
+  }
+
+  /**
+   * DescribeResourceGroupNew资产中心资产树信息
+   */
+  async DescribeResourceGroupNew(
+    req: DescribeResourceGroupNewRequest,
+    cb?: (error: string, rep: DescribeResourceGroupNewResponse) => void
+  ): Promise<DescribeResourceGroupNewResponse> {
+    return this.request("DescribeResourceGroupNew", req, cb)
   }
 
   /**

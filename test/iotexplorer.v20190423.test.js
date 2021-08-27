@@ -78,6 +78,16 @@ it("iotexplorer.v20190423.DeleteLoRaGateway", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DeleteDevices", async function () {
+    try {
+       const data = await client.DeleteDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateStudioProduct", async function () {
     try {
        const data = await client.CreateStudioProduct({})
@@ -201,6 +211,16 @@ it("iotexplorer.v20190423.GetProjectList", async function () {
 it("iotexplorer.v20190423.DescribeDeviceDataHistory", async function () {
     try {
        const data = await client.DescribeDeviceDataHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.UpdateDevicesEnableState", async function () {
+    try {
+       const data = await client.UpdateDevicesEnableState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -6319,6 +6319,7 @@ export interface DescribeCcnRoutesRequest {
 <li>instance-type - String -（过滤条件）下一跳类型。</li>
 <li>instance-region - String -（过滤条件）下一跳所属地域。</li>
 <li>instance-id - String -（过滤条件）下一跳实例ID。</li>
+<li>route-table-id - String -（过滤条件）路由表ID列表，形如ccntr-1234edfr，可以根据路由表ID 过滤。</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -9769,11 +9770,11 @@ export interface DescribeCcnRoutesResponse {
     /**
       * 符合条件的对象数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * CCN路由策略对象。
       */
-    RouteSet?: Array<CcnRoute>;
+    RouteSet: Array<CcnRoute>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10493,7 +10494,7 @@ export interface CreateAssistantCidrResponse {
       * 辅助CIDR数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AssistantCidrSet?: Array<AssistantCidr>;
+    AssistantCidrSet: Array<AssistantCidr>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

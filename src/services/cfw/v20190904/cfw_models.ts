@@ -2167,6 +2167,56 @@ export interface DeleteSecurityGroupAllRuleResponse {
 }
 
 /**
+ * DescribeResourceGroupNew返回参数结构体
+ */
+export interface DescribeResourceGroupNewResponse {
+  /**
+   * 返回树形结构
+   */
+  Data: string
+
+  /**
+   * 无
+   */
+  UnResourceNum: number
+
+  /**
+   * 无
+   */
+  ReturnMsg: string
+
+  /**
+   * 无
+   */
+  ReturnCode: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeResourceGroupNew请求参数结构体
+ */
+export interface DescribeResourceGroupNewRequest {
+  /**
+   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
+   */
+  QueryType: string
+
+  /**
+   * 资产组id  全部传0
+   */
+  GroupId?: string
+
+  /**
+   * all  包含子组 own自己
+   */
+  ShowType?: string
+}
+
+/**
  * ModifyBlockTop请求参数结构体
  */
 export interface ModifyBlockTopRequest {

@@ -138,6 +138,16 @@ it("cfw.v20190904.CreateSecurityGroupApiRules", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeResourceGroupNew", async function () {
+    try {
+       const data = await client.DescribeResourceGroupNew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DeleteAllAccessControlRule", async function () {
     try {
        const data = await client.DeleteAllAccessControlRule({})

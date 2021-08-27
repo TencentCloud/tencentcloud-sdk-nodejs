@@ -102,6 +102,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSecurityGroupApiRules", req, cb);
     }
     /**
+     * DescribeResourceGroupNew资产中心资产树信息
+     */
+    async DescribeResourceGroupNew(req, cb) {
+        return this.request("DescribeResourceGroupNew", req, cb);
+    }
+    /**
      * 全部删除规则
      */
     async DeleteAllAccessControlRule(req, cb) {

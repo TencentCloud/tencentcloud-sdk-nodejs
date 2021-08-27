@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLoRaGateway", req, cb);
     }
     /**
+     * 批量删除设备
+     */
+    async DeleteDevices(req, cb) {
+        return this.request("DeleteDevices", req, cb);
+    }
+    /**
      * 为用户提供新建产品的能力，用于管理用户的设备
      */
     async CreateStudioProduct(req, cb) {
@@ -140,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDeviceDataHistory(req, cb) {
         return this.request("DescribeDeviceDataHistory", req, cb);
+    }
+    /**
+     * 批量禁用启用设备
+     */
+    async UpdateDevicesEnableState(req, cb) {
+        return this.request("UpdateDevicesEnableState", req, cb);
     }
     /**
      * 为用户提供同步调用设备行为的能力。

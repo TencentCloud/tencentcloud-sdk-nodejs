@@ -16,6 +16,28 @@
  */
 
 /**
+ * UpdateDevicesEnableState返回参数结构体
+ */
+export interface UpdateDevicesEnableStateResponse {
+  /**
+      * 删除的结果代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultCode: string
+
+  /**
+      * 删除的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultMessage: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteProject请求参数结构体
  */
 export interface DeleteProjectRequest {
@@ -26,33 +48,18 @@ export interface DeleteProjectRequest {
 }
 
 /**
- * 项目详情
+ * ProductId -> DeviceName
  */
-export interface ProjectEntry {
+export interface DevicesItem {
   /**
-   * 项目ID
+   * 产品id
    */
-  ProjectId: string
+  ProductId: string
 
   /**
-   * 项目名称
+   * 设备名称
    */
-  ProjectName: string
-
-  /**
-   * 项目描述
-   */
-  ProjectDesc: string
-
-  /**
-   * 创建时间，unix时间戳
-   */
-  CreateTime: number
-
-  /**
-   * 更新时间，unix时间戳
-   */
-  UpdateTime: number
+  DeviceName: string
 }
 
 /**
@@ -63,6 +70,28 @@ export interface DescribeModelDefinitionResponse {
    * 产品数据模板
    */
   Model: ProductModelDefinition
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDevices返回参数结构体
+ */
+export interface DeleteDevicesResponse {
+  /**
+      * 删除的结果代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultCode: string
+
+  /**
+      * 删除的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultMessage: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -103,53 +132,18 @@ export interface GetDeviceListResponse {
       * 返回的设备列表, 注意列表设备的 DevicePsk 为空, 要获取设备的 DevicePsk 请使用 DescribeDevice
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Devices?: Array<DeviceInfo>
+  Devices: Array<DeviceInfo>
 
   /**
       * 产品下的设备总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ControlDeviceData请求参数结构体
- */
-export interface ControlDeviceDataRequest {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-
-  /**
-   * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
-   */
-  Data: string
-
-  /**
-   * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
-   */
-  Method?: string
-
-  /**
-   * 设备ID，该字段有值将代替 ProductId/DeviceName , 通常情况不需要填写
-   */
-  DeviceId?: string
-
-  /**
-   * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
-   */
-  DataTimestamp?: number
 }
 
 /**
@@ -372,6 +366,51 @@ export interface ReleaseStudioProductRequest {
    * 产品DevStatus
    */
   DevStatus: string
+}
+
+/**
+ * ListEventHistory请求参数结构体
+ */
+export interface ListEventHistoryRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 搜索的事件类型：alert 表示告警，fault 表示故障，info 表示信息，为空则表示查询上述所有类型事件
+   */
+  Type?: string
+
+  /**
+   * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
+   */
+  StartTime?: number
+
+  /**
+   * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
+   */
+  EndTime?: number
+
+  /**
+   * 搜索上下文, 用作查询游标
+   */
+  Context?: string
+
+  /**
+   * 单次获取的历史数据项目的最大数量, 缺省10
+   */
+  Size?: number
+
+  /**
+   * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
+   */
+  EventId?: string
 }
 
 /**
@@ -675,9 +714,9 @@ export interface DeleteLoRaFrequencyRequest {
 }
 
 /**
- * ListEventHistory请求参数结构体
+ * ControlDeviceData请求参数结构体
  */
-export interface ListEventHistoryRequest {
+export interface ControlDeviceDataRequest {
   /**
    * 产品ID
    */
@@ -689,34 +728,24 @@ export interface ListEventHistoryRequest {
   DeviceName: string
 
   /**
-   * 搜索的事件类型：alert 表示告警，fault 表示故障，info 表示信息，为空则表示查询上述所有类型事件
+   * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
    */
-  Type?: string
+  Data: string
 
   /**
-   * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
+   * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
    */
-  StartTime?: number
+  Method?: string
 
   /**
-   * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
+   * 设备ID，该字段有值将代替 ProductId/DeviceName , 通常情况不需要填写
    */
-  EndTime?: number
+  DeviceId?: string
 
   /**
-   * 搜索上下文, 用作查询游标
+   * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
    */
-  Context?: string
-
-  /**
-   * 单次获取的历史数据项目的最大数量, 缺省10
-   */
-  Size?: number
-
-  /**
-   * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
-   */
-  EventId?: string
+  DataTimestamp?: number
 }
 
 /**
@@ -953,6 +982,16 @@ export interface DeleteProjectResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteDevices请求参数结构体
+ */
+export interface DeleteDevicesRequest {
+  /**
+   * 多个设备标识
+   */
+  DevicesItems: Array<DevicesItem>
 }
 
 /**
@@ -1445,6 +1484,11 @@ export interface GetDeviceListRequest {
    * 需要过滤的设备名称
    */
   DeviceName?: string
+
+  /**
+   * 项目ID。产品 ID 为 -1 时，该参数必填
+   */
+  ProjectId?: string
 }
 
 /**
@@ -1490,6 +1534,36 @@ export interface DisableTopicRuleRequest {
    * 规则名称
    */
   RuleName: string
+}
+
+/**
+ * 项目详情
+ */
+export interface ProjectEntry {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+
+  /**
+   * 项目名称
+   */
+  ProjectName: string
+
+  /**
+   * 项目描述
+   */
+  ProjectDesc: string
+
+  /**
+   * 创建时间，unix时间戳
+   */
+  CreateTime: number
+
+  /**
+   * 更新时间，unix时间戳
+   */
+  UpdateTime: number
 }
 
 /**
@@ -1748,6 +1822,21 @@ export interface DescribeDeviceRequest {
    * 设备ID，该字段有值将代替 ProductId/DeviceName
    */
   DeviceId?: string
+}
+
+/**
+ * UpdateDevicesEnableState请求参数结构体
+ */
+export interface UpdateDevicesEnableStateRequest {
+  /**
+   * 多个设备标识
+   */
+  DevicesItems: Array<DevicesItem>
+
+  /**
+   * 1：启用；0：禁用
+   */
+  Status: number
 }
 
 /**
