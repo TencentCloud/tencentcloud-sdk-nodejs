@@ -24,6 +24,7 @@ import {
   DeleteUserRequest,
   PartitionOffset,
   DescribeACLRequest,
+  DescribeTopicSyncReplicaResponse,
   DescribeTopicAttributesRequest,
   DescribeInstanceAttributesRequest,
   ConsumerGroup,
@@ -70,8 +71,9 @@ import {
   DeleteAclResponse,
   DynamicRetentionTime,
   DescribeTopicSubscribeGroupRequest,
-  DescribeRouteRequest,
+  InstanceDetailResponse,
   FetchMessageByOffsetRequest,
+  TopicInSyncReplicaInfo,
   DescribeRegionRequest,
   InstanceConfigDO,
   DeleteAclRuleResponse,
@@ -112,7 +114,8 @@ import {
   CreateInstancePreResponse,
   DescribeInstancesDetailRequest,
   ModifyPasswordResponse,
-  InstanceDetailResponse,
+  DescribeRouteRequest,
+  TopicInSyncReplicaResult,
   GroupInfoResponse,
   TopicAttributesResponse,
   InstanceResponse,
@@ -133,6 +136,7 @@ import {
   DeleteTopicIpWhiteListRequest,
   DescribeGroupOffsetsRequest,
   DescribeUserRequest,
+  DescribeTopicSyncReplicaRequest,
   InstanceDetail,
   DescribeTopicDetailResponse,
   SubscribedInfo,
@@ -417,6 +421,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserResponse) => void
   ): Promise<DeleteUserResponse> {
     return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 获取Topic 副本详情信息
+   */
+  async DescribeTopicSyncReplica(
+    req: DescribeTopicSyncReplicaRequest,
+    cb?: (error: string, rep: DescribeTopicSyncReplicaResponse) => void
+  ): Promise<DescribeTopicSyncReplicaResponse> {
+    return this.request("DescribeTopicSyncReplica", req, cb)
   }
 
   /**

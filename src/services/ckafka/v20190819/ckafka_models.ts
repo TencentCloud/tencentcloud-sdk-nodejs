@@ -222,6 +222,21 @@ export interface DescribeACLRequest {
 }
 
 /**
+ * DescribeTopicSyncReplica返回参数结构体
+ */
+export interface DescribeTopicSyncReplicaResponse {
+  /**
+   * 返回topic 副本详情
+   */
+  Result: TopicInSyncReplicaResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTopicAttributes请求参数结构体
  */
 export interface DescribeTopicAttributesRequest {
@@ -1169,13 +1184,18 @@ export interface DescribeTopicSubscribeGroupRequest {
 }
 
 /**
- * DescribeRoute请求参数结构体
+ * 实例详情返回结果
  */
-export interface DescribeRouteRequest {
+export interface InstanceDetailResponse {
   /**
-   * 实例唯一id
+   * 符合条件的实例总数
    */
-  InstanceId: string
+  TotalCount: number
+
+  /**
+   * 符合条件的实例详情列表
+   */
+  InstanceList: Array<InstanceDetail>
 }
 
 /**
@@ -1201,6 +1221,55 @@ export interface FetchMessageByOffsetRequest {
    * 位点信息
    */
   Offset?: number
+}
+
+/**
+ * topic副本及详细信息
+ */
+export interface TopicInSyncReplicaInfo {
+  /**
+   * 分区名称
+   */
+  Partition: string
+
+  /**
+   * Leader Id
+   */
+  Leader: number
+
+  /**
+   * 副本集
+   */
+  Replica: string
+
+  /**
+   * ISR
+   */
+  InSyncReplica: string
+
+  /**
+      * 起始Offset
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginOffset: number
+
+  /**
+      * 末端Offset
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndOffset: number
+
+  /**
+      * 消息数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MessageCount: number
+
+  /**
+      * 未同步副本集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutOfSyncReplica: string
 }
 
 /**
@@ -2268,18 +2337,28 @@ export interface ModifyPasswordResponse {
 }
 
 /**
- * 实例详情返回结果
+ * DescribeRoute请求参数结构体
  */
-export interface InstanceDetailResponse {
+export interface DescribeRouteRequest {
   /**
-   * 符合条件的实例总数
+   * 实例唯一id
    */
-  TotalCount: number
+  InstanceId: string
+}
+
+/**
+ * Topic 副本及详情数据集合
+ */
+export interface TopicInSyncReplicaResult {
+  /**
+   * Topic详情及副本合集
+   */
+  TopicInSyncReplicaList: Array<TopicInSyncReplicaInfo>
 
   /**
-   * 符合条件的实例详情列表
+   * 总计个数
    */
-  InstanceList: Array<InstanceDetail>
+  TotalCount: number
 }
 
 /**
@@ -2858,6 +2937,36 @@ export interface DescribeUserRequest {
    * 本次返回个数
    */
   Limit?: number
+}
+
+/**
+ * DescribeTopicSyncReplica请求参数结构体
+ */
+export interface DescribeTopicSyncReplicaRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 主题名称
+   */
+  TopicName: string
+
+  /**
+   * 偏移量，不填默认为0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，不填则默认10，最大值20。
+   */
+  Limit?: number
+
+  /**
+   * 仅筛选未同步副本
+   */
+  OutOfSyncReplicaOnly?: boolean
 }
 
 /**

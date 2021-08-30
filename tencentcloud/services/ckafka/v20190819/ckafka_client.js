@@ -191,6 +191,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUser", req, cb);
     }
     /**
+     * 获取Topic 副本详情信息
+     */
+    async DescribeTopicSyncReplica(req, cb) {
+        return this.request("DescribeTopicSyncReplica", req, cb);
+    }
+    /**
      * 获取消费分组offset
      */
     async DescribeGroupOffsets(req, cb) {
