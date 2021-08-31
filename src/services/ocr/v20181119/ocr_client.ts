@@ -63,6 +63,7 @@ import {
   MainlandPermitOCRRequest,
   EnterpriseLicenseOCRRequest,
   BankCardOCRRequest,
+  StructuralItem,
   PropOwnerCertOCRResponse,
   FinanBillInfo,
   TrainTicketOCRResponse,
@@ -71,6 +72,7 @@ import {
   ArithmeticOCRResponse,
   FormulaOCRResponse,
   BusInvoiceInfo,
+  SmartStructuralOCRRequest,
   TextVatInvoice,
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
@@ -123,6 +125,7 @@ import {
   Detail,
   EnglishOCRRequest,
   VatInvoiceVerifyResponse,
+  SmartStructuralOCRResponse,
   DetectedWords,
   VerifyEnterpriseFourFactorsRequest,
   GeneralAccurateOCRRequest,
@@ -801,6 +804,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: HmtResidentPermitOCRResponse) => void
   ): Promise<HmtResidentPermitOCRResponse> {
     return this.request("HmtResidentPermitOCR", req, cb)
+  }
+
+  /**
+   * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
+   */
+  async SmartStructuralOCR(
+    req: SmartStructuralOCRRequest,
+    cb?: (error: string, rep: SmartStructuralOCRResponse) => void
+  ): Promise<SmartStructuralOCRResponse> {
+    return this.request("SmartStructuralOCR", req, cb)
   }
 
   /**

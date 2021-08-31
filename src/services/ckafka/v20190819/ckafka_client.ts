@@ -47,6 +47,7 @@ import {
   Tag,
   GroupResponse,
   DescribeTopicAttributesResponse,
+  DeleteRouteTriggerTimeRequest,
   RouteResponse,
   DescribeGroupResponse,
   DeleteAclRuleRequest,
@@ -81,6 +82,7 @@ import {
   DescribeGroupInfoRequest,
   DescribeGroupInfoResponse,
   ModifyTopicAttributesResponse,
+  DeleteRouteTriggerTimeResponse,
   DescribeUserResponse,
   AppIdResponse,
   DescribeTopicRequest,
@@ -411,6 +413,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAclRuleResponse) => void
   ): Promise<DeleteAclRuleResponse> {
     return this.request("DeleteAclRule", req, cb)
+  }
+
+  /**
+   * 修改删除路由延迟触发时间
+   */
+  async DeleteRouteTriggerTime(
+    req: DeleteRouteTriggerTimeRequest,
+    cb?: (error: string, rep: DeleteRouteTriggerTimeResponse) => void
+  ): Promise<DeleteRouteTriggerTimeResponse> {
+    return this.request("DeleteRouteTriggerTime", req, cb)
   }
 
   /**

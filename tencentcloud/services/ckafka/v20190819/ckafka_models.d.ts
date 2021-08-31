@@ -533,6 +533,15 @@ export interface DescribeTopicAttributesResponse {
     RequestId?: string;
 }
 /**
+ * DeleteRouteTriggerTime请求参数结构体
+ */
+export interface DeleteRouteTriggerTimeRequest {
+    /**
+      * 修改时间
+      */
+    DelayTime: string;
+}
+/**
  * 路由信息返回对象
  */
 export interface RouteResponse {
@@ -590,7 +599,7 @@ export interface ModifyInstanceAttributesConfig {
  */
 export interface OperateResponseData {
     /**
-      * FlowId
+      * FlowId11
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowId: number;
@@ -615,7 +624,7 @@ export interface ModifyInstanceAttributesResponse {
     /**
       * 返回结果
       */
-    Result?: JgwOperateResponse;
+    Result: JgwOperateResponse;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1170,6 +1179,15 @@ export interface ModifyTopicAttributesResponse {
     RequestId?: string;
 }
 /**
+ * DeleteRouteTriggerTime返回参数结构体
+ */
+export interface DeleteRouteTriggerTimeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeUser返回参数结构体
  */
 export interface DescribeUserResponse {
@@ -1347,9 +1365,9 @@ export interface Instance {
  */
 export interface DescribeInstanceAttributesResponse {
     /**
-      * 实例属性返回结果对象
+      * 实例属性返回结果对象。
       */
-    Result?: InstanceAttributesResponse;
+    Result: InstanceAttributesResponse;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1551,6 +1569,10 @@ export interface ModifyInstanceAttributesRequest {
       * 修改升配置rebalance时间
       */
     RebalanceTime?: number;
+    /**
+      * 时间戳
+      */
+    PublicNetwork?: number;
 }
 /**
  * DescribeRegion返回参数结构体
@@ -1827,6 +1849,21 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RetentionTimeConfig: DynamicRetentionTime;
+    /**
+      * 最大连接数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxConnection: number;
+    /**
+      * 公网带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicNetwork: number;
+    /**
+      * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteRouteTimestamp: string;
 }
 /**
  * DescribeCkafkaZone返回参数结构体

@@ -910,6 +910,11 @@ export interface L4RuleSource {
       * 权重值，取值[0,100]
       */
     Weight: number;
+    /**
+      * 8000
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: number;
 }
 /**
  * CreateDDoSSpeedLimitConfig请求参数结构体

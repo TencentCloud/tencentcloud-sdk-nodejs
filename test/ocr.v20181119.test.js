@@ -418,6 +418,16 @@ it("ocr.v20181119.HmtResidentPermitOCR", async function () {
     }
 })
 
+it("ocr.v20181119.SmartStructuralOCR", async function () {
+    try {
+       const data = await client.SmartStructuralOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.ArithmeticOCR", async function () {
     try {
        const data = await client.ArithmeticOCR({})

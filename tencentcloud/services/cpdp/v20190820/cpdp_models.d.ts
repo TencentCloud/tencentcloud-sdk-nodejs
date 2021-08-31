@@ -3982,6 +3982,11 @@ export interface QueryInvoiceResultData {
       * pdf地址
       */
     PdfUrl: string;
+    /**
+      * png地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageUrl: string;
 }
 /**
  * 智能代发-单笔代发转账对账单返回数据

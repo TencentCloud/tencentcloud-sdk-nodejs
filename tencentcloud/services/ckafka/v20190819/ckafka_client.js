@@ -185,6 +185,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAclRule", req, cb);
     }
     /**
+     * 修改删除路由延迟触发时间
+     */
+    async DeleteRouteTriggerTime(req, cb) {
+        return this.request("DeleteRouteTriggerTime", req, cb);
+    }
+    /**
      * 删除用户
      */
     async DeleteUser(req, cb) {

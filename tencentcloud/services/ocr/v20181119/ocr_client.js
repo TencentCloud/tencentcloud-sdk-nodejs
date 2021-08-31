@@ -451,6 +451,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("HmtResidentPermitOCR", req, cb);
     }
     /**
+     * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
+     */
+    async SmartStructuralOCR(req, cb) {
+        return this.request("SmartStructuralOCR", req, cb);
+    }
+    /**
      * 本接口支持作业算式题目的自动识别和判分，目前覆盖 K12 学力范围内的 11 种题型，包括加减乘除四则、加减乘除已知结果求运算因子、判断大小、约等于估算、带余数除法、分数四则运算、单位换算、竖式加减法、竖式乘除法、脱式计算和解方程，平均识别精度达到93%以上。
      */
     async ArithmeticOCR(req, cb) {

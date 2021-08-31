@@ -1549,6 +1549,32 @@ export interface BankCardOCRRequest {
 }
 
 /**
+ * 智能结构化识别
+ */
+export interface StructuralItem {
+  /**
+   * 识别出的字段名称(关键字)。
+   */
+  Name: string
+
+  /**
+   * 识别出的字段名称对应的值。
+   */
+  Value: string
+
+  /**
+   * 置信度 0 ~100。
+   */
+  Confidence: number
+
+  /**
+      * 文本行在旋转纠正之后的图像中的像素
+坐标。
+      */
+  ItemCoord: ItemCoord
+}
+
+/**
  * PropOwnerCertOCR返回参数结构体
  */
 export interface PropOwnerCertOCRResponse {
@@ -1820,6 +1846,35 @@ export interface BusInvoiceInfo {
    * 文本行在旋转纠正之后的图像中的像素坐标。
    */
   Rect: Rect
+}
+
+/**
+ * SmartStructuralOCR请求参数结构体
+ */
+export interface SmartStructuralOCRRequest {
+  /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
+
+  /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
+
+  /**
+      * 需返回的字段名称，例：
+若客户只想返回姓名、性别两个字段的识别结果，则输入
+ItemNames=["姓名","性别"]
+      */
+  ItemNames?: Array<string>
 }
 
 /**
@@ -3656,6 +3711,27 @@ export interface VatInvoiceVerifyResponse {
    * 二手车销售统一发票信息
    */
   UsedVehicleInvoiceInfo: UsedVehicleInvoiceInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SmartStructuralOCR返回参数结构体
+ */
+export interface SmartStructuralOCRResponse {
+  /**
+      * 图片旋转角度(角度制)，文本的水平方向
+为 0；顺时针为正，逆时针为负
+      */
+  Angle: number
+
+  /**
+   * 识别信息
+   */
+  StructuralItems: Array<StructuralItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

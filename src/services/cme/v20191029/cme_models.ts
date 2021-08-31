@@ -2005,7 +2005,7 @@ export interface CMEExportInfo {
   Description?: string
 
   /**
-   * 导出的媒体分类路径，长度不能超过15字符。
+   * 导出的媒体分类路径，长度不能超过15字符。不存在默认创建。
    */
   ClassPath?: string
 
