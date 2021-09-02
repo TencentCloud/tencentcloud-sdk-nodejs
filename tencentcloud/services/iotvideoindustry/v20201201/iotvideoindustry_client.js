@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("iotvideoindustry.tencentcloudapi.com", "2020-12-01", clientConfig);
     }
     /**
+     * 获取设备下属通道
+     */
+    async DescribeIPCChannels(req, cb) {
+        return this.request("DescribeIPCChannels", req, cb);
+    }
+    /**
      * 本接口(UpdateRecordPlan)用于更新录制计划。
      */
     async UpdateRecordPlan(req, cb) {
@@ -151,11 +157,10 @@ RecordId和StartTime/EndTime互斥
         return this.request("DescribeDeviceStreams", req, cb);
     }
     /**
-     * 本接口(DeleteRecordPlan)用于删除录制计划
-录制计划删除的同时，会停止该录制计划下的全部录制任务。
+     * 本接口(DescribeStatisticDetails)用于查询指定统计项详情，返回结果按天为单位聚合，支持的最大时间查询范围为31天。
      */
-    async DeleteRecordPlan(req, cb) {
-        return this.request("DeleteRecordPlan", req, cb);
+    async DescribeStatisticDetails(req, cb) {
+        return this.request("DescribeStatisticDetails", req, cb);
     }
     /**
      * 本接口(CreateDevice) 用于创建设备。
@@ -182,10 +187,11 @@ RecordId和StartTime/EndTime互斥
         return this.request("DescribeDeviceGroup", req, cb);
     }
     /**
-     * 本接口(DescribeStatisticDetails)用于查询指定统计项详情，返回结果按天为单位聚合，支持的最大时间查询范围为31天。
+     * 本接口(DeleteRecordPlan)用于删除录制计划
+录制计划删除的同时，会停止该录制计划下的全部录制任务。
      */
-    async DescribeStatisticDetails(req, cb) {
-        return this.request("DescribeStatisticDetails", req, cb);
+    async DeleteRecordPlan(req, cb) {
+        return this.request("DeleteRecordPlan", req, cb);
     }
     /**
      * 本接口(DescribeGroups)用于批量查询分组信息。

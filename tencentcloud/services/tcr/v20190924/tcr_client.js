@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteImageLifecyclePersonal", req, cb);
     }
     /**
+     * 更新实例信息
+     */
+    async ModifyInstance(req, cb) {
+        return this.request("ModifyInstance", req, cb);
+    }
+    /**
      * 用于查询应用更新触发器
      */
     async DescribeApplicationTriggerPersonal(req, cb) {

@@ -25,7 +25,7 @@ import {
   DescribeCloudBaseRunServerVersionRequest,
   TurnOnStandaloneGatewayResponse,
   DescribeEnvLimitRequest,
-  DescribeExtensionUploadInfoRequest,
+  DescribeEnvDealRegionResponse,
   DeleteCloudBaseRunServerVersionResponse,
   StandaloneGatewayInfo,
   CloudBaseRunSideSpec,
@@ -57,6 +57,7 @@ import {
   CloudBaseRunVolumeMount,
   BackendServiceInfo,
   DescribePostpayFreeQuotasRequest,
+  DescribeExtensionUploadInfoRequest,
   CloudBaseRunImageInfo,
   DestroyStandaloneGatewayResponse,
   DescribeCloudBaseRunServerVersionResponse,
@@ -185,6 +186,7 @@ import {
   ExtensionFileInfo,
   ObjectKV,
   CloudBaseRunVpcSubnet,
+  DescribeEnvDealRegionRequest,
   DescribeDatabaseACLResponse,
   DescribeExtensionUploadInfoResponse,
   ModifyEnvRequest,
@@ -546,6 +548,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyEnvResponse) => void
   ): Promise<DestroyEnvResponse> {
     return this.request("DestroyEnv", req, cb)
+  }
+
+  /**
+   * 获取环境下单地域
+   */
+  async DescribeEnvDealRegion(
+    req: DescribeEnvDealRegionRequest,
+    cb?: (error: string, rep: DescribeEnvDealRegionResponse) => void
+  ): Promise<DescribeEnvDealRegionResponse> {
+    return this.request("DescribeEnvDealRegion", req, cb)
   }
 
   /**

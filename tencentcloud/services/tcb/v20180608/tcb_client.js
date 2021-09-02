@@ -235,6 +235,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyEnv", req, cb);
     }
     /**
+     * 获取环境下单地域
+     */
+    async DescribeEnvDealRegion(req, cb) {
+        return this.request("DescribeEnvDealRegion", req, cb);
+    }
+    /**
      * 获取增值包计费相关信息
      */
     async DescribeExtraPkgBillingInfo(req, cb) {

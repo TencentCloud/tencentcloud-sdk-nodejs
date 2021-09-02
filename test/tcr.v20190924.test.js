@@ -298,6 +298,16 @@ it("tcr.v20190924.DeleteImageLifecyclePersonal", async function () {
     }
 })
 
+it("tcr.v20190924.ModifyInstance", async function () {
+    try {
+       const data = await client.ModifyInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeApplicationTriggerPersonal", async function () {
     try {
        const data = await client.DescribeApplicationTriggerPersonal({})

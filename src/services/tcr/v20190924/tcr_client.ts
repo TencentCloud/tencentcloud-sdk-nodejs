@@ -44,7 +44,7 @@ import {
   AutoDelStrategyInfo,
   DeleteInternalEndpointDnsRequest,
   ValidateNamespaceExistPersonalRequest,
-  RegistryChargePrepaid,
+  ModifyInstanceRequest,
   RenewInstanceResponse,
   CreateImmutableTagRulesRequest,
   DescribeRepositoriesResponse,
@@ -150,6 +150,7 @@ import {
   CreateUserPersonalResponse,
   DescribeWebhookTriggerResponse,
   DescribeImageManifestsRequest,
+  RegistryChargePrepaid,
   ModifyNamespaceRequest,
   ModifyRepositoryAccessPersonalRequest,
   TagSpecification,
@@ -218,6 +219,7 @@ import {
   ModifyUserPasswordPersonalRequest,
   PeerReplicationOption,
   DescribeSecurityPoliciesRequest,
+  ModifyInstanceResponse,
   ReplicationRegistry,
   DescribeInternalEndpointsRequest,
   ValidateNamespaceExistPersonalResponse,
@@ -543,6 +545,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteImageLifecyclePersonalResponse) => void
   ): Promise<DeleteImageLifecyclePersonalResponse> {
     return this.request("DeleteImageLifecyclePersonal", req, cb)
+  }
+
+  /**
+   * 更新实例信息
+   */
+  async ModifyInstance(
+    req: ModifyInstanceRequest,
+    cb?: (error: string, rep: ModifyInstanceResponse) => void
+  ): Promise<ModifyInstanceResponse> {
+    return this.request("ModifyInstance", req, cb)
   }
 
   /**

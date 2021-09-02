@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceData", req, cb);
     }
     /**
+     * 直接绑定设备和家庭
+     */
+    async DirectBindDeviceInFamily(req, cb) {
+        return this.request("DirectBindDeviceInFamily", req, cb);
+    }
+    /**
      * 删除  LoRa 网关的接口
      */
     async DeleteLoRaGateway(req, cb) {

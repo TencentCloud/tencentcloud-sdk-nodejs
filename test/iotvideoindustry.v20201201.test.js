@@ -18,6 +18,16 @@ const client = new tencentcloud.iotvideoindustry.v20201201.Client({
 })
 describe("iotvideoindustry.v20201201.test.js", function () {
 
+it("iotvideoindustry.v20201201.DescribeIPCChannels", async function () {
+    try {
+       const data = await client.DescribeIPCChannels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideoindustry.v20201201.UpdateRecordPlan", async function () {
     try {
        const data = await client.UpdateRecordPlan({})
@@ -218,9 +228,9 @@ it("iotvideoindustry.v20201201.DescribeDeviceStreams", async function () {
     }
 })
 
-it("iotvideoindustry.v20201201.DeleteRecordPlan", async function () {
+it("iotvideoindustry.v20201201.DescribeStatisticDetails", async function () {
     try {
-       const data = await client.DeleteRecordPlan({})
+       const data = await client.DescribeStatisticDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +278,9 @@ it("iotvideoindustry.v20201201.DescribeDeviceGroup", async function () {
     }
 })
 
-it("iotvideoindustry.v20201201.DescribeStatisticDetails", async function () {
+it("iotvideoindustry.v20201201.DeleteRecordPlan", async function () {
     try {
-       const data = await client.DescribeStatisticDetails({})
+       const data = await client.DeleteRecordPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

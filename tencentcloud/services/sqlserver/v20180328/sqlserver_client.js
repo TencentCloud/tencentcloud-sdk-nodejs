@@ -534,7 +534,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupCommand", req, cb);
     }
     /**
-     * 本接口（RenewDBInstance）用于续费实例。
+     * 本接口（RenewDBInstance）用于续费实例。当被续费实例是按量计费实例时，则按量计费实例转为包年包月计费方式。
+按量计费实例转包年包月询价可通过(InquiryPriceRenewDBInstance)接口获得。
      */
     async RenewDBInstance(req, cb) {
         return this.request("RenewDBInstance", req, cb);

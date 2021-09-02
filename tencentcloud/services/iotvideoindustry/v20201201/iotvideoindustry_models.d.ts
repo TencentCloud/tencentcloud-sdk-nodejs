@@ -223,6 +223,27 @@ export interface DevGroupInfo {
     Error?: string;
 }
 /**
+ * DescribeIPCChannels请求参数结构体
+ */
+export interface DescribeIPCChannelsRequest {
+    /**
+      * 偏移量，默认0
+      */
+    Offset?: number;
+    /**
+      * 限制，默认0
+      */
+    Limit?: number;
+    /**
+      * 设备Id
+      */
+    DeviceId?: string;
+    /**
+      * 通道类型 	4: 国标NVR通道 5:  国标VMS通道 6: 国标IPC通道
+      */
+    ChannelTypes?: Array<number>;
+}
+/**
  * DescribeSubGroups请求参数结构体
  */
 export interface DescribeSubGroupsRequest {
@@ -289,6 +310,19 @@ export interface GetVideoListByConResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateTimeTemplate返回参数结构体
+ */
+export interface UpdateTimeTemplateResponse {
+    /**
+      * 操作结果，“OK”表示成功，其他表示失败。
+      */
+    Status: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1170,13 +1204,19 @@ export interface DescribeDevicePassWordResponse {
     RequestId?: string;
 }
 /**
- * UpdateTimeTemplate返回参数结构体
+ * DescribeIPCChannels返回参数结构体
  */
-export interface UpdateTimeTemplateResponse {
+export interface DescribeIPCChannelsResponse {
     /**
-      * 操作结果，“OK”表示成功，其他表示失败。
+      * 通道总数
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status: string;
+    TotalCount: number;
+    /**
+      * 通道详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceList: Array<GroupDeviceItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1569,14 +1609,6 @@ export interface BindGroupDevicesResponse {
  */
 export interface DescribeVideoListRequest {
     /**
-      * 开始时间戳，秒级
-      */
-    StartTime: number;
-    /**
-      * 结束时间戳，秒级
-      */
-    EndTime: number;
-    /**
       * 偏移
       */
     Offset: number;
@@ -1585,9 +1617,49 @@ export interface DescribeVideoListRequest {
       */
     Limit: number;
     /**
+      * 开始时间戳，秒级
+      */
+    StartTime?: number;
+    /**
+      * 结束时间戳，秒级
+      */
+    EndTime?: number;
+    /**
       * 设备Id
       */
     DeviceId?: string;
+    /**
+      * 开始录制范围 开始
+      */
+    StartRecordTime?: number;
+    /**
+      * 开始录制范围 结束
+      */
+    EndRecordTime?: number;
+    /**
+      * 过期时间范围 开始
+      */
+    StartExpireTime?: number;
+    /**
+      * 过期时间范围 结束
+      */
+    EndExpireTime?: number;
+    /**
+      * 文件大小范围 开始 单位byte
+      */
+    StartFileSize?: number;
+    /**
+      * 文件大小范围 结束 单位byte
+      */
+    EndFileSize?: number;
+    /**
+      * 录制状态 99: 录制方已经回写状态 1: 开始录制了，等待回写 2: 已经到了时间模板的停止时间，在等待录制方回写
+      */
+    IsRecording?: number;
+    /**
+      * 通道ID默认必传
+      */
+    ChannelId?: string;
 }
 /**
  * ModifyDeviceData返回参数结构体

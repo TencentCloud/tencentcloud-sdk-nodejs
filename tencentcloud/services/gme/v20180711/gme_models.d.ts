@@ -405,13 +405,30 @@ export interface DescribeFilterResultListResponse {
     RequestId?: string;
 }
 /**
- * 获取应用用量统计数据输出参数
+ * ModifyAppStatus接口输出参数
+ */
+export interface ModifyAppStatusResp {
+    /**
+      * GME应用ID
+      */
+    BizId: number;
+    /**
+      * 应用状态，取值：open/close
+      */
+    Status: string;
+}
+/**
+ * DescribeAppStatistics返回参数结构体
  */
 export interface DescribeAppStatisticsResponse {
     /**
       * 应用用量统计数据
       */
-    AppStatistics: Array<AppStatisticsItem>;
+    Data: DescribeAppStatisticsResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeApplicationData返回参数结构体
@@ -457,17 +474,41 @@ export interface VoiceFilterStatisticsItem {
     Duration: number;
 }
 /**
- * 用量数据单元
+ * CreateApp的输出参数
  */
-export interface StatisticsItem {
+export interface CreateAppResp {
     /**
-      * 日期，格式为年-月-日，如2018-07-13
+      * 应用ID，由后台自动生成。
       */
-    StatDate: string;
+    BizId: number;
     /**
-      * 统计值
+      * 应用名称，透传输入参数的AppName
       */
-    Data: number;
+    AppName: string;
+    /**
+      * 项目ID，透传输入的ProjectId
+      */
+    ProjectId: number;
+    /**
+      * 应用密钥，GME SDK初始化时使用
+      */
+    SecretKey: string;
+    /**
+      * 服务创建时间戳
+      */
+    CreateTime: number;
+    /**
+      * 实时语音服务配置数据
+      */
+    RealtimeSpeechConf: RealtimeSpeechConf;
+    /**
+      * 语音消息及转文本服务配置数据
+      */
+    VoiceMessageConf: VoiceMessageConf;
+    /**
+      * 语音分析服务配置数据
+      */
+    VoiceFilterConf: VoiceFilterConf;
 }
 /**
  * DescribeRoomInfo返回参数结构体
@@ -779,6 +820,15 @@ export interface RealtimeSpeechConf {
     Quality?: string;
 }
 /**
+ * 获取应用用量统计数据输出参数
+ */
+export interface DescribeAppStatisticsResp {
+    /**
+      * 应用用量统计数据
+      */
+    AppStatistics: Array<AppStatisticsItem>;
+}
+/**
  * 语音检测返回结果
  */
 export interface ScanVoiceResult {
@@ -792,41 +842,17 @@ export interface ScanVoiceResult {
     TaskId: string;
 }
 /**
- * CreateApp的输出参数
+ * CreateApp返回参数结构体
  */
 export interface CreateAppResponse {
     /**
-      * 应用ID，由后台自动生成。
+      * 创建应用返回数据
       */
-    BizId: number;
+    Data: CreateAppResp;
     /**
-      * 应用名称，透传输入参数的AppName
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    AppName: string;
-    /**
-      * 项目ID，透传输入的ProjectId
-      */
-    ProjectId: number;
-    /**
-      * 应用密钥，GME SDK初始化时使用
-      */
-    SecretKey: string;
-    /**
-      * 服务创建时间戳
-      */
-    CreateTime: number;
-    /**
-      * 实时语音服务配置数据
-      */
-    RealtimeSpeechConf: RealtimeSpeechConf;
-    /**
-      * 语音消息及转文本服务配置数据
-      */
-    VoiceMessageConf: VoiceMessageConf;
-    /**
-      * 语音分析服务配置数据
-      */
-    VoiceFilterConf: VoiceFilterConf;
+    RequestId?: string;
 }
 /**
  * DescribeAppStatistics请求参数结构体
@@ -903,17 +929,17 @@ export interface ScanPiece {
     PieceStartTime: number;
 }
 /**
- * ModifyAppStatus接口输出参数
+ * ModifyAppStatus返回参数结构体
  */
 export interface ModifyAppStatusResponse {
     /**
-      * GME应用ID
+      * 修改应用开关状态返回数据
       */
-    BizId: number;
+    Data: ModifyAppStatusResp;
     /**
-      * 应用状态，取值：open/close
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Status: string;
+    RequestId?: string;
 }
 /**
  * ScanVoice请求参数结构体
@@ -950,6 +976,19 @@ export interface VoiceFilterConf {
       * 语音过滤服务开关，取值：open/close
       */
     Status?: string;
+}
+/**
+ * 用量数据单元
+ */
+export interface StatisticsItem {
+    /**
+      * 日期，格式为年-月-日，如2018-07-13
+      */
+    StatDate: string;
+    /**
+      * 统计值
+      */
+    Data: number;
 }
 /**
  * DescribeFilterResult请求参数结构体

@@ -536,17 +536,17 @@ export interface ValidateNamespaceExistPersonalRequest {
     Namespace: string;
 }
 /**
- * 实例预付费模式
+ * ModifyInstance请求参数结构体
  */
-export interface RegistryChargePrepaid {
+export interface ModifyInstanceRequest {
     /**
-      * 购买实例的时长，单位：月
+      * 实例ID
       */
-    Period: number;
+    RegistryId: string;
     /**
-      * 自动续费标识，0：手动续费，1：自动续费，2：不续费并且不通知
+      * 实例的规格
       */
-    RenewFlag: number;
+    RegistryType: string;
 }
 /**
  * RenewInstance返回参数结构体
@@ -2219,6 +2219,19 @@ export interface DescribeImageManifestsRequest {
     ImageVersion: string;
 }
 /**
+ * 实例预付费模式
+ */
+export interface RegistryChargePrepaid {
+    /**
+      * 购买实例的时长，单位：月
+      */
+    Period: number;
+    /**
+      * 自动续费标识，0：手动续费，1：自动续费，2：不续费并且不通知
+      */
+    RenewFlag: number;
+}
+/**
  * ModifyNamespace请求参数结构体
  */
 export interface ModifyNamespaceRequest {
@@ -3382,6 +3395,15 @@ export interface DescribeSecurityPoliciesRequest {
       * 实例的Id
       */
     RegistryId: string;
+}
+/**
+ * ModifyInstance返回参数结构体
+ */
+export interface ModifyInstanceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 企业版复制实例

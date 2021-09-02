@@ -841,6 +841,10 @@ export interface DescribeClustersRequest {
       * 返回数量，不填则默认为10，最大值为20。
       */
     Limit?: number;
+    /**
+      * 集群ID列表过滤
+      */
+    ClusterIdList?: Array<string>;
 }
 /**
  * ModifyEnvironmentAttributes请求参数结构体
@@ -2397,6 +2401,11 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NamespaceNum: number;
+    /**
+      * 已使用存储限制，MB为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsedStorageBudget: number;
 }
 /**
  * 消息保留策略

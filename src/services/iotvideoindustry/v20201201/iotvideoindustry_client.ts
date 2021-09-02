@@ -34,10 +34,12 @@ import {
   UpdateDeviceGroupResponse,
   GetVideoListByConRequest,
   DevGroupInfo,
+  DescribeIPCChannelsRequest,
   DescribeSubGroupsRequest,
   DeleteRecordPlanRequest,
   CreateDeviceGroupResponse,
   GetVideoListByConResponse,
+  UpdateTimeTemplateResponse,
   DescribeStatisticDetailsResponse,
   GroupDeviceItem,
   DescribeStatisticSummaryRequest,
@@ -78,7 +80,7 @@ import {
   GetRecordDatesByDevRequest,
   GetTimeTemplatesResponse,
   DescribeDevicePassWordResponse,
-  UpdateTimeTemplateResponse,
+  DescribeIPCChannelsResponse,
   DescribeAllDeviceListResponse,
   DescribeSubGroupsResponse,
   DescribeGroupsResponse,
@@ -115,6 +117,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("iotvideoindustry.tencentcloudapi.com", "2020-12-01", clientConfig)
+  }
+
+  /**
+   * 获取设备下属通道
+   */
+  async DescribeIPCChannels(
+    req: DescribeIPCChannelsRequest,
+    cb?: (error: string, rep: DescribeIPCChannelsResponse) => void
+  ): Promise<DescribeIPCChannelsResponse> {
+    return this.request("DescribeIPCChannels", req, cb)
   }
 
   /**
@@ -321,14 +333,13 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-     * 本接口(DeleteRecordPlan)用于删除录制计划
-录制计划删除的同时，会停止该录制计划下的全部录制任务。
-     */
-  async DeleteRecordPlan(
-    req: DeleteRecordPlanRequest,
-    cb?: (error: string, rep: DeleteRecordPlanResponse) => void
-  ): Promise<DeleteRecordPlanResponse> {
-    return this.request("DeleteRecordPlan", req, cb)
+   * 本接口(DescribeStatisticDetails)用于查询指定统计项详情，返回结果按天为单位聚合，支持的最大时间查询范围为31天。
+   */
+  async DescribeStatisticDetails(
+    req: DescribeStatisticDetailsRequest,
+    cb?: (error: string, rep: DescribeStatisticDetailsResponse) => void
+  ): Promise<DescribeStatisticDetailsResponse> {
+    return this.request("DescribeStatisticDetails", req, cb)
   }
 
   /**
@@ -372,13 +383,14 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(DescribeStatisticDetails)用于查询指定统计项详情，返回结果按天为单位聚合，支持的最大时间查询范围为31天。
-   */
-  async DescribeStatisticDetails(
-    req: DescribeStatisticDetailsRequest,
-    cb?: (error: string, rep: DescribeStatisticDetailsResponse) => void
-  ): Promise<DescribeStatisticDetailsResponse> {
-    return this.request("DescribeStatisticDetails", req, cb)
+     * 本接口(DeleteRecordPlan)用于删除录制计划
+录制计划删除的同时，会停止该录制计划下的全部录制任务。
+     */
+  async DeleteRecordPlan(
+    req: DeleteRecordPlanRequest,
+    cb?: (error: string, rep: DeleteRecordPlanResponse) => void
+  ): Promise<DeleteRecordPlanResponse> {
+    return this.request("DeleteRecordPlan", req, cb)
   }
 
   /**

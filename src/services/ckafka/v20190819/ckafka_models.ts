@@ -903,6 +903,11 @@ export interface CreateAclRequest {
    * 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入时需要加 User: 前缀,如用户A则传入User:A。
    */
   Principal?: string
+
+  /**
+   * 资源名称列表,Json字符串格式。ResourceName和resourceNameList只能指定其中一个。
+   */
+  ResourceNameList?: string
 }
 
 /**

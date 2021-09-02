@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ControlRecordStreamRequest, DeleteTimeTemplateResponse, GetTimeTemplatesRequest, GetRecordPlanByDevRequest, GetRecordDatesByDevResponse, DescribeDeviceStreamsResponse, DescribeSIPServerRequest, GetRecordPlanByIdRequest, GetRecordPlansRequest, DeleteDeviceGroupResponse, DeleteRecordPlanResponse, UpdateDeviceGroupResponse, GetVideoListByConRequest, DescribeSubGroupsRequest, DeleteRecordPlanRequest, CreateDeviceGroupResponse, GetVideoListByConResponse, DescribeStatisticDetailsResponse, DescribeStatisticSummaryRequest, GetRecordPlanByIdResponse, DeleteDeviceRequest, UpdateDevicePassWordRequest, CreateTimeTemplateRequest, DescribeAllDeviceListRequest, DescribeDevicePassWordRequest, GetRecordPlanByDevResponse, UpdateRecordPlanRequest, DescribeStatisticDetailsRequest, CreateRecordPlanRequest, CreateDeviceGroupRequest, UpdateTimeTemplateRequest, CreateDeviceResponse, CreateDeviceRequest, DescribeStatisticSummaryResponse, DescribeRecordStreamRequest, GetTimeTemplateByIdResponse, ControlDevicePTZResponse, ControlDevicePTZRequest, UpdateDeviceGroupRequest, DescribeGroupDevicesRequest, DescribeGroupByIdRequest, UpdateDevicePassWordResponse, DescribeDeviceStreamsRequest, DescribeRecordStreamResponse, CreateRecordPlanResponse, DeleteDeviceGroupRequest, DescribeDeviceGroupResponse, ModifyDeviceDataRequest, GetRecordDatesByDevRequest, GetTimeTemplatesResponse, DescribeDevicePassWordResponse, UpdateTimeTemplateResponse, DescribeAllDeviceListResponse, DescribeSubGroupsResponse, DescribeGroupsResponse, BindGroupDevicesRequest, CreateTimeTemplateResponse, DescribeSIPServerResponse, DescribeGroupByPathRequest, UpdateRecordPlanResponse, DescribeDeviceGroupRequest, DescribeGroupsRequest, GetRecordPlansResponse, DescribeGroupByIdResponse, GetTimeTemplateByIdRequest, DeleteTimeTemplateRequest, DescribeVideoListResponse, ControlRecordStreamResponse, BindGroupDevicesResponse, DescribeVideoListRequest, ModifyDeviceDataResponse, DeleteDeviceResponse, DescribeGroupByPathResponse, DescribeGroupDevicesResponse } from "./iotvideoindustry_models";
+import { ControlRecordStreamRequest, DeleteTimeTemplateResponse, GetTimeTemplatesRequest, GetRecordPlanByDevRequest, GetRecordDatesByDevResponse, DescribeDeviceStreamsResponse, DescribeSIPServerRequest, GetRecordPlanByIdRequest, GetRecordPlansRequest, DeleteDeviceGroupResponse, DeleteRecordPlanResponse, UpdateDeviceGroupResponse, GetVideoListByConRequest, DescribeIPCChannelsRequest, DescribeSubGroupsRequest, DeleteRecordPlanRequest, CreateDeviceGroupResponse, GetVideoListByConResponse, UpdateTimeTemplateResponse, DescribeStatisticDetailsResponse, DescribeStatisticSummaryRequest, GetRecordPlanByIdResponse, DeleteDeviceRequest, UpdateDevicePassWordRequest, CreateTimeTemplateRequest, DescribeAllDeviceListRequest, DescribeDevicePassWordRequest, GetRecordPlanByDevResponse, UpdateRecordPlanRequest, DescribeStatisticDetailsRequest, CreateRecordPlanRequest, CreateDeviceGroupRequest, UpdateTimeTemplateRequest, CreateDeviceResponse, CreateDeviceRequest, DescribeStatisticSummaryResponse, DescribeRecordStreamRequest, GetTimeTemplateByIdResponse, ControlDevicePTZResponse, ControlDevicePTZRequest, UpdateDeviceGroupRequest, DescribeGroupDevicesRequest, DescribeGroupByIdRequest, UpdateDevicePassWordResponse, DescribeDeviceStreamsRequest, DescribeRecordStreamResponse, CreateRecordPlanResponse, DeleteDeviceGroupRequest, DescribeDeviceGroupResponse, ModifyDeviceDataRequest, GetRecordDatesByDevRequest, GetTimeTemplatesResponse, DescribeDevicePassWordResponse, DescribeIPCChannelsResponse, DescribeAllDeviceListResponse, DescribeSubGroupsResponse, DescribeGroupsResponse, BindGroupDevicesRequest, CreateTimeTemplateResponse, DescribeSIPServerResponse, DescribeGroupByPathRequest, UpdateRecordPlanResponse, DescribeDeviceGroupRequest, DescribeGroupsRequest, GetRecordPlansResponse, DescribeGroupByIdResponse, GetTimeTemplateByIdRequest, DeleteTimeTemplateRequest, DescribeVideoListResponse, ControlRecordStreamResponse, BindGroupDevicesResponse, DescribeVideoListRequest, ModifyDeviceDataResponse, DeleteDeviceResponse, DescribeGroupByPathResponse, DescribeGroupDevicesResponse } from "./iotvideoindustry_models";
 /**
  * iotvideoindustry client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取设备下属通道
+     */
+    DescribeIPCChannels(req: DescribeIPCChannelsRequest, cb?: (error: string, rep: DescribeIPCChannelsResponse) => void): Promise<DescribeIPCChannelsResponse>;
     /**
      * 本接口(UpdateRecordPlan)用于更新录制计划。
      */
@@ -91,10 +95,9 @@ RecordId和StartTime/EndTime互斥
      */
     DescribeDeviceStreams(req: DescribeDeviceStreamsRequest, cb?: (error: string, rep: DescribeDeviceStreamsResponse) => void): Promise<DescribeDeviceStreamsResponse>;
     /**
-     * 本接口(DeleteRecordPlan)用于删除录制计划
-录制计划删除的同时，会停止该录制计划下的全部录制任务。
+     * 本接口(DescribeStatisticDetails)用于查询指定统计项详情，返回结果按天为单位聚合，支持的最大时间查询范围为31天。
      */
-    DeleteRecordPlan(req: DeleteRecordPlanRequest, cb?: (error: string, rep: DeleteRecordPlanResponse) => void): Promise<DeleteRecordPlanResponse>;
+    DescribeStatisticDetails(req: DescribeStatisticDetailsRequest, cb?: (error: string, rep: DescribeStatisticDetailsResponse) => void): Promise<DescribeStatisticDetailsResponse>;
     /**
      * 本接口(CreateDevice) 用于创建设备。
      */
@@ -112,9 +115,10 @@ RecordId和StartTime/EndTime互斥
      */
     DescribeDeviceGroup(req: DescribeDeviceGroupRequest, cb?: (error: string, rep: DescribeDeviceGroupResponse) => void): Promise<DescribeDeviceGroupResponse>;
     /**
-     * 本接口(DescribeStatisticDetails)用于查询指定统计项详情，返回结果按天为单位聚合，支持的最大时间查询范围为31天。
+     * 本接口(DeleteRecordPlan)用于删除录制计划
+录制计划删除的同时，会停止该录制计划下的全部录制任务。
      */
-    DescribeStatisticDetails(req: DescribeStatisticDetailsRequest, cb?: (error: string, rep: DescribeStatisticDetailsResponse) => void): Promise<DescribeStatisticDetailsResponse>;
+    DeleteRecordPlan(req: DeleteRecordPlanRequest, cb?: (error: string, rep: DeleteRecordPlanResponse) => void): Promise<DeleteRecordPlanResponse>;
     /**
      * 本接口(DescribeGroups)用于批量查询分组信息。
      */

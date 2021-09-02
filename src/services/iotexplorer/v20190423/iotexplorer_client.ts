@@ -84,6 +84,7 @@ import {
   DisableTopicRuleRequest,
   ProjectEntry,
   EventHistoryItem,
+  DirectBindDeviceInFamilyResponse,
   TopicRule,
   TopicRulePayload,
   CallDeviceActionAsyncResponse,
@@ -93,6 +94,7 @@ import {
   DescribeDeviceRequest,
   UpdateDevicesEnableStateRequest,
   ModifyTopicRuleResponse,
+  DirectBindDeviceInFamilyRequest,
   DescribeLoRaFrequencyResponse,
   SearchStudioProductResponse,
   GetLoRaGatewayListRequest,
@@ -112,6 +114,7 @@ import {
   CreateLoRaFrequencyResponse,
   SearchStudioProductRequest,
   GetTopicRuleListRequest,
+  AppDeviceInfo,
   ModifyProjectResponse,
   DeleteStudioProductRequest,
   ModifyProjectRequest,
@@ -190,6 +193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceDataResponse) => void
   ): Promise<DescribeDeviceDataResponse> {
     return this.request("DescribeDeviceData", req, cb)
+  }
+
+  /**
+   * 直接绑定设备和家庭
+   */
+  async DirectBindDeviceInFamily(
+    req: DirectBindDeviceInFamilyRequest,
+    cb?: (error: string, rep: DirectBindDeviceInFamilyResponse) => void
+  ): Promise<DirectBindDeviceInFamilyResponse> {
+    return this.request("DirectBindDeviceInFamily", req, cb)
   }
 
   /**

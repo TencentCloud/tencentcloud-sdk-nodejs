@@ -68,6 +68,16 @@ it("iotexplorer.v20190423.DescribeDeviceData", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DirectBindDeviceInFamily", async function () {
+    try {
+       const data = await client.DirectBindDeviceInFamily({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DeleteLoRaGateway", async function () {
     try {
        const data = await client.DeleteLoRaGateway({})

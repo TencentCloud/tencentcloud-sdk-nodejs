@@ -2090,6 +2090,11 @@ export interface RenewDBInstanceRequest {
    * 代金券ID数组，目前只支持使用1张代金券
    */
   VoucherIds?: Array<string>
+
+  /**
+   * 续费标记 0:正常续费 1:自动续费：只用于按量计费转包年包月时有效。
+   */
+  AutoRenewFlag?: number
 }
 
 /**
@@ -4414,7 +4419,7 @@ export interface RenewDBInstanceResponse {
   /**
    * 订单名称
    */
-  DealName?: string
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -783,7 +783,7 @@ export interface QueryChainMakerBlockTransactionResponse {
       */
     TxCount: number;
     /**
-      * 区块时间戳
+      * 区块时间戳，单位是秒
       */
     BlockTimestamp: number;
     /**
@@ -1228,7 +1228,7 @@ export interface ChainMakerTransactionResult {
       */
     Message: string;
     /**
-      * 交易时间
+      * 交易时间，单位是秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Timestamp: number;

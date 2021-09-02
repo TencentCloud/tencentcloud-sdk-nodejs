@@ -42,12 +42,12 @@ export interface DescribeMigrateJobsResponse {
   /**
    * 任务数目
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 任务详情数组
    */
-  JobList?: Array<MigrateJobInfo>
+  JobList: Array<MigrateJobInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -536,14 +536,14 @@ export interface ModifySubscribeConsumeTimeResponse {
  */
 export interface DstInfo {
   /**
-   * 目标实例ID，如cdb-jd92ijd8
-   */
-  InstanceId: string
-
-  /**
    * 目标实例地域，如ap-guangzhou
    */
   Region: string
+
+  /**
+   * 目标实例ID，如cdb-jd92ijd8
+   */
+  InstanceId?: string
 
   /**
    * 目标实例vip。已废弃，无需填写
@@ -1523,6 +1523,11 @@ export interface DescribeMigrateJobsRequest {
    * 返回实例数量，默认20，有效区间[1,100]
    */
   Limit?: number
+
+  /**
+   * 标签过滤条件
+   */
+  TagFilters?: Array<TagFilter>
 }
 
 /**
@@ -1883,6 +1888,12 @@ export interface MigrateJobInfo {
    * 任务错误信息提示，当任务发生错误时，不为null或者空值
    */
   ErrorInfo: Array<ErrorInfo>
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<TagItem>
 }
 
 /**

@@ -1608,6 +1608,21 @@ export interface EventHistoryItem {
 }
 
 /**
+ * DirectBindDeviceInFamily返回参数结构体
+ */
+export interface DirectBindDeviceInFamilyResponse {
+  /**
+   * 返回设备信息
+   */
+  AppDeviceInfo: AppDeviceInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TopicRule结构
  */
 export interface TopicRule {
@@ -1847,6 +1862,41 @@ export interface ModifyTopicRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DirectBindDeviceInFamily请求参数结构体
+ */
+export interface DirectBindDeviceInFamilyRequest {
+  /**
+   * 小程序appid
+   */
+  IotAppID: string
+
+  /**
+   * 用户ID
+   */
+  UserID: string
+
+  /**
+   * 家庭ID
+   */
+  FamilyId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名
+   */
+  DeviceName: string
+
+  /**
+   * 房间ID
+   */
+  RoomId?: string
 }
 
 /**
@@ -2300,6 +2350,61 @@ export interface GetTopicRuleListRequest {
    * 分页的大小
    */
   PageSize: number
+}
+
+/**
+ * 云api直接绑定设备出参
+ */
+export interface AppDeviceInfo {
+  /**
+   * 产品ID/设备名
+   */
+  DeviceId: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名
+   */
+  DeviceName: string
+
+  /**
+   * 设备别名
+   */
+  AliasName: string
+
+  /**
+   * icon地址
+   */
+  IconUrl: string
+
+  /**
+   * 家庭ID
+   */
+  FamilyId: string
+
+  /**
+   * 房间ID
+   */
+  RoomId: string
+
+  /**
+   * 设备类型
+   */
+  DeviceType: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: number
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: number
 }
 
 /**

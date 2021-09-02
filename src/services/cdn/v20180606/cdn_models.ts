@@ -6923,10 +6923,30 @@ RETURN_404：全部请求返回 404
   CounterMeasure?: string
 
   /**
-      * 上次触发带宽封顶阈值的时间
+      * 境内区域上次触发带宽封顶阈值的时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LastTriggerTime?: string
+
+  /**
+      * 带宽封顶提醒开关
+on：开启
+off：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertSwitch?: string
+
+  /**
+      * 带宽封顶阈值提醒百分比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertPercentage?: number
+
+  /**
+      * 海外区域上次触发带宽封顶阈值的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastTriggerTimeOverseas?: string
 }
 
 /**

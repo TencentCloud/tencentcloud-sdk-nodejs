@@ -231,13 +231,33 @@ export interface TurnOnStandaloneGatewayResponse {
 export type DescribeEnvLimitRequest = null
 
 /**
- * DescribeExtensionUploadInfo请求参数结构体
+ * DescribeEnvDealRegion返回参数结构体
  */
-export interface DescribeExtensionUploadInfoRequest {
+export interface DescribeEnvDealRegionResponse {
   /**
-   * 待上传的文件
+   * 下单region
    */
-  ExtensionFiles: Array<ExtensionFile>
+  Region: string
+
+  /**
+   * 下单zone
+   */
+  Zone: string
+
+  /**
+   * 下单regionId
+   */
+  RegionId: number
+
+  /**
+   * 下单zoneId
+   */
+  ZoneId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -309,6 +329,16 @@ export interface StandaloneGatewayInfo {
    * 服务信息
    */
   ServiceInfo: BackendServiceInfo
+
+  /**
+   * 公网CLBIP
+   */
+  PublicClbIp: string
+
+  /**
+   * 内网CLBIP
+   */
+  InternalClbIp: string
 }
 
 /**
@@ -1086,6 +1116,16 @@ export interface DescribePostpayFreeQuotasRequest {
    * 环境ID
    */
   EnvId: string
+}
+
+/**
+ * DescribeExtensionUploadInfo请求参数结构体
+ */
+export interface DescribeExtensionUploadInfoRequest {
+  /**
+   * 待上传的文件
+   */
+  ExtensionFiles: Array<ExtensionFile>
 }
 
 /**
@@ -4900,6 +4940,43 @@ export interface CloudBaseRunVpcSubnet {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Name: string
+}
+
+/**
+ * DescribeEnvDealRegion请求参数结构体
+ */
+export interface DescribeEnvDealRegionRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+      * 订单类型：
+ENV_PREPAY_MINIAPP= 预付费环境(微信小程序)
+ENV_PREPAY_CLOUD= 预付费环境(腾讯云)
+ENV_POSTPAY = 后付费环境
+HOSTING_PREPAY = 预付费静态托管
+PACKAGE=套餐包
+      */
+  DealType: string
+
+  /**
+      * 下单类型：
+CREATE = 新购
+RENEW = 续费
+MODIFY = 套餐调整(升级/降级)
+REFUND = 退费
+      */
+  DealAction: string
+
+  /**
+      * 下单地域：
+ap-guangzhou = 广州地域
+ap-shanghai = 上海地域
+ap-beijing = 北京地域
+      */
+  DealRegion: string
 }
 
 /**

@@ -272,6 +272,26 @@ export interface Invocation {
    * 调用来源。
    */
   InvocationSource: string
+
+  /**
+   * base64编码的命令内容
+   */
+  CommandContent: string
+
+  /**
+   * 命令类型
+   */
+  CommandType: string
+
+  /**
+   * 执行命令过期时间， 单位秒
+   */
+  Timeout: number
+
+  /**
+   * 执行命令的工作路径
+   */
+  WorkingDirectory: string
 }
 
 /**
