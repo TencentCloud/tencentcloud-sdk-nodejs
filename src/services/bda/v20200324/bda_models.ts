@@ -183,6 +183,11 @@ AttributesType 不含 LowerBodyCloth 或检测超过 5 个人体时，此参数�
 }
 
 /**
+ * GetSummaryInfo请求参数结构体
+ */
+export type GetSummaryInfoRequest = null
+
+/**
  * GetGroupList返回参数结构体
  */
 export interface GetGroupListResponse {
@@ -462,6 +467,31 @@ export interface DeleteGroupRequest {
    * 人体库ID。
    */
   GroupId: string
+}
+
+/**
+ * GetSummaryInfo返回参数结构体
+ */
+export interface GetSummaryInfoResponse {
+  /**
+   * 人体库总数量。
+   */
+  GroupCount: number
+
+  /**
+   * 人员总数量
+   */
+  PersonCount: number
+
+  /**
+   * 人员轨迹总数量
+   */
+  TraceCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

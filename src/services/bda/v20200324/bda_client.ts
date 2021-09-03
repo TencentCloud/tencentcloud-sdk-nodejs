@@ -26,6 +26,7 @@ import {
   ModifyGroupResponse,
   TerminateSegmentationTaskResponse,
   BodyAttributeInfo,
+  GetSummaryInfoRequest,
   GetGroupListResponse,
   GroupInfo,
   DescribeSegmentationTaskRequest,
@@ -37,6 +38,7 @@ import {
   ModifyPersonInfoResponse,
   CreateSegmentationTaskResponse,
   DeleteGroupRequest,
+  GetSummaryInfoResponse,
   ModifyPersonInfoRequest,
   Gender,
   SegmentCustomizedPortraitPicRequest,
@@ -115,6 +117,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateSegmentationTaskResponse) => void
   ): Promise<TerminateSegmentationTaskResponse> {
     return this.request("TerminateSegmentationTask", req, cb)
+  }
+
+  /**
+   * 获取人体库汇总信息。
+   */
+  async GetSummaryInfo(
+    req?: GetSummaryInfoRequest,
+    cb?: (error: string, rep: GetSummaryInfoResponse) => void
+  ): Promise<GetSummaryInfoResponse> {
+    return this.request("GetSummaryInfo", req, cb)
   }
 
   /**

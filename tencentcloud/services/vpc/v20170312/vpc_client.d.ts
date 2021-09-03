@@ -686,6 +686,7 @@ export declare class Client extends AbstractClient {
     GetCcnRegionBandwidthLimits(req: GetCcnRegionBandwidthLimitsRequest, cb?: (error: string, rep: GetCcnRegionBandwidthLimitsResponse) => void): Promise<GetCcnRegionBandwidthLimitsResponse>;
     /**
      * 本接口(CreateNatGateway)用于创建NAT网关。
+在对新建的NAT网关做其他操作前，需先确认此网关已被创建完成（DescribeNatGateway接口返回的实例State字段为AVAILABLE）。
      */
     CreateNatGateway(req: CreateNatGatewayRequest, cb?: (error: string, rep: CreateNatGatewayResponse) => void): Promise<CreateNatGatewayResponse>;
     /**

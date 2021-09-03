@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TerminateSegmentationTask", req, cb);
     }
     /**
+     * 获取人体库汇总信息。
+     */
+    async GetSummaryInfo(req, cb) {
+        return this.request("GetSummaryInfo", req, cb);
+    }
+    /**
      * 检测给定图片中的人体（Body）的位置信息及属性信息。
 
      */

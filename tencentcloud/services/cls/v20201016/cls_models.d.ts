@@ -1937,6 +1937,10 @@ export interface ModifyConfigRequest {
       * 采集配置关联的日志主题（TopicId）
       */
     Output?: string;
+    /**
+      * 用户自定义解析字符串，Json格式序列化的字符串
+      */
+    UserDefineRule?: string;
 }
 /**
  * DescribeLogsets返回参数结构体
@@ -2136,6 +2140,10 @@ export interface CreateConfigRequest {
       * 采集黑名单路径列表
       */
     ExcludePaths?: Array<ExcludePathInfo>;
+    /**
+      * 用户自定义采集规则，Json格式序列化的字符串
+      */
+    UserDefineRule?: string;
 }
 /**
  * CreateShipper返回参数结构体
@@ -2383,6 +2391,11 @@ export interface ConfigInfo {
       * 创建时间
       */
     CreateTime: string;
+    /**
+      * 用户自定义解析字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserDefineRule: string;
 }
 /**
  * DeleteExport请求参数结构体

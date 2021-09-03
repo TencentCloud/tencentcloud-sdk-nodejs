@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SegmentPortraitPicResponse, DetectBodyJointsResponse, DeletePersonRequest, ModifyGroupResponse, TerminateSegmentationTaskResponse, GetGroupListResponse, DescribeSegmentationTaskRequest, TerminateSegmentationTaskRequest, ModifyGroupRequest, CreatePersonRequest, ModifyPersonInfoResponse, CreateSegmentationTaskResponse, DeleteGroupRequest, ModifyPersonInfoRequest, SegmentCustomizedPortraitPicRequest, CreateGroupRequest, CreateSegmentationTaskRequest, DeleteGroupResponse, DescribeSegmentationTaskResponse, DetectBodyRequest, SearchTraceRequest, DetectBodyResponse, SegmentCustomizedPortraitPicResponse, DetectBodyJointsRequest, SegmentPortraitPicRequest, GetGroupListRequest, SearchTraceResponse, CreateTraceResponse, CreatePersonResponse, GetPersonListResponse, GetPersonListRequest, CreateTraceRequest, DeletePersonResponse, CreateGroupResponse } from "./bda_models";
+import { SegmentPortraitPicResponse, DetectBodyJointsResponse, DeletePersonRequest, ModifyGroupResponse, TerminateSegmentationTaskResponse, GetSummaryInfoRequest, GetGroupListResponse, DescribeSegmentationTaskRequest, TerminateSegmentationTaskRequest, ModifyGroupRequest, CreatePersonRequest, ModifyPersonInfoResponse, CreateSegmentationTaskResponse, DeleteGroupRequest, GetSummaryInfoResponse, ModifyPersonInfoRequest, SegmentCustomizedPortraitPicRequest, CreateGroupRequest, CreateSegmentationTaskRequest, DeleteGroupResponse, DescribeSegmentationTaskResponse, DetectBodyRequest, SearchTraceRequest, DetectBodyResponse, SegmentCustomizedPortraitPicResponse, DetectBodyJointsRequest, SegmentPortraitPicRequest, GetGroupListRequest, SearchTraceResponse, CreateTraceResponse, CreatePersonResponse, GetPersonListResponse, GetPersonListRequest, CreateTraceRequest, DeletePersonResponse, CreateGroupResponse } from "./bda_models";
 /**
  * bda client
  * @class
@@ -22,6 +22,10 @@ export declare class Client extends AbstractClient {
      * 终止指定视频人像分割处理任务
      */
     TerminateSegmentationTask(req: TerminateSegmentationTaskRequest, cb?: (error: string, rep: TerminateSegmentationTaskResponse) => void): Promise<TerminateSegmentationTaskResponse>;
+    /**
+     * 获取人体库汇总信息。
+     */
+    GetSummaryInfo(req?: GetSummaryInfoRequest, cb?: (error: string, rep: GetSummaryInfoResponse) => void): Promise<GetSummaryInfoResponse>;
     /**
      * 检测给定图片中的人体（Body）的位置信息及属性信息。
 

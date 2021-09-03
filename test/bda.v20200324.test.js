@@ -38,6 +38,16 @@ it("bda.v20200324.TerminateSegmentationTask", async function () {
     }
 })
 
+it("bda.v20200324.GetSummaryInfo", async function () {
+    try {
+       const data = await client.GetSummaryInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bda.v20200324.DetectBody", async function () {
     try {
        const data = await client.DetectBody({})

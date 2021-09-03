@@ -190,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDiagDBInstanceConf", req, cb);
     }
     /**
+     * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
+     */
+    async KillMySqlThreads(req, cb) {
+        return this.request("KillMySqlThreads", req, cb);
+    }
+    /**
      * 创建健康报告的浏览地址。
      */
     async CreateDBDiagReportUrl(req, cb) {

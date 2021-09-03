@@ -3048,12 +3048,12 @@ export interface CreateNatGatewayResponse {
   /**
    * NAT网关对象数组。
    */
-  NatGatewaySet?: Array<NatGateway>
+  NatGatewaySet: Array<NatGateway>
 
   /**
    * 符合条件的 NAT网关对象数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

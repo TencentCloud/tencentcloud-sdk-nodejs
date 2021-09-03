@@ -35,6 +35,7 @@ import {
   DescribeMySqlProcessListResponse,
   HealthStatus,
   DescribeTopSpaceTablesResponse,
+  KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
   ContactItem,
   DescribeDBSpaceStatusRequest,
@@ -57,6 +58,7 @@ import {
   EventInfo,
   DescribeMailProfileRequest,
   DeleteSecurityAuditLogExportTasksResponse,
+  KillMySqlThreadsRequest,
   CreateDBDiagReportUrlRequest,
   ScoreDetail,
   HealthScoreInfo,
@@ -383,6 +385,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
   ): Promise<ModifyDiagDBInstanceConfResponse> {
     return this.request("ModifyDiagDBInstanceConf", req, cb)
+  }
+
+  /**
+   * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
+   */
+  async KillMySqlThreads(
+    req: KillMySqlThreadsRequest,
+    cb?: (error: string, rep: KillMySqlThreadsResponse) => void
+  ): Promise<KillMySqlThreadsResponse> {
+    return this.request("KillMySqlThreads", req, cb)
   }
 
   /**
