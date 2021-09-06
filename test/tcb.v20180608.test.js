@@ -238,6 +238,16 @@ it("tcb.v20180608.CreatePostpayPackage", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeUserActivityInfo", async function () {
+    try {
+       const data = await client.DescribeUserActivityInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateWxCloudBaseRunEnv", async function () {
     try {
        const data = await client.CreateWxCloudBaseRunEnv({})
@@ -551,6 +561,16 @@ it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
 it("tcb.v20180608.ReplaceActivityRecord", async function () {
     try {
        const data = await client.ReplaceActivityRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeActivityInfo", async function () {
+    try {
+       const data = await client.DescribeActivityInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

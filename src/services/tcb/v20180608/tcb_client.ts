@@ -57,7 +57,7 @@ import {
   CloudBaseRunVolumeMount,
   BackendServiceInfo,
   DescribePostpayFreeQuotasRequest,
-  DescribeExtensionUploadInfoRequest,
+  DescribeActivityInfoResponse,
   CloudBaseRunImageInfo,
   DestroyStandaloneGatewayResponse,
   DescribeCloudBaseRunServerVersionResponse,
@@ -65,6 +65,7 @@ import {
   DeleteEndUserRequest,
   DescribeHostingDomainTaskRequest,
   DescribeQuotaDataResponse,
+  ActivityInfoItem,
   KVPair,
   SmsFreeQuota,
   FunctionInfo,
@@ -89,6 +90,7 @@ import {
   CloudBaseCapabilities,
   DescribeEndUserLoginStatisticResponse,
   DescribeEnvPostpaidDeductResponse,
+  CloudBaseRunImageSecretInfo,
   CreateCloudBaseRunResourceResponse,
   DescribeStandaloneGatewayPackageResponse,
   DestroyStaticStoreResponse,
@@ -115,6 +117,7 @@ import {
   LoginStatistic,
   DescribeWxCloudBaseRunSubNetsRequest,
   CreatePostpayPackageResponse,
+  DescribeExtensionUploadInfoRequest,
   ReplaceActivityRecordRequest,
   DeleteWxGatewayRouteResponse,
   EstablishCloudBaseRunServerRequest,
@@ -150,7 +153,7 @@ import {
   DescribeSmsQuotasResponse,
   DescribeWxCloudBaseRunEnvsRequest,
   DescribeCurveDataRequest,
-  CloudBaseRunImageSecretInfo,
+  DescribeActivityInfoRequest,
   BindEnvGatewayRequest,
   ModifyEnvResponse,
   DescribeDownloadFileResponse,
@@ -163,6 +166,7 @@ import {
   DescribeCloudBaseRunVersionSnapshotRequest,
   FreequotaInfo,
   TurnOnStandaloneGatewayRequest,
+  DescribeUserActivityInfoResponse,
   DescribePostpayFreeQuotasResponse,
   ActivityRecordItem,
   AuthDomain,
@@ -177,6 +181,7 @@ import {
   DescribeCloudBaseBuildServiceRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
+  DescribeUserActivityInfoRequest,
   Tag,
   CreateCloudBaseRunResourceRequest,
   ModifyEndUserResponse,
@@ -428,6 +433,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePostpayPackageResponse) => void
   ): Promise<CreatePostpayPackageResponse> {
     return this.request("CreatePostpayPackage", req, cb)
+  }
+
+  /**
+   * 查询用户活动信息
+   */
+  async DescribeUserActivityInfo(
+    req: DescribeUserActivityInfoRequest,
+    cb?: (error: string, rep: DescribeUserActivityInfoResponse) => void
+  ): Promise<DescribeUserActivityInfoResponse> {
+    return this.request("DescribeUserActivityInfo", req, cb)
   }
 
   /**
@@ -748,6 +763,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReplaceActivityRecordResponse) => void
   ): Promise<ReplaceActivityRecordResponse> {
     return this.request("ReplaceActivityRecord", req, cb)
+  }
+
+  /**
+   * 查询活动信息
+   */
+  async DescribeActivityInfo(
+    req: DescribeActivityInfoRequest,
+    cb?: (error: string, rep: DescribeActivityInfoResponse) => void
+  ): Promise<DescribeActivityInfoResponse> {
+    return this.request("DescribeActivityInfo", req, cb)
   }
 
   /**

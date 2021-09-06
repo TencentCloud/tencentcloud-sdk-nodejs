@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   Album,
   DescribeMusicResponse,
+  DescribePkgOfflineMusicRequest,
   DescribeLyricResponse,
   ModifyMusicOnShelvesResponse,
   UseRange,
@@ -45,6 +46,7 @@ import {
   PutMusicOnTheShelvesResponse,
   TakeMusicOffShelves,
   Lyric,
+  OfflineMusicDetail,
   DescribeItemByIdRequest,
   DescribeAuthInfoRequest,
   DescribeKTVPlaylistsResponse,
@@ -61,6 +63,7 @@ import {
   SearchKTVMusicsRequest,
   ImagePath,
   DescribeItemsResponse,
+  DescribePkgOfflineMusicResponse,
   KTVPlaylistBaseInfo,
   DescribeItemByIdResponse,
   MusicStatus,
@@ -216,7 +219,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取即时广播曲库推荐歌单列表。
+   * 根据搜索条件，返回匹配的歌曲列表。
+   */
+  async SearchKTVMusics(
+    req: SearchKTVMusicsRequest,
+    cb?: (error: string, rep: SearchKTVMusicsResponse) => void
+  ): Promise<SearchKTVMusicsResponse> {
+    return this.request("SearchKTVMusics", req, cb)
+  }
+
+  /**
+   * 获取直播互动曲库推荐歌单列表。
    */
   async DescribeKTVPlaylists(
     req: DescribeKTVPlaylistsRequest,
@@ -266,12 +279,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据搜索条件，返回匹配的歌曲列表。
+   * 根据购买曲库包用户可查询已回退的歌曲信息
    */
-  async SearchKTVMusics(
-    req: SearchKTVMusicsRequest,
-    cb?: (error: string, rep: SearchKTVMusicsResponse) => void
-  ): Promise<SearchKTVMusicsResponse> {
-    return this.request("SearchKTVMusics", req, cb)
+  async DescribePkgOfflineMusic(
+    req: DescribePkgOfflineMusicRequest,
+    cb?: (error: string, rep: DescribePkgOfflineMusicResponse) => void
+  ): Promise<DescribePkgOfflineMusicResponse> {
+    return this.request("DescribePkgOfflineMusic", req, cb)
   }
 }

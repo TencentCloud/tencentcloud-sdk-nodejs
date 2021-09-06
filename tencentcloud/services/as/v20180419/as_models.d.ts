@@ -566,6 +566,39 @@ UNIQUE，入参所填的 InstanceName 相当于实例名前缀，AS 和 CVM 会�
     InstanceNameStyle?: string;
 }
 /**
+ * 伸缩活动状态详细描述。
+ */
+export interface DetailedStatusMessage {
+    /**
+      * 错误类型。
+      */
+    Code: string;
+    /**
+      * 可用区信息。
+      */
+    Zone: string;
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 实例计费类型。
+      */
+    InstanceChargeType: string;
+    /**
+      * 子网ID。
+      */
+    SubnetId: string;
+    /**
+      * 错误描述。
+      */
+    Message: string;
+    /**
+      * 实例类型。
+      */
+    InstanceType: string;
+}
+/**
  * ModifyScheduledAction返回参数结构体
  */
 export interface ModifyScheduledActionResponse {
@@ -2863,6 +2896,10 @@ export interface Activity {
       * 伸缩活动中生命周期挂钩的执行结果。
       */
     LifecycleActionResultSet: Array<LifecycleActionResultInfo>;
+    /**
+      * 伸缩活动状态详细描述。
+      */
+    DetailedStatusMessageSet: Array<DetailedStatusMessage>;
 }
 /**
  * ModifyDesiredCapacity返回参数结构体

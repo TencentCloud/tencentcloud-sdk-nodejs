@@ -39,6 +39,7 @@ import {
   StopAutoScalingInstancesResponse,
   DescribeScalingPoliciesRequest,
   InstanceNameSettings,
+  DetailedStatusMessage,
   ModifyScheduledActionResponse,
   CreateAutoScalingGroupFromInstanceRequest,
   ExecuteScalingPolicyResponse,

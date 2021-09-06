@@ -27,6 +27,23 @@ export interface DescribeMusicResponse {
     RequestId?: string;
 }
 /**
+ * DescribePkgOfflineMusic请求参数结构体
+ */
+export interface DescribePkgOfflineMusicRequest {
+    /**
+      * 订单id
+      */
+    PackageOrderId: string;
+    /**
+      * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条(注：单次上限为100)。
+      */
+    Limit?: number;
+    /**
+      * 分页返回的记录条数，默认值：50。将返回第 Offset 到第 Offset+Limit-1 条。
+      */
+    Offset?: number;
+}
+/**
  * DescribeLyric返回参数结构体
  */
 export interface DescribeLyricResponse {
@@ -551,6 +568,27 @@ export interface Lyric {
     SubItemType: string;
 }
 /**
+ * 曲库包已下架歌曲详细信息
+ */
+export interface OfflineMusicDetail {
+    /**
+      * 歌曲Id
+      */
+    ItemId: string;
+    /**
+      * 歌曲名称
+      */
+    MusicName: string;
+    /**
+      * 不可用原因
+      */
+    OffRemark: string;
+    /**
+      * 不可用时间
+      */
+    OffTime: string;
+}
+/**
  * DescribeItemById请求参数结构体
  */
 export interface DescribeItemByIdRequest {
@@ -890,6 +928,23 @@ export interface DescribeItemsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Items?: Array<Item>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePkgOfflineMusic返回参数结构体
+ */
+export interface DescribePkgOfflineMusicResponse {
+    /**
+      * 曲库包中不可用歌曲信息
+      */
+    OfflineMusicSet: Array<OfflineMusicDetail>;
+    /**
+      * 返回总量
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

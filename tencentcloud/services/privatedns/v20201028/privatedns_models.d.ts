@@ -10,6 +10,10 @@ export interface ModifyPrivateZoneVpcRequest {
       * 私有域关联的全部VPC列表
       */
     VpcSet?: Array<VpcInfo>;
+    /**
+      * 私有域账号关联的全部VPC列表
+      */
+    AccountVpcSet?: Array<AccountVpcInfo>;
 }
 /**
  * DescribeAuditLog返回参数结构体
@@ -44,6 +48,23 @@ export interface DescribePrivateZoneRecordListRequest {
       * 分页限制数目， 最大100，默认20
       */
     Limit?: number;
+}
+/**
+ * 关联的VPC出参
+ */
+export interface AccountVpcInfoOutput {
+    /**
+      * 关联账户的uin
+      */
+    Uin: string;
+    /**
+      * vpcid
+      */
+    UniqVpcId: string;
+    /**
+      * 地域
+      */
+    Region: string;
 }
 /**
  * DescribePrivateZone请求参数结构体
@@ -258,6 +279,34 @@ export interface CreatePrivateZoneRequest {
       * 创建私有域的同时，将其关联至VPC
       */
     Vpcs?: Array<VpcInfo>;
+    /**
+      * 创建私有域同时绑定关联账号的VPC
+      */
+    AccountVpcSet?: Array<AccountVpcInfo>;
+}
+/**
+ * 私有域解析账号Vpc信息
+ */
+export interface AccountVpcInfo {
+    /**
+      * VpcId： vpc-xadsafsdasd
+      */
+    UniqVpcId: string;
+    /**
+      * Vpc所属地区: ap-guangzhou, ap-shanghai
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * Vpc所属账号: 123456789
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin: string;
+    /**
+      * vpc资源名称：testname
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcName: string;
 }
 /**
  * ModifyPrivateZone返回参数结构体
@@ -585,6 +634,11 @@ export interface PrivateZone {
       * 标签键值对集合
       */
     Tags: Array<TagInfo>;
+    /**
+      * 绑定的关联账号的vpc列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccountVpcSet: Array<AccountVpcInfoOutput>;
 }
 /**
  * CreatePrivateZoneRecord请求参数结构体
@@ -694,6 +748,10 @@ export interface ModifyPrivateZoneVpcResponse {
       * 解析域关联的VPC列表
       */
     VpcSet: Array<VpcInfo>;
+    /**
+      * 私有域账号关联的全部VPC列表
+      */
+    AccountVpcSet: Array<AccountVpcInfoOutput>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

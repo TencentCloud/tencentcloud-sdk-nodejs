@@ -1119,13 +1119,18 @@ export interface DescribePostpayFreeQuotasRequest {
 }
 
 /**
- * DescribeExtensionUploadInfo请求参数结构体
+ * DescribeActivityInfo返回参数结构体
  */
-export interface DescribeExtensionUploadInfoRequest {
+export interface DescribeActivityInfoResponse {
   /**
-   * 待上传的文件
+   * 活动详情
    */
-  ExtensionFiles: Array<ExtensionFile>
+  ActivityInfoList: Array<ActivityInfoItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1490,6 +1495,41 @@ export interface DescribeQuotaDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 活动信息
+ */
+export interface ActivityInfoItem {
+  /**
+   * 活动id
+   */
+  ActivityId: number
+
+  /**
+   * 记录插入时间
+   */
+  CreateTime: string
+
+  /**
+   * 记录最后一次变更时间
+   */
+  UpdateTime: string
+
+  /**
+   * 活动开始时间
+   */
+  StartTime: string
+
+  /**
+   * 活动结束时间
+   */
+  ExpireTime: string
+
+  /**
+   * 自定义备注信息
+   */
+  Tag: string
 }
 
 /**
@@ -1945,6 +1985,31 @@ export interface DescribeEnvPostpaidDeductResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ImageSecretInfo的信息
+ */
+export interface CloudBaseRunImageSecretInfo {
+  /**
+   * 镜像地址
+   */
+  RegistryServer?: string
+
+  /**
+   * 用户名
+   */
+  UserName?: string
+
+  /**
+   * 仓库密码
+   */
+  Password?: string
+
+  /**
+   * 邮箱
+   */
+  Email?: string
 }
 
 /**
@@ -2490,6 +2555,11 @@ export interface DescribeActivityRecordRequest {
    * 状态码过滤数组，空数组时不过滤
    */
   Statuses?: Array<number>
+
+  /**
+   * 根据是否软删除进行过滤，[0]未删除, [1] 删除，不传不过滤
+   */
+  IsDeletedList?: Array<number>
 }
 
 /**
@@ -2808,6 +2878,16 @@ export interface CreatePostpayPackageResponse {
 }
 
 /**
+ * DescribeExtensionUploadInfo请求参数结构体
+ */
+export interface DescribeExtensionUploadInfoRequest {
+  /**
+   * 待上传的文件
+   */
+  ExtensionFiles: Array<ExtensionFile>
+}
+
+/**
  * ReplaceActivityRecord请求参数结构体
  */
 export interface ReplaceActivityRecordRequest {
@@ -2824,17 +2904,17 @@ export interface ReplaceActivityRecordRequest {
   /**
    * 自定义子状态
    */
-  SubStatus: string
+  SubStatus?: string
 
   /**
    * 鉴权token
    */
-  ChannelToken: string
+  ChannelToken?: string
 
   /**
    * 渠道名，不同渠道对应不同secretKey
    */
-  Channel: string
+  Channel?: string
 }
 
 /**
@@ -3803,28 +3883,13 @@ export interface DescribeCurveDataRequest {
 }
 
 /**
- * ImageSecretInfo的信息
+ * DescribeActivityInfo请求参数结构体
  */
-export interface CloudBaseRunImageSecretInfo {
+export interface DescribeActivityInfoRequest {
   /**
-   * 镜像地址
+   * 活动id列表
    */
-  RegistryServer?: string
-
-  /**
-   * 用户名
-   */
-  UserName?: string
-
-  /**
-   * 仓库密码
-   */
-  Password?: string
-
-  /**
-   * 邮箱
-   */
-  Email?: string
+  ActivityIdList?: Array<number>
 }
 
 /**
@@ -4143,6 +4208,42 @@ export interface TurnOnStandaloneGatewayRequest {
 }
 
 /**
+ * DescribeUserActivityInfo返回参数结构体
+ */
+export interface DescribeUserActivityInfoResponse {
+  /**
+   * 自定义标记，1元钱裂变需求中即代指`团id`
+   */
+  Tag: string
+
+  /**
+   * 自定义备注，1元钱裂变需求中返回`团列表`，uin列表通过","拼接
+   */
+  Notes: string
+
+  /**
+   * 活动剩余时间，单位为s.1元钱裂变需求中即为 time(活动过期时间)-Now()), 过期后为0，即返回必为自然数
+   */
+  ActivityTimeLeft: number
+
+  /**
+   * 拼团剩余时间，单位为s.1元钱裂变需求中即为time(成团时间)+24H-Now()，过期后为0，即返回必为自然数
+   */
+  GroupTimeLeft: number
+
+  /**
+      * 昵称列表,通过","拼接， 1元钱裂变活动中与Notes中uin一一对应
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NickNameList: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePostpayFreeQuotas返回参数结构体
  */
 export interface DescribePostpayFreeQuotasResponse {
@@ -4185,6 +4286,18 @@ export interface ActivityRecordItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SubStatus: string
+
+  /**
+      * 整型子状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubStatusInt: number
+
+  /**
+      * 是否软删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDeleted: boolean
 }
 
 /**
@@ -4694,6 +4807,31 @@ export interface CloudBaseCodeRepoDetail {
  * CheckTcbService请求参数结构体
  */
 export type CheckTcbServiceRequest = null
+
+/**
+ * DescribeUserActivityInfo请求参数结构体
+ */
+export interface DescribeUserActivityInfoRequest {
+  /**
+   * 活动id
+   */
+  ActivityId: number
+
+  /**
+   * 渠道加密token
+   */
+  ChannelToken?: string
+
+  /**
+   * 渠道来源，每个来源对应不同secretKey
+   */
+  Channel?: string
+
+  /**
+   * 团id, 1元钱裂变中活动团id不为空时根据团id来查询记录，为空时查询uin最新记录
+   */
+  GroupId?: string
+}
 
 /**
  * 标签键值对

@@ -148,6 +148,16 @@ it("ame.v20190916.ModifyMusicOnShelves", async function () {
     }
 })
 
+it("ame.v20190916.SearchKTVMusics", async function () {
+    try {
+       const data = await client.SearchKTVMusics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.DescribeKTVPlaylists", async function () {
     try {
        const data = await client.DescribeKTVPlaylists({})
@@ -198,9 +208,9 @@ it("ame.v20190916.PutMusicOnTheShelves", async function () {
     }
 })
 
-it("ame.v20190916.SearchKTVMusics", async function () {
+it("ame.v20190916.DescribePkgOfflineMusic", async function () {
     try {
-       const data = await client.SearchKTVMusics({})
+       const data = await client.DescribePkgOfflineMusic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

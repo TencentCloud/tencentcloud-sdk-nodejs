@@ -106,7 +106,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMusicOnShelves", req, cb);
     }
     /**
-     * 获取即时广播曲库推荐歌单列表。
+     * 根据搜索条件，返回匹配的歌曲列表。
+     */
+    async SearchKTVMusics(req, cb) {
+        return this.request("SearchKTVMusics", req, cb);
+    }
+    /**
+     * 获取直播互动曲库推荐歌单列表。
      */
     async DescribeKTVPlaylists(req, cb) {
         return this.request("DescribeKTVPlaylists", req, cb);
@@ -136,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PutMusicOnTheShelves", req, cb);
     }
     /**
-     * 根据搜索条件，返回匹配的歌曲列表。
+     * 根据购买曲库包用户可查询已回退的歌曲信息
      */
-    async SearchKTVMusics(req, cb) {
-        return this.request("SearchKTVMusics", req, cb);
+    async DescribePkgOfflineMusic(req, cb) {
+        return this.request("DescribePkgOfflineMusic", req, cb);
     }
 }
 exports.Client = Client;

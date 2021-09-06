@@ -163,6 +163,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePostpayPackage", req, cb);
     }
     /**
+     * 查询用户活动信息
+     */
+    async DescribeUserActivityInfo(req, cb) {
+        return this.request("DescribeUserActivityInfo", req, cb);
+    }
+    /**
      * 创建微信云托管
      */
     async CreateWxCloudBaseRunEnv(req, cb) {
@@ -353,6 +359,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ReplaceActivityRecord(req, cb) {
         return this.request("ReplaceActivityRecord", req, cb);
+    }
+    /**
+     * 查询活动信息
+     */
+    async DescribeActivityInfo(req, cb) {
+        return this.request("DescribeActivityInfo", req, cb);
     }
     /**
      * 获取云托管代码上传url
