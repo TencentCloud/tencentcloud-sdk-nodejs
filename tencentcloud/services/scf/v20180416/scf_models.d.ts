@@ -1161,7 +1161,7 @@ export interface CreateTriggerRequest {
       */
     TriggerName: string;
     /**
-      * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型
+      * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。
       */
     Type: string;
     /**
@@ -1767,7 +1767,7 @@ export interface CreateTriggerResponse {
     /**
       * 触发器信息
       */
-    TriggerInfo?: Trigger;
+    TriggerInfo: Trigger;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2495,11 +2495,11 @@ export interface ListFunctionsResponse {
     /**
       * 函数列表
       */
-    Functions?: Array<Function>;
+    Functions: Array<Function>;
     /**
       * 总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2644,6 +2644,14 @@ export interface Function {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReservedConcurrencyMem: number;
+    /**
+      * 函数异步属性，取值 TRUE 或者 FALSE
+      */
+    AsyncRunEnable: string;
+    /**
+      * 异步函数是否开启调用追踪，取值 TRUE 或者 FALSE
+      */
+    TraceEnable: string;
 }
 /**
  * 名称空间已使用信息

@@ -660,27 +660,27 @@ export interface DescribeLiveStreamOnlineListResponse {
   /**
    * 符合条件的总个数。
    */
-  TotalNum?: number
+  TotalNum: number
 
   /**
    * 总页数。
    */
-  TotalPage?: number
+  TotalPage: number
 
   /**
    * 分页的页码。
    */
-  PageNum?: number
+  PageNum: number
 
   /**
    * 每页显示的条数。
    */
-  PageSize?: number
+  PageSize: number
 
   /**
    * 正在推送流的信息列表。
    */
-  OnlineInfo?: Array<StreamOnlineInfo>
+  OnlineInfo: Array<StreamOnlineInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4781,7 +4781,7 @@ export interface DescribeLiveForbidStreamListRequest {
   PageSize?: number
 
   /**
-   * 搜索的推流 id 名称。
+   * 按流名称查询。
    */
   StreamName?: string
 }
@@ -7545,27 +7545,27 @@ export interface DescribeLiveStreamEventListResponse {
   /**
    * 推断流事件列表。
    */
-  EventList?: Array<StreamEventInfo>
+  EventList: Array<StreamEventInfo>
 
   /**
    * 分页的页码。
    */
-  PageNum?: number
+  PageNum: number
 
   /**
    * 每页大小。
    */
-  PageSize?: number
+  PageSize: number
 
   /**
    * 符合条件的总个数。
    */
-  TotalNum?: number
+  TotalNum: number
 
   /**
    * 总页数。
    */
-  TotalPage?: number
+  TotalPage: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

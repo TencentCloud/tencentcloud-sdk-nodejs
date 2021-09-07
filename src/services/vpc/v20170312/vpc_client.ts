@@ -1129,11 +1129,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（AssignPrivateIpAddresses）用于弹性网卡申请内网 IP。
-   * 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
-   * 可以指定内网IP地址申请，内网IP地址类型不能为主IP，主IP已存在，不能修改，内网IP必须要弹性网卡所在子网内，而且不能被占用。
-   * 在弹性网卡上申请一个到多个辅助内网IP，接口会在弹性网卡所在子网网段内返回指定数量的辅助内网IP。
-   */
+     * 本接口（AssignPrivateIpAddresses）用于弹性网卡申请内网 IP。
+* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
+* 可以指定内网IP地址申请，内网IP地址类型不能为主IP，主IP已存在，不能修改，内网IP必须要弹性网卡所在子网内，而且不能被占用。
+* 在弹性网卡上申请一个到多个辅助内网IP，接口会在弹性网卡所在子网网段内返回指定数量的辅助内网IP。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async AssignPrivateIpAddresses(
     req: AssignPrivateIpAddressesRequest,
     cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void
@@ -1152,13 +1154,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云服务器。
-   * 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
-   * 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
-   * 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
-   * 创建弹性网卡同时可以绑定已有安全组。
-   * 创建弹性网卡同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
-   */
+     * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云服务器。
+* 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
+* 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
+* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
+* 创建弹性网卡同时可以绑定已有安全组。
+* 创建弹性网卡同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async CreateAndAttachNetworkInterface(
     req: CreateAndAttachNetworkInterfaceRequest,
     cb?: (error: string, rep: CreateAndAttachNetworkInterfaceResponse) => void
@@ -1342,8 +1346,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteDhcpIp）用于删除DhcpIp
-   */
+     * 本接口（DeleteDhcpIp）用于删除DhcpIp。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async DeleteDhcpIp(
     req: DeleteDhcpIpRequest,
     cb?: (error: string, rep: DeleteDhcpIpResponse) => void
@@ -1614,10 +1620,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(AttachClassicLinkVpc)用于创建私有网络和基础网络设备互通。
-   * 私有网络和基础网络设备必须在同一个地域。
-   * 私有网络和基础网络的区别详见vpc产品文档-<a href="https://cloud.tencent.com/document/product/215/30720">私有网络与基础网络</a>。
-   */
+     * 本接口(AttachClassicLinkVpc)用于创建私有网络和基础网络设备互通。
+* 私有网络和基础网络设备必须在同一个地域。
+* 私有网络和基础网络的区别详见vpc产品文档-<a href="https://cloud.tencent.com/document/product/215/30720">私有网络与基础网络</a>。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async AttachClassicLinkVpc(
     req: AttachClassicLinkVpcRequest,
     cb?: (error: string, rep: AttachClassicLinkVpcResponse) => void
@@ -1679,13 +1687,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateNetworkInterface）用于创建弹性网卡。
-   * 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
-   * 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
-   * 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
-   * 创建弹性网卡同时可以绑定已有安全组。
-   * 创建弹性网卡同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
-   */
+     * 本接口（CreateNetworkInterface）用于创建弹性网卡。
+* 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
+* 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
+* 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
+* 创建弹性网卡同时可以绑定已有安全组。
+* 创建弹性网卡同时可以绑定标签, 应答里的标签列表代表添加成功的标签。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async CreateNetworkInterface(
     req: CreateNetworkInterfaceRequest,
     cb?: (error: string, rep: CreateNetworkInterfaceResponse) => void
@@ -2016,8 +2026,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（AssociateDhcpIpWithAddressIp）用于DhcpIp绑定弹性公网IP（EIP）。<br />
-   */
+     * 本接口（AssociateDhcpIpWithAddressIp）用于DhcpIp绑定弹性公网IP（EIP）。<br />
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async AssociateDhcpIpWithAddressIp(
     req: AssociateDhcpIpWithAddressIpRequest,
     cb?: (error: string, rep: AssociateDhcpIpWithAddressIpResponse) => void
@@ -2967,8 +2979,10 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（DisassociateDhcpIpWithAddressIp）用于将DhcpIp已绑定的弹性公网IP（EIP）解除绑定。<br />
-   */
+     * 本接口（DisassociateDhcpIpWithAddressIp）用于将DhcpIp已绑定的弹性公网IP（EIP）解除绑定。<br />
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async DisassociateDhcpIpWithAddressIp(
     req: DisassociateDhcpIpWithAddressIpRequest,
     cb?: (error: string, rep: DisassociateDhcpIpWithAddressIpResponse) => void
@@ -3267,8 +3281,10 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口（CreateVpnConnection）用于创建VPN通道。
-   */
+     * 本接口（CreateVpnConnection）用于创建VPN通道。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async CreateVpnConnection(
     req: CreateVpnConnectionRequest,
     cb?: (error: string, rep: CreateVpnConnectionResponse) => void
@@ -3307,8 +3323,10 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口(DetachClassicLinkVpc)用于删除私有网络和基础网络设备互通。
-   */
+     * 本接口(DetachClassicLinkVpc)用于删除私有网络和基础网络设备互通。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
+     */
   async DetachClassicLinkVpc(
     req: DetachClassicLinkVpcRequest,
     cb?: (error: string, rep: DetachClassicLinkVpcResponse) => void

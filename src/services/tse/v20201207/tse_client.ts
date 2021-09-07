@@ -26,7 +26,9 @@ import {
   Filter,
   EnvAddressInfo,
   VpcInfo,
+  BoundK8SInfo,
   DescribeSREInstanceAccessAddressRequest,
+  ServiceGovernanceInfo,
 } from "./tse_models"
 
 /**

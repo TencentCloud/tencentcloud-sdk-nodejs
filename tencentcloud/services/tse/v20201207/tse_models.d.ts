@@ -110,6 +110,11 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VpcInfos: Array<VpcInfo>;
+    /**
+      * 服务治理相关信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceGovernanceInfos: Array<ServiceGovernanceInfo>;
 }
 /**
  * DescribeSREInstanceAccessAddress返回参数结构体
@@ -235,6 +240,20 @@ export interface VpcInfo {
     IntranetAddress?: string;
 }
 /**
+ * 服务治理引擎绑定的kubernetes信息
+ */
+export interface BoundK8SInfo {
+    /**
+      * 绑定的kubernetes集群ID
+      */
+    BoundClusterId: string;
+    /**
+      * 绑定的kubernetes的集群类型，分tke和eks两种
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BoundClusterType: string;
+}
+/**
  * DescribeSREInstanceAccessAddress请求参数结构体
  */
 export interface DescribeSREInstanceAccessAddressRequest {
@@ -250,4 +269,21 @@ export interface DescribeSREInstanceAccessAddressRequest {
       * 子网ID
       */
     SubnetId?: string;
+}
+/**
+ * 服务治理相关的信息
+ */
+export interface ServiceGovernanceInfo {
+    /**
+      * 引擎所在的地域
+      */
+    EngineRegion: string;
+    /**
+      * 服务治理引擎绑定的kubernetes集群信息
+      */
+    BoundK8SInfos?: Array<BoundK8SInfo>;
+    /**
+      * 服务治理引擎绑定的网络信息
+      */
+    VpcInfos?: Array<VpcInfo>;
 }

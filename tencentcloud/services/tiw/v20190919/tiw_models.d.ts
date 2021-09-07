@@ -981,7 +981,9 @@ export interface CreateTranscodeRequest {
       */
     IsStaticPPT?: boolean;
     /**
-      * 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率
+      * 注意: 该参数已废弃, 请使用 MinScaleResolution
+
+转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率
 
 注意分辨率宽高中间为英文字母"xyz"的"x"
       */
@@ -1009,6 +1011,12 @@ tar.gz： 生成`.tar.gz`压缩包
 注意：对于PDF等静态文件转码，无论是正常优先级或者低优先级，最大只能支持200MB
       */
     Priority?: string;
+    /**
+      * 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率
+
+注意分辨率宽高中间为英文字母"xyz"的"x"
+      */
+    MinScaleResolution?: string;
 }
 /**
  * DescribeWhiteboardPushCallback请求参数结构体

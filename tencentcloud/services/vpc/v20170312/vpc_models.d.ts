@@ -2865,10 +2865,6 @@ export interface InstanceStatistic {
  */
 export interface CreateVpnConnectionRequest {
     /**
-      * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口返回值中的VpcId获取。
-      */
-    VpcId: string;
-    /**
       * VPN网关实例ID。
       */
     VpnGatewayId: string;
@@ -2885,9 +2881,14 @@ export interface CreateVpnConnectionRequest {
       */
     PreShareKey: string;
     /**
+      * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口返回值中的VpcId获取。
+CCN VPN 形的通道 可以不传VPCID
+      */
+    VpcId?: string;
+    /**
       * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
       */
-    SecurityPolicyDatabases: Array<SecurityPolicyDatabase>;
+    SecurityPolicyDatabases?: Array<SecurityPolicyDatabase>;
     /**
       * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议
       */
@@ -2912,6 +2913,10 @@ export interface CreateVpnConnectionRequest {
       * 健康检查对端地址
       */
     HealthCheckRemoteIp?: string;
+    /**
+      * 通道类型, 例如:["STATIC", "StaticRoute", "Policy"]
+      */
+    RouteType?: string;
 }
 /**
  * CCN路由策略对象
@@ -4195,7 +4200,7 @@ export interface CreateVpnConnectionResponse {
     /**
       * 通道实例对象。
       */
-    VpnConnection?: VpnConnection;
+    VpnConnection: VpnConnection;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9400,7 +9405,7 @@ export interface CreateNetworkInterfaceResponse {
     /**
       * 弹性网卡实例。
       */
-    NetworkInterface?: NetworkInterface;
+    NetworkInterface: NetworkInterface;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
