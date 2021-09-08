@@ -16,6 +16,10 @@ export interface ChargePrepaid {
  */
 export interface InquiryPriceTerminateInstancesResponse {
     /**
+      * 退款详情。
+      */
+    InstanceRefundsSet?: Array<InstanceRefund>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -3366,6 +3370,26 @@ export interface InquiryPriceRenewInstancesRequest {
       * 是否续费弹性数据盘。取值范围：<br><li>TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘<br><li>FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘<br><br>默认取值：TRUE。
       */
     RenewPortableDataDisk?: boolean;
+}
+/**
+ * 描述退款详情。
+ */
+export interface InstanceRefund {
+    /**
+      * 实例Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
+    /**
+      * 退款数额。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Refunds?: number;
+    /**
+      * 退款详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PriceDetail?: string;
 }
 /**
  * DescribeInstances请求参数结构体

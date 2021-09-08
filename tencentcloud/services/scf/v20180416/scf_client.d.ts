@@ -131,7 +131,7 @@ export declare class Client extends AbstractClient {
      */
     ListLayerVersions(req: ListLayerVersionsRequest, cb?: (error: string, rep: ListLayerVersionsResponse) => void): Promise<ListLayerVersionsResponse>;
     /**
-     * 获取函数的保留并发详情。
+     * 获取函数的最大独占配额详情。
      */
     GetReservedConcurrencyConfig(req: GetReservedConcurrencyConfigRequest, cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void): Promise<GetReservedConcurrencyConfigResponse>;
     /**
@@ -143,7 +143,7 @@ export declare class Client extends AbstractClient {
      */
     UpdateFunctionConfiguration(req: UpdateFunctionConfigurationRequest, cb?: (error: string, rep: UpdateFunctionConfigurationResponse) => void): Promise<UpdateFunctionConfigurationResponse>;
     /**
-     * 设置函数保留并发
+     * 设置函数最大独占配额
      */
     PutReservedConcurrencyConfig(req: PutReservedConcurrencyConfigRequest, cb?: (error: string, rep: PutReservedConcurrencyConfigResponse) => void): Promise<PutReservedConcurrencyConfigResponse>;
     /**
@@ -151,7 +151,7 @@ export declare class Client extends AbstractClient {
      */
     GetAccount(req?: GetAccountRequest, cb?: (error: string, rep: GetAccountResponse) => void): Promise<GetAccountResponse>;
     /**
-     * 删除函数的保留并发配置。
+     * 删除函数的最大独占配额配置。
      */
     DeleteReservedConcurrencyConfig(req: DeleteReservedConcurrencyConfigRequest, cb?: (error: string, rep: DeleteReservedConcurrencyConfigResponse) => void): Promise<DeleteReservedConcurrencyConfigResponse>;
     /**

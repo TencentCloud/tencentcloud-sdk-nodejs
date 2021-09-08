@@ -186,10 +186,10 @@ export interface DeleteLayerVersionResponse {
  */
 export interface GetReservedConcurrencyConfigResponse {
   /**
-      * 该函数的保留并发内存。
+      * 该函数的最大独占配额。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReservedMem?: number
+  ReservedMem: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1028,7 +1028,7 @@ export interface UpdateFunctionConfigurationRequest {
  */
 export interface DeleteReservedConcurrencyConfigRequest {
   /**
-   * 需要删除预置并发的函数的名称
+   * 需要删除最大独占配额的函数的名称
    */
   FunctionName: string
 
@@ -2080,12 +2080,12 @@ export interface UpdateFunctionEventInvokeConfigResponse {
  */
 export interface PutReservedConcurrencyConfigRequest {
   /**
-   * 需要设置预置并发的函数的名称
+   * 需要设置最大独占配额的函数的名称
    */
   FunctionName: string
 
   /**
-   * 函数保留并发内存，注：函数的保留并发内存总和上限：用户总并发内存配额 - 12800
+   * 函数最大独占配额，注：函数的最大独占配额内存总和上限：用户总并发内存配额 - 12800
    */
   ReservedConcurrencyMem: number
 
@@ -3059,7 +3059,7 @@ export interface CreateFunctionResponse {
  */
 export interface GetReservedConcurrencyConfigRequest {
   /**
-   * 需要获取预置并发详情的函数名称。
+   * 需要获取最大独占配额详情的函数名称。
    */
   FunctionName: string
 

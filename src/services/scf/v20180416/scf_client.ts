@@ -453,7 +453,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取函数的保留并发详情。
+   * 获取函数的最大独占配额详情。
    */
   async GetReservedConcurrencyConfig(
     req: GetReservedConcurrencyConfigRequest,
@@ -483,7 +483,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置函数保留并发
+   * 设置函数最大独占配额
    */
   async PutReservedConcurrencyConfig(
     req: PutReservedConcurrencyConfigRequest,
@@ -503,7 +503,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除函数的保留并发配置。
+   * 删除函数的最大独占配额配置。
    */
   async DeleteReservedConcurrencyConfig(
     req: DeleteReservedConcurrencyConfigRequest,

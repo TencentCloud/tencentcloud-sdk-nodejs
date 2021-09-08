@@ -53,6 +53,7 @@ import {
   DescribeDomainPurviewRequest,
   ModifyDomainStatusResponse,
   CreateDomainBatchDetail,
+  ModifySubdomainStatusRequest,
   DescribeRecordRequest,
   ModifyDomainUnlockRequest,
   CreateDomainGroupResponse,
@@ -72,6 +73,7 @@ import {
   DescribeDomainLogListRequest,
   DescribeDomainPurviewResponse,
   DescribeDomainShareInfoRequest,
+  ModifySubdomainStatusResponse,
   CreateRecordBatchDetail,
   DomainListItem,
   ModifyRecordStatusResponse,
@@ -130,6 +132,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainPurviewResponse) => void
   ): Promise<DescribeDomainPurviewResponse> {
     return this.request("DescribeDomainPurview", req, cb)
+  }
+
+  /**
+   * 暂停子域名的解析记录
+   */
+  async ModifySubdomainStatus(
+    req: ModifySubdomainStatusRequest,
+    cb?: (error: string, rep: ModifySubdomainStatusResponse) => void
+  ): Promise<ModifySubdomainStatusResponse> {
+    return this.request("ModifySubdomainStatus", req, cb)
   }
 
   /**

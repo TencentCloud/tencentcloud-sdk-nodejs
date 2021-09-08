@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainPurview", req, cb);
     }
     /**
+     * 暂停子域名的解析记录
+     */
+    async ModifySubdomainStatus(req, cb) {
+        return this.request("ModifySubdomainStatus", req, cb);
+    }
+    /**
      * 删除记录
      */
     async DeleteRecord(req, cb) {

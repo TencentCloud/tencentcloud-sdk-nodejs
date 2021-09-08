@@ -836,6 +836,31 @@ export interface CreateDomainBatchDetail {
     Operation: string;
 }
 /**
+ * ModifySubdomainStatus请求参数结构体
+ */
+export interface ModifySubdomainStatusRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 记录类型。允许的值为A、CNAME、MX、TXT、NS、AAAA、SPF、SRV、CAA、URL、URL1。若要传多个，用英文逗号分隔，例如A,TXT,CNAME。
+      */
+    RecordType: string;
+    /**
+      * 记录状态。允许的值为disable。
+      */
+    Status: string;
+    /**
+      * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+      */
+    DomainId?: number;
+    /**
+      * 主机记录，如 www，如果不传，默认为 @。
+      */
+    SubDomain?: string;
+}
+/**
  * DescribeRecord请求参数结构体
  */
 export interface DescribeRecordRequest {
@@ -1240,6 +1265,15 @@ export interface DescribeDomainShareInfoRequest {
       * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
       */
     DomainId?: number;
+}
+/**
+ * ModifySubdomainStatus返回参数结构体
+ */
+export interface ModifySubdomainStatusResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 批量添加记录返回结构
