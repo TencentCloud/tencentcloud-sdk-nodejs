@@ -1366,6 +1366,30 @@ export interface DescribeCloudBaseRunServerVersionResponse {
   MemSize: number
 
   /**
+      * 是否有Dockerfile：0-default has, 1-has, 2-has not
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasDockerfile: number
+
+  /**
+      * 基础镜像
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BaseImage: string
+
+  /**
+      * 容器启动入口命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EntryPoint: string
+
+  /**
+      * 仓库语言
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoLanguage: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2470,6 +2494,12 @@ export interface CodeSource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProjectId?: number
+
+  /**
+      * coding项目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectName?: string
 }
 
 /**
@@ -2627,7 +2657,7 @@ export interface CreateCloudBaseRunServerVersionRequest {
   EnvId: string
 
   /**
-   * 枚举（package/repository/image)
+   * 枚举（package/repository/image/jar/war)
    */
   UploadType: string
 
@@ -2810,6 +2840,31 @@ export interface CreateCloudBaseRunServerVersionRequest {
    * 数据卷挂载参数
    */
   ServiceVolumeMounts?: Array<CloudBaseRunServiceVolumeMount>
+
+  /**
+   * 是否有Dockerfile：0-default has, 1-has, 2-has not
+   */
+  HasDockerfile?: number
+
+  /**
+   * 基础镜像
+   */
+  BaseImage?: string
+
+  /**
+   * 容器启动入口命令
+   */
+  EntryPoint?: string
+
+  /**
+   * 仓库语言
+   */
+  RepoLanguage?: string
+
+  /**
+   * 用户实际上传文件名（仅UploadType为jar/war时必填）
+   */
+  UploadFilename?: string
 }
 
 /**

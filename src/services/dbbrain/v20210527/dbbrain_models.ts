@@ -1823,7 +1823,7 @@ export interface DescribeSlowLogTopSqlsRequest {
   StartTime: string
 
   /**
-   * 截止时间，如“2019-09-10 12:13:14”，截止时间与开始时间的间隔最大可为7天。
+   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
    */
   EndTime: string
 

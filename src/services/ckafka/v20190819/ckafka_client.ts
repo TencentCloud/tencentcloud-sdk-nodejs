@@ -21,6 +21,7 @@ import {
   TopicDetail,
   DeleteAclRequest,
   GroupInfoMember,
+  BatchCreateAclRequest,
   DeleteUserRequest,
   PartitionOffset,
   DescribeACLRequest,
@@ -111,6 +112,7 @@ import {
   DescribeCkafkaZoneResponse,
   Filter,
   GroupOffsetResponse,
+  BatchCreateAclResponse,
   CreateUserRequest,
   DeleteTopicIpWhiteListResponse,
   CreateInstancePreResponse,
@@ -131,6 +133,7 @@ import {
   ModifyGroupOffsetsRequest,
   CreateTopicIpWhiteListRequest,
   Route,
+  AclRuleInfo,
   Acl,
   TopicRetentionTimeConfigRsp,
   ModifyTopicAttributesRequest,
@@ -403,6 +406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesDetailResponse) => void
   ): Promise<DescribeInstancesDetailResponse> {
     return this.request("DescribeInstancesDetail", req, cb)
+  }
+
+  /**
+   * 批量添加ACL策略
+   */
+  async BatchCreateAcl(
+    req: BatchCreateAclRequest,
+    cb?: (error: string, rep: BatchCreateAclResponse) => void
+  ): Promise<BatchCreateAclResponse> {
+    return this.request("BatchCreateAcl", req, cb)
   }
 
   /**

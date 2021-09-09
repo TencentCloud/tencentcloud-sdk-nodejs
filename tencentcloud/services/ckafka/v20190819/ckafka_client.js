@@ -179,6 +179,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesDetail", req, cb);
     }
     /**
+     * 批量添加ACL策略
+     */
+    async BatchCreateAcl(req, cb) {
+        return this.request("BatchCreateAcl", req, cb);
+    }
+    /**
      * 删除ACL规则
      */
     async DeleteAclRule(req, cb) {
