@@ -168,9 +168,9 @@ it("dcdb.v20180411.InitDCDBInstances", async function () {
     }
 })
 
-it("dcdb.v20180411.GrantAccountPrivileges", async function () {
+it("dcdb.v20180411.CreateDedicatedClusterDCDBInstance", async function () {
     try {
-       const data = await client.GrantAccountPrivileges({})
+       const data = await client.CreateDedicatedClusterDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +381,16 @@ it("dcdb.v20180411.DescribeDcnDetail", async function () {
 it("dcdb.v20180411.FlushBinlog", async function () {
     try {
        const data = await client.FlushBinlog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.GrantAccountPrivileges", async function () {
+    try {
+       const data = await client.GrantAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

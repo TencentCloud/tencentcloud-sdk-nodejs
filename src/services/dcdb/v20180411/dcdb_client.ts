@@ -50,6 +50,7 @@ import {
   DatabaseView,
   DescribeDBLogFilesRequest,
   DescribeOrdersResponse,
+  CreateDedicatedClusterDCDBInstanceRequest,
   DcnDetailItem,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
@@ -123,6 +124,7 @@ import {
   DescribeFlowRequest,
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
+  CreateDedicatedClusterDCDBInstanceResponse,
   UserTaskInfo,
   DescribeProjectsRequest,
   AddShardConfig,
@@ -320,14 +322,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-注意：相同用户名，不同Host是不同的账号。
-     */
-  async GrantAccountPrivileges(
-    req: GrantAccountPrivilegesRequest,
-    cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void
-  ): Promise<GrantAccountPrivilegesResponse> {
-    return this.request("GrantAccountPrivileges", req, cb)
+   * 创建独享集群DCDB实例
+   */
+  async CreateDedicatedClusterDCDBInstance(
+    req: CreateDedicatedClusterDCDBInstanceRequest,
+    cb?: (error: string, rep: CreateDedicatedClusterDCDBInstanceResponse) => void
+  ): Promise<CreateDedicatedClusterDCDBInstanceResponse> {
+    return this.request("CreateDedicatedClusterDCDBInstance", req, cb)
   }
 
   /**
@@ -538,6 +539,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FlushBinlogResponse) => void
   ): Promise<FlushBinlogResponse> {
     return this.request("FlushBinlog", req, cb)
+  }
+
+  /**
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
+  async GrantAccountPrivileges(
+    req: GrantAccountPrivilegesRequest,
+    cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void
+  ): Promise<GrantAccountPrivilegesResponse> {
+    return this.request("GrantAccountPrivileges", req, cb)
   }
 
   /**

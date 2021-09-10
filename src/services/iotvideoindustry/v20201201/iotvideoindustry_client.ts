@@ -120,7 +120,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取设备下属通道
+   * 获取IPC设备下属通道
    */
   async DescribeIPCChannels(
     req: DescribeIPCChannelsRequest,

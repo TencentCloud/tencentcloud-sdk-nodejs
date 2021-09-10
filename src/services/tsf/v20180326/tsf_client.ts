@@ -719,7 +719,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  容器部署组详情
+   *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
    */
   async DescribeContainerGroupDetail(
     req: DescribeContainerGroupDetailRequest,

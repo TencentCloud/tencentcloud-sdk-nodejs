@@ -2724,12 +2724,12 @@ export interface DescribeDBErrlogsResponse {
   /**
    * 本次调用返回了多少条数据
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 错误日志列表
    */
-  Details?: Array<ErrLogDetail>
+  Details: Array<ErrLogDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3165,12 +3165,12 @@ export interface DescribeDBSlowlogsResponse {
   /**
    * 本次返回多少条数据
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 慢查询日志详情
    */
-  Detail?: SlowlogDetail
+  Detail: SlowlogDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

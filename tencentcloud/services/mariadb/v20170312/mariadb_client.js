@@ -114,16 +114,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSqlLogs", req, cb);
     }
     /**
-     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+     * 本接口(DescribeDBPerformanceDetails)用于查看实例性能数据详情。
      */
-    async DescribeDBSlowLogs(req, cb) {
-        return this.request("DescribeDBSlowLogs", req, cb);
+    async DescribeDBPerformanceDetails(req, cb) {
+        return this.request("DescribeDBPerformanceDetails", req, cb);
     }
     /**
      * 本接口（DescribeFlow）用于查询流程状态。
      */
     async DescribeFlow(req, cb) {
         return this.request("DescribeFlow", req, cb);
+    }
+    /**
+     * 创建独享集群Mariadb实例
+     */
+    async CreateDedicatedClusterDBInstance(req, cb) {
+        return this.request("CreateDedicatedClusterDBInstance", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceName）用于修改云数据库实例的名称。
@@ -162,10 +168,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
-     * 本接口(DescribeDBPerformanceDetails)用于查看实例性能数据详情。
+     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
      */
-    async DescribeDBPerformanceDetails(req, cb) {
-        return this.request("DescribeDBPerformanceDetails", req, cb);
+    async DescribeDBSlowLogs(req, cb) {
+        return this.request("DescribeDBSlowLogs", req, cb);
     }
     /**
      * 本接口(DescribeDBLogFiles)用于获取数据库的各种日志列表，包括冷备、binlog、errlog和slowlog。

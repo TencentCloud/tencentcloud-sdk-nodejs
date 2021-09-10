@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBErrlogs(req: DescribeDBErrlogsRequest, cb?: (error: string, rep: DescribeDBErrlogsResponse) => void): Promise<DescribeDBErrlogsResponse>;
     /**
-     * 慢查询统计分析接口，根据SQL语句抽象参数之后，进行聚合分析，并返回对应结果
+     * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
      */
     DescribeSlowQueryAnalysis(req: DescribeSlowQueryAnalysisRequest, cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void): Promise<DescribeSlowQueryAnalysisResponse>;
     /**
@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**
-     * 获取慢查询列表
+     * 此接口（DescribeSlowQueryList）用于查询指定时间范围内的所有慢查询。
      */
     DescribeSlowQueryList(req: DescribeSlowQueryListRequest, cb?: (error: string, rep: DescribeSlowQueryListResponse) => void): Promise<DescribeSlowQueryListResponse>;
     /**
@@ -192,7 +192,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeProductConfig(req: DescribeProductConfigRequest, cb?: (error: string, rep: DescribeProductConfigResponse) => void): Promise<DescribeProductConfigResponse>;
     /**
-     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。
+     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。已于2021.09.01日正式废弃，后续此接口将不再返回任何数据，新接口为DescribeSlowQueryList，详细请查看：https://cloud.tencent.com/document/product/409/60540
      */
     DescribeDBSlowlogs(req: DescribeDBSlowlogsRequest, cb?: (error: string, rep: DescribeDBSlowlogsResponse) => void): Promise<DescribeDBSlowlogsResponse>;
     /**

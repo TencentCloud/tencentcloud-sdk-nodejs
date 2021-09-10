@@ -148,9 +148,9 @@ it("mariadb.v20170312.DescribeSqlLogs", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeDBSlowLogs", async function () {
+it("mariadb.v20170312.DescribeDBPerformanceDetails", async function () {
     try {
-       const data = await client.DescribeDBSlowLogs({})
+       const data = await client.DescribeDBPerformanceDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +161,16 @@ it("mariadb.v20170312.DescribeDBSlowLogs", async function () {
 it("mariadb.v20170312.DescribeFlow", async function () {
     try {
        const data = await client.DescribeFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.CreateDedicatedClusterDBInstance", async function () {
+    try {
+       const data = await client.CreateDedicatedClusterDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +238,9 @@ it("mariadb.v20170312.ModifyDBInstancesProject", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeDBPerformanceDetails", async function () {
+it("mariadb.v20170312.DescribeDBSlowLogs", async function () {
     try {
-       const data = await client.DescribeDBPerformanceDetails({})
+       const data = await client.DescribeDBSlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

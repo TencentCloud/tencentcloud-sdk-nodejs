@@ -69,6 +69,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   DescribeSaleInfoRequest,
   RenewDBInstanceRequest,
+  CreateDedicatedClusterDBInstanceResponse,
   TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
   DescribeSqlLogsRequest,
@@ -82,6 +83,7 @@ import {
   DescribeSaleInfoResponse,
   Deal,
   DescribeDBPerformanceDetailsRequest,
+  CreateDedicatedClusterDBInstanceRequest,
   DBParamValue,
   SpecConfigInfo,
   ModifyDBParametersRequest,
@@ -309,13 +311,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+   * 本接口(DescribeDBPerformanceDetails)用于查看实例性能数据详情。
    */
-  async DescribeDBSlowLogs(
-    req: DescribeDBSlowLogsRequest,
-    cb?: (error: string, rep: DescribeDBSlowLogsResponse) => void
-  ): Promise<DescribeDBSlowLogsResponse> {
-    return this.request("DescribeDBSlowLogs", req, cb)
+  async DescribeDBPerformanceDetails(
+    req: DescribeDBPerformanceDetailsRequest,
+    cb?: (error: string, rep: DescribeDBPerformanceDetailsResponse) => void
+  ): Promise<DescribeDBPerformanceDetailsResponse> {
+    return this.request("DescribeDBPerformanceDetails", req, cb)
   }
 
   /**
@@ -326,6 +328,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowResponse) => void
   ): Promise<DescribeFlowResponse> {
     return this.request("DescribeFlow", req, cb)
+  }
+
+  /**
+   * 创建独享集群Mariadb实例
+   */
+  async CreateDedicatedClusterDBInstance(
+    req: CreateDedicatedClusterDBInstanceRequest,
+    cb?: (error: string, rep: CreateDedicatedClusterDBInstanceResponse) => void
+  ): Promise<CreateDedicatedClusterDBInstanceResponse> {
+    return this.request("CreateDedicatedClusterDBInstance", req, cb)
   }
 
   /**
@@ -389,13 +401,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBPerformanceDetails)用于查看实例性能数据详情。
+   * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
    */
-  async DescribeDBPerformanceDetails(
-    req: DescribeDBPerformanceDetailsRequest,
-    cb?: (error: string, rep: DescribeDBPerformanceDetailsResponse) => void
-  ): Promise<DescribeDBPerformanceDetailsResponse> {
-    return this.request("DescribeDBPerformanceDetails", req, cb)
+  async DescribeDBSlowLogs(
+    req: DescribeDBSlowLogsRequest,
+    cb?: (error: string, rep: DescribeDBSlowLogsResponse) => void
+  ): Promise<DescribeDBSlowLogsResponse> {
+    return this.request("DescribeDBSlowLogs", req, cb)
   }
 
   /**

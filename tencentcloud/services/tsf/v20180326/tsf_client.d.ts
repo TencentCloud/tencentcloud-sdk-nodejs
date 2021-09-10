@@ -96,7 +96,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskDetail(req: DescribeTaskDetailRequest, cb?: (error: string, rep: DescribeTaskDetailResponse) => void): Promise<DescribeTaskDetailResponse>;
     /**
-     *  容器部署组详情
+     *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
      */
     DescribeContainerGroupDetail(req: DescribeContainerGroupDetailRequest, cb?: (error: string, rep: DescribeContainerGroupDetailResponse) => void): Promise<DescribeContainerGroupDetailResponse>;
     /**

@@ -8,7 +8,7 @@ import { ControlRecordStreamRequest, DeleteTimeTemplateResponse, GetTimeTemplate
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取设备下属通道
+     * 获取IPC设备下属通道
      */
     DescribeIPCChannels(req: DescribeIPCChannelsRequest, cb?: (error: string, rep: DescribeIPCChannelsResponse) => void): Promise<DescribeIPCChannelsResponse>;
     /**

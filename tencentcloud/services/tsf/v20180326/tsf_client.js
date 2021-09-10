@@ -160,7 +160,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskDetail", req, cb);
     }
     /**
-     *  容器部署组详情
+     *  容器部署组详情（已废弃，请使用  DescribeContainerGroupDeployInfo）
      */
     async DescribeContainerGroupDetail(req, cb) {
         return this.request("DescribeContainerGroupDetail", req, cb);

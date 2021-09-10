@@ -1207,12 +1207,12 @@ export interface DescribeAlarmNoticesResponse {
   /**
    * 告警通知模板总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 告警通知模板列表
    */
-  Notices?: Array<AlarmNotice>
+  Notices: Array<AlarmNotice>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4554,6 +4554,11 @@ export interface DescribeAlarmNoticesRequest {
    * 接收组列表
    */
   GroupIds?: Array<number>
+
+  /**
+   * 根据通知模板 id 过滤，空数组/不传则不过滤
+   */
+  NoticeIds?: Array<string>
 }
 
 /**

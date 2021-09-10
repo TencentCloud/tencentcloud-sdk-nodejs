@@ -1056,6 +1056,23 @@ export interface RenewDBInstanceRequest {
     VoucherIds?: Array<string>;
 }
 /**
+ * CreateDedicatedClusterDBInstance返回参数结构体
+ */
+export interface CreateDedicatedClusterDBInstanceResponse {
+    /**
+      * 分配资源ID数组
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 流程ID
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 数据库表权限
  */
 export interface TablePrivilege {
@@ -1268,6 +1285,103 @@ export interface DescribeDBPerformanceDetailsRequest {
       * 拉取的指标名，支持的值为：long_query,select_total,update_total,insert_total,delete_total,mem_hit_rate,disk_iops,conn_active,is_master_switched,slave_delay
       */
     MetricName?: string;
+}
+/**
+ * CreateDedicatedClusterDBInstance请求参数结构体
+ */
+export interface CreateDedicatedClusterDBInstanceRequest {
+    /**
+      * 分配实例个数
+      */
+    GoodsNum: number;
+    /**
+      * 內存大小，单位GB
+      */
+    Memory: number;
+    /**
+      * 磁盘大小，单位GB
+      */
+    Storage: number;
+    /**
+      * 独享集群集群uuid
+      */
+    ClusterId: string;
+    /**
+      * （废弃）可用区
+      */
+    Zone?: string;
+    /**
+      * 项目ID
+      */
+    ProjectId?: number;
+    /**
+      * （废弃）Pid，可通过获取独享集群售卖配置接口得到
+      */
+    Pid?: number;
+    /**
+      * （废弃）机型
+      */
+    Machine?: string;
+    /**
+      * 网络Id
+      */
+    VpcId?: string;
+    /**
+      * 子网Id
+      */
+    SubnetId?: string;
+    /**
+      * db类型，不传默认0
+      */
+    DbVersionId?: string;
+    /**
+      * （废弃）是否手动指定一组服务器分配, 运维使用
+      */
+    Manual?: number;
+    /**
+      * （废弃）DeviceNo参数
+      */
+    DeviceNo?: string;
+    /**
+      * 安全组ID
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
+      * DCN源实例ID
+      */
+    DcnInstanceId?: string;
+    /**
+      * DCN源实例地域名
+      */
+    DcnRegion?: string;
+    /**
+      * 自定义实例名称
+      */
+    InstanceName?: string;
+    /**
+      * 标签
+      */
+    ResourceTags?: Array<ResourceTag>;
+    /**
+      * 支持IPv6标志：1 支持， 0 不支持
+      */
+    Ipv6Flag?: number;
+    /**
+      * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
+      */
+    InitParams?: Array<DBParamValue>;
+    /**
+      * 实例节点数
+      */
+    NodeNum?: number;
+    /**
+      * 指定主节点uuid，不填随机分配
+      */
+    MasterHostId?: string;
+    /**
+      * 指定从节点uuid，不填随机分配
+      */
+    SlaveHostIds?: Array<string>;
 }
 /**
  * 云数据库参数信息。

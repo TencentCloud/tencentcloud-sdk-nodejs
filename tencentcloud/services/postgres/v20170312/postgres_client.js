@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBErrlogs", req, cb);
     }
     /**
-     * 慢查询统计分析接口，根据SQL语句抽象参数之后，进行聚合分析，并返回对应结果
+     * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
      */
     async DescribeSlowQueryAnalysis(req, cb) {
         return this.request("DescribeSlowQueryAnalysis", req, cb);
@@ -208,7 +208,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
-     * 获取慢查询列表
+     * 此接口（DescribeSlowQueryList）用于查询指定时间范围内的所有慢查询。
      */
     async DescribeSlowQueryList(req, cb) {
         return this.request("DescribeSlowQueryList", req, cb);
@@ -304,7 +304,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductConfig", req, cb);
     }
     /**
-     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。
+     * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。已于2021.09.01日正式废弃，后续此接口将不再返回任何数据，新接口为DescribeSlowQueryList，详细请查看：https://cloud.tencent.com/document/product/409/60540
      */
     async DescribeDBSlowlogs(req, cb) {
         return this.request("DescribeDBSlowlogs", req, cb);

@@ -127,11 +127,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitDCDBInstances", req, cb);
     }
     /**
-     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-注意：相同用户名，不同Host是不同的账号。
+     * 创建独享集群DCDB实例
      */
-    async GrantAccountPrivileges(req, cb) {
-        return this.request("GrantAccountPrivileges", req, cb);
+    async CreateDedicatedClusterDCDBInstance(req, cb) {
+        return this.request("CreateDedicatedClusterDCDBInstance", req, cb);
     }
     /**
      * 本接口（RenewDCDBInstance）用于续费分布式数据库实例。
@@ -258,6 +257,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async FlushBinlog(req, cb) {
         return this.request("FlushBinlog", req, cb);
+    }
+    /**
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
+    async GrantAccountPrivileges(req, cb) {
+        return this.request("GrantAccountPrivileges", req, cb);
     }
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。

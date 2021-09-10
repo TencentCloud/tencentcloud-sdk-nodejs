@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("iotvideoindustry.tencentcloudapi.com", "2020-12-01", clientConfig);
     }
     /**
-     * 获取设备下属通道
+     * 获取IPC设备下属通道
      */
     async DescribeIPCChannels(req, cb) {
         return this.request("DescribeIPCChannels", req, cb);

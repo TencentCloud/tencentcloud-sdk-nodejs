@@ -1741,7 +1741,7 @@ export interface RuleInfoData {
   Protocol: string
 
   /**
-   * 策略
+   * 策略, 0：观察，1：阻断，2：放行
    */
   Strategy: string
 
