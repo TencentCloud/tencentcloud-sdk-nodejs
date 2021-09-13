@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeError", req, cb);
     }
     /**
+     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     */
+    async DescribeLogList(req, cb) {
+        return this.request("DescribeLogList", req, cb);
+    }
+    /**
      * 获取PerformancePage信息
      */
     async DescribeDataPerformancePage(req, cb) {

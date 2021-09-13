@@ -29,6 +29,23 @@ export interface DescribeAuditLogResponse {
     RequestId?: string;
 }
 /**
+ * DescribePrivateDNSAccountList返回参数结构体
+ */
+export interface DescribePrivateDNSAccountListResponse {
+    /**
+      * 私有域解析账号数量
+      */
+    TotalCount: number;
+    /**
+      * 私有域解析账号列表
+      */
+    AccountSet: Array<PrivateDNSAccount>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribePrivateZoneRecordList请求参数结构体
  */
 export interface DescribePrivateZoneRecordListRequest {
@@ -48,6 +65,23 @@ export interface DescribePrivateZoneRecordListRequest {
       * 分页限制数目， 最大100，默认20
       */
     Limit?: number;
+}
+/**
+ * 私有域解析账号
+ */
+export interface PrivateDNSAccount {
+    /**
+      * 主账号Uin
+      */
+    Uin: string;
+    /**
+      * 主账号名称
+      */
+    Account?: string;
+    /**
+      * 用户昵称
+      */
+    Nickname?: string;
 }
 /**
  * 关联的VPC出参
@@ -88,6 +122,10 @@ export interface DatePoint {
       */
     Value: number;
 }
+/**
+ * DescribePrivateZoneService请求参数结构体
+ */
+export declare type DescribePrivateZoneServiceRequest = null;
 /**
  * 私有域信息
  */
@@ -318,21 +356,21 @@ export interface ModifyPrivateZoneResponse {
     RequestId?: string;
 }
 /**
- * CreatePrivateZone返回参数结构体
+ * DescribePrivateZoneList请求参数结构体
  */
-export interface CreatePrivateZoneResponse {
+export interface DescribePrivateZoneListRequest {
     /**
-      * 私有域ID, zone-xxxxxx
+      * 分页偏移量，从0开始
       */
-    ZoneId: string;
+    Offset?: number;
     /**
-      * 私有域名
+      * 分页限制数目， 最大100，默认20
       */
-    Domain: string;
+    Limit?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 过滤参数
       */
-    RequestId?: string;
+    Filters?: Array<Filter>;
 }
 /**
  * SubscribePrivateZoneService请求参数结构体
@@ -352,21 +390,21 @@ export interface DescribePrivateZoneResponse {
     RequestId?: string;
 }
 /**
- * DescribePrivateZoneList请求参数结构体
+ * CreatePrivateZone返回参数结构体
  */
-export interface DescribePrivateZoneListRequest {
+export interface CreatePrivateZoneResponse {
     /**
-      * 分页偏移量，从0开始
+      * 私有域ID, zone-xxxxxx
       */
-    Offset?: number;
+    ZoneId: string;
     /**
-      * 分页限制数目， 最大100，默认20
+      * 私有域名
       */
-    Limit?: number;
+    Domain: string;
     /**
-      * 过滤参数
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * DescribeDashboard返回参数结构体
@@ -582,9 +620,22 @@ export interface MetricData {
     DataSet: Array<DatePoint>;
 }
 /**
- * DescribePrivateZoneService请求参数结构体
+ * DescribePrivateDNSAccountList请求参数结构体
  */
-export declare type DescribePrivateZoneServiceRequest = null;
+export interface DescribePrivateDNSAccountListRequest {
+    /**
+      * 分页偏移量，从0开始
+      */
+    Offset?: number;
+    /**
+      * 分页限制数目， 最大100，默认20
+      */
+    Limit?: number;
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filter>;
+}
 /**
  * 私有域信息
  */

@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZoneList", req, cb);
     }
     /**
+     * 修改私有域信息
+     */
+    async ModifyPrivateZone(req, cb) {
+        return this.request("ModifyPrivateZone", req, cb);
+    }
+    /**
      * 开通私有域解析
      */
     async SubscribePrivateZoneService(req, cb) {
@@ -112,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivateZone", req, cb);
     }
     /**
-     * 修改私有域信息
+     * 获取私有域解析账号列表
      */
-    async ModifyPrivateZone(req, cb) {
-        return this.request("ModifyPrivateZone", req, cb);
+    async DescribePrivateDNSAccountList(req, cb) {
+        return this.request("DescribePrivateDNSAccountList", req, cb);
     }
 }
 exports.Client = Client;

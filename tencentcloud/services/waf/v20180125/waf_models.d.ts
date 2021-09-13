@@ -28,7 +28,7 @@ export interface CreateAccessExportRequest {
       */
     Query: string;
     /**
-      * 日志导出数量
+      * 日志导出数量，最大值100w
       */
     Count: number;
     /**

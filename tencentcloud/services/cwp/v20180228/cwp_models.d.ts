@@ -1353,7 +1353,7 @@ export interface CheckBashRuleParamsRequest {
       */
     Name?: string;
     /**
-      * 用户填入的正则表达式
+      * 用户填入的正则表达式：“正则表达式“需与“提交EventId对应的命令内容”相匹配
       */
     Rule?: string;
     /**
@@ -1972,7 +1972,7 @@ export interface DescribeServersAndRiskAndFirstInfoResponse {
       */
     ServersCount: number;
     /**
-      * 是否试用
+      * 是否试用：true-是，false-否
       */
     IsFirstCheck: boolean;
     /**
@@ -2205,7 +2205,7 @@ export interface DescribeBaselineRuleResponse {
       */
     BaselineRuleList: Array<BaselineRuleInfo>;
     /**
-      * 是否显示说明列
+      * 是否显示说明列：true-是，false-否
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ShowRuleRemark: boolean;
@@ -3350,7 +3350,7 @@ export interface DescribeMalwareFileRequest {
  */
 export interface DescribeWebPageServiceInfoResponse {
     /**
-      * 是否已购服务
+      * 是否已购服务：true-是，false-否
       */
     Status: boolean;
     /**
@@ -5803,7 +5803,7 @@ export declare type DescribeMachineOsListRequest = null;
  */
 export interface DescribeMalwareRiskWarningResponse {
     /**
-      * 是否开启自动扫描
+      * 是否开启自动扫描：true-开启，false-未开启
       */
     IsCheckRisk: boolean;
     /**

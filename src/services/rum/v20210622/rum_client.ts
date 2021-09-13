@@ -21,8 +21,10 @@ import {
   DescribeDataPerformancePageResponse,
   DescribeDataPerformancePageRequest,
   DescribeErrorRequest,
+  DescribeLogListResponse,
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
+  DescribeLogListRequest,
   DescribeErrorResponse,
   DescribeDataLogUrlStatisticsRequest,
   CreateProjectRequest,
@@ -45,6 +47,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeErrorResponse) => void
   ): Promise<DescribeErrorResponse> {
     return this.request("DescribeError", req, cb)
+  }
+
+  /**
+   * 获取项目下的日志列表（实例创建的项目下的日志列表）
+   */
+  async DescribeLogList(
+    req: DescribeLogListRequest,
+    cb?: (error: string, rep: DescribeLogListResponse) => void
+  ): Promise<DescribeLogListResponse> {
+    return this.request("DescribeLogList", req, cb)
   }
 
   /**

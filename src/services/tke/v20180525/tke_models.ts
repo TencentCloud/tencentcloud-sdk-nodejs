@@ -655,107 +655,13 @@ pending 还未开始
 }
 
 /**
- * 节点池描述
+ * EnableVpcCniNetworkType返回参数结构体
  */
-export interface NodePool {
+export interface EnableVpcCniNetworkTypeResponse {
   /**
-   * NodePoolId 资源池id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NodePoolId: string
-
-  /**
-   * Name 资源池名称
-   */
-  Name: string
-
-  /**
-   * ClusterInstanceId 集群实例id
-   */
-  ClusterInstanceId: string
-
-  /**
-   * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
-   */
-  LifeState: string
-
-  /**
-   * LaunchConfigurationId 配置
-   */
-  LaunchConfigurationId: string
-
-  /**
-   * AutoscalingGroupId 分组id
-   */
-  AutoscalingGroupId: string
-
-  /**
-   * Labels 标签
-   */
-  Labels: Array<Label>
-
-  /**
-   * Taints 污点标记
-   */
-  Taints: Array<Taint>
-
-  /**
-   * NodeCountSummary 节点列表
-   */
-  NodeCountSummary: NodeCountSummary
-
-  /**
-      * 状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AutoscalingGroupStatus: string
-
-  /**
-      * 最大节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxNodesNum: number
-
-  /**
-      * 最小节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MinNodesNum: number
-
-  /**
-      * 期望的节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DesiredNodesNum: number
-
-  /**
-      * 节点池osName
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NodePoolOs: string
-
-  /**
-      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OsCustomizeType: string
-
-  /**
-      * 镜像id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ImageId: string
-
-  /**
-      * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DesiredPodNum: number
-
-  /**
-      * 用户自定义脚本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserScript: string
+  RequestId?: string
 }
 
 /**
@@ -1218,14 +1124,9 @@ export interface AddNodeToNodePoolRequest {
 }
 
 /**
- * EnableVpcCniNetworkType返回参数结构体
+ * DescribeEKSContainerInstanceRegions请求参数结构体
  */
-export interface EnableVpcCniNetworkTypeResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeEKSContainerInstanceRegionsRequest = null
 
 /**
  * DescribePrometheusAlertRule返回参数结构体
@@ -1382,6 +1283,26 @@ export interface DescribeVpcCniPodLimitsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EksCi地域信息
+ */
+export interface EksCiRegionInfo {
+  /**
+   * 地域别名，形如gz
+   */
+  Alias: string
+
+  /**
+   * 地域名，形如ap-guangzhou
+   */
+  RegionName: string
+
+  /**
+   * 地域ID
+   */
+  RegionId: number
 }
 
 /**
@@ -2718,6 +2639,110 @@ export interface InstanceExtraArgs {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Kubelet?: Array<string>
+}
+
+/**
+ * 节点池描述
+ */
+export interface NodePool {
+  /**
+   * NodePoolId 资源池id
+   */
+  NodePoolId: string
+
+  /**
+   * Name 资源池名称
+   */
+  Name: string
+
+  /**
+   * ClusterInstanceId 集群实例id
+   */
+  ClusterInstanceId: string
+
+  /**
+   * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
+   */
+  LifeState: string
+
+  /**
+   * LaunchConfigurationId 配置
+   */
+  LaunchConfigurationId: string
+
+  /**
+   * AutoscalingGroupId 分组id
+   */
+  AutoscalingGroupId: string
+
+  /**
+   * Labels 标签
+   */
+  Labels: Array<Label>
+
+  /**
+   * Taints 污点标记
+   */
+  Taints: Array<Taint>
+
+  /**
+   * NodeCountSummary 节点列表
+   */
+  NodeCountSummary: NodeCountSummary
+
+  /**
+      * 状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoscalingGroupStatus: string
+
+  /**
+      * 最大节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxNodesNum: number
+
+  /**
+      * 最小节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinNodesNum: number
+
+  /**
+      * 期望的节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DesiredNodesNum: number
+
+  /**
+      * 节点池osName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodePoolOs: string
+
+  /**
+      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OsCustomizeType: string
+
+  /**
+      * 镜像id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId: string
+
+  /**
+      * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DesiredPodNum: number
+
+  /**
+      * 用户自定义脚本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserScript: string
 }
 
 /**
@@ -4436,6 +4461,27 @@ export interface PrometheusJobTargets {
    * 健康的target总数
    */
   Up: number
+}
+
+/**
+ * DescribeEKSContainerInstanceRegions返回参数结构体
+ */
+export interface DescribeEKSContainerInstanceRegionsResponse {
+  /**
+      * EKS Container Instance支持的地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Regions: Array<EksCiRegionInfo>
+
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

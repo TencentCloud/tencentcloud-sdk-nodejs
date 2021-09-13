@@ -98,6 +98,16 @@ it("privatedns.v20201028.DescribePrivateZoneList", async function () {
     }
 })
 
+it("privatedns.v20201028.ModifyPrivateZone", async function () {
+    try {
+       const data = await client.ModifyPrivateZone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.SubscribePrivateZoneService", async function () {
     try {
        const data = await client.SubscribePrivateZoneService({})
@@ -158,9 +168,9 @@ it("privatedns.v20201028.DeletePrivateZone", async function () {
     }
 })
 
-it("privatedns.v20201028.ModifyPrivateZone", async function () {
+it("privatedns.v20201028.DescribePrivateDNSAccountList", async function () {
     try {
-       const data = await client.ModifyPrivateZone({})
+       const data = await client.DescribePrivateDNSAccountList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

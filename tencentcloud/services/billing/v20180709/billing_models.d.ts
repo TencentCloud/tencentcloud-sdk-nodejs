@@ -196,6 +196,10 @@ export interface ProjectSummaryOverviewItem {
       * 账单月份，格式2019-08
       */
     BillMonth: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+      */
+    TotalCost: string;
 }
 /**
  * 地域过滤条件
@@ -338,12 +342,12 @@ export interface DescribeBillSummaryByPayModeResponse {
     /**
       * 数据是否准备好，0未准备好，1准备好
       */
-    Ready?: number;
+    Ready: number;
     /**
       * 各付费模式花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SummaryOverview?: Array<PayModeSummaryOverviewItem>;
+    SummaryOverview: Array<PayModeSummaryOverviewItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -507,6 +511,10 @@ export interface DescribeBillSummaryByTagRequest {
       * 查询账单数据的用户UIN
       */
     PayerUin?: string;
+    /**
+      * 分账标签值
+      */
+    TagValue?: string;
 }
 /**
  * 账单筛选条件对象
@@ -596,17 +604,17 @@ export interface DescribeBillSummaryByProductResponse {
     /**
       * 数据是否准备好，0未准备好，1准备好
       */
-    Ready?: number;
+    Ready: number;
     /**
       * 总花费详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SummaryTotal?: BusinessSummaryTotal;
+    SummaryTotal: BusinessSummaryTotal;
     /**
       * 各产品花费分布
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SummaryOverview?: Array<BusinessSummaryOverviewItem>;
+    SummaryOverview: Array<BusinessSummaryOverviewItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -632,12 +640,12 @@ export interface DescribeBillSummaryByRegionResponse {
     /**
       * 数据是否准备好，0未准备好，1准备好
       */
-    Ready?: number;
+    Ready: number;
     /**
       * 各地域花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SummaryOverview?: Array<RegionSummaryOverviewItem>;
+    SummaryOverview: Array<RegionSummaryOverviewItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -747,6 +755,10 @@ export interface RegionSummaryOverviewItem {
       * 账单月份，格式2019-08
       */
     BillMonth: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+      */
+    TotalCost: string;
 }
 /**
  * 消耗按资源汇总详情
@@ -824,7 +836,7 @@ export interface DescribeBillDetailRequest {
     /**
       * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
       */
-    PeriodType: string;
+    PeriodType?: string;
     /**
       * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。
       */
@@ -1141,6 +1153,10 @@ export interface BusinessSummaryOverviewItem {
       * 账单月份，格式2019-08
       */
     BillMonth: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+      */
+    TotalCost: string;
 }
 /**
  * 账单明细组件对象
@@ -1395,6 +1411,10 @@ export interface ActionSummaryOverviewItem {
       * 账单月份，格式2019-08
       */
     BillMonth: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+      */
+    TotalCost: string;
 }
 /**
  * 付费模式过滤条件
@@ -1467,13 +1487,13 @@ export interface DescribeBillResourceSummaryRequest {
       */
     Limit: number;
     /**
-      * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
-      */
-    PeriodType: string;
-    /**
       * 月份，格式为yyyy-mm。不能早于开通账单2.0的月份，最多可拉取24个月内的数据。
       */
     Month: string;
+    /**
+      * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
+      */
+    PeriodType?: string;
     /**
       * 是否需要访问列表的总记录数，用于前端分页
 1-表示需要， 0-表示不需要
@@ -1703,12 +1723,17 @@ export interface DescribeBillSummaryByTagResponse {
     /**
       * 数据是否准备好，0未准备好，1准备好
       */
-    Ready?: number;
+    Ready: number;
     /**
       * 各标签值花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SummaryOverview?: Array<TagSummaryOverviewItem>;
+    SummaryOverview: Array<TagSummaryOverviewItem>;
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SummaryTotal: SummaryTotal;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1733,6 +1758,11 @@ export interface TagSummaryOverviewItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RealTotalCostRatio: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCost: string;
 }
 /**
  * DescribeCostSummaryByResource返回参数结构体
@@ -1774,12 +1804,12 @@ export interface DescribeBillDetailResponse {
     /**
       * 详情列表
       */
-    DetailSet?: Array<BillDetail>;
+    DetailSet: Array<BillDetail>;
     /**
       * 总记录数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total?: number;
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2031,12 +2061,12 @@ export interface DescribeBillSummaryByProjectResponse {
     /**
       * 数据是否准备好，0未准备好，1准备好
       */
-    Ready?: number;
+    Ready: number;
     /**
       * 各项目花费分布详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SummaryOverview?: Array<ProjectSummaryOverviewItem>;
+    SummaryOverview: Array<ProjectSummaryOverviewItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2129,6 +2159,21 @@ export interface DescribeDosageCosDetailByDateRequest {
     BucketName: string;
 }
 /**
+ * 总数
+ */
+export interface SummaryTotal {
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RealTotalCost: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCost: string;
+}
+/**
  * 按付费模式汇总消费详情
  */
 export interface PayModeSummaryOverviewItem {
@@ -2164,6 +2209,10 @@ export interface PayModeSummaryOverviewItem {
       * 代金券金额
       */
     VoucherPayAmount: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+      */
+    TotalCost: string;
 }
 /**
  * 按产品汇总总费用
@@ -2185,6 +2234,10 @@ export interface BusinessSummaryTotal {
       * 现金金额
       */
     CashPayAmount: string;
+    /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+      */
+    TotalCost: string;
 }
 /**
  * DescribeCostSummaryByRegion返回参数结构体

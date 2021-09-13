@@ -352,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddExistedInstances", req, cb);
     }
     /**
+     * 查询容器实例支持的地域
+     */
+    async DescribeEKSContainerInstanceRegions(req, cb) {
+        return this.request("DescribeEKSContainerInstanceRegions", req, cb);
+    }
+    /**
      * 修改告警规则
      */
     async ModifyPrometheusAlertRule(req, cb) {

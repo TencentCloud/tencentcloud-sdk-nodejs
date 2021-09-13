@@ -114,6 +114,19 @@ export interface DescribeErrorRequest {
     ID: number;
 }
 /**
+ * DescribeLogList返回参数结构体
+ */
+export interface DescribeLogListResponse {
+    /**
+      * 返回字符串
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDataLogUrlStatistics返回参数结构体
  */
 export interface DescribeDataLogUrlStatisticsResponse {
@@ -142,6 +155,43 @@ export interface CreateProjectResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeLogList请求参数结构体
+ */
+export interface DescribeLogListRequest {
+    /**
+      * 排序方式  desc  asc
+      */
+    Sort: string;
+    /**
+      * searchlog   histogram
+      */
+    ActionType: string;
+    /**
+      * 项目ID
+      */
+    ID: number;
+    /**
+      * 开始时间
+      */
+    StartTime?: string;
+    /**
+      * 限制
+      */
+    Limit?: number;
+    /**
+      * 上下文
+      */
+    Context?: string;
+    /**
+      * 查询语句
+      */
+    Query?: string;
+    /**
+      * 结束时间
+      */
+    EndTime?: string;
 }
 /**
  * DescribeError返回参数结构体

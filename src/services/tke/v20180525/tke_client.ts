@@ -45,7 +45,7 @@ import {
   CreatePrometheusTemplateRequest,
   DeletePrometheusTemplateRequest,
   InstanceUpgradeProgressItem,
-  NodePool,
+  EnableVpcCniNetworkTypeResponse,
   DescribeEKSClustersResponse,
   RouteTableInfo,
   IPAddress,
@@ -64,12 +64,13 @@ import {
   DescribePrometheusTemplatesRequest,
   ModifyPrometheusAlertRuleResponse,
   AddNodeToNodePoolRequest,
-  EnableVpcCniNetworkTypeResponse,
+  DescribeEKSContainerInstanceRegionsRequest,
   DescribePrometheusAlertRuleResponse,
   ClusterAsGroup,
   Instance,
   LoginSettings,
   DescribeVpcCniPodLimitsResponse,
+  EksCiRegionInfo,
   DescribeVersionsResponse,
   UpgradeAbleInstancesItem,
   CreateClusterNodePoolFromExistingAsgRequest,
@@ -130,6 +131,7 @@ import {
   PodLimitsByType,
   UpdateEKSClusterResponse,
   InstanceExtraArgs,
+  NodePool,
   DescribeRegionsRequest,
   DescribeClustersResponse,
   ClusterCredential,
@@ -203,6 +205,7 @@ import {
   DescribePrometheusAgentInstancesResponse,
   CreateClusterEndpointRequest,
   PrometheusJobTargets,
+  DescribeEKSContainerInstanceRegionsResponse,
   ModifyClusterAsGroupOptionAttributeResponse,
   DescribePrometheusInstanceResponse,
   AddExistedInstancesRequest,
@@ -804,6 +807,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddExistedInstancesResponse) => void
   ): Promise<AddExistedInstancesResponse> {
     return this.request("AddExistedInstances", req, cb)
+  }
+
+  /**
+   * 查询容器实例支持的地域
+   */
+  async DescribeEKSContainerInstanceRegions(
+    req?: DescribeEKSContainerInstanceRegionsRequest,
+    cb?: (error: string, rep: DescribeEKSContainerInstanceRegionsResponse) => void
+  ): Promise<DescribeEKSContainerInstanceRegionsResponse> {
+    return this.request("DescribeEKSContainerInstanceRegions", req, cb)
   }
 
   /**

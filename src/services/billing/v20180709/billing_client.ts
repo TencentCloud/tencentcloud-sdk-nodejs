@@ -82,6 +82,7 @@ import {
   DescribeCostSummaryByResourceRequest,
   DescribeCostDetailResponse,
   DescribeDosageCosDetailByDateRequest,
+  SummaryTotal,
   PayModeSummaryOverviewItem,
   BusinessSummaryTotal,
   DescribeCostSummaryByRegionResponse,

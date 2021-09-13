@@ -3148,7 +3148,7 @@ LimitTypes取值范围：
   }
 
   /**
-     * 修改终端节点服务属性。
+     * 本接口（ModifyVpcEndPointServiceAttribute）用于修改终端节点服务属性。
 
 
      */

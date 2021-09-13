@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDataPerformancePageResponse, DescribeDataPerformancePageRequest, DescribeErrorRequest, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, DescribeErrorResponse, DescribeDataLogUrlStatisticsRequest, CreateProjectRequest } from "./rum_models";
+import { DescribeDataPerformancePageResponse, DescribeDataPerformancePageRequest, DescribeErrorRequest, DescribeLogListResponse, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, DescribeLogListRequest, DescribeErrorResponse, DescribeDataLogUrlStatisticsRequest, CreateProjectRequest } from "./rum_models";
 /**
  * rum client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 获取首页错误信息
      */
     DescribeError(req: DescribeErrorRequest, cb?: (error: string, rep: DescribeErrorResponse) => void): Promise<DescribeErrorResponse>;
+    /**
+     * 获取项目下的日志列表（实例创建的项目下的日志列表）
+     */
+    DescribeLogList(req: DescribeLogListRequest, cb?: (error: string, rep: DescribeLogListResponse) => void): Promise<DescribeLogListResponse>;
     /**
      * 获取PerformancePage信息
      */

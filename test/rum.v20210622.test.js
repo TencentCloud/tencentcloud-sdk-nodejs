@@ -28,6 +28,16 @@ it("rum.v20210622.DescribeError", async function () {
     }
 })
 
+it("rum.v20210622.DescribeLogList", async function () {
+    try {
+       const data = await client.DescribeLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataPerformancePage", async function () {
     try {
        const data = await client.DescribeDataPerformancePage({})

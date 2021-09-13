@@ -2159,7 +2159,7 @@ export interface SubmitJobResponse {
   /**
    * 当通过本接口来提交作业时会返回该参数，表示一个作业ID。返回作业ID列表并不代表作业解析/运行成功，可根据 DescribeJob 接口查询其状态。
    */
-  JobId?: string
+  JobId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

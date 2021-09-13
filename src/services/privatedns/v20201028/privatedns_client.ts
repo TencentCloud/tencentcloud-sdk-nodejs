@@ -20,10 +20,13 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyPrivateZoneVpcRequest,
   DescribeAuditLogResponse,
+  DescribePrivateDNSAccountListResponse,
   DescribePrivateZoneRecordListRequest,
+  PrivateDNSAccount,
   AccountVpcInfoOutput,
   DescribePrivateZoneRequest,
   DatePoint,
+  DescribePrivateZoneServiceRequest,
   PrivateZoneRecord,
   AuditLogInfo,
   DescribeRequestDataRequest,
@@ -35,10 +38,10 @@ import {
   CreatePrivateZoneRequest,
   AccountVpcInfo,
   ModifyPrivateZoneResponse,
-  CreatePrivateZoneResponse,
+  DescribePrivateZoneListRequest,
   SubscribePrivateZoneServiceRequest,
   DescribePrivateZoneResponse,
-  DescribePrivateZoneListRequest,
+  CreatePrivateZoneResponse,
   DescribeDashboardResponse,
   CreatePrivateZoneRecordResponse,
   DescribePrivateZoneServiceResponse,
@@ -53,7 +56,7 @@ import {
   DeletePrivateZoneResponse,
   DescribePrivateZoneListResponse,
   MetricData,
-  DescribePrivateZoneServiceRequest,
+  DescribePrivateDNSAccountListRequest,
   PrivateZone,
   CreatePrivateZoneRecordRequest,
   ModifyPrivateZoneRecordRequest,
@@ -152,6 +155,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改私有域信息
+   */
+  async ModifyPrivateZone(
+    req: ModifyPrivateZoneRequest,
+    cb?: (error: string, rep: ModifyPrivateZoneResponse) => void
+  ): Promise<ModifyPrivateZoneResponse> {
+    return this.request("ModifyPrivateZone", req, cb)
+  }
+
+  /**
    * 开通私有域解析
    */
   async SubscribePrivateZoneService(
@@ -212,12 +225,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改私有域信息
+   * 获取私有域解析账号列表
    */
-  async ModifyPrivateZone(
-    req: ModifyPrivateZoneRequest,
-    cb?: (error: string, rep: ModifyPrivateZoneResponse) => void
-  ): Promise<ModifyPrivateZoneResponse> {
-    return this.request("ModifyPrivateZone", req, cb)
+  async DescribePrivateDNSAccountList(
+    req: DescribePrivateDNSAccountListRequest,
+    cb?: (error: string, rep: DescribePrivateDNSAccountListResponse) => void
+  ): Promise<DescribePrivateDNSAccountListResponse> {
+    return this.request("DescribePrivateDNSAccountList", req, cb)
   }
 }
