@@ -1161,14 +1161,15 @@ export interface ComposeMediaResponse {
 export interface UrlSignatureAuthPolicy {
     /**
       * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)设置状态，可选值：
-<li>Enabled: 启用；</li>
+<li>Enabled: 启用。</li>
 <li>Disabled: 禁用。</li>
       */
     Status: string;
     /**
       * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)中用于生成签名的密钥。
+EncryptedKey 字符串的长度为8~40个字节，不能包含不可见字符。
       */
-    EncryptedKey: string;
+    EncryptedKey?: string;
 }
 /**
  * DeleteSampleSnapshotTemplate请求参数结构体
@@ -2332,6 +2333,33 @@ export interface MediaImageSpriteItem {
     WebVttUrl: string;
 }
 /**
+ * ModifyVodDomainAccelerateConfig请求参数结构体
+ */
+export interface ModifyVodDomainAccelerateConfigRequest {
+    /**
+      * 需要设置加速配置的域名。
+      */
+    Domain: string;
+    /**
+      * 区域，可选值：
+<li>Chinese Mainland：中国境内（不包含港澳台）。</li>
+<li>Outside Chinese Mainland: 中国境外。</li>
+<li>Global: 全球范围。</li>
+      */
+    Area: string;
+    /**
+      * 开启或者关闭所选区域的域名加速，可选值：
+<li>Enabled: 开启。</li>
+<li>Disabled：关闭。</li>
+开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。
+      */
+    Status: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
+}
+/**
  * 对视频转自适应码流任务结果类型
  */
 export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
@@ -3003,6 +3031,27 @@ export interface TaskStatData {
 <li>Edit.H265.4K: H.265编码方式4K视频编辑</li>
       */
     Details: Array<SpecificationDataItem>;
+}
+/**
+ * CreateVodDomain请求参数结构体
+ */
+export interface CreateVodDomainRequest {
+    /**
+      * 需要接入点播的加速域名。注意：不支持填写泛域名。
+      */
+    Domain: string;
+    /**
+      * 需要开启 CDN 加速的区域：
+<li>Chinese Mainland：中国境内（不包含港澳台）。</li>
+<li>Outside Chinese Mainland: 中国境外。</li>
+<li>Global: 全球范围。</li>
+如果没有设置 AccelerateArea， 点播会根据用户在腾讯云设置的地域信息自动开通中国境内或者中国境外的 CDN 加速。开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。
+      */
+    AccelerateArea?: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
 }
 /**
  * 文本全文本识别任务控制参数
@@ -6216,6 +6265,15 @@ export interface AiRecognitionTaskObjectResultItem {
     SegmentSet: Array<AiRecognitionTaskObjectSeqmentItem>;
 }
 /**
+ * ModifyVodDomainConfig返回参数结构体
+ */
+export interface ModifyVodDomainConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 点播文件指定时间点截图信息
  */
 export interface MediaSnapshotByTimeOffsetInfo {
@@ -6263,6 +6321,27 @@ export interface MediaKeyFrameDescItem {
       * 打点的内容字符串，限制 1-128 个字符。
       */
     Content: string;
+}
+/**
+ * ModifyVodDomainConfig请求参数结构体
+ */
+export interface ModifyVodDomainConfigRequest {
+    /**
+      * 域名。
+      */
+    Domain: string;
+    /**
+      * [Referer 防盗链](/document/product/266/14046)规则。
+      */
+    RefererAuthPolicy?: RefererAuthPolicy;
+    /**
+      * [Key 防盗链](/document/product/266/14047)规则。
+      */
+    UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
 }
 /**
  * AI 样本管理，标签操作。
@@ -7392,18 +7471,20 @@ export interface RefererAuthPolicy {
     Status: string;
     /**
       * Referer 校验类型，可选值：
-<li>Black: 黑名单方式校验；</li>
-<li>White:白名单方式校验。</li>
+<li>Black：黑名单方式校验。HTTP 请求携带了 Referers 列表中的某个 Referer 将被拒绝访问。</li>
+<li>White：白名单方式校验。HTTP 请求携带了 Referers 列表中的 Referer 时才允许访问。</li>
+当 Status 取值为 Enabled 时，AuthType 必须赋值。
       */
     AuthType?: string;
     /**
-      * 用于校验的 Referer 名单。
+      * 用于校验的 Referer 列表，最大支持20个 Referer。当 Status 取值为 Enabled 时， Referers 不能为空数组。Referer 的格式参考域名的格式。
       */
     Referers?: Array<string>;
     /**
       * 是否允许空 Referer 访问本域名，可选值：
-<li>Yes: 是；</li>
-<li>No: 否。</li>
+<li>Yes： 是。</li>
+<li>No： 否。</li>
+当 Status 取值为 Enabled 时，BlankRefererAllowed 必须赋值。
       */
     BlankRefererAllowed?: string;
 }
@@ -9005,6 +9086,19 @@ export interface AsrFullTextConfigureInfo {
     SubtitleFormat?: string;
 }
 /**
+ * DeleteVodDomain请求参数结构体
+ */
+export interface DeleteVodDomainRequest {
+    /**
+      * 要删除的点播加速域名。
+      */
+    Domain: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
+}
+/**
  * CreateAIRecognitionTemplate请求参数结构体
  */
 export interface CreateAIRecognitionTemplateRequest {
@@ -10090,6 +10184,24 @@ export interface SplitMediaOutputConfig {
     ExpireTime?: string;
 }
 /**
+ * CreateVodDomain返回参数结构体
+ */
+export interface CreateVodDomainResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVodDomainAccelerateConfig返回参数结构体
+ */
+export interface ModifyVodDomainAccelerateConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 视频拆条输入。
  */
 export interface AiRecognitionTaskSegmentResultInput {
@@ -10933,6 +11045,15 @@ export interface DeleteWatermarkTemplateRequest {
       * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
       */
     SubAppId?: number;
+}
+/**
+ * DeleteVodDomain返回参数结构体
+ */
+export interface DeleteVodDomainResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 编辑视频流信息

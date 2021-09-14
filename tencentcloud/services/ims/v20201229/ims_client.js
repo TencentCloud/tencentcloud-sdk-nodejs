@@ -69,11 +69,5 @@ class Client extends abstract_client_1.AbstractClient {
     async ImageModeration(req, cb) {
         return this.request("ImageModeration", req, cb);
     }
-    /**
-     * 图片内容审核服务能自动扫描图片，识别可能令人反感、不安全或不适宜的内容，同时支持用户配置图片黑名单，打击自定义识别类型的图片。
-     */
-    async ImageRecognition(req, cb) {
-        return this.request("ImageRecognition", req, cb);
-    }
 }
 exports.Client = Client;

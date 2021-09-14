@@ -1,4 +1,73 @@
 /**
+ * Rum 项目信息
+ */
+export interface RumProject {
+    /**
+      * 项目名
+      */
+    Name: string;
+    /**
+      * 创建者 id
+      */
+    Creator: string;
+    /**
+      * 实例 id
+      */
+    InstanceID: string;
+    /**
+      * 项目类型
+      */
+    Type: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 项目仓库地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Repo: string;
+    /**
+      * 项目网址地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    URL: string;
+    /**
+      * 项目采样频率
+      */
+    Rate: string;
+    /**
+      * 项目唯一key（长度 12 位）
+      */
+    Key: string;
+    /**
+      * 是否开启url聚类
+      */
+    EnableURLGroup: number;
+    /**
+      * 实例名
+      */
+    InstanceName: string;
+    /**
+      * 项目 ID
+      */
+    ID: number;
+    /**
+      * 实例 key
+      */
+    InstanceKey: string;
+    /**
+      * 项目描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Desc: string;
+    /**
+      * 是否星标  1:是 0:否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsStar: number;
+}
+/**
  * DescribeDataPerformancePage返回参数结构体
  */
 export interface DescribeDataPerformancePageResponse {
@@ -101,6 +170,23 @@ export interface DescribeDataPerformancePageRequest {
     CostType?: string;
 }
 /**
+ * DescribeProjects返回参数结构体
+ */
+export interface DescribeProjectsResponse {
+    /**
+      * 列表总数
+      */
+    TotalCount: number;
+    /**
+      * 项目列表
+      */
+    ProjectSet: Array<RumProject>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeError请求参数结构体
  */
 export interface DescribeErrorRequest {
@@ -114,6 +200,23 @@ export interface DescribeErrorRequest {
     ID: number;
 }
 /**
+ * DescribeProjects请求参数结构体
+ */
+export interface DescribeProjectsRequest {
+    /**
+      * 分页每页数目，整型
+      */
+    Limit: number;
+    /**
+      * 分页页码，整型
+      */
+    Offset: number;
+    /**
+      * 过滤条件
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * DescribeLogList返回参数结构体
  */
 export interface DescribeLogListResponse {
@@ -125,6 +228,22 @@ export interface DescribeLogListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+
+· 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+· 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ */
+export interface Filter {
+    /**
+      * 一个或者多个过滤值。
+      */
+    Values?: Array<string>;
+    /**
+      * 过滤键的名称。
+      */
+    Name?: string;
 }
 /**
  * DescribeDataLogUrlStatistics返回参数结构体

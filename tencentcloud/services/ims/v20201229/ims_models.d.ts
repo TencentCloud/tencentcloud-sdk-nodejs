@@ -36,73 +36,6 @@ export interface ImageModerationRequest {
     Device?: Device;
 }
 /**
- * ImageRecognition返回参数结构体
- */
-export interface ImageRecognitionResponse {
-    /**
-      * 建议您拿到判断结果后的执行操作。
-建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
-      */
-    Suggestion: string;
-    /**
-      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
-以及令人反感、不安全或不适宜的内容类型。
-      */
-    Label: string;
-    /**
-      * 子标签名称，如色情--性行为；当未命中子标签时，返回空字符串；
-      */
-    SubLabel: string;
-    /**
-      * 机器判断当前分类的置信度，取值范围：0.00~100.00。分数越高，表示越有可能属于当前分类。
-（如：色情 99.99，则该样本属于色情的置信度非常高。）
-      */
-    Score: number;
-    /**
-      * 智能模型的识别结果，包括涉黄、广告等令人反感、不安全或不适宜的内容类型识别结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LabelResults: Array<LabelResult>;
-    /**
-      * 物体检测模型的审核结果，包括实体、广告台标/二维码等物体坐标信息与内容审核信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ObjectResults: Array<ObjectResult>;
-    /**
-      * OCR识别后的文本识别结果，包括文本所处图片的OCR坐标信息以及图片文本的识别结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OcrResults: Array<OcrResult>;
-    /**
-      * 基于图片风险库识别的结果。
-风险库包括不安全黑库与正常白库的结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LibResults: Array<LibResult>;
-    /**
-      * 请求参数中的DataId。
-      */
-    DataId: string;
-    /**
-      * 您在入参时所填入的Biztype参数。 -- 该字段暂未开放。
-      */
-    BizType: string;
-    /**
-      * 扩展字段，用于特定信息返回，不同客户/Biztype下返回信息不同。
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Extra: string;
-    /**
-      * 图片MD5值
-      */
-    FileMD5: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 用于返回实体检测结果详情
  */
 export interface ObjectResult {
@@ -268,63 +201,6 @@ export interface LibDetail {
       * 该字段用于返回对应模型命中的分值，取值为**0-100**，如：*Porn 99* 则代表相应识别内容命中色情标签的分值为99。
       */
     Score: number;
-}
-/**
- * ImageRecognition请求参数结构体
- */
-export interface ImageRecognitionRequest {
-    /**
-      * 渠道ID，必须与主调账号一致，由天御分配并与API调用账号绑定
-      */
-    Channel: number;
-    /**
-      * 产品侧腾讯云用户账号AppId
-      */
-    CustomAppId: string;
-    /**
-      * 该字段用于标识业务场景。您可以在内容安全控制台创建对应的ID，配置不同的内容审核策略，通过接口调用，默认不填为0，后端使用默认策略。 -- 该字段暂未开放。
-      */
-    BizType?: string;
-    /**
-      * 数据ID，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符
-      */
-    DataId?: string;
-    /**
-      * 数据Base64编码，图片检测接口为图片文件内容，大小不能超过5M
-      */
-    FileContent?: string;
-    /**
-      * 图片资源访问链接，__与FileContent参数必须二选一输入__
-      */
-    FileUrl?: string;
-    /**
-      * 截帧频率，GIF图/长图检测专用，默认值为0，表示只会检测GIF图/长图的第一帧
-      */
-    Interval?: number;
-    /**
-      * GIF图/长图检测专用，代表均匀最大截帧数量，默认值为1（即只取GIF第一张，或长图不做切分处理（可能会造成处理超时））。
-      */
-    MaxFrames?: number;
-    /**
-      * 账号相关信息字段，填入后可识别违规风险账号。
-      */
-    User?: User;
-    /**
-      * 设备相关信息字段，填入后可识别违规风险设备。
-      */
-    Device?: Device;
-    /**
-      * 产品侧腾讯云用户账号Uin
-      */
-    CustomUin?: string;
-    /**
-      * 产品侧腾讯云用户子账号Uin
-      */
-    CustomSubAccountUin?: string;
-    /**
-      * 视频流ID
-      */
-    StreamId?: string;
 }
 /**
  * 坐标

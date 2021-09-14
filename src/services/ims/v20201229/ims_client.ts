@@ -19,13 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ImageModerationRequest,
-  ImageRecognitionResponse,
   ObjectResult,
   OcrTextDetail,
   ObjectDetail,
   OcrResult,
   LibDetail,
-  ImageRecognitionRequest,
   Location,
   LabelResult,
   LabelDetailItem,
@@ -88,15 +86,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImageModerationResponse) => void
   ): Promise<ImageModerationResponse> {
     return this.request("ImageModeration", req, cb)
-  }
-
-  /**
-   * 图片内容审核服务能自动扫描图片，识别可能令人反感、不安全或不适宜的内容，同时支持用户配置图片黑名单，打击自定义识别类型的图片。
-   */
-  async ImageRecognition(
-    req: ImageRecognitionRequest,
-    cb?: (error: string, rep: ImageRecognitionResponse) => void
-  ): Promise<ImageRecognitionResponse> {
-    return this.request("ImageRecognition", req, cb)
   }
 }

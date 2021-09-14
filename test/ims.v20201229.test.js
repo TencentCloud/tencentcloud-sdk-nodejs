@@ -28,14 +28,4 @@ it("ims.v20201229.ImageModeration", async function () {
     }
 })
 
-it("ims.v20201229.ImageRecognition", async function () {
-    try {
-       const data = await client.ImageRecognition({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 })

@@ -17,7 +17,17 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { RiskDetail, QueryAntiFraudRequest, QueryAntiFraudResponse } from "./af_models"
+import {
+  FinanceAntiFraudCryptoFilter,
+  FinanceAntiFraudRecord,
+  DescribeAntiFraudResponse,
+  RiskDetail,
+  RiskDetailInfo,
+  DescribeAntiFraudRequest,
+  FinanceAntiFraudFilter,
+  QueryAntiFraudRequest,
+  QueryAntiFraudResponse,
+} from "./af_models"
 
 /**
  * af client
@@ -38,5 +48,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryAntiFraudResponse) => void
   ): Promise<QueryAntiFraudResponse> {
     return this.request("QueryAntiFraud", req, cb)
+  }
+
+  /**
+     * 天御反欺诈服务，主要应用于银行、证券、保险、消费金融等金融行业客户，通过腾讯的大数据风控能力，
+可以准确识别恶意用户信息，解决客户在支付、活动、理财，风控等业务环节遇到的欺诈威胁，降低企业
+的损失。
+     */
+  async DescribeAntiFraud(
+    req: DescribeAntiFraudRequest,
+    cb?: (error: string, rep: DescribeAntiFraudResponse) => void
+  ): Promise<DescribeAntiFraudResponse> {
+    return this.request("DescribeAntiFraud", req, cb)
   }
 }

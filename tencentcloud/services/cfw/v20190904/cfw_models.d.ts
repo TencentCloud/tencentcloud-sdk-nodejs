@@ -320,17 +320,61 @@ export interface VpcZoneData {
     Region: string;
 }
 /**
- * CreateSecurityGroupRules返回参数结构体
+ * 数据库白名单规则数据
  */
-export interface CreateSecurityGroupRulesResponse {
+export interface DatabaseWhiteListRuleData {
     /**
-      * 状态值，0：添加成功，非0：添加失败
+      * 访问源
       */
-    Status: number;
+    SourceIp: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 访问源类型，1 ip；6 实例；100 资源分组
       */
-    RequestId?: string;
+    SourceType: number;
+    /**
+      * 访问目的
+      */
+    TargetIp: string;
+    /**
+      * 访问目的类型，1 ip；6 实例；100 资源分组
+      */
+    TargetType: number;
+    /**
+      * 规则描述
+      */
+    Detail: string;
+    /**
+      * 是否地域规则，0不是 1是
+      */
+    IsRegionRule: number;
+    /**
+      * 是否云厂商规则，0不是 1 时
+      */
+    IsCloudRule: number;
+    /**
+      * 是否启用，0 不启用，1启用
+      */
+    Enable: number;
+    /**
+      * 地域码1
+      */
+    FirstLevelRegionCode?: number;
+    /**
+      * 地域码2
+      */
+    SecondLevelRegionCode?: number;
+    /**
+      * 地域名称1
+      */
+    FirstLevelRegionName?: string;
+    /**
+      * 地域名称2
+      */
+    SecondLevelRegionName?: string;
+    /**
+      * 云厂商码
+      */
+    CloudCode?: string;
 }
 /**
  * DescribeNatFwVpcDnsLst请求参数结构体
@@ -557,6 +601,11 @@ export interface NatFwInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: number;
+    /**
+      * nat公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NatIp: string;
 }
 /**
  * DeleteNatFwInstance请求参数结构体
@@ -566,6 +615,19 @@ export interface DeleteNatFwInstanceRequest {
       * 防火墙实例id
       */
     CfwInstance: string;
+}
+/**
+ * CreateSecurityGroupRules返回参数结构体
+ */
+export interface CreateSecurityGroupRulesResponse {
+    /**
+      * 状态值，0：添加成功，非0：添加失败
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ExpandCfwVertical请求参数结构体
@@ -1578,38 +1640,17 @@ export interface ModifySecurityGroupSequenceRulesRequest {
     Data: Array<SecurityGroupOrderIndexData>;
 }
 /**
- * 新手引导扫描结果信息PortNum   int
-    LeakNum   int
-    IPNum     int
-    IPStatus  bool
-    IdpStatus bool
-    BanStatus bool
+ * CreateDatabaseWhiteListRules返回参数结构体
  */
-export interface ScanResultInfo {
+export interface CreateDatabaseWhiteListRulesResponse {
     /**
-      * 暴漏漏洞数量
+      * 状态值，0:添加成功，非0：添加失败
       */
-    LeakNum: number;
+    Status: number;
     /**
-      * 防护ip数量
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    IPNum: number;
-    /**
-      * 暴漏端口数量
-      */
-    PortNum: number;
-    /**
-      * 是否开启防护
-      */
-    IPStatus: boolean;
-    /**
-      * 是否拦截攻击
-      */
-    IdpStatus: boolean;
-    /**
-      * 是否禁封端口
-      */
-    BanStatus: boolean;
+    RequestId?: string;
 }
 /**
  * 新手引导扫描信息
@@ -1675,6 +1716,40 @@ export interface NatFwFilter {
       * 过滤的内容，以',' 分隔
       */
     FilterContent: string;
+}
+/**
+ * 新手引导扫描结果信息PortNum   int
+    LeakNum   int
+    IPNum     int
+    IPStatus  bool
+    IdpStatus bool
+    BanStatus bool
+ */
+export interface ScanResultInfo {
+    /**
+      * 暴漏漏洞数量
+      */
+    LeakNum: number;
+    /**
+      * 防护ip数量
+      */
+    IPNum: number;
+    /**
+      * 暴漏端口数量
+      */
+    PortNum: number;
+    /**
+      * 是否开启防护
+      */
+    IPStatus: boolean;
+    /**
+      * 是否拦截攻击
+      */
+    IdpStatus: boolean;
+    /**
+      * 是否禁封端口
+      */
+    BanStatus: boolean;
 }
 /**
  * ModifySecurityGroupSequenceRules返回参数结构体
@@ -2240,6 +2315,15 @@ export interface DescribeNatRuleOverviewRequest {
         'ap-wuhan-ec': '武汉EC'
       */
     Area?: string;
+}
+/**
+ * CreateDatabaseWhiteListRules请求参数结构体
+ */
+export interface CreateDatabaseWhiteListRulesRequest {
+    /**
+      * 创建白名单数据
+      */
+    DatabaseWhiteListRuleData: Array<DatabaseWhiteListRuleData>;
 }
 /**
  * Nat实例卡片详细信息

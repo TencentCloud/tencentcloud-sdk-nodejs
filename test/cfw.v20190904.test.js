@@ -208,6 +208,16 @@ it("cfw.v20190904.DescribeSwitchLists", async function () {
     }
 })
 
+it("cfw.v20190904.CreateDatabaseWhiteListRules", async function () {
+    try {
+       const data = await client.CreateDatabaseWhiteListRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DeleteSecurityGroupAllRule", async function () {
     try {
        const data = await client.DeleteSecurityGroupAllRule({})

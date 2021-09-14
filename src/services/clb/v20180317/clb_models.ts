@@ -116,6 +116,31 @@ export interface SetLoadBalancerSecurityGroupsResponse {
 }
 
 /**
+ * 七层规则对象
+ */
+export interface RulesItems {
+  /**
+   * 规则id
+   */
+  LocationId: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * uri
+   */
+  Url: string
+
+  /**
+   * 绑定的后端对象
+   */
+  Targets: Array<LbRsTargets>
+}
+
+/**
  * 暂做保留，一般用户无需关注。
  */
 export interface ExtraInfo {
@@ -252,6 +277,11 @@ OPEN：公网属性， INTERNAL：内网属性。
    * 独占集群信息。若创建独占集群负载均衡实例，则此参数必填。
    */
   ExclusiveCluster?: ExclusiveCluster
+
+  /**
+   * 创建性能独享型CLB，传SLA。
+   */
+  SlaType?: string
 
   /**
    * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
@@ -718,6 +748,44 @@ export interface ClassicalTarget {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RunFlag: number
+}
+
+/**
+ * 反查监听器类型
+ */
+export interface ListenerItem {
+  /**
+   * 监听器ID
+   */
+  ListenerId: string
+
+  /**
+   * 监听器协议
+   */
+  Protocol: string
+
+  /**
+   * 监听器端口
+   */
+  Port: number
+
+  /**
+      * 绑定规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules: Array<RulesItems>
+
+  /**
+      * 四层绑定对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Targets: Array<LbRsTargets>
+
+  /**
+      * 端口段监听器的结束端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndPort: number
 }
 
 /**
@@ -1293,6 +1361,16 @@ export interface ModifyLoadBalancerAttributesRequest {
    * 是否开启删除保护
    */
   DeleteProtect?: boolean
+}
+
+/**
+ * DescribeLBListeners请求参数结构体
+ */
+export interface DescribeLBListenersRequest {
+  /**
+   * 需要查询的内网ip列表
+   */
+  Backends: Array<LbRsItem>
 }
 
 /**
@@ -2774,6 +2852,21 @@ export interface ModifyTargetGroupInstancesPortResponse {
 }
 
 /**
+ * 查询类型
+ */
+export interface LbRsItem {
+  /**
+   * vpc的字符串id，只支持字符串id。
+   */
+  VpcId: string
+
+  /**
+   * 需要查询后端的内网ip，可以是cvm和弹性网卡。
+   */
+  PrivateIp: string
+}
+
+/**
  * HTTP/HTTPS监听器下的转发规则绑定的后端服务信息
  */
 export interface RuleTargets {
@@ -3679,6 +3772,38 @@ Public：公网属性， Private：内网属性。
 }
 
 /**
+ * 反查结果数据类型。
+ */
+export interface LbRsTargets {
+  /**
+   * 内网ip类型。“cvm”或“eni”
+   */
+  Type: string
+
+  /**
+   * 后端实例的内网ip。
+   */
+  PrivateIp: string
+
+  /**
+   * 绑定后端实例的端口。
+   */
+  Port: number
+
+  /**
+      * rs的vpcId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: number
+
+  /**
+      * rs的权重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Weight: number
+}
+
+/**
  * BatchModifyTargetWeight请求参数结构体
  */
 export interface BatchModifyTargetWeightRequest {
@@ -4272,6 +4397,31 @@ export interface Quota {
 }
 
 /**
+ * 反查Lb绑定关系。
+ */
+export interface LBItem {
+  /**
+   * lb的字符串id
+   */
+  LoadBalancerId: string
+
+  /**
+   * lb的vip
+   */
+  Vip: string
+
+  /**
+   * 监听器规则
+   */
+  Listeners: Array<ListenerItem>
+
+  /**
+   * LB所在地域
+   */
+  Region: string
+}
+
+/**
  * ModifyTargetGroupAttribute返回参数结构体
  */
 export interface ModifyTargetGroupAttributeResponse {
@@ -4445,6 +4595,21 @@ export interface DescribeLoadBalancersResponse {
    * 返回的负载均衡实例数组。
    */
   LoadBalancerSet: Array<LoadBalancer>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLBListeners返回参数结构体
+ */
+export interface DescribeLBListenersResponse {
+  /**
+   * 绑定的后端规则
+   */
+  LoadBalancers: Array<LBItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

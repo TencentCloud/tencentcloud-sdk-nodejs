@@ -24,6 +24,7 @@ import {
   DescribeTargetGroupListRequest,
   BatchDeregisterTargetsResponse,
   SetLoadBalancerSecurityGroupsResponse,
+  RulesItems,
   ExtraInfo,
   BatchModifyTargetWeightResponse,
   SetSecurityGroupForLoadbalancersRequest,
@@ -43,6 +44,7 @@ import {
   AssociateTargetGroupsRequest,
   DescribeLoadBalancersRequest,
   ClassicalTarget,
+  ListenerItem,
   RsWeightRule,
   DeregisterTargetsFromClassicalLBRequest,
   SetSecurityGroupForLoadbalancersResponse,
@@ -73,6 +75,7 @@ import {
   DescribeTaskStatusResponse,
   BatchRegisterTargetsResponse,
   ModifyLoadBalancerAttributesRequest,
+  DescribeLBListenersRequest,
   Target,
   DescribeLoadBalancerTrafficRequest,
   DescribeBlockIPListRequest,
@@ -124,6 +127,7 @@ import {
   CreateTopicResponse,
   CreateRuleRequest,
   ModifyTargetGroupInstancesPortResponse,
+  LbRsItem,
   RuleTargets,
   BatchDeregisterTargetsRequest,
   DeregisterTargetGroupInstancesRequest,
@@ -151,6 +155,7 @@ import {
   ModifyTargetWeightRequest,
   DescribeLoadBalancersDetailResponse,
   LoadBalancerDetail,
+  LbRsTargets,
   BatchModifyTargetWeightRequest,
   DeleteRewriteResponse,
   BatchTarget,
@@ -181,6 +186,7 @@ import {
   CreateLoadBalancerResponse,
   DescribeRewriteResponse,
   Quota,
+  LBItem,
   ModifyTargetGroupAttributeResponse,
   DeleteLoadBalancerListenersResponse,
   DescribeListenersRequest,
@@ -190,6 +196,7 @@ import {
   RewriteLocationMap,
   ModifyTargetPortRequest,
   DescribeLoadBalancersResponse,
+  DescribeLBListenersResponse,
   DeleteListenerResponse,
   DeleteLoadBalancerSnatIpsResponse,
   CertificateOutput,
@@ -530,6 +537,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateTargetGroupsResponse) => void
   ): Promise<AssociateTargetGroupsResponse> {
     return this.request("AssociateTargetGroups", req, cb)
+  }
+
+  /**
+   * 查询后端云主机或弹性网卡绑定的负载均衡，支持弹性网卡和cvm查询。
+   */
+  async DescribeLBListeners(
+    req: DescribeLBListenersRequest,
+    cb?: (error: string, rep: DescribeLBListenersResponse) => void
+  ): Promise<DescribeLBListenersResponse> {
+    return this.request("DescribeLBListeners", req, cb)
   }
 
   /**

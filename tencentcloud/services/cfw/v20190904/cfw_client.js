@@ -144,6 +144,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSwitchLists", req, cb);
     }
     /**
+     * 创建暴露数据库白名单规则
+     */
+    async CreateDatabaseWhiteListRules(req, cb) {
+        return this.request("CreateDatabaseWhiteListRules", req, cb);
+    }
+    /**
      * 删除全部规则
      */
     async DeleteSecurityGroupAllRule(req, cb) {

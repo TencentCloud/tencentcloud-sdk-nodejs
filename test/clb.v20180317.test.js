@@ -318,6 +318,16 @@ it("clb.v20180317.AssociateTargetGroups", async function () {
     }
 })
 
+it("clb.v20180317.DescribeLBListeners", async function () {
+    try {
+       const data = await client.DescribeLBListeners({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DeregisterTargetGroupInstances", async function () {
     try {
        const data = await client.DeregisterTargetGroupInstances({})

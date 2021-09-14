@@ -68,4 +68,14 @@ it("rum.v20210622.DescribeDataLogUrlStatistics", async function () {
     }
 })
 
+it("rum.v20210622.DescribeProjects", async function () {
+    try {
+       const data = await client.DescribeProjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

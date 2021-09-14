@@ -1390,6 +1390,12 @@ export interface DescribeCloudBaseRunServerVersionResponse {
   RepoLanguage: string
 
   /**
+      * 自动扩缩容策略组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyDetail: Array<HpaPolicy>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2009,6 +2015,23 @@ export interface DescribeEnvPostpaidDeductResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 扩缩容策略
+ */
+export interface HpaPolicy {
+  /**
+      * 策略类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyType?: string
+
+  /**
+      * 策略阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyThreshold?: number
 }
 
 /**
@@ -2865,6 +2888,11 @@ export interface CreateCloudBaseRunServerVersionRequest {
    * 用户实际上传文件名（仅UploadType为jar/war时必填）
    */
   UploadFilename?: string
+
+  /**
+   * 自动扩缩容策略组
+   */
+  PolicyDetail?: Array<HpaPolicy>
 }
 
 /**
@@ -5501,4 +5529,9 @@ export interface RollUpdateCloudBaseRunServerVersionRequest {
    * 是否更新Cls
    */
   IsUpdateCls?: boolean
+
+  /**
+   * 自动扩缩容策略组
+   */
+  PolicyDetail?: Array<HpaPolicy>
 }

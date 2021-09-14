@@ -121,6 +121,7 @@ import {
   DescribeWordSamplesResponse,
   AiSampleFaceInfo,
   MediaImageSpriteItem,
+  ModifyVodDomainAccelerateConfigRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
   WatermarkTemplate,
@@ -148,6 +149,7 @@ import {
   AiRecognitionTaskAsrFullTextResultInput,
   MediaMiniProgramReviewInfoItem,
   TaskStatData,
+  CreateVodDomainRequest,
   OcrFullTextConfigureInfoForUpdate,
   ProcessMediaByProcedureRequest,
   MediaImageSpriteInfo,
@@ -287,9 +289,11 @@ import {
   MosaicInput,
   AIAnalysisTemplateItem,
   AiRecognitionTaskObjectResultItem,
+  ModifyVodDomainConfigResponse,
   MediaSnapshotByTimeOffsetInfo,
   DescribeImageSpriteTemplatesRequest,
   MediaKeyFrameDescItem,
+  ModifyVodDomainConfigRequest,
   AiSampleTagOperation,
   PlayerConfig,
   ConfirmEventsRequest,
@@ -402,6 +406,7 @@ import {
   ModifyPersonSampleRequest,
   DescribeDrmDataKeyRequest,
   AsrFullTextConfigureInfo,
+  DeleteVodDomainRequest,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
   MediaAiAnalysisClassificationItem,
@@ -448,6 +453,8 @@ import {
   DescribeSuperPlayerConfigsRequest,
   HeadTailTaskInput,
   SplitMediaOutputConfig,
+  CreateVodDomainResponse,
+  ModifyVodDomainAccelerateConfigResponse,
   AiRecognitionTaskSegmentResultInput,
   ModifyHeadTailTemplateRequest,
   DescribeTasksResponse,
@@ -478,6 +485,7 @@ import {
   ModifyImageSpriteTemplateRequest,
   AiReviewProhibitedOcrTaskInput,
   DeleteWatermarkTemplateRequest,
+  DeleteVodDomainResponse,
   EditMediaStreamInfo,
   DescribeWordSamplesRequest,
   ImageCenterCut,
@@ -652,16 +660,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
   ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
     return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
-  }
-
-  /**
-   * 查询指定时间点截图模板，支持根据条件，分页查询。
-   */
-  async DescribeSnapshotByTimeOffsetTemplates(
-    req: DescribeSnapshotByTimeOffsetTemplatesRequest,
-    cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void
-  ): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse> {
-    return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb)
   }
 
   /**
@@ -946,6 +944,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+   */
+  async DescribeTranscodeTemplates(
+    req: DescribeTranscodeTemplatesRequest,
+    cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void
+  ): Promise<DescribeTranscodeTemplatesResponse> {
+    return this.request("DescribeTranscodeTemplates", req, cb)
+  }
+
+  /**
      * 该接口返回查询时间范围内每天使用的视频处理用量信息。
    1. 可以查询最近365天内的视频处理统计数据。
    2. 查询时间跨度不超过90天。
@@ -970,13 +978,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义转动图模板。
+   * 查询指定时间点截图模板，支持根据条件，分页查询。
    */
-  async ModifyAnimatedGraphicsTemplate(
-    req: ModifyAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
-  ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
-    return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
+  async DescribeSnapshotByTimeOffsetTemplates(
+    req: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void
+  ): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse> {
+    return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb)
   }
 
   /**
@@ -1102,6 +1110,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 该接口用于开启或者关闭点播域名的加速区域。
+1、域名部署状态为 Online 状态时才允许开启或者关闭域名加速区域。
+     */
+  async ModifyVodDomainAccelerateConfig(
+    req: ModifyVodDomainAccelerateConfigRequest,
+    cb?: (error: string, rep: ModifyVodDomainAccelerateConfigResponse) => void
+  ): Promise<ModifyVodDomainAccelerateConfigResponse> {
+    return this.request("ModifyVodDomainAccelerateConfig", req, cb)
+  }
+
+  /**
    * 删除超级播放器配置。
    *注：系统预置播放器配置不允许删除。*
    */
@@ -1123,13 +1142,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
-   */
-  async DescribeTranscodeTemplates(
-    req: DescribeTranscodeTemplatesRequest,
-    cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void
-  ): Promise<DescribeTranscodeTemplatesResponse> {
-    return this.request("DescribeTranscodeTemplates", req, cb)
+     * 该接口用于删除点播加速域名。
+1、域名删除前需要先关闭所有区域的加速。
+     */
+  async DeleteVodDomain(
+    req: DeleteVodDomainRequest,
+    cb?: (error: string, rep: DeleteVodDomainResponse) => void
+  ): Promise<DeleteVodDomainResponse> {
+    return this.request("DeleteVodDomain", req, cb)
   }
 
   /**
@@ -1253,6 +1273,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 该接口用于修改域名配置，可以修改域名的防盗链配置。
+1、域名部署状态为 Online 状态时才允许修改域名的配置。
+     */
+  async ModifyVodDomainConfig(
+    req: ModifyVodDomainConfigRequest,
+    cb?: (error: string, rep: ModifyVodDomainConfigResponse) => void
+  ): Promise<ModifyVodDomainConfigResponse> {
+    return this.request("ModifyVodDomainConfig", req, cb)
+  }
+
+  /**
    * * 开发者调用拉取事件通知，获取到事件后，必须调用该接口来确认消息已经收到；
    * 开发者获取到事件句柄后，等待确认的有效时间为 30 秒，超出 30 秒会报参数错误（4000）；
    * 更多参考事件通知的[可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83)。
@@ -1348,23 +1379,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量删除关键词样本。
-   */
-  async DeleteWordSamples(
-    req: DeleteWordSamplesRequest,
-    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
-  ): Promise<DeleteWordSamplesResponse> {
-    return this.request("DeleteWordSamples", req, cb)
+     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
+  禁播/解禁操作全网生效时间约 5~10 分钟。
+     */
+  async ForbidMediaDistribution(
+    req: ForbidMediaDistributionRequest,
+    cb?: (error: string, rep: ForbidMediaDistributionResponse) => void
+  ): Promise<ForbidMediaDistributionResponse> {
+    return this.request("ForbidMediaDistribution", req, cb)
   }
 
   /**
-   * 该接口用于修改子应用信息，但不允许修改主应用信息。
-   */
-  async ModifySubAppIdInfo(
-    req: ModifySubAppIdInfoRequest,
-    cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void
-  ): Promise<ModifySubAppIdInfoResponse> {
-    return this.request("ModifySubAppIdInfo", req, cb)
+     * 该接口用于将加速域名添加到点播，一个用户最多添加20个加速域名。
+1.域名添加成功后点播会进行域名的部署，域名由部署状态变为在线状态大概需要2分钟的时间。
+     */
+  async CreateVodDomain(
+    req: CreateVodDomainRequest,
+    cb?: (error: string, rep: CreateVodDomainResponse) => void
+  ): Promise<CreateVodDomainResponse> {
+    return this.request("CreateVodDomain", req, cb)
   }
 
   /**
@@ -1418,14 +1451,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
-  禁播/解禁操作全网生效时间约 5~10 分钟。
-     */
-  async ForbidMediaDistribution(
-    req: ForbidMediaDistributionRequest,
-    cb?: (error: string, rep: ForbidMediaDistributionResponse) => void
-  ): Promise<ForbidMediaDistributionResponse> {
-    return this.request("ForbidMediaDistribution", req, cb)
+   * 该接口用于批量删除关键词样本。
+   */
+  async DeleteWordSamples(
+    req: DeleteWordSamplesRequest,
+    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
+  ): Promise<DeleteWordSamplesResponse> {
+    return this.request("DeleteWordSamples", req, cb)
   }
 
   /**
@@ -1503,6 +1535,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEventConfigResponse) => void
   ): Promise<DescribeEventConfigResponse> {
     return this.request("DescribeEventConfig", req, cb)
+  }
+
+  /**
+   * 该接口用于修改子应用信息，但不允许修改主应用信息。
+   */
+  async ModifySubAppIdInfo(
+    req: ModifySubAppIdInfoRequest,
+    cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void
+  ): Promise<ModifySubAppIdInfoResponse> {
+    return this.request("ModifySubAppIdInfo", req, cb)
   }
 
   /**
@@ -1716,6 +1758,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
   ): Promise<CreateAnimatedGraphicsTemplateResponse> {
     return this.request("CreateAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+   * 修改用户自定义转动图模板。
+   */
+  async ModifyAnimatedGraphicsTemplate(
+    req: ModifyAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
+  ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
+    return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
   }
 
   /**

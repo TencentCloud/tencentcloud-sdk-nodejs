@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifySampleSnapshotTemplateResponse, ModifyWatermarkTemplateRequest, DescribeAllClassRequest, WeChatMiniProgramPublishRequest, CreateTranscodeTemplateRequest, DescribeAnimatedGraphicsTemplatesRequest, LiveRealTimeClipResponse, DeleteAnimatedGraphicsTemplateResponse, ManageTaskResponse, CreateImageProcessingTemplateRequest, ModifyEventConfigResponse, ModifySampleSnapshotTemplateRequest, DescribePrepaidProductsRequest, ManageTaskRequest, CreateImageSpriteTemplateRequest, DescribeDailyMostPlayedStatRequest, DeleteAIRecognitionTemplateResponse, DeleteContentReviewTemplateRequest, ResetProcedureTemplateRequest, ComposeMediaResponse, DeleteSampleSnapshotTemplateRequest, DescribeStorageDataResponse, DescribeDailyMediaPlayStatResponse, ModifySubAppIdInfoRequest, DeletePersonSampleRequest, ExecuteFunctionResponse, ComposeMediaRequest, CreateAdaptiveDynamicStreamingTemplateRequest, PushUrlCacheResponse, DescribeDailyMediaPlayStatRequest, ModifyTranscodeTemplateRequest, DeleteAIAnalysisTemplateResponse, DeleteImageProcessingTemplateRequest, ApplyUploadResponse, DescribeDailyPlayStatFileListResponse, DeleteSuperPlayerConfigRequest, CreateProcedureTemplateRequest, DescribeMediaProcessUsageDataRequest, CreatePersonSampleRequest, ModifySuperPlayerConfigResponse, DeleteAIRecognitionTemplateRequest, DescribeCDNStatDetailsResponse, AttachMediaSubtitlesRequest, DescribeEventConfigRequest, DescribeWordSamplesResponse, ForbidMediaDistributionRequest, DescribeAIRecognitionTemplatesResponse, EditMediaResponse, ProcessMediaByUrlRequest, DescribeDailyMostPlayedStatResponse, ModifyMediaInfoRequest, DeleteTranscodeTemplateRequest, DescribeSnapshotByTimeOffsetTemplatesRequest, ModifyHeadTailTemplateResponse, ProcessMediaByProcedureRequest, ProcessMediaResponse, CreateWordSamplesResponse, DeleteAdaptiveDynamicStreamingTemplateResponse, CreateWordSamplesRequest, ModifyAnimatedGraphicsTemplateResponse, ModifyAIAnalysisTemplateResponse, LiveRealTimeClipRequest, DeleteAdaptiveDynamicStreamingTemplateRequest, SimpleHlsClipResponse, DeleteAIAnalysisTemplateRequest, EditMediaRequest, DescribeMediaInfosResponse, DeleteProcedureTemplateResponse, DescribeAdaptiveDynamicStreamingTemplatesResponse, ForbidMediaDistributionResponse, DescribeAdaptiveDynamicStreamingTemplatesRequest, DeleteHeadTailTemplateResponse, CreatePersonSampleResponse, CreateContentReviewTemplateResponse, ModifyAnimatedGraphicsTemplateRequest, DescribeProcedureTemplatesRequest, CreateHeadTailTemplateRequest, DeleteWordSamplesRequest, DescribeDrmDataKeyResponse, ModifyContentReviewTemplateResponse, DescribeWatermarkTemplatesRequest, CreateSuperPlayerConfigResponse, ModifyAdaptiveDynamicStreamingTemplateRequest, DescribeCDNUsageDataResponse, ModifyWordSampleRequest, DeleteMediaResponse, ModifySnapshotByTimeOffsetTemplateResponse, DeleteHeadTailTemplateRequest, SearchMediaResponse, ProcessMediaRequest, ModifyMediaInfoResponse, ModifyEventConfigRequest, DescribeHeadTailTemplatesRequest, ModifyAdaptiveDynamicStreamingTemplateResponse, DeleteMediaRequest, CreateSuperPlayerConfigRequest, ModifySubAppIdInfoResponse, ModifySubAppIdStatusResponse, SimpleHlsClipRequest, DescribeDailyPlayStatFileListRequest, DescribeSuperPlayerConfigsResponse, DescribeStorageDataRequest, DeleteImageSpriteTemplateResponse, DescribeContentReviewTemplatesResponse, DescribeEventsStateResponse, ModifyImageSpriteTemplateResponse, CreateWatermarkTemplateRequest, DescribeEventsStateRequest, CreateImageProcessingTemplateResponse, DescribeImageSpriteTemplatesRequest, ConfirmEventsRequest, CreateAIRecognitionTemplateResponse, ModifySubAppIdStatusRequest, CreateSubAppIdResponse, CreateWatermarkTemplateResponse, DescribeImageProcessingTemplatesRequest, ResetProcedureTemplateResponse, SplitMediaRequest, DescribeAIAnalysisTemplatesRequest, ParseStreamingManifestRequest, DeleteSampleSnapshotTemplateResponse, DescribeStorageDetailsResponse, PullEventsResponse, DescribeCdnLogsRequest, ProcessMediaByUrlResponse, DescribeEventConfigResponse, DescribeCdnLogsResponse, DeletePersonSampleResponse, CreateSnapshotByTimeOffsetTemplateResponse, ModifyContentReviewTemplateRequest, AttachMediaSubtitlesResponse, CreateAdaptiveDynamicStreamingTemplateResponse, ParseStreamingManifestResponse, ApplyUploadRequest, CreateSampleSnapshotTemplateResponse, DeleteContentReviewTemplateResponse, PullUploadRequest, DescribeCDNUsageDataRequest, DescribeReviewDetailsRequest, CreateClassResponse, DeleteSuperPlayerConfigResponse, DescribeSampleSnapshotTemplatesRequest, DescribeVodDomainsResponse, ModifyAIRecognitionTemplateRequest, DescribeCDNStatDetailsRequest, DescribePrepaidProductsResponse, PushUrlCacheRequest, CreateAIAnalysisTemplateResponse, ModifyClassRequest, DescribeMediaInfosRequest, ModifyPersonSampleRequest, DescribeDrmDataKeyRequest, CreateAIRecognitionTemplateRequest, DescribeTaskDetailRequest, ModifyAIRecognitionTemplateResponse, CreateHeadTailTemplateResponse, DeleteWordSamplesResponse, DeleteProcedureTemplateRequest, DeleteClassResponse, ModifyTranscodeTemplateResponse, DescribeSubAppIdsResponse, CreateContentReviewTemplateRequest, DescribeContentReviewTemplatesRequest, DescribeImageSpriteTemplatesResponse, DescribeTaskDetailResponse, DeleteImageSpriteTemplateRequest, CreateClassRequest, CreateProcedureTemplateResponse, DescribeMediaProcessUsageDataResponse, DescribeSuperPlayerConfigsRequest, ModifyHeadTailTemplateRequest, DescribeTasksResponse, DescribeSubAppIdsRequest, ModifySnapshotByTimeOffsetTemplateRequest, ModifySuperPlayerConfigRequest, DescribeSnapshotByTimeOffsetTemplatesResponse, DeleteSnapshotByTimeOffsetTemplateResponse, DescribeVodDomainsRequest, DescribeTasksRequest, DescribeReviewDetailsResponse, CreateTranscodeTemplateResponse, CreateAIAnalysisTemplateRequest, DescribeAllClassResponse, ModifyImageSpriteTemplateRequest, DeleteWatermarkTemplateRequest, DescribeWordSamplesRequest, ModifyAIAnalysisTemplateRequest, CommitUploadResponse, DescribeSampleSnapshotTemplatesResponse, ModifyWordSampleResponse, DeleteClassRequest, DescribeTranscodeTemplatesRequest, DescribeWatermarkTemplatesResponse, WeChatMiniProgramPublishResponse, CreateAnimatedGraphicsTemplateRequest, ExecuteFunctionRequest, ConfirmEventsResponse, ModifyPersonSampleResponse, DeleteTranscodeTemplateResponse, DescribePersonSamplesResponse, SplitMediaResponse, PullEventsRequest, DescribeAIAnalysisTemplatesResponse, CreateSnapshotByTimeOffsetTemplateRequest, CreateSubAppIdRequest, DescribeProcedureTemplatesResponse, SearchMediaRequest, CreateSampleSnapshotTemplateRequest, ModifyClassResponse, ProcessMediaByProcedureResponse, PullUploadResponse, DeleteImageProcessingTemplateResponse, CommitUploadRequest, DescribeTranscodeTemplatesResponse, DeleteAnimatedGraphicsTemplateRequest, DeleteSnapshotByTimeOffsetTemplateRequest, DescribeAnimatedGraphicsTemplatesResponse, DescribeImageProcessingTemplatesResponse, DescribeHeadTailTemplatesResponse, CreateAnimatedGraphicsTemplateResponse, DescribePersonSamplesRequest, DescribeStorageDetailsRequest, DeleteWatermarkTemplateResponse, CreateImageSpriteTemplateResponse, DescribeAIRecognitionTemplatesRequest, ModifyWatermarkTemplateResponse } from "./vod_models";
+import { ModifySampleSnapshotTemplateResponse, ModifyWatermarkTemplateRequest, DescribeAllClassRequest, WeChatMiniProgramPublishRequest, CreateTranscodeTemplateRequest, DescribeAnimatedGraphicsTemplatesRequest, LiveRealTimeClipResponse, DeleteAnimatedGraphicsTemplateResponse, ManageTaskResponse, CreateImageProcessingTemplateRequest, ModifyEventConfigResponse, ModifySampleSnapshotTemplateRequest, DescribePrepaidProductsRequest, ManageTaskRequest, CreateImageSpriteTemplateRequest, DescribeDailyMostPlayedStatRequest, DeleteAIRecognitionTemplateResponse, DeleteContentReviewTemplateRequest, ResetProcedureTemplateRequest, ComposeMediaResponse, DeleteSampleSnapshotTemplateRequest, DescribeStorageDataResponse, DescribeDailyMediaPlayStatResponse, ModifySubAppIdInfoRequest, DeletePersonSampleRequest, ExecuteFunctionResponse, ComposeMediaRequest, CreateAdaptiveDynamicStreamingTemplateRequest, PushUrlCacheResponse, DescribeDailyMediaPlayStatRequest, ModifyTranscodeTemplateRequest, DeleteAIAnalysisTemplateResponse, DeleteImageProcessingTemplateRequest, ApplyUploadResponse, DescribeDailyPlayStatFileListResponse, DeleteSuperPlayerConfigRequest, CreateProcedureTemplateRequest, DescribeMediaProcessUsageDataRequest, CreatePersonSampleRequest, ModifySuperPlayerConfigResponse, DeleteAIRecognitionTemplateRequest, DescribeCDNStatDetailsResponse, AttachMediaSubtitlesRequest, DescribeEventConfigRequest, DescribeWordSamplesResponse, ModifyVodDomainAccelerateConfigRequest, ForbidMediaDistributionRequest, DescribeAIRecognitionTemplatesResponse, EditMediaResponse, ProcessMediaByUrlRequest, DescribeDailyMostPlayedStatResponse, ModifyMediaInfoRequest, DeleteTranscodeTemplateRequest, DescribeSnapshotByTimeOffsetTemplatesRequest, ModifyHeadTailTemplateResponse, CreateVodDomainRequest, ProcessMediaByProcedureRequest, ProcessMediaResponse, CreateWordSamplesResponse, DeleteAdaptiveDynamicStreamingTemplateResponse, CreateWordSamplesRequest, ModifyAnimatedGraphicsTemplateResponse, ModifyAIAnalysisTemplateResponse, LiveRealTimeClipRequest, DeleteAdaptiveDynamicStreamingTemplateRequest, SimpleHlsClipResponse, DeleteAIAnalysisTemplateRequest, EditMediaRequest, DescribeMediaInfosResponse, DeleteProcedureTemplateResponse, DescribeAdaptiveDynamicStreamingTemplatesResponse, ForbidMediaDistributionResponse, DescribeAdaptiveDynamicStreamingTemplatesRequest, DeleteHeadTailTemplateResponse, CreatePersonSampleResponse, CreateContentReviewTemplateResponse, ModifyAnimatedGraphicsTemplateRequest, DescribeProcedureTemplatesRequest, CreateHeadTailTemplateRequest, DeleteWordSamplesRequest, DescribeDrmDataKeyResponse, ModifyContentReviewTemplateResponse, DescribeWatermarkTemplatesRequest, CreateSuperPlayerConfigResponse, ModifyAdaptiveDynamicStreamingTemplateRequest, DescribeCDNUsageDataResponse, ModifyWordSampleRequest, DeleteMediaResponse, ModifySnapshotByTimeOffsetTemplateResponse, DeleteHeadTailTemplateRequest, SearchMediaResponse, ProcessMediaRequest, ModifyMediaInfoResponse, ModifyEventConfigRequest, DescribeHeadTailTemplatesRequest, ModifyAdaptiveDynamicStreamingTemplateResponse, DeleteMediaRequest, CreateSuperPlayerConfigRequest, ModifySubAppIdInfoResponse, ModifySubAppIdStatusResponse, SimpleHlsClipRequest, DescribeDailyPlayStatFileListRequest, DescribeSuperPlayerConfigsResponse, DescribeStorageDataRequest, DeleteImageSpriteTemplateResponse, DescribeContentReviewTemplatesResponse, DescribeEventsStateResponse, ModifyImageSpriteTemplateResponse, CreateWatermarkTemplateRequest, DescribeEventsStateRequest, CreateImageProcessingTemplateResponse, ModifyVodDomainConfigResponse, DescribeImageSpriteTemplatesRequest, ModifyVodDomainConfigRequest, ConfirmEventsRequest, CreateAIRecognitionTemplateResponse, ModifySubAppIdStatusRequest, CreateSubAppIdResponse, CreateWatermarkTemplateResponse, DescribeImageProcessingTemplatesRequest, ResetProcedureTemplateResponse, SplitMediaRequest, DescribeAIAnalysisTemplatesRequest, ParseStreamingManifestRequest, DeleteSampleSnapshotTemplateResponse, DescribeStorageDetailsResponse, PullEventsResponse, DescribeCdnLogsRequest, ProcessMediaByUrlResponse, DescribeEventConfigResponse, DescribeCdnLogsResponse, DeletePersonSampleResponse, CreateSnapshotByTimeOffsetTemplateResponse, ModifyContentReviewTemplateRequest, AttachMediaSubtitlesResponse, CreateAdaptiveDynamicStreamingTemplateResponse, ParseStreamingManifestResponse, ApplyUploadRequest, CreateSampleSnapshotTemplateResponse, DeleteContentReviewTemplateResponse, PullUploadRequest, DescribeCDNUsageDataRequest, DescribeReviewDetailsRequest, CreateClassResponse, DeleteSuperPlayerConfigResponse, DescribeSampleSnapshotTemplatesRequest, DescribeVodDomainsResponse, ModifyAIRecognitionTemplateRequest, DescribeCDNStatDetailsRequest, DescribePrepaidProductsResponse, PushUrlCacheRequest, CreateAIAnalysisTemplateResponse, ModifyClassRequest, DescribeMediaInfosRequest, ModifyPersonSampleRequest, DescribeDrmDataKeyRequest, DeleteVodDomainRequest, CreateAIRecognitionTemplateRequest, DescribeTaskDetailRequest, ModifyAIRecognitionTemplateResponse, CreateHeadTailTemplateResponse, DeleteWordSamplesResponse, DeleteProcedureTemplateRequest, DeleteClassResponse, ModifyTranscodeTemplateResponse, DescribeSubAppIdsResponse, CreateContentReviewTemplateRequest, DescribeContentReviewTemplatesRequest, DescribeImageSpriteTemplatesResponse, DescribeTaskDetailResponse, DeleteImageSpriteTemplateRequest, CreateClassRequest, CreateProcedureTemplateResponse, DescribeMediaProcessUsageDataResponse, DescribeSuperPlayerConfigsRequest, CreateVodDomainResponse, ModifyVodDomainAccelerateConfigResponse, ModifyHeadTailTemplateRequest, DescribeTasksResponse, DescribeSubAppIdsRequest, ModifySnapshotByTimeOffsetTemplateRequest, ModifySuperPlayerConfigRequest, DescribeSnapshotByTimeOffsetTemplatesResponse, DeleteSnapshotByTimeOffsetTemplateResponse, DescribeVodDomainsRequest, DescribeTasksRequest, DescribeReviewDetailsResponse, CreateTranscodeTemplateResponse, CreateAIAnalysisTemplateRequest, DescribeAllClassResponse, ModifyImageSpriteTemplateRequest, DeleteWatermarkTemplateRequest, DeleteVodDomainResponse, DescribeWordSamplesRequest, ModifyAIAnalysisTemplateRequest, CommitUploadResponse, DescribeSampleSnapshotTemplatesResponse, ModifyWordSampleResponse, DeleteClassRequest, DescribeTranscodeTemplatesRequest, DescribeWatermarkTemplatesResponse, WeChatMiniProgramPublishResponse, CreateAnimatedGraphicsTemplateRequest, ExecuteFunctionRequest, ConfirmEventsResponse, ModifyPersonSampleResponse, DeleteTranscodeTemplateResponse, DescribePersonSamplesResponse, SplitMediaResponse, PullEventsRequest, DescribeAIAnalysisTemplatesResponse, CreateSnapshotByTimeOffsetTemplateRequest, CreateSubAppIdRequest, DescribeProcedureTemplatesResponse, SearchMediaRequest, CreateSampleSnapshotTemplateRequest, ModifyClassResponse, ProcessMediaByProcedureResponse, PullUploadResponse, DeleteImageProcessingTemplateResponse, CommitUploadRequest, DescribeTranscodeTemplatesResponse, DeleteAnimatedGraphicsTemplateRequest, DeleteSnapshotByTimeOffsetTemplateRequest, DescribeAnimatedGraphicsTemplatesResponse, DescribeImageProcessingTemplatesResponse, DescribeHeadTailTemplatesResponse, CreateAnimatedGraphicsTemplateResponse, DescribePersonSamplesRequest, DescribeStorageDetailsRequest, DeleteWatermarkTemplateResponse, CreateImageSpriteTemplateResponse, DescribeAIRecognitionTemplatesRequest, ModifyWatermarkTemplateResponse } from "./vod_models";
 /**
  * vod client
  * @class
@@ -47,10 +47,6 @@ export declare class Client extends AbstractClient {
      * 删除用户自定义转动图模板。
      */
     DeleteAnimatedGraphicsTemplate(req: DeleteAnimatedGraphicsTemplateRequest, cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void): Promise<DeleteAnimatedGraphicsTemplateResponse>;
-    /**
-     * 查询指定时间点截图模板，支持根据条件，分页查询。
-     */
-    DescribeSnapshotByTimeOffsetTemplates(req: DescribeSnapshotByTimeOffsetTemplatesRequest, cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
     /**
      * 根据视频内容分析模板唯一标识，获取视频内容分析模板详情列表。返回结果包含符合条件的所有用户自定义视频内容分析模板及[系统预置视频内容分析模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF)。
      */
@@ -183,6 +179,10 @@ export declare class Client extends AbstractClient {
      */
     ExecuteFunction(req: ExecuteFunctionRequest, cb?: (error: string, rep: ExecuteFunctionResponse) => void): Promise<ExecuteFunctionResponse>;
     /**
+     * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+     */
+    DescribeTranscodeTemplates(req: DescribeTranscodeTemplatesRequest, cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void): Promise<DescribeTranscodeTemplatesResponse>;
+    /**
      * 该接口返回查询时间范围内每天使用的视频处理用量信息。
    1. 可以查询最近365天内的视频处理统计数据。
    2. 查询时间跨度不超过90天。
@@ -195,9 +195,9 @@ export declare class Client extends AbstractClient {
      */
     DescribePrepaidProducts(req?: DescribePrepaidProductsRequest, cb?: (error: string, rep: DescribePrepaidProductsResponse) => void): Promise<DescribePrepaidProductsResponse>;
     /**
-     * 修改用户自定义转动图模板。
+     * 查询指定时间点截图模板，支持根据条件，分页查询。
      */
-    ModifyAnimatedGraphicsTemplate(req: ModifyAnimatedGraphicsTemplateRequest, cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void): Promise<ModifyAnimatedGraphicsTemplateResponse>;
+    DescribeSnapshotByTimeOffsetTemplates(req: DescribeSnapshotByTimeOffsetTemplatesRequest, cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse>;
     /**
      * 该接口用于制作媒体文件，可以
 
@@ -273,6 +273,11 @@ export declare class Client extends AbstractClient {
      */
     ModifySampleSnapshotTemplate(req: ModifySampleSnapshotTemplateRequest, cb?: (error: string, rep: ModifySampleSnapshotTemplateResponse) => void): Promise<ModifySampleSnapshotTemplateResponse>;
     /**
+     * 该接口用于开启或者关闭点播域名的加速区域。
+1、域名部署状态为 Online 状态时才允许开启或者关闭域名加速区域。
+     */
+    ModifyVodDomainAccelerateConfig(req: ModifyVodDomainAccelerateConfigRequest, cb?: (error: string, rep: ModifyVodDomainAccelerateConfigResponse) => void): Promise<ModifyVodDomainAccelerateConfigResponse>;
+    /**
      * 删除超级播放器配置。
 *注：系统预置播放器配置不允许删除。*
      */
@@ -282,9 +287,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeProcedureTemplates(req: DescribeProcedureTemplatesRequest, cb?: (error: string, rep: DescribeProcedureTemplatesResponse) => void): Promise<DescribeProcedureTemplatesResponse>;
     /**
-     * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+     * 该接口用于删除点播加速域名。
+1、域名删除前需要先关闭所有区域的加速。
      */
-    DescribeTranscodeTemplates(req: DescribeTranscodeTemplatesRequest, cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void): Promise<DescribeTranscodeTemplatesResponse>;
+    DeleteVodDomain(req: DeleteVodDomainRequest, cb?: (error: string, rep: DeleteVodDomainResponse) => void): Promise<DeleteVodDomainResponse>;
     /**
      * 上传 HLS 视频时，解析索引文件内容，返回待上传的分片文件列表。分片文件路径必须是当前目录或子目录的相对路径，不能是 URL，不能是绝对路径。
      */
@@ -340,6 +346,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeEventsState(req: DescribeEventsStateRequest, cb?: (error: string, rep: DescribeEventsStateResponse) => void): Promise<DescribeEventsStateResponse>;
     /**
+     * 该接口用于修改域名配置，可以修改域名的防盗链配置。
+1、域名部署状态为 Online 状态时才允许修改域名的配置。
+     */
+    ModifyVodDomainConfig(req: ModifyVodDomainConfigRequest, cb?: (error: string, rep: ModifyVodDomainConfigResponse) => void): Promise<ModifyVodDomainConfigResponse>;
+    /**
      * * 开发者调用拉取事件通知，获取到事件后，必须调用该接口来确认消息已经收到；
 * 开发者获取到事件句柄后，等待确认的有效时间为 30 秒，超出 30 秒会报参数错误（4000）；
 * 更多参考事件通知的[可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83)。
@@ -381,13 +392,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeStorageDetails(req: DescribeStorageDetailsRequest, cb?: (error: string, rep: DescribeStorageDetailsResponse) => void): Promise<DescribeStorageDetailsResponse>;
     /**
-     * 该接口用于批量删除关键词样本。
+     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
+  禁播/解禁操作全网生效时间约 5~10 分钟。
      */
-    DeleteWordSamples(req: DeleteWordSamplesRequest, cb?: (error: string, rep: DeleteWordSamplesResponse) => void): Promise<DeleteWordSamplesResponse>;
+    ForbidMediaDistribution(req: ForbidMediaDistributionRequest, cb?: (error: string, rep: ForbidMediaDistributionResponse) => void): Promise<ForbidMediaDistributionResponse>;
     /**
-     * 该接口用于修改子应用信息，但不允许修改主应用信息。
+     * 该接口用于将加速域名添加到点播，一个用户最多添加20个加速域名。
+1.域名添加成功后点播会进行域名的部署，域名由部署状态变为在线状态大概需要2分钟的时间。
      */
-    ModifySubAppIdInfo(req: ModifySubAppIdInfoRequest, cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void): Promise<ModifySubAppIdInfoResponse>;
+    CreateVodDomain(req: CreateVodDomainRequest, cb?: (error: string, rep: CreateVodDomainResponse) => void): Promise<CreateVodDomainResponse>;
     /**
      * 创建用户自定义雪碧图模板，数量上限：16。
      */
@@ -409,10 +422,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAnimatedGraphicsTemplates(req: DescribeAnimatedGraphicsTemplatesRequest, cb?: (error: string, rep: DescribeAnimatedGraphicsTemplatesResponse) => void): Promise<DescribeAnimatedGraphicsTemplatesResponse>;
     /**
-     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
-  禁播/解禁操作全网生效时间约 5~10 分钟。
+     * 该接口用于批量删除关键词样本。
      */
-    ForbidMediaDistribution(req: ForbidMediaDistributionRequest, cb?: (error: string, rep: ForbidMediaDistributionResponse) => void): Promise<ForbidMediaDistributionResponse>;
+    DeleteWordSamples(req: DeleteWordSamplesRequest, cb?: (error: string, rep: DeleteWordSamplesResponse) => void): Promise<DeleteWordSamplesResponse>;
     /**
      * 对已发起的任务进行管理。
      */
@@ -448,6 +460,10 @@ export declare class Client extends AbstractClient {
 默认接口请求频率限制：100次/秒。
      */
     DescribeEventConfig(req: DescribeEventConfigRequest, cb?: (error: string, rep: DescribeEventConfigResponse) => void): Promise<DescribeEventConfigResponse>;
+    /**
+     * 该接口用于修改子应用信息，但不允许修改主应用信息。
+     */
+    ModifySubAppIdInfo(req: ModifySubAppIdInfoRequest, cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void): Promise<ModifySubAppIdInfoResponse>;
     /**
      * 查询转自适应码流模板，支持根据条件，分页查询。
      */
@@ -553,6 +569,10 @@ export declare class Client extends AbstractClient {
      * 创建用户自定义转动图模板，数量上限：16。
      */
     CreateAnimatedGraphicsTemplate(req: CreateAnimatedGraphicsTemplateRequest, cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void): Promise<CreateAnimatedGraphicsTemplateResponse>;
+    /**
+     * 修改用户自定义转动图模板。
+     */
+    ModifyAnimatedGraphicsTemplate(req: ModifyAnimatedGraphicsTemplateRequest, cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void): Promise<ModifyAnimatedGraphicsTemplateResponse>;
     /**
      * 关联媒资字幕，将指定的字幕关联到转自适应码流模板号对应的媒体输出文件中（或解除关联）。
      */

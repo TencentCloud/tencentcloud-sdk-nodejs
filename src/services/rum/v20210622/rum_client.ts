@@ -18,10 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  RumProject,
   DescribeDataPerformancePageResponse,
   DescribeDataPerformancePageRequest,
+  DescribeProjectsResponse,
   DescribeErrorRequest,
+  DescribeProjectsRequest,
   DescribeLogListResponse,
+  Filter,
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
   DescribeLogListRequest,
@@ -87,5 +91,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataLogUrlStatisticsResponse) => void
   ): Promise<DescribeDataLogUrlStatisticsResponse> {
     return this.request("DescribeDataLogUrlStatistics", req, cb)
+  }
+
+  /**
+   * 获取项目列表（实例创建的团队下的项目列表）
+   */
+  async DescribeProjects(
+    req: DescribeProjectsRequest,
+    cb?: (error: string, rep: DescribeProjectsResponse) => void
+  ): Promise<DescribeProjectsResponse> {
+    return this.request("DescribeProjects", req, cb)
   }
 }

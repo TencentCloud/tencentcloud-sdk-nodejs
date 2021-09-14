@@ -57,5 +57,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeDataLogUrlStatistics(req, cb) {
         return this.request("DescribeDataLogUrlStatistics", req, cb);
     }
+    /**
+     * 获取项目列表（实例创建的团队下的项目列表）
+     */
+    async DescribeProjects(req, cb) {
+        return this.request("DescribeProjects", req, cb);
+    }
 }
 exports.Client = Client;

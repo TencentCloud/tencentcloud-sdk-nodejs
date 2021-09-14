@@ -78,16 +78,6 @@ it("vod.v20180717.DeleteAnimatedGraphicsTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
-    try {
-       const data = await client.DescribeSnapshotByTimeOffsetTemplates({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("vod.v20180717.DescribeAIAnalysisTemplates", async function () {
     try {
        const data = await client.DescribeAIAnalysisTemplates({})
@@ -338,6 +328,16 @@ it("vod.v20180717.ExecuteFunction", async function () {
     }
 })
 
+it("vod.v20180717.DescribeTranscodeTemplates", async function () {
+    try {
+       const data = await client.DescribeTranscodeTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeMediaProcessUsageData", async function () {
     try {
        const data = await client.DescribeMediaProcessUsageData({})
@@ -358,9 +358,9 @@ it("vod.v20180717.DescribePrepaidProducts", async function () {
     }
 })
 
-it("vod.v20180717.ModifyAnimatedGraphicsTemplate", async function () {
+it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
     try {
-       const data = await client.ModifyAnimatedGraphicsTemplate({})
+       const data = await client.DescribeSnapshotByTimeOffsetTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,6 +448,16 @@ it("vod.v20180717.ModifySampleSnapshotTemplate", async function () {
     }
 })
 
+it("vod.v20180717.ModifyVodDomainAccelerateConfig", async function () {
+    try {
+       const data = await client.ModifyVodDomainAccelerateConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DeleteSuperPlayerConfig", async function () {
     try {
        const data = await client.DeleteSuperPlayerConfig({})
@@ -468,9 +478,9 @@ it("vod.v20180717.DescribeProcedureTemplates", async function () {
     }
 })
 
-it("vod.v20180717.DescribeTranscodeTemplates", async function () {
+it("vod.v20180717.DeleteVodDomain", async function () {
     try {
-       const data = await client.DescribeTranscodeTemplates({})
+       const data = await client.DeleteVodDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,6 +598,16 @@ it("vod.v20180717.DescribeEventsState", async function () {
     }
 })
 
+it("vod.v20180717.ModifyVodDomainConfig", async function () {
+    try {
+       const data = await client.ModifyVodDomainConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ConfirmEvents", async function () {
     try {
        const data = await client.ConfirmEvents({})
@@ -678,9 +698,9 @@ it("vod.v20180717.DescribeStorageDetails", async function () {
     }
 })
 
-it("vod.v20180717.DeleteWordSamples", async function () {
+it("vod.v20180717.ForbidMediaDistribution", async function () {
     try {
-       const data = await client.DeleteWordSamples({})
+       const data = await client.ForbidMediaDistribution({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +708,9 @@ it("vod.v20180717.DeleteWordSamples", async function () {
     }
 })
 
-it("vod.v20180717.ModifySubAppIdInfo", async function () {
+it("vod.v20180717.CreateVodDomain", async function () {
     try {
-       const data = await client.ModifySubAppIdInfo({})
+       const data = await client.CreateVodDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +768,9 @@ it("vod.v20180717.DescribeAnimatedGraphicsTemplates", async function () {
     }
 })
 
-it("vod.v20180717.ForbidMediaDistribution", async function () {
+it("vod.v20180717.DeleteWordSamples", async function () {
     try {
-       const data = await client.ForbidMediaDistribution({})
+       const data = await client.DeleteWordSamples({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -821,6 +841,16 @@ it("vod.v20180717.CreateWordSamples", async function () {
 it("vod.v20180717.DescribeEventConfig", async function () {
     try {
        const data = await client.DescribeEventConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifySubAppIdInfo", async function () {
+    try {
+       const data = await client.ModifySubAppIdInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1001,6 +1031,16 @@ it("vod.v20180717.DeletePersonSample", async function () {
 it("vod.v20180717.CreateAnimatedGraphicsTemplate", async function () {
     try {
        const data = await client.CreateAnimatedGraphicsTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifyAnimatedGraphicsTemplate", async function () {
+    try {
+       const data = await client.ModifyAnimatedGraphicsTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

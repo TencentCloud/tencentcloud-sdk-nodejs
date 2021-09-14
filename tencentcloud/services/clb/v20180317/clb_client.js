@@ -227,6 +227,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateTargetGroups", req, cb);
     }
     /**
+     * 查询后端云主机或弹性网卡绑定的负载均衡，支持弹性网卡和cvm查询。
+     */
+    async DescribeLBListeners(req, cb) {
+        return this.request("DescribeLBListeners", req, cb);
+    }
+    /**
      * 从目标组中解绑服务器。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */

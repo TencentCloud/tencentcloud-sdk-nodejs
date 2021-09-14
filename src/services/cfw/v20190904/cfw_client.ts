@@ -36,7 +36,7 @@ import {
   ModifySecurityGroupRuleRequest,
   ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
-  CreateSecurityGroupRulesResponse,
+  DatabaseWhiteListRuleData,
   DescribeNatFwVpcDnsLstRequest,
   DescribeCfwEipsRequest,
   DescribeTLogInfoResponse,
@@ -47,6 +47,7 @@ import {
   DescribeNatRuleOverviewResponse,
   NatFwInstance,
   DeleteNatFwInstanceRequest,
+  CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
   ModifyAllPublicIPSwitchStatusResponse,
   DeleteVpcInstanceResponse,
@@ -91,11 +92,12 @@ import {
   ModifyAllPublicIPSwitchStatusRequest,
   DescribeBlockStaticListResponse,
   ModifySecurityGroupSequenceRulesRequest,
-  ScanResultInfo,
+  CreateDatabaseWhiteListRulesResponse,
   ScanInfo,
   CreateChooseVpcsResponse,
   DescribeUnHandleEventTabListResponse,
   NatFwFilter,
+  ScanResultInfo,
   ModifySecurityGroupSequenceRulesResponse,
   IpStatic,
   UnHandleEventDetail,
@@ -124,6 +126,7 @@ import {
   DeleteAllAccessControlRuleResponse,
   ModifyNatFwSwitchRequest,
   DescribeNatRuleOverviewRequest,
+  CreateDatabaseWhiteListRulesRequest,
   NatInstanceInfo,
   NatFwEipsInfo,
   DescribeResourceGroupResponse,
@@ -371,6 +374,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSwitchListsResponse) => void
   ): Promise<DescribeSwitchListsResponse> {
     return this.request("DescribeSwitchLists", req, cb)
+  }
+
+  /**
+   * 创建暴露数据库白名单规则
+   */
+  async CreateDatabaseWhiteListRules(
+    req: CreateDatabaseWhiteListRulesRequest,
+    cb?: (error: string, rep: CreateDatabaseWhiteListRulesResponse) => void
+  ): Promise<CreateDatabaseWhiteListRulesResponse> {
+    return this.request("CreateDatabaseWhiteListRules", req, cb)
   }
 
   /**

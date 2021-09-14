@@ -90,6 +90,7 @@ import {
   CloudBaseCapabilities,
   DescribeEndUserLoginStatisticResponse,
   DescribeEnvPostpaidDeductResponse,
+  HpaPolicy,
   CloudBaseRunImageSecretInfo,
   CreateCloudBaseRunResourceResponse,
   DescribeStandaloneGatewayPackageResponse,

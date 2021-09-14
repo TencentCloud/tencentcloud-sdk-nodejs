@@ -2084,7 +2084,7 @@ export interface CloseDBExtranetAccessResponse {
     /**
       * 异步任务ID，可通过 DescribeFlow 查询任务状态。
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2342,27 +2342,27 @@ export interface DescribeDBLogFilesResponse {
     /**
       * 实例 ID，形如：tdsql-ow728lmc。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 请求日志类型，取值只能为1、2、3或者4。1-binlog，2-冷备，3-errlog，4-slowlog。
       */
-    Type?: number;
+    Type: number;
     /**
       * 请求日志总数
       */
-    Total?: number;
+    Total: number;
     /**
       * 包含uri、length、mtime（修改时间）等信息
       */
-    Files?: Array<LogFileInfo>;
+    Files: Array<LogFileInfo>;
     /**
       * 如果是VPC网络的实例，做用本前缀加上URI为下载地址
       */
-    VpcPrefix?: string;
+    VpcPrefix: string;
     /**
       * 如果是普通网络的实例，做用本前缀加上URI为下载地址
       */
-    NormalPrefix?: string;
+    NormalPrefix: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
