@@ -59,6 +59,12 @@ export interface FinanceAntiFraudRecord {
   RiskInfo: Array<RiskDetailInfo>
 
   /**
+      * 多模型返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherModelScores: Array<FinanceOtherModelScores>
+
+  /**
       * 业务侧错误码。成功时返回0，错误时返回非0值
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -96,6 +102,23 @@ export interface RiskDetail {
    * 风险码 参数详细定义请加微信：TYXGJ-01
    */
   RiskCode: number
+}
+
+/**
+ * 借贷反欺返回结果出参中的多模型返回结果
+ */
+export interface FinanceOtherModelScores {
+  /**
+      * 模型ID序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelId: string
+
+  /**
+      * 模型ID序号对应的评分结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModelScore: string
 }
 
 /**

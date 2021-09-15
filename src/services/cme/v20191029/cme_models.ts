@@ -1335,7 +1335,7 @@ export interface DescribeTasksRequest {
   Offset?: number
 
   /**
-   * 分页返回的记录条数，默认值：10。
+   * 分页返回的记录条数，默认值：10。最大值：20。
    */
   Limit?: number
 
@@ -1675,6 +1675,14 @@ export interface PlatformInfo {
    * 平台绑定的 license Id。
    */
   LicenseId: string
+
+  /**
+      * 平台状态，可取值为：
+<li>Normal：正常，可使用。；</li>
+<li>Stopped：已停用，暂无法使用；</li>
+<li>Expired：已过期，需要重新购买会员包。</li>
+      */
+  Status: string
 
   /**
    * 创建时间，格式按照 ISO 8601 标准表示。
@@ -3662,12 +3670,12 @@ export interface DescribeTasksResponse {
   /**
    * 符合搜索条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 任务基础信息列表。
    */
-  TaskBaseInfoSet?: Array<TaskBaseInfo>
+  TaskBaseInfoSet: Array<TaskBaseInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

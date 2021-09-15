@@ -22,6 +22,7 @@ import {
   FinanceAntiFraudRecord,
   DescribeAntiFraudResponse,
   RiskDetail,
+  FinanceOtherModelScores,
   RiskDetailInfo,
   DescribeAntiFraudRequest,
   FinanceAntiFraudFilter,
