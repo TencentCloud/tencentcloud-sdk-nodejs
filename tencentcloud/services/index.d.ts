@@ -69,6 +69,7 @@ export { eiam } from "./eiam";
 export { eis } from "./eis";
 export { emr } from "./emr";
 export { es } from "./es";
+export { essbasic } from "./essbasic";
 export { facefusion } from "./facefusion";
 export { faceid } from "./faceid";
 export { fmu } from "./fmu";
