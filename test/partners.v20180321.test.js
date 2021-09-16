@@ -18,9 +18,49 @@ const client = new tencentcloud.partners.v20180321.Client({
 })
 describe("partners.v20180321.test.js", function () {
 
+it("partners.v20180321.DescribeAgentSelfPayDeals", async function () {
+    try {
+       const data = await client.DescribeAgentSelfPayDeals({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.DescribeAgentDealsCache", async function () {
     try {
        const data = await client.DescribeAgentDealsCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("partners.v20180321.ModifyClientRemark", async function () {
+    try {
+       const data = await client.ModifyClientRemark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("partners.v20180321.DescribeAgentSelfPayDealsV2", async function () {
+    try {
+       const data = await client.DescribeAgentSelfPayDealsV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("partners.v20180321.AgentPayDeals", async function () {
+    try {
+       const data = await client.AgentPayDeals({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +98,9 @@ it("partners.v20180321.DescribeRebateInfos", async function () {
     }
 })
 
-it("partners.v20180321.DescribeClientBaseInfo", async function () {
+it("partners.v20180321.DescribeSalesmans", async function () {
     try {
-       const data = await client.DescribeClientBaseInfo({})
+       const data = await client.DescribeSalesmans({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,26 +118,6 @@ it("partners.v20180321.RemovePayRelationForClient", async function () {
     }
 })
 
-it("partners.v20180321.ModifyClientRemark", async function () {
-    try {
-       const data = await client.ModifyClientRemark({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("partners.v20180321.DescribeClientBalance", async function () {
-    try {
-       const data = await client.DescribeClientBalance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("partners.v20180321.DescribeClientBalanceNew", async function () {
     try {
        const data = await client.DescribeClientBalanceNew({})
@@ -108,9 +128,9 @@ it("partners.v20180321.DescribeClientBalanceNew", async function () {
     }
 })
 
-it("partners.v20180321.DescribeAgentClientGrade", async function () {
+it("partners.v20180321.DescribeAgentPayDeals", async function () {
     try {
-       const data = await client.DescribeAgentClientGrade({})
+       const data = await client.DescribeAgentPayDeals({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +148,9 @@ it("partners.v20180321.DescribeUnbindClientList", async function () {
     }
 })
 
-it("partners.v20180321.AgentPayDeals", async function () {
+it("partners.v20180321.DescribeAgentClients", async function () {
     try {
-       const data = await client.AgentPayDeals({})
+       const data = await client.DescribeAgentClients({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +158,9 @@ it("partners.v20180321.AgentPayDeals", async function () {
     }
 })
 
-it("partners.v20180321.DescribeSalesmans", async function () {
+it("partners.v20180321.DescribeClientBalance", async function () {
     try {
-       const data = await client.DescribeSalesmans({})
+       const data = await client.DescribeClientBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,9 @@ it("partners.v20180321.DescribeSalesmans", async function () {
     }
 })
 
-it("partners.v20180321.DescribeAgentPayDeals", async function () {
+it("partners.v20180321.DescribeAgentClientGrade", async function () {
     try {
-       const data = await client.DescribeAgentPayDeals({})
+       const data = await client.DescribeAgentClientGrade({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,9 @@ it("partners.v20180321.DescribeAgentAuditedClients", async function () {
     }
 })
 
-it("partners.v20180321.DescribeAgentSelfPayDealsV2", async function () {
+it("partners.v20180321.CreatePayRelationForClient", async function () {
     try {
-       const data = await client.DescribeAgentSelfPayDealsV2({})
+       const data = await client.CreatePayRelationForClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,36 +221,6 @@ it("partners.v20180321.AuditApplyClient", async function () {
 it("partners.v20180321.DescribeAgentDealsByCache", async function () {
     try {
        const data = await client.DescribeAgentDealsByCache({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("partners.v20180321.DescribeAgentSelfPayDeals", async function () {
-    try {
-       const data = await client.DescribeAgentSelfPayDeals({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("partners.v20180321.DescribeAgentClients", async function () {
-    try {
-       const data = await client.DescribeAgentClients({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("partners.v20180321.CreatePayRelationForClient", async function () {
-    try {
-       const data = await client.CreatePayRelationForClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

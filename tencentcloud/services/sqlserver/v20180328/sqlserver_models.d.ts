@@ -152,6 +152,31 @@ export interface DealInfo {
     InstanceChargeType: string;
 }
 /**
+ * ModifyBackupStrategy请求参数结构体
+ */
+export interface ModifyBackupStrategyRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份类型，当前只支持按天备份，取值为daily
+      */
+    BackupType?: string;
+    /**
+      * 备份时间点，取值为0-23的整数
+      */
+    BackupTime?: number;
+    /**
+      * BackupType取值为daily时，表示备份间隔天数。当前取值只能为1
+      */
+    BackupDay?: number;
+    /**
+      * 备份模式，master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
+      */
+    BackupModel?: string;
+}
+/**
  * RestoreInstance请求参数结构体
  */
 export interface RestoreInstanceRequest {
@@ -171,6 +196,10 @@ export interface RestoreInstanceRequest {
       * 按照ReNameRestoreDatabase中的库进行恢复，并重命名，不填则按照默认方式命名恢复的库，且恢复所有的库。
       */
     RenameRestore?: Array<RenameRestoreDatabase>;
+    /**
+      * 备份任务组ID，在单库备份文件模式下，可通过[DescribeBackups](https://cloud.tencent.com/document/product/238/19943) 接口获得。
+      */
+    GroupId?: string;
 }
 /**
  * CreateBasicDBInstances返回参数结构体
@@ -419,11 +448,11 @@ export interface ModifyBackupStrategyResponse {
     /**
       * 返回错误码
       */
-    Errno?: number;
+    Errno: number;
     /**
       * 返回错误信息
       */
-    Msg?: string;
+    Msg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -718,6 +747,10 @@ export interface DescribeBackupsRequest {
       * 按照备份的库名称筛选，不填则不筛选此项
       */
     DatabaseName?: string;
+    /**
+      * 是否分组查询，默认是0，单库备份情况下 0-兼容老方式不分组，1-单库备份分组后展示
+      */
+    Group?: number;
 }
 /**
  * ModifyDBInstanceProject返回参数结构体
@@ -867,7 +900,7 @@ export interface RestoreInstanceResponse {
     /**
       * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1184,53 +1217,57 @@ export interface MigrationDetail {
  */
 export interface DescribeBackupByFlowIdResponse {
     /**
-      * 备份文件唯一标识，RestoreInstance接口会用到该字段
+      * 备份文件唯一标识，RestoreInstance接口会用到该字段，对于单库备份文件只返回第一条记录的备份文件唯一标识；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的可回档的ID
       */
-    Id?: number;
+    Id: number;
     /**
-      * 存储文件名
+      * 文件名，对于单库备份文件只返回第一条记录的文件名；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的文件名
       */
-    FileName?: string;
+    FileName: string;
     /**
-      * 备份名称，可自定义
+      * 备份任务名称，可自定义
       */
-    BackupName?: string;
+    BackupName: string;
     /**
       * 备份开始时间
       */
-    StartTime?: string;
+    StartTime: string;
     /**
       * 备份结束时间
       */
-    EndTime?: string;
+    EndTime: string;
     /**
-      * 文件大小，单位 KB
+      * 文件大小，单位 KB，对于单库备份文件只返回第一条记录的文件大小；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的文件大小
       */
-    Size?: number;
+    Size: number;
     /**
       * 备份策略，0-实例备份；1-多库备份；实例状态是0-创建中时，该字段为默认值0，无实际意义
       */
-    Strategy?: number;
-    /**
-      * 备份方式，0-定时备份；1-手动临时备份；实例状态是0-创建中时，该字段为默认值0，无实际意义
-      */
-    BackupWay?: number;
+    Strategy: number;
     /**
       * 备份文件状态，0-创建中；1-成功；2-失败
       */
-    Status?: number;
+    Status: number;
     /**
-      * 多库备份时的DB列表
+      * 备份方式，0-定时备份；1-手动临时备份；实例状态是0-创建中时，该字段为默认值0，无实际意义
       */
-    DBs?: Array<string>;
+    BackupWay: number;
     /**
-      * 内网下载地址
+      * DB列表，对于单库备份文件只返回第一条记录包含的库名；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的库名。
       */
-    InternalAddr?: string;
+    DBs: Array<string>;
     /**
-      * 外网下载地址
+      * 内网下载地址，对于单库备份文件只返回第一条记录的内网下载地址；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的下载地址
       */
-    ExternalAddr?: string;
+    InternalAddr: string;
+    /**
+      * 外网下载地址，对于单库备份文件只返回第一条记录的外网下载地址；单库备份文件需要通过DescribeBackupFiles接口获取全部记录的下载地址
+      */
+    ExternalAddr: string;
+    /**
+      * 聚合Id，对于打包备份文件不返回此值。通过此值调用DescribeBackupFiles接口，获取单库备份文件的详细信息
+      */
+    GroupId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1246,13 +1283,17 @@ export interface RecycleDBInstanceRequest {
     InstanceId: string;
 }
 /**
- * DescribeFlowStatus请求参数结构体
+ * CompleteMigration返回参数结构体
  */
-export interface DescribeFlowStatusRequest {
+export interface CompleteMigrationResponse {
     /**
-      * 流程ID
+      * 完成迁移流程发起后，返回的流程id
       */
-    FlowId: number;
+    FlowId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ResetAccountPassword返回参数结构体
@@ -1629,6 +1670,10 @@ export interface DescribeDBInstancesRequest {
       * 模糊查询关键字，支持实例id、实例名、内网ip
       */
     SearchKey?: string;
+    /**
+      * 实例唯一Uid列表
+      */
+    UidSet?: Array<string>;
 }
 /**
  * DescribeDBSecurityGroups请求参数结构体
@@ -1704,25 +1749,21 @@ export interface DescribeMigrationsResponse {
     RequestId?: string;
 }
 /**
- * ModifyBackupStrategy请求参数结构体
+ * DescribeBackupFiles返回参数结构体
  */
-export interface ModifyBackupStrategyRequest {
+export interface DescribeBackupFilesResponse {
     /**
-      * 实例ID
+      * 备份总数量
       */
-    InstanceId: string;
+    TotalCount: number;
     /**
-      * 备份类型，当前只支持按天备份，取值为daily
+      * 备份文件列表详情
       */
-    BackupType: string;
+    BackupFiles: Array<BackupFile>;
     /**
-      * 备份时间点，取值为0-23的整数
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    BackupTime: number;
-    /**
-      * BackupType取值为daily时，表示备份间隔天数。当前取值只能为1
-      */
-    BackupDay: number;
+    RequestId?: string;
 }
 /**
  * RenewDBInstance请求参数结构体
@@ -2226,6 +2267,15 @@ export interface DescribeInstanceParamRecordsRequest {
     Limit?: number;
 }
 /**
+ * DescribeFlowStatus请求参数结构体
+ */
+export interface DescribeFlowStatusRequest {
+    /**
+      * 流程ID
+      */
+    FlowId: number;
+}
+/**
  * DescribeDBs请求参数结构体
  */
 export interface DescribeDBsRequest {
@@ -2340,17 +2390,13 @@ export interface DescribeInstanceParamsRequest {
     InstanceId: string;
 }
 /**
- * CompleteMigration返回参数结构体
+ * DescribeMigrationDetail请求参数结构体
  */
-export interface CompleteMigrationResponse {
+export interface DescribeMigrationDetailRequest {
     /**
-      * 完成迁移流程发起后，返回的流程id
+      * 迁移任务ID
       */
-    FlowId?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    MigrateId: number;
 }
 /**
  * ModifyDBInstanceSecurityGroups请求参数结构体
@@ -2513,6 +2559,31 @@ export interface SecurityGroup {
       * 安全组备注
       */
     SecurityGroupRemark: string;
+}
+/**
+ * DescribeBackupFiles请求参数结构体
+ */
+export interface DescribeBackupFilesRequest {
+    /**
+      * 实例ID，形如mssql-njj2mtpl
+      */
+    InstanceId: string;
+    /**
+      * 聚合ID, 可通过接口DescribeBackups获取
+      */
+    GroupId: string;
+    /**
+      * 分页返回，每页返回的数目，取值为1-100，默认值为20
+      */
+    Limit?: number;
+    /**
+      * 分页返回，页编号，默认值为第0页
+      */
+    Offset?: number;
+    /**
+      * 按照备份的库名称筛选，不填则不筛选此项
+      */
+    DatabaseName?: string;
 }
 /**
  * 用于RestoreInstance，RollbackInstance，CreateMigration、CloneDB 等接口；对恢复的库进行重命名，且支持选择要恢复的库。
@@ -2707,6 +2778,31 @@ export interface AccountPassword {
       * 密码
       */
     Password: string;
+}
+/**
+ * DescribeSlowlogs请求参数结构体
+ */
+export interface DescribeSlowlogsRequest {
+    /**
+      * 实例ID，形如mssql-k8voqdlz
+      */
+    InstanceId: string;
+    /**
+      * 查询开始时间
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间
+      */
+    EndTime: string;
+    /**
+      * 分页返回，每页返回的数目，取值为1-100，默认值为20
+      */
+    Limit?: number;
+    /**
+      * 分页返回，页编号，默认值为第0页
+      */
+    Offset?: number;
 }
 /**
  * DeleteMigration返回参数结构体
@@ -3026,7 +3122,7 @@ export interface DBInstance {
       */
     SubnetId: number;
     /**
-      * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>
+      * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>  <li>13：实例修改中且待切换</li> <li>14：订阅发布创建中</li> <li>15：订阅发布修改中</li> <li>16：实例修改中且切换中</li> <li>17：创建RO副本中</li>
       */
     Status: number;
     /**
@@ -3150,6 +3246,11 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceTags: Array<ResourceTag>;
+    /**
+      * 备份模式，master_pkg-主节点打包备份(默认) ；master_no_pkg-主节点不打包备份；slave_pkg-从节点打包备份(always on集群有效)；slave_no_pkg-从节点不打包备份(always on集群有效)；只读副本对该值无效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupModel: string;
 }
 /**
  * DescribeProductConfig返回参数结构体
@@ -3466,11 +3567,11 @@ export interface ModifyDBInstanceRenewFlagRequest {
  */
 export interface Backup {
     /**
-      * 文件名
+      * 文件名，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取文件名
       */
     FileName: string;
     /**
-      * 文件大小，单位 KB
+      * 文件大小，单位 KB，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取文件大小
       */
     Size: number;
     /**
@@ -3482,15 +3583,15 @@ export interface Backup {
       */
     EndTime: string;
     /**
-      * 内网下载地址
+      * 内网下载地址，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取下载地址
       */
     InternalAddr: string;
     /**
-      * 外网下载地址
+      * 外网下载地址，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取下载地址
       */
     ExternalAddr: string;
     /**
-      * 备份文件唯一标识，RestoreInstance接口会用到该字段
+      * 备份文件唯一标识，RestoreInstance接口会用到该字段，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取可回档的ID
       */
     Id: number;
     /**
@@ -3510,9 +3611,13 @@ export interface Backup {
       */
     BackupWay: number;
     /**
-      * 备份名称，可自定义
+      * 备份任务名称，可自定义
       */
     BackupName: string;
+    /**
+      * 聚合Id，对于打包备份文件不返回此值。通过此值调用DescribeBackupFiles接口，获取单库备份文件的详细信息
+      */
+    GroupId: string;
 }
 /**
  * DescribeBackupCommand请求参数结构体
@@ -3799,11 +3904,11 @@ export interface DescribeBackupsResponse {
     /**
       * 备份总数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 备份列表详情
       */
-    Backups?: Array<Backup>;
+    Backups: Array<Backup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3964,29 +4069,29 @@ export interface DescribeDBsNormalRequest {
     InstanceId: string;
 }
 /**
- * DescribeSlowlogs请求参数结构体
+ * 在非打包上传备份模式下，每个库对应一个备份文件
  */
-export interface DescribeSlowlogsRequest {
+export interface BackupFile {
     /**
-      * 实例ID，形如mssql-k8voqdlz
+      * 备份文件唯一标识
       */
-    InstanceId: string;
+    Id: number;
     /**
-      * 查询开始时间
+      * 备份文件名称
       */
-    StartTime: string;
+    FileName: string;
     /**
-      * 查询结束时间
+      * 文件大小(K)
       */
-    EndTime: string;
+    Size: number;
     /**
-      * 分页返回，每页返回的数目，取值为1-100，默认值为20
+      * 备份文件的库的名称
       */
-    Limit?: number;
+    DBs: Array<string>;
     /**
-      * 分页返回，页编号，默认值为第0页
+      * 下载地址
       */
-    Offset?: number;
+    DownloadLink: string;
 }
 /**
  * ModifyAccountRemark请求参数结构体
@@ -4359,11 +4464,11 @@ export interface DescribeDBInstancesResponse {
     /**
       * 符合条件的实例总数。分页返回的话，这个值指的是所有符合条件的实例的个数，而非当前根据Limit和Offset值返回的实例个数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例列表
       */
-    DBInstances?: Array<DBInstance>;
+    DBInstances: Array<DBInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4571,13 +4676,18 @@ export interface ModifyBackupNameRequest {
       */
     InstanceId: string;
     /**
-      * 要修改名称的备份ID，可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943)  接口获取。
-      */
-    BackupId: number;
-    /**
       * 修改的备份名称
       */
     BackupName: string;
+    /**
+      * 要修改名称的备份ID，可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943)  接口获取。
+      */
+    BackupId?: number;
+    /**
+      * 备份任务组ID，在单库备份文件模式下，可通过[DescribeBackups](https://cloud.tencent.com/document/product/238/19943) 接口获得。
+ BackupId 和 GroupId 同时存在，按照BackupId进行修改。
+      */
+    GroupId?: string;
 }
 /**
  * StopMigration返回参数结构体
@@ -4724,15 +4834,6 @@ export interface DescribePublishSubscribeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeMigrationDetail请求参数结构体
- */
-export interface DescribeMigrationDetailRequest {
-    /**
-      * 迁移任务ID
-      */
-    MigrateId: number;
 }
 /**
  * DescribeReadOnlyGroupList请求参数结构体

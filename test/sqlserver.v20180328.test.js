@@ -38,6 +38,16 @@ it("sqlserver.v20180328.RecycleReadOnlyGroup", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDBInstanceRenewFlag", async function () {
+    try {
+       const data = await client.ModifyDBInstanceRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.StartIncrementalMigration", async function () {
     try {
        const data = await client.StartIncrementalMigration({})
@@ -168,9 +178,9 @@ it("sqlserver.v20180328.CreatePublishSubscribe", async function () {
     }
 })
 
-it("sqlserver.v20180328.DescribeReadOnlyGroupByReadOnlyInstance", async function () {
+it("sqlserver.v20180328.DescribeBackupFiles", async function () {
     try {
-       const data = await client.DescribeReadOnlyGroupByReadOnlyInstance({})
+       const data = await client.DescribeBackupFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,9 +978,9 @@ it("sqlserver.v20180328.ModifyReadOnlyGroupDetails", async function () {
     }
 })
 
-it("sqlserver.v20180328.ModifyDBInstanceRenewFlag", async function () {
+it("sqlserver.v20180328.DescribeReadOnlyGroupByReadOnlyInstance", async function () {
     try {
-       const data = await client.ModifyDBInstanceRenewFlag({})
+       const data = await client.DescribeReadOnlyGroupByReadOnlyInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

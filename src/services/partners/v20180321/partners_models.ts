@@ -129,23 +129,33 @@ export interface DescribeAgentDealsCacheRequest {
 }
 
 /**
- * DescribeClientBaseInfo返回参数结构体
+ * DescribeSalesmans请求参数结构体
  */
-export interface DescribeClientBaseInfoResponse {
+export interface DescribeSalesmansRequest {
   /**
-   * 代客基础信息数组
+   * 偏移量
    */
-  ClientBaseSet: Array<ClientBaseElem>
+  Offset: number
 
   /**
-   * 符合条件的代客数
+   * 限制数目
    */
-  TotalCount: number
+  Limit: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 业务员姓名(模糊查询)
    */
-  RequestId?: string
+  SalesName?: string
+
+  /**
+   * 业务员ID
+   */
+  SalesUin?: string
+
+  /**
+   * ASC/DESC， 不区分大小写，按创建通过时间排序
+   */
+  OrderDirection?: string
 }
 
 /**
@@ -518,46 +528,6 @@ export interface RemovePayRelationForClientResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeSalesmans请求参数结构体
- */
-export interface DescribeSalesmansRequest {
-  /**
-   * 偏移量
-   */
-  Offset: number
-
-  /**
-   * 限制数目
-   */
-  Limit: number
-
-  /**
-   * 业务员姓名(模糊查询)
-   */
-  SalesName?: string
-
-  /**
-   * 业务员ID
-   */
-  SalesUin?: string
-
-  /**
-   * ASC/DESC， 不区分大小写，按创建通过时间排序
-   */
-  OrderDirection?: string
-}
-
-/**
- * DescribeClientBaseInfo请求参数结构体
- */
-export interface DescribeClientBaseInfoRequest {
-  /**
-   * 代客UIN
-   */
-  ClientUin: string
 }
 
 /**
@@ -1133,26 +1103,6 @@ export interface DescribeUnbindClientListRequest {
 }
 
 /**
- * DescribeRebateInfos返回参数结构体
- */
-export interface DescribeRebateInfosResponse {
-  /**
-   * 返佣信息列表
-   */
-  RebateInfoSet: Array<RebateInfoElem>
-
-  /**
-   * 符合查询条件返佣信息数目
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeAgentPayDeals返回参数结构体
  */
 export interface DescribeAgentPayDealsResponse {
@@ -1461,33 +1411,23 @@ export interface AuditApplyClientResponse {
 }
 
 /**
- * 代客基础信息
+ * DescribeAgentDealsCache返回参数结构体
  */
-export interface ClientBaseElem {
+export interface DescribeAgentDealsCacheResponse {
   /**
-   * 代客关联的代理商UIN
+   * 订单数组
    */
-  AgentUin: string
+  AgentDealSet: Array<AgentDealElem>
 
   /**
-   * 代客UIN
+   * 符合条件的订单总数量
    */
-  ClientUin: string
+  TotalCount: number
 
   /**
-   * 代客关联类型 0:代理 1:转售
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ClientRelateType: number
-
-  /**
-   * 代理商合作模式 0:代理 1:转售
-   */
-  AgentCooperationMode: number
-
-  /**
-   * 代理商国家编码 China:中国  其他:海外，如US等
-   */
-  AgentCountry: string
+  RequestId?: string
 }
 
 /**
@@ -1760,16 +1700,16 @@ export interface DealGoodsPriceNewElem {
 }
 
 /**
- * DescribeAgentDealsCache返回参数结构体
+ * DescribeRebateInfos返回参数结构体
  */
-export interface DescribeAgentDealsCacheResponse {
+export interface DescribeRebateInfosResponse {
   /**
-   * 订单数组
+   * 返佣信息列表
    */
-  AgentDealSet: Array<AgentDealElem>
+  RebateInfoSet: Array<RebateInfoElem>
 
   /**
-   * 符合条件的订单总数量
+   * 符合查询条件返佣信息数目
    */
   TotalCount: number
 

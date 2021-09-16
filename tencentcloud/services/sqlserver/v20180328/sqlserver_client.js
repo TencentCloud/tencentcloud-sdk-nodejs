@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecycleReadOnlyGroup", req, cb);
     }
     /**
+     * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
+     */
+    async ModifyDBInstanceRenewFlag(req, cb) {
+        return this.request("ModifyDBInstanceRenewFlag", req, cb);
+    }
+    /**
      * 本接口（StartIncrementalMigration）用于启动增量备份导入任务。
      */
     async StartIncrementalMigration(req, cb) {
@@ -118,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePublishSubscribe", req, cb);
     }
     /**
-     * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
+     * 本接口(DescribeBackupFiles)用于在非打包备份模式下单个库对应的备份文件
      */
-    async DescribeReadOnlyGroupByReadOnlyInstance(req, cb) {
-        return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb);
+    async DescribeBackupFiles(req, cb) {
+        return this.request("DescribeBackupFiles", req, cb);
     }
     /**
      * 本接口（DescribeMaintenanceSpan）根据实例ID查询该实例的可维护时间窗。
@@ -420,7 +426,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMigration", req, cb);
     }
     /**
-     * 本接口(ModifyBackupName)用于修改备份名称。
+     * 本接口(ModifyBackupName)用于修改备份任务名称。
      */
     async ModifyBackupName(req, cb) {
         return this.request("ModifyBackupName", req, cb);
@@ -601,10 +607,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyReadOnlyGroupDetails", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
+     * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
      */
-    async ModifyDBInstanceRenewFlag(req, cb) {
-        return this.request("ModifyDBInstanceRenewFlag", req, cb);
+    async DescribeReadOnlyGroupByReadOnlyInstance(req, cb) {
+        return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb);
     }
 }
 exports.Client = Client;

@@ -23,6 +23,7 @@ import {
   CloneDBResponse,
   InstanceRenewInfo,
   DealInfo,
+  ModifyBackupStrategyRequest,
   RestoreInstanceRequest,
   CreateBasicDBInstancesResponse,
   DescribeAccountsRequest,
@@ -78,7 +79,7 @@ import {
   MigrationDetail,
   DescribeBackupByFlowIdResponse,
   RecycleDBInstanceRequest,
-  DescribeFlowStatusRequest,
+  CompleteMigrationResponse,
   ResetAccountPasswordResponse,
   StartMigrationCheckResponse,
   MigrateTask,
@@ -98,7 +99,7 @@ import {
   SlowlogInfo,
   ModifyAccountRemarkResponse,
   DescribeMigrationsResponse,
-  ModifyBackupStrategyRequest,
+  DescribeBackupFilesResponse,
   RenewDBInstanceRequest,
   DescribeZonesRequest,
   DeleteDBRequest,
@@ -121,6 +122,7 @@ import {
   DescribeMigrationsRequest,
   DescribeDBCharsetsRequest,
   DescribeInstanceParamRecordsRequest,
+  DescribeFlowStatusRequest,
   DescribeDBsRequest,
   CompleteExpansionRequest,
   ModifyDatabaseMdfRequest,
@@ -132,7 +134,7 @@ import {
   CreateReadOnlyDBInstancesResponse,
   DeleteMigrationRequest,
   DescribeInstanceParamsRequest,
-  CompleteMigrationResponse,
+  DescribeMigrationDetailRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   DBPrivilegeModifyInfo,
   RemoveBackupsResponse,
@@ -143,6 +145,7 @@ import {
   DescribeProjectSecurityGroupsRequest,
   InstanceDBDetail,
   SecurityGroup,
+  DescribeBackupFilesRequest,
   RenameRestoreDatabase,
   ReadOnlyInstance,
   InquiryPriceUpgradeDBInstanceRequest,
@@ -150,6 +153,7 @@ import {
   ReadOnlyInstanceWeightPair,
   ModifyDBInstanceNameRequest,
   AccountPassword,
+  DescribeSlowlogsRequest,
   DeleteMigrationResponse,
   DescribeBackupMigrationRequest,
   RecycleReadOnlyGroupRequest,
@@ -204,7 +208,7 @@ import {
   DescribeBackupByFlowIdRequest,
   CreateBackupRequest,
   DescribeDBsNormalRequest,
-  DescribeSlowlogsRequest,
+  BackupFile,
   ModifyAccountRemarkRequest,
   ModifyIncrementalMigrationResponse,
   ModifyPublishSubscribeNameRequest,
@@ -246,7 +250,6 @@ import {
   DescribeBackupCommandResponse,
   StartBackupMigrationRequest,
   DescribePublishSubscribeResponse,
-  DescribeMigrationDetailRequest,
   DescribeReadOnlyGroupListRequest,
   DescribeIncrementalMigrationResponse,
   ModifyDBRemarkResponse,
@@ -285,6 +288,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecycleReadOnlyGroupResponse) => void
   ): Promise<RecycleReadOnlyGroupResponse> {
     return this.request("RecycleReadOnlyGroup", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
+   */
+  async ModifyDBInstanceRenewFlag(
+    req: ModifyDBInstanceRenewFlagRequest,
+    cb?: (error: string, rep: ModifyDBInstanceRenewFlagResponse) => void
+  ): Promise<ModifyDBInstanceRenewFlagResponse> {
+    return this.request("ModifyDBInstanceRenewFlag", req, cb)
   }
 
   /**
@@ -418,13 +431,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
+   * 本接口(DescribeBackupFiles)用于在非打包备份模式下单个库对应的备份文件
    */
-  async DescribeReadOnlyGroupByReadOnlyInstance(
-    req: DescribeReadOnlyGroupByReadOnlyInstanceRequest,
-    cb?: (error: string, rep: DescribeReadOnlyGroupByReadOnlyInstanceResponse) => void
-  ): Promise<DescribeReadOnlyGroupByReadOnlyInstanceResponse> {
-    return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb)
+  async DescribeBackupFiles(
+    req: DescribeBackupFilesRequest,
+    cb?: (error: string, rep: DescribeBackupFilesResponse) => void
+  ): Promise<DescribeBackupFilesResponse> {
+    return this.request("DescribeBackupFiles", req, cb)
   }
 
   /**
@@ -920,7 +933,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyBackupName)用于修改备份名称。
+   * 本接口(ModifyBackupName)用于修改备份任务名称。
    */
   async ModifyBackupName(
     req: ModifyBackupNameRequest,
@@ -1221,12 +1234,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
+   * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
    */
-  async ModifyDBInstanceRenewFlag(
-    req: ModifyDBInstanceRenewFlagRequest,
-    cb?: (error: string, rep: ModifyDBInstanceRenewFlagResponse) => void
-  ): Promise<ModifyDBInstanceRenewFlagResponse> {
-    return this.request("ModifyDBInstanceRenewFlag", req, cb)
+  async DescribeReadOnlyGroupByReadOnlyInstance(
+    req: DescribeReadOnlyGroupByReadOnlyInstanceRequest,
+    cb?: (error: string, rep: DescribeReadOnlyGroupByReadOnlyInstanceResponse) => void
+  ): Promise<DescribeReadOnlyGroupByReadOnlyInstanceResponse> {
+    return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb)
   }
 }

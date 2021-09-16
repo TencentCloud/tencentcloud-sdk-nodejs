@@ -820,6 +820,11 @@ export interface DescribeScanResult {
 <li>Error: 异常</li>
       */
   Status: string
+
+  /**
+   * 提交检测的应用 ID
+   */
+  BizId: number
 }
 
 /**

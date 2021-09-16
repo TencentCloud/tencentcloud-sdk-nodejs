@@ -18,333 +18,351 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  RunEIPDirectServiceEnabled,
-  DescribeTaskResultResponse,
-  Ipv6Address,
-  BatchDeregisterTargetsResponse,
-  DescribePeakBaseOverviewRequest,
-  SecurityGroupAssociationStatistics,
   SecurityGroupLimitSet,
-  DisassociateAddressResponse,
-  BatchModifyTargetWeightResponse,
-  InstanceStatistic,
   CreateRoutesRequest,
-  SetSecurityGroupForLoadbalancersRequest,
-  CreateLoadBalancerRequest,
   DescribeHaVipsResponse,
   ModifyModuleSecurityGroupsRequest,
-  Internet,
-  DescribeModuleResponse,
-  ModifyLoadBalancerAttributesRequest,
-  DeleteSecurityGroupPoliciesRequest,
-  ImageTask,
-  Province,
+  TerminateInstancesResponse,
   DescribeMonthPeakNetworkResponse,
-  ModifyModuleConfigResponse,
-  NetworkStorageRange,
-  ModifyModuleNameResponse,
   DescribeNetworkInterfacesRequest,
-  DescribeSubnetsRequest,
-  AssociateSecurityGroupsRequest,
-  StartInstancesRequest,
-  ImageLimitConfig,
-  HaVip,
-  RouteConflict,
-  SetLoadBalancerSecurityGroupsResponse,
-  EipQuota,
-  DeleteSubnetResponse,
-  ModifyAddressesBandwidthResponse,
-  DescribeSubnetsResponse,
-  Tag,
-  RunInstancesRequest,
-  ReleaseAddressesRequest,
-  DescribeLoadBalancersRequest,
-  DescribeInstancesResponse,
+  CreateSecurityGroupPoliciesResponse,
   DescribeMonthPeakNetworkRequest,
-  ImportImageRequest,
-  ModifyModuleSecurityGroupsResponse,
-  SrcImage,
-  SetSecurityGroupForLoadbalancersResponse,
-  InstanceTypeConfig,
   DescribeNodeResponse,
-  RemovePrivateIpAddressesResponse,
-  DescribeDefaultSubnetResponse,
-  ReplaceRouteTableAssociationRequest,
-  ReplaceSecurityGroupPolicyRequest,
-  ModifyTargetWeightResponse,
-  Node,
-  DescribeCustomImageTaskResponse,
-  SecurityGroup,
-  DeleteSubnetRequest,
   DescribeModuleRequest,
-  DescribeTaskStatusRequest,
-  CreateNetworkInterfaceRequest,
-  CreateModuleResponse,
   RebootInstancesRequest,
-  RuleHealth,
-  AllocateAddressesRequest,
-  NetworkInterfaceAttachment,
-  Instance,
-  DeleteNetworkInterfaceRequest,
+  CreateDisksRequest,
+  AttachDisksRequest,
+  DescribeSnapshotsRequest,
   RemovePrivateIpAddressesRequest,
-  RouteTable,
-  ZoneInstanceCountISP,
-  LoadBalancerHealth,
-  DescribeTargetsRequest,
-  ModifyInstancesAttributeRequest,
-  InstanceFamilyTypeConfig,
-  ResetInstancesResponse,
-  DeleteVpcRequest,
-  DeleteLoadBalancerListenersRequest,
-  MigratePrivateIpAddressRequest,
-  ModifySubnetAttributeResponse,
-  ZoneInfo,
-  DescribeInstancesDeniedActionsRequest,
-  DeleteRouteTableRequest,
-  DescribeNodeRequest,
-  CreateSubnetResponse,
-  DescribeSecurityGroupPoliciesResponse,
+  Tag,
+  DescribeImageRequest,
+  OsVersion,
   DescribeListenersResponse,
-  Area,
-  ModifySecurityGroupPoliciesRequest,
-  DescribeConfigRequest,
-  DescribeInstanceVncUrlRequest,
-  DescribeInstanceVncUrlResponse,
-  TargetsWeightRule,
-  StopInstancesResponse,
   StartInstancesResponse,
   CreateVpcResponse,
-  ModifyTargetPortResponse,
   AssistantCidr,
-  TerminateInstancesRequest,
-  DescribeTaskStatusResponse,
-  BatchRegisterTargetsResponse,
-  CreateModuleRequest,
-  ReplaceRouteTableAssociationResponse,
+  ModifyModuleIpDirectRequest,
   InstanceNetworkInfo,
-  ModifyInstancesAttributeResponse,
-  ReleaseAddressesResponse,
-  ModifyVpcAttributeRequest,
-  DescribeInstancesDeniedActionsResponse,
-  DeleteHaVipResponse,
-  ReleaseIpv6AddressesRequest,
-  TaskOutput,
-  ModuleCounter,
-  ReplaceSecurityGroupPolicyResponse,
-  ModifyPrivateIpAddressesAttributeResponse,
-  ReplaceRoutesResponse,
-  PhysicalPosition,
-  Listener,
-  ModifyLoadBalancerAttributesResponse,
-  SetLoadBalancerSecurityGroupsRequest,
-  DescribeDefaultSubnetRequest,
   ResetInstancesMaxBandwidthResponse,
-  DeleteSecurityGroupResponse,
-  VpcInfo,
-  Route,
-  DescribeImageRequest,
-  CreateNetworkInterfaceResponse,
-  ModifyListenerRequest,
-  RunInstancesResponse,
-  DescribeAddressQuotaRequest,
-  ModifyModuleNameRequest,
-  DescribeInstanceTypeConfigResponse,
   NodeInstanceNum,
-  HealthCheck,
-  DescribeSecurityGroupLimitsResponse,
-  DescribeAddressesResponse,
-  AssignIpv6AddressesResponse,
-  CreateRoutesResponse,
-  NetworkInterface,
   DeleteListenerRequest,
-  DescribeSecurityGroupsResponse,
-  ImportCustomImageResponse,
+  StopInstancesResponse,
+  LoadBalancerInternetAccessible,
+  ResetRoutesRequest,
+  TerminateDisksRequest,
+  SecurityGroupAssociationStatistics,
+  ModifyDefaultSubnetResponse,
+  DescribeRouteTablesResponse,
+  StopInstancesRequest,
   DetachNetworkInterfaceResponse,
-  InstanceFamilyConfig,
+  ImageTask,
+  ModifyListenerRequest,
+  CreateImageRequest,
+  Instance,
+  Node,
+  DeleteLoadBalancerRequest,
+  DescribeVpcsRequest,
+  DescribeRouteConflictsResponse,
+  AssociateSecurityGroupsResponse,
+  BatchDeregisterTargetsRequest,
+  ModifyListenerResponse,
+  DescribeTargetHealthResponse,
+  ModifyDefaultSubnetRequest,
+  DescribeTaskResultRequest,
+  Snapshot,
+  AttachDisksResponse,
+  DescribeLoadBalancersRequest,
+  DeleteRoutesResponse,
+  DescribeCustomImageTaskRequest,
+  DescribeSecurityGroupAssociationStatisticsResponse,
+  AssignPrivateIpAddressesResponse,
+  ImportImageResponse,
+  DescribeSecurityGroupsRequest,
+  DeleteImageResponse,
+  ModifySubnetAttributeResponse,
+  DisassociateSecurityGroupsRequest,
+  NetworkInterface,
+  DescribeVpcsResponse,
+  ModifySecurityGroupAttributeRequest,
+  LoadBalancer,
+  ModifyModuleNameResponse,
+  DescribePeakBaseOverviewRequest,
+  BatchModifyTargetWeightResponse,
+  InstanceStatistic,
+  DeleteSecurityGroupPoliciesRequest,
+  ImportCustomImageResponse,
+  AssociateSecurityGroupsRequest,
+  RouteConflict,
+  DeleteSubnetResponse,
+  ISP,
+  Address,
+  PeakBase,
+  ReplaceRouteTableAssociationRequest,
+  ModifyTargetWeightResponse,
+  DescribeCustomImageTaskResponse,
+  ISPCounter,
+  CreateModuleResponse,
+  SecurityGroupPolicy,
+  TerminateDisksResponse,
+  LoadBalancerHealth,
+  CreateListenerResponse,
+  DeleteVpcRequest,
+  Disk,
+  CreateSubnetResponse,
+  DescribeSecurityGroupPoliciesResponse,
+  ModifySecurityGroupPoliciesRequest,
+  NetworkStorageRange,
+  ReplaceRoutesRequest,
+  DescribeTargetHealthRequest,
+  ModifyInstancesAttributeResponse,
+  ModifySubnetAttributeRequest,
+  DisassociateAddressRequest,
+  ModuleCounter,
+  TaskInput,
+  ModifyLoadBalancerAttributesResponse,
+  InstanceFamilyTypeConfig,
+  DescribeDefaultSubnetRequest,
+  RunInstancesResponse,
+  TargetHealth,
+  DescribeSecurityGroupLimitsResponse,
+  RouteTableAssociation,
+  ModifyTargetPortResponse,
   MonthNetwork,
   ResetRoutesResponse,
-  DeleteModuleRequest,
+  AllocateAddressesResponse,
   CreateImageResponse,
-  ModifySecurityGroupPoliciesResponse,
-  ResetInstancesMaxBandwidthRequest,
-  LoadBalancerInternetAccessible,
-  OsVersion,
-  ResetRoutesRequest,
-  DisableRoutesResponse,
-  PeakBase,
-  ResetInstancesPasswordResponse,
   ModifyModuleNetworkRequest,
-  Image,
-  TagSpecification,
-  DetachNetworkInterfaceRequest,
   AddressTemplateSpecification,
-  DescribeConfigResponse,
   AssignIpv6AddressesRequest,
-  ModifyModuleNetworkResponse,
-  ModifyDefaultSubnetResponse,
-  ModifyTargetWeightRequest,
-  CreateSubnetRequest,
   DescribeModuleDetailResponse,
-  TaskInput,
-  ModifyModuleDisableWanIpRequest,
   Backend,
-  Subnet,
-  ModifyVpcAttributeResponse,
-  DeleteLoadBalancerRequest,
   ModifyIpv6AddressesAttributeResponse,
-  DeleteVpcResponse,
-  Target,
-  RouteTableAssociation,
-  SecurityGroupPolicySet,
-  DescribeVpcsResponse,
   ImageUrl,
-  ISP,
-  PrivateIpAddressSpecification,
+  ModifyModuleSecurityGroupsResponse,
+  ReplaceSecurityGroupPolicyRequest,
+  DeleteModuleResponse,
+  DescribeModuleDetailRequest,
+  ModifyRouteTableAttributeRequest,
+  ModifyModuleNetworkResponse,
+  DescribeImportImageOsRequest,
+  ModifyModuleIpDirectResponse,
+  ResetInstancesPasswordRequest,
+  AssociateAddressResponse,
+  DescribeAddressesRequest,
+  DescribeSecurityGroupPoliciesRequest,
+  CreateSecurityGroupResponse,
+  DeleteListenerResponse,
+  ResetInstancesRequest,
+  DeleteImageRequest,
+  PeakNetworkRegionInfo,
+  ModifyHaVipAttributeRequest,
+  ModifyAddressesBandwidthRequest,
+  ModifyImageAttributeResponse,
+  SimpleModule,
+  TagInfo,
+  ModifyImageAttributeRequest,
+  InstanceNetworkLimitConfig,
+  CreateModuleRequest,
+  CreateLoadBalancerResponse,
+  SetLoadBalancerSecurityGroupsRequest,
+  DescribeImportImageOsResponse,
+  MigrateNetworkInterfaceResponse,
+  Module,
+  ListenerHealth,
+  DisassociateSecurityGroupsResponse,
+  RunEIPDirectServiceEnabled,
+  ModifyTargetPortRequest,
+  Ipv6Address,
+  CreateNetworkInterfaceRequest,
+  SetSecurityGroupForLoadbalancersRequest,
+  DescribeInstancesDeniedActionsRequest,
+  ModifyLoadBalancerAttributesRequest,
+  DeleteHaVipResponse,
+  Province,
+  DescribeSubnetsRequest,
+  CreateSubnetRequest,
+  HaVip,
+  ModifyAddressesBandwidthResponse,
+  RunInstancesRequest,
+  DescribeInstancesResponse,
+  InstanceTypeConfig,
+  AllocateAddressesRequest,
+  ZoneInfo,
+  ModifyInstancesAttributeRequest,
+  ResetInstancesResponse,
+  DescribeNodeRequest,
   ModifySecurityGroupAttributeResponse,
-  ISPCounter,
+  ModifyModuleConfigRequest,
+  Area,
+  ModifyAddressAttributeResponse,
+  DescribeInstanceVncUrlRequest,
+  DescribeTaskStatusResponse,
+  ReplaceRouteTableAssociationResponse,
+  DescribeInstancesDeniedActionsResponse,
+  ReleaseIpv6AddressesRequest,
+  TaskOutput,
+  PhysicalPosition,
+  Listener,
+  StartInstancesRequest,
+  DeleteSnapshotsRequest,
+  Placement,
+  Target,
+  DeleteSnapshotsResponse,
+  DescribeAddressesResponse,
+  ModifyIpv6AddressesAttributeRequest,
+  DeleteModuleRequest,
+  DisableRoutesResponse,
+  DescribeConfigResponse,
+  ModifyVpcAttributeResponse,
+  PrivateIpAddressSpecification,
   MigratePrivateIpAddressResponse,
-  CreateImageRequest,
   DeleteRouteTableResponse,
   ModifyModuleDisableWanIpResponse,
   EnhancedService,
-  CreateListenerResponse,
-  DeleteModuleResponse,
-  DescribeInstanceTypeConfigRequest,
   DescribeLoadBalanceTaskStatusRequest,
-  ImportCustomImageRequest,
   ModifyHaVipAttributeResponse,
-  ModifyIpv6AddressesAttributeRequest,
-  DescribeModuleDetailRequest,
-  DeleteRoutesRequest,
-  AssociateAddressRequest,
-  ModifySecurityGroupAttributeRequest,
-  ModifyModuleConfigRequest,
-  Position,
-  DescribePeakNetworkOverviewResponse,
+  ModifyVpcAttributeRequest,
+  TagSpecification,
   AttachNetworkInterfaceResponse,
-  SecurityGroupPolicy,
-  DescribeVpcsRequest,
-  DescribeRouteConflictsResponse,
   DescribeRouteTablesRequest,
   DescribeBaseOverviewRequest,
   CreateHaVipResponse,
-  AssociateSecurityGroupsResponse,
-  DiskInfo,
-  ModifyRouteTableAttributeRequest,
-  BatchDeregisterTargetsRequest,
-  DescribeImportImageOsRequest,
+  ImportImageRequest,
+  DiskChargePrepaid,
   DisableRoutesRequest,
-  ModifyListenerResponse,
-  DescribeTargetHealthResponse,
-  DescribeLoadBalanceTaskStatusResponse,
-  EnableRoutesRequest,
-  ModifyDefaultSubnetRequest,
+  ResetInstancesMaxBandwidthRequest,
+  ModifyModuleNameRequest,
   DescribeInstancesRequest,
   CreateListenerRequest,
-  DescribeTaskResultRequest,
-  VirtualPrivateCloud,
-  AssociateAddressResponse,
-  Filter,
+  ReleaseAddressesRequest,
   CreateRouteTableRequest,
-  PublicIPAddressInfo,
-  TerminateInstancesResponse,
-  CreateHaVipRequest,
-  DescribeAddressesRequest,
-  DescribeSecurityGroupPoliciesRequest,
+  ModifyModuleConfigResponse,
   MigrateNetworkInterfaceRequest,
+  SrcImage,
+  DescribeTaskStatusRequest,
+  ModifyAddressAttributeRequest,
+  DescribeTargetsResponse,
+  ImageOsList,
+  BatchModifyTargetWeightRequest,
+  BatchTarget,
+  City,
+  PeakNetwork,
+  RebootInstancesResponse,
+  DeleteSecurityGroupPoliciesResponse,
+  DescribeHaVipsRequest,
+  BatchRegisterTargetsRequest,
+  RemovePrivateIpAddressesResponse,
+  PublicIPAddressInfo,
+  RunSecurityServiceEnabled,
+  ModifyModuleImageResponse,
+  DeleteLoadBalancerListenersResponse,
+  VpcInfo,
+  ModuleItem,
+  CreateSecurityGroupPoliciesRequest,
+  RunMonitorServiceEnabled,
+  ModifyRouteTableAttributeResponse,
+  VirtualPrivateCloud,
+  ReleaseIpv6AddressesResponse,
+  DescribeTaskResultResponse,
+  BatchDeregisterTargetsResponse,
+  SetLoadBalancerSecurityGroupsResponse,
+  CreateLoadBalancerRequest,
+  Internet,
+  DescribeModuleResponse,
+  ImageLimitConfig,
+  EipQuota,
+  DescribeSubnetsResponse,
+  SetSecurityGroupForLoadbalancersResponse,
+  DescribeDefaultSubnetResponse,
+  DeleteSubnetRequest,
+  Position,
+  RouteTable,
+  DeleteNetworkInterfaceRequest,
+  DescribeTargetsRequest,
+  ReplaceRoutesResponse,
+  DeleteHaVipRequest,
+  DeleteLoadBalancerListenersRequest,
+  MigratePrivateIpAddressRequest,
+  DeleteRouteTableRequest,
+  DetachDisksRequest,
+  DescribeConfigRequest,
+  NetworkInterfaceAttachment,
+  BatchRegisterTargetsResponse,
+  ImportCustomImageRequest,
+  ReleaseAddressesResponse,
+  ReplaceSecurityGroupPolicyResponse,
+  ModifyPrivateIpAddressesAttributeResponse,
+  RuleHealth,
+  DeleteSecurityGroupResponse,
+  CreateNetworkInterfaceResponse,
+  TargetsWeightRule,
+  DescribeDisksResponse,
+  ZoneInstanceCountISP,
+  DescribeAddressQuotaRequest,
+  DescribeInstanceTypeConfigResponse,
+  HealthCheck,
+  SecurityGroupPolicySet,
+  AssignIpv6AddressesResponse,
+  CreateRoutesResponse,
+  DescribeSecurityGroupsResponse,
+  InstanceFamilyConfig,
+  ModifySecurityGroupPoliciesResponse,
+  ServiceTemplateSpecification,
+  Image,
+  DetachNetworkInterfaceRequest,
+  ModifyTargetWeightRequest,
+  DescribeRouteConflictsRequest,
+  Subnet,
+  AttachNetworkInterfaceRequest,
+  ResetInstancesPasswordResponse,
+  SecurityGroup,
+  ModifyModuleDisableWanIpRequest,
+  DescribeInstanceVncUrlResponse,
+  DisassociateAddressResponse,
+  DescribeInstanceTypeConfigRequest,
+  DeleteRoutesRequest,
+  AssociateAddressRequest,
+  DescribePeakNetworkOverviewResponse,
+  DescribeLoadBalanceTaskStatusResponse,
+  DiskInfo,
+  Filter,
+  DescribeSnapshotsResponse,
+  CreateHaVipRequest,
+  CreateDisksResponse,
   DescribeAddressQuotaResponse,
-  CreateSecurityGroupPoliciesResponse,
-  CreateSecurityGroupResponse,
   ZoneInstanceInfo,
   DeleteLoadBalancerResponse,
   DeleteSecurityGroupRequest,
-  ReplaceRoutesRequest,
   CreateRouteTableResponse,
-  ModifyModuleImageResponse,
-  DeleteRoutesResponse,
-  ResetInstancesRequest,
-  PeakNetwork,
-  DescribeCustomImageTaskRequest,
-  DescribeSecurityGroupAssociationStatisticsResponse,
+  DescribeDisksRequest,
   ModifyPrivateIpAddressesAttributeRequest,
-  DescribeTargetsResponse,
-  ImageOsList,
-  InstanceOperator,
-  ModifyAddressAttributeResponse,
-  ImportImageResponse,
-  BatchModifyTargetWeightRequest,
+  DetachDisksResponse,
   CreateSecurityGroupRequest,
   DescribeSecurityGroupLimitsRequest,
-  BatchTarget,
-  City,
   PrivateIPAddressInfo,
-  DescribeTargetHealthRequest,
-  EnableRoutesResponse,
+  TerminateInstancesRequest,
   DeleteNetworkInterfaceResponse,
-  SimpleModule,
   DescribePeakNetworkOverviewRequest,
-  ModifyModuleIpDirectResponse,
-  AssignPrivateIpAddressesResponse,
-  DescribeSecurityGroupsRequest,
-  PeakNetworkRegionInfo,
-  ModifyHaVipAttributeRequest,
-  RebootInstancesResponse,
-  ModifyModuleIpDirectRequest,
-  ModifyAddressesBandwidthRequest,
-  DeleteSecurityGroupPoliciesResponse,
-  ModifyAddressAttributeRequest,
+  EnableRoutesRequest,
+  OperatorAction,
   PeakFamilyInfo,
   DescribePeakBaseOverviewResponse,
-  ModifyImageAttributeResponse,
-  DescribeHaVipsRequest,
-  BatchRegisterTargetsRequest,
   DescribeImageResponse,
   ListenerBackend,
   RegionInfo,
-  TagInfo,
-  DeleteImageResponse,
-  Address,
   DescribeNetworkInterfacesResponse,
-  DeleteHaVipRequest,
+  EnableRoutesResponse,
   AssignPrivateIpAddressesRequest,
-  ResetInstancesPasswordRequest,
-  ModifyImageAttributeRequest,
-  InstanceNetworkLimitConfig,
-  OperatorAction,
   CreateVpcRequest,
-  CreateLoadBalancerResponse,
-  RunSecurityServiceEnabled,
   DescribeSecurityGroupAssociationStatisticsRequest,
   Country,
-  DisassociateSecurityGroupsRequest,
-  DescribeRouteTablesResponse,
-  StopInstancesRequest,
-  ModifySubnetAttributeRequest,
-  AllocateAddressesResponse,
-  DisassociateAddressRequest,
-  DeleteLoadBalancerListenersResponse,
+  Route,
   DescribeListenersRequest,
-  AttachNetworkInterfaceRequest,
-  ModuleItem,
+  DeleteVpcResponse,
   ModifyModuleImageRequest,
-  CreateSecurityGroupPoliciesRequest,
-  RunMonitorServiceEnabled,
-  ModifyTargetPortRequest,
-  DescribeImportImageOsResponse,
   DescribeLoadBalancersResponse,
-  ModifyRouteTableAttributeResponse,
-  MigrateNetworkInterfaceResponse,
-  DeleteListenerResponse,
-  DeleteImageRequest,
-  Module,
+  InstanceOperator,
   DescribeBaseOverviewResponse,
-  ServiceTemplateSpecification,
-  TargetHealth,
-  ListenerHealth,
-  DisassociateSecurityGroupsResponse,
-  DescribeRouteConflictsRequest,
-  ReleaseIpv6AddressesResponse,
-  LoadBalancer,
   AddressInfo,
 } from "./ecm_models"
 
@@ -468,13 +486,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询导入镜像任务
+   * 从CVM产品导入镜像到ECM
    */
-  async DescribeCustomImageTask(
-    req: DescribeCustomImageTaskRequest,
-    cb?: (error: string, rep: DescribeCustomImageTaskResponse) => void
-  ): Promise<DescribeCustomImageTaskResponse> {
-    return this.request("DescribeCustomImageTask", req, cb)
+  async ImportImage(
+    req: ImportImageRequest,
+    cb?: (error: string, rep: ImportImageResponse) => void
+  ): Promise<ImportImageResponse> {
+    return this.request("ImportImage", req, cb)
   }
 
   /**
@@ -528,13 +546,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从CVM产品导入镜像到ECM
+   * 查询导入镜像任务
    */
-  async ImportImage(
-    req: ImportImageRequest,
-    cb?: (error: string, rep: ImportImageResponse) => void
-  ): Promise<ImportImageResponse> {
-    return this.request("ImportImage", req, cb)
+  async DescribeCustomImageTask(
+    req: DescribeCustomImageTaskRequest,
+    cb?: (error: string, rep: DescribeCustomImageTaskResponse) => void
+  ): Promise<DescribeCustomImageTaskResponse> {
+    return this.request("DescribeCustomImageTask", req, cb)
   }
 
   /**
@@ -713,6 +731,19 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+     * 本接口（AttachDisks）用于挂载云硬盘。
+ 
+* 支持批量操作，将多块云盘挂载到同一云主机。如果多个云盘中存在不允许挂载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当挂载云盘的请求成功返回时，表示后台已发起挂载云盘的操作，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHING”变为“ATTACHED”，则为挂载成功。
+     */
+  async AttachDisks(
+    req: AttachDisksRequest,
+    cb?: (error: string, rep: AttachDisksResponse) => void
+  ): Promise<AttachDisksResponse> {
+    return this.request("AttachDisks", req, cb)
+  }
+
+  /**
    * 设置负载均衡实例的安全组。
    */
   async SetLoadBalancerSecurityGroups(
@@ -763,16 +794,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: AssociateAddressResponse) => void
   ): Promise<AssociateAddressResponse> {
     return this.request("AssociateAddress", req, cb)
-  }
-
-  /**
-   * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
-   */
-  async ModifyDefaultSubnet(
-    req: ModifyDefaultSubnetRequest,
-    cb?: (error: string, rep: ModifyDefaultSubnetResponse) => void
-  ): Promise<ModifyDefaultSubnetResponse> {
-    return this.request("ModifyDefaultSubnet", req, cb)
   }
 
   /**
@@ -868,6 +889,20 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+     * 本接口（TerminateDisks）用于退还云硬盘。
+
+* 不再使用的云盘，可通过本接口主动退还。
+* 本接口支持退还预付费云盘和按小时后付费云盘。按小时后付费云盘可直接退还，预付费云盘需符合退还规则。
+* 支持批量操作，每次请求批量云硬盘的上限为50。如果批量云盘存在不允许操作的，请求会以特定错误码返回。
+     */
+  async TerminateDisks(
+    req: TerminateDisksRequest,
+    cb?: (error: string, rep: TerminateDisksResponse) => void
+  ): Promise<TerminateDisksResponse> {
+    return this.request("TerminateDisks", req, cb)
+  }
+
+  /**
    * 修改监听器绑定的后端机器的端口。
    */
   async ModifyTargetPort(
@@ -938,14 +973,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-     * 弹性网卡退还内网 IP。
-退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+     * 本接口（DetachDisks）用于卸载云硬盘。
+
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
      */
-  async RemovePrivateIpAddresses(
-    req: RemovePrivateIpAddressesRequest,
-    cb?: (error: string, rep: RemovePrivateIpAddressesResponse) => void
-  ): Promise<RemovePrivateIpAddressesResponse> {
-    return this.request("RemovePrivateIpAddresses", req, cb)
+  async DetachDisks(
+    req: DetachDisksRequest,
+    cb?: (error: string, rep: DetachDisksResponse) => void
+  ): Promise<DetachDisksResponse> {
+    return this.request("DetachDisks", req, cb)
   }
 
   /**
@@ -956,6 +993,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DisableRoutesResponse) => void
   ): Promise<DisableRoutesResponse> {
     return this.request("DisableRoutes", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
+   */
+  async ModifyIpv6AddressesAttribute(
+    req: ModifyIpv6AddressesAttributeRequest,
+    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
+  ): Promise<ModifyIpv6AddressesAttributeResponse> {
+    return this.request("ModifyIpv6AddressesAttribute", req, cb)
   }
 
   /**
@@ -1079,6 +1126,20 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+     * 本接口（CreateDisks）用于创建云硬盘。
+
+* 预付费云盘的购买会预先扣除本次云盘购买所需金额，在调用本接口前请确保账户余额充足。
+* 本接口支持传入数据盘快照来创建云盘，实现将快照数据复制到新购云盘上。
+* 本接口为异步接口，当创建请求下发成功后会返回一个新建的云盘ID列表，此时云盘的创建并未立即完成。可以通过调用[DescribeDisks](/document/product/362/16315)接口根据DiskId查询对应云盘，如果能查到云盘，且状态为'UNATTACHED'或'ATTACHED'，则表示创建成功。
+     */
+  async CreateDisks(
+    req: CreateDisksRequest,
+    cb?: (error: string, rep: CreateDisksResponse) => void
+  ): Promise<CreateDisksResponse> {
+    return this.request("CreateDisks", req, cb)
+  }
+
+  /**
    * 绑定安全组
    */
   async AssociateSecurityGroups(
@@ -1139,6 +1200,19 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+     * 本接口（DescribeSnapshots）用于查询快照的详细信息。
+
+* 根据快照ID、创建快照的云硬盘ID、创建快照的云硬盘类型等对结果进行过滤，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
+*  如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的快照列表。
+     */
+  async DescribeSnapshots(
+    req: DescribeSnapshotsRequest,
+    cb?: (error: string, rep: DescribeSnapshotsResponse) => void
+  ): Promise<DescribeSnapshotsResponse> {
+    return this.request("DescribeSnapshots", req, cb)
+  }
+
+  /**
    * 销毁实例
    */
   async TerminateInstances(
@@ -1189,13 +1263,13 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
+   * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
    */
-  async ModifyIpv6AddressesAttribute(
-    req: ModifyIpv6AddressesAttributeRequest,
-    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
-  ): Promise<ModifyIpv6AddressesAttributeResponse> {
-    return this.request("ModifyIpv6AddressesAttribute", req, cb)
+  async ModifyDefaultSubnet(
+    req: ModifyDefaultSubnetRequest,
+    cb?: (error: string, rep: ModifyDefaultSubnetResponse) => void
+  ): Promise<ModifyDefaultSubnetResponse> {
+    return this.request("ModifyDefaultSubnet", req, cb)
   }
 
   /**
@@ -1402,6 +1476,19 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+     * 本接口（DescribeDisks）用于查询云硬盘列表。
+
+* 可以根据云硬盘ID、云硬盘类型或者云硬盘状态等信息来查询云硬盘的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
+* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的云硬盘列表。
+     */
+  async DescribeDisks(
+    req: DescribeDisksRequest,
+    cb?: (error: string, rep: DescribeDisksResponse) => void
+  ): Promise<DescribeDisksResponse> {
+    return this.request("DescribeDisks", req, cb)
+  }
+
+  /**
    * 弹性网卡迁移
    */
   async MigrateNetworkInterface(
@@ -1419,6 +1506,19 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: CreateListenerResponse) => void
   ): Promise<CreateListenerResponse> {
     return this.request("CreateListener", req, cb)
+  }
+
+  /**
+     * 本接口（DeleteSnapshots）用于删除快照。
+
+* 快照必须处于NORMAL状态，快照状态可以通过[DescribeSnapshots](/document/product/362/15647)接口查询，见输出参数中SnapshotState字段解释。
+* 支持批量操作。如果多个快照存在无法删除的快照，则操作不执行，以返回特定的错误码返回。
+     */
+  async DeleteSnapshots(
+    req: DeleteSnapshotsRequest,
+    cb?: (error: string, rep: DeleteSnapshotsResponse) => void
+  ): Promise<DeleteSnapshotsResponse> {
+    return this.request("DeleteSnapshots", req, cb)
   }
 
   /**
@@ -1541,6 +1641,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: ModifyAddressAttributeResponse) => void
   ): Promise<ModifyAddressAttributeResponse> {
     return this.request("ModifyAddressAttribute", req, cb)
+  }
+
+  /**
+     * 弹性网卡退还内网 IP。
+退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+     */
+  async RemovePrivateIpAddresses(
+    req: RemovePrivateIpAddressesRequest,
+    cb?: (error: string, rep: RemovePrivateIpAddressesResponse) => void
+  ): Promise<RemovePrivateIpAddressesResponse> {
+    return this.request("RemovePrivateIpAddresses", req, cb)
   }
 
   /**
