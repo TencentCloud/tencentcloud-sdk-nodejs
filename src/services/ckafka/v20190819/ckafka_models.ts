@@ -87,6 +87,12 @@ export interface TopicDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RetentionTimeConfig: TopicRetentionTimeConfigRsp
+
+  /**
+      * 0:正常，1：已删除，2：删除中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
 }
 
 /**
@@ -499,6 +505,89 @@ export interface CreateInstancePreData {
 }
 
 /**
+ * AclRule列表接口出参
+ */
+export interface AclRule {
+  /**
+      * Acl规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleName: string
+
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 匹配类型，目前只支持前缀匹配，枚举值列表：PREFIXED
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PatternType: string
+
+  /**
+      * 表示前缀匹配的前缀的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Pattern: string
+
+  /**
+      * Acl资源类型,目前只支持Topic,枚举值列表：Topic
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType: string
+
+  /**
+      * 该规则所包含的ACL信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AclList: string
+
+  /**
+      * 规则所创建的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTimeStamp: string
+
+  /**
+      * 预设ACL规则是否应用到新增的topic中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsApplied: number
+
+  /**
+      * 规则更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTimeStamp: string
+
+  /**
+      * 规则的备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Comment: string
+
+  /**
+      * 其中一个显示的对应的TopicName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicName: string
+
+  /**
+      * 应用该ACL规则的Topic数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicCount: number
+
+  /**
+      * patternType的中文显示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PatternTypeTitle: string
+}
+
+/**
  * DescribeACL返回参数结构体
  */
 export interface DescribeACLResponse {
@@ -659,7 +748,7 @@ export interface DescribeTopicAttributesResponse {
   /**
    * 返回的结果对象
    */
-  Result?: TopicAttributesResponse
+  Result: TopicAttributesResponse
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1152,6 +1241,16 @@ export interface CreateTopicRequest {
    * Segment分片滚动的时长，单位ms，当前最小为3600000ms
    */
   SegmentMs?: number
+
+  /**
+   * 预设ACL规则, 1:打开  0:关闭，默认不打开
+   */
+  EnableAclRule?: number
+
+  /**
+   * 预设ACL规则的名称
+   */
+  AclRuleName?: string
 }
 
 /**
@@ -1421,7 +1520,7 @@ export interface ModifyTopicAttributesResponse {
   /**
    * 返回结果集
    */
-  Result?: JgwOperateResponse
+  Result: JgwOperateResponse
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1493,6 +1592,11 @@ export interface DescribeTopicRequest {
    * 返回数量，不填则默认为10，最大值为50
    */
   Limit?: number
+
+  /**
+   * Acl预设策略名称
+   */
+  AclRuleName?: string
 }
 
 /**
@@ -2533,6 +2637,18 @@ export interface TopicAttributesResponse {
    * 分区详情
    */
   Partitions: Array<TopicPartitionDO>
+
+  /**
+      * ACL预设策略开关，1：打开； 0：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableAclRule: number
+
+  /**
+      * 预设策略列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AclRuleList: Array<AclRule>
 }
 
 /**
@@ -2640,6 +2756,11 @@ export interface DescribeTopicDetailRequest {
    * 返回数量，不填则默认 10，最大值20，取值要大于0
    */
   Limit?: number
+
+  /**
+   * Acl预设策略名称
+   */
+  AclRuleName?: string
 }
 
 /**
@@ -2945,6 +3066,21 @@ export interface ModifyTopicAttributesRequest {
    * 消息删除策略，可以选择delete 或者compact
    */
   CleanUpPolicy?: string
+
+  /**
+   * Ip白名单列表，配额限制，enableWhileList=1时必选
+   */
+  IpWhiteList?: Array<string>
+
+  /**
+   * 预设ACL规则, 1:打开  0:关闭，默认不打开
+   */
+  EnableAclRule?: number
+
+  /**
+   * 预设ACL规则的名称
+   */
+  AclRuleName?: string
 }
 
 /**
@@ -3237,7 +3373,7 @@ export interface DescribeTopicDetailResponse {
   /**
    * 返回的主题详情实体
    */
-  Result?: TopicDetailResponse
+  Result: TopicDetailResponse
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

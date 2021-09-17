@@ -185,12 +185,12 @@ export interface ExportVideoByVideoSegmentationDataRequest {
   ExportDestination: string
 
   /**
-   * 导出的云剪素材信息。指定 ExportDestination = CME 时有效。
+   * 导出的云剪媒体信息。当导出目标为 CME 时必填。
    */
   CMEExportInfo?: CMEExportInfo
 
   /**
-   * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+   * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
    */
   VODExportInfo?: VODExportInfo
 
@@ -322,12 +322,12 @@ export interface ExportVideoEditProjectRequest {
   CoverData?: string
 
   /**
-   * 导出的云剪媒体信息。指定 ExportDestination = CME 时有效。
+   * 导出的云剪媒体信息。当导出目标为 CME 时必填。
    */
   CMEExportInfo?: CMEExportInfo
 
   /**
-   * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+   * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
    */
   VODExportInfo?: VODExportInfo
 
@@ -1088,12 +1088,12 @@ export interface ExportVideoByEditorTrackDataRequest {
   CoverData?: string
 
   /**
-   * 导出的云剪素材信息。指定 ExportDestination = CME 时有效。
+   * 导出的云剪媒体信息。当导出目标为 CME 时必填。
    */
   CMEExportInfo?: CMEExportInfo
 
   /**
-   * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+   * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
    */
   VODExportInfo?: VODExportInfo
 
@@ -3086,12 +3086,12 @@ export interface ExportVideoByTemplateRequest {
   SlotReplacements?: Array<SlotReplacementInfo>
 
   /**
-   * 导出的云剪媒体信息。指定 ExportDestination = CME 时有效。
+   * 导出的云剪媒体信息。当导出目标为 CME 时必填。
    */
   CMEExportInfo?: CMEExportInfo
 
   /**
-   * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+   * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
    */
   VODExportInfo?: VODExportInfo
 

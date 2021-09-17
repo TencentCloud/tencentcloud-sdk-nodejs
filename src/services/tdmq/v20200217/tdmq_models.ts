@@ -2238,6 +2238,16 @@ export interface DescribeCmqQueuesRequest {
    * 根据QueueName进行过滤
    */
   QueueName?: string
+
+  /**
+   * CMQ 队列名称列表过滤
+   */
+  QueueNameList?: Array<string>
+
+  /**
+   * 标签过滤查找时，需要设置为 true
+   */
+  IsTagFilter?: boolean
 }
 
 /**
@@ -2414,6 +2424,16 @@ export interface DescribeCmqTopicsRequest {
    * 根据TopicName进行模糊搜索
    */
   TopicName?: string
+
+  /**
+   * CMQ 主题名称列表过滤
+   */
+  TopicNameList?: Array<string>
+
+  /**
+   * 标签过滤查找时，需要设置为 true
+   */
+  IsTagFilter?: boolean
 }
 
 /**

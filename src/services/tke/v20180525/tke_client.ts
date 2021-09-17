@@ -20,10 +20,12 @@ import { ClientConfig } from "../../../common/interface"
 import {
   EnableVpcCniNetworkTypeRequest,
   DescribeClusterEndpointVipStatusRequest,
+  CreateEKSContainerInstancesResponse,
   DescribeClusterSecurityResponse,
   DescribeClusterSecurityRequest,
   ModifyPrometheusAlertRuleRequest,
   DeleteClusterInstancesResponse,
+  EksCiVolume,
   ModifyNodePoolDesiredCapacityAboutAsgResponse,
   ModifyClusterNodePoolResponse,
   DescribeClusterKubeconfigResponse,
@@ -33,26 +35,33 @@ import {
   ModifyClusterEndpointSPRequest,
   DescribeClusterInstancesResponse,
   DeleteClusterResponse,
-  AutoscalingAdded,
+  ContainerState,
   CreatePrometheusAlertRuleRequest,
   UpdateEKSClusterRequest,
   CreateClusterRouteTableResponse,
   DescribeClusterCommonNamesRequest,
+  NfsVolume,
   DeleteClusterEndpointResponse,
   PrometheusTemplateModify,
+  CbsVolume,
   PrometheusNotification,
   ClusterVersion,
   CreatePrometheusTemplateRequest,
+  Exec,
+  RestartEKSContainerInstancesRequest,
   DeletePrometheusTemplateRequest,
   InstanceUpgradeProgressItem,
-  EnableVpcCniNetworkTypeResponse,
+  DescribeEKSContainerInstanceRegionsRequest,
   DescribeEKSClustersResponse,
+  VolumeMount,
   RouteTableInfo,
   IPAddress,
   DeleteClusterRequest,
   PrometheusTarget,
+  SecurityContext,
   CreateEKSClusterRequest,
-  DisableVpcCniNetworkTypeResponse,
+  DNSConfig,
+  DNSConfigOption,
   DeleteClusterAsGroupsRequest,
   DescribeClusterControllersResponse,
   DescribeExistedInstancesRequest,
@@ -64,7 +73,7 @@ import {
   DescribePrometheusTemplatesRequest,
   ModifyPrometheusAlertRuleResponse,
   AddNodeToNodePoolRequest,
-  DescribeEKSContainerInstanceRegionsRequest,
+  DescribeEKSContainerInstanceEventResponse,
   DescribePrometheusAlertRuleResponse,
   ClusterAsGroup,
   Instance,
@@ -73,6 +82,7 @@ import {
   EksCiRegionInfo,
   DescribeVersionsResponse,
   UpgradeAbleInstancesItem,
+  EnvironmentVariable,
   CreateClusterNodePoolFromExistingAsgRequest,
   PrometheusAlertRule,
   DescribePrometheusAgentInstancesRequest,
@@ -83,9 +93,9 @@ import {
   DeleteClusterRouteResponse,
   ModifyClusterEndpointSPResponse,
   CreateClusterEndpointVipResponse,
-  DescribeClusterRoutesResponse,
+  AutoscalingAdded,
   DescribeClustersRequest,
-  UpgradeClusterInstancesRequest,
+  ModifyClusterAttributeResponse,
   ClusterPublicLB,
   ExtensionAddon,
   DeletePrometheusAlertRuleRequest,
@@ -95,7 +105,7 @@ import {
   DeletePrometheusTemplateSyncRequest,
   SetNodePoolNodeProtectionResponse,
   DisableVpcCniNetworkTypeRequest,
-  DescribePrometheusTemplatesResponse,
+  AddVpcCniSubnetsRequest,
   PrometheusAlertRuleDetail,
   DeleteClusterEndpointVipResponse,
   SyncPrometheusTemplateRequest,
@@ -107,22 +117,28 @@ import {
   ModifyClusterAsGroupAttributeResponse,
   CreateClusterInstancesRequest,
   ManuallyAdded,
+  DescribeEksContainerInstanceLogResponse,
   DeleteEKSClusterResponse,
   VersionInstance,
   PrometheusConfigItem,
+  DescribePrometheusTemplatesResponse,
   DeleteClusterNodePoolRequest,
+  EksCi,
+  DisableVpcCniNetworkTypeResponse,
   DescribeClusterKubeconfigRequest,
   ClusterCIDRSettings,
+  RunSecurityServiceEnabled,
   CreatePrometheusTemplateResponse,
   CreateClusterEndpointVipRequest,
   RouteInfo,
+  TcpSocket,
   ClusterInternalLB,
-  Taint,
+  EnableVpcCniNetworkTypeResponse,
   CheckInstancesUpgradeAbleRequest,
   ExistedInstance,
   ModifyNodePoolInstanceTypesRequest,
   AddClusterCIDRRequest,
-  DescribeClusterNodePoolsResponse,
+  DeleteEKSContainerInstancesResponse,
   DescribePrometheusAlertRuleRequest,
   DescribeEKSClusterCredentialRequest,
   GetUpgradeInstanceProgressRequest,
@@ -132,7 +148,9 @@ import {
   UpdateEKSClusterResponse,
   InstanceExtraArgs,
   NodePool,
+  Event,
   DescribeRegionsRequest,
+  UpdateEKSContainerInstanceRequest,
   DescribeClustersResponse,
   ClusterCredential,
   DescribeVpcCniPodLimitsRequest,
@@ -147,6 +165,7 @@ import {
   CreateEKSClusterResponse,
   DescribeEKSClustersRequest,
   CreatePrometheusAlertRuleResponse,
+  UpdateEKSContainerInstanceResponse,
   ResourceDeleteOption,
   DnsServerConf,
   EksCluster,
@@ -154,20 +173,24 @@ import {
   CreateClusterNodePoolFromExistingAsgResponse,
   DescribeEnableVpcCniProgressRequest,
   DescribeClusterEndpointStatusRequest,
-  ModifyClusterAttributeResponse,
+  HttpGet,
   EnhancedService,
   CreateClusterAsGroupRequest,
+  ImageRegistryCredential,
+  DescribeClusterNodePoolsResponse,
   DescribeRouteTableConflictsResponse,
   DescribeVersionsRequest,
   CreateClusterResponse,
-  TaskStepInfo,
-  RunSecurityServiceEnabled,
+  DescribeClusterRoutesResponse,
+  DescribeEKSContainerInstancesResponse,
   DeleteClusterRouteTableRequest,
   DescribeAvailableClusterVersionRequest,
   CreateClusterRequest,
   DeletePrometheusAlertRuleResponse,
+  UpgradeClusterInstancesRequest,
   AcquireClusterAdminRoleRequest,
   CreateClusterAsGroupResponse,
+  DescribeEksContainerInstanceLogRequest,
   DeleteClusterAsGroupsResponse,
   DescribePrometheusInstanceRequest,
   DescribeClusterInstancesRequest,
@@ -186,11 +209,14 @@ import {
   CreateClusterNodePoolRequest,
   ClusterAdvancedSettings,
   AcquireClusterAdminRoleResponse,
+  Taint,
+  RestartEKSContainerInstancesResponse,
   ModifyPrometheusTemplateResponse,
   DeletePrometheusTemplateResponse,
   DescribePrometheusTemplateSyncRequest,
   UpdateClusterVersionRequest,
   DeleteClusterEndpointVipRequest,
+  LivenessOrReadinessProbe,
   CheckInstancesUpgradeAbleResponse,
   Cluster,
   DescribeClusterEndpointStatusResponse,
@@ -203,11 +229,13 @@ import {
   CreateClusterInstancesResponse,
   DescribeClusterAsGroupOptionRequest,
   DescribePrometheusAgentInstancesResponse,
+  Container,
   CreateClusterEndpointRequest,
   PrometheusJobTargets,
   DescribeEKSContainerInstanceRegionsResponse,
   ModifyClusterAsGroupOptionAttributeResponse,
   DescribePrometheusInstanceResponse,
+  Capabilities,
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
   AddVpcCniSubnetsResponse,
@@ -227,14 +255,16 @@ import {
   DescribeClusterNodePoolDetailRequest,
   SetNodePoolNodeProtectionRequest,
   DeletePrometheusTemplateSyncResponse,
+  RouteTableConflict,
   CreateClusterRouteTableRequest,
-  RemoveNodeFromNodePoolRequest,
+  InstanceUpgradePreCheckResult,
   DescribeClusterAsGroupsRequest,
   DescribeImagesRequest,
+  TaskStepInfo,
   DescribeAvailableClusterVersionResponse,
   TagSpecification,
   DescribeClusterRouteTablesResponse,
-  AddVpcCniSubnetsRequest,
+  DeleteEKSContainerInstancesRequest,
   InstanceUpgradePreCheckResultItem,
   DescribePrometheusAlertHistoryResponse,
   DescribeClusterCommonNamesResponse,
@@ -246,18 +276,22 @@ import {
   PrometheusTemplate,
   RunMonitorServiceEnabled,
   UpdateClusterVersionResponse,
-  RouteTableConflict,
+  CreateEKSContainerInstancesRequest,
+  Probe,
   CreateClusterNodePoolResponse,
   NodePoolOption,
   ModifyClusterAsGroupAttributeRequest,
   PrometheusGrafanaInfo,
+  EipAttribute,
   InstanceDataDiskMountSetting,
+  RemoveNodeFromNodePoolRequest,
   PrometheusInstanceOverview,
   NodeCountSummary,
   DescribeClusterAsGroupsResponse,
-  InstanceUpgradePreCheckResult,
+  DescribeEKSContainerInstancesRequest,
   DescribeClusterNodePoolDetailResponse,
   DescribeClusterControllersRequest,
+  DescribeEKSContainerInstanceEventRequest,
 } from "./tke_models"
 
 /**
@@ -267,36 +301,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tke.tencentcloudapi.com", "2018-05-25", clientConfig)
-  }
-
-  /**
-   * 拉取模板列表，默认模板将总是在最前面
-   */
-  async DescribePrometheusTemplates(
-    req: DescribePrometheusTemplatesRequest,
-    cb?: (error: string, rep: DescribePrometheusTemplatesResponse) => void
-  ): Promise<DescribePrometheusTemplatesResponse> {
-    return this.request("DescribePrometheusTemplates", req, cb)
-  }
-
-  /**
-   * 查询弹性集群列表
-   */
-  async DescribeEKSClusters(
-    req: DescribeEKSClustersRequest,
-    cb?: (error: string, rep: DescribeEKSClustersResponse) => void
-  ): Promise<DescribeEKSClustersResponse> {
-    return this.request("DescribeEKSClusters", req, cb)
-  }
-
-  /**
-   * 检查给定节点列表中哪些是可升级的
-   */
-  async CheckInstancesUpgradeAble(
-    req: CheckInstancesUpgradeAbleRequest,
-    cb?: (error: string, rep: CheckInstancesUpgradeAbleResponse) => void
-  ): Promise<CheckInstancesUpgradeAbleResponse> {
-    return this.request("CheckInstancesUpgradeAble", req, cb)
   }
 
   /**
@@ -310,123 +314,73 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建grafana监控面板
+   * 修改集群弹性伸缩属性
    */
-  async CreatePrometheusDashboard(
-    req: CreatePrometheusDashboardRequest,
-    cb?: (error: string, rep: CreatePrometheusDashboardResponse) => void
-  ): Promise<CreatePrometheusDashboardResponse> {
-    return this.request("CreatePrometheusDashboard", req, cb)
+  async ModifyClusterAsGroupOptionAttribute(
+    req: ModifyClusterAsGroupOptionAttributeRequest,
+    cb?: (error: string, rep: ModifyClusterAsGroupOptionAttributeResponse) => void
+  ): Promise<ModifyClusterAsGroupOptionAttributeResponse> {
+    return this.request("ModifyClusterAsGroupOptionAttribute", req, cb)
   }
 
   /**
-   * 获取实例列表
+   * GR集群可以通过本接口附加vpc-cni容器网络插件，开启vpc-cni容器网络能力
    */
-  async DescribePrometheusOverviews(
-    req: DescribePrometheusOverviewsRequest,
-    cb?: (error: string, rep: DescribePrometheusOverviewsResponse) => void
-  ): Promise<DescribePrometheusOverviewsResponse> {
-    return this.request("DescribePrometheusOverviews", req, cb)
+  async EnableVpcCniNetworkType(
+    req: EnableVpcCniNetworkTypeRequest,
+    cb?: (error: string, rep: EnableVpcCniNetworkTypeResponse) => void
+  ): Promise<EnableVpcCniNetworkTypeResponse> {
+    return this.request("EnableVpcCniNetworkType", req, cb)
   }
 
   /**
-   * 创建弹性集群
+   * 删除集群(YUNAPI V3版本)
    */
-  async CreateEKSCluster(
-    req: CreateEKSClusterRequest,
-    cb?: (error: string, rep: CreateEKSClusterResponse) => void
-  ): Promise<CreateEKSClusterResponse> {
-    return this.request("CreateEKSCluster", req, cb)
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 
   /**
-   * 查询节点池详情
+   * 修改告警规则
    */
-  async DescribeClusterNodePoolDetail(
-    req: DescribeClusterNodePoolDetailRequest,
-    cb?: (error: string, rep: DescribeClusterNodePoolDetailResponse) => void
-  ): Promise<DescribeClusterNodePoolDetailResponse> {
-    return this.request("DescribeClusterNodePoolDetail", req, cb)
+  async ModifyPrometheusAlertRule(
+    req: ModifyPrometheusAlertRuleRequest,
+    cb?: (error: string, rep: ModifyPrometheusAlertRuleResponse) => void
+  ): Promise<ModifyPrometheusAlertRuleResponse> {
+    return this.request("ModifyPrometheusAlertRule", req, cb)
   }
 
   /**
-   * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
+   * 仅能设置节点池中处于伸缩组的节点
    */
-  async DescribeVpcCniPodLimits(
-    req: DescribeVpcCniPodLimitsRequest,
-    cb?: (error: string, rep: DescribeVpcCniPodLimitsResponse) => void
-  ): Promise<DescribeVpcCniPodLimitsResponse> {
-    return this.request("DescribeVpcCniPodLimits", req, cb)
+  async SetNodePoolNodeProtection(
+    req: SetNodePoolNodeProtectionRequest,
+    cb?: (error: string, rep: SetNodePoolNodeProtectionResponse) => void
+  ): Promise<SetNodePoolNodeProtectionResponse> {
+    return this.request("SetNodePoolNodeProtection", req, cb)
   }
 
   /**
-   * 删除一个云原生Prometheus配置模板
+   * 查询容器实例的事件
    */
-  async DeletePrometheusTemplate(
-    req: DeletePrometheusTemplateRequest,
-    cb?: (error: string, rep: DeletePrometheusTemplateResponse) => void
-  ): Promise<DeletePrometheusTemplateResponse> {
-    return this.request("DeletePrometheusTemplate", req, cb)
+  async DescribeEKSContainerInstanceEvent(
+    req: DescribeEKSContainerInstanceEventRequest,
+    cb?: (error: string, rep: DescribeEKSContainerInstanceEventResponse) => void
+  ): Promise<DescribeEKSContainerInstanceEventResponse> {
+    return this.request("DescribeEKSContainerInstanceEvent", req, cb)
   }
 
   /**
-   * 修改节点池关联伸缩组的期望实例数
+   * 获取指定子账户在RBAC授权模式中对应kube-apiserver客户端证书的CommonName字段，如果没有客户端证书，将会签发一个，此接口有最大传入子账户数量上限，当前为50
    */
-  async ModifyNodePoolDesiredCapacityAboutAsg(
-    req: ModifyNodePoolDesiredCapacityAboutAsgRequest,
-    cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void
-  ): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse> {
-    return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb)
-  }
-
-  /**
-   * 获取被关联集群列表
-   */
-  async DescribePrometheusAgents(
-    req: DescribePrometheusAgentsRequest,
-    cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void
-  ): Promise<DescribePrometheusAgentsResponse> {
-    return this.request("DescribePrometheusAgents", req, cb)
-  }
-
-  /**
-   * 取消模板同步，这将会删除目标中该模板所生产的配置
-   */
-  async DeletePrometheusTemplateSync(
-    req: DeletePrometheusTemplateSyncRequest,
-    cb?: (error: string, rep: DeletePrometheusTemplateSyncResponse) => void
-  ): Promise<DeletePrometheusTemplateSyncResponse> {
-    return this.request("DeletePrometheusTemplateSync", req, cb)
-  }
-
-  /**
-   * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
-   */
-  async DeleteClusterEndpoint(
-    req: DeleteClusterEndpointRequest,
-    cb?: (error: string, rep: DeleteClusterEndpointResponse) => void
-  ): Promise<DeleteClusterEndpointResponse> {
-    return this.request("DeleteClusterEndpoint", req, cb)
-  }
-
-  /**
-   * 本接口用于查询开启vpc-cni模式的任务进度
-   */
-  async DescribeEnableVpcCniProgress(
-    req: DescribeEnableVpcCniProgressRequest,
-    cb?: (error: string, rep: DescribeEnableVpcCniProgressResponse) => void
-  ): Promise<DescribeEnableVpcCniProgressResponse> {
-    return this.request("DescribeEnableVpcCniProgress", req, cb)
-  }
-
-  /**
-   * 同步模板到实例或者集群
-   */
-  async SyncPrometheusTemplate(
-    req: SyncPrometheusTemplateRequest,
-    cb?: (error: string, rep: SyncPrometheusTemplateResponse) => void
-  ): Promise<SyncPrometheusTemplateResponse> {
-    return this.request("SyncPrometheusTemplate", req, cb)
+  async DescribeClusterCommonNames(
+    req: DescribeClusterCommonNamesRequest,
+    cb?: (error: string, rep: DescribeClusterCommonNamesResponse) => void
+  ): Promise<DescribeClusterCommonNamesResponse> {
+    return this.request("DescribeClusterCommonNames", req, cb)
   }
 
   /**
@@ -440,6 +394,146 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建集群路由表
+   */
+  async CreateClusterRouteTable(
+    req: CreateClusterRouteTableRequest,
+    cb?: (error: string, rep: CreateClusterRouteTableResponse) => void
+  ): Promise<CreateClusterRouteTableResponse> {
+    return this.request("CreateClusterRouteTable", req, cb)
+  }
+
+  /**
+   * 获得节点升级当前的进度
+   */
+  async GetUpgradeInstanceProgress(
+    req: GetUpgradeInstanceProgressRequest,
+    cb?: (error: string, rep: GetUpgradeInstanceProgressResponse) => void
+  ): Promise<GetUpgradeInstanceProgressResponse> {
+    return this.request("GetUpgradeInstanceProgress", req, cb)
+  }
+
+  /**
+   * 创建一个云原生Prometheus模板实例
+   */
+  async CreatePrometheusTemplate(
+    req: CreatePrometheusTemplateRequest,
+    cb?: (error: string, rep: CreatePrometheusTemplateResponse) => void
+  ): Promise<CreatePrometheusTemplateResponse> {
+    return this.request("CreatePrometheusTemplate", req, cb)
+  }
+
+  /**
+   * 从伸缩组创建节点池
+   */
+  async CreateClusterNodePoolFromExistingAsg(
+    req: CreateClusterNodePoolFromExistingAsgRequest,
+    cb?: (error: string, rep: CreateClusterNodePoolFromExistingAsgResponse) => void
+  ): Promise<CreateClusterNodePoolFromExistingAsgResponse> {
+    return this.request("CreateClusterNodePoolFromExistingAsg", req, cb)
+  }
+
+  /**
+   * 获取集群版本信息
+   */
+  async DescribeVersions(
+    req?: DescribeVersionsRequest,
+    cb?: (error: string, rep: DescribeVersionsResponse) => void
+  ): Promise<DescribeVersionsResponse> {
+    return this.request("DescribeVersions", req, cb)
+  }
+
+  /**
+   * 删除弹性集群(yunapiv3)
+   */
+  async DeleteEKSCluster(
+    req: DeleteEKSClusterRequest,
+    cb?: (error: string, rep: DeleteEKSClusterResponse) => void
+  ): Promise<DeleteEKSClusterResponse> {
+    return this.request("DeleteEKSCluster", req, cb)
+  }
+
+  /**
+   * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+   */
+  async DescribeClusterEndpointStatus(
+    req: DescribeClusterEndpointStatusRequest,
+    cb?: (error: string, rep: DescribeClusterEndpointStatusResponse) => void
+  ): Promise<DescribeClusterEndpointStatusResponse> {
+    return this.request("DescribeClusterEndpointStatus", req, cb)
+  }
+
+  /**
+   * 集群关联的伸缩组列表
+   */
+  async DescribeClusterAsGroups(
+    req: DescribeClusterAsGroupsRequest,
+    cb?: (error: string, rep: DescribeClusterAsGroupsResponse) => void
+  ): Promise<DescribeClusterAsGroupsResponse> {
+    return this.request("DescribeClusterAsGroups", req, cb)
+  }
+
+  /**
+   * 升级集群 Master 组件到指定版本
+   */
+  async UpdateClusterVersion(
+    req: UpdateClusterVersionRequest,
+    cb?: (error: string, rep: UpdateClusterVersionResponse) => void
+  ): Promise<UpdateClusterVersionResponse> {
+    return this.request("UpdateClusterVersion", req, cb)
+  }
+
+  /**
+   * 获取集群可以升级的所有版本
+   */
+  async DescribeAvailableClusterVersion(
+    req: DescribeAvailableClusterVersionRequest,
+    cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
+  ): Promise<DescribeAvailableClusterVersionResponse> {
+    return this.request("DescribeAvailableClusterVersion", req, cb)
+  }
+
+  /**
+   * 删除集群路由表
+   */
+  async DeleteClusterRouteTable(
+    req: DeleteClusterRouteTableRequest,
+    cb?: (error: string, rep: DeleteClusterRouteTableResponse) => void
+  ): Promise<DeleteClusterRouteTableResponse> {
+    return this.request("DeleteClusterRouteTable", req, cb)
+  }
+
+  /**
+   * 拉取模板列表，默认模板将总是在最前面
+   */
+  async DescribePrometheusTemplates(
+    req: DescribePrometheusTemplatesRequest,
+    cb?: (error: string, rep: DescribePrometheusTemplatesResponse) => void
+  ): Promise<DescribePrometheusTemplatesResponse> {
+    return this.request("DescribePrometheusTemplates", req, cb)
+  }
+
+  /**
+   * 查询节点池详情
+   */
+  async DescribeClusterNodePoolDetail(
+    req: DescribeClusterNodePoolDetailRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolDetailResponse) => void
+  ): Promise<DescribeClusterNodePoolDetailResponse> {
+    return this.request("DescribeClusterNodePoolDetail", req, cb)
+  }
+
+  /**
+   * 取消模板同步，这将会删除目标中该模板所生产的配置
+   */
+  async DeletePrometheusTemplateSync(
+    req: DeletePrometheusTemplateSyncRequest,
+    cb?: (error: string, rep: DeletePrometheusTemplateSyncResponse) => void
+  ): Promise<DeletePrometheusTemplateSyncResponse> {
+    return this.request("DeletePrometheusTemplateSync", req, cb)
+  }
+
+  /**
    * 扩展(新建)集群节点
    */
   async CreateClusterInstances(
@@ -447,16 +541,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterInstancesResponse) => void
   ): Promise<CreateClusterInstancesResponse> {
     return this.request("CreateClusterInstances", req, cb)
-  }
-
-  /**
-   * 获取targets信息
-   */
-  async DescribePrometheusTargets(
-    req: DescribePrometheusTargetsRequest,
-    cb?: (error: string, rep: DescribePrometheusTargetsResponse) => void
-  ): Promise<DescribePrometheusTargetsResponse> {
-    return this.request("DescribePrometheusTargets", req, cb)
   }
 
   /**
@@ -490,46 +574,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * GR集群可以通过本接口附加vpc-cni容器网络插件，开启vpc-cni容器网络能力
-   */
-  async EnableVpcCniNetworkType(
-    req: EnableVpcCniNetworkTypeRequest,
-    cb?: (error: string, rep: EnableVpcCniNetworkTypeResponse) => void
-  ): Promise<EnableVpcCniNetworkTypeResponse> {
-    return this.request("EnableVpcCniNetworkType", req, cb)
-  }
-
-  /**
-   * 获取实例详细信息
-   */
-  async DescribePrometheusInstance(
-    req: DescribePrometheusInstanceRequest,
-    cb?: (error: string, rep: DescribePrometheusInstanceResponse) => void
-  ): Promise<DescribePrometheusInstanceResponse> {
-    return this.request("DescribePrometheusInstance", req, cb)
-  }
-
-  /**
-   * 仅能设置节点池中处于伸缩组的节点
-   */
-  async SetNodePoolNodeProtection(
-    req: SetNodePoolNodeProtectionRequest,
-    cb?: (error: string, rep: SetNodePoolNodeProtectionResponse) => void
-  ): Promise<SetNodePoolNodeProtectionResponse> {
-    return this.request("SetNodePoolNodeProtection", req, cb)
-  }
-
-  /**
-   * 查询集群开启端口流程状态(仅支持托管集群外网端口)
-   */
-  async DescribeClusterEndpointVipStatus(
-    req: DescribeClusterEndpointVipStatusRequest,
-    cb?: (error: string, rep: DescribeClusterEndpointVipStatusResponse) => void
-  ): Promise<DescribeClusterEndpointVipStatusResponse> {
-    return this.request("DescribeClusterEndpointVipStatus", req, cb)
-  }
-
-  /**
    * 针对VPC-CNI模式的集群，增加集群容器网络可使用的子网
    */
   async AddVpcCniSubnets(
@@ -537,26 +581,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddVpcCniSubnetsResponse) => void
   ): Promise<AddVpcCniSubnetsResponse> {
     return this.request("AddVpcCniSubnets", req, cb)
-  }
-
-  /**
-   * 删除集群(YUNAPI V3版本)
-   */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
-  }
-
-  /**
-   * 获取指定子账户在RBAC授权模式中对应kube-apiserver客户端证书的CommonName字段，如果没有客户端证书，将会签发一个，此接口有最大传入子账户数量上限，当前为50
-   */
-  async DescribeClusterCommonNames(
-    req: DescribeClusterCommonNamesRequest,
-    cb?: (error: string, rep: DescribeClusterCommonNamesResponse) => void
-  ): Promise<DescribeClusterCommonNamesResponse> {
-    return this.request("DescribeClusterCommonNames", req, cb)
   }
 
   /**
@@ -570,16 +594,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过此接口，可以获取集群的tke:admin的ClusterRole，即管理员角色，可以用于CAM侧高权限的用户，通过CAM策略给予子账户此接口权限，进而可以通过此接口直接获取到kubernetes集群内的管理员角色。
-   */
-  async AcquireClusterAdminRole(
-    req: AcquireClusterAdminRoleRequest,
-    cb?: (error: string, rep: AcquireClusterAdminRoleResponse) => void
-  ): Promise<AcquireClusterAdminRoleResponse> {
-    return this.request("AcquireClusterAdminRole", req, cb)
-  }
-
-  /**
    * 查询已经存在的节点，判断是否可以加入集群
    */
   async DescribeExistedInstances(
@@ -590,113 +604,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建集群路由
+   * 获取弹性容器集群的接入认证信息
    */
-  async CreateClusterRoute(
-    req: CreateClusterRouteRequest,
-    cb?: (error: string, rep: CreateClusterRouteResponse) => void
-  ): Promise<CreateClusterRouteResponse> {
-    return this.request("CreateClusterRoute", req, cb)
-  }
-
-  /**
-   *  查询集群下节点实例信息
-   */
-  async DescribeClusterInstances(
-    req: DescribeClusterInstancesRequest,
-    cb?: (error: string, rep: DescribeClusterInstancesResponse) => void
-  ): Promise<DescribeClusterInstancesResponse> {
-    return this.request("DescribeClusterInstances", req, cb)
-  }
-
-  /**
-   * 创建集群路由表
-   */
-  async CreateClusterRouteTable(
-    req: CreateClusterRouteTableRequest,
-    cb?: (error: string, rep: CreateClusterRouteTableResponse) => void
-  ): Promise<CreateClusterRouteTableResponse> {
-    return this.request("CreateClusterRouteTable", req, cb)
-  }
-
-  /**
-   * 编辑节点池
-   */
-  async ModifyClusterNodePool(
-    req: ModifyClusterNodePoolRequest,
-    cb?: (error: string, rep: ModifyClusterNodePoolResponse) => void
-  ): Promise<ModifyClusterNodePoolResponse> {
-    return this.request("ModifyClusterNodePool", req, cb)
-  }
-
-  /**
-   * 获得节点升级当前的进度
-   */
-  async GetUpgradeInstanceProgress(
-    req: GetUpgradeInstanceProgressRequest,
-    cb?: (error: string, rep: GetUpgradeInstanceProgressResponse) => void
-  ): Promise<GetUpgradeInstanceProgressResponse> {
-    return this.request("GetUpgradeInstanceProgress", req, cb)
-  }
-
-  /**
-   * 集群弹性伸缩配置
-   */
-  async DescribeClusterAsGroupOption(
-    req: DescribeClusterAsGroupOptionRequest,
-    cb?: (error: string, rep: DescribeClusterAsGroupOptionResponse) => void
-  ): Promise<DescribeClusterAsGroupOptionResponse> {
-    return this.request("DescribeClusterAsGroupOption", req, cb)
-  }
-
-  /**
-   * 将集群内节点移入节点池
-   */
-  async AddNodeToNodePool(
-    req: AddNodeToNodePoolRequest,
-    cb?: (error: string, rep: AddNodeToNodePoolResponse) => void
-  ): Promise<AddNodeToNodePoolResponse> {
-    return this.request("AddNodeToNodePool", req, cb)
-  }
-
-  /**
-   * 创建一个云原生Prometheus模板实例
-   */
-  async CreatePrometheusTemplate(
-    req: CreatePrometheusTemplateRequest,
-    cb?: (error: string, rep: CreatePrometheusTemplateResponse) => void
-  ): Promise<CreatePrometheusTemplateResponse> {
-    return this.request("CreatePrometheusTemplate", req, cb)
-  }
-
-  /**
-   * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
-   */
-  async DescribeClusterEndpointStatus(
-    req: DescribeClusterEndpointStatusRequest,
-    cb?: (error: string, rep: DescribeClusterEndpointStatusResponse) => void
-  ): Promise<DescribeClusterEndpointStatusResponse> {
-    return this.request("DescribeClusterEndpointStatus", req, cb)
-  }
-
-  /**
-   * 集群关联的伸缩组列表
-   */
-  async DescribeClusterAsGroups(
-    req: DescribeClusterAsGroupsRequest,
-    cb?: (error: string, rep: DescribeClusterAsGroupsResponse) => void
-  ): Promise<DescribeClusterAsGroupsResponse> {
-    return this.request("DescribeClusterAsGroups", req, cb)
-  }
-
-  /**
-   * 创建节点池
-   */
-  async CreateClusterNodePool(
-    req: CreateClusterNodePoolRequest,
-    cb?: (error: string, rep: CreateClusterNodePoolResponse) => void
-  ): Promise<CreateClusterNodePoolResponse> {
-    return this.request("CreateClusterNodePool", req, cb)
+  async DescribeEKSClusterCredential(
+    req: DescribeEKSClusterCredentialRequest,
+    cb?: (error: string, rep: DescribeEKSClusterCredentialResponse) => void
+  ): Promise<DescribeEKSClusterCredentialResponse> {
+    return this.request("DescribeEKSClusterCredential", req, cb)
   }
 
   /**
@@ -710,33 +624,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取镜像信息
+   * 查询集群路由表
    */
-  async DescribeImages(
-    req?: DescribeImagesRequest,
-    cb?: (error: string, rep: DescribeImagesResponse) => void
-  ): Promise<DescribeImagesResponse> {
-    return this.request("DescribeImages", req, cb)
+  async DescribeClusterRouteTables(
+    req?: DescribeClusterRouteTablesRequest,
+    cb?: (error: string, rep: DescribeClusterRouteTablesResponse) => void
+  ): Promise<DescribeClusterRouteTablesResponse> {
+    return this.request("DescribeClusterRouteTables", req, cb)
   }
 
   /**
-   * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+   * 将集群内节点移入节点池
    */
-  async CreateClusterEndpoint(
-    req: CreateClusterEndpointRequest,
-    cb?: (error: string, rep: CreateClusterEndpointResponse) => void
-  ): Promise<CreateClusterEndpointResponse> {
-    return this.request("CreateClusterEndpoint", req, cb)
-  }
-
-  /**
-   * 从伸缩组创建节点池
-   */
-  async CreateClusterNodePoolFromExistingAsg(
-    req: CreateClusterNodePoolFromExistingAsgRequest,
-    cb?: (error: string, rep: CreateClusterNodePoolFromExistingAsgResponse) => void
-  ): Promise<CreateClusterNodePoolFromExistingAsgResponse> {
-    return this.request("CreateClusterNodePoolFromExistingAsg", req, cb)
+  async AddNodeToNodePool(
+    req: AddNodeToNodePoolRequest,
+    cb?: (error: string, rep: AddNodeToNodePoolResponse) => void
+  ): Promise<AddNodeToNodePoolResponse> {
+    return this.request("AddNodeToNodePool", req, cb)
   }
 
   /**
@@ -750,43 +654,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取关联目标集群的实例列表
+   * 编辑节点池
    */
-  async DescribePrometheusAgentInstances(
-    req: DescribePrometheusAgentInstancesRequest,
-    cb?: (error: string, rep: DescribePrometheusAgentInstancesResponse) => void
-  ): Promise<DescribePrometheusAgentInstancesResponse> {
-    return this.request("DescribePrometheusAgentInstances", req, cb)
-  }
-
-  /**
-   * 查询集群路由表
-   */
-  async DescribeClusterRouteTables(
-    req?: DescribeClusterRouteTablesRequest,
-    cb?: (error: string, rep: DescribeClusterRouteTablesResponse) => void
-  ): Promise<DescribeClusterRouteTablesResponse> {
-    return this.request("DescribeClusterRouteTables", req, cb)
-  }
-
-  /**
-   * 修改节点池的机型配置
-   */
-  async ModifyNodePoolInstanceTypes(
-    req: ModifyNodePoolInstanceTypesRequest,
-    cb?: (error: string, rep: ModifyNodePoolInstanceTypesResponse) => void
-  ): Promise<ModifyNodePoolInstanceTypesResponse> {
-    return this.request("ModifyNodePoolInstanceTypes", req, cb)
-  }
-
-  /**
-   * 创建告警规则
-   */
-  async CreatePrometheusAlertRule(
-    req: CreatePrometheusAlertRuleRequest,
-    cb?: (error: string, rep: CreatePrometheusAlertRuleResponse) => void
-  ): Promise<CreatePrometheusAlertRuleResponse> {
-    return this.request("CreatePrometheusAlertRule", req, cb)
+  async ModifyClusterNodePool(
+    req: ModifyClusterNodePoolRequest,
+    cb?: (error: string, rep: ModifyClusterNodePoolResponse) => void
+  ): Promise<ModifyClusterNodePoolResponse> {
+    return this.request("ModifyClusterNodePool", req, cb)
   }
 
   /**
@@ -810,133 +684,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询容器实例支持的地域
+   * 获取targets信息
    */
-  async DescribeEKSContainerInstanceRegions(
-    req?: DescribeEKSContainerInstanceRegionsRequest,
-    cb?: (error: string, rep: DescribeEKSContainerInstanceRegionsResponse) => void
-  ): Promise<DescribeEKSContainerInstanceRegionsResponse> {
-    return this.request("DescribeEKSContainerInstanceRegions", req, cb)
+  async DescribePrometheusTargets(
+    req: DescribePrometheusTargetsRequest,
+    cb?: (error: string, rep: DescribePrometheusTargetsResponse) => void
+  ): Promise<DescribePrometheusTargetsResponse> {
+    return this.request("DescribePrometheusTargets", req, cb)
   }
 
   /**
-   * 修改告警规则
+   * 删除容器实例，可批量删除
    */
-  async ModifyPrometheusAlertRule(
-    req: ModifyPrometheusAlertRuleRequest,
-    cb?: (error: string, rep: ModifyPrometheusAlertRuleResponse) => void
-  ): Promise<ModifyPrometheusAlertRuleResponse> {
-    return this.request("ModifyPrometheusAlertRule", req, cb)
+  async DeleteEKSContainerInstances(
+    req: DeleteEKSContainerInstancesRequest,
+    cb?: (error: string, rep: DeleteEKSContainerInstancesResponse) => void
+  ): Promise<DeleteEKSContainerInstancesResponse> {
+    return this.request("DeleteEKSContainerInstances", req, cb)
   }
 
   /**
-   * 删除弹性集群(yunapiv3)
+   *  查询集群下节点实例信息
    */
-  async DeleteEKSCluster(
-    req: DeleteEKSClusterRequest,
-    cb?: (error: string, rep: DeleteEKSClusterResponse) => void
-  ): Promise<DeleteEKSClusterResponse> {
-    return this.request("DeleteEKSCluster", req, cb)
-  }
-
-  /**
-   * 查询节点池列表
-   */
-  async DescribeClusterNodePools(
-    req: DescribeClusterNodePoolsRequest,
-    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
-  ): Promise<DescribeClusterNodePoolsResponse> {
-    return this.request("DescribeClusterNodePools", req, cb)
-  }
-
-  /**
-   * 修改模板内容
-   */
-  async ModifyPrometheusTemplate(
-    req: ModifyPrometheusTemplateRequest,
-    cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void
-  ): Promise<ModifyPrometheusTemplateResponse> {
-    return this.request("ModifyPrometheusTemplate", req, cb)
-  }
-
-  /**
-   * 集群的密钥信息
-   */
-  async DescribeClusterSecurity(
-    req: DescribeClusterSecurityRequest,
-    cb?: (error: string, rep: DescribeClusterSecurityResponse) => void
-  ): Promise<DescribeClusterSecurityResponse> {
-    return this.request("DescribeClusterSecurity", req, cb)
-  }
-
-  /**
-   * 提供给附加了VPC-CNI能力的Global-Route集群关闭VPC-CNI
-   */
-  async DisableVpcCniNetworkType(
-    req: DisableVpcCniNetworkTypeRequest,
-    cb?: (error: string, rep: DisableVpcCniNetworkTypeResponse) => void
-  ): Promise<DisableVpcCniNetworkTypeResponse> {
-    return this.request("DisableVpcCniNetworkType", req, cb)
-  }
-
-  /**
-   * 查询路由表冲突列表
-   */
-  async DescribeRouteTableConflicts(
-    req: DescribeRouteTableConflictsRequest,
-    cb?: (error: string, rep: DescribeRouteTableConflictsResponse) => void
-  ): Promise<DescribeRouteTableConflictsResponse> {
-    return this.request("DescribeRouteTableConflicts", req, cb)
-  }
-
-  /**
-   * 删除告警规则
-   */
-  async DeletePrometheusAlertRule(
-    req: DeletePrometheusAlertRuleRequest,
-    cb?: (error: string, rep: DeletePrometheusAlertRuleResponse) => void
-  ): Promise<DeletePrometheusAlertRuleResponse> {
-    return this.request("DeletePrometheusAlertRule", req, cb)
-  }
-
-  /**
-   * 删除节点池
-   */
-  async DeleteClusterNodePool(
-    req: DeleteClusterNodePoolRequest,
-    cb?: (error: string, rep: DeleteClusterNodePoolResponse) => void
-  ): Promise<DeleteClusterNodePoolResponse> {
-    return this.request("DeleteClusterNodePool", req, cb)
-  }
-
-  /**
-   * 获取集群版本信息
-   */
-  async DescribeVersions(
-    req?: DescribeVersionsRequest,
-    cb?: (error: string, rep: DescribeVersionsResponse) => void
-  ): Promise<DescribeVersionsResponse> {
-    return this.request("DescribeVersions", req, cb)
-  }
-
-  /**
-   * 修改集群伸缩组属性
-   */
-  async ModifyClusterAsGroupAttribute(
-    req: ModifyClusterAsGroupAttributeRequest,
-    cb?: (error: string, rep: ModifyClusterAsGroupAttributeResponse) => void
-  ): Promise<ModifyClusterAsGroupAttributeResponse> {
-    return this.request("ModifyClusterAsGroupAttribute", req, cb)
-  }
-
-  /**
-   * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
-   */
-  async DeleteClusterEndpointVip(
-    req: DeleteClusterEndpointVipRequest,
-    cb?: (error: string, rep: DeleteClusterEndpointVipResponse) => void
-  ): Promise<DeleteClusterEndpointVipResponse> {
-    return this.request("DeleteClusterEndpointVip", req, cb)
+  async DescribeClusterInstances(
+    req: DescribeClusterInstancesRequest,
+    cb?: (error: string, rep: DescribeClusterInstancesResponse) => void
+  ): Promise<DescribeClusterInstancesResponse> {
+    return this.request("DescribeClusterInstances", req, cb)
   }
 
   /**
@@ -950,26 +724,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除集群中的实例
-   */
-  async DeleteClusterInstances(
-    req: DeleteClusterInstancesRequest,
-    cb?: (error: string, rep: DeleteClusterInstancesResponse) => void
-  ): Promise<DeleteClusterInstancesResponse> {
-    return this.request("DeleteClusterInstances", req, cb)
-  }
-
-  /**
-   * 获取模板同步信息
-   */
-  async DescribePrometheusTemplateSync(
-    req: DescribePrometheusTemplateSyncRequest,
-    cb?: (error: string, rep: DescribePrometheusTemplateSyncResponse) => void
-  ): Promise<DescribePrometheusTemplateSyncResponse> {
-    return this.request("DescribePrometheusTemplateSync", req, cb)
-  }
-
-  /**
    * 给GR集群增加可用的ClusterCIDR
    */
   async AddClusterCIDR(
@@ -980,53 +734,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
+   * 查询容器实例中容器日志
    */
-  async DescribeClusterKubeconfig(
-    req: DescribeClusterKubeconfigRequest,
-    cb?: (error: string, rep: DescribeClusterKubeconfigResponse) => void
-  ): Promise<DescribeClusterKubeconfigResponse> {
-    return this.request("DescribeClusterKubeconfig", req, cb)
+  async DescribeEksContainerInstanceLog(
+    req: DescribeEksContainerInstanceLogRequest,
+    cb?: (error: string, rep: DescribeEksContainerInstanceLogResponse) => void
+  ): Promise<DescribeEksContainerInstanceLogResponse> {
+    return this.request("DescribeEksContainerInstanceLog", req, cb)
   }
 
   /**
-   * 修改弹性集群名称等属性
+   * 更新容器实例
    */
-  async UpdateEKSCluster(
-    req: UpdateEKSClusterRequest,
-    cb?: (error: string, rep: UpdateEKSClusterResponse) => void
-  ): Promise<UpdateEKSClusterResponse> {
-    return this.request("UpdateEKSCluster", req, cb)
-  }
-
-  /**
-   * 升级集群 Master 组件到指定版本
-   */
-  async UpdateClusterVersion(
-    req: UpdateClusterVersionRequest,
-    cb?: (error: string, rep: UpdateClusterVersionResponse) => void
-  ): Promise<UpdateClusterVersionResponse> {
-    return this.request("UpdateClusterVersion", req, cb)
-  }
-
-  /**
-   * 获取弹性容器集群的接入认证信息
-   */
-  async DescribeEKSClusterCredential(
-    req: DescribeEKSClusterCredentialRequest,
-    cb?: (error: string, rep: DescribeEKSClusterCredentialResponse) => void
-  ): Promise<DescribeEKSClusterCredentialResponse> {
-    return this.request("DescribeEKSClusterCredential", req, cb)
-  }
-
-  /**
-   * 移出节点池节点，但保留在集群内
-   */
-  async RemoveNodeFromNodePool(
-    req: RemoveNodeFromNodePoolRequest,
-    cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void
-  ): Promise<RemoveNodeFromNodePoolResponse> {
-    return this.request("RemoveNodeFromNodePool", req, cb)
+  async UpdateEKSContainerInstance(
+    req: UpdateEKSContainerInstanceRequest,
+    cb?: (error: string, rep: UpdateEKSContainerInstanceResponse) => void
+  ): Promise<UpdateEKSContainerInstanceResponse> {
+    return this.request("UpdateEKSContainerInstance", req, cb)
   }
 
   /**
@@ -1040,13 +764,223 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群可以升级的所有版本
+   * 重启弹性容器实例，支持批量操作
    */
-  async DescribeAvailableClusterVersion(
-    req: DescribeAvailableClusterVersionRequest,
-    cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
-  ): Promise<DescribeAvailableClusterVersionResponse> {
-    return this.request("DescribeAvailableClusterVersion", req, cb)
+  async RestartEKSContainerInstances(
+    req: RestartEKSContainerInstancesRequest,
+    cb?: (error: string, rep: RestartEKSContainerInstancesResponse) => void
+  ): Promise<RestartEKSContainerInstancesResponse> {
+    return this.request("RestartEKSContainerInstances", req, cb)
+  }
+
+  /**
+   * 修改节点池关联伸缩组的期望实例数
+   */
+  async ModifyNodePoolDesiredCapacityAboutAsg(
+    req: ModifyNodePoolDesiredCapacityAboutAsgRequest,
+    cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void
+  ): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse> {
+    return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb)
+  }
+
+  /**
+   * 创建弹性集群
+   */
+  async CreateEKSCluster(
+    req: CreateEKSClusterRequest,
+    cb?: (error: string, rep: CreateEKSClusterResponse) => void
+  ): Promise<CreateEKSClusterResponse> {
+    return this.request("CreateEKSCluster", req, cb)
+  }
+
+  /**
+   * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
+   */
+  async DescribeVpcCniPodLimits(
+    req: DescribeVpcCniPodLimitsRequest,
+    cb?: (error: string, rep: DescribeVpcCniPodLimitsResponse) => void
+  ): Promise<DescribeVpcCniPodLimitsResponse> {
+    return this.request("DescribeVpcCniPodLimits", req, cb)
+  }
+
+  /**
+   * 修改集群伸缩组属性
+   */
+  async ModifyClusterAsGroupAttribute(
+    req: ModifyClusterAsGroupAttributeRequest,
+    cb?: (error: string, rep: ModifyClusterAsGroupAttributeResponse) => void
+  ): Promise<ModifyClusterAsGroupAttributeResponse> {
+    return this.request("ModifyClusterAsGroupAttribute", req, cb)
+  }
+
+  /**
+   * 获取模板同步信息
+   */
+  async DescribePrometheusTemplateSync(
+    req: DescribePrometheusTemplateSyncRequest,
+    cb?: (error: string, rep: DescribePrometheusTemplateSyncResponse) => void
+  ): Promise<DescribePrometheusTemplateSyncResponse> {
+    return this.request("DescribePrometheusTemplateSync", req, cb)
+  }
+
+  /**
+   * 获取实例详细信息
+   */
+  async DescribePrometheusInstance(
+    req: DescribePrometheusInstanceRequest,
+    cb?: (error: string, rep: DescribePrometheusInstanceResponse) => void
+  ): Promise<DescribePrometheusInstanceResponse> {
+    return this.request("DescribePrometheusInstance", req, cb)
+  }
+
+  /**
+   * 查询集群开启端口流程状态(仅支持托管集群外网端口)
+   */
+  async DescribeClusterEndpointVipStatus(
+    req: DescribeClusterEndpointVipStatusRequest,
+    cb?: (error: string, rep: DescribeClusterEndpointVipStatusResponse) => void
+  ): Promise<DescribeClusterEndpointVipStatusResponse> {
+    return this.request("DescribeClusterEndpointVipStatus", req, cb)
+  }
+
+  /**
+   * 查询容器实例
+   */
+  async DescribeEKSContainerInstances(
+    req: DescribeEKSContainerInstancesRequest,
+    cb?: (error: string, rep: DescribeEKSContainerInstancesResponse) => void
+  ): Promise<DescribeEKSContainerInstancesResponse> {
+    return this.request("DescribeEKSContainerInstances", req, cb)
+  }
+
+  /**
+   * 查询路由表冲突列表
+   */
+  async DescribeRouteTableConflicts(
+    req: DescribeRouteTableConflictsRequest,
+    cb?: (error: string, rep: DescribeRouteTableConflictsResponse) => void
+  ): Promise<DescribeRouteTableConflictsResponse> {
+    return this.request("DescribeRouteTableConflicts", req, cb)
+  }
+
+  /**
+   * 通过此接口，可以获取集群的tke:admin的ClusterRole，即管理员角色，可以用于CAM侧高权限的用户，通过CAM策略给予子账户此接口权限，进而可以通过此接口直接获取到kubernetes集群内的管理员角色。
+   */
+  async AcquireClusterAdminRole(
+    req: AcquireClusterAdminRoleRequest,
+    cb?: (error: string, rep: AcquireClusterAdminRoleResponse) => void
+  ): Promise<AcquireClusterAdminRoleResponse> {
+    return this.request("AcquireClusterAdminRole", req, cb)
+  }
+
+  /**
+   * 创建集群路由
+   */
+  async CreateClusterRoute(
+    req: CreateClusterRouteRequest,
+    cb?: (error: string, rep: CreateClusterRouteResponse) => void
+  ): Promise<CreateClusterRouteResponse> {
+    return this.request("CreateClusterRoute", req, cb)
+  }
+
+  /**
+   * 创建容器实例
+   */
+  async CreateEKSContainerInstances(
+    req: CreateEKSContainerInstancesRequest,
+    cb?: (error: string, rep: CreateEKSContainerInstancesResponse) => void
+  ): Promise<CreateEKSContainerInstancesResponse> {
+    return this.request("CreateEKSContainerInstances", req, cb)
+  }
+
+  /**
+   * 删除告警规则
+   */
+  async DeletePrometheusAlertRule(
+    req: DeletePrometheusAlertRuleRequest,
+    cb?: (error: string, rep: DeletePrometheusAlertRuleResponse) => void
+  ): Promise<DeletePrometheusAlertRuleResponse> {
+    return this.request("DeletePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+   */
+  async CreateClusterEndpoint(
+    req: CreateClusterEndpointRequest,
+    cb?: (error: string, rep: CreateClusterEndpointResponse) => void
+  ): Promise<CreateClusterEndpointResponse> {
+    return this.request("CreateClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 获取关联目标集群的实例列表
+   */
+  async DescribePrometheusAgentInstances(
+    req: DescribePrometheusAgentInstancesRequest,
+    cb?: (error: string, rep: DescribePrometheusAgentInstancesResponse) => void
+  ): Promise<DescribePrometheusAgentInstancesResponse> {
+    return this.request("DescribePrometheusAgentInstances", req, cb)
+  }
+
+  /**
+   * 创建告警规则
+   */
+  async CreatePrometheusAlertRule(
+    req: CreatePrometheusAlertRuleRequest,
+    cb?: (error: string, rep: CreatePrometheusAlertRuleResponse) => void
+  ): Promise<CreatePrometheusAlertRuleResponse> {
+    return this.request("CreatePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 集群的密钥信息
+   */
+  async DescribeClusterSecurity(
+    req: DescribeClusterSecurityRequest,
+    cb?: (error: string, rep: DescribeClusterSecurityResponse) => void
+  ): Promise<DescribeClusterSecurityResponse> {
+    return this.request("DescribeClusterSecurity", req, cb)
+  }
+
+  /**
+   * 删除节点池
+   */
+  async DeleteClusterNodePool(
+    req: DeleteClusterNodePoolRequest,
+    cb?: (error: string, rep: DeleteClusterNodePoolResponse) => void
+  ): Promise<DeleteClusterNodePoolResponse> {
+    return this.request("DeleteClusterNodePool", req, cb)
+  }
+
+  /**
+   * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+   */
+  async DeleteClusterEndpointVip(
+    req: DeleteClusterEndpointVipRequest,
+    cb?: (error: string, rep: DeleteClusterEndpointVipResponse) => void
+  ): Promise<DeleteClusterEndpointVipResponse> {
+    return this.request("DeleteClusterEndpointVip", req, cb)
+  }
+
+  /**
+   * 查询节点池列表
+   */
+  async DescribeClusterNodePools(
+    req: DescribeClusterNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
+  ): Promise<DescribeClusterNodePoolsResponse> {
+    return this.request("DescribeClusterNodePools", req, cb)
+  }
+
+  /**
+   * 获取镜像信息
+   */
+  async DescribeImages(
+    req?: DescribeImagesRequest,
+    cb?: (error: string, rep: DescribeImagesResponse) => void
+  ): Promise<DescribeImagesResponse> {
+    return this.request("DescribeImages", req, cb)
   }
 
   /**
@@ -1060,26 +994,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
-   */
-  async CreateClusterEndpointVip(
-    req: CreateClusterEndpointVipRequest,
-    cb?: (error: string, rep: CreateClusterEndpointVipResponse) => void
-  ): Promise<CreateClusterEndpointVipResponse> {
-    return this.request("CreateClusterEndpointVip", req, cb)
-  }
-
-  /**
-   * 删除集群路由表
-   */
-  async DeleteClusterRouteTable(
-    req: DeleteClusterRouteTableRequest,
-    cb?: (error: string, rep: DeleteClusterRouteTableResponse) => void
-  ): Promise<DeleteClusterRouteTableResponse> {
-    return this.request("DeleteClusterRouteTable", req, cb)
-  }
-
-  /**
    * 查询集群路由
    */
   async DescribeClusterRoutes(
@@ -1090,12 +1004,202 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群弹性伸缩属性
+   * 修改节点池的机型配置
    */
-  async ModifyClusterAsGroupOptionAttribute(
-    req: ModifyClusterAsGroupOptionAttributeRequest,
-    cb?: (error: string, rep: ModifyClusterAsGroupOptionAttributeResponse) => void
-  ): Promise<ModifyClusterAsGroupOptionAttributeResponse> {
-    return this.request("ModifyClusterAsGroupOptionAttribute", req, cb)
+  async ModifyNodePoolInstanceTypes(
+    req: ModifyNodePoolInstanceTypesRequest,
+    cb?: (error: string, rep: ModifyNodePoolInstanceTypesResponse) => void
+  ): Promise<ModifyNodePoolInstanceTypesResponse> {
+    return this.request("ModifyNodePoolInstanceTypes", req, cb)
+  }
+
+  /**
+   * 检查给定节点列表中哪些是可升级的
+   */
+  async CheckInstancesUpgradeAble(
+    req: CheckInstancesUpgradeAbleRequest,
+    cb?: (error: string, rep: CheckInstancesUpgradeAbleResponse) => void
+  ): Promise<CheckInstancesUpgradeAbleResponse> {
+    return this.request("CheckInstancesUpgradeAble", req, cb)
+  }
+
+  /**
+   * 创建grafana监控面板
+   */
+  async CreatePrometheusDashboard(
+    req: CreatePrometheusDashboardRequest,
+    cb?: (error: string, rep: CreatePrometheusDashboardResponse) => void
+  ): Promise<CreatePrometheusDashboardResponse> {
+    return this.request("CreatePrometheusDashboard", req, cb)
+  }
+
+  /**
+   * 获取实例列表
+   */
+  async DescribePrometheusOverviews(
+    req: DescribePrometheusOverviewsRequest,
+    cb?: (error: string, rep: DescribePrometheusOverviewsResponse) => void
+  ): Promise<DescribePrometheusOverviewsResponse> {
+    return this.request("DescribePrometheusOverviews", req, cb)
+  }
+
+  /**
+   * 删除一个云原生Prometheus配置模板
+   */
+  async DeletePrometheusTemplate(
+    req: DeletePrometheusTemplateRequest,
+    cb?: (error: string, rep: DeletePrometheusTemplateResponse) => void
+  ): Promise<DeletePrometheusTemplateResponse> {
+    return this.request("DeletePrometheusTemplate", req, cb)
+  }
+
+  /**
+   * 获取被关联集群列表
+   */
+  async DescribePrometheusAgents(
+    req: DescribePrometheusAgentsRequest,
+    cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void
+  ): Promise<DescribePrometheusAgentsResponse> {
+    return this.request("DescribePrometheusAgents", req, cb)
+  }
+
+  /**
+   * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+   */
+  async DeleteClusterEndpoint(
+    req: DeleteClusterEndpointRequest,
+    cb?: (error: string, rep: DeleteClusterEndpointResponse) => void
+  ): Promise<DeleteClusterEndpointResponse> {
+    return this.request("DeleteClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 修改模板内容
+   */
+  async ModifyPrometheusTemplate(
+    req: ModifyPrometheusTemplateRequest,
+    cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void
+  ): Promise<ModifyPrometheusTemplateResponse> {
+    return this.request("ModifyPrometheusTemplate", req, cb)
+  }
+
+  /**
+   * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
+   */
+  async DescribeClusterKubeconfig(
+    req: DescribeClusterKubeconfigRequest,
+    cb?: (error: string, rep: DescribeClusterKubeconfigResponse) => void
+  ): Promise<DescribeClusterKubeconfigResponse> {
+    return this.request("DescribeClusterKubeconfig", req, cb)
+  }
+
+  /**
+   * 集群弹性伸缩配置
+   */
+  async DescribeClusterAsGroupOption(
+    req: DescribeClusterAsGroupOptionRequest,
+    cb?: (error: string, rep: DescribeClusterAsGroupOptionResponse) => void
+  ): Promise<DescribeClusterAsGroupOptionResponse> {
+    return this.request("DescribeClusterAsGroupOption", req, cb)
+  }
+
+  /**
+   * 查询弹性集群列表
+   */
+  async DescribeEKSClusters(
+    req: DescribeEKSClustersRequest,
+    cb?: (error: string, rep: DescribeEKSClustersResponse) => void
+  ): Promise<DescribeEKSClustersResponse> {
+    return this.request("DescribeEKSClusters", req, cb)
+  }
+
+  /**
+   * 创建节点池
+   */
+  async CreateClusterNodePool(
+    req: CreateClusterNodePoolRequest,
+    cb?: (error: string, rep: CreateClusterNodePoolResponse) => void
+  ): Promise<CreateClusterNodePoolResponse> {
+    return this.request("CreateClusterNodePool", req, cb)
+  }
+
+  /**
+   * 本接口用于查询开启vpc-cni模式的任务进度
+   */
+  async DescribeEnableVpcCniProgress(
+    req: DescribeEnableVpcCniProgressRequest,
+    cb?: (error: string, rep: DescribeEnableVpcCniProgressResponse) => void
+  ): Promise<DescribeEnableVpcCniProgressResponse> {
+    return this.request("DescribeEnableVpcCniProgress", req, cb)
+  }
+
+  /**
+   * 同步模板到实例或者集群
+   */
+  async SyncPrometheusTemplate(
+    req: SyncPrometheusTemplateRequest,
+    cb?: (error: string, rep: SyncPrometheusTemplateResponse) => void
+  ): Promise<SyncPrometheusTemplateResponse> {
+    return this.request("SyncPrometheusTemplate", req, cb)
+  }
+
+  /**
+   * 查询容器实例支持的地域
+   */
+  async DescribeEKSContainerInstanceRegions(
+    req?: DescribeEKSContainerInstanceRegionsRequest,
+    cb?: (error: string, rep: DescribeEKSContainerInstanceRegionsResponse) => void
+  ): Promise<DescribeEKSContainerInstanceRegionsResponse> {
+    return this.request("DescribeEKSContainerInstanceRegions", req, cb)
+  }
+
+  /**
+   * 移出节点池节点，但保留在集群内
+   */
+  async RemoveNodeFromNodePool(
+    req: RemoveNodeFromNodePoolRequest,
+    cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void
+  ): Promise<RemoveNodeFromNodePoolResponse> {
+    return this.request("RemoveNodeFromNodePool", req, cb)
+  }
+
+  /**
+   * 提供给附加了VPC-CNI能力的Global-Route集群关闭VPC-CNI
+   */
+  async DisableVpcCniNetworkType(
+    req: DisableVpcCniNetworkTypeRequest,
+    cb?: (error: string, rep: DisableVpcCniNetworkTypeResponse) => void
+  ): Promise<DisableVpcCniNetworkTypeResponse> {
+    return this.request("DisableVpcCniNetworkType", req, cb)
+  }
+
+  /**
+   * 删除集群中的实例
+   */
+  async DeleteClusterInstances(
+    req: DeleteClusterInstancesRequest,
+    cb?: (error: string, rep: DeleteClusterInstancesResponse) => void
+  ): Promise<DeleteClusterInstancesResponse> {
+    return this.request("DeleteClusterInstances", req, cb)
+  }
+
+  /**
+   * 修改弹性集群名称等属性
+   */
+  async UpdateEKSCluster(
+    req: UpdateEKSClusterRequest,
+    cb?: (error: string, rep: UpdateEKSClusterResponse) => void
+  ): Promise<UpdateEKSClusterResponse> {
+    return this.request("UpdateEKSCluster", req, cb)
+  }
+
+  /**
+   * 创建托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
+   */
+  async CreateClusterEndpointVip(
+    req: CreateClusterEndpointVipRequest,
+    cb?: (error: string, rep: CreateClusterEndpointVipResponse) => void
+  ): Promise<CreateClusterEndpointVipResponse> {
+    return this.request("CreateClusterEndpointVip", req, cb)
   }
 }

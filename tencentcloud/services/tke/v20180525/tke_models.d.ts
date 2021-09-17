@@ -33,6 +33,19 @@ export interface DescribeClusterEndpointVipStatusRequest {
     ClusterId: string;
 }
 /**
+ * CreateEKSContainerInstances返回参数结构体
+ */
+export interface CreateEKSContainerInstancesResponse {
+    /**
+      * EKS Container Instance Id集合，格式为eksci-xxx，是容器实例的唯一标识。
+      */
+    EksCiIds: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeClusterSecurity返回参数结构体
  */
 export interface DescribeClusterSecurityResponse {
@@ -125,6 +138,21 @@ export interface DeleteClusterInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * EKS Instance Volume,  可选包括CbsVolume和NfsVolume
+ */
+export interface EksCiVolume {
+    /**
+      * Cbs Volume
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CbsVolumes?: Array<CbsVolume>;
+    /**
+      * Nfs Volume
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NfsVolumes?: Array<NfsVolume>;
 }
 /**
  * ModifyNodePoolDesiredCapacityAboutAsg返回参数结构体
@@ -241,25 +269,43 @@ export interface DeleteClusterResponse {
     RequestId?: string;
 }
 /**
- * 自动扩所容的节点
+ * 容器状态
  */
-export interface AutoscalingAdded {
+export interface ContainerState {
     /**
-      * 正在加入中的节点数量
+      * 容器运行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Joining: number;
+    StartTime: string;
     /**
-      * 初始化中的节点数量
+      * 容器状态：created, running, exited, unknown
       */
-    Initializing: number;
+    State: string;
     /**
-      * 正常的节点数量
+      * 容器运行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Normal: number;
+    FinishTime: string;
     /**
-      * 节点总数
+      * 容器运行退出码
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total: number;
+    ExitCode: number;
+    /**
+      * 容器状态 Reason
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
+    /**
+      * 容器状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+    /**
+      * 容器重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RestartCount: number;
 }
 /**
  * CreatePrometheusAlertRule请求参数结构体
@@ -346,6 +392,27 @@ export interface DescribeClusterCommonNamesRequest {
     RoleIds?: Array<string>;
 }
 /**
+ * EKS Instance Nfs Volume
+ */
+export interface NfsVolume {
+    /**
+      * nfs volume 数据卷名称
+      */
+    Name: string;
+    /**
+      * NFS 服务器地址
+      */
+    Server: string;
+    /**
+      * NFS 数据卷路径
+      */
+    Path: string;
+    /**
+      * 默认为 False
+      */
+    ReadOnly?: boolean;
+}
+/**
  * DeleteClusterEndpoint返回参数结构体
  */
 export interface DeleteClusterEndpointResponse {
@@ -401,6 +468,19 @@ export interface PrometheusTemplateModify {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AlertDetailRules?: Array<PrometheusAlertRuleDetail>;
+}
+/**
+ * EKS Instnace CBS volume
+ */
+export interface CbsVolume {
+    /**
+      * cbs volume 数据卷名称
+      */
+    Name: string;
+    /**
+      * 腾讯云cbs盘Id
+      */
+    CbsDiskId: string;
 }
 /**
  * amp告警渠道配置
@@ -499,6 +579,25 @@ export interface CreatePrometheusTemplateRequest {
     Template: PrometheusTemplate;
 }
 /**
+ * 探针在容器内执行检测命令参数类型
+ */
+export interface Exec {
+    /**
+      * 容器内检测的命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Commands?: Array<string>;
+}
+/**
+ * RestartEKSContainerInstances请求参数结构体
+ */
+export interface RestartEKSContainerInstancesRequest {
+    /**
+      * EKS instance ids
+      */
+    EksCiIds: Array<string>;
+}
+/**
  * DeletePrometheusTemplate请求参数结构体
  */
 export interface DeletePrometheusTemplateRequest {
@@ -546,14 +645,9 @@ pending 还未开始
     Detail: Array<TaskStepInfo>;
 }
 /**
- * EnableVpcCniNetworkType返回参数结构体
+ * DescribeEKSContainerInstanceRegions请求参数结构体
  */
-export interface EnableVpcCniNetworkTypeResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeEKSContainerInstanceRegionsRequest = null;
 /**
  * DescribeEKSClusters返回参数结构体
  */
@@ -570,6 +664,41 @@ export interface DescribeEKSClustersResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 数据卷挂载路径信息
+ */
+export interface VolumeMount {
+    /**
+      * volume名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 挂载路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MountPath: string;
+    /**
+      * 是否只读
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReadOnly?: boolean;
+    /**
+      * 子路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubPath?: string;
+    /**
+      * 传播挂载方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MountPropagation?: string;
+    /**
+      * 子路径表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubPathExpr?: string;
 }
 /**
  * 集群路由表对象
@@ -655,6 +784,16 @@ unknown = 未知
     Error: string;
 }
 /**
+ * cloudrun安全特性
+ */
+export interface SecurityContext {
+    /**
+      * 安全能力清单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Capabilities?: Capabilities;
+}
+/**
  * CreateEKSCluster请求参数结构体
  */
 export interface CreateEKSClusterRequest {
@@ -700,13 +839,39 @@ export interface CreateEKSClusterRequest {
     TagSpecification?: Array<TagSpecification>;
 }
 /**
- * DisableVpcCniNetworkType返回参数结构体
+ * 自定义DNS配置
  */
-export interface DisableVpcCniNetworkTypeResponse {
+export interface DNSConfig {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * DNS 服务器IP地址列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Nameservers?: Array<string>;
+    /**
+      * DNS搜索域列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Searches?: Array<string>;
+    /**
+      * 对象选项列表，每个对象由name和value（可选）构成
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Options?: Array<DNSConfigOption>;
+}
+/**
+ * DNS配置选项
+ */
+export interface DNSConfigOption {
+    /**
+      * 配置项名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 项值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
 }
 /**
  * DeleteClusterAsGroups请求参数结构体
@@ -944,9 +1109,22 @@ export interface AddNodeToNodePoolRequest {
     InstanceIds: Array<string>;
 }
 /**
- * DescribeEKSContainerInstanceRegions请求参数结构体
+ * DescribeEKSContainerInstanceEvent返回参数结构体
  */
-export declare type DescribeEKSContainerInstanceRegionsRequest = null;
+export interface DescribeEKSContainerInstanceEventResponse {
+    /**
+      * 事件集合
+      */
+    Events: Array<Event>;
+    /**
+      * 容器实例id
+      */
+    EksCiId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * DescribePrometheusAlertRule返回参数结构体
  */
@@ -1133,6 +1311,19 @@ export interface UpgradeAbleInstancesItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LatestVersion: string;
+}
+/**
+ * EnvironmentVariable
+ */
+export interface EnvironmentVariable {
+    /**
+      * key
+      */
+    Name?: string;
+    /**
+      * val
+      */
+    Value?: string;
 }
 /**
  * CreateClusterNodePoolFromExistingAsg请求参数结构体
@@ -1325,21 +1516,25 @@ export interface CreateClusterEndpointVipResponse {
     RequestId?: string;
 }
 /**
- * DescribeClusterRoutes返回参数结构体
+ * 自动扩所容的节点
  */
-export interface DescribeClusterRoutesResponse {
+export interface AutoscalingAdded {
     /**
-      * 符合条件的实例数量。
+      * 正在加入中的节点数量
       */
-    TotalCount?: number;
+    Joining: number;
     /**
-      * 集群路由对象。
+      * 初始化中的节点数量
       */
-    RouteSet?: Array<RouteInfo>;
+    Initializing: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 正常的节点数量
       */
-    RequestId?: string;
+    Normal: number;
+    /**
+      * 节点总数
+      */
+    Total: number;
 }
 /**
  * DescribeClusters请求参数结构体
@@ -1364,43 +1559,28 @@ export interface DescribeClustersRequest {
     Filters?: Array<Filter>;
 }
 /**
- * UpgradeClusterInstances请求参数结构体
+ * ModifyClusterAttribute返回参数结构体
  */
-export interface UpgradeClusterInstancesRequest {
+export interface ModifyClusterAttributeResponse {
     /**
-      * 集群ID
+      * 集群所属项目
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterId: string;
+    ProjectId?: number;
     /**
-      * create 表示开始一次升级任务
-pause 表示停止任务
-resume表示继续任务
-abort表示终止任务
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Operation: string;
+    ClusterName?: string;
     /**
-      * 升级类型，只有Operation是create需要设置
-reset 大版本重装升级
-hot 小版本热升级
-major 大版本原地升级
+      * 集群描述
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    UpgradeType?: string;
+    ClusterDesc?: string;
     /**
-      * 需要升级的节点列表
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceIds?: Array<string>;
-    /**
-      * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
-      */
-    ResetParam?: UpgradeNodeResetParam;
-    /**
-      * 是否忽略节点升级前检查
-      */
-    SkipPreCheck?: boolean;
-    /**
-      * 最大可容忍的不可用Pod比例
-      */
-    MaxNotReadyPercent?: number;
+    RequestId?: string;
 }
 /**
  * 弹性容器集群公网访问负载均衡信息
@@ -1550,21 +1730,21 @@ export interface DisableVpcCniNetworkTypeRequest {
     ClusterId: string;
 }
 /**
- * DescribePrometheusTemplates返回参数结构体
+ * AddVpcCniSubnets请求参数结构体
  */
-export interface DescribePrometheusTemplatesResponse {
+export interface AddVpcCniSubnetsRequest {
     /**
-      * 模板列表
+      * 集群ID
       */
-    Templates?: Array<PrometheusTemplate>;
+    ClusterId: string;
     /**
-      * 总数
+      * 为集群容器网络增加的子网列表
       */
-    Total?: number;
+    SubnetIds: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 集群所属的VPC的ID
       */
-    RequestId?: string;
+    VpcId: string;
 }
 /**
  * 托管prometheus告警配置实例
@@ -1792,6 +1972,23 @@ export interface ManuallyAdded {
     Total: number;
 }
 /**
+ * DescribeEksContainerInstanceLog返回参数结构体
+ */
+export interface DescribeEksContainerInstanceLogResponse {
+    /**
+      * 容器名称
+      */
+    ContainerName: string;
+    /**
+      * 日志内容
+      */
+    LogContent: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteEKSCluster返回参数结构体
  */
 export interface DeleteEKSClusterResponse {
@@ -1839,6 +2036,23 @@ export interface PrometheusConfigItem {
     TemplateId?: string;
 }
 /**
+ * DescribePrometheusTemplates返回参数结构体
+ */
+export interface DescribePrometheusTemplatesResponse {
+    /**
+      * 模板列表
+      */
+    Templates?: Array<PrometheusTemplate>;
+    /**
+      * 总数
+      */
+    Total?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteClusterNodePool请求参数结构体
  */
 export interface DeleteClusterNodePoolRequest {
@@ -1854,6 +2068,129 @@ export interface DeleteClusterNodePoolRequest {
       * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
       */
     KeepInstance: boolean;
+}
+/**
+ * EksContainerInstance实例类型
+ */
+export interface EksCi {
+    /**
+      * EKS Cotainer Instance Id
+      */
+    EksCiId?: string;
+    /**
+      * EKS Cotainer Instance Name
+      */
+    EksCiName?: string;
+    /**
+      * 内存大小
+      */
+    Memory?: number;
+    /**
+      * CPU大小
+      */
+    Cpu?: number;
+    /**
+      * 安全组ID
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
+      * 容器组的重启策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RestartPolicy?: string;
+    /**
+      * 返回容器组创建状态：Pending，Running，Succeeded，Failed。其中：
+Failed （运行失败）指的容器组退出，RestartPolilcy为Never， 有容器exitCode非0；
+Succeeded（运行成功）指的是容器组退出了，RestartPolicy为Never或onFailure，所有容器exitCode都为0；
+Failed和Succeeded这两种状态都会停止运行，停止计费。
+Pending是创建中，Running是 运行中。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status?: string;
+    /**
+      * 接到请求后的系统创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime?: string;
+    /**
+      * 容器全部成功退出后的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SucceededTime?: string;
+    /**
+      * 容器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Containers?: Array<Container>;
+    /**
+      * 数据卷信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EksCiVolume?: EksCiVolume;
+    /**
+      * 容器组运行的安全上下文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityContext?: SecurityContext;
+    /**
+      * 内网ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivateIp?: string;
+    /**
+      * 容器实例绑定的Eip地址，注意可能为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EipAddress?: string;
+    /**
+      * GPU类型。如无使用GPU则不返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GpuType?: string;
+    /**
+      * CPU类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CpuType?: string;
+    /**
+      * GPU卡数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GpuCount?: number;
+    /**
+      * 实例所属VPC的Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId?: string;
+    /**
+      * 实例所属子网Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId?: string;
+    /**
+      * 初始化容器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InitContainers?: Array<Container>;
+    /**
+      * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CamRoleName?: string;
+    /**
+      * 自动为用户创建的EipId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoCreatedEipId?: string;
+}
+/**
+ * DisableVpcCniNetworkType返回参数结构体
+ */
+export interface DisableVpcCniNetworkTypeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeClusterKubeconfig请求参数结构体
@@ -1896,6 +2233,15 @@ export interface ClusterCIDRSettings {
       * VPC-CNI网络模式下，弹性网卡IP的回收时间，取值范围[300,15768000)
       */
     ClaimExpiredSeconds?: number;
+}
+/**
+ * 描述了 “云安全” 服务相关的信息
+ */
+export interface RunSecurityServiceEnabled {
+    /**
+      * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+      */
+    Enabled?: boolean;
 }
 /**
  * CreatePrometheusTemplate返回参数结构体
@@ -1941,6 +2287,16 @@ export interface RouteInfo {
     GatewayIp: string;
 }
 /**
+ * 探针使用TcpSocket检测容器
+ */
+export interface TcpSocket {
+    /**
+      * TcpSocket检测的端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: number;
+}
+/**
  * 弹性容器集群内网访问LB信息
  */
 export interface ClusterInternalLB {
@@ -1954,21 +2310,13 @@ export interface ClusterInternalLB {
     SubnetId?: string;
 }
 /**
- * kubernetes Taint
+ * EnableVpcCniNetworkType返回参数结构体
  */
-export interface Taint {
+export interface EnableVpcCniNetworkTypeResponse {
     /**
-      * Key
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Key?: string;
-    /**
-      * Value
-      */
-    Value?: string;
-    /**
-      * Effect
-      */
-    Effect?: string;
+    RequestId?: string;
 }
 /**
  * CheckInstancesUpgradeAble请求参数结构体
@@ -2109,18 +2457,9 @@ export interface AddClusterCIDRRequest {
     IgnoreClusterCIDRConflict?: boolean;
 }
 /**
- * DescribeClusterNodePools返回参数结构体
+ * DeleteEKSContainerInstances返回参数结构体
  */
-export interface DescribeClusterNodePoolsResponse {
-    /**
-      * NodePools（节点池列表）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NodePoolSet?: Array<NodePool>;
-    /**
-      * 资源总数
-      */
-    TotalCount?: number;
+export interface DeleteEKSContainerInstancesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2322,9 +2661,75 @@ export interface NodePool {
     UserScript: string;
 }
 /**
+ * 服务事件
+ */
+export interface Event {
+    /**
+      * pod名称
+      */
+    PodName: string;
+    /**
+      * 事件原因内容
+      */
+    Reason: string;
+    /**
+      * 事件类型
+      */
+    Type: string;
+    /**
+      * 事件出现次数
+      */
+    Count: number;
+    /**
+      * 事件第一次出现时间
+      */
+    FirstTimestamp: string;
+    /**
+      * 事件最后一次出现时间
+      */
+    LastTimestamp: string;
+    /**
+      * 事件内容
+      */
+    Message: string;
+}
+/**
  * DescribeRegions请求参数结构体
  */
 export declare type DescribeRegionsRequest = null;
+/**
+ * UpdateEKSContainerInstance请求参数结构体
+ */
+export interface UpdateEKSContainerInstanceRequest {
+    /**
+      * 容器实例 ID
+      */
+    EksCiId: string;
+    /**
+      * 实例重启策略： Always(总是重启)、Never(从不重启)、OnFailure(失败时重启)
+      */
+    RestartPolicy?: string;
+    /**
+      * 数据卷，包含NfsVolume数组和CbsVolume数组
+      */
+    EksCiVolume?: EksCiVolume;
+    /**
+      * 容器组
+      */
+    Containers?: Array<Container>;
+    /**
+      * Init 容器组
+      */
+    InitContainers?: Array<Container>;
+    /**
+      * 容器实例名称
+      */
+    Name?: string;
+    /**
+      * 镜像仓库凭证数组
+      */
+    ImageRegistryCredentials?: Array<ImageRegistryCredential>;
+}
 /**
  * DescribeClusters返回参数结构体
  */
@@ -2584,6 +2989,20 @@ export interface CreatePrometheusAlertRuleResponse {
     RequestId?: string;
 }
 /**
+ * UpdateEKSContainerInstance返回参数结构体
+ */
+export interface UpdateEKSContainerInstanceResponse {
+    /**
+      * 容器实例 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EksCiId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 资源删除选项
  */
 export interface ResourceDeleteOption {
@@ -2712,28 +3131,24 @@ export interface DescribeClusterEndpointStatusRequest {
     IsExtranet?: boolean;
 }
 /**
- * ModifyClusterAttribute返回参数结构体
+ * Probe中的HttpGet
  */
-export interface ModifyClusterAttributeResponse {
+export interface HttpGet {
     /**
-      * 集群所属项目
+      * HttpGet检测的路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProjectId?: number;
+    Path: string;
     /**
-      * 集群名称
+      * HttpGet检测的端口号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterName?: string;
+    Port: number;
     /**
-      * 集群描述
+      * HTTP or HTTPS
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterDesc?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Scheme: string;
 }
 /**
  * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
@@ -2778,6 +3193,45 @@ export interface CreateClusterAsGroupRequest {
     Labels?: Array<Label>;
 }
 /**
+ * 从镜像仓库拉取镜像的凭据
+ */
+export interface ImageRegistryCredential {
+    /**
+      * 镜像仓库地址
+      */
+    Server?: string;
+    /**
+      * 用户名
+      */
+    Username?: string;
+    /**
+      * 密码
+      */
+    Password?: string;
+    /**
+      * ImageRegistryCredential的名字
+      */
+    Name?: string;
+}
+/**
+ * DescribeClusterNodePools返回参数结构体
+ */
+export interface DescribeClusterNodePoolsResponse {
+    /**
+      * NodePools（节点池列表）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodePoolSet?: Array<NodePool>;
+    /**
+      * 资源总数
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRouteTableConflicts返回参数结构体
  */
 export interface DescribeRouteTableConflictsResponse {
@@ -2813,45 +3267,38 @@ export interface CreateClusterResponse {
     RequestId?: string;
 }
 /**
- * 任务步骤信息
+ * DescribeClusterRoutes返回参数结构体
  */
-export interface TaskStepInfo {
+export interface DescribeClusterRoutesResponse {
     /**
-      * 步骤名称
+      * 符合条件的实例数量。
       */
-    Step: string;
+    TotalCount?: number;
     /**
-      * 生命周期
-pending : 步骤未开始
-running: 步骤执行中
-success: 步骤成功完成
-failed: 步骤失败
+      * 集群路由对象。
       */
-    LifeState: string;
+    RouteSet?: Array<RouteInfo>;
     /**
-      * 步骤开始时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    StartAt: string;
-    /**
-      * 步骤结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndAt: string;
-    /**
-      * 若步骤生命周期为failed,则此字段显示错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FailedMsg: string;
+    RequestId?: string;
 }
 /**
- * 描述了 “云安全” 服务相关的信息
+ * DescribeEKSContainerInstances返回参数结构体
  */
-export interface RunSecurityServiceEnabled {
+export interface DescribeEKSContainerInstancesResponse {
     /**
-      * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+      * 容器组总数
       */
-    Enabled?: boolean;
+    TotalCount: number;
+    /**
+      * 容器组列表
+      */
+    EksCis: Array<EksCi>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteClusterRouteTable请求参数结构体
@@ -2926,6 +3373,45 @@ export interface DeletePrometheusAlertRuleResponse {
     RequestId?: string;
 }
 /**
+ * UpgradeClusterInstances请求参数结构体
+ */
+export interface UpgradeClusterInstancesRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * create 表示开始一次升级任务
+pause 表示停止任务
+resume表示继续任务
+abort表示终止任务
+      */
+    Operation: string;
+    /**
+      * 升级类型，只有Operation是create需要设置
+reset 大版本重装升级
+hot 小版本热升级
+major 大版本原地升级
+      */
+    UpgradeType?: string;
+    /**
+      * 需要升级的节点列表
+      */
+    InstanceIds?: Array<string>;
+    /**
+      * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
+      */
+    ResetParam?: UpgradeNodeResetParam;
+    /**
+      * 是否忽略节点升级前检查
+      */
+    SkipPreCheck?: boolean;
+    /**
+      * 最大可容忍的不可用Pod比例
+      */
+    MaxNotReadyPercent?: number;
+}
+/**
  * AcquireClusterAdminRole请求参数结构体
  */
 export interface AcquireClusterAdminRoleRequest {
@@ -2950,6 +3436,39 @@ export interface CreateClusterAsGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeEksContainerInstanceLog请求参数结构体
+ */
+export interface DescribeEksContainerInstanceLogRequest {
+    /**
+      * Eks Container Instance Id，即容器实例Id
+      */
+    EksCiId: string;
+    /**
+      * 容器名称，单容器的实例可选填。如果为多容器实例，请指定容器名称。
+      */
+    ContainerName?: string;
+    /**
+      * 返回最新日志行数，默认500，最大2000。日志内容最大返回 1M 数据。
+      */
+    Tail?: number;
+    /**
+      * UTC时间，RFC3339标准
+      */
+    StartTime?: string;
+    /**
+      * 是否是查上一个容器（如果容器退出重启了）
+      */
+    Previous?: boolean;
+    /**
+      * 查询最近多少秒内的日志
+      */
+    SinceSeconds?: number;
+    /**
+      * 日志总大小限制
+      */
+    LimitBytes?: number;
 }
 /**
  * DeleteClusterAsGroups返回参数结构体
@@ -3425,6 +3944,32 @@ export interface AcquireClusterAdminRoleResponse {
     RequestId?: string;
 }
 /**
+ * kubernetes Taint
+ */
+export interface Taint {
+    /**
+      * Key
+      */
+    Key?: string;
+    /**
+      * Value
+      */
+    Value?: string;
+    /**
+      * Effect
+      */
+    Effect?: string;
+}
+/**
+ * RestartEKSContainerInstances返回参数结构体
+ */
+export interface RestartEKSContainerInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyPrometheusTemplate返回参数结构体
  */
 export interface ModifyPrometheusTemplateResponse {
@@ -3484,6 +4029,31 @@ export interface DeleteClusterEndpointVipRequest {
       * 集群ID
       */
     ClusterId: string;
+}
+/**
+ * 健康探针
+ */
+export interface LivenessOrReadinessProbe {
+    /**
+      * 探针参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Probe: Probe;
+    /**
+      * HttpGet检测参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HttpGet?: HttpGet;
+    /**
+      * 容器内检测命令参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Exec?: Exec;
+    /**
+      * TcpSocket检测的端口参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TcpSocket?: TcpSocket;
 }
 /**
  * CheckInstancesUpgradeAble返回参数结构体
@@ -3748,6 +4318,74 @@ export interface DescribePrometheusAgentInstancesResponse {
     RequestId?: string;
 }
 /**
+ * EKS Instance Container容器
+ */
+export interface Container {
+    /**
+      * 镜像
+      */
+    Image: string;
+    /**
+      * 容器名
+      */
+    Name: string;
+    /**
+      * 容器启动命令
+      */
+    Commands?: Array<string>;
+    /**
+      * 容器启动参数
+      */
+    Args?: Array<string>;
+    /**
+      * 容器内操作系统的环境变量
+      */
+    EnvironmentVars?: Array<EnvironmentVariable>;
+    /**
+      * CPU，制改容器最多可使用的核数，该值不可超过容器实例的总核数。单位：核。
+      */
+    Cpu?: number;
+    /**
+      * 内存，限制该容器最多可使用的内存值，该值不可超过容器实例的总内存值。单位：GiB
+      */
+    Memory?: number;
+    /**
+      * 数据卷挂载信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VolumeMounts?: Array<VolumeMount>;
+    /**
+      * 当前状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrentState?: ContainerState;
+    /**
+      * 重启次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RestartCount?: number;
+    /**
+      * 容器工作目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkingDir?: string;
+    /**
+      * 存活探针
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LivenessProbe?: LivenessOrReadinessProbe;
+    /**
+      * 就绪探针
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReadinessProbe?: LivenessOrReadinessProbe;
+    /**
+      * Gpu限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GpuLimit?: number;
+}
+/**
  * CreateClusterEndpoint请求参数结构体
  */
 export interface CreateClusterEndpointRequest {
@@ -3854,6 +4492,21 @@ export interface DescribePrometheusInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * cloudrun安全特性能力
+ */
+export interface Capabilities {
+    /**
+      * 启用安全能力项列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Add?: Array<string>;
+    /**
+      * 禁用安全能力向列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Drop?: Array<string>;
 }
 /**
  * AddExistedInstances请求参数结构体
@@ -4216,6 +4869,30 @@ export interface DeletePrometheusTemplateSyncResponse {
     RequestId?: string;
 }
 /**
+ * 路由表冲突对象
+ */
+export interface RouteTableConflict {
+    /**
+      * 路由表类型。
+      */
+    RouteTableType: string;
+    /**
+      * 路由表CIDR。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableCidrBlock: string;
+    /**
+      * 路由表名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableName: string;
+    /**
+      * 路由表ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableId: string;
+}
+/**
  * CreateClusterRouteTable请求参数结构体
  */
 export interface CreateClusterRouteTableRequest {
@@ -4237,21 +4914,21 @@ export interface CreateClusterRouteTableRequest {
     IgnoreClusterCidrConflict?: number;
 }
 /**
- * RemoveNodeFromNodePool请求参数结构体
+ * 某个节点升级前检查结果
  */
-export interface RemoveNodeFromNodePoolRequest {
+export interface InstanceUpgradePreCheckResult {
     /**
-      * 集群id
+      * 检查是否通过
       */
-    ClusterId: string;
+    CheckPass: boolean;
     /**
-      * 节点池id
+      * 检查项数组
       */
-    NodePoolId: string;
+    Items: Array<InstanceUpgradePreCheckResultItem>;
     /**
-      * 节点id列表，一次最多支持100台
+      * 本节点独立pod列表
       */
-    InstanceIds: Array<string>;
+    SinglePods: Array<string>;
 }
 /**
  * DescribeClusterAsGroups请求参数结构体
@@ -4278,6 +4955,38 @@ export interface DescribeClusterAsGroupsRequest {
  * DescribeImages请求参数结构体
  */
 export declare type DescribeImagesRequest = null;
+/**
+ * 任务步骤信息
+ */
+export interface TaskStepInfo {
+    /**
+      * 步骤名称
+      */
+    Step: string;
+    /**
+      * 生命周期
+pending : 步骤未开始
+running: 步骤执行中
+success: 步骤成功完成
+failed: 步骤失败
+      */
+    LifeState: string;
+    /**
+      * 步骤开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartAt: string;
+    /**
+      * 步骤结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndAt: string;
+    /**
+      * 若步骤生命周期为failed,则此字段显示错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedMsg: string;
+}
 /**
  * DescribeAvailableClusterVersion返回参数结构体
  */
@@ -4330,21 +5039,17 @@ export interface DescribeClusterRouteTablesResponse {
     RequestId?: string;
 }
 /**
- * AddVpcCniSubnets请求参数结构体
+ * DeleteEKSContainerInstances请求参数结构体
  */
-export interface AddVpcCniSubnetsRequest {
+export interface DeleteEKSContainerInstancesRequest {
     /**
-      * 集群ID
+      * 需要删除的EksCi的Id。 最大数量不超过20
       */
-    ClusterId: string;
+    EksCiIds: Array<string>;
     /**
-      * 为集群容器网络增加的子网列表
+      * 是否释放为EksCi自动创建的Eip
       */
-    SubnetIds: Array<string>;
-    /**
-      * 集群所属的VPC的ID
-      */
-    VpcId: string;
+    ReleaseAutoCreatedEip?: boolean;
 }
 /**
  * 节点升级检查项结果
@@ -4582,28 +5287,131 @@ export interface UpdateClusterVersionResponse {
     RequestId?: string;
 }
 /**
- * 路由表冲突对象
+ * CreateEKSContainerInstances请求参数结构体
  */
-export interface RouteTableConflict {
+export interface CreateEKSContainerInstancesRequest {
     /**
-      * 路由表类型。
+      * 容器组
       */
-    RouteTableType: string;
+    Containers: Array<Container>;
     /**
-      * 路由表CIDR。
+      * EKS Container Instance容器实例名称
+      */
+    EksCiName: string;
+    /**
+      * 指定新创建实例所属于的安全组Id
+      */
+    SecurityGroupIds: Array<string>;
+    /**
+      * 实例所属子网Id
+      */
+    SubnetId: string;
+    /**
+      * 实例所属VPC的Id
+      */
+    VpcId: string;
+    /**
+      * 内存，单位：GiB。可参考[资源规格](https://cloud.tencent.com/document/product/457/39808)文档
+      */
+    Memory: number;
+    /**
+      * CPU，单位：核。可参考[资源规格](https://cloud.tencent.com/document/product/457/39808)文档
+      */
+    Cpu: number;
+    /**
+      * 实例重启策略： Always(总是重启)、Never(从不重启)、OnFailure(失败时重启)，默认：Always。
+      */
+    RestartPolicy?: string;
+    /**
+      * 镜像仓库凭证数组
+      */
+    ImageRegistryCredentials?: Array<ImageRegistryCredential>;
+    /**
+      * 数据卷，包含NfsVolume数组和CbsVolume数组
+      */
+    EksCiVolume?: EksCiVolume;
+    /**
+      * 实例副本数，默认为1
+      */
+    Replicas?: number;
+    /**
+      * Init 容器
+      */
+    InitContainers?: Array<Container>;
+    /**
+      * 自定义DNS配置
+      */
+    DnsConfig?: DNSConfig;
+    /**
+      * 用来绑定容器实例的已有EIP的列表。如传值，需要保证数值和Replicas相等。
+另外此参数和AutoCreateEipAttribute互斥。
+      */
+    ExistedEipIds?: Array<string>;
+    /**
+      * 自动创建EIP的可选参数。若传此参数，则会自动创建EIP。
+另外此参数和ExistedEipIds互斥
+      */
+    AutoCreateEipAttribute?: EipAttribute;
+    /**
+      * 是否为容器实例自动创建EIP，默认为false。若传true，则此参数和ExistedEipIds互斥
+      */
+    AutoCreateEip?: boolean;
+    /**
+      * Pod 所需的 CPU 资源型号，如果不填写则默认不强制指定 CPU 类型。目前支持型号如下：
+intel
+amd
+- 支持优先级顺序写法，如 “amd,intel” 表示优先创建 amd 资源 Pod，如果所选地域可用区 amd 资源不足，则会创建 intel 资源 Pod。
+      */
+    CpuType?: string;
+    /**
+      * 容器实例所需的 GPU 资源型号，目前支持型号如下：
+1/4\*V100
+1/2\*V100
+V100
+1/4\*T4
+1/2\*T4
+T4
+      */
+    GpuType?: string;
+    /**
+      * Pod 所需的 GPU 数量，如填写，请确保为支持的规格。默认单位为卡，无需再次注明。
+      */
+    GpuCount?: number;
+    /**
+      * 为容器实例关联 CAM 角色，value 填写 CAM 角色名称，容器实例可获取该 CAM 角色包含的权限策略，方便 容器实例 内的程序进行如购买资源、读写存储等云资源操作。
+      */
+    CamRoleName?: string;
+}
+/**
+ * 健康检查探测参数
+ */
+export interface Probe {
+    /**
+      * Number of seconds after the container has started before liveness probes are initiated.
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RouteTableCidrBlock: string;
+    InitialDelaySeconds?: number;
     /**
-      * 路由表名称。
+      * Number of seconds after which the probe times out.
+Defaults to 1 second. Minimum value is 1.
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RouteTableName: string;
+    TimeoutSeconds?: number;
     /**
-      * 路由表ID。
+      * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RouteTableId: string;
+    PeriodSeconds?: number;
+    /**
+      * Minimum consecutive successes for the probe to be considered successful after having failed.Defaults to 1. Must be 1 for liveness. Minimum value is 1.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessThreshold?: number;
+    /**
+      * Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailureThreshold?: number;
 }
 /**
  * CreateClusterNodePool返回参数结构体
@@ -4677,6 +5485,31 @@ open  = 已开启外网访问
     AdminUser: string;
 }
 /**
+ * 用以帮助用户自动创建EIP的配置
+ */
+export interface EipAttribute {
+    /**
+      * 容器实例删除后，EIP是否释放。
+Never表示不释放，其他任意值（包括空字符串）表示释放。
+      */
+    DeletePolicy: string;
+    /**
+      * EIP线路类型。默认值：BGP。
+已开通静态单线IP白名单的用户，可选值：
+CMCC：中国移动
+CTCC：中国电信
+CUCC：中国联通
+注意：仅部分地域支持静态单线IP。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternetServiceProvider?: string;
+    /**
+      * EIP出带宽上限，单位：Mbps。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternetMaxBandwidthOut?: number;
+}
+/**
  * CVM实例数据盘挂载配置
  */
 export interface InstanceDataDiskMountSetting {
@@ -4692,6 +5525,23 @@ export interface InstanceDataDiskMountSetting {
       * CVM实例所属可用区
       */
     Zone: string;
+}
+/**
+ * RemoveNodeFromNodePool请求参数结构体
+ */
+export interface RemoveNodeFromNodePoolRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 节点池id
+      */
+    NodePoolId: string;
+    /**
+      * 节点id列表，一次最多支持100台
+      */
+    InstanceIds: Array<string>;
 }
 /**
  * 托管prometheus实例概览
@@ -4773,21 +5623,45 @@ export interface DescribeClusterAsGroupsResponse {
     RequestId?: string;
 }
 /**
- * 某个节点升级前检查结果
+ * DescribeEKSContainerInstances请求参数结构体
  */
-export interface InstanceUpgradePreCheckResult {
+export interface DescribeEKSContainerInstancesRequest {
     /**
-      * 检查是否通过
+      * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过100
       */
-    CheckPass: boolean;
+    Limit?: number;
     /**
-      * 检查项数组
+      * 偏移量,默认0
       */
-    Items: Array<InstanceUpgradePreCheckResultItem>;
+    Offset?: number;
     /**
-      * 本节点独立pod列表
+      * 过滤条件，可条件：
+(1)实例名称
+KeyName: eks-ci-name
+类型：String
+
+(2)实例状态
+KeyName: status
+类型：String
+可选值："Pending", "Running", "Succeeded", "Failed"
+
+(3)内网ip
+KeyName: private-ip
+类型：String
+
+(4)EIP地址
+KeyName: eip-address
+类型：String
+
+(5)VpcId
+KeyName: vpc-id
+类型：String
       */
-    SinglePods: Array<string>;
+    Filters?: Array<Filter>;
+    /**
+      * 容器实例 ID 数组
+      */
+    EksCiIds?: Array<string>;
 }
 /**
  * DescribeClusterNodePoolDetail返回参数结构体
@@ -4810,4 +5684,17 @@ export interface DescribeClusterControllersRequest {
       * 集群ID
       */
     ClusterId: string;
+}
+/**
+ * DescribeEKSContainerInstanceEvent请求参数结构体
+ */
+export interface DescribeEKSContainerInstanceEventRequest {
+    /**
+      * 容器实例id
+      */
+    EksCiId: string;
+    /**
+      * 最大事件数量。默认为50，最大取值100。
+      */
+    Limit?: number;
 }

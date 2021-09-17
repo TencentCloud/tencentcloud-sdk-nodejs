@@ -2561,7 +2561,7 @@ export interface DomainSetList {
       */
     DomainName: string;
     /**
-      * 域名解析状态。True 表示正常解析，False 表示解析失败。
+      * 域名解析状态。1 表示正常解析，0 表示解析失败。
       */
     Status: number;
     /**

@@ -846,7 +846,7 @@ export interface UpdateFunctionConfigurationRequest {
       */
     CfsConfig?: CfsConfig;
     /**
-      * 函数初始化执行超时时间，默认15秒
+      * 函数初始化执行超时时间
       */
     InitTimeout?: number;
 }
@@ -1475,7 +1475,7 @@ export interface CreateFunctionRequest {
       */
     CfsConfig?: CfsConfig;
     /**
-      * 函数初始化超时时间
+      * 函数初始化超时时间，默认 65s，镜像部署函数默认 90s。
       */
     InitTimeout?: number;
     /**
@@ -2131,6 +2131,10 @@ export interface Code {
       * 加密后的Git用户名，一般无需指定
       */
     GitUserNameSecret?: string;
+    /**
+      * 镜像部署时配置TCR镜像信息
+      */
+    ImageConfig?: ImageConfig;
 }
 /**
  * PutTotalConcurrencyConfig请求参数结构体
@@ -2774,6 +2778,39 @@ export interface GetFunctionLogsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * TCR镜像信息描述
+ */
+export interface ImageConfig {
+    /**
+      * 镜像仓库类型，个人版或者企业版：personal/enterprise
+      */
+    ImageType: string;
+    /**
+      * {domain}/{namespace}/{imageName}:{tag}@{digest}
+      */
+    ImageUri: string;
+    /**
+      * 用于企业版TCR获取镜像拉取临时凭证，ImageType为"enterprise"时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegistryId?: string;
+    /**
+      * 应用的ENTRYPOINT
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EntryPoint?: string;
+    /**
+      * entrypoint执行命令
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Command?: string;
+    /**
+      * 命令参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Args?: string;
 }
 /**
  * DeleteTrigger返回参数结构体

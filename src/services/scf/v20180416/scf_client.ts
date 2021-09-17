@@ -135,6 +135,7 @@ import {
   Alias,
   GetLayerVersionRequest,
   GetFunctionLogsResponse,
+  ImageConfig,
   DeleteTriggerResponse,
   SearchKey,
   DeleteTriggerRequest,

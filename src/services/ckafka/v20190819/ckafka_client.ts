@@ -39,6 +39,7 @@ import {
   Region,
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
+  AclRule,
   DescribeACLResponse,
   JgwOperateResponse,
   ZoneInfo,

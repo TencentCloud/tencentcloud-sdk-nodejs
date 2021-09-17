@@ -58,6 +58,16 @@ export interface FlowApproverInfo {
    * 签署完回调url
    */
   CallbackUrl?: string
+
+  /**
+   * 签署人类型，PERSON和ORGANIZATION
+   */
+  ApproverType?: string
+
+  /**
+   * 用户侧第三方id
+   */
+  OpenId?: string
 }
 
 /**
@@ -113,6 +123,16 @@ export interface TemplateInfo {
    * 模板创建的时间戳（精确到秒）
    */
   CreatedOn: number
+
+  /**
+   * 模板类型：1-静默签；2-静默签授权；3-普通模版
+   */
+  TemplateType: number
+
+  /**
+   * 模板中的流程参与人信息
+   */
+  Recipients: Array<Recipient>
 }
 
 /**
@@ -175,7 +195,7 @@ export interface CreateSignUrlsRequest {
   Operator?: UserInfo
 
   /**
-   * 签署链接类型，默认：“WEIXINAPP”-直接跳小程序; “CHANNEL”-跳转H5页面
+   * 签署链接类型，默认：“WEIXINAPP”-直接跳小程序; “CHANNEL”-跳转H5页面; “APP”-第三方APP或小程序跳转电子签小程序;
    */
   Endpoint?: string
 
@@ -401,6 +421,16 @@ export interface CreateConsoleLoginUrlRequest {
    * 操作者的信息
    */
   Operator?: UserInfo
+
+  /**
+   * 控制台指定模块，文件/合同管理:"DOCUMENT"，模版管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"
+   */
+  Module?: string
+
+  /**
+   * 控制台指定模块Id
+   */
+  ModuleId?: string
 }
 
 /**
@@ -468,6 +498,20 @@ export interface ProxyOrganizationOperator {
  */
 export interface SyncProxyOrganizationOperatorsResponse {
   /**
+      * Status 同步状态,全部同步失败接口会直接报错
+1-成功 
+2-部分成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+
+  /**
+      * 同步失败经办人及其失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedList: Array<SyncFailReason>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -486,6 +530,11 @@ export interface DescribeTemplatesRequest {
    * 操作者的信息
    */
   Operator?: UserInfo
+
+  /**
+   * 模版唯一标识,可以通过模版列表处获取
+   */
+  TemplateId?: string
 }
 
 /**
@@ -561,6 +610,31 @@ export interface SyncProxyOrganizationRequest {
 }
 
 /**
+ * PrepareFlows请求参数结构体
+ */
+export interface PrepareFlowsRequest {
+  /**
+   * 渠道应用相关信息
+   */
+  Agent: Agent
+
+  /**
+   * 多个合同（流程）信息
+   */
+  FlowInfos: Array<FlowInfo>
+
+  /**
+   * 操作完成后的跳转地址
+   */
+  JumpUrl: string
+
+  /**
+   * 操作者的信息
+   */
+  Operator?: UserInfo
+}
+
+/**
  * 用量明细
  */
 export interface UsageDetail {
@@ -594,6 +668,23 @@ export interface CreateSignUrlsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 同步经办人失败原因
+ */
+export interface SyncFailReason {
+  /**
+   * 经办人Id
+   */
+  Id: string
+
+  /**
+      * 失败原因
+例如：Id不符合规范、证件号码不合法等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Message: string
 }
 
 /**
@@ -640,28 +731,48 @@ export interface DescribeUsageRequest {
 }
 
 /**
- * PrepareFlows请求参数结构体
+ * 签署参与者信息
  */
-export interface PrepareFlowsRequest {
+export interface Recipient {
   /**
-   * 渠道应用相关信息
+   * 签署人唯一标识
    */
-  Agent: Agent
+  RecipientId?: string
 
   /**
-   * 多个合同（流程）信息
+   * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
    */
-  FlowInfos: Array<FlowInfo>
+  RecipientType?: string
 
   /**
-   * 操作完成后的跳转地址
+   * 描述
    */
-  JumpUrl: string
+  Description?: string
 
   /**
-   * 操作者的信息
+   * 签署方备注信息
    */
-  Operator?: UserInfo
+  RoleName?: string
+
+  /**
+   * 是否需要校验
+   */
+  RequireValidation?: boolean
+
+  /**
+   * 是否必须填写
+   */
+  RequireSign?: boolean
+
+  /**
+   * 签署类型
+   */
+  SignType?: number
+
+  /**
+   * 签署顺序：数字越小优先级越高
+   */
+  RoutingOrder?: number
 }
 
 /**
