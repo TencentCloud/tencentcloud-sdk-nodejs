@@ -862,7 +862,7 @@ export interface SetInstancesProtectionRequest {
       */
     InstanceIds: Array<string>;
     /**
-      * 实例是否需要移出保护。
+      * 实例是否需要设置保护。
       */
     ProtectedFromScaleIn: boolean;
 }

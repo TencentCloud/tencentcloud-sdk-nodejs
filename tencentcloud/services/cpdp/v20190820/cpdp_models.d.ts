@@ -7947,6 +7947,11 @@ export interface QuerySinglePaymentResultData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AgentName: string;
+    /**
+      * 交易状态描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeStatusDesc: string;
 }
 /**
  * DownloadBill请求参数结构体

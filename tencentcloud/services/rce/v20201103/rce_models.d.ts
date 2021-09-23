@@ -1,4 +1,22 @@
 /**
+ * 业务出参
+ */
+export interface OutputDescribeRiskModel {
+    /**
+      * 请求返回状态值，0为成功，别的结合Message查看
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Code: number;
+    /**
+      * 请求返回信息
+      */
+    Message: string;
+    /**
+      * 请求返回结果
+      */
+    Value: OutputDescribeRiskModelValue;
+}
+/**
  * QQ账号信息。
  */
 export interface QQAccountInfo {
@@ -22,6 +40,40 @@ export interface QQAccountInfo {
       * 用户设备号。
       */
     DeviceId?: string;
+}
+/**
+ * ManageMarketingRisk请求参数结构体
+ */
+export interface ManageMarketingRiskRequest {
+    /**
+      * 业务入参
+      */
+    BusinessSecurityData: InputManageMarketingRisk;
+}
+/**
+ * 全栈式风控引擎出参
+ */
+export interface OutputManageMarketingRisk {
+    /**
+      * 返回码。0表示成功，非0标识失败错误码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Code: number;
+    /**
+      * UTF-8编码，出错消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+    /**
+      * 业务详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: OutputManageMarketingRiskValue;
+    /**
+      * 控制台显示的req_id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UUid: string;
 }
 /**
  * 诈骗信息。
@@ -53,40 +105,6 @@ export interface OnlineScamInfo {
       * 诈骗账号，手机号或QQ账号。
       */
     FraudAccount?: string;
-}
-/**
- * 全栈式风控引擎出参
- */
-export interface OutputManageMarketingRisk {
-    /**
-      * 返回码。0表示成功，非0标识失败错误码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Code: number;
-    /**
-      * UTF-8编码，出错消息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Message: string;
-    /**
-      * 业务详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Value: OutputManageMarketingRiskValue;
-    /**
-      * 控制台显示的req_id。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UUid: string;
-}
-/**
- * ManageMarketingRisk请求参数结构体
- */
-export interface ManageMarketingRiskRequest {
-    /**
-      * 业务入参
-      */
-    BusinessSecurityData: InputManageMarketingRisk;
 }
 /**
  * 全栈式风控引擎入参
@@ -267,6 +285,19 @@ AccountType是10004时，填入手机号的MD5值。
     DeviceId?: string;
 }
 /**
+ * DescribeRiskModel返回参数结构体
+ */
+export interface DescribeRiskModelResponse {
+    /**
+      * 业务出参
+      */
+    Data: OutputDescribeRiskModel;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 账号信息。
  */
 export interface AccountInfo {
@@ -296,17 +327,22 @@ export interface AccountInfo {
     OtherAccount?: OtherAccountInfo;
 }
 /**
- * ManageMarketingRisk返回参数结构体
+ * 风控建模服务出参对应值
  */
-export interface ManageMarketingRiskResponse {
+export interface OutputDescribeRiskModelValue {
     /**
-      * 业务出参
+      * 模型分数值
       */
-    Data: OutputManageMarketingRisk;
+    ApplyScore: number;
+}
+/**
+ * DescribeRiskModel请求参数结构体
+ */
+export interface DescribeRiskModelRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 业务入参
       */
-    RequestId?: string;
+    BusinessSecurityData: InputDescribeRiskModelData;
 }
 /**
  * 网赚防刷相关参数
@@ -332,6 +368,19 @@ export interface SponsorInfo {
       * 助力场景建议填写：活动链接。
       */
     CampaignUrl?: string;
+}
+/**
+ * ManageMarketingRisk返回参数结构体
+ */
+export interface ManageMarketingRiskResponse {
+    /**
+      * 业务出参
+      */
+    Data: OutputManageMarketingRisk;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 入参的详细参数信息
@@ -450,4 +499,21 @@ export interface WeChatAccountInfo {
       * 用户设备号。
       */
     DeviceId?: string;
+}
+/**
+ * 客户请求入参
+ */
+export interface InputDescribeRiskModelData {
+    /**
+      * 业务参数加密后的签名值
+      */
+    UserData: string;
+    /**
+      * 调用时间戳，精确到秒
+      */
+    ApplyDate: number;
+    /**
+      * 客户业务侧标识用户的唯一ID
+      */
+    UserId: string;
 }

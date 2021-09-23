@@ -28,6 +28,16 @@ it("cwp.v20180228.DeleteTags", async function () {
     }
 })
 
+it("cwp.v20180228.SwitchBashRules", async function () {
+    try {
+       const data = await client.SwitchBashRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.TrustMalwares", async function () {
     try {
        const data = await client.TrustMalwares({})
@@ -198,9 +208,9 @@ it("cwp.v20180228.DescribeSearchLogs", async function () {
     }
 })
 
-it("cwp.v20180228.DeletePrivilegeEvents", async function () {
+it("cwp.v20180228.DescribeBaselineStrategyList", async function () {
     try {
-       const data = await client.DeletePrivilegeEvents({})
+       const data = await client.DescribeBaselineStrategyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +238,9 @@ it("cwp.v20180228.ExportAttackLogs", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeUsualLoginPlaces", async function () {
+it("cwp.v20180228.DescribeBaselineHostTop", async function () {
     try {
-       const data = await client.DescribeUsualLoginPlaces({})
+       const data = await client.DescribeBaselineHostTop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +248,19 @@ it("cwp.v20180228.DescribeUsualLoginPlaces", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeScanState", async function () {
+it("cwp.v20180228.DescribeExpertServiceList", async function () {
     try {
-       const data = await client.DescribeScanState({})
+       const data = await client.DescribeExpertServiceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineList", async function () {
+    try {
+       const data = await client.DescribeBaselineList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +271,16 @@ it("cwp.v20180228.DescribeScanState", async function () {
 it("cwp.v20180228.DeleteBashEvents", async function () {
     try {
        const data = await client.DeleteBashEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineEffectHostList", async function () {
+    try {
+       const data = await client.DescribeBaselineEffectHostList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +311,26 @@ it("cwp.v20180228.DescribeIndexList", async function () {
 it("cwp.v20180228.ExportBaselineList", async function () {
     try {
        const data = await client.ExportBaselineList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeProVersionInfo", async function () {
+    try {
+       const data = await client.DescribeProVersionInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeProtectNetList", async function () {
+    try {
+       const data = await client.DescribeProtectNetList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +448,16 @@ it("cwp.v20180228.ExportBashEvents", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeIgnoreRuleEffectHostList", async function () {
+    try {
+       const data = await client.DescribeIgnoreRuleEffectHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.ExportVulEffectHostList", async function () {
     try {
        const data = await client.ExportVulEffectHostList({})
@@ -488,9 +548,9 @@ it("cwp.v20180228.IgnoreImpactedHosts", async function () {
     }
 })
 
-it("cwp.v20180228.CreateSearchTemplate", async function () {
+it("cwp.v20180228.DescribeBaselineScanSchedule", async function () {
     try {
-       const data = await client.CreateSearchTemplate({})
+       const data = await client.DescribeBaselineScanSchedule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,6 +618,16 @@ it("cwp.v20180228.ExportMaliciousRequests", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeUsualLoginPlaces", async function () {
+    try {
+       const data = await client.DescribeUsualLoginPlaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeTagMachines", async function () {
     try {
        const data = await client.DescribeTagMachines({})
@@ -618,9 +688,19 @@ it("cwp.v20180228.DescribeOverviewStatistics", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeBaselineScanSchedule", async function () {
+it("cwp.v20180228.DescribeAvailableExpertServiceDetail", async function () {
     try {
-       const data = await client.DescribeBaselineScanSchedule({})
+       const data = await client.DescribeAvailableExpertServiceDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.CreateSearchTemplate", async function () {
+    try {
+       const data = await client.CreateSearchTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +768,9 @@ it("cwp.v20180228.ExportScanTaskDetails", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeVulLevelCount", async function () {
+it("cwp.v20180228.DeletePrivilegeEvents", async function () {
     try {
-       const data = await client.DescribeVulLevelCount({})
+       const data = await client.DeletePrivilegeEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -711,6 +791,16 @@ it("cwp.v20180228.DeleteMalwares", async function () {
 it("cwp.v20180228.DescribeMachineList", async function () {
     try {
        const data = await client.DescribeMachineList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyWebPageProtectSetting", async function () {
+    try {
+       const data = await client.ModifyWebPageProtectSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -878,9 +968,39 @@ it("cwp.v20180228.ModifyWebPageProtectDir", async function () {
     }
 })
 
-it("cwp.v20180228.SwitchBashRules", async function () {
+it("cwp.v20180228.DescribeMaliciousRequestWhiteList", async function () {
     try {
-       const data = await client.SwitchBashRules({})
+       const data = await client.DescribeMaliciousRequestWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineStrategyDetail", async function () {
+    try {
+       const data = await client.DescribeBaselineStrategyDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeVulLevelCount", async function () {
+    try {
+       const data = await client.DescribeVulLevelCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ExportSecurityTrends", async function () {
+    try {
+       const data = await client.ExportSecurityTrends({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -928,9 +1048,9 @@ it("cwp.v20180228.DescribeBruteAttackList", async function () {
     }
 })
 
-it("cwp.v20180228.ModifyWebPageProtectSetting", async function () {
+it("cwp.v20180228.DescribeScanTaskStatus", async function () {
     try {
-       const data = await client.ModifyWebPageProtectSetting({})
+       const data = await client.DescribeScanTaskStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -951,6 +1071,16 @@ it("cwp.v20180228.OpenProVersionPrepaid", async function () {
 it("cwp.v20180228.DescribeSearchTemplates", async function () {
     try {
        const data = await client.DescribeSearchTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeEmergencyResponseList", async function () {
+    try {
+       const data = await client.DescribeEmergencyResponseList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,6 +1158,16 @@ it("cwp.v20180228.ExportBaselineEffectHostList", async function () {
     }
 })
 
+it("cwp.v20180228.ExportNonlocalLoginPlaces", async function () {
+    try {
+       const data = await client.ExportNonlocalLoginPlaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBanStatus", async function () {
     try {
        const data = await client.DescribeBanStatus({})
@@ -1071,6 +1211,16 @@ it("cwp.v20180228.DescribeMalwareInfo", async function () {
 it("cwp.v20180228.DescribeServersAndRiskAndFirstInfo", async function () {
     try {
        const data = await client.DescribeServersAndRiskAndFirstInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineTop", async function () {
+    try {
+       const data = await client.DescribeBaselineTop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,9 +1328,9 @@ it("cwp.v20180228.ModifyWarningSetting", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeProVersionInfo", async function () {
+it("cwp.v20180228.DescribeBruteAttackRules", async function () {
     try {
-       const data = await client.DescribeProVersionInfo({})
+       const data = await client.DescribeBruteAttackRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1231,6 +1381,16 @@ it("cwp.v20180228.DescribePrivilegeEvents", async function () {
 it("cwp.v20180228.DescribeMachineInfo", async function () {
     try {
        const data = await client.DescribeMachineInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBanWhiteList", async function () {
+    try {
+       const data = await client.DescribeBanWhiteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1328,9 +1488,19 @@ it("cwp.v20180228.CreateProtectServer", async function () {
     }
 })
 
-it("cwp.v20180228.ExportNonlocalLoginPlaces", async function () {
+it("cwp.v20180228.DescribeScanState", async function () {
     try {
-       const data = await client.ExportNonlocalLoginPlaces({})
+       const data = await client.DescribeScanState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeVulHostTop", async function () {
+    try {
+       const data = await client.DescribeVulHostTop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1498,6 +1668,16 @@ it("cwp.v20180228.DeleteMachine", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeExpertServiceOrderList", async function () {
+    try {
+       const data = await client.DescribeExpertServiceOrderList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.RescanImpactedHost", async function () {
     try {
        const data = await client.RescanImpactedHost({})
@@ -1541,6 +1721,16 @@ it("cwp.v20180228.DescribeBaselineBasicInfo", async function () {
 it("cwp.v20180228.DescribeSecurityTrends", async function () {
     try {
        const data = await client.DescribeSecurityTrends({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeBaselineAnalysisData", async function () {
+    try {
+       const data = await client.DescribeBaselineAnalysisData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

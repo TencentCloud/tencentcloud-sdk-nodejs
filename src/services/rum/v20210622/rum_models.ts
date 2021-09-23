@@ -532,7 +532,7 @@ export interface CreateProjectRequest {
   Name: string
 
   /**
-   * 项目对应实例 id
+   * 业务系统 ID
    */
   InstanceID: string
 

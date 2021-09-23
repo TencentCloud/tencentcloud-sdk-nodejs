@@ -21,58 +21,70 @@ import {
   ExportBashEventsRequest,
   DescribeSearchTemplatesResponse,
   ExportReverseShellEventsResponse,
+  DescribeBaselineTopResponse,
   ScanVulAgainRequest,
   DeleteBaselineStrategyResponse,
   ExportWebPageEventListResponse,
   InquiryPriceOpenProVersionPrepaidRequest,
   DescribeUndoVulCountsResponse,
   DescribeBaselineScanScheduleResponse,
+  MaliciousRequestWhiteListInfo,
   DeleteBashEventsResponse,
   ExportWebPageEventListRequest,
   DescribeTagsRequest,
   DescribeMonthInspectionReportResponse,
   DescribeSaveOrUpdateWarningsResponse,
+  DescribeBaselineHostTopResponse,
   DeleteBashRulesResponse,
   ExportVulListResponse,
   DescribeHistoryServiceResponse,
+  BaselineEffectHost,
   ModifyWebPageProtectSettingResponse,
   DescribeVulInfoCvssResponse,
+  DescribeBaselineStrategyDetailRequest,
   MalWareList,
   Tag,
   ExportAttackLogsResponse,
+  DescribeBaselineEffectHostListResponse,
   TrustMalwaresRequest,
   ExportVulEffectHostListRequest,
   DescribeBaselineBasicInfoRequest,
   DescribeProVersionInfoRequest,
   DescribeVulCountByDatesRequest,
+  DescribeBaselineStrategyListResponse,
   DeleteLoginWhiteListRequest,
-  MachineTag,
+  DescribeBanWhiteListRequest,
   DescribeAttackLogInfoResponse,
   DescribePrivilegeEventsResponse,
   DescribeOverviewStatisticsResponse,
   DescribeMonthInspectionReportRequest,
+  ProtectNetInfo,
   ReverseShellRule,
   DescribeBashRulesResponse,
+  DescribeAvailableExpertServiceDetailResponse,
   ChangeRuleEventsIgnoreStatusRequest,
   DescribeWebPageEventListRequest,
   ExportAssetCoreModuleListRequest,
   DescribeComponentStatisticsResponse,
   DescribeMachineRegionsRequest,
   DescribeSearchExportListResponse,
+  DescribeAvailableExpertServiceDetailRequest,
   DescribeServerRelatedDirInfoResponse,
   CloseProVersionRequest,
   DescribeUsualLoginPlacesResponse,
   IgnoreBaselineRule,
   DescribeBaselineBasicInfoResponse,
   EditBashRulesResponse,
+  LoginWhiteLists,
   ScanVulResponse,
   DescribeOverviewStatisticsRequest,
   OsName,
   DescribeTagMachinesRequest,
   AssetKeyVal,
-  HostLoginList,
+  ModifyAutoOpenProVersionConfigRequest,
   DeletePrivilegeEventsRequest,
   ExportAttackLogsRequest,
+  IgnoreRuleEffectHostInfo,
   DescribeBanModeRequest,
   DescribeESAggregationsResponse,
   EmergencyVul,
@@ -90,7 +102,7 @@ import {
   DescribeIgnoreBaselineRuleRequest,
   ExportNonlocalLoginPlacesResponse,
   ExportMaliciousRequestsRequest,
-  ModifyAutoOpenProVersionConfigRequest,
+  HostLoginList,
   DescribeWebPageProtectStatRequest,
   ExportVulDetectionReportRequest,
   ExportMalwaresResponse,
@@ -103,7 +115,7 @@ import {
   RescanImpactedHostResponse,
   DescribeStrategyExistResponse,
   DeleteReverseShellEventsRequest,
-  DescribeSearchLogsResponse,
+  DescribeBanRegionsRequest,
   DescribeServersAndRiskAndFirstInfoRequest,
   IgnoreImpactedHostsRequest,
   DescribeMachinesRequest,
@@ -118,22 +130,24 @@ import {
   DescribeLogStorageStatisticRequest,
   DescribeAssetRecentMachineInfoRequest,
   CheckBashRuleParamsResponse,
-  ScanVulSettingResponse,
+  ExportBaselineListRequest,
   DeleteProtectDirRequest,
   ExportIgnoreBaselineRuleResponse,
+  BruteAttackRuleList,
   DescribeBanStatusResponse,
   VulDetailInfo,
-  DescribeServersAndRiskAndFirstInfoResponse,
+  BaselineInfo,
   DescribePrivilegeRulesRequest,
   MonthInspectionReport,
   DescribeWebPageGeneralizeRequest,
   UpdateBaselineStrategyRequest,
   ModifyWarningSettingRequest,
-  DescribeBruteAttackListResponse,
+  DescribeMalwareRiskWarningRequest,
   DescribeAssetInfoRequest,
   DescribeMachineRegionsResponse,
   UntrustMalwaresRequest,
   UntrustMalwaresResponse,
+  DescribeExpertServiceListResponse,
   DescribeAccountStatisticsResponse,
   DescribeSearchExportListRequest,
   ScanAssetRequest,
@@ -154,7 +168,7 @@ import {
   DeleteMachineRequest,
   BruteAttackRule,
   PrivilegeEscalationProcess,
-  LoginWhiteLists,
+  DescribeProtectNetListResponse,
   DeleteSearchTemplateRequest,
   ChangeRuleEventsIgnoreStatusResponse,
   DeletePrivilegeRulesResponse,
@@ -165,6 +179,8 @@ import {
   DescribeIndexListResponse,
   ModifyWebPageProtectDirRequest,
   DescribeWebPageGeneralizeResponse,
+  DescribeBanWhiteListResponse,
+  EmergencyResponseInfo,
   DescribeOpenPortStatisticsResponse,
   DeleteAttackLogsResponse,
   SecurityDynamic,
@@ -183,12 +199,16 @@ import {
   DeleteBashRulesRequest,
   CreateProtectServerResponse,
   OpenProVersionResponse,
+  DescribeExpertServiceListRequest,
+  DescribeBaselineHostTopRequest,
   ExportBaselineEffectHostListResponse,
+  DescribeVulHostTopResponse,
   DescribeHistoryServiceRequest,
   DescribeWarningListRequest,
-  SyncAssetScanRequest,
-  DescribeServerRelatedDirInfoRequest,
+  ModifyProVersionRenewFlagRequest,
+  ExportSecurityTrendsRequest,
   DescribeESAggregationsRequest,
+  BaselineHostTopList,
   DescribeReverseShellRulesResponse,
   DescribeBruteAttackListRequest,
   DescribeUndoVulCountsRequest,
@@ -196,12 +216,14 @@ import {
   ModifyProVersionRenewFlagResponse,
   Machine,
   ProtectMachineInfo,
-  DescribeMalwareFileRequest,
+  DefendAttackLog,
+  MachineTag,
   DescribeWebPageServiceInfoResponse,
   DescribeUsualLoginPlacesRequest,
   ProtectEventLists,
+  SwitchBashRulesRequest,
   DescribeProcessStatisticsRequest,
-  CreateScanMalwareSettingResponse,
+  DescribeAssetInfoResponse,
   MalwareRisk,
   ExportProtectDirListResponse,
   ExportTasksRequest,
@@ -220,6 +242,7 @@ import {
   AssetFilters,
   SetBashEventsStatusRequest,
   DescribeAccountsRequest,
+  DescribeBaselineStrategyListRequest,
   RegionInfo,
   DescribeAttackLogsRequest,
   ComponentStatistics,
@@ -230,24 +253,34 @@ import {
   ExportPrivilegeEventsRequest,
   Account,
   DescribeMalwareFileResponse,
+  TaskStatus,
   DescribeRiskDnsListResponse,
   ScanTaskDetails,
+  DescribeScanTaskStatusRequest,
   ExportIgnoreBaselineRuleRequest,
   DeleteMachineTagRequest,
   DescribeBaselineDetailRequest,
   ZoneInfo,
   BaselineRuleInfo,
   DescribeExportMachinesResponse,
+  DescribeScanTaskStatusResponse,
+  DeleteWebPageEventLogRequest,
+  DescribeProtectNetListRequest,
   DescribeWebPageEventListResponse,
   DeleteProtectDirResponse,
   ModifyBanStatusRequest,
   DescribeWebPageServiceInfoRequest,
+  SyncAssetScanRequest,
   DescribeLogStorageStatisticResponse,
+  DescribeEmergencyResponseListRequest,
   DescribeScanStateResponse,
   EditTagsRequest,
   DeleteReverseShellRulesRequest,
+  DescribeBaselineEffectHostListRequest,
+  DescribeServerRelatedDirInfoRequest,
   DescribeOpenPortStatisticsRequest,
   ExportAssetWebServiceInfoListResponse,
+  ExportSecurityTrendsResponse,
   ModifyMalwareTimingScanSettingsResponse,
   DeleteNonlocalLoginPlacesResponse,
   ModifyWebPageProtectSettingRequest,
@@ -257,15 +290,18 @@ import {
   DescribeBanRegionsResponse,
   DeletePrivilegeEventsResponse,
   DescribeMachineInfoResponse,
+  VulHostTopInfo,
   DescribeImportMachineInfoRequest,
   VulLevelInfo,
   ProtectStat,
   SwitchBashRulesResponse,
   DescribeSearchLogsRequest,
   DescribeAttackLogInfoRequest,
+  ScanVulSettingResponse,
   DescribeVulInfoCvssRequest,
   DescribeComponentStatisticsRequest,
   RescanImpactedHostRequest,
+  DescribeMaliciousRequestWhiteListRequest,
   ModifyBanStatusResponse,
   DescribeLoginWhiteListResponse,
   StopNoticeBanTipsResponse,
@@ -279,28 +315,34 @@ import {
   DescribeEmergencyVulListRequest,
   DescribeVulHostCountScanTimeResponse,
   DeleteReverseShellEventsResponse,
-  DefendAttackLog,
   DescribeMachineInfoRequest,
   DescribeScanTaskDetailsResponse,
   DescribeGeneralStatRequest,
   UpdateBaselineStrategyResponse,
+  DescribeVulHostTopRequest,
+  DescribeIgnoreRuleEffectHostListRequest,
   ModifyWarningSettingResponse,
   LoginWhiteCombinedInfo,
   OpenProVersionPrepaidResponse,
   DescribeMalwareInfoResponse,
   DescribePrivilegeEventsRequest,
+  DescribeServersAndRiskAndFirstInfoResponse,
   ExportIgnoreRuleEffectHostListResponse,
   ExportBashEventsResponse,
   DeleteWebPageEventLogResponse,
   DescribeVulLevelCountResponse,
   DescribeVersionStatisticsResponse,
+  DescribeBruteAttackRulesRequest,
   DescribeProcessStatisticsResponse,
   ModifyBruteAttackRulesResponse,
   DeleteNonlocalLoginPlacesRequest,
   DescribeTagsResponse,
+  BaselineEventLevelInfo,
+  DescribeMalwareFileRequest,
   DescribeLoginWhiteCombinedListRequest,
+  Strategy,
   DeleteSearchTemplateResponse,
-  DeleteWebPageEventLogRequest,
+  DescribeEmergencyResponseListResponse,
   ProtectHostConfig,
   HistoryAccount,
   ModifyWebPageProtectSwitchRequest,
@@ -308,6 +350,7 @@ import {
   DescribeMalwareTimingScanSettingResponse,
   DescribeHostLoginListRequest,
   SecurityTrend,
+  PrivilegeRule,
   ExportVulDetectionExcelRequest,
   CreateEmergencyVulScanRequest,
   DescribeProtectDirRelatedServerResponse,
@@ -318,6 +361,7 @@ import {
   DescribeMalWareListResponse,
   DeleteMaliciousRequestsRequest,
   DescribeProtectDirListResponse,
+  DescribeMaliciousRequestWhiteListResponse,
   DeleteBruteAttacksResponse,
   ExportTasksResponse,
   DescribeIgnoreBaselineRuleResponse,
@@ -337,13 +381,15 @@ import {
   DescribeAttackVulTypeListResponse,
   DescribePrivilegeRulesResponse,
   DescribeReverseShellEventsResponse,
-  BruteAttackInfo,
+  DescribeSecurityEventsCntResponse,
   DescribeWebPageProtectStatResponse,
+  VulLevelCountInfo,
   DescribeExportMachinesRequest,
-  DescribeAssetInfoResponse,
+  CreateScanMalwareSettingResponse,
   RenewProVersionRequest,
   RiskDnsList,
   DeleteMalwareScanTaskRequest,
+  DescribeIgnoreRuleEffectHostListResponse,
   ExportProtectDirListRequest,
   CreateBaselineStrategyResponse,
   ExportAssetCoreModuleListResponse,
@@ -353,11 +399,13 @@ import {
   ExportVulDetectionReportResponse,
   DescribeScanScheduleRequest,
   EditBashRulesRequest,
-  DescribeMalwareRiskWarningRequest,
+  DescribeBruteAttackListResponse,
   ScanVulSettingRequest,
   ExportScanTaskDetailsRequest,
   ExportBaselineListResponse,
+  DescribeBruteAttackRulesResponse,
   ModifyBanModeResponse,
+  BaselineRuleTopInfo,
   TrustMalwaresResponse,
   DescribeLoginWhiteCombinedListResponse,
   ExportVulDetectionExcelResponse,
@@ -369,14 +417,16 @@ import {
   DescribeMachineListResponse,
   MalwareInfo,
   Place,
+  DescribeExpertServiceOrderListResponse,
   DeleteReverseShellRulesResponse,
   DescribeScanTaskDetailsRequest,
   DescribeProtectDirRelatedServerRequest,
   InquiryPriceOpenProVersionPrepaidResponse,
-  DescribeBanRegionsRequest,
+  DescribeSearchLogsResponse,
   SecurityEventInfo,
+  DescribeBaselineAnalysisDataResponse,
   ModifyBanModeRequest,
-  ExportBaselineListRequest,
+  BanWhiteListDetail,
   DescribeVulTopResponse,
   DeleteBashEventsRequest,
   SeparateMalwaresRequest,
@@ -385,23 +435,27 @@ import {
   DescribeSecurityDynamicsResponse,
   CloseProVersionResponse,
   DeleteAttackLogsRequest,
-  ModifyProVersionRenewFlagRequest,
-  SwitchBashRulesRequest,
+  DescribeBaselineStrategyDetailResponse,
+  DescribeBaselineListRequest,
+  DescribeBaselineTopRequest,
   Filter,
   DescribeAccountStatisticsRequest,
   DescribeESHitsResponse,
+  SecurityButlerInfo,
   DescribeSaveOrUpdateWarningsRequest,
   ChargePrepaid,
   ProcessStatistics,
   DescribeScanScheduleResponse,
   BaselineDetail,
   ModifyWebPageProtectDirResponse,
+  ExpertServiceOrderInfo,
   AccountStatistics,
   DescribeMachinesResponse,
   DescribeVulLevelCountRequest,
   DescribeVulHostCountScanTimeRequest,
   DescribeProVersionStatusRequest,
-  PrivilegeRule,
+  DescribeBaselineListResponse,
+  DescribeExpertServiceOrderListRequest,
   ExportVulEffectHostListResponse,
   DescribeVulTopRequest,
   DescribeProVersionStatusResponse,
@@ -409,11 +463,12 @@ import {
   DescribeGeneralStatResponse,
   ExportNonlocalLoginPlacesRequest,
   DeleteMachineTagResponse,
-  DescribeSecurityEventsCntResponse,
+  BruteAttackInfo,
   WarningInfoObj,
   OpenProVersionRequest,
   UpdateMachineTagsRequest,
   DescribeHostLoginListResponse,
+  DescribeBaselineAnalysisDataRequest,
   DeleteBaselineStrategyRequest,
   Filters,
   CreateSearchLogRequest,
@@ -438,6 +493,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTagsResponse) => void
   ): Promise<DeleteTagsResponse> {
     return this.request("DeleteTags", req, cb)
+  }
+
+  /**
+   * 切换高危命令规则状态
+   */
+  async SwitchBashRules(
+    req: SwitchBashRulesRequest,
+    cb?: (error: string, rep: SwitchBashRulesResponse) => void
+  ): Promise<SwitchBashRulesResponse> {
+    return this.request("SwitchBashRules", req, cb)
   }
 
   /**
@@ -611,13 +676,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据Ids删除本地提权
+   * 查询一个用户下的基线策略信息
    */
-  async DeletePrivilegeEvents(
-    req: DeletePrivilegeEventsRequest,
-    cb?: (error: string, rep: DeletePrivilegeEventsResponse) => void
-  ): Promise<DeletePrivilegeEventsResponse> {
-    return this.request("DeletePrivilegeEvents", req, cb)
+  async DescribeBaselineStrategyList(
+    req: DescribeBaselineStrategyListRequest,
+    cb?: (error: string, rep: DescribeBaselineStrategyListResponse) => void
+  ): Promise<DescribeBaselineStrategyListResponse> {
+    return this.request("DescribeBaselineStrategyList", req, cb)
   }
 
   /**
@@ -641,23 +706,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（DescribeUsualLoginPlaces）用于查询常用登录地。
+   * 接口返回TopN的风险服务器
    */
-  async DescribeUsualLoginPlaces(
-    req: DescribeUsualLoginPlacesRequest,
-    cb?: (error: string, rep: DescribeUsualLoginPlacesResponse) => void
-  ): Promise<DescribeUsualLoginPlacesResponse> {
-    return this.request("DescribeUsualLoginPlaces", req, cb)
+  async DescribeBaselineHostTop(
+    req: DescribeBaselineHostTopRequest,
+    cb?: (error: string, rep: DescribeBaselineHostTopResponse) => void
+  ): Promise<DescribeBaselineHostTopResponse> {
+    return this.request("DescribeBaselineHostTop", req, cb)
   }
 
   /**
-   * DescribeScanState 该接口能查询对应模块正在进行的扫描任务状态
+   * 专家服务-安全管家列表
    */
-  async DescribeScanState(
-    req: DescribeScanStateRequest,
-    cb?: (error: string, rep: DescribeScanStateResponse) => void
-  ): Promise<DescribeScanStateResponse> {
-    return this.request("DescribeScanState", req, cb)
+  async DescribeExpertServiceList(
+    req: DescribeExpertServiceListRequest,
+    cb?: (error: string, rep: DescribeExpertServiceListResponse) => void
+  ): Promise<DescribeExpertServiceListResponse> {
+    return this.request("DescribeExpertServiceList", req, cb)
+  }
+
+  /**
+   * 查询基线列表信息
+   */
+  async DescribeBaselineList(
+    req: DescribeBaselineListRequest,
+    cb?: (error: string, rep: DescribeBaselineListResponse) => void
+  ): Promise<DescribeBaselineListResponse> {
+    return this.request("DescribeBaselineList", req, cb)
   }
 
   /**
@@ -668,6 +743,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBashEventsResponse) => void
   ): Promise<DeleteBashEventsResponse> {
     return this.request("DeleteBashEvents", req, cb)
+  }
+
+  /**
+   * 根据基线id查询基线影响主机列表
+   */
+  async DescribeBaselineEffectHostList(
+    req: DescribeBaselineEffectHostListRequest,
+    cb?: (error: string, rep: DescribeBaselineEffectHostListResponse) => void
+  ): Promise<DescribeBaselineEffectHostListResponse> {
+    return this.request("DescribeBaselineEffectHostList", req, cb)
   }
 
   /**
@@ -698,6 +783,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportBaselineListResponse) => void
   ): Promise<ExportBaselineListResponse> {
     return this.request("ExportBaselineList", req, cb)
+  }
+
+  /**
+   * 用于获取专业版概览信息。
+   */
+  async DescribeProVersionInfo(
+    req?: DescribeProVersionInfoRequest,
+    cb?: (error: string, rep: DescribeProVersionInfoResponse) => void
+  ): Promise<DescribeProVersionInfoResponse> {
+    return this.request("DescribeProVersionInfo", req, cb)
+  }
+
+  /**
+   * 专家服务-旗舰护网列表
+   */
+  async DescribeProtectNetList(
+    req: DescribeProtectNetListRequest,
+    cb?: (error: string, rep: DescribeProtectNetListResponse) => void
+  ): Promise<DescribeProtectNetListResponse> {
+    return this.request("DescribeProtectNetList", req, cb)
   }
 
   /**
@@ -811,6 +916,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据检测项id与筛选条件查询忽略检测项影响主机列表信息
+   */
+  async DescribeIgnoreRuleEffectHostList(
+    req: DescribeIgnoreRuleEffectHostListRequest,
+    cb?: (error: string, rep: DescribeIgnoreRuleEffectHostListResponse) => void
+  ): Promise<DescribeIgnoreRuleEffectHostListResponse> {
+    return this.request("DescribeIgnoreRuleEffectHostList", req, cb)
+  }
+
+  /**
    * 导出漏洞影响主机列表
    */
   async ExportVulEffectHostList(
@@ -901,13 +1016,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加检索模板
+   * 根据任务id查询基线检测进度
    */
-  async CreateSearchTemplate(
-    req: CreateSearchTemplateRequest,
-    cb?: (error: string, rep: CreateSearchTemplateResponse) => void
-  ): Promise<CreateSearchTemplateResponse> {
-    return this.request("CreateSearchTemplate", req, cb)
+  async DescribeBaselineScanSchedule(
+    req: DescribeBaselineScanScheduleRequest,
+    cb?: (error: string, rep: DescribeBaselineScanScheduleResponse) => void
+  ): Promise<DescribeBaselineScanScheduleResponse> {
+    return this.request("DescribeBaselineScanSchedule", req, cb)
   }
 
   /**
@@ -971,6 +1086,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（DescribeUsualLoginPlaces）用于查询常用登录地。
+   */
+  async DescribeUsualLoginPlaces(
+    req: DescribeUsualLoginPlacesRequest,
+    cb?: (error: string, rep: DescribeUsualLoginPlacesResponse) => void
+  ): Promise<DescribeUsualLoginPlacesResponse> {
+    return this.request("DescribeUsualLoginPlaces", req, cb)
+  }
+
+  /**
    * 获取指定标签关联的服务器信息
    */
   async DescribeTagMachines(
@@ -1031,13 +1156,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据任务id查询基线检测进度
+   * 专家服务-可用订单详情
    */
-  async DescribeBaselineScanSchedule(
-    req: DescribeBaselineScanScheduleRequest,
-    cb?: (error: string, rep: DescribeBaselineScanScheduleResponse) => void
-  ): Promise<DescribeBaselineScanScheduleResponse> {
-    return this.request("DescribeBaselineScanSchedule", req, cb)
+  async DescribeAvailableExpertServiceDetail(
+    req?: DescribeAvailableExpertServiceDetailRequest,
+    cb?: (error: string, rep: DescribeAvailableExpertServiceDetailResponse) => void
+  ): Promise<DescribeAvailableExpertServiceDetailResponse> {
+    return this.request("DescribeAvailableExpertServiceDetail", req, cb)
+  }
+
+  /**
+   * 添加检索模板
+   */
+  async CreateSearchTemplate(
+    req: CreateSearchTemplateRequest,
+    cb?: (error: string, rep: CreateSearchTemplateResponse) => void
+  ): Promise<CreateSearchTemplateResponse> {
+    return this.request("CreateSearchTemplate", req, cb)
   }
 
   /**
@@ -1101,13 +1236,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 漏洞数量等级分布统计
+   * 根据Ids删除本地提权
    */
-  async DescribeVulLevelCount(
-    req?: DescribeVulLevelCountRequest,
-    cb?: (error: string, rep: DescribeVulLevelCountResponse) => void
-  ): Promise<DescribeVulLevelCountResponse> {
-    return this.request("DescribeVulLevelCount", req, cb)
+  async DeletePrivilegeEvents(
+    req: DeletePrivilegeEventsRequest,
+    cb?: (error: string, rep: DeletePrivilegeEventsResponse) => void
+  ): Promise<DeletePrivilegeEventsResponse> {
+    return this.request("DeletePrivilegeEvents", req, cb)
   }
 
   /**
@@ -1128,6 +1263,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMachineListResponse) => void
   ): Promise<DescribeMachineListResponse> {
     return this.request("DescribeMachineList", req, cb)
+  }
+
+  /**
+   * 修改网站防护设置
+   */
+  async ModifyWebPageProtectSetting(
+    req: ModifyWebPageProtectSettingRequest,
+    cb?: (error: string, rep: ModifyWebPageProtectSettingResponse) => void
+  ): Promise<ModifyWebPageProtectSettingResponse> {
+    return this.request("ModifyWebPageProtectSetting", req, cb)
   }
 
   /**
@@ -1291,13 +1436,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换高危命令规则状态
+   * 查询恶意请求白名单列表
    */
-  async SwitchBashRules(
-    req: SwitchBashRulesRequest,
-    cb?: (error: string, rep: SwitchBashRulesResponse) => void
-  ): Promise<SwitchBashRulesResponse> {
-    return this.request("SwitchBashRules", req, cb)
+  async DescribeMaliciousRequestWhiteList(
+    req: DescribeMaliciousRequestWhiteListRequest,
+    cb?: (error: string, rep: DescribeMaliciousRequestWhiteListResponse) => void
+  ): Promise<DescribeMaliciousRequestWhiteListResponse> {
+    return this.request("DescribeMaliciousRequestWhiteList", req, cb)
+  }
+
+  /**
+   * 根据基线策略id查询策略详情
+   */
+  async DescribeBaselineStrategyDetail(
+    req: DescribeBaselineStrategyDetailRequest,
+    cb?: (error: string, rep: DescribeBaselineStrategyDetailResponse) => void
+  ): Promise<DescribeBaselineStrategyDetailResponse> {
+    return this.request("DescribeBaselineStrategyDetail", req, cb)
+  }
+
+  /**
+   * 漏洞数量等级分布统计
+   */
+  async DescribeVulLevelCount(
+    req?: DescribeVulLevelCountRequest,
+    cb?: (error: string, rep: DescribeVulLevelCountResponse) => void
+  ): Promise<DescribeVulLevelCountResponse> {
+    return this.request("DescribeVulLevelCount", req, cb)
+  }
+
+  /**
+   * 导出风险趋势
+   */
+  async ExportSecurityTrends(
+    req: ExportSecurityTrendsRequest,
+    cb?: (error: string, rep: ExportSecurityTrendsResponse) => void
+  ): Promise<ExportSecurityTrendsResponse> {
+    return this.request("ExportSecurityTrends", req, cb)
   }
 
   /**
@@ -1341,13 +1516,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改网站防护设置
+   * DescribeScanTaskStatus 查询机器扫描状态列表用于过滤筛选
    */
-  async ModifyWebPageProtectSetting(
-    req: ModifyWebPageProtectSettingRequest,
-    cb?: (error: string, rep: ModifyWebPageProtectSettingResponse) => void
-  ): Promise<ModifyWebPageProtectSettingResponse> {
-    return this.request("ModifyWebPageProtectSetting", req, cb)
+  async DescribeScanTaskStatus(
+    req: DescribeScanTaskStatusRequest,
+    cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void
+  ): Promise<DescribeScanTaskStatusResponse> {
+    return this.request("DescribeScanTaskStatus", req, cb)
   }
 
   /**
@@ -1368,6 +1543,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSearchTemplatesResponse) => void
   ): Promise<DescribeSearchTemplatesResponse> {
     return this.request("DescribeSearchTemplates", req, cb)
+  }
+
+  /**
+   * 专家服务-应急响应列表
+   */
+  async DescribeEmergencyResponseList(
+    req: DescribeEmergencyResponseListRequest,
+    cb?: (error: string, rep: DescribeEmergencyResponseListResponse) => void
+  ): Promise<DescribeEmergencyResponseListResponse> {
+    return this.request("DescribeEmergencyResponseList", req, cb)
   }
 
   /**
@@ -1441,6 +1626,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
+   */
+  async ExportNonlocalLoginPlaces(
+    req: ExportNonlocalLoginPlacesRequest,
+    cb?: (error: string, rep: ExportNonlocalLoginPlacesResponse) => void
+  ): Promise<ExportNonlocalLoginPlacesResponse> {
+    return this.request("ExportNonlocalLoginPlaces", req, cb)
+  }
+
+  /**
    * 获取阻断按钮状态
    */
   async DescribeBanStatus(
@@ -1488,6 +1683,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeServersAndRiskAndFirstInfoResponse) => void
   ): Promise<DescribeServersAndRiskAndFirstInfoResponse> {
     return this.request("DescribeServersAndRiskAndFirstInfo", req, cb)
+  }
+
+  /**
+   * 根据策略id查询基线检测项TOP
+   */
+  async DescribeBaselineTop(
+    req: DescribeBaselineTopRequest,
+    cb?: (error: string, rep: DescribeBaselineTopResponse) => void
+  ): Promise<DescribeBaselineTopResponse> {
+    return this.request("DescribeBaselineTop", req, cb)
   }
 
   /**
@@ -1593,13 +1798,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取专业版概览信息。
+   * 获取爆破破解规则
    */
-  async DescribeProVersionInfo(
-    req?: DescribeProVersionInfoRequest,
-    cb?: (error: string, rep: DescribeProVersionInfoResponse) => void
-  ): Promise<DescribeProVersionInfoResponse> {
-    return this.request("DescribeProVersionInfo", req, cb)
+  async DescribeBruteAttackRules(
+    req?: DescribeBruteAttackRulesRequest,
+    cb?: (error: string, rep: DescribeBruteAttackRulesResponse) => void
+  ): Promise<DescribeBruteAttackRulesResponse> {
+    return this.request("DescribeBruteAttackRules", req, cb)
   }
 
   /**
@@ -1650,6 +1855,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMachineInfoResponse) => void
   ): Promise<DescribeMachineInfoResponse> {
     return this.request("DescribeMachineInfo", req, cb)
+  }
+
+  /**
+   * 获取阻断白名单列表
+   */
+  async DescribeBanWhiteList(
+    req: DescribeBanWhiteListRequest,
+    cb?: (error: string, rep: DescribeBanWhiteListResponse) => void
+  ): Promise<DescribeBanWhiteListResponse> {
+    return this.request("DescribeBanWhiteList", req, cb)
   }
 
   /**
@@ -1743,13 +1958,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
+   * DescribeScanState 该接口能查询对应模块正在进行的扫描任务状态
    */
-  async ExportNonlocalLoginPlaces(
-    req: ExportNonlocalLoginPlacesRequest,
-    cb?: (error: string, rep: ExportNonlocalLoginPlacesResponse) => void
-  ): Promise<ExportNonlocalLoginPlacesResponse> {
-    return this.request("ExportNonlocalLoginPlaces", req, cb)
+  async DescribeScanState(
+    req: DescribeScanStateRequest,
+    cb?: (error: string, rep: DescribeScanStateResponse) => void
+  ): Promise<DescribeScanStateResponse> {
+    return this.request("DescribeScanState", req, cb)
+  }
+
+  /**
+   * 获取服务器风险top列表
+   */
+  async DescribeVulHostTop(
+    req: DescribeVulHostTopRequest,
+    cb?: (error: string, rep: DescribeVulHostTopResponse) => void
+  ): Promise<DescribeVulHostTopResponse> {
+    return this.request("DescribeVulHostTop", req, cb)
   }
 
   /**
@@ -1913,6 +2138,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 专家服务-专家服务订单列表
+   */
+  async DescribeExpertServiceOrderList(
+    req: DescribeExpertServiceOrderListRequest,
+    cb?: (error: string, rep: DescribeExpertServiceOrderListResponse) => void
+  ): Promise<DescribeExpertServiceOrderListResponse> {
+    return this.request("DescribeExpertServiceOrderList", req, cb)
+  }
+
+  /**
      * 该接口已废弃
 
 本接口 (RescanImpactedHost) 用于漏洞重新检测。
@@ -1962,6 +2197,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityTrendsResponse) => void
   ): Promise<DescribeSecurityTrendsResponse> {
     return this.request("DescribeSecurityTrends", req, cb)
+  }
+
+  /**
+   * 根据基线策略id查询基线策略数据概览统计
+   */
+  async DescribeBaselineAnalysisData(
+    req: DescribeBaselineAnalysisDataRequest,
+    cb?: (error: string, rep: DescribeBaselineAnalysisDataResponse) => void
+  ): Promise<DescribeBaselineAnalysisDataResponse> {
+    return this.request("DescribeBaselineAnalysisData", req, cb)
   }
 
   /**

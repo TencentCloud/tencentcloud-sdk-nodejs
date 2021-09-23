@@ -2526,6 +2526,18 @@ export interface MetricSet {
    * 维度描述信息
    */
   Dimensions: Array<DimensionsDesc>
+
+  /**
+      * 指标中文名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricCName: string
+
+  /**
+      * 指标英文名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricEName: string
 }
 
 /**

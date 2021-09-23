@@ -1649,7 +1649,7 @@ export interface DescribeDosageCosDetailByDateResponse {
   /**
    * 用量数组
    */
-  DetailSets?: Array<CosDetailSets>
+  DetailSets: Array<CosDetailSets>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2636,7 +2636,7 @@ export interface DescribeDosageCosDetailByDateRequest {
   EndDate: string
 
   /**
-   * COS 存储桶名称，可通过Get Service 接口是用来获取请求者名下的所有存储空间列表（Bucket list）https://tcloud-dev.oa.com/document/product/555/30925?!preview&!document=1
+   * COS 存储桶名称，可通过Get Service 接口是用来获取请求者名下的所有存储空间列表（Bucket list）https://cloud.tencent.com/document/product/436/8291
    */
   BucketName: string
 }

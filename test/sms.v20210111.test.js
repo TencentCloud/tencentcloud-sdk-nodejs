@@ -158,6 +158,16 @@ it("sms.v20210111.PullSmsReplyStatusByPhoneNumber", async function () {
     }
 })
 
+it("sms.v20210111.DescribePhoneNumberInfo", async function () {
+    try {
+       const data = await client.DescribePhoneNumberInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sms.v20210111.DeleteSmsSign", async function () {
     try {
        const data = await client.DeleteSmsSign({})

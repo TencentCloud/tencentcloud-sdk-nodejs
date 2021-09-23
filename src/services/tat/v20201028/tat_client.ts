@@ -18,34 +18,51 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ScheduleSettings,
+  InvocationTaskBasicInfo,
   PreviewReplacedCommandContentResponse,
   CreateCommandResponse,
+  DisableInvokerRequest,
   AutomationAgentInfo,
   RunCommandRequest,
+  Invoker,
   DescribeInvocationTasksRequest,
   Invocation,
+  DescribeRegionsRequest,
   CommandDocument,
+  DescribeInvokerRecordsResponse,
   TaskResult,
+  ModifyInvokerRequest,
+  EnableInvokerResponse,
+  EnableInvokerRequest,
   ModifyCommandResponse,
   RegionInfo,
+  DescribeInvokersResponse,
   DeleteCommandResponse,
+  DisableInvokerResponse,
   DescribeCommandsResponse,
+  CreateInvokerRequest,
   DescribeAutomationAgentStatusRequest,
   InvokeCommandResponse,
   ModifyCommandRequest,
+  DescribeInvokersRequest,
   DescribeCommandsRequest,
+  DeleteInvokerResponse,
   DescribeInvocationsRequest,
-  PreviewReplacedCommandContentRequest,
   Filter,
   DescribeInvocationsResponse,
   DescribeInvocationTasksResponse,
   Command,
+  PreviewReplacedCommandContentRequest,
   InvocationTask,
+  InvokerRecord,
   DescribeAutomationAgentStatusResponse,
-  InvocationTaskBasicInfo,
+  CreateInvokerResponse,
+  ModifyInvokerResponse,
   DeleteCommandRequest,
+  DeleteInvokerRequest,
   InvokeCommandRequest,
-  DescribeRegionsRequest,
+  DescribeInvokerRecordsRequest,
   Tag,
   RunCommandResponse,
   DescribeRegionsResponse,
@@ -59,6 +76,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tat.tencentcloudapi.com", "2020-10-28", clientConfig)
+  }
+
+  /**
+   * 此接口用于启用执行器。
+   */
+  async EnableInvoker(
+    req: EnableInvokerRequest,
+    cb?: (error: string, rep: EnableInvokerResponse) => void
+  ): Promise<EnableInvokerResponse> {
+    return this.request("EnableInvoker", req, cb)
+  }
+
+  /**
+   * 此接口用于删除执行器。
+   */
+  async DeleteInvoker(
+    req: DeleteInvokerRequest,
+    cb?: (error: string, rep: DeleteInvokerResponse) => void
+  ): Promise<DeleteInvokerResponse> {
+    return this.request("DeleteInvoker", req, cb)
   }
 
   /**
@@ -92,6 +129,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口用于创建执行器。
+   */
+  async CreateInvoker(
+    req: CreateInvokerRequest,
+    cb?: (error: string, rep: CreateInvokerResponse) => void
+  ): Promise<CreateInvokerResponse> {
+    return this.request("CreateInvoker", req, cb)
+  }
+
+  /**
+   * 此接口用于查询执行器的执行记录。
+   */
+  async DescribeInvokerRecords(
+    req: DescribeInvokerRecordsRequest,
+    cb?: (error: string, rep: DescribeInvokerRecordsResponse) => void
+  ): Promise<DescribeInvokerRecordsResponse> {
+    return this.request("DescribeInvokerRecords", req, cb)
+  }
+
+  /**
      * 此接口用于查询 TAT 产品后台地域列表。
 RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；未返回，代表该地域的 TAT 后台服务尚不可用。
      */
@@ -103,13 +160,23 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
   }
 
   /**
-   * 此接口用于预览自定义参数替换后的命令内容。不会触发真实执行。
+   * 此接口用于停止执行器。
    */
-  async PreviewReplacedCommandContent(
-    req: PreviewReplacedCommandContentRequest,
-    cb?: (error: string, rep: PreviewReplacedCommandContentResponse) => void
-  ): Promise<PreviewReplacedCommandContentResponse> {
-    return this.request("PreviewReplacedCommandContent", req, cb)
+  async DisableInvoker(
+    req: DisableInvokerRequest,
+    cb?: (error: string, rep: DisableInvokerResponse) => void
+  ): Promise<DisableInvokerResponse> {
+    return this.request("DisableInvoker", req, cb)
+  }
+
+  /**
+   * 此接口用于修改执行器。
+   */
+  async ModifyInvoker(
+    req: ModifyInvokerRequest,
+    cb?: (error: string, rep: ModifyInvokerResponse) => void
+  ): Promise<ModifyInvokerResponse> {
+    return this.request("ModifyInvoker", req, cb)
   }
 
   /**
@@ -123,8 +190,9 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
   }
 
   /**
-   * 此接口用于删除命令。
-   */
+     * 此接口用于删除命令。
+如果命令与执行器关联，则无法被删除。
+     */
   async DeleteCommand(
     req: DeleteCommandRequest,
     cb?: (error: string, rep: DeleteCommandResponse) => void
@@ -153,6 +221,16 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
   }
 
   /**
+   * 此接口用于预览自定义参数替换后的命令内容。不会触发真实执行。
+   */
+  async PreviewReplacedCommandContent(
+    req: PreviewReplacedCommandContentRequest,
+    cb?: (error: string, rep: PreviewReplacedCommandContentResponse) => void
+  ): Promise<PreviewReplacedCommandContentResponse> {
+    return this.request("PreviewReplacedCommandContent", req, cb)
+  }
+
+  /**
      * 执行命令，调用成功返回执行活动ID（inv-xxxxxxxx），每个执行活动内部有一个或多个执行任务（invt-xxxxxxxx），每个执行任务代表命令在一台 CVM 或一台 Lighthouse 上的执行记录。
 
 * 如果指定实例未安装 agent，或 agent 不在线，返回失败
@@ -166,6 +244,16 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
     cb?: (error: string, rep: RunCommandResponse) => void
   ): Promise<RunCommandResponse> {
     return this.request("RunCommand", req, cb)
+  }
+
+  /**
+   * 此接口用于查询执行器信息。
+   */
+  async DescribeInvokers(
+    req: DescribeInvokersRequest,
+    cb?: (error: string, rep: DescribeInvokersResponse) => void
+  ): Promise<DescribeInvokersResponse> {
+    return this.request("DescribeInvokers", req, cb)
   }
 
   /**

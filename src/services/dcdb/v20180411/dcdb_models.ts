@@ -369,7 +369,7 @@ export interface CreateAccountRequest {
   Host: string
 
   /**
-   * 账号密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。
+   * 账号密码，密码需要 8-32 个字符，不能以 '/' 开头，并且必须包含小写字母、大写字母、数字和符号()~!@#$%^&*-+=_|{}[]:<>,.?/。
    */
   Password: string
 
@@ -2894,22 +2894,22 @@ export interface CreateAccountResponse {
   /**
    * 实例ID，透传入参。
    */
-  InstanceId?: string
+  InstanceId: string
 
   /**
    * 用户名，透传入参。
    */
-  UserName?: string
+  UserName: string
 
   /**
    * 允许访问的 host，透传入参。
    */
-  Host?: string
+  Host: string
 
   /**
    * 透传入参。
    */
-  ReadOnly?: number
+  ReadOnly: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

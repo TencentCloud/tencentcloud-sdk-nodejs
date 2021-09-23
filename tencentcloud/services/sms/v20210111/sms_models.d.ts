@@ -102,6 +102,33 @@ export interface ModifySmsSignRequest {
     Remark?: string;
 }
 /**
+ * SmsPackagesStatistics请求参数结构体
+ */
+export interface SmsPackagesStatisticsRequest {
+    /**
+      * 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage)  添加应用后生成的实际 SdkAppId，示例如1400006666。
+      */
+    SmsSdkAppId: string;
+    /**
+      * 最大上限(需要拉取的套餐包个数)。
+      */
+    Limit: number;
+    /**
+      * 偏移量。
+      */
+    Offset: number;
+    /**
+      * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
+注：拉取套餐包的创建时间不小于起始时间。
+      */
+    BeginTime: string;
+    /**
+      * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
+注：EndTime 必须大于 BeginTime，拉取套餐包的创建时间不大于结束时间。
+      */
+    EndTime: string;
+}
+/**
  * AddSmsSign请求参数结构体
  */
 export interface AddSmsSignRequest {
@@ -182,6 +209,16 @@ export interface DescribeSmsTemplateListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribePhoneNumberInfo请求参数结构体
+ */
+export interface DescribePhoneNumberInfoRequest {
+    /**
+      * 查询手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号。
+例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
+      */
+    PhoneNumberSet: Array<string>;
 }
 /**
  * PullSmsSendStatusByPhoneNumber请求参数结构体
@@ -559,31 +596,17 @@ export interface DescribeSmsSignListRequest {
     International: number;
 }
 /**
- * SmsPackagesStatistics请求参数结构体
+ * DescribePhoneNumberInfo返回参数结构体
  */
-export interface SmsPackagesStatisticsRequest {
+export interface DescribePhoneNumberInfoResponse {
     /**
-      * 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage)  添加应用后生成的实际 SdkAppId，示例如1400006666。
+      * 获取号码信息。
       */
-    SmsSdkAppId: string;
+    PhoneNumberInfoSet: Array<PhoneNumberInfo>;
     /**
-      * 最大上限(需要拉取的套餐包个数)。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Limit: number;
-    /**
-      * 偏移量。
-      */
-    Offset: number;
-    /**
-      * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
-注：拉取套餐包的创建时间不小于起始时间。
-      */
-    BeginTime: string;
-    /**
-      * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
-注：EndTime 必须大于 BeginTime，拉取套餐包的创建时间不大于结束时间。
-      */
-    EndTime: string;
+    RequestId?: string;
 }
 /**
  * 获取短信模板信息响应
@@ -733,6 +756,39 @@ export interface CallbackStatusStatistics {
       * 运营商频率限制统计。
       */
     FrequencyLimitCount: number;
+}
+/**
+ * 号码信息。
+ */
+export interface PhoneNumberInfo {
+    /**
+      * 号码信息查询错误码，查询成功返回 "Ok"。
+      */
+    Code: string;
+    /**
+      * 号码信息查询错误码描述。
+      */
+    Message: string;
+    /**
+      * 国家（或地区）码。
+      */
+    NationCode: string;
+    /**
+      * 用户号码，去除国家或地区码前缀的普通格式，示例如：13711112222。
+      */
+    SubscriberNumber: string;
+    /**
+      * 解析后的规范的 E.164 号码，与下发短信的号码解析结果一致。解析失败时会原样返回。
+      */
+    PhoneNumber: string;
+    /**
+      * 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF。
+      */
+    IsoCode: string;
+    /**
+      * 国家码或地区名，例如 China，可参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051#.E6.97.A5.E7.BB.93.E5.90.8E.E4.BB.98.E8.B4.B9.3Ca-id.3D.22post-payment.22.3E.3C.2Fa.3E)
+      */
+    IsoName: string;
 }
 /**
  * SendStatusStatistics请求参数结构体

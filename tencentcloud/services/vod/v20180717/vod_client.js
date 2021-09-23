@@ -426,8 +426,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PushUrlCache", req, cb);
     }
     /**
-     * * 删除媒体及其对应的视频处理文件（如转码视频、雪碧图、截图、微信发布视频等）；
-* 可单独删除指定 ID 的视频文件下的转码，或者微信发布文件；
+     * * 删除媒体及其对应的视频处理文件（原始文件、如转码视频、雪碧图、截图、微信发布视频等）；
+* 可单独删除指定 ID 的视频文件下的原文件、转码视频、微信发布视频等；
+* 注意：原文件删除后，无法发起转码、微信发布等任何视频处理操作。
      */
     async DeleteMedia(req, cb) {
         return this.request("DeleteMedia", req, cb);

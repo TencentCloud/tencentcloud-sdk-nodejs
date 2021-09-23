@@ -1789,27 +1789,27 @@ export interface ApplyUploadResponse {
     /**
       * 存储桶，用于上传接口 URL 的 bucket_name。
       */
-    StorageBucket?: string;
+    StorageBucket: string;
     /**
       * 存储园区，用于上传接口 Host 的 Region。
       */
-    StorageRegion?: string;
+    StorageRegion: string;
     /**
       * 点播会话，用于确认上传接口的参数 VodSessionKey。
       */
-    VodSessionKey?: string;
+    VodSessionKey: string;
     /**
       * 媒体存储路径，用于上传接口存储媒体的对象键（Key）。
       */
-    MediaStoragePath?: string;
+    MediaStoragePath: string;
     /**
       * 封面存储路径，用于上传接口存储封面的对象键（Key）。
       */
-    CoverStoragePath?: string;
+    CoverStoragePath: string;
     /**
       * 临时凭证，用于上传接口的权限验证。
       */
-    TempCertificate?: TempCertificate;
+    TempCertificate: TempCertificate;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -28,6 +28,18 @@ class Client extends abstract_client_1.AbstractClient {
         super("tat.tencentcloudapi.com", "2020-10-28", clientConfig);
     }
     /**
+     * 此接口用于启用执行器。
+     */
+    async EnableInvoker(req, cb) {
+        return this.request("EnableInvoker", req, cb);
+    }
+    /**
+     * 此接口用于删除执行器。
+     */
+    async DeleteInvoker(req, cb) {
+        return this.request("DeleteInvoker", req, cb);
+    }
+    /**
      * 此接口用于查询命令详情。
      */
     async DescribeCommands(req, cb) {
@@ -46,6 +58,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInvocationTasks", req, cb);
     }
     /**
+     * 此接口用于创建执行器。
+     */
+    async CreateInvoker(req, cb) {
+        return this.request("CreateInvoker", req, cb);
+    }
+    /**
+     * 此接口用于查询执行器的执行记录。
+     */
+    async DescribeInvokerRecords(req, cb) {
+        return this.request("DescribeInvokerRecords", req, cb);
+    }
+    /**
      * 此接口用于查询 TAT 产品后台地域列表。
 RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；未返回，代表该地域的 TAT 后台服务尚不可用。
      */
@@ -53,10 +77,16 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
         return this.request("DescribeRegions", req, cb);
     }
     /**
-     * 此接口用于预览自定义参数替换后的命令内容。不会触发真实执行。
+     * 此接口用于停止执行器。
      */
-    async PreviewReplacedCommandContent(req, cb) {
-        return this.request("PreviewReplacedCommandContent", req, cb);
+    async DisableInvoker(req, cb) {
+        return this.request("DisableInvoker", req, cb);
+    }
+    /**
+     * 此接口用于修改执行器。
+     */
+    async ModifyInvoker(req, cb) {
+        return this.request("ModifyInvoker", req, cb);
     }
     /**
      * 此接口用于创建命令。
@@ -66,6 +96,7 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
     }
     /**
      * 此接口用于删除命令。
+如果命令与执行器关联，则无法被删除。
      */
     async DeleteCommand(req, cb) {
         return this.request("DeleteCommand", req, cb);
@@ -83,6 +114,12 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
         return this.request("DescribeAutomationAgentStatus", req, cb);
     }
     /**
+     * 此接口用于预览自定义参数替换后的命令内容。不会触发真实执行。
+     */
+    async PreviewReplacedCommandContent(req, cb) {
+        return this.request("PreviewReplacedCommandContent", req, cb);
+    }
+    /**
      * 执行命令，调用成功返回执行活动ID（inv-xxxxxxxx），每个执行活动内部有一个或多个执行任务（invt-xxxxxxxx），每个执行任务代表命令在一台 CVM 或一台 Lighthouse 上的执行记录。
 
 * 如果指定实例未安装 agent，或 agent 不在线，返回失败
@@ -93,6 +130,12 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
      */
     async RunCommand(req, cb) {
         return this.request("RunCommand", req, cb);
+    }
+    /**
+     * 此接口用于查询执行器信息。
+     */
+    async DescribeInvokers(req, cb) {
+        return this.request("DescribeInvokers", req, cb);
     }
     /**
      * 在指定的实例上触发命令，调用成功返回执行活动ID（inv-xxxxxxxx），每个执行活动内部有一个或多个执行任务（invt-xxxxxxxx），每个执行任务代表命令在一台 CVM 或一台 Lighthouse 上的执行记录。

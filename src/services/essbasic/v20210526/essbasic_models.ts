@@ -532,7 +532,7 @@ export interface DescribeTemplatesRequest {
   Operator?: UserInfo
 
   /**
-   * 模版唯一标识,可以通过模版列表处获取
+   * 模版唯一标识
    */
   TemplateId?: string
 }

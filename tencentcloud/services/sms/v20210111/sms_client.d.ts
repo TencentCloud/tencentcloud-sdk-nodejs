@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { PullSmsReplyStatusRequest, DeleteSmsTemplateResponse, ModifySmsTemplateResponse, ModifySmsSignRequest, AddSmsSignRequest, DescribeSmsTemplateListResponse, PullSmsSendStatusByPhoneNumberRequest, AddSmsTemplateRequest, ModifySmsTemplateRequest, CallbackStatusStatisticsResponse, PullSmsSendStatusRequest, PullSmsSendStatusByPhoneNumberResponse, SendSmsResponse, SendStatusStatisticsResponse, SendSmsRequest, CallbackStatusStatisticsRequest, DescribeSmsSignListRequest, SmsPackagesStatisticsRequest, AddSmsTemplateResponse, DescribeSmsSignListResponse, DescribeSmsTemplateListRequest, SendStatusStatisticsRequest, DeleteSmsTemplateRequest, PullSmsReplyStatusByPhoneNumberResponse, DeleteSmsSignResponse, AddSmsSignResponse, DeleteSmsSignRequest, PullSmsReplyStatusByPhoneNumberRequest, ModifySmsSignResponse, PullSmsSendStatusResponse, SmsPackagesStatisticsResponse, PullSmsReplyStatusResponse } from "./sms_models";
+import { PullSmsReplyStatusRequest, DeleteSmsTemplateResponse, ModifySmsTemplateResponse, ModifySmsSignRequest, SmsPackagesStatisticsRequest, AddSmsSignRequest, DescribeSmsTemplateListResponse, DescribePhoneNumberInfoRequest, PullSmsSendStatusByPhoneNumberRequest, AddSmsTemplateRequest, ModifySmsTemplateRequest, CallbackStatusStatisticsResponse, PullSmsSendStatusRequest, PullSmsSendStatusByPhoneNumberResponse, SendSmsResponse, SendStatusStatisticsResponse, SendSmsRequest, CallbackStatusStatisticsRequest, DescribeSmsSignListRequest, DescribePhoneNumberInfoResponse, AddSmsTemplateResponse, DescribeSmsSignListResponse, DescribeSmsTemplateListRequest, SendStatusStatisticsRequest, DeleteSmsTemplateRequest, PullSmsReplyStatusByPhoneNumberResponse, DeleteSmsSignResponse, AddSmsSignResponse, DeleteSmsSignRequest, PullSmsReplyStatusByPhoneNumberRequest, ModifySmsSignResponse, PullSmsSendStatusResponse, SmsPackagesStatisticsResponse, PullSmsReplyStatusResponse } from "./sms_models";
 /**
  * sms client
  * @class
@@ -111,6 +111,10 @@ export declare class Client extends AbstractClient {
 
      */
     PullSmsReplyStatusByPhoneNumber(req: PullSmsReplyStatusByPhoneNumberRequest, cb?: (error: string, rep: PullSmsReplyStatusByPhoneNumberResponse) => void): Promise<PullSmsReplyStatusByPhoneNumberResponse>;
+    /**
+     * 提供 E.164 格式号码国家或地区码识别，以及解析后规范的E.164号码。
+     */
+    DescribePhoneNumberInfo(req: DescribePhoneNumberInfoRequest, cb?: (error: string, rep: DescribePhoneNumberInfoResponse) => void): Promise<DescribePhoneNumberInfoResponse>;
     /**
      * ⚠️注意：个人认证用户不支持使用 API 删除短信签名，请参阅了解 [实名认证基本介绍](https://cloud.tencent.com/document/product/378/3629)，请登录 [控制台](https://console.cloud.tencent.com/smsv2) 删除短信签名。
 >- 注：由于云 **API3.0 安全性**有所提升，所以**接口鉴权**较为复杂，建议使用 SDK 来使用云短信服务。

@@ -85,22 +85,22 @@ export interface ImageTranslateResponse {
   /**
    * 请求的SessionUuid返回
    */
-  SessionUuid?: string
+  SessionUuid: string
 
   /**
    * 源语言
    */
-  Source?: string
+  Source: string
 
   /**
    * 目标语言
    */
-  Target?: string
+  Target: string
 
   /**
    * 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本
    */
-  ImageRecord?: ImageRecord
+  ImageRecord: ImageRecord
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -266,17 +266,17 @@ export interface TextTranslateResponse {
   /**
    * 翻译后的文本
    */
-  TargetText?: string
+  TargetText: string
 
   /**
    * 源语言，详见入参Target
    */
-  Source?: string
+  Source: string
 
   /**
    * 目标语言，详见入参Target
    */
-  Target?: string
+  Target: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

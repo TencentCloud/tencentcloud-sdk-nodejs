@@ -884,6 +884,11 @@ export interface ScdnDomain {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Area: string;
+    /**
+      * waf规则等级，可取100|200|300
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WafLevel: number;
 }
 /**
  * 路径缓存不缓存配置
@@ -1592,7 +1597,7 @@ export interface DescribeBillingDataRequest {
     /**
       * 时间粒度，支持模式如下：
 min：1 分钟粒度，查询区间需要小于等于 24 小时
-5min：5 分钟粒度，查询区间需要小于等于 31 天
+5min：5 分钟粒度，查询区间需要小于等于 31 天(计费数据粒度)
 hour：1 小时粒度，查询区间需要小于等于 31 天内
 day：天粒度，查询区间需要大于 31 天
 

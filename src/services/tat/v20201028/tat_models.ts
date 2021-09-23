@@ -16,6 +16,57 @@
  */
 
 /**
+ * 周期执行器设置。
+ */
+export interface ScheduleSettings {
+  /**
+      * 执行策略：
+<br><li>ONCE：单次执行
+<br><li>RECURRENCE：周期执行
+      */
+  Policy: string
+
+  /**
+   * 触发 Crontab 表达式。Policy 为 RECURRENCE 时，需要指定此字段。Crontab 按北京时间解析。
+   */
+  Recurrence?: string
+
+  /**
+   * 执行器下次执行时间。Policy 为 ONCE 时，需要指定此字段。
+   */
+  InvokeTime?: string
+}
+
+/**
+ * 执行活动任务简介。
+ */
+export interface InvocationTaskBasicInfo {
+  /**
+   * 执行任务ID。
+   */
+  InvocationTaskId: string
+
+  /**
+      * 执行任务状态。取值范围：
+<li> PENDING：等待下发 
+<li> DELIVERING：下发中
+<li> DELIVER_DELAYED：延时下发 
+<li> DELIVER_FAILED：下发失败
+<li> RUNNING：命令运行中
+<li> SUCCESS：命令成功
+<li> FAILED：命令失败
+<li> TIMEOUT：命令超时
+<li> TASK_TIMEOUT：执行任务超时
+      */
+  TaskStatus: string
+
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+}
+
+/**
  * PreviewReplacedCommandContent返回参数结构体
  */
 export interface PreviewReplacedCommandContentResponse {
@@ -43,6 +94,16 @@ export interface CreateCommandResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisableInvoker请求参数结构体
+ */
+export interface DisableInvokerRequest {
+  /**
+   * 待停止的执行器ID。
+   */
+  InvokerId: string
 }
 
 /**
@@ -161,6 +222,67 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在Linux实例中以root用户执行命令。
       */
   Username?: string
+}
+
+/**
+ * 执行器信息。
+ */
+export interface Invoker {
+  /**
+   * 执行器ID。
+   */
+  InvokerId: string
+
+  /**
+   * 执行器名称。
+   */
+  Name: string
+
+  /**
+   * 执行器类型。
+   */
+  Type: string
+
+  /**
+   * 命令ID。
+   */
+  CommandId: string
+
+  /**
+   * 用户名。
+   */
+  Username: string
+
+  /**
+   * 自定义参数。
+   */
+  Parameters: string
+
+  /**
+   * 实例ID列表。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 执行器是否启用。
+   */
+  Enable: boolean
+
+  /**
+      * 执行器周期计划。周期执行器会返回此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScheduleSettings: ScheduleSettings
+
+  /**
+   * 创建时间。
+   */
+  CreatedTime: string
+
+  /**
+   * 修改时间。
+   */
+  UpdatedTime: string
 }
 
 /**
@@ -295,6 +417,11 @@ export interface Invocation {
 }
 
 /**
+ * DescribeRegions请求参数结构体
+ */
+export type DescribeRegionsRequest = null
+
+/**
  * 命令执行详情。
  */
 export interface CommandDocument {
@@ -322,6 +449,26 @@ export interface CommandDocument {
    * 执行用户。
    */
   Username: string
+}
+
+/**
+ * DescribeInvokerRecords返回参数结构体
+ */
+export interface DescribeInvokerRecordsResponse {
+  /**
+   * 符合条件的历史记录数量。
+   */
+  TotalCount: number
+
+  /**
+   * 执行器执行历史记录。
+   */
+  InvokerRecordSet: Array<InvokerRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -355,6 +502,71 @@ export interface TaskResult {
 }
 
 /**
+ * ModifyInvoker请求参数结构体
+ */
+export interface ModifyInvokerRequest {
+  /**
+   * 待修改的执行器ID。
+   */
+  InvokerId: string
+
+  /**
+   * 待修改的执行器名称。
+   */
+  Name?: string
+
+  /**
+   * 执行器类型，当前仅支持周期类型执行器，取值：`SCHEDULE` 。
+   */
+  Type?: string
+
+  /**
+   * 待修改的命令ID。
+   */
+  CommandId?: string
+
+  /**
+   * 待修改的用户名。
+   */
+  Username?: string
+
+  /**
+   * 待修改的自定义参数。
+   */
+  Parameters?: string
+
+  /**
+   * 待修改的实例ID列表。列表长度上限100。
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 待修改的周期执行器设置。
+   */
+  ScheduleSettings?: ScheduleSettings
+}
+
+/**
+ * EnableInvoker返回参数结构体
+ */
+export interface EnableInvokerResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * EnableInvoker请求参数结构体
+ */
+export interface EnableInvokerRequest {
+  /**
+   * 待启用的执行器ID。
+   */
+  InvokerId: string
+}
+
+/**
  * ModifyCommand返回参数结构体
  */
 export interface ModifyCommandResponse {
@@ -385,9 +597,39 @@ export interface RegionInfo {
 }
 
 /**
+ * DescribeInvokers返回参数结构体
+ */
+export interface DescribeInvokersResponse {
+  /**
+   * 满足条件的执行器数量。
+   */
+  TotalCount: number
+
+  /**
+   * 执行器信息。
+   */
+  InvokerSet: Array<Invoker>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCommand返回参数结构体
  */
 export interface DeleteCommandResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisableInvoker返回参数结构体
+ */
+export interface DisableInvokerResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -412,6 +654,46 @@ export interface DescribeCommandsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateInvoker请求参数结构体
+ */
+export interface CreateInvokerRequest {
+  /**
+   * 执行器名称。
+   */
+  Name: string
+
+  /**
+   * 执行器类型，当前仅支持周期类型执行器，取值：`SCHEDULE` 。
+   */
+  Type: string
+
+  /**
+   * 远程命令ID。
+   */
+  CommandId: string
+
+  /**
+   * 触发器关联的实例ID。列表上限 100。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 命令执行用户。
+   */
+  Username?: string
+
+  /**
+   * 命令自定义参数。
+   */
+  Parameters?: string
+
+  /**
+   * 周期执行器设置，当创建周期执行器时，必须指定此参数。
+   */
+  ScheduleSettings?: ScheduleSettings
 }
 
 /**
@@ -511,6 +793,35 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 }
 
 /**
+ * DescribeInvokers请求参数结构体
+ */
+export interface DescribeInvokersRequest {
+  /**
+   * 执行器ID列表。
+   */
+  InvokerIds?: Array<string>
+
+  /**
+      * 过滤条件：
+
+<li> invoker-id - String - 是否必填：否 - （过滤条件）按执行器ID过滤。
+<li> command-id - String - 是否必填：否 - （过滤条件）按命令ID过滤。
+<li> type - String - 是否必填：否 - （过滤条件）按执行器类型过滤。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+}
+
+/**
  * DescribeCommands请求参数结构体
  */
 export interface DescribeCommandsRequest {
@@ -544,6 +855,16 @@ export interface DescribeCommandsRequest {
 }
 
 /**
+ * DeleteInvoker返回参数结构体
+ */
+export interface DeleteInvokerResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInvocations请求参数结构体
  */
 export interface DescribeInvocationsRequest {
@@ -570,32 +891,6 @@ export interface DescribeInvocationsRequest {
    * 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Offset?: number
-}
-
-/**
- * PreviewReplacedCommandContent请求参数结构体
- */
-export interface PreviewReplacedCommandContentRequest {
-  /**
-      * 本次预览采用的自定义参数。字段类型为 json encoded string，如：{\"varA\": \"222\"}。
-key 为自定义参数名称，value 为该参数的取值。kv 均为字符串型。
-自定义参数最多 20 个。
-自定义参数名称需符合以下规范：字符数目上限 64，可选范围【a-zA-Z0-9-_】。
-如果将预览的 CommandId 设置过 DefaultParameters，本参数可以为空。
-      */
-  Parameters?: string
-
-  /**
-      * 要进行替换预览的命令，如果有设置过 DefaultParameters，会与 Parameters 进行叠加，后者覆盖前者。
-CommandId 与 Content，必须且只能提供一个。
-      */
-  CommandId?: string
-
-  /**
-      * 要预览的命令内容，经 Base64 编码，长度不可超过 64KB。
-CommandId 与 Content，必须且只能提供一个。
-      */
-  Content?: string
 }
 
 /**
@@ -745,6 +1040,32 @@ export interface Command {
 }
 
 /**
+ * PreviewReplacedCommandContent请求参数结构体
+ */
+export interface PreviewReplacedCommandContentRequest {
+  /**
+      * 本次预览采用的自定义参数。字段类型为 json encoded string，如：{\"varA\": \"222\"}。
+key 为自定义参数名称，value 为该参数的取值。kv 均为字符串型。
+自定义参数最多 20 个。
+自定义参数名称需符合以下规范：字符数目上限 64，可选范围【a-zA-Z0-9-_】。
+如果将预览的 CommandId 设置过 DefaultParameters，本参数可以为空。
+      */
+  Parameters?: string
+
+  /**
+      * 要进行替换预览的命令，如果有设置过 DefaultParameters，会与 Parameters 进行叠加，后者覆盖前者。
+CommandId 与 Content，必须且只能提供一个。
+      */
+  CommandId?: string
+
+  /**
+      * 要预览的命令内容，经 Base64 编码，长度不可超过 64KB。
+CommandId 与 Content，必须且只能提供一个。
+      */
+  Content?: string
+}
+
+/**
  * 执行任务。
  */
 export interface InvocationTask {
@@ -825,6 +1146,36 @@ export interface InvocationTask {
 }
 
 /**
+ * 执行器执行记录。
+ */
+export interface InvokerRecord {
+  /**
+   * 执行器ID。
+   */
+  InvokerId: string
+
+  /**
+   * 执行时间。
+   */
+  InvokeTime: string
+
+  /**
+   * 执行原因。
+   */
+  Reason: string
+
+  /**
+   * 命令执行ID。
+   */
+  InvocationId: string
+
+  /**
+   * 触发结果。
+   */
+  Result: string
+}
+
+/**
  * DescribeAutomationAgentStatus返回参数结构体
  */
 export interface DescribeAutomationAgentStatusResponse {
@@ -845,32 +1196,28 @@ export interface DescribeAutomationAgentStatusResponse {
 }
 
 /**
- * 执行活动任务简介。
+ * CreateInvoker返回参数结构体
  */
-export interface InvocationTaskBasicInfo {
+export interface CreateInvokerResponse {
   /**
-   * 执行任务ID。
+   * 执行器ID。
    */
-  InvocationTaskId: string
+  InvokerId: string
 
   /**
-      * 执行任务状态。取值范围：
-<li> PENDING：等待下发 
-<li> DELIVERING：下发中
-<li> DELIVER_DELAYED：延时下发 
-<li> DELIVER_FAILED：下发失败
-<li> RUNNING：命令运行中
-<li> SUCCESS：命令成功
-<li> FAILED：命令失败
-<li> TIMEOUT：命令超时
-<li> TASK_TIMEOUT：执行任务超时
-      */
-  TaskStatus: string
-
-  /**
-   * 实例ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
+}
+
+/**
+ * ModifyInvoker返回参数结构体
+ */
+export interface ModifyInvokerResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -881,6 +1228,16 @@ export interface DeleteCommandRequest {
    * 待删除的命令ID。
    */
   CommandId: string
+}
+
+/**
+ * DeleteInvoker请求参数结构体
+ */
+export interface DeleteInvokerRequest {
+  /**
+   * 待删除的执行器ID。
+   */
+  InvokerId: string
 }
 
 /**
@@ -924,9 +1281,24 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 }
 
 /**
- * DescribeRegions请求参数结构体
+ * DescribeInvokerRecords请求参数结构体
  */
-export type DescribeRegionsRequest = null
+export interface DescribeInvokerRecordsRequest {
+  /**
+   * 执行器ID列表。列表上限 100。
+   */
+  InvokerIds?: Array<string>
+
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+}
 
 /**
  * 标签

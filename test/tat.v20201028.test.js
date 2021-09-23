@@ -18,6 +18,26 @@ const client = new tencentcloud.tat.v20201028.Client({
 })
 describe("tat.v20201028.test.js", function () {
 
+it("tat.v20201028.EnableInvoker", async function () {
+    try {
+       const data = await client.EnableInvoker({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tat.v20201028.DeleteInvoker", async function () {
+    try {
+       const data = await client.DeleteInvoker({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tat.v20201028.DescribeCommands", async function () {
     try {
        const data = await client.DescribeCommands({})
@@ -48,6 +68,26 @@ it("tat.v20201028.DescribeInvocationTasks", async function () {
     }
 })
 
+it("tat.v20201028.CreateInvoker", async function () {
+    try {
+       const data = await client.CreateInvoker({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tat.v20201028.DescribeInvokerRecords", async function () {
+    try {
+       const data = await client.DescribeInvokerRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tat.v20201028.DescribeRegions", async function () {
     try {
        const data = await client.DescribeRegions({})
@@ -58,9 +98,19 @@ it("tat.v20201028.DescribeRegions", async function () {
     }
 })
 
-it("tat.v20201028.PreviewReplacedCommandContent", async function () {
+it("tat.v20201028.DisableInvoker", async function () {
     try {
-       const data = await client.PreviewReplacedCommandContent({})
+       const data = await client.DisableInvoker({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tat.v20201028.ModifyInvoker", async function () {
+    try {
+       const data = await client.ModifyInvoker({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +158,29 @@ it("tat.v20201028.DescribeAutomationAgentStatus", async function () {
     }
 })
 
+it("tat.v20201028.PreviewReplacedCommandContent", async function () {
+    try {
+       const data = await client.PreviewReplacedCommandContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tat.v20201028.RunCommand", async function () {
     try {
        const data = await client.RunCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tat.v20201028.DescribeInvokers", async function () {
+    try {
+       const data = await client.DescribeInvokers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

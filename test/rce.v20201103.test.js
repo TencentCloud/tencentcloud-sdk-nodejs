@@ -18,6 +18,16 @@ const client = new tencentcloud.rce.v20201103.Client({
 })
 describe("rce.v20201103.test.js", function () {
 
+it("rce.v20201103.DescribeRiskModel", async function () {
+    try {
+       const data = await client.DescribeRiskModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rce.v20201103.ManageMarketingRisk", async function () {
     try {
        const data = await client.ManageMarketingRisk({})

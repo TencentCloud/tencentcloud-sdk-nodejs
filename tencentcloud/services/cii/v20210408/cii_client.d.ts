@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeStructCompareDataResponse, DescribeStructureTaskResultRequest, DescribeStructureTaskResultTestResponse, CreateStructureTaskResponse, CreateStructureTaskRequest, DescribeStructureResultResponse, DescribeStructCompareDataRequest, CreateStructureTaskTestResponse, CreateStructureTaskTestRequest, DescribeStructureTaskResultResponse, DescribeStructureResultRequest, DescribeStructureTaskResultTestRequest } from "./cii_models";
+import { DescribeStructCompareDataResponse, DescribeStructureTaskResultRequest, DescribeStructureTaskResultTestResponse, CreateStructureTaskTestResponse, CreateStructureTaskRequest, DescribeStructureResultResponse, DescribeStructCompareDataRequest, CreateStructureTaskResponse, CreateStructureTaskTestRequest, DescribeStructureTaskResultResponse, DescribeStructureResultRequest, DescribeStructureTaskResultTestRequest } from "./cii_models";
 /**
  * cii client
  * @class

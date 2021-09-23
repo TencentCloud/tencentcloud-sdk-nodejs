@@ -62,6 +62,35 @@ export interface DescribeStructCompareDataResponse {
     RequestId?: string;
 }
 /**
+ * 报告分类信息
+ */
+export interface ClassifyInfo {
+    /**
+      * 一级分类
+      */
+    FirstClass: string;
+    /**
+      * 二级分类
+      */
+    SecondClass: string;
+    /**
+      * 三级分类
+      */
+    ThirdClass: string;
+    /**
+      * 一级分类序号
+      */
+    FirstClassId: number;
+    /**
+      * 二级分类序号
+      */
+    SecondClassId: number;
+    /**
+      * 三级分类序号
+      */
+    ThirdClassId: number;
+}
+/**
  * DescribeStructureTaskResult请求参数结构体
  */
 export interface DescribeStructureTaskResultRequest {
@@ -92,9 +121,9 @@ export interface DescribeStructureTaskResultTestResponse {
     RequestId?: string;
 }
 /**
- * CreateStructureTask返回参数结构体
+ * CreateStructureTaskTest返回参数结构体
  */
-export interface CreateStructureTaskResponse {
+export interface CreateStructureTaskTestResponse {
     /**
       * 创建的主任务号，用于查询结果
       */
@@ -208,6 +237,11 @@ export interface ResultObject {
       * 由结构化算法结构化json转换的字符串，具体协议参见算法结构化结果协议
       */
     StructureResult: string;
+    /**
+      * 报告分类信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReportType: Array<ClassifyInfo>;
 }
 /**
  * DescribeStructureResult返回参数结构体
@@ -243,9 +277,9 @@ export interface DescribeStructCompareDataRequest {
     SubTaskId?: string;
 }
 /**
- * CreateStructureTaskTest返回参数结构体
+ * CreateStructureTask返回参数结构体
  */
-export interface CreateStructureTaskTestResponse {
+export interface CreateStructureTaskResponse {
     /**
       * 创建的主任务号，用于查询结果
       */

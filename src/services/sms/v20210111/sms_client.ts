@@ -22,9 +22,11 @@ import {
   DeleteSmsTemplateResponse,
   ModifySmsTemplateResponse,
   ModifySmsSignRequest,
+  SmsPackagesStatisticsRequest,
   AddSmsSignRequest,
   AddTemplateStatus,
   DescribeSmsTemplateListResponse,
+  DescribePhoneNumberInfoRequest,
   PullSmsSendStatusByPhoneNumberRequest,
   AddSmsTemplateRequest,
   ModifySmsTemplateRequest,
@@ -42,13 +44,14 @@ import {
   CallbackStatusStatisticsRequest,
   DeleteTemplateStatus,
   DescribeSmsSignListRequest,
-  SmsPackagesStatisticsRequest,
+  DescribePhoneNumberInfoResponse,
   DescribeTemplateListStatus,
   AddSmsTemplateResponse,
   PullSmsSendStatus,
   DescribeSmsSignListResponse,
   DescribeSmsTemplateListRequest,
   CallbackStatusStatistics,
+  PhoneNumberInfo,
   SendStatusStatisticsRequest,
   DeleteSmsTemplateRequest,
   PullSmsReplyStatusByPhoneNumberResponse,
@@ -261,6 +264,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PullSmsReplyStatusByPhoneNumberResponse) => void
   ): Promise<PullSmsReplyStatusByPhoneNumberResponse> {
     return this.request("PullSmsReplyStatusByPhoneNumber", req, cb)
+  }
+
+  /**
+   * 提供 E.164 格式号码国家或地区码识别，以及解析后规范的E.164号码。
+   */
+  async DescribePhoneNumberInfo(
+    req: DescribePhoneNumberInfoRequest,
+    cb?: (error: string, rep: DescribePhoneNumberInfoResponse) => void
+  ): Promise<DescribePhoneNumberInfoResponse> {
+    return this.request("DescribePhoneNumberInfo", req, cb)
   }
 
   /**

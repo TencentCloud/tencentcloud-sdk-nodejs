@@ -243,6 +243,11 @@ export interface AuthorizationUserResouceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ApplicationAccounts: Array<string>;
+    /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceName: string;
 }
 /**
  * 排序条件。
@@ -820,6 +825,11 @@ export interface AuthorizationResouceEntityInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Resource: string;
+    /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceName: string;
 }
 /**
  * DeleteUserGroup返回参数结构体
@@ -1292,6 +1302,11 @@ export interface DescribeOrgResourcesAuthorizationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AuthorizationOrgResourceList: Array<AuthorizationResouceEntityInfo>;
+    /**
+      * 资源数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
