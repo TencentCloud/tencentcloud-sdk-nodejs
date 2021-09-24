@@ -376,6 +376,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterRoute", req, cb);
     }
     /**
+     * 获取导入第三方集群YAML定义
+     */
+    async DescribeExternalClusterSpec(req, cb) {
+        return this.request("DescribeExternalClusterSpec", req, cb);
+    }
+    /**
      * 创建容器实例
      */
     async CreateEKSContainerInstances(req, cb) {

@@ -103,6 +103,11 @@ export interface CreateJobRequest {
    * 作业名所属文件夹ID，根目录为"root"
    */
   FolderId?: string
+
+  /**
+   * 作业运行的Flink版本
+   */
+  FlinkVersion?: string
 }
 
 /**
@@ -755,6 +760,11 @@ export interface DescribeSystemResourcesRequest {
    * 集群ID
    */
   ClusterId?: string
+
+  /**
+   * 查询对应Flink版本的内置connector
+   */
+  FlinkVersion?: string
 }
 
 /**

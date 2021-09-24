@@ -323,6 +323,11 @@ export interface DescribeStructureResultResponse {
   Results: Array<StructureResultObject>
 
   /**
+   * 主任务ID
+   */
+  MainTaskId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -442,6 +447,11 @@ export interface StructureResultObject {
    * 结构化结果
    */
   StructureResult: string
+
+  /**
+   * 子任务ID
+   */
+  SubTaskId: string
 }
 
 /**

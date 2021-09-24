@@ -42,6 +42,7 @@ import {
   DetectLabelBetaRequest,
   DetectLabelItem,
   Location,
+  CarPlateContent,
   DetectLabelBetaResponse,
   Labels,
   Product,

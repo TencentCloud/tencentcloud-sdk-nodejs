@@ -715,6 +715,26 @@ export interface RestartEKSContainerInstancesRequest {
 }
 
 /**
+ * DescribeExternalClusterSpec请求参数结构体
+ */
+export interface DescribeExternalClusterSpecRequest {
+  /**
+   * 注册集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 默认false 获取内网，是否获取外网版注册命令
+   */
+  IsExtranet?: boolean
+
+  /**
+   * 默认false 不刷新有效时间 ，true刷新有效时间
+   */
+  IsRefreshExpirationTime?: boolean
+}
+
+/**
  * DeletePrometheusTemplate请求参数结构体
  */
 export interface DeletePrometheusTemplateRequest {
@@ -1838,9 +1858,42 @@ export interface DescribeClustersRequest {
   Limit?: number
 
   /**
-   * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
-   */
+      * ·  ClusterName
+    按照【集群名】进行过滤。
+    类型：String
+    必选：否
+
+·  Tags
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+
+·  vpc-id
+    按照【VPC】进行过滤。
+    类型：String
+    必选：否
+
+·  tag-key
+    按照【标签键】进行过滤。
+    类型：String
+    必选：否
+
+·  tag-value
+    按照【标签值】进行过滤。
+    类型：String
+    必选：否
+
+·  tag:tag-key
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+      */
   Filters?: Array<Filter>
+
+  /**
+   * 集群类型，例如：MANAGED_CLUSTER
+   */
+  ClusterType?: string
 }
 
 /**
@@ -2982,6 +3035,26 @@ export interface ModifyPrometheusTemplateRequest {
 }
 
 /**
+ * DescribeExternalClusterSpec返回参数结构体
+ */
+export interface DescribeExternalClusterSpecResponse {
+  /**
+   * 导入第三方集群YAML定义
+   */
+  Spec: string
+
+  /**
+   * agent.yaml文件过期时间字符串，时区UTC
+   */
+  Expiration: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddNodeToNodePool返回参数结构体
  */
 export interface AddNodeToNodePoolResponse {
@@ -3231,12 +3304,12 @@ export interface DescribeClustersResponse {
   /**
    * 集群总个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 集群信息列表
    */
-  Clusters?: Array<Cluster>
+  Clusters: Array<Cluster>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

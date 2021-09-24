@@ -107,7 +107,7 @@ export interface DescribeDeliverBandwidthListResponse {
     /**
       * 转推计费带宽数据
       */
-    DataInfoList?: Array<BandwidthInfo>;
+    DataInfoList: Array<BandwidthInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -166,27 +166,27 @@ export interface DescribeBillBandwidthAndFluxListResponse {
     /**
       * 峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
       */
-    PeakBandwidthTime?: string;
+    PeakBandwidthTime: string;
     /**
       * 峰值带宽，单位是Mbps。
       */
-    PeakBandwidth?: number;
+    PeakBandwidth: number;
     /**
       * 95峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
       */
-    P95PeakBandwidthTime?: string;
+    P95PeakBandwidthTime: string;
     /**
       * 95峰值带宽，单位是Mbps。
       */
-    P95PeakBandwidth?: number;
+    P95PeakBandwidth: number;
     /**
       * 总流量，单位是MB。
       */
-    SumFlux?: number;
+    SumFlux: number;
     /**
       * 明细数据信息。
       */
-    DataInfoList?: Array<BillDataInfo>;
+    DataInfoList: Array<BillDataInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -492,7 +492,7 @@ export interface DescribeGroupProIspPlayInfoListResponse {
     /**
       * 数据内容。
       */
-    DataInfoList?: Array<GroupProIspDataInfo>;
+    DataInfoList: Array<GroupProIspDataInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -530,7 +530,7 @@ export interface DescribeUploadStreamNumsResponse {
     /**
       * 明细数据信息
       */
-    DataInfoList?: Array<ConcurrentRecordStreamNum>;
+    DataInfoList: Array<ConcurrentRecordStreamNum>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -839,7 +839,7 @@ export interface DescribeStreamPlayInfoListResponse {
     /**
       * 统计信息列表，时间粒度是1分钟。
       */
-    DataInfoList?: Array<DayStreamPlayInfo>;
+    DataInfoList: Array<DayStreamPlayInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -852,7 +852,7 @@ export interface DescribeScreenShotSheetNumListResponse {
     /**
       * 数据信息列表。
       */
-    DataInfoList?: Array<TimeValue>;
+    DataInfoList: Array<TimeValue>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1882,47 +1882,47 @@ export interface DescribePlayErrorCodeSumInfoListResponse {
     /**
       * 分省份分运营商错误码为2或3或4或5开头的状态码数据信息。
       */
-    ProIspInfoList?: Array<ProIspPlayCodeDataInfo>;
+    ProIspInfoList: Array<ProIspPlayCodeDataInfo>;
     /**
       * 所有状态码的加和的次数。
       */
-    TotalCodeAll?: number;
+    TotalCodeAll: number;
     /**
       * 状态码为4开头的总次数。
       */
-    TotalCode4xx?: number;
+    TotalCode4xx: number;
     /**
       * 状态码为5开头的总次数。
       */
-    TotalCode5xx?: number;
+    TotalCode5xx: number;
     /**
       * 各状态码的总次数。
       */
-    TotalCodeList?: Array<PlayCodeTotalInfo>;
+    TotalCodeList: Array<PlayCodeTotalInfo>;
     /**
       * 页号。
       */
-    PageNum?: number;
+    PageNum: number;
     /**
       * 每页大小。
       */
-    PageSize?: number;
+    PageSize: number;
     /**
       * 总页数。
       */
-    TotalPage?: number;
+    TotalPage: number;
     /**
       * 总记录数。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 状态码为2开头的总次数。
       */
-    TotalCode2xx?: number;
+    TotalCode2xx: number;
     /**
       * 状态码为3开头的总次数。
       */
-    TotalCode3xx?: number;
+    TotalCode3xx: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1975,7 +1975,7 @@ export interface DescribeScreenShotSheetNumListRequest {
       */
     PushDomains?: Array<string>;
     /**
-      * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，最大支持查询时间范围是186天当天）。
+      * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，按照北京时间做跨天处理，最大支持查询时间范围是186天当天）。
       */
     Granularity?: string;
 }
@@ -2447,7 +2447,7 @@ export interface DescribeConcurrentRecordStreamNumResponse {
     /**
       * 统计信息列表。
       */
-    DataInfoList?: Array<ConcurrentRecordStreamNum>;
+    DataInfoList: Array<ConcurrentRecordStreamNum>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2529,11 +2529,11 @@ export interface DescribeProvinceIspPlayInfoListResponse {
     /**
       * 播放信息列表。
       */
-    DataInfoList?: Array<PlayStatInfo>;
+    DataInfoList: Array<PlayStatInfo>;
     /**
       * 统计的类型，和输入参数保持一致。
       */
-    StatType?: string;
+    StatType: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2569,22 +2569,23 @@ export interface DescribeCallbackRecordsListRequest {
       */
     StreamName: string;
     /**
-      * 页码
+      * 页码。
       */
     PageNum: number;
     /**
-      * 每页条数
+      * 每页条数。
       */
     PageSize: number;
     /**
       * 事件类型。
 0: "断流",
 1: "推流",
-100: "录制"
+100: "录制"。
       */
     EventType?: number;
     /**
-      * 回调结果。0为成功，其他为失败
+      * 回调结果。
+0为成功，其他为失败。
       */
     ResultCode?: number;
 }
@@ -2701,27 +2702,27 @@ export interface DescribeTopClientIpSumInfoListResponse {
     /**
       * 页号，范围是[1,1000]，默认值是1。
       */
-    PageNum?: number;
+    PageNum: number;
     /**
       * 每页个数，范围是[1,1000]，默认值是20。
       */
-    PageSize?: number;
+    PageSize: number;
     /**
       * 排序指标，可选值包括”TotalRequest”，”FailedRequest”,“TotalFlux”。
       */
-    OrderParam?: string;
+    OrderParam: string;
     /**
       * 记录总数。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 记录总页数。
       */
-    TotalPage?: number;
+    TotalPage: number;
     /**
       * 数据内容。
       */
-    DataInfoList?: Array<ClientIpPlaySumInfo>;
+    DataInfoList: Array<ClientIpPlaySumInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3755,7 +3756,7 @@ export interface DescribeStreamPushInfoListRequest {
       */
     StartTime: string;
     /**
-      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，最大时间跨度支持6小时，支持最近6天数据查询。
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，支持查询最近7天数据，建议查询时间跨度在3小时之内。
       */
     EndTime: string;
     /**
@@ -3966,7 +3967,7 @@ export interface DescribeStreamPushInfoListResponse {
     /**
       * 返回的数据列表。
       */
-    DataInfoList?: Array<PushQualityData>;
+    DataInfoList: Array<PushQualityData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4182,25 +4183,25 @@ export interface DeleteLiveWatermarkRuleResponse {
  */
 export interface DescribeCallbackRecordsListResponse {
     /**
-      * 回调事件列表
+      * 回调事件列表。
       */
-    DataInfoList?: Array<CallbackEventInfo>;
+    DataInfoList: Array<CallbackEventInfo>;
     /**
-      * 页码
+      * 页码。
       */
-    PageNum?: number;
+    PageNum: number;
     /**
-      * 每页条数
+      * 每页条数。
       */
-    PageSize?: number;
+    PageSize: number;
     /**
-      * 总条数
+      * 总条数。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
-      * 总页数
+      * 总页数。
       */
-    TotalPage?: number;
+    TotalPage: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4869,7 +4870,7 @@ export interface DescribeAreaBillBandwidthAndFluxListResponse {
     /**
       * 明细数据信息。
       */
-    DataInfoList?: Array<BillAreaInfo>;
+    DataInfoList: Array<BillAreaInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4895,11 +4896,11 @@ export interface DescribePlayErrorCodeDetailInfoListResponse {
     /**
       * 统计信息列表。
       */
-    HttpCodeList?: Array<HttpCodeInfo>;
+    HttpCodeList: Array<HttpCodeInfo>;
     /**
       * 统计类型。
       */
-    StatType?: string;
+    StatType: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5786,27 +5787,27 @@ export interface DescribeLiveDomainPlayInfoListResponse {
     /**
       * 数据时间，格式为yyyy-mm-dd HH:MM:SS。
       */
-    Time?: string;
+    Time: string;
     /**
       * 实时总带宽。
       */
-    TotalBandwidth?: number;
+    TotalBandwidth: number;
     /**
       * 实时总流量。
       */
-    TotalFlux?: number;
+    TotalFlux: number;
     /**
       * 总请求数。
       */
-    TotalRequest?: number;
+    TotalRequest: number;
     /**
       * 实时总连接数。
       */
-    TotalOnline?: number;
+    TotalOnline: number;
     /**
       * 分域名的数据情况。
       */
-    DomainInfoList?: Array<DomainInfoList>;
+    DomainInfoList: Array<DomainInfoList>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6316,23 +6317,23 @@ export interface DescribeStreamDayPlayInfoListResponse {
     /**
       * 播放数据信息列表。
       */
-    DataInfoList?: Array<PlayDataInfoByStream>;
+    DataInfoList: Array<PlayDataInfoByStream>;
     /**
       * 总数量。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 总页数。
       */
-    TotalPage?: number;
+    TotalPage: number;
     /**
       * 当前数据所处页码。
       */
-    PageNum?: number;
+    PageNum: number;
     /**
       * 每页个数。
       */
-    PageSize?: number;
+    PageSize: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6347,32 +6348,32 @@ export interface DescribeVisitTopSumInfoListResponse {
 范围是[1,1000]，
 默认值是1。
       */
-    PageNum?: number;
+    PageNum: number;
     /**
       * 每页个数，范围是[1,1000]，
 默认值是20。
       */
-    PageSize?: number;
+    PageSize: number;
     /**
       * 峰值指标，可选值包括”Domain”，”StreamId”。
       */
-    TopIndex?: string;
+    TopIndex: string;
     /**
       * 排序指标，可选值包括” AvgFluxPerSecond”(按每秒平均流量排序)，”TotalRequest”（默认，按总请求数排序）,“TotalFlux”（按总流量排序）。
       */
-    OrderParam?: string;
+    OrderParam: string;
     /**
       * 记录总数。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 记录总页数。
       */
-    TotalPage?: number;
+    TotalPage: number;
     /**
       * 数据内容。
       */
-    DataInfoList?: Array<PlaySumStatInfo>;
+    DataInfoList: Array<PlaySumStatInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6654,39 +6655,39 @@ export interface DescribeProIspPlaySumInfoListResponse {
     /**
       * 总流量。
       */
-    TotalFlux?: number;
+    TotalFlux: number;
     /**
       * 总请求数。
       */
-    TotalRequest?: number;
+    TotalRequest: number;
     /**
       * 统计的类型。
       */
-    StatType?: string;
+    StatType: string;
     /**
       * 每页的记录数。
       */
-    PageSize?: number;
+    PageSize: number;
     /**
       * 页号。
       */
-    PageNum?: number;
+    PageNum: number;
     /**
       * 总记录数。
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 总页数。
       */
-    TotalPage?: number;
+    TotalPage: number;
     /**
       * 省份，运营商，国家或地区汇总数据列表。
       */
-    DataInfoList?: Array<ProIspPlaySumInfo>;
+    DataInfoList: Array<ProIspPlaySumInfo>;
     /**
       * 下载速度，单位：MB/s，计算方式：总流量/总时长。
       */
-    AvgFluxPerSecond?: number;
+    AvgFluxPerSecond: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6708,7 +6709,7 @@ export interface DescribeHttpStatusInfoListResponse {
     /**
       * 播放状态码列表。
       */
-    DataInfoList?: Array<HttpStatusData>;
+    DataInfoList: Array<HttpStatusData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

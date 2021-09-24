@@ -138,6 +138,16 @@ it("tcaplusdb.v20190823.ModifyClusterName", async function () {
     }
 })
 
+it("tcaplusdb.v20190823.SetTableDataFlow", async function () {
+    try {
+       const data = await client.SetTableDataFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcaplusdb.v20190823.DeleteCluster", async function () {
     try {
        const data = await client.DeleteCluster({})
@@ -461,6 +471,16 @@ it("tcaplusdb.v20190823.VerifyIdlFiles", async function () {
 it("tcaplusdb.v20190823.ClearTables", async function () {
     try {
        const data = await client.ClearTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.DeleteTableDataFlow", async function () {
+    try {
+       const data = await client.DeleteTableDataFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

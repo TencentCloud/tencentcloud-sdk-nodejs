@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterName", req, cb);
     }
     /**
+     * 新增、修改表格数据订阅
+     */
+    async SetTableDataFlow(req, cb) {
+        return this.request("SetTableDataFlow", req, cb);
+    }
+    /**
      * 删除TcaplusDB集群，必须在集群所属所有资源（包括表格组，表）都已经释放的情况下才会成功。
      */
     async DeleteCluster(req, cb) {
@@ -296,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ClearTables(req, cb) {
         return this.request("ClearTables", req, cb);
+    }
+    /**
+     * 删除表格的数据订阅
+     */
+    async DeleteTableDataFlow(req, cb) {
+        return this.request("DeleteTableDataFlow", req, cb);
     }
     /**
      * 根据用户选定的表定义IDL文件，批量修改指定的表

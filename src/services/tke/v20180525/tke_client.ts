@@ -49,6 +49,7 @@ import {
   CreatePrometheusTemplateRequest,
   Exec,
   RestartEKSContainerInstancesRequest,
+  DescribeExternalClusterSpecRequest,
   DeletePrometheusTemplateRequest,
   InstanceUpgradeProgressItem,
   DescribeEKSContainerInstanceRegionsRequest,
@@ -143,6 +144,7 @@ import {
   DescribeEKSClusterCredentialRequest,
   GetUpgradeInstanceProgressRequest,
   ModifyPrometheusTemplateRequest,
+  DescribeExternalClusterSpecResponse,
   AddNodeToNodePoolResponse,
   PodLimitsByType,
   UpdateEKSClusterResponse,
@@ -881,6 +883,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterRouteResponse) => void
   ): Promise<CreateClusterRouteResponse> {
     return this.request("CreateClusterRoute", req, cb)
+  }
+
+  /**
+   * 获取导入第三方集群YAML定义
+   */
+  async DescribeExternalClusterSpec(
+    req: DescribeExternalClusterSpecRequest,
+    cb?: (error: string, rep: DescribeExternalClusterSpecResponse) => void
+  ): Promise<DescribeExternalClusterSpecResponse> {
+    return this.request("DescribeExternalClusterSpec", req, cb)
   }
 
   /**

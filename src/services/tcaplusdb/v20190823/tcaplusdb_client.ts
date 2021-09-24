@@ -39,9 +39,11 @@ import {
   DescribeTasksResponse,
   DeleteTablesRequest,
   DescribeRegionsResponse,
+  SetTableDataFlowResponse,
   SelectedTableInfoNew,
   ModifyClusterPasswordRequest,
   DescribeMachineResponse,
+  DeleteTableDataFlowRequest,
   DeleteTableGroupRequest,
   DescribeSnapshotsRequest,
   TagsInfoOfTableGroup,
@@ -116,9 +118,12 @@ import {
   EnableRestProxyResponse,
   ModifyClusterNameResponse,
   ModifyTablesRequest,
+  SetTableDataFlowRequest,
   DescribeTableGroupTagsRequest,
   DescribeTablesInRecycleRequest,
   DescribeTablesRequest,
+  KafkaInfo,
+  DeleteTableDataFlowResponse,
   UpdateApplyRequest,
   ModifyTableMemosRequest,
   DescribeUinInWhitelistResponse,
@@ -278,6 +283,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterNameResponse) => void
   ): Promise<ModifyClusterNameResponse> {
     return this.request("ModifyClusterName", req, cb)
+  }
+
+  /**
+   * 新增、修改表格数据订阅
+   */
+  async SetTableDataFlow(
+    req: SetTableDataFlowRequest,
+    cb?: (error: string, rep: SetTableDataFlowResponse) => void
+  ): Promise<SetTableDataFlowResponse> {
+    return this.request("SetTableDataFlow", req, cb)
   }
 
   /**
@@ -608,6 +623,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ClearTablesResponse) => void
   ): Promise<ClearTablesResponse> {
     return this.request("ClearTables", req, cb)
+  }
+
+  /**
+   * 删除表格的数据订阅
+   */
+  async DeleteTableDataFlow(
+    req: DeleteTableDataFlowRequest,
+    cb?: (error: string, rep: DeleteTableDataFlowResponse) => void
+  ): Promise<DeleteTableDataFlowResponse> {
+    return this.request("DeleteTableDataFlow", req, cb)
   }
 
   /**

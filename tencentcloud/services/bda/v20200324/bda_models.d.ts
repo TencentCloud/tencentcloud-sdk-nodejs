@@ -22,7 +22,7 @@ export interface DetectBodyJointsResponse {
     /**
       * 图中检测出的人体框和人体关键点， 包含14个人体关键点的坐标，建议根据人体框置信度筛选出合格的人体；
       */
-    BodyJointsResults?: Array<BodyJointsResult>;
+    BodyJointsResults: Array<BodyJointsResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -154,11 +154,11 @@ export interface GetGroupListResponse {
     /**
       * 返回的人体库信息。
       */
-    GroupInfos?: Array<GroupInfo>;
+    GroupInfos: Array<GroupInfo>;
     /**
       * 人体库总数量。
       */
-    GroupNum?: number;
+    GroupNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -365,11 +365,11 @@ export interface CreateSegmentationTaskResponse {
     /**
       * 任务标识ID,可以用与追溯任务状态，查看任务结果
       */
-    TaskID?: string;
+    TaskID: string;
     /**
       * 预估处理时间，单位为秒
       */
-    EstimatedProcessingTime?: number;
+    EstimatedProcessingTime: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

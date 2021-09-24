@@ -288,11 +288,11 @@ export interface FaceCartoonPicResponse {
     /**
       * 结果图片Base64信息。
       */
-    ResultImage?: string;
+    ResultImage: string;
     /**
       * RspImgType 为 url 时，返回处理后的图片 url 数据。(默认为base64)
       */
-    ResultUrl?: string;
+    ResultUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

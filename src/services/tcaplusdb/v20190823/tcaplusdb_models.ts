@@ -383,7 +383,7 @@ export interface SelectedTableWithField {
   TableType?: string
 
   /**
-   * 待创建索引的字段列表
+   * 待创建索引、缓写、数据订阅的字段列表
    */
   SelectedFields?: Array<FieldInfo>
 
@@ -391,6 +391,11 @@ export interface SelectedTableWithField {
    * 索引分片数
    */
   ShardNum?: number
+
+  /**
+   * ckafka实例信息
+   */
+  KafkaInfo?: KafkaInfo
 }
 
 /**
@@ -421,6 +426,11 @@ export interface ProxyMachineInfo {
    * 机器类型
    */
   MachineType: string
+
+  /**
+   * 可分配proxy资源数
+   */
+  AvailableCount: number
 }
 
 /**
@@ -471,6 +481,26 @@ export interface DescribeRegionsResponse {
    * 可用区详情结果列表
    */
   RegionInfos?: Array<RegionInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetTableDataFlow返回参数结构体
+ */
+export interface SetTableDataFlowResponse {
+  /**
+   * 表格数据订阅创建结果数量
+   */
+  TotalCount: number
+
+  /**
+   * 表格数据订阅创建结果列表
+   */
+  TableResults: Array<TableResultNew>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -596,6 +626,21 @@ export interface DescribeMachineResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteTableDataFlow请求参数结构体
+ */
+export interface DeleteTableDataFlowRequest {
+  /**
+   * 表格所属集群实例ID
+   */
+  ClusterId: string
+
+  /**
+   * 待删除分布式索引的表格列表
+   */
+  SelectedTables: Array<SelectedTableInfoNew>
 }
 
 /**
@@ -1333,6 +1378,18 @@ export interface ClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DbaUins: Array<string>
+
+  /**
+      * 是否开启了数据订阅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataFlowStatus: number
+
+  /**
+      * 数据订阅的kafka信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KafkaInfo: KafkaInfo
 }
 
 /**
@@ -2288,7 +2345,7 @@ export interface TableInfoNew {
   SortRule: number
 
   /**
-      * 表格分布式索引信息
+      * 表格分布式索引/缓写、kafka数据订阅信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DbClusterInfoStruct: string
@@ -2567,6 +2624,21 @@ export interface ModifyTablesRequest {
 }
 
 /**
+ * SetTableDataFlow请求参数结构体
+ */
+export interface SetTableDataFlowRequest {
+  /**
+   * 表所属集群实例ID
+   */
+  ClusterId: string
+
+  /**
+   * 待创建分布式索引表格列表
+   */
+  SelectedTables: Array<SelectedTableWithField>
+}
+
+/**
  * DescribeTableGroupTags请求参数结构体
  */
 export interface DescribeTableGroupTagsRequest {
@@ -2644,6 +2716,61 @@ export interface DescribeTablesRequest {
    * 查询结果返回记录数量
    */
   Limit?: number
+}
+
+/**
+ * ckafka地址信息
+ */
+export interface KafkaInfo {
+  /**
+   * kafaka address
+   */
+  Address: string
+
+  /**
+   * kafaka topic
+   */
+  Topic: string
+
+  /**
+   * kafka username
+   */
+  User: string
+
+  /**
+   * kafka password
+   */
+  Password: string
+
+  /**
+   * ckafka实例
+   */
+  Instance: string
+
+  /**
+   * 是否走VPC
+   */
+  IsVpc: number
+}
+
+/**
+ * DeleteTableDataFlow返回参数结构体
+ */
+export interface DeleteTableDataFlowResponse {
+  /**
+   * 删除表格分布式索引结果数量
+   */
+  TotalCount: number
+
+  /**
+   * 删除表格分布式索引结果列表
+   */
+  TableResults: Array<TableResultNew>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
