@@ -206,6 +206,11 @@ export interface CreateDBInstanceRequest {
    * 是否自动发起灾备同步功能。该参数仅对购买灾备实例生效。 可选值为：0 - 不自动发起灾备同步；1 - 自动发起灾备同步。
    */
   AutoSyncFlag?: number
+
+  /**
+   * 金融围拢 ID。
+   */
+  CageId?: string
 }
 
 /**
@@ -2510,6 +2515,11 @@ export interface CreateDBInstanceHourRequest {
    * 是否自动发起灾备同步功能。该参数仅对购买灾备实例生效。 可选值为：0 - 不自动发起灾备同步；1 - 自动发起灾备同步。
    */
   AutoSyncFlag?: number
+
+  /**
+   * 金融围拢 ID 。
+   */
+  CageId?: string
 }
 
 /**
@@ -2903,6 +2913,11 @@ export interface DescribeDBInstancesRequest {
    * 是否以标签键为过滤条件。
    */
   TagKeysForSearch?: Array<string>
+
+  /**
+   * 金融围拢 ID 。
+   */
+  CageIds?: Array<string>
 }
 
 /**

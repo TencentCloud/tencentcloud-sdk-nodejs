@@ -188,7 +188,7 @@ SIGN_PERSONAL_SEAL - 个人签署印章控件；
       */
     ComponentType?: string;
     /**
-      * 控件名称
+      * 控件简称
       */
     ComponentName?: string;
     /**
