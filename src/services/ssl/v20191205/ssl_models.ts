@@ -107,6 +107,12 @@ export interface ManagerInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VerifyTime: string
+
+  /**
+      * 具体审核状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StatusInfo: Array<ManagerStatusInfo>
 }
 
 /**
@@ -1793,159 +1799,9 @@ export interface DescribeManagerDetailResponse {
 }
 
 /**
- * 获取证书列表（DescribeCertificate）返回参数键为 SubmittedData 的内容。
+ * 管理人的四种审核状态
  */
-export interface SubmittedData {
-  /**
-      * CSR 类型，（online = 在线生成CSR，parse = 粘贴 CSR）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CsrType?: string
-
-  /**
-      * CSR 内容。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CsrContent?: string
-
-  /**
-      * 域名信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CertificateDomain?: string
-
-  /**
-      * DNS 信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainList?: Array<string>
-
-  /**
-      * 私钥密码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KeyPassword?: string
-
-  /**
-      * 企业或单位名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationName?: string
-
-  /**
-      * 部门。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationDivision?: string
-
-  /**
-      * 地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationAddress?: string
-
-  /**
-      * 国家。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationCountry?: string
-
-  /**
-      * 市。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationCity?: string
-
-  /**
-      * 省。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationRegion?: string
-
-  /**
-      * 邮政编码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PostalCode?: string
-
-  /**
-      * 座机区号。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhoneAreaCode?: string
-
-  /**
-      * 座机号码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhoneNumber?: string
-
-  /**
-      * 管理员名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AdminFirstName?: string
-
-  /**
-      * 管理员姓。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AdminLastName?: string
-
-  /**
-      * 管理员电话号码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AdminPhoneNum?: string
-
-  /**
-      * 管理员邮箱地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AdminEmail?: string
-
-  /**
-      * 管理员职位。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AdminPosition?: string
-
-  /**
-      * 联系人名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContactFirstName?: string
-
-  /**
-      * 联系人姓。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContactLastName?: string
-
-  /**
-      * 联系人电话号码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContactNumber?: string
-
-  /**
-      * 联系人邮箱地址，
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContactEmail?: string
-
-  /**
-      * 联系人职位。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContactPosition?: string
-
-  /**
-      * 验证类型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VerifyType?: string
-}
+export type ManagerStatusInfo = null
 
 /**
  * SubmitCertificateInformation请求参数结构体
@@ -2177,6 +2033,11 @@ export interface DescribeManagersRequest {
 'expired' 已过期
       */
   Status?: string
+
+  /**
+   * 管理人姓名/邮箱/部门精准匹配
+   */
+  SearchKey?: string
 }
 
 /**
@@ -2222,4 +2083,159 @@ export interface RevokeCertificateRequest {
    * 吊销证书原因。
    */
   Reason?: string
+}
+
+/**
+ * 获取证书列表（DescribeCertificate）返回参数键为 SubmittedData 的内容。
+ */
+export interface SubmittedData {
+  /**
+      * CSR 类型，（online = 在线生成CSR，parse = 粘贴 CSR）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CsrType?: string
+
+  /**
+      * CSR 内容。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CsrContent?: string
+
+  /**
+      * 域名信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertificateDomain?: string
+
+  /**
+      * DNS 信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainList?: Array<string>
+
+  /**
+      * 私钥密码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyPassword?: string
+
+  /**
+      * 企业或单位名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationName?: string
+
+  /**
+      * 部门。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationDivision?: string
+
+  /**
+      * 地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationAddress?: string
+
+  /**
+      * 国家。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationCountry?: string
+
+  /**
+      * 市。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationCity?: string
+
+  /**
+      * 省。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationRegion?: string
+
+  /**
+      * 邮政编码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostalCode?: string
+
+  /**
+      * 座机区号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneAreaCode?: string
+
+  /**
+      * 座机号码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneNumber?: string
+
+  /**
+      * 管理员名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdminFirstName?: string
+
+  /**
+      * 管理员姓。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdminLastName?: string
+
+  /**
+      * 管理员电话号码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdminPhoneNum?: string
+
+  /**
+      * 管理员邮箱地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdminEmail?: string
+
+  /**
+      * 管理员职位。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdminPosition?: string
+
+  /**
+      * 联系人名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContactFirstName?: string
+
+  /**
+      * 联系人姓。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContactLastName?: string
+
+  /**
+      * 联系人电话号码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContactNumber?: string
+
+  /**
+      * 联系人邮箱地址，
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContactEmail?: string
+
+  /**
+      * 联系人职位。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContactPosition?: string
+
+  /**
+      * 验证类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VerifyType?: string
 }

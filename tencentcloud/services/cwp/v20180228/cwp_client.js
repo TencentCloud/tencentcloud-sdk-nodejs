@@ -34,16 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTags", req, cb);
     }
     /**
-     * 切换高危命令规则状态
+     * 新增或编辑标签
      */
-    async SwitchBashRules(req, cb) {
-        return this.request("SwitchBashRules", req, cb);
+    async EditTags(req, cb) {
+        return this.request("EditTags", req, cb);
     }
     /**
      * 本接口(TrustMalwares)将被识别木马文件设为信任。
      */
     async TrustMalwares(req, cb) {
         return this.request("TrustMalwares", req, cb);
+    }
+    /**
+     * 获取资产管理端口列表
+     */
+    async DescribeAssetPortInfoList(req, cb) {
+        return this.request("DescribeAssetPortInfoList", req, cb);
     }
     /**
      * 本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
@@ -76,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSearchExportList", req, cb);
     }
     /**
+     * 查询资产管理计划任务列表
+     */
+    async DescribeAssetPlanTaskList(req, cb) {
+        return this.request("DescribeAssetPlanTaskList", req, cb);
+    }
+    /**
      * 获取爆破阻断模式
      */
     async DescribeBanMode(req, cb) {
@@ -86,6 +98,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ChangeRuleEventsIgnoreStatus(req, cb) {
         return this.request("ChangeRuleEventsIgnoreStatus", req, cb);
+    }
+    /**
+     * 获取资产管理系统安装包列表
+     */
+    async DescribeAssetSystemPackageList(req, cb) {
+        return this.request("DescribeAssetSystemPackageList", req, cb);
+    }
+    /**
+     * 获取资产管理Web应用插件列表
+     */
+    async DescribeAssetWebAppPluginList(req, cb) {
+        return this.request("DescribeAssetWebAppPluginList", req, cb);
     }
     /**
      * 删除检索模板
@@ -142,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSearchLogs", req, cb);
     }
     /**
-     * 查询一个用户下的基线策略信息
+     * 根据Ids删除本地提权
      */
-    async DescribeBaselineStrategyList(req, cb) {
-        return this.request("DescribeBaselineStrategyList", req, cb);
+    async DeletePrivilegeEvents(req, cb) {
+        return this.request("DeletePrivilegeEvents", req, cb);
     }
     /**
      * 本接口 (RenewProVersion) 用于续费专业版(包年包月)。
@@ -256,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHistoryService", req, cb);
     }
     /**
+     * 获取资产管理Web应用列表
+     */
+    async DescribeAssetWebAppList(req, cb) {
+        return this.request("DescribeAssetWebAppList", req, cb);
+    }
+    /**
      * 漏洞管理模块，获取近日指定类型的漏洞数量和主机数量
      */
     async DescribeVulCountByDates(req, cb) {
@@ -298,10 +328,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportVulEffectHostList", req, cb);
     }
     /**
+     * 查询应用列表
+     */
+    async DescribeAssetAppList(req, cb) {
+        return this.request("DescribeAssetAppList", req, cb);
+    }
+    /**
      * 查询网站防篡改概览信息
      */
     async DescribeWebPageGeneralize(req, cb) {
         return this.request("DescribeWebPageGeneralize", req, cb);
+    }
+    /**
+     * 导出本次漏洞检测Excel
+     */
+    async ExportVulDetectionExcel(req, cb) {
+        return this.request("ExportVulDetectionExcel", req, cb);
     }
     /**
      * 导出资产管理内核模块列表
@@ -370,10 +412,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivilegeRules", req, cb);
     }
     /**
+     * 查询Jar包列表
+     */
+    async DescribeAssetJarList(req, cb) {
+        return this.request("DescribeAssetJarList", req, cb);
+    }
+    /**
      * 本接口 (DeleteNonlocalLoginPlaces) 用于删除异地登录记录。
      */
     async DeleteNonlocalLoginPlaces(req, cb) {
         return this.request("DeleteNonlocalLoginPlaces", req, cb);
+    }
+    /**
+     * 获取Web服务关联进程列表
+     */
+    async DescribeAssetWebServiceProcessList(req, cb) {
+        return this.request("DescribeAssetWebServiceProcessList", req, cb);
     }
     /**
      * 设置阻断开关状态
@@ -418,6 +472,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportPrivilegeEvents", req, cb);
     }
     /**
+     * 该接口已废弃
+
+本接口 (RescanImpactedHost) 用于漏洞重新检测。
+     */
+    async RescanImpactedHost(req, cb) {
+        return this.request("RescanImpactedHost", req, cb);
+    }
+    /**
      * 导出网页防篡改防护目录列表
      */
     async ExportProtectDirList(req, cb) {
@@ -434,6 +496,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAvailableExpertServiceDetail(req, cb) {
         return this.request("DescribeAvailableExpertServiceDetail", req, cb);
+    }
+    /**
+     * 获取待处理风险文件数+影响服务器数+是否试用检测+最近检测时间
+     */
+    async DescribeServersAndRiskAndFirstInfo(req, cb) {
+        return this.request("DescribeServersAndRiskAndFirstInfo", req, cb);
     }
     /**
      * 添加检索模板
@@ -460,6 +528,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteReverseShellEvents", req, cb);
     }
     /**
+     * 获取主机账号详情
+     */
+    async DescribeAssetUserInfo(req, cb) {
+        return this.request("DescribeAssetUserInfo", req, cb);
+    }
+    /**
      * 取消漏洞忽略
      */
     async CancelIgnoreVul(req, cb) {
@@ -478,10 +552,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportScanTaskDetails", req, cb);
     }
     /**
-     * 根据Ids删除本地提权
+     * 漏洞数量等级分布统计
      */
-    async DeletePrivilegeEvents(req, cb) {
-        return this.request("DeletePrivilegeEvents", req, cb);
+    async DescribeVulLevelCount(req, cb) {
+        return this.request("DescribeVulLevelCount", req, cb);
     }
     /**
      * 本接口 (DeleteMalwares) 用于删除木马记录。
@@ -556,16 +630,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMachineRegions", req, cb);
     }
     /**
-     * 根据基线策略id删除策略
+     * 获取资产管理主机资源详细信息
      */
-    async DeleteBaselineStrategy(req, cb) {
-        return this.request("DeleteBaselineStrategy", req, cb);
+    async DescribeAssetMachineDetail(req, cb) {
+        return this.request("DescribeAssetMachineDetail", req, cb);
     }
     /**
-     * 入侵检测获取木马列表
+     * 导出风险趋势
      */
-    async DescribeMalWareList(req, cb) {
-        return this.request("DescribeMalWareList", req, cb);
+    async ExportSecurityTrends(req, cb) {
+        return this.request("ExportSecurityTrends", req, cb);
+    }
+    /**
+     * 查询资产管理内核模块列表
+     */
+    async DescribeAssetCoreModuleList(req, cb) {
+        return this.request("DescribeAssetCoreModuleList", req, cb);
     }
     /**
      * 本接口 (DescribeOpenPortStatistics) 用于获取端口统计列表。
@@ -604,22 +684,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMaliciousRequestWhiteList", req, cb);
     }
     /**
+     * 获取账号列表
+     */
+    async DescribeAssetUserList(req, cb) {
+        return this.request("DescribeAssetUserList", req, cb);
+    }
+    /**
      * 根据基线策略id查询策略详情
      */
     async DescribeBaselineStrategyDetail(req, cb) {
         return this.request("DescribeBaselineStrategyDetail", req, cb);
     }
     /**
-     * 漏洞数量等级分布统计
+     * 获取Web站点详情
      */
-    async DescribeVulLevelCount(req, cb) {
-        return this.request("DescribeVulLevelCount", req, cb);
-    }
-    /**
-     * 导出风险趋势
-     */
-    async ExportSecurityTrends(req, cb) {
-        return this.request("ExportSecurityTrends", req, cb);
+    async DescribeAssetWebLocationInfo(req, cb) {
+        return this.request("DescribeAssetWebLocationInfo", req, cb);
     }
     /**
      * 网页防篡改防护目录列表
@@ -634,6 +714,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportMalwares", req, cb);
     }
     /**
+     * 获取Jar包详情
+     */
+    async DescribeAssetJarInfo(req, cb) {
+        return this.request("DescribeAssetJarInfo", req, cb);
+    }
+    /**
      * 导出篡改事件列表
      */
     async ExportWebPageEventList(req, cb) {
@@ -644,6 +730,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBruteAttackList(req, cb) {
         return this.request("DescribeBruteAttackList", req, cb);
+    }
+    /**
+     * 查询资产管理数据库列表
+     */
+    async DescribeAssetDatabaseList(req, cb) {
+        return this.request("DescribeAssetDatabaseList", req, cb);
     }
     /**
      * DescribeScanTaskStatus 查询机器扫描状态列表用于过滤筛选
@@ -682,10 +774,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ScanVulAgain", req, cb);
     }
     /**
-     * 新增或编辑标签
+     * 查询一个用户下的基线策略信息
      */
-    async EditTags(req, cb) {
-        return this.request("EditTags", req, cb);
+    async DescribeBaselineStrategyList(req, cb) {
+        return this.request("DescribeBaselineStrategyList", req, cb);
     }
     /**
      * 本接口（SeparateMalwares）用于隔离木马。
@@ -718,6 +810,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportNonlocalLoginPlaces", req, cb);
     }
     /**
+     * 获取资产指纹页面的资源监控列表
+     */
+    async DescribeAssetMachineList(req, cb) {
+        return this.request("DescribeAssetMachineList", req, cb);
+    }
+    /**
      * 获取阻断按钮状态
      */
     async DescribeBanStatus(req, cb) {
@@ -742,10 +840,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMalwareInfo", req, cb);
     }
     /**
-     * 获取待处理风险文件数+影响服务器数+是否试用检测+最近检测时间
+     * 获取Web站点列表
      */
-    async DescribeServersAndRiskAndFirstInfo(req, cb) {
-        return this.request("DescribeServersAndRiskAndFirstInfo", req, cb);
+    async DescribeAssetWebLocationList(req, cb) {
+        return this.request("DescribeAssetWebLocationList", req, cb);
     }
     /**
      * 根据策略id查询基线检测项TOP
@@ -760,10 +858,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBashRules", req, cb);
     }
     /**
-     * 根据策略名查询策略是否存在
+     * 获取资产管理进程列表
      */
-    async DescribeStrategyExist(req, cb) {
-        return this.request("DescribeStrategyExist", req, cb);
+    async DescribeAssetProcessInfoList(req, cb) {
+        return this.request("DescribeAssetProcessInfoList", req, cb);
     }
     /**
      * 获取反弹Shell列表
@@ -816,10 +914,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWarningSetting", req, cb);
     }
     /**
+     * 获取待处理漏洞数+影响主机数
+     */
+    async DescribeVulHostCountScanTime(req, cb) {
+        return this.request("DescribeVulHostCountScanTime", req, cb);
+    }
+    /**
      * 获取爆破破解规则
      */
     async DescribeBruteAttackRules(req, cb) {
         return this.request("DescribeBruteAttackRules", req, cb);
+    }
+    /**
+     * 查询资产管理环境变量列表
+     */
+    async DescribeAssetEnvList(req, cb) {
+        return this.request("DescribeAssetEnvList", req, cb);
     }
     /**
      * 获取ES查询文档列表
@@ -918,6 +1028,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanState", req, cb);
     }
     /**
+     * 根据基线策略id删除策略
+     */
+    async DeleteBaselineStrategy(req, cb) {
+        return this.request("DeleteBaselineStrategy", req, cb);
+    }
+    /**
      * 获取服务器风险top列表
      */
     async DescribeVulHostTop(req, cb) {
@@ -936,10 +1052,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenProVersion", req, cb);
     }
     /**
-     * 导出本次漏洞检测Excel
+     * 获取资产管理Web框架列表
      */
-    async ExportVulDetectionExcel(req, cb) {
-        return this.request("ExportVulDetectionExcel", req, cb);
+    async DescribeAssetWebFrameList(req, cb) {
+        return this.request("DescribeAssetWebFrameList", req, cb);
     }
     /**
      * 获取阻断地域
@@ -960,10 +1076,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulInfoCvss", req, cb);
     }
     /**
-     * 获取待处理漏洞数+影响主机数
+     * 入侵检测获取木马列表
      */
-    async DescribeVulHostCountScanTime(req, cb) {
-        return this.request("DescribeVulHostCountScanTime", req, cb);
+    async DescribeMalWareList(req, cb) {
+        return this.request("DescribeMalWareList", req, cb);
     }
     /**
      * 该接口可以对入侵检测-文件查杀扫描检测
@@ -984,10 +1100,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProVersionRenewFlag", req, cb);
     }
     /**
+     * 获取内核模块详情
+     */
+    async DescribeAssetCoreModuleInfo(req, cb) {
+        return this.request("DescribeAssetCoreModuleInfo", req, cb);
+    }
+    /**
      * 获取主机相关统计
      */
     async DescribeGeneralStat(req, cb) {
         return this.request("DescribeGeneralStat", req, cb);
+    }
+    /**
+     * 获取软件关联进程列表
+     */
+    async DescribeAssetAppProcessList(req, cb) {
+        return this.request("DescribeAssetAppProcessList", req, cb);
+    }
+    /**
+     * 获取资产管理数据库详情
+     */
+    async DescribeAssetDatabaseInfo(req, cb) {
+        return this.request("DescribeAssetDatabaseInfo", req, cb);
     }
     /**
      * 设置高危命令事件状态
@@ -1014,6 +1148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanVulSetting", req, cb);
     }
     /**
+     * 查询资产管理启动服务列表
+     */
+    async DescribeAssetInitServiceList(req, cb) {
+        return this.request("DescribeAssetInitServiceList", req, cb);
+    }
+    /**
      * 本接口（DeleteMachine）用于卸载云镜客户端。
      */
     async DeleteMachine(req, cb) {
@@ -1026,18 +1166,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExpertServiceOrderList", req, cb);
     }
     /**
-     * 该接口已废弃
-
-本接口 (RescanImpactedHost) 用于漏洞重新检测。
+     * 根据策略名查询策略是否存在
      */
-    async RescanImpactedHost(req, cb) {
-        return this.request("RescanImpactedHost", req, cb);
+    async DescribeStrategyExist(req, cb) {
+        return this.request("DescribeStrategyExist", req, cb);
     }
     /**
      * 网站防篡改-查询网页防篡改服务器购买信息及服务器信息
      */
     async DescribeWebPageServiceInfo(req, cb) {
         return this.request("DescribeWebPageServiceInfo", req, cb);
+    }
+    /**
+     * 切换高危命令规则状态
+     */
+    async SwitchBashRules(req, cb) {
+        return this.request("SwitchBashRules", req, cb);
     }
     /**
      * 获取所有主机标签
@@ -1128,6 +1272,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMachines(req, cb) {
         return this.request("DescribeMachines", req, cb);
+    }
+    /**
+     * 查询资产管理Web服务列表
+     */
+    async DescribeAssetWebServiceInfoList(req, cb) {
+        return this.request("DescribeAssetWebServiceInfoList", req, cb);
     }
     /**
      * 导出漏洞检测报告。

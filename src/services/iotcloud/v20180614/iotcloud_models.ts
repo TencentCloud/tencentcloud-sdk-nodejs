@@ -16,6 +16,16 @@
  */
 
 /**
+ * UpdateDevicesEnableState返回参数结构体
+ */
+export interface UpdateDevicesEnableStateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UnbindDevices请求参数结构体
  */
 export interface UnbindDevicesRequest {
@@ -1177,6 +1187,36 @@ export interface CreateLoraDeviceRequest {
 }
 
 /**
+ * UpdateDevicesEnableState请求参数结构体
+ */
+export interface UpdateDevicesEnableStateRequest {
+  /**
+   * 设备所属产品id
+   */
+  ProductID: string
+
+  /**
+   * 设备名称集合
+   */
+  DeviceNames: Array<string>
+
+  /**
+   * 要设置的设备状态，1为启用，0为禁用
+   */
+  Status: number
+}
+
+/**
+ * SetProductsForbiddenStatus返回参数结构体
+ */
+export interface SetProductsForbiddenStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProduct返回参数结构体
  */
 export interface CreateProductResponse {
@@ -2074,6 +2114,21 @@ export interface PublishToDeviceRequest {
    * 消息内容
    */
   Payload: string
+}
+
+/**
+ * SetProductsForbiddenStatus请求参数结构体
+ */
+export interface SetProductsForbiddenStatusRequest {
+  /**
+   * 要设置禁用状态的产品列表
+   */
+  ProductID: Array<string>
+
+  /**
+   * 0启用，1禁用
+   */
+  Status: number
 }
 
 /**

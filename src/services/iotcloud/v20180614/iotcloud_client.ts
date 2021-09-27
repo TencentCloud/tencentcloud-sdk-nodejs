@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UpdateDevicesEnableStateResponse,
   UnbindDevicesRequest,
   DescribeDeviceResourcesRequest,
   BindDevicesRequest,
@@ -62,6 +63,8 @@ import {
   DescribeFirmwareTaskStatisticsResponse,
   DescribePushResourceTaskStatisticsRequest,
   CreateLoraDeviceRequest,
+  UpdateDevicesEnableStateRequest,
+  SetProductsForbiddenStatusResponse,
   CreateProductResponse,
   CreateMultiDeviceRequest,
   DeleteLoraDeviceResponse,
@@ -100,6 +103,7 @@ import {
   DeleteProductResponse,
   DeviceProperty,
   PublishToDeviceRequest,
+  SetProductsForbiddenStatusRequest,
   UploadFirmwareResponse,
   ProductInfo,
   DescribeFirmwareTaskDistributionResponse,
@@ -353,13 +357,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UploadFirmware）用于上传设备固件信息
+   * 批量设置产品禁用状态
    */
-  async UploadFirmware(
-    req: UploadFirmwareRequest,
-    cb?: (error: string, rep: UploadFirmwareResponse) => void
-  ): Promise<UploadFirmwareResponse> {
-    return this.request("UploadFirmware", req, cb)
+  async SetProductsForbiddenStatus(
+    req: SetProductsForbiddenStatusRequest,
+    cb?: (error: string, rep: SetProductsForbiddenStatusResponse) => void
+  ): Promise<SetProductsForbiddenStatusResponse> {
+    return this.request("SetProductsForbiddenStatus", req, cb)
   }
 
   /**
@@ -440,6 +444,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDeviceResponse) => void
   ): Promise<DeleteDeviceResponse> {
     return this.request("DeleteDevice", req, cb)
+  }
+
+  /**
+   * 批量启用或者禁用设备
+   */
+  async UpdateDevicesEnableState(
+    req: UpdateDevicesEnableStateRequest,
+    cb?: (error: string, rep: UpdateDevicesEnableStateResponse) => void
+  ): Promise<UpdateDevicesEnableStateResponse> {
+    return this.request("UpdateDevicesEnableState", req, cb)
   }
 
   /**
@@ -560,6 +574,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFirmwareTaskResponse) => void
   ): Promise<DescribeFirmwareTaskResponse> {
     return this.request("DescribeFirmwareTask", req, cb)
+  }
+
+  /**
+   * 本接口（UploadFirmware）用于上传设备固件信息
+   */
+  async UploadFirmware(
+    req: UploadFirmwareRequest,
+    cb?: (error: string, rep: UploadFirmwareResponse) => void
+  ): Promise<UploadFirmwareResponse> {
+    return this.request("UploadFirmware", req, cb)
   }
 
   /**

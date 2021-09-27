@@ -108,6 +108,16 @@ it("cfw.v20190904.DescribeVpcRuleOverview", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeNatFwInstanceWithRegion", async function () {
+    try {
+       const data = await client.DescribeNatFwInstanceWithRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DeleteAcRule", async function () {
     try {
        const data = await client.DeleteAcRule({})
@@ -218,9 +228,29 @@ it("cfw.v20190904.CreateDatabaseWhiteListRules", async function () {
     }
 })
 
+it("cfw.v20190904.CreateNatFwInstanceWithDomain", async function () {
+    try {
+       const data = await client.CreateNatFwInstanceWithDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DeleteSecurityGroupAllRule", async function () {
     try {
        const data = await client.DeleteSecurityGroupAllRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.AddAcRule", async function () {
+    try {
+       const data = await client.AddAcRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +388,16 @@ it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
     }
 })
 
+it("cfw.v20190904.SetNatFwEip", async function () {
+    try {
+       const data = await client.SetNatFwEip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeSourceAsset", async function () {
     try {
        const data = await client.DescribeSourceAsset({})
@@ -418,9 +458,9 @@ it("cfw.v20190904.ModifySequenceRules", async function () {
     }
 })
 
-it("cfw.v20190904.SetNatFwEip", async function () {
+it("cfw.v20190904.RemoveAcRule", async function () {
     try {
-       const data = await client.SetNatFwEip({})
+       const data = await client.RemoveAcRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,16 +511,6 @@ it("cfw.v20190904.ModifyNatFwReSelect", async function () {
 it("cfw.v20190904.DescribeResourceGroup", async function () {
     try {
        const data = await client.DescribeResourceGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfw.v20190904.DescribeBlockStaticList", async function () {
-    try {
-       const data = await client.DescribeBlockStaticList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,9 +658,9 @@ it("cfw.v20190904.DescribeBlockByIpTimesList", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeNatFwInstanceWithRegion", async function () {
+it("cfw.v20190904.DescribeBlockStaticList", async function () {
     try {
-       const data = await client.DescribeNatFwInstanceWithRegion({})
+       const data = await client.DescribeBlockStaticList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

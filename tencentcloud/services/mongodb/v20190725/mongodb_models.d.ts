@@ -38,7 +38,7 @@ export interface KillOpsRequest {
  */
 export interface CreateDBInstanceRequest {
     /**
-      * 每个副本集内节点个数，当前副本集节点数固定为3，分片从节点数可选，具体参照查询云数据库的售卖规格返回参数
+      * 每个副本集内节点个数，具体参照查询云数据库的售卖规格返回参数
       */
     NodeNum: number;
     /**
@@ -50,7 +50,7 @@ export interface CreateDBInstanceRequest {
       */
     Volume: number;
     /**
-      * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
+      * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本
       */
     MongoVersion: string;
     /**
@@ -58,7 +58,7 @@ export interface CreateDBInstanceRequest {
       */
     GoodsNum: number;
     /**
-      * 实例所属区域名称，格式如：ap-guangzhou-2
+      * 实例所属区域名称，格式如：ap-guangzhou-2。注：此参数填写的是主可用区，如果选择多可用区部署，Zone必须是AvailabilityZoneList中的一个
       */
     Zone: string;
     /**
@@ -106,17 +106,41 @@ export interface CreateDBInstanceRequest {
       */
     AutoVoucher?: number;
     /**
-      * 1:正式实例,2:临时实例,3:只读实例，4：灾备实例
+      * 1:正式实例,2:临时实例,3:只读实例,4:灾备实例,5:克隆实例
       */
     Clone?: number;
     /**
-      * 若是只读，灾备实例，Father必须填写，即主实例ID
+      * 若是只读，灾备实例或克隆实例，Father必须填写，即主实例ID
       */
     Father?: string;
     /**
       * 安全组
       */
     SecurityGroup?: Array<string>;
+    /**
+      * 克隆实例回档时间。若是克隆实例，则必须填写，格式：2021-08-13 16:30:00。注：只能回档7天内的时间点
+      */
+    RestoreTime?: string;
+    /**
+      * 实例名称。注：名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符-
+      */
+    InstanceName?: string;
+    /**
+      * 多可用区部署的节点列表，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：1、多可用区部署节点只能部署在3个不同可用区；2、为了保障跨可用区切换，不支持将集群的大多数节点部署在同一个可用区（如3节点集群不支持2个节点部署在同一个区）；3、不支持4.2及以上版本；4、不支持只读灾备实例；5、不能选择基础网络
+      */
+    AvailabilityZoneList?: Array<string>;
+    /**
+      * mongos cpu数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果
+      */
+    MongosCpu?: number;
+    /**
+      * mongos 内存大小，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果
+      */
+    MongosMemory?: number;
+    /**
+      * mongos 数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：为了保障高可用，最低需要购买3个mongos，上限为32个
+      */
+    MongosNodeNum?: number;
 }
 /**
  * DescribeSecurityGroup返回参数结构体
@@ -323,11 +347,11 @@ export interface CreateDBInstanceHourRequest {
       */
     ReplicateSetNum: number;
     /**
-      * 每个副本集内节点个数，当前副本集节点数固定为3，分片从节点数可选，具体参照查询云数据库的售卖规格返回参数
+      * 每个副本集内节点个数，具体参照查询云数据库的售卖规格返回参数
       */
     NodeNum: number;
     /**
-      * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本
+      * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本，MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本
       */
     MongoVersion: string;
     /**
@@ -339,7 +363,7 @@ export interface CreateDBInstanceHourRequest {
       */
     GoodsNum: number;
     /**
-      * 可用区信息，格式如：ap-guangzhou-2
+      * 可用区信息，格式如：ap-guangzhou-2。注：此参数填写的是主可用区，如果选择多可用区部署，Zone必须是AvailabilityZoneList中的一个
       */
     Zone: string;
     /**
@@ -367,7 +391,7 @@ export interface CreateDBInstanceHourRequest {
       */
     Tags?: Array<TagInfo>;
     /**
-      * 1:正式实例,2:临时实例,3:只读实例，4：灾备实例
+      * 1:正式实例,2:临时实例,3:只读实例,4:灾备实例,5:克隆实例
       */
     Clone?: number;
     /**
@@ -378,6 +402,30 @@ export interface CreateDBInstanceHourRequest {
       * 安全组
       */
     SecurityGroup?: Array<string>;
+    /**
+      * 克隆实例回档时间。若是克隆实例，则必须填写，示例：2021-08-13 16:30:00。注：只能回档7天内的时间点
+      */
+    RestoreTime?: string;
+    /**
+      * 实例名称。注：名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符-
+      */
+    InstanceName?: string;
+    /**
+      * 多可用区部署的节点列表，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：1、多可用区部署节点只能部署在3个不同可用区；2、为了保障跨可用区切换，不支持将集群的大多数节点部署在同一个可用区（如3节点集群不支持2个节点部署在同一个区）；3、不支持4.2及以上版本；4、不支持只读灾备实例；5、不能选择基础网络
+      */
+    AvailabilityZoneList?: Array<string>;
+    /**
+      * mongos cpu数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果
+      */
+    MongosCpu?: number;
+    /**
+      * mongos 内存大小，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果
+      */
+    MongosMemory?: number;
+    /**
+      * mongos 数量，购买MongoDB 4.2 WiredTiger存储引擎版本的分片集群时必须填写，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。注：为了保障高可用，最低需要购买3个mongos，上限为32个
+      */
+    MongosNodeNum?: number;
 }
 /**
  * AssignProject请求参数结构体
@@ -947,9 +995,9 @@ export interface DescribeDBInstancesRequest {
  */
 export interface DescribeAsyncRequestInfoResponse {
     /**
-      * 状态
+      * 状态。返回参数有：initial-初始化、running-运行中、paused-任务执行失败，已暂停、undoed-任务执行失败，已回滚、failed-任务执行失败, 已终止、success-成功
       */
-    Status?: string;
+    Status: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

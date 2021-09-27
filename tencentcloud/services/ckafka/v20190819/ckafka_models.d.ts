@@ -1625,7 +1625,7 @@ export interface CreateInstancePreRequest {
       */
     RenewFlag?: number;
     /**
-      * 支持指定版本Kafka版本（0.10.2/1.1.1/2.4.2） 。指定专业版参数specificationsType=pro
+      * 支持指定版本Kafka版本（0.10.2/1.1.1/2.4.1） 。指定专业版参数specificationsType=pro
       */
     KafkaVersion?: string;
     /**

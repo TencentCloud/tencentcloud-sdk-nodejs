@@ -817,7 +817,7 @@ export interface ModifyLoadBalancersRequest {
       */
     LoadBalancerIds?: Array<string>;
     /**
-      * 应用型负载均衡器列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+      * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
       */
     ForwardLoadBalancers?: Array<ForwardLoadBalancer>;
     /**
@@ -1512,7 +1512,7 @@ export interface CreateAutoScalingGroupRequest {
       */
     ProjectId?: number;
     /**
-      * 应用型负载均衡器列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+      * 应用型负载均衡器列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
       */
     ForwardLoadBalancers?: Array<ForwardLoadBalancer>;
     /**

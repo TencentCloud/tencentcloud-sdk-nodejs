@@ -96,6 +96,22 @@ export interface DescribeEnvLimitResponse {
 }
 
 /**
+ * DescribeCloudBaseRunAllVpcs返回参数结构体
+ */
+export interface DescribeCloudBaseRunAllVpcsResponse {
+  /**
+      * 所有vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vpcs: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 订单信息
  */
 export interface OrderInfo {
@@ -966,6 +982,21 @@ export interface ClsInfo {
    * 创建时间
    */
   CreateTime: string
+}
+
+/**
+ * DescribeCloudBaseRunOperationTypes请求参数结构体
+ */
+export interface DescribeCloudBaseRunOperationTypesRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 服务名称，精确匹配
+   */
+  ServerName?: string
 }
 
 /**
@@ -2235,6 +2266,28 @@ export interface ModifyCloudBaseRunServerFlowConfResponse {
 }
 
 /**
+ * DescribeCloudBaseRunOperationTypes返回参数结构体
+ */
+export interface DescribeCloudBaseRunOperationTypesResponse {
+  /**
+      * 操作类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action: Array<string>
+
+  /**
+      * 服务名列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerName: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 1分钱计费详情
  */
 export interface SpecialCostItem {
@@ -2937,6 +2990,16 @@ export interface DescribeWxCloudBaseRunSubNetsRequest {
    * 查询个数限制，不填或小于等于0，等于不限制
    */
   Limit?: number
+}
+
+/**
+ * DescribeCloudBaseRunAllVpcs请求参数结构体
+ */
+export interface DescribeCloudBaseRunAllVpcsRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
 }
 
 /**
@@ -3923,6 +3986,16 @@ export interface DescribeWxCloudBaseRunEnvsRequest {
 }
 
 /**
+ * DescribeCloudBaseRunVersionRsByCondition返回参数结构体
+ */
+export interface DescribeCloudBaseRunVersionRsByConditionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCurveData请求参数结构体
  */
 export interface DescribeCurveDataRequest {
@@ -4901,6 +4974,11 @@ export interface CloudBaseCodeRepoDetail {
  * CheckTcbService请求参数结构体
  */
 export type CheckTcbServiceRequest = null
+
+/**
+ * DescribeCloudBaseRunVersionRsByCondition请求参数结构体
+ */
+export type DescribeCloudBaseRunVersionRsByConditionRequest = null
 
 /**
  * DescribeUserActivityInfo请求参数结构体

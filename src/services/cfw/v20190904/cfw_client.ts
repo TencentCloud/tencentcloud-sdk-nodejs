@@ -28,7 +28,7 @@ import {
   ModifyPublicIPSwitchStatusResponse,
   ModifyAcRuleResponse,
   DescribeTableStatusResponse,
-  DescribeNatFwInstanceWithRegionResponse,
+  AddAcRuleRequest,
   ModifyNatFwVpcDnsSwitchRequest,
   SecurityGroupApiRuleData,
   DeleteNatFwInstanceResponse,
@@ -45,6 +45,7 @@ import {
   DescribeAssociatedInstanceListResponse,
   AssociatedInstanceInfo,
   DescribeNatRuleOverviewResponse,
+  RemoveAcRuleResponse,
   NatFwInstance,
   DeleteNatFwInstanceRequest,
   CreateSecurityGroupRulesResponse,
@@ -86,6 +87,8 @@ import {
   ModifyAllSwitchStatusResponse,
   DescribeNatFwInfoCountResponse,
   SecurityGroupListData,
+  CreateNatFwInstanceWithDomainResponse,
+  RemoveAcRuleRequest,
   ModifyAllRuleStatusRequest,
   RuleInfoData,
   DescribeAcListsResponse,
@@ -108,6 +111,7 @@ import {
   ModifySequenceRulesResponse,
   DeleteSecurityGroupAllRuleResponse,
   DescribeResourceGroupNewResponse,
+  DescribeNatFwInstanceWithRegionResponse,
   DescribeResourceGroupNewRequest,
   ModifyBlockTopRequest,
   DeleteAcRuleResponse,
@@ -134,6 +138,7 @@ import {
   DescribeTLogIpListResponse,
   StopSecurityGroupRuleDispatchResponse,
   DescribeNatFwInfoCountRequest,
+  AddAcRuleResponse,
   ModifyNatFwReSelectRequest,
   SetNatFwDnatRuleRequest,
   DescribeSyncAssetStatusResponse,
@@ -151,6 +156,7 @@ import {
   CreateSecurityGroupRulesRequest,
   DeleteVpcInstanceRequest,
   SwitchListsData,
+  CreateNatFwInstanceWithDomainRequest,
   DescribeSwitchListsResponse,
   DescribeSyncAssetStatusRequest,
   DescribeCfwEipsResponse,
@@ -275,6 +281,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
+   */
+  async DescribeNatFwInstanceWithRegion(
+    req?: DescribeNatFwInstanceWithRegionRequest,
+    cb?: (error: string, rep: DescribeNatFwInstanceWithRegionResponse) => void
+  ): Promise<DescribeNatFwInstanceWithRegionResponse> {
+    return this.request("DescribeNatFwInstanceWithRegion", req, cb)
+  }
+
+  /**
    * 删除规则
    */
   async DeleteAcRule(
@@ -387,6 +403,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建防火墙实例和接入域名
+   */
+  async CreateNatFwInstanceWithDomain(
+    req: CreateNatFwInstanceWithDomainRequest,
+    cb?: (error: string, rep: CreateNatFwInstanceWithDomainResponse) => void
+  ): Promise<CreateNatFwInstanceWithDomainResponse> {
+    return this.request("CreateNatFwInstanceWithDomain", req, cb)
+  }
+
+  /**
    * 删除全部规则
    */
   async DeleteSecurityGroupAllRule(
@@ -394,6 +420,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSecurityGroupAllRuleResponse) => void
   ): Promise<DeleteSecurityGroupAllRuleResponse> {
     return this.request("DeleteSecurityGroupAllRule", req, cb)
+  }
+
+  /**
+   * 添加互联网边界规则
+   */
+  async AddAcRule(
+    req: AddAcRuleRequest,
+    cb?: (error: string, rep: AddAcRuleResponse) => void
+  ): Promise<AddAcRuleResponse> {
+    return this.request("AddAcRule", req, cb)
   }
 
   /**
@@ -532,6 +568,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+   */
+  async SetNatFwEip(
+    req: SetNatFwEipRequest,
+    cb?: (error: string, rep: SetNatFwEipResponse) => void
+  ): Promise<SetNatFwEipResponse> {
+    return this.request("SetNatFwEip", req, cb)
+  }
+
+  /**
      * DescribeSourceAsset-查询资产组全部资产信息
 
      */
@@ -593,13 +639,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+   * 删除互联网边界规则
    */
-  async SetNatFwEip(
-    req: SetNatFwEipRequest,
-    cb?: (error: string, rep: SetNatFwEipResponse) => void
-  ): Promise<SetNatFwEipResponse> {
-    return this.request("SetNatFwEip", req, cb)
+  async RemoveAcRule(
+    req: RemoveAcRuleRequest,
+    cb?: (error: string, rep: RemoveAcRuleResponse) => void
+  ): Promise<RemoveAcRuleResponse> {
+    return this.request("RemoveAcRule", req, cb)
   }
 
   /**
@@ -650,17 +696,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceGroupResponse) => void
   ): Promise<DescribeResourceGroupResponse> {
     return this.request("DescribeResourceGroup", req, cb)
-  }
-
-  /**
-     * DescribeBlockStaticList 告警中心柱形图
-
-     */
-  async DescribeBlockStaticList(
-    req: DescribeBlockStaticListRequest,
-    cb?: (error: string, rep: DescribeBlockStaticListResponse) => void
-  ): Promise<DescribeBlockStaticListResponse> {
-    return this.request("DescribeBlockStaticList", req, cb)
   }
 
   /**
@@ -806,13 +841,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
-   */
-  async DescribeNatFwInstanceWithRegion(
-    req?: DescribeNatFwInstanceWithRegionRequest,
-    cb?: (error: string, rep: DescribeNatFwInstanceWithRegionResponse) => void
-  ): Promise<DescribeNatFwInstanceWithRegionResponse> {
-    return this.request("DescribeNatFwInstanceWithRegion", req, cb)
+     * DescribeBlockStaticList 告警中心柱形图
+
+     */
+  async DescribeBlockStaticList(
+    req: DescribeBlockStaticListRequest,
+    cb?: (error: string, rep: DescribeBlockStaticListResponse) => void
+  ): Promise<DescribeBlockStaticListResponse> {
+    return this.request("DescribeBlockStaticList", req, cb)
   }
 
   /**

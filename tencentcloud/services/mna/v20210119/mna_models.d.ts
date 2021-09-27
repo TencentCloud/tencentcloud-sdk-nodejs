@@ -133,15 +133,15 @@ export interface CreateQosRequest {
     DestAddressInfo: DestAddressInfo;
     /**
       * 加速套餐
-T100K：上/下行保障 100kbps
-T200K：上/下行保障 200kbps
-T400K：上/下行保障 400kbps
-BD1M：下行带宽保障1Mbps
-BD2M：下行带宽保障2Mbps
-BD4M：下行带宽保障4Mbps
-BU1M：上行带宽保障1Mbps
-BU2M：上行带宽保障2Mbps
-BU4M：上行带宽保障4Mbps
+T100K：时延性保障 + 带宽保障上下行保障 100kbps
+T200K：时延性保障 + 带宽保障上下行保障 200kbps
+T400K：时延性保障 + 带宽保障上下行保障  400kbps
+BD1M：带宽型保障 + 下行带宽保障1Mbps
+BD2M：带宽型保障 + 下行带宽保障2Mbps
+BD4M：带宽型保障 + 下行带宽保障4Mbps
+BU1M：带宽型保障 + 上行带宽保障1Mbps
+BU2M：带宽型保障 + 上行带宽保障2Mbps
+BU4M：带宽型保障 + 上行带宽保障4Mbps
       */
     QosMenu: string;
     /**
@@ -160,4 +160,11 @@ BU4M：上行带宽保障4Mbps
       * 应用模板ID
       */
     TemplateId?: string;
+    /**
+      * 针对特殊协议进行加速
+1. IP （默认值）
+2. UDP
+3. TCP
+      */
+    Protocol?: number;
 }

@@ -5112,6 +5112,10 @@ export interface CreateApplicationRequest {
       * 服务配置信息列表
       */
     ServiceConfigList?: Array<ServiceConfig>;
+    /**
+      * 忽略创建镜像仓库
+      */
+    IgnoreCreateImageRepository?: boolean;
 }
 /**
  * DeployGroup请求参数结构体

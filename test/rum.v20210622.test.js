@@ -38,6 +38,16 @@ it("rum.v20210622.DescribeLogList", async function () {
     }
 })
 
+it("rum.v20210622.DescribeScores", async function () {
+    try {
+       const data = await client.DescribeScores({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataPerformancePage", async function () {
     try {
        const data = await client.DescribeDataPerformancePage({})

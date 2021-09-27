@@ -198,9 +198,9 @@ it("iotcloud.v20180614.GetUserResourceInfo", async function () {
     }
 })
 
-it("iotcloud.v20180614.UploadFirmware", async function () {
+it("iotcloud.v20180614.SetProductsForbiddenStatus", async function () {
     try {
-       const data = await client.UploadFirmware({})
+       const data = await client.SetProductsForbiddenStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +281,16 @@ it("iotcloud.v20180614.DescribeTask", async function () {
 it("iotcloud.v20180614.DeleteDevice", async function () {
     try {
        const data = await client.DeleteDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.UpdateDevicesEnableState", async function () {
+    try {
+       const data = await client.UpdateDevicesEnableState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,6 +411,16 @@ it("iotcloud.v20180614.ResetDeviceState", async function () {
 it("iotcloud.v20180614.DescribeFirmwareTask", async function () {
     try {
        const data = await client.DescribeFirmwareTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.UploadFirmware", async function () {
+    try {
+       const data = await client.UploadFirmware({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

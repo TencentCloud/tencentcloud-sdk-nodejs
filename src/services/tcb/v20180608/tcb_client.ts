@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeEnvLimitResponse,
+  DescribeCloudBaseRunAllVpcsResponse,
   OrderInfo,
   CheckTcbServiceResponse,
   DescribeCloudBaseRunConfForGateWayRequest,
@@ -48,6 +49,7 @@ import {
   DescribeCurveDataResponse,
   RollUpdateCloudBaseRunServerVersionResponse,
   ClsInfo,
+  DescribeCloudBaseRunOperationTypesRequest,
   DescribeAuthDomainsResponse,
   DescribeStandaloneGatewayResponse,
   DescribeWxCloudBaseRunEnvsResponse,
@@ -100,6 +102,7 @@ import {
   CloudBaseEsInfo,
   PostPaidEnvDeductInfo,
   ModifyCloudBaseRunServerFlowConfResponse,
+  DescribeCloudBaseRunOperationTypesResponse,
   SpecialCostItem,
   EstablishCloudBaseRunServerResponse,
   EnvInfo,
@@ -117,6 +120,7 @@ import {
   CreateCloudBaseRunServerVersionRequest,
   LoginStatistic,
   DescribeWxCloudBaseRunSubNetsRequest,
+  DescribeCloudBaseRunAllVpcsRequest,
   CreatePostpayPackageResponse,
   DescribeExtensionUploadInfoRequest,
   ReplaceActivityRecordRequest,
@@ -153,6 +157,7 @@ import {
   CloudBaseRunNfsVolumeSource,
   DescribeSmsQuotasResponse,
   DescribeWxCloudBaseRunEnvsRequest,
+  DescribeCloudBaseRunVersionRsByConditionResponse,
   DescribeCurveDataRequest,
   DescribeActivityInfoRequest,
   BindEnvGatewayRequest,
@@ -182,6 +187,7 @@ import {
   DescribeCloudBaseBuildServiceRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
+  DescribeCloudBaseRunVersionRsByConditionRequest,
   DescribeUserActivityInfoRequest,
   Tag,
   CreateCloudBaseRunResourceRequest,
@@ -231,6 +237,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSpecialCostItemsResponse) => void
   ): Promise<DescribeSpecialCostItemsResponse> {
     return this.request("DescribeSpecialCostItems", req, cb)
+  }
+
+  /**
+   * 查询环境下所有的vpc列表
+   */
+  async DescribeCloudBaseRunAllVpcs(
+    req: DescribeCloudBaseRunAllVpcsRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunAllVpcsResponse) => void
+  ): Promise<DescribeCloudBaseRunAllVpcsResponse> {
+    return this.request("DescribeCloudBaseRunAllVpcs", req, cb)
   }
 
   /**
@@ -657,6 +673,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询环境个数上限
+   */
+  async DescribeEnvLimit(
+    req?: DescribeEnvLimitRequest,
+    cb?: (error: string, rep: DescribeEnvLimitResponse) => void
+  ): Promise<DescribeEnvLimitResponse> {
+    return this.request("DescribeEnvLimit", req, cb)
+  }
+
+  /**
    * 查询静态托管域名任务状态
    */
   async DescribeHostingDomainTask(
@@ -724,6 +750,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDownloadFileResponse) => void
   ): Promise<DescribeDownloadFileResponse> {
     return this.request("DescribeDownloadFile", req, cb)
+  }
+
+  /**
+   * 查询服务、版本和操作类型
+   */
+  async DescribeCloudBaseRunOperationTypes(
+    req: DescribeCloudBaseRunOperationTypesRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunOperationTypesResponse) => void
+  ): Promise<DescribeCloudBaseRunOperationTypesResponse> {
+    return this.request("DescribeCloudBaseRunOperationTypes", req, cb)
   }
 
   /**
@@ -847,13 +883,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询环境个数上限
+   * DescribeCloudBaseRunVersionRsByCondition 获取云托管详情
    */
-  async DescribeEnvLimit(
-    req?: DescribeEnvLimitRequest,
-    cb?: (error: string, rep: DescribeEnvLimitResponse) => void
-  ): Promise<DescribeEnvLimitResponse> {
-    return this.request("DescribeEnvLimit", req, cb)
+  async DescribeCloudBaseRunVersionRsByCondition(
+    req?: DescribeCloudBaseRunVersionRsByConditionRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunVersionRsByConditionResponse) => void
+  ): Promise<DescribeCloudBaseRunVersionRsByConditionResponse> {
+    return this.request("DescribeCloudBaseRunVersionRsByCondition", req, cb)
   }
 
   /**

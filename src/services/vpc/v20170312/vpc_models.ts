@@ -557,12 +557,12 @@ export interface CreateDhcpIpResponse {
  */
 export interface DescribeIpGeolocationInfosRequest {
   /**
-   * 查询IP地址列表，支持IPv4和IPv6。
+   * 需查询的IP地址列表，支持IPv4和IPv6。批量查询的IP地址上限为100个。
    */
   AddressIps: Array<string>
 
   /**
-   * 查询IP地址的字段信息，包括"Country","Province","City","Region","Isp","AsName","AsId"
+   * 需查询的IP地址的字段信息。
    */
   Fields?: IpField
 }
@@ -1450,14 +1450,14 @@ export interface FilterObject {
  */
 export interface DescribeIpGeolocationInfosResponse {
   /**
-   * IP地址信息列表
+   * IP地址信息列表。
    */
-  AddressInfo?: Array<IpGeolocationInfo>
+  AddressInfo: Array<IpGeolocationInfo>
 
   /**
-   * IP地址信息个数
+   * IP地址信息个数。
    */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

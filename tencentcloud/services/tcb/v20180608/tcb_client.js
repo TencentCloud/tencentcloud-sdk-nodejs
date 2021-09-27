@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSpecialCostItems", req, cb);
     }
     /**
+     * 查询环境下所有的vpc列表
+     */
+    async DescribeCloudBaseRunAllVpcs(req, cb) {
+        return this.request("DescribeCloudBaseRunAllVpcs", req, cb);
+    }
+    /**
      * 创建或修改安全网关路由
      */
     async EstablishWxGatewayRoute(req, cb) {
@@ -295,6 +301,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEndUserLoginStatistic", req, cb);
     }
     /**
+     * 查询环境个数上限
+     */
+    async DescribeEnvLimit(req, cb) {
+        return this.request("DescribeEnvLimit", req, cb);
+    }
+    /**
      * 查询静态托管域名任务状态
      */
     async DescribeHostingDomainTask(req, cb) {
@@ -335,6 +347,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDownloadFile(req, cb) {
         return this.request("DescribeDownloadFile", req, cb);
+    }
+    /**
+     * 查询服务、版本和操作类型
+     */
+    async DescribeCloudBaseRunOperationTypes(req, cb) {
+        return this.request("DescribeCloudBaseRunOperationTypes", req, cb);
     }
     /**
      * 更新环境信息
@@ -409,10 +427,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStaticStore", req, cb);
     }
     /**
-     * 查询环境个数上限
+     * DescribeCloudBaseRunVersionRsByCondition 获取云托管详情
      */
-    async DescribeEnvLimit(req, cb) {
-        return this.request("DescribeEnvLimit", req, cb);
+    async DescribeCloudBaseRunVersionRsByCondition(req, cb) {
+        return this.request("DescribeCloudBaseRunVersionRsByCondition", req, cb);
     }
     /**
      * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看

@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcRuleOverview", req, cb);
     }
     /**
+     * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
+     */
+    async DescribeNatFwInstanceWithRegion(req, cb) {
+        return this.request("DescribeNatFwInstanceWithRegion", req, cb);
+    }
+    /**
      * 删除规则
      */
     async DeleteAcRule(req, cb) {
@@ -150,10 +156,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatabaseWhiteListRules", req, cb);
     }
     /**
+     * 创建防火墙实例和接入域名
+     */
+    async CreateNatFwInstanceWithDomain(req, cb) {
+        return this.request("CreateNatFwInstanceWithDomain", req, cb);
+    }
+    /**
      * 删除全部规则
      */
     async DeleteSecurityGroupAllRule(req, cb) {
         return this.request("DeleteSecurityGroupAllRule", req, cb);
+    }
+    /**
+     * 添加互联网边界规则
+     */
+    async AddAcRule(req, cb) {
+        return this.request("AddAcRule", req, cb);
     }
     /**
      * 创建规则
@@ -239,6 +257,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUnHandleEventTabList", req, cb);
     }
     /**
+     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+     */
+    async SetNatFwEip(req, cb) {
+        return this.request("SetNatFwEip", req, cb);
+    }
+    /**
      * DescribeSourceAsset-查询资产组全部资产信息
 
      */
@@ -276,10 +300,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySequenceRules", req, cb);
     }
     /**
-     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+     * 删除互联网边界规则
      */
-    async SetNatFwEip(req, cb) {
-        return this.request("SetNatFwEip", req, cb);
+    async RemoveAcRule(req, cb) {
+        return this.request("RemoveAcRule", req, cb);
     }
     /**
      * ModifyBlockTop取消置顶接口
@@ -310,13 +334,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeResourceGroup(req, cb) {
         return this.request("DescribeResourceGroup", req, cb);
-    }
-    /**
-     * DescribeBlockStaticList 告警中心柱形图
-
-     */
-    async DescribeBlockStaticList(req, cb) {
-        return this.request("DescribeBlockStaticList", req, cb);
     }
     /**
      * 查询防火墙弹性公网IP
@@ -405,10 +422,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlockByIpTimesList", req, cb);
     }
     /**
-     * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
+     * DescribeBlockStaticList 告警中心柱形图
+
      */
-    async DescribeNatFwInstanceWithRegion(req, cb) {
-        return this.request("DescribeNatFwInstanceWithRegion", req, cb);
+    async DescribeBlockStaticList(req, cb) {
+        return this.request("DescribeBlockStaticList", req, cb);
     }
     /**
      * 修改单个防火墙开关

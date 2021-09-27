@@ -187,6 +187,23 @@ export interface DescribeProjectsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeScores请求参数结构体
+ */
+export interface DescribeScoresRequest {
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 项目ID
+      */
+    ID?: number;
+}
+/**
  * DescribeError请求参数结构体
  */
 export interface DescribeErrorRequest {
@@ -198,6 +215,63 @@ export interface DescribeErrorRequest {
       * 项目ID
       */
     ID: number;
+}
+/**
+ * project Score分数实体
+ */
+export interface ScoreInfo {
+    /**
+      * duration
+      */
+    StaticDuration: string;
+    /**
+      * pv
+      */
+    PagePv: string;
+    /**
+      * 失败
+      */
+    ApiFail: string;
+    /**
+      * 请求
+      */
+    ApiNum: string;
+    /**
+      * fail
+      */
+    StaticFail: string;
+    /**
+      * 项目id
+      */
+    ProjectID: number;
+    /**
+      * uv
+      */
+    PageUv: string;
+    /**
+      * 请求次数
+      */
+    ApiDuration: string;
+    /**
+      * 分数
+      */
+    Score: string;
+    /**
+      * error
+      */
+    PageError: string;
+    /**
+      * num
+      */
+    StaticNum: string;
+    /**
+      * num
+      */
+    RecordNum: number;
+    /**
+      * Duration
+      */
+    PageDuration: string;
 }
 /**
  * DescribeProjects请求参数结构体
@@ -311,6 +385,19 @@ export interface DescribeLogListRequest {
       * 结束时间
       */
     EndTime?: string;
+}
+/**
+ * DescribeScores返回参数结构体
+ */
+export interface DescribeScoresResponse {
+    /**
+      * 数组
+      */
+    ScoreSet: Array<ScoreInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeError返回参数结构体

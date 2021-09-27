@@ -378,6 +378,11 @@ export interface ExternalContactSimpleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SalesName: string
+
+  /**
+   * 添加了此外部联系人的企业成员的归属部门id列表
+   */
+  DepartmentIdList: Array<number>
 }
 
 /**

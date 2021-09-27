@@ -72,13 +72,14 @@ import {
   CheckCertificateChainRequest,
   ModifyCertificateAliasResponse,
   DescribeManagerDetailResponse,
-  SubmittedData,
+  ManagerStatusInfo,
   SubmitCertificateInformationRequest,
   DescribeCertificatesRequest,
   DescribeManagersRequest,
   CompleteCertificateResponse,
   SubmitCertificateInformationResponse,
   RevokeCertificateRequest,
+  SubmittedData,
 } from "./ssl_models"
 
 /**

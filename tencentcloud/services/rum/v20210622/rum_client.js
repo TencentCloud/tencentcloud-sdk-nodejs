@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogList", req, cb);
     }
     /**
+     * 获取首页分数列表
+     */
+    async DescribeScores(req, cb) {
+        return this.request("DescribeScores", req, cb);
+    }
+    /**
      * 获取PerformancePage信息
      */
     async DescribeDataPerformancePage(req, cb) {

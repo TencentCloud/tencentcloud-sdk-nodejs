@@ -38,6 +38,16 @@ it("tcb.v20180608.DescribeSpecialCostItems", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudBaseRunAllVpcs", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunAllVpcs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.EstablishWxGatewayRoute", async function () {
     try {
        const data = await client.EstablishWxGatewayRoute({})
@@ -458,6 +468,16 @@ it("tcb.v20180608.DescribeEndUserLoginStatistic", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeEnvLimit", async function () {
+    try {
+       const data = await client.DescribeEnvLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeHostingDomainTask", async function () {
     try {
        const data = await client.DescribeHostingDomainTask({})
@@ -521,6 +541,16 @@ it("tcb.v20180608.DeleteCloudBaseProjectLatestVersion", async function () {
 it("tcb.v20180608.DescribeDownloadFile", async function () {
     try {
        const data = await client.DescribeDownloadFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudBaseRunOperationTypes", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunOperationTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +678,9 @@ it("tcb.v20180608.CreateStaticStore", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEnvLimit", async function () {
+it("tcb.v20180608.DescribeCloudBaseRunVersionRsByCondition", async function () {
     try {
-       const data = await client.DescribeEnvLimit({})
+       const data = await client.DescribeCloudBaseRunVersionRsByCondition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

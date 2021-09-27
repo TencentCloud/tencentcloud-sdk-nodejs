@@ -136,10 +136,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetUserResourceInfo", req, cb);
     }
     /**
-     * 本接口（UploadFirmware）用于上传设备固件信息
+     * 批量设置产品禁用状态
      */
-    async UploadFirmware(req, cb) {
-        return this.request("UploadFirmware", req, cb);
+    async SetProductsForbiddenStatus(req, cb) {
+        return this.request("SetProductsForbiddenStatus", req, cb);
     }
     /**
      * 获取证书认证类型设备的私钥，刚生成或者重置设备后仅可调用一次
@@ -188,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDevice(req, cb) {
         return this.request("DeleteDevice", req, cb);
+    }
+    /**
+     * 批量启用或者禁用设备
+     */
+    async UpdateDevicesEnableState(req, cb) {
+        return this.request("UpdateDevicesEnableState", req, cb);
     }
     /**
      * 本接口（ReplaceTopicRule）用于修改替换规则
@@ -260,6 +266,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFirmwareTask(req, cb) {
         return this.request("DescribeFirmwareTask", req, cb);
+    }
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件信息
+     */
+    async UploadFirmware(req, cb) {
+        return this.request("UploadFirmware", req, cb);
     }
     /**
      * 本接口（DescribeTasks）用于查询已创建的任务列表，任务保留一个月

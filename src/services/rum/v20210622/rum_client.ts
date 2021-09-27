@@ -22,13 +22,16 @@ import {
   DescribeDataPerformancePageResponse,
   DescribeDataPerformancePageRequest,
   DescribeProjectsResponse,
+  DescribeScoresRequest,
   DescribeErrorRequest,
+  ScoreInfo,
   DescribeProjectsRequest,
   DescribeLogListResponse,
   Filter,
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
   DescribeLogListRequest,
+  DescribeScoresResponse,
   DescribeErrorResponse,
   DescribeDataLogUrlStatisticsRequest,
   CreateProjectRequest,
@@ -61,6 +64,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogListResponse) => void
   ): Promise<DescribeLogListResponse> {
     return this.request("DescribeLogList", req, cb)
+  }
+
+  /**
+   * 获取首页分数列表
+   */
+  async DescribeScores(
+    req: DescribeScoresRequest,
+    cb?: (error: string, rep: DescribeScoresResponse) => void
+  ): Promise<DescribeScoresResponse> {
+    return this.request("DescribeScores", req, cb)
   }
 
   /**
