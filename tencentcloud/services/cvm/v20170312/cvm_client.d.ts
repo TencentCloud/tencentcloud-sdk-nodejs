@@ -357,7 +357,7 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceRunInstances(req: InquiryPriceRunInstancesRequest, cb?: (error: string, rep: InquiryPriceRunInstancesResponse) => void): Promise<InquiryPriceRunInstancesResponse>;
     /**
-     * 本接口(ImportImage)用于导入镜像，导入后的镜像可用于创建实例。
+     * 本接口(ImportImage)用于导入镜像，导入后的镜像可用于创建实例。目前支持 RAW、VHD、QCOW2、VMDK 镜像格式。
      */
     ImportImage(req: ImportImageRequest, cb?: (error: string, rep: ImportImageResponse) => void): Promise<ImportImageResponse>;
     /**

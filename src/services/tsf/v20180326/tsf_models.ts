@@ -1863,6 +1863,12 @@ export interface ScalableRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Desc: string
+
+  /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
 }
 
 /**
@@ -6105,6 +6111,16 @@ export interface DeployGroupRequest {
    * 是否进行增量部署，默认为false，全量更新
    */
   IncrementalDeployment?: boolean
+
+  /**
+   * JDK名称: konaJDK或openJDK
+   */
+  JdkName?: string
+
+  /**
+   * JDK版本: 8或11 (openJDK只支持8)
+   */
+  JdkVersion?: string
 }
 
 /**

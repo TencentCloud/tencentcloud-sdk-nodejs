@@ -289,12 +289,12 @@ export interface DescribeTablesResponse {
   /**
    * 表格数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 表格详情结果列表
    */
-  TableInfos?: Array<TableInfoNew>
+  TableInfos: Array<TableInfoNew>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -307,12 +307,12 @@ export interface DescribeTablesResponse {
  */
 export interface ModifySnapshotsResponse {
   /**
-   * 批量创建的快照数量
+   * 批量修改的快照数量
    */
   TotalCount: number
 
   /**
-   * 批量创建的快照结果列表
+   * 批量修改的快照结果列表
    */
   TableResults: Array<SnapshotResult>
 
@@ -1743,6 +1743,11 @@ export interface CreateClusterRequest {
    * 集群类型1共享2独占
    */
   ClusterType?: number
+
+  /**
+   * 密码认证类型，0 静态认证， 1 签名认证
+   */
+  AuthType?: number
 }
 
 /**
@@ -1948,12 +1953,12 @@ export interface SetTableIndexResponse {
   /**
    * 表格分布式索引创建结果数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 表格分布式索引创建结果列表
    */
-  TableResults?: Array<TableResultNew>
+  TableResults: Array<TableResultNew>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2111,7 +2116,7 @@ export interface CreateClusterResponse {
   /**
    * 集群ID
    */
-  ClusterId?: string
+  ClusterId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -8357,6 +8357,10 @@ export interface DescribeMalwareTimingScanSettingResponse {
       */
     ClickTimeout: number;
     /**
+      * 是否杀掉进程 1杀掉 0不杀掉 只有开启自动隔离才生效
+      */
+    KillProcess: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -10095,6 +10099,10 @@ export interface ModifyMalwareTimingScanSettingsRequest {
       * 是否自动隔离 1隔离 0 不隔离
       */
     AutoIsolation?: number;
+    /**
+      * 是否杀掉进程 1杀掉 0不杀掉
+      */
+    KillProcess?: number;
 }
 /**
  * 资产管理环境变量列表
@@ -10712,6 +10720,10 @@ export interface SeparateMalwaresRequest {
       * 木马事件ID数组。(最大100条)
       */
     Ids: Array<number>;
+    /**
+      * 是否杀掉进程
+      */
+    KillProcess?: boolean;
 }
 /**
  * ExportIgnoreRuleEffectHostList请求参数结构体

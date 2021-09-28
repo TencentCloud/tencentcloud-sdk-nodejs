@@ -3223,6 +3223,10 @@ export interface GeneralAccurateOCRRequest {
       * 是否返回单字信息，默认关
       */
     IsWords?: boolean;
+    /**
+      * 是否开启原图切图检测功能，开启后可提升“整图面积大，但单字符占比面积小”（例如：试卷）场景下的识别效果，默认关
+      */
+    EnableDetectSplit?: boolean;
 }
 /**
  * OrgCodeCertOCR请求参数结构体
