@@ -39,5 +39,11 @@ class Client extends abstract_client_1.AbstractClient {
     async CreateQos(req, cb) {
         return this.request("CreateQos", req, cb);
     }
+    /**
+     * 获取Qos加速状态
+     */
+    async DescribeQos(req, cb) {
+        return this.request("DescribeQos", req, cb);
+    }
 }
 exports.Client = Client;

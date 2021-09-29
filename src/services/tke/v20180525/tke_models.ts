@@ -4526,6 +4526,11 @@ export interface ModifyClusterNodePoolRequest {
    * 镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
    */
   OsCustomizeType?: string
+
+  /**
+   * 节点自定义参数
+   */
+  ExtraArgs?: InstanceExtraArgs
 }
 
 /**

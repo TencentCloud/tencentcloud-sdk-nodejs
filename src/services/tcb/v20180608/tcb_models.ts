@@ -4953,6 +4953,11 @@ export interface DescribeCloudBaseBuildServiceRequest {
    * 服务版本
    */
   ServiceVersion?: string
+
+  /**
+   * 文件后缀
+   */
+  Suffix?: string
 }
 
 /**

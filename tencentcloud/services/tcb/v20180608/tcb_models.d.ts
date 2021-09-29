@@ -4191,6 +4191,10 @@ export interface DescribeCloudBaseBuildServiceRequest {
       * 服务版本
       */
     ServiceVersion?: string;
+    /**
+      * 文件后缀
+      */
+    Suffix?: string;
 }
 /**
  * 代码仓库里 Repo的信息描述

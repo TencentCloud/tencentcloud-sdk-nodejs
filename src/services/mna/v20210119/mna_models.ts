@@ -31,6 +31,16 @@ export interface Capacity {
 }
 
 /**
+ * DescribeQos请求参数结构体
+ */
+export interface DescribeQosRequest {
+  /**
+   * 单次加速唯一 Id
+   */
+  SessionId: string
+}
+
+/**
  * 移动网络加速目标地址结构体
  */
 export interface DestAddressInfo {
@@ -38,6 +48,26 @@ export interface DestAddressInfo {
    * 加速业务目标 ip 地址数组
    */
   DestIp: Array<string>
+}
+
+/**
+ * 移动网络加速源地址结构体
+ */
+export interface SrcAddressInfo {
+  /**
+   * 用户私网 ipv4 地址
+   */
+  SrcIpv4?: string
+
+  /**
+   * 用户公网 ipv4 地址
+   */
+  SrcPublicIpv4?: string
+
+  /**
+   * 用户 ipv6 地址
+   */
+  SrcIpv6?: string
 }
 
 /**
@@ -135,23 +165,43 @@ export interface CreateQosResponse {
 }
 
 /**
- * 移动网络加速源地址结构体
+ * DescribeQos返回参数结构体
  */
-export interface SrcAddressInfo {
+export interface DescribeQosResponse {
   /**
-   * 用户私网 ipv4 地址
-   */
-  SrcIpv4?: string
+      * 0：无匹配的加速中会话
+1：存在匹配的加速中会话
+      */
+  Status: number
 
   /**
-   * 用户公网 ipv4 地址
-   */
-  SrcPublicIpv4?: string
+      * 手机公网出口IP，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SrcPublicIpv4: string
 
   /**
-   * 用户 ipv6 地址
+      * 业务访问目的IP，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DestIpv4: Array<string>
+
+  /**
+      * 当前加速剩余时长（单位秒）有，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration: number
+
+  /**
+      * 加速套餐类型，仅匹配时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QosMenu: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SrcIpv6?: string
+  RequestId?: string
 }
 
 /**

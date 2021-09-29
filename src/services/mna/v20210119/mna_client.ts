@@ -19,12 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   Capacity,
+  DescribeQosRequest,
   DestAddressInfo,
+  SrcAddressInfo,
   DeleteQosRequest,
   DeviceInfo,
   DeleteQosResponse,
   CreateQosResponse,
-  SrcAddressInfo,
+  DescribeQosResponse,
   CreateQosRequest,
 } from "./mna_models"
 
@@ -55,5 +57,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateQosResponse) => void
   ): Promise<CreateQosResponse> {
     return this.request("CreateQos", req, cb)
+  }
+
+  /**
+   * 获取Qos加速状态
+   */
+  async DescribeQos(
+    req: DescribeQosRequest,
+    cb?: (error: string, rep: DescribeQosResponse) => void
+  ): Promise<DescribeQosResponse> {
+    return this.request("DescribeQos", req, cb)
   }
 }

@@ -2818,7 +2818,7 @@ export interface CreatePluginRequest {
   PluginName: string
 
   /**
-   * 插件类型。目前支持IPControl。
+   * 插件类型。目前支持IPControl, TrafficControl, Cors, CustomReq, CustomAuth。
    */
   PluginType: string
 
