@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryActivityList", req, cb);
     }
     /**
+     * 企业可通过此接口获取线索列表。
+     */
+    async QueryClueInfoList(req, cb) {
+        return this.request("QueryClueInfoList", req, cb);
+    }
+    /**
      * 根据游标拉取会话存档列表信息
      */
     async QueryChatArchivingList(req, cb) {

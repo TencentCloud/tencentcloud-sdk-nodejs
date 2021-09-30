@@ -58,6 +58,16 @@ it("wav.v20210129.QueryActivityList", async function () {
     }
 })
 
+it("wav.v20210129.QueryClueInfoList", async function () {
+    try {
+       const data = await client.QueryClueInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wav.v20210129.QueryChatArchivingList", async function () {
     try {
        const data = await client.QueryChatArchivingList({})

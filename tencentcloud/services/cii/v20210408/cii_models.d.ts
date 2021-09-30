@@ -1,4 +1,262 @@
 /**
+ * 报告分类信息
+ */
+export interface ClassifyInfo {
+    /**
+      * 一级分类
+      */
+    FirstClass: string;
+    /**
+      * 二级分类
+      */
+    SecondClass: string;
+    /**
+      * 三级分类
+      */
+    ThirdClass: string;
+    /**
+      * 一级分类序号
+      */
+    FirstClassId: number;
+    /**
+      * 二级分类序号
+      */
+    SecondClassId: number;
+    /**
+      * 三级分类序号
+      */
+    ThirdClassId: number;
+}
+/**
+ * DescribeStructureTaskResult请求参数结构体
+ */
+export interface DescribeStructureTaskResultRequest {
+    /**
+      * 结构化任务ID
+      */
+    MainTaskId: string;
+}
+/**
+ * 机器核保输出
+ */
+export interface MachineUnderwriteOutput {
+    /**
+      * 客户号
+      */
+    CustomerId: string;
+    /**
+      * 客户姓名
+      */
+    CustomerName: string;
+    /**
+      * 各个险种的结果
+      */
+    Results: Array<InsuranceResult>;
+}
+/**
+ * CreateStructureTask请求参数结构体
+ */
+export interface CreateStructureTaskRequest {
+    /**
+      * 服务类型
+Structured 仅结构化
+Underwrite 结构化+核保
+      */
+    ServiceType: string;
+    /**
+      * 创建任务时可以上传多个报告，后台生成多个识别子任务，子任务的详细信息
+      */
+    TaskInfos: Array<CreateStructureTaskInfo>;
+    /**
+      * 保单号
+      */
+    PolicyId?: string;
+    /**
+      * 核保触发方式
+Auto 自动
+Manual 手动
+      */
+    TriggerType?: string;
+    /**
+      * 险种，如果是体检报告类型，此参数是必填，类型说明如下：
+CriticalDiseaseInsurance:重疾险
+LifeInsurance：寿险
+AccidentInsurance：意外险
+      */
+    InsuranceTypes?: Array<string>;
+    /**
+      * 回调地址，接收Post请求传送结果
+      */
+    CallbackUrl?: string;
+}
+/**
+ * DescribeStructCompareData请求参数结构体
+ */
+export interface DescribeStructCompareDataRequest {
+    /**
+      * 主任务号
+      */
+    MainTaskId?: string;
+    /**
+      * 子任务号
+      */
+    SubTaskId?: string;
+}
+/**
+ * 包含险种的各个核保结论
+ */
+export interface InsuranceResult {
+    /**
+      * 险种
+      */
+    InsuranceType: string;
+    /**
+      * 对应险种的机器核保结果
+      */
+    Result: Array<MachinePredict>;
+}
+/**
+ * DescribeStructureDifference返回参数结构体
+ */
+export interface DescribeStructureDifferenceResponse {
+    /**
+      * 主任务号
+      */
+    MainTaskId: string;
+    /**
+      * 结果状态：
+0：返回成功
+1：结果未生成
+2：结果生成失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 差异的结果数组
+      */
+    Results: Array<PerStructDifference>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 复核差异接口的每一份报告的差异结果
+ */
+export interface PerStructDifference {
+    /**
+      * 子任务ID
+      */
+    SubTaskId: string;
+    /**
+      * 任务类型
+      */
+    TaskType: string;
+    /**
+      * 修改的项
+      */
+    ModifyItems: Array<StructureModifyItem>;
+    /**
+      * 新增的项
+      */
+    NewItems: Array<StructureOneItem>;
+    /**
+      * 删除的项
+      */
+    RemoveItems: Array<StructureOneItem>;
+}
+/**
+ * 结构化对比指标（准确率/召回率）数据
+ */
+export interface CompareMetricsData {
+    /**
+      * 短文准确率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShortStructAccuracy: string;
+    /**
+      * 短文召回率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShortStructRecall: string;
+    /**
+      * 长文结构化准确率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LongStructAccuracy: string;
+    /**
+      * 长文结构化召回率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LongStructRecall: string;
+    /**
+      * 长文提取准确率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LongContentAccuracy: string;
+    /**
+      * 长文提取召回率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LongContentRecall: string;
+}
+/**
+ * DescribeMachineUnderwrite请求参数结构体
+ */
+export interface DescribeMachineUnderwriteRequest {
+    /**
+      * 核保任务ID
+      */
+    UnderwriteTaskId: string;
+}
+/**
+ * 人工复核数据的子任务信息
+ */
+export interface ReviewDataTaskInfo {
+    /**
+      * 主任务号
+      */
+    MainTaskId: string;
+    /**
+      * 子任务号
+      */
+    SubTaskId: string;
+    /**
+      * 任务名
+      */
+    TaskName: string;
+    /**
+      * 任务类型
+      */
+    TaskType: string;
+}
+/**
+ * DescribeStructureResult请求参数结构体
+ */
+export interface DescribeStructureResultRequest {
+    /**
+      * 创建任务时返回的主任务ID
+      */
+    MainTaskId: string;
+}
+/**
+ * 机器核保结论子项
+ */
+export interface UnderwriteItem {
+    /**
+      * 字段名
+      */
+    Name: string;
+    /**
+      * 结果
+      */
+    Result: string;
+    /**
+      * 风险值或者说明
+      */
+    Value: string;
+}
+/**
  * DescribeStructCompareData返回参数结构体
  */
 export interface DescribeStructCompareDataResponse {
@@ -62,168 +320,19 @@ export interface DescribeStructCompareDataResponse {
     RequestId?: string;
 }
 /**
- * 报告分类信息
+ * 复核差异接口的新增或者删除的项
  */
-export interface ClassifyInfo {
+export interface StructureOneItem {
     /**
-      * 一级分类
-      */
-    FirstClass: string;
-    /**
-      * 二级分类
-      */
-    SecondClass: string;
-    /**
-      * 三级分类
-      */
-    ThirdClass: string;
-    /**
-      * 一级分类序号
-      */
-    FirstClassId: number;
-    /**
-      * 二级分类序号
-      */
-    SecondClassId: number;
-    /**
-      * 三级分类序号
-      */
-    ThirdClassId: number;
-}
-/**
- * DescribeStructureTaskResult请求参数结构体
- */
-export interface DescribeStructureTaskResultRequest {
-    /**
-      * 结构化任务ID
-      */
-    MainTaskId: string;
-}
-/**
- * DescribeStructureTaskResultTest返回参数结构体
- */
-export interface DescribeStructureTaskResultTestResponse {
-    /**
-      * 结果状态：
-0：返回成功
-1：结果未生成
-2：结果生成失败
-      */
-    Status: number;
-    /**
-      * 结构化识别结果数组，每个数组元素对应一个图片的结构化结果，顺序和输入参数的ImageList或FileList对应。
+      * 新字段的路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Results: Array<ResultObject>;
+    Path: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateStructureTaskTest返回参数结构体
- */
-export interface CreateStructureTaskTestResponse {
-    /**
-      * 创建的主任务号，用于查询结果
-      */
-    MainTaskId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateStructureTask请求参数结构体
- */
-export interface CreateStructureTaskRequest {
-    /**
-      * 服务类型
-Structured 仅结构化
-Underwrite 结构化+核保
-      */
-    ServiceType: string;
-    /**
-      * 创建任务时可以上传多个报告，后台生成多个识别子任务，子任务的详细信息
-      */
-    TaskInfos: Array<CreateStructureTaskInfo>;
-    /**
-      * 保单号
-      */
-    PolicyId?: string;
-    /**
-      * 核保触发方式
-Auto 自动
-Manual 手动
-      */
-    TriggerType?: string;
-    /**
-      * 险种，如果是体检报告类型，此参数是必填，类型说明如下：
-CriticalDiseaseInsurance:重疾险
-LifeInsurance：寿险
-AccidentInsurance：意外险
-      */
-    InsuranceTypes?: Array<string>;
-    /**
-      * 回调地址，接收Post请求传送结果
-      */
-    CallbackUrl?: string;
-}
-/**
- * 结构化对比指标（准确率/召回率）数据
- */
-export interface CompareMetricsData {
-    /**
-      * 短文准确率
+      * 字段的值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ShortStructAccuracy: string;
-    /**
-      * 短文召回率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ShortStructRecall: string;
-    /**
-      * 长文结构化准确率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LongStructAccuracy: string;
-    /**
-      * 长文结构化召回率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LongStructRecall: string;
-    /**
-      * 长文提取准确率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LongContentAccuracy: string;
-    /**
-      * 长文提取召回率
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LongContentRecall: string;
-}
-/**
- * 人工复核数据的子任务信息
- */
-export interface ReviewDataTaskInfo {
-    /**
-      * 主任务号
-      */
-    MainTaskId: string;
-    /**
-      * 子任务号
-      */
-    SubTaskId: string;
-    /**
-      * 任务名
-      */
-    TaskName: string;
-    /**
-      * 任务类型
-      */
-    TaskType: string;
+    Value: string;
 }
 /**
  * 用于返回结构化任务结果
@@ -268,17 +377,29 @@ export interface DescribeStructureResultResponse {
     RequestId?: string;
 }
 /**
- * DescribeStructCompareData请求参数结构体
+ * 机器核保预测结果
  */
-export interface DescribeStructCompareDataRequest {
+export interface MachinePredict {
     /**
-      * 主任务号
+      * 核保引擎名称
       */
-    MainTaskId?: string;
+    Title: string;
     /**
-      * 子任务号
+      * 核保结论
       */
-    SubTaskId?: string;
+    Conclusion: string;
+    /**
+      * AI决策树解释
+      */
+    Explanation: Array<UnderwriteItem>;
+    /**
+      * 疾病指标
+      */
+    Disease: Array<UnderwriteItem>;
+    /**
+      * 检查异常
+      */
+    Laboratory: Array<UnderwriteItem>;
 }
 /**
  * CreateStructureTask返回参数结构体
@@ -292,42 +413,6 @@ export interface CreateStructureTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * CreateStructureTaskTest请求参数结构体
- */
-export interface CreateStructureTaskTestRequest {
-    /**
-      * 服务类型
-Structured 仅结构化
-Underwrite 结构化+核保
-      */
-    ServiceType: string;
-    /**
-      * 创建任务时可以上传多个报告，后台生成多个识别子任务，子任务的详细信息
-      */
-    TaskInfos: Array<CreateStructureTaskInfo>;
-    /**
-      * 保单号
-      */
-    PolicyId?: string;
-    /**
-      * 核保触发方式
-Auto 自动
-Manual 手动
-      */
-    TriggerType?: string;
-    /**
-      * 险种，如果是体检报告类型，此参数是必填，类型说明如下：
-CriticalDiseaseInsurance:重疾险
-LifeInsurance：寿险
-AccidentInsurance：意外险
-      */
-    InsuranceTypes?: Array<string>;
-    /**
-      * 回调地址，接收Post请求传送结果
-      */
-    CallbackUrl?: string;
 }
 /**
  * DescribeStructureTaskResult返回参数结构体
@@ -345,6 +430,69 @@ export interface DescribeStructureTaskResultResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Results: Array<ResultObject>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeMachineUnderwrite返回参数结构体
+ */
+export interface DescribeMachineUnderwriteResponse {
+    /**
+      * 腾讯云主账号ID
+      */
+    Uin: string;
+    /**
+      * 操作人子账户ID
+      */
+    SubAccountUin: string;
+    /**
+      * 保单ID
+      */
+    PolicyId: string;
+    /**
+      * 主任务ID
+      */
+    MainTaskId: string;
+    /**
+      * 核保任务ID
+      */
+    UnderwriteTaskId: string;
+    /**
+      * 状态码
+      */
+    Status: number;
+    /**
+      * 机器核保结果
+      */
+    UnderwriteResults: Array<MachineUnderwriteOutput>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateUnderwriteTaskById请求参数结构体
+ */
+export interface CreateUnderwriteTaskByIdRequest {
+    /**
+      * 主任务ID数组，
+      */
+    MainTaskIds: Array<string>;
+    /**
+      * 回调地址，可不传（提供轮询机制）。
+      */
+    CallbackUrl?: string;
+}
+/**
+ * CreateUnderwriteTaskById返回参数结构体
+ */
+export interface CreateUnderwriteTaskByIdResponse {
+    /**
+      * 核保任务ID数据
+      */
+    UnderwriteTaskIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -370,15 +518,6 @@ export interface StructureResultObject {
       * 子任务ID
       */
     SubTaskId: string;
-}
-/**
- * DescribeStructureResult请求参数结构体
- */
-export interface DescribeStructureResultRequest {
-    /**
-      * 创建任务时返回的主任务ID
-      */
-    MainTaskId: string;
 }
 /**
  * 创建结构化任务子任务信息
@@ -410,11 +549,35 @@ export interface CreateStructureTaskInfo {
     Year?: string;
 }
 /**
- * DescribeStructureTaskResultTest请求参数结构体
+ * DescribeStructureDifference请求参数结构体
  */
-export interface DescribeStructureTaskResultTestRequest {
+export interface DescribeStructureDifferenceRequest {
     /**
-      * 结构化任务ID
+      * 主任务号
       */
-    MainTaskId: string;
+    MainTaskId?: string;
+    /**
+      * 子任务号
+      */
+    SubTaskId?: string;
+}
+/**
+ * 结构化复核差异接口的修改的项
+ */
+export interface StructureModifyItem {
+    /**
+      * 修改的字段的路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * 机器结果的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Machine: string;
+    /**
+      * 人工结果的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Manual: string;
 }

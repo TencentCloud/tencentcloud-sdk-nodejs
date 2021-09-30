@@ -9514,6 +9514,16 @@ export interface RiskDnsList {
       * 标签特性
       */
     Tags: Array<string>;
+    /**
+      * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineWanIp: string;
+    /**
+      * 主机在线状态 OFFLINE  ONLINE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineStatus: string;
 }
 /**
  * DeleteMalwareScanTask请求参数结构体
@@ -9659,14 +9669,6 @@ export interface DescribeScanScheduleRequest {
  */
 export interface EditBashRulesRequest {
     /**
-      * 规则名称
-      */
-    Name: string;
-    /**
-      * 正则表达式
-      */
-    Rule: string;
-    /**
       * 规则ID（新增时不填）
       */
     Id?: number;
@@ -9679,9 +9681,17 @@ export interface EditBashRulesRequest {
       */
     HostIp?: string;
     /**
+      * 规则名称，编辑时不可修改规则名称
+      */
+    Name?: string;
+    /**
       * 危险等级(0:无，1: 高危 2:中危 3: 低危)
       */
     Level?: number;
+    /**
+      * 正则表达式 ，编辑时不可修改正则表达式，需要对内容QueryEscape后再base64
+      */
+    Rule?: string;
     /**
       * 是否全局规则(默认否)：1-全局，0-非全局
       */
@@ -10255,6 +10265,26 @@ export interface MalwareInfo {
       * 参考链接
       */
     Reference: string;
+    /**
+      * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineWanIp: string;
+    /**
+      * 进程树 json  pid:进程id，exe:文件路径 ，account:进程所属用组和用户 ,cmdline:执行命令，ssh_service: SSH服务ip, ssh_soure:登录源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PsTree: string;
+    /**
+      * 主机在线状态 OFFLINE  ONLINE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineStatus: string;
+    /**
+      * 状态；4-:待处理，5-已信任，6-已隔离
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
 }
 /**
  * 登录地信息

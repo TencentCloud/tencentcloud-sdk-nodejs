@@ -316,6 +316,11 @@ PERSON 自然人
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FlowId: string;
+    /**
+      * 企业经办人 用户在渠道的编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId: string;
 }
 /**
  * CreateConsoleLoginUrl请求参数结构体

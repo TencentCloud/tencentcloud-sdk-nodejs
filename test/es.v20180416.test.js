@@ -98,6 +98,16 @@ it("es.v20180416.UpdateDiagnoseSettings", async function () {
     }
 })
 
+it("es.v20180416.UpdateJdk", async function () {
+    try {
+       const data = await client.UpdateJdk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.UpgradeInstance", async function () {
     try {
        const data = await client.UpgradeInstance({})

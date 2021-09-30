@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetRequestTargetNodeTypesRequest, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateRequestTargetNodeTypesRequest, UpgradeLicenseRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, DiagnoseInstanceRequest, RestartInstanceRequest, DescribeInstancesRequest, UpdateDiagnoseSettingsRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpdateDiagnoseSettingsResponse, UpgradeLicenseResponse, DeleteInstanceRequest, RestartNodesResponse, UpgradeInstanceResponse, UpdateInstanceResponse, UpgradeInstanceRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse } from "./es_models";
+import { UpdateJdkRequest, GetRequestTargetNodeTypesRequest, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateRequestTargetNodeTypesRequest, UpgradeLicenseRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, DiagnoseInstanceRequest, RestartInstanceRequest, DescribeInstancesRequest, UpdateDiagnoseSettingsRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpdateDiagnoseSettingsResponse, UpgradeLicenseResponse, DeleteInstanceRequest, UpdateJdkResponse, RestartNodesResponse, UpgradeInstanceResponse, UpdateInstanceResponse, UpgradeInstanceRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse } from "./es_models";
 /**
  * es client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 更新智能运维配置
      */
     UpdateDiagnoseSettings(req: UpdateDiagnoseSettingsRequest, cb?: (error: string, rep: UpdateDiagnoseSettingsResponse) => void): Promise<UpdateDiagnoseSettingsResponse>;
+    /**
+     * 更新实例Jdk配置
+     */
+    UpdateJdk(req: UpdateJdkRequest, cb?: (error: string, rep: UpdateJdkResponse) => void): Promise<UpdateJdkResponse>;
     /**
      * 升级ES集群版本
      */

@@ -245,6 +245,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindAutoSnapshotPolicy", req, cb);
     }
     /**
+     * 本接口（DescribeDiskStoragePool）查询用户的云硬盘独享集群列表。
+
+* 可以根据独享集群ID(CdcId)、集群区域名(zone)类型等信息来查询和过滤云硬盘独享集群详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
+* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的云硬盘独享集群列表。
+     */
+    async DescribeDiskStoragePool(req, cb) {
+        return this.request("DescribeDiskStoragePool", req, cb);
+    }
+    /**
      * 本接口（ApplySnapshot）用于回滚快照到原云硬盘。
 
 * 仅支持回滚到原云硬盘上。对于数据盘快照，如果您需要复制快照数据到其它云硬盘上，请使用[CreateDisks](/document/product/362/16312)接口创建新的弹性云盘，将快照数据复制到新购云盘上。

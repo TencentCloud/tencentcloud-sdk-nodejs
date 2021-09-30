@@ -23,6 +23,7 @@ import {
   LocalDiskInfo,
   TaskDetail,
   NodeInfo,
+  UpdateJdkRequest,
   GetRequestTargetNodeTypesRequest,
   DescribeInstanceOperationsRequest,
   OperationDetail,
@@ -62,6 +63,7 @@ import {
   MasterNodeInfo,
   DeleteInstanceRequest,
   SubTaskDetail,
+  UpdateJdkResponse,
   RestartNodesResponse,
   UpgradeInstanceResponse,
   UpdateInstanceResponse,
@@ -158,6 +160,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDiagnoseSettingsResponse) => void
   ): Promise<UpdateDiagnoseSettingsResponse> {
     return this.request("UpdateDiagnoseSettings", req, cb)
+  }
+
+  /**
+   * 更新实例Jdk配置
+   */
+  async UpdateJdk(
+    req: UpdateJdkRequest,
+    cb?: (error: string, rep: UpdateJdkResponse) => void
+  ): Promise<UpdateJdkResponse> {
+    return this.request("UpdateJdk", req, cb)
   }
 
   /**

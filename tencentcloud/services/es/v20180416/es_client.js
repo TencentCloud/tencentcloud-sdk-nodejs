@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDiagnoseSettings", req, cb);
     }
     /**
+     * 更新实例Jdk配置
+     */
+    async UpdateJdk(req, cb) {
+        return this.request("UpdateJdk", req, cb);
+    }
+    /**
      * 升级ES集群版本
      */
     async UpgradeInstance(req, cb) {

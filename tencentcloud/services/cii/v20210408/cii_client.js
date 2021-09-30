@@ -28,22 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("cii.tencentcloudapi.com", "2021-04-08", clientConfig);
     }
     /**
+     * 结构化复核差异查询接口，对比结构化复核前后数据差异，返回差异的部分。
+     */
+    async DescribeStructureDifference(req, cb) {
+        return this.request("DescribeStructureDifference", req, cb);
+    }
+    /**
      * 依据任务ID获取结构化结果接口。
      */
     async DescribeStructureTaskResult(req, cb) {
         return this.request("DescribeStructureTaskResult", req, cb);
     }
     /**
-     * 本接口(CreateStructureTaskTest)基于提供的客户及保单信息，创建并启动结构化识别任务。用于路由到测试环境。
+     * 本接口(CreateUnderwriteTaskById)用于根据结构化任务ID创建核保任务
      */
-    async CreateStructureTaskTest(req, cb) {
-        return this.request("CreateStructureTaskTest", req, cb);
+    async CreateUnderwriteTaskById(req, cb) {
+        return this.request("CreateUnderwriteTaskById", req, cb);
     }
     /**
-     * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
+     * 本接口(DescribeMachineUnderwrite)用于查询机器核保任务数据
      */
-    async DescribeStructCompareData(req, cb) {
-        return this.request("DescribeStructCompareData", req, cb);
+    async DescribeMachineUnderwrite(req, cb) {
+        return this.request("DescribeMachineUnderwrite", req, cb);
     }
     /**
      * 本接口(CreateStructureTask)基于提供的客户及保单信息，创建并启动结构化识别任务。
@@ -52,16 +58,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStructureTask", req, cb);
     }
     /**
+     * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
+     */
+    async DescribeStructCompareData(req, cb) {
+        return this.request("DescribeStructCompareData", req, cb);
+    }
+    /**
      * 本接口(DescribeStructureResult)用于查询结构化结果接口
      */
     async DescribeStructureResult(req, cb) {
         return this.request("DescribeStructureResult", req, cb);
-    }
-    /**
-     * 依据任务ID获取结构化结果接口，该接口用于路由到测试环境。
-     */
-    async DescribeStructureTaskResultTest(req, cb) {
-        return this.request("DescribeStructureTaskResultTest", req, cb);
     }
 }
 exports.Client = Client;

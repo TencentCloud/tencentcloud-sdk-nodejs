@@ -150,6 +150,31 @@ export interface NodeInfo {
 }
 
 /**
+ * UpdateJdk请求参数结构体
+ */
+export interface UpdateJdkRequest {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+
+  /**
+   * Jdk类型，支持kona和oracle
+   */
+  Jdk?: string
+
+  /**
+   * Gc类型，支持g1和cms
+   */
+  Gc?: string
+
+  /**
+   * 是否强制重启
+   */
+  ForceRestart?: boolean
+}
+
+/**
  * GetRequestTargetNodeTypes请求参数结构体
  */
 export interface GetRequestTargetNodeTypesRequest {
@@ -1493,6 +1518,16 @@ export interface SubTaskDetail {
    * 子任务等级，1警告 2失败
    */
   Level: number
+}
+
+/**
+ * UpdateJdk返回参数结构体
+ */
+export interface UpdateJdkResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryExternalContactListRequest, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryLicenseInfoResponse, QueryActivityListResponse, QueryActivityJoinListRequest, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, CreateCorpTagRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryExternalUserMappingInfoRequest, QueryChannelCodeListResponse } from "./wav_models";
+import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryExternalContactListRequest, QueryClueInfoListResponse, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryLicenseInfoResponse, QueryClueInfoListRequest, QueryActivityListResponse, QueryActivityJoinListRequest, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, CreateCorpTagRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryExternalUserMappingInfoRequest, QueryChannelCodeListResponse } from "./wav_models";
 /**
  * wav client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 根据游标拉取活动列表信息
      */
     QueryActivityList(req: QueryActivityListRequest, cb?: (error: string, rep: QueryActivityListResponse) => void): Promise<QueryActivityListResponse>;
+    /**
+     * 企业可通过此接口获取线索列表。
+     */
+    QueryClueInfoList(req: QueryClueInfoListRequest, cb?: (error: string, rep: QueryClueInfoListResponse) => void): Promise<QueryClueInfoListResponse>;
     /**
      * 根据游标拉取会话存档列表信息
      */

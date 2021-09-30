@@ -32,6 +32,7 @@ import {
   ChatArchivingMsgTypeVideo,
   QueryExternalContactListRequest,
   MiniAppCodeInfo,
+  QueryClueInfoListResponse,
   CreateChannelCodeRequest,
   QueryExternalContactDetailResponse,
   LiveCodeDetail,
@@ -41,6 +42,7 @@ import {
   QueryActivityJoinListResponse,
   ExternalUserMappingInfo,
   QueryLicenseInfoResponse,
+  QueryClueInfoListRequest,
   ActivityDetail,
   ExternalContactTag,
   ChatArchivingDetail,
@@ -51,6 +53,7 @@ import {
   WeComTagDetail,
   QueryActivityLiveCodeListRequest,
   CreateCorpTagRequest,
+  ClueInfoDetail,
   QueryMiniAppCodeListResponse,
   CreateChannelCodeResponse,
   QueryLicenseInfoRequest,
@@ -108,6 +111,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryActivityListResponse) => void
   ): Promise<QueryActivityListResponse> {
     return this.request("QueryActivityList", req, cb)
+  }
+
+  /**
+   * 企业可通过此接口获取线索列表。
+   */
+  async QueryClueInfoList(
+    req: QueryClueInfoListRequest,
+    cb?: (error: string, rep: QueryClueInfoListResponse) => void
+  ): Promise<QueryClueInfoListResponse> {
+    return this.request("QueryClueInfoList", req, cb)
   }
 
   /**

@@ -18,24 +18,33 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeStructCompareDataResponse,
   ClassifyInfo,
   DescribeStructureTaskResultRequest,
-  DescribeStructureTaskResultTestResponse,
-  CreateStructureTaskTestResponse,
+  MachineUnderwriteOutput,
   CreateStructureTaskRequest,
+  DescribeStructCompareDataRequest,
+  InsuranceResult,
+  DescribeStructureDifferenceResponse,
+  PerStructDifference,
   CompareMetricsData,
+  DescribeMachineUnderwriteRequest,
   ReviewDataTaskInfo,
+  DescribeStructureResultRequest,
+  UnderwriteItem,
+  DescribeStructCompareDataResponse,
+  StructureOneItem,
   ResultObject,
   DescribeStructureResultResponse,
-  DescribeStructCompareDataRequest,
+  MachinePredict,
   CreateStructureTaskResponse,
-  CreateStructureTaskTestRequest,
   DescribeStructureTaskResultResponse,
+  DescribeMachineUnderwriteResponse,
+  CreateUnderwriteTaskByIdRequest,
+  CreateUnderwriteTaskByIdResponse,
   StructureResultObject,
-  DescribeStructureResultRequest,
   CreateStructureTaskInfo,
-  DescribeStructureTaskResultTestRequest,
+  DescribeStructureDifferenceRequest,
+  StructureModifyItem,
 } from "./cii_models"
 
 /**
@@ -45,6 +54,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cii.tencentcloudapi.com", "2021-04-08", clientConfig)
+  }
+
+  /**
+   * 结构化复核差异查询接口，对比结构化复核前后数据差异，返回差异的部分。
+   */
+  async DescribeStructureDifference(
+    req: DescribeStructureDifferenceRequest,
+    cb?: (error: string, rep: DescribeStructureDifferenceResponse) => void
+  ): Promise<DescribeStructureDifferenceResponse> {
+    return this.request("DescribeStructureDifference", req, cb)
   }
 
   /**
@@ -58,23 +77,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateStructureTaskTest)基于提供的客户及保单信息，创建并启动结构化识别任务。用于路由到测试环境。
+   * 本接口(CreateUnderwriteTaskById)用于根据结构化任务ID创建核保任务
    */
-  async CreateStructureTaskTest(
-    req: CreateStructureTaskTestRequest,
-    cb?: (error: string, rep: CreateStructureTaskTestResponse) => void
-  ): Promise<CreateStructureTaskTestResponse> {
-    return this.request("CreateStructureTaskTest", req, cb)
+  async CreateUnderwriteTaskById(
+    req: CreateUnderwriteTaskByIdRequest,
+    cb?: (error: string, rep: CreateUnderwriteTaskByIdResponse) => void
+  ): Promise<CreateUnderwriteTaskByIdResponse> {
+    return this.request("CreateUnderwriteTaskById", req, cb)
   }
 
   /**
-   * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
+   * 本接口(DescribeMachineUnderwrite)用于查询机器核保任务数据
    */
-  async DescribeStructCompareData(
-    req: DescribeStructCompareDataRequest,
-    cb?: (error: string, rep: DescribeStructCompareDataResponse) => void
-  ): Promise<DescribeStructCompareDataResponse> {
-    return this.request("DescribeStructCompareData", req, cb)
+  async DescribeMachineUnderwrite(
+    req: DescribeMachineUnderwriteRequest,
+    cb?: (error: string, rep: DescribeMachineUnderwriteResponse) => void
+  ): Promise<DescribeMachineUnderwriteResponse> {
+    return this.request("DescribeMachineUnderwrite", req, cb)
   }
 
   /**
@@ -88,6 +107,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
+   */
+  async DescribeStructCompareData(
+    req: DescribeStructCompareDataRequest,
+    cb?: (error: string, rep: DescribeStructCompareDataResponse) => void
+  ): Promise<DescribeStructCompareDataResponse> {
+    return this.request("DescribeStructCompareData", req, cb)
+  }
+
+  /**
    * 本接口(DescribeStructureResult)用于查询结构化结果接口
    */
   async DescribeStructureResult(
@@ -95,15 +124,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStructureResultResponse) => void
   ): Promise<DescribeStructureResultResponse> {
     return this.request("DescribeStructureResult", req, cb)
-  }
-
-  /**
-   * 依据任务ID获取结构化结果接口，该接口用于路由到测试环境。
-   */
-  async DescribeStructureTaskResultTest(
-    req: DescribeStructureTaskResultTestRequest,
-    cb?: (error: string, rep: DescribeStructureTaskResultTestResponse) => void
-  ): Promise<DescribeStructureTaskResultTestResponse> {
-    return this.request("DescribeStructureTaskResultTest", req, cb)
   }
 }

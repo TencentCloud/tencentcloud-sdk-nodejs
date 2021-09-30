@@ -508,6 +508,34 @@ export interface MiniAppCodeInfo {
 }
 
 /**
+ * QueryClueInfoList返回参数结构体
+ */
+export interface QueryClueInfoListResponse {
+  /**
+      * 线索信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<ClueInfoDetail>
+
+  /**
+      * 分页游标，下次调用带上该值，则从当前的位置继续往后拉，以实现增量拉取。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 是否还有更多数据。0-否；1-是。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasMore: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateChannelCode请求参数结构体
  */
 export interface CreateChannelCodeRequest {
@@ -797,6 +825,21 @@ export interface QueryLicenseInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryClueInfoList请求参数结构体
+ */
+export interface QueryClueInfoListRequest {
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
+
+  /**
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+   */
+  Limit?: number
 }
 
 /**
@@ -1123,6 +1166,81 @@ export interface CreateCorpTagRequest {
    * 标签组次序值。sort值大的排序靠前。有效的值范围是[0, 2^32)
    */
   Sort?: number
+}
+
+/**
+ * 线索信息详情
+ */
+export interface ClueInfoDetail {
+  /**
+   * 线索id，线索唯一识别编码
+   */
+  ClueId: string
+
+  /**
+   * 接待客户经销商顾问所属组织id,多个组织使用逗号分割
+   */
+  DealerId: string
+
+  /**
+   * 线索获取时间，用户添加企业微信时间，单位是秒
+   */
+  EnquireTime: number
+
+  /**
+   * 客户在微信生态中唯一识别码
+   */
+  UnionId: string
+
+  /**
+   * 微信昵称
+   */
+  Name: string
+
+  /**
+   * 联系方式
+   */
+  Phone: string
+
+  /**
+   * 车系编号
+   */
+  SeriesCode: string
+
+  /**
+   * 车型编号
+   */
+  ModelCode: string
+
+  /**
+   * 省份编号
+   */
+  ProvinceCode: string
+
+  /**
+   * 城市编号
+   */
+  CityCode: string
+
+  /**
+   * 顾问名称
+   */
+  SalesName: string
+
+  /**
+   * 顾问电话
+   */
+  SalesPhone: string
+
+  /**
+   * 备注
+   */
+  Remark: string
+
+  /**
+   * 标签
+   */
+  TagList: Array<string>
 }
 
 /**

@@ -278,6 +278,16 @@ it("cbs.v20170312.UnbindAutoSnapshotPolicy", async function () {
     }
 })
 
+it("cbs.v20170312.DescribeDiskStoragePool", async function () {
+    try {
+       const data = await client.DescribeDiskStoragePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.ApplySnapshot", async function () {
     try {
        const data = await client.ApplySnapshot({})
