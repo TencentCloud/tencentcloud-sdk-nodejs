@@ -88,6 +88,16 @@ it("tdmq.v20200217.DescribeNodeHealthOpt", async function () {
     }
 })
 
+it("tdmq.v20200217.CreateRole", async function () {
+    try {
+       const data = await client.CreateRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateCmqQueue", async function () {
     try {
        const data = await client.CreateCmqQueue({})
@@ -138,6 +148,16 @@ it("tdmq.v20200217.DescribeCmqSubscriptionDetail", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeCmqDeadLetterSourceQueues", async function () {
+    try {
+       const data = await client.DescribeCmqDeadLetterSourceQueues({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DeleteCmqQueue", async function () {
     try {
        const data = await client.DeleteCmqQueue({})
@@ -158,9 +178,9 @@ it("tdmq.v20200217.DescribeCmqTopics", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeCmqDeadLetterSourceQueues", async function () {
+it("tdmq.v20200217.DeleteTopics", async function () {
     try {
-       const data = await client.DescribeCmqDeadLetterSourceQueues({})
+       const data = await client.DeleteTopics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +358,16 @@ it("tdmq.v20200217.CreateEnvironment", async function () {
     }
 })
 
+it("tdmq.v20200217.DeleteRoles", async function () {
+    try {
+       const data = await client.DeleteRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeProducers", async function () {
     try {
        const data = await client.DescribeProducers({})
@@ -378,6 +408,16 @@ it("tdmq.v20200217.ClearCmqSubscriptionFilterTags", async function () {
     }
 })
 
+it("tdmq.v20200217.ModifyEnvironmentRole", async function () {
+    try {
+       const data = await client.ModifyEnvironmentRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.SendMessages", async function () {
     try {
        const data = await client.SendMessages({})
@@ -408,6 +448,16 @@ it("tdmq.v20200217.ModifyCluster", async function () {
     }
 })
 
+it("tdmq.v20200217.ModifyRole", async function () {
+    try {
+       const data = await client.ModifyRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ModifyEnvironmentAttributes", async function () {
     try {
        const data = await client.ModifyEnvironmentAttributes({})
@@ -421,6 +471,16 @@ it("tdmq.v20200217.ModifyEnvironmentAttributes", async function () {
 it("tdmq.v20200217.ModifyCmqSubscriptionAttribute", async function () {
     try {
        const data = await client.ModifyCmqSubscriptionAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRoles", async function () {
+    try {
+       const data = await client.DescribeRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +538,19 @@ it("tdmq.v20200217.CreateCmqSubscribe", async function () {
     }
 })
 
-it("tdmq.v20200217.DeleteTopics", async function () {
+it("tdmq.v20200217.CreateEnvironmentRole", async function () {
     try {
-       const data = await client.DeleteTopics({})
+       const data = await client.CreateEnvironmentRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DeleteEnvironmentRoles", async function () {
+    try {
+       const data = await client.DeleteEnvironmentRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

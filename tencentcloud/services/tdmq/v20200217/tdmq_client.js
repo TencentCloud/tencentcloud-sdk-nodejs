@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNodeHealthOpt", req, cb);
     }
     /**
+     * 创建角色
+     */
+    async CreateRole(req, cb) {
+        return this.request("CreateRole", req, cb);
+    }
+    /**
      * 创建cmq队列接口
      */
     async CreateCmqQueue(req, cb) {
@@ -100,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqSubscriptionDetail", req, cb);
     }
     /**
+     * 枚举cmq死信队列源队列
+     */
+    async DescribeCmqDeadLetterSourceQueues(req, cb) {
+        return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
+    }
+    /**
      * 删除cmq队列
      */
     async DeleteCmqQueue(req, cb) {
@@ -112,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqTopics", req, cb);
     }
     /**
-     * 枚举cmq死信队列源队列
+     * 批量删除topics
      */
-    async DescribeCmqDeadLetterSourceQueues(req, cb) {
-        return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
+    async DeleteTopics(req, cb) {
+        return this.request("DeleteTopics", req, cb);
     }
     /**
      * 获取命名空间角色列表
@@ -220,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEnvironment", req, cb);
     }
     /**
+     * 删除角色，支持批量。
+     */
+    async DeleteRoles(req, cb) {
+        return this.request("DeleteRoles", req, cb);
+    }
+    /**
      * 获取生产者列表，仅显示在线的生产者
      */
     async DescribeProducers(req, cb) {
@@ -244,6 +262,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClearCmqSubscriptionFilterTags", req, cb);
     }
     /**
+     * 修改环境角色授权。
+     */
+    async ModifyEnvironmentRole(req, cb) {
+        return this.request("ModifyEnvironmentRole", req, cb);
+    }
+    /**
      * 发送单条消息
      */
     async SendMessages(req, cb) {
@@ -262,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCluster", req, cb);
     }
     /**
+     * 角色修改
+     */
+    async ModifyRole(req, cb) {
+        return this.request("ModifyRole", req, cb);
+    }
+    /**
      * 修改指定命名空间的属性值
      */
     async ModifyEnvironmentAttributes(req, cb) {
@@ -272,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyCmqSubscriptionAttribute(req, cb) {
         return this.request("ModifyCmqSubscriptionAttribute", req, cb);
+    }
+    /**
+     * 获取角色列表
+     */
+    async DescribeRoles(req, cb) {
+        return this.request("DescribeRoles", req, cb);
     }
     /**
      * 解绑cmq死信队列
@@ -304,10 +340,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCmqSubscribe", req, cb);
     }
     /**
-     * 批量删除topics
+     * 创建环境角色授权
      */
-    async DeleteTopics(req, cb) {
-        return this.request("DeleteTopics", req, cb);
+    async CreateEnvironmentRole(req, cb) {
+        return this.request("CreateEnvironmentRole", req, cb);
+    }
+    /**
+     * 删除环境角色授权。
+     */
+    async DeleteEnvironmentRoles(req, cb) {
+        return this.request("DeleteEnvironmentRoles", req, cb);
     }
     /**
      * 根据时间戳进行消息回溯，精确到毫秒

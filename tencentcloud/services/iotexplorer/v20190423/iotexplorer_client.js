@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateLoRaFrequency", req, cb);
     }
     /**
+     * 本接口（CreateTopicPolicy）用于创建一个Topic
+     */
+    async CreateTopicPolicy(req, cb) {
+        return this.request("CreateTopicPolicy", req, cb);
+    }
+    /**
      * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求
      */
     async UpdateFirmware(req, cb) {

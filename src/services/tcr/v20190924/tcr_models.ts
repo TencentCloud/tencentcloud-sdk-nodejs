@@ -789,7 +789,12 @@ export interface CreateReplicationInstanceRequest {
   /**
    * 复制实例地域ID
    */
-  ReplicationRegionId: number
+  ReplicationRegionId?: number
+
+  /**
+   * 复制实例地域名称
+   */
+  ReplicationRegionName?: string
 }
 
 /**
@@ -4678,9 +4683,14 @@ export interface ManageInternalEndpointRequest {
   SubnetId: string
 
   /**
-   * 请求的地域ID
+   * 请求的地域ID，用于实例复制地域
    */
   RegionId?: number
+
+  /**
+   * 请求的地域名称，用于实例复制地域
+   */
+  RegionName?: string
 }
 
 /**

@@ -3374,31 +3374,31 @@ export interface DescribeLivePackageInfoResponse {
 204: 日结流量
 205: 日结时长
 206: 月结时长
-304: 日结流量
+304: 日结流量。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PackageBillMode: number
 
   /**
-      * 总页数
+      * 总页数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalPage: number
 
   /**
-      * 数据总条数
+      * 数据总条数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalNum: number
 
   /**
-      * 当前页数
+      * 当前页数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PageNum: number
 
   /**
-      * 当前每页数量
+      * 当前每页数量。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PageSize: number
@@ -4010,8 +4010,8 @@ UTC格式时间，例如：2019-01-07T15:00:00Z。
 export interface DescribeLivePackageInfoRequest {
   /**
       * 包类型，可选值：
-0：流量包；
-1：转码包。
+0：流量包
+1：转码包
 2: 连麦包。
       */
   PackageType: number
@@ -4021,10 +4021,10 @@ export interface DescribeLivePackageInfoRequest {
 1. BuyTimeDesc： 最新购买的排在最前面
 2. BuyTimeAsc： 最老购买的排在最前面
 3. ExpireTimeDesc： 最后过期的排在最前面
-4. ExpireTimeAsc：最先过期的排在最前面
+4. ExpireTimeAsc：最先过期的排在最前面。
 
 注意：
-1. PackageType 为 2（连麦包） 的时候，不支持 3、4 排序
+1. PackageType 为 2（连麦包） 的时候，不支持 3、4 排序。
       */
   OrderBy?: string
 
@@ -4035,7 +4035,7 @@ export interface DescribeLivePackageInfoRequest {
 
   /**
       * 分页大小，和 PageNum 同时传递才会生效。
-取值：10 ～ 100 之间的任意整数
+取值：10 ～ 100 之间的任意整数。
       */
   PageSize?: number
 }

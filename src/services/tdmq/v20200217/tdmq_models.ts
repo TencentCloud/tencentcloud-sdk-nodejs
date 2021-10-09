@@ -16,6 +16,26 @@
  */
 
 /**
+ * DescribeRoles返回参数结构体
+ */
+export interface DescribeRolesResponse {
+  /**
+   * 记录数。
+   */
+  TotalCount: number
+
+  /**
+   * 角色数组。
+   */
+  RoleSets: Array<Role>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBindClusters返回参数结构体
  */
 export interface DescribeBindClustersResponse {
@@ -107,6 +127,36 @@ export interface DescribeSubscriptionsRequest {
    * Pulsar 集群的ID
    */
   ClusterId?: string
+}
+
+/**
+ * 角色实例
+ */
+export interface Role {
+  /**
+   * 角色名称。
+   */
+  RoleName: string
+
+  /**
+   * 角色token值。
+   */
+  Token: string
+
+  /**
+   * 备注说明。
+   */
+  Remark: string
+
+  /**
+   * 创建时间。
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间。
+   */
+  UpdateTime: string
 }
 
 /**
@@ -1249,6 +1299,16 @@ export interface AcknowledgeMessageResponse {
 }
 
 /**
+ * DeleteEnvironmentRoles返回参数结构体
+ */
+export interface DeleteEnvironmentRolesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterDetail请求参数结构体
  */
 export interface DescribeClusterDetailRequest {
@@ -1256,6 +1316,26 @@ export interface DescribeClusterDetailRequest {
    * 集群的ID
    */
   ClusterId: string
+}
+
+/**
+ * ModifyRole返回参数结构体
+ */
+export interface ModifyRoleResponse {
+  /**
+   * 角色名称
+   */
+  RoleName: string
+
+  /**
+   * 备注说明
+   */
+  Remark: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1351,6 +1431,21 @@ export interface ModifyCmqTopicAttributeRequest {
    * 是否开启消息轨迹标识，true表示开启，false表示不开启，不填表示不开启。
    */
   Trace?: boolean
+}
+
+/**
+ * DeleteRoles请求参数结构体
+ */
+export interface DeleteRolesRequest {
+  /**
+   * 角色名称数组。
+   */
+  RoleNames: Array<string>
+
+  /**
+   * 必填字段，集群Id
+   */
+  ClusterId?: string
 }
 
 /**
@@ -1491,6 +1586,26 @@ export interface DescribeSubscriptionsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyRole请求参数结构体
+ */
+export interface ModifyRoleRequest {
+  /**
+   * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
+   */
+  RoleName: string
+
+  /**
+   * 备注说明，长度必须大等于0且小等于128。
+   */
+  Remark?: string
+
+  /**
+   * 必填字段，集群Id
+   */
+  ClusterId?: string
 }
 
 /**
@@ -1890,7 +2005,7 @@ export interface TopicRecord {
  */
 export interface DescribeEnvironmentRolesRequest {
   /**
-   * 环境（命名空间）名称。
+   * 必填字段，环境（命名空间）名称。
    */
   EnvironmentId?: string
 
@@ -1905,7 +2020,7 @@ export interface DescribeEnvironmentRolesRequest {
   Limit?: number
 
   /**
-   * Pulsar 集群的ID
+   * 必填字段，Pulsar 集群的ID
    */
   ClusterId?: string
 
@@ -1921,6 +2036,21 @@ export interface DescribeEnvironmentRolesRequest {
 必选：否
       */
   Filters?: Array<Filter>
+}
+
+/**
+ * DeleteRoles返回参数结构体
+ */
+export interface DeleteRolesResponse {
+  /**
+   * 成功删除的角色名称数组。
+   */
+  RoleNames: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2636,6 +2766,16 @@ export interface ResetMsgSubOffsetByTimestampRequest {
 }
 
 /**
+ * CreateEnvironmentRole返回参数结构体
+ */
+export interface CreateEnvironmentRoleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  *  消费者
  */
 export interface Consumer {
@@ -2925,6 +3065,52 @@ export interface DescribeCmqQueueDetailRequest {
 }
 
 /**
+ * CreateRole返回参数结构体
+ */
+export interface CreateRoleResponse {
+  /**
+   * 角色名称
+   */
+  RoleName: string
+
+  /**
+   * 角色token
+   */
+  Token: string
+
+  /**
+      * 备注说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteEnvironmentRoles请求参数结构体
+ */
+export interface DeleteEnvironmentRolesRequest {
+  /**
+   * 环境（命名空间）名称。
+   */
+  EnvironmentId: string
+
+  /**
+   * 角色名称数组。
+   */
+  RoleNames: Array<string>
+
+  /**
+   * 必填字段，集群的ID
+   */
+  ClusterId?: string
+}
+
+/**
  * ClearCmqQueue返回参数结构体
  */
 export interface ClearCmqQueueResponse {
@@ -2955,18 +3141,70 @@ export interface DeleteEnvironmentsRequest {
 export type DescribeBindClustersRequest = null
 
 /**
- * DescribeClusterDetail返回参数结构体
+ * ModifyEnvironmentAttributes返回参数结构体
  */
-export interface DescribeClusterDetailResponse {
+export interface ModifyEnvironmentAttributesResponse {
   /**
-   * 集群的详细信息
+   * 命名空间名称。
    */
-  ClusterSet: Cluster
+  EnvironmentId: string
+
+  /**
+   * 未消费消息过期时间，单位：秒。
+   */
+  MsgTTL: number
+
+  /**
+      * 备注，字符串最长不超过128。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 环境角色集合
+ */
+export interface EnvironmentRole {
+  /**
+   * 环境（命名空间）。
+   */
+  EnvironmentId: string
+
+  /**
+   * 角色名称。
+   */
+  RoleName: string
+
+  /**
+   * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+   */
+  Permissions: Array<string>
+
+  /**
+   * 角色描述。
+   */
+  RoleDescribe: string
+
+  /**
+   * 创建时间。
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间。
+   */
+  UpdateTime: string
 }
 
 /**
@@ -3050,6 +3288,16 @@ export interface CreateCmqQueueRequest {
 }
 
 /**
+ * ModifyEnvironmentRole返回参数结构体
+ */
+export interface ModifyEnvironmentRoleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCmqQueue请求参数结构体
  */
 export interface DeleteCmqQueueRequest {
@@ -3057,6 +3305,26 @@ export interface DeleteCmqQueueRequest {
    * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   QueueName: string
+}
+
+/**
+ * CreateRole请求参数结构体
+ */
+export interface CreateRoleRequest {
+  /**
+   * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
+   */
+  RoleName: string
+
+  /**
+   * 备注说明，长度必须大等于0且小等于128。
+   */
+  Remark?: string
+
+  /**
+   * 必填字段，集群Id
+   */
+  ClusterId?: string
 }
 
 /**
@@ -3090,6 +3358,31 @@ export interface DescribeProducersRequest {
 
   /**
    * Pulsar 集群的ID
+   */
+  ClusterId?: string
+}
+
+/**
+ * ModifyEnvironmentRole请求参数结构体
+ */
+export interface ModifyEnvironmentRoleRequest {
+  /**
+   * 环境（命名空间）名称。
+   */
+  EnvironmentId: string
+
+  /**
+   * 角色名称。
+   */
+  RoleName: string
+
+  /**
+   * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+   */
+  Permissions: Array<string>
+
+  /**
+   * 必填字段，集群的ID
    */
   ClusterId?: string
 }
@@ -3385,35 +3678,36 @@ export interface DeleteCmqSubscribeResponse {
 }
 
 /**
- * ModifyEnvironmentAttributes返回参数结构体
+ * DescribeRoles请求参数结构体
  */
-export interface ModifyEnvironmentAttributesResponse {
+export interface DescribeRolesRequest {
   /**
-   * 命名空间名称。
+   * 角色名称，模糊查询
    */
-  EnvironmentId: string
+  RoleName?: string
 
   /**
-   * 未消费消息过期时间，单位：秒。
+   * 起始下标，不填默认为0。
    */
-  MsgTTL: number
+  Offset?: number
 
   /**
-      * 备注，字符串最长不超过128。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回数量，不填则默认为10，最大值为20。
+   */
+  Limit?: number
+
+  /**
+   * 必填字段，集群Id
+   */
+  ClusterId?: string
+
+  /**
+      * * RoleName
+按照角色名进行过滤，精确查询。
+类型：String
+必选：否
       */
-  Remark: string
-
-  /**
-      * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NamespaceId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Filters?: Array<Filter>
 }
 
 /**
@@ -3442,11 +3736,26 @@ export interface DeleteSubscriptionsRequest {
 }
 
 /**
- * 环境角色集合
+ * DescribeClusterDetail返回参数结构体
  */
-export interface EnvironmentRole {
+export interface DescribeClusterDetailResponse {
   /**
-   * 环境（命名空间）。
+   * 集群的详细信息
+   */
+  ClusterSet: Cluster
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateEnvironmentRole请求参数结构体
+ */
+export interface CreateEnvironmentRoleRequest {
+  /**
+   * 环境（命名空间）名称。
    */
   EnvironmentId: string
 
@@ -3461,17 +3770,7 @@ export interface EnvironmentRole {
   Permissions: Array<string>
 
   /**
-   * 角色描述。
+   * 必填字段，集群的ID
    */
-  RoleDescribe: string
-
-  /**
-   * 创建时间。
-   */
-  CreateTime: string
-
-  /**
-   * 更新时间。
-   */
-  UpdateTime: string
+  ClusterId?: string
 }

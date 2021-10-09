@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeBindClustersResponse, DescribeSubscriptionsRequest, DeleteClusterResponse, SendBatchMessagesResponse, ModifyCmqSubscriptionAttributeResponse, CreateCmqTopicRequest, ReceiveMessageRequest, ModifyClusterResponse, DescribeCmqQueuesResponse, DeleteCmqQueueResponse, CreateCmqSubscribeRequest, RewindCmqQueueResponse, DeleteClusterRequest, DeleteCmqTopicResponse, CreateSubscriptionRequest, DescribeCmqTopicDetailResponse, CreateEnvironmentResponse, CreateSubscriptionResponse, SendMsgResponse, ModifyCmqTopicAttributeResponse, DescribeCmqSubscriptionDetailRequest, DescribeEnvironmentsRequest, DescribeCmqQueueDetailResponse, CreateEnvironmentRequest, DeleteTopicsResponse, DescribeClustersRequest, ModifyEnvironmentAttributesRequest, DescribeCmqSubscriptionDetailResponse, RewindCmqQueueRequest, ModifyClusterRequest, DescribeEnvironmentAttributesRequest, AcknowledgeMessageRequest, DescribeTopicsResponse, PublishCmqMsgResponse, SendCmqMsgRequest, AcknowledgeMessageResponse, DescribeClusterDetailRequest, DescribeNamespaceBundlesOptResponse, SendMessagesRequest, ModifyCmqTopicAttributeRequest, CreateCmqSubscribeResponse, DescribeSubscriptionsResponse, SendMessagesResponse, CreateTopicRequest, DescribeTopicsRequest, DeleteEnvironmentsResponse, DescribeEnvironmentRolesResponse, ClearCmqQueueRequest, DescribeCmqTopicsResponse, DescribeCmqTopicDetailRequest, UnbindCmqDeadLetterResponse, DescribeNodeHealthOptRequest, DescribeBindVpcsRequest, DescribeClustersResponse, ClearCmqSubscriptionFilterTagsRequest, DescribeEnvironmentRolesRequest, CreateCmqQueueResponse, ResetMsgSubOffsetByTimestampResponse, CreateClusterResponse, DescribeCmqDeadLetterSourceQueuesRequest, DescribeNodeHealthOptResponse, CreateClusterRequest, ModifyCmqQueueAttributeResponse, CreateTopicResponse, DescribeCmqQueuesRequest, DescribeEnvironmentsResponse, ModifyCmqSubscriptionAttributeRequest, ModifyTopicResponse, ReceiveMessageResponse, CreateCmqTopicResponse, ClearCmqSubscriptionFilterTagsResponse, DescribeCmqTopicsRequest, DeleteTopicsRequest, DescribeNamespaceBundlesOptRequest, ModifyTopicRequest, ResetMsgSubOffsetByTimestampRequest, DescribeBindVpcsResponse, DeleteCmqSubscribeRequest, DescribeCmqDeadLetterSourceQueuesResponse, DeleteSubscriptionsResponse, SendMsgRequest, DescribeCmqQueueDetailRequest, ClearCmqQueueResponse, DeleteEnvironmentsRequest, DescribeBindClustersRequest, DescribeClusterDetailResponse, CreateCmqQueueRequest, DeleteCmqQueueRequest, DescribeProducersRequest, DescribeEnvironmentAttributesResponse, DescribeProducersResponse, SendBatchMessagesRequest, DeleteCmqTopicRequest, SendCmqMsgResponse, PublishCmqMsgRequest, UnbindCmqDeadLetterRequest, ModifyCmqQueueAttributeRequest, DeleteCmqSubscribeResponse, ModifyEnvironmentAttributesResponse, DeleteSubscriptionsRequest } from "./tdmq_models";
+import { DescribeRolesResponse, DescribeBindClustersResponse, DescribeSubscriptionsRequest, DeleteClusterResponse, SendBatchMessagesResponse, ModifyCmqSubscriptionAttributeResponse, CreateCmqTopicRequest, ReceiveMessageRequest, ModifyClusterResponse, DescribeCmqQueuesResponse, DeleteCmqQueueResponse, CreateCmqSubscribeRequest, RewindCmqQueueResponse, DeleteClusterRequest, DeleteCmqTopicResponse, CreateSubscriptionRequest, DescribeCmqTopicDetailResponse, CreateEnvironmentResponse, CreateSubscriptionResponse, SendMsgResponse, ModifyCmqTopicAttributeResponse, DescribeCmqSubscriptionDetailRequest, DescribeEnvironmentsRequest, DescribeCmqQueueDetailResponse, CreateEnvironmentRequest, DeleteTopicsResponse, DescribeClustersRequest, ModifyEnvironmentAttributesRequest, DescribeCmqSubscriptionDetailResponse, RewindCmqQueueRequest, ModifyClusterRequest, DescribeEnvironmentAttributesRequest, AcknowledgeMessageRequest, DescribeTopicsResponse, PublishCmqMsgResponse, SendCmqMsgRequest, AcknowledgeMessageResponse, DeleteEnvironmentRolesResponse, DescribeClusterDetailRequest, ModifyRoleResponse, DescribeNamespaceBundlesOptResponse, SendMessagesRequest, ModifyCmqTopicAttributeRequest, DeleteRolesRequest, CreateCmqSubscribeResponse, DescribeSubscriptionsResponse, ModifyRoleRequest, SendMessagesResponse, CreateTopicRequest, DescribeTopicsRequest, DeleteEnvironmentsResponse, DescribeEnvironmentRolesResponse, ClearCmqQueueRequest, DescribeCmqTopicsResponse, DescribeCmqTopicDetailRequest, UnbindCmqDeadLetterResponse, DescribeNodeHealthOptRequest, DescribeBindVpcsRequest, DescribeClustersResponse, ClearCmqSubscriptionFilterTagsRequest, DescribeEnvironmentRolesRequest, DeleteRolesResponse, CreateCmqQueueResponse, ResetMsgSubOffsetByTimestampResponse, CreateClusterResponse, DescribeCmqDeadLetterSourceQueuesRequest, DescribeNodeHealthOptResponse, CreateClusterRequest, ModifyCmqQueueAttributeResponse, CreateTopicResponse, DescribeCmqQueuesRequest, DescribeEnvironmentsResponse, ModifyCmqSubscriptionAttributeRequest, ModifyTopicResponse, ReceiveMessageResponse, CreateCmqTopicResponse, ClearCmqSubscriptionFilterTagsResponse, DescribeCmqTopicsRequest, DeleteTopicsRequest, DescribeNamespaceBundlesOptRequest, ModifyTopicRequest, ResetMsgSubOffsetByTimestampRequest, CreateEnvironmentRoleResponse, DescribeBindVpcsResponse, DeleteCmqSubscribeRequest, DescribeCmqDeadLetterSourceQueuesResponse, DeleteSubscriptionsResponse, SendMsgRequest, DescribeCmqQueueDetailRequest, CreateRoleResponse, DeleteEnvironmentRolesRequest, ClearCmqQueueResponse, DeleteEnvironmentsRequest, DescribeBindClustersRequest, ModifyEnvironmentAttributesResponse, CreateCmqQueueRequest, ModifyEnvironmentRoleResponse, DeleteCmqQueueRequest, CreateRoleRequest, DescribeProducersRequest, ModifyEnvironmentRoleRequest, DescribeEnvironmentAttributesResponse, DescribeProducersResponse, SendBatchMessagesRequest, DeleteCmqTopicRequest, SendCmqMsgResponse, PublishCmqMsgRequest, UnbindCmqDeadLetterRequest, ModifyCmqQueueAttributeRequest, DeleteCmqSubscribeResponse, DescribeRolesRequest, DeleteSubscriptionsRequest, DescribeClusterDetailResponse, CreateEnvironmentRoleRequest } from "./tdmq_models";
 /**
  * tdmq client
  * @class
@@ -36,6 +36,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeNodeHealthOpt(req: DescribeNodeHealthOptRequest, cb?: (error: string, rep: DescribeNodeHealthOptResponse) => void): Promise<DescribeNodeHealthOptResponse>;
     /**
+     * 创建角色
+     */
+    CreateRole(req: CreateRoleRequest, cb?: (error: string, rep: CreateRoleResponse) => void): Promise<CreateRoleResponse>;
+    /**
      * 创建cmq队列接口
      */
     CreateCmqQueue(req: CreateCmqQueueRequest, cb?: (error: string, rep: CreateCmqQueueResponse) => void): Promise<CreateCmqQueueResponse>;
@@ -56,6 +60,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeCmqSubscriptionDetail(req: DescribeCmqSubscriptionDetailRequest, cb?: (error: string, rep: DescribeCmqSubscriptionDetailResponse) => void): Promise<DescribeCmqSubscriptionDetailResponse>;
     /**
+     * 枚举cmq死信队列源队列
+     */
+    DescribeCmqDeadLetterSourceQueues(req: DescribeCmqDeadLetterSourceQueuesRequest, cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void): Promise<DescribeCmqDeadLetterSourceQueuesResponse>;
+    /**
      * 删除cmq队列
      */
     DeleteCmqQueue(req: DeleteCmqQueueRequest, cb?: (error: string, rep: DeleteCmqQueueResponse) => void): Promise<DeleteCmqQueueResponse>;
@@ -64,9 +72,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCmqTopics(req: DescribeCmqTopicsRequest, cb?: (error: string, rep: DescribeCmqTopicsResponse) => void): Promise<DescribeCmqTopicsResponse>;
     /**
-     * 枚举cmq死信队列源队列
+     * 批量删除topics
      */
-    DescribeCmqDeadLetterSourceQueues(req: DescribeCmqDeadLetterSourceQueuesRequest, cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void): Promise<DescribeCmqDeadLetterSourceQueuesResponse>;
+    DeleteTopics(req: DeleteTopicsRequest, cb?: (error: string, rep: DeleteTopicsResponse) => void): Promise<DeleteTopicsResponse>;
     /**
      * 获取命名空间角色列表
      */
@@ -136,6 +144,10 @@ export declare class Client extends AbstractClient {
      */
     CreateEnvironment(req: CreateEnvironmentRequest, cb?: (error: string, rep: CreateEnvironmentResponse) => void): Promise<CreateEnvironmentResponse>;
     /**
+     * 删除角色，支持批量。
+     */
+    DeleteRoles(req: DeleteRolesRequest, cb?: (error: string, rep: DeleteRolesResponse) => void): Promise<DeleteRolesResponse>;
+    /**
      * 获取生产者列表，仅显示在线的生产者
      */
     DescribeProducers(req: DescribeProducersRequest, cb?: (error: string, rep: DescribeProducersResponse) => void): Promise<DescribeProducersResponse>;
@@ -152,6 +164,10 @@ export declare class Client extends AbstractClient {
      */
     ClearCmqSubscriptionFilterTags(req: ClearCmqSubscriptionFilterTagsRequest, cb?: (error: string, rep: ClearCmqSubscriptionFilterTagsResponse) => void): Promise<ClearCmqSubscriptionFilterTagsResponse>;
     /**
+     * 修改环境角色授权。
+     */
+    ModifyEnvironmentRole(req: ModifyEnvironmentRoleRequest, cb?: (error: string, rep: ModifyEnvironmentRoleResponse) => void): Promise<ModifyEnvironmentRoleResponse>;
+    /**
      * 发送单条消息
      */
     SendMessages(req: SendMessagesRequest, cb?: (error: string, rep: SendMessagesResponse) => void): Promise<SendMessagesResponse>;
@@ -164,6 +180,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyCluster(req: ModifyClusterRequest, cb?: (error: string, rep: ModifyClusterResponse) => void): Promise<ModifyClusterResponse>;
     /**
+     * 角色修改
+     */
+    ModifyRole(req: ModifyRoleRequest, cb?: (error: string, rep: ModifyRoleResponse) => void): Promise<ModifyRoleResponse>;
+    /**
      * 修改指定命名空间的属性值
      */
     ModifyEnvironmentAttributes(req: ModifyEnvironmentAttributesRequest, cb?: (error: string, rep: ModifyEnvironmentAttributesResponse) => void): Promise<ModifyEnvironmentAttributesResponse>;
@@ -171,6 +191,10 @@ export declare class Client extends AbstractClient {
      * 修改cmq订阅属性
      */
     ModifyCmqSubscriptionAttribute(req: ModifyCmqSubscriptionAttributeRequest, cb?: (error: string, rep: ModifyCmqSubscriptionAttributeResponse) => void): Promise<ModifyCmqSubscriptionAttributeResponse>;
+    /**
+     * 获取角色列表
+     */
+    DescribeRoles(req: DescribeRolesRequest, cb?: (error: string, rep: DescribeRolesResponse) => void): Promise<DescribeRolesResponse>;
     /**
      * 解绑cmq死信队列
      */
@@ -192,9 +216,13 @@ export declare class Client extends AbstractClient {
      */
     CreateCmqSubscribe(req: CreateCmqSubscribeRequest, cb?: (error: string, rep: CreateCmqSubscribeResponse) => void): Promise<CreateCmqSubscribeResponse>;
     /**
-     * 批量删除topics
+     * 创建环境角色授权
      */
-    DeleteTopics(req: DeleteTopicsRequest, cb?: (error: string, rep: DeleteTopicsResponse) => void): Promise<DeleteTopicsResponse>;
+    CreateEnvironmentRole(req: CreateEnvironmentRoleRequest, cb?: (error: string, rep: CreateEnvironmentRoleResponse) => void): Promise<CreateEnvironmentRoleResponse>;
+    /**
+     * 删除环境角色授权。
+     */
+    DeleteEnvironmentRoles(req: DeleteEnvironmentRolesRequest, cb?: (error: string, rep: DeleteEnvironmentRolesResponse) => void): Promise<DeleteEnvironmentRolesResponse>;
     /**
      * 根据时间戳进行消息回溯，精确到毫秒
      */

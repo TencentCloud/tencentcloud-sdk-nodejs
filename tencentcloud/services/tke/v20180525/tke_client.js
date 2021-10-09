@@ -148,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterRouteTable", req, cb);
     }
     /**
-     * 拉取模板列表，默认模板将总是在最前面
+     * 查看集群认证配置
      */
-    async DescribePrometheusTemplates(req, cb) {
-        return this.request("DescribePrometheusTemplates", req, cb);
+    async DescribeClusterAuthenticationOptions(req, cb) {
+        return this.request("DescribeClusterAuthenticationOptions", req, cb);
     }
     /**
      * 查询节点池详情
@@ -484,6 +484,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusTemplate", req, cb);
     }
     /**
+     * 修改集群认证配置
+     */
+    async ModifyClusterAuthenticationOptions(req, cb) {
+        return this.request("ModifyClusterAuthenticationOptions", req, cb);
+    }
+    /**
      * 获取被关联集群列表
      */
     async DescribePrometheusAgents(req, cb) {
@@ -524,6 +530,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterNodePool(req, cb) {
         return this.request("CreateClusterNodePool", req, cb);
+    }
+    /**
+     * 拉取模板列表，默认模板将总是在最前面
+     */
+    async DescribePrometheusTemplates(req, cb) {
+        return this.request("DescribePrometheusTemplates", req, cb);
     }
     /**
      * 本接口用于查询开启vpc-cni模式的任务进度

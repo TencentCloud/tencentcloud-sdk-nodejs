@@ -26,6 +26,7 @@ import {
   ModifyStudioProductResponse,
   DeleteStudioProductResponse,
   GetDeviceListResponse,
+  TopicRulePayload,
   DeleteLoRaFrequencyResponse,
   DeleteTopicRuleResponse,
   ModifyModelDefinitionRequest,
@@ -86,7 +87,7 @@ import {
   EventHistoryItem,
   DirectBindDeviceInFamilyResponse,
   TopicRule,
-  TopicRulePayload,
+  CreateTopicPolicyResponse,
   CallDeviceActionAsyncResponse,
   DescribeTopicRuleResponse,
   UpdateFirmwareRequest,
@@ -94,6 +95,7 @@ import {
   DescribeDeviceRequest,
   UpdateDevicesEnableStateRequest,
   ModifyTopicRuleResponse,
+  CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
   DescribeLoRaFrequencyResponse,
   SearchStudioProductResponse,
@@ -283,6 +285,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLoRaFrequencyResponse) => void
   ): Promise<CreateLoRaFrequencyResponse> {
     return this.request("CreateLoRaFrequency", req, cb)
+  }
+
+  /**
+   * 本接口（CreateTopicPolicy）用于创建一个Topic
+   */
+  async CreateTopicPolicy(
+    req: CreateTopicPolicyRequest,
+    cb?: (error: string, rep: CreateTopicPolicyResponse) => void
+  ): Promise<CreateTopicPolicyResponse> {
+    return this.request("CreateTopicPolicy", req, cb)
   }
 
   /**

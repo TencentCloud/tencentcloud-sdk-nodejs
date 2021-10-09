@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryAnchorContractInfo", req, cb);
     }
     /**
+     * 商户查询已开通的支付方式列表
+     */
+    async QueryMerchantPayWayList(req, cb) {
+        return this.request("QueryMerchantPayWayList", req, cb);
+    }
+    /**
      * 跨境-付款人查询
      */
     async QueryPayerInfo(req, cb) {

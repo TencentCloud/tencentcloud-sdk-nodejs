@@ -32,6 +32,7 @@ import {
   ModifyMntMbrBindRelateAcctBankCodeRequest,
   CreateMerchantResult,
   ApplyPayerInfoResponse,
+  QueryMerchantPayWayListResponse,
   ApplyTradeResult,
   RevokeRechargeByThirdPayRequest,
   QueryTradeRequest,
@@ -211,6 +212,7 @@ import {
   QueryMemberBindResponse,
   AnchorContractInfo,
   QueryMerchantBalanceResult,
+  MerchantPayWayData,
   QueryDeclareResult,
   CreateCustAcctIdRequest,
   QueryBankClearResponse,
@@ -278,6 +280,7 @@ import {
   ChannelContractInfo,
   ModifyAgentTaxPaymentInfoRequest,
   QuerySmallAmountTransferRequest,
+  QueryMerchantPayWayListRequest,
   CreateBatchPaymentRecipient,
   DownloadReconciliationUrlRequest,
   CreateBatchPaymentRequest,
@@ -442,6 +445,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryAnchorContractInfoResponse) => void
   ): Promise<QueryAnchorContractInfoResponse> {
     return this.request("QueryAnchorContractInfo", req, cb)
+  }
+
+  /**
+   * 商户查询已开通的支付方式列表
+   */
+  async QueryMerchantPayWayList(
+    req: QueryMerchantPayWayListRequest,
+    cb?: (error: string, rep: QueryMerchantPayWayListResponse) => void
+  ): Promise<QueryMerchantPayWayListResponse> {
+    return this.request("QueryMerchantPayWayList", req, cb)
   }
 
   /**

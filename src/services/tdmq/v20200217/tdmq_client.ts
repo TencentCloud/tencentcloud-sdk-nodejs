@@ -18,10 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeRolesResponse,
   DescribeBindClustersResponse,
   CmqDeadLetterPolicy,
   BundleSetOpt,
   DescribeSubscriptionsRequest,
+  Role,
   DeleteClusterResponse,
   SendBatchMessagesResponse,
   ModifyCmqSubscriptionAttributeResponse,
@@ -62,14 +64,18 @@ import {
   PublishCmqMsgResponse,
   SendCmqMsgRequest,
   AcknowledgeMessageResponse,
+  DeleteEnvironmentRolesResponse,
   DescribeClusterDetailRequest,
+  ModifyRoleResponse,
   Tag,
   DescribeNamespaceBundlesOptResponse,
   SendMessagesRequest,
   ModifyCmqTopicAttributeRequest,
+  DeleteRolesRequest,
   Subscription,
   CreateCmqSubscribeResponse,
   DescribeSubscriptionsResponse,
+  ModifyRoleRequest,
   SendMessagesResponse,
   CreateTopicRequest,
   DescribeTopicsRequest,
@@ -87,6 +93,7 @@ import {
   ClearCmqSubscriptionFilterTagsRequest,
   TopicRecord,
   DescribeEnvironmentRolesRequest,
+  DeleteRolesResponse,
   Environment,
   CreateCmqQueueResponse,
   PartitionsTopic,
@@ -113,6 +120,7 @@ import {
   DescribeNamespaceBundlesOptRequest,
   ModifyTopicRequest,
   ResetMsgSubOffsetByTimestampRequest,
+  CreateEnvironmentRoleResponse,
   Consumer,
   DescribeBindVpcsResponse,
   DeleteCmqSubscribeRequest,
@@ -123,13 +131,19 @@ import {
   RetentionPolicy,
   SendMsgRequest,
   DescribeCmqQueueDetailRequest,
+  CreateRoleResponse,
+  DeleteEnvironmentRolesRequest,
   ClearCmqQueueResponse,
   DeleteEnvironmentsRequest,
   DescribeBindClustersRequest,
-  DescribeClusterDetailResponse,
+  ModifyEnvironmentAttributesResponse,
+  EnvironmentRole,
   CreateCmqQueueRequest,
+  ModifyEnvironmentRoleResponse,
   DeleteCmqQueueRequest,
+  CreateRoleRequest,
   DescribeProducersRequest,
+  ModifyEnvironmentRoleRequest,
   DescribeEnvironmentAttributesResponse,
   SubscriptionTopic,
   DescribeProducersResponse,
@@ -140,9 +154,10 @@ import {
   UnbindCmqDeadLetterRequest,
   ModifyCmqQueueAttributeRequest,
   DeleteCmqSubscribeResponse,
-  ModifyEnvironmentAttributesResponse,
+  DescribeRolesRequest,
   DeleteSubscriptionsRequest,
-  EnvironmentRole,
+  DescribeClusterDetailResponse,
+  CreateEnvironmentRoleRequest,
 } from "./tdmq_models"
 
 /**
@@ -225,6 +240,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建角色
+   */
+  async CreateRole(
+    req: CreateRoleRequest,
+    cb?: (error: string, rep: CreateRoleResponse) => void
+  ): Promise<CreateRoleResponse> {
+    return this.request("CreateRole", req, cb)
+  }
+
+  /**
    * 创建cmq队列接口
    */
   async CreateCmqQueue(
@@ -275,6 +300,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 枚举cmq死信队列源队列
+   */
+  async DescribeCmqDeadLetterSourceQueues(
+    req: DescribeCmqDeadLetterSourceQueuesRequest,
+    cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void
+  ): Promise<DescribeCmqDeadLetterSourceQueuesResponse> {
+    return this.request("DescribeCmqDeadLetterSourceQueues", req, cb)
+  }
+
+  /**
    * 删除cmq队列
    */
   async DeleteCmqQueue(
@@ -295,13 +330,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 枚举cmq死信队列源队列
+   * 批量删除topics
    */
-  async DescribeCmqDeadLetterSourceQueues(
-    req: DescribeCmqDeadLetterSourceQueuesRequest,
-    cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void
-  ): Promise<DescribeCmqDeadLetterSourceQueuesResponse> {
-    return this.request("DescribeCmqDeadLetterSourceQueues", req, cb)
+  async DeleteTopics(
+    req: DeleteTopicsRequest,
+    cb?: (error: string, rep: DeleteTopicsResponse) => void
+  ): Promise<DeleteTopicsResponse> {
+    return this.request("DeleteTopics", req, cb)
   }
 
   /**
@@ -475,6 +510,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除角色，支持批量。
+   */
+  async DeleteRoles(
+    req: DeleteRolesRequest,
+    cb?: (error: string, rep: DeleteRolesResponse) => void
+  ): Promise<DeleteRolesResponse> {
+    return this.request("DeleteRoles", req, cb)
+  }
+
+  /**
    * 获取生产者列表，仅显示在线的生产者
    */
   async DescribeProducers(
@@ -515,6 +560,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改环境角色授权。
+   */
+  async ModifyEnvironmentRole(
+    req: ModifyEnvironmentRoleRequest,
+    cb?: (error: string, rep: ModifyEnvironmentRoleResponse) => void
+  ): Promise<ModifyEnvironmentRoleResponse> {
+    return this.request("ModifyEnvironmentRole", req, cb)
+  }
+
+  /**
    * 发送单条消息
    */
   async SendMessages(
@@ -545,6 +600,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 角色修改
+   */
+  async ModifyRole(
+    req: ModifyRoleRequest,
+    cb?: (error: string, rep: ModifyRoleResponse) => void
+  ): Promise<ModifyRoleResponse> {
+    return this.request("ModifyRole", req, cb)
+  }
+
+  /**
    * 修改指定命名空间的属性值
    */
   async ModifyEnvironmentAttributes(
@@ -562,6 +627,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCmqSubscriptionAttributeResponse) => void
   ): Promise<ModifyCmqSubscriptionAttributeResponse> {
     return this.request("ModifyCmqSubscriptionAttribute", req, cb)
+  }
+
+  /**
+   * 获取角色列表
+   */
+  async DescribeRoles(
+    req: DescribeRolesRequest,
+    cb?: (error: string, rep: DescribeRolesResponse) => void
+  ): Promise<DescribeRolesResponse> {
+    return this.request("DescribeRoles", req, cb)
   }
 
   /**
@@ -615,13 +690,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除topics
+   * 创建环境角色授权
    */
-  async DeleteTopics(
-    req: DeleteTopicsRequest,
-    cb?: (error: string, rep: DeleteTopicsResponse) => void
-  ): Promise<DeleteTopicsResponse> {
-    return this.request("DeleteTopics", req, cb)
+  async CreateEnvironmentRole(
+    req: CreateEnvironmentRoleRequest,
+    cb?: (error: string, rep: CreateEnvironmentRoleResponse) => void
+  ): Promise<CreateEnvironmentRoleResponse> {
+    return this.request("CreateEnvironmentRole", req, cb)
+  }
+
+  /**
+   * 删除环境角色授权。
+   */
+  async DeleteEnvironmentRoles(
+    req: DeleteEnvironmentRolesRequest,
+    cb?: (error: string, rep: DeleteEnvironmentRolesResponse) => void
+  ): Promise<DeleteEnvironmentRolesResponse> {
+    return this.request("DeleteEnvironmentRoles", req, cb)
   }
 
   /**

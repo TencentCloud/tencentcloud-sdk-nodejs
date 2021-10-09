@@ -113,6 +113,75 @@ export interface GetDeviceListResponse {
     RequestId?: string;
 }
 /**
+ * TopicRulePayload结构
+ */
+export interface TopicRulePayload {
+    /**
+      * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
+      */
+    Sql: string;
+    /**
+      * 行为的JSON字符串，大部分种类举例如下：
+[
+{
+"republish": {
+"topic": "TEST/test"
+}
+},
+{
+"forward": {
+"api": "http://test.com:8080"
+}
+},
+{
+"ckafka": {
+"instance": {
+"id": "ckafka-test",
+"name": ""
+},
+"topic": {
+"id": "topic-test",
+"name": "test"
+},
+"region": "gz"
+}
+},
+{
+"cmqqueue": {
+"queuename": "queue-test-TEST",
+"region": "gz"
+}
+},
+{
+"mysql": {
+"instanceid": "cdb-test",
+"region": "gz",
+"username": "test",
+"userpwd": "*****",
+"dbname": "d_mqtt",
+"tablename": "t_test",
+"fieldpairs": [
+{
+"field": "test",
+"value": "test"
+}
+],
+"devicetype": "CUSTOM"
+}
+}
+]
+      */
+    Actions?: string;
+    /**
+      * 规则描述
+      */
+    Description?: string;
+    /**
+      * 是否禁用规则
+      */
+    RuleDisabled?: boolean;
+}
+/**
  * DeleteLoRaFrequency返回参数结构体
  */
 export interface DeleteLoRaFrequencyResponse {
@@ -1388,73 +1457,13 @@ export interface TopicRule {
     RuleDisabled: boolean;
 }
 /**
- * TopicRulePayload结构
+ * CreateTopicPolicy返回参数结构体
  */
-export interface TopicRulePayload {
+export interface CreateTopicPolicyResponse {
     /**
-      * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Sql: string;
-    /**
-      * 行为的JSON字符串，大部分种类举例如下：
-[
-{
-"republish": {
-"topic": "TEST/test"
-}
-},
-{
-"forward": {
-"api": "http://test.com:8080"
-}
-},
-{
-"ckafka": {
-"instance": {
-"id": "ckafka-test",
-"name": ""
-},
-"topic": {
-"id": "topic-test",
-"name": "test"
-},
-"region": "gz"
-}
-},
-{
-"cmqqueue": {
-"queuename": "queue-test-TEST",
-"region": "gz"
-}
-},
-{
-"mysql": {
-"instanceid": "cdb-test",
-"region": "gz",
-"username": "test",
-"userpwd": "*****",
-"dbname": "d_mqtt",
-"tablename": "t_test",
-"fieldpairs": [
-{
-"field": "test",
-"value": "test"
-}
-],
-"devicetype": "CUSTOM"
-}
-}
-]
-      */
-    Actions?: string;
-    /**
-      * 规则描述
-      */
-    Description?: string;
-    /**
-      * 是否禁用规则
-      */
-    RuleDisabled?: boolean;
+    RequestId?: string;
 }
 /**
  * CallDeviceActionAsync返回参数结构体
@@ -1571,6 +1580,23 @@ export interface ModifyTopicRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateTopicPolicy请求参数结构体
+ */
+export interface CreateTopicPolicyRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * Topic名称
+      */
+    TopicName: string;
+    /**
+      * Topic权限，1发布，2订阅，3订阅和发布
+      */
+    Privilege: number;
 }
 /**
  * DirectBindDeviceInFamily请求参数结构体

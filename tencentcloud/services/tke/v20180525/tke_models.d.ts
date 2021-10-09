@@ -2000,25 +2000,13 @@ export interface CreateClusterInstancesRequest {
     SkipValidateOptions?: Array<string>;
 }
 /**
- * 手动加入的节点
+ * DescribeClusterAuthenticationOptions请求参数结构体
  */
-export interface ManuallyAdded {
+export interface DescribeClusterAuthenticationOptionsRequest {
     /**
-      * 加入中的节点数量
+      * 集群ID
       */
-    Joining: number;
-    /**
-      * 初始化中的节点数量
-      */
-    Initializing: number;
-    /**
-      * 正常的节点数量
-      */
-    Normal: number;
-    /**
-      * 节点总数
-      */
-    Total: number;
+    ClusterId: string;
 }
 /**
  * DescribeEksContainerInstanceLog返回参数结构体
@@ -3320,6 +3308,26 @@ export interface DescribeRouteTableConflictsResponse {
     RequestId?: string;
 }
 /**
+ * ServiceAccount认证相关配置
+ */
+export interface ServiceAccountAuthenticationOptions {
+    /**
+      * service-account-issuer
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Issuer?: string;
+    /**
+      * service-account-jwks-uri
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JWKSURI?: string;
+    /**
+      * 如果为true，则会自动创建允许匿名用户访问'/.well-known/openid-configuration'和/openid/v1/jwks的rbac规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoCreateDiscoveryAnonymousAuth?: boolean;
+}
+/**
  * DescribeVersions请求参数结构体
  */
 export declare type DescribeVersionsRequest = null;
@@ -3539,6 +3547,34 @@ export interface DescribeEksContainerInstanceLogRequest {
       * 日志总大小限制
       */
     LimitBytes?: number;
+}
+/**
+ * ModifyClusterAuthenticationOptions返回参数结构体
+ */
+export interface ModifyClusterAuthenticationOptionsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeClusterAuthenticationOptions返回参数结构体
+ */
+export interface DescribeClusterAuthenticationOptionsResponse {
+    /**
+      * ServiceAccount认证配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceAccounts: ServiceAccountAuthenticationOptions;
+    /**
+      * 最近一次修改操作结果，返回值可能为：Updating，Success，Failed，TimeOut
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LatestOperationState: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteClusterAsGroups返回参数结构体
@@ -4094,6 +4130,19 @@ export interface UpdateClusterVersionRequest {
       * 是否跳过预检查阶段
       */
     SkipPreCheck?: boolean;
+}
+/**
+ * ModifyClusterAuthenticationOptions请求参数结构体
+ */
+export interface ModifyClusterAuthenticationOptionsRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * ServiceAccount认证配置
+      */
+    ServiceAccounts?: ServiceAccountAuthenticationOptions;
 }
 /**
  * DeleteClusterEndpointVip请求参数结构体
@@ -5499,6 +5548,27 @@ export interface CreateClusterNodePoolResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 手动加入的节点
+ */
+export interface ManuallyAdded {
+    /**
+      * 加入中的节点数量
+      */
+    Joining: number;
+    /**
+      * 初始化中的节点数量
+      */
+    Initializing: number;
+    /**
+      * 正常的节点数量
+      */
+    Normal: number;
+    /**
+      * 节点总数
+      */
+    Total: number;
 }
 /**
  * 加入存量节点时的节点池选项

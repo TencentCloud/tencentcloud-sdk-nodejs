@@ -555,6 +555,33 @@ export interface ApplyPayerInfoResponse {
 }
 
 /**
+ * QueryMerchantPayWayList返回参数结构体
+ */
+export interface QueryMerchantPayWayListResponse {
+  /**
+   * 业务系统返回码
+   */
+  ErrCode: string
+
+  /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+      * 查询商户支付方式列表结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<MerchantPayWayData>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 提交贸易材料结果
  */
 export interface ApplyTradeResult {
@@ -7633,6 +7660,65 @@ export interface QueryMerchantBalanceResult {
 }
 
 /**
+ * 商户支付方式数据
+ */
+export interface MerchantPayWayData {
+  /**
+      * 支付币种
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayCurrency: string
+
+  /**
+      * 支付图标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayIcon: string
+
+  /**
+      * 支付名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayInternalName: string
+
+  /**
+      * 支付简称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayName: string
+
+  /**
+      * 是否支持退款
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaySplitRefund: string
+
+  /**
+      * 支付标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayTag: string
+
+  /**
+      * 支付凭证图标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayTicketIcon: string
+
+  /**
+      * 支付类型，逗号分隔
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayType: string
+
+  /**
+      * 凭证名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TicketName: string
+}
+
+/**
  * 成功申报材料查询结果
  */
 export interface QueryDeclareResult {
@@ -10161,6 +10247,31 @@ export interface QuerySmallAmountTransferRequest {
 
   /**
    * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+   */
+  Profile?: string
+}
+
+/**
+ * QueryMerchantPayWayList请求参数结构体
+ */
+export interface QueryMerchantPayWayListRequest {
+  /**
+   * 收单系统分配的开放ID
+   */
+  OpenId: string
+
+  /**
+   * 收单系统分配的密钥
+   */
+  OpenKey: string
+
+  /**
+   * 支付类型，逗号分隔
+   */
+  PayType: string
+
+  /**
+   * 沙箱环境填sandbox，正式环境不填
    */
   Profile?: string
 }

@@ -158,6 +158,16 @@ it("iotexplorer.v20190423.CreateLoRaFrequency", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateTopicPolicy", async function () {
+    try {
+       const data = await client.CreateTopicPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.UpdateFirmware", async function () {
     try {
        const data = await client.UpdateFirmware({})

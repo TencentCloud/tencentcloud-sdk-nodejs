@@ -117,7 +117,7 @@ import {
   UpgradeNodeResetParam,
   ModifyClusterAsGroupAttributeResponse,
   CreateClusterInstancesRequest,
-  ManuallyAdded,
+  DescribeClusterAuthenticationOptionsRequest,
   DescribeEksContainerInstanceLogResponse,
   DeleteEKSClusterResponse,
   VersionInstance,
@@ -181,6 +181,7 @@ import {
   ImageRegistryCredential,
   DescribeClusterNodePoolsResponse,
   DescribeRouteTableConflictsResponse,
+  ServiceAccountAuthenticationOptions,
   DescribeVersionsRequest,
   CreateClusterResponse,
   DescribeClusterRoutesResponse,
@@ -193,6 +194,8 @@ import {
   AcquireClusterAdminRoleRequest,
   CreateClusterAsGroupResponse,
   DescribeEksContainerInstanceLogRequest,
+  ModifyClusterAuthenticationOptionsResponse,
+  DescribeClusterAuthenticationOptionsResponse,
   DeleteClusterAsGroupsResponse,
   DescribePrometheusInstanceRequest,
   DescribeClusterInstancesRequest,
@@ -217,6 +220,7 @@ import {
   DeletePrometheusTemplateResponse,
   DescribePrometheusTemplateSyncRequest,
   UpdateClusterVersionRequest,
+  ModifyClusterAuthenticationOptionsRequest,
   DeleteClusterEndpointVipRequest,
   LivenessOrReadinessProbe,
   CheckInstancesUpgradeAbleResponse,
@@ -281,6 +285,7 @@ import {
   CreateEKSContainerInstancesRequest,
   Probe,
   CreateClusterNodePoolResponse,
+  ManuallyAdded,
   NodePoolOption,
   ModifyClusterAsGroupAttributeRequest,
   PrometheusGrafanaInfo,
@@ -506,13 +511,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取模板列表，默认模板将总是在最前面
+   * 查看集群认证配置
    */
-  async DescribePrometheusTemplates(
-    req: DescribePrometheusTemplatesRequest,
-    cb?: (error: string, rep: DescribePrometheusTemplatesResponse) => void
-  ): Promise<DescribePrometheusTemplatesResponse> {
-    return this.request("DescribePrometheusTemplates", req, cb)
+  async DescribeClusterAuthenticationOptions(
+    req: DescribeClusterAuthenticationOptionsRequest,
+    cb?: (error: string, rep: DescribeClusterAuthenticationOptionsResponse) => void
+  ): Promise<DescribeClusterAuthenticationOptionsResponse> {
+    return this.request("DescribeClusterAuthenticationOptions", req, cb)
   }
 
   /**
@@ -1066,6 +1071,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改集群认证配置
+   */
+  async ModifyClusterAuthenticationOptions(
+    req: ModifyClusterAuthenticationOptionsRequest,
+    cb?: (error: string, rep: ModifyClusterAuthenticationOptionsResponse) => void
+  ): Promise<ModifyClusterAuthenticationOptionsResponse> {
+    return this.request("ModifyClusterAuthenticationOptions", req, cb)
+  }
+
+  /**
    * 获取被关联集群列表
    */
   async DescribePrometheusAgents(
@@ -1133,6 +1148,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterNodePoolResponse) => void
   ): Promise<CreateClusterNodePoolResponse> {
     return this.request("CreateClusterNodePool", req, cb)
+  }
+
+  /**
+   * 拉取模板列表，默认模板将总是在最前面
+   */
+  async DescribePrometheusTemplates(
+    req: DescribePrometheusTemplatesRequest,
+    cb?: (error: string, rep: DescribePrometheusTemplatesResponse) => void
+  ): Promise<DescribePrometheusTemplatesResponse> {
+    return this.request("DescribePrometheusTemplates", req, cb)
   }
 
   /**
