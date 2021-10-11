@@ -190,17 +190,17 @@ export interface TextTranslateBatchResponse {
   /**
    * 源语言，详见入参Target
    */
-  Source?: string
+  Source: string
 
   /**
    * 目标语言，详见入参Target
    */
-  Target?: string
+  Target: string
 
   /**
    * 翻译后的文本列表
    */
-  TargetTextList?: Array<string>
+  TargetTextList: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

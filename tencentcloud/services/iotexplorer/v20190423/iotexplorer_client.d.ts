@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateDevicesEnableStateResponse, DeleteProjectRequest, DescribeModelDefinitionResponse, DeleteDevicesResponse, ModifyStudioProductResponse, DeleteStudioProductResponse, GetDeviceListResponse, DeleteLoRaFrequencyResponse, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, EnableTopicRuleResponse, UpdateFirmwareResponse, ModifyStudioProductRequest, CreateStudioProductRequest, ReleaseStudioProductRequest, ListEventHistoryRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, DescribeStudioProductResponse, DescribeProjectResponse, DescribeLoRaFrequencyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ControlDeviceDataRequest, ListFirmwaresResponse, ReleaseStudioProductResponse, DeleteLoRaGatewayRequest, SearchTopicRuleResponse, DescribeTopicRuleRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, CreateProjectResponse, ModifyTopicRuleRequest, DeleteProjectResponse, DeleteDevicesRequest, CallDeviceActionAsyncRequest, CreateDeviceResponse, CreateDeviceRequest, GetProjectListResponse, GetStudioProductListRequest, DescribeFirmwareTaskResponse, DisableTopicRuleResponse, GetCOSURLRequest, CreateProjectRequest, DescribeDeviceResponse, ListFirmwaresRequest, GetStudioProductListResponse, PublishMessageRequest, UploadFirmwareRequest, GetDeviceListRequest, GetCOSURLResponse, GetTopicRuleListResponse, DisableTopicRuleRequest, DirectBindDeviceInFamilyResponse, CreateTopicPolicyResponse, CallDeviceActionAsyncResponse, DescribeTopicRuleResponse, UpdateFirmwareRequest, DescribeDeviceRequest, UpdateDevicesEnableStateRequest, ModifyTopicRuleResponse, CreateTopicPolicyRequest, DirectBindDeviceInFamilyRequest, DescribeLoRaFrequencyResponse, SearchStudioProductResponse, GetLoRaGatewayListRequest, DescribeProjectRequest, UploadFirmwareResponse, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, DescribeStudioProductRequest, ModifyLoRaFrequencyRequest, ModifyModelDefinitionResponse, GetProjectListRequest, CreateLoRaFrequencyResponse, SearchStudioProductRequest, GetTopicRuleListRequest, ModifyProjectResponse, DeleteStudioProductRequest, ModifyProjectRequest, PublishMessageResponse, ModifyLoRaGatewayResponse, DescribeDeviceDataHistoryResponse, DescribeModelDefinitionRequest, GetLoRaGatewayListResponse, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateTopicRuleRequest, DeleteDeviceResponse, ModifyLoRaFrequencyResponse, ModifyLoRaGatewayRequest, ListEventHistoryResponse, EnableTopicRuleRequest, DescribeFirmwareTaskRequest } from "./iotexplorer_models";
+import { UpdateDevicesEnableStateResponse, DeleteProjectRequest, DeleteFenceBindRequest, DescribeModelDefinitionResponse, DeleteDevicesResponse, ModifyStudioProductResponse, DeleteStudioProductResponse, GetPositionSpaceListRequest, GetDeviceListResponse, DeleteLoRaFrequencyResponse, ModifyPositionFenceRequest, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, EnableTopicRuleResponse, GetDeviceLocationHistoryResponse, UpdateFirmwareResponse, ModifyPositionFenceResponse, ModifyStudioProductRequest, ModifyPositionSpaceResponse, CreateStudioProductRequest, ModifyFenceBindResponse, DeletePositionFenceResponse, UploadFirmwareRequest, ListEventHistoryRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, SearchPositionSpaceResponse, DescribePositionFenceListResponse, GetDeviceLocationHistoryRequest, DescribeDevicePositionListResponse, GetProjectListResponse, DescribeStudioProductResponse, DescribeProjectResponse, SearchStudioProductResponse, GetTopicRuleListRequest, DescribeLoRaFrequencyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ControlDeviceDataRequest, ListFirmwaresResponse, ReleaseStudioProductResponse, DescribeSpaceFenceEventListResponse, DeleteLoRaGatewayRequest, SearchPositionSpaceRequest, SearchTopicRuleResponse, DescribeFenceEventListResponse, UpdateDevicesEnableStateRequest, DescribeTopicRuleRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, ReleaseStudioProductRequest, CreateProjectResponse, DescribeDeviceDataHistoryResponse, DeleteProjectResponse, CreateTopicPolicyResponse, CreateDeviceResponse, CreateDeviceRequest, DeletePositionSpaceRequest, GetStudioProductListRequest, DescribeFirmwareTaskResponse, DisableTopicRuleResponse, GetCOSURLRequest, CreateProjectRequest, CreateFenceBindRequest, DescribeDeviceResponse, ListFirmwaresRequest, GetStudioProductListResponse, PublishMessageRequest, ModifyTopicRuleRequest, GetDeviceListRequest, ModifySpacePropertyRequest, GetPositionSpaceListResponse, GetCOSURLResponse, ModifyFenceBindRequest, GetTopicRuleListResponse, DescribeFenceEventListRequest, ModifyPositionSpaceRequest, GetLoRaGatewayListResponse, DirectBindDeviceInFamilyResponse, CallDeviceActionAsyncRequest, CallDeviceActionAsyncResponse, DeleteFenceBindResponse, CreateFenceBindResponse, DescribeFenceBindListRequest, CreatePositionFenceResponse, DescribeTopicRuleResponse, UpdateFirmwareRequest, DescribeDeviceRequest, DescribePositionFenceListRequest, ModifyTopicRuleResponse, CreateTopicPolicyRequest, DirectBindDeviceInFamilyRequest, DescribeLoRaFrequencyResponse, DescribeSpaceFenceEventListRequest, GetLoRaGatewayListRequest, DescribeProjectRequest, UploadFirmwareResponse, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, DescribeStudioProductRequest, CreatePositionSpaceResponse, ModifyLoRaFrequencyRequest, ModifyModelDefinitionResponse, DeletePositionFenceRequest, GetProjectListRequest, DeletePositionSpaceResponse, CreateLoRaFrequencyResponse, DescribeDevicePositionListRequest, SearchStudioProductRequest, DeleteDevicesRequest, ModifyProjectResponse, DeleteStudioProductRequest, ModifyProjectRequest, ModifySpacePropertyResponse, PublishMessageResponse, ModifyLoRaGatewayResponse, DescribeFenceBindListResponse, CreatePositionFenceRequest, DescribeModelDefinitionRequest, DisableTopicRuleRequest, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateTopicRuleRequest, DeleteDeviceResponse, ModifyLoRaFrequencyResponse, ModifyLoRaGatewayRequest, ListEventHistoryResponse, EnableTopicRuleRequest, DescribeFirmwareTaskRequest, CreatePositionSpaceRequest } from "./iotexplorer_models";
 /**
  * iotexplorer client
  * @class
@@ -8,9 +8,9 @@ import { UpdateDevicesEnableStateResponse, DeleteProjectRequest, DescribeModelDe
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取规则列表
+     * 提供查询LoRa自定义频点详情的能力
      */
-    GetTopicRuleList(req: GetTopicRuleListRequest, cb?: (error: string, rep: GetTopicRuleListResponse) => void): Promise<GetTopicRuleListResponse>;
+    DescribeLoRaFrequency(req: DescribeLoRaFrequencyRequest, cb?: (error: string, rep: DescribeLoRaFrequencyResponse) => void): Promise<DescribeLoRaFrequencyResponse>;
     /**
      * 本接口（GetCOSURL）用于获取固件存储在COS的URL
      */
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteStudioProduct(req: DeleteStudioProductRequest, cb?: (error: string, rep: DeleteStudioProductResponse) => void): Promise<DeleteStudioProductResponse>;
     /**
+     * 搜索位置空间
+     */
+    SearchPositionSpace(req: SearchPositionSpaceRequest, cb?: (error: string, rep: SearchPositionSpaceResponse) => void): Promise<SearchPositionSpaceResponse>;
+    /**
      * 根据设备产品ID、设备名称，获取设备上报的属性数据。
      */
     DescribeDeviceData(req: DescribeDeviceDataRequest, cb?: (error: string, rep: DescribeDeviceDataResponse) => void): Promise<DescribeDeviceDataResponse>;
@@ -31,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 直接绑定设备和家庭
      */
     DirectBindDeviceInFamily(req: DirectBindDeviceInFamilyRequest, cb?: (error: string, rep: DirectBindDeviceInFamilyResponse) => void): Promise<DirectBindDeviceInFamilyResponse>;
+    /**
+     * 获取围栏绑定信息列表
+     */
+    DescribeFenceBindList(req: DescribeFenceBindListRequest, cb?: (error: string, rep: DescribeFenceBindListResponse) => void): Promise<DescribeFenceBindListResponse>;
     /**
      * 删除  LoRa 网关的接口
      */
@@ -48,9 +56,13 @@ export declare class Client extends AbstractClient {
      */
     ModifyLoRaFrequency(req: ModifyLoRaFrequencyRequest, cb?: (error: string, rep: ModifyLoRaFrequencyResponse) => void): Promise<ModifyLoRaFrequencyResponse>;
     /**
-     * 用于查看某个设备的详细信息
+     * 创建围栏
      */
-    DescribeDevice(req: DescribeDeviceRequest, cb?: (error: string, rep: DescribeDeviceResponse) => void): Promise<DescribeDeviceResponse>;
+    CreatePositionFence(req: CreatePositionFenceRequest, cb?: (error: string, rep: CreatePositionFenceResponse) => void): Promise<CreatePositionFenceResponse>;
+    /**
+     * 更新位置空间产品属性
+     */
+    ModifySpaceProperty(req: ModifySpacePropertyRequest, cb?: (error: string, rep: ModifySpacePropertyResponse) => void): Promise<ModifySpacePropertyResponse>;
     /**
      * 创建新 LoRa 网关设备接口
      */
@@ -67,6 +79,14 @@ export declare class Client extends AbstractClient {
      * 本接口（CreateTopicPolicy）用于创建一个Topic
      */
     CreateTopicPolicy(req: CreateTopicPolicyRequest, cb?: (error: string, rep: CreateTopicPolicyResponse) => void): Promise<CreateTopicPolicyResponse>;
+    /**
+     * 获取设备历史位置
+     */
+    GetDeviceLocationHistory(req: GetDeviceLocationHistoryRequest, cb?: (error: string, rep: GetDeviceLocationHistoryResponse) => void): Promise<GetDeviceLocationHistoryResponse>;
+    /**
+     * 获取规则列表
+     */
+    GetTopicRuleList(req: GetTopicRuleListRequest, cb?: (error: string, rep: GetTopicRuleListResponse) => void): Promise<GetTopicRuleListResponse>;
     /**
      * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求
      */
@@ -112,13 +132,25 @@ export declare class Client extends AbstractClient {
      */
     ModifyProject(req: ModifyProjectRequest, cb?: (error: string, rep: ModifyProjectResponse) => void): Promise<ModifyProjectResponse>;
     /**
-     * 提供删除LoRa自定义频点的能力
+     * 获取围栏列表
      */
-    DeleteLoRaFrequency(req: DeleteLoRaFrequencyRequest, cb?: (error: string, rep: DeleteLoRaFrequencyResponse) => void): Promise<DeleteLoRaFrequencyResponse>;
+    DescribePositionFenceList(req: DescribePositionFenceListRequest, cb?: (error: string, rep: DescribePositionFenceListResponse) => void): Promise<DescribePositionFenceListResponse>;
     /**
      * 本接口（ListFirmwares）用于获取固件列表
      */
     ListFirmwares(req: ListFirmwaresRequest, cb?: (error: string, rep: ListFirmwaresResponse) => void): Promise<ListFirmwaresResponse>;
+    /**
+     * 提供删除LoRa自定义频点的能力
+     */
+    DeleteLoRaFrequency(req: DeleteLoRaFrequencyRequest, cb?: (error: string, rep: DeleteLoRaFrequencyResponse) => void): Promise<DeleteLoRaFrequencyResponse>;
+    /**
+     * 创建围栏绑定信息
+     */
+    CreateFenceBind(req: CreateFenceBindRequest, cb?: (error: string, rep: CreateFenceBindResponse) => void): Promise<CreateFenceBindResponse>;
+    /**
+     * 搜索规则
+     */
+    SearchTopicRule(req: SearchTopicRuleRequest, cb?: (error: string, rep: SearchTopicRuleResponse) => void): Promise<SearchTopicRuleResponse>;
     /**
      * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
      */
@@ -127,6 +159,10 @@ export declare class Client extends AbstractClient {
      * 用于查询某个产品下的设备列表
      */
     GetDeviceList(req: GetDeviceListRequest, cb?: (error: string, rep: GetDeviceListResponse) => void): Promise<GetDeviceListResponse>;
+    /**
+     * 获取位置空间中围栏告警事件列表
+     */
+    DescribeSpaceFenceEventList(req: DescribeSpaceFenceEventListRequest, cb?: (error: string, rep: DescribeSpaceFenceEventListResponse) => void): Promise<DescribeSpaceFenceEventListResponse>;
     /**
      * 创建设备
      */
@@ -140,9 +176,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeStudioProduct(req: DescribeStudioProductRequest, cb?: (error: string, rep: DescribeStudioProductResponse) => void): Promise<DescribeStudioProductResponse>;
     /**
+     * 删除围栏绑定信息
+     */
+    DeleteFenceBind(req: DeleteFenceBindRequest, cb?: (error: string, rep: DeleteFenceBindResponse) => void): Promise<DeleteFenceBindResponse>;
+    /**
      * 获取 LoRa 网关列表接口
      */
     GetLoRaGatewayList(req: GetLoRaGatewayListRequest, cb?: (error: string, rep: GetLoRaGatewayListResponse) => void): Promise<GetLoRaGatewayListResponse>;
+    /**
+     * 获取围栏告警事件列表
+     */
+    DescribeFenceEventList(req: DescribeFenceEventListRequest, cb?: (error: string, rep: DescribeFenceEventListResponse) => void): Promise<DescribeFenceEventListResponse>;
     /**
      * 产品开发完成并测试通过后，通过发布产品将产品设置为发布状态
      */
@@ -152,25 +196,45 @@ export declare class Client extends AbstractClient {
      */
     DescribeFirmwareTask(req: DescribeFirmwareTaskRequest, cb?: (error: string, rep: DescribeFirmwareTaskResponse) => void): Promise<DescribeFirmwareTaskResponse>;
     /**
-     * 提供查询LoRa自定义频点详情的能力
+     * 获取位置空间列表
      */
-    DescribeLoRaFrequency(req: DescribeLoRaFrequencyRequest, cb?: (error: string, rep: DescribeLoRaFrequencyResponse) => void): Promise<DescribeLoRaFrequencyResponse>;
+    GetPositionSpaceList(req: GetPositionSpaceListRequest, cb?: (error: string, rep: GetPositionSpaceListResponse) => void): Promise<GetPositionSpaceListResponse>;
     /**
-     * 搜索规则
+     * 删除围栏
      */
-    SearchTopicRule(req: SearchTopicRuleRequest, cb?: (error: string, rep: SearchTopicRuleResponse) => void): Promise<SearchTopicRuleResponse>;
+    DeletePositionFence(req: DeletePositionFenceRequest, cb?: (error: string, rep: DeletePositionFenceResponse) => void): Promise<DeletePositionFenceResponse>;
+    /**
+     * 更新围栏
+     */
+    ModifyPositionFence(req?: ModifyPositionFenceRequest, cb?: (error: string, rep: ModifyPositionFenceResponse) => void): Promise<ModifyPositionFenceResponse>;
+    /**
+     * 获取设备位置列表
+     */
+    DescribeDevicePositionList(req?: DescribeDevicePositionListRequest, cb?: (error: string, rep: DescribeDevicePositionListResponse) => void): Promise<DescribeDevicePositionListResponse>;
+    /**
+     * 更新围栏绑定信息
+     */
+    ModifyFenceBind(req: ModifyFenceBindRequest, cb?: (error: string, rep: ModifyFenceBindResponse) => void): Promise<ModifyFenceBindResponse>;
+    /**
+     * 更新位置空间
+     */
+    ModifyPositionSpace(req: ModifyPositionSpaceRequest, cb?: (error: string, rep: ModifyPositionSpaceResponse) => void): Promise<ModifyPositionSpaceResponse>;
     /**
      * 提供查询某个项目下所有产品信息的能力。
      */
     GetStudioProductList(req: GetStudioProductListRequest, cb?: (error: string, rep: GetStudioProductListResponse) => void): Promise<GetStudioProductListResponse>;
     /**
+     * 启用规则
+     */
+    EnableTopicRule(req: EnableTopicRuleRequest, cb?: (error: string, rep: EnableTopicRuleResponse) => void): Promise<EnableTopicRuleResponse>;
+    /**
      * 提供修改产品的数据模板的能力
      */
     ModifyModelDefinition(req: ModifyModelDefinitionRequest, cb?: (error: string, rep: ModifyModelDefinitionResponse) => void): Promise<ModifyModelDefinitionResponse>;
     /**
-     * 查询项目详情
+     * 删除位置空间
      */
-    DescribeProject(req: DescribeProjectRequest, cb?: (error: string, rep: DescribeProjectResponse) => void): Promise<DescribeProjectResponse>;
+    DeletePositionSpace(req: DeletePositionSpaceRequest, cb?: (error: string, rep: DeletePositionSpaceResponse) => void): Promise<DeletePositionSpaceResponse>;
     /**
      * 查询产品配置的数据模板信息
      */
@@ -188,13 +252,21 @@ export declare class Client extends AbstractClient {
      */
     CallDeviceActionAsync(req: CallDeviceActionAsyncRequest, cb?: (error: string, rep: CallDeviceActionAsyncResponse) => void): Promise<CallDeviceActionAsyncResponse>;
     /**
-     * 启用规则
+     * 创建位置空间
      */
-    EnableTopicRule(req: EnableTopicRuleRequest, cb?: (error: string, rep: EnableTopicRuleResponse) => void): Promise<EnableTopicRuleResponse>;
+    CreatePositionSpace(req: CreatePositionSpaceRequest, cb?: (error: string, rep: CreatePositionSpaceResponse) => void): Promise<CreatePositionSpaceResponse>;
+    /**
+     * 用于查看某个设备的详细信息
+     */
+    DescribeDevice(req: DescribeDeviceRequest, cb?: (error: string, rep: DescribeDeviceResponse) => void): Promise<DescribeDeviceResponse>;
     /**
      * 提供删除某个项目的能力
      */
     DeleteProject(req: DeleteProjectRequest, cb?: (error: string, rep: DeleteProjectResponse) => void): Promise<DeleteProjectResponse>;
+    /**
+     * 查询项目详情
+     */
+    DescribeProject(req: DescribeProjectRequest, cb?: (error: string, rep: DescribeProjectResponse) => void): Promise<DescribeProjectResponse>;
     /**
      * 根据设备产品ID、设备名称，设置控制设备的属性数据。
      */

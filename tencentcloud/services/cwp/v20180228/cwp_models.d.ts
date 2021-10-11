@@ -242,7 +242,7 @@ export interface DescribeAssetProcessInfoListRequest {
 <li>RunTimeStart - String - 是否必填：否 - 运行开始时间</li>
 <li>RunTimeEnd - String - 是否必填：否 - 运行结束时间</li>
 <li>InstallByPackage - uint64 - 是否必填：否 - 是否包安装：0否，1是</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -338,7 +338,7 @@ export interface DescribeAssetWebFrameListRequest {
 9:IHS
 10:Tengine</li>
 <li>OsType - String - 是否必填：否 - windows/linux</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -3108,7 +3108,7 @@ export interface DescribeAssetAppListRequest {
 7 : WEB服务
 99:其他</li>
 <li>OsType - uint64 - 是否必填：否 - windows/linux</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<AssetFilters>;
     /**
@@ -8880,7 +8880,7 @@ export interface DescribeAssetDatabaseListRequest {
 10:TiDB</li>
 <li>Proto - String - 是否必填：否 - 协议：1:TCP, 2:UDP, 3:未知</li>
 <li>OsType - String - 是否必填：否 - 操作系统: linux/windows</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<AssetFilters>;
     /**
@@ -8925,7 +8925,7 @@ export interface DescribeAssetMachineListRequest {
 2: 20%～50%  3: 50%～80%
 4: 80%～100%</li>
 <li>Quuid：主机Quuid</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -9344,7 +9344,7 @@ export interface DescribeAssetPortInfoListRequest {
 <li>OsType - uint64 - 是否必填：否 - windows/linux</li>
 <li>RunTimeStart - String - 是否必填：否 - 运行开始时间</li>
 <li>RunTimeEnd - String - 是否必填：否 - 运行结束时间</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -11245,7 +11245,7 @@ export interface DescribeAssetWebAppListRequest {
 8:IHS
 9:Tengine</li>
 <li>OsType - String - 是否必填：否 - windows/linux</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -11372,7 +11372,7 @@ export interface DescribeAssetWebLocationListRequest {
 9:IHS
 10:Tengine</li>
 <li>OsType - String - 是否必填：否 - windows/linux</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -11994,7 +11994,7 @@ export interface DescribeAssetUserListRequest {
 <li>IsSshLogin - uint64 - 是否必填：否 - 是否ssh登录：0 不是，1是 仅linux</li>
 <li>ShellLoginStatus - uint64 - 是否必填：否 - 是否shell登录性，0不是；1是 仅linux</li>
 <li>PasswordStatus - uint64 - 是否必填：否 - 密码状态：1正常 2即将过期 3已过期 4已锁定 仅linux</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -12129,7 +12129,7 @@ export interface DescribeAssetWebServiceInfoListRequest {
 9:IHS
 10:Tengine</li>
 <li>OsType- string - 是否必填：否 - Windows/linux</li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
       */
     Filters?: Array<AssetFilters>;
     /**

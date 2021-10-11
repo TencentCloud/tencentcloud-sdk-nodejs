@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("iotexplorer.tencentcloudapi.com", "2019-04-23", clientConfig);
     }
     /**
-     * 获取规则列表
+     * 提供查询LoRa自定义频点详情的能力
      */
-    async GetTopicRuleList(req, cb) {
-        return this.request("GetTopicRuleList", req, cb);
+    async DescribeLoRaFrequency(req, cb) {
+        return this.request("DescribeLoRaFrequency", req, cb);
     }
     /**
      * 本接口（GetCOSURL）用于获取固件存储在COS的URL
@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteStudioProduct", req, cb);
     }
     /**
+     * 搜索位置空间
+     */
+    async SearchPositionSpace(req, cb) {
+        return this.request("SearchPositionSpace", req, cb);
+    }
+    /**
      * 根据设备产品ID、设备名称，获取设备上报的属性数据。
      */
     async DescribeDeviceData(req, cb) {
@@ -62,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DirectBindDeviceInFamily(req, cb) {
         return this.request("DirectBindDeviceInFamily", req, cb);
+    }
+    /**
+     * 获取围栏绑定信息列表
+     */
+    async DescribeFenceBindList(req, cb) {
+        return this.request("DescribeFenceBindList", req, cb);
     }
     /**
      * 删除  LoRa 网关的接口
@@ -88,10 +100,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyLoRaFrequency", req, cb);
     }
     /**
-     * 用于查看某个设备的详细信息
+     * 创建围栏
      */
-    async DescribeDevice(req, cb) {
-        return this.request("DescribeDevice", req, cb);
+    async CreatePositionFence(req, cb) {
+        return this.request("CreatePositionFence", req, cb);
+    }
+    /**
+     * 更新位置空间产品属性
+     */
+    async ModifySpaceProperty(req, cb) {
+        return this.request("ModifySpaceProperty", req, cb);
     }
     /**
      * 创建新 LoRa 网关设备接口
@@ -116,6 +134,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTopicPolicy(req, cb) {
         return this.request("CreateTopicPolicy", req, cb);
+    }
+    /**
+     * 获取设备历史位置
+     */
+    async GetDeviceLocationHistory(req, cb) {
+        return this.request("GetDeviceLocationHistory", req, cb);
+    }
+    /**
+     * 获取规则列表
+     */
+    async GetTopicRuleList(req, cb) {
+        return this.request("GetTopicRuleList", req, cb);
     }
     /**
      * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求
@@ -184,16 +214,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProject", req, cb);
     }
     /**
-     * 提供删除LoRa自定义频点的能力
+     * 获取围栏列表
      */
-    async DeleteLoRaFrequency(req, cb) {
-        return this.request("DeleteLoRaFrequency", req, cb);
+    async DescribePositionFenceList(req, cb) {
+        return this.request("DescribePositionFenceList", req, cb);
     }
     /**
      * 本接口（ListFirmwares）用于获取固件列表
      */
     async ListFirmwares(req, cb) {
         return this.request("ListFirmwares", req, cb);
+    }
+    /**
+     * 提供删除LoRa自定义频点的能力
+     */
+    async DeleteLoRaFrequency(req, cb) {
+        return this.request("DeleteLoRaFrequency", req, cb);
+    }
+    /**
+     * 创建围栏绑定信息
+     */
+    async CreateFenceBind(req, cb) {
+        return this.request("CreateFenceBind", req, cb);
+    }
+    /**
+     * 搜索规则
+     */
+    async SearchTopicRule(req, cb) {
+        return this.request("SearchTopicRule", req, cb);
     }
     /**
      * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
@@ -206,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetDeviceList(req, cb) {
         return this.request("GetDeviceList", req, cb);
+    }
+    /**
+     * 获取位置空间中围栏告警事件列表
+     */
+    async DescribeSpaceFenceEventList(req, cb) {
+        return this.request("DescribeSpaceFenceEventList", req, cb);
     }
     /**
      * 创建设备
@@ -226,10 +280,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStudioProduct", req, cb);
     }
     /**
+     * 删除围栏绑定信息
+     */
+    async DeleteFenceBind(req, cb) {
+        return this.request("DeleteFenceBind", req, cb);
+    }
+    /**
      * 获取 LoRa 网关列表接口
      */
     async GetLoRaGatewayList(req, cb) {
         return this.request("GetLoRaGatewayList", req, cb);
+    }
+    /**
+     * 获取围栏告警事件列表
+     */
+    async DescribeFenceEventList(req, cb) {
+        return this.request("DescribeFenceEventList", req, cb);
     }
     /**
      * 产品开发完成并测试通过后，通过发布产品将产品设置为发布状态
@@ -244,16 +310,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTask", req, cb);
     }
     /**
-     * 提供查询LoRa自定义频点详情的能力
+     * 获取位置空间列表
      */
-    async DescribeLoRaFrequency(req, cb) {
-        return this.request("DescribeLoRaFrequency", req, cb);
+    async GetPositionSpaceList(req, cb) {
+        return this.request("GetPositionSpaceList", req, cb);
     }
     /**
-     * 搜索规则
+     * 删除围栏
      */
-    async SearchTopicRule(req, cb) {
-        return this.request("SearchTopicRule", req, cb);
+    async DeletePositionFence(req, cb) {
+        return this.request("DeletePositionFence", req, cb);
+    }
+    /**
+     * 更新围栏
+     */
+    async ModifyPositionFence(req, cb) {
+        return this.request("ModifyPositionFence", req, cb);
+    }
+    /**
+     * 获取设备位置列表
+     */
+    async DescribeDevicePositionList(req, cb) {
+        return this.request("DescribeDevicePositionList", req, cb);
+    }
+    /**
+     * 更新围栏绑定信息
+     */
+    async ModifyFenceBind(req, cb) {
+        return this.request("ModifyFenceBind", req, cb);
+    }
+    /**
+     * 更新位置空间
+     */
+    async ModifyPositionSpace(req, cb) {
+        return this.request("ModifyPositionSpace", req, cb);
     }
     /**
      * 提供查询某个项目下所有产品信息的能力。
@@ -262,16 +352,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetStudioProductList", req, cb);
     }
     /**
+     * 启用规则
+     */
+    async EnableTopicRule(req, cb) {
+        return this.request("EnableTopicRule", req, cb);
+    }
+    /**
      * 提供修改产品的数据模板的能力
      */
     async ModifyModelDefinition(req, cb) {
         return this.request("ModifyModelDefinition", req, cb);
     }
     /**
-     * 查询项目详情
+     * 删除位置空间
      */
-    async DescribeProject(req, cb) {
-        return this.request("DescribeProject", req, cb);
+    async DeletePositionSpace(req, cb) {
+        return this.request("DeletePositionSpace", req, cb);
     }
     /**
      * 查询产品配置的数据模板信息
@@ -298,16 +394,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CallDeviceActionAsync", req, cb);
     }
     /**
-     * 启用规则
+     * 创建位置空间
      */
-    async EnableTopicRule(req, cb) {
-        return this.request("EnableTopicRule", req, cb);
+    async CreatePositionSpace(req, cb) {
+        return this.request("CreatePositionSpace", req, cb);
+    }
+    /**
+     * 用于查看某个设备的详细信息
+     */
+    async DescribeDevice(req, cb) {
+        return this.request("DescribeDevice", req, cb);
     }
     /**
      * 提供删除某个项目的能力
      */
     async DeleteProject(req, cb) {
         return this.request("DeleteProject", req, cb);
+    }
+    /**
+     * 查询项目详情
+     */
+    async DescribeProject(req, cb) {
+        return this.request("DescribeProject", req, cb);
     }
     /**
      * 根据设备产品ID、设备名称，设置控制设备的属性数据。

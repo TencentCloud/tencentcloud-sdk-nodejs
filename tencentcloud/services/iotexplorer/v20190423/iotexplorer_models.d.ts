@@ -40,6 +40,19 @@ export interface DevicesItem {
     DeviceName: string;
 }
 /**
+ * DeleteFenceBind请求参数结构体
+ */
+export interface DeleteFenceBindRequest {
+    /**
+      * 围栏Id
+      */
+    FenceId: number;
+    /**
+      * 围栏绑定的产品信息
+      */
+    Items: Array<FenceBindProductItem>;
+}
+/**
  * DescribeModelDefinition返回参数结构体
  */
 export interface DescribeModelDefinitionResponse {
@@ -92,6 +105,23 @@ export interface DeleteStudioProductResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetPositionSpaceList请求参数结构体
+ */
+export interface GetPositionSpaceListRequest {
+    /**
+      * 项目Id
+      */
+    ProjectId: string;
+    /**
+      * 翻页偏移量，0起始
+      */
+    Offset: number;
+    /**
+      * 最大返回结果数
+      */
+    Limit: number;
 }
 /**
  * GetDeviceList返回参数结构体
@@ -191,6 +221,35 @@ export interface DeleteLoRaFrequencyResponse {
     RequestId?: string;
 }
 /**
+ * ModifyPositionFence请求参数结构体
+ */
+export declare type ModifyPositionFenceRequest = null;
+/**
+ * 围栏信息
+ */
+export interface PositionFenceItem {
+    /**
+      * 围栏Id
+      */
+    FenceId: number;
+    /**
+      * 位置空间Id
+      */
+    SpaceId: string;
+    /**
+      * 围栏名称
+      */
+    FenceName: string;
+    /**
+      * 围栏描述
+      */
+    FenceDesc: string;
+    /**
+      * 围栏区域信息，采用 GeoJSON 格式
+      */
+    FenceArea: string;
+}
+/**
  * DeleteTopicRule返回参数结构体
  */
 export interface DeleteTopicRuleResponse {
@@ -198,6 +257,23 @@ export interface DeleteTopicRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 位置点
+ */
+export interface PositionItem {
+    /**
+      * 位置点的时间
+      */
+    CreateTime: number;
+    /**
+      * 位置点的经度
+      */
+    Longitude: number;
+    /**
+      * 位置点的纬度
+      */
+    Latitude: number;
 }
 /**
  * ModifyModelDefinition请求参数结构体
@@ -256,9 +332,31 @@ export interface EnableTopicRuleResponse {
     RequestId?: string;
 }
 /**
+ * GetDeviceLocationHistory返回参数结构体
+ */
+export interface GetDeviceLocationHistoryResponse {
+    /**
+      * 历史位置列表
+      */
+    Positions: Array<PositionItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UpdateFirmware返回参数结构体
  */
 export interface UpdateFirmwareResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyPositionFence返回参数结构体
+ */
+export interface ModifyPositionFenceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -288,6 +386,15 @@ export interface ModifyStudioProductRequest {
       * 是否打开二进制转Json功能, 取值为字符串 true/false
       */
     EnableProductScript?: string;
+}
+/**
+ * ModifyPositionSpace返回参数结构体
+ */
+export interface ModifyPositionSpaceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateStudioProduct请求参数结构体
@@ -358,17 +465,72 @@ export interface ProductModelDefinition {
     NetTypeModel: string;
 }
 /**
- * ReleaseStudioProduct请求参数结构体
+ * ModifyFenceBind返回参数结构体
  */
-export interface ReleaseStudioProductRequest {
+export interface ModifyFenceBindResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeletePositionFence返回参数结构体
+ */
+export interface DeletePositionFenceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 围栏告警位置点
+ */
+export interface FenceAlarmPoint {
+    /**
+      * 围栏告警时间
+      */
+    AlarmTime: number;
+    /**
+      * 围栏告警位置的经度
+      */
+    Longitude: number;
+    /**
+      * 围栏告警位置的纬度
+      */
+    Latitude: number;
+}
+/**
+ * UploadFirmware请求参数结构体
+ */
+export interface UploadFirmwareRequest {
     /**
       * 产品ID
       */
-    ProductId: string;
+    ProductID: string;
     /**
-      * 产品DevStatus
+      * 固件版本号
       */
-    DevStatus: string;
+    FirmwareVersion: string;
+    /**
+      * 固件的MD5值
+      */
+    Md5sum: string;
+    /**
+      * 固件的大小
+      */
+    FileSize: number;
+    /**
+      * 固件名称
+      */
+    FirmwareName?: string;
+    /**
+      * 固件描述
+      */
+    FirmwareDescription?: string;
+    /**
+      * 固件升级模块；可选值 mcu|moudule
+      */
+    FwType?: string;
 }
 /**
  * ListEventHistory请求参数结构体
@@ -434,6 +596,110 @@ export interface DescribeDeviceDataRequest {
     DeviceId?: string;
 }
 /**
+ * 围栏绑定的产品信息
+ */
+export interface FenceBindProductItem {
+    /**
+      * 围栏绑定的设备信息
+      */
+    Devices: Array<FenceBindDeviceItem>;
+    /**
+      * 围栏绑定的产品Id
+      */
+    ProductId: string;
+}
+/**
+ * SearchPositionSpace返回参数结构体
+ */
+export interface SearchPositionSpaceResponse {
+    /**
+      * 位置空间列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<PositionSpaceInfo>;
+    /**
+      * 符合条件的位置空间个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePositionFenceList返回参数结构体
+ */
+export interface DescribePositionFenceListResponse {
+    /**
+      * 围栏列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<PositionFenceInfo>;
+    /**
+      * 围栏数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetDeviceLocationHistory请求参数结构体
+ */
+export interface GetDeviceLocationHistoryRequest {
+    /**
+      * 产品Id
+      */
+    ProductId: string;
+    /**
+      * 设备名
+      */
+    DeviceName: string;
+    /**
+      * 查询起始时间，Unix时间，单位为毫秒
+      */
+    StartTime: number;
+    /**
+      * 查询结束时间，Unix时间，单位为毫秒
+      */
+    EndTime: number;
+    /**
+      * 坐标类型
+      */
+    CoordinateType?: number;
+}
+/**
+ * DescribeDevicePositionList返回参数结构体
+ */
+export interface DescribeDevicePositionListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetProjectList返回参数结构体
+ */
+export interface GetProjectListResponse {
+    /**
+      * 项目列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Projects: Array<ProjectEntryEx>;
+    /**
+      * 列表项个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeStudioProduct返回参数结构体
  */
 export interface DescribeStudioProductResponse {
@@ -454,6 +720,23 @@ export interface DescribeProjectResponse {
       * 返回信息
       */
     Project?: ProjectEntryEx;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SearchStudioProduct返回参数结构体
+ */
+export interface SearchStudioProductResponse {
+    /**
+      * 产品列表
+      */
+    Products: Array<ProductEntry>;
+    /**
+      * 产品数量
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -483,6 +766,40 @@ export interface DeviceData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DevicePsk: string;
+}
+/**
+ * GetTopicRuleList请求参数结构体
+ */
+export interface GetTopicRuleListRequest {
+    /**
+      * 请求的页数
+      */
+    PageNum: number;
+    /**
+      * 分页的大小
+      */
+    PageSize: number;
+}
+/**
+ * 围栏绑定的设备信息
+ */
+export interface FenceBindDeviceItem {
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 告警条件(In，进围栏报警；Out，出围栏报警；InOrOut，进围栏或者出围栏均报警)
+      */
+    AlertCondition: string;
+    /**
+      * 是否使能围栏(true，使能；false，禁用)
+      */
+    FenceEnable: boolean;
+    /**
+      * 告警处理方法
+      */
+    Method: string;
 }
 /**
  * 设备历史数据结构
@@ -716,6 +1033,24 @@ export interface ReleaseStudioProductResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSpaceFenceEventList返回参数结构体
+ */
+export interface DescribeSpaceFenceEventListResponse {
+    /**
+      * 围栏告警事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<FenceEventItem>;
+    /**
+      * 围栏告警事件总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteLoRaGateway请求参数结构体
  */
 export interface DeleteLoRaGatewayRequest {
@@ -723,6 +1058,27 @@ export interface DeleteLoRaGatewayRequest {
       * LoRa 网关 Id
       */
     GatewayId: string;
+}
+/**
+ * SearchPositionSpace请求参数结构体
+ */
+export interface SearchPositionSpaceRequest {
+    /**
+      * 项目Id
+      */
+    ProjectId: string;
+    /**
+      * 位置空间名字
+      */
+    SpaceName: string;
+    /**
+      * 偏移量，从0开始
+      */
+    Offset: number;
+    /**
+      * 最大获取数量
+      */
+    Limit: number;
 }
 /**
  * LoRa自定义频点信息
@@ -785,6 +1141,36 @@ export interface SearchTopicRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeFenceEventList返回参数结构体
+ */
+export interface DescribeFenceEventListResponse {
+    /**
+      * 围栏告警事件列表
+      */
+    List: Array<FenceEventItem>;
+    /**
+      * 围栏告警事件总数
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateDevicesEnableState请求参数结构体
+ */
+export interface UpdateDevicesEnableStateRequest {
+    /**
+      * 多个设备标识
+      */
+    DevicesItems: Array<DevicesItem>;
+    /**
+      * 1：启用；0：禁用
+      */
+    Status: number;
 }
 /**
  * DescribeTopicRule请求参数结构体
@@ -855,6 +1241,19 @@ export interface CreateLoRaGatewayRequest {
     FrequencyId?: string;
 }
 /**
+ * ReleaseStudioProduct请求参数结构体
+ */
+export interface ReleaseStudioProductRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 产品DevStatus
+      */
+    DevStatus: string;
+}
+/**
  * CreateProject返回参数结构体
  */
 export interface CreateProjectResponse {
@@ -868,17 +1267,33 @@ export interface CreateProjectResponse {
     RequestId?: string;
 }
 /**
- * ModifyTopicRule请求参数结构体
+ * DescribeDeviceDataHistory返回参数结构体
  */
-export interface ModifyTopicRuleRequest {
+export interface DescribeDeviceDataHistoryResponse {
     /**
-      * 规则名称
+      * 属性字段名称，对应数据模板中功能属性的标识符
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RuleName: string;
+    FieldName?: string;
     /**
-      * 替换的规则包体
+      * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TopicRulePayload: TopicRulePayload;
+    Listover?: boolean;
+    /**
+      * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Context?: string;
+    /**
+      * 历史数据结果数组，返回对应时间点及取值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Results?: Array<DeviceDataHistoryItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteProject返回参数结构体
@@ -890,34 +1305,13 @@ export interface DeleteProjectResponse {
     RequestId?: string;
 }
 /**
- * DeleteDevices请求参数结构体
+ * CreateTopicPolicy返回参数结构体
  */
-export interface DeleteDevicesRequest {
+export interface CreateTopicPolicyResponse {
     /**
-      * 多个设备标识
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    DevicesItems: Array<DevicesItem>;
-}
-/**
- * CallDeviceActionAsync请求参数结构体
- */
-export interface CallDeviceActionAsyncRequest {
-    /**
-      * 产品Id
-      */
-    ProductId: string;
-    /**
-      * 设备名称
-      */
-    DeviceName: string;
-    /**
-      * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
-      */
-    ActionId: string;
-    /**
-      * 输入参数
-      */
-    InputParams?: string;
+    RequestId?: string;
 }
 /**
  * CreateDevice返回参数结构体
@@ -970,23 +1364,13 @@ export interface CreateDeviceRequest {
     DefinedPsk?: string;
 }
 /**
- * GetProjectList返回参数结构体
+ * DeletePositionSpace请求参数结构体
  */
-export interface GetProjectListResponse {
+export interface DeletePositionSpaceRequest {
     /**
-      * 项目列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 位置空间Id
       */
-    Projects: Array<ProjectEntryEx>;
-    /**
-      * 列表项个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Total: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    SpaceId: string;
 }
 /**
  * GetStudioProductList请求参数结构体
@@ -1175,6 +1559,19 @@ export interface CreateProjectRequest {
     InstanceId?: string;
 }
 /**
+ * CreateFenceBind请求参数结构体
+ */
+export interface CreateFenceBindRequest {
+    /**
+      * 围栏Id
+      */
+    FenceId: number;
+    /**
+      * 围栏绑定的产品列表
+      */
+    Items: Array<FenceBindProductItem>;
+}
+/**
  * DescribeDevice返回参数结构体
  */
 export interface DescribeDeviceResponse {
@@ -1255,37 +1652,17 @@ export interface PublishMessageRequest {
     PayloadEncoding?: string;
 }
 /**
- * UploadFirmware请求参数结构体
+ * ModifyTopicRule请求参数结构体
  */
-export interface UploadFirmwareRequest {
+export interface ModifyTopicRuleRequest {
     /**
-      * 产品ID
+      * 规则名称
       */
-    ProductID: string;
+    RuleName: string;
     /**
-      * 固件版本号
+      * 替换的规则包体
       */
-    FirmwareVersion: string;
-    /**
-      * 固件的MD5值
-      */
-    Md5sum: string;
-    /**
-      * 固件的大小
-      */
-    FileSize: number;
-    /**
-      * 固件名称
-      */
-    FirmwareName?: string;
-    /**
-      * 固件描述
-      */
-    FirmwareDescription?: string;
-    /**
-      * 固件升级模块；可选值 mcu|moudule
-      */
-    FwType?: string;
+    TopicRulePayload: TopicRulePayload;
 }
 /**
  * GetDeviceList请求参数结构体
@@ -1317,6 +1694,42 @@ export interface GetDeviceListRequest {
     ProjectId?: string;
 }
 /**
+ * ModifySpaceProperty请求参数结构体
+ */
+export interface ModifySpacePropertyRequest {
+    /**
+      * 位置空间Id
+      */
+    SpaceId: string;
+    /**
+      * 产品Id
+      */
+    ProductId: string;
+    /**
+      * 产品属性
+      */
+    Data: string;
+}
+/**
+ * GetPositionSpaceList返回参数结构体
+ */
+export interface GetPositionSpaceListResponse {
+    /**
+      * 位置空间列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<PositionSpaceInfo>;
+    /**
+      * 位置空间数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GetCOSURL返回参数结构体
  */
 export interface GetCOSURLResponse {
@@ -1328,6 +1741,19 @@ export interface GetCOSURLResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyFenceBind请求参数结构体
+ */
+export interface ModifyFenceBindRequest {
+    /**
+      * 围栏Id
+      */
+    FenceId: number;
+    /**
+      * 围栏绑定的产品列表
+      */
+    Items: Array<FenceBindProductItem>;
 }
 /**
  * GetTopicRuleList返回参数结构体
@@ -1347,13 +1773,84 @@ export interface GetTopicRuleListResponse {
     RequestId?: string;
 }
 /**
- * DisableTopicRule请求参数结构体
+ * DescribeFenceEventList请求参数结构体
  */
-export interface DisableTopicRuleRequest {
+export interface DescribeFenceEventListRequest {
     /**
-      * 规则名称
+      * 围栏告警信息的查询起始时间，Unix时间，单位为毫秒
       */
-    RuleName: string;
+    StartTime: number;
+    /**
+      * 围栏告警信息的查询结束时间，Unix时间，单位为毫秒
+      */
+    EndTime: number;
+    /**
+      * 围栏Id
+      */
+    FenceId?: number;
+    /**
+      * 翻页偏移量，0起始
+      */
+    Offset?: number;
+    /**
+      * 最大返回结果数
+      */
+    Limit?: number;
+    /**
+      * 告警对应的产品Id
+      */
+    ProductId?: string;
+    /**
+      * 告警对应的设备名称
+      */
+    DeviceName?: string;
+}
+/**
+ * ModifyPositionSpace请求参数结构体
+ */
+export interface ModifyPositionSpaceRequest {
+    /**
+      * 位置空间Id
+      */
+    SpaceId: string;
+    /**
+      * 位置空间名称
+      */
+    SpaceName: string;
+    /**
+      * 授权类型
+      */
+    AuthorizeType: number;
+    /**
+      * 产品列表
+      */
+    ProductIdList: Array<string>;
+    /**
+      * 位置空间描述
+      */
+    Description?: string;
+    /**
+      * 缩略图
+      */
+    Icon?: string;
+}
+/**
+ * GetLoRaGatewayList返回参数结构体
+ */
+export interface GetLoRaGatewayListResponse {
+    /**
+      * 返回总数
+      */
+    Total?: number;
+    /**
+      * 返回详情项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Gateways?: Array<LoRaGatewayItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 项目详情
@@ -1457,13 +1954,25 @@ export interface TopicRule {
     RuleDisabled: boolean;
 }
 /**
- * CreateTopicPolicy返回参数结构体
+ * CallDeviceActionAsync请求参数结构体
  */
-export interface CreateTopicPolicyResponse {
+export interface CallDeviceActionAsyncRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 产品Id
       */
-    RequestId?: string;
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
+      */
+    ActionId: string;
+    /**
+      * 输入参数
+      */
+    InputParams?: string;
 }
 /**
  * CallDeviceActionAsync返回参数结构体
@@ -1477,6 +1986,50 @@ export interface CallDeviceActionAsyncResponse {
       * 异步调用状态
       */
     Status?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteFenceBind返回参数结构体
+ */
+export interface DeleteFenceBindResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateFenceBind返回参数结构体
+ */
+export interface CreateFenceBindResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeFenceBindList请求参数结构体
+ */
+export interface DescribeFenceBindListRequest {
+    /**
+      * 围栏Id
+      */
+    FenceId: number;
+    /**
+      * 翻页偏移量，0起始
+      */
+    Offset?: number;
+    /**
+      * 最大返回结果数
+      */
+    Limit?: number;
+}
+/**
+ * CreatePositionFence返回参数结构体
+ */
+export interface CreatePositionFenceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1522,6 +2075,52 @@ export interface UpdateFirmwareRequest {
     UpgradeMethod?: number;
 }
 /**
+ * 位置空间详情
+ */
+export interface PositionSpaceInfo {
+    /**
+      * 项目Id
+      */
+    ProjectId: string;
+    /**
+      * 位置空间Id
+      */
+    SpaceId: string;
+    /**
+      * 位置空间名称
+      */
+    SpaceName: string;
+    /**
+      * 授权类型
+      */
+    AuthorizeType: number;
+    /**
+      * 描述备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 产品列表
+      */
+    ProductIdList: Array<string>;
+    /**
+      * 缩略图
+      */
+    Icon: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: number;
+    /**
+      * 更新时间
+      */
+    UpdateTime: number;
+    /**
+      * 用户自定义地图缩放
+      */
+    Zoom: number;
+}
+/**
  * 网关坐标
  */
 export interface LoRaGatewayLocation {
@@ -1560,17 +2159,21 @@ export interface DescribeDeviceRequest {
     DeviceId?: string;
 }
 /**
- * UpdateDevicesEnableState请求参数结构体
+ * DescribePositionFenceList请求参数结构体
  */
-export interface UpdateDevicesEnableStateRequest {
+export interface DescribePositionFenceListRequest {
     /**
-      * 多个设备标识
+      * 位置空间Id
       */
-    DevicesItems: Array<DevicesItem>;
+    SpaceId: string;
     /**
-      * 1：启用；0：禁用
+      * 翻页偏移量，0起始
       */
-    Status: number;
+    Offset?: number;
+    /**
+      * 最大返回结果数
+      */
+    Limit?: number;
 }
 /**
  * ModifyTopicRule返回参数结构体
@@ -1642,21 +2245,29 @@ export interface DescribeLoRaFrequencyResponse {
     RequestId?: string;
 }
 /**
- * SearchStudioProduct返回参数结构体
+ * DescribeSpaceFenceEventList请求参数结构体
  */
-export interface SearchStudioProductResponse {
+export interface DescribeSpaceFenceEventListRequest {
     /**
-      * 产品列表
+      * 位置空间Id
       */
-    Products: Array<ProductEntry>;
+    SpaceId: string;
     /**
-      * 产品数量
+      * 围栏告警信息的查询起始时间，Unix时间，单位为毫秒
       */
-    Total: number;
+    StartTime: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 围栏告警信息的查询结束时间，Unix时间，单位为毫秒
       */
-    RequestId?: string;
+    EndTime: number;
+    /**
+      * 翻页偏移量，0起始
+      */
+    Offset?: number;
+    /**
+      * 最大返回结果数
+      */
+    Limit?: number;
 }
 /**
  * GetLoRaGatewayList请求参数结构体
@@ -1674,6 +2285,31 @@ export interface GetLoRaGatewayListRequest {
       * 限制个数
       */
     Limit?: number;
+}
+/**
+ * 围栏事件详情
+ */
+export interface FenceEventItem {
+    /**
+      * 围栏事件的产品Id
+      */
+    ProductId: string;
+    /**
+      * 围栏事件的设备名称
+      */
+    DeviceName: string;
+    /**
+      * 围栏Id
+      */
+    FenceId: number;
+    /**
+      * 围栏事件的告警类型（In，进围栏报警；Out，出围栏报警；InOrOut，进围栏或者出围栏均报警）
+      */
+    AlertType: string;
+    /**
+      * 围栏事件的设备位置信息
+      */
+    Data: FenceAlarmPoint;
 }
 /**
  * DescribeProject请求参数结构体
@@ -1872,6 +2508,20 @@ export interface DescribeStudioProductRequest {
     ProductId: string;
 }
 /**
+ * CreatePositionSpace返回参数结构体
+ */
+export interface CreatePositionSpaceResponse {
+    /**
+      * 空间Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpaceId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyLoRaFrequency请求参数结构体
  */
 export interface ModifyLoRaFrequencyRequest {
@@ -1922,6 +2572,19 @@ export interface ModifyModelDefinitionResponse {
     RequestId?: string;
 }
 /**
+ * DeletePositionFence请求参数结构体
+ */
+export interface DeletePositionFenceRequest {
+    /**
+      * 位置空间Id
+      */
+    SpaceId: string;
+    /**
+      * 围栏Id
+      */
+    FenceId: number;
+}
+/**
  * GetProjectList请求参数结构体
  */
 export interface GetProjectListRequest {
@@ -1955,6 +2618,15 @@ export interface GetProjectListRequest {
     ProjectName?: string;
 }
 /**
+ * DeletePositionSpace返回参数结构体
+ */
+export interface DeletePositionSpaceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateLoRaFrequency返回参数结构体
  */
 export interface CreateLoRaFrequencyResponse {
@@ -1967,6 +2639,10 @@ export interface CreateLoRaFrequencyResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeDevicePositionList请求参数结构体
+ */
+export declare type DescribeDevicePositionListRequest = null;
 /**
  * SearchStudioProduct请求参数结构体
  */
@@ -1997,17 +2673,13 @@ export interface SearchStudioProductRequest {
     ProductId?: string;
 }
 /**
- * GetTopicRuleList请求参数结构体
+ * DeleteDevices请求参数结构体
  */
-export interface GetTopicRuleListRequest {
+export interface DeleteDevicesRequest {
     /**
-      * 请求的页数
+      * 多个设备标识
       */
-    PageNum: number;
-    /**
-      * 分页的大小
-      */
-    PageSize: number;
+    DevicesItems: Array<DevicesItem>;
 }
 /**
  * 云api直接绑定设备出参
@@ -2094,6 +2766,15 @@ export interface ModifyProjectRequest {
     ProjectDesc: string;
 }
 /**
+ * ModifySpaceProperty返回参数结构体
+ */
+export interface ModifySpacePropertyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * PublishMessage返回参数结构体
  */
 export interface PublishMessageResponse {
@@ -2116,29 +2797,17 @@ export interface ModifyLoRaGatewayResponse {
     RequestId?: string;
 }
 /**
- * DescribeDeviceDataHistory返回参数结构体
+ * DescribeFenceBindList返回参数结构体
  */
-export interface DescribeDeviceDataHistoryResponse {
+export interface DescribeFenceBindListResponse {
     /**
-      * 属性字段名称，对应数据模板中功能属性的标识符
-注意：此字段可能返回 null，表示取不到有效值。
+      * 围栏绑定的产品设备列表
       */
-    FieldName?: string;
+    List: Array<FenceBindProductItem>;
     /**
-      * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 围栏绑定的设备总数
       */
-    Listover?: boolean;
-    /**
-      * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Context?: string;
-    /**
-      * 历史数据结果数组，返回对应时间点及取值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Results?: Array<DeviceDataHistoryItem>;
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2158,6 +2827,27 @@ export interface SearchKeyword {
     Value?: string;
 }
 /**
+ * CreatePositionFence请求参数结构体
+ */
+export interface CreatePositionFenceRequest {
+    /**
+      * 位置空间Id
+      */
+    SpaceId: string;
+    /**
+      * 围栏名称
+      */
+    FenceName: string;
+    /**
+      * 围栏区域信息，采用 GeoJSON 格式
+      */
+    FenceArea: string;
+    /**
+      * 围栏描述
+      */
+    FenceDesc?: string;
+}
+/**
  * DescribeModelDefinition请求参数结构体
  */
 export interface DescribeModelDefinitionRequest {
@@ -2167,22 +2857,13 @@ export interface DescribeModelDefinitionRequest {
     ProductId: string;
 }
 /**
- * GetLoRaGatewayList返回参数结构体
+ * DisableTopicRule请求参数结构体
  */
-export interface GetLoRaGatewayListResponse {
+export interface DisableTopicRuleRequest {
     /**
-      * 返回总数
+      * 规则名称
       */
-    Total?: number;
-    /**
-      * 返回详情项
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Gateways?: Array<LoRaGatewayItem>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    RuleName: string;
 }
 /**
  * CreateTopicRule返回参数结构体
@@ -2218,6 +2899,23 @@ export interface CreateTopicRuleRequest {
       * 规则内容
       */
     TopicRulePayload: TopicRulePayload;
+}
+/**
+ * 围栏详细信息(包含创建时间及更新时间)
+ */
+export interface PositionFenceInfo {
+    /**
+      * 围栏信息
+      */
+    GeoFence: PositionFenceItem;
+    /**
+      * 围栏创建时间
+      */
+    CreateTime: number;
+    /**
+      * 围栏更新时间
+      */
+    UpdateTime: number;
 }
 /**
  * DeleteDevice返回参数结构体
@@ -2425,4 +3123,33 @@ export interface DescribeFirmwareTaskRequest {
       * 固件任务ID
       */
     TaskId: number;
+}
+/**
+ * CreatePositionSpace请求参数结构体
+ */
+export interface CreatePositionSpaceRequest {
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 空间名称
+      */
+    SpaceName: string;
+    /**
+      * 授权类型，0：只读 1：读写
+      */
+    AuthorizeType: number;
+    /**
+      * 产品列表
+      */
+    ProductIdList: Array<string>;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 缩略图
+      */
+    Icon?: string;
 }

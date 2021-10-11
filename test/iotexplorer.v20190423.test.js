@@ -18,9 +18,9 @@ const client = new tencentcloud.iotexplorer.v20190423.Client({
 })
 describe("iotexplorer.v20190423.test.js", function () {
 
-it("iotexplorer.v20190423.GetTopicRuleList", async function () {
+it("iotexplorer.v20190423.DescribeLoRaFrequency", async function () {
     try {
-       const data = await client.GetTopicRuleList({})
+       const data = await client.DescribeLoRaFrequency({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,6 +58,16 @@ it("iotexplorer.v20190423.DeleteStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.SearchPositionSpace", async function () {
+    try {
+       const data = await client.SearchPositionSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeDeviceData", async function () {
     try {
        const data = await client.DescribeDeviceData({})
@@ -71,6 +81,16 @@ it("iotexplorer.v20190423.DescribeDeviceData", async function () {
 it("iotexplorer.v20190423.DirectBindDeviceInFamily", async function () {
     try {
        const data = await client.DirectBindDeviceInFamily({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeFenceBindList", async function () {
+    try {
+       const data = await client.DescribeFenceBindList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +138,19 @@ it("iotexplorer.v20190423.ModifyLoRaFrequency", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeDevice", async function () {
+it("iotexplorer.v20190423.CreatePositionFence", async function () {
     try {
-       const data = await client.DescribeDevice({})
+       const data = await client.CreatePositionFence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifySpaceProperty", async function () {
+    try {
+       const data = await client.ModifySpaceProperty({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +191,26 @@ it("iotexplorer.v20190423.CreateLoRaFrequency", async function () {
 it("iotexplorer.v20190423.CreateTopicPolicy", async function () {
     try {
        const data = await client.CreateTopicPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetDeviceLocationHistory", async function () {
+    try {
+       const data = await client.GetDeviceLocationHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetTopicRuleList", async function () {
+    try {
+       const data = await client.GetTopicRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +328,9 @@ it("iotexplorer.v20190423.ModifyProject", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DeleteLoRaFrequency", async function () {
+it("iotexplorer.v20190423.DescribePositionFenceList", async function () {
     try {
-       const data = await client.DeleteLoRaFrequency({})
+       const data = await client.DescribePositionFenceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +341,36 @@ it("iotexplorer.v20190423.DeleteLoRaFrequency", async function () {
 it("iotexplorer.v20190423.ListFirmwares", async function () {
     try {
        const data = await client.ListFirmwares({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DeleteLoRaFrequency", async function () {
+    try {
+       const data = await client.DeleteLoRaFrequency({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateFenceBind", async function () {
+    try {
+       const data = await client.CreateFenceBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.SearchTopicRule", async function () {
+    try {
+       const data = await client.SearchTopicRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +391,16 @@ it("iotexplorer.v20190423.PublishMessage", async function () {
 it("iotexplorer.v20190423.GetDeviceList", async function () {
     try {
        const data = await client.GetDeviceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeSpaceFenceEventList", async function () {
+    try {
+       const data = await client.DescribeSpaceFenceEventList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +438,29 @@ it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DeleteFenceBind", async function () {
+    try {
+       const data = await client.DeleteFenceBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetLoRaGatewayList", async function () {
     try {
        const data = await client.GetLoRaGatewayList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeFenceEventList", async function () {
+    try {
+       const data = await client.DescribeFenceEventList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +488,9 @@ it("iotexplorer.v20190423.DescribeFirmwareTask", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeLoRaFrequency", async function () {
+it("iotexplorer.v20190423.GetPositionSpaceList", async function () {
     try {
-       const data = await client.DescribeLoRaFrequency({})
+       const data = await client.GetPositionSpaceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +498,49 @@ it("iotexplorer.v20190423.DescribeLoRaFrequency", async function () {
     }
 })
 
-it("iotexplorer.v20190423.SearchTopicRule", async function () {
+it("iotexplorer.v20190423.DeletePositionFence", async function () {
     try {
-       const data = await client.SearchTopicRule({})
+       const data = await client.DeletePositionFence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyPositionFence", async function () {
+    try {
+       const data = await client.ModifyPositionFence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeDevicePositionList", async function () {
+    try {
+       const data = await client.DescribeDevicePositionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyFenceBind", async function () {
+    try {
+       const data = await client.ModifyFenceBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyPositionSpace", async function () {
+    try {
+       const data = await client.ModifyPositionSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +558,16 @@ it("iotexplorer.v20190423.GetStudioProductList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.EnableTopicRule", async function () {
+    try {
+       const data = await client.EnableTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyModelDefinition", async function () {
     try {
        const data = await client.ModifyModelDefinition({})
@@ -418,9 +578,9 @@ it("iotexplorer.v20190423.ModifyModelDefinition", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeProject", async function () {
+it("iotexplorer.v20190423.DeletePositionSpace", async function () {
     try {
-       const data = await client.DescribeProject({})
+       const data = await client.DeletePositionSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +628,19 @@ it("iotexplorer.v20190423.CallDeviceActionAsync", async function () {
     }
 })
 
-it("iotexplorer.v20190423.EnableTopicRule", async function () {
+it("iotexplorer.v20190423.CreatePositionSpace", async function () {
     try {
-       const data = await client.EnableTopicRule({})
+       const data = await client.CreatePositionSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeDevice", async function () {
+    try {
+       const data = await client.DescribeDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,6 +651,16 @@ it("iotexplorer.v20190423.EnableTopicRule", async function () {
 it("iotexplorer.v20190423.DeleteProject", async function () {
     try {
        const data = await client.DeleteProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeProject", async function () {
+    try {
+       const data = await client.DescribeProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
