@@ -97,7 +97,7 @@ export declare class Client extends AbstractClient {
     DeleteLiveTranscodeTemplate(req: DeleteLiveTranscodeTemplateRequest, cb?: (error: string, rep: DeleteLiveTranscodeTemplateResponse) => void): Promise<DeleteLiveTranscodeTemplateResponse>;
     /**
      * 查询直播域名 Referer 黑白名单配置。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 webrtc 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
      */
     DescribeLiveDomainReferer(req: DescribeLiveDomainRefererRequest, cb?: (error: string, rep: DescribeLiveDomainRefererResponse) => void): Promise<DescribeLiveDomainRefererResponse>;
     /**
@@ -507,7 +507,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     DescribeLiveStreamState(req: DescribeLiveStreamStateRequest, cb?: (error: string, rep: DescribeLiveStreamStateResponse) => void): Promise<DescribeLiveStreamStateResponse>;
     /**
      * 设置直播域名 Referer 黑白名单。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 webrtc 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
      */
     ModifyLiveDomainReferer(req: ModifyLiveDomainRefererRequest, cb?: (error: string, rep: ModifyLiveDomainRefererResponse) => void): Promise<ModifyLiveDomainRefererResponse>;
     /**

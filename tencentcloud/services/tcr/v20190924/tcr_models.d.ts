@@ -949,6 +949,11 @@ export interface DescribeReplicationInstanceSyncStatusResponse {
       */
     ReplicationTime: string;
     /**
+      * 同步日志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReplicationLog: ReplicationLog;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1424,7 +1429,19 @@ export interface DescribeReplicationInstanceSyncStatusRequest {
     /**
       * 复制实例的地域Id
       */
-    ReplicationRegionId: number;
+    ReplicationRegionId?: number;
+    /**
+      * 是否显示同步日志
+      */
+    ShowReplicationLog?: boolean;
+    /**
+      * 日志页号, 默认0
+      */
+    Offset?: number;
+    /**
+      * 最大输出条数，默认5，最大为20
+      */
+    Limit?: number;
 }
 /**
  * DeleteInstance返回参数结构体
@@ -3947,6 +3964,41 @@ export interface CreateTagRetentionExecutionRequest {
       * 是否模拟执行，默认值为false，即非模拟执行
       */
     DryRun?: boolean;
+}
+/**
+ * 同步日志
+ */
+export interface ReplicationLog {
+    /**
+      * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceType: string;
+    /**
+      * 源资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Source: string;
+    /**
+      * 目的资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Destination: string;
+    /**
+      * 同步状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
 }
 /**
  * CreateApplicationTriggerPersonal返回参数结构体

@@ -149,7 +149,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 查询直播域名 Referer 黑白名单配置。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 webrtc 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
      */
     async DescribeLiveDomainReferer(req, cb) {
         return this.request("DescribeLiveDomainReferer", req, cb);
@@ -737,7 +737,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
     /**
      * 设置直播域名 Referer 黑白名单。
-由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 webrtc 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
+由于 Referer 信息包含在 http 协议中，在开启配置后，播放协议为 rtmp 或 WebRTC 不会校验 Referer 配置，仍可正常播放。如需配置 Referer 鉴权建议使用 http-flv 或 http-hls 协议播放。
      */
     async ModifyLiveDomainReferer(req, cb) {
         return this.request("ModifyLiveDomainReferer", req, cb);

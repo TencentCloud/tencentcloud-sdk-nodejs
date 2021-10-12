@@ -671,6 +671,11 @@ export interface CreateSignUrlsResponse {
   SignUrlInfos: Array<SignUrlInfo>
 
   /**
+   * 生成失败时的错误信息，成功返回”“，顺序和出参SignUrlInfos保持一致
+   */
+  ErrorMessages: Array<string>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

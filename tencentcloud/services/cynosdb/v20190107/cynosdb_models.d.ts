@@ -488,6 +488,10 @@ export interface AddInstancesRequest {
       * 订单来源
       */
     OrderSource?: string;
+    /**
+      * 交易模式 0-下单并支付 1-下单
+      */
+    DealMode?: number;
 }
 /**
  * DescribeClusterDetail请求参数结构体
@@ -1274,6 +1278,10 @@ export interface UpgradeInstanceRequest {
 <li> MYSQL </li>
       */
     DbType?: string;
+    /**
+      * 交易模式 0-下单并支付 1-下单
+      */
+    DealMode?: number;
 }
 /**
  * DescribeInstanceDetail返回参数结构体
@@ -1381,41 +1389,21 @@ export interface DescribeInstanceSpecsRequest {
     DbType: string;
 }
 /**
- * 安全组规则
+ * 修改参数时，传入参数描述
  */
-export interface PolicyRule {
+export interface ParamItem {
     /**
-      * 策略，ACCEPT或者DROP
+      * 参数名称
       */
-    Action: string;
+    ParamName: string;
     /**
-      * 来源Ip或Ip段，例如192.168.0.0/16
+      * 当前值
       */
-    CidrIp: string;
+    CurrentValue: string;
     /**
-      * 端口
+      * 原有值
       */
-    PortRange: string;
-    /**
-      * 网络协议，支持udp、tcp等
-      */
-    IpProtocol: string;
-    /**
-      * 协议端口ID或者协议端口组ID。
-      */
-    ServiceModule: string;
-    /**
-      * IP地址ID或者ID地址组ID。
-      */
-    AddressModule: string;
-    /**
-      * id
-      */
-    Id: string;
-    /**
-      * 描述
-      */
-    Desc: string;
+    OldValue: string;
 }
 /**
  * IsolateCluster返回参数结构体
@@ -1451,12 +1439,12 @@ export interface CreateClustersResponse {
       */
     DealNames: Array<string>;
     /**
-      * 资源ID列表（异步发货可能无法返回该字段, 强烈建议使用dealNames字段查询接口DescribeResourcesByDealName获取异步发货的资源ID）
+      * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceIds: Array<string>;
     /**
-      * 集群ID列表（异步发货可能不返回该字段, 强烈建议使用dealNames查询接口DescribeResourcesByDealName获取异步发货的集群ID）
+      * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterIds: Array<string>;
@@ -1640,6 +1628,26 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
 回档与克隆均不支持包年包月存储
       */
     StoragePayMode?: number;
+    /**
+      * 安全组id数组
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
+      * 告警策略Id数组
+      */
+    AlarmPolicyIds?: Array<string>;
+    /**
+      * 参数数组
+      */
+    ClusterParams?: Array<ParamItem>;
+    /**
+      * 交易模式，0-下单且支付，1-下单
+      */
+    DealMode?: number;
+    /**
+      * 参数模版ID
+      */
+    ParamTemplateId?: number;
 }
 /**
  * 集群信息
@@ -1905,6 +1913,43 @@ export interface ModifyBackupConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 安全组规则
+ */
+export interface PolicyRule {
+    /**
+      * 策略，ACCEPT或者DROP
+      */
+    Action: string;
+    /**
+      * 来源Ip或Ip段，例如192.168.0.0/16
+      */
+    CidrIp: string;
+    /**
+      * 端口
+      */
+    PortRange: string;
+    /**
+      * 网络协议，支持udp、tcp等
+      */
+    IpProtocol: string;
+    /**
+      * 协议端口ID或者协议端口组ID。
+      */
+    ServiceModule: string;
+    /**
+      * IP地址ID或者ID地址组ID。
+      */
+    AddressModule: string;
+    /**
+      * id
+      */
+    Id: string;
+    /**
+      * 描述
+      */
+    Desc: string;
 }
 /**
  * DescribeBackupConfig返回参数结构体

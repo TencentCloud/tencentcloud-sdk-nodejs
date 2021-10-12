@@ -2080,7 +2080,7 @@ export interface Code {
       */
     CosBucketName?: string;
     /**
-      * 对象存储对象路径
+      * 对象存储中代码包文件路径，以/开头
       */
     CosObjectName?: string;
     /**

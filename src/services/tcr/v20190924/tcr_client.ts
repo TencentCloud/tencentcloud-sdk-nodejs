@@ -251,6 +251,7 @@ import {
   DeleteRepositoryRequest,
   CreateInternalEndpointDnsResponse,
   CreateTagRetentionExecutionRequest,
+  ReplicationLog,
   CreateApplicationTriggerPersonalResponse,
   ManageInternalEndpointRequest,
   BatchDeleteImagePersonalResponse,

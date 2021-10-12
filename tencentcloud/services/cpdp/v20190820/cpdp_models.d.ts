@@ -8602,7 +8602,7 @@ export interface QueryMerchantPayWayListRequest {
       */
     OpenKey: string;
     /**
-      * 支付类型，逗号分隔
+      * 支付类型，逗号分隔。1-现金，2-主扫，3-被扫，4-JSAPI。
       */
     PayType: string;
     /**

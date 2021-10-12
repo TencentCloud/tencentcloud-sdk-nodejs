@@ -2695,6 +2695,14 @@ export interface LiveStreamTaskNotifyConfig {
       * 当模型为 Topic 时有效，表示接收事件通知的 CMQ 的主题名。
       */
     TopicName?: string;
+    /**
+      * 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。
+      */
+    NotifyType?: string;
+    /**
+      * HTTP回调地址，NotifyType为URL时必填。
+      */
+    NotifyUrl?: string;
 }
 /**
  * 视频流配置参数

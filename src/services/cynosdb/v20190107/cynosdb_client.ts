@@ -72,7 +72,7 @@ import {
   DescribeInstanceSpecsResponse,
   ObjectTask,
   DescribeInstanceSpecsRequest,
-  PolicyRule,
+  ParamItem,
   IsolateClusterResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
@@ -84,6 +84,7 @@ import {
   CynosdbInstanceGrp,
   DescribeClustersResponse,
   ModifyBackupConfigResponse,
+  PolicyRule,
   DescribeBackupConfigResponse,
   ModifyDBInstanceSecurityGroupsRequest,
 } from "./cynosdb_models"
