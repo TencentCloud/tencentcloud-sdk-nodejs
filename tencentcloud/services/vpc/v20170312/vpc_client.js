@@ -181,10 +181,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetDetects", req, cb);
     }
     /**
-     * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+     * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
+只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
      */
-    async InquirePriceCreateDirectConnectGateway(req, cb) {
-        return this.request("InquirePriceCreateDirectConnectGateway", req, cb);
+    async DescribeVpcPrivateIpAddresses(req, cb) {
+        return this.request("DescribeVpcPrivateIpAddresses", req, cb);
     }
     /**
      * 本接口（DescribeGatewayFlowMonitorDetail）用于查询网关流量监控明细。
@@ -341,6 +342,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVpcEndPointService(req, cb) {
         return this.request("DescribeVpcEndPointService", req, cb);
+    }
+    /**
+     * 刷新专线直连nat路由，更新nat到专线的路由表
+     */
+    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
+        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
     }
     /**
      * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云服务器。
@@ -661,6 +668,16 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLocalGateway(req, cb) {
         return this.request("DescribeLocalGateway", req, cb);
+    }
+    /**
+     *  本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
+* 该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
+* 迁移前后的弹性网卡必须在同一个子网内。
+
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     */
+    async MigratePrivateIpAddress(req, cb) {
+        return this.request("MigratePrivateIpAddress", req, cb);
     }
     /**
      * 本接口（DescribeFlowLogs）用于查询获取流日志集合
@@ -1207,11 +1224,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("WithdrawNotifyRoutes", req, cb);
     }
     /**
-     * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
-只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
+     * 查询专线绑定NAT的路由
      */
-    async DescribeVpcPrivateIpAddresses(req, cb) {
-        return this.request("DescribeVpcPrivateIpAddresses", req, cb);
+    async DescribeNatGatewayDirectConnectGatewayRoute(req, cb) {
+        return this.request("DescribeNatGatewayDirectConnectGatewayRoute", req, cb);
     }
     /**
      * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
@@ -1249,14 +1265,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignIpv6Addresses", req, cb);
     }
     /**
-     *  本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
-* 该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
-* 迁移前后的弹性网卡必须在同一个子网内。
-
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
      */
-    async MigratePrivateIpAddress(req, cb) {
-        return this.request("MigratePrivateIpAddress", req, cb);
+    async InquirePriceCreateDirectConnectGateway(req, cb) {
+        return this.request("InquirePriceCreateDirectConnectGateway", req, cb);
     }
     /**
      * 本接口（DescribeIpGeolocationInfos）用于查询IP地址信息，包括地理位置信息和网络信息。

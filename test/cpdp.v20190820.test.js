@@ -288,6 +288,16 @@ it("cpdp.v20190820.TransferSinglePay", async function () {
     }
 })
 
+it("cpdp.v20190820.RefundTlinxOrder", async function () {
+    try {
+       const data = await client.RefundTlinxOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.DescribeChargeDetail", async function () {
     try {
        const data = await client.DescribeChargeDetail({})
@@ -578,6 +588,16 @@ it("cpdp.v20190820.CreateOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.UnifiedTlinxOrder", async function () {
+    try {
+       const data = await client.UnifiedTlinxOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryMemberBind", async function () {
     try {
        const data = await client.QueryMemberBind({})
@@ -811,6 +831,16 @@ it("cpdp.v20190820.CreateSinglePayment", async function () {
 it("cpdp.v20190820.RegisterBill", async function () {
     try {
        const data = await client.RegisterBill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryOrderStatus", async function () {
+    try {
+       const data = await client.QueryOrderStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

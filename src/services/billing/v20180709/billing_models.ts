@@ -289,6 +289,16 @@ export interface DescribeBillSummaryByProductRequest {
    * 查询账单数据的用户UIN
    */
   PayerUin?: string
+
+  /**
+      * 款项类别，与L0账单上的汇总类别对应。
+此参数自账单3.0（即2021-05）之后开始生效。
+枚举值：
+consume-消费
+refund-退款
+adjustment-调账
+      */
+  PayType?: string
 }
 
 /**

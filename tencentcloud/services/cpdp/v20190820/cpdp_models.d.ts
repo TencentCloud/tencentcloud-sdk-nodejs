@@ -930,13 +930,23 @@ export interface ReviseMbrPropertyRequest {
     Profile?: string;
 }
 /**
- * UploadTaxList返回参数结构体
+ * UnifiedTlinxOrder返回参数结构体
  */
-export interface UploadTaxListResponse {
+export interface UnifiedTlinxOrderResponse {
     /**
-      * 完税ID
+      * 业务系统返回码
       */
-    TaxId?: string;
+    ErrCode: string;
+    /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 统一下单响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: PayOrderResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1188,6 +1198,29 @@ export interface QueryBankWithdrawCashDetailsResponse {
     RequestId?: string;
 }
 /**
+ * RefundTlinxOrder返回参数结构体
+ */
+export interface RefundTlinxOrderResponse {
+    /**
+      * 业务系统返回码
+      */
+    ErrCode: string;
+    /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 退款响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: RefundOrderResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreatePayMerchant请求参数结构体
  */
 export interface CreatePayMerchantRequest {
@@ -1212,6 +1245,81 @@ export interface CreatePayMerchantRequest {
       * 是否开通 B2B 支付 1:开通 0:不开通 缺省:1
       */
     BusinessPayFlag?: string;
+}
+/**
+ * 订单支付响应对象
+ */
+export interface PayOrderResult {
+    /**
+      * 付款订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderNo: string;
+    /**
+      * 开发者流水号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeveloperNo: string;
+    /**
+      * 交易优惠金额（免充值券）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeDiscountAmount: string;
+    /**
+      * 付款方式名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayName: string;
+    /**
+      * 商户流水号（从1开始自增长不重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderMerchantId: string;
+    /**
+      * 交易帐号（银行卡号、支付宝帐号、微信帐号等，某些收单机构没有此数据）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeAccount: string;
+    /**
+      * 实际交易金额（以分为单位，没有小数点）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeAmount: string;
+    /**
+      * 币种签名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrencySign: string;
+    /**
+      * 付款完成时间（以收单机构为准）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradePayTime: string;
+    /**
+      * 门店流水号（从1开始自增长不重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShopOrderId: string;
+    /**
+      * 支付标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayTag: string;
+    /**
+      * 订单状态（1交易成功，2待支付，4已取消，9等待用户输入密码确认
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 币种代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderCurrency: string;
+    /**
+      * 二维码字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeQrcode: string;
 }
 /**
  * ContractOrder请求参数结构体
@@ -1678,6 +1786,47 @@ export interface DeleteAgentTaxPaymentInfoRequest {
     BatchNum: number;
     /**
       * 接入环境。沙箱环境填sandbox
+      */
+    Profile?: string;
+}
+/**
+ * RefundTlinxOrder请求参数结构体
+ */
+export interface RefundTlinxOrderRequest {
+    /**
+      * 收单系统分配的开放ID
+      */
+    OpenId: string;
+    /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
+    /**
+      * 原始订单的开发者交易流水号
+      */
+    DeveloperNo: string;
+    /**
+      * 新退款订单的开发者流水号，同一门店内唯一
+      */
+    RefundOutNo: string;
+    /**
+      * 退款订单名称，可以为空
+      */
+    RefundOrderName: string;
+    /**
+      * 退款金额（以分为单位，没有小数点）
+      */
+    RefundAmount: string;
+    /**
+      * 主管密码，对密码进行sha1加密，默认为123456
+      */
+    ShopPassword: string;
+    /**
+      * 退款备注
+      */
+    Remark?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
       */
     Profile?: string;
 }
@@ -2276,6 +2425,19 @@ export interface ConfirmOrderResponse {
     RequestId?: string;
 }
 /**
+ * UploadTaxList返回参数结构体
+ */
+export interface UploadTaxListResponse {
+    /**
+      * 完税ID
+      */
+    TaxId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CloseOrder返回参数结构体
  */
 export interface CloseOrderResponse {
@@ -2489,6 +2651,86 @@ export interface QueryOrderOutSubOrderList {
       * 子订单号
       */
     SubOutTradeNo: string;
+}
+/**
+ * 订单退款响应对象
+ */
+export interface RefundOrderResult {
+    /**
+      * 付款订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderNo: string;
+    /**
+      * 开发者流水号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeveloperNo: string;
+    /**
+      * 交易优惠金额（免充值券）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeDiscountAmount: string;
+    /**
+      * 付款方式名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayName: string;
+    /**
+      * 商户流水号（从1开始自增长不重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderMerchantId: string;
+    /**
+      * 实际交易金额（以分为单位，没有小数点）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeAmount: string;
+    /**
+      * 币种签名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrencySign: string;
+    /**
+      * 付款完成时间（以收单机构为准）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradePayTime: string;
+    /**
+      * 门店流水号（从1开始自增长不重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShopOrderId: string;
+    /**
+      * 支付标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayTag: string;
+    /**
+      * 订单状态（1交易成功，2待支付，4已取消，9等待用户输入密码确认
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 币种代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderCurrency: string;
+    /**
+      * 开始交易时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeTime: string;
+    /**
+      * 折扣金额（以分为单位，没有小数点）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountAmount: string;
+    /**
+      * 原始订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalOrderNo: string;
 }
 /**
  * ApplyReWithdrawal请求参数结构体
@@ -3053,6 +3295,31 @@ export interface QuerySinglePayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryOrderStatus请求参数结构体
+ */
+export interface QueryOrderStatusRequest {
+    /**
+      * 收单系统分配的开放ID
+      */
+    OpenId: string;
+    /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
+    /**
+      * 开发者流水号
+      */
+    DeveloperNo: string;
+    /**
+      * 付款订单号
+      */
+    OrderNo?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * UploadExternalAnchorInfo返回参数结构体
@@ -3751,6 +4018,171 @@ export interface RefundResponse {
     RequestId?: string;
 }
 /**
+ * 查询订单付款状态响应对象
+ */
+export interface QueryOrderStatusResult {
+    /**
+      * 付款订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderNo: string;
+    /**
+      * 开发者流水号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeveloperNo: string;
+    /**
+      * 交易优惠金额（免充值券）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeDiscountAmount: string;
+    /**
+      * 付款方式名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayName: string;
+    /**
+      * 商户流水号（从1开始自增长不重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderMerchantId: string;
+    /**
+      * 交易帐号（银行卡号、支付宝帐号、微信帐号等，某些收单机构没有此数据）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeAccount: string;
+    /**
+      * 实际交易金额（以分为单位，没有小数点）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeAmount: string;
+    /**
+      * 币种签名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrencySign: string;
+    /**
+      * 付款完成时间（以收单机构为准）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradePayTime: string;
+    /**
+      * 门店流水号（从1开始自增长不重复）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShopOrderId: string;
+    /**
+      * 支付标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayTag: string;
+    /**
+      * 订单状态（1交易成功，2待支付，4已取消，9等待用户输入密码确认
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 币种代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderCurrency: string;
+    /**
+      * 二维码字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeQrcode: string;
+    /**
+      * 开始交易时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeTime: string;
+    /**
+      * 折扣金额（以分为单位，没有小数点）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountAmount: string;
+    /**
+      * 商户号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MerchantNo: string;
+    /**
+      * 订单备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 订单标题
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderName: string;
+    /**
+      * 原始金额（以分为单位，没有小数点）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalAmount: string;
+    /**
+      * 门店编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShopNo: string;
+    /**
+      * 收单机构原始交易数据，如果返回非标准json数据，请自行转换
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeResult: string;
+    /**
+      * 订单流水号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderId: string;
+    /**
+      * 订单类型（1消费，2辙单）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderType: string;
+    /**
+      * 收单机构交易号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeNo: string;
+    /**
+      * 原始订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalOrderNo: string;
+    /**
+      * 订单标记，订单附加数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tag: string;
+    /**
+      * 下单时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AddTime: string;
+    /**
+      * 收银员编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CashierId: string;
+    /**
+      * 收银员名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CashierRealName: string;
+    /**
+      * 店铺全称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShopFullName: string;
+    /**
+      * 店铺名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShopName: string;
+}
+/**
  * QueryAgentTaxPaymentBatch返回参数结构体
  */
 export interface QueryAgentTaxPaymentBatchResponse {
@@ -3788,6 +4220,29 @@ export interface ReturnContractInfo {
       * 第三方渠道合约信息
       */
     ExternalReturnContractInfo: ExternalReturnContractInfo;
+}
+/**
+ * QueryOrderStatus返回参数结构体
+ */
+export interface QueryOrderStatusResponse {
+    /**
+      * 业务系统返回码
+      */
+    ErrCode: string;
+    /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 查询订单付款状态结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryOrderStatusResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RegisterBillSupportWithdraw返回参数结构体
@@ -6457,6 +6912,87 @@ export interface MerchantPayWayData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TicketName: string;
+}
+/**
+ * UnifiedTlinxOrder请求参数结构体
+ */
+export interface UnifiedTlinxOrderRequest {
+    /**
+      * 收单系统分配的开放ID
+      */
+    OpenId: string;
+    /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
+    /**
+      * 开发者流水号
+      */
+    DeveloperNo: string;
+    /**
+      * 支付标签
+      */
+    PayTag: string;
+    /**
+      * 实际交易金额（以分为单位，没有小数点）
+      */
+    TradeAmount: string;
+    /**
+      * 订单标记，订单附加数据
+      */
+    Tag: string;
+    /**
+      * 交易结果异步通知url地址
+      */
+    NotifyUrl: string;
+    /**
+      * 付款方式名称(当PayTag为Diy时，PayName不能为空)
+      */
+    PayName?: string;
+    /**
+      * 订单名称（描述）
+      */
+    OrderName?: string;
+    /**
+      * 原始交易金额（以分为单位，没有小数点）
+      */
+    OriginalAmount?: string;
+    /**
+      * 折扣金额（以分为单位，没有小数点）
+      */
+    DiscountAmount?: string;
+    /**
+      * 抹零金额（以分为单位，没有小数点）
+      */
+    IgnoreAmount?: string;
+    /**
+      * 交易帐号（银行卡号）
+      */
+    TradeAccount?: string;
+    /**
+      * 交易号（收单机构交易号）
+      */
+    TradeNo?: string;
+    /**
+      * 收单机构原始交易报文，请转换为json
+      */
+    TradeResult?: string;
+    /**
+      * 订单备注
+      */
+    Remark?: string;
+    /**
+      * 条码支付的授权码（条码抢扫手机扫到的一串数字）
+      */
+    AuthCode?: string;
+    /**
+      * 公众号支付时，支付成功后跳转url地址
+      */
+    JumpUrl?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * 成功申报材料查询结果

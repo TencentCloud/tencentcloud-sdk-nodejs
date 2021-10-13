@@ -45,7 +45,7 @@ import {
   WithdrawItem,
   BindAcctRequest,
   ReviseMbrPropertyRequest,
-  UploadTaxListResponse,
+  UnifiedTlinxOrderResponse,
   MigrateOrderRefundQueryResponse,
   RevResigterBillSupportWithdrawRequest,
   CreateInvoiceResponse,
@@ -54,7 +54,9 @@ import {
   ModifyBindedAccountRequest,
   CreateRedInvoiceResult,
   QueryBankWithdrawCashDetailsResponse,
+  RefundTlinxOrderResponse,
   CreatePayMerchantRequest,
+  PayOrderResult,
   ContractOrderRequest,
   ModifyAgentTaxPaymentInfoResponse,
   CreateSinglePaymentRequest,
@@ -66,6 +68,7 @@ import {
   CreateMerchantRequest,
   ApplyDeclareResult,
   DeleteAgentTaxPaymentInfoRequest,
+  RefundTlinxOrderRequest,
   QueryInvoiceResult,
   QueryAcctBindingResponse,
   QueryMerchantInfoForManagementRequest,
@@ -85,6 +88,7 @@ import {
   CreateExternalAnchorRequest,
   CreateAgentTaxPaymentInfosRequest,
   ConfirmOrderResponse,
+  UploadTaxListResponse,
   CloseOrderResponse,
   ApplyPayerinfoData,
   ModifyMerchantRequest,
@@ -92,6 +96,7 @@ import {
   CheckAcctRequest,
   CheckAmountResponse,
   QueryOrderOutSubOrderList,
+  RefundOrderResult,
   ApplyReWithdrawalRequest,
   QueryOutwardOrderResult,
   CreateAgentTaxPaymentInfosResponse,
@@ -111,6 +116,7 @@ import {
   QuerySinglePayResult,
   RefundOrderResponse,
   QuerySinglePayResponse,
+  QueryOrderStatusRequest,
   UploadExternalAnchorInfoResponse,
   ResponseTerminateContract,
   QueryCustAcctIdBalanceResponse,
@@ -132,9 +138,11 @@ import {
   TransferDetailRequest,
   ConfirmOrderRequest,
   RefundResponse,
+  QueryOrderStatusResult,
   QueryAgentTaxPaymentBatchResponse,
   DeleteAgentTaxPaymentInfosResponse,
   ReturnContractInfo,
+  QueryOrderStatusResponse,
   RegisterBillSupportWithdrawResponse,
   QueryTransferResultResponse,
   QueryItem,
@@ -213,6 +221,7 @@ import {
   AnchorContractInfo,
   QueryMerchantBalanceResult,
   MerchantPayWayData,
+  UnifiedTlinxOrderRequest,
   QueryDeclareResult,
   CreateCustAcctIdRequest,
   QueryBankClearResponse,
@@ -598,6 +607,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云支付Tlinx退款接口
+   */
+  async RefundTlinxOrder(
+    req: RefundTlinxOrderRequest,
+    cb?: (error: string, rep: RefundTlinxOrderResponse) => void
+  ): Promise<RefundTlinxOrderResponse> {
+    return this.request("RefundTlinxOrder", req, cb)
+  }
+
+  /**
    * 查询充值明细接口
    */
   async DescribeChargeDetail(
@@ -891,6 +910,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云支付Tlinx统一下单接口
+   */
+  async UnifiedTlinxOrder(
+    req: UnifiedTlinxOrderRequest,
+    cb?: (error: string, rep: UnifiedTlinxOrderResponse) => void
+  ): Promise<UnifiedTlinxOrderResponse> {
+    return this.request("UnifiedTlinxOrder", req, cb)
+  }
+
+  /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
@@ -1129,6 +1158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegisterBillResponse) => void
   ): Promise<RegisterBillResponse> {
     return this.request("RegisterBill", req, cb)
+  }
+
+  /**
+   * 云支付-查询订单付款状态
+   */
+  async QueryOrderStatus(
+    req: QueryOrderStatusRequest,
+    cb?: (error: string, rep: QueryOrderStatusResponse) => void
+  ): Promise<QueryOrderStatusResponse> {
+    return this.request("QueryOrderStatus", req, cb)
   }
 
   /**

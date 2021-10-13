@@ -140,6 +140,7 @@ import {
   DescribeAccountAttributesResponse,
   AssignPrivateIpAddressesResponse,
   DescribeSecurityGroupsRequest,
+  RefreshDirectConnectGatewayRouteToNatGatewayRequest,
   DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest,
   ModifyNetworkAclAttributeResponse,
   CreateVpnGatewayRoutesRequest,
@@ -186,6 +187,7 @@ import {
   ModifyNatGatewayAttributeResponse,
   DescribeNetDetectsRequest,
   CreateAddressTemplateGroupRequest,
+  DescribeNatGatewayDirectConnectGatewayRouteRequest,
   DescribeCustomerGatewayVendorsResponse,
   RouteConflict,
   DeleteSubnetResponse,
@@ -432,6 +434,7 @@ import {
   DeleteAssistantCidrRequest,
   ModifyVpcEndPointServiceWhiteListResponse,
   SubnetInput,
+  DescribeNatGatewayDirectConnectGatewayRouteResponse,
   EnableVpcEndPointConnectResponse,
   CreateNetDetectResponse,
   DeleteCcnRequest,
@@ -513,6 +516,7 @@ import {
   CreateLocalGatewayResponse,
   MigratePrivateIpAddressRequest,
   DescribeServiceTemplatesRequest,
+  RefreshDirectConnectGatewayRouteToNatGatewayResponse,
   DeleteRouteTableRequest,
   CreateVpnGatewayRequest,
   DescribeVpcInstancesRequest,
@@ -548,6 +552,7 @@ import {
   AttachClassicLinkVpcResponse,
   CreateAddressTemplateRequest,
   DescribeRouteConflictsRequest,
+  NatDirectConnectGatewayRoute,
   Subnet,
   AttachNetworkInterfaceRequest,
   DescribeCcnRoutesResponse,
@@ -555,6 +560,7 @@ import {
   SecurityGroup,
   DisableGatewayFlowMonitorResponse,
   DisassociateAddressResponse,
+  DirectConnectSubnet,
   DescribeVpnGatewayRoutesRequest,
   GetCcnRegionBandwidthLimitsResponse,
   DeleteRoutesRequest,
@@ -892,13 +898,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
-   */
-  async InquirePriceCreateDirectConnectGateway(
-    req?: InquirePriceCreateDirectConnectGatewayRequest,
-    cb?: (error: string, rep: InquirePriceCreateDirectConnectGatewayResponse) => void
-  ): Promise<InquirePriceCreateDirectConnectGatewayResponse> {
-    return this.request("InquirePriceCreateDirectConnectGateway", req, cb)
+     * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
+只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
+     */
+  async DescribeVpcPrivateIpAddresses(
+    req: DescribeVpcPrivateIpAddressesRequest,
+    cb?: (error: string, rep: DescribeVpcPrivateIpAddressesResponse) => void
+  ): Promise<DescribeVpcPrivateIpAddressesResponse> {
+    return this.request("DescribeVpcPrivateIpAddresses", req, cb)
   }
 
   /**
@@ -1151,6 +1158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVpcEndPointServiceResponse) => void
   ): Promise<DescribeVpcEndPointServiceResponse> {
     return this.request("DescribeVpcEndPointService", req, cb)
+  }
+
+  /**
+   * 刷新专线直连nat路由，更新nat到专线的路由表
+   */
+  async RefreshDirectConnectGatewayRouteToNatGateway(
+    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
+    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
+  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
+    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
   }
 
   /**
@@ -1651,6 +1668,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLocalGatewayResponse) => void
   ): Promise<DescribeLocalGatewayResponse> {
     return this.request("DescribeLocalGateway", req, cb)
+  }
+
+  /**
+     *  本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
+* 该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
+* 迁移前后的弹性网卡必须在同一个子网内。  
+
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     */
+  async MigratePrivateIpAddress(
+    req: MigratePrivateIpAddressRequest,
+    cb?: (error: string, rep: MigratePrivateIpAddressResponse) => void
+  ): Promise<MigratePrivateIpAddressResponse> {
+    return this.request("MigratePrivateIpAddress", req, cb)
   }
 
   /**
@@ -2510,14 +2541,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
-只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
-     */
-  async DescribeVpcPrivateIpAddresses(
-    req: DescribeVpcPrivateIpAddressesRequest,
-    cb?: (error: string, rep: DescribeVpcPrivateIpAddressesResponse) => void
-  ): Promise<DescribeVpcPrivateIpAddressesResponse> {
-    return this.request("DescribeVpcPrivateIpAddresses", req, cb)
+   * 查询专线绑定NAT的路由
+   */
+  async DescribeNatGatewayDirectConnectGatewayRoute(
+    req: DescribeNatGatewayDirectConnectGatewayRouteRequest,
+    cb?: (error: string, rep: DescribeNatGatewayDirectConnectGatewayRouteResponse) => void
+  ): Promise<DescribeNatGatewayDirectConnectGatewayRouteResponse> {
+    return this.request("DescribeNatGatewayDirectConnectGatewayRoute", req, cb)
   }
 
   /**
@@ -2576,17 +2606,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     *  本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
-* 该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
-* 迁移前后的弹性网卡必须在同一个子网内。  
-
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
-     */
-  async MigratePrivateIpAddress(
-    req: MigratePrivateIpAddressRequest,
-    cb?: (error: string, rep: MigratePrivateIpAddressResponse) => void
-  ): Promise<MigratePrivateIpAddressResponse> {
-    return this.request("MigratePrivateIpAddress", req, cb)
+   * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+   */
+  async InquirePriceCreateDirectConnectGateway(
+    req?: InquirePriceCreateDirectConnectGatewayRequest,
+    cb?: (error: string, rep: InquirePriceCreateDirectConnectGatewayResponse) => void
+  ): Promise<InquirePriceCreateDirectConnectGatewayResponse> {
+    return this.request("InquirePriceCreateDirectConnectGateway", req, cb)
   }
 
   /**

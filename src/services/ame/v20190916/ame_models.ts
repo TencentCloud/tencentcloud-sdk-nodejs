@@ -1337,6 +1337,11 @@ export interface DescribeKTVMusicDetailResponse {
   LyricsUrl: string
 
   /**
+   * 歌曲规格信息列表
+   */
+  DefinitionInfoSet: Array<KTVMusicDefinitionInfo>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1389,4 +1394,27 @@ reportData由两部分数据组成：
 https://github.com/tencentyun/ame-documents
       */
   ReportData: string
+}
+
+/**
+ * 直播互动歌曲规格信息。
+ */
+export interface KTVMusicDefinitionInfo {
+  /**
+      * 规格，取值有：
+<li>audio/mi：低规格；</li>
+<li>audio/lo：中规格；</li>
+<li>audio/hi：高规格。</li>
+      */
+  Definition: string
+
+  /**
+   * 码率，单位为 bps。
+   */
+  Bitrate: number
+
+  /**
+   * 文件大小，单位为字节。
+   */
+  Size: number
 }

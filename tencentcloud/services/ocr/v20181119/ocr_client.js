@@ -291,6 +291,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvoiceGeneralOCR", req, cb);
     }
     /**
+     * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
+     */
+    async RecognizeOnlineTaxiItineraryOCR(req, cb) {
+        return this.request("RecognizeOnlineTaxiItineraryOCR", req, cb);
+    }
+    /**
      * 本接口支持中国香港身份证人像面中关键字段的识别，包括中文姓名、英文姓名、姓名电码、出生日期、性别、证件符号、首次签发日期、最近领用日期、身份证号、是否是永久性居民身份证；具备防伪识别、人像照片裁剪等扩展功能。
 本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
 

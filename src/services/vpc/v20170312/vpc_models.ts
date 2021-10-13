@@ -248,7 +248,7 @@ export interface CreateCcnResponse {
   /**
    * 云联网（CCN）对象。
    */
-  Ccn?: CCN
+  Ccn: CCN
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1318,6 +1318,11 @@ export interface ModifyBandwidthPackageAttributeRequest {
    * 带宽包计费模式
    */
   ChargeType?: string
+
+  /**
+   * 退款时迁移为后付费带宽包。默认值：否
+   */
+  MigrateOnRefund?: boolean
 }
 
 /**
@@ -2577,6 +2582,26 @@ export interface DescribeSecurityGroupsRequest {
 }
 
 /**
+ * RefreshDirectConnectGatewayRouteToNatGateway请求参数结构体
+ */
+export interface RefreshDirectConnectGatewayRouteToNatGatewayRequest {
+  /**
+   * vpc的ID
+   */
+  VpcId: string
+
+  /**
+   * NAT网关ID
+   */
+  NatGatewayId: string
+
+  /**
+   * 是否是预刷新；True:是， False:否
+   */
+  DryRun: boolean
+}
+
+/**
  * DescribeNatGatewayDestinationIpPortTranslationNatRules请求参数结构体
  */
 export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
@@ -3714,6 +3739,31 @@ export interface CreateAddressTemplateGroupRequest {
 }
 
 /**
+ * DescribeNatGatewayDirectConnectGatewayRoute请求参数结构体
+ */
+export interface DescribeNatGatewayDirectConnectGatewayRouteRequest {
+  /**
+   * nat的唯一标识
+   */
+  NatGatewayId: string
+
+  /**
+   * vpc的唯一标识
+   */
+  VpcId: string
+
+  /**
+   * 0到200之间
+   */
+  Limit?: number
+
+  /**
+   * 大于0
+   */
+  Offset?: number
+}
+
+/**
  * DescribeCustomerGatewayVendors返回参数结构体
  */
 export interface DescribeCustomerGatewayVendorsResponse {
@@ -4211,12 +4261,12 @@ export interface DescribeCcnsResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * CCN对象。
    */
-  CcnSet?: Array<CCN>
+  CcnSet: Array<CCN>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4598,12 +4648,12 @@ export interface DescribeCcnAttachedInstancesResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 关联实例列表。
    */
-  InstanceSet?: Array<CcnAttachedInstance>
+  InstanceSet: Array<CcnAttachedInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9098,6 +9148,26 @@ export interface SubnetInput {
 }
 
 /**
+ * DescribeNatGatewayDirectConnectGatewayRoute返回参数结构体
+ */
+export interface DescribeNatGatewayDirectConnectGatewayRouteResponse {
+  /**
+   * 路由数据
+   */
+  NatDirectConnectGatewayRouteSet: Array<NatDirectConnectGatewayRoute>
+
+  /**
+   * 路由总数
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnableVpcEndPointConnect返回参数结构体
  */
 export interface EnableVpcEndPointConnectResponse {
@@ -9302,12 +9372,12 @@ export interface ModifyCcnAttributeRequest {
   CcnId: string
 
   /**
-   * CCN名称，最大长度不能超过60个字节。
+   * CCN名称，最大长度不能超过60个字节，限制：CcnName和CcnDescription必须至少选择一个参数输入，否则报错。
    */
   CcnName?: string
 
   /**
-   * CCN描述信息，最大长度不能超过100个字节。
+   * CCN描述信息，最大长度不能超过100个字节，限制：CcnName和CcnDescription必须至少选择一个参数输入，否则报错。
    */
   CcnDescription?: string
 }
@@ -10763,6 +10833,21 @@ export interface DescribeServiceTemplatesRequest {
 }
 
 /**
+ * RefreshDirectConnectGatewayRouteToNatGateway返回参数结构体
+ */
+export interface RefreshDirectConnectGatewayRouteToNatGatewayResponse {
+  /**
+   * IDC子网信息
+   */
+  DirectConnectSubnetSet: Array<DirectConnectSubnet>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRouteTable请求参数结构体
  */
 export interface DeleteRouteTableRequest {
@@ -10892,7 +10977,7 @@ export interface ReleaseAddressesResponse {
   /**
    * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11364,6 +11449,37 @@ export interface DescribeRouteConflictsRequest {
 }
 
 /**
+ * 查询nat路由的返回路由对象
+ */
+export interface NatDirectConnectGatewayRoute {
+  /**
+   * 子网的 `IPv4` `CIDR`
+   */
+  DestinationCidrBlock: string
+
+  /**
+      * 下一跳网关的类型，目前此接口支持的类型有：
+DIRECTCONNECT：专线网关
+      */
+  GatewayType: string
+
+  /**
+   * 下一跳网关ID
+   */
+  GatewayId: string
+
+  /**
+   * 路由的创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 路由的更新时间
+   */
+  UpdateTime: string
+}
+
+/**
  * 子网对象
  */
 export interface Subnet {
@@ -11558,6 +11674,12 @@ export interface SecurityGroup {
    * 标签键值对。
    */
   TagSet?: Array<Tag>
+
+  /**
+      * 安全组更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
 }
 
 /**
@@ -11583,6 +11705,21 @@ export interface DisassociateAddressResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IDC子网信息
+ */
+export interface DirectConnectSubnet {
+  /**
+   * 专线网关ID
+   */
+  DirectConnectGatewayId: string
+
+  /**
+   * IDC子网网段
+   */
+  CidrBlock: string
 }
 
 /**
@@ -11911,6 +12048,11 @@ export interface UnassignPrivateIpAddressesRequest {
    * 指定的内网IP信息，单次最多指定10个。
    */
   PrivateIpAddresses: Array<PrivateIpAddressSpecification>
+
+  /**
+   * 网卡绑定的子机实例ID，该参数仅用于指定网卡退还IP并解绑子机的场景，如果不涉及解绑子机，请勿填写。
+   */
+  InstanceId?: string
 }
 
 /**

@@ -258,9 +258,9 @@ it("vpc.v20170312.DescribeNetDetects", async function () {
     }
 })
 
-it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
+it("vpc.v20170312.DescribeVpcPrivateIpAddresses", async function () {
     try {
-       const data = await client.InquirePriceCreateDirectConnectGateway({})
+       const data = await client.DescribeVpcPrivateIpAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +501,16 @@ it("vpc.v20170312.AssignPrivateIpAddresses", async function () {
 it("vpc.v20170312.DescribeVpcEndPointService", async function () {
     try {
        const data = await client.DescribeVpcEndPointService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+    try {
+       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -951,6 +961,16 @@ it("vpc.v20170312.DisassociateNatGatewayAddress", async function () {
 it("vpc.v20170312.DescribeLocalGateway", async function () {
     try {
        const data = await client.DescribeLocalGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.MigratePrivateIpAddress", async function () {
+    try {
+       const data = await client.MigratePrivateIpAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1738,9 +1758,9 @@ it("vpc.v20170312.WithdrawNotifyRoutes", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeVpcPrivateIpAddresses", async function () {
+it("vpc.v20170312.DescribeNatGatewayDirectConnectGatewayRoute", async function () {
     try {
-       const data = await client.DescribeVpcPrivateIpAddresses({})
+       const data = await client.DescribeNatGatewayDirectConnectGatewayRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1798,9 +1818,9 @@ it("vpc.v20170312.AssignIpv6Addresses", async function () {
     }
 })
 
-it("vpc.v20170312.MigratePrivateIpAddress", async function () {
+it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
     try {
-       const data = await client.MigratePrivateIpAddress({})
+       const data = await client.InquirePriceCreateDirectConnectGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

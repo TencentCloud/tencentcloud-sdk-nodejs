@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   TextWaybill,
+  RecognizeOnlineTaxiItineraryOCRResponse,
   BankSlipOCRRequest,
   BusinessCardOCRResponse,
   TextArithmetic,
@@ -64,6 +65,7 @@ import {
   EnterpriseLicenseOCRRequest,
   BankCardOCRRequest,
   StructuralItem,
+  OnlineTaxiItineraryInfo,
   PropOwnerCertOCRResponse,
   FinanBillInfo,
   TrainTicketOCRResponse,
@@ -128,6 +130,7 @@ import {
   SmartStructuralOCRResponse,
   DetectedWords,
   VerifyEnterpriseFourFactorsRequest,
+  ShipInvoiceInfo,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
   FlightInvoiceOCRResponse,
@@ -194,7 +197,7 @@ import {
   QuestionBlockObj,
   AdvertiseOCRResponse,
   VatRollInvoiceInfo,
-  ShipInvoiceInfo,
+  RecognizeOnlineTaxiItineraryOCRRequest,
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
   VinOCRRequest,
@@ -584,6 +587,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InvoiceGeneralOCRResponse) => void
   ): Promise<InvoiceGeneralOCRResponse> {
     return this.request("InvoiceGeneralOCR", req, cb)
+  }
+
+  /**
+   * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
+   */
+  async RecognizeOnlineTaxiItineraryOCR(
+    req: RecognizeOnlineTaxiItineraryOCRRequest,
+    cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void
+  ): Promise<RecognizeOnlineTaxiItineraryOCRResponse> {
+    return this.request("RecognizeOnlineTaxiItineraryOCR", req, cb)
   }
 
   /**

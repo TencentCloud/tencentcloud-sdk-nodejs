@@ -1767,6 +1767,11 @@ export interface Environment {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TopicNum: number;
+    /**
+      * 消息保留策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RetentionPolicy: RetentionPolicy;
 }
 /**
  * CreateCmqQueue返回参数结构体

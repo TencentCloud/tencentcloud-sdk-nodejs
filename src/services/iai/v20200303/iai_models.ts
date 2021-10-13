@@ -614,12 +614,12 @@ export interface DetectLiveFaceAccurateResponse {
   /**
    * 活体打分，取值范围 [0,100]，根据活体分数对应的阈值区间来判断是否为翻拍。目前阈值可分为[5,10,40,70,90]，其中推荐阈值为40。
    */
-  Score?: number
+  Score: number
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

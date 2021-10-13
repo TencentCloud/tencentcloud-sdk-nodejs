@@ -77,6 +77,7 @@ import {
   DescribeKTVMusicDetailResponse,
   DescribeMusicRequest,
   ReportDataRequest,
+  KTVMusicDefinitionInfo,
 } from "./ame_models"
 
 /**

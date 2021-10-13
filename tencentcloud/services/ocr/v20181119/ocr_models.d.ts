@@ -32,6 +32,19 @@ export interface TextWaybill {
     WaybillNum: WaybillObj;
 }
 /**
+ * RecognizeOnlineTaxiItineraryOCR返回参数结构体
+ */
+export interface RecognizeOnlineTaxiItineraryOCRResponse {
+    /**
+      * 网约车行程单识别结果，具体内容请点击左侧链接。
+      */
+    OnlineTaxiItineraryInfos: Array<OnlineTaxiItineraryInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * BankSlipOCR请求参数结构体
  */
 export interface BankSlipOCRRequest {
@@ -1320,6 +1333,20 @@ export interface StructuralItem {
 坐标。
       */
     ItemCoord: ItemCoord;
+}
+/**
+ * 网约车行程单识别结果
+ */
+export interface OnlineTaxiItineraryInfo {
+    /**
+      * 识别出的字段名称(关键字)，支持以下字段：
+发票代码、 机打代码、 发票号码、 发动机号码、 合格证号、 机打号码、 价税合计(小写)、 销货单位名称、 身份证号码/组织机构代码、 购买方名称、 销售方纳税人识别号、 购买方纳税人识别号、主管税务机关、 主管税务机关代码、 开票日期、 不含税价(小写)、 吨位、增值税税率或征收率、 车辆识别代号/车架号码、 增值税税额、 厂牌型号、 省、 市、 发票消费类型、 销售方电话、 销售方账号、 产地、 进口证明书号、 车辆类型、 机器编号、备注、开票人、限乘人数、商检单号、销售方地址、销售方开户银行、价税合计、发票类型。
+      */
+    Name: string;
+    /**
+      * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
+      */
+    Value: string;
 }
 /**
  * PropOwnerCertOCR返回参数结构体
@@ -3204,6 +3231,24 @@ export interface VerifyEnterpriseFourFactorsRequest {
     EnterpriseMark: string;
 }
 /**
+ * 轮船票字段信息
+ */
+export interface ShipInvoiceInfo {
+    /**
+      * 识别出的字段名称(关键字)，支持以下字段：
+发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种。
+      */
+    Name: string;
+    /**
+      * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+      */
+    Value: string;
+    /**
+      * 文本行在旋转纠正之后的图像中的像素坐标。
+      */
+    Rect: Rect;
+}
+/**
  * GeneralAccurateOCR请求参数结构体
  */
 export interface GeneralAccurateOCRRequest {
@@ -4624,38 +4669,38 @@ export interface QuotaInvoiceOCRResponse {
     /**
       * 发票号码
       */
-    InvoiceNum?: string;
+    InvoiceNum: string;
     /**
       * 发票代码
       */
-    InvoiceCode?: string;
+    InvoiceCode: string;
     /**
       * 大写金额
       */
-    Rate?: string;
+    Rate: string;
     /**
       * 小写金额
       */
-    RateNum?: string;
+    RateNum: string;
     /**
       * 发票消费类型
       */
-    InvoiceType?: string;
+    InvoiceType: string;
     /**
       * 省
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Province?: string;
+    Province: string;
     /**
       * 市
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    City?: string;
+    City: string;
     /**
       * 是否有公司印章（1有 0无 空为识别不出）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    HasStamp?: string;
+    HasStamp: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4871,22 +4916,32 @@ export interface VatRollInvoiceInfo {
     Rect: Rect;
 }
 /**
- * 轮船票字段信息
+ * RecognizeOnlineTaxiItineraryOCR请求参数结构体
  */
-export interface ShipInvoiceInfo {
+export interface RecognizeOnlineTaxiItineraryOCRRequest {
     /**
-      * 识别出的字段名称(关键字)，支持以下字段：
-发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种。
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
-    Name: string;
+    ImageBase64?: string;
     /**
-      * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
-    Value: string;
+    ImageUrl?: string;
     /**
-      * 文本行在旋转纠正之后的图像中的像素坐标。
+      * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
       */
-    Rect: Rect;
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * IDCardOCR请求参数结构体

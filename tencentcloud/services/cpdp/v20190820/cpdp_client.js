@@ -190,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TransferSinglePay", req, cb);
     }
     /**
+     * 云支付Tlinx退款接口
+     */
+    async RefundTlinxOrder(req, cb) {
+        return this.request("RefundTlinxOrder", req, cb);
+    }
+    /**
      * 查询充值明细接口
      */
     async DescribeChargeDetail(req, cb) {
@@ -367,6 +373,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateOrder", req, cb);
     }
     /**
+     * 云支付Tlinx统一下单接口
+     */
+    async UnifiedTlinxOrder(req, cb) {
+        return this.request("UnifiedTlinxOrder", req, cb);
+    }
+    /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
@@ -510,6 +522,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RegisterBill(req, cb) {
         return this.request("RegisterBill", req, cb);
+    }
+    /**
+     * 云支付-查询订单付款状态
+     */
+    async QueryOrderStatus(req, cb) {
+        return this.request("QueryOrderStatus", req, cb);
     }
     /**
      * 银企直连-单笔支付状态查询接口
