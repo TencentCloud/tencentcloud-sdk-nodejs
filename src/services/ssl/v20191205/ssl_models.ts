@@ -993,6 +993,21 @@ export interface UploadRevokeLetterResponse {
 }
 
 /**
+ * DescribeDeployedResources请求参数结构体
+ */
+export interface DescribeDeployedResourcesRequest {
+  /**
+   * 证书ID
+   */
+  CertificateIds: Array<string>
+
+  /**
+   * 资源类型:clb,cdn,live,waf,antiddos
+   */
+  ResourceType: string
+}
+
+/**
  * CreateCertificate返回参数结构体
  */
 export interface CreateCertificateResponse {
@@ -1059,32 +1074,23 @@ export interface RevokeCertificateResponse {
 }
 
 /**
- * 返回参数键为 RevokeDomainValidateAuths 的内容。
+ * 资源详情
  */
-export interface RevokeDomainValidateAuths {
+export interface DeployedResources {
   /**
-      * DV 认证值路径。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainValidateAuthPath: string
+   * 证书ID
+   */
+  CertificateId: string
 
   /**
-      * DV 认证 KEY。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainValidateAuthKey: string
+   * 数量
+   */
+  Count: number
 
   /**
-      * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainValidateAuthValue: string
-
-  /**
-      * DV 认证域名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DomainValidateAuthDomain: string
+   * 资源标识:clb,cdn,live,waf,antiddos
+   */
+  Type: string
 }
 
 /**
@@ -1510,6 +1516,21 @@ export interface ProjectInfo {
 }
 
 /**
+ * DescribeDeployedResources返回参数结构体
+ */
+export interface DescribeDeployedResourcesResponse {
+  /**
+   * 资源详情
+   */
+  DeployedResources: Array<DeployedResources>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCertificateOperateLogs请求参数结构体
  */
 export interface DescribeCertificateOperateLogsRequest {
@@ -1654,6 +1675,35 @@ export interface VerifyManagerRequest {
    * 管理人ID
    */
   ManagerId: number
+}
+
+/**
+ * 返回参数键为 RevokeDomainValidateAuths 的内容。
+ */
+export interface RevokeDomainValidateAuths {
+  /**
+      * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthPath: string
+
+  /**
+      * DV 认证 KEY。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthKey: string
+
+  /**
+      * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthValue: string
+
+  /**
+      * DV 认证域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainValidateAuthDomain: string
 }
 
 /**

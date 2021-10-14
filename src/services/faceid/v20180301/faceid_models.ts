@@ -280,7 +280,7 @@ export interface BankCardVerificationRequest {
 
   /**
       * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。
-目前默认：0 身份证，其他证件类型需求可以联系小助手faceid001确认。
+目前默认：0 身份证，其他证件类型需求可以添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行确认。
       */
   CertType?: number
 
@@ -2200,6 +2200,7 @@ export interface EncryptedPhoneVerificationResponse {
 
 【不收费结果码】
 -7: 身份证号码有误
+-8: 参数错误
 -9: 没有记录
 -11: 验证中心服务繁忙
       */

@@ -34,6 +34,7 @@ import {
   AttachRolePolicyResponse,
   GetServiceLinkedRoleDeletionStatusResponse,
   GetSecurityLastUsedRequest,
+  DescribeUserSAMLConfigResponse,
   DeleteUserPermissionsBoundaryResponse,
   ListUsersResponse,
   UpdateRoleDescriptionResponse,
@@ -43,6 +44,7 @@ import {
   ListPolicyVersionsRequest,
   GetCustomMFATokenInfoRequest,
   DescribeRoleListRequest,
+  DescribeUserSAMLConfigRequest,
   GetGroupRequest,
   DeleteRoleResponse,
   PolicyVersionItem,
@@ -62,6 +64,7 @@ import {
   OffsiteFlag,
   GroupIdOfUidInfo,
   UpdateRoleDescriptionRequest,
+  UpdateUserSAMLConfigRequest,
   DeleteGroupResponse,
   RoleInfo,
   DescribeSafeAuthFlagResponse,
@@ -127,6 +130,7 @@ import {
   DetachGroupPolicyResponse,
   CreatePolicyRequest,
   DeletePolicyVersionRequest,
+  CreateUserSAMLConfigRequest,
   UpdateGroupRequest,
   ListGrantServiceAccessNode,
   GetPolicyVersionResponse,
@@ -159,9 +163,11 @@ import {
   PolicyVersionDetail,
   AddUserResponse,
   ListGrantServiceAccessService,
+  CreateUserSAMLConfigResponse,
   DescribeSubAccountsResponse,
   ListEntitiesForPolicyResponse,
   AddUserToGroupResponse,
+  UpdateUserSAMLConfigResponse,
   AttachUserPolicyResponse,
   DescribeSafeAuthFlagCollResponse,
   DescribeSafeAuthFlagCollRequest,
@@ -326,6 +332,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户SAML配置
+   */
+  async DescribeUserSAMLConfig(
+    req?: DescribeUserSAMLConfigRequest,
+    cb?: (error: string, rep: DescribeUserSAMLConfigResponse) => void
+  ): Promise<DescribeUserSAMLConfigResponse> {
+    return this.request("DescribeUserSAMLConfig", req, cb)
+  }
+
+  /**
    * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
    */
   async DeletePolicyVersion(
@@ -343,6 +359,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachRolePolicyResponse) => void
   ): Promise<DetachRolePolicyResponse> {
     return this.request("DetachRolePolicy", req, cb)
+  }
+
+  /**
+   * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+   */
+  async SetDefaultPolicyVersion(
+    req: SetDefaultPolicyVersionRequest,
+    cb?: (error: string, rep: SetDefaultPolicyVersionResponse) => void
+  ): Promise<SetDefaultPolicyVersionResponse> {
+    return this.request("SetDefaultPolicyVersion", req, cb)
   }
 
   /**
@@ -536,13 +562,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+   * 创建用户SAML配置
    */
-  async SetDefaultPolicyVersion(
-    req: SetDefaultPolicyVersionRequest,
-    cb?: (error: string, rep: SetDefaultPolicyVersionResponse) => void
-  ): Promise<SetDefaultPolicyVersionResponse> {
-    return this.request("SetDefaultPolicyVersion", req, cb)
+  async CreateUserSAMLConfig(
+    req: CreateUserSAMLConfigRequest,
+    cb?: (error: string, rep: CreateUserSAMLConfigResponse) => void
+  ): Promise<CreateUserSAMLConfigResponse> {
+    return this.request("CreateUserSAMLConfig", req, cb)
   }
 
   /**
@@ -663,6 +689,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserResponse) => void
   ): Promise<DeleteUserResponse> {
     return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 修改用户SAML配置
+   */
+  async UpdateUserSAMLConfig(
+    req: UpdateUserSAMLConfigRequest,
+    cb?: (error: string, rep: UpdateUserSAMLConfigResponse) => void
+  ): Promise<UpdateUserSAMLConfigResponse> {
+    return this.request("UpdateUserSAMLConfig", req, cb)
   }
 
   /**

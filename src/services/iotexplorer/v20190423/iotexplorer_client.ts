@@ -30,6 +30,7 @@ import {
   GetDeviceListResponse,
   TopicRulePayload,
   DeleteLoRaFrequencyResponse,
+  DescribeTopicPolicyRequest,
   ModifyPositionFenceRequest,
   PositionFenceItem,
   DeleteTopicRuleResponse,
@@ -37,7 +38,7 @@ import {
   ModifyModelDefinitionRequest,
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
-  EnableTopicRuleResponse,
+  DescribeDevicePositionListRequest,
   GetDeviceLocationHistoryResponse,
   UpdateFirmwareResponse,
   ModifyPositionFenceResponse,
@@ -53,6 +54,7 @@ import {
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   FenceBindProductItem,
+  ListTopicPolicyResponse,
   SearchPositionSpaceResponse,
   DescribePositionFenceListResponse,
   GetDeviceLocationHistoryRequest,
@@ -67,6 +69,7 @@ import {
   DeviceDataHistoryItem,
   ProductEntry,
   ProjectEntryEx,
+  ListTopicPolicyRequest,
   DescribeLoRaFrequencyRequest,
   DeleteDeviceRequest,
   DeleteLoRaFrequencyRequest,
@@ -75,8 +78,10 @@ import {
   ReleaseStudioProductResponse,
   DescribeSpaceFenceEventListResponse,
   DeleteLoRaGatewayRequest,
+  DescribeTopicPolicyResponse,
   SearchPositionSpaceRequest,
   LoRaFrequencyEntry,
+  ModifyTopicPolicyResponse,
   SearchTopicRuleResponse,
   DescribeFenceEventListResponse,
   UpdateDevicesEnableStateRequest,
@@ -120,9 +125,11 @@ import {
   CallDeviceActionAsyncRequest,
   CallDeviceActionAsyncResponse,
   DeleteFenceBindResponse,
+  DeleteTopicPolicyRequest,
   CreateFenceBindResponse,
   DescribeFenceBindListRequest,
   CreatePositionFenceResponse,
+  TopicItem,
   DescribeTopicRuleResponse,
   UpdateFirmwareRequest,
   PositionSpaceInfo,
@@ -138,8 +145,10 @@ import {
   FenceEventItem,
   DescribeProjectRequest,
   UploadFirmwareResponse,
+  ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
   CreateLoRaGatewayResponse,
+  DeleteTopicPolicyResponse,
   DeleteLoRaGatewayResponse,
   CreateLoRaFrequencyRequest,
   LoRaGatewayItem,
@@ -153,7 +162,7 @@ import {
   GetProjectListRequest,
   DeletePositionSpaceResponse,
   CreateLoRaFrequencyResponse,
-  DescribeDevicePositionListRequest,
+  EnableTopicRuleResponse,
   SearchStudioProductRequest,
   DeleteDevicesRequest,
   AppDeviceInfo,
@@ -402,6 +411,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 搜索规则
+   */
+  async SearchTopicRule(
+    req: SearchTopicRuleRequest,
+    cb?: (error: string, rep: SearchTopicRuleResponse) => void
+  ): Promise<SearchTopicRuleResponse> {
+    return this.request("SearchTopicRule", req, cb)
+  }
+
+  /**
    * 本接口（UploadFirmware）用于上传设备固件至平台
    */
   async UploadFirmware(
@@ -439,6 +458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTopicRuleResponse) => void
   ): Promise<ModifyTopicRuleResponse> {
     return this.request("ModifyTopicRule", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTopicPolicy）用于查看Topic详细信息
+   */
+  async DescribeTopicPolicy(
+    req: DescribeTopicPolicyRequest,
+    cb?: (error: string, rep: DescribeTopicPolicyResponse) => void
+  ): Promise<DescribeTopicPolicyResponse> {
+    return this.request("DescribeTopicPolicy", req, cb)
   }
 
   /**
@@ -542,13 +571,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 搜索规则
+   * 本接口（UpdateTopicPolicy）用于更新Topic信息
    */
-  async SearchTopicRule(
-    req: SearchTopicRuleRequest,
-    cb?: (error: string, rep: SearchTopicRuleResponse) => void
-  ): Promise<SearchTopicRuleResponse> {
-    return this.request("SearchTopicRule", req, cb)
+  async ModifyTopicPolicy(
+    req: ModifyTopicPolicyRequest,
+    cb?: (error: string, rep: ModifyTopicPolicyResponse) => void
+  ): Promise<ModifyTopicPolicyResponse> {
+    return this.request("ModifyTopicPolicy", req, cb)
   }
 
   /**
@@ -602,6 +631,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DeleteTopicPolicy）用于删除Topic
+   */
+  async DeleteTopicPolicy(
+    req: DeleteTopicPolicyRequest,
+    cb?: (error: string, rep: DeleteTopicPolicyResponse) => void
+  ): Promise<DeleteTopicPolicyResponse> {
+    return this.request("DeleteTopicPolicy", req, cb)
+  }
+
+  /**
    * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
    */
   async DescribeStudioProduct(
@@ -609,6 +648,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStudioProductResponse) => void
   ): Promise<DescribeStudioProductResponse> {
     return this.request("DescribeStudioProduct", req, cb)
+  }
+
+  /**
+   * 本接口（ListTopicPolicy）用于获取Topic列表
+   */
+  async ListTopicPolicy(
+    req: ListTopicPolicyRequest,
+    cb?: (error: string, rep: ListTopicPolicyResponse) => void
+  ): Promise<ListTopicPolicyResponse> {
+    return this.request("ListTopicPolicy", req, cb)
   }
 
   /**

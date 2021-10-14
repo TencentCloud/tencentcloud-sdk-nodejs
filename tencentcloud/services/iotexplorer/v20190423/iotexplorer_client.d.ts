@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateDevicesEnableStateResponse, DeleteProjectRequest, DeleteFenceBindRequest, DescribeModelDefinitionResponse, DeleteDevicesResponse, ModifyStudioProductResponse, DeleteStudioProductResponse, GetPositionSpaceListRequest, GetDeviceListResponse, DeleteLoRaFrequencyResponse, ModifyPositionFenceRequest, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, EnableTopicRuleResponse, GetDeviceLocationHistoryResponse, UpdateFirmwareResponse, ModifyPositionFenceResponse, ModifyStudioProductRequest, ModifyPositionSpaceResponse, CreateStudioProductRequest, ModifyFenceBindResponse, DeletePositionFenceResponse, UploadFirmwareRequest, ListEventHistoryRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, SearchPositionSpaceResponse, DescribePositionFenceListResponse, GetDeviceLocationHistoryRequest, DescribeDevicePositionListResponse, GetProjectListResponse, DescribeStudioProductResponse, DescribeProjectResponse, SearchStudioProductResponse, GetTopicRuleListRequest, DescribeLoRaFrequencyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ControlDeviceDataRequest, ListFirmwaresResponse, ReleaseStudioProductResponse, DescribeSpaceFenceEventListResponse, DeleteLoRaGatewayRequest, SearchPositionSpaceRequest, SearchTopicRuleResponse, DescribeFenceEventListResponse, UpdateDevicesEnableStateRequest, DescribeTopicRuleRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, ReleaseStudioProductRequest, CreateProjectResponse, DescribeDeviceDataHistoryResponse, DeleteProjectResponse, CreateTopicPolicyResponse, CreateDeviceResponse, CreateDeviceRequest, DeletePositionSpaceRequest, GetStudioProductListRequest, DescribeFirmwareTaskResponse, DisableTopicRuleResponse, GetCOSURLRequest, CreateProjectRequest, CreateFenceBindRequest, DescribeDeviceResponse, ListFirmwaresRequest, GetStudioProductListResponse, PublishMessageRequest, ModifyTopicRuleRequest, GetDeviceListRequest, ModifySpacePropertyRequest, GetPositionSpaceListResponse, GetCOSURLResponse, ModifyFenceBindRequest, GetTopicRuleListResponse, DescribeFenceEventListRequest, ModifyPositionSpaceRequest, GetLoRaGatewayListResponse, DirectBindDeviceInFamilyResponse, CallDeviceActionAsyncRequest, CallDeviceActionAsyncResponse, DeleteFenceBindResponse, CreateFenceBindResponse, DescribeFenceBindListRequest, CreatePositionFenceResponse, DescribeTopicRuleResponse, UpdateFirmwareRequest, DescribeDeviceRequest, DescribePositionFenceListRequest, ModifyTopicRuleResponse, CreateTopicPolicyRequest, DirectBindDeviceInFamilyRequest, DescribeLoRaFrequencyResponse, DescribeSpaceFenceEventListRequest, GetLoRaGatewayListRequest, DescribeProjectRequest, UploadFirmwareResponse, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, DescribeStudioProductRequest, CreatePositionSpaceResponse, ModifyLoRaFrequencyRequest, ModifyModelDefinitionResponse, DeletePositionFenceRequest, GetProjectListRequest, DeletePositionSpaceResponse, CreateLoRaFrequencyResponse, DescribeDevicePositionListRequest, SearchStudioProductRequest, DeleteDevicesRequest, ModifyProjectResponse, DeleteStudioProductRequest, ModifyProjectRequest, ModifySpacePropertyResponse, PublishMessageResponse, ModifyLoRaGatewayResponse, DescribeFenceBindListResponse, CreatePositionFenceRequest, DescribeModelDefinitionRequest, DisableTopicRuleRequest, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateTopicRuleRequest, DeleteDeviceResponse, ModifyLoRaFrequencyResponse, ModifyLoRaGatewayRequest, ListEventHistoryResponse, EnableTopicRuleRequest, DescribeFirmwareTaskRequest, CreatePositionSpaceRequest } from "./iotexplorer_models";
+import { UpdateDevicesEnableStateResponse, DeleteProjectRequest, DeleteFenceBindRequest, DescribeModelDefinitionResponse, DeleteDevicesResponse, ModifyStudioProductResponse, DeleteStudioProductResponse, GetPositionSpaceListRequest, GetDeviceListResponse, DeleteLoRaFrequencyResponse, DescribeTopicPolicyRequest, ModifyPositionFenceRequest, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, DescribeDevicePositionListRequest, GetDeviceLocationHistoryResponse, UpdateFirmwareResponse, ModifyPositionFenceResponse, ModifyStudioProductRequest, ModifyPositionSpaceResponse, CreateStudioProductRequest, ModifyFenceBindResponse, DeletePositionFenceResponse, UploadFirmwareRequest, ListEventHistoryRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, ListTopicPolicyResponse, SearchPositionSpaceResponse, DescribePositionFenceListResponse, GetDeviceLocationHistoryRequest, DescribeDevicePositionListResponse, GetProjectListResponse, DescribeStudioProductResponse, DescribeProjectResponse, SearchStudioProductResponse, GetTopicRuleListRequest, ListTopicPolicyRequest, DescribeLoRaFrequencyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ControlDeviceDataRequest, ListFirmwaresResponse, ReleaseStudioProductResponse, DescribeSpaceFenceEventListResponse, DeleteLoRaGatewayRequest, DescribeTopicPolicyResponse, SearchPositionSpaceRequest, ModifyTopicPolicyResponse, SearchTopicRuleResponse, DescribeFenceEventListResponse, UpdateDevicesEnableStateRequest, DescribeTopicRuleRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, ReleaseStudioProductRequest, CreateProjectResponse, DescribeDeviceDataHistoryResponse, DeleteProjectResponse, CreateTopicPolicyResponse, CreateDeviceResponse, CreateDeviceRequest, DeletePositionSpaceRequest, GetStudioProductListRequest, DescribeFirmwareTaskResponse, DisableTopicRuleResponse, GetCOSURLRequest, CreateProjectRequest, CreateFenceBindRequest, DescribeDeviceResponse, ListFirmwaresRequest, GetStudioProductListResponse, PublishMessageRequest, ModifyTopicRuleRequest, GetDeviceListRequest, ModifySpacePropertyRequest, GetPositionSpaceListResponse, GetCOSURLResponse, ModifyFenceBindRequest, GetTopicRuleListResponse, DescribeFenceEventListRequest, ModifyPositionSpaceRequest, GetLoRaGatewayListResponse, DirectBindDeviceInFamilyResponse, CallDeviceActionAsyncRequest, CallDeviceActionAsyncResponse, DeleteFenceBindResponse, DeleteTopicPolicyRequest, CreateFenceBindResponse, DescribeFenceBindListRequest, CreatePositionFenceResponse, DescribeTopicRuleResponse, UpdateFirmwareRequest, DescribeDeviceRequest, DescribePositionFenceListRequest, ModifyTopicRuleResponse, CreateTopicPolicyRequest, DirectBindDeviceInFamilyRequest, DescribeLoRaFrequencyResponse, DescribeSpaceFenceEventListRequest, GetLoRaGatewayListRequest, DescribeProjectRequest, UploadFirmwareResponse, ModifyTopicPolicyRequest, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DeleteTopicPolicyResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, DescribeStudioProductRequest, CreatePositionSpaceResponse, ModifyLoRaFrequencyRequest, ModifyModelDefinitionResponse, DeletePositionFenceRequest, GetProjectListRequest, DeletePositionSpaceResponse, CreateLoRaFrequencyResponse, EnableTopicRuleResponse, SearchStudioProductRequest, DeleteDevicesRequest, ModifyProjectResponse, DeleteStudioProductRequest, ModifyProjectRequest, ModifySpacePropertyResponse, PublishMessageResponse, ModifyLoRaGatewayResponse, DescribeFenceBindListResponse, CreatePositionFenceRequest, DescribeModelDefinitionRequest, DisableTopicRuleRequest, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateTopicRuleRequest, DeleteDeviceResponse, ModifyLoRaFrequencyResponse, ModifyLoRaGatewayRequest, ListEventHistoryResponse, EnableTopicRuleRequest, DescribeFirmwareTaskRequest, CreatePositionSpaceRequest } from "./iotexplorer_models";
 /**
  * iotexplorer client
  * @class
@@ -92,6 +92,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateFirmware(req: UpdateFirmwareRequest, cb?: (error: string, rep: UpdateFirmwareResponse) => void): Promise<UpdateFirmwareResponse>;
     /**
+     * 搜索规则
+     */
+    SearchTopicRule(req: SearchTopicRuleRequest, cb?: (error: string, rep: SearchTopicRuleResponse) => void): Promise<SearchTopicRuleResponse>;
+    /**
      * 本接口（UploadFirmware）用于上传设备固件至平台
      */
     UploadFirmware(req: UploadFirmwareRequest, cb?: (error: string, rep: UploadFirmwareResponse) => void): Promise<UploadFirmwareResponse>;
@@ -107,6 +111,10 @@ export declare class Client extends AbstractClient {
      * 修改规则
      */
     ModifyTopicRule(req: ModifyTopicRuleRequest, cb?: (error: string, rep: ModifyTopicRuleResponse) => void): Promise<ModifyTopicRuleResponse>;
+    /**
+     * 本接口（DescribeTopicPolicy）用于查看Topic详细信息
+     */
+    DescribeTopicPolicy(req: DescribeTopicPolicyRequest, cb?: (error: string, rep: DescribeTopicPolicyResponse) => void): Promise<DescribeTopicPolicyResponse>;
     /**
      * 提供查询用户所创建的项目列表查询功能。
      */
@@ -148,9 +156,9 @@ export declare class Client extends AbstractClient {
      */
     CreateFenceBind(req: CreateFenceBindRequest, cb?: (error: string, rep: CreateFenceBindResponse) => void): Promise<CreateFenceBindResponse>;
     /**
-     * 搜索规则
+     * 本接口（UpdateTopicPolicy）用于更新Topic信息
      */
-    SearchTopicRule(req: SearchTopicRuleRequest, cb?: (error: string, rep: SearchTopicRuleResponse) => void): Promise<SearchTopicRuleResponse>;
+    ModifyTopicPolicy(req: ModifyTopicPolicyRequest, cb?: (error: string, rep: ModifyTopicPolicyResponse) => void): Promise<ModifyTopicPolicyResponse>;
     /**
      * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
      */
@@ -172,9 +180,17 @@ export declare class Client extends AbstractClient {
      */
     ListEventHistory(req: ListEventHistoryRequest, cb?: (error: string, rep: ListEventHistoryResponse) => void): Promise<ListEventHistoryResponse>;
     /**
+     * 本接口（DeleteTopicPolicy）用于删除Topic
+     */
+    DeleteTopicPolicy(req: DeleteTopicPolicyRequest, cb?: (error: string, rep: DeleteTopicPolicyResponse) => void): Promise<DeleteTopicPolicyResponse>;
+    /**
      * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      */
     DescribeStudioProduct(req: DescribeStudioProductRequest, cb?: (error: string, rep: DescribeStudioProductResponse) => void): Promise<DescribeStudioProductResponse>;
+    /**
+     * 本接口（ListTopicPolicy）用于获取Topic列表
+     */
+    ListTopicPolicy(req: ListTopicPolicyRequest, cb?: (error: string, rep: ListTopicPolicyResponse) => void): Promise<ListTopicPolicyResponse>;
     /**
      * 删除围栏绑定信息
      */

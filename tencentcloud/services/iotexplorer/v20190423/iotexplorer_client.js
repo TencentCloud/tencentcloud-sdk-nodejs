@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateFirmware", req, cb);
     }
     /**
+     * 搜索规则
+     */
+    async SearchTopicRule(req, cb) {
+        return this.request("SearchTopicRule", req, cb);
+    }
+    /**
      * 本接口（UploadFirmware）用于上传设备固件至平台
      */
     async UploadFirmware(req, cb) {
@@ -176,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyTopicRule(req, cb) {
         return this.request("ModifyTopicRule", req, cb);
+    }
+    /**
+     * 本接口（DescribeTopicPolicy）用于查看Topic详细信息
+     */
+    async DescribeTopicPolicy(req, cb) {
+        return this.request("DescribeTopicPolicy", req, cb);
     }
     /**
      * 提供查询用户所创建的项目列表查询功能。
@@ -238,10 +250,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFenceBind", req, cb);
     }
     /**
-     * 搜索规则
+     * 本接口（UpdateTopicPolicy）用于更新Topic信息
      */
-    async SearchTopicRule(req, cb) {
-        return this.request("SearchTopicRule", req, cb);
+    async ModifyTopicPolicy(req, cb) {
+        return this.request("ModifyTopicPolicy", req, cb);
     }
     /**
      * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
@@ -274,10 +286,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListEventHistory", req, cb);
     }
     /**
+     * 本接口（DeleteTopicPolicy）用于删除Topic
+     */
+    async DeleteTopicPolicy(req, cb) {
+        return this.request("DeleteTopicPolicy", req, cb);
+    }
+    /**
      * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      */
     async DescribeStudioProduct(req, cb) {
         return this.request("DescribeStudioProduct", req, cb);
+    }
+    /**
+     * 本接口（ListTopicPolicy）用于获取Topic列表
+     */
+    async ListTopicPolicy(req, cb) {
+        return this.request("ListTopicPolicy", req, cb);
     }
     /**
      * 删除围栏绑定信息

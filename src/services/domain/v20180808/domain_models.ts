@@ -31,6 +31,21 @@ export interface UploadImageResponse {
 }
 
 /**
+ * RenewDomainBatch返回参数结构体
+ */
+export interface RenewDomainBatchResponse {
+  /**
+   * 操作日志ID。
+   */
+  LogId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchModifyDomainInfo请求参数结构体
  */
 export interface BatchModifyDomainInfoRequest {
@@ -127,6 +142,21 @@ True:开启禁止域名更新状态。
 False：关闭禁止域名更新状态。
       */
   Status: boolean
+}
+
+/**
+ * TransferInDomainBatch返回参数结构体
+ */
+export interface TransferInDomainBatchResponse {
+  /**
+   * 日志ID
+   */
+  LogId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -234,6 +264,16 @@ success  操作成功。
 }
 
 /**
+ * SendPhoneEmailCode返回参数结构体
+ */
+export interface SendPhoneEmailCodeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDomainDNSBatch返回参数结构体
  */
 export interface ModifyDomainDNSBatchResponse {
@@ -249,31 +289,18 @@ export interface ModifyDomainDNSBatchResponse {
 }
 
 /**
- * RenewDomainBatch请求参数结构体
+ * DeletePhoneEmail请求参数结构体
  */
-export interface RenewDomainBatchRequest {
+export interface DeletePhoneEmailRequest {
   /**
-   * 域名续费的年限。
+   * 手机或者邮箱
    */
-  Period: number
+  Code: string
 
   /**
-   * 批量续费的域名。
+   * 1：手机  2：邮箱
    */
-  Domains: Array<string>
-
-  /**
-   * 付费模式 0手动在线付费，1使用余额付费。
-   */
-  PayMode: number
-
-  /**
-      * 自动续费开关。有三个可选值：
-0 表示关闭，不自动续费
-1 表示开启，将自动续费
-2 表示不处理，保留域名原有状态（默认值）
-      */
-  AutoRenewFlag?: number
+  Type: number
 }
 
 /**
@@ -386,18 +413,23 @@ export interface CheckDomainResponse {
 }
 
 /**
- * RenewDomainBatch返回参数结构体
+ * CreatePhoneEmail请求参数结构体
  */
-export interface RenewDomainBatchResponse {
+export interface CreatePhoneEmailRequest {
   /**
-   * 操作日志ID。
+   * 手机号或者邮箱
    */
-  LogId: number
+  Code: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 1：手机   2：邮箱
    */
-  RequestId?: string
+  Type: number
+
+  /**
+   * 验证码
+   */
+  VerifyCode: string
 }
 
 /**
@@ -441,9 +473,37 @@ export interface DescribeTemplateRequest {
 }
 
 /**
- * TransferInDomainBatch返回参数结构体
+ * RenewDomainBatch请求参数结构体
  */
-export interface TransferInDomainBatchResponse {
+export interface RenewDomainBatchRequest {
+  /**
+   * 域名续费的年限。
+   */
+  Period: number
+
+  /**
+   * 批量续费的域名。
+   */
+  Domains: Array<string>
+
+  /**
+   * 付费模式 0手动在线付费，1使用余额付费。
+   */
+  PayMode: number
+
+  /**
+      * 自动续费开关。有三个可选值：
+0 表示关闭，不自动续费
+1 表示开启，将自动续费
+2 表示不处理，保留域名原有状态（默认值）
+      */
+  AutoRenewFlag?: number
+}
+
+/**
+ * BatchModifyDomainInfo返回参数结构体
+ */
+export interface BatchModifyDomainInfoResponse {
   /**
    * 日志ID
    */
@@ -456,11 +516,11 @@ export interface TransferInDomainBatchResponse {
 }
 
 /**
- * BatchModifyDomainInfo返回参数结构体
+ * ModifyDomainOwnerBatch返回参数结构体
  */
-export interface BatchModifyDomainInfoResponse {
+export interface ModifyDomainOwnerBatchResponse {
   /**
-   * 日志ID
+   * 日志id
    */
   LogId: number
 
@@ -567,6 +627,26 @@ export interface DescribeDomainNameListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 手机号邮箱列表
+ */
+export interface PhoneEmailData {
+  /**
+   * 手机号或者邮箱
+   */
+  Code: string
+
+  /**
+   * 1：手机  2：邮箱
+   */
+  Type: number
+
+  /**
+   * 创建时间
+   */
+  CreatedOn: string
 }
 
 /**
@@ -921,6 +1001,21 @@ export interface CreateDomainBatchRequest {
 }
 
 /**
+ * SendPhoneEmailCode请求参数结构体
+ */
+export interface SendPhoneEmailCodeRequest {
+  /**
+   * 手机或者邮箱号。
+   */
+  Code: string
+
+  /**
+   * 1：手机  2：邮箱。
+   */
+  Type: number
+}
+
+/**
  * DescribeDomainBaseInfo请求参数结构体
  */
 export interface DescribeDomainBaseInfoRequest {
@@ -928,6 +1023,31 @@ export interface DescribeDomainBaseInfoRequest {
    * 域名
    */
   Domain: string
+}
+
+/**
+ * DescribePhoneEmailList请求参数结构体
+ */
+export interface DescribePhoneEmailListRequest {
+  /**
+   * 0：所有类型  1：手机  2：邮箱，默认0
+   */
+  Type?: number
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，取值范围[1,200]
+   */
+  Limit?: number
+
+  /**
+   * 手机或者邮箱精确搜索
+   */
+  Code?: string
 }
 
 /**
@@ -1175,6 +1295,26 @@ export interface DescribeBatchOperationLogDetailsResponse {
 }
 
 /**
+ * DescribePhoneEmailList返回参数结构体
+ */
+export interface DescribePhoneEmailListResponse {
+  /**
+   * 手机或者邮箱列表
+   */
+  PhoneEmailList: Array<PhoneEmailData>
+
+  /**
+   * 总数量。
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckBatchStatus返回参数结构体
  */
 export interface CheckBatchStatusResponse {
@@ -1183,6 +1323,16 @@ export interface CheckBatchStatusResponse {
    */
   StatusSet: Array<BatchStatus>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeletePhoneEmail返回参数结构体
+ */
+export interface DeletePhoneEmailResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1220,14 +1370,9 @@ export interface DescribeTemplateListRequest {
 }
 
 /**
- * ModifyDomainOwnerBatch返回参数结构体
+ * CreatePhoneEmail返回参数结构体
  */
-export interface ModifyDomainOwnerBatchResponse {
-  /**
-   * 日志id
-   */
-  LogId: number
-
+export interface CreatePhoneEmailResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

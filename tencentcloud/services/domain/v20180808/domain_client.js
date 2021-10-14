@@ -28,11 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("domain.tencentcloudapi.com", "2018-08-08", clientConfig);
     }
     /**
-     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
-
+     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
      */
-    async DescribeDomainNameList(req, cb) {
-        return this.request("DescribeDomainNameList", req, cb);
+    async SetDomainAutoRenew(req, cb) {
+        return this.request("SetDomainAutoRenew", req, cb);
+    }
+    /**
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+     */
+    async ModifyDomainDNSBatch(req, cb) {
+        return this.request("ModifyDomainDNSBatch", req, cb);
+    }
+    /**
+     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
+     */
+    async CheckBatchStatus(req, cb) {
+        return this.request("CheckBatchStatus", req, cb);
     }
     /**
      * 本接口 ( UploadImage ) 用于证件图片上传 。
@@ -41,22 +52,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadImage", req, cb);
     }
     /**
-     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+     * 此接口用于删除已验证的手机邮箱
      */
-    async CreateTemplate(req, cb) {
-        return this.request("CreateTemplate", req, cb);
+    async DeletePhoneEmail(req, cb) {
+        return this.request("DeletePhoneEmail", req, cb);
     }
     /**
-     * 本接口 (DescribeTemplate) 用于获取模板信息。
+     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
+
      */
-    async DescribeTemplate(req, cb) {
-        return this.request("DescribeTemplate", req, cb);
-    }
-    /**
-     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
-     */
-    async ModifyDomainOwnerBatch(req, cb) {
-        return this.request("ModifyDomainOwnerBatch", req, cb);
+    async DescribeDomainNameList(req, cb) {
+        return this.request("DescribeDomainNameList", req, cb);
     }
     /**
      * 本接口 ( CreateDomainBatch ) 用于批量域名注册 。
@@ -72,12 +78,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainBaseInfo", req, cb);
     }
     /**
-     * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
-     */
-    async DescribeBatchOperationLogs(req, cb) {
-        return this.request("DescribeBatchOperationLogs", req, cb);
-    }
-    /**
      * 本接口 ( DescribeBatchOperationLogDetails ) 用于获取批量操作日志详情。
      */
     async DescribeBatchOperationLogDetails(req, cb) {
@@ -90,11 +90,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTemplate", req, cb);
     }
     /**
-     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
-
+     * 检查域名是否可以注册。
      */
-    async DescribeTemplateList(req, cb) {
-        return this.request("DescribeTemplateList", req, cb);
+    async CheckDomain(req, cb) {
+        return this.request("CheckDomain", req, cb);
     }
     /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
@@ -104,10 +103,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewDomainBatch", req, cb);
     }
     /**
-     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+     * 本接口 (DescribeTemplate) 用于获取模板信息。
      */
-    async TransferProhibitionBatch(req, cb) {
-        return this.request("TransferProhibitionBatch", req, cb);
+    async DescribeTemplate(req, cb) {
+        return this.request("DescribeTemplate", req, cb);
+    }
+    /**
+     * 此接口用于创建有效的手机、邮箱
+     */
+    async CreatePhoneEmail(req, cb) {
+        return this.request("CreatePhoneEmail", req, cb);
+    }
+    /**
+     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
+
+     */
+    async DescribeTemplateList(req, cb) {
+        return this.request("DescribeTemplateList", req, cb);
     }
     /**
      * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
@@ -116,22 +128,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyDomainInfo", req, cb);
     }
     /**
-     * 按照域名后缀获取对应的价格列表
+     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
      */
-    async DescribeDomainPriceList(req, cb) {
-        return this.request("DescribeDomainPriceList", req, cb);
-    }
-    /**
-     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
-     */
-    async CheckBatchStatus(req, cb) {
-        return this.request("CheckBatchStatus", req, cb);
-    }
-    /**
-     * 检查域名是否可以注册。
-     */
-    async CheckDomain(req, cb) {
-        return this.request("CheckDomain", req, cb);
+    async TransferProhibitionBatch(req, cb) {
+        return this.request("TransferProhibitionBatch", req, cb);
     }
     /**
      * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
@@ -146,16 +146,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateProhibitionBatch", req, cb);
     }
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
      */
-    async ModifyDomainDNSBatch(req, cb) {
-        return this.request("ModifyDomainDNSBatch", req, cb);
+    async CreateTemplate(req, cb) {
+        return this.request("CreateTemplate", req, cb);
     }
     /**
-     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
      */
-    async SetDomainAutoRenew(req, cb) {
-        return this.request("SetDomainAutoRenew", req, cb);
+    async ModifyDomainOwnerBatch(req, cb) {
+        return this.request("ModifyDomainOwnerBatch", req, cb);
+    }
+    /**
+     * 本接口用于获取已验证的手机邮箱列表
+     */
+    async DescribePhoneEmailList(req, cb) {
+        return this.request("DescribePhoneEmailList", req, cb);
+    }
+    /**
+     * 此接口用于发送手机邮箱验证码。
+     */
+    async SendPhoneEmailCode(req, cb) {
+        return this.request("SendPhoneEmailCode", req, cb);
+    }
+    /**
+     * 按照域名后缀获取对应的价格列表
+     */
+    async DescribeDomainPriceList(req, cb) {
+        return this.request("DescribeDomainPriceList", req, cb);
+    }
+    /**
+     * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
+     */
+    async DescribeBatchOperationLogs(req, cb) {
+        return this.request("DescribeBatchOperationLogs", req, cb);
     }
 }
 exports.Client = Client;

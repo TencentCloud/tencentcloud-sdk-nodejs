@@ -228,6 +228,16 @@ it("iotexplorer.v20190423.UpdateFirmware", async function () {
     }
 })
 
+it("iotexplorer.v20190423.SearchTopicRule", async function () {
+    try {
+       const data = await client.SearchTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.UploadFirmware", async function () {
     try {
        const data = await client.UploadFirmware({})
@@ -261,6 +271,16 @@ it("iotexplorer.v20190423.SearchStudioProduct", async function () {
 it("iotexplorer.v20190423.ModifyTopicRule", async function () {
     try {
        const data = await client.ModifyTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeTopicPolicy", async function () {
+    try {
+       const data = await client.DescribeTopicPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +388,9 @@ it("iotexplorer.v20190423.CreateFenceBind", async function () {
     }
 })
 
-it("iotexplorer.v20190423.SearchTopicRule", async function () {
+it("iotexplorer.v20190423.ModifyTopicPolicy", async function () {
     try {
-       const data = await client.SearchTopicRule({})
+       const data = await client.ModifyTopicPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +448,29 @@ it("iotexplorer.v20190423.ListEventHistory", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DeleteTopicPolicy", async function () {
+    try {
+       const data = await client.DeleteTopicPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
     try {
        const data = await client.DescribeStudioProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ListTopicPolicy", async function () {
+    try {
+       const data = await client.ListTopicPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

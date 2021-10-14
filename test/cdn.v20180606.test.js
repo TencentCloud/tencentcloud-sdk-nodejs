@@ -488,6 +488,16 @@ it("cdn.v20180606.DescribeDiagnoseReport", async function () {
     }
 })
 
+it("cdn.v20180606.DescribeScdnIpStrategy", async function () {
+    try {
+       const data = await client.DescribeScdnIpStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.CreateClsLogTopic", async function () {
     try {
        const data = await client.CreateClsLogTopic({})

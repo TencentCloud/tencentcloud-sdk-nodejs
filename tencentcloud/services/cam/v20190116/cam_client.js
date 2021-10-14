@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRolePermissionsBoundary", req, cb);
     }
     /**
+     * 查询用户SAML配置
+     */
+    async DescribeUserSAMLConfig(req, cb) {
+        return this.request("DescribeUserSAMLConfig", req, cb);
+    }
+    /**
      * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
      */
     async DeletePolicyVersion(req, cb) {
@@ -122,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DetachRolePolicy(req, cb) {
         return this.request("DetachRolePolicy", req, cb);
+    }
+    /**
+     * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+     */
+    async SetDefaultPolicyVersion(req, cb) {
+        return this.request("SetDefaultPolicyVersion", req, cb);
     }
     /**
      * 本接口（DescribeRoleList）用于获取账号下的角色列表。
@@ -238,10 +250,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAssumeRolePolicy", req, cb);
     }
     /**
-     * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+     * 创建用户SAML配置
      */
-    async SetDefaultPolicyVersion(req, cb) {
-        return this.request("SetDefaultPolicyVersion", req, cb);
+    async CreateUserSAMLConfig(req, cb) {
+        return this.request("CreateUserSAMLConfig", req, cb);
     }
     /**
      * 查询用户组列表
@@ -314,6 +326,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteUser(req, cb) {
         return this.request("DeleteUser", req, cb);
+    }
+    /**
+     * 修改用户SAML配置
+     */
+    async UpdateUserSAMLConfig(req, cb) {
+        return this.request("UpdateUserSAMLConfig", req, cb);
     }
     /**
      * 该接口（CreatePolicyVersion）用于新增策略版本，用户创建了一个策略版本之后可以方便的通过变更策略版本的方式来变更策略。

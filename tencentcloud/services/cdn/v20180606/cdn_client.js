@@ -350,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDiagnoseReport", req, cb);
     }
     /**
+     * 查询在SCDN IP安全策略
+     */
+    async DescribeScdnIpStrategy(req, cb) {
+        return this.request("DescribeScdnIpStrategy", req, cb);
+    }
+    /**
      * CreateClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
      */
     async CreateClsLogTopic(req, cb) {

@@ -265,6 +265,21 @@ export interface DeleteLoRaFrequencyResponse {
 }
 
 /**
+ * DescribeTopicPolicy请求参数结构体
+ */
+export interface DescribeTopicPolicyRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * Topic名字
+   */
+  TopicName: string
+}
+
+/**
  * ModifyPositionFence请求参数结构体
  */
 export type ModifyPositionFenceRequest = null
@@ -385,14 +400,9 @@ export interface CallDeviceActionSyncRequest {
 }
 
 /**
- * EnableTopicRule返回参数结构体
+ * DescribeDevicePositionList请求参数结构体
  */
-export interface EnableTopicRuleResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeDevicePositionListRequest = null
 
 /**
  * GetDeviceLocationHistory返回参数结构体
@@ -719,6 +729,21 @@ export interface FenceBindProductItem {
    * 围栏绑定的产品Id
    */
   ProductId: string
+}
+
+/**
+ * ListTopicPolicy返回参数结构体
+ */
+export interface ListTopicPolicyResponse {
+  /**
+   * Topic列表
+   */
+  Topics?: Array<TopicItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1118,6 +1143,16 @@ export interface ProjectEntryEx {
 }
 
 /**
+ * ListTopicPolicy请求参数结构体
+ */
+export interface ListTopicPolicyRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+}
+
+/**
  * DescribeLoRaFrequency请求参数结构体
  */
 export interface DescribeLoRaFrequencyRequest {
@@ -1254,6 +1289,31 @@ export interface DeleteLoRaGatewayRequest {
 }
 
 /**
+ * DescribeTopicPolicy返回参数结构体
+ */
+export interface DescribeTopicPolicyResponse {
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+
+  /**
+   * Topic名称
+   */
+  TopicName?: string
+
+  /**
+   * Topic权限
+   */
+  Privilege?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchPositionSpace请求参数结构体
  */
 export interface SearchPositionSpaceRequest {
@@ -1331,6 +1391,16 @@ export interface LoRaFrequencyEntry {
    * 创建时间
    */
   CreateTime: number
+}
+
+/**
+ * ModifyTopicPolicy返回参数结构体
+ */
+export interface ModifyTopicPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2366,6 +2436,21 @@ export interface DeleteFenceBindResponse {
 }
 
 /**
+ * DeleteTopicPolicy请求参数结构体
+ */
+export interface DeleteTopicPolicyRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * Topic名称
+   */
+  TopicName: string
+}
+
+/**
  * CreateFenceBind返回参数结构体
  */
 export interface CreateFenceBindResponse {
@@ -2403,6 +2488,21 @@ export interface CreatePositionFenceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Topic信息, 包括Topic名字和权限
+ */
+export interface TopicItem {
+  /**
+   * Topic名称
+   */
+  TopicName: string
+
+  /**
+   * Topic权限 , 1上报  2下发
+   */
+  Privilege: number
 }
 
 /**
@@ -2754,6 +2854,31 @@ export interface UploadFirmwareResponse {
 }
 
 /**
+ * ModifyTopicPolicy请求参数结构体
+ */
+export interface ModifyTopicPolicyRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 更新前Topic名
+   */
+  TopicName: string
+
+  /**
+   * 更新后Topic名
+   */
+  NewTopicName: string
+
+  /**
+   * Topic权限
+   */
+  Privilege: number
+}
+
+/**
  * DeleteTopicRule请求参数结构体
  */
 export interface DeleteTopicRuleRequest {
@@ -2772,6 +2897,16 @@ export interface CreateLoRaGatewayResponse {
    */
   Gateway?: LoRaGatewayItem
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteTopicPolicy返回参数结构体
+ */
+export interface DeleteTopicPolicyResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3122,9 +3257,14 @@ export interface CreateLoRaFrequencyResponse {
 }
 
 /**
- * DescribeDevicePositionList请求参数结构体
+ * EnableTopicRule返回参数结构体
  */
-export type DescribeDevicePositionListRequest = null
+export interface EnableTopicRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * SearchStudioProduct请求参数结构体

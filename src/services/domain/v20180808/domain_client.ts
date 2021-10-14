@@ -19,28 +19,33 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UploadImageResponse,
+  RenewDomainBatchResponse,
   BatchModifyDomainInfoRequest,
   TemplateInfo,
   UpdateProhibitionBatchRequest,
+  TransferInDomainBatchResponse,
   DeleteTemplateResponse,
   TransferInDomainBatchRequest,
   CreateDomainBatchResponse,
   DomainBatchDetailSet,
+  SendPhoneEmailCodeResponse,
   ModifyDomainDNSBatchResponse,
-  RenewDomainBatchRequest,
+  DeletePhoneEmailRequest,
   DescribeTemplateResponse,
   UpdateProhibitionBatchResponse,
   CheckDomainResponse,
-  RenewDomainBatchResponse,
+  CreatePhoneEmailRequest,
   PriceInfo,
   DescribeTemplateRequest,
-  TransferInDomainBatchResponse,
+  RenewDomainBatchRequest,
   BatchModifyDomainInfoResponse,
+  ModifyDomainOwnerBatchResponse,
   DescribeDomainBaseInfoResponse,
   DescribeTemplateListResponse,
   TransferProhibitionBatchRequest,
   DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
+  PhoneEmailData,
   ContactInfo,
   DescribeDomainPriceListResponse,
   CreateTemplateResponse,
@@ -53,7 +58,9 @@ import {
   DomainList,
   DescribeDomainPriceListRequest,
   CreateDomainBatchRequest,
+  SendPhoneEmailCodeRequest,
   DescribeDomainBaseInfoRequest,
+  DescribePhoneEmailListRequest,
   DomainBaseInfo,
   DescribeDomainNameListRequest,
   DescribeBatchOperationLogsRequest,
@@ -63,9 +70,11 @@ import {
   TransferProhibitionBatchResponse,
   ModifyDomainDNSBatchRequest,
   DescribeBatchOperationLogDetailsResponse,
+  DescribePhoneEmailListResponse,
   CheckBatchStatusResponse,
+  DeletePhoneEmailResponse,
   DescribeTemplateListRequest,
-  ModifyDomainOwnerBatchResponse,
+  CreatePhoneEmailResponse,
   SetDomainAutoRenewRequest,
   ModifyDomainOwnerBatchRequest,
   DomainBatchLogSet,
@@ -81,14 +90,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
+   * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+   */
+  async SetDomainAutoRenew(
+    req: SetDomainAutoRenewRequest,
+    cb?: (error: string, rep: SetDomainAutoRenewResponse) => void
+  ): Promise<SetDomainAutoRenewResponse> {
+    return this.request("SetDomainAutoRenew", req, cb)
+  }
 
-     */
-  async DescribeDomainNameList(
-    req: DescribeDomainNameListRequest,
-    cb?: (error: string, rep: DescribeDomainNameListResponse) => void
-  ): Promise<DescribeDomainNameListResponse> {
-    return this.request("DescribeDomainNameList", req, cb)
+  /**
+   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+   */
+  async ModifyDomainDNSBatch(
+    req: ModifyDomainDNSBatchRequest,
+    cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
+  ): Promise<ModifyDomainDNSBatchResponse> {
+    return this.request("ModifyDomainDNSBatch", req, cb)
+  }
+
+  /**
+   * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
+   */
+  async CheckBatchStatus(
+    req: CheckBatchStatusRequest,
+    cb?: (error: string, rep: CheckBatchStatusResponse) => void
+  ): Promise<CheckBatchStatusResponse> {
+    return this.request("CheckBatchStatus", req, cb)
   }
 
   /**
@@ -102,33 +130,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+   * 此接口用于删除已验证的手机邮箱
    */
-  async CreateTemplate(
-    req: CreateTemplateRequest,
-    cb?: (error: string, rep: CreateTemplateResponse) => void
-  ): Promise<CreateTemplateResponse> {
-    return this.request("CreateTemplate", req, cb)
+  async DeletePhoneEmail(
+    req: DeletePhoneEmailRequest,
+    cb?: (error: string, rep: DeletePhoneEmailResponse) => void
+  ): Promise<DeletePhoneEmailResponse> {
+    return this.request("DeletePhoneEmail", req, cb)
   }
 
   /**
-   * 本接口 (DescribeTemplate) 用于获取模板信息。
-   */
-  async DescribeTemplate(
-    req: DescribeTemplateRequest,
-    cb?: (error: string, rep: DescribeTemplateResponse) => void
-  ): Promise<DescribeTemplateResponse> {
-    return this.request("DescribeTemplate", req, cb)
-  }
+     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
-  /**
-   * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
-   */
-  async ModifyDomainOwnerBatch(
-    req: ModifyDomainOwnerBatchRequest,
-    cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void
-  ): Promise<ModifyDomainOwnerBatchResponse> {
-    return this.request("ModifyDomainOwnerBatch", req, cb)
+     */
+  async DescribeDomainNameList(
+    req: DescribeDomainNameListRequest,
+    cb?: (error: string, rep: DescribeDomainNameListResponse) => void
+  ): Promise<DescribeDomainNameListResponse> {
+    return this.request("DescribeDomainNameList", req, cb)
   }
 
   /**
@@ -153,16 +172,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
-   */
-  async DescribeBatchOperationLogs(
-    req: DescribeBatchOperationLogsRequest,
-    cb?: (error: string, rep: DescribeBatchOperationLogsResponse) => void
-  ): Promise<DescribeBatchOperationLogsResponse> {
-    return this.request("DescribeBatchOperationLogs", req, cb)
-  }
-
-  /**
    * 本接口 ( DescribeBatchOperationLogDetails ) 用于获取批量操作日志详情。
    */
   async DescribeBatchOperationLogDetails(
@@ -183,14 +192,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
-
-     */
-  async DescribeTemplateList(
-    req: DescribeTemplateListRequest,
-    cb?: (error: string, rep: DescribeTemplateListResponse) => void
-  ): Promise<DescribeTemplateListResponse> {
-    return this.request("DescribeTemplateList", req, cb)
+   * 检查域名是否可以注册。
+   */
+  async CheckDomain(
+    req: CheckDomainRequest,
+    cb?: (error: string, rep: CheckDomainResponse) => void
+  ): Promise<CheckDomainResponse> {
+    return this.request("CheckDomain", req, cb)
   }
 
   /**
@@ -205,13 +213,34 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+   * 本接口 (DescribeTemplate) 用于获取模板信息。
    */
-  async TransferProhibitionBatch(
-    req: TransferProhibitionBatchRequest,
-    cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
-  ): Promise<TransferProhibitionBatchResponse> {
-    return this.request("TransferProhibitionBatch", req, cb)
+  async DescribeTemplate(
+    req: DescribeTemplateRequest,
+    cb?: (error: string, rep: DescribeTemplateResponse) => void
+  ): Promise<DescribeTemplateResponse> {
+    return this.request("DescribeTemplate", req, cb)
+  }
+
+  /**
+   * 此接口用于创建有效的手机、邮箱
+   */
+  async CreatePhoneEmail(
+    req: CreatePhoneEmailRequest,
+    cb?: (error: string, rep: CreatePhoneEmailResponse) => void
+  ): Promise<CreatePhoneEmailResponse> {
+    return this.request("CreatePhoneEmail", req, cb)
+  }
+
+  /**
+     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
+
+     */
+  async DescribeTemplateList(
+    req: DescribeTemplateListRequest,
+    cb?: (error: string, rep: DescribeTemplateListResponse) => void
+  ): Promise<DescribeTemplateListResponse> {
+    return this.request("DescribeTemplateList", req, cb)
   }
 
   /**
@@ -225,33 +254,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按照域名后缀获取对应的价格列表
+   * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
    */
-  async DescribeDomainPriceList(
-    req: DescribeDomainPriceListRequest,
-    cb?: (error: string, rep: DescribeDomainPriceListResponse) => void
-  ): Promise<DescribeDomainPriceListResponse> {
-    return this.request("DescribeDomainPriceList", req, cb)
-  }
-
-  /**
-   * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
-   */
-  async CheckBatchStatus(
-    req: CheckBatchStatusRequest,
-    cb?: (error: string, rep: CheckBatchStatusResponse) => void
-  ): Promise<CheckBatchStatusResponse> {
-    return this.request("CheckBatchStatus", req, cb)
-  }
-
-  /**
-   * 检查域名是否可以注册。
-   */
-  async CheckDomain(
-    req: CheckDomainRequest,
-    cb?: (error: string, rep: CheckDomainResponse) => void
-  ): Promise<CheckDomainResponse> {
-    return this.request("CheckDomain", req, cb)
+  async TransferProhibitionBatch(
+    req: TransferProhibitionBatchRequest,
+    cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
+  ): Promise<TransferProhibitionBatchResponse> {
+    return this.request("TransferProhibitionBatch", req, cb)
   }
 
   /**
@@ -275,22 +284,62 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+   * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
    */
-  async ModifyDomainDNSBatch(
-    req: ModifyDomainDNSBatchRequest,
-    cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
-  ): Promise<ModifyDomainDNSBatchResponse> {
-    return this.request("ModifyDomainDNSBatch", req, cb)
+  async CreateTemplate(
+    req: CreateTemplateRequest,
+    cb?: (error: string, rep: CreateTemplateResponse) => void
+  ): Promise<CreateTemplateResponse> {
+    return this.request("CreateTemplate", req, cb)
   }
 
   /**
-   * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+   * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
    */
-  async SetDomainAutoRenew(
-    req: SetDomainAutoRenewRequest,
-    cb?: (error: string, rep: SetDomainAutoRenewResponse) => void
-  ): Promise<SetDomainAutoRenewResponse> {
-    return this.request("SetDomainAutoRenew", req, cb)
+  async ModifyDomainOwnerBatch(
+    req: ModifyDomainOwnerBatchRequest,
+    cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void
+  ): Promise<ModifyDomainOwnerBatchResponse> {
+    return this.request("ModifyDomainOwnerBatch", req, cb)
+  }
+
+  /**
+   * 本接口用于获取已验证的手机邮箱列表
+   */
+  async DescribePhoneEmailList(
+    req: DescribePhoneEmailListRequest,
+    cb?: (error: string, rep: DescribePhoneEmailListResponse) => void
+  ): Promise<DescribePhoneEmailListResponse> {
+    return this.request("DescribePhoneEmailList", req, cb)
+  }
+
+  /**
+   * 此接口用于发送手机邮箱验证码。
+   */
+  async SendPhoneEmailCode(
+    req: SendPhoneEmailCodeRequest,
+    cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void
+  ): Promise<SendPhoneEmailCodeResponse> {
+    return this.request("SendPhoneEmailCode", req, cb)
+  }
+
+  /**
+   * 按照域名后缀获取对应的价格列表
+   */
+  async DescribeDomainPriceList(
+    req: DescribeDomainPriceListRequest,
+    cb?: (error: string, rep: DescribeDomainPriceListResponse) => void
+  ): Promise<DescribeDomainPriceListResponse> {
+    return this.request("DescribeDomainPriceList", req, cb)
+  }
+
+  /**
+   * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
+   */
+  async DescribeBatchOperationLogs(
+    req: DescribeBatchOperationLogsRequest,
+    cb?: (error: string, rep: DescribeBatchOperationLogsResponse) => void
+  ): Promise<DescribeBatchOperationLogsResponse> {
+    return this.request("DescribeBatchOperationLogs", req, cb)
   }
 }

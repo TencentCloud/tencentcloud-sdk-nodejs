@@ -276,6 +276,23 @@ export interface GetSecurityLastUsedRequest {
     SecretIdList: Array<string>;
 }
 /**
+ * DescribeUserSAMLConfig返回参数结构体
+ */
+export interface DescribeUserSAMLConfigResponse {
+    /**
+      * SAML元数据文档
+      */
+    SAMLMetadata: string;
+    /**
+      * 状态：0:未设置，11:已开启，2:已禁用
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteUserPermissionsBoundary返回参数结构体
  */
 export interface DeleteUserPermissionsBoundaryResponse {
@@ -371,6 +388,10 @@ export interface DescribeRoleListRequest {
       */
     Rp: number;
 }
+/**
+ * DescribeUserSAMLConfig请求参数结构体
+ */
+export declare type DescribeUserSAMLConfigRequest = null;
 /**
  * GetGroup请求参数结构体
  */
@@ -680,6 +701,19 @@ export interface UpdateRoleDescriptionRequest {
       * 角色名称，用于指定角色，入参 RoleId 与 RoleName 二选一
       */
     RoleName?: string;
+}
+/**
+ * UpdateUserSAMLConfig请求参数结构体
+ */
+export interface UpdateUserSAMLConfigRequest {
+    /**
+      * 修改的操作类型:enable:启用,disable:禁用,updateSAML:修改元数据文档
+      */
+    Operate: string;
+    /**
+      * 元数据文档，需要base64 encode，仅当Operate为updateSAML时需要此参数
+      */
+    SAMLMetadataDocument?: string;
 }
 /**
  * DeleteGroup返回参数结构体
@@ -1856,6 +1890,15 @@ export interface DeletePolicyVersionRequest {
     VersionId: Array<number>;
 }
 /**
+ * CreateUserSAMLConfig请求参数结构体
+ */
+export interface CreateUserSAMLConfigRequest {
+    /**
+      * SAML元数据文档，需要base64 encode
+      */
+    SAMLMetadataDocument: string;
+}
+/**
  * UpdateGroup请求参数结构体
  */
 export interface UpdateGroupRequest {
@@ -2404,6 +2447,15 @@ export interface ListGrantServiceAccessService {
     ServiceName: string;
 }
 /**
+ * CreateUserSAMLConfig返回参数结构体
+ */
+export interface CreateUserSAMLConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeSubAccounts返回参数结构体
  */
 export interface DescribeSubAccountsResponse {
@@ -2439,6 +2491,15 @@ export interface ListEntitiesForPolicyResponse {
  * AddUserToGroup返回参数结构体
  */
 export interface AddUserToGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateUserSAMLConfig返回参数结构体
+ */
+export interface UpdateUserSAMLConfigResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

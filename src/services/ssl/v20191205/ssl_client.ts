@@ -46,11 +46,12 @@ import {
   ApplyCertificateRequest,
   ReplaceCertificateRequest,
   UploadRevokeLetterResponse,
+  DescribeDeployedResourcesRequest,
   CreateCertificateResponse,
   UploadRevokeLetterRequest,
   DeleteCertificateResponse,
   RevokeCertificateResponse,
-  RevokeDomainValidateAuths,
+  DeployedResources,
   DescribeCertificateDetailResponse,
   CheckCertificateChainResponse,
   ModifyCertificateProjectRequest,
@@ -60,6 +61,7 @@ import {
   DescribeManagerDetailRequest,
   DvAuthDetail,
   ProjectInfo,
+  DescribeDeployedResourcesResponse,
   DescribeCertificateOperateLogsRequest,
   CancelCertificateOrderResponse,
   CreateCertificateRequest,
@@ -68,6 +70,7 @@ import {
   UploadConfirmLetterResponse,
   DeleteManagerResponse,
   VerifyManagerRequest,
+  RevokeDomainValidateAuths,
   UploadCertificateResponse,
   CheckCertificateChainRequest,
   ModifyCertificateAliasResponse,
@@ -269,6 +272,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCertificateAliasResponse) => void
   ): Promise<ModifyCertificateAliasResponse> {
     return this.request("ModifyCertificateAlias", req, cb)
+  }
+
+  /**
+   * 证书查询关联资源
+   */
+  async DescribeDeployedResources(
+    req: DescribeDeployedResourcesRequest,
+    cb?: (error: string, rep: DescribeDeployedResourcesResponse) => void
+  ): Promise<DescribeDeployedResourcesResponse> {
+    return this.request("DescribeDeployedResources", req, cb)
   }
 
   /**

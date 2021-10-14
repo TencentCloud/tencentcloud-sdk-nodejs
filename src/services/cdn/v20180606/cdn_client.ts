@@ -75,6 +75,7 @@ import {
   UpdateScdnDomainResponse,
   Origin,
   ViolationUrl,
+  ScdnIpStrategyFilter,
   DescribeDomainsConfigRequest,
   TopData,
   EnableCachesRequest,
@@ -141,6 +142,7 @@ import {
   AuthenticationTypeC,
   AuthenticationTypeB,
   AuthenticationTypeA,
+  DescribeScdnIpStrategyResponse,
   OriginAuthenticationTypeA,
   SecurityConfig,
   DescribePushTasksResponse,
@@ -189,6 +191,7 @@ import {
   DescribeScdnTopDataRequest,
   DescribeUrlViolationsRequest,
   RefererRule,
+  DescribeScdnIpStrategyRequest,
   ScdnCCRules,
   IpFreqLimit,
   ScdnDdosConfig,
@@ -201,6 +204,7 @@ import {
   DescribeTrafficPackagesResponse,
   DescribeMapInfoRequest,
   EnableCachesResponse,
+  ScdnIpStrategy,
   RuleQueryString,
   AdvancedScdnAclRule,
   DescribeIpVisitRequest,
@@ -831,6 +835,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void
   ): Promise<DescribeDiagnoseReportResponse> {
     return this.request("DescribeDiagnoseReport", req, cb)
+  }
+
+  /**
+   * 查询在SCDN IP安全策略
+   */
+  async DescribeScdnIpStrategy(
+    req: DescribeScdnIpStrategyRequest,
+    cb?: (error: string, rep: DescribeScdnIpStrategyResponse) => void
+  ): Promise<DescribeScdnIpStrategyResponse> {
+    return this.request("DescribeScdnIpStrategy", req, cb)
   }
 
   /**

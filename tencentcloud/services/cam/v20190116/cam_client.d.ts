@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ListAttachedRolePoliciesResponse, ListAccessKeysRequest, SetMfaFlagResponse, DeleteUserRequest, DetachGroupPolicyRequest, DescribeRoleListResponse, CreatePolicyResponse, GetRoleRequest, CreateServiceLinkedRoleRequest, ListAttachedGroupPoliciesRequest, ListGroupsForUserRequest, AttachRolePolicyResponse, GetServiceLinkedRoleDeletionStatusResponse, GetSecurityLastUsedRequest, DeleteUserPermissionsBoundaryResponse, ListUsersResponse, UpdateRoleDescriptionResponse, GetAccountSummaryRequest, DetachUserPolicyRequest, ListGroupsResponse, ListPolicyVersionsRequest, GetCustomMFATokenInfoRequest, DescribeRoleListRequest, GetGroupRequest, DeleteRoleResponse, DescribeSubAccountsRequest, DeleteUserPermissionsBoundaryRequest, ListSAMLProvidersRequest, ListGroupsRequest, DeletePolicyVersionResponse, UpdateSAMLProviderRequest, UpdateAssumeRolePolicyRequest, ListGroupsForUserResponse, ListUsersForGroupRequest, RemoveUserFromGroupRequest, CreatePolicyVersionResponse, ListPoliciesResponse, UpdateRoleDescriptionRequest, DeleteGroupResponse, DescribeSafeAuthFlagResponse, CreatePolicyVersionRequest, DeleteGroupRequest, GetUserResponse, DeleteUserResponse, DetachRolePolicyRequest, ListPoliciesGrantingServiceAccessResponse, DeleteRolePermissionsBoundaryRequest, DeletePolicyRequest, AddUserRequest, DeleteRoleRequest, ListWeChatWorkSubAccountsRequest, UpdateRoleConsoleLoginRequest, GetCustomMFATokenInfoResponse, UpdateAssumeRolePolicyResponse, GetPolicyVersionRequest, CreateSAMLProviderResponse, DeleteRolePermissionsBoundaryResponse, GetUserRequest, CreateGroupRequest, ListPoliciesGrantingServiceAccessRequest, UpdateSAMLProviderResponse, UpdateUserRequest, ListWeChatWorkSubAccountsResponse, CreateSAMLProviderRequest, PutRolePermissionsBoundaryRequest, UpdateRoleConsoleLoginResponse, AttachRolePolicyRequest, ConsumeCustomMFATokenResponse, AttachUserPolicyRequest, ListAttachedGroupPoliciesResponse, ListAttachedUserPoliciesResponse, PutUserPermissionsBoundaryResponse, DeletePolicyResponse, ConsumeCustomMFATokenRequest, GetGroupResponse, DeleteSAMLProviderRequest, DeleteSAMLProviderResponse, UpdateUserResponse, GetAccountSummaryResponse, CreateServiceLinkedRoleResponse, ListUsersRequest, ListCollaboratorsRequest, UpdatePolicyResponse, AttachGroupPolicyResponse, UpdateGroupResponse, ListEntitiesForPolicyRequest, ListPoliciesRequest, GetServiceLinkedRoleDeletionStatusRequest, DetachGroupPolicyResponse, CreatePolicyRequest, DeletePolicyVersionRequest, UpdateGroupRequest, GetPolicyVersionResponse, CreateRoleResponse, GetSAMLProviderResponse, DescribeSafeAuthFlagIntlResponse, ListPolicyVersionsResponse, GetPolicyRequest, DescribeSafeAuthFlagIntlRequest, SetDefaultPolicyVersionRequest, AddUserToGroupRequest, RemoveUserFromGroupResponse, DetachRolePolicyResponse, PutUserPermissionsBoundaryRequest, ListSAMLProvidersResponse, SetDefaultPolicyVersionResponse, ListAttachedRolePoliciesRequest, GetSAMLProviderRequest, DetachUserPolicyResponse, GetRoleResponse, CreateRoleRequest, DeleteServiceLinkedRoleResponse, GetPolicyResponse, DescribeSafeAuthFlagRequest, AttachGroupPolicyRequest, DeleteServiceLinkedRoleRequest, ListUsersForGroupResponse, AddUserResponse, DescribeSubAccountsResponse, ListEntitiesForPolicyResponse, AddUserToGroupResponse, AttachUserPolicyResponse, DescribeSafeAuthFlagCollResponse, DescribeSafeAuthFlagCollRequest, PutRolePermissionsBoundaryResponse, SetMfaFlagRequest, ListCollaboratorsResponse, ListAccessKeysResponse, GetSecurityLastUsedResponse, ListAttachedUserPoliciesRequest, UpdatePolicyRequest, CreateGroupResponse } from "./cam_models";
+import { ListAttachedRolePoliciesResponse, ListAccessKeysRequest, SetMfaFlagResponse, DeleteUserRequest, DetachGroupPolicyRequest, DescribeRoleListResponse, CreatePolicyResponse, GetRoleRequest, CreateServiceLinkedRoleRequest, ListAttachedGroupPoliciesRequest, ListGroupsForUserRequest, AttachRolePolicyResponse, GetServiceLinkedRoleDeletionStatusResponse, GetSecurityLastUsedRequest, DescribeUserSAMLConfigResponse, DeleteUserPermissionsBoundaryResponse, ListUsersResponse, UpdateRoleDescriptionResponse, GetAccountSummaryRequest, DetachUserPolicyRequest, ListGroupsResponse, ListPolicyVersionsRequest, GetCustomMFATokenInfoRequest, DescribeRoleListRequest, DescribeUserSAMLConfigRequest, GetGroupRequest, DeleteRoleResponse, DescribeSubAccountsRequest, DeleteUserPermissionsBoundaryRequest, ListSAMLProvidersRequest, ListGroupsRequest, DeletePolicyVersionResponse, UpdateSAMLProviderRequest, UpdateAssumeRolePolicyRequest, ListGroupsForUserResponse, ListUsersForGroupRequest, RemoveUserFromGroupRequest, CreatePolicyVersionResponse, ListPoliciesResponse, UpdateRoleDescriptionRequest, UpdateUserSAMLConfigRequest, DeleteGroupResponse, DescribeSafeAuthFlagResponse, CreatePolicyVersionRequest, DeleteGroupRequest, GetUserResponse, DeleteUserResponse, DetachRolePolicyRequest, ListPoliciesGrantingServiceAccessResponse, DeleteRolePermissionsBoundaryRequest, DeletePolicyRequest, AddUserRequest, DeleteRoleRequest, ListWeChatWorkSubAccountsRequest, UpdateRoleConsoleLoginRequest, GetCustomMFATokenInfoResponse, UpdateAssumeRolePolicyResponse, GetPolicyVersionRequest, CreateSAMLProviderResponse, DeleteRolePermissionsBoundaryResponse, GetUserRequest, CreateGroupRequest, ListPoliciesGrantingServiceAccessRequest, UpdateSAMLProviderResponse, UpdateUserRequest, ListWeChatWorkSubAccountsResponse, CreateSAMLProviderRequest, PutRolePermissionsBoundaryRequest, UpdateRoleConsoleLoginResponse, AttachRolePolicyRequest, ConsumeCustomMFATokenResponse, AttachUserPolicyRequest, ListAttachedGroupPoliciesResponse, ListAttachedUserPoliciesResponse, PutUserPermissionsBoundaryResponse, DeletePolicyResponse, ConsumeCustomMFATokenRequest, GetGroupResponse, DeleteSAMLProviderRequest, DeleteSAMLProviderResponse, UpdateUserResponse, GetAccountSummaryResponse, CreateServiceLinkedRoleResponse, ListUsersRequest, ListCollaboratorsRequest, UpdatePolicyResponse, AttachGroupPolicyResponse, UpdateGroupResponse, ListEntitiesForPolicyRequest, ListPoliciesRequest, GetServiceLinkedRoleDeletionStatusRequest, DetachGroupPolicyResponse, CreatePolicyRequest, DeletePolicyVersionRequest, CreateUserSAMLConfigRequest, UpdateGroupRequest, GetPolicyVersionResponse, CreateRoleResponse, GetSAMLProviderResponse, DescribeSafeAuthFlagIntlResponse, ListPolicyVersionsResponse, GetPolicyRequest, DescribeSafeAuthFlagIntlRequest, SetDefaultPolicyVersionRequest, AddUserToGroupRequest, RemoveUserFromGroupResponse, DetachRolePolicyResponse, PutUserPermissionsBoundaryRequest, ListSAMLProvidersResponse, SetDefaultPolicyVersionResponse, ListAttachedRolePoliciesRequest, GetSAMLProviderRequest, DetachUserPolicyResponse, GetRoleResponse, CreateRoleRequest, DeleteServiceLinkedRoleResponse, GetPolicyResponse, DescribeSafeAuthFlagRequest, AttachGroupPolicyRequest, DeleteServiceLinkedRoleRequest, ListUsersForGroupResponse, AddUserResponse, CreateUserSAMLConfigResponse, DescribeSubAccountsResponse, ListEntitiesForPolicyResponse, AddUserToGroupResponse, UpdateUserSAMLConfigResponse, AttachUserPolicyResponse, DescribeSafeAuthFlagCollResponse, DescribeSafeAuthFlagCollRequest, PutRolePermissionsBoundaryResponse, SetMfaFlagRequest, ListCollaboratorsResponse, ListAccessKeysResponse, GetSecurityLastUsedResponse, ListAttachedUserPoliciesRequest, UpdatePolicyRequest, CreateGroupResponse } from "./cam_models";
 /**
  * cam client
  * @class
@@ -64,6 +64,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteRolePermissionsBoundary(req: DeleteRolePermissionsBoundaryRequest, cb?: (error: string, rep: DeleteRolePermissionsBoundaryResponse) => void): Promise<DeleteRolePermissionsBoundaryResponse>;
     /**
+     * 查询用户SAML配置
+     */
+    DescribeUserSAMLConfig(req?: DescribeUserSAMLConfigRequest, cb?: (error: string, rep: DescribeUserSAMLConfigResponse) => void): Promise<DescribeUserSAMLConfigResponse>;
+    /**
      * 本接口（DeletePolicyVersion）可用于删除一个策略的策略版本。
      */
     DeletePolicyVersion(req: DeletePolicyVersionRequest, cb?: (error: string, rep: DeletePolicyVersionResponse) => void): Promise<DeletePolicyVersionResponse>;
@@ -71,6 +75,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DetachRolePolicy）用于解除绑定角色的策略。
      */
     DetachRolePolicy(req: DetachRolePolicyRequest, cb?: (error: string, rep: DetachRolePolicyResponse) => void): Promise<DetachRolePolicyResponse>;
+    /**
+     * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+     */
+    SetDefaultPolicyVersion(req: SetDefaultPolicyVersionRequest, cb?: (error: string, rep: SetDefaultPolicyVersionResponse) => void): Promise<SetDefaultPolicyVersionResponse>;
     /**
      * 本接口（DescribeRoleList）用于获取账号下的角色列表。
      */
@@ -148,9 +156,9 @@ export declare class Client extends AbstractClient {
      */
     UpdateAssumeRolePolicy(req: UpdateAssumeRolePolicyRequest, cb?: (error: string, rep: UpdateAssumeRolePolicyResponse) => void): Promise<UpdateAssumeRolePolicyResponse>;
     /**
-     * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
+     * 创建用户SAML配置
      */
-    SetDefaultPolicyVersion(req: SetDefaultPolicyVersionRequest, cb?: (error: string, rep: SetDefaultPolicyVersionResponse) => void): Promise<SetDefaultPolicyVersionResponse>;
+    CreateUserSAMLConfig(req: CreateUserSAMLConfigRequest, cb?: (error: string, rep: CreateUserSAMLConfigResponse) => void): Promise<CreateUserSAMLConfigResponse>;
     /**
      * 查询用户组列表
      */
@@ -199,6 +207,10 @@ export declare class Client extends AbstractClient {
      * 删除子用户
      */
     DeleteUser(req: DeleteUserRequest, cb?: (error: string, rep: DeleteUserResponse) => void): Promise<DeleteUserResponse>;
+    /**
+     * 修改用户SAML配置
+     */
+    UpdateUserSAMLConfig(req: UpdateUserSAMLConfigRequest, cb?: (error: string, rep: UpdateUserSAMLConfigResponse) => void): Promise<UpdateUserSAMLConfigResponse>;
     /**
      * 该接口（CreatePolicyVersion）用于新增策略版本，用户创建了一个策略版本之后可以方便的通过变更策略版本的方式来变更策略。
      */

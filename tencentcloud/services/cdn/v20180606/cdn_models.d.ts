@@ -1542,6 +1542,24 @@ complain：申诉进行中
     UpdateTime: string;
 }
 /**
+ * IP策略查询过滤参数
+ */
+export interface ScdnIpStrategyFilter {
+    /**
+      * 过滤字段名，支持domain, ip
+      */
+    Name: string;
+    /**
+      * 过滤字段值
+      */
+    Value: Array<string>;
+    /**
+      * 是否启用模糊查询，仅支持过滤字段名为domain。
+模糊查询时，Value长度最大为1
+      */
+    Fuzzy?: boolean;
+}
+/**
  * DescribeDomainsConfig请求参数结构体
  */
 export interface DescribeDomainsConfigRequest {
@@ -3506,6 +3524,25 @@ blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
     FilterType: string;
 }
 /**
+ * DescribeScdnIpStrategy返回参数结构体
+ */
+export interface DescribeScdnIpStrategyResponse {
+    /**
+      * IP策略列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IpStrategyList?: Array<ScdnIpStrategy>;
+    /**
+      * 配置的策略条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 回源鉴权高级配置TypeA
  */
 export interface OriginAuthenticationTypeA {
@@ -5102,6 +5139,31 @@ false：不允许空 referer
     AllowEmpty: boolean;
 }
 /**
+ * DescribeScdnIpStrategy请求参数结构体
+ */
+export interface DescribeScdnIpStrategyRequest {
+    /**
+      * 分页起始地址
+      */
+    Offset?: number;
+    /**
+      * 列表分页记录条数，最大1000
+      */
+    Limit?: number;
+    /**
+      * 查询条件过滤器
+      */
+    Filters?: Array<ScdnIpStrategyFilter>;
+    /**
+      * 指定查询返回结果的排序字段，支持domain，update_time
+      */
+    Order?: string;
+    /**
+      * 排序方式，支持asc，desc
+      */
+    Sequence?: string;
+}
+/**
  * scdn 的自定义 cc 规则
  */
 export interface ScdnCCRules {
@@ -5336,6 +5398,41 @@ export interface EnableCachesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * scdn的IP白名单策略
+ */
+export interface ScdnIpStrategy {
+    /**
+      * 域名|global表示全部域名
+      */
+    Domain: string;
+    /**
+      * 策略ID
+      */
+    StrategyId: string;
+    /**
+      * IP白名单列表
+      */
+    IpList: Array<string>;
+    /**
+      * 更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 备注
+      */
+    Remark: string;
+    /**
+      * 规则类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleType: string;
+    /**
+      * 规则值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleValue: Array<string>;
 }
 /**
  * 路径保留参数配置
@@ -7296,6 +7393,12 @@ blacklist：黑名单
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FilterRules?: Array<IpFilterPathRule>;
+    /**
+      * IP 黑白名单验证失败时返回的 HTTP Code
+合法值: 400~499
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReturnCode?: number;
 }
 /**
  * SCDN访问控制

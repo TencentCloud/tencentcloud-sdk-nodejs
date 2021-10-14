@@ -158,6 +158,16 @@ it("cam.v20190116.DeleteRolePermissionsBoundary", async function () {
     }
 })
 
+it("cam.v20190116.DescribeUserSAMLConfig", async function () {
+    try {
+       const data = await client.DescribeUserSAMLConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.DeletePolicyVersion", async function () {
     try {
        const data = await client.DeletePolicyVersion({})
@@ -171,6 +181,16 @@ it("cam.v20190116.DeletePolicyVersion", async function () {
 it("cam.v20190116.DetachRolePolicy", async function () {
     try {
        const data = await client.DetachRolePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.SetDefaultPolicyVersion", async function () {
+    try {
+       const data = await client.SetDefaultPolicyVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +388,9 @@ it("cam.v20190116.UpdateAssumeRolePolicy", async function () {
     }
 })
 
-it("cam.v20190116.SetDefaultPolicyVersion", async function () {
+it("cam.v20190116.CreateUserSAMLConfig", async function () {
     try {
-       const data = await client.SetDefaultPolicyVersion({})
+       const data = await client.CreateUserSAMLConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +511,16 @@ it("cam.v20190116.ListAttachedUserPolicies", async function () {
 it("cam.v20190116.DeleteUser", async function () {
     try {
        const data = await client.DeleteUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.UpdateUserSAMLConfig", async function () {
+    try {
+       const data = await client.UpdateUserSAMLConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
