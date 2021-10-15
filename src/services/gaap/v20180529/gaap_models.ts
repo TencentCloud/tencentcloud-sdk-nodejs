@@ -28,6 +28,21 @@ export interface RegionDetail {
    * 区域英文名或中文名
    */
   RegionName: string
+
+  /**
+   * 机房所属大区
+   */
+  RegionArea: string
+
+  /**
+   * 机房所属大区名
+   */
+  RegionAreaName: string
+
+  /**
+   * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
+   */
+  IDCType: string
 }
 
 /**
@@ -1209,63 +1224,48 @@ export interface DescribeProxyDetailRequest {
 }
 
 /**
- * ModifyTCPListenerAttribute请求参数结构体
+ * ip信息详情
  */
-export interface ModifyTCPListenerAttributeRequest {
+export interface IPDetail {
   /**
-   * 监听器ID
+   * IP字符串
    */
-  ListenerId: string
+  IP: string
 
   /**
-   * 通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+   * 供应商，BGP表示默认，CMCC表示中国移动，CUCC表示中国联通，CTCC表示中国电信
    */
-  GroupId?: string
+  Provider: string
 
   /**
-   * 通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+   * 带宽
    */
-  ProxyId?: string
+  Bandwidth: number
+}
+
+/**
+ * 通道状态信息
+ */
+export interface ProxyStatus {
+  /**
+   * 通道实例ID。
+   */
+  InstanceId: string
 
   /**
-   * 监听器名称
-   */
-  ListenerName?: string
-
-  /**
-   * 监听器源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）。
-   */
-  Scheduler?: string
-
-  /**
-   * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
-   */
-  DelayLoop?: number
-
-  /**
-   * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
-   */
-  ConnectTimeout?: number
-
-  /**
-   * 是否开启健康检查，1开启，0关闭。
-   */
-  HealthCheck?: number
-
-  /**
-   * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
-   */
-  FailoverSwitch?: number
-
-  /**
-   * 健康阈值，表示连续检查成功多少次数后认定源站健康。范围为1到10
-   */
-  HealthyThreshold?: number
-
-  /**
-   * 不健康阈值，表示连续检查失败次数后认定源站不健康。范围为1到10
-   */
-  UnhealthyThreshold?: number
+      * 通道状态。
+其中：
+RUNNING表示运行中；
+CREATING表示创建中；
+DESTROYING表示销毁中；
+OPENING表示开启中；
+CLOSING表示关闭中；
+CLOSED表示已关闭；
+ADJUSTING表示配置变更中；
+ISOLATING表示隔离中；
+ISOLATED表示已隔离。
+      */
+  Status: string
 }
 
 /**
@@ -1505,6 +1505,12 @@ export interface RealServerStatus {
    * 绑定此源站的通道ID，没有绑定时为空字符串。
    */
   ProxyId: string
+
+  /**
+      * 绑定此源站的通道组ID，没有绑定时为空字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
 }
 
 /**
@@ -1801,6 +1807,24 @@ IPAddressVersion - String - 是否必填：否 - （过滤条件）按照IP版�
 不存在该字段时，拉取所有通道，包括独立通道和通道组通道。
       */
   Independent?: number
+
+  /**
+      * 输出通道列表的排列顺序。取值范围：
+asc：升序排列
+desc：降序排列。
+默认为降序。
+      */
+  Order?: string
+
+  /**
+      * 通道列表排序的依据字段。取值范围：
+create_time：依据通道的创建时间排序
+proxy_id：依据通道的ID排序
+bandwidth：依据通道带宽上限排序
+concurrent_connections：依据通道并发排序
+默认按通道创建时间排序。
+      */
+  OrderField?: string
 }
 
 /**
@@ -2427,29 +2451,63 @@ export interface DescribeProxiesStatusRequest {
 }
 
 /**
- * 通道状态信息
+ * ModifyTCPListenerAttribute请求参数结构体
  */
-export interface ProxyStatus {
+export interface ModifyTCPListenerAttributeRequest {
   /**
-   * 通道实例ID。
+   * 监听器ID
    */
-  InstanceId: string
+  ListenerId: string
 
   /**
-      * 通道状态。
-其中：
-RUNNING表示运行中；
-CREATING表示创建中；
-DESTROYING表示销毁中；
-OPENING表示开启中；
-CLOSING表示关闭中；
-CLOSED表示已关闭；
-ADJUSTING表示配置变更中；
-ISOLATING表示隔离中；
-ISOLATED表示已隔离；
-UNKNOWN表示未知状态。
-      */
-  Status: string
+   * 通道组ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+   */
+  GroupId?: string
+
+  /**
+   * 通道ID，ProxyId和GroupId必须设置一个，但不能同时设置。
+   */
+  ProxyId?: string
+
+  /**
+   * 监听器名称
+   */
+  ListenerName?: string
+
+  /**
+   * 监听器源站调度策略，支持轮询（rr），加权轮询（wrr），最小连接数（lc）。
+   */
+  Scheduler?: string
+
+  /**
+   * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
+   */
+  DelayLoop?: number
+
+  /**
+   * 源站健康检查响应超时时间，单位：秒。超时时间取值在[2，60]之间。超时时间应小于健康检查时间间隔DelayLoop。
+   */
+  ConnectTimeout?: number
+
+  /**
+   * 是否开启健康检查，1开启，0关闭。
+   */
+  HealthCheck?: number
+
+  /**
+   * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+   */
+  FailoverSwitch?: number
+
+  /**
+   * 健康阈值，表示连续检查成功多少次数后认定源站健康。范围为1到10
+   */
+  HealthyThreshold?: number
+
+  /**
+   * 不健康阈值，表示连续检查失败次数后认定源站不健康。范围为1到10
+   */
+  UnhealthyThreshold?: number
 }
 
 /**
@@ -3882,6 +3940,21 @@ export interface AccessRegionDetial {
    * 可选的带宽取值数组
    */
   BandwidthList: Array<number>
+
+  /**
+   * 机房所属大区
+   */
+  RegionArea: string
+
+  /**
+   * 机房所属大区名
+   */
+  RegionAreaName: string
+
+  /**
+   * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
+   */
+  IDCType: string
 }
 
 /**
@@ -5144,8 +5217,7 @@ CLOSED表示已关闭；
 ADJUSTING表示配置变更中；
 ISOLATING表示隔离中；
 ISOLATED表示已隔离；
-CLONING表示复制中；
-UNKNOWN表示未知状态。
+CLONING表示复制中。
       */
   Status: string
 
@@ -5258,7 +5330,7 @@ UNKNOWN表示未知状态。
   IPAddressVersion: string
 
   /**
-      * 网络类型：normal、cn2
+      * 网络类型：normal表示常规BGP，cn2表示精品BGP，triple表示三网
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetworkType: string
@@ -5274,6 +5346,12 @@ UNKNOWN表示未知状态。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BanStatus: string
+
+  /**
+      * IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IPList: Array<IPDetail>
 }
 
 /**

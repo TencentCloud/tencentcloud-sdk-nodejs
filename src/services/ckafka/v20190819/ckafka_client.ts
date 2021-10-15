@@ -45,6 +45,7 @@ import {
   ZoneInfo,
   DescribeTopicSubscribeGroupResponse,
   DescribeCkafkaZoneRequest,
+  SaleInfo,
   Topic,
   Tag,
   GroupResponse,

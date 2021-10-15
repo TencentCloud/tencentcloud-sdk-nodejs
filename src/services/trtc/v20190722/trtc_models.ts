@@ -590,6 +590,11 @@ export interface EncodeParams {
    * 混流-输出流音频编码类型，取值范围[0,1, 2]，0为LC-AAC，1为HE-AAC，2为HE-AACv2。默认值为0。当音频编码设置为HE-AACv2时，只支持输出流音频声道数为双声道。HE-AAC和HE-AACv2支持的输出流音频采样率范围为[48000, 44100, 32000, 24000, 16000]
    */
   AudioCodec?: number
+
+  /**
+   * 混流-输出流背景图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。BackgroundImageUrl和BackgroundImageId参数都填时，以BackgroundImageUrl为准。图片大小限制不超过10MB。
+   */
+  BackgroundImageUrl?: string
 }
 
 /**
@@ -1703,6 +1708,11 @@ export interface WaterMarkParams {
    * 水印在输出时的Y偏移。单位为像素值。
    */
   LocationY: number
+
+  /**
+   * 混流-水印图片URL地址，支持png、jpg、jpeg、bmp格式，暂不支持透明通道。URL链接长度限制为512字节。WaterMarkUrl和WaterMarkId参数都填时，以WaterMarkUrl为准。图片大小限制不超过10MB。
+   */
+  WaterMarkUrl?: string
 }
 
 /**

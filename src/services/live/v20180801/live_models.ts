@@ -3624,7 +3624,7 @@ export interface PushDataInfo {
   VideoFps: number
 
   /**
-   * 推流视频码率，单位: bps。
+   * 推流视频码率，单位: Kbps。
    */
   VideoSpeed: number
 
@@ -3634,7 +3634,7 @@ export interface PushDataInfo {
   AudioFps: number
 
   /**
-   * 推流音频码率，单位: bps。
+   * 推流音频码率，单位: Kbps。
    */
   AudioSpeed: number
 
@@ -6751,7 +6751,7 @@ export interface CreateLiveSnapshotTemplateRequest {
 
   /**
       * 截图间隔，单位s，默认10s。
-范围： 5s ~ 300s。
+范围： 2s ~ 300s。
       */
   SnapshotInterval?: number
 

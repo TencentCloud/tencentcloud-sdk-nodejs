@@ -45,6 +45,7 @@ import {
   ServiceTemplateGroup,
   CreateDhcpIpResponse,
   DescribeIpGeolocationInfosRequest,
+  AddTemplateMemberResponse,
   CreateDefaultSecurityGroupRequest,
   DescribeServiceTemplateGroupsResponse,
   DescribeVpcEndPointRequest,
@@ -69,6 +70,7 @@ import {
   UnassignIpv6AddressesResponse,
   CreateIp6TranslatorsResponse,
   DescribeFlowLogsRequest,
+  DeleteTemplateMemberRequest,
   CloneSecurityGroupRequest,
   AssociateNatGatewayAddressRequest,
   CreateDirectConnectGatewayRequest,
@@ -165,7 +167,7 @@ import {
   ReferredSecurityGroup,
   ModifyAddressTemplateAttributeRequest,
   CreateNatGatewayResponse,
-  DescribeVpcsResponse,
+  DescribeIp6TranslatorQuotaRequest,
   ModifySecurityGroupAttributeRequest,
   ModifyNetDetectRequest,
   DescribeNetDetectStatesResponse,
@@ -181,6 +183,7 @@ import {
   InstanceStatistic,
   CreateVpnConnectionRequest,
   CcnRoute,
+  ModifyIpv6AddressesAttributeResponse,
   DeleteSecurityGroupPoliciesRequest,
   VpnConnection,
   DescribeCcnsRequest,
@@ -252,7 +255,7 @@ import {
   CreateServiceTemplateGroupResponse,
   NetDetect,
   VpnGatewayRouteModify,
-  ModifyIpv6AddressesAttributeResponse,
+  MemberInfo,
   ReplaceSecurityGroupPolicyRequest,
   ModifyVpcEndPointServiceAttributeResponse,
   ResourceDashboard,
@@ -283,10 +286,11 @@ import {
   ModifyNetworkInterfaceAttributeResponse,
   CreateSecurityGroupResponse,
   DisassociateNetworkInterfaceSecurityGroupsResponse,
-  DescribeIp6TranslatorQuotaRequest,
+  DescribeVpcsResponse,
   DescribeNetworkInterfaceLimitResponse,
   AssignIpv6CidrBlockResponse,
   CreateCcnRequest,
+  DeleteTemplateMemberResponse,
   ModifyNatGatewaySourceIpTranslationNatRuleRequest,
   RemoveIp6RulesRequest,
   DescribeIpGeolocationDatabaseUrlRequest,
@@ -383,6 +387,7 @@ import {
   CreateVpcEndPointResponse,
   DeleteAssistantCidrResponse,
   DescribeCcnRegionBandwidthLimitsResponse,
+  ModifyTemplateMemberRequest,
   DescribeAddressesResponse,
   GatewayQos,
   ModifyIpv6AddressesAttributeRequest,
@@ -432,7 +437,7 @@ import {
   ModifyAddressAttributeRequest,
   DhcpIp,
   DeleteAssistantCidrRequest,
-  ModifyVpcEndPointServiceWhiteListResponse,
+  ModifyTemplateMemberResponse,
   SubnetInput,
   DescribeNatGatewayDirectConnectGatewayRouteResponse,
   EnableVpcEndPointConnectResponse,
@@ -626,9 +631,11 @@ import {
   NotifyRoutesResponse,
   Route,
   ModifySubnetAttributeRequest,
+  ModifyVpcEndPointServiceWhiteListResponse,
   DescribeBandwidthPackageQuotaRequest,
   DeleteVpcResponse,
   DescribeTemplateLimitsRequest,
+  AddTemplateMemberRequest,
   DescribeVpcEndPointServiceWhiteListResponse,
   AcceptAttachCcnInstancesResponse,
   InstanceChargePrepaid,
@@ -832,6 +839,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyFlowLogAttributeResponse) => void
   ): Promise<ModifyFlowLogAttributeResponse> {
     return this.request("ModifyFlowLogAttribute", req, cb)
+  }
+
+  /**
+   * 修改弹性网卡服务质量
+   */
+  async ModifyNetworkInterfaceQos(
+    req: ModifyNetworkInterfaceQosRequest,
+    cb?: (error: string, rep: ModifyNetworkInterfaceQosResponse) => void
+  ): Promise<ModifyNetworkInterfaceQosResponse> {
+    return this.request("ModifyNetworkInterfaceQos", req, cb)
   }
 
   /**
@@ -1395,13 +1412,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改弹性网卡服务质量
+   * 删除模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
    */
-  async ModifyNetworkInterfaceQos(
-    req: ModifyNetworkInterfaceQosRequest,
-    cb?: (error: string, rep: ModifyNetworkInterfaceQosResponse) => void
-  ): Promise<ModifyNetworkInterfaceQosResponse> {
-    return this.request("ModifyNetworkInterfaceQos", req, cb)
+  async DeleteTemplateMember(
+    req: DeleteTemplateMemberRequest,
+    cb?: (error: string, rep: DeleteTemplateMemberResponse) => void
+  ): Promise<DeleteTemplateMemberResponse> {
+    return this.request("DeleteTemplateMember", req, cb)
   }
 
   /**
@@ -1422,6 +1439,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGatewayFlowQosResponse) => void
   ): Promise<DescribeGatewayFlowQosResponse> {
     return this.request("DescribeGatewayFlowQos", req, cb)
+  }
+
+  /**
+   * 修改模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+   */
+  async ModifyTemplateMember(
+    req: ModifyTemplateMemberRequest,
+    cb?: (error: string, rep: ModifyTemplateMemberResponse) => void
+  ): Promise<ModifyTemplateMemberResponse> {
+    return this.request("ModifyTemplateMember", req, cb)
   }
 
   /**
@@ -2725,6 +2752,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: CreateNatGatewaySourceIpTranslationNatRuleResponse) => void
   ): Promise<CreateNatGatewaySourceIpTranslationNatRuleResponse> {
     return this.request("CreateNatGatewaySourceIpTranslationNatRule", req, cb)
+  }
+
+  /**
+   * 增加模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+   */
+  async AddTemplateMember(
+    req: AddTemplateMemberRequest,
+    cb?: (error: string, rep: AddTemplateMemberResponse) => void
+  ): Promise<AddTemplateMemberResponse> {
+    return this.request("AddTemplateMember", req, cb)
   }
 
   /**

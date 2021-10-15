@@ -666,6 +666,12 @@ export interface ZoneInfo {
    * json对象，key为机型，value true为售罄，false为未售罄
    */
   SoldOut: string
+
+  /**
+      * 标准版售罄信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SalesInfo: Array<SaleInfo>
 }
 
 /**
@@ -687,6 +693,35 @@ export interface DescribeTopicSubscribeGroupResponse {
  * DescribeCkafkaZone请求参数结构体
  */
 export type DescribeCkafkaZoneRequest = null
+
+/**
+ * 标准版销售信息
+ */
+export interface SaleInfo {
+  /**
+      * 手动设置的flag标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Flag: boolean
+
+  /**
+      * ckakfa版本号(1.1.1/2.4.2/0.10.2)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version: string
+
+  /**
+      * 专业版、标准版标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Platform: string
+
+  /**
+      * 售罄标志：true售罄
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SoldOut: boolean
+}
 
 /**
  * 返回的topic对象

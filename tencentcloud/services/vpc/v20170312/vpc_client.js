@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyFlowLogAttribute", req, cb);
     }
     /**
+     * 修改弹性网卡服务质量
+     */
+    async ModifyNetworkInterfaceQos(req, cb) {
+        return this.request("ModifyNetworkInterfaceQos", req, cb);
+    }
+    /**
      * 本接口（DisassociateNetworkInterfaceSecurityGroups）用于弹性网卡解绑安全组。支持弹性网卡完全解绑安全组。
      */
     async DisassociateNetworkInterfaceSecurityGroups(req, cb) {
@@ -494,10 +500,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AcceptAttachCcnInstances", req, cb);
     }
     /**
-     * 修改弹性网卡服务质量
+     * 删除模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
      */
-    async ModifyNetworkInterfaceQos(req, cb) {
-        return this.request("ModifyNetworkInterfaceQos", req, cb);
+    async DeleteTemplateMember(req, cb) {
+        return this.request("DeleteTemplateMember", req, cb);
     }
     /**
      * 本接口（DeleteServiceTemplateGroup）用于删除协议端口模板集合
@@ -510,6 +516,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeGatewayFlowQos(req, cb) {
         return this.request("DescribeGatewayFlowQos", req, cb);
+    }
+    /**
+     * 修改模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     */
+    async ModifyTemplateMember(req, cb) {
+        return this.request("ModifyTemplateMember", req, cb);
     }
     /**
      * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
@@ -1349,6 +1361,12 @@ LimitTypes取值范围：
      */
     async CreateNatGatewaySourceIpTranslationNatRule(req, cb) {
         return this.request("CreateNatGatewaySourceIpTranslationNatRule", req, cb);
+    }
+    /**
+     * 增加模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     */
+    async AddTemplateMember(req, cb) {
+        return this.request("AddTemplateMember", req, cb);
     }
     /**
      * 1. 该接口用于删除IPV6转换规则

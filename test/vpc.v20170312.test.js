@@ -198,6 +198,16 @@ it("vpc.v20170312.ModifyFlowLogAttribute", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyNetworkInterfaceQos", async function () {
+    try {
+       const data = await client.ModifyNetworkInterfaceQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DisassociateNetworkInterfaceSecurityGroups", async function () {
     try {
        const data = await client.DisassociateNetworkInterfaceSecurityGroups({})
@@ -718,9 +728,9 @@ it("vpc.v20170312.AcceptAttachCcnInstances", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyNetworkInterfaceQos", async function () {
+it("vpc.v20170312.DeleteTemplateMember", async function () {
     try {
-       const data = await client.ModifyNetworkInterfaceQos({})
+       const data = await client.DeleteTemplateMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +751,16 @@ it("vpc.v20170312.DeleteServiceTemplateGroup", async function () {
 it("vpc.v20170312.DescribeGatewayFlowQos", async function () {
     try {
        const data = await client.DescribeGatewayFlowQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyTemplateMember", async function () {
+    try {
+       const data = await client.ModifyTemplateMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1901,6 +1921,16 @@ it("vpc.v20170312.HaVipAssociateAddressIp", async function () {
 it("vpc.v20170312.CreateNatGatewaySourceIpTranslationNatRule", async function () {
     try {
        const data = await client.CreateNatGatewaySourceIpTranslationNatRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.AddTemplateMember", async function () {
+    try {
+       const data = await client.AddTemplateMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

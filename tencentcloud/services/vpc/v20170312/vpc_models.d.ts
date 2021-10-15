@@ -472,6 +472,15 @@ export interface DescribeIpGeolocationInfosRequest {
     Fields?: IpField;
 }
 /**
+ * AddTemplateMember返回参数结构体
+ */
+export interface AddTemplateMemberResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateDefaultSecurityGroup请求参数结构体
  */
 export interface CreateDefaultSecurityGroupRequest {
@@ -978,6 +987,19 @@ export interface DescribeFlowLogsRequest {
 <li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。</li>
       */
     Filters?: Filter;
+}
+/**
+ * DeleteTemplateMember请求参数结构体
+ */
+export interface DeleteTemplateMemberRequest {
+    /**
+      * 参数模板实例ID，支持IP地址、协议端口、IP地址组、协议端口组四种参数模板的实例ID。
+      */
+    TemplateId: string;
+    /**
+      * 需要添加的参数模板成员信息，支持IP地址、协议端口、IP地址组、协议端口组四种类型，类型需要与TemplateId参数类型一致。
+      */
+    TemplateMember: Array<MemberInfo>;
 }
 /**
  * CloneSecurityGroup请求参数结构体
@@ -2626,21 +2648,13 @@ export interface CreateNatGatewayResponse {
     RequestId?: string;
 }
 /**
- * DescribeVpcs返回参数结构体
+ * DescribeIp6TranslatorQuota请求参数结构体
  */
-export interface DescribeVpcsResponse {
+export interface DescribeIp6TranslatorQuotaRequest {
     /**
-      * 符合条件的对象数。
+      * 待查询IPV6转换实例的唯一ID列表，形如ip6-xxxxxxxx
       */
-    TotalCount: number;
-    /**
-      * VPC对象。
-      */
-    VpcSet: Array<Vpc>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Ip6TranslatorIds?: Array<string>;
 }
 /**
  * ModifySecurityGroupAttribute请求参数结构体
@@ -2997,6 +3011,15 @@ export interface CcnRoute {
       * 下一跳扩展名称（关联实例的扩展名称）
       */
     InstanceExtraName: string;
+}
+/**
+ * ModifyIpv6AddressesAttribute返回参数结构体
+ */
+export interface ModifyIpv6AddressesAttributeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteSecurityGroupPolicies请求参数结构体
@@ -4400,13 +4423,17 @@ export interface VpnGatewayRouteModify {
     Status: string;
 }
 /**
- * ModifyIpv6AddressesAttribute返回参数结构体
+ * 模板对象成员信息
  */
-export interface ModifyIpv6AddressesAttributeResponse {
+export interface MemberInfo {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 模板对象成员
       */
-    RequestId?: string;
+    Member: string;
+    /**
+      * 模板对象成员描述信息
+      */
+    Description?: string;
 }
 /**
  * ReplaceSecurityGroupPolicy请求参数结构体
@@ -5049,13 +5076,21 @@ export interface DisassociateNetworkInterfaceSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * DescribeIp6TranslatorQuota请求参数结构体
+ * DescribeVpcs返回参数结构体
  */
-export interface DescribeIp6TranslatorQuotaRequest {
+export interface DescribeVpcsResponse {
     /**
-      * 待查询IPV6转换实例的唯一ID列表，形如ip6-xxxxxxxx
+      * 符合条件的对象数。
       */
-    Ip6TranslatorIds?: Array<string>;
+    TotalCount: number;
+    /**
+      * VPC对象。
+      */
+    VpcSet: Array<Vpc>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeNetworkInterfaceLimit返回参数结构体
@@ -5125,6 +5160,15 @@ export interface CreateCcnRequest {
       * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
       */
     Tags?: Array<Tag>;
+}
+/**
+ * DeleteTemplateMember返回参数结构体
+ */
+export interface DeleteTemplateMemberResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyNatGatewaySourceIpTranslationNatRule请求参数结构体
@@ -7017,6 +7061,23 @@ export interface DescribeCcnRegionBandwidthLimitsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyTemplateMember请求参数结构体
+ */
+export interface ModifyTemplateMemberRequest {
+    /**
+      * 参数模板实例ID，支持IP地址、协议端口、IP地址组、协议端口组四种参数模板的实例ID。
+      */
+    TemplateId: string;
+    /**
+      * 需要修改的参数模板成员信息，支持IP地址、协议端口、IP地址组、协议端口组四种类型，类型需要与TemplateId参数类型一致，修改顺序与TemplateMember参数顺序一一对应，入参长度需要与TemplateMember参数保持一致。
+      */
+    OriginalTemplateMember: Array<MemberInfo>;
+    /**
+      * 新的参数模板成员信息，支持IP地址、协议端口、IP地址组、协议端口组四种类型，类型需要与TemplateId参数类型一致，修改顺序与OriginalTemplateMember参数顺序一一对应，入参长度需要与OriginalTemplateMember参数保持一致。
+      */
+    TemplateMember: Array<MemberInfo>;
+}
+/**
  * DescribeAddresses返回参数结构体
  */
 export interface DescribeAddressesResponse {
@@ -7755,9 +7816,9 @@ export interface DeleteAssistantCidrRequest {
     CidrBlocks: Array<string>;
 }
 /**
- * ModifyVpcEndPointServiceWhiteList返回参数结构体
+ * ModifyTemplateMember返回参数结构体
  */
-export interface ModifyVpcEndPointServiceWhiteListResponse {
+export interface ModifyTemplateMemberResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10996,6 +11057,15 @@ export interface ModifySubnetAttributeRequest {
     EnableBroadcast?: string;
 }
 /**
+ * ModifyVpcEndPointServiceWhiteList返回参数结构体
+ */
+export interface ModifyVpcEndPointServiceWhiteListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBandwidthPackageQuota请求参数结构体
  */
 export declare type DescribeBandwidthPackageQuotaRequest = null;
@@ -11012,6 +11082,19 @@ export interface DeleteVpcResponse {
  * DescribeTemplateLimits请求参数结构体
  */
 export declare type DescribeTemplateLimitsRequest = null;
+/**
+ * AddTemplateMember请求参数结构体
+ */
+export interface AddTemplateMemberRequest {
+    /**
+      * 参数模板实例ID，支持IP地址、协议端口、IP地址组、协议端口组四种参数模板的实例ID。
+      */
+    TemplateId: string;
+    /**
+      * 需要添加的参数模板成员信息，支持IP地址、协议端口、IP地址组、协议端口组四种类型，类型需要与TemplateId参数类型一致。
+      */
+    TemplateMember: Array<MemberInfo>;
+}
 /**
  * DescribeVpcEndPointServiceWhiteList返回参数结构体
  */
