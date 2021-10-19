@@ -226,7 +226,7 @@ export declare class Client extends AbstractClient {
     /**
      * 获取设备位置列表
      */
-    DescribeDevicePositionList(req?: DescribeDevicePositionListRequest, cb?: (error: string, rep: DescribeDevicePositionListResponse) => void): Promise<DescribeDevicePositionListResponse>;
+    DescribeDevicePositionList(req: DescribeDevicePositionListRequest, cb?: (error: string, rep: DescribeDevicePositionListResponse) => void): Promise<DescribeDevicePositionListResponse>;
     /**
      * 更新围栏绑定信息
      */

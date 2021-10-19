@@ -38,6 +38,7 @@ import {
   ModifyModelDefinitionRequest,
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
+  ProductDevicesPositionItem,
   DescribeDevicePositionListRequest,
   GetDeviceLocationHistoryResponse,
   UpdateFirmwareResponse,
@@ -54,6 +55,7 @@ import {
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   FenceBindProductItem,
+  DevicePositionItem,
   ListTopicPolicyResponse,
   SearchPositionSpaceResponse,
   DescribePositionFenceListResponse,
@@ -744,7 +746,7 @@ export class Client extends AbstractClient {
    * 获取设备位置列表
    */
   async DescribeDevicePositionList(
-    req?: DescribeDevicePositionListRequest,
+    req: DescribeDevicePositionListRequest,
     cb?: (error: string, rep: DescribeDevicePositionListResponse) => void
   ): Promise<DescribeDevicePositionListResponse> {
     return this.request("DescribeDevicePositionList", req, cb)

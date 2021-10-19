@@ -332,7 +332,7 @@ export interface LogItem {
  */
 export interface SearchLogResponse {
     /**
-      * 加载后续内容的Context
+      * 加载后续内容的Context，过期时间1小时
       */
     Context: string;
     /**
@@ -3118,7 +3118,7 @@ export interface SearchLogRequest {
       */
     Limit?: number;
     /**
-      * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+      * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。过期时间1小时
       */
     Context?: string;
     /**

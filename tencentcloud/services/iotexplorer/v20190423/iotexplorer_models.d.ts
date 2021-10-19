@@ -336,9 +336,43 @@ export interface CallDeviceActionSyncRequest {
     InputParams?: string;
 }
 /**
+ * 产品设备位置信息
+ */
+export interface ProductDevicesPositionItem {
+    /**
+      * 设备位置列表
+      */
+    Items: Array<DevicePositionItem>;
+    /**
+      * 产品标识
+      */
+    ProductId: string;
+    /**
+      * 设备位置数量
+      */
+    Total: number;
+}
+/**
  * DescribeDevicePositionList请求参数结构体
  */
-export declare type DescribeDevicePositionListRequest = null;
+export interface DescribeDevicePositionListRequest {
+    /**
+      * 产品标识列表
+      */
+    ProductIdList: Array<string>;
+    /**
+      * 坐标类型
+      */
+    CoordinateType?: number;
+    /**
+      * 分页偏移
+      */
+    Offset?: number;
+    /**
+      * 分页的大小
+      */
+    Limit?: number;
+}
 /**
  * GetDeviceLocationHistory返回参数结构体
  */
@@ -617,6 +651,27 @@ export interface FenceBindProductItem {
     ProductId: string;
 }
 /**
+ * 设备位置详情
+ */
+export interface DevicePositionItem {
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 位置信息时间
+      */
+    CreateTime: number;
+    /**
+      * 设备经度信息
+      */
+    Longitude: number;
+    /**
+      * 设备纬度信息
+      */
+    Latitude: number;
+}
+/**
  * ListTopicPolicy返回参数结构体
  */
 export interface ListTopicPolicyResponse {
@@ -696,6 +751,14 @@ export interface GetDeviceLocationHistoryRequest {
  * DescribeDevicePositionList返回参数结构体
  */
 export interface DescribeDevicePositionListResponse {
+    /**
+      * 产品设备位置信息列表
+      */
+    Positions: Array<ProductDevicesPositionItem>;
+    /**
+      * 产品设备位置信息的数目
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

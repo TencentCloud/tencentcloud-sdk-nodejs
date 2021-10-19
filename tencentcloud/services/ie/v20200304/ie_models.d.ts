@@ -726,7 +726,7 @@ export interface UrlInfo {
       */
     Format?: number;
     /**
-      * 指定请求资源时，HTTP头部host的值。
+      * 【不再支持】指定请求资源时，HTTP头部host的值。
       */
     Host?: string;
 }
