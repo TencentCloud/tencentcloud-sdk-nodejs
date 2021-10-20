@@ -199,6 +199,29 @@ export interface DescribeMonthPeakNetworkRequest {
 }
 
 /**
+ * 用于描述系统盘。
+ */
+export interface SystemDisk {
+  /**
+      * 硬盘类型。取值范围：
+- LOCAL_BASIC：本地硬盘；
+- CLOUD_PREMIUM：高性能云硬盘；
+默认取值：CLOUD_BASIC。
+      */
+  DiskType?: string
+
+  /**
+   * 硬盘ID。此参数暂不可用。
+   */
+  DiskId?: string
+
+  /**
+   * 硬盘容量大小。单位GB。
+   */
+  DiskSize?: number
+}
+
+/**
  * DescribeNode返回参数结构体
  */
 export interface DescribeNodeResponse {
@@ -3775,6 +3798,16 @@ DELETEFAILED：删除失败。
    * 自定义脚本数据
    */
   UserData: string
+
+  /**
+   * 系统盘信息。
+   */
+  SystemDisk: SystemDisk
+
+  /**
+   * 数据盘信息。
+   */
+  DataDisks: Array<DataDisk>
 }
 
 /**
@@ -4308,6 +4341,16 @@ FALSE：表示不保持镜像的登录设置
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KeepImageLogin?: string
+
+  /**
+   * 系统盘信息。
+   */
+  SystemDisk?: SystemDisk
+
+  /**
+   * 数据盘信息。
+   */
+  DataDisks?: Array<DataDisk>
 }
 
 /**
@@ -4932,6 +4975,11 @@ export interface DescribeConfigResponse {
    */
   RequestId?: string
 }
+
+/**
+ * 描述了数据盘的信息
+ */
+export type DataDisk = null
 
 /**
  * ModifyVpcAttribute返回参数结构体
