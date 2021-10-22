@@ -4,6 +4,8 @@ var aa_1 = require("./aa");
 Object.defineProperty(exports, "aa", { enumerable: true, get: function () { return aa_1.aa; } });
 var aai_1 = require("./aai");
 Object.defineProperty(exports, "aai", { enumerable: true, get: function () { return aai_1.aai; } });
+var advisor_1 = require("./advisor");
+Object.defineProperty(exports, "advisor", { enumerable: true, get: function () { return advisor_1.advisor; } });
 var af_1 = require("./af");
 Object.defineProperty(exports, "af", { enumerable: true, get: function () { return af_1.af; } });
 var afc_1 = require("./afc");

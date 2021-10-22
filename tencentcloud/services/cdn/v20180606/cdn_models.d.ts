@@ -1,4 +1,70 @@
 /**
+ * DescribeWafData请求参数结构体
+ */
+export interface DescribeWafDataRequest {
+    /**
+      * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+      */
+    EndTime: string;
+    /**
+      * 时间粒度，支持以下几种模式：
+min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据
+5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据
+hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据
+day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据
+
+仅支持30天内数据查询，且查询时间范围在 7 到 30 天最小粒度是 hour。
+      */
+    Interval: string;
+    /**
+      * 指定域名查询
+      */
+    Domain?: string;
+    /**
+      * 指定攻击类型
+不填则查询所有攻击类型的数据分布
+AttackType 映射如下:
+"webshell" : Webshell检测防护
+"oa" : 常见OA漏洞防护
+"xss" : XSS跨站脚本攻击防护
+"xxe" : XXE攻击防护
+"webscan" : 扫描器攻击漏洞防护
+"cms" : 常见CMS漏洞防护
+"upload" : 恶意文件上传攻击防护
+"sql" : SQL注入攻击防护
+"cmd_inject": 命令/代码注入攻击防护
+"osc" : 开源组件漏洞防护
+"file_read" : 任意文件读取
+"ldap" : LDAP注入攻击防护
+"other" : 其它漏洞防护
+      */
+    AttackType?: string;
+    /**
+      * 指定防御模式
+不填则查询所有防御模式的数据总和
+DefenceMode映射如下：
+  observe = '观察模式'
+  intercept = '拦截模式'
+      */
+    DefenceMode?: string;
+    /**
+      * 地域：mainland 或 overseas
+      */
+    Area?: string;
+    /**
+      * 指定多个攻击类型，取值参考AttackType
+      */
+    AttackTypes?: Array<string>;
+    /**
+      * 指定域名列表查询
+      */
+    Domains?: Array<string>;
+}
+/**
  * DescribeCdnDomainLogs返回参数结构体
  */
 export interface DescribeCdnDomainLogsResponse {
@@ -872,21 +938,21 @@ day：天粒度
     RequestId?: string;
 }
 /**
- * EnableClsLogTopic请求参数结构体
+ * DescribeIpStatus返回参数结构体
  */
-export interface EnableClsLogTopicRequest {
+export interface DescribeIpStatusResponse {
     /**
-      * 日志集ID
+      * 节点列表
       */
-    LogsetId: string;
+    Ips: Array<IpStatus>;
     /**
-      * 日志主题ID
+      * 节点总个数
       */
-    TopicId: string;
+    TotalCount: number;
     /**
-      * 接入渠道，默认值为cdn
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Channel?: string;
+    RequestId?: string;
 }
 /**
  * UpdateImageConfig返回参数结构体
@@ -985,25 +1051,66 @@ export interface ListTopDDoSDataRequest {
       * 查询Top的数量，不填默认值为10
       */
     TopCount?: number;
+    /**
+      * AttackIP表示查询攻击ip的top排行，AttackType表示攻击类型的top排行，为空默认为AttackType
+      */
+    Metric?: string;
 }
 /**
- * 请求头部及请求url访问控制
+ * DescribeDistrictIspData请求参数结构体
  */
-export interface AccessControl {
+export interface DescribeDistrictIspDataRequest {
     /**
-      * on | off 是否启用请求头部及请求url访问控制
+      * 域名列表，最多支持20个域名
       */
-    Switch: string;
+    Domains: Array<string>;
     /**
-      * 请求头部及请求url访问规则
-注意：此字段可能返回 null，表示取不到有效值。
+      * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+支持近 60 天内的数据查询，每次查询时间区间为 3 小时
       */
-    AccessControlRules?: Array<AccessControlRule>;
+    StartTime: string;
     /**
-      * 返回状态码
-注意：此字段可能返回 null，表示取不到有效值。
+      * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+结束时间与起始时间区间最大为 3 小时
       */
-    ReturnCode?: number;
+    EndTime: string;
+    /**
+      * 指定查询指标，支持:
+bandwidth：带宽，单位为 bps
+request：请求数，单位为 次
+      */
+    Metric: string;
+    /**
+      * 指定省份查询，不填充表示查询所有省份
+省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+      */
+    Districts?: Array<number>;
+    /**
+      * 指定运营商查询，不填充表示查询所有运营商
+运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+      */
+    Isps?: Array<number>;
+    /**
+      * 指定协议查询，不填充表示查询所有协议
+all：所有协议
+http：指定查询 HTTP 对应指标
+https：指定查询 HTTPS 对应指标
+      */
+    Protocol?: string;
+    /**
+      * 指定IP协议查询，不填充表示查询所有协议
+all：所有协议
+ipv4：指定查询 ipv4 对应指标
+ipv6：指定查询 ipv6 对应指标
+指定IP协议查询时，不可同时指定省份、运营商查询
+      */
+    IpProtocol?: string;
+    /**
+      * 时间粒度，支持以下几种模式（默认5min）：
+min：1 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过10分钟，可返回 1 分钟粒度明细数据
+5min：5 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过3 小时，可返回 5 分钟粒度明细数据
+      */
+    Interval?: string;
 }
 /**
  * DeleteCdnDomain请求参数结构体
@@ -1058,6 +1165,50 @@ request：请求数计费
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeEventLogData请求参数结构体
+ */
+export interface DescribeEventLogDataRequest {
+    /**
+      * 防护类型，映射如下：
+  waf = "Web攻击"
+  cc = "CC攻击"
+      */
+    Mode: string;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间，最长跨度为30分钟
+      */
+    EndTime: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 执行动作，取值为：intercept/redirect/observe
+分别表示：拦截/重定向/观察
+参数放空，表示查询全部动作数据
+      */
+    ActionName: string;
+    /**
+      * 请求URL，支持URL开头和结尾使用\*表示通配
+如：
+/files/* 表示所有以/files/开头的请求
+*.jpg 表示所有以.jpg结尾的请求
+      */
+    Url: string;
+    /**
+      * 地域 mainland 或者 overseas，为空时默认 mainland
+      */
+    Area?: string;
+    /**
+      * 来源产品，cdn 或者 ecdn，为空时默认 cdn
+      */
+    Source?: string;
 }
 /**
  * 访问协议强制跳转配置，默认为关闭状态
@@ -1273,6 +1424,38 @@ overseas：境外计费方式查询
     Product?: string;
 }
 /**
+ * DescribeCcData返回参数结构体
+ */
+export interface DescribeCcDataResponse {
+    /**
+      * 指定执行动作的请求数数据，如果指定类型为空，表示所有类型的请求总数
+      */
+    Data: Array<TimestampData>;
+    /**
+      * 粒度
+      */
+    Interval: string;
+    /**
+      * 执行动作为拦截类型QPS统计数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InterceptQpsData: Array<TimestampData>;
+    /**
+      * 执行动作为重定向类型QPS统计数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RedirectQpsData: Array<TimestampData>;
+    /**
+      * 执行动作为观察类型QPS统计数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ObserveQpsData: Array<TimestampData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UpdateImageConfig请求参数结构体
  */
 export interface UpdateImageConfigRequest {
@@ -1340,6 +1523,22 @@ export interface StartCdnDomainResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 访问URL重写配置
+ */
+export interface UrlRedirect {
+    /**
+      * 访问URL重写配置开关
+on：开启
+off：关闭
+      */
+    Switch: string;
+    /**
+      * 访问URL重写规则，当Switch为on时必填，规则数量最大为10个。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PathRules?: Array<UrlRedirectRule>;
 }
 /**
  * 智能压缩规则配置
@@ -1618,25 +1817,25 @@ export interface EnableCachesRequest {
     Date?: string;
 }
 /**
- * 刷新/预热 可用量及配额
+ * 通过Cls日志，计算出来的IP每秒访问数量
  */
-export interface Quota {
+export interface ClsLogIpData {
     /**
-      * 单次批量提交配额上限。
+      * IP
       */
-    Batch: number;
+    ClientIp: string;
     /**
-      * 每日提交配额上限。
+      * 在给定的时间段中，1秒内的最大请求量
       */
-    Total: number;
+    Request: number;
     /**
-      * 每日剩余的可提交配额。
+      * 在获取的Top信息中，IP出现的次数
       */
-    Available: number;
+    Count: number;
     /**
-      * 配额的区域。
+      * 在给定的时间段中，1秒内的最大请求量对应的时间
       */
-    Area: string;
+    Time: string;
 }
 /**
  * CreateScdnDomain请求参数结构体
@@ -1868,6 +2067,16 @@ ecdn表示ECDN数据
       * 地域：mainland或overseas，表示国内或海外，不填写默认表示国内
       */
     Area?: string;
+}
+/**
+ * StartCdnDomain请求参数结构体
+ */
+export interface StartCdnDomainRequest {
+    /**
+      * 域名
+域名状态需要为【已停用】
+      */
+    Domain: string;
 }
 /**
  * DeleteScdnDomain请求参数结构体
@@ -2178,6 +2387,41 @@ off：关闭，遵循用户自定义的节点缓存规则
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IgnoreSetCookie: string;
+}
+/**
+ * PushUrlsCache请求参数结构体
+ */
+export interface PushUrlsCacheRequest {
+    /**
+      * URL 列表，需要包含协议头部 http:// 或 https://
+      */
+    Urls: Array<string>;
+    /**
+      * 指定预热请求回源时 HTTP 请求的 User-Agent 头部
+默认为 TencentCdn
+      */
+    UserAgent?: string;
+    /**
+      * 预热生效区域
+mainland：预热至境内节点
+overseas：预热至境外节点
+global：预热全球节点
+不填充情况下，默认为 mainland， URL 中域名必须在对应区域启用了加速服务才能提交对应区域的预热任务
+      */
+    Area?: string;
+    /**
+      * 填写"middle"或不填充时预热至中间层节点。
+注意：中国境外区域预热，资源默认加载至中国境外边缘节点，所产生的边缘层流量会计入计费流量。
+      */
+    Layer?: string;
+    /**
+      * 是否递归解析m3u8文件中的ts分片预热
+注意事项：
+1. 该功能要求m3u8索引文件能直接请求获取
+2. 当前只支持递归解析一级索引和子索引中的ts分片，递归深度不超过3层
+3. 解析获取的ts分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热
+      */
+    ParseM3U8?: boolean;
 }
 /**
  * DescribeReportData返回参数结构体
@@ -3605,31 +3849,29 @@ all：账号维度明细数据
     OriginData: Array<CdnData>;
 }
 /**
- * 节点 IP 信息
+ * 攻击ip数据详细数据
  */
-export interface IpStatus {
+export interface DDoSAttackIPTopData {
     /**
-      * 节点 IP
+      * 攻击ip
       */
-    Ip: string;
+    AttackIP: string;
     /**
-      * 节点所属区域
+      * 攻击ip所在省份
       */
-    District: string;
+    Province: string;
     /**
-      * 节点所属运营商
+      * 攻击ip所在国家
+      */
+    Country: string;
+    /**
+      * 红果电信
       */
     Isp: string;
     /**
-      * 节点所在城市
+      * 攻击次数
       */
-    City: string;
-    /**
-      * 节点状态
-online：上线状态，正常调度服务中
-offline：下线状态
-      */
-    Status: string;
+    AttackCount: number;
 }
 /**
  * AddCdnDomain返回参数结构体
@@ -3900,6 +4142,27 @@ DefenceMode 映射如下：
       * 地域：mainland 或 overseas
       */
     Area?: string;
+}
+/**
+ * 刷新/预热 可用量及配额
+ */
+export interface Quota {
+    /**
+      * 单次批量提交配额上限。
+      */
+    Batch: number;
+    /**
+      * 每日提交配额上限。
+      */
+    Total: number;
+    /**
+      * 每日剩余的可提交配额。
+      */
+    Available: number;
+    /**
+      * 配额的区域。
+      */
+    Area: string;
 }
 /**
  * 地区运营商明细数据
@@ -4428,20 +4691,24 @@ offline：节点下线
     Datetime: string;
 }
 /**
- * 明细数据的汇总值，各指标根据其特性不同拥有不同汇总方式
+ * 状态码重定向规则配置
  */
-export interface SummarizedData {
+export interface ErrorPageRule {
     /**
-      * 汇总方式，存在以下几种：
-sum：累加求和
-max：最大值，带宽模式下，采用 5 分钟粒度汇总数据，计算峰值带宽
-avg：平均值
+      * 状态码
+支持 400、403、404、500
       */
-    Name: string;
+    StatusCode: number;
     /**
-      * 汇总后的数据值
+      * 重定向状态码设置
+支持 301 或 302
       */
-    Value: number;
+    RedirectCode: number;
+    /**
+      * 重定向 URL
+需要为完整跳转路径，如 https://www.test.com/error.html
+      */
+    RedirectUrl: string;
 }
 /**
  * UpdateScdnDomain请求参数结构体
@@ -4524,43 +4791,19 @@ export interface ListDiagnoseReportRequest {
     Origin?: string;
 }
 /**
- * waf配置类型
+ * 回源鉴权高级配置
  */
-export interface ScdnWafConfig {
+export interface OriginAuthentication {
     /**
-      * on|off
+      * 鉴权开关，on或off
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Switch: string;
     /**
-      * intercept|observe，默认intercept
+      * 鉴权类型A配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Mode?: string;
-    /**
-      * 重定向的错误页面
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ErrorPage?: ScdnErrorPage;
-    /**
-      * webshell拦截开关，on|off，默认off
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    WebShellSwitch?: string;
-    /**
-      * 类型拦截规则
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Rules?: Array<ScdnWafRule>;
-    /**
-      * waf规则等级，可取100|200|300
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Level?: number;
-    /**
-      * waf子规则开关
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubRuleSwitch?: Array<WafSubRuleStatus>;
+    TypeA?: OriginAuthenticationTypeA;
 }
 /**
  * 域名及其他指标Bot次数
@@ -4778,39 +5021,31 @@ index 时填充 /
     Origin: Array<string>;
 }
 /**
- * PushUrlsCache请求参数结构体
+ * 节点 IP 信息
  */
-export interface PushUrlsCacheRequest {
+export interface IpStatus {
     /**
-      * URL 列表，需要包含协议头部 http:// 或 https://
+      * 节点 IP
       */
-    Urls: Array<string>;
+    Ip: string;
     /**
-      * 指定预热请求回源时 HTTP 请求的 User-Agent 头部
-默认为 TencentCdn
+      * 节点所属区域
       */
-    UserAgent?: string;
+    District: string;
     /**
-      * 预热生效区域
-mainland：预热至境内节点
-overseas：预热至境外节点
-global：预热全球节点
-不填充情况下，默认为 mainland， URL 中域名必须在对应区域启用了加速服务才能提交对应区域的预热任务
+      * 节点所属运营商
       */
-    Area?: string;
+    Isp: string;
     /**
-      * 填写"middle"或不填充时预热至中间层节点。
-注意：中国境外区域预热，资源默认加载至中国境外边缘节点，所产生的边缘层流量会计入计费流量。
+      * 节点所在城市
       */
-    Layer?: string;
+    City: string;
     /**
-      * 是否递归解析m3u8文件中的ts分片预热
-注意事项：
-1. 该功能要求m3u8索引文件能直接请求获取
-2. 当前只支持递归解析一级索引和子索引中的ts分片，递归深度不超过3层
-3. 解析获取的ts分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热
+      * 节点状态
+online：上线状态，正常调度服务中
+offline：下线状态
       */
-    ParseM3U8?: boolean;
+    Status: string;
 }
 /**
  * 域名国内地区特殊配置。分地区特殊配置。UpdateDomainConfig接口只支持修改部分分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：
@@ -5033,9 +5268,9 @@ invalid: 预热无效(源站返回4xx或5xx状态码)
     Status?: string;
 }
 /**
- * DescribeScdnTopData请求参数结构体
+ * DescribeDDoSData请求参数结构体
  */
-export interface DescribeScdnTopDataRequest {
+export interface DescribeDDoSDataRequest {
     /**
       * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
       */
@@ -5045,55 +5280,13 @@ export interface DescribeScdnTopDataRequest {
       */
     EndTime: string;
     /**
-      * 查询的SCDN TOP攻击数据类型：
-waf：Web 攻击防护TOP数据
+      * 时间粒度，支持以下几种模式：
+min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据
+5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据
+hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据
+day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据
       */
-    Mode: string;
-    /**
-      * 排序对象，支持以下几种形式：
-url：攻击目标 url 排序
-ip：攻击源 IP 排序
-attackType：攻击类型排序
-      */
-    Metric: string;
-    /**
-      * 排序使用的指标名称：
-request：请求次数
-      */
-    Filter: string;
-    /**
-      * 指定域名查询
-      */
-    Domain?: string;
-    /**
-      * 指定攻击类型, 仅 Mode=waf 时有效
-不填则查询所有攻击类型的数据总和
-AttackType 映射如下:
-  other = '未知类型'
-  malicious_scan = "恶意扫描"
-  sql_inject = "SQL注入攻击"
-  xss = "XSS攻击"
-  cmd_inject = "命令注入攻击"
-  ldap_inject = "LDAP注入攻击"
-  ssi_inject = "SSI注入攻击"
-  xml_inject = "XML注入攻击"
-  web_service = "WEB服务漏洞攻击"
-  web_app = "WEB应用漏洞攻击"
-  path_traversal = "路径跨越攻击"
-  illegal_access_core_file = "核心文件非法访问"
-  trojan_horse = "木马后门攻击"
-  csrf = "CSRF攻击"
-  malicious_file_upload= '恶意文件上传'
-      */
-    AttackType?: string;
-    /**
-      * 指定防御模式,仅 Mode=waf 时有效
-不填则查询所有防御模式的数据总和
-DefenceMode 映射如下：
-  observe = '观察模式'
-  intercept = '拦截模式'
-      */
-    DefenceMode?: string;
+    Interval: string;
 }
 /**
  * DescribeUrlViolations请求参数结构体
@@ -5244,13 +5437,21 @@ off：关闭
     Qps?: number;
 }
 /**
- * ddos配置类型
+ * EnableClsLogTopic请求参数结构体
  */
-export interface ScdnDdosConfig {
+export interface EnableClsLogTopicRequest {
     /**
-      * on|off
+      * 日志集ID
       */
-    Switch: string;
+    LogsetId: string;
+    /**
+      * 日志主题ID
+      */
+    TopicId: string;
+    /**
+      * 接入渠道，默认值为cdn
+      */
+    Channel?: string;
 }
 /**
  * CreateDiagnoseUrl返回参数结构体
@@ -5300,6 +5501,113 @@ export interface CacheOptResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FailUrls: Array<string>;
+}
+/**
+ * DescribeScdnTopData请求参数结构体
+ */
+export interface DescribeScdnTopDataRequest {
+    /**
+      * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+      */
+    EndTime: string;
+    /**
+      * 查询的SCDN TOP攻击数据类型：
+waf：Web 攻击防护TOP数据
+      */
+    Mode: string;
+    /**
+      * 排序对象，支持以下几种形式：
+url：攻击目标 url 排序
+ip：攻击源 IP 排序
+attackType：攻击类型排序
+      */
+    Metric: string;
+    /**
+      * 排序使用的指标名称：
+request：请求次数
+      */
+    Filter: string;
+    /**
+      * 指定域名查询
+      */
+    Domain?: string;
+    /**
+      * 指定攻击类型, 仅 Mode=waf 时有效
+不填则查询所有攻击类型的数据总和
+AttackType 映射如下:
+  other = '未知类型'
+  malicious_scan = "恶意扫描"
+  sql_inject = "SQL注入攻击"
+  xss = "XSS攻击"
+  cmd_inject = "命令注入攻击"
+  ldap_inject = "LDAP注入攻击"
+  ssi_inject = "SSI注入攻击"
+  xml_inject = "XML注入攻击"
+  web_service = "WEB服务漏洞攻击"
+  web_app = "WEB应用漏洞攻击"
+  path_traversal = "路径跨越攻击"
+  illegal_access_core_file = "核心文件非法访问"
+  trojan_horse = "木马后门攻击"
+  csrf = "CSRF攻击"
+  malicious_file_upload= '恶意文件上传'
+      */
+    AttackType?: string;
+    /**
+      * 指定防御模式,仅 Mode=waf 时有效
+不填则查询所有防御模式的数据总和
+DefenceMode 映射如下：
+  observe = '观察模式'
+  intercept = '拦截模式'
+      */
+    DefenceMode?: string;
+}
+/**
+ * ListTopClsLogData请求参数结构体
+ */
+export interface ListTopClsLogDataRequest {
+    /**
+      * 需要查询的日志集ID
+      */
+    LogsetId: string;
+    /**
+      * 需要查询的日志主题ID组合，多个以逗号分隔
+      */
+    TopicIds: string;
+    /**
+      * 需要查询的日志的起始时间，格式 YYYY-mm-dd HH:MM:SS
+      */
+    StartTime: string;
+    /**
+      * 需要查询的日志的结束时间，格式 YYYY-mm-dd HH:MM:SS，时间跨度应小于10分钟
+      */
+    EndTime: string;
+    /**
+      * 指定域名查询
+      */
+    Domain: string;
+    /**
+      * 指定访问的URL查询，支持URL开头和结尾使用\*表示通配
+如：
+/files/* 表示所有以/files/开头的请求
+*.jpg 表示所有以.jpg结尾的请求
+      */
+    Url: string;
+    /**
+      * 接入渠道，默认值为cdn
+      */
+    Channel?: string;
+    /**
+      * 要查询的Top条数，最大值为100，默认为10
+      */
+    Limit?: number;
+    /**
+      * 按请求量排序， asc（升序）或者 desc（降序），默认为 desc
+      */
+    Sort?: string;
 }
 /**
  * CreateVerifyRecord返回参数结构体
@@ -6043,6 +6351,19 @@ export interface DisableCachesResponse {
     RequestId?: string;
 }
 /**
+ * 事件日志统计数据结果
+ */
+export interface EventLogStatsData {
+    /**
+      * 时间
+      */
+    Datetime: string;
+    /**
+      * 请求数
+      */
+    Request: number;
+}
+/**
  * 作为CacheKey的一部分
  */
 export interface SchemeKey {
@@ -6106,77 +6427,67 @@ default 时填充 "no max-age"
     CacheTime: number;
 }
 /**
- * DescribeIpStatus返回参数结构体
+ * DescribeCcData请求参数结构体
  */
-export interface DescribeIpStatusResponse {
-    /**
-      * 节点列表
-      */
-    Ips: Array<IpStatus>;
-    /**
-      * 节点总个数
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDistrictIspData请求参数结构体
- */
-export interface DescribeDistrictIspDataRequest {
-    /**
-      * 域名列表，最多支持20个域名
-      */
-    Domains: Array<string>;
+export interface DescribeCcDataRequest {
     /**
       * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
-支持近 60 天内的数据查询，每次查询时间区间为 3 小时
       */
     StartTime: string;
     /**
       * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
-结束时间与起始时间区间最大为 3 小时
       */
     EndTime: string;
     /**
-      * 指定查询指标，支持:
-bandwidth：带宽，单位为 bps
-request：请求数，单位为 次
-      */
-    Metric: string;
-    /**
-      * 指定省份查询，不填充表示查询所有省份
-省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
-      */
-    Districts?: Array<number>;
-    /**
-      * 指定运营商查询，不填充表示查询所有运营商
-运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
-      */
-    Isps?: Array<number>;
-    /**
-      * 指定协议查询，不填充表示查询所有协议
-all：所有协议
-http：指定查询 HTTP 对应指标
-https：指定查询 HTTPS 对应指标
-      */
-    Protocol?: string;
-    /**
-      * 指定IP协议查询，不填充表示查询所有协议
-all：所有协议
-ipv4：指定查询 ipv4 对应指标
-ipv6：指定查询 ipv6 对应指标
-指定IP协议查询时，不可同时指定省份、运营商查询
-      */
-    IpProtocol?: string;
-    /**
-      * 时间粒度，支持以下几种模式（默认5min）：
-min：1 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过10分钟，可返回 1 分钟粒度明细数据
-5min：5 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过3 小时，可返回 5 分钟粒度明细数据
+      * 时间粒度，支持以下几种模式：
+min：1 分钟粒度，指定查询区间 24 小时内（含 24 小时），可返回 1 分钟粒度明细数据
+5min：5 分钟粒度，指定查询区间 31 天内（含 31 天），可返回 5 分钟粒度明细数据
+hour：1 小时粒度，指定查询区间 31 天内（含 31 天），可返回 1 小时粒度明细数据
+day：天粒度，指定查询区间大于 31 天，可返回天粒度明细数据
       */
     Interval?: string;
+    /**
+      * 指定域名查询，为空时，表示查询账号级别数据
+      */
+    Domain?: string;
+    /**
+      * 执行动作，取值为：intercept/redirect/observe
+分别表示：拦截/重定向/观察
+为空时，表示所有执行动作
+      */
+    ActionName?: string;
+    /**
+      * 指定域名列表查询，为空时，表示查询账号级别数据
+      */
+    Domains?: Array<string>;
+    /**
+      * cdn表示CDN数据，默认值
+ecdn表示ECDN数据
+      */
+    Source?: string;
+    /**
+      * 地域：mainland或overseas，表示国内或海外，不填写默认表示国内
+      */
+    Area?: string;
+}
+/**
+ * 请求头部及请求url访问控制
+ */
+export interface AccessControl {
+    /**
+      * on | off 是否启用请求头部及请求url访问控制
+      */
+    Switch: string;
+    /**
+      * 请求头部及请求url访问规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessControlRules?: Array<AccessControlRule>;
+    /**
+      * 返回状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReturnCode?: number;
 }
 /**
  * ListScdnLogTasks返回参数结构体
@@ -6257,20 +6568,13 @@ off：关闭全路径缓存（即开启参数忽略）
     KeyRules?: Array<KeyRule>;
 }
 /**
- * 访问URL重写配置
+ * ddos配置类型
  */
-export interface UrlRedirect {
+export interface ScdnDdosConfig {
     /**
-      * 访问URL重写配置开关
-on：开启
-off：关闭
+      * on|off
       */
     Switch: string;
-    /**
-      * 访问URL重写规则，当Switch为on时必填，规则数量最大为10个。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PathRules?: Array<UrlRedirectRule>;
 }
 /**
  * 单链接下行限速配置，默认为关闭状态
@@ -6302,6 +6606,27 @@ export interface CookieKey {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Value?: string;
+}
+/**
+ * ListTopClsLogData返回参数结构体
+ */
+export interface ListTopClsLogDataResponse {
+    /**
+      * 数据列表
+      */
+    Data: Array<ClsLogIpData>;
+    /**
+      * 获取到Top总记录数
+      */
+    TotalCount: number;
+    /**
+      * 获取到的不重复IP条数
+      */
+    IpCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 状态码缓存过期时间规则配置
@@ -6549,6 +6874,23 @@ export interface ClsLogObject {
     Source: string;
 }
 /**
+ * DescribeWafData返回参数结构体
+ */
+export interface DescribeWafDataResponse {
+    /**
+      * 粒度数据
+      */
+    Data: Array<TimestampData>;
+    /**
+      * 粒度
+      */
+    Interval: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 区域映射id和子区域id的关联信息。
  */
 export interface RegionMapRelation {
@@ -6684,14 +7026,21 @@ export interface PurgeUrlsCacheRequest {
     UrlEncode?: boolean;
 }
 /**
- * StartCdnDomain请求参数结构体
+ * ddos攻击带宽峰值数据
  */
-export interface StartCdnDomainRequest {
+export interface DDoSAttackBandwidthData {
     /**
-      * 域名
-域名状态需要为【已停用】
+      * ddos攻击类型，当值为all的时候表示所有的攻击类型的总带宽峰值
       */
-    Domain: string;
+    AttackType: string;
+    /**
+      * ddos攻击带宽大小
+      */
+    Value: number;
+    /**
+      * 攻击时间点
+      */
+    Time: string;
 }
 /**
  * 跨国回源优化配置，默认为关闭状态（功能灰度中，尚未全量）
@@ -6936,54 +7285,17 @@ export interface ClientInfo {
     Ip: string;
 }
 /**
- * DescribePurgeTasks请求参数结构体
+ * DescribeEventLogData返回参数结构体
  */
-export interface DescribePurgeTasksRequest {
+export interface DescribeEventLogDataResponse {
     /**
-      * 指定刷新类型查询
-url：url 刷新记录
-path：目录刷新记录
+      * 统计曲线结果
       */
-    PurgeType?: string;
+    Results: Array<EventLogStatsData>;
     /**
-      * 根据时间区间查询时，填充开始时间，如 2018-08-08 00:00:00
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    StartTime?: string;
-    /**
-      * 根据时间区间查询时，填充结束时间，如 2018-08-08 23:59:59
-      */
-    EndTime?: string;
-    /**
-      * 根据任务 ID 查询时，填充任务 ID
-查询时任务 ID 与起始时间必须填充一项
-      */
-    TaskId?: string;
-    /**
-      * 分页查询偏移量，默认为 0
-      */
-    Offset?: number;
-    /**
-      * 分页查询限制数目，默认为 20
-      */
-    Limit?: number;
-    /**
-      * 支持域名过滤，或 http(s):// 开头完整 URL 过滤
-      */
-    Keyword?: string;
-    /**
-      * 指定任务状态查询
-fail：刷新失败
-done：刷新成功
-process：刷新中
-      */
-    Status?: string;
-    /**
-      * 指定刷新地域查询
-mainland：境内
-overseas：境外
-global：全球
-      */
-    Area?: string;
+    RequestId?: string;
 }
 /**
  * ListTopBotData请求参数结构体
@@ -7505,6 +7817,45 @@ export interface DiagnoseInfo {
     Area: string;
 }
 /**
+ * waf配置类型
+ */
+export interface ScdnWafConfig {
+    /**
+      * on|off
+      */
+    Switch: string;
+    /**
+      * intercept|observe，默认intercept
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Mode?: string;
+    /**
+      * 重定向的错误页面
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorPage?: ScdnErrorPage;
+    /**
+      * webshell拦截开关，on|off，默认off
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WebShellSwitch?: string;
+    /**
+      * 类型拦截规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rules?: Array<ScdnWafRule>;
+    /**
+      * waf规则等级，可取100|200|300
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level?: number;
+    /**
+      * waf子规则开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubRuleSwitch?: Array<WafSubRuleStatus>;
+}
+/**
  * DescribePurgeTasks返回参数结构体
  */
 export interface DescribePurgeTasksResponse {
@@ -7524,39 +7875,83 @@ export interface DescribePurgeTasksResponse {
     RequestId?: string;
 }
 /**
- * 回源鉴权高级配置
+ * DDoS统计数据
  */
-export interface OriginAuthentication {
+export interface DDoSStatsData {
     /**
-      * 鉴权开关，on或off
-注意：此字段可能返回 null，表示取不到有效值。
+      * 时间
       */
-    Switch: string;
+    Time: string;
     /**
-      * 鉴权类型A配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * 带宽数值，单位bps
       */
-    TypeA?: OriginAuthenticationTypeA;
+    Value: number;
 }
 /**
- * 状态码重定向规则配置
+ * 明细数据的汇总值，各指标根据其特性不同拥有不同汇总方式
  */
-export interface ErrorPageRule {
+export interface SummarizedData {
     /**
-      * 状态码
-支持 400、403、404、500
+      * 汇总方式，存在以下几种：
+sum：累加求和
+max：最大值，带宽模式下，采用 5 分钟粒度汇总数据，计算峰值带宽
+avg：平均值
       */
-    StatusCode: number;
+    Name: string;
     /**
-      * 重定向状态码设置
-支持 301 或 302
+      * 汇总后的数据值
       */
-    RedirectCode: number;
+    Value: number;
+}
+/**
+ * DescribePurgeTasks请求参数结构体
+ */
+export interface DescribePurgeTasksRequest {
     /**
-      * 重定向 URL
-需要为完整跳转路径，如 https://www.test.com/error.html
+      * 指定刷新类型查询
+url：url 刷新记录
+path：目录刷新记录
       */
-    RedirectUrl: string;
+    PurgeType?: string;
+    /**
+      * 根据时间区间查询时，填充开始时间，如 2018-08-08 00:00:00
+      */
+    StartTime?: string;
+    /**
+      * 根据时间区间查询时，填充结束时间，如 2018-08-08 23:59:59
+      */
+    EndTime?: string;
+    /**
+      * 根据任务 ID 查询时，填充任务 ID
+查询时任务 ID 与起始时间必须填充一项
+      */
+    TaskId?: string;
+    /**
+      * 分页查询偏移量，默认为 0
+      */
+    Offset?: number;
+    /**
+      * 分页查询限制数目，默认为 20
+      */
+    Limit?: number;
+    /**
+      * 支持域名过滤，或 http(s):// 开头完整 URL 过滤
+      */
+    Keyword?: string;
+    /**
+      * 指定任务状态查询
+fail：刷新失败
+done：刷新成功
+process：刷新中
+      */
+    Status?: string;
+    /**
+      * 指定刷新地域查询
+mainland：境内
+overseas：境外
+global：全球
+      */
+    Area?: string;
 }
 /**
  * DescribeOriginData返回参数结构体
@@ -7653,9 +8048,13 @@ export interface DeleteCdnDomainResponse {
  */
 export interface ListTopDDoSDataResponse {
     /**
-      * DDoS Top数据
+      * DDoS 攻击类型的top数据，当Metric=AttackType的时候返回攻击类型的统计数据，IPData为空
       */
     Data: Array<DDoSTopData>;
+    /**
+      * ddos攻击ip的top数据，Metric=AttackIP的时候返回IPData，Data为空
+      */
+    IPData: Array<DDoSAttackIPTopData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7896,6 +8295,31 @@ export interface Quic {
       * 是否启动Quic配置
       */
     Switch: string;
+}
+/**
+ * DescribeDDoSData返回参数结构体
+ */
+export interface DescribeDDoSDataResponse {
+    /**
+      * DDoS统计数据数组
+      */
+    Data: Array<DDoSStatsData>;
+    /**
+      * 时间粒度：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
+      */
+    Interval: string;
+    /**
+      * DDoS统计攻击带宽峰值数组
+      */
+    AttackBandwidthData: Array<DDoSAttackBandwidthData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDomains请求参数结构体

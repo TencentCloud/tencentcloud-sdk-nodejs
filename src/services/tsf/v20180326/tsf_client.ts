@@ -23,6 +23,7 @@ import {
   ModifyPathRewriteRequest,
   TsfPageContainerEvent,
   ApiDetailResponse,
+  UpdateApiRateLimitRuleRequest,
   CosCredentials,
   DeletePathRewritesResponse,
   PathRewritePage,
@@ -193,7 +194,7 @@ import {
   ShrinkInstancesRequest,
   ValueFrom,
   ShrinkInstancesResponse,
-  OverviewBasicResourceUsage,
+  DeleteLaneRuleResponse,
   DescribeApiRateLimitRulesResponse,
   AddClusterInstancesRequest,
   DescribeGroupUseDetailResponse,
@@ -213,7 +214,7 @@ import {
   DescribeImageRepositoryRequest,
   TsfPageUnitRule,
   DescribeApiGroupRequest,
-  RedoTaskExecuteResponse,
+  DescribeGatewayApisRequest,
   DescribeContainerGroupDetailRequest,
   DescribeGroupsWithPluginRequest,
   ImageRepositoryResult,
@@ -224,6 +225,7 @@ import {
   UnitRuleItem,
   BindPluginRequest,
   HealthCheckSetting,
+  DeleteLaneRuleRequest,
   GatewayDeployGroup,
   PkgList,
   Cluster,
@@ -278,6 +280,7 @@ import {
   DescribeApiUseDetailResponse,
   ServiceSetting,
   ModifyUploadInfoRequest,
+  DescribeGatewayApisResponse,
   DescribeUnitRuleRequest,
   UpdateGatewayApiResponse,
   ContainerEvent,
@@ -332,7 +335,7 @@ import {
   CreateFileConfigResponse,
   CreateConfigRequest,
   DescribeUploadInfoRequest,
-  TaskFlowLastBatchState,
+  OverviewBasicResourceUsage,
   DescribeUnitRulesResponse,
   UpdateGatewayApiRequest,
   PathRewriteCreateObject,
@@ -340,6 +343,7 @@ import {
   DescribeServerlessGroupRequest,
   DeleteUnitRuleRequest,
   ApplicationAttribute,
+  TaskFlowLastBatchState,
   DeletePkgsResponse,
   DescribeGroupsResponse,
   ModifyLaneRuleRequest,
@@ -394,7 +398,7 @@ import {
   GroupDailyUseStatistics,
   DescribeEnabledUnitRuleRequest,
   DescribeApiGroupResponse,
-  UpdateApiRateLimitRuleRequest,
+  RedoTaskExecuteResponse,
   CreateLaneRequest,
   CreateApiGroupResponse,
   ServiceConfig,
@@ -455,6 +459,7 @@ import {
   DescribeApplicationRequest,
   FileConfig,
   DeployContainerGroupResponse,
+  TsfPageApiDetailInfo,
   DescribeBasicResourceUsageRequest,
   DeleteMicroserviceResponse,
   DescribeReleasedConfigResponse,
@@ -609,13 +614,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询部署组相关的发布信息
+   * 删除泳道规则
    */
-  async DescribeGroupRelease(
-    req: DescribeGroupReleaseRequest,
-    cb?: (error: string, rep: DescribeGroupReleaseResponse) => void
-  ): Promise<DescribeGroupReleaseResponse> {
-    return this.request("DescribeGroupRelease", req, cb)
+  async DeleteLaneRule(
+    req: DeleteLaneRuleRequest,
+    cb?: (error: string, rep: DeleteLaneRuleResponse) => void
+  ): Promise<DeleteLaneRuleResponse> {
+    return this.request("DeleteLaneRule", req, cb)
   }
 
   /**
@@ -990,13 +995,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询泳道列表
+   * 查询工作流最新一个批次的状态信息
    */
-  async DescribeLanes(
-    req: DescribeLanesRequest,
-    cb?: (error: string, rep: DescribeLanesResponse) => void
-  ): Promise<DescribeLanesResponse> {
-    return this.request("DescribeLanes", req, cb)
+  async DescribeFlowLastBatchState(
+    req: DescribeFlowLastBatchStateRequest,
+    cb?: (error: string, rep: DescribeFlowLastBatchStateResponse) => void
+  ): Promise<DescribeFlowLastBatchStateResponse> {
+    return this.request("DescribeFlowLastBatchState", req, cb)
   }
 
   /**
@@ -1077,6 +1082,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: StopContainerGroupResponse) => void
   ): Promise<StopContainerGroupResponse> {
     return this.request("StopContainerGroup", req, cb)
+  }
+
+  /**
+   * 查询部署组相关的发布信息
+   */
+  async DescribeGroupRelease(
+    req: DescribeGroupReleaseRequest,
+    cb?: (error: string, rep: DescribeGroupReleaseResponse) => void
+  ): Promise<DescribeGroupReleaseResponse> {
+    return this.request("DescribeGroupRelease", req, cb)
   }
 
   /**
@@ -1492,6 +1507,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 停止执行中的任务批次， 非运行中的任务不可调用。
+   */
+  async StopTaskBatch(
+    req: StopTaskBatchRequest,
+    cb?: (error: string, rep: StopTaskBatchResponse) => void
+  ): Promise<StopTaskBatchResponse> {
+    return this.request("StopTaskBatch", req, cb)
+  }
+
+  /**
    * 查询公共配置项列表
    */
   async DescribePublicConfigs(
@@ -1802,16 +1827,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询工作流最新一个批次的状态信息
-   */
-  async DescribeFlowLastBatchState(
-    req: DescribeFlowLastBatchStateRequest,
-    cb?: (error: string, rep: DescribeFlowLastBatchStateResponse) => void
-  ): Promise<DescribeFlowLastBatchStateResponse> {
-    return this.request("DescribeFlowLastBatchState", req, cb)
-  }
-
-  /**
    * 查询网关所有分组下Api列表
    */
   async DescribeGatewayAllGroupApis(
@@ -1962,13 +1977,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 停止执行中的任务批次， 非运行中的任务不可调用。
+   * 查询API分组下的Api列表信息
    */
-  async StopTaskBatch(
-    req: StopTaskBatchRequest,
-    cb?: (error: string, rep: StopTaskBatchResponse) => void
-  ): Promise<StopTaskBatchResponse> {
-    return this.request("StopTaskBatch", req, cb)
+  async DescribeGatewayApis(
+    req: DescribeGatewayApisRequest,
+    cb?: (error: string, rep: DescribeGatewayApisResponse) => void
+  ): Promise<DescribeGatewayApisResponse> {
+    return this.request("DescribeGatewayApis", req, cb)
   }
 
   /**
@@ -2099,6 +2114,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribePublicConfigReleasesResponse) => void
   ): Promise<DescribePublicConfigReleasesResponse> {
     return this.request("DescribePublicConfigReleases", req, cb)
+  }
+
+  /**
+   * 查询泳道列表
+   */
+  async DescribeLanes(
+    req: DescribeLanesRequest,
+    cb?: (error: string, rep: DescribeLanesResponse) => void
+  ): Promise<DescribeLanesResponse> {
+    return this.request("DescribeLanes", req, cb)
   }
 
   /**

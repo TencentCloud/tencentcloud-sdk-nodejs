@@ -6373,26 +6373,6 @@ export interface ExportVulListRequest {
 }
 
 /**
- * DescribeAccounts返回参数结构体
- */
-export interface DescribeAccountsResponse {
-  /**
-   * 帐号列表记录总数。
-   */
-  TotalCount?: number
-
-  /**
-   * 帐号数据列表。
-   */
-  Accounts?: Array<Account>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeBaselineScanSchedule请求参数结构体
  */
 export interface DescribeBaselineScanScheduleRequest {
@@ -6743,39 +6723,6 @@ export interface SetBashEventsStatusRequest {
 }
 
 /**
- * DescribeAccounts请求参数结构体
- */
-export interface DescribeAccountsRequest {
-  /**
-   * 云镜客户端唯一Uuid。Username和Uuid必填其一，使用Uuid表示，查询该主机下列表信息。
-   */
-  Uuid?: string
-
-  /**
-   * 云镜客户端唯一Uuid。Username和Uuid必填其一，使用Username表示，查询该用户名下列表信息。
-   */
-  Username?: string
-
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-
-  /**
-      * 过滤条件。
-<li>Username - String - 是否必填：否 - 帐号名</li>
-<li>Privilege - String - 是否必填：否 - 帐号类型（ORDINARY: 普通帐号 | SUPPER: 超级管理员帐号）</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
-      */
-  Filters?: Array<Filter>
-}
-
-/**
  * 软件应用关联进程信息
  */
 export interface AssetAppProcessInfo {
@@ -7056,58 +7003,6 @@ export interface ExportPrivilegeEventsRequest {
    * 过滤参数
    */
   Filters?: Array<Filters>
-}
-
-/**
- * 帐号列表信息数据。
- */
-export interface Account {
-  /**
-   * 唯一ID。
-   */
-  Id: number
-
-  /**
-   * 云镜客户端唯一Uuid
-   */
-  Uuid: string
-
-  /**
-   * 主机内网IP。
-   */
-  MachineIp: string
-
-  /**
-   * 主机名称。
-   */
-  MachineName: string
-
-  /**
-   * 帐号名。
-   */
-  Username: string
-
-  /**
-   * 帐号所属组。
-   */
-  Groups: string
-
-  /**
-      * 帐号类型。
-<li>ORDINARY：普通帐号</li>
-<li>SUPPER：超级管理员帐号</li>
-      */
-  Privilege: string
-
-  /**
-   * 帐号创建时间。
-   */
-  AccountCreateTime: string
-
-  /**
-   * 帐号最后登录时间。
-   */
-  LastLoginTime: string
 }
 
 /**

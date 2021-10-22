@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddCdnDomain", req, cb);
     }
     /**
+     * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     */
+    async GetDisableRecords(req, cb) {
+        return this.request("GetDisableRecords", req, cb);
+    }
+    /**
      * DescribeIpVisit 用于查询 5 分钟活跃用户数，及日活跃用户数明细
 
 + 5 分钟活跃用户数：根据日志中客户端 IP，5 分钟粒度去重统计
@@ -139,10 +145,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateVerifyRecord", req, cb);
     }
     /**
-     * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     * CC统计数据查询
      */
-    async GetDisableRecords(req, cb) {
-        return this.request("GetDisableRecords", req, cb);
+    async DescribeCcData(req, cb) {
+        return this.request("DescribeCcData", req, cb);
     }
     /**
      * ManageClsTopicDomains 用于管理某日志主题下绑定的域名列表。
@@ -175,10 +181,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopScdnDomain", req, cb);
     }
     /**
-     * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+     * DescribeDiagnoseReport 用于获取指定报告id的内容
      */
-    async DescribeCertDomains(req, cb) {
-        return this.request("DescribeCertDomains", req, cb);
+    async DescribeDiagnoseReport(req, cb) {
+        return this.request("DescribeDiagnoseReport", req, cb);
+    }
+    /**
+     * DDoS统计数据查询
+     */
+    async DescribeDDoSData(req, cb) {
+        return this.request("DescribeDDoSData", req, cb);
+    }
+    /**
+     * 通过CLS日志计算Top信息。支持近7天的日志数据。
+     */
+    async ListTopClsLogData(req, cb) {
+        return this.request("ListTopClsLogData", req, cb);
     }
     /**
      * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
@@ -191,6 +209,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListTopCcData(req, cb) {
         return this.request("ListTopCcData", req, cb);
+    }
+    /**
+     * 查询在SCDN IP安全策略
+     */
+    async DescribeScdnIpStrategy(req, cb) {
+        return this.request("DescribeScdnIpStrategy", req, cb);
     }
     /**
      * DescribePurgeQuota 用于查询账户刷新配额和每日可用量。
@@ -305,6 +329,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUrlViolations", req, cb);
     }
     /**
+     * Waf统计数据查询
+     */
+    async DescribeWafData(req, cb) {
+        return this.request("DescribeWafData", req, cb);
+    }
+    /**
      * 获取DDoS攻击Top数据
      */
     async ListTopDDoSData(req, cb) {
@@ -344,16 +374,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePushTasks", req, cb);
     }
     /**
-     * DescribeDiagnoseReport 用于获取指定报告id的内容
+     * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
      */
-    async DescribeDiagnoseReport(req, cb) {
-        return this.request("DescribeDiagnoseReport", req, cb);
+    async DescribeCertDomains(req, cb) {
+        return this.request("DescribeCertDomains", req, cb);
     }
     /**
-     * 查询在SCDN IP安全策略
+     * DescribeEventLogData 用于查询事件日志统计曲线
      */
-    async DescribeScdnIpStrategy(req, cb) {
-        return this.request("DescribeScdnIpStrategy", req, cb);
+    async DescribeEventLogData(req, cb) {
+        return this.request("DescribeEventLogData", req, cb);
     }
     /**
      * CreateClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。

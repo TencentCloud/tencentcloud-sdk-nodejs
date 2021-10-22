@@ -2773,6 +2773,11 @@ export interface CreateCloneInstanceRequest {
    * 新克隆实例节点数。如果需要克隆出三节点实例， 请将该值设置为3 或指定 BackupZone 参数。如果需要克隆出两节点实例，请将该值设置为2。默认克隆出两节点实例。
    */
   InstanceNodes?: number
+
+  /**
+   * 置放群组 ID。
+   */
+  DeployGroupId?: string
 }
 
 /**

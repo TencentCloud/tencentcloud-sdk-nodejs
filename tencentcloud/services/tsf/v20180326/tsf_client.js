@@ -94,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddClusterInstances", req, cb);
     }
     /**
-     * 查询部署组相关的发布信息
+     * 删除泳道规则
      */
-    async DescribeGroupRelease(req, cb) {
-        return this.request("DescribeGroupRelease", req, cb);
+    async DeleteLaneRule(req, cb) {
+        return this.request("DeleteLaneRule", req, cb);
     }
     /**
      * 重新执行工作流批次
@@ -323,10 +323,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("UpdateApiTimeouts", req, cb);
     }
     /**
-     * 查询泳道列表
+     * 查询工作流最新一个批次的状态信息
      */
-    async DescribeLanes(req, cb) {
-        return this.request("DescribeLanes", req, cb);
+    async DescribeFlowLastBatchState(req, cb) {
+        return this.request("DescribeFlowLastBatchState", req, cb);
     }
     /**
      * 更新健康检查配置
@@ -375,6 +375,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async StopContainerGroup(req, cb) {
         return this.request("StopContainerGroup", req, cb);
+    }
+    /**
+     * 查询部署组相关的发布信息
+     */
+    async DescribeGroupRelease(req, cb) {
+        return this.request("DescribeGroupRelease", req, cb);
     }
     /**
      * 查询一键导入API分组任务的状态
@@ -625,6 +631,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeletePkgs", req, cb);
     }
     /**
+     * 停止执行中的任务批次， 非运行中的任务不可调用。
+     */
+    async StopTaskBatch(req, cb) {
+        return this.request("StopTaskBatch", req, cb);
+    }
+    /**
      * 查询公共配置项列表
      */
     async DescribePublicConfigs(req, cb) {
@@ -811,12 +823,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("RedoTaskExecute", req, cb);
     }
     /**
-     * 查询工作流最新一个批次的状态信息
-     */
-    async DescribeFlowLastBatchState(req, cb) {
-        return this.request("DescribeFlowLastBatchState", req, cb);
-    }
-    /**
      * 查询网关所有分组下Api列表
      */
     async DescribeGatewayAllGroupApis(req, cb) {
@@ -907,10 +913,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DraftApiGroup", req, cb);
     }
     /**
-     * 停止执行中的任务批次， 非运行中的任务不可调用。
+     * 查询API分组下的Api列表信息
      */
-    async StopTaskBatch(req, cb) {
-        return this.request("StopTaskBatch", req, cb);
+    async DescribeGatewayApis(req, cb) {
+        return this.request("DescribeGatewayApis", req, cb);
     }
     /**
      * 对执行失败的任务批次执行续跑
@@ -989,6 +995,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribePublicConfigReleases(req, cb) {
         return this.request("DescribePublicConfigReleases", req, cb);
+    }
+    /**
+     * 查询泳道列表
+     */
+    async DescribeLanes(req, cb) {
+        return this.request("DescribeLanes", req, cb);
     }
     /**
      * 查询网关API监控明细数据

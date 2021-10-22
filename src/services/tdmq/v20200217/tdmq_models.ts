@@ -1063,6 +1063,16 @@ export interface DescribeClustersRequest {
    * 集群ID列表过滤
    */
   ClusterIdList?: Array<string>
+
+  /**
+   * 是否标签过滤
+   */
+  IsTagFilter?: boolean
+
+  /**
+   * 过滤器。目前支持按标签过滤。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1185,6 +1195,11 @@ export interface ModifyClusterRequest {
    * 说明信息。
    */
   Remark?: string
+
+  /**
+   * 开启公网访问，只能为true
+   */
+  PublicAccessEnabled?: boolean
 }
 
 /**
@@ -2302,6 +2317,11 @@ export interface CreateClusterRequest {
    * 集群的标签列表
    */
   Tags?: Array<Tag>
+
+  /**
+   * 是否开启公网访问，不填时默认开启
+   */
+  PublicAccessEnabled?: boolean
 }
 
 /**
@@ -2384,6 +2404,11 @@ export interface DescribeCmqQueuesRequest {
    * 标签过滤查找时，需要设置为 true
    */
   IsTagFilter?: boolean
+
+  /**
+   * 过滤器。目前支持按标签过滤。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2570,6 +2595,11 @@ export interface DescribeCmqTopicsRequest {
    * 标签过滤查找时，需要设置为 true
    */
   IsTagFilter?: boolean
+
+  /**
+   * 过滤器。目前支持按标签过滤。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2980,7 +3010,7 @@ export interface Cluster {
   MaxQps: number
 
   /**
-   * 消息保留时间
+   * 最大消息保留时间，分钟为单位
    */
   MessageRetentionTime: number
 
@@ -3018,6 +3048,54 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UsedStorageBudget: number
+
+  /**
+      * 最大生产消息速率，以条数为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxPublishRateInMessages: number
+
+  /**
+      * 最大推送消息速率，以条数为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxDispatchRateInMessages: number
+
+  /**
+      * 最大生产消息速率，以字节为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxPublishRateInBytes: number
+
+  /**
+      * 最大推送消息速率，以字节为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxDispatchRateInBytes: number
+
+  /**
+      * 已创建主题数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicNum: number
+
+  /**
+      * 最长消息延时，以秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxMessageDelayInSeconds: number
+
+  /**
+      * 是否开启公网访问，不填时默认开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicAccessEnabled: boolean
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**

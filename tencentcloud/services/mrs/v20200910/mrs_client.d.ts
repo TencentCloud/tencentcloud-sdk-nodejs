@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ImageToObjectRequest, TextToObjectRequest, ImageToClassResponse, TextToClassResponse, ImageToClassRequest, TextToObjectResponse, TextToClassRequest, ImageToObjectResponse } from "./mrs_models";
+import { ImageToObjectRequest, TextToObjectRequest, TextToObjectResponse, ImageToClassResponse, ImageToObjectResponse, TextToClassResponse, ImageToClassRequest, TextToClassRequest } from "./mrs_models";
 /**
  * mrs client
  * @class

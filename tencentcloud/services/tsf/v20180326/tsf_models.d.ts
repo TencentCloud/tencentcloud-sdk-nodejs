@@ -115,6 +115,23 @@ export interface ApiDetailResponse {
     Description: string;
 }
 /**
+ * UpdateApiRateLimitRule请求参数结构体
+ */
+export interface UpdateApiRateLimitRuleRequest {
+    /**
+      * 限流规则ID
+      */
+    RuleId: string;
+    /**
+      * 开启/禁用，enabled/disabled
+      */
+    UsableStatus: string;
+    /**
+      * qps值，开启限流规则时，必填
+      */
+    MaxQps?: number;
+}
+/**
  * cos临时帐号信息
  */
 export interface CosCredentials {
@@ -3784,34 +3801,18 @@ export interface ShrinkInstancesResponse {
     RequestId?: string;
 }
 /**
- * TSF基本资源信息概览
+ * DeleteLaneRule返回参数结构体
  */
-export interface OverviewBasicResourceUsage {
+export interface DeleteLaneRuleResponse {
     /**
-      * 应用总数
+      * 操作状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApplicationCount: number;
+    Result: boolean;
     /**
-      * 命名空间总数
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    NamespaceCount: number;
-    /**
-      * 部署组个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupCount: number;
-    /**
-      * 程序包存储空间用量，单位字节
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PackageSpaceUsed: number;
-    /**
-      * 已注册实例数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsulInstanceCount: number;
+    RequestId?: string;
 }
 /**
  * DescribeApiRateLimitRules返回参数结构体
@@ -4224,17 +4225,29 @@ export interface DescribeApiGroupRequest {
     GroupId: string;
 }
 /**
- * RedoTaskExecute返回参数结构体
+ * DescribeGatewayApis请求参数结构体
  */
-export interface RedoTaskExecuteResponse {
+export interface DescribeGatewayApisRequest {
     /**
-      * 成功失败
+      * 分组ID
       */
-    Result?: string;
+    GroupId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 翻页偏移量
       */
-    RequestId?: string;
+    Offset: number;
+    /**
+      * 每页的记录数
+      */
+    Limit: number;
+    /**
+      * 搜索关键字，支持 API path
+      */
+    SearchWord?: string;
+    /**
+      * 部署组ID
+      */
+    GatewayDeployGroupId?: string;
 }
 /**
  * DescribeContainerGroupDetail请求参数结构体
@@ -4457,6 +4470,15 @@ export interface HealthCheckSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Type?: string;
+}
+/**
+ * DeleteLaneRule请求参数结构体
+ */
+export interface DeleteLaneRuleRequest {
+    /**
+      * 泳道规则Id
+      */
+    RuleId: string;
 }
 /**
  * api分组已绑定的网关部署组
@@ -5889,6 +5911,19 @@ export interface ModifyUploadInfoRequest {
     RepositoryId?: string;
 }
 /**
+ * DescribeGatewayApis返回参数结构体
+ */
+export interface DescribeGatewayApisResponse {
+    /**
+      * 翻页结构
+      */
+    Result: TsfPageApiDetailInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeUnitRule请求参数结构体
  */
 export interface DescribeUnitRuleRequest {
@@ -7110,24 +7145,34 @@ export interface DescribeUploadInfoRequest {
     RepositoryId?: string;
 }
 /**
- * 工作流最近批次的状态
+ * TSF基本资源信息概览
  */
-export interface TaskFlowLastBatchState {
+export interface OverviewBasicResourceUsage {
     /**
-      * 批次ID
+      * 应用总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowBatchId: string;
+    ApplicationCount: number;
     /**
-      * 批次历史ID
+      * 命名空间总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowBatchLogId: string;
+    NamespaceCount: number;
     /**
-      * 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING
+      * 部署组个数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    State: string;
+    GroupCount: number;
+    /**
+      * 程序包存储空间用量，单位字节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageSpaceUsed: number;
+    /**
+      * 已注册实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsulInstanceCount: number;
 }
 /**
  * DescribeUnitRules返回参数结构体
@@ -7275,6 +7320,26 @@ export interface ApplicationAttribute {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     GroupCount: number;
+}
+/**
+ * 工作流最近批次的状态
+ */
+export interface TaskFlowLastBatchState {
+    /**
+      * 批次ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowBatchId: string;
+    /**
+      * 批次历史ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowBatchLogId: string;
+    /**
+      * 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    State: string;
 }
 /**
  * DeletePkgs返回参数结构体
@@ -8370,21 +8435,17 @@ export interface DescribeApiGroupResponse {
     RequestId?: string;
 }
 /**
- * UpdateApiRateLimitRule请求参数结构体
+ * RedoTaskExecute返回参数结构体
  */
-export interface UpdateApiRateLimitRuleRequest {
+export interface RedoTaskExecuteResponse {
     /**
-      * 限流规则ID
+      * 成功失败
       */
-    RuleId: string;
+    Result?: string;
     /**
-      * 开启/禁用，enabled/disabled
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    UsableStatus: string;
-    /**
-      * qps值，开启限流规则时，必填
-      */
-    MaxQps?: number;
+    RequestId?: string;
 }
 /**
  * CreateLane请求参数结构体
@@ -10049,6 +10110,19 @@ false：失败。
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ApiDetailInfo 翻页对象
+ */
+export interface TsfPageApiDetailInfo {
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * API 信息列表
+      */
+    Content: Array<ApiDetailInfo>;
 }
 /**
  * DescribeBasicResourceUsage请求参数结构体

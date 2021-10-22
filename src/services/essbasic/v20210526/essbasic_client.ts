@@ -18,19 +18,23 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ResourceUrlInfo,
   SyncProxyOrganizationResponse,
   FlowApproverInfo,
   PrepareFlowsResponse,
   TemplateInfo,
+  DescribeResourceUrlsByFlowsResponse,
   DescribeTemplatesResponse,
   SyncProxyOrganizationOperatorsRequest,
   CreateSignUrlsRequest,
+  DescribeResourceUrlsByFlowsRequest,
   Component,
   SignUrlInfo,
   CreateConsoleLoginUrlRequest,
   CreateFlowsByTemplatesResponse,
   ProxyOrganizationOperator,
   SyncProxyOrganizationOperatorsResponse,
+  FlowResourceUrlInfo,
   DescribeTemplatesRequest,
   CreateConsoleLoginUrlResponse,
   CreateFlowsByTemplatesRequest,
@@ -117,6 +121,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUsageResponse) => void
   ): Promise<DescribeUsageResponse> {
     return this.request("DescribeUsage", req, cb)
+  }
+
+  /**
+   * 根据流程信息批量获取资源下载链接
+   */
+  async DescribeResourceUrlsByFlows(
+    req: DescribeResourceUrlsByFlowsRequest,
+    cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
+  ): Promise<DescribeResourceUrlsByFlowsResponse> {
+    return this.request("DescribeResourceUrlsByFlows", req, cb)
   }
 
   /**

@@ -128,9 +128,9 @@ it("tsf.v20180326.AddClusterInstances", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeGroupRelease", async function () {
+it("tsf.v20180326.DeleteLaneRule", async function () {
     try {
-       const data = await client.DescribeGroupRelease({})
+       const data = await client.DeleteLaneRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +508,9 @@ it("tsf.v20180326.UpdateApiTimeouts", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeLanes", async function () {
+it("tsf.v20180326.DescribeFlowLastBatchState", async function () {
     try {
-       const data = await client.DescribeLanes({})
+       const data = await client.DescribeFlowLastBatchState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +591,16 @@ it("tsf.v20180326.CreateServerlessGroup", async function () {
 it("tsf.v20180326.StopContainerGroup", async function () {
     try {
        const data = await client.StopContainerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeGroupRelease", async function () {
+    try {
+       const data = await client.DescribeGroupRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1008,6 +1018,16 @@ it("tsf.v20180326.DeletePkgs", async function () {
     }
 })
 
+it("tsf.v20180326.StopTaskBatch", async function () {
+    try {
+       const data = await client.StopTaskBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribePublicConfigs", async function () {
     try {
        const data = await client.DescribePublicConfigs({})
@@ -1318,16 +1338,6 @@ it("tsf.v20180326.RedoTaskExecute", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeFlowLastBatchState", async function () {
-    try {
-       const data = await client.DescribeFlowLastBatchState({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tsf.v20180326.DescribeGatewayAllGroupApis", async function () {
     try {
        const data = await client.DescribeGatewayAllGroupApis({})
@@ -1478,9 +1488,9 @@ it("tsf.v20180326.DraftApiGroup", async function () {
     }
 })
 
-it("tsf.v20180326.StopTaskBatch", async function () {
+it("tsf.v20180326.DescribeGatewayApis", async function () {
     try {
-       const data = await client.StopTaskBatch({})
+       const data = await client.DescribeGatewayApis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1611,6 +1621,16 @@ it("tsf.v20180326.DescribeReleasedConfig", async function () {
 it("tsf.v20180326.DescribePublicConfigReleases", async function () {
     try {
        const data = await client.DescribePublicConfigReleases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeLanes", async function () {
+    try {
+       const data = await client.DescribeLanes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

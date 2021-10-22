@@ -124,12 +124,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckBashRuleParams", req, cb);
     }
     /**
-     * 漏洞top统计
-     */
-    async DescribeVulTop(req, cb) {
-        return this.request("DescribeVulTop", req, cb);
-    }
-    /**
      * DescribeScanTaskDetails 查询扫描任务详情 , 可以查询扫描进度信息/异常;
      */
     async DescribeScanTaskDetails(req, cb) {
@@ -900,12 +894,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMalwareScanTask", req, cb);
     }
     /**
-     * 该接口已废弃
-
-本接口 (DescribeAccounts) 用于获取帐号列表数据。
+     * 漏洞top统计
      */
-    async DescribeAccounts(req, cb) {
-        return this.request("DescribeAccounts", req, cb);
+    async DescribeVulTop(req, cb) {
+        return this.request("DescribeVulTop", req, cb);
     }
     /**
      * 修改告警设置

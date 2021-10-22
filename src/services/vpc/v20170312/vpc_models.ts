@@ -557,7 +557,7 @@ export interface CreateDhcpIpResponse {
  */
 export interface DescribeIpGeolocationInfosRequest {
   /**
-   * 需查询的IP地址列表，支持IPv4和IPv6。批量查询的IP地址上限为100个。
+   * 需查询的IP地址列表，目前仅支持IPv4地址。查询的IP地址数量上限为100个。
    */
   AddressIps: Array<string>
 

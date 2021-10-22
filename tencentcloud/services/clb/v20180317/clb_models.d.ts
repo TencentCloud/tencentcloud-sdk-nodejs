@@ -249,6 +249,10 @@ OPEN：公网属性， INTERNAL：内网属性。
       * EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP。
       */
     EipAddressId?: string;
+    /**
+      * Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。
+      */
+    LoadBalancerPassToTarget?: boolean;
 }
 /**
  * 一条转发规则的健康检查状态
@@ -1477,6 +1481,10 @@ export interface ModifyListenerRequest {
       * 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。
       */
     DeregisterTargetRst?: boolean;
+    /**
+      * 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。
+      */
+    SessionType?: string;
 }
 /**
  * DeregisterTargetGroupInstances返回参数结构体
@@ -1596,6 +1604,11 @@ export interface HealthCheck {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HttpVersion?: string;
+    /**
+      * 自定义探测相关参数。健康检查原IP类型：0（使用LB的VIP做为源IP），1（使用100.64网段IP做为源IP），默认值：0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SourceIpType?: number;
 }
 /**
  * AssociateTargetGroups返回参数结构体

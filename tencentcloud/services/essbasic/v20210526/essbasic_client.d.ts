@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, PrepareFlowsResponse, DescribeTemplatesResponse, SyncProxyOrganizationOperatorsRequest, CreateSignUrlsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, SyncProxyOrganizationOperatorsResponse, DescribeTemplatesRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, PrepareFlowsRequest, CreateSignUrlsResponse, DescribeUsageRequest, DescribeUsageResponse } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, PrepareFlowsResponse, DescribeResourceUrlsByFlowsResponse, DescribeTemplatesResponse, SyncProxyOrganizationOperatorsRequest, CreateSignUrlsRequest, DescribeResourceUrlsByFlowsRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, SyncProxyOrganizationOperatorsResponse, DescribeTemplatesRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, PrepareFlowsRequest, CreateSignUrlsResponse, DescribeUsageRequest, DescribeUsageResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -33,6 +33,10 @@ export declare class Client extends AbstractClient {
  注: 此接口每日限频2次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
      */
     DescribeUsage(req: DescribeUsageRequest, cb?: (error: string, rep: DescribeUsageResponse) => void): Promise<DescribeUsageResponse>;
+    /**
+     * 根据流程信息批量获取资源下载链接
+     */
+    DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
     /**
      * 此接口（SyncProxyOrganization）用于同步渠道侧企业信息
      */

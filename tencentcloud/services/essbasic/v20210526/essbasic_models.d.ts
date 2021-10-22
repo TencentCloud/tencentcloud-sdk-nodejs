@@ -1,4 +1,24 @@
 /**
+ * 资源链接信息
+ */
+export interface ResourceUrlInfo {
+    /**
+      * 资源链接地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
+    /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+}
+/**
  * SyncProxyOrganization返回参数结构体
  */
 export interface SyncProxyOrganizationResponse {
@@ -99,6 +119,24 @@ export interface TemplateInfo {
     Recipients: Array<Recipient>;
 }
 /**
+ * DescribeResourceUrlsByFlows返回参数结构体
+ */
+export interface DescribeResourceUrlsByFlowsResponse {
+    /**
+      * 流程资源对应链接信息
+      */
+    FlowResourceUrlInfos: Array<FlowResourceUrlInfo>;
+    /**
+      * 创建消息，对应多个合同ID，
+成功为“”,创建失败则对应失败消息
+      */
+    ErrorMessages: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeTemplates返回参数结构体
  */
 export interface DescribeTemplatesResponse {
@@ -156,6 +194,23 @@ export interface CreateSignUrlsRequest {
       * 签署完成后H5引导页跳转URL
       */
     JumpUrl?: string;
+}
+/**
+ * DescribeResourceUrlsByFlows请求参数结构体
+ */
+export interface DescribeResourceUrlsByFlowsRequest {
+    /**
+      * 渠道应用相关信息
+      */
+    Agent: Agent;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 查询资源所对应的流程Id
+      */
+    FlowIds?: Array<string>;
 }
 /**
  * 此结构体 (Component) 用于描述控件属性。
@@ -427,6 +482,21 @@ export interface SyncProxyOrganizationOperatorsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 流程对应资源链接信息
+ */
+export interface FlowResourceUrlInfo {
+    /**
+      * 流程对应Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 流程对应资源链接信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceUrlInfos: Array<ResourceUrlInfo>;
 }
 /**
  * DescribeTemplates请求参数结构体

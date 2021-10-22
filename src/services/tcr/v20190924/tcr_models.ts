@@ -638,6 +638,11 @@ export interface DeleteInternalEndpointDnsRequest {
 false:  使用带有vpc的域名
       */
   UsePublicDomain?: boolean
+
+  /**
+   * 解析地域，需要保证和vpc处于同一地域，如果不填则默认为主实例地域
+   */
+  RegionName?: string
 }
 
 /**
@@ -744,6 +749,11 @@ export interface VpcAndDomainInfo {
 false: use instancename+"-vpc" as subdomain
       */
   UsePublicDomain?: boolean
+
+  /**
+   * 解析地域，需要保证和vpc处于同一地域，如果不填则默认为主实例地域
+   */
+  RegionName?: string
 }
 
 /**
@@ -3160,6 +3170,11 @@ false: 使用vpc域名
 默认为vpc域名
       */
   UsePublicDomain?: boolean
+
+  /**
+   * 解析地域，需要保证和vpc处于同一地域，如果不填则默认为主实例地域
+   */
+  RegionName?: string
 }
 
 /**

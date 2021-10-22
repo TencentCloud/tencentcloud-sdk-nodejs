@@ -262,7 +262,6 @@ import {
   DescribeAssetWebLocationInfoResponse,
   ModifyBruteAttackRulesRequest,
   ExportVulListRequest,
-  DescribeAccountsResponse,
   DescribeBaselineScanScheduleRequest,
   DescribeEmergencyVulListResponse,
   DescribeAssetUserListResponse,
@@ -276,7 +275,6 @@ import {
   AssetFilters,
   DescribeAssetDatabaseInfoResponse,
   SetBashEventsStatusRequest,
-  DescribeAccountsRequest,
   AssetAppProcessInfo,
   DescribeBaselineStrategyListRequest,
   RegionInfo,
@@ -288,7 +286,6 @@ import {
   DescribeAssetUserInfoRequest,
   DescribeProtectDirListRequest,
   ExportPrivilegeEventsRequest,
-  Account,
   DescribeMalwareFileResponse,
   TaskStatus,
   DescribeRiskDnsListResponse,
@@ -721,16 +718,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckBashRuleParamsResponse) => void
   ): Promise<CheckBashRuleParamsResponse> {
     return this.request("CheckBashRuleParams", req, cb)
-  }
-
-  /**
-   * 漏洞top统计
-   */
-  async DescribeVulTop(
-    req: DescribeVulTopRequest,
-    cb?: (error: string, rep: DescribeVulTopResponse) => void
-  ): Promise<DescribeVulTopResponse> {
-    return this.request("DescribeVulTop", req, cb)
   }
 
   /**
@@ -2016,15 +2003,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口已废弃
-
-本接口 (DescribeAccounts) 用于获取帐号列表数据。
-     */
-  async DescribeAccounts(
-    req: DescribeAccountsRequest,
-    cb?: (error: string, rep: DescribeAccountsResponse) => void
-  ): Promise<DescribeAccountsResponse> {
-    return this.request("DescribeAccounts", req, cb)
+   * 漏洞top统计
+   */
+  async DescribeVulTop(
+    req: DescribeVulTopRequest,
+    cb?: (error: string, rep: DescribeVulTopResponse) => void
+  ): Promise<DescribeVulTopResponse> {
+    return this.request("DescribeVulTop", req, cb)
   }
 
   /**

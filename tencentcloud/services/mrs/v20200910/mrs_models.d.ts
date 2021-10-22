@@ -72,6 +72,11 @@ export interface Template {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Surgery: Surgery;
+    /**
+      * 心电图报告
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Electrocardiogram: Electrocardiogram;
 }
 /**
  * 弹性质地
@@ -307,7 +312,7 @@ export interface ImageToObjectRequest {
       */
     HandleParam: HandleParam;
     /**
-      * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
+      * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明），363（心电图）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
       */
     Type: number;
     /**
@@ -325,7 +330,7 @@ export interface TextToObjectRequest {
       */
     Text: string;
     /**
-      * 报告类型，目前支持12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
+      * 报告类型，目前支持12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明），363（心电图）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
       */
     Type: number;
     /**
@@ -690,19 +695,17 @@ export interface Advice {
     Text: string;
 }
 /**
- * 手术记录属性
+ * TextToObject返回参数结构体
  */
-export interface SurgeryAttr {
+export interface TextToObjectResponse {
     /**
-      * 名称
-注意：此字段可能返回 null，表示取不到有效值。
+      * 报告结构化结果
       */
-    Name: string;
+    Template: Template;
     /**
-      * 值
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Value: string;
+    RequestId?: string;
 }
 /**
  * 部位信息
@@ -804,49 +807,29 @@ export interface Invas {
     Src: string;
 }
 /**
- * 门诊病历信息
+ * 心电图指标项
  */
-export interface MedicalRecordInfo {
+export interface EcgItem {
     /**
-      * 就诊日期
+      * 名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiagnosisTime: string;
+    Name: string;
     /**
-      * 就诊科室
+      * 值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiagnosisDepartmentName: string;
+    Value: string;
     /**
-      * 就诊医生
+      * 单位
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiagnosisDoctorName: string;
+    Unit: string;
     /**
-      * 临床诊断
+      * 原文
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClinicalDiagnosis: string;
-    /**
-      * 主述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MainNarration: string;
-    /**
-      * 体格检查
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PhysicalExamination: string;
-    /**
-      * 检查结论
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InspectionFindings: string;
-    /**
-      * 治疗意见
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TreatmentOpinion: string;
+    Src: string;
 }
 /**
  * 标准部位
@@ -1022,6 +1005,45 @@ export interface PatientInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MedicalInsuranceType: string;
+    /**
+      * 标准化年龄
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgeNorm: string;
+    /**
+      * 民族
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Nation: string;
+    /**
+      * 婚姻代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MarriedCode: string;
+    /**
+      * 职业代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfessionCode: string;
+    /**
+      * 居民医保代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MedicalInsuranceTypeCode: string;
+}
+/**
+ * ImageToObject返回参数结构体
+ */
+export interface ImageToObjectResponse {
+    /**
+      * 报告结构化结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Template: Template;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 个人史
@@ -1344,34 +1366,19 @@ export interface Value {
     Positive: string;
 }
 /**
- * 出入院诊断
+ * 结论
  */
-export interface DischargeDiagnosis {
+export interface Summary {
     /**
-      * 表格位置
+      * 症状
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TableIndex: number;
+    Symptom: Array<SymptomInfo>;
     /**
-      * 出院诊断
+      * 文本
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OutDiagnosis: BlockInfo;
-    /**
-      * 疾病编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiseaseCode: BlockInfo;
-    /**
-      * 入院情况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InStatus: BlockInfo;
-    /**
-      * 出院情况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OutStatus: BlockInfo;
+    Text: string;
 }
 /**
  * 疾病史
@@ -1552,19 +1559,19 @@ export interface BlockInfo {
     Name: string;
 }
 /**
- * 结论
+ * 手术记录属性
  */
-export interface Summary {
+export interface SurgeryAttr {
     /**
-      * 症状
+      * 名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Symptom: Array<SymptomInfo>;
+    Name: string;
     /**
-      * 文本
+      * 值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Text: string;
+    Value: string;
 }
 /**
  * 文本类型
@@ -1605,6 +1612,111 @@ export interface HistologyLevel {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Src: string;
+}
+/**
+ * 心电图详情
+ */
+export interface EcgDescription {
+    /**
+      * 心率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeartRate: EcgItem;
+    /**
+      * 心房率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuricularRate: EcgItem;
+    /**
+      * 心室率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VentricularRate: EcgItem;
+    /**
+      * 节律
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rhythm: EcgItem;
+    /**
+      * P波时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PDuration: EcgItem;
+    /**
+      * QRS时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QrsDuration: EcgItem;
+    /**
+      * QRS电轴
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QrsAxis: EcgItem;
+    /**
+      * P-R间期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PRInterval: EcgItem;
+    /**
+      * P-P间期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PPInterval: EcgItem;
+    /**
+      * R-R间期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RRInterval: EcgItem;
+    /**
+      * P-J间期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PJInterval: EcgItem;
+    /**
+      * Q-T间期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QTInterval: EcgItem;
+    /**
+      * qt/qtc间期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QTCInterval: EcgItem;
+    /**
+      * RV5/SV1振幅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rv5SV1Amplitude: EcgItem;
+    /**
+      * RV5+SV1振幅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rv5AddSV1Amplitude: EcgItem;
+    /**
+      * PRT电轴
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PRTAxis: EcgItem;
+    /**
+      * RV5振幅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rv5Amplitude: EcgItem;
+    /**
+      * SV1振幅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SV1Amplitude: EcgItem;
+    /**
+      * RV6/SV2
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RV6SV2: EcgItem;
+    /**
+      * P/QRS/T电轴
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PQRSTAxis: EcgItem;
 }
 /**
  * 检验指标项
@@ -1791,32 +1903,49 @@ export interface FirstPage {
     ClinicalDiagnosis: BlockInfo;
 }
 /**
- * 检查报告单
+ * 出入院诊断
  */
-export interface Check {
+export interface DischargeDiagnosis {
     /**
-      * 描述
+      * 表格位置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Desc: Desc;
+    TableIndex: number;
     /**
-      * 结论
+      * 出院诊断
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Summary: Summary;
+    OutDiagnosis: BlockInfo;
+    /**
+      * 疾病编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiseaseCode: BlockInfo;
+    /**
+      * 入院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InStatus: BlockInfo;
+    /**
+      * 出院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutStatus: BlockInfo;
 }
 /**
- * TextToObject返回参数结构体
+ * 心电图诊断
  */
-export interface TextToObjectResponse {
+export interface EcgDiagnosis {
     /**
-      * 报告结构化结果
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Template: Template;
+    Name: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 值
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Value: Array<string>;
 }
 /**
  * TextToClass请求参数结构体
@@ -1838,18 +1967,79 @@ export interface Surgery {
     SurgeryHistory: SurgeryHistory;
 }
 /**
- * ImageToObject返回参数结构体
+ * 门诊病历信息
  */
-export interface ImageToObjectResponse {
+export interface MedicalRecordInfo {
     /**
-      * 报告结构化结果
+      * 就诊日期
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Template: Template;
+    DiagnosisTime: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 就诊科室
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    DiagnosisDepartmentName: string;
+    /**
+      * 就诊医生
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiagnosisDoctorName: string;
+    /**
+      * 临床诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClinicalDiagnosis: string;
+    /**
+      * 主述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MainNarration: string;
+    /**
+      * 体格检查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PhysicalExamination: string;
+    /**
+      * 检查结论
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InspectionFindings: string;
+    /**
+      * 治疗意见
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TreatmentOpinion: string;
+}
+/**
+ * 检查报告单
+ */
+export interface Check {
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Desc: Desc;
+    /**
+      * 结论
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Summary: Summary;
+}
+/**
+ * 心电图
+ */
+export interface Electrocardiogram {
+    /**
+      * 心电图详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EcgDescription: EcgDescription;
+    /**
+      * 心电图诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EcgDiagnosis: EcgDiagnosis;
 }
 /**
  * 大小

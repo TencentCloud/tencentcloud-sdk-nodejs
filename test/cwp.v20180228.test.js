@@ -178,16 +178,6 @@ it("cwp.v20180228.CheckBashRuleParams", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeVulTop", async function () {
-    try {
-       const data = await client.DescribeVulTop({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.DescribeScanTaskDetails", async function () {
     try {
        const data = await client.DescribeScanTaskDetails({})
@@ -1468,9 +1458,9 @@ it("cwp.v20180228.DeleteMalwareScanTask", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeAccounts", async function () {
+it("cwp.v20180228.DescribeVulTop", async function () {
     try {
-       const data = await client.DescribeAccounts({})
+       const data = await client.DescribeVulTop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

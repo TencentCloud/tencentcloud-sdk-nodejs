@@ -4979,7 +4979,21 @@ export interface DescribeConfigResponse {
 /**
  * 描述了数据盘的信息
  */
-export type DataDisk = null
+export interface DataDisk {
+  /**
+   * 数据盘大小。单位GB。
+   */
+  DiskSize: number
+
+  /**
+      * 数据盘类型，取值范围：
+- LOCAL_BASIC：本地硬盘
+- CLOUD_PREMIUM：高性能云硬盘
+
+默认取值： LOCAL_BASIC。
+      */
+  DiskType?: string
+}
 
 /**
  * ModifyVpcAttribute返回参数结构体

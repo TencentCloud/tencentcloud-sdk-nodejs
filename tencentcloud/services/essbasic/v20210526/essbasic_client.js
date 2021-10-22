@@ -66,6 +66,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUsage", req, cb);
     }
     /**
+     * 根据流程信息批量获取资源下载链接
+     */
+    async DescribeResourceUrlsByFlows(req, cb) {
+        return this.request("DescribeResourceUrlsByFlows", req, cb);
+    }
+    /**
      * 此接口（SyncProxyOrganization）用于同步渠道侧企业信息
      */
     async SyncProxyOrganization(req, cb) {

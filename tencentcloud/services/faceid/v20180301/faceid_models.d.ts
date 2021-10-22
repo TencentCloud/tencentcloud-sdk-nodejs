@@ -523,6 +523,10 @@ export interface GetEidTokenRequest {
       * 最长长度1024位。用户从Url中进入核身认证结束后重定向的回调链接地址。EidToken会在该链接的query参数中。
       */
     RedirectUrl?: string;
+    /**
+      * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+      */
+    Encryption?: Encryption;
 }
 /**
  * IdCardOCRVerification请求参数结构体

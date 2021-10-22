@@ -321,6 +321,21 @@ export interface AutoScalingNotification {
    * 事件通知ID。
    */
   AutoScalingNotificationId: string
+
+  /**
+   * 通知接收端类型。
+   */
+  TargetType: string
+
+  /**
+   * CMQ 队列名。
+   */
+  QueueName: string
+
+  /**
+   * CMQ 主题名。
+   */
+  TopicName: string
 }
 
 /**
@@ -1567,7 +1582,22 @@ export interface CreateNotificationConfigurationRequest {
   /**
    * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
    */
-  NotificationUserGroupIds: Array<string>
+  NotificationUserGroupIds?: Array<string>
+
+  /**
+   * 通知接收端类型，取值：`USER_GROUP`，`CMQ_QUEUE`，`CMQ_TOPIC`。默认值为：`USER_GROUP`。
+   */
+  TargetType?: string
+
+  /**
+   * CMQ 队列名称，如 TargetType 取值为 `CMQ_QUEUE`，该字段必填。
+   */
+  QueueName?: string
+
+  /**
+   * CMQ 主题名称，如 TargetType 取值为 `CMQ_TOPIC`，该字段必填。
+   */
+  TopicName?: string
 }
 
 /**
@@ -1614,6 +1644,16 @@ export interface ModifyNotificationConfigurationRequest {
    * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
    */
   NotificationUserGroupIds?: Array<string>
+
+  /**
+   * CMQ 队列名。
+   */
+  QueueName?: string
+
+  /**
+   * CMQ 主题名。
+   */
+  TopicName?: string
 }
 
 /**

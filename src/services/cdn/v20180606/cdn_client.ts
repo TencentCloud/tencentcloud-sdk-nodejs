@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeWafDataRequest,
   DescribeCdnDomainLogsResponse,
   ScdnTopUrlData,
   ScdnLogTaskDetail,
@@ -52,24 +53,27 @@ import {
   PostSize,
   ListTopWafDataRequest,
   DescribeCdnDataResponse,
-  EnableClsLogTopicRequest,
+  DescribeIpStatusResponse,
   UpdateImageConfigResponse,
   ScdnDomain,
   CacheConfigNoCache,
   ListTopDDoSDataRequest,
-  AccessControl,
+  DescribeDistrictIspDataRequest,
   DeleteCdnDomainRequest,
   DescribePayTypeResponse,
+  DescribeEventLogDataRequest,
   ForceRedirect,
   PathRule,
   ListTopDataRequest,
   ListClsTopicDomainsRequest,
   DescribeDomainsResponse,
   DescribePayTypeRequest,
+  DescribeCcDataResponse,
   UpdateImageConfigRequest,
   DisableCachesRequest,
   AdvancedAuthenticationTypeD,
   StartCdnDomainResponse,
+  UrlRedirect,
   CompressionRule,
   GuetzliAdapter,
   UpdateScdnDomainResponse,
@@ -79,7 +83,7 @@ import {
   DescribeDomainsConfigRequest,
   TopData,
   EnableCachesRequest,
-  Quota,
+  ClsLogIpData,
   CreateScdnDomainRequest,
   HeaderKey,
   DescribeBillingDataRequest,
@@ -87,6 +91,7 @@ import {
   DeleteClsLogTopicRequest,
   UserAgentFilter,
   ListTopCcDataRequest,
+  StartCdnDomainRequest,
   DeleteScdnDomainRequest,
   DescribeDistrictIspDataResponse,
   DescribeCdnOriginIpRequest,
@@ -101,6 +106,7 @@ import {
   TimestampData,
   TpgAdapter,
   CacheConfigCache,
+  PushUrlsCacheRequest,
   DescribeReportDataResponse,
   DisableClsLogTopicRequest,
   RuleCacheConfig,
@@ -147,7 +153,7 @@ import {
   SecurityConfig,
   DescribePushTasksResponse,
   ResourceOriginData,
-  IpStatus,
+  DDoSAttackIPTopData,
   AddCdnDomainResponse,
   ListScdnDomainsResponse,
   VerifyDomainRecordResponse,
@@ -157,6 +163,7 @@ import {
   AccessControlRule,
   HttpHeaderPathRule,
   CreateScdnLogTaskRequest,
+  Quota,
   DistrictIspInfo,
   SimpleCacheRule,
   ModifyPurgeFetchTaskStatusResponse,
@@ -169,12 +176,12 @@ import {
   ResponseHeader,
   DuplicateDomainConfigResponse,
   CdnIpHistory,
-  SummarizedData,
+  ErrorPageRule,
   UpdateScdnDomainRequest,
   UpdatePayTypeRequest,
   ManageClsTopicDomainsRequest,
   ListDiagnoseReportRequest,
-  ScdnWafConfig,
+  OriginAuthentication,
   DomainBotCount,
   CreateScdnFailedLogTaskRequest,
   Cache,
@@ -184,20 +191,22 @@ import {
   ListScdnLogTasksRequest,
   ListTopCcDataResponse,
   PathBasedOriginRule,
-  PushUrlsCacheRequest,
+  IpStatus,
   MainlandConfig,
   DescribeReportDataRequest,
   DescribePushTasksRequest,
-  DescribeScdnTopDataRequest,
+  DescribeDDoSDataRequest,
   DescribeUrlViolationsRequest,
   RefererRule,
   DescribeScdnIpStrategyRequest,
   ScdnCCRules,
   IpFreqLimit,
-  ScdnDdosConfig,
+  EnableClsLogTopicRequest,
   CreateDiagnoseUrlResponse,
   CreateClsLogTopicRequest,
   CacheOptResult,
+  DescribeScdnTopDataRequest,
+  ListTopClsLogDataRequest,
   CreateVerifyRecordResponse,
   StopCdnDomainRequest,
   DescribeMapInfoResponse,
@@ -223,18 +232,20 @@ import {
   DeleteClsLogTopicResponse,
   DescribeBillingDataResponse,
   DisableCachesResponse,
+  EventLogStatsData,
   SchemeKey,
   DescribeImageConfigRequest,
   DescribeCdnIpResponse,
   AdvanceCacheRule,
-  DescribeIpStatusResponse,
-  DescribeDistrictIspDataRequest,
+  DescribeCcDataRequest,
+  AccessControl,
   ListScdnLogTasksResponse,
   ScdnErrorPage,
   CacheKey,
-  UrlRedirect,
+  ScdnDdosConfig,
   DownstreamCapping,
   CookieKey,
+  ListTopClsLogDataResponse,
   StatusCodeCacheRule,
   VerifyDomainRecordRequest,
   KeyRule,
@@ -246,13 +257,14 @@ import {
   BandwidthAlert,
   CreateVerifyRecordRequest,
   ClsLogObject,
+  DescribeWafDataResponse,
   RegionMapRelation,
   PurgePathCacheRequest,
   DescribeDiagnoseReportResponse,
   CreateScdnFailedLogTaskResponse,
   CdnData,
   PurgeUrlsCacheRequest,
-  StartCdnDomainRequest,
+  DDoSAttackBandwidthData,
   OriginPullOptimization,
   ErrorPage,
   PushTask,
@@ -265,7 +277,7 @@ import {
   ListTopWafDataResponse,
   Sort,
   ClientInfo,
-  DescribePurgeTasksRequest,
+  DescribeEventLogDataResponse,
   ListTopBotDataRequest,
   PushUrlsCacheResponse,
   OriginCombine,
@@ -291,9 +303,11 @@ import {
   ScdnAclConfig,
   DiagnoseUnit,
   DiagnoseInfo,
+  ScdnWafConfig,
   DescribePurgeTasksResponse,
-  OriginAuthentication,
-  ErrorPageRule,
+  DDoSStatsData,
+  SummarizedData,
+  DescribePurgeTasksRequest,
   DescribeOriginDataResponse,
   PurgeTask,
   DDoSTopData,
@@ -309,6 +323,7 @@ import {
   StopScdnDomainRequest,
   ScdnTypeData,
   Quic,
+  DescribeDDoSDataResponse,
   DescribeDomainsRequest,
   OfflineCache,
   CreateEdgePackTaskRequest,
@@ -438,6 +453,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+   */
+  async GetDisableRecords(
+    req: GetDisableRecordsRequest,
+    cb?: (error: string, rep: GetDisableRecordsResponse) => void
+  ): Promise<GetDisableRecordsResponse> {
+    return this.request("GetDisableRecords", req, cb)
+  }
+
+  /**
      * DescribeIpVisit 用于查询 5 分钟活跃用户数，及日活跃用户数明细
 
 + 5 分钟活跃用户数：根据日志中客户端 IP，5 分钟粒度去重统计
@@ -503,13 +528,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+   * CC统计数据查询
    */
-  async GetDisableRecords(
-    req: GetDisableRecordsRequest,
-    cb?: (error: string, rep: GetDisableRecordsResponse) => void
-  ): Promise<GetDisableRecordsResponse> {
-    return this.request("GetDisableRecords", req, cb)
+  async DescribeCcData(
+    req: DescribeCcDataRequest,
+    cb?: (error: string, rep: DescribeCcDataResponse) => void
+  ): Promise<DescribeCcDataResponse> {
+    return this.request("DescribeCcData", req, cb)
   }
 
   /**
@@ -563,13 +588,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+   * DescribeDiagnoseReport 用于获取指定报告id的内容
    */
-  async DescribeCertDomains(
-    req: DescribeCertDomainsRequest,
-    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
-  ): Promise<DescribeCertDomainsResponse> {
-    return this.request("DescribeCertDomains", req, cb)
+  async DescribeDiagnoseReport(
+    req: DescribeDiagnoseReportRequest,
+    cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void
+  ): Promise<DescribeDiagnoseReportResponse> {
+    return this.request("DescribeDiagnoseReport", req, cb)
+  }
+
+  /**
+   * DDoS统计数据查询
+   */
+  async DescribeDDoSData(
+    req: DescribeDDoSDataRequest,
+    cb?: (error: string, rep: DescribeDDoSDataResponse) => void
+  ): Promise<DescribeDDoSDataResponse> {
+    return this.request("DescribeDDoSData", req, cb)
+  }
+
+  /**
+   * 通过CLS日志计算Top信息。支持近7天的日志数据。
+   */
+  async ListTopClsLogData(
+    req: ListTopClsLogDataRequest,
+    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
+  ): Promise<ListTopClsLogDataResponse> {
+    return this.request("ListTopClsLogData", req, cb)
   }
 
   /**
@@ -590,6 +635,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListTopCcDataResponse) => void
   ): Promise<ListTopCcDataResponse> {
     return this.request("ListTopCcData", req, cb)
+  }
+
+  /**
+   * 查询在SCDN IP安全策略
+   */
+  async DescribeScdnIpStrategy(
+    req: DescribeScdnIpStrategyRequest,
+    cb?: (error: string, rep: DescribeScdnIpStrategyResponse) => void
+  ): Promise<DescribeScdnIpStrategyResponse> {
+    return this.request("DescribeScdnIpStrategy", req, cb)
   }
 
   /**
@@ -765,6 +820,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Waf统计数据查询
+   */
+  async DescribeWafData(
+    req: DescribeWafDataRequest,
+    cb?: (error: string, rep: DescribeWafDataResponse) => void
+  ): Promise<DescribeWafDataResponse> {
+    return this.request("DescribeWafData", req, cb)
+  }
+
+  /**
    * 获取DDoS攻击Top数据
    */
   async ListTopDDoSData(
@@ -828,23 +893,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeDiagnoseReport 用于获取指定报告id的内容
+   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
    */
-  async DescribeDiagnoseReport(
-    req: DescribeDiagnoseReportRequest,
-    cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void
-  ): Promise<DescribeDiagnoseReportResponse> {
-    return this.request("DescribeDiagnoseReport", req, cb)
+  async DescribeCertDomains(
+    req: DescribeCertDomainsRequest,
+    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
+  ): Promise<DescribeCertDomainsResponse> {
+    return this.request("DescribeCertDomains", req, cb)
   }
 
   /**
-   * 查询在SCDN IP安全策略
+   * DescribeEventLogData 用于查询事件日志统计曲线
    */
-  async DescribeScdnIpStrategy(
-    req: DescribeScdnIpStrategyRequest,
-    cb?: (error: string, rep: DescribeScdnIpStrategyResponse) => void
-  ): Promise<DescribeScdnIpStrategyResponse> {
-    return this.request("DescribeScdnIpStrategy", req, cb)
+  async DescribeEventLogData(
+    req: DescribeEventLogDataRequest,
+    cb?: (error: string, rep: DescribeEventLogDataResponse) => void
+  ): Promise<DescribeEventLogDataResponse> {
+    return this.request("DescribeEventLogData", req, cb)
   }
 
   /**
