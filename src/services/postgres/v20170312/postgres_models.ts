@@ -777,18 +777,18 @@ export interface DescribeDBInstanceAttributeRequest {
 }
 
 /**
- * ModifyDBInstancesProject返回参数结构体
+ * CloseServerlessDBExtranetAccess请求参数结构体
  */
-export interface ModifyDBInstancesProjectResponse {
+export interface CloseServerlessDBExtranetAccessRequest {
   /**
-   * 转移项目成功的实例个数
+   * 实例唯一标识符
    */
-  Count?: number
+  DBInstanceId?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例名称
    */
-  RequestId?: string
+  DBInstanceName?: string
 }
 
 /**
@@ -887,6 +887,21 @@ export interface DurationAnalysis {
    * 对应时段区间慢SQL 条数
    */
   Count: number
+}
+
+/**
+ * DescribeDBInstanceParameters请求参数结构体
+ */
+export interface DescribeDBInstanceParametersRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+
+  /**
+   * 查询指定参数详情。ParamName为空或不传，默认返回全部参数列表
+   */
+  ParamName?: string
 }
 
 /**
@@ -1160,18 +1175,18 @@ export interface ResetAccountPasswordResponse {
 }
 
 /**
- * CloseServerlessDBExtranetAccess请求参数结构体
+ * ModifyDBInstancesProject返回参数结构体
  */
-export interface CloseServerlessDBExtranetAccessRequest {
+export interface ModifyDBInstancesProjectResponse {
   /**
-   * 实例唯一标识符
+   * 转移项目成功的实例个数
    */
-  DBInstanceId?: string
+  Count?: number
 
   /**
-   * 实例名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceName?: string
+  RequestId?: string
 }
 
 /**
@@ -1353,6 +1368,69 @@ export interface DestroyDBInstanceRequest {
    * 待下线实例ID
    */
   DBInstanceId: string
+}
+
+/**
+ * DescribeParamsEvent请求参数结构体
+ */
+export interface DescribeParamsEventRequest {
+  /**
+   * 实例DB ID
+   */
+  DBInstanceId: string
+}
+
+/**
+ * 参数修改事件信息
+ */
+export interface EventInfo {
+  /**
+      * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamName: string
+
+  /**
+      * 原参数值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldValue: string
+
+  /**
+      * 本次修改期望参数值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewValue: string
+
+  /**
+      * 后台参数修改开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyTime: string
+
+  /**
+      * 后台参数生效开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EffectiveTime: string
+
+  /**
+      * 修改状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State: string
+
+  /**
+      * 操作者（一般为用户sub UIN）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Operator: string
+
+  /**
+      * 时间日志。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventLog: string
 }
 
 /**
@@ -1723,6 +1801,26 @@ export interface CreateReadOnlyGroupRequest {
 }
 
 /**
+ * DescribeParamsEvent返回参数结构体
+ */
+export interface DescribeParamsEventResponse {
+  /**
+   * 参数修改事件总数，以参数为统计粒度
+   */
+  TotalCount: number
+
+  /**
+   * 实例参数修改事件详情
+   */
+  EventItems: Array<EventItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CloseServerlessDBExtranetAccess返回参数结构体
  */
 export interface CloseServerlessDBExtranetAccessResponse {
@@ -1733,6 +1831,29 @@ export interface CloseServerlessDBExtranetAccessResponse {
 }
 
 /**
+ * 修改参数条目，以参数为维度
+ */
+export interface EventItem {
+  /**
+      * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamName: string
+
+  /**
+      * 修改事件数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventCount: number
+
+  /**
+      * 修改时间详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventDetail: Array<EventInfo>
+}
+
+/**
  * RestartDBInstance请求参数结构体
  */
 export interface RestartDBInstanceRequest {
@@ -1740,6 +1861,113 @@ export interface RestartDBInstanceRequest {
    * 实例ID，形如postgres-6r233v55
    */
   DBInstanceId: string
+}
+
+/**
+ * 参数详情
+ */
+export interface ParamInfo {
+  /**
+      * 参数ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ID: number
+
+  /**
+      * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 参数值类型：integer（整型）、real（浮点型）、bool（布尔型）、enum（枚举类型）、mutil_enum（枚举类型、支持多选）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamValueType: string
+
+  /**
+      * 参数值 单位。参数没有单位是，该字段返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit: string
+
+  /**
+      * 参数默认值。以字符串形式返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefaultValue: string
+
+  /**
+      * 参数当前运行值。以字符串形式返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurrentValue: string
+
+  /**
+      * 枚举类型参数，取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnumValue: Array<string>
+
+  /**
+      * 数值类型（integer、real）参数，取值下界
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Max: number
+
+  /**
+      * 数值类型（integer、real）参数，取值上界
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Min: number
+
+  /**
+      * 参数中文描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamDescriptionCH: string
+
+  /**
+      * 参数英文描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParamDescriptionEN: string
+
+  /**
+      * 参数修改，是否重启生效。（true为需要，false为不需要）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NeedReboot: boolean
+
+  /**
+      * 参数中文分类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassificationCN: string
+
+  /**
+      * 参数英文分类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassificationEN: string
+
+  /**
+      * 是否和规格相关。（true为相关，false为不想关）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecRelated: boolean
+
+  /**
+      * 是否为重点参数。（true为重点参数，修改是需要重点关注，可能会影响实例性能）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Advanced: boolean
+
+  /**
+      * 参数最后一次修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastModifyTime: string
 }
 
 /**
@@ -2235,6 +2463,16 @@ export interface Filter {
  * DisIsolateDBInstances返回参数结构体
  */
 export interface DisIsolateDBInstancesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDBInstanceParameters返回参数结构体
+ */
+export interface ModifyDBInstanceParametersResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2738,6 +2976,21 @@ export interface DescribeDBErrlogsResponse {
 }
 
 /**
+ * 批量修改参数
+ */
+export interface ParamEntry {
+  /**
+   * 参数名
+   */
+  Name: string
+
+  /**
+   * 修改参数值。入参均以字符串形式传递，例如：小数”0.1“、整数”1000“、枚举”replica“
+   */
+  ExpectedValue: string
+}
+
+/**
  * InquiryPriceUpgradeDBInstance返回参数结构体
  */
 export interface InquiryPriceUpgradeDBInstanceResponse {
@@ -2815,6 +3068,26 @@ export interface DescribeSlowQueryListRequest {
    * 分页偏移。取值范围[0,INF)，默认为0。
    */
   Offset?: number
+}
+
+/**
+ * DescribeDBInstanceParameters返回参数结构体
+ */
+export interface DescribeDBInstanceParametersResponse {
+  /**
+   * 参数列表总数
+   */
+  TotalCount: number
+
+  /**
+   * 参数列表返回详情
+   */
+  Detail: Array<ParamInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2936,6 +3209,21 @@ export interface DescribeSlowQueryAnalysisResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDBInstanceParameters请求参数结构体
+ */
+export interface ModifyDBInstanceParametersRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+
+  /**
+   * 待修改参数及期望值
+   */
+  ParamList: Array<ParamEntry>
 }
 
 /**

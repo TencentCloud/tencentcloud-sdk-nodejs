@@ -486,6 +486,12 @@ export interface VersionProvisionedConcurrencyInfo {
    * 函数版本号
    */
   Qualifier: string
+
+  /**
+      * 预置并发定时任务。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TriggerActions: Array<TriggerAction>
 }
 
 /**
@@ -2856,6 +2862,29 @@ export interface CfsInsInfo {
 }
 
 /**
+ * 预置定时任务动作
+ */
+export interface TriggerAction {
+  /**
+      * 定时预置名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TriggerName: string
+
+  /**
+      * 定时预置并发数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TriggerProvisionedConcurrencyNum: number
+
+  /**
+      * 设置定时触发器的时间配置，cron表达式。Cron 表达式有七个必需字段，按空格分隔。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TriggerCronConfig: string
+}
+
+/**
  * 限制信息
  */
 export interface LimitsInfo {
@@ -3097,6 +3126,11 @@ export interface PutProvisionedConcurrencyConfigRequest {
    * 函数所属命名空间，默认为default
    */
   Namespace?: string
+
+  /**
+   * 定时预置任务
+   */
+  TriggerActions?: Array<TriggerAction>
 }
 
 /**

@@ -1188,6 +1188,16 @@ it("cwp.v20180228.DescribeAssetDatabaseList", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeVulEffectHostList", async function () {
+    try {
+       const data = await client.DescribeVulEffectHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeScanTaskStatus", async function () {
     try {
        const data = await client.DescribeScanTaskStatus({})
@@ -1771,6 +1781,16 @@ it("cwp.v20180228.CreateScanMalwareSetting", async function () {
 it("cwp.v20180228.ModifyMalwareTimingScanSettings", async function () {
     try {
        const data = await client.ModifyMalwareTimingScanSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeVulList", async function () {
+    try {
+       const data = await client.DescribeVulList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

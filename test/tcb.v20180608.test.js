@@ -558,6 +558,16 @@ it("tcb.v20180608.DescribeCloudBaseRunOperationTypes", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudBaseRunServer", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ModifyEnv", async function () {
     try {
        const data = await client.ModifyEnv({})
@@ -681,6 +691,16 @@ it("tcb.v20180608.CreateStaticStore", async function () {
 it("tcb.v20180608.DescribeCloudBaseRunVersionRsByCondition", async function () {
     try {
        const data = await client.DescribeCloudBaseRunVersionRsByCondition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudBaseRunPodList", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunPodList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

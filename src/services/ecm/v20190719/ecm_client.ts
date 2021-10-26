@@ -85,6 +85,7 @@ import {
   NetworkInterface,
   DescribeVpcsResponse,
   ModifySecurityGroupAttributeRequest,
+  DescribePackingQuotaGroupResponse,
   LoadBalancer,
   ModifyModuleNameResponse,
   DescribePeakBaseOverviewRequest,
@@ -103,6 +104,7 @@ import {
   DescribeCustomImageTaskResponse,
   ISPCounter,
   CreateModuleResponse,
+  DescribePackingQuotaGroupRequest,
   SecurityGroupPolicy,
   TerminateDisksResponse,
   LoadBalancerHealth,
@@ -310,6 +312,7 @@ import {
   InstanceFamilyConfig,
   ModifySecurityGroupPoliciesResponse,
   ServiceTemplateSpecification,
+  PackingQuotaInfo,
   Image,
   DetachNetworkInterfaceRequest,
   ModifyTargetWeightRequest,
@@ -352,6 +355,7 @@ import {
   DescribeImageResponse,
   ListenerBackend,
   RegionInfo,
+  PackingQuotaGroup,
   DescribeNetworkInterfacesResponse,
   EnableRoutesResponse,
   AssignPrivateIpAddressesRequest,
@@ -1115,6 +1119,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: ModifySubnetAttributeResponse) => void
   ): Promise<ModifySubnetAttributeResponse> {
     return this.request("ModifySubnetAttribute", req, cb)
+  }
+
+  /**
+   * 使用本接口获取某种机型在某些区域的装箱配额（当使用虚拟机型时，返回的是一组相互关联的装箱配额）。
+   */
+  async DescribePackingQuotaGroup(
+    req: DescribePackingQuotaGroupRequest,
+    cb?: (error: string, rep: DescribePackingQuotaGroupResponse) => void
+  ): Promise<DescribePackingQuotaGroupResponse> {
+    return this.request("DescribePackingQuotaGroup", req, cb)
   }
 
   /**

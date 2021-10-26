@@ -20,6 +20,8 @@ import { ClientConfig } from "../../../common/interface"
 import {
   BindOrganizationMemberAuthAccountRequest,
   BindOrganizationMemberAuthAccountResponse,
+  CreateOrganizationMemberResponse,
+  CreateOrganizationMemberRequest,
 } from "./organization_models"
 
 /**
@@ -29,6 +31,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("organization.tencentcloudapi.com", "2021-03-31", clientConfig)
+  }
+
+  /**
+   * 创建组织成员
+   */
+  async CreateOrganizationMember(
+    req: CreateOrganizationMemberRequest,
+    cb?: (error: string, rep: CreateOrganizationMemberResponse) => void
+  ): Promise<CreateOrganizationMemberResponse> {
+    return this.request("CreateOrganizationMember", req, cb)
   }
 
   /**

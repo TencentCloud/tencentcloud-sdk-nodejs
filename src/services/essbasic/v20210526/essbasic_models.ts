@@ -20,7 +20,7 @@
  */
 export interface ResourceUrlInfo {
   /**
-      * 资源链接地址
+      * 资源链接地址，过期时间5分钟
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Url: string

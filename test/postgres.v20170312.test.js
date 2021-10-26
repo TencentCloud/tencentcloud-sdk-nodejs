@@ -38,6 +38,16 @@ it("postgres.v20170312.DescribeOrders", async function () {
     }
 })
 
+it("postgres.v20170312.ModifyDBInstanceParameters", async function () {
+    try {
+       const data = await client.ModifyDBInstanceParameters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DestroyDBInstance", async function () {
     try {
        const data = await client.DestroyDBInstance({})
@@ -108,9 +118,9 @@ it("postgres.v20170312.InquiryPriceCreateDBInstances", async function () {
     }
 })
 
-it("postgres.v20170312.OpenDBExtranetAccess", async function () {
+it("postgres.v20170312.DescribeDBInstanceParameters", async function () {
     try {
-       const data = await client.OpenDBExtranetAccess({})
+       const data = await client.DescribeDBInstanceParameters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,6 +251,16 @@ it("postgres.v20170312.DescribeZones", async function () {
 it("postgres.v20170312.RestartDBInstance", async function () {
     try {
        const data = await client.RestartDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.OpenDBExtranetAccess", async function () {
+    try {
+       const data = await client.OpenDBExtranetAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,6 +491,16 @@ it("postgres.v20170312.CreateInstances", async function () {
 it("postgres.v20170312.DescribeProductConfig", async function () {
     try {
        const data = await client.DescribeProductConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeParamsEvent", async function () {
+    try {
+       const data = await client.DescribeParamsEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

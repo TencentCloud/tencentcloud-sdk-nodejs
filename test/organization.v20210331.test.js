@@ -18,6 +18,16 @@ const client = new tencentcloud.organization.v20210331.Client({
 })
 describe("organization.v20210331.test.js", function () {
 
+it("organization.v20210331.CreateOrganizationMember", async function () {
+    try {
+       const data = await client.CreateOrganizationMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.BindOrganizationMemberAuthAccount", async function () {
     try {
        const data = await client.BindOrganizationMemberAuthAccount({})

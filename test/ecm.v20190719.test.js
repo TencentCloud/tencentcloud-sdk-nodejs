@@ -738,6 +738,16 @@ it("ecm.v20190719.ModifySubnetAttribute", async function () {
     }
 })
 
+it("ecm.v20190719.DescribePackingQuotaGroup", async function () {
+    try {
+       const data = await client.DescribePackingQuotaGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.DescribeNetworkInterfaces", async function () {
     try {
        const data = await client.DescribeNetworkInterfaces({})

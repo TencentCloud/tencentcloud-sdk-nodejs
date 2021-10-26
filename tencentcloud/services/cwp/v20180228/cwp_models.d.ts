@@ -2493,6 +2493,31 @@ Other 混合云专区
     ProjectIds?: Array<number>;
 }
 /**
+ * DescribeVulEffectHostList请求参数结构体
+ */
+export interface DescribeVulEffectHostListRequest {
+    /**
+      * 分页limit 最大100
+      */
+    Limit: number;
+    /**
+      * 分页Offset
+      */
+    Offset: number;
+    /**
+      * 漏洞id
+      */
+    VulId: number;
+    /**
+      * 过滤条件。
+<li>AliasName - String - 主机名筛选</li>
+<li>TagIds - String - 主机标签id串，多个用英文逗号分隔</li>
+<li>Status - String - 状态,0: 待处理 1:忽略  3:已修复  5:检测中  6:修复这中.</li>
+<li>Uuid - String数组 - Uuid串数组</li>
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * 资产管理Web应用插件详情
  */
 export interface AssetWebAppPluginInfo {
@@ -2803,6 +2828,31 @@ export interface DescribeBanStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeVulList请求参数结构体
+ */
+export interface DescribeVulListRequest {
+    /**
+      * 返回数量，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。
+<li>IfEmergency - String - 是否必填：否 - 是否为应急漏洞，查询应急漏洞传:yes</li>
+<li>Status - String - 是否必填：是 - 漏洞状态筛选，0: 待处理 1:忽略  3:已修复  5:检测中，6：修复中 控制台仅处理0,1,3,5,6五种状态</li>
+<li>Level - String - 是否必填：否 - 漏洞等级筛选 1:低 2:中 3:高 4:提示</li>
+<li>VulName- String - 是否必填：否 - 漏洞名称搜索</li>
+<li>LastDay- int - 是否必填：否 - 查询近几日的数据，需要 -1 之后传入，例如近3日数据，传2</li>
+<li>OrderBy - String 是否必填：否 默认按照处理状态,威胁等级,检测时间排序 -排序字段，支持：level,lastTime的动态排序  hostCount 影响主机台数排序</li>
+<li>IsShowFollowVul -  String 是否必填：否   是否仅展示重点关注漏洞  0=展示全部 1=仅展示重点关注漏洞</li>
+<li>VulCategory-  String 是否必填：否   1: web应用漏洞 2:系统组件漏洞3:安全基线 4: Linux系统漏洞 5: windows补丁</li>
+      */
+    Filters?: Array<Filters>;
 }
 /**
  * 漏洞详细信息
@@ -4772,6 +4822,61 @@ export interface ModifyProVersionRenewFlagRequest {
     Quuid: string;
 }
 /**
+ * 漏洞影响主机列表
+ */
+export interface VulEffectHostList {
+    /**
+      * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventId: number;
+    /**
+      * 状态：0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 最后检测时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastTime: string;
+    /**
+      * 危害等级：1-低危；2-中危；3-高危；4-严重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level: number;
+    /**
+      * 主机Quuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Quuid: string;
+    /**
+      * 主机Uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uuid: string;
+    /**
+      * 主机HostIp
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HostIp: string;
+    /**
+      * 主机别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AliasName: string;
+    /**
+      * 主机标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<string>;
+    /**
+      * 说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+}
+/**
  * DescribeServerRelatedDirInfo请求参数结构体
  */
 export interface DescribeServerRelatedDirInfoRequest {
@@ -4857,6 +4962,30 @@ export interface DescribeBruteAttackListRequest {
 <li>Banned - String - 是否必填：否 - 阻断状态筛选，多个用","分割：0-未阻断（全局ZK开关关闭），82-未阻断(非专业版)，83-未阻断(已加白名单)，1-已阻断，2-未阻断-程序异常，3-未阻断-内网攻击暂不支持阻断，4-未阻断-安平暂不支持阻断</li>
       */
     Filters?: Array<Filter>;
+}
+/**
+ * DescribeVulList返回参数结构体
+ */
+export interface DescribeVulListResponse {
+    /**
+      * 漏洞列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VulInfoList: Array<VulInfoList>;
+    /**
+      * 漏洞总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 重点关注漏洞总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FollowVulCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeUndoVulCounts请求参数结构体
@@ -6807,6 +6936,24 @@ export interface ProtectStat {
       * 数量
       */
     Num: number;
+}
+/**
+ * DescribeVulEffectHostList返回参数结构体
+ */
+export interface DescribeVulEffectHostListResponse {
+    /**
+      * 列表总数量
+      */
+    TotalCount: number;
+    /**
+      * 影响主机列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VulEffectHostList: Array<VulEffectHostList>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * SwitchBashRules返回参数结构体
@@ -10666,6 +10813,73 @@ export interface SeparateMalwaresRequest {
       * 是否杀掉进程
       */
     KillProcess?: boolean;
+}
+/**
+ * 主机安全-漏洞管理-漏洞列表
+ */
+export interface VulInfoList {
+    /**
+      * 漏洞包含的事件id串，多个用“,”分割
+      */
+    Ids: string;
+    /**
+      * 漏洞名
+      */
+    Name: string;
+    /**
+      * 0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中 控制台仅处理0,1,3,5,6四种状态
+      */
+    Status: number;
+    /**
+      * 漏洞id
+      */
+    VulId: number;
+    /**
+      * 漏洞披露事件
+      */
+    PublishTime: string;
+    /**
+      * 最后检测时间
+      */
+    LastTime: string;
+    /**
+      * 影响主机数
+      */
+    HostCount: number;
+    /**
+      * 漏洞等级 1:低 2:中 3:高 4:提示
+      */
+    Level: number;
+    /**
+      * 废弃字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    From: number;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Descript: string;
+    /**
+      * 废弃字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublishTimeWisteria: string;
+    /**
+      * 废弃字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NameWisteria: string;
+    /**
+      * 废弃字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DescriptWisteria: string;
+    /**
+      * 聚合后事件状态串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatusStr: string;
 }
 /**
  * ExportIgnoreRuleEffectHostList请求参数结构体

@@ -43,12 +43,13 @@ import {
   NormalQueryItem,
   Tag,
   DescribeDBInstanceAttributeRequest,
-  ModifyDBInstancesProjectResponse,
+  CloseServerlessDBExtranetAccessRequest,
   ServerlessDBAccount,
   ModifyDBInstanceReadOnlyGroupRequest,
   AddDBInstanceToReadOnlyGroupResponse,
   CreateReadOnlyDBInstanceResponse,
   DurationAnalysis,
+  DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
   InquiryPriceCreateDBInstancesResponse,
   ModifySwitchTimePeriodResponse,
@@ -62,11 +63,13 @@ import {
   SetAutoRenewFlagResponse,
   SpecInfo,
   ResetAccountPasswordResponse,
-  CloseServerlessDBExtranetAccessRequest,
+  ModifyDBInstancesProjectResponse,
   ReadOnlyGroup,
   PgDeal,
   DescribeDBErrlogsRequest,
   DestroyDBInstanceRequest,
+  DescribeParamsEventRequest,
+  EventInfo,
   CreateInstancesResponse,
   AnalysisItems,
   Xlog,
@@ -76,8 +79,11 @@ import {
   DescribeSlowQueryListResponse,
   ServerlessDBInstance,
   CreateReadOnlyGroupRequest,
+  DescribeParamsEventResponse,
   CloseServerlessDBExtranetAccessResponse,
+  EventItem,
   RestartDBInstanceRequest,
+  ParamInfo,
   Detail,
   IsolateDBInstancesResponse,
   OpenDBExtranetAccessResponse,
@@ -96,6 +102,7 @@ import {
   DescribeDBBackupsRequest,
   Filter,
   DisIsolateDBInstancesResponse,
+  ModifyDBInstanceParametersResponse,
   OpenDBExtranetAccessRequest,
   SlowlogDetail,
   RemoveDBInstanceFromReadOnlyGroupRequest,
@@ -116,15 +123,18 @@ import {
   AccountInfo,
   DBBackup,
   DescribeDBErrlogsResponse,
+  ParamEntry,
   InquiryPriceUpgradeDBInstanceResponse,
   ModifySwitchTimePeriodRequest,
   DescribeSlowQueryListRequest,
+  DescribeDBInstanceParametersResponse,
   RegionInfo,
   RestartDBInstanceResponse,
   DescribeDBInstancesResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
   ResetAccountPasswordRequest,
   DescribeSlowQueryAnalysisResponse,
+  ModifyDBInstanceParametersRequest,
   RawSlowQuery,
   DescribeReadOnlyGroupsRequest,
   DescribeAccountsResponse,
@@ -166,6 +176,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrdersResponse) => void
   ): Promise<DescribeOrdersResponse> {
     return this.request("DescribeOrders", req, cb)
+  }
+
+  /**
+   * 批量修改参数
+   */
+  async ModifyDBInstanceParameters(
+    req: ModifyDBInstanceParametersRequest,
+    cb?: (error: string, rep: ModifyDBInstanceParametersResponse) => void
+  ): Promise<ModifyDBInstanceParametersResponse> {
+    return this.request("ModifyDBInstanceParameters", req, cb)
   }
 
   /**
@@ -239,13 +259,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（OpenDBExtranetAccess）用于开通外网。
+   * 获取实例可修改参数列表
    */
-  async OpenDBExtranetAccess(
-    req: OpenDBExtranetAccessRequest,
-    cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
-  ): Promise<OpenDBExtranetAccessResponse> {
-    return this.request("OpenDBExtranetAccess", req, cb)
+  async DescribeDBInstanceParameters(
+    req: DescribeDBInstanceParametersRequest,
+    cb?: (error: string, rep: DescribeDBInstanceParametersResponse) => void
+  ): Promise<DescribeDBInstanceParametersResponse> {
+    return this.request("DescribeDBInstanceParameters", req, cb)
   }
 
   /**
@@ -376,6 +396,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartDBInstanceResponse) => void
   ): Promise<RestartDBInstanceResponse> {
     return this.request("RestartDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（OpenDBExtranetAccess）用于开通外网。
+   */
+  async OpenDBExtranetAccess(
+    req: OpenDBExtranetAccessRequest,
+    cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
+  ): Promise<OpenDBExtranetAccessResponse> {
+    return this.request("OpenDBExtranetAccess", req, cb)
   }
 
   /**
@@ -606,6 +636,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductConfigResponse) => void
   ): Promise<DescribeProductConfigResponse> {
     return this.request("DescribeProductConfig", req, cb)
+  }
+
+  /**
+   * 获取参数修改事件详情
+   */
+  async DescribeParamsEvent(
+    req: DescribeParamsEventRequest,
+    cb?: (error: string, rep: DescribeParamsEventResponse) => void
+  ): Promise<DescribeParamsEventResponse> {
+    return this.request("DescribeParamsEvent", req, cb)
   }
 
   /**

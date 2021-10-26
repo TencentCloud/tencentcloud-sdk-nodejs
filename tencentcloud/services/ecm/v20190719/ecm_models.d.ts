@@ -956,35 +956,35 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
  */
 export interface Node {
     /**
-      * zone信息
+      * zone信息。
       */
     ZoneInfo: ZoneInfo;
     /**
-      * 国家信息
+      * 国家信息。
       */
     Country: Country;
     /**
-      * 区域信息
+      * 区域信息。
       */
     Area: Area;
     /**
-      * 省份信息
+      * 省份信息。
       */
     Province: Province;
     /**
-      * 城市信息
+      * 城市信息。
       */
     City: City;
     /**
-      * Region信息
+      * Region信息。
       */
     RegionInfo: RegionInfo;
     /**
-      * 运营商列表
+      * 运营商列表。
       */
     ISPSet: Array<ISP>;
     /**
-      * 运营商数量
+      * 运营商数量。
       */
     ISPNum: number;
 }
@@ -1500,6 +1500,19 @@ export interface ModifySecurityGroupAttributeRequest {
     GroupDescription?: string;
 }
 /**
+ * DescribePackingQuotaGroup返回参数结构体
+ */
+export interface DescribePackingQuotaGroupResponse {
+    /**
+      * 装箱配额组
+      */
+    PackingQuotaSet?: Array<PackingQuotaGroup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 负载均衡实例信息
  */
 export interface LoadBalancer {
@@ -1880,6 +1893,15 @@ export interface CreateModuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribePackingQuotaGroup请求参数结构体
+ */
+export interface DescribePackingQuotaGroupRequest {
+    /**
+      * 过滤条件，name取值为：Zone-可用区， InstanceType-实例类型，DataDiskSize - 数据盘大小
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * 安全组规则对象
@@ -3104,6 +3126,14 @@ false：表示开通IP直通
       * 是否禁止分配外网IP
       */
     DisableWanIp?: boolean;
+    /**
+      * 系统盘信息。
+      */
+    SystemDisk?: SystemDisk;
+    /**
+      * 数据盘信息。
+      */
+    DataDisks?: Array<DataDisk>;
 }
 /**
  * CreateLoadBalancer返回参数结构体
@@ -3873,6 +3903,18 @@ export interface ModifyModuleConfigRequest {
       * 默认数据盘大小，单位：G。范围不得超过数据盘范围大小，详看DescribeConfig。
       */
     DefaultDataDiskSize: number;
+    /**
+      * 默认系统盘大小，单位：G。范围不得超过数据盘范围大小，详看DescribeConfig。
+      */
+    DefaultSystemDiskSize?: number;
+    /**
+      * 系统盘
+      */
+    SystemDisk?: SystemDisk;
+    /**
+      * 数据盘
+      */
+    DataDisks?: Array<DataDisk>;
 }
 /**
  * 区域信息
@@ -5905,6 +5947,19 @@ export interface ServiceTemplateSpecification {
     ServiceGroupId: string;
 }
 /**
+ * 一组相关联的装箱配额信息
+ */
+export interface PackingQuotaInfo {
+    /**
+      * 实例类型
+      */
+    InstanceType: string;
+    /**
+      * 装箱配额
+      */
+    PackingQuota: number;
+}
+/**
  * 镜像信息
  */
 export interface Image {
@@ -6684,6 +6739,27 @@ export interface RegionInfo {
       * RegionID
       */
     RegionId: number;
+}
+/**
+ * 一组相互关联的装箱配额，以实例类型的优先级排序，优先级高的在前
+ */
+export interface PackingQuotaGroup {
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 可用区id
+      */
+    ZoneId: number;
+    /**
+      * ISP id
+      */
+    ISPId: string;
+    /**
+      * 一组相互关联的装箱配额
+      */
+    PackingQuotaInfos: Array<PackingQuotaInfo>;
 }
 /**
  * DescribeNetworkInterfaces返回参数结构体

@@ -279,8 +279,10 @@ OPEN：公网属性， INTERNAL：内网属性。
   ExclusiveCluster?: ExclusiveCluster
 
   /**
-   * 创建性能独享型CLB，传SLA。
-   */
+      * 创建性能容量型 CLB 实例。
+<ul><li>若需要创建性能容量型 CLB 实例，则此参数必填，且取值为：SLA，表示创建按量计费模式下的默认性能保障规格的性能容量型实例。</li>
+<li>若需要创建共享型 CLB 实例，则无需填写此参数。</li></ul>
+      */
   SlaType?: string
 
   /**

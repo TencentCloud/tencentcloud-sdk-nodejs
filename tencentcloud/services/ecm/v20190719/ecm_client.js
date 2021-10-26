@@ -480,6 +480,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("ModifySubnetAttribute", req, cb);
     }
     /**
+     * 使用本接口获取某种机型在某些区域的装箱配额（当使用虚拟机型时，返回的是一组相互关联的装箱配额）。
+     */
+    async DescribePackingQuotaGroup(req, cb) {
+        return this.request("DescribePackingQuotaGroup", req, cb);
+    }
+    /**
      * 查询弹性网卡列表
      */
     async DescribeNetworkInterfaces(req, cb) {

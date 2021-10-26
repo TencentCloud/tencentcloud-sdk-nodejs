@@ -355,6 +355,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunOperationTypes", req, cb);
     }
     /**
+     * 查询单个服务的详情，版本以及详情
+     */
+    async DescribeCloudBaseRunServer(req, cb) {
+        return this.request("DescribeCloudBaseRunServer", req, cb);
+    }
+    /**
      * 更新环境信息
      */
     async ModifyEnv(req, cb) {
@@ -431,6 +437,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudBaseRunVersionRsByCondition(req, cb) {
         return this.request("DescribeCloudBaseRunVersionRsByCondition", req, cb);
+    }
+    /**
+     * 查询云应用服务版本容器列表
+     */
+    async DescribeCloudBaseRunPodList(req, cb) {
+        return this.request("DescribeCloudBaseRunPodList", req, cb);
     }
     /**
      * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看

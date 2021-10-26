@@ -134,6 +134,7 @@ import {
   IgnoreImpactedHostsRequest,
   AssetUserDetail,
   DescribeMachinesRequest,
+  DescribeVulEffectHostListRequest,
   AssetWebAppPluginInfo,
   DeletePrivilegeRulesRequest,
   DescribeMalwareInfoRequest,
@@ -151,6 +152,7 @@ import {
   ExportIgnoreBaselineRuleResponse,
   BruteAttackRuleList,
   DescribeBanStatusResponse,
+  DescribeVulListRequest,
   VulDetailInfo,
   DescribeServersAndRiskAndFirstInfoResponse,
   AssetAppBaseInfo,
@@ -236,11 +238,13 @@ import {
   DescribeHistoryServiceRequest,
   DescribeWarningListRequest,
   ModifyProVersionRenewFlagRequest,
+  VulEffectHostList,
   DescribeServerRelatedDirInfoRequest,
   DescribeESAggregationsRequest,
   BaselineHostTopList,
   DescribeReverseShellRulesResponse,
   DescribeBruteAttackListRequest,
+  DescribeVulListResponse,
   DescribeUndoVulCountsRequest,
   ScanAssetResponse,
   ModifyProVersionRenewFlagResponse,
@@ -330,6 +334,7 @@ import {
   DescribeImportMachineInfoRequest,
   VulLevelInfo,
   ProtectStat,
+  DescribeVulEffectHostListResponse,
   SwitchBashRulesResponse,
   DescribeSearchLogsRequest,
   DescribeAttackLogInfoRequest,
@@ -490,6 +495,7 @@ import {
   DeleteBashEventsRequest,
   AssetJarBaseInfo,
   SeparateMalwaresRequest,
+  VulInfoList,
   ExportIgnoreRuleEffectHostListRequest,
   ProVersionMachine,
   DescribeVulHostCountScanTimeResponse,
@@ -1733,6 +1739,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 漏洞影响主机列表
+   */
+  async DescribeVulEffectHostList(
+    req: DescribeVulEffectHostListRequest,
+    cb?: (error: string, rep: DescribeVulEffectHostListResponse) => void
+  ): Promise<DescribeVulEffectHostListResponse> {
+    return this.request("DescribeVulEffectHostList", req, cb)
+  }
+
+  /**
    * DescribeScanTaskStatus 查询机器扫描状态列表用于过滤筛选
    */
   async DescribeScanTaskStatus(
@@ -2320,6 +2336,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMalwareTimingScanSettingsResponse) => void
   ): Promise<ModifyMalwareTimingScanSettingsResponse> {
     return this.request("ModifyMalwareTimingScanSettings", req, cb)
+  }
+
+  /**
+   * 获取漏洞列表数据
+   */
+  async DescribeVulList(
+    req: DescribeVulListRequest,
+    cb?: (error: string, rep: DescribeVulListResponse) => void
+  ): Promise<DescribeVulListResponse> {
+    return this.request("DescribeVulList", req, cb)
   }
 
   /**

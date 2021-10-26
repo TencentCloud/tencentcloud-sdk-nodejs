@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrders", req, cb);
     }
     /**
+     * 批量修改参数
+     */
+    async ModifyDBInstanceParameters(req, cb) {
+        return this.request("ModifyDBInstanceParameters", req, cb);
+    }
+    /**
      * 本接口 (DestroyDBInstance) 用于彻底下线指定DBInstanceId对应的实例，下线后实例数据将彻底删除，无法找回，只能下线隔离中的实例。
      */
     async DestroyDBInstance(req, cb) {
@@ -82,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateDBInstances", req, cb);
     }
     /**
-     * 本接口（OpenDBExtranetAccess）用于开通外网。
+     * 获取实例可修改参数列表
      */
-    async OpenDBExtranetAccess(req, cb) {
-        return this.request("OpenDBExtranetAccess", req, cb);
+    async DescribeDBInstanceParameters(req, cb) {
+        return this.request("DescribeDBInstanceParameters", req, cb);
     }
     /**
      * 关闭serverlessDB实例外网
@@ -164,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RestartDBInstance(req, cb) {
         return this.request("RestartDBInstance", req, cb);
+    }
+    /**
+     * 本接口（OpenDBExtranetAccess）用于开通外网。
+     */
+    async OpenDBExtranetAccess(req, cb) {
+        return this.request("OpenDBExtranetAccess", req, cb);
     }
     /**
      * 本接口（IsolateDBInstances）用于隔离实例
@@ -302,6 +314,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProductConfig(req, cb) {
         return this.request("DescribeProductConfig", req, cb);
+    }
+    /**
+     * 获取参数修改事件详情
+     */
+    async DescribeParamsEvent(req, cb) {
+        return this.request("DescribeParamsEvent", req, cb);
     }
     /**
      * 本接口（DescribeDBSlowlogs）用于获取慢查询日志。已于2021.09.01日正式废弃，后续此接口将不再返回任何数据，新接口为DescribeSlowQueryList，详细请查看：https://cloud.tencent.com/document/product/409/60540

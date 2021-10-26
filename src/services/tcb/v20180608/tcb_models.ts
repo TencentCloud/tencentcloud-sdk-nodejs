@@ -174,6 +174,19 @@ export interface OrderInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceReady: string
+
+  /**
+      * 安装标记。建议使用方统一转大小写之后再判断。
+<li>QuickStart：快速启动来源</li>
+<li>Activity：活动来源</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Flag: string
+
+  /**
+   * 下单时的参数
+   */
+  ReqBody: string
 }
 
 /**
@@ -572,23 +585,33 @@ export interface DescribeEndUsersRequest {
 }
 
 /**
- * DescribeSpecialCostItems请求参数结构体
+ * DescribeCloudBaseBuildService请求参数结构体
  */
-export interface DescribeSpecialCostItemsRequest {
+export interface DescribeCloudBaseBuildServiceRequest {
   /**
    * 环境id
    */
-  EnvId?: string
+  EnvId: string
 
   /**
-   * 查询开始时间
+   * 服务名
    */
-  StartTime?: string
+  ServiceName: string
 
   /**
-   * 查询结束时间
+   * build类型,枚举值有: cloudbaserun, framework-ci
    */
-  EndTime?: string
+  CIBusiness?: string
+
+  /**
+   * 服务版本
+   */
+  ServiceVersion?: string
+
+  /**
+   * 文件后缀
+   */
+  Suffix?: string
 }
 
 /**
@@ -831,33 +854,23 @@ export interface ReplaceActivityRecordResponse {
 }
 
 /**
- * 云日志服务相关信息
+ * DescribeSpecialCostItems请求参数结构体
  */
-export interface LogServiceInfo {
+export interface DescribeSpecialCostItemsRequest {
   /**
-   * log名
+   * 环境id
    */
-  LogsetName: string
+  EnvId?: string
 
   /**
-   * log-id
+   * 查询开始时间
    */
-  LogsetId: string
+  StartTime?: string
 
   /**
-   * topic名
+   * 查询结束时间
    */
-  TopicName: string
-
-  /**
-   * topic-id
-   */
-  TopicId: string
-
-  /**
-   * cls日志所属地域
-   */
-  Region: string
+  EndTime?: string
 }
 
 /**
@@ -1077,6 +1090,36 @@ export interface DescribeCloudBaseRunResourceRequest {
    * 环境ID
    */
   EnvId: string
+}
+
+/**
+ * DescribeCloudBaseRunServer请求参数结构体
+ */
+export interface DescribeCloudBaseRunServerRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 服务名称
+   */
+  ServerName: string
+
+  /**
+   * 分页偏移
+   */
+  Offset: number
+
+  /**
+   * 分页数量
+   */
+  Limit: number
+
+  /**
+   * 版本名字（精确匹配）
+   */
+  VersionName?: string
 }
 
 /**
@@ -3074,6 +3117,29 @@ export interface DeleteWxGatewayRouteResponse {
 }
 
 /**
+ * KV参数的优先级
+ */
+export interface CloudBaseRunKVPriority {
+  /**
+      * 参数的Key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
+
+  /**
+      * 参数的Value
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+
+  /**
+      * 优先级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Priority: number
+}
+
+/**
  * EstablishCloudBaseRunServer请求参数结构体
  */
 export interface EstablishCloudBaseRunServerRequest {
@@ -3272,149 +3338,50 @@ export interface ReinstateEnvResponse {
 }
 
 /**
- * 云开发项目版本
+ * 子网信息
  */
-export interface CloudBaseProjectVersion {
+export interface CloudBaseRunVpcSubnet {
   /**
-   * 项目名
-   */
-  Name: string
-
-  /**
-      * SAM json
+      * 子网id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Sam: string
+  Id: string
 
   /**
-      * 来源类型
+      * 子网的ipv4
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Source: CodeSource
+  Cidr: string
 
   /**
-      * 创建时间, unix时间戳
+      * 可用区
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CreateTime: number
+  Zone: string
 
   /**
-      * 更新时间 ,unix时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: number
-
-  /**
-      * 项目状态, 枚举值: 
-        "creatingEnv"-创建环境中
-	"createEnvFail"-创建环境失败
-	"building"-构建中
-	"buildFail"-构建失败
-	"deploying"-部署中
-	 "deployFail"-部署失败
-	 "success"-部署成功
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 环境变量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Parameters: Array<KVPair>
-
-  /**
-      * 项目类型, 枚举值:
-"framework-oneclick" 控制台一键部署
-"framework-local-oneclick" cli本地一键部署
-"qci-extension-cicd" 内网coding ci cd
+      * 类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type: string
 
   /**
-      * ci的id
+      * subnet类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CIId: string
+  Target: string
 
   /**
-      * cd的id
+      * 地域
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CDId: string
+  Region: string
 
   /**
-      * 环境id
+      * 名字
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EnvId: string
-
-  /**
-      * 版本号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VersionNum: number
-
-  /**
-      * 错误原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailReason: string
-
-  /**
-      * rc.json内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RcJson: string
-
-  /**
-      * 插件配置内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AddonConfig: string
-
-  /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<string>
-
-  /**
-      * 网络配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NetworkConfig: string
-
-  /**
-      * 扩展id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExtensionId: string
-
-  /**
-      * 错误类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailType: string
-
-  /**
-      * 私有仓库地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RepoUrl: string
-
-  /**
-      * 是否私有仓库代码变更触发自动部署
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AutoDeployOnCodeChange: boolean
-
-  /**
-      * ci部署进度（%）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BuildPercent: number
+  Name: string
 }
 
 /**
@@ -3842,6 +3809,111 @@ export interface CreateCloudBaseRunServerVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 版本的列表
+ */
+export interface CloudBaseRunServerVersionItem {
+  /**
+   * 版本名称
+   */
+  VersionName: string
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+   * 流量占比
+   */
+  FlowRatio: number
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedTime: string
+
+  /**
+      * 构建ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BuildId: number
+
+  /**
+      * 构建方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UploadType: string
+
+  /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * url中的参数路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UrlParam: ObjectKV
+
+  /**
+      * 优先级（数值越小，优先级越高）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Priority: number
+
+  /**
+      * 是否是默认兜底版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDefaultPriority: boolean
+
+  /**
+      * KV Params
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowParams: Array<CloudBaseRunKVPriority>
+
+  /**
+      * 最小副本数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinReplicas: number
+
+  /**
+      * 最大副本数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxReplicas: number
+
+  /**
+      * 操作记录id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunId: string
+
+  /**
+      * 进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Percent: number
+
+  /**
+      * 当前副本数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CurrentReplicas: number
 }
 
 /**
@@ -4542,6 +4614,36 @@ export interface DescribeCloudBaseProjectLatestVersionListRequest {
 }
 
 /**
+ * 云日志服务相关信息
+ */
+export interface LogServiceInfo {
+  /**
+   * log名
+   */
+  LogsetName: string
+
+  /**
+   * log-id
+   */
+  LogsetId: string
+
+  /**
+   * topic名
+   */
+  TopicName: string
+
+  /**
+   * topic-id
+   */
+  TopicId: string
+
+  /**
+   * cls日志所属地域
+   */
+  Region: string
+}
+
+/**
  * DescribeEndUsers返回参数结构体
  */
 export interface DescribeEndUsersResponse {
@@ -4931,33 +5033,13 @@ export interface CreatePostpayPackageRequest {
 }
 
 /**
- * DescribeCloudBaseBuildService请求参数结构体
+ * DescribeCloudBaseRunPodList返回参数结构体
  */
-export interface DescribeCloudBaseBuildServiceRequest {
+export interface DescribeCloudBaseRunPodListResponse {
   /**
-   * 环境id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
-
-  /**
-   * 服务名
-   */
-  ServiceName: string
-
-  /**
-   * build类型,枚举值有: cloudbaserun, framework-ci
-   */
-  CIBusiness?: string
-
-  /**
-   * 服务版本
-   */
-  ServiceVersion?: string
-
-  /**
-   * 文件后缀
-   */
-  Suffix?: string
+  RequestId?: string
 }
 
 /**
@@ -4984,6 +5066,58 @@ export type CheckTcbServiceRequest = null
  * DescribeCloudBaseRunVersionRsByCondition请求参数结构体
  */
 export type DescribeCloudBaseRunVersionRsByConditionRequest = null
+
+/**
+ * DescribeCloudBaseRunServer返回参数结构体
+ */
+export interface DescribeCloudBaseRunServerResponse {
+  /**
+      * 个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 版本列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionItems: Array<CloudBaseRunServerVersionItem>
+
+  /**
+      * 服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerName: string
+
+  /**
+      * 是否对于外网开放
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsPublic: boolean
+
+  /**
+      * 镜像仓库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageRepo: string
+
+  /**
+      * 流量配置的类型（FLOW,URL_PARAMS)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TrafficType: string
+
+  /**
+      * 服务创建类型，默认为空，一键部署为oneclick
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceType: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeUserActivityInfo请求参数结构体
@@ -5023,6 +5157,46 @@ export interface Tag {
    * 标签值
    */
   Value: string
+}
+
+/**
+ * DescribeCloudBaseRunPodList请求参数结构体
+ */
+export interface DescribeCloudBaseRunPodListRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+
+  /**
+   * 服务名
+   */
+  ServerName: string
+
+  /**
+   * 版本名
+   */
+  VersionName: string
+
+  /**
+   * 分页限制
+   */
+  Limit?: number
+
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+
+  /**
+   * 容器状态
+   */
+  Status?: string
+
+  /**
+   * 容器名
+   */
+  PodName?: string
 }
 
 /**
@@ -5211,50 +5385,149 @@ export interface ObjectKV {
 }
 
 /**
- * 子网信息
+ * 云开发项目版本
  */
-export interface CloudBaseRunVpcSubnet {
+export interface CloudBaseProjectVersion {
   /**
-      * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Id: string
+   * 项目名
+   */
+  Name: string
 
   /**
-      * 子网的ipv4
+      * SAM json
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Cidr: string
+  Sam: string
 
   /**
-      * 可用区
+      * 来源类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Zone: string
+  Source: CodeSource
 
   /**
-      * 类型
+      * 创建时间, unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: number
+
+  /**
+      * 更新时间 ,unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: number
+
+  /**
+      * 项目状态, 枚举值: 
+        "creatingEnv"-创建环境中
+	"createEnvFail"-创建环境失败
+	"building"-构建中
+	"buildFail"-构建失败
+	"deploying"-部署中
+	 "deployFail"-部署失败
+	 "success"-部署成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Parameters: Array<KVPair>
+
+  /**
+      * 项目类型, 枚举值:
+"framework-oneclick" 控制台一键部署
+"framework-local-oneclick" cli本地一键部署
+"qci-extension-cicd" 内网coding ci cd
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type: string
 
   /**
-      * subnet类型
+      * ci的id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Target: string
+  CIId: string
 
   /**
-      * 地域
+      * cd的id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Region: string
+  CDId: string
 
   /**
-      * 名字
+      * 环境id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Name: string
+  EnvId: string
+
+  /**
+      * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionNum: number
+
+  /**
+      * 错误原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailReason: string
+
+  /**
+      * rc.json内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RcJson: string
+
+  /**
+      * 插件配置内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddonConfig: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 网络配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkConfig: string
+
+  /**
+      * 扩展id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtensionId: string
+
+  /**
+      * 错误类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailType: string
+
+  /**
+      * 私有仓库地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RepoUrl: string
+
+  /**
+      * 是否私有仓库代码变更触发自动部署
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoDeployOnCodeChange: boolean
+
+  /**
+      * ci部署进度（%）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BuildPercent: number
 }
 
 /**

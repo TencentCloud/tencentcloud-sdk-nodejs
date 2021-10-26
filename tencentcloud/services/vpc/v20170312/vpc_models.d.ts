@@ -172,9 +172,13 @@ export interface CreateServiceTemplateRequest {
       */
     ServiceTemplateName: string;
     /**
-      * 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。
+      * 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。Services与ServicesExtra必填其一。
       */
-    Services: Array<string>;
+    Services?: Array<string>;
+    /**
+      * 支持添加备注，单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。Services与ServicesExtra必填其一。
+      */
+    ServicesExtra?: Array<ServicesInfo>;
 }
 /**
  * DescribeIp6TranslatorQuota返回参数结构体
@@ -827,6 +831,10 @@ export interface AddressTemplate {
       * 创建时间。
       */
     CreatedTime?: string;
+    /**
+      * 带备注的IP地址信息。
+      */
+    AddressExtraSet: Array<AddressInfo>;
 }
 /**
  * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议
@@ -1449,6 +1457,10 @@ export interface ServiceTemplate {
       * 创建时间。
       */
     CreatedTime?: string;
+    /**
+      * 带备注的协议端口信息。
+      */
+    ServiceExtraSet: Array<ServicesInfo>;
 }
 /**
  * DescribeCcnAttachedInstances请求参数结构体
@@ -2629,6 +2641,10 @@ export interface ModifyAddressTemplateAttributeRequest {
       * 地址信息，支持 IP、CIDR、IP 范围。
       */
     Addresses?: Array<string>;
+    /**
+      * 支持添加备注的地址信息，支持 IP、CIDR、IP 范围。
+      */
+    AddressesExtra?: Array<AddressInfo>;
 }
 /**
  * CreateNatGateway返回参数结构体
@@ -4730,7 +4746,7 @@ export interface CreateAddressTemplateResponse {
     /**
       * IP地址模板对象。
       */
-    AddressTemplate?: AddressTemplate;
+    AddressTemplate: AddressTemplate;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4964,6 +4980,10 @@ export interface ModifyServiceTemplateAttributeRequest {
       * 支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。
       */
     Services?: Array<string>;
+    /**
+      * 支持添加备注的协议端口信息，支持单个端口、多个端口、连续端口及所有端口，协议支持：TCP、UDP、ICMP、GRE 协议。
+      */
+    ServicesExtra?: Array<ServicesInfo>;
 }
 /**
  * AssociateAddress返回参数结构体
@@ -7453,11 +7473,11 @@ export interface DescribeServiceTemplatesResponse {
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 协议端口模板对象。
       */
-    ServiceTemplateSet?: Array<ServiceTemplate>;
+    ServiceTemplateSet: Array<ServiceTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9245,6 +9265,20 @@ export interface CreateLocalGatewayResponse {
     RequestId?: string;
 }
 /**
+ * 协议端口模板信息
+ */
+export interface ServicesInfo {
+    /**
+      * 协议端口
+      */
+    Service: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description?: string;
+}
+/**
  * MigratePrivateIpAddress请求参数结构体
  */
 export interface MigratePrivateIpAddressRequest {
@@ -9267,8 +9301,9 @@ export interface MigratePrivateIpAddressRequest {
 export interface DescribeServiceTemplatesRequest {
     /**
       * 过滤条件。
-<li>service-template-name - String - （过滤条件）协议端口模板名称。</li>
-<li>service-template-id - String - （过滤条件）协议端口模板实例ID，例如：ppm-e6dy460g。</li>
+<li>service-template-name - 协议端口模板名称。</li>
+<li>service-template-id - 协议端口模板实例ID，例如：ppm-e6dy460g。</li>
+<li>service-port- 协议端口。</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -9794,9 +9829,13 @@ export interface CreateAddressTemplateRequest {
       */
     AddressTemplateName: string;
     /**
-      * 地址信息，支持 IP、CIDR、IP 范围。
+      * 地址信息，支持 IP、CIDR、IP 范围。Addresses与AddressesExtra必填其一。
       */
-    Addresses: Array<string>;
+    Addresses?: Array<string>;
+    /**
+      * 地址信息，支持携带备注，支持 IP、CIDR、IP 范围。Addresses与AddressesExtra必填其一。
+      */
+    AddressesExtra?: Array<AddressInfo>;
 }
 /**
  * DescribeRouteConflicts请求参数结构体
@@ -10624,7 +10663,7 @@ export interface CreateServiceTemplateResponse {
     /**
       * 协议端口模板对象。
       */
-    ServiceTemplate?: ServiceTemplate;
+    ServiceTemplate: ServiceTemplate;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10711,8 +10750,9 @@ export interface CustomerGatewayVendor {
 export interface DescribeAddressTemplatesRequest {
     /**
       * 过滤条件。
-<li>address-template-name - String - （过滤条件）IP地址模板名称。</li>
-<li>address-template-id - String - （过滤条件）IP地址模板实例ID，例如：ipm-mdunqeb6。</li>
+<li>address-template-name - IP地址模板名称。</li>
+<li>address-template-id - IP地址模板实例ID，例如：ipm-mdunqeb6。</li>
+<li>address-ip - IP地址。</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -10795,11 +10835,11 @@ export interface DescribeAddressTemplatesResponse {
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * IP地址模版。
       */
-    AddressTemplateSet?: Array<AddressTemplate>;
+    AddressTemplateSet: Array<AddressTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11079,6 +11119,19 @@ export interface DeleteVpcResponse {
     RequestId?: string;
 }
 /**
+ * 预付费（包年包月）计费对象。
+ */
+export interface InstanceChargePrepaid {
+    /**
+      * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36。
+      */
+    Period: number;
+    /**
+      * 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费， NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认：NOTIFY_AND_MANUAL_RENEW
+      */
+    RenewFlag?: string;
+}
+/**
  * DescribeTemplateLimits请求参数结构体
  */
 export declare type DescribeTemplateLimitsRequest = null;
@@ -11122,17 +11175,18 @@ export interface AcceptAttachCcnInstancesResponse {
     RequestId?: string;
 }
 /**
- * 预付费（包年包月）计费对象。
+ * IP地址模板信息
  */
-export interface InstanceChargePrepaid {
+export interface AddressInfo {
     /**
-      * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 24, 36。
+      * ip地址
       */
-    Period: number;
+    Address: string;
     /**
-      * 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费， NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认：NOTIFY_AND_MANUAL_RENEW
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RenewFlag?: string;
+    Description?: string;
 }
 /**
  * AuditCrossBorderCompliance请求参数结构体

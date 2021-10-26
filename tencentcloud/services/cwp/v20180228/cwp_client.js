@@ -732,6 +732,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetDatabaseList", req, cb);
     }
     /**
+     * 漏洞影响主机列表
+     */
+    async DescribeVulEffectHostList(req, cb) {
+        return this.request("DescribeVulEffectHostList", req, cb);
+    }
+    /**
      * DescribeScanTaskStatus 查询机器扫描状态列表用于过滤筛选
      */
     async DescribeScanTaskStatus(req, cb) {
@@ -1084,6 +1090,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyMalwareTimingScanSettings(req, cb) {
         return this.request("ModifyMalwareTimingScanSettings", req, cb);
+    }
+    /**
+     * 获取漏洞列表数据
+     */
+    async DescribeVulList(req, cb) {
+        return this.request("DescribeVulList", req, cb);
     }
     /**
      * 本接口 (ModifyProVersionRenewFlag) 用于修改专业版包年包月续费标识。
