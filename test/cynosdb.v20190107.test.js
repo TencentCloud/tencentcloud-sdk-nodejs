@@ -158,6 +158,16 @@ it("cynosdb.v20190107.DescribeProjectSecurityGroups", async function () {
     }
 })
 
+it("cynosdb.v20190107.SetRenewFlag", async function () {
+    try {
+       const data = await client.SetRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeClusterDetail", async function () {
     try {
        const data = await client.DescribeClusterDetail({})
@@ -218,9 +228,9 @@ it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
     }
 })
 
-it("cynosdb.v20190107.SetRenewFlag", async function () {
+it("cynosdb.v20190107.ModifyClusterParam", async function () {
     try {
-       const data = await client.SetRenewFlag({})
+       const data = await client.ModifyClusterParam({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -3202,6 +3202,26 @@ export interface DeviceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreatorNickName: string;
+    /**
+      * 启用/禁用状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableState: number;
+    /**
+      * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductId: string;
+    /**
+      * 产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductName: string;
+    /**
+      * 设备类型（设备、子设备、网关）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceType: string;
 }
 /**
  * ModifyLoRaFrequency返回参数结构体

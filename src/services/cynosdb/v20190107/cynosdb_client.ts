@@ -24,7 +24,7 @@ import {
   DescribeClustersRequest,
   InstanceSpec,
   DescribeProjectSecurityGroupsRequest,
-  SetRenewFlagResponse,
+  ModifyClusterParamResponse,
   Account,
   SecurityGroup,
   ModifyDBInstanceSecurityGroupsResponse,
@@ -38,11 +38,13 @@ import {
   DescribeRollbackTimeRangeResponse,
   ModifyMaintainPeriodConfigRequest,
   ModifyBackupConfigRequest,
+  ModifyClusterParamRequest,
   DescribeDBSecurityGroupsRequest,
   DescribeRollbackTimeValidityRequest,
   IsolateClusterRequest,
   DescribeClusterInstanceGrpsResponse,
   AddInstancesRequest,
+  NetAddr,
   DescribeClusterDetailRequest,
   Tag,
   DescribeProjectSecurityGroupsResponse,
@@ -83,6 +85,7 @@ import {
   OfflineInstanceResponse,
   CynosdbInstanceGrp,
   DescribeClustersResponse,
+  SetRenewFlagResponse,
   ModifyBackupConfigResponse,
   PolicyRule,
   DescribeBackupConfigResponse,
@@ -239,6 +242,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * SetRenewFlag设置实例的自动续费功能
+   */
+  async SetRenewFlag(
+    req: SetRenewFlagRequest,
+    cb?: (error: string, rep: SetRenewFlagResponse) => void
+  ): Promise<SetRenewFlagResponse> {
+    return this.request("SetRenewFlag", req, cb)
+  }
+
+  /**
    * 显示集群详情
    */
   async DescribeClusterDetail(
@@ -299,13 +312,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * SetRenewFlag设置实例的自动续费功能
+   * 修改集群参数
    */
-  async SetRenewFlag(
-    req: SetRenewFlagRequest,
-    cb?: (error: string, rep: SetRenewFlagResponse) => void
-  ): Promise<SetRenewFlagResponse> {
-    return this.request("SetRenewFlag", req, cb)
+  async ModifyClusterParam(
+    req: ModifyClusterParamRequest,
+    cb?: (error: string, rep: ModifyClusterParamResponse) => void
+  ): Promise<ModifyClusterParamResponse> {
+    return this.request("ModifyClusterParam", req, cb)
   }
 
   /**

@@ -127,13 +127,13 @@ export interface DescribeProjectSecurityGroupsRequest {
     ProjectId: number;
 }
 /**
- * SetRenewFlag返回参数结构体
+ * ModifyClusterParam返回参数结构体
  */
-export interface SetRenewFlagResponse {
+export interface ModifyClusterParamResponse {
     /**
-      * 操作成功实例数
+      * 异步请求Id，用于查询结果
       */
-    Count: number;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -379,6 +379,19 @@ export interface ModifyBackupConfigRequest {
     BackupType?: string;
 }
 /**
+ * ModifyClusterParam请求参数结构体
+ */
+export interface ModifyClusterParamRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 修改参数列表
+      */
+    ParamList: Array<ParamItem>;
+}
+/**
  * DescribeDBSecurityGroups请求参数结构体
  */
 export interface DescribeDBSecurityGroupsRequest {
@@ -492,6 +505,36 @@ export interface AddInstancesRequest {
       * 交易模式 0-下单并支付 1-下单
       */
     DealMode?: number;
+}
+/**
+ * 网络信息
+ */
+export interface NetAddr {
+    /**
+      * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip: string;
+    /**
+      * 内网端口号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vport: number;
+    /**
+      * 外网域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanDomain: string;
+    /**
+      * 外网端口号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WanPort: number;
+    /**
+      * 网络类型（ro-只读,rw/ha-读写）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetType: string;
 }
 /**
  * DescribeClusterDetail请求参数结构体
@@ -1787,6 +1830,10 @@ pause
       * 集群计算规格对应的最大存储值
       */
     MaxStorageSize?: number;
+    /**
+      * 集群网络信息
+      */
+    NetAddrs?: Array<NetAddr>;
 }
 /**
  * OfflineCluster请求参数结构体
@@ -1900,6 +1947,19 @@ export interface DescribeClustersResponse {
       * 集群列表
       */
     ClusterSet: Array<CynosdbCluster>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SetRenewFlag返回参数结构体
+ */
+export interface SetRenewFlagResponse {
+    /**
+      * 操作成功实例数
+      */
+    Count: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

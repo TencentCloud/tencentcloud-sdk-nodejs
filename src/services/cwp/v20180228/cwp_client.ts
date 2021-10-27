@@ -124,7 +124,6 @@ import {
   DescribeAssetMachineDetailRequest,
   CancelIgnoreVulResponse,
   IgnoreImpactedHostsResponse,
-  RescanImpactedHostResponse,
   DescribeAssetMachineDetailResponse,
   DescribeStrategyExistResponse,
   DeleteReverseShellEventsRequest,
@@ -342,7 +341,6 @@ import {
   DescribeAssetJarInfoResponse,
   DescribeVulInfoCvssRequest,
   DescribeComponentStatisticsRequest,
-  RescanImpactedHostRequest,
   DescribeMaliciousRequestWhiteListRequest,
   ModifyBanStatusResponse,
   DescribeLoginWhiteListResponse,
@@ -1294,18 +1292,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportPrivilegeEventsResponse) => void
   ): Promise<ExportPrivilegeEventsResponse> {
     return this.request("ExportPrivilegeEvents", req, cb)
-  }
-
-  /**
-     * 该接口已废弃
-
-本接口 (RescanImpactedHost) 用于漏洞重新检测。
-     */
-  async RescanImpactedHost(
-    req: RescanImpactedHostRequest,
-    cb?: (error: string, rep: RescanImpactedHostResponse) => void
-  ): Promise<RescanImpactedHostResponse> {
-    return this.request("RescanImpactedHost", req, cb)
   }
 
   /**

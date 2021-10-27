@@ -133,6 +133,11 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
 新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。
       */
   InstanceNameSettings?: InstanceNameSettings
+
+  /**
+   * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。
+   */
+  EnhancedService?: EnhancedService
 }
 
 /**

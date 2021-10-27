@@ -39,6 +39,7 @@ import {
   DescribeImageRequest,
   OsVersion,
   DescribeListenersResponse,
+  TargetsWeightRule,
   StartInstancesResponse,
   CreateVpcResponse,
   AssistantCidr,
@@ -57,7 +58,7 @@ import {
   StopInstancesRequest,
   DetachNetworkInterfaceResponse,
   ImageTask,
-  ModifyListenerRequest,
+  RunSecurityServiceEnabled,
   CreateImageRequest,
   Instance,
   Node,
@@ -83,6 +84,7 @@ import {
   ModifySubnetAttributeResponse,
   DisassociateSecurityGroupsRequest,
   NetworkInterface,
+  KeyPair,
   DescribeVpcsResponse,
   ModifySecurityGroupAttributeRequest,
   DescribePackingQuotaGroupResponse,
@@ -128,6 +130,7 @@ import {
   RunInstancesResponse,
   TargetHealth,
   DescribeSecurityGroupLimitsResponse,
+  DisassociateInstancesKeyPairsRequest,
   RouteTableAssociation,
   ModifyTargetPortResponse,
   MonthNetwork,
@@ -143,11 +146,13 @@ import {
   ImageUrl,
   ModifyModuleSecurityGroupsResponse,
   ReplaceSecurityGroupPolicyRequest,
+  CreateKeyPairResponse,
   DeleteModuleResponse,
   DescribeModuleDetailRequest,
   ModifyRouteTableAttributeRequest,
   ModifyModuleNetworkResponse,
   DescribeImportImageOsRequest,
+  CreateKeyPairRequest,
   ModifyModuleIpDirectResponse,
   ResetInstancesPasswordRequest,
   AssociateAddressResponse,
@@ -257,7 +262,6 @@ import {
   BatchRegisterTargetsRequest,
   RemovePrivateIpAddressesResponse,
   PublicIPAddressInfo,
-  RunSecurityServiceEnabled,
   ModifyModuleImageResponse,
   DeleteLoadBalancerListenersResponse,
   VpcInfo,
@@ -299,7 +303,7 @@ import {
   RuleHealth,
   DeleteSecurityGroupResponse,
   CreateNetworkInterfaceResponse,
-  TargetsWeightRule,
+  ModifyListenerRequest,
   DescribeDisksResponse,
   ZoneInstanceCountISP,
   DescribeAddressQuotaRequest,
@@ -345,6 +349,7 @@ import {
   CreateSecurityGroupRequest,
   DescribeSecurityGroupLimitsRequest,
   PrivateIPAddressInfo,
+  DisassociateInstancesKeyPairsResponse,
   TerminateInstancesRequest,
   DeleteNetworkInterfaceResponse,
   DescribePeakNetworkOverviewRequest,
@@ -790,6 +795,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+   * 用于解除实例的密钥绑定关系。
+   */
+  async DisassociateInstancesKeyPairs(
+    req: DisassociateInstancesKeyPairsRequest,
+    cb?: (error: string, rep: DisassociateInstancesKeyPairsResponse) => void
+  ): Promise<DisassociateInstancesKeyPairsResponse> {
+    return this.request("DisassociateInstancesKeyPairs", req, cb)
+  }
+
+  /**
      * 将弹性公网IP（简称 EIP）绑定到实例或弹性网卡的指定内网 IP 上。
 将 EIP 绑定到实例（ECM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
 将 EIP 绑定到指定网卡的内网 IP上，内网IP已经绑定了EIP或普通公网IP，则反馈失败。必须先解绑该 EIP，才能再绑定新的。
@@ -1039,6 +1054,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DeleteSecurityGroupPoliciesResponse) => void
   ): Promise<DeleteSecurityGroupPoliciesResponse> {
     return this.request("DeleteSecurityGroupPolicies", req, cb)
+  }
+
+  /**
+   * 用于创建一个 OpenSSH RSA 密钥对，可以用于登录 Linux 实例。
+   */
+  async CreateKeyPair(
+    req: CreateKeyPairRequest,
+    cb?: (error: string, rep: CreateKeyPairResponse) => void
+  ): Promise<CreateKeyPairResponse> {
+    return this.request("CreateKeyPair", req, cb)
   }
 
   /**

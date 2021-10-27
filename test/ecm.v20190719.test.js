@@ -418,6 +418,16 @@ it("ecm.v20190719.ModifyListener", async function () {
     }
 })
 
+it("ecm.v20190719.DisassociateInstancesKeyPairs", async function () {
+    try {
+       const data = await client.DisassociateInstancesKeyPairs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.AssociateAddress", async function () {
     try {
        const data = await client.AssociateAddress({})
@@ -651,6 +661,16 @@ it("ecm.v20190719.AttachNetworkInterface", async function () {
 it("ecm.v20190719.DeleteSecurityGroupPolicies", async function () {
     try {
        const data = await client.DeleteSecurityGroupPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.CreateKeyPair", async function () {
+    try {
+       const data = await client.CreateKeyPair({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

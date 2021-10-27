@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjectSecurityGroups", req, cb);
     }
     /**
+     * SetRenewFlag设置实例的自动续费功能
+     */
+    async SetRenewFlag(req, cb) {
+        return this.request("SetRenewFlag", req, cb);
+    }
+    /**
      * 显示集群详情
      */
     async DescribeClusterDetail(req, cb) {
@@ -148,10 +154,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourcesByDealName", req, cb);
     }
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 修改集群参数
      */
-    async SetRenewFlag(req, cb) {
-        return this.request("SetRenewFlag", req, cb);
+    async ModifyClusterParam(req, cb) {
+        return this.request("ModifyClusterParam", req, cb);
     }
     /**
      * 升级实例

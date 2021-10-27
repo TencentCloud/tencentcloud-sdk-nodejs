@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { AddInstancesResponse, UpgradeInstanceResponse, DescribeClustersRequest, DescribeProjectSecurityGroupsRequest, SetRenewFlagResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeBackupConfigRequest, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, DescribeAccountsRequest, IsolateInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, DescribeRollbackTimeRangeResponse, ModifyMaintainPeriodConfigRequest, ModifyBackupConfigRequest, DescribeDBSecurityGroupsRequest, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeInstancesResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DescribeInstancesRequest, DescribeResourcesByDealNameRequest, IsolateInstanceResponse, DescribeBackupListRequest, DescribeRollbackTimeRangeRequest, DescribeAccountsResponse, UpgradeInstanceRequest, DescribeInstanceDetailResponse, OfflineInstanceRequest, OfflineClusterResponse, DescribeInstanceSpecsResponse, DescribeInstanceSpecsRequest, IsolateClusterResponse, CreateClustersResponse, SetRenewFlagRequest, CreateClustersRequest, OfflineClusterRequest, DescribeClusterDetailResponse, OfflineInstanceResponse, DescribeClustersResponse, ModifyBackupConfigResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest } from "./cynosdb_models";
+import { AddInstancesResponse, UpgradeInstanceResponse, DescribeClustersRequest, DescribeProjectSecurityGroupsRequest, ModifyClusterParamResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeBackupConfigRequest, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, DescribeAccountsRequest, IsolateInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, DescribeRollbackTimeRangeResponse, ModifyMaintainPeriodConfigRequest, ModifyBackupConfigRequest, ModifyClusterParamRequest, DescribeDBSecurityGroupsRequest, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeInstancesResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DescribeInstancesRequest, DescribeResourcesByDealNameRequest, IsolateInstanceResponse, DescribeBackupListRequest, DescribeRollbackTimeRangeRequest, DescribeAccountsResponse, UpgradeInstanceRequest, DescribeInstanceDetailResponse, OfflineInstanceRequest, OfflineClusterResponse, DescribeInstanceSpecsResponse, DescribeInstanceSpecsRequest, IsolateClusterResponse, CreateClustersResponse, SetRenewFlagRequest, CreateClustersRequest, OfflineClusterRequest, DescribeClusterDetailResponse, OfflineInstanceResponse, DescribeClustersResponse, SetRenewFlagResponse, ModifyBackupConfigResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest } from "./cynosdb_models";
 /**
  * cynosdb client
  * @class
@@ -64,6 +64,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeProjectSecurityGroups(req: DescribeProjectSecurityGroupsRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void): Promise<DescribeProjectSecurityGroupsResponse>;
     /**
+     * SetRenewFlag设置实例的自动续费功能
+     */
+    SetRenewFlag(req: SetRenewFlagRequest, cb?: (error: string, rep: SetRenewFlagResponse) => void): Promise<SetRenewFlagResponse>;
+    /**
      * 显示集群详情
      */
     DescribeClusterDetail(req: DescribeClusterDetailRequest, cb?: (error: string, rep: DescribeClusterDetailResponse) => void): Promise<DescribeClusterDetailResponse>;
@@ -88,9 +92,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourcesByDealName(req: DescribeResourcesByDealNameRequest, cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void): Promise<DescribeResourcesByDealNameResponse>;
     /**
-     * SetRenewFlag设置实例的自动续费功能
+     * 修改集群参数
      */
-    SetRenewFlag(req: SetRenewFlagRequest, cb?: (error: string, rep: SetRenewFlagResponse) => void): Promise<SetRenewFlagResponse>;
+    ModifyClusterParam(req: ModifyClusterParamRequest, cb?: (error: string, rep: ModifyClusterParamResponse) => void): Promise<ModifyClusterParamResponse>;
     /**
      * 升级实例
      */

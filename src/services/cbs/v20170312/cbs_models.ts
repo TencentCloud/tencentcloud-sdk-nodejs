@@ -995,14 +995,14 @@ export type GetSnapOverviewRequest = null
  */
 export interface Image {
   /**
-   * 镜像实例ID。
-   */
-  ImageId: string
-
-  /**
    * 镜像名称。
    */
   ImageName: string
+
+  /**
+   * 镜像实例ID。
+   */
+  ImageId: string
 }
 
 /**
@@ -1317,69 +1317,9 @@ export interface DescribeSnapshotsResponse {
  */
 export interface Snapshot {
   /**
-   * 快照ID。
-   */
-  SnapshotId?: string
-
-  /**
    * 快照所在的位置。
    */
   Placement?: Placement
-
-  /**
-   * 创建此快照的云硬盘类型。取值范围：<br><li>SYSTEM_DISK：系统盘<br><li>DATA_DISK：数据盘。
-   */
-  DiskUsage?: string
-
-  /**
-   * 创建此快照的云硬盘ID。
-   */
-  DiskId?: string
-
-  /**
-   * 创建此快照的云硬盘大小，单位GB。
-   */
-  DiskSize?: number
-
-  /**
-   * 快照的状态。取值范围：<br><li>NORMAL：正常<br><li>CREATING：创建中<br><li>ROLLBACKING：回滚中<br><li>COPYING_FROM_REMOTE：跨地域复制中<br><li>CHECKING_COPIED：复制校验中<br><li>TORECYCLE：待回收。
-   */
-  SnapshotState?: string
-
-  /**
-   * 快照名称，用户自定义的快照别名。调用[ModifySnapshotAttribute](/document/product/362/15650)可修改此字段。
-   */
-  SnapshotName?: string
-
-  /**
-   * 快照创建进度百分比，快照创建成功后此字段恒为100。
-   */
-  Percent?: number
-
-  /**
-   * 快照的创建时间。
-   */
-  CreateTime?: string
-
-  /**
-   * 快照到期时间。如果快照为永久保留，此字段为空。
-   */
-  DeadlineTime?: string
-
-  /**
-   * 是否为加密盘创建的快照。取值范围：<br><li>true：该快照为加密盘创建的<br><li>false:非加密盘创建的快照。
-   */
-  Encrypt?: boolean
-
-  /**
-   * 是否为永久快照。取值范围：<br><li>true：永久快照<br><li>false：非永久快照。
-   */
-  IsPermanent?: boolean
-
-  /**
-   * 快照正在跨地域复制的目的地域，默认取值为[]。
-   */
-  CopyingToRegions: Array<string>
 
   /**
    * 是否为跨地域复制的快照。取值范围：<br><li>true：表示为跨地域复制的快照。<br><li>false:本地域的快照。
@@ -1387,14 +1327,39 @@ export interface Snapshot {
   CopyFromRemote: boolean
 
   /**
+   * 快照的状态。取值范围：<br><li>NORMAL：正常<br><li>CREATING：创建中<br><li>ROLLBACKING：回滚中<br><li>COPYING_FROM_REMOTE：跨地域复制中<br><li>CHECKING_COPIED：复制校验中<br><li>TORECYCLE：待回收。
+   */
+  SnapshotState?: string
+
+  /**
+   * 是否为永久快照。取值范围：<br><li>true：永久快照<br><li>false：非永久快照。
+   */
+  IsPermanent?: boolean
+
+  /**
+   * 快照名称，用户自定义的快照别名。调用[ModifySnapshotAttribute](/document/product/362/15650)可修改此字段。
+   */
+  SnapshotName?: string
+
+  /**
+   * 快照到期时间。如果快照为永久保留，此字段为空。
+   */
+  DeadlineTime?: string
+
+  /**
+   * 快照创建进度百分比，快照创建成功后此字段恒为100。
+   */
+  Percent?: number
+
+  /**
    * 快照关联的镜像列表。
    */
   Images: Array<Image>
 
   /**
-   * 快照关联的镜像个数。
+   * 快照当前被共享数。
    */
-  ImageCount: number
+  ShareReference: number
 
   /**
    * 快照类型，目前该项取值可以为PRIVATE_SNAPSHOT或者SHARED_SNAPSHOT
@@ -1402,9 +1367,44 @@ export interface Snapshot {
   SnapshotType: string
 
   /**
-   * 快照当前被共享数。
+   * 创建此快照的云硬盘大小，单位GB。
    */
-  ShareReference: number
+  DiskSize?: number
+
+  /**
+   * 创建此快照的云硬盘ID。
+   */
+  DiskId?: string
+
+  /**
+   * 快照正在跨地域复制的目的地域，默认取值为[]。
+   */
+  CopyingToRegions: Array<string>
+
+  /**
+   * 是否为加密盘创建的快照。取值范围：<br><li>true：该快照为加密盘创建的<br><li>false:非加密盘创建的快照。
+   */
+  Encrypt?: boolean
+
+  /**
+   * 快照的创建时间。
+   */
+  CreateTime?: string
+
+  /**
+   * 快照关联的镜像个数。
+   */
+  ImageCount: number
+
+  /**
+   * 创建此快照的云硬盘类型。取值范围：<br><li>SYSTEM_DISK：系统盘<br><li>DATA_DISK：数据盘。
+   */
+  DiskUsage?: string
+
+  /**
+   * 快照ID。
+   */
+  SnapshotId: string
 
   /**
    * 快照开始共享的时间。

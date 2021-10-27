@@ -73,7 +73,12 @@ export interface ManageMarketingRiskRequest {
   /**
    * 业务入参
    */
-  BusinessSecurityData: InputManageMarketingRisk
+  BusinessSecurityData?: InputManageMarketingRisk
+
+  /**
+   * 业务入参
+   */
+  BusinessCryptoData?: InputCryptoManageMarketingRisk
 }
 
 /**
@@ -333,6 +338,26 @@ export interface DescribeRiskModelRequest {
    * 业务入参
    */
   BusinessSecurityData: InputDescribeRiskModelData
+}
+
+/**
+ * 全栈式风控引擎入参
+ */
+export interface InputCryptoManageMarketingRisk {
+  /**
+   * 是否授权
+   */
+  IsAuthorized?: string
+
+  /**
+   * 加密类型
+   */
+  CryptoType?: string
+
+  /**
+   * 加密内容
+   */
+  CryptoContent?: string
 }
 
 /**

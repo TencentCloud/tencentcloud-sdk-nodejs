@@ -22,6 +22,7 @@ import {
   SREInstance,
   DescribeSREInstanceAccessAddressResponse,
   DescribeSREInstancesResponse,
+  KVPair,
   EnvInfo,
   Filter,
   EnvAddressInfo,

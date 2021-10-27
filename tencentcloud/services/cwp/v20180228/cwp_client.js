@@ -466,14 +466,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportPrivilegeEvents", req, cb);
     }
     /**
-     * 该接口已废弃
-
-本接口 (RescanImpactedHost) 用于漏洞重新检测。
-     */
-    async RescanImpactedHost(req, cb) {
-        return this.request("RescanImpactedHost", req, cb);
-    }
-    /**
      * 导出网页防篡改防护目录列表
      */
     async ExportProtectDirList(req, cb) {

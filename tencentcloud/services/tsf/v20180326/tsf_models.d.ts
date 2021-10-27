@@ -1918,7 +1918,7 @@ export interface CreateLaneResponse {
  */
 export interface TcrRepoInfo {
     /**
-      * 地域
+      * 地域（填数字）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Region?: string;

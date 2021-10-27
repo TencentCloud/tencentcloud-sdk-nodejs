@@ -29,6 +29,7 @@ import {
   AccountInfo,
   OutputDescribeRiskModelValue,
   DescribeRiskModelRequest,
+  InputCryptoManageMarketingRisk,
   SponsorInfo,
   ManageMarketingRiskResponse,
   InputDetails,

@@ -2656,16 +2656,6 @@ export interface IgnoreImpactedHostsResponse {
 }
 
 /**
- * RescanImpactedHost返回参数结构体
- */
-export interface RescanImpactedHostResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeAssetMachineDetail返回参数结构体
  */
 export interface DescribeAssetMachineDetailResponse {
@@ -8317,16 +8307,6 @@ export interface DescribeComponentStatisticsRequest {
 ComponentName - String - 是否必填：否 - 组件名称
       */
   Filters?: Array<Filter>
-}
-
-/**
- * RescanImpactedHost请求参数结构体
- */
-export interface RescanImpactedHostRequest {
-  /**
-   * 漏洞ID。
-   */
-  Id: number
 }
 
 /**

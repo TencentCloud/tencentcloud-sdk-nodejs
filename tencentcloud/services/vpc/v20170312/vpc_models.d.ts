@@ -9269,11 +9269,11 @@ export interface CreateLocalGatewayResponse {
  */
 export interface ServicesInfo {
     /**
-      * 协议端口
+      * 协议端口。
       */
     Service: string;
     /**
-      * 备注
+      * 备注。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Description?: string;
@@ -10060,7 +10060,7 @@ export interface DisassociateAddressResponse {
     /**
       * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11179,11 +11179,11 @@ export interface AcceptAttachCcnInstancesResponse {
  */
 export interface AddressInfo {
     /**
-      * ip地址
+      * ip地址。
       */
     Address: string;
     /**
-      * 备注
+      * 备注。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Description?: string;

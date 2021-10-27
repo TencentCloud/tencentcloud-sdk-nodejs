@@ -115,6 +115,11 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServiceGovernanceInfos: Array<ServiceGovernanceInfo>;
+    /**
+      * 实例的标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<KVPair>;
 }
 /**
  * DescribeSREInstanceAccessAddress返回参数结构体
@@ -153,6 +158,19 @@ export interface DescribeSREInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 键值对
+ */
+export interface KVPair {
+    /**
+      * 键
+      */
+    Key: string;
+    /**
+      * 值
+      */
+    Value: string;
 }
 /**
  * 环境具体信息

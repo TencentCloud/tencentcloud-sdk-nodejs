@@ -748,16 +748,6 @@ it("cwp.v20180228.ExportPrivilegeEvents", async function () {
     }
 })
 
-it("cwp.v20180228.RescanImpactedHost", async function () {
-    try {
-       const data = await client.RescanImpactedHost({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.ExportProtectDirList", async function () {
     try {
        const data = await client.ExportProtectDirList({})

@@ -458,6 +458,26 @@ export interface DescribeListenersResponse {
     RequestId?: string;
 }
 /**
+ * 目标和权重的描述信息
+ */
+export interface TargetsWeightRule {
+    /**
+      * 负载均衡监听器 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ListenerId?: string;
+    /**
+      * 要修改权重的后端机器列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Targets?: Array<Target>;
+    /**
+      * 后端服务新的转发权重，取值范围：0~100。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weight?: number;
+}
+/**
  * StartInstances返回参数结构体
  */
 export interface StartInstancesResponse {
@@ -736,34 +756,17 @@ export interface ImageTask {
     CreateTime: string;
 }
 /**
- * ModifyListener请求参数结构体
+ * 云镜服务；
  */
-export interface ModifyListenerRequest {
+export interface RunSecurityServiceEnabled {
     /**
-      * 负载均衡实例 ID
+      * 是否开启。
       */
-    LoadBalancerId: string;
+    Enabled?: boolean;
     /**
-      * 负载均衡监听器 ID
+      * 云镜版本：0 基础版，1 专业版。目前仅支持基础版
       */
-    ListenerId: string;
-    /**
-      * 新的监听器名称
-      */
-    ListenerName?: string;
-    /**
-      * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。
-      */
-    SessionExpireTime?: number;
-    /**
-      * 健康检查相关参数
-      */
-    HealthCheck?: HealthCheck;
-    /**
-      * 监听器转发的方式。可选值：WRR、LEAST_CONN
-分别表示按权重轮询、最小连接数， 默认为 WRR。
-      */
-    Scheduler?: string;
+    Version?: number;
 }
 /**
  * CreateImage请求参数结构体
@@ -1463,6 +1466,51 @@ DELETING：删除中
       * EcmRegion ecm区域
       */
     EcmRegion: string;
+}
+/**
+ * 描述密钥对信息
+ */
+export interface KeyPair {
+    /**
+      * 密钥对的ID，是密钥对的唯一标识。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyId: string;
+    /**
+      * 密钥对名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyName: string;
+    /**
+      * 密钥对所属的项目ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectId: number;
+    /**
+      * 密钥对描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 密钥对的纯文本公钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicKey: string;
+    /**
+      * 钥对的纯文本私钥。腾讯云不会保管私钥，请用户自行妥善保存。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivateKey: string;
+    /**
+      * 钥关联的实例ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssociatedInstanceIds: Array<string>;
+    /**
+      * 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
 }
 /**
  * DescribeVpcs返回参数结构体
@@ -2487,6 +2535,33 @@ export interface DescribeSecurityGroupLimitsResponse {
     RequestId?: string;
 }
 /**
+ * DisassociateInstancesKeyPairs请求参数结构体
+ */
+export interface DisassociateInstancesKeyPairsRequest {
+    /**
+      * 可以通过以下方式获取可用的实例ID：
+通过登录控制台查询实例ID。
+通过调用接口 DescribeInstances ，取返回信息中的 InstanceId 获取实例ID。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 密钥对ID列表，每次请求批量密钥对的上限为100。密钥对ID形如：skey-11112222。
+
+可以通过以下方式获取可用的密钥ID：
+通过登录控制台查询密钥ID。
+通过调用接口 DescribeKeyPairs ，取返回信息中的 KeyId 获取密钥对ID。
+      */
+    KeyIds: Array<string>;
+    /**
+      * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：
+TRUE：表示在正常关机失败后进行强制关机。
+FALSE：表示在正常关机失败后不进行强制关机。
+
+默认取值：FALSE。
+      */
+    ForceStop?: boolean;
+}
+/**
  * 路由表关联关系
  */
 export interface RouteTableAssociation {
@@ -2761,6 +2836,19 @@ export interface ReplaceSecurityGroupPolicyRequest {
     SecurityGroupPolicySet: SecurityGroupPolicySet;
 }
 /**
+ * CreateKeyPair返回参数结构体
+ */
+export interface CreateKeyPairResponse {
+    /**
+      * 密钥对信息。
+      */
+    KeyPair: KeyPair;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteModule返回参数结构体
  */
 export interface DeleteModuleResponse {
@@ -2804,6 +2892,15 @@ export interface ModifyModuleNetworkResponse {
  * DescribeImportImageOs请求参数结构体
  */
 export declare type DescribeImportImageOsRequest = null;
+/**
+ * CreateKeyPair请求参数结构体
+ */
+export interface CreateKeyPairRequest {
+    /**
+      * 密钥对名称，可由数字，字母和下划线组成，长度不超过25个字符。
+      */
+    KeyName: string;
+}
 /**
  * ModifyModuleIpDirect返回参数结构体
  */
@@ -4984,19 +5081,6 @@ export interface PublicIPAddressInfo {
     MaxBandwidthIn: number;
 }
 /**
- * 云镜服务；
- */
-export interface RunSecurityServiceEnabled {
-    /**
-      * 是否开启。
-      */
-    Enabled?: boolean;
-    /**
-      * 云镜版本：0 基础版，1 专业版。目前仅支持基础版
-      */
-    Version?: number;
-}
-/**
  * ModifyModuleImage返回参数结构体
  */
 export interface ModifyModuleImageResponse {
@@ -5691,24 +5775,34 @@ export interface CreateNetworkInterfaceResponse {
     RequestId?: string;
 }
 /**
- * 目标和权重的描述信息
+ * ModifyListener请求参数结构体
  */
-export interface TargetsWeightRule {
+export interface ModifyListenerRequest {
+    /**
+      * 负载均衡实例 ID
+      */
+    LoadBalancerId: string;
     /**
       * 负载均衡监听器 ID
-注意：此字段可能返回 null，表示取不到有效值。
       */
-    ListenerId?: string;
+    ListenerId: string;
     /**
-      * 要修改权重的后端机器列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 新的监听器名称
       */
-    Targets?: Array<Target>;
+    ListenerName?: string;
     /**
-      * 后端服务新的转发权重，取值范围：0~100。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。
       */
-    Weight?: number;
+    SessionExpireTime?: number;
+    /**
+      * 健康检查相关参数
+      */
+    HealthCheck?: HealthCheck;
+    /**
+      * 监听器转发的方式。可选值：WRR、LEAST_CONN
+分别表示按权重轮询、最小连接数， 默认为 WRR。
+      */
+    Scheduler?: string;
 }
 /**
  * DescribeDisks返回参数结构体
@@ -6561,6 +6655,15 @@ export interface PrivateIPAddressInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PrivateIPAddress: string;
+}
+/**
+ * DisassociateInstancesKeyPairs返回参数结构体
+ */
+export interface DisassociateInstancesKeyPairsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * TerminateInstances请求参数结构体

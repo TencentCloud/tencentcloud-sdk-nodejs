@@ -276,6 +276,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("ModifyListener", req, cb);
     }
     /**
+     * 用于解除实例的密钥绑定关系。
+     */
+    async DisassociateInstancesKeyPairs(req, cb) {
+        return this.request("DisassociateInstancesKeyPairs", req, cb);
+    }
+    /**
      * 将弹性公网IP（简称 EIP）绑定到实例或弹性网卡的指定内网 IP 上。
 将 EIP 绑定到实例（ECM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
 将 EIP 绑定到指定网卡的内网 IP上，内网IP已经绑定了EIP或普通公网IP，则反馈失败。必须先解绑该 EIP，才能再绑定新的。
@@ -430,6 +436,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async DeleteSecurityGroupPolicies(req, cb) {
         return this.request("DeleteSecurityGroupPolicies", req, cb);
+    }
+    /**
+     * 用于创建一个 OpenSSH RSA 密钥对，可以用于登录 Linux 实例。
+     */
+    async CreateKeyPair(req, cb) {
+        return this.request("CreateKeyPair", req, cb);
     }
     /**
      * 修改模块配置，已关联实例的模块不支持调整配置。
