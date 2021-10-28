@@ -1135,7 +1135,7 @@ export interface DescribeAvailableExpertServiceDetailResponse {
       */
     EmergencyResponseBuy: boolean;
     /**
-      * 是否哦购买过旗舰护网
+      * 是否购买过旗舰护网
       */
     ProtectNetBuy: boolean;
     /**

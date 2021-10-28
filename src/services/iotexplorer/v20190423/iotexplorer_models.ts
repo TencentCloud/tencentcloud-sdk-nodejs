@@ -1550,18 +1550,18 @@ export interface CallDeviceActionSyncResponse {
   /**
    * 调用Id
    */
-  ClientToken?: string
+  ClientToken: string
 
   /**
       * 输出参数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OutputParams?: string
+  OutputParams: string
 
   /**
-   * 返回状态
+   * 返回状态，当设备不在线等部分情况，会通过该 Status 返回。
    */
-  Status?: string
+  Status: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2487,12 +2487,12 @@ export interface CallDeviceActionAsyncResponse {
   /**
    * 调用Id
    */
-  ClientToken?: string
+  ClientToken: string
 
   /**
    * 异步调用状态
    */
-  Status?: string
+  Status: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

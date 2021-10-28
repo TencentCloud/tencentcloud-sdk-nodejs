@@ -21,24 +21,30 @@ import {
   DescribeRolesResponse,
   DescribeBindClustersResponse,
   CmqDeadLetterPolicy,
-  BundleSetOpt,
+  DescribeNamespaceBundlesOptRequest,
+  RocketMQNamespace,
   DescribeSubscriptionsRequest,
-  Role,
+  CreateRocketMQGroupRequest,
+  ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
   SendBatchMessagesResponse,
   ModifyCmqSubscriptionAttributeResponse,
   CreateCmqTopicRequest,
-  ReceiveMessageRequest,
+  DescribeRocketMQNamespacesResponse,
   BindCluster,
   ModifyClusterResponse,
+  RocketMQClusterRecentStats,
   DescribeCmqQueuesResponse,
-  DeleteCmqQueueResponse,
+  DescribeNamespaceBundlesOptResponse,
   CreateCmqSubscribeRequest,
   RewindCmqQueueResponse,
   DeleteClusterRequest,
   CmqSubscription,
+  DeleteRocketMQGroupRequest,
+  RocketMQGroup,
   DeleteCmqTopicResponse,
   CreateSubscriptionRequest,
+  CreateRocketMQNamespaceRequest,
   DescribeCmqTopicDetailResponse,
   CmqQueue,
   CreateEnvironmentResponse,
@@ -49,27 +55,34 @@ import {
   DescribeCmqSubscriptionDetailRequest,
   Topic,
   DescribeEnvironmentsRequest,
+  DescribeRocketMQNamespacesRequest,
+  DescribeRocketMQTopicsRequest,
+  ModifyRocketMQClusterResponse,
   DescribeCmqQueueDetailResponse,
   CreateEnvironmentRequest,
   DeleteTopicsResponse,
   DescribeClustersRequest,
-  ModifyEnvironmentAttributesRequest,
+  RocketMQTopic,
+  DescribeRocketMQClusterResponse,
   DescribeCmqSubscriptionDetailResponse,
   VpcBindRecord,
   RewindCmqQueueRequest,
   ModifyClusterRequest,
   DescribeEnvironmentAttributesRequest,
+  ModifyRocketMQClusterRequest,
   AcknowledgeMessageRequest,
   DescribeTopicsResponse,
   PublishCmqMsgResponse,
+  CreateRocketMQClusterRequest,
   SendCmqMsgRequest,
   AcknowledgeMessageResponse,
   DeleteEnvironmentRolesResponse,
   DescribeClusterDetailRequest,
   ModifyRoleResponse,
   Tag,
-  DescribeNamespaceBundlesOptResponse,
-  SendMessagesRequest,
+  DeleteCmqQueueResponse,
+  DescribeRocketMQClusterRequest,
+  DeleteRocketMQTopicResponse,
   ModifyCmqTopicAttributeRequest,
   DeleteRolesRequest,
   Subscription,
@@ -77,30 +90,42 @@ import {
   DescribeSubscriptionsResponse,
   ModifyRoleRequest,
   SendMessagesResponse,
+  ReceiveMessageRequest,
   CreateTopicRequest,
   DescribeTopicsRequest,
   DeleteEnvironmentsResponse,
   DescribeEnvironmentRolesResponse,
   ClearCmqQueueRequest,
+  ModifyRocketMQGroupRequest,
   FilterSubscription,
   DescribeCmqTopicsResponse,
   DescribeCmqTopicDetailRequest,
   CmqTopic,
   UnbindCmqDeadLetterResponse,
-  DescribeNodeHealthOptRequest,
+  ModifyRocketMQNamespaceResponse,
+  DeleteEnvironmentsRequest,
+  DescribeRocketMQClustersRequest,
   DescribeBindVpcsRequest,
   DescribeClustersResponse,
   ClearCmqSubscriptionFilterTagsRequest,
   TopicRecord,
+  CreateRocketMQGroupResponse,
+  ModifyRocketMQNamespaceRequest,
   DescribeEnvironmentRolesRequest,
   DeleteRolesResponse,
+  ModifyRocketMQTopicRequest,
+  RocketMQClusterInfo,
+  DescribeRocketMQTopicsResponse,
   Environment,
+  RocketMQClusterDetail,
+  DeleteRocketMQGroupResponse,
   CreateCmqQueueResponse,
   PartitionsTopic,
+  DescribeRocketMQGroupsResponse,
   ResetMsgSubOffsetByTimestampResponse,
   CreateClusterResponse,
   DescribeCmqDeadLetterSourceQueuesRequest,
-  DescribeNodeHealthOptResponse,
+  DeleteRocketMQNamespaceRequest,
   CreateClusterRequest,
   ModifyCmqQueueAttributeResponse,
   CreateTopicResponse,
@@ -109,6 +134,7 @@ import {
   ModifyCmqSubscriptionAttributeRequest,
   ModifyTopicResponse,
   ReceiveMessageResponse,
+  DeleteRocketMQClusterResponse,
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
   ClearCmqSubscriptionFilterTagsResponse,
@@ -117,47 +143,62 @@ import {
   Connection,
   DeleteTopicsRequest,
   CmqTransactionPolicy,
-  DescribeNamespaceBundlesOptRequest,
+  BundleSetOpt,
   ModifyTopicRequest,
   ResetMsgSubOffsetByTimestampRequest,
   CreateEnvironmentRoleResponse,
   Consumer,
   DescribeBindVpcsResponse,
   DeleteCmqSubscribeRequest,
+  RocketMQClusterConfig,
   DescribeCmqDeadLetterSourceQueuesResponse,
   DeleteSubscriptionsResponse,
+  DeleteRocketMQTopicRequest,
   ConsumersSchedule,
   Cluster,
   RetentionPolicy,
+  CreateRocketMQClusterResponse,
+  DeleteRocketMQNamespaceResponse,
   SendMsgRequest,
   DescribeCmqQueueDetailRequest,
+  CreateRocketMQTopicRequest,
   CreateRoleResponse,
+  DeleteRocketMQClusterRequest,
   DeleteEnvironmentRolesRequest,
   ClearCmqQueueResponse,
-  DeleteEnvironmentsRequest,
+  DescribeNodeHealthOptRequest,
   DescribeBindClustersRequest,
+  CreateRocketMQTopicResponse,
   ModifyEnvironmentAttributesResponse,
   EnvironmentRole,
   CreateCmqQueueRequest,
   ModifyEnvironmentRoleResponse,
   DeleteCmqQueueRequest,
+  DescribeRocketMQGroupsRequest,
+  DescribeRocketMQClustersResponse,
   CreateRoleRequest,
   DescribeProducersRequest,
   ModifyEnvironmentRoleRequest,
   DescribeEnvironmentAttributesResponse,
+  Role,
   SubscriptionTopic,
   DescribeProducersResponse,
+  CreateRocketMQNamespaceResponse,
   SendBatchMessagesRequest,
   DeleteCmqTopicRequest,
   SendCmqMsgResponse,
+  DescribeNodeHealthOptResponse,
   PublishCmqMsgRequest,
   UnbindCmqDeadLetterRequest,
   ModifyCmqQueueAttributeRequest,
   DeleteCmqSubscribeResponse,
   DescribeRolesRequest,
   DeleteSubscriptionsRequest,
+  ModifyRocketMQGroupResponse,
   DescribeClusterDetailResponse,
+  SendMessagesRequest,
   CreateEnvironmentRoleRequest,
+  ModifyRocketMQTopicResponse,
 } from "./tdmq_models"
 
 /**
@@ -177,6 +218,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCmqTopicResponse) => void
   ): Promise<DeleteCmqTopicResponse> {
     return this.request("DeleteCmqTopic", req, cb)
+  }
+
+  /**
+   * 获取RocketMQ集群列表
+   */
+  async DescribeRocketMQClusters(
+    req: DescribeRocketMQClustersRequest,
+    cb?: (error: string, rep: DescribeRocketMQClustersResponse) => void
+  ): Promise<DescribeRocketMQClustersResponse> {
+    return this.request("DescribeRocketMQClusters", req, cb)
   }
 
   /**
@@ -230,6 +281,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除RocketMQ主题
+   */
+  async DeleteRocketMQTopic(
+    req: DeleteRocketMQTopicRequest,
+    cb?: (error: string, rep: DeleteRocketMQTopicResponse) => void
+  ): Promise<DeleteRocketMQTopicResponse> {
+    return this.request("DeleteRocketMQTopic", req, cb)
+  }
+
+  /**
    * 运营端获节点健康状态
    */
   async DescribeNodeHealthOpt(
@@ -260,6 +321,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新RocketMQ消费组信息
+   */
+  async ModifyRocketMQGroup(
+    req: ModifyRocketMQGroupRequest,
+    cb?: (error: string, rep: ModifyRocketMQGroupResponse) => void
+  ): Promise<ModifyRocketMQGroupResponse> {
+    return this.request("ModifyRocketMQGroup", req, cb)
+  }
+
+  /**
    * 修改cmq主题属性
    */
   async ModifyCmqTopicAttribute(
@@ -277,6 +348,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCmqQueueAttributeResponse) => void
   ): Promise<ModifyCmqQueueAttributeResponse> {
     return this.request("ModifyCmqQueueAttribute", req, cb)
+  }
+
+  /**
+   * 删除订阅关系
+   */
+  async DeleteSubscriptions(
+    req: DeleteSubscriptionsRequest,
+    cb?: (error: string, rep: DeleteSubscriptionsResponse) => void
+  ): Promise<DeleteSubscriptionsResponse> {
+    return this.request("DeleteSubscriptions", req, cb)
   }
 
   /**
@@ -310,6 +391,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取RocketMQ命名空间列表
+   */
+  async DescribeRocketMQNamespaces(
+    req: DescribeRocketMQNamespacesRequest,
+    cb?: (error: string, rep: DescribeRocketMQNamespacesResponse) => void
+  ): Promise<DescribeRocketMQNamespacesResponse> {
+    return this.request("DescribeRocketMQNamespaces", req, cb)
+  }
+
+  /**
    * 删除cmq队列
    */
   async DeleteCmqQueue(
@@ -320,23 +411,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 枚举cmq全量主题
+   * 此接口用于创建一个RocketMQ集群
    */
-  async DescribeCmqTopics(
-    req: DescribeCmqTopicsRequest,
-    cb?: (error: string, rep: DescribeCmqTopicsResponse) => void
-  ): Promise<DescribeCmqTopicsResponse> {
-    return this.request("DescribeCmqTopics", req, cb)
+  async CreateRocketMQCluster(
+    req: CreateRocketMQClusterRequest,
+    cb?: (error: string, rep: CreateRocketMQClusterResponse) => void
+  ): Promise<CreateRocketMQClusterResponse> {
+    return this.request("CreateRocketMQCluster", req, cb)
   }
 
   /**
-   * 批量删除topics
+   * 删除环境角色授权。
    */
-  async DeleteTopics(
-    req: DeleteTopicsRequest,
-    cb?: (error: string, rep: DeleteTopicsResponse) => void
-  ): Promise<DeleteTopicsResponse> {
-    return this.request("DeleteTopics", req, cb)
+  async DeleteEnvironmentRoles(
+    req: DeleteEnvironmentRolesRequest,
+    cb?: (error: string, rep: DeleteEnvironmentRolesResponse) => void
+  ): Promise<DeleteEnvironmentRolesResponse> {
+    return this.request("DeleteEnvironmentRoles", req, cb)
+  }
+
+  /**
+   * 删除RocketMQ消费组
+   */
+  async DeleteRocketMQGroup(
+    req: DeleteRocketMQGroupRequest,
+    cb?: (error: string, rep: DeleteRocketMQGroupResponse) => void
+  ): Promise<DeleteRocketMQGroupResponse> {
+    return this.request("DeleteRocketMQGroup", req, cb)
   }
 
   /**
@@ -350,13 +451,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除集群
+   * 发送cmq主题消息
    */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
+  async PublishCmqMsg(
+    req: PublishCmqMsgRequest,
+    cb?: (error: string, rep: PublishCmqMsgResponse) => void
+  ): Promise<PublishCmqMsgResponse> {
+    return this.request("PublishCmqMsg", req, cb)
+  }
+
+  /**
+   * 更新RocketMQ命名空间
+   */
+  async ModifyRocketMQNamespace(
+    req: ModifyRocketMQNamespaceRequest,
+    cb?: (error: string, rep: ModifyRocketMQNamespaceResponse) => void
+  ): Promise<ModifyRocketMQNamespaceResponse> {
+    return this.request("ModifyRocketMQNamespace", req, cb)
   }
 
   /**
@@ -420,6 +531,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取RocketMQ消费组列表
+   */
+  async DescribeRocketMQGroups(
+    req: DescribeRocketMQGroupsRequest,
+    cb?: (error: string, rep: DescribeRocketMQGroupsResponse) => void
+  ): Promise<DescribeRocketMQGroupsResponse> {
+    return this.request("DescribeRocketMQGroups", req, cb)
+  }
+
+  /**
    * 查询cmq全量队列
    */
   async DescribeCmqQueues(
@@ -430,13 +551,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发送cmq主题消息
+   * 创建RocketMQ主题
    */
-  async PublishCmqMsg(
-    req: PublishCmqMsgRequest,
-    cb?: (error: string, rep: PublishCmqMsgResponse) => void
-  ): Promise<PublishCmqMsgResponse> {
-    return this.request("PublishCmqMsg", req, cb)
+  async CreateRocketMQTopic(
+    req: CreateRocketMQTopicRequest,
+    cb?: (error: string, rep: CreateRocketMQTopicResponse) => void
+  ): Promise<CreateRocketMQTopicResponse> {
+    return this.request("CreateRocketMQTopic", req, cb)
   }
 
   /**
@@ -450,6 +571,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取RocketMQ主题列表
+   */
+  async DescribeRocketMQTopics(
+    req: DescribeRocketMQTopicsRequest,
+    cb?: (error: string, rep: DescribeRocketMQTopicsResponse) => void
+  ): Promise<DescribeRocketMQTopicsResponse> {
+    return this.request("DescribeRocketMQTopics", req, cb)
+  }
+
+  /**
    * 获取集群的详细信息
    */
   async DescribeClusterDetail(
@@ -460,23 +591,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定环境和主题下的订阅者列表
+   * 删除RocketMQ集群
    */
-  async DescribeSubscriptions(
-    req: DescribeSubscriptionsRequest,
-    cb?: (error: string, rep: DescribeSubscriptionsResponse) => void
-  ): Promise<DescribeSubscriptionsResponse> {
-    return this.request("DescribeSubscriptions", req, cb)
+  async DeleteRocketMQCluster(
+    req: DeleteRocketMQClusterRequest,
+    cb?: (error: string, rep: DeleteRocketMQClusterResponse) => void
+  ): Promise<DeleteRocketMQClusterResponse> {
+    return this.request("DeleteRocketMQCluster", req, cb)
   }
 
   /**
-   * 删除cmq订阅
+   * 创建RocketMQ消费组
    */
-  async DeleteCmqSubscribe(
-    req: DeleteCmqSubscribeRequest,
-    cb?: (error: string, rep: DeleteCmqSubscribeResponse) => void
-  ): Promise<DeleteCmqSubscribeResponse> {
-    return this.request("DeleteCmqSubscribe", req, cb)
+  async CreateRocketMQGroup(
+    req: CreateRocketMQGroupRequest,
+    cb?: (error: string, rep: CreateRocketMQGroupResponse) => void
+  ): Promise<CreateRocketMQGroupResponse> {
+    return this.request("CreateRocketMQGroup", req, cb)
+  }
+
+  /**
+   * 根据时间戳进行消息回溯，精确到毫秒
+   */
+  async ResetMsgSubOffsetByTimestamp(
+    req: ResetMsgSubOffsetByTimestampRequest,
+    cb?: (error: string, rep: ResetMsgSubOffsetByTimestampResponse) => void
+  ): Promise<ResetMsgSubOffsetByTimestampResponse> {
+    return this.request("ResetMsgSubOffsetByTimestamp", req, cb)
   }
 
   /**
@@ -497,6 +638,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCmqTopicDetailResponse) => void
   ): Promise<DescribeCmqTopicDetailResponse> {
     return this.request("DescribeCmqTopicDetail", req, cb)
+  }
+
+  /**
+   * 查询指定环境和主题下的订阅者列表
+   */
+  async DescribeSubscriptions(
+    req: DescribeSubscriptionsRequest,
+    cb?: (error: string, rep: DescribeSubscriptionsResponse) => void
+  ): Promise<DescribeSubscriptionsResponse> {
+    return this.request("DescribeSubscriptions", req, cb)
   }
 
   /**
@@ -550,6 +701,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 枚举cmq全量主题
+   */
+  async DescribeCmqTopics(
+    req: DescribeCmqTopicsRequest,
+    cb?: (error: string, rep: DescribeCmqTopicsResponse) => void
+  ): Promise<DescribeCmqTopicsResponse> {
+    return this.request("DescribeCmqTopics", req, cb)
+  }
+
+  /**
    * 清空订阅者消息标签
    */
   async ClearCmqSubscriptionFilterTags(
@@ -560,13 +721,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改环境角色授权。
+   * 删除cmq订阅
    */
-  async ModifyEnvironmentRole(
-    req: ModifyEnvironmentRoleRequest,
-    cb?: (error: string, rep: ModifyEnvironmentRoleResponse) => void
-  ): Promise<ModifyEnvironmentRoleResponse> {
-    return this.request("ModifyEnvironmentRole", req, cb)
+  async DeleteCmqSubscribe(
+    req: DeleteCmqSubscribeRequest,
+    cb?: (error: string, rep: DeleteCmqSubscribeResponse) => void
+  ): Promise<DeleteCmqSubscribeResponse> {
+    return this.request("DeleteCmqSubscribe", req, cb)
   }
 
   /**
@@ -577,6 +738,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SendMessagesResponse) => void
   ): Promise<SendMessagesResponse> {
     return this.request("SendMessages", req, cb)
+  }
+
+  /**
+   * 更新RocketMQ集群信息
+   */
+  async ModifyRocketMQCluster(
+    req: ModifyRocketMQClusterRequest,
+    cb?: (error: string, rep: ModifyRocketMQClusterResponse) => void
+  ): Promise<ModifyRocketMQClusterResponse> {
+    return this.request("ModifyRocketMQCluster", req, cb)
   }
 
   /**
@@ -597,6 +768,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterResponse) => void
   ): Promise<ModifyClusterResponse> {
     return this.request("ModifyCluster", req, cb)
+  }
+
+  /**
+   * 更新RocketMQ主题信息
+   */
+  async ModifyRocketMQTopic(
+    req: ModifyRocketMQTopicRequest,
+    cb?: (error: string, rep: ModifyRocketMQTopicResponse) => void
+  ): Promise<ModifyRocketMQTopicResponse> {
+    return this.request("ModifyRocketMQTopic", req, cb)
   }
 
   /**
@@ -660,6 +841,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建RocketMQ命名空间
+   */
+  async CreateRocketMQNamespace(
+    req: CreateRocketMQNamespaceRequest,
+    cb?: (error: string, rep: CreateRocketMQNamespaceResponse) => void
+  ): Promise<CreateRocketMQNamespaceResponse> {
+    return this.request("CreateRocketMQNamespace", req, cb)
+  }
+
+  /**
+   * 获取单个RocketMQ集群信息
+   */
+  async DescribeRocketMQCluster(
+    req: DescribeRocketMQClusterRequest,
+    cb?: (error: string, rep: DescribeRocketMQClusterResponse) => void
+  ): Promise<DescribeRocketMQClusterResponse> {
+    return this.request("DescribeRocketMQCluster", req, cb)
+  }
+
+  /**
    * 批量发送消息
    */
   async SendBatchMessages(
@@ -700,23 +901,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除环境角色授权。
+   * 批量删除topics
    */
-  async DeleteEnvironmentRoles(
-    req: DeleteEnvironmentRolesRequest,
-    cb?: (error: string, rep: DeleteEnvironmentRolesResponse) => void
-  ): Promise<DeleteEnvironmentRolesResponse> {
-    return this.request("DeleteEnvironmentRoles", req, cb)
+  async DeleteTopics(
+    req: DeleteTopicsRequest,
+    cb?: (error: string, rep: DeleteTopicsResponse) => void
+  ): Promise<DeleteTopicsResponse> {
+    return this.request("DeleteTopics", req, cb)
   }
 
   /**
-   * 根据时间戳进行消息回溯，精确到毫秒
+   * 修改环境角色授权。
    */
-  async ResetMsgSubOffsetByTimestamp(
-    req: ResetMsgSubOffsetByTimestampRequest,
-    cb?: (error: string, rep: ResetMsgSubOffsetByTimestampResponse) => void
-  ): Promise<ResetMsgSubOffsetByTimestampResponse> {
-    return this.request("ResetMsgSubOffsetByTimestamp", req, cb)
+  async ModifyEnvironmentRole(
+    req: ModifyEnvironmentRoleRequest,
+    cb?: (error: string, rep: ModifyEnvironmentRoleResponse) => void
+  ): Promise<ModifyEnvironmentRoleResponse> {
+    return this.request("ModifyEnvironmentRole", req, cb)
+  }
+
+  /**
+   * 删除RocketMQ命名空间
+   */
+  async DeleteRocketMQNamespace(
+    req: DeleteRocketMQNamespaceRequest,
+    cb?: (error: string, rep: DeleteRocketMQNamespaceResponse) => void
+  ): Promise<DeleteRocketMQNamespaceResponse> {
+    return this.request("DeleteRocketMQNamespace", req, cb)
   }
 
   /**
@@ -730,12 +941,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除订阅关系
+   * 删除集群
    */
-  async DeleteSubscriptions(
-    req: DeleteSubscriptionsRequest,
-    cb?: (error: string, rep: DeleteSubscriptionsResponse) => void
-  ): Promise<DeleteSubscriptionsResponse> {
-    return this.request("DeleteSubscriptions", req, cb)
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 }

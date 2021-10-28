@@ -540,7 +540,7 @@ export interface CreateAlarmPolicyRequest {
   MonitorType: string
 
   /**
-   * 告警策略类型，由 [DescribeAllNamespaces](https://cloud.tencent.com/document/product/248/48683) 获得，例如 cvm_device
+   * 告警策略类型，由 [DescribeAllNamespaces](https://cloud.tencent.com/document/product/248/48683) 获得。对于云产品监控，取接口出参的 QceNamespacesNew.N.Id，例如 cvm_device
    */
   Namespace: string
 

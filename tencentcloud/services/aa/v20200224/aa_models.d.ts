@@ -31,17 +31,17 @@ export interface QueryActivityAntiRushResponse {
       * 操作时间戳，单位：秒。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PostTime?: string;
+    PostTime: string;
     /**
       * 用户操作的真实外网 IP。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UserIp?: string;
+    UserIp: string;
     /**
       * 0：表示无恶意。
 1 - 4：恶意等级由低到高。
       */
-    Level?: number;
+    Level: number;
     /**
       * 风险类型。
 
@@ -63,29 +63,28 @@ export interface QueryActivityAntiRushResponse {
 205，非公网有效ip，传进来的IP地址为内网ip地址或者ip保留地址；
 206，设备异常，该设备存在异常的使用行为
       */
-    RiskType?: Array<number>;
+    RiskType: Array<number>;
     /**
       * accountType是QQ或微信开放账号时，用于标识QQ或微信用户登录后关联业务自身的账号ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AssociateAccount?: string;
+    AssociateAccount: string;
     /**
-      * 用户ID
-accountType不同对应不同的用户ID。如果是QQ或微信用户则填入对应的openId
+      * uid值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Uid?: string;
+    Uid: string;
     /**
       * 用户操作的目的ID
 比如：点赞，该字段就是被点 赞的消息 id，如果是投票，就是被投号码的 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RootId?: string;
+    RootId: string;
     /**
       * 业务侧错误码。成功时返回Success，错误时返回具体业务错误原因。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CodeDesc?: string;
+    CodeDesc: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -517,16 +516,11 @@ export interface SponsorInfo {
  */
 export interface QueryActivityAntiRushRequest {
     /**
-      * 用户账号类型（默认开通 QQ 开放账号、手机号，手机 MD5 账号类型查询。如需使用微信开放账号，则需要 提交工单 由腾讯云进行资格审核，审核通过后方可正常使用微信开放账号）：
-1：QQ 开放帐号。
-2：微信开放账号。
-4：手机号。
-0：其他。
-10004：手机号 MD5。
+      * 账号类型
       */
     AccountType: string;
     /**
-      * 用户 ID 不同的 accountType 对应不同的用户 ID。如果是 QQ，则填入对应的 openid，微信用户则填入对应的 openid/unionid，手机号则填入对应真实用户手机号（如13123456789）。
+      * uid值
       */
     Uid: string;
     /**
@@ -546,7 +540,7 @@ export interface QueryActivityAntiRushRequest {
       */
     NickName?: string;
     /**
-      * 手机号。若 accountType 选4（手机号）、或10004（手机号 MD5），则无需重复填写。否则填入对应的手机号（如15912345687）。accountType为1或2时，该字段支持MD5值；
+      * 手机号
       */
     PhoneNumber?: string;
     /**
@@ -652,8 +646,7 @@ export interface QueryActivityAntiRushRequest {
       */
     RandNum?: string;
     /**
-      * 如果 accountType为2而且wxSubType有填，该字段必选，否则不需要填写；
-如果是微信小程序（WxSubType=2），该字段为以ssesion_key为key去签名随机数radnNum得到的值（ hmac_sha256签名算法）；如果是微信公众号或第三方登录，则为授权的access_token（网页版本的access_Token,而且获取token的scope字段必需填写snsapi_userinfo；）
+      * token
       */
     WxToken?: string;
     /**

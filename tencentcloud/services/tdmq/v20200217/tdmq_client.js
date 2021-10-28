@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCmqTopic", req, cb);
     }
     /**
+     * 获取RocketMQ集群列表
+     */
+    async DescribeRocketMQClusters(req, cb) {
+        return this.request("DescribeRocketMQClusters", req, cb);
+    }
+    /**
      * 批量删除租户下的命名空间
      */
     async DeleteEnvironments(req, cb) {
@@ -64,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClearCmqQueue", req, cb);
     }
     /**
+     * 删除RocketMQ主题
+     */
+    async DeleteRocketMQTopic(req, cb) {
+        return this.request("DeleteRocketMQTopic", req, cb);
+    }
+    /**
      * 运营端获节点健康状态
      */
     async DescribeNodeHealthOpt(req, cb) {
@@ -82,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCmqQueue", req, cb);
     }
     /**
+     * 更新RocketMQ消费组信息
+     */
+    async ModifyRocketMQGroup(req, cb) {
+        return this.request("ModifyRocketMQGroup", req, cb);
+    }
+    /**
      * 修改cmq主题属性
      */
     async ModifyCmqTopicAttribute(req, cb) {
@@ -92,6 +110,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyCmqQueueAttribute(req, cb) {
         return this.request("ModifyCmqQueueAttribute", req, cb);
+    }
+    /**
+     * 删除订阅关系
+     */
+    async DeleteSubscriptions(req, cb) {
+        return this.request("DeleteSubscriptions", req, cb);
     }
     /**
      * 创建cmq主题
@@ -112,22 +136,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
     }
     /**
+     * 获取RocketMQ命名空间列表
+     */
+    async DescribeRocketMQNamespaces(req, cb) {
+        return this.request("DescribeRocketMQNamespaces", req, cb);
+    }
+    /**
      * 删除cmq队列
      */
     async DeleteCmqQueue(req, cb) {
         return this.request("DeleteCmqQueue", req, cb);
     }
     /**
-     * 枚举cmq全量主题
+     * 此接口用于创建一个RocketMQ集群
      */
-    async DescribeCmqTopics(req, cb) {
-        return this.request("DescribeCmqTopics", req, cb);
+    async CreateRocketMQCluster(req, cb) {
+        return this.request("CreateRocketMQCluster", req, cb);
     }
     /**
-     * 批量删除topics
+     * 删除环境角色授权。
      */
-    async DeleteTopics(req, cb) {
-        return this.request("DeleteTopics", req, cb);
+    async DeleteEnvironmentRoles(req, cb) {
+        return this.request("DeleteEnvironmentRoles", req, cb);
+    }
+    /**
+     * 删除RocketMQ消费组
+     */
+    async DeleteRocketMQGroup(req, cb) {
+        return this.request("DeleteRocketMQGroup", req, cb);
     }
     /**
      * 获取命名空间角色列表
@@ -136,10 +172,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironmentRoles", req, cb);
     }
     /**
-     * 删除集群
+     * 发送cmq主题消息
      */
-    async DeleteCluster(req, cb) {
-        return this.request("DeleteCluster", req, cb);
+    async PublishCmqMsg(req, cb) {
+        return this.request("PublishCmqMsg", req, cb);
+    }
+    /**
+     * 更新RocketMQ命名空间
+     */
+    async ModifyRocketMQNamespace(req, cb) {
+        return this.request("ModifyRocketMQNamespace", req, cb);
     }
     /**
      * 获取用户绑定的专享集群列表
@@ -178,16 +220,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
+     * 获取RocketMQ消费组列表
+     */
+    async DescribeRocketMQGroups(req, cb) {
+        return this.request("DescribeRocketMQGroups", req, cb);
+    }
+    /**
      * 查询cmq全量队列
      */
     async DescribeCmqQueues(req, cb) {
         return this.request("DescribeCmqQueues", req, cb);
     }
     /**
-     * 发送cmq主题消息
+     * 创建RocketMQ主题
      */
-    async PublishCmqMsg(req, cb) {
-        return this.request("PublishCmqMsg", req, cb);
+    async CreateRocketMQTopic(req, cb) {
+        return this.request("CreateRocketMQTopic", req, cb);
     }
     /**
      * 获取租户下命名空间列表
@@ -196,22 +244,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironments", req, cb);
     }
     /**
+     * 获取RocketMQ主题列表
+     */
+    async DescribeRocketMQTopics(req, cb) {
+        return this.request("DescribeRocketMQTopics", req, cb);
+    }
+    /**
      * 获取集群的详细信息
      */
     async DescribeClusterDetail(req, cb) {
         return this.request("DescribeClusterDetail", req, cb);
     }
     /**
-     * 查询指定环境和主题下的订阅者列表
+     * 删除RocketMQ集群
      */
-    async DescribeSubscriptions(req, cb) {
-        return this.request("DescribeSubscriptions", req, cb);
+    async DeleteRocketMQCluster(req, cb) {
+        return this.request("DeleteRocketMQCluster", req, cb);
     }
     /**
-     * 删除cmq订阅
+     * 创建RocketMQ消费组
      */
-    async DeleteCmqSubscribe(req, cb) {
-        return this.request("DeleteCmqSubscribe", req, cb);
+    async CreateRocketMQGroup(req, cb) {
+        return this.request("CreateRocketMQGroup", req, cb);
+    }
+    /**
+     * 根据时间戳进行消息回溯，精确到毫秒
+     */
+    async ResetMsgSubOffsetByTimestamp(req, cb) {
+        return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
     }
     /**
      * 根据提供的 MessageID 确认指定 topic 中的消息
@@ -224,6 +284,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCmqTopicDetail(req, cb) {
         return this.request("DescribeCmqTopicDetail", req, cb);
+    }
+    /**
+     * 查询指定环境和主题下的订阅者列表
+     */
+    async DescribeSubscriptions(req, cb) {
+        return this.request("DescribeSubscriptions", req, cb);
     }
     /**
      * 用于在用户账户下创建消息队列 Tdmq 命名空间
@@ -256,22 +322,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopics", req, cb);
     }
     /**
+     * 枚举cmq全量主题
+     */
+    async DescribeCmqTopics(req, cb) {
+        return this.request("DescribeCmqTopics", req, cb);
+    }
+    /**
      * 清空订阅者消息标签
      */
     async ClearCmqSubscriptionFilterTags(req, cb) {
         return this.request("ClearCmqSubscriptionFilterTags", req, cb);
     }
     /**
-     * 修改环境角色授权。
+     * 删除cmq订阅
      */
-    async ModifyEnvironmentRole(req, cb) {
-        return this.request("ModifyEnvironmentRole", req, cb);
+    async DeleteCmqSubscribe(req, cb) {
+        return this.request("DeleteCmqSubscribe", req, cb);
     }
     /**
      * 发送单条消息
      */
     async SendMessages(req, cb) {
         return this.request("SendMessages", req, cb);
+    }
+    /**
+     * 更新RocketMQ集群信息
+     */
+    async ModifyRocketMQCluster(req, cb) {
+        return this.request("ModifyRocketMQCluster", req, cb);
     }
     /**
      * 发送cmq消息
@@ -284,6 +362,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyCluster(req, cb) {
         return this.request("ModifyCluster", req, cb);
+    }
+    /**
+     * 更新RocketMQ主题信息
+     */
+    async ModifyRocketMQTopic(req, cb) {
+        return this.request("ModifyRocketMQTopic", req, cb);
     }
     /**
      * 角色修改
@@ -322,6 +406,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSubscription", req, cb);
     }
     /**
+     * 创建RocketMQ命名空间
+     */
+    async CreateRocketMQNamespace(req, cb) {
+        return this.request("CreateRocketMQNamespace", req, cb);
+    }
+    /**
+     * 获取单个RocketMQ集群信息
+     */
+    async DescribeRocketMQCluster(req, cb) {
+        return this.request("DescribeRocketMQCluster", req, cb);
+    }
+    /**
      * 批量发送消息
      */
     async SendBatchMessages(req, cb) {
@@ -346,16 +442,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEnvironmentRole", req, cb);
     }
     /**
-     * 删除环境角色授权。
+     * 批量删除topics
      */
-    async DeleteEnvironmentRoles(req, cb) {
-        return this.request("DeleteEnvironmentRoles", req, cb);
+    async DeleteTopics(req, cb) {
+        return this.request("DeleteTopics", req, cb);
     }
     /**
-     * 根据时间戳进行消息回溯，精确到毫秒
+     * 修改环境角色授权。
      */
-    async ResetMsgSubOffsetByTimestamp(req, cb) {
-        return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
+    async ModifyEnvironmentRole(req, cb) {
+        return this.request("ModifyEnvironmentRole", req, cb);
+    }
+    /**
+     * 删除RocketMQ命名空间
+     */
+    async DeleteRocketMQNamespace(req, cb) {
+        return this.request("DeleteRocketMQNamespace", req, cb);
     }
     /**
      * 运营端获取命名空间bundle列表
@@ -364,10 +466,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespaceBundlesOpt", req, cb);
     }
     /**
-     * 删除订阅关系
+     * 删除集群
      */
-    async DeleteSubscriptions(req, cb) {
-        return this.request("DeleteSubscriptions", req, cb);
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
     }
 }
 exports.Client = Client;
