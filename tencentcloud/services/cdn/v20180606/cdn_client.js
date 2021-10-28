@@ -193,10 +193,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSData", req, cb);
     }
     /**
-     * 通过CLS日志计算Top信息。支持近7天的日志数据。
+     * 获取Bot攻击的Top数据列表
      */
-    async ListTopClsLogData(req, cb) {
-        return this.request("ListTopClsLogData", req, cb);
+    async ListScdnTopBotData(req, cb) {
+        return this.request("ListScdnTopBotData", req, cb);
     }
     /**
      * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
@@ -442,6 +442,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListClsLogTopics", req, cb);
     }
     /**
+     * 查询BOT会话记录列表
+     */
+    async DescribeScdnBotRecords(req, cb) {
+        return this.request("DescribeScdnBotRecords", req, cb);
+    }
+    /**
      * DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
      */
     async DescribeScdnConfig(req, cb) {
@@ -503,10 +509,33 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdatePayType", req, cb);
     }
     /**
+     * DescribeTopData 通过入参 Metric 和 Filter 组合不同，可以查询以下排序数据：
+
++ 依据总流量、总请求数对访问 IP 排序，从大至小返回 TOP 100 IP
++ 依据总流量、总请求数对访问 Refer 排序，从大至小返回 TOP 100 Refer
++ 依据总流量、总请求数对访问 设备 排序，从大至小返回 设备类型
++ 依据总流量、总请求数对访问 操作系统 排序，从大至小返回 操作系统
++ 依据总流量、总请求数对访问 浏览器 排序，从大至小返回 浏览器
+
+注意：
++ 仅支持 90 天内数据查询，且从2021年09月20日开始有数据
++ 本接口为beta版，尚未正式全量发布
+
+     */
+    async DescribeTopData(req, cb) {
+        return this.request("DescribeTopData", req, cb);
+    }
+    /**
      * EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时间约 5~10 分钟。（接口尚在内测中，暂未全量开放使用）
      */
     async EnableCaches(req, cb) {
         return this.request("EnableCaches", req, cb);
+    }
+    /**
+     * 通过CLS日志计算Top信息。支持近7天的日志数据。
+     */
+    async ListTopClsLogData(req, cb) {
+        return this.request("ListTopClsLogData", req, cb);
     }
 }
 exports.Client = Client;

@@ -268,9 +268,9 @@ it("cdn.v20180606.DescribeDDoSData", async function () {
     }
 })
 
-it("cdn.v20180606.ListTopClsLogData", async function () {
+it("cdn.v20180606.ListScdnTopBotData", async function () {
     try {
-       const data = await client.ListTopClsLogData({})
+       const data = await client.ListScdnTopBotData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,6 +638,16 @@ it("cdn.v20180606.ListClsLogTopics", async function () {
     }
 })
 
+it("cdn.v20180606.DescribeScdnBotRecords", async function () {
+    try {
+       const data = await client.DescribeScdnBotRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.DescribeScdnConfig", async function () {
     try {
        const data = await client.DescribeScdnConfig({})
@@ -738,9 +748,29 @@ it("cdn.v20180606.UpdatePayType", async function () {
     }
 })
 
+it("cdn.v20180606.DescribeTopData", async function () {
+    try {
+       const data = await client.DescribeTopData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.EnableCaches", async function () {
     try {
        const data = await client.EnableCaches({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.ListTopClsLogData", async function () {
+    try {
+       const data = await client.ListTopClsLogData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

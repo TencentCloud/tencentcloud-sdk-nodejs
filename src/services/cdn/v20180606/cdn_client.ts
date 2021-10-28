@@ -39,15 +39,18 @@ import {
   DescribeCdnDomainLogsRequest,
   CcTopData,
   CreateClsLogTopicResponse,
+  RemoteAuthenticationRule,
   ScdnAclRule,
   PurgePathCacheResponse,
+  RangeOriginPull,
   DomainFilter,
   DescribeCdnOriginIpResponse,
+  UpdatePayTypeRequest,
   SpecificConfig,
-  FollowRedirect,
+  DescribeTopDataRequest,
   RequestHeader,
   DescribePurgeQuotaRequest,
-  ModifyPurgeFetchTaskStatusRequest,
+  DisableCachesResponse,
   Referer,
   StartScdnDomainRequest,
   PostSize,
@@ -60,9 +63,10 @@ import {
   ListTopDDoSDataRequest,
   DescribeDistrictIspDataRequest,
   DeleteCdnDomainRequest,
-  DescribePayTypeResponse,
+  BotRecord,
   DescribeEventLogDataRequest,
   ForceRedirect,
+  ListScdnTopBotDataRequest,
   PathRule,
   ListTopDataRequest,
   ListClsTopicDomainsRequest,
@@ -71,7 +75,7 @@ import {
   DescribeCcDataResponse,
   UpdateImageConfigRequest,
   DisableCachesRequest,
-  AdvancedAuthenticationTypeD,
+  DescribeCertDomainsRequest,
   StartCdnDomainResponse,
   UrlRedirect,
   CompressionRule,
@@ -95,9 +99,9 @@ import {
   DeleteScdnDomainRequest,
   DescribeDistrictIspDataResponse,
   DescribeCdnOriginIpRequest,
-  UpdatePayTypeResponse,
+  TopDetailDataMore,
   TopicInfo,
-  WebpAdapter,
+  PushUrlsCacheRequest,
   AdvancedCCRules,
   DescribeDomainsConfigResponse,
   DescribeDiagnoseReportRequest,
@@ -106,7 +110,7 @@ import {
   TimestampData,
   TpgAdapter,
   CacheConfigCache,
-  PushUrlsCacheRequest,
+  ListScdnTopBotDataResponse,
   DescribeReportDataResponse,
   DisableClsLogTopicRequest,
   RuleCacheConfig,
@@ -120,6 +124,7 @@ import {
   StatusCodeCache,
   DescribeIpVisitResponse,
   EnableClsLogTopicResponse,
+  ModifyPurgeFetchTaskStatusRequest,
   ListClsLogTopicsResponse,
   OverseaConfig,
   AddCdnDomainRequest,
@@ -130,7 +135,7 @@ import {
   CacheConfigFollowOrigin,
   MaxAgeRule,
   AdvancedAuthenticationTypeE,
-  DescribeCertDomainsRequest,
+  AdvancedAuthenticationTypeD,
   AdvancedAuthenticationTypeF,
   AdvancedAuthenticationTypeA,
   AdvancedCache,
@@ -178,7 +183,7 @@ import {
   CdnIpHistory,
   ErrorPageRule,
   UpdateScdnDomainRequest,
-  UpdatePayTypeRequest,
+  BotSortBy,
   ManageClsTopicDomainsRequest,
   ListDiagnoseReportRequest,
   OriginAuthentication,
@@ -187,7 +192,8 @@ import {
   Cache,
   DiagnoseData,
   DescribeOriginDataRequest,
-  RangeOriginPull,
+  DescribeScdnBotRecordsRequest,
+  FollowRedirect,
   ListScdnLogTasksRequest,
   ListTopCcDataResponse,
   PathBasedOriginRule,
@@ -204,6 +210,7 @@ import {
   EnableClsLogTopicRequest,
   CreateDiagnoseUrlResponse,
   CreateClsLogTopicRequest,
+  UpdatePayTypeResponse,
   CacheOptResult,
   DescribeScdnTopDataRequest,
   ListTopClsLogDataRequest,
@@ -231,7 +238,7 @@ import {
   BotJavaScript,
   DeleteClsLogTopicResponse,
   DescribeBillingDataResponse,
-  DisableCachesResponse,
+  BotStatisticsCount,
   EventLogStatsData,
   SchemeKey,
   DescribeImageConfigRequest,
@@ -247,7 +254,7 @@ import {
   CookieKey,
   ListTopClsLogDataResponse,
   StatusCodeCacheRule,
-  VerifyDomainRecordRequest,
+  RemoteAuthentication,
   KeyRule,
   ClientCert,
   CappingRule,
@@ -257,6 +264,7 @@ import {
   BandwidthAlert,
   CreateVerifyRecordRequest,
   ClsLogObject,
+  WebpAdapter,
   DescribeWafDataResponse,
   RegionMapRelation,
   PurgePathCacheRequest,
@@ -275,6 +283,7 @@ import {
   TopDetailData,
   ResponseHeaderCache,
   ListTopWafDataResponse,
+  DescribePayTypeResponse,
   Sort,
   ClientInfo,
   DescribeEventLogDataResponse,
@@ -303,6 +312,7 @@ import {
   ScdnAclConfig,
   DiagnoseUnit,
   DiagnoseInfo,
+  DescribeScdnBotRecordsResponse,
   ScdnWafConfig,
   DescribePurgeTasksResponse,
   DDoSStatsData,
@@ -321,14 +331,17 @@ import {
   DescribeScdnConfigRequest,
   CacheTagKey,
   StopScdnDomainRequest,
+  VerifyDomainRecordRequest,
   ScdnTypeData,
   Quic,
   DescribeDDoSDataResponse,
+  DescribeTopDataResponse,
   DescribeDomainsRequest,
   OfflineCache,
   CreateEdgePackTaskRequest,
   StopCdnDomainResponse,
   UrlRedirectRule,
+  TopDataMore,
   DiagnoseList,
   IpFilterPathRule,
 } from "./cdn_models"
@@ -608,13 +621,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过CLS日志计算Top信息。支持近7天的日志数据。
+   * 获取Bot攻击的Top数据列表
    */
-  async ListTopClsLogData(
-    req: ListTopClsLogDataRequest,
-    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
-  ): Promise<ListTopClsLogDataResponse> {
-    return this.request("ListTopClsLogData", req, cb)
+  async ListScdnTopBotData(
+    req: ListScdnTopBotDataRequest,
+    cb?: (error: string, rep: ListScdnTopBotDataResponse) => void
+  ): Promise<ListScdnTopBotDataResponse> {
+    return this.request("ListScdnTopBotData", req, cb)
   }
 
   /**
@@ -1005,6 +1018,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询BOT会话记录列表
+   */
+  async DescribeScdnBotRecords(
+    req: DescribeScdnBotRecordsRequest,
+    cb?: (error: string, rep: DescribeScdnBotRecordsResponse) => void
+  ): Promise<DescribeScdnBotRecordsResponse> {
+    return this.request("DescribeScdnBotRecords", req, cb)
+  }
+
+  /**
    * DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
    */
   async DescribeScdnConfig(
@@ -1106,6 +1129,27 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * DescribeTopData 通过入参 Metric 和 Filter 组合不同，可以查询以下排序数据：
+
++ 依据总流量、总请求数对访问 IP 排序，从大至小返回 TOP 100 IP
++ 依据总流量、总请求数对访问 Refer 排序，从大至小返回 TOP 100 Refer
++ 依据总流量、总请求数对访问 设备 排序，从大至小返回 设备类型
++ 依据总流量、总请求数对访问 操作系统 排序，从大至小返回 操作系统
++ 依据总流量、总请求数对访问 浏览器 排序，从大至小返回 浏览器
+
+注意：
++ 仅支持 90 天内数据查询，且从2021年09月20日开始有数据
++ 本接口为beta版，尚未正式全量发布
+
+     */
+  async DescribeTopData(
+    req: DescribeTopDataRequest,
+    cb?: (error: string, rep: DescribeTopDataResponse) => void
+  ): Promise<DescribeTopDataResponse> {
+    return this.request("DescribeTopData", req, cb)
+  }
+
+  /**
    * EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时间约 5~10 分钟。（接口尚在内测中，暂未全量开放使用）
    */
   async EnableCaches(
@@ -1113,5 +1157,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableCachesResponse) => void
   ): Promise<EnableCachesResponse> {
     return this.request("EnableCaches", req, cb)
+  }
+
+  /**
+   * 通过CLS日志计算Top信息。支持近7天的日志数据。
+   */
+  async ListTopClsLogData(
+    req: ListTopClsLogDataRequest,
+    cb?: (error: string, rep: ListTopClsLogDataResponse) => void
+  ): Promise<ListTopClsLogDataResponse> {
+    return this.request("ListTopClsLogData", req, cb)
   }
 }

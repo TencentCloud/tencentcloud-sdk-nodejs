@@ -668,6 +668,48 @@ export interface CreateClsLogTopicResponse {
     RequestId?: string;
 }
 /**
+ * 远程鉴权规则。
+ */
+export interface RemoteAuthenticationRule {
+    /**
+      * 远程鉴权服务http url
+      */
+    Server: string;
+    /**
+      * 请求远程鉴权服务器的http方法；取值范围[get,post,head,all]; all 表示不限制请求方法；
+all: 不指定访问访问方法；
+      */
+    AuthMethod: string;
+    /**
+      * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+      */
+    RuleType: string;
+    /**
+      * 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test
+path 时填充绝对路径，如 /xxx/test.html
+index 时填充 /
+      */
+    RulePaths: Array<string>;
+    /**
+      * 请求远程鉴权服务器超时时间，单位毫秒；
+取值范围：[1,30 000]
+      */
+    AuthTimeout: number;
+    /**
+      * 请求远程鉴权服务器超时后执行拦截或者放行；
+RETURN_200: 超时后放行；
+RETURN_403:超时返回403；
+      */
+    AuthTimeoutAction: string;
+}
+/**
  * 精准访问控制匹配规则
  */
 export interface ScdnAclRule {
@@ -696,6 +738,22 @@ export interface PurgePathCacheResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 分片回源配置，默认为开启状态
+ */
+export interface RangeOriginPull {
+    /**
+      * 分片回源配置开关
+on：开启
+off：关闭
+      */
+    Switch: string;
+    /**
+      * 分路径分片回源配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RangeRules?: Array<RangeOriginPullRule>;
 }
 /**
  * 域名查询时过滤条件。
@@ -744,6 +802,19 @@ export interface DescribeCdnOriginIpResponse {
     RequestId?: string;
 }
 /**
+ * UpdatePayType请求参数结构体
+ */
+export interface UpdatePayTypeRequest {
+    /**
+      * 计费区域，mainland或overseas。
+      */
+    Area: string;
+    /**
+      * 计费类型，flux或bandwidth。
+      */
+    PayType: string;
+}
+/**
  * 域名国内海外分地区特殊配置。
  */
 export interface SpecificConfig {
@@ -759,15 +830,50 @@ export interface SpecificConfig {
     Overseas?: OverseaConfig;
 }
 /**
- * 回源 301/302 状态码自动跟随配置，默认为关闭状态
+ * DescribeTopData请求参数结构体
  */
-export interface FollowRedirect {
+export interface DescribeTopDataRequest {
     /**
-      * 回源跟随开关
-on：开启
-off：关闭
+      * 查询起始日期：yyyy-MM-dd HH:mm:ss
+当前仅支持按天粒度的数据查询，参数需为某天的起点时刻
       */
-    Switch: string;
+    StartTime: string;
+    /**
+      * 查询起始日期：yyyy-MM-dd HH:mm:ss
+当前仅支持按天粒度的数据查询，参数需为某天的结束时刻
+      */
+    EndTime: string;
+    /**
+      * 排序对象，支持以下几种形式：
+ip、ua_device、ua_browser、ua_os、referer
+      */
+    Metric: string;
+    /**
+      * 排序使用的指标名称：
+flux：Metric 为 host 时指代访问流量
+request：Metric 为 host 时指代访问请求数
+      */
+    Filter: string;
+    /**
+      * 指定查询域名列表，最多可一次性查询 30 个加速域名明细
+      */
+    Domains?: Array<string>;
+    /**
+      * 未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
+      */
+    Project?: number;
+    /**
+      * 是否详细显示每个域名的的具体数值
+      */
+    Detail?: boolean;
+    /**
+      * 地域，目前可不填，默认是大陆
+      */
+    Area?: string;
+    /**
+      * 产品名，目前仅可使用cdn
+      */
+    Product?: string;
 }
 /**
  * 自定义请求头配置，默认为关闭状态
@@ -790,27 +896,23 @@ off：关闭
  */
 export declare type DescribePurgeQuotaRequest = null;
 /**
- * ModifyPurgeFetchTaskStatus请求参数结构体
+ * DisableCaches返回参数结构体
  */
-export interface ModifyPurgeFetchTaskStatusRequest {
+export interface DisableCachesResponse {
     /**
-      * 执行时间
+      * 提交结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ExecutionTime: string;
+    CacheOptResult: CacheOptResult;
     /**
-      * 执行状态
-success: 成功
-failed: 失败
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ExecutionStatus: string;
+    TaskId: string;
     /**
-      * 任务 ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Id: string;
-    /**
-      * 执行状态详情
-      */
-    ExecutionStatusDesc?: string;
+    RequestId?: string;
 }
 /**
  * Referer 黑白名单配置，默认为关闭状态
@@ -1123,48 +1225,80 @@ export interface DeleteCdnDomainRequest {
     Domain: string;
 }
 /**
- * DescribePayType返回参数结构体
+ * BOT记录详细内容
  */
-export interface DescribePayTypeResponse {
+export interface BotRecord {
     /**
-      * 计费类型：
-flux：流量计费
-bandwidth：带宽计费
-request：请求数计费
-日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。
+      * 动作，取值为以为3个类型中的一个："intercept","permit","monitor"，分别表示： 拦截， 放行，监控
       */
-    PayType: string;
+    Action: string;
     /**
-      * 计费周期：
-day：日结计费
-month：月结计费
+      * 会话总次数
       */
-    BillingCycle: string;
+    Nums: number;
     /**
-      * monthMax：日峰值月平均，月结模式
-day95：日 95 带宽，月结模式
-month95：月95带宽，月结模式
-sum：总流量/总请求数，日结或月结模式
-max：峰值带宽，日结模式
+      * BotType=UB时，表示预测标签，取值如下：
+                "crawler_unregular",
+                "crawler_regular",
+                "request_repeat",
+                "credential_miss_user",
+                "credential_without_user",
+                "credential_only_action",
+                "credential_user_password",
+                "credential_cracking",
+                "credential_stuffing",
+                "brush_sms",
+                "brush_captcha",
+                "reg_malicious"
+BotType=TCB时，表示Bot分类，取值如下：
+                "Uncategorised",
+                "Search engine bot",
+                "Site monitor",
+                "Screenshot creator",
+                "Link checker",
+                "Web scraper",
+                "Vulnerability scanner",
+                "Virus scanner",
+                "Speed tester",
+                "Feed Fetcher",
+                "Tool",
+                "Marketing"
+BotType=UCB时，为二期接口，暂时未定义内容
       */
-    StatType: string;
+    RuleName: string;
     /**
-      * 境外计费类型：
-all：全地区统一计费
-multiple：分地区计费
+      * 会话持续时间
       */
-    RegionType: string;
+    SessionDuration: number;
     /**
-      * 当前生效计费类型：
-flux：流量计费
-bandwidth：带宽计费
-request：请求数计费
+      * 访问源IP
       */
-    CurrentPayType: string;
+    SrcIp: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 异常特征
       */
-    RequestId?: string;
+    BotFeature: Array<string>;
+    /**
+      * 最新检测时间
+      */
+    Time: string;
+    /**
+      * BOT得分
+      */
+    Score: number;
+    /**
+      * 平均速率
+      */
+    AvgSpeed: number;
+    /**
+      * BotType=TCB，表示TCB名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TcbDetail: string;
+    /**
+      * BOT记录唯一ID，用于查询访问详情
+      */
+    Id: string;
 }
 /**
  * DescribeEventLogData请求参数结构体
@@ -1239,6 +1373,38 @@ https：强制 https 跳转
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CarryHeaders?: string;
+}
+/**
+ * ListScdnTopBotData请求参数结构体
+ */
+export interface ListScdnTopBotDataRequest {
+    /**
+      * 获取Top量，取值范围[1-10]
+      */
+    TopCount: number;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * mainland 大陆地区 overseas境外地区
+      */
+    Area: string;
+    /**
+      * session表示查询BOT会话的Top信息
+ip表示查询BOT客户端IP的Top信息
+
+不填代表获取会话信息
+      */
+    Metric?: string;
+    /**
+      * 域名，仅当Metric=ip，并且Domain为空时有效，不填写表示获取AppID信息
+      */
+    Domains?: Array<string>;
 }
 /**
  * 分路径回源配置规则。
@@ -1371,6 +1537,10 @@ client：指定查询客户端地区（用户请求终端所在地区）数据�
       * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
       */
     Product?: string;
+    /**
+      * 只返回前N条数据，默认为最大值100，metric=url时默认为最大值1000
+      */
+    Limit?: number;
 }
 /**
  * ListClsTopicDomains请求参数结构体
@@ -1487,33 +1657,21 @@ export interface DisableCachesRequest {
     Urls: Array<string>;
 }
 /**
- * 时间戳防盗链高级版模式D配置。
+ * DescribeCertDomains请求参数结构体
  */
-export interface AdvancedAuthenticationTypeD {
+export interface DescribeCertDomainsRequest {
     /**
-      * 用于计算签名的密钥，只允许字母和数字，长度6-32字节。
+      * PEM格式证书Base64编码后的字符串
       */
-    SecretKey: string;
+    Cert?: string;
     /**
-      * 备份密钥，当使用SecretKey鉴权失败时会使用该密钥重新鉴权。
+      * 托管证书ID，Cert和CertId不能均未空，都填写时以CerId为准。
       */
-    BackupSecretKey: string;
+    CertId?: string;
     /**
-      * uri串中签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      * 域名所属产品，cdn或ecdn，默认cdn。
       */
-    SignParam: string;
-    /**
-      * uri串中时间的字段名，字母，数字或下划线构成，同时必须以字母开头。
-      */
-    TimeParam: string;
-    /**
-      * 过期时间，单位秒。
-      */
-    ExpireTime: number;
-    /**
-      * 时间格式，dec，hex分别表示十进制，十六进制。
-      */
-    TimeFormat: string;
+    Product?: string;
 }
 /**
  * StartCdnDomain返回参数结构体
@@ -2106,13 +2264,22 @@ export interface DescribeDistrictIspDataResponse {
  */
 export declare type DescribeCdnOriginIpRequest = null;
 /**
- * UpdatePayType返回参数结构体
+ * 排序类型的数据结构，同时附带上该项的在总值的占比
  */
-export interface UpdatePayTypeResponse {
+export interface TopDetailDataMore {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 数据类型的名称
       */
-    RequestId?: string;
+    Name: string;
+    /**
+      * 数据值
+      */
+    Value: number;
+    /**
+      * 数据值在总值中的百分比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Percent: number;
 }
 /**
  * CLS主题信息
@@ -2142,14 +2309,39 @@ export interface TopicInfo {
     Channel: string;
 }
 /**
- * 图片优化-WebpAdapter配置
+ * PushUrlsCache请求参数结构体
  */
-export interface WebpAdapter {
+export interface PushUrlsCacheRequest {
     /**
-      * 开关，"on/off"
-注意：此字段可能返回 null，表示取不到有效值。
+      * URL 列表，需要包含协议头部 http:// 或 https://
       */
-    Switch?: string;
+    Urls: Array<string>;
+    /**
+      * 指定预热请求回源时 HTTP 请求的 User-Agent 头部
+默认为 TencentCdn
+      */
+    UserAgent?: string;
+    /**
+      * 预热生效区域
+mainland：预热至境内节点
+overseas：预热至境外节点
+global：预热全球节点
+不填充情况下，默认为 mainland， URL 中域名必须在对应区域启用了加速服务才能提交对应区域的预热任务
+      */
+    Area?: string;
+    /**
+      * 填写"middle"或不填充时预热至中间层节点。
+注意：中国境外区域预热，资源默认加载至中国境外边缘节点，所产生的边缘层流量会计入计费流量。
+      */
+    Layer?: string;
+    /**
+      * 是否递归解析m3u8文件中的ts分片预热
+注意事项：
+1. 该功能要求m3u8索引文件能直接请求获取
+2. 当前只支持递归解析一级索引和子索引中的ts分片，递归深度不超过3层
+3. 解析获取的ts分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热
+      */
+    ParseM3U8?: boolean;
 }
 /**
  * scdn 的自定义 cc 规则
@@ -2389,39 +2581,17 @@ off：关闭，遵循用户自定义的节点缓存规则
     IgnoreSetCookie: string;
 }
 /**
- * PushUrlsCache请求参数结构体
+ * ListScdnTopBotData返回参数结构体
  */
-export interface PushUrlsCacheRequest {
+export interface ListScdnTopBotDataResponse {
     /**
-      * URL 列表，需要包含协议头部 http:// 或 https://
+      * 域名BOT次数列表
       */
-    Urls: Array<string>;
+    Data: Array<BotStatisticsCount>;
     /**
-      * 指定预热请求回源时 HTTP 请求的 User-Agent 头部
-默认为 TencentCdn
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    UserAgent?: string;
-    /**
-      * 预热生效区域
-mainland：预热至境内节点
-overseas：预热至境外节点
-global：预热全球节点
-不填充情况下，默认为 mainland， URL 中域名必须在对应区域启用了加速服务才能提交对应区域的预热任务
-      */
-    Area?: string;
-    /**
-      * 填写"middle"或不填充时预热至中间层节点。
-注意：中国境外区域预热，资源默认加载至中国境外边缘节点，所产生的边缘层流量会计入计费流量。
-      */
-    Layer?: string;
-    /**
-      * 是否递归解析m3u8文件中的ts分片预热
-注意事项：
-1. 该功能要求m3u8索引文件能直接请求获取
-2. 当前只支持递归解析一级索引和子索引中的ts分片，递归深度不超过3层
-3. 解析获取的ts分片会正常累加每日预热用量，当用量超出配额时，会静默处理，不再执行预热
-      */
-    ParseM3U8?: boolean;
+    RequestId?: string;
 }
 /**
  * DescribeReportData返回参数结构体
@@ -2567,7 +2737,7 @@ disabled：未启用
       */
     Channel: string;
     /**
-      * 流量包生效区域，目前仅支持mainland
+      * 流量包生效区域，mainland或overseas
       */
     Area: string;
     /**
@@ -2582,6 +2752,20 @@ disabled：未启用
       * 流量包是否支持退费
       */
     RefundAvailable: boolean;
+    /**
+      * 流量包生效区域
+0：中国大陆
+1：亚太一区
+2：亚太二区
+3：亚太三区
+4：中东
+5：北美
+6：欧洲
+7：南美
+8：非洲
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: number;
 }
 /**
  * Bot cookie策略
@@ -2701,6 +2885,29 @@ export interface EnableClsLogTopicResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyPurgeFetchTaskStatus请求参数结构体
+ */
+export interface ModifyPurgeFetchTaskStatusRequest {
+    /**
+      * 执行时间
+      */
+    ExecutionTime: string;
+    /**
+      * 执行状态
+success: 成功
+failed: 失败
+      */
+    ExecutionStatus: string;
+    /**
+      * 任务 ID
+      */
+    Id: string;
+    /**
+      * 执行状态详情
+      */
+    ExecutionStatusDesc?: string;
 }
 /**
  * ListClsLogTopics返回参数结构体
@@ -3171,6 +3378,7 @@ media：流媒体点播加速
 mainland：中国境内加速
 overseas：中国境外加速
 global：全球加速
+从mainland/overseas修改至global时，域名的配置将被同步至overseas/mainland。若域名含有后端特殊配置，此类配置的同步过程有一定延时，请耐心等待
       */
     Area?: string;
     /**
@@ -3190,7 +3398,7 @@ global：全球加速
       */
     AccessControl?: AccessControl;
     /**
-      * URL重定向配置
+      * 访问URL重写配置
       */
     UrlRedirect?: UrlRedirect;
     /**
@@ -3229,6 +3437,10 @@ global：全球加速
       * WebSocket配置
       */
     WebSocket?: WebSocket;
+    /**
+      * 远程鉴权配置
+      */
+    RemoteAuthentication?: RemoteAuthentication;
 }
 /**
  * 域名标签配置
@@ -3326,21 +3538,33 @@ export interface AdvancedAuthenticationTypeE {
     TimeFormat: string;
 }
 /**
- * DescribeCertDomains请求参数结构体
+ * 时间戳防盗链高级版模式D配置。
  */
-export interface DescribeCertDomainsRequest {
+export interface AdvancedAuthenticationTypeD {
     /**
-      * PEM格式证书Base64编码后的字符串
+      * 用于计算签名的密钥，只允许字母和数字，长度6-32字节。
       */
-    Cert?: string;
+    SecretKey: string;
     /**
-      * 托管证书ID，Cert和CertId不能均未空，都填写时以CerId为准。
+      * 备份密钥，当使用SecretKey鉴权失败时会使用该密钥重新鉴权。
       */
-    CertId?: string;
+    BackupSecretKey: string;
     /**
-      * 域名所属产品，cdn或ecdn，默认cdn。
+      * uri串中签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
       */
-    Product?: string;
+    SignParam: string;
+    /**
+      * uri串中时间的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      */
+    TimeParam: string;
+    /**
+      * 过期时间，单位秒。
+      */
+    ExpireTime: number;
+    /**
+      * 时间格式，dec，hex分别表示十进制，十六进制。
+      */
+    TimeFormat: string;
 }
 /**
  * 时间戳防盗链高级鉴权模式TypeF配置
@@ -4397,7 +4621,7 @@ media：流媒体点播加速
       */
     FollowRedirect: FollowRedirect;
     /**
-      * 自定义错误页面配置（功能灰度中，敬请期待）
+      * 自定义错误页面配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ErrorPage: ErrorPage;
@@ -4584,17 +4808,17 @@ off：不支持
       */
     Ipv6Access: Ipv6Access;
     /**
-      * 高级配置集合。
+      * 高级配置集合
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AdvanceSet: Array<AdvanceConfig>;
     /**
-      * 离线缓存
+      * 离线缓存（功能灰度中，尚未全量，请等待后续全量发布）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OfflineCache: OfflineCache;
     /**
-      * 合并回源
+      * 合并回源（白名单功能）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginCombine: OriginCombine;
@@ -4618,6 +4842,11 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WebSocket: WebSocket;
+    /**
+      * 远程鉴权配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemoteAuthentication: RemoteAuthentication;
 }
 /**
  * GetDisableRecords返回参数结构体
@@ -4740,17 +4969,17 @@ export interface UpdateScdnDomainRequest {
     Bot?: ScdnBotConfig;
 }
 /**
- * UpdatePayType请求参数结构体
+ * Bot记录的排序选项
  */
-export interface UpdatePayTypeRequest {
+export interface BotSortBy {
     /**
-      * 计费区域，mainland或overseas。
+      * 排序参数名称， 取值为：timestamp， nums， session_duration，score.total，stat.avg_speed分别表示按照：最新检测时间，会话总次数，会话持续时间，BOT得分，平均速率排序
       */
-    Area: string;
+    Key: string;
     /**
-      * 计费类型，flux或bandwidth。
+      * asc/desc
       */
-    PayType: string;
+    Sequence: string;
 }
 /**
  * ManageClsTopicDomains请求参数结构体
@@ -4953,20 +5182,127 @@ overseas：指定查询中国境外 CDN 数据
     Area?: string;
 }
 /**
- * 分片回源配置，默认为开启状态
+ * DescribeScdnBotRecords请求参数结构体
  */
-export interface RangeOriginPull {
+export interface DescribeScdnBotRecordsRequest {
     /**
-      * 分片回源配置开关
+      * BOT类型，取值为"UB","UCB","TCB"，分别表示：未知类型，自定义类型，公开类型
+      */
+    BotType: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 分页参数
+      */
+    Offset: number;
+    /**
+      * 分页参数
+      */
+    Limit: number;
+    /**
+      * mainland 大陆地区 overseas境外地区
+      */
+    Area: string;
+    /**
+      * 排序参数
+      */
+    SortBy?: Array<BotSortBy>;
+    /**
+      * BotType=UB时，表示需要过滤的预测标签，取值如下：
+                "crawler_unregular",
+                "crawler_regular",
+                "request_repeat",
+                "credential_miss_user",
+                "credential_without_user",
+                "credential_only_action",
+                "credential_user_password",
+                "credential_cracking",
+                "credential_stuffing",
+                "brush_sms",
+                "brush_captcha",
+                "reg_malicious"
+BotType=TCB时，表示需要过滤的Bot分类，取值如下：
+                "Uncategorised",
+                "Search engine bot",
+                "Site monitor",
+                "Screenshot creator",
+                "Link checker",
+                "Web scraper",
+                "Vulnerability scanner",
+                "Virus scanner",
+                "Speed tester",
+                "Feed Fetcher",
+                "Tool",
+                "Marketing"
+BotType=UCB时，取值如下：
+User-Agent为空或不存在
+User-Agent类型为BOT
+User-Agent类型为HTTP Library
+User-Agent类型为Framework
+User-Agent类型为Tools
+User-Agent类型为Unkonwn BOT
+User-Agent类型为Scanner
+Referer空或不存在
+Referer滥用(多个UA使用相同Referer)
+Cookie滥用(多个UA使用相同Cookie)
+Cookie空或不存在
+Connection空或不存在
+Accept空或不存在
+Accept-Language空或不存在
+Accept-Enconding空或不存在
+使用HTTP HEAD方法
+HTTP协议为1.0或者更低
+IDC-IP 腾讯云
+IDC-IP 阿里云
+IDC-IP 华为云
+IDC-IP 金山云
+IDC-IP UCloud
+IDC-IP 百度云
+IDC-IP 京东云
+IDC-IP 青云
+IDC-IP Aws
+IDC-IP Azure
+IDC-IP Google
+
+以上所有类型，FilterName为空时，表示不过滤，获取所有内容
+      */
+    FilterName?: string;
+    /**
+      * 目前支持的Action
+"intercept" 拦截
+"monitor"，监控
+"permit" 放行
+"redirect" 重定向
+
+尚未支持的Action
+"captcha" 验证码
+      */
+    FilterAction?: string;
+    /**
+      * 过滤的IP
+      */
+    FilterIp?: string;
+}
+/**
+ * 回源 301/302 状态码自动跟随配置，默认为关闭状态
+ */
+export interface FollowRedirect {
+    /**
+      * 回源跟随开关
 on：开启
 off：关闭
       */
     Switch: string;
-    /**
-      * 分路径分片回源配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RangeRules?: Array<RangeOriginPullRule>;
 }
 /**
  * ListScdnLogTasks请求参数结构体
@@ -5486,6 +5822,15 @@ export interface CreateClsLogTopicRequest {
       * 域名区域信息
       */
     DomainAreaConfigs?: Array<DomainAreaConfig>;
+}
+/**
+ * UpdatePayType返回参数结构体
+ */
+export interface UpdatePayTypeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 违规资源封禁/解封返回类型
@@ -6332,23 +6677,29 @@ day：天粒度
     RequestId?: string;
 }
 /**
- * DisableCaches返回参数结构体
+ * session/ip维度的bot统计复杂对象
  */
-export interface DisableCachesResponse {
+export interface BotStatisticsCount {
     /**
-      * 提交结果
-注意：此字段可能返回 null，表示取不到有效值。
+      * BOT次数
       */
-    CacheOptResult: CacheOptResult;
+    Count: number;
     /**
-      * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * Top指标值,如果是ip维度就是ip如果是session维度就是域名
       */
-    TaskId: string;
+    Value: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * ip所在国家
       */
-    RequestId?: string;
+    Country: string;
+    /**
+      * ip所在省份
+      */
+    Province: string;
+    /**
+      * ip归属的idc
+      */
+    Isp: string;
 }
 /**
  * 事件日志统计数据结果
@@ -6643,13 +6994,28 @@ export interface StatusCodeCacheRule {
     CacheTime: number;
 }
 /**
- * VerifyDomainRecord请求参数结构体
+ * 远程鉴权规则配置，可以包含多种规则配置。
+RemoteAuthenticationRule 和Server 互斥，配置其中一个。
+若只配置Server ，规则参数将采用默认参数；
  */
-export interface VerifyDomainRecordRequest {
+export interface RemoteAuthentication {
     /**
-      * 域名
+      * 远程鉴权开关；
+on : 开启;
+off: 关闭；
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Domain: string;
+    Switch: string;
+    /**
+      * 远程鉴权规则配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemoteAuthenticationRules?: Array<RemoteAuthenticationRule>;
+    /**
+      * 远程鉴权Server
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Server?: string;
 }
 /**
  * 缓存键分路径配置
@@ -6872,6 +7238,16 @@ export interface ClsLogObject {
       * 日志来源设备
       */
     Source: string;
+}
+/**
+ * 图片优化-WebpAdapter配置
+ */
+export interface WebpAdapter {
+    /**
+      * 开关，"on/off"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Switch?: string;
 }
 /**
  * DescribeWafData返回参数结构体
@@ -7238,6 +7614,50 @@ export interface ListTopWafDataResponse {
       * 域名统计
       */
     TopDomainData: Array<ScdnTopDomainData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePayType返回参数结构体
+ */
+export interface DescribePayTypeResponse {
+    /**
+      * 计费类型：
+flux：流量计费
+bandwidth：带宽计费
+request：请求数计费
+日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。
+      */
+    PayType: string;
+    /**
+      * 计费周期：
+day：日结计费
+month：月结计费
+      */
+    BillingCycle: string;
+    /**
+      * monthMax：日峰值月平均，月结模式
+day95：日 95 带宽，月结模式
+month95：月95带宽，月结模式
+sum：总流量/总请求数，日结或月结模式
+max：峰值带宽，日结模式
+      */
+    StatType: string;
+    /**
+      * 境外计费类型：
+all：全地区统一计费
+multiple：分地区计费
+      */
+    RegionType: string;
+    /**
+      * 当前生效计费类型：
+flux：流量计费
+bandwidth：带宽计费
+request：请求数计费
+      */
+    CurrentPayType: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7817,6 +8237,23 @@ export interface DiagnoseInfo {
     Area: string;
 }
 /**
+ * DescribeScdnBotRecords返回参数结构体
+ */
+export interface DescribeScdnBotRecordsResponse {
+    /**
+      * BOT拦截结果数组
+      */
+    Data: Array<BotRecord>;
+    /**
+      * 记录数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * waf配置类型
  */
 export interface ScdnWafConfig {
@@ -8275,6 +8712,15 @@ export interface StopScdnDomainRequest {
     Domain: string;
 }
 /**
+ * VerifyDomainRecord请求参数结构体
+ */
+export interface VerifyDomainRecordRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+}
+/**
  * Scdn饼图数据，waf仅有
  */
 export interface ScdnTypeData {
@@ -8316,6 +8762,19 @@ day：天粒度
       * DDoS统计攻击带宽峰值数组
       */
     AttackBandwidthData: Array<DDoSAttackBandwidthData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTopData返回参数结构体
+ */
+export interface DescribeTopDataResponse {
+    /**
+      * 各个资源的Top 访问数据详情。
+      */
+    Data: Array<TopDataMore>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8398,6 +8857,19 @@ export interface UrlRedirectRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RedirectHost?: string;
+}
+/**
+ * 排序类型数据结构
+ */
+export interface TopDataMore {
+    /**
+      * 资源名称，根据查询条件不同分为以下几类：
+      */
+    Resource: string;
+    /**
+      * 排序结果详情
+      */
+    DetailData: Array<TopDetailDataMore>;
 }
 /**
  * 客户端访问诊断URL信息列表
