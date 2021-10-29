@@ -68,9 +68,9 @@ it("ses.v20201002.CreateEmailTemplate", async function () {
     }
 })
 
-it("ses.v20201002.GetStatisticsReport", async function () {
+it("ses.v20201002.BatchSendEmail", async function () {
     try {
-       const data = await client.GetStatisticsReport({})
+       const data = await client.BatchSendEmail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("ses.v20201002.ListEmailIdentities", async function () {
     }
 })
 
-it("ses.v20201002.ListBlackEmailAddress", async function () {
+it("ses.v20201002.GetStatisticsReport", async function () {
     try {
-       const data = await client.ListBlackEmailAddress({})
+       const data = await client.GetStatisticsReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +111,16 @@ it("ses.v20201002.ListBlackEmailAddress", async function () {
 it("ses.v20201002.GetSendEmailStatus", async function () {
     try {
        const data = await client.GetSendEmailStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.ListBlackEmailAddress", async function () {
+    try {
+       const data = await client.ListBlackEmailAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

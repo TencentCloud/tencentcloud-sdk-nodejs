@@ -121,7 +121,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * SendTrafficSecuritySmsMessage
+   * 流量安选产品，短信发送接口
    */
   async SendTrafficSecuritySmsMessage(
     req: SendTrafficSecuritySmsMessageRequest,

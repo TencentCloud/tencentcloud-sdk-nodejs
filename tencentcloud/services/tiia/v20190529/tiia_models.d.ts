@@ -45,21 +45,69 @@ export interface DetectDisgustRequest {
     ImageBase64?: string;
 }
 /**
- * DetectCelebrity返回参数结构体
+ * SearchImage返回参数结构体
  */
-export interface DetectCelebrityResponse {
+export interface SearchImageResponse {
     /**
-      * 公众人物识别结果数组。如果检测不到人脸，返回为空；最多可以返回10个人脸识别结果。
+      * 返回结果数量。
       */
-    Faces?: Array<Face>;
+    Count: number;
     /**
-      * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。
-FalseRate1Percent, FalseRate5Permil, FalseRate1Permil分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。
-因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
- 例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
+      * 图片信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Threshold?: Threshold;
+    ImageInfos: Array<ImageInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateImage请求参数结构体
+ */
+export interface CreateImageRequest {
+    /**
+      * 图库ID。
+      */
+    GroupId: string;
+    /**
+      * 物品ID，最多支持64个字符。
+若EntityId已存在，则对其追加图片。
+      */
+    EntityId: string;
+    /**
+      * 图片名称，最多支持64个字符，
+同一个EntityId，最大支持5张图。如果图片名称已存在，则会更新库中的图片。
+      */
+    PicName: string;
+    /**
+      * 图片的 Url 。对应图片 base64 编码后大小不可超过2M。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片分辨率不超过1920*1080。
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
+    ImageUrl?: string;
+    /**
+      * 图片 base64 数据，base64 编码后大小不可超过2M。
+图片分辨率不超过1920*1080。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
+    ImageBase64?: string;
+    /**
+      * 用户自定义的内容，最多支持4096个字符，查询时原样带回。
+      */
+    CustomContent?: string;
+    /**
+      * 图片自定义标签，最多不超过10个，格式为JSON。
+      */
+    Tags?: string;
+}
+/**
+ * DeleteImages返回参数结构体
+ */
+export interface DeleteImagesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -120,6 +168,23 @@ export interface DetectProductRequest {
     ImageBase64?: string;
 }
 /**
+ * DescribeGroups请求参数结构体
+ */
+export interface DescribeGroupsRequest {
+    /**
+      * 起始序号，默认值为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认值为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 图库ID，如果不为空，则返回指定库信息。
+      */
+    GroupId?: string;
+}
+/**
  * AssessQuality返回参数结构体
  */
 export interface AssessQualityResponse {
@@ -168,6 +233,63 @@ export interface DetectDisgustResponse {
       * 与图像内容最相似的恶心内容的类别，包含腐烂、密集、畸形、血腥、蛇、虫子、牙齿等。
       */
     Type?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SearchImage请求参数结构体
+ */
+export interface SearchImageRequest {
+    /**
+      * 图库名称。
+      */
+    GroupId: string;
+    /**
+      * 图片的 Url 。对应图片 base64 编码后大小不可超过2M。
+图片分辨率不超过1920*1080。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
+    ImageUrl?: string;
+    /**
+      * 图片 base64 数据，base64 编码后大小不可超过2M。
+图片分辨率不超过1920*1080。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
+    ImageBase64?: string;
+    /**
+      * 出参Score中，只有超过MatchThreshold值的结果才会返回。默认为0
+      */
+    MatchThreshold?: number;
+    /**
+      * 起始序号，默认值为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认值为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 针对入库时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。
+      */
+    Filter?: string;
+}
+/**
+ * RecognizeCar返回参数结构体
+ */
+export interface RecognizeCarResponse {
+    /**
+      * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
+      */
+    CarCoords?: Array<Coord>;
+    /**
+      * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
+      */
+    CarTags?: Array<CarTagItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -312,6 +434,72 @@ export interface AssessQualityRequest {
     ImageBase64?: string;
 }
 /**
+ * DeleteImages请求参数结构体
+ */
+export interface DeleteImagesRequest {
+    /**
+      * 图库名称。
+      */
+    GroupId: string;
+    /**
+      * 物品ID。
+      */
+    EntityId: string;
+    /**
+      * 图片名称，如果不指定本参数，则删除EntityId下所有的图片；否则删除指定的图。
+      */
+    PicName?: string;
+}
+/**
+ * CreateGroup请求参数结构体
+ */
+export interface CreateGroupRequest {
+    /**
+      * 图库ID，不可重复，仅支持字母、数字和下划线。
+      */
+    GroupId: string;
+    /**
+      * 图库名称描述。
+      */
+    GroupName: string;
+    /**
+      * 该库的容量限制。
+      */
+    MaxCapacity: number;
+    /**
+      * 简介。
+      */
+    Brief?: string;
+    /**
+      * 该库的访问限频 ，默认10。
+      */
+    MaxQps?: number;
+    /**
+      * 图库类型， 默认为通用。
+类型：
+1: 通用图库，以用户输入图提取特征。
+2: 灰度图库，输入图和搜索图均转为灰度图提取特征。
+      */
+    GroupType?: number;
+}
+/**
+ * DescribeImages请求参数结构体
+ */
+export interface DescribeImagesRequest {
+    /**
+      * 图库名称。
+      */
+    GroupId: string;
+    /**
+      * 物品ID。
+      */
+    EntityId: string;
+    /**
+      * 图片名称。
+      */
+    PicName?: string;
+}
+/**
  * DetectProductBeta请求参数结构体
  */
 export interface DetectProductBetaRequest {
@@ -385,6 +573,49 @@ export interface EnhanceImageRequest {
 **注意：图片需要base64编码，并且要去掉编码头部。**
       */
     ImageBase64?: string;
+}
+/**
+ * 图库信息。
+ */
+export interface GroupInfo {
+    /**
+      * 图库Id。
+      */
+    GroupId: string;
+    /**
+      * 图库名称。
+      */
+    GroupName: string;
+    /**
+      * 图库简介。
+      */
+    Brief: string;
+    /**
+      * 图库容量。
+      */
+    MaxCapacity: number;
+    /**
+      * 该库的访问限频 。
+      */
+    MaxQps: number;
+    /**
+      * 图库类型：
+1: 通用图库，以用户输入图提取特征。
+2: 灰度图库，输入图和搜索图均转为灰度图提取特征。
+      */
+    GroupType: number;
+    /**
+      * 图库图片数量。
+      */
+    PicCount: number;
+    /**
+      * 图库创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 图库更新时间。
+      */
+    UpdateTime: string;
 }
 /**
  * CropImage返回参数结构体
@@ -555,6 +786,15 @@ LOCATION，主体位置识别；
     Scenes?: Array<string>;
 }
 /**
+ * CreateImage返回参数结构体
+ */
+export interface CreateImageResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 图像标签检测结果。
  */
 export interface DetectLabelItem {
@@ -662,6 +902,51 @@ export interface DetectLabelBetaResponse {
     RequestId?: string;
 }
 /**
+ * 图片信息
+ */
+export interface ImageInfo {
+    /**
+      * 图片名称。
+      */
+    EntityId: string;
+    /**
+      * 用户自定义的内容。
+      */
+    CustomContent: string;
+    /**
+      * 图片自定义标签，JSON格式。
+      */
+    Tags: string;
+    /**
+      * 图片名称。
+      */
+    PicName: string;
+    /**
+      * 相似度。
+      */
+    Score: number;
+}
+/**
+ * 检测到的图片中的商品位置和品类预测。
+当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。
+最多可以输出__3组__检测结果。
+ */
+export interface RegionDetected {
+    /**
+      * 商品的品类预测结果。
+包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。
+      */
+    Category: string;
+    /**
+      * 商品品类预测的置信度
+      */
+    CategoryScore: number;
+    /**
+      * 检测到的主体在图片中的坐标，表示为矩形框的四个顶点坐标
+      */
+    Location: Location;
+}
+/**
  * 名人识别的标签
  */
 export interface Labels {
@@ -675,6 +960,27 @@ export interface Labels {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SecondLabel: string;
+}
+/**
+ * DetectCelebrity返回参数结构体
+ */
+export interface DetectCelebrityResponse {
+    /**
+      * 公众人物识别结果数组。如果检测不到人脸，返回为空；最多可以返回10个人脸识别结果。
+      */
+    Faces?: Array<Face>;
+    /**
+      * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。
+FalseRate1Percent, FalseRate5Permil, FalseRate1Permil分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。
+因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
+ 例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Threshold?: Threshold;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 检测到的单个商品结构体
@@ -710,24 +1016,18 @@ export interface Product {
     YMax: number;
 }
 /**
- * 检测到的图片中的商品位置和品类预测。
-当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。
-最多可以输出__3组__检测结果。
+ * DescribeGroups返回参数结构体
  */
-export interface RegionDetected {
+export interface DescribeGroupsResponse {
     /**
-      * 商品的品类预测结果。
-包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。
+      * 图库信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Category: string;
+    Groups: Array<GroupInfo>;
     /**
-      * 商品品类预测的置信度
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CategoryScore: number;
-    /**
-      * 检测到的主体在图片中的坐标，表示为矩形框的四个顶点坐标
-      */
-    Location: Location;
+    RequestId?: string;
 }
 /**
  * 车辆属性识别的结果
@@ -788,17 +1088,21 @@ export interface Threshold {
     FalseRate1Permil: number;
 }
 /**
- * RecognizeCar返回参数结构体
+ * DescribeImages返回参数结构体
  */
-export interface RecognizeCarResponse {
+export interface DescribeImagesResponse {
     /**
-      * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
+      * 图库名称。
       */
-    CarCoords?: Array<Coord>;
+    GroupId: string;
     /**
-      * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
+      * 物品ID。
       */
-    CarTags?: Array<CarTagItem>;
+    EntityId: string;
+    /**
+      * 图片信息。
+      */
+    ImageInfos: Array<ImageInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -824,4 +1128,13 @@ export interface DetectMisbehaviorRequest {
 **注意：图片需要base64编码，并且要去掉编码头部。**
       */
     ImageBase64?: string;
+}
+/**
+ * CreateGroup返回参数结构体
+ */
+export interface CreateGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }

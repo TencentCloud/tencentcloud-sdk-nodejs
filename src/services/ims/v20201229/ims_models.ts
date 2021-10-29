@@ -146,6 +146,11 @@ export interface OcrTextDetail {
    * 该参数用于返回OCR文本识别结果的置信度，取值在**0**（**置信度最低**）-**100**（**置信度最高**），越高代表对应图像越有可能是识别出的文字；如：*你好 99*，则表明OCR识别框内的文字大概率是”你好“。
    */
   Rate: number
+
+  /**
+   * 该字段用于返回检测结果所对应的恶意二级标签。
+   */
+  SubLabel: string
 }
 
 /**
@@ -176,6 +181,11 @@ export interface ObjectDetail {
    * 该字段用于返回实体检测框的坐标位置（左上角xy坐标、长宽、旋转角度）以方便快速定位实体的相关信息。
    */
   Location: Location
+
+  /**
+   * 该参数用于返回命中的实体二级标签。
+   */
+  SubLabel: string
 }
 
 /**

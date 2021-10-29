@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tiia.tencentcloudapi.com", "2019-05-29", clientConfig);
     }
     /**
+     * 创建图片，并添加对应图片的自定义信息。
+     */
+    async CreateImage(req, cb) {
+        return this.request("CreateImage", req, cb);
+    }
+    /**
      * 商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
 本服务可以识别出图片中的主体位置、主体商品类型，覆盖亿级SKU，输出具体商品的价格、型号等详细信息。
 客户无需自建商品库，即可快速实现商品识别、拍照搜商品等功能。
@@ -95,6 +101,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectDisgust", req, cb);
     }
     /**
+     * 查询所有的图库信息。
+     */
+    async DescribeGroups(req, cb) {
+        return this.request("DescribeGroups", req, cb);
+    }
+    /**
+     * 删除图片。
+     */
+    async DeleteImages(req, cb) {
+        return this.request("DeleteImages", req, cb);
+    }
+    /**
      * 图像标签测试接口
 
 >
@@ -114,6 +132,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CropImage", req, cb);
     }
     /**
+     * 获取指定图片库中的图片列表。
+     */
+    async DescribeImages(req, cb) {
+        return this.request("DescribeImages", req, cb);
+    }
+    /**
      * 可以识别输入的图片中是否包含不良行为，例如打架斗殴、赌博、抽烟等，可以应用于广告图、直播截图、短视频截图等审核，减少不良行为对平台内容质量的影响，维护健康向上的互联网环境。
 >
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
@@ -122,12 +146,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetectMisbehavior", req, cb);
     }
     /**
+     * 用于创建一个空的图片库，如果图片库已存在则返回错误。
+
+     */
+    async CreateGroup(req, cb) {
+        return this.request("CreateGroup", req, cb);
+    }
+    /**
      * 本接口支持识别图片中包含的商品，能够输出商品的品类名称、类别，还可以输出商品在图片中的位置。支持一张图片多个商品的识别。
 >
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     async DetectProduct(req, cb) {
         return this.request("DetectProduct", req, cb);
+    }
+    /**
+     * 本接口用于对一张待识别的商品图片，在指定图片库中检索出最相似的图片列表。
+     */
+    async SearchImage(req, cb) {
+        return this.request("SearchImage", req, cb);
     }
     /**
      * 传入一张图片，输出清晰度提升后的图片。

@@ -370,7 +370,7 @@ export interface SendTrafficSecuritySmsMessageResponse {
       * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data?: OutputSendTrafficSecuritySmsMsg
+  Data: OutputSendTrafficSecuritySmsMsg
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -777,4 +777,29 @@ export interface InputSendTrafficSecuritySmsMsg {
    * 手机号码列表（号码量<=200）
    */
   Mobiles: Array<string>
+
+  /**
+   * 是否授权，1：已授权
+   */
+  IsAuthorized?: number
+
+  /**
+   * 加密方式，0：AES加密；1：DES加密
+   */
+  EncryptMethod?: number
+
+  /**
+   * 加密算法中的块处理模式，0：ECB模式；1：CBC模式；2：CTR模式；3：CFB模式；4：OFB模式；
+   */
+  EncryptMode?: number
+
+  /**
+   * 填充模式，0：ZeroPadding；1：PKCS5Padding；2：PKCS7Padding；
+   */
+  PaddingType?: number
+
+  /**
+   * 加密数据
+   */
+  EncryptData?: string
 }

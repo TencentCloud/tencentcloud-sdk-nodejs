@@ -211,6 +211,16 @@ export interface CreateDBInstanceRequest {
    * 金融围拢 ID。
    */
   CageId?: string
+
+  /**
+   * 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。
+   */
+  AlarmPolicyIdList?: Array<string>
+
+  /**
+   * 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.默认为false：发送正常请求，通过检查后直接创建实例。
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -2520,6 +2530,16 @@ export interface CreateDBInstanceHourRequest {
    * 金融围拢 ID 。
    */
   CageId?: string
+
+  /**
+   * 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。
+   */
+  AlarmPolicyIdList?: Array<string>
+
+  /**
+   * 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.默认为false：发送正常请求，通过检查后直接创建实例。
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -2668,6 +2688,11 @@ export interface BackupInfo {
    * 备份方式。可能的值有 "manual": 手动备份， "automatic": 自动备份。
    */
   Way: string
+
+  /**
+   * 手动备份别名
+   */
+  ManualBackupName: string
 }
 
 /**
@@ -2778,6 +2803,11 @@ export interface CreateCloneInstanceRequest {
    * 置放群组 ID。
    */
   DeployGroupId?: string
+
+  /**
+   * 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.默认为false：发送正常请求，通过检查后直接创建实例。
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -4695,7 +4725,7 @@ export interface CreateBackupResponse {
   /**
    * 备份任务 ID。
    */
-  BackupId?: number
+  BackupId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5902,6 +5932,11 @@ export interface CreateBackupRequest {
 例：如果需要备份 db1 库的 tb1、tb2 表 和 db2 库。则该参数设置为 [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ]。
       */
   BackupDBTableList?: Array<BackupItem>
+
+  /**
+   * 手动备份别名
+   */
+  ManualBackupName?: string
 }
 
 /**

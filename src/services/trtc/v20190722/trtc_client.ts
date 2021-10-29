@@ -19,7 +19,6 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAbnormalEventResponse,
-  RealtimeData,
   DescribeAbnormalEventRequest,
   DescribeTrtcInteractiveTimeResponse,
   ModifyPictureResponse,
@@ -30,18 +29,16 @@ import {
   DescribeTrtcMcuTranscodeTimeRequest,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   RemoveUserByStrRoomIdRequest,
-  DescribeRealtimeScaleResponse,
   DismissRoomResponse,
-  DescribeRealtimeNetworkResponse,
+  EventMessage,
   DescribeRecordStatisticRequest,
   DescribeUserInformationRequest,
   DescribeCallDetailRequest,
-  DescribeRealtimeNetworkRequest,
+  ScaleInfomation,
   DescribeUserInformationResponse,
   EncodeParams,
   RemoveUserByStrRoomIdResponse,
   StartMCUMixTranscodeRequest,
-  DescribeRealtimeQualityResponse,
   StopMCUMixTranscodeRequest,
   UserInformation,
   DescribeHistoryScaleRequest,
@@ -50,16 +47,13 @@ import {
   RecordUsage,
   RemoveUserRequest,
   OutputParams,
-  EventMessage,
   ModifyPictureRequest,
   CreateTroubleInfoResponse,
   StopMCUMixTranscodeByStrRoomIdRequest,
   QualityData,
   AbnormalEvent,
   StopMCUMixTranscodeByStrRoomIdResponse,
-  DescribeRealtimeQualityRequest,
   DeletePictureResponse,
-  StopMCUMixTranscodeResponse,
   CreateTroubleInfoRequest,
   EventList,
   DismissRoomRequest,
@@ -74,14 +68,13 @@ import {
   SmallVideoLayoutParams,
   RemoveUserResponse,
   PresetLayoutConfig,
-  DescribeRealtimeScaleRequest,
+  StopMCUMixTranscodeResponse,
   DescribeCallDetailResponse,
   DescribePictureResponse,
   SdkAppIdTrtcUsage,
   DescribeTrtcInteractiveTimeRequest,
   PublishCdnParams,
   DescribeRoomInformationRequest,
-  ScaleInfomation,
   DescribeDetailEventRequest,
   AbnormalExperience,
   RoomState,
@@ -213,36 +206,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeCallDetailResponse) => void
   ): Promise<DescribeCallDetailResponse> {
     return this.request("DescribeCallDetail", req, cb)
-  }
-
-  /**
-   * 查询sdkappid维度下每分钟实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-   */
-  async DescribeRealtimeQuality(
-    req: DescribeRealtimeQualityRequest,
-    cb?: (error: string, rep: DescribeRealtimeQualityResponse) => void
-  ): Promise<DescribeRealtimeQualityResponse> {
-    return this.request("DescribeRealtimeQuality", req, cb)
-  }
-
-  /**
-   *  查询sdkappid维度下每分钟实时规模，可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-   */
-  async DescribeRealtimeScale(
-    req: DescribeRealtimeScaleRequest,
-    cb?: (error: string, rep: DescribeRealtimeScaleResponse) => void
-  ): Promise<DescribeRealtimeScaleResponse> {
-    return this.request("DescribeRealtimeScale", req, cb)
-  }
-
-  /**
-   * 查询sdkappid维度下每分钟实时网络状态，包括上行丢包与下行丢包。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-   */
-  async DescribeRealtimeNetwork(
-    req: DescribeRealtimeNetworkRequest,
-    cb?: (error: string, rep: DescribeRealtimeNetworkResponse) => void
-  ): Promise<DescribeRealtimeNetworkResponse> {
-    return this.request("DescribeRealtimeNetwork", req, cb)
   }
 
   /**

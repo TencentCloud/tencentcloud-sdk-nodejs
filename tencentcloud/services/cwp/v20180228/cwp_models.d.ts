@@ -479,7 +479,7 @@ export interface BaselineEffectHost {
       */
     LastScanTime: string;
     /**
-      * 处理状态
+      * 风险项处理状态状态：0-未通过，1-通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: number;
@@ -3451,8 +3451,7 @@ export interface DescribeAssetEnvListRequest {
       */
     Offset?: number;
     /**
-      * 类型：
-0
+      * 该字段已废弃，由Filters代替
       */
     Type?: number;
     /**

@@ -59,13 +59,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEmailTemplate", req, cb);
     }
     /**
-     * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
+     * 您可以通过此API批量发送TEXT或者HTML邮件，适用于营销类、通知类邮件。默认仅支持使用模板发送邮件，如需发送自定义内容，请单独联系商务开通此功能。批量发送之前，需先创建收件人列表，和收件人地址，并通过收件人列表id来进行发送。批量发送任务支持定时发送和周期重复发送，定时发送需传TimedParam，周期重复发送需传CycleParam
      */
-    async GetStatisticsReport(req, cb) {
-        return this.request("GetStatisticsReport", req, cb);
+    async BatchSendEmail(req, cb) {
+        return this.request("BatchSendEmail", req, cb);
     }
     /**
-     * 您可以通过此API发送TEXT或者HTML邮件，默认仅支持使用模板发送邮件，如需发送自定义内容，请单独联系商务开通此功能。
+     * 您可以通过此API发送TEXT或者HTML邮件，适用于触发类邮件（验证码、交易类）。默认仅支持使用模板发送邮件，如需发送自定义内容，请单独联系商务开通此功能。
      */
     async SendEmail(req, cb) {
         return this.request("SendEmail", req, cb);
@@ -77,16 +77,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListEmailIdentities", req, cb);
     }
     /**
-     * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
+     * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
      */
-    async ListBlackEmailAddress(req, cb) {
-        return this.request("ListBlackEmailAddress", req, cb);
+    async GetStatisticsReport(req, cb) {
+        return this.request("GetStatisticsReport", req, cb);
     }
     /**
      * 获取邮件发送状态。仅支持查询90天之内的数据
      */
     async GetSendEmailStatus(req, cb) {
         return this.request("GetSendEmailStatus", req, cb);
+    }
+    /**
+     * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
+     */
+    async ListBlackEmailAddress(req, cb) {
+        return this.request("ListBlackEmailAddress", req, cb);
     }
     /**
      * 删除发信模版

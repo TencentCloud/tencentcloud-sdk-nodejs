@@ -142,6 +142,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTranscode", req, cb);
     }
     /**
+     * 查询互动白板天维度计费用量。
+1. 单次查询统计区间最多不能超过31天。
+2. 由于统计延迟等原因，暂时不支持查询当天数据，建议在次日上午7点以后再来查询前一天的用量，例如在10月27日上午7点后，再来查询到10月26日整天的用量
+
+     */
+    async DescribeTIWDailyUsage(req, cb) {
+        return this.request("DescribeTIWDailyUsage", req, cb);
+    }
+    /**
      * 停止白板推流任务
      */
     async StopWhiteboardPush(req, cb) {

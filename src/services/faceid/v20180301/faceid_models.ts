@@ -102,6 +102,12 @@ export interface GetFaceIdTokenRequest {
    * 透传参数 1000长度字符串
    */
   Extra?: string
+
+  /**
+      * 默认为false，设置该参数为true后，核身过程中的视频图片将会存储在人脸核身控制台授权cos的bucket中，拉取结果时会返回对应资源完整cos地址。开通地址见https://console.cloud.tencent.com/faceid/cos
+【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。
+      */
+  UseCos?: boolean
 }
 
 /**
@@ -872,7 +878,7 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * Eid出参
+ * Eid出参，包括商户方用户的标识和加密的用户姓名身份证信息。
  */
 export interface EidInfo {
   /**
@@ -881,9 +887,19 @@ export interface EidInfo {
   EidCode: string
 
   /**
-   * eID 中心针对商户方EidCode的电子签名
+   * Eid中心针对商户方EidCode的电子签名
    */
   EidSign: string
+
+  /**
+   * 商户方公钥加密的会话密钥的base64字符串，[指引详见](https://cloud.tencent.com/document/product/1007/63370)
+   */
+  DesKey: string
+
+  /**
+   * 会话密钥sm2加密后的base64字符串，[指引详见](https://cloud.tencent.com/document/product/1007/63370)
+   */
+  UserInfo: string
 }
 
 /**
@@ -893,7 +909,7 @@ export interface GetFaceIdTokenResponse {
   /**
    * 有效期 10分钟。只能完成1次核身。
    */
-  FaceIdToken?: string
+  FaceIdToken: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1360,7 +1376,7 @@ export interface CheckEidTokenStatusRequest {
  */
 export interface GetEidResultResponse {
   /**
-      * 文本类信息。
+      * 文本类信息。（基于对敏感信息的保护，验证使用的姓名和身份证号统一通过加密后从Eidinfo参数中返回，如需获取请在控制台申请返回身份信息，详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Text: DetectInfoText
@@ -1378,7 +1394,7 @@ export interface GetEidResultResponse {
   BestFrame: DetectInfoBestFrame
 
   /**
-      * Eid信息
+      * Eid信息。（包括商户下用户唯一标识以及加密后的姓名、身份证号信息。解密方式详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EidInfo: EidInfo
@@ -2100,13 +2116,13 @@ export interface GetFaceIdResultResponse {
   Similarity: number
 
   /**
-      * 用户核验的视频
+      * 用户核验的视频base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VideoBase64: string
 
   /**
-      * 用户核验视频的截帧
+      * 用户核验视频的截帧base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BestFrameBase64: string

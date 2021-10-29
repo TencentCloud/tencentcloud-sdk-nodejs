@@ -16,18 +16,115 @@
  */
 
 /**
- * 邮件发送的内容，可以是纯文本(TEXT)，也可以是纯代码(HTML)，或者纯文本+HTML的组合(建议方式)
+ * BatchSendEmail请求参数结构体
  */
-export interface Simple {
+export interface BatchSendEmailRequest {
   /**
-   * base64之后的Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
-   */
-  Html?: string
+      * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照
+发信人 <邮件地址> 的方式填写，例如：
+腾讯云团队 <noreply@mail.qcloud.com>
+      */
+  FromEmailAddress: string
 
   /**
-   * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
+   * 收件人列表ID
    */
-  Text?: string
+  ReceiverId: number
+
+  /**
+   * 邮件主题
+   */
+  Subject: string
+
+  /**
+   * 任务类型 1即时 2 定时 3 周期
+   */
+  TaskType: number
+
+  /**
+   * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人将会回复到腾讯云。
+   */
+  ReplyToAddresses?: string
+
+  /**
+   * 使用模板发送时，填写的模板相关参数
+   */
+  Template?: Template
+
+  /**
+   * 使用API直接发送内容时，填写的邮件内容
+   */
+  Simple?: Simple
+
+  /**
+   * 需要发送附件时，填写附件相关参数。
+   */
+  Attachments?: Array<Attachment>
+
+  /**
+   * 周期发送任务的必要参数
+   */
+  CycleParam?: CycleEmailParam
+
+  /**
+   * 定时发送任务的必要参数
+   */
+  TimedParam?: TimedEmailParam
+}
+
+/**
+ * GetEmailTemplate请求参数结构体
+ */
+export interface GetEmailTemplateRequest {
+  /**
+   * 模板ID
+   */
+  TemplateID: number
+}
+
+/**
+ * CreateEmailTemplate请求参数结构体
+ */
+export interface CreateEmailTemplateRequest {
+  /**
+   * 模板名称
+   */
+  TemplateName: string
+
+  /**
+   * 模板内容
+   */
+  TemplateContent: TemplateContent
+}
+
+/**
+ * 模板列表结构
+ */
+export interface TemplatesMetadata {
+  /**
+   * 创建时间
+   */
+  CreatedTimestamp: number
+
+  /**
+   * 模板名称
+   */
+  TemplateName: string
+
+  /**
+   * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
+   */
+  TemplateStatus: number
+
+  /**
+   * 模板ID
+   */
+  TemplateID: number
+
+  /**
+   * 审核原因
+   */
+  ReviewReason: string
 }
 
 /**
@@ -146,8 +243,8 @@ export interface GetSendEmailStatusResponse {
 export interface SendEmailRequest {
   /**
       * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照 
-发信人 &lt;邮件地址&gt; 的方式填写，例如：
-腾讯云团队 &lt;noreply@mail.qcloud.com&gt;
+发信人 <邮件地址> 的方式填写，例如：
+腾讯云团队 <noreply@mail.qcloud.com>
       */
   FromEmailAddress: string
 
@@ -202,6 +299,21 @@ export interface EmailSender {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreatedTimestamp: number
+}
+
+/**
+ * BatchSendEmail返回参数结构体
+ */
+export interface BatchSendEmailResponse {
+  /**
+   * 发送任务ID
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -327,18 +439,13 @@ export interface Volume {
 }
 
 /**
- * CreateEmailTemplate请求参数结构体
+ * CreateEmailIdentity请求参数结构体
  */
-export interface CreateEmailTemplateRequest {
+export interface CreateEmailIdentityRequest {
   /**
-   * 模板名称
+   * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
    */
-  TemplateName: string
-
-  /**
-   * 模板内容
-   */
-  TemplateContent: TemplateContent
+  EmailIdentity: string
 }
 
 /**
@@ -609,33 +716,18 @@ export interface GetSendEmailStatusRequest {
 }
 
 /**
- * 模板列表结构
+ * 邮件发送的内容，可以是纯文本(TEXT)，也可以是纯代码(HTML)，或者纯文本+HTML的组合(建议方式)
  */
-export interface TemplatesMetadata {
+export interface Simple {
   /**
-   * 创建时间
+   * base64之后的Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
    */
-  CreatedTimestamp: number
+  Html?: string
 
   /**
-   * 模板名称
+   * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
    */
-  TemplateName: string
-
-  /**
-   * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
-   */
-  TemplateStatus: number
-
-  /**
-   * 模板ID
-   */
-  TemplateID: number
-
-  /**
-   * 审核原因
-   */
-  ReviewReason: string
+  Text?: string
 }
 
 /**
@@ -750,13 +842,18 @@ export interface BlackEmailAddress {
 }
 
 /**
- * GetEmailTemplate请求参数结构体
+ * 创建重复周期发送邮件任务的参数
  */
-export interface GetEmailTemplateRequest {
+export interface CycleEmailParam {
   /**
-   * 模板ID
+   * 任务开始时间
    */
-  TemplateID: number
+  BeginTime: string
+
+  /**
+   * 任务周期 小时维度
+   */
+  IntervalTime: number
 }
 
 /**
@@ -792,16 +889,6 @@ export interface CreateEmailIdentityResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateEmailIdentity请求参数结构体
- */
-export interface CreateEmailIdentityRequest {
-  /**
-   * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
-   */
-  EmailIdentity: string
 }
 
 /**
@@ -847,6 +934,16 @@ export interface UpdateEmailTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建定时发送邮件任务时，设置的定时参数，比如开始时间之类
+ */
+export interface TimedEmailParam {
+  /**
+   * 定时发送邮件的开始时间
+   */
+  BeginTime: string
 }
 
 /**

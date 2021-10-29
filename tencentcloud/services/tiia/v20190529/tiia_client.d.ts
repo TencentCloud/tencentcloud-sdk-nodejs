@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectProductBetaResponse, DetectDisgustRequest, DetectCelebrityResponse, CropImageRequest, DetectProductRequest, AssessQualityResponse, DetectDisgustResponse, DetectLabelRequest, DetectLabelResponse, EnhanceImageResponse, AssessQualityRequest, DetectProductBetaRequest, DetectMisbehaviorResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, DetectLabelBetaRequest, DetectLabelBetaResponse, RecognizeCarResponse, DetectMisbehaviorRequest } from "./tiia_models";
+import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, CreateImageRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DescribeGroupsRequest, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, DetectMisbehaviorResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, DetectLabelBetaRequest, CreateImageResponse, DetectLabelBetaResponse, DetectCelebrityResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
 /**
  * tiia client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 创建图片，并添加对应图片的自定义信息。
+     */
+    CreateImage(req: CreateImageRequest, cb?: (error: string, rep: CreateImageResponse) => void): Promise<CreateImageResponse>;
     /**
      * 商品识别-微信识物版，基于人工智能技术、海量训练图片、亿级商品库，可以实现全覆盖、细粒度、高准确率的商品识别和商品推荐功能。
 本服务可以识别出图片中的主体位置、主体商品类型，覆盖亿级SKU，输出具体商品的价格、型号等详细信息。
@@ -65,6 +69,14 @@ export declare class Client extends AbstractClient {
      */
     DetectDisgust(req: DetectDisgustRequest, cb?: (error: string, rep: DetectDisgustResponse) => void): Promise<DetectDisgustResponse>;
     /**
+     * 查询所有的图库信息。
+     */
+    DescribeGroups(req: DescribeGroupsRequest, cb?: (error: string, rep: DescribeGroupsResponse) => void): Promise<DescribeGroupsResponse>;
+    /**
+     * 删除图片。
+     */
+    DeleteImages(req: DeleteImagesRequest, cb?: (error: string, rep: DeleteImagesResponse) => void): Promise<DeleteImagesResponse>;
+    /**
      * 图像标签测试接口
 
 >
@@ -80,17 +92,30 @@ export declare class Client extends AbstractClient {
      */
     CropImage(req: CropImageRequest, cb?: (error: string, rep: CropImageResponse) => void): Promise<CropImageResponse>;
     /**
+     * 获取指定图片库中的图片列表。
+     */
+    DescribeImages(req: DescribeImagesRequest, cb?: (error: string, rep: DescribeImagesResponse) => void): Promise<DescribeImagesResponse>;
+    /**
      * 可以识别输入的图片中是否包含不良行为，例如打架斗殴、赌博、抽烟等，可以应用于广告图、直播截图、短视频截图等审核，减少不良行为对平台内容质量的影响，维护健康向上的互联网环境。
 >
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     DetectMisbehavior(req: DetectMisbehaviorRequest, cb?: (error: string, rep: DetectMisbehaviorResponse) => void): Promise<DetectMisbehaviorResponse>;
     /**
+     * 用于创建一个空的图片库，如果图片库已存在则返回错误。
+
+     */
+    CreateGroup(req: CreateGroupRequest, cb?: (error: string, rep: CreateGroupResponse) => void): Promise<CreateGroupResponse>;
+    /**
      * 本接口支持识别图片中包含的商品，能够输出商品的品类名称、类别，还可以输出商品在图片中的位置。支持一张图片多个商品的识别。
 >
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     DetectProduct(req: DetectProductRequest, cb?: (error: string, rep: DetectProductResponse) => void): Promise<DetectProductResponse>;
+    /**
+     * 本接口用于对一张待识别的商品图片，在指定图片库中检索出最相似的图片列表。
+     */
+    SearchImage(req: SearchImageRequest, cb?: (error: string, rep: SearchImageResponse) => void): Promise<SearchImageResponse>;
     /**
      * 传入一张图片，输出清晰度提升后的图片。
 

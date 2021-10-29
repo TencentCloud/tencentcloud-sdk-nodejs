@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, DescribeTrtcInteractiveTimeResponse, ModifyPictureResponse, StartMCUMixTranscodeByStrRoomIdRequest, CreatePictureRequest, DescribeTrtcMcuTranscodeTimeRequest, RemoveUserByStrRoomIdRequest, DescribeRealtimeScaleResponse, DismissRoomResponse, DescribeRealtimeNetworkResponse, DescribeRecordStatisticRequest, DescribeUserInformationRequest, DescribeCallDetailRequest, DescribeRealtimeNetworkRequest, DescribeUserInformationResponse, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, DescribeRealtimeQualityResponse, StopMCUMixTranscodeRequest, DescribeHistoryScaleRequest, DeletePictureRequest, DescribeRoomInformationResponse, RemoveUserRequest, ModifyPictureRequest, CreateTroubleInfoResponse, StopMCUMixTranscodeByStrRoomIdRequest, StopMCUMixTranscodeByStrRoomIdResponse, DescribeRealtimeQualityRequest, DeletePictureResponse, StopMCUMixTranscodeResponse, CreateTroubleInfoRequest, DismissRoomRequest, DescribeDetailEventResponse, DismissRoomByStrRoomIdRequest, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DescribePictureRequest, RemoveUserResponse, DescribeRealtimeScaleRequest, DescribeCallDetailResponse, DescribePictureResponse, DescribeTrtcInteractiveTimeRequest, DescribeRoomInformationRequest, DescribeDetailEventRequest, CreatePictureResponse, DescribeRecordStatisticResponse, DismissRoomByStrRoomIdResponse, DescribeHistoryScaleResponse, StartMCUMixTranscodeByStrRoomIdResponse } from "./trtc_models";
+import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, DescribeTrtcInteractiveTimeResponse, ModifyPictureResponse, StartMCUMixTranscodeByStrRoomIdRequest, CreatePictureRequest, DescribeTrtcMcuTranscodeTimeRequest, RemoveUserByStrRoomIdRequest, DismissRoomResponse, DescribeRecordStatisticRequest, DescribeUserInformationRequest, DescribeCallDetailRequest, DescribeUserInformationResponse, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, StopMCUMixTranscodeRequest, DescribeHistoryScaleRequest, DeletePictureRequest, DescribeRoomInformationResponse, RemoveUserRequest, ModifyPictureRequest, CreateTroubleInfoResponse, StopMCUMixTranscodeByStrRoomIdRequest, StopMCUMixTranscodeByStrRoomIdResponse, DeletePictureResponse, CreateTroubleInfoRequest, DismissRoomRequest, DescribeDetailEventResponse, DismissRoomByStrRoomIdRequest, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, DescribePictureRequest, RemoveUserResponse, StopMCUMixTranscodeResponse, DescribeCallDetailResponse, DescribePictureResponse, DescribeTrtcInteractiveTimeRequest, DescribeRoomInformationRequest, DescribeDetailEventRequest, CreatePictureResponse, DescribeRecordStatisticResponse, DismissRoomByStrRoomIdResponse, DescribeHistoryScaleResponse, StartMCUMixTranscodeByStrRoomIdResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -65,18 +65,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 **注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
      */
     DescribeCallDetail(req: DescribeCallDetailRequest, cb?: (error: string, rep: DescribeCallDetailResponse) => void): Promise<DescribeCallDetailResponse>;
-    /**
-     * 查询sdkappid维度下每分钟实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-     */
-    DescribeRealtimeQuality(req: DescribeRealtimeQualityRequest, cb?: (error: string, rep: DescribeRealtimeQualityResponse) => void): Promise<DescribeRealtimeQualityResponse>;
-    /**
-     *  查询sdkappid维度下每分钟实时规模，可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-     */
-    DescribeRealtimeScale(req: DescribeRealtimeScaleRequest, cb?: (error: string, rep: DescribeRealtimeScaleResponse) => void): Promise<DescribeRealtimeScaleResponse>;
-    /**
-     * 查询sdkappid维度下每分钟实时网络状态，包括上行丢包与下行丢包。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-     */
-    DescribeRealtimeNetwork(req: DescribeRealtimeNetworkRequest, cb?: (error: string, rep: DescribeRealtimeNetworkResponse) => void): Promise<DescribeRealtimeNetworkResponse>;
     /**
      * 接口说明：结束云端混流
      */

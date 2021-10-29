@@ -108,36 +108,6 @@ it("trtc.v20190722.DescribeCallDetail", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeRealtimeQuality", async function () {
-    try {
-       const data = await client.DescribeRealtimeQuality({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.DescribeRealtimeScale", async function () {
-    try {
-       const data = await client.DescribeRealtimeScale({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.DescribeRealtimeNetwork", async function () {
-    try {
-       const data = await client.DescribeRealtimeNetwork({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trtc.v20190722.StopMCUMixTranscodeByStrRoomId", async function () {
     try {
        const data = await client.StopMCUMixTranscodeByStrRoomId({})

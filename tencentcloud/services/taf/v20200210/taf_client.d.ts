@@ -34,7 +34,7 @@ export declare class Client extends AbstractClient {
      */
     RecognizePreciseTargetAudience(req: RecognizePreciseTargetAudienceRequest, cb?: (error: string, rep: RecognizePreciseTargetAudienceResponse) => void): Promise<RecognizePreciseTargetAudienceResponse>;
     /**
-     * SendTrafficSecuritySmsMessage
+     * 流量安选产品，短信发送接口
      */
     SendTrafficSecuritySmsMessage(req: SendTrafficSecuritySmsMessageRequest, cb?: (error: string, rep: SendTrafficSecuritySmsMessageResponse) => void): Promise<SendTrafficSecuritySmsMessageResponse>;
 }

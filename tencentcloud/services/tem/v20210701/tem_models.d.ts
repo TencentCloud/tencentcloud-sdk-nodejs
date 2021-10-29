@@ -187,6 +187,10 @@ export interface DescribeDeployApplicationDetailRequest {
       * 环境id
       */
     EnvironmentId?: string;
+    /**
+      * 版本部署id
+      */
+    VersionId?: string;
 }
 /**
  * 弹性伸缩配置

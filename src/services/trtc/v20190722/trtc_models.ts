@@ -36,22 +36,6 @@ export interface DescribeAbnormalEventResponse {
 }
 
 /**
- * 查询秒级监控返回的数据
- */
-export interface RealtimeData {
-  /**
-      * 返回的数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Content: Array<TimeValue>
-
-  /**
-   * 数据类型字段
-   */
-  DataType: string
-}
-
-/**
  * DescribeAbnormalEvent请求参数结构体
  */
 export interface DescribeAbnormalEventRequest {
@@ -319,21 +303,6 @@ export interface RemoveUserByStrRoomIdRequest {
 }
 
 /**
- * DescribeRealtimeScale返回参数结构体
- */
-export interface DescribeRealtimeScaleResponse {
-  /**
-   * 返回的数据数组
-   */
-  Data?: Array<RealtimeData>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DismissRoom返回参数结构体
  */
 export interface DismissRoomResponse {
@@ -344,18 +313,37 @@ export interface DismissRoomResponse {
 }
 
 /**
- * DescribeRealtimeNetwork返回参数结构体
+ * 事件信息，包括，事件时间戳，事件ID,
  */
-export interface DescribeRealtimeNetworkResponse {
+export interface EventMessage {
   /**
-   * 查询返回的数据
-   */
-  Data?: Array<RealtimeData>
+      * 视频流类型：
+0：与视频无关的事件；
+2：视频为大画面；
+3：视频为小画面；
+7：视频为旁路画面；
+      */
+  Type: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 事件上报的时间戳，unix时间（1589891188801ms)
    */
-  RequestId?: string
+  Time: number
+
+  /**
+   * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
+   */
+  EventId: number
+
+  /**
+   * 事件的第一个参数，如视频分辨率宽
+   */
+  ParamOne: number
+
+  /**
+   * 事件的第二个参数，如视频分辨率高
+   */
+  ParamTwo: number
 }
 
 /**
@@ -478,30 +466,31 @@ bigvHeight：上/下行分辨率高
 }
 
 /**
- * DescribeRealtimeNetwork请求参数结构体
+ * 历史规模信息
  */
-export interface DescribeRealtimeNetworkRequest {
+export interface ScaleInfomation {
   /**
-   * 查询开始时间，24小时内，本地unix时间戳（1588031999s）
+   * 每天开始的时间
    */
-  StartTime: number
+  Time: number
 
   /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
-   */
-  EndTime: number
-
-  /**
-   * 用户sdkappid
-   */
-  SdkAppId: string
-
-  /**
-      * 需查询的数据类型
-sendLossRateRaw：上行丢包率
-recvLossRateRaw：下行丢包率
+      * 房间人数，用户重复进入同一个房间为1次
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  DataType?: Array<string>
+  UserNumber: number
+
+  /**
+      * 房间人次，用户每次进入房间为一次
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserCount: number
+
+  /**
+      * sdkappid下一天内的房间数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoomNumbers: number
 }
 
 /**
@@ -640,21 +629,6 @@ export interface StartMCUMixTranscodeRequest {
    * 第三方CDN转推参数。
    */
   PublishCdnParams?: PublishCdnParams
-}
-
-/**
- * DescribeRealtimeQuality返回参数结构体
- */
-export interface DescribeRealtimeQualityResponse {
-  /**
-   * 返回的数据类型
-   */
-  Data?: Array<RealtimeData>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -848,40 +822,6 @@ export interface OutputParams {
 }
 
 /**
- * 事件信息，包括，事件时间戳，事件ID,
- */
-export interface EventMessage {
-  /**
-      * 视频流类型：
-0：与视频无关的事件；
-2：视频为大画面；
-3：视频为小画面；
-7：视频为旁路画面；
-      */
-  Type: number
-
-  /**
-   * 事件上报的时间戳，unix时间（1589891188801ms)
-   */
-  Time: number
-
-  /**
-   * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
-   */
-  EventId: number
-
-  /**
-   * 事件的第一个参数，如视频分辨率宽
-   */
-  ParamOne: number
-
-  /**
-   * 事件的第二个参数，如视频分辨率高
-   */
-  ParamTwo: number
-}
-
-/**
  * ModifyPicture请求参数结构体
  */
 export interface ModifyPictureRequest {
@@ -994,48 +934,9 @@ export interface StopMCUMixTranscodeByStrRoomIdResponse {
 }
 
 /**
- * DescribeRealtimeQuality请求参数结构体
- */
-export interface DescribeRealtimeQualityRequest {
-  /**
-   * 查询开始时间，24小时内。本地unix时间戳（1588031999s）
-   */
-  StartTime: number
-
-  /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
-   */
-  EndTime: number
-
-  /**
-   * 用户sdkappid
-   */
-  SdkAppId: string
-
-  /**
-      * 查询的数据类型
-enterTotalSuccPercent：进房成功率
-fistFreamInSecRate：首帧秒开率
-blockPercent：视频卡顿率
-audioBlockPercent：音频卡顿率
-      */
-  DataType?: Array<string>
-}
-
-/**
  * DeletePicture返回参数结构体
  */
 export interface DeletePictureResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * StopMCUMixTranscode返回参数结构体
- */
-export interface StopMCUMixTranscodeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1361,30 +1262,13 @@ export interface PresetLayoutConfig {
 }
 
 /**
- * DescribeRealtimeScale请求参数结构体
+ * StopMCUMixTranscode返回参数结构体
  */
-export interface DescribeRealtimeScaleRequest {
+export interface StopMCUMixTranscodeResponse {
   /**
-   * 查询开始时间，24小时内。本地unix时间戳（1588031999s）
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: number
-
-  /**
-   * 查询结束时间，本地unix时间戳（1588031999s）
-   */
-  EndTime: number
-
-  /**
-   * 用户sdkappid
-   */
-  SdkAppId: string
-
-  /**
-      * 查询的数据类型
-UserNum：通话人数；
-RoomNum：房间数
-      */
-  DataType?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1540,34 +1424,6 @@ export interface DescribeRoomInformationRequest {
    * 分页大小（PageNumber和PageSize 其中一个不填均默认返回10条数据,最大不超过100）
    */
   PageSize?: string
-}
-
-/**
- * 历史规模信息
- */
-export interface ScaleInfomation {
-  /**
-   * 每天开始的时间
-   */
-  Time: number
-
-  /**
-      * 房间人数，用户重复进入同一个房间为1次
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserNumber: number
-
-  /**
-      * 房间人次，用户每次进入房间为一次
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserCount: number
-
-  /**
-      * sdkappid下一天内的房间数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RoomNumbers: number
 }
 
 /**
