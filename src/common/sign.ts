@@ -33,6 +33,7 @@ export default class Sign {
     secretKey,
     multipart,
     boundary,
+    isOctetStream = false
   }: {
     method?: string
     url?: string
@@ -43,6 +44,7 @@ export default class Sign {
     secretKey: string
     multipart: boolean
     boundary: string
+    isOctetStream: boolean
   }): string {
     const urlObj = new URL(url)
 
@@ -56,6 +58,8 @@ export default class Sign {
       signedHeaders = "content-type"
       if (multipart) {
         headers = `content-type:multipart/form-data; boundary=${boundary}\n`
+      } else if (isOctetStream) {
+        headers = "content-type:application/octet-stream\n";
       } else {
         headers = "content-type:application/json\n"
       }
@@ -86,6 +90,8 @@ export default class Sign {
       }
       hash.update(`--\r\n`)
       payload_hash = hash.digest("hex")
+    } else if (isOctetStream) { 
+      payload_hash = payload ? getHash(payload) : getHash("");
     } else {
       payload_hash = payload ? getHash(JSON.stringify(payload)) : getHash("")
     }

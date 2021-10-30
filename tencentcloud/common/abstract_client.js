@@ -48,6 +48,7 @@ class AbstractClient {
                 reqTimeout: 60,
             }, profile && profile.httpProfile),
             language: profile.language,
+            headers: profile.headers,
         };
         if (this.profile.language && !interface_1.SUPPORT_LANGUAGE_LIST.includes(this.profile.language)) {
             throw new tencent_cloud_sdk_exception_1.default(`Language invalid, choices: ${interface_1.SUPPORT_LANGUAGE_LIST.join("|")}`);
@@ -115,6 +116,7 @@ class AbstractClient {
                 token: this.credential.token,
                 requestClient: this.sdkVersion,
                 language: this.profile.language,
+                headers: this.profile.headers,
             });
         }
         catch (e) {

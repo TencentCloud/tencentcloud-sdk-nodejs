@@ -1,0 +1,21 @@
+{
+  "name": "cls_node_demo",
+  "version": "1.0.0",
+  "description": "cls demo",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node ./src/index.ts"
+  },
+  "author": "farmerx",
+  "license": "MIT",
+  "dependencies": {
+    "google-protobuf": "^3.17.3",
+    "tencentcloud-sdk-nodejs": "^4.0.181",
+    "tslint": "^6.1.3",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "ts-node": "^10.2.0"
+  }
+}
