@@ -338,7 +338,22 @@ export interface DescribeAsyncContextResultResponse {
 /**
  * UploadLog请求参数结构体
  */
-export type UploadLogRequest = null
+export interface UploadLogRequest {
+  /**
+   * 主题id
+   */
+  TopicId: string
+
+  /**
+   * 根据 hashkey 写入相应范围的主题分区
+   */
+  HashKey?: string
+
+  /**
+   * 压缩方法
+   */
+  CompressType?: string
+}
 
 /**
  * CreateAsyncContextTask请求参数结构体

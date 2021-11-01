@@ -575,6 +575,18 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SessionId: string
+
+  /**
+      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProtectedCaller: string
+
+  /**
+      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProtectedCallee: string
 }
 
 /**
@@ -660,12 +672,12 @@ export interface DescribeChatMessagesResponse {
   /**
    * 总记录数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 消息列表
    */
-  Messages?: Array<MessageBody>
+  Messages: Array<MessageBody>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -778,11 +790,6 @@ export interface ErrStaffItem {
  */
 export interface DescribeChatMessagesRequest {
   /**
-   * 服务记录ID
-   */
-  CdrId: string
-
-  /**
    * 实例ID
    */
   InstanceId?: number
@@ -791,6 +798,11 @@ export interface DescribeChatMessagesRequest {
    * 应用ID
    */
   SdkAppId?: number
+
+  /**
+   * 服务记录ID
+   */
+  CdrId?: string
 
   /**
    * 返回记录条数 最大为100默认20
@@ -806,6 +818,11 @@ export interface DescribeChatMessagesRequest {
    * 1为从早到晚，2为从晚到早，默认为2
    */
   Order?: number
+
+  /**
+   * 服务记录SessionID
+   */
+  SessionId?: string
 }
 
 /**
@@ -880,6 +897,16 @@ finished 已完成
    * 转外线被叫
    */
   OutBoundCallee: string
+
+  /**
+   * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
+   */
+  ProtectedCaller: string
+
+  /**
+   * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
+   */
+  ProtectedCallee: string
 }
 
 /**
@@ -1075,6 +1102,16 @@ export interface PSTNSessionInfo {
    * 振铃时间，Unix 时间戳
    */
   RingTimestamp: number
+
+  /**
+   * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
+   */
+  ProtectedCaller: string
+
+  /**
+   * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
+   */
+  ProtectedCallee: string
 }
 
 /**
@@ -1411,6 +1448,11 @@ export interface DescribeTelCdrRequest {
    * 按手机号筛选
    */
   Phones?: Array<string>
+
+  /**
+   * 按SessionId筛选
+   */
+  SessionIds?: Array<string>
 }
 
 /**

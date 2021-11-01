@@ -2645,10 +2645,6 @@ export interface DescribeLifecycleHooksRequest {
 <li> lifecycle-hook-id - String - 是否必填：否 -（过滤条件）按照生命周期挂钩ID过滤。</li>
 <li> lifecycle-hook-name - String - 是否必填：否 -（过滤条件）按照生命周期挂钩名称过滤。</li>
 <li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
-过滤条件。
-<li> lifecycle-hook-id - String - 是否必填：否 -（过滤条件）按照生命周期挂钩ID过滤。</li>
-<li> lifecycle-hook-name - String - 是否必填：否 -（过滤条件）按照生命周期挂钩名称过滤。</li>
-<li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LifecycleHookIds `和`Filters`。
       */
   Filters?: Array<Filter>
@@ -2885,12 +2881,12 @@ export interface DescribeLifecycleHooksResponse {
   /**
    * 生命周期挂钩数组
    */
-  LifecycleHookSet?: Array<LifecycleHook>
+  LifecycleHookSet: Array<LifecycleHook>
 
   /**
    * 总体数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

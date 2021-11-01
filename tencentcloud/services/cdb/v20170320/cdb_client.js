@@ -216,12 +216,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountPrivileges", req, cb);
     }
     /**
-     * 修改只读实例类型，可以将普通只读实例变为延迟只读实例，或者将延迟只读实例变为普通只读实例。
-     */
-    async ModifyRoType(req, cb) {
-        return this.request("ModifyRoType", req, cb);
-    }
-    /**
      * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。
      */
     async ReleaseIsolatedDBInstances(req, cb) {

@@ -437,13 +437,17 @@ export interface StopDBImportJobRequest {
     AsyncRequestId: string;
 }
 /**
- * OfflineIsolatedInstances返回参数结构体
+ * RO 实例的权重值
  */
-export interface OfflineIsolatedInstancesResponse {
+export interface RoWeightValue {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * RO 实例 ID。
       */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+      * 权重值。取值范围为 [0, 100]。
+      */
+    Weight: number;
 }
 /**
  * DescribeSlowLogData返回参数结构体
@@ -3349,19 +3353,6 @@ export interface SlaveInstanceInfo {
     Zone: string;
 }
 /**
- * RO 实例的权重值
- */
-export interface RoWeightValue {
-    /**
-      * RO 实例 ID。
-      */
-    InstanceId: string;
-    /**
-      * 权重值。取值范围为 [0, 100]。
-      */
-    Weight: number;
-}
-/**
  * ModifyDBInstanceVipVport请求参数结构体
  */
 export interface ModifyDBInstanceVipVportRequest {
@@ -3750,15 +3741,6 @@ export interface BalanceRoGroupLoadRequest {
       * RO 组的 ID，格式如：cdbrg-c1nl9rpv。
       */
     RoGroupId: string;
-}
-/**
- * ModifyRoType返回参数结构体
- */
-export interface ModifyRoTypeResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * DescribeAuditRules请求参数结构体
@@ -4243,25 +4225,13 @@ export interface DescribeBinlogsResponse {
     RequestId?: string;
 }
 /**
- * ModifyRoType请求参数结构体
+ * OfflineIsolatedInstances返回参数结构体
  */
-export interface ModifyRoTypeRequest {
+export interface OfflineIsolatedInstancesResponse {
     /**
-      * 实例 ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceId: string;
-    /**
-      * 只读实例源类型，取值 NORMAL（普通只读实例）、DELAY_REPLICATION（延迟只读实例）。
-      */
-    SrcRoInstType: string;
-    /**
-      * 只读实例目标类型，取值 NORMAL（普通只读实例）、DELAY_REPLICATION（延迟只读实例）。
-      */
-    DstRoInstType: string;
-    /**
-      * 延迟时间（s），将实例修改为延迟只读实例时必传。最小值1，最大值259200。
-      */
-    ReplicationDelay?: number;
+    RequestId?: string;
 }
 /**
  * SwitchDrInstanceToMaster返回参数结构体

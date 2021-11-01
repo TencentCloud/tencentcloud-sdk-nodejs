@@ -318,16 +318,6 @@ it("cdb.v20170320.DescribeAccountPrivileges", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyRoType", async function () {
-    try {
-       const data = await client.ModifyRoType({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.ReleaseIsolatedDBInstances", async function () {
     try {
        const data = await client.ReleaseIsolatedDBInstances({})

@@ -572,24 +572,9 @@ export class Client extends AbstractClient {
 系统根据携带的哈希值（X-CLS-HashKey）将数据写入到符合范围要求的目标分区。例如，可以将某个日志源端通过 hashkey 与某个主题分区强绑定，这样可以保证数据在该分区上写入和消费是严格保序的。
 
 此外日志服务还为用户提供以下两种不同的日志上传模式：
+                 
 
-
-## 请求
-
-#### 请求头业务参数
-
-X-CLS-HashKey 请求头表示日志根据 hashkey 路由写入到 CLS 对应范围的主题分区，以保证写入到的每个主题分区是严格有序的，便于消费时有序消费。
-
-| 字段名             | 类型   | 位置   | 是否必须 | 含义                                                         |
-| ------------------ | ------ | ------ | -------- | ------------------------------------------------------------ |
-| X-CLS-HashKey      | string | header | 否       | 根据 hashkey 写入相应范围的主题分区                          |
-| X-CLS-TopicId      | String | header | 是       | 主题id                                                       |                                                 |
-| Content-Type       | String | header | 是       | 请求参数的协议类型， 目前只支持pb协议，填写 "application/octet-stream" |
-| X-TC-Action        | String |	header | 是       | 公共参数，本接口取值：UploadLog。                   
-| X-TC-Region        | String | header | 是   	  | 公共参数，本接口不需要传递此参数。                       
-| X-TC-Version       | String | header | 是       | 公共参数，本接口取值：2020-10-16。                  
-
-#### 输入参数（pb协议）
+#### 输入参数(pb二进制流，位于body中)
 
 | 字段名       | 类型    | 位置 | 必须 | 含义                                                         |
 | ------------ | ------- | ---- | ---- | ------------------------------------------------------------ |
@@ -723,7 +708,7 @@ cls.pb.cc cls.pb.h cls.proto
 将生成的 cls.pb.h 头文件引入代码中，调用接口进行数据格式封装。
      */
   async UploadLog(
-    req?: UploadLogRequest,
+    req: UploadLogRequest,
     cb?: (error: string, rep: UploadLogResponse) => void
   ): Promise<UploadLogResponse> {
     return this.request("UploadLog", req, cb)

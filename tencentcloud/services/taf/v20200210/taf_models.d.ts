@@ -59,6 +59,10 @@ export interface EnhanceTaDegreeRequest {
       * 业务数据
       */
     BspData: InputTaBspData;
+    /**
+      * 业务加密数据
+      */
+    BusinessEncryptData?: InputBusinessEncryptData;
 }
 /**
  * 流量反欺诈-验准返回的查询分值
@@ -150,7 +154,7 @@ export interface EnhanceTaDegreeResponse {
       * 回包数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: OutputTaData;
+    Data: OutputTaData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -181,7 +185,7 @@ export interface InputTaBspData {
       */
     Gender: number;
     /**
-      * 用户操作时间
+      * 用户操作时间,uinux时间戳，精确到秒
       */
     UserTime?: number;
     /**
@@ -260,6 +264,10 @@ export interface InputTaBspData {
       * 辅助区分信息
       */
     Context?: string;
+    /**
+      * 是否授权
+      */
+    IsAuthorized?: number;
 }
 /**
  * 返回结果
@@ -594,10 +602,6 @@ export interface InputKolDataList {
     AgentInfo?: string;
 }
 /**
- * 接口入参
- */
-export declare type InputRecognizeEffectiveFlow = null;
-/**
  * RecognizePreciseTargetAudience返回参数结构体
  */
 export interface RecognizePreciseTargetAudienceResponse {
@@ -611,6 +615,14 @@ export interface RecognizePreciseTargetAudienceResponse {
       */
     RequestId?: string;
 }
+/**
+ * 接口入参
+ */
+export declare type InputRecognizeEffectiveFlow = null;
+/**
+ * 业务入参
+ */
+export declare type InputBusinessEncryptData = null;
 /**
  * 流量反欺诈-验准返回值
  */

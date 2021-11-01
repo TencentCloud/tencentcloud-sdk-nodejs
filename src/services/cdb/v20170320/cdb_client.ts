@@ -30,7 +30,7 @@ import {
   DescribeRoMinScaleResponse,
   CreateAuditRuleResponse,
   StopDBImportJobRequest,
-  OfflineIsolatedInstancesResponse,
+  RoWeightValue,
   DescribeSlowLogDataResponse,
   SellType,
   DescribeDBInstanceInfoResponse,
@@ -167,7 +167,6 @@ import {
   DescribeBackupTablesResponse,
   Outbound,
   SlaveInstanceInfo,
-  RoWeightValue,
   ModifyDBInstanceVipVportRequest,
   ModifyParamTemplateResponse,
   ModifyDBInstanceSecurityGroupsResponse,
@@ -193,7 +192,6 @@ import {
   DescribeAsyncRequestInfoRequest,
   TablePrivilege,
   BalanceRoGroupLoadRequest,
-  ModifyRoTypeResponse,
   DescribeAuditRulesRequest,
   DescribeBackupOverviewResponse,
   ColumnPrivilege,
@@ -218,7 +216,7 @@ import {
   DescribeDBInstanceConfigRequest,
   DescribeBackupTablesRequest,
   DescribeBinlogsResponse,
-  ModifyRoTypeRequest,
+  OfflineIsolatedInstancesResponse,
   SwitchDrInstanceToMasterResponse,
   DatabasePrivilege,
   RoGroupAttr,
@@ -638,16 +636,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountPrivilegesResponse) => void
   ): Promise<DescribeAccountPrivilegesResponse> {
     return this.request("DescribeAccountPrivileges", req, cb)
-  }
-
-  /**
-   * 修改只读实例类型，可以将普通只读实例变为延迟只读实例，或者将延迟只读实例变为普通只读实例。
-   */
-  async ModifyRoType(
-    req: ModifyRoTypeRequest,
-    cb?: (error: string, rep: ModifyRoTypeResponse) => void
-  ): Promise<ModifyRoTypeResponse> {
-    return this.request("ModifyRoType", req, cb)
   }
 
   /**

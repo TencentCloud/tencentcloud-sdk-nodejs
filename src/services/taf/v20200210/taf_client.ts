@@ -43,8 +43,9 @@ import {
   OutputTaValue,
   RecognizePreciseTargetAudienceRequest,
   InputKolDataList,
-  InputRecognizeEffectiveFlow,
   RecognizePreciseTargetAudienceResponse,
+  InputRecognizeEffectiveFlow,
+  InputBusinessEncryptData,
   OutputRecognizeTargetAudience,
   InputSendTrafficSecuritySmsMsg,
 } from "./taf_models"
