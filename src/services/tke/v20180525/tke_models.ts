@@ -296,7 +296,7 @@ export interface ModifyClusterEndpointSPRequest {
   /**
    * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
    */
-  SecurityPolicies: Array<string>
+  SecurityPolicies?: Array<string>
 }
 
 /**
@@ -1804,7 +1804,7 @@ export interface CreateClusterEndpointVipResponse {
   /**
    * 请求任务的FlowId
    */
-  RequestFlowId?: number
+  RequestFlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -370,7 +370,7 @@ export interface CreateDBImportJobRequest {
   InstanceId: string
 
   /**
-   * 文件名称。该文件是指用户已上传到腾讯云的文件。
+   * 文件名称。该文件是指用户已上传到腾讯云的文件，仅支持.sql文件。
    */
   FileName: string
 
@@ -6376,7 +6376,7 @@ export interface CreateDBImportJobResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

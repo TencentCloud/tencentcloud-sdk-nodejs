@@ -1029,7 +1029,7 @@ export interface CreateTopicRequest {
       */
     InstanceId: string;
     /**
-      * 主题名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+      * 主题名称，是一个不超过 128 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
       */
     TopicName: string;
     /**
@@ -1080,6 +1080,10 @@ export interface CreateTopicRequest {
       * 预设ACL规则的名称
       */
     AclRuleName?: string;
+    /**
+      * 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B
+      */
+    RetentionBytes?: number;
 }
 /**
  * DeleteAcl返回参数结构体
@@ -1592,6 +1596,11 @@ delete：日志按保存时间删除；compact：日志按 key 压缩；compact,
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxMessageBytes: number;
+    /**
+      * 消息保留文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RetentionBytes: number;
 }
 /**
  * ModifyPassword请求参数结构体
@@ -2626,6 +2635,10 @@ export interface ModifyTopicAttributesRequest {
       * 预设ACL规则的名称
       */
     AclRuleName?: string;
+    /**
+      * 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B
+      */
+    RetentionBytes?: number;
 }
 /**
  * DescribeGroup请求参数结构体

@@ -6983,6 +6983,11 @@ export interface ComposeMediaTask {
   Message: string
 
   /**
+   * 制作媒体文件任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
+
+  /**
       * 制作媒体文件任务的输入。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -7001,14 +7006,14 @@ export interface ComposeMediaTask {
   MetaData: MediaMetaData
 
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext: string
-
-  /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId: string
+
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext: string
 }
 
 /**
@@ -14585,6 +14590,11 @@ export interface EditMediaTask {
   Message: string
 
   /**
+   * 编辑视频任务进度，取值范围 [0-100] 。
+   */
+  Progress: number
+
+  /**
       * 视频编辑任务的输入。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -14597,14 +14607,14 @@ export interface EditMediaTask {
   Output: EditMediaTaskOutput
 
   /**
+   * 原始视频的元信息。
+   */
+  MetaData: MediaMetaData
+
+  /**
    * 若发起视频编辑任务时指定了视频处理流程，则该字段为流程任务 ID。
    */
   ProcedureTaskId: string
-
-  /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext: string
 
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
@@ -14612,9 +14622,9 @@ export interface EditMediaTask {
   SessionId: string
 
   /**
-   * 原始视频的元信息。
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
-  MetaData: MediaMetaData
+  SessionContext: string
 }
 
 /**

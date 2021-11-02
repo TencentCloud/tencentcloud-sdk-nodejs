@@ -5463,6 +5463,18 @@ export interface EffectiveMachineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Uuid: string
+
+  /**
+      * 内核版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KernelVersion: string
+
+  /**
+      * 在线状态 OFFLINE，ONLINE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MachineStatus: string
 }
 
 /**
@@ -6064,6 +6076,11 @@ export interface Machine {
    * 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区
    */
   MachineType: string
+
+  /**
+   * 内核版本
+   */
+  KernelVersion: string
 }
 
 /**
@@ -9435,6 +9452,11 @@ export interface DescribeVersionStatisticsResponse {
    * 专业版数量
    */
   ProVersionNum: number
+
+  /**
+   * 旗舰版数量
+   */
+  UltimateVersionNum: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

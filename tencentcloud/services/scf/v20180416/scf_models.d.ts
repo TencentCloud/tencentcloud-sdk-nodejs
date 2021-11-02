@@ -914,6 +914,10 @@ export interface TerminateAsyncEventRequest {
       * 命名空间
       */
     Namespace?: string;
+    /**
+      * 优雅关停
+      */
+    GraceShutdown?: boolean;
 }
 /**
  * ListLayers请求参数结构体

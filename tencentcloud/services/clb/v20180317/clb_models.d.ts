@@ -3442,6 +3442,10 @@ export interface CreateLoadBalancerSnatIpsRequest {
       * 添加SnatIp信息，可指定IP申请，或者指定子网自动申请。
       */
     SnatIps: Array<SnatIp>;
+    /**
+      * 添加SnatIp个数，与SnatIps一起使用，当指定Ip时，不能指定创建SnatIp个数。
+      */
+    Number?: number;
 }
 /**
  * ModifyTargetGroupInstancesWeight请求参数结构体

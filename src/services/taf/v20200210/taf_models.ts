@@ -416,6 +416,11 @@ export interface RecognizeTargetAudienceRequest {
    * 业务数据
    */
   BspData: InputRecognizeTargetAudience
+
+  /**
+   * 业务加密数据
+   */
+  BusinessEncryptData?: InputBusinessEncryptData
 }
 
 /**
@@ -637,12 +642,12 @@ export interface InputRecognizeTargetAudience {
   AdType?: number
 
   /**
-   * app name
+   * app名称
    */
   AppName?: string
 
   /**
-   * appVer
+   * app版本描述
    */
   AppVer?: string
 
@@ -650,6 +655,11 @@ export interface InputRecognizeTargetAudience {
    * 竞价模式1：rtb 2:pd
    */
   ReqType?: number
+
+  /**
+   * 用户是否授权,1为授权，0为未授权
+   */
+  IsAuthorized?: number
 }
 
 /**
