@@ -102,7 +102,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DetectFraudKOL
+   * 流量反欺诈-KOL欺诈识别
    */
   async DetectFraudKOL(
     req: DetectFraudKOLRequest,

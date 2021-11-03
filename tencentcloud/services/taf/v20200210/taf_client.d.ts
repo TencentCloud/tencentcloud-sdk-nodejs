@@ -26,7 +26,7 @@ export declare class Client extends AbstractClient {
      */
     RecognizeCustomizedAudience(req: RecognizeCustomizedAudienceRequest, cb?: (error: string, rep: RecognizeCustomizedAudienceResponse) => void): Promise<RecognizeCustomizedAudienceResponse>;
     /**
-     * DetectFraudKOL
+     * 流量反欺诈-KOL欺诈识别
      */
     DetectFraudKOL(req: DetectFraudKOLRequest, cb?: (error: string, rep: DetectFraudKOLResponse) => void): Promise<DetectFraudKOLResponse>;
     /**

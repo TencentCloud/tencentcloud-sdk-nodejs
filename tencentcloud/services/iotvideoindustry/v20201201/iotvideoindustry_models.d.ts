@@ -1012,7 +1012,7 @@ export interface DescribeDeviceStreamsRequest {
       */
     ExpireTime: number;
     /**
-      * 通道唯一标识
+      * 通道唯一标识（接口升级字段为必填）
       */
     ChannelId?: string;
 }

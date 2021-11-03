@@ -101,7 +101,7 @@ export interface DetectFraudKOLResponse {
       * 回包数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: OutputKolData;
+    Data: OutputKolData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -323,6 +323,10 @@ export interface DetectFraudKOLRequest {
       * 业务数据
       */
     BspData: InputKolBspData;
+    /**
+      * 业务加密数据
+      */
+    BusinessEncryptData?: InputBusinessEncryptData;
 }
 /**
  * RecognizeCustomizedAudience请求参数结构体
@@ -585,7 +589,7 @@ export interface RecognizePreciseTargetAudienceRequest {
     BspData: InputRecognizeTargetAudience;
 }
 /**
- * CheckKol
+ * CheckKOL
  */
 export interface InputKolDataList {
     /**
@@ -608,6 +612,10 @@ export interface InputKolDataList {
       * 代理商名称
       */
     AgentInfo?: string;
+    /**
+      * 是否授权
+      */
+    IsAuthorized?: number;
 }
 /**
  * RecognizePreciseTargetAudience返回参数结构体
