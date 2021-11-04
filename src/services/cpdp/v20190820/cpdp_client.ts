@@ -67,6 +67,7 @@ import {
   QueryAcctInfoListRequest,
   CreateMerchantRequest,
   ApplyDeclareResult,
+  QuerySmallAmountTransferResponse,
   DeleteAgentTaxPaymentInfoRequest,
   RefundTlinxOrderRequest,
   QueryInvoiceResult,
@@ -130,6 +131,7 @@ import {
   BindRelateAcctSmallAmountResponse,
   ContractInfo,
   QueryTransferBatchRequest,
+  MerchantRiskInfo,
   CreateTransferBatchRequest,
   ExecuteMemberTransactionResponse,
   OrganizationInfo,
@@ -163,7 +165,7 @@ import {
   Acct,
   QueryBankTransactionDetailsResponse,
   QueryTransferResultRequest,
-  SyncContractDataResponse,
+  QueryMaliciousRegistrationRequest,
   CreateSinglePaymentData,
   QueryMerchantBalanceData,
   QueryMemberTransactionRequest,
@@ -201,6 +203,7 @@ import {
   OrderItem,
   CreateSinglePayRequest,
   QueryTransferBatchResponse,
+  SyncContractDataResponse,
   Order,
   RegisterBillResponse,
   WithdrawCashMembershipRequest,
@@ -255,7 +258,7 @@ import {
   QueryBillDownloadURLRequest,
   TransferSinglePayRequest,
   ApplyOutwardOrderResult,
-  QuerySmallAmountTransferResponse,
+  QueryMaliciousRegistrationResponse,
   ApplyPayerInfoRequest,
   CreateSinglePayResponse,
   RefundMemberTransactionResponse,
@@ -757,6 +760,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 商户恶意注册接口
+   */
+  async QueryMaliciousRegistration(
+    req: QueryMaliciousRegistrationRequest,
+    cb?: (error: string, rep: QueryMaliciousRegistrationResponse) => void
+  ): Promise<QueryMaliciousRegistrationResponse> {
+    return this.request("QueryMaliciousRegistration", req, cb)
+  }
+
+  /**
    * 山姆聚合支付项目-存量订单退款接口。可以通过本接口将支付款全部或部分退还给付款方，在收到用户退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。
    */
   async MigrateOrderRefund(
@@ -910,7 +923,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云支付Tlinx统一下单接口
+   * 云支付-统一下单接口
    */
   async UnifiedTlinxOrder(
     req: UnifiedTlinxOrderRequest,

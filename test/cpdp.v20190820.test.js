@@ -438,6 +438,16 @@ it("cpdp.v20190820.QueryOutwardOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryMaliciousRegistration", async function () {
+    try {
+       const data = await client.QueryMaliciousRegistration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.MigrateOrderRefund", async function () {
     try {
        const data = await client.MigrateOrderRefund({})

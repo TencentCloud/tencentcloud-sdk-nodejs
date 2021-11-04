@@ -1116,7 +1116,7 @@ export interface CreateNatFwInstanceRequest {
   ZoneBak?: string
 
   /**
-   * 异地灾备 1：使用异地灾备；0：不使用异地灾备
+   * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
    */
   CrossAZone?: number
 }
@@ -1430,7 +1430,7 @@ export interface DescribeSourceAssetRequest {
   InsType?: string
 
   /**
-   * 是否未分组 1是
+   * ChooseType为1，查询已经分组的资产；ChooseType不为1查询没有分组的资产
    */
   ChooseType?: string
 
@@ -1440,12 +1440,12 @@ export interface DescribeSourceAssetRequest {
   Zone?: string
 
   /**
-   * 页大小
+   * 查询单页的最大值；eg：10；则最多返回10条结果
    */
   Limit?: number
 
   /**
-   * 偏移量
+   * 查询结果的偏移量
    */
   Offset?: number
 }
@@ -1480,7 +1480,7 @@ export interface DescribeSourceAssetResponse {
   Data: Array<InstanceInfo>
 
   /**
-   * 10
+   * 返回数据总数
    */
   Total: number
 
@@ -2413,17 +2413,17 @@ export interface DescribeResourceGroupNewResponse {
   Data: string
 
   /**
-   * 无
+   * 未分类实例数量
    */
   UnResourceNum: number
 
   /**
-   * 无
+   * 接口返回消息
    */
   ReturnMsg: string
 
   /**
-   * 无
+   * 返回码；0为请求成功
    */
   ReturnCode: number
 
@@ -2454,7 +2454,7 @@ export interface DescribeNatFwInstanceWithRegionResponse {
  */
 export interface DescribeResourceGroupNewRequest {
   /**
-   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
+   * 查询类型 网络结构-vpc，业务识别-resource ，资源标签-tag
    */
   QueryType: string
 
@@ -3649,7 +3649,7 @@ export interface CreateNatFwInstanceWithDomainRequest {
   ZoneBak?: string
 
   /**
-   * 异地灾备 1：使用异地灾备；0：不使用异地灾备
+   * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
    */
   CrossAZone?: number
 

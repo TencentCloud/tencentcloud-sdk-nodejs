@@ -280,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryOutwardOrder", req, cb);
     }
     /**
+     * 商户恶意注册接口
+     */
+    async QueryMaliciousRegistration(req, cb) {
+        return this.request("QueryMaliciousRegistration", req, cb);
+    }
+    /**
      * 山姆聚合支付项目-存量订单退款接口。可以通过本接口将支付款全部或部分退还给付款方，在收到用户退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。
      */
     async MigrateOrderRefund(req, cb) {
@@ -373,7 +379,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateOrder", req, cb);
     }
     /**
-     * 云支付Tlinx统一下单接口
+     * 云支付-统一下单接口
      */
     async UnifiedTlinxOrder(req, cb) {
         return this.request("UnifiedTlinxOrder", req, cb);

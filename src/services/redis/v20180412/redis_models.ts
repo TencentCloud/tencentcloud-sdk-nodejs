@@ -2713,9 +2713,16 @@ export interface CreateInstanceAccountRequest {
  */
 export interface EnableReplicaReadonlyResponse {
   /**
-   * 错误：ERROR，正确OK。
-   */
+      * 错误：ERROR，正确OK（已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Status?: string
+
+  /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

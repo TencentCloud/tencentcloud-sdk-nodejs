@@ -56,6 +56,7 @@ import {
   DisIsolateDBInstancesRequest,
   ServerlessDBInstanceNetInfo,
   DescribeDBInstancesRequest,
+  ModifyDBInstanceSpecRequest,
   ModifyAccountRemarkResponse,
   UpgradeDBInstanceRequest,
   DescribeZonesRequest,
@@ -90,6 +91,7 @@ import {
   InquiryPriceUpgradeDBInstanceRequest,
   RebalanceReadOnlyGroupResponse,
   ModifyDBInstanceNameRequest,
+  OpenServerlessDBExtranetAccessResponse,
   InquiryPriceRenewDBInstanceResponse,
   DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
@@ -143,7 +145,7 @@ import {
   DescribeDBSlowlogsRequest,
   DestroyDBInstanceResponse,
   DescribeDBInstanceAttributeResponse,
-  OpenServerlessDBExtranetAccessResponse,
+  ModifyDBInstanceSpecResponse,
   DescribeDBXlogsResponse,
   DescribeDBSlowlogsResponse,
   CreateDBInstancesResponse,
@@ -446,6 +448,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceUpgradeDBInstanceResponse) => void
   ): Promise<InquiryPriceUpgradeDBInstanceResponse> {
     return this.request("InquiryPriceUpgradeDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceSpec）用于调整实例规格，包括内存、磁盘。
+   */
+  async ModifyDBInstanceSpec(
+    req: ModifyDBInstanceSpecRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSpecResponse) => void
+  ): Promise<ModifyDBInstanceSpecResponse> {
+    return this.request("ModifyDBInstanceSpec", req, cb)
   }
 
   /**

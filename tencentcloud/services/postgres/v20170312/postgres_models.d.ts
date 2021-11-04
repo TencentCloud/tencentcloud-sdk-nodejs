@@ -867,6 +867,47 @@ db-tag-key：按照标签键过滤，类型为string
     OrderByType?: string;
 }
 /**
+ * ModifyDBInstanceSpec请求参数结构体
+ */
+export interface ModifyDBInstanceSpecRequest {
+    /**
+      * 实例ID，形如：postgres-6bwgamo3。
+      */
+    DBInstanceId: string;
+    /**
+      * 升级后的实例内存大小，单位GiB。
+      */
+    Memory: number;
+    /**
+      * 升级后的实例磁盘大小，单位GiB。
+      */
+    Storage: number;
+    /**
+      * 是否自动使用代金券,1是,0否，默认不使用。
+      */
+    AutoVoucher?: number;
+    /**
+      * 代金券ID列表，目前仅支持指定一张代金券。
+      */
+    VoucherIds?: Array<string>;
+    /**
+      * 活动ID。
+      */
+    ActivityId?: number;
+    /**
+      * 指定实例配置完成变更后的切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。
+      */
+    SwitchTag?: number;
+    /**
+      * 切换开始时间。
+      */
+    SwitchStartTime?: string;
+    /**
+      * 切换截止时间。
+      */
+    SwitchEndTime?: string;
+}
+/**
  * ModifyAccountRemark返回参数结构体
  */
 export interface ModifyAccountRemarkResponse {
@@ -1721,6 +1762,15 @@ export interface ModifyDBInstanceNameRequest {
       * 新的数据库实例名字
       */
     InstanceName: string;
+}
+/**
+ * OpenServerlessDBExtranetAccess返回参数结构体
+ */
+export interface OpenServerlessDBExtranetAccessResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * InquiryPriceRenewDBInstance返回参数结构体
@@ -2858,9 +2908,17 @@ export interface DescribeDBInstanceAttributeResponse {
     RequestId?: string;
 }
 /**
- * OpenServerlessDBExtranetAccess返回参数结构体
+ * ModifyDBInstanceSpec返回参数结构体
  */
-export interface OpenServerlessDBExtranetAccessResponse {
+export interface ModifyDBInstanceSpecResponse {
+    /**
+      * 订单号。
+      */
+    DealName: string;
+    /**
+      * 冻结流水号。
+      */
+    BillId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -1255,12 +1255,12 @@ export interface DescribeUserInfoRequest {
  */
 export interface DescribeUserGroupResponse {
     /**
-      * 昵称，长度限制：64个字符。 DisplayName不唯一。
+      * 用户组昵称，长度限制：64个字符。 DisplayName不唯一。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DisplayName: string;
     /**
-      * 用户备注，长度限制：512个字符。
+      * 用户组备注，长度限制：512个字符。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Description: string;
@@ -1415,11 +1415,11 @@ export interface ListAuthorizedApplicationsToOrgNodeRequest {
  */
 export interface CreateUserGroupRequest {
     /**
-      * 昵称，长度限制：64个字符。 DisplayName是唯一的。
+      * 用户组昵称，长度限制：64个字符。 DisplayName是唯一的。
       */
     DisplayName: string;
     /**
-      * 用户备注，长度限制：512个字符。
+      * 用户组备注，长度限制：512个字符。
       */
     Description?: string;
 }

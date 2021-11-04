@@ -202,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);
     }
     /**
+     * 本接口（ModifyDBInstanceSpec）用于调整实例规格，包括内存、磁盘。
+     */
+    async ModifyDBInstanceSpec(req, cb) {
+        return this.request("ModifyDBInstanceSpec", req, cb);
+    }
+    /**
      * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
      */
     async RemoveDBInstanceFromReadOnlyGroup(req, cb) {

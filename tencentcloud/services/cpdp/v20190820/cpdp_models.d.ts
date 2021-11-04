@@ -934,14 +934,14 @@ export interface ReviseMbrPropertyRequest {
  */
 export interface UnifiedTlinxOrderResponse {
     /**
-      * 业务系统返回码
-      */
-    ErrCode: string;
-    /**
       * 业务系统返回消息
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ErrMessage: string;
+    /**
+      * 业务系统返回码
+      */
+    ErrCode: string;
     /**
       * 统一下单响应对象
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1775,6 +1775,42 @@ export interface ApplyDeclareResult {
       * 提交申报材料数据
       */
     Data: ApplyDeclareData;
+}
+/**
+ * QuerySmallAmountTransfer返回参数结构体
+ */
+export interface QuerySmallAmountTransferResponse {
+    /**
+      * String(20)，返回码
+      */
+    TxnReturnCode?: string;
+    /**
+      * String(100)，返回信息
+      */
+    TxnReturnMsg?: string;
+    /**
+      * String(22)，交易流水号
+      */
+    CnsmrSeqNo?: string;
+    /**
+      * STRING(10)，返回状态（0: 成功; 1: 失败; 2: 待确认）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReturnStatus?: string;
+    /**
+      * STRING(512)，返回信息（失败返回具体信息）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReturnMsg?: string;
+    /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedMsg?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteAgentTaxPaymentInfo请求参数结构体
@@ -3692,6 +3728,21 @@ FAIL：转账失败，只查询转账失败的明细单。
     DetailStatus?: string;
 }
 /**
+ * 商户风险信息
+ */
+export interface MerchantRiskInfo {
+    /**
+      * 恶意注册等级，0-9级，9级最高
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RiskLevel: number;
+    /**
+      * 恶意注册代码，代码以|分割，如"G001|T002"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RiskTypes: string;
+}
+/**
  * CreateTransferBatch请求参数结构体
  */
 export interface CreateTransferBatchRequest {
@@ -4940,17 +4991,57 @@ export interface QueryTransferResultRequest {
     Profile?: string;
 }
 /**
- * SyncContractData返回参数结构体
+ * QueryMaliciousRegistration请求参数结构体
  */
-export interface SyncContractDataResponse {
+export interface QueryMaliciousRegistrationRequest {
     /**
-      * 请求处理信息
+      * 商户ID，调用方使用的商户号信息，与商户主体一一对应
       */
-    Msg: string;
+    MerchantId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 商户名称
       */
-    RequestId?: string;
+    MerchantName: string;
+    /**
+      * 企业工商注册标准名称
+      */
+    CompanyName: string;
+    /**
+      * 注册地址
+      */
+    RegAddress: string;
+    /**
+      * 商户进件Unix时间，单位秒（非企业注册工商时间)
+      */
+    RegTime: number;
+    /**
+      * 统一社会信用代码
+      */
+    USCI?: string;
+    /**
+      * 工商注册码，匹配优先级为Usci>RegNumber>CompanyName
+      */
+    RegNumber?: string;
+    /**
+      * 手机号码32位MD5加密结果，全大写，格式为0086-13812345678
+      */
+    EncryptedPhoneNumber?: string;
+    /**
+      * 邮箱32位MD5加密结果，全大写
+      */
+    EncryptedEmailAddress?: string;
+    /**
+      * 身份证MD5加密结果，最后一位x大写
+      */
+    EncryptedPersonId?: string;
+    /**
+      * 填写信息设备的IP地址
+      */
+    Ip?: string;
+    /**
+      * 进件渠道号，客户自行编码即可
+      */
+    Channel?: string;
 }
 /**
  * CreateSinglePayment接口返回响应
@@ -6151,6 +6242,19 @@ OVERDUE_CLOSE：系统超时关闭。
     RequestId?: string;
 }
 /**
+ * SyncContractData返回参数结构体
+ */
+export interface SyncContractDataResponse {
+    /**
+      * 请求处理信息
+      */
+    Msg: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 线下查票-订单信息
  */
 export interface Order {
@@ -6918,17 +7022,21 @@ export interface MerchantPayWayData {
  */
 export interface UnifiedTlinxOrderRequest {
     /**
+      * 开发者流水号
+      */
+    DeveloperNo: string;
+    /**
       * 收单系统分配的开放ID
       */
     OpenId: string;
     /**
+      * 交易结果异步通知url地址
+      */
+    NotifyUrl: string;
+    /**
       * 收单系统分配的密钥
       */
     OpenKey: string;
-    /**
-      * 开发者流水号
-      */
-    DeveloperNo: string;
     /**
       * 支付标签
       */
@@ -6938,33 +7046,41 @@ export interface UnifiedTlinxOrderRequest {
       */
     TradeAmount: string;
     /**
-      * 订单标记，订单附加数据
+      * 订单备注
       */
-    Tag: string;
+    Remark?: string;
     /**
-      * 交易结果异步通知url地址
+      * 订单标记，订单附加数据。
       */
-    NotifyUrl: string;
+    Tag?: string;
     /**
-      * 付款方式名称(当PayTag为Diy时，PayName不能为空)
+      * 抹零金额（以分为单位，没有小数点）
       */
-    PayName?: string;
+    IgnoreAmount?: string;
     /**
-      * 订单名称（描述）
+      * 条码支付的授权码（条码抢扫手机扫到的一串数字）
       */
-    OrderName?: string;
+    AuthCode?: string;
     /**
       * 原始交易金额（以分为单位，没有小数点）
       */
     OriginalAmount?: string;
     /**
-      * 折扣金额（以分为单位，没有小数点）
+      * 订单名称（描述）
       */
-    DiscountAmount?: string;
+    OrderName?: string;
     /**
-      * 抹零金额（以分为单位，没有小数点）
+      * 公众号支付时，支付成功后跳转url地址
       */
-    IgnoreAmount?: string;
+    JumpUrl?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
+    /**
+      * 收单机构原始交易报文，请转换为json
+      */
+    TradeResult?: string;
     /**
       * 交易帐号（银行卡号）
       */
@@ -6974,25 +7090,17 @@ export interface UnifiedTlinxOrderRequest {
       */
     TradeNo?: string;
     /**
-      * 收单机构原始交易报文，请转换为json
+      * 折扣金额（以分为单位，没有小数点）
       */
-    TradeResult?: string;
+    DiscountAmount?: string;
     /**
-      * 订单备注
+      * 付款方式名称(当PayTag为Diy时，PayName不能为空)
       */
-    Remark?: string;
+    PayName?: string;
     /**
-      * 条码支付的授权码（条码抢扫手机扫到的一串数字）
+      * 0-不分账，1-需分账。为1时标记为待分账订单，待分账订单不会进行清算。不传默认为不分账。
       */
-    AuthCode?: string;
-    /**
-      * 公众号支付时，支付成功后跳转url地址
-      */
-    JumpUrl?: string;
-    /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
+    Royalty?: string;
 }
 /**
  * 成功申报材料查询结果
@@ -8131,36 +8239,22 @@ export interface ApplyOutwardOrderResult {
     Code: string;
 }
 /**
- * QuerySmallAmountTransfer返回参数结构体
+ * QueryMaliciousRegistration返回参数结构体
  */
-export interface QuerySmallAmountTransferResponse {
+export interface QueryMaliciousRegistrationResponse {
     /**
-      * String(20)，返回码
+      * 错误码
       */
-    TxnReturnCode?: string;
+    ErrCode: string;
     /**
-      * String(100)，返回信息
+      * 错误消息
       */
-    TxnReturnMsg?: string;
+    ErrMsg: string;
     /**
-      * String(22)，交易流水号
-      */
-    CnsmrSeqNo?: string;
-    /**
-      * STRING(10)，返回状态（0: 成功; 1: 失败; 2: 待确认）
+      * 商户风险信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReturnStatus?: string;
-    /**
-      * STRING(512)，返回信息（失败返回具体信息）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReturnMsg?: string;
-    /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReservedMsg?: string;
+    Result: MerchantRiskInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

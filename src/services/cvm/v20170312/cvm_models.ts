@@ -4117,7 +4117,7 @@ export interface DescribeImagesRequest {
   ImageIds?: Array<string>
 
   /**
-      * 过滤条件，每次请求的`Filters`的上限为0，`Filters.Values`的上限为5。参数不可以同时指定`ImageIds`和`Filters`。详细的过滤条件如下：
+      * 过滤条件，每次请求的`Filters`的上限为10，`Filters.Values`的上限为5。参数不可以同时指定`ImageIds`和`Filters`。详细的过滤条件如下：
 <li> image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行过滤</li>
 <li> image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：
     PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像) 

@@ -156,6 +156,12 @@ export interface Service {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SetType: string
+
+  /**
+      * 服务部署的集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeploymentType: string
 }
 
 /**
@@ -1515,6 +1521,18 @@ export interface DescribeServiceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SetType: string
+
+  /**
+      * 服务部署的集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeploymentType: string
+
+  /**
+      * 特殊用途
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecialUse: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
