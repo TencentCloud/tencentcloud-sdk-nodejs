@@ -18,24 +18,18 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeSyncJobsResponse,
   DescribeMigrateJobsResponse,
   MigrateDetailInfo,
   DeleteMigrateJobResponse,
   CreateMigrateCheckJobRequest,
   ModifySubscribeVipVportRequest,
-  SyncInstanceInfo,
   ModifySubscribeNameResponse,
-  CreateSyncJobResponse,
   DescribeMigrateCheckJobRequest,
   IsolateSubscribeResponse,
   ModifySubscribeObjectsResponse,
-  SwitchDrToMasterRequest,
-  StartSyncJobRequest,
   CreateMigrateJobRequest,
-  SubscribeInfo,
+  SubscribeRegionConf,
   ModifySubscribeNameRequest,
-  SyncJobInfo,
   ModifySubscribeConsumeTimeResponse,
   DstInfo,
   DescribeSubscribeConfResponse,
@@ -48,40 +42,32 @@ import {
   MigrateStepDetailInfo,
   ModifySubscribeObjectsRequest,
   DescribeMigrateCheckJobResponse,
-  SubscribeRegionConf,
   ActivateSubscribeRequest,
   OfflineIsolatedSubscribeRequest,
   DescribeSubscribesRequest,
   ResetSubscribeResponse,
-  StartSyncJobResponse,
   DescribeSubscribesResponse,
-  SyncCheckStepInfo,
-  CreateSyncCheckJobResponse,
+  ModifySubscribeConsumeTimeRequest,
   StopMigrateJobRequest,
   DescribeSyncCheckJobRequest,
   DescribeRegionConfResponse,
   ModifySyncJobResponse,
   DescribeAsyncRequestInfoResponse,
-  CompleteMigrateJobRequest,
+  SubscribeInfo,
   ResetSubscribeRequest,
   TagItem,
   TagFilter,
-  ModifySubscribeConsumeTimeRequest,
-  SwitchDrToMasterResponse,
+  SyncCheckStepInfo,
   ModifyMigrateJobResponse,
-  CreateSyncJobRequest,
-  DescribeSyncJobsRequest,
   DescribeMigrateJobsRequest,
-  SyncDetailInfo,
   ModifySubscribeAutoRenewFlagResponse,
   StopMigrateJobResponse,
   SyncOption,
   OfflineIsolatedSubscribeResponse,
-  SyncStepDetailInfo,
   IsolateSubscribeRequest,
   ModifySubscribeAutoRenewFlagRequest,
-  DeleteSyncJobResponse,
-  CreateSyncCheckJobRequest,
+  CompleteMigrateJobRequest,
+  MigrateJobInfo,
   ModifySyncJobRequest,
   DescribeRegionConfRequest,
   CompleteMigrateJobResponse,
@@ -90,9 +76,7 @@ import {
   CreateMigrateJobResponse,
   DescribeSubscribeConfRequest,
   ModifySubscribeVipVportResponse,
-  MigrateJobInfo,
   DeleteMigrateJobRequest,
-  DeleteSyncJobRequest,
   ActivateSubscribeResponse,
   CreateSubscribeResponse,
   MigrateOption,
@@ -108,26 +92,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dts.tencentcloudapi.com", "2018-03-30", clientConfig)
-  }
-
-  /**
-   * 删除灾备同步任务 （运行中的同步任务不能删除）。
-   */
-  async DeleteSyncJob(
-    req: DeleteSyncJobRequest,
-    cb?: (error: string, rep: DeleteSyncJobResponse) => void
-  ): Promise<DeleteSyncJobResponse> {
-    return this.request("DeleteSyncJob", req, cb)
-  }
-
-  /**
-   * 查询在迁移平台发起的灾备同步任务
-   */
-  async DescribeSyncJobs(
-    req: DescribeSyncJobsRequest,
-    cb?: (error: string, rep: DescribeSyncJobsResponse) => void
-  ): Promise<DescribeSyncJobsResponse> {
-    return this.request("DescribeSyncJobs", req, cb)
   }
 
   /**
@@ -153,17 +117,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(CreateSyncJob)用于创建灾备同步任务。
-创建同步任务后，可以通过 CreateSyncCheckJob 接口发起校验任务。校验成功后才可以通过 StartSyncJob 接口启动同步任务。
-     */
-  async CreateSyncJob(
-    req: CreateSyncJobRequest,
-    cb?: (error: string, rep: CreateSyncJobResponse) => void
-  ): Promise<CreateSyncJobResponse> {
-    return this.request("CreateSyncJob", req, cb)
-  }
-
-  /**
    * 本接口(ModifySubscribeObjects)用于修改数据订阅通道的订阅规则
    */
   async ModifySubscribeObjects(
@@ -171,16 +124,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySubscribeObjectsResponse) => void
   ): Promise<ModifySubscribeObjectsResponse> {
     return this.request("ModifySubscribeObjects", req, cb)
-  }
-
-  /**
-   * 创建的灾备同步任务在通过 CreateSyncCheckJob 和 DescribeSyncCheckJob 确定校验成功后，可以调用该接口启动同步
-   */
-  async StartSyncJob(
-    req: StartSyncJobRequest,
-    cb?: (error: string, rep: StartSyncJobResponse) => void
-  ): Promise<StartSyncJobResponse> {
-    return this.request("StartSyncJob", req, cb)
   }
 
   /**
@@ -203,16 +146,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void
   ): Promise<DescribeAsyncRequestInfoResponse> {
     return this.request("DescribeAsyncRequestInfo", req, cb)
-  }
-
-  /**
-   * 将灾备升级为主实例，停止从原来所属主实例的同步，断开主备关系。
-   */
-  async SwitchDrToMaster(
-    req: SwitchDrToMasterRequest,
-    cb?: (error: string, rep: SwitchDrToMasterResponse) => void
-  ): Promise<SwitchDrToMasterResponse> {
-    return this.request("SwitchDrToMaster", req, cb)
   }
 
   /**
@@ -334,17 +267,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySubscribeNameResponse) => void
   ): Promise<ModifySubscribeNameResponse> {
     return this.request("ModifySubscribeName", req, cb)
-  }
-
-  /**
-     * 在调用 StartSyncJob 接口启动灾备同步前, 必须调用本接口创建校验, 且校验成功后才能开始同步数据. 校验的结果可以通过 DescribeSyncCheckJob 查看.
-校验成功后才能启动同步.
-     */
-  async CreateSyncCheckJob(
-    req: CreateSyncCheckJobRequest,
-    cb?: (error: string, rep: CreateSyncCheckJobResponse) => void
-  ): Promise<CreateSyncCheckJobResponse> {
-    return this.request("CreateSyncCheckJob", req, cb)
   }
 
   /**

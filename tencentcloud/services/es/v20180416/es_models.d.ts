@@ -501,6 +501,10 @@ export interface CreateInstanceRequest {
       * 可视化节点配置
       */
     WebNodeTypeInfo?: WebNodeTypeInfo;
+    /**
+      * 创建https集群，默认是http
+      */
+    Protocol?: string;
 }
 /**
  * 实例详细信息
@@ -755,6 +759,16 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Jdk: string;
+    /**
+      * 集群网络通讯协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 安全组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityGroups: Array<string>;
 }
 /**
  * DeleteInstance返回参数结构体
@@ -1023,6 +1037,22 @@ export interface UpdateInstanceRequest {
       * 可视化节点配置
       */
     WebNodeTypeInfo?: WebNodeTypeInfo;
+    /**
+      * 切换到新网络架构
+      */
+    SwitchPrivateLink?: string;
+    /**
+      * 启用Cerebro
+      */
+    EnableCerebro?: boolean;
+    /**
+      * Cerebro公网访问状态
+      */
+    CerebroPublicAccess?: string;
+    /**
+      * Cerebro内网访问状态
+      */
+    CerebroPrivateAccess?: string;
 }
 /**
  * ES 词库信息

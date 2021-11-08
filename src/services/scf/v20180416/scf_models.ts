@@ -198,6 +198,17 @@ export interface GetReservedConcurrencyConfigResponse {
 }
 
 /**
+ * HTTP函数支持其他访问协议的参数
+ */
+export interface ProtocolParams {
+  /**
+      * WebSockets协议支持的参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WSParams?: WSParams
+}
+
+/**
  * 别名的版本路由配置
  */
 export interface RoutingConfig {
@@ -830,6 +841,17 @@ export interface ListVersionByFunctionResponse {
 }
 
 /**
+ * HTTP函数通过WebSockets协议访问时的参数
+ */
+export interface WSParams {
+  /**
+      * 空闲超时时间, 单位秒，默认15s。可配置范围1~1800s。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdleTimeOut?: number
+}
+
+/**
  * GetAlias请求参数结构体
  */
 export interface GetAliasRequest {
@@ -1027,6 +1049,11 @@ export interface UpdateFunctionConfigurationRequest {
    * 函数初始化执行超时时间
    */
   InitTimeout?: number
+
+  /**
+   * HTTP函数配置ProtocolType访问协议，当前协议可配置的参数
+   */
+  ProtocolParams?: ProtocolParams
 }
 
 /**
@@ -1802,6 +1829,16 @@ export interface CreateFunctionRequest {
    * 是否开启事件追踪，TRUE 为开启，FALSE为关闭
    */
   TraceEnable?: string
+
+  /**
+   * HTTP函数支持的访问协议。当前支持WebSockets协议，值为WS
+   */
+  ProtocolType?: string
+
+  /**
+   * HTTP函数配置ProtocolType访问协议，当前协议可配置的参数
+   */
+  ProtocolParams?: ProtocolParams
 }
 
 /**
@@ -2469,6 +2506,18 @@ export interface GetFunctionResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TraceEnable: string
+
+  /**
+      * HTTP函数支持的访问协议。当前支持WebSockets协议。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProtocolType: string
+
+  /**
+      * HTTP函数配置ProtocolType访问协议，当前协议配置的参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProtocolParams: ProtocolParams
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

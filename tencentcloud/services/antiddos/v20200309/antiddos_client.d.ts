@@ -97,7 +97,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeListDDoSAI(req: DescribeListDDoSAIRequest, cb?: (error: string, rep: DescribeListDDoSAIResponse) => void): Promise<DescribeListDDoSAIResponse>;
     /**
-     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)
+     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
      */
     DescribeCCTrend(req: DescribeCCTrendRequest, cb?: (error: string, rep: DescribeCCTrendResponse) => void): Promise<DescribeCCTrendResponse>;
     /**

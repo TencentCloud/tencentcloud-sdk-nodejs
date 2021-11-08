@@ -677,13 +677,17 @@ export interface OffsiteFlag {
  */
 export interface GroupIdOfUidInfo {
     /**
-      * 子用户 UID
-      */
-    Uid: number;
-    /**
       * 用户组 ID
       */
     GroupId: number;
+    /**
+      * 子用户 UID
+      */
+    Uid?: number;
+    /**
+      * 子用户 Uin，Uid和Uin至少有一个必填
+      */
+    Uin?: number;
 }
 /**
  * UpdateRoleDescription请求参数结构体

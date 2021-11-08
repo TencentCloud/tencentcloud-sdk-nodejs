@@ -610,7 +610,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云支付Tlinx退款接口
+   * 云支付订单退款接口
    */
   async RefundTlinxOrder(
     req: RefundTlinxOrderRequest,

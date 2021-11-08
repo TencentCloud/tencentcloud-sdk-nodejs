@@ -28,18 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("dts.tencentcloudapi.com", "2018-03-30", clientConfig);
     }
     /**
-     * 删除灾备同步任务 （运行中的同步任务不能删除）。
-     */
-    async DeleteSyncJob(req, cb) {
-        return this.request("DeleteSyncJob", req, cb);
-    }
-    /**
-     * 查询在迁移平台发起的灾备同步任务
-     */
-    async DescribeSyncJobs(req, cb) {
-        return this.request("DescribeSyncJobs", req, cb);
-    }
-    /**
      * 本接口用于配置数据订阅，只有在未配置状态的订阅实例才能调用此接口。
      */
     async ActivateSubscribe(req, cb) {
@@ -54,23 +42,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySyncJob", req, cb);
     }
     /**
-     * 本接口(CreateSyncJob)用于创建灾备同步任务。
-创建同步任务后，可以通过 CreateSyncCheckJob 接口发起校验任务。校验成功后才可以通过 StartSyncJob 接口启动同步任务。
-     */
-    async CreateSyncJob(req, cb) {
-        return this.request("CreateSyncJob", req, cb);
-    }
-    /**
      * 本接口(ModifySubscribeObjects)用于修改数据订阅通道的订阅规则
      */
     async ModifySubscribeObjects(req, cb) {
         return this.request("ModifySubscribeObjects", req, cb);
-    }
-    /**
-     * 创建的灾备同步任务在通过 CreateSyncCheckJob 和 DescribeSyncCheckJob 确定校验成功后，可以调用该接口启动同步
-     */
-    async StartSyncJob(req, cb) {
-        return this.request("StartSyncJob", req, cb);
     }
     /**
      * 本接口用于创建校验后,获取校验的结果. 能查询到当前校验的状态和进度.
@@ -85,12 +60,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAsyncRequestInfo(req, cb) {
         return this.request("DescribeAsyncRequestInfo", req, cb);
-    }
-    /**
-     * 将灾备升级为主实例，停止从原来所属主实例的同步，断开主备关系。
-     */
-    async SwitchDrToMaster(req, cb) {
-        return this.request("SwitchDrToMaster", req, cb);
     }
     /**
      * 修改订阅实例自动续费标识
@@ -168,13 +137,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySubscribeName(req, cb) {
         return this.request("ModifySubscribeName", req, cb);
-    }
-    /**
-     * 在调用 StartSyncJob 接口启动灾备同步前, 必须调用本接口创建校验, 且校验成功后才能开始同步数据. 校验的结果可以通过 DescribeSyncCheckJob 查看.
-校验成功后才能启动同步.
-     */
-    async CreateSyncCheckJob(req, cb) {
-        return this.request("CreateSyncCheckJob", req, cb);
     }
     /**
      * 本接口(CreateSubscribe)用于创建一个数据订阅实例。

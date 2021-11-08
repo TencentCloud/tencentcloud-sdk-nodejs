@@ -1,21 +1,4 @@
 /**
- * DescribeSyncJobs返回参数结构体
- */
-export interface DescribeSyncJobsResponse {
-    /**
-      * 任务数目
-      */
-    TotalCount?: number;
-    /**
-      * 任务详情数组
-      */
-    JobList?: Array<SyncJobInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeMigrateJobs返回参数结构体
  */
 export interface DescribeMigrateJobsResponse {
@@ -105,35 +88,9 @@ export interface ModifySubscribeVipVportRequest {
     DstPort?: number;
 }
 /**
- * 灾备同步的实例信息，记录主实例或灾备实例的信息
- */
-export interface SyncInstanceInfo {
-    /**
-      * 地域英文名，如：ap-guangzhou
-      */
-    Region: string;
-    /**
-      * 实例短ID
-      */
-    InstanceId: string;
-}
-/**
  * ModifySubscribeName返回参数结构体
  */
 export interface ModifySubscribeNameResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateSyncJob返回参数结构体
- */
-export interface CreateSyncJobResponse {
-    /**
-      * 灾备同步任务ID
-      */
-    JobId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -169,28 +126,6 @@ export interface ModifySubscribeObjectsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * SwitchDrToMaster请求参数结构体
- */
-export interface SwitchDrToMasterRequest {
-    /**
-      * 灾备实例的信息
-      */
-    DstInfo: SyncInstanceInfo;
-    /**
-      * 数据库的类型  （如 mysql）
-      */
-    DatabaseType: string;
-}
-/**
- * StartSyncJob请求参数结构体
- */
-export interface StartSyncJobRequest {
-    /**
-      * 灾备同步任务ID
-      */
-    JobId: string;
 }
 /**
  * CreateMigrateJob请求参数结构体
@@ -242,108 +177,34 @@ Schema:s1}]
     DatabaseInfo?: string;
 }
 /**
- * 订阅实例信息
+ * 数据订阅地域售卖信息
  */
-export interface SubscribeInfo {
+export interface SubscribeRegionConf {
     /**
-      * 数据订阅的实例ID
-      */
-    SubscribeId?: string;
-    /**
-      * 数据订阅实例的名称
-      */
-    SubscribeName?: string;
-    /**
-      * 数据订阅实例绑定的通道ID
-      */
-    ChannelId?: string;
-    /**
-      * 数据订阅绑定实例对应的产品名称
-      */
-    Product?: string;
-    /**
-      * 数据订阅实例绑定的数据库实例ID
-      */
-    InstanceId?: string;
-    /**
-      * 数据订阅实例绑定的数据库实例状态
-      */
-    InstanceStatus?: string;
-    /**
-      * 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置
-      */
-    SubsStatus?: string;
-    /**
-      * 上次修改时间
-      */
-    ModifyTime?: string;
-    /**
-      * 创建时间
-      */
-    CreateTime?: string;
-    /**
-      * 隔离时间
-      */
-    IsolateTime?: string;
-    /**
-      * 到期时间
-      */
-    ExpireTime?: string;
-    /**
-      * 下线时间
-      */
-    OfflineTime?: string;
-    /**
-      * 最近一次修改的消费时间起点，如果从未修改则为零值
-      */
-    ConsumeStartTime?: string;
-    /**
-      * 数据订阅实例所属地域
-      */
-    Region?: string;
-    /**
-      * 计费方式，0 - 包年包月，1 - 按量计费
-      */
-    PayType?: number;
-    /**
-      * 数据订阅实例的Vip
-      */
-    Vip?: string;
-    /**
-      * 数据订阅实例的Vport
-      */
-    Vport?: number;
-    /**
-      * 数据订阅实例Vip所在VPC的唯一ID
-      */
-    UniqVpcId?: string;
-    /**
-      * 数据订阅实例Vip所在子网的唯一ID
-      */
-    UniqSubnetId?: string;
-    /**
-      * 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中，offline - 已下线
-      */
-    Status?: string;
-    /**
-      * SDK最后一条确认消息的时间戳，如果SDK一直消费，也可以作为SDK当前消费时间点
-      */
-    SdkConsumedTime?: string;
-    /**
-      * 标签
+      * 地域名称，如广州
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<TagItem>;
+    RegionName: string;
     /**
-      * 自动续费标识。0-不自动续费，1-自动续费
+      * 地区标识，如ap-guangzhou
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AutoRenewFlag?: number;
+    Region: string;
     /**
-      * 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅
+      * 地域名称，如华南地区
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubscribeVersion?: string;
+    Area: string;
+    /**
+      * 是否为默认地域，0 - 不是，1 - 是的
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsDefaultRegion: number;
+    /**
+      * 当前地域的售卖情况，1 - 正常， 2-灰度，3 - 停售
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
 }
 /**
  * ModifySubscribeName请求参数结构体
@@ -357,71 +218,6 @@ export interface ModifySubscribeNameRequest {
       * 数据订阅实例的名称，长度限制为[1,60]
       */
     SubscribeName: string;
-}
-/**
- * 灾备同步任务信息
- */
-export interface SyncJobInfo {
-    /**
-      * 灾备任务id
-      */
-    JobId: string;
-    /**
-      * 灾备任务名
-      */
-    JobName: string;
-    /**
-      * 任务同步
-      */
-    SyncOption: SyncOption;
-    /**
-      * 源接入类型
-      */
-    SrcAccessType: string;
-    /**
-      * 源数据类型
-      */
-    SrcDatabaseType: string;
-    /**
-      * 源实例信息
-      */
-    SrcInfo: SyncInstanceInfo;
-    /**
-      * 灾备接入类型
-      */
-    DstAccessType: string;
-    /**
-      * 灾备数据类型
-      */
-    DstDatabaseType: string;
-    /**
-      * 灾备实例信息
-      */
-    DstInfo: SyncInstanceInfo;
-    /**
-      * 任务信息
-      */
-    Detail: SyncDetailInfo;
-    /**
-      * 任务状态
-      */
-    Status: number;
-    /**
-      * 迁移库表
-      */
-    DatabaseInfo: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: string;
-    /**
-      * 开始时间
-      */
-    StartTime: string;
-    /**
-      * 结束时间
-      */
-    EndTime: string;
 }
 /**
  * ModifySubscribeConsumeTime返回参数结构体
@@ -831,36 +627,6 @@ export interface DescribeMigrateCheckJobResponse {
     RequestId?: string;
 }
 /**
- * 数据订阅地域售卖信息
- */
-export interface SubscribeRegionConf {
-    /**
-      * 地域名称，如广州
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RegionName: string;
-    /**
-      * 地区标识，如ap-guangzhou
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Region: string;
-    /**
-      * 地域名称，如华南地区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Area: string;
-    /**
-      * 是否为默认地域，0 - 不是，1 - 是的
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsDefaultRegion: number;
-    /**
-      * 当前地域的售卖情况，1 - 正常， 2-灰度，3 - 停售
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: number;
-}
-/**
  * ActivateSubscribe请求参数结构体
  */
 export interface ActivateSubscribeRequest {
@@ -965,15 +731,6 @@ export interface ResetSubscribeResponse {
     RequestId?: string;
 }
 /**
- * StartSyncJob返回参数结构体
- */
-export interface StartSyncJobResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeSubscribes返回参数结构体
  */
 export interface DescribeSubscribesResponse {
@@ -991,34 +748,17 @@ export interface DescribeSubscribesResponse {
     RequestId?: string;
 }
 /**
- * 灾备任务校验步骤
+ * ModifySubscribeConsumeTime请求参数结构体
  */
-export interface SyncCheckStepInfo {
+export interface ModifySubscribeConsumeTimeRequest {
     /**
-      * 步骤序列
+      * 数据订阅实例的ID
       */
-    StepNo: number;
+    SubscribeId: string;
     /**
-      * 步骤展现名称
+      * 消费时间起点，也即是指定订阅数据的时间起点，时间格式如：Y-m-d h:m:s，取值范围为过去24小时之内
       */
-    StepName: string;
-    /**
-      * 步骤执行结果代码
-      */
-    StepCode: number;
-    /**
-      * 步骤执行结果提示
-      */
-    StepMessage: string;
-}
-/**
- * CreateSyncCheckJob返回参数结构体
- */
-export interface CreateSyncCheckJobResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    ConsumeStartTime: string;
 }
 /**
  * StopMigrateJob请求参数结构体
@@ -1082,17 +822,108 @@ export interface DescribeAsyncRequestInfoResponse {
     RequestId?: string;
 }
 /**
- * CompleteMigrateJob请求参数结构体
+ * 订阅实例信息
  */
-export interface CompleteMigrateJobRequest {
+export interface SubscribeInfo {
     /**
-      * 数据迁移任务ID
+      * 数据订阅的实例ID
       */
-    JobId: string;
+    SubscribeId?: string;
     /**
-      * 完成任务的方式,仅支持旧版MySQL迁移任务。waitForSync-等待主从差距为0才停止,immediately-立即完成，不会等待主从差距一致。默认为waitForSync
+      * 数据订阅实例的名称
       */
-    CompleteMode?: string;
+    SubscribeName?: string;
+    /**
+      * 数据订阅实例绑定的通道ID
+      */
+    ChannelId?: string;
+    /**
+      * 数据订阅绑定实例对应的产品名称
+      */
+    Product?: string;
+    /**
+      * 数据订阅实例绑定的数据库实例ID
+      */
+    InstanceId?: string;
+    /**
+      * 数据订阅实例绑定的数据库实例状态
+      */
+    InstanceStatus?: string;
+    /**
+      * 数据订阅实例的配置状态，unconfigure - 未配置， configuring - 配置中，configured - 已配置
+      */
+    SubsStatus?: string;
+    /**
+      * 上次修改时间
+      */
+    ModifyTime?: string;
+    /**
+      * 创建时间
+      */
+    CreateTime?: string;
+    /**
+      * 隔离时间
+      */
+    IsolateTime?: string;
+    /**
+      * 到期时间
+      */
+    ExpireTime?: string;
+    /**
+      * 下线时间
+      */
+    OfflineTime?: string;
+    /**
+      * 最近一次修改的消费时间起点，如果从未修改则为零值
+      */
+    ConsumeStartTime?: string;
+    /**
+      * 数据订阅实例所属地域
+      */
+    Region?: string;
+    /**
+      * 计费方式，0 - 包年包月，1 - 按量计费
+      */
+    PayType?: number;
+    /**
+      * 数据订阅实例的Vip
+      */
+    Vip?: string;
+    /**
+      * 数据订阅实例的Vport
+      */
+    Vport?: number;
+    /**
+      * 数据订阅实例Vip所在VPC的唯一ID
+      */
+    UniqVpcId?: string;
+    /**
+      * 数据订阅实例Vip所在子网的唯一ID
+      */
+    UniqSubnetId?: string;
+    /**
+      * 数据订阅实例的状态，creating - 创建中，normal - 正常运行，isolating - 隔离中，isolated - 已隔离，offlining - 下线中，offline - 已下线
+      */
+    Status?: string;
+    /**
+      * SDK最后一条确认消息的时间戳，如果SDK一直消费，也可以作为SDK当前消费时间点
+      */
+    SdkConsumedTime?: string;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<TagItem>;
+    /**
+      * 自动续费标识。0-不自动续费，1-自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoRenewFlag?: number;
+    /**
+      * 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubscribeVersion?: string;
 }
 /**
  * ResetSubscribe请求参数结构体
@@ -1131,30 +962,25 @@ export interface TagFilter {
     TagValue?: Array<string>;
 }
 /**
- * ModifySubscribeConsumeTime请求参数结构体
+ * 灾备任务校验步骤
  */
-export interface ModifySubscribeConsumeTimeRequest {
+export interface SyncCheckStepInfo {
     /**
-      * 数据订阅实例的ID
+      * 步骤序列
       */
-    SubscribeId: string;
+    StepNo: number;
     /**
-      * 消费时间起点，也即是指定订阅数据的时间起点，时间格式如：Y-m-d h:m:s，取值范围为过去24小时之内
+      * 步骤展现名称
       */
-    ConsumeStartTime: string;
-}
-/**
- * SwitchDrToMaster返回参数结构体
- */
-export interface SwitchDrToMasterResponse {
+    StepName: string;
     /**
-      * 后台异步任务请求id
+      * 步骤执行结果代码
       */
-    AsyncRequestId?: string;
+    StepCode: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 步骤执行结果提示
       */
-    RequestId?: string;
+    StepMessage: string;
 }
 /**
  * ModifyMigrateJob返回参数结构体
@@ -1164,78 +990,6 @@ export interface ModifyMigrateJobResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * CreateSyncJob请求参数结构体
- */
-export interface CreateSyncJobRequest {
-    /**
-      * 灾备同步任务名
-      */
-    JobName: string;
-    /**
-      * 灾备同步任务配置选项
-      */
-    SyncOption: SyncOption;
-    /**
-      * 源实例数据库类型，目前仅包括：mysql
-      */
-    SrcDatabaseType: string;
-    /**
-      * 源实例接入类型，目前仅包括：cdb(云上cdb实例)
-      */
-    SrcAccessType: string;
-    /**
-      * 源实例信息
-      */
-    SrcInfo: SyncInstanceInfo;
-    /**
-      * 目标实例数据库类型，目前仅包括：mysql
-      */
-    DstDatabaseType: string;
-    /**
-      * 目标实例接入类型，目前仅包括：cdb(云上cdb实例)
-      */
-    DstAccessType: string;
-    /**
-      * 目标实例信息
-      */
-    DstInfo: SyncInstanceInfo;
-    /**
-      * 需要同步的源数据库表信息，用json格式的字符串描述。
-对于database-table两级结构的数据库：
-[{Database:db1,Table:[table1,table2]},{Database:db2}]
-      */
-    DatabaseInfo?: string;
-}
-/**
- * DescribeSyncJobs请求参数结构体
- */
-export interface DescribeSyncJobsRequest {
-    /**
-      * 灾备同步任务ID
-      */
-    JobId?: string;
-    /**
-      * 灾备同步任务名
-      */
-    JobName?: string;
-    /**
-      * 排序字段，可以取值为JobId、Status、JobName、CreateTime
-      */
-    Order?: string;
-    /**
-      * 排序方式，升序为ASC，降序为DESC
-      */
-    OrderSeq?: string;
-    /**
-      * 偏移量，默认为0
-      */
-    Offset?: number;
-    /**
-      * 返回实例数量，默认20，有效区间[1,100]
-      */
-    Limit?: number;
 }
 /**
  * DescribeMigrateJobs请求参数结构体
@@ -1269,39 +1023,6 @@ export interface DescribeMigrateJobsRequest {
       * 标签过滤条件
       */
     TagFilters?: Array<TagFilter>;
-}
-/**
- * 描述详细同步任务过程
- */
-export interface SyncDetailInfo {
-    /**
-      * 总步骤数
-      */
-    StepAll: number;
-    /**
-      * 当前步骤
-      */
-    StepNow: number;
-    /**
-      * 总进度
-      */
-    Progress: string;
-    /**
-      * 当前步骤进度
-      */
-    CurrentStepProgress: string;
-    /**
-      * 主从差距，MB
-      */
-    MasterSlaveDistance: number;
-    /**
-      * 主从差距，秒
-      */
-    SecondsBehindMaster: number;
-    /**
-      * 步骤信息
-      */
-    StepInfo: Array<SyncStepDetailInfo>;
 }
 /**
  * ModifySubscribeAutoRenewFlag返回参数结构体
@@ -1352,27 +1073,6 @@ export interface OfflineIsolatedSubscribeResponse {
     RequestId?: string;
 }
 /**
- * 同步任务进度
- */
-export interface SyncStepDetailInfo {
-    /**
-      * 步骤编号
-      */
-    StepNo: number;
-    /**
-      * 步骤名
-      */
-    StepName: string;
-    /**
-      * 能否中止
-      */
-    CanStop: number;
-    /**
-      * 步骤号
-      */
-    StepId: number;
-}
-/**
  * IsolateSubscribe请求参数结构体
  */
 export interface IsolateSubscribeRequest {
@@ -1395,22 +1095,91 @@ export interface ModifySubscribeAutoRenewFlagRequest {
     AutoRenewFlag: number;
 }
 /**
- * DeleteSyncJob返回参数结构体
+ * CompleteMigrateJob请求参数结构体
  */
-export interface DeleteSyncJobResponse {
+export interface CompleteMigrateJobRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateSyncCheckJob请求参数结构体
- */
-export interface CreateSyncCheckJobRequest {
-    /**
-      * 灾备同步任务ID
+      * 数据迁移任务ID
       */
     JobId: string;
+    /**
+      * 完成任务的方式,仅支持旧版MySQL迁移任务。waitForSync-等待主从差距为0才停止,immediately-立即完成，不会等待主从差距一致。默认为waitForSync
+      */
+    CompleteMode?: string;
+}
+/**
+ * 迁移任务详情
+ */
+export interface MigrateJobInfo {
+    /**
+      * 数据迁移任务ID
+      */
+    JobId: string;
+    /**
+      * 数据迁移任务名称
+      */
+    JobName: string;
+    /**
+      * 迁移任务配置选项
+      */
+    MigrateOption: MigrateOption;
+    /**
+      * 源实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona
+      */
+    SrcDatabaseType: string;
+    /**
+      * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),cdb(腾讯云数据库实例),ccn(云联网实例)
+      */
+    SrcAccessType: string;
+    /**
+      * 源实例信息，具体内容跟迁移任务类型相关
+      */
+    SrcInfo: SrcInfo;
+    /**
+      * 目标实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona
+      */
+    DstDatabaseType: string;
+    /**
+      * 目标实例接入类型，目前支持：cdb(腾讯云数据库实例)
+      */
+    DstAccessType: string;
+    /**
+      * 目标实例信息
+      */
+    DstInfo: DstInfo;
+    /**
+      * 需要迁移的源数据库表信息，如果需要迁移的是整个实例，该字段为[]
+      */
+    DatabaseInfo: string;
+    /**
+      * 任务创建(提交)时间
+      */
+    CreateTime: string;
+    /**
+      * 任务开始执行时间
+      */
+    StartTime: string;
+    /**
+      * 任务执行结束时间
+      */
+    EndTime: string;
+    /**
+      * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）
+      */
+    Status: number;
+    /**
+      * 任务详情
+      */
+    Detail: MigrateDetailInfo;
+    /**
+      * 任务错误信息提示，当任务发生错误时，不为null或者空值
+      */
+    ErrorInfo: Array<ErrorInfo>;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<TagItem>;
 }
 /**
  * ModifySyncJob请求参数结构体
@@ -1509,94 +1278,11 @@ export interface ModifySubscribeVipVportResponse {
     RequestId?: string;
 }
 /**
- * 迁移任务详情
- */
-export interface MigrateJobInfo {
-    /**
-      * 数据迁移任务ID
-      */
-    JobId: string;
-    /**
-      * 数据迁移任务名称
-      */
-    JobName: string;
-    /**
-      * 迁移任务配置选项
-      */
-    MigrateOption: MigrateOption;
-    /**
-      * 源实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona
-      */
-    SrcDatabaseType: string;
-    /**
-      * 源实例接入类型，值包括：extranet(外网),cvm(cvm自建实例),dcg(专线接入的实例),vpncloud(云vpn接入的实例),cdb(腾讯云数据库实例),ccn(云联网实例)
-      */
-    SrcAccessType: string;
-    /**
-      * 源实例信息，具体内容跟迁移任务类型相关
-      */
-    SrcInfo: SrcInfo;
-    /**
-      * 目标实例数据库类型:mysql，redis，mongodb，postgresql，mariadb，percona
-      */
-    DstDatabaseType: string;
-    /**
-      * 目标实例接入类型，目前支持：cdb(腾讯云数据库实例)
-      */
-    DstAccessType: string;
-    /**
-      * 目标实例信息
-      */
-    DstInfo: DstInfo;
-    /**
-      * 需要迁移的源数据库表信息，如果需要迁移的是整个实例，该字段为[]
-      */
-    DatabaseInfo: string;
-    /**
-      * 任务创建(提交)时间
-      */
-    CreateTime: string;
-    /**
-      * 任务开始执行时间
-      */
-    StartTime: string;
-    /**
-      * 任务执行结束时间
-      */
-    EndTime: string;
-    /**
-      * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）
-      */
-    Status: number;
-    /**
-      * 任务详情
-      */
-    Detail: MigrateDetailInfo;
-    /**
-      * 任务错误信息提示，当任务发生错误时，不为null或者空值
-      */
-    ErrorInfo: Array<ErrorInfo>;
-    /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tags: Array<TagItem>;
-}
-/**
  * DeleteMigrateJob请求参数结构体
  */
 export interface DeleteMigrateJobRequest {
     /**
       * 数据迁移任务ID
-      */
-    JobId: string;
-}
-/**
- * DeleteSyncJob请求参数结构体
- */
-export interface DeleteSyncJobRequest {
-    /**
-      * 待删除的灾备同步任务ID
       */
     JobId: string;
 }

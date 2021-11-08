@@ -1,20 +1,12 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSyncJobsResponse, DescribeMigrateJobsResponse, DeleteMigrateJobResponse, CreateMigrateCheckJobRequest, ModifySubscribeVipVportRequest, ModifySubscribeNameResponse, CreateSyncJobResponse, DescribeMigrateCheckJobRequest, IsolateSubscribeResponse, ModifySubscribeObjectsResponse, SwitchDrToMasterRequest, StartSyncJobRequest, CreateMigrateJobRequest, ModifySubscribeNameRequest, ModifySubscribeConsumeTimeResponse, DescribeSubscribeConfResponse, DescribeAsyncRequestInfoRequest, ModifyMigrateJobRequest, CreateSubscribeRequest, CreateMigrateCheckJobResponse, ModifySubscribeObjectsRequest, DescribeMigrateCheckJobResponse, ActivateSubscribeRequest, OfflineIsolatedSubscribeRequest, DescribeSubscribesRequest, ResetSubscribeResponse, StartSyncJobResponse, DescribeSubscribesResponse, CreateSyncCheckJobResponse, StopMigrateJobRequest, DescribeSyncCheckJobRequest, DescribeRegionConfResponse, ModifySyncJobResponse, DescribeAsyncRequestInfoResponse, CompleteMigrateJobRequest, ResetSubscribeRequest, ModifySubscribeConsumeTimeRequest, SwitchDrToMasterResponse, ModifyMigrateJobResponse, CreateSyncJobRequest, DescribeSyncJobsRequest, DescribeMigrateJobsRequest, ModifySubscribeAutoRenewFlagResponse, StopMigrateJobResponse, OfflineIsolatedSubscribeResponse, IsolateSubscribeRequest, ModifySubscribeAutoRenewFlagRequest, DeleteSyncJobResponse, CreateSyncCheckJobRequest, ModifySyncJobRequest, DescribeRegionConfRequest, CompleteMigrateJobResponse, StartMigrateJobResponse, CreateMigrateJobResponse, DescribeSubscribeConfRequest, ModifySubscribeVipVportResponse, DeleteMigrateJobRequest, DeleteSyncJobRequest, ActivateSubscribeResponse, CreateSubscribeResponse, DescribeSyncCheckJobResponse, StartMigrateJobRequest } from "./dts_models";
+import { DescribeMigrateJobsResponse, DeleteMigrateJobResponse, CreateMigrateCheckJobRequest, ModifySubscribeVipVportRequest, ModifySubscribeNameResponse, DescribeMigrateCheckJobRequest, IsolateSubscribeResponse, ModifySubscribeObjectsResponse, CreateMigrateJobRequest, ModifySubscribeNameRequest, ModifySubscribeConsumeTimeResponse, DescribeSubscribeConfResponse, DescribeAsyncRequestInfoRequest, ModifyMigrateJobRequest, CreateSubscribeRequest, CreateMigrateCheckJobResponse, ModifySubscribeObjectsRequest, DescribeMigrateCheckJobResponse, ActivateSubscribeRequest, OfflineIsolatedSubscribeRequest, DescribeSubscribesRequest, ResetSubscribeResponse, DescribeSubscribesResponse, ModifySubscribeConsumeTimeRequest, StopMigrateJobRequest, DescribeSyncCheckJobRequest, DescribeRegionConfResponse, ModifySyncJobResponse, DescribeAsyncRequestInfoResponse, ResetSubscribeRequest, ModifyMigrateJobResponse, DescribeMigrateJobsRequest, ModifySubscribeAutoRenewFlagResponse, StopMigrateJobResponse, OfflineIsolatedSubscribeResponse, IsolateSubscribeRequest, ModifySubscribeAutoRenewFlagRequest, CompleteMigrateJobRequest, ModifySyncJobRequest, DescribeRegionConfRequest, CompleteMigrateJobResponse, StartMigrateJobResponse, CreateMigrateJobResponse, DescribeSubscribeConfRequest, ModifySubscribeVipVportResponse, DeleteMigrateJobRequest, ActivateSubscribeResponse, CreateSubscribeResponse, DescribeSyncCheckJobResponse, StartMigrateJobRequest } from "./dts_models";
 /**
  * dts client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
-    /**
-     * 删除灾备同步任务 （运行中的同步任务不能删除）。
-     */
-    DeleteSyncJob(req: DeleteSyncJobRequest, cb?: (error: string, rep: DeleteSyncJobResponse) => void): Promise<DeleteSyncJobResponse>;
-    /**
-     * 查询在迁移平台发起的灾备同步任务
-     */
-    DescribeSyncJobs(req: DescribeSyncJobsRequest, cb?: (error: string, rep: DescribeSyncJobsResponse) => void): Promise<DescribeSyncJobsResponse>;
     /**
      * 本接口用于配置数据订阅，只有在未配置状态的订阅实例才能调用此接口。
      */
@@ -26,18 +18,9 @@ export declare class Client extends AbstractClient {
      */
     ModifySyncJob(req: ModifySyncJobRequest, cb?: (error: string, rep: ModifySyncJobResponse) => void): Promise<ModifySyncJobResponse>;
     /**
-     * 本接口(CreateSyncJob)用于创建灾备同步任务。
-创建同步任务后，可以通过 CreateSyncCheckJob 接口发起校验任务。校验成功后才可以通过 StartSyncJob 接口启动同步任务。
-     */
-    CreateSyncJob(req: CreateSyncJobRequest, cb?: (error: string, rep: CreateSyncJobResponse) => void): Promise<CreateSyncJobResponse>;
-    /**
      * 本接口(ModifySubscribeObjects)用于修改数据订阅通道的订阅规则
      */
     ModifySubscribeObjects(req: ModifySubscribeObjectsRequest, cb?: (error: string, rep: ModifySubscribeObjectsResponse) => void): Promise<ModifySubscribeObjectsResponse>;
-    /**
-     * 创建的灾备同步任务在通过 CreateSyncCheckJob 和 DescribeSyncCheckJob 确定校验成功后，可以调用该接口启动同步
-     */
-    StartSyncJob(req: StartSyncJobRequest, cb?: (error: string, rep: StartSyncJobResponse) => void): Promise<StartSyncJobResponse>;
     /**
      * 本接口用于创建校验后,获取校验的结果. 能查询到当前校验的状态和进度.
 若通过校验, 则可调用'StartMigrateJob' 开始迁移.
@@ -48,10 +31,6 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeAsyncRequestInfo）用于查询任务执行结果
      */
     DescribeAsyncRequestInfo(req: DescribeAsyncRequestInfoRequest, cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void): Promise<DescribeAsyncRequestInfoResponse>;
-    /**
-     * 将灾备升级为主实例，停止从原来所属主实例的同步，断开主备关系。
-     */
-    SwitchDrToMaster(req: SwitchDrToMasterRequest, cb?: (error: string, rep: SwitchDrToMasterResponse) => void): Promise<SwitchDrToMasterResponse>;
     /**
      * 修改订阅实例自动续费标识
      */
@@ -107,11 +86,6 @@ export declare class Client extends AbstractClient {
      * 本接口(ModifySubscribeName)用于修改数据订阅实例的名称
      */
     ModifySubscribeName(req: ModifySubscribeNameRequest, cb?: (error: string, rep: ModifySubscribeNameResponse) => void): Promise<ModifySubscribeNameResponse>;
-    /**
-     * 在调用 StartSyncJob 接口启动灾备同步前, 必须调用本接口创建校验, 且校验成功后才能开始同步数据. 校验的结果可以通过 DescribeSyncCheckJob 查看.
-校验成功后才能启动同步.
-     */
-    CreateSyncCheckJob(req: CreateSyncCheckJobRequest, cb?: (error: string, rep: CreateSyncCheckJobResponse) => void): Promise<CreateSyncCheckJobResponse>;
     /**
      * 本接口(CreateSubscribe)用于创建一个数据订阅实例。
      */

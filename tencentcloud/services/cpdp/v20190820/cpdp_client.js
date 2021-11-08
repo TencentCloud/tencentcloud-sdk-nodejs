@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TransferSinglePay", req, cb);
     }
     /**
-     * 云支付Tlinx退款接口
+     * 云支付订单退款接口
      */
     async RefundTlinxOrder(req, cb) {
         return this.request("RefundTlinxOrder", req, cb);

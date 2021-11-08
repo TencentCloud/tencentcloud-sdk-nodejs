@@ -161,7 +161,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListDDoSAI", req, cb);
     }
     /**
-     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)
+     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
      */
     async DescribeCCTrend(req, cb) {
         return this.request("DescribeCCTrend", req, cb);

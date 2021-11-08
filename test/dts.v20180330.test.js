@@ -18,26 +18,6 @@ const client = new tencentcloud.dts.v20180330.Client({
 })
 describe("dts.v20180330.test.js", function () {
 
-it("dts.v20180330.DeleteSyncJob", async function () {
-    try {
-       const data = await client.DeleteSyncJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dts.v20180330.DescribeSyncJobs", async function () {
-    try {
-       const data = await client.DescribeSyncJobs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dts.v20180330.ActivateSubscribe", async function () {
     try {
        const data = await client.ActivateSubscribe({})
@@ -58,29 +38,9 @@ it("dts.v20180330.ModifySyncJob", async function () {
     }
 })
 
-it("dts.v20180330.CreateSyncJob", async function () {
-    try {
-       const data = await client.CreateSyncJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dts.v20180330.ModifySubscribeObjects", async function () {
     try {
        const data = await client.ModifySubscribeObjects({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dts.v20180330.StartSyncJob", async function () {
-    try {
-       const data = await client.StartSyncJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,16 +61,6 @@ it("dts.v20180330.DescribeMigrateCheckJob", async function () {
 it("dts.v20180330.DescribeAsyncRequestInfo", async function () {
     try {
        const data = await client.DescribeAsyncRequestInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dts.v20180330.SwitchDrToMaster", async function () {
-    try {
-       const data = await client.SwitchDrToMaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,16 +171,6 @@ it("dts.v20180330.ModifySubscribeConsumeTime", async function () {
 it("dts.v20180330.ModifySubscribeName", async function () {
     try {
        const data = await client.ModifySubscribeName({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dts.v20180330.CreateSyncCheckJob", async function () {
-    try {
-       const data = await client.CreateSyncCheckJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

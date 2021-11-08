@@ -740,6 +740,12 @@ export interface UsageDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Date: string
+
+  /**
+      * 渠道侧合作企业名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyOrganizationName: string
 }
 
 /**

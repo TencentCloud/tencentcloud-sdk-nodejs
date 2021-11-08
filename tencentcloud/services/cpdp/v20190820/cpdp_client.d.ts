@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     TransferSinglePay(req: TransferSinglePayRequest, cb?: (error: string, rep: TransferSinglePayResponse) => void): Promise<TransferSinglePayResponse>;
     /**
-     * 云支付Tlinx退款接口
+     * 云支付订单退款接口
      */
     RefundTlinxOrder(req: RefundTlinxOrderRequest, cb?: (error: string, rep: RefundTlinxOrderResponse) => void): Promise<RefundTlinxOrderResponse>;
     /**
