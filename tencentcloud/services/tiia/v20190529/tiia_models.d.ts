@@ -513,6 +513,10 @@ export interface DetectProductBetaRequest {
 与ImageUrl同时存在时优先使用ImageUrl字段。
       */
     ImageBase64?: string;
+    /**
+      * 是否需要百科信息 1：是，0: 否，默认是0
+      */
+    NeedLemma?: number;
 }
 /**
  * DetectMisbehavior返回参数结构体

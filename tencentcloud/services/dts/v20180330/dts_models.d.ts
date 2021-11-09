@@ -16,37 +16,30 @@ export interface DescribeMigrateJobsResponse {
     RequestId?: string;
 }
 /**
- * 描述详细迁移过程
+ * 迁移中的步骤信息
  */
-export interface MigrateDetailInfo {
+export interface MigrateStepDetailInfo {
     /**
-      * 总步骤数
+      * 步骤序列
       */
-    StepAll: number;
+    StepNo: number;
     /**
-      * 当前步骤
+      * 步骤展现名称
       */
-    StepNow: number;
+    StepName: string;
     /**
-      * 总进度,如："10"
+      * 步骤英文标识
       */
-    Progress: string;
+    StepId: string;
     /**
-      * 当前步骤进度,如:"1"
+      * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
       */
-    CurrentStepProgress: string;
+    Status: number;
     /**
-      * 主从差距，MB；在增量同步阶段有效，目前支持产品为：redis和mysql
+      * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    MasterSlaveDistance: number;
-    /**
-      * 主从差距，秒；在增量同步阶段有效，目前支持产品为：mysql
-      */
-    SecondsBehindMaster: number;
-    /**
-      * 步骤信息
-      */
-    StepInfo: Array<MigrateStepDetailInfo>;
+    StartTime: string;
 }
 /**
  * DeleteMigrateJob返回参数结构体
@@ -555,32 +548,6 @@ export interface CreateMigrateCheckJobResponse {
     RequestId?: string;
 }
 /**
- * 迁移中的步骤信息
- */
-export interface MigrateStepDetailInfo {
-    /**
-      * 步骤序列
-      */
-    StepNo: number;
-    /**
-      * 步骤展现名称
-      */
-    StepName: string;
-    /**
-      * 步骤英文标识
-      */
-    StepId: string;
-    /**
-      * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
-      */
-    Status: number;
-    /**
-      * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTime: string;
-}
-/**
  * ModifySubscribeObjects请求参数结构体
  */
 export interface ModifySubscribeObjectsRequest {
@@ -770,13 +737,37 @@ export interface StopMigrateJobRequest {
     JobId: string;
 }
 /**
- * DescribeSyncCheckJob请求参数结构体
+ * 描述详细迁移过程
  */
-export interface DescribeSyncCheckJobRequest {
+export interface MigrateDetailInfo {
     /**
-      * 要查询的灾备同步任务ID
+      * 总步骤数
       */
-    JobId: string;
+    StepAll: number;
+    /**
+      * 当前步骤
+      */
+    StepNow: number;
+    /**
+      * 总进度,如："10"
+      */
+    Progress: string;
+    /**
+      * 当前步骤进度,如:"1"
+      */
+    CurrentStepProgress: string;
+    /**
+      * 主从差距，MB；在增量同步阶段有效，目前支持产品为：redis和mysql
+      */
+    MasterSlaveDistance: number;
+    /**
+      * 主从差距，秒；在增量同步阶段有效，目前支持产品为：mysql
+      */
+    SecondsBehindMaster: number;
+    /**
+      * 步骤信息
+      */
+    StepInfo: Array<MigrateStepDetailInfo>;
 }
 /**
  * DescribeRegionConf返回参数结构体
@@ -790,15 +781,6 @@ export interface DescribeRegionConfResponse {
       * 可售卖地域详情
       */
     Items?: Array<SubscribeRegionConf>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ModifySyncJob返回参数结构体
- */
-export interface ModifySyncJobResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -962,27 +944,6 @@ export interface TagFilter {
     TagValue?: Array<string>;
 }
 /**
- * 灾备任务校验步骤
- */
-export interface SyncCheckStepInfo {
-    /**
-      * 步骤序列
-      */
-    StepNo: number;
-    /**
-      * 步骤展现名称
-      */
-    StepName: string;
-    /**
-      * 步骤执行结果代码
-      */
-    StepCode: number;
-    /**
-      * 步骤执行结果提示
-      */
-    StepMessage: string;
-}
-/**
  * ModifyMigrateJob返回参数结构体
  */
 export interface ModifyMigrateJobResponse {
@@ -1041,27 +1002,6 @@ export interface StopMigrateJobResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 灾备同步任务配置选项
- */
-export interface SyncOption {
-    /**
-      * 同步对象，1-整个实例，2-指定库表
-      */
-    SyncObject: number;
-    /**
-      * 同步开始设置，1-立即开始
-      */
-    RunMode?: number;
-    /**
-      * 同步模式， 3-全量且增量同步
-      */
-    SyncType?: number;
-    /**
-      * 数据一致性检测， 1-无需配置
-      */
-    ConsistencyType?: number;
 }
 /**
  * OfflineIsolatedSubscribe返回参数结构体
@@ -1182,29 +1122,6 @@ export interface MigrateJobInfo {
     Tags: Array<TagItem>;
 }
 /**
- * ModifySyncJob请求参数结构体
- */
-export interface ModifySyncJobRequest {
-    /**
-      * 待修改的灾备同步任务ID
-      */
-    JobId: string;
-    /**
-      * 灾备同步任务名称
-      */
-    JobName?: string;
-    /**
-      * 灾备同步任务配置选项
-      */
-    SyncOption?: SyncOption;
-    /**
-      * 当选择'指定库表'灾备同步的时候, 需要设置待同步的源数据库表信息,用符合json数组格式的字符串描述, 如下所例。
-对于database-table两级结构的数据库：
-[{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
-      */
-    DatabaseInfo?: string;
-}
-/**
  * DescribeRegionConf请求参数结构体
  */
 export declare type DescribeRegionConfRequest = null;
@@ -1212,15 +1129,6 @@ export declare type DescribeRegionConfRequest = null;
  * CompleteMigrateJob返回参数结构体
  */
 export interface CompleteMigrateJobResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * StartMigrateJob返回参数结构体
- */
-export interface StartMigrateJobResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1379,29 +1287,9 @@ export interface ErrorInfo {
     HelpDoc: string;
 }
 /**
- * DescribeSyncCheckJob返回参数结构体
+ * StartMigrateJob返回参数结构体
  */
-export interface DescribeSyncCheckJobResponse {
-    /**
-      * 任务校验状态： starting(开始中)，running(校验中)，finished(校验完成)
-      */
-    Status?: string;
-    /**
-      * 任务校验结果代码
-      */
-    ErrorCode?: number;
-    /**
-      * 提示信息
-      */
-    ErrorMessage?: string;
-    /**
-      * 任务执行步骤描述
-      */
-    StepInfo?: Array<SyncCheckStepInfo>;
-    /**
-      * 校验标志：0（尚未校验成功） ， 1（校验成功）
-      */
-    CheckFlag?: number;
+export interface StartMigrateJobResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

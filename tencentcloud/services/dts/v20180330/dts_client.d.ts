@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMigrateJobsResponse, DeleteMigrateJobResponse, CreateMigrateCheckJobRequest, ModifySubscribeVipVportRequest, ModifySubscribeNameResponse, DescribeMigrateCheckJobRequest, IsolateSubscribeResponse, ModifySubscribeObjectsResponse, CreateMigrateJobRequest, ModifySubscribeNameRequest, ModifySubscribeConsumeTimeResponse, DescribeSubscribeConfResponse, DescribeAsyncRequestInfoRequest, ModifyMigrateJobRequest, CreateSubscribeRequest, CreateMigrateCheckJobResponse, ModifySubscribeObjectsRequest, DescribeMigrateCheckJobResponse, ActivateSubscribeRequest, OfflineIsolatedSubscribeRequest, DescribeSubscribesRequest, ResetSubscribeResponse, DescribeSubscribesResponse, ModifySubscribeConsumeTimeRequest, StopMigrateJobRequest, DescribeSyncCheckJobRequest, DescribeRegionConfResponse, ModifySyncJobResponse, DescribeAsyncRequestInfoResponse, ResetSubscribeRequest, ModifyMigrateJobResponse, DescribeMigrateJobsRequest, ModifySubscribeAutoRenewFlagResponse, StopMigrateJobResponse, OfflineIsolatedSubscribeResponse, IsolateSubscribeRequest, ModifySubscribeAutoRenewFlagRequest, CompleteMigrateJobRequest, ModifySyncJobRequest, DescribeRegionConfRequest, CompleteMigrateJobResponse, StartMigrateJobResponse, CreateMigrateJobResponse, DescribeSubscribeConfRequest, ModifySubscribeVipVportResponse, DeleteMigrateJobRequest, ActivateSubscribeResponse, CreateSubscribeResponse, DescribeSyncCheckJobResponse, StartMigrateJobRequest } from "./dts_models";
+import { DescribeMigrateJobsResponse, DeleteMigrateJobResponse, CreateMigrateCheckJobRequest, ModifySubscribeVipVportRequest, ModifySubscribeNameResponse, DescribeMigrateCheckJobRequest, IsolateSubscribeResponse, ModifySubscribeObjectsResponse, CreateMigrateJobRequest, ModifySubscribeNameRequest, ModifySubscribeConsumeTimeResponse, DescribeSubscribeConfResponse, DescribeAsyncRequestInfoRequest, ModifyMigrateJobRequest, CreateSubscribeRequest, CreateMigrateCheckJobResponse, ModifySubscribeObjectsRequest, DescribeMigrateCheckJobResponse, ActivateSubscribeRequest, OfflineIsolatedSubscribeRequest, DescribeSubscribesRequest, ResetSubscribeResponse, DescribeSubscribesResponse, ModifySubscribeConsumeTimeRequest, StopMigrateJobRequest, DescribeRegionConfResponse, DescribeAsyncRequestInfoResponse, ResetSubscribeRequest, ModifyMigrateJobResponse, DescribeMigrateJobsRequest, ModifySubscribeAutoRenewFlagResponse, StopMigrateJobResponse, OfflineIsolatedSubscribeResponse, IsolateSubscribeRequest, ModifySubscribeAutoRenewFlagRequest, CompleteMigrateJobRequest, DescribeRegionConfRequest, CompleteMigrateJobResponse, CreateMigrateJobResponse, DescribeSubscribeConfRequest, ModifySubscribeVipVportResponse, DeleteMigrateJobRequest, ActivateSubscribeResponse, CreateSubscribeResponse, StartMigrateJobResponse, StartMigrateJobRequest } from "./dts_models";
 /**
  * dts client
  * @class
@@ -11,12 +11,6 @@ export declare class Client extends AbstractClient {
      * 本接口用于配置数据订阅，只有在未配置状态的订阅实例才能调用此接口。
      */
     ActivateSubscribe(req: ActivateSubscribeRequest, cb?: (error: string, rep: ActivateSubscribeResponse) => void): Promise<ActivateSubscribeResponse>;
-    /**
-     * 修改灾备同步任务.
-当同步任务处于下述状态时, 允许调用本接口: 同步任务创建中, 创建完成, 校验成功, 校验失败.
-源实例和目标实例信息不允许修改，可以修改任务名、需要同步的库表。
-     */
-    ModifySyncJob(req: ModifySyncJobRequest, cb?: (error: string, rep: ModifySyncJobResponse) => void): Promise<ModifySyncJobResponse>;
     /**
      * 本接口(ModifySubscribeObjects)用于修改数据订阅通道的订阅规则
      */
@@ -53,15 +47,6 @@ export declare class Client extends AbstractClient {
      * 本接口(DescribeSubscribes)获取数据订阅实例信息列表，默认分页，每次返回20条
      */
     DescribeSubscribes(req: DescribeSubscribesRequest, cb?: (error: string, rep: DescribeSubscribesResponse) => void): Promise<DescribeSubscribesResponse>;
-    /**
-     * 本接口用于在通过 CreateSyncCheckJob 接口创建灾备同步校验任务后，获取校验的结果。能查询到当前校验的状态和进度。
-若通过校验, 则可调用 StartSyncJob 启动同步任务。
-若未通过校验, 则会返回校验失败的原因。 可通过 ModifySyncJob 修改配置，然后再次发起校验。
-校验任务需要大概约30秒，当返回的 Status 不为 finished 时表示尚未校验完成，需要轮询该接口。
-如果 Status=finished 且 CheckFlag=1 时表示校验成功。
-如果 Status=finished 且 CheckFlag !=1 时表示校验失败。
-     */
-    DescribeSyncCheckJob(req: DescribeSyncCheckJobRequest, cb?: (error: string, rep: DescribeSyncCheckJobResponse) => void): Promise<DescribeSyncCheckJobResponse>;
     /**
      * 本接口（CreateMigrateJob）用于创建数据迁移任务。
 

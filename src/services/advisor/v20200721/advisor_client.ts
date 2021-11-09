@@ -22,6 +22,7 @@ import {
   DescribeTaskStrategyRisksRequest,
   DescribeStrategie,
   DescribeTaskStrategyRisksResponse,
+  KeyValue,
   RiskFieldsDesc,
   DescribeStrategiesCondition,
   DescribeStrategiesRequest,

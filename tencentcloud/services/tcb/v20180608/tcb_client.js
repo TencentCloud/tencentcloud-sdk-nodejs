@@ -115,6 +115,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvs", req, cb);
     }
     /**
+     * 查询微信云托管服务域名
+     */
+    async DescribeCloudBaseRunServerDomainName(req, cb) {
+        return this.request("DescribeCloudBaseRunServerDomainName", req, cb);
+    }
+    /**
      * 查看容器托管的集群状态
      */
     async DescribeCloudBaseRunResource(req, cb) {
@@ -395,6 +401,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudBaseBuildService(req, cb) {
         return this.request("DescribeCloudBaseBuildService", req, cb);
+    }
+    /**
+     * 查询一键部署任务 （特定接口：外部查询使用）
+     */
+    async DescribeCloudBaseRunOneClickTaskExternal(req, cb) {
+        return this.request("DescribeCloudBaseRunOneClickTaskExternal", req, cb);
     }
     /**
      * 查询版本历史

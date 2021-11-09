@@ -110,6 +110,19 @@ export interface DescribeTaskStrategyRisksResponse {
     RequestId?: string;
 }
 /**
+ * 键值对
+ */
+export interface KeyValue {
+    /**
+      * 键名
+      */
+    Key?: string;
+    /**
+      * 键名对应值
+      */
+    Value?: string;
+}
+/**
  * 风险实例字段描述
  */
 export interface RiskFieldsDesc {
@@ -129,6 +142,11 @@ stringSlice : 字符串数组类型，例如["a", "b"]
 tags: 标签类型, 例如: [{"Key":"kkk","Value":"vvv"},{"Key":"kkk2","Value":"vvv2"}]
       */
     FieldType: string;
+    /**
+      * 字段值对应字典
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FieldDict: Array<KeyValue>;
 }
 /**
  * 评估项警告条件

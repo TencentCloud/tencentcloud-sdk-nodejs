@@ -876,6 +876,23 @@ request：Metric 为 host 时指代访问请求数
     Product?: string;
 }
 /**
+ * DescribeScdnBotData返回参数结构体
+ */
+export interface DescribeScdnBotDataResponse {
+    /**
+      * 统计信息详细数据
+      */
+    Data: Array<BotStats>;
+    /**
+      * 当前返回数据的粒度，取值："2min"或者"hour"，分别表示2分钟或者1小时粒度
+      */
+    Interval: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 自定义请求头配置，默认为关闭状态
  */
 export interface RequestHeader {
@@ -2228,14 +2245,33 @@ ecdn表示ECDN数据
     Area?: string;
 }
 /**
- * StartCdnDomain请求参数结构体
+ * CDN报表数据
  */
-export interface StartCdnDomainRequest {
+export interface ReportData {
     /**
-      * 域名
-域名状态需要为【已停用】
+      * 项目ID/域名ID。
       */
-    Domain: string;
+    ResourceId: string;
+    /**
+      * 项目名称/域名。
+      */
+    Resource: string;
+    /**
+      * 流量总和/带宽最大值，单位分别为bytes，bps。
+      */
+    Value: number;
+    /**
+      * 单个资源占总体百分比。
+      */
+    Percentage: number;
+    /**
+      * 计费流量总和/计费带宽最大值，单位分别为bytes，bps。
+      */
+    BillingValue: number;
+    /**
+      * 计费数值占总体百分比。
+      */
+    BillingPercentage: number;
 }
 /**
  * DeleteScdnDomain请求参数结构体
@@ -2767,6 +2803,11 @@ disabled：未启用
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Region: number;
+    /**
+      * 流量包类型id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigId: number;
 }
 /**
  * Bot cookie策略
@@ -2819,17 +2860,17 @@ export interface Ipv6 {
     Switch: string;
 }
 /**
- * Waf子规则开关状态
+ * BOT统计结果数据
  */
-export interface WafSubRuleStatus {
+export interface BotStats {
     /**
-      * 子规则状态，on|off
+      * 指标名称
       */
-    Switch: string;
+    Metric: string;
     /**
-      * 规则id列表
+      * 指标详细数据
       */
-    SubIds: Array<number>;
+    DetailData: Array<BotStatsDetailData>;
 }
 /**
  * DescribeTrafficPackages请求参数结构体
@@ -3774,6 +3815,30 @@ export interface ScdnEventLogConditions {
       * 匹配值，允许使用通配符(*)查询，匹配零个、单个、多个字符，例如 1.2.*
       */
     Value: string;
+}
+/**
+ * SCDN访问控制
+ */
+export interface ScdnAclConfig {
+    /**
+      * 是否开启，on | off
+      */
+    Switch: string;
+    /**
+      * 新版本请使用AdvancedScriptData
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScriptData?: Array<ScdnAclGroup>;
+    /**
+      * 错误页面配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorPage?: ScdnErrorPage;
+    /**
+      * Acl规则组，switch为on时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdvancedScriptData?: Array<AdvancedScdnAclGroup>;
 }
 /**
  * WebSocket配置
@@ -7455,6 +7520,16 @@ off：关闭
     PageRules?: Array<ErrorPageRule>;
 }
 /**
+ * StartCdnDomain请求参数结构体
+ */
+export interface StartCdnDomainRequest {
+    /**
+      * 域名
+域名状态需要为【已停用】
+      */
+    Domain: string;
+}
+/**
  * 预热任务详情
  */
 export interface PushTask {
@@ -7505,33 +7580,17 @@ export interface CreateEdgePackTaskResponse {
     RequestId?: string;
 }
 /**
- * CDN报表数据
+ * BOT统计结果数据详细数据
  */
-export interface ReportData {
+export interface BotStatsDetailData {
     /**
-      * 项目ID/域名ID。
+      * 时间
       */
-    ResourceId: string;
+    Time: string;
     /**
-      * 项目名称/域名。
-      */
-    Resource: string;
-    /**
-      * 流量总和/带宽最大值，单位分别为bytes，bps。
+      * 数据值
       */
     Value: number;
-    /**
-      * 单个资源占总体百分比。
-      */
-    Percentage: number;
-    /**
-      * 计费流量总和/计费带宽最大值，单位分别为bytes，bps。
-      */
-    BillingValue: number;
-    /**
-      * 计费数值占总体百分比。
-      */
-    BillingPercentage: number;
 }
 /**
  * DescribeScdnConfig返回参数结构体
@@ -7835,6 +7894,19 @@ export interface UpdateDomainConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * Waf子规则开关状态
+ */
+export interface WafSubRuleStatus {
+    /**
+      * 子规则状态，on|off
+      */
+    Switch: string;
+    /**
+      * 规则id列表
+      */
+    SubIds: Array<number>;
 }
 /**
  * oss回源鉴权
@@ -8149,28 +8221,29 @@ blacklist：黑名单
     ReturnCode?: number;
 }
 /**
- * SCDN访问控制
+ * DescribeScdnBotData请求参数结构体
  */
-export interface ScdnAclConfig {
+export interface DescribeScdnBotDataRequest {
     /**
-      * 是否开启，on | off
+      * 开始时间
       */
-    Switch: string;
+    StartTime: string;
     /**
-      * 新版本请使用AdvancedScriptData
-注意：此字段可能返回 null，表示取不到有效值。
+      * 结束时间
       */
-    ScriptData?: Array<ScdnAclGroup>;
+    EndTime: string;
     /**
-      * 错误页面配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * mainland 大陆地区 overseas境外地区
       */
-    ErrorPage?: ScdnErrorPage;
+    Area: string;
     /**
-      * Acl规则组，switch为on时必填
-注意：此字段可能返回 null，表示取不到有效值。
+      * 取值："2min"或者"hour"，表示查询2分钟或者1小时粒度的数据，如果查询时间范围>1天，则强制返回1小时粒度数据
       */
-    AdvancedScriptData?: Array<AdvancedScdnAclGroup>;
+    Interval?: string;
+    /**
+      * 域名数组，多选域名时，使用此参数,不填写表示查询所有域名的数据（AppID维度数据）
+      */
+    Domains?: Array<string>;
 }
 /**
  * 诊断报告单元信息

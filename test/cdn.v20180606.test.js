@@ -738,6 +738,16 @@ it("cdn.v20180606.DescribeDistrictIspData", async function () {
     }
 })
 
+it("cdn.v20180606.DescribeScdnBotData", async function () {
+    try {
+       const data = await client.DescribeScdnBotData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.UpdatePayType", async function () {
     try {
        const data = await client.UpdatePayType({})

@@ -28,16 +28,6 @@ it("dts.v20180330.ActivateSubscribe", async function () {
     }
 })
 
-it("dts.v20180330.ModifySyncJob", async function () {
-    try {
-       const data = await client.ModifySyncJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dts.v20180330.ModifySubscribeObjects", async function () {
     try {
        const data = await client.ModifySubscribeObjects({})
@@ -111,16 +101,6 @@ it("dts.v20180330.DescribeMigrateJobs", async function () {
 it("dts.v20180330.DescribeSubscribes", async function () {
     try {
        const data = await client.DescribeSubscribes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dts.v20180330.DescribeSyncCheckJob", async function () {
-    try {
-       const data = await client.DescribeSyncCheckJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

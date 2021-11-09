@@ -38,19 +38,21 @@ import {
   DescribeCloudBaseBuildServiceResponse,
   DescribeEndUsersRequest,
   DescribeCloudBaseBuildServiceRequest,
-  DescribeCloudBaseRunVersionRequest,
+  DescribeCloudBaseRunServerDomainNameResponse,
   DestroyStandaloneGatewayRequest,
   CloudRunServiceSimpleVersionSnapshot,
   CreateWxCloudBaseRunServerDBClusterResponse,
   ReplaceActivityRecordResponse,
   DescribeSpecialCostItemsRequest,
   DescribeCloudBaseRunResourceForExtendRequest,
+  DescribeWxCloudBaseRunSubNetsRequest,
   ModifyEndUserRequest,
   DescribeCurveDataResponse,
   RollUpdateCloudBaseRunServerVersionResponse,
   ClsInfo,
   DescribeCloudBaseRunOperationTypesRequest,
   DescribeAuthDomainsResponse,
+  DescribeCloudBaseRunOneClickTaskExternalRequest,
   DescribeStandaloneGatewayResponse,
   DescribeWxCloudBaseRunEnvsResponse,
   CreateHostingDomainRequest,
@@ -111,6 +113,7 @@ import {
   DestroyEnvResponse,
   DescribeCloudBaseProjectVersionListRequest,
   CodeSource,
+  DescribeCloudBaseRunOneClickTaskExternalResponse,
   TurnOffStandaloneGatewayResponse,
   DescribeEnvsResponse,
   CreateAuthDomainRequest,
@@ -120,7 +123,7 @@ import {
   DeleteCloudBaseRunServerVersionRequest,
   CreateCloudBaseRunServerVersionRequest,
   LoginStatistic,
-  DescribeWxCloudBaseRunSubNetsRequest,
+  DescribeCloudBaseRunServerDomainNameRequest,
   DescribeCloudBaseRunAllVpcsRequest,
   CreatePostpayPackageResponse,
   DescribeExtensionUploadInfoRequest,
@@ -128,12 +131,13 @@ import {
   DeleteWxGatewayRouteResponse,
   CloudBaseRunKVPriority,
   EstablishCloudBaseRunServerRequest,
+  ReinstateEnvResponse,
   CloudBaseRunServiceVolumeMount,
   DescribeSpecialCostItemsResponse,
   CreateStandaloneGatewayRequest,
   DescribeCloudBaseProjectVersionListResponse,
   DescribeDownloadFileRequest,
-  ReinstateEnvResponse,
+  DescribeEndUserStatisticRequest,
   CloudBaseRunVpcSubnet,
   PackageFreeQuotaInfo,
   DescribeEnvFreeQuotaResponse,
@@ -141,7 +145,7 @@ import {
   StaticStorageInfo,
   DescribeCloudBaseRunResourceForExtendResponse,
   CreateAndDeployCloudBaseProjectRequest,
-  DescribeEndUserStatisticRequest,
+  DescribeCloudBaseRunVersionRequest,
   EstablishWxGatewayRouteRequest,
   DescribeCloudBaseRunConfForGateWayResponse,
   DatabasesInfo,
@@ -366,6 +370,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvsResponse) => void
   ): Promise<DescribeEnvsResponse> {
     return this.request("DescribeEnvs", req, cb)
+  }
+
+  /**
+   * 查询微信云托管服务域名
+   */
+  async DescribeCloudBaseRunServerDomainName(
+    req: DescribeCloudBaseRunServerDomainNameRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunServerDomainNameResponse) => void
+  ): Promise<DescribeCloudBaseRunServerDomainNameResponse> {
+    return this.request("DescribeCloudBaseRunServerDomainName", req, cb)
   }
 
   /**
@@ -836,6 +850,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudBaseBuildServiceResponse) => void
   ): Promise<DescribeCloudBaseBuildServiceResponse> {
     return this.request("DescribeCloudBaseBuildService", req, cb)
+  }
+
+  /**
+   * 查询一键部署任务 （特定接口：外部查询使用）
+   */
+  async DescribeCloudBaseRunOneClickTaskExternal(
+    req: DescribeCloudBaseRunOneClickTaskExternalRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunOneClickTaskExternalResponse) => void
+  ): Promise<DescribeCloudBaseRunOneClickTaskExternalResponse> {
+    return this.request("DescribeCloudBaseRunOneClickTaskExternal", req, cb)
   }
 
   /**

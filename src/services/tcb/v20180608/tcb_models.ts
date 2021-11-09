@@ -615,23 +615,28 @@ export interface DescribeCloudBaseBuildServiceRequest {
 }
 
 /**
- * DescribeCloudBaseRunVersion请求参数结构体
+ * DescribeCloudBaseRunServerDomainName返回参数结构体
  */
-export interface DescribeCloudBaseRunVersionRequest {
+export interface DescribeCloudBaseRunServerDomainNameResponse {
   /**
-   * 环境ID
+   * 公网服务域名
    */
-  EnvId: string
+  PublicDomain: string
 
   /**
-   * 服务名称
+   * 内部服务域名
    */
-  ServerName: string
+  InternalDomain: string
 
   /**
-   * 版本名称
+   * 弃用
    */
-  VersionName: string
+  DomainName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -884,6 +889,21 @@ export interface DescribeCloudBaseRunResourceForExtendRequest {
 }
 
 /**
+ * DescribeWxCloudBaseRunSubNets请求参数结构体
+ */
+export interface DescribeWxCloudBaseRunSubNetsRequest {
+  /**
+   * VPC id
+   */
+  VpcId: string
+
+  /**
+   * 查询个数限制，不填或小于等于0，等于不限制
+   */
+  Limit?: number
+}
+
+/**
  * ModifyEndUser请求参数结构体
  */
 export interface ModifyEndUserRequest {
@@ -1025,6 +1045,16 @@ export interface DescribeAuthDomainsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudBaseRunOneClickTaskExternal请求参数结构体
+ */
+export interface DescribeCloudBaseRunOneClickTaskExternalRequest {
+  /**
+   * 外部任务Id 最长64字节
+   */
+  ExternalId: string
 }
 
 /**
@@ -2622,6 +2652,68 @@ export interface CodeSource {
 }
 
 /**
+ * DescribeCloudBaseRunOneClickTaskExternal返回参数结构体
+ */
+export interface DescribeCloudBaseRunOneClickTaskExternalResponse {
+  /**
+   * 外部任务Id
+   */
+  ExternalId: string
+
+  /**
+   * 环境Id
+   */
+  EnvId: string
+
+  /**
+   * 用户uin
+   */
+  UserUin: string
+
+  /**
+   * 服务名
+   */
+  ServerName: string
+
+  /**
+   * 版本名
+   */
+  VersionName: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+      * 当前阶段
+微信云托管环境创建阶段：envStage
+存储资源创建阶段：storageStage
+服务创建阶段：serverStage
+      */
+  Stage: string
+
+  /**
+      * 状态
+running
+stopped
+failed
+finished
+      */
+  Status: string
+
+  /**
+   * 失败原因
+   */
+  FailReason: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TurnOffStandaloneGateway返回参数结构体
  */
 export interface TurnOffStandaloneGatewayResponse {
@@ -3021,18 +3113,28 @@ export interface LoginStatistic {
 }
 
 /**
- * DescribeWxCloudBaseRunSubNets请求参数结构体
+ * DescribeCloudBaseRunServerDomainName请求参数结构体
  */
-export interface DescribeWxCloudBaseRunSubNetsRequest {
+export interface DescribeCloudBaseRunServerDomainNameRequest {
   /**
-   * VPC id
+   * 服务名
    */
-  VpcId: string
+  ServerName: string
 
   /**
-   * 查询个数限制，不填或小于等于0，等于不限制
+   * 环境Id
    */
-  Limit?: number
+  UserEnvId: string
+
+  /**
+   * 用户Uin
+   */
+  UserUin: string
+
+  /**
+   * 外部Id
+   */
+  ExternalId: string
 }
 
 /**
@@ -3215,6 +3317,16 @@ export interface EstablishCloudBaseRunServerRequest {
 }
 
 /**
+ * ReinstateEnv返回参数结构体
+ */
+export interface ReinstateEnvResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对标 EKS VolumeMount
  */
 export interface CloudBaseRunServiceVolumeMount {
@@ -3328,13 +3440,13 @@ export interface DescribeDownloadFileRequest {
 }
 
 /**
- * ReinstateEnv返回参数结构体
+ * DescribeEndUserStatistic请求参数结构体
  */
-export interface ReinstateEnvResponse {
+export interface DescribeEndUserStatisticRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 环境id
    */
-  RequestId?: string
+  EnvId: string
 }
 
 /**
@@ -3611,13 +3723,23 @@ export interface CreateAndDeployCloudBaseProjectRequest {
 }
 
 /**
- * DescribeEndUserStatistic请求参数结构体
+ * DescribeCloudBaseRunVersion请求参数结构体
  */
-export interface DescribeEndUserStatisticRequest {
+export interface DescribeCloudBaseRunVersionRequest {
   /**
-   * 环境id
+   * 环境ID
    */
   EnvId: string
+
+  /**
+   * 服务名称
+   */
+  ServerName: string
+
+  /**
+   * 版本名称
+   */
+  VersionName: string
 }
 
 /**

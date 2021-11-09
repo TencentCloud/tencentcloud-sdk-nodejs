@@ -551,7 +551,7 @@ export interface ListUsersForGroupRequest {
  */
 export interface RemoveUserFromGroupRequest {
     /**
-      * 要删除的用户 UID和用户组 ID对应数组
+      * 要删除的用户 UIN/UID和用户组 ID对应数组
       */
     Info: Array<GroupIdOfUidInfo>;
 }
@@ -2059,7 +2059,7 @@ export interface SetDefaultPolicyVersionRequest {
  */
 export interface AddUserToGroupRequest {
     /**
-      * 添加的子用户 UID 和用户组 ID 关联关系
+      * 添加的子用户 UIN/UID 和用户组 ID 关联关系
       */
     Info: Array<GroupIdOfUidInfo>;
 }

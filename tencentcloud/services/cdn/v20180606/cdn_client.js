@@ -503,6 +503,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDistrictIspData", req, cb);
     }
     /**
+     * 获取BOT统计数据列表
+     */
+    async DescribeScdnBotData(req, cb) {
+        return this.request("DescribeScdnBotData", req, cb);
+    }
+    /**
      * 本接口(UpdatePayType)用于修改账号计费类型，暂不支持月结用户或子账号修改。
      */
     async UpdatePayType(req, cb) {

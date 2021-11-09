@@ -1835,7 +1835,7 @@ export interface IgnoreRuleEffectHostInfo {
   HostName: string
 
   /**
-      * 危害等级
+      * 危害等级：1-低位，2-中危，3-高危，4-严重
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Level: number
@@ -1847,13 +1847,13 @@ export interface IgnoreRuleEffectHostInfo {
   TagList: Array<string>
 
   /**
-      * 状态
+      * 状态：0-未通过，1-忽略，3-已通过，5-检测中
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
 
   /**
-      * 最后检测事件
+      * 最后检测时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LastScanTime: string
@@ -8330,12 +8330,12 @@ ComponentName - String - 是否必填：否 - 组件名称
  */
 export interface DescribeMaliciousRequestWhiteListRequest {
   /**
-   * 分页参数
+   * 返回数量，默认为10，最大值为100。
    */
   Limit: number
 
   /**
-   * 分页参数
+   * 偏移量，默认为0。
    */
   Offset: number
 
@@ -12468,7 +12468,7 @@ export interface DescribeBaselineAnalysisDataResponse {
   LatestScanTime: string
 
   /**
-      * 是否全部服务器
+      * 是否全部服务器：1-是 0-否
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsGlobal: number
@@ -14426,7 +14426,7 @@ export interface DescribeAssetSystemPackageListRequest {
   Filters?: Array<Filter>
 
   /**
-   * 排序方式，asc升序 或 desc降序
+   * 排序方式，asc-升序 或 desc-降序
    */
   Order?: string
 

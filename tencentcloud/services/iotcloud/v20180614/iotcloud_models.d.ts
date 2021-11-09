@@ -1936,27 +1936,27 @@ export interface DescribeLoraDeviceResponse {
     /**
       * 设备名称
       */
-    DeviceName?: string;
+    DeviceName: string;
     /**
       * LoRa应用UUID
       */
-    AppEui?: string;
+    AppEui: string;
     /**
       * LoRa设备UUID
       */
-    DeviceEui?: string;
+    DeviceEui: string;
     /**
       * LoRa应用密钥
       */
-    AppKey?: string;
+    AppKey: string;
     /**
       * 设备类型,目前支持A、B、C三种
       */
-    ClassType?: string;
+    ClassType: string;
     /**
       * 设备所属产品id
       */
-    ProductId?: string;
+    ProductId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

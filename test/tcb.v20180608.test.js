@@ -158,6 +158,16 @@ it("tcb.v20180608.DescribeEnvs", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudBaseRunServerDomainName", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunServerDomainName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
     try {
        const data = await client.DescribeCloudBaseRunResource({})
@@ -621,6 +631,16 @@ it("tcb.v20180608.DescribeActivityInfo", async function () {
 it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
     try {
        const data = await client.DescribeCloudBaseBuildService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudBaseRunOneClickTaskExternal", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunOneClickTaskExternal({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

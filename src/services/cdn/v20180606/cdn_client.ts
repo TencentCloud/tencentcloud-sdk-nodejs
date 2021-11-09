@@ -48,6 +48,7 @@ import {
   UpdatePayTypeRequest,
   SpecificConfig,
   DescribeTopDataRequest,
+  DescribeScdnBotDataResponse,
   RequestHeader,
   DescribePurgeQuotaRequest,
   DisableCachesResponse,
@@ -95,7 +96,7 @@ import {
   DeleteClsLogTopicRequest,
   UserAgentFilter,
   ListTopCcDataRequest,
-  StartCdnDomainRequest,
+  ReportData,
   DeleteScdnDomainRequest,
   DescribeDistrictIspDataResponse,
   DescribeCdnOriginIpRequest,
@@ -119,7 +120,7 @@ import {
   BotCookie,
   DescribeCdnIpRequest,
   Ipv6,
-  WafSubRuleStatus,
+  BotStats,
   DescribeTrafficPackagesRequest,
   StatusCodeCache,
   DescribeIpVisitResponse,
@@ -144,6 +145,7 @@ import {
   SearchClsLogResponse,
   CreateScdnLogTaskResponse,
   ScdnEventLogConditions,
+  ScdnAclConfig,
   WebSocket,
   MapInfo,
   DescribeCertDomainsResponse,
@@ -275,9 +277,10 @@ import {
   DDoSAttackBandwidthData,
   OriginPullOptimization,
   ErrorPage,
+  StartCdnDomainRequest,
   PushTask,
   CreateEdgePackTaskResponse,
-  ReportData,
+  BotStatsDetailData,
   DescribeScdnConfigResponse,
   DescribePushQuotaRequest,
   TopDetailData,
@@ -294,6 +297,7 @@ import {
   ListTopDataResponse,
   MaxAge,
   UpdateDomainConfigResponse,
+  WafSubRuleStatus,
   OssPrivateAccess,
   LogSetInfo,
   ListDiagnoseReportResponse,
@@ -309,7 +313,7 @@ import {
   ClsSearchLogs,
   DescribeUrlViolationsResponse,
   IpFilter,
-  ScdnAclConfig,
+  DescribeScdnBotDataRequest,
   DiagnoseUnit,
   DiagnoseInfo,
   DescribeScdnBotRecordsResponse,
@@ -1116,6 +1120,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDistrictIspDataResponse) => void
   ): Promise<DescribeDistrictIspDataResponse> {
     return this.request("DescribeDistrictIspData", req, cb)
+  }
+
+  /**
+   * 获取BOT统计数据列表
+   */
+  async DescribeScdnBotData(
+    req: DescribeScdnBotDataRequest,
+    cb?: (error: string, rep: DescribeScdnBotDataResponse) => void
+  ): Promise<DescribeScdnBotDataResponse> {
+    return this.request("DescribeScdnBotData", req, cb)
   }
 
   /**

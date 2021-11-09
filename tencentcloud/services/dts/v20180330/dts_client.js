@@ -34,14 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ActivateSubscribe", req, cb);
     }
     /**
-     * 修改灾备同步任务.
-当同步任务处于下述状态时, 允许调用本接口: 同步任务创建中, 创建完成, 校验成功, 校验失败.
-源实例和目标实例信息不允许修改，可以修改任务名、需要同步的库表。
-     */
-    async ModifySyncJob(req, cb) {
-        return this.request("ModifySyncJob", req, cb);
-    }
-    /**
      * 本接口(ModifySubscribeObjects)用于修改数据订阅通道的订阅规则
      */
     async ModifySubscribeObjects(req, cb) {
@@ -92,17 +84,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSubscribes(req, cb) {
         return this.request("DescribeSubscribes", req, cb);
-    }
-    /**
-     * 本接口用于在通过 CreateSyncCheckJob 接口创建灾备同步校验任务后，获取校验的结果。能查询到当前校验的状态和进度。
-若通过校验, 则可调用 StartSyncJob 启动同步任务。
-若未通过校验, 则会返回校验失败的原因。 可通过 ModifySyncJob 修改配置，然后再次发起校验。
-校验任务需要大概约30秒，当返回的 Status 不为 finished 时表示尚未校验完成，需要轮询该接口。
-如果 Status=finished 且 CheckFlag=1 时表示校验成功。
-如果 Status=finished 且 CheckFlag !=1 时表示校验失败。
-     */
-    async DescribeSyncCheckJob(req, cb) {
-        return this.request("DescribeSyncCheckJob", req, cb);
     }
     /**
      * 本接口（CreateMigrateJob）用于创建数据迁移任务。
