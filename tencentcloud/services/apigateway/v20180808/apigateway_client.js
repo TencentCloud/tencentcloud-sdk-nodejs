@@ -226,10 +226,10 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("DeleteApi", req, cb);
     }
     /**
-     * 本接口（EnableApiKey）用于启动一对被禁用的 API 密钥。
+     * 本接口（UpdateApiAppKey）用于更新应用秘钥。
      */
-    async EnableApiKey(req, cb) {
-        return this.request("EnableApiKey", req, cb);
+    async UpdateApiAppKey(req, cb) {
+        return this.request("UpdateApiAppKey", req, cb);
     }
     /**
      * 本接口（ModifyUsagePlan）用于修改使用计划的名称，描述及 QPS。
@@ -301,6 +301,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("ModifyService", req, cb);
     }
     /**
+     * 本接口（DescribeExclusiveInstances）用于查询独享实例列表信息。​
+     */
+    async DescribeExclusiveInstances(req, cb) {
+        return this.request("DescribeExclusiveInstances", req, cb);
+    }
+    /**
      * 本接口（DescribeService）用于查询一个服务的详细信息、包括服务的描述、域名、协议、创建时间、发布情况等信息。
      */
     async DescribeService(req, cb) {
@@ -329,6 +335,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     async CreateApi(req, cb) {
         return this.request("CreateApi", req, cb);
+    }
+    /**
+     * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。​
+     */
+    async DescribeExclusiveInstanceDetail(req, cb) {
+        return this.request("DescribeExclusiveInstanceDetail", req, cb);
     }
     /**
      * 绑定插件到API上。
@@ -384,6 +396,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     async ModifyServiceEnvironmentStrategy(req, cb) {
         return this.request("ModifyServiceEnvironmentStrategy", req, cb);
+    }
+    /**
+     * 本接口（ModifyExclusiveInstance）用于修改独享实例信息。​
+     */
+    async ModifyExclusiveInstance(req, cb) {
+        return this.request("ModifyExclusiveInstance", req, cb);
     }
     /**
      * 本接口（DescribeUsagePlanEnvironments）用于查询使用计划绑定的环境列表。
@@ -523,10 +541,10 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
         return this.request("BindIPStrategy", req, cb);
     }
     /**
-     * 本接口（UpdateApiAppKey）用于更新应用秘钥。
+     * 本接口（EnableApiKey）用于启动一对被禁用的 API 密钥。
      */
-    async UpdateApiAppKey(req, cb) {
-        return this.request("UpdateApiAppKey", req, cb);
+    async EnableApiKey(req, cb) {
+        return this.request("EnableApiKey", req, cb);
     }
     /**
      * 本接口（CreateIPStrategy）用于创建服务IP策略。

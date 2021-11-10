@@ -2201,6 +2201,11 @@ export interface DescribeCloudStorageEventsRequest {
    * 用户ID
    */
   UserId?: string
+
+  /**
+   * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+   */
+  ChannelId?: number
 }
 
 /**
@@ -2778,7 +2783,7 @@ export interface DescribeCloudStorageEventsResponse {
   Listover: boolean
 
   /**
-   * 拉取结果数量
+   * 内部结果数量，并不等同于事件总数。
    */
   Total: number
 

@@ -492,6 +492,12 @@ export interface ProductInfo {
    * 搜索到的商品配图URL。
    */
   Image: string
+
+  /**
+      * 百科词条列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LemmaInfoList: Array<LemmaInfo>
 }
 
 /**
@@ -1283,6 +1289,29 @@ export interface Threshold {
    * 误识率在千分之一时的推荐阈值。
    */
   FalseRate1Permil: number
+}
+
+/**
+ * 百科词条信息
+ */
+export interface LemmaInfo {
+  /**
+      * 词条
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LemmaTitle: string
+
+  /**
+      * 词条描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LemmaAbstract: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tag: string
 }
 
 /**

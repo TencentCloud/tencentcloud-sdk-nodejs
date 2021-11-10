@@ -138,6 +138,16 @@ it("ocr.v20181119.FlightInvoiceOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeContainerOCR", async function () {
+    try {
+       const data = await client.RecognizeContainerOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.MixedInvoiceDetect", async function () {
     try {
        const data = await client.MixedInvoiceDetect({})

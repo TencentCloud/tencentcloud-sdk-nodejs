@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchPositionSpace", req, cb);
     }
     /**
-     * 根据设备产品ID、设备名称，获取设备上报的属性数据。
+     * 获取量产详情信息。
      */
-    async DescribeDeviceData(req, cb) {
-        return this.request("DescribeDeviceData", req, cb);
+    async DescribeBatchProduction(req, cb) {
+        return this.request("DescribeBatchProduction", req, cb);
     }
     /**
      * 直接绑定设备和家庭
@@ -182,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyTopicRule(req, cb) {
         return this.request("ModifyTopicRule", req, cb);
+    }
+    /**
+     * 根据设备产品ID、设备名称，获取设备上报的属性数据。
+     */
+    async DescribeDeviceData(req, cb) {
+        return this.request("DescribeDeviceData", req, cb);
     }
     /**
      * 本接口（DescribeTopicPolicy）用于查看Topic详细信息
@@ -388,6 +394,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyModelDefinition", req, cb);
     }
     /**
+     * 用于新建批量生产设备
+     */
+    async CreateBatchProduction(req, cb) {
+        return this.request("CreateBatchProduction", req, cb);
+    }
+    /**
      * 删除位置空间
      */
     async DeletePositionSpace(req, cb) {
@@ -398,6 +410,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeModelDefinition(req, cb) {
         return this.request("DescribeModelDefinition", req, cb);
+    }
+    /**
+     * 列出量产数据列表信息。
+     */
+    async GetBatchProductionsList(req, cb) {
+        return this.request("GetBatchProductionsList", req, cb);
     }
     /**
      * 为用户提供新建项目的能力，用于集中管理产品和应用。

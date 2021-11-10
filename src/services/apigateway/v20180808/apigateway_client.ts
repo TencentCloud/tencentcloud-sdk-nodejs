@@ -53,7 +53,7 @@ import {
   DeleteIPStrategyRequest,
   DescribeApiAppRequest,
   DescribePluginResponse,
-  DomainSets,
+  DescribeExclusiveInstancesResponse,
   DeleteUsagePlanRequest,
   DeleteServiceRequest,
   DescribeApiEnvironmentStrategyRequest,
@@ -62,10 +62,11 @@ import {
   DeleteApiAppResponse,
   DescribeServiceResponse,
   UsagePlanEnvironmentStatus,
-  ModifyIPStrategyResponse,
+  DescribeExclusiveInstancesRequest,
   BindSubDomainResponse,
   BindEnvironmentResponse,
   Tag,
+  DescribeExclusiveInstanceDetailResponse,
   DescribeApiBindApiAppsStatusResponse,
   ConstantParameter,
   DescribeApiForApiAppRequest,
@@ -76,6 +77,7 @@ import {
   DisableApiKeyRequest,
   PathMapping,
   UnBindIPStrategyResponse,
+  DescribeExclusiveInstanceDetailRequest,
   ModifyPluginRequest,
   BindIPStrategyResponse,
   AvailableApiInfo,
@@ -89,16 +91,18 @@ import {
   AttachedApiInfo,
   CreateApiResponse,
   DescribeIPStrategyApisStatusRequest,
-  UnBindEnvironmentRequest,
+  ModifyIPStrategyResponse,
   OauthConfig,
   ModifyApiEnvironmentStrategyRequest,
+  NetworkConfig,
   ModifyUsagePlanResponse,
   CreateUsagePlanResponse,
-  ReqParameter,
+  DomainSets,
   DeletePluginRequest,
   Base64EncodedTriggerRule,
   RequestConfig,
   DeleteApiKeyResponse,
+  ModifyExclusiveInstanceRequest,
   UsagePlan,
   DescribeServiceReleaseVersionRequest,
   DescribeUsagePlanSecretIdsRequest,
@@ -124,7 +128,7 @@ import {
   ModifySubDomainResponse,
   DescribePluginsRequest,
   BindSecretIdsRequest,
-  UnBindEnvironmentResponse,
+  ParameterInfo,
   UsagePlanBindSecret,
   DeleteApiKeyRequest,
   ModifyApiEnvironmentStrategyResponse,
@@ -151,6 +155,7 @@ import {
   UsagePlanStatusInfo,
   ServiceReleaseHistoryInfo,
   CreatePluginResponse,
+  ModifyExclusiveInstanceResponse,
   DescribePluginsResponse,
   ReleaseServiceResponse,
   APIDocInfo,
@@ -168,6 +173,7 @@ import {
   BindSecretIdsResponse,
   CreateApiRsp,
   UsagePlanBindEnvironment,
+  InstanceInfo,
   DeleteApiRequest,
   DescribeServiceSubDomainMappingsRequest,
   DescribeApiAppResponse,
@@ -187,6 +193,7 @@ import {
   ModifyPluginResponse,
   UnBindSecretIdsRequest,
   DescribeApiRequest,
+  VpcConfig,
   UnBindSecretIdsResponse,
   ResetAPIDocPasswordRequest,
   ApiUsagePlan,
@@ -208,6 +215,7 @@ import {
   ApiAppInfos,
   IPStrategyApiStatus,
   CreateIPStrategyResponse,
+  UnBindEnvironmentResponse,
   DeleteApiResponse,
   BindIPStrategyRequest,
   UpdateServiceRequest,
@@ -215,6 +223,7 @@ import {
   ErrorCodes,
   DescribeServiceEnvironmentListRequest,
   ServiceEnvironmentStrategyStatus,
+  ReqParameter,
   DescribeApiEnvironmentStrategyResponse,
   MicroService,
   ApiEnvironmentStrategyStataus,
@@ -225,11 +234,13 @@ import {
   ApiKey,
   ApiAppApiInfo,
   DescribeUsagePlanResponse,
+  UnBindEnvironmentRequest,
   AttachPluginResponse,
   BindEnvironmentRequest,
   DescribeIPStrategyRequest,
   DescribeApiForApiAppResponse,
   EnvironmentStrategy,
+  InstanceParameterInput,
   DescribeUsagePlanEnvironmentsRequest,
   DescribeServiceReleaseVersionResponse,
   ApiAppApiInfos,
@@ -255,11 +266,13 @@ import {
   ApiEnvironmentStrategy,
   DescribeIPStrategysStatusResponse,
   UpdateApiAppKeyResponse,
+  InstanceDetail,
   CreateApiAppRequest,
   EnableApiKeyRequest,
   ResetAPIDocPasswordResponse,
   DescribeServicesStatusRequest,
   RequestParameter,
+  InstanceChargePrepaid,
   ServiceReleaseVersion,
   DescribeServicesStatusResponse,
   CreateApiKeyRequest,
@@ -601,13 +614,13 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 本接口（EnableApiKey）用于启动一对被禁用的 API 密钥。
+   * 本接口（UpdateApiAppKey）用于更新应用秘钥。
    */
-  async EnableApiKey(
-    req: EnableApiKeyRequest,
-    cb?: (error: string, rep: EnableApiKeyResponse) => void
-  ): Promise<EnableApiKeyResponse> {
-    return this.request("EnableApiKey", req, cb)
+  async UpdateApiAppKey(
+    req: UpdateApiAppKeyRequest,
+    cb?: (error: string, rep: UpdateApiAppKeyResponse) => void
+  ): Promise<UpdateApiAppKeyResponse> {
+    return this.request("UpdateApiAppKey", req, cb)
   }
 
   /**
@@ -724,6 +737,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
+   * 本接口（DescribeExclusiveInstances）用于查询独享实例列表信息。​
+   */
+  async DescribeExclusiveInstances(
+    req: DescribeExclusiveInstancesRequest,
+    cb?: (error: string, rep: DescribeExclusiveInstancesResponse) => void
+  ): Promise<DescribeExclusiveInstancesResponse> {
+    return this.request("DescribeExclusiveInstances", req, cb)
+  }
+
+  /**
    * 本接口（DescribeService）用于查询一个服务的详细信息、包括服务的描述、域名、协议、创建时间、发布情况等信息。
    */
   async DescribeService(
@@ -771,6 +794,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     cb?: (error: string, rep: CreateApiResponse) => void
   ): Promise<CreateApiResponse> {
     return this.request("CreateApi", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。​
+   */
+  async DescribeExclusiveInstanceDetail(
+    req: DescribeExclusiveInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeExclusiveInstanceDetailResponse) => void
+  ): Promise<DescribeExclusiveInstanceDetailResponse> {
+    return this.request("DescribeExclusiveInstanceDetail", req, cb)
   }
 
   /**
@@ -862,6 +895,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     cb?: (error: string, rep: ModifyServiceEnvironmentStrategyResponse) => void
   ): Promise<ModifyServiceEnvironmentStrategyResponse> {
     return this.request("ModifyServiceEnvironmentStrategy", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyExclusiveInstance）用于修改独享实例信息。​
+   */
+  async ModifyExclusiveInstance(
+    req: ModifyExclusiveInstanceRequest,
+    cb?: (error: string, rep: ModifyExclusiveInstanceResponse) => void
+  ): Promise<ModifyExclusiveInstanceResponse> {
+    return this.request("ModifyExclusiveInstance", req, cb)
   }
 
   /**
@@ -1086,13 +1129,13 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
   }
 
   /**
-   * 本接口（UpdateApiAppKey）用于更新应用秘钥。
+   * 本接口（EnableApiKey）用于启动一对被禁用的 API 密钥。
    */
-  async UpdateApiAppKey(
-    req: UpdateApiAppKeyRequest,
-    cb?: (error: string, rep: UpdateApiAppKeyResponse) => void
-  ): Promise<UpdateApiAppKeyResponse> {
-    return this.request("UpdateApiAppKey", req, cb)
+  async EnableApiKey(
+    req: EnableApiKeyRequest,
+    cb?: (error: string, rep: EnableApiKeyResponse) => void
+  ): Promise<EnableApiKeyResponse> {
+    return this.request("EnableApiKey", req, cb)
   }
 
   /**

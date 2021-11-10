@@ -51,12 +51,13 @@ export interface ModifySmsSignRequest {
     SignName: string;
     /**
       * 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：
-0：公司，可选 DocumentType 有（0，1，2，3）。
+0：公司，可选 DocumentType 有（0，1）。
 1：APP，可选 DocumentType 有（0，1，2，3，4） 。
 2：网站，可选 DocumentType 有（0，1，2，3，5）。
-3：公众号或者小程序，可选 DocumentType 有（0，1，2，3，6）。
+3：公众号，可选 DocumentType 有（0，1，2，3，8）。
 4：商标，可选 DocumentType 有（7）。
 5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。
+6：小程序，可选 DocumentType 有（0，1，2，3，6）。
 注：必须按照对应关系选择证明类型，否则会审核失败。
       */
     SignType: number;
@@ -70,7 +71,7 @@ export interface ModifySmsSignRequest {
 5：网站备案后台截图（个人开发网站）。
 6：小程序设置页面截图（个人认证小程序）。
 7：商标注册书。
-注：必选按照 SignType 选择对应的DocumentType。
+8：公众号设置页面截图（个人认证公众号）。
       */
     DocumentType: number;
     /**
@@ -139,12 +140,13 @@ export interface AddSmsSignRequest {
     SignName: string;
     /**
       * 签名类型。其中每种类型后面标注了其可选的 DocumentType（证明类型）：
-0：公司，可选 DocumentType 有（0，1，2，3）。
+0：公司，可选 DocumentType 有（0，1）。
 1：APP，可选 DocumentType 有（0，1，2，3，4） 。
 2：网站，可选 DocumentType 有（0，1，2，3，5）。
-3：公众号或者小程序，可选 DocumentType 有（0，1，2，3，6）。
+3：公众号，可选 DocumentType 有（0，1，2，3，8）。
 4：商标，可选 DocumentType 有（7）。
 5：政府/机关事业单位/其他机构，可选 DocumentType 有（2，3）。
+6：小程序，可选 DocumentType 有（0，1，2，3，6）。
 注：必须按照对应关系选择证明类型，否则会审核失败。
       */
     SignType: number;
@@ -158,7 +160,7 @@ export interface AddSmsSignRequest {
 5：网站备案后台截图（个人开发网站）。
 6：小程序设置页面截图（个人认证小程序）。
 7：商标注册书。
-注：必选按照 SignType 选择对应的DocumentType。
+8：公众号设置页面截图（个人认证公众号）。
       */
     DocumentType: number;
     /**

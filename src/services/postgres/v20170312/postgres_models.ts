@@ -1059,12 +1059,12 @@ export interface ModifyDBInstanceSpecRequest {
   DBInstanceId: string
 
   /**
-   * 升级后的实例内存大小，单位GiB。
+   * 修改后的实例内存大小，单位GiB。
    */
   Memory: number
 
   /**
-   * 升级后的实例磁盘大小，单位GiB。
+   * 修改后的实例磁盘大小，单位GiB。
    */
   Storage: number
 

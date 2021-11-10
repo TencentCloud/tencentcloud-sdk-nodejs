@@ -338,9 +338,9 @@ it("apigateway.v20180808.DeleteApi", async function () {
     }
 })
 
-it("apigateway.v20180808.EnableApiKey", async function () {
+it("apigateway.v20180808.UpdateApiAppKey", async function () {
     try {
-       const data = await client.EnableApiKey({})
+       const data = await client.UpdateApiAppKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,6 +458,16 @@ it("apigateway.v20180808.ModifyService", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribeExclusiveInstances", async function () {
+    try {
+       const data = await client.DescribeExclusiveInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeService", async function () {
     try {
        const data = await client.DescribeService({})
@@ -501,6 +511,16 @@ it("apigateway.v20180808.DeleteApiKey", async function () {
 it("apigateway.v20180808.CreateApi", async function () {
     try {
        const data = await client.CreateApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeExclusiveInstanceDetail", async function () {
+    try {
+       const data = await client.DescribeExclusiveInstanceDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +611,16 @@ it("apigateway.v20180808.DescribeIPStrategysStatus", async function () {
 it("apigateway.v20180808.ModifyServiceEnvironmentStrategy", async function () {
     try {
        const data = await client.ModifyServiceEnvironmentStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.ModifyExclusiveInstance", async function () {
+    try {
+       const data = await client.ModifyExclusiveInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +838,9 @@ it("apigateway.v20180808.BindIPStrategy", async function () {
     }
 })
 
-it("apigateway.v20180808.UpdateApiAppKey", async function () {
+it("apigateway.v20180808.EnableApiKey", async function () {
     try {
-       const data = await client.UpdateApiAppKey({})
+       const data = await client.EnableApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

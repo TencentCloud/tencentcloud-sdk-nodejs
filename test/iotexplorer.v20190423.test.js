@@ -68,9 +68,9 @@ it("iotexplorer.v20190423.SearchPositionSpace", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeDeviceData", async function () {
+it("iotexplorer.v20190423.DescribeBatchProduction", async function () {
     try {
-       const data = await client.DescribeDeviceData({})
+       const data = await client.DescribeBatchProduction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +271,16 @@ it("iotexplorer.v20190423.SearchStudioProduct", async function () {
 it("iotexplorer.v20190423.ModifyTopicRule", async function () {
     try {
        const data = await client.ModifyTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeDeviceData", async function () {
+    try {
+       const data = await client.DescribeDeviceData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,6 +628,16 @@ it("iotexplorer.v20190423.ModifyModelDefinition", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateBatchProduction", async function () {
+    try {
+       const data = await client.CreateBatchProduction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DeletePositionSpace", async function () {
     try {
        const data = await client.DeletePositionSpace({})
@@ -631,6 +651,16 @@ it("iotexplorer.v20190423.DeletePositionSpace", async function () {
 it("iotexplorer.v20190423.DescribeModelDefinition", async function () {
     try {
        const data = await client.DescribeModelDefinition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetBatchProductionsList", async function () {
+    try {
+       const data = await client.GetBatchProductionsList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

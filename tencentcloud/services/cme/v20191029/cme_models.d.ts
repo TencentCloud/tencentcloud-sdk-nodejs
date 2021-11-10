@@ -1404,7 +1404,7 @@ export interface EmptyTrackItem {
  */
 export interface PlatformInfo {
     /**
-      * 平台名称。
+      * 平台标识。
       */
     Platform: string;
     /**

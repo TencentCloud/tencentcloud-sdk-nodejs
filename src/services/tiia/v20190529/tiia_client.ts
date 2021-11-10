@@ -62,6 +62,7 @@ import {
   DescribeGroupsResponse,
   CarTagItem,
   Threshold,
+  LemmaInfo,
   DescribeImagesResponse,
   DetectMisbehaviorRequest,
   CreateGroupResponse,

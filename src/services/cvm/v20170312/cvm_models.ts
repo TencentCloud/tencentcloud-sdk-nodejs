@@ -95,8 +95,9 @@ export interface RenewInstancesRequest {
   InstanceIds: Array<string>
 
   /**
-   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。
-   */
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。<dx-alert infotype="explain" title="">
+包年包月实例该参数为必传参数。</dx-alert>
+      */
   InstanceChargePrepaid?: InstanceChargePrepaid
 
   /**
@@ -988,7 +989,7 @@ export interface ModifyInstancesChargeTypeRequest {
   InstanceChargeType: string
 
   /**
-   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。<dx-alert infotype="explain" title="">若指定实例的付费模式为预付费则该参数必传。</dx-alert>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
 }
@@ -1208,12 +1209,13 @@ export interface ModifyInstancesAttributeRequest {
   InstanceIds: Array<string>
 
   /**
-   * 实例名称。可任意命名，但不得超过60个字符。
-   */
+      * 实例名称。可任意命名，但不得超过60个字符。
+<dx-alert infotype="explain" title="">必须指定InstanceName与SecurityGroups的其中一个，但不能同时设置</dx-alert>
+      */
   InstanceName?: string
 
   /**
-   * 指定实例的安全组Id列表，子机将重新关联指定列表的安全组，原本关联的安全组会被解绑。
+   * 指定实例的安全组Id列表，子机将重新关联指定列表的安全组，原本关联的安全组会被解绑。<dx-alert infotype="explain" title="">必须指定SecurityGroups与InstanceName的其中一个，但不能同时设置</dx-alert>
    */
   SecurityGroups?: Array<string>
 }
@@ -2832,8 +2834,9 @@ export interface RunInstancesRequest {
   InstanceChargePrepaid?: InstanceChargePrepaid
 
   /**
-   * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
-   */
+      * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
+注：本数据结构中的Zone为必填参数。
+      */
   Placement?: Placement
 
   /**
@@ -2918,7 +2921,7 @@ export interface RunInstancesRequest {
   TagSpecification?: Array<TagSpecification>
 
   /**
-   * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+   * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费但没有传递该参数时，默认按当前固定折扣价格出价。
    */
   InstanceMarketOptions?: InstanceMarketOptionsRequest
 

@@ -956,17 +956,17 @@ export interface DescribePluginResponse {
     RequestId?: string;
 }
 /**
- * 自定义服务域名展示
+ * DescribeExclusiveInstances返回参数结构体
  */
-export interface DomainSets {
+export interface DescribeExclusiveInstancesResponse {
     /**
-      * 服务下的自定义域名数量。
+      * 独享实例列表查询结果
       */
-    TotalCount: number;
+    Result: InstanceInfo;
     /**
-      * 自定义服务域名列表。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    DomainSet: Array<DomainSetList>;
+    RequestId?: string;
 }
 /**
  * DeleteUsagePlan请求参数结构体
@@ -1302,18 +1302,21 @@ export interface UsagePlanEnvironmentStatus {
     EnvironmentList: Array<UsagePlanEnvironment>;
 }
 /**
- * ModifyIPStrategy返回参数结构体
+ * DescribeExclusiveInstances请求参数结构体
  */
-export interface ModifyIPStrategyResponse {
+export interface DescribeExclusiveInstancesRequest {
     /**
-      * 修改操作是否成功。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 分页查询，limit
       */
-    Result?: boolean;
+    Limit: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 分页查询，offset
       */
-    RequestId?: string;
+    Offset: number;
+    /**
+      * 过滤条件
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * BindSubDomain返回参数结构体
@@ -1355,6 +1358,19 @@ export interface Tag {
       * 便签的 value。
       */
     Value: string;
+}
+/**
+ * DescribeExclusiveInstanceDetail返回参数结构体
+ */
+export interface DescribeExclusiveInstanceDetailResponse {
+    /**
+      * 独享实例详情
+      */
+    Result: InstanceDetail;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeApiBindApiAppsStatus返回参数结构体
@@ -1522,6 +1538,15 @@ export interface UnBindIPStrategyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeExclusiveInstanceDetail请求参数结构体
+ */
+export interface DescribeExclusiveInstanceDetailRequest {
+    /**
+      * 独享实例唯一id
+      */
+    InstanceId: string;
 }
 /**
  * ModifyPlugin请求参数结构体
@@ -1812,29 +1837,18 @@ export interface DescribeIPStrategyApisStatusRequest {
     Filters?: Array<Filter>;
 }
 /**
- * UnBindEnvironment请求参数结构体
+ * ModifyIPStrategy返回参数结构体
  */
-export interface UnBindEnvironmentRequest {
+export interface ModifyIPStrategyResponse {
     /**
-      * 绑定类型，取值为 API、SERVICE，默认值为 SERVICE。
+      * 修改操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    BindType: string;
+    Result?: boolean;
     /**
-      * 待绑定的使用计划唯一 ID 列表。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    UsagePlanIds: Array<string>;
-    /**
-      * 待解绑的服务环境。
-      */
-    Environment: string;
-    /**
-      * 待解绑的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * API 唯一 ID 数组，当 BindType=API 时，需要传入此参数。
-      */
-    ApiIds?: Array<string>;
+    RequestId?: string;
 }
 /**
  * Oauth授权配置信息
@@ -1875,6 +1889,31 @@ export interface ModifyApiEnvironmentStrategyRequest {
     ApiIds: Array<string>;
 }
 /**
+ * 独享实例网络配置
+ */
+export interface NetworkConfig {
+    /**
+      * 最大出带宽
+      */
+    InternetMaxBandwidthOut: number;
+    /**
+      * EnableInternetInbound信息
+      */
+    EnableInternetInbound: boolean;
+    /**
+      * EnableInternetOutbound信息
+      */
+    EnableInternetOutbound: boolean;
+    /**
+      * InboundIpAddresses信息
+      */
+    InboundIpAddresses: Array<string>;
+    /**
+      * OutboundIpAddresses信息
+      */
+    OutboundIpAddresses: Array<string>;
+}
+/**
  * ModifyUsagePlan返回参数结构体
  */
 export interface ModifyUsagePlanResponse {
@@ -1903,33 +1942,17 @@ export interface CreateUsagePlanResponse {
     RequestId?: string;
 }
 /**
- * 请求参数
+ * 自定义服务域名展示
  */
-export interface ReqParameter {
+export interface DomainSets {
     /**
-      * API 的前端参数名称。
+      * 服务下的自定义域名数量。
       */
-    Name: string;
+    TotalCount: number;
     /**
-      * API 的前端参数位置，如 header。目前支持 header、query、path。
+      * 自定义服务域名列表。
       */
-    Position: string;
-    /**
-      * API 的前端参数类型，如 String、int。
-      */
-    Type: string;
-    /**
-      * API 的前端参数默认值。
-      */
-    DefaultValue: string;
-    /**
-      * API 的前端参数是否必填，True：表示必填，False：表示可选。
-      */
-    Required: boolean;
-    /**
-      * API 的前端参数备注。
-      */
-    Desc: string;
+    DomainSet: Array<DomainSetList>;
 }
 /**
  * DeletePlugin请求参数结构体
@@ -1986,6 +2009,27 @@ export interface DeleteApiKeyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyExclusiveInstance请求参数结构体
+ */
+export interface ModifyExclusiveInstanceRequest {
+    /**
+      * 独享实例唯一id
+      */
+    InstanceId: string;
+    /**
+      * 独享实例name
+      */
+    InstanceName?: string;
+    /**
+      * 独享实例描述
+      */
+    InstanceDescription?: string;
+    /**
+      * 独享实例参数配置
+      */
+    Parameters?: Array<InstanceParameterInput>;
 }
 /**
  * usagePlan详情
@@ -2480,18 +2524,41 @@ export interface BindSecretIdsRequest {
     AccessKeyIds: Array<string>;
 }
 /**
- * UnBindEnvironment返回参数结构体
+ * 独享实例配置参数
  */
-export interface UnBindEnvironmentResponse {
+export interface ParameterInfo {
     /**
-      * 解绑操作是否成功。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 名字
       */
-    Result?: boolean;
+    Name: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 当前值
       */
-    RequestId?: string;
+    Value: number;
+    /**
+      * 默认值
+      */
+    Default: number;
+    /**
+      * 单位
+      */
+    Unit: string;
+    /**
+      * 类型
+      */
+    Type: string;
+    /**
+      * 最小
+      */
+    Minimum: number;
+    /**
+      * 最大
+      */
+    Maximum: number;
+    /**
+      * 修改时间
+      */
+    ModifedTime: string;
 }
 /**
  * 使用计划绑定密钥
@@ -3395,6 +3462,19 @@ export interface CreatePluginResponse {
     RequestId?: string;
 }
 /**
+ * ModifyExclusiveInstance返回参数结构体
+ */
+export interface ModifyExclusiveInstanceResponse {
+    /**
+      * 独享实例详情信息
+      */
+    Result: InstanceDetail;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribePlugins返回参数结构体
  */
 export interface DescribePluginsResponse {
@@ -3720,6 +3800,48 @@ export interface UsagePlanBindEnvironment {
     ServiceId: string;
 }
 /**
+ * 独享实例信息
+ */
+export interface InstanceInfo {
+    /**
+      * 独享实例唯一id
+      */
+    InstanceId: string;
+    /**
+      * 独享实例name
+      */
+    InstanceName: string;
+    /**
+      * 独享实例描述
+      */
+    InstanceDescription: string;
+    /**
+      * 独享实例计费类型
+      */
+    InstanceChargeType: string;
+    /**
+      * 独享实例类型
+      */
+    InstanceType: string;
+    /**
+      * 独享实例状态
+      */
+    InstanceState: string;
+    /**
+      * 独享实例创建时间
+      */
+    CreatedTime: string;
+    /**
+      * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealName: string;
+    /**
+      * 资源ID同唯一id
+      */
+    ResourceId: string;
+}
+/**
  * DeleteApi请求参数结构体
  */
 export interface DeleteApiRequest {
@@ -4031,6 +4153,19 @@ export interface DescribeApiRequest {
       * API 接口唯一 ID。
       */
     ApiId: string;
+}
+/**
+ * 独享实例vpc配置信息
+ */
+export interface VpcConfig {
+    /**
+      * vpcid
+      */
+    UniqVpcId: string;
+    /**
+      * subnetid
+      */
+    UniqSubnetId: string;
 }
 /**
  * UnBindSecretIds返回参数结构体
@@ -4428,6 +4563,20 @@ export interface CreateIPStrategyResponse {
     RequestId?: string;
 }
 /**
+ * UnBindEnvironment返回参数结构体
+ */
+export interface UnBindEnvironmentResponse {
+    /**
+      * 解绑操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteApi返回参数结构体
  */
 export interface DeleteApiResponse {
@@ -4557,6 +4706,35 @@ export interface ServiceEnvironmentStrategyStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnvironmentList: Array<ServiceEnvironmentStrategy>;
+}
+/**
+ * 请求参数
+ */
+export interface ReqParameter {
+    /**
+      * API 的前端参数名称。
+      */
+    Name: string;
+    /**
+      * API 的前端参数位置，如 header。目前支持 header、query、path。
+      */
+    Position: string;
+    /**
+      * API 的前端参数类型，如 String、int。
+      */
+    Type: string;
+    /**
+      * API 的前端参数默认值。
+      */
+    DefaultValue: string;
+    /**
+      * API 的前端参数是否必填，True：表示必填，False：表示可选。
+      */
+    Required: boolean;
+    /**
+      * API 的前端参数备注。
+      */
+    Desc: string;
 }
 /**
  * DescribeApiEnvironmentStrategy返回参数结构体
@@ -4775,6 +4953,31 @@ export interface DescribeUsagePlanResponse {
     RequestId?: string;
 }
 /**
+ * UnBindEnvironment请求参数结构体
+ */
+export interface UnBindEnvironmentRequest {
+    /**
+      * 绑定类型，取值为 API、SERVICE，默认值为 SERVICE。
+      */
+    BindType: string;
+    /**
+      * 待绑定的使用计划唯一 ID 列表。
+      */
+    UsagePlanIds: Array<string>;
+    /**
+      * 待解绑的服务环境。
+      */
+    Environment: string;
+    /**
+      * 待解绑的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * API 唯一 ID 数组，当 BindType=API 时，需要传入此参数。
+      */
+    ApiIds?: Array<string>;
+}
+/**
  * AttachPlugin返回参数结构体
  */
 export interface AttachPluginResponse {
@@ -4871,6 +5074,19 @@ export interface EnvironmentStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxQuota: number;
+}
+/**
+ * 独享实例参数信息
+ */
+export interface InstanceParameterInput {
+    /**
+      * ServiceRequestNumPreSec，ApiRequestNumPreSec
+      */
+    Name: string;
+    /**
+      * 参数值
+      */
+    Value: string;
 }
 /**
  * DescribeUsagePlanEnvironments请求参数结构体
@@ -5466,6 +5682,71 @@ export interface UpdateApiAppKeyResponse {
     RequestId?: string;
 }
 /**
+ * 独享实例详情
+ */
+export interface InstanceDetail {
+    /**
+      * 独享实例唯一id
+      */
+    InstanceId: string;
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 独享实例名字
+      */
+    InstanceName: string;
+    /**
+      * 独享实例描述
+      */
+    InstanceDescription: string;
+    /**
+      * 独享实例计费类型
+      */
+    InstanceChargeType: string;
+    /**
+      * 独享实例状态
+      */
+    InstanceState: string;
+    /**
+      * 独享实例预付费类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceChargePrepaid: InstanceChargePrepaid;
+    /**
+      * 独享实例类型
+      */
+    InstanceType: string;
+    /**
+      * 独享实例网络类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetworkConfig: NetworkConfig;
+    /**
+      * 独享实例vpc配置
+      */
+    VpcConfig: VpcConfig;
+    /**
+      * 独享实例参数配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Parameters: Array<ParameterInfo>;
+    /**
+      * 独享实例隔离时间
+      */
+    IsolationStartedTime: string;
+    /**
+      * 创建时间
+      */
+    CreatedTime: string;
+    /**
+      * 可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zones: string;
+}
+/**
  * CreateApiApp请求参数结构体
  */
 export interface CreateApiAppRequest {
@@ -5545,6 +5826,19 @@ export interface RequestParameter {
       * 是否必须
       */
     Required?: boolean;
+}
+/**
+ * 独享实例预付费详情
+ */
+export interface InstanceChargePrepaid {
+    /**
+      * 自动续费标示
+      */
+    RenewFlag: string;
+    /**
+      * 预付费到期时间
+      */
+    ExpiredTime: string;
 }
 /**
  * 服务发布版本

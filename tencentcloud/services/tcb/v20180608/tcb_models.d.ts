@@ -2244,7 +2244,7 @@ export interface DescribeCloudBaseRunOneClickTaskExternalResponse {
       */
     ExternalId: string;
     /**
-      * 环境Id
+      * 弃用
       */
     EnvId: string;
     /**
@@ -2282,6 +2282,10 @@ finished
       * 失败原因
       */
     FailReason: string;
+    /**
+      * 用户envId
+      */
+    UserEnvId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

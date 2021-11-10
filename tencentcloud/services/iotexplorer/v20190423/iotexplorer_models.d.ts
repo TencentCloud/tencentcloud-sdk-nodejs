@@ -516,6 +516,39 @@ export interface ModifyFenceBindResponse {
     RequestId?: string;
 }
 /**
+ * CreateBatchProduction请求参数结构体
+ */
+export interface CreateBatchProductionRequest {
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 烧录方式，0为直接烧录，1为动态注册。
+      */
+    BurnMethod: number;
+    /**
+      * 生成方式，0为系统生成，1为文件上传。
+      */
+    GenerationMethod: number;
+    /**
+      * 文件上传URL，用于文件上传时填写。
+      */
+    UploadUrl?: string;
+    /**
+      * 量产数量，用于系统生成时填写。
+      */
+    BatchCnt?: number;
+    /**
+      * 是否生成二维码,0为不生成，1为生成。
+      */
+    GenerationQRCode?: number;
+}
+/**
  * DeletePositionFence返回参数结构体
  */
 export interface DeletePositionFenceResponse {
@@ -1025,6 +1058,39 @@ export interface ProjectEntryEx {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeviceCount: number;
+}
+/**
+ * DescribeBatchProduction返回参数结构体
+ */
+export interface DescribeBatchProductionResponse {
+    /**
+      * 量产数量。
+      */
+    BatchCnt?: number;
+    /**
+      * 烧录方式。
+      */
+    BurnMethod?: number;
+    /**
+      * 创建时间。
+      */
+    CreateTime?: number;
+    /**
+      * 下载URL。
+      */
+    DownloadUrl?: string;
+    /**
+      * 生成方式。
+      */
+    GenerationMethod?: number;
+    /**
+      * 上传URL。
+      */
+    UploadUrl?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ListTopicPolicy请求参数结构体
@@ -2199,29 +2265,21 @@ export interface DescribeTopicRuleResponse {
     RequestId?: string;
 }
 /**
- * UpdateFirmware请求参数结构体
+ * 围栏详细信息(包含创建时间及更新时间)
  */
-export interface UpdateFirmwareRequest {
+export interface PositionFenceInfo {
     /**
-      * 产品ID
+      * 围栏信息
       */
-    ProductID: string;
+    GeoFence: PositionFenceItem;
     /**
-      * 设备名
+      * 围栏创建时间
       */
-    DeviceName: string;
+    CreateTime: number;
     /**
-      * 固件新的版本号
+      * 围栏更新时间
       */
-    FirmwareVersion: string;
-    /**
-      * 固件原版本号
-      */
-    FirmwareOriVersion: string;
-    /**
-      * 固件升级方式；0 静默升级 1 用户确认升级   不填默认静默升级
-      */
-    UpgradeMethod?: number;
+    UpdateTime: number;
 }
 /**
  * 位置空间详情
@@ -2332,6 +2390,19 @@ export interface ModifyTopicRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeBatchProduction请求参数结构体
+ */
+export interface DescribeBatchProductionRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 量产ID
+      */
+    BatchProductionId: string;
 }
 /**
  * CreateTopicPolicy请求参数结构体
@@ -2468,6 +2539,47 @@ export interface DescribeProjectRequest {
       * 项目ID
       */
     ProjectId: string;
+}
+/**
+ * ModifyLoRaFrequency请求参数结构体
+ */
+export interface ModifyLoRaFrequencyRequest {
+    /**
+      * 频点唯一ID
+      */
+    FreqId?: string;
+    /**
+      * 频点名称
+      */
+    FreqName?: string;
+    /**
+      * 频点描述
+      */
+    Description?: string;
+    /**
+      * 数据上行信道
+      */
+    ChannelsDataUp?: Array<number>;
+    /**
+      * 数据下行信道RX1
+      */
+    ChannelsDataRX1?: Array<number>;
+    /**
+      * 数据下行信道RX2
+      */
+    ChannelsDataRX2?: Array<number>;
+    /**
+      * 入网上行信道
+      */
+    ChannelsJoinUp?: Array<number>;
+    /**
+      * 入网下行信道RX1
+      */
+    ChannelsJoinRX1?: Array<number>;
+    /**
+      * 入网下行信道RX2
+      */
+    ChannelsJoinRX2?: Array<number>;
 }
 /**
  * UploadFirmware返回参数结构体
@@ -2678,6 +2790,31 @@ export interface DescribeDeviceDataHistoryRequest {
     Context?: string;
 }
 /**
+ * UpdateFirmware请求参数结构体
+ */
+export interface UpdateFirmwareRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 设备名
+      */
+    DeviceName: string;
+    /**
+      * 固件新的版本号
+      */
+    FirmwareVersion: string;
+    /**
+      * 固件原版本号
+      */
+    FirmwareOriVersion: string;
+    /**
+      * 固件升级方式；0 静默升级 1 用户确认升级   不填默认静默升级
+      */
+    UpgradeMethod?: number;
+}
+/**
  * DescribeStudioProduct请求参数结构体
  */
 export interface DescribeStudioProductRequest {
@@ -2701,45 +2838,25 @@ export interface CreatePositionSpaceResponse {
     RequestId?: string;
 }
 /**
- * ModifyLoRaFrequency请求参数结构体
+ * CreateBatchProduction返回参数结构体
  */
-export interface ModifyLoRaFrequencyRequest {
+export interface CreateBatchProductionResponse {
     /**
-      * 频点唯一ID
+      * 项目Id
       */
-    FreqId?: string;
+    ProjectId: string;
     /**
-      * 频点名称
+      * 产品Id
       */
-    FreqName?: string;
+    ProductId: string;
     /**
-      * 频点描述
+      * 量产id
       */
-    Description?: string;
+    BatchProductionId: string;
     /**
-      * 数据上行信道
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ChannelsDataUp?: Array<number>;
-    /**
-      * 数据下行信道RX1
-      */
-    ChannelsDataRX1?: Array<number>;
-    /**
-      * 数据下行信道RX2
-      */
-    ChannelsDataRX2?: Array<number>;
-    /**
-      * 入网上行信道
-      */
-    ChannelsJoinUp?: Array<number>;
-    /**
-      * 入网下行信道RX1
-      */
-    ChannelsJoinRX1?: Array<number>;
-    /**
-      * 入网下行信道RX2
-      */
-    ChannelsJoinRX2?: Array<number>;
+    RequestId?: string;
 }
 /**
  * ModifyModelDefinition返回参数结构体
@@ -2924,6 +3041,31 @@ export interface ModifyProjectResponse {
     RequestId?: string;
 }
 /**
+ * 获取返回列表的详情。
+ */
+export interface BatchProductionInfo {
+    /**
+      * 量产ID
+      */
+    BatchProductionId: string;
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 烧录方式
+      */
+    BurnMethod: number;
+    /**
+      * 创建时间
+      */
+    CreateTime: number;
+    /**
+      * 产品名称
+      */
+    ProductName: string;
+}
+/**
  * DeleteStudioProduct请求参数结构体
  */
 export interface DeleteStudioProductRequest {
@@ -3085,21 +3227,21 @@ export interface CreateTopicRuleRequest {
     TopicRulePayload: TopicRulePayload;
 }
 /**
- * 围栏详细信息(包含创建时间及更新时间)
+ * GetBatchProductionsList请求参数结构体
  */
-export interface PositionFenceInfo {
+export interface GetBatchProductionsListRequest {
     /**
-      * 围栏信息
+      * 项目ID
       */
-    GeoFence: PositionFenceItem;
+    ProjectId: string;
     /**
-      * 围栏创建时间
+      * 偏移量
       */
-    CreateTime: number;
+    Offset?: number;
     /**
-      * 围栏更新时间
+      * 返回数量限制
       */
-    UpdateTime: number;
+    Limit?: number;
 }
 /**
  * DeleteDevice返回参数结构体
@@ -3297,6 +3439,24 @@ export interface ListEventHistoryResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EventHistory?: Array<EventHistoryItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetBatchProductionsList返回参数结构体
+ */
+export interface GetBatchProductionsListResponse {
+    /**
+      * 返回详情信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BatchProductions?: Array<BatchProductionInfo>;
+    /**
+      * 返回数量。
+      */
+    TotalCnt?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

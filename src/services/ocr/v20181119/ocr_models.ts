@@ -186,7 +186,7 @@ export interface HKIDCardOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
       */
   ImageBase64?: string
 
@@ -2385,42 +2385,42 @@ export interface IDCardOCRResponse {
   /**
    * 姓名（人像面）
    */
-  Name?: string
+  Name: string
 
   /**
    * 性别（人像面）
    */
-  Sex?: string
+  Sex: string
 
   /**
    * 民族（人像面）
    */
-  Nation?: string
+  Nation: string
 
   /**
    * 出生日期（人像面）
    */
-  Birth?: string
+  Birth: string
 
   /**
    * 地址（人像面）
    */
-  Address?: string
+  Address: string
 
   /**
    * 身份证号（人像面）
    */
-  IdNum?: string
+  IdNum: string
 
   /**
    * 发证机关（国徽面）
    */
-  Authority?: string
+  Authority: string
 
   /**
    * 证件有效期（国徽面）
    */
-  ValidDate?: string
+  ValidDate: string
 
   /**
       * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
@@ -2428,7 +2428,7 @@ IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时�
 Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
 
 Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0~100，分数越低越模糊，建议阈值≥50）;
-BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0~100，分数越低边框遮挡可能性越低，建议阈值≥50）;
+BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0~100，分数越低边框遮挡可能性越低，建议阈值≤50）;
 
 WarnInfos，告警信息，Code 告警码列表和释义：
 -9100	身份证有效日期不合法告警，
@@ -2440,7 +2440,7 @@ WarnInfos，告警信息，Code 告警码列表和释义：
 -9106	身份证 PS 告警，
 -9107       身份证反光告警。
       */
-  AdvancedInfo?: string
+  AdvancedInfo: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2567,27 +2567,27 @@ export interface HKIDCardOCRResponse {
   /**
    * 中文姓名
    */
-  CnName?: string
+  CnName: string
 
   /**
    * 英文姓名
    */
-  EnName?: string
+  EnName: string
 
   /**
    * 中文姓名对应电码
    */
-  TelexCode?: string
+  TelexCode: string
 
   /**
    * 性别 ：“男M”或“女F”
    */
-  Sex?: string
+  Sex: string
 
   /**
    * 出生日期
    */
-  Birthday?: string
+  Birthday: string
 
   /**
       * 永久性居民身份证。
@@ -2595,27 +2595,27 @@ export interface HKIDCardOCRResponse {
 1：永久；
 -1：未知。
       */
-  Permanent?: number
+  Permanent: number
 
   /**
    * 身份证号码
    */
-  IdNum?: string
+  IdNum: string
 
   /**
    * 证件符号，出生日期下的符号，例如"***AZ"
    */
-  Symbol?: string
+  Symbol: string
 
   /**
    * 首次签发日期
    */
-  FirstIssueDate?: string
+  FirstIssueDate: string
 
   /**
    * 最近领用日期
    */
-  CurrentIssueDate?: string
+  CurrentIssueDate: string
 
   /**
       * 真假判断。
@@ -2624,13 +2624,13 @@ export interface HKIDCardOCRResponse {
 2：真。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FakeDetectResult?: number
+  FakeDetectResult: number
 
   /**
       * 人像照片Base64后的结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HeadImage?: string
+  HeadImage: string
 
   /**
       * 多重告警码，当身份证是翻拍、复印、PS件时返回对应告警码。
@@ -2639,7 +2639,7 @@ export interface HKIDCardOCRResponse {
 -9104：证照PS告警
 -9105：证照防伪告警
       */
-  WarningCode?: Array<number>
+  WarningCode: Array<number>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2779,6 +2779,28 @@ export interface PropOwnerCertOCRRequest {
 }
 
 /**
+ * RecognizeContainerOCR请求参数结构体
+ */
+export interface RecognizeContainerOCRRequest {
+  /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+  ImageBase64?: string
+
+  /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+  ImageUrl?: string
+}
+
+/**
  * TextDetect请求参数结构体
  */
 export interface TextDetectRequest {
@@ -2840,11 +2862,18 @@ export interface VatInvoiceVerifyRequest {
   InvoiceDate: string
 
   /**
-      * 金额/发票校验码后6位（根据票种传递对应值，如果报参数错误，请仔细检查每个票种对应的值）
+      * 根据票种传递对应值，如果报参数错误，请仔细检查每个票种对应的值
+
 增值税专用发票：开具金额（不含税）
+
 增值税普通发票、增值税电子普通发票（含通行费发票）、增值税普通发票（卷票）：校验码后6位
+
+区块链发票：不含税金额/校验码，例如：“285.01/856ab”
+
 机动车销售统一发票：不含税价
+
 货物运输业增值税专用发票：合计金额
+
 二手车销售统一发票：车价合计
       */
   Additional: string
@@ -4793,6 +4822,86 @@ export interface ResidenceBookletOCRResponse {
   Address: string
 
   /**
+   * 承办人签章文字
+   */
+  Signature: string
+
+  /**
+   * 签发日期
+   */
+  IssueDate: string
+
+  /**
+   * 户主页编号
+   */
+  HomePageNumber: string
+
+  /**
+   * 户主姓名
+   */
+  HouseholderName: string
+
+  /**
+   * 户主或与户主关系
+   */
+  Relationship: string
+
+  /**
+   * 本市（县）其他住址
+   */
+  OtherAddresses: string
+
+  /**
+   * 宗教信仰
+   */
+  ReligiousBelief: string
+
+  /**
+   * 身高
+   */
+  Height: string
+
+  /**
+   * 血型
+   */
+  BloodType: string
+
+  /**
+   * 婚姻状况
+   */
+  MaritalStatus: string
+
+  /**
+   * 兵役状况
+   */
+  VeteranStatus: string
+
+  /**
+   * 职业
+   */
+  Profession: string
+
+  /**
+   * 何时由何地迁来本市(县)
+   */
+  MoveToCityInformation: string
+
+  /**
+   * 何时由何地迁来本址
+   */
+  MoveToSiteInformation: string
+
+  /**
+   * 登记日期
+   */
+  RegistrationDate: string
+
+  /**
+   * 曾用名
+   */
+  FormerName: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5596,6 +5705,73 @@ export interface CandWord {
    * 候选字符集的单词信息（包括单词Character和单词置信度confidence）
    */
   CandWords: Array<Words>
+}
+
+/**
+ * RecognizeContainerOCR返回参数结构体
+ */
+export interface RecognizeContainerOCRResponse {
+  /**
+   * 集装箱箱号
+   */
+  ContainerId?: string
+
+  /**
+   * 集装箱类型
+   */
+  ContainerType?: string
+
+  /**
+   * 集装箱总重量，单位：千克（KG）
+   */
+  GrossKG?: string
+
+  /**
+   * 集装箱总重量，单位：磅（LB）
+   */
+  GrossLB?: string
+
+  /**
+   * 集装箱有效承重，单位：千克（KG）
+   */
+  PayloadKG?: string
+
+  /**
+   * 集装箱有效承重，单位：磅（LB）
+   */
+  PayloadLB?: string
+
+  /**
+   * 集装箱容量，单位：立方米
+   */
+  CapacityM3?: string
+
+  /**
+   * 集装箱容量，单位：立英尺
+   */
+  CapacityFT3?: string
+
+  /**
+      * 告警码
+-9926	集装箱箱号不完整或者不清晰
+-9927	集装箱类型不完整或者不清晰
+      */
+  Warn?: Array<number>
+
+  /**
+   * 集装箱自身重量，单位：千克（KG）
+   */
+  TareKG?: string
+
+  /**
+   * 集装箱自身重量，单位：磅（LB）
+   */
+  TareLB?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

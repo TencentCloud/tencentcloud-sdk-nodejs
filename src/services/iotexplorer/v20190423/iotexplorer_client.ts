@@ -48,6 +48,7 @@ import {
   CreateStudioProductRequest,
   ProductModelDefinition,
   ModifyFenceBindResponse,
+  CreateBatchProductionRequest,
   DeletePositionFenceResponse,
   FenceAlarmPoint,
   UploadFirmwareRequest,
@@ -71,6 +72,7 @@ import {
   DeviceDataHistoryItem,
   ProductEntry,
   ProjectEntryEx,
+  DescribeBatchProductionResponse,
   ListTopicPolicyRequest,
   DescribeLoRaFrequencyRequest,
   DeleteDeviceRequest,
@@ -133,12 +135,13 @@ import {
   CreatePositionFenceResponse,
   TopicItem,
   DescribeTopicRuleResponse,
-  UpdateFirmwareRequest,
+  PositionFenceInfo,
   PositionSpaceInfo,
   LoRaGatewayLocation,
   DescribeDeviceRequest,
   DescribePositionFenceListRequest,
   ModifyTopicRuleResponse,
+  DescribeBatchProductionRequest,
   CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
   DescribeLoRaFrequencyResponse,
@@ -146,6 +149,7 @@ import {
   GetLoRaGatewayListRequest,
   FenceEventItem,
   DescribeProjectRequest,
+  ModifyLoRaFrequencyRequest,
   UploadFirmwareResponse,
   ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
@@ -156,9 +160,10 @@ import {
   LoRaGatewayItem,
   ControlDeviceDataResponse,
   DescribeDeviceDataHistoryRequest,
+  UpdateFirmwareRequest,
   DescribeStudioProductRequest,
   CreatePositionSpaceResponse,
-  ModifyLoRaFrequencyRequest,
+  CreateBatchProductionResponse,
   ModifyModelDefinitionResponse,
   DeletePositionFenceRequest,
   GetProjectListRequest,
@@ -169,6 +174,7 @@ import {
   DeleteDevicesRequest,
   AppDeviceInfo,
   ModifyProjectResponse,
+  BatchProductionInfo,
   DeleteStudioProductRequest,
   ModifyProjectRequest,
   ModifySpacePropertyResponse,
@@ -182,12 +188,13 @@ import {
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   CreateTopicRuleRequest,
-  PositionFenceInfo,
+  GetBatchProductionsListRequest,
   DeleteDeviceResponse,
   DeviceInfo,
   ModifyLoRaFrequencyResponse,
   ModifyLoRaGatewayRequest,
   ListEventHistoryResponse,
+  GetBatchProductionsListResponse,
   EnableTopicRuleRequest,
   DescribeFirmwareTaskRequest,
   CreatePositionSpaceRequest,
@@ -253,13 +260,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据设备产品ID、设备名称，获取设备上报的属性数据。
+   * 获取量产详情信息。
    */
-  async DescribeDeviceData(
-    req: DescribeDeviceDataRequest,
-    cb?: (error: string, rep: DescribeDeviceDataResponse) => void
-  ): Promise<DescribeDeviceDataResponse> {
-    return this.request("DescribeDeviceData", req, cb)
+  async DescribeBatchProduction(
+    req: DescribeBatchProductionRequest,
+    cb?: (error: string, rep: DescribeBatchProductionResponse) => void
+  ): Promise<DescribeBatchProductionResponse> {
+    return this.request("DescribeBatchProduction", req, cb)
   }
 
   /**
@@ -460,6 +467,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTopicRuleResponse) => void
   ): Promise<ModifyTopicRuleResponse> {
     return this.request("ModifyTopicRule", req, cb)
+  }
+
+  /**
+   * 根据设备产品ID、设备名称，获取设备上报的属性数据。
+   */
+  async DescribeDeviceData(
+    req: DescribeDeviceDataRequest,
+    cb?: (error: string, rep: DescribeDeviceDataResponse) => void
+  ): Promise<DescribeDeviceDataResponse> {
+    return this.request("DescribeDeviceData", req, cb)
   }
 
   /**
@@ -803,6 +820,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于新建批量生产设备
+   */
+  async CreateBatchProduction(
+    req: CreateBatchProductionRequest,
+    cb?: (error: string, rep: CreateBatchProductionResponse) => void
+  ): Promise<CreateBatchProductionResponse> {
+    return this.request("CreateBatchProduction", req, cb)
+  }
+
+  /**
    * 删除位置空间
    */
   async DeletePositionSpace(
@@ -820,6 +847,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
   ): Promise<DescribeModelDefinitionResponse> {
     return this.request("DescribeModelDefinition", req, cb)
+  }
+
+  /**
+   * 列出量产数据列表信息。
+   */
+  async GetBatchProductionsList(
+    req: GetBatchProductionsListRequest,
+    cb?: (error: string, rep: GetBatchProductionsListResponse) => void
+  ): Promise<GetBatchProductionsListResponse> {
+    return this.request("GetBatchProductionsList", req, cb)
   }
 
   /**
