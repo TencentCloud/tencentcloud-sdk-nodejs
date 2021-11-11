@@ -178,9 +178,9 @@ it("cdb.v20170320.DescribeRollbackTaskDetail", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyDBInstanceSecurityGroups", async function () {
+it("cdb.v20170320.ModifyBackupDownloadRestriction", async function () {
     try {
-       const data = await client.ModifyDBInstanceSecurityGroups({})
+       const data = await client.ModifyBackupDownloadRestriction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,6 +888,16 @@ it("cdb.v20170320.VerifyRootAccount", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeBackupDownloadRestriction", async function () {
+    try {
+       const data = await client.DescribeBackupDownloadRestriction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.StartDelayReplication", async function () {
     try {
        const data = await client.StartDelayReplication({})
@@ -1051,6 +1061,16 @@ it("cdb.v20170320.OpenWanService", async function () {
 it("cdb.v20170320.ModifyAuditRule", async function () {
     try {
        const data = await client.ModifyAuditRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

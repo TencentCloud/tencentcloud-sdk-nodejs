@@ -16,6 +16,16 @@
  */
 
 /**
+ * ModifyInstanceTag返回参数结构体
+ */
+export interface ModifyInstanceTagResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAuditConfig请求参数结构体
  */
 export interface ModifyAuditConfigRequest {
@@ -1844,13 +1854,33 @@ export interface RollbackTimeRange {
 }
 
 /**
- * ModifyInstanceTag返回参数结构体
+ * ModifyBackupDownloadRestriction请求参数结构体
  */
-export interface ModifyInstanceTagResponse {
+export interface ModifyBackupDownloadRestrictionRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * NoLimit 不限制,内外网都可以下载； LimitOnlyIntranet 仅内网可下载； Customize 用户自定义vpc:ip可下载。 只有该值为 Customize 时，才可以设置 LimitVpc 和 LimitIp 。
    */
-  RequestId?: string
+  LimitType: string
+
+  /**
+   * 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。默认为In。
+   */
+  VpcComparisonSymbol?: string
+
+  /**
+   * In: 指定的ip可以下载； NotIn: 指定的ip不可以下载。 默认为In。
+   */
+  IpComparisonSymbol?: string
+
+  /**
+   * 限制下载的vpc设置。
+   */
+  LimitVpc?: Array<BackupLimitVpcItem>
+
+  /**
+   * 限制下载的ip设置
+   */
+  LimitIp?: Array<string>
 }
 
 /**
@@ -1926,6 +1956,26 @@ export interface ModifyAccountMaxUserConnectionsRequest {
    * 设置账户最大可用连接数，最大可设置值为10240。
    */
   MaxUserConnections: number
+}
+
+/**
+ * ModifyAccountDescription请求参数结构体
+ */
+export interface ModifyAccountDescriptionRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * 云数据库账号。
+   */
+  Accounts: Array<Account>
+
+  /**
+   * 数据库账号的备注信息。
+   */
+  Description?: string
 }
 
 /**
@@ -3042,6 +3092,41 @@ export interface RenewDBInstanceRequest {
 }
 
 /**
+ * 慢查询日志详情
+ */
+export interface SlowLogInfo {
+  /**
+   * 备份文件名
+   */
+  Name: string
+
+  /**
+   * 备份文件大小，单位：Byte
+   */
+  Size: number
+
+  /**
+   * 备份快照时间，时间格式：2016-03-17 02:10:37
+   */
+  Date: string
+
+  /**
+   * 内网下载地址
+   */
+  IntranetUrl: string
+
+  /**
+   * 外网下载地址
+   */
+  InternetUrl: string
+
+  /**
+   * 日志具体类型，可能的值：slowlog - 慢日志
+   */
+  Type: string
+}
+
+/**
  * 用于回档的数据库表名
  */
 export interface RollbackTableName {
@@ -3411,18 +3496,13 @@ export interface CreateRoInstanceIpResponse {
 }
 
 /**
- * DescribeBackupDatabases返回参数结构体
+ * CreateAuditPolicy返回参数结构体
  */
-export interface DescribeBackupDatabasesResponse {
+export interface CreateAuditPolicyResponse {
   /**
-   * 返回的数据个数。
+   * 审计策略 ID。
    */
-  TotalCount?: number
-
-  /**
-   * 符合查询条件的数据库数组。
-   */
-  Items?: Array<DatabaseName>
+  PolicyId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3749,13 +3829,18 @@ export interface DescribeDBImportRecordsResponse {
 }
 
 /**
- * CreateAuditPolicy返回参数结构体
+ * DescribeBackupDatabases返回参数结构体
  */
-export interface CreateAuditPolicyResponse {
+export interface DescribeBackupDatabasesResponse {
   /**
-   * 审计策略 ID。
+   * 返回的数据个数。
    */
-  PolicyId: string
+  TotalCount?: number
+
+  /**
+   * 符合查询条件的数据库数组。
+   */
+  Items?: Array<DatabaseName>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4424,6 +4509,26 @@ export interface DescribeAsyncRequestInfoRequest {
    * 异步任务的请求 ID。
    */
   AsyncRequestId: string
+}
+
+/**
+ * DescribeInstanceParams返回参数结构体
+ */
+export interface DescribeInstanceParamsResponse {
+  /**
+   * 实例的参数总数。
+   */
+  TotalCount?: number
+
+  /**
+   * 参数详情。
+   */
+  Items?: Array<ParameterDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5147,23 +5252,38 @@ export interface ModifyDBInstanceNameResponse {
 }
 
 /**
- * ModifyAccountDescription请求参数结构体
+ * DescribeBackupDownloadRestriction返回参数结构体
  */
-export interface ModifyAccountDescriptionRequest {
+export interface DescribeBackupDownloadRestrictionResponse {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * NoLimit 不限制,内外网都可以下载； LimitOnlyIntranet 仅内网可下载； Customize 用户自定义vpc:ip可下载。 只有该值为 Customize 时， LimitVpc 和 LimitIp 才有意义。
    */
-  InstanceId: string
+  LimitType: string
 
   /**
-   * 云数据库账号。
+   * 该参数仅支持 In， 表示 LimitVpc 指定的vpc可以下载。
    */
-  Accounts: Array<Account>
+  VpcComparisonSymbol: string
 
   /**
-   * 数据库账号的备注信息。
+   * In: 指定的ip可以下载； NotIn: 指定的ip不可以下载。
    */
-  Description?: string
+  IpComparisonSymbol: string
+
+  /**
+   * 限制下载的vpc设置。
+   */
+  LimitVpc: Array<BackupLimitVpcItem>
+
+  /**
+   * 限制下载的ip设置。
+   */
+  LimitIp: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5756,6 +5876,16 @@ export interface CreateAuditRuleRequest {
    * 是否开启全审计。支持值包括：false – 不开启全审计，true – 开启全审计。用户未设置审计规则过滤条件时，默认开启全审计。
    */
   AuditAll?: boolean
+}
+
+/**
+ * ModifyBackupDownloadRestriction返回参数结构体
+ */
+export interface ModifyBackupDownloadRestrictionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6510,39 +6640,9 @@ export interface DescribeParamTemplateInfoRequest {
 }
 
 /**
- * 慢查询日志详情
+ * DescribeBackupDownloadRestriction请求参数结构体
  */
-export interface SlowLogInfo {
-  /**
-   * 备份文件名
-   */
-  Name: string
-
-  /**
-   * 备份文件大小，单位：Byte
-   */
-  Size: number
-
-  /**
-   * 备份快照时间，时间格式：2016-03-17 02:10:37
-   */
-  Date: string
-
-  /**
-   * 内网下载地址
-   */
-  IntranetUrl: string
-
-  /**
-   * 外网下载地址
-   */
-  InternetUrl: string
-
-  /**
-   * 日志具体类型，可能的值：slowlog - 慢日志
-   */
-  Type: string
-}
+export type DescribeBackupDownloadRestrictionRequest = null
 
 /**
  * InitDBInstances返回参数结构体
@@ -6665,23 +6765,18 @@ export interface DescribeDBInstanceInfoRequest {
 }
 
 /**
- * DescribeInstanceParams返回参数结构体
+ * 备份文件限制下载来源VPC设置项
  */
-export interface DescribeInstanceParamsResponse {
+export interface BackupLimitVpcItem {
   /**
-   * 实例的参数总数。
+   * 限制下载来源的地域。目前仅支持当前地域。
    */
-  TotalCount?: number
+  Region: string
 
   /**
-   * 参数详情。
+   * 限制下载的vpc列表。
    */
-  Items?: Array<ParameterDetail>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  VpcList: Array<string>
 }
 
 /**

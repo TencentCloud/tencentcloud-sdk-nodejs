@@ -899,11 +899,11 @@ export interface ModifyDBInstanceSpecRequest {
       */
     SwitchTag?: number;
     /**
-      * 切换开始时间。
+      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。
       */
     SwitchStartTime?: string;
     /**
-      * 切换截止时间。
+      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。
       */
     SwitchEndTime?: string;
 }
@@ -1605,7 +1605,10 @@ export interface ParamInfo {
       */
     Name: string;
     /**
-      * 参数值类型：integer（整型）、real（浮点型）、bool（布尔型）、enum（枚举类型）、mutil_enum（枚举类型、支持多选）
+      * 参数值类型：integer（整型）、real（浮点型）、bool（布尔型）、enum（枚举类型）、mutil_enum（枚举类型、支持多选）。
+当参数类型为integer（整型）、real（浮点型）时，参数的取值范围根据返回值的Max、Min确定；
+当参数类型为bool（布尔型）时，参数设置值取值范围是true | false；
+当参数类型为enum（枚举类型）、mutil_enum（多枚举类型）时，参数的取值范围由返回值中的EnumValue确定。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ParamValueType: string;
@@ -1802,7 +1805,7 @@ export interface DescribeSlowQueryAnalysisRequest {
       */
     StartTime: string;
     /**
-      * 查询j结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。
+      * 查询结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。
       */
     EndTime: string;
     /**
@@ -1810,19 +1813,19 @@ export interface DescribeSlowQueryAnalysisRequest {
       */
     DatabaseName?: string;
     /**
-      * 排序维度。 可选参数，取值范围[CallNum,CostTime,AvgCostTime]。
+      * 排序维度。 可选参数，取值范围[CallNum,CostTime,AvgCostTime]。默认CallNum。
       */
     OrderBy?: string;
     /**
-      * 排序类型。升序asc、降序desc。
+      * 排序类型。升序asc、降序desc。默认desc。
       */
     OrderByType?: string;
     /**
-      * 分页大小。取值范围[1,100]。
+      * 分页大小。取值范围[1,100]。默认50。
       */
     Limit?: number;
     /**
-      * 分页偏移。取值范围[0,INF)。
+      * 分页偏移。取值范围[0,INF)。默认0。
       */
     Offset?: number;
 }
@@ -2590,7 +2593,7 @@ export interface DescribeSlowQueryListRequest {
       */
     StartTime: string;
     /**
-      * 查询j结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。
+      * 查询结束时间戳，格式 “YYYY-MM-DD HH:mm:ss”。
       */
     EndTime: string;
     /**

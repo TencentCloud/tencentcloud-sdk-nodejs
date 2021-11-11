@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyInstanceTagResponse,
   ModifyAuditConfigRequest,
   CreateDBInstanceRequest,
   TaskDetail,
@@ -83,11 +84,12 @@ import {
   DeleteAuditPolicyRequest,
   BackupSummaryItem,
   RollbackTimeRange,
-  ModifyInstanceTagResponse,
+  ModifyBackupDownloadRestrictionRequest,
   CreateParamTemplateResponse,
   CreateDBInstanceHourResponse,
   DescribeCloneListResponse,
   ModifyAccountMaxUserConnectionsRequest,
+  ModifyAccountDescriptionRequest,
   ReleaseIsolatedDBInstancesRequest,
   BinlogInfo,
   DescribeAccountsRequest,
@@ -116,6 +118,7 @@ import {
   DescribeDBSwitchRecordsResponse,
   TableName,
   RenewDBInstanceRequest,
+  SlowLogInfo,
   RollbackTableName,
   DeleteBackupResponse,
   ModifyInstanceParamRequest,
@@ -137,7 +140,7 @@ import {
   CloseWanServiceRequest,
   RestartDBInstancesResponse,
   CreateRoInstanceIpResponse,
-  DescribeBackupDatabasesResponse,
+  CreateAuditPolicyResponse,
   VerifyRootAccountRequest,
   SwitchForUpgradeResponse,
   ModifyAccountMaxUserConnectionsResponse,
@@ -155,7 +158,7 @@ import {
   CreateRoInstanceIpRequest,
   ModifyInstanceParamResponse,
   DescribeDBImportRecordsResponse,
-  CreateAuditPolicyResponse,
+  DescribeBackupDatabasesResponse,
   BackupItem,
   DatabaseName,
   AuditFilter,
@@ -190,6 +193,7 @@ import {
   InquiryPriceUpgradeInstancesRequest,
   ModifyAuditRuleResponse,
   DescribeAsyncRequestInfoRequest,
+  DescribeInstanceParamsResponse,
   TablePrivilege,
   BalanceRoGroupLoadRequest,
   DescribeAuditRulesRequest,
@@ -223,7 +227,7 @@ import {
   ModifyAuditConfigResponse,
   RoVipInfo,
   ModifyDBInstanceNameResponse,
-  ModifyAccountDescriptionRequest,
+  DescribeBackupDownloadRestrictionResponse,
   ModifyAccountPasswordRequest,
   DescribeAuditPoliciesRequest,
   DescribeTablesRequest,
@@ -245,6 +249,7 @@ import {
   DeleteAuditRuleResponse,
   IsolateDBInstanceRequest,
   CreateAuditRuleRequest,
+  ModifyBackupDownloadRestrictionResponse,
   ModifyTimeWindowRequest,
   AuditLogFile,
   ModifyAccountPrivilegesRequest,
@@ -278,14 +283,14 @@ import {
   DeleteAuditPolicyResponse,
   DescribeDBInstancesResponse,
   DescribeParamTemplateInfoRequest,
-  SlowLogInfo,
+  DescribeBackupDownloadRestrictionRequest,
   InitDBInstancesResponse,
   DescribeDataBackupOverviewRequest,
   DescribeParamTemplateInfoResponse,
   ParamRecord,
   RestartDBInstancesRequest,
   DescribeDBInstanceInfoRequest,
-  DescribeInstanceParamsResponse,
+  BackupLimitVpcItem,
   DescribeDBZoneConfigResponse,
   CreateDeployGroupRequest,
   DisassociateSecurityGroupsRequest,
@@ -499,13 +504,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+   * 该接口用于修改用户当前地域的备份文件限制下载来源，可以设置内外网均可下载、仅内网可下载，或内网指定的vpc、ip可以下载。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async ModifyBackupDownloadRestriction(
+    req: ModifyBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
+  ): Promise<ModifyBackupDownloadRestrictionResponse> {
+    return this.request("ModifyBackupDownloadRestriction", req, cb)
   }
 
   /**
@@ -1233,6 +1238,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用户查询当前地域用户设置的默认备份下载来源限制。
+   */
+  async DescribeBackupDownloadRestriction(
+    req?: DescribeBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: DescribeBackupDownloadRestrictionResponse) => void
+  ): Promise<DescribeBackupDownloadRestrictionResponse> {
+    return this.request("DescribeBackupDownloadRestriction", req, cb)
+  }
+
+  /**
    * 启动延迟只读实例的延迟复制。
    */
   async StartDelayReplication(
@@ -1406,6 +1421,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAuditRuleResponse) => void
   ): Promise<ModifyAuditRuleResponse> {
     return this.request("ModifyAuditRule", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**

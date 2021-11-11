@@ -35,6 +35,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterTargets", req, cb);
     }
     /**
+     * 升、降配接口。支持共享型clb升级到性能保障型clb。支持性能保障型提升等级。支持性能保障降低规格。（不支持性能保障降级到共享型）。
+     */
+    async ModifyLoadBalancerSla(req, cb) {
+        return this.request("ModifyLoadBalancerSla", req, cb);
+    }
+    /**
      * 根据证书ID查询其在一个地域中所关联到负载均衡实例列表
      */
     async DescribeLoadBalancerListByCertId(req, cb) {

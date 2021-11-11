@@ -132,10 +132,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRollbackTaskDetail", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * 该接口用于修改用户当前地域的备份文件限制下载来源，可以设置内外网均可下载、仅内网可下载，或内网指定的vpc、ip可以下载。
      */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    async ModifyBackupDownloadRestriction(req, cb) {
+        return this.request("ModifyBackupDownloadRestriction", req, cb);
     }
     /**
      * 本接口(DescribeTasks)用于查询云数据库实例任务列表。
@@ -582,6 +582,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyRootAccount", req, cb);
     }
     /**
+     * 该接口用户查询当前地域用户设置的默认备份下载来源限制。
+     */
+    async DescribeBackupDownloadRestriction(req, cb) {
+        return this.request("DescribeBackupDownloadRestriction", req, cb);
+    }
+    /**
      * 启动延迟只读实例的延迟复制。
      */
     async StartDelayReplication(req, cb) {
@@ -688,6 +694,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAuditRule(req, cb) {
         return this.request("ModifyAuditRule", req, cb);
+    }
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
      * 本接口(DeleteAuditRule)用于删除用户的审计规则。

@@ -28,6 +28,16 @@ it("clb.v20180317.RegisterTargets", async function () {
     }
 })
 
+it("clb.v20180317.ModifyLoadBalancerSla", async function () {
+    try {
+       const data = await client.ModifyLoadBalancerSla({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeLoadBalancerListByCertId", async function () {
     try {
        const data = await client.DescribeLoadBalancerListByCertId({})

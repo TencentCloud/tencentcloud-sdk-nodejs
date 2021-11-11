@@ -2039,7 +2039,7 @@ export interface CreateListenerResponse {
       * 创建的监听器的唯一标识数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ListenerIds?: Array<string>;
+    ListenerIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4749,6 +4749,10 @@ export interface CreateListenerRequest {
       * 会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。
       */
     SessionType?: string;
+    /**
+      * 批量端口段的结束端口，必须和Ports长度一样。
+      */
+    EndPorts?: Array<number>;
 }
 /**
  * ReleaseAddresses请求参数结构体

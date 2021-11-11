@@ -920,25 +920,13 @@ export interface LoadBalancerHealth {
     Listeners: Array<ListenerHealth>;
 }
 /**
- * SetLoadBalancerClsLog请求参数结构体
+ * ModifyLoadBalancerSla返回参数结构体
  */
-export interface SetLoadBalancerClsLogRequest {
+export interface ModifyLoadBalancerSlaResponse {
     /**
-      * 负载均衡实例 ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    LoadBalancerId: string;
-    /**
-      * 日志服务(CLS)的日志集ID。
-      */
-    LogSetId: string;
-    /**
-      * 日志服务(CLS)的日志主题ID。
-      */
-    LogTopicId: string;
-    /**
-      * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
-      */
-    LogType?: string;
+    RequestId?: string;
 }
 /**
  * DeleteLoadBalancerListeners请求参数结构体
@@ -1155,6 +1143,19 @@ export interface DescribeLBListenersRequest {
       * 需要查询的内网ip列表
       */
     Backends: Array<LbRsItem>;
+}
+/**
+ * 性能保障变配参数
+ */
+export interface SlaUpdateParam {
+    /**
+      * lb的字符串ID
+      */
+    LoadBalancerId: string;
+    /**
+      * 需要变更的性能保障级别
+      */
+    SlaType: string;
 }
 /**
  * 转发目标，即绑定在负载均衡上的后端服务
@@ -3678,6 +3679,15 @@ export interface DescribeExclusiveClustersRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * ModifyLoadBalancerSla请求参数结构体
+ */
+export interface ModifyLoadBalancerSlaRequest {
+    /**
+      * 负载均衡性能保障实例ID和变配的目标规格
+      */
+    LoadBalancerSla: Array<SlaUpdateParam>;
+}
+/**
  * DescribeBlockIPTask请求参数结构体
  */
 export interface DescribeBlockIPTaskRequest {
@@ -3734,6 +3744,27 @@ export interface Quota {
       * 配额数量。
       */
     QuotaLimit: number;
+}
+/**
+ * SetLoadBalancerClsLog请求参数结构体
+ */
+export interface SetLoadBalancerClsLogRequest {
+    /**
+      * 负载均衡实例 ID。
+      */
+    LoadBalancerId: string;
+    /**
+      * 日志服务(CLS)的日志集ID。
+      */
+    LogSetId: string;
+    /**
+      * 日志服务(CLS)的日志主题ID。
+      */
+    LogTopicId: string;
+    /**
+      * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
+      */
+    LogType?: string;
 }
 /**
  * 反查Lb绑定关系。

@@ -62,7 +62,7 @@ import {
   RegisterTargetsWithClassicalLBResponse,
   DescribeTargetGroupsResponse,
   LoadBalancerHealth,
-  SetLoadBalancerClsLogRequest,
+  ModifyLoadBalancerSlaResponse,
   DeleteLoadBalancerListenersRequest,
   BlockedIP,
   ModifyRuleResponse,
@@ -76,6 +76,7 @@ import {
   BatchRegisterTargetsResponse,
   ModifyLoadBalancerAttributesRequest,
   DescribeLBListenersRequest,
+  SlaUpdateParam,
   Target,
   DescribeLoadBalancerTrafficRequest,
   DescribeBlockIPListRequest,
@@ -182,10 +183,12 @@ import {
   DescribeBlockIPTaskResponse,
   DescribeClassicalLBListenersResponse,
   DescribeExclusiveClustersRequest,
+  ModifyLoadBalancerSlaRequest,
   DescribeBlockIPTaskRequest,
   CreateLoadBalancerResponse,
   DescribeRewriteResponse,
   Quota,
+  SetLoadBalancerClsLogRequest,
   LBItem,
   ModifyTargetGroupAttributeResponse,
   DeleteLoadBalancerListenersResponse,
@@ -229,6 +232,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegisterTargetsResponse) => void
   ): Promise<RegisterTargetsResponse> {
     return this.request("RegisterTargets", req, cb)
+  }
+
+  /**
+   * 升、降配接口。支持共享型clb升级到性能保障型clb。支持性能保障型提升等级。支持性能保障降低规格。（不支持性能保障降级到共享型）。
+   */
+  async ModifyLoadBalancerSla(
+    req: ModifyLoadBalancerSlaRequest,
+    cb?: (error: string, rep: ModifyLoadBalancerSlaResponse) => void
+  ): Promise<ModifyLoadBalancerSlaResponse> {
+    return this.request("ModifyLoadBalancerSla", req, cb)
   }
 
   /**
