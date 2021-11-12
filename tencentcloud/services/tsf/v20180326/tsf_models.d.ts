@@ -22,6 +22,18 @@ export interface DescribePublicConfigSummaryRequest {
       * 升序传 0，降序传 1
       */
     OrderType?: number;
+    /**
+      * 无
+      */
+    ConfigTagList?: Array<string>;
+    /**
+      * 无
+      */
+    DisableProgramAuthCheck?: boolean;
+    /**
+      * 无
+      */
+    ConfigIdList?: Array<string>;
 }
 /**
  * 文件配置项列表
@@ -369,7 +381,7 @@ export interface DescribeSimpleClustersResponse {
       * TSF集群分页对象
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TsfPageCluster;
+    Result: TsfPageCluster;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -521,7 +533,7 @@ export interface CreateGatewayApiResponse {
     /**
       * 是否成功
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -699,7 +711,7 @@ export interface CreateNamespaceResponse {
       * 成功时为命名空间ID，失败为null
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -950,6 +962,10 @@ export interface CreateGatewayApiRequest {
       * Api信息
       */
     ApiList: Array<ApiInfo>;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * DescribeCreateGatewayApiStatus返回参数结构体
@@ -1234,7 +1250,7 @@ export interface DescribeServerlessGroupsResponse {
       * 数据列表对象
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ServerlessGroupPage;
+    Result: ServerlessGroupPage;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1615,7 +1631,7 @@ export interface CreateClusterResponse {
     /**
       * 集群ID
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1696,7 +1712,7 @@ export interface DescribeLanesResponse {
       * 泳道列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: LaneInfos;
+    Result: LaneInfos;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1738,6 +1754,10 @@ export interface CreateNamespaceRequest {
       * 需要绑定的数据集ID
       */
     ProgramId?: string;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * DescribeClusterInstances请求参数结构体
@@ -1907,7 +1927,7 @@ export interface CreateLaneResponse {
       * 泳道ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2011,7 +2031,7 @@ export interface DescribeSimpleNamespacesResponse {
       * 命名空间分页列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TsfPageNamespace;
+    Result: TsfPageNamespace;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2161,7 +2181,7 @@ export interface CreatePublicConfigResponse {
       * true：创建成功；false：创建失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2203,7 +2223,7 @@ export interface CreateConfigResponse {
       * true：创建成功；false：创建失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2520,7 +2540,7 @@ export interface DescribeSimpleApplicationsResponse {
       * 简单应用分页对象
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TsfPageSimpleApplication;
+    Result: TsfPageSimpleApplication;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2687,6 +2707,10 @@ export interface DescribeSimpleApplicationsRequest {
       * 通过id和name进行关键词过滤
       */
     SearchWord?: string;
+    /**
+      * 无
+      */
+    DisableProgramAuthCheck?: boolean;
 }
 /**
  * OperateApplicationTcrBinding请求参数结构体
@@ -2891,6 +2915,10 @@ export interface CreateFileConfigRequest {
       * Base64编码的配置项
       */
     EncodeWithBase64?: boolean;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * UpdateApiRateLimitRules请求参数结构体
@@ -3597,6 +3625,10 @@ export interface CreateLaneRuleRequest {
       * 泳道Id
       */
     LaneId: string;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * DisableUnitRoute返回参数结构体
@@ -3969,6 +4001,10 @@ export interface DescribeSimpleNamespacesRequest {
       * 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认，命名空间。1：非默认命名空间
       */
     IsDefault?: string;
+    /**
+      * 无
+      */
+    DisableProgramAuthCheck?: boolean;
 }
 /**
  * ExecuteTaskFlow返回参数结构体
@@ -4119,6 +4155,10 @@ export interface DescribeSimpleClustersRequest {
       * 对id和name进行关键词过滤
       */
     SearchWord?: string;
+    /**
+      * 无
+      */
+    DisableProgramAuthCheck?: boolean;
 }
 /**
  * DeployServerlessGroup请求参数结构体
@@ -4166,7 +4206,7 @@ export interface DescribeLaneRulesResponse {
       * 泳道规则列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: LaneRules;
+    Result: LaneRules;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4929,7 +4969,7 @@ export interface CreateLaneRuleResponse {
       * 泳道规则Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5143,6 +5183,10 @@ export interface CreateApplicationRequest {
       * 忽略创建镜像仓库
       */
     IgnoreCreateImageRepository?: boolean;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * DeployGroup请求参数结构体
@@ -6140,15 +6184,23 @@ export interface DescribeLanesRequest {
     /**
       * 每页展示的条数
       */
-    Limit: number;
+    Limit?: number;
     /**
       * 翻页偏移量
       */
-    Offset: number;
+    Offset?: number;
     /**
       * 搜索关键字
       */
     SearchWord?: string;
+    /**
+      * 无
+      */
+    LaneIdList?: Array<string>;
+    /**
+      * 无
+      */
+    DisableProgramAuthCheck?: boolean;
 }
 /**
  * DescribeGatewayMonitorOverview返回参数结构体
@@ -6191,6 +6243,10 @@ export interface CreatePublicConfigRequest {
       * Base64编码的配置项
       */
     EncodeWithBase64?: boolean;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * CreateAllGatewayApiAsync请求参数结构体
@@ -7110,6 +7166,10 @@ export interface CreateConfigRequest {
       * Base64编码的配置项
       */
     EncodeWithBase64?: boolean;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * DescribeUploadInfo请求参数结构体
@@ -7358,7 +7418,7 @@ export interface DescribeGroupsResponse {
       * 虚拟机部署组分页信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TsfPageVmGroup;
+    Result: TsfPageVmGroup;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7629,6 +7689,10 @@ export interface DescribeLaneRulesRequest {
       * 泳道规则ID（用于精确搜索）
       */
     RuleId?: string;
+    /**
+      * 无
+      */
+    RuleIdList?: Array<string>;
 }
 /**
  * CreateServerlessGroup请求参数结构体
@@ -7786,6 +7850,10 @@ export interface DescribeServerlessGroupsRequest {
       * 分组所属集群ID
       */
     ClusterId?: string;
+    /**
+      * 无
+      */
+    GroupIdList?: Array<string>;
 }
 /**
  * Cos下载所需信息
@@ -8463,6 +8531,10 @@ export interface CreateLaneRequest {
       * 泳道部署组信息
       */
     LaneGroupList: Array<LaneGroup>;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * CreateApiGroup返回参数结构体
@@ -9444,6 +9516,22 @@ export interface CreateClusterRequest {
       * 需要绑定的数据集ID
       */
     ProgramId?: string;
+    /**
+      * api地址
+      */
+    KuberneteApiServer?: string;
+    /**
+      * K : kubeconfig, S : service account
+      */
+    KuberneteNativeType?: string;
+    /**
+      * native secret
+      */
+    KuberneteNativeSecret?: string;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * 微服务列表信息
@@ -10257,6 +10345,10 @@ export interface DescribeGroupsRequest {
       * 部署组状态过滤字段
       */
     Status?: string;
+    /**
+      * 无
+      */
+    GroupIdList?: Array<string>;
 }
 /**
  * 泳道规则标签
@@ -10671,6 +10763,18 @@ export interface DescribeConfigSummaryRequest {
       * 升序传 0，降序传 1
       */
     OrderType?: number;
+    /**
+      * 无
+      */
+    ConfigTagList?: Array<string>;
+    /**
+      * 无
+      */
+    DisableProgramAuthCheck?: boolean;
+    /**
+      * 无
+      */
+    ConfigIdList?: Array<string>;
 }
 /**
  * DeleteLane请求参数结构体
