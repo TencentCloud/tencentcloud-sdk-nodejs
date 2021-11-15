@@ -24,10 +24,6 @@ export interface CreateResourceRequest {
       */
     ResourceLoc: ResourceLoc;
     /**
-      * 资源名称
-      */
-    Name: string;
-    /**
       * 资源类型。目前只支持 JAR，取值为 1
       */
     ResourceType: number;
@@ -36,9 +32,17 @@ export interface CreateResourceRequest {
       */
     Remark?: string;
     /**
+      * 资源名称
+      */
+    Name?: string;
+    /**
       * 资源版本描述
       */
     ResourceConfigRemark?: string;
+    /**
+      * 目录ID
+      */
+    FolderId?: string;
 }
 /**
  * CreateJob请求参数结构体
@@ -334,6 +338,10 @@ export interface DescribeResourceRelatedJobsRequest {
       * 分页大小，默认为20，最大值为100
       */
     Limit?: number;
+    /**
+      * 资源版本号
+      */
+    ResourceConfigVersion?: number;
 }
 /**
  * DeleteResources返回参数结构体

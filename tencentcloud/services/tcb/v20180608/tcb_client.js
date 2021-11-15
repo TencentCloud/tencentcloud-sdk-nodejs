@@ -175,6 +175,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePostpayPackage", req, cb);
     }
     /**
+     * 更新活动详情
+     */
+    async ReplaceActivityRecord(req, cb) {
+        return this.request("ReplaceActivityRecord", req, cb);
+    }
+    /**
      * 查询用户活动信息
      */
     async DescribeUserActivityInfo(req, cb) {
@@ -385,10 +391,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunServerVersion", req, cb);
     }
     /**
-     * 更新活动详情
+     * 修改服务版本的副本数，环境变量
      */
-    async ReplaceActivityRecord(req, cb) {
-        return this.request("ReplaceActivityRecord", req, cb);
+    async ModifyCloudBaseRunServerVersion(req, cb) {
+        return this.request("ModifyCloudBaseRunServerVersion", req, cb);
     }
     /**
      * 查询活动信息

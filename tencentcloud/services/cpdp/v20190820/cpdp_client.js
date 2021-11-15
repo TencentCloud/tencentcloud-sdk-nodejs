@@ -274,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryTransferResult", req, cb);
     }
     /**
+     * 直播平台-主播入驻
+     */
+    async CreateAnchor(req, cb) {
+        return this.request("CreateAnchor", req, cb);
+    }
+    /**
      * 跨境-查询汇出结果
      */
     async QueryOutwardOrder(req, cb) {
@@ -444,6 +450,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ApplyPayerInfo(req, cb) {
         return this.request("ApplyPayerInfo", req, cb);
+    }
+    /**
+     * 直播平台-文件上传
+     */
+    async UploadFile(req, cb) {
+        return this.request("UploadFile", req, cb);
     }
     /**
      * 跨境-提交贸易材料。通过提交贸易材料接口可为对接方累计贸易额度，在额度范围内可发起汇兑汇出交易。

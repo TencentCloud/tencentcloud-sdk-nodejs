@@ -28,12 +28,10 @@ import {
   DescribeAutoScalingGroupsRequest,
   CreateAutoScalingGroupResponse,
   DescribeAccountLimitsResponse,
-  CreatePaiInstanceResponse,
   CreateLaunchConfigurationResponse,
   CreateLifecycleHookResponse,
   ClearLaunchConfigurationAttributesResponse,
   DescribeAutoScalingGroupsResponse,
-  CreatePaiInstanceRequest,
   SystemDisk,
   SpotMarketOptions,
   StopAutoScalingInstancesResponse,
@@ -260,16 +258,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartAutoScalingInstancesResponse) => void
   ): Promise<StartAutoScalingInstancesResponse> {
     return this.request("StartAutoScalingInstances", req, cb)
-  }
-
-  /**
-   * 本接口 (CreatePaiInstance) 用于创建一个指定配置的PAI实例。
-   */
-  async CreatePaiInstance(
-    req: CreatePaiInstanceRequest,
-    cb?: (error: string, rep: CreatePaiInstanceResponse) => void
-  ): Promise<CreatePaiInstanceResponse> {
-    return this.request("CreatePaiInstance", req, cb)
   }
 
   /**

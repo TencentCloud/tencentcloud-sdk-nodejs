@@ -4041,6 +4041,12 @@ export interface CloudBaseRunServerVersionItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CurrentReplicas: number
+
+  /**
+      * Monolithic，Microservice
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Architecture: string
 }
 
 /**
@@ -5714,6 +5720,22 @@ export interface DescribeDatabaseACLResponse {
 }
 
 /**
+ * ModifyCloudBaseRunServerVersion返回参数结构体
+ */
+export interface ModifyCloudBaseRunServerVersionResponse {
+  /**
+      * 返回结果（succ为成功）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeExtensionUploadInfo返回参数结构体
  */
 export interface DescribeExtensionUploadInfoResponse {
@@ -5842,6 +5864,71 @@ export interface CloudBaseCodeRepoName {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FullName?: string
+}
+
+/**
+ * ModifyCloudBaseRunServerVersion请求参数结构体
+ */
+export interface ModifyCloudBaseRunServerVersionRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 服务名称
+   */
+  ServerName: string
+
+  /**
+   * 版本名称
+   */
+  VersionName: string
+
+  /**
+   * 环境变量
+   */
+  EnvParams?: string
+
+  /**
+   * 最小副本数
+   */
+  MinNum?: string
+
+  /**
+   * 最大副本数
+   */
+  MaxNum?: string
+
+  /**
+   * 端口
+   */
+  ContainerPort?: string
+
+  /**
+   * 备注
+   */
+  Remark?: string
+
+  /**
+   * 日志采集路径
+   */
+  CustomLogs?: string
+
+  /**
+   * 是否重设备注
+   */
+  IsResetRemark?: boolean
+
+  /**
+   * 修改基础信息
+   */
+  BasicModify?: boolean
+
+  /**
+   * 操作备注
+   */
+  OperatorRemark?: string
 }
 
 /**

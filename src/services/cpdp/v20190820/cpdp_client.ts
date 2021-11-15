@@ -24,8 +24,9 @@ import {
   ApplyTradeRequest,
   QueryOutwardOrderResponse,
   QueryExchangeRateResponse,
-  UploadTaxPaymentRequest,
+  UploadFileRequest,
   QueryBatchPaymentResultRequest,
+  UploadFileResponse,
   UnifiedOrderInSubOrderList,
   QueryAcctBindingRequest,
   QueryAgentStatementsResponse,
@@ -55,6 +56,7 @@ import {
   CreateRedInvoiceResult,
   QueryBankWithdrawCashDetailsResponse,
   RefundTlinxOrderResponse,
+  QueryMemberTransactionResponse,
   CreatePayMerchantRequest,
   PayOrderResult,
   ContractOrderRequest,
@@ -117,7 +119,7 @@ import {
   QuerySinglePayResult,
   RefundOrderResponse,
   QuerySinglePayResponse,
-  QueryOrderStatusRequest,
+  CreateAnchorResponse,
   UploadExternalAnchorInfoResponse,
   ResponseTerminateContract,
   QueryCustAcctIdBalanceResponse,
@@ -125,7 +127,7 @@ import {
   QueryTradeResponse,
   DownloadBillResponse,
   RevokeMemberRechargeThirdPayResponse,
-  CreateRedInvoiceRequest,
+  CreateInvoiceV2Request,
   QueryAcctInfoListResponse,
   DeleteAgentTaxPaymentInfosRequest,
   BindRelateAcctSmallAmountResponse,
@@ -150,10 +152,10 @@ import {
   QueryItem,
   SceneInfo,
   QueryContractResponse,
-  CreateInvoiceResultV2,
+  Acct,
   RegisterBehaviorResponse,
   QueryInvoiceResultData,
-  QueryBillDownloadURLData,
+  Order,
   QuerySingleTransactionStatusResponse,
   QueryAcctInfoRequest,
   DescribeChargeDetailResponse,
@@ -162,7 +164,7 @@ import {
   TranItem,
   ClearItem,
   MerchantManagementResult,
-  Acct,
+  ApplyWithdrawalResponse,
   QueryBankTransactionDetailsResponse,
   QueryTransferResultRequest,
   QueryMaliciousRegistrationRequest,
@@ -181,12 +183,13 @@ import {
   RevResigterBillSupportWithdrawResponse,
   BindAcctResponse,
   CreateOrderResponse,
-  CreateRedInvoiceResponse,
+  CreateInvoiceResultV2,
   QueryExchangerateData,
   CreateRedInvoiceResultV2,
   QueryMerchantOrderRequest,
   QueryTransferResultData,
   QueryTransferDetailResponse,
+  UploadTaxPaymentRequest,
   UploadExternalAnchorInfoRequest,
   BindRelateAccReUnionPayRequest,
   CreateCustAcctIdResponse,
@@ -195,6 +198,7 @@ import {
   QueryAcctInfoResponse,
   MigrateOrderRefundQueryRequest,
   QueryAgentTaxPaymentBatchRequest,
+  QueryBillDownloadURLData,
   QueryMerchantRequest,
   QueryPayerinfoResult,
   TransferItem,
@@ -204,10 +208,11 @@ import {
   CreateSinglePayRequest,
   QueryTransferBatchResponse,
   SyncContractDataResponse,
-  Order,
+  AnchorExtendInfo,
   RegisterBillResponse,
   WithdrawCashMembershipRequest,
   ApplyOutwardOrderRequest,
+  CreateRedInvoiceRequest,
   CreatePayMerchantResponse,
   TerminateContractResponse,
   RechargeByThirdPayResponse,
@@ -241,9 +246,9 @@ import {
   CloseOrderRequest,
   QueryBankClearRequest,
   QueryBalanceResponse,
-  ApplyWithdrawalResponse,
+  QueryOutwardOrderData,
+  CreateRedInvoiceResponse,
   QueryContractRequest,
-  UnBindAcctRequest,
   RefundOrderRequest,
   TerminateContractRequest,
   QueryInvoiceRequest,
@@ -283,6 +288,7 @@ import {
   CreateMerchantResponse,
   CreateSinglePaymentResponse,
   ExternalContractUserInfo,
+  QueryOrderStatusRequest,
   ContractUserInfo,
   ApplyTradeData,
   QuerySinglePayItem,
@@ -308,16 +314,15 @@ import {
   QuerySinglePaymentResultResponse,
   ContractOrderInSubOrder,
   QueryDeclareData,
-  QueryMemberTransactionResponse,
+  CreateAnchorRequest,
   QueryMemberBindRequest,
   SyncContractDataRequest,
   QueryAgentStatementsRequest,
   BindRelateAcctUnionPayResponse,
   QueryReconciliationDocumentRequest,
   QueryOrderResponse,
-  QueryOutwardOrderData,
   UnifiedOrderRequest,
-  BankCardItem,
+  UnBindAcctRequest,
   MigrateOrderRefundResponse,
   QueryBatchPaymentResultDataInfo,
   QueryAnchorContractInfoResponse,
@@ -327,7 +332,7 @@ import {
   ContractOrderResponse,
   QueryMerchantOrderResponse,
   QueryMerchantResponse,
-  CreateInvoiceV2Request,
+  BankCardItem,
 } from "./cpdp_models"
 
 /**
@@ -750,6 +755,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 直播平台-主播入驻
+   */
+  async CreateAnchor(
+    req: CreateAnchorRequest,
+    cb?: (error: string, rep: CreateAnchorResponse) => void
+  ): Promise<CreateAnchorResponse> {
+    return this.request("CreateAnchor", req, cb)
+  }
+
+  /**
    * 跨境-查询汇出结果
    */
   async QueryOutwardOrder(
@@ -1031,6 +1046,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyPayerInfoResponse) => void
   ): Promise<ApplyPayerInfoResponse> {
     return this.request("ApplyPayerInfo", req, cb)
+  }
+
+  /**
+   * 直播平台-文件上传
+   */
+  async UploadFile(
+    req: UploadFileRequest,
+    cb?: (error: string, rep: UploadFileResponse) => void
+  ): Promise<UploadFileResponse> {
+    return this.request("UploadFile", req, cb)
   }
 
   /**

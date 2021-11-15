@@ -94,12 +94,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartAutoScalingInstances", req, cb);
     }
     /**
-     * 本接口 (CreatePaiInstance) 用于创建一个指定配置的PAI实例。
-     */
-    async CreatePaiInstance(req, cb) {
-        return this.request("CreatePaiInstance", req, cb);
-    }
-    /**
      * 本接口（UpgradeLaunchConfiguration）用于升级启动配置。
 
 * 本接口用于升级启动配置，采用“完全覆盖”风格，无论之前参数如何，统一按照接口参数设置为新的配置。对于非必填字段，不填写则按照默认值赋值。

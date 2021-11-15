@@ -210,6 +210,7 @@ import {
   CloudBaseProjectVersion,
   DescribeEnvDealRegionRequest,
   DescribeDatabaseACLResponse,
+  ModifyCloudBaseRunServerVersionResponse,
   DescribeExtensionUploadInfoResponse,
   ModifyEnvRequest,
   PostpayEnvQuota,
@@ -217,6 +218,7 @@ import {
   DescribePostpayPackageFreeQuotasResponse,
   DescribeExtraPkgBillingInfoResponse,
   CloudBaseCodeRepoName,
+  ModifyCloudBaseRunServerVersionRequest,
   RollUpdateCloudBaseRunServerVersionRequest,
 } from "./tcb_models"
 
@@ -470,6 +472,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePostpayPackageResponse) => void
   ): Promise<CreatePostpayPackageResponse> {
     return this.request("CreatePostpayPackage", req, cb)
+  }
+
+  /**
+   * 更新活动详情
+   */
+  async ReplaceActivityRecord(
+    req: ReplaceActivityRecordRequest,
+    cb?: (error: string, rep: ReplaceActivityRecordResponse) => void
+  ): Promise<ReplaceActivityRecordResponse> {
+    return this.request("ReplaceActivityRecord", req, cb)
   }
 
   /**
@@ -823,13 +835,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新活动详情
+   * 修改服务版本的副本数，环境变量
    */
-  async ReplaceActivityRecord(
-    req: ReplaceActivityRecordRequest,
-    cb?: (error: string, rep: ReplaceActivityRecordResponse) => void
-  ): Promise<ReplaceActivityRecordResponse> {
-    return this.request("ReplaceActivityRecord", req, cb)
+  async ModifyCloudBaseRunServerVersion(
+    req: ModifyCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: ModifyCloudBaseRunServerVersionResponse) => void
+  ): Promise<ModifyCloudBaseRunServerVersionResponse> {
+    return this.request("ModifyCloudBaseRunServerVersion", req, cb)
   }
 
   /**

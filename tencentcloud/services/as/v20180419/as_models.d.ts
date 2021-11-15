@@ -381,19 +381,6 @@ export interface DescribeAccountLimitsResponse {
     RequestId?: string;
 }
 /**
- * CreatePaiInstance返回参数结构体
- */
-export interface CreatePaiInstanceResponse {
-    /**
-      * 当通过本接口来创建实例时会返回该参数，表示一个或多个实例`ID`。返回实例`ID`列表并不代表实例创建成功，可根据 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口查询返回的InstancesSet中对应实例的`ID`的状态来判断创建是否完成；如果实例状态由“准备中”变为“正在运行”，则为创建成功。
-      */
-    InstanceIdSet: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * CreateLaunchConfiguration返回参数结构体
  */
 export interface CreateLaunchConfigurationResponse {
@@ -444,55 +431,6 @@ export interface DescribeAutoScalingGroupsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * CreatePaiInstance请求参数结构体
- */
-export interface CreatePaiInstanceRequest {
-    /**
-      * PAI实例的域名。
-      */
-    DomainName: string;
-    /**
-      * 公网带宽相关信息设置。
-      */
-    InternetAccessible: InternetAccessible;
-    /**
-      * 启动脚本的base64编码字符串。
-      */
-    InitScript?: string;
-    /**
-      * 可用区列表。
-      */
-    Zones?: Array<string>;
-    /**
-      * VPC ID。
-      */
-    VpcId?: string;
-    /**
-      * 子网列表。
-      */
-    SubnetIds?: Array<string>;
-    /**
-      * 实例显示名称。
-      */
-    InstanceName?: string;
-    /**
-      * 实例机型列表。
-      */
-    InstanceTypes?: Array<string>;
-    /**
-      * 实例登录设置。
-      */
-    LoginSettings?: LoginSettings;
-    /**
-      * 实例计费类型。
-      */
-    InstanceChargeType?: string;
-    /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-      */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
 }
 /**
  * 启动配置的系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。

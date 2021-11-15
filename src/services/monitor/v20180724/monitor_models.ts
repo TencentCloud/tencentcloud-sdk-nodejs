@@ -47,7 +47,7 @@ export interface TagInstance {
       * 地域ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RegionId: string
+  RegionId: number
 
   /**
       * 绑定状态，2：绑定成功，1：绑定中

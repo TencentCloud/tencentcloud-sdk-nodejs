@@ -428,6 +428,16 @@ it("cpdp.v20190820.QueryTransferResult", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateAnchor", async function () {
+    try {
+       const data = await client.CreateAnchor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryOutwardOrder", async function () {
     try {
        const data = await client.QueryOutwardOrder({})
@@ -701,6 +711,16 @@ it("cpdp.v20190820.ApplyOutwardOrder", async function () {
 it("cpdp.v20190820.ApplyPayerInfo", async function () {
     try {
        const data = await client.ApplyPayerInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.UploadFile", async function () {
+    try {
+       const data = await client.UploadFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -108,16 +108,6 @@ it("as.v20180419.StartAutoScalingInstances", async function () {
     }
 })
 
-it("as.v20180419.CreatePaiInstance", async function () {
-    try {
-       const data = await client.CreatePaiInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("as.v20180419.UpgradeLaunchConfiguration", async function () {
     try {
        const data = await client.UpgradeLaunchConfiguration({})
