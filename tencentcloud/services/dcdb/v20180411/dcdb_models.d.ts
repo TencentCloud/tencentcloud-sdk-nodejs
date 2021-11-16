@@ -1077,7 +1077,7 @@ export interface GrantAccountPrivilegesRequest {
       */
     Privileges: Array<string>;
     /**
-      * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
+      * 类型,可以填入 table 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
       */
     Type?: string;
     /**

@@ -2657,12 +2657,12 @@ export interface DescribeResourceAuthorizationRequest {
   /**
    * 归属者。
    */
-  Owner: Entity
+  Owner?: Entity
 
   /**
    * 资源。
    */
-  Resource: Resource
+  Resource?: Resource
 
   /**
    * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
@@ -3222,12 +3222,12 @@ export interface DescribeResourceAuthorizationResponse {
       * 符合条件的资源授权记录总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 授权信息列表。
    */
-  AuthorizationInfoSet?: Array<AuthorizationInfo>
+  AuthorizationInfoSet: Array<AuthorizationInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

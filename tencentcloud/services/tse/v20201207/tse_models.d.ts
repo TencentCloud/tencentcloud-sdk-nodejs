@@ -120,6 +120,16 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<KVPair>;
+    /**
+      * 引擎实例是否开启控制台公网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableConsoleInternet: boolean;
+    /**
+      * 引擎实例是否开启控制台内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableConsoleIntranet: boolean;
 }
 /**
  * DescribeSREInstanceAccessAddress返回参数结构体
@@ -137,6 +147,16 @@ export interface DescribeSREInstanceAccessAddressResponse {
       * apollo多环境公网ip
       */
     EnvAddressInfos: Array<EnvAddressInfo>;
+    /**
+      * 控制台公网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsoleInternetAddress: string;
+    /**
+      * 控制台内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsoleIntranetAddress: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

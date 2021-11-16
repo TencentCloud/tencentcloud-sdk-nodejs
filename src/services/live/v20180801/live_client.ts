@@ -1043,7 +1043,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 提前结束录制，并中止运行中的录制任务。任务被成功终止后，本次任务将不再启动。
+   * 提前结束录制，中止运行中的录制任务并生成录制文件。任务被成功终止后，本次任务将不再启动。
    */
   async StopRecordTask(
     req: StopRecordTaskRequest,

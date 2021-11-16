@@ -331,7 +331,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     DescribeLiveCallbackTemplates(req?: DescribeLiveCallbackTemplatesRequest, cb?: (error: string, rep: DescribeLiveCallbackTemplatesResponse) => void): Promise<DescribeLiveCallbackTemplatesResponse>;
     /**
-     * 提前结束录制，并中止运行中的录制任务。任务被成功终止后，本次任务将不再启动。
+     * 提前结束录制，中止运行中的录制任务并生成录制文件。任务被成功终止后，本次任务将不再启动。
      */
     StopRecordTask(req: StopRecordTaskRequest, cb?: (error: string, rep: StopRecordTaskResponse) => void): Promise<StopRecordTaskResponse>;
     /**

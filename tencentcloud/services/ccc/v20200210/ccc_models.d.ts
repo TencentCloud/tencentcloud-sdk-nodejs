@@ -486,6 +486,11 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProtectedCallee: string;
+    /**
+      * 客户自定义数据（User-to-User Interface）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uui: string;
 }
 /**
  * DeleteStaff返回参数结构体

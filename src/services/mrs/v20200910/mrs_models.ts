@@ -107,6 +107,18 @@ export interface Template {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Electrocardiogram: Electrocardiogram
+
+  /**
+      * 内窥镜报告
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Endoscopy: Endoscopy
+
+  /**
+      * 处方单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Prescription: Prescription
 }
 
 /**
@@ -258,6 +270,29 @@ export interface ReportInfo {
 }
 
 /**
+ * 内窥镜报告
+ */
+export interface Endoscopy {
+  /**
+      * 活检部位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BiopsyPart: BiopsyPart
+
+  /**
+      * 可见描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Desc: EndoscopyDesc
+
+  /**
+      * 结论
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Summary: Summary
+}
+
+/**
  * Ihc信息
  */
 export interface IHCInfo {
@@ -324,6 +359,59 @@ export interface SurgeryHistory {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DischargeDiagnosis: SurgeryAttr
+}
+
+/**
+ * 药品
+ */
+export interface Medicine {
+  /**
+      * 药品名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 商品名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TradeName: string
+
+  /**
+      * 厂商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Firm: string
+
+  /**
+      * 医保类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Category: string
+
+  /**
+      * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Specification: string
+
+  /**
+      * 最小包装数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinQuantity: string
+
+  /**
+      * 最小制剂单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DosageUnit: string
+
+  /**
+      * 最小包装单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackingUnit: string
 }
 
 /**
@@ -852,6 +940,59 @@ export interface TextToObjectResponse {
 }
 
 /**
+ * 门诊病历信息
+ */
+export interface MedicalRecordInfo {
+  /**
+      * 就诊日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnosisTime: string
+
+  /**
+      * 就诊科室
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnosisDepartmentName: string
+
+  /**
+      * 就诊医生
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnosisDoctorName: string
+
+  /**
+      * 临床诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClinicalDiagnosis: string
+
+  /**
+      * 主述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MainNarration: string
+
+  /**
+      * 体格检查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhysicalExamination: string
+
+  /**
+      * 检查结论
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InspectionFindings: string
+
+  /**
+      * 治疗意见
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TreatmentOpinion: string
+}
+
+/**
  * 部位信息
  */
 export interface Part {
@@ -1079,26 +1220,38 @@ export interface MedDoc {
 }
 
 /**
- * 描述
+ * 内窥部位
  */
-export interface Desc {
+export interface EndoscopyOrgan {
   /**
-      * 描述
+      * 部位
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Text: string
+  Part: Part
 
   /**
-      * 器官
+      * 原文位置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Organ: Array<Organ>
+  Index: Array<number>
 
   /**
-      * 结节
+      * 原文
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Tuber: Array<TuberInfo>
+  Src: string
+
+  /**
+      * 部位别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PartAlias: string
+
+  /**
+      * 症状描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SymDescList: Array<BlockInfo>
 }
 
 /**
@@ -1233,6 +1386,29 @@ export interface PatientInfo {
 }
 
 /**
+ * 组织学等级
+ */
+export interface HistologyLevel {
+  /**
+      * 等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Grade: string
+
+  /**
+      * 原文位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Index: Array<number>
+
+  /**
+      * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Src: string
+}
+
+/**
  * ImageToObject返回参数结构体
  */
 export interface ImageToObjectResponse {
@@ -1246,6 +1422,17 @@ export interface ImageToObjectResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 处方单
+ */
+export interface Prescription {
+  /**
+      * 药品列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MedicineList: Array<Medicine>
 }
 
 /**
@@ -1894,26 +2081,20 @@ export interface TextType {
 }
 
 /**
- * 组织学等级
+ * 内窥镜描述
  */
-export interface HistologyLevel {
+export interface EndoscopyDesc {
   /**
-      * 等级
+      * 描述内容
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Grade: string
+  Text: string
 
   /**
-      * 原文位置
+      * 器官
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Index: Array<number>
-
-  /**
-      * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Src: string
+  Organ: Array<EndoscopyOrgan>
 }
 
 /**
@@ -2150,6 +2331,23 @@ export interface DiagCertItem {
 }
 
 /**
+ * 活检部位
+ */
+export interface BiopsyPart {
+  /**
+      * 值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+
+  /**
+      * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Src: string
+}
+
+/**
  * 月经史
  */
 export interface MenstrualMedicalHistory {
@@ -2257,38 +2455,20 @@ export interface FirstPage {
 }
 
 /**
- * 出入院诊断
+ * 检查报告单
  */
-export interface DischargeDiagnosis {
+export interface Check {
   /**
-      * 表格位置
+      * 描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TableIndex: number
+  Desc: Desc
 
   /**
-      * 出院诊断
+      * 结论
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OutDiagnosis: BlockInfo
-
-  /**
-      * 疾病编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiseaseCode: BlockInfo
-
-  /**
-      * 入院情况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InStatus: BlockInfo
-
-  /**
-      * 出院情况
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OutStatus: BlockInfo
+  Summary: Summary
 }
 
 /**
@@ -2330,73 +2510,61 @@ export interface Surgery {
 }
 
 /**
- * 门诊病历信息
+ * 描述
  */
-export interface MedicalRecordInfo {
-  /**
-      * 就诊日期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiagnosisTime: string
-
-  /**
-      * 就诊科室
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiagnosisDepartmentName: string
-
-  /**
-      * 就诊医生
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiagnosisDoctorName: string
-
-  /**
-      * 临床诊断
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClinicalDiagnosis: string
-
-  /**
-      * 主述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MainNarration: string
-
-  /**
-      * 体格检查
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PhysicalExamination: string
-
-  /**
-      * 检查结论
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InspectionFindings: string
-
-  /**
-      * 治疗意见
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TreatmentOpinion: string
-}
-
-/**
- * 检查报告单
- */
-export interface Check {
+export interface Desc {
   /**
       * 描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Desc: Desc
+  Text: string
 
   /**
-      * 结论
+      * 器官
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Summary: Summary
+  Organ: Array<Organ>
+
+  /**
+      * 结节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tuber: Array<TuberInfo>
+}
+
+/**
+ * 出入院诊断
+ */
+export interface DischargeDiagnosis {
+  /**
+      * 表格位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableIndex: number
+
+  /**
+      * 出院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutDiagnosis: BlockInfo
+
+  /**
+      * 疾病编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiseaseCode: BlockInfo
+
+  /**
+      * 入院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InStatus: BlockInfo
+
+  /**
+      * 出院情况
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutStatus: BlockInfo
 }
 
 /**
