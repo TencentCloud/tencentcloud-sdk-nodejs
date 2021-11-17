@@ -59,6 +59,7 @@ import {
   DescribeRenewalPriceRequest,
   NodeInfo,
   DescribeOrdersResponse,
+  ModifySyncTaskAttributeResponse,
   DcnDetailItem,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
@@ -100,6 +101,7 @@ import {
   UpgradeDBInstanceRequest,
   SecurityGroupBound,
   ColumnPrivilege,
+  ModifySyncTaskAttributeRequest,
   DescribeUpgradePriceResponse,
   AssociateSecurityGroupsResponse,
   DBInstance,
@@ -134,6 +136,7 @@ import {
   DescribeFlowRequest,
   ModifyAccountPrivilegesRequest,
   DescribeDBPerformanceResponse,
+  ModifyDBSyncModeRequest,
   DescribeInstanceNodeInfoRequest,
   CreateAccountResponse,
   DescribeLogFileRetentionPeriodResponse,
@@ -156,6 +159,7 @@ import {
   ModifyDBInstancesProjectRequest,
   FlushBinlogRequest,
   MonitorData,
+  ModifyDBSyncModeResponse,
   DescribeInstanceNodeInfoResponse,
   ModifyLogFileRetentionPeriodResponse,
   DisassociateSecurityGroupsResponse,
@@ -421,6 +425,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
+   */
+  async ModifySyncTaskAttribute(
+    req: ModifySyncTaskAttributeRequest,
+    cb?: (error: string, rep: ModifySyncTaskAttributeResponse) => void
+  ): Promise<ModifySyncTaskAttributeResponse> {
+    return this.request("ModifySyncTaskAttribute", req, cb)
+  }
+
+  /**
    * 本接口（DestroyHourDBInstance）用于销毁按量计费实例。
    */
   async DestroyHourDBInstance(
@@ -554,6 +568,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
   ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
     return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBSyncMode）用于修改云数据库实例的同步模式。
+   */
+  async ModifyDBSyncMode(
+    req: ModifyDBSyncModeRequest,
+    cb?: (error: string, rep: ModifyDBSyncModeResponse) => void
+  ): Promise<ModifyDBSyncModeResponse> {
+    return this.request("ModifyDBSyncMode", req, cb)
   }
 
   /**

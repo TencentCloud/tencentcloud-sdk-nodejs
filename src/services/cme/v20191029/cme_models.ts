@@ -302,7 +302,7 @@ export interface ExportVideoEditProjectRequest {
   ProjectId: string
 
   /**
-      * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+      * 视频编码配置 ID，支持自定义创建，推荐优先使用系统预置的导出配置。
 <li>10：分辨率为 480P，输出视频格式为 MP4；</li>
 <li>11：分辨率为 720P，输出视频格式为 MP4；</li>
 <li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
@@ -330,6 +330,11 @@ export interface ExportVideoEditProjectRequest {
    * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
    */
   VODExportInfo?: VODExportInfo
+
+  /**
+   * 视频导出扩展参数。可以覆盖导出模板中的参数，灵活的指定导出规格及参数。
+   */
+  ExportExtensionArgs?: VideoExportExtensionArgs
 
   /**
    * 操作者。填写用户的 Id，用于标识调用者及校验项目导出权限。
@@ -450,6 +455,64 @@ export interface StreamConnectProjectInfo {
    * 云转推输出源。
    */
   OutputSet: Array<StreamConnectOutputInfo>
+}
+
+/**
+ * 视频编码配置中的音频设置更新信息
+ */
+export interface VideoEncodingPresetAudioSettingForUpdate {
+  /**
+      * 音频码率，单位：bps。
+不填则不修改。
+      */
+  Bitrate?: string
+
+  /**
+      * 音频声道数，可选值： 
+<li>1：单声道；</li>
+<li>2：双声道。</li> 
+不填则不修改。
+      */
+  Channels?: number
+
+  /**
+      * 音频流的采样率，目前仅支持： 16000； 32000； 44100； 48000。单位：Hz。
+不填则不修改。
+      */
+  SampleRate?: number
+}
+
+/**
+ * 视频编码配置中的音频设置
+ */
+export interface VideoEncodingPresetAudioSetting {
+  /**
+      * 音频流的编码格式，可选值：
+AAC：AAC 编码。
+
+默认值：AAC。
+      */
+  Codec?: string
+
+  /**
+      * 音频码率，单位：bps。
+默认值：64K。
+      */
+  Bitrate?: number
+
+  /**
+      * 音频声道数，可选值： 
+<li>1：单声道；</li>
+<li>2：双声道。</li> 
+默认值：2。
+      */
+  Channels?: number
+
+  /**
+      * 音频流的采样率，仅支持 16000； 32000； 44100； 48000。单位：Hz。 
+默认值：16000。
+      */
+  SampleRate?: number
 }
 
 /**
@@ -1063,7 +1126,7 @@ export interface ExportVideoByEditorTrackDataRequest {
   Platform: string
 
   /**
-      * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+      * 导出视频编码配置 Id，推荐优先使用下面的预置模板 Id，有其他需求可通过接口定制视频编码配置。
 <li>10：分辨率为 480P，输出视频格式为 MP4；</li>
 <li>11：分辨率为 720P，输出视频格式为 MP4；</li>
 <li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
@@ -1083,8 +1146,10 @@ export interface ExportVideoByEditorTrackDataRequest {
   TrackData: string
 
   /**
-   * 轨道数据对应的画布宽高比。
-   */
+      * 轨道数据对应的画布宽高比，配合视频编码配置中的视频短边尺寸，可决定导出画面的尺寸。例：
+<li>如果 AspectRatio 取值 16:9，视频编码配置选为12（短边1080），则导出尺寸为 1920 * 1080；</li>
+<li>如果 AspectRatio 取值 9:16，视频编码配置选为11（短边720），则导出尺寸为 720 *1280。</li>
+      */
   AspectRatio?: string
 
   /**
@@ -1458,6 +1523,16 @@ export interface MediaTrack {
 }
 
 /**
+ * DeleteVideoEncodingPreset返回参数结构体
+ */
+export interface DeleteVideoEncodingPresetResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteLoginStatus返回参数结构体
  */
 export interface DeleteLoginStatusResponse {
@@ -1701,6 +1776,31 @@ export interface PlatformInfo {
 }
 
 /**
+ * DeleteVideoEncodingPreset请求参数结构体
+ */
+export interface DeleteVideoEncodingPresetRequest {
+  /**
+   * 平台名称，指定访问的平台。
+   */
+  Platform: string
+
+  /**
+   * 要删除的视频编码配置 ID。
+   */
+  Id: number
+}
+
+/**
+ * ModifyVideoEncodingPreset返回参数结构体
+ */
+export interface ModifyVideoEncodingPresetResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeJoinTeams请求参数结构体
  */
 export interface DescribeJoinTeamsRequest {
@@ -1715,7 +1815,7 @@ export interface DescribeJoinTeamsRequest {
   MemberId: string
 
   /**
-   * 分页偏移量，默认值：0
+   * 分页偏移量，默认值：0。
    */
   Offset?: number
 
@@ -1824,6 +1924,36 @@ export interface DeleteProjectResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频编码配置中的视频设置信息
+ */
+export interface VideoEncodingPresetVideoSetting {
+  /**
+      * 视频流的编码格式，可选值：
+<li>H264：H.264 编码。</li>
+      */
+  Codec?: string
+
+  /**
+      * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
+视频最后的分辨率，根据短边尺寸和宽高比进行计算。
+例：如果项目的宽高比是 16：9 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720。</li>
+如果项目的宽高比是 9：16 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1080 * 1920。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 720 * 1280。</li>
+默认值：1080。
+      */
+  ShortEdge?: number
+
+  /**
+      * 指定码率，单位 bps。当该参数为'0'时则不强制限定码率。
+默认值：0。
+      */
+  Bitrate?: number
 }
 
 /**
@@ -1941,13 +2071,13 @@ export interface DescribeMaterialsResponse {
 }
 
 /**
- * HandleStreamConnectProject返回参数结构体
+ * CreateVideoEncodingPreset返回参数结构体
  */
-export interface HandleStreamConnectProjectResponse {
+export interface CreateVideoEncodingPresetResponse {
   /**
-   * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
+   * 模板 ID。
    */
-  StreamInputRtmpPushUrl: string
+  Id: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2488,6 +2618,36 @@ export interface ModifyTeamMemberRequest {
 }
 
 /**
+ * 视频编码配置的视频设置更新信息
+ */
+export interface VideoEncodingPresetVideoSettingForUpdate {
+  /**
+      * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
+视频最后的分辨率，根据短边尺寸和宽高比进行计算。
+例：如果项目的宽高比是 16：9 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720。</li>
+如果项目的宽高比是 9：16 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1080 * 1920。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 720 * 1280。</li>
+不填则不修改。
+      */
+  ShortEdge?: number
+
+  /**
+      * 指定码率，单位 bps。当该参数为'0' 时则不强制限定码率。
+不填则不修改。
+      */
+  Bitrate?: number
+
+  /**
+      * 指定帧率。单位 Hz。
+不填则不修改。
+      */
+  FrameRate?: number
+}
+
+/**
  * CreateTeam请求参数结构体
  */
 export interface CreateTeamRequest {
@@ -2873,18 +3033,42 @@ export interface AddTeamMemberRequest {
 }
 
 /**
- * ExportVideoEditProject返回参数结构体
+ * GrantResourceAuthorization请求参数结构体
  */
-export interface ExportVideoEditProjectResponse {
+export interface GrantResourceAuthorizationRequest {
   /**
-   * 任务 Id。
+   * 平台名称，指定访问的平台。
    */
-  TaskId: string
+  Platform: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 资源归属者，个人或者团队。
    */
-  RequestId?: string
+  Owner: Entity
+
+  /**
+   * 被授权资源。
+   */
+  Resources: Array<Resource>
+
+  /**
+   * 被授权目标，个人或者团队。
+   */
+  Authorizees: Array<Entity>
+
+  /**
+      * 详细授权值。 取值有：
+<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
+<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
+<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
+<li>W：可修改、删除媒资。</li>
+      */
+  Permissions: Array<string>
+
+  /**
+   * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+   */
+  Operator?: string
 }
 
 /**
@@ -2950,6 +3134,21 @@ export interface ListMediaRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验对媒体的访问权限。
    */
   Operator?: string
+}
+
+/**
+ * HandleStreamConnectProject返回参数结构体
+ */
+export interface HandleStreamConnectProjectResponse {
+  /**
+   * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
+   */
+  StreamInputRtmpPushUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3215,6 +3414,26 @@ export interface VideoMaterial {
 }
 
 /**
+ * DescribeVideoEncodingPresets返回参数结构体
+ */
+export interface DescribeVideoEncodingPresetsResponse {
+  /**
+   * 符合条件的编码配置总个数。
+   */
+  TotalCount: number
+
+  /**
+   * 视频编码配置信息。
+   */
+  VideoEncodingPresetSet: Array<VideoEncodingPreset>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeResourceAuthorization返回参数结构体
  */
 export interface DescribeResourceAuthorizationResponse {
@@ -3363,6 +3582,55 @@ export interface DescribeLoginStatusResponse {
 }
 
 /**
+ * CreateVideoEncodingPreset请求参数结构体
+ */
+export interface CreateVideoEncodingPresetRequest {
+  /**
+   * 平台名称，指定访问的平台。
+   */
+  Platform: string
+
+  /**
+   * 配置名，可用来简单描述该配置的作用。
+   */
+  Name: string
+
+  /**
+      * 封装格式，可选值：
+<li>mp4 ；</li>
+<li>mov 。</li>
+默认值：mp4。
+      */
+  Container?: string
+
+  /**
+      * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+      */
+  RemoveVideo?: number
+
+  /**
+      * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+      */
+  RemoveAudio?: number
+
+  /**
+   * 编码配置的视频设置。默认值参考VideoEncodingPresetVideoSetting 定义。
+   */
+  VideoSetting?: VideoEncodingPresetVideoSetting
+
+  /**
+   * 编码配置的音频设置。默认值参考VideoEncodingPresetAudioSetting 定义。
+   */
+  AudioSetting?: VideoEncodingPresetAudioSetting
+}
+
+/**
  * 云转推项目状态变更事件。
  */
 export interface ProjectStreamConnectStatusChangedEvent {
@@ -3386,12 +3654,12 @@ export interface DescribeJoinTeamsResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
-   * 团队列表
+   * 团队列表。
    */
-  TeamSet?: Array<JoinTeamInfo>
+  TeamSet: Array<JoinTeamInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3507,6 +3775,61 @@ export interface VideoEditTemplateMaterial {
 }
 
 /**
+ * 视频导出扩展参数
+ */
+export interface VideoExportExtensionArgs {
+  /**
+      * 封装格式，可选值：
+<li>mp4 </li>
+<li>mov </li>
+不填则默认使用导出模板中的值。
+      */
+  Container?: string
+
+  /**
+      * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
+视频最后的分辨率，根据短边尺寸和宽高比进行计算。
+例如：项目的宽高比是 16：9 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720</li>
+不填则默认使用导出模板中对的值。
+      */
+  ShortEdge?: number
+
+  /**
+      * 指定码率，单位 bps。当该参数为 0 时则不强制限定码率。
+不填则默认使用导出模板中的值。
+      */
+  VideoBitrate?: number
+
+  /**
+      * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+不填则默认使用导出模板中对的值。
+      */
+  RemoveVideo?: number
+
+  /**
+      * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+不填则默认使用导出模板中对的值。
+      */
+  RemoveAudio?: number
+
+  /**
+   * 片段起始时间，单位：毫秒。
+   */
+  StartTime?: number
+
+  /**
+   * 片段结束时间，单位：毫秒。
+   */
+  EndTime?: number
+}
+
+/**
  * 卡槽替换信息。
  */
 export interface SlotReplacementInfo {
@@ -3618,6 +3941,52 @@ export interface DescribeTaskDetailRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
    */
   Operator?: string
+}
+
+/**
+ * ModifyVideoEncodingPreset请求参数结构体
+ */
+export interface ModifyVideoEncodingPresetRequest {
+  /**
+   * 平台名称，指定访问的平台。
+   */
+  Platform: string
+
+  /**
+   * 配置 ID。
+   */
+  Id: number
+
+  /**
+   * 更改后的视频编码配置名，不填则不修改。
+   */
+  Name?: string
+
+  /**
+      * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+      */
+  RemoveVideo?: number
+
+  /**
+      * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+      */
+  RemoveAudio?: number
+
+  /**
+   * 更改后的编码配置的视频设置。
+   */
+  VideoSetting?: VideoEncodingPresetVideoSettingForUpdate
+
+  /**
+   * 更改后的编码配置的音频设置。
+   */
+  AudioSetting?: VideoEncodingPresetAudioSettingForUpdate
 }
 
 /**
@@ -3775,6 +4144,31 @@ export interface MaterialInfo {
 }
 
 /**
+ * DescribeVideoEncodingPresets请求参数结构体
+ */
+export interface DescribeVideoEncodingPresetsRequest {
+  /**
+   * 平台名称，指定访问的平台。
+   */
+  Platform: string
+
+  /**
+   * 要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。
+   */
+  Ids?: Array<number>
+
+  /**
+   * 分页大小，默认20。最大值50。
+   */
+  Limit?: number
+
+  /**
+   * 分页起始，默认0。
+   */
+  Offset?: number
+}
+
+/**
  * 登录态信息
  */
 export interface LoginStatusInfo {
@@ -3897,42 +4291,18 @@ export interface DeleteClassResponse {
 }
 
 /**
- * GrantResourceAuthorization请求参数结构体
+ * ExportVideoEditProject返回参数结构体
  */
-export interface GrantResourceAuthorizationRequest {
+export interface ExportVideoEditProjectResponse {
   /**
-   * 平台名称，指定访问的平台。
+   * 任务 Id。
    */
-  Platform: string
+  TaskId: string
 
   /**
-   * 资源归属者，个人或者团队。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Owner: Entity
-
-  /**
-   * 被授权资源。
-   */
-  Resources: Array<Resource>
-
-  /**
-   * 被授权目标，个人或者团队。
-   */
-  Authorizees: Array<Entity>
-
-  /**
-      * 详细授权值。 取值有：
-<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
-<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
-<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
-<li>W：可修改、删除媒资。</li>
-      */
-  Permissions: Array<string>
-
-  /**
-   * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
-   */
-  Operator?: string
+  RequestId?: string
 }
 
 /**
@@ -4076,6 +4446,54 @@ export interface MediaImageSpriteInfo {
    * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
    */
   WebVttUrl: string
+}
+
+/**
+ * 视频编码配置
+ */
+export interface VideoEncodingPreset {
+  /**
+   * 配置 ID。
+   */
+  Id: number
+
+  /**
+   * 配置名。
+   */
+  Name: string
+
+  /**
+      * 封装格式，可选值：
+<li>mp4 ；</li>
+<li>mov 。</li>
+      */
+  Container: string
+
+  /**
+      * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+      */
+  RemoveVideo: number
+
+  /**
+      * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+      */
+  RemoveAudio: number
+
+  /**
+   * 视频编码配置中的视频设置。
+   */
+  VideoSetting: VideoEncodingPresetVideoSetting
+
+  /**
+   * 视频编码配置中的音频设置。
+   */
+  AudioSetting: VideoEncodingPresetAudioSetting
 }
 
 /**

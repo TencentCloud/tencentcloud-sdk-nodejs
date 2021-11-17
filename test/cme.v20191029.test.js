@@ -38,6 +38,16 @@ it("cme.v20191029.DescribeTeams", async function () {
     }
 })
 
+it("cme.v20191029.DescribeVideoEncodingPresets", async function () {
+    try {
+       const data = await client.DescribeVideoEncodingPresets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.ExportVideoEditProject", async function () {
     try {
        const data = await client.ExportVideoEditProject({})
@@ -148,9 +158,9 @@ it("cme.v20191029.ExportVideoByEditorTrackData", async function () {
     }
 })
 
-it("cme.v20191029.DescribePlatforms", async function () {
+it("cme.v20191029.DescribeClass", async function () {
     try {
-       const data = await client.DescribePlatforms({})
+       const data = await client.DescribeClass({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +178,9 @@ it("cme.v20191029.DescribeTaskDetail", async function () {
     }
 })
 
-it("cme.v20191029.CreateLink", async function () {
+it("cme.v20191029.CreateVideoEncodingPreset", async function () {
     try {
-       const data = await client.CreateLink({})
+       const data = await client.CreateVideoEncodingPreset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +248,29 @@ it("cme.v20191029.MoveClass", async function () {
     }
 })
 
+it("cme.v20191029.CreateLink", async function () {
+    try {
+       const data = await client.CreateLink({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.ModifyTeamMember", async function () {
     try {
        const data = await client.ModifyTeamMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cme.v20191029.DeleteVideoEncodingPreset", async function () {
+    try {
+       const data = await client.DeleteVideoEncodingPreset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +318,16 @@ it("cme.v20191029.DescribeLoginStatus", async function () {
     }
 })
 
+it("cme.v20191029.ModifyVideoEncodingPreset", async function () {
+    try {
+       const data = await client.ModifyVideoEncodingPreset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.DescribeMaterials", async function () {
     try {
        const data = await client.DescribeMaterials({})
@@ -318,9 +358,9 @@ it("cme.v20191029.DescribeAccounts", async function () {
     }
 })
 
-it("cme.v20191029.DescribeClass", async function () {
+it("cme.v20191029.DescribePlatforms", async function () {
     try {
-       const data = await client.DescribeClass({})
+       const data = await client.DescribePlatforms({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

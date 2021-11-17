@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTeams", req, cb);
     }
     /**
+     * 查询视频编码配置信息。
+     */
+    async DescribeVideoEncodingPresets(req, cb) {
+        return this.request("DescribeVideoEncodingPresets", req, cb);
+    }
+    /**
      * 导出视频编辑项目，支持指定输出的模板。
      */
     async ExportVideoEditProject(req, cb) {
@@ -108,13 +114,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportVideoByEditorTrackData", req, cb);
     }
     /**
-     * <li>支持获取所创建的所有平台列表信息；</li>
-<li>支持获取指定的平台列表信息。</li>
-
-
+     * 获取指定归属者下所有的分类信息。
      */
-    async DescribePlatforms(req, cb) {
-        return this.request("DescribePlatforms", req, cb);
+    async DescribeClass(req, cb) {
+        return this.request("DescribeClass", req, cb);
     }
     /**
      * 获取任务详情信息，包含下面几个部分：
@@ -125,10 +128,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskDetail", req, cb);
     }
     /**
-     *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     * 指定导出的参数，创建一个视频编码配置
      */
-    async CreateLink(req, cb) {
-        return this.request("CreateLink", req, cb);
+    async CreateVideoEncodingPreset(req, cb) {
+        return this.request("CreateVideoEncodingPreset", req, cb);
     }
     /**
      * 修改团队信息，目前支持修改的操作有：
@@ -173,10 +176,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MoveClass", req, cb);
     }
     /**
+     *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     */
+    async CreateLink(req, cb) {
+        return this.request("CreateLink", req, cb);
+    }
+    /**
      * 修改团队成员信息，包括成员备注、角色等。
      */
     async ModifyTeamMember(req, cb) {
         return this.request("ModifyTeamMember", req, cb);
+    }
+    /**
+     * 删除指定 ID 的视频编码配置
+     */
+    async DeleteVideoEncodingPreset(req, cb) {
+        return this.request("DeleteVideoEncodingPreset", req, cb);
     }
     /**
      * 将团队成员从团队中删除，默认只有 Owner 及管理员才有此权限。
@@ -201,6 +216,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLoginStatus(req, cb) {
         return this.request("DescribeLoginStatus", req, cb);
+    }
+    /**
+     * 修改视频编码配置信息。
+     */
+    async ModifyVideoEncodingPreset(req, cb) {
+        return this.request("ModifyVideoEncodingPreset", req, cb);
     }
     /**
      * 根据媒体 Id 批量获取媒体详情。
@@ -235,10 +256,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
-     * 获取指定归属者下所有的分类信息。
+     * <li>支持获取所创建的所有平台列表信息；</li>
+<li>支持获取指定的平台列表信息。</li>
+
+
      */
-    async DescribeClass(req, cb) {
-        return this.request("DescribeClass", req, cb);
+    async DescribePlatforms(req, cb) {
+        return this.request("DescribePlatforms", req, cb);
     }
     /**
      * 创建一个团队。

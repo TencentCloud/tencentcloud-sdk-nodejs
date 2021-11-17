@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { QueryInvoiceResponse, ApplyTradeRequest, QueryOutwardOrderResponse, QueryExchangeRateResponse, UploadFileRequest, QueryBatchPaymentResultRequest, UploadFileResponse, QueryAcctBindingRequest, QueryAgentStatementsResponse, ModifyMntMbrBindRelateAcctBankCodeRequest, ApplyPayerInfoResponse, QueryMerchantPayWayListResponse, RevokeRechargeByThirdPayRequest, QueryTradeRequest, UnifiedOrderResponse, QueryBankWithdrawCashDetailsRequest, QueryCustAcctIdBalanceRequest, QueryPayerInfoResponse, BindAcctRequest, ReviseMbrPropertyRequest, UnifiedTlinxOrderResponse, MigrateOrderRefundQueryResponse, RevResigterBillSupportWithdrawRequest, CreateInvoiceResponse, CreateOrderRequest, ModifyBindedAccountRequest, QueryBankWithdrawCashDetailsResponse, RefundTlinxOrderResponse, QueryMemberTransactionResponse, CreatePayMerchantRequest, ContractOrderRequest, ModifyAgentTaxPaymentInfoResponse, CreateSinglePaymentRequest, UnbindRelateAcctRequest, QueryAcctInfoListRequest, CreateMerchantRequest, QuerySmallAmountTransferResponse, DeleteAgentTaxPaymentInfoRequest, RefundTlinxOrderRequest, QueryAcctBindingResponse, QueryMerchantInfoForManagementRequest, QueryCommonTransferRechargeResponse, ApplyOutwardOrderResponse, ApplyReWithdrawalResponse, QueryBatchPaymentResultResponse, RegisterBillRequest, RevokeRechargeByThirdPayResponse, CreateBatchPaymentResponse, QueryInvoiceV2Response, BindAccountResponse, CreateExternalAnchorRequest, CreateAgentTaxPaymentInfosRequest, ConfirmOrderResponse, UploadTaxListResponse, CloseOrderResponse, ModifyMerchantRequest, CheckAcctRequest, CheckAmountResponse, ApplyReWithdrawalRequest, CreateAgentTaxPaymentInfosResponse, RechargeByThirdPayRequest, RevokeMemberRechargeThirdPayRequest, QueryPayerInfoRequest, QueryMerchantInfoForManagementResponse, CreateTransferBatchResponse, QuerySingleTransactionStatusRequest, DescribeOrderStatusRequest, QueryDownloadBillURLRequest, BindAccountRequest, RegisterBillSupportWithdrawRequest, ModifyMerchantResponse, RefundOrderResponse, QuerySinglePayResponse, CreateAnchorResponse, UploadExternalAnchorInfoResponse, QueryCustAcctIdBalanceResponse, CreateExternalAnchorResponse, QueryTradeResponse, DownloadBillResponse, RevokeMemberRechargeThirdPayResponse, CreateInvoiceV2Request, QueryAcctInfoListResponse, DeleteAgentTaxPaymentInfosRequest, BindRelateAcctSmallAmountResponse, QueryTransferBatchRequest, CreateTransferBatchRequest, ExecuteMemberTransactionResponse, BindRelateAcctUnionPayRequest, CreateAcctRequest, ConfirmOrderRequest, RefundResponse, QueryAgentTaxPaymentBatchResponse, DeleteAgentTaxPaymentInfosResponse, QueryOrderStatusResponse, RegisterBillSupportWithdrawResponse, QueryTransferResultResponse, QueryContractResponse, RegisterBehaviorResponse, QuerySingleTransactionStatusResponse, QueryAcctInfoRequest, DescribeChargeDetailResponse, ApplyWithdrawalResponse, QueryBankTransactionDetailsResponse, QueryTransferResultRequest, QueryMaliciousRegistrationRequest, QueryMemberTransactionRequest, UploadTaxPaymentResponse, QueryBillDownloadURLResponse, CreateRedInvoiceV2Request, QueryOutwardOrderRequest, QueryMerchantBalanceRequest, CreateAcctResponse, DescribeChargeDetailRequest, RevResigterBillSupportWithdrawResponse, BindAcctResponse, CreateOrderResponse, QueryMerchantOrderRequest, QueryTransferDetailResponse, UploadTaxPaymentRequest, UploadExternalAnchorInfoRequest, BindRelateAccReUnionPayRequest, CreateCustAcctIdResponse, QueryMerchantBalanceResponse, QueryAcctInfoResponse, MigrateOrderRefundQueryRequest, QueryAgentTaxPaymentBatchRequest, QueryMerchantRequest, QueryInvoiceV2Request, QuerySinglePaymentResultRequest, CreateSinglePayRequest, QueryTransferBatchResponse, SyncContractDataResponse, RegisterBillResponse, WithdrawCashMembershipRequest, ApplyOutwardOrderRequest, CreateRedInvoiceRequest, CreatePayMerchantResponse, TerminateContractResponse, RechargeByThirdPayResponse, CheckAmountRequest, QueryDownloadBillURLResponse, CreateInvoiceRequest, QueryAnchorContractInfoRequest, TransferSinglePayResponse, QueryMemberBindResponse, UnifiedTlinxOrderRequest, CreateCustAcctIdRequest, QueryBankClearResponse, UnBindAcctResponse, MigrateOrderRefundRequest, CreateRedInvoiceV2Response, QueryCommonTransferRechargeRequest, RegisterBehaviorRequest, ReviseMbrPropertyResponse, QueryTransferDetailRequest, QueryOrderRequest, CloseOrderRequest, QueryBankClearRequest, QueryBalanceResponse, CreateRedInvoiceResponse, QueryContractRequest, RefundOrderRequest, TerminateContractRequest, QueryInvoiceRequest, CheckAcctResponse, QueryReconciliationDocumentResponse, QueryApplicationMaterialResponse, QueryExchangeRateRequest, RechargeMemberThirdPayRequest, QueryBillDownloadURLRequest, TransferSinglePayRequest, QueryMaliciousRegistrationResponse, ApplyPayerInfoRequest, CreateSinglePayResponse, RefundMemberTransactionResponse, CreateInvoiceV2Response, DownloadReconciliationUrlResponse, ModifyBindedAccountResponse, ApplyApplicationMaterialResponse, RefundMemberTransactionRequest, QueryBankTransactionDetailsRequest, DownloadBillRequest, QueryRefundRequest, QuerySinglePayRequest, ApplyTradeResponse, RechargeMemberThirdPayResponse, DescribeOrderStatusResponse, WithdrawCashMembershipResponse, QueryApplicationMaterialRequest, CreateMerchantResponse, CreateSinglePaymentResponse, QueryOrderStatusRequest, UnbindRelateAcctResponse, ApplyApplicationMaterialRequest, ModifyAgentTaxPaymentInfoRequest, QuerySmallAmountTransferRequest, QueryMerchantPayWayListRequest, DownloadReconciliationUrlRequest, CreateBatchPaymentRequest, ModifyMntMbrBindRelateAcctBankCodeResponse, QueryBalanceRequest, UploadTaxListRequest, ApplyWithdrawalRequest, ExecuteMemberTransactionRequest, BindRelateAcctSmallAmountRequest, QueryRefundResponse, QuerySinglePaymentResultResponse, CreateAnchorRequest, QueryMemberBindRequest, SyncContractDataRequest, QueryAgentStatementsRequest, BindRelateAcctUnionPayResponse, QueryReconciliationDocumentRequest, QueryOrderResponse, UnifiedOrderRequest, UnBindAcctRequest, MigrateOrderRefundResponse, QueryAnchorContractInfoResponse, DeleteAgentTaxPaymentInfoResponse, RefundRequest, BindRelateAccReUnionPayResponse, ContractOrderResponse, QueryMerchantOrderResponse, QueryMerchantResponse } from "./cpdp_models";
+import { UploadTaxPaymentRequest, QueryAcctBindingRequest, ReviseMbrPropertyResponse, ApplyPayerInfoResponse, RevokeRechargeByThirdPayRequest, UnifiedOrderResponse, BindAcctRequest, MigrateOrderRefundQueryResponse, QueryOutwardOrderRequest, UploadOrgFileRequest, RefundTlinxOrderResponse, CreatePayMerchantRequest, QueryContractPayWayListResponse, QueryContractPayWayListRequest, QueryMemberTransactionResponse, UnbindRelateAcctRequest, CreateMerchantRequest, QueryContractRelateShopResponse, RefundTlinxOrderRequest, QueryAcctBindingResponse, BindAccountResponse, CreateTransferBatchResponse, BindAccountRequest, QuerySinglePayResponse, QueryCustAcctIdBalanceResponse, CreateRedInvoiceRequest, QueryAcctInfoListResponse, QueryApplicationMaterialRequest, ConfirmOrderRequest, ModifyMerchantResponse, QuerySmallAmountTransferResponse, QueryMerchantClassificationRequest, QuerySingleTransactionStatusResponse, QueryOrderRequest, RevokeMemberRechargeThirdPayResponse, DistributeAccreditTlinxRequest, QueryContractRelateShopRequest, AddContractRequest, CreateAcctResponse, DistributeAddReceiverRequest, QueryPayerInfoResponse, AddMerchantResponse, RegisterBillSupportWithdrawResponse, ApplyReWithdrawalRequest, RechargeByThirdPayResponse, ViewMerchantRequest, QueryDownloadBillURLResponse, CreateInvoiceV2Response, QueryInvoiceV2Response, QueryAgentStatementsResponse, QueryOutwardOrderResponse, QuerySinglePaymentResultRequest, QueryShopOpenIdRequest, QueryBalanceResponse, TerminateContractRequest, QueryMaliciousRegistrationResponse, QueryBankClearRequest, QueryInvoiceRequest, DistributeQueryReceiverRequest, DownloadBillRequest, QuerySinglePayRequest, ApplyTradeResponse, QueryContractPayFeeResponse, BindRelateAcctSmallAmountResponse, QueryBalanceRequest, BindRelateAcctSmallAmountRequest, QueryTransferDetailResponse, QueryTransferBatchResponse, SyncContractDataRequest, RegisterBehaviorRequest, DescribeChargeDetailRequest, QueryBankWithdrawCashDetailsRequest, QueryMerchantPayWayListRequest, WithdrawCashMembershipRequest, RevResigterBillSupportWithdrawRequest, RefundMemberTransactionRequest, AddMerchantRequest, QueryAnchorContractInfoRequest, QueryReconciliationDocumentRequest, DeleteAgentTaxPaymentInfoRequest, ViewContractResponse, ModifyAgentTaxPaymentInfoResponse, QueryBatchPaymentResultResponse, RevokeRechargeByThirdPayResponse, CreateAcctRequest, CreateAgentTaxPaymentInfosRequest, QueryBillDownloadURLResponse, QueryMerchantBalanceRequest, QueryPayerInfoRequest, QuerySingleTransactionStatusRequest, QueryContractRequest, QueryDownloadBillURLRequest, QueryMerchantInfoForManagementResponse, RefundOrderResponse, QueryOrderStatusRequest, CreateExternalAnchorResponse, QueryTradeResponse, QueryMerchantOrderRequest, DistributeQueryResponse, CreateInvoiceV2Request, UploadExternalAnchorInfoResponse, UploadTaxListResponse, BindRelateAcctUnionPayRequest, RegisterBehaviorResponse, ApplyWithdrawalResponse, QueryMerchantInfoForManagementRequest, UnifiedTlinxOrderRequest, RevokeMemberRechargeThirdPayRequest, RechargeMemberThirdPayResponse, QueryBatchPaymentResultRequest, BindAcctResponse, UploadExternalAnchorInfoRequest, BindRelateAccReUnionPayRequest, QueryAcctInfoResponse, MigrateOrderRefundQueryRequest, CreatePayMerchantResponse, UnbindRelateAcctResponse, QueryContractPayFeeRequest, RechargeByThirdPayRequest, CreateCustAcctIdRequest, DistributeApplyResponse, DistributeQueryRequest, CloseOrderRequest, ViewContractRequest, QueryBankTransactionDetailsRequest, QueryExchangeRateRequest, AddContractResponse, QueryBillDownloadURLRequest, RefundMemberTransactionResponse, RevResigterBillSupportWithdrawResponse, ApplyApplicationMaterialResponse, QueryBankClearResponse, DescribeOrderStatusResponse, CreateMerchantResponse, CreateSinglePaymentResponse, UploadTaxListRequest, ApplyWithdrawalRequest, QuerySinglePaymentResultResponse, QueryMemberBindResponse, QueryMemberBindRequest, BindRelateAcctUnionPayResponse, UnifiedOrderRequest, DistributeRemoveReceiverResponse, QueryInvoiceV2Request, DistributeAccreditQueryRequest, QueryMerchantResponse, ViewShopResponse, ApplyTradeRequest, QueryExchangeRateResponse, QuerySmallAmountTransferRequest, ModifyMntMbrBindRelateAcctBankCodeRequest, QueryMerchantPayWayListResponse, QueryCustAcctIdBalanceRequest, ReviseMbrPropertyRequest, QueryBankWithdrawCashDetailsResponse, UploadTaxPaymentResponse, ExecuteMemberTransactionResponse, ContractOrderRequest, DistributeAccreditQueryResponse, ApplyReWithdrawalResponse, RegisterBillRequest, CreateBatchPaymentResponse, CreateExternalAnchorRequest, ConfirmOrderResponse, UnifiedTlinxOrderResponse, CheckAmountResponse, QueryCityCodeResponse, QueryApplicationMaterialResponse, DownloadBillResponse, DistributeRemoveReceiverRequest, DeleteAgentTaxPaymentInfosRequest, QueryAcctInfoListRequest, AddShopRequest, QueryOrderStatusResponse, QueryTransferResultResponse, QueryAcctInfoRequest, DescribeChargeDetailResponse, DistributeQueryReceiverResponse, QueryTransferResultRequest, QueryAgentStatementsRequest, CreateRedInvoiceV2Request, CreateOrderResponse, ModifyMerchantRequest, CreateInvoiceResponse, CheckAmountRequest, DistributeCancelRequest, RegisterBillSupportWithdrawRequest, UnBindAcctResponse, QueryCommonTransferRechargeRequest, QueryTransferDetailRequest, DownloadOrgFileResponse, QueryReconciliationDocumentResponse, QueryBankTransactionDetailsResponse, TransferSinglePayRequest, CreateSinglePayResponse, MigrateOrderRefundRequest, UploadOrgFileResponse, CreateAnchorRequest, ApplyApplicationMaterialRequest, ModifyAgentTaxPaymentInfoRequest, DownloadReconciliationUrlRequest, CreateBatchPaymentRequest, ModifyMntMbrBindRelateAcctBankCodeResponse, SyncContractDataResponse, ExecuteMemberTransactionRequest, DownloadOrgFileRequest, QueryRefundRequest, MigrateOrderRefundResponse, TransferSinglePayResponse, RefundRequest, ContractOrderResponse, QueryInvoiceResponse, UploadFileRequest, ViewMerchantResponse, AddShopResponse, UploadFileResponse, RefundResponse, CreateTransferBatchRequest, QueryMemberTransactionRequest, QueryCityCodeRequest, CreateOrderRequest, ModifyBindedAccountRequest, WithdrawCashMembershipResponse, CreateSinglePaymentRequest, DistributeApplyRequest, ViewShopRequest, ApplyOutwardOrderResponse, QueryShopOpenIdResponse, QueryCommonTransferRechargeResponse, CheckAcctRequest, CreateAgentTaxPaymentInfosResponse, DescribeOrderStatusRequest, CreateAnchorResponse, QueryAgentTaxPaymentBatchResponse, DeleteAgentTaxPaymentInfosResponse, QueryMerchantClassificationResponse, QueryContractResponse, CreateRedInvoiceResponse, QueryMerchantBalanceResponse, CloseOrderResponse, QueryMaliciousRegistrationRequest, QueryOrderResponse, QueryTradeRequest, CreateCustAcctIdResponse, QueryAgentTaxPaymentBatchRequest, RegisterBillResponse, ApplyOutwardOrderRequest, DistributeAccreditTlinxResponse, RechargeMemberThirdPayRequest, CreateInvoiceRequest, CreateRedInvoiceV2Response, RefundOrderRequest, QueryTransferBatchRequest, CheckAcctResponse, ApplyPayerInfoRequest, DownloadReconciliationUrlResponse, ModifyBindedAccountResponse, DistributeCancelResponse, DeleteAgentTaxPaymentInfoResponse, CreateSinglePayRequest, QueryRefundResponse, DistributeAddReceiverResponse, TerminateContractResponse, QueryMerchantRequest, QueryAnchorContractInfoResponse, BindRelateAccReUnionPayResponse, QueryMerchantOrderResponse, UnBindAcctRequest } from "./cpdp_models";
 /**
  * cpdp client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 云支付-分账授权申请查询接口
+     */
+    DistributeAccreditQuery(req: DistributeAccreditQueryRequest, cb?: (error: string, rep: DistributeAccreditQueryResponse) => void): Promise<DistributeAccreditQueryResponse>;
     /**
      * 直播平台-修改代理商完税信息
      */
@@ -19,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 灵云-批量主播转账接口
      */
     CreateBatchPayment(req: CreateBatchPaymentRequest, cb?: (error: string, rep: CreateBatchPaymentResponse) => void): Promise<CreateBatchPaymentResponse>;
+    /**
+     * 云支付-查询商户明细接口
+     */
+    ViewMerchant(req: ViewMerchantRequest, cb?: (error: string, rep: ViewMerchantResponse) => void): Promise<ViewMerchantResponse>;
     /**
      * 灵云-主播入驻
      */
@@ -60,9 +68,9 @@ export declare class Client extends AbstractClient {
      */
     QueryMerchantPayWayList(req: QueryMerchantPayWayListRequest, cb?: (error: string, rep: QueryMerchantPayWayListResponse) => void): Promise<QueryMerchantPayWayListResponse>;
     /**
-     * 跨境-付款人查询
+     * 云鉴-商户信息修改的接口
      */
-    QueryPayerInfo(req: QueryPayerInfoRequest, cb?: (error: string, rep: QueryPayerInfoResponse) => void): Promise<QueryPayerInfoResponse>;
+    ModifyMerchant(req: ModifyMerchantRequest, cb?: (error: string, rep: ModifyMerchantResponse) => void): Promise<ModifyMerchantResponse>;
     /**
      * 跨境-贸易材料明细查询。
      */
@@ -72,9 +80,13 @@ export declare class Client extends AbstractClient {
      */
     QueryTransferDetail(req: QueryTransferDetailRequest, cb?: (error: string, rep: QueryTransferDetailResponse) => void): Promise<QueryTransferDetailResponse>;
     /**
-     * 查询银行单笔交易状态。查询单笔交易的状态。
+     * 云支付-添加门店接口
      */
-    QuerySingleTransactionStatus(req: QuerySingleTransactionStatusRequest, cb?: (error: string, rep: QuerySingleTransactionStatusResponse) => void): Promise<QuerySingleTransactionStatusResponse>;
+    AddShop(req: AddShopRequest, cb?: (error: string, rep: AddShopResponse) => void): Promise<AddShopResponse>;
+    /**
+     * 云支付-查询商户分类接口
+     */
+    QueryMerchantClassification(req: QueryMerchantClassificationRequest, cb?: (error: string, rep: QueryMerchantClassificationResponse) => void): Promise<QueryMerchantClassificationResponse>;
     /**
      * 跨境-提交申报材料。申报材料的主体是付款人，需要提前调用【跨境-付款人申请】接口提交付款人信息且审核通过后调用。
      */
@@ -128,6 +140,10 @@ export declare class Client extends AbstractClient {
      */
     RegisterBillSupportWithdraw(req: RegisterBillSupportWithdrawRequest, cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void): Promise<RegisterBillSupportWithdrawResponse>;
     /**
+     * 云支付-查询合同支付方式列表接口
+     */
+    QueryContractPayWayList(req: QueryContractPayWayListRequest, cb?: (error: string, rep: QueryContractPayWayListResponse) => void): Promise<QueryContractPayWayListResponse>;
+    /**
      * 直播平台-删除代理商完税信息
      */
     DeleteAgentTaxPaymentInfo(req: DeleteAgentTaxPaymentInfoRequest, cb?: (error: string, rep: DeleteAgentTaxPaymentInfoResponse) => void): Promise<DeleteAgentTaxPaymentInfoResponse>;
@@ -164,6 +180,10 @@ export declare class Client extends AbstractClient {
      */
     ConfirmOrder(req: ConfirmOrderRequest, cb?: (error: string, rep: ConfirmOrderResponse) => void): Promise<ConfirmOrderResponse>;
     /**
+     * 云支付-添加商户接口
+     */
+    AddMerchant(req: AddMerchantRequest, cb?: (error: string, rep: AddMerchantResponse) => void): Promise<AddMerchantResponse>;
+    /**
      * 智慧零售-发票查询V2
      */
     QueryInvoiceV2(req: QueryInvoiceV2Request, cb?: (error: string, rep: QueryInvoiceV2Response) => void): Promise<QueryInvoiceV2Response>;
@@ -179,6 +199,10 @@ export declare class Client extends AbstractClient {
      * 跨境-查询汇出结果
      */
     QueryOutwardOrder(req: QueryOutwardOrderRequest, cb?: (error: string, rep: QueryOutwardOrderResponse) => void): Promise<QueryOutwardOrderResponse>;
+    /**
+     * 云支付-获取门店OpenId接口
+     */
+    QueryShopOpenId(req: QueryShopOpenIdRequest, cb?: (error: string, rep: QueryShopOpenIdResponse) => void): Promise<QueryShopOpenIdResponse>;
     /**
      * 商户恶意注册接口
      */
@@ -220,9 +244,9 @@ export declare class Client extends AbstractClient {
      */
     SyncContractData(req: SyncContractDataRequest, cb?: (error: string, rep: SyncContractDataResponse) => void): Promise<SyncContractDataResponse>;
     /**
-     * 云鉴-商户信息修改的接口
+     * 云支付-查询合同明细接口
      */
-    ModifyMerchant(req: ModifyMerchantRequest, cb?: (error: string, rep: ModifyMerchantResponse) => void): Promise<ModifyMerchantResponse>;
+    ViewContract(req: ViewContractRequest, cb?: (error: string, rep: ViewContractResponse) => void): Promise<ViewContractResponse>;
     /**
      * 灵云-重新绑定账号
      */
@@ -251,6 +275,10 @@ export declare class Client extends AbstractClient {
      */
     UnifiedTlinxOrder(req: UnifiedTlinxOrderRequest, cb?: (error: string, rep: UnifiedTlinxOrderResponse) => void): Promise<UnifiedTlinxOrderResponse>;
     /**
+     * 云支付-上传机构文件接口
+     */
+    UploadOrgFile(req: UploadOrgFileRequest, cb?: (error: string, rep: UploadOrgFileResponse) => void): Promise<UploadOrgFileResponse>;
+    /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
@@ -272,6 +300,10 @@ export declare class Client extends AbstractClient {
      */
     RevokeRechargeByThirdPay(req: RevokeRechargeByThirdPayRequest, cb?: (error: string, rep: RevokeRechargeByThirdPayResponse) => void): Promise<RevokeRechargeByThirdPayResponse>;
     /**
+     * 云支付-下载机构文件接口
+     */
+    DownloadOrgFile(req: DownloadOrgFileRequest, cb?: (error: string, rep: DownloadOrgFileResponse) => void): Promise<DownloadOrgFileResponse>;
+    /**
      * 直播平台-查询批次信息
      */
     QueryAgentTaxPaymentBatch(req: QueryAgentTaxPaymentBatchRequest, cb?: (error: string, rep: QueryAgentTaxPaymentBatchResponse) => void): Promise<QueryAgentTaxPaymentBatchResponse>;
@@ -284,9 +316,13 @@ export declare class Client extends AbstractClient {
      */
     QueryAcctBinding(req: QueryAcctBindingRequest, cb?: (error: string, rep: QueryAcctBindingResponse) => void): Promise<QueryAcctBindingResponse>;
     /**
-     * 跨境-汇出指令申请。通过该接口可将对接方账户中的人民币余额汇兑成外币，再汇出至指定银行账户。
+     * 正常结算提现失败情况下，发起重新提现的请求接口
      */
-    ApplyOutwardOrder(req: ApplyOutwardOrderRequest, cb?: (error: string, rep: ApplyOutwardOrderResponse) => void): Promise<ApplyOutwardOrderResponse>;
+    ApplyReWithdrawal(req: ApplyReWithdrawalRequest, cb?: (error: string, rep: ApplyReWithdrawalResponse) => void): Promise<ApplyReWithdrawalResponse>;
+    /**
+     * 云支付-分账解除分账接收方接口
+     */
+    DistributeRemoveReceiver(req: DistributeRemoveReceiverRequest, cb?: (error: string, rep: DistributeRemoveReceiverResponse) => void): Promise<DistributeRemoveReceiverResponse>;
     /**
      * 跨境-付款人申请。通过该接口提交付款人信息并进行 kyc 审核。
      */
@@ -316,6 +352,10 @@ export declare class Client extends AbstractClient {
      */
     RevResigterBillSupportWithdraw(req: RevResigterBillSupportWithdrawRequest, cb?: (error: string, rep: RevResigterBillSupportWithdrawResponse) => void): Promise<RevResigterBillSupportWithdrawResponse>;
     /**
+     * 云支付-查询城市编码接口
+     */
+    QueryCityCode(req: QueryCityCodeRequest, cb?: (error: string, rep: QueryCityCodeResponse) => void): Promise<QueryCityCodeResponse>;
+    /**
      * 跨境-成功申报材料查询。查询成功入库的申报材料。
      */
     QueryApplicationMaterial(req: QueryApplicationMaterialRequest, cb?: (error: string, rep: QueryApplicationMaterialResponse) => void): Promise<QueryApplicationMaterialResponse>;
@@ -327,6 +367,14 @@ export declare class Client extends AbstractClient {
      * 直播平台-上传代理商完税列表
      */
     UploadTaxList(req: UploadTaxListRequest, cb?: (error: string, rep: UploadTaxListResponse) => void): Promise<UploadTaxListResponse>;
+    /**
+     * 云支付-分账授权申请接口
+     */
+    DistributeAccreditTlinx(req: DistributeAccreditTlinxRequest, cb?: (error: string, rep: DistributeAccreditTlinxResponse) => void): Promise<DistributeAccreditTlinxResponse>;
+    /**
+     * 会员在途充值(经第三方支付渠道)接口
+     */
+    RechargeByThirdPay(req: RechargeByThirdPayRequest, cb?: (error: string, rep: RechargeByThirdPayResponse) => void): Promise<RechargeByThirdPayResponse>;
     /**
      * 见证宝-会员在途充值(经第三方支付渠道)
      */
@@ -344,6 +392,14 @@ export declare class Client extends AbstractClient {
      */
     ExecuteMemberTransaction(req: ExecuteMemberTransactionRequest, cb?: (error: string, rep: ExecuteMemberTransactionResponse) => void): Promise<ExecuteMemberTransactionResponse>;
     /**
+     * 云支付-分账结果查询接口
+     */
+    DistributeQuery(req: DistributeQueryRequest, cb?: (error: string, rep: DistributeQueryResponse) => void): Promise<DistributeQueryResponse>;
+    /**
+     * 云支付-添加合同接口
+     */
+    AddContract(req: AddContractRequest, cb?: (error: string, rep: AddContractResponse) => void): Promise<AddContractResponse>;
+    /**
      * 灵云-单笔主播转账接口
      */
     CreateSinglePayment(req: CreateSinglePaymentRequest, cb?: (error: string, rep: CreateSinglePaymentResponse) => void): Promise<CreateSinglePaymentResponse>;
@@ -360,13 +416,17 @@ export declare class Client extends AbstractClient {
      */
     QuerySinglePay(req: QuerySinglePayRequest, cb?: (error: string, rep: QuerySinglePayResponse) => void): Promise<QuerySinglePayResponse>;
     /**
+     * 跨境-付款人查询
+     */
+    QueryPayerInfo(req: QueryPayerInfoRequest, cb?: (error: string, rep: QueryPayerInfoResponse) => void): Promise<QueryPayerInfoResponse>;
+    /**
      * 商户提现
      */
     ApplyWithdrawal(req: ApplyWithdrawalRequest, cb?: (error: string, rep: ApplyWithdrawalResponse) => void): Promise<ApplyWithdrawalResponse>;
     /**
-     * 会员在途充值(经第三方支付渠道)接口
+     * 云支付-分账请求接口
      */
-    RechargeByThirdPay(req: RechargeByThirdPayRequest, cb?: (error: string, rep: RechargeByThirdPayResponse) => void): Promise<RechargeByThirdPayResponse>;
+    DistributeApply(req: DistributeApplyRequest, cb?: (error: string, rep: DistributeApplyResponse) => void): Promise<DistributeApplyResponse>;
     /**
      * 银企直连-单笔支付接口
      */
@@ -389,6 +449,10 @@ export declare class Client extends AbstractClient {
      */
     RevokeMemberRechargeThirdPay(req: RevokeMemberRechargeThirdPayRequest, cb?: (error: string, rep: RevokeMemberRechargeThirdPayResponse) => void): Promise<RevokeMemberRechargeThirdPayResponse>;
     /**
+     * 云支付-分账撤销接口
+     */
+    DistributeCancel(req: DistributeCancelRequest, cb?: (error: string, rep: DistributeCancelResponse) => void): Promise<DistributeCancelResponse>;
+    /**
      * 获取对账中心账单下载地址的接口
      */
     DownloadReconciliationUrl(req: DownloadReconciliationUrlRequest, cb?: (error: string, rep: DownloadReconciliationUrlResponse) => void): Promise<DownloadReconciliationUrlResponse>;
@@ -404,6 +468,10 @@ export declare class Client extends AbstractClient {
      * 会员间交易-不验证。此接口可以实现会员间的余额的交易，实现资金在会员之间流动。
      */
     QueryMemberTransaction(req: QueryMemberTransactionRequest, cb?: (error: string, rep: QueryMemberTransactionResponse) => void): Promise<QueryMemberTransactionResponse>;
+    /**
+     * 云支付-T查询已添加分账接收方接口
+     */
+    DistributeQueryReceiver(req: DistributeQueryReceiverRequest, cb?: (error: string, rep: DistributeQueryReceiverResponse) => void): Promise<DistributeQueryReceiverResponse>;
     /**
      * 灵云-批量转账结果查询
      */
@@ -421,25 +489,45 @@ export declare class Client extends AbstractClient {
      */
     QueryRefund(req: QueryRefundRequest, cb?: (error: string, rep: QueryRefundResponse) => void): Promise<QueryRefundResponse>;
     /**
+     * 云支付-分账添加分账接收方接口
+     */
+    DistributeAddReceiver(req: DistributeAddReceiverRequest, cb?: (error: string, rep: DistributeAddReceiverResponse) => void): Promise<DistributeAddReceiverResponse>;
+    /**
      * 会员间交易退款
      */
     RefundMemberTransaction(req: RefundMemberTransactionRequest, cb?: (error: string, rep: RefundMemberTransactionResponse) => void): Promise<RefundMemberTransactionResponse>;
+    /**
+     * 云支付-查询合同可关联门店接口
+     */
+    QueryContractRelateShop(req: QueryContractRelateShopRequest, cb?: (error: string, rep: QueryContractRelateShopResponse) => void): Promise<QueryContractRelateShopResponse>;
     /**
      * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时。
      */
     MigrateOrderRefundQuery(req: MigrateOrderRefundQueryRequest, cb?: (error: string, rep: MigrateOrderRefundQueryResponse) => void): Promise<MigrateOrderRefundQueryResponse>;
     /**
+     * 云支付-查询门店明细接口
+     */
+    ViewShop(req: ViewShopRequest, cb?: (error: string, rep: ViewShopResponse) => void): Promise<ViewShopResponse>;
+    /**
      * 通过此接口查询签约数据
      */
     QueryContract(req: QueryContractRequest, cb?: (error: string, rep: QueryContractResponse) => void): Promise<QueryContractResponse>;
     /**
-     * 正常结算提现失败情况下，发起重新提现的请求接口
+     * 跨境-汇出指令申请。通过该接口可将对接方账户中的人民币余额汇兑成外币，再汇出至指定银行账户。
      */
-    ApplyReWithdrawal(req: ApplyReWithdrawalRequest, cb?: (error: string, rep: ApplyReWithdrawalResponse) => void): Promise<ApplyReWithdrawalResponse>;
+    ApplyOutwardOrder(req: ApplyOutwardOrderRequest, cb?: (error: string, rep: ApplyOutwardOrderResponse) => void): Promise<ApplyOutwardOrderResponse>;
+    /**
+     * 云支付-查询支付方式费率及自定义表单项接口
+     */
+    QueryContractPayFee(req: QueryContractPayFeeRequest, cb?: (error: string, rep: QueryContractPayFeeResponse) => void): Promise<QueryContractPayFeeResponse>;
     /**
      * 查询小额鉴权转账结果。查询小额往账鉴权的转账状态。
      */
     QuerySmallAmountTransfer(req: QuerySmallAmountTransferRequest, cb?: (error: string, rep: QuerySmallAmountTransferResponse) => void): Promise<QuerySmallAmountTransferResponse>;
+    /**
+     * 查询银行单笔交易状态。查询单笔交易的状态。
+     */
+    QuerySingleTransactionStatus(req: QuerySingleTransactionStatusRequest, cb?: (error: string, rep: QuerySingleTransactionStatusResponse) => void): Promise<QuerySingleTransactionStatusResponse>;
     /**
      * 通过商家批次单号或者微信批次号查询批次单
      */

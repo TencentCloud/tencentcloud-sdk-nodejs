@@ -3440,11 +3440,11 @@ export interface CreateLoadBalancerSnatIpsRequest {
       */
     LoadBalancerId: string;
     /**
-      * 添加SnatIp信息，可指定IP申请，或者指定子网自动申请。
+      * 添加的SnatIp信息，可指定IP申请，或者指定子网自动申请。单个CLB实例可申请的默认上限为10个。
       */
     SnatIps: Array<SnatIp>;
     /**
-      * 添加SnatIp个数，与SnatIps一起使用，当指定Ip时，不能指定创建SnatIp个数。
+      * 添加的SnatIp的个数，可与SnatIps一起使用，但若指定IP时，则不能指定创建的SnatIp个数。默认值为1，数量上限与用户配置有关，默认上限为10。
       */
     Number?: number;
 }
@@ -3754,15 +3754,22 @@ export interface SetLoadBalancerClsLogRequest {
       */
     LoadBalancerId: string;
     /**
-      * 日志服务(CLS)的日志集ID。
+      * 日志服务(CLS)的日志集 ID。
+<li>增加和更新日志主题时可调用 [DescribeLogsets](https://cloud.tencent.com/document/product/614/56454) 接口获取日志集 ID。</li>
+<li>删除日志主题时，此参数填写为null即可。</li>
       */
     LogSetId: string;
     /**
-      * 日志服务(CLS)的日志主题ID。
+      * 日志服务(CLS)的日志主题 ID。
+<li>增加和更新日志主题时可调用 [DescribeTopics](https://cloud.tencent.com/document/product/614/58624) 接口获取日志主题 ID。</li>
+<li>删除日志主题时，此参数填写为null即可。</li>
       */
     LogTopicId: string;
     /**
-      * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
+      * 日志类型：
+<li>ACCESS：访问日志</li>
+<li>HEALTH：健康检查日志</li>
+默认为ACCESS。
       */
     LogType?: string;
 }

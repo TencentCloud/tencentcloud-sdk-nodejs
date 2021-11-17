@@ -258,6 +258,16 @@ it("mariadb.v20170312.DescribeDBLogFiles", async function () {
     }
 })
 
+it("mariadb.v20170312.ModifySyncTaskAttribute", async function () {
+    try {
+       const data = await client.ModifySyncTaskAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DestroyHourDBInstance", async function () {
     try {
        const data = await client.DestroyHourDBInstance({})
@@ -381,6 +391,16 @@ it("mariadb.v20170312.ModifyAccountPrivileges", async function () {
 it("mariadb.v20170312.ModifyDBInstanceSecurityGroups", async function () {
     try {
        const data = await client.ModifyDBInstanceSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.ModifyDBSyncMode", async function () {
+    try {
+       const data = await client.ModifyDBSyncMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

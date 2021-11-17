@@ -180,6 +180,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBLogFiles", req, cb);
     }
     /**
+     * 本接口 (ModifySyncTaskAttribute) 用于修改同步任务的属性（目前只支持修改任务名称）
+     */
+    async ModifySyncTaskAttribute(req, cb) {
+        return this.request("ModifySyncTaskAttribute", req, cb);
+    }
+    /**
      * 本接口（DestroyHourDBInstance）用于销毁按量计费实例。
      */
     async DestroyHourDBInstance(req, cb) {
@@ -262,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDBInstanceSecurityGroups(req, cb) {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口（ModifyDBSyncMode）用于修改云数据库实例的同步模式。
+     */
+    async ModifyDBSyncMode(req, cb) {
+        return this.request("ModifyDBSyncMode", req, cb);
     }
     /**
      * 本接口(CloseDBExtranetAccess)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问，查询实例列表接口将不返回对应实例的外网域名和端口信息。

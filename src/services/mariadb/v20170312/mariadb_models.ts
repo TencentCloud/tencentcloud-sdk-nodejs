@@ -937,6 +937,16 @@ export interface DescribeOrdersResponse {
 }
 
 /**
+ * ModifySyncTaskAttribute返回参数结构体
+ */
+export interface ModifySyncTaskAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DCN详情条目
  */
 export interface DcnDetailItem {
@@ -2035,6 +2045,21 @@ export interface ColumnPrivilege {
 }
 
 /**
+ * ModifySyncTaskAttribute请求参数结构体
+ */
+export interface ModifySyncTaskAttributeRequest {
+  /**
+   * 一个或多个待操作的任务ID。可通过[DescribeSyncTasks](https://tcloud-dev.oa.com/document/product/237/32979?!preview&!document=1) API返回值中的TaskId获取。每次请求允许操作的实例数量上限是100。
+   */
+  TaskIds: Array<string>
+
+  /**
+   * 任务名称。可任意命名，但不得超过100个字符。
+   */
+  TaskName?: string
+}
+
+/**
  * DescribeUpgradePrice返回参数结构体
  */
 export interface DescribeUpgradePriceResponse {
@@ -2588,7 +2613,7 @@ export interface GrantAccountPrivilegesRequest {
   DbName: string
 
   /**
-      * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES 
+      * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES，REPLICATION CLIENT，REPLICATION SLAVE 
 库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER 
 表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER 
 存储过程/函数权限： ALTER ROUTINE，EXECUTE 
@@ -2727,6 +2752,11 @@ export interface SlowLogData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ExampleSql: string
+
+  /**
+   * 账户的域名
+   */
+  Host: string
 }
 
 /**
@@ -3060,6 +3090,21 @@ export interface DescribeDBPerformanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDBSyncMode请求参数结构体
+ */
+export interface ModifyDBSyncModeRequest {
+  /**
+   * 待修改同步模式的实例ID。形如：tdsql-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 同步模式：0 异步，1 强同步， 2 强同步可退化
+   */
+  SyncMode: number
 }
 
 /**
@@ -3599,6 +3644,21 @@ export interface MonitorData {
    * 监控数据
    */
   Data: Array<number>
+}
+
+/**
+ * ModifyDBSyncMode返回参数结构体
+ */
+export interface ModifyDBSyncModeResponse {
+  /**
+   * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+   */
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

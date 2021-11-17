@@ -34,6 +34,8 @@ import {
   ModifyProjectResponse,
   AudioTrackItem,
   StreamConnectProjectInfo,
+  VideoEncodingPresetAudioSettingForUpdate,
+  VideoEncodingPresetAudioSetting,
   IntegerRange,
   SearchMaterialRequest,
   DeleteTeamResponse,
@@ -66,6 +68,7 @@ import {
   StorageNewFileCreatedEvent,
   DescribeLoginStatusRequest,
   MediaTrack,
+  DeleteVideoEncodingPresetResponse,
   DeleteLoginStatusResponse,
   WeiboPublishInfo,
   Resource,
@@ -78,17 +81,20 @@ import {
   ParseEventRequest,
   EmptyTrackItem,
   PlatformInfo,
+  DeleteVideoEncodingPresetRequest,
+  ModifyVideoEncodingPresetResponse,
   DescribeJoinTeamsRequest,
   VideoSegmentationProjectInput,
   DeleteMaterialRequest,
   CreateProjectResponse,
   VideoEditProjectInput,
   DeleteProjectResponse,
+  VideoEncodingPresetVideoSetting,
   DeleteClassRequest,
   CreateLinkRequest,
   CreateClassRequest,
   DescribeMaterialsResponse,
-  HandleStreamConnectProjectResponse,
+  CreateVideoEncodingPresetResponse,
   GrantResourceAuthorizationResponse,
   SwitcherPgmOutputConfig,
   CMEExportInfo,
@@ -114,6 +120,7 @@ import {
   CreateTeamResponse,
   ModifyTeamRequest,
   ModifyTeamMemberRequest,
+  VideoEncodingPresetVideoSettingForUpdate,
   CreateTeamRequest,
   MaterialBasicInfo,
   ResourceInfo,
@@ -127,9 +134,10 @@ import {
   RecordReplayProjectInput,
   VideoStreamInfo,
   AddTeamMemberRequest,
-  ExportVideoEditProjectResponse,
+  GrantResourceAuthorizationRequest,
   ThirdPartyPublishInfo,
   ListMediaRequest,
+  HandleStreamConnectProjectResponse,
   VodPullInputInfo,
   ModifyTeamResponse,
   DeleteLoginStatusRequest,
@@ -141,11 +149,13 @@ import {
   OtherMaterial,
   EventContent,
   VideoMaterial,
+  DescribeVideoEncodingPresetsResponse,
   DescribeResourceAuthorizationResponse,
   FlattenListMediaResponse,
   AccountInfo,
   DescribeProjectsRequest,
   DescribeLoginStatusResponse,
+  CreateVideoEncodingPresetRequest,
   ProjectStreamConnectStatusChangedEvent,
   DescribeJoinTeamsResponse,
   DescribeTeamMembersRequest,
@@ -153,16 +163,19 @@ import {
   DescribeProjectsResponse,
   AuthorizationInfo,
   VideoEditTemplateMaterial,
+  VideoExportExtensionArgs,
   SlotReplacementInfo,
   ParseEventResponse,
   DeleteMaterialResponse,
   RevokeResourceAuthorizationRequest,
   DescribeTaskDetailRequest,
+  ModifyVideoEncodingPresetRequest,
   TeamMemberInfo,
   CosPublishInputInfo,
   DescribeTasksResponse,
   ModifyProjectRequest,
   MaterialInfo,
+  DescribeVideoEncodingPresetsRequest,
   LoginStatusInfo,
   DescribeClassResponse,
   GenerateVideoSegmentationSchemeByAiResponse,
@@ -171,12 +184,13 @@ import {
   KuaishouPublishInfo,
   CopyProjectResponse,
   DeleteClassResponse,
-  GrantResourceAuthorizationRequest,
+  ExportVideoEditProjectResponse,
   MediaMetaData,
   ExternalMediaInfo,
   LinkMaterialInfo,
   ExportVideoByEditorTrackDataResponse,
   MediaImageSpriteInfo,
+  VideoEncodingPreset,
   ImportMaterialRequest,
   TextReplacementInfo,
   DescribeMaterialsRequest,
@@ -209,6 +223,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTeamsResponse) => void
   ): Promise<DescribeTeamsResponse> {
     return this.request("DescribeTeams", req, cb)
+  }
+
+  /**
+   * 查询视频编码配置信息。
+   */
+  async DescribeVideoEncodingPresets(
+    req: DescribeVideoEncodingPresetsRequest,
+    cb?: (error: string, rep: DescribeVideoEncodingPresetsResponse) => void
+  ): Promise<DescribeVideoEncodingPresetsResponse> {
+    return this.request("DescribeVideoEncodingPresets", req, cb)
   }
 
   /**
@@ -324,16 +348,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <li>支持获取所创建的所有平台列表信息；</li>
-<li>支持获取指定的平台列表信息。</li>
-
-
-     */
-  async DescribePlatforms(
-    req: DescribePlatformsRequest,
-    cb?: (error: string, rep: DescribePlatformsResponse) => void
-  ): Promise<DescribePlatformsResponse> {
-    return this.request("DescribePlatforms", req, cb)
+   * 获取指定归属者下所有的分类信息。
+   */
+  async DescribeClass(
+    req: DescribeClassRequest,
+    cb?: (error: string, rep: DescribeClassResponse) => void
+  ): Promise<DescribeClassResponse> {
+    return this.request("DescribeClass", req, cb)
   }
 
   /**
@@ -349,13 +370,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+   * 指定导出的参数，创建一个视频编码配置
    */
-  async CreateLink(
-    req: CreateLinkRequest,
-    cb?: (error: string, rep: CreateLinkResponse) => void
-  ): Promise<CreateLinkResponse> {
-    return this.request("CreateLink", req, cb)
+  async CreateVideoEncodingPreset(
+    req: CreateVideoEncodingPresetRequest,
+    cb?: (error: string, rep: CreateVideoEncodingPresetResponse) => void
+  ): Promise<CreateVideoEncodingPresetResponse> {
+    return this.request("CreateVideoEncodingPreset", req, cb)
   }
 
   /**
@@ -425,6 +446,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+   */
+  async CreateLink(
+    req: CreateLinkRequest,
+    cb?: (error: string, rep: CreateLinkResponse) => void
+  ): Promise<CreateLinkResponse> {
+    return this.request("CreateLink", req, cb)
+  }
+
+  /**
    * 修改团队成员信息，包括成员备注、角色等。
    */
   async ModifyTeamMember(
@@ -432,6 +463,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTeamMemberResponse) => void
   ): Promise<ModifyTeamMemberResponse> {
     return this.request("ModifyTeamMember", req, cb)
+  }
+
+  /**
+   * 删除指定 ID 的视频编码配置
+   */
+  async DeleteVideoEncodingPreset(
+    req: DeleteVideoEncodingPresetRequest,
+    cb?: (error: string, rep: DeleteVideoEncodingPresetResponse) => void
+  ): Promise<DeleteVideoEncodingPresetResponse> {
+    return this.request("DeleteVideoEncodingPreset", req, cb)
   }
 
   /**
@@ -472,6 +513,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLoginStatusResponse) => void
   ): Promise<DescribeLoginStatusResponse> {
     return this.request("DescribeLoginStatus", req, cb)
+  }
+
+  /**
+   * 修改视频编码配置信息。
+   */
+  async ModifyVideoEncodingPreset(
+    req: ModifyVideoEncodingPresetRequest,
+    cb?: (error: string, rep: ModifyVideoEncodingPresetResponse) => void
+  ): Promise<ModifyVideoEncodingPresetResponse> {
+    return this.request("ModifyVideoEncodingPreset", req, cb)
   }
 
   /**
@@ -519,13 +570,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定归属者下所有的分类信息。
-   */
-  async DescribeClass(
-    req: DescribeClassRequest,
-    cb?: (error: string, rep: DescribeClassResponse) => void
-  ): Promise<DescribeClassResponse> {
-    return this.request("DescribeClass", req, cb)
+     * <li>支持获取所创建的所有平台列表信息；</li>
+<li>支持获取指定的平台列表信息。</li>
+
+
+     */
+  async DescribePlatforms(
+    req: DescribePlatformsRequest,
+    cb?: (error: string, rep: DescribePlatformsResponse) => void
+  ): Promise<DescribePlatformsResponse> {
+    return this.request("DescribePlatforms", req, cb)
   }
 
   /**

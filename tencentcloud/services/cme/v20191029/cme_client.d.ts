@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyMaterialResponse, DeleteProjectRequest, ExportVideoByVideoSegmentationDataResponse, ImportMaterialResponse, DescribeAccountsRequest, ExportVideoByVideoSegmentationDataRequest, DescribeTeamsResponse, DescribeTaskDetailResponse, ExportVideoEditProjectRequest, ModifyProjectResponse, SearchMaterialRequest, DeleteTeamResponse, CopyProjectRequest, RevokeResourceAuthorizationResponse, HandleStreamConnectProjectRequest, DeleteTeamRequest, DescribeTeamsRequest, FlattenListMediaRequest, ExportVideoByEditorTrackDataRequest, CreateProjectRequest, ModifyMaterialRequest, DescribePlatformsResponse, DescribeTasksRequest, DescribeLoginStatusRequest, DeleteLoginStatusResponse, CreateLinkResponse, ExportVideoByTemplateResponse, ListMediaResponse, SearchMaterialResponse, ParseEventRequest, DescribeJoinTeamsRequest, DeleteMaterialRequest, CreateProjectResponse, DeleteProjectResponse, DeleteClassRequest, CreateLinkRequest, CreateClassRequest, DescribeMaterialsResponse, HandleStreamConnectProjectResponse, GrantResourceAuthorizationResponse, MoveResourceRequest, ImportMediaToProjectRequest, DescribeClassRequest, DescribeSharedSpaceResponse, DescribeAccountsResponse, MoveResourceResponse, MoveClassRequest, DeleteTeamMembersResponse, MoveClassResponse, ImportMediaToProjectResponse, ModifyTeamMemberResponse, DescribeTeamMembersResponse, AddTeamMemberResponse, CreateTeamResponse, ModifyTeamRequest, ModifyTeamMemberRequest, CreateTeamRequest, DescribeResourceAuthorizationRequest, CreateClassResponse, AddTeamMemberRequest, ExportVideoEditProjectResponse, ListMediaRequest, ModifyTeamResponse, DeleteLoginStatusRequest, GenerateVideoSegmentationSchemeByAiRequest, DeleteTeamMembersRequest, ExportVideoByTemplateRequest, DescribePlatformsRequest, DescribeResourceAuthorizationResponse, FlattenListMediaResponse, DescribeProjectsRequest, DescribeLoginStatusResponse, DescribeJoinTeamsResponse, DescribeTeamMembersRequest, DescribeProjectsResponse, ParseEventResponse, DeleteMaterialResponse, RevokeResourceAuthorizationRequest, DescribeTaskDetailRequest, DescribeTasksResponse, ModifyProjectRequest, DescribeClassResponse, GenerateVideoSegmentationSchemeByAiResponse, DescribeSharedSpaceRequest, CopyProjectResponse, DeleteClassResponse, GrantResourceAuthorizationRequest, ExportVideoByEditorTrackDataResponse, ImportMaterialRequest, DescribeMaterialsRequest } from "./cme_models";
+import { ModifyMaterialResponse, DeleteProjectRequest, ExportVideoByVideoSegmentationDataResponse, ImportMaterialResponse, DescribeAccountsRequest, ExportVideoByVideoSegmentationDataRequest, DescribeTeamsResponse, DescribeTaskDetailResponse, ExportVideoEditProjectRequest, ModifyProjectResponse, SearchMaterialRequest, DeleteTeamResponse, CopyProjectRequest, RevokeResourceAuthorizationResponse, HandleStreamConnectProjectRequest, DeleteTeamRequest, DescribeTeamsRequest, FlattenListMediaRequest, ExportVideoByEditorTrackDataRequest, CreateProjectRequest, ModifyMaterialRequest, DescribePlatformsResponse, DescribeTasksRequest, DescribeLoginStatusRequest, DeleteVideoEncodingPresetResponse, DeleteLoginStatusResponse, CreateLinkResponse, ExportVideoByTemplateResponse, ListMediaResponse, SearchMaterialResponse, ParseEventRequest, DeleteVideoEncodingPresetRequest, ModifyVideoEncodingPresetResponse, DescribeJoinTeamsRequest, DeleteMaterialRequest, CreateProjectResponse, DeleteProjectResponse, DeleteClassRequest, CreateLinkRequest, CreateClassRequest, DescribeMaterialsResponse, CreateVideoEncodingPresetResponse, GrantResourceAuthorizationResponse, MoveResourceRequest, ImportMediaToProjectRequest, DescribeClassRequest, DescribeSharedSpaceResponse, DescribeAccountsResponse, MoveResourceResponse, MoveClassRequest, DeleteTeamMembersResponse, MoveClassResponse, ImportMediaToProjectResponse, ModifyTeamMemberResponse, DescribeTeamMembersResponse, AddTeamMemberResponse, CreateTeamResponse, ModifyTeamRequest, ModifyTeamMemberRequest, CreateTeamRequest, DescribeResourceAuthorizationRequest, CreateClassResponse, AddTeamMemberRequest, GrantResourceAuthorizationRequest, ListMediaRequest, HandleStreamConnectProjectResponse, ModifyTeamResponse, DeleteLoginStatusRequest, GenerateVideoSegmentationSchemeByAiRequest, DeleteTeamMembersRequest, ExportVideoByTemplateRequest, DescribePlatformsRequest, DescribeVideoEncodingPresetsResponse, DescribeResourceAuthorizationResponse, FlattenListMediaResponse, DescribeProjectsRequest, DescribeLoginStatusResponse, CreateVideoEncodingPresetRequest, DescribeJoinTeamsResponse, DescribeTeamMembersRequest, DescribeProjectsResponse, ParseEventResponse, DeleteMaterialResponse, RevokeResourceAuthorizationRequest, DescribeTaskDetailRequest, ModifyVideoEncodingPresetRequest, DescribeTasksResponse, ModifyProjectRequest, DescribeVideoEncodingPresetsRequest, DescribeClassResponse, GenerateVideoSegmentationSchemeByAiResponse, DescribeSharedSpaceRequest, CopyProjectResponse, DeleteClassResponse, ExportVideoEditProjectResponse, ExportVideoByEditorTrackDataResponse, ImportMaterialRequest, DescribeMaterialsRequest } from "./cme_models";
 /**
  * cme client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 获取指定团队的信息，拉取团队信息列表。
      */
     DescribeTeams(req: DescribeTeamsRequest, cb?: (error: string, rep: DescribeTeamsResponse) => void): Promise<DescribeTeamsResponse>;
+    /**
+     * 查询视频编码配置信息。
+     */
+    DescribeVideoEncodingPresets(req: DescribeVideoEncodingPresetsRequest, cb?: (error: string, rep: DescribeVideoEncodingPresetsResponse) => void): Promise<DescribeVideoEncodingPresetsResponse>;
     /**
      * 导出视频编辑项目，支持指定输出的模板。
      */
@@ -62,12 +66,9 @@ export declare class Client extends AbstractClient {
      */
     ExportVideoByEditorTrackData(req: ExportVideoByEditorTrackDataRequest, cb?: (error: string, rep: ExportVideoByEditorTrackDataResponse) => void): Promise<ExportVideoByEditorTrackDataResponse>;
     /**
-     * <li>支持获取所创建的所有平台列表信息；</li>
-<li>支持获取指定的平台列表信息。</li>
-
-
+     * 获取指定归属者下所有的分类信息。
      */
-    DescribePlatforms(req: DescribePlatformsRequest, cb?: (error: string, rep: DescribePlatformsResponse) => void): Promise<DescribePlatformsResponse>;
+    DescribeClass(req: DescribeClassRequest, cb?: (error: string, rep: DescribeClassResponse) => void): Promise<DescribeClassResponse>;
     /**
      * 获取任务详情信息，包含下面几个部分：
 <li>任务基础信息：包括任务状态、错误信息、创建时间等；</li>
@@ -75,9 +76,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskDetail(req: DescribeTaskDetailRequest, cb?: (error: string, rep: DescribeTaskDetailResponse) => void): Promise<DescribeTaskDetailResponse>;
     /**
-     *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     * 指定导出的参数，创建一个视频编码配置
      */
-    CreateLink(req: CreateLinkRequest, cb?: (error: string, rep: CreateLinkResponse) => void): Promise<CreateLinkResponse>;
+    CreateVideoEncodingPreset(req: CreateVideoEncodingPresetRequest, cb?: (error: string, rep: CreateVideoEncodingPresetResponse) => void): Promise<CreateVideoEncodingPresetResponse>;
     /**
      * 修改团队信息，目前支持修改的操作有：
 <li>修改团队名称。</li>
@@ -109,9 +110,17 @@ export declare class Client extends AbstractClient {
      */
     MoveClass(req: MoveClassRequest, cb?: (error: string, rep: MoveClassResponse) => void): Promise<MoveClassResponse>;
     /**
+     *  创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     */
+    CreateLink(req: CreateLinkRequest, cb?: (error: string, rep: CreateLinkResponse) => void): Promise<CreateLinkResponse>;
+    /**
      * 修改团队成员信息，包括成员备注、角色等。
      */
     ModifyTeamMember(req: ModifyTeamMemberRequest, cb?: (error: string, rep: ModifyTeamMemberResponse) => void): Promise<ModifyTeamMemberResponse>;
+    /**
+     * 删除指定 ID 的视频编码配置
+     */
+    DeleteVideoEncodingPreset(req: DeleteVideoEncodingPresetRequest, cb?: (error: string, rep: DeleteVideoEncodingPresetResponse) => void): Promise<DeleteVideoEncodingPresetResponse>;
     /**
      * 将团队成员从团队中删除，默认只有 Owner 及管理员才有此权限。
      */
@@ -128,6 +137,10 @@ export declare class Client extends AbstractClient {
      * 查询指定用户的登录态。
      */
     DescribeLoginStatus(req: DescribeLoginStatusRequest, cb?: (error: string, rep: DescribeLoginStatusResponse) => void): Promise<DescribeLoginStatusResponse>;
+    /**
+     * 修改视频编码配置信息。
+     */
+    ModifyVideoEncodingPreset(req: ModifyVideoEncodingPresetRequest, cb?: (error: string, rep: ModifyVideoEncodingPresetResponse) => void): Promise<ModifyVideoEncodingPresetResponse>;
     /**
      * 根据媒体 Id 批量获取媒体详情。
      */
@@ -155,9 +168,12 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
-     * 获取指定归属者下所有的分类信息。
+     * <li>支持获取所创建的所有平台列表信息；</li>
+<li>支持获取指定的平台列表信息。</li>
+
+
      */
-    DescribeClass(req: DescribeClassRequest, cb?: (error: string, rep: DescribeClassResponse) => void): Promise<DescribeClassResponse>;
+    DescribePlatforms(req: DescribePlatformsRequest, cb?: (error: string, rep: DescribePlatformsResponse) => void): Promise<DescribePlatformsResponse>;
     /**
      * 创建一个团队。
      */

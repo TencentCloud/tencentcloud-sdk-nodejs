@@ -362,7 +362,7 @@ export interface ModifyBackupConfigRequest {
       */
     BackupTimeBeg: number;
     /**
-      * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+      * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
       */
     BackupTimeEnd: number;
     /**
@@ -1012,7 +1012,14 @@ export interface DescribeInstancesRequest {
       */
     DbType?: string;
     /**
-      * 实例状态
+      * 实例状态, 可选值:
+creating 创建中
+running 运行中
+isolating 隔离中
+isolated 已隔离
+activating 恢复中
+offlining 下线中
+offlined 已下线
       */
     Status?: string;
     /**
@@ -1545,15 +1552,18 @@ export interface CreateClustersRequest {
       */
     ProjectId?: number;
     /**
-      * 普通实例Cpu核数
+      * 当DbMode为NORMAL或不填时必选
+普通实例Cpu核数
       */
     Cpu?: number;
     /**
-      * 普通实例内存,单位G
+      * 当DbMode为NORMAL或不填时必选
+普通实例内存,单位G
       */
     Memory?: number;
     /**
-      * 存储大小，单位G
+      * 该参数无实际意义，已废弃。
+存储大小，单位G。
       */
     Storage?: number;
     /**
@@ -1596,7 +1606,8 @@ timeRollback，时间点回档
       */
     ExpectTime?: string;
     /**
-      * 时间点回档，指定时间允许范围
+      * 该参数无实际意义，已废弃。
+时间点回档，指定时间允许范围
       */
     ExpectTimeThresh?: number;
     /**

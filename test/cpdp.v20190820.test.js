@@ -18,6 +18,16 @@ const client = new tencentcloud.cpdp.v20190820.Client({
 })
 describe("cpdp.v20190820.test.js", function () {
 
+it("cpdp.v20190820.DistributeAccreditQuery", async function () {
+    try {
+       const data = await client.DistributeAccreditQuery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.ModifyAgentTaxPaymentInfo", async function () {
     try {
        const data = await client.ModifyAgentTaxPaymentInfo({})
@@ -41,6 +51,16 @@ it("cpdp.v20190820.ModifyMntMbrBindRelateAcctBankCode", async function () {
 it("cpdp.v20190820.CreateBatchPayment", async function () {
     try {
        const data = await client.CreateBatchPayment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.ViewMerchant", async function () {
+    try {
+       const data = await client.ViewMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,9 @@ it("cpdp.v20190820.QueryMerchantPayWayList", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryPayerInfo", async function () {
+it("cpdp.v20190820.ModifyMerchant", async function () {
     try {
-       const data = await client.QueryPayerInfo({})
+       const data = await client.ModifyMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,19 @@ it("cpdp.v20190820.QueryTransferDetail", async function () {
     }
 })
 
-it("cpdp.v20190820.QuerySingleTransactionStatus", async function () {
+it("cpdp.v20190820.AddShop", async function () {
     try {
-       const data = await client.QuerySingleTransactionStatus({})
+       const data = await client.AddShop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryMerchantClassification", async function () {
+    try {
+       const data = await client.QueryMerchantClassification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +348,16 @@ it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryContractPayWayList", async function () {
+    try {
+       const data = await client.QueryContractPayWayList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.DeleteAgentTaxPaymentInfo", async function () {
     try {
        const data = await client.DeleteAgentTaxPaymentInfo({})
@@ -408,6 +448,16 @@ it("cpdp.v20190820.ConfirmOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.AddMerchant", async function () {
+    try {
+       const data = await client.AddMerchant({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryInvoiceV2", async function () {
     try {
        const data = await client.QueryInvoiceV2({})
@@ -441,6 +491,16 @@ it("cpdp.v20190820.CreateAnchor", async function () {
 it("cpdp.v20190820.QueryOutwardOrder", async function () {
     try {
        const data = await client.QueryOutwardOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryShopOpenId", async function () {
+    try {
+       const data = await client.QueryShopOpenId({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +608,9 @@ it("cpdp.v20190820.SyncContractData", async function () {
     }
 })
 
-it("cpdp.v20190820.ModifyMerchant", async function () {
+it("cpdp.v20190820.ViewContract", async function () {
     try {
-       const data = await client.ModifyMerchant({})
+       const data = await client.ViewContract({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,6 +678,16 @@ it("cpdp.v20190820.UnifiedTlinxOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.UploadOrgFile", async function () {
+    try {
+       const data = await client.UploadOrgFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryMemberBind", async function () {
     try {
        const data = await client.QueryMemberBind({})
@@ -668,6 +738,16 @@ it("cpdp.v20190820.RevokeRechargeByThirdPay", async function () {
     }
 })
 
+it("cpdp.v20190820.DownloadOrgFile", async function () {
+    try {
+       const data = await client.DownloadOrgFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryAgentTaxPaymentBatch", async function () {
     try {
        const data = await client.QueryAgentTaxPaymentBatch({})
@@ -698,9 +778,19 @@ it("cpdp.v20190820.QueryAcctBinding", async function () {
     }
 })
 
-it("cpdp.v20190820.ApplyOutwardOrder", async function () {
+it("cpdp.v20190820.ApplyReWithdrawal", async function () {
     try {
-       const data = await client.ApplyOutwardOrder({})
+       const data = await client.ApplyReWithdrawal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.DistributeRemoveReceiver", async function () {
+    try {
+       const data = await client.DistributeRemoveReceiver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -778,6 +868,16 @@ it("cpdp.v20190820.RevResigterBillSupportWithdraw", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryCityCode", async function () {
+    try {
+       const data = await client.QueryCityCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryApplicationMaterial", async function () {
     try {
        const data = await client.QueryApplicationMaterial({})
@@ -801,6 +901,26 @@ it("cpdp.v20190820.Refund", async function () {
 it("cpdp.v20190820.UploadTaxList", async function () {
     try {
        const data = await client.UploadTaxList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.DistributeAccreditTlinx", async function () {
+    try {
+       const data = await client.DistributeAccreditTlinx({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.RechargeByThirdPay", async function () {
+    try {
+       const data = await client.RechargeByThirdPay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,6 +968,26 @@ it("cpdp.v20190820.ExecuteMemberTransaction", async function () {
     }
 })
 
+it("cpdp.v20190820.DistributeQuery", async function () {
+    try {
+       const data = await client.DistributeQuery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.AddContract", async function () {
+    try {
+       const data = await client.AddContract({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CreateSinglePayment", async function () {
     try {
        const data = await client.CreateSinglePayment({})
@@ -888,6 +1028,16 @@ it("cpdp.v20190820.QuerySinglePay", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryPayerInfo", async function () {
+    try {
+       const data = await client.QueryPayerInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.ApplyWithdrawal", async function () {
     try {
        const data = await client.ApplyWithdrawal({})
@@ -898,9 +1048,9 @@ it("cpdp.v20190820.ApplyWithdrawal", async function () {
     }
 })
 
-it("cpdp.v20190820.RechargeByThirdPay", async function () {
+it("cpdp.v20190820.DistributeApply", async function () {
     try {
-       const data = await client.RechargeByThirdPay({})
+       const data = await client.DistributeApply({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,6 +1108,16 @@ it("cpdp.v20190820.RevokeMemberRechargeThirdPay", async function () {
     }
 })
 
+it("cpdp.v20190820.DistributeCancel", async function () {
+    try {
+       const data = await client.DistributeCancel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.DownloadReconciliationUrl", async function () {
     try {
        const data = await client.DownloadReconciliationUrl({})
@@ -981,6 +1141,16 @@ it("cpdp.v20190820.BindRelateAcctUnionPay", async function () {
 it("cpdp.v20190820.QueryMemberTransaction", async function () {
     try {
        const data = await client.QueryMemberTransaction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.DistributeQueryReceiver", async function () {
+    try {
+       const data = await client.DistributeQueryReceiver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,9 +1198,29 @@ it("cpdp.v20190820.QueryRefund", async function () {
     }
 })
 
+it("cpdp.v20190820.DistributeAddReceiver", async function () {
+    try {
+       const data = await client.DistributeAddReceiver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RefundMemberTransaction", async function () {
     try {
        const data = await client.RefundMemberTransaction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryContractRelateShop", async function () {
+    try {
+       const data = await client.QueryContractRelateShop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1048,6 +1238,16 @@ it("cpdp.v20190820.MigrateOrderRefundQuery", async function () {
     }
 })
 
+it("cpdp.v20190820.ViewShop", async function () {
+    try {
+       const data = await client.ViewShop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryContract", async function () {
     try {
        const data = await client.QueryContract({})
@@ -1058,9 +1258,19 @@ it("cpdp.v20190820.QueryContract", async function () {
     }
 })
 
-it("cpdp.v20190820.ApplyReWithdrawal", async function () {
+it("cpdp.v20190820.ApplyOutwardOrder", async function () {
     try {
-       const data = await client.ApplyReWithdrawal({})
+       const data = await client.ApplyOutwardOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryContractPayFee", async function () {
+    try {
+       const data = await client.QueryContractPayFee({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1071,6 +1281,16 @@ it("cpdp.v20190820.ApplyReWithdrawal", async function () {
 it("cpdp.v20190820.QuerySmallAmountTransfer", async function () {
     try {
        const data = await client.QuerySmallAmountTransfer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QuerySingleTransactionStatus", async function () {
+    try {
+       const data = await client.QuerySingleTransactionStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,7 +18,7 @@ export declare class Client extends AbstractClient {
     /**
      * 中止安全组规则下发
      */
-    StopSecurityGroupRuleDispatch(req?: StopSecurityGroupRuleDispatchRequest, cb?: (error: string, rep: StopSecurityGroupRuleDispatchResponse) => void): Promise<StopSecurityGroupRuleDispatchResponse>;
+    StopSecurityGroupRuleDispatch(req: StopSecurityGroupRuleDispatchRequest, cb?: (error: string, rep: StopSecurityGroupRuleDispatchResponse) => void): Promise<StopSecurityGroupRuleDispatchResponse>;
     /**
      * 修改规则表状态
      */

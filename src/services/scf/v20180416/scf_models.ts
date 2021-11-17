@@ -1006,6 +1006,11 @@ export interface UpdateFunctionConfigurationRequest {
   Role?: string
 
   /**
+   * [在线依赖安装](https://cloud.tencent.com/document/product/583/37920)，TRUE 表示安装，默认值为 FALSE。仅支持 Node.js 函数。
+   */
+  InstallDependency?: string
+
+  /**
    * 日志投递到的cls日志集ID
    */
   ClsLogsetId?: string
@@ -1769,6 +1774,11 @@ export interface CreateFunctionRequest {
    * 函数绑定的角色
    */
   Role?: string
+
+  /**
+   * [在线依赖安装](https://cloud.tencent.com/document/product/583/37920)，TRUE 表示安装，默认值为 FALSE。仅支持 Node.js 函数。
+   */
+  InstallDependency?: string
 
   /**
    * 函数日志投递到的CLS LogsetID

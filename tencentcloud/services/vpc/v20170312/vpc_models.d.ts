@@ -4915,6 +4915,10 @@ export interface NetDetectIpState {
  */
 export interface ModifyIp6AddressesBandwidthResponse {
     /**
+      * 任务ID
+      */
+    TaskId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -8315,6 +8319,14 @@ export interface VpnGateway {
       * Type值为CCN时，该值表示云联网实例ID
       */
     NetworkInstanceId: string;
+    /**
+      * CDC 实例ID
+      */
+    CdcId: string;
+    /**
+      * SSL-VPN 客户端连接数。
+      */
+    MaxConnection: number;
 }
 /**
  * EnableVpcEndPointConnect请求参数结构体
@@ -9366,13 +9378,21 @@ export interface CreateVpnGatewayRequest {
       */
     Zone?: string;
     /**
-      * VPN网关类型。值“CCN”云联网类型VPN网关
+      * VPN网关类型。值“CCN”云联网类型VPN网关，值SSL为SSL-VPN
       */
     Type?: string;
     /**
       * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
       */
     Tags?: Array<Tag>;
+    /**
+      * CDC实例ID
+      */
+    CdcId?: string;
+    /**
+      * SSL-VPN 最大CLIENT 连接数。可选 [5, 10, 20, 50, 100]。仅SSL-VPN 需要选这个参数。
+      */
+    MaxConnection?: number;
 }
 /**
  * DescribeVpcInstances请求参数结构体

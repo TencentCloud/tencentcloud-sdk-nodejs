@@ -3338,7 +3338,12 @@ export interface ModifyAllRuleStatusResponse {
 /**
  * StopSecurityGroupRuleDispatch请求参数结构体
  */
-export type StopSecurityGroupRuleDispatchRequest = null
+export interface StopSecurityGroupRuleDispatchRequest {
+  /**
+   * 值为1，中止全部
+   */
+  StopType?: number
+}
 
 /**
  * DescribeGuideScanInfo请求参数结构体

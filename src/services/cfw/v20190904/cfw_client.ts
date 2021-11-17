@@ -214,7 +214,7 @@ export class Client extends AbstractClient {
    * 中止安全组规则下发
    */
   async StopSecurityGroupRuleDispatch(
-    req?: StopSecurityGroupRuleDispatchRequest,
+    req: StopSecurityGroupRuleDispatchRequest,
     cb?: (error: string, rep: StopSecurityGroupRuleDispatchResponse) => void
   ): Promise<StopSecurityGroupRuleDispatchResponse> {
     return this.request("StopSecurityGroupRuleDispatch", req, cb)

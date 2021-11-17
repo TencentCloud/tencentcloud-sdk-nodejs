@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cpdp.tencentcloudapi.com", "2019-08-20", clientConfig);
     }
     /**
+     * 云支付-分账授权申请查询接口
+     */
+    async DistributeAccreditQuery(req, cb) {
+        return this.request("DistributeAccreditQuery", req, cb);
+    }
+    /**
      * 直播平台-修改代理商完税信息
      */
     async ModifyAgentTaxPaymentInfo(req, cb) {
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBatchPayment(req, cb) {
         return this.request("CreateBatchPayment", req, cb);
+    }
+    /**
+     * 云支付-查询商户明细接口
+     */
+    async ViewMerchant(req, cb) {
+        return this.request("ViewMerchant", req, cb);
     }
     /**
      * 灵云-主播入驻
@@ -106,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryMerchantPayWayList", req, cb);
     }
     /**
-     * 跨境-付款人查询
+     * 云鉴-商户信息修改的接口
      */
-    async QueryPayerInfo(req, cb) {
-        return this.request("QueryPayerInfo", req, cb);
+    async ModifyMerchant(req, cb) {
+        return this.request("ModifyMerchant", req, cb);
     }
     /**
      * 跨境-贸易材料明细查询。
@@ -124,10 +136,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryTransferDetail", req, cb);
     }
     /**
-     * 查询银行单笔交易状态。查询单笔交易的状态。
+     * 云支付-添加门店接口
      */
-    async QuerySingleTransactionStatus(req, cb) {
-        return this.request("QuerySingleTransactionStatus", req, cb);
+    async AddShop(req, cb) {
+        return this.request("AddShop", req, cb);
+    }
+    /**
+     * 云支付-查询商户分类接口
+     */
+    async QueryMerchantClassification(req, cb) {
+        return this.request("QueryMerchantClassification", req, cb);
     }
     /**
      * 跨境-提交申报材料。申报材料的主体是付款人，需要提前调用【跨境-付款人申请】接口提交付款人信息且审核通过后调用。
@@ -208,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterBillSupportWithdraw", req, cb);
     }
     /**
+     * 云支付-查询合同支付方式列表接口
+     */
+    async QueryContractPayWayList(req, cb) {
+        return this.request("QueryContractPayWayList", req, cb);
+    }
+    /**
      * 直播平台-删除代理商完税信息
      */
     async DeleteAgentTaxPaymentInfo(req, cb) {
@@ -262,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ConfirmOrder", req, cb);
     }
     /**
+     * 云支付-添加商户接口
+     */
+    async AddMerchant(req, cb) {
+        return this.request("AddMerchant", req, cb);
+    }
+    /**
      * 智慧零售-发票查询V2
      */
     async QueryInvoiceV2(req, cb) {
@@ -284,6 +314,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryOutwardOrder(req, cb) {
         return this.request("QueryOutwardOrder", req, cb);
+    }
+    /**
+     * 云支付-获取门店OpenId接口
+     */
+    async QueryShopOpenId(req, cb) {
+        return this.request("QueryShopOpenId", req, cb);
     }
     /**
      * 商户恶意注册接口
@@ -346,10 +382,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncContractData", req, cb);
     }
     /**
-     * 云鉴-商户信息修改的接口
+     * 云支付-查询合同明细接口
      */
-    async ModifyMerchant(req, cb) {
-        return this.request("ModifyMerchant", req, cb);
+    async ViewContract(req, cb) {
+        return this.request("ViewContract", req, cb);
     }
     /**
      * 灵云-重新绑定账号
@@ -391,6 +427,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnifiedTlinxOrder", req, cb);
     }
     /**
+     * 云支付-上传机构文件接口
+     */
+    async UploadOrgFile(req, cb) {
+        return this.request("UploadOrgFile", req, cb);
+    }
+    /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
@@ -422,6 +464,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeRechargeByThirdPay", req, cb);
     }
     /**
+     * 云支付-下载机构文件接口
+     */
+    async DownloadOrgFile(req, cb) {
+        return this.request("DownloadOrgFile", req, cb);
+    }
+    /**
      * 直播平台-查询批次信息
      */
     async QueryAgentTaxPaymentBatch(req, cb) {
@@ -440,10 +488,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryAcctBinding", req, cb);
     }
     /**
-     * 跨境-汇出指令申请。通过该接口可将对接方账户中的人民币余额汇兑成外币，再汇出至指定银行账户。
+     * 正常结算提现失败情况下，发起重新提现的请求接口
      */
-    async ApplyOutwardOrder(req, cb) {
-        return this.request("ApplyOutwardOrder", req, cb);
+    async ApplyReWithdrawal(req, cb) {
+        return this.request("ApplyReWithdrawal", req, cb);
+    }
+    /**
+     * 云支付-分账解除分账接收方接口
+     */
+    async DistributeRemoveReceiver(req, cb) {
+        return this.request("DistributeRemoveReceiver", req, cb);
     }
     /**
      * 跨境-付款人申请。通过该接口提交付款人信息并进行 kyc 审核。
@@ -488,6 +542,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevResigterBillSupportWithdraw", req, cb);
     }
     /**
+     * 云支付-查询城市编码接口
+     */
+    async QueryCityCode(req, cb) {
+        return this.request("QueryCityCode", req, cb);
+    }
+    /**
      * 跨境-成功申报材料查询。查询成功入库的申报材料。
      */
     async QueryApplicationMaterial(req, cb) {
@@ -504,6 +564,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UploadTaxList(req, cb) {
         return this.request("UploadTaxList", req, cb);
+    }
+    /**
+     * 云支付-分账授权申请接口
+     */
+    async DistributeAccreditTlinx(req, cb) {
+        return this.request("DistributeAccreditTlinx", req, cb);
+    }
+    /**
+     * 会员在途充值(经第三方支付渠道)接口
+     */
+    async RechargeByThirdPay(req, cb) {
+        return this.request("RechargeByThirdPay", req, cb);
     }
     /**
      * 见证宝-会员在途充值(经第三方支付渠道)
@@ -530,6 +602,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExecuteMemberTransaction", req, cb);
     }
     /**
+     * 云支付-分账结果查询接口
+     */
+    async DistributeQuery(req, cb) {
+        return this.request("DistributeQuery", req, cb);
+    }
+    /**
+     * 云支付-添加合同接口
+     */
+    async AddContract(req, cb) {
+        return this.request("AddContract", req, cb);
+    }
+    /**
      * 灵云-单笔主播转账接口
      */
     async CreateSinglePayment(req, cb) {
@@ -554,16 +638,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QuerySinglePay", req, cb);
     }
     /**
+     * 跨境-付款人查询
+     */
+    async QueryPayerInfo(req, cb) {
+        return this.request("QueryPayerInfo", req, cb);
+    }
+    /**
      * 商户提现
      */
     async ApplyWithdrawal(req, cb) {
         return this.request("ApplyWithdrawal", req, cb);
     }
     /**
-     * 会员在途充值(经第三方支付渠道)接口
+     * 云支付-分账请求接口
      */
-    async RechargeByThirdPay(req, cb) {
-        return this.request("RechargeByThirdPay", req, cb);
+    async DistributeApply(req, cb) {
+        return this.request("DistributeApply", req, cb);
     }
     /**
      * 银企直连-单笔支付接口
@@ -597,6 +687,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeMemberRechargeThirdPay", req, cb);
     }
     /**
+     * 云支付-分账撤销接口
+     */
+    async DistributeCancel(req, cb) {
+        return this.request("DistributeCancel", req, cb);
+    }
+    /**
      * 获取对账中心账单下载地址的接口
      */
     async DownloadReconciliationUrl(req, cb) {
@@ -617,6 +713,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryMemberTransaction(req, cb) {
         return this.request("QueryMemberTransaction", req, cb);
+    }
+    /**
+     * 云支付-T查询已添加分账接收方接口
+     */
+    async DistributeQueryReceiver(req, cb) {
+        return this.request("DistributeQueryReceiver", req, cb);
     }
     /**
      * 灵云-批量转账结果查询
@@ -643,10 +745,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryRefund", req, cb);
     }
     /**
+     * 云支付-分账添加分账接收方接口
+     */
+    async DistributeAddReceiver(req, cb) {
+        return this.request("DistributeAddReceiver", req, cb);
+    }
+    /**
      * 会员间交易退款
      */
     async RefundMemberTransaction(req, cb) {
         return this.request("RefundMemberTransaction", req, cb);
+    }
+    /**
+     * 云支付-查询合同可关联门店接口
+     */
+    async QueryContractRelateShop(req, cb) {
+        return this.request("QueryContractRelateShop", req, cb);
     }
     /**
      * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时。
@@ -655,22 +769,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MigrateOrderRefundQuery", req, cb);
     }
     /**
+     * 云支付-查询门店明细接口
+     */
+    async ViewShop(req, cb) {
+        return this.request("ViewShop", req, cb);
+    }
+    /**
      * 通过此接口查询签约数据
      */
     async QueryContract(req, cb) {
         return this.request("QueryContract", req, cb);
     }
     /**
-     * 正常结算提现失败情况下，发起重新提现的请求接口
+     * 跨境-汇出指令申请。通过该接口可将对接方账户中的人民币余额汇兑成外币，再汇出至指定银行账户。
      */
-    async ApplyReWithdrawal(req, cb) {
-        return this.request("ApplyReWithdrawal", req, cb);
+    async ApplyOutwardOrder(req, cb) {
+        return this.request("ApplyOutwardOrder", req, cb);
+    }
+    /**
+     * 云支付-查询支付方式费率及自定义表单项接口
+     */
+    async QueryContractPayFee(req, cb) {
+        return this.request("QueryContractPayFee", req, cb);
     }
     /**
      * 查询小额鉴权转账结果。查询小额往账鉴权的转账状态。
      */
     async QuerySmallAmountTransfer(req, cb) {
         return this.request("QuerySmallAmountTransfer", req, cb);
+    }
+    /**
+     * 查询银行单笔交易状态。查询单笔交易的状态。
+     */
+    async QuerySingleTransactionStatus(req, cb) {
+        return this.request("QuerySingleTransactionStatus", req, cb);
     }
     /**
      * 通过商家批次单号或者微信批次号查询批次单
