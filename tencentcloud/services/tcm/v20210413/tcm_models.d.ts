@@ -48,6 +48,11 @@ export interface MeshConfig {
       * Prometheus配置
       */
     Prometheus?: PrometheusConfig;
+    /**
+      * 自动注入配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Inject?: InjectConfig;
 }
 /**
  * 负载均衡状态信息
@@ -352,17 +357,19 @@ export interface IstiodConfig {
     Workload?: WorkloadConfig;
 }
 /**
- * 被选中的范围
+ * 自动注入配置
  */
-export interface SelectedRange {
+export interface InjectConfig {
     /**
-      * 选中的项目详细内容
+      * 不需要进行代理的 ip 地址范围
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Items?: Array<SelectedItems>;
+    ExcludeIPRanges?: Array<string>;
     /**
-      * 是否全选
+      * 是否等待sidecar启动
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    All?: boolean;
+    HoldApplicationUntilProxyStarts?: boolean;
 }
 /**
  * PodsMetricSource 定义了如何根据特定指标进行扩缩容
@@ -511,6 +518,11 @@ export interface IstioConfig {
       * 调用链配置
       */
     Tracing?: TracingConfig;
+    /**
+      * 禁用策略检查功能
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisablePolicyChecks?: boolean;
 }
 /**
  * 腾讯云日志服务相关参数
@@ -699,6 +711,19 @@ export interface ClusterStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LinkErrorDetail: string;
+}
+/**
+ * 被选中的范围
+ */
+export interface SelectedRange {
+    /**
+      * 选中的项目详细内容
+      */
+    Items?: Array<SelectedItems>;
+    /**
+      * 是否全选
+      */
+    All?: boolean;
 }
 /**
  * AccessLog 配置

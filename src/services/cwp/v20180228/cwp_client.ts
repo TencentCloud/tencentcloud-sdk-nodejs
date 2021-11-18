@@ -1418,7 +1418,7 @@ export class Client extends AbstractClient {
    * 漏洞数量等级分布统计
    */
   async DescribeVulLevelCount(
-    req?: DescribeVulLevelCountRequest,
+    req: DescribeVulLevelCountRequest,
     cb?: (error: string, rep: DescribeVulLevelCountResponse) => void
   ): Promise<DescribeVulLevelCountResponse> {
     return this.request("DescribeVulLevelCount", req, cb)

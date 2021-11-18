@@ -348,6 +348,80 @@ true为启用，false为不启用
 }
 
 /**
+ * 安全组规则
+ */
+export interface SecurityGroupRule {
+  /**
+      * 访问源示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+      */
+  SourceContent: string
+
+  /**
+   * 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+   */
+  SourceType: string
+
+  /**
+      * 访问目的示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+      */
+  DestContent: string
+
+  /**
+   * 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+   */
+  DestType: string
+
+  /**
+      * 访问控制策略中设置的流量通过云防火墙的方式。取值：
+accept：放行
+drop：拒绝
+      */
+  RuleAction: string
+
+  /**
+   * 描述
+   */
+  Description: string
+
+  /**
+   * 规则顺序，-1表示最低，1表示最高
+   */
+  OrderIndex: string
+
+  /**
+      * 协议；TCP/UDP/ICMP/ANY
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol?: string
+
+  /**
+      * 访问控制策略的端口。取值：
+-1/-1：全部端口
+80：80端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port?: string
+
+  /**
+      * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceTemplateId?: string
+}
+
+/**
  * ModifyNatFwVpcDnsSwitch请求参数结构体
  */
 export interface ModifyNatFwVpcDnsSwitchRequest {
@@ -493,73 +567,18 @@ export interface VpcZoneData {
 }
 
 /**
- * 数据库白名单规则数据
+ * CreateSecurityGroupRules返回参数结构体
  */
-export interface DatabaseWhiteListRuleData {
+export interface CreateSecurityGroupRulesResponse {
   /**
-   * 访问源
+   * 状态值，0：添加成功，非0：添加失败
    */
-  SourceIp: string
+  Status: number
 
   /**
-   * 访问源类型，1 ip；6 实例；100 资源分组
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SourceType: number
-
-  /**
-   * 访问目的
-   */
-  TargetIp: string
-
-  /**
-   * 访问目的类型，1 ip；6 实例；100 资源分组
-   */
-  TargetType: number
-
-  /**
-   * 规则描述
-   */
-  Detail: string
-
-  /**
-   * 是否地域规则，0不是 1是
-   */
-  IsRegionRule: number
-
-  /**
-   * 是否云厂商规则，0不是 1 时
-   */
-  IsCloudRule: number
-
-  /**
-   * 是否启用，0 不启用，1启用
-   */
-  Enable: number
-
-  /**
-   * 地域码1
-   */
-  FirstLevelRegionCode?: number
-
-  /**
-   * 地域码2
-   */
-  SecondLevelRegionCode?: number
-
-  /**
-   * 地域名称1
-   */
-  FirstLevelRegionName?: string
-
-  /**
-   * 地域名称2
-   */
-  SecondLevelRegionName?: string
-
-  /**
-   * 云厂商码
-   */
-  CloudCode?: string
+  RequestId?: string
 }
 
 /**
@@ -695,56 +714,18 @@ export interface DescribeAssociatedInstanceListResponse {
 }
 
 /**
- * 企业安全组关联实例信息
+ * DescribeResourceGroup返回参数结构体
  */
-export interface AssociatedInstanceInfo {
+export interface DescribeResourceGroupResponse {
   /**
-      * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceId: string
+   * 返回树形结构
+   */
+  Data: string
 
   /**
-      * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceName: string
-
-  /**
-      * 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Type: number
-
-  /**
-      * 私有网络ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VpcId: string
-
-  /**
-      * 私有网络名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VpcName: string
-
-  /**
-      * 公网IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PublicIp: string
-
-  /**
-      * 内网IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Ip: string
-
-  /**
-      * 关联安全组数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SecurityGroupCount: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -874,21 +855,6 @@ export interface DeleteNatFwInstanceRequest {
 }
 
 /**
- * CreateSecurityGroupRules返回参数结构体
- */
-export interface CreateSecurityGroupRulesResponse {
-  /**
-   * 状态值，0：添加成功，非0：添加失败
-   */
-  Status: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ExpandCfwVertical请求参数结构体
  */
 export interface ExpandCfwVerticalRequest {
@@ -1003,6 +969,26 @@ export interface ModifyBlockIgnoreListRequest {
    * 时间格式：yyyy-MM-dd HH:mm:ss
    */
   EndTime?: string
+}
+
+/**
+ * AddEnterpriseSecurityGroupRules请求参数结构体
+ */
+export interface AddEnterpriseSecurityGroupRulesRequest {
+  /**
+   * 创建规则数据
+   */
+  Data: Array<SecurityGroupRule>
+
+  /**
+   * 添加类型，0：添加到最后，1：添加到最前；2：中间插入；默认0添加到最后
+   */
+  Type?: number
+
+  /**
+   * 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。
+   */
+  ClientToken?: string
 }
 
 /**
@@ -1137,23 +1123,33 @@ export interface ModifySecurityGroupItemRuleStatusResponse {
 }
 
 /**
- * 新增模式传递参数
+ * DescribeEnterpriseSecurityGroupRule返回参数结构体
  */
-export interface NewModeItems {
+export interface DescribeEnterpriseSecurityGroupRuleResponse {
   /**
-   * 新增模式下接入的vpc列表
+   * 分页查询时，显示的当前页的页码。
    */
-  VpcList: Array<string>
+  PageNo: string
 
   /**
-   * 新增模式下绑定的出口弹性公网ip列表，其中Eips和AddCount至少传递一个。
+   * 分页查询时，显示的每页数据的最大条数。
    */
-  Eips?: Array<string>
+  PageSize: string
 
   /**
-   * 新增模式下新增绑定的出口弹性公网ip个数，其中Eips和AddCount至少传递一个。
+   * 访问控制策略列表
    */
-  AddCount?: number
+  Rules: Array<SecurityGroupRule>
+
+  /**
+   * 访问控制策略的总数量。
+   */
+  TotalCount: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1201,6 +1197,84 @@ export interface VpcDnsInfo {
    * 0：开关关闭 ， 1: 开关打开
    */
   SwitchStatus: number
+}
+
+/**
+ * DescribeEnterpriseSecurityGroupRule请求参数结构体
+ */
+export interface DescribeEnterpriseSecurityGroupRuleRequest {
+  /**
+      * 分页查询时，显示的当前页的页码。
+
+默认值为1。
+      */
+  PageNo: string
+
+  /**
+      * 分页查询时，显示的每页数据的最大条数。
+
+可设置值最大为50。
+      */
+  PageSize: string
+
+  /**
+      * 访问源示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+支持通配
+      */
+  SourceContent?: string
+
+  /**
+      * 访问目的示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板(ipm-dyodhpby)
+instance：资产实例(ins-123456)
+resourcegroup：资产分组(/全部分组/分组1/子分组1)
+tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+region：地域(ap-gaungzhou)
+支持通配
+      */
+  DestContent?: string
+
+  /**
+   * 规则描述，支持通配
+   */
+  Description?: string
+
+  /**
+      * 访问控制策略中设置的流量通过云防火墙的方式。取值：
+accept：放行
+drop：拒绝
+      */
+  RuleAction?: string
+
+  /**
+      * 是否启用规则，默认为启用，取值：
+true为启用，false为不启用
+      */
+  Enable?: string
+
+  /**
+      * 访问控制策略的端口。取值：
+-1/-1：全部端口
+80：80端口
+      */
+  Port?: string
+
+  /**
+   * 协议；TCP/UDP/ICMP/ANY
+   */
+  Protocol?: string
+
+  /**
+   * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+   */
+  ServiceTemplateId?: string
 }
 
 /**
@@ -1732,6 +1806,26 @@ export interface ModifyAllSwitchStatusResponse {
 }
 
 /**
+ * 新增模式传递参数
+ */
+export interface NewModeItems {
+  /**
+   * 新增模式下接入的vpc列表
+   */
+  VpcList: Array<string>
+
+  /**
+   * 新增模式下绑定的出口弹性公网ip列表，其中Eips和AddCount至少传递一个。
+   */
+  Eips?: Array<string>
+
+  /**
+   * 新增模式下新增绑定的出口弹性公网ip个数，其中Eips和AddCount至少传递一个。
+   */
+  AddCount?: number
+}
+
+/**
  * DescribeNatFwInfoCount返回参数结构体
  */
 export interface DescribeNatFwInfoCountResponse {
@@ -1911,6 +2005,76 @@ export interface RemoveAcRuleRequest {
    * 规则的uuid，可通过查询规则列表获取
    */
   RuleUuid: number
+}
+
+/**
+ * 数据库白名单规则数据
+ */
+export interface DatabaseWhiteListRuleData {
+  /**
+   * 访问源
+   */
+  SourceIp: string
+
+  /**
+   * 访问源类型，1 ip；6 实例；100 资源分组
+   */
+  SourceType: number
+
+  /**
+   * 访问目的
+   */
+  TargetIp: string
+
+  /**
+   * 访问目的类型，1 ip；6 实例；100 资源分组
+   */
+  TargetType: number
+
+  /**
+   * 规则描述
+   */
+  Detail: string
+
+  /**
+   * 是否地域规则，0不是 1是
+   */
+  IsRegionRule: number
+
+  /**
+   * 是否云厂商规则，0不是 1 时
+   */
+  IsCloudRule: number
+
+  /**
+   * 是否启用，0 不启用，1启用
+   */
+  Enable: number
+
+  /**
+   * 地域码1
+   */
+  FirstLevelRegionCode?: number
+
+  /**
+   * 地域码2
+   */
+  SecondLevelRegionCode?: number
+
+  /**
+   * 地域名称1
+   */
+  FirstLevelRegionName?: string
+
+  /**
+   * 地域名称2
+   */
+  SecondLevelRegionName?: string
+
+  /**
+   * 云厂商码
+   */
+  CloudCode?: string
 }
 
 /**
@@ -2271,6 +2435,21 @@ export interface IpStatic {
 }
 
 /**
+ * AddEnterpriseSecurityGroupRules返回参数结构体
+ */
+export interface AddEnterpriseSecurityGroupRulesResponse {
+  /**
+   * 状态值，0：添加成功，非0：添加失败
+   */
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 未处置事件信息汇总
  */
 export interface UnHandleEventDetail {
@@ -2283,6 +2462,21 @@ export interface UnHandleEventDetail {
    * 未处置事件数量
    */
   Total: number
+}
+
+/**
+ * RemoveEnterpriseSecurityGroupRule请求参数结构体
+ */
+export interface RemoveEnterpriseSecurityGroupRuleRequest {
+  /**
+   * 规则的uuid，可通过查询规则列表获取
+   */
+  RuleUuid: number
+
+  /**
+   * 删除类型，0是单条删除，RuleUuid填写删除规则id，1为全部删除，RuleUuid填0即可
+   */
+  RemoveType: number
 }
 
 /**
@@ -2344,6 +2538,27 @@ export interface ModifyVPCSwitchStatusResponse {
    * 接口返回错误码，0请求成功  非0失败
    */
   ReturnCode: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveEnterpriseSecurityGroupRule返回参数结构体
+ */
+export interface RemoveEnterpriseSecurityGroupRuleResponse {
+  /**
+   * 删除成功后返回被删除策略的uuid
+   */
+  RuleUuid: number
+
+  /**
+      * 0代表成功，-1代表失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2928,6 +3143,21 @@ export interface CreateDatabaseWhiteListRulesRequest {
 }
 
 /**
+ * DescribeResourceGroup请求参数结构体
+ */
+export interface DescribeResourceGroupRequest {
+  /**
+   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
+   */
+  QueryType: string
+
+  /**
+   * 资产组id  全部传0
+   */
+  GroupId?: string
+}
+
+/**
  * Nat实例卡片详细信息
  */
 export interface NatInstanceInfo {
@@ -3016,21 +3246,6 @@ export interface NatFwEipsInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NatGatewayName: string
-}
-
-/**
- * DescribeResourceGroup返回参数结构体
- */
-export interface DescribeResourceGroupResponse {
-  /**
-   * 返回树形结构
-   */
-  Data: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4013,18 +4228,56 @@ export interface DnsVpcSwitch {
 }
 
 /**
- * DescribeResourceGroup请求参数结构体
+ * 企业安全组关联实例信息
  */
-export interface DescribeResourceGroupRequest {
+export interface AssociatedInstanceInfo {
   /**
-   * 查询类型 网络结构 vpc，业务识别- resource ，资源标签-tag
-   */
-  QueryType: string
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
 
   /**
-   * 资产组id  全部传0
-   */
-  GroupId?: string
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
+
+  /**
+      * 实例类型，3是cvm实例,4是clb实例,5是eni实例,6是云数据库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: number
+
+  /**
+      * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 私有网络名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcName: string
+
+  /**
+      * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicIp: string
+
+  /**
+      * 内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ip: string
+
+  /**
+      * 关联安全组数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroupCount: number
 }
 
 /**

@@ -17,7 +17,18 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { QueryAntiFraudVipRequest, RiskDetail, QueryAntiFraudVipResponse } from "./afc_models"
+import {
+  OtherModelScores,
+  QueryAntiFraudVipResponse,
+  RiskDetail,
+  SimpleKindRiskDetail,
+  GetAntiFraudVipResponse,
+  AntiFraudVipCryptoFilter,
+  AntiFraudVipFilter,
+  QueryAntiFraudVipRequest,
+  GetAntiFraudVipRequest,
+  AntiFraudVipRecord,
+} from "./afc_models"
 
 /**
  * afc client
@@ -38,5 +49,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryAntiFraudVipResponse) => void
   ): Promise<QueryAntiFraudVipResponse> {
     return this.request("QueryAntiFraudVip", req, cb)
+  }
+
+  /**
+   * 反欺诈VIP评分接口
+   */
+  async GetAntiFraudVip(
+    req: GetAntiFraudVipRequest,
+    cb?: (error: string, rep: GetAntiFraudVipResponse) => void
+  ): Promise<GetAntiFraudVipResponse> {
+    return this.request("GetAntiFraudVip", req, cb)
   }
 }

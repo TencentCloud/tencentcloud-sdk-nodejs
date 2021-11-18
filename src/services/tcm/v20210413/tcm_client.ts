@@ -35,7 +35,7 @@ import {
   GrafanaInfo,
   MeshStatus,
   IstiodConfig,
-  SelectedRange,
+  InjectConfig,
   PodsMetricSource,
   Resource,
   DeployConfig,
@@ -53,6 +53,7 @@ import {
   DescribeMeshListResponse,
   ResourceRequirements,
   ClusterStatus,
+  SelectedRange,
   AccessLogConfig,
   LoadBalancer,
 } from "./tcm_models"

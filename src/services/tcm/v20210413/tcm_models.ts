@@ -73,6 +73,12 @@ export interface MeshConfig {
    * Prometheus配置
    */
   Prometheus?: PrometheusConfig
+
+  /**
+      * 自动注入配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Inject?: InjectConfig
 }
 
 /**
@@ -430,18 +436,20 @@ export interface IstiodConfig {
 }
 
 /**
- * 被选中的范围
+ * 自动注入配置
  */
-export interface SelectedRange {
+export interface InjectConfig {
   /**
-   * 选中的项目详细内容
-   */
-  Items?: Array<SelectedItems>
+      * 不需要进行代理的 ip 地址范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExcludeIPRanges?: Array<string>
 
   /**
-   * 是否全选
-   */
-  All?: boolean
+      * 是否等待sidecar启动
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HoldApplicationUntilProxyStarts?: boolean
 }
 
 /**
@@ -614,6 +622,12 @@ export interface IstioConfig {
    * 调用链配置
    */
   Tracing?: TracingConfig
+
+  /**
+      * 禁用策略检查功能
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisablePolicyChecks?: boolean
 }
 
 /**
@@ -836,6 +850,21 @@ export interface ClusterStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LinkErrorDetail: string
+}
+
+/**
+ * 被选中的范围
+ */
+export interface SelectedRange {
+  /**
+   * 选中的项目详细内容
+   */
+  Items?: Array<SelectedItems>
+
+  /**
+   * 是否全选
+   */
+  All?: boolean
 }
 
 /**

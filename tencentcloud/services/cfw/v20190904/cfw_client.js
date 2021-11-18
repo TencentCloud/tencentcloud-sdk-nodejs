@@ -174,6 +174,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddAcRule", req, cb);
     }
     /**
+     * 创建新企业安全组规则
+     */
+    async AddEnterpriseSecurityGroupRules(req, cb) {
+        return this.request("AddEnterpriseSecurityGroupRules", req, cb);
+    }
+    /**
      * 创建规则
      */
     async CreateAcRules(req, cb) {
@@ -196,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateSecurityGroupRules(req, cb) {
         return this.request("CreateSecurityGroupRules", req, cb);
+    }
+    /**
+     * 删除新企业安全组规则
+     */
+    async RemoveEnterpriseSecurityGroupRule(req, cb) {
+        return this.request("RemoveEnterpriseSecurityGroupRule", req, cb);
     }
     /**
      * 查询规则列表概况
@@ -227,6 +239,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAllVPCSwitchStatus(req, cb) {
         return this.request("ModifyAllVPCSwitchStatus", req, cb);
+    }
+    /**
+     * 查询新企业安全组规则
+     */
+    async DescribeEnterpriseSecurityGroupRule(req, cb) {
+        return this.request("DescribeEnterpriseSecurityGroupRule", req, cb);
     }
     /**
      * 支持对拦截列表、忽略列表如下操作：

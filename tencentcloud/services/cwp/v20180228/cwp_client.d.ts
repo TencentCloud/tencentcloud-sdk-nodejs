@@ -350,7 +350,7 @@ export declare class Client extends AbstractClient {
     /**
      * 漏洞数量等级分布统计
      */
-    DescribeVulLevelCount(req?: DescribeVulLevelCountRequest, cb?: (error: string, rep: DescribeVulLevelCountResponse) => void): Promise<DescribeVulLevelCountResponse>;
+    DescribeVulLevelCount(req: DescribeVulLevelCountRequest, cb?: (error: string, rep: DescribeVulLevelCountResponse) => void): Promise<DescribeVulLevelCountResponse>;
     /**
      * 本接口 (DeleteMalwares) 用于删除木马记录。
      */

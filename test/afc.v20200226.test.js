@@ -28,4 +28,14 @@ it("afc.v20200226.QueryAntiFraudVip", async function () {
     }
 })
 
+it("afc.v20200226.GetAntiFraudVip", async function () {
+    try {
+       const data = await client.GetAntiFraudVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

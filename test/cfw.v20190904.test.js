@@ -258,6 +258,16 @@ it("cfw.v20190904.AddAcRule", async function () {
     }
 })
 
+it("cfw.v20190904.AddEnterpriseSecurityGroupRules", async function () {
+    try {
+       const data = await client.AddEnterpriseSecurityGroupRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.CreateAcRules", async function () {
     try {
        const data = await client.CreateAcRules({})
@@ -291,6 +301,16 @@ it("cfw.v20190904.DescribeAcLists", async function () {
 it("cfw.v20190904.CreateSecurityGroupRules", async function () {
     try {
        const data = await client.CreateSecurityGroupRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.RemoveEnterpriseSecurityGroupRule", async function () {
+    try {
+       const data = await client.RemoveEnterpriseSecurityGroupRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +361,16 @@ it("cfw.v20190904.ModifyVPCSwitchStatus", async function () {
 it("cfw.v20190904.ModifyAllVPCSwitchStatus", async function () {
     try {
        const data = await client.ModifyAllVPCSwitchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeEnterpriseSecurityGroupRule", async function () {
+    try {
+       const data = await client.DescribeEnterpriseSecurityGroupRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

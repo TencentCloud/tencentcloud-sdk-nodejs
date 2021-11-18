@@ -18,16 +18,23 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  FinanceAntiFraudCryptoFilter,
+  RiskDetailInfo,
+  AntiFraudRecord,
+  AntiFraudFilter,
+  AntiFraudCryptoFilter,
   FinanceAntiFraudRecord,
   DescribeAntiFraudResponse,
   RiskDetail,
   FinanceOtherModelScores,
-  RiskDetailInfo,
+  SimpleKindRiskDetail,
+  OtherModelScoresDetail,
+  GetAntiFraudRequest,
   DescribeAntiFraudRequest,
   FinanceAntiFraudFilter,
-  QueryAntiFraudRequest,
   QueryAntiFraudResponse,
+  GetAntiFraudResponse,
+  QueryAntiFraudRequest,
+  FinanceAntiFraudCryptoFilter,
 } from "./af_models"
 
 /**
@@ -49,6 +56,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryAntiFraudResponse) => void
   ): Promise<QueryAntiFraudResponse> {
     return this.request("QueryAntiFraud", req, cb)
+  }
+
+  /**
+   * 反欺诈评分接口
+   */
+  async GetAntiFraud(
+    req: GetAntiFraudRequest,
+    cb?: (error: string, rep: GetAntiFraudResponse) => void
+  ): Promise<GetAntiFraudResponse> {
+    return this.request("GetAntiFraud", req, cb)
   }
 
   /**

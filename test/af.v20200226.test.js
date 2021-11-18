@@ -28,6 +28,16 @@ it("af.v20200226.QueryAntiFraud", async function () {
     }
 })
 
+it("af.v20200226.GetAntiFraud", async function () {
+    try {
+       const data = await client.GetAntiFraud({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("af.v20200226.DescribeAntiFraud", async function () {
     try {
        const data = await client.DescribeAntiFraud({})

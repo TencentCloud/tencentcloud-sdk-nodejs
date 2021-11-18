@@ -29,6 +29,7 @@ import {
   ModifyAcRuleResponse,
   DescribeTableStatusResponse,
   AddAcRuleRequest,
+  SecurityGroupRule,
   ModifyNatFwVpcDnsSwitchRequest,
   SecurityGroupApiRuleData,
   DeleteNatFwInstanceResponse,
@@ -36,31 +37,32 @@ import {
   ModifySecurityGroupRuleRequest,
   ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
-  DatabaseWhiteListRuleData,
+  CreateSecurityGroupRulesResponse,
   DescribeNatFwVpcDnsLstRequest,
   DescribeCfwEipsRequest,
   DescribeTLogInfoResponse,
   ModifyAllSwitchStatusRequest,
   DescribeUnHandleEventTabListRequest,
   DescribeAssociatedInstanceListResponse,
-  AssociatedInstanceInfo,
+  DescribeResourceGroupResponse,
   DescribeNatRuleOverviewResponse,
   RemoveAcRuleResponse,
   NatFwInstance,
   DeleteNatFwInstanceRequest,
-  CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
   ModifyAllPublicIPSwitchStatusResponse,
   DeleteVpcInstanceResponse,
   ModifyAssetScanRequest,
   ModifyBlockIgnoreListRequest,
+  AddEnterpriseSecurityGroupRulesRequest,
   DeleteSecurityGroupRuleResponse,
   ModifySecurityGroupAllRuleStatusRequest,
   ModifySequenceRulesRequest,
   CreateNatFwInstanceRequest,
   ModifySecurityGroupItemRuleStatusResponse,
-  NewModeItems,
+  DescribeEnterpriseSecurityGroupRuleResponse,
   VpcDnsInfo,
+  DescribeEnterpriseSecurityGroupRuleRequest,
   ModifyItemSwitchStatusResponse,
   ModifyNatFwReSelectResponse,
   DeleteSecurityGroupRuleRequest,
@@ -85,10 +87,12 @@ import {
   ModifyResourceGroupRequest,
   CreateNatFwInstanceResponse,
   ModifyAllSwitchStatusResponse,
+  NewModeItems,
   DescribeNatFwInfoCountResponse,
   SecurityGroupListData,
   CreateNatFwInstanceWithDomainResponse,
   RemoveAcRuleRequest,
+  DatabaseWhiteListRuleData,
   ModifyAllRuleStatusRequest,
   RuleInfoData,
   DescribeAcListsResponse,
@@ -103,10 +107,13 @@ import {
   ScanResultInfo,
   ModifySecurityGroupSequenceRulesResponse,
   IpStatic,
+  AddEnterpriseSecurityGroupRulesResponse,
   UnHandleEventDetail,
+  RemoveEnterpriseSecurityGroupRuleRequest,
   DeleteResourceGroupRequest,
   DescribeBlockByIpTimesListRequest,
   ModifyVPCSwitchStatusResponse,
+  RemoveEnterpriseSecurityGroupRuleResponse,
   ModifyAllVPCSwitchStatusRequest,
   ModifySequenceRulesResponse,
   DeleteSecurityGroupAllRuleResponse,
@@ -131,9 +138,9 @@ import {
   ModifyNatFwSwitchRequest,
   DescribeNatRuleOverviewRequest,
   CreateDatabaseWhiteListRulesRequest,
+  DescribeResourceGroupRequest,
   NatInstanceInfo,
   NatFwEipsInfo,
-  DescribeResourceGroupResponse,
   DeleteSecurityGroupAllRuleRequest,
   DescribeTLogIpListResponse,
   StopSecurityGroupRuleDispatchResponse,
@@ -174,7 +181,7 @@ import {
   ModifySecurityGroupRuleResponse,
   ModifySecurityGroupAllRuleStatusResponse,
   DnsVpcSwitch,
-  DescribeResourceGroupRequest,
+  AssociatedInstanceInfo,
   CreateAcRulesRequest,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
@@ -433,6 +440,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建新企业安全组规则
+   */
+  async AddEnterpriseSecurityGroupRules(
+    req: AddEnterpriseSecurityGroupRulesRequest,
+    cb?: (error: string, rep: AddEnterpriseSecurityGroupRulesResponse) => void
+  ): Promise<AddEnterpriseSecurityGroupRulesResponse> {
+    return this.request("AddEnterpriseSecurityGroupRules", req, cb)
+  }
+
+  /**
    * 创建规则
    */
   async CreateAcRules(
@@ -470,6 +487,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSecurityGroupRulesResponse) => void
   ): Promise<CreateSecurityGroupRulesResponse> {
     return this.request("CreateSecurityGroupRules", req, cb)
+  }
+
+  /**
+   * 删除新企业安全组规则
+   */
+  async RemoveEnterpriseSecurityGroupRule(
+    req: RemoveEnterpriseSecurityGroupRuleRequest,
+    cb?: (error: string, rep: RemoveEnterpriseSecurityGroupRuleResponse) => void
+  ): Promise<RemoveEnterpriseSecurityGroupRuleResponse> {
+    return this.request("RemoveEnterpriseSecurityGroupRule", req, cb)
   }
 
   /**
@@ -521,6 +548,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAllVPCSwitchStatusResponse) => void
   ): Promise<ModifyAllVPCSwitchStatusResponse> {
     return this.request("ModifyAllVPCSwitchStatus", req, cb)
+  }
+
+  /**
+   * 查询新企业安全组规则
+   */
+  async DescribeEnterpriseSecurityGroupRule(
+    req: DescribeEnterpriseSecurityGroupRuleRequest,
+    cb?: (error: string, rep: DescribeEnterpriseSecurityGroupRuleResponse) => void
+  ): Promise<DescribeEnterpriseSecurityGroupRuleResponse> {
+    return this.request("DescribeEnterpriseSecurityGroupRule", req, cb)
   }
 
   /**
