@@ -26,6 +26,7 @@ import {
   ImportModelDefinitionResponse,
   ApplyAIModelRequest,
   CreateBatchRequest,
+  ModifyProductDynamicRegisterResponse,
   CancelAIModelApplicationResponse,
   DescribeCloudStorageTimeResponse,
   DescribeDeviceStatusLogResponse,
@@ -126,6 +127,7 @@ import {
   ModifyForwardRuleResponse,
   BalanceTransaction,
   FirmwareTaskInfo,
+  DescribeProductDynamicRegisterRequest,
   AIModelApplication,
   DescribeFirmwareTaskDistributionResponse,
   DescribeBatchResponse,
@@ -160,6 +162,7 @@ import {
   ModifyDeviceLogLevelResponse,
   CreateDataForwardRequest,
   BatchUpdateFirmwareRequest,
+  ModifyProductDynamicRegisterRequest,
   DescribeCloudStorageThumbnailRequest,
   GetFirmwareURLRequest,
   CreateAIDetectionRequest,
@@ -180,6 +183,7 @@ import {
   SearchKeyword,
   DescribeDevicesRequest,
   DescribeModelDefinitionRequest,
+  DescribeProductDynamicRegisterResponse,
   DescribeFirmwareTaskStatisticsResponse,
   CheckForwardAuthResponse,
   DescribeDeviceResponse,
@@ -246,6 +250,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceDataResponse) => void
   ): Promise<DescribeDeviceDataResponse> {
     return this.request("DescribeDeviceData", req, cb)
+  }
+
+  /**
+   * 获取设备sdk日志
+   */
+  async DescribeSDKLog(
+    req: DescribeSDKLogRequest,
+    cb?: (error: string, rep: DescribeSDKLogResponse) => void
+  ): Promise<DescribeSDKLogResponse> {
+    return this.request("DescribeSDKLog", req, cb)
   }
 
   /**
@@ -539,6 +553,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改产品动态注册
+   */
+  async ModifyProductDynamicRegister(
+    req: ModifyProductDynamicRegisterRequest,
+    cb?: (error: string, rep: ModifyProductDynamicRegisterResponse) => void
+  ): Promise<ModifyProductDynamicRegisterResponse> {
+    return this.request("ModifyProductDynamicRegister", req, cb)
+  }
+
+  /**
    * 获取设备在指定时间范围内上报的历史数据。
    */
   async DescribeDeviceDataHistory(
@@ -679,13 +703,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取设备sdk日志
+   * 获取产品动态注册详情
    */
-  async DescribeSDKLog(
-    req: DescribeSDKLogRequest,
-    cb?: (error: string, rep: DescribeSDKLogResponse) => void
-  ): Promise<DescribeSDKLogResponse> {
-    return this.request("DescribeSDKLog", req, cb)
+  async DescribeProductDynamicRegister(
+    req: DescribeProductDynamicRegisterRequest,
+    cb?: (error: string, rep: DescribeProductDynamicRegisterResponse) => void
+  ): Promise<DescribeProductDynamicRegisterResponse> {
+    return this.request("DescribeProductDynamicRegister", req, cb)
   }
 
   /**

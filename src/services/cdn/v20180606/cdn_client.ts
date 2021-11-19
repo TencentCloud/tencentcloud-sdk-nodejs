@@ -260,6 +260,7 @@ import {
   KeyRule,
   ClientCert,
   CappingRule,
+  ShareCname,
   DeleteScdnDomainResponse,
   ListClsLogTopicsRequest,
   Seo,

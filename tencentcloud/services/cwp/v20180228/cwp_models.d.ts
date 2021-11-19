@@ -7747,7 +7747,7 @@ export interface DescribeVulHostTopRequest {
       */
     Top: number;
     /**
-      * 1: web应用漏洞 2=系统组件漏洞3:安全基线 4: Linux系统漏洞 5: windows补丁 6:应急漏洞
+      * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
       */
     VulCategory?: number;
 }
@@ -11603,7 +11603,7 @@ export interface DescribeAssetWebLocationListRequest {
  */
 export interface DescribeVulLevelCountRequest {
     /**
-      * 1: web应用漏洞 2=系统组件漏洞3:安全基线 4: Linux系统漏洞 5: windows补丁 6:应急漏洞
+      * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
       */
     VulCategory?: number;
 }
@@ -11683,7 +11683,7 @@ export interface DescribeVulTopRequest {
       */
     Top: number;
     /**
-      * 1: web应用漏洞 2=系统组件漏洞3:安全基线 4: Linux系统漏洞 5: windows补丁 6:应急漏洞
+      * 1:web-cms 漏洞，2.应用漏洞 3:安全基线 4: Linux软件漏洞 5: windows系统漏洞 6:应急漏洞
       */
     VulCategory?: number;
 }

@@ -532,6 +532,21 @@ export interface RecordTaskItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RecordStatus: number;
+    /**
+      * 场景ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneId: number;
+    /**
+      * 告警ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WarnId: number;
+    /**
+      * 录制id，NVR下属设备有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordId: string;
 }
 /**
  * GetRecordPlanByDev返回参数结构体

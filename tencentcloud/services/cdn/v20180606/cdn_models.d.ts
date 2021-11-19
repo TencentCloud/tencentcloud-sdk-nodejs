@@ -3489,6 +3489,10 @@ global：全球加速
       * 远程鉴权配置
       */
     RemoteAuthentication?: RemoteAuthentication;
+    /**
+      * 共享CNAME配置，白名单功能
+      */
+    ShareCname?: ShareCname;
 }
 /**
  * 域名标签配置
@@ -3970,6 +3974,12 @@ dec：十进制
 hex：十六进制
       */
     TimeFormat: string;
+    /**
+      * 计算签名的备用密钥
+仅允许大小写字母与数字，长度 6~32 位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupSecretKey?: string;
 }
 /**
  * 时间戳防盗链模式 C 配置
@@ -4006,6 +4016,12 @@ hex：十六进制
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TimeFormat?: string;
+    /**
+      * 计算签名的备用密钥
+仅允许大小写字母与数字，长度 6~32 位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupSecretKey?: string;
 }
 /**
  * 时间戳防盗链模式 B 配置（B 模式正在进行平台升级，暂不支持配置）
@@ -4032,6 +4048,12 @@ export interface AuthenticationTypeB {
 blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
       */
     FilterType: string;
+    /**
+      * 计算签名的备用密钥
+仅允许大小写字母与数字，长度 6~32 位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupSecretKey?: string;
 }
 /**
  * 时间戳防盗链模式 A 配置
@@ -4069,6 +4091,12 @@ export interface AuthenticationTypeA {
 blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
       */
     FilterType: string;
+    /**
+      * 计算签名的备用密钥
+仅允许大小写字母与数字，长度 6~32 位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupSecretKey?: string;
 }
 /**
  * DescribeScdnIpStrategy返回参数结构体
@@ -4919,6 +4947,11 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RemoteAuthentication: RemoteAuthentication;
+    /**
+      * 共享CNAME配置（白名单功能）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShareCname: ShareCname;
 }
 /**
  * GetDisableRecords返回参数结构体
@@ -7186,6 +7219,22 @@ path 时填充绝对路径，如 /xxx/test.html
       * 下行速度值设置，单位为 KB/s
       */
     KBpsThreshold: number;
+}
+/**
+ * ShareCname配置
+ */
+export interface ShareCname {
+    /**
+      * ShareCname 配置开关, 开关为off时，域名使用默认CNAME，若需要使用共享CNAME，将开关置为on.
+
+* ShareCname 为内测功能,如需使用,请联系腾讯云工程师开白.
+      */
+    Switch: string;
+    /**
+      * 设置共享CNAME.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cname?: string;
 }
 /**
  * DeleteScdnDomain返回参数结构体

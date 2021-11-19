@@ -178,12 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
-     * 只有当前账号下的安全组允许被删除。
-安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
-删除的安全组无法再找回，请谨慎调用。
+     * 弹性网卡迁移
      */
-    async DeleteSecurityGroup(req, cb) {
-        return this.request("DeleteSecurityGroup", req, cb);
+    async MigrateNetworkInterface(req, cb) {
+        return this.request("MigrateNetworkInterface", req, cb);
     }
     /**
      * 调整弹性公网IP带宽
@@ -412,6 +410,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async DisableRoutes(req, cb) {
         return this.request("DisableRoutes", req, cb);
+    }
+    /**
+     * 查询实例价格
+     */
+    async DescribePriceRunInstance(req, cb) {
+        return this.request("DescribePriceRunInstance", req, cb);
     }
     /**
      * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
@@ -727,10 +731,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("DescribeDisks", req, cb);
     }
     /**
-     * 弹性网卡迁移
+     * 只有当前账号下的安全组允许被删除。
+安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
+删除的安全组无法再找回，请谨慎调用。
      */
-    async MigrateNetworkInterface(req, cb) {
-        return this.request("MigrateNetworkInterface", req, cb);
+    async DeleteSecurityGroup(req, cb) {
+        return this.request("DeleteSecurityGroup", req, cb);
     }
     /**
      * 创建负载均衡监听器。

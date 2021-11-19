@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceData", req, cb);
     }
     /**
+     * 获取设备sdk日志
+     */
+    async DescribeSDKLog(req, cb) {
+        return this.request("DescribeSDKLog", req, cb);
+    }
+    /**
      * 修改产品信息
      */
     async ModifyProduct(req, cb) {
@@ -226,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTaskStatistics", req, cb);
     }
     /**
+     * 修改产品动态注册
+     */
+    async ModifyProductDynamicRegister(req, cb) {
+        return this.request("ModifyProductDynamicRegister", req, cb);
+    }
+    /**
      * 获取设备在指定时间范围内上报的历史数据。
      */
     async DescribeDeviceDataHistory(req, cb) {
@@ -310,10 +322,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteProduct", req, cb);
     }
     /**
-     * 获取设备sdk日志
+     * 获取产品动态注册详情
      */
-    async DescribeSDKLog(req, cb) {
-        return this.request("DescribeSDKLog", req, cb);
+    async DescribeProductDynamicRegister(req, cb) {
+        return this.request("DescribeProductDynamicRegister", req, cb);
     }
     /**
      * 获取设备的历史事件

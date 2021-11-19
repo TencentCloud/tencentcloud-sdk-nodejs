@@ -58,6 +58,16 @@ it("iotvideo.v20201215.DescribeDeviceData", async function () {
     }
 })
 
+it("iotvideo.v20201215.DescribeSDKLog", async function () {
+    try {
+       const data = await client.DescribeSDKLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.ModifyProduct", async function () {
     try {
        const data = await client.ModifyProduct({})
@@ -348,6 +358,16 @@ it("iotvideo.v20201215.DescribeFirmwareTaskStatistics", async function () {
     }
 })
 
+it("iotvideo.v20201215.ModifyProductDynamicRegister", async function () {
+    try {
+       const data = await client.ModifyProductDynamicRegister({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeDeviceDataHistory", async function () {
     try {
        const data = await client.DescribeDeviceDataHistory({})
@@ -488,9 +508,9 @@ it("iotvideo.v20201215.DeleteProduct", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeSDKLog", async function () {
+it("iotvideo.v20201215.DescribeProductDynamicRegister", async function () {
     try {
-       const data = await client.DescribeSDKLog({})
+       const data = await client.DescribeProductDynamicRegister({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

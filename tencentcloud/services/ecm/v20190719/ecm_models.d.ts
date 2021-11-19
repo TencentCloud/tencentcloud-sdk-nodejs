@@ -144,6 +144,23 @@ export interface CreateSecurityGroupPoliciesResponse {
     RequestId?: string;
 }
 /**
+ * 描述实例的价格相关
+ */
+export interface InstancePricesPartDetail {
+    /**
+      * cpu的价格信息
+      */
+    CpuPrice: PriceDetail;
+    /**
+      * 内存价格信息
+      */
+    MemPrice: PriceDetail;
+    /**
+      * 磁盘价格信息
+      */
+    DisksPrice: PriceDetail;
+}
+/**
  * DescribeMonthPeakNetwork请求参数结构体
  */
 export interface DescribeMonthPeakNetworkRequest {
@@ -381,19 +398,17 @@ export interface RemovePrivateIpAddressesRequest {
     PrivateIpAddresses: Array<PrivateIpAddressSpecification>;
 }
 /**
- * 标签信息。
+ * 实例系列类型配置
  */
-export interface Tag {
+export interface InstanceFamilyTypeConfig {
     /**
-      * 标签健。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例机型系列类型Id
       */
-    Key: string;
+    InstanceFamilyType: string;
     /**
-      * 标签值。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例机型系列类型名称
       */
-    Value: string;
+    InstanceFamilyTypeName: string;
 }
 /**
  * DescribeImage请求参数结构体
@@ -596,13 +611,21 @@ export interface DeleteListenerRequest {
     ListenerId: string;
 }
 /**
- * StopInstances返回参数结构体
+ * ResetInstancesMaxBandwidth请求参数结构体
  */
-export interface StopInstancesResponse {
+export interface ResetInstancesMaxBandwidthRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 待重置带宽上限的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
       */
-    RequestId?: string;
+    InstanceIdSet: Array<string>;
+    /**
+      * 修改后的最大出带宽上限。
+      */
+    MaxBandwidthOut: number;
+    /**
+      * 修改后的最大入带宽上限。
+      */
+    MaxBandwidthIn?: number;
 }
 /**
  * 负载均衡的带宽限制等信息。
@@ -756,17 +779,34 @@ export interface ImageTask {
     CreateTime: string;
 }
 /**
- * 云镜服务；
+ * ModifyListener请求参数结构体
  */
-export interface RunSecurityServiceEnabled {
+export interface ModifyListenerRequest {
     /**
-      * 是否开启。
+      * 负载均衡实例 ID
       */
-    Enabled?: boolean;
+    LoadBalancerId: string;
     /**
-      * 云镜版本：0 基础版，1 专业版。目前仅支持基础版
+      * 负载均衡监听器 ID
       */
-    Version?: number;
+    ListenerId: string;
+    /**
+      * 新的监听器名称
+      */
+    ListenerName?: string;
+    /**
+      * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。
+      */
+    SessionExpireTime?: number;
+    /**
+      * 健康检查相关参数
+      */
+    HealthCheck?: HealthCheck;
+    /**
+      * 监听器转发的方式。可选值：WRR、LEAST_CONN
+分别表示按权重轮询、最小连接数， 默认为 WRR。
+      */
+    Scheduler?: string;
 }
 /**
  * CreateImage请求参数结构体
@@ -955,41 +995,17 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
     PhysicalPosition: PhysicalPosition;
 }
 /**
- * 节点信息
+ * 云镜服务；
  */
-export interface Node {
+export interface RunSecurityServiceEnabled {
     /**
-      * zone信息。
+      * 是否开启。
       */
-    ZoneInfo: ZoneInfo;
+    Enabled?: boolean;
     /**
-      * 国家信息。
+      * 云镜版本：0 基础版，1 专业版。目前仅支持基础版
       */
-    Country: Country;
-    /**
-      * 区域信息。
-      */
-    Area: Area;
-    /**
-      * 省份信息。
-      */
-    Province: Province;
-    /**
-      * 城市信息。
-      */
-    City: City;
-    /**
-      * Region信息。
-      */
-    RegionInfo: RegionInfo;
-    /**
-      * 运营商列表。
-      */
-    ISPSet: Array<ISP>;
-    /**
-      * 运营商数量。
-      */
-    ISPNum: number;
+    Version?: number;
 }
 /**
  * DeleteLoadBalancer请求参数结构体
@@ -1319,6 +1335,23 @@ export interface AssignPrivateIpAddressesResponse {
     RequestId?: string;
 }
 /**
+ * 描述cpu,内存等维度的价格
+ */
+export interface PriceDetail {
+    /**
+      * 表示折扣，20 表示20%，打2折
+      */
+    Discount: number;
+    /**
+      * 打折后价格，单位分
+      */
+    DiscountPrice: number;
+    /**
+      * 折扣前价格，单位分
+      */
+    OriginalPrice: number;
+}
+/**
  * ImportImage返回参数结构体
  */
 export interface ImportImageResponse {
@@ -1351,6 +1384,19 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
       * 返回数量，默认为20，最大值为100。
       */
     Limit?: number;
+}
+/**
+ * DescribePriceRunInstance返回参数结构体
+ */
+export interface DescribePriceRunInstanceResponse {
+    /**
+      * 实例价格信息
+      */
+    InstancePrice: InstancesPrice;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteImage返回参数结构体
@@ -2452,17 +2498,19 @@ export interface ModifyLoadBalancerAttributesResponse {
     RequestId?: string;
 }
 /**
- * 实例系列类型配置
+ * 标签信息。
  */
-export interface InstanceFamilyTypeConfig {
+export interface Tag {
     /**
-      * 实例机型系列类型Id
+      * 标签健。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceFamilyType: string;
+    Key: string;
     /**
-      * 实例机型系列类型名称
+      * 标签值。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceFamilyTypeName: string;
+    Value: string;
 }
 /**
  * DescribeDefaultSubnet请求参数结构体
@@ -3096,6 +3144,27 @@ export interface ModifyAddressesBandwidthRequest {
       * 调整带宽目标值
       */
     InternetMaxBandwidthOut: number;
+}
+/**
+ * 实例价格信息
+ */
+export interface InstancesPrice {
+    /**
+      * 分部描述实例子维度的价格
+      */
+    InstancePricesPartDetail: InstancePricesPartDetail;
+    /**
+      * 实例总价折扣
+      */
+    Discount: number;
+    /**
+      * 折扣后价格
+      */
+    DiscountPrice: number;
+    /**
+      * 折扣前价格，原始总价
+      */
+    OriginalPrice: number;
 }
 /**
  * ModifyImageAttribute返回参数结构体
@@ -4636,21 +4705,13 @@ export interface DisableRoutesRequest {
     RouteIds: Array<number>;
 }
 /**
- * ResetInstancesMaxBandwidth请求参数结构体
+ * StopInstances返回参数结构体
  */
-export interface ResetInstancesMaxBandwidthRequest {
+export interface StopInstancesResponse {
     /**
-      * 待重置带宽上限的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceIdSet: Array<string>;
-    /**
-      * 修改后的最大出带宽上限。
-      */
-    MaxBandwidthOut: number;
-    /**
-      * 修改后的最大入带宽上限。
-      */
-    MaxBandwidthIn?: number;
+    RequestId?: string;
 }
 /**
  * ModifyModuleName请求参数结构体
@@ -4888,6 +4949,27 @@ export interface ModifyAddressAttributeRequest {
       * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。注意该参数仅对EIP直通功能可见的用户可以设定。
       */
     EipDirectConnection?: string;
+}
+/**
+ * DescribePriceRunInstance请求参数结构体
+ */
+export interface DescribePriceRunInstanceRequest {
+    /**
+      * 实例的机型信息
+      */
+    InstanceType: string;
+    /**
+      * 系统盘信息
+      */
+    SystemDisk: SystemDisk;
+    /**
+      * 实例个数
+      */
+    InstanceCount: number;
+    /**
+      * 数据盘信息
+      */
+    DataDisk?: Array<DataDisk>;
 }
 /**
  * DescribeTargets返回参数结构体
@@ -5784,34 +5866,41 @@ export interface CreateNetworkInterfaceResponse {
     RequestId?: string;
 }
 /**
- * ModifyListener请求参数结构体
+ * 节点信息
  */
-export interface ModifyListenerRequest {
+export interface Node {
     /**
-      * 负载均衡实例 ID
+      * zone信息。
       */
-    LoadBalancerId: string;
+    ZoneInfo: ZoneInfo;
     /**
-      * 负载均衡监听器 ID
+      * 国家信息。
       */
-    ListenerId: string;
+    Country: Country;
     /**
-      * 新的监听器名称
+      * 区域信息。
       */
-    ListenerName?: string;
+    Area: Area;
     /**
-      * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。
+      * 省份信息。
       */
-    SessionExpireTime?: number;
+    Province: Province;
     /**
-      * 健康检查相关参数
+      * 城市信息。
       */
-    HealthCheck?: HealthCheck;
+    City: City;
     /**
-      * 监听器转发的方式。可选值：WRR、LEAST_CONN
-分别表示按权重轮询、最小连接数， 默认为 WRR。
+      * Region信息。
       */
-    Scheduler?: string;
+    RegionInfo: RegionInfo;
+    /**
+      * 运营商列表。
+      */
+    ISPSet: Array<ISP>;
+    /**
+      * 运营商数量。
+      */
+    ISPNum: number;
 }
 /**
  * DescribeDisks返回参数结构体

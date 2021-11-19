@@ -168,6 +168,16 @@ it("ssa.v20180608.DescribeSafetyEventList", async function () {
     }
 })
 
+it("ssa.v20180608.DescribeSocAlertList", async function () {
+    try {
+       const data = await client.DescribeSocAlertList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssa.v20180608.DescribeVulDetail", async function () {
     try {
        const data = await client.DescribeVulDetail({})

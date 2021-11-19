@@ -268,9 +268,9 @@ it("ecm.v20190719.DisassociateSecurityGroups", async function () {
     }
 })
 
-it("ecm.v20190719.DeleteSecurityGroup", async function () {
+it("ecm.v20190719.MigrateNetworkInterface", async function () {
     try {
-       const data = await client.DeleteSecurityGroup({})
+       const data = await client.MigrateNetworkInterface({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -621,6 +621,16 @@ it("ecm.v20190719.DetachDisks", async function () {
 it("ecm.v20190719.DisableRoutes", async function () {
     try {
        const data = await client.DisableRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.DescribePriceRunInstance", async function () {
+    try {
+       const data = await client.DescribePriceRunInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1128,9 +1138,9 @@ it("ecm.v20190719.DescribeDisks", async function () {
     }
 })
 
-it("ecm.v20190719.MigrateNetworkInterface", async function () {
+it("ecm.v20190719.DeleteSecurityGroup", async function () {
     try {
-       const data = await client.MigrateNetworkInterface({})
+       const data = await client.DeleteSecurityGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

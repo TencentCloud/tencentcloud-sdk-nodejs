@@ -32,13 +32,15 @@ import {
   DescribeAssetListResponse,
   VulItem,
   DescribeCheckConfigAssetListResponse,
-  DescribeCheckConfigDetailRequest,
+  AlertListData,
   SaDivulgeDataQueryPub,
+  SocComplianceInfoResp,
   DescribeAssetListRequest,
   DescribeComplianceDetailResponse,
   DescribeAssetsMappingListResponse,
-  Tag,
+  DescribeSocAlertListResponse,
   SocComplianceItem,
+  QuerySort,
   DescribeComplianceListRequest,
   DescribeVulListRequest,
   DescribeLeakDetectionListRequest,
@@ -46,6 +48,8 @@ import {
   DescribeSafetyEventListResponse,
   SaDivulgeDataQueryPubList,
   DescribeSafetyEventListRequest,
+  AlertType,
+  DescribeSocAlertListRequest,
   ComplianceCheckDetail,
   SaDivulgeDataQueryPubResponse,
   Bucket,
@@ -54,6 +58,7 @@ import {
   Filter,
   AssetList,
   DataAssetMapping,
+  DescribeCheckConfigDetailRequest,
   VulList,
   DescribeLeakDetectionListResponse,
   DataEvent,
@@ -63,15 +68,17 @@ import {
   CheckAssetItem,
   SaDivulgeDataQueryPubRequest,
   DescribeVulDetailRequest,
-  DataCompliance,
+  ConcernInfo,
   DescribeAssetsMappingListRequest,
-  DescribeComplianceDetailRequest,
+  DataCompliance,
   AssetDetail,
   DescribeComplianceAssetListRequest,
+  QueryFilter,
   DescribeAssetDetailResponse,
   DescribeVulDetailResponse,
   DescribeSocCspmComplianceRequest,
-  SocComplianceInfoResp,
+  Tag,
+  DescribeComplianceDetailRequest,
 } from "./ssa_models"
 
 /**
@@ -231,6 +238,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSafetyEventListResponse) => void
   ): Promise<DescribeSafetyEventListResponse> {
     return this.request("DescribeSafetyEventList", req, cb)
+  }
+
+  /**
+   * 拉取告警列表
+   */
+  async DescribeSocAlertList(
+    req: DescribeSocAlertListRequest,
+    cb?: (error: string, rep: DescribeSocAlertListResponse) => void
+  ): Promise<DescribeSocAlertListResponse> {
+    return this.request("DescribeSocAlertList", req, cb)
   }
 
   /**

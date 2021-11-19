@@ -26,6 +26,7 @@ import {
   DescribeMonthPeakNetworkResponse,
   DescribeNetworkInterfacesRequest,
   CreateSecurityGroupPoliciesResponse,
+  InstancePricesPartDetail,
   DescribeMonthPeakNetworkRequest,
   SystemDisk,
   DescribeNodeResponse,
@@ -35,7 +36,7 @@ import {
   AttachDisksRequest,
   DescribeSnapshotsRequest,
   RemovePrivateIpAddressesRequest,
-  Tag,
+  InstanceFamilyTypeConfig,
   DescribeImageRequest,
   OsVersion,
   DescribeListenersResponse,
@@ -48,7 +49,7 @@ import {
   ResetInstancesMaxBandwidthResponse,
   NodeInstanceNum,
   DeleteListenerRequest,
-  StopInstancesResponse,
+  ResetInstancesMaxBandwidthRequest,
   LoadBalancerInternetAccessible,
   ResetRoutesRequest,
   TerminateDisksRequest,
@@ -58,10 +59,10 @@ import {
   StopInstancesRequest,
   DetachNetworkInterfaceResponse,
   ImageTask,
-  RunSecurityServiceEnabled,
+  ModifyListenerRequest,
   CreateImageRequest,
   Instance,
-  Node,
+  RunSecurityServiceEnabled,
   DeleteLoadBalancerRequest,
   DescribeVpcsRequest,
   DescribeRouteConflictsResponse,
@@ -78,8 +79,10 @@ import {
   DescribeCustomImageTaskRequest,
   DescribeSecurityGroupAssociationStatisticsResponse,
   AssignPrivateIpAddressesResponse,
+  PriceDetail,
   ImportImageResponse,
   DescribeSecurityGroupsRequest,
+  DescribePriceRunInstanceResponse,
   DeleteImageResponse,
   ModifySubnetAttributeResponse,
   DisassociateSecurityGroupsRequest,
@@ -125,7 +128,7 @@ import {
   ModuleCounter,
   TaskInput,
   ModifyLoadBalancerAttributesResponse,
-  InstanceFamilyTypeConfig,
+  Tag,
   DescribeDefaultSubnetRequest,
   RunInstancesResponse,
   TargetHealth,
@@ -165,6 +168,7 @@ import {
   PeakNetworkRegionInfo,
   ModifyHaVipAttributeRequest,
   ModifyAddressesBandwidthRequest,
+  InstancesPrice,
   ModifyImageAttributeResponse,
   SimpleModule,
   TagInfo,
@@ -239,7 +243,7 @@ import {
   ImportImageRequest,
   DiskChargePrepaid,
   DisableRoutesRequest,
-  ResetInstancesMaxBandwidthRequest,
+  StopInstancesResponse,
   ModifyModuleNameRequest,
   DescribeInstancesRequest,
   CreateListenerRequest,
@@ -250,6 +254,7 @@ import {
   SrcImage,
   DescribeTaskStatusRequest,
   ModifyAddressAttributeRequest,
+  DescribePriceRunInstanceRequest,
   DescribeTargetsResponse,
   ImageOsList,
   BatchModifyTargetWeightRequest,
@@ -303,7 +308,7 @@ import {
   RuleHealth,
   DeleteSecurityGroupResponse,
   CreateNetworkInterfaceResponse,
-  ModifyListenerRequest,
+  Node,
   DescribeDisksResponse,
   ZoneInstanceCountISP,
   DescribeAddressQuotaRequest,
@@ -637,15 +642,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 只有当前账号下的安全组允许被删除。
-安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
-删除的安全组无法再找回，请谨慎调用。
-     */
-  async DeleteSecurityGroup(
-    req: DeleteSecurityGroupRequest,
-    cb?: (error: string, rep: DeleteSecurityGroupResponse) => void
-  ): Promise<DeleteSecurityGroupResponse> {
-    return this.request("DeleteSecurityGroup", req, cb)
+   * 弹性网卡迁移
+   */
+  async MigrateNetworkInterface(
+    req: MigrateNetworkInterfaceRequest,
+    cb?: (error: string, rep: MigrateNetworkInterfaceResponse) => void
+  ): Promise<MigrateNetworkInterfaceResponse> {
+    return this.request("MigrateNetworkInterface", req, cb)
   }
 
   /**
@@ -1014,6 +1017,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DisableRoutesResponse) => void
   ): Promise<DisableRoutesResponse> {
     return this.request("DisableRoutes", req, cb)
+  }
+
+  /**
+   * 查询实例价格
+   */
+  async DescribePriceRunInstance(
+    req: DescribePriceRunInstanceRequest,
+    cb?: (error: string, rep: DescribePriceRunInstanceResponse) => void
+  ): Promise<DescribePriceRunInstanceResponse> {
+    return this.request("DescribePriceRunInstance", req, cb)
   }
 
   /**
@@ -1530,13 +1543,15 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-   * 弹性网卡迁移
-   */
-  async MigrateNetworkInterface(
-    req: MigrateNetworkInterfaceRequest,
-    cb?: (error: string, rep: MigrateNetworkInterfaceResponse) => void
-  ): Promise<MigrateNetworkInterfaceResponse> {
-    return this.request("MigrateNetworkInterface", req, cb)
+     * 只有当前账号下的安全组允许被删除。
+安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
+删除的安全组无法再找回，请谨慎调用。
+     */
+  async DeleteSecurityGroup(
+    req: DeleteSecurityGroupRequest,
+    cb?: (error: string, rep: DeleteSecurityGroupResponse) => void
+  ): Promise<DeleteSecurityGroupResponse> {
+    return this.request("DeleteSecurityGroup", req, cb)
   }
 
   /**

@@ -113,6 +113,7 @@ export declare class Client extends AbstractClient {
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
      * 根据检索条件查询实例错误日志详情。只能查询一个月之内的错误日志。
+使用时需要注意：可能存在单条错误日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
      */
     DescribeErrorLogData(req: DescribeErrorLogDataRequest, cb?: (error: string, rep: DescribeErrorLogDataResponse) => void): Promise<DescribeErrorLogDataResponse>;
     /**
@@ -408,7 +409,8 @@ export declare class Client extends AbstractClient {
      */
     ModifyAccountDescription(req: ModifyAccountDescriptionRequest, cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void): Promise<ModifyAccountDescriptionResponse>;
     /**
-     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志
+     * 条件检索实例的慢日志。只允许查看一个月之内的慢日志。
+使用时需要注意：可能存在单条慢日志太大，导致整个http请求的回包太大，进而引发接口超时。一旦发生超时，建议您缩小查询时的Limit参数值，从而降低包的大小，让接口能够及时返回内容。
      */
     DescribeSlowLogData(req: DescribeSlowLogDataRequest, cb?: (error: string, rep: DescribeSlowLogDataResponse) => void): Promise<DescribeSlowLogDataResponse>;
     /**

@@ -215,6 +215,31 @@ export interface CreateBatchRequest {
 }
 
 /**
+ * ModifyProductDynamicRegister返回参数结构体
+ */
+export interface ModifyProductDynamicRegisterResponse {
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+
+  /**
+   * 动态注册产品密钥
+   */
+  ProductSecret: string
+
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CancelAIModelApplication返回参数结构体
  */
 export interface CancelAIModelApplicationResponse {
@@ -2598,6 +2623,16 @@ export interface FirmwareTaskInfo {
 }
 
 /**
+ * DescribeProductDynamicRegister请求参数结构体
+ */
+export interface DescribeProductDynamicRegisterRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+}
+
+/**
  * AI模型申请信息
  */
 export interface AIModelApplication {
@@ -3392,6 +3427,26 @@ export interface BatchUpdateFirmwareRequest {
 }
 
 /**
+ * ModifyProductDynamicRegister请求参数结构体
+ */
+export interface ModifyProductDynamicRegisterRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
+}
+
+/**
  * DescribeCloudStorageThumbnail请求参数结构体
  */
 export interface DescribeCloudStorageThumbnailRequest {
@@ -3819,6 +3874,31 @@ export interface DescribeModelDefinitionRequest {
    * 产品ID
    */
   ProductId: string
+}
+
+/**
+ * DescribeProductDynamicRegister返回参数结构体
+ */
+export interface DescribeProductDynamicRegisterResponse {
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+
+  /**
+   * 动态注册产品密钥
+   */
+  ProductSecret: string
+
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

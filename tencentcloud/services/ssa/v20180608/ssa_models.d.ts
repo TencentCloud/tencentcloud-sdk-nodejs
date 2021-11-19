@@ -523,13 +523,19 @@ export interface DescribeCheckConfigAssetListResponse {
     RequestId?: string;
 }
 /**
- * DescribeCheckConfigDetail请求参数结构体
+ * 告警列表响应数据
  */
-export interface DescribeCheckConfigDetailRequest {
+export interface AlertListData {
     /**
-      * 检查项ID
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id: string;
+    Total: number;
+    /**
+      * 返回列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlertList: Array<AlertType>;
 }
 /**
  * 查询_通用字段
@@ -601,6 +607,16 @@ export interface SaDivulgeDataQueryPub {
     UpdateTime: string;
 }
 /**
+ * 返回结构
+ */
+export interface SocComplianceInfoResp {
+    /**
+      * 合格项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Items: Array<SocComplianceItem>;
+}
+/**
  * DescribeAssetList请求参数结构体
  */
 export interface DescribeAssetListRequest {
@@ -645,17 +661,17 @@ export interface DescribeAssetsMappingListResponse {
     RequestId?: string;
 }
 /**
- * 标签
+ * DescribeSocAlertList返回参数结构体
  */
-export interface Tag {
+export interface DescribeSocAlertListResponse {
     /**
-      * 数据库标识
+      * 业务数据
       */
-    Fid: number;
+    Data: AlertListData;
     /**
-      * 标签名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Fname: string;
+    RequestId?: string;
 }
 /**
  * soc合规信息
@@ -701,6 +717,19 @@ export interface SocComplianceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CheckItems: Array<SocCheckItem>;
+}
+/**
+ * 排序的字段
+ */
+export interface QuerySort {
+    /**
+      * 排序字段
+      */
+    SortKey: string;
+    /**
+      * 顺序，1升序2降序
+      */
+    SortType: number;
 }
 /**
  * DescribeComplianceList请求参数结构体
@@ -824,6 +853,161 @@ export interface DescribeSafetyEventListRequest {
       * 是否过滤响应时间
       */
     IsFilterResponseTime?: boolean;
+}
+/**
+ * 告警字段
+ */
+export interface AlertType {
+    /**
+      * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlertTime: string;
+    /**
+      * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlertId: string;
+    /**
+      * 资产id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssetId: string;
+    /**
+      * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssetPrivateIp: Array<string>;
+    /**
+      * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlertName: string;
+    /**
+      * 告警级别  0:未知 1:低危 2:中危 3:高危 4:严重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level: number;
+    /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Source: string;
+    /**
+      * 攻击字段1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttackChain: string;
+    /**
+      * 攻击字段2
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttackId: string;
+    /**
+      * 关注点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Concerns: Array<ConcernInfo>;
+    /**
+      * 1：已防御，0,2：仅检测(0:告警类 1:拦截类 2:放行类 )
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Action: number;
+    /**
+      * 0/空：未知，1：未成功，2：成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttackResult: number;
+    /**
+      * //调查状态  0/空：未启用，1：调查中，2：完成调查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventStatus: number;
+    /**
+      * //关联事件ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventId: string;
+    /**
+      * //处置状态  0：未关闭，1：已关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 资产名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssetName: string;
+    /**
+      * 恶意实体
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConcernMaliciousCount: number;
+    /**
+      * 受害者实体
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConcernVictimCount: number;
+    /**
+      * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VictimAssetType: string;
+    /**
+      * 告警子类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubType: string;
+    /**
+      * 攻击技术名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttackName: string;
+    /**
+      * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssetPublicIp: Array<string>;
+    /**
+      * 攻击战术名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttackTactic: string;
+    /**
+      * 资产子网
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VictimAssetSub: string;
+}
+/**
+ * DescribeSocAlertList请求参数结构体
+ */
+export interface DescribeSocAlertListRequest {
+    /**
+      * 页大小
+      */
+    PageSize: number;
+    /**
+      * 页码
+      */
+    PageIndex: number;
+    /**
+      * 业务场景 参考ScenesType
+      */
+    Scenes: number;
+    /**
+      * 查询参数
+      */
+    Filter?: Array<QueryFilter>;
+    /**
+      * 排序参数
+      */
+    Sorter?: Array<QuerySort>;
 }
 /**
  * 等保资产组记录
@@ -1105,6 +1289,15 @@ export interface DataAssetMapping {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsIntranet: number;
+}
+/**
+ * DescribeCheckConfigDetail请求参数结构体
+ */
+export interface DescribeCheckConfigDetailRequest {
+    /**
+      * 检查项ID
+      */
+    Id: string;
 }
 /**
  * 漏洞管理漏洞列表
@@ -1550,6 +1743,40 @@ export interface DescribeVulDetailRequest {
     Source?: string;
 }
 /**
+ * 关注点类型
+ */
+export interface ConcernInfo {
+    /**
+      * 关注点类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConcernType: number;
+    /**
+      * 实体类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EntityType: number;
+    /**
+      * 关注点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Concern: string;
+    /**
+      * 最近数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatisticsCount: number;
+}
+/**
+ * DescribeAssetsMappingList请求参数结构体
+ */
+export interface DescribeAssetsMappingListRequest {
+    /**
+      * 请求参数
+      */
+    Params: string;
+}
+/**
  * 合规检查项详情对象
  */
 export interface DataCompliance {
@@ -1630,24 +1857,6 @@ export interface DataCompliance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Remarks: string;
-}
-/**
- * DescribeAssetsMappingList请求参数结构体
- */
-export interface DescribeAssetsMappingListRequest {
-    /**
-      * 请求参数
-      */
-    Params: string;
-}
-/**
- * DescribeComplianceDetail请求参数结构体
- */
-export interface DescribeComplianceDetailRequest {
-    /**
-      * 检查项uuid
-      */
-    Id: string;
 }
 /**
  * 资产详情信息
@@ -1893,6 +2102,23 @@ export interface DescribeComplianceAssetListRequest {
     Search?: Array<Filter>;
 }
 /**
+ * 查询参数
+ */
+export interface QueryFilter {
+    /**
+      * 查询的字段
+      */
+    FilterKey: string;
+    /**
+      * 查询的值
+      */
+    FilterValue: string;
+    /**
+      * 匹配类型，枚举见pb
+      */
+    FilterOperatorType: number;
+}
+/**
  * DescribeAssetDetail返回参数结构体
  */
 export interface DescribeAssetDetailResponse {
@@ -2025,12 +2251,24 @@ export interface DescribeVulDetailResponse {
  */
 export declare type DescribeSocCspmComplianceRequest = null;
 /**
- * 返回结构
+ * 标签
  */
-export interface SocComplianceInfoResp {
+export interface Tag {
     /**
-      * 合格项
-注意：此字段可能返回 null，表示取不到有效值。
+      * 数据库标识
       */
-    Items: Array<SocComplianceItem>;
+    Fid: number;
+    /**
+      * 标签名称
+      */
+    Fname: string;
+}
+/**
+ * DescribeComplianceDetail请求参数结构体
+ */
+export interface DescribeComplianceDetailRequest {
+    /**
+      * 检查项uuid
+      */
+    Id: string;
 }
