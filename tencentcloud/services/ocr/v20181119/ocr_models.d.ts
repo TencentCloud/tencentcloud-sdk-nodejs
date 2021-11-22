@@ -433,35 +433,35 @@ export interface VerifyBizLicenseResponse {
       */
     ApprDate: string;
     /**
-      * 省
+      * 省（返回空值）
       */
     Province: string;
     /**
-      * 地级市
+      * 地级市（返回空值）
       */
     City: string;
     /**
-      * 区\县
+      * 区\县（返回空值）
       */
     County: string;
     /**
-      * 住所所在行政区划代码
+      * 住所所在行政区划代码（返回空值）
       */
     AreaCode: string;
     /**
-      * 行业门类代码
+      * 行业门类代码（返回空值）
       */
     IndustryPhyCode: string;
     /**
-      * 行业门类名称
+      * 行业门类名称（返回空值）
       */
     IndustryPhyName: string;
     /**
-      * 国民经济行业代码
+      * 国民经济行业代码（返回空值）
       */
     IndustryCode: string;
     /**
-      * 国民经济行业名称
+      * 国民经济行业名称（返回空值）
       */
     IndustryName: string;
     /**

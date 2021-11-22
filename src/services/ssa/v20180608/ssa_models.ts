@@ -41,6 +41,21 @@ export interface DescribeVulListResponse {
 }
 
 /**
+ * DescribeSocAlertDetails请求参数结构体
+ */
+export interface DescribeSocAlertDetailsRequest {
+  /**
+   * 告警id
+   */
+  AlertId: string
+
+  /**
+   * 告警时间，取Timestamp字段
+   */
+  AlertTimestamp?: string
+}
+
+/**
  * DescribeComplianceAssetList返回参数结构体
  */
 export interface DescribeComplianceAssetListResponse {
@@ -439,6 +454,22 @@ export interface DescribeAssetListResponse {
    * 命名空间数据
    */
   NamespaceData: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSocAlertDetails返回参数结构体
+ */
+export interface DescribeSocAlertDetailsResponse {
+  /**
+      * 返回详情数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: AlertDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1032,6 +1063,21 @@ export interface DescribeSafetyEventListRequest {
    * 是否过滤响应时间
    */
   IsFilterResponseTime?: boolean
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 数据库标识
+   */
+  Fid: number
+
+  /**
+   * 标签名称
+   */
+  Fname: string
 }
 
 /**
@@ -2705,18 +2751,20 @@ export interface DescribeVulDetailResponse {
 export type DescribeSocCspmComplianceRequest = null
 
 /**
- * 标签
+ * 告警详情
  */
-export interface Tag {
+export interface AlertDetail {
   /**
-   * 数据库标识
-   */
-  Fid: number
+      * 告警基础信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BaseInfo: AlertType
 
   /**
-   * 标签名称
-   */
-  Fname: string
+      * 告警详情，json序列化
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail: string
 }
 
 /**

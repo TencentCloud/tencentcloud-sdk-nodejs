@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSafetyEventList", req, cb);
     }
     /**
+     * 返回告警详情
+     */
+    async DescribeSocAlertDetails(req, cb) {
+        return this.request("DescribeSocAlertDetails", req, cb);
+    }
+    /**
      * 拉取告警列表
      */
     async DescribeSocAlertList(req, cb) {

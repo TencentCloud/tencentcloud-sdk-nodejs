@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAssetDetailRequest,
   DescribeVulListResponse,
+  DescribeSocAlertDetailsRequest,
   DescribeComplianceAssetListResponse,
   DataCheck,
   SocProductionItem,
@@ -30,6 +31,7 @@ import {
   AggregationObj,
   DescribeCheckConfigDetailResponse,
   DescribeAssetListResponse,
+  DescribeSocAlertDetailsResponse,
   VulItem,
   DescribeCheckConfigAssetListResponse,
   AlertListData,
@@ -48,6 +50,7 @@ import {
   DescribeSafetyEventListResponse,
   SaDivulgeDataQueryPubList,
   DescribeSafetyEventListRequest,
+  Tag,
   AlertType,
   DescribeSocAlertListRequest,
   ComplianceCheckDetail,
@@ -77,7 +80,7 @@ import {
   DescribeAssetDetailResponse,
   DescribeVulDetailResponse,
   DescribeSocCspmComplianceRequest,
-  Tag,
+  AlertDetail,
   DescribeComplianceDetailRequest,
 } from "./ssa_models"
 
@@ -238,6 +241,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSafetyEventListResponse) => void
   ): Promise<DescribeSafetyEventListResponse> {
     return this.request("DescribeSafetyEventList", req, cb)
+  }
+
+  /**
+   * 返回告警详情
+   */
+  async DescribeSocAlertDetails(
+    req: DescribeSocAlertDetailsRequest,
+    cb?: (error: string, rep: DescribeSocAlertDetailsResponse) => void
+  ): Promise<DescribeSocAlertDetailsResponse> {
+    return this.request("DescribeSocAlertDetails", req, cb)
   }
 
   /**

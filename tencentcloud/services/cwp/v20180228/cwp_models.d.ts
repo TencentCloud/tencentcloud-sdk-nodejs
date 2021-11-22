@@ -12281,7 +12281,7 @@ export interface DescribeAssetSystemPackageListRequest {
       */
     Filters?: Array<Filter>;
     /**
-      * 排序方式，asc-升序 或 desc-降序
+      * 排序方式，asc-升序 或 desc-降序。默认：desc-降序
       */
     Order?: string;
     /**

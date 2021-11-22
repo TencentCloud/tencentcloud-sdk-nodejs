@@ -5794,7 +5794,7 @@ export interface DescribeServicesStatusRequest {
       */
     Offset?: number;
     /**
-      * 过滤条件。支持ServiceId、ServiceName、NotUsagePlanId、Environment、IpVersion。InstanceId
+      * 过滤条件。支持ServiceId、ServiceName、NotUsagePlanId、Environment、IpVersion、InstanceId、NetType、EIAMAppId。
       */
     Filters?: Array<Filter>;
 }
