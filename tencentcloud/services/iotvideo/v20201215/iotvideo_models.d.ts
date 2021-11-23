@@ -3000,6 +3000,14 @@ export interface ResetCloudStorageRequest {
       * 设备名称
       */
     DeviceName: string;
+    /**
+      * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
+      */
+    ChannelId?: number;
+    /**
+      * 云存用户Id，为空则为默认云存空间。
+      */
+    UserId?: string;
 }
 /**
  * DescribeProduct返回参数结构体

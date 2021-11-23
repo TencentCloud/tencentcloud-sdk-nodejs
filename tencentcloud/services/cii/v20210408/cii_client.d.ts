@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, DescribeStructureDifferenceResponse, DescribeMachineUnderwriteRequest, DescribeStructureResultRequest, DescribeStructCompareDataResponse, DescribeStructureResultResponse, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateUnderwriteTaskByIdRequest, CreateUnderwriteTaskByIdResponse, DescribeStructureDifferenceRequest } from "./cii_models";
+import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, DescribeStructureDifferenceResponse, UploadMedicalFileRequest, DescribeMachineUnderwriteRequest, DescribeStructureResultRequest, DescribeStructCompareDataResponse, DescribeStructureResultResponse, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateUnderwriteTaskByIdRequest, CreateUnderwriteTaskByIdResponse, DescribeStructureDifferenceRequest, UploadMedicalFileResponse } from "./cii_models";
 /**
  * cii client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 依据任务ID获取结构化结果接口。
      */
     DescribeStructureTaskResult(req: DescribeStructureTaskResultRequest, cb?: (error: string, rep: DescribeStructureTaskResultResponse) => void): Promise<DescribeStructureTaskResultResponse>;
+    /**
+     * 上传医疗影像文件，可以用来做结构化。
+     */
+    UploadMedicalFile(req: UploadMedicalFileRequest, cb?: (error: string, rep: UploadMedicalFileResponse) => void): Promise<UploadMedicalFileResponse>;
     /**
      * 本接口(CreateUnderwriteTaskById)用于根据结构化任务ID创建核保任务
      */

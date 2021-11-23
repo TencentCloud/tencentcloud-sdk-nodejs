@@ -38,6 +38,16 @@ it("cii.v20210408.DescribeStructureTaskResult", async function () {
     }
 })
 
+it("cii.v20210408.UploadMedicalFile", async function () {
+    try {
+       const data = await client.UploadMedicalFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cii.v20210408.CreateUnderwriteTaskById", async function () {
     try {
        const data = await client.CreateUnderwriteTaskById({})

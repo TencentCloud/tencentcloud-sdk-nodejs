@@ -26,6 +26,7 @@ import {
   InsuranceResult,
   DescribeStructureDifferenceResponse,
   PerStructDifference,
+  UploadMedicalFileRequest,
   CompareMetricsData,
   DescribeMachineUnderwriteRequest,
   ReviewDataTaskInfo,
@@ -44,6 +45,7 @@ import {
   StructureResultObject,
   CreateStructureTaskInfo,
   DescribeStructureDifferenceRequest,
+  UploadMedicalFileResponse,
   StructureModifyItem,
 } from "./cii_models"
 
@@ -74,6 +76,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStructureTaskResultResponse) => void
   ): Promise<DescribeStructureTaskResultResponse> {
     return this.request("DescribeStructureTaskResult", req, cb)
+  }
+
+  /**
+   * 上传医疗影像文件，可以用来做结构化。
+   */
+  async UploadMedicalFile(
+    req: UploadMedicalFileRequest,
+    cb?: (error: string, rep: UploadMedicalFileResponse) => void
+  ): Promise<UploadMedicalFileResponse> {
+    let options = {
+      multipart: true,
+    }
+    return this.request("UploadMedicalFile", req, cb)
   }
 
   /**

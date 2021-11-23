@@ -148,6 +148,16 @@ it("antiddos.v20200309.DescribeListBlackWhiteIpList", async function () {
     }
 })
 
+it("antiddos.v20200309.ModifyNewDomainRules", async function () {
+    try {
+       const data = await client.ModifyNewDomainRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeListDDoSGeoIPBlockConfig", async function () {
     try {
        const data = await client.DescribeListDDoSGeoIPBlockConfig({})

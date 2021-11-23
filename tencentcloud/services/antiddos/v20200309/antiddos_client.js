@@ -107,6 +107,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListBlackWhiteIpList", req, cb);
     }
     /**
+     * 修改7层转发规则
+     */
+    async ModifyNewDomainRules(req, cb) {
+        return this.request("ModifyNewDomainRules", req, cb);
+    }
+    /**
      * 获取DDoS防护的区域封禁配置列表
      */
     async DescribeListDDoSGeoIPBlockConfig(req, cb) {

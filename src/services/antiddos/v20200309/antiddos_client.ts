@@ -32,6 +32,7 @@ import {
   DescribeL7RulesBySSLCertIdResponse,
   DescribeListDDoSSpeedLimitConfigRequest,
   InstanceRelation,
+  ModifyNewDomainRulesRequest,
   DescribeListProtocolBlockConfigResponse,
   DescribeListBGPInstancesRequest,
   KeyValue,
@@ -44,6 +45,7 @@ import {
   DescribeDefaultAlarmThresholdResponse,
   CreateDDoSAIRequest,
   DescribeListProtectThresholdConfigRequest,
+  ModifyNewDomainRulesResponse,
   CreateWaterPrintConfigResponse,
   DescribeListBGPIPInstancesRequest,
   StaticPackRelation,
@@ -131,6 +133,7 @@ import {
   AssociateDDoSEipLoadBalancerResponse,
   CreateBlackWhiteIpListRequest,
   DescribeBizTrendResponse,
+  NewL7RuleEntry,
   CreateBoundIPResponse,
   SpeedValue,
   SwitchWaterPrintConfigRequest,
@@ -301,6 +304,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeListBlackWhiteIpListResponse) => void
   ): Promise<DescribeListBlackWhiteIpListResponse> {
     return this.request("DescribeListBlackWhiteIpList", req, cb)
+  }
+
+  /**
+   * 修改7层转发规则
+   */
+  async ModifyNewDomainRules(
+    req: ModifyNewDomainRulesRequest,
+    cb?: (error: string, rep: ModifyNewDomainRulesResponse) => void
+  ): Promise<ModifyNewDomainRulesResponse> {
+    return this.request("ModifyNewDomainRules", req, cb)
   }
 
   /**

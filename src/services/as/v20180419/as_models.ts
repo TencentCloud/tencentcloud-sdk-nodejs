@@ -1515,17 +1515,24 @@ export interface CreateNotificationConfigurationRequest {
   NotificationUserGroupIds?: Array<string>
 
   /**
-   * 通知接收端类型，取值：`USER_GROUP`，`CMQ_QUEUE`，`CMQ_TOPIC`。默认值为：`USER_GROUP`。
-   */
+      * 通知接收端类型，取值如下
+<br><li>USER_GROUP：用户组
+<br><li>CMQ_QUEUE：CMQ 队列
+<br><li>CMQ_TOPIC：CMQ 主题
+<br><li>TDMQ_CMQ_TOPIC：TDMQ CMQ 主题
+<br><li>TDMQ_CMQ_QUEUE：TDMQ CMQ 队列
+
+默认值为：`USER_GROUP`。
+      */
   TargetType?: string
 
   /**
-   * CMQ 队列名称，如 TargetType 取值为 `CMQ_QUEUE`，该字段必填。
+   * CMQ 队列名称，如 TargetType 取值为 `CMQ_QUEUE` 或 `TDMQ_CMQ_QUEUE` 时，该字段必填。
    */
   QueueName?: string
 
   /**
-   * CMQ 主题名称，如 TargetType 取值为 `CMQ_TOPIC`，该字段必填。
+   * CMQ 主题名称，如 TargetType 取值为 `CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC` 时，该字段必填。
    */
   TopicName?: string
 }
@@ -1576,12 +1583,12 @@ export interface ModifyNotificationConfigurationRequest {
   NotificationUserGroupIds?: Array<string>
 
   /**
-   * CMQ 队列名。
+   * CMQ 队列或 TDMQ CMQ 队列名。
    */
   QueueName?: string
 
   /**
-   * CMQ 主题名。
+   * CMQ 主题或 TDMQ CMQ 主题名。
    */
   TopicName?: string
 }
@@ -2918,19 +2925,21 @@ export interface DescribeLaunchConfigurationsRequest {
  */
 export interface NotificationTarget {
   /**
-      * 目标类型，取值范围包括`CMQ_QUEUE`、`CMQ_TOPIC`。
+      * 目标类型，取值范围包括`CMQ_QUEUE`、`CMQ_TOPIC`、`TDMQ_CMQ_QUEUE`、`TDMQ_CMQ_TOPIC`。
 <li> CMQ_QUEUE，指腾讯云消息队列-队列模型。</li>
 <li> CMQ_TOPIC，指腾讯云消息队列-主题模型。</li>
+<li> TDMQ_CMQ_QUEUE，指腾讯云 TDMQ 消息队列-队列模型。</li>
+<li> TDMQ_CMQ_TOPIC，指腾讯云 TDMQ 消息队列-主题模型。</li>
       */
   TargetType: string
 
   /**
-   * 队列名称，如果`TargetType`取值为`CMQ_QUEUE`，则本字段必填。
+   * 队列名称，如果`TargetType`取值为`CMQ_QUEUE` 或 `TDMQ_CMQ_QUEUE`，则本字段必填。
    */
   QueueName?: string
 
   /**
-   * 主题名称，如果`TargetType`取值为`CMQ_TOPIC`，则本字段必填。
+   * 主题名称，如果`TargetType`取值为`CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC`，则本字段必填。
    */
   TopicName?: string
 }

@@ -40,6 +40,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStructureTaskResult", req, cb);
     }
     /**
+     * 上传医疗影像文件，可以用来做结构化。
+     */
+    async UploadMedicalFile(req, cb) {
+        let options = {
+            multipart: true
+        };
+        return this.request("UploadMedicalFile", req, cb);
+    }
+    /**
      * 本接口(CreateUnderwriteTaskById)用于根据结构化任务ID创建核保任务
      */
     async CreateUnderwriteTaskById(req, cb) {

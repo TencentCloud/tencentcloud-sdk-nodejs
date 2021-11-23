@@ -1061,7 +1061,7 @@ export interface DescribeBillDetailRequest {
   NeedRecordNum?: number
 
   /**
-   * 查询指定产品信息（暂时未开放获取）
+   * 已废弃参数，未开放
    */
   ProductCode?: string
 
@@ -1084,6 +1084,12 @@ export interface DescribeBillDetailRequest {
    * 项目ID:资源所属项目ID
    */
   ProjectId?: number
+
+  /**
+      * 商品名称代码
+备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+      */
+  BusinessCode?: string
 }
 
 /**
@@ -1878,6 +1884,12 @@ export interface DescribeBillResourceSummaryRequest {
    * 付费模式 prePay/postPay
    */
   PayMode?: string
+
+  /**
+      * 商品名称代码
+备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+      */
+  BusinessCode?: string
 }
 
 /**
