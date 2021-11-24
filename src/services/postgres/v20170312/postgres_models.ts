@@ -1165,6 +1165,26 @@ export interface UpgradeDBInstanceRequest {
 export type DescribeZonesRequest = null
 
 /**
+ * 描述某个地域下某个可用区的可售卖规格详细信息。
+ */
+export interface SpecInfo {
+  /**
+   * 地域英文编码，对应RegionSet的Region字段
+   */
+  Region: string
+
+  /**
+   * 区域英文编码，对应ZoneSet的Zone字段
+   */
+  Zone: string
+
+  /**
+   * 规格详细信息列表
+   */
+  SpecItemInfoList: Array<SpecItemInfo>
+}
+
+/**
  * DescribeReadOnlyGroups返回参数结构体
  */
 export interface DescribeReadOnlyGroupsResponse {
@@ -1195,23 +1215,56 @@ export interface SetAutoRenewFlagResponse {
 }
 
 /**
- * 描述某个地域下某个可用区的可售卖规格详细信息。
+ * 网络类型信息，用于实例查询接口和RO组查询接口的返回。
  */
-export interface SpecInfo {
+export interface NetworkAccess {
   /**
-   * 地域英文编码，对应RegionSet的Region字段
-   */
-  Region: string
+      * 网络资源id，实例id或RO组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceId: string
 
   /**
-   * 区域英文编码，对应ZoneSet的Zone字段
-   */
-  Zone: string
+      * 资源类型，1-实例 2-RO组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType: number
 
   /**
-   * 规格详细信息列表
-   */
-  SpecItemInfoList: Array<SpecItemInfo>
+      * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vip: string
+
+  /**
+      * ipv6的IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vip6: string
+
+  /**
+      * 连接Port地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vport: number
+
+  /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
+
+  /**
+      * 网络状态，1-申请中，2-使用中，3-删除中，4-已删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcStatus: number
 }
 
 /**
@@ -1333,6 +1386,12 @@ export interface ReadOnlyGroup {
    * 网络信息
    */
   DBInstanceNetInfo: Array<DBInstanceNetInfo>
+
+  /**
+      * 只读组网络信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkAccessList: Array<NetworkAccess>
 }
 
 /**
@@ -1788,6 +1847,12 @@ export interface ServerlessDBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagList?: Array<Tag>
+
+  /**
+      * 数据库内核版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBKernelVersion?: string
 }
 
 /**
@@ -2355,7 +2420,7 @@ export interface DBInstance {
   DBCharset: string
 
   /**
-   * PostgreSQL内核版本
+   * PostgreSQL主版本
    */
   DBVersion: string
 
@@ -2443,6 +2508,18 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OfflineTime: string
+
+  /**
+      * 数据库内核版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBKernelVersion: string
+
+  /**
+      * 实例网络信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkAccessList: Array<NetworkAccess>
 }
 
 /**

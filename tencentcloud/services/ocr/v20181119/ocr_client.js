@@ -255,7 +255,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VinOCR", req, cb);
     }
     /**
-     * 本接口支持图片中整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，识别速度更快、支持的 QPS 更高。
+     * 本接口支持图片中整体文字的检测和识别，返回文字框位置与文字内容。相比通用印刷体识别接口，识别速度更快。
      */
     async GeneralFastOCR(req, cb) {
         return this.request("GeneralFastOCR", req, cb);
