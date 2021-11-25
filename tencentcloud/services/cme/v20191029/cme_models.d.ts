@@ -1040,6 +1040,7 @@ export interface CreateProjectRequest {
     Name: string;
     /**
       * 项目归属者。
+注：云转推项目，仅支持个人归属。
       */
     Owner: Entity;
     /**

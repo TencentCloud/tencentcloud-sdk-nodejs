@@ -648,6 +648,16 @@ it("tke.v20180525.DescribePrometheusAgentInstances", async function () {
     }
 })
 
+it("tke.v20180525.ScaleOutClusterMaster", async function () {
+    try {
+       const data = await client.ScaleOutClusterMaster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreatePrometheusAlertRule", async function () {
     try {
        const data = await client.CreatePrometheusAlertRule({})
@@ -671,6 +681,16 @@ it("tke.v20180525.DescribeClusterSecurity", async function () {
 it("tke.v20180525.DeleteClusterNodePool", async function () {
     try {
        const data = await client.DeleteClusterNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ScaleInClusterMaster", async function () {
+    try {
+       const data = await client.ScaleInClusterMaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

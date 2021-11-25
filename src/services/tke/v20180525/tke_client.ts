@@ -22,6 +22,7 @@ import {
   DescribeClusterEndpointVipStatusRequest,
   CreateEKSContainerInstancesResponse,
   DescribeClusterSecurityResponse,
+  ScaleOutClusterMasterRequest,
   DescribeClusterSecurityRequest,
   ModifyPrometheusAlertRuleRequest,
   DeleteClusterInstancesResponse,
@@ -74,6 +75,7 @@ import {
   DescribePrometheusTemplatesRequest,
   ModifyPrometheusAlertRuleResponse,
   AddNodeToNodePoolRequest,
+  ScaleInMaster,
   DescribeEKSContainerInstanceEventResponse,
   DescribePrometheusAlertRuleResponse,
   ClusterAsGroup,
@@ -82,7 +84,7 @@ import {
   DescribeVpcCniPodLimitsResponse,
   EksCiRegionInfo,
   DescribeVersionsResponse,
-  UpgradeAbleInstancesItem,
+  ScaleInClusterMasterRequest,
   EnvironmentVariable,
   CreateClusterNodePoolFromExistingAsgRequest,
   PrometheusAlertRule,
@@ -210,6 +212,7 @@ import {
   Filter,
   ModifyClusterNodePoolRequest,
   ImageInstance,
+  UpgradeAbleInstancesItem,
   CreateClusterEndpointResponse,
   CreateClusterNodePoolRequest,
   ClusterAdvancedSettings,
@@ -264,6 +267,7 @@ import {
   RouteTableConflict,
   CreateClusterRouteTableRequest,
   InstanceUpgradePreCheckResult,
+  ScaleInClusterMasterResponse,
   DescribeClusterAsGroupsRequest,
   DescribeImagesRequest,
   TaskStepInfo,
@@ -299,6 +303,7 @@ import {
   DescribeClusterNodePoolDetailResponse,
   DescribeClusterControllersRequest,
   DescribeEKSContainerInstanceEventRequest,
+  ScaleOutClusterMasterResponse,
 } from "./tke_models"
 
 /**
@@ -941,6 +946,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 扩容独立集群master节点
+   */
+  async ScaleOutClusterMaster(
+    req: ScaleOutClusterMasterRequest,
+    cb?: (error: string, rep: ScaleOutClusterMasterResponse) => void
+  ): Promise<ScaleOutClusterMasterResponse> {
+    return this.request("ScaleOutClusterMaster", req, cb)
+  }
+
+  /**
    * 创建告警规则
    */
   async CreatePrometheusAlertRule(
@@ -968,6 +983,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterNodePoolResponse) => void
   ): Promise<DeleteClusterNodePoolResponse> {
     return this.request("DeleteClusterNodePool", req, cb)
+  }
+
+  /**
+   * 缩容独立集群master节点
+   */
+  async ScaleInClusterMaster(
+    req: ScaleInClusterMasterRequest,
+    cb?: (error: string, rep: ScaleInClusterMasterResponse) => void
+  ): Promise<ScaleInClusterMasterResponse> {
+    return this.request("ScaleInClusterMaster", req, cb)
   }
 
   /**

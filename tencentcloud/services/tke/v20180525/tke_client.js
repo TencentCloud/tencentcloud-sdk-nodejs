@@ -406,6 +406,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusAgentInstances", req, cb);
     }
     /**
+     * 扩容独立集群master节点
+     */
+    async ScaleOutClusterMaster(req, cb) {
+        return this.request("ScaleOutClusterMaster", req, cb);
+    }
+    /**
      * 创建告警规则
      */
     async CreatePrometheusAlertRule(req, cb) {
@@ -422,6 +428,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterNodePool(req, cb) {
         return this.request("DeleteClusterNodePool", req, cb);
+    }
+    /**
+     * 缩容独立集群master节点
+     */
+    async ScaleInClusterMaster(req, cb) {
+        return this.request("ScaleInClusterMaster", req, cb);
     }
     /**
      * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）

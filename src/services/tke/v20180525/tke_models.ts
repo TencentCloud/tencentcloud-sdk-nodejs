@@ -129,6 +129,36 @@ export interface DescribeClusterSecurityResponse {
 }
 
 /**
+ * ScaleOutClusterMaster请求参数结构体
+ */
+export interface ScaleOutClusterMasterRequest {
+  /**
+   * 集群实例ID
+   */
+  ClusterId: string
+
+  /**
+   * 新建节点参数
+   */
+  RunInstancesForNode?: Array<RunInstancesForNode>
+
+  /**
+   * 添加已有节点相关参数
+   */
+  ExistedInstancesForNode?: Array<ExistedInstancesForNode>
+
+  /**
+   * 实例高级设置
+   */
+  InstanceAdvancedSettings?: InstanceAdvancedSettings
+
+  /**
+   * 集群master组件自定义参数
+   */
+  ExtraArgs?: ClusterExtraArgs
+}
+
+/**
  * DescribeClusterSecurity请求参数结构体
  */
 export interface DescribeClusterSecurityRequest {
@@ -1335,6 +1365,26 @@ export interface AddNodeToNodePoolRequest {
 }
 
 /**
+ * master节点缩容参数
+ */
+export interface ScaleInMaster {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 缩容的实例角色：MASTER,ETCD,MASTER_ETCD
+   */
+  NodeRole: string
+
+  /**
+   * 实例的保留模式
+   */
+  InstanceDeleteMode: string
+}
+
+/**
  * DescribeEKSContainerInstanceEvent返回参数结构体
  */
 export interface DescribeEKSContainerInstanceEventResponse {
@@ -1554,24 +1604,18 @@ export interface DescribeVersionsResponse {
 }
 
 /**
- * 可升级节点信息
+ * ScaleInClusterMaster请求参数结构体
  */
-export interface UpgradeAbleInstancesItem {
+export interface ScaleInClusterMasterRequest {
   /**
-   * 节点Id
+   * 集群实例ID
    */
-  InstanceId: string
+  ClusterId: string
 
   /**
-   * 节点的当前版本
+   * master缩容选项
    */
-  Version: string
-
-  /**
-      * 当前版本的最新小版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LatestVersion: string
+  ScaleInMasters: Array<ScaleInMaster>
 }
 
 /**
@@ -4603,6 +4647,27 @@ export interface ImageInstance {
 }
 
 /**
+ * 可升级节点信息
+ */
+export interface UpgradeAbleInstancesItem {
+  /**
+   * 节点Id
+   */
+  InstanceId: string
+
+  /**
+   * 节点的当前版本
+   */
+  Version: string
+
+  /**
+      * 当前版本的最新小版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestVersion: string
+}
+
+/**
  * CreateClusterEndpoint返回参数结构体
  */
 export interface CreateClusterEndpointResponse {
@@ -5949,6 +6014,16 @@ export interface InstanceUpgradePreCheckResult {
 }
 
 /**
+ * ScaleInClusterMaster返回参数结构体
+ */
+export interface ScaleInClusterMasterResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterAsGroups请求参数结构体
  */
 export interface DescribeClusterAsGroupsRequest {
@@ -6868,4 +6943,14 @@ export interface DescribeEKSContainerInstanceEventRequest {
    * 最大事件数量。默认为50，最大取值100。
    */
   Limit?: number
+}
+
+/**
+ * ScaleOutClusterMaster返回参数结构体
+ */
+export interface ScaleOutClusterMasterResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
