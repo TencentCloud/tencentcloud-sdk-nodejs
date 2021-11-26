@@ -419,6 +419,16 @@ drop：拒绝
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ServiceTemplateId?: string
+
+  /**
+   * 规则对应的唯一id
+   */
+  Id?: string
+
+  /**
+   * 规则状态，true表示启用，false表示禁用
+   */
+  Enable?: string
 }
 
 /**
@@ -1063,6 +1073,36 @@ export interface ModifySequenceRulesRequest {
 }
 
 /**
+ * DescribeAddrTemplateList请求参数结构体
+ */
+export interface DescribeAddrTemplateListRequest {
+  /**
+   * 偏移量，分页用
+   */
+  Offset?: number
+
+  /**
+   * 条数，分页用
+   */
+  Limit?: number
+
+  /**
+   * 排序字段，取值 'UpdateTime' | 'RulesNum'
+   */
+  By?: string
+
+  /**
+   * 排序，取值 'asc'|'desc'
+   */
+  Order?: string
+
+  /**
+   * 搜索值
+   */
+  SearchValue?: string
+}
+
+/**
  * CreateNatFwInstance请求参数结构体
  */
 export interface CreateNatFwInstanceRequest {
@@ -1633,6 +1673,31 @@ export interface AssetZone {
    * 地域英文
    */
   ZoneEng: string
+}
+
+/**
+ * DescribeAddrTemplateList返回参数结构体
+ */
+export interface DescribeAddrTemplateListResponse {
+  /**
+   * 模版总数
+   */
+  Total: number
+
+  /**
+   * 模版列表数据
+   */
+  Data: Array<TemplateListInfo>
+
+  /**
+   * 模版名称列表
+   */
+  NameList: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3573,6 +3638,59 @@ export interface ModifyBlockTopResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 地址模版列表数据
+ */
+export interface TemplateListInfo {
+  /**
+      * 模版ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uuid: string
+
+  /**
+      * 模版名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Detail: string
+
+  /**
+      * IP模版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpString: string
+
+  /**
+      * 插入时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InsertTime: string
+
+  /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 模版类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: number
+
+  /**
+      * 关联规则条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RulesNum: number
 }
 
 /**

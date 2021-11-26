@@ -63,7 +63,7 @@ export interface UpgradeDCDBInstanceResponse {
       * 长订单号。可以据此调用 DescribeOrders
  查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
       */
-  DealName?: string
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3007,6 +3007,11 @@ export interface UpgradeDCDBInstanceRequest {
    * 代金券ID列表，目前仅支持指定一张代金券。
    */
   VoucherIds?: Array<string>
+
+  /**
+   * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
+   */
+  Zones?: Array<string>
 }
 
 /**

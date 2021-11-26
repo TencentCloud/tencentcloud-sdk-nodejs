@@ -29,15 +29,15 @@ export interface ModifyMaterialResponse {
  */
 export interface DeleteProjectRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 项目 Id。
+      * 要删除的项目 Id。
       */
     ProjectId: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验对项目删除操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以删除一切项目。如果指定操作者，则操作者必须为项目所有者。
       */
     Operator?: string;
 }
@@ -93,11 +93,11 @@ export interface StreamConnectProjectInput {
  */
 export interface DescribeAccountsRequest {
     /**
-      * 平台唯一标识。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 手机号码。
+      * 手机号码。指定手机号获取账号信息，目前仅支持国内手机号，且号码不加地区码 `+86` 等。
       */
     Phone?: string;
     /**
@@ -114,7 +114,7 @@ export interface DescribeAccountsRequest {
  */
 export interface ExportVideoByVideoSegmentationDataRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -137,9 +137,9 @@ export interface ExportVideoByVideoSegmentationDataRequest {
       */
     Definition: number;
     /**
-      * 导出目标。
-<li>CME：云剪，即导出为云剪素材；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+      * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：云剪，即导出为云剪媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在云剪媒资库将不可见。</li>
       */
     ExportDestination: string;
     /**
@@ -151,7 +151,7 @@ export interface ExportVideoByVideoSegmentationDataRequest {
       */
     VODExportInfo?: VODExportInfo;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作任意智能拆条项目。如果指定操作者，则操作者必须为项目所有。
       */
     Operator?: string;
 }
@@ -175,11 +175,11 @@ export interface DescribeTeamsResponse {
     /**
       * 符合条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 团队列表。
       */
-    TeamSet?: Array<TeamInfo>;
+    TeamSet: Array<TeamInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -444,7 +444,7 @@ export interface IntegerRange {
  */
 export interface SearchMaterialRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -452,10 +452,11 @@ export interface SearchMaterialRequest {
       */
     SearchScopes: Array<SearchScope>;
     /**
-      * 媒体类型，取值：
+      * 媒体类型，可取值有：
 <li>AUDIO：音频；</li>
 <li>VIDEO：视频 ；</li>
-<li>IMAGE：图片。</li>
+<li>IMAGE：图片；</li>
+<li>VIDEO_EDIT_TEMPLATE：剪辑模板。</li>
       */
     MaterialTypes?: Array<string>;
     /**
@@ -491,7 +492,7 @@ export interface SearchMaterialRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验媒体访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以搜索任意媒体的信息。如果指定操作者，则操作者必须对媒体有读权限。
       */
     Operator?: string;
 }
@@ -579,11 +580,11 @@ export interface RevokeResourceAuthorizationResponse {
  */
 export interface HandleStreamConnectProjectRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 云转推项目Id 。
+      * 云转推项目 Id 。
       */
     ProjectId: string;
     /**
@@ -608,6 +609,10 @@ export interface HandleStreamConnectProjectRequest {
       * 云转推当前预计结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。具体操作方式详见 [操作类型](#Operation) 及下文示例。
       */
     CurrentStopTime?: string;
+    /**
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有云转推项目。如果指定操作者，则操作者必须为项目所有者。
+      */
+    Operator?: string;
 }
 /**
  * 项目信息。
@@ -734,7 +739,7 @@ export interface VideoTrackItem {
  */
 export interface DeleteTeamRequest {
     /**
-      * 平台名称，指定访问平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -742,7 +747,7 @@ export interface DeleteTeamRequest {
       */
     TeamId: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以删除所有团队。如果指定操作者，则操作者必须为团队所有者。
       */
     Operator?: string;
 }
@@ -751,7 +756,7 @@ export interface DeleteTeamRequest {
  */
 export interface DescribeTeamsRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -812,7 +817,7 @@ export interface SwitcherProjectInput {
  */
 export interface FlattenListMediaRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -832,7 +837,7 @@ export interface FlattenListMediaRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验媒体访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以平铺查询任意分类下的媒体信息。如果指定操作者，则操作者必须对当前分类有读权限。
       */
     Operator?: string;
 }
@@ -943,20 +948,20 @@ export interface TeamInfo {
  */
 export interface ExportVideoByEditorTrackDataRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 导出视频编码配置 Id，推荐优先使用下面的预置模板 Id，有其他需求可通过接口定制视频编码配置。
+      * 导出视频预设配置 Id，推荐优先使用下面的默认预设配置 Id，有其他需求可通过接口定制预设配置。
 <li>10：分辨率为 480P，输出视频格式为 MP4；</li>
 <li>11：分辨率为 720P，输出视频格式为 MP4；</li>
 <li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
       */
     Definition: number;
     /**
-      * 导出目标。
-<li>CME：云剪，即导出为云剪素材；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+      * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：云剪，即导出为云剪媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在云剪媒资库将不可见。</li>
       */
     ExportDestination: string;
     /**
@@ -964,9 +969,9 @@ export interface ExportVideoByEditorTrackDataRequest {
       */
     TrackData: string;
     /**
-      * 轨道数据对应的画布宽高比，配合视频编码配置中的视频短边尺寸，可决定导出画面的尺寸。例：
-<li>如果 AspectRatio 取值 16:9，视频编码配置选为12（短边1080），则导出尺寸为 1920 * 1080；</li>
-<li>如果 AspectRatio 取值 9:16，视频编码配置选为11（短边720），则导出尺寸为 720 *1280。</li>
+      * 轨道数据对应的画布宽高比，配合预设配置中的视频短边尺寸，可决定导出画面的尺寸。例：
+<li>如果 AspectRatio 取值 16:9，预设配置选为12（短边1080），则导出尺寸为 1920 * 1080；</li>
+<li>如果 AspectRatio 取值 9:16，预设配置选为11（短边720），则导出尺寸为 720 *1280。</li>
       */
     AspectRatio?: string;
     /**
@@ -982,7 +987,7 @@ export interface ExportVideoByEditorTrackDataRequest {
       */
     VODExportInfo?: VODExportInfo;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验导出操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，轨道数据中使的媒资该操作者需要拥有使用权限。
       */
     Operator?: string;
 }
@@ -1031,7 +1036,7 @@ export interface VideoEditProjectOutput {
  */
 export interface CreateProjectRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -1039,8 +1044,9 @@ export interface CreateProjectRequest {
       */
     Name: string;
     /**
-      * 项目归属者。
-注：云转推项目，仅支持个人归属。
+      * 项目归属者，即项目的所有者，后续操作只有该所有者有权限操作。
+
+注：目前所有项目只能设置归属个人，暂不支持团队项目。
       */
     Owner: Entity;
     /**
@@ -1055,8 +1061,10 @@ export interface CreateProjectRequest {
     /**
       * 项目模式，一个项目可以有多种模式并相互切换。
 当 Category 为 VIDEO_EDIT 时，可选模式有：
-<li>Default：默认模式。</li>
-<li>VideoEditTemplate：视频编辑模板制作模式。</li>
+<li>Default：默认模式，即普通视频编辑项目。</li>
+<li>VideoEditTemplate：剪辑模板制作模式，用于制作剪辑模板。</li>
+
+注：不填则为默认模式。
       */
     Mode?: string;
     /**
@@ -1069,27 +1077,27 @@ export interface CreateProjectRequest {
       */
     Description?: string;
     /**
-      * 导播台信息，仅当项目类型为 SWITCHER 时必填。
+      * 导播台项目输入信息，仅当项目类型为 SWITCHER 时必填。
       */
     SwitcherProjectInput?: SwitcherProjectInput;
     /**
-      * 直播剪辑信息，暂未开放，请勿使用。
+      * 直播剪辑项目输入信息，暂未开放，请勿使用。
       */
     LiveStreamClipProjectInput?: LiveStreamClipProjectInput;
     /**
-      * 视频编辑信息，仅当项目类型为 VIDEO_EDIT 时必填。
+      * 视频编辑项目输入信息，仅当项目类型为 VIDEO_EDIT 时必填。
       */
     VideoEditProjectInput?: VideoEditProjectInput;
     /**
-      * 视频拆条信息，仅当项目类型为 VIDEO_SEGMENTATION  时必填。
+      * 视频拆条项目输入信息，仅当项目类型为 VIDEO_SEGMENTATION  时必填。
       */
     VideoSegmentationProjectInput?: VideoSegmentationProjectInput;
     /**
-      * 云转推项目信息，仅当项目类型为 STREAM_CONNECT 时必填。
+      * 云转推项目输入信息，仅当项目类型为 STREAM_CONNECT 时必填。
       */
     StreamConnectProjectInput?: StreamConnectProjectInput;
     /**
-      * 录制回放项目信息，仅当项目类型为 RECORD_REPLAY 时必填。
+      * 录制回放项目输入信息，仅当项目类型为 RECORD_REPLAY 时必填。
       */
     RecordReplayProjectInput?: RecordReplayProjectInput;
 }
@@ -1098,19 +1106,19 @@ export interface CreateProjectRequest {
  */
 export interface ModifyMaterialRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 媒体 Id。
+      * 要修改的媒体 Id。
       */
     MaterialId: string;
     /**
-      * 媒体或分类路径归属。
+      * 媒体归属者。
       */
     Owner?: Entity;
     /**
-      * 媒体名称，不能超过30个字符。
+      * 媒体名称，不能超过30个字符，不填则不修改。
       */
     Name?: string;
     /**
@@ -1118,7 +1126,7 @@ export interface ModifyMaterialRequest {
       */
     ClassPath?: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以修改任意媒体的信息。如果指定操作者，则操作者必须对媒体有写权限。
       */
     Operator?: string;
 }
@@ -1142,13 +1150,13 @@ export interface Authorizer {
  */
 export interface DescribePlatformsResponse {
     /**
-      * 符合搜索条件的记录总数。
+      * 符合查询条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 平台信息列表。
       */
-    PlatformInfoSet?: Array<PlatformInfo>;
+    PlatformInfoSet: Array<PlatformInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1159,16 +1167,18 @@ export interface DescribePlatformsResponse {
  */
 export interface DescribeTasksRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 项目 Id。
+      * 项目 Id，使用项目 Id 进行过滤。
       */
     ProjectId?: string;
     /**
       * 任务类型集合，取值有：
 <li>VIDEO_EDIT_PROJECT_EXPORT：视频编辑项目导出。</li>
+
+注：不填不使用任务类型进行过滤。
       */
     TaskTypeSet?: Array<string>;
     /**
@@ -1176,6 +1186,8 @@ export interface DescribeTasksRequest {
 <li>PROCESSING：处理中；</li>
 <li>SUCCESS：成功；</li>
 <li>FAIL：失败。</li>
+
+注：不填则不使用任务状态进行过滤。
       */
     StatusSet?: Array<string>;
     /**
@@ -1187,7 +1199,7 @@ export interface DescribeTasksRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以获取所有任务信息。如果指定操作者，则操作者需要是任务发起者。
       */
     Operator?: string;
 }
@@ -1258,11 +1270,11 @@ export interface StorageNewFileCreatedEvent {
  */
 export interface DescribeLoginStatusRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 用户 Id 列表，N 从 0 开始取值，最大 19。
+      * 用户 Id 列表，N 从0开始取值，最大19。
       */
     UserIds: Array<string>;
 }
@@ -1344,7 +1356,7 @@ export interface CreateLinkResponse {
     /**
       * 新建链接的媒体 Id。
       */
-    MaterialId?: string;
+    MaterialId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1529,7 +1541,7 @@ export interface ModifyVideoEncodingPresetResponse {
  */
 export interface DescribeJoinTeamsRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -1594,8 +1606,7 @@ export interface CreateProjectResponse {
       */
     ProjectId: string;
     /**
-      * 输入源推流信息。
- <li> 当 Catagory 为 STREAM_CONNECT 时，数组返回长度为 2 ，第 0 个代表主输入源，第 1 个代表备输入源。只有当各自输入源类型为推流时才有有效内容。</li>
+      * <li> 当 Catagory 为 STREAM_CONNECT 时，数组返回长度为2 ，第0个代表主输入源推流信息，第1个代表备输入源推流信息。只有当各自输入源类型为推流时才有有效内容。</li>
       */
     RtmpPushInputInfoSet: Array<RtmpPushInputInfo>;
     /**
@@ -1687,11 +1698,11 @@ export interface DeleteClassRequest {
  */
 export interface CreateLinkRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 链接类型，取值有:
+      * 链接类型，可取值有:
 <li>CLASS: 分类链接；</li>
 <li> MATERIAL：媒体文件链接。</li>
       */
@@ -1705,7 +1716,7 @@ export interface CreateLinkRequest {
       */
     Owner: Entity;
     /**
-      * 目标资源Id。取值：
+      * 目标资源Id。可取值有：
 <li>当 Type 为 MATERIAL 时填媒体 ID；</li>
 <li>当 Type 为 CLASS 时填写分类路径。</li>
       */
@@ -1719,7 +1730,7 @@ export interface CreateLinkRequest {
       */
     ClassPath?: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以创建任意源及目标资源的链接。如果指定操作者，则操作者必须对源资源有读权限，对目标媒体有写权限。
       */
     Operator?: string;
 }
@@ -1751,7 +1762,7 @@ export interface DescribeMaterialsResponse {
     /**
       * 媒体列表信息。
       */
-    MaterialInfoSet?: Array<MaterialInfo>;
+    MaterialInfoSet: Array<MaterialInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1841,7 +1852,7 @@ export interface CMEExportInfo {
  */
 export interface MoveResourceRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -1853,7 +1864,7 @@ export interface MoveResourceRequest {
       */
     DestinationResource: ResourceInfo;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验资源访问以及写权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以移动任务资源。如果指定操作者，则操作者必须对源及目标资源有写权限。
       */
     Operator?: string;
 }
@@ -1871,7 +1882,7 @@ export interface LivePullInputInfo {
  */
 export interface ImportMediaToProjectRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -1895,17 +1906,18 @@ export interface ImportMediaToProjectRequest {
       */
     ExternalMediaInfo?: ExternalMediaInfo;
     /**
-      * 媒体名称，不能超过30个字符。
+      * 媒体名称，不能超过30个字符。如果不填，则媒体名称为点播媒资文件名称。
       */
     Name?: string;
     /**
-      * 媒体预处理任务模板 ID，取值：
-<li>10：进行编辑预处理。</li>
-注意：如果填0则不进行处理。
+      * 媒体预处理配置 ID，取值：
+<li>10：进行视频编辑预处理。</li>
+
+注意：如果填0或者不填则不进行处理，如果原始视频不可在浏览器直接播放将无法在编辑页面编辑。
       */
     PreProcessDefinition?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验项目和媒体文件访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以向所有视频编辑项目导入媒体；如果指定操作者，则操作者必须为项目所有者。
       */
     Operator?: string;
 }
@@ -2013,12 +2025,11 @@ export interface DescribeSharedSpaceResponse {
     /**
       * 查询到的共享空间总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 各个共享空间对应的授权者信息。
-注意：此字段可能返回 null，表示取不到有效值。
       */
-    AuthorizerSet?: Array<Authorizer>;
+    AuthorizerSet: Array<Authorizer>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2139,11 +2150,11 @@ export interface DescribeTeamMembersResponse {
     /**
       * 符合条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 团队成员列表。
       */
-    MemberSet?: Array<TeamMemberInfo>;
+    MemberSet: Array<TeamMemberInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2176,7 +2187,7 @@ export interface CreateTeamResponse {
  */
 export interface ModifyTeamRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2184,11 +2195,11 @@ export interface ModifyTeamRequest {
       */
     TeamId: string;
     /**
-      * 团队名称，不能超过 30 个字符。
+      * 团队名称。团队名称不能置空，并且不能超过30个字符。
       */
     Name?: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以修改所有团队的信息。如果指定操作者，则操作者必须为团队管理员或者所有者。
       */
     Operator?: string;
 }
@@ -2197,7 +2208,7 @@ export interface ModifyTeamRequest {
  */
 export interface ModifyTeamMemberRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2209,17 +2220,17 @@ export interface ModifyTeamMemberRequest {
       */
     MemberId: string;
     /**
-      * 成员备注，允许设置备注为空，不为空时长度不能超过15个字符。
+      * 成员备注，长度不能超过15个字符。
       */
     Remark?: string;
     /**
-      * 成员角色，取值：
+      * 成员角色，可取值有：
 <li>Admin：团队管理员；</li>
 <li>Member：普通成员。</li>
       */
     Role?: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以个改任意团队成员的信息。如果指定操作者，则操作者必须为团队的管理员或者所有者。
       */
     Operator?: string;
 }
@@ -2389,7 +2400,7 @@ export interface JoinTeamInfo {
  */
 export interface DescribeResourceAuthorizationRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2401,7 +2412,7 @@ export interface DescribeResourceAuthorizationRequest {
       */
     Resource?: Resource;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以查询任意资源的被授权情况。如果指定操作者，则操作者必须对被授权资源有读权限。
       */
     Operator?: string;
 }
@@ -2561,7 +2572,7 @@ export interface VideoStreamInfo {
  */
 export interface AddTeamMemberRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2573,7 +2584,7 @@ export interface AddTeamMemberRequest {
       */
     TeamMembers: Array<AddMemberInfo>;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以向任意团队中添加成员。如果指定操作者，则操作者必须为管理员或者团队所有者。
       */
     Operator?: string;
 }
@@ -2582,7 +2593,7 @@ export interface AddTeamMemberRequest {
  */
 export interface GrantResourceAuthorizationRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2606,7 +2617,7 @@ export interface GrantResourceAuthorizationRequest {
       */
     Permissions: Array<string>;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以授权任意归属者的资源。如果指定操作者，则操作者必须对资源拥有写权限。
       */
     Operator?: string;
 }
@@ -2640,7 +2651,7 @@ export interface ThirdPartyPublishInfo {
  */
 export interface ListMediaRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2660,7 +2671,7 @@ export interface ListMediaRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验对媒体的访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以浏览任意分类的信息。如果指定操作者，则操作者必须对分类有读权限。
       */
     Operator?: string;
 }
@@ -2721,7 +2732,7 @@ export interface DeleteLoginStatusRequest {
  */
 export interface GenerateVideoSegmentationSchemeByAiRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2729,7 +2740,7 @@ export interface GenerateVideoSegmentationSchemeByAiRequest {
       */
     ProjectId: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以对任务视频拆条项目发起拆条任务。如果指定操作者，则操作者必须为项目所有者。
       */
     Operator?: string;
 }
@@ -2751,7 +2762,7 @@ export interface LiveStreamClipProjectInput {
  */
 export interface DeleteTeamMembersRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2763,7 +2774,7 @@ export interface DeleteTeamMembersRequest {
       */
     MemberIds: Array<string>;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以删除所有团队的成员。如果指定操作者，则操作者必须为团队管理员或者所有者。
       */
     Operator?: string;
 }
@@ -2772,7 +2783,7 @@ export interface DeleteTeamMembersRequest {
  */
 export interface ExportVideoByTemplateRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -2780,16 +2791,16 @@ export interface ExportVideoByTemplateRequest {
       */
     TemplateId: string;
     /**
-      * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+      * 导出视频预设配置 Id，推荐优先使用下面的默认预设配置 Id，有其他需求可通过接口定制预设配置。
 <li>10：分辨率为 480P，输出视频格式为 MP4；</li>
 <li>11：分辨率为 720P，输出视频格式为 MP4；</li>
 <li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
       */
     Definition: number;
     /**
-      * 导出目标，可取值为：
-<li>CME：云剪，即导出为云剪媒体；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+      * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：云剪，即导出为云剪媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在云剪媒资库将不可见。</li>
       */
     ExportDestination: string;
     /**
@@ -2797,7 +2808,7 @@ export interface ExportVideoByTemplateRequest {
       */
     SlotReplacements?: Array<SlotReplacementInfo>;
     /**
-      * 导出的云剪媒体信息。当导出目标为 CME 时必填。
+      * 导出的云剪媒资信息。当导出目标为 CME 时必填。
       */
     CMEExportInfo?: CMEExportInfo;
     /**
@@ -2805,7 +2816,7 @@ export interface ExportVideoByTemplateRequest {
       */
     VODExportInfo?: VODExportInfo;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验项目导出权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，则操作者需要有替换媒体及剪辑模板的权限。
       */
     Operator?: string;
 }
@@ -2814,11 +2825,11 @@ export interface ExportVideoByTemplateRequest {
  */
 export interface DescribePlatformsRequest {
     /**
-      * 平台集合。
+      * 平台 Id 列表。如果不填，则不按平台 Id 进行过滤。
       */
     Platforms?: Array<string>;
     /**
-      * 平台绑定的 license Id 集合。
+      * 平台绑定的 License Id 列表。如果不填，则不按平台绑定的 License Id 进行过滤。
       */
     LicenseIds?: Array<string>;
     /**
@@ -2826,7 +2837,7 @@ export interface DescribePlatformsRequest {
       */
     Offset?: number;
     /**
-      * 分页返回的记录条数，默认值：10。
+      * 分页返回的记录条数，默认值：10，最大值：20。
       */
     Limit?: number;
 }
@@ -2980,41 +2991,47 @@ export interface AccountInfo {
  */
 export interface DescribeProjectsRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 项目 Id 列表，N 从 0 开始取值，最大 19。
+      * 项目 Id 过滤参数列表，最大支持20个项目 Id 过滤。如果不填不需要项目 Id 进行过滤。
       */
     ProjectIds?: Array<string>;
     /**
-      * 画布宽高比集合。
+      * 画布宽高比过滤参数列表。如果不填则不用画布宽高比进行过滤。
       */
     AspectRatioSet?: Array<string>;
     /**
-      * 项目类别，取值有：
+      * 项目类型过滤参数列表，取值有：
 <li>VIDEO_EDIT：视频编辑。</li>
 <li>SWITCHER：导播台。</li>
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
 <li>STREAM_CONNECT：云转推。</li>
 <li>RECORD_REPLAY：录制回放。</li>
+
+注：如果不填则不使用项目类型进行过滤。
       */
     CategorySet?: Array<string>;
     /**
-      * 项目模式，一个项目可以有多种模式并相互切换。
+      * 项目模式过滤参数列表，一个项目可以有多种模式并相互切换。
 当 Category 为 VIDEO_EDIT 时，可选模式有：
 <li>Default：默认模式。</li>
 <li>VideoEditTemplate：视频编辑模板制作模式。</li>
+
+注：不填不使用项目模式进行过滤。
       */
     Modes?: Array<string>;
     /**
-      * 列表排序，支持下列排序字段：
+      * 结果排序方式，支持下列排序字段：
 <li>CreateTime：创建时间；</li>
 <li>UpdateTime：更新时间。</li>
+
+注：如不填，则使用项目创建时间倒序排列。
       */
     Sort?: SortBy;
     /**
-      * 项目归属者。
+      * 项目所有者，目前仅支持个人项目过滤。
       */
     Owner?: Entity;
     /**
@@ -3026,7 +3043,7 @@ export interface DescribeProjectsRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验项目访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以查询一切用户项目信息。如果指定操作者，则操作者必须为项目所有者。
       */
     Operator?: string;
 }
@@ -3037,7 +3054,7 @@ export interface DescribeLoginStatusResponse {
     /**
       * 用户登录状态列表。
       */
-    LoginStatusInfoSet?: Array<LoginStatusInfo>;
+    LoginStatusInfoSet: Array<LoginStatusInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3122,7 +3139,7 @@ export interface DescribeJoinTeamsResponse {
  */
 export interface DescribeTeamMembersRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -3142,7 +3159,7 @@ export interface DescribeTeamMembersRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以拉取任意团队成员的信息。如果指定操作者，则操作者必须为团队成员。
       */
     Operator?: string;
 }
@@ -3310,7 +3327,7 @@ export interface DeleteMaterialResponse {
  */
 export interface RevokeResourceAuthorizationRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -3334,7 +3351,7 @@ export interface RevokeResourceAuthorizationRequest {
       */
     Permissions: Array<string>;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，撤销任意资源的授权权限。如果指定操作者，则操作者必须对被授权资源有写权限。
       */
     Operator?: string;
 }
@@ -3343,7 +3360,7 @@ export interface RevokeResourceAuthorizationRequest {
  */
 export interface DescribeTaskDetailRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -3351,7 +3368,7 @@ export interface DescribeTaskDetailRequest {
       */
     TaskId: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以获取任意任务信息。如果指定操作者，则操作者需要是任务发起者。
       */
     Operator?: string;
 }
@@ -3457,7 +3474,7 @@ export interface DescribeTasksResponse {
  */
 export interface ModifyProjectRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
@@ -3469,20 +3486,18 @@ export interface ModifyProjectRequest {
       */
     Name?: string;
     /**
-      * 画布宽高比，取值有：
-<li>16:9；</li>
-<li>9:16。</li>
+      * 画布宽高比，值为视频编辑项目画布宽与高的像素值的比值，如 16:9、9:16 等。
       */
     AspectRatio?: string;
     /**
-      * 项目归属者。
+      * 项目所有者。目前仅支持个人项目，不支持团队项目。
       */
     Owner?: Entity;
     /**
       * 项目模式，一个项目可以有多种模式并相互切换。
 当 Category 为 VIDEO_EDIT 时，可选模式有：
-<li>Defualt：默认模式。</li>
-<li>VideoEditTemplate：视频编辑模板制作模式。</li>
+<li>Default：默认模式，即普通视频编辑项目。</li>
+<li>VideoEditTemplate：剪辑模板制作模式，用于制作剪辑模板。</li>
       */
     Mode?: string;
 }
@@ -3609,15 +3624,15 @@ export interface PresetTagInfo {
  */
 export interface DescribeSharedSpaceRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 被授权目标,，个人或团队。
+      * 被授权目标，个人或团队。
       */
     Authorizee: Entity;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以查询任意个人或者团队的共享空间。如果指定操作者，则操作者必须本人或者团队成员。
       */
     Operator?: string;
 }
@@ -3832,11 +3847,11 @@ export interface VideoEncodingPreset {
  */
 export interface ImportMaterialRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 媒体归属者，团队或个人。
+      * 媒体归属者，可支持归属团队或个人。
       */
     Owner: Entity;
     /**
@@ -3848,7 +3863,7 @@ export interface ImportMaterialRequest {
 <li>VOD：云点播文件；</li>
 <li>EXTERNAL：媒资绑定。</li>
 
-注意：如果不填默认为云点播文件，如果媒体存储在非腾讯云点播中，都需要使用媒资绑定。
+注意：如果不填默认为云点播文件，如果媒体存储在非腾讯云点播中，都需要使用媒资绑定。另外，导入云点播的文件，使用云点播的子应用 Id 必须与创建云剪平台时使用的云点播子应用一致。
       */
     SourceType?: string;
     /**
@@ -3864,12 +3879,12 @@ export interface ImportMaterialRequest {
       */
     ClassPath?: string;
     /**
-      * 媒体预处理任务模板 ID。取值：
+      * 媒体预处理任务参数 ID。可取值有：
 <li>10：进行编辑预处理。</li>
       */
     PreProcessDefinition?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以向任意团队或者个人导入媒体。如果指定操作者，如果媒体归属为个人，则操作者必须与归属者一致；如果媒体归属为团队，则必须为团队可导入媒体的团队成员(如果没有特殊设置，所有团队成员可导入媒体)。
       */
     Operator?: string;
 }
@@ -3887,11 +3902,11 @@ export interface TextReplacementInfo {
  */
 export interface DescribeMaterialsRequest {
     /**
-      * 平台名称，指定访问的平台。
+      * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
       */
     Platform: string;
     /**
-      * 媒体 ID 列表，N 从 0 开始取值，最大 19。
+      * 媒体 ID 列表，一次最多可拉取20个媒体的信息。
       */
     MaterialIds: Array<string>;
     /**
@@ -3901,7 +3916,7 @@ export interface DescribeMaterialsRequest {
       */
     Sort?: SortBy;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验媒体的访问权限。
+      * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以获取任意媒体的信息。如果指定操作者，则操作者必须对媒体有读权限。
       */
     Operator?: string;
 }

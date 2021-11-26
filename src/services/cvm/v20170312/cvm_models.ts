@@ -4126,7 +4126,9 @@ export interface DescribeImagesRequest {
 <li> image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：
     PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像) 
     PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
-   SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像) 。</li>
+    SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像) 。</li>
+<li> image-name - String - 是否必填： 否 - （过滤条件）按照镜像名称进行过滤</li>
+<li> platform - String - 是否必填： 否 - （过滤条件）按照镜像平台过滤，如 CentOS</li>
       */
   Filters?: Array<Filter>
 

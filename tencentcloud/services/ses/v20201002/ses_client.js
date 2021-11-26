@@ -83,7 +83,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetStatisticsReport", req, cb);
     }
     /**
-     * 获取邮件发送状态。仅支持查询90天之内的数据
+     * 获取邮件发送状态。仅支持查询180天之内的数据
      */
     async GetSendEmailStatus(req, cb) {
         return this.request("GetSendEmailStatus", req, cb);

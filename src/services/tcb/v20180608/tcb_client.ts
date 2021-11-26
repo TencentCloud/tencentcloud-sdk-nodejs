@@ -216,6 +216,7 @@ import {
   PostpayEnvQuota,
   DescribeCloudBaseRunVersionSnapshotResponse,
   DescribePostpayPackageFreeQuotasResponse,
+  OneClickTaskStepInfo,
   DescribeExtraPkgBillingInfoResponse,
   CloudBaseCodeRepoName,
   ModifyCloudBaseRunServerVersionRequest,

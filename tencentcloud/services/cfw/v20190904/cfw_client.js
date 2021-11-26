@@ -440,6 +440,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlockByIpTimesList", req, cb);
     }
     /**
+     * 获取地址模版列表
+     */
+    async DescribeAddrTemplateList(req, cb) {
+        return this.request("DescribeAddrTemplateList", req, cb);
+    }
+    /**
      * DescribeBlockStaticList 告警中心柱形图
 
      */

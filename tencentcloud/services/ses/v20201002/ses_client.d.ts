@@ -45,7 +45,7 @@ export declare class Client extends AbstractClient {
      */
     GetStatisticsReport(req: GetStatisticsReportRequest, cb?: (error: string, rep: GetStatisticsReportResponse) => void): Promise<GetStatisticsReportResponse>;
     /**
-     * 获取邮件发送状态。仅支持查询90天之内的数据
+     * 获取邮件发送状态。仅支持查询180天之内的数据
      */
     GetSendEmailStatus(req: GetSendEmailStatusRequest, cb?: (error: string, rep: GetSendEmailStatusResponse) => void): Promise<GetSendEmailStatusResponse>;
     /**

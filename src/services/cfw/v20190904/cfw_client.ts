@@ -58,6 +58,7 @@ import {
   DeleteSecurityGroupRuleResponse,
   ModifySecurityGroupAllRuleStatusRequest,
   ModifySequenceRulesRequest,
+  DescribeAddrTemplateListRequest,
   CreateNatFwInstanceRequest,
   ModifySecurityGroupItemRuleStatusResponse,
   DescribeEnterpriseSecurityGroupRuleResponse,
@@ -79,6 +80,7 @@ import {
   DescribeTLogInfoRequest,
   DescribeSecurityGroupListResponse,
   AssetZone,
+  DescribeAddrTemplateListResponse,
   RunSyncAssetRequest,
   DescribeTLogIpListRequest,
   DescribeNatFwInstancesInfoRequest,
@@ -154,6 +156,7 @@ import {
   StopSecurityGroupRuleDispatchRequest,
   DescribeGuideScanInfoRequest,
   ModifyBlockTopResponse,
+  TemplateListInfo,
   CreateSecurityGroupApiRulesRequest,
   DescribeNatFwVpcDnsLstResponse,
   CreateChooseVpcsRequest,
@@ -875,6 +878,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void
   ): Promise<DescribeBlockByIpTimesListResponse> {
     return this.request("DescribeBlockByIpTimesList", req, cb)
+  }
+
+  /**
+   * 获取地址模版列表
+   */
+  async DescribeAddrTemplateList(
+    req: DescribeAddrTemplateListRequest,
+    cb?: (error: string, rep: DescribeAddrTemplateListResponse) => void
+  ): Promise<DescribeAddrTemplateListResponse> {
+    return this.request("DescribeAddrTemplateList", req, cb)
   }
 
   /**

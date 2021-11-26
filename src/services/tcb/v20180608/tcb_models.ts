@@ -2713,6 +2713,16 @@ finished
   UserEnvId: string
 
   /**
+   * 创建时间
+   */
+  StartTime: string
+
+  /**
+   * 步骤信息
+   */
+  Steps: Array<OneClickTaskStepInfo>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5827,6 +5837,44 @@ export interface DescribePostpayPackageFreeQuotasResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 一键部署步骤信息
+ */
+export interface OneClickTaskStepInfo {
+  /**
+      * 未启动："todo"
+运行中："running"
+失败："failed"
+成功结束："finished"
+      */
+  Status: string
+
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 耗时：秒
+   */
+  CostTime: number
+
+  /**
+   * 失败原因
+   */
+  FailReason: string
+
+  /**
+   * 步骤名
+   */
+  Name: string
 }
 
 /**

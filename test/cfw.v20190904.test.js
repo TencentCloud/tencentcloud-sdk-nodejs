@@ -688,6 +688,16 @@ it("cfw.v20190904.DescribeBlockByIpTimesList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeAddrTemplateList", async function () {
+    try {
+       const data = await client.DescribeAddrTemplateList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeBlockStaticList", async function () {
     try {
        const data = await client.DescribeBlockStaticList({})

@@ -344,6 +344,11 @@ export interface DescribeUpgradePriceRequest {
  查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
       */
   Storage: number
+
+  /**
+   * 新节点数，传0表示节点数不变
+   */
+  NodeCount?: number
 }
 
 /**
@@ -1992,6 +1997,11 @@ export interface UpgradeDBInstanceRequest {
    * 代金券ID列表，目前仅支持指定一张代金券。
    */
   VoucherIds?: Array<string>
+
+  /**
+   * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
+   */
+  Zones?: Array<string>
 }
 
 /**
@@ -3583,7 +3593,7 @@ export interface UpgradeDBInstanceResponse {
       * 长订单号。可以据此调用 DescribeOrders
  查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
       */
-  DealName?: string
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
