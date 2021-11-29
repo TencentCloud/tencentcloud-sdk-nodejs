@@ -256,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddExistedInstances", req, cb);
     }
     /**
+     * 关闭集群删除保护
+     */
+    async DisableClusterDeletionProtection(req, cb) {
+        return this.request("DisableClusterDeletionProtection", req, cb);
+    }
+    /**
      * 获取targets信息
      */
     async DescribePrometheusTargets(req, cb) {
@@ -554,6 +560,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEnableVpcCniProgress(req, cb) {
         return this.request("DescribeEnableVpcCniProgress", req, cb);
+    }
+    /**
+     * 启用集群删除保护
+     */
+    async EnableClusterDeletionProtection(req, cb) {
+        return this.request("EnableClusterDeletionProtection", req, cb);
     }
     /**
      * 同步模板到实例或者集群

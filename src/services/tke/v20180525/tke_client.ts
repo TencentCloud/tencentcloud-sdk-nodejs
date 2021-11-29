@@ -67,6 +67,7 @@ import {
   DeleteClusterAsGroupsRequest,
   DescribeClusterControllersResponse,
   DescribeExistedInstancesRequest,
+  InstanceExtraArgs,
   Tag,
   DescribeRegionsResponse,
   PrometheusAlertHistoryItem,
@@ -78,6 +79,7 @@ import {
   ScaleInMaster,
   DescribeEKSContainerInstanceEventResponse,
   DescribePrometheusAlertRuleResponse,
+  EnableClusterDeletionProtectionResponse,
   ClusterAsGroup,
   Instance,
   LoginSettings,
@@ -145,12 +147,13 @@ import {
   DescribePrometheusAlertRuleRequest,
   DescribeEKSClusterCredentialRequest,
   GetUpgradeInstanceProgressRequest,
+  EnableClusterDeletionProtectionRequest,
   ModifyPrometheusTemplateRequest,
   DescribeExternalClusterSpecResponse,
   AddNodeToNodePoolResponse,
   PodLimitsByType,
   UpdateEKSClusterResponse,
-  InstanceExtraArgs,
+  DisableClusterDeletionProtectionRequest,
   NodePool,
   Event,
   DescribeRegionsRequest,
@@ -236,6 +239,7 @@ import {
   AddExistedInstancesResponse,
   DeleteClusterRouteTableResponse,
   CreateClusterInstancesResponse,
+  DisableClusterDeletionProtectionResponse,
   DescribeClusterAsGroupOptionRequest,
   DescribePrometheusAgentInstancesResponse,
   Container,
@@ -693,6 +697,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddExistedInstancesResponse) => void
   ): Promise<AddExistedInstancesResponse> {
     return this.request("AddExistedInstances", req, cb)
+  }
+
+  /**
+   * 关闭集群删除保护
+   */
+  async DisableClusterDeletionProtection(
+    req: DisableClusterDeletionProtectionRequest,
+    cb?: (error: string, rep: DisableClusterDeletionProtectionResponse) => void
+  ): Promise<DisableClusterDeletionProtectionResponse> {
+    return this.request("DisableClusterDeletionProtection", req, cb)
   }
 
   /**
@@ -1193,6 +1207,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnableVpcCniProgressResponse) => void
   ): Promise<DescribeEnableVpcCniProgressResponse> {
     return this.request("DescribeEnableVpcCniProgress", req, cb)
+  }
+
+  /**
+   * 启用集群删除保护
+   */
+  async EnableClusterDeletionProtection(
+    req: EnableClusterDeletionProtectionRequest,
+    cb?: (error: string, rep: EnableClusterDeletionProtectionResponse) => void
+  ): Promise<EnableClusterDeletionProtectionResponse> {
+    return this.request("EnableClusterDeletionProtection", req, cb)
   }
 
   /**

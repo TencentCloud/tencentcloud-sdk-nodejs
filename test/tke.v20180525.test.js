@@ -398,6 +398,16 @@ it("tke.v20180525.AddExistedInstances", async function () {
     }
 })
 
+it("tke.v20180525.DisableClusterDeletionProtection", async function () {
+    try {
+       const data = await client.DisableClusterDeletionProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribePrometheusTargets", async function () {
     try {
        const data = await client.DescribePrometheusTargets({})
@@ -891,6 +901,16 @@ it("tke.v20180525.DescribePrometheusTemplates", async function () {
 it("tke.v20180525.DescribeEnableVpcCniProgress", async function () {
     try {
        const data = await client.DescribeEnableVpcCniProgress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.EnableClusterDeletionProtection", async function () {
+    try {
+       const data = await client.EnableClusterDeletionProtection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

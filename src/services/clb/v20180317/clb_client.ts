@@ -31,6 +31,7 @@ import {
   CreateLoadBalancerRequest,
   RuleHealth,
   DeleteRuleRequest,
+  CloneLoadBalancerRequest,
   DisassociateTargetGroupsResponse,
   SetLoadBalancerClsLogResponse,
   DescribeLoadBalancerTrafficResponse,
@@ -165,6 +166,7 @@ import {
   DescribeTargetHealthRequest,
   ReplaceCertForLoadBalancersRequest,
   DeleteRuleResponse,
+  CloneLoadBalancerResponse,
   DescribeClsLogSetResponse,
   ModifyTargetGroupAttributeRequest,
   ExclusiveCluster,
@@ -878,6 +880,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLoadBalancerTrafficResponse) => void
   ): Promise<DescribeLoadBalancerTrafficResponse> {
     return this.request("DescribeLoadBalancerTraffic", req, cb)
+  }
+
+  /**
+   * 克隆负载均衡实例，根据指定的负载均衡实例，复制出相同规则和绑定关系的负载均衡实例。
+   */
+  async CloneLoadBalancer(
+    req: CloneLoadBalancerRequest,
+    cb?: (error: string, rep: CloneLoadBalancerResponse) => void
+  ): Promise<CloneLoadBalancerResponse> {
+    return this.request("CloneLoadBalancer", req, cb)
   }
 
   /**

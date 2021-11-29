@@ -433,6 +433,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLoadBalancerTraffic", req, cb);
     }
     /**
+     * 克隆负载均衡实例，根据指定的负载均衡实例，复制出相同规则和绑定关系的负载均衡实例。
+     */
+    async CloneLoadBalancer(req, cb) {
+        return this.request("CloneLoadBalancer", req, cb);
+    }
+    /**
      * 批量修改目标组服务器端口。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */

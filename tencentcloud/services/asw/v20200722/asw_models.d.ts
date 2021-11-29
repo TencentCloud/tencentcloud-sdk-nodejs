@@ -276,7 +276,7 @@ export interface StartExecutionRequest {
       */
     StateMachineResourceName: string;
     /**
-      * 输入参数
+      * 输入参数，内容为JsonObject，长度不大于524288字符。
       */
     Input?: string;
     /**
@@ -359,11 +359,11 @@ export interface StartExecutionResponse {
     /**
       * 执行资源名
       */
-    ExecutionResourceName?: string;
+    ExecutionResourceName: string;
     /**
       * 执行开始时间
       */
-    StartDate?: string;
+    StartDate: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

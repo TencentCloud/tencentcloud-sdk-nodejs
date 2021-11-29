@@ -983,6 +983,16 @@ export interface DescribeExistedInstancesRequest {
     IpAddresses?: Array<string>;
 }
 /**
+ * 节点自定义参数
+ */
+export interface InstanceExtraArgs {
+    /**
+      * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Kubelet?: Array<string>;
+}
+/**
  * 标签绑定的资源类型，当前支持类型："cluster"
  */
 export interface Tag {
@@ -1196,6 +1206,15 @@ export interface DescribePrometheusAlertRuleResponse {
       * 总数
       */
     Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * EnableClusterDeletionProtection返回参数结构体
+ */
+export interface EnableClusterDeletionProtectionResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2592,6 +2611,15 @@ export interface GetUpgradeInstanceProgressRequest {
     Offset?: number;
 }
 /**
+ * EnableClusterDeletionProtection请求参数结构体
+ */
+export interface EnableClusterDeletionProtectionRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+}
+/**
  * ModifyPrometheusTemplate请求参数结构体
  */
 export interface ModifyPrometheusTemplateRequest {
@@ -2660,14 +2688,13 @@ export interface UpdateEKSClusterResponse {
     RequestId?: string;
 }
 /**
- * 节点自定义参数
+ * DisableClusterDeletionProtection请求参数结构体
  */
-export interface InstanceExtraArgs {
+export interface DisableClusterDeletionProtectionRequest {
     /**
-      * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
-注意：此字段可能返回 null，表示取不到有效值。
+      * 集群ID
       */
-    Kubelet?: Array<string>;
+    ClusterId: string;
 }
 /**
  * 节点池描述
@@ -4467,6 +4494,15 @@ export interface CreateClusterInstancesResponse {
       * 节点实例ID
       */
     InstanceIdSet?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DisableClusterDeletionProtection返回参数结构体
+ */
+export interface DisableClusterDeletionProtectionResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

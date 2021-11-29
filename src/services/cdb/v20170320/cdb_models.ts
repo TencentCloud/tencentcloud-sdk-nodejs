@@ -7010,7 +7010,7 @@ export interface SlowLogItem {
   Timestamp: number
 
   /**
-      * Sql的执行时长。
+      * Sql的执行时长（秒）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QueryTime: number
@@ -7040,7 +7040,7 @@ export interface SlowLogItem {
   Database: string
 
   /**
-      * 锁时长。
+      * 锁时长（秒）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LockTime: number

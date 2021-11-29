@@ -166,7 +166,7 @@ export interface VerifyByAsymmetricKeyRequest {
   Message: string
 
   /**
-   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
+   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
    */
   Algorithm: string
 
@@ -1544,7 +1544,7 @@ export interface EnableKeysResponse {
  */
 export interface SignByAsymmetricKeyRequest {
   /**
-   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
+   * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256 等。更多支持的算法可通过 ListAlgorithms 接口进行查询。
    */
   Algorithm: string
 

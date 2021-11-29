@@ -50,7 +50,7 @@ export declare class Client extends AbstractClient {
     AsymmetricSm2Decrypt(req: AsymmetricSm2DecryptRequest, cb?: (error: string, rep: AsymmetricSm2DecryptResponse) => void): Promise<AsymmetricSm2DecryptResponse>;
     /**
      * 非对称密钥签名。
-注意：只有成功创建了KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2、ASYMMETRIC_SIGN_VERIFY_ECC 或 ASYMMETRIC_SIGN_VERIFY_RSA_2048 的密钥才可以使用签名功能
+注意：只有 KeyUsage 为 ASYMMETRIC_SIGN_VERIFY_SM2、ASYMMETRIC_SIGN_VERIFY_ECC 或其他支持的 ASYMMETRIC_SIGN_VERIFY_${ALGORITHM} 的密钥才可以使用签名功能。
      */
     SignByAsymmetricKey(req: SignByAsymmetricKeyRequest, cb?: (error: string, rep: SignByAsymmetricKeyResponse) => void): Promise<SignByAsymmetricKeyResponse>;
     /**

@@ -648,6 +648,16 @@ it("clb.v20180317.DescribeLoadBalancerTraffic", async function () {
     }
 })
 
+it("clb.v20180317.CloneLoadBalancer", async function () {
+    try {
+       const data = await client.CloneLoadBalancer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.ModifyTargetGroupInstancesPort", async function () {
     try {
        const data = await client.ModifyTargetGroupInstancesPort({})
