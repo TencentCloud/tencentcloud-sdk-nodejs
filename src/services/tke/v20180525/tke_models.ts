@@ -1723,6 +1723,21 @@ export interface DescribePrometheusAgentInstancesRequest {
 }
 
 /**
+ * ForwardApplicationRequestV3返回参数结构体
+ */
+export interface ForwardApplicationRequestV3Response {
+  /**
+   * 请求集群addon后返回的数据
+   */
+  ResponseBody: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 集群网络相关的参数
  */
 export interface ClusterNetworkSettings {
@@ -4562,6 +4577,27 @@ export interface ControllerStatus {
 }
 
 /**
+ * app所支持的chart
+ */
+export interface AppChart {
+  /**
+   * chart名称
+   */
+  Name: string
+
+  /**
+      * chart的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Label: string
+
+  /**
+   * chart的版本
+   */
+  LatestVersion: string
+}
+
+/**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
@@ -4695,6 +4731,26 @@ export interface UpgradeAbleInstancesItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LatestVersion: string
+}
+
+/**
+ * GetTkeAppChartList请求参数结构体
+ */
+export interface GetTkeAppChartListRequest {
+  /**
+   * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
+   */
+  Kind?: string
+
+  /**
+   * app支持的操作系统，取值arm32、arm64、amd64
+   */
+  Arch?: string
+
+  /**
+   * 集群类型，取值tke、eks
+   */
+  ClusterType?: string
 }
 
 /**
@@ -4902,6 +4958,22 @@ export interface RestartEKSContainerInstancesResponse {
  * ModifyPrometheusTemplate返回参数结构体
  */
 export interface ModifyPrometheusTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetTkeAppChartList返回参数结构体
+ */
+export interface GetTkeAppChartListResponse {
+  /**
+      * 所支持的chart列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppCharts: Array<AppChart>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6958,6 +7030,46 @@ export interface DescribeClusterNodePoolDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ForwardApplicationRequestV3请求参数结构体
+ */
+export interface ForwardApplicationRequestV3Request {
+  /**
+   * 请求集群addon的访问
+   */
+  Method: string
+
+  /**
+   * 请求集群addon的路径
+   */
+  Path: string
+
+  /**
+   * 请求集群addon后允许接收的数据格式
+   */
+  Accept?: string
+
+  /**
+   * 请求集群addon的数据格式
+   */
+  ContentType?: string
+
+  /**
+   * 请求集群addon的数据
+   */
+  RequestBody?: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+
+  /**
+   * 是否编码请求内容
+   */
+  EncodedBody?: string
 }
 
 /**

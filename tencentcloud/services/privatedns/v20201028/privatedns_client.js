@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("privatedns.tencentcloudapi.com", "2020-10-28", clientConfig);
     }
     /**
+     * 创建私有域解析账号
+     */
+    async CreatePrivateDNSAccount(req, cb) {
+        return this.request("CreatePrivateDNSAccount", req, cb);
+    }
+    /**
      * 获取私有域信息
      */
     async DescribePrivateZone(req, cb) {
@@ -40,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrivateZoneRecord", req, cb);
     }
     /**
+     * 获取私有域解析账号的VPC列表
+     */
+    async DescribeAccountVpcList(req, cb) {
+        return this.request("DescribeAccountVpcList", req, cb);
+    }
+    /**
      * 获取私有域记录列表
      */
     async DescribePrivateZoneRecordList(req, cb) {
@@ -50,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrivateZoneService(req, cb) {
         return this.request("DescribePrivateZoneService", req, cb);
+    }
+    /**
+     * 删除私有域解析账号
+     */
+    async DeletePrivateDNSAccount(req, cb) {
+        return this.request("DeletePrivateDNSAccount", req, cb);
     }
     /**
      * 获取操作日志列表

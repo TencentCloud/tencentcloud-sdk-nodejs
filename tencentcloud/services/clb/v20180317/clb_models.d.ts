@@ -257,28 +257,29 @@ OPEN：公网属性， INTERNAL：内网属性。
     LoadBalancerPassToTarget?: boolean;
 }
 /**
- * 一条转发规则的健康检查状态
+ * DescribeLoadBalancerOverview返回参数结构体
  */
-export interface RuleHealth {
+export interface DescribeLoadBalancerOverviewResponse {
     /**
-      * 转发规则ID
+      * 负载均衡总数
       */
-    LocationId: string;
+    TotalCount?: number;
     /**
-      * 转发规则的域名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 运行中的负载均衡数目
       */
-    Domain: string;
+    RunningCount?: number;
     /**
-      * 转发规则的Url
-注意：此字段可能返回 null，表示取不到有效值。
+      * 隔离中的负载均衡数目
       */
-    Url: string;
+    IsolationCount?: number;
     /**
-      * 本规则上绑定的后端服务的健康检查状态
-注意：此字段可能返回 null，表示取不到有效值。
+      * 即将到期的负载均衡数目
       */
-    Targets: Array<TargetHealth>;
+    WillExpireCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteRule请求参数结构体
@@ -654,7 +655,8 @@ OPEN：公网属性， INTERNAL：内网属性。
       */
     MasterZone?: string;
     /**
-      * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。详细的过滤条件如下：
+      * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。<br/>`Filter.Name`和`Filter.Values`皆为必填项。详细的过滤条件如下：
+<li> charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的实例计费模式过滤，包括"PREPAID","POSTPAID_BY_HOUR"。</li>
 <li> internet-charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的网络计费模式过滤，包括"BANDWIDTH_PREPAID","TRAFFIC_POSTPAID_BY_HOUR","BANDWIDTH_POSTPAID_BY_HOUR","BANDWIDTH_PACKAGE"。</li>
 <li> master-zone-id - String - 是否必填：否 - （过滤条件）按照 CLB 的主可用区ID过滤，如 ："100001" （对应的是广州一区）。</li>
 <li> tag-key - String - 是否必填：否 - （过滤条件）按照 CLB 标签的键过滤。</li>
@@ -662,6 +664,7 @@ OPEN：公网属性， INTERNAL：内网属性。
 <li> function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。</li>
 <li> function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。</li>
 <li> vip-isp - String - 是否必填：否 - （过滤条件）按照 CLB VIP的运营商类型过滤，如："BGP","INTERNAL","CMCC","CTCC","CUCC"等。</li>
+<li> sla-type - String - 是否必填：否 - （过滤条件）按照 CLB 的性能容量型规格过滤，包括"clb.c2.medium","clb.c3.small","clb.c3.medium","clb.c4.small","clb.c4.medium","clb.c4.large","clb.c4.xlarge"。</li>
       */
     Filters?: Array<Filter>;
 }
@@ -863,6 +866,30 @@ export interface CreateRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 一条转发规则的健康检查状态
+ */
+export interface RuleHealth {
+    /**
+      * 转发规则ID
+      */
+    LocationId: string;
+    /**
+      * 转发规则的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain: string;
+    /**
+      * 转发规则的Url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
+    /**
+      * 本规则上绑定的后端服务的健康检查状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Targets: Array<TargetHealth>;
 }
 /**
  * DescribeExclusiveClusters返回参数结构体
@@ -1800,7 +1827,7 @@ export interface DescribeLoadBalancersDetailRequest {
       */
     Offset?: number;
     /**
-      * 选择返回的Fields列表，默认添加LoadBalancerId和LoadBalancerName。
+      * 选择返回的Fields列表，系统仅会返回Fileds中填写的字段，可填写的字段详情请参见<a href="https://cloud.tencent.com/document/api/214/30694#LoadBalancerDetail">LoadBalancerDetail</a>。若未在Fileds填写相关字段，则此字段返回null。Fileds中默认添加LoadBalancerId和LoadBalancerName字段。
       */
     Fields?: Array<string>;
     /**
@@ -2913,6 +2940,10 @@ export interface DeregisterTargetsResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeLoadBalancerOverview请求参数结构体
+ */
+export declare type DescribeLoadBalancerOverviewRequest = null;
 /**
  * 重定向目标的信息
  */
@@ -4541,4 +4572,14 @@ OPEN：公网属性， INTERNAL：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HealthLogTopicId?: string;
+    /**
+      * 集群ID.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterIds?: Array<string>;
+    /**
+      * 负载均衡的属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttributeFlags?: Array<string>;
 }

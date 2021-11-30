@@ -29,7 +29,7 @@ import {
   BatchModifyTargetWeightResponse,
   SetSecurityGroupForLoadbalancersRequest,
   CreateLoadBalancerRequest,
-  RuleHealth,
+  DescribeLoadBalancerOverviewResponse,
   DeleteRuleRequest,
   CloneLoadBalancerRequest,
   DisassociateTargetGroupsResponse,
@@ -55,6 +55,7 @@ import {
   TargetGroupInstance,
   DescribeClassicalLBByInstanceIdResponse,
   CreateRuleResponse,
+  RuleHealth,
   DescribeExclusiveClustersResponse,
   RegisterTargetGroupInstancesResponse,
   ClassicalTargetInfo,
@@ -152,6 +153,7 @@ import {
   DeleteLoadBalancerResponse,
   AutoRewriteResponse,
   DeregisterTargetsResponse,
+  DescribeLoadBalancerOverviewRequest,
   RewriteTarget,
   Cluster,
   ModifyTargetWeightRequest,
@@ -747,6 +749,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTargetGroupResponse) => void
   ): Promise<CreateTargetGroupResponse> {
     return this.request("CreateTargetGroup", req, cb)
+  }
+
+  /**
+   * 查询运行中、隔离中、即将到期和负载均衡总数。
+   */
+  async DescribeLoadBalancerOverview(
+    req?: DescribeLoadBalancerOverviewRequest,
+    cb?: (error: string, rep: DescribeLoadBalancerOverviewResponse) => void
+  ): Promise<DescribeLoadBalancerOverviewResponse> {
+    return this.request("DescribeLoadBalancerOverview", req, cb)
   }
 
   /**

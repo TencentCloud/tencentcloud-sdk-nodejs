@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeContainerGroups", req, cb);
     }
     /**
+     * 获取部署组其他属性
+     */
+    async DescribeGroupAttribute(req, cb) {
+        return this.request("DescribeGroupAttribute", req, cb);
+    }
+    /**
      * 查询配置项列表
      */
     async DescribeConfigs(req, cb) {

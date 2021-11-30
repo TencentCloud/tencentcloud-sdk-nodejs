@@ -23,19 +23,24 @@ import {
   DescribePrivateDNSAccountListResponse,
   DescribePrivateZoneRecordListRequest,
   PrivateDNSAccount,
+  DescribePrivateZoneRecordListResponse,
+  DescribePrivateZoneListResponse,
   AccountVpcInfoOutput,
   DescribePrivateZoneRequest,
   DatePoint,
+  DescribeAccountVpcListResponse,
   DescribePrivateZoneServiceRequest,
   PrivateZoneRecord,
   AuditLogInfo,
   DescribeRequestDataRequest,
   ModifyPrivateZoneRecordResponse,
-  DescribePrivateZoneRecordListResponse,
+  DescribeAccountVpcListRequest,
   DescribeRequestDataResponse,
   ModifyPrivateZoneRequest,
   TagInfo,
   CreatePrivateZoneRequest,
+  VpcInfo,
+  AccountVpcInfoOut,
   AccountVpcInfo,
   ModifyPrivateZoneResponse,
   DescribePrivateZoneListRequest,
@@ -45,21 +50,23 @@ import {
   DescribeDashboardResponse,
   CreatePrivateZoneRecordResponse,
   DescribePrivateZoneServiceResponse,
-  VpcInfo,
+  CreatePrivateDNSAccountResponse,
   DescribeAuditLogRequest,
   DescribeDashboardRequest,
   DeletePrivateZoneRequest,
   AuditLog,
   SubscribePrivateZoneServiceResponse,
+  DeletePrivateDNSAccountRequest,
   DeletePrivateZoneRecordRequest,
   Filter,
   DeletePrivateZoneResponse,
-  DescribePrivateZoneListResponse,
+  CreatePrivateDNSAccountRequest,
   MetricData,
   DescribePrivateDNSAccountListRequest,
   PrivateZone,
   CreatePrivateZoneRecordRequest,
   ModifyPrivateZoneRecordRequest,
+  DeletePrivateDNSAccountResponse,
   FlowUsage,
   DeletePrivateZoneRecordResponse,
   ModifyPrivateZoneVpcResponse,
@@ -72,6 +79,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("privatedns.tencentcloudapi.com", "2020-10-28", clientConfig)
+  }
+
+  /**
+   * 创建私有域解析账号
+   */
+  async CreatePrivateDNSAccount(
+    req: CreatePrivateDNSAccountRequest,
+    cb?: (error: string, rep: CreatePrivateDNSAccountResponse) => void
+  ): Promise<CreatePrivateDNSAccountResponse> {
+    return this.request("CreatePrivateDNSAccount", req, cb)
   }
 
   /**
@@ -95,6 +112,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取私有域解析账号的VPC列表
+   */
+  async DescribeAccountVpcList(
+    req: DescribeAccountVpcListRequest,
+    cb?: (error: string, rep: DescribeAccountVpcListResponse) => void
+  ): Promise<DescribeAccountVpcListResponse> {
+    return this.request("DescribeAccountVpcList", req, cb)
+  }
+
+  /**
    * 获取私有域记录列表
    */
   async DescribePrivateZoneRecordList(
@@ -112,6 +139,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrivateZoneServiceResponse) => void
   ): Promise<DescribePrivateZoneServiceResponse> {
     return this.request("DescribePrivateZoneService", req, cb)
+  }
+
+  /**
+   * 删除私有域解析账号
+   */
+  async DeletePrivateDNSAccount(
+    req: DeletePrivateDNSAccountRequest,
+    cb?: (error: string, rep: DeletePrivateDNSAccountResponse) => void
+  ): Promise<DeletePrivateDNSAccountResponse> {
+    return this.request("DeletePrivateDNSAccount", req, cb)
   }
 
   /**

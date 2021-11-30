@@ -84,6 +84,40 @@ export interface PrivateDNSAccount {
     Nickname?: string;
 }
 /**
+ * DescribePrivateZoneRecordList返回参数结构体
+ */
+export interface DescribePrivateZoneRecordListResponse {
+    /**
+      * 解析记录数量
+      */
+    TotalCount: number;
+    /**
+      * 解析记录列表
+      */
+    RecordSet: Array<PrivateZoneRecord>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePrivateZoneList返回参数结构体
+ */
+export interface DescribePrivateZoneListResponse {
+    /**
+      * 私有域数量
+      */
+    TotalCount: number;
+    /**
+      * 私有域列表
+      */
+    PrivateZoneSet: Array<PrivateZone>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 关联的VPC出参
  */
 export interface AccountVpcInfoOutput {
@@ -121,6 +155,23 @@ export interface DatePoint {
       * 值
       */
     Value: number;
+}
+/**
+ * DescribeAccountVpcList返回参数结构体
+ */
+export interface DescribeAccountVpcListResponse {
+    /**
+      * VPC数量
+      */
+    TotalCount: number;
+    /**
+      * VPC 列表
+      */
+    VpcSet: Array<AccountVpcInfoOut>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribePrivateZoneService请求参数结构体
@@ -226,21 +277,25 @@ export interface ModifyPrivateZoneRecordResponse {
     RequestId?: string;
 }
 /**
- * DescribePrivateZoneRecordList返回参数结构体
+ * DescribeAccountVpcList请求参数结构体
  */
-export interface DescribePrivateZoneRecordListResponse {
+export interface DescribeAccountVpcListRequest {
     /**
-      * 解析记录数量
+      * 关联账号的uin
       */
-    TotalCount: number;
+    AccountUin: string;
     /**
-      * 解析记录列表
+      * 分页偏移量，从0开始
       */
-    RecordSet: Array<PrivateZoneRecord>;
+    Offset?: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 分页限制数目， 最大100，默认20
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeRequestData返回参数结构体
@@ -321,6 +376,40 @@ export interface CreatePrivateZoneRequest {
       * 创建私有域同时绑定关联账号的VPC
       */
     AccountVpcSet?: Array<AccountVpcInfo>;
+}
+/**
+ * Vpc信息
+ */
+export interface VpcInfo {
+    /**
+      * VpcId： vpc-xadsafsdasd
+      */
+    UniqVpcId: string;
+    /**
+      * Vpc所属地区: ap-guangzhou, ap-shanghai
+      */
+    Region: string;
+}
+/**
+ * 查询关联账号VPC列表出参
+ */
+export interface AccountVpcInfoOut {
+    /**
+      * VpcId： vpc-xadsafsdasd
+      */
+    VpcId: string;
+    /**
+      * Vpc所属地区: ap-guangzhou, ap-shanghai
+      */
+    Region: string;
+    /**
+      * Vpc所属账号: 123456789
+      */
+    Uin: string;
+    /**
+      * vpc资源名称：testname
+      */
+    VpcName: string;
 }
 /**
  * 私有域解析账号Vpc信息
@@ -458,17 +547,13 @@ export interface DescribePrivateZoneServiceResponse {
     RequestId?: string;
 }
 /**
- * Vpc信息
+ * CreatePrivateDNSAccount返回参数结构体
  */
-export interface VpcInfo {
+export interface CreatePrivateDNSAccountResponse {
     /**
-      * VpcId： vpc-xadsafsdasd
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    UniqVpcId: string;
-    /**
-      * Vpc所属地区: ap-guangzhou, ap-shanghai
-      */
-    Region: string;
+    RequestId?: string;
 }
 /**
  * DescribeAuditLog请求参数结构体
@@ -547,6 +632,15 @@ export interface SubscribePrivateZoneServiceResponse {
     RequestId?: string;
 }
 /**
+ * DeletePrivateDNSAccount请求参数结构体
+ */
+export interface DeletePrivateDNSAccountRequest {
+    /**
+      * 私有域解析账号
+      */
+    Account: PrivateDNSAccount;
+}
+/**
  * DeletePrivateZoneRecord请求参数结构体
  */
 export interface DeletePrivateZoneRecordRequest {
@@ -586,21 +680,13 @@ export interface DeletePrivateZoneResponse {
     RequestId?: string;
 }
 /**
- * DescribePrivateZoneList返回参数结构体
+ * CreatePrivateDNSAccount请求参数结构体
  */
-export interface DescribePrivateZoneListResponse {
+export interface CreatePrivateDNSAccountRequest {
     /**
-      * 私有域数量
+      * 私有域解析账号
       */
-    TotalCount: number;
-    /**
-      * 私有域列表
-      */
-    PrivateZoneSet: Array<PrivateZone>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Account: PrivateDNSAccount;
 }
 /**
  * 统计数据表
@@ -760,6 +846,15 @@ export interface ModifyPrivateZoneRecordRequest {
       * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
       */
     TTL?: number;
+}
+/**
+ * DeletePrivateDNSAccount返回参数结构体
+ */
+export interface DeletePrivateDNSAccountResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 流量包用量

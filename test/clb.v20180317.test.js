@@ -518,6 +518,16 @@ it("clb.v20180317.CreateTargetGroup", async function () {
     }
 })
 
+it("clb.v20180317.DescribeLoadBalancerOverview", async function () {
+    try {
+       const data = await client.DescribeLoadBalancerOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeTargets", async function () {
     try {
        const data = await client.DescribeTargets({})

@@ -6438,6 +6438,22 @@ export interface MetricDataPointMap {
 }
 
 /**
+ * DescribeGroupAttribute返回参数结构体
+ */
+export interface DescribeGroupAttributeResponse {
+  /**
+      * 虚拟机部署组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: VmGroupOther
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPathRewrite返回参数结构体
  */
 export interface ModifyPathRewriteResponse {
@@ -8864,6 +8880,65 @@ export interface AddClusterInstancesResponse {
 }
 
 /**
+ * 虚拟机部署组其他字段
+ */
+export interface VmGroupOther {
+  /**
+      * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
+
+  /**
+      * 程序包ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageId: string
+
+  /**
+      * 程序包名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageName: string
+
+  /**
+      * 程序包版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageVersion: string
+
+  /**
+      * 部署组实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceCount: number
+
+  /**
+      * 部署组运行中实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunInstanceCount: number
+
+  /**
+      * 部署组中停止实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OffInstanceCount: number
+
+  /**
+      * 部署组状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupStatus: string
+
+  /**
+      * 服务配置信息是否匹配
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNotEqualServiceConfig: boolean
+}
+
+/**
  * DescribeTaskLastStatus返回参数结构体
  */
 export interface DescribeTaskLastStatusResponse {
@@ -9599,6 +9674,16 @@ export interface TsfPageSimpleGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Content: Array<SimpleGroup>
+}
+
+/**
+ * DescribeGroupAttribute请求参数结构体
+ */
+export interface DescribeGroupAttributeRequest {
+  /**
+   * 部署组ID字段
+   */
+  GroupId: string
 }
 
 /**

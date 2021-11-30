@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAuthenticationOptions", req, cb);
     }
     /**
+     * 操作TKE集群的addon
+     */
+    async ForwardApplicationRequestV3(req, cb) {
+        return this.request("ForwardApplicationRequestV3", req, cb);
+    }
+    /**
      * 查询节点池详情
      */
     async DescribeClusterNodePoolDetail(req, cb) {
@@ -602,6 +608,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateEKSCluster(req, cb) {
         return this.request("UpdateEKSCluster", req, cb);
+    }
+    /**
+     * 获取TKE支持的App列表
+     */
+    async GetTkeAppChartList(req, cb) {
+        return this.request("GetTkeAppChartList", req, cb);
     }
     /**
      * 创建托管集群外网访问端口（老的方式，仅支持托管集群外网端口）

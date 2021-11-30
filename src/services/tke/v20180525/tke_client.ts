@@ -91,6 +91,7 @@ import {
   CreateClusterNodePoolFromExistingAsgRequest,
   PrometheusAlertRule,
   DescribePrometheusAgentInstancesRequest,
+  ForwardApplicationRequestV3Response,
   ClusterNetworkSettings,
   DescribeImagesResponse,
   AutoScalingGroupRange,
@@ -212,10 +213,12 @@ import {
   AddClusterCIDRResponse,
   PrometheusAgentOverview,
   ControllerStatus,
+  AppChart,
   Filter,
   ModifyClusterNodePoolRequest,
   ImageInstance,
   UpgradeAbleInstancesItem,
+  GetTkeAppChartListRequest,
   CreateClusterEndpointResponse,
   CreateClusterNodePoolRequest,
   ClusterAdvancedSettings,
@@ -223,6 +226,7 @@ import {
   Taint,
   RestartEKSContainerInstancesResponse,
   ModifyPrometheusTemplateResponse,
+  GetTkeAppChartListResponse,
   DeletePrometheusTemplateResponse,
   DescribePrometheusTemplateSyncRequest,
   UpdateClusterVersionRequest,
@@ -305,6 +309,7 @@ import {
   DescribeClusterAsGroupsResponse,
   DescribeEKSContainerInstancesRequest,
   DescribeClusterNodePoolDetailResponse,
+  ForwardApplicationRequestV3Request,
   DescribeClusterControllersRequest,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
@@ -527,6 +532,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterAuthenticationOptionsResponse) => void
   ): Promise<DescribeClusterAuthenticationOptionsResponse> {
     return this.request("DescribeClusterAuthenticationOptions", req, cb)
+  }
+
+  /**
+   * 操作TKE集群的addon
+   */
+  async ForwardApplicationRequestV3(
+    req: ForwardApplicationRequestV3Request,
+    cb?: (error: string, rep: ForwardApplicationRequestV3Response) => void
+  ): Promise<ForwardApplicationRequestV3Response> {
+    return this.request("ForwardApplicationRequestV3", req, cb)
   }
 
   /**
@@ -1277,6 +1292,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateEKSClusterResponse) => void
   ): Promise<UpdateEKSClusterResponse> {
     return this.request("UpdateEKSCluster", req, cb)
+  }
+
+  /**
+   * 获取TKE支持的App列表
+   */
+  async GetTkeAppChartList(
+    req: GetTkeAppChartListRequest,
+    cb?: (error: string, rep: GetTkeAppChartListResponse) => void
+  ): Promise<GetTkeAppChartListResponse> {
+    return this.request("GetTkeAppChartList", req, cb)
   }
 
   /**

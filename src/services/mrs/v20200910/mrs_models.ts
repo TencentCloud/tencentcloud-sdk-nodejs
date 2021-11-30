@@ -119,6 +119,12 @@ export interface Template {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Prescription: Prescription
+
+  /**
+      * 免疫接种证明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VaccineCertificate: VaccineCertificate
 }
 
 /**
@@ -154,6 +160,65 @@ export interface Elastic {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Name: string
+}
+
+/**
+ * 免疫接种记录
+ */
+export interface Vaccination {
+  /**
+      * 序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id: string
+
+  /**
+      * 疫苗名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vaccine: string
+
+  /**
+      * 剂次
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Dose: string
+
+  /**
+      * 接种日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Date: string
+
+  /**
+      * 疫苗批号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LotNumber: string
+
+  /**
+      * 生产企业
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Manufacturer: string
+
+  /**
+      * 接种单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Clinic: string
+
+  /**
+      * 接种部位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Site: string
+
+  /**
+      * 接种者
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Provider: string
 }
 
 /**
@@ -464,7 +529,7 @@ export interface HandleParam {
  */
 export interface ImageToObjectRequest {
   /**
-   * 图片列表，允许传入多张图片，支持传入图片的url或base64编码
+   * 图片列表，允许传入多张图片，目前只支持传入图片base64编码，图片url暂不支持
    */
   ImageInfoList: Array<ImageInfo>
 
@@ -474,7 +539,7 @@ export interface ImageToObjectRequest {
   HandleParam: HandleParam
 
   /**
-   * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明），363（心电图），27（内窥镜检查），215（处方单）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
+   * 报告类型，目前支持11（检验报告），12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明），363（心电图），27（内窥镜检查），215（处方单），219（免疫接种证明），301（C14呼气试验）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
    */
   Type: number
 
@@ -495,7 +560,7 @@ export interface TextToObjectRequest {
   Text: string
 
   /**
-   * 报告类型，目前支持12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明），363（心电图），27（内窥镜检查），215（处方单）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
+   * 报告类型，目前支持12（检查报告），15（病理报告），28（出院报告），29（入院报告），210（门诊病历），212（手术记录），218（诊断证明），363（心电图），27（内窥镜检查），215（处方单），219（免疫接种证明），301（C14呼气试验）。如果不清楚报告类型，可以使用分类引擎，该字段传0（同时IsUsedClassify字段必须为True，否则无法输出结果）
    */
   Type: number
 
@@ -1792,6 +1857,17 @@ export interface TreatmentRecord {
 }
 
 /**
+ * 免疫接种证明
+ */
+export interface VaccineCertificate {
+  /**
+      * 免疫接种列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VaccineList: Array<Vaccination>
+}
+
+/**
  * 值
  */
 export interface Value {
@@ -2393,7 +2469,7 @@ export interface MenstrualMedicalHistory {
  */
 export interface ImageToClassRequest {
   /**
-   * 图片列表，允许传入多张图片，支持传入图片的url或base64编码
+   * 图片列表，允许传入多张图片，支持传入图片的base64编码，暂不支持图片url
    */
   ImageInfoList: Array<ImageInfo>
 
@@ -2403,7 +2479,7 @@ export interface ImageToClassRequest {
   HandleParam: HandleParam
 
   /**
-   * 图片类型，目前支持11（检验报告），12（检查报告），15（病理报告），218（诊断证明）。
+   * 不填，默认为0
    */
   Type: number
 }

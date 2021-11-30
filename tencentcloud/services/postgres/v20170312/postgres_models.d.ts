@@ -1005,16 +1005,16 @@ export interface SetAutoRenewFlagResponse {
     RequestId?: string;
 }
 /**
- * 网络类型信息，用于实例查询接口和RO组查询接口的返回。
+ * 网络相关信息。
  */
 export interface NetworkAccess {
     /**
-      * 网络资源id，实例id或RO组id
+      * 网络资源id，实例id或RO组id(此字段已废弃)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceId: string;
     /**
-      * 资源类型，1-实例 2-RO组
+      * 资源类型，1-实例 2-RO组(此字段已废弃)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ResourceType: number;
@@ -1024,17 +1024,17 @@ export interface NetworkAccess {
       */
     VpcId: string;
     /**
-      * IP地址
+      * IPV4地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Vip: string;
     /**
-      * ipv6的IP地址
+      * IPV6地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Vip6: string;
     /**
-      * 连接Port地址
+      * 访问端口
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Vport: number;

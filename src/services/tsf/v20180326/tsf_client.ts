@@ -263,6 +263,7 @@ import {
   DescribeServerlessGroupResponse,
   BindApiGroupResponse,
   MetricDataPointMap,
+  DescribeGroupAttributeResponse,
   ModifyPathRewriteResponse,
   EnableUnitRuleResponse,
   DescribeEnabledUnitRuleResponse,
@@ -350,6 +351,7 @@ import {
   CreateTaskFlowResponse,
   DescribeMicroservicesRequest,
   AddClusterInstancesResponse,
+  VmGroupOther,
   DescribeTaskLastStatusResponse,
   DescribePublicConfigsRequest,
   GatewayGroupApiVo,
@@ -384,6 +386,7 @@ import {
   RevocationPublicConfigRequest,
   ModifyLaneRuleResponse,
   TsfPageSimpleGroup,
+  DescribeGroupAttributeRequest,
   TaskRule,
   PkgInfo,
   GroupPod,
@@ -651,6 +654,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeContainerGroupsResponse) => void
   ): Promise<DescribeContainerGroupsResponse> {
     return this.request("DescribeContainerGroups", req, cb)
+  }
+
+  /**
+   * 获取部署组其他属性
+   */
+  async DescribeGroupAttribute(
+    req: DescribeGroupAttributeRequest,
+    cb?: (error: string, rep: DescribeGroupAttributeResponse) => void
+  ): Promise<DescribeGroupAttributeResponse> {
+    return this.request("DescribeGroupAttribute", req, cb)
   }
 
   /**

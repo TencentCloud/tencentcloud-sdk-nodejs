@@ -228,6 +228,16 @@ it("tke.v20180525.DescribeClusterAuthenticationOptions", async function () {
     }
 })
 
+it("tke.v20180525.ForwardApplicationRequestV3", async function () {
+    try {
+       const data = await client.ForwardApplicationRequestV3({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeClusterNodePoolDetail", async function () {
     try {
        const data = await client.DescribeClusterNodePoolDetail({})
@@ -971,6 +981,16 @@ it("tke.v20180525.DeleteClusterInstances", async function () {
 it("tke.v20180525.UpdateEKSCluster", async function () {
     try {
        const data = await client.UpdateEKSCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.GetTkeAppChartList", async function () {
+    try {
+       const data = await client.GetTkeAppChartList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

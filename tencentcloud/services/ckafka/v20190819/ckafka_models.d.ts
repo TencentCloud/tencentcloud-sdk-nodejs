@@ -2121,6 +2121,11 @@ export interface CreateInstancePreResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Data: CreateInstancePreData;
+    /**
+      * 删除是时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteRouteTimestamp: string;
 }
 /**
  * DescribeInstancesDetail请求参数结构体

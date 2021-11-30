@@ -18,6 +18,16 @@ const client = new tencentcloud.privatedns.v20201028.Client({
 })
 describe("privatedns.v20201028.test.js", function () {
 
+it("privatedns.v20201028.CreatePrivateDNSAccount", async function () {
+    try {
+       const data = await client.CreatePrivateDNSAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.DescribePrivateZone", async function () {
     try {
        const data = await client.DescribePrivateZone({})
@@ -38,6 +48,16 @@ it("privatedns.v20201028.ModifyPrivateZoneRecord", async function () {
     }
 })
 
+it("privatedns.v20201028.DescribeAccountVpcList", async function () {
+    try {
+       const data = await client.DescribeAccountVpcList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
     try {
        const data = await client.DescribePrivateZoneRecordList({})
@@ -51,6 +71,16 @@ it("privatedns.v20201028.DescribePrivateZoneRecordList", async function () {
 it("privatedns.v20201028.DescribePrivateZoneService", async function () {
     try {
        const data = await client.DescribePrivateZoneService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("privatedns.v20201028.DeletePrivateDNSAccount", async function () {
+    try {
+       const data = await client.DeletePrivateDNSAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

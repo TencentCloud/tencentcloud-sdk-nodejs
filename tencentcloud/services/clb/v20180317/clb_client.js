@@ -352,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTargetGroup", req, cb);
     }
     /**
+     * 查询运行中、隔离中、即将到期和负载均衡总数。
+     */
+    async DescribeLoadBalancerOverview(req, cb) {
+        return this.request("DescribeLoadBalancerOverview", req, cb);
+    }
+    /**
      * DescribeTargets 接口用来查询负载均衡实例的某些监听器绑定的后端服务列表。
      */
     async DescribeTargets(req, cb) {

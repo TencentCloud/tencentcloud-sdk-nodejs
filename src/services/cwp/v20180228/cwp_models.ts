@@ -641,7 +641,7 @@ export interface DescribeVulInfoCvssResponse {
   VulLevel: number
 
   /**
-      * 漏洞分类 1: web应用漏洞 2:应用漏洞3:安全基线 4: Linux系统漏洞 5: Windows系统漏洞
+      * 漏洞分类 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VulType: number
@@ -919,7 +919,7 @@ export interface DescribeVulCountByDatesRequest {
   LastDays?: Array<number>
 
   /**
-   * 漏洞的分类，最小值为1最大值为5
+   * 漏洞的分类: 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
    */
   VulCategory?: number
 
@@ -3391,6 +3391,7 @@ export interface DescribeVulListRequest {
 <li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
 <li>VulName- string -</li>
 <li>HostIp- string - 是否必填：否 - 主机ip</li>
+<li>VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞</li>
       */
   Filters?: Array<Filters>
 
@@ -3430,7 +3431,7 @@ export interface VulDetailInfo {
   CveId: string
 
   /**
-   * 漏洞分类
+   * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
    */
   VulCategory: number
 
@@ -4015,7 +4016,7 @@ export interface ScanVulRequest {
   HostType: number
 
   /**
-   * 漏洞类型：1: web应用漏洞（webCMS） 2:系统组件（应用漏洞）漏洞  3:安全基线 4:Linux软件漏洞 5:Windows系统漏洞(多选英文;分隔)
+   * 漏洞类型：1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 (多选英文;分隔)
    */
   VulCategories?: string
 
@@ -5972,7 +5973,7 @@ export interface DescribeVulListResponse {
  */
 export interface DescribeUndoVulCountsRequest {
   /**
-   * 漏洞分类，最小值为1，最大值为5
+   * 漏洞分类，1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
    */
   VulCategory?: number
 
@@ -6569,7 +6570,7 @@ export interface ModifyBruteAttackRulesRequest {
 export interface ExportVulListRequest {
   /**
       * 过滤条件。
-<li>VulCategory - int - 是否必填：否 - 漏洞分类筛选 1: web应用漏洞 2:系统组件漏洞 3:安全基线</li>
+<li>VulCategory - int - 是否必填：否 - 漏洞分类筛选1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞</li>
 <li>IfEmergency - String - 是否必填：否 - 是否为应急漏洞，查询应急漏洞传:yes</li>
 <li>Status - String - 是否必填：是 - 漏洞状态筛选，0: 待处理 1:忽略  3:已修复  5:检测中， 控制台仅处理0,1,3,5四种状态</li>
 <li>Level - String - 是否必填：否 - 漏洞等级筛选 1:低 2:中 3:高 4:提示</li>
@@ -6829,7 +6830,7 @@ export interface DescribeReverseShellRulesRequest {
  */
 export interface DescribeScanVulSettingResponse {
   /**
-   * 漏洞类型：1: web应用漏洞 2:系统组件漏洞 (多选英文逗号分隔)
+   * 漏洞类型：1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
    */
   VulCategories: string
 
@@ -11668,7 +11669,7 @@ export interface ScanVulSettingRequest {
   TimerInterval: number
 
   /**
-   * 漏洞类型：1: web应用漏洞 2:系统组件漏洞, 以数组方式传参[1,2]
+   * 漏洞类型：1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞, 以数组方式传参[1,2]
    */
   VulCategories?: Array<number>
 
