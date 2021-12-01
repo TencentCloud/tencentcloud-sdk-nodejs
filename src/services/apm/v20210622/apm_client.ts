@@ -17,7 +17,15 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { DescribeApmAgentRequest, DescribeApmAgentResponse, ApmAgentInfo } from "./apm_models"
+import {
+  ApmInstanceDetail,
+  DescribeApmAgentResponse,
+  ApmTag,
+  DescribeApmInstancesResponse,
+  DescribeApmInstancesRequest,
+  DescribeApmAgentRequest,
+  ApmAgentInfo,
+} from "./apm_models"
 
 /**
  * apm client
@@ -26,6 +34,16 @@ import { DescribeApmAgentRequest, DescribeApmAgentResponse, ApmAgentInfo } from 
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("apm.tencentcloudapi.com", "2021-06-22", clientConfig)
+  }
+
+  /**
+   * APM实例列表拉取
+   */
+  async DescribeApmInstances(
+    req: DescribeApmInstancesRequest,
+    cb?: (error: string, rep: DescribeApmInstancesResponse) => void
+  ): Promise<DescribeApmInstancesResponse> {
+    return this.request("DescribeApmInstances", req, cb)
   }
 
   /**

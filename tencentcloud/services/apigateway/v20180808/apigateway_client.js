@@ -226,7 +226,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("DeleteApi", req, cb);
     }
     /**
-     * 本接口（UpdateApiAppKey）用于更新应用秘钥。
+     * 本接口（UpdateApiAppKey）用于更新应用密钥。
      */
     async UpdateApiAppKey(req, cb) {
         return this.request("UpdateApiAppKey", req, cb);

@@ -2363,7 +2363,7 @@ export interface ScanInfo {
   ScanResultInfo: ScanResultInfo
 
   /**
-   * 扫描状态 0扫描中 1完成   2没赠送过扫描显示开启界面
+   * 扫描状态 0扫描中 1完成  2未勾选自动扫描
    */
   ScanStatus: number
 

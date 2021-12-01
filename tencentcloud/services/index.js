@@ -192,6 +192,8 @@ var iotvideo_1 = require("./iotvideo");
 Object.defineProperty(exports, "iotvideo", { enumerable: true, get: function () { return iotvideo_1.iotvideo; } });
 var iotvideoindustry_1 = require("./iotvideoindustry");
 Object.defineProperty(exports, "iotvideoindustry", { enumerable: true, get: function () { return iotvideoindustry_1.iotvideoindustry; } });
+var ivld_1 = require("./ivld");
+Object.defineProperty(exports, "ivld", { enumerable: true, get: function () { return ivld_1.ivld; } });
 var kms_1 = require("./kms");
 Object.defineProperty(exports, "kms", { enumerable: true, get: function () { return kms_1.kms; } });
 var lighthouse_1 = require("./lighthouse");

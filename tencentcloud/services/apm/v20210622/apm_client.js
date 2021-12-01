@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("apm.tencentcloudapi.com", "2021-06-22", clientConfig);
     }
     /**
+     * APM实例列表拉取
+     */
+    async DescribeApmInstances(req, cb) {
+        return this.request("DescribeApmInstances", req, cb);
+    }
+    /**
      * 获取Apm Agent信息
      */
     async DescribeApmAgent(req, cb) {

@@ -875,31 +875,6 @@ export interface DisassociateInstancesKeyPairsRequest {
     InstanceIds: Array<string>;
 }
 /**
- * 数据盘价格
- */
-export interface DataDiskPrice {
-    /**
-      * 磁盘ID
-      */
-    DiskId: string;
-    /**
-      * 磁盘单价
-      */
-    OriginalDiskPrice: number;
-    /**
-      * 磁盘总价
-      */
-    OriginalPrice: number;
-    /**
-      * 折扣
-      */
-    Discount: number;
-    /**
-      * 折后总价
-      */
-    DiscountPrice: number;
-}
-/**
  * ImportKeyPair请求参数结构体
  */
 export interface ImportKeyPairRequest {
@@ -1556,6 +1531,12 @@ export interface DescribeInstancesRequest {
 <li>public-ip-address</li>按照【实例主网卡的公网 IP】进行过滤。
 类型：String
 必选：否
+<li>zone</li>按照【可用区】进行过滤。
+类型：String
+必选：否
+<li>instance-state</li>按照【实例状态】进行过滤。
+类型：String
+必选：否
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 InstanceIds 和 Filters。
       */
     Filters?: Array<Filter>;
@@ -2020,10 +2001,6 @@ export interface Price {
       * 实例价格。
       */
     InstancePrice: InstancePrice;
-    /**
-      * 数据盘价格。
-      */
-    DataDiskPrices: Array<DataDiskPrice>;
 }
 /**
  * BlueprintPrice	自定义镜像的价格参数。

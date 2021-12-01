@@ -77,7 +77,6 @@ import {
   DescribeBundleDiscountResponse,
   DeleteSnapshotsResponse,
   DisassociateInstancesKeyPairsRequest,
-  DataDiskPrice,
   ImportKeyPairRequest,
   DeleteBlueprintsResponse,
   ModifyInstancesLoginKeyPairAttributeRequest,
