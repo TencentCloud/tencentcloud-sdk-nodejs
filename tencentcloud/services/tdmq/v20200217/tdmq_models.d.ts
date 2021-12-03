@@ -105,7 +105,25 @@ export interface DescribeNamespaceBundlesOptRequest {
 /**
  * RocketMQ命名空间信息
  */
-export declare type RocketMQNamespace = null;
+export interface RocketMQNamespace {
+    /**
+      * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+      */
+    NamespaceId: string;
+    /**
+      * 未消费消息的保留时间，以毫秒单位，范围60秒到15天
+      */
+    Ttl: number;
+    /**
+      * 消息持久化后保留的时间，以毫秒单位
+      */
+    RetentionTime: number;
+    /**
+      * 说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+}
 /**
  * DescribeSubscriptions请求参数结构体
  */
@@ -347,7 +365,24 @@ export interface ModifyClusterResponse {
 /**
  * RocketMQ近期使用量
  */
-export declare type RocketMQClusterRecentStats = null;
+export interface RocketMQClusterRecentStats {
+    /**
+      * Topic数量
+      */
+    TopicNum: number;
+    /**
+      * 消息生产数
+      */
+    ProducedMsgNum: number;
+    /**
+      * 消息消费数
+      */
+    ConsumedMsgNum: number;
+    /**
+      * 消息堆积数
+      */
+    AccumulativeMsgNum: number;
+}
 /**
  * DescribeCmqQueues返回参数结构体
  */
@@ -361,6 +396,23 @@ export interface DescribeCmqQueuesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     QueueList: Array<CmqQueue>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAllTenants返回参数结构体
+ */
+export interface DescribeAllTenantsResponse {
+    /**
+      * 总条数
+      */
+    TotalCount: number;
+    /**
+      * 虚拟集群列表
+      */
+    Tenants: Array<InternalTenant>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -551,7 +603,63 @@ export interface DeleteRocketMQGroupRequest {
 /**
  * RocketMQ消费组信息
  */
-export declare type RocketMQGroup = null;
+export interface RocketMQGroup {
+    /**
+      * 消费组名称
+      */
+    Name: string;
+    /**
+      * 在线消费者数量
+      */
+    ConsumerNum: number;
+    /**
+      * 消费TPS
+      */
+    TPS: number;
+    /**
+      * 总堆积数量
+      */
+    TotalAccumulative: number;
+    /**
+      * 0表示集群消费模式，1表示广播消费模式，-1表示未知
+      */
+    ConsumptionMode: number;
+    /**
+      * 是否允许消费
+      */
+    ReadEnabled: boolean;
+    /**
+      * 重试队列分区数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RetryPartitionNum: number;
+    /**
+      * 创建时间，以毫秒为单位
+      */
+    CreateTime: number;
+    /**
+      * 修改时间，以毫秒为单位
+      */
+    UpdateTime: number;
+    /**
+      * 客户端协议
+      */
+    ClientProtocol: string;
+    /**
+      * 说明信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 消费者类型，枚举值ACTIVELY, PASSIVELY
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerType: string;
+    /**
+      * 是否开启广播消费
+      */
+    BroadcastEnabled: boolean;
+}
 /**
  * AMQP集群近期使用量
  */
@@ -1198,6 +1306,94 @@ export interface ModifyRocketMQClusterResponse {
     RequestId?: string;
 }
 /**
+ * 订阅者
+ */
+export interface Subscription {
+    /**
+      * 主题名称。
+      */
+    TopicName: string;
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 消费者开始连接的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConnectedSince: string;
+    /**
+      * 消费者地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerAddr: string;
+    /**
+      * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerCount: string;
+    /**
+      * 消费者名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerName: string;
+    /**
+      * 堆积的消息数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgBacklog: string;
+    /**
+      * 于TTL，此订阅下没有被发送而是被丢弃的比例。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgRateExpired: string;
+    /**
+      * 消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgRateOut: string;
+    /**
+      * 消费者每秒消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgThroughputOut: string;
+    /**
+      * 订阅名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubscriptionName: string;
+    /**
+      * 消费者集合。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerSets: Array<Consumer>;
+    /**
+      * 是否在线。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsOnline: boolean;
+    /**
+      * 消费进度集合。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumersScheduleSets: Array<ConsumersSchedule>;
+    /**
+      * 备注。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+}
+/**
  * DescribeCmqQueueDetail返回参数结构体
  */
 export interface DescribeCmqQueueDetailResponse {
@@ -1305,7 +1501,29 @@ export interface DescribeClustersRequest {
 /**
  * RocketMQ主题信息
  */
-export declare type RocketMQTopic = null;
+export interface RocketMQTopic {
+    /**
+      * 主题名称
+      */
+    Name: string;
+    /**
+      * 说明
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 读写分区数
+      */
+    PartitionNum: number;
+    /**
+      * 创建时间，以毫秒为单位
+      */
+    CreateTime: number;
+    /**
+      * 创建时间，以毫秒为单位
+      */
+    UpdateTime: number;
+}
 /**
  * DescribeRocketMQCluster返回参数结构体
  */
@@ -1806,92 +2024,13 @@ export interface DeleteRolesRequest {
     ClusterId?: string;
 }
 /**
- * 订阅者
+ * ModifyRocketMQTopic返回参数结构体
  */
-export interface Subscription {
+export interface ModifyRocketMQTopicResponse {
     /**
-      * 主题名称。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TopicName: string;
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 消费者开始连接的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConnectedSince: string;
-    /**
-      * 消费者地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerAddr: string;
-    /**
-      * 消费者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerCount: string;
-    /**
-      * 消费者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerName: string;
-    /**
-      * 堆积的消息数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgBacklog: string;
-    /**
-      * 于TTL，此订阅下没有被发送而是被丢弃的比例。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgRateExpired: string;
-    /**
-      * 消费者每秒分发消息的数量之和。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgRateOut: string;
-    /**
-      * 消费者每秒消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgThroughputOut: string;
-    /**
-      * 订阅名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubscriptionName: string;
-    /**
-      * 消费者集合。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerSets: Array<Consumer>;
-    /**
-      * 是否在线。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsOnline: boolean;
-    /**
-      * 消费进度集合。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumersScheduleSets: Array<ConsumersSchedule>;
-    /**
-      * 备注。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Remark: string;
-    /**
-      * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
-    /**
-      * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdateTime: string;
+    RequestId?: string;
 }
 /**
  * CreateCmqSubscribe返回参数结构体
@@ -2637,7 +2776,37 @@ export interface ModifyRocketMQTopicRequest {
 /**
  * RocketMQ集群基本信息
  */
-export declare type RocketMQClusterInfo = null;
+export interface RocketMQClusterInfo {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 集群名称
+      */
+    ClusterName: string;
+    /**
+      * 地域信息
+      */
+    Region: string;
+    /**
+      * 创建时间，毫秒为单位
+      */
+    CreateTime: number;
+    /**
+      * 集群说明信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 公网接入地址
+      */
+    PublicEndPoint: string;
+    /**
+      * VPC接入地址
+      */
+    VpcEndPoint: string;
+}
 /**
  * DescribeRocketMQTopics返回参数结构体
  */
@@ -2679,7 +2848,21 @@ export interface CreateAMQPVHostRequest {
 /**
  * 租户RocketMQ集群详细信息
  */
-export declare type RocketMQClusterDetail = null;
+export interface RocketMQClusterDetail {
+    /**
+      * 集群基本信息
+      */
+    Info: RocketMQClusterInfo;
+    /**
+      * 集群配置信息
+      */
+    Config: RocketMQClusterConfig;
+    /**
+      * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+}
 /**
  * DeleteRocketMQGroup返回参数结构体
  */
@@ -3461,7 +3644,44 @@ export interface DescribeAMQPClustersResponse {
 /**
  * RocketMQ集群配置
  */
-export declare type RocketMQClusterConfig = null;
+export interface RocketMQClusterConfig {
+    /**
+      * 单命名空间TPS上线
+      */
+    MaxTpsPerNamespace: number;
+    /**
+      * 最大命名空间数量
+      */
+    MaxNamespaceNum: number;
+    /**
+      * 已使用命名空间数量
+      */
+    UsedNamespaceNum: number;
+    /**
+      * 最大Topic数量
+      */
+    MaxTopicNum: number;
+    /**
+      * 已使用Topic数量
+      */
+    UsedTopicNum: number;
+    /**
+      * 最大Group数量
+      */
+    MaxGroupNum: number;
+    /**
+      * 已使用Group数量
+      */
+    UsedGroupNum: number;
+    /**
+      * 消息最大保留时间，以毫秒为单位
+      */
+    MaxRetentionTime: number;
+    /**
+      * 消息最长延时，以毫秒为单位
+      */
+    MaxLatencyTime: number;
+}
 /**
  * DescribeCmqDeadLetterSourceQueues返回参数结构体
  */
@@ -3865,6 +4085,98 @@ export interface DeleteRocketMQClusterRequest {
       * 待删除的集群Id。
       */
     ClusterId: string;
+}
+/**
+ * 面向运营端的虚拟集群信息
+ */
+export interface InternalTenant {
+    /**
+      * 虚拟集群ID
+      */
+    TenantId: string;
+    /**
+      * 虚拟集群名称
+      */
+    TenantName: string;
+    /**
+      * 客户UIN
+      */
+    CustomerUin: string;
+    /**
+      * 客户的APPID
+      */
+    CustomerAppId: string;
+    /**
+      * 物理集群名称
+      */
+    ClusterName: string;
+    /**
+      * 集群协议类型，支持的值为TDMQ，ROCKETMQ，AMQP，CMQ
+      */
+    Type: string;
+    /**
+      * 命名空间配额
+      */
+    MaxNamespaces: number;
+    /**
+      * 已使用命名空间配额
+      */
+    UsedNamespaces: number;
+    /**
+      * Topic配额
+      */
+    MaxTopics: number;
+    /**
+      * 已使用Topic配额
+      */
+    UsedTopics: number;
+    /**
+      * Topic分区数配额
+      */
+    MaxPartitions: number;
+    /**
+      * 已使用Topic分区数配额
+      */
+    UsedPartitions: number;
+    /**
+      * 存储配额, byte为单位
+      */
+    MaxMsgBacklogSize: number;
+    /**
+      * 命名空间最大生产TPS
+      */
+    MaxPublishTps: number;
+    /**
+      * 消息最大保留时间，秒为单位
+      */
+    MaxRetention: number;
+    /**
+      * 创建时间，毫秒为单位
+      */
+    CreateTime: number;
+    /**
+      * 修改时间，毫秒为单位
+      */
+    UpdateTime: number;
+    /**
+      * 命名空间最大消费TPS
+      */
+    MaxDispatchTps: number;
+    /**
+      * 命名空间最大消费带宽，byte为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxDispatchRateInBytes: number;
+    /**
+      * 命名空间最大生产带宽，byte为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxPublishRateInBytes: number;
+    /**
+      * 消息最大保留空间，MB为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRetentionSizeInMB: number;
 }
 /**
  * DescribeEnvironmentAttributes请求参数结构体
@@ -4867,11 +5179,39 @@ export interface DeleteAMQPVHostResponse {
     RequestId?: string;
 }
 /**
- * ModifyRocketMQTopic返回参数结构体
+ * DescribeAllTenants请求参数结构体
  */
-export interface ModifyRocketMQTopicResponse {
+export interface DescribeAllTenantsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 查询偏移量
       */
-    RequestId?: string;
+    Offset: number;
+    /**
+      * 查询限制条数
+      */
+    Limit: number;
+    /**
+      * 物理集群名称
+      */
+    ClusterName?: string;
+    /**
+      * 虚拟集群ID
+      */
+    TenantId?: string;
+    /**
+      * 虚拟集群名称
+      */
+    TenantName?: string;
+    /**
+      * 协议类型数组
+      */
+    Types?: Array<string>;
+    /**
+      * 排序字段名，支持createTime，updateTime
+      */
+    SortBy?: string;
+    /**
+      * 升序排列ASC，降序排列DESC
+      */
+    SortOrder?: string;
 }

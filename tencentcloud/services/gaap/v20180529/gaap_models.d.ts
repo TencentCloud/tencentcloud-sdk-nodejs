@@ -3710,6 +3710,10 @@ export interface DescribeProxyStatisticsRequest {
 当时间范围不超过30天，支持最小粒度3600秒。
       */
     Granularity: number;
+    /**
+      * 运营商（通道为三网通道时有效），支持CMCC，CUCC，CTCC，传空值或不传则合并三个运营商数据
+      */
+    Isp?: string;
 }
 /**
  * 按照域名分类的7层监听器转发规则信息

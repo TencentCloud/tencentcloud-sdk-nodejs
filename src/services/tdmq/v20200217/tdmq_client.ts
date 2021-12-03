@@ -37,6 +37,7 @@ import {
   ModifyClusterResponse,
   RocketMQClusterRecentStats,
   DescribeCmqQueuesResponse,
+  DescribeAllTenantsResponse,
   DescribeNamespaceBundlesOptResponse,
   DescribeBindVpcsResponse,
   RewindCmqQueueResponse,
@@ -69,6 +70,7 @@ import {
   DescribeAMQPClusterRequest,
   DescribeRocketMQTopicsRequest,
   ModifyRocketMQClusterResponse,
+  Subscription,
   DescribeCmqQueueDetailResponse,
   CreateEnvironmentRequest,
   CreateAMQPQueueRequest,
@@ -105,7 +107,7 @@ import {
   DeleteRocketMQTopicResponse,
   ModifyCmqTopicAttributeRequest,
   DeleteRolesRequest,
-  Subscription,
+  ModifyRocketMQTopicResponse,
   CreateCmqSubscribeResponse,
   DescribeCmqDeadLetterSourceQueuesRequest,
   DescribeSubscriptionsResponse,
@@ -201,6 +203,7 @@ import {
   CreateRocketMQTopicRequest,
   CreateRoleResponse,
   DeleteRocketMQClusterRequest,
+  InternalTenant,
   DescribeEnvironmentAttributesRequest,
   DeleteEnvironmentRolesRequest,
   ClearCmqQueueResponse,
@@ -248,7 +251,7 @@ import {
   SendMessagesRequest,
   ModifyRocketMQNamespaceRequest,
   DeleteAMQPVHostResponse,
-  ModifyRocketMQTopicResponse,
+  DescribeAllTenantsRequest,
 } from "./tdmq_models"
 
 /**
@@ -1190,6 +1193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCmqSubscribeResponse) => void
   ): Promise<DeleteCmqSubscribeResponse> {
     return this.request("DeleteCmqSubscribe", req, cb)
+  }
+
+  /**
+   * 获取某个租户的虚拟集群列表
+   */
+  async DescribeAllTenants(
+    req: DescribeAllTenantsRequest,
+    cb?: (error: string, rep: DescribeAllTenantsResponse) => void
+  ): Promise<DescribeAllTenantsResponse> {
+    return this.request("DescribeAllTenants", req, cb)
   }
 
   /**

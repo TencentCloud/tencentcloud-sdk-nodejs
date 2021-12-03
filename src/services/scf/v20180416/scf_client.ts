@@ -44,6 +44,7 @@ import {
   GetFunctionLogsRequest,
   StatusReason,
   Tag,
+  GetRequestStatusRequest,
   LogFilter,
   EipConfigIn,
   ListLayerVersionsResponse,
@@ -84,6 +85,7 @@ import {
   CreateAliasResponse,
   LogSearchContext,
   TriggerInfo,
+  RequestStatus,
   CreateFunctionRequest,
   GetAccountRequest,
   PutTotalConcurrencyConfigResponse,
@@ -113,6 +115,7 @@ import {
   PutTotalConcurrencyConfigRequest,
   UpdateNamespaceRequest,
   GetLayerVersionResponse,
+  GetRequestStatusResponse,
   PutReservedConcurrencyConfigResponse,
   FunctionLog,
   InvokeFunctionRequest,
@@ -326,13 +329,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于运行函数。
+   * 删除函数版本的预置并发配置。
    */
-  async Invoke(
-    req: InvokeRequest,
-    cb?: (error: string, rep: InvokeResponse) => void
-  ): Promise<InvokeResponse> {
-    return this.request("Invoke", req, cb)
+  async DeleteProvisionedConcurrencyConfig(
+    req: DeleteProvisionedConcurrencyConfigRequest,
+    cb?: (error: string, rep: DeleteProvisionedConcurrencyConfigResponse) => void
+  ): Promise<DeleteProvisionedConcurrencyConfigResponse> {
+    return this.request("DeleteProvisionedConcurrencyConfig", req, cb)
   }
 
   /**
@@ -517,13 +520,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除函数版本的预置并发配置。
+   * 该接口用于运行函数。
    */
-  async DeleteProvisionedConcurrencyConfig(
-    req: DeleteProvisionedConcurrencyConfigRequest,
-    cb?: (error: string, rep: DeleteProvisionedConcurrencyConfigResponse) => void
-  ): Promise<DeleteProvisionedConcurrencyConfigResponse> {
-    return this.request("DeleteProvisionedConcurrencyConfig", req, cb)
+  async Invoke(
+    req: InvokeRequest,
+    cb?: (error: string, rep: InvokeResponse) => void
+  ): Promise<InvokeResponse> {
+    return this.request("Invoke", req, cb)
   }
 
   /**
@@ -584,5 +587,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateFunctionCodeResponse) => void
   ): Promise<UpdateFunctionCodeResponse> {
     return this.request("UpdateFunctionCode", req, cb)
+  }
+
+  /**
+   * 该接口根据指定的查询条件返回函数单个请求运行状态。
+   */
+  async GetRequestStatus(
+    req: GetRequestStatusRequest,
+    cb?: (error: string, rep: GetRequestStatusResponse) => void
+  ): Promise<GetRequestStatusResponse> {
+    return this.request("GetRequestStatus", req, cb)
   }
 }

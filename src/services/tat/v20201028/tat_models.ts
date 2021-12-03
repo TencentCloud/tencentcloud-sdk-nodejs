@@ -52,11 +52,15 @@ export interface InvocationTaskBasicInfo {
 <li> DELIVERING：下发中
 <li> DELIVER_DELAYED：延时下发 
 <li> DELIVER_FAILED：下发失败
+<li> START_FAILED：命令启动失败
 <li> RUNNING：命令运行中
 <li> SUCCESS：命令成功
-<li> FAILED：命令失败
+<li> FAILED：命令执行失败，执行完退出码不为 0
 <li> TIMEOUT：命令超时
 <li> TASK_TIMEOUT：执行任务超时
+<li> CANCELLING：取消中
+<li> CANCELLED：已取消（命令启动前就被取消）
+<li> TERMINATED：已中止（命令执行期间被取消）
       */
   TaskStatus: string
 
@@ -167,12 +171,12 @@ export interface RunCommandRequest {
   Description?: string
 
   /**
-   * 命令类型，目前仅支持取值：SHELL。默认：SHELL。
+   * 命令类型，目前支持取值：SHELL、POWERSHELL。默认：SHELL。
    */
   CommandType?: string
 
   /**
-   * 命令执行路径，默认：/root。
+   * 命令执行路径，对于 SHELL 命令默认为 /root，对于 POWERSHELL 命令默认为 C:\Program Files\qcloud\tat_agent\workdir。
    */
   WorkingDirectory?: string
 
@@ -221,9 +225,22 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 
   /**
       * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
-使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在Linux实例中以root用户执行命令。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在 Linux 实例中以 root 用户执行命令；Windows 实例当前仅支持以 System 用户执行命令。
       */
   Username?: string
+
+  /**
+   * 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。
+   */
+  OutputCOSBucketUrl?: string
+
+  /**
+      * 指定日志在cos bucket中的目录，目录命名有如下规则：
+1. 可用数字、中英文和可见字符的组合，长度最多为60。
+2. 用 / 分割路径，可快速创建子目录。
+3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。
+      */
+  OutputCOSKeyPrefix?: string
 }
 
 /**
@@ -416,6 +433,16 @@ export interface Invocation {
    * 执行命令的工作路径
    */
   WorkingDirectory: string
+
+  /**
+   * 日志上传的cos bucket 地址。
+   */
+  OutputCOSBucketUrl: string
+
+  /**
+   * 日志在cos bucket中的目录。
+   */
+  OutputCOSKeyPrefix: string
 }
 
 /**
@@ -501,6 +528,16 @@ export interface TaskResult {
    * 命令最终输出被截断的字节数。
    */
   Dropped: number
+
+  /**
+   * 日志在cos中的地址
+   */
+  OutputUrl: string
+
+  /**
+   * 日志上传cos的错误信息。
+   */
+  OutputUploadCOSErrorInfo: string
 }
 
 /**
@@ -763,17 +800,17 @@ export interface ModifyCommandRequest {
   Content?: string
 
   /**
-   * 命令类型，目前仅支持取值：SHELL。
+   * 命令类型，目前支持取值：SHELL、POWERSHELL。
    */
   CommandType?: string
 
   /**
-   * 命令执行路径，默认：`/root`。
+   * 命令执行路径。
    */
   WorkingDirectory?: string
 
   /**
-   * 命令超时时间，默认60秒。取值范围[1, 86400]。
+   * 命令超时时间。取值范围[1, 86400]。
    */
   Timeout?: number
 
@@ -789,9 +826,22 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 
   /**
       * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
-使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在Linux实例中以root用户执行命令。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。Windows 实例当前仅支持以 System 用户执行命令。
       */
   Username?: string
+
+  /**
+   * 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。
+   */
+  OutputCOSBucketUrl?: string
+
+  /**
+      * 指定日志在cos bucket中的目录，目录命名有如下规则：
+1. 可用数字、中英文和可见字符的组合，长度最多为60。
+2. 用 / 分割路径，可快速创建子目录。
+3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。
+      */
+  OutputCOSKeyPrefix?: string
 }
 
 /**
@@ -1040,6 +1090,16 @@ export interface Command {
    * 在实例上执行命令的用户名。
    */
   Username: string
+
+  /**
+   * 日志上传的cos bucket 地址。
+   */
+  OutputCOSBucketUrl: string
+
+  /**
+   * 日志在cos bucket中的目录。
+   */
+  OutputCOSKeyPrefix: string
 }
 
 /**
@@ -1099,6 +1159,9 @@ export interface InvocationTask {
 <li> FAILED：命令执行失败，执行完退出码不为 0
 <li> TIMEOUT：命令超时
 <li> TASK_TIMEOUT：执行任务超时
+<li> CANCELLING：取消中
+<li> CANCELLED：已取消（命令启动前就被取消）
+<li> TERMINATED：已中止（命令执行期间被取消）
       */
   TaskStatus: string
 
@@ -1281,6 +1344,19 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
    * 命令超时时间，取值范围[1, 86400]。默认以Command配置的Timeout执行。
    */
   Timeout?: number
+
+  /**
+   * 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。
+   */
+  OutputCOSBucketUrl?: string
+
+  /**
+      * 指定日志在cos bucket中的目录，目录命名有如下规则：
+1. 可用数字、中英文和可见字符的组合，长度最多为60。
+2. 用 / 分割路径，可快速创建子目录。
+3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。
+      */
+  OutputCOSKeyPrefix?: string
 }
 
 /**
@@ -1378,12 +1454,12 @@ export interface CreateCommandRequest {
   Description?: string
 
   /**
-   * 命令类型，目前仅支持取值：SHELL。默认：SHELL。
+   * 命令类型，目前支持取值：SHELL、POWERSHELL。默认：SHELL。
    */
   CommandType?: string
 
   /**
-   * 命令执行路径，默认：/root。
+   * 命令执行路径，对于 SHELL 命令默认为 /root，对于 POWERSHELL 命令默认为 C:\Program Files\qcloud\tat_agent\workdir。
    */
   WorkingDirectory?: string
 
@@ -1415,7 +1491,7 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 
   /**
       * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
-使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在Linux实例中以root用户执行命令。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在 Linux 实例中以 root 用户执行命令；Windows 实例当前仅支持以 System 用户执行命令。
       */
   Username?: string
 

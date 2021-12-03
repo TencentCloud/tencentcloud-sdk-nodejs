@@ -18,7 +18,9 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateApmInstanceResponse,
   ApmInstanceDetail,
+  CreateApmInstanceRequest,
   DescribeApmAgentResponse,
   ApmTag,
   DescribeApmInstancesResponse,
@@ -34,6 +36,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("apm.tencentcloudapi.com", "2021-06-22", clientConfig)
+  }
+
+  /**
+   * 业务购买APM实例，调用该接口创建
+   */
+  async CreateApmInstance(
+    req: CreateApmInstanceRequest,
+    cb?: (error: string, rep: CreateApmInstanceResponse) => void
+  ): Promise<CreateApmInstanceResponse> {
+    return this.request("CreateApmInstance", req, cb)
   }
 
   /**

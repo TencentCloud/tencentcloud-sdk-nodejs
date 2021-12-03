@@ -948,6 +948,16 @@ it("tdmq.v20200217.DeleteCmqSubscribe", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeAllTenants", async function () {
+    try {
+       const data = await client.DescribeAllTenants({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeNamespaceBundlesOpt", async function () {
     try {
        const data = await client.DescribeNamespaceBundlesOpt({})

@@ -200,7 +200,7 @@ export class Client extends AbstractClient {
    * 本接口用于访问日志的快速分析
    */
   async DescribeAccessFastAnalysis(
-    req?: DescribeAccessFastAnalysisRequest,
+    req: DescribeAccessFastAnalysisRequest,
     cb?: (error: string, rep: DescribeAccessFastAnalysisResponse) => void
   ): Promise<DescribeAccessFastAnalysisResponse> {
     return this.request("DescribeAccessFastAnalysis", req, cb)

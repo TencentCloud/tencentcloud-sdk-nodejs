@@ -596,9 +596,21 @@ export interface DBInstanceNetInfo {
   NetType: string
 
   /**
-   * 网络连接状态
+   * 网络连接状态，1、initing（未开通）；2、opened（已开通）；3、closed（已关闭）；4、opening（开通中）；5、closing（关闭中）；
    */
   Status: string
+
+  /**
+      * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetId: string
 }
 
 /**
@@ -1215,17 +1227,17 @@ export interface SetAutoRenewFlagResponse {
 }
 
 /**
- * 网络相关信息。
+ * 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo）
  */
 export interface NetworkAccess {
   /**
-      * 网络资源id，实例id或RO组id(此字段已废弃)
+      * 网络资源id，实例id或RO组id
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceId: string
 
   /**
-      * 资源类型，1-实例 2-RO组(此字段已废弃)
+      * 资源类型，1-实例 2-RO组
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceType: number
@@ -1388,7 +1400,7 @@ export interface ReadOnlyGroup {
   DBInstanceNetInfo: Array<DBInstanceNetInfo>
 
   /**
-      * 只读组网络信息列表
+      * 只读组网络信息列表（此字段已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetworkAccessList: Array<NetworkAccess>
@@ -2516,7 +2528,7 @@ export interface DBInstance {
   DBKernelVersion: string
 
   /**
-      * 实例网络信息列表
+      * 实例网络信息列表（此字段已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetworkAccessList: Array<NetworkAccess>

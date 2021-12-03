@@ -304,6 +304,10 @@ export interface PackageItem {
       * 授权区域，global: 全球 CN: 中国
       */
     AuthorizedArea: string;
+    /**
+      * 标签数组
+      */
+    Tags: Array<string>;
 }
 /**
  * DescribeCloudMusicPurchased返回参数结构体

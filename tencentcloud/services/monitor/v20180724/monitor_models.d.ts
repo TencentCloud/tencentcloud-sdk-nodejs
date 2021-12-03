@@ -302,11 +302,11 @@ export interface BindingPolicyObjectRequest {
       */
     Module: string;
     /**
-      * 策略组id，如传入 PolicyId 则该字段会被忽略可传入任意值如 0
+      * 策略组id，例如 4739573。逐渐弃用，建议使用 PolicyId 参数
       */
-    GroupId: number;
+    GroupId?: number;
     /**
-      * 告警策略ID，使用此字段时 GroupId 会被忽略
+      * 告警策略ID，例如“policy-gh892hg0”。PolicyId 参数与 GroupId 参数至少要填一个，否则会报参数错误，建议使用该参数。若两者同时存在则以该参数为准
       */
     PolicyId?: string;
     /**

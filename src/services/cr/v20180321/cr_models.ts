@@ -1587,7 +1587,7 @@ export interface UploadDataFileRequest {
   /**
    * 文件，文件与文件地址上传只可选用一种，必须使用multipart/form-data协议来上传二进制流文件，建议使用xlsx格式，大小不超过5MB。
    */
-  File?: File
+  File?: string
 
   /**
    * 文件上传地址，文件与文件地址上传只可选用一种，大小不超过50MB。

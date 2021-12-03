@@ -396,6 +396,10 @@ export interface UpgradeDBInstanceRequest {
       * 是否极速变配。0-普通升级，1-极速变配。选择极速变配会根据资源状况校验是否可以进行极速变配，满足条件则进行极速变配，不满足条件会返回报错信息。
       */
     FastUpgrade?: number;
+    /**
+      * 延迟阈值。取值范围1~10，默认值为10。
+      */
+    MaxDelayTime?: number;
 }
 /**
  * DescribeBackupConfig请求参数结构体
@@ -3730,7 +3734,7 @@ export interface UpgradeDBInstanceEngineVersionResponse {
     /**
       * 异步任务 ID，可使用 [查询异步任务的执行结果](https://cloud.tencent.com/document/api/236/20410) 获取其执行情况。
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5213,6 +5217,10 @@ export interface UpgradeDBInstanceEngineVersionRequest {
       * 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。
       */
     UpgradeSubversion?: number;
+    /**
+      * 延迟阈值。取值范围1~10
+      */
+    MaxDelayTime?: number;
 }
 /**
  * StartDelayReplication请求参数结构体

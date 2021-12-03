@@ -456,7 +456,32 @@ export interface AccessRuleInfo {
 /**
  * DescribeAccessFastAnalysis请求参数结构体
  */
-export type DescribeAccessFastAnalysisRequest = null
+export interface DescribeAccessFastAnalysisRequest {
+  /**
+   * 客户要查询的日志主题ID，每个客户都有对应的一个主题
+   */
+  TopicId: string
+
+  /**
+   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   */
+  From: number
+
+  /**
+   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   */
+  To: number
+
+  /**
+   * 查询语句，语句长度最大为4096，由于本接口是分析接口，如果无过滤条件，必须传 * 表示匹配所有，参考CLS的分析统计语句的文档
+   */
+  Query: string
+
+  /**
+   * 需要分析统计的字段名
+   */
+  FieldName: string
+}
 
 /**
  * 用于DescribeAccessIndex接口的出参

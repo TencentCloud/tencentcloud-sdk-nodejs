@@ -138,12 +138,12 @@ export interface ExportVideoByVideoSegmentationDataRequest {
     Definition: number;
     /**
       * 导出目标，指定导出视频的目标媒资库，可取值有：
-<li>CME：云剪，即导出为云剪媒资库，此导出目标在云点播媒资库依然可见；</li>
-<li>VOD：云点播，即导出为云点播媒资库，此导出目标在云剪媒资库将不可见。</li>
+<li>CME：多媒体创作引擎，即导出为多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
       */
     ExportDestination: string;
     /**
-      * 导出的云剪媒体信息。当导出目标为 CME 时必填。
+      * 导出的多媒体创作引擎媒体信息。当导出目标为 CME 时必填。
       */
     CMEExportInfo?: CMEExportInfo;
     /**
@@ -249,9 +249,9 @@ export interface ExportVideoEditProjectRequest {
       */
     Definition: number;
     /**
-      * 导出目标。
-<li>CME：云剪，即导出为云剪媒体；</li>
-<li>VOD：云点播，即导出为云点播媒资。</li>
+      * 导出目标，指定导出视频的目标媒资库，可取值有：
+<li>CME：多媒体创作引擎，即导出为多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
       */
     ExportDestination: string;
     /**
@@ -259,7 +259,7 @@ export interface ExportVideoEditProjectRequest {
       */
     CoverData?: string;
     /**
-      * 导出的云剪媒体信息。当导出目标为 CME 时必填。
+      * 导出的多媒体创作引擎媒体信息。当导出目标为 CME 时必填。
       */
     CMEExportInfo?: CMEExportInfo;
     /**
@@ -314,7 +314,7 @@ export interface AudioTrackItem {
       * 音频媒体，可取值为：
 <ul>
 <li>当 SourceType 为 VOD 时，参数填云点播 FileId ；</li>
-<li>当 SourceType 为 CME 时，参数填云剪媒体 Id；</li>
+<li>当 SourceType 为 CME 时，参数填多媒体创作引擎媒体 Id；</li>
 <li>当 SourceType 为 EXTERNAL 时，目前仅支持外部媒体 URL(如`https://www.example.com/a.mp3`)，参数填写规则请参见注意事项。</li>
 </ul>
 
@@ -678,7 +678,7 @@ export interface VideoTrackItem {
       * 视频媒体，可取值为：
 <ul>
 <li>当 SourceType 为 VOD 时，参数填云点播 FileId ；</li>
-<li>当 SourceType 为 CME 时，参数填云剪媒体 Id；</li>
+<li>当 SourceType 为 CME 时，参数填多媒体创作引擎媒体 Id；</li>
 <li>当 SourceType 为 EXTERNAL 时，目前仅支持外部媒体 URL(如`https://www.example.com/a.mp4`)，参数填写规则请参见注意事项。</li>
 </ul>
 
@@ -842,7 +842,7 @@ export interface FlattenListMediaRequest {
     Operator?: string;
 }
 /**
- * 直播推流信息，包括推流地址有效时长，云剪后端生成直播推流地址。
+ * 直播推流信息，包括推流地址有效时长，多媒体创作引擎后端生成直播推流地址。
  */
 export interface RtmpPushInputInfo {
     /**
@@ -850,7 +850,7 @@ export interface RtmpPushInputInfo {
       */
     ExpiredSecond: number;
     /**
-      * 直播推流地址，入参不填默认由云剪生成。
+      * 直播推流地址，入参不填默认由多媒体创作引擎生成。
       */
     PushUrl?: string;
 }
@@ -960,8 +960,8 @@ export interface ExportVideoByEditorTrackDataRequest {
     Definition: number;
     /**
       * 导出目标，指定导出视频的目标媒资库，可取值有：
-<li>CME：云剪，即导出为云剪媒资库，此导出目标在云点播媒资库依然可见；</li>
-<li>VOD：云点播，即导出为云点播媒资库，此导出目标在云剪媒资库将不可见。</li>
+<li>CME：多媒体创建引擎，即导出到多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
       */
     ExportDestination: string;
     /**
@@ -979,7 +979,7 @@ export interface ExportVideoByEditorTrackDataRequest {
       */
     CoverData?: string;
     /**
-      * 导出的云剪媒体信息。当导出目标为 CME 时必填。
+      * 导出的多媒体创作引擎媒体信息。当导出目标为 CME 时必填。
       */
     CMEExportInfo?: CMEExportInfo;
     /**
@@ -1014,7 +1014,7 @@ export interface MaterialTagInfo {
  */
 export interface VideoEditProjectOutput {
     /**
-      * 导出的云剪素材 MaterialId，仅当导出为云剪素材时有效。
+      * 导出的多媒体创作引擎媒体 Id，仅当导出目标为多媒体创作引擎媒体时有效。
       */
     MaterialId: string;
     /**
@@ -1819,7 +1819,7 @@ export interface SwitcherPgmOutputConfig {
     BitRate?: number;
 }
 /**
- * 云剪导出信息。
+ * 多媒体创作引擎导出信息。
  */
 export interface CMEExportInfo {
     /**
@@ -2799,8 +2799,8 @@ export interface ExportVideoByTemplateRequest {
     Definition: number;
     /**
       * 导出目标，指定导出视频的目标媒资库，可取值有：
-<li>CME：云剪，即导出为云剪媒资库，此导出目标在云点播媒资库依然可见；</li>
-<li>VOD：云点播，即导出为云点播媒资库，此导出目标在云剪媒资库将不可见。</li>
+<li>CME：多媒体创作引擎，即导出为多媒体创作引擎媒资库，此导出目标在云点播媒资库依然可见；</li>
+<li>VOD：云点播，即导出为云点播媒资库，此导出目标在多媒体创作引擎媒资库将不可见。</li>
       */
     ExportDestination: string;
     /**
@@ -2808,7 +2808,7 @@ export interface ExportVideoByTemplateRequest {
       */
     SlotReplacements?: Array<SlotReplacementInfo>;
     /**
-      * 导出的云剪媒资信息。当导出目标为 CME 时必填。
+      * 导出的多媒体创作引擎媒资信息。当导出目标为 CME 时必填。
       */
     CMEExportInfo?: CMEExportInfo;
     /**
@@ -3234,7 +3234,7 @@ export interface VideoExportExtensionArgs {
       * 封装格式，可选值：
 <li>mp4 </li>
 <li>mov </li>
-不填则默认使用导出模板中的值。
+不填则使用视频导出编码配置。
       */
     Container?: string;
     /**
@@ -3243,26 +3243,30 @@ export interface VideoExportExtensionArgs {
 例如：项目的宽高比是 16：9 ：
 <li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
 <li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720</li>
-不填则默认使用导出模板中对的值。
+不填则使用视频导出编码配置。
       */
     ShortEdge?: number;
     /**
       * 指定码率，单位 bps。当该参数为 0 时则不强制限定码率。
-不填则默认使用导出模板中的值。
+不填则使用视频导出编码配置。
       */
     VideoBitrate?: number;
+    /**
+      * 帧率。取值范围：[15, 60]，不填默认值为 25。
+      */
+    FrameRate?: number;
     /**
       * 是否去除视频数据，可选值：
 <li>0：保留；</li>
 <li>1：去除。</li>
-不填则默认使用导出模板中对的值。
+不填则使用视频导出编码配置。
       */
     RemoveVideo?: number;
     /**
       * 是否去除音频数据，可选值：
 <li>0：保留；</li>
 <li>1：去除。</li>
-不填则默认使用导出模板中对的值。
+不填则使用视频导出编码配置。
       */
     RemoveAudio?: number;
     /**
@@ -3863,7 +3867,7 @@ export interface ImportMaterialRequest {
 <li>VOD：云点播文件；</li>
 <li>EXTERNAL：媒资绑定。</li>
 
-注意：如果不填默认为云点播文件，如果媒体存储在非腾讯云点播中，都需要使用媒资绑定。另外，导入云点播的文件，使用云点播的子应用 Id 必须与创建云剪平台时使用的云点播子应用一致。
+注意：如果不填默认为云点播文件，如果媒体存储在非腾讯云点播中，都需要使用媒资绑定。另外，导入云点播的文件，使用云点播的子应用 Id 必须与创建多媒体创作引擎平台时使用的云点播子应用一致。
       */
     SourceType?: string;
     /**

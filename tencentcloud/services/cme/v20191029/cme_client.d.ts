@@ -58,7 +58,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceAuthorization(req: DescribeResourceAuthorizationRequest, cb?: (error: string, rep: DescribeResourceAuthorizationResponse) => void): Promise<DescribeResourceAuthorizationResponse>;
     /**
-     * 将云点播媒资文件导入到云剪媒体资源库。支持导入媒体归属团队或者个人。
+     * 将云点播媒资文件导入到多媒体创作引擎媒体资源库。支持导入媒体归属团队或者个人。
      */
     ImportMaterial(req: ImportMaterialRequest, cb?: (error: string, rep: ImportMaterialResponse) => void): Promise<ImportMaterialResponse>;
     /**
@@ -126,7 +126,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteTeamMembers(req: DeleteTeamMembersRequest, cb?: (error: string, rep: DeleteTeamMembersResponse) => void): Promise<DeleteTeamMembersResponse>;
     /**
-     * 删除用户登录态，使用户登出云剪平台。
+     * 删除用户登录态，使用户登出多媒体创作引擎平台。
      */
     DeleteLoginStatus(req: DeleteLoginStatusRequest, cb?: (error: string, rep: DeleteLoginStatusResponse) => void): Promise<DeleteLoginStatusResponse>;
     /**
@@ -201,7 +201,7 @@ export declare class Client extends AbstractClient {
      */
     ListMedia(req: ListMediaRequest, cb?: (error: string, rep: ListMediaResponse) => void): Promise<ListMediaResponse>;
     /**
-     * 创建云剪项目，目前支持的项目类型有：
+     * 创建多媒体创作引擎项目，目前支持的项目类型有：
 <li>视频剪辑项目：用于普通视频剪辑；</li>
 <li>直播剪辑项目：用于直播流剪辑；</li>
 <li>导播台项目：用于云导播台；</li>

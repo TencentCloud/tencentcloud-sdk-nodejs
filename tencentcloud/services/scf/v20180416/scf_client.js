@@ -130,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PublishLayerVersion", req, cb);
     }
     /**
-     * 该接口用于运行函数。
+     * 删除函数版本的预置并发配置。
      */
-    async Invoke(req, cb) {
-        return this.request("Invoke", req, cb);
+    async DeleteProvisionedConcurrencyConfig(req, cb) {
+        return this.request("DeleteProvisionedConcurrencyConfig", req, cb);
     }
     /**
      * 该接口用于用户发布新版本函数。
@@ -245,10 +245,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteReservedConcurrencyConfig", req, cb);
     }
     /**
-     * 删除函数版本的预置并发配置。
+     * 该接口用于运行函数。
      */
-    async DeleteProvisionedConcurrencyConfig(req, cb) {
-        return this.request("DeleteProvisionedConcurrencyConfig", req, cb);
+    async Invoke(req, cb) {
+        return this.request("Invoke", req, cb);
     }
     /**
      * 该接口用于获取函数代码包的下载地址。
@@ -285,6 +285,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateFunctionCode(req, cb) {
         return this.request("UpdateFunctionCode", req, cb);
+    }
+    /**
+     * 该接口根据指定的查询条件返回函数单个请求运行状态。
+     */
+    async GetRequestStatus(req, cb) {
+        return this.request("GetRequestStatus", req, cb);
     }
 }
 exports.Client = Client;

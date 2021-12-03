@@ -867,6 +867,12 @@ export interface BGPIPInstance {
    * 是否开启安全加速，是为1，否为0。
    */
   DamDDoSStatus: number
+
+  /**
+      * 是否Ipv6版本的IP, 是为1，否为0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  V6Flag: number
 }
 
 /**

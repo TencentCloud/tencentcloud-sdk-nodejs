@@ -2111,6 +2111,11 @@ export interface CreateProductRequest {
    * 认证方式 只支持取值为2 psk认证
    */
   EncryptionType?: number
+
+  /**
+   * 连接类型，wifi表示WIFI连接，cellular表示4G连接
+   */
+  NetType?: string
 }
 
 /**
@@ -2891,6 +2896,12 @@ export interface VideoProduct {
    * 修改时间unix时间戳
    */
   UpdateTime: number
+
+  /**
+      * 连接类型，wifi表示WIFI连接，cellular表示4G连接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetType: string
 }
 
 /**

@@ -537,6 +537,10 @@ export interface PhoneEmailData {
       * 创建时间
       */
     CreatedOn: string;
+    /**
+      * 1=控制台校验，2=第三方校验
+      */
+    CheckStatus: number;
 }
 /**
  * 域名联系人信息
@@ -1152,7 +1156,7 @@ export interface DescribeTemplateListRequest {
       */
     Type?: string;
     /**
-      * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+      * 认证状态：未实名审核:NotUpload, 实名审核中:InAudit，已实名审核:Approved，实名审核失败:Reject，更新手机邮箱:NotVerified。
       */
     Status?: string;
     /**

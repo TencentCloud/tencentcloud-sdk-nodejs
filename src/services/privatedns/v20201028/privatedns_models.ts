@@ -528,7 +528,7 @@ export interface AccountVpcInfo {
       * vpc资源名称：testname
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VpcName: string
+  VpcName?: string
 }
 
 /**

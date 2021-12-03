@@ -588,6 +588,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCmqSubscribe", req, cb);
     }
     /**
+     * 获取某个租户的虚拟集群列表
+     */
+    async DescribeAllTenants(req, cb) {
+        return this.request("DescribeAllTenants", req, cb);
+    }
+    /**
      * 运营端获取命名空间bundle列表
      */
     async DescribeNamespaceBundlesOpt(req, cb) {

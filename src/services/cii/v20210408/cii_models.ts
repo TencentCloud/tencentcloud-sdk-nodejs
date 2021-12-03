@@ -218,7 +218,7 @@ export interface UploadMedicalFileRequest {
   /**
    * 文件内容的base64的值。FileBase64与FileURL有一个不为空即可，若FileURL同时存在，那么取FileBase64。
    */
-  File?: File
+  File?: string
 
   /**
    * 文件的URL地址。FileBase64与FileURL有一个不为空即可，若FileBase64同时存在，那么取FileBase64。

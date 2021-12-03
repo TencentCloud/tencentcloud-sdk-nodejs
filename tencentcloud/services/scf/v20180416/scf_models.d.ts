@@ -497,6 +497,31 @@ export interface Tag {
     Value: string;
 }
 /**
+ * GetRequestStatus请求参数结构体
+ */
+export interface GetRequestStatusRequest {
+    /**
+      * 函数名称
+      */
+    FunctionName: string;
+    /**
+      * 需要查询状态的请求 id
+      */
+    FunctionRequestId: string;
+    /**
+      * 函数的所在的命名空间
+      */
+    Namespace?: string;
+    /**
+      * 查询的开始时间，例如：2017-05-16 20:00:00，不填默认为当前时间 - 24小时
+      */
+    StartTime?: string;
+    /**
+      * 查询的结束时间，例如：2017-05-16 20:59:59，不填默认为当前时间。EndTime 需要晚于 StartTime。
+      */
+    EndTime?: string;
+}
+/**
  * 日志过滤条件，用于区分正确与错误日志
  */
 export interface LogFilter {
@@ -781,6 +806,10 @@ export interface UpdateFunctionCodeRequest {
       * 对象存储的地域，注：北京分为ap-beijing和ap-beijing-1
       */
     CosBucketRegion?: string;
+    /**
+      * 是否自动安装依赖
+      */
+    InstallDependency?: string;
     /**
       * 函数所属环境
       */
@@ -1432,6 +1461,43 @@ export interface TriggerInfo {
     TriggerAttribute: string;
 }
 /**
+ * 函数运行状态
+ */
+export interface RequestStatus {
+    /**
+      * 函数的名称
+      */
+    FunctionName: string;
+    /**
+      * 函数执行完成后的返回值
+      */
+    RetMsg: string;
+    /**
+      * 查询的请求 id
+      */
+    RequestId: string;
+    /**
+      * 请求开始时间
+      */
+    StartTime: string;
+    /**
+      * 请求执行结果， 0 表示执行成功，1表示运行中，-1 表示执行异常。
+      */
+    RetCode: number;
+    /**
+      * 请求运行耗时，单位：ms
+      */
+    Duration: number;
+    /**
+      * 请求消耗内存，单位为 MB
+      */
+    MemUsage: number;
+    /**
+      * 重试次数
+      */
+    RetryNum: number;
+}
+/**
  * CreateFunction请求参数结构体
  */
 export interface CreateFunctionRequest {
@@ -1693,7 +1759,7 @@ export interface InvokeRequest {
       */
     InvocationType?: string;
     /**
-      * 触发函数的版本号或别名
+      * 触发函数的版本号或别名，默认值为 $LATEST
       */
     Qualifier?: string;
     /**
@@ -2265,6 +2331,25 @@ PublishFailed  发布失败
 Deleted 已删除
       */
     Status?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetRequestStatus返回参数结构体
+ */
+export interface GetRequestStatusResponse {
+    /**
+      * 函数运行状态的总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 函数运行状态数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<RequestStatus>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

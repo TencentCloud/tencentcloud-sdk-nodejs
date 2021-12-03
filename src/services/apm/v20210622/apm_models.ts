@@ -16,6 +16,22 @@
  */
 
 /**
+ * CreateApmInstance返回参数结构体
+ */
+export interface CreateApmInstanceResponse {
+  /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * apm实例信息
  */
 export interface ApmInstanceDetail {
@@ -124,6 +140,36 @@ export interface ApmInstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SlowRequestSavedThreshold: number
+}
+
+/**
+ * CreateApmInstance请求参数结构体
+ */
+export interface CreateApmInstanceRequest {
+  /**
+   * 实例名
+   */
+  Name: string
+
+  /**
+   * 实例描述信息
+   */
+  Description?: string
+
+  /**
+   * Trace数据保存时长
+   */
+  TraceDuration?: number
+
+  /**
+   * 标签列表
+   */
+  Tags?: Array<ApmTag>
+
+  /**
+   * 实例上报额度值
+   */
+  SpanDailyCounters?: number
 }
 
 /**
