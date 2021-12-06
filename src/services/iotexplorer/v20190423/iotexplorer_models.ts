@@ -896,33 +896,18 @@ export interface DescribePositionFenceListResponse {
 }
 
 /**
- * GetDeviceLocationHistory请求参数结构体
+ * GenSingleDeviceSignatureOfPublic返回参数结构体
  */
-export interface GetDeviceLocationHistoryRequest {
+export interface GenSingleDeviceSignatureOfPublicResponse {
   /**
-   * 产品Id
+   * 设备签名
    */
-  ProductId: string
+  DeviceSignature: DeviceSignatureInfo
 
   /**
-   * 设备名
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DeviceName: string
-
-  /**
-   * 查询起始时间，Unix时间，单位为毫秒
-   */
-  StartTime: number
-
-  /**
-   * 查询结束时间，Unix时间，单位为毫秒
-   */
-  EndTime: number
-
-  /**
-   * 坐标类型
-   */
-  CoordinateType?: number
+  RequestId?: string
 }
 
 /**
@@ -1621,6 +1606,36 @@ export interface DescribeTopicRuleRequest {
    * 规则名称。
    */
   RuleName: string
+}
+
+/**
+ * GetDeviceLocationHistory请求参数结构体
+ */
+export interface GetDeviceLocationHistoryRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+
+  /**
+   * 设备名
+   */
+  DeviceName: string
+
+  /**
+   * 查询起始时间，Unix时间，单位为毫秒
+   */
+  StartTime: number
+
+  /**
+   * 查询结束时间，Unix时间，单位为毫秒
+   */
+  EndTime: number
+
+  /**
+   * 坐标类型
+   */
+  CoordinateType?: number
 }
 
 /**
@@ -2697,6 +2712,21 @@ export interface PositionFenceInfo {
 }
 
 /**
+ * 设备签名
+ */
+export interface DeviceSignatureInfo {
+  /**
+   * 设备名
+   */
+  DeviceName: string
+
+  /**
+   * 设备签名
+   */
+  DeviceSignature: string
+}
+
+/**
  * 位置空间详情
  */
 export interface PositionSpaceInfo {
@@ -3514,6 +3544,26 @@ export interface SearchStudioProductRequest {
    * 产品ID
    */
   ProductId?: string
+}
+
+/**
+ * GenSingleDeviceSignatureOfPublic请求参数结构体
+ */
+export interface GenSingleDeviceSignatureOfPublicRequest {
+  /**
+   * 设备所属的产品ID
+   */
+  ProductId: string
+
+  /**
+   * 需要绑定的设备
+   */
+  DeviceName: string
+
+  /**
+   * 设备绑定签名的有效时间,以秒为单位。取值范围：0 < Expire <= 86400，Expire == -1（十年）
+   */
+  Expire: number
 }
 
 /**

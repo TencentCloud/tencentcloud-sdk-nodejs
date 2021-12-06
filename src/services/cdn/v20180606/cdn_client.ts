@@ -257,6 +257,7 @@ import {
   ListTopClsLogDataResponse,
   StatusCodeCacheRule,
   RemoteAuthentication,
+  ExtraLogset,
   KeyRule,
   ClientCert,
   CappingRule,

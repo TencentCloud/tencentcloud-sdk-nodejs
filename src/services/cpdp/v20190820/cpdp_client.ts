@@ -33,6 +33,7 @@ import {
   CreatePayMerchantRequest,
   QueryContractPayWayListResponse,
   QueryContractPayWayListRequest,
+  QueryAssignmentRequest,
   QueryMemberTransactionResponse,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
@@ -116,7 +117,7 @@ import {
   QueryTransferDetailResponse,
   QueryTransferBatchResponse,
   QueryDeclareData,
-  SyncContractDataRequest,
+  QueryContractPayFeeRequest,
   RefundOrderResult,
   QueryBatchPaymentResultDataInfo,
   ContractOrderInSubOrder,
@@ -166,6 +167,7 @@ import {
   ApplyWithdrawalResponse,
   QueryMerchantInfoForManagementRequest,
   UnifiedTlinxOrderRequest,
+  DeduceQuotaRequest,
   RevokeMemberRechargeThirdPayRequest,
   RechargeMemberThirdPayResponse,
   ViewMerchantResult,
@@ -181,7 +183,7 @@ import {
   CreatePayMerchantResponse,
   UnbindRelateAcctResponse,
   AgentTaxPaymentBatch,
-  QueryContractPayFeeRequest,
+  SyncContractDataRequest,
   RechargeByThirdPayRequest,
   CreateCustAcctIdRequest,
   DistributeApplyResponse,
@@ -209,6 +211,7 @@ import {
   QueryContractRelateShopResult,
   UploadTaxListRequest,
   ApplyWithdrawalRequest,
+  QueryAssignmentResponse,
   QuerySinglePaymentResultResponse,
   QueryMemberBindResponse,
   QueryMemberBindRequest,
@@ -339,6 +342,7 @@ import {
   ApplyPayerinfoData,
   CheckAcctRequest,
   CreateAgentTaxPaymentInfosResponse,
+  ContractPayListResult,
   CreateInvoiceResult,
   DescribeOrderStatusRequest,
   CreateAnchorResponse,
@@ -363,6 +367,7 @@ import {
   QueryAgentTaxPaymentBatchRequest,
   RegisterBillResponse,
   ApplyOutwardOrderRequest,
+  AssignmentData,
   DistributeAccreditTlinxResponse,
   RechargeMemberThirdPayRequest,
   CreateInvoiceRequest,
@@ -386,7 +391,7 @@ import {
   QuerySinglePayResult,
   DistributeCancelResponse,
   ApplyTradeData,
-  ContractPayListResult,
+  DeduceQuotaResponse,
   ChannelContractInfo,
   CreateBatchPaymentRecipient,
   DeleteAgentTaxPaymentInfoResponse,
@@ -410,6 +415,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cpdp.tencentcloudapi.com", "2019-08-20", clientConfig)
+  }
+
+  /**
+   * 直播平台-查询分配关系
+   */
+  async QueryAssignment(
+    req: QueryAssignmentRequest,
+    cb?: (error: string, rep: QueryAssignmentResponse) => void
+  ): Promise<QueryAssignmentResponse> {
+    return this.request("QueryAssignment", req, cb)
   }
 
   /**
@@ -453,13 +468,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云支付-查询商户明细接口
+   * 直播平台-扣减额度
    */
-  async ViewMerchant(
-    req: ViewMerchantRequest,
-    cb?: (error: string, rep: ViewMerchantResponse) => void
-  ): Promise<ViewMerchantResponse> {
-    return this.request("ViewMerchant", req, cb)
+  async DeduceQuota(
+    req: DeduceQuotaRequest,
+    cb?: (error: string, rep: DeduceQuotaResponse) => void
+  ): Promise<DeduceQuotaResponse> {
+    return this.request("DeduceQuota", req, cb)
   }
 
   /**
@@ -690,6 +705,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QuerySinglePaymentResultResponse) => void
   ): Promise<QuerySinglePaymentResultResponse> {
     return this.request("QuerySinglePaymentResult", req, cb)
+  }
+
+  /**
+   * 云支付-查询商户明细接口
+   */
+  async ViewMerchant(
+    req: ViewMerchantRequest,
+    cb?: (error: string, rep: ViewMerchantResponse) => void
+  ): Promise<ViewMerchantResponse> {
+    return this.request("ViewMerchant", req, cb)
   }
 
   /**

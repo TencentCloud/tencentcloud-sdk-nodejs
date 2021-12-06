@@ -6422,13 +6422,13 @@ export interface DescribeModuleResponse {
       * 符合条件的模块数量。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 模块详情信息的列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ModuleItemSet?: Array<ModuleItem>
+  ModuleItemSet: Array<ModuleItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

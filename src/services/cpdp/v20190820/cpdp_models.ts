@@ -584,6 +584,16 @@ export interface QueryContractPayWayListRequest {
 }
 
 /**
+ * QueryAssignment请求参数结构体
+ */
+export interface QueryAssignmentRequest {
+  /**
+   * 主播ID
+   */
+  AnchorId: string
+}
+
+/**
  * QueryMemberTransaction返回参数结构体
  */
 export interface QueryMemberTransactionResponse {
@@ -3813,79 +3823,28 @@ export interface QueryDeclareData {
 }
 
 /**
- * SyncContractData请求参数结构体
+ * QueryContractPayFee请求参数结构体
  */
-export interface SyncContractDataRequest {
+export interface QueryContractPayFeeRequest {
   /**
-   * 聚鑫分配的支付主MidasAppId
+   * 收单系统分配的开放ID
    */
-  MidasAppId: string
+  OpenId: string
 
   /**
-   * 用户ID，长度不小于5位，仅支持字母和数字的组合
+   * 收单系统分配的密钥
    */
-  UserId: string
+  OpenKey: string
 
   /**
-   * 签约使用的渠道
+   * 支付方式编号
    */
-  Channel: string
+  PaymentId: string
 
   /**
-   * 业务签约合同协议号
+   * 沙箱环境填sandbox，正式环境不填
    */
-  OutContractCode: string
-
-  /**
-      * 签约状态，枚举值
-CONTRACT_STATUS_INVALID=无效状态
-CONTRACT_STATUS_SIGNED=已签约
-CONTRACT_STATUS_TERMINATED=已解约
-CONTRACT_STATUS_PENDING=签约进行中
-      */
-  ContractStatus: string
-
-  /**
-   * 签约同步信息
-   */
-  ContractSyncInfo: ContractSyncInfo
-
-  /**
-   * 按照聚鑫安全密钥计算的签名
-   */
-  MidasSignature: string
-
-  /**
-   * 聚鑫分配的安全ID
-   */
-  MidasSecretId: string
-
-  /**
-   * 聚鑫计费SubAppId，代表子商户
-   */
-  SubAppId?: string
-
-  /**
-      * 用户类型，枚举值
-USER_ID: 用户ID
-ANONYMOUS: 匿名类型 USER_ID
-默认值为 USER_ID
-      */
-  UserType?: string
-
-  /**
-   * 场景信息
-   */
-  SceneInfo?: SceneInfo
-
-  /**
-      * 环境名:
-release: 现网环境
-sandbox: 沙箱环境
-development: 开发环境
-缺省: release
-      */
-  MidasEnvironment?: string
+  Profile?: string
 }
 
 /**
@@ -6314,6 +6273,26 @@ export interface UnifiedTlinxOrderRequest {
 }
 
 /**
+ * DeduceQuota请求参数结构体
+ */
+export interface DeduceQuotaRequest {
+  /**
+   * 主播ID
+   */
+  AnchorId: string
+
+  /**
+   * 提现金额，单位为"分"
+   */
+  Amount: number
+
+  /**
+   * 外部业务订单号
+   */
+  OrderId: string
+}
+
+/**
  * RevokeMemberRechargeThirdPay请求参数结构体
  */
 export interface RevokeMemberRechargeThirdPayRequest {
@@ -7216,28 +7195,79 @@ export interface AgentTaxPaymentBatch {
 }
 
 /**
- * QueryContractPayFee请求参数结构体
+ * SyncContractData请求参数结构体
  */
-export interface QueryContractPayFeeRequest {
+export interface SyncContractDataRequest {
   /**
-   * 收单系统分配的开放ID
+   * 聚鑫分配的支付主MidasAppId
    */
-  OpenId: string
+  MidasAppId: string
 
   /**
-   * 收单系统分配的密钥
+   * 用户ID，长度不小于5位，仅支持字母和数字的组合
    */
-  OpenKey: string
+  UserId: string
 
   /**
-   * 支付方式编号
+   * 签约使用的渠道
    */
-  PaymentId: string
+  Channel: string
 
   /**
-   * 沙箱环境填sandbox，正式环境不填
+   * 业务签约合同协议号
    */
-  Profile?: string
+  OutContractCode: string
+
+  /**
+      * 签约状态，枚举值
+CONTRACT_STATUS_INVALID=无效状态
+CONTRACT_STATUS_SIGNED=已签约
+CONTRACT_STATUS_TERMINATED=已解约
+CONTRACT_STATUS_PENDING=签约进行中
+      */
+  ContractStatus: string
+
+  /**
+   * 签约同步信息
+   */
+  ContractSyncInfo: ContractSyncInfo
+
+  /**
+   * 按照聚鑫安全密钥计算的签名
+   */
+  MidasSignature: string
+
+  /**
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
+
+  /**
+   * 聚鑫计费SubAppId，代表子商户
+   */
+  SubAppId?: string
+
+  /**
+      * 用户类型，枚举值
+USER_ID: 用户ID
+ANONYMOUS: 匿名类型 USER_ID
+默认值为 USER_ID
+      */
+  UserType?: string
+
+  /**
+   * 场景信息
+   */
+  SceneInfo?: SceneInfo
+
+  /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+  MidasEnvironment?: string
 }
 
 /**
@@ -8882,6 +8912,32 @@ development: 开发环境
    * 提现单号，长度32字节
    */
   WithdrawOrderId?: string
+}
+
+/**
+ * QueryAssignment返回参数结构体
+ */
+export interface QueryAssignmentResponse {
+  /**
+   * 错误码。响应成功："SUCCESS"，其他为不成功。
+   */
+  ErrCode: string
+
+  /**
+   * 响应消息
+   */
+  ErrMsg: string
+
+  /**
+      * 返回响应
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: AssignmentData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13953,6 +14009,107 @@ export interface CreateAgentTaxPaymentInfosResponse {
 }
 
 /**
+ * 合同-支付方式列表响应对象
+ */
+export interface ContractPayListResult {
+  /**
+      * 支付标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentTag: string
+
+  /**
+      * 支付方式图片url路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentIcon: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionSix?: string
+
+  /**
+      * 付款方式名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentName: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionSeven?: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionTwo?: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionOne?: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionOther?: string
+
+  /**
+      * 支持的交易类型（多个以小写逗号分开，0现金，1刷卡，2主扫，3被扫，4JSPAY，5预授权）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentType: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionFive?: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionNine?: string
+
+  /**
+      * 支付方式编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentId: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionThree?: string
+
+  /**
+      * 付款方式名称（内部名称）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentInternalName: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionFour?: string
+
+  /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PaymentOptionTen?: string
+}
+
+/**
  * 发票结果
  */
 export interface CreateInvoiceResult {
@@ -14860,6 +15017,31 @@ export interface ApplyOutwardOrderRequest {
    * 接入环境。沙箱环境填sandbox
    */
   Profile?: string
+}
+
+/**
+ * 分配关系
+ */
+export interface AssignmentData {
+  /**
+   * 主播ID
+   */
+  AnchorId: string
+
+  /**
+   * 主播名称
+   */
+  AnchorName: string
+
+  /**
+   * 代理商ID
+   */
+  AgentId: string
+
+  /**
+   * 代理商名称
+   */
+  AgentName: string
 }
 
 /**
@@ -15826,104 +16008,29 @@ export interface ApplyTradeData {
 }
 
 /**
- * 合同-支付方式列表响应对象
+ * DeduceQuota返回参数结构体
  */
-export interface ContractPayListResult {
+export interface DeduceQuotaResponse {
   /**
-      * 支付标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentTag: string
+   * 错误码。响应成功："SUCCESS"，其他为不成功。
+   */
+  ErrCode: string
 
   /**
-      * 支付方式图片url路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentIcon: string
+   * 响应消息
+   */
+  ErrMsg: string
 
   /**
-      * 支付方式
+      * 返回响应
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PaymentOptionSix?: string
+  Result: AssignmentData
 
   /**
-      * 付款方式名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentName: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionSeven?: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionTwo?: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionOne?: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionOther?: string
-
-  /**
-      * 支持的交易类型（多个以小写逗号分开，0现金，1刷卡，2主扫，3被扫，4JSPAY，5预授权）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentType: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionFive?: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionNine?: string
-
-  /**
-      * 支付方式编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentId: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionThree?: string
-
-  /**
-      * 付款方式名称（内部名称）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentInternalName: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionFour?: string
-
-  /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PaymentOptionTen?: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

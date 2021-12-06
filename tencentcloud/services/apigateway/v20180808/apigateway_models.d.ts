@@ -3287,6 +3287,22 @@ export interface CreateApiRequest {
       * scf函数类型。当后端类型是SCF时生效。支持事件触发(EVENT)，http直通云函数(HTTP)。
       */
     ServiceScfFunctionType?: string;
+    /**
+      * EIAM应用类型。
+      */
+    EIAMAppType?: string;
+    /**
+      * EIAM应用认证类型，支持仅认证（AuthenticationOnly）、认证和鉴权（Authorization）。
+      */
+    EIAMAuthType?: string;
+    /**
+      * EIAM应用Token 有效时间，单位为秒，默认为7200秒。
+      */
+    TokenTimeout?: number;
+    /**
+      * EIAM应用ID。
+      */
+    EIAMAppId?: string;
 }
 /**
  * DescribeServiceEnvironmentStrategy请求参数结构体

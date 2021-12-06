@@ -58,6 +58,16 @@ it("iotexplorer.v20190423.DeleteStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
+    try {
+       const data = await client.ReleaseStudioProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.SearchPositionSpace", async function () {
     try {
        const data = await client.SearchPositionSpace({})
@@ -518,9 +528,9 @@ it("iotexplorer.v20190423.DescribeFenceEventList", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
+it("iotexplorer.v20190423.GetPositionSpaceList", async function () {
     try {
-       const data = await client.ReleaseStudioProduct({})
+       const data = await client.GetPositionSpaceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +548,9 @@ it("iotexplorer.v20190423.DescribeFirmwareTask", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetPositionSpaceList", async function () {
+it("iotexplorer.v20190423.GenSingleDeviceSignatureOfPublic", async function () {
     try {
-       const data = await client.GetPositionSpaceList({})
+       const data = await client.GenSingleDeviceSignatureOfPublic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

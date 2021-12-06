@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteStudioProduct", req, cb);
     }
     /**
+     * 产品开发完成并测试通过后，通过发布产品将产品设置为发布状态
+     */
+    async ReleaseStudioProduct(req, cb) {
+        return this.request("ReleaseStudioProduct", req, cb);
+    }
+    /**
      * 搜索位置空间
      */
     async SearchPositionSpace(req, cb) {
@@ -328,10 +334,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFenceEventList", req, cb);
     }
     /**
-     * 产品开发完成并测试通过后，通过发布产品将产品设置为发布状态
+     * 获取位置空间列表
      */
-    async ReleaseStudioProduct(req, cb) {
-        return this.request("ReleaseStudioProduct", req, cb);
+    async GetPositionSpaceList(req, cb) {
+        return this.request("GetPositionSpaceList", req, cb);
     }
     /**
      * 查询固件升级任务列表
@@ -340,10 +346,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTask", req, cb);
     }
     /**
-     * 获取位置空间列表
+     * 无
      */
-    async GetPositionSpaceList(req, cb) {
-        return this.request("GetPositionSpaceList", req, cb);
+    async GenSingleDeviceSignatureOfPublic(req, cb) {
+        return this.request("GenSingleDeviceSignatureOfPublic", req, cb);
     }
     /**
      * 删除围栏

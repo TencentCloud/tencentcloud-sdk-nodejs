@@ -226,176 +226,6 @@ export interface CreateStaffResponse {
 }
 
 /**
- * CreateUserSig请求参数结构体
- */
-export interface CreateUserSigRequest {
-  /**
-   * 应用 ID
-   */
-  SdkAppId: number
-
-  /**
-   * 用户 ID
-   */
-  Uid: string
-
-  /**
-   * 有效期，单位秒，不超过 1 小时
-   */
-  ExpiredTime: number
-
-  /**
-   * 用户签名数据
-   */
-  ClientData?: string
-}
-
-/**
- * UnbindStaffSkillGroupList请求参数结构体
- */
-export interface UnbindStaffSkillGroupListRequest {
-  /**
-   * 实例ID
-   */
-  SdkAppId: number
-
-  /**
-   * 客服邮箱
-   */
-  StaffEmail: string
-
-  /**
-   * 解绑技能组列表
-   */
-  SkillGroupList: Array<number>
-}
-
-/**
- * DescribeStaffStatusMetrics请求参数结构体
- */
-export interface DescribeStaffStatusMetricsRequest {
-  /**
-   * 实例ID
-   */
-  SdkAppId: number
-
-  /**
-   * 筛选坐席列表，默认不传返回全部坐席信息
-   */
-  StaffList?: Array<string>
-}
-
-/**
- * 技能组信息
- */
-export interface SkillGroupItem {
-  /**
-   * 技能组ID
-   */
-  SkillGroupId: number
-
-  /**
-   * 技能组名称
-   */
-  SkillGroupName: string
-
-  /**
-   * 优先级
-   */
-  Priority: number
-
-  /**
-   * 类型：IM、TEL、ALL（全媒体）
-   */
-  Type: string
-}
-
-/**
- * CreateUserSig返回参数结构体
- */
-export interface CreateUserSigResponse {
-  /**
-   * 签名结果
-   */
-  UserSig: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteStaff请求参数结构体
- */
-export interface DeleteStaffRequest {
-  /**
-   * 实例ID
-   */
-  SdkAppId: number
-
-  /**
-   * 待删除客服邮箱列表
-   */
-  StaffList: Array<string>
-}
-
-/**
- * DescribeTelSession请求参数结构体
- */
-export interface DescribeTelSessionRequest {
-  /**
-   * 应用ID
-   */
-  SdkAppId: number
-
-  /**
-   * 会话ID
-   */
-  SessionId: string
-}
-
-/**
- * DescribeIMCdrs请求参数结构体
- */
-export interface DescribeIMCdrsRequest {
-  /**
-   * 起始时间
-   */
-  StartTimestamp: number
-
-  /**
-   * 结束时间
-   */
-  EndTimestamp: number
-
-  /**
-   * 实例ID
-   */
-  InstanceId?: number
-
-  /**
-   * 应用ID
-   */
-  SdkAppId?: number
-
-  /**
-   * 返回记录条数 最大为100默认20
-   */
-  Limit?: number
-
-  /**
-   * 返回记录偏移 默认为0
-   */
-  Offset?: number
-
-  /**
-   * 1为全媒体，2为文本客服，不填则查询全部
-   */
-  Type?: number
-}
-
-/**
  * 电话话单信息
  */
 export interface TelCdrInfo {
@@ -596,6 +426,221 @@ notInService       不在服务区
 }
 
 /**
+ * CreateUserSig请求参数结构体
+ */
+export interface CreateUserSigRequest {
+  /**
+   * 应用 ID
+   */
+  SdkAppId: number
+
+  /**
+   * 用户 ID
+   */
+  Uid: string
+
+  /**
+   * 有效期，单位秒，不超过 1 小时
+   */
+  ExpiredTime: number
+
+  /**
+   * 用户签名数据
+   */
+  ClientData?: string
+}
+
+/**
+ * 号码购买信息
+ */
+export interface PhoneNumBuyInfo {
+  /**
+   * 电话号码
+   */
+  PhoneNum: string
+
+  /**
+   * 号码类型，0-固话|1-虚商号码|2-运营商号码|3-400号码
+   */
+  Type: number
+
+  /**
+   * 号码呼叫类型，1-呼入|2-呼出|3-呼入呼出
+   */
+  CallType: number
+
+  /**
+   * 购买时间戳
+   */
+  BuyTime: number
+
+  /**
+   * 截至时间戳
+   */
+  EndTime: number
+
+  /**
+   * 号码状态，1正常|2停用
+   */
+  State: number
+}
+
+/**
+ * UnbindStaffSkillGroupList请求参数结构体
+ */
+export interface UnbindStaffSkillGroupListRequest {
+  /**
+   * 实例ID
+   */
+  SdkAppId: number
+
+  /**
+   * 客服邮箱
+   */
+  StaffEmail: string
+
+  /**
+   * 解绑技能组列表
+   */
+  SkillGroupList: Array<number>
+}
+
+/**
+ * DescribeStaffStatusMetrics请求参数结构体
+ */
+export interface DescribeStaffStatusMetricsRequest {
+  /**
+   * 实例ID
+   */
+  SdkAppId: number
+
+  /**
+   * 筛选坐席列表，默认不传返回全部坐席信息
+   */
+  StaffList?: Array<string>
+}
+
+/**
+ * 技能组信息
+ */
+export interface SkillGroupItem {
+  /**
+   * 技能组ID
+   */
+  SkillGroupId: number
+
+  /**
+   * 技能组名称
+   */
+  SkillGroupName: string
+
+  /**
+   * 优先级
+   */
+  Priority: number
+
+  /**
+   * 类型：IM、TEL、ALL（全媒体）
+   */
+  Type: string
+}
+
+/**
+ * CreateUserSig返回参数结构体
+ */
+export interface CreateUserSigResponse {
+  /**
+   * 签名结果
+   */
+  UserSig: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteStaff请求参数结构体
+ */
+export interface DeleteStaffRequest {
+  /**
+   * 实例ID
+   */
+  SdkAppId: number
+
+  /**
+   * 待删除客服邮箱列表
+   */
+  StaffList: Array<string>
+}
+
+/**
+ * DescribeTelSession请求参数结构体
+ */
+export interface DescribeTelSessionRequest {
+  /**
+   * 应用ID
+   */
+  SdkAppId: number
+
+  /**
+   * 会话ID
+   */
+  SessionId: string
+}
+
+/**
+ * DescribeIMCdrs请求参数结构体
+ */
+export interface DescribeIMCdrsRequest {
+  /**
+   * 起始时间
+   */
+  StartTimestamp: number
+
+  /**
+   * 结束时间
+   */
+  EndTimestamp: number
+
+  /**
+   * 实例ID
+   */
+  InstanceId?: number
+
+  /**
+   * 应用ID
+   */
+  SdkAppId?: number
+
+  /**
+   * 返回记录条数 最大为100默认20
+   */
+  Limit?: number
+
+  /**
+   * 返回记录偏移 默认为0
+   */
+  Offset?: number
+
+  /**
+   * 1为全媒体，2为文本客服，不填则查询全部
+   */
+  Type?: number
+}
+
+/**
+ * DescribeCCCBuyInfoList请求参数结构体
+ */
+export interface DescribeCCCBuyInfoListRequest {
+  /**
+   * 应用ID列表，不传时查询所有应用
+   */
+  SdkAppIds?: Array<number>
+}
+
+/**
  * DeleteStaff返回参数结构体
  */
 export interface DeleteStaffResponse {
@@ -692,6 +737,36 @@ export interface DescribeChatMessagesResponse {
 }
 
 /**
+ * 应用购买信息
+ */
+export interface SdkAppIdBuyInfo {
+  /**
+   * 应用ID
+   */
+  SdkAppId: number
+
+  /**
+   * 应用名称
+   */
+  Name: string
+
+  /**
+   * 坐席购买数（还在有效期内）
+   */
+  StaffBuyNum: number
+
+  /**
+   * 坐席购买列表 （还在有效期内）
+   */
+  StaffBuyList: Array<StaffBuyInfo>
+
+  /**
+   * 号码购买列表
+   */
+  PhoneNumBuyList: Array<PhoneNumBuyInfo>
+}
+
+/**
  * 呼入线路维度相关指标
  */
 export interface CallInNumberMetrics {
@@ -769,6 +844,26 @@ export interface IMCdrInfo {
    * 服务时间戳
    */
   Timestamp: number
+}
+
+/**
+ * 坐席购买信息
+ */
+export interface StaffBuyInfo {
+  /**
+   * 购买坐席数量
+   */
+  Num: number
+
+  /**
+   * 购买时间戳
+   */
+  BuyTime: number
+
+  /**
+   * 截至时间戳
+   */
+  EndTime: number
 }
 
 /**
@@ -1222,6 +1317,26 @@ export interface ServeParticipant {
 }
 
 /**
+ * DescribeTelCdr返回参数结构体
+ */
+export interface DescribeTelCdrResponse {
+  /**
+   * 话单记录总数
+   */
+  TotalCount: number
+
+  /**
+   * 话单记录
+   */
+  TelCdrs: Array<TelCdrInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStaffStatusMetrics返回参数结构体
  */
 export interface DescribeStaffStatusMetricsResponse {
@@ -1397,13 +1512,38 @@ export interface BindStaffSkillGroupListResponse {
 }
 
 /**
- * UnbindStaffSkillGroupList返回参数结构体
+ * 套餐包购买信息
  */
-export interface UnbindStaffSkillGroupListResponse {
+export interface PackageBuyInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 套餐包Id
    */
-  RequestId?: string
+  PackageId: string
+
+  /**
+   * 套餐包类型，0-外呼套餐包|1-400呼入套餐包
+   */
+  Type: number
+
+  /**
+   * 套餐包总量
+   */
+  CapacitySize: number
+
+  /**
+   * 套餐包剩余量
+   */
+  CapacityRemain: number
+
+  /**
+   * 购买时间戳
+   */
+  BuyTime: number
+
+  /**
+   * 截至时间戳
+   */
+  EndTime: number
 }
 
 /**
@@ -1517,19 +1657,34 @@ export interface DescribeTelCallInfoRequest {
 }
 
 /**
- * DescribeTelCdr返回参数结构体
+ * DescribeCCCBuyInfoList返回参数结构体
  */
-export interface DescribeTelCdrResponse {
+export interface DescribeCCCBuyInfoListResponse {
   /**
-   * 话单记录总数
+   * 应用总数
    */
   TotalCount: number
 
   /**
-   * 话单记录
+   * 应用购买信息列表
    */
-  TelCdrs: Array<TelCdrInfo>
+  SdkAppIdBuyList: Array<SdkAppIdBuyInfo>
 
+  /**
+   * 套餐包购买信息列表
+   */
+  PackageBuyList: Array<PackageBuyInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindStaffSkillGroupList返回参数结构体
+ */
+export interface UnbindStaffSkillGroupListResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

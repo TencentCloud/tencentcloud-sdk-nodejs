@@ -18,6 +18,16 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
+it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
+    try {
+       const data = await client.DescribeStaffStatusMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeChatMessages", async function () {
     try {
        const data = await client.DescribeChatMessages({})
@@ -78,9 +88,9 @@ it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeStaffInfoList", async function () {
+it("ccc.v20200210.DescribeCCCBuyInfoList", async function () {
     try {
-       const data = await client.DescribeStaffInfoList({})
+       const data = await client.DescribeCCCBuyInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +158,9 @@ it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
+it("ccc.v20200210.DescribeStaffInfoList", async function () {
     try {
-       const data = await client.DescribeStaffStatusMetrics({})
+       const data = await client.DescribeStaffInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

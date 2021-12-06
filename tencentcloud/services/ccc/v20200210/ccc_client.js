@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
+     * 获取坐席实时状态统计指标
+     */
+    async DescribeStaffStatusMetrics(req, cb) {
+        return this.request("DescribeStaffStatusMetrics", req, cb);
+    }
+    /**
      * 包括具体聊天内容
      */
     async DescribeChatMessages(req, cb) {
@@ -64,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSkillGroupInfoList", req, cb);
     }
     /**
-     * 获取坐席信息列表
+     * 获取用户购买信息列表
      */
-    async DescribeStaffInfoList(req, cb) {
-        return this.request("DescribeStaffInfoList", req, cb);
+    async DescribeCCCBuyInfoList(req, cb) {
+        return this.request("DescribeCCCBuyInfoList", req, cb);
     }
     /**
      * 按实例获取电话消耗统计
@@ -108,10 +114,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePSTNActiveSessionList", req, cb);
     }
     /**
-     * 获取坐席实时状态统计指标
+     * 获取坐席信息列表
      */
-    async DescribeStaffStatusMetrics(req, cb) {
-        return this.request("DescribeStaffStatusMetrics", req, cb);
+    async DescribeStaffInfoList(req, cb) {
+        return this.request("DescribeStaffInfoList", req, cb);
     }
     /**
      * 创建客服账号。

@@ -26,7 +26,9 @@ import {
   CallInMetrics,
   DescribeStaffInfoListResponse,
   CreateStaffResponse,
+  TelCdrInfo,
   CreateUserSigRequest,
+  PhoneNumBuyInfo,
   UnbindStaffSkillGroupListRequest,
   DescribeStaffStatusMetricsRequest,
   SkillGroupItem,
@@ -34,15 +36,17 @@ import {
   DeleteStaffRequest,
   DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
-  TelCdrInfo,
+  DescribeCCCBuyInfoListRequest,
   DeleteStaffResponse,
   StaffStatusExtra,
   DescribeSkillGroupInfoListRequest,
   CreateStaffRequest,
   DescribeChatMessagesResponse,
+  SdkAppIdBuyInfo,
   CallInNumberMetrics,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
+  StaffBuyInfo,
   ErrStaffItem,
   DescribeChatMessagesRequest,
   PSTNSession,
@@ -52,6 +56,7 @@ import {
   StaffInfo,
   PSTNSessionInfo,
   ServeParticipant,
+  DescribeTelCdrResponse,
   DescribeStaffStatusMetricsResponse,
   CallInSkillGroupMetrics,
   DescribeSeatUserListResponse,
@@ -59,12 +64,13 @@ import {
   DescribeTelCallInfoResponse,
   StaffStatusMetrics,
   BindStaffSkillGroupListResponse,
-  UnbindStaffSkillGroupListResponse,
+  PackageBuyInfo,
   DescribeTelCdrRequest,
   MessageBody,
   CreateSDKLoginTokenRequest,
   DescribeTelCallInfoRequest,
-  DescribeTelCdrResponse,
+  DescribeCCCBuyInfoListResponse,
+  UnbindStaffSkillGroupListResponse,
   SeatUserInfo,
   DescribeCallInMetricsRequest,
   Message,
@@ -79,6 +85,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig)
+  }
+
+  /**
+   * 获取坐席实时状态统计指标
+   */
+  async DescribeStaffStatusMetrics(
+    req: DescribeStaffStatusMetricsRequest,
+    cb?: (error: string, rep: DescribeStaffStatusMetricsResponse) => void
+  ): Promise<DescribeStaffStatusMetricsResponse> {
+    return this.request("DescribeStaffStatusMetrics", req, cb)
   }
 
   /**
@@ -142,13 +158,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取坐席信息列表
+   * 获取用户购买信息列表
    */
-  async DescribeStaffInfoList(
-    req: DescribeStaffInfoListRequest,
-    cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
-  ): Promise<DescribeStaffInfoListResponse> {
-    return this.request("DescribeStaffInfoList", req, cb)
+  async DescribeCCCBuyInfoList(
+    req: DescribeCCCBuyInfoListRequest,
+    cb?: (error: string, rep: DescribeCCCBuyInfoListResponse) => void
+  ): Promise<DescribeCCCBuyInfoListResponse> {
+    return this.request("DescribeCCCBuyInfoList", req, cb)
   }
 
   /**
@@ -214,13 +230,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取坐席实时状态统计指标
+   * 获取坐席信息列表
    */
-  async DescribeStaffStatusMetrics(
-    req: DescribeStaffStatusMetricsRequest,
-    cb?: (error: string, rep: DescribeStaffStatusMetricsResponse) => void
-  ): Promise<DescribeStaffStatusMetricsResponse> {
-    return this.request("DescribeStaffStatusMetrics", req, cb)
+  async DescribeStaffInfoList(
+    req: DescribeStaffInfoListRequest,
+    cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
+  ): Promise<DescribeStaffInfoListResponse> {
+    return this.request("DescribeStaffInfoList", req, cb)
   }
 
   /**

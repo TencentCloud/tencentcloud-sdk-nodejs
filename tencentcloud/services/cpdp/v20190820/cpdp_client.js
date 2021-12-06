@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cpdp.tencentcloudapi.com", "2019-08-20", clientConfig);
     }
     /**
+     * 直播平台-查询分配关系
+     */
+    async QueryAssignment(req, cb) {
+        return this.request("QueryAssignment", req, cb);
+    }
+    /**
      * 云支付-分账授权申请查询接口
      */
     async DistributeAccreditQuery(req, cb) {
@@ -52,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBatchPayment", req, cb);
     }
     /**
-     * 云支付-查询商户明细接口
+     * 直播平台-扣减额度
      */
-    async ViewMerchant(req, cb) {
-        return this.request("ViewMerchant", req, cb);
+    async DeduceQuota(req, cb) {
+        return this.request("DeduceQuota", req, cb);
     }
     /**
      * 灵云-主播入驻
@@ -194,6 +200,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QuerySinglePaymentResult(req, cb) {
         return this.request("QuerySinglePaymentResult", req, cb);
+    }
+    /**
+     * 云支付-查询商户明细接口
+     */
+    async ViewMerchant(req, cb) {
+        return this.request("ViewMerchant", req, cb);
     }
     /**
      * 直播平台-上传代理商完税证明

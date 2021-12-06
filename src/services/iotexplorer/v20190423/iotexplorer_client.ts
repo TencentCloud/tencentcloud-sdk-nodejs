@@ -60,7 +60,7 @@ import {
   ListTopicPolicyResponse,
   SearchPositionSpaceResponse,
   DescribePositionFenceListResponse,
-  GetDeviceLocationHistoryRequest,
+  GenSingleDeviceSignatureOfPublicResponse,
   DescribeDevicePositionListResponse,
   GetProjectListResponse,
   DescribeStudioProductResponse,
@@ -90,6 +90,7 @@ import {
   DescribeFenceEventListResponse,
   UpdateDevicesEnableStateRequest,
   DescribeTopicRuleRequest,
+  GetDeviceLocationHistoryRequest,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
   ReleaseStudioProductRequest,
@@ -136,6 +137,7 @@ import {
   TopicItem,
   DescribeTopicRuleResponse,
   PositionFenceInfo,
+  DeviceSignatureInfo,
   PositionSpaceInfo,
   LoRaGatewayLocation,
   DescribeDeviceRequest,
@@ -171,6 +173,7 @@ import {
   CreateLoRaFrequencyResponse,
   EnableTopicRuleResponse,
   SearchStudioProductRequest,
+  GenSingleDeviceSignatureOfPublicRequest,
   DeleteDevicesRequest,
   AppDeviceInfo,
   ModifyProjectResponse,
@@ -247,6 +250,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteStudioProductResponse) => void
   ): Promise<DeleteStudioProductResponse> {
     return this.request("DeleteStudioProduct", req, cb)
+  }
+
+  /**
+   * 产品开发完成并测试通过后，通过发布产品将产品设置为发布状态
+   */
+  async ReleaseStudioProduct(
+    req: ReleaseStudioProductRequest,
+    cb?: (error: string, rep: ReleaseStudioProductResponse) => void
+  ): Promise<ReleaseStudioProductResponse> {
+    return this.request("ReleaseStudioProduct", req, cb)
   }
 
   /**
@@ -710,13 +723,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 产品开发完成并测试通过后，通过发布产品将产品设置为发布状态
+   * 获取位置空间列表
    */
-  async ReleaseStudioProduct(
-    req: ReleaseStudioProductRequest,
-    cb?: (error: string, rep: ReleaseStudioProductResponse) => void
-  ): Promise<ReleaseStudioProductResponse> {
-    return this.request("ReleaseStudioProduct", req, cb)
+  async GetPositionSpaceList(
+    req: GetPositionSpaceListRequest,
+    cb?: (error: string, rep: GetPositionSpaceListResponse) => void
+  ): Promise<GetPositionSpaceListResponse> {
+    return this.request("GetPositionSpaceList", req, cb)
   }
 
   /**
@@ -730,13 +743,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取位置空间列表
+   * 无
    */
-  async GetPositionSpaceList(
-    req: GetPositionSpaceListRequest,
-    cb?: (error: string, rep: GetPositionSpaceListResponse) => void
-  ): Promise<GetPositionSpaceListResponse> {
-    return this.request("GetPositionSpaceList", req, cb)
+  async GenSingleDeviceSignatureOfPublic(
+    req: GenSingleDeviceSignatureOfPublicRequest,
+    cb?: (error: string, rep: GenSingleDeviceSignatureOfPublicResponse) => void
+  ): Promise<GenSingleDeviceSignatureOfPublicResponse> {
+    return this.request("GenSingleDeviceSignatureOfPublic", req, cb)
   }
 
   /**

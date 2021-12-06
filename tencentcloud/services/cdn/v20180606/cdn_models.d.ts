@@ -2350,6 +2350,11 @@ export interface TopicInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Channel: string;
+    /**
+      * cls侧是否已经被删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Deleted: string;
 }
 /**
  * PushUrlsCache请求参数结构体
@@ -2962,14 +2967,19 @@ failed: 失败
  */
 export interface ListClsLogTopicsResponse {
     /**
-      * 日志集信息
+      * 上海区域日志集信息
       */
-    Logset?: LogSetInfo;
+    Logset: LogSetInfo;
     /**
-      * 日志主题信息列表
+      * 上海区域日志主题信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Topics?: Array<TopicInfo>;
+    Topics: Array<TopicInfo>;
+    /**
+      * 其他区域日志集信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtraLogset: Array<ExtraLogset>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7123,6 +7133,21 @@ off: 关闭；
     Server?: string;
 }
 /**
+ * 除上海外其他区域日志集和日志主题信息
+ */
+export interface ExtraLogset {
+    /**
+      * 日志集信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Logset: LogSetInfo;
+    /**
+      * 日志主题信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Topics: Array<TopicInfo>;
+}
+/**
  * 缓存键分路径配置
  */
 export interface KeyRule {
@@ -8019,6 +8044,16 @@ export interface LogSetInfo {
       * 区域
       */
     Region: string;
+    /**
+      * cls侧是否已经被删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Deleted: string;
+    /**
+      * 英文区域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionEn: string;
 }
 /**
  * ListDiagnoseReport返回参数结构体

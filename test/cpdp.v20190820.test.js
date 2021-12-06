@@ -18,6 +18,16 @@ const client = new tencentcloud.cpdp.v20190820.Client({
 })
 describe("cpdp.v20190820.test.js", function () {
 
+it("cpdp.v20190820.QueryAssignment", async function () {
+    try {
+       const data = await client.QueryAssignment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.DistributeAccreditQuery", async function () {
     try {
        const data = await client.DistributeAccreditQuery({})
@@ -58,9 +68,9 @@ it("cpdp.v20190820.CreateBatchPayment", async function () {
     }
 })
 
-it("cpdp.v20190820.ViewMerchant", async function () {
+it("cpdp.v20190820.DeduceQuota", async function () {
     try {
-       const data = await client.ViewMerchant({})
+       const data = await client.DeduceQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +301,16 @@ it("cpdp.v20190820.CreatePayMerchant", async function () {
 it("cpdp.v20190820.QuerySinglePaymentResult", async function () {
     try {
        const data = await client.QuerySinglePaymentResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.ViewMerchant", async function () {
+    try {
+       const data = await client.ViewMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

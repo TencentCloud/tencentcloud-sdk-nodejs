@@ -206,6 +206,16 @@ false：关闭60天内禁止转移注册商锁定
 默认 true
       */
   LockTransfer?: boolean
+
+  /**
+   * 是否开启更新锁：0=默认不开启，1=开启
+   */
+  UpdateProhibition?: number
+
+  /**
+   * 是否开启转移锁：0=默认不开启，1=开启
+   */
+  TransferProhibition?: number
 }
 
 /**
@@ -1003,6 +1013,16 @@ export interface CreateDomainBatchRequest {
    * 使用的特惠包ID，PayMode为2时必填
    */
   PackageResourceId?: string
+
+  /**
+   * 是否开启更新锁：0=默认不开启，1=开启
+   */
+  UpdateProhibition?: number
+
+  /**
+   * 是否开启转移锁：0=默认不开启，1=开启
+   */
+  TransferProhibition?: number
 }
 
 /**
