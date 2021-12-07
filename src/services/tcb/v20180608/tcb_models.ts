@@ -436,7 +436,7 @@ export interface CommonServiceAPIResponse {
   /**
    * json格式response
    */
-  JSONResp?: string
+  JSONResp: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1745,6 +1745,11 @@ export interface CommonServiceAPIRequest {
    * 需要转发的云API参数，要转成JSON格式
    */
   JSONData?: string
+
+  /**
+   * 指定角色
+   */
+  ApiRole?: string
 }
 
 /**

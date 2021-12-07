@@ -237,6 +237,14 @@ export interface CreateJobConfigRequest {
       * TaskManager规格
       */
     TaskManagerSpec?: number;
+    /**
+      * CLS日志集ID
+      */
+    ClsLogsetId?: string;
+    /**
+      * CLS日志主题ID
+      */
+    ClsTopicId?: string;
 }
 /**
  * CreateResourceConfig请求参数结构体
@@ -1053,6 +1061,16 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskManagerSpec: number;
+    /**
+      * CLS日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClsLogsetId: string;
+    /**
+      * CLS日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClsTopicId: string;
 }
 /**
  * DescribeResourceConfigs请求参数结构体

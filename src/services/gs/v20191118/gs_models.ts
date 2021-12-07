@@ -20,7 +20,7 @@
  */
 export interface StopGameRequest {
   /**
-   * 游戏用户ID
+   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
    */
   UserId: string
 
@@ -105,7 +105,7 @@ export interface CreateSessionRequest {
   ClientSession: string
 
   /**
-   * 游戏用户ID
+   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
    */
   UserId: string
 
@@ -245,7 +245,7 @@ export interface SaveGameArchiveRequest {
  */
 export interface TrylockWorkerRequest {
   /**
-   * 游戏用户ID
+   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
    */
   UserId: string
 
