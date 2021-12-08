@@ -221,7 +221,7 @@ export interface CreateInstancesRequest {
   SpecCode: string
 
   /**
-   * PostgreSQL内核版本，目前支持：9.3.5、9.5.4、10.4、11.8、12.4五种版本。
+   * PostgreSQL主版本，目前支持：9.3、9.5、10、11、12、13以及9.3.5、9.5.4、10.4、11.8、12.4版本。
    */
   DBVersion: string
 
@@ -2303,13 +2303,13 @@ export interface DescribeServerlessDBInstancesResponse {
   /**
    * 查询结果数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 查询结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DBInstanceSet?: Array<ServerlessDBInstance>
+  DBInstanceSet: Array<ServerlessDBInstance>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3560,7 +3560,7 @@ export interface DescribeDBInstanceAttributeResponse {
   /**
    * 实例详细信息。
    */
-  DBInstance?: DBInstance
+  DBInstance: DBInstance
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAlias", req, cb);
     }
     /**
+     * 获取函数异步执行事件状态，事件状态保留 3 * 24 小时（从事件完成开始计时）。
+     */
+    async GetAsyncEventStatus(req, cb) {
+        return this.request("GetAsyncEventStatus", req, cb);
+    }
+    /**
      * 该接口根据传入的参数删除命名空间。
      */
     async DeleteNamespace(req, cb) {

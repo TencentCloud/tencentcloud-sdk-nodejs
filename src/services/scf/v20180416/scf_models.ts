@@ -1947,6 +1947,16 @@ export interface PutTotalConcurrencyConfigResponse {
 }
 
 /**
+ * GetAsyncEventStatus请求参数结构体
+ */
+export interface GetAsyncEventStatusRequest {
+  /**
+   * 异步执行请求 id
+   */
+  InvokeRequestId: string
+}
+
+/**
  * DeleteAlias返回参数结构体
  */
 export interface DeleteAliasResponse {
@@ -2350,8 +2360,11 @@ export interface DeleteLayerVersionRequest {
  */
 export interface Filter {
   /**
-   * 需要过滤的字段。
-   */
+      * 需要过滤的字段。过滤条件数量限制为10。
+Name可选值：VpcId, SubnetId, ClsTopicId, ClsLogsetId, Role, CfsId, CfsMountInsId, Eip；Values 长度限制为1。
+Name可选值：Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, TraceEnable；Values 长度限制为20。
+当 Name = Runtime 时，CustomImage 表示过滤镜像类型函数。
+      */
   Name: string
 
   /**
@@ -2827,6 +2840,26 @@ export interface GetRequestStatusResponse {
 }
 
 /**
+ * 异步事件状态
+ */
+export interface AsyncEventStatus {
+  /**
+   * 异步事件状态，RUNNING 表示运行中, FINISHED 表示调用成功, ABORTED 表示调用终止, FAILED 表示调用失败。
+   */
+  Status: string
+
+  /**
+   * 请求状态码
+   */
+  StatusCode: number
+
+  /**
+   * 异步执行请求 Id
+   */
+  InvokeRequestId: string
+}
+
+/**
  * PutReservedConcurrencyConfig返回参数结构体
  */
 export interface PutReservedConcurrencyConfigResponse {
@@ -3196,6 +3229,21 @@ export interface ListFunctionsResponse {
    * 总数
    */
   TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetAsyncEventStatus返回参数结构体
+ */
+export interface GetAsyncEventStatusResponse {
+  /**
+   * 异步事件状态
+   */
+  Result: AsyncEventStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

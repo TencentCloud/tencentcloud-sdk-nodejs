@@ -283,13 +283,28 @@ export interface DescribeTopicAttributesRequest {
 }
 
 /**
- * DescribeInstanceAttributes请求参数结构体
+ * FetchMessageByOffset请求参数结构体
  */
-export interface DescribeInstanceAttributesRequest {
+export interface FetchMessageByOffsetRequest {
   /**
-   * 实例id
+   * 实例Id
    */
   InstanceId: string
+
+  /**
+   * 主题名
+   */
+  Topic: string
+
+  /**
+   * 分区id
+   */
+  Partition: number
+
+  /**
+   * 位点信息
+   */
+  Offset?: number
 }
 
 /**
@@ -381,6 +396,33 @@ export interface FetchMessageByOffsetResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建预付费实例返回结构
+ */
+export interface CreateInstancePreResp {
+  /**
+   * 返回的code，0为正常，非0为错误
+   */
+  ReturnCode: string
+
+  /**
+   * 成功消息
+   */
+  ReturnMessage: string
+
+  /**
+      * 操作型返回的Data数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: CreateInstancePreData
+
+  /**
+      * 删除是时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeleteRouteTimestamp: string
 }
 
 /**
@@ -1378,28 +1420,13 @@ export interface InstanceDetailResponse {
 }
 
 /**
- * FetchMessageByOffset请求参数结构体
+ * DescribeInstanceAttributes请求参数结构体
  */
-export interface FetchMessageByOffsetRequest {
+export interface DescribeInstanceAttributesRequest {
   /**
-   * 实例Id
+   * 实例id
    */
   InstanceId: string
-
-  /**
-   * 主题名
-   */
-  Topic: string
-
-  /**
-   * 分区id
-   */
-  Partition: number
-
-  /**
-   * 位点信息
-   */
-  Offset?: number
 }
 
 /**
@@ -2499,30 +2526,18 @@ export interface DeleteTopicIpWhiteListResponse {
 }
 
 /**
- * 创建预付费实例返回结构
+ * CreateInstancePre返回参数结构体
  */
 export interface CreateInstancePreResponse {
   /**
-   * 返回的code，0为正常，非0为错误
+   * 返回结果
    */
-  ReturnCode: string
+  Result: CreateInstancePreResp
 
   /**
-   * 成功消息
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ReturnMessage: string
-
-  /**
-      * 操作型返回的Data数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: CreateInstancePreData
-
-  /**
-      * 删除是时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeleteRouteTimestamp: string
+  RequestId?: string
 }
 
 /**

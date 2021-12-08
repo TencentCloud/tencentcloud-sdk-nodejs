@@ -421,7 +421,7 @@ export declare type DescribeProVersionInfoRequest = null;
  */
 export interface SetCheckModeResponse {
     /**
-      * “Succ"表示设置成功，"Failed"表示设置失败
+      * "Succ"表示设置成功，"Failed"表示设置失败
       */
     SetCheckResult: string;
     /**
@@ -1355,6 +1355,14 @@ export interface ProcessInfo {
       * 进程名称
       */
     ProcessName: string;
+    /**
+      * 主机名称
+      */
+    HostName: string;
+    /**
+      * 外网ip
+      */
+    PublicIp: string;
 }
 /**
  * DescribeReverseShellDetail请求参数结构体
@@ -3477,7 +3485,7 @@ export interface DescribeProVersionInfoResponse {
       */
     EndTime: string;
     /**
-      * 需购买的虚拟机核数
+      * 需购买的机器核数
       */
     CoresCnt: number;
     /**
@@ -3512,7 +3520,7 @@ export declare type DescribeAssetImageRegistryListRequest = null;
  */
 export interface CreateCheckComponentResponse {
     /**
-      * “InstallSucc"表示安装成功，"InstallFailed"表示安装失败
+      * "InstallSucc"表示安装成功，"InstallFailed"表示安装失败
       */
     InstallResult: string;
     /**
@@ -4056,6 +4064,14 @@ export interface PortInfo {
       * 运行账号
       */
     RunAs: string;
+    /**
+      * 主机名称
+      */
+    HostName: string;
+    /**
+      * 外网ip
+      */
+    PublicIp: string;
 }
 /**
  * DescribeAssetImageRegistrySummary请求参数结构体
@@ -4095,7 +4111,7 @@ export interface HostInfo {
       */
     HostID: string;
     /**
-      * 主机ip
+      * 主机ip即内网ip
       */
     HostIP: string;
     /**
@@ -4123,9 +4139,25 @@ export interface HostInfo {
       */
     ContainerCnt: number;
     /**
-      * 主机运行状态
+      * agent运行状态
       */
     Status: string;
+    /**
+      * 是否是Containerd
+      */
+    IsContainerd: boolean;
+    /**
+      * 主机来源
+      */
+    MachineType: string;
+    /**
+      * 外网ip
+      */
+    PublicIp: string;
+    /**
+      * 主机uuid
+      */
+    Uuid: string;
 }
 /**
  * DescribeVirusScanTimeoutSetting请求参数结构体
@@ -4456,7 +4488,7 @@ export interface DescribeAssetHostDetailResponse {
       */
     ContainerCnt: number;
     /**
-      * k8s ip
+      * k8s IP
       */
     K8sMasterIP: string;
     /**
@@ -4468,9 +4500,21 @@ export interface DescribeAssetHostDetailResponse {
       */
     KubeProxyVersion: string;
     /**
-      * 主机运行状态 offline,online,pause
+      * "UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中
       */
     Status: string;
+    /**
+      * 是否Containerd
+      */
+    IsContainerd: boolean;
+    /**
+      * 主机来源;"TENCENTCLOUD":"腾讯云服务器","OTHERCLOUD":"非腾讯云服务器"
+      */
+    MachineType: string;
+    /**
+      * 外网ip
+      */
+    PublicIp: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7551,6 +7595,10 @@ export interface ContainerInfo {
       * 主机名称
       */
     HostName: string;
+    /**
+      * 外网ip
+      */
+    PublicIp: string;
 }
 /**
  * DescribeAssetImageRegistryRiskInfoList请求参数结构体
@@ -9055,12 +9103,13 @@ export interface DescribeAssetHostListRequest {
     Offset?: number;
     /**
       * 过滤条件。
-<li>Status - String - 是否必填：否 - 主机运行状态筛选，0："offline",1："online", 2："paused"</li>
+<li>Status - String - 是否必填：否 - agent状态筛选，"ALL":"全部"(或不传该字段),"UNINSTALL"："未安装","OFFLINE"："离线", "ONLINE"："防护中"</li>
 <li>HostName - String - 是否必填：否 - 主机名筛选</li>
 <li>Group- String - 是否必填：否 - 主机群组搜索</li>
 <li>HostIP- string - 是否必填：否 - 主机ip搜索</li>
 <li>HostID- string - 是否必填：否 - 主机id搜索</li>
 <li>DockerVersion- string - 是否必填：否 - docker版本搜索</li>
+<li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),"TENCENTCLOUD":"腾讯云服务器","OTHERCLOUD":"非腾讯云服务器"</li>
       */
     Filters?: Array<AssetFilters>;
     /**
@@ -9303,6 +9352,14 @@ export interface ServiceInfo {
       * 容器id
       */
     ContainerId: string;
+    /**
+      * 主机名称
+      */
+    HostName: string;
+    /**
+      * 外网ip
+      */
+    PublicIp: string;
 }
 /**
  * AddEditReverseShellWhiteList请求参数结构体

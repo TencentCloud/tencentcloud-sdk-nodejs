@@ -228,6 +228,16 @@ it("scf.v20180416.DeleteAlias", async function () {
     }
 })
 
+it("scf.v20180416.GetAsyncEventStatus", async function () {
+    try {
+       const data = await client.GetAsyncEventStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.DeleteNamespace", async function () {
     try {
        const data = await client.DeleteNamespace({})

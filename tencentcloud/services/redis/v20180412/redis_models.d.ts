@@ -1061,9 +1061,10 @@ export interface ManualBackupInstanceResponse {
  */
 export interface DisableReplicaReadonlyResponse {
     /**
-      * 失败:ERROR，成功:OK
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: string;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

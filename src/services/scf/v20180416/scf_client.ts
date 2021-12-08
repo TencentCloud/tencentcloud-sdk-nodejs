@@ -89,6 +89,7 @@ import {
   CreateFunctionRequest,
   GetAccountRequest,
   PutTotalConcurrencyConfigResponse,
+  GetAsyncEventStatusRequest,
   DeleteAliasResponse,
   PublishVersionResponse,
   AsyncEvent,
@@ -116,6 +117,7 @@ import {
   UpdateNamespaceRequest,
   GetLayerVersionResponse,
   GetRequestStatusResponse,
+  AsyncEventStatus,
   PutReservedConcurrencyConfigResponse,
   FunctionLog,
   InvokeFunctionRequest,
@@ -130,6 +132,7 @@ import {
   DeadLetterConfig,
   ListVersionByFunctionRequest,
   ListFunctionsResponse,
+  GetAsyncEventStatusResponse,
   ListTriggersRequest,
   CreateFunctionResponse,
   GetReservedConcurrencyConfigRequest,
@@ -376,6 +379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAliasResponse) => void
   ): Promise<DeleteAliasResponse> {
     return this.request("DeleteAlias", req, cb)
+  }
+
+  /**
+   * 获取函数异步执行事件状态，事件状态保留 3 * 24 小时（从事件完成开始计时）。
+   */
+  async GetAsyncEventStatus(
+    req: GetAsyncEventStatusRequest,
+    cb?: (error: string, rep: GetAsyncEventStatusResponse) => void
+  ): Promise<GetAsyncEventStatusResponse> {
+    return this.request("GetAsyncEventStatus", req, cb)
   }
 
   /**

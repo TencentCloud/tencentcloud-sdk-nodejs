@@ -5,12 +5,17 @@ export interface QueryFaceMorphJobResponse {
     /**
       * 当前任务状态：排队中、处理中、处理失败或者处理完成
       */
-    JobStatus?: string;
+    JobStatus: string;
     /**
       * 人像渐变输出的结果信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FaceMorphOutput?: FaceMorphOutput;
+    FaceMorphOutput: FaceMorphOutput;
+    /**
+      * 当前任务状态码：1：排队中、3: 处理中、5: 处理失败、7:处理完成
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JobStatusCode: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -1842,6 +1842,36 @@ export interface ClusterInstancesInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Zone: string;
+    /**
+      * 场景名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneName: string;
+    /**
+      * 场景化集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneServiceClass: string;
+    /**
+      * 场景化EMR版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneEmrVersion: string;
+    /**
+      * 场景化集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisplayName: string;
+    /**
+      * vpc name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcName: string;
+    /**
+      * subnet name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetName: string;
 }
 /**
  * 扩容容器资源时的资源描述
@@ -2389,24 +2419,24 @@ export interface InquiryPriceUpdateInstanceResponse {
       * 原价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OriginalCost?: number;
+    OriginalCost: number;
     /**
       * 折扣价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiscountCost?: number;
+    DiscountCost: number;
     /**
       * 变配的时间单位。取值范围：
 <li>s：表示秒。</li>
 <li>m：表示月份。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeUnit?: string;
+    TimeUnit: string;
     /**
       * 变配的时长。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeSpan?: number;
+    TimeSpan: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
