@@ -115,6 +115,21 @@ export interface DescribeDataPerformancePageResponse {
 }
 
 /**
+ * DescribeLogList返回参数结构体
+ */
+export interface DescribeLogListResponse {
+  /**
+   * 返回字符串
+   */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataPerformancePage请求参数结构体
  */
 export interface DescribeDataPerformancePageRequest {
@@ -370,11 +385,11 @@ export interface DescribeProjectsRequest {
 }
 
 /**
- * DescribeLogList返回参数结构体
+ * DescribeDataEventUrl返回参数结构体
  */
-export interface DescribeLogListResponse {
+export interface DescribeDataEventUrlResponse {
   /**
-   * 返回字符串
+   * 返回值
    */
   Result: string
 
@@ -382,6 +397,51 @@ export interface DescribeLogListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLogList请求参数结构体
+ */
+export interface DescribeLogListRequest {
+  /**
+   * 排序方式  desc  asc
+   */
+  Sort: string
+
+  /**
+   * searchlog   histogram
+   */
+  ActionType: string
+
+  /**
+   * 项目ID
+   */
+  ID: number
+
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 限制
+   */
+  Limit?: number
+
+  /**
+   * 上下文
+   */
+  Context?: string
+
+  /**
+   * 查询语句
+   */
+  Query?: string
+
+  /**
+   * 结束时间
+   */
+  EndTime?: string
 }
 
 /**
@@ -438,18 +498,23 @@ export interface CreateProjectResponse {
 }
 
 /**
- * DescribeLogList请求参数结构体
+ * DescribeDataEventUrl请求参数结构体
  */
-export interface DescribeLogListRequest {
+export interface DescribeDataEventUrlRequest {
   /**
-   * 排序方式  desc  asc
+   * 开始时间
    */
-  Sort: string
+  StartTime: number
 
   /**
-   * searchlog   histogram
+   * 类型
    */
-  ActionType: string
+  Type: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: number
 
   /**
    * 项目ID
@@ -457,44 +522,194 @@ export interface DescribeLogListRequest {
   ID: number
 
   /**
+   * 自定义2
+   */
+  ExtSecond?: string
+
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+
+  /**
+   * 运营商
+   */
+  Isp?: string
+
+  /**
+   * 来源页面
+   */
+  From?: string
+
+  /**
+   * 日志等级
+   */
+  Level?: string
+
+  /**
+   * 品牌
+   */
+  Brand?: string
+
+  /**
+   * 地区
+   */
+  Area?: string
+
+  /**
+   * 版本
+   */
+  VersionNum?: string
+
+  /**
+   * 平台
+   */
+  Platform?: string
+
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+
+  /**
+   * 网络类型
+   */
+  NetType?: string
+
+  /**
+   * 机型
+   */
+  Device?: string
+
+  /**
+   * 是否海外
+   */
+  IsAbroad?: string
+
+  /**
+   * 操作系统
+   */
+  Os?: string
+
+  /**
+   * 浏览器
+   */
+  Browser?: string
+
+  /**
+   * 筛选条件
+   */
+  Name?: string
+}
+
+/**
+ * DescribeDataPvUrlStatistics请求参数结构体
+ */
+export interface DescribeDataPvUrlStatisticsRequest {
+  /**
    * 开始时间
    */
-  StartTime?: string
+  StartTime: number
 
   /**
-   * 限制
+   * 类型:"allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
    */
-  Limit?: number
-
-  /**
-   * 上下文
-   */
-  Context?: string
-
-  /**
-   * 查询语句
-   */
-  Query?: string
+  Type: string
 
   /**
    * 结束时间
    */
-  EndTime?: string
-}
-
-/**
- * DescribeScores返回参数结构体
- */
-export interface DescribeScoresResponse {
-  /**
-   * 数组
-   */
-  ScoreSet: Array<ScoreInfo>
+  EndTime: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 项目ID
    */
-  RequestId?: string
+  ID: number
+
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+
+  /**
+   * 运营商
+   */
+  Isp?: string
+
+  /**
+   * 来源页面
+   */
+  From?: string
+
+  /**
+   * 日志等级
+   */
+  Level?: string
+
+  /**
+   * 品牌
+   */
+  Brand?: string
+
+  /**
+   * 地区
+   */
+  Area?: string
+
+  /**
+   * 版本
+   */
+  VersionNum?: string
+
+  /**
+   * 平台
+   */
+  Platform?: string
+
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+
+  /**
+   * 网络类型
+   */
+  NetType?: string
+
+  /**
+   * 机型
+   */
+  Device?: string
+
+  /**
+   * 是否海外
+   */
+  IsAbroad?: string
+
+  /**
+   * 操作系统
+   */
+  Os?: string
+
+  /**
+   * 浏览器
+   */
+  Browser?: string
 }
 
 /**
@@ -628,6 +843,21 @@ export interface DescribeDataLogUrlStatisticsRequest {
 }
 
 /**
+ * DescribeDataPvUrlStatistics返回参数结构体
+ */
+export interface DescribeDataPvUrlStatisticsResponse {
+  /**
+   * 返回值
+   */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProject请求参数结构体
  */
 export interface CreateProjectRequest {
@@ -670,4 +900,19 @@ export interface CreateProjectRequest {
    * 创建的项目描述(可选，最长为 1000)
    */
   Desc?: string
+}
+
+/**
+ * DescribeScores返回参数结构体
+ */
+export interface DescribeScoresResponse {
+  /**
+   * 数组
+   */
+  ScoreSet: Array<ScoreInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

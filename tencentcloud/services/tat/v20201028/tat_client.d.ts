@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { PreviewReplacedCommandContentResponse, CreateCommandResponse, DisableInvokerRequest, RunCommandRequest, DescribeInvocationTasksRequest, DescribeRegionsRequest, DescribeInvokerRecordsResponse, ModifyInvokerRequest, EnableInvokerResponse, EnableInvokerRequest, ModifyCommandResponse, DescribeInvokersResponse, DeleteCommandResponse, DisableInvokerResponse, DescribeCommandsResponse, CreateInvokerRequest, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeInvokersRequest, DescribeCommandsRequest, DeleteInvokerResponse, DescribeInvocationsRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, PreviewReplacedCommandContentRequest, DescribeAutomationAgentStatusResponse, CreateInvokerResponse, ModifyInvokerResponse, DeleteCommandRequest, DeleteInvokerRequest, InvokeCommandRequest, DescribeInvokerRecordsRequest, RunCommandResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
+import { PreviewReplacedCommandContentResponse, CreateCommandResponse, DisableInvokerRequest, RunCommandRequest, DescribeInvocationTasksRequest, DescribeRegionsRequest, DescribeInvokerRecordsResponse, ModifyInvokerRequest, EnableInvokerResponse, EnableInvokerRequest, ModifyCommandResponse, DescribeInvokersResponse, CancelInvocationResponse, DeleteCommandResponse, DisableInvokerResponse, DescribeCommandsResponse, CreateInvokerRequest, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeInvokersRequest, DescribeCommandsRequest, DeleteInvokerResponse, DescribeInvocationsRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, PreviewReplacedCommandContentRequest, ModifyInvokerResponse, DescribeAutomationAgentStatusResponse, CreateInvokerResponse, CancelInvocationRequest, DeleteCommandRequest, DeleteInvokerRequest, InvokeCommandRequest, DescribeInvokerRecordsRequest, RunCommandResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
 /**
  * tat client
  * @class
@@ -23,6 +23,13 @@ export declare class Client extends AbstractClient {
      * 此接口用于查询执行活动详情。
      */
     DescribeInvocations(req: DescribeInvocationsRequest, cb?: (error: string, rep: DescribeInvocationsResponse) => void): Promise<DescribeInvocationsResponse>;
+    /**
+     * 取消一台或多台CVM实例执行的命令
+
+* 如果命令还未下发到agent，任务状态处于处于PENDING、DELIVERING、DELIVER_DELAYED，取消后任务状态是CANCELLED
+* 如果命令已下发到agent，任务状态处于RUNNING， 取消后任务状态是TERMINATED
+     */
+    CancelInvocation(req: CancelInvocationRequest, cb?: (error: string, rep: CancelInvocationResponse) => void): Promise<CancelInvocationResponse>;
     /**
      * 此接口用于查询执行任务详情。
      */

@@ -656,6 +656,16 @@ export interface DescribeInvokersResponse {
 }
 
 /**
+ * CancelInvocation返回参数结构体
+ */
+export interface CancelInvocationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCommand返回参数结构体
  */
 export interface DeleteCommandResponse {
@@ -1212,6 +1222,16 @@ export interface InvocationTask {
 }
 
 /**
+ * ModifyInvoker返回参数结构体
+ */
+export interface ModifyInvokerResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 执行器执行记录。
  */
 export interface InvokerRecord {
@@ -1277,13 +1297,20 @@ export interface CreateInvokerResponse {
 }
 
 /**
- * ModifyInvoker返回参数结构体
+ * CancelInvocation请求参数结构体
  */
-export interface ModifyInvokerResponse {
+export interface CancelInvocationRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 执行活动ID
    */
-  RequestId?: string
+  InvocationId: string
+
+  /**
+      * 实例ID列表，上限100。支持实例类型：
+<li> CVM
+<li> LIGHTHOUSE
+      */
+  InstanceIds?: Array<string>
 }
 
 /**

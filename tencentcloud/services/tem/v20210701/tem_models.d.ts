@@ -879,6 +879,36 @@ export interface DeployServicePodDetail {
     Webshell?: string;
 }
 /**
+ * ModifyApplicationReplicas返回参数结构体
+ */
+export interface ModifyApplicationReplicasResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyApplicationReplicas请求参数结构体
+ */
+export interface ModifyApplicationReplicasRequest {
+    /**
+      * 服务id
+      */
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 实例数量
+      */
+    Replicas: number;
+    /**
+      * 来源渠道
+      */
+    SourceChannel?: number;
+}
+/**
  * 日志输出配置
  */
 export interface LogOutputConf {

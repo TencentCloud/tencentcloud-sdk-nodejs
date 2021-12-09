@@ -157,13 +157,13 @@ export interface ListAliasesResponse {
   /**
    * 别名列表
    */
-  Aliases?: Array<Alias>
+  Aliases: Array<Alias>
 
   /**
       * 别名总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -423,35 +423,35 @@ export interface GetAliasResponse {
   /**
    * 别名指向的主版本
    */
-  FunctionVersion?: string
+  FunctionVersion: string
 
   /**
    * 别名的名称
    */
-  Name?: string
+  Name: string
 
   /**
    * 别名的路由信息
    */
-  RoutingConfig?: RoutingConfig
+  RoutingConfig: RoutingConfig
 
   /**
       * 别名的描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description?: string
+  Description: string
 
   /**
       * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AddTime?: string
+  AddTime: string
 
   /**
       * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ModTime?: string
+  ModTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -688,7 +688,7 @@ export interface DeleteFunctionRequest {
   Namespace?: string
 
   /**
-   * 函数版本
+   * 函数版本，如果删除版本的话传入版本号，不传入改字段删除函数下的所有版本
    */
   Qualifier?: string
 }
@@ -850,19 +850,19 @@ export interface ListVersionByFunctionResponse {
   /**
    * 函数版本。
    */
-  FunctionVersion?: Array<string>
+  FunctionVersion: Array<string>
 
   /**
       * 函数版本列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Versions?: Array<FunctionVersion>
+  Versions: Array<FunctionVersion>
 
   /**
       * 函数版本总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1166,7 +1166,7 @@ export interface TerminateAsyncEventRequest {
   Namespace?: string
 
   /**
-   * 优雅关停
+   * 该参数已下线
    */
   GraceShutdown?: boolean
 }
@@ -1973,42 +1973,42 @@ export interface PublishVersionResponse {
   /**
    * 函数的版本
    */
-  FunctionVersion?: string
+  FunctionVersion: string
 
   /**
    * 代码大小
    */
-  CodeSize?: number
+  CodeSize: number
 
   /**
    * 最大可用内存
    */
-  MemorySize?: number
+  MemorySize: number
 
   /**
    * 函数的描述
    */
-  Description?: string
+  Description: string
 
   /**
    * 函数的入口
    */
-  Handler?: string
+  Handler: string
 
   /**
    * 函数的超时时间
    */
-  Timeout?: number
+  Timeout: number
 
   /**
    * 函数的运行环境
    */
-  Runtime?: string
+  Runtime: string
 
   /**
    * 函数的命名空间
    */
-  Namespace?: string
+  Namespace: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2991,12 +2991,12 @@ export interface GetFunctionAddressResponse {
   /**
    * 函数的Cos地址
    */
-  Url?: string
+  Url: string
 
   /**
    * 函数的SHA256编码
    */
-  CodeSha256?: string
+  CodeSha256: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3144,6 +3144,12 @@ export interface FunctionVersion {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModTime?: string
+
+  /**
+      * 版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: string
 }
 
 /**
@@ -3699,12 +3705,12 @@ export interface GetProvisionedConcurrencyConfigResponse {
   /**
    * 该函数剩余可配置的预置并发数。
    */
-  UnallocatedConcurrencyNum?: number
+  UnallocatedConcurrencyNum: number
 
   /**
    * 函数已预置的并发配置详情。
    */
-  Allocated?: Array<VersionProvisionedConcurrencyInfo>
+  Allocated: Array<VersionProvisionedConcurrencyInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

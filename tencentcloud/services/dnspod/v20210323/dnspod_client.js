@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRecord", req, cb);
     }
     /**
+     * 获取域名别名列表
+     */
+    async DescribeDomainAliasList(req, cb) {
+        return this.request("DescribeDomainAliasList", req, cb);
+    }
+    /**
      * 修改解析记录的状态
      */
     async ModifyRecordStatus(req, cb) {
@@ -108,10 +114,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomain", req, cb);
     }
     /**
-     * 锁定域名
+     * 获取帐户信息
      */
-    async ModifyDomainLock(req, cb) {
-        return this.request("ModifyDomainLock", req, cb);
+    async DescribeUserDetail(req, cb) {
+        return this.request("DescribeUserDetail", req, cb);
     }
     /**
      * 获取等级允许的记录类型
@@ -206,10 +212,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainLogList", req, cb);
     }
     /**
-     * 获取帐户信息
+     * 锁定域名
      */
-    async DescribeUserDetail(req, cb) {
-        return this.request("DescribeUserDetail", req, cb);
+    async ModifyDomainLock(req, cb) {
+        return this.request("ModifyDomainLock", req, cb);
     }
     /**
      * 批量修改记录

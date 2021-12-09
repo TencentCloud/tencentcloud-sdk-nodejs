@@ -619,6 +619,11 @@ export interface ClientConnection {
    * 对应客户端IP的连接数
    */
   Count: number
+
+  /**
+   * 是否为内部ip
+   */
+  InternalService: boolean
 }
 
 /**

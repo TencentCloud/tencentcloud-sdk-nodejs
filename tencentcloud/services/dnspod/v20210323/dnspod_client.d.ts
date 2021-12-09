@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRecordRequest, DescribeRecordTypeRequest, DeleteDomainRequest, ModifyDomainOwnerRequest, DeleteShareDomainRequest, DeleteDomainAliasResponse, CreateDomainBatchResponse, ModifyDomainStatusRequest, ModifyDynamicDNSRequest, ModifyDomainOwnerResponse, DescribeRecordLineListRequest, ModifyRecordRemarkRequest, DescribeRecordListResponse, CreateRecordBatchRequest, DescribeUserDetailRequest, DeleteDomainAliasRequest, CreateRecordBatchResponse, DescribeUserDetailResponse, ModifyDomainLockRequest, ModifyRecordRemarkResponse, DescribeDomainListRequest, DescribeDomainShareInfoResponse, DescribeBatchTaskRequest, DescribeDomainPurviewRequest, ModifyDomainStatusResponse, ModifySubdomainStatusRequest, DescribeRecordRequest, ModifyDomainUnlockRequest, CreateDomainGroupResponse, ModifyDomainLockResponse, DescribeDomainResponse, DeleteRecordRequest, CreateDomainAliasResponse, DescribeRecordListRequest, DescribeDomainRequest, DescribeRecordLineListResponse, DescribeRecordResponse, ModifyRecordStatusRequest, ModifyDynamicDNSResponse, CreateRecordResponse, CreateDomainBatchRequest, DescribeDomainLogListRequest, DescribeDomainPurviewResponse, DescribeDomainShareInfoRequest, ModifySubdomainStatusResponse, ModifyRecordStatusResponse, ModifyRecordResponse, DescribeRecordTypeResponse, ModifyDomainUnlockResponse, CreateDomainRequest, ModifyRecordBatchResponse, DescribeDomainListResponse, ModifyDomainRemarkResponse, ModifyRecordBatchRequest, ModifyDomainRemarkRequest, DescribeBatchTaskResponse, DeleteRecordResponse, CreateDomainGroupRequest, DeleteDomainResponse, CreateDomainResponse, ModifyRecordRequest, DeleteShareDomainResponse, DescribeDomainLogListResponse, CreateDomainAliasRequest } from "./dnspod_models";
+import { CreateRecordRequest, DeleteDomainAliasResponse, ModifySubdomainStatusRequest, CreateRecordBatchResponse, DescribeBatchTaskRequest, DescribeDomainResponse, DescribeRecordLineListResponse, CreateDomainBatchRequest, DescribeDomainShareInfoRequest, DescribeRecordTypeResponse, ModifyDomainRemarkResponse, DescribeDomainAliasListResponse, DeleteShareDomainResponse, ModifyRecordRequest, DeleteDomainRequest, ModifyDomainOwnerRequest, DescribeRecordLineListRequest, DescribeRecordListResponse, CreateRecordBatchRequest, DeleteDomainAliasRequest, ModifyDomainLockRequest, ModifyDomainStatusRequest, ModifyDomainStatusResponse, DescribeRecordRequest, CreateDomainGroupResponse, DeleteRecordRequest, DescribeDomainRequest, ModifyRecordStatusRequest, CreateRecordResponse, DescribeRecordResponse, ModifyRecordResponse, ModifyDomainUnlockResponse, DescribeDomainLogListRequest, DescribeDomainListResponse, ModifyRecordBatchRequest, DeleteRecordResponse, CreateDomainResponse, ModifyRecordBatchResponse, DescribeDomainLogListResponse, DescribeRecordTypeRequest, CreateDomainBatchResponse, ModifyDomainOwnerResponse, DescribeUserDetailResponse, CreateDomainRequest, DescribeDomainShareInfoResponse, ModifyDomainRemarkRequest, CreateDomainAliasResponse, DescribeRecordListRequest, DescribeDomainPurviewResponse, ModifySubdomainStatusResponse, ModifyRecordStatusResponse, CreateDomainGroupRequest, DeleteDomainResponse, DescribeDomainAliasListRequest, CreateDomainAliasRequest, DeleteShareDomainRequest, ModifyDynamicDNSRequest, ModifyRecordRemarkRequest, DescribeUserDetailRequest, ModifyRecordRemarkResponse, DescribeDomainListRequest, DescribeDomainPurviewRequest, ModifyDomainUnlockRequest, ModifyDomainLockResponse, DescribeBatchTaskResponse, ModifyDynamicDNSResponse } from "./dnspod_models";
 /**
  * dnspod client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 删除记录
      */
     DeleteRecord(req: DeleteRecordRequest, cb?: (error: string, rep: DeleteRecordResponse) => void): Promise<DeleteRecordResponse>;
+    /**
+     * 获取域名别名列表
+     */
+    DescribeDomainAliasList(req: DescribeDomainAliasListRequest, cb?: (error: string, rep: DescribeDomainAliasListResponse) => void): Promise<DescribeDomainAliasListResponse>;
     /**
      * 修改解析记录的状态
      */
@@ -62,9 +66,9 @@ export declare class Client extends AbstractClient {
      */
     CreateDomain(req: CreateDomainRequest, cb?: (error: string, rep: CreateDomainResponse) => void): Promise<CreateDomainResponse>;
     /**
-     * 锁定域名
+     * 获取帐户信息
      */
-    ModifyDomainLock(req: ModifyDomainLockRequest, cb?: (error: string, rep: ModifyDomainLockResponse) => void): Promise<ModifyDomainLockResponse>;
+    DescribeUserDetail(req?: DescribeUserDetailRequest, cb?: (error: string, rep: DescribeUserDetailResponse) => void): Promise<DescribeUserDetailResponse>;
     /**
      * 获取等级允许的记录类型
      */
@@ -128,9 +132,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomainLogList(req: DescribeDomainLogListRequest, cb?: (error: string, rep: DescribeDomainLogListResponse) => void): Promise<DescribeDomainLogListResponse>;
     /**
-     * 获取帐户信息
+     * 锁定域名
      */
-    DescribeUserDetail(req?: DescribeUserDetailRequest, cb?: (error: string, rep: DescribeUserDetailResponse) => void): Promise<DescribeUserDetailResponse>;
+    ModifyDomainLock(req: ModifyDomainLockRequest, cb?: (error: string, rep: ModifyDomainLockResponse) => void): Promise<ModifyDomainLockResponse>;
     /**
      * 批量修改记录
      */

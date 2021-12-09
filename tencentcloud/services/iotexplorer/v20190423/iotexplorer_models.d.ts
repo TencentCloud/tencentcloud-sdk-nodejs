@@ -684,6 +684,23 @@ export interface FenceBindProductItem {
     ProductId: string;
 }
 /**
+ * PublishRRPCMessage请求参数结构体
+ */
+export interface PublishRRPCMessageRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 消息内容，utf8编码
+      */
+    Payload: string;
+}
+/**
  * 设备位置详情
  */
 export interface DevicePositionItem {
@@ -2475,6 +2492,25 @@ export interface DirectBindDeviceInFamilyRequest {
       * 房间ID
       */
     RoomId?: string;
+}
+/**
+ * PublishRRPCMessage返回参数结构体
+ */
+export interface PublishRRPCMessageResponse {
+    /**
+      * RRPC消息ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageId: number;
+    /**
+      * 设备回复的消息内容，采用base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayloadBase64: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeLoRaFrequency返回参数结构体

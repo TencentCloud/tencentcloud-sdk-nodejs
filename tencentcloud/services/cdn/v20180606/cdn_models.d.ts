@@ -227,20 +227,42 @@ export interface AdvancedAuthentication {
     TypeF?: AdvancedAuthenticationTypeF;
 }
 /**
- * 智能压缩配置，默认对 js、html、css、xml、json、shtml、htm 后缀且大小为 256 ~ 2097152 字节的文件进行 GZIP 压缩
+ * 回源的自定义Https配置
  */
-export interface Compression {
+export interface AdvanceHttps {
     /**
-      * 智能压缩配置开关
-on：开启
-off：关闭
-      */
-    Switch: string;
-    /**
-      * 压缩规则数组
+      * 自定义Tls数据开关
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CompressionRules?: Array<CompressionRule>;
+    CustomTlsStatus?: string;
+    /**
+      * Tls版本列表，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TlsVersion?: Array<string>;
+    /**
+      * 自定义加密套件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cipher?: string;
+    /**
+      * 回源双向校验开启状态
+off - 关闭校验
+oneWay - 校验源站
+twoWay - 双向校验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VerifyOriginType?: string;
+    /**
+      * 回源层证书配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CertInfo?: ServerCert;
+    /**
+      * 源站证书配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginCertInfo?: ClientCert;
 }
 /**
  * 是否回源站校验
@@ -716,21 +738,20 @@ RETURN_403:超时拦截；
     AuthTimeoutAction: string;
 }
 /**
- * 精准访问控制匹配规则
+ * 智能压缩配置，默认对 js、html、css、xml、json、shtml、htm 后缀且大小为 256 ~ 2097152 字节的文件进行 GZIP 压缩
  */
-export interface ScdnAclRule {
+export interface Compression {
     /**
-      * 匹配关键字
+      * 智能压缩配置开关
+on：开启
+off：关闭
       */
-    MatchKey: string;
+    Switch: string;
     /**
-      * 逻辑操作符，取值如下
+      * 压缩规则数组
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    LogiOperator: string;
-    /**
-      * 匹配值。
-      */
-    MatchValue: string;
+    CompressionRules?: Array<CompressionRule>;
 }
 /**
  * PurgePathCache返回参数结构体
@@ -1894,6 +1915,11 @@ ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PathBasedOrigin?: Array<PathBasedOriginRule>;
+    /**
+      * HTTPS回源高级配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdvanceHttps?: AdvanceHttps;
 }
 /**
  * 违规 URL 详情
@@ -2852,13 +2878,18 @@ export interface BotCookie {
     UpdateTime?: string;
 }
 /**
- * DescribeCdnIp请求参数结构体
+ * CreateScdnFailedLogTask返回参数结构体
  */
-export interface DescribeCdnIpRequest {
+export interface CreateScdnFailedLogTaskResponse {
     /**
-      * 需要查询的 IP 列表
+      * 创建结果,
+"0" -> 创建成功
       */
-    Ips: Array<string>;
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * Ipv6启用配置，不可更改
@@ -4550,6 +4581,23 @@ export interface DistrictIspInfo {
       * 运营商名称
       */
     IspName: string;
+}
+/**
+ * 精准访问控制匹配规则
+ */
+export interface ScdnAclRule {
+    /**
+      * 匹配关键字
+      */
+    MatchKey: string;
+    /**
+      * 逻辑操作符，取值如下
+      */
+    LogiOperator: string;
+    /**
+      * 匹配值。
+      */
+    MatchValue: string;
 }
 /**
  * 缓存过期规则配置
@@ -7486,18 +7534,13 @@ export interface DescribeDiagnoseReportResponse {
     RequestId?: string;
 }
 /**
- * CreateScdnFailedLogTask返回参数结构体
+ * DescribeCdnIp请求参数结构体
  */
-export interface CreateScdnFailedLogTaskResponse {
+export interface DescribeCdnIpRequest {
     /**
-      * 创建结果,
-"0" -> 创建成功
+      * 需要查询的 IP 列表
       */
-    Result: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Ips: Array<string>;
 }
 /**
  * 访问明细数据类型

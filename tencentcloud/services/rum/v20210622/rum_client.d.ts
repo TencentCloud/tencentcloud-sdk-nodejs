@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDataPerformancePageResponse, DescribeDataPerformancePageRequest, DescribeProjectsResponse, DescribeScoresRequest, DescribeErrorRequest, DescribeProjectsRequest, DescribeLogListResponse, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, DescribeLogListRequest, DescribeScoresResponse, DescribeErrorResponse, DescribeDataLogUrlStatisticsRequest, CreateProjectRequest } from "./rum_models";
+import { DescribeDataPerformancePageResponse, DescribeLogListResponse, DescribeDataPerformancePageRequest, DescribeProjectsResponse, DescribeScoresRequest, DescribeErrorRequest, DescribeProjectsRequest, DescribeDataEventUrlResponse, DescribeLogListRequest, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, DescribeDataEventUrlRequest, DescribeDataPvUrlStatisticsRequest, DescribeErrorResponse, DescribeDataLogUrlStatisticsRequest, DescribeDataPvUrlStatisticsResponse, CreateProjectRequest, DescribeScoresResponse } from "./rum_models";
 /**
  * rum client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 获取项目下的日志列表（实例创建的项目下的日志列表）
      */
     DescribeLogList(req: DescribeLogListRequest, cb?: (error: string, rep: DescribeLogListResponse) => void): Promise<DescribeLogListResponse>;
+    /**
+     * 获取DescribeDataEventUrl信息
+     */
+    DescribeDataEventUrl(req: DescribeDataEventUrlRequest, cb?: (error: string, rep: DescribeDataEventUrlResponse) => void): Promise<DescribeDataEventUrlResponse>;
     /**
      * 获取首页分数列表
      */
@@ -35,4 +39,8 @@ export declare class Client extends AbstractClient {
      * 获取项目列表（实例创建的团队下的项目列表）
      */
     DescribeProjects(req: DescribeProjectsRequest, cb?: (error: string, rep: DescribeProjectsResponse) => void): Promise<DescribeProjectsResponse>;
+    /**
+     * 获取DescribeDataPvUrlStatistics信息
+     */
+    DescribeDataPvUrlStatistics(req: DescribeDataPvUrlStatisticsRequest, cb?: (error: string, rep: DescribeDataPvUrlStatisticsResponse) => void): Promise<DescribeDataPvUrlStatisticsResponse>;
 }

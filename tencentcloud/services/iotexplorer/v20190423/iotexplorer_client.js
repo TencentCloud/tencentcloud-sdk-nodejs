@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReleaseStudioProduct", req, cb);
     }
     /**
+     * 下发RRPC消息
+     */
+    async PublishRRPCMessage(req, cb) {
+        return this.request("PublishRRPCMessage", req, cb);
+    }
+    /**
      * 搜索位置空间
      */
     async SearchPositionSpace(req, cb) {

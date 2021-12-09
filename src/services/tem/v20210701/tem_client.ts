@@ -46,6 +46,8 @@ import {
   DescribeRunPodPage,
   IngressTls,
   DeployServicePodDetail,
+  ModifyApplicationReplicasResponse,
+  ModifyApplicationReplicasRequest,
   LogOutputConf,
   DescribeIngressesResponse,
   DeleteIngressResponse,
@@ -102,6 +104,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeployApplicationResponse) => void
   ): Promise<DeployApplicationResponse> {
     return this.request("DeployApplication", req, cb)
+  }
+
+  /**
+   * 修改应用实例数量
+   */
+  async ModifyApplicationReplicas(
+    req: ModifyApplicationReplicasRequest,
+    cb?: (error: string, rep: ModifyApplicationReplicasResponse) => void
+  ): Promise<ModifyApplicationReplicasResponse> {
+    return this.request("ModifyApplicationReplicas", req, cb)
   }
 
   /**

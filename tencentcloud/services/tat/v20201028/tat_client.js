@@ -52,6 +52,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInvocations", req, cb);
     }
     /**
+     * 取消一台或多台CVM实例执行的命令
+
+* 如果命令还未下发到agent，任务状态处于处于PENDING、DELIVERING、DELIVER_DELAYED，取消后任务状态是CANCELLED
+* 如果命令已下发到agent，任务状态处于RUNNING， 取消后任务状态是TERMINATED
+     */
+    async CancelInvocation(req, cb) {
+        return this.request("CancelInvocation", req, cb);
+    }
+    /**
      * 此接口用于查询执行任务详情。
      */
     async DescribeInvocationTasks(req, cb) {

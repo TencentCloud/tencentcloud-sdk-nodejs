@@ -38,6 +38,7 @@ import {
   ModifyCommandResponse,
   RegionInfo,
   DescribeInvokersResponse,
+  CancelInvocationResponse,
   DeleteCommandResponse,
   DisableInvokerResponse,
   DescribeCommandsResponse,
@@ -55,10 +56,11 @@ import {
   Command,
   PreviewReplacedCommandContentRequest,
   InvocationTask,
+  ModifyInvokerResponse,
   InvokerRecord,
   DescribeAutomationAgentStatusResponse,
   CreateInvokerResponse,
-  ModifyInvokerResponse,
+  CancelInvocationRequest,
   DeleteCommandRequest,
   DeleteInvokerRequest,
   InvokeCommandRequest,
@@ -116,6 +118,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInvocationsResponse) => void
   ): Promise<DescribeInvocationsResponse> {
     return this.request("DescribeInvocations", req, cb)
+  }
+
+  /**
+     * 取消一台或多台CVM实例执行的命令
+
+* 如果命令还未下发到agent，任务状态处于处于PENDING、DELIVERING、DELIVER_DELAYED，取消后任务状态是CANCELLED
+* 如果命令已下发到agent，任务状态处于RUNNING， 取消后任务状态是TERMINATED
+     */
+  async CancelInvocation(
+    req: CancelInvocationRequest,
+    cb?: (error: string, rep: CancelInvocationResponse) => void
+  ): Promise<CancelInvocationResponse> {
+    return this.request("CancelInvocation", req, cb)
   }
 
   /**

@@ -20,21 +20,25 @@ import { ClientConfig } from "../../../common/interface"
 import {
   RumProject,
   DescribeDataPerformancePageResponse,
+  DescribeLogListResponse,
   DescribeDataPerformancePageRequest,
   DescribeProjectsResponse,
   DescribeScoresRequest,
   DescribeErrorRequest,
   ScoreInfo,
   DescribeProjectsRequest,
-  DescribeLogListResponse,
+  DescribeDataEventUrlResponse,
+  DescribeLogListRequest,
   Filter,
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
-  DescribeLogListRequest,
-  DescribeScoresResponse,
+  DescribeDataEventUrlRequest,
+  DescribeDataPvUrlStatisticsRequest,
   DescribeErrorResponse,
   DescribeDataLogUrlStatisticsRequest,
+  DescribeDataPvUrlStatisticsResponse,
   CreateProjectRequest,
+  DescribeScoresResponse,
 } from "./rum_models"
 
 /**
@@ -64,6 +68,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogListResponse) => void
   ): Promise<DescribeLogListResponse> {
     return this.request("DescribeLogList", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataEventUrl信息
+   */
+  async DescribeDataEventUrl(
+    req: DescribeDataEventUrlRequest,
+    cb?: (error: string, rep: DescribeDataEventUrlResponse) => void
+  ): Promise<DescribeDataEventUrlResponse> {
+    return this.request("DescribeDataEventUrl", req, cb)
   }
 
   /**
@@ -114,5 +128,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProjectsResponse) => void
   ): Promise<DescribeProjectsResponse> {
     return this.request("DescribeProjects", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataPvUrlStatistics信息
+   */
+  async DescribeDataPvUrlStatistics(
+    req: DescribeDataPvUrlStatisticsRequest,
+    cb?: (error: string, rep: DescribeDataPvUrlStatisticsResponse) => void
+  ): Promise<DescribeDataPvUrlStatisticsResponse> {
+    return this.request("DescribeDataPvUrlStatistics", req, cb)
   }
 }

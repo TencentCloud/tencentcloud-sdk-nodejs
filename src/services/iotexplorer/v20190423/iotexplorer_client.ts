@@ -56,6 +56,7 @@ import {
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   FenceBindProductItem,
+  PublishRRPCMessageRequest,
   DevicePositionItem,
   ListTopicPolicyResponse,
   SearchPositionSpaceResponse,
@@ -146,6 +147,7 @@ import {
   DescribeBatchProductionRequest,
   CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
+  PublishRRPCMessageResponse,
   DescribeLoRaFrequencyResponse,
   DescribeSpaceFenceEventListRequest,
   GetLoRaGatewayListRequest,
@@ -260,6 +262,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReleaseStudioProductResponse) => void
   ): Promise<ReleaseStudioProductResponse> {
     return this.request("ReleaseStudioProduct", req, cb)
+  }
+
+  /**
+   * 下发RRPC消息
+   */
+  async PublishRRPCMessage(
+    req: PublishRRPCMessageRequest,
+    cb?: (error: string, rep: PublishRRPCMessageResponse) => void
+  ): Promise<PublishRRPCMessageResponse> {
+    return this.request("PublishRRPCMessage", req, cb)
   }
 
   /**

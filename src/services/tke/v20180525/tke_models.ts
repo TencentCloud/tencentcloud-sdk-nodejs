@@ -2696,6 +2696,12 @@ Pending是创建中，Running是 运行中。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AutoCreatedEipId?: string
+
+  /**
+      * 容器状态是否持久化
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PersistStatus?: boolean
 }
 
 /**

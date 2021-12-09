@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogList", req, cb);
     }
     /**
+     * 获取DescribeDataEventUrl信息
+     */
+    async DescribeDataEventUrl(req, cb) {
+        return this.request("DescribeDataEventUrl", req, cb);
+    }
+    /**
      * 获取首页分数列表
      */
     async DescribeScores(req, cb) {
@@ -68,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProjects(req, cb) {
         return this.request("DescribeProjects", req, cb);
+    }
+    /**
+     * 获取DescribeDataPvUrlStatistics信息
+     */
+    async DescribeDataPvUrlStatistics(req, cb) {
+        return this.request("DescribeDataPvUrlStatistics", req, cb);
     }
 }
 exports.Client = Client;

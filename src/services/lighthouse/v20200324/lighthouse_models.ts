@@ -72,12 +72,12 @@ export interface DescribeInstancesTrafficPackagesResponse {
   /**
    * 符合条件的实例流量包详情数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例流量包详情列表。
    */
-  InstanceTrafficPackageSet?: Array<InstanceTrafficPackage>
+  InstanceTrafficPackageSet: Array<InstanceTrafficPackage>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

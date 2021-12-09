@@ -28,6 +28,16 @@ it("tem.v20210701.DeployApplication", async function () {
     }
 })
 
+it("tem.v20210701.ModifyApplicationReplicas", async function () {
+    try {
+       const data = await client.ModifyApplicationReplicas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.RestartApplicationPod", async function () {
     try {
        const data = await client.RestartApplicationPod({})

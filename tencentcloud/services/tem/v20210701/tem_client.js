@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeployApplication", req, cb);
     }
     /**
+     * 修改应用实例数量
+     */
+    async ModifyApplicationReplicas(req, cb) {
+        return this.request("ModifyApplicationReplicas", req, cb);
+    }
+    /**
      * 重启应用实例
      */
     async RestartApplicationPod(req, cb) {

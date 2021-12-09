@@ -306,7 +306,7 @@ adjustment-调账
  */
 export interface ConsumptionBusinessSummaryDataItem {
   /**
-   * 产品码
+   * 产品名称代码
    */
   BusinessCode: string
 
@@ -351,12 +351,12 @@ export interface CostDetail {
   PayerUin: string
 
   /**
-   * 业务名称
+   * 产品名称
    */
   BusinessCodeName: string
 
   /**
-   * 产品名称
+   * 子产品名称
    */
   ProductCodeName: string
 
@@ -422,7 +422,7 @@ export interface CostDetail {
   ComponentSet: Array<CostComponentSet>
 
   /**
-   * 产品代码
+   * 子产品名称代码
    */
   ProductCode: string
 }
@@ -458,7 +458,7 @@ export interface BillResourceSummary {
   BusinessCodeName: string
 
   /**
-   * 子产品：云产品子类，如云服务器CVM-标准型S1， 当没有获取到子产品名称时，返回"-"
+   * 子产品名称：云产品子类，如云服务器CVM-标准型S1， 当没有获取到子产品名称时，返回"-"
    */
   ProductCodeName: string
 
@@ -605,12 +605,12 @@ export interface BillResourceSummary {
   OperateUin: string
 
   /**
-   * 商品名称代码
+   * 产品名称代码
    */
   BusinessCode: string
 
   /**
-   * 子商品名称代码
+   * 子产品名称代码
    */
   ProductCode: string
 
@@ -660,7 +660,7 @@ export interface Conditions {
   TimeRange?: number
 
   /**
-   * 产品编码
+   * 产品名称代码
    */
   BusinessCode?: string
 
@@ -685,12 +685,12 @@ export interface Conditions {
   ResourceKeyword?: string
 
   /**
-   * 产品编码
+   * 产品名称代码
    */
   BusinessCodes?: Array<string>
 
   /**
-   * 子产品编码
+   * 子产品名称代码
    */
   ProductCodes?: Array<string>
 
@@ -1000,7 +1000,7 @@ export interface ConsumptionResourceSummaryDataItem {
   PayModeName: string
 
   /**
-   * 产品码
+   * 产品名称代码
    */
   BusinessCode: string
 
@@ -1076,8 +1076,38 @@ export interface DescribeBillDetailRequest {
   ResourceId?: string
 
   /**
-   * 查询交易类型。如 按量计费日结，按量计费小时结 等
-   */
+      * 查询交易类型，如下：
+包年包月新购
+包年包月续费
+包年包月配置变更
+包年包月退款
+按量计费扣费
+按量计费小时结
+按量计费日结
+按量计费月结
+线下项目扣费
+线下产品扣费
+调账扣费
+调账补偿
+竞价实例小时结
+线下项目调账补偿
+线下产品调账补偿
+优惠扣费
+优惠补偿
+按量计费迁入资源
+按量计费迁出资源
+包年包月迁入资源
+包年包月迁出资源
+预付费用
+小时费用
+预留实例退款
+按量计费冲正
+按量计费冲正
+按量计费冲正
+按量计费冲正
+按量计费冲正
+包年包月转按量
+      */
   ActionType?: string
 
   /**
@@ -1086,7 +1116,7 @@ export interface DescribeBillDetailRequest {
   ProjectId?: number
 
   /**
-      * 商品名称代码
+      * 产品名称代码
 备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
       */
   BusinessCode?: string
@@ -1388,7 +1418,7 @@ export interface DescribeCostSummaryByRegionRequest {
  */
 export interface BusinessSummaryOverviewItem {
   /**
-      * 产品码
+      * 产品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BusinessCode: string
@@ -1872,6 +1902,7 @@ export interface DescribeBillResourceSummaryRequest {
 按量计费冲正
 按量计费冲正
 按量计费冲正
+包年包月转按量
       */
   ActionType?: string
 
@@ -1886,7 +1917,7 @@ export interface DescribeBillResourceSummaryRequest {
   PayMode?: string
 
   /**
-      * 商品名称代码
+      * 产品名称代码
 备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
       */
   BusinessCode?: string
@@ -2106,19 +2137,19 @@ export interface BillDetail {
   Tags: Array<BillTagInfo>
 
   /**
-      * 商品名称代码
+      * 产品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BusinessCode: string
 
   /**
-      * 子商品名称代码
+      * 子产品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProductCode: string
 
   /**
-      * 交易类型代码（未开放的字段）
+      * 交易类型代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ActionType: string
@@ -2566,7 +2597,7 @@ export interface DescribeBillSummaryByProjectResponse {
  */
 export interface ConditionBusiness {
   /**
-   * 产品码
+   * 产品名称代码
    */
   BusinessCode: string
 

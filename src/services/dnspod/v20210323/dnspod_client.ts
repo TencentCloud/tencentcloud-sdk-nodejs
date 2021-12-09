@@ -18,91 +18,94 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  BatchRecordInfo,
   CreateRecordRequest,
-  DescribeRecordTypeRequest,
+  DescribeBatchTaskDetail,
+  DeleteDomainAliasResponse,
+  ModifySubdomainStatusRequest,
+  CreateRecordBatchResponse,
+  CreateDomainBatchRecord,
+  DescribeBatchTaskRequest,
+  DescribeDomainResponse,
+  DescribeRecordLineListResponse,
+  DomainInfo,
+  CreateDomainBatchRequest,
+  DescribeDomainShareInfoRequest,
+  DomainListItem,
+  DescribeRecordTypeResponse,
+  ModifyDomainRemarkResponse,
+  DescribeDomainAliasListResponse,
+  RecordCountInfo,
+  DeleteShareDomainResponse,
+  ModifyRecordRequest,
+  BatchRecordInfo,
+  LineGroupInfo,
   DeleteDomainRequest,
   ModifyDomainOwnerRequest,
-  DeleteShareDomainRequest,
-  DescribeBatchTaskDetail,
-  RecordInfo,
-  LineGroupInfo,
   DomainShareInfo,
-  DeleteDomainAliasResponse,
-  RecordListItem,
-  CreateDomainBatchResponse,
-  ModifyDomainStatusRequest,
-  ModifyDynamicDNSRequest,
-  ModifyDomainOwnerResponse,
   DescribeRecordLineListRequest,
-  ModifyRecordRemarkRequest,
   DescribeRecordListResponse,
   CreateRecordBatchRequest,
-  DescribeUserDetailRequest,
   DeleteDomainAliasRequest,
-  ModifyRecordBatchDetail,
-  CreateRecordBatchResponse,
-  DescribeUserDetailResponse,
-  CreateDomainBatchRecord,
+  DomainAliasInfo,
   ModifyDomainLockRequest,
+  ModifyDomainStatusRequest,
+  ModifyDomainStatusResponse,
+  AddRecordBatch,
+  DescribeRecordRequest,
+  CreateDomainGroupResponse,
+  DeleteRecordRequest,
+  DescribeDomainRequest,
+  ModifyRecordStatusRequest,
+  CreateRecordResponse,
+  DescribeRecordResponse,
+  RecordInfo,
+  CreateRecordBatchDetail,
+  ModifyRecordResponse,
+  ModifyDomainUnlockResponse,
+  DescribeDomainLogListRequest,
+  DescribeDomainListResponse,
+  ModifyRecordBatchRequest,
+  DeleteRecordResponse,
+  CreateRecordBatchRecord,
+  CreateDomainResponse,
+  DomainCountInfo,
+  UserInfo,
+  ModifyRecordBatchResponse,
+  DescribeDomainLogListResponse,
+  DescribeRecordTypeRequest,
+  RecordListItem,
+  CreateDomainBatchResponse,
+  ModifyDomainOwnerResponse,
+  ModifyRecordBatchDetail,
+  DescribeUserDetailResponse,
+  CreateDomainRequest,
+  DescribeDomainShareInfoResponse,
+  ModifyDomainRemarkRequest,
+  CreateDomainAliasResponse,
+  DescribeRecordListRequest,
+  DescribeDomainPurviewResponse,
+  ModifySubdomainStatusResponse,
+  ModifyRecordStatusResponse,
+  CreateDomainGroupRequest,
+  LineInfo,
+  DeleteDomainResponse,
+  DescribeDomainAliasListRequest,
+  CreateDomainAliasRequest,
+  DeleteShareDomainRequest,
+  ModifyDynamicDNSRequest,
+  PurviewInfo,
+  ModifyRecordRemarkRequest,
+  DescribeUserDetailRequest,
   ModifyRecordRemarkResponse,
   DescribeDomainListRequest,
   DomainCreateInfo,
-  DescribeDomainShareInfoResponse,
-  DescribeBatchTaskRequest,
   DescribeDomainPurviewRequest,
-  ModifyDomainStatusResponse,
   CreateDomainBatchDetail,
-  ModifySubdomainStatusRequest,
-  DescribeRecordRequest,
   ModifyDomainUnlockRequest,
-  CreateDomainGroupResponse,
   ModifyDomainLockResponse,
-  DescribeDomainResponse,
-  DomainInfo,
-  DeleteRecordRequest,
-  CreateDomainAliasResponse,
-  DescribeRecordListRequest,
-  DescribeDomainRequest,
-  DescribeRecordLineListResponse,
-  DescribeRecordResponse,
-  ModifyRecordStatusRequest,
-  ModifyDynamicDNSResponse,
-  CreateRecordResponse,
-  CreateDomainBatchRequest,
-  DescribeDomainLogListRequest,
-  DescribeDomainPurviewResponse,
-  DescribeDomainShareInfoRequest,
-  ModifySubdomainStatusResponse,
-  CreateRecordBatchDetail,
-  DomainListItem,
-  ModifyRecordStatusResponse,
   LockInfo,
-  ModifyRecordResponse,
-  PurviewInfo,
-  DescribeRecordTypeResponse,
-  ModifyDomainUnlockResponse,
-  CreateDomainRequest,
-  ModifyRecordBatchResponse,
-  DescribeDomainListResponse,
-  ModifyDomainRemarkResponse,
-  ModifyRecordBatchRequest,
-  ModifyDomainRemarkRequest,
   DescribeBatchTaskResponse,
-  DeleteRecordResponse,
-  CreateDomainGroupRequest,
-  CreateRecordBatchRecord,
-  LineInfo,
-  DeleteDomainResponse,
-  CreateDomainResponse,
-  DomainCountInfo,
-  AddRecordBatch,
-  ModifyRecordRequest,
-  UserInfo,
-  RecordCountInfo,
-  DeleteShareDomainResponse,
-  DescribeDomainLogListResponse,
-  CreateDomainAliasRequest,
+  ModifyDynamicDNSResponse,
 } from "./dnspod_models"
 
 /**
@@ -152,6 +155,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRecordResponse) => void
   ): Promise<DeleteRecordResponse> {
     return this.request("DeleteRecord", req, cb)
+  }
+
+  /**
+   * 获取域名别名列表
+   */
+  async DescribeDomainAliasList(
+    req: DescribeDomainAliasListRequest,
+    cb?: (error: string, rep: DescribeDomainAliasListResponse) => void
+  ): Promise<DescribeDomainAliasListResponse> {
+    return this.request("DescribeDomainAliasList", req, cb)
   }
 
   /**
@@ -247,13 +260,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 锁定域名
+   * 获取帐户信息
    */
-  async ModifyDomainLock(
-    req: ModifyDomainLockRequest,
-    cb?: (error: string, rep: ModifyDomainLockResponse) => void
-  ): Promise<ModifyDomainLockResponse> {
-    return this.request("ModifyDomainLock", req, cb)
+  async DescribeUserDetail(
+    req?: DescribeUserDetailRequest,
+    cb?: (error: string, rep: DescribeUserDetailResponse) => void
+  ): Promise<DescribeUserDetailResponse> {
+    return this.request("DescribeUserDetail", req, cb)
   }
 
   /**
@@ -409,13 +422,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取帐户信息
+   * 锁定域名
    */
-  async DescribeUserDetail(
-    req?: DescribeUserDetailRequest,
-    cb?: (error: string, rep: DescribeUserDetailResponse) => void
-  ): Promise<DescribeUserDetailResponse> {
-    return this.request("DescribeUserDetail", req, cb)
+  async ModifyDomainLock(
+    req: ModifyDomainLockRequest,
+    cb?: (error: string, rep: ModifyDomainLockResponse) => void
+  ): Promise<ModifyDomainLockResponse> {
+    return this.request("ModifyDomainLock", req, cb)
   }
 
   /**

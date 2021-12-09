@@ -58,6 +58,16 @@ it("dnspod.v20210323.DeleteRecord", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeDomainAliasList", async function () {
+    try {
+       const data = await client.DescribeDomainAliasList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.ModifyRecordStatus", async function () {
     try {
        const data = await client.ModifyRecordStatus({})
@@ -148,9 +158,9 @@ it("dnspod.v20210323.CreateDomain", async function () {
     }
 })
 
-it("dnspod.v20210323.ModifyDomainLock", async function () {
+it("dnspod.v20210323.DescribeUserDetail", async function () {
     try {
-       const data = await client.ModifyDomainLock({})
+       const data = await client.DescribeUserDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +318,9 @@ it("dnspod.v20210323.DescribeDomainLogList", async function () {
     }
 })
 
-it("dnspod.v20210323.DescribeUserDetail", async function () {
+it("dnspod.v20210323.ModifyDomainLock", async function () {
     try {
-       const data = await client.DescribeUserDetail({})
+       const data = await client.ModifyDomainLock({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

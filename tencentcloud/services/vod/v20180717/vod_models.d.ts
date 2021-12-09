@@ -567,8 +567,17 @@ export interface AiReviewProhibitedOcrTaskOutput {
     Suggestion: string;
     /**
       * Ocr 文字有涉违禁嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>;
+    /**
+      * Ocr 文字有涉违禁嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * Ocr 文字有涉违禁嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 小程序审核概要元信息
@@ -643,8 +652,17 @@ export interface ModifyEventConfigResponse {
 export interface AiAnalysisTaskCoverOutput {
     /**
       * 智能封面列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 CoverSetFileUrl 对应的文件中获取。
       */
     CoverSet: Array<MediaAiAnalysisCoverItem>;
+    /**
+      * 智能封面列表文件 URL。文件的内容为 JSON，数据结构与 CoverSet 字段一致。 （文件不会永久存储，到达 CoverSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    CoverSetFileUrl: string;
+    /**
+      * 智能封面列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    CoverSetFileUrlExpireTime: string;
 }
 /**
  * 点播文件指定时间点截图信息
@@ -2189,8 +2207,17 @@ export interface DescribeEventConfigRequest {
 export interface AiAnalysisTaskClassificationOutput {
     /**
       * 视频智能分类列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 ClassificationSetFileUrl 对应的文件中获取。
       */
     ClassificationSet: Array<MediaAiAnalysisClassificationItem>;
+    /**
+      * 视频智能分类列表文件 URL。文件的内容为 JSON，数据结构与 ClassificationSet 字段一致。 （文件不会永久存储，到达 ClassificationSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    ClassificationSetFileUrl: string;
+    /**
+      * 视频智能分类列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    ClassificationSetFileUrlExpireTime: string;
 }
 /**
  * 文件删除任务
@@ -3634,8 +3661,17 @@ export interface AiReviewPornAsrTaskOutput {
     Suggestion: string;
     /**
       * Asr 文字有涉黄嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewAsrTextSegmentItem>;
+    /**
+      * Asr 文字有涉黄嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * Asr 文字有涉黄嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * SimpleHlsClip返回参数结构体
@@ -4549,6 +4585,43 @@ export interface AiRecognitionTaskSegmentSegmentItem {
     SpecialInfo: string;
 }
 /**
+ * 取回视频任务信息
+ */
+export interface RestoreMediaTask {
+    /**
+      * 取回任务状态，0表示取回完成，其他值表示取回还未完成。
+      */
+    Status: number;
+    /**
+      * 提示信息。
+      */
+    Message: string;
+    /**
+      * 文件ID。
+      */
+    FileId: string;
+    /**
+      * 文件原始存储类型。
+      */
+    OriginalStorageClass: string;
+    /**
+      * 文件目标存储类型。对于临时取回，目标存储类型与原始存储类型相同。
+      */
+    TargetStorageClass: string;
+    /**
+      * 取回模式，取值：
+<li>Expedited：极速模式</li>
+<li>Standard：标准模式</li>
+<li>Bulk：批量模式</li>
+      */
+    RestoreTier: string;
+    /**
+      * 临时取回副本有效期，单位：天。对于永久取回，取值为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RestoreDay: number;
+}
+/**
  * 内容审核 Ocr 文字鉴黄任务输入参数类型
  */
 export interface AiReviewPornOcrTaskInput {
@@ -4588,8 +4661,17 @@ export interface CreateSuperPlayerConfigResponse {
 export interface AiAnalysisTaskFrameTagOutput {
     /**
       * 视频按帧标签列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaAiAnalysisFrameTagSegmentItem>;
+    /**
+      * 视频按帧标签列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 视频按帧标签列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * ModifyAdaptiveDynamicStreamingTemplate请求参数结构体
@@ -4831,8 +4913,17 @@ export interface SearchMediaResponse {
 export interface AiAnalysisTaskTagOutput {
     /**
       * 视频智能标签列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 TagSetFileUrl 对应的文件中获取。
       */
     TagSet: Array<MediaAiAnalysisTagItem>;
+    /**
+      * 视频智能标签列表文件 URL。文件的内容为 JSON，数据结构与 TagSet 字段一致。 （文件不会永久存储，到达 TagSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    TagSetFileUrl: string;
+    /**
+      * 视频智能标签列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    TagSetFileUrlExpireTime: string;
 }
 /**
  * 智能精彩片段结果信息
@@ -4840,8 +4931,17 @@ export interface AiAnalysisTaskTagOutput {
 export interface AiAnalysisTaskHighlightOutput {
     /**
       * 视频智能精彩片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 HighlightSetFileUrl 对应的文件中获取。
       */
     HighlightSet: Array<MediaAiAnalysisHighlightItem>;
+    /**
+      * 视频智能精彩片段列表文件 URL。文件的内容为 JSON，数据结构与 HighlightSet 字段一致。 （文件不会永久存储，到达 HighlightSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    HighlightSetFileUrl: string;
+    /**
+      * 视频智能精彩片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    HighlightSetFileUrlExpireTime: string;
 }
 /**
  * 字幕信息输入参数。
@@ -6529,8 +6629,17 @@ export interface AiReviewTerrorismTaskOutput {
     Label: string;
     /**
       * 有暴恐嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewSegmentItem>;
+    /**
+      * 暴恐嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 暴恐嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * DescribeImageProcessingTemplates请求参数结构体
@@ -6638,8 +6747,17 @@ export interface AiReviewTerrorismOcrTaskOutput {
     Suggestion: string;
     /**
       * Ocr 文字有涉恐嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>;
+    /**
+      * Ocr 文字有涉恐嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * Ocr 文字有涉恐嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 智能分析结果
@@ -7539,8 +7657,17 @@ export interface AiReviewPornOcrTaskOutput {
     Suggestion: string;
     /**
       * Ocr 文字有涉黄嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>;
+    /**
+      * Ocr 文字有涉黄嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * Ocr 文字有涉黄嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * ApplyUpload请求参数结构体
@@ -8125,8 +8252,17 @@ export interface AiReviewProhibitedAsrTaskOutput {
     Suggestion: string;
     /**
       * Asr 文字有涉违禁嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewAsrTextSegmentItem>;
+    /**
+      * Asr 文字有涉违禁嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * Asr 文字有涉违禁嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * CreateClass返回参数结构体
@@ -8820,6 +8956,11 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WechatMiniProgramPublishCompleteEvent: WechatMiniProgramPublishTask;
+    /**
+      * 视频取回完成事件，当事件类型为RestoreMediaComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RestoreMediaCompleteEvent: RestoreMediaTask;
 }
 /**
  * 智能精彩片段任务控制参数
@@ -8896,8 +9037,17 @@ export interface AiReviewPoliticalAsrTaskOutput {
     Suggestion: string;
     /**
       * Asr 文字有涉政、敏感嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewAsrTextSegmentItem>;
+    /**
+      * Asr 文字有涉政、敏感嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * Asr 文字有涉政、敏感嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 输出的音频流信息
@@ -9237,8 +9387,17 @@ export interface AiReviewPornTaskOutput {
     Label: string;
     /**
       * 有涉黄嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewSegmentItem>;
+    /**
+      * 涉黄嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 涉黄嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 语音全文识别结果。
@@ -10325,8 +10484,17 @@ violation_photo：
     Label: string;
     /**
       * 有涉政嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewPoliticalSegmentItem>;
+    /**
+      * 涉政嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * 涉政嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 内容审核鉴政任务结果类型
@@ -12572,8 +12740,17 @@ export interface AiReviewPoliticalOcrTaskOutput {
     Suggestion: string;
     /**
       * Ocr 文字有涉政、敏感嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
       */
     SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>;
+    /**
+      * Ocr 文字有涉政、敏感嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达 SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+      */
+    SegmentSetFileUrl: string;
+    /**
+      * Ocr 文字有涉政、敏感嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    SegmentSetFileUrlExpireTime: string;
 }
 /**
  * 文本全文本识别任务控制参数

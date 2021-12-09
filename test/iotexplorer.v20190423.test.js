@@ -68,6 +68,16 @@ it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.PublishRRPCMessage", async function () {
+    try {
+       const data = await client.PublishRRPCMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.SearchPositionSpace", async function () {
     try {
        const data = await client.SearchPositionSpace({})
