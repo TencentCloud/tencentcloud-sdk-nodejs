@@ -76,7 +76,7 @@ import {
   DeleteAclResponse,
   DynamicRetentionTime,
   DescribeTopicSubscribeGroupRequest,
-  InstanceDetailResponse,
+  DeleteInstancePreResponse,
   DescribeInstanceAttributesRequest,
   TopicInSyncReplicaInfo,
   DescribeRegionRequest,
@@ -92,16 +92,17 @@ import {
   DescribeTopicRequest,
   CreatePartitionRequest,
   Group,
+  GroupInfoResponse,
   DescribeAppInfoResponse,
   AclResponse,
   ZoneResponse,
   Instance,
   DescribeInstanceAttributesResponse,
   TopicDetailResponse,
+  DeleteInstancePreRequest,
   TopicSubscribeGroup,
   Config,
   ModifyPasswordRequest,
-  CreateInstancePreRequest,
   ModifyInstanceAttributesRequest,
   DescribeRegionResponse,
   CreateTopicResponse,
@@ -112,18 +113,19 @@ import {
   DeleteTopicResponse,
   DescribeInstancesRequest,
   InstanceAttributesResponse,
-  DescribeCkafkaZoneResponse,
+  DescribeGroupRequest,
   Filter,
   GroupOffsetResponse,
   BatchCreateAclResponse,
   CreateUserRequest,
+  InstanceDetailResponse,
   DeleteTopicIpWhiteListResponse,
   CreateInstancePreResponse,
   DescribeInstancesDetailRequest,
   ModifyPasswordResponse,
   DescribeRouteRequest,
   TopicInSyncReplicaResult,
-  GroupInfoResponse,
+  DescribeCkafkaZoneResponse,
   TopicAttributesResponse,
   InstanceResponse,
   DescribeGroup,
@@ -140,7 +142,7 @@ import {
   Acl,
   TopicRetentionTimeConfigRsp,
   ModifyTopicAttributesRequest,
-  DescribeGroupRequest,
+  CreateInstancePreRequest,
   DeleteTopicIpWhiteListRequest,
   DescribeGroupOffsetsRequest,
   DescribeUserRequest,
@@ -389,6 +391,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicAttributesResponse) => void
   ): Promise<DescribeTopicAttributesResponse> {
     return this.request("DescribeTopicAttributes", req, cb)
+  }
+
+  /**
+   * 删除预付费实例
+   */
+  async DeleteInstancePre(
+    req: DeleteInstancePreRequest,
+    cb?: (error: string, rep: DeleteInstancePreResponse) => void
+  ): Promise<DeleteInstancePreResponse> {
+    return this.request("DeleteInstancePre", req, cb)
   }
 
   /**

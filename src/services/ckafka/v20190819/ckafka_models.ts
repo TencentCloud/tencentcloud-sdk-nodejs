@@ -1405,18 +1405,18 @@ export interface DescribeTopicSubscribeGroupRequest {
 }
 
 /**
- * 实例详情返回结果
+ * DeleteInstancePre返回参数结构体
  */
-export interface InstanceDetailResponse {
+export interface DeleteInstancePreResponse {
   /**
-   * 符合条件的实例总数
+   * 返回结果
    */
-  TotalCount: number
+  Result: CreateInstancePreResp
 
   /**
-   * 符合条件的实例详情列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceList: Array<InstanceDetail>
+  RequestId?: string
 }
 
 /**
@@ -1697,6 +1697,46 @@ export interface Group {
 }
 
 /**
+ * GroupInfo返回数据的实体
+ */
+export interface GroupInfoResponse {
+  /**
+   * 错误码，正常为0
+   */
+  ErrorCode: string
+
+  /**
+      * group 状态描述（常见的为 Empty、Stable、Dead 三种状态）：
+Dead：消费分组不存在
+Empty：消费分组，当前没有任何消费者订阅
+PreparingRebalance：消费分组处于 rebalance 状态
+CompletingRebalance：消费分组处于 rebalance 状态
+Stable：消费分组中各个消费者已经加入，处于稳定状态
+      */
+  State: string
+
+  /**
+   * 消费分组选择的协议类型正常的消费者一般为 consumer 但有些系统采用了自己的协议如 kafka-connect 用的就是 connect。只有标准的 consumer 协议，本接口才知道具体的分配方式的格式，才能解析到具体的 partition 的分配情况
+   */
+  ProtocolType: string
+
+  /**
+   * 消费者 partition 分配算法常见的有如下几种(Kafka 消费者 SDK 默认的选择项为 range)：range、 roundrobin、 sticky
+   */
+  Protocol: string
+
+  /**
+   * 仅当 state 为 Stable 且 protocol_type 为 consumer 时， 该数组才包含信息
+   */
+  Members: Array<GroupInfoMember>
+
+  /**
+   * Kafka 消费分组
+   */
+  Group: string
+}
+
+/**
  * DescribeAppInfo返回参数结构体
  */
 export interface DescribeAppInfoResponse {
@@ -1845,6 +1885,16 @@ export interface TopicDetailResponse {
 }
 
 /**
+ * DeleteInstancePre请求参数结构体
+ */
+export interface DeleteInstancePreRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeTopicSubscribeGroup接口出参
  */
 export interface TopicSubscribeGroup {
@@ -1948,91 +1998,6 @@ export interface ModifyPasswordRequest {
    * 用户新密码
    */
   PasswordNew: string
-}
-
-/**
- * CreateInstancePre请求参数结构体
- */
-export interface CreateInstancePreRequest {
-  /**
-   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
-   */
-  InstanceName: string
-
-  /**
-   * 可用区
-   */
-  ZoneId: number
-
-  /**
-   * 预付费购买时长，例如 "1m",就是一个月
-   */
-  Period: string
-
-  /**
-   * 实例规格，专业版默认填写1。1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
-   */
-  InstanceType: number
-
-  /**
-   * vpcId，不填默认基础网络
-   */
-  VpcId?: string
-
-  /**
-   * 子网id，vpc网络需要传该参数，基础网络可以不传
-   */
-  SubnetId?: string
-
-  /**
-   * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
-   */
-  MsgRetentionTime?: number
-
-  /**
-   * 创建实例时可以选择集群Id, 该入参表示集群Id
-   */
-  ClusterId?: number
-
-  /**
-   * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
-   */
-  RenewFlag?: number
-
-  /**
-   * 支持指定版本Kafka版本（0.10.2/1.1.1/2.4.1） 。指定专业版参数specificationsType=pro
-   */
-  KafkaVersion?: string
-
-  /**
-   * 专业版必须填写 （专业版：profession、标准版：standard） 默认是standard。专业版填profession
-   */
-  SpecificationsType?: string
-
-  /**
-   * 磁盘大小,专业版不填写默认最小磁盘,填写后根据磁盘带宽分区数弹性计算
-   */
-  DiskSize?: number
-
-  /**
-   * 带宽,专业版不填写默认最小带宽,填写后根据磁盘带宽分区数弹性计算
-   */
-  BandWidth?: number
-
-  /**
-   * 分区大小,专业版不填写默认最小分区数,填写后根据磁盘带宽分区数弹性计算
-   */
-  Partition?: number
-
-  /**
-   * 标签
-   */
-  Tags?: Array<Tag>
-
-  /**
-   * 磁盘类型（ssd填写CLOUD_SSD，sata填写CLOUD_BASIC）
-   */
-  DiskType?: string
 }
 
 /**
@@ -2425,18 +2390,28 @@ export interface InstanceAttributesResponse {
 }
 
 /**
- * DescribeCkafkaZone返回参数结构体
+ * DescribeGroup请求参数结构体
  */
-export interface DescribeCkafkaZoneResponse {
+export interface DescribeGroupRequest {
   /**
-   * 查询结果复杂对象实体
+   * 实例ID
    */
-  Result: ZoneResponse
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 搜索关键字
    */
-  RequestId?: string
+  SearchWord?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 最大返回数量
+   */
+  Limit?: number
 }
 
 /**
@@ -2508,6 +2483,21 @@ export interface CreateUserRequest {
    * 用户密码
    */
   Password: string
+}
+
+/**
+ * 实例详情返回结果
+ */
+export interface InstanceDetailResponse {
+  /**
+   * 符合条件的实例总数
+   */
+  TotalCount: number
+
+  /**
+   * 符合条件的实例详情列表
+   */
+  InstanceList: Array<InstanceDetail>
 }
 
 /**
@@ -2621,43 +2611,18 @@ export interface TopicInSyncReplicaResult {
 }
 
 /**
- * GroupInfo返回数据的实体
+ * DescribeCkafkaZone返回参数结构体
  */
-export interface GroupInfoResponse {
+export interface DescribeCkafkaZoneResponse {
   /**
-   * 错误码，正常为0
+   * 查询结果复杂对象实体
    */
-  ErrorCode: string
+  Result: ZoneResponse
 
   /**
-      * group 状态描述（常见的为 Empty、Stable、Dead 三种状态）：
-Dead：消费分组不存在
-Empty：消费分组，当前没有任何消费者订阅
-PreparingRebalance：消费分组处于 rebalance 状态
-CompletingRebalance：消费分组处于 rebalance 状态
-Stable：消费分组中各个消费者已经加入，处于稳定状态
-      */
-  State: string
-
-  /**
-   * 消费分组选择的协议类型正常的消费者一般为 consumer 但有些系统采用了自己的协议如 kafka-connect 用的就是 connect。只有标准的 consumer 协议，本接口才知道具体的分配方式的格式，才能解析到具体的 partition 的分配情况
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProtocolType: string
-
-  /**
-   * 消费者 partition 分配算法常见的有如下几种(Kafka 消费者 SDK 默认的选择项为 range)：range、 roundrobin、 sticky
-   */
-  Protocol: string
-
-  /**
-   * 仅当 state 为 Stable 且 protocol_type 为 consumer 时， 该数组才包含信息
-   */
-  Members: Array<GroupInfoMember>
-
-  /**
-   * Kafka 消费分组
-   */
-  Group: string
+  RequestId?: string
 }
 
 /**
@@ -3156,28 +3121,88 @@ export interface ModifyTopicAttributesRequest {
 }
 
 /**
- * DescribeGroup请求参数结构体
+ * CreateInstancePre请求参数结构体
  */
-export interface DescribeGroupRequest {
+export interface CreateInstancePreRequest {
   /**
-   * 实例ID
+   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
    */
-  InstanceId: string
+  InstanceName: string
 
   /**
-   * 搜索关键字
+   * 可用区
    */
-  SearchWord?: string
+  ZoneId: number
 
   /**
-   * 偏移量
+   * 预付费购买时长，例如 "1m",就是一个月
    */
-  Offset?: number
+  Period: string
 
   /**
-   * 最大返回数量
+   * 实例规格，专业版默认填写1。1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
    */
-  Limit?: number
+  InstanceType: number
+
+  /**
+   * vpcId，不填默认基础网络
+   */
+  VpcId?: string
+
+  /**
+   * 子网id，vpc网络需要传该参数，基础网络可以不传
+   */
+  SubnetId?: string
+
+  /**
+   * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
+   */
+  MsgRetentionTime?: number
+
+  /**
+   * 创建实例时可以选择集群Id, 该入参表示集群Id
+   */
+  ClusterId?: number
+
+  /**
+   * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   */
+  RenewFlag?: number
+
+  /**
+   * 支持指定版本Kafka版本（0.10.2/1.1.1/2.4.1） 。指定专业版参数specificationsType=pro
+   */
+  KafkaVersion?: string
+
+  /**
+   * 专业版必须填写 （专业版：profession、标准版：standard） 默认是standard。专业版填profession
+   */
+  SpecificationsType?: string
+
+  /**
+   * 磁盘大小,专业版不填写默认最小磁盘,填写后根据磁盘带宽分区数弹性计算
+   */
+  DiskSize?: number
+
+  /**
+   * 带宽,专业版不填写默认最小带宽,填写后根据磁盘带宽分区数弹性计算
+   */
+  BandWidth?: number
+
+  /**
+   * 分区大小,专业版不填写默认最小分区数,填写后根据磁盘带宽分区数弹性计算
+   */
+  Partition?: number
+
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
+
+  /**
+   * 磁盘类型（ssd填写CLOUD_SSD，sata填写CLOUD_BASIC）
+   */
+  DiskType?: string
 }
 
 /**

@@ -747,7 +747,7 @@ export interface MalWareList {
   VirusName: string
 
   /**
-   * 状态；4-:待处理，5-已信任，6-已隔离
+   * 状态；4-:待处理，5-已信任，6-已隔离，8-文件已删除
    */
   Status: number
 
@@ -789,6 +789,11 @@ export interface MalWareList {
    * 最近扫描时间
    */
   LatestScanTime: string
+
+  /**
+   * 风险等级 0未知、1低、2中、3高、4严重
+   */
+  Level: number
 }
 
 /**
@@ -9978,6 +9983,11 @@ export interface CreateScanMalwareSettingRequest {
    * 超时时间单位 秒 默认3600 秒
    */
   TimeoutPeriod?: number
+
+  /**
+   * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
+   */
+  EngineType?: number
 }
 
 /**
@@ -10049,6 +10059,11 @@ export interface DescribeMalwareTimingScanSettingResponse {
    * 是否杀掉进程 1杀掉 0不杀掉 只有开启自动隔离才生效
    */
   KillProcess: number
+
+  /**
+   * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
+   */
+  EngineType: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12117,6 +12132,11 @@ export interface ModifyMalwareTimingScanSettingsRequest {
    * 是否杀掉进程 1杀掉 0不杀掉
    */
   KillProcess?: number
+
+  /**
+   * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
+   */
+  EngineType?: number
 }
 
 /**
@@ -12326,6 +12346,12 @@ export interface MalwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+
+  /**
+      * 风险等级 0提示、1低、2中、3高、4严重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level: number
 }
 
 /**

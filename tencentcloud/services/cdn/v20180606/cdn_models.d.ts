@@ -2845,6 +2845,11 @@ disabled：未启用
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ConfigId: number;
+    /**
+      * 流量包当前续订模式，0 未续订、1到期续订、2用完续订、3到期或用完续订
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtensionMode: number;
 }
 /**
  * Bot cookie策略

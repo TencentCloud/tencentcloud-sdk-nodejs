@@ -937,80 +937,18 @@ export interface DeviceDataHistoryItem {
     Value: string;
 }
 /**
- * 产品详情
+ * GetFamilyDeviceUserList返回参数结构体
  */
-export interface ProductEntry {
+export interface GetFamilyDeviceUserListResponse {
     /**
-      * 产品ID
-      */
-    ProductId: string;
-    /**
-      * 产品名称
-      */
-    ProductName: string;
-    /**
-      * 产品分组模板ID
-      */
-    CategoryId: number;
-    /**
-      * 加密类型
-      */
-    EncryptionType: string;
-    /**
-      * 连接类型
-      */
-    NetType: string;
-    /**
-      * 数据协议
-      */
-    DataProtocol: number;
-    /**
-      * 产品描述
-      */
-    ProductDesc: string;
-    /**
-      * 状态
-      */
-    DevStatus: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: number;
-    /**
-      * 更新时间
-      */
-    UpdateTime: number;
-    /**
-      * 区域
-      */
-    Region: string;
-    /**
-      * 产品类型
-      */
-    ProductType: number;
-    /**
-      * 项目ID
-      */
-    ProjectId: string;
-    /**
-      * 产品ModuleId
-      */
-    ModuleId: number;
-    /**
-      * 是否使用脚本进行二进制转json功能 可以取值 true / false
+      * 设备的用户列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnableProductScript: string;
+    UserList: Array<DeviceUser>;
     /**
-      * 创建人 UinId
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CreateUserId: number;
-    /**
-      * 创建者昵称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatorNickName: string;
+    RequestId?: string;
 }
 /**
  * 项目详情
@@ -2494,23 +2432,17 @@ export interface DirectBindDeviceInFamilyRequest {
     RoomId?: string;
 }
 /**
- * PublishRRPCMessage返回参数结构体
+ * GetFamilyDeviceUserList请求参数结构体
  */
-export interface PublishRRPCMessageResponse {
+export interface GetFamilyDeviceUserListRequest {
     /**
-      * RRPC消息ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 产品ID
       */
-    MessageId: number;
+    ProductId: string;
     /**
-      * 设备回复的消息内容，采用base64编码
-注意：此字段可能返回 null，表示取不到有效值。
+      * 设备名称
       */
-    PayloadBase64: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DeviceName: string;
 }
 /**
  * DescribeLoRaFrequency返回参数结构体
@@ -2525,6 +2457,82 @@ export interface DescribeLoRaFrequencyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 产品详情
+ */
+export interface ProductEntry {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 产品名称
+      */
+    ProductName: string;
+    /**
+      * 产品分组模板ID
+      */
+    CategoryId: number;
+    /**
+      * 加密类型
+      */
+    EncryptionType: string;
+    /**
+      * 连接类型
+      */
+    NetType: string;
+    /**
+      * 数据协议
+      */
+    DataProtocol: number;
+    /**
+      * 产品描述
+      */
+    ProductDesc: string;
+    /**
+      * 状态
+      */
+    DevStatus: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: number;
+    /**
+      * 更新时间
+      */
+    UpdateTime: number;
+    /**
+      * 区域
+      */
+    Region: string;
+    /**
+      * 产品类型
+      */
+    ProductType: number;
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 产品ModuleId
+      */
+    ModuleId: number;
+    /**
+      * 是否使用脚本进行二进制转json功能 可以取值 true / false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableProductScript: string;
+    /**
+      * 创建人 UinId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateUserId: number;
+    /**
+      * 创建者昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatorNickName: string;
 }
 /**
  * DescribeSpaceFenceEventList请求参数结构体
@@ -3304,6 +3312,38 @@ export interface CreateTopicRuleRequest {
       * 规则内容
       */
     TopicRulePayload: TopicRulePayload;
+}
+/**
+ * PublishRRPCMessage返回参数结构体
+ */
+export interface PublishRRPCMessageResponse {
+    /**
+      * RRPC消息ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageId: number;
+    /**
+      * 设备回复的消息内容，采用base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayloadBase64: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 设备的用户
+ */
+export interface DeviceUser {
+    /**
+      * 用户ID
+      */
+    UserId: string;
+    /**
+      * 用户角色 1所有者，0：其他分享者
+      */
+    Role: number;
 }
 /**
  * GetBatchProductionsList请求参数结构体

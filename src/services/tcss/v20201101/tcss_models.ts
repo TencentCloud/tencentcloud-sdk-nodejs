@@ -8969,7 +8969,7 @@ export interface ContainerInfo {
   Cmd: string
 
   /**
-   * cpu 使用率 *1000
+   * CPU使用率 *1000
    */
   CPUUsage: number
 

@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReleaseStudioProduct", req, cb);
     }
     /**
-     * 下发RRPC消息
+     * 用于获取设备绑定的用户列表
      */
-    async PublishRRPCMessage(req, cb) {
-        return this.request("PublishRRPCMessage", req, cb);
+    async GetFamilyDeviceUserList(req, cb) {
+        return this.request("GetFamilyDeviceUserList", req, cb);
     }
     /**
      * 搜索位置空间
@@ -158,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetTopicRuleList(req, cb) {
         return this.request("GetTopicRuleList", req, cb);
+    }
+    /**
+     * 下发RRPC消息
+     */
+    async PublishRRPCMessage(req, cb) {
+        return this.request("PublishRRPCMessage", req, cb);
     }
     /**
      * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求

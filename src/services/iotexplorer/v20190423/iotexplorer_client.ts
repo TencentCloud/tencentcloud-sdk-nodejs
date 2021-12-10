@@ -71,7 +71,7 @@ import {
   GetTopicRuleListRequest,
   FenceBindDeviceItem,
   DeviceDataHistoryItem,
-  ProductEntry,
+  GetFamilyDeviceUserListResponse,
   ProjectEntryEx,
   DescribeBatchProductionResponse,
   ListTopicPolicyRequest,
@@ -147,8 +147,9 @@ import {
   DescribeBatchProductionRequest,
   CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
-  PublishRRPCMessageResponse,
+  GetFamilyDeviceUserListRequest,
   DescribeLoRaFrequencyResponse,
+  ProductEntry,
   DescribeSpaceFenceEventListRequest,
   GetLoRaGatewayListRequest,
   FenceEventItem,
@@ -193,6 +194,8 @@ import {
   CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   CreateTopicRuleRequest,
+  PublishRRPCMessageResponse,
+  DeviceUser,
   GetBatchProductionsListRequest,
   DeleteDeviceResponse,
   DeviceInfo,
@@ -265,13 +268,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下发RRPC消息
+   * 用于获取设备绑定的用户列表
    */
-  async PublishRRPCMessage(
-    req: PublishRRPCMessageRequest,
-    cb?: (error: string, rep: PublishRRPCMessageResponse) => void
-  ): Promise<PublishRRPCMessageResponse> {
-    return this.request("PublishRRPCMessage", req, cb)
+  async GetFamilyDeviceUserList(
+    req: GetFamilyDeviceUserListRequest,
+    cb?: (error: string, rep: GetFamilyDeviceUserListResponse) => void
+  ): Promise<GetFamilyDeviceUserListResponse> {
+    return this.request("GetFamilyDeviceUserList", req, cb)
   }
 
   /**
@@ -432,6 +435,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTopicRuleListResponse) => void
   ): Promise<GetTopicRuleListResponse> {
     return this.request("GetTopicRuleList", req, cb)
+  }
+
+  /**
+   * 下发RRPC消息
+   */
+  async PublishRRPCMessage(
+    req: PublishRRPCMessageRequest,
+    cb?: (error: string, rep: PublishRRPCMessageResponse) => void
+  ): Promise<PublishRRPCMessageResponse> {
+    return this.request("PublishRRPCMessage", req, cb)
   }
 
   /**

@@ -395,6 +395,14 @@ export interface InquiryPriceCreateInstanceRequest {
 <li>7：表示EMR-V3.0.0。</li>
       */
     ProductId?: number;
+    /**
+      * 场景化取值：
+Hadoop-Kudu
+Hadoop-Zookeeper
+Hadoop-Presto
+Hadoop-Hbase
+      */
+    SceneName?: string;
 }
 /**
  * 资源详情
@@ -686,24 +694,24 @@ export interface InquiryPriceCreateInstanceResponse {
       * 原价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OriginalCost?: number;
+    OriginalCost: number;
     /**
       * 折扣价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DiscountCost?: number;
+    DiscountCost: number;
     /**
       * 购买实例的时间单位。取值范围：
 <li>s：表示秒。</li>
 <li>m：表示月份。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeUnit?: string;
+    TimeUnit: string;
     /**
       * 购买实例的时长。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeSpan?: number;
+    TimeSpan: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1045,6 +1053,14 @@ export interface CreateInstanceRequest {
       * 自定义应用角色。
       */
     ApplicationRole?: string;
+    /**
+      * 场景化取值：
+Hadoop-Kudu
+Hadoop-Zookeeper
+Hadoop-Presto
+Hadoop-Hbase
+      */
+    SceneName?: string;
 }
 /**
  * InquirePriceRenewEmr请求参数结构体

@@ -347,6 +347,11 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Uui: string;
+    /**
+      * IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IVRKeyPressedEx: Array<IVRKeyPressedElement>;
 }
 /**
  * CreateUserSig请求参数结构体

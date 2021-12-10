@@ -68,9 +68,9 @@ it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
     }
 })
 
-it("iotexplorer.v20190423.PublishRRPCMessage", async function () {
+it("iotexplorer.v20190423.GetFamilyDeviceUserList", async function () {
     try {
-       const data = await client.PublishRRPCMessage({})
+       const data = await client.GetFamilyDeviceUserList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +231,16 @@ it("iotexplorer.v20190423.GetDeviceLocationHistory", async function () {
 it("iotexplorer.v20190423.GetTopicRuleList", async function () {
     try {
        const data = await client.GetTopicRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.PublishRRPCMessage", async function () {
+    try {
+       const data = await client.PublishRRPCMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

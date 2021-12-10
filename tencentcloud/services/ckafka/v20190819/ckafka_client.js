@@ -167,6 +167,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicAttributes", req, cb);
     }
     /**
+     * 删除预付费实例
+     */
+    async DeleteInstancePre(req, cb) {
+        return this.request("DeleteInstancePre", req, cb);
+    }
+    /**
      * 获取实例属性
      */
     async DescribeInstanceAttributes(req, cb) {

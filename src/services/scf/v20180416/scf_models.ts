@@ -3605,7 +3605,7 @@ export interface ImageConfig {
   RegistryId?: string
 
   /**
-      * 应用的ENTRYPOINT
+      * 参数已废弃
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EntryPoint?: string

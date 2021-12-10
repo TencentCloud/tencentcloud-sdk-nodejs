@@ -248,6 +248,16 @@ it("ckafka.v20190819.DescribeTopicAttributes", async function () {
     }
 })
 
+it("ckafka.v20190819.DeleteInstancePre", async function () {
+    try {
+       const data = await client.DeleteInstancePre({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeInstanceAttributes", async function () {
     try {
        const data = await client.DescribeInstanceAttributes({})

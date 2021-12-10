@@ -80,6 +80,7 @@ import {
   DetectInfoIdCardData,
   CheckPhoneAndNameRequest,
   GetEidTokenResponse,
+  IntentionVerifyData,
   LivenessCompareRequest,
   DetectDetail,
   GetFaceIdResultResponse,
