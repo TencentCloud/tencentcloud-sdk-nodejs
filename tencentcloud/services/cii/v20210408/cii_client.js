@@ -67,6 +67,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStructureTask", req, cb);
     }
     /**
+     * 本接口(CreateAutoClassifyStructureTask)基于提供的客户及保单信息，创建并启动结构化识别任务。
+     */
+    async CreateAutoClassifyStructureTask(req, cb) {
+        return this.request("CreateAutoClassifyStructureTask", req, cb);
+    }
+    /**
      * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
      */
     async DescribeStructCompareData(req, cb) {

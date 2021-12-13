@@ -28,6 +28,7 @@ import {
   PerStructDifference,
   UploadMedicalFileRequest,
   CompareMetricsData,
+  CreateAutoClassifyStructureTaskRequest,
   DescribeMachineUnderwriteRequest,
   ReviewDataTaskInfo,
   DescribeStructureResultRequest,
@@ -40,12 +41,14 @@ import {
   CreateStructureTaskResponse,
   DescribeStructureTaskResultResponse,
   DescribeMachineUnderwriteResponse,
+  CreateAutoClassifyStructureTaskResponse,
   CreateUnderwriteTaskByIdRequest,
   CreateUnderwriteTaskByIdResponse,
   StructureResultObject,
   CreateStructureTaskInfo,
   DescribeStructureDifferenceRequest,
   UploadMedicalFileResponse,
+  CreateAutoClassifyStructureTaskInfo,
   StructureModifyItem,
 } from "./cii_models"
 
@@ -119,6 +122,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStructureTaskResponse) => void
   ): Promise<CreateStructureTaskResponse> {
     return this.request("CreateStructureTask", req, cb)
+  }
+
+  /**
+   * 本接口(CreateAutoClassifyStructureTask)基于提供的客户及保单信息，创建并启动结构化识别任务。
+   */
+  async CreateAutoClassifyStructureTask(
+    req: CreateAutoClassifyStructureTaskRequest,
+    cb?: (error: string, rep: CreateAutoClassifyStructureTaskResponse) => void
+  ): Promise<CreateAutoClassifyStructureTaskResponse> {
+    return this.request("CreateAutoClassifyStructureTask", req, cb)
   }
 
   /**

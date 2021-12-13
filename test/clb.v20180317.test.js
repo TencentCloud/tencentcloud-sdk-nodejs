@@ -58,6 +58,16 @@ it("clb.v20180317.DescribeClassicalLBListeners", async function () {
     }
 })
 
+it("clb.v20180317.RegisterTargetsWithClassicalLB", async function () {
+    try {
+       const data = await client.RegisterTargetsWithClassicalLB({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeCustomizedConfigAssociateList", async function () {
     try {
        const data = await client.DescribeCustomizedConfigAssociateList({})
@@ -548,9 +558,9 @@ it("clb.v20180317.ModifyDomain", async function () {
     }
 })
 
-it("clb.v20180317.RegisterTargetsWithClassicalLB", async function () {
+it("clb.v20180317.MigrateClassicalLoadBalancers", async function () {
     try {
-       const data = await client.RegisterTargetsWithClassicalLB({})
+       const data = await client.MigrateClassicalLoadBalancers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

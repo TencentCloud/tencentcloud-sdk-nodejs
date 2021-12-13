@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, DescribeStructureDifferenceResponse, UploadMedicalFileRequest, DescribeMachineUnderwriteRequest, DescribeStructureResultRequest, DescribeStructCompareDataResponse, DescribeStructureResultResponse, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateUnderwriteTaskByIdRequest, CreateUnderwriteTaskByIdResponse, DescribeStructureDifferenceRequest, UploadMedicalFileResponse } from "./cii_models";
+import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, DescribeStructureDifferenceResponse, UploadMedicalFileRequest, CreateAutoClassifyStructureTaskRequest, DescribeMachineUnderwriteRequest, DescribeStructureResultRequest, DescribeStructCompareDataResponse, DescribeStructureResultResponse, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateAutoClassifyStructureTaskResponse, CreateUnderwriteTaskByIdRequest, CreateUnderwriteTaskByIdResponse, DescribeStructureDifferenceRequest, UploadMedicalFileResponse } from "./cii_models";
 /**
  * cii client
  * @class
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 本接口(CreateStructureTask)基于提供的客户及保单信息，创建并启动结构化识别任务。
      */
     CreateStructureTask(req: CreateStructureTaskRequest, cb?: (error: string, rep: CreateStructureTaskResponse) => void): Promise<CreateStructureTaskResponse>;
+    /**
+     * 本接口(CreateAutoClassifyStructureTask)基于提供的客户及保单信息，创建并启动结构化识别任务。
+     */
+    CreateAutoClassifyStructureTask(req: CreateAutoClassifyStructureTaskRequest, cb?: (error: string, rep: CreateAutoClassifyStructureTaskResponse) => void): Promise<CreateAutoClassifyStructureTaskResponse>;
     /**
      * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
      */

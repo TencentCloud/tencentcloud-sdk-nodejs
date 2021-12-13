@@ -78,6 +78,16 @@ it("cii.v20210408.CreateStructureTask", async function () {
     }
 })
 
+it("cii.v20210408.CreateAutoClassifyStructureTask", async function () {
+    try {
+       const data = await client.CreateAutoClassifyStructureTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cii.v20210408.DescribeStructCompareData", async function () {
     try {
        const data = await client.DescribeStructCompareData({})

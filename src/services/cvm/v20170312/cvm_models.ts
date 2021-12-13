@@ -2533,6 +2533,16 @@ export interface ActionTimer {
 }
 
 /**
+ * ModifyInstanceDiskType返回参数结构体
+ */
+export interface ModifyInstanceDiskTypeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeReservedInstancesConfigInfos请求参数结构体
  */
 export interface DescribeReservedInstancesConfigInfosRequest {
@@ -3846,6 +3856,26 @@ export interface CreateDisasterRecoverGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyInstanceDiskType请求参数结构体
+ */
+export interface ModifyInstanceDiskTypeRequest {
+  /**
+   * 待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`InstanceId`获取。
+   */
+  InstanceId: string
+
+  /**
+   * 实例数据盘配置信息，只需要指定要转换的目标云硬盘的介质类型，指定DiskType的值，当前只支持一个数据盘转化。只支持CDHPAID类型实例指定CdcId参数。
+   */
+  DataDisks?: Array<DataDisk>
+
+  /**
+   * 实例系统盘配置信息，只需要指定要转换的目标云硬盘的介质类型，指定DiskType的值。只支持CDHPAID类型实例指定CdcId参数。
+   */
+  SystemDisk?: SystemDisk
 }
 
 /**

@@ -1815,6 +1815,19 @@ export interface ModifyTargetPortResponse {
     RequestId?: string;
 }
 /**
+ * MigrateClassicalLoadBalancers请求参数结构体
+ */
+export interface MigrateClassicalLoadBalancersRequest {
+    /**
+      * 传统型负载均衡ID数组
+      */
+    LoadBalancerIds: Array<string>;
+    /**
+      * 独占集群信息
+      */
+    ExclusiveCluster?: ExclusiveCluster;
+}
+/**
  * DescribeLoadBalancersDetail请求参数结构体
  */
 export interface DescribeLoadBalancersDetailRequest {
@@ -2339,6 +2352,15 @@ export interface CreateTargetGroupResponse {
       * 创建目标组后生成的id
       */
     TargetGroupId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * MigrateClassicalLoadBalancers返回参数结构体
+ */
+export interface MigrateClassicalLoadBalancersResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

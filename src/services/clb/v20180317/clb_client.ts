@@ -102,6 +102,7 @@ import {
   ClassicalHealth,
   DescribeCustomizedConfigAssociateListRequest,
   ModifyTargetPortResponse,
+  MigrateClassicalLoadBalancersRequest,
   DescribeLoadBalancersDetailRequest,
   TargetGroupBackend,
   DescribeClassicalLBByInstanceIdRequest,
@@ -123,6 +124,7 @@ import {
   SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,
   CreateTargetGroupResponse,
+  MigrateClassicalLoadBalancersResponse,
   CreateLoadBalancerSnatIpsResponse,
   ClassicalLoadBalancerInfo,
   DescribeListenersResponse,
@@ -266,6 +268,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClassicalLBListenersResponse) => void
   ): Promise<DescribeClassicalLBListenersResponse> {
     return this.request("DescribeClassicalLBListeners", req, cb)
+  }
+
+  /**
+   * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+   */
+  async RegisterTargetsWithClassicalLB(
+    req: RegisterTargetsWithClassicalLBRequest,
+    cb?: (error: string, rep: RegisterTargetsWithClassicalLBResponse) => void
+  ): Promise<RegisterTargetsWithClassicalLBResponse> {
+    return this.request("RegisterTargetsWithClassicalLB", req, cb)
   }
 
   /**
@@ -783,13 +795,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
-   */
-  async RegisterTargetsWithClassicalLB(
-    req: RegisterTargetsWithClassicalLBRequest,
-    cb?: (error: string, rep: RegisterTargetsWithClassicalLBResponse) => void
-  ): Promise<RegisterTargetsWithClassicalLBResponse> {
-    return this.request("RegisterTargetsWithClassicalLB", req, cb)
+     * 本接口将传统型负载均衡迁移成(原应用型)负载均衡
+本接口为异步接口，接口成功返回后，可使用 DescribeLoadBalancers 接口查询负载均衡实例的状态（如创建中、正常），以确定是否创建成功。
+     */
+  async MigrateClassicalLoadBalancers(
+    req: MigrateClassicalLoadBalancersRequest,
+    cb?: (error: string, rep: MigrateClassicalLoadBalancersResponse) => void
+  ): Promise<MigrateClassicalLoadBalancersResponse> {
+    return this.request("MigrateClassicalLoadBalancers", req, cb)
   }
 
   /**

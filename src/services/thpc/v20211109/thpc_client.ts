@@ -28,7 +28,9 @@ import {
   ComputeNode,
   VirtualPrivateCloud,
   DeleteClusterResponse,
+  StorageOption,
   InstanceChargePrepaid,
+  CFSOption,
   CreateClusterResponse,
   DataDisk,
 } from "./thpc_models"

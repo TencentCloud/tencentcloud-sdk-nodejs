@@ -214,6 +214,42 @@ export interface CompareMetricsData {
     LongContentRecall: string;
 }
 /**
+ * CreateAutoClassifyStructureTask请求参数结构体
+ */
+export interface CreateAutoClassifyStructureTaskRequest {
+    /**
+      * 服务类型
+Structured 仅结构化
+Underwrite 结构化+核保
+      */
+    ServiceType: string;
+    /**
+      * 创建任务时可以上传多个报告，后台生成多个识别子任务，子任务的详细信息
+      */
+    TaskInfos: Array<CreateAutoClassifyStructureTaskInfo>;
+    /**
+      * 保单号
+      */
+    PolicyId?: string;
+    /**
+      * 核保触发方式
+Auto 自动
+Manual 手动
+      */
+    TriggerType?: string;
+    /**
+      * 险种，如果是体检报告类型，此参数是必填，类型说明如下：
+CriticalDiseaseInsurance:重疾险
+LifeInsurance：寿险
+AccidentInsurance：意外险
+      */
+    InsuranceTypes?: Array<string>;
+    /**
+      * 回调地址，接收Post请求传送结果
+      */
+    CallbackUrl?: string;
+}
+/**
  * DescribeMachineUnderwrite请求参数结构体
  */
 export interface DescribeMachineUnderwriteRequest {
@@ -486,6 +522,19 @@ export interface DescribeMachineUnderwriteResponse {
     RequestId?: string;
 }
 /**
+ * CreateAutoClassifyStructureTask返回参数结构体
+ */
+export interface CreateAutoClassifyStructureTaskResponse {
+    /**
+      * 创建的主任务号，用于查询结果
+      */
+    MainTaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateUnderwriteTaskById请求参数结构体
  */
 export interface CreateUnderwriteTaskByIdRequest {
@@ -587,6 +636,27 @@ export interface UploadMedicalFileResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 创建自动分类的结构化任务子任务信息
+ */
+export interface CreateAutoClassifyStructureTaskInfo {
+    /**
+      * 报告文件上传的地址列表，需按顺序排列。如果使用ImageList参数，置为空数组即可
+      */
+    FileList: Array<string>;
+    /**
+      * 客户号
+      */
+    CustomerId?: string;
+    /**
+      * 客户姓名
+      */
+    CustomerName?: string;
+    /**
+      * 报告上传的图片内容数组，图片内容采用base64编码，需按顺序排列
+      */
+    ImageList?: Array<string>;
 }
 /**
  * 结构化复核差异接口的修改的项

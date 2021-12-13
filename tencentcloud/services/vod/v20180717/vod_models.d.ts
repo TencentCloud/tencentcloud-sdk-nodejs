@@ -4589,14 +4589,6 @@ export interface AiRecognitionTaskSegmentSegmentItem {
  */
 export interface RestoreMediaTask {
     /**
-      * 取回任务状态，0表示取回完成，其他值表示取回还未完成。
-      */
-    Status: number;
-    /**
-      * 提示信息。
-      */
-    Message: string;
-    /**
       * 文件ID。
       */
     FileId: string;
@@ -4617,9 +4609,16 @@ export interface RestoreMediaTask {
     RestoreTier: string;
     /**
       * 临时取回副本有效期，单位：天。对于永久取回，取值为0。
-注意：此字段可能返回 null，表示取不到有效值。
       */
     RestoreDay: number;
+    /**
+      * 该字段已废弃。
+      */
+    Status: number;
+    /**
+      * 该字段已废弃。
+      */
+    Message: string;
 }
 /**
  * 内容审核 Ocr 文字鉴黄任务输入参数类型

@@ -53,6 +53,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClassicalLBListeners", req, cb);
     }
     /**
+     * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     */
+    async RegisterTargetsWithClassicalLB(req, cb) {
+        return this.request("RegisterTargetsWithClassicalLB", req, cb);
+    }
+    /**
      * 拉取配置绑定的 server 或 location，如果 domain 存在，结果将根据 domain 过滤。或拉取配置绑定的 loadbalancer。
      */
     async DescribeCustomizedConfigAssociateList(req, cb) {
@@ -371,10 +377,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDomain", req, cb);
     }
     /**
-     * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * 本接口将传统型负载均衡迁移成(原应用型)负载均衡
+本接口为异步接口，接口成功返回后，可使用 DescribeLoadBalancers 接口查询负载均衡实例的状态（如创建中、正常），以确定是否创建成功。
      */
-    async RegisterTargetsWithClassicalLB(req, cb) {
-        return this.request("RegisterTargetsWithClassicalLB", req, cb);
+    async MigrateClassicalLoadBalancers(req, cb) {
+        return this.request("MigrateClassicalLoadBalancers", req, cb);
     }
     /**
      * DescribeRewrite 接口可根据负载均衡实例ID，查询一个负载均衡实例下转发规则的重定向关系。如果不指定监听器ID或转发规则ID，则返回该负载均衡实例下的所有重定向关系。

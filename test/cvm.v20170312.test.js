@@ -718,4 +718,14 @@ it("cvm.v20170312.DisassociateSecurityGroups", async function () {
     }
 })
 
+it("cvm.v20170312.ModifyInstanceDiskType", async function () {
+    try {
+       const data = await client.ModifyInstanceDiskType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

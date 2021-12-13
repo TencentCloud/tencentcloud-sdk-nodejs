@@ -138,6 +138,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       * 集群显示名称。
       */
     ClusterName?: string;
+    /**
+      * 集群存储选项
+      */
+    StorageOption?: StorageOption;
 }
 /**
  * 描述了实例登录相关配置与信息。
@@ -227,6 +231,15 @@ export interface DeleteClusterResponse {
     RequestId?: string;
 }
 /**
+ * 描述集群文件系统选项
+ */
+export interface StorageOption {
+    /**
+      * 集群挂载CFS文件系统选项
+      */
+    CFSOptions: Array<CFSOption>;
+}
+/**
  * 描述了实例的计费模式
  */
 export interface InstanceChargePrepaid {
@@ -243,6 +256,27 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
 默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
       */
     RenewFlag?: string;
+}
+/**
+ * 描述CFS文件系统版本和挂载信息
+ */
+export interface CFSOption {
+    /**
+      * 文件系统本地挂载路径
+      */
+    LocalPath: string;
+    /**
+      * 文件系统远程挂载ip及路径
+      */
+    RemotePath: string;
+    /**
+      * 文件系统协议类型，默认值NFS 3.0
+      */
+    Protocol: string;
+    /**
+      * 文件系统存储类型，默认值SD
+      */
+    StorageType: string;
 }
 /**
  * CreateCluster返回参数结构体
