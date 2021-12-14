@@ -29,6 +29,7 @@ import {
   CreateAutoScalingGroupResponse,
   DescribeAccountLimitsResponse,
   CreateLaunchConfigurationResponse,
+  Advice,
   CreateLifecycleHookResponse,
   ClearLaunchConfigurationAttributesResponse,
   DescribeAutoScalingGroupsResponse,
@@ -48,6 +49,7 @@ import {
   CreateScalingPolicyResponse,
   CreateNotificationConfigurationResponse,
   DescribeLaunchConfigurationsResponse,
+  RemoveInstancesRequest,
   DeleteScalingPolicyResponse,
   Tag,
   DescribeAutoScalingInstancesRequest,
@@ -80,6 +82,7 @@ import {
   UpgradeLifecycleHookResponse,
   InstanceTag,
   PaiInstance,
+  DescribeAutoScalingAdvicesResponse,
   CreateAutoScalingGroupRequest,
   DeleteScheduledActionResponse,
   UpgradeLaunchConfigurationRequest,
@@ -115,6 +118,7 @@ import {
   DescribeLifecycleHooksResponse,
   CreateScalingPolicyRequest,
   ScaleInInstancesResponse,
+  DescribeAutoScalingAdvicesRequest,
   DeleteNotificationConfigurationRequest,
   DescribeLaunchConfigurationsRequest,
   NotificationTarget,
@@ -130,7 +134,7 @@ import {
   ClearLaunchConfigurationAttributesRequest,
   PreviewPaiDomainNameResponse,
   DeleteAutoScalingGroupRequest,
-  RemoveInstancesRequest,
+  AutoScalingAdvice,
   StartAutoScalingInstancesRequest,
   AttachInstancesRequest,
   SpotMixedAllocationPolicy,
@@ -340,6 +344,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateScheduledActionResponse) => void
   ): Promise<CreateScheduledActionResponse> {
     return this.request("CreateScheduledAction", req, cb)
+  }
+
+  /**
+   * 此接口用于查询伸缩组配置建议。
+   */
+  async DescribeAutoScalingAdvices(
+    req: DescribeAutoScalingAdvicesRequest,
+    cb?: (error: string, rep: DescribeAutoScalingAdvicesResponse) => void
+  ): Promise<DescribeAutoScalingAdvicesResponse> {
+    return this.request("DescribeAutoScalingAdvices", req, cb)
   }
 
   /**

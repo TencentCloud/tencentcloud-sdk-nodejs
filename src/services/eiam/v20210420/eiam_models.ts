@@ -1654,6 +1654,36 @@ export interface UserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DisplayName: string
+
+  /**
+      * 用户名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * 用户手机号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Phone: string
+
+  /**
+      * 邮箱地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Email: string
+
+  /**
+      * 用户状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 数据来源。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataSource: string
 }
 
 /**

@@ -55,6 +55,7 @@ import {
   TargetGroupInstance,
   DescribeClassicalLBByInstanceIdResponse,
   CreateRuleResponse,
+  CrossTargets,
   RuleHealth,
   DescribeExclusiveClustersResponse,
   RegisterTargetGroupInstancesResponse,
@@ -71,6 +72,7 @@ import {
   DescribeClassicalLBTargetsRequest,
   DescribeCustomizedConfigListRequest,
   AutoRewriteRequest,
+  DescribeCrossTargetsResponse,
   DescribeLoadBalancerListByCertIdResponse,
   ModifyTargetGroupInstancesWeightResponse,
   DescribeTargetGroupsRequest,
@@ -115,7 +117,7 @@ import {
   DescribeClassicalLBHealthStatusRequest,
   ModifyDomainRequest,
   CreateClsLogSetResponse,
-  Backend,
+  DescribeCrossTargetsRequest,
   LBChargePrepaid,
   ClassicalListener,
   DeleteLoadBalancerRequest,
@@ -206,6 +208,7 @@ import {
   ModifyTargetPortRequest,
   DescribeLoadBalancersResponse,
   DescribeLBListenersResponse,
+  TargetGroupInfo,
   DeleteListenerResponse,
   DeleteLoadBalancerSnatIpsResponse,
   CertificateOutput,
@@ -215,7 +218,7 @@ import {
   TargetGroupAssociation,
   ListenerHealth,
   AssociationItem,
-  TargetGroupInfo,
+  Backend,
   RegisterTargetGroupInstancesRequest,
   LoadBalancer,
 } from "./clb_models"
@@ -241,7 +244,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升、降配接口。支持共享型clb升级到性能保障型clb。支持性能保障型提升等级。支持性能保障降低规格。（不支持性能保障降级到共享型）。
+   * 支持共享型clb升级到性能容量型clb（不支持性能保障降级到共享型）。
    */
   async ModifyLoadBalancerSla(
     req: ModifyLoadBalancerSlaRequest,
@@ -576,6 +579,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLBListenersResponse) => void
   ): Promise<DescribeLBListenersResponse> {
     return this.request("DescribeLBListeners", req, cb)
+  }
+
+  /**
+     * 批量修改目标组服务器端口。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     */
+  async ModifyTargetGroupInstancesPort(
+    req: ModifyTargetGroupInstancesPortRequest,
+    cb?: (error: string, rep: ModifyTargetGroupInstancesPortResponse) => void
+  ): Promise<ModifyTargetGroupInstancesPortResponse> {
+    return this.request("ModifyTargetGroupInstancesPort", req, cb)
   }
 
   /**
@@ -918,14 +932,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 批量修改目标组服务器端口。
-本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
-     */
-  async ModifyTargetGroupInstancesPort(
-    req: ModifyTargetGroupInstancesPortRequest,
-    cb?: (error: string, rep: ModifyTargetGroupInstancesPortResponse) => void
-  ): Promise<ModifyTargetGroupInstancesPortResponse> {
-    return this.request("ModifyTargetGroupInstancesPort", req, cb)
+   * 查询跨域2.0版本云联网后端子机和网卡信息。
+   */
+  async DescribeCrossTargets(
+    req: DescribeCrossTargetsRequest,
+    cb?: (error: string, rep: DescribeCrossTargetsResponse) => void
+  ): Promise<DescribeCrossTargetsResponse> {
+    return this.request("DescribeCrossTargets", req, cb)
   }
 
   /**

@@ -394,6 +394,23 @@ export interface CreateLaunchConfigurationResponse {
     RequestId?: string;
 }
 /**
+ * 伸缩配置建议。
+ */
+export interface Advice {
+    /**
+      * 问题描述。
+      */
+    Problem: string;
+    /**
+      * 问题详情。
+      */
+    Detail: string;
+    /**
+      * 建议解决方案。
+      */
+    Solution: string;
+}
+/**
  * CreateLifecycleHook返回参数结构体
  */
 export interface CreateLifecycleHookResponse {
@@ -697,6 +714,19 @@ export interface DescribeLaunchConfigurationsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RemoveInstances请求参数结构体
+ */
+export interface RemoveInstancesRequest {
+    /**
+      * 伸缩组ID
+      */
+    AutoScalingGroupId: string;
+    /**
+      * CVM实例ID列表
+      */
+    InstanceIds: Array<string>;
 }
 /**
  * DeleteScalingPolicy返回参数结构体
@@ -1451,6 +1481,19 @@ export interface PaiInstance {
       * PAI管理页面URL
       */
     PaiMateUrl: string;
+}
+/**
+ * DescribeAutoScalingAdvices返回参数结构体
+ */
+export interface DescribeAutoScalingAdvicesResponse {
+    /**
+      * 伸缩组配置建议集合。
+      */
+    AutoScalingAdviceSet: Array<AutoScalingAdvice>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateAutoScalingGroup请求参数结构体
@@ -2430,6 +2473,15 @@ export interface ScaleInInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAutoScalingAdvices请求参数结构体
+ */
+export interface DescribeAutoScalingAdvicesRequest {
+    /**
+      * 待查询的伸缩组列表，上限100。
+      */
+    AutoScalingGroupIds: Array<string>;
+}
+/**
  * DeleteNotificationConfiguration请求参数结构体
  */
 export interface DeleteNotificationConfigurationRequest {
@@ -2723,17 +2775,17 @@ export interface DeleteAutoScalingGroupRequest {
     AutoScalingGroupId: string;
 }
 /**
- * RemoveInstances请求参数结构体
+ * 伸缩组配置建议。
  */
-export interface RemoveInstancesRequest {
+export interface AutoScalingAdvice {
     /**
-      * 伸缩组ID
+      * 伸缩组ID。
       */
     AutoScalingGroupId: string;
     /**
-      * CVM实例ID列表
+      * 伸缩组配置建议集合。
       */
-    InstanceIds: Array<string>;
+    Advices: Array<Advice>;
 }
 /**
  * StartAutoScalingInstances请求参数结构体

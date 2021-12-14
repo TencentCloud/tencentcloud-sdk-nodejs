@@ -868,6 +868,45 @@ export interface CreateRuleResponse {
     RequestId?: string;
 }
 /**
+ * 跨域2.0云联网下子机和网卡信息
+ */
+export interface CrossTargets {
+    /**
+      * 本地私有网络ID，即负载均衡的VpcId。
+      */
+    LocalVpcId: string;
+    /**
+      * 子机或网卡所属的私有网络ID。
+      */
+    VpcId: string;
+    /**
+      * 子机或网卡的IP地址
+      */
+    IP: string;
+    /**
+      * 子机或网卡所属的私有网络名称。
+      */
+    VpcName: string;
+    /**
+      * 子机的网卡ID。
+      */
+    EniId: string;
+    /**
+      * 子机实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 子机实例名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName: string;
+    /**
+      * 子机或者网卡所属的地域。
+      */
+    Region: string;
+}
+/**
  * 一条转发规则的健康检查状态
  */
 export interface RuleHealth {
@@ -1140,6 +1179,23 @@ export interface AutoRewriteRequest {
     TakeUrls?: Array<boolean>;
 }
 /**
+ * DescribeCrossTargets返回参数结构体
+ */
+export interface DescribeCrossTargetsResponse {
+    /**
+      * 后端服务列表总数。
+      */
+    TotalCount: number;
+    /**
+      * 后端服务列表。
+      */
+    CrossTargetSet: Array<CrossTargets>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeLoadBalancerListByCertId返回参数结构体
  */
 export interface DescribeLoadBalancerListByCertIdResponse {
@@ -1252,7 +1308,7 @@ export interface DescribeLBListenersRequest {
     Backends: Array<LbRsItem>;
 }
 /**
- * 性能保障变配参数
+ * 性能容量型变配参数
  */
 export interface SlaUpdateParam {
     /**
@@ -1260,7 +1316,7 @@ export interface SlaUpdateParam {
       */
     LoadBalancerId: string;
     /**
-      * 需要变更的性能保障级别
+      * 变更为性能容量型，固定为SLA
       */
     SlaType: string;
 }
@@ -2106,50 +2162,25 @@ export interface CreateClsLogSetResponse {
     RequestId?: string;
 }
 /**
- * 监听器绑定的后端服务的详细信息
+ * DescribeCrossTargets请求参数结构体
  */
-export interface Backend {
+export interface DescribeCrossTargetsRequest {
     /**
-      * 后端服务的类型，可取：CVM、ENI
+      * 返回后端服务列表数目，默认20，最大值100。
       */
-    Type: string;
+    Limit?: number;
     /**
-      * 后端服务的唯一 ID，如 ins-abcd1234
+      * 返回后端服务列表起始偏移量，默认0。
       */
-    InstanceId: string;
+    Offset?: number;
     /**
-      * 后端服务的监听端口
+      * 查询跨域2.0版本云联网后端子机和网卡服务列表条件，详细的过滤条件如下：
+<li> vpc-id - String - 是否必填：否 - （过滤条件）按照 本地私有网络ID，即负载均衡的VpcId 过滤，如："vpc-12345678"。</li>
+<li> ip - String - 是否必填：否 - （过滤条件）按照 后端服务ip 过滤，如："192.168.0.1"。</li>
+<li> listener-id - String - 是否必填：否 - （过滤条件）按照 监听器ID 过滤，如："lbl-12345678"。</li>
+<li> location-id - String - 是否必填：否 - （过滤条件）按照 七层监听器规则ID 过滤，如："loc-12345678"。</li>
       */
-    Port: number;
-    /**
-      * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
-      */
-    Weight: number;
-    /**
-      * 后端服务的外网 IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PublicIpAddresses: Array<string>;
-    /**
-      * 后端服务的内网 IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PrivateIpAddresses: Array<string>;
-    /**
-      * 后端服务的实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceName: string;
-    /**
-      * 后端服务被绑定的时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RegisteredTime: string;
-    /**
-      * 弹性网卡唯一ID，如 eni-1234abcd
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EniId: string;
+    Filters?: Array<Filter>;
 }
 /**
  * lb实例包年包月相关配置属性
@@ -3825,7 +3856,7 @@ export interface DescribeExclusiveClustersRequest {
  */
 export interface ModifyLoadBalancerSlaRequest {
     /**
-      * 负载均衡性能保障实例ID和变配的目标规格
+      * 负载均衡实例信息
       */
     LoadBalancerSla: Array<SlaUpdateParam>;
 }
@@ -4104,6 +4135,41 @@ export interface DescribeLBListenersResponse {
     RequestId?: string;
 }
 /**
+ * 目标组信息
+ */
+export interface TargetGroupInfo {
+    /**
+      * 目标组ID
+      */
+    TargetGroupId: string;
+    /**
+      * 目标组的vpcid
+      */
+    VpcId: string;
+    /**
+      * 目标组的名字
+      */
+    TargetGroupName: string;
+    /**
+      * 目标组的默认端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port: number;
+    /**
+      * 目标组的创建时间
+      */
+    CreatedTime: string;
+    /**
+      * 目标组的修改时间
+      */
+    UpdatedTime: string;
+    /**
+      * 关联到的规则数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssociatedRule: Array<AssociationItem>;
+}
+/**
  * DeleteListener返回参数结构体
  */
 export interface DeleteListenerResponse {
@@ -4291,39 +4357,50 @@ export interface AssociationItem {
     ListenerName: string;
 }
 /**
- * 目标组信息
+ * 监听器绑定的后端服务的详细信息
  */
-export interface TargetGroupInfo {
+export interface Backend {
     /**
-      * 目标组ID
+      * 后端服务的类型，可取：CVM、ENI
       */
-    TargetGroupId: string;
+    Type: string;
     /**
-      * 目标组的vpcid
+      * 后端服务的唯一 ID，如 ins-abcd1234
       */
-    VpcId: string;
+    InstanceId: string;
     /**
-      * 目标组的名字
-      */
-    TargetGroupName: string;
-    /**
-      * 目标组的默认端口
-注意：此字段可能返回 null，表示取不到有效值。
+      * 后端服务的监听端口
       */
     Port: number;
     /**
-      * 目标组的创建时间
+      * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
       */
-    CreatedTime: string;
+    Weight: number;
     /**
-      * 目标组的修改时间
-      */
-    UpdatedTime: string;
-    /**
-      * 关联到的规则数组
+      * 后端服务的外网 IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AssociatedRule: Array<AssociationItem>;
+    PublicIpAddresses: Array<string>;
+    /**
+      * 后端服务的内网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivateIpAddresses: Array<string>;
+    /**
+      * 后端服务的实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName: string;
+    /**
+      * 后端服务被绑定的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegisteredTime: string;
+    /**
+      * 弹性网卡唯一ID，如 eni-1234abcd
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EniId: string;
 }
 /**
  * RegisterTargetGroupInstances请求参数结构体

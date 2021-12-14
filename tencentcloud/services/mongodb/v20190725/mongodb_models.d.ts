@@ -212,6 +212,43 @@ export interface CreateBackupDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * 实例分片详情
+ */
+export interface ShardInfo {
+    /**
+      * 分片已使用容量
+      */
+    UsedVolume: number;
+    /**
+      * 分片ID
+      */
+    ReplicaSetId: string;
+    /**
+      * 分片名
+      */
+    ReplicaSetName: string;
+    /**
+      * 分片内存规格，单位为MB
+      */
+    Memory: number;
+    /**
+      * 分片磁盘规格，单位为MB
+      */
+    Volume: number;
+    /**
+      * 分片Oplog大小，单位为MB
+      */
+    OplogSize: number;
+    /**
+      * 分片从节点数
+      */
+    SecondaryNum: number;
+    /**
+      * 分片物理id
+      */
+    RealReplicaSetId: string;
+}
+/**
  * 数据库实例价格
  */
 export interface DBInstancePrice {
@@ -570,6 +607,39 @@ export interface BackupInfo {
     BackupMethod: number;
 }
 /**
+ * 安全组信息
+ */
+export interface SecurityGroup {
+    /**
+      * 所属项目id
+      */
+    ProjectId: number;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 入站规则
+      */
+    Inbound: Array<SecurityGroupBound>;
+    /**
+      * 出站规则
+      */
+    Outbound: Array<SecurityGroupBound>;
+    /**
+      * 安全组id
+      */
+    SecurityGroupId: string;
+    /**
+      * 安全组名称
+      */
+    SecurityGroupName: string;
+    /**
+      * 安全组备注
+      */
+    SecurityGroupRemark: string;
+}
+/**
  * InquirePriceRenewDBInstances请求参数结构体
  */
 export interface InquirePriceRenewDBInstancesRequest {
@@ -879,6 +949,51 @@ export interface OfflineIsolatedDBInstanceRequest {
     InstanceId: string;
 }
 /**
+ * 实例可修改参数integer类型集合。
+ */
+export interface InstanceIntegerParam {
+    /**
+      * 当前值
+      */
+    CurrentValue: string;
+    /**
+      * 默认值
+      */
+    DefaultValue: string;
+    /**
+      * 最大值
+      */
+    Max: string;
+    /**
+      * 最小值
+      */
+    Min: string;
+    /**
+      * 是否徐亚哦重启后生效 1:需要重启；0:无需重启
+      */
+    NeedRestart: string;
+    /**
+      * 参数名称
+      */
+    ParamName: string;
+    /**
+      * 参数说明
+      */
+    Tips: Array<string>;
+    /**
+      * 参数类型
+      */
+    ValueType: string;
+    /**
+      * 是否正常获取到，1：未正常获取；0：正常获取，仅对前端有实际意义；
+      */
+    Status: number;
+    /**
+      * 暂时未用到，前端使用redis侧代码，为了兼容，保留该参数
+      */
+    Unit: string;
+}
+/**
  * DescribeCurrentOp请求参数结构体
  */
 export interface DescribeCurrentOpRequest {
@@ -1025,6 +1140,35 @@ export interface CreateDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeInstanceParams返回参数结构体
+ */
+export interface DescribeInstanceParamsResponse {
+    /**
+      * 值为枚举类型参数集合
+      */
+    InstanceEnumParam: Array<InstanceEnumParam>;
+    /**
+      * 值为integer类型参数集合
+      */
+    InstanceIntegerParam: Array<InstanceIntegerParam>;
+    /**
+      * 值为text类型的参数集合
+      */
+    InstanceTextParam: Array<InstanceTextParam>;
+    /**
+      * 值为混合类型的参数集合
+      */
+    InstanceMultiParam: Array<InstanceMultiParam>;
+    /**
+      * 当前实例支持修改的参数个数统计 如0
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeSlowLogs请求参数结构体
  */
 export interface DescribeSlowLogsRequest {
@@ -1129,6 +1273,43 @@ export interface DescribeDBBackupsRequest {
     Offset?: number;
 }
 /**
+ * 实例可修改参数Multi类型集合。
+ */
+export interface InstanceMultiParam {
+    /**
+      * 当前值
+      */
+    CurrentValue: string;
+    /**
+      * 默认值
+      */
+    DefaultValue: string;
+    /**
+      * 指导值范围
+      */
+    EnumValue: Array<string>;
+    /**
+      * 是否需要重启
+      */
+    NeedRestart: string;
+    /**
+      * 参数名称
+      */
+    ParamName: string;
+    /**
+      * 状态值
+      */
+    Status: number;
+    /**
+      * 参数说明
+      */
+    Tips: Array<string>;
+    /**
+      * 值类型，multi混合类型
+      */
+    ValueType: string;
+}
+/**
  * DescribeClientConnections请求参数结构体
  */
 export interface DescribeClientConnectionsRequest {
@@ -1184,37 +1365,41 @@ export interface ModifyDBInstanceSpecResponse {
     RequestId?: string;
 }
 /**
- * 安全组信息
+ * 实例可修改参数text类型集合。
  */
-export interface SecurityGroup {
+export interface InstanceTextParam {
     /**
-      * 所属项目id
+      * 当前值(暂未使用)
       */
-    ProjectId: number;
+    CurrentValue: string;
     /**
-      * 创建时间
+      * 默认值(暂未使用)
       */
-    CreateTime: string;
+    DefaultValue: string;
     /**
-      * 入站规则
+      * 是否需要重启(暂未使用)
       */
-    Inbound: Array<SecurityGroupBound>;
+    NeedRestart: string;
     /**
-      * 出站规则
+      * 参数名称(暂未使用)
       */
-    Outbound: Array<SecurityGroupBound>;
+    ParamName: string;
     /**
-      * 安全组id
+      * text类型值(暂未使用)
       */
-    SecurityGroupId: string;
+    TextValue: string;
     /**
-      * 安全组名称
+      * 说明(暂未使用)
       */
-    SecurityGroupName: string;
+    Tips: Array<string>;
     /**
-      * 安全组备注
+      * 值类型(暂未使用)
       */
-    SecurityGroupRemark: string;
+    ValueType: string;
+    /**
+      * 值获取状态(暂未使用)
+      */
+    Status: string;
 }
 /**
  * OfflineIsolatedDBInstance返回参数结构体
@@ -1313,6 +1498,43 @@ export interface RenewDBInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 实例可修改参数枚举类型集合。
+ */
+export interface InstanceEnumParam {
+    /**
+      * 参数当前值
+      */
+    CurrentValue: string;
+    /**
+      * 默认值
+      */
+    DefaultValue: string;
+    /**
+      * 枚举值，所有支持的值
+      */
+    EnumValue: Array<string>;
+    /**
+      * 是否需要重启后生效，"1"需要，"0"无需重启
+      */
+    NeedRestart: string;
+    /**
+      * 参数名称
+      */
+    ParamName: string;
+    /**
+      * 中英文说明
+      */
+    Tips: Array<string>;
+    /**
+      * 参数值类型说明
+      */
+    ValueType: string;
+    /**
+      * 是否获取到参数，1为获取，前端正常显示，0:前段显示loading
+      */
+    Status: number;
 }
 /**
  * DescribeBackupDownloadTask返回参数结构体
@@ -1703,21 +1925,13 @@ export interface CreateBackupDBInstanceRequest {
     BackupRemark?: string;
 }
 /**
- * 需要终止的操作
+ * DescribeInstanceParams请求参数结构体
  */
-export interface Operation {
+export interface DescribeInstanceParamsRequest {
     /**
-      * 操作所在的分片名
+      * 实例ID
       */
-    ReplicaSetName: string;
-    /**
-      * 操作所在的节点名
-      */
-    NodeName: string;
-    /**
-      * 操作序号
-      */
-    OpId: number;
+    InstanceId: string;
 }
 /**
  * 描述了实例的计费模式
@@ -1766,39 +1980,19 @@ export interface RenewDBInstancesRequest {
     InstanceChargePrepaid: InstanceChargePrepaid;
 }
 /**
- * 实例分片详情
+ * 需要终止的操作
  */
-export interface ShardInfo {
+export interface Operation {
     /**
-      * 分片已使用容量
-      */
-    UsedVolume: number;
-    /**
-      * 分片ID
-      */
-    ReplicaSetId: string;
-    /**
-      * 分片名
+      * 操作所在的分片名
       */
     ReplicaSetName: string;
     /**
-      * 分片内存规格，单位为MB
+      * 操作所在的节点名
       */
-    Memory: number;
+    NodeName: string;
     /**
-      * 分片磁盘规格，单位为MB
+      * 操作序号
       */
-    Volume: number;
-    /**
-      * 分片Oplog大小，单位为MB
-      */
-    OplogSize: number;
-    /**
-      * 分片从节点数
-      */
-    SecondaryNum: number;
-    /**
-      * 分片物理id
-      */
-    RealReplicaSetId: string;
+    OpId: number;
 }

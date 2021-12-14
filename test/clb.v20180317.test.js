@@ -348,6 +348,16 @@ it("clb.v20180317.DescribeLBListeners", async function () {
     }
 })
 
+it("clb.v20180317.ModifyTargetGroupInstancesPort", async function () {
+    try {
+       const data = await client.ModifyTargetGroupInstancesPort({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DeregisterTargetGroupInstances", async function () {
     try {
        const data = await client.DeregisterTargetGroupInstances({})
@@ -678,9 +688,9 @@ it("clb.v20180317.CloneLoadBalancer", async function () {
     }
 })
 
-it("clb.v20180317.ModifyTargetGroupInstancesPort", async function () {
+it("clb.v20180317.DescribeCrossTargets", async function () {
     try {
-       const data = await client.ModifyTargetGroupInstancesPort({})
+       const data = await client.DescribeCrossTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

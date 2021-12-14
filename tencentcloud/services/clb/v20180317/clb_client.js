@@ -35,7 +35,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterTargets", req, cb);
     }
     /**
-     * 升、降配接口。支持共享型clb升级到性能保障型clb。支持性能保障型提升等级。支持性能保障降低规格。（不支持性能保障降级到共享型）。
+     * 支持共享型clb升级到性能容量型clb（不支持性能保障降级到共享型）。
      */
     async ModifyLoadBalancerSla(req, cb) {
         return this.request("ModifyLoadBalancerSla", req, cb);
@@ -245,6 +245,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLBListeners", req, cb);
     }
     /**
+     * 批量修改目标组服务器端口。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     */
+    async ModifyTargetGroupInstancesPort(req, cb) {
+        return this.request("ModifyTargetGroupInstancesPort", req, cb);
+    }
+    /**
      * 从目标组中解绑服务器。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */
@@ -452,11 +459,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneLoadBalancer", req, cb);
     }
     /**
-     * 批量修改目标组服务器端口。
-本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * 查询跨域2.0版本云联网后端子机和网卡信息。
      */
-    async ModifyTargetGroupInstancesPort(req, cb) {
-        return this.request("ModifyTargetGroupInstancesPort", req, cb);
+    async DescribeCrossTargets(req, cb) {
+        return this.request("DescribeCrossTargets", req, cb);
     }
     /**
      * BatchModifyTargetWeight 接口用于批量修改负载均衡监听器绑定的后端机器的转发权重。批量修改的资源数量上限为500。本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。<br/>负载均衡的4层和7层监听器支持此接口，传统型负载均衡不支持。

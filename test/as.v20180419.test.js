@@ -178,6 +178,16 @@ it("as.v20180419.CreateScheduledAction", async function () {
     }
 })
 
+it("as.v20180419.DescribeAutoScalingAdvices", async function () {
+    try {
+       const data = await client.DescribeAutoScalingAdvices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.RemoveInstances", async function () {
     try {
        const data = await client.RemoveInstances({})

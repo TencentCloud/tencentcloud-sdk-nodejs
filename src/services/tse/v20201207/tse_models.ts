@@ -38,6 +38,11 @@ export interface DescribeSREInstancesRequest {
    * 查询类型
    */
   QueryType?: string
+
+  /**
+   * 调用方来源
+   */
+  QuerySource?: string
 }
 
 /**

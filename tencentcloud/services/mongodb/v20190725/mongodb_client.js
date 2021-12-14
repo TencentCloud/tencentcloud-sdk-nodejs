@@ -150,6 +150,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSpec", req, cb);
     }
     /**
+     * 本接口(DescribeInstanceParams)用于查询当前实例可修改的参数列表。
+     */
+    async DescribeInstanceParams(req, cb) {
+        return this.request("DescribeInstanceParams", req, cb);
+    }
+    /**
      * 本接口(DescribeSpecInfo)用于查询实例的售卖规格。
      */
     async DescribeSpecInfo(req, cb) {

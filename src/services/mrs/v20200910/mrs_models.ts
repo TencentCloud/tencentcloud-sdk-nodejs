@@ -131,6 +131,12 @@ export interface Template {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OcrText: string
+
+  /**
+      * OCR拼接后文本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OcrResult: string
 }
 
 /**

@@ -375,7 +375,7 @@ export interface DescribeInstancesResponse {
   /**
    * 返回的结果
    */
-  Result?: InstanceResponse
+  Result: InstanceResponse
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2207,7 +2207,7 @@ export interface DescribeInstancesRequest {
   Limit?: number
 
   /**
-   * 匹配标签key值。
+   * 已废弃。匹配标签key值。
    */
   TagKey?: string
 }
@@ -2387,6 +2387,18 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeleteRouteTimestamp: string
+
+  /**
+      * 剩余创建分区数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemainingPartitions: number
+
+  /**
+      * 剩余创建主题数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemainingTopics: number
 }
 
 /**

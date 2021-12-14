@@ -237,6 +237,11 @@ export interface DescribeDataPerformancePageRequest {
    * 耗时计算方式
    */
   CostType?: string
+
+  /**
+   * 环境变量
+   */
+  Env?: string
 }
 
 /**
@@ -605,6 +610,11 @@ export interface DescribeDataEventUrlRequest {
    * 筛选条件
    */
   Name?: string
+
+  /**
+   * 环境
+   */
+  Env?: string
 }
 
 /**
@@ -710,6 +720,11 @@ export interface DescribeDataPvUrlStatisticsRequest {
    * 浏览器
    */
   Browser?: string
+
+  /**
+   * 环境
+   */
+  Env?: string
 }
 
 /**
@@ -840,6 +855,11 @@ export interface DescribeDataLogUrlStatisticsRequest {
    * 浏览器
    */
   Browser?: string
+
+  /**
+   * 环境区分
+   */
+  Env?: string
 }
 
 /**

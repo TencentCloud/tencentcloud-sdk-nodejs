@@ -18,6 +18,10 @@ export interface DescribeSREInstancesRequest {
       * 查询类型
       */
     QueryType?: string;
+    /**
+      * 调用方来源
+      */
+    QuerySource?: string;
 }
 /**
  * 微服务注册引擎实例

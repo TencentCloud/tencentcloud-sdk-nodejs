@@ -27,6 +27,7 @@ import {
   IsolateDBInstanceResponse,
   BackupDownloadTaskStatus,
   CreateBackupDBInstanceResponse,
+  ShardInfo,
   DBInstancePrice,
   DescribeBackupAccessResponse,
   InquirePriceCreateDBInstancesRequest,
@@ -40,6 +41,7 @@ import {
   ClientConnection,
   InquirePriceModifyDBInstanceSpecRequest,
   BackupInfo,
+  SecurityGroup,
   InquirePriceRenewDBInstancesRequest,
   DescribeAsyncRequestInfoRequest,
   KillOpsResponse,
@@ -56,25 +58,29 @@ import {
   TagInfo,
   DescribeDBInstancesResponse,
   OfflineIsolatedDBInstanceRequest,
+  InstanceIntegerParam,
   DescribeCurrentOpRequest,
   DescribeDBInstanceDealRequest,
   DescribeDBInstancesRequest,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
+  DescribeInstanceParamsResponse,
   DescribeSlowLogsRequest,
   AssignProjectResponse,
   BackupDownloadTask,
   DescribeDBBackupsRequest,
+  InstanceMultiParam,
   DescribeClientConnectionsRequest,
   DescribeDBInstanceDealResponse,
   ModifyDBInstanceSpecResponse,
-  SecurityGroup,
+  InstanceTextParam,
   OfflineIsolatedDBInstanceResponse,
   DescribeBackupDownloadTaskRequest,
   DescribeBackupAccessRequest,
   RenameInstanceRequest,
   DescribeSecurityGroupRequest,
   RenewDBInstancesResponse,
+  InstanceEnumParam,
   DescribeBackupDownloadTaskResponse,
   RenameInstanceResponse,
   DescribeClientConnectionsResponse,
@@ -88,11 +94,11 @@ import {
   SlowLogPattern,
   CreateDBInstanceHourResponse,
   CreateBackupDBInstanceRequest,
-  Operation,
+  DescribeInstanceParamsRequest,
   InstanceChargePrepaid,
   InquirePriceCreateDBInstancesResponse,
   RenewDBInstancesRequest,
-  ShardInfo,
+  Operation,
 } from "./mongodb_models"
 
 /**
@@ -304,6 +310,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceSpecResponse) => void
   ): Promise<ModifyDBInstanceSpecResponse> {
     return this.request("ModifyDBInstanceSpec", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeInstanceParams)用于查询当前实例可修改的参数列表。
+   */
+  async DescribeInstanceParams(
+    req: DescribeInstanceParamsRequest,
+    cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
+  ): Promise<DescribeInstanceParamsResponse> {
+    return this.request("DescribeInstanceParams", req, cb)
   }
 
   /**

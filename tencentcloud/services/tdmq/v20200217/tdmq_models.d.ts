@@ -2772,6 +2772,10 @@ export interface ModifyRocketMQTopicRequest {
       * 说明信息，最大128个字符
       */
     Remark: string;
+    /**
+      * 分区数，全局类型无效，不可小于当前分区数
+      */
+    PartitionNum?: number;
 }
 /**
  * RocketMQ集群基本信息
@@ -4043,7 +4047,7 @@ export interface CreateRocketMQTopicRequest {
       */
     Namespaces: Array<string>;
     /**
-      * 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder, Transaction
+      * 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder
       */
     Type: string;
     /**
@@ -4054,6 +4058,10 @@ export interface CreateRocketMQTopicRequest {
       * 主题说明，最大128个字符
       */
     Remark?: string;
+    /**
+      * 分区数，全局顺序无效
+      */
+    PartitionNum?: number;
 }
 /**
  * CreateRole返回参数结构体
