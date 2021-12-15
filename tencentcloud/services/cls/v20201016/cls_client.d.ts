@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAsyncSearchTask(req: DeleteAsyncSearchTaskRequest, cb?: (error: string, rep: DeleteAsyncSearchTaskResponse) => void): Promise<DeleteAsyncSearchTaskResponse>;
     /**
-     * 该接口用户创建告警通知模板。
+     * 该接口用户创建通知渠道组。
      */
     CreateAlarmNotice(req: CreateAlarmNoticeRequest, cb?: (error: string, rep: CreateAlarmNoticeResponse) => void): Promise<CreateAlarmNoticeResponse>;
     /**
@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     CreateLogset(req: CreateLogsetRequest, cb?: (error: string, rep: CreateLogsetResponse) => void): Promise<CreateLogsetResponse>;
     /**
-     * 本接口用于获取告警策略。
+     * 本接口用于获取告警策略列表。
      */
     DescribeAlarms(req: DescribeAlarmsRequest, cb?: (error: string, rep: DescribeAlarmsResponse) => void): Promise<DescribeAlarmsResponse>;
     /**
@@ -124,7 +124,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAsyncContextTask(req: DeleteAsyncContextTaskRequest, cb?: (error: string, rep: DeleteAsyncContextTaskResponse) => void): Promise<DeleteAsyncContextTaskResponse>;
     /**
-     * 该接口用于获取告警通知模板列表
+     * 该接口用于获取通知渠道组列表
      */
     DescribeAlarmNotices(req: DescribeAlarmNoticesRequest, cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void): Promise<DescribeAlarmNoticesResponse>;
     /**
@@ -136,7 +136,7 @@ export declare class Client extends AbstractClient {
      */
     ApplyConfigToMachineGroup(req: ApplyConfigToMachineGroupRequest, cb?: (error: string, rep: ApplyConfigToMachineGroupResponse) => void): Promise<ApplyConfigToMachineGroupResponse>;
     /**
-     * 该接口用于删除告警通知模板
+     * 该接口用于删除通知渠道组
      */
     DeleteAlarmNotice(req: DeleteAlarmNoticeRequest, cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void): Promise<DeleteAlarmNoticeResponse>;
     /**
@@ -145,11 +145,11 @@ export declare class Client extends AbstractClient {
      */
     ModifyIndex(req: ModifyIndexRequest, cb?: (error: string, rep: ModifyIndexResponse) => void): Promise<ModifyIndexResponse>;
     /**
-     * 该接口用于修改告警通知模板。
+     * 该接口用于修改通知渠道组
      */
     ModifyAlarmNotice(req: ModifyAlarmNoticeRequest, cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void): Promise<ModifyAlarmNoticeResponse>;
     /**
-     * 本接口用于搜索日志
+     * 本接口用于搜索日志, 该接口除受默认接口请求频率限制外，针对单个日志主题，并发数不能超过15
      */
     SearchLog(req: SearchLogRequest, cb?: (error: string, rep: SearchLogResponse) => void): Promise<SearchLogResponse>;
     /**

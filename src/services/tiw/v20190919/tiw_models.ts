@@ -300,9 +300,7 @@ SdkAppID = 12345678，RoomID = 12345，PushUserID = push_user_1
   ExtraData?: string
 
   /**
-      * **内部体验字段，若需要体验可以提工单申请开通体验**
-
-TRTC数字类型房间号，取值范围: (1, 4294967295)。
+      * TRTC数字类型房间号，取值范围: (1, 4294967295)。
 
 在同时指定了RoomId与TRTCRoomId的情况下，优先使用TRTCRoomId作为白板流进行推流的TRTC房间号。
 
@@ -311,9 +309,7 @@ TRTC数字类型房间号，取值范围: (1, 4294967295)。
   TRTCRoomId?: number
 
   /**
-      * **内部体验字段，若需要体验可以提工单申请开通体验**
-
-TRTC字符串类型房间号。
+      * TRTC字符串类型房间号。
 
 在指定了TRTCRoomIdStr的情况下，会优先使用TRTCRoomIdStr作为白板流进行推流的TRTC房间号。
       */

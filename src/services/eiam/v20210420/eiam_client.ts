@@ -18,80 +18,115 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeUserGroupRequest,
-  ListApplicationAuthorizationsRequest,
   DescribeOrgNodeResponse,
-  CreateOrgNodeResponse,
   ListApplicationsRequest,
   UserSearchCriteria,
-  ListUsersInOrgNodeResponse,
-  ModifyUserInfoResponse,
+  AddAccountToAccountGroupResponse,
   DeleteUserRequest,
-  ListAuthorizedApplicationsToOrgNodeResponse,
   AuthorizationUserResouceInfo,
-  SortCondition,
-  InheritedForm,
-  ListAuthorizedApplicationsToUserRequest,
-  DeleteOrgNodeResponse,
-  AddUserToUserGroupResponse,
-  CreateUserResponse,
-  DescribeUserResourcesAuthorizationResponse,
-  ListUsersInUserGroupResponse,
-  ListUsersResponse,
-  DescribeOrgNodeRequest,
-  ListUsersInOrgNodeRequest,
-  ListUserGroupsOfUserRequest,
-  ModifyApplicationResponse,
-  DescribePublicKeyRequest,
-  AuthorizationInfo,
-  CreateUserGroupResponse,
-  DescribeUserGroupResourcesAuthorizationRequest,
-  DeleteUserResponse,
+  CreateAppAccountResponse,
   ListAuthorizedApplicationsToUserGroupRequest,
-  ListUserGroupsRequest,
-  AddUserToUserGroupRequest,
-  ApplicationAuthorizationInfo,
-  ApplicationInformation,
-  DescribeUserGroupResourcesAuthorizationResponse,
-  ListApplicationAuthorizationsResponse,
-  DescribeApplicationResponse,
-  UserGroupInformation,
-  ListUserGroupsResponse,
-  ListAuthorizedApplicationsToUserResponse,
-  AuthorizationResouceEntityInfo,
-  DeleteUserGroupResponse,
-  ApplicationInfoSearchCriteria,
-  UpdateOrgNodeRequest,
-  AuthorizationInfoSearchCriteria,
-  DescribeOrgResourcesAuthorizationRequest,
+  ModifyApplicationResponse,
   OrgNodeChildUserInfo,
-  ModifyApplicationRequest,
-  CreateUserRequest,
-  ListUserGroupsOfUserResponse,
-  DescribeUserInfoResponse,
-  DeleteOrgNodeRequest,
+  DeleteAccountGroupRequest,
+  AddUserToUserGroupRequest,
+  ApplicationInformation,
+  ListUsersResponse,
+  DeleteAppAccountRequest,
+  UserGroupInfo,
+  UpdateOrgNodeRequest,
   CreateOrgNodeRequest,
   RemoveUserFromUserGroupRequest,
+  ModifyAppAccountRequest,
   ListAuthorizedApplicationsToUserGroupResponse,
-  DescribeUserResourcesAuthorizationRequest,
-  ListUsersRequest,
-  UpdateOrgNodeResponse,
-  DescribePublicKeyResponse,
-  DeleteUserGroupRequest,
+  DeleteAccountGroupResponse,
   UserGroupInfoSearchCriteria,
   DescribeUserInfoRequest,
-  DescribeUserGroupResponse,
+  ListAuthorizedApplicationsToOrgNodeRequest,
+  DescribePublicKeyResponse,
+  DescribeOrgNodeRequest,
+  CreateAccountGroupRequest,
+  DescribeUserGroupRequest,
+  CreateOrgNodeResponse,
+  UserGroupInformationSearchCriteria,
+  AccountGroupSearchCriteria,
+  CreateUserResponse,
+  ThirdPartyAccountInfo,
+  ModifyAppAccountResponse,
+  DeleteUserResponse,
+  ListUsersInUserGroupResponse,
+  CreateAppAccountRequest,
+  DescribeApplicationResponse,
+  DescribeAppAccountResponse,
+  DescribeUserGroupResourcesAuthorizationResponse,
+  UserGroupInformation,
+  ListUsersInOrgNodeSearchCriteria,
+  DescribeAccountGroupResponse,
+  CreateUserGroupRequest,
+  DescribeOrgResourcesAuthorizationRequest,
+  DescribeUserInfoResponse,
+  DeleteOrgNodeRequest,
+  DeleteUsersResponse,
+  AppAccountInfo,
+  DescribeAccountGroupRequest,
+  AppAccountSearchCriteria,
   DescribeOrgResourcesAuthorizationResponse,
-  UserInformation,
   ListUsersInUserGroupRequest,
   UserInfo,
-  ListAuthorizedApplicationsToOrgNodeRequest,
-  CreateUserGroupRequest,
-  DescribeApplicationRequest,
+  DeleteAppAccountResponse,
+  ModifyAccountGroupRequest,
+  ListUsersInOrgNodeResponse,
+  ListApplicationAuthorizationsRequest,
+  ModifyAccountGroupResponse,
+  DeleteUsersRequest,
+  AccountGroupInfo,
   OrgNodeChildInfo,
+  ListAuthorizedApplicationsToUserRequest,
+  DeleteOrgNodeResponse,
+  ListAccountInAccountGroupResponse,
+  DescribeUserResourcesAuthorizationResponse,
+  ListUsersInOrgNodeRequest,
+  InheritedForm,
+  RemoveAccountFromAccountGroupResponse,
+  DescribeUserGroupResourcesAuthorizationRequest,
+  ListUserGroupsRequest,
+  UpdateOrgNodeResponse,
+  ListAuthorizedApplicationsToUserResponse,
+  AuthorizationResouceEntityInfo,
+  ModifyApplicationRequest,
+  CreateUserRequest,
+  DescribePublicKeyRequest,
+  RemoveAccountFromAccountGroupRequest,
+  ListApplicationAuthorizationsResponse,
+  SortCondition,
+  DescribeUserGroupResponse,
+  ListUserGroupsOfUserRequest,
+  UserInformation,
+  DescribeApplicationRequest,
   ModifyUserInfoRequest,
-  ListApplicationsResponse,
   RemoveUserFromUserGroupResponse,
+  DescribeUserThirdPartyAccountInfoRequest,
+  ModifyUserInfoResponse,
+  ListAuthorizedApplicationsToOrgNodeResponse,
+  AddUserToUserGroupResponse,
+  DescribeAppAccountRequest,
+  AuthorizationInfo,
+  CreateUserGroupResponse,
+  DescribeUserThirdPartyAccountInfoResponse,
+  ApplicationAuthorizationInfo,
+  LinkUserInfo,
+  ListUserGroupsResponse,
+  ListAccountInAccountGroupRequest,
+  DeleteUserGroupResponse,
+  AuthorizationInfoSearchCriteria,
+  ListUserGroupsOfUserResponse,
+  CreateAccountGroupResponse,
+  DescribeUserResourcesAuthorizationRequest,
+  ListUsersRequest,
+  DeleteUserGroupRequest,
+  ApplicationInfoSearchCriteria,
+  ListApplicationsResponse,
+  AddAccountToAccountGroupRequest,
 } from "./eiam_models"
 
 /**
@@ -111,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserGroupResponse) => void
   ): Promise<DescribeUserGroupResponse> {
     return this.request("DescribeUserGroup", req, cb)
+  }
+
+  /**
+   * 创建账号组
+   */
+  async CreateAccountGroup(
+    req: CreateAccountGroupRequest,
+    cb?: (error: string, rep: CreateAccountGroupResponse) => void
+  ): Promise<CreateAccountGroupResponse> {
+    return this.request("CreateAccountGroup", req, cb)
   }
 
   /**
@@ -154,6 +199,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 从账号组中移除账号
+   */
+  async RemoveAccountFromAccountGroup(
+    req: RemoveAccountFromAccountGroupRequest,
+    cb?: (error: string, rep: RemoveAccountFromAccountGroupResponse) => void
+  ): Promise<RemoveAccountFromAccountGroupResponse> {
+    return this.request("RemoveAccountFromAccountGroup", req, cb)
+  }
+
+  /**
+   *  获取账号组中的账号列表
+   */
+  async ListAccountInAccountGroup(
+    req: ListAccountInAccountGroupRequest,
+    cb?: (error: string, rep: ListAccountInAccountGroupResponse) => void
+  ): Promise<ListAccountInAccountGroupResponse> {
+    return this.request("ListAccountInAccountGroup", req, cb)
+  }
+
+  /**
    * 通过用户组ID获得被授权访问的应用列表。
    */
   async ListAuthorizedApplicationsToUserGroup(
@@ -174,6 +239,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改账号组
+   */
+  async ModifyAccountGroup(
+    req: ModifyAccountGroupRequest,
+    cb?: (error: string, rep: ModifyAccountGroupResponse) => void
+  ): Promise<ModifyAccountGroupResponse> {
+    return this.request("ModifyAccountGroup", req, cb)
+  }
+
+  /**
    * 查询指定用户下的资源授权列表
    */
   async DescribeUserResourcesAuthorization(
@@ -184,6 +259,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改应用账号
+   */
+  async ModifyAppAccount(
+    req: ModifyAppAccountRequest,
+    cb?: (error: string, rep: ModifyAppAccountResponse) => void
+  ): Promise<ModifyAppAccountResponse> {
+    return this.request("ModifyAppAccount", req, cb)
+  }
+
+  /**
+   * 通过用户名或用户 id 获取用户的第三方账号绑定信息。
+   */
+  async DescribeUserThirdPartyAccountInfo(
+    req: DescribeUserThirdPartyAccountInfoRequest,
+    cb?: (error: string, rep: DescribeUserThirdPartyAccountInfoResponse) => void
+  ): Promise<DescribeUserThirdPartyAccountInfoResponse> {
+    return this.request("DescribeUserThirdPartyAccountInfo", req, cb)
+  }
+
+  /**
    * 删除一个用户组
    */
   async DeleteUserGroup(
@@ -191,6 +286,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserGroupResponse) => void
   ): Promise<DeleteUserGroupResponse> {
     return this.request("DeleteUserGroup", req, cb)
+  }
+
+  /**
+   * 删除账号组
+   */
+  async DeleteAccountGroup(
+    req: DeleteAccountGroupRequest,
+    cb?: (error: string, rep: DeleteAccountGroupResponse) => void
+  ): Promise<DeleteAccountGroupResponse> {
+    return this.request("DeleteAccountGroup", req, cb)
   }
 
   /**
@@ -224,6 +329,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除应用账号
+   */
+  async DeleteAppAccount(
+    req: DeleteAppAccountRequest,
+    cb?: (error: string, rep: DeleteAppAccountResponse) => void
+  ): Promise<DeleteAppAccountResponse> {
+    return this.request("DeleteAppAccount", req, cb)
+  }
+
+  /**
+   * 查询账号组列表
+   */
+  async DescribeAccountGroup(
+    req: DescribeAccountGroupRequest,
+    cb?: (error: string, rep: DescribeAccountGroupResponse) => void
+  ): Promise<DescribeAccountGroupResponse> {
+    return this.request("DescribeAccountGroup", req, cb)
+  }
+
+  /**
+   * 批量删除当前节点下的用户。如果出现个别用户删除错误，将不影响其余被勾选用户被删除的操作，同时提示未被删除的用户名称/用户ID。
+   */
+  async DeleteUsers(
+    req: DeleteUsersRequest,
+    cb?: (error: string, rep: DeleteUsersResponse) => void
+  ): Promise<DeleteUsersResponse> {
+    return this.request("DeleteUsers", req, cb)
+  }
+
+  /**
    * 查询指定用户组下的资源授权列表
    */
   async DescribeUserGroupResourcesAuthorization(
@@ -231,6 +366,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserGroupResourcesAuthorizationResponse) => void
   ): Promise<DescribeUserGroupResourcesAuthorizationResponse> {
     return this.request("DescribeUserGroupResourcesAuthorization", req, cb)
+  }
+
+  /**
+   * 创建应用账号
+   */
+  async CreateAppAccount(
+    req: CreateAppAccountRequest,
+    cb?: (error: string, rep: CreateAppAccountResponse) => void
+  ): Promise<CreateAppAccountResponse> {
+    return this.request("CreateAppAccount", req, cb)
   }
 
   /**
@@ -244,13 +389,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建一个用户
+   * 获取用户所在的用户组列表
    */
-  async CreateUser(
-    req: CreateUserRequest,
-    cb?: (error: string, rep: CreateUserResponse) => void
-  ): Promise<CreateUserResponse> {
-    return this.request("CreateUser", req, cb)
+  async ListUserGroupsOfUser(
+    req: ListUserGroupsOfUserRequest,
+    cb?: (error: string, rep: ListUserGroupsOfUserResponse) => void
+  ): Promise<ListUserGroupsOfUserResponse> {
+    return this.request("ListUserGroupsOfUser", req, cb)
   }
 
   /**
@@ -261,6 +406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListAuthorizedApplicationsToUserResponse) => void
   ): Promise<ListAuthorizedApplicationsToUserResponse> {
     return this.request("ListAuthorizedApplicationsToUser", req, cb)
+  }
+
+  /**
+   * 查询应用账号列表
+   */
+  async DescribeAppAccount(
+    req: DescribeAppAccountRequest,
+    cb?: (error: string, rep: DescribeAppAccountResponse) => void
+  ): Promise<DescribeAppAccountResponse> {
+    return this.request("DescribeAppAccount", req, cb)
   }
 
   /**
@@ -344,6 +499,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 账号组添加账号
+   */
+  async AddAccountToAccountGroup(
+    req: AddAccountToAccountGroupRequest,
+    cb?: (error: string, rep: AddAccountToAccountGroupResponse) => void
+  ): Promise<AddAccountToAccountGroupResponse> {
+    return this.request("AddAccountToAccountGroup", req, cb)
+  }
+
+  /**
    * 新建用户组
    */
   async CreateUserGroup(
@@ -354,13 +519,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户所在的用户组列表
+   * 新建一个用户
    */
-  async ListUserGroupsOfUser(
-    req: ListUserGroupsOfUserRequest,
-    cb?: (error: string, rep: ListUserGroupsOfUserResponse) => void
-  ): Promise<ListUserGroupsOfUserResponse> {
-    return this.request("ListUserGroupsOfUser", req, cb)
+  async CreateUser(
+    req: CreateUserRequest,
+    cb?: (error: string, rep: CreateUserResponse) => void
+  ): Promise<CreateUserResponse> {
+    return this.request("CreateUser", req, cb)
   }
 
   /**

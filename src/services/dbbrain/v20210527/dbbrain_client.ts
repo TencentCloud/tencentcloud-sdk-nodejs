@@ -27,6 +27,7 @@ import {
   InstanceConfs,
   CreateSecurityAuditLogExportTaskRequest,
   DescribeDBDiagEventResponse,
+  DescribeDBDiagEventsResponse,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
   ModifyDiagDBInstanceConfResponse,
@@ -42,12 +43,12 @@ import {
   TimeSlice,
   ModifyDiagDBInstanceConfRequest,
   DescribeSecurityAuditLogDownloadUrlsRequest,
-  CreateDBDiagReportTaskResponse,
+  MySqlProcess,
   CreateMailProfileResponse,
   DescribeSlowLogTimeSeriesStatsRequest,
   CreateDBDiagReportUrlResponse,
   DescribeDBDiagHistoryRequest,
-  MySqlProcess,
+  CreateDBDiagReportTaskResponse,
   DiagHistoryEventItem,
   SlowLogHost,
   CreateMailProfileRequest,
@@ -94,6 +95,7 @@ import {
   DescribeAllUserGroupResponse,
   DescribeUserSqlAdviceResponse,
   DescribeDBSpaceStatusResponse,
+  DescribeDBDiagEventsRequest,
   GroupItem,
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeDBDiagReportTasksRequest,
@@ -185,6 +187,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAllUserGroupResponse) => void
   ): Promise<DescribeAllUserGroupResponse> {
     return this.request("DescribeAllUserGroup", req, cb)
+  }
+
+  /**
+   * 获取指定时间段内的诊断事件列表，支持依据风险等级、实例ID等条件过滤。
+   */
+  async DescribeDBDiagEvents(
+    req: DescribeDBDiagEventsRequest,
+    cb?: (error: string, rep: DescribeDBDiagEventsResponse) => void
+  ): Promise<DescribeDBDiagEventsResponse> {
+    return this.request("DescribeDBDiagEvents", req, cb)
   }
 
   /**

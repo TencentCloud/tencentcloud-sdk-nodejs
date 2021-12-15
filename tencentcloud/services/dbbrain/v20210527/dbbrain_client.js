@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAllUserGroup", req, cb);
     }
     /**
+     * 获取指定时间段内的诊断事件列表，支持依据风险等级、实例ID等条件过滤。
+     */
+    async DescribeDBDiagEvents(req, cb) {
+        return this.request("DescribeDBDiagEvents", req, cb);
+    }
+    /**
      * 获取慢日志统计柱状图。
      */
     async DescribeSlowLogTimeSeriesStats(req, cb) {

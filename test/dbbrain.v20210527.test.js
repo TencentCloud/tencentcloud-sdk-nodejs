@@ -88,6 +88,16 @@ it("dbbrain.v20210527.DescribeAllUserGroup", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeDBDiagEvents", async function () {
+    try {
+       const data = await client.DescribeDBDiagEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeSlowLogTimeSeriesStats", async function () {
     try {
        const data = await client.DescribeSlowLogTimeSeriesStats({})

@@ -25,6 +25,37 @@ export interface ControlRecordStreamRequest {
     ChannelId?: string;
 }
 /**
+ * ModifySubscriptionStatus请求参数结构体
+ */
+export interface ModifySubscriptionStatusRequest {
+    /**
+      * 设备ID
+      */
+    DeviceId: string;
+    /**
+      * 订阅状态 1：关闭订阅 2：开启订阅
+      */
+    Status: number;
+    /**
+      * 订阅类型 Alarm:告警订阅 Catalog:目录订阅 MobilePosition:移动位置订阅
+      */
+    SubscriptionItem?: string;
+}
+/**
+ * CreateScene返回参数结构体
+ */
+export interface CreateSceneResponse {
+    /**
+      * 场景ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteTimeTemplate返回参数结构体
  */
 export interface DeleteTimeTemplateResponse {
@@ -87,6 +118,72 @@ export interface GetRecordDatesByDevResponse {
     RequestId?: string;
 }
 /**
+ * CreateLiveRecordPlan请求参数结构体
+ */
+export interface CreateLiveRecordPlanRequest {
+    /**
+      * 录制计划名
+      */
+    PlanName: string;
+    /**
+      * 计划类型 1：固定直播 2：移动直播
+      */
+    PlanType: number;
+    /**
+      * 时间模板ID,固定直播时为必填
+      */
+    TemplateId?: string;
+    /**
+      * 录制文件存储时长，单位天，默认30天
+      */
+    RecordStorageTime?: number;
+    /**
+      * 绑定的直播频道ID列表
+      */
+    LiveChannelIds?: Array<string>;
+}
+/**
+ * DescribeLiveChannel请求参数结构体
+ */
+export interface DescribeLiveChannelRequest {
+    /**
+      * 频道ID
+      */
+    LiveChannelId: string;
+}
+/**
+ * DescribeSubscriptionStatus返回参数结构体
+ */
+export interface DescribeSubscriptionStatusResponse {
+    /**
+      * 设备GB28181报警订阅状态 1：未开启订阅；2：已开启订阅
+      */
+    AlarmStatus: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeScenes返回参数结构体
+ */
+export interface DescribeScenesResponse {
+    /**
+      * 场景总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 场景列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<SceneItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDeviceStreams返回参数结构体
  */
 export interface DescribeDeviceStreamsResponse {
@@ -104,18 +201,79 @@ export interface DescribeDeviceStreamsResponse {
  */
 export declare type DescribeSIPServerRequest = null;
 /**
- * GetRecordPlanById请求参数结构体
+ * CreateLiveRecordPlan返回参数结构体
  */
-export interface GetRecordPlanByIdRequest {
+export interface CreateLiveRecordPlanResponse {
     /**
-      * 录制计划ID
+      * 录制计划名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
     PlanId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
- * GetRecordPlans请求参数结构体
+ * 分组信息
  */
-export declare type GetRecordPlansRequest = null;
+export interface GroupItem {
+    /**
+      * 分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupName: string;
+    /**
+      * 父分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ParentId: string;
+    /**
+      * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupId: string;
+    /**
+      * 分组路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupPath?: string;
+    /**
+      * 分组描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupDescribe?: string;
+    /**
+      * 分组绑定设备数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceNum?: number;
+    /**
+      * 子分组数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubGroupNum?: number;
+    /**
+      * 分组附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtraInformation?: string;
+    /**
+      * 分组类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupType?: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: number;
+    /**
+      * 分组状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupStatus?: number;
+}
 /**
  * 用于描述唯一一个设备
  */
@@ -153,6 +311,28 @@ export interface DeleteRecordPlanResponse {
       * 操作结果，OK：成功，其他：失败
       */
     Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVideoInfo请求参数结构体
+ */
+export interface ModifyVideoInfoRequest {
+    /**
+      * 视频ID列表长度限制100内
+      */
+    InitIDs: Array<number>;
+    /**
+      * 过期时间 时间戳 -1: 永不过期 0: 无效值
+      */
+    ExpireTime: number;
+}
+/**
+ * ModifyBindPlanLiveChannel返回参数结构体
+ */
+export interface ModifyBindPlanLiveChannelResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -225,6 +405,85 @@ export interface DevGroupInfo {
       * 设备错误，仅在用户没权限或者设备已删除时返回具体结果
       */
     Error?: string;
+}
+/**
+ * DescribeLiveRecordPlanById请求参数结构体
+ */
+export interface DescribeLiveRecordPlanByIdRequest {
+    /**
+      * 录制计划ID
+      */
+    PlanId: string;
+}
+/**
+ * 直播录制计划详情
+ */
+export interface LiveRecordPlanItem {
+    /**
+      * 计划ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PlanId: string;
+    /**
+      * 计划名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PlanName: string;
+}
+/**
+ * 普通设备的录像详情
+ */
+export interface RecordTaskItem {
+    /**
+      * 录像任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordTaskId: string;
+    /**
+      * 录制计划ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordPlanId: string;
+    /**
+      * 本录制片段开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: number;
+    /**
+      * 本录制片段结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: number;
+    /**
+      * 录制模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventId: number;
+    /**
+      * 本录制片段对应的录制文件URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VideoUrl: string;
+    /**
+      * 本录制片段当前的录制状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordStatus: number;
+    /**
+      * 场景ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneId: number;
+    /**
+      * 告警ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WarnId: number;
+    /**
+      * 录制id，NVR下属设备有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordId: string;
 }
 /**
  * DescribeIPCChannels请求参数结构体
@@ -320,11 +579,97 @@ export interface GetVideoListByConResponse {
     RequestId?: string;
 }
 /**
+ * 直播录制详情item
+ */
+export interface LiveRecordItem {
+    /**
+      * 录制文件自增ID
+      */
+    IntID: number;
+    /**
+      * 直播频道ID
+      */
+    LiveChannelId: string;
+    /**
+      * 过期时间
+      */
+    ExpectDeleteTime: number;
+    /**
+      * 录制时长
+      */
+    RecordTimeLen: number;
+    /**
+      * 文件大小
+      */
+    FileSize: number;
+    /**
+      * 录制文件url
+      */
+    VideoUrl: string;
+    /**
+      * 录制计划ID
+      */
+    RecordPlanId: string;
+    /**
+      * 录制开始时间
+      */
+    StartTime: number;
+    /**
+      * 录制结束时间
+      */
+    EndTime: number;
+}
+/**
  * UpdateTimeTemplate返回参数结构体
  */
 export interface UpdateTimeTemplateResponse {
     /**
       * 操作结果，“OK”表示成功，其他表示失败。
+      */
+    Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateRecordPlan请求参数结构体
+ */
+export interface UpdateRecordPlanRequest {
+    /**
+      * 录制计划ID
+      */
+    PlanId: string;
+    /**
+      * 计划名称
+      */
+    Name?: string;
+    /**
+      * 时间模板ID
+      */
+    TimeTemplateId?: string;
+    /**
+      * 触发录制的事件 1：全部
+      */
+    EventId?: number;
+    /**
+      * 录制设备列表
+      */
+    Devices?: Array<DeviceItem>;
+    /**
+      * 是否更新绑定此录制计划的设备列表
+0 - 不更新
+1 - 更新，如果Devices参数为空则清空设备列表，Devices不为空则全量更新设备列表
+      */
+    IsModifyDevices?: number;
+}
+/**
+ * ModifyDeviceData返回参数结构体
+ */
+export interface ModifyDeviceDataResponse {
+    /**
+      * 操作结果,“OK”表示成功，其他表示失败。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: string;
     /**
@@ -402,13 +747,23 @@ export interface GroupDeviceItem {
     Protocol?: string;
 }
 /**
- * DescribeStatisticSummary请求参数结构体
+ * DescribeSubGroups返回参数结构体
  */
-export interface DescribeStatisticSummaryRequest {
+export interface DescribeSubGroupsResponse {
     /**
-      * 指定日期。格式【YYYY-MM-DD】
+      * 子分组详情列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Date: string;
+    GroupList: Array<GroupItem>;
+    /**
+      * 子分组总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetRecordPlanById返回参数结构体
@@ -464,6 +819,85 @@ export interface CreateTimeTemplateRequest {
     TimeTemplateSpecs?: Array<TimeTemplateSpec>;
 }
 /**
+ * ModifyBindPlanLiveChannel请求参数结构体
+ */
+export interface ModifyBindPlanLiveChannelRequest {
+    /**
+      * 直播录制计划ID
+      */
+    PlanId: string;
+    /**
+      * 1: 绑定 2: 解绑
+      */
+    Type: number;
+    /**
+      * 直播频道ID列表
+      */
+    LiveChannelIds: Array<string>;
+}
+/**
+ * DescribeLiveStream请求参数结构体
+ */
+export interface DescribeLiveStreamRequest {
+    /**
+      * 频道ID
+      */
+    LiveChannelId: string;
+    /**
+      * 过期时间
+      */
+    ExpireTime: number;
+}
+/**
+ * ModifyLiveRecordPlan返回参数结构体
+ */
+export interface ModifyLiveRecordPlanResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 频道信息
+ */
+export interface LiveChannelInfo {
+    /**
+      * 频道ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannelId: string;
+    /**
+      * 频道名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannelName: string;
+    /**
+      * 频道类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannelType: number;
+    /**
+      * 通道直播状态：1: 未推流，2: 推流中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveStatus: number;
+    /**
+      * 推流地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PushStreamAddress: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+}
+/**
  * DescribeAllDeviceList请求参数结构体
  */
 export interface DescribeAllDeviceListRequest {
@@ -489,6 +923,23 @@ export interface DescribeAllDeviceListRequest {
     DeviceTypes?: Array<number>;
 }
 /**
+ * DescribeRecordDatesByLive请求参数结构体
+ */
+export interface DescribeRecordDatesByLiveRequest {
+    /**
+      * 直播频道ID
+      */
+    LiveChannelId: string;
+    /**
+      * 分页值，本地录制时参数无效
+      */
+    Offset: number;
+    /**
+      * 限制值，本地录制时参数无效
+      */
+    Limit: number;
+}
+/**
  * DescribeDevicePassWord请求参数结构体
  */
 export interface DescribeDevicePassWordRequest {
@@ -498,59 +949,38 @@ export interface DescribeDevicePassWordRequest {
     DeviceId: string;
 }
 /**
- * 普通设备的录像详情
+ * GetRecordPlanById请求参数结构体
  */
-export interface RecordTaskItem {
-    /**
-      * 录像任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RecordTaskId: string;
+export interface GetRecordPlanByIdRequest {
     /**
       * 录制计划ID
-注意：此字段可能返回 null，表示取不到有效值。
       */
-    RecordPlanId: string;
+    PlanId: string;
+}
+/**
+ * DescribeLiveChannelList请求参数结构体
+ */
+export interface DescribeLiveChannelListRequest {
     /**
-      * 本录制片段开始时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 偏移量
       */
-    StartTime: number;
+    Offset: number;
     /**
-      * 本录制片段结束时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 最大数
       */
-    EndTime: number;
+    Limit: number;
     /**
-      * 录制模式
-注意：此字段可能返回 null，表示取不到有效值。
+      * 直播频道类型，1：固定直播；2：移动直播
       */
-    EventId: number;
+    LiveChannelType?: number;
     /**
-      * 本录制片段对应的录制文件URL
-注意：此字段可能返回 null，表示取不到有效值。
+      * 直播录制计划ID, null: 直播录制计划为空
       */
-    VideoUrl: string;
+    RecordPlanId?: string;
     /**
-      * 本录制片段当前的录制状态
-注意：此字段可能返回 null，表示取不到有效值。
+      * 频道名称 (支持模糊搜索)
       */
-    RecordStatus: number;
-    /**
-      * 场景ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SceneId: number;
-    /**
-      * 告警ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    WarnId: number;
-    /**
-      * 录制id，NVR下属设备有效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RecordId: string;
+    LiveChannelName?: string;
 }
 /**
  * GetRecordPlanByDev返回参数结构体
@@ -567,35 +997,13 @@ export interface GetRecordPlanByDevResponse {
     RequestId?: string;
 }
 /**
- * UpdateRecordPlan请求参数结构体
+ * DeleteVideoList请求参数结构体
  */
-export interface UpdateRecordPlanRequest {
+export interface DeleteVideoListRequest {
     /**
-      * 录制计划ID
+      * 视频ID列表长度限制100内
       */
-    PlanId: string;
-    /**
-      * 计划名称
-      */
-    Name?: string;
-    /**
-      * 时间模板ID
-      */
-    TimeTemplateId?: string;
-    /**
-      * 触发录制的事件 1：全部
-      */
-    EventId?: number;
-    /**
-      * 录制设备列表
-      */
-    Devices?: Array<DeviceItem>;
-    /**
-      * 是否更新绑定此录制计划的设备列表
-0 - 不更新
-1 - 更新，如果Devices参数为空则清空设备列表，Devices不为空则全量更新设备列表
-      */
-    IsModifyDevices?: number;
+    InitIDs: Array<number>;
 }
 /**
  * 分组信息详情
@@ -758,6 +1166,23 @@ export interface UpdateTimeTemplateRequest {
     TimeTemplateSpecs?: Array<TimeTemplateSpec>;
 }
 /**
+ * DescribeLiveRecordPlanIds返回参数结构体
+ */
+export interface DescribeLiveRecordPlanIdsResponse {
+    /**
+      * 总个数
+      */
+    TotalCount: number;
+    /**
+      * 计划数组
+      */
+    Plans: Array<LiveRecordPlanItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateDevice返回参数结构体
  */
 export interface CreateDeviceResponse {
@@ -876,6 +1301,79 @@ export interface DescribeRecordStreamRequest {
     ChannelId?: string;
 }
 /**
+ * BindGroupDevices请求参数结构体
+ */
+export interface BindGroupDevicesRequest {
+    /**
+      * 分组ID
+      */
+    GroupId: string;
+    /**
+      * 设备唯一标识列表
+      */
+    DeviceList: Array<string>;
+}
+/**
+ * ModifyLiveRecordPlan请求参数结构体
+ */
+export interface ModifyLiveRecordPlanRequest {
+    /**
+      * 录制计划ID
+      */
+    PlanId: string;
+    /**
+      * 录制计划名
+      */
+    PlanName: string;
+    /**
+      * 时间模板ID，固定直播时为必填
+      */
+    TemplateId?: string;
+}
+/**
+ * 场景列表元素
+ */
+export interface SceneItem {
+    /**
+      * 场景ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntId: number;
+    /**
+      * 用户UIN
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin: string;
+    /**
+      * 场景名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneName: string;
+    /**
+      * 触发规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneTrigger: string;
+    /**
+      * 录制时长 秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordDuration: number;
+    /**
+      * 存储时长 天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StoreDuration: number;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 修改时间
+      */
+    UpdateTime: string;
+}
+/**
  * GetTimeTemplateById返回参数结构体
  */
 export interface GetTimeTemplateByIdResponse {
@@ -884,6 +1382,50 @@ export interface GetTimeTemplateByIdResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Template: TimeTemplateItem;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeLiveChannel返回参数结构体
+ */
+export interface DescribeLiveChannelResponse {
+    /**
+      * 频道ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannelId: string;
+    /**
+      * 频道名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannelName: string;
+    /**
+      * 直播频道类型 1：固定直播；2：移动直播
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannelType: number;
+    /**
+      * 通道直播状态：1: 未推流，2: 推流中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveStatus: number;
+    /**
+      * 推流地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PushStreamAddress: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: Array<string>;
+    /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -972,6 +1514,25 @@ export interface UpdateDeviceGroupRequest {
     NewParentId?: string;
 }
 /**
+ * DescribeChannelsByLiveRecordPlan返回参数结构体
+ */
+export interface DescribeChannelsByLiveRecordPlanResponse {
+    /**
+      * 总个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 通道详情数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannels: Array<LiveChannelItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeGroupDevices请求参数结构体
  */
 export interface DescribeGroupDevicesRequest {
@@ -1025,6 +1586,28 @@ export interface UpdateDevicePassWordResponse {
     RequestId?: string;
 }
 /**
+ * DeleteChannel请求参数结构体
+ */
+export interface DeleteChannelRequest {
+    /**
+      * 设备ID
+      */
+    DeviceId: string;
+    /**
+      * 通道ID
+      */
+    ChannelId: string;
+}
+/**
+ * DescribeSubscriptionStatus请求参数结构体
+ */
+export interface DescribeSubscriptionStatusRequest {
+    /**
+      * 设备ID
+      */
+    DeviceId: string;
+}
+/**
  * DescribeDeviceStreams请求参数结构体
  */
 export interface DescribeDeviceStreamsRequest {
@@ -1066,6 +1649,31 @@ export interface CreateRecordPlanResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateScene请求参数结构体
+ */
+export interface CreateSceneRequest {
+    /**
+      * 场景名称
+      */
+    SceneName: string;
+    /**
+      * 场景触发规则
+      */
+    SceneTrigger: string;
+    /**
+      * 录制时长 (秒)
+      */
+    RecordDuration: number;
+    /**
+      * 录像存储时长(天)
+      */
+    StoreDuration: number;
+    /**
+      * 设备列表
+      */
+    Devices?: Array<DeviceItem>;
 }
 /**
  * 查询全部设备出参
@@ -1138,6 +1746,25 @@ export interface AllDeviceInfo {
     GroupName?: string;
 }
 /**
+ * DescribeLiveVideoList返回参数结构体
+ */
+export interface DescribeLiveVideoListResponse {
+    /**
+      * 总的条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 录制任务详情数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordList: Array<LiveRecordItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteDeviceGroup请求参数结构体
  */
 export interface DeleteDeviceGroupRequest {
@@ -1147,14 +1774,52 @@ export interface DeleteDeviceGroupRequest {
     GroupId: string;
 }
 /**
- * DescribeDeviceGroup返回参数结构体
+ * DescribeLiveRecordPlanById返回参数结构体
  */
-export interface DescribeDeviceGroupResponse {
+export interface DescribeLiveRecordPlanByIdResponse {
     /**
-      * 设备所在分组信息
+      * 计划名称
+      */
+    PlanName: string;
+    /**
+      * 模板ID
+      */
+    TemplateId: string;
+    /**
+      * 模板名称
+      */
+    TemplateName: string;
+    /**
+      * 存储时间
+      */
+    RecordStorageTime: number;
+    /**
+      * 计划类型
+      */
+    PlanType: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRecordDatesByLive返回参数结构体
+ */
+export interface DescribeRecordDatesByLiveResponse {
+    /**
+      * 录制日期数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DevGroups: Array<DevGroupInfo>;
+    Dates: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifySubscriptionStatus返回参数结构体
+ */
+export interface ModifySubscriptionStatusResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1172,6 +1837,15 @@ export interface ModifyDeviceDataRequest {
       * 设备名称
       */
     NickName: string;
+}
+/**
+ * DeleteScene返回参数结构体
+ */
+export interface DeleteSceneResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetRecordDatesByDev请求参数结构体
@@ -1199,6 +1873,51 @@ export interface GetRecordDatesByDevRequest {
     Type?: number;
 }
 /**
+ * DescribeLiveVideoList请求参数结构体
+ */
+export interface DescribeLiveVideoListRequest {
+    /**
+      * 偏移量
+      */
+    Offset: number;
+    /**
+      * 分页的每页数量
+      */
+    Limit: number;
+    /**
+      * 直播ID
+      */
+    LiveChannelId: string;
+    /**
+      * 开始录制开始时间
+      */
+    StartRecordTime?: number;
+    /**
+      * 开始录制结束时间
+      */
+    EndRecordTime?: number;
+    /**
+      * 过期开始时间
+      */
+    StartExpireTime?: number;
+    /**
+      * 过期结束时间
+      */
+    EndExpireTime?: number;
+    /**
+      * 文件大小范围 Byte
+      */
+    StartFileSize?: number;
+    /**
+      * 文件大小范围 Byte
+      */
+    EndFileSize?: number;
+    /**
+      * 录制状态，5: 录制回写完
+      */
+    IsRecording?: number;
+}
+/**
  * GetTimeTemplates返回参数结构体
  */
 export interface GetTimeTemplatesResponse {
@@ -1217,13 +1936,37 @@ export interface GetTimeTemplatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeDevicePassWord返回参数结构体
+ * CreateLiveChannel返回参数结构体
  */
-export interface DescribeDevicePassWordResponse {
+export interface CreateLiveChannelResponse {
     /**
-      * 设备密码
+      * 直播频道ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    PassWord: string;
+    LiveChannelId: string;
+    /**
+      * 直播频道推流地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PushStreamAddress: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteVideoList返回参数结构体
+ */
+export interface DeleteVideoListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyLiveVideo返回参数结构体
+ */
+export interface ModifyLiveVideoResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1268,23 +2011,13 @@ export interface DescribeAllDeviceListResponse {
     RequestId?: string;
 }
 /**
- * DescribeSubGroups返回参数结构体
+ * DescribeStatisticSummary请求参数结构体
  */
-export interface DescribeSubGroupsResponse {
+export interface DescribeStatisticSummaryRequest {
     /**
-      * 子分组详情列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 指定日期。格式【YYYY-MM-DD】
       */
-    GroupList: Array<GroupItem>;
-    /**
-      * 子分组总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Date: string;
 }
 /**
  * DescribeGroups返回参数结构体
@@ -1322,17 +2055,50 @@ export interface DescribeDeviceStreamsData {
     FlvAddr: string;
 }
 /**
- * BindGroupDevices请求参数结构体
+ * DeleteLiveRecordPlan请求参数结构体
  */
-export interface BindGroupDevicesRequest {
+export interface DeleteLiveRecordPlanRequest {
     /**
-      * 分组ID
+      * 录制计划ID
       */
-    GroupId: string;
+    PlanId: string;
+}
+/**
+ * DeleteDevice返回参数结构体
+ */
+export interface DeleteDeviceResponse {
     /**
-      * 设备唯一标识列表
+      * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DeviceList: Array<string>;
+    Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteLiveVideoList返回参数结构体
+ */
+export interface DeleteLiveVideoListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDeviceGroup返回参数结构体
+ */
+export interface DescribeDeviceGroupResponse {
+    /**
+      * 设备所在分组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DevGroups: Array<DevGroupInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateTimeTemplate返回参数结构体
@@ -1346,6 +2112,15 @@ export interface CreateTimeTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteLiveChannel请求参数结构体
+ */
+export interface DeleteLiveChannelRequest {
+    /**
+      * 直播频道ID
+      */
+    LiveChannelId: string;
 }
 /**
  * 某天的统计数额
@@ -1383,6 +2158,15 @@ export interface DescribeGroupByPathRequest {
       * 分组路径，格式为/aaa(/bbb/ccc)
       */
     GroupPath: string;
+}
+/**
+ * DeleteChannel返回参数结构体
+ */
+export interface DeleteChannelResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpdateRecordPlan返回参数结构体
@@ -1437,6 +2221,82 @@ export interface DescribeDeviceGroupRequest {
     DeviceIds?: Array<string>;
 }
 /**
+ * 直播频道详情
+ */
+export interface LiveChannelItem {
+    /**
+      * 频道ID
+      */
+    ChannelId: string;
+    /**
+      * 频道名称
+      */
+    ChannelName: string;
+}
+/**
+ * DescribeGroups请求参数结构体
+ */
+export interface DescribeGroupsRequest {
+    /**
+      * 分组ID列表
+      */
+    GroupIds?: Array<string>;
+}
+/**
+ * GetRecordPlans返回参数结构体
+ */
+export interface GetRecordPlansResponse {
+    /**
+      * 录制计划详情·列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Plans: Array<RecordPlanItem>;
+    /**
+      * 录制计划总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeChannelsByLiveRecordPlan请求参数结构体
+ */
+export interface DescribeChannelsByLiveRecordPlanRequest {
+    /**
+      * 录制计划ID
+      */
+    PlanId: string;
+    /**
+      * 分页偏移量
+      */
+    Offset?: number;
+    /**
+      * 分页大小
+      */
+    Limit?: number;
+}
+/**
+ * ModifyLiveChannel返回参数结构体
+ */
+export interface ModifyLiveChannelResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetTimeTemplateById请求参数结构体
+ */
+export interface GetTimeTemplateByIdRequest {
+    /**
+      * 时间模板ID
+      */
+    TemplateId: string;
+}
+/**
  * 录制计划详情
  */
 export interface RecordPlanItem {
@@ -1472,116 +2332,9 @@ export interface RecordPlanItem {
     Devices: Array<DeviceItem>;
 }
 /**
- * DescribeGroups请求参数结构体
+ * GetRecordPlans请求参数结构体
  */
-export interface DescribeGroupsRequest {
-    /**
-      * 分组ID列表
-      */
-    GroupIds?: Array<string>;
-}
-/**
- * GetRecordPlans返回参数结构体
- */
-export interface GetRecordPlansResponse {
-    /**
-      * 录制计划详情·列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Plans: Array<RecordPlanItem>;
-    /**
-      * 录制计划总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeGroupById返回参数结构体
- */
-export interface DescribeGroupByIdResponse {
-    /**
-      * 分组信息详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Group: GroupItem;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * GetTimeTemplateById请求参数结构体
- */
-export interface GetTimeTemplateByIdRequest {
-    /**
-      * 时间模板ID
-      */
-    TemplateId: string;
-}
-/**
- * 分组信息
- */
-export interface GroupItem {
-    /**
-      * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupName: string;
-    /**
-      * 父分组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ParentId: string;
-    /**
-      * 分组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupId: string;
-    /**
-      * 分组路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupPath?: string;
-    /**
-      * 分组描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupDescribe?: string;
-    /**
-      * 分组绑定设备数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeviceNum?: number;
-    /**
-      * 子分组数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubGroupNum?: number;
-    /**
-      * 分组附加信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExtraInformation?: string;
-    /**
-      * 分组类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupType?: string;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime?: number;
-    /**
-      * 分组状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GroupStatus?: number;
-}
+export declare type GetRecordPlansRequest = null;
 /**
  * DeleteTimeTemplate请求参数结构体
  */
@@ -1590,6 +2343,19 @@ export interface DeleteTimeTemplateRequest {
       * 时间模板ID
       */
     TemplateId: string;
+}
+/**
+ * ModifyLiveChannel请求参数结构体
+ */
+export interface ModifyLiveChannelRequest {
+    /**
+      * 直播频道ID
+      */
+    LiveChannelId: string;
+    /**
+      * 直播频道名
+      */
+    LiveChannelName: string;
 }
 /**
  * DescribeVideoList返回参数结构体
@@ -1613,6 +2379,81 @@ export interface DescribeVideoListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeLiveRecordPlanIds请求参数结构体
+ */
+export interface DescribeLiveRecordPlanIdsRequest {
+    /**
+      * 时间模板ID
+      */
+    TemplateId?: string;
+    /**
+      * 分页偏移量
+      */
+    Offset?: number;
+    /**
+      * 分页大小
+      */
+    Limit?: number;
+}
+/**
+ * DeleteLiveVideoList请求参数结构体
+ */
+export interface DeleteLiveVideoListRequest {
+    /**
+      * 视频ID 列表, 大小限制(100)
+      */
+    IntIDs: Array<number>;
+}
+/**
+ * DescribeScenes请求参数结构体
+ */
+export interface DescribeScenesRequest {
+    /**
+      * 条数限制
+      */
+    Limit: number;
+    /**
+      * 偏移
+      */
+    Offset?: number;
+}
+/**
+ * DeleteLiveRecordPlan返回参数结构体
+ */
+export interface DeleteLiveRecordPlanResponse {
+    /**
+      * 删除状态描述
+      */
+    Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVideoInfo返回参数结构体
+ */
+export interface ModifyVideoInfoResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeGroupById返回参数结构体
+ */
+export interface DescribeGroupByIdResponse {
+    /**
+      * 分组信息详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Group: GroupItem;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ControlRecordStream返回参数结构体
  */
 export interface ControlRecordStreamResponse {
@@ -1620,6 +2461,46 @@ export interface ControlRecordStreamResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteLiveChannel返回参数结构体
+ */
+export interface DeleteLiveChannelResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 拉流地址，只有在推流情况下才有
+
+ */
+export interface StreamAddress {
+    /**
+      * 流ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StreamId: string;
+    /**
+      * rtsp流地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RtspAddr: string;
+    /**
+      * rtmp流地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RtmpAddr: string;
+    /**
+      * hls流地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HlsAddr: string;
+    /**
+      * flv流地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlvAddr: string;
 }
 /**
  * BindGroupDevices返回参数结构体
@@ -1704,32 +2585,85 @@ export interface DescribeVideoListRequest {
     RecordType?: Array<number>;
 }
 /**
- * ModifyDeviceData返回参数结构体
+ * DescribeLiveChannelList返回参数结构体
  */
-export interface ModifyDeviceDataResponse {
+export interface DescribeLiveChannelListResponse {
     /**
-      * 操作结果,“OK”表示成功，其他表示失败。
+      * 频道总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status: string;
+    Total: number;
+    /**
+      * 频道信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiveChannels: Array<LiveChannelInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * DeleteDevice返回参数结构体
+ * DescribeDevicePassWord返回参数结构体
  */
-export interface DeleteDeviceResponse {
+export interface DescribeDevicePassWordResponse {
     /**
-      * 操作结果
-注意：此字段可能返回 null，表示取不到有效值。
+      * 设备密码
       */
-    Status: string;
+    PassWord: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeBindSceneDevices请求参数结构体
+ */
+export interface DescribeBindSceneDevicesRequest {
+    /**
+      * 场景ID
+      */
+    SceneId?: number;
+    /**
+      * 偏移值
+      */
+    Offset?: number;
+    /**
+      * 条数限制最大不能超过1000
+      */
+    Limit?: number;
+}
+/**
+ * DescribeBindSceneDevices返回参数结构体
+ */
+export interface DescribeBindSceneDevicesResponse {
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<DeviceItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyLiveVideo请求参数结构体
+ */
+export interface ModifyLiveVideoRequest {
+    /**
+      * 视频ID 列表, 大小限制(100)
+      */
+    IntIDs: Array<number>;
+    /**
+      * 过期时间 秒 (-1: 为永不过期)
+      */
+    ExpireTime: number;
 }
 /**
  * DescribeGroupByPath返回参数结构体
@@ -1746,6 +2680,19 @@ export interface DescribeGroupByPathResponse {
     RequestId?: string;
 }
 /**
+ * CreateLiveChannel请求参数结构体
+ */
+export interface CreateLiveChannelRequest {
+    /**
+      * 直播频道名称
+      */
+    LiveChannelName: string;
+    /**
+      * 直播频道类型 1：固定直播；2：移动直播
+      */
+    LiveChannelType: number;
+}
+/**
  * DescribeGroupDevices返回参数结构体
  */
 export interface DescribeGroupDevicesResponse {
@@ -1759,6 +2706,29 @@ export interface DescribeGroupDevicesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeviceList: Array<GroupDeviceItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteScene请求参数结构体
+ */
+export interface DeleteSceneRequest {
+    /**
+      * 场景ID
+      */
+    IntId: number;
+}
+/**
+ * DescribeLiveStream返回参数结构体
+ */
+export interface DescribeLiveStreamResponse {
+    /**
+      * 拉流地址，只有在推流情况下才有
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: StreamAddress;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

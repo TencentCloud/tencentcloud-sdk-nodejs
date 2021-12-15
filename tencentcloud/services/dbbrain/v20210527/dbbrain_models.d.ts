@@ -241,6 +241,23 @@ export interface DescribeDBDiagEventResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDBDiagEvents返回参数结构体
+ */
+export interface DescribeDBDiagEventsResponse {
+    /**
+      * 诊断事件的总数目。
+      */
+    TotalCount: number;
+    /**
+      * 诊断事件的列表。
+      */
+    Items: Array<DiagHistoryEventItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBDiagReportTasks返回参数结构体
  */
 export interface DescribeDBDiagReportTasksResponse {
@@ -578,18 +595,41 @@ export interface DescribeSecurityAuditLogDownloadUrlsRequest {
     Product: string;
 }
 /**
- * CreateDBDiagReportTask返回参数结构体
+ * 关系型数据库线程
  */
-export interface CreateDBDiagReportTaskResponse {
+export interface MySqlProcess {
     /**
-      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 线程ID。
       */
-    AsyncRequestId: number;
+    ID: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 线程的操作账号名。
       */
-    RequestId?: string;
+    User: string;
+    /**
+      * 线程的操作主机地址。
+      */
+    Host: string;
+    /**
+      * 线程的操作数据库。
+      */
+    DB: string;
+    /**
+      * 线程的操作状态。
+      */
+    State: string;
+    /**
+      * 线程的执行类型。
+      */
+    Command: string;
+    /**
+      * 线程的操作时长，单位秒。
+      */
+    Time: string;
+    /**
+      * 线程的操作语句。
+      */
+    Info: string;
 }
 /**
  * CreateMailProfile返回参数结构体
@@ -660,41 +700,18 @@ export interface DescribeDBDiagHistoryRequest {
     Product?: string;
 }
 /**
- * 关系型数据库线程
+ * CreateDBDiagReportTask返回参数结构体
  */
-export interface MySqlProcess {
+export interface CreateDBDiagReportTaskResponse {
     /**
-      * 线程ID。
+      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ID: string;
+    AsyncRequestId: number;
     /**
-      * 线程的操作账号名。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    User: string;
-    /**
-      * 线程的操作主机地址。
-      */
-    Host: string;
-    /**
-      * 线程的操作数据库。
-      */
-    DB: string;
-    /**
-      * 线程的操作状态。
-      */
-    State: string;
-    /**
-      * 线程的执行类型。
-      */
-    Command: string;
-    /**
-      * 线程的操作时长，单位秒。
-      */
-    Time: string;
-    /**
-      * 线程的操作语句。
-      */
-    Info: string;
+    RequestId?: string;
 }
 /**
  * 实例诊断历史事件
@@ -1806,6 +1823,35 @@ export interface DescribeDBSpaceStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDBDiagEvents请求参数结构体
+ */
+export interface DescribeDBDiagEventsRequest {
+    /**
+      * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，如“2021-05-27 01:00:00”，结束时间与开始时间的间隔最大可为7天。
+      */
+    EndTime: string;
+    /**
+      * 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。
+      */
+    Severities?: Array<number>;
+    /**
+      * 实例ID列表。
+      */
+    InstanceIds?: Array<string>;
+    /**
+      * 偏移量，默认0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认20，最大值为50。
+      */
+    Limit?: number;
 }
 /**
  * 描述组信息。

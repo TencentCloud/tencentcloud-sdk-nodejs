@@ -19,95 +19,153 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ControlRecordStreamRequest,
+  ModifySubscriptionStatusRequest,
+  CreateSceneResponse,
   DeleteTimeTemplateResponse,
   GetTimeTemplatesRequest,
   ServerConfiguration,
   GetRecordPlanByDevRequest,
   GetRecordDatesByDevResponse,
+  CreateLiveRecordPlanRequest,
+  DescribeLiveChannelRequest,
+  DescribeSubscriptionStatusResponse,
+  DescribeScenesResponse,
   DescribeDeviceStreamsResponse,
   DescribeSIPServerRequest,
-  GetRecordPlanByIdRequest,
-  GetRecordPlansRequest,
+  CreateLiveRecordPlanResponse,
+  GroupItem,
   DeviceItem,
   DeleteDeviceGroupResponse,
   DeleteRecordPlanResponse,
+  ModifyVideoInfoRequest,
+  ModifyBindPlanLiveChannelResponse,
   UpdateDeviceGroupResponse,
   GetVideoListByConRequest,
   DevGroupInfo,
+  DescribeLiveRecordPlanByIdRequest,
+  LiveRecordPlanItem,
+  RecordTaskItem,
   DescribeIPCChannelsRequest,
   DescribeSubGroupsRequest,
   DeleteRecordPlanRequest,
   CreateDeviceGroupResponse,
   GetVideoListByConResponse,
+  LiveRecordItem,
   UpdateTimeTemplateResponse,
+  UpdateRecordPlanRequest,
+  ModifyDeviceDataResponse,
   DescribeStatisticDetailsResponse,
   GroupDeviceItem,
-  DescribeStatisticSummaryRequest,
+  DescribeSubGroupsResponse,
   GetRecordPlanByIdResponse,
   DeleteDeviceRequest,
   UpdateDevicePassWordRequest,
   CreateTimeTemplateRequest,
+  ModifyBindPlanLiveChannelRequest,
+  DescribeLiveStreamRequest,
+  ModifyLiveRecordPlanResponse,
+  LiveChannelInfo,
   DescribeAllDeviceListRequest,
+  DescribeRecordDatesByLiveRequest,
   DescribeDevicePassWordRequest,
-  RecordTaskItem,
+  GetRecordPlanByIdRequest,
+  DescribeLiveChannelListRequest,
   GetRecordPlanByDevResponse,
-  UpdateRecordPlanRequest,
+  DeleteVideoListRequest,
   GroupInfo,
   DescribeStatisticDetailsRequest,
   CreateRecordPlanRequest,
   DescribeRecordStreamData,
   CreateDeviceGroupRequest,
   UpdateTimeTemplateRequest,
+  DescribeLiveRecordPlanIdsResponse,
   CreateDeviceResponse,
   CreateDeviceRequest,
   DescribeStatisticSummaryResponse,
   DescribeRecordStreamRequest,
+  BindGroupDevicesRequest,
+  ModifyLiveRecordPlanRequest,
+  SceneItem,
   GetTimeTemplateByIdResponse,
+  DescribeLiveChannelResponse,
   ControlDevicePTZResponse,
   TimeTemplateSpec,
   ControlDevicePTZRequest,
   UpdateDeviceGroupRequest,
+  DescribeChannelsByLiveRecordPlanResponse,
   DescribeGroupDevicesRequest,
   DescribeGroupByIdRequest,
   UpdateDevicePassWordResponse,
+  DeleteChannelRequest,
+  DescribeSubscriptionStatusRequest,
   DescribeDeviceStreamsRequest,
   DescribeRecordStreamResponse,
   CreateRecordPlanResponse,
+  CreateSceneRequest,
   AllDeviceInfo,
+  DescribeLiveVideoListResponse,
   DeleteDeviceGroupRequest,
-  DescribeDeviceGroupResponse,
+  DescribeLiveRecordPlanByIdResponse,
+  DescribeRecordDatesByLiveResponse,
+  ModifySubscriptionStatusResponse,
   ModifyDeviceDataRequest,
+  DeleteSceneResponse,
   GetRecordDatesByDevRequest,
+  DescribeLiveVideoListRequest,
   GetTimeTemplatesResponse,
-  DescribeDevicePassWordResponse,
+  CreateLiveChannelResponse,
+  DeleteVideoListResponse,
+  ModifyLiveVideoResponse,
   DescribeIPCChannelsResponse,
   DescribeAllDeviceListResponse,
-  DescribeSubGroupsResponse,
+  DescribeStatisticSummaryRequest,
   DescribeGroupsResponse,
   DescribeDeviceStreamsData,
-  BindGroupDevicesRequest,
+  DeleteLiveRecordPlanRequest,
+  DeleteDeviceResponse,
+  DeleteLiveVideoListResponse,
+  DescribeDeviceGroupResponse,
   CreateTimeTemplateResponse,
+  DeleteLiveChannelRequest,
   StatisticItem,
   DescribeSIPServerResponse,
   DescribeGroupByPathRequest,
+  DeleteChannelResponse,
   UpdateRecordPlanResponse,
   TimeTemplateItem,
   DescribeDeviceGroupRequest,
-  RecordPlanItem,
+  LiveChannelItem,
   DescribeGroupsRequest,
   GetRecordPlansResponse,
-  DescribeGroupByIdResponse,
+  DescribeChannelsByLiveRecordPlanRequest,
+  ModifyLiveChannelResponse,
   GetTimeTemplateByIdRequest,
-  GroupItem,
+  RecordPlanItem,
+  GetRecordPlansRequest,
   DeleteTimeTemplateRequest,
+  ModifyLiveChannelRequest,
   DescribeVideoListResponse,
+  DescribeLiveRecordPlanIdsRequest,
+  DeleteLiveVideoListRequest,
+  DescribeScenesRequest,
+  DeleteLiveRecordPlanResponse,
+  ModifyVideoInfoResponse,
+  DescribeGroupByIdResponse,
   ControlRecordStreamResponse,
+  DeleteLiveChannelResponse,
+  StreamAddress,
   BindGroupDevicesResponse,
   DescribeVideoListRequest,
-  ModifyDeviceDataResponse,
-  DeleteDeviceResponse,
+  DescribeLiveChannelListResponse,
+  DescribeDevicePassWordResponse,
+  DescribeBindSceneDevicesRequest,
+  DescribeBindSceneDevicesResponse,
+  ModifyLiveVideoRequest,
   DescribeGroupByPathResponse,
+  CreateLiveChannelRequest,
   DescribeGroupDevicesResponse,
+  DeleteSceneRequest,
+  DescribeLiveStreamResponse,
 } from "./iotvideoindustry_models"
 
 /**
@@ -130,13 +188,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(UpdateRecordPlan)用于更新录制计划。
+   * 修改录像存储列表
    */
-  async UpdateRecordPlan(
-    req: UpdateRecordPlanRequest,
-    cb?: (error: string, rep: UpdateRecordPlanResponse) => void
-  ): Promise<UpdateRecordPlanResponse> {
-    return this.request("UpdateRecordPlan", req, cb)
+  async ModifyVideoInfo(
+    req: ModifyVideoInfoRequest,
+    cb?: (error: string, rep: ModifyVideoInfoResponse) => void
+  ): Promise<ModifyVideoInfoResponse> {
+    return this.request("ModifyVideoInfo", req, cb)
   }
 
   /**
@@ -157,6 +215,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDeviceGroupResponse) => void
   ): Promise<UpdateDeviceGroupResponse> {
     return this.request("UpdateDeviceGroup", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDeviceStreams)用于获取设备实时流地址。
+   */
+  async DescribeDeviceStreams(
+    req: DescribeDeviceStreamsRequest,
+    cb?: (error: string, rep: DescribeDeviceStreamsResponse) => void
+  ): Promise<DescribeDeviceStreamsResponse> {
+    return this.request("DescribeDeviceStreams", req, cb)
+  }
+
+  /**
+   * 删除录像存储列表
+   */
+  async DeleteVideoList(
+    req: DeleteVideoListRequest,
+    cb?: (error: string, rep: DeleteVideoListResponse) => void
+  ): Promise<DeleteVideoListResponse> {
+    return this.request("DeleteVideoList", req, cb)
   }
 
   /**
@@ -183,13 +261,23 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
+   * 直播录像回放列表
    */
-  async DescribeStatisticSummary(
-    req: DescribeStatisticSummaryRequest,
-    cb?: (error: string, rep: DescribeStatisticSummaryResponse) => void
-  ): Promise<DescribeStatisticSummaryResponse> {
-    return this.request("DescribeStatisticSummary", req, cb)
+  async DescribeLiveVideoList(
+    req: DescribeLiveVideoListRequest,
+    cb?: (error: string, rep: DescribeLiveVideoListResponse) => void
+  ): Promise<DescribeLiveVideoListResponse> {
+    return this.request("DescribeLiveVideoList", req, cb)
+  }
+
+  /**
+   * 创建场景
+   */
+  async CreateScene(
+    req: CreateSceneRequest,
+    cb?: (error: string, rep: CreateSceneResponse) => void
+  ): Promise<CreateSceneResponse> {
+    return this.request("CreateScene", req, cb)
   }
 
   /**
@@ -223,6 +311,16 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
+   * 查询主设备订阅状态
+   */
+  async DescribeSubscriptionStatus(
+    req: DescribeSubscriptionStatusRequest,
+    cb?: (error: string, rep: DescribeSubscriptionStatusResponse) => void
+  ): Promise<DescribeSubscriptionStatusResponse> {
+    return this.request("DescribeSubscriptionStatus", req, cb)
+  }
+
+  /**
    * 对回放流进行控制，包括暂停、播放、拉动、结束等
    */
   async ControlRecordStream(
@@ -233,6 +331,16 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
+   * 直播录制计划绑定解绑直播频道
+   */
+  async ModifyBindPlanLiveChannel(
+    req: ModifyBindPlanLiveChannelRequest,
+    cb?: (error: string, rep: ModifyBindPlanLiveChannelResponse) => void
+  ): Promise<ModifyBindPlanLiveChannelResponse> {
+    return this.request("ModifyBindPlanLiveChannel", req, cb)
+  }
+
+  /**
    * 本接口(GetTimeTemplateById)用于根据模板ID获取时间模板详情。
    */
   async GetTimeTemplateById(
@@ -240,6 +348,36 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: GetTimeTemplateByIdResponse) => void
   ): Promise<GetTimeTemplateByIdResponse> {
     return this.request("GetTimeTemplateById", req, cb)
+  }
+
+  /**
+   * 直播录像删除
+   */
+  async DeleteLiveVideoList(
+    req: DeleteLiveVideoListRequest,
+    cb?: (error: string, rep: DeleteLiveVideoListResponse) => void
+  ): Promise<DeleteLiveVideoListResponse> {
+    return this.request("DeleteLiveVideoList", req, cb)
+  }
+
+  /**
+   * 编辑直播录制计划
+   */
+  async ModifyLiveRecordPlan(
+    req: ModifyLiveRecordPlanRequest,
+    cb?: (error: string, rep: ModifyLiveRecordPlanResponse) => void
+  ): Promise<ModifyLiveRecordPlanResponse> {
+    return this.request("ModifyLiveRecordPlan", req, cb)
+  }
+
+  /**
+   * 删除通道接口
+   */
+  async DeleteChannel(
+    req: DeleteChannelRequest,
+    cb?: (error: string, rep: DeleteChannelResponse) => void
+  ): Promise<DeleteChannelResponse> {
+    return this.request("DeleteChannel", req, cb)
   }
 
   /**
@@ -263,6 +401,16 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
+   * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+   */
+  async GetRecordPlanByDev(
+    req: GetRecordPlanByDevRequest,
+    cb?: (error: string, rep: GetRecordPlanByDevResponse) => void
+  ): Promise<GetRecordPlanByDevResponse> {
+    return this.request("GetRecordPlanByDev", req, cb)
+  }
+
+  /**
    * 本接口(GetRecordPlans)用于获取用户的全部录制计划。
    */
   async GetRecordPlans(
@@ -283,13 +431,13 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(ModifyDeviceData)用于编辑设备信息。
+   * 创建直播录制计划
    */
-  async ModifyDeviceData(
-    req: ModifyDeviceDataRequest,
-    cb?: (error: string, rep: ModifyDeviceDataResponse) => void
-  ): Promise<ModifyDeviceDataResponse> {
-    return this.request("ModifyDeviceData", req, cb)
+  async CreateLiveRecordPlan(
+    req: CreateLiveRecordPlanRequest,
+    cb?: (error: string, rep: CreateLiveRecordPlanResponse) => void
+  ): Promise<CreateLiveRecordPlanResponse> {
+    return this.request("CreateLiveRecordPlan", req, cb)
   }
 
   /**
@@ -300,6 +448,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: DescribeGroupByPathResponse) => void
   ): Promise<DescribeGroupByPathResponse> {
     return this.request("DescribeGroupByPath", req, cb)
+  }
+
+  /**
+   * 直播录像存储日期列表
+   */
+  async DescribeRecordDatesByLive(
+    req: DescribeRecordDatesByLiveRequest,
+    cb?: (error: string, rep: DescribeRecordDatesByLiveResponse) => void
+  ): Promise<DescribeRecordDatesByLiveResponse> {
+    return this.request("DescribeRecordDatesByLive", req, cb)
   }
 
   /**
@@ -323,13 +481,13 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(DescribeDeviceStreams)用于获取设备实时流地址。
+   * 删除直播接口
    */
-  async DescribeDeviceStreams(
-    req: DescribeDeviceStreamsRequest,
-    cb?: (error: string, rep: DescribeDeviceStreamsResponse) => void
-  ): Promise<DescribeDeviceStreamsResponse> {
-    return this.request("DescribeDeviceStreams", req, cb)
+  async DeleteLiveChannel(
+    req: DeleteLiveChannelRequest,
+    cb?: (error: string, rep: DeleteLiveChannelResponse) => void
+  ): Promise<DeleteLiveChannelResponse> {
+    return this.request("DeleteLiveChannel", req, cb)
   }
 
   /**
@@ -340,6 +498,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: DescribeStatisticDetailsResponse) => void
   ): Promise<DescribeStatisticDetailsResponse> {
     return this.request("DescribeStatisticDetails", req, cb)
+  }
+
+  /**
+   * 获取场景列表
+   */
+  async DescribeScenes(
+    req: DescribeScenesRequest,
+    cb?: (error: string, rep: DescribeScenesResponse) => void
+  ): Promise<DescribeScenesResponse> {
+    return this.request("DescribeScenes", req, cb)
   }
 
   /**
@@ -363,13 +531,13 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+   * 根据直播录制计划获取频道列表
    */
-  async GetRecordPlanByDev(
-    req: GetRecordPlanByDevRequest,
-    cb?: (error: string, rep: GetRecordPlanByDevResponse) => void
-  ): Promise<GetRecordPlanByDevResponse> {
-    return this.request("GetRecordPlanByDev", req, cb)
+  async DescribeChannelsByLiveRecordPlan(
+    req: DescribeChannelsByLiveRecordPlanRequest,
+    cb?: (error: string, rep: DescribeChannelsByLiveRecordPlanResponse) => void
+  ): Promise<DescribeChannelsByLiveRecordPlanResponse> {
+    return this.request("DescribeChannelsByLiveRecordPlan", req, cb)
   }
 
   /**
@@ -394,13 +562,23 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(DescribeGroups)用于批量查询分组信息。
+   * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
    */
-  async DescribeGroups(
-    req: DescribeGroupsRequest,
-    cb?: (error: string, rep: DescribeGroupsResponse) => void
-  ): Promise<DescribeGroupsResponse> {
-    return this.request("DescribeGroups", req, cb)
+  async DescribeStatisticSummary(
+    req: DescribeStatisticSummaryRequest,
+    cb?: (error: string, rep: DescribeStatisticSummaryResponse) => void
+  ): Promise<DescribeStatisticSummaryResponse> {
+    return this.request("DescribeStatisticSummary", req, cb)
+  }
+
+  /**
+   * 删除直播录制计划
+   */
+  async DeleteLiveRecordPlan(
+    req: DeleteLiveRecordPlanRequest,
+    cb?: (error: string, rep: DeleteLiveRecordPlanResponse) => void
+  ): Promise<DeleteLiveRecordPlanResponse> {
+    return this.request("DeleteLiveRecordPlan", req, cb)
   }
 
   /**
@@ -414,13 +592,43 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口用于获取SIP服务器相关配置，用户可以通过这些配置项，将设备通过GB28181协议注册到本服务。
+   * 本接口(DescribeGroups)用于批量查询分组信息。
    */
-  async DescribeSIPServer(
-    req?: DescribeSIPServerRequest,
-    cb?: (error: string, rep: DescribeSIPServerResponse) => void
-  ): Promise<DescribeSIPServerResponse> {
-    return this.request("DescribeSIPServer", req, cb)
+  async DescribeGroups(
+    req: DescribeGroupsRequest,
+    cb?: (error: string, rep: DescribeGroupsResponse) => void
+  ): Promise<DescribeGroupsResponse> {
+    return this.request("DescribeGroups", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDeviceData)用于编辑设备信息。
+   */
+  async ModifyDeviceData(
+    req: ModifyDeviceDataRequest,
+    cb?: (error: string, rep: ModifyDeviceDataResponse) => void
+  ): Promise<ModifyDeviceDataResponse> {
+    return this.request("ModifyDeviceData", req, cb)
+  }
+
+  /**
+   * 直播拉流接口
+   */
+  async DescribeLiveStream(
+    req: DescribeLiveStreamRequest,
+    cb?: (error: string, rep: DescribeLiveStreamResponse) => void
+  ): Promise<DescribeLiveStreamResponse> {
+    return this.request("DescribeLiveStream", req, cb)
+  }
+
+  /**
+   * 编辑直播接口
+   */
+  async ModifyLiveChannel(
+    req: ModifyLiveChannelRequest,
+    cb?: (error: string, rep: ModifyLiveChannelResponse) => void
+  ): Promise<ModifyLiveChannelResponse> {
+    return this.request("ModifyLiveChannel", req, cb)
   }
 
   /**
@@ -434,6 +642,16 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
+   * 获取场景绑定设备列表
+   */
+  async DescribeBindSceneDevices(
+    req: DescribeBindSceneDevicesRequest,
+    cb?: (error: string, rep: DescribeBindSceneDevicesResponse) => void
+  ): Promise<DescribeBindSceneDevicesResponse> {
+    return this.request("DescribeBindSceneDevices", req, cb)
+  }
+
+  /**
    * 本接口(ControlDevicePTZ) 用于对支持GB28181 PTZ信令的设备进行远程控制。
    */
   async ControlDevicePTZ(
@@ -441,6 +659,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: ControlDevicePTZResponse) => void
   ): Promise<ControlDevicePTZResponse> {
     return this.request("ControlDevicePTZ", req, cb)
+  }
+
+  /**
+   * 获取直播录制计划列表
+   */
+  async DescribeLiveRecordPlanIds(
+    req: DescribeLiveRecordPlanIdsRequest,
+    cb?: (error: string, rep: DescribeLiveRecordPlanIdsResponse) => void
+  ): Promise<DescribeLiveRecordPlanIdsResponse> {
+    return this.request("DescribeLiveRecordPlanIds", req, cb)
   }
 
   /**
@@ -454,6 +682,26 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
+   * 直播录像编辑
+   */
+  async ModifyLiveVideo(
+    req: ModifyLiveVideoRequest,
+    cb?: (error: string, rep: ModifyLiveVideoResponse) => void
+  ): Promise<ModifyLiveVideoResponse> {
+    return this.request("ModifyLiveVideo", req, cb)
+  }
+
+  /**
+   * 直播详情接口
+   */
+  async DescribeLiveChannel(
+    req: DescribeLiveChannelRequest,
+    cb?: (error: string, rep: DescribeLiveChannelResponse) => void
+  ): Promise<DescribeLiveChannelResponse> {
+    return this.request("DescribeLiveChannel", req, cb)
+  }
+
+  /**
    * 本接口(DescribeAllDeviceList) 用于获取设备列表。
    */
   async DescribeAllDeviceList(
@@ -464,6 +712,56 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
+   * 删除场景
+   */
+  async DeleteScene(
+    req: DeleteSceneRequest,
+    cb?: (error: string, rep: DeleteSceneResponse) => void
+  ): Promise<DeleteSceneResponse> {
+    return this.request("DeleteScene", req, cb)
+  }
+
+  /**
+   * 本接口用于获取SIP服务器相关配置，用户可以通过这些配置项，将设备通过GB28181协议注册到本服务。
+   */
+  async DescribeSIPServer(
+    req?: DescribeSIPServerRequest,
+    cb?: (error: string, rep: DescribeSIPServerResponse) => void
+  ): Promise<DescribeSIPServerResponse> {
+    return this.request("DescribeSIPServer", req, cb)
+  }
+
+  /**
+   * 编辑设备订阅状态
+   */
+  async ModifySubscriptionStatus(
+    req: ModifySubscriptionStatusRequest,
+    cb?: (error: string, rep: ModifySubscriptionStatusResponse) => void
+  ): Promise<ModifySubscriptionStatusResponse> {
+    return this.request("ModifySubscriptionStatus", req, cb)
+  }
+
+  /**
+   * 本接口(UpdateRecordPlan)用于更新录制计划。
+   */
+  async UpdateRecordPlan(
+    req: UpdateRecordPlanRequest,
+    cb?: (error: string, rep: UpdateRecordPlanResponse) => void
+  ): Promise<UpdateRecordPlanResponse> {
+    return this.request("UpdateRecordPlan", req, cb)
+  }
+
+  /**
+   * 创建直播频道
+   */
+  async CreateLiveChannel(
+    req: CreateLiveChannelRequest,
+    cb?: (error: string, rep: CreateLiveChannelResponse) => void
+  ): Promise<CreateLiveChannelResponse> {
+    return this.request("CreateLiveChannel", req, cb)
+  }
+
+  /**
    * 本接口(BindGroupDevices) 用于绑定设备到分组。
    */
   async BindGroupDevices(
@@ -471,6 +769,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: BindGroupDevicesResponse) => void
   ): Promise<BindGroupDevicesResponse> {
     return this.request("BindGroupDevices", req, cb)
+  }
+
+  /**
+   * 获取直播录制计划详情
+   */
+  async DescribeLiveRecordPlanById(
+    req: DescribeLiveRecordPlanByIdRequest,
+    cb?: (error: string, rep: DescribeLiveRecordPlanByIdResponse) => void
+  ): Promise<DescribeLiveRecordPlanByIdResponse> {
+    return this.request("DescribeLiveRecordPlanById", req, cb)
   }
 
   /**
@@ -501,5 +809,15 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: CreateTimeTemplateResponse) => void
   ): Promise<CreateTimeTemplateResponse> {
     return this.request("CreateTimeTemplate", req, cb)
+  }
+
+  /**
+   * 直播列表接口
+   */
+  async DescribeLiveChannelList(
+    req: DescribeLiveChannelListRequest,
+    cb?: (error: string, rep: DescribeLiveChannelListResponse) => void
+  ): Promise<DescribeLiveChannelListResponse> {
+    return this.request("DescribeLiveChannelList", req, cb)
   }
 }

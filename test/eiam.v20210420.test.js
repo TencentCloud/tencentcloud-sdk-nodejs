@@ -28,6 +28,16 @@ it("eiam.v20210420.DescribeUserGroup", async function () {
     }
 })
 
+it("eiam.v20210420.CreateAccountGroup", async function () {
+    try {
+       const data = await client.CreateAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.DescribeOrgResourcesAuthorization", async function () {
     try {
        const data = await client.DescribeOrgResourcesAuthorization({})
@@ -68,6 +78,26 @@ it("eiam.v20210420.ListUsers", async function () {
     }
 })
 
+it("eiam.v20210420.RemoveAccountFromAccountGroup", async function () {
+    try {
+       const data = await client.RemoveAccountFromAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.ListAccountInAccountGroup", async function () {
+    try {
+       const data = await client.ListAccountInAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.ListAuthorizedApplicationsToUserGroup", async function () {
     try {
        const data = await client.ListAuthorizedApplicationsToUserGroup({})
@@ -88,6 +118,16 @@ it("eiam.v20210420.ListApplicationAuthorizations", async function () {
     }
 })
 
+it("eiam.v20210420.ModifyAccountGroup", async function () {
+    try {
+       const data = await client.ModifyAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.DescribeUserResourcesAuthorization", async function () {
     try {
        const data = await client.DescribeUserResourcesAuthorization({})
@@ -98,9 +138,39 @@ it("eiam.v20210420.DescribeUserResourcesAuthorization", async function () {
     }
 })
 
+it("eiam.v20210420.ModifyAppAccount", async function () {
+    try {
+       const data = await client.ModifyAppAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.DescribeUserThirdPartyAccountInfo", async function () {
+    try {
+       const data = await client.DescribeUserThirdPartyAccountInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.DeleteUserGroup", async function () {
     try {
        const data = await client.DeleteUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.DeleteAccountGroup", async function () {
+    try {
+       const data = await client.DeleteAccountGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +208,49 @@ it("eiam.v20210420.AddUserToUserGroup", async function () {
     }
 })
 
+it("eiam.v20210420.DeleteAppAccount", async function () {
+    try {
+       const data = await client.DeleteAppAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.DescribeAccountGroup", async function () {
+    try {
+       const data = await client.DescribeAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.DeleteUsers", async function () {
+    try {
+       const data = await client.DeleteUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.DescribeUserGroupResourcesAuthorization", async function () {
     try {
        const data = await client.DescribeUserGroupResourcesAuthorization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.CreateAppAccount", async function () {
+    try {
+       const data = await client.CreateAppAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +268,9 @@ it("eiam.v20210420.ListUsersInUserGroup", async function () {
     }
 })
 
-it("eiam.v20210420.CreateUser", async function () {
+it("eiam.v20210420.ListUserGroupsOfUser", async function () {
     try {
-       const data = await client.CreateUser({})
+       const data = await client.ListUserGroupsOfUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +281,16 @@ it("eiam.v20210420.CreateUser", async function () {
 it("eiam.v20210420.ListAuthorizedApplicationsToUser", async function () {
     try {
        const data = await client.ListAuthorizedApplicationsToUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eiam.v20210420.DescribeAppAccount", async function () {
+    try {
+       const data = await client.DescribeAppAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +378,16 @@ it("eiam.v20210420.DeleteOrgNode", async function () {
     }
 })
 
+it("eiam.v20210420.AddAccountToAccountGroup", async function () {
+    try {
+       const data = await client.AddAccountToAccountGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eiam.v20210420.CreateUserGroup", async function () {
     try {
        const data = await client.CreateUserGroup({})
@@ -268,9 +398,9 @@ it("eiam.v20210420.CreateUserGroup", async function () {
     }
 })
 
-it("eiam.v20210420.ListUserGroupsOfUser", async function () {
+it("eiam.v20210420.CreateUser", async function () {
     try {
-       const data = await client.ListUserGroupsOfUser({})
+       const data = await client.CreateUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

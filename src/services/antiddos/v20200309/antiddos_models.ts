@@ -369,6 +369,16 @@ export interface DescribeListBGPInstancesRequest {
    * 按照线路搜索, 1: BGP; 2: 三网
    */
   FilterLine?: number
+
+  /**
+   * 状态搜索，idle：允许中；attacking：攻击中；blocking：封堵中
+   */
+  FilterStatus?: string
+
+  /**
+   * 高防包绑定状态搜索，bounding：绑定中； failed：绑定失败
+   */
+  FilterBoundStatus?: string
 }
 
 /**
@@ -628,6 +638,11 @@ export interface DescribeListBGPIPInstancesRequest {
    * 是否只获取安全加速实例。填写时，只能填写1或者0。当填写1时，表示返回安全加速实例。当填写0时，表示返回非安全加速实例。
    */
   FilterDamDDoSStatus?: number
+
+  /**
+   * 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking
+   */
+  FilterStatus?: string
 }
 
 /**

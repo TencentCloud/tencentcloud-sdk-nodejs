@@ -130,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAsyncSearchTask", req, cb);
     }
     /**
-     * 该接口用户创建告警通知模板。
+     * 该接口用户创建通知渠道组。
      */
     async CreateAlarmNotice(req, cb) {
         return this.request("CreateAlarmNotice", req, cb);
@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateLogset", req, cb);
     }
     /**
-     * 本接口用于获取告警策略。
+     * 本接口用于获取告警策略列表。
      */
     async DescribeAlarms(req, cb) {
         return this.request("DescribeAlarms", req, cb);
@@ -202,7 +202,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAsyncContextTask", req, cb);
     }
     /**
-     * 该接口用于获取告警通知模板列表
+     * 该接口用于获取通知渠道组列表
      */
     async DescribeAlarmNotices(req, cb) {
         return this.request("DescribeAlarmNotices", req, cb);
@@ -220,7 +220,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyConfigToMachineGroup", req, cb);
     }
     /**
-     * 该接口用于删除告警通知模板
+     * 该接口用于删除通知渠道组
      */
     async DeleteAlarmNotice(req, cb) {
         return this.request("DeleteAlarmNotice", req, cb);
@@ -233,13 +233,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyIndex", req, cb);
     }
     /**
-     * 该接口用于修改告警通知模板。
+     * 该接口用于修改通知渠道组
      */
     async ModifyAlarmNotice(req, cb) {
         return this.request("ModifyAlarmNotice", req, cb);
     }
     /**
-     * 本接口用于搜索日志
+     * 本接口用于搜索日志, 该接口除受默认接口请求频率限制外，针对单个日志主题，并发数不能超过15
      */
     async SearchLog(req, cb) {
         return this.request("SearchLog", req, cb);

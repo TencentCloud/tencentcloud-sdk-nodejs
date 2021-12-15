@@ -107,7 +107,7 @@ export interface DescribeStructCompareDataRequest {
  */
 export interface InsuranceResult {
     /**
-      * 险种
+      * 险种:CriticalDiseaseInsurance(重疾险);LifeInsurance(寿险);AccidentInsurance(意外险);MedicalInsurance(医疗险)
       */
     InsuranceType: string;
     /**
@@ -149,7 +149,7 @@ export interface PerStructDifference {
       */
     SubTaskId: string;
     /**
-      * 任务类型
+      * 任务类型:HealthReport(体检报告); BUltraReport(B超报告);MedCheckReport(检查报告);LaboratoryReport(检验报告); PathologyReport(病理报告);AdmissionReport(入院记录);DischargeReport(出院记录); DischargeSummary(出院小结);DiagnosisReport(诊断证明); MedicalRecordFront(病案首页);OperationReport(手术记录);OutpatientMedicalRecord(门诊病历)
       */
     TaskType: string;
     /**
@@ -275,7 +275,7 @@ export interface ReviewDataTaskInfo {
       */
     TaskName: string;
     /**
-      * 任务类型
+      * 任务类型:HealthReport(体检报告); BUltraReport(B超报告);MedCheckReport(检查报告);LaboratoryReport(检验报告); PathologyReport(病理报告);AdmissionReport(入院记录);DischargeReport(出院记录); DischargeSummary(出院小结);DiagnosisReport(诊断证明); MedicalRecordFront(病案首页);OperationReport(手术记录);OutpatientMedicalRecord(门诊病历)
       */
     TaskType: string;
 }
@@ -565,11 +565,11 @@ export interface CreateUnderwriteTaskByIdResponse {
  */
 export interface StructureResultObject {
     /**
-      * 0表示正常返回
+      * 0表示正常返回；1代表结果未生成；2代表任务执行失败
       */
     Code: number;
     /**
-      * 报告类型
+      * 报告类型:HealthReport(体检报告); BUltraReport(B超报告);MedCheckReport(检查报告);LaboratoryReport(检验报告); PathologyReport(病理报告);AdmissionReport(入院记录);DischargeReport(出院记录); DischargeSummary(出院小结);DiagnosisReport(诊断证明); MedicalRecordFront(病案首页);OperationReport(手术记录);OutpatientMedicalRecord(门诊病历)
       */
     TaskType: string;
     /**
@@ -586,7 +586,7 @@ export interface StructureResultObject {
  */
 export interface CreateStructureTaskInfo {
     /**
-      * 任务类型
+      * 任务类型:HealthReport(体检报告); BUltraReport(B超报告);MedCheckReport(检查报告);LaboratoryReport(检验报告); PathologyReport(病理报告);AdmissionReport(入院记录);DischargeReport(出院记录); DischargeSummary(出院小结);DiagnosisReport(诊断证明); MedicalRecordFront(病案首页);OperationReport(手术记录);OutpatientMedicalRecord(门诊病历)
       */
     TaskType: string;
     /**

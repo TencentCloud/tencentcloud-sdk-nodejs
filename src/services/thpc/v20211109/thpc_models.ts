@@ -277,6 +277,21 @@ export interface VirtualPrivateCloud {
 }
 
 /**
+ * 描述集群文件系统选项
+ */
+export interface StorageOption {
+  /**
+   * 集群挂载CFS文件系统选项
+   */
+  CFSOptions?: Array<CFSOption>
+
+  /**
+   * 集群挂在GooseFS文件系统选项
+   */
+  GooseFSOptions?: Array<GooseFSOption>
+}
+
+/**
  * DeleteCluster返回参数结构体
  */
 export interface DeleteClusterResponse {
@@ -287,13 +302,23 @@ export interface DeleteClusterResponse {
 }
 
 /**
- * 描述集群文件系统选项
+ * 描述GooseFS挂载信息
  */
-export interface StorageOption {
+export interface GooseFSOption {
   /**
-   * 集群挂载CFS文件系统选项
+   * 文件系统本地挂载路径
    */
-  CFSOptions: Array<CFSOption>
+  LocalPath: string
+
+  /**
+   * 文件系统远程挂载路径
+   */
+  RemotePath: string
+
+  /**
+   * 文件系统master的ip和端口
+   */
+  Masters: Array<string>
 }
 
 /**

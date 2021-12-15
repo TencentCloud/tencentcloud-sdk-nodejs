@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserGroup", req, cb);
     }
     /**
+     * 创建账号组
+     */
+    async CreateAccountGroup(req, cb) {
+        return this.request("CreateAccountGroup", req, cb);
+    }
+    /**
      * 查询指定机构下的资源授权列表
      */
     async DescribeOrgResourcesAuthorization(req, cb) {
@@ -58,6 +64,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListUsers", req, cb);
     }
     /**
+     * 从账号组中移除账号
+     */
+    async RemoveAccountFromAccountGroup(req, cb) {
+        return this.request("RemoveAccountFromAccountGroup", req, cb);
+    }
+    /**
+     *  获取账号组中的账号列表
+     */
+    async ListAccountInAccountGroup(req, cb) {
+        return this.request("ListAccountInAccountGroup", req, cb);
+    }
+    /**
      * 通过用户组ID获得被授权访问的应用列表。
      */
     async ListAuthorizedApplicationsToUserGroup(req, cb) {
@@ -70,16 +88,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListApplicationAuthorizations", req, cb);
     }
     /**
+     * 修改账号组
+     */
+    async ModifyAccountGroup(req, cb) {
+        return this.request("ModifyAccountGroup", req, cb);
+    }
+    /**
      * 查询指定用户下的资源授权列表
      */
     async DescribeUserResourcesAuthorization(req, cb) {
         return this.request("DescribeUserResourcesAuthorization", req, cb);
     }
     /**
+     * 修改应用账号
+     */
+    async ModifyAppAccount(req, cb) {
+        return this.request("ModifyAppAccount", req, cb);
+    }
+    /**
+     * 通过用户名或用户 id 获取用户的第三方账号绑定信息。
+     */
+    async DescribeUserThirdPartyAccountInfo(req, cb) {
+        return this.request("DescribeUserThirdPartyAccountInfo", req, cb);
+    }
+    /**
      * 删除一个用户组
      */
     async DeleteUserGroup(req, cb) {
         return this.request("DeleteUserGroup", req, cb);
+    }
+    /**
+     * 删除账号组
+     */
+    async DeleteAccountGroup(req, cb) {
+        return this.request("DeleteAccountGroup", req, cb);
     }
     /**
      * 更新一个应用的信息
@@ -100,10 +142,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUserToUserGroup", req, cb);
     }
     /**
+     * 删除应用账号
+     */
+    async DeleteAppAccount(req, cb) {
+        return this.request("DeleteAppAccount", req, cb);
+    }
+    /**
+     * 查询账号组列表
+     */
+    async DescribeAccountGroup(req, cb) {
+        return this.request("DescribeAccountGroup", req, cb);
+    }
+    /**
+     * 批量删除当前节点下的用户。如果出现个别用户删除错误，将不影响其余被勾选用户被删除的操作，同时提示未被删除的用户名称/用户ID。
+     */
+    async DeleteUsers(req, cb) {
+        return this.request("DeleteUsers", req, cb);
+    }
+    /**
      * 查询指定用户组下的资源授权列表
      */
     async DescribeUserGroupResourcesAuthorization(req, cb) {
         return this.request("DescribeUserGroupResourcesAuthorization", req, cb);
+    }
+    /**
+     * 创建应用账号
+     */
+    async CreateAppAccount(req, cb) {
+        return this.request("CreateAppAccount", req, cb);
     }
     /**
      * 获取用户组中的用户列表
@@ -112,16 +178,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListUsersInUserGroup", req, cb);
     }
     /**
-     * 新建一个用户
+     * 获取用户所在的用户组列表
      */
-    async CreateUser(req, cb) {
-        return this.request("CreateUser", req, cb);
+    async ListUserGroupsOfUser(req, cb) {
+        return this.request("ListUserGroupsOfUser", req, cb);
     }
     /**
      * 通过用户ID获得被授权访问的应用列表。
      */
     async ListAuthorizedApplicationsToUser(req, cb) {
         return this.request("ListAuthorizedApplicationsToUser", req, cb);
+    }
+    /**
+     * 查询应用账号列表
+     */
+    async DescribeAppAccount(req, cb) {
+        return this.request("DescribeAppAccount", req, cb);
     }
     /**
      * 根据机构节点ID读取机构节点信息
@@ -172,16 +244,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOrgNode", req, cb);
     }
     /**
+     * 账号组添加账号
+     */
+    async AddAccountToAccountGroup(req, cb) {
+        return this.request("AddAccountToAccountGroup", req, cb);
+    }
+    /**
      * 新建用户组
      */
     async CreateUserGroup(req, cb) {
         return this.request("CreateUserGroup", req, cb);
     }
     /**
-     * 获取用户所在的用户组列表
+     * 新建一个用户
      */
-    async ListUserGroupsOfUser(req, cb) {
-        return this.request("ListUserGroupsOfUser", req, cb);
+    async CreateUser(req, cb) {
+        return this.request("CreateUser", req, cb);
     }
     /**
      * 获取一个应用的信息。

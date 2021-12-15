@@ -2580,7 +2580,8 @@ export interface DescribeCallbackRecordsListRequest {
       * 事件类型。
 0: "断流",
 1: "推流",
-100: "录制"。
+100: "录制"
+200: "截图回调"。
       */
     EventType?: number;
     /**
@@ -2891,6 +2892,15 @@ export interface DescribeLivePackageInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PageSize: number;
+    /**
+      * 当请求参数 PackageType = 0 时生效，逗号分隔，从第一个到最后一个分别表示：
+标准直播，中国大陆（境内全地区）计费方式。
+标准直播，国际/港澳台（境外多地区）计费方式。
+快直播，中国大陆（境内全地区）计费方式。
+快直播，国际/港澳台（境外多地区）计费方式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FluxPackageBillMode: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
