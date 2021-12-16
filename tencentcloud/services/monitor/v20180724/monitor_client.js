@@ -199,6 +199,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmNotices", req, cb);
     }
     /**
+     * 启停告警策略
+     */
+    async ModifyAlarmPolicyStatus(req, cb) {
+        return this.request("ModifyAlarmPolicyStatus", req, cb);
+    }
+    /**
      * 云监控告警获取告警通知模板所有回调URL
      */
     async DescribeAlarmNoticeCallbacks(req, cb) {
@@ -290,10 +296,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmMetrics", req, cb);
     }
     /**
-     * 启停告警策略
+     * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
+<ul>
+<li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
+<li>如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的实例。</li>
+</ul>
      */
-    async ModifyAlarmPolicyStatus(req, cb) {
-        return this.request("ModifyAlarmPolicyStatus", req, cb);
+    async DescribePrometheusInstances(req, cb) {
+        return this.request("DescribePrometheusInstances", req, cb);
     }
     /**
      * 获取基础指标属性

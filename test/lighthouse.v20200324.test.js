@@ -48,9 +48,9 @@ it("lighthouse.v20200324.DeleteBlueprints", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeModifyInstanceBundles", async function () {
+it("lighthouse.v20200324.DescribeInstancesDiskNum", async function () {
     try {
-       const data = await client.DescribeModifyInstanceBundles({})
+       const data = await client.DescribeInstancesDiskNum({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,19 @@ it("lighthouse.v20200324.ModifyInstancesAttribute", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeFirewallRulesTemplate", async function () {
+it("lighthouse.v20200324.DescribeModifyInstanceBundles", async function () {
     try {
-       const data = await client.DescribeFirewallRulesTemplate({})
+       const data = await client.DescribeModifyInstanceBundles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeCcnAttachedInstances", async function () {
+    try {
+       const data = await client.DescribeCcnAttachedInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +148,19 @@ it("lighthouse.v20200324.DeleteKeyPairs", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeCcnAttachedInstances", async function () {
+it("lighthouse.v20200324.ModifyDisksRenewFlag", async function () {
     try {
-       const data = await client.DescribeCcnAttachedInstances({})
+       const data = await client.ModifyDisksRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeFirewallRulesTemplate", async function () {
+    try {
+       const data = await client.DescribeFirewallRulesTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +201,16 @@ it("lighthouse.v20200324.DescribeInstancesTrafficPackages", async function () {
 it("lighthouse.v20200324.InquirePriceCreateBlueprint", async function () {
     try {
        const data = await client.InquirePriceCreateBlueprint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.AttachDisks", async function () {
+    try {
+       const data = await client.AttachDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +298,9 @@ it("lighthouse.v20200324.DescribeInstanceLoginKeyPairAttribute", async function 
     }
 })
 
-it("lighthouse.v20200324.ResetInstance", async function () {
+it("lighthouse.v20200324.DescribeDisksDeniedActions", async function () {
     try {
-       const data = await client.ResetInstance({})
+       const data = await client.DescribeDisksDeniedActions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +311,16 @@ it("lighthouse.v20200324.ResetInstance", async function () {
 it("lighthouse.v20200324.DescribeFirewallRules", async function () {
     try {
        const data = await client.DescribeFirewallRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeDisks", async function () {
+    try {
+       const data = await client.DescribeDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +398,16 @@ it("lighthouse.v20200324.CreateInstanceSnapshot", async function () {
     }
 })
 
+it("lighthouse.v20200324.ModifyDisksAttribute", async function () {
+    try {
+       const data = await client.ModifyDisksAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeRegions", async function () {
     try {
        const data = await client.DescribeRegions({})
@@ -388,9 +438,39 @@ it("lighthouse.v20200324.ModifySnapshotAttribute", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeDisksReturnable", async function () {
+    try {
+       const data = await client.DescribeDisksReturnable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.InquirePriceRenewDisks", async function () {
+    try {
+       const data = await client.InquirePriceRenewDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeBlueprintInstances", async function () {
     try {
        const data = await client.DescribeBlueprintInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ResetInstance", async function () {
+    try {
+       const data = await client.ResetInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,6 +538,16 @@ it("lighthouse.v20200324.DescribeInstanceVncUrl", async function () {
     }
 })
 
+it("lighthouse.v20200324.TerminateDisks", async function () {
+    try {
+       const data = await client.TerminateDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.StartInstances", async function () {
     try {
        const data = await client.StartInstances({})
@@ -498,6 +588,36 @@ it("lighthouse.v20200324.DescribeSnapshotsDeniedActions", async function () {
     }
 })
 
+it("lighthouse.v20200324.InquirePriceCreateDisks", async function () {
+    try {
+       const data = await client.InquirePriceCreateDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeDiskDiscount", async function () {
+    try {
+       const data = await client.DescribeDiskDiscount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeDiskConfigs", async function () {
+    try {
+       const data = await client.DescribeDiskConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeZones", async function () {
     try {
        const data = await client.DescribeZones({})
@@ -531,6 +651,16 @@ it("lighthouse.v20200324.RebootInstances", async function () {
 it("lighthouse.v20200324.CreateBlueprint", async function () {
     try {
        const data = await client.CreateBlueprint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DetachDisks", async function () {
+    try {
+       const data = await client.DetachDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -277,6 +277,22 @@ export interface DescribeServiceDiscoveryResponse {
 }
 
 /**
+ * Prometheus 托管服务标签
+ */
+export interface PrometheusTag {
+  /**
+   * 标签的健值
+   */
+  Key: string
+
+  /**
+      * 标签对应的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+}
+
+/**
  * 指标告警配置
  */
 export interface DescribePolicyConditionListMetric {
@@ -342,6 +358,27 @@ export interface DescribeAlertRulesRequest {
    * 报警策略模板分类
    */
   Type?: string
+}
+
+/**
+ * DescribePrometheusInstances返回参数结构体
+ */
+export interface DescribePrometheusInstancesResponse {
+  /**
+      * 实例详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceSet: Array<PrometheusInstancesItem>
+
+  /**
+   * 符合条件的实例数量。
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -759,6 +796,199 @@ export interface DeleteAlarmPolicyRequest {
    * 告警策略 ID 列表
    */
   PolicyIds: Array<string>
+}
+
+/**
+ * Prometheus 服务响应体
+ */
+export interface PrometheusInstancesItem {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称。
+   */
+  InstanceName: string
+
+  /**
+      * 实例计费模式。取值范围：
+<ul>
+<li>2：包年包月</li>
+<li>3：按量</li>
+</ul>
+      */
+  InstanceChargeType: number
+
+  /**
+   * 地域 ID
+   */
+  RegionId: number
+
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * VPC ID
+   */
+  VpcId: string
+
+  /**
+   * 子网 ID
+   */
+  SubnetId: string
+
+  /**
+      * 存储周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataRetentionTime: number
+
+  /**
+      * 实例业务状态。取值范围：
+<ul>
+<li>1：正在创建</li>
+<li>2：运行中</li>
+<li>3：异常</li>
+<li>4：重建中</li>
+<li>5：销毁中</li>
+<li>6：已停服</li>
+<li>8：欠费停服中</li>
+<li>9：欠费已停服</li>
+</ul>
+      */
+  InstanceStatus: number
+
+  /**
+      * Grafana 面板 URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaURL: string
+
+  /**
+   * 创建时间
+   */
+  CreatedAt: string
+
+  /**
+      * 是否开启 Grafana
+<li>0：不开启</li>
+<li>1：开启</li>
+      */
+  EnableGrafana: number
+
+  /**
+      * 实例IPV4地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IPv4Address: string
+
+  /**
+      * 实例关联的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSpecification: Array<PrometheusTag>
+
+  /**
+      * 购买的实例过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
+
+  /**
+      * 计费状态
+<ul>
+<li>1：正常</li>
+<li>2：过期</li>
+<li>3：销毁</li>
+<li>4：分配中</li>
+<li>5：分配失败</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeStatus: number
+
+  /**
+      * 规格名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecName: string
+
+  /**
+      * 自动续费标记
+<ul>
+<li>0：不自动续费</li>
+<li>1：开启自动续费</li>
+<li>2：禁止自动续费</li>
+<li>-1：无效</ii>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRenewFlag: number
+
+  /**
+      * 是否快过期
+<ul>
+<li>0：否</li>
+<li>1：快过期</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsNearExpire: number
+
+  /**
+      * 数据写入需要的 Token
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthToken: string
+
+  /**
+      * Prometheus Remote Write 的地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RemoteWrite: string
+
+  /**
+      * Prometheus HTTP Api 根地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiRootPath: string
+
+  /**
+      * Proxy 的地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyAddress: string
+
+  /**
+      * Grafana 运行状态
+<ul>
+<li>1：正在创建</li>
+<li>2：运行中</li>
+<li>3：异常</li>
+<li>4：重启中</li>
+<li>5：销毁中</li>
+<li>6：已停机</li>
+<li>7：已删除</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaStatus: number
+
+  /**
+      * Grafana IP 白名单列表，使用英文分号分隔
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaIpWhiteList: string
+
+  /**
+      * 实例的授权信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Grant: PrometheusInstanceGrantInfo
 }
 
 /**
@@ -1995,6 +2225,41 @@ export interface Dimension {
    * 实例维度值
    */
   Value: string
+}
+
+/**
+ * 实例的授权信息
+ */
+export interface PrometheusInstanceGrantInfo {
+  /**
+   * 是否有计费操作权限(1=有，2=无)
+   */
+  HasChargeOperation: number
+
+  /**
+   * 是否显示VPC信息的权限(1=有，2=无)
+   */
+  HasVpcDisplay: number
+
+  /**
+   * 是否可修改Grafana的状态(1=有，2=无)
+   */
+  HasGrafanaStatusChange: number
+
+  /**
+   * 是否有管理agent的权限(1=有，2=无)
+   */
+  HasAgentManage: number
+
+  /**
+   * 是否有管理TKE集成的权限(1=有，2=无)
+   */
+  HasTkeManage: number
+
+  /**
+   * 是否显示API等信息(1=有, 2=无)
+   */
+  HasApiOperation: number
 }
 
 /**
@@ -5275,6 +5540,61 @@ export interface AlarmPolicyEventCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Rules: Array<AlarmPolicyRule>
+}
+
+/**
+ * DescribePrometheusInstances请求参数结构体
+ */
+export interface DescribePrometheusInstancesRequest {
+  /**
+   * 按照一个或者多个实例ID查询。实例ID形如：prom-xxxxxxxx。请求的实例的上限为100。
+   */
+  InstanceIds?: Array<string>
+
+  /**
+      * 按照【实例状态】进行过滤。
+<ul>
+<li>1：正在创建</li>
+<li>2：运行中</li>
+<li>3：异常</li>
+<li>4：重建中</li>
+<li>5：销毁中</li>
+<li>6：已停服</li>
+<li>8：欠费停服中</li>
+<li>9：欠费已停服</li>
+</ul>
+      */
+  InstanceStatus?: Array<number>
+
+  /**
+   * 按照【实例名称】进行过滤。
+   */
+  InstanceName?: string
+
+  /**
+   * 按照【可用区】进行过滤。可用区形如：ap-guangzhou-1。
+   */
+  Zones?: Array<string>
+
+  /**
+   * 按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。
+   */
+  TagFilters?: Array<PrometheusTag>
+
+  /**
+   * 按照【实例的IPv4地址】进行过滤。
+   */
+  IPv4Address?: Array<string>
+
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**

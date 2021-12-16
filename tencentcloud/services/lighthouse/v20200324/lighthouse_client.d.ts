@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, DescribeInstancesTrafficPackagesResponse, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, AttachCcnRequest, DescribeSnapshotsDeniedActionsResponse, DescribeBlueprintInstancesResponse, DetachCcnResponse, CreateInstanceSnapshotResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, DescribeGeneralResourceQuotasRequest, DeleteKeyPairsRequest, ResetInstanceRequest, DescribeBundlesResponse, InquirePriceRenewInstancesRequest, DescribeRegionsResponse, AttachCcnResponse, RebootInstancesRequest, ResetAttachCcnRequest, AssociateInstancesKeyPairsRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, StartInstancesResponse, TerminateInstancesResponse, DisassociateInstancesKeyPairsResponse, DescribeBlueprintsRequest, DescribeInstancesDeniedActionsResponse, ModifyInstancesAttributeRequest, DescribeZonesRequest, StartInstancesRequest, DeleteSnapshotsRequest, ModifySnapshotAttributeRequest, DescribeBundleDiscountResponse, DeleteSnapshotsResponse, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, StopInstancesResponse, ModifyBlueprintAttributeResponse, DescribeModifyInstanceBundlesRequest, DescribeRegionsRequest, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, StopInstancesRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, DescribeCcnAttachedInstancesRequest, ResetInstancesPasswordResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeCcnAttachedInstancesResponse, DescribeBundlesRequest, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceCreateInstancesResponse, DescribeSnapshotsDeniedActionsRequest, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DetachCcnRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, InquirePriceCreateBlueprintRequest, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeInstancesResponse, DescribeZonesResponse, CreateBlueprintResponse, DescribeResetInstanceBlueprintsRequest, ResetAttachCcnResponse, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, TerminateInstancesRequest, RebootInstancesResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeResetInstanceBlueprintsResponse, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, DescribeFirewallRulesTemplateResponse, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, CreateInstanceSnapshotRequest, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
+import { DescribeInstancesTrafficPackagesRequest, AssociateInstancesKeyPairsResponse, DescribeDisksDeniedActionsRequest, DescribeInstancesTrafficPackagesResponse, DescribeInstancesDeniedActionsRequest, DeleteKeyPairsResponse, AttachCcnRequest, DescribeSnapshotsDeniedActionsResponse, DescribeBlueprintInstancesResponse, InquirePriceCreateDisksRequest, DetachCcnResponse, CreateInstanceSnapshotResponse, InquirePriceRenewInstancesResponse, DeleteFirewallRulesResponse, DescribeGeneralResourceQuotasRequest, DeleteKeyPairsRequest, DescribeBundlesResponse, InquirePriceRenewInstancesRequest, DescribeDiskConfigsRequest, DescribeRegionsResponse, AssociateInstancesKeyPairsRequest, AttachCcnResponse, RebootInstancesRequest, ResetAttachCcnRequest, AttachDisksRequest, ImportKeyPairResponse, DescribeSnapshotsRequest, TerminateDisksResponse, DescribeFirewallRulesTemplateRequest, DescribeKeyPairsResponse, ModifyBlueprintAttributeRequest, InquirePriceRenewDisksRequest, DescribeBlueprintInstancesRequest, ApplyInstanceSnapshotResponse, DetachDisksRequest, ModifyFirewallRulesRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, DescribeInstanceVncUrlRequest, ModifyFirewallRuleDescriptionRequest, StartInstancesResponse, TerminateInstancesResponse, DescribeInstancesDiskNumRequest, DescribeBlueprintsRequest, DescribeInstancesDeniedActionsResponse, ModifyDisksAttributeRequest, ModifyInstancesAttributeRequest, DescribeZonesRequest, StartInstancesRequest, DeleteSnapshotsRequest, ModifyDisksRenewFlagResponse, ModifySnapshotAttributeRequest, DescribeDisksResponse, DescribeBundleDiscountResponse, DeleteSnapshotsResponse, ModifyDisksRenewFlagRequest, DisassociateInstancesKeyPairsRequest, ImportKeyPairRequest, DeleteBlueprintsResponse, ModifyInstancesLoginKeyPairAttributeRequest, StopInstancesResponse, ModifyBlueprintAttributeResponse, DescribeFirewallRulesTemplateResponse, DescribeRegionsRequest, DescribeInstancesDiskNumResponse, InquirePriceCreateBlueprintResponse, DescribeInstancesReturnableRequest, DescribeBlueprintsResponse, DescribeKeyPairsRequest, DescribeCcnAttachedInstancesRequest, ResetInstancesPasswordResponse, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, ModifyFirewallRulesResponse, DescribeCcnAttachedInstancesResponse, DescribeBundlesRequest, ModifyInstancesLoginKeyPairAttributeResponse, InquirePriceRenewDisksResponse, InquirePriceCreateInstancesResponse, DescribeSnapshotsDeniedActionsRequest, DescribeDiskDiscountResponse, ResetInstancesPasswordRequest, CreateKeyPairRequest, DescribeInstancesRequest, DetachCcnRequest, DescribeSnapshotsResponse, ModifyFirewallRuleDescriptionResponse, DescribeDiskDiscountRequest, InquirePriceCreateBlueprintRequest, AttachDisksResponse, CreateFirewallRulesRequest, DescribeFirewallRulesResponse, DescribeInstancesReturnableResponse, DeleteBlueprintsRequest, CreateFirewallRulesResponse, DescribeDisksRequest, DescribeInstancesResponse, DescribeZonesResponse, CreateBlueprintResponse, DetachDisksResponse, DescribeResetInstanceBlueprintsRequest, ResetAttachCcnResponse, ModifyInstancesRenewFlagResponse, ApplyInstanceSnapshotRequest, DisassociateInstancesKeyPairsResponse, TerminateInstancesRequest, TerminateDisksRequest, ResetInstanceRequest, DescribeDiskConfigsResponse, RebootInstancesResponse, DescribeDisksDeniedActionsResponse, DescribeInstanceLoginKeyPairAttributeRequest, DescribeBundleDiscountRequest, DescribeDisksReturnableResponse, DescribeResetInstanceBlueprintsResponse, DescribeDisksReturnableRequest, ModifySnapshotAttributeResponse, DescribeGeneralResourceQuotasResponse, ModifyInstancesRenewFlagRequest, StopInstancesRequest, DescribeModifyInstanceBundlesRequest, ResetInstanceResponse, DescribeFirewallRulesRequest, InquirePriceCreateInstancesRequest, DescribeModifyInstanceBundlesResponse, ModifyDisksAttributeResponse, CreateInstanceSnapshotRequest, InquirePriceCreateDisksResponse, ModifyInstancesAttributeResponse, DescribeInstanceLoginKeyPairAttributeResponse } from "./lighthouse_models";
 /**
  * lighthouse client
  * @class
@@ -33,9 +33,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteBlueprints(req: DeleteBlueprintsRequest, cb?: (error: string, rep: DeleteBlueprintsResponse) => void): Promise<DeleteBlueprintsResponse>;
     /**
-     * 本接口（DescribeModifyInstanceBundles）用于查询实例可变更套餐列表。
+     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云盘数量。
      */
-    DescribeModifyInstanceBundles(req: DescribeModifyInstanceBundlesRequest, cb?: (error: string, rep: DescribeModifyInstanceBundlesResponse) => void): Promise<DescribeModifyInstanceBundlesResponse>;
+    DescribeInstancesDiskNum(req: DescribeInstancesDiskNumRequest, cb?: (error: string, rep: DescribeInstancesDiskNumResponse) => void): Promise<DescribeInstancesDiskNumResponse>;
     /**
      * 本接口 (ModifyInstancesRenewFlag) 用于修改包年包月实例续费标识。
 
@@ -70,9 +70,13 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstancesAttribute(req: ModifyInstancesAttributeRequest, cb?: (error: string, rep: ModifyInstancesAttributeResponse) => void): Promise<ModifyInstancesAttributeResponse>;
     /**
-     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+     * 本接口（DescribeModifyInstanceBundles）用于查询实例可变更套餐列表。
      */
-    DescribeFirewallRulesTemplate(req?: DescribeFirewallRulesTemplateRequest, cb?: (error: string, rep: DescribeFirewallRulesTemplateResponse) => void): Promise<DescribeFirewallRulesTemplateResponse>;
+    DescribeModifyInstanceBundles(req: DescribeModifyInstanceBundlesRequest, cb?: (error: string, rep: DescribeModifyInstanceBundlesResponse) => void): Promise<DescribeModifyInstanceBundlesResponse>;
+    /**
+     * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+     */
+    DescribeCcnAttachedInstances(req?: DescribeCcnAttachedInstancesRequest, cb?: (error: string, rep: DescribeCcnAttachedInstancesResponse) => void): Promise<DescribeCcnAttachedInstancesResponse>;
     /**
      * 本接口（CreateKeyPair）用于创建一个密钥对。
      */
@@ -86,9 +90,13 @@ export declare class Client extends AbstractClient {
      */
     DeleteKeyPairs(req: DeleteKeyPairsRequest, cb?: (error: string, rep: DeleteKeyPairsResponse) => void): Promise<DeleteKeyPairsResponse>;
     /**
-     * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+     * 本接口（ModifyDisksRenewFlag）用于修改磁盘续费标识。
      */
-    DescribeCcnAttachedInstances(req?: DescribeCcnAttachedInstancesRequest, cb?: (error: string, rep: DescribeCcnAttachedInstancesResponse) => void): Promise<DescribeCcnAttachedInstancesResponse>;
+    ModifyDisksRenewFlag(req: ModifyDisksRenewFlagRequest, cb?: (error: string, rep: ModifyDisksRenewFlagResponse) => void): Promise<ModifyDisksRenewFlagResponse>;
+    /**
+     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+     */
+    DescribeFirewallRulesTemplate(req?: DescribeFirewallRulesTemplateRequest, cb?: (error: string, rep: DescribeFirewallRulesTemplateResponse) => void): Promise<DescribeFirewallRulesTemplateResponse>;
     /**
      * 本接口（DescribeInstances）用于查询一个或多个实例的详细信息。
 
@@ -110,6 +118,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (InquirePriceCreateBlueprint) 用于创建镜像询价。
      */
     InquirePriceCreateBlueprint(req: InquirePriceCreateBlueprintRequest, cb?: (error: string, rep: InquirePriceCreateBlueprintResponse) => void): Promise<InquirePriceCreateBlueprintResponse>;
+    /**
+     * 本接口（AttachDisks）用于挂载一个或多个弹性云盘。
+     */
+    AttachDisks(req: AttachDisksRequest, cb?: (error: string, rep: AttachDisksResponse) => void): Promise<AttachDisksResponse>;
     /**
      * 本接口（AssociateInstancesKeyPairs）用于绑定用户指定密钥对到实例。
 * 只支持 [RUNNING, STOPPED] 状态的 LINUX_UNIX 操作系统的实例。处于 RUNNING 状态的实例会强制关机，然后绑定。
@@ -169,18 +181,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceLoginKeyPairAttribute(req: DescribeInstanceLoginKeyPairAttributeRequest, cb?: (error: string, rep: DescribeInstanceLoginKeyPairAttributeResponse) => void): Promise<DescribeInstanceLoginKeyPairAttributeResponse>;
     /**
-     * 本接口（ResetInstance）用于重装指定实例上的镜像。
-
-* 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
-* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
-* 目前不支持实例使用该接口实现 LINUX_UNIX 和 WINDOWS 操作系统切换。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     * 本接口（DescribeDisksDeniedActions）用于查询一个或多个磁盘的操作限制列表信息
      */
-    ResetInstance(req: ResetInstanceRequest, cb?: (error: string, rep: ResetInstanceResponse) => void): Promise<ResetInstanceResponse>;
+    DescribeDisksDeniedActions(req: DescribeDisksDeniedActionsRequest, cb?: (error: string, rep: DescribeDisksDeniedActionsResponse) => void): Promise<DescribeDisksDeniedActionsResponse>;
     /**
      * 本接口（DescribeFirewallRules）用于查询实例的防火墙规则。
      */
     DescribeFirewallRules(req: DescribeFirewallRulesRequest, cb?: (error: string, rep: DescribeFirewallRulesResponse) => void): Promise<DescribeFirewallRulesResponse>;
+    /**
+     * 本接口（DescribeDisks）用于查询磁盘信息。
+     */
+    DescribeDisks(req: DescribeDisksRequest, cb?: (error: string, rep: DescribeDisksResponse) => void): Promise<DescribeDisksResponse>;
     /**
      * 本接口（DescribeGeneralResourceQuotas）用于查询通用资源配额信息。
      */
@@ -211,6 +222,10 @@ export declare class Client extends AbstractClient {
      */
     CreateInstanceSnapshot(req: CreateInstanceSnapshotRequest, cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void): Promise<CreateInstanceSnapshotResponse>;
     /**
+     * 本接口(ModifyDisksAttribute)用于修改磁盘属性
+     */
+    ModifyDisksAttribute(req: ModifyDisksAttributeRequest, cb?: (error: string, rep: ModifyDisksAttributeResponse) => void): Promise<ModifyDisksAttributeResponse>;
+    /**
      * 本接口（DescribeRegions）用于查询地域信息。
      */
     DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
@@ -226,9 +241,26 @@ export declare class Client extends AbstractClient {
      */
     ModifySnapshotAttribute(req: ModifySnapshotAttributeRequest, cb?: (error: string, rep: ModifySnapshotAttributeResponse) => void): Promise<ModifySnapshotAttributeResponse>;
     /**
+     * 本接口（DescribeDisksReturnable）用于查询磁盘是否可退还。
+     */
+    DescribeDisksReturnable(req: DescribeDisksReturnableRequest, cb?: (error: string, rep: DescribeDisksReturnableResponse) => void): Promise<DescribeDisksReturnableResponse>;
+    /**
+     * 本接口（InquirePriceRenewDisks）用于续费磁盘询价。
+     */
+    InquirePriceRenewDisks(req: InquirePriceRenewDisksRequest, cb?: (error: string, rep: InquirePriceRenewDisksResponse) => void): Promise<InquirePriceRenewDisksResponse>;
+    /**
      * 本接口（DescribeBlueprintInstances）用于查询镜像实例信息。
      */
     DescribeBlueprintInstances(req: DescribeBlueprintInstancesRequest, cb?: (error: string, rep: DescribeBlueprintInstancesResponse) => void): Promise<DescribeBlueprintInstancesResponse>;
+    /**
+     * 本接口（ResetInstance）用于重装指定实例上的镜像。
+
+* 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
+* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
+* 目前不支持实例使用该接口实现 LINUX_UNIX 和 WINDOWS 操作系统切换。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     */
+    ResetInstance(req: ResetInstanceRequest, cb?: (error: string, rep: ResetInstanceResponse) => void): Promise<ResetInstanceResponse>;
     /**
      * 本接口（ApplyInstanceSnapshot）用于回滚指定实例的系统盘快照。
 <li>仅支持回滚到原系统盘。</li>
@@ -277,6 +309,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceVncUrl(req: DescribeInstanceVncUrlRequest, cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void): Promise<DescribeInstanceVncUrlResponse>;
     /**
+     * 本接口（TerminateDisks）用于销毁一个或多个磁盘。
+     */
+    TerminateDisks(req: TerminateDisksRequest, cb?: (error: string, rep: TerminateDisksResponse) => void): Promise<TerminateDisksResponse>;
+    /**
      * 本接口（StartInstances）用于启动一个或多个实例。
 
 * 只有状态为 STOPPED 的实例才可以进行此操作。
@@ -298,6 +334,18 @@ export declare class Client extends AbstractClient {
      */
     DescribeSnapshotsDeniedActions(req: DescribeSnapshotsDeniedActionsRequest, cb?: (error: string, rep: DescribeSnapshotsDeniedActionsResponse) => void): Promise<DescribeSnapshotsDeniedActionsResponse>;
     /**
+     * 本接口（InquirePriceCreateDisks）用于新购磁盘询价。
+     */
+    InquirePriceCreateDisks(req: InquirePriceCreateDisksRequest, cb?: (error: string, rep: InquirePriceCreateDisksResponse) => void): Promise<InquirePriceCreateDisksResponse>;
+    /**
+     * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息
+     */
+    DescribeDiskDiscount(req: DescribeDiskDiscountRequest, cb?: (error: string, rep: DescribeDiskDiscountResponse) => void): Promise<DescribeDiskDiscountResponse>;
+    /**
+     * 本接口（DescribeDiskConfigs）用于查询磁盘配置。
+     */
+    DescribeDiskConfigs(req: DescribeDiskConfigsRequest, cb?: (error: string, rep: DescribeDiskConfigsResponse) => void): Promise<DescribeDiskConfigsResponse>;
+    /**
      * 查询地域下可用区
      */
     DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
@@ -318,4 +366,8 @@ export declare class Client extends AbstractClient {
      * 本接口 (CreateBlueprint) 用于创建镜像。
      */
     CreateBlueprint(req: CreateBlueprintRequest, cb?: (error: string, rep: CreateBlueprintResponse) => void): Promise<CreateBlueprintResponse>;
+    /**
+     * 本接口（DetachDisks）用于卸载一个或多个弹性云盘。
+     */
+    DetachDisks(req: DetachDisksRequest, cb?: (error: string, rep: DetachDisksResponse) => void): Promise<DetachDisksResponse>;
 }

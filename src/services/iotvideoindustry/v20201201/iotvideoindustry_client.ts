@@ -37,13 +37,14 @@ import {
   DeviceItem,
   DeleteDeviceGroupResponse,
   DeleteRecordPlanResponse,
-  ModifyVideoInfoRequest,
+  DeleteMessageForwardResponse,
   ModifyBindPlanLiveChannelResponse,
   UpdateDeviceGroupResponse,
   GetVideoListByConRequest,
   DevGroupInfo,
   DescribeLiveRecordPlanByIdRequest,
   LiveRecordPlanItem,
+  DescribeVideoListResponse,
   RecordTaskItem,
   DescribeIPCChannelsRequest,
   DescribeSubGroupsRequest,
@@ -60,9 +61,12 @@ import {
   GetRecordPlanByIdResponse,
   DeleteDeviceRequest,
   UpdateDevicePassWordRequest,
+  DescribeMessageForwardRequest,
   CreateTimeTemplateRequest,
+  CreateMessageForwardRequest,
   ModifyBindPlanLiveChannelRequest,
   DescribeLiveStreamRequest,
+  ModifyMessageForwardRequest,
   ModifyLiveRecordPlanResponse,
   LiveChannelInfo,
   DescribeAllDeviceListRequest,
@@ -88,6 +92,7 @@ import {
   SceneItem,
   GetTimeTemplateByIdResponse,
   DescribeLiveChannelResponse,
+  DescribeMessageForwardsRequest,
   ControlDevicePTZResponse,
   TimeTemplateSpec,
   ControlDevicePTZRequest,
@@ -108,6 +113,7 @@ import {
   DescribeLiveRecordPlanByIdResponse,
   DescribeRecordDatesByLiveResponse,
   ModifySubscriptionStatusResponse,
+  MessageForward,
   ModifyDeviceDataRequest,
   DeleteSceneResponse,
   GetRecordDatesByDevRequest,
@@ -141,17 +147,21 @@ import {
   ModifyLiveChannelResponse,
   GetTimeTemplateByIdRequest,
   RecordPlanItem,
+  DescribeMessageForwardsResponse,
+  ModifyVideoInfoRequest,
   GetRecordPlansRequest,
   DeleteTimeTemplateRequest,
   ModifyLiveChannelRequest,
-  DescribeVideoListResponse,
+  DescribeMessageForwardResponse,
   DescribeLiveRecordPlanIdsRequest,
   DeleteLiveVideoListRequest,
+  ModifyMessageForwardResponse,
   DescribeScenesRequest,
   DeleteLiveRecordPlanResponse,
   ModifyVideoInfoResponse,
   DescribeGroupByIdResponse,
   ControlRecordStreamResponse,
+  DeleteMessageForwardRequest,
   DeleteLiveChannelResponse,
   StreamAddress,
   BindGroupDevicesResponse,
@@ -162,6 +172,7 @@ import {
   DescribeBindSceneDevicesResponse,
   ModifyLiveVideoRequest,
   DescribeGroupByPathResponse,
+  CreateMessageForwardResponse,
   CreateLiveChannelRequest,
   DescribeGroupDevicesResponse,
   DeleteSceneRequest,
@@ -215,6 +226,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDeviceGroupResponse) => void
   ): Promise<UpdateDeviceGroupResponse> {
     return this.request("UpdateDeviceGroup", req, cb)
+  }
+
+  /**
+   * 修改消息转发配置
+   */
+  async ModifyMessageForward(
+    req: ModifyMessageForwardRequest,
+    cb?: (error: string, rep: ModifyMessageForwardResponse) => void
+  ): Promise<ModifyMessageForwardResponse> {
+    return this.request("ModifyMessageForward", req, cb)
   }
 
   /**
@@ -361,6 +382,16 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
+   * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+   */
+  async GetRecordPlanByDev(
+    req: GetRecordPlanByDevRequest,
+    cb?: (error: string, rep: GetRecordPlanByDevResponse) => void
+  ): Promise<GetRecordPlanByDevResponse> {
+    return this.request("GetRecordPlanByDev", req, cb)
+  }
+
+  /**
    * 编辑直播录制计划
    */
   async ModifyLiveRecordPlan(
@@ -368,6 +399,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: ModifyLiveRecordPlanResponse) => void
   ): Promise<ModifyLiveRecordPlanResponse> {
     return this.request("ModifyLiveRecordPlan", req, cb)
+  }
+
+  /**
+   * 查看消息转发配置列表
+   */
+  async DescribeMessageForwards(
+    req: DescribeMessageForwardsRequest,
+    cb?: (error: string, rep: DescribeMessageForwardsResponse) => void
+  ): Promise<DescribeMessageForwardsResponse> {
+    return this.request("DescribeMessageForwards", req, cb)
   }
 
   /**
@@ -401,13 +442,13 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+   * 删除消息转发配置
    */
-  async GetRecordPlanByDev(
-    req: GetRecordPlanByDevRequest,
-    cb?: (error: string, rep: GetRecordPlanByDevResponse) => void
-  ): Promise<GetRecordPlanByDevResponse> {
-    return this.request("GetRecordPlanByDev", req, cb)
+  async DeleteMessageForward(
+    req: DeleteMessageForwardRequest,
+    cb?: (error: string, rep: DeleteMessageForwardResponse) => void
+  ): Promise<DeleteMessageForwardResponse> {
+    return this.request("DeleteMessageForward", req, cb)
   }
 
   /**
@@ -448,6 +489,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: DescribeGroupByPathResponse) => void
   ): Promise<DescribeGroupByPathResponse> {
     return this.request("DescribeGroupByPath", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
+   */
+  async DescribeStatisticSummary(
+    req: DescribeStatisticSummaryRequest,
+    cb?: (error: string, rep: DescribeStatisticSummaryResponse) => void
+  ): Promise<DescribeStatisticSummaryResponse> {
+    return this.request("DescribeStatisticSummary", req, cb)
   }
 
   /**
@@ -562,13 +613,13 @@ RecordId和StartTime/EndTime互斥
   }
 
   /**
-   * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
+   * 创建消息转发配置
    */
-  async DescribeStatisticSummary(
-    req: DescribeStatisticSummaryRequest,
-    cb?: (error: string, rep: DescribeStatisticSummaryResponse) => void
-  ): Promise<DescribeStatisticSummaryResponse> {
-    return this.request("DescribeStatisticSummary", req, cb)
+  async CreateMessageForward(
+    req: CreateMessageForwardRequest,
+    cb?: (error: string, rep: CreateMessageForwardResponse) => void
+  ): Promise<CreateMessageForwardResponse> {
+    return this.request("CreateMessageForward", req, cb)
   }
 
   /**
@@ -629,6 +680,16 @@ RecordId和StartTime/EndTime互斥
     cb?: (error: string, rep: ModifyLiveChannelResponse) => void
   ): Promise<ModifyLiveChannelResponse> {
     return this.request("ModifyLiveChannel", req, cb)
+  }
+
+  /**
+   * 查看消息转发配置详情
+   */
+  async DescribeMessageForward(
+    req: DescribeMessageForwardRequest,
+    cb?: (error: string, rep: DescribeMessageForwardResponse) => void
+  ): Promise<DescribeMessageForwardResponse> {
+    return this.request("DescribeMessageForward", req, cb)
   }
 
   /**

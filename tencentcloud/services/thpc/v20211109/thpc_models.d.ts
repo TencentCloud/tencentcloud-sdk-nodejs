@@ -1,4 +1,45 @@
 /**
+ * BindAutoScalingGroup请求参数结构体
+ */
+export interface BindAutoScalingGroupRequest {
+    /**
+      * 集群ID。
+      */
+    ClusterId: string;
+    /**
+      * 弹性伸缩启动配置ID。
+      */
+    LaunchConfigurationId: string;
+    /**
+      * 弹性伸缩组ID。
+      */
+    AutoScalingGroupId: string;
+    /**
+      * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。默认值120。
+      */
+    ExpansionBusyTime?: number;
+    /**
+      * 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。单位秒。默认值300。
+      */
+    ShrinkIdleTime?: number;
+    /**
+      * 是否开启自动扩容，默认值true。
+      */
+    EnableAutoExpansion?: boolean;
+    /**
+      * 是否开启自动缩容，默认值true。
+      */
+    EnableAutoShrink?: boolean;
+    /**
+      * 是否只预检此次请求。
+true：发送检查请求，不会绑定弹性伸缩组。检查项包括是否填写了必需参数，请求格式，业务限制。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId。
+false（默认）：发送正常请求，通过检查后直接绑定弹性伸缩组。
+      */
+    DryRun?: boolean;
+}
+/**
  * DeleteCluster请求参数结构体
  */
 export interface DeleteClusterRequest {
@@ -259,6 +300,15 @@ export interface GooseFSOption {
       * 文件系统master的ip和端口
       */
     Masters: Array<string>;
+}
+/**
+ * BindAutoScalingGroup返回参数结构体
+ */
+export interface BindAutoScalingGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述了实例的计费模式

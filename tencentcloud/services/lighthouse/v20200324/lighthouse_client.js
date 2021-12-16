@@ -59,10 +59,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBlueprints", req, cb);
     }
     /**
-     * 本接口（DescribeModifyInstanceBundles）用于查询实例可变更套餐列表。
+     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云盘数量。
      */
-    async DescribeModifyInstanceBundles(req, cb) {
-        return this.request("DescribeModifyInstanceBundles", req, cb);
+    async DescribeInstancesDiskNum(req, cb) {
+        return this.request("DescribeInstancesDiskNum", req, cb);
     }
     /**
      * 本接口 (ModifyInstancesRenewFlag) 用于修改包年包月实例续费标识。
@@ -106,10 +106,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstancesAttribute", req, cb);
     }
     /**
-     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+     * 本接口（DescribeModifyInstanceBundles）用于查询实例可变更套餐列表。
      */
-    async DescribeFirewallRulesTemplate(req, cb) {
-        return this.request("DescribeFirewallRulesTemplate", req, cb);
+    async DescribeModifyInstanceBundles(req, cb) {
+        return this.request("DescribeModifyInstanceBundles", req, cb);
+    }
+    /**
+     * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+     */
+    async DescribeCcnAttachedInstances(req, cb) {
+        return this.request("DescribeCcnAttachedInstances", req, cb);
     }
     /**
      * 本接口（CreateKeyPair）用于创建一个密钥对。
@@ -130,10 +136,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteKeyPairs", req, cb);
     }
     /**
-     * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+     * 本接口（ModifyDisksRenewFlag）用于修改磁盘续费标识。
      */
-    async DescribeCcnAttachedInstances(req, cb) {
-        return this.request("DescribeCcnAttachedInstances", req, cb);
+    async ModifyDisksRenewFlag(req, cb) {
+        return this.request("ModifyDisksRenewFlag", req, cb);
+    }
+    /**
+     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+     */
+    async DescribeFirewallRulesTemplate(req, cb) {
+        return this.request("DescribeFirewallRulesTemplate", req, cb);
     }
     /**
      * 本接口（DescribeInstances）用于查询一个或多个实例的详细信息。
@@ -163,6 +175,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquirePriceCreateBlueprint(req, cb) {
         return this.request("InquirePriceCreateBlueprint", req, cb);
+    }
+    /**
+     * 本接口（AttachDisks）用于挂载一个或多个弹性云盘。
+     */
+    async AttachDisks(req, cb) {
+        return this.request("AttachDisks", req, cb);
     }
     /**
      * 本接口（AssociateInstancesKeyPairs）用于绑定用户指定密钥对到实例。
@@ -239,21 +257,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceLoginKeyPairAttribute", req, cb);
     }
     /**
-     * 本接口（ResetInstance）用于重装指定实例上的镜像。
-
-* 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
-* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
-* 目前不支持实例使用该接口实现 LINUX_UNIX 和 WINDOWS 操作系统切换。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     * 本接口（DescribeDisksDeniedActions）用于查询一个或多个磁盘的操作限制列表信息
      */
-    async ResetInstance(req, cb) {
-        return this.request("ResetInstance", req, cb);
+    async DescribeDisksDeniedActions(req, cb) {
+        return this.request("DescribeDisksDeniedActions", req, cb);
     }
     /**
      * 本接口（DescribeFirewallRules）用于查询实例的防火墙规则。
      */
     async DescribeFirewallRules(req, cb) {
         return this.request("DescribeFirewallRules", req, cb);
+    }
+    /**
+     * 本接口（DescribeDisks）用于查询磁盘信息。
+     */
+    async DescribeDisks(req, cb) {
+        return this.request("DescribeDisks", req, cb);
     }
     /**
      * 本接口（DescribeGeneralResourceQuotas）用于查询通用资源配额信息。
@@ -299,6 +318,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceSnapshot", req, cb);
     }
     /**
+     * 本接口(ModifyDisksAttribute)用于修改磁盘属性
+     */
+    async ModifyDisksAttribute(req, cb) {
+        return this.request("ModifyDisksAttribute", req, cb);
+    }
+    /**
      * 本接口（DescribeRegions）用于查询地域信息。
      */
     async DescribeRegions(req, cb) {
@@ -320,10 +345,33 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySnapshotAttribute", req, cb);
     }
     /**
+     * 本接口（DescribeDisksReturnable）用于查询磁盘是否可退还。
+     */
+    async DescribeDisksReturnable(req, cb) {
+        return this.request("DescribeDisksReturnable", req, cb);
+    }
+    /**
+     * 本接口（InquirePriceRenewDisks）用于续费磁盘询价。
+     */
+    async InquirePriceRenewDisks(req, cb) {
+        return this.request("InquirePriceRenewDisks", req, cb);
+    }
+    /**
      * 本接口（DescribeBlueprintInstances）用于查询镜像实例信息。
      */
     async DescribeBlueprintInstances(req, cb) {
         return this.request("DescribeBlueprintInstances", req, cb);
+    }
+    /**
+     * 本接口（ResetInstance）用于重装指定实例上的镜像。
+
+* 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
+* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
+* 目前不支持实例使用该接口实现 LINUX_UNIX 和 WINDOWS 操作系统切换。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     */
+    async ResetInstance(req, cb) {
+        return this.request("ResetInstance", req, cb);
     }
     /**
      * 本接口（ApplyInstanceSnapshot）用于回滚指定实例的系统盘快照。
@@ -385,6 +433,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceVncUrl", req, cb);
     }
     /**
+     * 本接口（TerminateDisks）用于销毁一个或多个磁盘。
+     */
+    async TerminateDisks(req, cb) {
+        return this.request("TerminateDisks", req, cb);
+    }
+    /**
      * 本接口（StartInstances）用于启动一个或多个实例。
 
 * 只有状态为 STOPPED 的实例才可以进行此操作。
@@ -414,6 +468,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSnapshotsDeniedActions", req, cb);
     }
     /**
+     * 本接口（InquirePriceCreateDisks）用于新购磁盘询价。
+     */
+    async InquirePriceCreateDisks(req, cb) {
+        return this.request("InquirePriceCreateDisks", req, cb);
+    }
+    /**
+     * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息
+     */
+    async DescribeDiskDiscount(req, cb) {
+        return this.request("DescribeDiskDiscount", req, cb);
+    }
+    /**
+     * 本接口（DescribeDiskConfigs）用于查询磁盘配置。
+     */
+    async DescribeDiskConfigs(req, cb) {
+        return this.request("DescribeDiskConfigs", req, cb);
+    }
+    /**
      * 查询地域下可用区
      */
     async DescribeZones(req, cb) {
@@ -441,6 +513,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBlueprint(req, cb) {
         return this.request("CreateBlueprint", req, cb);
+    }
+    /**
+     * 本接口（DetachDisks）用于卸载一个或多个弹性云盘。
+     */
+    async DetachDisks(req, cb) {
+        return this.request("DetachDisks", req, cb);
     }
 }
 exports.Client = Client;

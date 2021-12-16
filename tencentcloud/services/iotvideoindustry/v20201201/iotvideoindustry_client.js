@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDeviceGroup", req, cb);
     }
     /**
+     * 修改消息转发配置
+     */
+    async ModifyMessageForward(req, cb) {
+        return this.request("ModifyMessageForward", req, cb);
+    }
+    /**
      * 本接口(DescribeDeviceStreams)用于获取设备实时流地址。
      */
     async DescribeDeviceStreams(req, cb) {
@@ -139,10 +145,22 @@ RecordId和StartTime/EndTime互斥
         return this.request("DeleteLiveVideoList", req, cb);
     }
     /**
+     * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+     */
+    async GetRecordPlanByDev(req, cb) {
+        return this.request("GetRecordPlanByDev", req, cb);
+    }
+    /**
      * 编辑直播录制计划
      */
     async ModifyLiveRecordPlan(req, cb) {
         return this.request("ModifyLiveRecordPlan", req, cb);
+    }
+    /**
+     * 查看消息转发配置列表
+     */
+    async DescribeMessageForwards(req, cb) {
+        return this.request("DescribeMessageForwards", req, cb);
     }
     /**
      * 删除通道接口
@@ -163,10 +181,10 @@ RecordId和StartTime/EndTime互斥
         return this.request("DescribeGroupDevices", req, cb);
     }
     /**
-     * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+     * 删除消息转发配置
      */
-    async GetRecordPlanByDev(req, cb) {
-        return this.request("GetRecordPlanByDev", req, cb);
+    async DeleteMessageForward(req, cb) {
+        return this.request("DeleteMessageForward", req, cb);
     }
     /**
      * 本接口(GetRecordPlans)用于获取用户的全部录制计划。
@@ -191,6 +209,12 @@ RecordId和StartTime/EndTime互斥
      */
     async DescribeGroupByPath(req, cb) {
         return this.request("DescribeGroupByPath", req, cb);
+    }
+    /**
+     * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
+     */
+    async DescribeStatisticSummary(req, cb) {
+        return this.request("DescribeStatisticSummary", req, cb);
     }
     /**
      * 直播录像存储日期列表
@@ -260,10 +284,10 @@ RecordId和StartTime/EndTime互斥
         return this.request("DeleteRecordPlan", req, cb);
     }
     /**
-     * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
+     * 创建消息转发配置
      */
-    async DescribeStatisticSummary(req, cb) {
-        return this.request("DescribeStatisticSummary", req, cb);
+    async CreateMessageForward(req, cb) {
+        return this.request("CreateMessageForward", req, cb);
     }
     /**
      * 删除直播录制计划
@@ -300,6 +324,12 @@ RecordId和StartTime/EndTime互斥
      */
     async ModifyLiveChannel(req, cb) {
         return this.request("ModifyLiveChannel", req, cb);
+    }
+    /**
+     * 查看消息转发配置详情
+     */
+    async DescribeMessageForward(req, cb) {
+        return this.request("DescribeMessageForward", req, cb);
     }
     /**
      * 本接口(DeleteDeviceGroup)用于删除分组。

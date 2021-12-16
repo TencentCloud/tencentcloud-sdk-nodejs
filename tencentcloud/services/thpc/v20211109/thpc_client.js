@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCluster", req, cb);
     }
     /**
+     * 本接口(BindAutoScalingGroup)用于为集群队列绑定弹性伸缩组
+     */
+    async BindAutoScalingGroup(req, cb) {
+        return this.request("BindAutoScalingGroup", req, cb);
+    }
+    /**
      * 本接口 (CreateCluster) 用于创建并启动集群。
      */
     async CreateCluster(req, cb) {

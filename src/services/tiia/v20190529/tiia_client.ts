@@ -49,6 +49,7 @@ import {
   Face,
   DetectProductResponse,
   DetectLabelBetaRequest,
+  ImageRect,
   CreateImageResponse,
   DetectLabelItem,
   Location,

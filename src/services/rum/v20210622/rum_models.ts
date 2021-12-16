@@ -414,7 +414,7 @@ export interface DescribeLogListRequest {
   Sort: string
 
   /**
-   * searchlog   histogram
+   * searchlog  histogram
    */
   ActionType: string
 
@@ -429,17 +429,17 @@ export interface DescribeLogListRequest {
   StartTime?: string
 
   /**
-   * 限制
+   * 单次查询返回的原始日志条数，最大值为100
    */
   Limit?: number
 
   /**
-   * 上下文
+   * 上下文，加载更多日志时使用，透传上次返回的 Context 值，获取后续的日志内容，总计最多可获取1万条原始日志。过期时间1小时
    */
   Context?: string
 
   /**
-   * 查询语句
+   * 查询语句，语句长度最大为4096
    */
   Query?: string
 

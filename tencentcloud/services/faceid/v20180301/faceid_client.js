@@ -144,6 +144,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MinorsVerification", req, cb);
     }
     /**
+     * 使用一闪SDK生成的数据包检测活体，并和用户传入的图片进行比对。
+     */
+    async DetectReflectLivenessAndCompare(req, cb) {
+        return this.request("DetectReflectLivenessAndCompare", req, cb);
+    }
+    /**
      * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
      */
     async CheckIdNameDate(req, cb) {

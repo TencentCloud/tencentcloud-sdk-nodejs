@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  BindAutoScalingGroupRequest,
   DeleteClusterRequest,
   SystemDisk,
   ManagerNode,
@@ -30,6 +31,7 @@ import {
   StorageOption,
   DeleteClusterResponse,
   GooseFSOption,
+  BindAutoScalingGroupResponse,
   InstanceChargePrepaid,
   CFSOption,
   CreateClusterResponse,
@@ -53,6 +55,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterResponse) => void
   ): Promise<DeleteClusterResponse> {
     return this.request("DeleteCluster", req, cb)
+  }
+
+  /**
+   * 本接口(BindAutoScalingGroup)用于为集群队列绑定弹性伸缩组
+   */
+  async BindAutoScalingGroup(
+    req: BindAutoScalingGroupRequest,
+    cb?: (error: string, rep: BindAutoScalingGroupResponse) => void
+  ): Promise<BindAutoScalingGroupResponse> {
+    return this.request("BindAutoScalingGroup", req, cb)
   }
 
   /**

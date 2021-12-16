@@ -317,17 +317,13 @@ export interface DeleteRecordPlanResponse {
     RequestId?: string;
 }
 /**
- * ModifyVideoInfo请求参数结构体
+ * DeleteMessageForward返回参数结构体
  */
-export interface ModifyVideoInfoRequest {
+export interface DeleteMessageForwardResponse {
     /**
-      * 视频ID列表长度限制100内
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InitIDs: Array<number>;
-    /**
-      * 过期时间 时间戳 -1: 永不过期 0: 无效值
-      */
-    ExpireTime: number;
+    RequestId?: string;
 }
 /**
  * ModifyBindPlanLiveChannel返回参数结构体
@@ -429,6 +425,27 @@ export interface LiveRecordPlanItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PlanName: string;
+}
+/**
+ * DescribeVideoList返回参数结构体
+ */
+export interface DescribeVideoListResponse {
+    /**
+      * 总数
+      */
+    TotalCount: number;
+    /**
+      * 已废弃
+      */
+    VideoList: RecordTaskItem;
+    /**
+      * 录像详情列表
+      */
+    RecordList: Array<RecordTaskItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 普通设备的录像详情
@@ -802,6 +819,15 @@ export interface UpdateDevicePassWordRequest {
     DeviceId: string;
 }
 /**
+ * DescribeMessageForward请求参数结构体
+ */
+export interface DescribeMessageForwardRequest {
+    /**
+      * 配置ID
+      */
+    IntId: number;
+}
+/**
  * CreateTimeTemplate请求参数结构体
  */
 export interface CreateTimeTemplateRequest {
@@ -817,6 +843,39 @@ export interface CreateTimeTemplateRequest {
       * 当IsAllWeek为0时必选，用于描述模板的各个时间片段
       */
     TimeTemplateSpecs?: Array<TimeTemplateSpec>;
+}
+/**
+ * CreateMessageForward请求参数结构体
+ */
+export interface CreateMessageForwardRequest {
+    /**
+      * 区域ID
+      */
+    RegionId: string;
+    /**
+      * 区域名称
+      */
+    RegionName: string;
+    /**
+      * 实例ID
+      */
+    Instance: string;
+    /**
+      * 实例名称
+      */
+    InstanceName: string;
+    /**
+      * json数组， 转发类型 1: 告警 2:GPS
+      */
+    MessageType: string;
+    /**
+      * kafka topic id
+      */
+    TopicId: string;
+    /**
+      * kafka topic 名称
+      */
+    TopicName: string;
 }
 /**
  * ModifyBindPlanLiveChannel请求参数结构体
@@ -847,6 +906,19 @@ export interface DescribeLiveStreamRequest {
       * 过期时间
       */
     ExpireTime: number;
+}
+/**
+ * ModifyMessageForward请求参数结构体
+ */
+export interface ModifyMessageForwardRequest {
+    /**
+      * 配置ID
+      */
+    IntId: number;
+    /**
+      * json数组， 转发类型 1: 告警 2:GPS
+      */
+    MessageType: string;
 }
 /**
  * ModifyLiveRecordPlan返回参数结构体
@@ -1432,6 +1504,19 @@ export interface DescribeLiveChannelResponse {
     RequestId?: string;
 }
 /**
+ * DescribeMessageForwards请求参数结构体
+ */
+export interface DescribeMessageForwardsRequest {
+    /**
+      * 数量限制
+      */
+    Limit: number;
+    /**
+      * 偏移
+      */
+    Offset?: number;
+}
+/**
  * ControlDevicePTZ返回参数结构体
  */
 export interface ControlDevicePTZResponse {
@@ -1824,6 +1909,66 @@ export interface ModifySubscriptionStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 消息转发配置信息
+ */
+export interface MessageForward {
+    /**
+      * 配置ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntId: number;
+    /**
+      * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin: string;
+    /**
+      * json数组， 转发类型 1: 告警 2:GPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageType: string;
+    /**
+      * 区域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionId: string;
+    /**
+      * 区域名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionName: string;
+    /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Instance: string;
+    /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName: string;
+    /**
+      * kafka topic id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicId: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * topic 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicName: string;
 }
 /**
  * ModifyDeviceData请求参数结构体
@@ -2332,6 +2477,38 @@ export interface RecordPlanItem {
     Devices: Array<DeviceItem>;
 }
 /**
+ * DescribeMessageForwards返回参数结构体
+ */
+export interface DescribeMessageForwardsResponse {
+    /**
+      * 配置总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<MessageForward>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVideoInfo请求参数结构体
+ */
+export interface ModifyVideoInfoRequest {
+    /**
+      * 视频ID列表长度限制100内
+      */
+    InitIDs: Array<number>;
+    /**
+      * 过期时间 时间戳 -1: 永不过期 0: 无效值
+      */
+    ExpireTime: number;
+}
+/**
  * GetRecordPlans请求参数结构体
  */
 export declare type GetRecordPlansRequest = null;
@@ -2358,21 +2535,59 @@ export interface ModifyLiveChannelRequest {
     LiveChannelName: string;
 }
 /**
- * DescribeVideoList返回参数结构体
+ * DescribeMessageForward返回参数结构体
  */
-export interface DescribeVideoListResponse {
+export interface DescribeMessageForwardResponse {
     /**
-      * 总数
+      * 区域ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    RegionId: string;
     /**
-      * 已废弃
+      * 区域名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    VideoList: RecordTaskItem;
+    RegionName: string;
     /**
-      * 录像详情列表
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RecordList: Array<RecordTaskItem>;
+    Instance: string;
+    /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName: string;
+    /**
+      * 配置ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntId: number;
+    /**
+      * json数组， 转发类型 1: 告警 2:GPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageType: string;
+    /**
+      * kafka topic id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicId: string;
+    /**
+      * 配置创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 用户Uin信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin: string;
+    /**
+      * kafka topic 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2403,6 +2618,15 @@ export interface DeleteLiveVideoListRequest {
       * 视频ID 列表, 大小限制(100)
       */
     IntIDs: Array<number>;
+}
+/**
+ * ModifyMessageForward返回参数结构体
+ */
+export interface ModifyMessageForwardResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeScenes请求参数结构体
@@ -2461,6 +2685,15 @@ export interface ControlRecordStreamResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteMessageForward请求参数结构体
+ */
+export interface DeleteMessageForwardRequest {
+    /**
+      * 配置ID
+      */
+    IntId: number;
 }
 /**
  * DeleteLiveChannel返回参数结构体
@@ -2674,6 +2907,20 @@ export interface DescribeGroupByPathResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Group: GroupItem;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateMessageForward返回参数结构体
+ */
+export interface CreateMessageForwardResponse {
+    /**
+      * 配置ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IntId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

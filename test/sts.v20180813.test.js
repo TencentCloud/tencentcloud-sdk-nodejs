@@ -58,4 +58,14 @@ it("sts.v20180813.AssumeRole", async function () {
     }
 })
 
+it("sts.v20180813.GetCallerIdentity", async function () {
+    try {
+       const data = await client.GetCallerIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

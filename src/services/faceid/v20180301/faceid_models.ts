@@ -767,6 +767,41 @@ export interface MobileStatusRequest {
 }
 
 /**
+ * DetectReflectLivenessAndCompare返回参数结构体
+ */
+export interface DetectReflectLivenessAndCompareResponse {
+  /**
+   * 验证通过后的视频最佳截图照片资源地址，jpg格式。
+   */
+  BestFrameUrl: string
+
+  /**
+   * 验证通过后的视频最佳截图照片资源Md5。
+   */
+  BestFrameMd5: string
+
+  /**
+   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+   */
+  Result: string
+
+  /**
+   * 业务结果描述。
+   */
+  Description: string
+
+  /**
+   * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
+   */
+  Sim: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetRealNameAuthToken请求参数结构体
  */
 export interface GetRealNameAuthTokenRequest {
@@ -930,6 +965,31 @@ export interface GetFaceIdTokenResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DetectReflectLivenessAndCompare请求参数结构体
+ */
+export interface DetectReflectLivenessAndCompareRequest {
+  /**
+   * SDK生成的数据包活体数据包的资源地址。
+   */
+  LiveDataUrl: string
+
+  /**
+   * SDK生成的数据包活体数据包的资源Md5。
+   */
+  LiveDataMd5: string
+
+  /**
+   * 用于比对的目标图片的资源地址。
+   */
+  ImageUrl: string
+
+  /**
+   * 用于比对的目标图片的资源Md5。
+   */
+  ImageMd5: string
 }
 
 /**

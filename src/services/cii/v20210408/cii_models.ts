@@ -527,7 +527,7 @@ export interface MachinePredict {
   Title: string
 
   /**
-   * 核保结论
+   * 核保结论：加费、承保、拒保、延期、除外、加费+除外
    */
   Conclusion: string
 

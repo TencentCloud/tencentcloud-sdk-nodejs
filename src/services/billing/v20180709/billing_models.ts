@@ -195,7 +195,7 @@ cdn业务：
 
   /**
       * 查询域名 例如 www.qq.com
-非CDN业务查询时值为空
+非CDN业务查询时传入空字符串，返回的值为空
       */
   Domain: string
 
@@ -1207,25 +1207,25 @@ export interface DescribeDosageDetailByDateResponse {
       * 计量单位
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Unit?: string
+  Unit: string
 
   /**
       * 用量数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DetailSets?: Array<DetailSet>
+  DetailSets: Array<DetailSet>
 
   /**
       * 错误码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RetCode?: number
+  RetCode: number
 
   /**
       * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RetMsg?: string
+  RetMsg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

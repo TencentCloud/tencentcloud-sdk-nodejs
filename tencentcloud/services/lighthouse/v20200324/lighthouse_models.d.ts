@@ -25,21 +25,13 @@ export interface AssociateInstancesKeyPairsResponse {
     RequestId?: string;
 }
 /**
- * 描述了镜像重置信息
+ * DescribeDisksDeniedActions请求参数结构体
  */
-export interface ResetInstanceBlueprint {
+export interface DescribeDisksDeniedActionsRequest {
     /**
-      * 镜像详细信息
+      * 磁盘ID列表
       */
-    BlueprintInfo: Blueprint;
-    /**
-      * 实例镜像是否可重置为目标镜像
-      */
-    IsResettable: boolean;
-    /**
-      * 不可重置信息.当镜像可重置时为""
-      */
-    NonResettableMessage: string;
+    DiskIds: Array<string>;
 }
 /**
  * DescribeInstancesTrafficPackages返回参数结构体
@@ -151,6 +143,27 @@ export interface InstanceDeniedActions {
     DeniedActions: Array<DeniedAction>;
 }
 /**
+ * InquirePriceCreateDisks请求参数结构体
+ */
+export interface InquirePriceCreateDisksRequest {
+    /**
+      * 磁盘大小
+      */
+    DiskSize: number;
+    /**
+      * 硬盘介质类型
+      */
+    DiskType: string;
+    /**
+      * 新购磁盘包年包月相关参数设置
+      */
+    DiskChargePrepaid: DiskChargePrepaid;
+    /**
+      * 磁盘个数, 默认值: 1
+      */
+    DiskCount?: number;
+}
+/**
  * 描述了实例可变更的套餐。
  */
 export interface ModifyBundle {
@@ -253,17 +266,21 @@ export interface SystemDisk {
     DiskId: string;
 }
 /**
- * ResetInstance请求参数结构体
+ * 描述了镜像重置信息
  */
-export interface ResetInstanceRequest {
+export interface ResetInstanceBlueprint {
     /**
-      * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+      * 镜像详细信息
       */
-    InstanceId: string;
+    BlueprintInfo: Blueprint;
     /**
-      * 镜像 ID。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
+      * 实例镜像是否可重置为目标镜像
       */
-    BlueprintId?: string;
+    IsResettable: boolean;
+    /**
+      * 不可重置信息.当镜像可重置时为""
+      */
+    NonResettableMessage: string;
 }
 /**
  * DescribeBundles返回参数结构体
@@ -325,6 +342,16 @@ export interface DiscountDetail {
     PolicyDetail: PolicyDetail;
 }
 /**
+ * DescribeDiskConfigs请求参数结构体
+ */
+export interface DescribeDiskConfigsRequest {
+    /**
+      * - zone:
+可用区
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * DescribeRegions返回参数结构体
  */
 export interface DescribeRegionsResponse {
@@ -340,6 +367,19 @@ export interface DescribeRegionsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * AssociateInstancesKeyPairs请求参数结构体
+ */
+export interface AssociateInstancesKeyPairsRequest {
+    /**
+      * 密钥对 ID 列表。每次请求批量密钥对的上限为 100。
+      */
+    KeyIds: Array<string>;
+    /**
+      * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+      */
+    InstanceIds: Array<string>;
 }
 /**
  * AttachCcn返回参数结构体
@@ -369,17 +409,21 @@ export interface ResetAttachCcnRequest {
     CcnId: string;
 }
 /**
- * AssociateInstancesKeyPairs请求参数结构体
+ * AttachDisks请求参数结构体
  */
-export interface AssociateInstancesKeyPairsRequest {
+export interface AttachDisksRequest {
     /**
-      * 密钥对 ID 列表。每次请求批量密钥对的上限为 100。
+      * 磁盘ID列表
       */
-    KeyIds: Array<string>;
+    DiskIds: Array<string>;
     /**
-      * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+      * 实例ID
       */
-    InstanceIds: Array<string>;
+    InstanceId: string;
+    /**
+      * 续费标识
+      */
+    RenewFlag?: string;
 }
 /**
  * ImportKeyPair返回参数结构体
@@ -430,21 +474,13 @@ export interface DescribeSnapshotsRequest {
     Limit?: number;
 }
 /**
- * 可用区详细信息
+ * TerminateDisks返回参数结构体
  */
-export interface ZoneInfo {
+export interface TerminateDisksResponse {
     /**
-      * 可用区
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Zone: string;
-    /**
-      * 可用区中文名称
-      */
-    ZoneName: string;
-    /**
-      * 实例购买页可用区展示标签
-      */
-    InstanceDisplayLabel: string;
+    RequestId?: string;
 }
 /**
  * 描述密钥对信息。
@@ -517,6 +553,115 @@ export interface ModifyBlueprintAttributeRequest {
     Description?: string;
 }
 /**
+ * InquirePriceRenewDisks请求参数结构体
+ */
+export interface InquirePriceRenewDisksRequest {
+    /**
+      * 磁盘ID列表
+      */
+    DiskIds: Array<string>;
+    /**
+      * 续费磁盘包年包月相关参数设置
+      */
+    RenewDiskChargePrepaid: RenewDiskChargePrepaid;
+}
+/**
+ * 磁盘信息
+ */
+export interface Disk {
+    /**
+      * 磁盘ID
+      */
+    DiskId: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 磁盘名称
+      */
+    DiskName: string;
+    /**
+      * 磁盘类型
+      */
+    DiskUsage: string;
+    /**
+      * 磁盘介质类型
+      */
+    DiskType: string;
+    /**
+      * 磁盘付费类型
+      */
+    DiskChargeType: string;
+    /**
+      * 磁盘大小
+      */
+    DiskSize: number;
+    /**
+      * 续费标识
+      */
+    RenewFlag: string;
+    /**
+      * 磁盘状态
+      */
+    DiskState: string;
+    /**
+      * 磁盘挂载状态
+      */
+    Attached: boolean;
+    /**
+      * 是否随实例释放
+      */
+    DeleteWithInstance: boolean;
+    /**
+      * 上一次操作
+      */
+    LatestOperation: string;
+    /**
+      * 上一次操作状态
+      */
+    LatestOperationState: string;
+    /**
+      * 上一次请求ID
+      */
+    LatestOperationRequestId: string;
+    /**
+      * 创建时间
+      */
+    CreatedTime: string;
+    /**
+      * 到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpiredTime: string;
+    /**
+      * 隔离时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsolatedTime: string;
+}
+/**
+ * 可用区详细信息
+ */
+export interface ZoneInfo {
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 可用区中文名称
+      */
+    ZoneName: string;
+    /**
+      * 实例购买页可用区展示标签
+      */
+    InstanceDisplayLabel: string;
+}
+/**
  * DescribeBlueprintInstances请求参数结构体
  */
 export interface DescribeBlueprintInstancesRequest {
@@ -533,6 +678,15 @@ export interface ApplyInstanceSnapshotResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DetachDisks请求参数结构体
+ */
+export interface DetachDisksRequest {
+    /**
+      * 磁盘ID列表
+      */
+    DiskIds: Array<string>;
 }
 /**
  * ModifyFirewallRules请求参数结构体
@@ -692,13 +846,13 @@ export interface TrafficPackage {
     Status: string;
 }
 /**
- * DisassociateInstancesKeyPairs返回参数结构体
+ * DescribeInstancesDiskNum请求参数结构体
  */
-export interface DisassociateInstancesKeyPairsResponse {
+export interface DescribeInstancesDiskNumRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例ID列表
       */
-    RequestId?: string;
+    InstanceIds: Array<string>;
 }
 /**
  * DescribeBlueprints请求参数结构体
@@ -775,6 +929,19 @@ export interface DescribeInstancesDeniedActionsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDisksAttribute请求参数结构体
+ */
+export interface ModifyDisksAttributeRequest {
+    /**
+      * 磁盘ID列表
+      */
+    DiskIds: Array<string>;
+    /**
+      * 磁盘名称
+      */
+    DiskName: string;
+}
+/**
  * ModifyInstancesAttribute请求参数结构体
  */
 export interface ModifyInstancesAttributeRequest {
@@ -823,6 +990,15 @@ export interface DeleteSnapshotsRequest {
     SnapshotIds: Array<string>;
 }
 /**
+ * ModifyDisksRenewFlag返回参数结构体
+ */
+export interface ModifyDisksRenewFlagResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifySnapshotAttribute请求参数结构体
  */
 export interface ModifySnapshotAttributeRequest {
@@ -834,6 +1010,23 @@ export interface ModifySnapshotAttributeRequest {
       * 新的快照名称，最长为 60 个字符。
       */
     SnapshotName?: string;
+}
+/**
+ * DescribeDisks返回参数结构体
+ */
+export interface DescribeDisksResponse {
+    /**
+      * 磁盘信息列表
+      */
+    DiskSet: Array<Disk>;
+    /**
+      * 符合条件的磁盘信息数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeBundleDiscount返回参数结构体
@@ -860,6 +1053,19 @@ export interface DeleteSnapshotsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyDisksRenewFlag请求参数结构体
+ */
+export interface ModifyDisksRenewFlagRequest {
+    /**
+      * 磁盘ID列表
+      */
+    DiskIds: Array<string>;
+    /**
+      * 续费标识
+      */
+    RenewFlag: string;
 }
 /**
  * DisassociateInstancesKeyPairs请求参数结构体
@@ -953,38 +1159,43 @@ export interface ModifyBlueprintAttributeResponse {
     RequestId?: string;
 }
 /**
- * DescribeModifyInstanceBundles请求参数结构体
+ * DescribeFirewallRulesTemplate返回参数结构体
  */
-export interface DescribeModifyInstanceBundlesRequest {
+export interface DescribeFirewallRulesTemplateResponse {
     /**
-      * 实例 ID。
+      * 符合条件的防火墙规则数量。
       */
-    InstanceId: string;
+    TotalCount: number;
     /**
-      * 过滤器列表。
-<li>bundle-id</li>按照【套餐 ID】进行过滤。
-类型：String
-必选：否
-<li>support-platform-type</li>按照【系统类型】进行过滤。
-取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
-类型：String
-必选：否
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
+      * 防火墙规则详细信息列表。
       */
-    Filters?: Array<Filter>;
+    FirewallRuleSet: Array<FirewallRuleInfo>;
     /**
-      * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Offset?: number;
-    /**
-      * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
-      */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * DescribeRegions请求参数结构体
  */
 export declare type DescribeRegionsRequest = null;
+/**
+ * DescribeInstancesDiskNum返回参数结构体
+ */
+export interface DescribeInstancesDiskNumResponse {
+    /**
+      * 挂载信息列表
+      */
+    AttachDetailSet: Array<AttachDetail>;
+    /**
+      * 挂载信息数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * InquirePriceCreateBlueprint返回参数结构体
  */
@@ -1016,13 +1227,25 @@ export interface DescribeInstancesReturnableRequest {
     Limit?: number;
 }
 /**
- * StopInstances请求参数结构体
+ * 可退还磁盘详细信息
  */
-export interface StopInstancesRequest {
+export interface DiskReturnable {
     /**
-      * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+      * 磁盘ID
       */
-    InstanceIds: Array<string>;
+    DiskId: string;
+    /**
+      * 磁盘是否可退还。
+      */
+    IsReturnable: boolean;
+    /**
+      * 实例退还失败错误码。
+      */
+    ReturnFailCode: number;
+    /**
+      * 实例退还失败错误信息。
+      */
+    ReturnFailMessage: string;
 }
 /**
  * DescribeBlueprints返回参数结构体
@@ -1249,6 +1472,27 @@ export interface ModifyFirewallRulesResponse {
     RequestId?: string;
 }
 /**
+ * 磁盘价格
+ */
+export interface DiskPrice {
+    /**
+      * 磁盘单价
+      */
+    OriginalDiskPrice: number;
+    /**
+      * 磁盘总价
+      */
+    OriginalPrice: number;
+    /**
+      * 折扣
+      */
+    Discount: number;
+    /**
+      * 折后总价
+      */
+    DiscountPrice: number;
+}
+/**
  * DescribeCcnAttachedInstances返回参数结构体
  */
 export interface DescribeCcnAttachedInstancesResponse {
@@ -1394,6 +1638,19 @@ export interface ModifyInstancesLoginKeyPairAttributeResponse {
     RequestId?: string;
 }
 /**
+ * InquirePriceRenewDisks返回参数结构体
+ */
+export interface InquirePriceRenewDisksResponse {
+    /**
+      * 磁盘价格
+      */
+    DiskPrice: DiskPrice;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 套餐信息。
  */
 export interface Bundle {
@@ -1463,6 +1720,35 @@ export interface Bundle {
     BundleDisplayLabel: string;
 }
 /**
+ * 磁盘配置
+ */
+export interface DiskConfig {
+    /**
+      * 可用区
+      */
+    Zone: string;
+    /**
+      * 磁盘类型
+      */
+    DiskType: string;
+    /**
+      * 磁盘可售卖状态
+      */
+    DiskSalesState: string;
+    /**
+      * 最大磁盘大小
+      */
+    MaxDiskSize: number;
+    /**
+      * 最小磁盘大小
+      */
+    MinDiskSize: number;
+    /**
+      * 磁盘步长
+      */
+    DiskStepSize: number;
+}
+/**
  * InquirePriceCreateInstances返回参数结构体
  */
 export interface InquirePriceCreateInstancesResponse {
@@ -1485,6 +1771,23 @@ export interface DescribeSnapshotsDeniedActionsRequest {
     SnapshotIds: Array<string>;
 }
 /**
+ * DescribeDiskDiscount返回参数结构体
+ */
+export interface DescribeDiskDiscountResponse {
+    /**
+      * 币种：CNY人民币，USD 美元。
+      */
+    Currency: string;
+    /**
+      * 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。
+      */
+    DiscountDetail: Array<DiscountDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ResetInstancesPassword请求参数结构体
  */
 export interface ResetInstancesPasswordRequest {
@@ -1502,6 +1805,23 @@ export interface ResetInstancesPasswordRequest {
       * 待重置密码的实例操作系统用户名。不得超过 64 个字符。
       */
     UserName?: string;
+}
+/**
+ * 磁盘包年包月相关参数设置
+ */
+export interface DiskChargePrepaid {
+    /**
+      * 新购周期
+      */
+    Period: number;
+    /**
+      * 续费标识
+      */
+    RenewFlag?: string;
+    /**
+      * 新购单位. 默认值: "m"
+      */
+    TimeUnit?: string;
 }
 /**
  * CreateKeyPair请求参数结构体
@@ -1668,6 +1988,19 @@ export interface ModifyFirewallRuleDescriptionResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDiskDiscount请求参数结构体
+ */
+export interface DescribeDiskDiscountRequest {
+    /**
+      * 磁盘类型, 取值: "CLOUD_PREMIUM"
+      */
+    DiskType: string;
+    /**
+      * 磁盘大小
+      */
+    DiskSize: number;
+}
+/**
  * InquirePriceCreateBlueprint请求参数结构体
  */
 export interface InquirePriceCreateBlueprintRequest {
@@ -1675,6 +2008,15 @@ export interface InquirePriceCreateBlueprintRequest {
       * 自定义镜像的个数。默认值为1。
       */
     BlueprintCount?: number;
+}
+/**
+ * AttachDisks返回参数结构体
+ */
+export interface AttachDisksResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateFirewallRules请求参数结构体
@@ -1804,6 +2146,60 @@ export interface CreateFirewallRulesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDisks请求参数结构体
+ */
+export interface DescribeDisksRequest {
+    /**
+      * 磁盘ID列表
+      */
+    DiskIds?: Array<string>;
+    /**
+      * 过滤器列表。
+disk-id
+按照【磁盘 ID】进行过滤。
+类型：String
+必选：否
+instance-id
+按照【实例ID】进行过滤。
+类型：String
+必选：否
+disk-name
+按照【磁盘名称】进行过滤。
+类型：String
+必选：否
+zone
+按照【可用区】进行过滤。
+类型：String
+必选：否
+disk-usage
+按照【磁盘类型】进行过滤。
+类型：String
+必选：否
+disk-state
+按照【磁盘状态】进行过滤。
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 DiskIds 和 Filters。
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 云盘列表排序的依据字段。取值范围："CREATED_TIME"：依据云盘的创建时间排序。 "EXPIRED_TIME"：依据云盘的到期时间排序。"DISK_SIZE"：依据云盘的大小排序。默认按云盘创建时间排序。
+      */
+    OrderField?: string;
+    /**
+      * 输出云盘列表的排列顺序。取值范围："ASC"：升序排列。 "DESC"：降序排列。默认按降序排列
+      */
+    Order?: string;
+}
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -1866,6 +2262,15 @@ export interface PolicyDetail {
       * 最终折扣。
       */
     FinalDiscount: number;
+}
+/**
+ * DetachDisks返回参数结构体
+ */
+export interface DetachDisksResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeResetInstanceBlueprints请求参数结构体
@@ -1939,6 +2344,15 @@ export interface ApplyInstanceSnapshotRequest {
     SnapshotId: string;
 }
 /**
+ * DisassociateInstancesKeyPairs返回参数结构体
+ */
+export interface DisassociateInstancesKeyPairsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * TerminateInstances请求参数结构体
  */
 export interface TerminateInstancesRequest {
@@ -1946,6 +2360,62 @@ export interface TerminateInstancesRequest {
       * 实例ID列表。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
       */
     InstanceIds: Array<string>;
+}
+/**
+ * 续费磁盘包年包月相关参数设置
+ */
+export interface RenewDiskChargePrepaid {
+    /**
+      * 新购周期
+      */
+    Period?: number;
+    /**
+      * 续费标识
+      */
+    RenewFlag?: string;
+    /**
+      * 周期单位. 默认值: "m"
+      */
+    TimeUnit?: string;
+    /**
+      * 当前实例到期时间
+      */
+    CurInstanceDeadline?: string;
+}
+/**
+ * TerminateDisks请求参数结构体
+ */
+export interface TerminateDisksRequest {
+    /**
+      * 磁盘ID列表
+      */
+    DiskIds: Array<string>;
+}
+/**
+ * ResetInstance请求参数结构体
+ */
+export interface ResetInstanceRequest {
+    /**
+      * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+      */
+    InstanceId: string;
+    /**
+      * 镜像 ID。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
+      */
+    BlueprintId?: string;
+}
+/**
+ * DescribeDiskConfigs返回参数结构体
+ */
+export interface DescribeDiskConfigsResponse {
+    /**
+      * 磁盘配置列表
+      */
+    DiskConfigSet: Array<DiskConfig>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。
@@ -1970,6 +2440,19 @@ export interface InternetAccessible {
  * RebootInstances返回参数结构体
  */
 export interface RebootInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDisksDeniedActions返回参数结构体
+ */
+export interface DescribeDisksDeniedActionsResponse {
+    /**
+      * 磁盘操作限制列表详细信息。
+      */
+    DiskDeniedActionSet: Array<DiskDeniedActions>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2001,6 +2484,23 @@ export interface Price {
       * 实例价格。
       */
     InstancePrice: InstancePrice;
+}
+/**
+ * DescribeDisksReturnable返回参数结构体
+ */
+export interface DescribeDisksReturnableResponse {
+    /**
+      * 可退还磁盘详细信息列表。
+      */
+    DiskReturnableSet: Array<DiskReturnable>;
+    /**
+      * 符合条件的磁盘数量。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * BlueprintPrice	自定义镜像的价格参数。
@@ -2058,6 +2558,23 @@ export interface DescribeResetInstanceBlueprintsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDisksReturnable请求参数结构体
+ */
+export interface DescribeDisksReturnableRequest {
+    /**
+      * 磁盘ID列表
+      */
+    DiskIds?: Array<string>;
+    /**
+      * 返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
 }
 /**
  * 描述镜像软件详细信息。
@@ -2133,21 +2650,42 @@ export interface ModifyInstancesRenewFlagRequest {
     RenewFlag: string;
 }
 /**
- * DescribeFirewallRulesTemplate返回参数结构体
+ * StopInstances请求参数结构体
  */
-export interface DescribeFirewallRulesTemplateResponse {
+export interface StopInstancesRequest {
     /**
-      * 符合条件的防火墙规则数量。
+      * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
       */
-    TotalCount: number;
+    InstanceIds: Array<string>;
+}
+/**
+ * DescribeModifyInstanceBundles请求参数结构体
+ */
+export interface DescribeModifyInstanceBundlesRequest {
     /**
-      * 防火墙规则详细信息列表。
+      * 实例 ID。
       */
-    FirewallRuleSet: Array<FirewallRuleInfo>;
+    InstanceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 过滤器列表。
+<li>bundle-id</li>按照【套餐 ID】进行过滤。
+类型：String
+必选：否
+<li>support-platform-type</li>按照【系统类型】进行过滤。
+取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
       */
-    RequestId?: string;
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+      */
+    Limit?: number;
 }
 /**
  * ResetInstance返回参数结构体
@@ -2174,6 +2712,19 @@ export interface DescribeFirewallRulesRequest {
       * 返回数量，默认为 20，最大值为 100。
       */
     Limit?: number;
+}
+/**
+ * 磁盘操作限制列表详细信息
+ */
+export interface DiskDeniedActions {
+    /**
+      * 磁盘ID
+      */
+    DiskId: string;
+    /**
+      * 操作限制列表
+      */
+    DeniedActions: Array<DeniedAction>;
 }
 /**
  * InquirePriceCreateInstances请求参数结构体
@@ -2250,6 +2801,32 @@ export interface DescribeModifyInstanceBundlesResponse {
     RequestId?: string;
 }
 /**
+ * 挂载信息
+ */
+export interface AttachDetail {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例已挂载弹性云盘数量
+      */
+    AttachedDiskCount: number;
+    /**
+      * 可挂载弹性云盘数量
+      */
+    MaxAttachCount: number;
+}
+/**
+ * ModifyDisksAttribute返回参数结构体
+ */
+export interface ModifyDisksAttributeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateInstanceSnapshot请求参数结构体
  */
 export interface CreateInstanceSnapshotRequest {
@@ -2278,6 +2855,19 @@ export interface BlueprintInstance {
       * 实例 ID。
       */
     InstanceId: string;
+}
+/**
+ * InquirePriceCreateDisks返回参数结构体
+ */
+export interface InquirePriceCreateDisksResponse {
+    /**
+      * 磁盘价格
+      */
+    DiskPrice: DiskPrice;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述了实例的计费模式

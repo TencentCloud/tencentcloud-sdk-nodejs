@@ -4895,7 +4895,7 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
   AuditLogTopicId?: string
 
   /**
-   * 区分单网卡多IP模式和独立网卡模式
+   * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
    */
   VpcCniType?: string
 

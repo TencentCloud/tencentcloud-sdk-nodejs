@@ -278,6 +278,16 @@ it("monitor.v20180724.DescribeAlarmNotices", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyAlarmPolicyStatus", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeAlarmNoticeCallbacks", async function () {
     try {
        const data = await client.DescribeAlarmNoticeCallbacks({})
@@ -418,9 +428,9 @@ it("monitor.v20180724.DescribeAlarmMetrics", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmPolicyStatus", async function () {
+it("monitor.v20180724.DescribePrometheusInstances", async function () {
     try {
-       const data = await client.ModifyAlarmPolicyStatus({})
+       const data = await client.DescribePrometheusInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

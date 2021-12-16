@@ -58,6 +58,16 @@ it("iotvideoindustry.v20201201.UpdateDeviceGroup", async function () {
     }
 })
 
+it("iotvideoindustry.v20201201.ModifyMessageForward", async function () {
+    try {
+       const data = await client.ModifyMessageForward({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideoindustry.v20201201.DescribeDeviceStreams", async function () {
     try {
        const data = await client.DescribeDeviceStreams({})
@@ -198,9 +208,29 @@ it("iotvideoindustry.v20201201.DeleteLiveVideoList", async function () {
     }
 })
 
+it("iotvideoindustry.v20201201.GetRecordPlanByDev", async function () {
+    try {
+       const data = await client.GetRecordPlanByDev({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideoindustry.v20201201.ModifyLiveRecordPlan", async function () {
     try {
        const data = await client.ModifyLiveRecordPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideoindustry.v20201201.DescribeMessageForwards", async function () {
+    try {
+       const data = await client.DescribeMessageForwards({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +268,9 @@ it("iotvideoindustry.v20201201.DescribeGroupDevices", async function () {
     }
 })
 
-it("iotvideoindustry.v20201201.GetRecordPlanByDev", async function () {
+it("iotvideoindustry.v20201201.DeleteMessageForward", async function () {
     try {
-       const data = await client.GetRecordPlanByDev({})
+       const data = await client.DeleteMessageForward({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +311,16 @@ it("iotvideoindustry.v20201201.CreateLiveRecordPlan", async function () {
 it("iotvideoindustry.v20201201.DescribeGroupByPath", async function () {
     try {
        const data = await client.DescribeGroupByPath({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideoindustry.v20201201.DescribeStatisticSummary", async function () {
+    try {
+       const data = await client.DescribeStatisticSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +438,9 @@ it("iotvideoindustry.v20201201.DeleteRecordPlan", async function () {
     }
 })
 
-it("iotvideoindustry.v20201201.DescribeStatisticSummary", async function () {
+it("iotvideoindustry.v20201201.CreateMessageForward", async function () {
     try {
-       const data = await client.DescribeStatisticSummary({})
+       const data = await client.CreateMessageForward({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +501,16 @@ it("iotvideoindustry.v20201201.DescribeLiveStream", async function () {
 it("iotvideoindustry.v20201201.ModifyLiveChannel", async function () {
     try {
        const data = await client.ModifyLiveChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideoindustry.v20201201.DescribeMessageForward", async function () {
+    try {
+       const data = await client.DescribeMessageForward({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

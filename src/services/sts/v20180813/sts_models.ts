@@ -191,6 +191,46 @@ export interface GetFederationTokenRequest {
 }
 
 /**
+ * GetCallerIdentity返回参数结构体
+ */
+export interface GetCallerIdentityResponse {
+  /**
+   * 当前调用者ARN。
+   */
+  Arn?: string
+
+  /**
+   * 当前调用者所属主账号Uin。
+   */
+  AccountId?: string
+
+  /**
+      * 身份标识。
+1. 调用者是云账号时，返回的是当前账号Uin
+2. 调用者是角色时，返回的是roleId:roleSessionName
+3. 调用者是联合身份时，返回的是uin:federatedUserName
+      */
+  UserId?: string
+
+  /**
+      * 密钥所属账号Uin。
+1. 调用者是云账号，返回的当前账号Uin
+2, 调用者是角色，返回的申请角色密钥的账号Uin
+      */
+  PrincipalId?: string
+
+  /**
+   * 身份类型。
+   */
+  Type?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 临时证书
  */
 export interface Credentials {
@@ -249,3 +289,8 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
       */
   ExternalId?: string
 }
+
+/**
+ * GetCallerIdentity请求参数结构体
+ */
+export type GetCallerIdentityRequest = null

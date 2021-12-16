@@ -43,12 +43,14 @@ import {
   CheckPhoneAndNameResponse,
   BankCard4EVerificationResponse,
   MobileStatusRequest,
+  DetectReflectLivenessAndCompareResponse,
   GetRealNameAuthTokenRequest,
   CheckIdNameDateRequest,
   BankCard2EVerificationRequest,
   LivenessRecognitionRequest,
   EidInfo,
   GetFaceIdTokenResponse,
+  DetectReflectLivenessAndCompareRequest,
   CheckEidTokenStatusResponse,
   MobileStatusResponse,
   IdCardOCRVerificationResponse,
@@ -288,6 +290,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MinorsVerificationResponse) => void
   ): Promise<MinorsVerificationResponse> {
     return this.request("MinorsVerification", req, cb)
+  }
+
+  /**
+   * 使用一闪SDK生成的数据包检测活体，并和用户传入的图片进行比对。
+   */
+  async DetectReflectLivenessAndCompare(
+    req: DetectReflectLivenessAndCompareRequest,
+    cb?: (error: string, rep: DetectReflectLivenessAndCompareResponse) => void
+  ): Promise<DetectReflectLivenessAndCompareResponse> {
+    return this.request("DetectReflectLivenessAndCompare", req, cb)
   }
 
   /**

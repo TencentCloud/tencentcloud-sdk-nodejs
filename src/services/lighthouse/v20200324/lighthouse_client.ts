@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeInstancesTrafficPackagesRequest,
   AssociateInstancesKeyPairsResponse,
-  ResetInstanceBlueprint,
+  DescribeDisksDeniedActionsRequest,
   DescribeInstancesTrafficPackagesResponse,
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
@@ -29,6 +29,7 @@ import {
   RegionInfo,
   DescribeBlueprintInstancesResponse,
   InstanceDeniedActions,
+  InquirePriceCreateDisksRequest,
   ModifyBundle,
   DetachCcnResponse,
   CreateInstanceSnapshotResponse,
@@ -37,24 +38,30 @@ import {
   DescribeGeneralResourceQuotasRequest,
   DeleteKeyPairsRequest,
   SystemDisk,
-  ResetInstanceRequest,
+  ResetInstanceBlueprint,
   DescribeBundlesResponse,
   InquirePriceRenewInstancesRequest,
   DiscountDetail,
+  DescribeDiskConfigsRequest,
   DescribeRegionsResponse,
+  AssociateInstancesKeyPairsRequest,
   AttachCcnResponse,
   RebootInstancesRequest,
   ResetAttachCcnRequest,
-  AssociateInstancesKeyPairsRequest,
+  AttachDisksRequest,
   ImportKeyPairResponse,
   DescribeSnapshotsRequest,
-  ZoneInfo,
+  TerminateDisksResponse,
   KeyPair,
   DescribeFirewallRulesTemplateRequest,
   DescribeKeyPairsResponse,
   ModifyBlueprintAttributeRequest,
+  InquirePriceRenewDisksRequest,
+  Disk,
+  ZoneInfo,
   DescribeBlueprintInstancesRequest,
   ApplyInstanceSnapshotResponse,
+  DetachDisksRequest,
   ModifyFirewallRulesRequest,
   CreateBlueprintRequest,
   DeleteFirewallRulesRequest,
@@ -64,18 +71,22 @@ import {
   StartInstancesResponse,
   TerminateInstancesResponse,
   TrafficPackage,
-  DisassociateInstancesKeyPairsResponse,
+  DescribeInstancesDiskNumRequest,
   DescribeBlueprintsRequest,
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
+  ModifyDisksAttributeRequest,
   ModifyInstancesAttributeRequest,
   DescribeZonesRequest,
   StartInstancesRequest,
   SnapshotDeniedActions,
   DeleteSnapshotsRequest,
+  ModifyDisksRenewFlagResponse,
   ModifySnapshotAttributeRequest,
+  DescribeDisksResponse,
   DescribeBundleDiscountResponse,
   DeleteSnapshotsResponse,
+  ModifyDisksRenewFlagRequest,
   DisassociateInstancesKeyPairsRequest,
   ImportKeyPairRequest,
   DeleteBlueprintsResponse,
@@ -83,11 +94,12 @@ import {
   StopInstancesResponse,
   FirewallRule,
   ModifyBlueprintAttributeResponse,
-  DescribeModifyInstanceBundlesRequest,
+  DescribeFirewallRulesTemplateResponse,
   DescribeRegionsRequest,
+  DescribeInstancesDiskNumResponse,
   InquirePriceCreateBlueprintResponse,
   DescribeInstancesReturnableRequest,
-  StopInstancesRequest,
+  DiskReturnable,
   DescribeBlueprintsResponse,
   DescribeKeyPairsRequest,
   DescribeCcnAttachedInstancesRequest,
@@ -97,15 +109,20 @@ import {
   CreateKeyPairResponse,
   DescribeInstanceVncUrlResponse,
   ModifyFirewallRulesResponse,
+  DiskPrice,
   DescribeCcnAttachedInstancesResponse,
   DescribeBundlesRequest,
   Blueprint,
   DeniedAction,
   ModifyInstancesLoginKeyPairAttributeResponse,
+  InquirePriceRenewDisksResponse,
   Bundle,
+  DiskConfig,
   InquirePriceCreateInstancesResponse,
   DescribeSnapshotsDeniedActionsRequest,
+  DescribeDiskDiscountResponse,
   ResetInstancesPasswordRequest,
+  DiskChargePrepaid,
   CreateKeyPairRequest,
   DescribeInstancesRequest,
   DetachCcnRequest,
@@ -113,7 +130,9 @@ import {
   DescribeSnapshotsResponse,
   Snapshot,
   ModifyFirewallRuleDescriptionResponse,
+  DescribeDiskDiscountRequest,
   InquirePriceCreateBlueprintRequest,
+  AttachDisksResponse,
   CreateFirewallRulesRequest,
   Software,
   DescribeFirewallRulesResponse,
@@ -121,36 +140,51 @@ import {
   DeleteBlueprintsRequest,
   FirewallRuleInfo,
   CreateFirewallRulesResponse,
+  DescribeDisksRequest,
   DescribeInstancesResponse,
   DescribeZonesResponse,
   CreateBlueprintResponse,
   PolicyDetail,
+  DetachDisksResponse,
   DescribeResetInstanceBlueprintsRequest,
   ResetAttachCcnResponse,
   ModifyInstancesRenewFlagResponse,
   ApplyInstanceSnapshotRequest,
+  DisassociateInstancesKeyPairsResponse,
   TerminateInstancesRequest,
+  RenewDiskChargePrepaid,
+  TerminateDisksRequest,
+  ResetInstanceRequest,
+  DescribeDiskConfigsResponse,
   InternetAccessible,
   RebootInstancesResponse,
+  DescribeDisksDeniedActionsResponse,
   DescribeInstanceLoginKeyPairAttributeRequest,
   DescribeBundleDiscountRequest,
   Price,
+  DescribeDisksReturnableResponse,
   BlueprintPrice,
   GeneralResourceQuota,
   DescribeResetInstanceBlueprintsResponse,
+  DescribeDisksReturnableRequest,
   SoftwareDetail,
   InstancePrice,
   ModifySnapshotAttributeResponse,
   DescribeGeneralResourceQuotasResponse,
   ModifyInstancesRenewFlagRequest,
-  DescribeFirewallRulesTemplateResponse,
+  StopInstancesRequest,
+  DescribeModifyInstanceBundlesRequest,
   ResetInstanceResponse,
   DescribeFirewallRulesRequest,
+  DiskDeniedActions,
   InquirePriceCreateInstancesRequest,
   CcnAttachedInstance,
   DescribeModifyInstanceBundlesResponse,
+  AttachDetail,
+  ModifyDisksAttributeResponse,
   CreateInstanceSnapshotRequest,
   BlueprintInstance,
+  InquirePriceCreateDisksResponse,
   InstanceChargePrepaid,
   ModifyInstancesAttributeResponse,
   DescribeInstanceLoginKeyPairAttributeResponse,
@@ -209,13 +243,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeModifyInstanceBundles）用于查询实例可变更套餐列表。
+   * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云盘数量。
    */
-  async DescribeModifyInstanceBundles(
-    req: DescribeModifyInstanceBundlesRequest,
-    cb?: (error: string, rep: DescribeModifyInstanceBundlesResponse) => void
-  ): Promise<DescribeModifyInstanceBundlesResponse> {
-    return this.request("DescribeModifyInstanceBundles", req, cb)
+  async DescribeInstancesDiskNum(
+    req: DescribeInstancesDiskNumRequest,
+    cb?: (error: string, rep: DescribeInstancesDiskNumResponse) => void
+  ): Promise<DescribeInstancesDiskNumResponse> {
+    return this.request("DescribeInstancesDiskNum", req, cb)
   }
 
   /**
@@ -276,13 +310,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+   * 本接口（DescribeModifyInstanceBundles）用于查询实例可变更套餐列表。
    */
-  async DescribeFirewallRulesTemplate(
-    req?: DescribeFirewallRulesTemplateRequest,
-    cb?: (error: string, rep: DescribeFirewallRulesTemplateResponse) => void
-  ): Promise<DescribeFirewallRulesTemplateResponse> {
-    return this.request("DescribeFirewallRulesTemplate", req, cb)
+  async DescribeModifyInstanceBundles(
+    req: DescribeModifyInstanceBundlesRequest,
+    cb?: (error: string, rep: DescribeModifyInstanceBundlesResponse) => void
+  ): Promise<DescribeModifyInstanceBundlesResponse> {
+    return this.request("DescribeModifyInstanceBundles", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+   */
+  async DescribeCcnAttachedInstances(
+    req?: DescribeCcnAttachedInstancesRequest,
+    cb?: (error: string, rep: DescribeCcnAttachedInstancesResponse) => void
+  ): Promise<DescribeCcnAttachedInstancesResponse> {
+    return this.request("DescribeCcnAttachedInstances", req, cb)
   }
 
   /**
@@ -316,13 +360,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeCcnAttachedInstances) 用于查询云联网关联的实例信息。
+   * 本接口（ModifyDisksRenewFlag）用于修改磁盘续费标识。
    */
-  async DescribeCcnAttachedInstances(
-    req?: DescribeCcnAttachedInstancesRequest,
-    cb?: (error: string, rep: DescribeCcnAttachedInstancesResponse) => void
-  ): Promise<DescribeCcnAttachedInstancesResponse> {
-    return this.request("DescribeCcnAttachedInstances", req, cb)
+  async ModifyDisksRenewFlag(
+    req: ModifyDisksRenewFlagRequest,
+    cb?: (error: string, rep: ModifyDisksRenewFlagResponse) => void
+  ): Promise<ModifyDisksRenewFlagResponse> {
+    return this.request("ModifyDisksRenewFlag", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+   */
+  async DescribeFirewallRulesTemplate(
+    req?: DescribeFirewallRulesTemplateRequest,
+    cb?: (error: string, rep: DescribeFirewallRulesTemplateResponse) => void
+  ): Promise<DescribeFirewallRulesTemplateResponse> {
+    return this.request("DescribeFirewallRulesTemplate", req, cb)
   }
 
   /**
@@ -368,6 +422,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceCreateBlueprintResponse) => void
   ): Promise<InquirePriceCreateBlueprintResponse> {
     return this.request("InquirePriceCreateBlueprint", req, cb)
+  }
+
+  /**
+   * 本接口（AttachDisks）用于挂载一个或多个弹性云盘。
+   */
+  async AttachDisks(
+    req: AttachDisksRequest,
+    cb?: (error: string, rep: AttachDisksResponse) => void
+  ): Promise<AttachDisksResponse> {
+    return this.request("AttachDisks", req, cb)
   }
 
   /**
@@ -477,18 +541,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（ResetInstance）用于重装指定实例上的镜像。
-
-* 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
-* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
-* 目前不支持实例使用该接口实现 LINUX_UNIX 和 WINDOWS 操作系统切换。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
-     */
-  async ResetInstance(
-    req: ResetInstanceRequest,
-    cb?: (error: string, rep: ResetInstanceResponse) => void
-  ): Promise<ResetInstanceResponse> {
-    return this.request("ResetInstance", req, cb)
+   * 本接口（DescribeDisksDeniedActions）用于查询一个或多个磁盘的操作限制列表信息
+   */
+  async DescribeDisksDeniedActions(
+    req: DescribeDisksDeniedActionsRequest,
+    cb?: (error: string, rep: DescribeDisksDeniedActionsResponse) => void
+  ): Promise<DescribeDisksDeniedActionsResponse> {
+    return this.request("DescribeDisksDeniedActions", req, cb)
   }
 
   /**
@@ -499,6 +558,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFirewallRulesResponse) => void
   ): Promise<DescribeFirewallRulesResponse> {
     return this.request("DescribeFirewallRules", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDisks）用于查询磁盘信息。
+   */
+  async DescribeDisks(
+    req: DescribeDisksRequest,
+    cb?: (error: string, rep: DescribeDisksResponse) => void
+  ): Promise<DescribeDisksResponse> {
+    return this.request("DescribeDisks", req, cb)
   }
 
   /**
@@ -573,6 +642,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyDisksAttribute)用于修改磁盘属性
+   */
+  async ModifyDisksAttribute(
+    req: ModifyDisksAttributeRequest,
+    cb?: (error: string, rep: ModifyDisksAttributeResponse) => void
+  ): Promise<ModifyDisksAttributeResponse> {
+    return this.request("ModifyDisksAttribute", req, cb)
+  }
+
+  /**
    * 本接口（DescribeRegions）用于查询地域信息。
    */
   async DescribeRegions(
@@ -606,6 +685,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeDisksReturnable）用于查询磁盘是否可退还。
+   */
+  async DescribeDisksReturnable(
+    req: DescribeDisksReturnableRequest,
+    cb?: (error: string, rep: DescribeDisksReturnableResponse) => void
+  ): Promise<DescribeDisksReturnableResponse> {
+    return this.request("DescribeDisksReturnable", req, cb)
+  }
+
+  /**
+   * 本接口（InquirePriceRenewDisks）用于续费磁盘询价。
+   */
+  async InquirePriceRenewDisks(
+    req: InquirePriceRenewDisksRequest,
+    cb?: (error: string, rep: InquirePriceRenewDisksResponse) => void
+  ): Promise<InquirePriceRenewDisksResponse> {
+    return this.request("InquirePriceRenewDisks", req, cb)
+  }
+
+  /**
    * 本接口（DescribeBlueprintInstances）用于查询镜像实例信息。
    */
   async DescribeBlueprintInstances(
@@ -613,6 +712,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBlueprintInstancesResponse) => void
   ): Promise<DescribeBlueprintInstancesResponse> {
     return this.request("DescribeBlueprintInstances", req, cb)
+  }
+
+  /**
+     * 本接口（ResetInstance）用于重装指定实例上的镜像。
+
+* 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
+* 系统盘将会被格式化，并重置；请确保系统盘中无重要文件。
+* 目前不支持实例使用该接口实现 LINUX_UNIX 和 WINDOWS 操作系统切换。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     */
+  async ResetInstance(
+    req: ResetInstanceRequest,
+    cb?: (error: string, rep: ResetInstanceResponse) => void
+  ): Promise<ResetInstanceResponse> {
+    return this.request("ResetInstance", req, cb)
   }
 
   /**
@@ -699,6 +813,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（TerminateDisks）用于销毁一个或多个磁盘。
+   */
+  async TerminateDisks(
+    req: TerminateDisksRequest,
+    cb?: (error: string, rep: TerminateDisksResponse) => void
+  ): Promise<TerminateDisksResponse> {
+    return this.request("TerminateDisks", req, cb)
+  }
+
+  /**
      * 本接口（StartInstances）用于启动一个或多个实例。
 
 * 只有状态为 STOPPED 的实例才可以进行此操作。
@@ -744,6 +868,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（InquirePriceCreateDisks）用于新购磁盘询价。
+   */
+  async InquirePriceCreateDisks(
+    req: InquirePriceCreateDisksRequest,
+    cb?: (error: string, rep: InquirePriceCreateDisksResponse) => void
+  ): Promise<InquirePriceCreateDisksResponse> {
+    return this.request("InquirePriceCreateDisks", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息
+   */
+  async DescribeDiskDiscount(
+    req: DescribeDiskDiscountRequest,
+    cb?: (error: string, rep: DescribeDiskDiscountResponse) => void
+  ): Promise<DescribeDiskDiscountResponse> {
+    return this.request("DescribeDiskDiscount", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDiskConfigs）用于查询磁盘配置。
+   */
+  async DescribeDiskConfigs(
+    req: DescribeDiskConfigsRequest,
+    cb?: (error: string, rep: DescribeDiskConfigsResponse) => void
+  ): Promise<DescribeDiskConfigsResponse> {
+    return this.request("DescribeDiskConfigs", req, cb)
+  }
+
+  /**
    * 查询地域下可用区
    */
   async DescribeZones(
@@ -786,5 +940,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBlueprintResponse) => void
   ): Promise<CreateBlueprintResponse> {
     return this.request("CreateBlueprint", req, cb)
+  }
+
+  /**
+   * 本接口（DetachDisks）用于卸载一个或多个弹性云盘。
+   */
+  async DetachDisks(
+    req: DetachDisksRequest,
+    cb?: (error: string, rep: DetachDisksResponse) => void
+  ): Promise<DetachDisksResponse> {
+    return this.request("DetachDisks", req, cb)
   }
 }

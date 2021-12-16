@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ControlRecordStreamRequest, ModifySubscriptionStatusRequest, CreateSceneResponse, DeleteTimeTemplateResponse, GetTimeTemplatesRequest, GetRecordPlanByDevRequest, GetRecordDatesByDevResponse, CreateLiveRecordPlanRequest, DescribeLiveChannelRequest, DescribeSubscriptionStatusResponse, DescribeScenesResponse, DescribeDeviceStreamsResponse, DescribeSIPServerRequest, CreateLiveRecordPlanResponse, DeleteDeviceGroupResponse, DeleteRecordPlanResponse, ModifyVideoInfoRequest, ModifyBindPlanLiveChannelResponse, UpdateDeviceGroupResponse, GetVideoListByConRequest, DescribeLiveRecordPlanByIdRequest, DescribeIPCChannelsRequest, DescribeSubGroupsRequest, DeleteRecordPlanRequest, CreateDeviceGroupResponse, GetVideoListByConResponse, UpdateTimeTemplateResponse, UpdateRecordPlanRequest, ModifyDeviceDataResponse, DescribeStatisticDetailsResponse, DescribeSubGroupsResponse, GetRecordPlanByIdResponse, DeleteDeviceRequest, UpdateDevicePassWordRequest, CreateTimeTemplateRequest, ModifyBindPlanLiveChannelRequest, DescribeLiveStreamRequest, ModifyLiveRecordPlanResponse, DescribeAllDeviceListRequest, DescribeRecordDatesByLiveRequest, DescribeDevicePassWordRequest, GetRecordPlanByIdRequest, DescribeLiveChannelListRequest, GetRecordPlanByDevResponse, DeleteVideoListRequest, DescribeStatisticDetailsRequest, CreateRecordPlanRequest, CreateDeviceGroupRequest, UpdateTimeTemplateRequest, DescribeLiveRecordPlanIdsResponse, CreateDeviceResponse, CreateDeviceRequest, DescribeStatisticSummaryResponse, DescribeRecordStreamRequest, BindGroupDevicesRequest, ModifyLiveRecordPlanRequest, GetTimeTemplateByIdResponse, DescribeLiveChannelResponse, ControlDevicePTZResponse, ControlDevicePTZRequest, UpdateDeviceGroupRequest, DescribeChannelsByLiveRecordPlanResponse, DescribeGroupDevicesRequest, DescribeGroupByIdRequest, UpdateDevicePassWordResponse, DeleteChannelRequest, DescribeSubscriptionStatusRequest, DescribeDeviceStreamsRequest, DescribeRecordStreamResponse, CreateRecordPlanResponse, CreateSceneRequest, DescribeLiveVideoListResponse, DeleteDeviceGroupRequest, DescribeLiveRecordPlanByIdResponse, DescribeRecordDatesByLiveResponse, ModifySubscriptionStatusResponse, ModifyDeviceDataRequest, DeleteSceneResponse, GetRecordDatesByDevRequest, DescribeLiveVideoListRequest, GetTimeTemplatesResponse, CreateLiveChannelResponse, DeleteVideoListResponse, ModifyLiveVideoResponse, DescribeIPCChannelsResponse, DescribeAllDeviceListResponse, DescribeStatisticSummaryRequest, DescribeGroupsResponse, DeleteLiveRecordPlanRequest, DeleteDeviceResponse, DeleteLiveVideoListResponse, DescribeDeviceGroupResponse, CreateTimeTemplateResponse, DeleteLiveChannelRequest, DescribeSIPServerResponse, DescribeGroupByPathRequest, DeleteChannelResponse, UpdateRecordPlanResponse, DescribeDeviceGroupRequest, DescribeGroupsRequest, GetRecordPlansResponse, DescribeChannelsByLiveRecordPlanRequest, ModifyLiveChannelResponse, GetTimeTemplateByIdRequest, GetRecordPlansRequest, DeleteTimeTemplateRequest, ModifyLiveChannelRequest, DescribeVideoListResponse, DescribeLiveRecordPlanIdsRequest, DeleteLiveVideoListRequest, DescribeScenesRequest, DeleteLiveRecordPlanResponse, ModifyVideoInfoResponse, DescribeGroupByIdResponse, ControlRecordStreamResponse, DeleteLiveChannelResponse, BindGroupDevicesResponse, DescribeVideoListRequest, DescribeLiveChannelListResponse, DescribeDevicePassWordResponse, DescribeBindSceneDevicesRequest, DescribeBindSceneDevicesResponse, ModifyLiveVideoRequest, DescribeGroupByPathResponse, CreateLiveChannelRequest, DescribeGroupDevicesResponse, DeleteSceneRequest, DescribeLiveStreamResponse } from "./iotvideoindustry_models";
+import { ControlRecordStreamRequest, ModifySubscriptionStatusRequest, CreateSceneResponse, DeleteTimeTemplateResponse, GetTimeTemplatesRequest, GetRecordPlanByDevRequest, GetRecordDatesByDevResponse, CreateLiveRecordPlanRequest, DescribeLiveChannelRequest, DescribeSubscriptionStatusResponse, DescribeScenesResponse, DescribeDeviceStreamsResponse, DescribeSIPServerRequest, CreateLiveRecordPlanResponse, DeleteDeviceGroupResponse, DeleteRecordPlanResponse, DeleteMessageForwardResponse, ModifyBindPlanLiveChannelResponse, UpdateDeviceGroupResponse, GetVideoListByConRequest, DescribeLiveRecordPlanByIdRequest, DescribeVideoListResponse, DescribeIPCChannelsRequest, DescribeSubGroupsRequest, DeleteRecordPlanRequest, CreateDeviceGroupResponse, GetVideoListByConResponse, UpdateTimeTemplateResponse, UpdateRecordPlanRequest, ModifyDeviceDataResponse, DescribeStatisticDetailsResponse, DescribeSubGroupsResponse, GetRecordPlanByIdResponse, DeleteDeviceRequest, UpdateDevicePassWordRequest, DescribeMessageForwardRequest, CreateTimeTemplateRequest, CreateMessageForwardRequest, ModifyBindPlanLiveChannelRequest, DescribeLiveStreamRequest, ModifyMessageForwardRequest, ModifyLiveRecordPlanResponse, DescribeAllDeviceListRequest, DescribeRecordDatesByLiveRequest, DescribeDevicePassWordRequest, GetRecordPlanByIdRequest, DescribeLiveChannelListRequest, GetRecordPlanByDevResponse, DeleteVideoListRequest, DescribeStatisticDetailsRequest, CreateRecordPlanRequest, CreateDeviceGroupRequest, UpdateTimeTemplateRequest, DescribeLiveRecordPlanIdsResponse, CreateDeviceResponse, CreateDeviceRequest, DescribeStatisticSummaryResponse, DescribeRecordStreamRequest, BindGroupDevicesRequest, ModifyLiveRecordPlanRequest, GetTimeTemplateByIdResponse, DescribeLiveChannelResponse, DescribeMessageForwardsRequest, ControlDevicePTZResponse, ControlDevicePTZRequest, UpdateDeviceGroupRequest, DescribeChannelsByLiveRecordPlanResponse, DescribeGroupDevicesRequest, DescribeGroupByIdRequest, UpdateDevicePassWordResponse, DeleteChannelRequest, DescribeSubscriptionStatusRequest, DescribeDeviceStreamsRequest, DescribeRecordStreamResponse, CreateRecordPlanResponse, CreateSceneRequest, DescribeLiveVideoListResponse, DeleteDeviceGroupRequest, DescribeLiveRecordPlanByIdResponse, DescribeRecordDatesByLiveResponse, ModifySubscriptionStatusResponse, ModifyDeviceDataRequest, DeleteSceneResponse, GetRecordDatesByDevRequest, DescribeLiveVideoListRequest, GetTimeTemplatesResponse, CreateLiveChannelResponse, DeleteVideoListResponse, ModifyLiveVideoResponse, DescribeIPCChannelsResponse, DescribeAllDeviceListResponse, DescribeStatisticSummaryRequest, DescribeGroupsResponse, DeleteLiveRecordPlanRequest, DeleteDeviceResponse, DeleteLiveVideoListResponse, DescribeDeviceGroupResponse, CreateTimeTemplateResponse, DeleteLiveChannelRequest, DescribeSIPServerResponse, DescribeGroupByPathRequest, DeleteChannelResponse, UpdateRecordPlanResponse, DescribeDeviceGroupRequest, DescribeGroupsRequest, GetRecordPlansResponse, DescribeChannelsByLiveRecordPlanRequest, ModifyLiveChannelResponse, GetTimeTemplateByIdRequest, DescribeMessageForwardsResponse, ModifyVideoInfoRequest, GetRecordPlansRequest, DeleteTimeTemplateRequest, ModifyLiveChannelRequest, DescribeMessageForwardResponse, DescribeLiveRecordPlanIdsRequest, DeleteLiveVideoListRequest, ModifyMessageForwardResponse, DescribeScenesRequest, DeleteLiveRecordPlanResponse, ModifyVideoInfoResponse, DescribeGroupByIdResponse, ControlRecordStreamResponse, DeleteMessageForwardRequest, DeleteLiveChannelResponse, BindGroupDevicesResponse, DescribeVideoListRequest, DescribeLiveChannelListResponse, DescribeDevicePassWordResponse, DescribeBindSceneDevicesRequest, DescribeBindSceneDevicesResponse, ModifyLiveVideoRequest, DescribeGroupByPathResponse, CreateMessageForwardResponse, CreateLiveChannelRequest, DescribeGroupDevicesResponse, DeleteSceneRequest, DescribeLiveStreamResponse } from "./iotvideoindustry_models";
 /**
  * iotvideoindustry client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 本接口(UpdateDeviceGroup)用于修改分组信息。
      */
     UpdateDeviceGroup(req: UpdateDeviceGroupRequest, cb?: (error: string, rep: UpdateDeviceGroupResponse) => void): Promise<UpdateDeviceGroupResponse>;
+    /**
+     * 修改消息转发配置
+     */
+    ModifyMessageForward(req: ModifyMessageForwardRequest, cb?: (error: string, rep: ModifyMessageForwardResponse) => void): Promise<ModifyMessageForwardResponse>;
     /**
      * 本接口(DescribeDeviceStreams)用于获取设备实时流地址。
      */
@@ -83,9 +87,17 @@ RecordId和StartTime/EndTime互斥
      */
     DeleteLiveVideoList(req: DeleteLiveVideoListRequest, cb?: (error: string, rep: DeleteLiveVideoListResponse) => void): Promise<DeleteLiveVideoListResponse>;
     /**
+     * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+     */
+    GetRecordPlanByDev(req: GetRecordPlanByDevRequest, cb?: (error: string, rep: GetRecordPlanByDevResponse) => void): Promise<GetRecordPlanByDevResponse>;
+    /**
      * 编辑直播录制计划
      */
     ModifyLiveRecordPlan(req: ModifyLiveRecordPlanRequest, cb?: (error: string, rep: ModifyLiveRecordPlanResponse) => void): Promise<ModifyLiveRecordPlanResponse>;
+    /**
+     * 查看消息转发配置列表
+     */
+    DescribeMessageForwards(req: DescribeMessageForwardsRequest, cb?: (error: string, rep: DescribeMessageForwardsResponse) => void): Promise<DescribeMessageForwardsResponse>;
     /**
      * 删除通道接口
      */
@@ -99,9 +111,9 @@ RecordId和StartTime/EndTime互斥
      */
     DescribeGroupDevices(req: DescribeGroupDevicesRequest, cb?: (error: string, rep: DescribeGroupDevicesResponse) => void): Promise<DescribeGroupDevicesResponse>;
     /**
-     * 本接口(GetRecordPlanByDev)用于根据设备ID查询其绑定的录制计划.
+     * 删除消息转发配置
      */
-    GetRecordPlanByDev(req: GetRecordPlanByDevRequest, cb?: (error: string, rep: GetRecordPlanByDevResponse) => void): Promise<GetRecordPlanByDevResponse>;
+    DeleteMessageForward(req: DeleteMessageForwardRequest, cb?: (error: string, rep: DeleteMessageForwardResponse) => void): Promise<DeleteMessageForwardResponse>;
     /**
      * 本接口(GetRecordPlans)用于获取用户的全部录制计划。
      */
@@ -118,6 +130,10 @@ RecordId和StartTime/EndTime互斥
      * 根据分组路径查询分组
      */
     DescribeGroupByPath(req: DescribeGroupByPathRequest, cb?: (error: string, rep: DescribeGroupByPathResponse) => void): Promise<DescribeGroupByPathResponse>;
+    /**
+     * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
+     */
+    DescribeStatisticSummary(req: DescribeStatisticSummaryRequest, cb?: (error: string, rep: DescribeStatisticSummaryResponse) => void): Promise<DescribeStatisticSummaryResponse>;
     /**
      * 直播录像存储日期列表
      */
@@ -164,9 +180,9 @@ RecordId和StartTime/EndTime互斥
      */
     DeleteRecordPlan(req: DeleteRecordPlanRequest, cb?: (error: string, rep: DeleteRecordPlanResponse) => void): Promise<DeleteRecordPlanResponse>;
     /**
-     * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
+     * 创建消息转发配置
      */
-    DescribeStatisticSummary(req: DescribeStatisticSummaryRequest, cb?: (error: string, rep: DescribeStatisticSummaryResponse) => void): Promise<DescribeStatisticSummaryResponse>;
+    CreateMessageForward(req: CreateMessageForwardRequest, cb?: (error: string, rep: CreateMessageForwardResponse) => void): Promise<CreateMessageForwardResponse>;
     /**
      * 删除直播录制计划
      */
@@ -191,6 +207,10 @@ RecordId和StartTime/EndTime互斥
      * 编辑直播接口
      */
     ModifyLiveChannel(req: ModifyLiveChannelRequest, cb?: (error: string, rep: ModifyLiveChannelResponse) => void): Promise<ModifyLiveChannelResponse>;
+    /**
+     * 查看消息转发配置详情
+     */
+    DescribeMessageForward(req: DescribeMessageForwardRequest, cb?: (error: string, rep: DescribeMessageForwardResponse) => void): Promise<DescribeMessageForwardResponse>;
     /**
      * 本接口(DeleteDeviceGroup)用于删除分组。
      */

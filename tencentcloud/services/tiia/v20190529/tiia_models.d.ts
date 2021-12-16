@@ -277,6 +277,10 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
       * 针对入库时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。
       */
     Filter?: string;
+    /**
+      * 图像主体区域。
+      */
+    ImageRect?: ImageRect;
 }
 /**
  * RecognizeCar返回参数结构体
@@ -484,6 +488,7 @@ export interface CreateGroupRequest {
 类型：
 1: 通用图库，以用户输入图提取特征。
 2: 灰度图库，输入图和搜索图均转为灰度图提取特征。
+3: 针对电商（通用品类）和logo优化。
       */
     GroupType?: number;
 }
@@ -793,6 +798,27 @@ LOCATION，主体位置识别；
 支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
       */
     Scenes?: Array<string>;
+}
+/**
+ * 图像主体区域坐标
+ */
+export interface ImageRect {
+    /**
+      * 左上角横坐标。
+      */
+    X: number;
+    /**
+      * 左上角纵坐标。
+      */
+    Y: number;
+    /**
+      * 宽度。
+      */
+    Width: number;
+    /**
+      * 高度。
+      */
+    Height: number;
 }
 /**
  * CreateImage返回参数结构体

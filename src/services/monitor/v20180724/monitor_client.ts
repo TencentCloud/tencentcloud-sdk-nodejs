@@ -26,8 +26,10 @@ import {
   DescribeProductEventListRequest,
   AlarmPolicyTriggerTask,
   DescribeServiceDiscoveryResponse,
+  PrometheusTag,
   DescribePolicyConditionListMetric,
   DescribeAlertRulesRequest,
+  DescribePrometheusInstancesResponse,
   DescribePolicyGroupListResponse,
   BindingPolicyObjectRequest,
   CreateServiceDiscoveryResponse,
@@ -44,6 +46,7 @@ import {
   DescribePolicyGroupInfoResponse,
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
+  PrometheusInstancesItem,
   PutMonitorDataRequest,
   CreateAlertRuleResponse,
   CreatePolicyGroupResponse,
@@ -90,6 +93,7 @@ import {
   DescribeProductEventListEventsDimensions,
   ModifyAlarmPolicyConditionResponse,
   Dimension,
+  PrometheusInstanceGrantInfo,
   DescribeBindingPolicyObjectListInstance,
   Point,
   UpdateAlertRuleStateRequest,
@@ -183,6 +187,7 @@ import {
   DescribePolicyConditionListCondition,
   DeleteServiceDiscoveryRequest,
   AlarmPolicyEventCondition,
+  DescribePrometheusInstancesRequest,
   DescribeProductEventListOverView,
   DescribePolicyConditionListConfigManualCalcValue,
   SetDefaultAlarmPolicyResponse,
@@ -474,6 +479,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 启停告警策略
+   */
+  async ModifyAlarmPolicyStatus(
+    req: ModifyAlarmPolicyStatusRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyStatusResponse) => void
+  ): Promise<ModifyAlarmPolicyStatusResponse> {
+    return this.request("ModifyAlarmPolicyStatus", req, cb)
+  }
+
+  /**
    * 云监控告警获取告警通知模板所有回调URL
    */
   async DescribeAlarmNoticeCallbacks(
@@ -621,13 +636,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启停告警策略
-   */
-  async ModifyAlarmPolicyStatus(
-    req: ModifyAlarmPolicyStatusRequest,
-    cb?: (error: string, rep: ModifyAlarmPolicyStatusResponse) => void
-  ): Promise<ModifyAlarmPolicyStatusResponse> {
-    return this.request("ModifyAlarmPolicyStatus", req, cb)
+     * 本接口 (DescribePrometheusInstances) 用于查询一个或多个实例的详细信息。
+<ul>
+<li>可以根据实例ID、实例名称或者实例状态等信息来查询实例的详细信息</li>
+<li>如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的实例。</li>
+</ul>
+     */
+  async DescribePrometheusInstances(
+    req: DescribePrometheusInstancesRequest,
+    cb?: (error: string, rep: DescribePrometheusInstancesResponse) => void
+  ): Promise<DescribePrometheusInstancesResponse> {
+    return this.request("DescribePrometheusInstances", req, cb)
   }
 
   /**
