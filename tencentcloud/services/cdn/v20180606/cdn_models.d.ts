@@ -1343,6 +1343,11 @@ BotType=UCB时，为二期接口，暂时未定义内容
       * BOT记录唯一ID，用于查询访问详情
       */
     Id: string;
+    /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain: string;
 }
 /**
  * DescribeEventLogData请求参数结构体
@@ -5460,6 +5465,10 @@ IDC-IP Google
       * 过滤的IP
       */
     FilterIp?: string;
+    /**
+      * 域名列表，为空表示查询AppID维度数据
+      */
+    Domains?: Array<string>;
 }
 /**
  * 回源 301/302 状态码自动跟随配置，默认为关闭状态

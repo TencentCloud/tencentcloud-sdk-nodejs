@@ -1006,43 +1006,43 @@ export interface AddRecordBatch {
   Value: string
 
   /**
-   * 子域名(主机记录)。
+   * 子域名(主机记录)，默认为@。
    */
   SubDomain?: string
 
   /**
-   * 解析记录的线路，详见 DescribeRecordLineList 接口。
+   * 解析记录的线路，详见 DescribeRecordLineList 接口，RecordLine和RecordLineId都未填时，默认为「默认」线路。
    */
   RecordLine?: string
 
   /**
-   * 解析记录的线路 ID，RecordLine和RecordLineId都有时，系统优先取 RecordLineId
+   * 解析记录的线路 ID，RecordLine和RecordLineId都有时，系统优先取 RecordLineId。
    */
   RecordLineId?: string
 
   /**
-      * 记录权重值。
+      * 记录权重值(暂未支持)。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Weight?: number
 
   /**
-   * 记录的 MX 记录值，非 MX 记录类型，默认为 0，MX记录则必选
+   * 记录的 MX 记录值，非 MX 记录类型，默认为 0，MX记录则必选。
    */
   MX?: number
 
   /**
-   * 记录的 TTL 值，默认600
+   * 记录的 TTL 值，默认600。
    */
   TTL?: number
 
   /**
-   * 记录状态。0表示禁用，1表示启用，默认启用
+   * 记录状态(暂未支持)。0表示禁用，1表示启用。默认启用。
    */
   Enabled?: number
 
   /**
-   * 记录别名
+   * 记录备注(暂未支持)。
    */
   Remark?: string
 }

@@ -15,9 +15,17 @@ export interface DescribeDatabasesRequest {
       */
     KeyWord?: string;
     /**
-      * 数据源唯名称，该名称可以通过DescribeDatasourceConnection接口查询到。默认为CosDataCatalog
+      * 数据源唯名称，该名称可以通过DescribeDatasourceConnection接口查询到。默认为DataLakeCatalog
       */
     DatasourceConnectionName?: string;
+    /**
+      * 排序字段，当前版本仅支持按库名排序
+      */
+    Sort?: string;
+    /**
+      * 排序类型：false：降序（默认）、true：升序
+      */
+    Asc?: boolean;
 }
 /**
  * 工作组部分信息
@@ -272,7 +280,7 @@ export interface CreateDatabaseRequest {
       */
     DatabaseInfo: DatabaseInfo;
     /**
-      * 数据源名称，默认为CosDataCatalog
+      * 数据源名称，默认为DataLakeCatalog
       */
     DatasourceConnectionName?: string;
 }
@@ -332,10 +340,12 @@ export interface DescribeTasksRequest {
 task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。
 task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。
 task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。
+task-operator- string （子uin过滤）
+task-type -string （任务类型过滤）分导入任务和sql任务
       */
     Filters?: Array<Filter>;
     /**
-      * 排序字段，支持如下字段类型，create-time
+      * 排序字段，支持如下字段类型，create-time（创建时间，默认）、update-time（更新时间）
       */
     SortBy?: string;
     /**
@@ -350,6 +360,10 @@ task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：D
       * 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻
       */
     EndTime?: string;
+    /**
+      * 支持计算资源名字筛选
+      */
+    DataEngineName?: string;
 }
 /**
  * script实例。
@@ -427,6 +441,21 @@ export interface TableBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DatasourceConnectionName?: string;
+    /**
+      * 该数据表备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TableComment?: string;
+    /**
+      * 具体类型，表or视图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
+    /**
+      * 数据格式类型，hive，iceberg等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TableFormat?: string;
 }
 /**
  * 批量顺序执行任务集合
@@ -522,6 +551,10 @@ export interface CreateTaskRequest {
       * 默认数据源名称。
       */
     DatasourceConnectionName?: string;
+    /**
+      * 数据引擎名称，不填提交到默认集群
+      */
+    DataEngineName?: string;
 }
 /**
  * 数据库和数据表属性信息
@@ -662,6 +695,22 @@ view-id - String - （过滤条件）view id形如：12342。
       * 数据库所属的数据源名称
       */
     DatasourceConnectionName?: string;
+    /**
+      * 排序字段
+      */
+    Sort?: string;
+    /**
+      * 排序规则
+      */
+    Asc?: boolean;
+    /**
+      * 开始时间
+      */
+    StartTime?: string;
+    /**
+      * 结束时间
+      */
+    EndTime?: string;
 }
 /**
  * 授权用户信息
@@ -814,6 +863,46 @@ export interface TaskResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProgressDetail: string;
+    /**
+      * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 计算资源id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataEngineId: string;
+    /**
+      * 执行sql的子uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OperateUin: string;
+    /**
+      * 计算资源名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataEngineName: string;
+    /**
+      * 导入类型是本地导入还是cos
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InputType: string;
+    /**
+      * 导入配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InputConf: string;
+    /**
+      * 数据条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataNumber: number;
+    /**
+      * 查询数据能不能下载
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CanDownload: boolean;
 }
 /**
  * 文本格式
@@ -946,6 +1035,21 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Nullable?: string;
+    /**
+      * 字段位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Position?: number;
+    /**
+      * 字段创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: string;
+    /**
+      * 字段修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiedTime?: string;
 }
 /**
  * 查询列表过滤条件参数
@@ -1152,9 +1256,29 @@ table-id - String - （过滤条件）table id形如：12342。
       */
     Filters?: Array<Filter>;
     /**
-      * 指定查询的数据源名称，默认为CosDataCatalog
+      * 指定查询的数据源名称，默认为DataLakeCatalog
       */
     DatasourceConnectionName?: string;
+    /**
+      * 起始时间：用于对更新时间的筛选
+      */
+    StartTime?: string;
+    /**
+      * 终止时间：用于对更新时间的筛选
+      */
+    EndTime?: string;
+    /**
+      * 排序字段，支持：ModifiedTime（默认）；CreateTime
+      */
+    Sort?: string;
+    /**
+      * 排序字段，false：降序（默认）；true
+      */
+    Asc?: boolean;
+    /**
+      * table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW
+      */
+    TableType?: string;
 }
 /**
  * DescribeDatabases返回参数结构体
@@ -1178,11 +1302,11 @@ export interface DescribeDatabasesResponse {
  */
 export interface DatabaseInfo {
     /**
-      * 数据库名称。
+      * 数据库名称，长度0~128，支持数字、字母下划线，不允许数字大头，统一转换为小写。
       */
     DatabaseName: string;
     /**
-      * 数据库描述信息，长度 0~256。
+      * 数据库描述信息，长度 0~500。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Comment?: string;
@@ -1191,6 +1315,11 @@ export interface DatabaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Properties?: Array<Property>;
+    /**
+      * 数据库cos路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Location?: string;
 }
 /**
  * UnbindWorkGroupsFromUser请求参数结构体
@@ -1297,9 +1426,13 @@ export interface CreateTasksRequest {
       */
     Tasks: TasksInfo;
     /**
-      * 数据源名称，默认为COSDataCatalog
+      * 数据源名称，默认为DataLakeCatalog
       */
     DatasourceConnectionName?: string;
+    /**
+      * 计算引擎名称，不填任务提交到默认集群
+      */
+    DataEngineName?: string;
 }
 /**
  * CreateTask返回参数结构体
@@ -1581,7 +1714,7 @@ export interface DatabaseResponseInfo {
       */
     Comment?: string;
     /**
-      * 数据库属性列表。
+      * 允许针对数据库的属性元数据信息进行指定。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Properties?: Array<Property>;

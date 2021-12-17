@@ -280,7 +280,7 @@ export interface CreateMigrationResponse {
     /**
       * 迁移任务ID
       */
-    MigrateId?: number;
+    MigrateId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -490,7 +490,7 @@ export interface DescribeDBSecurityGroupsResponse {
     /**
       * 安全组详情。
       */
-    SecurityGroupSet?: Array<SecurityGroup>;
+    SecurityGroupSet: Array<SecurityGroup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1498,7 +1498,7 @@ export interface ModifyAccountPrivilegeResponse {
     /**
       * 异步任务流程ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1588,11 +1588,11 @@ export interface DescribeDBsResponse {
     /**
       * 数据库数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例数据库列表
       */
-    DBInstances?: Array<InstanceDBDetail>;
+    DBInstances: Array<InstanceDBDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3259,11 +3259,11 @@ export interface DescribeProductConfigResponse {
     /**
       * 规格信息数组
       */
-    SpecInfoList?: Array<SpecInfo>;
+    SpecInfoList: Array<SpecInfo>;
     /**
       * 返回总共多少条数据
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4756,15 +4756,15 @@ export interface DescribeAccountsResponse {
     /**
       * 实例ID
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 账户信息列表
       */
-    Accounts?: Array<AccountDetail>;
+    Accounts: Array<AccountDetail>;
     /**
       * 总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

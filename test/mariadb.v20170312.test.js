@@ -98,6 +98,16 @@ it("mariadb.v20170312.ModifyRealServerAccessStrategy", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeFileDownloadUrl", async function () {
+    try {
+       const data = await client.DescribeFileDownloadUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeBackupTime", async function () {
     try {
        const data = await client.DescribeBackupTime({})

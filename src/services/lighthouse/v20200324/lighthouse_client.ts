@@ -243,7 +243,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云盘数量。
+   * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
    */
   async DescribeInstancesDiskNum(
     req: DescribeInstancesDiskNumRequest,
@@ -360,7 +360,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDisksRenewFlag）用于修改磁盘续费标识。
+   * 本接口（ModifyDisksRenewFlag）用于修改云硬盘续费标识。
    */
   async ModifyDisksRenewFlag(
     req: ModifyDisksRenewFlagRequest,
@@ -425,7 +425,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（AttachDisks）用于挂载一个或多个弹性云盘。
+   * 本接口（AttachDisks）用于挂载一个或多个云硬盘。
    */
   async AttachDisks(
     req: AttachDisksRequest,
@@ -541,7 +541,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDisksDeniedActions）用于查询一个或多个磁盘的操作限制列表信息
+   * 本接口（DescribeDisksDeniedActions）用于查询一个或多个云硬盘的操作限制列表信息。
    */
   async DescribeDisksDeniedActions(
     req: DescribeDisksDeniedActionsRequest,
@@ -561,7 +561,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDisks）用于查询磁盘信息。
+   * 本接口（DescribeDisks）用于查询云硬盘信息。
    */
   async DescribeDisks(
     req: DescribeDisksRequest,
@@ -642,7 +642,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDisksAttribute)用于修改磁盘属性
+   * 本接口(ModifyDisksAttribute)用于修改云硬盘属性。
    */
   async ModifyDisksAttribute(
     req: ModifyDisksAttributeRequest,
@@ -685,7 +685,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDisksReturnable）用于查询磁盘是否可退还。
+   * 本接口（DescribeDisksReturnable）用于查询云硬盘是否可退还。
    */
   async DescribeDisksReturnable(
     req: DescribeDisksReturnableRequest,
@@ -695,7 +695,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（InquirePriceRenewDisks）用于续费磁盘询价。
+   * 本接口（InquirePriceRenewDisks）用于续费云硬盘询价。
    */
   async InquirePriceRenewDisks(
     req: InquirePriceRenewDisksRequest,
@@ -813,7 +813,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（TerminateDisks）用于销毁一个或多个磁盘。
+   * 本接口（TerminateDisks）用于销毁一个或多个云硬盘。
    */
   async TerminateDisks(
     req: TerminateDisksRequest,
@@ -878,7 +878,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息
+   * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息。
    */
   async DescribeDiskDiscount(
     req: DescribeDiskDiscountRequest,
@@ -943,7 +943,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DetachDisks）用于卸载一个或多个弹性云盘。
+   * 本接口（DetachDisks）用于卸载一个或多个云硬盘。
    */
   async DetachDisks(
     req: DetachDisksRequest,

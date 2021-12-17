@@ -230,6 +230,23 @@ export interface CancelDcnJobResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFileDownloadUrl请求参数结构体
+ */
+export interface DescribeFileDownloadUrlRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例分片ID
+      */
+    ShardId: string;
+    /**
+      * 不带签名的文件路径
+      */
+    FilePath: string;
+}
+/**
  * DescribeDBSyncMode返回参数结构体
  */
 export interface DescribeDBSyncModeResponse {
@@ -1416,6 +1433,19 @@ export interface DescribeDcnDetailRequest {
       * 实例ID
       */
     InstanceId: string;
+}
+/**
+ * DescribeFileDownloadUrl返回参数结构体
+ */
+export interface DescribeFileDownloadUrlResponse {
+    /**
+      * 带签名的下载连接
+      */
+    PreSignedUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyDBParameters返回参数结构体

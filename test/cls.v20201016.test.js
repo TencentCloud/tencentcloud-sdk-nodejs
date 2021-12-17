@@ -48,6 +48,16 @@ it("cls.v20201016.GetAlarmLog", async function () {
     }
 })
 
+it("cls.v20201016.CreateConsumer", async function () {
+    try {
+       const data = await client.CreateConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyTopic", async function () {
     try {
        const data = await client.ModifyTopic({})
@@ -168,9 +178,9 @@ it("cls.v20201016.CreateShipper", async function () {
     }
 })
 
-it("cls.v20201016.ModifyShipper", async function () {
+it("cls.v20201016.ModifyConsumer", async function () {
     try {
-       const data = await client.ModifyShipper({})
+       const data = await client.ModifyConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +208,9 @@ it("cls.v20201016.CreateAlarmNotice", async function () {
     }
 })
 
-it("cls.v20201016.DescribeConfigs", async function () {
+it("cls.v20201016.DeleteConsumer", async function () {
     try {
-       const data = await client.DescribeConfigs({})
+       const data = await client.DeleteConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +418,16 @@ it("cls.v20201016.CreateAsyncContextTask", async function () {
     }
 })
 
+it("cls.v20201016.ModifyShipper", async function () {
+    try {
+       const data = await client.ModifyShipper({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateConfig", async function () {
     try {
        const data = await client.CreateConfig({})
@@ -471,6 +491,26 @@ it("cls.v20201016.DeleteAlarm", async function () {
 it("cls.v20201016.DescribeLogContext", async function () {
     try {
        const data = await client.DescribeLogContext({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConsumer", async function () {
+    try {
+       const data = await client.DescribeConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConfigs", async function () {
+    try {
+       const data = await client.DescribeConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

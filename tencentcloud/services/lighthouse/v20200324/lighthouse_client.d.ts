@@ -33,7 +33,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteBlueprints(req: DeleteBlueprintsRequest, cb?: (error: string, rep: DeleteBlueprintsResponse) => void): Promise<DeleteBlueprintsResponse>;
     /**
-     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云盘数量。
+     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
      */
     DescribeInstancesDiskNum(req: DescribeInstancesDiskNumRequest, cb?: (error: string, rep: DescribeInstancesDiskNumResponse) => void): Promise<DescribeInstancesDiskNumResponse>;
     /**
@@ -90,7 +90,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteKeyPairs(req: DeleteKeyPairsRequest, cb?: (error: string, rep: DeleteKeyPairsResponse) => void): Promise<DeleteKeyPairsResponse>;
     /**
-     * 本接口（ModifyDisksRenewFlag）用于修改磁盘续费标识。
+     * 本接口（ModifyDisksRenewFlag）用于修改云硬盘续费标识。
      */
     ModifyDisksRenewFlag(req: ModifyDisksRenewFlagRequest, cb?: (error: string, rep: ModifyDisksRenewFlagResponse) => void): Promise<ModifyDisksRenewFlagResponse>;
     /**
@@ -119,7 +119,7 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceCreateBlueprint(req: InquirePriceCreateBlueprintRequest, cb?: (error: string, rep: InquirePriceCreateBlueprintResponse) => void): Promise<InquirePriceCreateBlueprintResponse>;
     /**
-     * 本接口（AttachDisks）用于挂载一个或多个弹性云盘。
+     * 本接口（AttachDisks）用于挂载一个或多个云硬盘。
      */
     AttachDisks(req: AttachDisksRequest, cb?: (error: string, rep: AttachDisksResponse) => void): Promise<AttachDisksResponse>;
     /**
@@ -181,7 +181,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceLoginKeyPairAttribute(req: DescribeInstanceLoginKeyPairAttributeRequest, cb?: (error: string, rep: DescribeInstanceLoginKeyPairAttributeResponse) => void): Promise<DescribeInstanceLoginKeyPairAttributeResponse>;
     /**
-     * 本接口（DescribeDisksDeniedActions）用于查询一个或多个磁盘的操作限制列表信息
+     * 本接口（DescribeDisksDeniedActions）用于查询一个或多个云硬盘的操作限制列表信息。
      */
     DescribeDisksDeniedActions(req: DescribeDisksDeniedActionsRequest, cb?: (error: string, rep: DescribeDisksDeniedActionsResponse) => void): Promise<DescribeDisksDeniedActionsResponse>;
     /**
@@ -189,7 +189,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeFirewallRules(req: DescribeFirewallRulesRequest, cb?: (error: string, rep: DescribeFirewallRulesResponse) => void): Promise<DescribeFirewallRulesResponse>;
     /**
-     * 本接口（DescribeDisks）用于查询磁盘信息。
+     * 本接口（DescribeDisks）用于查询云硬盘信息。
      */
     DescribeDisks(req: DescribeDisksRequest, cb?: (error: string, rep: DescribeDisksResponse) => void): Promise<DescribeDisksResponse>;
     /**
@@ -222,7 +222,7 @@ export declare class Client extends AbstractClient {
      */
     CreateInstanceSnapshot(req: CreateInstanceSnapshotRequest, cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void): Promise<CreateInstanceSnapshotResponse>;
     /**
-     * 本接口(ModifyDisksAttribute)用于修改磁盘属性
+     * 本接口(ModifyDisksAttribute)用于修改云硬盘属性。
      */
     ModifyDisksAttribute(req: ModifyDisksAttributeRequest, cb?: (error: string, rep: ModifyDisksAttributeResponse) => void): Promise<ModifyDisksAttributeResponse>;
     /**
@@ -241,11 +241,11 @@ export declare class Client extends AbstractClient {
      */
     ModifySnapshotAttribute(req: ModifySnapshotAttributeRequest, cb?: (error: string, rep: ModifySnapshotAttributeResponse) => void): Promise<ModifySnapshotAttributeResponse>;
     /**
-     * 本接口（DescribeDisksReturnable）用于查询磁盘是否可退还。
+     * 本接口（DescribeDisksReturnable）用于查询云硬盘是否可退还。
      */
     DescribeDisksReturnable(req: DescribeDisksReturnableRequest, cb?: (error: string, rep: DescribeDisksReturnableResponse) => void): Promise<DescribeDisksReturnableResponse>;
     /**
-     * 本接口（InquirePriceRenewDisks）用于续费磁盘询价。
+     * 本接口（InquirePriceRenewDisks）用于续费云硬盘询价。
      */
     InquirePriceRenewDisks(req: InquirePriceRenewDisksRequest, cb?: (error: string, rep: InquirePriceRenewDisksResponse) => void): Promise<InquirePriceRenewDisksResponse>;
     /**
@@ -309,7 +309,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceVncUrl(req: DescribeInstanceVncUrlRequest, cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void): Promise<DescribeInstanceVncUrlResponse>;
     /**
-     * 本接口（TerminateDisks）用于销毁一个或多个磁盘。
+     * 本接口（TerminateDisks）用于销毁一个或多个云硬盘。
      */
     TerminateDisks(req: TerminateDisksRequest, cb?: (error: string, rep: TerminateDisksResponse) => void): Promise<TerminateDisksResponse>;
     /**
@@ -338,7 +338,7 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceCreateDisks(req: InquirePriceCreateDisksRequest, cb?: (error: string, rep: InquirePriceCreateDisksResponse) => void): Promise<InquirePriceCreateDisksResponse>;
     /**
-     * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息
+     * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息。
      */
     DescribeDiskDiscount(req: DescribeDiskDiscountRequest, cb?: (error: string, rep: DescribeDiskDiscountResponse) => void): Promise<DescribeDiskDiscountResponse>;
     /**
@@ -367,7 +367,7 @@ export declare class Client extends AbstractClient {
      */
     CreateBlueprint(req: CreateBlueprintRequest, cb?: (error: string, rep: CreateBlueprintResponse) => void): Promise<CreateBlueprintResponse>;
     /**
-     * 本接口（DetachDisks）用于卸载一个或多个弹性云盘。
+     * 本接口（DetachDisks）用于卸载一个或多个云硬盘。
      */
     DetachDisks(req: DetachDisksRequest, cb?: (error: string, rep: DetachDisksResponse) => void): Promise<DetachDisksResponse>;
 }

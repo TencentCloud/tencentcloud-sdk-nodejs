@@ -18,6 +18,16 @@ const client = new tencentcloud.cat.v20180409.Client({
 })
 describe("cat.v20180409.test.js", function () {
 
+it("cat.v20180409.SuspendProbeTask", async function () {
+    try {
+       const data = await client.SuspendProbeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cat.v20180409.GetRespTimeTrendEx", async function () {
     try {
        const data = await client.GetRespTimeTrendEx({})
@@ -41,6 +51,16 @@ it("cat.v20180409.ModifyAgentGroup", async function () {
 it("cat.v20180409.DescribeTasksByType", async function () {
     try {
        const data = await client.DescribeTasksByType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cat.v20180409.VerifyResult", async function () {
+    try {
+       const data = await client.VerifyResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +128,16 @@ it("cat.v20180409.DescribeTaskDetail", async function () {
     }
 })
 
+it("cat.v20180409.CreateProbeTasks", async function () {
+    try {
+       const data = await client.CreateProbeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cat.v20180409.DescribeAlarmTopic", async function () {
     try {
        const data = await client.DescribeAlarmTopic({})
@@ -158,6 +188,16 @@ it("cat.v20180409.GetDailyAvailRatio", async function () {
     }
 })
 
+it("cat.v20180409.ResumeProbeTask", async function () {
+    try {
+       const data = await client.ResumeProbeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cat.v20180409.ModifyTaskEx", async function () {
     try {
        const data = await client.ModifyTaskEx({})
@@ -198,9 +238,19 @@ it("cat.v20180409.DescribeCatLogs", async function () {
     }
 })
 
-it("cat.v20180409.VerifyResult", async function () {
+it("cat.v20180409.UpdateProbeTaskConfigurationList", async function () {
     try {
-       const data = await client.VerifyResult({})
+       const data = await client.UpdateProbeTaskConfigurationList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cat.v20180409.DescribeDetailedSingleProbeData", async function () {
+    try {
+       const data = await client.DescribeDetailedSingleProbeData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +261,16 @@ it("cat.v20180409.VerifyResult", async function () {
 it("cat.v20180409.BindAlarmPolicy", async function () {
     try {
        const data = await client.BindAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cat.v20180409.DescribeProbeTasks", async function () {
+    try {
+       const data = await client.DescribeProbeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +318,16 @@ it("cat.v20180409.RunTask", async function () {
     }
 })
 
+it("cat.v20180409.DescribeProbeNodes", async function () {
+    try {
+       const data = await client.DescribeProbeNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cat.v20180409.GetReturnCodeInfo", async function () {
     try {
        const data = await client.GetReturnCodeInfo({})
@@ -271,6 +341,16 @@ it("cat.v20180409.GetReturnCodeInfo", async function () {
 it("cat.v20180409.DescribeAlarmsByTask", async function () {
     try {
        const data = await client.DescribeAlarmsByTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cat.v20180409.DeleteProbeTask", async function () {
+    try {
+       const data = await client.DeleteProbeTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,75 +18,98 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  GetReturnCodeInfoResponse,
   ModifyAgentGroupRequest,
-  BindAlarmPolicyResponse,
   AlarmInfo,
-  GetDailyAvailRatioRequest,
-  ModifyTaskExResponse,
-  DescribeAgentsRequest,
-  CatReturnSummary,
-  CatReturnDetail,
+  CreateTaskExResponse,
+  DescribeProbeNodesResponse,
   RunTaskRequest,
-  DimensionsDetail,
-  GetRespTimeTrendExResponse,
-  ModifyAgentGroupResponse,
   DescribeTaskDetailResponse,
-  IspDetail,
-  DataPointMetric,
-  GetReturnCodeInfoRequest,
-  DescribeCatLogsRequest,
-  DescribeAgentsResponse,
-  GetAvailRatioHistoryResponse,
-  CreateAgentGroupResponse,
   DeleteTasksResponse,
-  DescribeAlarmsResponse,
-  GetRealAvailRatioRequest,
-  DeleteAgentGroupResponse,
-  AgentGroup,
-  DescribeTaskDetailRequest,
-  DescribeTasksByTypeResponse,
-  GetResultSummaryResponse,
-  GetReturnCodeHistoryRequest,
+  CatTaskDetail,
   BindAlarmPolicyRequest,
-  DescribeAgentGroupsResponse,
-  ProvinceDetail,
-  AlarmTopic,
+  DeleteProbeTaskRequest,
   ResultSummary,
-  PauseTaskRequest,
-  GetResultSummaryRequest,
+  DescribeDetailedSingleProbeDataResponse,
+  DescribeAlarmsByTaskRequest,
   DescribeAlarmsRequest,
   DescribeUserLimitResponse,
-  GetRespTimeTrendExRequest,
-  DeleteTasksRequest,
-  DescribeAlarmsByTaskRequest,
-  PauseTaskResponse,
-  CreateAgentGroupRequest,
-  CatLog,
-  GetDailyAvailRatioResponse,
-  DeleteAgentGroupRequest,
-  GetAvailRatioHistoryRequest,
-  DescribeAgentGroupsRequest,
-  DescribeAlarmsByTaskResponse,
-  ModifyTaskExRequest,
-  DescribeAlarmTopicRequest,
   CreateTaskExRequest,
-  GetTaskTotalNumberRequest,
-  TaskAlarm,
-  DescribeTasksByTypeRequest,
-  VerifyResultRequest,
-  VerifyResultResponse,
-  CatTaskDetail,
-  GetReturnCodeHistoryResponse,
+  PauseTaskRequest,
+  GetResultSummaryRequest,
+  ProbeTask,
   DataPoint,
   DescribeAlarmTopicResponse,
-  GetRealAvailRatioResponse,
-  RunTaskResponse,
-  CatAgent,
-  DescribeCatLogsResponse,
-  GetTaskTotalNumberResponse,
-  CreateTaskExResponse,
   DescribeUserLimitRequest,
+  Label,
+  DescribeAgentsRequest,
+  CatReturnDetail,
+  IspDetail,
+  GetReturnCodeInfoRequest,
+  DescribeAgentsResponse,
+  CreateAgentGroupResponse,
+  DescribeDetailedSingleProbeDataRequest,
+  DeleteAgentGroupResponse,
+  AgentGroup,
+  GetReturnCodeHistoryRequest,
+  ProvinceDetail,
+  GetRealAvailRatioResponse,
+  UpdateProbeTaskConfigurationListResponse,
+  CreateAgentGroupRequest,
+  ResumeProbeTaskResponse,
+  ModifyTaskExResponse,
+  DescribeAlarmsByTaskResponse,
+  ModifyTaskExRequest,
+  ResumeProbeTaskRequest,
+  DescribeTasksByTypeRequest,
+  NodeDefine,
+  GetReturnCodeHistoryResponse,
+  GetAvailRatioHistoryRequest,
+  GetTaskTotalNumberResponse,
+  DimensionsDetail,
+  GetDailyAvailRatioRequest,
+  CatReturnSummary,
+  TaskResult,
+  SuspendProbeTaskResponse,
+  GetRespTimeTrendExResponse,
+  DataPointMetric,
+  DescribeCatLogsRequest,
+  GetAvailRatioHistoryResponse,
+  DescribeProbeTasksResponse,
+  DescribeAlarmsResponse,
+  DescribeTasksByTypeResponse,
+  DescribeAlarmTopicRequest,
+  DescribeAgentGroupsResponse,
+  SuspendProbeTaskRequest,
+  GetRespTimeTrendExRequest,
+  UpdateProbeTaskConfigurationListRequest,
+  CreateProbeTasksRequest,
+  CatLog,
+  DescribeAgentGroupsRequest,
+  TaskAlarm,
+  DescribeCatLogsResponse,
+  DetailedSingleDataDefine,
+  GetReturnCodeInfoResponse,
+  BindAlarmPolicyResponse,
+  RunTaskResponse,
+  Field,
+  ProbeTaskBasicConfiguration,
+  VerifyResultRequest,
+  GetTaskTotalNumberRequest,
+  ModifyAgentGroupResponse,
+  DescribeTaskDetailRequest,
+  GetResultSummaryResponse,
+  VerifyResultResponse,
+  AlarmTopic,
+  DeleteTasksRequest,
+  DescribeProbeTasksRequest,
+  PauseTaskResponse,
+  GetDailyAvailRatioResponse,
+  DeleteAgentGroupRequest,
+  GetRealAvailRatioRequest,
+  DeleteProbeTaskResponse,
+  CreateProbeTasksResponse,
+  DescribeProbeNodesRequest,
+  CatAgent,
 } from "./cat_models"
 
 /**
@@ -96,6 +119,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cat.tencentcloudapi.com", "2018-04-09", clientConfig)
+  }
+
+  /**
+   * 暂停拨测任务
+   */
+  async SuspendProbeTask(
+    req: SuspendProbeTaskRequest,
+    cb?: (error: string, rep: SuspendProbeTaskResponse) => void
+  ): Promise<SuspendProbeTaskResponse> {
+    return this.request("SuspendProbeTask", req, cb)
   }
 
   /**
@@ -126,6 +159,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTasksByTypeResponse) => void
   ): Promise<DescribeTasksByTypeResponse> {
     return this.request("DescribeTasksByType", req, cb)
+  }
+
+  /**
+   * 验证拨测任务，结果验证查询（验证成功的，才建议创建拨测任务）
+   */
+  async VerifyResult(
+    req: VerifyResultRequest,
+    cb?: (error: string, rep: VerifyResultResponse) => void
+  ): Promise<VerifyResultResponse> {
+    return this.request("VerifyResult", req, cb)
   }
 
   /**
@@ -189,6 +232,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量创建探测任务
+   */
+  async CreateProbeTasks(
+    req: CreateProbeTasksRequest,
+    cb?: (error: string, rep: CreateProbeTasksResponse) => void
+  ): Promise<CreateProbeTasksResponse> {
+    return this.request("CreateProbeTasks", req, cb)
+  }
+
+  /**
    * 查询用户的告警主题列表
    */
   async DescribeAlarmTopic(
@@ -239,6 +292,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 恢复拨测任务
+   */
+  async ResumeProbeTask(
+    req: ResumeProbeTaskRequest,
+    cb?: (error: string, rep: ResumeProbeTaskResponse) => void
+  ): Promise<ResumeProbeTaskResponse> {
+    return this.request("ResumeProbeTask", req, cb)
+  }
+
+  /**
    * 修改拨测任务(扩展)
    */
   async ModifyTaskEx(
@@ -279,13 +342,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 验证拨测任务，结果验证查询（验证成功的，才建议创建拨测任务）
+   * 批量更新拨测任务配置
    */
-  async VerifyResult(
-    req: VerifyResultRequest,
-    cb?: (error: string, rep: VerifyResultResponse) => void
-  ): Promise<VerifyResultResponse> {
-    return this.request("VerifyResult", req, cb)
+  async UpdateProbeTaskConfigurationList(
+    req: UpdateProbeTaskConfigurationListRequest,
+    cb?: (error: string, rep: UpdateProbeTaskConfigurationListResponse) => void
+  ): Promise<UpdateProbeTaskConfigurationListResponse> {
+    return this.request("UpdateProbeTaskConfigurationList", req, cb)
+  }
+
+  /**
+   * 根据时间范围、任务ID、运营商等条件查询单次拨测详情数据
+   */
+  async DescribeDetailedSingleProbeData(
+    req: DescribeDetailedSingleProbeDataRequest,
+    cb?: (error: string, rep: DescribeDetailedSingleProbeDataResponse) => void
+  ): Promise<DescribeDetailedSingleProbeDataResponse> {
+    return this.request("DescribeDetailedSingleProbeData", req, cb)
   }
 
   /**
@@ -296,6 +369,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindAlarmPolicyResponse) => void
   ): Promise<BindAlarmPolicyResponse> {
     return this.request("BindAlarmPolicy", req, cb)
+  }
+
+  /**
+   * 查询探测任务列表
+   */
+  async DescribeProbeTasks(
+    req: DescribeProbeTasksRequest,
+    cb?: (error: string, rep: DescribeProbeTasksResponse) => void
+  ): Promise<DescribeProbeTasksResponse> {
+    return this.request("DescribeProbeTasks", req, cb)
   }
 
   /**
@@ -339,6 +422,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询拨测节点
+   */
+  async DescribeProbeNodes(
+    req: DescribeProbeNodesRequest,
+    cb?: (error: string, rep: DescribeProbeNodesResponse) => void
+  ): Promise<DescribeProbeNodesResponse> {
+    return this.request("DescribeProbeNodes", req, cb)
+  }
+
+  /**
    * 查询拨测任务的返回码统计信息
    */
   async GetReturnCodeInfo(
@@ -356,6 +449,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlarmsByTaskResponse) => void
   ): Promise<DescribeAlarmsByTaskResponse> {
     return this.request("DescribeAlarmsByTask", req, cb)
+  }
+
+  /**
+   * 删除拨测任务
+   */
+  async DeleteProbeTask(
+    req: DeleteProbeTaskRequest,
+    cb?: (error: string, rep: DeleteProbeTaskResponse) => void
+  ): Promise<DeleteProbeTaskResponse> {
+    return this.request("DeleteProbeTask", req, cb)
   }
 
   /**

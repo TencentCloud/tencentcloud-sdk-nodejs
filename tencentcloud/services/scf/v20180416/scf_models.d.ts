@@ -513,7 +513,7 @@ export interface GetRequestStatusRequest {
       */
     Namespace?: string;
     /**
-      * 查询的开始时间，例如：2017-05-16 20:00:00，不填默认为当前时间 - 24小时
+      * 查询的开始时间，例如：2017-05-16 20:00:00，不填默认为当前时间 - 15min
       */
     StartTime?: string;
     /**

@@ -34,6 +34,7 @@ import {
   FlushBinlogResponse,
   DescribeDBSecurityGroupsResponse,
   CancelDcnJobResponse,
+  DescribeFileDownloadUrlRequest,
   DescribeDBResourceUsageDetailsResponse,
   DescribeDBInstanceSpecsResponse,
   DestroyHourDBInstanceResponse,
@@ -90,6 +91,7 @@ import {
   ModifyDBParametersRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   DescribeDcnDetailRequest,
+  DescribeFileDownloadUrlResponse,
   ModifyDBParametersResponse,
   CopyAccountPrivilegesRequest,
   SecurityGroup,
@@ -261,6 +263,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRealServerAccessStrategyResponse) => void
   ): Promise<ModifyRealServerAccessStrategyResponse> {
     return this.request("ModifyRealServerAccessStrategy", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeFileDownloadUrl)用于获取数据库指定备份或日志文件的下载连接。
+   */
+  async DescribeFileDownloadUrl(
+    req: DescribeFileDownloadUrlRequest,
+    cb?: (error: string, rep: DescribeFileDownloadUrlResponse) => void
+  ): Promise<DescribeFileDownloadUrlResponse> {
+    return this.request("DescribeFileDownloadUrl", req, cb)
   }
 
   /**

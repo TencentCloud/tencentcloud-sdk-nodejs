@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeUsers(req: DescribeUsersRequest, cb?: (error: string, rep: DescribeUsersResponse) => void): Promise<DescribeUsersResponse>;
     /**
-     * 批量创建任务
+     * 本接口（CreateTasks），用于批量创建任务
      */
     CreateTasks(req: CreateTasksRequest, cb?: (error: string, rep: CreateTasksResponse) => void): Promise<CreateTasksResponse>;
     /**
@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeWorkGroups(req: DescribeWorkGroupsRequest, cb?: (error: string, rep: DescribeWorkGroupsResponse) => void): Promise<DescribeWorkGroupsResponse>;
     /**
-     * 取消任务执行
+     * 本接口（CancelTask），用于取消任务执行
      */
     CancelTask(req: CancelTaskRequest, cb?: (error: string, rep: CancelTaskResponse) => void): Promise<CancelTaskResponse>;
     /**
@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeViews(req: DescribeViewsRequest, cb?: (error: string, rep: DescribeViewsResponse) => void): Promise<DescribeViewsResponse>;
     /**
-     * 查询单个表的详细信息。
+     * 本接口（DescribeTable），用于查询单个表的详细信息。
      */
     DescribeTable(req: DescribeTableRequest, cb?: (error: string, rep: DescribeTableResponse) => void): Promise<DescribeTableResponse>;
     /**
@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
      */
     DetachUserPolicy(req: DetachUserPolicyRequest, cb?: (error: string, rep: DetachUserPolicyResponse) => void): Promise<DetachUserPolicyResponse>;
     /**
-     * 本接口（DescribleTables）用于查询数据表列表。
+     * 本接口（DescribeTables）用于查询数据表列表。
      */
     DescribeTables(req: DescribeTablesRequest, cb?: (error: string, rep: DescribeTablesResponse) => void): Promise<DescribeTablesResponse>;
 }

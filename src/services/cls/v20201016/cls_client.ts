@@ -58,9 +58,12 @@ import {
   DescribeExportsRequest,
   CreateAsyncSearchTaskRequest,
   TopicInfo,
+  DescribeConsumerRequest,
   ShipperTaskInfo,
+  ModifyConsumerRequest,
   CreateIndexResponse,
   DeleteConfigFromMachineGroupResponse,
+  CreateConsumerResponse,
   ModifyMachineGroupResponse,
   RuleInfo,
   DeleteMachineGroupRequest,
@@ -84,19 +87,23 @@ import {
   DescribeMachineGroupsRequest,
   DescribeAsyncContextTasksResponse,
   CreateIndexRequest,
-  CreateTopicRequest,
+  DeleteConsumerResponse,
   DescribeTopicsRequest,
   GetAlarmLogResponse,
   DescribeAsyncSearchTasksRequest,
-  DescribeConfigsRequest,
+  CreateTopicRequest,
   DescribeAsyncSearchResultResponse,
   DescribeAsyncContextTasksRequest,
   AlarmTarget,
   DeleteConfigResponse,
   ModifyIndexResponse,
+  DeleteConsumerRequest,
   DeleteIndexRequest,
+  DescribeConsumerResponse,
   ExtractRuleInfo,
   AsyncContextTask,
+  ModifyConsumerResponse,
+  DescribeConfigsRequest,
   DeleteConfigRequest,
   AnalysisDimensional,
   LogsetInfo,
@@ -132,6 +139,7 @@ import {
   ModifyShipperRequest,
   DescribeLogContextResponse,
   DescribeAsyncSearchResultRequest,
+  CreateConsumerRequest,
   AlarmNotice,
   ModifyConfigResponse,
   ModifyAlarmNoticeResponse,
@@ -146,10 +154,11 @@ import {
   KeyValueInfo,
   DeleteAsyncSearchTaskRequest,
   ModifyMachineGroupRequest,
+  MergePartitionRequest,
   DescribeAlarmNoticesRequest,
   NoticeReceiver,
   AsyncSearchTask,
-  MergePartitionRequest,
+  Ckafka,
   WebCallback,
   CreateAsyncSearchTaskResponse,
   DeleteAlarmNoticeRequest,
@@ -171,6 +180,7 @@ import {
   DescribeLogsetsRequest,
   DeleteTopicResponse,
   Filter,
+  ConsumerContent,
   CreateExportResponse,
   KeyRegexInfo,
   MergePartitionResponse,
@@ -213,6 +223,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAlarmLogResponse) => void
   ): Promise<GetAlarmLogResponse> {
     return this.request("GetAlarmLog", req, cb)
+  }
+
+  /**
+   * 本接口用于创建投递任务
+   */
+  async CreateConsumer(
+    req: CreateConsumerRequest,
+    cb?: (error: string, rep: CreateConsumerResponse) => void
+  ): Promise<CreateConsumerResponse> {
+    return this.request("CreateConsumer", req, cb)
   }
 
   /**
@@ -336,13 +356,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   * 本接口用于修改投递任务
    */
-  async ModifyShipper(
-    req: ModifyShipperRequest,
-    cb?: (error: string, rep: ModifyShipperResponse) => void
-  ): Promise<ModifyShipperResponse> {
-    return this.request("ModifyShipper", req, cb)
+  async ModifyConsumer(
+    req: ModifyConsumerRequest,
+    cb?: (error: string, rep: ModifyConsumerResponse) => void
+  ): Promise<ModifyConsumerResponse> {
+    return this.request("ModifyConsumer", req, cb)
   }
 
   /**
@@ -366,13 +386,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取采集规则配置
+   * 本接口用于删除投递配置
    */
-  async DescribeConfigs(
-    req: DescribeConfigsRequest,
-    cb?: (error: string, rep: DescribeConfigsResponse) => void
-  ): Promise<DescribeConfigsResponse> {
-    return this.request("DescribeConfigs", req, cb)
+  async DeleteConsumer(
+    req: DeleteConsumerRequest,
+    cb?: (error: string, rep: DeleteConsumerResponse) => void
+  ): Promise<DeleteConsumerResponse> {
+    return this.request("DeleteConsumer", req, cb)
   }
 
   /**
@@ -725,6 +745,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   */
+  async ModifyShipper(
+    req: ModifyShipperRequest,
+    cb?: (error: string, rep: ModifyShipperResponse) => void
+  ): Promise<ModifyShipperResponse> {
+    return this.request("ModifyShipper", req, cb)
+  }
+
+  /**
    * 创建采集规则配置
    */
   async CreateConfig(
@@ -792,6 +822,26 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DescribeLogContextResponse) => void
   ): Promise<DescribeLogContextResponse> {
     return this.request("DescribeLogContext", req, cb)
+  }
+
+  /**
+   * 本接口用于获取投递配置
+   */
+  async DescribeConsumer(
+    req: DescribeConsumerRequest,
+    cb?: (error: string, rep: DescribeConsumerResponse) => void
+  ): Promise<DescribeConsumerResponse> {
+    return this.request("DescribeConsumer", req, cb)
+  }
+
+  /**
+   * 获取采集规则配置
+   */
+  async DescribeConfigs(
+    req: DescribeConfigsRequest,
+    cb?: (error: string, rep: DescribeConfigsResponse) => void
+  ): Promise<DescribeConfigsResponse> {
+    return this.request("DescribeConfigs", req, cb)
   }
 
   /**

@@ -84,6 +84,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRealServerAccessStrategy", req, cb);
     }
     /**
+     * 本接口(DescribeFileDownloadUrl)用于获取数据库指定备份或日志文件的下载连接。
+     */
+    async DescribeFileDownloadUrl(req, cb) {
+        return this.request("DescribeFileDownloadUrl", req, cb);
+    }
+    /**
      * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
 注意：相同用户名，不同Host是不同的账号。
      */

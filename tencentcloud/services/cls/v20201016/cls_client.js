@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAlarmLog", req, cb);
     }
     /**
+     * 本接口用于创建投递任务
+     */
+    async CreateConsumer(req, cb) {
+        return this.request("CreateConsumer", req, cb);
+    }
+    /**
      * 本接口用于修改日志主题。
      */
     async ModifyTopic(req, cb) {
@@ -118,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateShipper", req, cb);
     }
     /**
-     * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     * 本接口用于修改投递任务
      */
-    async ModifyShipper(req, cb) {
-        return this.request("ModifyShipper", req, cb);
+    async ModifyConsumer(req, cb) {
+        return this.request("ModifyConsumer", req, cb);
     }
     /**
      * 本接口用于删除离线检索任务
@@ -136,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAlarmNotice", req, cb);
     }
     /**
-     * 获取采集规则配置
+     * 本接口用于删除投递配置
      */
-    async DescribeConfigs(req, cb) {
-        return this.request("DescribeConfigs", req, cb);
+    async DeleteConsumer(req, cb) {
+        return this.request("DeleteConsumer", req, cb);
     }
     /**
      * 本接口用于修改告警策略。需要至少修改一项有效内容。
@@ -411,6 +417,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateAsyncContextTask", req, cb);
     }
     /**
+     * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     */
+    async ModifyShipper(req, cb) {
+        return this.request("ModifyShipper", req, cb);
+    }
+    /**
      * 创建采集规则配置
      */
     async CreateConfig(req, cb) {
@@ -451,6 +463,18 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DescribeLogContext(req, cb) {
         return this.request("DescribeLogContext", req, cb);
+    }
+    /**
+     * 本接口用于获取投递配置
+     */
+    async DescribeConsumer(req, cb) {
+        return this.request("DescribeConsumer", req, cb);
+    }
+    /**
+     * 获取采集规则配置
+     */
+    async DescribeConfigs(req, cb) {
+        return this.request("DescribeConfigs", req, cb);
     }
     /**
      * 本接口用于合并一个读写态的主题分区，合并时指定一个主题分区 ID，日志服务会自动合并范围右相邻的分区。

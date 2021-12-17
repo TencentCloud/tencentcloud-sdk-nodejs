@@ -951,6 +951,16 @@ export interface TopicInfo {
 }
 
 /**
+ * DescribeConsumer请求参数结构体
+ */
+export interface DescribeConsumerRequest {
+  /**
+   * 投递任务绑定的日志主题 ID
+   */
+  TopicId: string
+}
+
+/**
  * 投递任务信息
  */
 export interface ShipperTaskInfo {
@@ -1001,6 +1011,36 @@ export interface ShipperTaskInfo {
 }
 
 /**
+ * ModifyConsumer请求参数结构体
+ */
+export interface ModifyConsumerRequest {
+  /**
+   * 投递任务绑定的日志主题 ID
+   */
+  TopicId: string
+
+  /**
+   * 投递任务是否生效
+   */
+  Effective?: boolean
+
+  /**
+   * 是否投递日志的元数据信息，默认为 false
+   */
+  NeedContent?: boolean
+
+  /**
+   * 如果需要投递元数据信息，元数据信息的描述
+   */
+  Content?: ConsumerContent
+
+  /**
+   * CKafka的描述
+   */
+  Ckafka?: Ckafka
+}
+
+/**
  * CreateIndex返回参数结构体
  */
 export interface CreateIndexResponse {
@@ -1014,6 +1054,16 @@ export interface CreateIndexResponse {
  * DeleteConfigFromMachineGroup返回参数结构体
  */
 export interface DeleteConfigFromMachineGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateConsumer返回参数结构体
+ */
+export interface CreateConsumerResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1624,48 +1674,13 @@ export interface CreateIndexRequest {
 }
 
 /**
- * CreateTopic请求参数结构体
+ * DeleteConsumer返回参数结构体
  */
-export interface CreateTopicRequest {
+export interface DeleteConsumerResponse {
   /**
-   * 日志集ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  LogsetId: string
-
-  /**
-   * 日志主题名称
-   */
-  TopicName: string
-
-  /**
-   * 日志主题分区个数。默认创建1个，最大支持创建10个分区。
-   */
-  PartitionCount?: number
-
-  /**
-   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。
-   */
-  Tags?: Array<Tag>
-
-  /**
-   * 是否开启自动分裂，默认值为true
-   */
-  AutoSplit?: boolean
-
-  /**
-   * 开启自动分裂后，每个主题能够允许的最大分区数，默认值为50
-   */
-  MaxSplitPartitions?: number
-
-  /**
-   * 日志主题的存储类型，可选值 hot（实时存储），cold（离线存储）；默认为hot。若传入cold，请先联系客服进行开白。
-   */
-  StorageType?: string
-
-  /**
-   * 生命周期，单位天；可取值范围1~366。默认30天
-   */
-  Period?: number
+  RequestId?: string
 }
 
 /**
@@ -1825,45 +1840,48 @@ export interface DescribeAsyncSearchTasksRequest {
 }
 
 /**
- * DescribeConfigs请求参数结构体
+ * CreateTopic请求参数结构体
  */
-export interface DescribeConfigsRequest {
+export interface CreateTopicRequest {
   /**
-      * <br><li> configName
-
-按照【采集配置名称】进行模糊匹配过滤。
-类型：String
-
-必选：否
-
-<br><li> configId
-
-按照【采集配置ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> topicId
-
-按照【日志主题】进行过滤。
-
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
-      */
-  Filters?: Array<Filter>
-
-  /**
-   * 分页的偏移量，默认值为0
+   * 日志集ID
    */
-  Offset?: number
+  LogsetId: string
 
   /**
-   * 分页单页的限制数目，默认值为20，最大值100
+   * 日志主题名称
    */
-  Limit?: number
+  TopicName: string
+
+  /**
+   * 日志主题分区个数。默认创建1个，最大支持创建10个分区。
+   */
+  PartitionCount?: number
+
+  /**
+   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。
+   */
+  Tags?: Array<Tag>
+
+  /**
+   * 是否开启自动分裂，默认值为true
+   */
+  AutoSplit?: boolean
+
+  /**
+   * 开启自动分裂后，每个主题能够允许的最大分区数，默认值为50
+   */
+  MaxSplitPartitions?: number
+
+  /**
+   * 日志主题的存储类型，可选值 hot（实时存储），cold（离线存储）；默认为hot。若传入cold，请先联系客服进行开白。
+   */
+  StorageType?: string
+
+  /**
+   * 生命周期，单位天；可取值范围1~366。默认30天
+   */
+  Period?: number
 }
 
 /**
@@ -1982,6 +2000,16 @@ export interface ModifyIndexResponse {
 }
 
 /**
+ * DeleteConsumer请求参数结构体
+ */
+export interface DeleteConsumerRequest {
+  /**
+   * 投递任务绑定的日志主题 ID
+   */
+  TopicId: string
+}
+
+/**
  * DeleteIndex请求参数结构体
  */
 export interface DeleteIndexRequest {
@@ -1989,6 +2017,37 @@ export interface DeleteIndexRequest {
    * 日志主题ID
    */
   TopicId: string
+}
+
+/**
+ * DescribeConsumer返回参数结构体
+ */
+export interface DescribeConsumerResponse {
+  /**
+   * 投递任务是否生效
+   */
+  Effective: boolean
+
+  /**
+   * 是否投递日志的元数据信息
+   */
+  NeedContent: boolean
+
+  /**
+      * 如果需要投递元数据信息，元数据信息的描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: ConsumerContent
+
+  /**
+   * CKafka的描述
+   */
+  Ckafka: Ckafka
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2120,6 +2179,58 @@ export interface AsyncContextTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AsyncSearchTaskId: string
+}
+
+/**
+ * ModifyConsumer返回参数结构体
+ */
+export interface ModifyConsumerResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConfigs请求参数结构体
+ */
+export interface DescribeConfigsRequest {
+  /**
+      * <br><li> configName
+
+按照【采集配置名称】进行模糊匹配过滤。
+类型：String
+
+必选：否
+
+<br><li> configId
+
+按照【采集配置ID】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> topicId
+
+按照【日志主题】进行过滤。
+
+类型：String
+
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 分页的偏移量，默认值为0
+   */
+  Offset?: number
+
+  /**
+   * 分页单页的限制数目，默认值为20，最大值100
+   */
+  Limit?: number
 }
 
 /**
@@ -3024,6 +3135,31 @@ export interface DescribeAsyncSearchResultRequest {
 }
 
 /**
+ * CreateConsumer请求参数结构体
+ */
+export interface CreateConsumerRequest {
+  /**
+   * 投递任务绑定的日志主题 ID
+   */
+  TopicId: string
+
+  /**
+   * 是否投递日志的元数据信息，默认为 true
+   */
+  NeedContent?: boolean
+
+  /**
+   * 如果需要投递元数据信息，元数据信息的描述
+   */
+  Content?: ConsumerContent
+
+  /**
+   * CKafka的描述
+   */
+  Ckafka?: Ckafka
+}
+
+/**
  * 告警通知模板类型
  */
 export interface AlarmNotice {
@@ -3349,6 +3485,21 @@ export interface ModifyMachineGroupRequest {
 }
 
 /**
+ * MergePartition请求参数结构体
+ */
+export interface MergePartitionRequest {
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+
+  /**
+   * 合并的PartitionId
+   */
+  PartitionId: number
+}
+
+/**
  * DescribeAlarmNotices请求参数结构体
  */
 export interface DescribeAlarmNoticesRequest {
@@ -3509,18 +3660,38 @@ export interface AsyncSearchTask {
 }
 
 /**
- * MergePartition请求参数结构体
+ * CKafka的描述-需要投递到的kafka信息
  */
-export interface MergePartitionRequest {
+export interface Ckafka {
   /**
-   * 日志主题ID
+   * Ckafka 的 Vip
+   */
+  Vip: string
+
+  /**
+   * Ckafka 的 Vport
+   */
+  Vport: string
+
+  /**
+   * Ckafka 的 InstanceId
+   */
+  InstanceId: string
+
+  /**
+   * Ckafka 的 InstanceName
+   */
+  InstanceName: string
+
+  /**
+   * Ckafka 的 TopicId
    */
   TopicId: string
 
   /**
-   * 合并的PartitionId
+   * Ckafka 的 TopicName
    */
-  PartitionId: number
+  TopicName: string
 }
 
 /**
@@ -4018,6 +4189,23 @@ export interface Filter {
    * 需要过滤的值。
    */
   Values: Array<string>
+}
+
+/**
+ * 投递任务出入参 Content
+ */
+export interface ConsumerContent {
+  /**
+      * 是否投递 TAG 信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableTag: boolean
+
+  /**
+      * 需要投递的元数据列表，目前仅支持：__SOURCE__，__FILENAME__和__TIMESTAMP__
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetaFields: Array<string>
 }
 
 /**

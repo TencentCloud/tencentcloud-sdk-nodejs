@@ -1110,7 +1110,7 @@ export interface CreateIp6TranslatorsResponse {
   /**
    * 转换实例的唯一ID数组，形如"ip6-xxxxxxxx"
    */
-  Ip6TranslatorSet?: Array<string>
+  Ip6TranslatorSet: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1298,6 +1298,11 @@ export interface CreateDirectConnectGatewayRequest {
    * 专线网关可用区
    */
   Zone?: string
+
+  /**
+   * 专线网关高可用区容灾组ID
+   */
+  HaZoneGroupId?: string
 }
 
 /**
@@ -6553,6 +6558,43 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Zone: string
+
+  /**
+      * 网关流控明细启用状态：
+0：关闭
+1：开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableFlowDetails: number
+
+  /**
+      * 开启、关闭网关流控明细时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowDetailsUpdateTime: string
+
+  /**
+      * 是否支持开启网关流控明细
+0：不支持
+1：支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewAfc: number
+
+  /**
+      * 专线网关接入网络类型：
+<li>`VXLAN` - VXLAN类型。</li>
+<li>`MPLS` - MPLS类型。</li>
+<li>`Hybrid` - Hybrid类型。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccessNetworkType: string
+
+  /**
+      * 跨可用区容灾专线网关的可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HaZoneList: Array<string>
 }
 
 /**
@@ -10887,6 +10929,16 @@ export interface DirectConnectGatewayCcnRoute {
    * `BGP`的`AS-Path`属性。
    */
   ASPath: Array<string>
+
+  /**
+   * 备注
+   */
+  Description: string
+
+  /**
+   * 最后更新时间
+   */
+  UpdateTime: string
 }
 
 /**

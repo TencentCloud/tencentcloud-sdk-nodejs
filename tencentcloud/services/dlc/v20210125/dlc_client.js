@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUsers", req, cb);
     }
     /**
-     * 批量创建任务
+     * 本接口（CreateTasks），用于批量创建任务
      */
     async CreateTasks(req, cb) {
         return this.request("CreateTasks", req, cb);
@@ -118,7 +118,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWorkGroups", req, cb);
     }
     /**
-     * 取消任务执行
+     * 本接口（CancelTask），用于取消任务执行
      */
     async CancelTask(req, cb) {
         return this.request("CancelTask", req, cb);
@@ -148,7 +148,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeViews", req, cb);
     }
     /**
-     * 查询单个表的详细信息。
+     * 本接口（DescribeTable），用于查询单个表的详细信息。
      */
     async DescribeTable(req, cb) {
         return this.request("DescribeTable", req, cb);
@@ -214,7 +214,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachUserPolicy", req, cb);
     }
     /**
-     * 本接口（DescribleTables）用于查询数据表列表。
+     * 本接口（DescribeTables）用于查询数据表列表。
      */
     async DescribeTables(req, cb) {
         return this.request("DescribeTables", req, cb);

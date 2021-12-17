@@ -184,7 +184,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量创建任务
+   * 本接口（CreateTasks），用于批量创建任务
    */
   async CreateTasks(
     req: CreateTasksRequest,
@@ -274,7 +274,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 取消任务执行
+   * 本接口（CancelTask），用于取消任务执行
    */
   async CancelTask(
     req: CancelTaskRequest,
@@ -324,7 +324,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个表的详细信息。
+   * 本接口（DescribeTable），用于查询单个表的详细信息。
    */
   async DescribeTable(
     req: DescribeTableRequest,
@@ -434,7 +434,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribleTables）用于查询数据表列表。
+   * 本接口（DescribeTables）用于查询数据表列表。
    */
   async DescribeTables(
     req: DescribeTablesRequest,

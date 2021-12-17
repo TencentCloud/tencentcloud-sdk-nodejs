@@ -46,13 +46,58 @@ export interface RenewDiskRequest {
 }
 
 /**
- * AttachDisks返回参数结构体
+ * 描述了定期快照策略的详细信息
  */
-export interface AttachDisksResponse {
+export interface AutoSnapshotPolicy {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 定期快照策略ID。
    */
-  RequestId?: string
+  AutoSnapshotPolicyId?: string
+
+  /**
+   * 定期快照策略名称。
+   */
+  AutoSnapshotPolicyName?: string
+
+  /**
+   * 定期快照策略的状态。取值范围：<br><li>NORMAL：正常<br><li>ISOLATED：已隔离。
+   */
+  AutoSnapshotPolicyState?: string
+
+  /**
+   * 定期快照策略是否激活。
+   */
+  IsActivated?: boolean
+
+  /**
+   * 使用该定期快照策略创建出来的快照是否永久保留。
+   */
+  IsPermanent?: boolean
+
+  /**
+   * 使用该定期快照策略创建出来的快照保留天数。
+   */
+  RetentionDays?: number
+
+  /**
+   * 定期快照策略的创建时间。
+   */
+  CreateTime?: string
+
+  /**
+   * 定期快照下次触发的时间。
+   */
+  NextTriggerTime?: string
+
+  /**
+   * 定期快照的执行策略。
+   */
+  Policy?: Array<Policy>
+
+  /**
+   * 已绑定当前定期快照策略的云盘ID列表。
+   */
+  DiskIdSet?: Array<string>
 }
 
 /**
@@ -345,6 +390,11 @@ export interface CreateDisksRequest {
    * 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过DescribeSnapshots接口返回的快照详情的IsPermanent字段来判断，true表示永久快照，false表示非永久快照。
    */
   DeleteSnapshot?: number
+
+  /**
+   * 创建云盘时指定自动挂载并初始化该数据盘。
+   */
+  AutoMountConfiguration?: AutoMountConfiguration
 }
 
 /**
@@ -420,13 +470,38 @@ export interface DescribeSnapshotsRequest {
 }
 
 /**
- * TerminateDisks返回参数结构体
+ * ModifyAutoSnapshotPolicyAttribute请求参数结构体
  */
-export interface TerminateDisksResponse {
+export interface ModifyAutoSnapshotPolicyAttributeRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 定期快照策略ID。
    */
-  RequestId?: string
+  AutoSnapshotPolicyId: string
+
+  /**
+   * 定期快照的执行策略。
+   */
+  Policy?: Array<Policy>
+
+  /**
+   * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
+   */
+  AutoSnapshotPolicyName?: string
+
+  /**
+   * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
+   */
+  IsActivated?: boolean
+
+  /**
+   * 通过该定期快照策略创建的快照是否永久保留。FALSE表示非永久保留，TRUE表示永久保留，默认为FALSE。
+   */
+  IsPermanent?: boolean
+
+  /**
+   * 通过该定期快照策略创建的快照保留天数，该参数不可与`IsPermanent`参数冲突，即若定期快照策略设置为永久保留，`RetentionDays`应置0。
+   */
+  RetentionDays?: number
 }
 
 /**
@@ -678,38 +753,23 @@ export interface Disk {
 }
 
 /**
- * ModifyAutoSnapshotPolicyAttribute请求参数结构体
+ * TerminateDisks返回参数结构体
  */
-export interface ModifyAutoSnapshotPolicyAttributeRequest {
+export interface TerminateDisksResponse {
   /**
-   * 定期快照策略ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AutoSnapshotPolicyId: string
+  RequestId?: string
+}
 
+/**
+ * ApplySnapshot返回参数结构体
+ */
+export interface ApplySnapshotResponse {
   /**
-   * 定期快照的执行策略。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Policy?: Array<Policy>
-
-  /**
-   * 要创建的定期快照策略名。不传则默认为“未命名”。最大长度不能超60个字节。
-   */
-  AutoSnapshotPolicyName?: string
-
-  /**
-   * 是否激活定期快照策略，FALSE表示未激活，TRUE表示激活，默认为TRUE。
-   */
-  IsActivated?: boolean
-
-  /**
-   * 通过该定期快照策略创建的快照是否永久保留。FALSE表示非永久保留，TRUE表示永久保留，默认为FALSE。
-   */
-  IsPermanent?: boolean
-
-  /**
-   * 通过该定期快照策略创建的快照保留天数，该参数不可与`IsPermanent`参数冲突，即若定期快照策略设置为永久保留，`RetentionDays`应置0。
-   */
-  RetentionDays?: number
+  RequestId?: string
 }
 
 /**
@@ -1428,58 +1488,13 @@ export interface CreateDisksResponse {
 }
 
 /**
- * 描述了定期快照策略的详细信息
+ * AttachDisks返回参数结构体
  */
-export interface AutoSnapshotPolicy {
+export interface AttachDisksResponse {
   /**
-   * 定期快照策略ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AutoSnapshotPolicyId?: string
-
-  /**
-   * 定期快照策略名称。
-   */
-  AutoSnapshotPolicyName?: string
-
-  /**
-   * 定期快照策略的状态。取值范围：<br><li>NORMAL：正常<br><li>ISOLATED：已隔离。
-   */
-  AutoSnapshotPolicyState?: string
-
-  /**
-   * 定期快照策略是否激活。
-   */
-  IsActivated?: boolean
-
-  /**
-   * 使用该定期快照策略创建出来的快照是否永久保留。
-   */
-  IsPermanent?: boolean
-
-  /**
-   * 使用该定期快照策略创建出来的快照保留天数。
-   */
-  RetentionDays?: number
-
-  /**
-   * 定期快照策略的创建时间。
-   */
-  CreateTime?: string
-
-  /**
-   * 定期快照下次触发的时间。
-   */
-  NextTriggerTime?: string
-
-  /**
-   * 定期快照的执行策略。
-   */
-  Policy?: Array<Policy>
-
-  /**
-   * 已绑定当前定期快照策略的云盘ID列表。
-   */
-  DiskIdSet?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1885,13 +1900,23 @@ export interface GetSnapOverviewResponse {
 }
 
 /**
- * ApplySnapshot返回参数结构体
+ * 自动初始化、挂载云盘时指定配置。
  */
-export interface ApplySnapshotResponse {
+export interface AutoMountConfiguration {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 要挂载到的实例ID。
    */
-  RequestId?: string
+  InstanceId: Array<string>
+
+  /**
+   * 子机内的挂载点。
+   */
+  MountPoint: Array<string>
+
+  /**
+   * 文件系统类型，支持的有 ext4、xfs。
+   */
+  FileSystemType: string
 }
 
 /**

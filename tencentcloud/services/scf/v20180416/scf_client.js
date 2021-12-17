@@ -112,7 +112,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListAliases", req, cb);
     }
     /**
-     * 该接口根据指定的日志查询条件返回函数运行日志。
+     * 该接口根据指定的日志查询条件返回函数运行日志。该接口已下线，查询函数请求运行的返回信息，请使用 [GetRequestStatus](https://cloud.tencent.com/document/product/583/65348)。查询函数运行日志，请参考[日志检索教程](https://cloud.tencent.com/document/product/583/52637)。
      */
     async GetFunctionLogs(req, cb) {
         return this.request("GetFunctionLogs", req, cb);

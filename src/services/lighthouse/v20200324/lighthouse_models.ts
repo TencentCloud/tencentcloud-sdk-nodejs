@@ -50,7 +50,7 @@ export interface AssociateInstancesKeyPairsResponse {
  */
 export interface DescribeDisksDeniedActionsRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds: Array<string>
 }
@@ -493,17 +493,17 @@ export interface ResetAttachCcnRequest {
  */
 export interface AttachDisksRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds: Array<string>
 
   /**
-   * 实例ID
+   * 实例ID。
    */
   InstanceId: string
 
   /**
-   * 续费标识
+   * 续费标识。
    */
   RenewFlag?: string
 }
@@ -660,12 +660,12 @@ export interface ModifyBlueprintAttributeRequest {
  */
 export interface InquirePriceRenewDisksRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds: Array<string>
 
   /**
-   * 续费磁盘包年包月相关参数设置
+   * 续费云硬盘包年包月相关参数设置。
    */
   RenewDiskChargePrepaid: RenewDiskChargePrepaid
 }
@@ -812,7 +812,7 @@ export interface ApplyInstanceSnapshotResponse {
  */
 export interface DetachDisksRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds: Array<string>
 }
@@ -1005,7 +1005,7 @@ export interface TrafficPackage {
  */
 export interface DescribeInstancesDiskNumRequest {
   /**
-   * 实例ID列表
+   * 实例ID列表。
    */
   InstanceIds: Array<string>
 }
@@ -1099,12 +1099,12 @@ export interface DescribeInstancesDeniedActionsResponse {
  */
 export interface ModifyDisksAttributeRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds: Array<string>
 
   /**
-   * 磁盘名称
+   * 云硬盘名称。
    */
   DiskName: string
 }
@@ -1194,12 +1194,12 @@ export interface ModifySnapshotAttributeRequest {
  */
 export interface DescribeDisksResponse {
   /**
-   * 磁盘信息列表
+   * 云硬盘信息列表。
    */
   DiskSet: Array<Disk>
 
   /**
-   * 符合条件的磁盘信息数量
+   * 符合条件的云硬盘信息数量。
    */
   TotalCount: number
 
@@ -1244,12 +1244,12 @@ export interface DeleteSnapshotsResponse {
  */
 export interface ModifyDisksRenewFlagRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds: Array<string>
 
   /**
-   * 续费标识
+   * 续费标识。
    */
   RenewFlag: string
 }
@@ -1440,26 +1440,26 @@ export interface DescribeInstancesReturnableRequest {
 }
 
 /**
- * 可退还磁盘详细信息
+ * 可退还云硬盘详细信息
  */
 export interface DiskReturnable {
   /**
-   * 磁盘ID
+   * 云硬盘ID。
    */
   DiskId: string
 
   /**
-   * 磁盘是否可退还。
+   * 云硬盘是否可退还。
    */
   IsReturnable: boolean
 
   /**
-   * 实例退还失败错误码。
+   * 云硬盘退还失败错误码。
    */
   ReturnFailCode: number
 
   /**
-   * 实例退还失败错误信息。
+   * 云硬盘退还失败错误信息。
    */
   ReturnFailMessage: string
 }
@@ -1729,26 +1729,26 @@ export interface ModifyFirewallRulesResponse {
 }
 
 /**
- * 磁盘价格
+ * 云硬盘价格
  */
 export interface DiskPrice {
   /**
-   * 磁盘单价
+   * 云硬盘单价。
    */
   OriginalDiskPrice: number
 
   /**
-   * 磁盘总价
+   * 云硬盘总价。
    */
   OriginalPrice: number
 
   /**
-   * 折扣
+   * 折扣。
    */
   Discount: number
 
   /**
-   * 折后总价
+   * 折后总价。
    */
   DiscountPrice: number
 }
@@ -1930,7 +1930,7 @@ export interface ModifyInstancesLoginKeyPairAttributeResponse {
  */
 export interface InquirePriceRenewDisksResponse {
   /**
-   * 磁盘价格
+   * 云硬盘价格。
    */
   DiskPrice: DiskPrice
 
@@ -2024,36 +2024,36 @@ export interface Bundle {
 }
 
 /**
- * 磁盘配置
+ * 云硬盘配置
  */
 export interface DiskConfig {
   /**
-   * 可用区
+   * 可用区。
    */
   Zone: string
 
   /**
-   * 磁盘类型
+   * 云硬盘类型。
    */
   DiskType: string
 
   /**
-   * 磁盘可售卖状态
+   * 云硬盘可售卖状态。
    */
   DiskSalesState: string
 
   /**
-   * 最大磁盘大小
+   * 最大云硬盘大小。
    */
   MaxDiskSize: number
 
   /**
-   * 最小磁盘大小
+   * 最小云硬盘大小。
    */
   MinDiskSize: number
 
   /**
-   * 磁盘步长
+   * 云硬盘步长。
    */
   DiskStepSize: number
 }
@@ -2126,21 +2126,21 @@ export interface ResetInstancesPasswordRequest {
 }
 
 /**
- * 磁盘包年包月相关参数设置
+ * 云硬盘包年包月相关参数设置
  */
 export interface DiskChargePrepaid {
   /**
-   * 新购周期
+   * 新购周期。
    */
   Period: number
 
   /**
-   * 续费标识
+   * 续费标识。
    */
   RenewFlag?: string
 
   /**
-   * 新购单位. 默认值: "m"
+   * 新购单位. 默认值: "m"。
    */
   TimeUnit?: string
 }
@@ -2337,12 +2337,12 @@ export interface ModifyFirewallRuleDescriptionResponse {
  */
 export interface DescribeDiskDiscountRequest {
   /**
-   * 磁盘类型, 取值: "CLOUD_PREMIUM"
+   * 云硬盘类型, 取值: "CLOUD_PREMIUM"。
    */
   DiskType: string
 
   /**
-   * 磁盘大小
+   * 云硬盘大小。
    */
   DiskSize: number
 }
@@ -2522,14 +2522,14 @@ export interface CreateFirewallRulesResponse {
  */
 export interface DescribeDisksRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds?: Array<string>
 
   /**
       * 过滤器列表。
 disk-id
-按照【磁盘 ID】进行过滤。
+按照【云硬盘 ID】进行过滤。
 类型：String
 必选：否
 instance-id
@@ -2537,7 +2537,7 @@ instance-id
 类型：String
 必选：否
 disk-name
-按照【磁盘名称】进行过滤。
+按照【云硬盘名称】进行过滤。
 类型：String
 必选：否
 zone
@@ -2545,11 +2545,11 @@ zone
 类型：String
 必选：否
 disk-usage
-按照【磁盘类型】进行过滤。
+按照【云硬盘类型】进行过滤。
 类型：String
 必选：否
 disk-state
-按照【磁盘状态】进行过滤。
+按照【云硬盘状态】进行过滤。
 类型：String
 必选：否
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 DiskIds 和 Filters。
@@ -2562,17 +2562,17 @@ disk-state
   Limit?: number
 
   /**
-   * 偏移量，默认为0
+   * 偏移量，默认为0。
    */
   Offset?: number
 
   /**
-   * 云盘列表排序的依据字段。取值范围："CREATED_TIME"：依据云盘的创建时间排序。 "EXPIRED_TIME"：依据云盘的到期时间排序。"DISK_SIZE"：依据云盘的大小排序。默认按云盘创建时间排序。
+   * 云硬盘列表排序的依据字段。取值范围："CREATED_TIME"：依据云硬盘的创建时间排序。 "EXPIRED_TIME"：依据云硬盘的到期时间排序。"DISK_SIZE"：依据云硬盘的大小排序。默认按云硬盘创建时间排序。
    */
   OrderField?: string
 
   /**
-   * 输出云盘列表的排列顺序。取值范围："ASC"：升序排列。 "DESC"：降序排列。默认按降序排列
+   * 输出云硬盘列表的排列顺序。取值范围："ASC"：升序排列。 "DESC"：降序排列。默认按降序排列。
    */
   Order?: string
 }
@@ -2762,26 +2762,26 @@ export interface TerminateInstancesRequest {
 }
 
 /**
- * 续费磁盘包年包月相关参数设置
+ * 续费云硬盘包年包月相关参数设置
  */
 export interface RenewDiskChargePrepaid {
   /**
-   * 新购周期
+   * 新购周期。
    */
   Period?: number
 
   /**
-   * 续费标识
+   * 续费标识。
    */
   RenewFlag?: string
 
   /**
-   * 周期单位. 默认值: "m"
+   * 周期单位. 默认值: "m"。
    */
   TimeUnit?: string
 
   /**
-   * 当前实例到期时间
+   * 当前实例到期时间。
    */
   CurInstanceDeadline?: string
 }
@@ -2791,7 +2791,7 @@ export interface RenewDiskChargePrepaid {
  */
 export interface TerminateDisksRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds: Array<string>
 }
@@ -2863,7 +2863,7 @@ export interface RebootInstancesResponse {
  */
 export interface DescribeDisksDeniedActionsResponse {
   /**
-   * 磁盘操作限制列表详细信息。
+   * 云硬盘操作限制列表详细信息。
    */
   DiskDeniedActionSet: Array<DiskDeniedActions>
 
@@ -2908,12 +2908,12 @@ export interface Price {
  */
 export interface DescribeDisksReturnableResponse {
   /**
-   * 可退还磁盘详细信息列表。
+   * 可退还云硬盘详细信息列表。
    */
   DiskReturnableSet: Array<DiskReturnable>
 
   /**
-   * 符合条件的磁盘数量。
+   * 符合条件的云硬盘数量。
    */
   TotalCount: number
 
@@ -2995,7 +2995,7 @@ export interface DescribeResetInstanceBlueprintsResponse {
  */
 export interface DescribeDisksReturnableRequest {
   /**
-   * 磁盘ID列表
+   * 云硬盘ID列表。
    */
   DiskIds?: Array<string>
 
@@ -3173,12 +3173,12 @@ export interface DescribeFirewallRulesRequest {
  */
 export interface DiskDeniedActions {
   /**
-   * 磁盘ID
+   * 云硬盘ID。
    */
   DiskId: string
 
   /**
-   * 操作限制列表
+   * 操作限制列表。
    */
   DeniedActions: Array<DeniedAction>
 }

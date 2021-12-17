@@ -59,7 +59,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBlueprints", req, cb);
     }
     /**
-     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云盘数量。
+     * 本接口(DescribeInstancesDiskNum)用于查询实例挂载云硬盘数量。
      */
     async DescribeInstancesDiskNum(req, cb) {
         return this.request("DescribeInstancesDiskNum", req, cb);
@@ -136,7 +136,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteKeyPairs", req, cb);
     }
     /**
-     * 本接口（ModifyDisksRenewFlag）用于修改磁盘续费标识。
+     * 本接口（ModifyDisksRenewFlag）用于修改云硬盘续费标识。
      */
     async ModifyDisksRenewFlag(req, cb) {
         return this.request("ModifyDisksRenewFlag", req, cb);
@@ -177,7 +177,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceCreateBlueprint", req, cb);
     }
     /**
-     * 本接口（AttachDisks）用于挂载一个或多个弹性云盘。
+     * 本接口（AttachDisks）用于挂载一个或多个云硬盘。
      */
     async AttachDisks(req, cb) {
         return this.request("AttachDisks", req, cb);
@@ -257,7 +257,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceLoginKeyPairAttribute", req, cb);
     }
     /**
-     * 本接口（DescribeDisksDeniedActions）用于查询一个或多个磁盘的操作限制列表信息
+     * 本接口（DescribeDisksDeniedActions）用于查询一个或多个云硬盘的操作限制列表信息。
      */
     async DescribeDisksDeniedActions(req, cb) {
         return this.request("DescribeDisksDeniedActions", req, cb);
@@ -269,7 +269,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirewallRules", req, cb);
     }
     /**
-     * 本接口（DescribeDisks）用于查询磁盘信息。
+     * 本接口（DescribeDisks）用于查询云硬盘信息。
      */
     async DescribeDisks(req, cb) {
         return this.request("DescribeDisks", req, cb);
@@ -318,7 +318,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceSnapshot", req, cb);
     }
     /**
-     * 本接口(ModifyDisksAttribute)用于修改磁盘属性
+     * 本接口(ModifyDisksAttribute)用于修改云硬盘属性。
      */
     async ModifyDisksAttribute(req, cb) {
         return this.request("ModifyDisksAttribute", req, cb);
@@ -345,13 +345,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySnapshotAttribute", req, cb);
     }
     /**
-     * 本接口（DescribeDisksReturnable）用于查询磁盘是否可退还。
+     * 本接口（DescribeDisksReturnable）用于查询云硬盘是否可退还。
      */
     async DescribeDisksReturnable(req, cb) {
         return this.request("DescribeDisksReturnable", req, cb);
     }
     /**
-     * 本接口（InquirePriceRenewDisks）用于续费磁盘询价。
+     * 本接口（InquirePriceRenewDisks）用于续费云硬盘询价。
      */
     async InquirePriceRenewDisks(req, cb) {
         return this.request("InquirePriceRenewDisks", req, cb);
@@ -433,7 +433,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceVncUrl", req, cb);
     }
     /**
-     * 本接口（TerminateDisks）用于销毁一个或多个磁盘。
+     * 本接口（TerminateDisks）用于销毁一个或多个云硬盘。
      */
     async TerminateDisks(req, cb) {
         return this.request("TerminateDisks", req, cb);
@@ -474,7 +474,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceCreateDisks", req, cb);
     }
     /**
-     * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息
+     * 本接口(DescribeDiskDiscount)用于查询云硬盘折扣信息。
      */
     async DescribeDiskDiscount(req, cb) {
         return this.request("DescribeDiskDiscount", req, cb);
@@ -515,7 +515,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBlueprint", req, cb);
     }
     /**
-     * 本接口（DetachDisks）用于卸载一个或多个弹性云盘。
+     * 本接口（DetachDisks）用于卸载一个或多个云硬盘。
      */
     async DetachDisks(req, cb) {
         return this.request("DetachDisks", req, cb);

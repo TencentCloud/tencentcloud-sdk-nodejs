@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cat.tencentcloudapi.com", "2018-04-09", clientConfig);
     }
     /**
+     * 暂停拨测任务
+     */
+    async SuspendProbeTask(req, cb) {
+        return this.request("SuspendProbeTask", req, cb);
+    }
+    /**
      * 查询拨测任务的走势数据
      */
     async GetRespTimeTrendEx(req, cb) {
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTasksByType(req, cb) {
         return this.request("DescribeTasksByType", req, cb);
+    }
+    /**
+     * 验证拨测任务，结果验证查询（验证成功的，才建议创建拨测任务）
+     */
+    async VerifyResult(req, cb) {
+        return this.request("VerifyResult", req, cb);
     }
     /**
      * 创建拨测任务(扩展)
@@ -82,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskDetail", req, cb);
     }
     /**
+     * 批量创建探测任务
+     */
+    async CreateProbeTasks(req, cb) {
+        return this.request("CreateProbeTasks", req, cb);
+    }
+    /**
      * 查询用户的告警主题列表
      */
     async DescribeAlarmTopic(req, cb) {
@@ -112,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDailyAvailRatio", req, cb);
     }
     /**
+     * 恢复拨测任务
+     */
+    async ResumeProbeTask(req, cb) {
+        return this.request("ResumeProbeTask", req, cb);
+    }
+    /**
      * 修改拨测任务(扩展)
      */
     async ModifyTaskEx(req, cb) {
@@ -136,16 +160,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCatLogs", req, cb);
     }
     /**
-     * 验证拨测任务，结果验证查询（验证成功的，才建议创建拨测任务）
+     * 批量更新拨测任务配置
      */
-    async VerifyResult(req, cb) {
-        return this.request("VerifyResult", req, cb);
+    async UpdateProbeTaskConfigurationList(req, cb) {
+        return this.request("UpdateProbeTaskConfigurationList", req, cb);
+    }
+    /**
+     * 根据时间范围、任务ID、运营商等条件查询单次拨测详情数据
+     */
+    async DescribeDetailedSingleProbeData(req, cb) {
+        return this.request("DescribeDetailedSingleProbeData", req, cb);
     }
     /**
      * 绑定拨测任务和告警策略组
      */
     async BindAlarmPolicy(req, cb) {
         return this.request("BindAlarmPolicy", req, cb);
+    }
+    /**
+     * 查询探测任务列表
+     */
+    async DescribeProbeTasks(req, cb) {
+        return this.request("DescribeProbeTasks", req, cb);
     }
     /**
      * 获取任务列表的实时数据
@@ -172,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunTask", req, cb);
     }
     /**
+     * 查询拨测节点
+     */
+    async DescribeProbeNodes(req, cb) {
+        return this.request("DescribeProbeNodes", req, cb);
+    }
+    /**
      * 查询拨测任务的返回码统计信息
      */
     async GetReturnCodeInfo(req, cb) {
@@ -182,6 +224,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAlarmsByTask(req, cb) {
         return this.request("DescribeAlarmsByTask", req, cb);
+    }
+    /**
+     * 删除拨测任务
+     */
+    async DeleteProbeTask(req, cb) {
+        return this.request("DeleteProbeTask", req, cb);
     }
     /**
      * 获取AppId下的拨测任务总数
