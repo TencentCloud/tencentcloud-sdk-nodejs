@@ -34,10 +34,36 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowsByTemplates", req, cb);
     }
     /**
+     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载确认页面链接，支持客户合同（流程）归类打包下载。
+
+     */
+    async GetDownloadFlowUrl(req, cb) {
+        return this.request("GetDownloadFlowUrl", req, cb);
+    }
+    /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
      */
     async PrepareFlows(req, cb) {
         return this.request("PrepareFlows", req, cb);
+    }
+    /**
+     * 此接口（OperateChannelTemplate）用于渠道侧将模板库中的模板对合作企业进行查询和设置, 其中包括可见性的修改以及对合作企业的指定.
+1、同步标识=select时：
+输入规则：“可见标识”、“指定合作企业列表”为空。
+处理规则：返回指定模版的可见标识、指定合作企业列表。
+2、同步标识=update时：
+输入规则：“可见标识”、“指定合作企业列表”非必填输入。
+处理规则：
+若“可见标识”=空，不做处理，返回当前的可见标识。
+若“可见标识”=所有合作企业，不取“指定合作企业列表”的值处理。
+若“可见标识”=指定合作企业，取“指定合作企业列表”的值进行更新/插入。
+3、同步标识=delete时：
+输入规则：“可见标识”、“指定合作企业列表”非必填输入。
+处理规则：
+仅取“指定合作企业列表”的值进行删除处理，为空时不做处。
+     */
+    async OperateChannelTemplate(req, cb) {
+        return this.request("OperateChannelTemplate", req, cb);
     }
     /**
      * 根据流程Id批量创建签署参与者签署H5链接

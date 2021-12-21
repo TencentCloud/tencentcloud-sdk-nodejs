@@ -68,6 +68,16 @@ it("cvm.v20170312.DescribeImageSharePermission", async function () {
     }
 })
 
+it("cvm.v20170312.ModifyLaunchTemplateDefaultVersion", async function () {
+    try {
+       const data = await client.ModifyLaunchTemplateDefaultVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.InquiryPriceModifyInstancesChargeType", async function () {
     try {
        const data = await client.InquiryPriceModifyInstancesChargeType({})
@@ -198,9 +208,9 @@ it("cvm.v20170312.DescribeInstances", async function () {
     }
 })
 
-it("cvm.v20170312.ImportKeyPair", async function () {
+it("cvm.v20170312.DescribeLaunchTemplateVersions", async function () {
     try {
-       const data = await client.ImportKeyPair({})
+       const data = await client.DescribeLaunchTemplateVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +258,19 @@ it("cvm.v20170312.AssociateInstancesKeyPairs", async function () {
     }
 })
 
-it("cvm.v20170312.RunInstances", async function () {
+it("cvm.v20170312.DescribeInstanceVncUrl", async function () {
     try {
-       const data = await client.RunInstances({})
+       const data = await client.DescribeInstanceVncUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.DeleteLaunchTemplate", async function () {
+    try {
+       const data = await client.DeleteLaunchTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +358,16 @@ it("cvm.v20170312.ModifyInstancesRenewFlag", async function () {
     }
 })
 
+it("cvm.v20170312.RenewInstances", async function () {
+    try {
+       const data = await client.RenewInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.PurchaseReservedInstancesOffering", async function () {
     try {
        const data = await client.PurchaseReservedInstancesOffering({})
@@ -351,6 +381,16 @@ it("cvm.v20170312.PurchaseReservedInstancesOffering", async function () {
 it("cvm.v20170312.ResizeInstanceDisks", async function () {
     try {
        const data = await client.ResizeInstanceDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.CreateLaunchTemplate", async function () {
+    try {
+       const data = await client.CreateLaunchTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,6 +468,16 @@ it("cvm.v20170312.ModifyImageAttribute", async function () {
     }
 })
 
+it("cvm.v20170312.StartInstances", async function () {
+    try {
+       const data = await client.StartInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DescribeZones", async function () {
     try {
        const data = await client.DescribeZones({})
@@ -458,9 +508,19 @@ it("cvm.v20170312.InquiryPriceResetInstancesType", async function () {
     }
 })
 
-it("cvm.v20170312.DescribeInstanceFamilyConfigs", async function () {
+it("cvm.v20170312.DeleteLaunchTemplateVersions", async function () {
     try {
-       const data = await client.DescribeInstanceFamilyConfigs({})
+       const data = await client.DeleteLaunchTemplateVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.CreateLaunchTemplateVersion", async function () {
+    try {
+       const data = await client.CreateLaunchTemplateVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +608,19 @@ it("cvm.v20170312.ImportImage", async function () {
     }
 })
 
-it("cvm.v20170312.RenewInstances", async function () {
+it("cvm.v20170312.ImportKeyPair", async function () {
     try {
-       const data = await client.RenewInstances({})
+       const data = await client.ImportKeyPair({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.DescribeLaunchTemplates", async function () {
+    try {
+       const data = await client.DescribeLaunchTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +638,9 @@ it("cvm.v20170312.ModifyDisasterRecoverGroupAttribute", async function () {
     }
 })
 
-it("cvm.v20170312.DescribeInstanceVncUrl", async function () {
+it("cvm.v20170312.DescribeInstanceFamilyConfigs", async function () {
     try {
-       const data = await client.DescribeInstanceVncUrl({})
+       const data = await client.DescribeInstanceFamilyConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,9 +678,9 @@ it("cvm.v20170312.DescribeDisasterRecoverGroups", async function () {
     }
 })
 
-it("cvm.v20170312.StartInstances", async function () {
+it("cvm.v20170312.RunInstances", async function () {
     try {
-       const data = await client.StartInstances({})
+       const data = await client.RunInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

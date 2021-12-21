@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryExternalContactListRequest, QueryClueInfoListResponse, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryLicenseInfoResponse, QueryClueInfoListRequest, QueryActivityListResponse, QueryActivityJoinListRequest, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, CreateCorpTagRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryExternalUserMappingInfoRequest, QueryChannelCodeListResponse } from "./wav_models";
+import { CreateCorpTagResponse, QueryChatArchivingListResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, CreateLeadResponse, QueryVehicleInfoListResponse, QueryVehicleInfoListRequest, QueryExternalContactListRequest, QueryClueInfoListResponse, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListResponse, CreateCorpTagRequest, QueryLicenseInfoResponse, QueryClueInfoListRequest, QueryActivityListResponse, QueryActivityJoinListRequest, QueryExternalUserMappingInfoRequest, QueryChannelCodeListRequest, QueryDealerInfoListResponse, QueryActivityLiveCodeListRequest, QueryActivityJoinListResponse, QueryDealerInfoListRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, CreateLeadRequest, QueryChannelCodeListResponse } from "./wav_models";
 /**
  * wav client
  * @class
@@ -23,6 +23,18 @@ export declare class Client extends AbstractClient {
      * 根据游标拉取活动列表信息
      */
     QueryActivityList(req: QueryActivityListRequest, cb?: (error: string, rep: QueryActivityListResponse) => void): Promise<QueryActivityListResponse>;
+    /**
+     * 企业可通过此接口获取录入在企微SaaS平台上的经销商信息。
+     */
+    QueryDealerInfoList(req: QueryDealerInfoListRequest, cb?: (error: string, rep: QueryDealerInfoListResponse) => void): Promise<QueryDealerInfoListResponse>;
+    /**
+     * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
+     */
+    QueryVehicleInfoList(req: QueryVehicleInfoListRequest, cb?: (error: string, rep: QueryVehicleInfoListResponse) => void): Promise<QueryVehicleInfoListResponse>;
+    /**
+     * 线索回收接口
+     */
+    CreateLead(req: CreateLeadRequest, cb?: (error: string, rep: CreateLeadResponse) => void): Promise<CreateLeadResponse>;
     /**
      * 企业可通过此接口获取线索列表。
      */

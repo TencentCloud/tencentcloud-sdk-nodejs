@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicSubscribeGroup", req, cb);
     }
     /**
+     * 批量设置主题属性
+     */
+    async BatchModifyTopicAttributes(req, cb) {
+        return this.request("BatchModifyTopicAttributes", req, cb);
+    }
+    /**
      * 本接口用于修改主题属性。
      */
     async ModifyTopicAttributes(req, cb) {
@@ -148,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePartition", req, cb);
     }
     /**
+     * 删除用户
+     */
+    async DeleteUser(req, cb) {
+        return this.request("DeleteUser", req, cb);
+    }
+    /**
      * 删除ACL
      */
     async DeleteAcl(req, cb) {
@@ -203,10 +215,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRouteTriggerTime", req, cb);
     }
     /**
-     * 删除用户
+     * 批量修改消费组offset
      */
-    async DeleteUser(req, cb) {
-        return this.request("DeleteUser", req, cb);
+    async BatchModifyGroupOffsets(req, cb) {
+        return this.request("BatchModifyGroupOffsets", req, cb);
     }
     /**
      * 获取Topic 副本详情信息

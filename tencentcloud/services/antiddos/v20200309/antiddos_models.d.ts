@@ -474,6 +474,23 @@ export interface ModifyNewDomainRulesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDDoSBlackWhiteIpList返回参数结构体
+ */
+export interface DescribeDDoSBlackWhiteIpListResponse {
+    /**
+      * 黑名单IP列表
+      */
+    BlackIpList: Array<IpSegment>;
+    /**
+      * 白名单IP列表
+      */
+    WhiteIpList: Array<IpSegment>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateWaterPrintConfig返回参数结构体
  */
 export interface CreateWaterPrintConfigResponse {
@@ -568,6 +585,15 @@ export interface StaticPackRelation {
     CurDeadline: string;
 }
 /**
+ * CreateDDoSBlackWhiteIpList返回参数结构体
+ */
+export interface CreateDDoSBlackWhiteIpListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeL7RulesBySSLCertId请求参数结构体
  */
 export interface DescribeL7RulesBySSLCertIdRequest {
@@ -636,6 +662,23 @@ export interface BoundIpInfo {
     IspCode?: number;
 }
 /**
+ * CreateDDoSBlackWhiteIpList请求参数结构体
+ */
+export interface CreateDDoSBlackWhiteIpListRequest {
+    /**
+      * 资源实例ID
+      */
+    InstanceId: string;
+    /**
+      * IP列表
+      */
+    IpList: Array<IpSegment>;
+    /**
+      * IP类型，取值[black(黑名单IP), white(白名单IP)]
+      */
+    Type: string;
+}
+/**
  * DisassociateDDoSEipAddress返回参数结构体
  */
 export interface DisassociateDDoSEipAddressResponse {
@@ -643,107 +686,6 @@ export interface DisassociateDDoSEipAddressResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 高防IP资产实例信息
- */
-export interface BGPIPInstance {
-    /**
-      * 资产实例的详细信息
-      */
-    InstanceDetail: InstanceRelation;
-    /**
-      * 资产实例的规格信息
-      */
-    SpecificationLimit: BGPIPInstanceSpecification;
-    /**
-      * 资产实例的使用统计信息
-      */
-    Usage: BGPIPInstanceUsages;
-    /**
-      * 资产实例所在的地域
-      */
-    Region: RegionInfo;
-    /**
-      * 资产实例的防护状态，状态码如下：
-"idle"：正常状态(无攻击)
-"attacking"：攻击中
-"blocking"：封堵中
-"creating"：创建中
-"deblocking"：解封中
-"isolate"：回收隔离中
-      */
-    Status: string;
-    /**
-      * 购买时间
-      */
-    ExpiredTime: string;
-    /**
-      * 到期时间
-      */
-    CreatedTime: string;
-    /**
-      * 资产实例的名称
-      */
-    Name: string;
-    /**
-      * 资产实例所属的套餐包信息，
-注意：当资产实例不是套餐包的实例时，此字段为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PackInfo: PackInfo;
-    /**
-      * 资产实例所属的三网套餐包详情，
-注意：当资产实例不是三网套餐包的实例时，此字段为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StaticPackRelation: StaticPackRelation;
-    /**
-      * 区分高防IP境外线路
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ZoneId: number;
-    /**
-      * 区分集群
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tgw: number;
-    /**
-      * 高防弹性公网IP状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)。只对高防弹性公网IP实例有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EipAddressStatus: string;
-    /**
-      * 是否高防弹性公网IP实例，是为1，否为0。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EipFlag: number;
-    /**
-      * 资产实例所属的高防弹性公网IP套餐包详情，
-注意：当资产实例不是高防弹性公网IP套餐包的实例时，此字段为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EipAddressPackRelation: EipAddressPackRelation;
-    /**
-      * 高防弹性公网IP关联的实例信息。
-注意：当资产实例不是高防弹性公网IP实例时，此字段为null
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EipAddressInfo: EipAddressRelation;
-    /**
-      * 建议客户接入的域名，客户可使用域名接入。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Domain: string;
-    /**
-      * 是否开启安全加速，是为1，否为0。
-      */
-    DamDDoSStatus: number;
-    /**
-      * 是否Ipv6版本的IP, 是为1，否为0
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    V6Flag: number;
 }
 /**
  * DeleteBlackWhiteIpList请求参数结构体
@@ -952,6 +894,15 @@ export interface Layer7Rule {
       * 规则所属的资源实例
       */
     InstanceDetails: Array<InstanceRelation>;
+}
+/**
+ * DescribeBasicDeviceStatus请求参数结构体
+ */
+export interface DescribeBasicDeviceStatusRequest {
+    /**
+      * IP 资源列表
+      */
+    IpList: Array<string>;
 }
 /**
  * L4规则回源列表
@@ -1225,9 +1176,106 @@ export interface ProtocolBlockConfig {
     CheckExceptNullConnect: number;
 }
 /**
- * DescribeListListener请求参数结构体
+ * 高防IP资产实例信息
  */
-export declare type DescribeListListenerRequest = null;
+export interface BGPIPInstance {
+    /**
+      * 资产实例的详细信息
+      */
+    InstanceDetail: InstanceRelation;
+    /**
+      * 资产实例的规格信息
+      */
+    SpecificationLimit: BGPIPInstanceSpecification;
+    /**
+      * 资产实例的使用统计信息
+      */
+    Usage: BGPIPInstanceUsages;
+    /**
+      * 资产实例所在的地域
+      */
+    Region: RegionInfo;
+    /**
+      * 资产实例的防护状态，状态码如下：
+"idle"：正常状态(无攻击)
+"attacking"：攻击中
+"blocking"：封堵中
+"creating"：创建中
+"deblocking"：解封中
+"isolate"：回收隔离中
+      */
+    Status: string;
+    /**
+      * 购买时间
+      */
+    ExpiredTime: string;
+    /**
+      * 到期时间
+      */
+    CreatedTime: string;
+    /**
+      * 资产实例的名称
+      */
+    Name: string;
+    /**
+      * 资产实例所属的套餐包信息，
+注意：当资产实例不是套餐包的实例时，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackInfo: PackInfo;
+    /**
+      * 资产实例所属的三网套餐包详情，
+注意：当资产实例不是三网套餐包的实例时，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StaticPackRelation: StaticPackRelation;
+    /**
+      * 区分高防IP境外线路
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneId: number;
+    /**
+      * 区分集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tgw: number;
+    /**
+      * 高防弹性公网IP状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)。只对高防弹性公网IP实例有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EipAddressStatus: string;
+    /**
+      * 是否高防弹性公网IP实例，是为1，否为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EipFlag: number;
+    /**
+      * 资产实例所属的高防弹性公网IP套餐包详情，
+注意：当资产实例不是高防弹性公网IP套餐包的实例时，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EipAddressPackRelation: EipAddressPackRelation;
+    /**
+      * 高防弹性公网IP关联的实例信息。
+注意：当资产实例不是高防弹性公网IP实例时，此字段为null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EipAddressInfo: EipAddressRelation;
+    /**
+      * 建议客户接入的域名，客户可使用域名接入。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain: string;
+    /**
+      * 是否开启安全加速，是为1，否为0。
+      */
+    DamDDoSStatus: number;
+    /**
+      * 是否Ipv6版本的IP, 是为1，否为0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    V6Flag: number;
+}
 /**
  * DeleteWaterPrintConfig返回参数结构体
  */
@@ -1344,6 +1392,15 @@ export interface DeleteWaterPrintConfigRequest {
     InstanceId: string;
 }
 /**
+ * DescribeDDoSBlackWhiteIpList请求参数结构体
+ */
+export interface DescribeDDoSBlackWhiteIpListRequest {
+    /**
+      * 资源实例ID
+      */
+    InstanceId: string;
+}
+/**
  * DescribeListBlackWhiteIpList返回参数结构体
  */
 export interface DescribeListBlackWhiteIpListResponse {
@@ -1424,13 +1481,21 @@ export interface ListenerCcThreholdConfig {
     CCThreshold: number;
 }
 /**
- * DescribeBasicDeviceStatus请求参数结构体
+ * DeleteDDoSBlackWhiteIpList请求参数结构体
  */
-export interface DescribeBasicDeviceStatusRequest {
+export interface DeleteDDoSBlackWhiteIpListRequest {
     /**
-      * IP 资源列表
+      * 资源实例ID
       */
-    IpList: Array<string>;
+    InstanceId: string;
+    /**
+      * IP列表
+      */
+    IpList: Array<IpSegment>;
+    /**
+      * IP类型，取值[black(黑名单IP), white(白名单IP)]
+      */
+    Type: string;
 }
 /**
  * IP线路信息
@@ -1540,6 +1605,19 @@ off(关闭)
       * 域名与协议纬度的防护阈值
       */
     ListenerCcThresholdList: Array<ListenerCcThreholdConfig>;
+}
+/**
+ * ip段数据结构
+ */
+export interface IpSegment {
+    /**
+      * ip地址
+      */
+    Ip: string;
+    /**
+      * ip掩码，如果为32位ip，填0
+      */
+    Mask: number;
 }
 /**
  * ModifyL7RulesEdge返回参数结构体
@@ -2297,6 +2375,15 @@ export interface DescribeListSchedulingDomainResponse {
     RequestId?: string;
 }
 /**
+ * DeleteDDoSBlackWhiteIpList返回参数结构体
+ */
+export interface DeleteDDoSBlackWhiteIpListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCCTrend返回参数结构体
  */
 export interface DescribeCCTrendResponse {
@@ -2633,6 +2720,10 @@ export interface DeleteDDoSSpeedLimitConfigResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeListListener请求参数结构体
+ */
+export declare type DescribeListListenerRequest = null;
 /**
  * L7规则
  */

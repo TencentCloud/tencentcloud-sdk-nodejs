@@ -714,6 +714,14 @@ export interface RunJobDescription {
       * 当前作业的某个版本
       */
     JobConfigVersion?: number;
+    /**
+      * Savepoint路径
+      */
+    SavepointPath?: string;
+    /**
+      * Savepoint的Id
+      */
+    SavepointId?: string;
 }
 /**
  * DescribeJobConfigs返回参数结构体

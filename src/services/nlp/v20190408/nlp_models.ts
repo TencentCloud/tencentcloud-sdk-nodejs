@@ -701,7 +701,7 @@ export interface DescribeTripleResponse {
   /**
    * 返回三元组信息
    */
-  Content?: Array<TripleContent>
+  Content: Array<TripleContent>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

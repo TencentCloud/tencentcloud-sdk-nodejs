@@ -39,13 +39,15 @@ import {
   PostPaidQuota,
   ResetInstancesTypeRequest,
   InquiryPriceResetInstanceRequest,
-  ModifyImageSharePermissionResponse,
+  DeleteLaunchTemplateVersionsRequest,
   DeleteImagesRequest,
+  DeleteLaunchTemplateRequest,
   DescribeInstancesResponse,
   DescribeHostsResponse,
   DeleteKeyPairsRequest,
   SystemDisk,
   ResetInstanceRequest,
+  LaunchTemplate,
   InstanceTypeConfig,
   AllocateHostsRequest,
   LoginSettings,
@@ -53,28 +55,32 @@ import {
   PurchaseReservedInstancesOfferingRequest,
   RebootInstancesRequest,
   AssociateInstancesKeyPairsRequest,
+  DeleteLaunchTemplateResponse,
   ImportKeyPairResponse,
   DescribeInstancesStatusResponse,
   ZoneInfo,
-  DescribeInstanceTypeConfigsRequest,
+  ModifyLaunchTemplateDefaultVersionResponse,
+  LaunchTemplateVersionInfo,
+  InquiryPriceModifyInstancesChargeTypeResponse,
   DescribeKeyPairsResponse,
   ResetInstancesPasswordRequest,
   InternetChargeTypeConfig,
   DescribeImagesResponse,
   ModifyInstancesVpcAttributeResponse,
-  InquiryPriceResetInstancesTypeRequest,
+  DescribeLaunchTemplatesResponse,
   DescribeInstancesOperationLimitRequest,
   ModifyInstancesChargeTypeRequest,
   DescribeInstanceVncUrlRequest,
   StopInstancesResponse,
   ModifyImageSharePermissionRequest,
   DisassociateInstancesKeyPairsResponse,
+  DescribeLaunchTemplateVersionsRequest,
   InquiryPriceResizeInstanceDisksRequest,
   RunInstancesResponse,
   ReservedInstancePrice,
   DisasterRecoverGroupQuota,
   ModifyInstancesAttributeResponse,
-  InquiryPriceModifyInstancesChargeTypeResponse,
+  ModifyImageSharePermissionResponse,
   DescribeInstancesOperationLimitResponse,
   SyncImagesResponse,
   DescribeZoneInstanceConfigInfosResponse,
@@ -98,6 +104,7 @@ import {
   DescribeInstancesModificationRequest,
   InstanceMarketOptionsRequest,
   DescribeImageSharePermissionResponse,
+  DeleteLaunchTemplateVersionsResponse,
   ResetInstancesPasswordResponse,
   InquiryPriceRunInstancesRequest,
   Image,
@@ -113,12 +120,14 @@ import {
   DescribeKeyPairsRequest,
   OperationCountLimit,
   ReservedInstanceConfigInfoItem,
+  LaunchTemplateVersionData,
   DeleteDisasterRecoverGroupsResponse,
   HostItem,
   Externals,
   InquiryPriceModifyInstancesChargeTypeRequest,
   CreateImageRequest,
   Instance,
+  CreateLaunchTemplateVersionRequest,
   EnhancedService,
   CreateKeyPairResponse,
   DescribeInstanceVncUrlResponse,
@@ -129,23 +138,27 @@ import {
   RunSecurityServiceEnabled,
   ActionTimer,
   ModifyInstanceDiskTypeResponse,
+  CreateLaunchTemplateRequest,
   DescribeReservedInstancesConfigInfosRequest,
   TagSpecification,
+  DescribeLaunchTemplatesRequest,
   ResetInstancesInternetMaxBandwidthRequest,
   InstanceFamilyConfig,
   AssociateSecurityGroupsResponse,
   ImportImageRequest,
   SpotMarketOptions,
   DescribeImportImageOsRequest,
+  CreateLaunchTemplateResponse,
   CreateKeyPairRequest,
   InstanceStatus,
   InquiryPriceRenewInstancesResponse,
   AllocateHostsResponse,
   DescribeImageSharePermissionRequest,
-  DisasterRecoverGroup,
+  DescribeInstancesRequest,
   InquiryPriceResetInstanceResponse,
   RunInstancesRequest,
   Filter,
+  LaunchTemplateInfo,
   InquiryPriceResetInstancesInternetMaxBandwidthRequest,
   ModifyHostsAttributeResponse,
   DescribeDisasterRecoverGroupQuotaRequest,
@@ -154,6 +167,7 @@ import {
   DescribeReservedInstancesRequest,
   DescribeInternetChargeTypeConfigsResponse,
   AccountQuotaOverview,
+  RunAutomationServiceEnabled,
   DescribeZoneInstanceConfigInfosRequest,
   DescribeZonesResponse,
   ItemPrice,
@@ -180,12 +194,15 @@ import {
   ModifyInstanceDiskTypeRequest,
   InquiryPriceResetInstancesTypeResponse,
   ReservedInstancesOffering,
+  CreateLaunchTemplateVersionResponse,
   OsVersion,
   ModifyImageAttributeResponse,
   InquiryPriceRenewInstancesRequest,
   InstanceRefund,
-  DescribeInstancesRequest,
+  DescribeInstanceTypeConfigsRequest,
   RegionInfo,
+  InquiryPriceResetInstancesTypeRequest,
+  ModifyLaunchTemplateDefaultVersionRequest,
   StopInstancesRequest,
   DescribeInternetChargeTypeConfigsRequest,
   DescribeImagesRequest,
@@ -198,10 +215,11 @@ import {
   KeyPair,
   DescribeReservedInstancesOfferingsResponse,
   RenewInstancesResponse,
-  RunAutomationServiceEnabled,
+  DescribeLaunchTemplateVersionsResponse,
   DescribeAccountQuotaResponse,
   RunMonitorServiceEnabled,
   ResetInstanceResponse,
+  DisasterRecoverGroup,
   VirtualPrivateCloud,
   InstanceChargePrepaid,
   ModifyDisasterRecoverGroupAttributeResponse,
@@ -292,6 +310,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageSharePermissionResponse) => void
   ): Promise<DescribeImageSharePermissionResponse> {
     return this.request("DescribeImageSharePermission", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyLaunchTemplateDefaultVersion）用于修改实例启动模板默认版本。
+   */
+  async ModifyLaunchTemplateDefaultVersion(
+    req: ModifyLaunchTemplateDefaultVersionRequest,
+    cb?: (error: string, rep: ModifyLaunchTemplateDefaultVersionResponse) => void
+  ): Promise<ModifyLaunchTemplateDefaultVersionResponse> {
+    return this.request("ModifyLaunchTemplateDefaultVersion", req, cb)
   }
 
   /**
@@ -465,17 +493,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (ImportKeyPair) 用于导入密钥对。
-
-* 本接口的功能是将密钥对导入到用户账户，并不会自动绑定到实例。如需绑定可以使用[AssociasteInstancesKeyPair](https://cloud.tencent.com/document/api/213/9404)接口。
-* 需指定密钥对名称以及该密钥对的公钥文本。
-* 如果用户只有私钥，可以通过 `SSL` 工具将私钥转换成公钥后再导入。
-     */
-  async ImportKeyPair(
-    req: ImportKeyPairRequest,
-    cb?: (error: string, rep: ImportKeyPairResponse) => void
-  ): Promise<ImportKeyPairResponse> {
-    return this.request("ImportKeyPair", req, cb)
+   * 本接口（DescribeLaunchTemplateVersions）用于查询实例模板版本信息。
+   */
+  async DescribeLaunchTemplateVersions(
+    req: DescribeLaunchTemplateVersionsRequest,
+    cb?: (error: string, rep: DescribeLaunchTemplateVersionsResponse) => void
+  ): Promise<DescribeLaunchTemplateVersionsResponse> {
+    return this.request("DescribeLaunchTemplateVersions", req, cb)
   }
 
   /**
@@ -534,19 +558,38 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
+     * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
 
-* 实例创建成功后将自动开机启动，[实例状态](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)变为“运行中”。
-* 预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
-* 调用本接口创建实例，支持代金券自动抵扣（注意，代金券不可用于抵扣后付费冻结金额），详情请参考[代金券选用规则](https://cloud.tencent.com/document/product/555/7428)。
-* 本接口允许购买的实例数量遵循[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)，所创建的实例和官网入口创建的实例共用配额。
-* 本接口为异步接口，当创建实例请求下发成功后会返回一个实例`ID`列表和一个`RequestId`，此时创建实例操作并未立即完成。在此期间实例的状态将会处于“PENDING”，实例创建结果可以通过调用 [DescribeInstancesStatus](https://cloud.tencent.com/document/product/213/15738)  接口查询，如果实例状态(InstanceState)由“PENDING”变为“RUNNING”，则代表实例创建成功，“LAUNCH_FAILED”代表实例创建失败。
+* 处于 `STOPPED` 状态的机器无法使用此功能。
+* 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
+* 管理终端地址一旦被访问，将自动失效，您需要重新查询。
+* 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
+* 获取到 `InstanceVncUrl` 后，您需要在链接 <https://img.qcloud.com/qcloud/app/active_vnc/index.html?> 末尾加上参数 `InstanceVncUrl=xxxx`  。
+
+  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
+
+    最后组成的 URL 格式如下：
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
      */
-  async RunInstances(
-    req: RunInstancesRequest,
-    cb?: (error: string, rep: RunInstancesResponse) => void
-  ): Promise<RunInstancesResponse> {
-    return this.request("RunInstances", req, cb)
+  async DescribeInstanceVncUrl(
+    req: DescribeInstanceVncUrlRequest,
+    cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void
+  ): Promise<DescribeInstanceVncUrlResponse> {
+    return this.request("DescribeInstanceVncUrl", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteLaunchTemplate）用于删除一个实例启动模板。
+   */
+  async DeleteLaunchTemplate(
+    req: DeleteLaunchTemplateRequest,
+    cb?: (error: string, rep: DeleteLaunchTemplateResponse) => void
+  ): Promise<DeleteLaunchTemplateResponse> {
+    return this.request("DeleteLaunchTemplate", req, cb)
   }
 
   /**
@@ -658,6 +701,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 (RenewInstances) 用于续费包年包月实例。
+
+* 只支持操作包年包月实例。
+* 续费时请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
+* 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
+     */
+  async RenewInstances(
+    req: RenewInstancesRequest,
+    cb?: (error: string, rep: RenewInstancesResponse) => void
+  ): Promise<RenewInstancesResponse> {
+    return this.request("RenewInstances", req, cb)
+  }
+
+  /**
    * 本接口(PurchaseReservedInstancesOffering)用于用户购买一个或者多个指定配置的预留实例
    */
   async PurchaseReservedInstancesOffering(
@@ -680,6 +737,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResizeInstanceDisksResponse) => void
   ): Promise<ResizeInstanceDisksResponse> {
     return this.request("ResizeInstanceDisks", req, cb)
+  }
+
+  /**
+     * 本接口（CreateLaunchTemplate）用于创建实例启动模板。
+
+实例启动模板是一种配置数据并可用于创建实例，其内容包含创建实例所需的配置，比如实例类型，数据盘和系统盘的类型和大小，以及安全组等信息。
+
+初次创建实例模板后，其模板版本为默认版本1，新版本的创建可使用CreateLaunchTemplateVersion创建，版本号递增。默认情况下，在RunInstances中指定实例启动模板，若不指定模板版本号，则使用默认版本。
+     */
+  async CreateLaunchTemplate(
+    req: CreateLaunchTemplateRequest,
+    cb?: (error: string, rep: CreateLaunchTemplateResponse) => void
+  ): Promise<CreateLaunchTemplateResponse> {
+    return this.request("CreateLaunchTemplate", req, cb)
   }
 
   /**
@@ -760,6 +831,21 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 (StartInstances) 用于启动一个或多个实例。
+
+* 只有状态为`STOPPED`的实例才可以进行此操作。
+* 接口调用成功时，实例会进入`STARTING`状态；启动实例成功时，实例会进入`RUNNING`状态。
+* 支持批量操作。每次请求批量实例的上限为100。
+* 本接口为异步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表启动实例操作成功。
+     */
+  async StartInstances(
+    req: StartInstancesRequest,
+    cb?: (error: string, rep: StartInstancesResponse) => void
+  ): Promise<StartInstancesResponse> {
+    return this.request("StartInstances", req, cb)
+  }
+
+  /**
    * 本接口(DescribeZones)用于查询可用区信息。
    */
   async DescribeZones(
@@ -796,13 +882,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
+   * 本接口（DeleteLaunchTemplateVersions）用于删除一个或者多个实例启动模板版本。
    */
-  async DescribeInstanceFamilyConfigs(
-    req?: DescribeInstanceFamilyConfigsRequest,
-    cb?: (error: string, rep: DescribeInstanceFamilyConfigsResponse) => void
-  ): Promise<DescribeInstanceFamilyConfigsResponse> {
-    return this.request("DescribeInstanceFamilyConfigs", req, cb)
+  async DeleteLaunchTemplateVersions(
+    req: DeleteLaunchTemplateVersionsRequest,
+    cb?: (error: string, rep: DeleteLaunchTemplateVersionsResponse) => void
+  ): Promise<DeleteLaunchTemplateVersionsResponse> {
+    return this.request("DeleteLaunchTemplateVersions", req, cb)
+  }
+
+  /**
+   * 本接口（CreateLaunchTemplateVersion）根据指定的实例模板ID以及对应的模板版本号创建新的实例启动模板，若未指定模板版本号则使用默认版本号。每个实例启动模板最多创建30个版本。
+   */
+  async CreateLaunchTemplateVersion(
+    req: CreateLaunchTemplateVersionRequest,
+    cb?: (error: string, rep: CreateLaunchTemplateVersionResponse) => void
+  ): Promise<CreateLaunchTemplateVersionResponse> {
+    return this.request("CreateLaunchTemplateVersion", req, cb)
   }
 
   /**
@@ -902,17 +998,27 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (RenewInstances) 用于续费包年包月实例。
+     * 本接口 (ImportKeyPair) 用于导入密钥对。
 
-* 只支持操作包年包月实例。
-* 续费时请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
-* 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
+* 本接口的功能是将密钥对导入到用户账户，并不会自动绑定到实例。如需绑定可以使用[AssociasteInstancesKeyPair](https://cloud.tencent.com/document/api/213/9404)接口。
+* 需指定密钥对名称以及该密钥对的公钥文本。
+* 如果用户只有私钥，可以通过 `SSL` 工具将私钥转换成公钥后再导入。
      */
-  async RenewInstances(
-    req: RenewInstancesRequest,
-    cb?: (error: string, rep: RenewInstancesResponse) => void
-  ): Promise<RenewInstancesResponse> {
-    return this.request("RenewInstances", req, cb)
+  async ImportKeyPair(
+    req: ImportKeyPairRequest,
+    cb?: (error: string, rep: ImportKeyPairResponse) => void
+  ): Promise<ImportKeyPairResponse> {
+    return this.request("ImportKeyPair", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLaunchTemplates）用于查询一个或者多个实例启动模板。
+   */
+  async DescribeLaunchTemplates(
+    req: DescribeLaunchTemplatesRequest,
+    cb?: (error: string, rep: DescribeLaunchTemplatesResponse) => void
+  ): Promise<DescribeLaunchTemplatesResponse> {
+    return this.request("DescribeLaunchTemplates", req, cb)
   }
 
   /**
@@ -926,28 +1032,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
-
-* 处于 `STOPPED` 状态的机器无法使用此功能。
-* 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
-* 管理终端地址一旦被访问，将自动失效，您需要重新查询。
-* 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
-* 获取到 `InstanceVncUrl` 后，您需要在链接 <https://img.qcloud.com/qcloud/app/active_vnc/index.html?> 末尾加上参数 `InstanceVncUrl=xxxx`  。
-
-  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
-
-    最后组成的 URL 格式如下：
-
-```
-https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
-```
-
-     */
-  async DescribeInstanceVncUrl(
-    req: DescribeInstanceVncUrlRequest,
-    cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void
-  ): Promise<DescribeInstanceVncUrlResponse> {
-    return this.request("DescribeInstanceVncUrl", req, cb)
+   * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
+   */
+  async DescribeInstanceFamilyConfigs(
+    req?: DescribeInstanceFamilyConfigsRequest,
+    cb?: (error: string, rep: DescribeInstanceFamilyConfigsResponse) => void
+  ): Promise<DescribeInstanceFamilyConfigsResponse> {
+    return this.request("DescribeInstanceFamilyConfigs", req, cb)
   }
 
   /**
@@ -988,18 +1079,19 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-     * 本接口 (StartInstances) 用于启动一个或多个实例。
+     * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
 
-* 只有状态为`STOPPED`的实例才可以进行此操作。
-* 接口调用成功时，实例会进入`STARTING`状态；启动实例成功时，实例会进入`RUNNING`状态。
-* 支持批量操作。每次请求批量实例的上限为100。
-* 本接口为异步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表启动实例操作成功。
+* 实例创建成功后将自动开机启动，[实例状态](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)变为“运行中”。
+* 预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
+* 调用本接口创建实例，支持代金券自动抵扣（注意，代金券不可用于抵扣后付费冻结金额），详情请参考[代金券选用规则](https://cloud.tencent.com/document/product/555/7428)。
+* 本接口允许购买的实例数量遵循[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)，所创建的实例和官网入口创建的实例共用配额。
+* 本接口为异步接口，当创建实例请求下发成功后会返回一个实例`ID`列表和一个`RequestId`，此时创建实例操作并未立即完成。在此期间实例的状态将会处于“PENDING”，实例创建结果可以通过调用 [DescribeInstancesStatus](https://cloud.tencent.com/document/product/213/15738)  接口查询，如果实例状态(InstanceState)由“PENDING”变为“RUNNING”，则代表实例创建成功，“LAUNCH_FAILED”代表实例创建失败。
      */
-  async StartInstances(
-    req: StartInstancesRequest,
-    cb?: (error: string, rep: StartInstancesResponse) => void
-  ): Promise<StartInstancesResponse> {
-    return this.request("StartInstances", req, cb)
+  async RunInstances(
+    req: RunInstancesRequest,
+    cb?: (error: string, rep: RunInstancesResponse) => void
+  ): Promise<RunInstancesResponse> {
+    return this.request("RunInstances", req, cb)
   }
 
   /**

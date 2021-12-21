@@ -3496,6 +3496,26 @@ CCN VPN 形的通道 可以不传VPCID
    * 通道类型, 例如:["STATIC", "StaticRoute", "Policy"]
    */
   RouteType?: string
+
+  /**
+   * 协商类型，默认为active（主动协商）。可选值：active（主动协商），passive（被动协商），flowTrigger（流量协商）
+   */
+  NegotiationType?: string
+
+  /**
+   * DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启）
+   */
+  DpdEnable?: number
+
+  /**
+   * DPD超时时间。即探测确认对端不存在需要的时间。dpdEnable为1（开启）时有效。默认30，单位为秒
+   */
+  DpdTimeout?: string
+
+  /**
+   * DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）
+   */
+  DpdAction?: string
 }
 
 /**
@@ -10761,6 +10781,26 @@ export interface ModifyVpnConnectionAttributeRequest {
    * 对端通道探测ip
    */
   HealthCheckRemoteIp?: string
+
+  /**
+   * 协商类型，默认为active（主动协商）。可选值：active（主动协商），passive（被动协商），flowTrigger（流量协商）
+   */
+  NegotiationType?: string
+
+  /**
+   * DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启）
+   */
+  DpdEnable?: number
+
+  /**
+   * DPD超时时间。即探测确认对端不存在需要的时间。dpdEnable为1（开启）时有效。默认30，单位为秒
+   */
+  DpdTimeout?: string
+
+  /**
+   * DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）
+   */
+  DpdAction?: string
 }
 
 /**

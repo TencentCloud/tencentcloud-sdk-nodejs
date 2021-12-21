@@ -184,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCmqSubscribe", req, cb);
     }
     /**
+     * 获取消息生产概览信息
+     */
+    async DescribePublisherSummary(req, cb) {
+        return this.request("DescribePublisherSummary", req, cb);
+    }
+    /**
      * 删除RocketMQ命名空间
      */
     async DeleteRocketMQNamespace(req, cb) {
@@ -532,6 +538,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEnvironmentRoles(req, cb) {
         return this.request("DescribeEnvironmentRoles", req, cb);
+    }
+    /**
+     * 获取生产者信息列表
+     */
+    async DescribePublishers(req, cb) {
+        return this.request("DescribePublishers", req, cb);
     }
     /**
      * 此接口用于创建一个RocketMQ集群

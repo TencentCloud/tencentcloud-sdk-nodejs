@@ -238,6 +238,41 @@ export interface QueryExternalUserMappingInfoResponse {
 }
 
 /**
+ * 标签组信息
+ */
+export interface TagGroup {
+  /**
+   * 企微标签组id
+   */
+  GroupId: string
+
+  /**
+   * 标签组业务id
+   */
+  BizGroupId: string
+
+  /**
+   * 企微标签组名称，不能超过15个字符
+   */
+  GroupName: string
+
+  /**
+   * 标签组次序值。sort值大的排序靠前。有效的值范围是[0, 2^32)
+   */
+  Sort: number
+
+  /**
+   * 标签组创建时间,单位为秒
+   */
+  CreateTime: number
+
+  /**
+   * 标签组内的标签列表, 上限为20
+   */
+  Tags: Array<TagDetailInfo>
+}
+
+/**
  * 渠道活码详情
  */
 export interface ChannelCodeInnerDetail {
@@ -360,32 +395,6 @@ export interface ExternalContact {
 }
 
 /**
- * 列部联系人简短信息
- */
-export interface ExternalContactSimpleInfo {
-  /**
-   * 外部联系人的userId
-   */
-  ExternalUserId: string
-
-  /**
-   * 添加了此外部联系人的企业成员userId
-   */
-  UserId: string
-
-  /**
-      * 添加了此外部联系人的企业成员的姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SalesName: string
-
-  /**
-   * 添加了此外部联系人的企业成员的归属部门id列表
-   */
-  DepartmentIdList: Array<number>
-}
-
-/**
  * 标签信息
  */
 export interface TagInfo {
@@ -431,6 +440,41 @@ export interface TagDetailInfo {
 }
 
 /**
+ * 车型车系信息
+ */
+export interface VehicleInfo {
+  /**
+   * 品牌id
+   */
+  BrandId: number
+
+  /**
+   * 品牌名称
+   */
+  BrandName: string
+
+  /**
+   * 车系id
+   */
+  SeriesId: number
+
+  /**
+   * 车系名称
+   */
+  SeriesName: string
+
+  /**
+   * 车型id
+   */
+  ModelId: number
+
+  /**
+   * 车型名称
+   */
+  ModelName: string
+}
+
+/**
  * 会话存档的视频消息类型
  */
 export interface ChatArchivingMsgTypeVideo {
@@ -450,6 +494,69 @@ export interface ChatArchivingMsgTypeVideo {
    * 视频资源对象Cos下载地址
    */
   CosKey: string
+}
+
+/**
+ * CreateLead返回参数结构体
+ */
+export interface CreateLeadResponse {
+  /**
+   * 线索处理状态码： 0-表示创建成功， 1-表示线索合并，2-表示线索重复
+   */
+  BusinessCode: number
+
+  /**
+   * 线索处理结果描述
+   */
+  BusinessMsg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryVehicleInfoList返回参数结构体
+ */
+export interface QueryVehicleInfoListResponse {
+  /**
+      * 车系车型信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<VehicleInfo>
+
+  /**
+      * 分页游标，下次调用带上该值，则从当前的位置继续往后拉取新增的数据，以实现增量拉取。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 是否还有更多数据。0-否；1-是。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasMore: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryVehicleInfoList请求参数结构体
+ */
+export interface QueryVehicleInfoListRequest {
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
+
+  /**
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+   */
+  Limit?: number
 }
 
 /**
@@ -629,86 +736,6 @@ export interface QueryExternalContactDetailResponse {
 }
 
 /**
- * 活动活码详情
- */
-export interface LiveCodeDetail {
-  /**
-   * 活码id
-   */
-  LiveCodeId: number
-
-  /**
-   * 活码名称
-   */
-  LiveCodeName: string
-
-  /**
-      * 短链url
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ShortChainAddress: string
-
-  /**
-      * 活码二维码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LiveCodePreview: string
-
-  /**
-   * 活动id
-   */
-  ActivityId: number
-
-  /**
-   * 活动名称
-   */
-  ActivityName: string
-
-  /**
-   * 活码状态，-1：删除，0：启用，1禁用，默认为0
-   */
-  LiveCodeState: number
-
-  /**
-      * 活码参数，每个活码参数都是不一样的， 这个的值对应的是字符串json类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LiveCodeData: string
-
-  /**
-   * 创建时间戳，单位为秒
-   */
-  CreateTime: number
-
-  /**
-   * 更新时间戳，单位为秒
-   */
-  UpdateTime: number
-}
-
-/**
- * QueryExternalContactList返回参数结构体
- */
-export interface QueryExternalContactListResponse {
-  /**
-      * 外部联系人信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PageData: Array<ExternalContactSimpleInfo>
-
-  /**
-      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NextCursor: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 添加了此外部联系人的企业成员信息
  */
 export interface FollowUser {
@@ -752,6 +779,54 @@ export interface FollowUser {
 }
 
 /**
+ * QueryExternalContactList返回参数结构体
+ */
+export interface QueryExternalContactListResponse {
+  /**
+      * 外部联系人信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<ExternalContactSimpleInfo>
+
+  /**
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 列部联系人简短信息
+ */
+export interface ExternalContactSimpleInfo {
+  /**
+   * 外部联系人的userId
+   */
+  ExternalUserId: string
+
+  /**
+   * 添加了此外部联系人的企业成员userId
+   */
+  UserId: string
+
+  /**
+      * 添加了此外部联系人的企业成员的姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SalesName: string
+
+  /**
+   * 添加了此外部联系人的企业成员的归属部门id列表
+   */
+  DepartmentIdList: Array<number>
+}
+
+/**
  * QueryActivityLiveCodeList返回参数结构体
  */
 export interface QueryActivityLiveCodeListResponse {
@@ -774,25 +849,23 @@ export interface QueryActivityLiveCodeListResponse {
 }
 
 /**
- * QueryActivityJoinList返回参数结构体
+ * CreateCorpTag请求参数结构体
  */
-export interface QueryActivityJoinListResponse {
+export interface CreateCorpTagRequest {
   /**
-      * 分页游标
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NextCursor: string
-
-  /**
-      * 活码列表响应参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PageData: Array<ActivityJoinDetail>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 标签组名称，最长为15个字符
    */
-  RequestId?: string
+  GroupName: string
+
+  /**
+   * 标签信息数组
+   */
+  Tags: Array<TagInfo>
+
+  /**
+   * 标签组次序值。sort值大的排序靠前。有效的值范围是[0, 2^32)
+   */
+  Sort?: number
 }
 
 /**
@@ -905,6 +978,64 @@ export interface ActivityDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ActivityDataList: string
+}
+
+/**
+ * 活动活码详情
+ */
+export interface LiveCodeDetail {
+  /**
+   * 活码id
+   */
+  LiveCodeId: number
+
+  /**
+   * 活码名称
+   */
+  LiveCodeName: string
+
+  /**
+      * 短链url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShortChainAddress: string
+
+  /**
+      * 活码二维码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LiveCodePreview: string
+
+  /**
+   * 活动id
+   */
+  ActivityId: number
+
+  /**
+   * 活动名称
+   */
+  ActivityName: string
+
+  /**
+   * 活码状态，-1：删除，0：启用，1禁用，默认为0
+   */
+  LiveCodeState: number
+
+  /**
+      * 活码参数，每个活码参数都是不一样的， 这个的值对应的是字符串json类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LiveCodeData: string
+
+  /**
+   * 创建时间戳，单位为秒
+   */
+  CreateTime: number
+
+  /**
+   * 更新时间戳，单位为秒
+   */
+  UpdateTime: number
 }
 
 /**
@@ -1037,38 +1168,28 @@ export interface QueryActivityJoinListRequest {
 }
 
 /**
- * 标签组信息
+ * 经销商信息
  */
-export interface TagGroup {
+export interface DealerInfo {
   /**
-   * 企微标签组id
+   * 企微SaaS平台经销商id
    */
-  GroupId: string
+  DealerId: number
 
   /**
-   * 标签组业务id
+   * 经销商名称
    */
-  BizGroupId: string
+  DealerName: string
+}
 
+/**
+ * QueryExternalUserMappingInfo请求参数结构体
+ */
+export interface QueryExternalUserMappingInfoRequest {
   /**
-   * 企微标签组名称，不能超过15个字符
+   * 企业主体对应的外部联系人id列表，列表长度限制最大为50。
    */
-  GroupName: string
-
-  /**
-   * 标签组次序值。sort值大的排序靠前。有效的值范围是[0, 2^32)
-   */
-  Sort: number
-
-  /**
-   * 标签组创建时间,单位为秒
-   */
-  CreateTime: number
-
-  /**
-   * 标签组内的标签列表, 上限为20
-   */
-  Tags: Array<TagDetailInfo>
+  CorpExternalUserIdList: Array<string>
 }
 
 /**
@@ -1084,6 +1205,34 @@ export interface QueryChannelCodeListRequest {
    * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
    */
   Limit?: number
+}
+
+/**
+ * QueryDealerInfoList返回参数结构体
+ */
+export interface QueryDealerInfoListResponse {
+  /**
+      * 经销商信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<DealerInfo>
+
+  /**
+      * 分页游标，下次调用带上该值，则从当前的位置继续往后拉取新增的数据，以实现增量拉取。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 是否还有更多数据。0-否；1-是。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasMore: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1149,23 +1298,25 @@ export interface QueryActivityLiveCodeListRequest {
 }
 
 /**
- * CreateCorpTag请求参数结构体
+ * QueryActivityJoinList返回参数结构体
  */
-export interface CreateCorpTagRequest {
+export interface QueryActivityJoinListResponse {
   /**
-   * 标签组名称，最长为15个字符
-   */
-  GroupName: string
+      * 分页游标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
 
   /**
-   * 标签信息数组
-   */
-  Tags: Array<TagInfo>
+      * 活码列表响应参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<ActivityJoinDetail>
 
   /**
-   * 标签组次序值。sort值大的排序靠前。有效的值范围是[0, 2^32)
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Sort?: number
+  RequestId?: string
 }
 
 /**
@@ -1241,6 +1392,21 @@ export interface ClueInfoDetail {
    * 标签
    */
   TagList: Array<string>
+}
+
+/**
+ * QueryDealerInfoList请求参数结构体
+ */
+export interface QueryDealerInfoListRequest {
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
+
+  /**
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+   */
+  Limit?: number
 }
 
 /**
@@ -1331,13 +1497,83 @@ export interface QueryChatArchivingListRequest {
 }
 
 /**
- * QueryExternalUserMappingInfo请求参数结构体
+ * CreateLead请求参数结构体
  */
-export interface QueryExternalUserMappingInfoRequest {
+export interface CreateLeadRequest {
   /**
-   * 企业主体对应的外部联系人id列表，列表长度限制最大为50。
+   * 来源ID
    */
-  CorpExternalUserIdList: Array<string>
+  ChannelId: number
+
+  /**
+   * 来源名称
+   */
+  ChannelName: string
+
+  /**
+   * 创建时间， 单位毫秒
+   */
+  CreateTime: number
+
+  /**
+   * 线索类型：1-400呼入，2-常规留资
+   */
+  SourceType: number
+
+  /**
+   * 经销商id
+   */
+  DealerId: number
+
+  /**
+   * 品牌id
+   */
+  BrandId: number
+
+  /**
+   * 车系id
+   */
+  SeriesId: number
+
+  /**
+   * 客户姓名
+   */
+  CustomerName: string
+
+  /**
+   * 客户手机号
+   */
+  CustomerPhone: string
+
+  /**
+   * 车型id
+   */
+  ModelId?: number
+
+  /**
+   * 客户性别: 0-未知, 1-男, 2-女
+   */
+  CustomerSex?: number
+
+  /**
+   * 销售姓名
+   */
+  SalesName?: string
+
+  /**
+   * 销售手机号
+   */
+  SalesPhone?: string
+
+  /**
+   * Cc坐席姓名
+   */
+  CcName?: string
+
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**

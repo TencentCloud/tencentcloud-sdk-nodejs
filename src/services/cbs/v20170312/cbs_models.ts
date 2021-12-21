@@ -2154,4 +2154,14 @@ export interface ApplySnapshotRequest {
    * 快照原云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
    */
   DiskId: string
+
+  /**
+   * 回滚前是否执行自动关机
+   */
+  AutoStopInstance?: boolean
+
+  /**
+   * 回滚完成后是否自动开机
+   */
+  AutoStartInstance?: boolean
 }

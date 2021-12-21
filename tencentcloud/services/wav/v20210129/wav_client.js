@@ -52,6 +52,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryActivityList", req, cb);
     }
     /**
+     * 企业可通过此接口获取录入在企微SaaS平台上的经销商信息。
+     */
+    async QueryDealerInfoList(req, cb) {
+        return this.request("QueryDealerInfoList", req, cb);
+    }
+    /**
+     * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
+     */
+    async QueryVehicleInfoList(req, cb) {
+        return this.request("QueryVehicleInfoList", req, cb);
+    }
+    /**
+     * 线索回收接口
+     */
+    async CreateLead(req, cb) {
+        return this.request("CreateLead", req, cb);
+    }
+    /**
      * 企业可通过此接口获取线索列表。
      */
     async QueryClueInfoList(req, cb) {

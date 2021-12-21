@@ -402,13 +402,18 @@ export interface InquiryPriceResetInstanceRequest {
 }
 
 /**
- * ModifyImageSharePermission返回参数结构体
+ * DeleteLaunchTemplateVersions请求参数结构体
  */
-export interface ModifyImageSharePermissionResponse {
+export interface DeleteLaunchTemplateVersionsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 启动模板ID。
    */
-  RequestId?: string
+  LaunchTemplateId: string
+
+  /**
+   * 实例启动模板版本列表。
+   */
+  LaunchTemplateVersions: Array<number>
 }
 
 /**
@@ -419,6 +424,16 @@ export interface DeleteImagesRequest {
    * 准备删除的镜像Id列表
    */
   ImageIds: Array<string>
+}
+
+/**
+ * DeleteLaunchTemplate请求参数结构体
+ */
+export interface DeleteLaunchTemplateRequest {
+  /**
+   * 启动模板ID。
+   */
+  LaunchTemplateId: string
 }
 
 /**
@@ -530,6 +545,21 @@ export interface ResetInstanceRequest {
    * 重装系统时，可以指定修改实例的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
    */
   HostName?: string
+}
+
+/**
+ * 实例启动模板，通过该参数可使用实例模板中的预设参数创建实例。
+ */
+export interface LaunchTemplate {
+  /**
+   * 实例启动模板ID，通过该参数可使用实例模板中的预设参数创建实例。
+   */
+  LaunchTemplateId?: string
+
+  /**
+   * 实例启动模板版本号，若给定，新实例启动模板将基于给定的版本号创建
+   */
+  LaunchTemplateVersion?: number
 }
 
 /**
@@ -726,6 +756,16 @@ export interface AssociateInstancesKeyPairsRequest {
 }
 
 /**
+ * DeleteLaunchTemplate返回参数结构体
+ */
+export interface DeleteLaunchTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ImportKeyPair返回参数结构体
  */
 export interface ImportKeyPairResponse {
@@ -839,17 +879,70 @@ export interface ZoneInfo {
 }
 
 /**
- * DescribeInstanceTypeConfigs请求参数结构体
+ * ModifyLaunchTemplateDefaultVersion返回参数结构体
  */
-export interface DescribeInstanceTypeConfigsRequest {
+export interface ModifyLaunchTemplateDefaultVersionResponse {
   /**
-      * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
-<li><strong>instance-family</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 实例启动模板版本集合
+ */
+export interface LaunchTemplateVersionInfo {
+  /**
+      * 实例启动模板版本号。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Filters?: Array<Filter>
+  LaunchTemplateVersion: number
+
+  /**
+   * 实例启动模板版本数据详情。
+   */
+  LaunchTemplateVersionData: LaunchTemplateVersionData
+
+  /**
+   * 实例启动模板版本创建时间。
+   */
+  CreationTime: string
+
+  /**
+   * 实例启动模板ID。
+   */
+  LaunchTemplateId: string
+
+  /**
+   * 是否为默认启动模板版本。
+   */
+  IsDefaultVersion: boolean
+
+  /**
+      * 实例启动模板版本描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LaunchTemplateVersionDescription: string
+
+  /**
+   * 创建者。
+   */
+  CreatedBy: string
+}
+
+/**
+ * InquiryPriceModifyInstancesChargeType返回参数结构体
+ */
+export interface InquiryPriceModifyInstancesChargeTypeResponse {
+  /**
+   * 该参数表示对应配置实例转换计费模式的价格。
+   */
+  Price?: Price
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -945,18 +1038,25 @@ export interface ModifyInstancesVpcAttributeResponse {
 }
 
 /**
- * InquiryPriceResetInstancesType请求参数结构体
+ * DescribeLaunchTemplates返回参数结构体
  */
-export interface InquiryPriceResetInstancesTypeRequest {
+export interface DescribeLaunchTemplatesResponse {
   /**
-   * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。
-   */
-  InstanceIds: Array<string>
+      * 符合条件的实例模板数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
 
   /**
-   * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表[实例资源规格](https://cloud.tencent.com/document/product/213/11518)对照表，也可以调用查询[实例资源规格列表](https://cloud.tencent.com/document/product/213/15749)接口获得最新的规格表。
+      * 实例详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LaunchTemplateSet: Array<LaunchTemplateInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceType: string
+  RequestId?: string
 }
 
 /**
@@ -1043,6 +1143,46 @@ export interface DisassociateInstancesKeyPairsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLaunchTemplateVersions请求参数结构体
+ */
+export interface DescribeLaunchTemplateVersionsRequest {
+  /**
+   * 启动模板ID。
+   */
+  LaunchTemplateId: string
+
+  /**
+   * 实例启动模板列表。
+   */
+  LaunchTemplateVersions?: Array<number>
+
+  /**
+   * 通过范围指定版本时的最小版本号，默认为0。
+   */
+  MinVersion?: number
+
+  /**
+   * 过范围指定版本时的最大版本号，默认为30。
+   */
+  MaxVersion?: number
+
+  /**
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Limit?: number
+
+  /**
+   * 是否查询默认版本。该参数不可与LaunchTemplateVersions同时指定。
+   */
+  DefaultVersion?: boolean
 }
 
 /**
@@ -1146,14 +1286,9 @@ export interface ModifyInstancesAttributeResponse {
 }
 
 /**
- * InquiryPriceModifyInstancesChargeType返回参数结构体
+ * ModifyImageSharePermission返回参数结构体
  */
-export interface InquiryPriceModifyInstancesChargeTypeResponse {
-  /**
-   * 该参数表示对应配置实例转换计费模式的价格。
-   */
-  Price?: Price
-
+export interface ModifyImageSharePermissionResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1508,6 +1643,16 @@ export interface DescribeImageSharePermissionResponse {
    */
   SharePermissionSet?: Array<SharePermission>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLaunchTemplateVersions返回参数结构体
+ */
+export interface DeleteLaunchTemplateVersionsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1987,6 +2132,11 @@ export interface ReservedInstanceConfigInfoItem {
 }
 
 /**
+ * 实例启动模板版本信息
+ */
+export type LaunchTemplateVersionData = null
+
+/**
  * DeleteDisasterRecoverGroups返回参数结构体
  */
 export interface DeleteDisasterRecoverGroupsResponse {
@@ -2347,6 +2497,151 @@ export interface Instance {
 }
 
 /**
+ * CreateLaunchTemplateVersion请求参数结构体
+ */
+export interface CreateLaunchTemplateVersionRequest {
+  /**
+   * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
+   */
+  Placement: Placement
+
+  /**
+   * 启动模板ID，新版本将基于该实例启动模板ID创建。
+   */
+  LaunchTemplateId: string
+
+  /**
+   * 若给定，新实例启动模板将基于给定的版本号创建。若未指定则使用默认版本。
+   */
+  LaunchTemplateVersion?: number
+
+  /**
+   * 实例启动模板版本描述。长度为2~256个英文或中文字符。
+   */
+  LaunchTemplateVersionDescription?: string
+
+  /**
+      * 实例机型。不同实例机型指定了不同的资源规格。
+<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
+      */
+  InstanceType?: string
+
+  /**
+   * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
+   */
+  ImageId?: string
+
+  /**
+   * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+   */
+  SystemDisk?: SystemDisk
+
+  /**
+   * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+   */
+  DataDisks?: Array<DataDisk>
+
+  /**
+   * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，即表示每个实例的主网卡IP；同时，InstanceCount参数必须与私有网络IP的个数一致且不能大于20。
+   */
+  VirtualPrivateCloud?: VirtualPrivateCloud
+
+  /**
+   * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+   */
+  InternetAccessible?: InternetAccessible
+
+  /**
+   * 购买实例数量。包年包月实例取值范围：[1，300]，按量计费实例取值范围：[1，100]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。
+   */
+  InstanceCount?: number
+
+  /**
+   * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。</li><li>最多支持60个字符（包含模式串）。
+   */
+  InstanceName?: string
+
+  /**
+   * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+   */
+  LoginSettings?: LoginSettings
+
+  /**
+   * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+   */
+  SecurityGroupIds?: Array<string>
+
+  /**
+   * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
+   */
+  EnhancedService?: EnhancedService
+
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
+
+  /**
+   * 云服务器的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+   */
+  HostName?: string
+
+  /**
+   * 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。
+   */
+  ActionTimer?: ActionTimer
+
+  /**
+   * 置放群组id，仅支持指定一个。
+   */
+  DisasterRecoverGroupIds?: Array<string>
+
+  /**
+   * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。
+   */
+  TagSpecification?: Array<TagSpecification>
+
+  /**
+   * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+   */
+  InstanceMarketOptions?: InstanceMarketOptionsRequest
+
+  /**
+   * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
+   */
+  UserData?: string
+
+  /**
+      * 是否只预检此次请求。
+true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId.
+false（默认）：发送正常请求，通过检查后直接创建实例。
+      */
+  DryRun?: boolean
+
+  /**
+   * CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。
+   */
+  CamRoleName?: string
+
+  /**
+   * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
+   */
+  HpcClusterId?: string
+
+  /**
+   * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+   */
+  InstanceChargeType?: string
+
+  /**
+   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+}
+
+/**
  * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
  */
 export interface EnhancedService {
@@ -2543,6 +2838,146 @@ export interface ModifyInstanceDiskTypeResponse {
 }
 
 /**
+ * CreateLaunchTemplate请求参数结构体
+ */
+export interface CreateLaunchTemplateRequest {
+  /**
+   * 实例启动模板名称。长度为2~128个英文或中文字符。
+   */
+  LaunchTemplateName: string
+
+  /**
+   * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
+   */
+  Placement: Placement
+
+  /**
+   * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
+   */
+  ImageId: string
+
+  /**
+   * 实例启动模板版本描述。长度为2~256个英文或中文字符。
+   */
+  LaunchTemplateVersionDescription?: string
+
+  /**
+      * 实例机型。不同实例机型指定了不同的资源规格。
+<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
+      */
+  InstanceType?: string
+
+  /**
+   * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+   */
+  SystemDisk?: SystemDisk
+
+  /**
+   * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+   */
+  DataDisks?: Array<DataDisk>
+
+  /**
+   * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，即表示每个实例的主网卡IP；同时，InstanceCount参数必须与私有网络IP的个数一致且不能大于20。
+   */
+  VirtualPrivateCloud?: VirtualPrivateCloud
+
+  /**
+   * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+   */
+  InternetAccessible?: InternetAccessible
+
+  /**
+   * 购买实例数量。包年包月实例取值范围：[1，300]，按量计费实例取值范围：[1，100]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。
+   */
+  InstanceCount?: number
+
+  /**
+   * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。</li><li>最多支持60个字符（包含模式串）。
+   */
+  InstanceName?: string
+
+  /**
+   * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+   */
+  LoginSettings?: LoginSettings
+
+  /**
+   * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+   */
+  SecurityGroupIds?: Array<string>
+
+  /**
+   * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
+   */
+  EnhancedService?: EnhancedService
+
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
+
+  /**
+   * 云服务器的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+   */
+  HostName?: string
+
+  /**
+   * 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。
+   */
+  ActionTimer?: ActionTimer
+
+  /**
+   * 置放群组id，仅支持指定一个。
+   */
+  DisasterRecoverGroupIds?: Array<string>
+
+  /**
+   * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。
+   */
+  TagSpecification?: Array<TagSpecification>
+
+  /**
+   * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+   */
+  InstanceMarketOptions?: InstanceMarketOptionsRequest
+
+  /**
+   * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
+   */
+  UserData?: string
+
+  /**
+      * 是否只预检此次请求。
+true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId.
+false（默认）：发送正常请求，通过检查后直接创建实例。
+      */
+  DryRun?: boolean
+
+  /**
+   * CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。
+   */
+  CamRoleName?: string
+
+  /**
+   * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
+   */
+  HpcClusterId?: string
+
+  /**
+   * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+   */
+  InstanceChargeType?: string
+
+  /**
+   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+}
+
+/**
  * DescribeReservedInstancesConfigInfos请求参数结构体
  */
 export interface DescribeReservedInstancesConfigInfosRequest {
@@ -2582,6 +3017,32 @@ export interface TagSpecification {
    * 标签对列表
    */
   Tags: Array<Tag>
+}
+
+/**
+ * DescribeLaunchTemplates请求参数结构体
+ */
+export interface DescribeLaunchTemplatesRequest {
+  /**
+   * 启动模板ID，一个或者多个启动模板ID。若未指定，则显示用户所有模板。
+   */
+  LaunchTemplateIds?: Array<string>
+
+  /**
+      * <p style="padding-left: 30px;">按照【<strong>LaunchTemplateNames</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`LaunchTemplateIds`和`Filters`。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Limit?: number
 }
 
 /**
@@ -2701,6 +3162,21 @@ export interface SpotMarketOptions {
 export type DescribeImportImageOsRequest = null
 
 /**
+ * CreateLaunchTemplate返回参数结构体
+ */
+export interface CreateLaunchTemplateResponse {
+  /**
+   * 当通过本接口来创建实例启动模板时会返回该参数，表示创建成功的实例启动模板`ID`。
+   */
+  LaunchTemplateId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateKeyPair请求参数结构体
  */
 export interface CreateKeyPairRequest {
@@ -2774,45 +3250,62 @@ export interface DescribeImageSharePermissionRequest {
 }
 
 /**
- * 容灾组信息
+ * DescribeInstances请求参数结构体
  */
-export interface DisasterRecoverGroup {
+export interface DescribeInstancesRequest {
   /**
-   * 分散置放群组id。
+   * 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。参数不支持同时指定`InstanceIds`和`Filters`。
    */
-  DisasterRecoverGroupId: string
+  InstanceIds?: Array<string>
 
   /**
-   * 分散置放群组名称，长度1-60个字符。
-   */
-  Name: string
-
-  /**
-   * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
-   */
-  Type: string
-
-  /**
-   * 分散置放群组内最大容纳云服务器数量。
-   */
-  CvmQuotaTotal: number
-
-  /**
-   * 分散置放群组内云服务器当前数量。
-   */
-  CurrentNum: number
-
-  /**
-      * 分散置放群组内，云服务器id列表。
-注意：此字段可能返回 null，表示取不到有效值。
+      * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>project-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。项目ID形如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>host-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>vpc-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>VPC ID</strong>】进行过滤。VPC ID形如：vpc-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>subnet-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>子网ID</strong>】进行过滤。子网ID形如：subnet-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例ID</strong>】进行过滤。实例ID形如：ins-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>uuid</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例UUID</strong>】进行过滤。实例UUID形如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>security-group-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>安全组ID</strong>】进行过滤。安全组ID形如: sg-8jlk3f3r。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-name</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-charge-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例计费模式</strong>】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-state</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例状态</strong>】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>private-ip-address</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例主网卡的内网IP</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>public-ip-address</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例主网卡的公网IP</strong>】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>ipv6-address</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例的IPv6地址</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-key</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-value</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag:tag-key</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。
       */
-  InstanceIds: Array<string>
+  Filters?: Array<Filter>
 
   /**
-      * 分散置放群组创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Limit?: number
 }
 
 /**
@@ -2847,6 +3340,7 @@ export interface RunInstancesRequest {
   /**
       * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
  <b>注：本数据结构中的Zone为必填参数。</b>
+如果您不指定LaunchTemplate参数，则Placement为必选参数。若同时传递该参数和LaunchTemplate，则默认覆盖LaunchTemplate中对应的值。
       */
   Placement?: Placement
 
@@ -2857,8 +3351,9 @@ export interface RunInstancesRequest {
   InstanceType?: string
 
   /**
-   * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
-   */
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
+如果您不指定LaunchTemplate参数，则ImageId为必选参数。若同时传递该参数和LaunchTemplate，则默认覆盖LaunchTemplate中对应的值。
+      */
   ImageId?: string
 
   /**
@@ -2959,6 +3454,11 @@ false（默认）：发送正常请求，通过检查后直接创建实例
    * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
    */
   HpcClusterId?: string
+
+  /**
+   * 实例启动模板。
+   */
+  LaunchTemplate?: LaunchTemplate
 }
 
 /**
@@ -2985,6 +3485,53 @@ export interface Filter {
    * 字段的过滤值。
    */
   Values: Array<string>
+}
+
+/**
+ * 实例启动模板简要信息。
+ */
+export interface LaunchTemplateInfo {
+  /**
+      * 实例启动模版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestVersionNumber: number
+
+  /**
+      * 实例启动模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LaunchTemplateId: string
+
+  /**
+      * 实例启动模板名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LaunchTemplateName: string
+
+  /**
+      * 实例启动模板默认版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefaultVersionNumber: number
+
+  /**
+      * 实例启动模板包含的版本总数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LaunchTemplateVersionCount: number
+
+  /**
+      * 创建该模板的用户UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedBy: string
+
+  /**
+      * 创建该模板的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreationTime: string
 }
 
 /**
@@ -3132,6 +3679,16 @@ export interface AccountQuotaOverview {
    * 配额数据
    */
   AccountQuota: AccountQuota
+}
+
+/**
+ * 描述了 “云自动化助手” 服务相关的信息
+ */
+export interface RunAutomationServiceEnabled {
+  /**
+   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -3953,6 +4510,21 @@ export interface ReservedInstancesOffering {
 }
 
 /**
+ * CreateLaunchTemplateVersion返回参数结构体
+ */
+export interface CreateLaunchTemplateVersionResponse {
+  /**
+   * 新创建的实例启动模板版本号。
+   */
+  LaunchTemplateVersionNumber: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 操作系统支持的类型。
  */
 export interface OsVersion {
@@ -4031,62 +4603,17 @@ export interface InstanceRefund {
 }
 
 /**
- * DescribeInstances请求参数结构体
+ * DescribeInstanceTypeConfigs请求参数结构体
  */
-export interface DescribeInstancesRequest {
-  /**
-   * 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。参数不支持同时指定`InstanceIds`和`Filters`。
-   */
-  InstanceIds?: Array<string>
-
+export interface DescribeInstanceTypeConfigsRequest {
   /**
       * <li><strong>zone</strong></li>
 <p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
-<li><strong>project-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。项目ID形如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>host-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>vpc-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>VPC ID</strong>】进行过滤。VPC ID形如：vpc-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>subnet-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>子网ID</strong>】进行过滤。子网ID形如：subnet-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>instance-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例ID</strong>】进行过滤。实例ID形如：ins-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>uuid</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例UUID</strong>】进行过滤。实例UUID形如：xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>security-group-id</strong></li>
-<p style="padding-left: 30px;">按照【<strong>安全组ID</strong>】进行过滤。安全组ID形如: sg-8jlk3f3r。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>instance-name</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>instance-charge-type</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例计费模式</strong>】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>instance-state</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例状态</strong>】进行过滤。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>private-ip-address</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例主网卡的内网IP</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>public-ip-address</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例主网卡的公网IP</strong>】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>ipv6-address</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例的IPv6地址</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>tag-key</strong></li>
-<p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>tag-value</strong></li>
-<p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-<li><strong>tag:tag-key</strong></li>
-<p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
       */
   Filters?: Array<Filter>
-
-  /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Offset?: number
-
-  /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Limit?: number
 }
 
 /**
@@ -4107,6 +4634,36 @@ export interface RegionInfo {
    * 地域是否可用状态
    */
   RegionState: string
+}
+
+/**
+ * InquiryPriceResetInstancesType请求参数结构体
+ */
+export interface InquiryPriceResetInstancesTypeRequest {
+  /**
+   * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表[实例资源规格](https://cloud.tencent.com/document/product/213/11518)对照表，也可以调用查询[实例资源规格列表](https://cloud.tencent.com/document/product/213/15749)接口获得最新的规格表。
+   */
+  InstanceType: string
+}
+
+/**
+ * ModifyLaunchTemplateDefaultVersion请求参数结构体
+ */
+export interface ModifyLaunchTemplateDefaultVersionRequest {
+  /**
+   * 启动模板ID。
+   */
+  LaunchTemplateId: string
+
+  /**
+   * 待设置的默认版本号。
+   */
+  DefaultVersion: number
 }
 
 /**
@@ -4361,13 +4918,23 @@ export interface RenewInstancesResponse {
 }
 
 /**
- * 描述了 “云自动化助手” 服务相关的信息
+ * DescribeLaunchTemplateVersions返回参数结构体
  */
-export interface RunAutomationServiceEnabled {
+export interface DescribeLaunchTemplateVersionsResponse {
   /**
-   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+   * 实例启动模板总数。
    */
-  Enabled?: boolean
+  TotalCount: number
+
+  /**
+   * 实例启动模板版本集合。
+   */
+  LaunchTemplateVersionSet: Array<LaunchTemplateVersionInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4408,6 +4975,48 @@ export interface ResetInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 容灾组信息
+ */
+export interface DisasterRecoverGroup {
+  /**
+   * 分散置放群组id。
+   */
+  DisasterRecoverGroupId: string
+
+  /**
+   * 分散置放群组名称，长度1-60个字符。
+   */
+  Name: string
+
+  /**
+   * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+   */
+  Type: string
+
+  /**
+   * 分散置放群组内最大容纳云服务器数量。
+   */
+  CvmQuotaTotal: number
+
+  /**
+   * 分散置放群组内云服务器当前数量。
+   */
+  CurrentNum: number
+
+  /**
+      * 分散置放群组内，云服务器id列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceIds: Array<string>
+
+  /**
+      * 分散置放群组创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
 }
 
 /**

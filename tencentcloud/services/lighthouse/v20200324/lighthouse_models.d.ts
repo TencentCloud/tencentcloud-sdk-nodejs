@@ -147,19 +147,19 @@ export interface InstanceDeniedActions {
  */
 export interface InquirePriceCreateDisksRequest {
     /**
-      * 磁盘大小
+      * 云硬盘大小, 单位: GB。
       */
     DiskSize: number;
     /**
-      * 硬盘介质类型
+      * 云硬盘介质类型。取值: "CLOUD_PREMIUM"(高性能云盘), "CLOUD_SSD"(SSD云硬盘)。
       */
     DiskType: string;
     /**
-      * 新购磁盘包年包月相关参数设置
+      * 新购云硬盘包年包月相关参数设置。
       */
     DiskChargePrepaid: DiskChargePrepaid;
     /**
-      * 磁盘个数, 默认值: 1
+      * 云硬盘个数, 默认值: 1。
       */
     DiskCount?: number;
 }
@@ -213,6 +213,11 @@ export interface InquirePriceRenewInstancesResponse {
       * 询价信息。
       */
     Price: Price;
+    /**
+      * 数据盘价格信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataDiskPriceSet: Array<DataDiskPrice>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -311,6 +316,14 @@ export interface InquirePriceRenewInstancesRequest {
       * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
       */
     InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 是否续费数据盘
+      */
+    RenewDataDisk?: boolean;
+    /**
+      * 数据盘是否对齐实例到期时间
+      */
+    AlignInstanceExpiredTime?: boolean;
 }
 /**
  * 套餐折扣详情（仅用于控制台调用询价相关接口返回）。
@@ -346,8 +359,10 @@ export interface DiscountDetail {
  */
 export interface DescribeDiskConfigsRequest {
     /**
-      * - zone:
-可用区
+      * 过滤器列表。
+<li>zone</li>按照【可用区】进行过滤。
+类型：String
+必选：否
       */
     Filters?: Array<Filter>;
 }
@@ -1079,6 +1094,31 @@ export interface DisassociateInstancesKeyPairsRequest {
       * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
       */
     InstanceIds: Array<string>;
+}
+/**
+ * 数据盘价格
+ */
+export interface DataDiskPrice {
+    /**
+      * 云硬盘ID。
+      */
+    DiskId: string;
+    /**
+      * 云硬盘单价。
+      */
+    OriginalDiskPrice: number;
+    /**
+      * 云硬盘总价。
+      */
+    OriginalPrice: number;
+    /**
+      * 折扣。
+      */
+    Discount: number;
+    /**
+      * 折后总价。
+      */
+    DiscountPrice: number;
 }
 /**
  * ImportKeyPair请求参数结构体
@@ -2409,7 +2449,7 @@ export interface ResetInstanceRequest {
  */
 export interface DescribeDiskConfigsResponse {
     /**
-      * 磁盘配置列表
+      * 云硬盘配置列表。
       */
     DiskConfigSet: Array<DiskConfig>;
     /**
@@ -2861,7 +2901,7 @@ export interface BlueprintInstance {
  */
 export interface InquirePriceCreateDisksResponse {
     /**
-      * 磁盘价格
+      * 云硬盘价格。
       */
     DiskPrice: DiskPrice;
     /**

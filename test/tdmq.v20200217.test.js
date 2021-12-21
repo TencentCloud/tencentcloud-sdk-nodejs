@@ -278,6 +278,16 @@ it("tdmq.v20200217.CreateCmqSubscribe", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribePublisherSummary", async function () {
+    try {
+       const data = await client.DescribePublisherSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DeleteRocketMQNamespace", async function () {
     try {
        const data = await client.DeleteRocketMQNamespace({})
@@ -851,6 +861,16 @@ it("tdmq.v20200217.ClearCmqQueue", async function () {
 it("tdmq.v20200217.DescribeEnvironmentRoles", async function () {
     try {
        const data = await client.DescribeEnvironmentRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribePublishers", async function () {
+    try {
+       const data = await client.DescribePublishers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

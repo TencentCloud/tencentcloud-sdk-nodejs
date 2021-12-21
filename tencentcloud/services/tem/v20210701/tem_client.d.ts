@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RestartApplicationPodResponse, CreateResourceRequest, ResumeDeployApplicationResponse, DescribeDeployApplicationDetailRequest, DescribeApplicationPodsResponse, DeleteIngressRequest, RestartApplicationPodRequest, DescribeRelatedIngressesRequest, ModifyEnvironmentResponse, GenerateApplicationPackageDownloadUrlRequest, DeployApplicationRequest, ModifyIngressResponse, DescribeEnvironmentsResponse, ModifyIngressRequest, DescribeApplicationPodsRequest, CreateApplicationRequest, DescribeRelatedIngressesResponse, DescribeIngressesRequest, ModifyApplicationReplicasResponse, ModifyApplicationReplicasRequest, DescribeIngressesResponse, DeleteIngressResponse, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, CreateCosTokenResponse, DescribeDeployApplicationDetailResponse, CreateResourceResponse, ModifyApplicationInfoRequest, ModifyApplicationInfoResponse, RevertDeployApplicationRequest, CreateEnvironmentResponse, CreateApplicationResponse, ModifyEnvironmentRequest, RevertDeployApplicationResponse, DescribeIngressRequest, CreateCosTokenRequest, DescribeEnvironmentsRequest, ResumeDeployApplicationRequest, DeployApplicationResponse, CreateEnvironmentRequest } from "./tem_models";
+import { RestartApplicationPodResponse, CreateResourceRequest, ResumeDeployApplicationResponse, DescribeDeployApplicationDetailRequest, DescribeApplicationPodsResponse, DeleteIngressRequest, RestartApplicationPodRequest, DescribeRelatedIngressesRequest, ModifyEnvironmentResponse, GenerateApplicationPackageDownloadUrlRequest, DeployApplicationRequest, ModifyIngressResponse, DescribeEnvironmentsResponse, ModifyIngressRequest, DescribeApplicationPodsRequest, CreateApplicationRequest, DescribeRelatedIngressesResponse, DescribeIngressesRequest, ModifyApplicationReplicasResponse, ModifyApplicationReplicasRequest, DescribeIngressesResponse, DeleteIngressResponse, GenerateApplicationPackageDownloadUrlResponse, DescribeIngressResponse, CreateCosTokenResponse, RollingUpdateApplicationByVersionResponse, RollingUpdateApplicationByVersionRequest, DescribeDeployApplicationDetailResponse, CreateResourceResponse, ModifyApplicationInfoRequest, ModifyApplicationInfoResponse, RevertDeployApplicationRequest, CreateEnvironmentResponse, CreateApplicationResponse, ModifyEnvironmentRequest, RevertDeployApplicationResponse, DescribeIngressRequest, CreateCosTokenRequest, DescribeEnvironmentsRequest, ResumeDeployApplicationRequest, DeployApplicationResponse, CreateEnvironmentRequest } from "./tem_models";
 /**
  * tem client
  * @class
@@ -47,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 查询 Ingress 规则
      */
     DescribeIngress(req: DescribeIngressRequest, cb?: (error: string, rep: DescribeIngressResponse) => void): Promise<DescribeIngressResponse>;
+    /**
+     * 更新应用部署版本
+     */
+    RollingUpdateApplicationByVersion(req: RollingUpdateApplicationByVersionRequest, cb?: (error: string, rep: RollingUpdateApplicationByVersionResponse) => void): Promise<RollingUpdateApplicationByVersionResponse>;
     /**
      * 回滚分批发布
      */

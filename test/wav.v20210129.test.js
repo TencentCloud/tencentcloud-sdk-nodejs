@@ -58,6 +58,36 @@ it("wav.v20210129.QueryActivityList", async function () {
     }
 })
 
+it("wav.v20210129.QueryDealerInfoList", async function () {
+    try {
+       const data = await client.QueryDealerInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryVehicleInfoList", async function () {
+    try {
+       const data = await client.QueryVehicleInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.CreateLead", async function () {
+    try {
+       const data = await client.CreateLead({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wav.v20210129.QueryClueInfoList", async function () {
     try {
        const data = await client.QueryClueInfoList({})

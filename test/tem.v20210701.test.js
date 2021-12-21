@@ -118,6 +118,16 @@ it("tem.v20210701.DescribeIngress", async function () {
     }
 })
 
+it("tem.v20210701.RollingUpdateApplicationByVersion", async function () {
+    try {
+       const data = await client.RollingUpdateApplicationByVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tem.v20210701.RevertDeployApplication", async function () {
     try {
        const data = await client.RevertDeployApplication({})

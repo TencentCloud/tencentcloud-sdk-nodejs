@@ -53,6 +53,7 @@ import {
   ModifyAMQPVHostRequest,
   CreateSubscriptionRequest,
   CreateRocketMQNamespaceRequest,
+  Topic,
   DescribeCmqTopicDetailResponse,
   Environment,
   CmqQueue,
@@ -62,7 +63,7 @@ import {
   DeleteAMQPQueueResponse,
   ModifyCmqTopicAttributeResponse,
   DescribeCmqSubscriptionDetailRequest,
-  Topic,
+  DescribePublisherSummaryResponse,
   DescribeAMQPVHostsResponse,
   DescribeEnvironmentsRequest,
   DescribeRocketMQNamespacesRequest,
@@ -76,6 +77,7 @@ import {
   CreateAMQPQueueRequest,
   ClearCmqQueueRequest,
   DescribeClustersRequest,
+  Publisher,
   RocketMQTopic,
   DescribeRocketMQClusterResponse,
   CreateAMQPVHostResponse,
@@ -93,6 +95,7 @@ import {
   DeleteAMQPClusterRequest,
   DescribeTopicsResponse,
   PublishCmqMsgResponse,
+  DescribePublishersRequest,
   CreateRocketMQClusterRequest,
   DeleteAMQPVHostRequest,
   AcknowledgeMessageResponse,
@@ -155,6 +158,7 @@ import {
   CreateClusterResponse,
   DeleteAMQPExchangeResponse,
   DeleteRocketMQNamespaceRequest,
+  DescribeRolesRequest,
   CreateAMQPQueueResponse,
   CreateClusterRequest,
   DescribeAMQPClustersRequest,
@@ -192,10 +196,12 @@ import {
   DeleteRocketMQTopicRequest,
   ConsumersSchedule,
   Cluster,
+  SubscriptionTopic,
   RetentionPolicy,
   CreateRocketMQClusterResponse,
   DescribeAMQPCreateQuotaRequest,
   AMQPQueueDetail,
+  DescribePublishersResponse,
   DeleteAMQPRouteRelationResponse,
   SendMsgRequest,
   DescribeCmqQueueDetailRequest,
@@ -225,7 +231,7 @@ import {
   DescribeEnvironmentAttributesResponse,
   Role,
   ModifyAMQPClusterResponse,
-  SubscriptionTopic,
+  Sort,
   AMQPClusterConfig,
   DescribeAMQPExchangesRequest,
   DescribeProducersResponse,
@@ -240,7 +246,7 @@ import {
   UnbindCmqDeadLetterRequest,
   CreateAMQPRouteRelationRequest,
   DeleteCmqSubscribeResponse,
-  DescribeRolesRequest,
+  DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
   SendCmqMsgRequest,
   ModifyCmqQueueAttributeRequest,
@@ -521,6 +527,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCmqSubscribeResponse) => void
   ): Promise<CreateCmqSubscribeResponse> {
     return this.request("CreateCmqSubscribe", req, cb)
+  }
+
+  /**
+   * 获取消息生产概览信息
+   */
+  async DescribePublisherSummary(
+    req: DescribePublisherSummaryRequest,
+    cb?: (error: string, rep: DescribePublisherSummaryResponse) => void
+  ): Promise<DescribePublisherSummaryResponse> {
+    return this.request("DescribePublisherSummary", req, cb)
   }
 
   /**
@@ -1103,6 +1119,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvironmentRolesResponse) => void
   ): Promise<DescribeEnvironmentRolesResponse> {
     return this.request("DescribeEnvironmentRoles", req, cb)
+  }
+
+  /**
+   * 获取生产者信息列表
+   */
+  async DescribePublishers(
+    req: DescribePublishersRequest,
+    cb?: (error: string, rep: DescribePublishersResponse) => void
+  ): Promise<DescribePublishersResponse> {
+    return this.request("DescribePublishers", req, cb)
   }
 
   /**

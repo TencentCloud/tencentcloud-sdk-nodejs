@@ -28,9 +28,29 @@ it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
     }
 })
 
+it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
+    try {
+       const data = await client.GetDownloadFlowUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.PrepareFlows", async function () {
     try {
        const data = await client.PrepareFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.OperateChannelTemplate", async function () {
+    try {
+       const data = await client.OperateChannelTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

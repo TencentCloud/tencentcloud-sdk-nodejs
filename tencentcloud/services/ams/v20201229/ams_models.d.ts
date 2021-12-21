@@ -397,6 +397,11 @@ export interface TaskLabel {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Score: number;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 任务筛选器
@@ -569,6 +574,11 @@ export interface AudioResultDetailTextResult {
       * 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。
       */
     LibType: number;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 音频审核输出参数
@@ -625,6 +635,11 @@ export interface AudioResult {
       * 该字段用于返回音频小语种检测的详细审核结果。具体结果内容请参见AudioResultDetailLanguageResult数据结构的细节描述。
       */
     LanguageResults: Array<AudioResultDetailLanguageResult>;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 音频呻吟审核结果
@@ -651,6 +666,11 @@ export interface AudioResultDetailMoanResult {
       * *内测中，敬请期待*
       */
     SubLabelCode: string;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 任务数据

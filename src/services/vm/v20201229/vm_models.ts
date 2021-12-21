@@ -382,6 +382,12 @@ export interface TaskLabel {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Score: number
+
+  /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
 }
 
 /**
@@ -653,6 +659,12 @@ export interface AudioResultDetailTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LibType: number
+
+  /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
 }
 
 /**
@@ -725,6 +737,12 @@ export interface AudioResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LanguageResults: Array<AudioResultDetailLanguageResult>
+
+  /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
 }
 
 /**
@@ -756,6 +774,12 @@ export interface AudioResultDetailMoanResult {
    * *内测中，敬请期待*
    */
   SubLabelCode: string
+
+  /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
 }
 
 /**
@@ -935,4 +959,10 @@ export interface ImageResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Extra: string
+
+  /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
 }

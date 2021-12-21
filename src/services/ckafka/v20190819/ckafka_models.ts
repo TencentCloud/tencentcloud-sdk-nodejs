@@ -253,18 +253,31 @@ export interface DescribeACLRequest {
 }
 
 /**
- * DescribeTopicSyncReplica返回参数结构体
+ * 批量修改topic属性结果
  */
-export interface DescribeTopicSyncReplicaResponse {
+export interface BatchModifyTopicResultDTO {
   /**
-   * 返回topic 副本详情
-   */
-  Result: TopicInSyncReplicaResult
+      * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * topic名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicName: string
+
+  /**
+      * 状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReturnCode: string
+
+  /**
+   * 状态消息
    */
-  RequestId?: string
+  Message: string
 }
 
 /**
@@ -283,28 +296,13 @@ export interface DescribeTopicAttributesRequest {
 }
 
 /**
- * FetchMessageByOffset请求参数结构体
+ * DescribeInstanceAttributes请求参数结构体
  */
-export interface FetchMessageByOffsetRequest {
+export interface DescribeInstanceAttributesRequest {
   /**
-   * 实例Id
+   * 实例id
    */
   InstanceId: string
-
-  /**
-   * 主题名
-   */
-  Topic: string
-
-  /**
-   * 分区id
-   */
-  Partition: number
-
-  /**
-   * 位点信息
-   */
-  Offset?: number
 }
 
 /**
@@ -391,6 +389,21 @@ export interface FetchMessageByOffsetResponse {
    * 返回结果
    */
   Result: ConsumerRecord
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchModifyTopicAttributes返回参数结构体
+ */
+export interface BatchModifyTopicAttributesResponse {
+  /**
+   * 返回结果
+   */
+  Result: Array<BatchModifyTopicResultDTO>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -802,6 +815,21 @@ export interface Tag {
 }
 
 /**
+ * BatchModifyGroupOffsets返回参数结构体
+ */
+export interface BatchModifyGroupOffsetsResponse {
+  /**
+   * 返回结果
+   */
+  Result: JgwOperateResponse
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeGroup的返回
  */
 export interface GroupResponse {
@@ -1102,6 +1130,21 @@ export interface CreateAclRequest {
 }
 
 /**
+ * DescribeTopicSyncReplica返回参数结构体
+ */
+export interface DescribeTopicSyncReplicaResponse {
+  /**
+   * 返回topic 副本详情
+   */
+  Result: TopicInSyncReplicaResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAppInfo请求参数结构体
  */
 export interface DescribeAppInfoRequest {
@@ -1114,6 +1157,21 @@ export interface DescribeAppInfoRequest {
    * 本次查询用户数目最大数量限制，最大值为50，默认50
    */
   Limit?: number
+}
+
+/**
+ * partition信息
+ */
+export interface Partitions {
+  /**
+   * 分区
+   */
+  Partition: number
+
+  /**
+   * partition 消费位移
+   */
+  Offset: number
 }
 
 /**
@@ -1333,6 +1391,11 @@ export interface CreateTopicRequest {
    * 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B
    */
   RetentionBytes?: number
+
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1420,13 +1483,28 @@ export interface DeleteInstancePreResponse {
 }
 
 /**
- * DescribeInstanceAttributes请求参数结构体
+ * FetchMessageByOffset请求参数结构体
  */
-export interface DescribeInstanceAttributesRequest {
+export interface FetchMessageByOffsetRequest {
   /**
-   * 实例id
+   * 实例Id
    */
   InstanceId: string
+
+  /**
+   * 主题名
+   */
+  Topic: string
+
+  /**
+   * 分区id
+   */
+  Partition: number
+
+  /**
+   * 位点信息
+   */
+  Offset?: number
 }
 
 /**
@@ -1825,6 +1903,18 @@ export interface ZoneResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Physical: string
+
+  /**
+      * 公网带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicNetwork: string
+
+  /**
+      * 公网带宽配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicNetworkLimit: string
 }
 
 /**
@@ -2638,6 +2728,31 @@ export interface DescribeCkafkaZoneResponse {
 }
 
 /**
+ * BatchModifyGroupOffsets请求参数结构体
+ */
+export interface BatchModifyGroupOffsetsRequest {
+  /**
+   * 消费分组名称
+   */
+  GroupName: string
+
+  /**
+   * 实例名称
+   */
+  InstanceId: string
+
+  /**
+   * partition信息
+   */
+  Partitions: Array<Partitions>
+
+  /**
+   * 指定topic，默认所有topic
+   */
+  TopicName?: Array<string>
+}
+
+/**
  * 主题属性返回结果实体
  */
 export interface TopicAttributesResponse {
@@ -2760,6 +2875,66 @@ export interface CreateTopicResp {
    * 主题Id
    */
   TopicId: string
+}
+
+/**
+ * 批量修改topic参数
+ */
+export interface BatchModifyTopicInfo {
+  /**
+   * topic名称
+   */
+  TopicName: string
+
+  /**
+   * 分区数
+   */
+  PartitionNum?: number
+
+  /**
+   * 备注
+   */
+  Note?: string
+
+  /**
+   * 副本数
+   */
+  ReplicaNum?: number
+
+  /**
+   * 消息删除策略，可以选择delete 或者compact
+   */
+  CleanUpPolicy?: string
+
+  /**
+   * 当producer设置request.required.acks为-1时，min.insync.replicas指定replicas的最小数目
+   */
+  MinInsyncReplicas?: number
+
+  /**
+   * 是否允许非ISR的副本成为Leader
+   */
+  UncleanLeaderElectionEnable?: boolean
+
+  /**
+   * topic维度的消息保留时间（毫秒）范围1 分钟到90 天
+   */
+  RetentionMs?: number
+
+  /**
+   * topic维度的消息保留大小，范围1 MB到1024 GB
+   */
+  RetentionBytes?: number
+
+  /**
+   * Segment分片滚动的时长（毫秒），范围1 到90 天
+   */
+  SegmentMs?: number
+
+  /**
+   * 批次的消息大小，范围1 KB到12 MB
+   */
+  MaxMessageBytes?: number
 }
 
 /**
@@ -2903,6 +3078,21 @@ export interface ModifyGroupOffsetsRequest {
    * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
    */
   Partitions?: Array<number>
+}
+
+/**
+ * BatchModifyTopicAttributes请求参数结构体
+ */
+export interface BatchModifyTopicAttributesRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 主题属性列表
+   */
+  Topic: Array<BatchModifyTopicInfo>
 }
 
 /**

@@ -934,6 +934,143 @@ export interface CreateRocketMQNamespaceRequest {
 }
 
 /**
+ * 主题实例
+ */
+export interface Topic {
+  /**
+      * 最后一次间隔内发布消息的平均byte大小。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AverageMsgSize: string
+
+  /**
+      * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConsumerCount: string
+
+  /**
+      * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastConfirmedEntry: string
+
+  /**
+      * 最后一个ledger创建的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastLedgerCreatedTimestamp: string
+
+  /**
+      * 本地和复制的发布者每秒发布消息的速率。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MsgRateIn: string
+
+  /**
+      * 本地和复制的消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MsgRateOut: string
+
+  /**
+      * 本地和复制的发布者每秒发布消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MsgThroughputIn: string
+
+  /**
+      * 本地和复制的消费者每秒分发消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MsgThroughputOut: string
+
+  /**
+      * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumberOfEntries: string
+
+  /**
+      * 分区数<=0：topic下无子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Partitions: number
+
+  /**
+      * 生产者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProducerCount: string
+
+  /**
+      * 以byte计算的所有消息存储总量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalSize: string
+
+  /**
+      * 分区topic里面的子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubTopicSets: Array<PartitionsTopic>
+
+  /**
+      * topic类型描述：
+0：普通消息；
+1：全局顺序消息；
+2：局部顺序消息；
+3：重试队列；
+4：死信队列；
+5：事务消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicType: number
+
+  /**
+      * 环境（命名空间）名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentId: string
+
+  /**
+      * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopicName: string
+
+  /**
+      * 说明，128个字符以内。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 生产者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProducerLimit: string
+
+  /**
+      * 消费者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConsumerLimit: string
+}
+
+/**
  * DescribeCmqTopicDetail返回参数结构体
  */
 export interface DescribeCmqTopicDetailResponse {
@@ -1283,140 +1420,37 @@ export interface DescribeCmqSubscriptionDetailRequest {
 }
 
 /**
- * 主题实例
+ * DescribePublisherSummary返回参数结构体
  */
-export interface Topic {
+export interface DescribePublisherSummaryResponse {
   /**
-      * 最后一次间隔内发布消息的平均byte大小。
+      * 生产速率（条/秒）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AverageMsgSize: string
+  MsgRateIn: number
 
   /**
-      * 消费者数量。
+      * 生产速率（字节/秒）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ConsumerCount: string
+  MsgThroughputIn: number
 
   /**
-      * 被记录下来的消息总数。
+      * 生产者数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LastConfirmedEntry: string
+  PublisherCount: number
 
   /**
-      * 最后一个ledger创建的时间。
+      * 消息存储大小，以字节为单位
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LastLedgerCreatedTimestamp: string
+  StorageSize: number
 
   /**
-      * 本地和复制的发布者每秒发布消息的速率。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MsgRateIn: string
-
-  /**
-      * 本地和复制的消费者每秒分发消息的数量之和。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MsgRateOut: string
-
-  /**
-      * 本地和复制的发布者每秒发布消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MsgThroughputIn: string
-
-  /**
-      * 本地和复制的消费者每秒分发消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MsgThroughputOut: string
-
-  /**
-      * 被记录下来的消息总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NumberOfEntries: string
-
-  /**
-      * 分区数<=0：topic下无子分区。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Partitions: number
-
-  /**
-      * 生产者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProducerCount: string
-
-  /**
-      * 以byte计算的所有消息存储总量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalSize: string
-
-  /**
-      * 分区topic里面的子分区。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubTopicSets: Array<PartitionsTopic>
-
-  /**
-      * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TopicType: number
-
-  /**
-      * 环境（命名空间）名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvironmentId: string
-
-  /**
-      * 主题名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TopicName: string
-
-  /**
-      * 说明，128个字符以内。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Remark: string
-
-  /**
-      * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
-
-  /**
-      * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
-
-  /**
-      * 生产者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProducerLimit: string
-
-  /**
-      * 消费者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ConsumerLimit: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1790,6 +1824,65 @@ export interface DescribeClustersRequest {
    * 过滤器。目前支持按标签过滤。
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 生产者信息
+ */
+export interface Publisher {
+  /**
+      * 生产者id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProducerId: number
+
+  /**
+      * 生产者名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProducerName: string
+
+  /**
+      * 生产者地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Address: string
+
+  /**
+      * 客户端版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientVersion: string
+
+  /**
+      * 消息生产速率（条/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MsgRateIn: number
+
+  /**
+      * 消息生产吞吐速率（字节/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MsgThroughputIn: number
+
+  /**
+      * 平均消息大小（字节）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AverageMsgSize: number
+
+  /**
+      * 连接时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConnectedSince: string
+
+  /**
+      * 生产者连接的主题分区号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Partition: number
 }
 
 /**
@@ -2185,6 +2278,46 @@ export interface PublishCmqMsgResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePublishers请求参数结构体
+ */
+export interface DescribePublishersRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 命名空间名称
+   */
+  Namespace: string
+
+  /**
+   * 主题名称
+   */
+  Topic: string
+
+  /**
+   * 参数过滤器，支持ProducerName，Address字段
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 查询偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 查询条数，默认为20
+   */
+  Limit?: number
+
+  /**
+   * 排序器
+   */
+  Sort?: Sort
 }
 
 /**
@@ -3588,6 +3721,39 @@ export interface DeleteRocketMQNamespaceRequest {
 }
 
 /**
+ * DescribeRoles请求参数结构体
+ */
+export interface DescribeRolesRequest {
+  /**
+   * 角色名称，模糊查询
+   */
+  RoleName?: string
+
+  /**
+   * 起始下标，不填默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，不填则默认为10，最大值为20。
+   */
+  Limit?: number
+
+  /**
+   * 必填字段，集群Id
+   */
+  ClusterId?: string
+
+  /**
+      * * RoleName
+按照角色名进行过滤，精确查询。
+类型：String
+必选：否
+      */
+  Filters?: Array<Filter>
+}
+
+/**
  * CreateAMQPQueue返回参数结构体
  */
 export interface CreateAMQPQueueResponse {
@@ -4613,6 +4779,26 @@ export interface Cluster {
 }
 
 /**
+ * 订阅关系
+ */
+export interface SubscriptionTopic {
+  /**
+   * 环境（命名空间）名称。
+   */
+  EnvironmentId: string
+
+  /**
+   * 主题名称。
+   */
+  TopicName: string
+
+  /**
+   * 订阅名称。
+   */
+  SubscriptionName: string
+}
+
+/**
  * 消息保留策略
  */
 export interface RetentionPolicy {
@@ -4715,6 +4901,27 @@ export interface AMQPQueueDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeadLetterRoutingKey: string
+}
+
+/**
+ * DescribePublishers返回参数结构体
+ */
+export interface DescribePublishersResponse {
+  /**
+   * 总条数
+   */
+  TotalCount: number
+
+  /**
+      * 生产者信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Publishers: Array<Publisher>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5465,23 +5672,18 @@ export interface ModifyAMQPClusterResponse {
 }
 
 /**
- * 订阅关系
+ * 排序器
  */
-export interface SubscriptionTopic {
+export interface Sort {
   /**
-   * 环境（命名空间）名称。
+   * 排序字段
    */
-  EnvironmentId: string
+  Name: string
 
   /**
-   * 主题名称。
+   * 升序ASC，降序DESC
    */
-  TopicName: string
-
-  /**
-   * 订阅名称。
-   */
-  SubscriptionName: string
+  Order: string
 }
 
 /**
@@ -5830,36 +6032,23 @@ export interface DeleteCmqSubscribeResponse {
 }
 
 /**
- * DescribeRoles请求参数结构体
+ * DescribePublisherSummary请求参数结构体
  */
-export interface DescribeRolesRequest {
+export interface DescribePublisherSummaryRequest {
   /**
-   * 角色名称，模糊查询
+   * 集群ID
    */
-  RoleName?: string
+  ClusterId: string
 
   /**
-   * 起始下标，不填默认为0。
+   * 命名空间名称
    */
-  Offset?: number
+  Namespace: string
 
   /**
-   * 返回数量，不填则默认为10，最大值为20。
+   * 主题名称
    */
-  Limit?: number
-
-  /**
-   * 必填字段，集群Id
-   */
-  ClusterId?: string
-
-  /**
-      * * RoleName
-按照角色名进行过滤，精确查询。
-类型：String
-必选：否
-      */
-  Filters?: Array<Filter>
+  Topic: string
 }
 
 /**

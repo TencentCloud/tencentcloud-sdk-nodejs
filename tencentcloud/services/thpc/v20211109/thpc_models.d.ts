@@ -140,7 +140,7 @@ export interface CreateClusterRequest {
       */
     ComputeNodeCount?: number;
     /**
-      * 调度器类型。目前仅支持SGE调度器。
+      * 调度器类型。<br><li>SGE：SGE调度器。
       */
     SchedulerType?: string;
     /**
@@ -172,7 +172,7 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       */
     DryRun?: boolean;
     /**
-      * 域名字服务类型。目前仅支持NIS域名字服务。
+      * 域名字服务类型。<br><li>NIS：NIS域名字服务。
       */
     AccountType?: string;
     /**
@@ -343,11 +343,11 @@ export interface CFSOption {
     /**
       * 文件系统协议类型，默认值NFS 3.0
       */
-    Protocol: string;
+    Protocol?: string;
     /**
       * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
       */
-    StorageType: string;
+    StorageType?: string;
 }
 /**
  * CreateCluster返回参数结构体
@@ -355,6 +355,7 @@ export interface CFSOption {
 export interface CreateClusterResponse {
     /**
       * 集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterId: string;
     /**

@@ -58,6 +58,16 @@ it("ckafka.v20190819.DescribeTopicSubscribeGroup", async function () {
     }
 })
 
+it("ckafka.v20190819.BatchModifyTopicAttributes", async function () {
+    try {
+       const data = await client.BatchModifyTopicAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.ModifyTopicAttributes", async function () {
     try {
        const data = await client.ModifyTopicAttributes({})
@@ -218,6 +228,16 @@ it("ckafka.v20190819.CreatePartition", async function () {
     }
 })
 
+it("ckafka.v20190819.DeleteUser", async function () {
+    try {
+       const data = await client.DeleteUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DeleteAcl", async function () {
     try {
        const data = await client.DeleteAcl({})
@@ -308,9 +328,9 @@ it("ckafka.v20190819.DeleteRouteTriggerTime", async function () {
     }
 })
 
-it("ckafka.v20190819.DeleteUser", async function () {
+it("ckafka.v20190819.BatchModifyGroupOffsets", async function () {
     try {
-       const data = await client.DeleteUser({})
+       const data = await client.BatchModifyGroupOffsets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

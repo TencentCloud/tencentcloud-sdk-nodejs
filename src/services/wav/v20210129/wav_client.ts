@@ -24,43 +24,51 @@ import {
   LicenseInfo,
   QueryExternalContactDetailRequest,
   QueryExternalUserMappingInfoResponse,
+  TagGroup,
   ChannelCodeInnerDetail,
   ExternalContact,
-  ExternalContactSimpleInfo,
   TagInfo,
   TagDetailInfo,
+  VehicleInfo,
   ChatArchivingMsgTypeVideo,
+  CreateLeadResponse,
+  QueryVehicleInfoListResponse,
+  QueryVehicleInfoListRequest,
   QueryExternalContactListRequest,
   MiniAppCodeInfo,
   QueryClueInfoListResponse,
   CreateChannelCodeRequest,
   QueryExternalContactDetailResponse,
-  LiveCodeDetail,
-  QueryExternalContactListResponse,
   FollowUser,
+  QueryExternalContactListResponse,
+  ExternalContactSimpleInfo,
   QueryActivityLiveCodeListResponse,
-  QueryActivityJoinListResponse,
+  CreateCorpTagRequest,
   ExternalUserMappingInfo,
   QueryLicenseInfoResponse,
   QueryClueInfoListRequest,
   ActivityDetail,
+  LiveCodeDetail,
   ExternalContactTag,
   ChatArchivingDetail,
   QueryActivityListResponse,
   QueryActivityJoinListRequest,
-  TagGroup,
+  DealerInfo,
+  QueryExternalUserMappingInfoRequest,
   QueryChannelCodeListRequest,
+  QueryDealerInfoListResponse,
   WeComTagDetail,
   QueryActivityLiveCodeListRequest,
-  CreateCorpTagRequest,
+  QueryActivityJoinListResponse,
   ClueInfoDetail,
+  QueryDealerInfoListRequest,
   QueryMiniAppCodeListResponse,
   CreateChannelCodeResponse,
   QueryLicenseInfoRequest,
   QueryActivityListRequest,
   QueryMiniAppCodeListRequest,
   QueryChatArchivingListRequest,
-  QueryExternalUserMappingInfoRequest,
+  CreateLeadRequest,
   QueryChannelCodeListResponse,
 } from "./wav_models"
 
@@ -111,6 +119,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryActivityListResponse) => void
   ): Promise<QueryActivityListResponse> {
     return this.request("QueryActivityList", req, cb)
+  }
+
+  /**
+   * 企业可通过此接口获取录入在企微SaaS平台上的经销商信息。
+   */
+  async QueryDealerInfoList(
+    req: QueryDealerInfoListRequest,
+    cb?: (error: string, rep: QueryDealerInfoListResponse) => void
+  ): Promise<QueryDealerInfoListResponse> {
+    return this.request("QueryDealerInfoList", req, cb)
+  }
+
+  /**
+   * 企业可通过此接口获取企微SaaS平台上的车系车型信息。
+   */
+  async QueryVehicleInfoList(
+    req: QueryVehicleInfoListRequest,
+    cb?: (error: string, rep: QueryVehicleInfoListResponse) => void
+  ): Promise<QueryVehicleInfoListResponse> {
+    return this.request("QueryVehicleInfoList", req, cb)
+  }
+
+  /**
+   * 线索回收接口
+   */
+  async CreateLead(
+    req: CreateLeadRequest,
+    cb?: (error: string, rep: CreateLeadResponse) => void
+  ): Promise<CreateLeadResponse> {
+    return this.request("CreateLead", req, cb)
   }
 
   /**

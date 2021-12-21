@@ -63,6 +63,10 @@ export interface FlowApproverInfo {
       * 用户侧第三方id
       */
     OpenId?: string;
+    /**
+      * 合同的强制预览时间：3~300s，未指定则按合同页数计算
+      */
+    PreReadTime?: number;
 }
 /**
  * PrepareFlows返回参数结构体
@@ -119,6 +123,19 @@ export interface TemplateInfo {
     Recipients: Array<Recipient>;
 }
 /**
+ * GetDownloadFlowUrl返回参数结构体
+ */
+export interface GetDownloadFlowUrlResponse {
+    /**
+      * 进入合同（流程）下载确认页面链接
+      */
+    DownLoadUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeResourceUrlsByFlows返回参数结构体
  */
 export interface DescribeResourceUrlsByFlowsResponse {
@@ -137,6 +154,43 @@ export interface DescribeResourceUrlsByFlowsResponse {
     RequestId?: string;
 }
 /**
+ * 签署参与者信息
+ */
+export interface Recipient {
+    /**
+      * 签署人唯一标识
+      */
+    RecipientId?: string;
+    /**
+      * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
+      */
+    RecipientType?: string;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 签署方备注信息
+      */
+    RoleName?: string;
+    /**
+      * 是否需要校验
+      */
+    RequireValidation?: boolean;
+    /**
+      * 是否必须填写
+      */
+    RequireSign?: boolean;
+    /**
+      * 签署类型
+      */
+    SignType?: number;
+    /**
+      * 签署顺序：数字越小优先级越高
+      */
+    RoutingOrder?: number;
+}
+/**
  * DescribeTemplates返回参数结构体
  */
 export interface DescribeTemplatesResponse {
@@ -150,25 +204,43 @@ export interface DescribeTemplatesResponse {
     RequestId?: string;
 }
 /**
- * SyncProxyOrganizationOperators请求参数结构体
+ * OperateChannelTemplate返回参数结构体
  */
-export interface SyncProxyOrganizationOperatorsRequest {
+export interface OperateChannelTemplateResponse {
     /**
-      * 操作类型，新增:"CREATE"，修改:"UPDATE"，离职:"RESIGN"
+      * 腾讯电子签颁发给渠道的应用ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    OperatorType: string;
+    AppId: string;
     /**
-      * 应用信息
+      * 渠道方模板库模板唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Agent: Agent;
+    TemplateId: string;
     /**
-      * 经办人信息列表
+      * 全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProxyOrganizationOperators: Array<ProxyOrganizationOperator>;
+    OperateResult: string;
     /**
-      * 操作者的信息
+      * 模板可见性, 全部可见-"all", 部分可见-"part"
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Operator?: UserInfo;
+    AuthTag: string;
+    /**
+      * 合作企业方第三方机构唯一标识数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyOrganizationOpenIds: Array<string>;
+    /**
+      * 操作失败信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailMessageList: Array<AuthFailMessage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateSignUrls请求参数结构体
@@ -194,6 +266,19 @@ export interface CreateSignUrlsRequest {
       * 签署完成后H5引导页跳转URL
       */
     JumpUrl?: string;
+}
+/**
+ * 授权出错信息
+ */
+export interface AuthFailMessage {
+    /**
+      * 合作企业Id
+      */
+    ProxyOrganizationOpenId: string;
+    /**
+      * 出错信息
+      */
+    Message: string;
 }
 /**
  * DescribeResourceUrlsByFlows请求参数结构体
@@ -309,6 +394,24 @@ TEXT控件可以指定字体
       * 控件描述
       */
     ComponentDescription?: string;
+}
+/**
+ * GetDownloadFlowUrl请求参数结构体
+ */
+export interface GetDownloadFlowUrlRequest {
+    /**
+      * 应用信息
+此接口Agent.ProxyOrganizationOpenId 和 Agent. ProxyOperator.OpenId 必填
+      */
+    Agent: Agent;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 文件夹数组，合同（流程）总数不能超过50个，一个文件夹下，不能超过20个合同（流程），
+      */
+    DownLoadFlows?: Array<DownloadFlowInfo>;
 }
 /**
  * 签署链接内容
@@ -434,33 +537,25 @@ export interface CreateFlowsByTemplatesResponse {
     RequestId?: string;
 }
 /**
- * 合作企业经办人列表信息
+ * PrepareFlows请求参数结构体
  */
-export interface ProxyOrganizationOperator {
+export interface PrepareFlowsRequest {
     /**
-      * 经办人ID（渠道颁发）
+      * 渠道应用相关信息
       */
-    Id: string;
+    Agent: Agent;
     /**
-      * 经办人姓名
+      * 多个合同（流程）信息
       */
-    Name?: string;
+    FlowInfos: Array<FlowInfo>;
     /**
-      * 经办人身份证件类型
-用户证件类型：默认ID_CARD
-1. ID_CARD - 居民身份证
-2. HOUSEHOLD_REGISTER - 户口本
-3. TEMP_ID_CARD - 临时居民身份证
+      * 操作完成后的跳转地址
       */
-    IdCardType?: string;
+    JumpUrl: string;
     /**
-      * 经办人身份证号
+      * 操作者的信息
       */
-    IdCardNumber?: string;
-    /**
-      * 经办人手机号
-      */
-    Mobile?: string;
+    Operator?: UserInfo;
 }
 /**
  * SyncProxyOrganizationOperators返回参数结构体
@@ -514,6 +609,27 @@ export interface DescribeTemplatesRequest {
       * 模版唯一标识
       */
     TemplateId?: string;
+}
+/**
+ * SyncProxyOrganizationOperators请求参数结构体
+ */
+export interface SyncProxyOrganizationOperatorsRequest {
+    /**
+      * 操作类型，新增:"CREATE"，修改:"UPDATE"，离职:"RESIGN"
+      */
+    OperatorType: string;
+    /**
+      * 应用信息
+      */
+    Agent: Agent;
+    /**
+      * 经办人信息列表
+      */
+    ProxyOrganizationOperators: Array<ProxyOrganizationOperator>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
 }
 /**
  * CreateConsoleLoginUrl返回参数结构体
@@ -577,27 +693,6 @@ export interface SyncProxyOrganizationRequest {
     Operator?: UserInfo;
 }
 /**
- * PrepareFlows请求参数结构体
- */
-export interface PrepareFlowsRequest {
-    /**
-      * 渠道应用相关信息
-      */
-    Agent: Agent;
-    /**
-      * 多个合同（流程）信息
-      */
-    FlowInfos: Array<FlowInfo>;
-    /**
-      * 操作完成后的跳转地址
-      */
-    JumpUrl: string;
-    /**
-      * 操作者的信息
-      */
-    Operator?: UserInfo;
-}
-/**
  * 用量明细
  */
 export interface UsageDetail {
@@ -636,6 +731,48 @@ export interface CreateSignUrlsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * OperateChannelTemplate请求参数结构体
+ */
+export interface OperateChannelTemplateRequest {
+    /**
+      * 应用信息
+      */
+    Agent: Agent;
+    /**
+      * 渠道方模板库模板唯一标识
+      */
+    TemplateId: string;
+    /**
+      * 操作类型，查询:"SELECT"，删除:"DELETE"，更新:"UPDATE"
+      */
+    OperateType: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 模板可见性, 全部可见-"all", 部分可见-"part"
+      */
+    AuthTag?: string;
+    /**
+      * 合作企业方第三方机构唯一标识数据
+      */
+    ProxyOrganizationOpenIds?: string;
+}
+/**
+ * 合同（流程）下载信息
+ */
+export interface DownloadFlowInfo {
+    /**
+      * 文件夹名称
+      */
+    FileName: string;
+    /**
+      * 合同（流程）的标识数组
+      */
+    FlowIdList: Array<string>;
 }
 /**
  * 同步经办人失败原因
@@ -689,41 +826,33 @@ export interface DescribeUsageRequest {
     Offset?: number;
 }
 /**
- * 签署参与者信息
+ * 合作企业经办人列表信息
  */
-export interface Recipient {
+export interface ProxyOrganizationOperator {
     /**
-      * 签署人唯一标识
+      * 经办人ID（渠道颁发）
       */
-    RecipientId?: string;
+    Id: string;
     /**
-      * 签署方类型：ENTERPRISE-企业INDIVIDUAL-自然人
+      * 经办人姓名
       */
-    RecipientType?: string;
+    Name?: string;
     /**
-      * 描述
+      * 经办人身份证件类型
+用户证件类型：默认ID_CARD
+1. ID_CARD - 居民身份证
+2. HOUSEHOLD_REGISTER - 户口本
+3. TEMP_ID_CARD - 临时居民身份证
       */
-    Description?: string;
+    IdCardType?: string;
     /**
-      * 签署方备注信息
+      * 经办人身份证号
       */
-    RoleName?: string;
+    IdCardNumber?: string;
     /**
-      * 是否需要校验
+      * 经办人手机号
       */
-    RequireValidation?: boolean;
-    /**
-      * 是否必须填写
-      */
-    RequireSign?: boolean;
-    /**
-      * 签署类型
-      */
-    SignType?: number;
-    /**
-      * 签署顺序：数字越小优先级越高
-      */
-    RoutingOrder?: number;
+    Mobile?: string;
 }
 /**
  * 应用相关信息

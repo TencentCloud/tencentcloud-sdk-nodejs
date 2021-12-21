@@ -1133,22 +1133,42 @@ export interface CronHorizontalAutoscaler {
     Priority?: number;
 }
 /**
- * 存储卷配置
+ * RollingUpdateApplicationByVersion返回参数结构体
  */
-export interface StorageConf {
+export interface RollingUpdateApplicationByVersionResponse {
     /**
-      * 存储卷名称
+      * 版本ID
       */
-    StorageVolName: string;
+    Result: string;
     /**
-      * 存储卷路径
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    StorageVolPath: string;
+    RequestId?: string;
+}
+/**
+ * RollingUpdateApplicationByVersion请求参数结构体
+ */
+export interface RollingUpdateApplicationByVersionRequest {
     /**
-      * 存储卷IP
-注意：此字段可能返回 null，表示取不到有效值。
+      * 应用ID
       */
-    StorageVolIp?: string;
+    ApplicationId: string;
+    /**
+      * 环境ID
+      */
+    EnvironmentId: string;
+    /**
+      * 更新版本，IMAGE 部署为 tag 值；JAR/WAR 部署 为 Version
+      */
+    DeployVersion: string;
+    /**
+      * JAR/WAR 包名，仅 JAR/WAR 部署时必填
+      */
+    PackageName?: string;
+    /**
+      * 请求来源平台，含 IntelliJ，Coding
+      */
+    From?: string;
 }
 /**
  * 应用实例
@@ -1623,6 +1643,24 @@ export interface DeployApplicationResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 存储卷配置
+ */
+export interface StorageConf {
+    /**
+      * 存储卷名称
+      */
+    StorageVolName: string;
+    /**
+      * 存储卷路径
+      */
+    StorageVolPath: string;
+    /**
+      * 存储卷IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageVolIp?: string;
 }
 /**
  * CreateEnvironment请求参数结构体

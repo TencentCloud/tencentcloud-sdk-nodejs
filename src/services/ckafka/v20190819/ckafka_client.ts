@@ -25,15 +25,16 @@ import {
   DeleteUserRequest,
   PartitionOffset,
   DescribeACLRequest,
-  DescribeTopicSyncReplicaResponse,
+  BatchModifyTopicResultDTO,
   DescribeTopicAttributesRequest,
-  FetchMessageByOffsetRequest,
+  DescribeInstanceAttributesRequest,
   ConsumerGroup,
   Assignment,
   DescribeConsumerGroupResponse,
   DeleteTopicRequest,
   DescribeInstancesResponse,
   FetchMessageByOffsetResponse,
+  BatchModifyTopicAttributesResponse,
   CreateInstancePreResp,
   GroupInfoTopics,
   TopicResult,
@@ -49,6 +50,7 @@ import {
   SaleInfo,
   Topic,
   Tag,
+  BatchModifyGroupOffsetsResponse,
   GroupResponse,
   DescribeTopicAttributesResponse,
   DeleteRouteTriggerTimeRequest,
@@ -64,7 +66,9 @@ import {
   DescribeConsumerGroupRequest,
   DeleteUserResponse,
   CreateAclRequest,
+  DescribeTopicSyncReplicaResponse,
   DescribeAppInfoRequest,
+  Partitions,
   DescribeTopicResponse,
   ConsumerGroupResponse,
   CreateTopicIpWhiteListResponse,
@@ -77,7 +81,7 @@ import {
   DynamicRetentionTime,
   DescribeTopicSubscribeGroupRequest,
   DeleteInstancePreResponse,
-  DescribeInstanceAttributesRequest,
+  FetchMessageByOffsetRequest,
   TopicInSyncReplicaInfo,
   DescribeRegionRequest,
   InstanceConfigDO,
@@ -126,16 +130,19 @@ import {
   DescribeRouteRequest,
   TopicInSyncReplicaResult,
   DescribeCkafkaZoneResponse,
+  BatchModifyGroupOffsetsRequest,
   TopicAttributesResponse,
   InstanceResponse,
   DescribeGroup,
   TopicPartitionDO,
   CreateTopicResp,
+  BatchModifyTopicInfo,
   DescribeRouteResponse,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
   ConsumerRecord,
   ModifyGroupOffsetsRequest,
+  BatchModifyTopicAttributesRequest,
   CreateTopicIpWhiteListRequest,
   Route,
   AclRuleInfo,
@@ -200,6 +207,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicSubscribeGroupResponse) => void
   ): Promise<DescribeTopicSubscribeGroupResponse> {
     return this.request("DescribeTopicSubscribeGroup", req, cb)
+  }
+
+  /**
+   * 批量设置主题属性
+   */
+  async BatchModifyTopicAttributes(
+    req: BatchModifyTopicAttributesRequest,
+    cb?: (error: string, rep: BatchModifyTopicAttributesResponse) => void
+  ): Promise<BatchModifyTopicAttributesResponse> {
+    return this.request("BatchModifyTopicAttributes", req, cb)
   }
 
   /**
@@ -363,6 +380,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除用户
+   */
+  async DeleteUser(
+    req: DeleteUserRequest,
+    cb?: (error: string, rep: DeleteUserResponse) => void
+  ): Promise<DeleteUserResponse> {
+    return this.request("DeleteUser", req, cb)
+  }
+
+  /**
    * 删除ACL
    */
   async DeleteAcl(
@@ -454,13 +481,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户
+   * 批量修改消费组offset
    */
-  async DeleteUser(
-    req: DeleteUserRequest,
-    cb?: (error: string, rep: DeleteUserResponse) => void
-  ): Promise<DeleteUserResponse> {
-    return this.request("DeleteUser", req, cb)
+  async BatchModifyGroupOffsets(
+    req: BatchModifyGroupOffsetsRequest,
+    cb?: (error: string, rep: BatchModifyGroupOffsetsResponse) => void
+  ): Promise<BatchModifyGroupOffsetsResponse> {
+    return this.request("BatchModifyGroupOffsets", req, cb)
   }
 
   /**

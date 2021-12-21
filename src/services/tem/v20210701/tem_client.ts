@@ -58,7 +58,8 @@ import {
   CreateCosTokenResponse,
   IngressRule,
   CronHorizontalAutoscaler,
-  StorageConf,
+  RollingUpdateApplicationByVersionResponse,
+  RollingUpdateApplicationByVersionRequest,
   RunVersionPod,
   DescribeDeployApplicationDetailResponse,
   IngressRuleValue,
@@ -83,6 +84,7 @@ import {
   CronHorizontalAutoscalerSchedule,
   ResumeDeployApplicationRequest,
   DeployApplicationResponse,
+  StorageConf,
   CreateEnvironmentRequest,
   Pair,
 } from "./tem_models"
@@ -194,6 +196,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIngressResponse) => void
   ): Promise<DescribeIngressResponse> {
     return this.request("DescribeIngress", req, cb)
+  }
+
+  /**
+   * 更新应用部署版本
+   */
+  async RollingUpdateApplicationByVersion(
+    req: RollingUpdateApplicationByVersionRequest,
+    cb?: (error: string, rep: RollingUpdateApplicationByVersionResponse) => void
+  ): Promise<RollingUpdateApplicationByVersionResponse> {
+    return this.request("RollingUpdateApplicationByVersion", req, cb)
   }
 
   /**

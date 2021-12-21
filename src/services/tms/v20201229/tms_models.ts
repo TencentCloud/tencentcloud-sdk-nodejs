@@ -35,7 +35,7 @@ export interface RiskDetails {
  */
 export interface TextModerationRequest {
   /**
-   * 文本内容Base64编码，限制原文长度不能超过10000个unicode字符
+   * 该字段表示待检测对象的文本内容，长度不能超过10000（按unicode编码计算）
    */
   Content: string
 
@@ -104,6 +104,12 @@ export interface DetailResults {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LibName: string
+
+  /**
+      * 该字段用于返回当前标签（Label）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
 }
 
 /**
@@ -258,6 +264,12 @@ export interface TextModerationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DataId: string
+
+  /**
+      * 该字段用于返回当前标签（Label）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubLabel: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquiryPriceTerminateInstancesResponse, AssociateInstancesKeyPairsResponse, RenewInstancesRequest, DescribeImageQuotaResponse, ModifyInstancesProjectRequest, ResetInstancesTypeResponse, DeleteDisasterRecoverGroupsRequest, DeleteKeyPairsResponse, TerminateInstancesResponse, ModifyInstancesChargeTypeResponse, InquiryPriceResetInstancesInternetMaxBandwidthResponse, ModifyKeyPairAttributeRequest, AssociateSecurityGroupsRequest, ResetInstancesTypeRequest, InquiryPriceResetInstanceRequest, ModifyImageSharePermissionResponse, DeleteImagesRequest, DescribeInstancesResponse, DescribeHostsResponse, DeleteKeyPairsRequest, ResetInstanceRequest, AllocateHostsRequest, DescribeRegionsResponse, PurchaseReservedInstancesOfferingRequest, RebootInstancesRequest, AssociateInstancesKeyPairsRequest, ImportKeyPairResponse, DescribeInstancesStatusResponse, DescribeInstanceTypeConfigsRequest, DescribeKeyPairsResponse, ResetInstancesPasswordRequest, DescribeImagesResponse, ModifyInstancesVpcAttributeResponse, InquiryPriceResetInstancesTypeRequest, DescribeInstancesOperationLimitRequest, ModifyInstancesChargeTypeRequest, DescribeInstanceVncUrlRequest, StopInstancesResponse, ModifyImageSharePermissionRequest, DisassociateInstancesKeyPairsResponse, InquiryPriceResizeInstanceDisksRequest, RunInstancesResponse, ModifyInstancesAttributeResponse, InquiryPriceModifyInstancesChargeTypeResponse, DescribeInstancesOperationLimitResponse, SyncImagesResponse, DescribeZoneInstanceConfigInfosResponse, ModifyInstancesAttributeRequest, RenewHostsRequest, DescribeZonesRequest, StartInstancesRequest, DescribeInstanceInternetBandwidthConfigsResponse, DescribeDisasterRecoverGroupsRequest, ModifyKeyPairAttributeResponse, ModifyInstancesRenewFlagRequest, SyncImagesRequest, DisassociateInstancesKeyPairsRequest, DescribeImageQuotaRequest, ResetInstancesInternetMaxBandwidthResponse, DescribeInstanceFamilyConfigsResponse, CreateImageResponse, DescribeInstancesModificationRequest, DescribeImageSharePermissionResponse, ResetInstancesPasswordResponse, InquiryPriceRunInstancesRequest, DescribeDisasterRecoverGroupQuotaResponse, DescribeRegionsRequest, CreateDisasterRecoverGroupRequest, DescribeReservedInstancesConfigInfosResponse, DescribeReservedInstancesResponse, DescribeImportImageOsResponse, InquirePricePurchaseReservedInstancesOfferingRequest, DescribeInstancesModificationResponse, DescribeKeyPairsRequest, DeleteDisasterRecoverGroupsResponse, InquiryPriceModifyInstancesChargeTypeRequest, CreateImageRequest, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, DescribeReservedInstancesOfferingsRequest, DescribeDisasterRecoverGroupsResponse, ModifyInstanceDiskTypeResponse, DescribeReservedInstancesConfigInfosRequest, ResetInstancesInternetMaxBandwidthRequest, AssociateSecurityGroupsResponse, ImportImageRequest, DescribeImportImageOsRequest, CreateKeyPairRequest, InquiryPriceRenewInstancesResponse, AllocateHostsResponse, DescribeImageSharePermissionRequest, InquiryPriceResetInstanceResponse, RunInstancesRequest, InquiryPriceResetInstancesInternetMaxBandwidthRequest, ModifyHostsAttributeResponse, DescribeDisasterRecoverGroupQuotaRequest, StartInstancesResponse, ModifyInstancesVpcAttributeRequest, DescribeReservedInstancesRequest, DescribeInternetChargeTypeConfigsResponse, DescribeZoneInstanceConfigInfosRequest, DescribeZonesResponse, InquiryPriceTerminateInstancesRequest, InquiryPriceRunInstancesResponse, DescribeHostsRequest, DescribeAccountQuotaRequest, ModifyInstancesRenewFlagResponse, DescribeInstancesStatusRequest, InquiryPriceResizeInstanceDisksResponse, TerminateInstancesRequest, DeleteImagesResponse, ImportImageResponse, ModifyDisasterRecoverGroupAttributeRequest, RebootInstancesResponse, CreateDisasterRecoverGroupResponse, ModifyInstanceDiskTypeRequest, InquiryPriceResetInstancesTypeResponse, ModifyImageAttributeResponse, InquiryPriceRenewInstancesRequest, DescribeInstancesRequest, StopInstancesRequest, DescribeInternetChargeTypeConfigsRequest, DescribeImagesRequest, ModifyImageAttributeRequest, ResizeInstanceDisksResponse, InquirePricePurchaseReservedInstancesOfferingResponse, DisassociateSecurityGroupsRequest, ModifyHostsAttributeRequest, ImportKeyPairRequest, DescribeReservedInstancesOfferingsResponse, RenewInstancesResponse, DescribeAccountQuotaResponse, ResetInstanceResponse, ModifyDisasterRecoverGroupAttributeResponse, DescribeInstanceTypeConfigsResponse, ResizeInstanceDisksRequest, DescribeInstanceFamilyConfigsRequest, DescribeInstanceInternetBandwidthConfigsRequest, PurchaseReservedInstancesOfferingResponse, RenewHostsResponse, DisassociateSecurityGroupsResponse, ModifyInstancesProjectResponse } from "./cvm_models";
+import { InquiryPriceTerminateInstancesResponse, AssociateInstancesKeyPairsResponse, RenewInstancesRequest, DescribeImageQuotaResponse, ModifyInstancesProjectRequest, ResetInstancesTypeResponse, DeleteDisasterRecoverGroupsRequest, DeleteKeyPairsResponse, TerminateInstancesResponse, ModifyInstancesChargeTypeResponse, InquiryPriceResetInstancesInternetMaxBandwidthResponse, ModifyKeyPairAttributeRequest, AssociateSecurityGroupsRequest, ResetInstancesTypeRequest, InquiryPriceResetInstanceRequest, DeleteLaunchTemplateVersionsRequest, DeleteImagesRequest, DeleteLaunchTemplateRequest, DescribeInstancesResponse, DescribeHostsResponse, DeleteKeyPairsRequest, ResetInstanceRequest, AllocateHostsRequest, DescribeRegionsResponse, PurchaseReservedInstancesOfferingRequest, RebootInstancesRequest, AssociateInstancesKeyPairsRequest, DeleteLaunchTemplateResponse, ImportKeyPairResponse, DescribeInstancesStatusResponse, ModifyLaunchTemplateDefaultVersionResponse, InquiryPriceModifyInstancesChargeTypeResponse, DescribeKeyPairsResponse, ResetInstancesPasswordRequest, DescribeImagesResponse, ModifyInstancesVpcAttributeResponse, DescribeLaunchTemplatesResponse, DescribeInstancesOperationLimitRequest, ModifyInstancesChargeTypeRequest, DescribeInstanceVncUrlRequest, StopInstancesResponse, ModifyImageSharePermissionRequest, DisassociateInstancesKeyPairsResponse, DescribeLaunchTemplateVersionsRequest, InquiryPriceResizeInstanceDisksRequest, RunInstancesResponse, ModifyInstancesAttributeResponse, ModifyImageSharePermissionResponse, DescribeInstancesOperationLimitResponse, SyncImagesResponse, DescribeZoneInstanceConfigInfosResponse, ModifyInstancesAttributeRequest, RenewHostsRequest, DescribeZonesRequest, StartInstancesRequest, DescribeInstanceInternetBandwidthConfigsResponse, DescribeDisasterRecoverGroupsRequest, ModifyKeyPairAttributeResponse, ModifyInstancesRenewFlagRequest, SyncImagesRequest, DisassociateInstancesKeyPairsRequest, DescribeImageQuotaRequest, ResetInstancesInternetMaxBandwidthResponse, DescribeInstanceFamilyConfigsResponse, CreateImageResponse, DescribeInstancesModificationRequest, DescribeImageSharePermissionResponse, DeleteLaunchTemplateVersionsResponse, ResetInstancesPasswordResponse, InquiryPriceRunInstancesRequest, DescribeDisasterRecoverGroupQuotaResponse, DescribeRegionsRequest, CreateDisasterRecoverGroupRequest, DescribeReservedInstancesConfigInfosResponse, DescribeReservedInstancesResponse, DescribeImportImageOsResponse, InquirePricePurchaseReservedInstancesOfferingRequest, DescribeInstancesModificationResponse, DescribeKeyPairsRequest, DeleteDisasterRecoverGroupsResponse, InquiryPriceModifyInstancesChargeTypeRequest, CreateImageRequest, CreateLaunchTemplateVersionRequest, CreateKeyPairResponse, DescribeInstanceVncUrlResponse, DescribeReservedInstancesOfferingsRequest, DescribeDisasterRecoverGroupsResponse, ModifyInstanceDiskTypeResponse, CreateLaunchTemplateRequest, DescribeReservedInstancesConfigInfosRequest, DescribeLaunchTemplatesRequest, ResetInstancesInternetMaxBandwidthRequest, AssociateSecurityGroupsResponse, ImportImageRequest, DescribeImportImageOsRequest, CreateLaunchTemplateResponse, CreateKeyPairRequest, InquiryPriceRenewInstancesResponse, AllocateHostsResponse, DescribeImageSharePermissionRequest, DescribeInstancesRequest, InquiryPriceResetInstanceResponse, RunInstancesRequest, InquiryPriceResetInstancesInternetMaxBandwidthRequest, ModifyHostsAttributeResponse, DescribeDisasterRecoverGroupQuotaRequest, StartInstancesResponse, ModifyInstancesVpcAttributeRequest, DescribeReservedInstancesRequest, DescribeInternetChargeTypeConfigsResponse, DescribeZoneInstanceConfigInfosRequest, DescribeZonesResponse, InquiryPriceTerminateInstancesRequest, InquiryPriceRunInstancesResponse, DescribeHostsRequest, DescribeAccountQuotaRequest, ModifyInstancesRenewFlagResponse, DescribeInstancesStatusRequest, InquiryPriceResizeInstanceDisksResponse, TerminateInstancesRequest, DeleteImagesResponse, ImportImageResponse, ModifyDisasterRecoverGroupAttributeRequest, RebootInstancesResponse, CreateDisasterRecoverGroupResponse, ModifyInstanceDiskTypeRequest, InquiryPriceResetInstancesTypeResponse, CreateLaunchTemplateVersionResponse, ModifyImageAttributeResponse, InquiryPriceRenewInstancesRequest, DescribeInstanceTypeConfigsRequest, InquiryPriceResetInstancesTypeRequest, ModifyLaunchTemplateDefaultVersionRequest, StopInstancesRequest, DescribeInternetChargeTypeConfigsRequest, DescribeImagesRequest, ModifyImageAttributeRequest, ResizeInstanceDisksResponse, InquirePricePurchaseReservedInstancesOfferingResponse, DisassociateSecurityGroupsRequest, ModifyHostsAttributeRequest, ImportKeyPairRequest, DescribeReservedInstancesOfferingsResponse, RenewInstancesResponse, DescribeLaunchTemplateVersionsResponse, DescribeAccountQuotaResponse, ResetInstanceResponse, ModifyDisasterRecoverGroupAttributeResponse, DescribeInstanceTypeConfigsResponse, ResizeInstanceDisksRequest, DescribeInstanceFamilyConfigsRequest, DescribeInstanceInternetBandwidthConfigsRequest, PurchaseReservedInstancesOfferingResponse, RenewHostsResponse, DisassociateSecurityGroupsResponse, ModifyInstancesProjectResponse } from "./cvm_models";
 /**
  * cvm client
  * @class
@@ -42,6 +42,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeImageSharePermission）用于查询镜像分享信息。
      */
     DescribeImageSharePermission(req: DescribeImageSharePermissionRequest, cb?: (error: string, rep: DescribeImageSharePermissionResponse) => void): Promise<DescribeImageSharePermissionResponse>;
+    /**
+     * 本接口（ModifyLaunchTemplateDefaultVersion）用于修改实例启动模板默认版本。
+     */
+    ModifyLaunchTemplateDefaultVersion(req: ModifyLaunchTemplateDefaultVersionRequest, cb?: (error: string, rep: ModifyLaunchTemplateDefaultVersionResponse) => void): Promise<ModifyLaunchTemplateDefaultVersionResponse>;
     /**
      * 本接口 (InquiryPriceModifyInstancesChargeType) 用于切换实例的计费模式询价。
 
@@ -135,13 +139,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 本接口 (ImportKeyPair) 用于导入密钥对。
-
-* 本接口的功能是将密钥对导入到用户账户，并不会自动绑定到实例。如需绑定可以使用[AssociasteInstancesKeyPair](https://cloud.tencent.com/document/api/213/9404)接口。
-* 需指定密钥对名称以及该密钥对的公钥文本。
-* 如果用户只有私钥，可以通过 `SSL` 工具将私钥转换成公钥后再导入。
+     * 本接口（DescribeLaunchTemplateVersions）用于查询实例模板版本信息。
      */
-    ImportKeyPair(req: ImportKeyPairRequest, cb?: (error: string, rep: ImportKeyPairResponse) => void): Promise<ImportKeyPairResponse>;
+    DescribeLaunchTemplateVersions(req: DescribeLaunchTemplateVersionsRequest, cb?: (error: string, rep: DescribeLaunchTemplateVersionsResponse) => void): Promise<DescribeLaunchTemplateVersionsResponse>;
     /**
      * 本接口（SyncImages）用于将自定义镜像同步到其它地区。
 
@@ -174,15 +174,28 @@ export declare class Client extends AbstractClient {
      */
     AssociateInstancesKeyPairs(req: AssociateInstancesKeyPairsRequest, cb?: (error: string, rep: AssociateInstancesKeyPairsResponse) => void): Promise<AssociateInstancesKeyPairsResponse>;
     /**
-     * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
+     * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
 
-* 实例创建成功后将自动开机启动，[实例状态](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)变为“运行中”。
-* 预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
-* 调用本接口创建实例，支持代金券自动抵扣（注意，代金券不可用于抵扣后付费冻结金额），详情请参考[代金券选用规则](https://cloud.tencent.com/document/product/555/7428)。
-* 本接口允许购买的实例数量遵循[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)，所创建的实例和官网入口创建的实例共用配额。
-* 本接口为异步接口，当创建实例请求下发成功后会返回一个实例`ID`列表和一个`RequestId`，此时创建实例操作并未立即完成。在此期间实例的状态将会处于“PENDING”，实例创建结果可以通过调用 [DescribeInstancesStatus](https://cloud.tencent.com/document/product/213/15738)  接口查询，如果实例状态(InstanceState)由“PENDING”变为“RUNNING”，则代表实例创建成功，“LAUNCH_FAILED”代表实例创建失败。
+* 处于 `STOPPED` 状态的机器无法使用此功能。
+* 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
+* 管理终端地址一旦被访问，将自动失效，您需要重新查询。
+* 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
+* 获取到 `InstanceVncUrl` 后，您需要在链接 <https://img.qcloud.com/qcloud/app/active_vnc/index.html?> 末尾加上参数 `InstanceVncUrl=xxxx`  。
+
+  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
+
+    最后组成的 URL 格式如下：
+
+```
+https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
+```
+
      */
-    RunInstances(req: RunInstancesRequest, cb?: (error: string, rep: RunInstancesResponse) => void): Promise<RunInstancesResponse>;
+    DescribeInstanceVncUrl(req: DescribeInstanceVncUrlRequest, cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void): Promise<DescribeInstanceVncUrlResponse>;
+    /**
+     * 本接口（DeleteLaunchTemplate）用于删除一个实例启动模板。
+     */
+    DeleteLaunchTemplate(req: DeleteLaunchTemplateRequest, cb?: (error: string, rep: DeleteLaunchTemplateResponse) => void): Promise<DeleteLaunchTemplateResponse>;
     /**
      * 本接口（DeleteImages）用于删除一个或多个镜像。
 
@@ -244,6 +257,14 @@ export declare class Client extends AbstractClient {
      */
     ModifyInstancesRenewFlag(req: ModifyInstancesRenewFlagRequest, cb?: (error: string, rep: ModifyInstancesRenewFlagResponse) => void): Promise<ModifyInstancesRenewFlagResponse>;
     /**
+     * 本接口 (RenewInstances) 用于续费包年包月实例。
+
+* 只支持操作包年包月实例。
+* 续费时请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
+* 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
+     */
+    RenewInstances(req: RenewInstancesRequest, cb?: (error: string, rep: RenewInstancesResponse) => void): Promise<RenewInstancesResponse>;
+    /**
      * 本接口(PurchaseReservedInstancesOffering)用于用户购买一个或者多个指定配置的预留实例
      */
     PurchaseReservedInstancesOffering(req: PurchaseReservedInstancesOfferingRequest, cb?: (error: string, rep: PurchaseReservedInstancesOfferingResponse) => void): Promise<PurchaseReservedInstancesOfferingResponse>;
@@ -256,6 +277,14 @@ export declare class Client extends AbstractClient {
 * 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
      */
     ResizeInstanceDisks(req: ResizeInstanceDisksRequest, cb?: (error: string, rep: ResizeInstanceDisksResponse) => void): Promise<ResizeInstanceDisksResponse>;
+    /**
+     * 本接口（CreateLaunchTemplate）用于创建实例启动模板。
+
+实例启动模板是一种配置数据并可用于创建实例，其内容包含创建实例所需的配置，比如实例类型，数据盘和系统盘的类型和大小，以及安全组等信息。
+
+初次创建实例模板后，其模板版本为默认版本1，新版本的创建可使用CreateLaunchTemplateVersion创建，版本号递增。默认情况下，在RunInstances中指定实例启动模板，若不指定模板版本号，则使用默认版本。
+     */
+    CreateLaunchTemplate(req: CreateLaunchTemplateRequest, cb?: (error: string, rep: CreateLaunchTemplateResponse) => void): Promise<CreateLaunchTemplateResponse>;
     /**
      * 本接口(DescribeReservedInstances)可提供列出用户已购买的预留实例
      */
@@ -292,6 +321,15 @@ export declare class Client extends AbstractClient {
      */
     ModifyImageAttribute(req: ModifyImageAttributeRequest, cb?: (error: string, rep: ModifyImageAttributeResponse) => void): Promise<ModifyImageAttributeResponse>;
     /**
+     * 本接口 (StartInstances) 用于启动一个或多个实例。
+
+* 只有状态为`STOPPED`的实例才可以进行此操作。
+* 接口调用成功时，实例会进入`STARTING`状态；启动实例成功时，实例会进入`RUNNING`状态。
+* 支持批量操作。每次请求批量实例的上限为100。
+* 本接口为异步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表启动实例操作成功。
+     */
+    StartInstances(req: StartInstancesRequest, cb?: (error: string, rep: StartInstancesResponse) => void): Promise<StartInstancesResponse>;
+    /**
      * 本接口(DescribeZones)用于查询可用区信息。
      */
     DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
@@ -310,9 +348,13 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceResetInstancesType(req: InquiryPriceResetInstancesTypeRequest, cb?: (error: string, rep: InquiryPriceResetInstancesTypeResponse) => void): Promise<InquiryPriceResetInstancesTypeResponse>;
     /**
-     * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
+     * 本接口（DeleteLaunchTemplateVersions）用于删除一个或者多个实例启动模板版本。
      */
-    DescribeInstanceFamilyConfigs(req?: DescribeInstanceFamilyConfigsRequest, cb?: (error: string, rep: DescribeInstanceFamilyConfigsResponse) => void): Promise<DescribeInstanceFamilyConfigsResponse>;
+    DeleteLaunchTemplateVersions(req: DeleteLaunchTemplateVersionsRequest, cb?: (error: string, rep: DeleteLaunchTemplateVersionsResponse) => void): Promise<DeleteLaunchTemplateVersionsResponse>;
+    /**
+     * 本接口（CreateLaunchTemplateVersion）根据指定的实例模板ID以及对应的模板版本号创建新的实例启动模板，若未指定模板版本号则使用默认版本号。每个实例启动模板最多创建30个版本。
+     */
+    CreateLaunchTemplateVersion(req: CreateLaunchTemplateVersionRequest, cb?: (error: string, rep: CreateLaunchTemplateVersionResponse) => void): Promise<CreateLaunchTemplateVersionResponse>;
     /**
      * 本接口 (DeleteDisasterRecoverGroups)用于删除[分散置放群组](https://cloud.tencent.com/document/product/213/15486)。只有空的置放群组才能被删除，非空的群组需要先销毁组内所有云服务器，才能执行删除操作，不然会产生删除置放群组失败的错误。
      */
@@ -362,36 +404,25 @@ export declare class Client extends AbstractClient {
      */
     ImportImage(req: ImportImageRequest, cb?: (error: string, rep: ImportImageResponse) => void): Promise<ImportImageResponse>;
     /**
-     * 本接口 (RenewInstances) 用于续费包年包月实例。
+     * 本接口 (ImportKeyPair) 用于导入密钥对。
 
-* 只支持操作包年包月实例。
-* 续费时请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。
-* 实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表操作成功。
+* 本接口的功能是将密钥对导入到用户账户，并不会自动绑定到实例。如需绑定可以使用[AssociasteInstancesKeyPair](https://cloud.tencent.com/document/api/213/9404)接口。
+* 需指定密钥对名称以及该密钥对的公钥文本。
+* 如果用户只有私钥，可以通过 `SSL` 工具将私钥转换成公钥后再导入。
      */
-    RenewInstances(req: RenewInstancesRequest, cb?: (error: string, rep: RenewInstancesResponse) => void): Promise<RenewInstancesResponse>;
+    ImportKeyPair(req: ImportKeyPairRequest, cb?: (error: string, rep: ImportKeyPairResponse) => void): Promise<ImportKeyPairResponse>;
+    /**
+     * 本接口（DescribeLaunchTemplates）用于查询一个或者多个实例启动模板。
+     */
+    DescribeLaunchTemplates(req: DescribeLaunchTemplatesRequest, cb?: (error: string, rep: DescribeLaunchTemplatesResponse) => void): Promise<DescribeLaunchTemplatesResponse>;
     /**
      * 本接口 (ModifyDisasterRecoverGroupAttribute)用于修改[分散置放群组](https://cloud.tencent.com/document/product/213/15486)属性。
      */
     ModifyDisasterRecoverGroupAttribute(req: ModifyDisasterRecoverGroupAttributeRequest, cb?: (error: string, rep: ModifyDisasterRecoverGroupAttributeResponse) => void): Promise<ModifyDisasterRecoverGroupAttributeResponse>;
     /**
-     * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
-
-* 处于 `STOPPED` 状态的机器无法使用此功能。
-* 管理终端地址的有效期为 15 秒，调用接口成功后如果 15 秒内不使用该链接进行访问，管理终端地址自动失效，您需要重新查询。
-* 管理终端地址一旦被访问，将自动失效，您需要重新查询。
-* 如果连接断开，每分钟内重新连接的次数不能超过 30 次。
-* 获取到 `InstanceVncUrl` 后，您需要在链接 <https://img.qcloud.com/qcloud/app/active_vnc/index.html?> 末尾加上参数 `InstanceVncUrl=xxxx`  。
-
-  - 参数 `InstanceVncUrl` ：调用接口成功后会返回的 `InstanceVncUrl` 的值。
-
-    最后组成的 URL 格式如下：
-
-```
-https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F%2Fbjvnc.qcloud.com%3A26789%2Fvnc%3Fs%3DaHpjWnRVMFNhYmxKdDM5MjRHNlVTSVQwajNUSW0wb2tBbmFtREFCTmFrcy8vUUNPMG0wSHZNOUUxRm5PMmUzWmFDcWlOdDJIbUJxSTZDL0RXcHZxYnZZMmRkWWZWcEZia2lyb09XMzdKNmM9
-```
-
+     * 本接口（DescribeInstanceFamilyConfigs）查询当前用户和地域所支持的机型族列表信息。
      */
-    DescribeInstanceVncUrl(req: DescribeInstanceVncUrlRequest, cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void): Promise<DescribeInstanceVncUrlResponse>;
+    DescribeInstanceFamilyConfigs(req?: DescribeInstanceFamilyConfigsRequest, cb?: (error: string, rep: DescribeInstanceFamilyConfigsResponse) => void): Promise<DescribeInstanceFamilyConfigsResponse>;
     /**
      * 本接口 (ModifyInstancesChargeType) 用于切换实例的计费模式。
 
@@ -412,14 +443,15 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     DescribeDisasterRecoverGroups(req: DescribeDisasterRecoverGroupsRequest, cb?: (error: string, rep: DescribeDisasterRecoverGroupsResponse) => void): Promise<DescribeDisasterRecoverGroupsResponse>;
     /**
-     * 本接口 (StartInstances) 用于启动一个或多个实例。
+     * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
 
-* 只有状态为`STOPPED`的实例才可以进行此操作。
-* 接口调用成功时，实例会进入`STARTING`状态；启动实例成功时，实例会进入`RUNNING`状态。
-* 支持批量操作。每次请求批量实例的上限为100。
-* 本接口为异步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) 接口查询，如果实例的最新操作状态(LatestOperationState)为“SUCCESS”，则代表启动实例操作成功。
+* 实例创建成功后将自动开机启动，[实例状态](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)变为“运行中”。
+* 预付费实例的购买会预先扣除本次实例购买所需金额，按小时后付费实例购买会预先冻结本次实例购买一小时内所需金额，在调用本接口前请确保账户余额充足。
+* 调用本接口创建实例，支持代金券自动抵扣（注意，代金券不可用于抵扣后付费冻结金额），详情请参考[代金券选用规则](https://cloud.tencent.com/document/product/555/7428)。
+* 本接口允许购买的实例数量遵循[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)，所创建的实例和官网入口创建的实例共用配额。
+* 本接口为异步接口，当创建实例请求下发成功后会返回一个实例`ID`列表和一个`RequestId`，此时创建实例操作并未立即完成。在此期间实例的状态将会处于“PENDING”，实例创建结果可以通过调用 [DescribeInstancesStatus](https://cloud.tencent.com/document/product/213/15738)  接口查询，如果实例状态(InstanceState)由“PENDING”变为“RUNNING”，则代表实例创建成功，“LAUNCH_FAILED”代表实例创建失败。
      */
-    StartInstances(req: StartInstancesRequest, cb?: (error: string, rep: StartInstancesResponse) => void): Promise<StartInstancesResponse>;
+    RunInstances(req: RunInstancesRequest, cb?: (error: string, rep: RunInstancesResponse) => void): Promise<RunInstancesResponse>;
     /**
      * 本接口 (ResetInstancesInternetMaxBandwidth) 用于调整实例公网带宽上限。
 

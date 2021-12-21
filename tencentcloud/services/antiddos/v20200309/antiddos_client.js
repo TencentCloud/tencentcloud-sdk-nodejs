@@ -167,6 +167,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListDDoSAI", req, cb);
     }
     /**
+     * 添加DDoS防护的IP网段黑白名单
+     */
+    async CreateDDoSBlackWhiteIpList(req, cb) {
+        return this.request("CreateDDoSBlackWhiteIpList", req, cb);
+    }
+    /**
      * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
      */
     async DescribeCCTrend(req, cb) {
@@ -294,6 +300,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSchedulingDomain", req, cb);
     }
     /**
+     * 获取DDoS防护的IP网段黑白名单
+     */
+    async DescribeDDoSBlackWhiteIpList(req, cb) {
+        return this.request("DescribeDDoSBlackWhiteIpList", req, cb);
+    }
+    /**
      * 添加DDoS防护的水印防护密钥
      */
     async CreateWaterPrintKey(req, cb) {
@@ -304,6 +316,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateProtocolBlockConfig(req, cb) {
         return this.request("CreateProtocolBlockConfig", req, cb);
+    }
+    /**
+     * 删除DDoS防护的IP网段黑白名单
+     */
+    async DeleteDDoSBlackWhiteIpList(req, cb) {
+        return this.request("DeleteDDoSBlackWhiteIpList", req, cb);
     }
     /**
      * 批量配置L7转发规则的证书供SSL测调用

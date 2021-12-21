@@ -312,6 +312,11 @@ export interface TaskLabel {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Score: number;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 具体场景下的图片识别结果
@@ -543,6 +548,11 @@ export interface AudioResultDetailTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LibType: number;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 音频审核输出参数
@@ -604,6 +614,11 @@ export interface AudioResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LanguageResults: Array<AudioResultDetailLanguageResult>;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 音频呻吟审核结果
@@ -630,6 +645,11 @@ export interface AudioResultDetailMoanResult {
       * *内测中，敬请期待*
       */
     SubLabelCode: string;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * 任务数据
@@ -783,4 +803,9 @@ export interface ImageResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Extra: string;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }

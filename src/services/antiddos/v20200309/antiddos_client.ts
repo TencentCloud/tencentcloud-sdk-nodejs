@@ -46,16 +46,18 @@ import {
   CreateDDoSAIRequest,
   DescribeListProtectThresholdConfigRequest,
   ModifyNewDomainRulesResponse,
+  DescribeDDoSBlackWhiteIpListResponse,
   CreateWaterPrintConfigResponse,
   DescribeListBGPIPInstancesRequest,
   StaticPackRelation,
+  CreateDDoSBlackWhiteIpListResponse,
   DescribeL7RulesBySSLCertIdRequest,
   DescribeListPacketFilterConfigResponse,
   DeleteBlackWhiteIpListResponse,
   CreateSchedulingDomainRequest,
   BoundIpInfo,
+  CreateDDoSBlackWhiteIpListRequest,
   DisassociateDDoSEipAddressResponse,
-  BGPIPInstance,
   DeleteBlackWhiteIpListRequest,
   SourceServer,
   ModifyDomainUsrNameResponse,
@@ -69,6 +71,7 @@ import {
   ModifyPacketFilterConfigResponse,
   DescribeListDDoSGeoIPBlockConfigRequest,
   Layer7Rule,
+  DescribeBasicDeviceStatusRequest,
   L4RuleSource,
   CreateDDoSSpeedLimitConfigRequest,
   CreateDDoSGeoIPBlockConfigRequest,
@@ -87,7 +90,7 @@ import {
   DescribeBasicDeviceStatusResponse,
   WaterPrintConfig,
   ProtocolBlockConfig,
-  DescribeListListenerRequest,
+  BGPIPInstance,
   DeleteWaterPrintConfigResponse,
   Layer4Rule,
   DeletePacketFilterConfigResponse,
@@ -95,16 +98,18 @@ import {
   BGPIPInstanceSpecification,
   CreateIPAlarmThresholdConfigResponse,
   DeleteWaterPrintConfigRequest,
+  DescribeDDoSBlackWhiteIpListRequest,
   DescribeListBlackWhiteIpListResponse,
   DDoSAIRelation,
   DescribeListDDoSSpeedLimitConfigResponse,
   CreateDDoSGeoIPBlockConfigResponse,
   ListenerCcThreholdConfig,
-  DescribeBasicDeviceStatusRequest,
+  DeleteDDoSBlackWhiteIpListRequest,
   IPLineInfo,
   EipAddressRelation,
   DescribeListListenerResponse,
   ProtectThresholdRelation,
+  IpSegment,
   ModifyL7RulesEdgeResponse,
   CreateL7RuleCertsResponse,
   DDoSSpeedLimitConfig,
@@ -138,6 +143,7 @@ import {
   SpeedValue,
   SwitchWaterPrintConfigRequest,
   DescribeListSchedulingDomainResponse,
+  DeleteDDoSBlackWhiteIpListResponse,
   DescribeCCTrendResponse,
   CreateSchedulingDomainResponse,
   EipProductInfo,
@@ -152,6 +158,7 @@ import {
   DescribeListWaterPrintConfigResponse,
   BGPInstanceUsages,
   DeleteDDoSSpeedLimitConfigResponse,
+  DescribeListListenerRequest,
   L7RuleEntry,
   CreateWaterPrintKeyResponse,
   DeleteDDoSGeoIPBlockConfigResponse,
@@ -407,6 +414,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加DDoS防护的IP网段黑白名单
+   */
+  async CreateDDoSBlackWhiteIpList(
+    req: CreateDDoSBlackWhiteIpListRequest,
+    cb?: (error: string, rep: CreateDDoSBlackWhiteIpListResponse) => void
+  ): Promise<CreateDDoSBlackWhiteIpListResponse> {
+    return this.request("CreateDDoSBlackWhiteIpList", req, cb)
+  }
+
+  /**
    * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
    */
   async DescribeCCTrend(
@@ -618,6 +635,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取DDoS防护的IP网段黑白名单
+   */
+  async DescribeDDoSBlackWhiteIpList(
+    req: DescribeDDoSBlackWhiteIpListRequest,
+    cb?: (error: string, rep: DescribeDDoSBlackWhiteIpListResponse) => void
+  ): Promise<DescribeDDoSBlackWhiteIpListResponse> {
+    return this.request("DescribeDDoSBlackWhiteIpList", req, cb)
+  }
+
+  /**
    * 添加DDoS防护的水印防护密钥
    */
   async CreateWaterPrintKey(
@@ -635,6 +662,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProtocolBlockConfigResponse) => void
   ): Promise<CreateProtocolBlockConfigResponse> {
     return this.request("CreateProtocolBlockConfig", req, cb)
+  }
+
+  /**
+   * 删除DDoS防护的IP网段黑白名单
+   */
+  async DeleteDDoSBlackWhiteIpList(
+    req: DeleteDDoSBlackWhiteIpListRequest,
+    cb?: (error: string, rep: DeleteDDoSBlackWhiteIpListResponse) => void
+  ): Promise<DeleteDDoSBlackWhiteIpListResponse> {
+    return this.request("DeleteDDoSBlackWhiteIpList", req, cb)
   }
 
   /**

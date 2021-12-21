@@ -771,17 +771,17 @@ export interface MobileStatusRequest {
  */
 export interface DetectReflectLivenessAndCompareResponse {
   /**
-   * 验证通过后的视频最佳截图照片资源地址，jpg格式。
+   * 验证通过后的视频最佳截图资源临时地址，jpg格式，资源和链接有效期2小时，务必在有效期内下载。
    */
   BestFrameUrl: string
 
   /**
-   * 验证通过后的视频最佳截图照片资源Md5。
+   * 验证通过后的视频最佳截图资源MD5（32位，用于校验BestFrame的一致性）。
    */
   BestFrameMd5: string
 
   /**
-   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+   * 业务错误码，成功情况返回Success，错误情况请参考下方错误码 列表中FailedOperation部分。
    */
   Result: string
 
@@ -972,12 +972,12 @@ export interface GetFaceIdTokenResponse {
  */
 export interface DetectReflectLivenessAndCompareRequest {
   /**
-   * SDK生成的数据包活体数据包的资源地址。
+   * SDK生成的活体检测数据包的资源地址。
    */
   LiveDataUrl: string
 
   /**
-   * SDK生成的数据包活体数据包的资源Md5。
+   * SDK生成的活体检测数据包的资源内容MD5（32位，用于校验LiveData的一致性）。
    */
   LiveDataMd5: string
 
@@ -987,7 +987,7 @@ export interface DetectReflectLivenessAndCompareRequest {
   ImageUrl: string
 
   /**
-   * 用于比对的目标图片的资源Md5。
+   * 用于比对的目标图片的资源MD5（32位，用于校验Image的一致性）。
    */
   ImageMd5: string
 }

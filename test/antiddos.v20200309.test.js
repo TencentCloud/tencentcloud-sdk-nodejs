@@ -248,6 +248,16 @@ it("antiddos.v20200309.DescribeListDDoSAI", async function () {
     }
 })
 
+it("antiddos.v20200309.CreateDDoSBlackWhiteIpList", async function () {
+    try {
+       const data = await client.CreateDDoSBlackWhiteIpList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeCCTrend", async function () {
     try {
        const data = await client.DescribeCCTrend({})
@@ -458,6 +468,16 @@ it("antiddos.v20200309.CreateSchedulingDomain", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeDDoSBlackWhiteIpList", async function () {
+    try {
+       const data = await client.DescribeDDoSBlackWhiteIpList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.CreateWaterPrintKey", async function () {
     try {
        const data = await client.CreateWaterPrintKey({})
@@ -471,6 +491,16 @@ it("antiddos.v20200309.CreateWaterPrintKey", async function () {
 it("antiddos.v20200309.CreateProtocolBlockConfig", async function () {
     try {
        const data = await client.CreateProtocolBlockConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.DeleteDDoSBlackWhiteIpList", async function () {
+    try {
+       const data = await client.DeleteDDoSBlackWhiteIpList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

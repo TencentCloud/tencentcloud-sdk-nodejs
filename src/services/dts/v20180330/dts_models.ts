@@ -171,7 +171,7 @@ export interface CreateMigrateJobRequest {
   MigrateOption: MigrateOption
 
   /**
-   * 源实例数据库类型，目前支持：mysql，redis，mongodb，postgresql，mariadb，percona。不同地域数据库类型的具体支持情况，请参考控制台创建迁移页面。
+   * 源实例数据库类型，目前支持：mysql，redis，mongodb，postgresql，mariadb，percona，sqlserver 不同地域数据库类型的具体支持情况，请参考控制台创建迁移页面。
    */
   SrcDatabaseType: string
 
@@ -186,7 +186,7 @@ export interface CreateMigrateJobRequest {
   SrcInfo: SrcInfo
 
   /**
-   * 目标实例数据库类型，目前支持：mysql，redis，mongodb，postgresql，mariadb，percona。不同地域数据库类型的具体支持情况，请参考控制台创建迁移页面。
+   * 目标实例数据库类型，目前支持：mysql，redis，mongodb，postgresql，mariadb，percona，sqlserver，cynosdbmysql。不同地域数据库类型的具体支持情况，请参考控制台创建迁移页面。
    */
   DstDatabaseType: string
 
@@ -203,15 +203,16 @@ export interface CreateMigrateJobRequest {
   /**
       * 需要迁移的源数据库表信息，用json格式的字符串描述。当MigrateOption.MigrateObject配置为2（指定库表迁移）时必填。
 对于database-table两级结构的数据库：
-[{Database:db1,Table:[table1,table2]},{Database:db2}]
+[{"Database":"db1","Table":["table1","table2"]},{"Database":"db2"}]
 对于database-schema-table三级结构：
-[{Database:db1,Schema:s1
-Table:[table1,table2]},{Database:db1,Schema:s2
-Table:[table1,table2]},{Database:db2,Schema:s1
-Table:[table1,table2]},{Database:db3},{Database:db4
-Schema:s1}]
+[{"Database":"db1","Schema":"s1","Table":["table1","table2"]},{"Database":"db1","Schema":"s2","Table":["table1","table2"]},{"Database":"db2","Schema":"s1","Table":["table1","table2"]},{"Database":"db3"},{"Database":"db4","Schema":"s1"}]
       */
   DatabaseInfo?: string
+
+  /**
+   * 迁移实例的tag
+   */
+  Tags?: Array<TagItem>
 }
 
 /**
@@ -1399,7 +1400,7 @@ export interface CreateMigrateJobResponse {
   /**
    * 数据迁移任务ID
    */
-  JobId?: string
+  JobId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

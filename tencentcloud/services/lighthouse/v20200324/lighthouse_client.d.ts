@@ -334,7 +334,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSnapshotsDeniedActions(req: DescribeSnapshotsDeniedActionsRequest, cb?: (error: string, rep: DescribeSnapshotsDeniedActionsResponse) => void): Promise<DescribeSnapshotsDeniedActionsResponse>;
     /**
-     * 本接口（InquirePriceCreateDisks）用于新购磁盘询价。
+     * 本接口（InquirePriceCreateDisks）用于新购云硬盘询价。
      */
     InquirePriceCreateDisks(req: InquirePriceCreateDisksRequest, cb?: (error: string, rep: InquirePriceCreateDisksResponse) => void): Promise<InquirePriceCreateDisksResponse>;
     /**
@@ -342,7 +342,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDiskDiscount(req: DescribeDiskDiscountRequest, cb?: (error: string, rep: DescribeDiskDiscountResponse) => void): Promise<DescribeDiskDiscountResponse>;
     /**
-     * 本接口（DescribeDiskConfigs）用于查询磁盘配置。
+     * 本接口（DescribeDiskConfigs）用于查询云硬盘配置。
      */
     DescribeDiskConfigs(req: DescribeDiskConfigsRequest, cb?: (error: string, rep: DescribeDiskConfigsResponse) => void): Promise<DescribeDiskConfigsResponse>;
     /**

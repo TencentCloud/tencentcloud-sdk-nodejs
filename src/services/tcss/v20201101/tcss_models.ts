@@ -4263,7 +4263,7 @@ export interface ScanComplianceAssetsResponse {
  */
 export interface CreateComplianceTaskRequest {
   /**
-      * 指定要扫描的资产类型列表。若不填，对所有资产触发扫描。
+      * 指定要扫描的资产类型列表。
 ASSET_CONTAINER, 容器
 ASSET_IMAGE, 镜像
 ASSET_HOST, 主机
@@ -7016,8 +7016,12 @@ export interface DescribeImageRiskTendencyResponse {
  */
 export interface DescribeComplianceScanFailedAssetListRequest {
   /**
-   * 资产类型列表。
-   */
+      * 资产类型列表。
+ASSET_CONTAINER, 容器
+ASSET_IMAGE, 镜像
+ASSET_HOST, 主机
+ASSET_K8S, K8S资产
+      */
   AssetTypeSet?: Array<string>
 
   /**
@@ -10032,9 +10036,7 @@ export interface AffectedWorkloadItem {
  */
 export interface DescribeCompliancePeriodTaskListRequest {
   /**
-      * 资产的类型，传入时，只查询此类型资产的定时任务；不传，则返回所有定时任务。
-
-取值为：
+      * 资产的类型，取值为：
 ASSET_CONTAINER, 容器
 ASSET_IMAGE, 镜像
 ASSET_HOST, 主机
@@ -10697,7 +10699,7 @@ export interface DescribeCompliancePolicyItemAffectedAssetListResponse {
  */
 export interface DescribeComplianceAssetPolicyItemListRequest {
   /**
-   * 资产的ID。
+   * 客户资产的ID。
    */
   CustomerAssetId: number
 

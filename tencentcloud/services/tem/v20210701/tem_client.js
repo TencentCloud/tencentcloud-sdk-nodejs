@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIngress", req, cb);
     }
     /**
+     * 更新应用部署版本
+     */
+    async RollingUpdateApplicationByVersion(req, cb) {
+        return this.request("RollingUpdateApplicationByVersion", req, cb);
+    }
+    /**
      * 回滚分批发布
      */
     async RevertDeployApplication(req, cb) {

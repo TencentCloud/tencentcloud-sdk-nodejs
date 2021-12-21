@@ -5,7 +5,7 @@ export interface CreateFileSystemResponse {
     /**
       * 文件系统
       */
-    FileSystem?: FileSystem;
+    FileSystem: FileSystem;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -65,17 +65,27 @@ export interface DescribeFileSystemResponse {
     /**
       * 文件系统
       */
-    FileSystem?: FileSystem;
+    FileSystem: FileSystem;
     /**
-      * 已使用容量（byte），包括标准和归档存储
+      * 文件系统已使用容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CapacityUsed?: number;
+    CapacityUsed: number;
     /**
-      * 已使用归档存储容量（byte）
+      * 已使用COS归档存储容量（byte）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ArchiveCapacityUsed?: number;
+    ArchiveCapacityUsed: number;
+    /**
+      * 已使用COS标准存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StandardCapacityUsed: number;
+    /**
+      * 已使用COS低频存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DegradeCapacityUsed: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -136,7 +146,7 @@ export interface ModifyFileSystemRequest {
       */
     Description?: string;
     /**
-      * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
+      * 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍
 注意：修改的文件系统容量不能小于当前使用量
       */
     CapacityQuota?: number;
@@ -148,6 +158,14 @@ export interface ModifyFileSystemRequest {
       * 是否校验POSIX ACL
       */
     PosixAcl?: boolean;
+    /**
+      * 是否打开Ranger地址校验
+      */
+    EnableRanger?: boolean;
+    /**
+      * Ranger地址列表，可以为空数组
+      */
+    RangerServiceAddresses?: Array<string>;
 }
 /**
  * DescribeLifeCycleRules请求参数结构体
@@ -195,7 +213,7 @@ export interface DescribeFileSystemsResponse {
     /**
       * 文件系统列表
       */
-    FileSystems?: Array<FileSystem>;
+    FileSystems: Array<FileSystem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -353,7 +371,7 @@ export interface CreateFileSystemRequest {
       */
     FileSystemName: string;
     /**
-      * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
+      * 文件系统容量（byte），下限为1GB，上限为1PB，且必须是1GB的整数倍
       */
     CapacityQuota: number;
     /**
@@ -376,6 +394,14 @@ export interface CreateFileSystemRequest {
       * 根目录Inode组名，默认为supergroup
       */
     RootInodeGroup?: string;
+    /**
+      * 是否打开Ranger地址校验
+      */
+    EnableRanger?: boolean;
+    /**
+      * Ranger地址列表，默认为空数组
+      */
+    RangerServiceAddresses?: Array<string>;
 }
 /**
  * DisassociateAccessGroups请求参数结构体
@@ -513,6 +539,16 @@ export interface FileSystem {
       * POSIX权限控制
       */
     PosixAcl: boolean;
+    /**
+      * 是否打开Ranger地址校验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableRanger: boolean;
+    /**
+      * Ranger地址列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RangerServiceAddresses: Array<string>;
 }
 /**
  * 回热任务
@@ -527,7 +563,7 @@ export interface RestoreTask {
       */
     FilePath?: string;
     /**
-      * 回热任务类型（1：标准；2：极速；3：批量）
+      * 回热任务类型（1：标准；2：极速；3：批量，暂时仅支持极速）
       */
     Type?: number;
     /**
@@ -604,7 +640,7 @@ export interface Transition {
       */
     Days: number;
     /**
-      * 转换类型（1：归档；2：删除）
+      * 转换类型（1：归档；2：删除；3：低频）
       */
     Type: number;
 }
