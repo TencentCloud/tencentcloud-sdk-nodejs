@@ -78,6 +78,16 @@ it("es.v20180416.UpdatePlugins", async function () {
     }
 })
 
+it("es.v20180416.DescribeViews", async function () {
+    try {
+       const data = await client.DescribeViews({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})

@@ -166,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPolicy", req, cb);
     }
     /**
-     * 更新SAML身份提供商信息
+     * 获取角色权限边界
      */
-    async UpdateSAMLProvider(req, cb) {
-        return this.request("UpdateSAMLProvider", req, cb);
+    async GetRolePermissionBoundary(req, cb) {
+        return this.request("GetRolePermissionBoundary", req, cb);
     }
     /**
      * 获取自定义多因子Token关联信息
@@ -250,10 +250,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAssumeRolePolicy", req, cb);
     }
     /**
+     * 获取用户权限边界
+     */
+    async GetUserPermissionBoundary(req, cb) {
+        return this.request("GetUserPermissionBoundary", req, cb);
+    }
+    /**
      * 创建用户SAML配置
      */
     async CreateUserSAMLConfig(req, cb) {
         return this.request("CreateUserSAMLConfig", req, cb);
+    }
+    /**
+     * 更新SAML身份提供商信息
+     */
+    async UpdateSAMLProvider(req, cb) {
+        return this.request("UpdateSAMLProvider", req, cb);
     }
     /**
      * 查询用户组列表

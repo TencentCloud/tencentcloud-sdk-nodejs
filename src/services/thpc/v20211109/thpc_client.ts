@@ -18,23 +18,28 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  BindAutoScalingGroupRequest,
-  DeleteClusterRequest,
-  SystemDisk,
-  ManagerNode,
-  Placement,
-  CreateClusterRequest,
+  ClusterOverview,
+  DescribeClustersRequest,
   LoginSettings,
-  InternetAccessible,
-  ComputeNode,
-  VirtualPrivateCloud,
-  StorageOption,
   DeleteClusterResponse,
-  GooseFSOption,
-  BindAutoScalingGroupResponse,
-  InstanceChargePrepaid,
   CFSOption,
   CreateClusterResponse,
+  CreateClusterRequest,
+  BindAutoScalingGroupResponse,
+  ManagerNodeOverview,
+  ManagerNode,
+  DeleteClusterRequest,
+  ComputeNodeOverview,
+  SystemDisk,
+  Placement,
+  BindAutoScalingGroupRequest,
+  VirtualPrivateCloud,
+  StorageOption,
+  InternetAccessible,
+  ComputeNode,
+  DescribeClustersResponse,
+  GooseFSOption,
+  InstanceChargePrepaid,
   DataDisk,
 } from "./thpc_models"
 
@@ -55,6 +60,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterResponse) => void
   ): Promise<DeleteClusterResponse> {
     return this.request("DeleteCluster", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeClusters）用于查询集群列表。
+   */
+  async DescribeClusters(
+    req: DescribeClustersRequest,
+    cb?: (error: string, rep: DescribeClustersResponse) => void
+  ): Promise<DescribeClustersResponse> {
+    return this.request("DescribeClusters", req, cb)
   }
 
   /**

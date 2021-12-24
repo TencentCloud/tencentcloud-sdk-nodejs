@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeTaskResultResponse,
   DescribeDatabasesRequest,
   WorkGroupMessage,
   DeleteUserRequest,
@@ -30,7 +31,7 @@ import {
   DeleteScriptResponse,
   Task,
   DetachUserPolicyRequest,
-  DeleteWorkGroupResponse,
+  TableInfo,
   DescribeTasksResponse,
   CreateTasksInOrderRequest,
   DetachWorkGroupPolicyResponse,
@@ -75,6 +76,7 @@ import {
   CreateScriptRequest,
   BindWorkGroupsToUserRequest,
   Column,
+  DescribeTaskResultRequest,
   Filter,
   DescribeUsersResponse,
   DataFormat,
@@ -82,9 +84,10 @@ import {
   CreateUserRequest,
   ModifyWorkGroupRequest,
   CancelTaskResponse,
-  TableInfo,
+  DeleteWorkGroupResponse,
   WorkGroupIdSetOfUserId,
   CreateWorkGroupResponse,
+  TaskResultInfo,
   DescribeTablesRequest,
   DescribeDatabasesResponse,
   DatabaseInfo,
@@ -151,6 +154,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddUsersToWorkGroupResponse) => void
   ): Promise<AddUsersToWorkGroupResponse> {
     return this.request("AddUsersToWorkGroup", req, cb)
+  }
+
+  /**
+   * 查询任务结果
+   */
+  async DescribeTaskResult(
+    req: DescribeTaskResultRequest,
+    cb?: (error: string, rep: DescribeTaskResultResponse) => void
+  ): Promise<DescribeTaskResultResponse> {
+    return this.request("DescribeTaskResult", req, cb)
   }
 
   /**

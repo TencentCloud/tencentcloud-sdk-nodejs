@@ -312,7 +312,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWhiteBoxDecryptKey", req, cb);
     }
     /**
-     * 获取支持的地域列表
+     * 获取可以提供KMS服务的地域列表
      */
     async GetRegions(req, cb) {
         return this.request("GetRegions", req, cb);

@@ -2134,7 +2134,145 @@ export interface ReservedInstanceConfigInfoItem {
 /**
  * 实例启动模板版本信息
  */
-export type LaunchTemplateVersionData = null
+export interface LaunchTemplateVersionData {
+  /**
+      * 实例所在的位置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Placement?: Placement
+
+  /**
+      * 实例机型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType?: string
+
+  /**
+      * 实例名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName?: string
+
+  /**
+      * 实例计费模式。取值范围：<br><li>`PREPAID`：表示预付费，即包年包月<br><li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费<br><li>`CDHPAID`：`CDH`付费，即只对`CDH`计费，不对`CDH`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceChargeType?: string
+
+  /**
+      * 实例系统盘信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SystemDisk?: SystemDisk
+
+  /**
+      * 实例数据盘信息。只包含随实例购买的数据盘。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataDisks?: Array<DataDisk>
+
+  /**
+      * 实例带宽信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InternetAccessible?: InternetAccessible
+
+  /**
+      * 实例所属虚拟私有网络信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VirtualPrivateCloud?: VirtualPrivateCloud
+
+  /**
+      * 生产实例所使用的镜像`ID`。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId?: string
+
+  /**
+      * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroupIds?: Array<string>
+
+  /**
+      * 实例登录设置。目前只返回实例所关联的密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoginSettings?: LoginSettings
+
+  /**
+      * CAM角色名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CamRoleName?: string
+
+  /**
+      * 高性能计算集群`ID`。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HpcClusterId?: string
+
+  /**
+      * 购买实例数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceCount?: number
+
+  /**
+      * 增强服务。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnhancedService?: EnhancedService
+
+  /**
+      * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserData?: string
+
+  /**
+      * 置放群组id，仅支持指定一个。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisasterRecoverGroupIds?: Array<string>
+
+  /**
+      * 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ActionTimer?: ActionTimer
+
+  /**
+      * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceMarketOptions?: InstanceMarketOptionsRequest
+
+  /**
+      * 云服务器的主机名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostName?: string
+
+  /**
+      * 用于保证请求幂等性的字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientToken?: string
+
+  /**
+      * 预付费模式，即包年包月相关参数设置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+
+  /**
+      * 标签描述列表。通过指定该参数可以同时绑定标签到相应的云服务器、云硬盘实例。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSpecification?: Array<TagSpecification>
+}
 
 /**
  * DeleteDisasterRecoverGroups返回参数结构体

@@ -2459,18 +2459,13 @@ export interface MoveClassRequest {
 }
 
 /**
- * 时间范围
+ * 文本类型卡槽信息。
  */
-export interface TimeRange {
+export interface TextSlotInfo {
   /**
-   * 开始时间，使用 ISO 日期格式。
+   * 文本内容。
    */
-  StartTime: string
-
-  /**
-   * 结束时间，使用 ISO 日期格式。
-   */
-  EndTime: string
+  Text: string
 }
 
 /**
@@ -2863,17 +2858,24 @@ export interface SlotInfo {
   Id: number
 
   /**
-      * 素材类型，同素材素材，可取值有：
-<li> AUDIO :音频;</li>
-<li> VIDEO :视频;</li>
-<li> IMAGE :图片。</li>
+      * 卡槽类型，可取值有：
+<li> AUDIO：音频卡槽，可替换素材类型为 AUDIO 的音频素材;</li>
+<li> VIDEO：视频卡槽，可替换素材类型为 VIDEO 的视频素材;</li>
+<li> IMAGE：图片卡槽，可替换素材类型为 IMAGE 的图片素材;</li>
+<li> TEXT：文本卡槽，可替换文本内容。</li>
       */
   Type: string
 
   /**
-   * 默认素材 Id。
+   * 默认素材ID。当卡槽类型为 AUDIO，VIDEO，或 IMAGE 中的一种时有效。
    */
   DefaultMaterialId: string
+
+  /**
+      * 默认文本卡槽信息。当卡槽类型为 TEXT 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DefaultTextSlotInfo: TextSlotInfo
 
   /**
    * 素材时长，单位秒。
@@ -3082,6 +3084,21 @@ export interface GrantResourceAuthorizationRequest {
    * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以授权任意归属者的资源。如果指定操作者，则操作者必须对资源拥有写权限。
    */
   Operator?: string
+}
+
+/**
+ * 时间范围
+ */
+export interface TimeRange {
+  /**
+   * 开始时间，使用 ISO 日期格式。
+   */
+  StartTime: string
+
+  /**
+   * 结束时间，使用 ISO 日期格式。
+   */
+  EndTime: string
 }
 
 /**

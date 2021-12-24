@@ -2058,7 +2058,7 @@ export interface DescribeMicroservicesResponse {
       * 微服务分页列表信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TsfPageMicroservice;
+    Result: TsfPageMicroservice;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2674,6 +2674,14 @@ export interface DeployContainerGroupRequest {
       * tcr或者不填
       */
     RepoType?: string;
+    /**
+      * 数据卷信息
+      */
+    VolumeInfos?: VolumeInfo;
+    /**
+      * 数据卷挂载点信息
+      */
+    VolumeMountInfos?: VolumeMountInfo;
 }
 /**
  * DescribeSimpleApplications请求参数结构体
@@ -3939,6 +3947,23 @@ export interface TsfPageNamespace {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Content: Array<Namespace>;
+}
+/**
+ * 容器卷挂载信息
+ */
+export interface VolumeInfo {
+    /**
+      * 数据卷类型
+      */
+    VolumeType: string;
+    /**
+      * 数据卷名称
+      */
+    VolumeName: string;
+    /**
+      * 数据卷配置
+      */
+    VolumeConfig?: string;
 }
 /**
  * UpdateApiTimeouts请求参数结构体
@@ -7520,6 +7545,10 @@ export interface DescribeMicroservicesRequest {
       * IdList
       */
     MicroserviceIdList?: Array<string>;
+    /**
+      * 搜索的服务名列表
+      */
+    MicroserviceNameList?: Array<string>;
 }
 /**
  * AddClusterInstances返回参数结构体
@@ -8041,6 +8070,27 @@ export interface EnableTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 容器卷挂载点信息
+ */
+export interface VolumeMountInfo {
+    /**
+      * 挂载数据卷名称
+      */
+    VolumeMountName: string;
+    /**
+      * 挂载路径
+      */
+    VolumeMountPath: string;
+    /**
+      * 挂载子路径
+      */
+    VolumeMountSubPath?: string;
+    /**
+      * 读写，1：读 2：读写
+      */
+    ReadOrWrite?: string;
 }
 /**
  * UpdateApiRateLimitRules返回参数结构体

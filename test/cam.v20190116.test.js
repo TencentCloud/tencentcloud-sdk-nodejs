@@ -248,9 +248,9 @@ it("cam.v20190116.GetPolicy", async function () {
     }
 })
 
-it("cam.v20190116.UpdateSAMLProvider", async function () {
+it("cam.v20190116.GetRolePermissionBoundary", async function () {
     try {
-       const data = await client.UpdateSAMLProvider({})
+       const data = await client.GetRolePermissionBoundary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +388,29 @@ it("cam.v20190116.UpdateAssumeRolePolicy", async function () {
     }
 })
 
+it("cam.v20190116.GetUserPermissionBoundary", async function () {
+    try {
+       const data = await client.GetUserPermissionBoundary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.CreateUserSAMLConfig", async function () {
     try {
        const data = await client.CreateUserSAMLConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.UpdateSAMLProvider", async function () {
+    try {
+       const data = await client.UpdateSAMLProvider({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

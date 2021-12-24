@@ -92,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupOverview", req, cb);
     }
     /**
+     * 停止 RO 复制，中断从主实例同步数据。
+     */
+    async StopReplication(req, cb) {
+        return this.request("StopReplication", req, cb);
+    }
+    /**
      * 本接口(ModifyDBInstanceName)用于修改云数据库实例的名称。
      */
     async ModifyDBInstanceName(req, cb) {
@@ -341,12 +347,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpgradeInstances", req, cb);
     }
     /**
-     * 停止延迟只读实例的延迟复制。
-     */
-    async StopDelayReplication(req, cb) {
-        return this.request("StopDelayReplication", req, cb);
-    }
-    /**
      * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
 
 该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为1，且 TaskStatus 为0，表示实例已经发货成功。
@@ -512,7 +512,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstances", req, cb);
     }
     /**
-     * 本接口（ModifyRoGroupInfo）用于更新云数据库只读组的信息。包括设置实例延迟超限剔除策略，设置只读实例读权重等。
+     * 本接口（ModifyRoGroupInfo）用于更新云数据库只读组的信息。包括设置实例延迟超限剔除策略，设置只读实例读权重，设置复制延迟时间等。
      */
     async ModifyRoGroupInfo(req, cb) {
         return this.request("ModifyRoGroupInfo", req, cb);
@@ -589,12 +589,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDownloadRestriction", req, cb);
     }
     /**
-     * 启动延迟只读实例的延迟复制。
-     */
-    async StartDelayReplication(req, cb) {
-        return this.request("StartDelayReplication", req, cb);
-    }
-    /**
      * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
      */
     async ModifyAccountPassword(req, cb) {
@@ -618,6 +612,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSlowLogData(req, cb) {
         return this.request("DescribeSlowLogData", req, cb);
+    }
+    /**
+     * 开启 RO 复制，从主实例同步数据。
+     */
+    async StartReplication(req, cb) {
+        return this.request("StartReplication", req, cb);
     }
     /**
      * 本接口(DeleteAuditLogFile)用于删除云数据库实例的审计日志文件。
@@ -714,12 +714,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSupportedPrivileges(req, cb) {
         return this.request("DescribeSupportedPrivileges", req, cb);
-    }
-    /**
-     * 修改延迟只读实例的延迟复制时间。
-     */
-    async ModifyRoReplicationDelay(req, cb) {
-        return this.request("ModifyRoReplicationDelay", req, cb);
     }
     /**
      * 本接口(DescribeBinlogs)用于查询云数据库实例的 binlog 文件列表。

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsRequest, DescribeResourceUrlsByFlowsRequest, GetDownloadFlowUrlRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSignUrlsResponse, OperateChannelTemplateRequest, DescribeUsageRequest, DescribeUsageResponse } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsRequest, DescribeFlowDetailInfoRequest, DescribeResourceUrlsByFlowsRequest, GetDownloadFlowUrlRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSignUrlsResponse, OperateChannelTemplateRequest, DescribeUsageRequest, DescribeUsageResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -16,6 +16,10 @@ export declare class Client extends AbstractClient {
 
      */
     GetDownloadFlowUrl(req: GetDownloadFlowUrlRequest, cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void): Promise<GetDownloadFlowUrlResponse>;
+    /**
+     * 通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
+     */
+    DescribeTemplates(req: DescribeTemplatesRequest, cb?: (error: string, rep: DescribeTemplatesResponse) => void): Promise<DescribeTemplatesResponse>;
     /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
      */
@@ -56,15 +60,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeUsage(req: DescribeUsageRequest, cb?: (error: string, rep: DescribeUsageResponse) => void): Promise<DescribeUsageResponse>;
     /**
-     * 根据流程信息批量获取资源下载链接
+     * 此接口（DescribeFlowDetailInfo）用于查询合同(流程)的详细信息。
      */
-    DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
+    DescribeFlowDetailInfo(req: DescribeFlowDetailInfoRequest, cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void): Promise<DescribeFlowDetailInfoResponse>;
     /**
      * 此接口（SyncProxyOrganization）用于同步渠道侧企业信息
      */
     SyncProxyOrganization(req: SyncProxyOrganizationRequest, cb?: (error: string, rep: SyncProxyOrganizationResponse) => void): Promise<SyncProxyOrganizationResponse>;
     /**
-     * 通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
+     * 根据流程信息批量获取资源下载链接
      */
-    DescribeTemplates(req: DescribeTemplatesRequest, cb?: (error: string, rep: DescribeTemplatesResponse) => void): Promise<DescribeTemplatesResponse>;
+    DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
 }

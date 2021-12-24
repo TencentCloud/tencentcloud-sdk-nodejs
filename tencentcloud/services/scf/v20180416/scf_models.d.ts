@@ -571,7 +571,7 @@ export interface DeleteFunctionRequest {
       */
     Namespace?: string;
     /**
-      * 函数版本，如果删除版本的话传入版本号，不传入改字段删除函数下的所有版本
+      * 填写需要删除的版本号，不填默认删除函数下全部版本。
       */
     Qualifier?: string;
 }
@@ -972,7 +972,7 @@ export interface TerminateAsyncEventRequest {
       */
     Namespace?: string;
     /**
-      * 该参数已下线
+      * true，向指定请求[发送 SIGTERM 终止信号](https://cloud.tencent.com/document/product/583/63969#.E5.8F.91.E9.80.81.E7.BB.88.E6.AD.A2.E4.BF.A1.E5.8F.B7]， ，默认值为 false。
       */
     GraceShutdown?: boolean;
 }
@@ -2237,35 +2237,35 @@ export interface Code {
       */
     TempCosObjectName?: string;
     /**
-      * Git地址
+      * Git地址。该功能已下线。
       */
     GitUrl?: string;
     /**
-      * Git用户名
+      * Git用户名。该功能已下线。
       */
     GitUserName?: string;
     /**
-      * Git密码
+      * Git密码。该功能已下线。
       */
     GitPassword?: string;
     /**
-      * 加密后的Git密码，一般无需指定
+      * 加密后的Git密码，一般无需指定。该功能已下线。
       */
     GitPasswordSecret?: string;
     /**
-      * Git分支
+      * Git分支。该功能已下线。
       */
     GitBranch?: string;
     /**
-      * 代码在Git仓库中的路径
+      * 代码在Git仓库中的路径。该功能已下线。
       */
     GitDirectory?: string;
     /**
-      * 指定要拉取的版本
+      * 指定要拉取的版本。该功能已下线。
       */
     GitCommitId?: string;
     /**
-      * 加密后的Git用户名，一般无需指定
+      * 加密后的Git用户名，一般无需指定。该功能已下线。
       */
     GitUserNameSecret?: string;
     /**
@@ -3017,12 +3017,12 @@ export interface ImageConfig {
       */
     EntryPoint?: string;
     /**
-      * entrypoint执行命令
+      * 容器的启动命令。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 Entrypoint。传入规范，填写可运行的指令，例如 python
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Command?: string;
     /**
-      * 命令参数
+      * 容器的启动参数。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 CMD。传入规范，以“空格”作为参数的分割标识，例如 -u app.py
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Args?: string;

@@ -22,6 +22,7 @@ import {
   SyncProxyOrganizationResponse,
   FlowApproverInfo,
   PrepareFlowsResponse,
+  ProxyOrganizationOperator,
   TemplateInfo,
   GetDownloadFlowUrlResponse,
   DescribeResourceUrlsByFlowsResponse,
@@ -30,14 +31,16 @@ import {
   OperateChannelTemplateResponse,
   CreateSignUrlsRequest,
   AuthFailMessage,
+  DescribeFlowDetailInfoRequest,
   DescribeResourceUrlsByFlowsRequest,
   Component,
   GetDownloadFlowUrlRequest,
-  SignUrlInfo,
+  FlowDetailInfo,
   CreateConsoleLoginUrlRequest,
   CreateFlowsByTemplatesResponse,
   PrepareFlowsRequest,
   SyncProxyOrganizationOperatorsResponse,
+  SignUrlInfo,
   FlowResourceUrlInfo,
   DescribeTemplatesRequest,
   SyncProxyOrganizationOperatorsRequest,
@@ -50,12 +53,14 @@ import {
   DownloadFlowInfo,
   SyncFailReason,
   DescribeUsageRequest,
-  ProxyOrganizationOperator,
+  CcInfo,
   Agent,
   FormField,
+  FlowApproverDetail,
   FlowInfo,
   UserInfo,
   DescribeUsageResponse,
+  DescribeFlowDetailInfoResponse,
 } from "./essbasic_models"
 
 /**
@@ -86,6 +91,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
   ): Promise<GetDownloadFlowUrlResponse> {
     return this.request("GetDownloadFlowUrl", req, cb)
+  }
+
+  /**
+   * 通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
+   */
+  async DescribeTemplates(
+    req: DescribeTemplatesRequest,
+    cb?: (error: string, rep: DescribeTemplatesResponse) => void
+  ): Promise<DescribeTemplatesResponse> {
+    return this.request("DescribeTemplates", req, cb)
   }
 
   /**
@@ -164,13 +179,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据流程信息批量获取资源下载链接
+   * 此接口（DescribeFlowDetailInfo）用于查询合同(流程)的详细信息。
    */
-  async DescribeResourceUrlsByFlows(
-    req: DescribeResourceUrlsByFlowsRequest,
-    cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
-  ): Promise<DescribeResourceUrlsByFlowsResponse> {
-    return this.request("DescribeResourceUrlsByFlows", req, cb)
+  async DescribeFlowDetailInfo(
+    req: DescribeFlowDetailInfoRequest,
+    cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void
+  ): Promise<DescribeFlowDetailInfoResponse> {
+    return this.request("DescribeFlowDetailInfo", req, cb)
   }
 
   /**
@@ -184,12 +199,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
+   * 根据流程信息批量获取资源下载链接
    */
-  async DescribeTemplates(
-    req: DescribeTemplatesRequest,
-    cb?: (error: string, rep: DescribeTemplatesResponse) => void
-  ): Promise<DescribeTemplatesResponse> {
-    return this.request("DescribeTemplates", req, cb)
+  async DescribeResourceUrlsByFlows(
+    req: DescribeResourceUrlsByFlowsRequest,
+    cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
+  ): Promise<DescribeResourceUrlsByFlowsResponse> {
+    return this.request("DescribeResourceUrlsByFlows", req, cb)
   }
 }

@@ -82,6 +82,35 @@ export interface PrepareFlowsResponse {
     RequestId?: string;
 }
 /**
+ * 合作企业经办人列表信息
+ */
+export interface ProxyOrganizationOperator {
+    /**
+      * 经办人ID（渠道颁发）
+      */
+    Id: string;
+    /**
+      * 经办人姓名
+      */
+    Name?: string;
+    /**
+      * 经办人身份证件类型
+用户证件类型：默认ID_CARD
+1. ID_CARD - 居民身份证
+2. HOUSEHOLD_REGISTER - 户口本
+3. TEMP_ID_CARD - 临时居民身份证
+      */
+    IdCardType?: string;
+    /**
+      * 经办人身份证号
+      */
+    IdCardNumber?: string;
+    /**
+      * 经办人手机号
+      */
+    Mobile?: string;
+}
+/**
  * 此结构体 (TemplateInfo) 用于描述模板的信息。
  */
 export interface TemplateInfo {
@@ -121,6 +150,10 @@ export interface TemplateInfo {
       * 模板中的流程参与人信息
       */
     Recipients: Array<Recipient>;
+    /**
+      * 是否是发起人
+      */
+    IsPromoter: boolean;
 }
 /**
  * GetDownloadFlowUrl返回参数结构体
@@ -281,6 +314,23 @@ export interface AuthFailMessage {
     Message: string;
 }
 /**
+ * DescribeFlowDetailInfo请求参数结构体
+ */
+export interface DescribeFlowDetailInfoRequest {
+    /**
+      * 应用信息
+      */
+    Agent: Agent;
+    /**
+      * 合同(流程)编号数组
+      */
+    FlowIds: Array<string>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
  * DescribeResourceUrlsByFlows请求参数结构体
  */
 export interface DescribeResourceUrlsByFlowsRequest {
@@ -414,71 +464,45 @@ export interface GetDownloadFlowUrlRequest {
     DownLoadFlows?: Array<DownloadFlowInfo>;
 }
 /**
- * 签署链接内容
+ * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
  */
-export interface SignUrlInfo {
+export interface FlowDetailInfo {
     /**
-      * 签署链接
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SignUrl: string;
-    /**
-      * 链接失效时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Deadline: number;
-    /**
-      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SignOrder: number;
-    /**
-      * 签署人编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SignId: string;
-    /**
-      * 自定义用户编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CustomUserId: string;
-    /**
-      * 用户姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 用户手机号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Mobile: string;
-    /**
-      * 签署参与者机构名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OrganizationName: string;
-    /**
-      * 参与者类型:
-ORGANIZATION 企业经办人
-PERSON 自然人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApproverType: string;
-    /**
-      * 经办人身份证号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IdCardNumber: string;
-    /**
-      * 签署链接对应流程Id
-注意：此字段可能返回 null，表示取不到有效值。
+      * 合同(流程)的Id
       */
     FlowId: string;
     /**
-      * 企业经办人 用户在渠道的编号
-注意：此字段可能返回 null，表示取不到有效值。
+      * 合同(流程)的名字
       */
-    OpenId: string;
+    FlowName: string;
+    /**
+      * 合同(流程)的类型
+      */
+    FlowType: string;
+    /**
+      * 合同(流程)的状态
+      */
+    FlowStatus: string;
+    /**
+      * 合同(流程)的信息
+      */
+    FlowMessage: string;
+    /**
+      * 合同(流程)的创建时间戳
+      */
+    CreateOn: number;
+    /**
+      * 合同(流程)的签署截止时间戳
+      */
+    DeadLine: number;
+    /**
+      * 用户自定义数据
+      */
+    CustomData: string;
+    /**
+      * 合同(流程)的签署人数组
+      */
+    FlowApproverInfos: Array<FlowApproverDetail>;
 }
 /**
  * CreateConsoleLoginUrl请求参数结构体
@@ -577,6 +601,73 @@ export interface SyncProxyOrganizationOperatorsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 签署链接内容
+ */
+export interface SignUrlInfo {
+    /**
+      * 签署链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignUrl: string;
+    /**
+      * 链接失效时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Deadline: number;
+    /**
+      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignOrder: number;
+    /**
+      * 签署人编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignId: string;
+    /**
+      * 自定义用户编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomUserId: string;
+    /**
+      * 用户姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 用户手机号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Mobile: string;
+    /**
+      * 签署参与者机构名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrganizationName: string;
+    /**
+      * 参与者类型:
+ORGANIZATION 企业经办人
+PERSON 自然人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproverType: string;
+    /**
+      * 经办人身份证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdCardNumber: string;
+    /**
+      * 签署链接对应流程Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 企业经办人 用户在渠道的编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId: string;
 }
 /**
  * 流程对应资源链接信息
@@ -826,31 +917,11 @@ export interface DescribeUsageRequest {
     Offset?: number;
 }
 /**
- * 合作企业经办人列表信息
+ * 抄送信息
  */
-export interface ProxyOrganizationOperator {
+export interface CcInfo {
     /**
-      * 经办人ID（渠道颁发）
-      */
-    Id: string;
-    /**
-      * 经办人姓名
-      */
-    Name?: string;
-    /**
-      * 经办人身份证件类型
-用户证件类型：默认ID_CARD
-1. ID_CARD - 居民身份证
-2. HOUSEHOLD_REGISTER - 户口本
-3. TEMP_ID_CARD - 临时居民身份证
-      */
-    IdCardType?: string;
-    /**
-      * 经办人身份证号
-      */
-    IdCardNumber?: string;
-    /**
-      * 经办人手机号
+      * 被抄送人手机号
       */
     Mobile?: string;
 }
@@ -899,6 +970,60 @@ export interface FormField {
     ComponentName?: string;
 }
 /**
+ * 签署人的流程信息明细
+ */
+export interface FlowApproverDetail {
+    /**
+      * 模板配置时候的签署人id,与控件绑定
+      */
+    ReceiptId: string;
+    /**
+      * 渠道侧企业的第三方id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyOrganizationOpenId: string;
+    /**
+      * 渠道侧企业操作人的第三方id
+      */
+    ProxyOperatorOpenId: string;
+    /**
+      * 渠道侧企业名称
+      */
+    ProxyOrganizationName: string;
+    /**
+      * 签署人手机号
+      */
+    Mobile: string;
+    /**
+      * 签署人签署顺序
+      */
+    SignOrder: number;
+    /**
+      * 签署人姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveName: string;
+    /**
+      * 当前签署人的状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveStatus: string;
+    /**
+      * 签署人信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveMessage: string;
+    /**
+      * 签署人签署时间
+      */
+    ApproveTime: number;
+    /**
+      * 参与者类型 (ORGANIZATION企业/PERSON个人)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApproveType: string;
+}
+/**
  * 此结构体 (FlowInfo) 用于描述流程信息。
  */
 export interface FlowInfo {
@@ -942,6 +1067,10 @@ export interface FlowInfo {
       * 渠道的业务信息，限制1024字符
       */
     CustomerData?: string;
+    /**
+      * 被抄送人的信息列表
+      */
+    CcInfos?: Array<CcInfo>;
 }
 /**
  * 接口调用者信息
@@ -981,6 +1110,28 @@ export interface DescribeUsageResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Details: Array<UsageDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeFlowDetailInfo返回参数结构体
+ */
+export interface DescribeFlowDetailInfoResponse {
+    /**
+      * 渠道侧应用号Id
+      */
+    ApplicationId: string;
+    /**
+      * 渠道侧企业第三方Id
+      */
+    ProxyOrganizationOpenId: string;
+    /**
+      * 合同(流程)的具体详细描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowInfo: Array<FlowDetailInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

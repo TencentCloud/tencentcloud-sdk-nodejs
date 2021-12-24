@@ -41,6 +41,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDownloadFlowUrl", req, cb);
     }
     /**
+     * 通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
+     */
+    async DescribeTemplates(req, cb) {
+        return this.request("DescribeTemplates", req, cb);
+    }
+    /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
      */
     async PrepareFlows(req, cb) {
@@ -92,10 +98,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUsage", req, cb);
     }
     /**
-     * 根据流程信息批量获取资源下载链接
+     * 此接口（DescribeFlowDetailInfo）用于查询合同(流程)的详细信息。
      */
-    async DescribeResourceUrlsByFlows(req, cb) {
-        return this.request("DescribeResourceUrlsByFlows", req, cb);
+    async DescribeFlowDetailInfo(req, cb) {
+        return this.request("DescribeFlowDetailInfo", req, cb);
     }
     /**
      * 此接口（SyncProxyOrganization）用于同步渠道侧企业信息
@@ -104,10 +110,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncProxyOrganization", req, cb);
     }
     /**
-     * 通过此接口（DescribeTemplates）查询该企业在电子签渠道版中配置的有效模板列表
+     * 根据流程信息批量获取资源下载链接
      */
-    async DescribeTemplates(req, cb) {
-        return this.request("DescribeTemplates", req, cb);
+    async DescribeResourceUrlsByFlows(req, cb) {
+        return this.request("DescribeResourceUrlsByFlows", req, cb);
     }
 }
 exports.Client = Client;

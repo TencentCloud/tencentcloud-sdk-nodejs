@@ -30,6 +30,7 @@ import {
   OutputKolValue,
   EnhanceTaDegreeResponse,
   InputTaBspData,
+  Device,
   OutputSendTrafficSecuritySmsMsg,
   RecognizeEffectiveFlowResponse,
   SendTrafficSecuritySmsMessageResponse,

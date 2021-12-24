@@ -106,7 +106,7 @@ export interface CreateKeyRequest {
   Description?: string
 
   /**
-   * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥, “ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥
+   * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥，“ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥，“ASYMMETRIC_SIGN_VERIFY_ECDSA384”表示创建用于签名验签的 ECDSA384 非对称秘钥。完整的秘钥用途与算法支持列表可通过 ListAlgorithms 接口获取。
    */
   KeyUsage?: string
 
@@ -259,17 +259,17 @@ export interface ListAlgorithmsResponse {
   /**
    * 本地区支持的对称加密算法
    */
-  SymmetricAlgorithms?: Array<AlgorithmInfo>
+  SymmetricAlgorithms: Array<AlgorithmInfo>
 
   /**
    * 本地区支持的非对称加密算法
    */
-  AsymmetricAlgorithms?: Array<AlgorithmInfo>
+  AsymmetricAlgorithms: Array<AlgorithmInfo>
 
   /**
    * 本地区支持的非对称签名验签算法
    */
-  AsymmetricSignVerifyAlgorithms?: Array<AlgorithmInfo>
+  AsymmetricSignVerifyAlgorithms: Array<AlgorithmInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -436,6 +436,16 @@ export interface GenerateDataKeyRequest {
    * key/value对的json字符串，如果使用该字段，则返回的DataKey在解密时需要填入相同的字符串
    */
   EncryptionContext?: string
+
+  /**
+   * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+   */
+  EncryptionPublicKey?: string
+
+  /**
+   * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（C1C3C2），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+   */
+  EncryptionAlgorithm?: string
 }
 
 /**
@@ -455,12 +465,12 @@ export interface ScheduleKeyDeletionResponse {
   /**
    * 计划删除执行时间
    */
-  DeletionDate?: number
+  DeletionDate: number
 
   /**
    * 唯一标志被计划删除的CMK
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -475,7 +485,7 @@ export interface GenerateRandomResponse {
   /**
    * 生成的随机数的明文，该明文使用base64编码，用户需要使用base64解码得到明文。
    */
-  Plaintext?: string
+  Plaintext: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -560,22 +570,22 @@ export interface GetParametersForImportResponse {
   /**
    * CMK的唯一标识，用于指定目标导入密钥材料的CMK。
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 导入密钥材料需要的token，用于作为 ImportKeyMaterial 的参数。
    */
-  ImportToken?: string
+  ImportToken: string
 
   /**
    * 用于加密密钥材料的RSA公钥，base64编码。使用PublicKey base64解码后的公钥将导入密钥进行加密后作为 ImportKeyMaterial 的参数。
    */
-  PublicKey?: string
+  PublicKey: string
 
   /**
    * 该导出token和公钥的有效期，超过该时间后无法导入，需要重新调用GetParametersForImport获取。
    */
-  ParametersValidTo?: number
+  ParametersValidTo: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -590,12 +600,13 @@ export interface DecryptResponse {
   /**
    * CMK的全局唯一标识
    */
-  KeyId?: string
+  KeyId: string
 
   /**
-   * 解密后的明文。该字段是base64编码的，为了得到原始明文，调用方需要进行base64解码
-   */
-  Plaintext?: string
+      * 若调用时未提供 EncryptionPublicKey，该字段值为 Base64 编码的明文，需进行 Base64 解码以获取明文。
+若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取明文。
+      */
+  Plaintext: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -708,7 +719,7 @@ export interface DescribeKeysResponse {
       * 返回的属性信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  KeyMetadatas?: Array<KeyMetadata>
+  KeyMetadatas: Array<KeyMetadata>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -759,12 +770,12 @@ export interface ListKeysResponse {
       * CMK列表数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Keys?: Array<Key>
+  Keys: Array<Key>
 
   /**
    * CMK的总数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -779,12 +790,12 @@ export interface AsymmetricSm2DecryptResponse {
   /**
    * CMK的唯一标识
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 解密后的明文，base64编码
    */
-  Plaintext?: string
+  Plaintext: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -895,7 +906,7 @@ export interface GetRegionsResponse {
       * 可用region列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Regions?: Array<string>
+  Regions: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -910,17 +921,18 @@ export interface GenerateDataKeyResponse {
   /**
    * CMK的全局唯一标识
    */
-  KeyId?: string
+  KeyId: string
 
   /**
-   * 生成的数据密钥DataKey的明文，该明文使用base64进行了编码，需base64解码后作为数据密钥本地使用
-   */
-  Plaintext?: string
+      * 若调用时未提供 EncryptionPublicKey，该字段值为生成的数据密钥 DataKey 的 Base64 编码的明文，需进行 Base64 解码以获取 DataKey 明文。
+若调用时提供了 EncryptionPublicKey，则该字段值为使用 EncryptionPublicKey 公钥进行非对称加密后的 Base64 编码的密文。需在 Base64 解码后，使用用户上传的公钥对应的私钥进行进一步解密，以获取 DataKey 明文。
+      */
+  Plaintext: string
 
   /**
    * 数据密钥DataKey加密后的密文，用户需要自行保存该密文，KMS不托管用户的数据密钥。可以通过Decrypt接口从CiphertextBlob中获取数据密钥DataKey明文
    */
-  CiphertextBlob?: string
+  CiphertextBlob: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1063,22 +1075,22 @@ export interface ReEncryptResponse {
   /**
    * 重新加密后的密文
    */
-  CiphertextBlob?: string
+  CiphertextBlob: string
 
   /**
    * 重新加密使用的CMK
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 重新加密前密文使用的CMK
    */
-  SourceKeyId?: string
+  SourceKeyId: string
 
   /**
    * true表示密文已经重新加密。同一个CMK进行重加密，在密钥没有发生轮换的情况下不会进行实际重新加密操作，返回原密文
    */
-  ReEncrypted?: boolean
+  ReEncrypted: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1143,36 +1155,36 @@ export interface GetServiceStatusResponse {
   /**
    * KMS服务是否开通， true 表示已开通
    */
-  ServiceEnabled?: boolean
+  ServiceEnabled: boolean
 
   /**
       * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  InvalidType?: number
+  InvalidType: number
 
   /**
    * 0-普通版，1-旗舰版
    */
-  UserLevel?: number
+  UserLevel: number
 
   /**
       * 旗舰版到期时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProExpireTime?: number
+  ProExpireTime: number
 
   /**
       * 旗舰版是否自动续费：0-不自动续费，1-自动续费
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProRenewFlag?: number
+  ProRenewFlag: number
 
   /**
       * 旗舰版购买记录的唯一性标识。如果为开通旗舰版，则返回值为空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ProResourceId?: string
+  ProResourceId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1203,7 +1215,7 @@ export interface GetKeyRotationStatusResponse {
   /**
    * 密钥轮换是否开启
    */
-  KeyRotationEnabled?: boolean
+  KeyRotationEnabled: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1392,6 +1404,16 @@ export interface DecryptRequest {
    * key/value对的json字符串，如果Encrypt指定了该参数，则在调用Decrypt API时需要提供同样的参数，最大支持1024字符
    */
   EncryptionContext?: string
+
+  /**
+   * PEM 格式公钥字符串，支持 RSA2048 和 SM2 公钥，用于对返回数据中的 Plaintext 值进行加密。若为空，则不对 Plaintext 值加密。
+   */
+  EncryptionPublicKey?: string
+
+  /**
+   * 非对称加密算法，配合 EncryptionPublicKey 对返回数据进行加密。目前支持：SM2（C1C3C2），RSAES_PKCS1_V1_5，RSAES_OAEP_SHA_1，RSAES_OAEP_SHA_256。若为空，则默认为 SM2。
+   */
+  EncryptionAlgorithm?: string
 }
 
 /**
@@ -1426,12 +1448,12 @@ export interface AsymmetricRsaDecryptResponse {
   /**
    * CMK的唯一标识
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 解密后的明文，base64编码
    */
-  Plaintext?: string
+  Plaintext: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1446,7 +1468,7 @@ export interface CancelKeyDeletionResponse {
   /**
    * 唯一标志被取消删除的CMK。
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1782,7 +1804,7 @@ export interface DescribeKeyResponse {
       * 密钥属性信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  KeyMetadata?: KeyMetadata
+  KeyMetadata: KeyMetadata
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskDetail", req, cb);
     }
     /**
-     * 批量创建探测任务
+     * 批量创建拨测任务
      */
     async CreateProbeTasks(req, cb) {
         return this.request("CreateProbeTasks", req, cb);
@@ -178,7 +178,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindAlarmPolicy", req, cb);
     }
     /**
-     * 查询探测任务列表
+     * 查询拨测任务列表
      */
     async DescribeProbeTasks(req, cb) {
         return this.request("DescribeProbeTasks", req, cb);

@@ -16,6 +16,22 @@
  */
 
 /**
+ * DescribeTaskResult返回参数结构体
+ */
+export interface DescribeTaskResultResponse {
+  /**
+      * 查询的任务信息，返回为空表示输入任务ID对应的任务不存在。只有当任务状态为成功（2）的时候，才会返回任务的结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskInfo: TaskResultInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDatabases请求参数结构体
  */
 export interface DescribeDatabasesRequest {
@@ -255,13 +271,33 @@ export interface DetachUserPolicyRequest {
 }
 
 /**
- * DeleteWorkGroup返回参数结构体
+ * 返回数据表的相关信息。
  */
-export interface DeleteWorkGroupResponse {
+export interface TableInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数据表配置信息。
    */
-  RequestId?: string
+  TableBaseInfo: TableBaseInfo
+
+  /**
+   * 数据表格式。每次入参可选如下其一的KV结构，[TextFile，CSV，Json, Parquet, ORC, AVRD]。
+   */
+  DataFormat: DataFormat
+
+  /**
+   * 数据表列信息。
+   */
+  Columns: Array<Column>
+
+  /**
+   * 数据表分块信息。
+   */
+  Partitions: Array<Partition>
+
+  /**
+   * 数据存储路径。当前仅支持cos路径，格式如下：cosn://bucket-name/filepath。
+   */
+  Location: string
 }
 
 /**
@@ -1250,6 +1286,26 @@ string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|b
 }
 
 /**
+ * DescribeTaskResult请求参数结构体
+ */
+export interface DescribeTaskResultRequest {
+  /**
+   * 任务唯一ID
+   */
+  TaskId: string
+
+  /**
+   * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回1000行数据。
+   */
+  NextToken?: string
+
+  /**
+   * 返回结果的最大行数，范围0~1000，默认为1000.
+   */
+  MaxResults?: number
+}
+
+/**
  * 查询列表过滤条件参数
  */
 export interface Filter {
@@ -1403,33 +1459,13 @@ export interface CancelTaskResponse {
 }
 
 /**
- * 返回数据表的相关信息。
+ * DeleteWorkGroup返回参数结构体
  */
-export interface TableInfo {
+export interface DeleteWorkGroupResponse {
   /**
-   * 数据表配置信息。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TableBaseInfo: TableBaseInfo
-
-  /**
-   * 数据表格式。每次入参可选如下其一的KV结构，[TextFile，CSV，Json, Parquet, ORC, AVRD]。
-   */
-  DataFormat: DataFormat
-
-  /**
-   * 数据表列信息。
-   */
-  Columns: Array<Column>
-
-  /**
-   * 数据表分块信息。
-   */
-  Partitions: Array<Partition>
-
-  /**
-   * 数据存储路径。当前仅支持cos路径，格式如下：cosn://bucket-name/filepath。
-   */
-  Location: string
+  RequestId?: string
 }
 
 /**
@@ -1460,6 +1496,105 @@ export interface CreateWorkGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 任务结果信息
+ */
+export interface TaskResultInfo {
+  /**
+   * 任务唯一ID
+   */
+  TaskId: string
+
+  /**
+      * 数据源名称，当前任务执行时候选中的默认数据源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DatasourceConnectionName: string
+
+  /**
+      * 数据库名称，当前任务执行时候选中的默认数据库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DatabaseName: string
+
+  /**
+   * 当前执行的SQL，一个任务包含一个SQL
+   */
+  SQL: string
+
+  /**
+   * 执行任务的类型，现在分为DDL、DML、DQL
+   */
+  SQLType: string
+
+  /**
+   * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功 -1：任务执行失败 -3：用户手动终止。只有任务执行成功的情况下，才会返回任务执行的结果
+   */
+  State: number
+
+  /**
+   * 扫描的数据量，单位byte
+   */
+  DataAmount: number
+
+  /**
+   * 任务执行耗时，单位秒
+   */
+  UsedTime: number
+
+  /**
+   * 任务结果输出的COS桶地址
+   */
+  OutputPath: string
+
+  /**
+   * 任务创建时间，时间戳
+   */
+  CreateTime: string
+
+  /**
+   * 任务执行信息，成功时返回success，失败时返回失败原因
+   */
+  OutputMessage: string
+
+  /**
+   * 被影响的行数
+   */
+  RowAffectInfo: string
+
+  /**
+      * 结果的schema信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultSchema: Array<Column>
+
+  /**
+      * 结果信息，反转义后，外层数组的每个元素为一行数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultSet: string
+
+  /**
+   * 分页信息，如果没有更多结果数据，nextToken为空
+   */
+  NextToken: string
+
+  /**
+   * 任务执行进度num/100(%)
+   */
+  Percentage: number
+
+  /**
+   * 任务进度明细
+   */
+  ProgressDetail: string
+
+  /**
+   * 控制台展示格式。table：表格展示 text：文本展示
+   */
+  DisplayFormat: string
 }
 
 /**

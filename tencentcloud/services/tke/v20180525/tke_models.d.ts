@@ -389,6 +389,10 @@ export interface UpdateEKSClusterRequest {
       * 将来删除集群时是否要删除cbs。默认为 FALSE
       */
     NeedDeleteCbs?: boolean;
+    /**
+      * 标记是否是新的内外网。默认为false
+      */
+    ProxyLB?: boolean;
 }
 /**
  * CreateClusterRouteTable返回参数结构体
@@ -1720,6 +1724,10 @@ export interface ClusterPublicLB {
       * 外网访问相关的扩展参数，格式为json
       */
     ExtraParam?: string;
+    /**
+      * 新内外网功能，需要传递安全组
+      */
+    SecurityGroup?: string;
 }
 /**
  * 创建集群时，选择安装的扩展组件的信息
@@ -1982,19 +1990,23 @@ export interface DescribeEKSClusterCredentialResponse {
     /**
       * 集群的接入地址信息
       */
-    Addresses?: Array<IPAddress>;
+    Addresses: Array<IPAddress>;
     /**
       * 集群的认证信息
       */
-    Credential?: ClusterCredential;
+    Credential: ClusterCredential;
     /**
       * 集群的公网访问信息
       */
-    PublicLB?: ClusterPublicLB;
+    PublicLB: ClusterPublicLB;
     /**
       * 集群的内网访问信息
       */
-    InternalLB?: ClusterInternalLB;
+    InternalLB: ClusterInternalLB;
+    /**
+      * 标记是否新的内外网功能
+      */
+    ProxyLB: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

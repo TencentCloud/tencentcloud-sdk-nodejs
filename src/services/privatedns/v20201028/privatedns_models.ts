@@ -80,7 +80,7 @@ export interface DescribePrivateZoneRecordListRequest {
   ZoneId: string
 
   /**
-   * 过滤参数
+   * 过滤参数（支持使用Value、RecordType过滤）
    */
   Filters?: Array<Filter>
 

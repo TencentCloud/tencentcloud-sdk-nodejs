@@ -20,8 +20,11 @@ import { ClientConfig } from "../../../common/interface"
 import {
   MountedSettingConf,
   RestartApplicationPodResponse,
+  DeleteApplicationRequest,
   CreateResourceRequest,
   ResumeDeployApplicationResponse,
+  RestartApplicationResponse,
+  StopApplicationRequest,
   HealthCheckConfig,
   TemDeployApplicationDetailInfo,
   DescribeDeployApplicationDetailRequest,
@@ -66,12 +69,14 @@ import {
   CreateResourceResponse,
   ModifyApplicationInfoRequest,
   ModifyApplicationInfoResponse,
-  RevertDeployApplicationRequest,
+  DeleteApplicationResponse,
   IngressRulePath,
   CreateEnvironmentResponse,
   NamespacePage,
+  RestartApplicationRequest,
   CreateApplicationResponse,
   HorizontalAutoscaler,
+  RevertDeployApplicationRequest,
   StorageMountConf,
   ModifyEnvironmentRequest,
   PortMapping,
@@ -80,6 +85,7 @@ import {
   DescribeIngressRequest,
   CreateCosTokenRequest,
   DescribeEnvironmentsRequest,
+  StopApplicationResponse,
   EksService,
   CronHorizontalAutoscalerSchedule,
   ResumeDeployApplicationRequest,
@@ -99,16 +105,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 应用部署
-   */
-  async DeployApplication(
-    req: DeployApplicationRequest,
-    cb?: (error: string, rep: DeployApplicationResponse) => void
-  ): Promise<DeployApplicationResponse> {
-    return this.request("DeployApplication", req, cb)
-  }
-
-  /**
    * 修改应用实例数量
    */
   async ModifyApplicationReplicas(
@@ -116,36 +112,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApplicationReplicasResponse) => void
   ): Promise<ModifyApplicationReplicasResponse> {
     return this.request("ModifyApplicationReplicas", req, cb)
-  }
-
-  /**
-   * 重启应用实例
-   */
-  async RestartApplicationPod(
-    req: RestartApplicationPodRequest,
-    cb?: (error: string, rep: RestartApplicationPodResponse) => void
-  ): Promise<RestartApplicationPodResponse> {
-    return this.request("RestartApplicationPod", req, cb)
-  }
-
-  /**
-   * 获取分批发布详情
-   */
-  async DescribeDeployApplicationDetail(
-    req: DescribeDeployApplicationDetailRequest,
-    cb?: (error: string, rep: DescribeDeployApplicationDetailResponse) => void
-  ): Promise<DescribeDeployApplicationDetailResponse> {
-    return this.request("DescribeDeployApplicationDetail", req, cb)
-  }
-
-  /**
-   * 创建环境
-   */
-  async CreateEnvironment(
-    req: CreateEnvironmentRequest,
-    cb?: (error: string, rep: CreateEnvironmentResponse) => void
-  ): Promise<CreateEnvironmentResponse> {
-    return this.request("CreateEnvironment", req, cb)
   }
 
   /**
@@ -159,6 +125,59 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 服务删除
+  - 停止当前运行服务
+  - 删除服务相关资源
+  - 删除服务
+     */
+  async DeleteApplication(
+    req: DeleteApplicationRequest,
+    cb?: (error: string, rep: DeleteApplicationResponse) => void
+  ): Promise<DeleteApplicationResponse> {
+    return this.request("DeleteApplication", req, cb)
+  }
+
+  /**
+   * 删除 Ingress 规则
+   */
+  async DeleteIngress(
+    req: DeleteIngressRequest,
+    cb?: (error: string, rep: DeleteIngressResponse) => void
+  ): Promise<DeleteIngressResponse> {
+    return this.request("DeleteIngress", req, cb)
+  }
+
+  /**
+   * 应用部署
+   */
+  async DeployApplication(
+    req: DeployApplicationRequest,
+    cb?: (error: string, rep: DeployApplicationResponse) => void
+  ): Promise<DeployApplicationResponse> {
+    return this.request("DeployApplication", req, cb)
+  }
+
+  /**
+   * 获取分批发布详情
+   */
+  async DescribeDeployApplicationDetail(
+    req: DescribeDeployApplicationDetailRequest,
+    cb?: (error: string, rep: DescribeDeployApplicationDetailResponse) => void
+  ): Promise<DescribeDeployApplicationDetailResponse> {
+    return this.request("DescribeDeployApplicationDetail", req, cb)
+  }
+
+  /**
+   * 开始下一批次发布
+   */
+  async ResumeDeployApplication(
+    req: ResumeDeployApplicationRequest,
+    cb?: (error: string, rep: ResumeDeployApplicationResponse) => void
+  ): Promise<ResumeDeployApplicationResponse> {
+    return this.request("ResumeDeployApplication", req, cb)
+  }
+
+  /**
    * 编辑环境
    */
   async ModifyEnvironment(
@@ -166,6 +185,46 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyEnvironmentResponse) => void
   ): Promise<ModifyEnvironmentResponse> {
     return this.request("ModifyEnvironment", req, cb)
+  }
+
+  /**
+   * 服务停止
+   */
+  async StopApplication(
+    req: StopApplicationRequest,
+    cb?: (error: string, rep: StopApplicationResponse) => void
+  ): Promise<StopApplicationResponse> {
+    return this.request("StopApplication", req, cb)
+  }
+
+  /**
+   * 获取应用实例列表
+   */
+  async DescribeApplicationPods(
+    req: DescribeApplicationPodsRequest,
+    cb?: (error: string, rep: DescribeApplicationPodsResponse) => void
+  ): Promise<DescribeApplicationPodsResponse> {
+    return this.request("DescribeApplicationPods", req, cb)
+  }
+
+  /**
+   * 服务重启
+   */
+  async RestartApplication(
+    req: RestartApplicationRequest,
+    cb?: (error: string, rep: RestartApplicationResponse) => void
+  ): Promise<RestartApplicationResponse> {
+    return this.request("RestartApplication", req, cb)
+  }
+
+  /**
+   * 修改应用基本信息
+   */
+  async ModifyApplicationInfo(
+    req: ModifyApplicationInfoRequest,
+    cb?: (error: string, rep: ModifyApplicationInfoResponse) => void
+  ): Promise<ModifyApplicationInfoResponse> {
+    return this.request("ModifyApplicationInfo", req, cb)
   }
 
   /**
@@ -199,6 +258,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 生成应用程序包预签名下载链接
+   */
+  async GenerateApplicationPackageDownloadUrl(
+    req: GenerateApplicationPackageDownloadUrlRequest,
+    cb?: (error: string, rep: GenerateApplicationPackageDownloadUrlResponse) => void
+  ): Promise<GenerateApplicationPackageDownloadUrlResponse> {
+    return this.request("GenerateApplicationPackageDownloadUrl", req, cb)
+  }
+
+  /**
+   * 创建环境
+   */
+  async CreateEnvironment(
+    req: CreateEnvironmentRequest,
+    cb?: (error: string, rep: CreateEnvironmentResponse) => void
+  ): Promise<CreateEnvironmentResponse> {
+    return this.request("CreateEnvironment", req, cb)
+  }
+
+  /**
+   * 查询 Ingress 规则列表
+   */
+  async DescribeIngresses(
+    req: DescribeIngressesRequest,
+    cb?: (error: string, rep: DescribeIngressesResponse) => void
+  ): Promise<DescribeIngressesResponse> {
+    return this.request("DescribeIngresses", req, cb)
+  }
+
+  /**
+   * 创建应用
+   */
+  async CreateApplication(
+    req: CreateApplicationRequest,
+    cb?: (error: string, rep: CreateApplicationResponse) => void
+  ): Promise<CreateApplicationResponse> {
+    return this.request("CreateApplication", req, cb)
+  }
+
+  /**
+   * 重启应用实例
+   */
+  async RestartApplicationPod(
+    req: RestartApplicationPodRequest,
+    cb?: (error: string, rep: RestartApplicationPodResponse) => void
+  ): Promise<RestartApplicationPodResponse> {
+    return this.request("RestartApplicationPod", req, cb)
+  }
+
+  /**
    * 更新应用部署版本
    */
   async RollingUpdateApplicationByVersion(
@@ -229,26 +338,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 生成应用程序包预签名下载链接
-   */
-  async GenerateApplicationPackageDownloadUrl(
-    req: GenerateApplicationPackageDownloadUrlRequest,
-    cb?: (error: string, rep: GenerateApplicationPackageDownloadUrlResponse) => void
-  ): Promise<GenerateApplicationPackageDownloadUrlResponse> {
-    return this.request("GenerateApplicationPackageDownloadUrl", req, cb)
-  }
-
-  /**
-   * 获取应用实例列表
-   */
-  async DescribeApplicationPods(
-    req: DescribeApplicationPodsRequest,
-    cb?: (error: string, rep: DescribeApplicationPodsResponse) => void
-  ): Promise<DescribeApplicationPodsResponse> {
-    return this.request("DescribeApplicationPods", req, cb)
-  }
-
-  /**
    * 绑定云资源
    */
   async CreateResource(
@@ -256,55 +345,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateResourceResponse) => void
   ): Promise<CreateResourceResponse> {
     return this.request("CreateResource", req, cb)
-  }
-
-  /**
-   * 查询 Ingress 规则列表
-   */
-  async DescribeIngresses(
-    req: DescribeIngressesRequest,
-    cb?: (error: string, rep: DescribeIngressesResponse) => void
-  ): Promise<DescribeIngressesResponse> {
-    return this.request("DescribeIngresses", req, cb)
-  }
-
-  /**
-   * 创建应用
-   */
-  async CreateApplication(
-    req: CreateApplicationRequest,
-    cb?: (error: string, rep: CreateApplicationResponse) => void
-  ): Promise<CreateApplicationResponse> {
-    return this.request("CreateApplication", req, cb)
-  }
-
-  /**
-   * 开始下一批次发布
-   */
-  async ResumeDeployApplication(
-    req: ResumeDeployApplicationRequest,
-    cb?: (error: string, rep: ResumeDeployApplicationResponse) => void
-  ): Promise<ResumeDeployApplicationResponse> {
-    return this.request("ResumeDeployApplication", req, cb)
-  }
-
-  /**
-   * 修改应用基本信息
-   */
-  async ModifyApplicationInfo(
-    req: ModifyApplicationInfoRequest,
-    cb?: (error: string, rep: ModifyApplicationInfoResponse) => void
-  ): Promise<ModifyApplicationInfoResponse> {
-    return this.request("ModifyApplicationInfo", req, cb)
-  }
-
-  /**
-   * 删除 Ingress 规则
-   */
-  async DeleteIngress(
-    req: DeleteIngressRequest,
-    cb?: (error: string, rep: DeleteIngressResponse) => void
-  ): Promise<DeleteIngressResponse> {
-    return this.request("DeleteIngress", req, cb)
   }
 }

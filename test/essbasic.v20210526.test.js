@@ -38,6 +38,16 @@ it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
     }
 })
 
+it("essbasic.v20210526.DescribeTemplates", async function () {
+    try {
+       const data = await client.DescribeTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.PrepareFlows", async function () {
     try {
        const data = await client.PrepareFlows({})
@@ -98,9 +108,9 @@ it("essbasic.v20210526.DescribeUsage", async function () {
     }
 })
 
-it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
+it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
     try {
-       const data = await client.DescribeResourceUrlsByFlows({})
+       const data = await client.DescribeFlowDetailInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +128,9 @@ it("essbasic.v20210526.SyncProxyOrganization", async function () {
     }
 })
 
-it("essbasic.v20210526.DescribeTemplates", async function () {
+it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
     try {
-       const data = await client.DescribeTemplates({})
+       const data = await client.DescribeResourceUrlsByFlows({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

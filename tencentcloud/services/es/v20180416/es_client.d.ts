@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateJdkRequest, GetRequestTargetNodeTypesRequest, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateRequestTargetNodeTypesRequest, UpgradeLicenseRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, DiagnoseInstanceRequest, RestartInstanceRequest, DescribeInstancesRequest, UpdateDiagnoseSettingsRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpdateDiagnoseSettingsResponse, UpgradeLicenseResponse, DeleteInstanceRequest, UpdateJdkResponse, RestartNodesResponse, UpgradeInstanceResponse, UpdateInstanceResponse, UpgradeInstanceRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse } from "./es_models";
+import { UpdateJdkRequest, GetRequestTargetNodeTypesRequest, UpdateInstanceResponse, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateRequestTargetNodeTypesRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, DiagnoseInstanceRequest, RestartInstanceRequest, DescribeInstancesRequest, UpdateDiagnoseSettingsRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpdateDiagnoseSettingsResponse, UpgradeLicenseResponse, DeleteInstanceRequest, UpdateJdkResponse, RestartNodesResponse, UpgradeInstanceResponse, UpgradeInstanceRequest, DescribeViewsResponse, DescribeViewsRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse, UpgradeLicenseRequest } from "./es_models";
 /**
  * es client
  * @class
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 变更插件列表
      */
     UpdatePlugins(req: UpdatePluginsRequest, cb?: (error: string, rep: UpdatePluginsResponse) => void): Promise<UpdatePluginsResponse>;
+    /**
+     * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+     */
+    DescribeViews(req: DescribeViewsRequest, cb?: (error: string, rep: DescribeViewsResponse) => void): Promise<DescribeViewsResponse>;
     /**
      * 创建指定规格的ES集群实例
      */

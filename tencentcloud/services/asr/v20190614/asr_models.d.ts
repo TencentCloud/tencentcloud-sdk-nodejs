@@ -126,6 +126,10 @@ export interface CreateAsyncRecognitionTaskRequest {
       * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
       */
     HotwordId?: string;
+    /**
+      * 回调数据中，是否需要对应音频数据。
+      */
+    AudioData?: boolean;
 }
 /**
  * 热词的词和权重

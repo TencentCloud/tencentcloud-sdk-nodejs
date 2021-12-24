@@ -198,7 +198,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeWhiteBoxDecryptKey(req: DescribeWhiteBoxDecryptKeyRequest, cb?: (error: string, rep: DescribeWhiteBoxDecryptKeyResponse) => void): Promise<DescribeWhiteBoxDecryptKeyResponse>;
     /**
-     * 获取支持的地域列表
+     * 获取可以提供KMS服务的地域列表
      */
     GetRegions(req?: GetRegionsRequest, cb?: (error: string, rep: GetRegionsResponse) => void): Promise<GetRegionsResponse>;
     /**

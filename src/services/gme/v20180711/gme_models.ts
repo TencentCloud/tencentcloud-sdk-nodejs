@@ -23,7 +23,7 @@ export interface ScanVoiceResponse {
       * 语音检测返回。Data 字段是 JSON 数组，每一个元素包含：<li>DataId： 请求中对应的 DataId。</li>
 <li>TaskID ：该检测任务的 ID，用于轮询语音检测结果。</li>
       */
-  Data?: Array<ScanVoiceResult>
+  Data: Array<ScanVoiceResult>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -862,7 +862,7 @@ export interface DescribeFilterResultListRequest {
  */
 export interface VoiceFilter {
   /**
-      * 过滤类型，1：政治，2：色情，3：涉毒，4：谩骂
+      * 过滤类型，1：色情，2：涉毒，3：谩骂
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type: number
@@ -1139,7 +1139,7 @@ export interface ScanVoiceRequest {
   BizId: number
 
   /**
-   * 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、涉政、广告、暴恐、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a>
+   * 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、广告、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a>
    */
   Scenes: Array<string>
 
@@ -1159,6 +1159,11 @@ export interface ScanVoiceRequest {
    * 异步检测结果回调地址，具体见上述<a href="#Callback_Declare">回调相关说明</a>。（说明：该字段为空时，必须通过接口(查询语音检测结果)获取检测结果）。
    */
   Callback?: string
+
+  /**
+   * 语言，目前jp代表日语
+   */
+  Lang?: string
 }
 
 /**

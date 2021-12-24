@@ -3160,6 +3160,16 @@ MountNamespace逃逸、
       * 最近生成时间
       */
     LatestFoundTime: string;
+    /**
+      * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HostIP: string;
+    /**
+      * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIP: string;
 }
 /**
  * DescribeReverseShellWhiteLists返回参数结构体
@@ -8906,6 +8916,16 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubStatus: string;
+    /**
+      * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HostIP: string;
+    /**
+      * 外网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIP: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

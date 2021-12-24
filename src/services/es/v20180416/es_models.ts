@@ -185,6 +185,16 @@ export interface GetRequestTargetNodeTypesRequest {
 }
 
 /**
+ * UpdateInstance返回参数结构体
+ */
+export interface UpdateInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceOperations请求参数结构体
  */
 export interface DescribeInstanceOperationsRequest {
@@ -237,6 +247,51 @@ export interface DiagnoseInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Kibana视图数据
+ */
+export interface KibanaView {
+  /**
+   * Kibana节点IP
+   */
+  Ip: string
+
+  /**
+   * 节点总磁盘大小
+   */
+  DiskSize: number
+
+  /**
+   * 磁盘使用率
+   */
+  DiskUsage: number
+
+  /**
+   * 节点内存大小
+   */
+  MemSize: number
+
+  /**
+   * 内存使用率
+   */
+  MemUsage: number
+
+  /**
+   * 节点cpu个数
+   */
+  CpuNum: number
+
+  /**
+   * cpu使用率
+   */
+  CpuUsage: number
+
+  /**
+   * 可用区
+   */
+  Zone: string
 }
 
 /**
@@ -376,38 +431,93 @@ export interface UpdateRequestTargetNodeTypesRequest {
 }
 
 /**
- * UpgradeLicense请求参数结构体
+ * 节点维度视图数据
  */
-export interface UpgradeLicenseRequest {
+export interface NodeView {
   /**
-   * 实例ID
+   * 节点ID
    */
-  InstanceId: string
+  NodeId: string
 
   /**
-   * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+   * 节点IP
    */
-  LicenseType: string
+  NodeIp: string
 
   /**
-   * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+   * 节点是否可见
    */
-  AutoVoucher?: number
+  Visible: number
 
   /**
-   * 代金券ID列表（目前仅支持指定一张代金券）
+   * 是否熔断
    */
-  VoucherIds?: Array<string>
+  Break: number
 
   /**
-   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+   * 节点总磁盘大小
    */
-  BasicSecurityType?: number
+  DiskSize: number
 
   /**
-   * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
+   * 磁盘使用率
    */
-  ForceRestart?: boolean
+  DiskUsage: number
+
+  /**
+   * 节点内存大小，单位GB
+   */
+  MemSize: number
+
+  /**
+   * 内存使用率
+   */
+  MemUsage: number
+
+  /**
+   * 节点cpu个数
+   */
+  CpuNum: number
+
+  /**
+   * cpu使用率
+   */
+  CpuUsage: number
+
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * 节点角色
+   */
+  NodeRole: string
+
+  /**
+   * 节点HTTP IP
+   */
+  NodeHttpIp: string
+
+  /**
+   * JVM内存使用率
+   */
+  JvmMemUsage: number
+
+  /**
+   * 节点分片数
+   */
+  ShardNum: number
+
+  /**
+   * 节点上磁盘ID列表
+   */
+  DiskIds: Array<string>
+
+  /**
+   * 是否为隐藏可用区
+   */
+  Hidden: boolean
 }
 
 /**
@@ -1588,13 +1698,103 @@ export interface UpgradeInstanceResponse {
 }
 
 /**
- * UpdateInstance返回参数结构体
+ * 集群维度视图数据
  */
-export interface UpdateInstanceResponse {
+export interface ClusterView {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群健康状态
    */
-  RequestId?: string
+  Health?: number
+
+  /**
+   * 集群是否可见
+   */
+  Visible: number
+
+  /**
+   * 集群是否熔断
+   */
+  Break: number
+
+  /**
+   * 平均磁盘使用率
+   */
+  AvgDiskUsage: number
+
+  /**
+   * 平均内存使用率
+   */
+  AvgMemUsage: number
+
+  /**
+   * 平均cpu使用率
+   */
+  AvgCpuUsage: number
+
+  /**
+   * 集群总存储大小
+   */
+  TotalDiskSize: number
+
+  /**
+   * 客户端请求节点
+   */
+  TargetNodeTypes: Array<string>
+
+  /**
+   * 在线节点数
+   */
+  NodeNum: number
+
+  /**
+   * 总节点数
+   */
+  TotalNodeNum: number
+
+  /**
+   * 数据节点数
+   */
+  DataNodeNum: number
+
+  /**
+   * 索引数
+   */
+  IndexNum: number
+
+  /**
+   * 文档数
+   */
+  DocNum: number
+
+  /**
+   * 磁盘已使用字节数
+   */
+  DiskUsedInBytes: number
+
+  /**
+   * 分片个数
+   */
+  ShardNum: number
+
+  /**
+   * 主分片个数
+   */
+  PrimaryShardNum: number
+
+  /**
+   * 迁移中的分片个数
+   */
+  RelocatingShardNum: number
+
+  /**
+   * 初始化中的分片个数
+   */
+  InitializingShardNum: number
+
+  /**
+   * 未分配的分片个数
+   */
+  UnassignedShardNum: number
 }
 
 /**
@@ -1630,6 +1830,44 @@ export interface UpgradeInstanceRequest {
    * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
    */
   UpgradeMode?: string
+}
+
+/**
+ * DescribeViews返回参数结构体
+ */
+export interface DescribeViewsResponse {
+  /**
+      * 集群维度视图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterView: ClusterView
+
+  /**
+      * 节点维度视图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodesView: Array<NodeView>
+
+  /**
+      * Kibana维度视图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KibanasView: Array<KibanaView>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeViews请求参数结构体
+ */
+export interface DescribeViewsRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -1695,4 +1933,39 @@ export interface Operation {
    * 操作进度
    */
   Progress: number
+}
+
+/**
+ * UpgradeLicense请求参数结构体
+ */
+export interface UpgradeLicenseRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+   */
+  LicenseType: string
+
+  /**
+   * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+   */
+  AutoVoucher?: number
+
+  /**
+   * 代金券ID列表（目前仅支持指定一张代金券）
+   */
+  VoucherIds?: Array<string>
+
+  /**
+   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+   */
+  BasicSecurityType?: number
+
+  /**
+   * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
+   */
+  ForceRestart?: boolean
 }

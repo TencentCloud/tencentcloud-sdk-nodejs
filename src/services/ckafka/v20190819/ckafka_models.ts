@@ -658,6 +658,35 @@ export interface DescribeACLResponse {
 }
 
 /**
+ * 动态硬盘扩容配置
+ */
+export interface DynamicDiskConfig {
+  /**
+      * 动态硬盘扩容配置开关（0: 关闭，1: 开启）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Enable?: number
+
+  /**
+      * 每次磁盘动态扩容大小百分比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StepForwardPercentage?: number
+
+  /**
+      * 磁盘配额百分比触发条件，即消息达到此值触发硬盘自动扩容事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskQuotaPercentage?: number
+
+  /**
+      * 最大扩容硬盘大小，以 GB 为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxDiskSpace?: number
+}
+
+/**
  * 操作型结果返回值
  */
 export interface JgwOperateResponse {
@@ -1674,6 +1703,21 @@ export interface ModifyTopicAttributesResponse {
 }
 
 /**
+ * 批量发送消息内容
+ */
+export interface BatchContent {
+  /**
+   * 发送的消息体
+   */
+  Body: string
+
+  /**
+   * 发送消息的键名
+   */
+  Key?: string
+}
+
+/**
  * DeleteRouteTriggerTime返回参数结构体
  */
 export interface DeleteRouteTriggerTimeResponse {
@@ -2128,6 +2172,11 @@ export interface ModifyInstanceAttributesRequest {
    * 时间戳
    */
   PublicNetwork?: number
+
+  /**
+   * 动态硬盘扩容策略配置
+   */
+  DynamicDiskConfig?: DynamicDiskConfig
 }
 
 /**
@@ -2489,6 +2538,12 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RemainingTopics: number
+
+  /**
+      * 动态硬盘扩容策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DynamicDiskConfig: DynamicDiskConfig
 }
 
 /**
@@ -2710,6 +2765,21 @@ export interface TopicInSyncReplicaResult {
    * 总计个数
    */
   TotalCount: number
+}
+
+/**
+ * SendMessage返回参数结构体
+ */
+export interface SendMessageResponse {
+  /**
+   * 消息ID列表
+   */
+  MessageId: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2995,6 +3065,21 @@ export interface DescribeGroupOffsetsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SendMessage请求参数结构体
+ */
+export interface SendMessageRequest {
+  /**
+   * DataHub接入ID
+   */
+  DataHubId: string
+
+  /**
+   * 发送消息内容
+   */
+  Message: Array<BatchContent>
 }
 
 /**
@@ -3320,6 +3405,11 @@ export interface ModifyTopicAttributesRequest {
    * 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B
    */
   RetentionBytes?: number
+
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tag>
 }
 
 /**

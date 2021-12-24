@@ -23,8 +23,9 @@ import {
   LoginActionFlagIntl,
   ListAccessKeysRequest,
   SetMfaFlagResponse,
+  UpdateSAMLProviderRequest,
   DeleteUserRequest,
-  DetachGroupPolicyRequest,
+  GetRolePermissionBoundaryResponse,
   DescribeRoleListResponse,
   CreatePolicyResponse,
   GetRoleRequest,
@@ -32,6 +33,8 @@ import {
   ListAttachedGroupPoliciesRequest,
   ListGroupsForUserRequest,
   AttachRolePolicyResponse,
+  GetUserPermissionBoundaryRequest,
+  GetRolePermissionBoundaryRequest,
   GetServiceLinkedRoleDeletionStatusResponse,
   GetSecurityLastUsedRequest,
   DescribeUserSAMLConfigResponse,
@@ -53,7 +56,7 @@ import {
   ListSAMLProvidersRequest,
   ListGroupsRequest,
   DeletePolicyVersionResponse,
-  UpdateSAMLProviderRequest,
+  DetachGroupPolicyRequest,
   UpdateAssumeRolePolicyRequest,
   ListGroupsForUserResponse,
   ListUsersForGroupRequest,
@@ -72,6 +75,7 @@ import {
   SecretIdLastUsed,
   DeleteGroupRequest,
   GetUserResponse,
+  GetUserPermissionBoundaryResponse,
   DeleteUserResponse,
   DetachRolePolicyRequest,
   ListPoliciesGrantingServiceAccessResponse,
@@ -422,13 +426,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新SAML身份提供商信息
+   * 获取角色权限边界
    */
-  async UpdateSAMLProvider(
-    req: UpdateSAMLProviderRequest,
-    cb?: (error: string, rep: UpdateSAMLProviderResponse) => void
-  ): Promise<UpdateSAMLProviderResponse> {
-    return this.request("UpdateSAMLProvider", req, cb)
+  async GetRolePermissionBoundary(
+    req: GetRolePermissionBoundaryRequest,
+    cb?: (error: string, rep: GetRolePermissionBoundaryResponse) => void
+  ): Promise<GetRolePermissionBoundaryResponse> {
+    return this.request("GetRolePermissionBoundary", req, cb)
   }
 
   /**
@@ -562,6 +566,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用户权限边界
+   */
+  async GetUserPermissionBoundary(
+    req: GetUserPermissionBoundaryRequest,
+    cb?: (error: string, rep: GetUserPermissionBoundaryResponse) => void
+  ): Promise<GetUserPermissionBoundaryResponse> {
+    return this.request("GetUserPermissionBoundary", req, cb)
+  }
+
+  /**
    * 创建用户SAML配置
    */
   async CreateUserSAMLConfig(
@@ -569,6 +583,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserSAMLConfigResponse) => void
   ): Promise<CreateUserSAMLConfigResponse> {
     return this.request("CreateUserSAMLConfig", req, cb)
+  }
+
+  /**
+   * 更新SAML身份提供商信息
+   */
+  async UpdateSAMLProvider(
+    req: UpdateSAMLProviderRequest,
+    cb?: (error: string, rep: UpdateSAMLProviderResponse) => void
+  ): Promise<UpdateSAMLProviderResponse> {
+    return this.request("UpdateSAMLProvider", req, cb)
   }
 
   /**

@@ -287,7 +287,7 @@ export interface DescribeEntityResponse {
   /**
    * 返回查询实体相关信息
    */
-  Content?: string
+  Content: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -436,7 +436,7 @@ export interface DescribeRelationResponse {
   /**
    * 返回查询实体间的关系
    */
-  Content?: Array<EntityRelationContent>
+  Content: Array<EntityRelationContent>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

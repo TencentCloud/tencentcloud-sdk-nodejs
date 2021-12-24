@@ -68,6 +68,16 @@ it("ckafka.v20190819.BatchModifyTopicAttributes", async function () {
     }
 })
 
+it("ckafka.v20190819.SendMessage", async function () {
+    try {
+       const data = await client.SendMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.ModifyTopicAttributes", async function () {
     try {
        const data = await client.ModifyTopicAttributes({})

@@ -336,6 +336,21 @@ export interface InputTaBspData {
 }
 
 /**
+ * 业务入参
+ */
+export interface Device {
+  /**
+   * 业务入参id
+   */
+  DeviceId: string
+
+  /**
+   * 业务入参类型
+   */
+  DeviceType: number
+}
+
+/**
  * 返回结果
  */
 export interface OutputSendTrafficSecuritySmsMsg {
@@ -665,6 +680,11 @@ export interface InputRecognizeTargetAudience {
    * 用户是否授权,1为授权，0为未授权
    */
   IsAuthorized?: number
+
+  /**
+   * 设备信息
+   */
+  DeviceList?: Array<Device>
 }
 
 /**

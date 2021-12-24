@@ -138,6 +138,26 @@ export interface SetMfaFlagResponse {
 }
 
 /**
+ * UpdateSAMLProvider请求参数结构体
+ */
+export interface UpdateSAMLProviderRequest {
+  /**
+   * SAML身份提供商名称
+   */
+  Name: string
+
+  /**
+   * SAML身份提供商描述
+   */
+  Description?: string
+
+  /**
+   * SAML身份提供商Base64编码的元数据文档
+   */
+  SAMLMetadataDocument?: string
+}
+
+/**
  * DeleteUser请求参数结构体
  */
 export interface DeleteUserRequest {
@@ -153,18 +173,43 @@ export interface DeleteUserRequest {
 }
 
 /**
- * DetachGroupPolicy请求参数结构体
+ * GetRolePermissionBoundary返回参数结构体
  */
-export interface DetachGroupPolicyRequest {
+export interface GetRolePermissionBoundaryResponse {
   /**
-   * 策略 id
-   */
-  PolicyId: number
+      * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyId?: number
 
   /**
-   * 用户组 id
+      * 策略名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyName?: string
+
+  /**
+      * 策略语法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyDocument?: string
+
+  /**
+      * 策略类型：1.自定义策略，2.预设策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyType?: number
+
+  /**
+      * 创建方式：1.按产品功能或项目权限创建，2.按策略语法创建，3.按策略生成器创建，4.按标签授权创建，5.按权限边界规则创建
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateMode?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DetachGroupId: number
+  RequestId?: string
 }
 
 /**
@@ -296,6 +341,26 @@ export interface AttachRolePolicyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetUserPermissionBoundary请求参数结构体
+ */
+export interface GetUserPermissionBoundaryRequest {
+  /**
+   * 子账号Uin
+   */
+  TargetUin: number
+}
+
+/**
+ * GetRolePermissionBoundary请求参数结构体
+ */
+export interface GetRolePermissionBoundaryRequest {
+  /**
+   * 角色ID
+   */
+  RoleId: string
 }
 
 /**
@@ -574,23 +639,18 @@ export interface DeletePolicyVersionResponse {
 }
 
 /**
- * UpdateSAMLProvider请求参数结构体
+ * DetachGroupPolicy请求参数结构体
  */
-export interface UpdateSAMLProviderRequest {
+export interface DetachGroupPolicyRequest {
   /**
-   * SAML身份提供商名称
+   * 策略 id
    */
-  Name: string
+  PolicyId: number
 
   /**
-   * SAML身份提供商描述
+   * 用户组 id
    */
-  Description?: string
-
-  /**
-   * SAML身份提供商Base64编码的元数据文档
-   */
-  SAMLMetadataDocument?: string
+  DetachGroupId: number
 }
 
 /**
@@ -1038,6 +1098,46 @@ export interface GetUserResponse {
    * 邮箱
    */
   Email?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetUserPermissionBoundary返回参数结构体
+ */
+export interface GetUserPermissionBoundaryResponse {
+  /**
+      * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyId?: number
+
+  /**
+      * 策略名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyName?: string
+
+  /**
+      * 策略语法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyDocument?: string
+
+  /**
+      * 策略类型：1.自定义策略，2.预设策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyType?: number
+
+  /**
+      * 创建方式：1.按产品功能或项目权限创建，2.按策略语法创建，3.按策略生成器创建，4.按标签授权创建，5.按权限边界规则创建
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateMode?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

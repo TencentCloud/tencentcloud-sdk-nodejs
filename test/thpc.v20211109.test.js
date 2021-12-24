@@ -28,6 +28,16 @@ it("thpc.v20211109.DeleteCluster", async function () {
     }
 })
 
+it("thpc.v20211109.DescribeClusters", async function () {
+    try {
+       const data = await client.DescribeClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("thpc.v20211109.BindAutoScalingGroup", async function () {
     try {
        const data = await client.BindAutoScalingGroup({})

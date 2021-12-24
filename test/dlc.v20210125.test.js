@@ -48,6 +48,16 @@ it("dlc.v20210125.AddUsersToWorkGroup", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeTaskResult", async function () {
+    try {
+       const data = await client.DescribeTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.BindWorkGroupsToUser", async function () {
     try {
        const data = await client.BindWorkGroupsToUser({})

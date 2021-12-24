@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUsersToWorkGroup", req, cb);
     }
     /**
+     * 查询任务结果
+     */
+    async DescribeTaskResult(req, cb) {
+        return this.request("DescribeTaskResult", req, cb);
+    }
+    /**
      * 绑定工作组到用户
      */
     async BindWorkGroupsToUser(req, cb) {

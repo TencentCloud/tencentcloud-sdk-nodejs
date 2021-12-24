@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskDetail(req: DescribeTaskDetailRequest, cb?: (error: string, rep: DescribeTaskDetailResponse) => void): Promise<DescribeTaskDetailResponse>;
     /**
-     * 批量创建探测任务
+     * 批量创建拨测任务
      */
     CreateProbeTasks(req: CreateProbeTasksRequest, cb?: (error: string, rep: CreateProbeTasksResponse) => void): Promise<CreateProbeTasksResponse>;
     /**
@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     BindAlarmPolicy(req: BindAlarmPolicyRequest, cb?: (error: string, rep: BindAlarmPolicyResponse) => void): Promise<BindAlarmPolicyResponse>;
     /**
-     * 查询探测任务列表
+     * 查询拨测任务列表
      */
     DescribeProbeTasks(req: DescribeProbeTasksRequest, cb?: (error: string, rep: DescribeProbeTasksResponse) => void): Promise<DescribeProbeTasksResponse>;
     /**

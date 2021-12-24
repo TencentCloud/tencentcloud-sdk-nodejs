@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyTopicAttributes", req, cb);
     }
     /**
+     * 通过HTTP接入层发送消息
+     */
+    async SendMessage(req, cb) {
+        return this.request("SendMessage", req, cb);
+    }
+    /**
      * 本接口用于修改主题属性。
      */
     async ModifyTopicAttributes(req, cb) {

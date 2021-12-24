@@ -118,6 +118,16 @@ it("cdb.v20170320.DescribeBackupOverview", async function () {
     }
 })
 
+it("cdb.v20170320.StopReplication", async function () {
+    try {
+       const data = await client.StopReplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyDBInstanceName", async function () {
     try {
        const data = await client.ModifyDBInstanceName({})
@@ -508,16 +518,6 @@ it("cdb.v20170320.InquiryPriceUpgradeInstances", async function () {
     }
 })
 
-it("cdb.v20170320.StopDelayReplication", async function () {
-    try {
-       const data = await client.StopDelayReplication({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.CreateDBInstance", async function () {
     try {
        const data = await client.CreateDBInstance({})
@@ -898,16 +898,6 @@ it("cdb.v20170320.DescribeBackupDownloadRestriction", async function () {
     }
 })
 
-it("cdb.v20170320.StartDelayReplication", async function () {
-    try {
-       const data = await client.StartDelayReplication({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.ModifyAccountPassword", async function () {
     try {
        const data = await client.ModifyAccountPassword({})
@@ -941,6 +931,16 @@ it("cdb.v20170320.ModifyAccountDescription", async function () {
 it("cdb.v20170320.DescribeSlowLogData", async function () {
     try {
        const data = await client.DescribeSlowLogData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.StartReplication", async function () {
+    try {
+       const data = await client.StartReplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1091,16 +1091,6 @@ it("cdb.v20170320.DeleteAuditRule", async function () {
 it("cdb.v20170320.DescribeSupportedPrivileges", async function () {
     try {
        const data = await client.DescribeSupportedPrivileges({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdb.v20170320.ModifyRoReplicationDelay", async function () {
-    try {
-       const data = await client.ModifyRoReplicationDelay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

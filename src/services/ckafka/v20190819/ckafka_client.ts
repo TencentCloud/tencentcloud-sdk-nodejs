@@ -43,6 +43,7 @@ import {
   CreateInstancePreData,
   AclRule,
   DescribeACLResponse,
+  DynamicDiskConfig,
   JgwOperateResponse,
   ZoneInfo,
   DescribeTopicSubscribeGroupResponse,
@@ -90,6 +91,7 @@ import {
   DescribeGroupInfoRequest,
   DescribeGroupInfoResponse,
   ModifyTopicAttributesResponse,
+  BatchContent,
   DeleteRouteTriggerTimeResponse,
   DescribeUserResponse,
   AppIdResponse,
@@ -129,6 +131,7 @@ import {
   ModifyPasswordResponse,
   DescribeRouteRequest,
   TopicInSyncReplicaResult,
+  SendMessageResponse,
   DescribeCkafkaZoneResponse,
   BatchModifyGroupOffsetsRequest,
   TopicAttributesResponse,
@@ -140,6 +143,7 @@ import {
   DescribeRouteResponse,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
+  SendMessageRequest,
   ConsumerRecord,
   ModifyGroupOffsetsRequest,
   BatchModifyTopicAttributesRequest,
@@ -217,6 +221,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchModifyTopicAttributesResponse) => void
   ): Promise<BatchModifyTopicAttributesResponse> {
     return this.request("BatchModifyTopicAttributes", req, cb)
+  }
+
+  /**
+   * 通过HTTP接入层发送消息
+   */
+  async SendMessage(
+    req: SendMessageRequest,
+    cb?: (error: string, rep: SendMessageResponse) => void
+  ): Promise<SendMessageResponse> {
+    return this.request("SendMessage", req, cb)
   }
 
   /**

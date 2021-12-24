@@ -25,9 +25,11 @@ import {
   NodeInfo,
   UpdateJdkRequest,
   GetRequestTargetNodeTypesRequest,
+  UpdateInstanceResponse,
   DescribeInstanceOperationsRequest,
   OperationDetail,
   DiagnoseInstanceResponse,
+  KibanaView,
   EsPublicAcl,
   DictInfo,
   RestartInstanceResponse,
@@ -35,7 +37,7 @@ import {
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
   UpdateRequestTargetNodeTypesRequest,
-  UpgradeLicenseRequest,
+  NodeView,
   CosBackup,
   TagInfo,
   KeyValue,
@@ -66,11 +68,14 @@ import {
   UpdateJdkResponse,
   RestartNodesResponse,
   UpgradeInstanceResponse,
-  UpdateInstanceResponse,
+  ClusterView,
   UpgradeInstanceRequest,
+  DescribeViewsResponse,
+  DescribeViewsRequest,
   GetRequestTargetNodeTypesResponse,
   RestartKibanaResponse,
   Operation,
+  UpgradeLicenseRequest,
 } from "./es_models"
 
 /**
@@ -140,6 +145,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdatePluginsResponse) => void
   ): Promise<UpdatePluginsResponse> {
     return this.request("UpdatePlugins", req, cb)
+  }
+
+  /**
+   * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+   */
+  async DescribeViews(
+    req: DescribeViewsRequest,
+    cb?: (error: string, rep: DescribeViewsResponse) => void
+  ): Promise<DescribeViewsResponse> {
+    return this.request("DescribeViews", req, cb)
   }
 
   /**

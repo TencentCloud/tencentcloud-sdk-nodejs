@@ -607,7 +607,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取支持的地域列表
+   * 获取可以提供KMS服务的地域列表
    */
   async GetRegions(
     req?: GetRegionsRequest,

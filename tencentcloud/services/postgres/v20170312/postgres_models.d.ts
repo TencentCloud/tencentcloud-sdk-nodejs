@@ -7,10 +7,6 @@ export interface CreateDBInstancesRequest {
       */
     SpecCode: string;
     /**
-      * PostgreSQL内核版本，目前支持以下版本：9.3.5、9.5.4、10.4、11.8、12.4 。
-      */
-    DBVersion: string;
-    /**
       * 实例容量大小，单位：GB。
       */
     Storage: number;
@@ -30,6 +26,10 @@ export interface CreateDBInstancesRequest {
       * 项目ID。
       */
     ProjectId?: number;
+    /**
+      * PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。
+      */
+    DBVersion?: string;
     /**
       * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
       */
@@ -74,6 +74,14 @@ export interface CreateDBInstancesRequest {
       * 安全组id
       */
     SecurityGroupIds?: Array<string>;
+    /**
+      * PostgreSQL主要版本。目前支持10，11，12，13这几个版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。
+      */
+    DBMajorVersion?: string;
+    /**
+      * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例。
+      */
+    DBKernelVersion?: string;
 }
 /**
  * SetAutoRenewFlag请求参数结构体
@@ -170,10 +178,6 @@ export interface CreateInstancesRequest {
       */
     SpecCode: string;
     /**
-      * PostgreSQL主版本，目前支持：9.3、9.5、10、11、12、13以及9.3.5、9.5.4、10.4、11.8、12.4版本。
-      */
-    DBVersion: string;
-    /**
       * 实例容量大小，单位：GB。
       */
     Storage: number;
@@ -205,6 +209,10 @@ export interface CreateInstancesRequest {
       * 项目ID。
       */
     ProjectId?: number;
+    /**
+      * PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例
+      */
+    DBVersion?: string;
     /**
       * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
       */
@@ -249,6 +257,14 @@ export interface CreateInstancesRequest {
       * 安全组ID。
       */
     SecurityGroupIds?: Array<string>;
+    /**
+      * PostgreSQL主要版本。目前支持10，11，12，13这几个版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例
+      */
+    DBMajorVersion?: string;
+    /**
+      * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例
+      */
+    DBKernelVersion?: string;
 }
 /**
  * 描述一种规格的信息
@@ -259,7 +275,7 @@ export interface SpecItemInfo {
       */
     SpecCode: string;
     /**
-      * PostgreSQL的内核版本编号
+      * PostgreSQL的版本编号
       */
     Version: string;
     /**
@@ -294,6 +310,16 @@ export interface SpecItemInfo {
       * 机器类型
       */
     Type: string;
+    /**
+      * PostgreSQL的主要版本编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MajorVersion: string;
+    /**
+      * PostgreSQL的内核版本编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KernelVersion: string;
 }
 /**
  * ModifyDBInstanceReadOnlyGroup返回参数结构体
@@ -1550,6 +1576,11 @@ export interface ServerlessDBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DBKernelVersion?: string;
+    /**
+      * 数据库主要版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DBMajorVersion?: string;
 }
 /**
  * CreateReadOnlyGroup请求参数结构体
@@ -2028,7 +2059,7 @@ export interface DBInstance {
       */
     DBCharset: string;
     /**
-      * PostgreSQL主版本
+      * PostgreSQL版本
       */
     DBVersion: string;
     /**
@@ -2110,6 +2141,11 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NetworkAccessList: Array<NetworkAccess>;
+    /**
+      * PostgreSQL主要版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DBMajorVersion: string;
 }
 /**
  * DescribeProductConfig返回参数结构体

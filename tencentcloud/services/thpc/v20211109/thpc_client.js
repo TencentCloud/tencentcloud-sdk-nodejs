@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCluster", req, cb);
     }
     /**
+     * 本接口（DescribeClusters）用于查询集群列表。
+     */
+    async DescribeClusters(req, cb) {
+        return this.request("DescribeClusters", req, cb);
+    }
+    /**
      * 本接口(BindAutoScalingGroup)用于为集群队列绑定弹性伸缩组
      */
     async BindAutoScalingGroup(req, cb) {

@@ -52,6 +52,31 @@ export interface RestartApplicationPodResponse {
 }
 
 /**
+ * DeleteApplication请求参数结构体
+ */
+export interface DeleteApplicationRequest {
+  /**
+   * 服务Id
+   */
+  ApplicationId: string
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 当服务没有任何运行版本时，是否删除此服务
+   */
+  DeleteApplicationIfNoRunningVersion?: boolean
+}
+
+/**
  * CreateResource请求参数结构体
  */
 export interface CreateResourceRequest {
@@ -89,6 +114,41 @@ export interface ResumeDeployApplicationResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RestartApplication返回参数结构体
+ */
+export interface RestartApplicationResponse {
+  /**
+   * 返回结果
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopApplication请求参数结构体
+ */
+export interface StopApplicationRequest {
+  /**
+   * 服务id
+   */
+  ApplicationId: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId?: string
 }
 
 /**
@@ -1555,18 +1615,18 @@ export interface ModifyApplicationInfoResponse {
 }
 
 /**
- * RevertDeployApplication请求参数结构体
+ * DeleteApplication返回参数结构体
  */
-export interface RevertDeployApplicationRequest {
+export interface DeleteApplicationResponse {
   /**
-   * 需要回滚的服务id
+   * 返回结果
    */
-  ApplicationId?: string
+  Result: boolean
 
   /**
-   * 需要回滚的服务所在环境id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvironmentId?: string
+  RequestId?: string
 }
 
 /**
@@ -1626,6 +1686,26 @@ export interface NamespacePage {
 }
 
 /**
+ * RestartApplication请求参数结构体
+ */
+export interface RestartApplicationRequest {
+  /**
+   * 服务id
+   */
+  ApplicationId: string
+
+  /**
+   * 来源渠道
+   */
+  SourceChannel?: number
+
+  /**
+   * 环境ID
+   */
+  EnvironmentId?: string
+}
+
+/**
  * CreateApplication返回参数结构体
  */
 export interface CreateApplicationResponse {
@@ -1663,6 +1743,21 @@ export interface HorizontalAutoscaler {
    * 阈值（百分比）
    */
   Threshold: number
+}
+
+/**
+ * RevertDeployApplication请求参数结构体
+ */
+export interface RevertDeployApplicationRequest {
+  /**
+   * 需要回滚的服务id
+   */
+  ApplicationId?: string
+
+  /**
+   * 需要回滚的服务所在环境id
+   */
+  EnvironmentId?: string
 }
 
 /**
@@ -1848,6 +1943,21 @@ export interface DescribeEnvironmentsRequest {
    * 来源source
    */
   SourceChannel?: number
+}
+
+/**
+ * StopApplication返回参数结构体
+ */
+export interface StopApplicationResponse {
+  /**
+   * 返回结果
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

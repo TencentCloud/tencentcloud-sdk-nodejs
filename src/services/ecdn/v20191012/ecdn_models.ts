@@ -119,6 +119,94 @@ export interface DescribeDomainsConfigResponse {
 }
 
 /**
+ * 回源的自定义Https配置
+ */
+export interface AdvanceHttps {
+  /**
+      * 自定义Tls数据开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomTlsStatus?: string
+
+  /**
+      * Tls版本列表，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TlsVersion?: Array<string>
+
+  /**
+      * 自定义加密套件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cipher?: string
+
+  /**
+      * 回源双向校验开启状态
+off - 关闭校验
+oneWay - 校验源站
+twoWay - 双向校验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VerifyOriginType?: string
+
+  /**
+      * 回源层证书配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertInfo?: ServerCert
+
+  /**
+      * 源站证书配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginCertInfo?: ClientCert
+}
+
+/**
+ * CreateVerifyRecord返回参数结构体
+ */
+export interface CreateVerifyRecordResponse {
+  /**
+   * 子解析
+   */
+  SubDomain: string
+
+  /**
+   * 解析值
+   */
+  Record: string
+
+  /**
+   * 解析类型
+   */
+  RecordType: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询对象及其对应的访问明细数据
+ */
+export interface ResourceData {
+  /**
+      * 资源名称，根据查询条件不同分为以下几类：
+具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度明细数据
+      */
+  Resource: string
+
+  /**
+   * 资源对应的数据明细
+   */
+  EcdnData: EcdnData
+}
+
+/**
  * 域名https配置。
  */
 export interface Https {
@@ -178,50 +266,6 @@ export interface Https {
 }
 
 /**
- * CreateVerifyRecord返回参数结构体
- */
-export interface CreateVerifyRecordResponse {
-  /**
-   * 子解析
-   */
-  SubDomain: string
-
-  /**
-   * 解析值
-   */
-  Record: string
-
-  /**
-   * 解析类型
-   */
-  RecordType: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 查询对象及其对应的访问明细数据
- */
-export interface ResourceData {
-  /**
-      * 资源名称，根据查询条件不同分为以下几类：
-具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度明细数据
-      */
-  Resource: string
-
-  /**
-   * 资源对应的数据明细
-   */
-  EcdnData: EcdnData
-}
-
-/**
  * 缓存配置简单版本，该版本不支持设置源站未返回max-age情况下的缓存规则。
  */
 export interface Cache {
@@ -261,6 +305,26 @@ export interface ForceRedirect {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RedirectStatusCode?: number
+}
+
+/**
+ * DescribeIpStatus返回参数结构体
+ */
+export interface DescribeIpStatusResponse {
+  /**
+   * 节点列表
+   */
+  Ips: Array<IpStatus>
+
+  /**
+   * 节点总个数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -423,18 +487,34 @@ export interface DescribePurgeTasksRequest {
 }
 
 /**
- * DescribeEcdnStatistics返回参数结构体
+ * 域名查询时过滤条件。
  */
-export interface DescribeEcdnStatisticsResponse {
+export interface DomainFilter {
   /**
-   * 指定条件查询得到的数据明细
-   */
-  Data: Array<ResourceData>
+      * 过滤字段名，支持的列表如下：
+- origin：主源站。
+- domain：域名。
+- resourceId：域名id。
+- status：域名状态，online，offline，processing。
+- disable：域名封禁状态，normal，unlicensed。
+- projectId：项目ID。
+- fullUrlCache：全路径缓存，on或off。
+- https：是否配置https，on，off或processing。
+- originPullProtocol：回源协议类型，支持http，follow或https。
+- area：加速区域，支持mainland，overseas或global。
+- tagKey：标签键。
+      */
+  Name: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 过滤字段值。
    */
-  RequestId?: string
+  Value: Array<string>
+
+  /**
+   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
+   */
+  Fuzzy?: boolean
 }
 
 /**
@@ -1131,18 +1211,13 @@ export interface CacheRule {
 }
 
 /**
- * DescribeIpStatus返回参数结构体
+ * DescribeEcdnStatistics返回参数结构体
  */
-export interface DescribeIpStatusResponse {
+export interface DescribeEcdnStatisticsResponse {
   /**
-   * 节点列表
+   * 指定条件查询得到的数据明细
    */
-  Ips: Array<IpStatus>
-
-  /**
-   * 节点总个数
-   */
-  TotalCount: number
+  Data: Array<ResourceData>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1190,6 +1265,12 @@ export interface Origin {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BackupOriginType?: string
+
+  /**
+      * HTTPS回源高级配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdvanceHttps?: AdvanceHttps
 }
 
 /**
@@ -1247,37 +1328,6 @@ export interface CacheKey {
    * 是否开启全路径缓存，on或off。
    */
   FullUrlCache?: string
-}
-
-/**
- * 域名查询时过滤条件。
- */
-export interface DomainFilter {
-  /**
-      * 过滤字段名，支持的列表如下：
-- origin：主源站。
-- domain：域名。
-- resourceId：域名id。
-- status：域名状态，online，offline，processing。
-- disable：域名封禁状态，normal，unlicensed。
-- projectId：项目ID。
-- fullUrlCache：全路径缓存，on或off。
-- https：是否配置https，on，off或processing。
-- originPullProtocol：回源协议类型，支持http，follow或https。
-- area：加速区域，支持mainland，overseas或global。
-- tagKey：标签键。
-      */
-  Name: string
-
-  /**
-   * 过滤字段值。
-   */
-  Value: Array<string>
-
-  /**
-   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
-   */
-  Fuzzy?: boolean
 }
 
 /**

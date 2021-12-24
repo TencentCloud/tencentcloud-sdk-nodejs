@@ -570,7 +570,7 @@ export interface GetResultSummaryRequest {
     TaskIds: Array<number>;
 }
 /**
- * 探测任务
+ * 拨测任务
  */
 export interface ProbeTask {
     /**
@@ -587,15 +587,15 @@ export interface ProbeTask {
       */
     TaskType: number;
     /**
-      * 探测节点列表
+      * 拨测节点列表
       */
     Nodes: Array<string>;
     /**
-      * 探测间隔
+      * 拨测间隔
       */
     Interval: number;
     /**
-      * 探测参数
+      * 拨测参数
       */
     Parameters: string;
     /**
@@ -638,6 +638,11 @@ export interface ProbeTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CronState: number;
+    /**
+      * 任务当前绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagInfoList: Array<KeyValuePair>;
 }
 /**
  * 时延等数据，数据点
@@ -694,6 +699,19 @@ export interface Label {
  * DescribeAgents请求参数结构体
  */
 export declare type DescribeAgentsRequest = null;
+/**
+ * 健值对
+ */
+export interface KeyValuePair {
+    /**
+      * 健
+      */
+    Key: string;
+    /**
+      * 值
+      */
+    Value: string;
+}
 /**
  * 拨测失败详情
  */
@@ -886,6 +904,19 @@ export interface AgentGroup {
       * 最大拨测分组数
       */
     MaxGroupNum?: number;
+}
+/**
+ * 资源的标签，通过标签对资源进行划分用于支持细粒度的鉴权、分账等场景
+ */
+export interface Tag {
+    /**
+      * key
+      */
+    TagKey: string;
+    /**
+      * value
+      */
+    TagValue: string;
 }
 /**
  * GetReturnCodeHistory请求参数结构体
@@ -1665,15 +1696,15 @@ export interface CreateProbeTasksRequest {
       */
     TaskType: number;
     /**
-      * 探测节点
+      * 拨测节点
       */
     Nodes: Array<string>;
     /**
-      * 探测间隔
+      * 拨测间隔
       */
     Interval: number;
     /**
-      * 探测参数
+      * 拨测参数
       */
     Parameters: string;
     /**
@@ -1686,6 +1717,10 @@ export interface CreateProbeTasksRequest {
       * 定时任务cron表达式
       */
     Cron?: string;
+    /**
+      * 资源标签值
+      */
+    Tag?: Array<Tag>;
 }
 /**
  * 拨测记录
@@ -2040,7 +2075,7 @@ export interface DescribeProbeTasksRequest {
       */
     TaskName?: string;
     /**
-      * 探测目标
+      * 拨测目标
       */
     TargetAddress?: string;
     /**
@@ -2083,6 +2118,10 @@ export interface DescribeProbeTasksRequest {
       * 是否正序
       */
     Ascend?: boolean;
+    /**
+      * 资源标签值
+      */
+    TagFilters?: Array<KeyValuePair>;
 }
 /**
  * PauseTask返回参数结构体

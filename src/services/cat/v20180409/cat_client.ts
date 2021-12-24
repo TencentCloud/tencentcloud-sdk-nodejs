@@ -42,6 +42,7 @@ import {
   DescribeUserLimitRequest,
   Label,
   DescribeAgentsRequest,
+  KeyValuePair,
   CatReturnDetail,
   IspDetail,
   GetReturnCodeInfoRequest,
@@ -50,6 +51,7 @@ import {
   DescribeDetailedSingleProbeDataRequest,
   DeleteAgentGroupResponse,
   AgentGroup,
+  Tag,
   GetReturnCodeHistoryRequest,
   ProvinceDetail,
   GetRealAvailRatioResponse,
@@ -232,7 +234,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量创建探测任务
+   * 批量创建拨测任务
    */
   async CreateProbeTasks(
     req: CreateProbeTasksRequest,
@@ -372,7 +374,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询探测任务列表
+   * 查询拨测任务列表
    */
   async DescribeProbeTasks(
     req: DescribeProbeTasksRequest,

@@ -324,12 +324,12 @@ export interface CloneLoadBalancerRequest {
       */
     LoadBalancerName?: string;
     /**
-      * 负载均衡实例所属的项目 ID，可以通过 DescribeProject 接口获取。不传此参数则视为默认项目。
+      * 负载均衡实例所属的项目 ID，可以通过 [DescribeProject](https://cloud.tencent.com/document/product/378/4400) 接口获取。不传此参数则视为默认项目。
       */
     ProjectId?: number;
     /**
       * 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，例如 100001 或 ap-guangzhou-1
-注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。可通过 DescribeMasterZones 接口查询一个地域的主可用区的列表。
+注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。
       */
     MasterZoneId?: string;
     /**
@@ -542,15 +542,15 @@ export interface ModifyLoadBalancerAttributesResponse {
  */
 export interface DescribeTargetGroupInstancesRequest {
     /**
-      * 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤
+      * 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤。
       */
     Filters: Array<Filter>;
     /**
-      * 显示数量限制，默认20
+      * 显示数量限制，默认20。
       */
     Limit?: number;
     /**
-      * 显示的偏移量，默认为0
+      * 显示的偏移量，默认为0。
       */
     Offset?: number;
 }
@@ -1202,7 +1202,7 @@ export interface DescribeLoadBalancerListByCertIdResponse {
     /**
       * 证书ID，以及与该证书ID关联的负载均衡实例列表
       */
-    CertSet?: Array<CertIdRelatedWithLoadBalancers>;
+    CertSet: Array<CertIdRelatedWithLoadBalancers>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2686,17 +2686,17 @@ export interface DescribeTargetHealthResponse {
  */
 export interface DescribeTargetGroupInstancesResponse {
     /**
-      * 本次查询的结果数量
+      * 本次查询的结果数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
-      * 绑定的服务器信息
+      * 绑定的服务器信息。
       */
-    TargetGroupInstanceSet?: Array<TargetGroupBackend>;
+    TargetGroupInstanceSet: Array<TargetGroupBackend>;
     /**
-      * 实际统计数量，不受Limit，Offset，CAM的影响
+      * 实际统计数量，不受Limit、Offset、CAM的影响。
       */
-    RealCount?: number;
+    RealCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3641,7 +3641,7 @@ export interface DescribeQuotaResponse {
     /**
       * 配额列表
       */
-    QuotaSet?: Array<Quota>;
+    QuotaSet: Array<Quota>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

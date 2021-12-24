@@ -26,7 +26,6 @@ import {
   DescribeAccountPrivilegesResponse,
   CreateDBImportJobRequest,
   DescribeDatabasesRequest,
-  UpgradeDBInstanceRequest,
   DescribeBackupConfigRequest,
   DescribeRoMinScaleResponse,
   CreateAuditRuleResponse,
@@ -58,6 +57,7 @@ import {
   DescribeRoMinScaleRequest,
   DescribeDefaultParamsRequest,
   DBSwitchInfo,
+  StartReplicationResponse,
   ModifyNameOrDescByDpIdResponse,
   StopDBImportJobResponse,
   DescribeDBPriceResponse,
@@ -94,7 +94,6 @@ import {
   BinlogInfo,
   DescribeAccountsRequest,
   CloneItem,
-  StartDelayReplicationResponse,
   DescribeTasksRequest,
   IsolateDBInstanceResponse,
   SlaveConfig,
@@ -153,12 +152,15 @@ import {
   DeleteTimeWindowResponse,
   DescribeBinlogBackupOverviewRequest,
   RollbackTask,
+  StartReplicationRequest,
   DescribeBackupsResponse,
+  ZoneConf,
   CreateAuditPolicyRequest,
   CreateRoInstanceIpRequest,
   ModifyInstanceParamResponse,
   DescribeDBImportRecordsResponse,
   DescribeBackupDatabasesResponse,
+  StopReplicationResponse,
   BackupItem,
   DatabaseName,
   AuditFilter,
@@ -174,10 +176,9 @@ import {
   ModifyParamTemplateResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeProjectSecurityGroupsRequest,
-  ModifyRoReplicationDelayRequest,
   StartBatchRollbackRequest,
   SecurityGroup,
-  ZoneConf,
+  StopReplicationRequest,
   BalanceRoGroupLoadResponse,
   DeviceNetInfo,
   SlaveInfo,
@@ -264,7 +265,6 @@ import {
   DeviceMemInfo,
   ModifyAutoRenewFlagRequest,
   UpgradeDBInstanceEngineVersionRequest,
-  StartDelayReplicationRequest,
   ModifyBackupConfigRequest,
   DeleteDeployGroupsRequest,
   DescribeSlowLogDataRequest,
@@ -277,7 +277,7 @@ import {
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
   DescribeTagsOfInstanceIdsRequest,
-  StopDelayReplicationResponse,
+  UpgradeDBInstanceRequest,
   DescribeTimeWindowResponse,
   DeleteTimeWindowRequest,
   DeleteAuditPolicyResponse,
@@ -313,12 +313,10 @@ import {
   ReleaseResult,
   InstanceInfo,
   OpenWanServiceResponse,
-  ModifyRoReplicationDelayResponse,
   DescribeAuditLogFilesRequest,
   DescribeTagsOfInstanceIdsResponse,
   ModifyAccountPasswordResponse,
   AuditRule,
-  StopDelayReplicationRequest,
   DescribeBinlogsRequest,
   DisassociateSecurityGroupsResponse,
   DescribeDBInstanceGTIDRequest,
@@ -437,6 +435,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupOverviewResponse) => void
   ): Promise<DescribeBackupOverviewResponse> {
     return this.request("DescribeBackupOverview", req, cb)
+  }
+
+  /**
+   * 停止 RO 复制，中断从主实例同步数据。
+   */
+  async StopReplication(
+    req: StopReplicationRequest,
+    cb?: (error: string, rep: StopReplicationResponse) => void
+  ): Promise<StopReplicationResponse> {
+    return this.request("StopReplication", req, cb)
   }
 
   /**
@@ -845,16 +853,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止延迟只读实例的延迟复制。
-   */
-  async StopDelayReplication(
-    req: StopDelayReplicationRequest,
-    cb?: (error: string, rep: StopDelayReplicationResponse) => void
-  ): Promise<StopDelayReplicationResponse> {
-    return this.request("StopDelayReplication", req, cb)
-  }
-
-  /**
      * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
 
 该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为1，且 TaskStatus 为0，表示实例已经发货成功。
@@ -1124,7 +1122,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyRoGroupInfo）用于更新云数据库只读组的信息。包括设置实例延迟超限剔除策略，设置只读实例读权重等。
+   * 本接口（ModifyRoGroupInfo）用于更新云数据库只读组的信息。包括设置实例延迟超限剔除策略，设置只读实例读权重，设置复制延迟时间等。
    */
   async ModifyRoGroupInfo(
     req: ModifyRoGroupInfoRequest,
@@ -1249,16 +1247,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动延迟只读实例的延迟复制。
-   */
-  async StartDelayReplication(
-    req: StartDelayReplicationRequest,
-    cb?: (error: string, rep: StartDelayReplicationResponse) => void
-  ): Promise<StartDelayReplicationResponse> {
-    return this.request("StartDelayReplication", req, cb)
-  }
-
-  /**
    * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
    */
   async ModifyAccountPassword(
@@ -1297,6 +1285,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSlowLogDataResponse) => void
   ): Promise<DescribeSlowLogDataResponse> {
     return this.request("DescribeSlowLogData", req, cb)
+  }
+
+  /**
+   * 开启 RO 复制，从主实例同步数据。
+   */
+  async StartReplication(
+    req: StartReplicationRequest,
+    cb?: (error: string, rep: StartReplicationResponse) => void
+  ): Promise<StartReplicationResponse> {
+    return this.request("StartReplication", req, cb)
   }
 
   /**
@@ -1453,16 +1451,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSupportedPrivilegesResponse) => void
   ): Promise<DescribeSupportedPrivilegesResponse> {
     return this.request("DescribeSupportedPrivileges", req, cb)
-  }
-
-  /**
-   * 修改延迟只读实例的延迟复制时间。
-   */
-  async ModifyRoReplicationDelay(
-    req: ModifyRoReplicationDelayRequest,
-    cb?: (error: string, rep: ModifyRoReplicationDelayResponse) => void
-  ): Promise<ModifyRoReplicationDelayResponse> {
-    return this.request("ModifyRoReplicationDelay", req, cb)
   }
 
   /**

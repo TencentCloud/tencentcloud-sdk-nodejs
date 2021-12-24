@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdatePlugins", req, cb);
     }
     /**
+     * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+     */
+    async DescribeViews(req, cb) {
+        return this.request("DescribeViews", req, cb);
+    }
+    /**
      * 创建指定规格的ES集群实例
      */
     async CreateInstance(req, cb) {
