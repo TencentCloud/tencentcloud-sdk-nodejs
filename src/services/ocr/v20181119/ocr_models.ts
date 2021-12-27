@@ -1962,6 +1962,12 @@ export interface GeneralHandwritingOCRRequest {
    * 是否开启单字的四点定位坐标输出，默认值为false。
    */
   EnableWordPolygon?: boolean
+
+  /**
+      * 文本检测开关，默认值为true。
+设置为false表示直接进行单行识别，可适用于识别单行手写体签名场景。
+      */
+  EnableDetectText?: boolean
 }
 
 /**
@@ -5819,12 +5825,12 @@ export interface GeneralHandwritingOCRResponse {
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  TextDetections?: Array<TextGeneralHandwriting>
+  TextDetections: Array<TextGeneralHandwriting>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  Angel?: number
+  Angel: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

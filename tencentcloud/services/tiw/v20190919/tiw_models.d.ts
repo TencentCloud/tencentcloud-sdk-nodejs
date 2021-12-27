@@ -1381,7 +1381,7 @@ export interface CreateSnapshotTaskRequest {
       */
     Whiteboard: SnapshotWhiteboard;
     /**
-      * 白板房间SdkAppId
+      * 白板房间 `SdkAppId`
       */
     SdkAppId: number;
     /**
@@ -1393,9 +1393,19 @@ export interface CreateSnapshotTaskRequest {
       */
     CallbackURL?: string;
     /**
-      * 白板板书文件COS存储参数， 不填默认存储在公共存储桶，公共存储桶的数据仅保存3天
+      * 白板板书文件 `COS` 存储参数， 不填默认存储在公共存储桶，公共存储桶的数据仅保存3天
       */
     COS?: SnapshotCOS;
+    /**
+      * 白板板书生成模式，默认为 `AllMarks`。取值说明如下：
+
+`AllMarks` - 全量模式，即对于客户端每一次调用 `addSnapshotMark` 接口打上的白板板书生成标志全部都会生成对应的白板板书图片。
+
+`LatestMarksOnly` - 单页去重模式，即对于客户端在同一页白板上多次调用 `addSnapshotMark` 打上的白板板书生成标志仅保留最新一次标志来生成对应白板页的白板板书图片。
+
+（**注意：`LatestMarksOnly` 模式只有客户端使用v2.6.8及以上版本的白板SDK调用 `addSnapshotMark` 时才生效，否则即使在调用本API是指定了 `LatestMarksOnly` 模式，服务后台会使用默认的 `AllMarks` 模式生成白板板书**）
+      */
+    SnapshotMode?: string;
 }
 /**
  * DescribeTranscodeCallback返回参数结构体
