@@ -39,5 +39,11 @@ class Client extends abstract_client_1.AbstractClient {
     async BindOrganizationMemberAuthAccount(req, cb) {
         return this.request("BindOrganizationMemberAuthAccount", req, cb);
     }
+    /**
+     * 获取企业组织信息
+     */
+    async DescribeOrganization(req, cb) {
+        return this.request("DescribeOrganization", req, cb);
+    }
 }
 exports.Client = Client;

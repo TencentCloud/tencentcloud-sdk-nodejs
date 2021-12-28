@@ -18,10 +18,13 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  OrgPermission,
+  DescribeOrganizationResponse,
   BindOrganizationMemberAuthAccountRequest,
+  CreateOrganizationMemberRequest,
+  DescribeOrganizationRequest,
   BindOrganizationMemberAuthAccountResponse,
   CreateOrganizationMemberResponse,
-  CreateOrganizationMemberRequest,
 } from "./organization_models"
 
 /**
@@ -51,5 +54,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindOrganizationMemberAuthAccountResponse) => void
   ): Promise<BindOrganizationMemberAuthAccountResponse> {
     return this.request("BindOrganizationMemberAuthAccount", req, cb)
+  }
+
+  /**
+   * 获取企业组织信息
+   */
+  async DescribeOrganization(
+    req: DescribeOrganizationRequest,
+    cb?: (error: string, rep: DescribeOrganizationResponse) => void
+  ): Promise<DescribeOrganizationResponse> {
+    return this.request("DescribeOrganization", req, cb)
   }
 }
