@@ -280,12 +280,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqTopicDetail", req, cb);
     }
     /**
-     * 获取生产者列表，仅显示在线的生产者
-     */
-    async DescribeProducers(req, cb) {
-        return this.request("DescribeProducers", req, cb);
-    }
-    /**
      * 删除Amqp队列
      */
     async DeleteAMQPQueue(req, cb) {

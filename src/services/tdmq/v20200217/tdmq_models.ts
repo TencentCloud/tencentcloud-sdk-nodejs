@@ -1333,33 +1333,6 @@ export interface CreateEnvironmentResponse {
 }
 
 /**
- * 生产者
- */
-export interface Producer {
-  /**
-   * 环境（命名空间）名称。
-   */
-  EnvironmentId: string
-
-  /**
-   * 主题名称。
-   */
-  TopicName: string
-
-  /**
-      * 连接数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CountConnect: number
-
-  /**
-      * 连接集合。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ConnectionSets: Array<Connection>
-}
-
-/**
  * CreateSubscription返回参数结构体
  */
 export interface CreateSubscriptionResponse {
@@ -5522,41 +5495,6 @@ export interface CreateRoleRequest {
 }
 
 /**
- * DescribeProducers请求参数结构体
- */
-export interface DescribeProducersRequest {
-  /**
-   * 环境（命名空间）名称。
-   */
-  EnvironmentId: string
-
-  /**
-   * 主题名。
-   */
-  TopicName: string
-
-  /**
-   * 起始下标，不填默认为0。
-   */
-  Offset?: number
-
-  /**
-   * 返回数量，不填则默认为10，最大值为20。
-   */
-  Limit?: number
-
-  /**
-   * 生产者名称，模糊匹配。
-   */
-  ProducerName?: string
-
-  /**
-   * Pulsar 集群的ID
-   */
-  ClusterId?: string
-}
-
-/**
  * ModifyEnvironmentRole请求参数结构体
  */
 export interface ModifyEnvironmentRoleRequest {
@@ -5774,26 +5712,6 @@ export interface DescribeAMQPExchangesRequest {
    * 过滤查询内部或者外部exchange
    */
   FilterInternal?: boolean
-}
-
-/**
- * DescribeProducers返回参数结构体
- */
-export interface DescribeProducersResponse {
-  /**
-   * 生产者集合数组。
-   */
-  ProducerSets: Array<Producer>
-
-  /**
-   * 记录总数。
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6184,53 +6102,6 @@ export interface ModifyRocketMQGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 生产者连接实例
- */
-export interface Connection {
-  /**
-      * 生产者地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Address: string
-
-  /**
-      * 主题分区。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Partitions: number
-
-  /**
-      * 生产者版本。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClientVersion: string
-
-  /**
-      * 生产者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProducerName: string
-
-  /**
-      * 生产者ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProducerId: string
-
-  /**
-      * 消息平均大小(byte)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AverageMsgSize: string
-
-  /**
-      * 生成速率(byte/秒)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MsgThroughputIn: string
 }
 
 /**

@@ -18,23 +18,31 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  OutputDescribeRiskModel,
   QQAccountInfo,
   ManageMarketingRiskRequest,
-  OutputManageMarketingRisk,
-  OnlineScamInfo,
-  InputManageMarketingRisk,
-  OtherAccountInfo,
-  DescribeRiskModelResponse,
+  DescribeRiskTrendsRequest,
+  DescribeRiskAssessmentRequest,
   AccountInfo,
-  OutputDescribeRiskModelValue,
-  DescribeRiskModelRequest,
-  InputCryptoManageMarketingRisk,
-  SponsorInfo,
+  OutputFrontRiskValue,
+  DescribeRiskAssessmentResponse,
+  OutputManageMarketingRiskValue,
+  OutputFrontRiskData,
+  OutputFrontRisk,
+  InputFrontRisk,
   ManageMarketingRiskResponse,
   InputDetails,
-  OutputManageMarketingRiskValue,
   WeChatAccountInfo,
+  OutputDescribeRiskModel,
+  OutputManageMarketingRisk,
+  OtherAccountInfo,
+  DescribeRiskModelResponse,
+  InputManageMarketingRisk,
+  InputCryptoManageMarketingRisk,
+  SponsorInfo,
+  OnlineScamInfo,
+  OutputDescribeRiskModelValue,
+  DescribeRiskTrendsResponse,
+  DescribeRiskModelRequest,
   InputDescribeRiskModelData,
 } from "./rce_models"
 
@@ -55,6 +63,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskModelResponse) => void
   ): Promise<DescribeRiskModelResponse> {
     return this.request("DescribeRiskModel", req, cb)
+  }
+
+  /**
+   * 以图表形式展示三种请求状态的趋势变化
+   */
+  async DescribeRiskTrends(
+    req: DescribeRiskTrendsRequest,
+    cb?: (error: string, rep: DescribeRiskTrendsResponse) => void
+  ): Promise<DescribeRiskTrendsResponse> {
+    return this.request("DescribeRiskTrends", req, cb)
+  }
+
+  /**
+   * 此接口用于查询风险评估结果
+   */
+  async DescribeRiskAssessment(
+    req?: DescribeRiskAssessmentRequest,
+    cb?: (error: string, rep: DescribeRiskAssessmentResponse) => void
+  ): Promise<DescribeRiskAssessmentResponse> {
+    return this.request("DescribeRiskAssessment", req, cb)
   }
 
   /**

@@ -58,7 +58,6 @@ import {
   Environment,
   CmqQueue,
   CreateEnvironmentResponse,
-  Producer,
   CreateSubscriptionResponse,
   DeleteAMQPQueueResponse,
   ModifyCmqTopicAttributeResponse,
@@ -226,7 +225,6 @@ import {
   DescribeRocketMQGroupsRequest,
   DescribeRocketMQClustersResponse,
   CreateRoleRequest,
-  DescribeProducersRequest,
   ModifyEnvironmentRoleRequest,
   DescribeEnvironmentAttributesResponse,
   Role,
@@ -234,7 +232,6 @@ import {
   Sort,
   AMQPClusterConfig,
   DescribeAMQPExchangesRequest,
-  DescribeProducersResponse,
   CreateRocketMQNamespaceResponse,
   ModifyAMQPExchangeRequest,
   SendBatchMessagesRequest,
@@ -251,7 +248,6 @@ import {
   SendCmqMsgRequest,
   ModifyCmqQueueAttributeRequest,
   ModifyRocketMQGroupResponse,
-  Connection,
   AMQPClusterDetail,
   DescribeClusterDetailResponse,
   SendMessagesRequest,
@@ -687,16 +683,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCmqTopicDetailResponse) => void
   ): Promise<DescribeCmqTopicDetailResponse> {
     return this.request("DescribeCmqTopicDetail", req, cb)
-  }
-
-  /**
-   * 获取生产者列表，仅显示在线的生产者
-   */
-  async DescribeProducers(
-    req: DescribeProducersRequest,
-    cb?: (error: string, rep: DescribeProducersResponse) => void
-  ): Promise<DescribeProducersResponse> {
-    return this.request("DescribeProducers", req, cb)
   }
 
   /**

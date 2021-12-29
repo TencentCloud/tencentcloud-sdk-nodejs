@@ -438,16 +438,6 @@ it("tdmq.v20200217.DescribeCmqTopicDetail", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeProducers", async function () {
-    try {
-       const data = await client.DescribeProducers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmq.v20200217.DeleteAMQPQueue", async function () {
     try {
        const data = await client.DeleteAMQPQueue({})
