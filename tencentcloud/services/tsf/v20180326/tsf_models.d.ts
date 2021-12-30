@@ -814,6 +814,20 @@ export interface ChangeApiUsableStatusRequest {
     UsableStatus: string;
 }
 /**
+ * DescribeMicroservices返回参数结构体
+ */
+export interface DescribeMicroservicesResponse {
+    /**
+      * 微服务分页列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: TsfPageMicroservice;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeApiRateLimitRules请求参数结构体
  */
 export interface DescribeApiRateLimitRulesRequest {
@@ -2051,14 +2065,13 @@ export interface DeleteImageTag {
     TagName: string;
 }
 /**
- * DescribeMicroservices返回参数结构体
+ * DescribeContainerGroupDeployInfo返回参数结构体
  */
-export interface DescribeMicroservicesResponse {
+export interface DescribeContainerGroupDeployInfoResponse {
     /**
-      * 微服务分页列表信息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 获取部署组
       */
-    Result: TsfPageMicroservice;
+    Result: ContainerGroupDeploy;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3932,6 +3945,171 @@ export interface DescribeGroupUseDetailResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ *  获取部署组
+ */
+export interface ContainerGroupDeploy {
+    /**
+      * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupId: string;
+    /**
+      * 分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupName: string;
+    /**
+      * 实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceNum: number;
+    /**
+      * 已启动实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurrentNum: number;
+    /**
+      * 镜像server
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Server: string;
+    /**
+      * 镜像名，如/tsf/nginx
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reponame: string;
+    /**
+      * 镜像版本名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagName: string;
+    /**
+      * 业务容器初始分配的 CPU 核数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CpuRequest: string;
+    /**
+      * 业务容器最大分配的 CPU 核数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CpuLimit: string;
+    /**
+      * 业务容器初始分配的内存 MiB 数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MemRequest: string;
+    /**
+      * 业务容器最大分配的内存 MiB 数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MemLimit: string;
+    /**
+      * 0:公网 1:集群内访问 2：NodePort
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessType: number;
+    /**
+      * 端口映射
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProtocolPorts: Array<ProtocolPort>;
+    /**
+      * 更新方式：0:快速更新 1:滚动更新
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateType: number;
+    /**
+      * 更新间隔,单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateIvl: number;
+    /**
+      * jvm参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JvmOpts: string;
+    /**
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId: string;
+    /**
+      * agent容器初始分配的 CPU 核数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentCpuRequest: string;
+    /**
+      * agent容器最大分配的 CPU 核数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentCpuLimit: string;
+    /**
+      * agent容器初始分配的内存 MiB 数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentMemRequest: string;
+    /**
+      * agent容器最大分配的内存 MiB 数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentMemLimit: string;
+    /**
+      * istioproxy容器初始分配的 CPU 核数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IstioCpuRequest: string;
+    /**
+      * istioproxy容器最大分配的 CPU 核数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IstioCpuLimit: string;
+    /**
+      * istioproxy容器初始分配的内存 MiB 数，对应 K8S request
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IstioMemRequest: string;
+    /**
+      * istioproxy容器最大分配的内存 MiB 数，对应 K8S limit
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IstioMemLimit: string;
+    /**
+      * 部署组的环境变量数组，这里没有展示 tsf 使用的环境变量，只展示了用户设置的环境变量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Envs: Array<Env>;
+    /**
+      * 健康检查配置信息，若不指定该参数，则默认不设置健康检查。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HealthCheckSettings: HealthCheckSettings;
+    /**
+      * 是否部署Agent容器
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployAgent: boolean;
+    /**
+      * 部署组备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias: string;
+    /**
+      * 是否创建 k8s service
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DisableService: boolean;
+    /**
+      * service 是否为 headless 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeadlessService: boolean;
+    /**
+      * TcrRepoInfo值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TcrRepoInfo: TcrRepoInfo;
 }
 /**
  * Tsf命名空间分页对象
@@ -8131,6 +8309,15 @@ export interface DescribeGroupInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeContainerGroupDeployInfo请求参数结构体
+ */
+export interface DescribeContainerGroupDeployInfoRequest {
+    /**
+      * 实例所属 groupId
+      */
+    GroupId: string;
 }
 /**
  * OperateApplicationTcrBinding返回参数结构体

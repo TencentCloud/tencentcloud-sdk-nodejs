@@ -192,7 +192,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCertificate", req, cb);
     }
     /**
-     * 本接口（DescribeAccessRegionsByDestRegion）根据源站区域查询可用的加速区域列表
+     * 本接口（DescribeAccessRegionsByDestRegion）根据源站区域查询可用的加速区域列表。
      */
     async DescribeAccessRegionsByDestRegion(req, cb) {
         return this.request("DescribeAccessRegionsByDestRegion", req, cb);

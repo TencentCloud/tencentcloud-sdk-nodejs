@@ -118,7 +118,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCertificate(req: DeleteCertificateRequest, cb?: (error: string, rep: DeleteCertificateResponse) => void): Promise<DeleteCertificateResponse>;
     /**
-     * 本接口（DescribeAccessRegionsByDestRegion）根据源站区域查询可用的加速区域列表
+     * 本接口（DescribeAccessRegionsByDestRegion）根据源站区域查询可用的加速区域列表。
      */
     DescribeAccessRegionsByDestRegion(req: DescribeAccessRegionsByDestRegionRequest, cb?: (error: string, rep: DescribeAccessRegionsByDestRegionResponse) => void): Promise<DescribeAccessRegionsByDestRegionResponse>;
     /**

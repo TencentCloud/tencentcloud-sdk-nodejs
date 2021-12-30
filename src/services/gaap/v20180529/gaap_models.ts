@@ -1787,6 +1787,7 @@ AccessRegion - String - 是否必填：否 - （过滤条件）按照接入地�
 RealServerRegion - String - 是否必填：否 - （过滤条件）按照源站地域过滤。
 GroupId - String - 是否必填：否 - （过滤条件）按照通道组ID过滤。
 IPAddressVersion - String - 是否必填：否 - （过滤条件）按照IP版本过滤。
+PackageType - String - 是否必填：否 - （过滤条件）按照通道套餐类型过滤。
       */
   Filters?: Array<Filter>
 
@@ -2653,7 +2654,7 @@ export interface DescribeAccessRegionsByDestRegionRequest {
   IPAddressVersion?: string
 
   /**
-   * 通道组类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+   * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
    */
   PackageType?: string
 }
@@ -3048,9 +3049,14 @@ export interface CreateProxyRequest {
   IPAddressVersion?: string
 
   /**
-   * 网络类型，可取值：normal、cn2，默认值normal
+   * 网络类型，normal表示常规BGP，cn2表示精品BGP，triple表示三网
    */
   NetworkType?: string
+
+  /**
+   * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
+   */
+  PackageType?: string
 }
 
 /**
@@ -3918,7 +3924,7 @@ export interface ModifyHTTPSListenerAttributeResponse {
 }
 
 /**
- * 根据源站查询的可用加速区域信息及对应的可选带宽和并发量
+ * 根据源站查询的可用加速区域信息及对应的可选带宽和并发量。
  */
 export interface AccessRegionDetial {
   /**
@@ -4729,7 +4735,7 @@ export interface CheckProxyCreateRequest {
   NetworkType?: string
 
   /**
-   * 通道组类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+   * 通道套餐类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
    */
   PackageType?: string
 }
@@ -4744,7 +4750,7 @@ export interface DescribeRegionAndPriceRequest {
   IPAddressVersion?: string
 
   /**
-   * 通道组类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+   * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
    */
   PackageType?: string
 }
@@ -5064,7 +5070,7 @@ export interface InquiryPriceCreateProxyRequest {
   NetworkType?: string
 
   /**
-   * 通道组类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+   * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
    */
   PackageType?: string
 }
@@ -5341,7 +5347,8 @@ CLONING表示复制中。
   NetworkType: string
 
   /**
-      * 通道套餐类型：Thunder表示标准通道，Accelerator表示游戏加速器通道。
+      * 通道套餐类型：Thunder表示标准通道，Accelerator表示游戏加速器通道，
+CrossBorder表示跨境通道。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PackageType: string

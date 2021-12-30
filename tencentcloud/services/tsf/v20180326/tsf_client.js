@@ -257,6 +257,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeApplications", req, cb);
     }
     /**
+     *  获取部署组详情
+     */
+    async DescribeContainerGroupDeployInfo(req, cb) {
+        return this.request("DescribeContainerGroupDeployInfo", req, cb);
+    }
+    /**
      * 查询网关API监控明细数据（仅单元化网关），非单元化网关使用DescribeApiUseDetail
      */
     async DescribeUnitApiUseDetail(req, cb) {

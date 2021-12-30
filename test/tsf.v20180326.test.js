@@ -398,6 +398,16 @@ it("tsf.v20180326.DescribeApplications", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeContainerGroupDeployInfo", async function () {
+    try {
+       const data = await client.DescribeContainerGroupDeployInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeUnitApiUseDetail", async function () {
     try {
        const data = await client.DescribeUnitApiUseDetail({})

@@ -131,6 +131,101 @@ export interface CreateOrganizationMemberRequest {
     RecordId?: number;
 }
 /**
+ * BindOrganizationMemberAuthAccount返回参数结构体
+ */
+export interface BindOrganizationMemberAuthAccountResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeOrganizationMembers请求参数结构体
+ */
+export interface DescribeOrganizationMembersRequest {
+    /**
+      * 偏移量
+      */
+    Offset: number;
+    /**
+      * 限制数目
+      */
+    Limit: number;
+    /**
+      * 国际站：en，国内站：zh
+      */
+    Lang?: string;
+    /**
+      * 成员名或者成员ID搜索
+      */
+    SearchKey?: string;
+}
+/**
+ * 企业组织成员
+ */
+export interface OrgMember {
+    /**
+      * 成员Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MemberUin: number;
+    /**
+      * 成员名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 成员类型，邀请：Invite， 创建：Create
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MemberType: string;
+    /**
+      * 关系策略类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgPolicyType: string;
+    /**
+      * 关系策略名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgPolicyName: string;
+    /**
+      * 关系策略权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgPermission: Array<OrgPermission>;
+    /**
+      * 所属节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeId: number;
+    /**
+      * 所属节点名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeName: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 是否允许成员退出。允许：Allow，不允许：Denied。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsAllowQuit: string;
+}
+/**
  * DescribeOrganization请求参数结构体
  */
 export interface DescribeOrganizationRequest {
@@ -140,9 +235,17 @@ export interface DescribeOrganizationRequest {
     Lang?: string;
 }
 /**
- * BindOrganizationMemberAuthAccount返回参数结构体
+ * DescribeOrganizationMembers返回参数结构体
  */
-export interface BindOrganizationMemberAuthAccountResponse {
+export interface DescribeOrganizationMembersResponse {
+    /**
+      * 成员列表
+      */
+    Items: Array<OrgMember>;
+    /**
+      * 总数目
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

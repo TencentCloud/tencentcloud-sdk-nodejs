@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("organization.tencentcloudapi.com", "2021-03-31", clientConfig);
     }
     /**
+     * 获取企业组织成员列表
+     */
+    async DescribeOrganizationMembers(req, cb) {
+        return this.request("DescribeOrganizationMembers", req, cb);
+    }
+    /**
      * 创建组织成员
      */
     async CreateOrganizationMember(req, cb) {

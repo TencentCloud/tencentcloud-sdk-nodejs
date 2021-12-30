@@ -61,6 +61,7 @@ import {
   TaskRecordPage,
   DeleteServerlessGroupRequest,
   ChangeApiUsableStatusRequest,
+  DescribeMicroservicesResponse,
   DescribeApiRateLimitRulesRequest,
   DescribeApiGroupsResponse,
   DeletePublicConfigRequest,
@@ -111,7 +112,7 @@ import {
   DescribePkgsResponse,
   DescribeSimpleNamespacesResponse,
   DeleteImageTag,
-  DescribeMicroservicesResponse,
+  DescribeContainerGroupDeployInfoResponse,
   TaskLastExecuteStatus,
   DescribePublicConfigRequest,
   ImageRepository,
@@ -198,6 +199,7 @@ import {
   DescribeApiRateLimitRulesResponse,
   AddClusterInstancesRequest,
   DescribeGroupUseDetailResponse,
+  ContainerGroupDeploy,
   TsfPageNamespace,
   VolumeInfo,
   UpdateApiTimeoutsRequest,
@@ -377,6 +379,7 @@ import {
   UpdateApiRateLimitRulesResponse,
   GroupUnitApiUseStatistics,
   DescribeGroupInstancesResponse,
+  DescribeContainerGroupDeployInfoRequest,
   OperateApplicationTcrBindingResponse,
   DescribePublicConfigReleaseLogsResponse,
   DeleteApiGroupRequest,
@@ -887,6 +890,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeApplicationsResponse) => void
   ): Promise<DescribeApplicationsResponse> {
     return this.request("DescribeApplications", req, cb)
+  }
+
+  /**
+   *  获取部署组详情
+   */
+  async DescribeContainerGroupDeployInfo(
+    req: DescribeContainerGroupDeployInfoRequest,
+    cb?: (error: string, rep: DescribeContainerGroupDeployInfoResponse) => void
+  ): Promise<DescribeContainerGroupDeployInfoResponse> {
+    return this.request("DescribeContainerGroupDeployInfo", req, cb)
   }
 
   /**

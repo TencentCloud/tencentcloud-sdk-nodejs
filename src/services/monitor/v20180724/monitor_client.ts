@@ -37,6 +37,7 @@ import {
   PutMonitorDataResponse,
   DescribePolicyGroupInfoRequest,
   UpdateAlertRuleStateResponse,
+  BindingPolicyTagResponse,
   DeleteServiceDiscoveryResponse,
   DescribePolicyGroupInfoCallback,
   AlarmHistoryMetric,
@@ -46,6 +47,7 @@ import {
   DescribePolicyGroupInfoResponse,
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
+  PolicyTag,
   PrometheusInstancesItem,
   PutMonitorDataRequest,
   CreateAlertRuleResponse,
@@ -92,6 +94,7 @@ import {
   DescribeAlarmNoticeCallbacksRequest,
   DescribeProductEventListEventsDimensions,
   ModifyAlarmPolicyConditionResponse,
+  InstanceGroups,
   Dimension,
   PrometheusInstanceGrantInfo,
   DescribeBindingPolicyObjectListInstance,
@@ -126,7 +129,7 @@ import {
   ModifyAlarmPolicyStatusRequest,
   MetricData,
   AlarmEvent,
-  DescribePolicyGroupInfoCondition,
+  BindingPolicyTagRequest,
   UpdateAlertRuleRequest,
   DescribeBindingPolicyObjectListResponse,
   DescribePolicyGroupInfoConditionTpl,
@@ -176,7 +179,7 @@ import {
   DescribeAlarmNoticeRequest,
   DescribeBindingPolicyObjectListDimension,
   CreateAlarmNoticeRequest,
-  InstanceGroups,
+  DescribePolicyGroupInfoCondition,
   GetMonitorDataResponse,
   ReceiverInfo,
   UnBindingAllPolicyObjectRequest,
@@ -476,6 +479,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void
   ): Promise<DescribeAlarmNoticesResponse> {
     return this.request("DescribeAlarmNotices", req, cb)
+  }
+
+  /**
+   * 策略绑定标签
+   */
+  async BindingPolicyTag(
+    req: BindingPolicyTagRequest,
+    cb?: (error: string, rep: BindingPolicyTagResponse) => void
+  ): Promise<BindingPolicyTagResponse> {
+    return this.request("BindingPolicyTag", req, cb)
   }
 
   /**

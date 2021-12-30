@@ -22,8 +22,11 @@ import {
   DescribeOrganizationResponse,
   BindOrganizationMemberAuthAccountRequest,
   CreateOrganizationMemberRequest,
-  DescribeOrganizationRequest,
   BindOrganizationMemberAuthAccountResponse,
+  DescribeOrganizationMembersRequest,
+  OrgMember,
+  DescribeOrganizationRequest,
+  DescribeOrganizationMembersResponse,
   CreateOrganizationMemberResponse,
 } from "./organization_models"
 
@@ -34,6 +37,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("organization.tencentcloudapi.com", "2021-03-31", clientConfig)
+  }
+
+  /**
+   * 获取企业组织成员列表
+   */
+  async DescribeOrganizationMembers(
+    req: DescribeOrganizationMembersRequest,
+    cb?: (error: string, rep: DescribeOrganizationMembersResponse) => void
+  ): Promise<DescribeOrganizationMembersResponse> {
+    return this.request("DescribeOrganizationMembers", req, cb)
   }
 
   /**

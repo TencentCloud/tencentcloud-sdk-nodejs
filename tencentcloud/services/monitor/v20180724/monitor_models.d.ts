@@ -408,6 +408,15 @@ export interface UpdateAlertRuleStateResponse {
     RequestId?: string;
 }
 /**
+ * BindingPolicyTag返回参数结构体
+ */
+export interface BindingPolicyTagResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteServiceDiscovery返回参数结构体
  */
 export interface DeleteServiceDiscoveryResponse {
@@ -657,6 +666,19 @@ export interface DeleteAlarmPolicyRequest {
       * 告警策略 ID 列表
       */
     PolicyIds: Array<string>;
+}
+/**
+ * 策略标签
+ */
+export interface PolicyTag {
+    /**
+      * 标签Key
+      */
+    Key: string;
+    /**
+      * 标签Value
+      */
+    Value: string;
 }
 /**
  * Prometheus 服务响应体
@@ -1872,6 +1894,19 @@ export interface ModifyAlarmPolicyConditionResponse {
     RequestId?: string;
 }
 /**
+ * 告警对象所属实例组
+ */
+export interface InstanceGroups {
+    /**
+      * 实例组 Id
+      */
+    Id: number;
+    /**
+      * 实例组名称
+      */
+    Name: string;
+}
+/**
  * 实例对象的维度组合
  */
 export interface Dimension {
@@ -2741,57 +2776,33 @@ export interface AlarmEvent {
     Namespace: string;
 }
 /**
- * 查询策略输出的阈值告警条件
+ * BindingPolicyTag请求参数结构体
  */
-export interface DescribePolicyGroupInfoCondition {
+export interface BindingPolicyTagRequest {
     /**
-      * 指标名称
+      * 固定取值 monitor
       */
-    MetricShowName: string;
+    Module: string;
     /**
-      * 数据聚合周期(单位秒)
+      * 策略ID
       */
-    Period: number;
+    PolicyId: string;
     /**
-      * 指标id
+      * 用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID
       */
-    MetricId: number;
+    GroupId: string;
     /**
-      * 阈值规则id
+      * 策略标签
       */
-    RuleId: number;
+    Tag: PolicyTag;
     /**
-      * 指标单位
+      * 产品类型
       */
-    Unit: string;
+    ServiceType: string;
     /**
-      * 告警发送收敛类型。0连续告警，1指数告警
+      * 实例分组ID
       */
-    AlarmNotifyType: number;
-    /**
-      * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
-      */
-    AlarmNotifyPeriod: number;
-    /**
-      * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等，7表示日同比上涨，8表示日同比下降，9表示周同比上涨，10表示周同比下降，11表示周期环比上涨，12表示周期环比下降
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CalcType: number;
-    /**
-      * 检测阈值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CalcValue: string;
-    /**
-      * 持续多长时间触发规则会告警(单位秒)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ContinueTime: number;
-    /**
-      * 告警指标名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MetricName: string;
+    InstanceGroupId?: number;
 }
 /**
  * UpdateAlertRule请求参数结构体
@@ -4374,17 +4385,57 @@ export interface CreateAlarmNoticeRequest {
     URLNotices?: Array<URLNotice>;
 }
 /**
- * 告警对象所属实例组
+ * 查询策略输出的阈值告警条件
  */
-export interface InstanceGroups {
+export interface DescribePolicyGroupInfoCondition {
     /**
-      * 实例组 Id
+      * 指标名称
       */
-    Id: number;
+    MetricShowName: string;
     /**
-      * 实例组名称
+      * 数据聚合周期(单位秒)
       */
-    Name: string;
+    Period: number;
+    /**
+      * 指标id
+      */
+    MetricId: number;
+    /**
+      * 阈值规则id
+      */
+    RuleId: number;
+    /**
+      * 指标单位
+      */
+    Unit: string;
+    /**
+      * 告警发送收敛类型。0连续告警，1指数告警
+      */
+    AlarmNotifyType: number;
+    /**
+      * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+      */
+    AlarmNotifyPeriod: number;
+    /**
+      * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等，7表示日同比上涨，8表示日同比下降，9表示周同比上涨，10表示周同比下降，11表示周期环比上涨，12表示周期环比下降
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CalcType: number;
+    /**
+      * 检测阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CalcValue: string;
+    /**
+      * 持续多长时间触发规则会告警(单位秒)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContinueTime: number;
+    /**
+      * 告警指标名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetricName: string;
 }
 /**
  * GetMonitorData返回参数结构体

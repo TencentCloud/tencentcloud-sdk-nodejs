@@ -199,6 +199,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmNotices", req, cb);
     }
     /**
+     * 策略绑定标签
+     */
+    async BindingPolicyTag(req, cb) {
+        return this.request("BindingPolicyTag", req, cb);
+    }
+    /**
      * 启停告警策略
      */
     async ModifyAlarmPolicyStatus(req, cb) {

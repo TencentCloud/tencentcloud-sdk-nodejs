@@ -146,6 +146,11 @@ export interface GetRequestTargetNodeTypesRequest {
  */
 export interface UpdateInstanceResponse {
     /**
+      * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealName: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -290,6 +295,11 @@ export interface CreateInstanceResponse {
       * 实例ID
       */
     InstanceId: string;
+    /**
+      * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -746,32 +756,32 @@ export interface InstanceInfo {
       */
     EnableHotWarmMode: boolean;
     /**
-      * 冷节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      * 温节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WarmNodeType: string;
     /**
-      * 冷节点个数
+      * 温节点个数
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WarmNodeNum: number;
     /**
-      * 冷节点CPU核数
+      * 温节点CPU核数
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WarmCpuNum: number;
     /**
-      * 冷节点内存内存大小，单位GB
+      * 温节点内存内存大小，单位GB
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WarmMemSize: number;
     /**
-      * 冷节点磁盘类型
+      * 温节点磁盘类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WarmDiskType: string;
     /**
-      * 冷节点磁盘大小，单位GB
+      * 温节点磁盘大小，单位GB
 注意：此字段可能返回 null，表示取不到有效值。
       */
     WarmDiskSize: number;
@@ -859,6 +869,66 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SecurityGroups: Array<string>;
+    /**
+      * 冷节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColdNodeType: string;
+    /**
+      * 冷节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColdNodeNum: number;
+    /**
+      * 冷节点CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColdCpuNum: number;
+    /**
+      * 冷节点内存大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColdMemSize: number;
+    /**
+      * 冷节点磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColdDiskType: string;
+    /**
+      * 冷节点磁盘大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ColdDiskSize: number;
+    /**
+      * 冻节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrozenNodeType: string;
+    /**
+      * 冻节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrozenNodeNum: number;
+    /**
+      * 冻节点CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrozenCpuNum: number;
+    /**
+      * 冻节点内存大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrozenMemSize: number;
+    /**
+      * 冻节点磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrozenDiskType: string;
+    /**
+      * 冻节点磁盘大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FrozenDiskSize: number;
 }
 /**
  * DeleteInstance返回参数结构体
@@ -876,11 +946,11 @@ export interface DescribeInstancesResponse {
     /**
       * 返回的实例个数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例详细信息列表
       */
-    InstanceList?: Array<InstanceInfo>;
+    InstanceList: Array<InstanceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -999,6 +1069,10 @@ export interface DescribeInstancesRequest {
       * 私有网络vip列表
       */
     IpList?: Array<string>;
+    /**
+      * 可用区列表
+      */
+    ZoneList?: Array<string>;
 }
 /**
  * UpdateDiagnoseSettings请求参数结构体
@@ -1227,6 +1301,10 @@ export interface UpdatePluginsRequest {
       * 是否重新安装
       */
     ForceUpdate?: boolean;
+    /**
+      * 0：系统插件
+      */
+    PluginType?: number;
 }
 /**
  * UpdateRequestTargetNodeTypes返回参数结构体
@@ -1279,6 +1357,11 @@ export interface UpdateDiagnoseSettingsResponse {
  * UpgradeLicense返回参数结构体
  */
 export interface UpgradeLicenseResponse {
+    /**
+      * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1483,6 +1566,20 @@ export interface ClusterView {
       * 未分配的分片个数
       */
     UnassignedShardNum: number;
+    /**
+      * 企业版COS存储容量大小，单位GB
+      */
+    TotalCosStorage: number;
+    /**
+      * 企业版集群可搜索快照cos存放的bucket名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SearchableSnapshotCosBucket: string;
+    /**
+      * 企业版集群可搜索快照cos所属appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SearchableSnapshotCosAppId: string;
 }
 /**
  * UpgradeInstance请求参数结构体
