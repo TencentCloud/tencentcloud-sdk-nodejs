@@ -192,7 +192,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除发信模版
+   * 删除发信模板
    */
   async DeleteEmailTemplate(
     req: DeleteEmailTemplateRequest,

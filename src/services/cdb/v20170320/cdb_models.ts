@@ -223,6 +223,11 @@ export interface CreateDBInstanceRequest {
   CageId?: string
 
   /**
+   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模版，"HIGH_PERFORMANCE" - 高性能模版。
+   */
+  ParamTemplateType?: string
+
+  /**
    * 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。
    */
   AlarmPolicyIdList?: Array<string>

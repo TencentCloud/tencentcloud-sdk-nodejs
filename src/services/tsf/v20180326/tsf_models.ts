@@ -3174,14 +3174,24 @@ export interface DeployContainerGroupRequest {
   RepoType?: string
 
   /**
-   * 数据卷信息
+   * 数据卷信息-废弃，请用VolumeInfoList参数
    */
   VolumeInfos?: VolumeInfo
 
   /**
-   * 数据卷挂载点信息
+   * 数据卷挂载点信息-废弃，请用VolumeMountInfoList参数
    */
   VolumeMountInfos?: VolumeMountInfo
+
+  /**
+   * 数据卷信息，list
+   */
+  VolumeInfoList?: Array<VolumeInfo>
+
+  /**
+   * 数据卷挂载点信息，list
+   */
+  VolumeMountInfoList?: Array<VolumeMountInfo>
 }
 
 /**

@@ -53,7 +53,7 @@ export declare class Client extends AbstractClient {
      */
     ListBlackEmailAddress(req: ListBlackEmailAddressRequest, cb?: (error: string, rep: ListBlackEmailAddressResponse) => void): Promise<ListBlackEmailAddressResponse>;
     /**
-     * 删除发信模版
+     * 删除发信模板
      */
     DeleteEmailTemplate(req: DeleteEmailTemplateRequest, cb?: (error: string, rep: DeleteEmailTemplateResponse) => void): Promise<DeleteEmailTemplateResponse>;
     /**

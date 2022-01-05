@@ -21,6 +21,19 @@ export interface DescribeSpecInfoRequest {
     Zone?: string;
 }
 /**
+ * SetAccountUserPrivilege返回参数结构体
+ */
+export interface SetAccountUserPrivilegeResponse {
+    /**
+      * 设置任务ID,用于查询是否设置完成
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * KillOps请求参数结构体
  */
 export interface KillOpsRequest {
@@ -267,25 +280,17 @@ export interface DBInstancePrice {
     DiscountPrice: number;
 }
 /**
- * DescribeBackupAccess返回参数结构体
+ * 备份文件存储信息
  */
-export interface DescribeBackupAccessResponse {
+export interface BackupFile {
     /**
-      * 实例所属地域
+      * 备份文件所属的副本集/分片ID
       */
-    Region?: string;
+    ReplicateSetId: string;
     /**
-      * 备份文件所在存储桶
+      * 备份文件保存路径
       */
-    Bucket?: string;
-    /**
-      * 备份文件的存储信息
-      */
-    Files?: Array<BackupFile>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    File: string;
 }
 /**
  * InquirePriceCreateDBInstances请求参数结构体
@@ -865,6 +870,19 @@ export interface SpecItem {
       * 机器类型，取值：0-HIO，4-HIO10G
       */
     MachineType: string;
+}
+/**
+ * 用户权限
+ */
+export interface Auth {
+    /**
+      * *表示所有数据库,db.name表示特定的name数据库。
+      */
+    NameSpace: string;
+    /**
+      * 用于控制权限,0无权限，1只读，2只写，3读写。
+      */
+    Mask: number;
 }
 /**
  * DescribeSpecInfo返回参数结构体
@@ -1650,17 +1668,25 @@ export interface CurrentOp {
     MicrosecsRunning: number;
 }
 /**
- * 备份文件存储信息
+ * DescribeBackupAccess返回参数结构体
  */
-export interface BackupFile {
+export interface DescribeBackupAccessResponse {
     /**
-      * 备份文件所属的副本集/分片ID
+      * 实例所属地域
       */
-    ReplicateSetId: string;
+    Region?: string;
     /**
-      * 备份文件保存路径
+      * 备份文件所在存储桶
       */
-    File: string;
+    Bucket?: string;
+    /**
+      * 备份文件的存储信息
+      */
+    Files?: Array<BackupFile>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDBBackups返回参数结构体
@@ -1978,6 +2004,23 @@ export interface RenewDBInstancesRequest {
       * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。
       */
     InstanceChargePrepaid: InstanceChargePrepaid;
+}
+/**
+ * SetAccountUserPrivilege请求参数结构体
+ */
+export interface SetAccountUserPrivilegeRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 账号名称
+      */
+    UserName: string;
+    /**
+      * 权限信息
+      */
+    AuthRole: Array<Auth>;
 }
 /**
  * 需要终止的操作

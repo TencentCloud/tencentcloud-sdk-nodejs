@@ -62,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyScalingPolicy", req, cb);
     }
     /**
+     * 本接口（ModifyLoadBalancerTargetAttributes）用于修改伸缩组内负载均衡器的目标规则属性。
+     */
+    async ModifyLoadBalancerTargetAttributes(req, cb) {
+        return this.request("ModifyLoadBalancerTargetAttributes", req, cb);
+    }
+    /**
      * 本接口 (DescribeNotificationConfigurations) 用于查询一个或多个通知的详细信息。
 
 可以根据通知ID、伸缩组ID等信息来查询通知的详细信息。过滤信息详细请见过滤器`Filter`。
@@ -103,6 +109,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeLaunchConfiguration", req, cb);
     }
     /**
+     * 本接口（DetachLoadBalancers）用于从伸缩组移出负载均衡器，本接口不会销毁负载均衡器。
+     */
+    async DetachLoadBalancers(req, cb) {
+        return this.request("DetachLoadBalancers", req, cb);
+    }
+    /**
      * 本接口（AttachInstances）用于将 CVM 实例添加到伸缩组。
 
      */
@@ -120,6 +132,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteScheduledAction(req, cb) {
         return this.request("DeleteScheduledAction", req, cb);
+    }
+    /**
+     * 此接口（AttachLoadBalancers）用于将负载均衡器添加到伸缩组。
+     */
+    async AttachLoadBalancers(req, cb) {
+        return this.request("AttachLoadBalancers", req, cb);
     }
     /**
      * 本接口（DetachInstances）用于从伸缩组移出 CVM 实例，本接口不会销毁实例。

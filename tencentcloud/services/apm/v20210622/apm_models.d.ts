@@ -104,6 +104,26 @@ export interface ApmInstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SlowRequestSavedThreshold: number;
+    /**
+      * cls日志所在地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogRegion: string;
+    /**
+      * 日志来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogSource: string;
+    /**
+      * 日志功能开关 0 关 | 1 开
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsRelatedLog: number;
+    /**
+      * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogTopicID: string;
 }
 /**
  * CreateApmInstance请求参数结构体

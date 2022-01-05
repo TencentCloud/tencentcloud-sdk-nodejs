@@ -3664,6 +3664,18 @@ export interface OverseaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VideoSeek?: VideoSeek
+
+  /**
+      * 回源S3私有鉴权。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AwsPrivateAccess?: AwsPrivateAccess
+
+  /**
+      * 回源OSS私有鉴权。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OssPrivateAccess?: OssPrivateAccess
 }
 
 /**
@@ -5046,8 +5058,7 @@ export interface ListScdnDomainsRequest {
  */
 export interface ServerCert {
   /**
-      * 服务器证书 ID
-在 SSL 证书管理进行证书托管时自动生成
+      * 服务器证书 ID 在 SSL 证书管理进行证书托管时自动生成
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CertId?: string
@@ -6626,6 +6637,18 @@ export interface MainlandConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VideoSeek?: VideoSeek
+
+  /**
+      * 回源S3私有鉴权。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AwsPrivateAccess?: AwsPrivateAccess
+
+  /**
+      * 回源OSS私有鉴权。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OssPrivateAccess?: OssPrivateAccess
 }
 
 /**

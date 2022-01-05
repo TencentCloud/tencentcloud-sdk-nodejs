@@ -2815,6 +2815,11 @@ export interface NodePool {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UserScript: string;
+    /**
+      * 资源标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
 }
 /**
  * 服务事件
@@ -4001,6 +4006,10 @@ export interface ModifyClusterNodePoolRequest {
       * 节点自定义参数
       */
     ExtraArgs?: InstanceExtraArgs;
+    /**
+      * 资源标签
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * 镜像信息
@@ -4115,6 +4124,10 @@ export interface CreateClusterNodePoolRequest {
       * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
       */
     OsCustomizeType?: string;
+    /**
+      * 资源标签
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * 集群高级配置

@@ -411,7 +411,7 @@ export interface UpdateEmailIdentityResponse {
  */
 export interface DeleteEmailTemplateRequest {
     /**
-      * 模版ID
+      * 模板ID
       */
     TemplateID: number;
 }

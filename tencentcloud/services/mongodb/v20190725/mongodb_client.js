@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityGroup", req, cb);
     }
     /**
+     * 账户权限设置。
+     */
+    async SetAccountUserPrivilege(req, cb) {
+        return this.request("SetAccountUserPrivilege", req, cb);
+    }
+    /**
      * 在所有mongos上执行FlushRouterConfig命令
      */
     async FlushInstanceRouterConfig(req, cb) {

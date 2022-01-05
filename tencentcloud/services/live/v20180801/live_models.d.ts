@@ -1348,6 +1348,19 @@ Oversea：则查询国际/港澳台（境外）数据，
 默认值：5。
       */
     Granularity?: number;
+    /**
+      * 大区，映射表如下：
+China Mainland 中国大陆
+Asia Pacific I 亚太一区
+Asia Pacific II 亚太二区
+Asia Pacific III 亚太三区
+Europe 欧洲
+North America 北美
+South America 南美
+Middle East 中东
+Africa 非洲。
+      */
+    RegionNames?: Array<string>;
 }
 /**
  * CreateLiveRecordRule请求参数结构体
@@ -5714,6 +5727,19 @@ Oversea：则查询国外数据，
       * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
       */
     ServiceName?: string;
+    /**
+      * 大区，映射表如下：
+China Mainland 中国大陆
+Asia Pacific I 亚太一区
+Asia Pacific II 亚太二区
+Asia Pacific III 亚太三区
+Europe 欧洲
+North America 北美
+South America 南美
+Middle East 中东
+Africa 非洲。
+      */
+    RegionNames?: Array<string>;
 }
 /**
  * DescribeLiveRecordRules返回参数结构体

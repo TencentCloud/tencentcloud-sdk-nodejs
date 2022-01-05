@@ -26,13 +26,14 @@ import {
   AutoScalingNotification,
   ModifyScheduledActionRequest,
   DescribeAutoScalingGroupsRequest,
-  CreateAutoScalingGroupResponse,
+  LaunchConfiguration,
   DescribeAccountLimitsResponse,
   CreateLaunchConfigurationResponse,
   Advice,
   CreateLifecycleHookResponse,
   ClearLaunchConfigurationAttributesResponse,
   DescribeAutoScalingGroupsResponse,
+  CreateScheduledActionRequest,
   SystemDisk,
   SpotMarketOptions,
   StopAutoScalingInstancesResponse,
@@ -40,9 +41,9 @@ import {
   InstanceNameSettings,
   DetailedStatusMessage,
   ModifyScheduledActionResponse,
-  CreateAutoScalingGroupFromInstanceRequest,
+  AttachLoadBalancersResponse,
   ExecuteScalingPolicyResponse,
-  ModifyLaunchConfigurationAttributesResponse,
+  DeleteAutoScalingGroupRequest,
   SetInstancesProtectionResponse,
   StartAutoScalingInstancesResponse,
   CompleteLifecycleActionRequest,
@@ -52,20 +53,22 @@ import {
   RemoveInstancesRequest,
   DeleteScalingPolicyResponse,
   Tag,
+  DetachLoadBalancersRequest,
   DescribeAutoScalingInstancesRequest,
-  LimitedLoginSettings,
   ModifyLoadBalancersRequest,
   RemoveInstancesResponse,
   ModifyScalingPolicyResponse,
   SetInstancesProtectionRequest,
   DeleteNotificationConfigurationResponse,
   DetachInstancesResponse,
+  ModifyLaunchConfigurationAttributesResponse,
   CreateLaunchConfigurationRequest,
   AutoScalingGroup,
   AttachInstancesResponse,
   DescribeAutoScalingGroupLastActivitiesResponse,
   DescribeAccountLimitsRequest,
   UpgradeLifecycleHookRequest,
+  DetachLoadBalancersResponse,
   ScalingPolicy,
   DescribeAutoScalingGroupLastActivitiesRequest,
   HostNameSettings,
@@ -75,6 +78,7 @@ import {
   DescribeScheduledActionsResponse,
   ModifyNotificationConfigurationRequest,
   DeleteLifecycleHookRequest,
+  ModifyLoadBalancerTargetAttributesResponse,
   ModifyAutoScalingGroupResponse,
   DeleteLaunchConfigurationRequest,
   ModifyScalingPolicyRequest,
@@ -95,7 +99,7 @@ import {
   CreateAutoScalingGroupFromInstanceResponse,
   DetachInstancesRequest,
   Instance,
-  CreateScheduledActionRequest,
+  DescribeAutoScalingInstancesResponse,
   EnhancedService,
   DeleteLaunchConfigurationResponse,
   DescribeScheduledActionsRequest,
@@ -111,10 +115,10 @@ import {
   Filter,
   DescribeLifecycleHooksRequest,
   ServiceSettings,
-  LaunchConfiguration,
+  CreateAutoScalingGroupResponse,
   TargetAttribute,
   ModifyNotificationConfigurationResponse,
-  DescribeAutoScalingInstancesResponse,
+  LimitedLoginSettings,
   DescribeLifecycleHooksResponse,
   CreateScalingPolicyRequest,
   ScaleInInstancesResponse,
@@ -122,6 +126,7 @@ import {
   DeleteNotificationConfigurationRequest,
   DescribeLaunchConfigurationsRequest,
   NotificationTarget,
+  ModifyLoadBalancerTargetAttributesRequest,
   DeleteAutoScalingGroupResponse,
   LifecycleActionResultInfo,
   AutoScalingGroupAbstract,
@@ -133,10 +138,11 @@ import {
   ForwardLoadBalancer,
   ClearLaunchConfigurationAttributesRequest,
   PreviewPaiDomainNameResponse,
-  DeleteAutoScalingGroupRequest,
+  ForwardLoadBalancerIdentification,
   AutoScalingAdvice,
   StartAutoScalingInstancesRequest,
   AttachInstancesRequest,
+  AttachLoadBalancersRequest,
   SpotMixedAllocationPolicy,
   DescribeScalingPoliciesResponse,
   Activity,
@@ -145,6 +151,7 @@ import {
   RunMonitorServiceEnabled,
   DeleteLifecycleHookResponse,
   ActivtyRelatedInstance,
+  CreateAutoScalingGroupFromInstanceRequest,
   InternetAccessible,
   EnableAutoScalingGroupResponse,
   UpgradeLaunchConfigurationResponse,
@@ -217,6 +224,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyLoadBalancerTargetAttributes）用于修改伸缩组内负载均衡器的目标规则属性。
+   */
+  async ModifyLoadBalancerTargetAttributes(
+    req: ModifyLoadBalancerTargetAttributesRequest,
+    cb?: (error: string, rep: ModifyLoadBalancerTargetAttributesResponse) => void
+  ): Promise<ModifyLoadBalancerTargetAttributesResponse> {
+    return this.request("ModifyLoadBalancerTargetAttributes", req, cb)
+  }
+
+  /**
      * 本接口 (DescribeNotificationConfigurations) 用于查询一个或多个通知的详细信息。
 
 可以根据通知ID、伸缩组ID等信息来查询通知的详细信息。过滤信息详细请见过滤器`Filter`。
@@ -278,6 +295,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DetachLoadBalancers）用于从伸缩组移出负载均衡器，本接口不会销毁负载均衡器。
+   */
+  async DetachLoadBalancers(
+    req: DetachLoadBalancersRequest,
+    cb?: (error: string, rep: DetachLoadBalancersResponse) => void
+  ): Promise<DetachLoadBalancersResponse> {
+    return this.request("DetachLoadBalancers", req, cb)
+  }
+
+  /**
      * 本接口（AttachInstances）用于将 CVM 实例添加到伸缩组。
 
      */
@@ -306,6 +333,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteScheduledActionResponse) => void
   ): Promise<DeleteScheduledActionResponse> {
     return this.request("DeleteScheduledAction", req, cb)
+  }
+
+  /**
+   * 此接口（AttachLoadBalancers）用于将负载均衡器添加到伸缩组。
+   */
+  async AttachLoadBalancers(
+    req: AttachLoadBalancersRequest,
+    cb?: (error: string, rep: AttachLoadBalancersResponse) => void
+  ): Promise<AttachLoadBalancersResponse> {
+    return this.request("AttachLoadBalancers", req, cb)
   }
 
   /**

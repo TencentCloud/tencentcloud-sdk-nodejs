@@ -263,7 +263,7 @@ export interface MergeInfo {
   InputImageFaceRect?: FaceRect
 
   /**
-   * 控制台上传的素材人脸ID
+   * 控制台上传的素材人脸ID，不填默认取最大人脸
    */
   TemplateFaceID?: string
 }

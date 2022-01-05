@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ResetDBInstancePasswordResponse,
   DescribeSpecInfoRequest,
+  SetAccountUserPrivilegeResponse,
   KillOpsRequest,
   CreateDBInstanceRequest,
   DescribeSecurityGroupResponse,
@@ -29,7 +30,7 @@ import {
   CreateBackupDBInstanceResponse,
   ShardInfo,
   DBInstancePrice,
-  DescribeBackupAccessResponse,
+  BackupFile,
   InquirePriceCreateDBInstancesRequest,
   IsolateDBInstanceRequest,
   DescribeSlowLogPatternsResponse,
@@ -52,6 +53,7 @@ import {
   FlushInstanceRouterConfigResponse,
   InquirePriceModifyDBInstanceSpecResponse,
   SpecItem,
+  Auth,
   DescribeSpecInfoResponse,
   InquirePriceRenewDBInstancesResponse,
   ResetDBInstancePasswordRequest,
@@ -87,7 +89,7 @@ import {
   FlushInstanceRouterConfigRequest,
   DBInstanceInfo,
   CurrentOp,
-  BackupFile,
+  DescribeBackupAccessResponse,
   DescribeDBBackupsResponse,
   InstanceDetail,
   ModifyDBInstanceSpecRequest,
@@ -98,6 +100,7 @@ import {
   InstanceChargePrepaid,
   InquirePriceCreateDBInstancesResponse,
   RenewDBInstancesRequest,
+  SetAccountUserPrivilegeRequest,
   Operation,
 } from "./mongodb_models"
 
@@ -158,6 +161,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityGroupResponse) => void
   ): Promise<DescribeSecurityGroupResponse> {
     return this.request("DescribeSecurityGroup", req, cb)
+  }
+
+  /**
+   * 账户权限设置。
+   */
+  async SetAccountUserPrivilege(
+    req: SetAccountUserPrivilegeRequest,
+    cb?: (error: string, rep: SetAccountUserPrivilegeResponse) => void
+  ): Promise<SetAccountUserPrivilegeResponse> {
+    return this.request("SetAccountUserPrivilege", req, cb)
   }
 
   /**

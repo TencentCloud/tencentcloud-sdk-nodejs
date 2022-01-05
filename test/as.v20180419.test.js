@@ -68,6 +68,16 @@ it("as.v20180419.ModifyScalingPolicy", async function () {
     }
 })
 
+it("as.v20180419.ModifyLoadBalancerTargetAttributes", async function () {
+    try {
+       const data = await client.ModifyLoadBalancerTargetAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.DescribeNotificationConfigurations", async function () {
     try {
        const data = await client.DescribeNotificationConfigurations({})
@@ -118,6 +128,16 @@ it("as.v20180419.UpgradeLaunchConfiguration", async function () {
     }
 })
 
+it("as.v20180419.DetachLoadBalancers", async function () {
+    try {
+       const data = await client.DetachLoadBalancers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.AttachInstances", async function () {
     try {
        const data = await client.AttachInstances({})
@@ -141,6 +161,16 @@ it("as.v20180419.DescribeScalingPolicies", async function () {
 it("as.v20180419.DeleteScheduledAction", async function () {
     try {
        const data = await client.DeleteScheduledAction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("as.v20180419.AttachLoadBalancers", async function () {
+    try {
+       const data = await client.AttachLoadBalancers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

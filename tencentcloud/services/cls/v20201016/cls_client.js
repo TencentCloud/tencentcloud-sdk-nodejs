@@ -58,16 +58,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     * 本接口用户获取离线上下文任务的结果
+     * 本接口用于修改索引配置
+
      */
-    async DescribeAsyncContextResult(req, cb) {
-        return this.request("DescribeAsyncContextResult", req, cb);
-    }
-    /**
-     * 本接口用于获取离线上下文任务列表
-     */
-    async DescribeAsyncContextTasks(req, cb) {
-        return this.request("DescribeAsyncContextTasks", req, cb);
+    async ModifyIndex(req, cb) {
+        return this.request("ModifyIndex", req, cb);
     }
     /**
      * 本接口用于获取日志集信息列表。
@@ -76,10 +71,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogsets", req, cb);
     }
     /**
-     * 获取投递任务列表
+     * 本接口用于修改日志集信息
      */
-    async DescribeShipperTasks(req, cb) {
-        return this.request("DescribeShipperTasks", req, cb);
+    async ModifyLogset(req, cb) {
+        return this.request("ModifyLogset", req, cb);
     }
     /**
      * 本接口用于获取日志下载任务列表
@@ -106,12 +101,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
-     * 本接口用户获取离线检索任务的结果
-     */
-    async DescribeAsyncSearchResult(req, cb) {
-        return this.request("DescribeAsyncSearchResult", req, cb);
-    }
-    /**
      * 删除采集规则配置
      */
     async DeleteConfig(req, cb) {
@@ -128,12 +117,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyConsumer(req, cb) {
         return this.request("ModifyConsumer", req, cb);
-    }
-    /**
-     * 本接口用于删除离线检索任务
-     */
-    async DeleteAsyncSearchTask(req, cb) {
-        return this.request("DeleteAsyncSearchTask", req, cb);
     }
     /**
      * 该接口用户创建通知渠道组。
@@ -202,12 +185,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarms", req, cb);
     }
     /**
-     * 本接口用于删除离线上下文任务
-     */
-    async DeleteAsyncContextTask(req, cb) {
-        return this.request("DeleteAsyncContextTask", req, cb);
-    }
-    /**
      * 该接口用于获取通知渠道组列表
      */
     async DescribeAlarmNotices(req, cb) {
@@ -230,13 +207,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAlarmNotice(req, cb) {
         return this.request("DeleteAlarmNotice", req, cb);
-    }
-    /**
-     * 本接口用于修改索引配置
-
-     */
-    async ModifyIndex(req, cb) {
-        return this.request("ModifyIndex", req, cb);
     }
     /**
      * 该接口用于修改通知渠道组
@@ -411,10 +381,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("UploadLog", req, cb);
     }
     /**
-     * 本接口用于创建离线上下文任务
+     * 获取投递任务列表
      */
-    async CreateAsyncContextTask(req, cb) {
-        return this.request("CreateAsyncContextTask", req, cb);
+    async DescribeShipperTasks(req, cb) {
+        return this.request("DescribeShipperTasks", req, cb);
     }
     /**
      * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
@@ -445,12 +415,6 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DeleteIndex(req, cb) {
         return this.request("DeleteIndex", req, cb);
-    }
-    /**
-     * 本接口用户获取离线检索任务列表
-     */
-    async DescribeAsyncSearchTasks(req, cb) {
-        return this.request("DescribeAsyncSearchTasks", req, cb);
     }
     /**
      * 本接口用于删除告警策略。
@@ -501,12 +465,6 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeConfigMachineGroups", req, cb);
     }
     /**
-     * 本接口用于修改日志集信息
-     */
-    async ModifyLogset(req, cb) {
-        return this.request("ModifyLogset", req, cb);
-    }
-    /**
      * 本接口用于删除日志下载任务
      */
     async DeleteExport(req, cb) {
@@ -535,12 +493,6 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async SplitPartition(req, cb) {
         return this.request("SplitPartition", req, cb);
-    }
-    /**
-     * 本接口用于创建离线检索任务
-     */
-    async CreateAsyncSearchTask(req, cb) {
-        return this.request("CreateAsyncSearchTask", req, cb);
     }
 }
 exports.Client = Client;

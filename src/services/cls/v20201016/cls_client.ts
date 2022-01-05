@@ -30,9 +30,6 @@ import {
   DescribeShipperTasksResponse,
   CreateMachineGroupResponse,
   DescribeConfigMachineGroupsRequest,
-  DescribeAsyncContextResultResponse,
-  UploadLogRequest,
-  CreateAsyncContextTaskRequest,
   CreateLogsetRequest,
   LogItem,
   SearchLogResponse,
@@ -41,7 +38,7 @@ import {
   ModifyAlarmResponse,
   DescribeShipperTasksRequest,
   DescribeAlarmsRequest,
-  CreateAsyncContextTaskResponse,
+  MergePartitionRequest,
   DescribeShippersResponse,
   ModifyShipperResponse,
   RetryShipperTaskRequest,
@@ -50,13 +47,10 @@ import {
   DescribeIndexRequest,
   DescribeConfigsResponse,
   CreateLogsetResponse,
-  DeleteAsyncContextTaskResponse,
   DeleteMachineGroupResponse,
   Tag,
-  DescribeAsyncContextResultRequest,
-  DeleteAsyncSearchTaskResponse,
-  DescribeExportsRequest,
-  CreateAsyncSearchTaskRequest,
+  DescribeMachineGroupsRequest,
+  ExtractRuleInfo,
   TopicInfo,
   DescribeConsumerRequest,
   ShipperTaskInfo,
@@ -84,30 +78,25 @@ import {
   RetryShipperTaskResponse,
   SplitPartitionRequest,
   MachineGroupInfo,
-  DescribeMachineGroupsRequest,
-  DescribeAsyncContextTasksResponse,
+  RuleTagInfo,
   CreateIndexRequest,
   DeleteConsumerResponse,
   DescribeTopicsRequest,
   GetAlarmLogResponse,
-  DescribeAsyncSearchTasksRequest,
   CreateTopicRequest,
-  DescribeAsyncSearchResultResponse,
-  DescribeAsyncContextTasksRequest,
+  DescribeExportsRequest,
   AlarmTarget,
   DeleteConfigResponse,
   ModifyIndexResponse,
   DeleteConsumerRequest,
   DeleteIndexRequest,
   DescribeConsumerResponse,
-  ExtractRuleInfo,
-  AsyncContextTask,
+  UploadLogRequest,
   ModifyConsumerResponse,
   DescribeConfigsRequest,
   DeleteConfigRequest,
   AnalysisDimensional,
   LogsetInfo,
-  RuleTagInfo,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
   ModifyConfigRequest,
@@ -116,20 +105,18 @@ import {
   CreateShipperRequest,
   CreateTopicResponse,
   DeleteAlarmResponse,
-  DescribeMachinesResponse,
+  WebCallback,
   DescribeAlarmsResponse,
   CreateAlarmNoticeResponse,
   ModifyTopicResponse,
   CreateConfigRequest,
   CreateShipperResponse,
   DeleteIndexResponse,
-  DeleteAsyncContextTaskRequest,
   ModifyIndexRequest,
   Column,
   CompressInfo,
   ValueInfo,
   GetAlarmLogRequest,
-  DescribeMachinesRequest,
   DeleteShipperResponse,
   ExportInfo,
   ConfigInfo,
@@ -138,12 +125,11 @@ import {
   LogContextInfo,
   ModifyShipperRequest,
   DescribeLogContextResponse,
-  DescribeAsyncSearchResultRequest,
   CreateConsumerRequest,
   AlarmNotice,
   ModifyConfigResponse,
   ModifyAlarmNoticeResponse,
-  DescribeAsyncSearchTasksResponse,
+  DescribeMachinesResponse,
   ContentInfo,
   ApplyConfigToMachineGroupResponse,
   DeleteAlarmRequest,
@@ -152,15 +138,11 @@ import {
   DeleteConfigFromMachineGroupRequest,
   ShipperInfo,
   KeyValueInfo,
-  DeleteAsyncSearchTaskRequest,
   ModifyMachineGroupRequest,
-  MergePartitionRequest,
   DescribeAlarmNoticesRequest,
   NoticeReceiver,
-  AsyncSearchTask,
   Ckafka,
-  WebCallback,
-  CreateAsyncSearchTaskResponse,
+  CreateExportResponse,
   DeleteAlarmNoticeRequest,
   DeleteLogsetRequest,
   MachineInfo,
@@ -181,7 +163,7 @@ import {
   DeleteTopicResponse,
   Filter,
   ConsumerContent,
-  CreateExportResponse,
+  DescribeMachinesRequest,
   KeyRegexInfo,
   MergePartitionResponse,
 } from "./cls_models"
@@ -246,23 +228,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用户获取离线上下文任务的结果
-   */
-  async DescribeAsyncContextResult(
-    req: DescribeAsyncContextResultRequest,
-    cb?: (error: string, rep: DescribeAsyncContextResultResponse) => void
-  ): Promise<DescribeAsyncContextResultResponse> {
-    return this.request("DescribeAsyncContextResult", req, cb)
-  }
+     * 本接口用于修改索引配置
 
-  /**
-   * 本接口用于获取离线上下文任务列表
-   */
-  async DescribeAsyncContextTasks(
-    req: DescribeAsyncContextTasksRequest,
-    cb?: (error: string, rep: DescribeAsyncContextTasksResponse) => void
-  ): Promise<DescribeAsyncContextTasksResponse> {
-    return this.request("DescribeAsyncContextTasks", req, cb)
+     */
+  async ModifyIndex(
+    req: ModifyIndexRequest,
+    cb?: (error: string, rep: ModifyIndexResponse) => void
+  ): Promise<ModifyIndexResponse> {
+    return this.request("ModifyIndex", req, cb)
   }
 
   /**
@@ -276,13 +249,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取投递任务列表
+   * 本接口用于修改日志集信息
    */
-  async DescribeShipperTasks(
-    req: DescribeShipperTasksRequest,
-    cb?: (error: string, rep: DescribeShipperTasksResponse) => void
-  ): Promise<DescribeShipperTasksResponse> {
-    return this.request("DescribeShipperTasks", req, cb)
+  async ModifyLogset(
+    req: ModifyLogsetRequest,
+    cb?: (error: string, rep: ModifyLogsetResponse) => void
+  ): Promise<ModifyLogsetResponse> {
+    return this.request("ModifyLogset", req, cb)
   }
 
   /**
@@ -326,16 +299,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用户获取离线检索任务的结果
-   */
-  async DescribeAsyncSearchResult(
-    req: DescribeAsyncSearchResultRequest,
-    cb?: (error: string, rep: DescribeAsyncSearchResultResponse) => void
-  ): Promise<DescribeAsyncSearchResultResponse> {
-    return this.request("DescribeAsyncSearchResult", req, cb)
-  }
-
-  /**
    * 删除采集规则配置
    */
   async DeleteConfig(
@@ -363,16 +326,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyConsumerResponse) => void
   ): Promise<ModifyConsumerResponse> {
     return this.request("ModifyConsumer", req, cb)
-  }
-
-  /**
-   * 本接口用于删除离线检索任务
-   */
-  async DeleteAsyncSearchTask(
-    req: DeleteAsyncSearchTaskRequest,
-    cb?: (error: string, rep: DeleteAsyncSearchTaskResponse) => void
-  ): Promise<DeleteAsyncSearchTaskResponse> {
-    return this.request("DeleteAsyncSearchTask", req, cb)
   }
 
   /**
@@ -486,16 +439,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于删除离线上下文任务
-   */
-  async DeleteAsyncContextTask(
-    req: DeleteAsyncContextTaskRequest,
-    cb?: (error: string, rep: DeleteAsyncContextTaskResponse) => void
-  ): Promise<DeleteAsyncContextTaskResponse> {
-    return this.request("DeleteAsyncContextTask", req, cb)
-  }
-
-  /**
    * 该接口用于获取通知渠道组列表
    */
   async DescribeAlarmNotices(
@@ -533,17 +476,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void
   ): Promise<DeleteAlarmNoticeResponse> {
     return this.request("DeleteAlarmNotice", req, cb)
-  }
-
-  /**
-     * 本接口用于修改索引配置
-
-     */
-  async ModifyIndex(
-    req: ModifyIndexRequest,
-    cb?: (error: string, rep: ModifyIndexResponse) => void
-  ): Promise<ModifyIndexResponse> {
-    return this.request("ModifyIndex", req, cb)
   }
 
   /**
@@ -735,13 +667,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建离线上下文任务
+   * 获取投递任务列表
    */
-  async CreateAsyncContextTask(
-    req: CreateAsyncContextTaskRequest,
-    cb?: (error: string, rep: CreateAsyncContextTaskResponse) => void
-  ): Promise<CreateAsyncContextTaskResponse> {
-    return this.request("CreateAsyncContextTask", req, cb)
+  async DescribeShipperTasks(
+    req: DescribeShipperTasksRequest,
+    cb?: (error: string, rep: DescribeShipperTasksResponse) => void
+  ): Promise<DescribeShipperTasksResponse> {
+    return this.request("DescribeShipperTasks", req, cb)
   }
 
   /**
@@ -792,16 +724,6 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DeleteIndexResponse) => void
   ): Promise<DeleteIndexResponse> {
     return this.request("DeleteIndex", req, cb)
-  }
-
-  /**
-   * 本接口用户获取离线检索任务列表
-   */
-  async DescribeAsyncSearchTasks(
-    req: DescribeAsyncSearchTasksRequest,
-    cb?: (error: string, rep: DescribeAsyncSearchTasksResponse) => void
-  ): Promise<DescribeAsyncSearchTasksResponse> {
-    return this.request("DescribeAsyncSearchTasks", req, cb)
   }
 
   /**
@@ -885,16 +807,6 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于修改日志集信息
-   */
-  async ModifyLogset(
-    req: ModifyLogsetRequest,
-    cb?: (error: string, rep: ModifyLogsetResponse) => void
-  ): Promise<ModifyLogsetResponse> {
-    return this.request("ModifyLogset", req, cb)
-  }
-
-  /**
    * 本接口用于删除日志下载任务
    */
   async DeleteExport(
@@ -942,15 +854,5 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: SplitPartitionResponse) => void
   ): Promise<SplitPartitionResponse> {
     return this.request("SplitPartition", req, cb)
-  }
-
-  /**
-   * 本接口用于创建离线检索任务
-   */
-  async CreateAsyncSearchTask(
-    req: CreateAsyncSearchTaskRequest,
-    cb?: (error: string, rep: CreateAsyncSearchTaskResponse) => void
-  ): Promise<CreateAsyncSearchTaskResponse> {
-    return this.request("CreateAsyncSearchTask", req, cb)
   }
 }

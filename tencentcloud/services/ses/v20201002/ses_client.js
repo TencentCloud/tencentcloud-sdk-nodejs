@@ -95,7 +95,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListBlackEmailAddress", req, cb);
     }
     /**
-     * 删除发信模版
+     * 删除发信模板
      */
     async DeleteEmailTemplate(req, cb) {
         return this.request("DeleteEmailTemplate", req, cb);

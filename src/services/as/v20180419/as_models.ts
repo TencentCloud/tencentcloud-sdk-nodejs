@@ -422,18 +422,149 @@ export interface DescribeAutoScalingGroupsRequest {
 }
 
 /**
- * CreateAutoScalingGroup返回参数结构体
+ * 符合条件的启动配置信息的集合。
  */
-export interface CreateAutoScalingGroupResponse {
+export interface LaunchConfiguration {
   /**
-   * 伸缩组ID
+   * 实例所属项目ID。
    */
-  AutoScalingGroupId: string
+  ProjectId: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 启动配置ID。
    */
-  RequestId?: string
+  LaunchConfigurationId: string
+
+  /**
+   * 启动配置名称。
+   */
+  LaunchConfigurationName: string
+
+  /**
+   * 实例机型。
+   */
+  InstanceType: string
+
+  /**
+   * 实例系统盘配置信息。
+   */
+  SystemDisk: SystemDisk
+
+  /**
+   * 实例数据盘配置信息。
+   */
+  DataDisks: Array<DataDisk>
+
+  /**
+   * 实例登录设置。
+   */
+  LoginSettings: LimitedLoginSettings
+
+  /**
+   * 公网带宽相关信息设置。
+   */
+  InternetAccessible: InternetAccessible
+
+  /**
+   * 实例所属安全组。
+   */
+  SecurityGroupIds: Array<string>
+
+  /**
+   * 启动配置关联的伸缩组。
+   */
+  AutoScalingGroupAbstractSet: Array<AutoScalingGroupAbstract>
+
+  /**
+      * 自定义数据。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserData: string
+
+  /**
+   * 启动配置创建时间。
+   */
+  CreatedTime: string
+
+  /**
+   * 实例的增强服务启用情况与其设置。
+   */
+  EnhancedService: EnhancedService
+
+  /**
+   * 镜像ID。
+   */
+  ImageId: string
+
+  /**
+   * 启动配置当前状态。取值范围：<br><li>NORMAL：正常<br><li>IMAGE_ABNORMAL：启动配置镜像异常<br><li>CBS_SNAP_ABNORMAL：启动配置数据盘快照异常<br><li>SECURITY_GROUP_ABNORMAL：启动配置安全组异常<br>
+   */
+  LaunchConfigurationStatus: string
+
+  /**
+      * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
+<br><li>POSTPAID_BY_HOUR：按小时后付费
+<br><li>SPOTPAID：竞价付费
+      */
+  InstanceChargeType: string
+
+  /**
+      * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceMarketOptions: InstanceMarketOptionsRequest
+
+  /**
+   * 实例机型列表。
+   */
+  InstanceTypes: Array<string>
+
+  /**
+   * 标签列表。
+   */
+  InstanceTags: Array<InstanceTag>
+
+  /**
+   * 版本号。
+   */
+  VersionNumber: number
+
+  /**
+   * 更新时间。
+   */
+  UpdatedTime: string
+
+  /**
+   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+   */
+  CamRoleName: string
+
+  /**
+   * 上次操作时，InstanceTypesCheckPolicy 取值。
+   */
+  LastOperationInstanceTypesCheckPolicy: string
+
+  /**
+   * 云服务器主机名（HostName）的相关设置。
+   */
+  HostNameSettings: HostNameSettings
+
+  /**
+   * 云服务器实例名（InstanceName）的相关设置。
+   */
+  InstanceNameSettings: InstanceNameSettings
+
+  /**
+   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   */
+  InstanceChargePrepaid: InstanceChargePrepaid
+
+  /**
+      * 云盘类型选择策略。取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型
+<br><li>AUTOMATIC：自动选择当前可用区下可用的云盘类型
+      */
+  DiskTypePolicy: string
 }
 
 /**
@@ -544,6 +675,51 @@ export interface DescribeAutoScalingGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateScheduledAction请求参数结构体
+ */
+export interface CreateScheduledActionRequest {
+  /**
+   * 伸缩组ID
+   */
+  AutoScalingGroupId: string
+
+  /**
+   * 定时任务名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。同一伸缩组下必须唯一。
+   */
+  ScheduledActionName: string
+
+  /**
+   * 当定时任务触发时，设置的伸缩组最大实例数。
+   */
+  MaxSize: number
+
+  /**
+   * 当定时任务触发时，设置的伸缩组最小实例数。
+   */
+  MinSize: number
+
+  /**
+   * 当定时任务触发时，设置的伸缩组期望实例数。
+   */
+  DesiredCapacity: number
+
+  /**
+   * 定时任务的首次触发时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
+   */
+  StartTime: string
+
+  /**
+   * 定时任务的结束时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。<br><br>此参数与`Recurrence`需要同时指定，到达结束时间之后，定时任务将不再生效。
+   */
+  EndTime?: string
+
+  /**
+   * 定时任务的重复方式。为标准 Cron 格式<br><br>此参数与`EndTime`需要同时指定。
+   */
+  Recurrence?: string
 }
 
 /**
@@ -696,38 +872,18 @@ export interface ModifyScheduledActionResponse {
 }
 
 /**
- * CreateAutoScalingGroupFromInstance请求参数结构体
+ * AttachLoadBalancers返回参数结构体
  */
-export interface CreateAutoScalingGroupFromInstanceRequest {
+export interface AttachLoadBalancersResponse {
   /**
-   * 伸缩组名称，在您账号中必须唯一。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超55个字节。
+   * 伸缩活动ID
    */
-  AutoScalingGroupName: string
+  ActivityId: string
 
   /**
-   * 实例ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-
-  /**
-   * 最小实例数，取值范围为0-2000。
-   */
-  MinSize: number
-
-  /**
-   * 最大实例数，取值范围为0-2000。
-   */
-  MaxSize: number
-
-  /**
-   * 期望实例数，大小介于最小实例数和最大实例数之间。
-   */
-  DesiredCapacity?: number
-
-  /**
-   * 是否继承实例标签，默认值为False
-   */
-  InheritInstanceTag?: boolean
+  RequestId?: string
 }
 
 /**
@@ -746,13 +902,13 @@ export interface ExecuteScalingPolicyResponse {
 }
 
 /**
- * ModifyLaunchConfigurationAttributes返回参数结构体
+ * DeleteAutoScalingGroup请求参数结构体
  */
-export interface ModifyLaunchConfigurationAttributesResponse {
+export interface DeleteAutoScalingGroupRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 伸缩组ID
    */
-  RequestId?: string
+  AutoScalingGroupId: string
 }
 
 /**
@@ -902,6 +1058,26 @@ export interface Tag {
 }
 
 /**
+ * DetachLoadBalancers请求参数结构体
+ */
+export interface DetachLoadBalancersRequest {
+  /**
+   * 伸缩组ID
+   */
+  AutoScalingGroupId: string
+
+  /**
+   * 传统负载均衡器ID列表，目前长度上限为20，LoadBalancerIds 和 ForwardLoadBalancerIdentifications 二者同时最多只能指定一个
+   */
+  LoadBalancerIds?: Array<string>
+
+  /**
+   * 应用型负载均衡器标识信息列表，目前长度上限为50，LoadBalancerIds 和 ForwardLoadBalancerIdentifications二者同时最多只能指定一个
+   */
+  ForwardLoadBalancerIdentifications?: Array<ForwardLoadBalancerIdentification>
+}
+
+/**
  * DescribeAutoScalingInstances请求参数结构体
  */
 export interface DescribeAutoScalingInstancesRequest {
@@ -927,16 +1103,6 @@ export interface DescribeAutoScalingInstancesRequest {
    * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Limit?: number
-}
-
-/**
- * 描述了实例登录相关配置与信息，出于安全性考虑，不会描述敏感信息。
- */
-export interface LimitedLoginSettings {
-  /**
-   * 密钥ID列表。
-   */
-  KeyIds: Array<string>
 }
 
 /**
@@ -1030,6 +1196,16 @@ export interface DetachInstancesResponse {
    */
   ActivityId: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLaunchConfigurationAttributes返回参数结构体
+ */
+export interface ModifyLaunchConfigurationAttributesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1408,6 +1584,21 @@ export interface UpgradeLifecycleHookRequest {
 }
 
 /**
+ * DetachLoadBalancers返回参数结构体
+ */
+export interface DetachLoadBalancersResponse {
+  /**
+   * 伸缩活动ID
+   */
+  ActivityId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 告警触发策略。
  */
 export interface ScalingPolicy {
@@ -1636,6 +1827,21 @@ export interface DeleteLifecycleHookRequest {
    * 生命周期挂钩ID
    */
   LifecycleHookId: string
+}
+
+/**
+ * ModifyLoadBalancerTargetAttributes返回参数结构体
+ */
+export interface ModifyLoadBalancerTargetAttributesResponse {
+  /**
+   * 伸缩活动ID
+   */
+  ActivityId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2274,48 +2480,23 @@ export interface Instance {
 }
 
 /**
- * CreateScheduledAction请求参数结构体
+ * DescribeAutoScalingInstances返回参数结构体
  */
-export interface CreateScheduledActionRequest {
+export interface DescribeAutoScalingInstancesResponse {
   /**
-   * 伸缩组ID
+   * 实例详细信息列表。
    */
-  AutoScalingGroupId: string
+  AutoScalingInstanceSet?: Array<Instance>
 
   /**
-   * 定时任务名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。同一伸缩组下必须唯一。
+   * 符合条件的实例数量。
    */
-  ScheduledActionName: string
+  TotalCount?: number
 
   /**
-   * 当定时任务触发时，设置的伸缩组最大实例数。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MaxSize: number
-
-  /**
-   * 当定时任务触发时，设置的伸缩组最小实例数。
-   */
-  MinSize: number
-
-  /**
-   * 当定时任务触发时，设置的伸缩组期望实例数。
-   */
-  DesiredCapacity: number
-
-  /**
-   * 定时任务的首次触发时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。
-   */
-  StartTime: string
-
-  /**
-   * 定时任务的结束时间，取值为`北京时间`（UTC+8），按照`ISO8601`标准，格式：`YYYY-MM-DDThh:mm:ss+08:00`。<br><br>此参数与`Recurrence`需要同时指定，到达结束时间之后，定时任务将不再生效。
-   */
-  EndTime?: string
-
-  /**
-   * 定时任务的重复方式。为标准 Cron 格式<br><br>此参数与`EndTime`需要同时指定。
-   */
-  Recurrence?: string
+  RequestId?: string
 }
 
 /**
@@ -2666,149 +2847,18 @@ WAKE_UP_STOPPED_SCALING：扩容优先开机。扩容时优先对已关机的实
 }
 
 /**
- * 符合条件的启动配置信息的集合。
+ * CreateAutoScalingGroup返回参数结构体
  */
-export interface LaunchConfiguration {
+export interface CreateAutoScalingGroupResponse {
   /**
-   * 实例所属项目ID。
+   * 伸缩组ID
    */
-  ProjectId: number
+  AutoScalingGroupId: string
 
   /**
-   * 启动配置ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  LaunchConfigurationId: string
-
-  /**
-   * 启动配置名称。
-   */
-  LaunchConfigurationName: string
-
-  /**
-   * 实例机型。
-   */
-  InstanceType: string
-
-  /**
-   * 实例系统盘配置信息。
-   */
-  SystemDisk: SystemDisk
-
-  /**
-   * 实例数据盘配置信息。
-   */
-  DataDisks: Array<DataDisk>
-
-  /**
-   * 实例登录设置。
-   */
-  LoginSettings: LimitedLoginSettings
-
-  /**
-   * 公网带宽相关信息设置。
-   */
-  InternetAccessible: InternetAccessible
-
-  /**
-   * 实例所属安全组。
-   */
-  SecurityGroupIds: Array<string>
-
-  /**
-   * 启动配置关联的伸缩组。
-   */
-  AutoScalingGroupAbstractSet: Array<AutoScalingGroupAbstract>
-
-  /**
-      * 自定义数据。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserData: string
-
-  /**
-   * 启动配置创建时间。
-   */
-  CreatedTime: string
-
-  /**
-   * 实例的增强服务启用情况与其设置。
-   */
-  EnhancedService: EnhancedService
-
-  /**
-   * 镜像ID。
-   */
-  ImageId: string
-
-  /**
-   * 启动配置当前状态。取值范围：<br><li>NORMAL：正常<br><li>IMAGE_ABNORMAL：启动配置镜像异常<br><li>CBS_SNAP_ABNORMAL：启动配置数据盘快照异常<br><li>SECURITY_GROUP_ABNORMAL：启动配置安全组异常<br>
-   */
-  LaunchConfigurationStatus: string
-
-  /**
-      * 实例计费类型，CVM默认值按照POSTPAID_BY_HOUR处理。
-<br><li>POSTPAID_BY_HOUR：按小时后付费
-<br><li>SPOTPAID：竞价付费
-      */
-  InstanceChargeType: string
-
-  /**
-      * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceMarketOptions: InstanceMarketOptionsRequest
-
-  /**
-   * 实例机型列表。
-   */
-  InstanceTypes: Array<string>
-
-  /**
-   * 标签列表。
-   */
-  InstanceTags: Array<InstanceTag>
-
-  /**
-   * 版本号。
-   */
-  VersionNumber: number
-
-  /**
-   * 更新时间。
-   */
-  UpdatedTime: string
-
-  /**
-   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
-   */
-  CamRoleName: string
-
-  /**
-   * 上次操作时，InstanceTypesCheckPolicy 取值。
-   */
-  LastOperationInstanceTypesCheckPolicy: string
-
-  /**
-   * 云服务器主机名（HostName）的相关设置。
-   */
-  HostNameSettings: HostNameSettings
-
-  /**
-   * 云服务器实例名（InstanceName）的相关设置。
-   */
-  InstanceNameSettings: InstanceNameSettings
-
-  /**
-   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-   */
-  InstanceChargePrepaid: InstanceChargePrepaid
-
-  /**
-      * 云盘类型选择策略。取值范围：
-<br><li>ORIGINAL：使用设置的云盘类型
-<br><li>AUTOMATIC：自动选择当前可用区下可用的云盘类型
-      */
-  DiskTypePolicy: string
+  RequestId?: string
 }
 
 /**
@@ -2837,23 +2887,13 @@ export interface ModifyNotificationConfigurationResponse {
 }
 
 /**
- * DescribeAutoScalingInstances返回参数结构体
+ * 描述了实例登录相关配置与信息，出于安全性考虑，不会描述敏感信息。
  */
-export interface DescribeAutoScalingInstancesResponse {
+export interface LimitedLoginSettings {
   /**
-   * 实例详细信息列表。
+   * 密钥ID列表。
    */
-  AutoScalingInstanceSet?: Array<Instance>
-
-  /**
-   * 符合条件的实例数量。
-   */
-  TotalCount?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  KeyIds: Array<string>
 }
 
 /**
@@ -3002,6 +3042,21 @@ export interface NotificationTarget {
    * 主题名称，如果`TargetType`取值为`CMQ_TOPIC` 或 `TDMQ_CMQ_TOPIC`，则本字段必填。
    */
   TopicName?: string
+}
+
+/**
+ * ModifyLoadBalancerTargetAttributes请求参数结构体
+ */
+export interface ModifyLoadBalancerTargetAttributesRequest {
+  /**
+   * 伸缩组ID
+   */
+  AutoScalingGroupId: string
+
+  /**
+   * 需修改目标规则属性的应用型负载均衡器列表，长度上限为50
+   */
+  ForwardLoadBalancers: Array<ForwardLoadBalancer>
 }
 
 /**
@@ -3276,13 +3331,23 @@ export interface PreviewPaiDomainNameResponse {
 }
 
 /**
- * DeleteAutoScalingGroup请求参数结构体
+ * 应用型负载均衡器标识信息
  */
-export interface DeleteAutoScalingGroupRequest {
+export interface ForwardLoadBalancerIdentification {
   /**
-   * 伸缩组ID
+   * 负载均衡器ID
    */
-  AutoScalingGroupId: string
+  LoadBalancerId: string
+
+  /**
+   * 应用型负载均衡监听器 ID
+   */
+  ListenerId: string
+
+  /**
+   * 转发规则ID，注意：针对七层监听器此参数必填
+   */
+  LocationId?: string
 }
 
 /**
@@ -3328,6 +3393,26 @@ export interface AttachInstancesRequest {
    * CVM实例ID列表
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * AttachLoadBalancers请求参数结构体
+ */
+export interface AttachLoadBalancersRequest {
+  /**
+   * 伸缩组ID
+   */
+  AutoScalingGroupId: string
+
+  /**
+   * 传统负载均衡器ID列表，伸缩组绑定数量上限为20，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   */
+  LoadBalancerIds?: Array<string>
+
+  /**
+   * 应用型负载均衡器列表，伸缩组绑定数量上限为50，LoadBalancerIds 和 ForwardLoadBalancers 二者同时最多只能指定一个
+   */
+  ForwardLoadBalancers?: Array<ForwardLoadBalancer>
 }
 
 /**
@@ -3541,6 +3626,41 @@ export interface ActivtyRelatedInstance {
 <li>FAILED：活动失败
       */
   InstanceStatus: string
+}
+
+/**
+ * CreateAutoScalingGroupFromInstance请求参数结构体
+ */
+export interface CreateAutoScalingGroupFromInstanceRequest {
+  /**
+   * 伸缩组名称，在您账号中必须唯一。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超55个字节。
+   */
+  AutoScalingGroupName: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 最小实例数，取值范围为0-2000。
+   */
+  MinSize: number
+
+  /**
+   * 最大实例数，取值范围为0-2000。
+   */
+  MaxSize: number
+
+  /**
+   * 期望实例数，大小介于最小实例数和最大实例数之间。
+   */
+  DesiredCapacity?: number
+
+  /**
+   * 是否继承实例标签，默认值为False
+   */
+  InheritInstanceTag?: boolean
 }
 
 /**

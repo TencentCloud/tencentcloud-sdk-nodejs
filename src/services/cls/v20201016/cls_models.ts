@@ -311,86 +311,6 @@ export interface DescribeConfigMachineGroupsRequest {
 }
 
 /**
- * DescribeAsyncContextResult返回参数结构体
- */
-export interface DescribeAsyncContextResultResponse {
-  /**
-   * 上文日志是否已经返回
-   */
-  PrevOver: boolean
-
-  /**
-   * 下文日志是否已经返回
-   */
-  NextOver: boolean
-
-  /**
-   * 日志内容
-   */
-  Results: Array<LogInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UploadLog请求参数结构体
- */
-export interface UploadLogRequest {
-  /**
-   * 主题id
-   */
-  TopicId: string
-
-  /**
-   * 根据 hashkey 写入相应范围的主题分区
-   */
-  HashKey?: string
-
-  /**
-   * 压缩方法
-   */
-  CompressType?: string
-}
-
-/**
- * CreateAsyncContextTask请求参数结构体
- */
-export interface CreateAsyncContextTaskRequest {
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
-
-  /**
-   * 日志时间，单位ms
-   */
-  Time: number
-
-  /**
-   * 日志包序号
-   */
-  PkgId: string
-
-  /**
-   * 日志包内一条日志的序号
-   */
-  PkgLogId: string
-
-  /**
-   * 日志集ID
-   */
-  LogsetId: string
-
-  /**
-   * 异步检索任务ID
-   */
-  AsyncSearchTaskId: string
-}
-
-/**
  * CreateLogset请求参数结构体
  */
 export interface CreateLogsetRequest {
@@ -578,18 +498,18 @@ export interface DescribeAlarmsRequest {
 }
 
 /**
- * CreateAsyncContextTask返回参数结构体
+ * MergePartition请求参数结构体
  */
-export interface CreateAsyncContextTaskResponse {
+export interface MergePartitionRequest {
   /**
-   * 异步上下文任务ID
+   * 日志主题ID
    */
-  AsyncContextTaskId: string
+  TopicId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 合并的PartitionId
    */
-  RequestId?: string
+  PartitionId: number
 }
 
 /**
@@ -746,16 +666,6 @@ export interface CreateLogsetResponse {
 }
 
 /**
- * DeleteAsyncContextTask返回参数结构体
- */
-export interface DeleteAsyncContextTaskResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteMachineGroup返回参数结构体
  */
 export interface DeleteMachineGroupResponse {
@@ -781,58 +691,43 @@ export interface Tag {
 }
 
 /**
- * DescribeAsyncContextResult请求参数结构体
+ * DescribeMachineGroups请求参数结构体
  */
-export interface DescribeAsyncContextResultRequest {
+export interface DescribeMachineGroupsRequest {
   /**
-   * 异步检索任务ID
-   */
-  AsyncContextTaskId: string
+      * <br><li> machineGroupName
 
-  /**
-   * 日志包序号
-   */
-  PkgId: string
+按照【机器组名称】进行过滤。
+类型：String
 
-  /**
-   * 日志在日志包内的序号
-   */
-  PkgLogId: string
+必选：否
 
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
+<br><li> machineGroupId
 
-  /**
-   * 上文日志条数，默认值10
-   */
-  PrevLogs?: number
+按照【机器组ID】进行过滤。
+类型：String
 
-  /**
-   * 下文日志条数，默认值10
-   */
-  NextLogs?: number
-}
+必选：否
 
-/**
- * DeleteAsyncSearchTask返回参数结构体
- */
-export interface DeleteAsyncSearchTaskResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+<br><li> tagKey
 
-/**
- * DescribeExports请求参数结构体
- */
-export interface DescribeExportsRequest {
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
+按照【标签键】进行过滤。
+
+类型：String
+
+必选：否
+
+<br><li> tag:tagKey
+
+按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+类型：String
+
+必选：否
+
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
+      */
+  Filters?: Array<Filter>
 
   /**
    * 分页的偏移量，默认值为0
@@ -840,44 +735,74 @@ export interface DescribeExportsRequest {
   Offset?: number
 
   /**
-   * 分页单页限制数目，默认值为20，最大值100
+   * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
 }
 
 /**
- * CreateAsyncSearchTask请求参数结构体
+ * 日志提取规则
  */
-export interface CreateAsyncSearchTaskRequest {
+export interface ExtractRuleInfo {
   /**
-   * 日志集ID
-   */
-  LogsetId: string
+      * 时间字段的key名字，time_key和time_format必须成对出现
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeKey?: string
 
   /**
-   * 日志主题ID，目前仅支持StorageType为cold的日志主题
-   */
-  TopicId: string
+      * 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeFormat?: string
 
   /**
-   * 查询语句，语句长度最大为1024
-   */
-  Query: string
+      * 分隔符类型日志的分隔符，只有log_type为delimiter_log时有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Delimiter?: string
 
   /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
-   */
-  From: number
+      * 整条日志匹配规则，只有log_type为fullregex_log时有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LogRegex?: string
 
   /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
-   */
-  To: number
+      * 行首匹配规则，只有log_type为multiline_log或fullregex_log时有效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginRegex?: string
 
   /**
-   * 日志扫描顺序；可选值：asc(升序)、desc(降序)，默认为 desc
-   */
-  Sort?: string
+      * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Keys?: Array<string>
+
+  /**
+      * 需要过滤日志的key，及其对应的regex
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilterKeyRegex?: Array<KeyRegexInfo>
+
+  /**
+      * 解析失败日志是否上传，true表示上传，false表示不上传
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnMatchUpLoadSwitch?: boolean
+
+  /**
+      * 失败日志的key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnMatchLogKey?: string
+
+  /**
+      * 增量采集模式下的回溯数据量，默认-1（全量采集）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Backtracking?: number
 }
 
 /**
@@ -1582,75 +1507,18 @@ export interface MachineGroupInfo {
 }
 
 /**
- * DescribeMachineGroups请求参数结构体
+ * 标签索引配置信息
  */
-export interface DescribeMachineGroupsRequest {
+export interface RuleTagInfo {
   /**
-      * <br><li> machineGroupName
-
-按照【机器组名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> machineGroupId
-
-按照【机器组ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> tagKey
-
-按照【标签键】进行过滤。
-
-类型：String
-
-必选：否
-
-<br><li> tag:tagKey
-
-按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-类型：String
-
-必选：否
-
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
-      */
-  Filters?: Array<Filter>
-
-  /**
-   * 分页的偏移量，默认值为0
+   * 是否大小写敏感
    */
-  Offset?: number
+  CaseSensitive: boolean
 
   /**
-   * 分页单页的限制数目，默认值为20，最大值100
+   * 标签索引配置中的字段信息
    */
-  Limit?: number
-}
-
-/**
- * DescribeAsyncContextTasks返回参数结构体
- */
-export interface DescribeAsyncContextTasksResponse {
-  /**
-      * 异步上下文任务列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AsyncContextTasks: Array<AsyncContextTask>
-
-  /**
-      * 异步上下文任务的总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  KeyValues: Array<KeyValueInfo>
 }
 
 /**
@@ -1805,41 +1673,6 @@ export interface GetAlarmLogResponse {
 }
 
 /**
- * DescribeAsyncSearchTasks请求参数结构体
- */
-export interface DescribeAsyncSearchTasksRequest {
-  /**
-   * 分页的偏移量，默认值为0
-   */
-  Offset?: number
-
-  /**
-   * 分页单页限制数目，默认值为20，最大值100
-   */
-  Limit?: number
-
-  /**
-      * <br><li> topicId
-
-按照【日志主题ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> logsetId
-
-按照【日志集ID】进行过滤，可通过调用DescribeLogsets查询已创建的日志集列表或登录控制台进行查看；也可以调用CreateLogset创建新的日志集。
-
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5
-      */
-  Filters?: Array<Filter>
-}
-
-/**
  * CreateTopic请求参数结构体
  */
 export interface CreateTopicRequest {
@@ -1885,34 +1718,14 @@ export interface CreateTopicRequest {
 }
 
 /**
- * DescribeAsyncSearchResult返回参数结构体
+ * DescribeExports请求参数结构体
  */
-export interface DescribeAsyncSearchResultResponse {
+export interface DescribeExportsRequest {
   /**
-   * 加载后续内容的Context
+   * 日志主题ID
    */
-  Context: string
+  TopicId: string
 
-  /**
-   * 日志查询结果是否全部返回
-   */
-  ListOver: boolean
-
-  /**
-   * 日志内容
-   */
-  Results: Array<LogInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAsyncContextTasks请求参数结构体
- */
-export interface DescribeAsyncContextTasksRequest {
   /**
    * 分页的偏移量，默认值为0
    */
@@ -1922,26 +1735,6 @@ export interface DescribeAsyncContextTasksRequest {
    * 分页单页限制数目，默认值为20，最大值100
    */
   Limit?: number
-
-  /**
-      * <br><li> topicId
-
-按照【日志主题ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> logsetId
-
-按照【日志集ID】进行过滤，可通过调用DescribeLogsets查询已创建的日志集列表或登录控制台进行查看；也可以调用CreateLogset创建新的日志集。
-
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5
-      */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -2051,134 +1844,23 @@ export interface DescribeConsumerResponse {
 }
 
 /**
- * 日志提取规则
+ * UploadLog请求参数结构体
  */
-export interface ExtractRuleInfo {
+export interface UploadLogRequest {
   /**
-      * 时间字段的key名字，time_key和time_format必须成对出现
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TimeKey?: string
-
-  /**
-      * 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TimeFormat?: string
-
-  /**
-      * 分隔符类型日志的分隔符，只有log_type为delimiter_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Delimiter?: string
-
-  /**
-      * 整条日志匹配规则，只有log_type为fullregex_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogRegex?: string
-
-  /**
-      * 行首匹配规则，只有log_type为multiline_log或fullregex_log时有效
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BeginRegex?: string
-
-  /**
-      * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Keys?: Array<string>
-
-  /**
-      * 需要过滤日志的key，及其对应的regex
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FilterKeyRegex?: Array<KeyRegexInfo>
-
-  /**
-      * 解析失败日志是否上传，true表示上传，false表示不上传
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnMatchUpLoadSwitch?: boolean
-
-  /**
-      * 失败日志的key
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnMatchLogKey?: string
-
-  /**
-      * 增量采集模式下的回溯数据量，默认-1（全量采集）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Backtracking?: number
-}
-
-/**
- * 异步上下文任务
- */
-export interface AsyncContextTask {
-  /**
-   * 日志集ID
-   */
-  LogsetId: string
-
-  /**
-   * 日志主题ID
+   * 主题id
    */
   TopicId: string
 
   /**
-   * 创建时间，时间戳，精确到毫秒
+   * 根据 hashkey 写入相应范围的主题分区
    */
-  CreateTime: number
+  HashKey?: string
 
   /**
-   * 状态，0表示待开始，1表示运行中，2表示已完成，-1表示失败
+   * 压缩方法
    */
-  Status: number
-
-  /**
-   * 异步上下文任务ID
-   */
-  AsyncContextTaskId: string
-
-  /**
-      * 任务失败的错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrorMessage: string
-
-  /**
-      * 日志包序号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgId: string
-
-  /**
-      * 日志包内一条日志的序号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgLogId: string
-
-  /**
-      * 日志时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Time: number
-
-  /**
-      * 任务完成时间，时间戳，精确到毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FinishTime: number
-
-  /**
-      * 相关联的异步检索ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AsyncSearchTaskId: string
+  CompressType?: string
 }
 
 /**
@@ -2297,21 +1979,6 @@ export interface LogsetInfo {
    * 若AssumerUin非空，则表示创建该日志集的服务方角色
    */
   RoleName: string
-}
-
-/**
- * 标签索引配置信息
- */
-export interface RuleTagInfo {
-  /**
-   * 是否大小写敏感
-   */
-  CaseSensitive: boolean
-
-  /**
-   * 标签索引配置中的字段信息
-   */
-  KeyValues: Array<KeyValueInfo>
 }
 
 /**
@@ -2537,43 +2204,46 @@ export interface DeleteAlarmResponse {
 }
 
 /**
- * DescribeMachines返回参数结构体
+ * 回调地址
  */
-export interface DescribeMachinesResponse {
+export interface WebCallback {
   /**
-   * 机器状态信息组
+   * 回调地址。
    */
-  Machines: Array<MachineInfo>
+  Url: string
 
   /**
-   * 机器组是否开启自动升级功能
-   */
-  AutoUpdate: number
+      * 回调的类型。可选值：
+<br><li> WeCom
+<br><li> Http
+      */
+  CallbackType: string
 
   /**
-   * 机器组自动升级功能预设开始时间
-   */
-  UpdateStartTime: string
+      * 回调方法。可选值：
+<br><li> POST
+<br><li> PUT
+默认值为POST。CallbackType为Http时为必选。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Method?: string
 
   /**
-   * 机器组自动升级功能预设结束时间
-   */
-  UpdateEndTime: string
+      * 请求头。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Headers?: Array<string>
 
   /**
-   * 当前用户可用最新的Loglistener版本
-   */
-  LatestAgentVersion: string
+      * 请求内容。CallbackType为Http时为必选。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Body?: string
 
   /**
-   * 是否开启服务日志
+   * 序号
    */
-  ServiceLogging: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Index?: number
 }
 
 /**
@@ -2687,21 +2357,6 @@ export interface DeleteIndexResponse {
 }
 
 /**
- * DeleteAsyncContextTask请求参数结构体
- */
-export interface DeleteAsyncContextTaskRequest {
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
-
-  /**
-   * 异步上下文任务ID
-   */
-  AsyncContextTaskId: string
-}
-
-/**
  * ModifyIndex请求参数结构体
  */
 export interface ModifyIndexRequest {
@@ -2810,16 +2465,6 @@ export interface GetAlarmLogRequest {
    * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
    */
   UseNewAnalysis?: boolean
-}
-
-/**
- * DescribeMachines请求参数结构体
- */
-export interface DescribeMachinesRequest {
-  /**
-   * 查询的机器组ID
-   */
-  GroupId: string
 }
 
 /**
@@ -3110,31 +2755,6 @@ export interface DescribeLogContextResponse {
 }
 
 /**
- * DescribeAsyncSearchResult请求参数结构体
- */
-export interface DescribeAsyncSearchResultRequest {
-  /**
-   * 异步检索任务ID
-   */
-  AsyncSearchTaskId: string
-
-  /**
-   * 日志集ID
-   */
-  TopicId: string
-
-  /**
-   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
-   */
-  Context?: string
-
-  /**
-   * 单次调用返回的日志条数，默认为20，最大为500
-   */
-  Limit?: number
-}
-
-/**
  * CreateConsumer请求参数结构体
  */
 export interface CreateConsumerRequest {
@@ -3228,20 +2848,38 @@ export interface ModifyAlarmNoticeResponse {
 }
 
 /**
- * DescribeAsyncSearchTasks返回参数结构体
+ * DescribeMachines返回参数结构体
  */
-export interface DescribeAsyncSearchTasksResponse {
+export interface DescribeMachinesResponse {
   /**
-      * 异步检索任务列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AsyncSearchTasks: Array<AsyncSearchTask>
+   * 机器状态信息组
+   */
+  Machines: Array<MachineInfo>
 
   /**
-      * 异步检索任务的总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
+   * 机器组是否开启自动升级功能
+   */
+  AutoUpdate: number
+
+  /**
+   * 机器组自动升级功能预设开始时间
+   */
+  UpdateStartTime: string
+
+  /**
+   * 机器组自动升级功能预设结束时间
+   */
+  UpdateEndTime: string
+
+  /**
+   * 当前用户可用最新的Loglistener版本
+   */
+  LatestAgentVersion: string
+
+  /**
+   * 是否开启服务日志
+   */
+  ServiceLogging: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3425,21 +3063,6 @@ export interface KeyValueInfo {
 }
 
 /**
- * DeleteAsyncSearchTask请求参数结构体
- */
-export interface DeleteAsyncSearchTaskRequest {
-  /**
-   * 异步检索任务ID
-   */
-  AsyncSearchTaskId: string
-
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
-}
-
-/**
  * ModifyMachineGroup请求参数结构体
  */
 export interface ModifyMachineGroupRequest {
@@ -3482,21 +3105,6 @@ export interface ModifyMachineGroupRequest {
    * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
    */
   ServiceLogging?: boolean
-}
-
-/**
- * MergePartition请求参数结构体
- */
-export interface MergePartitionRequest {
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
-
-  /**
-   * 合并的PartitionId
-   */
-  PartitionId: number
 }
 
 /**
@@ -3592,74 +3200,6 @@ export interface NoticeReceiver {
 }
 
 /**
- * 异步检索任务
- */
-export interface AsyncSearchTask {
-  /**
-   * 日志集ID
-   */
-  LogsetId: string
-
-  /**
-   * 日志主题ID
-   */
-  TopicId: string
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 状态，0表示待开始，1表示运行中，2表示已完成，-1表示失败
-   */
-  Status: number
-
-  /**
-   * 异步检索任务ID
-   */
-  AsyncSearchTaskId: string
-
-  /**
-   * 查询语句
-   */
-  Query: string
-
-  /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
-   */
-  From: number
-
-  /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
-   */
-  To: number
-
-  /**
-   * 日志扫描顺序，可选值：asc(升序)、desc(降序)
-   */
-  Sort: string
-
-  /**
-      * 任务失败的错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrorMessage: string
-
-  /**
-      * 异步检索任务匹配的总日志条数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LogCount: number
-
-  /**
-      * 任务完成时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FinishTime: string
-}
-
-/**
  * CKafka的描述-需要投递到的kafka信息
  */
 export interface Ckafka {
@@ -3695,52 +3235,14 @@ export interface Ckafka {
 }
 
 /**
- * 回调地址
+ * CreateExport返回参数结构体
  */
-export interface WebCallback {
+export interface CreateExportResponse {
   /**
-   * 回调地址。
+   * 日志导出ID。
    */
-  Url: string
+  ExportId: string
 
-  /**
-      * 回调的类型。可选值：
-<br><li> WeCom
-<br><li> Http
-      */
-  CallbackType: string
-
-  /**
-      * 回调方法。可选值：
-<br><li> POST
-<br><li> PUT
-默认值为POST。CallbackType为Http时为必选。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Method?: string
-
-  /**
-      * 请求头。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Headers?: Array<string>
-
-  /**
-      * 请求内容。CallbackType为Http时为必选。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Body?: string
-
-  /**
-   * 序号
-   */
-  Index?: number
-}
-
-/**
- * CreateAsyncSearchTask返回参数结构体
- */
-export interface CreateAsyncSearchTaskResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4209,18 +3711,13 @@ export interface ConsumerContent {
 }
 
 /**
- * CreateExport返回参数结构体
+ * DescribeMachines请求参数结构体
  */
-export interface CreateExportResponse {
+export interface DescribeMachinesRequest {
   /**
-   * 日志导出ID。
+   * 查询的机器组ID
    */
-  ExportId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  GroupId: string
 }
 
 /**
