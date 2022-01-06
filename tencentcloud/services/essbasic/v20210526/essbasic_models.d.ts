@@ -697,7 +697,7 @@ export interface DescribeTemplatesRequest {
       */
     Operator?: UserInfo;
     /**
-      * 模版唯一标识
+      * 模板唯一标识
       */
     TemplateId?: string;
 }

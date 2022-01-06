@@ -990,6 +990,11 @@ export interface DescribeTaskStatusRequest {
    * 请求ID，即接口返回的 RequestId 参数。
    */
   TaskId?: string
+
+  /**
+   * 订单ID。
+   */
+  DealName?: string
 }
 
 /**
@@ -1489,6 +1494,12 @@ export interface DescribeTaskStatusResponse {
    * 任务的当前状态。 0：成功，1：失败，2：进行中。
    */
   Status: number
+
+  /**
+      * 由负载均衡实例唯一 ID 组成的数组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4587,6 +4598,12 @@ export interface CreateLoadBalancerResponse {
    * 由负载均衡实例唯一 ID 组成的数组。
    */
   LoadBalancerIds: Array<string>
+
+  /**
+      * 订单号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -801,7 +801,7 @@ export interface QueryExternalContactListResponse {
 }
 
 /**
- * 列部联系人简短信息
+ * 外部联系人简短信息
  */
 export interface ExternalContactSimpleInfo {
   /**

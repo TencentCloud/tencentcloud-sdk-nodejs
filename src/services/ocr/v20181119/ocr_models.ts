@@ -1284,7 +1284,7 @@ BACK 为驾驶证副页正面（有档案编号的一面）。
 export interface BizLicenseVerifyResult {
   /**
       * “0“：一致
-“-1”：此号未查询到结果
+“-1”：不一致
       */
   RegNum: string
 
