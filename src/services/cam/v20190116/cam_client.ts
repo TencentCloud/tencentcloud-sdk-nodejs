@@ -57,7 +57,7 @@ import {
   ListGroupsRequest,
   DeletePolicyVersionResponse,
   DetachGroupPolicyRequest,
-  UpdateAssumeRolePolicyRequest,
+  AttachedUserPolicyGroupInfo,
   ListGroupsForUserResponse,
   ListUsersForGroupRequest,
   RemoveUserFromGroupRequest,
@@ -73,6 +73,7 @@ import {
   DescribeSafeAuthFlagResponse,
   CreatePolicyVersionRequest,
   SecretIdLastUsed,
+  ListAttachedUserAllPoliciesResponse,
   DeleteGroupRequest,
   GetUserResponse,
   GetUserPermissionBoundaryResponse,
@@ -84,6 +85,7 @@ import {
   DeletePolicyRequest,
   GroupInfo,
   AddUserRequest,
+  UpdateAssumeRolePolicyRequest,
   LoginActionFlag,
   DeleteRoleRequest,
   ListWeChatWorkSubAccountsRequest,
@@ -133,6 +135,7 @@ import {
   ListGrantServiceAccessActionNode,
   DetachGroupPolicyResponse,
   CreatePolicyRequest,
+  ListAttachedUserAllPoliciesRequest,
   DeletePolicyVersionRequest,
   CreateUserSAMLConfigRequest,
   UpdateGroupRequest,
@@ -157,6 +160,7 @@ import {
   DetachUserPolicyResponse,
   GetRoleResponse,
   CreateRoleRequest,
+  AttachedUserPolicy,
   DeleteServiceLinkedRoleResponse,
   GetPolicyResponse,
   DescribeSafeAuthFlagRequest,
@@ -556,13 +560,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
+   * 列出用户关联的策略（包括随组关联）
    */
-  async UpdateAssumeRolePolicy(
-    req: UpdateAssumeRolePolicyRequest,
-    cb?: (error: string, rep: UpdateAssumeRolePolicyResponse) => void
-  ): Promise<UpdateAssumeRolePolicyResponse> {
-    return this.request("UpdateAssumeRolePolicy", req, cb)
+  async ListAttachedUserAllPolicies(
+    req: ListAttachedUserAllPoliciesRequest,
+    cb?: (error: string, rep: ListAttachedUserAllPoliciesResponse) => void
+  ): Promise<ListAttachedUserAllPoliciesResponse> {
+    return this.request("ListAttachedUserAllPolicies", req, cb)
   }
 
   /**
@@ -873,6 +877,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePolicyResponse) => void
   ): Promise<CreatePolicyResponse> {
     return this.request("CreatePolicy", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
+   */
+  async UpdateAssumeRolePolicy(
+    req: UpdateAssumeRolePolicyRequest,
+    cb?: (error: string, rep: UpdateAssumeRolePolicyResponse) => void
+  ): Promise<UpdateAssumeRolePolicyResponse> {
+    return this.request("UpdateAssumeRolePolicy", req, cb)
   }
 
   /**

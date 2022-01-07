@@ -4157,7 +4157,7 @@ export interface HostInfo {
       */
     IsContainerd: boolean;
     /**
-      * 主机来源
+      * 主机来源：["CVM", "ECM", "LH", "BM"]  中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器；
       */
     MachineType: string;
     /**
@@ -4168,6 +4168,14 @@ export interface HostInfo {
       * 主机uuid
       */
     Uuid: string;
+    /**
+      * 主机实例ID
+      */
+    InstanceID: string;
+    /**
+      * 地域ID
+      */
+    RegionID: number;
 }
 /**
  * DescribeVirusScanTimeoutSetting请求参数结构体
@@ -4525,6 +4533,14 @@ export interface DescribeAssetHostDetailResponse {
       * 外网ip
       */
     PublicIp: string;
+    /**
+      * 主机实例ID
+      */
+    InstanceID: string;
+    /**
+      * 地域ID
+      */
+    RegionID: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9132,6 +9148,7 @@ export interface DescribeAssetHostListRequest {
 <li>HostID- string - 是否必填：否 - 主机id搜索</li>
 <li>DockerVersion- string - 是否必填：否 - docker版本搜索</li>
 <li>MachineType- string - 是否必填：否 - 主机来源MachineType搜索，"ALL":"全部"(或不传该字段),"TENCENTCLOUD":"腾讯云服务器","OTHERCLOUD":"非腾讯云服务器"</li>
+<li>DockerStatus- string - 是否必填：否 - docker安装状态，"ALL":"全部"(或不传该字段),"INSTALL":"已安装","UNINSTALL":"未安装"</li>
       */
     Filters?: Array<AssetFilters>;
     /**

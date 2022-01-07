@@ -132,6 +132,8 @@ var dtf_1 = require("./dtf");
 Object.defineProperty(exports, "dtf", { enumerable: true, get: function () { return dtf_1.dtf; } });
 var dts_1 = require("./dts");
 Object.defineProperty(exports, "dts", { enumerable: true, get: function () { return dts_1.dts; } });
+var eb_1 = require("./eb");
+Object.defineProperty(exports, "eb", { enumerable: true, get: function () { return eb_1.eb; } });
 var ecc_1 = require("./ecc");
 Object.defineProperty(exports, "ecc", { enumerable: true, get: function () { return ecc_1.ecc; } });
 var ecdn_1 = require("./ecdn");

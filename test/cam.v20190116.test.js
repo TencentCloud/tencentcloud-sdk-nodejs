@@ -378,9 +378,9 @@ it("cam.v20190116.GetPolicyVersion", async function () {
     }
 })
 
-it("cam.v20190116.UpdateAssumeRolePolicy", async function () {
+it("cam.v20190116.ListAttachedUserAllPolicies", async function () {
     try {
-       const data = await client.UpdateAssumeRolePolicy({})
+       const data = await client.ListAttachedUserAllPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +691,16 @@ it("cam.v20190116.PutUserPermissionsBoundary", async function () {
 it("cam.v20190116.CreatePolicy", async function () {
     try {
        const data = await client.CreatePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.UpdateAssumeRolePolicy", async function () {
+    try {
+       const data = await client.UpdateAssumeRolePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

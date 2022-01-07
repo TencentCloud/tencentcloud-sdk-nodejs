@@ -4854,6 +4854,18 @@ export interface ContainerGroupDeploy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TcrRepoInfo: TcrRepoInfo
+
+  /**
+      * 数据卷信息，list
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VolumeInfos: Array<VolumeInfo>
+
+  /**
+      * 数据卷挂载信息，list
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VolumeMountInfos: Array<VolumeMountInfo>
 }
 
 /**

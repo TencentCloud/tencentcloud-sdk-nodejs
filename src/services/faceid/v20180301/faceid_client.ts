@@ -31,6 +31,7 @@ import {
   BankCardVerificationRequest,
   CheckBankCardInformationResponse,
   DetectInfoBestFrame,
+  WeChatBillDetail,
   GetEidTokenConfig,
   CheckIdCardInformationResponse,
   GetDetectInfoEnhancedResponse,
@@ -40,6 +41,7 @@ import {
   PhoneVerificationResponse,
   GetEidTokenRequest,
   IdCardOCRVerificationRequest,
+  GetWeChatBillDetailsResponse,
   CheckPhoneAndNameResponse,
   BankCard4EVerificationResponse,
   MobileStatusRequest,
@@ -54,12 +56,13 @@ import {
   CheckEidTokenStatusResponse,
   MobileStatusResponse,
   IdCardOCRVerificationResponse,
-  GetRealNameAuthTokenResponse,
+  ChargeDetail,
   LivenessResponse,
   CheckIdCardInformationRequest,
   DetectInfoText,
   DetectAuthRequest,
   MinorsVerificationResponse,
+  GetWeChatBillDetailsRequest,
   CheckEidTokenStatusRequest,
   GetEidResultResponse,
   GetRealNameAuthResultRequest,
@@ -87,6 +90,7 @@ import {
   DetectDetail,
   GetFaceIdResultResponse,
   EncryptedPhoneVerificationRequest,
+  GetRealNameAuthTokenResponse,
   GetRealNameAuthResultResponse,
   EncryptedPhoneVerificationResponse,
 } from "./faceid_models"
@@ -118,6 +122,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetActionSequenceResponse) => void
   ): Promise<GetActionSequenceResponse> {
     return this.request("GetActionSequence", req, cb)
+  }
+
+  /**
+   * 查询微信渠道服务（微信小程序、微信原生H5、微信普通H5）的账单明细及计费状态。
+   */
+  async GetWeChatBillDetails(
+    req: GetWeChatBillDetailsRequest,
+    cb?: (error: string, rep: GetWeChatBillDetailsResponse) => void
+  ): Promise<GetWeChatBillDetailsResponse> {
+    return this.request("GetWeChatBillDetails", req, cb)
   }
 
   /**

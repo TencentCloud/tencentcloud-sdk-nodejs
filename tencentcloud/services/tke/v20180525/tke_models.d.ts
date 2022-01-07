@@ -1449,6 +1449,11 @@ export interface PrometheusAlertRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Annotations?: Array<Label>;
+    /**
+      * 告警规则状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleState?: number;
 }
 /**
  * DescribePrometheusAgentInstances请求参数结构体
@@ -3902,6 +3907,12 @@ abnormal = 异常
       * 集群名称
       */
     ClusterName: string;
+    /**
+      * 额外labels
+本集群的所有指标都会带上这几个label
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalLabels: Array<Label>;
 }
 /**
  * 集群中控制器的状态描述

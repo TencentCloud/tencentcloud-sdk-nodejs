@@ -138,6 +138,11 @@ InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定�
    * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。
    */
   EnhancedService?: EnhancedService
+
+  /**
+   * CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。
+   */
+  CamRoleName?: string
 }
 
 /**

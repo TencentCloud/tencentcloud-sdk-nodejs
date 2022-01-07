@@ -244,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPolicyVersion", req, cb);
     }
     /**
-     * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
+     * 列出用户关联的策略（包括随组关联）
      */
-    async UpdateAssumeRolePolicy(req, cb) {
-        return this.request("UpdateAssumeRolePolicy", req, cb);
+    async ListAttachedUserAllPolicies(req, cb) {
+        return this.request("ListAttachedUserAllPolicies", req, cb);
     }
     /**
      * 获取用户权限边界
@@ -434,6 +434,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePolicy(req, cb) {
         return this.request("CreatePolicy", req, cb);
+    }
+    /**
+     * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
+     */
+    async UpdateAssumeRolePolicy(req, cb) {
+        return this.request("UpdateAssumeRolePolicy", req, cb);
     }
     /**
      * 本接口（DetachUserPolicy）可用于解除绑定到用户的策略。

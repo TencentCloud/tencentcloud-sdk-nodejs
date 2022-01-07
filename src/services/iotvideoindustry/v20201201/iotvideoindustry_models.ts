@@ -3736,12 +3736,17 @@ export interface ModifyLiveVideoResponse {
  */
 export interface DescribeChannelStreamURLRequest {
   /**
-   * 设备唯一标识
+   * 设备唯一标识，必填参数
    */
   DeviceId: string
 
   /**
-   * 通道唯一标识（接口升级字段为必填）
+   * 流地址失效时间，固定值填写0，其他参数无效，必填参数
+   */
+  ExpireTime: number
+
+  /**
+   * 通道唯一标识（接口升级字段为必填），必填参数
    */
   ChannelId?: string
 }

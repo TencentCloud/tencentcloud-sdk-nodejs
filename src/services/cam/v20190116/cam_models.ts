@@ -654,23 +654,18 @@ export interface DetachGroupPolicyRequest {
 }
 
 /**
- * UpdateAssumeRolePolicy请求参数结构体
+ * 用户关联策略(随组管理)信息
  */
-export interface UpdateAssumeRolePolicyRequest {
+export interface AttachedUserPolicyGroupInfo {
   /**
-   * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
+   * 分组ID
    */
-  PolicyDocument: string
+  GroupId: number
 
   /**
-   * 角色ID，用于指定角色，入参 RoleId 与 RoleName 二选一
+   * 分组名称
    */
-  RoleId?: string
-
-  /**
-   * 角色名称，用于指定角色，入参 RoleId 与 RoleName 二选一
-   */
-  RoleName?: string
+  GroupName: string
 }
 
 /**
@@ -1046,6 +1041,26 @@ export interface SecretIdLastUsed {
 }
 
 /**
+ * ListAttachedUserAllPolicies返回参数结构体
+ */
+export interface ListAttachedUserAllPoliciesResponse {
+  /**
+   * 策略列表数据
+   */
+  PolicyList: Array<AttachedUserPolicy>
+
+  /**
+   * 策略总数
+   */
+  TotalNum: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteGroup请求参数结构体
  */
 export interface DeleteGroupRequest {
@@ -1383,6 +1398,26 @@ export interface AddUserRequest {
    * 邮箱
    */
   Email?: string
+}
+
+/**
+ * UpdateAssumeRolePolicy请求参数结构体
+ */
+export interface UpdateAssumeRolePolicyRequest {
+  /**
+   * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
+   */
+  PolicyDocument: string
+
+  /**
+   * 角色ID，用于指定角色，入参 RoleId 与 RoleName 二选一
+   */
+  RoleId?: string
+
+  /**
+   * 角色名称，用于指定角色，入参 RoleId 与 RoleName 二选一
+   */
+  RoleName?: string
 }
 
 /**
@@ -2323,6 +2358,41 @@ export interface CreatePolicyRequest {
 }
 
 /**
+ * ListAttachedUserAllPolicies请求参数结构体
+ */
+export interface ListAttachedUserAllPoliciesRequest {
+  /**
+   * 目标用户ID
+   */
+  TargetUin: number
+
+  /**
+   * 每页数量，必须大于 0 且小于或等于 200
+   */
+  Rp: number
+
+  /**
+   * 页码，从 1开始，不能大于 200
+   */
+  Page: number
+
+  /**
+   * 0:返回直接关联和随组关联策略，1:只返回直接关联策略，2:只返回随组关联策略
+   */
+  AttachType: number
+
+  /**
+   * 策略类型
+   */
+  StrategyType?: number
+
+  /**
+   * 搜索关键字
+   */
+  Keyword?: string
+}
+
+/**
  * DeletePolicyVersion请求参数结构体
  */
 export interface DeletePolicyVersionRequest {
@@ -2747,6 +2817,59 @@ export interface CreateRoleRequest {
    * 申请角色临时密钥的最长有效期限制(范围：0~43200)
    */
   SessionDuration?: number
+}
+
+/**
+ * 用户关联的策略详情
+ */
+export interface AttachedUserPolicy {
+  /**
+   * 策略ID
+   */
+  PolicyId: string
+
+  /**
+   * 策略名
+   */
+  PolicyName: string
+
+  /**
+   * 策略描述
+   */
+  Description: string
+
+  /**
+   * 创建时间
+   */
+  AddTime: string
+
+  /**
+   * 策略类型(1表示自定义策略，2表示预设策略)
+   */
+  StrategyType: string
+
+  /**
+   * 创建模式(1表示按产品或项目权限创建的策略，其他表示策略语法创建的策略)
+   */
+  CreateMode: string
+
+  /**
+      * 随组关联信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Groups: Array<AttachedUserPolicyGroupInfo>
+
+  /**
+      * 是否已下线(0:否 1:是)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Deactived: number
+
+  /**
+      * 已下线的产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeactivedDetail: Array<string>
 }
 
 /**

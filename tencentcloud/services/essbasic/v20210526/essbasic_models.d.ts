@@ -34,15 +34,15 @@ export interface FlowApproverInfo {
     /**
       * 签署人姓名
       */
-    Name: string;
-    /**
-      * 签署人手机号，脱敏显示
-      */
-    Mobile: string;
+    Name?: string;
     /**
       * 经办人身份证号
       */
     IdCardNumber?: string;
+    /**
+      * 签署人手机号，脱敏显示
+      */
+    Mobile?: string;
     /**
       * 签署完前端跳转的url，暂未使用
       */
@@ -67,6 +67,22 @@ export interface FlowApproverInfo {
       * 合同的强制预览时间：3~300s，未指定则按合同页数计算
       */
     PreReadTime?: number;
+    /**
+      * 个人签署方指定签署控件类型，目前仅支持：OCR_ESIGN
+      */
+    ComponentLimitType?: Array<string>;
+    /**
+      * 流程签署人在模板中对应的签署人Id；在非单方签署、以及非B2C签署的场景下必传，用于指定当前签署方在流程中的位置；
+      */
+    RecipientId?: string;
+    /**
+      * 同一渠道下其他合作企业OpenId，签署人为非发起方企业员工场景下必传；
+      */
+    OrganizationOpenId?: string;
+    /**
+      * 同一渠道下其他合作企业OpenId，B2B场景下必传；
+      */
+    OrganizationName?: string;
 }
 /**
  * PrepareFlows返回参数结构体
@@ -1068,7 +1084,7 @@ export interface FlowInfo {
       */
     CustomerData?: string;
     /**
-      * 被抄送人的信息列表
+      * 被抄送人的信息列表，抄送功能暂不开放
       */
     CcInfos?: Array<CcInfo>;
 }

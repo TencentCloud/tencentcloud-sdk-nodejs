@@ -38,6 +38,16 @@ it("faceid.v20180301.GetActionSequence", async function () {
     }
 })
 
+it("faceid.v20180301.GetWeChatBillDetails", async function () {
+    try {
+       const data = await client.GetWeChatBillDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.CheckIdCardInformation", async function () {
     try {
        const data = await client.CheckIdCardInformation({})

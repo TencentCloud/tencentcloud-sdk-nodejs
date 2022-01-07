@@ -350,6 +350,31 @@ export interface DetectInfoBestFrame {
 }
 
 /**
+ * 账单详情
+ */
+export interface WeChatBillDetail {
+  /**
+   * token
+   */
+  BizToken: string
+
+  /**
+   * 本token收费次数
+   */
+  ChargeCount: number
+
+  /**
+   * 本token计费详情
+   */
+  ChargeDetails: Array<ChargeDetail>
+
+  /**
+   * 业务RuleId
+   */
+  RuleId: string
+}
+
+/**
  * 获取token时的的配置
  */
 export interface GetEidTokenConfig {
@@ -687,6 +712,31 @@ export interface IdCardOCRVerificationRequest {
    * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
+}
+
+/**
+ * GetWeChatBillDetails返回参数结构体
+ */
+export interface GetWeChatBillDetailsResponse {
+  /**
+   * 是否还有下一页。该字段为true时，需要将NextCursor的值作为入参Cursor继续调用本接口。
+   */
+  HasNextPage: boolean
+
+  /**
+   * 下一页的游标。用于分页。
+   */
+  NextCursor: number
+
+  /**
+   * 数据
+   */
+  WeChatBillDetails: Array<WeChatBillDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1117,23 +1167,53 @@ export interface IdCardOCRVerificationResponse {
 }
 
 /**
- * GetRealNameAuthToken返回参数结构体
+ * 计费详情
  */
-export interface GetRealNameAuthTokenResponse {
+export interface ChargeDetail {
   /**
-   * 查询实名认证结果的唯一凭证
+   * 一比一时间时间戳，13位。
    */
-  AuthToken?: string
+  ReqTime: string
 
   /**
-   * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。
+   * 一比一请求的唯一标记。
    */
-  RedirectURL?: string
+  Seq: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 一比一时使用的、脱敏后的身份证号。
    */
-  RequestId?: string
+  Idcard: string
+
+  /**
+   * 一比一时使用的、脱敏后的姓名。
+   */
+  Name: string
+
+  /**
+   * 一比一的相似度。0-100，保留2位小数。
+   */
+  Sim: string
+
+  /**
+   * 本次详情是否收费。
+   */
+  IsNeedCharge: boolean
+
+  /**
+   * 收费类型，比对、核身、混合部署。
+   */
+  ChargeType: string
+
+  /**
+   * 本次活体一比一最终结果。
+   */
+  ErrorCode: string
+
+  /**
+   * 本次活体一比一最终结果描述。
+   */
+  ErrorMessage: string
 }
 
 /**
@@ -1445,6 +1525,26 @@ export interface MinorsVerificationResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetWeChatBillDetails请求参数结构体
+ */
+export interface GetWeChatBillDetailsRequest {
+  /**
+   * 拉取的日期（YYYY-MM-DD）。最大可追溯到365天前。当天6点后才能拉取前一天的数据。
+   */
+  Date: string
+
+  /**
+   * 游标。用于分页，取第一页时传0，取后续页面时，传入本接口响应中返回的NextCursor字段的值。
+   */
+  Cursor: number
+
+  /**
+   * 需要拉取账单详情业务对应的RuleId。不传会返回所有RuleId数据。默认为空字符串。
+   */
+  RuleId?: string
 }
 
 /**
@@ -2336,6 +2436,26 @@ export interface EncryptedPhoneVerificationRequest {
 1：使用MD5加密
       */
   EncryptionMode: string
+}
+
+/**
+ * GetRealNameAuthToken返回参数结构体
+ */
+export interface GetRealNameAuthTokenResponse {
+  /**
+   * 查询实名认证结果的唯一凭证
+   */
+  AuthToken?: string
+
+  /**
+   * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。
+   */
+  RedirectURL?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

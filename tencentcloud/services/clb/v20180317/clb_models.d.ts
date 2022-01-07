@@ -378,6 +378,10 @@ export interface CloneLoadBalancerRequest {
       */
     ClusterIds?: Array<string>;
     /**
+      * 性能保障规格。
+      */
+    SlaType?: string;
+    /**
       * Stgw独占集群的标签。
       */
     ClusterTag?: string;
