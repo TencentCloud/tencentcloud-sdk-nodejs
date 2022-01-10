@@ -265,6 +265,10 @@ export interface CreateInstancesRequest {
       * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例
       */
     DBKernelVersion?: string;
+    /**
+      * 实例节点信息，购买跨可用区实例时填写。
+      */
+    DBNodeSet?: Array<DBNode>;
 }
 /**
  * 描述一种规格的信息
@@ -540,13 +544,18 @@ export interface ZoneInfo {
       */
     ZoneId: number;
     /**
-      * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
+      * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用，SELLOUT表示售罄
       */
     ZoneState: string;
     /**
       * 该可用区是否支持Ipv6
       */
     ZoneSupportIpv6: number;
+    /**
+      * 该可用区对应的备可用区集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StandbyZoneSet: Array<string>;
 }
 /**
  * InquiryPriceCreateDBInstances请求参数结构体
@@ -2146,6 +2155,11 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DBMajorVersion: string;
+    /**
+      * 实例的节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DBNodeSet: Array<DBNode>;
 }
 /**
  * DescribeProductConfig返回参数结构体
@@ -2275,6 +2289,21 @@ export interface RemoveDBInstanceFromReadOnlyGroupRequest {
     ReadOnlyGroupId: string;
 }
 /**
+ * 描述实例节点信息，包括节点类型、节点所在可用区。
+ */
+export interface DBNode {
+    /**
+      * 节点类型，值可以为：
+Primary，代表主节点；
+Standby，代表备节点。
+      */
+    Role: string;
+    /**
+      * 节点所在可用区，例如 ap-guangzhou-1。
+      */
+    Zone: string;
+}
+/**
  * ModifyDBInstanceName返回参数结构体
  */
 export interface ModifyDBInstanceNameResponse {
@@ -2388,11 +2417,11 @@ export interface DescribeZonesResponse {
     /**
       * 返回的结果数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 可用区信息集合。
       */
-    ZoneSet?: Array<ZoneInfo>;
+    ZoneSet: Array<ZoneInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2630,6 +2659,11 @@ export interface DBBackup {
       * 外网下载地址
       */
     ExternalAddr: string;
+    /**
+      * 备份集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SetId: string;
 }
 /**
  * DescribeDBErrlogs返回参数结构体

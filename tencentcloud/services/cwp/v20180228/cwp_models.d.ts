@@ -2501,10 +2501,11 @@ Other 混合云专区
       * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
 <li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）</li>
-<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）</li>
 <li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
 <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+<li>Quuid - String - 是否必填: 否 - 云服务器uuid  最大100条.</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -5090,6 +5091,7 @@ export interface Machine {
 <li>OFFLINE: 离线  </li>
 <li>ONLINE: 在线</li>
 <li>SHUTDOWN: 已关机</li>
+<li>UNINSTALLED: 未防护</li>
       */
     MachineStatus: string;
     /**
@@ -5179,6 +5181,10 @@ export interface Machine {
       * 内核版本
       */
     KernelVersion: string;
+    /**
+      * 防护版本 BASIC_VERSION 基础版, PRO_VERSION 专业版 Flagship 旗舰版.
+      */
+    ProtectType: string;
 }
 /**
  * 授权机器信息
@@ -6934,6 +6940,10 @@ export interface DescribeMachineInfoResponse {
       */
     HasAssetScan: number;
     /**
+      * 防护版本 BASIC_VERSION 基础版, PRO_VERSION 专业版 Flagship 旗舰版.
+      */
+    ProtectType: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -6976,9 +6986,14 @@ export interface DescribeImportMachineInfoRequest {
       */
     ImportType: string;
     /**
-      * 是否仅支持专业版机器的查询（true：仅专业版   false：专业版+基础版）
+      * 该参数已作废.
       */
     IsQueryProMachine?: boolean;
+    /**
+      * 过滤条件。
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）</li>
+      */
+    Filters?: Array<Filters>;
 }
 /**
  * 漏洞数量按等级分布统计结果实体
@@ -10425,6 +10440,16 @@ export interface MalwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Level: number;
+    /**
+      * 木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CheckPlatform: string;
+    /**
+      * 主机uuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uuid: string;
 }
 /**
  * 登录地信息
@@ -11807,6 +11832,16 @@ export interface DescribeGeneralStatResponse {
       * 已离线总数
       */
     Offline: number;
+    /**
+      * 旗舰版主机数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlagshipMachineCnt: number;
+    /**
+      * 保护天数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProtectDays: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

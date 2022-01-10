@@ -568,7 +568,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBruteAttackRules(req: ModifyBruteAttackRulesRequest, cb?: (error: string, rep: ModifyBruteAttackRulesResponse) => void): Promise<ModifyBruteAttackRulesResponse>;
     /**
-     *  用于设置新增主机自动开通专业版配置。
+     *  用于设置新增主机自动开通专业防护配置。
      */
     ModifyAutoOpenProVersionConfig(req: ModifyAutoOpenProVersionConfigRequest, cb?: (error: string, rep: ModifyAutoOpenProVersionConfigResponse) => void): Promise<ModifyAutoOpenProVersionConfigResponse>;
     /**

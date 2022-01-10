@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBDiagReportTaskRequest, DescribeTopSpaceTablesRequest, CreateSecurityAuditLogExportTaskRequest, DescribeDBDiagEventResponse, DescribeDBDiagEventsResponse, DescribeDBDiagReportTasksResponse, AddUserContactResponse, ModifyDiagDBInstanceConfResponse, DescribeTopSpaceSchemaTimeSeriesResponse, DescribeMySqlProcessListResponse, DescribeTopSpaceTablesResponse, KillMySqlThreadsResponse, CreateSchedulerMailProfileRequest, DescribeDBSpaceStatusRequest, ModifyDiagDBInstanceConfRequest, DescribeSecurityAuditLogDownloadUrlsRequest, CreateMailProfileResponse, DescribeSlowLogTimeSeriesStatsRequest, CreateDBDiagReportUrlResponse, DescribeDBDiagHistoryRequest, CreateDBDiagReportTaskResponse, CreateMailProfileRequest, DescribeSlowLogUserHostStatsResponse, DescribeMailProfileRequest, DeleteSecurityAuditLogExportTasksResponse, KillMySqlThreadsRequest, CreateDBDiagReportUrlRequest, DescribeTopSpaceTableTimeSeriesResponse, DescribeDBDiagHistoryResponse, DescribeDBDiagEventRequest, DescribeAllUserContactResponse, AddUserContactRequest, DescribeAllUserContactRequest, DescribeDiagDBInstancesRequest, DescribeSecurityAuditLogExportTasksRequest, DeleteSecurityAuditLogExportTasksRequest, CreateSchedulerMailProfileResponse, DescribeTopSpaceSchemaTimeSeriesRequest, DescribeSlowLogTopSqlsRequest, DescribeMailProfileResponse, DescribeHealthScoreRequest, DescribeDiagDBInstancesResponse, DescribeAllUserGroupRequest, CreateSecurityAuditLogExportTaskResponse, DescribeSlowLogUserHostStatsRequest, DescribeTopSpaceSchemasResponse, DescribeSlowLogTimeSeriesStatsResponse, DescribeAllUserGroupResponse, DescribeUserSqlAdviceResponse, DescribeDBSpaceStatusResponse, DescribeDBDiagEventsRequest, DescribeTopSpaceTableTimeSeriesRequest, DescribeDBDiagReportTasksRequest, DescribeHealthScoreResponse, DescribeSecurityAuditLogExportTasksResponse, DescribeTopSpaceSchemasRequest, DescribeSlowLogTopSqlsResponse, DescribeUserSqlAdviceRequest, DescribeMySqlProcessListRequest, DescribeSecurityAuditLogDownloadUrlsResponse } from "./dbbrain_models";
+import { CreateDBDiagReportTaskResponse, CreateDBDiagReportTaskRequest, DescribeTopSpaceTablesRequest, CreateSecurityAuditLogExportTaskRequest, DescribeDBDiagEventResponse, DescribeDBDiagEventsResponse, DescribeDBDiagReportTasksResponse, AddUserContactResponse, ModifyDiagDBInstanceConfResponse, DescribeTopSpaceSchemaTimeSeriesResponse, DescribeMySqlProcessListResponse, DescribeTopSpaceTablesResponse, KillMySqlThreadsResponse, CreateSchedulerMailProfileRequest, DescribeDBSpaceStatusRequest, ModifyDiagDBInstanceConfRequest, DescribeSecurityAuditLogDownloadUrlsRequest, CreateMailProfileResponse, DescribeSlowLogTimeSeriesStatsRequest, DescribeDBDiagHistoryRequest, CreateKillTaskResponse, DescribeDBDiagEventsRequest, CreateDBDiagReportUrlResponse, CreateKillTaskRequest, CreateMailProfileRequest, DescribeSlowLogUserHostStatsResponse, DescribeMailProfileRequest, DeleteSecurityAuditLogExportTasksResponse, KillMySqlThreadsRequest, CreateDBDiagReportUrlRequest, DescribeTopSpaceTableTimeSeriesResponse, DescribeDBDiagHistoryResponse, DescribeDBDiagEventRequest, DescribeAllUserContactResponse, AddUserContactRequest, DescribeAllUserContactRequest, DescribeDiagDBInstancesRequest, DescribeSecurityAuditLogExportTasksRequest, DeleteSecurityAuditLogExportTasksRequest, CreateSchedulerMailProfileResponse, DescribeTopSpaceSchemaTimeSeriesRequest, DescribeSlowLogTopSqlsRequest, DescribeMailProfileResponse, DescribeHealthScoreRequest, DescribeDiagDBInstancesResponse, DescribeAllUserGroupRequest, CreateProxySessionKillTaskRequest, CreateSecurityAuditLogExportTaskResponse, DescribeSlowLogUserHostStatsRequest, DescribeTopSpaceSchemasResponse, CreateProxySessionKillTaskResponse, DescribeSlowLogTimeSeriesStatsResponse, DescribeAllUserGroupResponse, DescribeUserSqlAdviceResponse, DescribeDBSpaceStatusResponse, DescribeTopSpaceTableTimeSeriesRequest, DescribeDBDiagReportTasksRequest, DescribeHealthScoreResponse, DescribeSecurityAuditLogExportTasksResponse, DescribeTopSpaceSchemasRequest, DescribeSlowLogTopSqlsResponse, DescribeUserSqlAdviceRequest, DescribeMySqlProcessListRequest, DescribeSecurityAuditLogDownloadUrlsResponse } from "./dbbrain_models";
 /**
  * dbbrain client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 查询关系型数据库的实时线程列表。
      */
     DescribeMySqlProcessList(req: DescribeMySqlProcessListRequest, cb?: (error: string, rep: DescribeMySqlProcessListResponse) => void): Promise<DescribeMySqlProcessListResponse>;
+    /**
+     * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
+     */
+    CreateProxySessionKillTask(req: CreateProxySessionKillTaskRequest, cb?: (error: string, rep: CreateProxySessionKillTaskResponse) => void): Promise<CreateProxySessionKillTaskResponse>;
     /**
      * 查询健康报告生成任务列表。
      */
@@ -107,6 +111,10 @@ export declare class Client extends AbstractClient {
      * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
      */
     DescribeTopSpaceSchemaTimeSeries(req: DescribeTopSpaceSchemaTimeSeriesRequest, cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void): Promise<DescribeTopSpaceSchemaTimeSeriesResponse>;
+    /**
+     * 创建中断会话的任务。
+     */
+    CreateKillTask(req: CreateKillTaskRequest, cb?: (error: string, rep: CreateKillTaskResponse) => void): Promise<CreateKillTaskResponse>;
     /**
      * 获取SQL优化建议。
      */

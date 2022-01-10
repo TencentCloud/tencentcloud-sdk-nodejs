@@ -49,6 +49,20 @@ export interface HealthReportTask {
     HealthStatus: HealthStatus;
 }
 /**
+ * CreateDBDiagReportTask返回参数结构体
+ */
+export interface CreateDBDiagReportTaskResponse {
+    /**
+      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateDBDiagReportTask请求参数结构体
  */
 export interface CreateDBDiagReportTaskRequest {
@@ -662,58 +676,6 @@ export interface DescribeSlowLogTimeSeriesStatsRequest {
     Product?: string;
 }
 /**
- * CreateDBDiagReportUrl返回参数结构体
- */
-export interface CreateDBDiagReportUrlResponse {
-    /**
-      * 健康报告浏览地址。
-      */
-    ReportUrl: string;
-    /**
-      * 健康报告浏览地址到期时间戳（秒）。
-      */
-    ExpireTime: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDBDiagHistory请求参数结构体
- */
-export interface DescribeDBDiagHistoryRequest {
-    /**
-      * 实例 ID 。
-      */
-    InstanceId: string;
-    /**
-      * 开始时间，如“2019-09-10 12:13:14”。
-      */
-    StartTime: string;
-    /**
-      * 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。
-      */
-    EndTime: string;
-    /**
-      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
-      */
-    Product?: string;
-}
-/**
- * CreateDBDiagReportTask返回参数结构体
- */
-export interface CreateDBDiagReportTaskResponse {
-    /**
-      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AsyncRequestId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 实例诊断历史事件
  */
 export interface DiagHistoryEventItem {
@@ -758,6 +720,127 @@ export interface DiagHistoryEventItem {
       * 地域。
       */
     Region: string;
+}
+/**
+ * DescribeDBDiagHistory请求参数结构体
+ */
+export interface DescribeDBDiagHistoryRequest {
+    /**
+      * 实例 ID 。
+      */
+    InstanceId: string;
+    /**
+      * 开始时间，如“2019-09-10 12:13:14”。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。
+      */
+    EndTime: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+      */
+    Product?: string;
+}
+/**
+ * CreateKillTask返回参数结构体
+ */
+export interface CreateKillTaskResponse {
+    /**
+      * kill会话任务创建成功返回1
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDBDiagEvents请求参数结构体
+ */
+export interface DescribeDBDiagEventsRequest {
+    /**
+      * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，如“2021-05-27 01:00:00”，结束时间与开始时间的间隔最大可为7天。
+      */
+    EndTime: string;
+    /**
+      * 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。
+      */
+    Severities?: Array<number>;
+    /**
+      * 实例ID列表。
+      */
+    InstanceIds?: Array<string>;
+    /**
+      * 偏移量，默认0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认20，最大值为50。
+      */
+    Limit?: number;
+}
+/**
+ * CreateDBDiagReportUrl返回参数结构体
+ */
+export interface CreateDBDiagReportUrlResponse {
+    /**
+      * 健康报告浏览地址。
+      */
+    ReportUrl: string;
+    /**
+      * 健康报告浏览地址到期时间戳（秒）。
+      */
+    ExpireTime: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateKillTask请求参数结构体
+ */
+export interface CreateKillTaskRequest {
+    /**
+      * kill会话任务的关联实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 任务持续时间时间，单位秒，手动关闭任务传-1。
+      */
+    Duration: number;
+    /**
+      * 任务过滤条件，客户端IP。
+      */
+    Host?: string;
+    /**
+      * 任务过滤条件，数据库库名,多个","隔开。
+      */
+    DB?: string;
+    /**
+      * 任务过滤条件，相关命令，多个","隔开。
+      */
+    Command?: string;
+    /**
+      * 任务过滤条件，支持单条件前缀匹配。
+      */
+    Info?: string;
+    /**
+      * 任务过滤条件，用户类型。
+      */
+    User?: string;
+    /**
+      * 任务过滤条件，会话持续时长，单位秒。
+      */
+    Time?: number;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+      */
+    Product?: string;
 }
 /**
  * 慢日志来源地址详情。
@@ -1642,6 +1725,19 @@ export interface DescribeAllUserGroupRequest {
     Names?: Array<string>;
 }
 /**
+ * CreateProxySessionKillTask请求参数结构体
+ */
+export interface CreateProxySessionKillTaskRequest {
+    /**
+      * 实例 ID。
+      */
+    InstanceId: string;
+    /**
+      * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+      */
+    Product: string;
+}
+/**
  * CreateSecurityAuditLogExportTask返回参数结构体
  */
 export interface CreateSecurityAuditLogExportTaskResponse {
@@ -1700,6 +1796,19 @@ export interface DescribeTopSpaceSchemasResponse {
       * 采集库空间数据的时间戳（秒）。
       */
     Timestamp: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateProxySessionKillTask返回参数结构体
+ */
+export interface CreateProxySessionKillTaskResponse {
+    /**
+      * 创建 kill 会话任务返回的异步任务 id
+      */
+    AsyncRequestId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1823,35 +1932,6 @@ export interface DescribeDBSpaceStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeDBDiagEvents请求参数结构体
- */
-export interface DescribeDBDiagEventsRequest {
-    /**
-      * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
-      */
-    StartTime: string;
-    /**
-      * 结束时间，如“2021-05-27 01:00:00”，结束时间与开始时间的间隔最大可为7天。
-      */
-    EndTime: string;
-    /**
-      * 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。
-      */
-    Severities?: Array<number>;
-    /**
-      * 实例ID列表。
-      */
-    InstanceIds?: Array<string>;
-    /**
-      * 偏移量，默认0。
-      */
-    Offset?: number;
-    /**
-      * 返回数量，默认20，最大值为50。
-      */
-    Limit?: number;
 }
 /**
  * 描述组信息。

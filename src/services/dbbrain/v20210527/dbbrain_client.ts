@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   SchemaSpaceTimeSeries,
   HealthReportTask,
+  CreateDBDiagReportTaskResponse,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
   DescribeTopSpaceTablesRequest,
@@ -46,10 +47,12 @@ import {
   MySqlProcess,
   CreateMailProfileResponse,
   DescribeSlowLogTimeSeriesStatsRequest,
-  CreateDBDiagReportUrlResponse,
-  DescribeDBDiagHistoryRequest,
-  CreateDBDiagReportTaskResponse,
   DiagHistoryEventItem,
+  DescribeDBDiagHistoryRequest,
+  CreateKillTaskResponse,
+  DescribeDBDiagEventsRequest,
+  CreateDBDiagReportUrlResponse,
+  CreateKillTaskRequest,
   SlowLogHost,
   CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
@@ -86,16 +89,17 @@ import {
   IssueTypeInfo,
   DescribeDiagDBInstancesResponse,
   DescribeAllUserGroupRequest,
+  CreateProxySessionKillTaskRequest,
   CreateSecurityAuditLogExportTaskResponse,
   SchemaItem,
   DescribeSlowLogUserHostStatsRequest,
   DescribeTopSpaceSchemasResponse,
+  CreateProxySessionKillTaskResponse,
   DescribeSlowLogTimeSeriesStatsResponse,
   MonitorFloatMetric,
   DescribeAllUserGroupResponse,
   DescribeUserSqlAdviceResponse,
   DescribeDBSpaceStatusResponse,
-  DescribeDBDiagEventsRequest,
   GroupItem,
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeDBDiagReportTasksRequest,
@@ -167,6 +171,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMySqlProcessListResponse) => void
   ): Promise<DescribeMySqlProcessListResponse> {
     return this.request("DescribeMySqlProcessList", req, cb)
+  }
+
+  /**
+   * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
+   */
+  async CreateProxySessionKillTask(
+    req: CreateProxySessionKillTaskRequest,
+    cb?: (error: string, rep: CreateProxySessionKillTaskResponse) => void
+  ): Promise<CreateProxySessionKillTaskResponse> {
+    return this.request("CreateProxySessionKillTask", req, cb)
   }
 
   /**
@@ -367,6 +381,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
   ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
     return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  }
+
+  /**
+   * 创建中断会话的任务。
+   */
+  async CreateKillTask(
+    req: CreateKillTaskRequest,
+    cb?: (error: string, rep: CreateKillTaskResponse) => void
+  ): Promise<CreateKillTaskResponse> {
+    return this.request("CreateKillTask", req, cb)
   }
 
   /**

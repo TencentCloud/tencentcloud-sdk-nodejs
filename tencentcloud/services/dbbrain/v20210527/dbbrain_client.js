@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMySqlProcessList", req, cb);
     }
     /**
+     * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
+     */
+    async CreateProxySessionKillTask(req, cb) {
+        return this.request("CreateProxySessionKillTask", req, cb);
+    }
+    /**
      * 查询健康报告生成任务列表。
      */
     async DescribeDBDiagReportTasks(req, cb) {
@@ -176,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTopSpaceSchemaTimeSeries(req, cb) {
         return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb);
+    }
+    /**
+     * 创建中断会话的任务。
+     */
+    async CreateKillTask(req, cb) {
+        return this.request("CreateKillTask", req, cb);
     }
     /**
      * 获取SQL优化建议。

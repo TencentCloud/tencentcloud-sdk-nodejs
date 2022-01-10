@@ -109,6 +109,7 @@ import {
   OpenDBExtranetAccessRequest,
   SlowlogDetail,
   RemoveDBInstanceFromReadOnlyGroupRequest,
+  DBNode,
   ModifyDBInstanceNameResponse,
   CloseDBExtranetAccessResponse,
   CreateReadOnlyDBInstanceRequest,

@@ -1370,6 +1370,12 @@ export interface ServiceConfig {
    * API的后端服务请求方法，如 GET。如果 ServiceType 是 HTTP，则此参数必传。前后端方法可不同。
    */
   Method?: string
+
+  /**
+      * API后端COS配置。如果 ServiceType 是 COS，则此参数必传。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CosConfig?: CosConfig
 }
 
 /**
@@ -2277,6 +2283,23 @@ export interface NetworkConfig {
 }
 
 /**
+ * 服务发布历史
+ */
+export interface ServiceReleaseHistory {
+  /**
+      * 发布版本总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 历史版本列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionList: Array<ServiceReleaseHistoryInfo>
+}
+
+/**
  * ModifyUsagePlan返回参数结构体
  */
 export interface ModifyUsagePlanResponse {
@@ -2735,6 +2758,21 @@ export interface DemoteServiceUsagePlanResponse {
 }
 
 /**
+ * DescribePluginApis返回参数结构体
+ */
+export interface DescribePluginApisResponse {
+  /**
+   * 插件绑定的API列表信息。
+   */
+  Result: AttachedApiSummary
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnableApiKey返回参数结构体
  */
 export interface EnableApiKeyResponse {
@@ -2748,23 +2786,6 @@ export interface EnableApiKeyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 服务发布历史
- */
-export interface ServiceReleaseHistory {
-  /**
-      * 发布版本总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
-  /**
-      * 历史版本列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VersionList: Array<ServiceReleaseHistoryInfo>
 }
 
 /**
@@ -4258,18 +4279,31 @@ export interface APIDocInfo {
 }
 
 /**
- * DescribePluginApis返回参数结构体
+ * cos类型的api配置
  */
-export interface DescribePluginApisResponse {
+export interface CosConfig {
   /**
-   * 插件绑定的API列表信息。
-   */
-  Result: AttachedApiSummary
+      * API调用后端COS的方式，前端请求方法与Action的可选值为：
+GET：GetObject
+PUT：PutObject
+POST：PostObject、AppendObject
+HEAD： HeadObject
+DELETE： DeleteObject。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * API后端COS的存储桶名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BucketName: string
+
+  /**
+      * API调用后端COS的签名开关，默认为false。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Authorization?: boolean
 }
 
 /**

@@ -1189,6 +1189,10 @@ export interface ModifyDBInstanceNetworkRequest {
       * 原vip保留时长，单位小时，默认为0，代表立即回收，最大为168小时
       */
     OldIpRetainTime?: number;
+    /**
+      * 指定VIP地址
+      */
+    Vip?: string;
 }
 /**
  * 冷备导入任务迁移细节
@@ -3007,7 +3011,7 @@ export interface ModifyDBInstanceNetworkResponse {
     /**
       * 实例转网流程id，可通过[DescribeFlowStatus](https://cloud.tencent.com/document/product/238/19967)接口查询流程状态
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

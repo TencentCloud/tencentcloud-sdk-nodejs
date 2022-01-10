@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     QueryActivityLiveCodeList(req: QueryActivityLiveCodeListRequest, cb?: (error: string, rep: QueryActivityLiveCodeListResponse) => void): Promise<QueryActivityLiveCodeListResponse>;
     /**
-     * 企业可通过此接口，根据外部联系人的userid，拉取客户详情
+     * 企业可通过此接口，根据外部联系人的userid，拉取外部联系人详情
      */
     QueryExternalContactDetail(req: QueryExternalContactDetailRequest, cb?: (error: string, rep: QueryExternalContactDetailResponse) => void): Promise<QueryExternalContactDetailResponse>;
     /**
@@ -44,7 +44,7 @@ export declare class Client extends AbstractClient {
      */
     QueryChatArchivingList(req: QueryChatArchivingListRequest, cb?: (error: string, rep: QueryChatArchivingListResponse) => void): Promise<QueryChatArchivingListResponse>;
     /**
-     * 企业可通过此接口获取指定成员添加的客户列表。客户是指配置了客户联系功能的成员所添加的外部联系人。没有配置客户联系功能的成员，所添加的外部联系人将不会作为客户返回。
+     * 企业可通过此接口基于外部联系人获取指定成员添加的客户列表。客户是指配置了客户联系功能的成员所添加的外部联系人。没有配置客户联系功能的成员，所添加的外部联系人将不会作为客户返回。
      */
     QueryExternalContactList(req: QueryExternalContactListRequest, cb?: (error: string, rep: QueryExternalContactListResponse) => void): Promise<QueryExternalContactListResponse>;
     /**

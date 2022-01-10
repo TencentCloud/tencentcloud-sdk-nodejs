@@ -68,6 +68,16 @@ it("dbbrain.v20210527.DescribeMySqlProcessList", async function () {
     }
 })
 
+it("dbbrain.v20210527.CreateProxySessionKillTask", async function () {
+    try {
+       const data = await client.CreateProxySessionKillTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeDBDiagReportTasks", async function () {
     try {
        const data = await client.DescribeDBDiagReportTasks({})
@@ -261,6 +271,16 @@ it("dbbrain.v20210527.AddUserContact", async function () {
 it("dbbrain.v20210527.DescribeTopSpaceSchemaTimeSeries", async function () {
     try {
        const data = await client.DescribeTopSpaceSchemaTimeSeries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.CreateKillTask", async function () {
+    try {
+       const data = await client.CreateKillTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

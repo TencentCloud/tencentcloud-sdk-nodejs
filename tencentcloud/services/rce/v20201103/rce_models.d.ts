@@ -574,4 +574,8 @@ export interface InputDescribeRiskModelData {
       * 客户业务侧标识用户的唯一ID
       */
     UserId: string;
+    /**
+      * 是否为测试流量
+      */
+    IsTest?: number;
 }
