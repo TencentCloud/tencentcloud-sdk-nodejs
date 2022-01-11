@@ -18,17 +18,21 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  StopPublishStreamResponse,
   StopGameRequest,
   SaveGameArchiveResponse,
+  StopPublishStreamRequest,
   SwitchGameArchiveRequest,
   TrylockWorkerResponse,
   DescribeInstancesCountResponse,
+  StartPublishStreamResponse,
   CreateSessionRequest,
   CreateSessionResponse,
   DescribeInstancesCountRequest,
   SaveGameArchiveRequest,
   TrylockWorkerRequest,
   SwitchGameArchiveResponse,
+  StartPublishStreamRequest,
   StopGameResponse,
 } from "./gs_models"
 
@@ -89,6 +93,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SwitchGameArchiveResponse) => void
   ): Promise<SwitchGameArchiveResponse> {
     return this.request("SwitchGameArchive", req, cb)
+  }
+
+  /**
+   * 开始云端推流
+   */
+  async StartPublishStream(
+    req: StartPublishStreamRequest,
+    cb?: (error: string, rep: StartPublishStreamResponse) => void
+  ): Promise<StartPublishStreamResponse> {
+    return this.request("StartPublishStream", req, cb)
+  }
+
+  /**
+   * 停止云端推流
+   */
+  async StopPublishStream(
+    req: StopPublishStreamRequest,
+    cb?: (error: string, rep: StopPublishStreamResponse) => void
+  ): Promise<StopPublishStreamResponse> {
+    return this.request("StopPublishStream", req, cb)
   }
 
   /**

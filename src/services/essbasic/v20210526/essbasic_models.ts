@@ -98,7 +98,7 @@ export interface FlowApproverInfo {
   PreReadTime?: number
 
   /**
-   * 个人签署方指定签署控件类型，目前仅支持：OCR_ESIGN
+   * 个人签署方指定签署控件类型，目前仅支持：OCR_ESIGN(AI智慧手写签名)
    */
   ComponentLimitType?: Array<string>
 
@@ -110,12 +110,12 @@ export interface FlowApproverInfo {
   /**
    * 同一渠道下其他合作企业OpenId，签署人为非发起方企业员工场景下必传；
    */
-  OrganizationOpenId?: string
+  OrganizationName?: string
 
   /**
-   * 同一渠道下其他合作企业OpenId，B2B场景下必传；
+   * 同一渠道下其他合作企业OpenId，签署人为非发起方企业员工场景下必传；
    */
-  OrganizationName?: string
+  OrganizationOpenId?: string
 }
 
 /**
@@ -301,6 +301,11 @@ export interface Recipient {
    * 签署顺序：数字越小优先级越高
    */
   RoutingOrder?: number
+
+  /**
+   * 是否是发起方
+   */
+  IsPromoter?: boolean
 }
 
 /**
@@ -1040,7 +1045,7 @@ export interface OperateChannelTemplateRequest {
   AuthTag?: string
 
   /**
-   * 合作企业方第三方机构唯一标识数据
+   * 合作企业方第三方机构唯一标识数据，支持多个， 用","进行分隔
    */
   ProxyOrganizationOpenIds?: string
 }

@@ -58,6 +58,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchGameArchive", req, cb);
     }
     /**
+     * 开始云端推流
+     */
+    async StartPublishStream(req, cb) {
+        return this.request("StartPublishStream", req, cb);
+    }
+    /**
+     * 停止云端推流
+     */
+    async StopPublishStream(req, cb) {
+        return this.request("StopPublishStream", req, cb);
+    }
+    /**
      * 创建会话
      */
     async CreateSession(req, cb) {

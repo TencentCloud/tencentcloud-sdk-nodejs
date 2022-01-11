@@ -2301,6 +2301,7 @@ export interface DescribeMediaProcessUsageDataRequest {
 <li> Editing: 视频编辑</li>
 <li> AdaptiveBitrateStreaming: 自适应码流</li>
 <li> ContentAudit: 内容审核</li>
+<li> RemoveWatermark: 去除水印</li>
 <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
       */
   Type?: string
@@ -3529,6 +3530,7 @@ export interface TaskStatData {
 <li> Editing: 视频编辑</li>
 <li> AdaptiveBitrateStreaming: 自适应码流</li>
 <li> ContentAudit: 智能识别</li>
+<li> RemoveWatermark: 去水印</li>
 <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
       */
   TaskType: string
@@ -3574,6 +3576,13 @@ export interface TaskStatData {
 <li>Edit.H265.FHD: H.265编码方式全高清视频编辑</li>
 <li>Edit.H265.2K: H.265编码方式2K视频编辑</li>
 <li>Edit.H265.4K: H.265编码方式4K视频编辑</li>
+去水印规格：
+<li>480P: 分辨率640*480及以下</li>
+<li>720P: 分辨率1280*720及以下</li>
+<li>1080P: 分辨率1920*1080及以下</li>
+<li>2K: 分辨率2560*1440及以下</li>
+<li>4K: 分辨率3840*2160及以下</li>
+<li>8K: 分辨率7680*4320及以下</li>
       */
   Details: Array<SpecificationDataItem>
 }
@@ -11298,6 +11307,14 @@ export interface AdaptiveDynamicStreamingInfoItem {
    * 播放地址。
    */
   Url: string
+
+  /**
+      * 媒体文件大小，单位：字节。
+<li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和；</li>
+<li>当媒体文件为 DASH 时，大小是 mpd 和分片文件大小的总和；</li>
+<li><font color=red>注意</font>：在 2022-01-10T16:00:00Z 前处理生成的自适应码流文件此字段为0。</li>
+      */
+  Size?: number
 }
 
 /**
@@ -12009,7 +12026,7 @@ export interface DescribeMediaProcessUsageDataResponse {
   /**
    * 视频处理统计数据概览，展示所查询任务的概览以及详细数据。
    */
-  MediaProcessDataSet?: Array<TaskStatData>
+  MediaProcessDataSet: Array<TaskStatData>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

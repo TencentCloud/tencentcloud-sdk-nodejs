@@ -65,7 +65,7 @@ import {
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   ModifyRealServerAccessStrategyResponse,
-  CloneAccountRequest,
+  CreateHourDBInstanceResponse,
   ParamModifyResult,
   DescribeDBInstancesRequest,
   DescribeDBSecurityGroupsRequest,
@@ -140,6 +140,7 @@ import {
   DescribeDBPerformanceResponse,
   ModifyDBSyncModeRequest,
   DescribeInstanceNodeInfoRequest,
+  CloneAccountRequest,
   CreateAccountResponse,
   DescribeLogFileRetentionPeriodResponse,
   RegionInfo,
@@ -151,6 +152,7 @@ import {
   DescribeDBResourceUsageDetailsRequest,
   DisassociateSecurityGroupsRequest,
   DBAccount,
+  CreateHourDBInstanceRequest,
   DescribeAccountPrivilegesRequest,
   DescribeDBPerformanceDetailsResponse,
   SqlLogItem,
@@ -197,6 +199,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRenewalPriceResponse) => void
   ): Promise<DescribeRenewalPriceResponse> {
     return this.request("DescribeRenewalPrice", req, cb)
+  }
+
+  /**
+   * 创建后付费实例
+   */
+  async CreateHourDBInstance(
+    req: CreateHourDBInstanceRequest,
+    cb?: (error: string, rep: CreateHourDBInstanceResponse) => void
+  ): Promise<CreateHourDBInstanceResponse> {
+    return this.request("CreateHourDBInstance", req, cb)
   }
 
   /**

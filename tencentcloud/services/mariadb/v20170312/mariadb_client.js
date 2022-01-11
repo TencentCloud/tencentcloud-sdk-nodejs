@@ -41,6 +41,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRenewalPrice", req, cb);
     }
     /**
+     * 创建后付费实例
+     */
+    async CreateHourDBInstance(req, cb) {
+        return this.request("CreateHourDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeInstanceNodeInfo）用于获取数据库实例主备节点信息
      */
     async DescribeInstanceNodeInfo(req, cb) {

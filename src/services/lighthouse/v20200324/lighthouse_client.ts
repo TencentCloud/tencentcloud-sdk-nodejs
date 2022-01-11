@@ -170,6 +170,7 @@ import {
   DescribeDisksReturnableRequest,
   SoftwareDetail,
   InstancePrice,
+  Tag,
   ModifySnapshotAttributeResponse,
   DescribeGeneralResourceQuotasResponse,
   ModifyInstancesRenewFlagRequest,

@@ -1107,38 +1107,25 @@ export interface ModifyRealServerAccessStrategyResponse {
 }
 
 /**
- * CloneAccount请求参数结构体
+ * CreateHourDBInstance返回参数结构体
  */
-export interface CloneAccountRequest {
+export interface CreateHourDBInstanceResponse {
   /**
-   * 实例ID
-   */
-  InstanceId: string
+      * 长订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+      */
+  DealName: string
 
   /**
-   * 源用户账户名
-   */
-  SrcUser: string
+      * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceIds: Array<string>
 
   /**
-   * 源用户HOST
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SrcHost: string
-
-  /**
-   * 目的用户账户名
-   */
-  DstUser: string
-
-  /**
-   * 目的用户HOST
-   */
-  DstHost: string
-
-  /**
-   * 目的用户账户描述
-   */
-  DstDesc?: string
+  RequestId?: string
 }
 
 /**
@@ -1349,6 +1336,11 @@ export interface DescribeProjectSecurityGroupsResponse {
    * 安全组详情。
    */
   Groups: Array<SecurityGroup>
+
+  /**
+   * 安全组总数。
+   */
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2089,7 +2081,7 @@ export interface ColumnPrivilege {
  */
 export interface ModifySyncTaskAttributeRequest {
   /**
-   * 一个或多个待操作的任务ID。可通过DescribeSyncTasks API返回值中的TaskId获取。每次请求允许操作的实例数量上限是100。
+   * 一个或多个待操作的任务ID。可通过DescribeSyncTasks API返回值中的TaskId获取。每次请求允许操作的任务数量上限是100。
    */
   TaskIds: Array<string>
 
@@ -2401,6 +2393,12 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceType: number
+
+  /**
+      * 实例标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceTags: Array<ResourceTag>
 }
 
 /**
@@ -3168,6 +3166,41 @@ export interface DescribeInstanceNodeInfoRequest {
 }
 
 /**
+ * CloneAccount请求参数结构体
+ */
+export interface CloneAccountRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 源用户账户名
+   */
+  SrcUser: string
+
+  /**
+   * 源用户HOST
+   */
+  SrcHost: string
+
+  /**
+   * 目的用户账户名
+   */
+  DstUser: string
+
+  /**
+   * 目的用户HOST
+   */
+  DstHost: string
+
+  /**
+   * 目的用户账户描述
+   */
+  DstDesc?: string
+}
+
+/**
  * CreateAccount返回参数结构体
  */
 export interface CreateAccountResponse {
@@ -3436,6 +3469,105 @@ export interface DBAccount {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DelayThresh: number
+}
+
+/**
+ * CreateHourDBInstance请求参数结构体
+ */
+export interface CreateHourDBInstanceRequest {
+  /**
+   * 节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
+   */
+  Zones: Array<string>
+
+  /**
+   * 节点个数
+   */
+  NodeCount: number
+
+  /**
+   * 内存大小，单位：GB
+   */
+  Memory: number
+
+  /**
+   * 储存大小，单位：GB
+   */
+  Storage: number
+
+  /**
+   * 购买实例数量
+   */
+  Count?: number
+
+  /**
+   * 项目ID，不传表示默认项目
+   */
+  ProjectId?: number
+
+  /**
+   * 统一网络ID，不传表示基础网络
+   */
+  VpcId?: string
+
+  /**
+   * 统一子网ID，VpcId有值时需填写
+   */
+  SubnetId?: string
+
+  /**
+      * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。
+10.0.10 - Mariadb 10.0.10；
+10.1.9 - Mariadb 10.1.9；
+5.7.17 - Percona 5.7.17。
+如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。
+      */
+  DbVersionId?: string
+
+  /**
+   * 自定义实例名称
+   */
+  InstanceName?: string
+
+  /**
+   * 安全组ID，不传表示不绑定安全组
+   */
+  SecurityGroupIds?: Array<string>
+
+  /**
+   * 是否支持IPv6
+   */
+  Ipv6Flag?: number
+
+  /**
+   * 标签键值对数组
+   */
+  ResourceTags?: Array<ResourceTag>
+
+  /**
+   * DCN源地域
+   */
+  DcnRegion?: string
+
+  /**
+   * DCN源实例ID
+   */
+  DcnInstanceId?: string
+
+  /**
+   * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
+   */
+  InitParams?: Array<DBParamValue>
+
+  /**
+   * 回档源实例ID
+   */
+  RollbackInstanceId?: string
+
+  /**
+   * 回档时间
+   */
+  RollbackTime?: string
 }
 
 /**

@@ -16,6 +16,16 @@
  */
 
 /**
+ * StopPublishStream返回参数结构体
+ */
+export interface StopPublishStreamResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopGame请求参数结构体
  */
 export interface StopGameRequest {
@@ -38,6 +48,16 @@ export interface SaveGameArchiveResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopPublishStream请求参数结构体
+ */
+export interface StopPublishStreamRequest {
+  /**
+   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
+   */
+  UserId: string
 }
 
 /**
@@ -89,6 +109,16 @@ export interface DescribeInstancesCountResponse {
    */
   Running: number
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartPublishStream返回参数结构体
+ */
+export interface StartPublishStreamResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -283,6 +313,21 @@ export interface SwitchGameArchiveResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StartPublishStream请求参数结构体
+ */
+export interface StartPublishStreamRequest {
+  /**
+   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
+   */
+  UserId: string
+
+  /**
+   * 推流地址，仅支持rtmp协议
+   */
+  PublishUrl: string
 }
 
 /**

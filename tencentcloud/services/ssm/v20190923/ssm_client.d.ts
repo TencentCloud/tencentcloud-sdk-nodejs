@@ -13,7 +13,8 @@ export declare class Client extends AbstractClient {
      */
     DescribeRotationHistory(req: DescribeRotationHistoryRequest, cb?: (error: string, rep: DescribeRotationHistoryResponse) => void): Promise<DescribeRotationHistoryResponse>;
     /**
-     * 轮转云产品凭据。该接口仅适用于处于Enabled状态的云产品凭据，对于其他状态的云产品凭据或用户自定义凭据不适用。
+     * 轮转云产品凭据或云API密钥对凭据。
+该接口仅适用于处于Enabled状态的云产品凭据或处于Enable状态的云API密钥对凭据，对于其他状态的云产品凭据或云API密钥对凭据或用户自定义凭据不适用。
      */
     RotateProductSecret(req: RotateProductSecretRequest, cb?: (error: string, rep: RotateProductSecretResponse) => void): Promise<RotateProductSecretResponse>;
     /**

@@ -400,6 +400,10 @@ export interface AddEditAbnormalProcessRuleRequest {
 export interface DescribeComplianceTaskAssetSummaryRequest {
     /**
       * 资产类型列表。
+ASSET_CONTAINER, 容器
+ASSET_IMAGE, 镜像
+ASSET_HOST, 主机
+ASSET_K8S, K8S资产
       */
     AssetTypeSet: Array<string>;
 }
@@ -3603,6 +3607,7 @@ ASSET_CONTAINER, 容器
 ASSET_IMAGE, 镜像
 ASSET_HOST, 主机
 ASSET_K8S, K8S资产
+AssetTypeSet, PolicySetId, PeriodTaskId三个参数，必须要给其中一个参数填写有效的值。
       */
     AssetTypeSet?: Array<string>;
     /**
@@ -9405,11 +9410,11 @@ export interface ServiceInfo {
  */
 export interface AddEditReverseShellWhiteListRequest {
     /**
-      * 增加白名单信息，白名单id为空，编辑白名单id不能为空
+      * 增加或编辑白名单信息。新增白名单时WhiteListInfo.id为空，编辑白名单WhiteListInfo.id不能为空。
       */
     WhiteListInfo: ReverseShellWhiteListInfo;
     /**
-      * 仅在添加白名单时候使用
+      * 仅在添加事件白名单时候使用
       */
     EventId?: string;
 }

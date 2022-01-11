@@ -68,6 +68,26 @@ it("gs.v20191118.SwitchGameArchive", async function () {
     }
 })
 
+it("gs.v20191118.StartPublishStream", async function () {
+    try {
+       const data = await client.StartPublishStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.StopPublishStream", async function () {
+    try {
+       const data = await client.StopPublishStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.CreateSession", async function () {
     try {
        const data = await client.CreateSession({})

@@ -1734,6 +1734,11 @@ FAILED：表示操作失败
    * 可用区。
    */
   Zone: string
+
+  /**
+   * 实例绑定的标签列表。
+   */
+  Tags: Array<Tag>
 }
 
 /**
@@ -3101,6 +3106,21 @@ export interface InstancePrice {
    * 折后价。
    */
   DiscountPrice: number
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key: string
+
+  /**
+   * 标签值
+   */
+  Value: string
 }
 
 /**

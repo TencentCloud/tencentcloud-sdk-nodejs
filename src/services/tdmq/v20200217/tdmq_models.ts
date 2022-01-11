@@ -3756,7 +3756,7 @@ export interface CreateClusterRequest {
   Remark?: string
 
   /**
-   * 集群的标签列表
+   * 集群的标签列表(已废弃)
    */
   Tags?: Array<Tag>
 

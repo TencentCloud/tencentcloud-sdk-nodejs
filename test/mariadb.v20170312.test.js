@@ -38,6 +38,16 @@ it("mariadb.v20170312.DescribeRenewalPrice", async function () {
     }
 })
 
+it("mariadb.v20170312.CreateHourDBInstance", async function () {
+    try {
+       const data = await client.CreateHourDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeInstanceNodeInfo", async function () {
     try {
        const data = await client.DescribeInstanceNodeInfo({})

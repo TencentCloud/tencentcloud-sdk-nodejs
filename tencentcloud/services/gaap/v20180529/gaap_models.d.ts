@@ -22,6 +22,21 @@ export interface RegionDetail {
       * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
       */
     IDCType: string;
+    /**
+      * 特性位图，每个bit位代表一种特性，其中：
+0，表示不支持该特性；
+1，表示支持该特性。
+特性位图含义如下（从右往左）：
+第1个bit，支持4层加速；
+第2个bit，支持7层加速；
+第3个bit，支持Http3接入；
+第4个bit，支持IPv6；
+第5个bit，支持精品BGP接入；
+第6个bit，支持三网接入；
+第7个bit，支持接入段Qos加速。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FeatureBitmap: number;
 }
 /**
  * DescribeUDPListeners请求参数结构体
@@ -575,6 +590,14 @@ export interface DescribeHTTPSListenersRequest {
       * 过滤条件，通道组ID
       */
     GroupId?: string;
+    /**
+      * 支持Http3的开关，其中：
+0，表示不需要支持Http3接入；
+1，表示需要支持Http3接入。
+注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。
+该功能的启停无法在监听器创建完毕后再修改。
+      */
+    Http3Supported?: number;
 }
 /**
  * DescribeAccessRegionsByDestRegion返回参数结构体
@@ -1194,6 +1217,14 @@ export interface CreateProxyGroupRequest {
       * 通道组套餐类型，可取值：Thunder、Accelerator，默认值Thunder
       */
     PackageType?: string;
+    /**
+      * 支持Http3的开关，其中：
+0，表示不需要支持Http3接入；
+1，表示需要支持Http3接入。
+注意：如果开启了Http3的功能，那么该通道组就不再支持TCP/UDP接入的功能。
+该功能的启停无法在通道组创建完毕后再修改。
+      */
+    Http3Supported?: number;
 }
 /**
  * 7层监听器转发规则信息
@@ -2382,6 +2413,13 @@ MOVING表示通道迁移中。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProxyType: number;
+    /**
+      * 支持Http3特性的标识，其中：
+0，表示不支持Http3；
+1，表示支持Http3。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Http3Supported: number;
 }
 /**
  * CreateProxyGroupDomain返回参数结构体
@@ -2586,6 +2624,10 @@ export interface CreateProxyRequest {
       * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
       */
     PackageType?: string;
+    /**
+      * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+      */
+    Http3Supported?: number;
 }
 /**
  * DeleteCertificate请求参数结构体
@@ -2653,6 +2695,13 @@ export interface CreateDomainRequest {
 仅当采用双向认证的方式时，需要设置该字段或ClientCertificateId字段。
       */
     PolyClientCertificateIds?: Array<string>;
+    /**
+      * 是否开启Http3特性的标识，其中：
+0，表示不开启Http3；
+1，表示开启Http3。
+默认不开启Http3。可以通过SetDomainHttp3开启。
+      */
+    Http3Supported?: number;
 }
 /**
  * CreateRule请求参数结构体
@@ -2839,10 +2888,17 @@ export interface ProxyGroupDetail {
       */
     IPAddressVersion: string;
     /**
-      * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示游戏加速器通道组。
+      * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示游戏加速器通道组，CrossBorder表示跨境通道组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PackageType: string;
+    /**
+      * 支持Http3特性的标识，其中：
+0表示关闭；
+1表示启用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Http3Supported: number;
 }
 /**
  * CreateHTTPListener请求参数结构体
@@ -3354,6 +3410,21 @@ export interface AccessRegionDetial {
       * 机房类型, dc表示DataCenter数据中心, ec表示EdgeComputing边缘节点
       */
     IDCType: string;
+    /**
+      * 特性位图，每个bit位代表一种特性，其中：
+0，表示不支持该特性；
+1，表示支持该特性。
+特性位图含义如下（从右往左）：
+第1个bit，支持4层加速；
+第2个bit，支持7层加速；
+第3个bit，支持Http3接入；
+第4个bit，支持IPv6；
+第5个bit，支持精品BGP接入；
+第6个bit，支持三网接入；
+第7个bit，支持接入段Qos加速。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FeatureBitmap: number;
 }
 /**
  * DescribeProxyGroupList请求参数结构体
@@ -3831,6 +3902,13 @@ export interface DomainRuleSet {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BanStatus: string;
+    /**
+      * Http3特性标识，其中：
+0表示关闭；
+1表示启用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Http3Supported: number;
 }
 /**
  * DescribeTCPListeners请求参数结构体
@@ -4015,6 +4093,10 @@ export interface CheckProxyCreateRequest {
       * 通道套餐类型。Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
       */
     PackageType?: string;
+    /**
+      * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+      */
+    Http3Supported?: number;
 }
 /**
  * DescribeRegionAndPrice请求参数结构体
@@ -4145,6 +4227,14 @@ export interface CreateHTTPSListenerRequest {
       * 通道组ID，与ProxyId之间只能设置一个。表示创建通道组的监听器。
       */
     GroupId?: string;
+    /**
+      * 支持Http3的开关，其中：
+0，表示不需要支持Http3接入；
+1，表示需要支持Http3接入。
+注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。
+该功能的启停无法在监听器创建完毕后再修改。
+      */
+    Http3Supported?: number;
 }
 /**
  * DeleteSecurityRules请求参数结构体
@@ -4299,6 +4389,10 @@ export interface InquiryPriceCreateProxyRequest {
       * 通道套餐类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道，CrossBorder表示跨境通道。
       */
     PackageType?: string;
+    /**
+      * 支持Http3的开关，其中：0，表示不需要支持Http3接入；1，表示需要支持Http3接入。注意：如果开启了Http3的功能，那么该通道就不再支持TCP/UDP接入的功能。该功能的启停无法在通道创建完毕后再修改。
+      */
+    Http3Supported?: number;
 }
 /**
  * DescribeProxyGroupDetails返回参数结构体
@@ -4543,6 +4637,13 @@ CrossBorder表示跨境通道。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IPList: Array<IPDetail>;
+    /**
+      * 支持Http3协议的标识，其中：
+0表示关闭；
+1表示启用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Http3Supported: number;
 }
 /**
  * RemoveRealServers返回参数结构体

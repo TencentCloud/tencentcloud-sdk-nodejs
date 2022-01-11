@@ -93,6 +93,31 @@ export interface DescribeModelDefinitionResponse {
 }
 
 /**
+ * UnbindDevices请求参数结构体
+ */
+export interface UnbindDevicesRequest {
+  /**
+   * 网关设备的产品ID
+   */
+  GatewayProductId: string
+
+  /**
+   * 网关设备的设备名
+   */
+  GatewayDeviceName: string
+
+  /**
+   * 产品ID
+   */
+  ProductId: string
+
+  /**
+   * 设备名列表
+   */
+  DeviceNames: Array<string>
+}
+
+/**
  * DeleteDevices返回参数结构体
  */
 export interface DeleteDevicesResponse {
@@ -130,6 +155,28 @@ export interface ModifyStudioProductResponse {
 }
 
 /**
+ * GetGatewaySubDeviceList返回参数结构体
+ */
+export interface GetGatewaySubDeviceListResponse {
+  /**
+      * 设备的总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+      * 设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceList: FamilySubDevice
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteStudioProduct返回参数结构体
  */
 export interface DeleteStudioProductResponse {
@@ -140,23 +187,48 @@ export interface DeleteStudioProductResponse {
 }
 
 /**
- * GetPositionSpaceList请求参数结构体
+ * BindDevices请求参数结构体
  */
-export interface GetPositionSpaceListRequest {
+export interface BindDevicesRequest {
   /**
-   * 项目Id
+   * 网关设备的产品ID。
    */
-  ProjectId: string
+  GatewayProductId: string
 
   /**
-   * 翻页偏移量，0起始
+   * 网关设备的设备名。
    */
-  Offset: number
+  GatewayDeviceName: string
 
   /**
-   * 最大返回结果数
+   * 被绑定设备的产品ID。
    */
-  Limit: number
+  ProductId: string
+
+  /**
+   * 被绑定的多个设备名。
+   */
+  DeviceNames: Array<string>
+}
+
+/**
+ * DescribeGatewaySubProducts返回参数结构体
+ */
+export interface DescribeGatewaySubProductsResponse {
+  /**
+   * 当前分页的可绑定或解绑的产品信息。
+   */
+  Products: Array<BindProductInfo>
+
+  /**
+   * 可绑定或解绑的产品总数
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -277,6 +349,57 @@ export interface DescribeTopicPolicyRequest {
    * Topic名字
    */
   TopicName: string
+}
+
+/**
+ * 绑定、未绑定产品详细信息
+ */
+export interface BindProductInfo {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+
+  /**
+   * 产品名称。
+   */
+  ProductName: string
+
+  /**
+      * 产品所属项目ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId: string
+
+  /**
+      * 物模型类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataProtocol: number
+
+  /**
+      * 产品分组模板ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CategoryId: number
+
+  /**
+      * 产品类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductType: number
+
+  /**
+      * 连接类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetType: string
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DevStatus: string
 }
 
 /**
@@ -973,18 +1096,23 @@ export interface GetProjectListResponse {
 }
 
 /**
- * DescribeStudioProduct返回参数结构体
+ * CreateProject请求参数结构体
  */
-export interface DescribeStudioProductResponse {
+export interface CreateProjectRequest {
   /**
-   * 产品详情
+   * 项目名称
    */
-  Product?: ProductEntry
+  ProjectName: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 项目描述
    */
-  RequestId?: string
+  ProjectDesc: string
+
+  /**
+   * 实例ID，不带实例ID，默认为公共实例
+   */
+  InstanceId?: string
 }
 
 /**
@@ -1000,6 +1128,21 @@ export interface DescribeProjectResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UnbindProducts请求参数结构体
+ */
+export interface UnbindProductsRequest {
+  /**
+   * 网关产品ID
+   */
+  GatewayProductId: string
+
+  /**
+   * 待解绑的子产品ID数组
+   */
+  ProductIds: Array<string>
 }
 
 /**
@@ -1120,6 +1263,21 @@ export interface GetFamilyDeviceUserListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * BindDeviceInfo
+ */
+export interface BindDeviceInfo {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+
+  /**
+   * 设备名称。
+   */
+  DeviceName: string
 }
 
 /**
@@ -1362,6 +1520,26 @@ export interface DescribeSpaceFenceEventListResponse {
 }
 
 /**
+ * 围栏详细信息(包含创建时间及更新时间)
+ */
+export interface PositionFenceInfo {
+  /**
+   * 围栏信息
+   */
+  GeoFence: PositionFenceItem
+
+  /**
+   * 围栏创建时间
+   */
+  CreateTime: number
+
+  /**
+   * 围栏更新时间
+   */
+  UpdateTime: number
+}
+
+/**
  * DeleteLoRaGateway请求参数结构体
  */
 export interface DeleteLoRaGatewayRequest {
@@ -1369,6 +1547,21 @@ export interface DeleteLoRaGatewayRequest {
    * LoRa 网关 Id
    */
   GatewayId: string
+}
+
+/**
+ * UnbindProducts返回参数结构体
+ */
+export interface UnbindProductsResponse {
+  /**
+   * 绑定了待解绑的LoRa产品下的设备的网关设备列表
+   */
+  GatewayDeviceNames?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1484,6 +1677,26 @@ export interface ModifyTopicPolicyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetPositionSpaceList请求参数结构体
+ */
+export interface GetPositionSpaceListRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+
+  /**
+   * 翻页偏移量，0起始
+   */
+  Offset: number
+
+  /**
+   * 最大返回结果数
+   */
+  Limit: number
 }
 
 /**
@@ -2007,23 +2220,18 @@ export interface GetCOSURLRequest {
 }
 
 /**
- * CreateProject请求参数结构体
+ * DescribeStudioProduct返回参数结构体
  */
-export interface CreateProjectRequest {
+export interface DescribeStudioProductResponse {
   /**
-   * 项目名称
+   * 产品详情
    */
-  ProjectName: string
+  Product?: ProductEntry
 
   /**
-   * 项目描述
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProjectDesc: string
-
-  /**
-   * 实例ID，不带实例ID，默认为公共实例
-   */
-  InstanceId?: string
+  RequestId?: string
 }
 
 /**
@@ -2134,6 +2342,65 @@ export interface PublishMessageRequest {
    * Payload的内容编码格式，取值为base64或空。base64表示云端将接收到的base64编码后的报文再转换成二进制报文下发至设备，为空表示不作转换，透传下发至设备
    */
   PayloadEncoding?: string
+}
+
+/**
+ * 子设备详情
+ */
+export interface FamilySubDevice {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 设备ID
+   */
+  DeviceId: string
+
+  /**
+      * 设备别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AliasName: string
+
+  /**
+   * 设备绑定的家庭ID
+   */
+  FamilyId: string
+
+  /**
+      * 设备所在的房间ID，默认"0"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoomId: string
+
+  /**
+      * 图标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IconUrl: string
+
+  /**
+      * grid图标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IconUrlGrid: string
+
+  /**
+   * 设备绑定时间戳
+   */
+  CreateTime: number
+
+  /**
+   * 设备更新时间戳
+   */
+  UpdateTime: number
 }
 
 /**
@@ -2405,6 +2672,21 @@ export interface ProjectEntry {
 }
 
 /**
+ * ModifyLoRaGateway返回参数结构体
+ */
+export interface ModifyLoRaGatewayResponse {
+  /**
+   * 返回网关数据
+   */
+  Gateway?: LoRaGatewayItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 设备事件的搜索结果项
  */
 export interface EventHistoryItem {
@@ -2574,23 +2856,19 @@ export interface CreateFenceBindResponse {
 }
 
 /**
- * DescribeFenceBindList请求参数结构体
+ * DescribeTopicRule返回参数结构体
  */
-export interface DescribeFenceBindListRequest {
+export interface DescribeTopicRuleResponse {
   /**
-   * 围栏Id
-   */
-  FenceId: number
+      * 规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rule?: TopicRule
 
   /**
-   * 翻页偏移量，0起始
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-   * 最大返回结果数
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -2619,39 +2897,43 @@ export interface TopicItem {
 }
 
 /**
- * DescribeTopicRule返回参数结构体
+ * DescribeFenceBindList请求参数结构体
  */
-export interface DescribeTopicRuleResponse {
+export interface DescribeFenceBindListRequest {
   /**
-      * 规则描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Rule?: TopicRule
+   * 围栏Id
+   */
+  FenceId: number
+
+  /**
+   * 翻页偏移量，0起始
+   */
+  Offset?: number
+
+  /**
+   * 最大返回结果数
+   */
+  Limit?: number
+}
+
+/**
+ * DescribeBindedProducts返回参数结构体
+ */
+export interface DescribeBindedProductsResponse {
+  /**
+   * 当前分页的子产品数组
+   */
+  Products?: Array<BindProductInfo>
+
+  /**
+   * 绑定的子产品总数量
+   */
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 围栏详细信息(包含创建时间及更新时间)
- */
-export interface PositionFenceInfo {
-  /**
-   * 围栏信息
-   */
-  GeoFence: PositionFenceItem
-
-  /**
-   * 围栏创建时间
-   */
-  CreateTime: number
-
-  /**
-   * 围栏更新时间
-   */
-  UpdateTime: number
 }
 
 /**
@@ -2886,6 +3168,26 @@ export interface GetFamilyDeviceUserListRequest {
 }
 
 /**
+ * DescribeBindedProducts请求参数结构体
+ */
+export interface DescribeBindedProductsRequest {
+  /**
+   * 网关产品ID
+   */
+  GatewayProductId: string
+
+  /**
+   * 分页偏移量
+   */
+  Offset: number
+
+  /**
+   * 分页大小
+   */
+  Limit: number
+}
+
+/**
  * DescribeLoRaFrequency返回参数结构体
  */
 export interface DescribeLoRaFrequencyResponse {
@@ -3082,6 +3384,16 @@ export interface DescribeProjectRequest {
    * 项目ID
    */
   ProjectId: string
+}
+
+/**
+ * UnbindDevices返回参数结构体
+ */
+export interface UnbindDevicesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3320,6 +3632,28 @@ export interface LoRaGatewayItem {
 }
 
 /**
+ * DescribeDeviceBindGateway返回参数结构体
+ */
+export interface DescribeDeviceBindGatewayResponse {
+  /**
+      * 网关产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GatewayProductId: string
+
+  /**
+      * 网关设备名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GatewayDeviceName: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ControlDeviceData返回参数结构体
  */
 export interface ControlDeviceDataResponse {
@@ -3538,6 +3872,21 @@ export interface DeletePositionSpaceResponse {
 }
 
 /**
+ * DescribeDeviceBindGateway请求参数结构体
+ */
+export interface DescribeDeviceBindGatewayRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+
+  /**
+   * 设备名
+   */
+  DeviceName: string
+}
+
+/**
  * CreateLoRaFrequency返回参数结构体
  */
 export interface CreateLoRaFrequencyResponse {
@@ -3560,6 +3909,31 @@ export interface EnableTopicRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetGatewaySubDeviceList请求参数结构体
+ */
+export interface GetGatewaySubDeviceListRequest {
+  /**
+   * 网关产品ID
+   */
+  GatewayProductId: string
+
+  /**
+   * 网关设备名称
+   */
+  GatewayDeviceName: string
+
+  /**
+   * 分页偏移
+   */
+  Offset: number
+
+  /**
+   * 分页的大小
+   */
+  Limit: number
 }
 
 /**
@@ -3683,6 +4057,16 @@ export interface AppDeviceInfo {
 }
 
 /**
+ * BindProducts返回参数结构体
+ */
+export interface BindProductsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyProject返回参数结构体
  */
 export interface ModifyProjectResponse {
@@ -3728,6 +4112,61 @@ export interface BatchProductionInfo {
 }
 
 /**
+ * DescribeGatewayBindDevices请求参数结构体
+ */
+export interface DescribeGatewayBindDevicesRequest {
+  /**
+   * 网关设备的产品ID
+   */
+  GatewayProductId: string
+
+  /**
+   * 网关设备的设备名
+   */
+  GatewayDeviceName: string
+
+  /**
+   * 子产品的ID
+   */
+  ProductId: string
+
+  /**
+   * 分页的偏移
+   */
+  Offset: number
+
+  /**
+   * 分页的页大小
+   */
+  Limit: number
+}
+
+/**
+ * DescribeGatewaySubProducts请求参数结构体
+ */
+export interface DescribeGatewaySubProductsRequest {
+  /**
+   * 网关产品ID
+   */
+  GatewayProductId: string
+
+  /**
+   * 分页的偏移量
+   */
+  Offset?: number
+
+  /**
+   * 分页的大小
+   */
+  Limit?: number
+
+  /**
+   * 项目Id
+   */
+  ProjectId?: string
+}
+
+/**
  * DeleteStudioProduct请求参数结构体
  */
 export interface DeleteStudioProductRequest {
@@ -3735,6 +4174,21 @@ export interface DeleteStudioProductRequest {
    * 产品ID
    */
   ProductId: string
+}
+
+/**
+ * BindProducts请求参数结构体
+ */
+export interface BindProductsRequest {
+  /**
+   * 网关产品ID。
+   */
+  GatewayProductId: string
+
+  /**
+   * 待绑定的子产品ID数组。
+   */
+  ProductIds: Array<string>
 }
 
 /**
@@ -3778,14 +4232,9 @@ export interface PublishMessageResponse {
 }
 
 /**
- * ModifyLoRaGateway返回参数结构体
+ * BindDevices返回参数结构体
  */
-export interface ModifyLoRaGatewayResponse {
-  /**
-   * 返回网关数据
-   */
-  Gateway?: LoRaGatewayItem
-
+export interface BindDevicesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3860,6 +4309,16 @@ export interface DescribeModelDefinitionRequest {
    * 产品ID
    */
   ProductId: string
+}
+
+/**
+ * EnableTopicRule请求参数结构体
+ */
+export interface EnableTopicRuleRequest {
+  /**
+   * 规则名称
+   */
+  RuleName: string
 }
 
 /**
@@ -4230,13 +4689,28 @@ export interface GetBatchProductionsListResponse {
 }
 
 /**
- * EnableTopicRule请求参数结构体
+ * DescribeGatewayBindDevices返回参数结构体
  */
-export interface EnableTopicRuleRequest {
+export interface DescribeGatewayBindDevicesResponse {
   /**
-   * 规则名称
+   * 子设备信息。
    */
-  RuleName: string
+  Devices?: Array<BindDeviceInfo>
+
+  /**
+   * 子设备总数。
+   */
+  Total?: number
+
+  /**
+   * 子设备所属的产品名。
+   */
+  ProductName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

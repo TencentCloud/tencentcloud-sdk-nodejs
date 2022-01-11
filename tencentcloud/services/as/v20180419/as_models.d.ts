@@ -923,7 +923,7 @@ export interface DescribeAutoScalingInstancesRequest {
       */
     Offset?: number;
     /**
-      * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+      * 返回数量，默认为20，最大值为2000。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
     Limit?: number;
 }
@@ -2097,11 +2097,11 @@ export interface DescribeAutoScalingInstancesResponse {
     /**
       * 实例详细信息列表。
       */
-    AutoScalingInstanceSet?: Array<Instance>;
+    AutoScalingInstanceSet: Array<Instance>;
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -1032,7 +1032,12 @@ export interface DescribeProjectSecurityGroupsResponse {
   /**
    * 安全组详情。
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
+
+  /**
+   * 安全组个数。
+   */
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1693,6 +1698,12 @@ export interface DCDBInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceType: number
+
+  /**
+      * 实例标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceTags: Array<ResourceTag>
 }
 
 /**
@@ -2113,14 +2124,14 @@ export interface TableColumn {
  */
 export interface SecurityGroupBound {
   /**
-   * 策略，ACCEPT 或者 DROP
-   */
-  Action: string
-
-  /**
    * 来源 IP 或 IP 段，例如192.168.0.0/16
    */
   CidrIp: string
+
+  /**
+   * 策略，ACCEPT 或者 DROP
+   */
+  Action: string
 
   /**
    * 端口
@@ -2766,6 +2777,11 @@ export interface CreateDCDBInstanceRequest {
    * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费，用户开通了预付费不停服特权也会进行自动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0
    */
   AutoRenewFlag?: number
+
+  /**
+   * 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**

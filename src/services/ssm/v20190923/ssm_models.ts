@@ -42,7 +42,7 @@ export interface RestoreSecretResponse {
   /**
    * 凭据名称。
    */
-  SecretName?: string
+  SecretName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -57,7 +57,7 @@ export interface UpdateDescriptionResponse {
   /**
    * 凭据名称。
    */
-  SecretName?: string
+  SecretName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -123,7 +123,7 @@ export interface DescribeSecretResponse {
   ResourceID: string
 
   /**
-      * 是否开启轮转：True -- 开启轮转；False -- 禁止轮转。
+      * 是否开启轮转：True -- 开启轮转；False -- 关闭轮转。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RotationStatus: boolean
@@ -151,6 +151,12 @@ export interface DescribeSecretResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AssociatedInstanceIDs: Array<string>
+
+  /**
+      * 当凭据类型为云API密钥对凭据时，此字段有效，用于表示此云API密钥对所属的用户UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetUin: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -368,7 +374,7 @@ export interface GetRegionsResponse {
   /**
    * region列表。
    */
-  Regions?: Array<string>
+  Regions: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -468,7 +474,10 @@ export interface SecretMetadata {
   NextRotationTime: number
 
   /**
-      * 0 -- 用户自定义凭据；1 -- 云产品凭据
+      * 0 -- 用户自定义凭据；
+1 -- 云产品凭据；
+2 -- SSH密钥对凭据；
+3 -- 云API密钥对凭据；
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SecretType: number
@@ -496,6 +505,12 @@ export interface SecretMetadata {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AssociatedInstanceIDs: Array<string>
+
+  /**
+      * 当凭据类型为云API密钥对凭据时，此字段有效，用于表示云API密钥对所属的用户UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetUin: number
 }
 
 /**
@@ -572,24 +587,24 @@ export interface CreateSecretResponse {
   /**
    * 新创建的凭据名称。
    */
-  SecretName?: string
+  SecretName: string
 
   /**
    * 新创建的凭据版本。
    */
-  VersionId?: string
+  VersionId: string
 
   /**
       * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TagCode?: number
+  TagCode: number
 
   /**
       * 标签操作的返回信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TagMsg?: string
+  TagMsg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -697,6 +712,7 @@ export interface ListSecretsRequest {
       * 0  -- 表示用户自定义凭据，默认为0。
 1  -- 表示用户云产品凭据。
 2 -- 表示SSH密钥对凭据。
+3 -- 表示云API密钥对凭据。
       */
   SecretType?: number
 
@@ -861,7 +877,7 @@ export interface RestoreSecretRequest {
  */
 export interface RotateProductSecretResponse {
   /**
-   * 轮转异步任务ID号。
+   * 当凭据类型为云产品凭据时（即SecretType为1，如Mysq、Tdsql等托管凭据）此字段有效，返回轮转异步任务ID号。
    */
   FlowID: number
 
@@ -999,12 +1015,18 @@ export interface GetServiceStatusResponse {
   /**
    * true表示服务已开通，false 表示服务尚未开通。
    */
-  ServiceEnabled?: boolean
+  ServiceEnabled: boolean
 
   /**
    * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放。
    */
-  InvalidType?: number
+  InvalidType: number
+
+  /**
+      * true表示用户已经可以使用云API密钥安全托管功能，
+false表示用户暂时不能使用云API密钥安全托管功能。
+      */
+  AccessKeyEscrowEnabled: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1267,13 +1289,13 @@ export interface ListSecretVersionIdsResponse {
   /**
    * 凭据名称。
    */
-  SecretName?: string
+  SecretName: string
 
   /**
       * VersionId列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Versions?: Array<VersionInfo>
+  Versions: Array<VersionInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

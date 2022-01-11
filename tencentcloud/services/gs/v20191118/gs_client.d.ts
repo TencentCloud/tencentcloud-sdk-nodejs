@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { StopGameRequest, SaveGameArchiveResponse, SwitchGameArchiveRequest, TrylockWorkerResponse, DescribeInstancesCountResponse, CreateSessionRequest, CreateSessionResponse, DescribeInstancesCountRequest, SaveGameArchiveRequest, TrylockWorkerRequest, SwitchGameArchiveResponse, StopGameResponse } from "./gs_models";
+import { StopPublishStreamResponse, StopGameRequest, SaveGameArchiveResponse, StopPublishStreamRequest, SwitchGameArchiveRequest, TrylockWorkerResponse, DescribeInstancesCountResponse, StartPublishStreamResponse, CreateSessionRequest, CreateSessionResponse, DescribeInstancesCountRequest, SaveGameArchiveRequest, TrylockWorkerRequest, SwitchGameArchiveResponse, StartPublishStreamRequest, StopGameResponse } from "./gs_models";
 /**
  * gs client
  * @class
@@ -27,6 +27,14 @@ export declare class Client extends AbstractClient {
      * 切换游戏存档
      */
     SwitchGameArchive(req: SwitchGameArchiveRequest, cb?: (error: string, rep: SwitchGameArchiveResponse) => void): Promise<SwitchGameArchiveResponse>;
+    /**
+     * 开始云端推流
+     */
+    StartPublishStream(req: StartPublishStreamRequest, cb?: (error: string, rep: StartPublishStreamResponse) => void): Promise<StartPublishStreamResponse>;
+    /**
+     * 停止云端推流
+     */
+    StopPublishStream(req: StopPublishStreamRequest, cb?: (error: string, rep: StopPublishStreamResponse) => void): Promise<StopPublishStreamResponse>;
     /**
      * 创建会话
      */
