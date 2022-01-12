@@ -58,6 +58,26 @@ it("postgres.v20170312.DestroyDBInstance", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeBackupPlans", async function () {
+    try {
+       const data = await client.DescribeBackupPlans({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.RenewInstance", async function () {
+    try {
+       const data = await client.RenewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeDBBackups", async function () {
     try {
        const data = await client.DescribeDBBackups({})
@@ -121,6 +141,16 @@ it("postgres.v20170312.InquiryPriceCreateDBInstances", async function () {
 it("postgres.v20170312.DescribeDBInstanceParameters", async function () {
     try {
        const data = await client.DescribeDBInstanceParameters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyBackupPlan", async function () {
+    try {
+       const data = await client.ModifyBackupPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +231,16 @@ it("postgres.v20170312.ModifyDBInstanceName", async function () {
 it("postgres.v20170312.UpgradeDBInstance", async function () {
     try {
        const data = await client.UpgradeDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyDBInstanceDeployment", async function () {
+    try {
+       const data = await client.ModifyDBInstanceDeployment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +358,9 @@ it("postgres.v20170312.ModifyDBInstanceSpec", async function () {
     }
 })
 
-it("postgres.v20170312.RemoveDBInstanceFromReadOnlyGroup", async function () {
+it("postgres.v20170312.DescribeAvailableRecoveryTime", async function () {
     try {
-       const data = await client.RemoveDBInstanceFromReadOnlyGroup({})
+       const data = await client.DescribeAvailableRecoveryTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +411,16 @@ it("postgres.v20170312.ModifyDBInstanceReadOnlyGroup", async function () {
 it("postgres.v20170312.CloseDBExtranetAccess", async function () {
     try {
        const data = await client.CloseDBExtranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.CloneDBInstance", async function () {
+    try {
+       const data = await client.CloneDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +488,9 @@ it("postgres.v20170312.RebalanceReadOnlyGroup", async function () {
     }
 })
 
-it("postgres.v20170312.RenewInstance", async function () {
+it("postgres.v20170312.DescribeCloneDBInstanceSpec", async function () {
     try {
-       const data = await client.RenewInstance({})
+       const data = await client.DescribeCloneDBInstanceSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +541,16 @@ it("postgres.v20170312.ModifyReadOnlyGroupConfig", async function () {
 it("postgres.v20170312.CreateInstances", async function () {
     try {
        const data = await client.CreateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.RemoveDBInstanceFromReadOnlyGroup", async function () {
+    try {
+       const data = await client.RemoveDBInstanceFromReadOnlyGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

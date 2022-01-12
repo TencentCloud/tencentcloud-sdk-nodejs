@@ -52,6 +52,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyDBInstance", req, cb);
     }
     /**
+     * 本接口 (DescribeBackupPlans) 用于实例所有的备份计划查询
+     */
+    async DescribeBackupPlans(req, cb) {
+        return this.request("DescribeBackupPlans", req, cb);
+    }
+    /**
+     * 本接口（RenewInstance）用于续费实例。
+     */
+    async RenewInstance(req, cb) {
+        return this.request("RenewInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeDBBackups）用于查询实例备份列表。
      */
     async DescribeDBBackups(req, cb) {
@@ -92,6 +104,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBInstanceParameters(req, cb) {
         return this.request("DescribeDBInstanceParameters", req, cb);
+    }
+    /**
+     * 本接口 (ModifyBackupPlan) 用于实例备份计划的修改，默认是在每天的凌晨开始全量备份，备份保留时长是7天。可以根据此接口指定时间进行实例的备份。
+     */
+    async ModifyBackupPlan(req, cb) {
+        return this.request("ModifyBackupPlan", req, cb);
     }
     /**
      * 关闭serverlessDB实例外网
@@ -140,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpgradeDBInstance(req, cb) {
         return this.request("UpgradeDBInstance", req, cb);
+    }
+    /**
+     * 本接口（ModifyDBInstanceDeployment）用于修改节点可用区部署方式，仅支持主实例。
+     */
+    async ModifyDBInstanceDeployment(req, cb) {
+        return this.request("ModifyDBInstanceDeployment", req, cb);
     }
     /**
      * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。
@@ -208,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSpec", req, cb);
     }
     /**
-     * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+     * 本接口（DescribeAvailableRecoveryTime）用于查询实例可恢复的时间范围。
      */
-    async RemoveDBInstanceFromReadOnlyGroup(req, cb) {
-        return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
+    async DescribeAvailableRecoveryTime(req, cb) {
+        return this.request("DescribeAvailableRecoveryTime", req, cb);
     }
     /**
      * 本接口（CreateReadOnlyGroup）用于创建只读组
@@ -242,6 +266,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CloseDBExtranetAccess(req, cb) {
         return this.request("CloseDBExtranetAccess", req, cb);
+    }
+    /**
+     * 用于克隆实例，支持指定备份集、指定时间点进行克隆。
+     */
+    async CloneDBInstance(req, cb) {
+        return this.request("CloneDBInstance", req, cb);
     }
     /**
      * 本接口（AddDBInstanceToReadOnlyGroup）用于添加只读实例到只读组
@@ -280,10 +310,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RebalanceReadOnlyGroup", req, cb);
     }
     /**
-     * 本接口（RenewInstance）用于续费实例。
+     * 本接口（DescribeCloneDBInstanceSpec）用于查询克隆实例可选择的最小规格，包括SpecCode和磁盘。
      */
-    async RenewInstance(req, cb) {
-        return this.request("RenewInstance", req, cb);
+    async DescribeCloneDBInstanceSpec(req, cb) {
+        return this.request("DescribeCloneDBInstanceSpec", req, cb);
     }
     /**
      * 接口（DescribeDatabases）用来拉取数据库列表
@@ -314,6 +344,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateInstances(req, cb) {
         return this.request("CreateInstances", req, cb);
+    }
+    /**
+     * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+     */
+    async RemoveDBInstanceFromReadOnlyGroup(req, cb) {
+        return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
     }
     /**
      * 本接口 (DescribeProductConfig) 用于查询售卖规格配置。

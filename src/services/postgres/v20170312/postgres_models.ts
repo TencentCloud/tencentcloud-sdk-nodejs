@@ -414,6 +414,26 @@ export interface SpecItemInfo {
 }
 
 /**
+ * DescribeAvailableRecoveryTime返回参数结构体
+ */
+export interface DescribeAvailableRecoveryTimeResponse {
+  /**
+   * 可恢复的最早时间，时区为东八区（UTC+8）。
+   */
+  RecoveryBeginTime: string
+
+  /**
+   * 可恢复的最晚时间，时区为东八区（UTC+8）。
+   */
+  RecoveryEndTime: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDBInstanceReadOnlyGroup返回参数结构体
  */
 export interface ModifyDBInstanceReadOnlyGroupResponse {
@@ -426,6 +446,146 @@ export interface ModifyDBInstanceReadOnlyGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CloneDBInstance请求参数结构体
+ */
+export interface CloneDBInstanceRequest {
+  /**
+   * 克隆的源实例ID。
+   */
+  DBInstanceId: string
+
+  /**
+   * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+   */
+  SpecCode: string
+
+  /**
+   * 实例容量大小，单位：GB。
+   */
+  Storage: number
+
+  /**
+   * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+   */
+  Period: number
+
+  /**
+   * 续费标记：0-正常续费（默认）；1-自动续费。
+   */
+  AutoRenewFlag: number
+
+  /**
+   * 私有网络ID。
+   */
+  VpcId: string
+
+  /**
+   * 已配置的私有网络中的子网ID。
+   */
+  SubnetId: string
+
+  /**
+   * 新购实例的实例名称。
+   */
+  Name?: string
+
+  /**
+   * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
+   */
+  InstanceChargeType?: string
+
+  /**
+   * 安全组ID。
+   */
+  SecurityGroupIds?: Array<string>
+
+  /**
+   * 项目ID。
+   */
+  ProjectId?: number
+
+  /**
+   * 实例需要绑定的Tag信息，默认为空。
+   */
+  TagList?: Array<Tag>
+
+  /**
+   * 购买多可用区实例时填写。
+   */
+  DBNodeSet?: Array<DBNode>
+
+  /**
+   * 是否自动使用代金券。1（是），0（否），默认不使用。
+   */
+  AutoVoucher?: number
+
+  /**
+   * 代金券ID列表。
+   */
+  VoucherIds?: string
+
+  /**
+   * 活动ID。
+   */
+  ActivityId?: number
+
+  /**
+   * 基础备份集ID。
+   */
+  BackupSetId?: string
+
+  /**
+   * 恢复时间点。
+   */
+  RecoveryTargetTime?: string
+}
+
+/**
+ * DescribeCloneDBInstanceSpec请求参数结构体
+ */
+export interface DescribeCloneDBInstanceSpecRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+
+  /**
+   * 基础备份集ID，此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。
+   */
+  BackupSetId?: string
+
+  /**
+   * 恢复目标时间，此入参和BackupSetId必须选择一个传入。时区以东八区（UTC+8）为准。
+   */
+  RecoveryTargetTime?: string
+}
+
+/**
+ * 备份计划
+ */
+export interface BackupPlan {
+  /**
+   * 备份周期
+   */
+  BackupPeriod: string
+
+  /**
+   * 基础备份保留时长
+   */
+  BaseBackupRetentionPeriod: number
+
+  /**
+   * 开始备份的最早时间
+   */
+  MinBackupStartTime: string
+
+  /**
+   * 开始备份的最晚时间
+   */
+  MaxBackupStartTime: string
 }
 
 /**
@@ -651,6 +811,36 @@ export interface DBInstanceNetInfo {
 }
 
 /**
+ * ModifyDBInstanceDeployment请求参数结构体
+ */
+export interface ModifyDBInstanceDeploymentRequest {
+  /**
+   * 实例ID。
+   */
+  DBInstanceId: string
+
+  /**
+   * 实例节点信息。
+   */
+  DBNodeSet: Array<DBNode>
+
+  /**
+   * 切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。
+   */
+  SwitchTag: number
+
+  /**
+   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。
+   */
+  SwitchStartTime?: string
+
+  /**
+   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。
+   */
+  SwitchEndTime?: string
+}
+
+/**
  * 描述可用区的编码和状态信息
  */
 export interface ZoneInfo {
@@ -847,26 +1037,25 @@ export interface CloseServerlessDBExtranetAccessRequest {
 }
 
 /**
- * serverless账号描述
+ * CloneDBInstance返回参数结构体
  */
-export interface ServerlessDBAccount {
+export interface CloneDBInstanceResponse {
   /**
-      * 用户名
+      * 订单号。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DBUser: string
+  DealName: string
 
   /**
-      * 密码
+      * 订单流水号。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DBPassword: string
+  BillId: string
 
   /**
-      * 连接数限制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DBConnLimit: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -927,6 +1116,16 @@ export interface CreateReadOnlyDBInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAvailableRecoveryTime请求参数结构体
+ */
+export interface DescribeAvailableRecoveryTimeRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
 }
 
 /**
@@ -1067,6 +1266,21 @@ export interface ServerlessDBInstanceNetInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NetType: string
+}
+
+/**
+ * DescribeBackupPlans返回参数结构体
+ */
+export interface DescribeBackupPlansResponse {
+  /**
+   * 实例的备份计划集
+   */
+  Plans: Array<BackupPlan>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1532,6 +1746,39 @@ export interface DestroyDBInstanceRequest {
    * 待下线实例ID
    */
   DBInstanceId: string
+}
+
+/**
+ * serverless账号描述
+ */
+export interface ServerlessDBAccount {
+  /**
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBUser: string
+
+  /**
+      * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBPassword: string
+
+  /**
+      * 连接数限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBConnLimit: number
+}
+
+/**
+ * ModifyDBInstanceDeployment返回参数结构体
+ */
+export interface ModifyDBInstanceDeploymentResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2890,6 +3137,26 @@ export interface CreateReadOnlyDBInstanceRequest {
 }
 
 /**
+ * DescribeCloneDBInstanceSpec返回参数结构体
+ */
+export interface DescribeCloneDBInstanceSpecResponse {
+  /**
+   * 可购买的最小规格码。
+   */
+  MinSpecCode: string
+
+  /**
+   * 可购买的最小磁盘容量，单位GB。
+   */
+  MinStorage: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeZones返回参数结构体
  */
 export interface DescribeZonesResponse {
@@ -2982,6 +3249,16 @@ export interface CloseDBExtranetAccessRequest {
    * 是否关闭Ipv6外网，1：是，0：否
    */
   IsIpv6?: number
+}
+
+/**
+ * ModifyBackupPlan返回参数结构体
+ */
+export interface ModifyBackupPlanResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3212,6 +3489,36 @@ export interface DescribeDBErrlogsResponse {
 }
 
 /**
+ * ModifyBackupPlan请求参数结构体
+ */
+export interface ModifyBackupPlanRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
+
+  /**
+   * 实例最早开始备份时间
+   */
+  MinBackupStartTime?: string
+
+  /**
+   * 实例最晚开始备份时间
+   */
+  MaxBackupStartTime?: string
+
+  /**
+   * 实例备份保留时长，取值范围为3-7，单位是天
+   */
+  BaseBackupRetentionPeriod?: number
+
+  /**
+   * 实例备份周期，按照星期维度，格式为小写星期英文单词
+   */
+  BackupPeriod?: Array<string>
+}
+
+/**
  * 批量修改参数
  */
 export interface ParamEntry {
@@ -3405,6 +3712,16 @@ export interface RemoveDBInstanceFromReadOnlyGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBackupPlans请求参数结构体
+ */
+export interface DescribeBackupPlansRequest {
+  /**
+   * 实例ID
+   */
+  DBInstanceId: string
 }
 
 /**

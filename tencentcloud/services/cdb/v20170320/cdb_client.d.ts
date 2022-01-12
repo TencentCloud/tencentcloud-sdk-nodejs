@@ -397,7 +397,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAccountPassword(req: ModifyAccountPasswordRequest, cb?: (error: string, rep: ModifyAccountPasswordResponse) => void): Promise<ModifyAccountPasswordResponse>;
     /**
-     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表。
+     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表，全地域公共参数Region均为ap-shanghai。
      */
     DescribeUploadedFiles(req: DescribeUploadedFilesRequest, cb?: (error: string, rep: DescribeUploadedFilesResponse) => void): Promise<DescribeUploadedFilesResponse>;
     /**

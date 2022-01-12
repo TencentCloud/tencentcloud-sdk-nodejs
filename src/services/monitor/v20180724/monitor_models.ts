@@ -4386,6 +4386,18 @@ export interface URLNotice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ValidationCode?: string
+
+  /**
+      * 通知开始时间 一天开始的秒数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime?: number
+
+  /**
+      * 通知结束时间 一天开始的秒数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime?: number
 }
 
 /**

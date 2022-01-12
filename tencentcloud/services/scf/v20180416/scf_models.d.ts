@@ -2571,6 +2571,11 @@ export interface TriggerAction {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TriggerCronConfig: string;
+    /**
+      * 预置类型 Default
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProvisionedType?: string;
 }
 /**
  * 限制信息

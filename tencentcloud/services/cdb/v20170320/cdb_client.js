@@ -595,7 +595,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountPassword", req, cb);
     }
     /**
-     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表。
+     * 本接口(DescribeUploadedFiles)用于查询用户导入的SQL文件列表，全地域公共参数Region均为ap-shanghai。
      */
     async DescribeUploadedFiles(req, cb) {
         return this.request("DescribeUploadedFiles", req, cb);

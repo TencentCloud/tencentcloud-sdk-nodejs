@@ -674,8 +674,10 @@ export interface DeployApplicationRequest {
 
   /**
       * JDK 版本。
-- KONA：使用 kona jdk。
-- OPEN：使用 open jdk。
+- KONA:8：使用 kona jdk 8。
+- OPEN:8：使用 open jdk 8。
+- KONA:11：使用 kona jdk 11。
+- OPEN:11：使用 open jdk 11。
       */
   JdkVersion?: string
 
@@ -768,6 +770,21 @@ export interface DeployApplicationRequest {
    * 是否启用log，1为启用，0为不启用
    */
   LogEnable?: number
+
+  /**
+   * （除开镜像配置）配置是否修改
+   */
+  ConfEdited?: boolean
+
+  /**
+   * 是否开启应用加速
+   */
+  SpeedUp?: boolean
+
+  /**
+   * 启动探针配置
+   */
+  StartupProbe?: HealthCheckConfig
 }
 
 /**
@@ -1868,6 +1885,11 @@ export interface DeployStrategyConf {
    * 每批暂停间隔
    */
   BatchInterval?: number
+
+  /**
+   * 最小可用实例数
+   */
+  MinAvailable?: number
 }
 
 /**
@@ -2145,7 +2167,7 @@ export interface CreateEnvironmentRequest {
  */
 export interface Pair {
   /**
-   * 建
+   * 键
    */
   Key: string
 
@@ -2153,4 +2175,16 @@ export interface Pair {
    * 值
    */
   Value: string
+
+  /**
+      * 类型，default 为自定义，reserved 为系统变量，referenced 为引用配置项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Config?: string
 }

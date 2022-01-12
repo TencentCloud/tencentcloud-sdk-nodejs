@@ -26,7 +26,11 @@ import {
   DeleteReadOnlyGroupResponse,
   CreateInstancesRequest,
   SpecItemInfo,
+  DescribeAvailableRecoveryTimeResponse,
   ModifyDBInstanceReadOnlyGroupResponse,
+  CloneDBInstanceRequest,
+  DescribeCloneDBInstanceSpecRequest,
+  BackupPlan,
   OpenServerlessDBExtranetAccessRequest,
   RenewInstanceResponse,
   DeleteServerlessDBInstanceResponse,
@@ -38,16 +42,18 @@ import {
   RebalanceReadOnlyGroupRequest,
   DescribeRegionsResponse,
   DBInstanceNetInfo,
+  ModifyDBInstanceDeploymentRequest,
   ZoneInfo,
   InquiryPriceCreateDBInstancesRequest,
   NormalQueryItem,
   Tag,
   DescribeDBInstanceAttributeRequest,
   CloseServerlessDBExtranetAccessRequest,
-  ServerlessDBAccount,
+  CloneDBInstanceResponse,
   ModifyDBInstanceReadOnlyGroupRequest,
   AddDBInstanceToReadOnlyGroupResponse,
   CreateReadOnlyDBInstanceResponse,
+  DescribeAvailableRecoveryTimeRequest,
   DurationAnalysis,
   DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
@@ -55,6 +61,7 @@ import {
   ModifySwitchTimePeriodResponse,
   DisIsolateDBInstancesRequest,
   ServerlessDBInstanceNetInfo,
+  DescribeBackupPlansResponse,
   DescribeDBInstancesRequest,
   ModifyDBInstanceSpecRequest,
   ModifyAccountRemarkResponse,
@@ -70,6 +77,8 @@ import {
   PgDeal,
   DescribeDBErrlogsRequest,
   DestroyDBInstanceRequest,
+  ServerlessDBAccount,
+  ModifyDBInstanceDeploymentResponse,
   DescribeParamsEventRequest,
   EventInfo,
   CreateInstancesResponse,
@@ -113,12 +122,14 @@ import {
   ModifyDBInstanceNameResponse,
   CloseDBExtranetAccessResponse,
   CreateReadOnlyDBInstanceRequest,
+  DescribeCloneDBInstanceSpecResponse,
   DescribeZonesResponse,
   CreateServerlessDBInstanceResponse,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
   ModifyAccountRemarkRequest,
   CloseDBExtranetAccessRequest,
+  ModifyBackupPlanResponse,
   CreateServerlessDBInstanceRequest,
   InquiryPriceRenewDBInstanceRequest,
   CreateReadOnlyGroupResponse,
@@ -127,6 +138,7 @@ import {
   AccountInfo,
   DBBackup,
   DescribeDBErrlogsResponse,
+  ModifyBackupPlanRequest,
   ParamEntry,
   InquiryPriceUpgradeDBInstanceResponse,
   ModifySwitchTimePeriodRequest,
@@ -136,6 +148,7 @@ import {
   RestartDBInstanceResponse,
   DescribeDBInstancesResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
+  DescribeBackupPlansRequest,
   ResetAccountPasswordRequest,
   DescribeSlowQueryAnalysisResponse,
   ModifyDBInstanceParametersRequest,
@@ -200,6 +213,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyDBInstanceResponse) => void
   ): Promise<DestroyDBInstanceResponse> {
     return this.request("DestroyDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeBackupPlans) 用于实例所有的备份计划查询
+   */
+  async DescribeBackupPlans(
+    req: DescribeBackupPlansRequest,
+    cb?: (error: string, rep: DescribeBackupPlansResponse) => void
+  ): Promise<DescribeBackupPlansResponse> {
+    return this.request("DescribeBackupPlans", req, cb)
+  }
+
+  /**
+   * 本接口（RenewInstance）用于续费实例。
+   */
+  async RenewInstance(
+    req: RenewInstanceRequest,
+    cb?: (error: string, rep: RenewInstanceResponse) => void
+  ): Promise<RenewInstanceResponse> {
+    return this.request("RenewInstance", req, cb)
   }
 
   /**
@@ -270,6 +303,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstanceParametersResponse) => void
   ): Promise<DescribeDBInstanceParametersResponse> {
     return this.request("DescribeDBInstanceParameters", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyBackupPlan) 用于实例备份计划的修改，默认是在每天的凌晨开始全量备份，备份保留时长是7天。可以根据此接口指定时间进行实例的备份。
+   */
+  async ModifyBackupPlan(
+    req: ModifyBackupPlanRequest,
+    cb?: (error: string, rep: ModifyBackupPlanResponse) => void
+  ): Promise<ModifyBackupPlanResponse> {
+    return this.request("ModifyBackupPlan", req, cb)
   }
 
   /**
@@ -350,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
   ): Promise<UpgradeDBInstanceResponse> {
     return this.request("UpgradeDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceDeployment）用于修改节点可用区部署方式，仅支持主实例。
+   */
+  async ModifyDBInstanceDeployment(
+    req: ModifyDBInstanceDeploymentRequest,
+    cb?: (error: string, rep: ModifyDBInstanceDeploymentResponse) => void
+  ): Promise<ModifyDBInstanceDeploymentResponse> {
+    return this.request("ModifyDBInstanceDeployment", req, cb)
   }
 
   /**
@@ -463,13 +516,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+   * 本接口（DescribeAvailableRecoveryTime）用于查询实例可恢复的时间范围。
    */
-  async RemoveDBInstanceFromReadOnlyGroup(
-    req: RemoveDBInstanceFromReadOnlyGroupRequest,
-    cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void
-  ): Promise<RemoveDBInstanceFromReadOnlyGroupResponse> {
-    return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb)
+  async DescribeAvailableRecoveryTime(
+    req: DescribeAvailableRecoveryTimeRequest,
+    cb?: (error: string, rep: DescribeAvailableRecoveryTimeResponse) => void
+  ): Promise<DescribeAvailableRecoveryTimeResponse> {
+    return this.request("DescribeAvailableRecoveryTime", req, cb)
   }
 
   /**
@@ -520,6 +573,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void
   ): Promise<CloseDBExtranetAccessResponse> {
     return this.request("CloseDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 用于克隆实例，支持指定备份集、指定时间点进行克隆。
+   */
+  async CloneDBInstance(
+    req: CloneDBInstanceRequest,
+    cb?: (error: string, rep: CloneDBInstanceResponse) => void
+  ): Promise<CloneDBInstanceResponse> {
+    return this.request("CloneDBInstance", req, cb)
   }
 
   /**
@@ -583,13 +646,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RenewInstance）用于续费实例。
+   * 本接口（DescribeCloneDBInstanceSpec）用于查询克隆实例可选择的最小规格，包括SpecCode和磁盘。
    */
-  async RenewInstance(
-    req: RenewInstanceRequest,
-    cb?: (error: string, rep: RenewInstanceResponse) => void
-  ): Promise<RenewInstanceResponse> {
-    return this.request("RenewInstance", req, cb)
+  async DescribeCloneDBInstanceSpec(
+    req: DescribeCloneDBInstanceSpecRequest,
+    cb?: (error: string, rep: DescribeCloneDBInstanceSpecResponse) => void
+  ): Promise<DescribeCloneDBInstanceSpecResponse> {
+    return this.request("DescribeCloneDBInstanceSpec", req, cb)
   }
 
   /**
@@ -640,6 +703,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstancesResponse) => void
   ): Promise<CreateInstancesResponse> {
     return this.request("CreateInstances", req, cb)
+  }
+
+  /**
+   * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+   */
+  async RemoveDBInstanceFromReadOnlyGroup(
+    req: RemoveDBInstanceFromReadOnlyGroupRequest,
+    cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void
+  ): Promise<RemoveDBInstanceFromReadOnlyGroupResponse> {
+    return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb)
   }
 
   /**

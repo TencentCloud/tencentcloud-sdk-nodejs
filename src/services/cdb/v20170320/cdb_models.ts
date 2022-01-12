@@ -4762,12 +4762,12 @@ export interface DescribeUploadedFilesResponse {
   /**
    * 符合查询条件的SQL文件总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 返回的SQL文件列表。
    */
-  Items?: Array<SqlFileInfo>
+  Items: Array<SqlFileInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
