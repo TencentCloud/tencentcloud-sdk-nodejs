@@ -89,6 +89,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRealServerAccessStrategy", req, cb);
     }
     /**
+     * 本接口（SwitchDBInstanceHA）用于发起实例主备切换。
+     */
+    async SwitchDBInstanceHA(req, cb) {
+        return this.request("SwitchDBInstanceHA", req, cb);
+    }
+    /**
      * 本接口(DescribeFileDownloadUrl)用于获取数据库指定备份或日志文件的下载连接。
      */
     async DescribeFileDownloadUrl(req, cb) {

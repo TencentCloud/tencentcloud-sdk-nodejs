@@ -241,6 +241,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCloudBaseRunServerFlowConf", req, cb);
     }
     /**
+     * 搜索CLS日志，TCB角色秘钥访问
+     */
+    async SearchClsLog(req, cb) {
+        return this.request("SearchClsLog", req, cb);
+    }
+    /**
      * 查看容器托管的集群状态扩展使用
      */
     async DescribeCloudBaseRunResourceForExtend(req, cb) {

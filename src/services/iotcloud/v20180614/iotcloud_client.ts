@@ -18,12 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  PublishMessageRequest,
   UpdateDevicesEnableStateResponse,
   UnbindDevicesRequest,
   DescribeDeviceResourcesRequest,
   BindDevicesRequest,
   DescribeProductsRequest,
   TopicRulePayload,
+  PayloadLogItem,
   DescribeFirmwareRequest,
   DescribeDevicesResponse,
   DeleteTopicRuleResponse,
@@ -53,7 +55,7 @@ import {
   MultiDevicesInfo,
   ResetDeviceStateRequest,
   DescribeDeviceClientKeyRequest,
-  UpdateTopicPolicyRequest,
+  CLSLogItem,
   BatchUpdateShadow,
   DeleteDeviceRequest,
   DescribeFirmwareTaskDevicesRequest,
@@ -64,6 +66,7 @@ import {
   DescribePushResourceTaskStatisticsRequest,
   CreateLoraDeviceRequest,
   UpdateDevicesEnableStateRequest,
+  ListSDKLogRequest,
   SetProductsForbiddenStatusResponse,
   CreateProductResponse,
   CreateMultiDeviceRequest,
@@ -88,7 +91,7 @@ import {
   DescribeProductTaskResponse,
   DescribeDeviceResponse,
   PublishBroadcastMessageRequest,
-  PublishMessageRequest,
+  ListLogResponse,
   RetryDeviceFirmwareTaskRequest,
   DescribeFirmwareTaskDevicesResponse,
   DescribeFirmwareTasksResponse,
@@ -96,10 +99,12 @@ import {
   GetCOSURLResponse,
   UpdateDeviceAvailableStateResponse,
   EditFirmwareResponse,
+  ListSDKLogResponse,
   CancelTaskRequest,
   DescribeFirmwareTaskDistributionRequest,
   UpdateDeviceAvailableStateRequest,
   GetUserResourceInfoResponse,
+  ListLogPayloadResponse,
   DeleteProductResponse,
   DeviceProperty,
   PublishToDeviceRequest,
@@ -118,6 +123,7 @@ import {
   ReplaceTopicRuleRequest,
   PublishRRPCMessageResponse,
   CancelTaskResponse,
+  UpdateTopicPolicyRequest,
   Attribute,
   DescribeDeviceResourcesResponse,
   CreateLoraDeviceResponse,
@@ -141,7 +147,9 @@ import {
   GetUserResourceInfoRequest,
   DeviceTag,
   DescribeAllDevicesResponse,
+  ListLogRequest,
   ProductMetadata,
+  SDKLogItem,
   DescribeLoraDeviceRequest,
   DescribeTaskRequest,
   PublishMessageResponse,
@@ -155,6 +163,7 @@ import {
   ResetDeviceStateResponse,
   FirmwareTaskInfo,
   CreateTopicRuleResponse,
+  ListLogPayloadRequest,
   CreateTopicRuleRequest,
   DescribeResourceTasksResponse,
   DescribeFirmwareTaskStatisticsRequest,
@@ -234,6 +243,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMultiDevicesResponse) => void
   ): Promise<DescribeMultiDevicesResponse> {
     return this.request("DescribeMultiDevices", req, cb)
+  }
+
+  /**
+   * 获取日志内容列表
+   */
+  async ListLogPayload(
+    req: ListLogPayloadRequest,
+    cb?: (error: string, rep: ListLogPayloadResponse) => void
+  ): Promise<ListLogPayloadResponse> {
+    return this.request("ListLogPayload", req, cb)
   }
 
   /**
@@ -467,6 +486,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取设备上报的日志
+   */
+  async ListSDKLog(
+    req: ListSDKLogRequest,
+    cb?: (error: string, rep: ListSDKLogResponse) => void
+  ): Promise<ListSDKLogResponse> {
+    return this.request("ListSDKLog", req, cb)
+  }
+
+  /**
    * 本接口（DescribeProductResource）用于查询产品资源详情。
    */
   async DescribeProductResource(
@@ -604,6 +633,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceResourcesResponse) => void
   ): Promise<DescribeDeviceResourcesResponse> {
     return this.request("DescribeDeviceResources", req, cb)
+  }
+
+  /**
+   * 本接口（ListLog）用于查看日志信息
+   */
+  async ListLog(
+    req: ListLogRequest,
+    cb?: (error: string, rep: ListLogResponse) => void
+  ): Promise<ListLogResponse> {
+    return this.request("ListLog", req, cb)
   }
 
   /**

@@ -1,4 +1,33 @@
 /**
+ * PublishMessage请求参数结构体
+ */
+export interface PublishMessageRequest {
+    /**
+      * 消息发往的主题。命名规则：${ProductId}/${DeviceName}/[a-zA-Z0-9:_-]{1,128}
+      */
+    Topic: string;
+    /**
+      * 消息内容
+      */
+    Payload: string;
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 服务质量等级，取值为0或1
+      */
+    Qos?: number;
+    /**
+      * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+      */
+    PayloadEncoding?: string;
+}
+/**
  * UpdateDevicesEnableState返回参数结构体
  */
 export interface UpdateDevicesEnableStateResponse {
@@ -168,6 +197,51 @@ export interface TopicRulePayload {
       * 是否禁用规则
       */
     RuleDisabled?: boolean;
+}
+/**
+ * 内容日志项
+ */
+export interface PayloadLogItem {
+    /**
+      * 账号id
+      */
+    Uin: string;
+    /**
+      * 产品id
+      */
+    ProductID: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 来源类型
+      */
+    SrcType: string;
+    /**
+      * 来源名称
+      */
+    SrcName: string;
+    /**
+      * 消息topic
+      */
+    Topic: string;
+    /**
+      * 内容格式类型
+      */
+    PayloadFmtType: string;
+    /**
+      * 内容信息
+      */
+    Payload: string;
+    /**
+      * 请求ID
+      */
+    RequestID: string;
+    /**
+      * 日期时间
+      */
+    DateTime: string;
 }
 /**
  * DescribeFirmware请求参数结构体
@@ -745,29 +819,41 @@ export interface DescribeDeviceClientKeyRequest {
     DeviceName: string;
 }
 /**
- * UpdateTopicPolicy请求参数结构体
+ * CLS日志
  */
-export interface UpdateTopicPolicyRequest {
+export interface CLSLogItem {
+    /**
+      * 日志内容
+      */
+    Content: string;
+    /**
+      * 设备名称
+      */
+    Devicename: string;
     /**
       * 产品ID
       */
-    ProductID: string;
+    Productid: string;
     /**
-      * 更新前Topic名
+      * 请求ID
       */
-    TopicName: string;
+    Requestid: string;
     /**
-      * 更新后Topic名
+      * 结果
       */
-    NewTopicName: string;
+    Result: string;
     /**
-      * Topic权限
+      * 模块
       */
-    Privilege: number;
+    Scene: string;
     /**
-      * 代理订阅信息
+      * 日志时间
       */
-    BrokerSubscribe?: BrokerSubscribe;
+    Time: string;
+    /**
+      * 腾讯云账号
+      */
+    Userid: string;
 }
 /**
  * 批量更新设备影子任务
@@ -1009,6 +1095,35 @@ export interface UpdateDevicesEnableStateRequest {
       * 要设置的设备状态，1为启用，0为禁用
       */
     Status: number;
+}
+/**
+ * ListSDKLog请求参数结构体
+ */
+export interface ListSDKLogRequest {
+    /**
+      * 日志开始时间
+      */
+    MinTime: number;
+    /**
+      * 日志结束时间
+      */
+    MaxTime: number;
+    /**
+      * 查询关键字，可以同时支持键值查询和文本查询，
+例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。
+键值或文本可以包含多个，以空格隔开。
+其中可以索引的key包括：productid、devicename、loglevel
+一个典型的查询示例：productid:7JK1G72JNE devicename:name publish loglevel:WARN一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW publish
+      */
+    Keywords: string;
+    /**
+      * 日志检索上下文
+      */
+    Context?: string;
+    /**
+      * 查询条数
+      */
+    MaxNum?: number;
 }
 /**
  * SetProductsForbiddenStatus返回参数结构体
@@ -1536,33 +1651,29 @@ export interface PublishBroadcastMessageRequest {
     PayloadEncoding?: string;
 }
 /**
- * PublishMessage请求参数结构体
+ * ListLog返回参数结构体
  */
-export interface PublishMessageRequest {
+export interface ListLogResponse {
     /**
-      * 消息发往的主题。命名规则：${ProductId}/${DeviceName}/[a-zA-Z0-9:_-]{1,128}
+      * 日志上下文
       */
-    Topic: string;
+    Context?: string;
     /**
-      * 消息内容
+      * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
       */
-    Payload: string;
+    Listover?: boolean;
     /**
-      * 产品ID
+      * 日志列表
       */
-    ProductId: string;
+    Results?: Array<CLSLogItem>;
     /**
-      * 设备名称
+      * 日志总条数
       */
-    DeviceName: string;
+    TotalCount?: number;
     /**
-      * 服务质量等级，取值为0或1
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Qos?: number;
-    /**
-      * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
-      */
-    PayloadEncoding?: string;
+    RequestId?: string;
 }
 /**
  * RetryDeviceFirmwareTask请求参数结构体
@@ -1668,6 +1779,27 @@ export interface EditFirmwareResponse {
     RequestId?: string;
 }
 /**
+ * ListSDKLog返回参数结构体
+ */
+export interface ListSDKLogResponse {
+    /**
+      * 日志检索上下文
+      */
+    Context?: string;
+    /**
+      * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+      */
+    Listover?: boolean;
+    /**
+      * 日志列表
+      */
+    Results?: Array<SDKLogItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CancelTask请求参数结构体
  */
 export interface CancelTaskRequest {
@@ -1722,6 +1854,27 @@ export interface GetUserResourceInfoResponse {
       * 可以使用资源的总大小
       */
     Limit: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ListLogPayload返回参数结构体
+ */
+export interface ListLogPayloadResponse {
+    /**
+      * 日志上下文
+      */
+    Context?: string;
+    /**
+      * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+      */
+    Listover?: boolean;
+    /**
+      * 日志列表
+      */
+    Results?: Array<PayloadLogItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2066,6 +2219,31 @@ export interface CancelTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UpdateTopicPolicy请求参数结构体
+ */
+export interface UpdateTopicPolicyRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 更新前Topic名
+      */
+    TopicName: string;
+    /**
+      * 更新后Topic名
+      */
+    NewTopicName: string;
+    /**
+      * Topic权限
+      */
+    Privilege: number;
+    /**
+      * 代理订阅信息
+      */
+    BrokerSubscribe?: BrokerSubscribe;
 }
 /**
  * 设备属性
@@ -2573,6 +2751,32 @@ export interface DescribeAllDevicesResponse {
     RequestId?: string;
 }
 /**
+ * ListLog请求参数结构体
+ */
+export interface ListLogRequest {
+    /**
+      * 日志开始时间
+      */
+    MinTime: number;
+    /**
+      * 日志结束时间
+      */
+    MaxTime: number;
+    /**
+      * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。
+一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish
+      */
+    Keywords?: string;
+    /**
+      * 日志检索上下文
+      */
+    Context?: string;
+    /**
+      * 查询条数
+      */
+    MaxNum?: number;
+}
+/**
  * 产品元数据
  */
 export interface ProductMetadata {
@@ -2580,6 +2784,31 @@ export interface ProductMetadata {
       * 产品创建时间
       */
     CreationDate: number;
+}
+/**
+ * SDK日志项
+ */
+export interface SDKLogItem {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 日志等级
+      */
+    Level: string;
+    /**
+      * 日志时间
+      */
+    DateTime: string;
+    /**
+      * 日志内容
+      */
+    Content: string;
 }
 /**
  * DescribeLoraDevice请求参数结构体
@@ -2786,6 +3015,32 @@ export interface CreateTopicRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ListLogPayload请求参数结构体
+ */
+export interface ListLogPayloadRequest {
+    /**
+      * 日志开始时间
+      */
+    MinTime: number;
+    /**
+      * 日志结束时间
+      */
+    MaxTime: number;
+    /**
+      * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key比如：RequestID、ProductID、DeviceName等。
+一个典型的查询示例：ProductID:ABCDE12345 DeviceName:test publish
+      */
+    Keywords: string;
+    /**
+      * 日志检索上下文
+      */
+    Context?: string;
+    /**
+      * 日志最大条数
+      */
+    MaxNum?: number;
 }
 /**
  * CreateTopicRule请求参数结构体

@@ -300,9 +300,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRollbackRangeTime(req: DescribeRollbackRangeTimeRequest, cb?: (error: string, rep: DescribeRollbackRangeTimeResponse) => void): Promise<DescribeRollbackRangeTimeResponse>;
     /**
-     * 该接口（DescribeParamTemplates）查询参数模板列表。
+     * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
      */
-    DescribeParamTemplates(req?: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
+    DescribeParamTemplates(req: DescribeParamTemplatesRequest, cb?: (error: string, rep: DescribeParamTemplatesResponse) => void): Promise<DescribeParamTemplatesResponse>;
     /**
      * 本接口(DeleteBackup)用于删除数据库备份。本接口只支持删除手动发起的备份。
      */

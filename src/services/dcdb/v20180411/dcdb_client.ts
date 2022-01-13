@@ -61,6 +61,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   DatabaseProcedure,
   DescribeDCDBPriceRequest,
+  SwitchDBInstanceHAResponse,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
   DescribeSqlLogsRequest,
@@ -77,6 +78,7 @@ import {
   GrantAccountPrivilegesRequest,
   DescribeShardSpecRequest,
   DescribeDCDBShardsRequest,
+  SwitchDBInstanceHARequest,
   DBParamValue,
   SpecConfigInfo,
   ModifyDBParametersRequest,
@@ -321,6 +323,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowResponse) => void
   ): Promise<DescribeFlowResponse> {
     return this.request("DescribeFlow", req, cb)
+  }
+
+  /**
+   * 本接口(SwitchDBInstanceHA)用于实例主备切换。
+   */
+  async SwitchDBInstanceHA(
+    req: SwitchDBInstanceHARequest,
+    cb?: (error: string, rep: SwitchDBInstanceHAResponse) => void
+  ): Promise<SwitchDBInstanceHAResponse> {
+    return this.request("SwitchDBInstanceHA", req, cb)
   }
 
   /**

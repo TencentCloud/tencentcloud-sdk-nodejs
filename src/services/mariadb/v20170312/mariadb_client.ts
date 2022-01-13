@@ -69,6 +69,7 @@ import {
   ParamModifyResult,
   DescribeDBInstancesRequest,
   DescribeDBSecurityGroupsRequest,
+  SwitchDBInstanceHAResponse,
   DescribeSaleInfoRequest,
   RenewDBInstanceRequest,
   CreateDedicatedClusterDBInstanceResponse,
@@ -86,6 +87,7 @@ import {
   Deal,
   DescribeDBPerformanceDetailsRequest,
   CreateDedicatedClusterDBInstanceRequest,
+  SwitchDBInstanceHARequest,
   DBParamValue,
   SpecConfigInfo,
   ModifyDBParametersRequest,
@@ -275,6 +277,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRealServerAccessStrategyResponse) => void
   ): Promise<ModifyRealServerAccessStrategyResponse> {
     return this.request("ModifyRealServerAccessStrategy", req, cb)
+  }
+
+  /**
+   * 本接口（SwitchDBInstanceHA）用于发起实例主备切换。
+   */
+  async SwitchDBInstanceHA(
+    req: SwitchDBInstanceHARequest,
+    cb?: (error: string, rep: SwitchDBInstanceHAResponse) => void
+  ): Promise<SwitchDBInstanceHAResponse> {
+    return this.request("SwitchDBInstanceHA", req, cb)
   }
 
   /**

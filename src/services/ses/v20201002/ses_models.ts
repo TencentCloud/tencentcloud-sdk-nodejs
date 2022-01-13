@@ -244,9 +244,9 @@ export interface GetSendEmailStatusResponse {
  */
 export interface SendEmailRequest {
   /**
-      * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照 
-发信人 <邮件地址> 的方式填写，例如：
-腾讯云团队 <noreply@mail.qcloud.com>
+      * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com
+如需填写发件人说明，请按照如下方式： 
+别名 <邮箱地址>
       */
   FromEmailAddress: string
 
@@ -279,6 +279,11 @@ export interface SendEmailRequest {
    * 需要发送附件时，填写附件相关参数。
    */
   Attachments?: Array<Attachment>
+
+  /**
+   * 是否加入退订链接
+   */
+  Unsubscribe?: string
 }
 
 /**

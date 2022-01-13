@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMultiDevices", req, cb);
     }
     /**
+     * 获取日志内容列表
+     */
+    async ListLogPayload(req, cb) {
+        return this.request("ListLogPayload", req, cb);
+    }
+    /**
      * 查询固件信息
      */
     async DescribeFirmware(req, cb) {
@@ -202,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReplaceTopicRule", req, cb);
     }
     /**
+     * 获取设备上报的日志
+     */
+    async ListSDKLog(req, cb) {
+        return this.request("ListSDKLog", req, cb);
+    }
+    /**
      * 本接口（DescribeProductResource）用于查询产品资源详情。
      */
     async DescribeProductResource(req, cb) {
@@ -284,6 +296,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDeviceResources(req, cb) {
         return this.request("DescribeDeviceResources", req, cb);
+    }
+    /**
+     * 本接口（ListLog）用于查看日志信息
+     */
+    async ListLog(req, cb) {
+        return this.request("ListLog", req, cb);
     }
     /**
      * 查询固件升级任务的设备列表

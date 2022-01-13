@@ -12,17 +12,13 @@ export interface ModifyDiskExtraPerformanceRequest {
     ThroughputPerformance: number;
 }
 /**
- * RenewDisk请求参数结构体
+ * ModifyDiskAttributes返回参数结构体
  */
-export interface RenewDiskRequest {
+export interface ModifyDiskAttributesResponse {
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的续费时长。<br>在云盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时云盘会按对齐到实例续费后的到期时间来续费。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    DiskChargePrepaid: DiskChargePrepaid;
-    /**
-      * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
-      */
-    DiskId: string;
+    RequestId?: string;
 }
 /**
  * 描述了定期快照策略的详细信息
@@ -174,6 +170,15 @@ export interface ModifySnapshotsSharePermissionResponse {
     RequestId?: string;
 }
 /**
+ * InitializeDisks返回参数结构体
+ */
+export interface InitializeDisksResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDiskStoragePool请求参数结构体
  */
 export interface DescribeDiskStoragePoolRequest {
@@ -235,13 +240,17 @@ PROCESSING :表示操作中。
     EndTime: string;
 }
 /**
- * ModifyDiskAttributes返回参数结构体
+ * RenewDisk请求参数结构体
  */
-export interface ModifyDiskAttributesResponse {
+export interface RenewDiskRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的续费时长。<br>在云盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时云盘会按对齐到实例续费后的到期时间来续费。
       */
-    RequestId?: string;
+    DiskChargePrepaid: DiskChargePrepaid;
+    /**
+      * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+      */
+    DiskId: string;
 }
 /**
  * InquirePriceModifyDiskExtraPerformance返回参数结构体
@@ -972,6 +981,15 @@ export interface ModifyDisksChargeTypeRequest {
       * 后付费模式
       */
     DiskChargePostpaid?: boolean;
+}
+/**
+ * InitializeDisks请求参数结构体
+ */
+export interface InitializeDisksRequest {
+    /**
+      * 待重新初始化的云硬盘ID列表， 单次初始化限制20块以内
+      */
+    DiskIds: Array<string>;
 }
 /**
  * CreateAutoSnapshotPolicy返回参数结构体

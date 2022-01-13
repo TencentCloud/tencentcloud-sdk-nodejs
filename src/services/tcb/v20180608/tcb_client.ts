@@ -28,6 +28,7 @@ import {
   DescribeEnvLimitRequest,
   DescribeEnvDealRegionResponse,
   DeleteCloudBaseRunServerVersionResponse,
+  SearchClsLogResponse,
   StandaloneGatewayInfo,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
@@ -39,6 +40,7 @@ import {
   DescribeEndUsersRequest,
   DescribeCloudBaseBuildServiceRequest,
   DescribeCloudBaseRunServerDomainNameResponse,
+  LogResObject,
   DestroyStandaloneGatewayRequest,
   CloudRunServiceSimpleVersionSnapshot,
   CreateWxCloudBaseRunServerDBClusterResponse,
@@ -99,6 +101,7 @@ import {
   CloudBaseRunImageSecretInfo,
   CreateCloudBaseRunResourceResponse,
   DescribeStandaloneGatewayPackageResponse,
+  LogObject,
   DestroyStaticStoreResponse,
   DeleteEndUserResponse,
   ModifyDatabaseACLResponse,
@@ -193,6 +196,7 @@ import {
   DescribeCloudBaseRunVersionResponse,
   CreatePostpayPackageRequest,
   DescribeCloudBaseRunPodListResponse,
+  SearchClsLogRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
   DescribeCloudBaseRunVersionRsByConditionRequest,
@@ -583,6 +587,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudBaseRunServerFlowConfResponse) => void
   ): Promise<ModifyCloudBaseRunServerFlowConfResponse> {
     return this.request("ModifyCloudBaseRunServerFlowConf", req, cb)
+  }
+
+  /**
+   * 搜索CLS日志，TCB角色秘钥访问
+   */
+  async SearchClsLog(
+    req: SearchClsLogRequest,
+    cb?: (error: string, rep: SearchClsLogResponse) => void
+  ): Promise<SearchClsLogResponse> {
+    return this.request("SearchClsLog", req, cb)
   }
 
   /**

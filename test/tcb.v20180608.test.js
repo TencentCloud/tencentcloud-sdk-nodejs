@@ -368,6 +368,16 @@ it("tcb.v20180608.ModifyCloudBaseRunServerFlowConf", async function () {
     }
 })
 
+it("tcb.v20180608.SearchClsLog", async function () {
+    try {
+       const data = await client.SearchClsLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeCloudBaseRunResourceForExtend", async function () {
     try {
        const data = await client.DescribeCloudBaseRunResourceForExtend({})

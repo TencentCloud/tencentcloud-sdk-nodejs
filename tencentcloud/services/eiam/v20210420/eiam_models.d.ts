@@ -565,6 +565,31 @@ export interface UserGroupInformationSearchCriteria {
     Keyword?: string;
 }
 /**
+ * 授权资源详情
+ */
+export interface AuthorizationResourceEntityInfo {
+    /**
+      * 授权关系的唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId: string;
+    /**
+      * 资源授权类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceType: string;
+    /**
+      * 授权的资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource: string;
+    /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceName: string;
+}
+/**
  * 账号组查询参数
  */
 export interface AccountGroupSearchCriteria {
@@ -796,7 +821,7 @@ export interface DescribeUserGroupResourcesAuthorizationResponse {
       * 资源列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AuthorizationUserGroupResourceList: Array<AuthorizationResouceEntityInfo>;
+    AuthorizationUserGroupResourceList: Array<AuthorizationResourceEntityInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1091,7 +1116,7 @@ export interface DescribeOrgResourcesAuthorizationResponse {
       * 资源列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AuthorizationOrgResourceList: Array<AuthorizationResouceEntityInfo>;
+    AuthorizationOrgResourceList: Array<AuthorizationResourceEntityInfo>;
     /**
       * 资源数量
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1533,31 +1558,6 @@ export interface ListAuthorizedApplicationsToUserResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 授权资源详情
- */
-export interface AuthorizationResouceEntityInfo {
-    /**
-      * 授权关系的唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResourceId: string;
-    /**
-      * 资源授权类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResourceType: string;
-    /**
-      * 授权的资源
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Resource: string;
-    /**
-      * 资源名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResourceName: string;
 }
 /**
  * ModifyApplication请求参数结构体

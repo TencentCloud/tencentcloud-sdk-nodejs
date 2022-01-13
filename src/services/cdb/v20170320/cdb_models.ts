@@ -1327,7 +1327,12 @@ export interface AuditLogFilter {
 /**
  * DescribeParamTemplates请求参数结构体
  */
-export type DescribeParamTemplatesRequest = null
+export interface DescribeParamTemplatesRequest {
+  /**
+   * 引擎版本，缺省则查询所有
+   */
+  EngineVersions?: Array<string>
+}
 
 /**
  * DescribeRollbackRangeTime请求参数结构体
@@ -1685,7 +1690,7 @@ export interface ParameterDetail {
   Name: string
 
   /**
-   * 参数类型
+   * 参数类型：integer，enum，float，string，func
    */
   ParamType: string
 
@@ -1723,6 +1728,16 @@ export interface ParameterDetail {
    * 参数的可选枚举值。如果为非枚举参数，则为空
    */
   EnumValue: Array<string>
+
+  /**
+   * 参数是公式类型时，该字段有效，表示公式类型最大值
+   */
+  MaxFunc: string
+
+  /**
+   * 参数是公式类型时，该字段有效，表示公式类型最小值
+   */
+  MinFunc: string
 }
 
 /**
@@ -3604,6 +3619,11 @@ export interface ParamTemplateInfo {
    * 实例引擎版本
    */
   EngineVersion: string
+
+  /**
+   * 参数模板类型
+   */
+  TemplateType: string
 }
 
 /**
@@ -3994,12 +4014,12 @@ export interface DescribeParamTemplatesResponse {
   /**
    * 该用户的参数模板数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 参数模板详情。
    */
-  Items?: Array<ParamTemplateInfo>
+  Items: Array<ParamTemplateInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4490,12 +4510,12 @@ export interface DescribeInstanceParamsResponse {
   /**
    * 实例的参数总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 参数详情。
    */
-  Items?: Array<ParameterDetail>
+  Items: Array<ParameterDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4839,12 +4859,12 @@ export interface DescribeDefaultParamsResponse {
   /**
    * 参数个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 参数详情。
    */
-  Items?: Array<ParameterDetail>
+  Items: Array<ParameterDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5808,6 +5828,11 @@ export interface CreateParamTemplateRequest {
    * 参数列表。
    */
   ParamList?: Array<Parameter>
+
+  /**
+   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模版，"HIGH_PERFORMANCE" - 高性能模版。
+   */
+  TemplateType?: string
 }
 
 /**
@@ -6740,6 +6765,11 @@ export interface DescribeParamTemplateInfoResponse {
    * 参数模板描述
    */
   Description: string
+
+  /**
+   * 参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模版，"HIGH_PERFORMANCE" - 高性能模版。
+   */
+  TemplateType: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -108,6 +108,16 @@ it("mariadb.v20170312.ModifyRealServerAccessStrategy", async function () {
     }
 })
 
+it("mariadb.v20170312.SwitchDBInstanceHA", async function () {
+    try {
+       const data = await client.SwitchDBInstanceHA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeFileDownloadUrl", async function () {
     try {
        const data = await client.DescribeFileDownloadUrl({})

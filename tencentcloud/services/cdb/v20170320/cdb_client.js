@@ -452,7 +452,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRollbackRangeTime", req, cb);
     }
     /**
-     * 该接口（DescribeParamTemplates）查询参数模板列表。
+     * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
      */
     async DescribeParamTemplates(req, cb) {
         return this.request("DescribeParamTemplates", req, cb);

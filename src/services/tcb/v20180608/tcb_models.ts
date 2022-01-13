@@ -306,6 +306,21 @@ export interface DeleteCloudBaseRunServerVersionResponse {
 }
 
 /**
+ * SearchClsLog返回参数结构体
+ */
+export interface SearchClsLogResponse {
+  /**
+   * 日志内容结果
+   */
+  LogResults?: LogResObject
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 独立网关信息
  */
 export interface StandaloneGatewayInfo {
@@ -637,6 +652,26 @@ export interface DescribeCloudBaseRunServerDomainNameResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CLS日志结果
+ */
+export interface LogResObject {
+  /**
+   * 获取更多检索结果的游标
+   */
+  Context: string
+
+  /**
+   * 搜索结果是否已经全部返回
+   */
+  ListOver: boolean
+
+  /**
+   * 日志内容信息
+   */
+  Results: Array<LogObject>
 }
 
 /**
@@ -2202,6 +2237,41 @@ export interface DescribeStandaloneGatewayPackageResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CLS日志单条信息
+ */
+export interface LogObject {
+  /**
+   * 日志属于的 topic ID
+   */
+  TopicId: string
+
+  /**
+   * 日志主题的名字
+   */
+  TopicName: string
+
+  /**
+   * 日志时间
+   */
+  Timestamp: string
+
+  /**
+   * 日志内容
+   */
+  Content: string
+
+  /**
+   * 采集路径
+   */
+  FileName: string
+
+  /**
+   * 日志来源设备
+   */
+  Source: string
 }
 
 /**
@@ -5188,6 +5258,51 @@ export interface DescribeCloudBaseRunPodListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SearchClsLog请求参数结构体
+ */
+export interface SearchClsLogRequest {
+  /**
+   * 环境唯一ID
+   */
+  EnvId: string
+
+  /**
+   * 查询起始时间条件
+   */
+  StartTime: string
+
+  /**
+   * 查询结束时间条件
+   */
+  EndTime: string
+
+  /**
+   * 查询语句，详情参考 https://cloud.tencent.com/document/product/614/47044
+   */
+  QueryString: string
+
+  /**
+   * 单次要返回的日志条数，单次返回的最大条数为100
+   */
+  Limit: number
+
+  /**
+   * 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围
+   */
+  Context?: string
+
+  /**
+   * 按时间排序 asc（升序）或者 desc（降序），默认为 desc
+   */
+  Sort?: string
+
+  /**
+   * 是否使用Lucene语法，默认为false
+   */
+  UseLucene?: boolean
 }
 
 /**

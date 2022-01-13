@@ -1026,6 +1026,21 @@ export interface DescribeDCDBPriceRequest {
 }
 
 /**
+ * SwitchDBInstanceHA返回参数结构体
+ */
+export interface SwitchDBInstanceHAResponse {
+  /**
+   * 异步流程Id
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProjectSecurityGroups返回参数结构体
  */
 export interface DescribeProjectSecurityGroupsResponse {
@@ -1368,6 +1383,21 @@ export interface DescribeDCDBShardsRequest {
    * 排序类型， desc 或者 asc
    */
   OrderByType?: string
+}
+
+/**
+ * SwitchDBInstanceHA请求参数结构体
+ */
+export interface SwitchDBInstanceHARequest {
+  /**
+   * 实例Id，形如 tdsql-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 切换的目标区域，会自动选择该可用区中延迟最低的节点。
+   */
+  Zone: string
 }
 
 /**

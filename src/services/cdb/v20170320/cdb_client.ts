@@ -1022,10 +1022,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeParamTemplates）查询参数模板列表。
+   * 该接口（DescribeParamTemplates）查询参数模板列表，全地域公共参数Region均为ap-guangzhou。
    */
   async DescribeParamTemplates(
-    req?: DescribeParamTemplatesRequest,
+    req: DescribeParamTemplatesRequest,
     cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
   ): Promise<DescribeParamTemplatesResponse> {
     return this.request("DescribeParamTemplates", req, cb)

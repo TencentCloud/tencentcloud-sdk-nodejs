@@ -23,13 +23,19 @@ export interface DescribeVpcRuleOverviewResponse {
       * 阻断策略规则数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StrategyNum?: number
+  StrategyNum: number
 
   /**
       * 启用规则数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StartRuleNum?: number
+  StartRuleNum: number
+
+  /**
+      * 规则总量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1850,6 +1856,11 @@ export interface ModifyResourceGroupRequest {
  */
 export interface CreateNatFwInstanceResponse {
   /**
+   * 防火墙实例id
+   */
+  CfwInsId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2056,6 +2067,12 @@ export interface SecurityGroupListData {
  * CreateNatFwInstanceWithDomain返回参数结构体
  */
 export interface CreateNatFwInstanceWithDomainResponse {
+  /**
+      * nat实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CfwInsId: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

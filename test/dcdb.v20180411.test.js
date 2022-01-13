@@ -168,6 +168,16 @@ it("dcdb.v20180411.DescribeFlow", async function () {
     }
 })
 
+it("dcdb.v20180411.SwitchDBInstanceHA", async function () {
+    try {
+       const data = await client.SwitchDBInstanceHA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.InitDCDBInstances", async function () {
     try {
        const data = await client.InitDCDBInstances({})

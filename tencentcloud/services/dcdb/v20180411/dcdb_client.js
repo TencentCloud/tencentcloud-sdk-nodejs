@@ -127,6 +127,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlow", req, cb);
     }
     /**
+     * 本接口(SwitchDBInstanceHA)用于实例主备切换。
+     */
+    async SwitchDBInstanceHA(req, cb) {
+        return this.request("SwitchDBInstanceHA", req, cb);
+    }
+    /**
      * 本接口(InitDCDBInstances)用于初始化云数据库实例，包括设置默认字符集、表名大小写敏感等。
      */
     async InitDCDBInstances(req, cb) {

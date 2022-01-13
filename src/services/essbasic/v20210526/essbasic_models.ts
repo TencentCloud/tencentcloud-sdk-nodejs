@@ -207,7 +207,7 @@ export interface TemplateInfo {
   CreatedOn: number
 
   /**
-   * 模板类型：1-静默签；2-静默签授权；3-普通模版
+   * 模板类型：1-静默签；2-静默签授权；3-普通模板
    */
   TemplateType: number
 
@@ -670,7 +670,7 @@ export interface CreateConsoleLoginUrlRequest {
   Operator?: UserInfo
 
   /**
-   * 控制台指定模块，文件/合同管理:"DOCUMENT"，模版管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"
+   * 控制台指定模块，文件/合同管理:"DOCUMENT"，模板管理:"TEMPLATE"，印章管理:"SEAL"，组织架构/人员:"OPERATOR"，空字符串："账号信息"
    */
   Module?: string
 

@@ -123,6 +123,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAutoSnapshotPolicies", req, cb);
     }
     /**
+     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
+
+* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
+* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
+     */
+    async CreateAutoSnapshotPolicy(req, cb) {
+        return this.request("CreateAutoSnapshotPolicy", req, cb);
+    }
+    /**
      * 本接口（DescribeDisks）用于查询云硬盘列表。
 
 * 可以根据云硬盘ID、云硬盘类型或者云硬盘状态等信息来查询云硬盘的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
@@ -198,13 +207,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSnapshotSharePermission", req, cb);
     }
     /**
-     * 本接口（CreateAutoSnapshotPolicy）用于创建定期快照策略。
-
-* 每个地域可创建的定期快照策略数量限制请参考文档[定期快照](/document/product/362/8191)。
-* 每个地域可创建的快照有数量和容量的限制，具体请见腾讯云控制台快照页面提示，如果快照超配额，定期快照创建会失败。
+     * 重新初始化云硬盘至云硬盘初始创建时的状态。使用云硬盘的重新初始化功能时需要注意以下4点：
+1. 如果云硬盘是由快照创建的，则重新初始化会通过此快照重新回滚此云硬盘，即将云硬盘恢复为与快照一致的状态；
+2. 如果云硬盘不是通过快照创建的，则重新初始化会清空此云硬盘的数据；请在重新初始化云硬盘前检查并备份必要的数据；
+3. 当前仅未挂载的、非共享属性的数据盘云硬盘支持重新初始化；
+4. 当创建此云硬盘的原始快照被删除时，不再支持重新初始化此云硬盘。
      */
-    async CreateAutoSnapshotPolicy(req, cb) {
-        return this.request("CreateAutoSnapshotPolicy", req, cb);
+    async InitializeDisks(req, cb) {
+        return this.request("InitializeDisks", req, cb);
     }
     /**
      * 接口请求域名： cbs.tencentcloudapi.com 。
