@@ -3468,6 +3468,36 @@ export interface ModifyApiRequest {
    * Header触发规则，总规则数不能超过10。
    */
   Base64EncodedTriggerRules?: Array<Base64EncodedTriggerRule>
+
+  /**
+   * 事件总线ID。
+   */
+  EventBusId?: string
+
+  /**
+   * scf函数类型。当后端类型是SCF时生效。支持事件触发(EVENT)，http直通云函数(HTTP)。
+   */
+  ServiceScfFunctionType?: string
+
+  /**
+   * EIAM应用类型。
+   */
+  EIAMAppType?: string
+
+  /**
+   * EIAM应用认证类型，支持仅认证（AuthenticationOnly）、认证和鉴权（Authorization）。
+   */
+  EIAMAuthType?: string
+
+  /**
+   * EIAM应用Token 有效时间，单位为秒，默认为7200秒。
+   */
+  EIAMAppId?: string
+
+  /**
+   * EIAM应用ID。
+   */
+  TokenTimeout?: number
 }
 
 /**
@@ -3929,6 +3959,11 @@ export interface CreateApiRequest {
    * 是否打开Base64编码，只有后端是scf时才会生效。
    */
   IsBase64Encoded?: boolean
+
+  /**
+   * 事件总线ID。
+   */
+  EventBusId?: string
 
   /**
    * scf函数类型。当后端类型是SCF时生效。支持事件触发(EVENT)，http直通云函数(HTTP)。

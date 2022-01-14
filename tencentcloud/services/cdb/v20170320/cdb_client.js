@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRoInstanceIp", req, cb);
     }
     /**
-     * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
+     * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
      */
-    async CreateAuditPolicy(req, cb) {
-        return this.request("CreateAuditPolicy", req, cb);
+    async DescribeTimeWindow(req, cb) {
+        return this.request("DescribeTimeWindow", req, cb);
     }
     /**
      * 本接口(DescribeDataBackupOverview)用于查询用户在当前地域总的数据备份概览。
@@ -80,10 +80,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceTag", req, cb);
     }
     /**
-     * 本接口(DescribeTimeWindow)用于查询云数据库实例的维护时间窗口。
+     * 本接口(CreateAuditPolicy)用于创建云数据库实例的审计策略，即将审计规则绑定到具体的云数据库实例上。
      */
-    async DescribeTimeWindow(req, cb) {
-        return this.request("DescribeTimeWindow", req, cb);
+    async CreateAuditPolicy(req, cb) {
+        return this.request("CreateAuditPolicy", req, cb);
     }
     /**
      * 本接口(DescribeBackupOverview)用于查询用户的备份概览。返回用户当前备份总个数、备份总的占用容量、赠送的免费容量、计费容量（容量单位为字节）。
@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OpenDBInstanceGTID(req, cb) {
         return this.request("OpenDBInstanceGTID", req, cb);
+    }
+    /**
+     * 修改数据库代理描述
+     */
+    async ModifyCDBProxyDesc(req, cb) {
+        return this.request("ModifyCDBProxyDesc", req, cb);
     }
     /**
      * 本接口(DescribeRollbackTaskDetail)用于查询云数据库实例回档任务详情。
@@ -209,12 +215,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTables(req, cb) {
         return this.request("DescribeTables", req, cb);
-    }
-    /**
-     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。
-     */
-    async DeleteTimeWindow(req, cb) {
-        return this.request("DeleteTimeWindow", req, cb);
     }
     /**
      * 本接口(DescribeAccountPrivileges)用于查询云数据库账户支持的权限信息。
@@ -297,6 +297,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddTimeWindow", req, cb);
     }
     /**
+     * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
+     */
+    async DescribeDeviceMonitorInfo(req, cb) {
+        return this.request("DescribeDeviceMonitorInfo", req, cb);
+    }
+    /**
      * 本接口(CreateBackup)用于创建数据库备份。
      */
     async CreateBackup(req, cb) {
@@ -335,6 +341,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjectSecurityGroups", req, cb);
     }
     /**
+     * 请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
+     */
+    async ModifyCDBProxyConnectionPool(req, cb) {
+        return this.request("ModifyCDBProxyConnectionPool", req, cb);
+    }
+    /**
      * 本接口(DescribeSlowLogs)用于获取云数据库实例的慢查询日志。
      */
     async DescribeSlowLogs(req, cb) {
@@ -345,6 +357,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceUpgradeInstances(req, cb) {
         return this.request("InquiryPriceUpgradeInstances", req, cb);
+    }
+    /**
+     * 该接口用于修改实例本地binlog保留策略。
+     */
+    async ModifyLocalBinlogConfig(req, cb) {
+        return this.request("ModifyLocalBinlogConfig", req, cb);
     }
     /**
      * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
@@ -374,6 +392,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceParams", req, cb);
     }
     /**
+     * 配置数据库代理读写分离
+     */
+    async ModifyCDBProxy(req, cb) {
+        return this.request("ModifyCDBProxy", req, cb);
+    }
+    /**
+     * 查询代理规格配置
+     */
+    async DescribeProxyCustomConf(req, cb) {
+        return this.request("DescribeProxyCustomConf", req, cb);
+    }
+    /**
      * 本接口(DescribeDeployGroupList)用于查询用户的置放群组列表，可以指定置放群组 ID 或置放群组名称。
      */
     async DescribeDeployGroupList(req, cb) {
@@ -390,6 +420,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAccounts(req, cb) {
         return this.request("CreateAccounts", req, cb);
+    }
+    /**
+     * 调整数据库代理配置
+     */
+    async UpgradeCDBProxy(req, cb) {
+        return this.request("UpgradeCDBProxy", req, cb);
     }
     /**
      * 本接口(UpgradeDBInstanceEngineVersion)用于升级云数据库实例版本，实例类型支持主实例、灾备实例和只读实例。
@@ -464,6 +500,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBackup", req, cb);
     }
     /**
+     * 修改数据库代理VIP或端口
+     */
+    async ModifyCDBProxyVipVPort(req, cb) {
+        return this.request("ModifyCDBProxyVipVPort", req, cb);
+    }
+    /**
      * 本接口(DescribeRoMinScale)用于获取只读实例购买、升级时的最小规格。
      */
     async DescribeRoMinScale(req, cb) {
@@ -486,6 +528,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstanceParam(req, cb) {
         return this.request("ModifyInstanceParam", req, cb);
+    }
+    /**
+     * 关闭数据库代理
+     */
+    async CloseCDBProxy(req, cb) {
+        return this.request("CloseCDBProxy", req, cb);
+    }
+    /**
+     * 本接口(ModifyAccountMaxUserConnections)用于修改云数据库账户最大可用连接数。
+     */
+    async ModifyAccountMaxUserConnections(req, cb) {
+        return this.request("ModifyAccountMaxUserConnections", req, cb);
     }
     /**
      * 本接口(DescribeAsyncRequestInfo)用于查询云数据库实例异步任务的执行结果。
@@ -577,6 +631,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
+     * 重新负载均衡数据库代理
+     */
+    async ReloadBalanceProxyNode(req, cb) {
+        return this.request("ReloadBalanceProxyNode", req, cb);
+    }
+    /**
      * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
      */
     async VerifyRootAccount(req, cb) {
@@ -599,6 +659,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeUploadedFiles(req, cb) {
         return this.request("DescribeUploadedFiles", req, cb);
+    }
+    /**
+     * 查询数据库代理
+     */
+    async DescribeCDBProxy(req, cb) {
+        return this.request("DescribeCDBProxy", req, cb);
     }
     /**
      * 本接口(ModifyAccountDescription)用于修改云数据库账户的备注信息。
@@ -632,6 +698,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupConfig", req, cb);
     }
     /**
+     * 针对主实例申请创建数据库代理。
+     */
+    async ApplyCDBProxy(req, cb) {
+        return this.request("ApplyCDBProxy", req, cb);
+    }
+    /**
      * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
      */
     async DescribeAuditRules(req, cb) {
@@ -660,6 +732,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoRenewFlag", req, cb);
     }
     /**
+     * 昨晚数据库代理配置变更或则升级版本后手动发起立即切换
+     */
+    async SwitchCDBProxy(req, cb) {
+        return this.request("SwitchCDBProxy", req, cb);
+    }
+    /**
      * 本接口(RenewDBInstance)用于续费云数据库实例，支持付费模式为包年包月的实例。按量计费实例可通过该接口续费为包年包月的实例。
      */
     async RenewDBInstance(req, cb) {
@@ -678,10 +756,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceProject", req, cb);
     }
     /**
-     * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
+     * 该接口用于查询实例本地binlog保留策略。
      */
-    async DescribeDeviceMonitorInfo(req, cb) {
-        return this.request("DescribeDeviceMonitorInfo", req, cb);
+    async DescribeLocalBinlogConfig(req, cb) {
+        return this.request("DescribeLocalBinlogConfig", req, cb);
     }
     /**
      * 本接口(OpenWanService)用于开通实例外网访问。
@@ -710,10 +788,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAuditRule", req, cb);
     }
     /**
+     * 获取数据库代理连接池相关规格配置
+     */
+    async DescribeProxyConnectionPoolConf(req, cb) {
+        return this.request("DescribeProxyConnectionPoolConf", req, cb);
+    }
+    /**
      * 本接口(DescribeSupportedPrivileges)用于查询云数据库的支持的权限信息，包括全局权限，数据库权限，表权限以及列权限。
      */
     async DescribeSupportedPrivileges(req, cb) {
         return this.request("DescribeSupportedPrivileges", req, cb);
+    }
+    /**
+     * 升级数据库代理版本
+     */
+    async UpgradeCDBProxyVersion(req, cb) {
+        return this.request("UpgradeCDBProxyVersion", req, cb);
     }
     /**
      * 本接口(DescribeBinlogs)用于查询云数据库实例的 binlog 文件列表。
@@ -758,10 +848,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDeployGroup", req, cb);
     }
     /**
-     * 本接口(ModifyAccountMaxUserConnections)用于修改云数据库账户最大可用连接数。
+     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。
      */
-    async ModifyAccountMaxUserConnections(req, cb) {
-        return this.request("ModifyAccountMaxUserConnections", req, cb);
+    async DeleteTimeWindow(req, cb) {
+        return this.request("DeleteTimeWindow", req, cb);
     }
 }
 exports.Client = Client;

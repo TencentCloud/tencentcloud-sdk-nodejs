@@ -3689,9 +3689,11 @@ export interface AddCdnDomainRequest {
 
   /**
       * 加速域名业务类型
-web：静态加速
-download：下载加速
-media：流媒体点播加速
+web：网页小文件
+download：下载大文件
+media：音视频点播
+hybrid:  动静加速
+dynamic:  动态加速
       */
   ServiceType: string
 
@@ -3856,7 +3858,7 @@ global：全球加速
   OfflineCache?: OfflineCache
 
   /**
-   * QUIC正在内测中，请先提交内测申请，详情请前往QUIC产品文档。
+   * Quic访问（收费服务，详见计费说明和产品文档）
    */
   Quic?: Quic
 
@@ -4127,7 +4129,7 @@ global：全球加速
   OriginCombine?: OriginCombine
 
   /**
-   * QUIC正在内测中，请先提交内测申请，详情请前往QUIC产品文档。
+   * Quic访问（收费服务，详见计费说明和产品文档）
    */
   Quic?: Quic
 

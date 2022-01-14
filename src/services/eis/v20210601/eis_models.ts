@@ -88,6 +88,26 @@ export interface RuntimeMC {
    * 正在运行的应用实例数量
    */
   RunningInstanceCount: number
+
+  /**
+   * 已使用cpu核数
+   */
+  CpuUsed: number
+
+  /**
+   * cpu核数上限
+   */
+  CpuLimit: number
+
+  /**
+   * 已使用内存 MB
+   */
+  MemoryUsed: number
+
+  /**
+   * 内存上限 MB
+   */
+  MemoryLimit: number
 }
 
 /**
@@ -360,4 +380,9 @@ export interface RuntimeDeployedInstanceMC {
    * 应用实例部署更新时间
    */
   UpdatedAt: number
+
+  /**
+   * 应用类型：0:NormalApp普通应用 1:TemplateApp模版应用 2:LightApp轻应用 3:MicroConnTemplate微连接模板 4:MicroConnApp微连接应用
+   */
+  ProjectType: number
 }

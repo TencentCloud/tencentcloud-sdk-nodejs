@@ -633,62 +633,62 @@ export interface DriverLicenseOCRResponse {
   /**
    * 姓名
    */
-  Name?: string
+  Name: string
 
   /**
    * 性别
    */
-  Sex?: string
+  Sex: string
 
   /**
    * 国籍
    */
-  Nationality?: string
+  Nationality: string
 
   /**
    * 住址
    */
-  Address?: string
+  Address: string
 
   /**
    * 出生日期（YYYY-MM-DD）
    */
-  DateOfBirth?: string
+  DateOfBirth: string
 
   /**
    * 初次领证日期（YYYY-MM-DD）
    */
-  DateOfFirstIssue?: string
+  DateOfFirstIssue: string
 
   /**
    * 准驾车型
    */
-  Class?: string
+  Class: string
 
   /**
    * 有效期开始时间（YYYY-MM-DD）
    */
-  StartDate?: string
+  StartDate: string
 
   /**
    * 有效期截止时间（YYYY-MM-DD）
    */
-  EndDate?: string
+  EndDate: string
 
   /**
    * 证号
    */
-  CardCode?: string
+  CardCode: string
 
   /**
    * 档案编号
    */
-  ArchivesCode?: string
+  ArchivesCode: string
 
   /**
    * 记录
    */
-  Record?: string
+  Record: string
 
   /**
       * Code 告警码列表和释义：
@@ -697,7 +697,7 @@ export interface DriverLicenseOCRResponse {
 -9106  ps告警
 注：告警码可以同时存在多个
       */
-  RecognizeWarnCode?: Array<number>
+  RecognizeWarnCode: Array<number>
 
   /**
       * 告警码说明：
@@ -706,12 +706,22 @@ WARN_DRIVER_LICENSE_SCREENED_CARD 翻拍件告警
 WARN_DRIVER_LICENSE_PS_CARD ps告警
 注：告警信息可以同时存在多个
       */
-  RecognizeWarnMsg?: Array<string>
+  RecognizeWarnMsg: Array<string>
 
   /**
    * 发证单位
    */
-  IssuingAuthority?: string
+  IssuingAuthority: string
+
+  /**
+   * 状态（仅电子驾驶证支持返回该字段）
+   */
+  State: string
+
+  /**
+   * 累积记分（仅电子驾驶证支持返回该字段）
+   */
+  CumulativeScore: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

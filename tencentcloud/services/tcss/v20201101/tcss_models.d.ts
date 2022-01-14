@@ -3430,7 +3430,7 @@ export interface ModifyVirusScanSettingRequest {
       */
     EnableScan: boolean;
     /**
-      * 检测周期每隔多少天
+      * 检测周期每隔多少天(1|3|7)
       */
     Cycle: number;
     /**
@@ -3438,7 +3438,7 @@ export interface ModifyVirusScanSettingRequest {
       */
     BeginScanAt: string;
     /**
-      * 扫描全部路径
+      * 扫描全部路径(true:全选,false:自选)
       */
     ScanPathAll: boolean;
     /**
@@ -3446,7 +3446,7 @@ export interface ModifyVirusScanSettingRequest {
       */
     ScanPathType: number;
     /**
-      * 超时时长
+      * 超时时长(5~24h)
       */
     Timeout: number;
     /**
@@ -3460,11 +3460,11 @@ export interface ModifyVirusScanSettingRequest {
     /**
       * 自选扫描范围的容器id或者主机id 根据ScanRangeType决定
       */
-    ScanIds: Array<string>;
+    ScanIds?: Array<string>;
     /**
       * 扫描路径
       */
-    ScanPath: Array<string>;
+    ScanPath?: Array<string>;
 }
 /**
  * DescribeAssetDBServiceList请求参数结构体
@@ -4755,6 +4755,10 @@ export interface DescribeContainerSecEventSummaryResponse {
       */
     UnhandledFileCnt: number;
     /**
+      * 未处理木马事件
+      */
+    UnhandledVirusEventCnt: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -5361,6 +5365,7 @@ export interface DescribeVirusScanSettingResponse {
     ScanPath: Array<string>;
     /**
       * 一键检测的超时设置
+注意：此字段可能返回 null，表示取不到有效值。
       */
     ClickTimeout: number;
     /**
@@ -6052,6 +6057,7 @@ SCAN_SCANNING:正在扫描中，
 SCAN_FINISH：扫描完成，
 SCAN_TIMEOUT：扫描超时
 SCAN_CANCELING: 取消中
+SCAN_CANCELED:已取消
       */
     Status: string;
     /**
@@ -8655,7 +8661,7 @@ export interface ImageProgress {
  */
 export interface ModifyVirusScanTimeoutSettingRequest {
     /**
-      * 超时时长单位小时
+      * 超时时长单位小时(5~24h)
       */
     Timeout: number;
     /**
@@ -9662,6 +9668,9 @@ FILE_ABNORMAL_DEAL_RECOVER:恢复文件时，文件异常
 BACKUP_FILE_NOT_FOUND:备份文件不存在
 CONTAINER_NOT_FOUND_DEAL_ISOLATE:隔离时，容器不存在
 CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
+TIMEOUT: 超时
+TOO_MANY: 任务过多
+OFFLINE: 离线
       */
     SubStatus: string;
 }

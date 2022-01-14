@@ -38,9 +38,9 @@ it("cdb.v20170320.CreateRoInstanceIp", async function () {
     }
 })
 
-it("cdb.v20170320.CreateAuditPolicy", async function () {
+it("cdb.v20170320.DescribeTimeWindow", async function () {
     try {
-       const data = await client.CreateAuditPolicy({})
+       const data = await client.DescribeTimeWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("cdb.v20170320.ModifyInstanceTag", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeTimeWindow", async function () {
+it("cdb.v20170320.CreateAuditPolicy", async function () {
     try {
-       const data = await client.DescribeTimeWindow({})
+       const data = await client.CreateAuditPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +171,16 @@ it("cdb.v20170320.CreateAuditLogFile", async function () {
 it("cdb.v20170320.OpenDBInstanceGTID", async function () {
     try {
        const data = await client.OpenDBInstanceGTID({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.ModifyCDBProxyDesc", async function () {
+    try {
+       const data = await client.ModifyCDBProxyDesc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,16 +318,6 @@ it("cdb.v20170320.DescribeTables", async function () {
     }
 })
 
-it("cdb.v20170320.DeleteTimeWindow", async function () {
-    try {
-       const data = await client.DeleteTimeWindow({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.DescribeAccountPrivileges", async function () {
     try {
        const data = await client.DescribeAccountPrivileges({})
@@ -438,6 +438,16 @@ it("cdb.v20170320.AddTimeWindow", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeDeviceMonitorInfo", async function () {
+    try {
+       const data = await client.DescribeDeviceMonitorInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.CreateBackup", async function () {
     try {
        const data = await client.CreateBackup({})
@@ -498,6 +508,16 @@ it("cdb.v20170320.DescribeProjectSecurityGroups", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyCDBProxyConnectionPool", async function () {
+    try {
+       const data = await client.ModifyCDBProxyConnectionPool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeSlowLogs", async function () {
     try {
        const data = await client.DescribeSlowLogs({})
@@ -511,6 +531,16 @@ it("cdb.v20170320.DescribeSlowLogs", async function () {
 it("cdb.v20170320.InquiryPriceUpgradeInstances", async function () {
     try {
        const data = await client.InquiryPriceUpgradeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.ModifyLocalBinlogConfig", async function () {
+    try {
+       const data = await client.ModifyLocalBinlogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +578,26 @@ it("cdb.v20170320.DescribeInstanceParams", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyCDBProxy", async function () {
+    try {
+       const data = await client.ModifyCDBProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DescribeProxyCustomConf", async function () {
+    try {
+       const data = await client.DescribeProxyCustomConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeDeployGroupList", async function () {
     try {
        const data = await client.DescribeDeployGroupList({})
@@ -571,6 +621,16 @@ it("cdb.v20170320.StopDBImportJob", async function () {
 it("cdb.v20170320.CreateAccounts", async function () {
     try {
        const data = await client.CreateAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.UpgradeCDBProxy", async function () {
+    try {
+       const data = await client.UpgradeCDBProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -698,6 +758,16 @@ it("cdb.v20170320.DeleteBackup", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyCDBProxyVipVPort", async function () {
+    try {
+       const data = await client.ModifyCDBProxyVipVPort({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeRoMinScale", async function () {
     try {
        const data = await client.DescribeRoMinScale({})
@@ -731,6 +801,26 @@ it("cdb.v20170320.DescribeAuditConfig", async function () {
 it("cdb.v20170320.ModifyInstanceParam", async function () {
     try {
        const data = await client.ModifyInstanceParam({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.CloseCDBProxy", async function () {
+    try {
+       const data = await client.CloseCDBProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.ModifyAccountMaxUserConnections", async function () {
+    try {
+       const data = await client.ModifyAccountMaxUserConnections({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -878,6 +968,16 @@ it("cdb.v20170320.DescribeAccounts", async function () {
     }
 })
 
+it("cdb.v20170320.ReloadBalanceProxyNode", async function () {
+    try {
+       const data = await client.ReloadBalanceProxyNode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.VerifyRootAccount", async function () {
     try {
        const data = await client.VerifyRootAccount({})
@@ -911,6 +1011,16 @@ it("cdb.v20170320.ModifyAccountPassword", async function () {
 it("cdb.v20170320.DescribeUploadedFiles", async function () {
     try {
        const data = await client.DescribeUploadedFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DescribeCDBProxy", async function () {
+    try {
+       const data = await client.DescribeCDBProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,6 +1078,16 @@ it("cdb.v20170320.ModifyBackupConfig", async function () {
     }
 })
 
+it("cdb.v20170320.ApplyCDBProxy", async function () {
+    try {
+       const data = await client.ApplyCDBProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeAuditRules", async function () {
     try {
        const data = await client.DescribeAuditRules({})
@@ -1008,6 +1128,16 @@ it("cdb.v20170320.ModifyAutoRenewFlag", async function () {
     }
 })
 
+it("cdb.v20170320.SwitchCDBProxy", async function () {
+    try {
+       const data = await client.SwitchCDBProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.RenewDBInstance", async function () {
     try {
        const data = await client.RenewDBInstance({})
@@ -1038,9 +1168,9 @@ it("cdb.v20170320.ModifyDBInstanceProject", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeDeviceMonitorInfo", async function () {
+it("cdb.v20170320.DescribeLocalBinlogConfig", async function () {
     try {
-       const data = await client.DescribeDeviceMonitorInfo({})
+       const data = await client.DescribeLocalBinlogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1088,9 +1218,29 @@ it("cdb.v20170320.DeleteAuditRule", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeProxyConnectionPoolConf", async function () {
+    try {
+       const data = await client.DescribeProxyConnectionPoolConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeSupportedPrivileges", async function () {
     try {
        const data = await client.DescribeSupportedPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.UpgradeCDBProxyVersion", async function () {
+    try {
+       const data = await client.UpgradeCDBProxyVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,9 +1318,9 @@ it("cdb.v20170320.CreateDeployGroup", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyAccountMaxUserConnections", async function () {
+it("cdb.v20170320.DeleteTimeWindow", async function () {
     try {
-       const data = await client.ModifyAccountMaxUserConnections({})
+       const data = await client.DeleteTimeWindow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

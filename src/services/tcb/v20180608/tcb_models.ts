@@ -1917,6 +1917,11 @@ export interface CreateWxCloudBaseRunServerDBClusterRequest {
    * 微信appid
    */
   WxAppId?: string
+
+  /**
+   * mysql内核版本，支持5.7,8.0
+   */
+  DbVersion?: string
 }
 
 /**

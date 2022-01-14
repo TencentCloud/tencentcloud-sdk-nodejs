@@ -478,6 +478,11 @@ export interface UpdateEKSClusterRequest {
    * 标记是否是新的内外网。默认为false
    */
   ProxyLB?: boolean
+
+  /**
+   * 扩展参数。须是map[string]string 的json 格式。
+   */
+  ExtraParam?: string
 }
 
 /**
