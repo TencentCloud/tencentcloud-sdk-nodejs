@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPacketFilterConfig", req, cb);
     }
     /**
+     * 获取智能调度域名列表
+     */
+    async DescribeListSchedulingDomain(req, cb) {
+        return this.request("DescribeListSchedulingDomain", req, cb);
+    }
+    /**
      * 添加DDoS防护的特征过滤规则
      */
     async CreatePacketFilterConfig(req, cb) {
@@ -131,10 +137,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBoundIP", req, cb);
     }
     /**
-     * 获取智能调度域名列表
+     * 删除DDoS防护的IP网段黑白名单
      */
-    async DescribeListSchedulingDomain(req, cb) {
-        return this.request("DescribeListSchedulingDomain", req, cb);
+    async DeleteDDoSBlackWhiteIpList(req, cb) {
+        return this.request("DeleteDDoSBlackWhiteIpList", req, cb);
     }
     /**
      * 删除DDoS防护的水印防护密钥
@@ -207,6 +213,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeListProtectThresholdConfig(req, cb) {
         return this.request("DescribeListProtectThresholdConfig", req, cb);
+    }
+    /**
+     * 添加DDoS防护的端口acl策略
+     */
+    async CreatePortAclConfig(req, cb) {
+        return this.request("CreatePortAclConfig", req, cb);
     }
     /**
      * 添加DDoS防护的访问限速配置
@@ -318,10 +330,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProtocolBlockConfig", req, cb);
     }
     /**
-     * 删除DDoS防护的IP网段黑白名单
+     * 批量添加DDoS防护的端口acl策略
      */
-    async DeleteDDoSBlackWhiteIpList(req, cb) {
-        return this.request("DeleteDDoSBlackWhiteIpList", req, cb);
+    async CreatePortAclConfigList(req, cb) {
+        return this.request("CreatePortAclConfigList", req, cb);
     }
     /**
      * 批量配置L7转发规则的证书供SSL测调用

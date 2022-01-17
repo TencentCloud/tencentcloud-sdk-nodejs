@@ -199,6 +199,12 @@ export interface RoomUser {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Uins: Array<number>
+
+  /**
+      * 字符串房间id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StrRoomId: string
 }
 
 /**
@@ -211,9 +217,14 @@ export interface DescribeRoomInfoRequest {
   SdkAppId: number
 
   /**
-   * 房间号列表，最大不能超过10个
+   * 房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
    */
-  RoomIds: Array<number>
+  RoomIds?: Array<number>
+
+  /**
+   * 字符串类型房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
+   */
+  StrRoomIds?: Array<string>
 }
 
 /**

@@ -18,15 +18,23 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ApmMetricRecord,
   CreateApmInstanceResponse,
   ApmInstanceDetail,
   CreateApmInstanceRequest,
+  DescribeMetricRecordsResponse,
   DescribeApmAgentResponse,
   ApmTag,
   DescribeApmInstancesResponse,
-  DescribeApmInstancesRequest,
+  Filter,
   DescribeApmAgentRequest,
+  OrderBy,
+  DescribeApmInstancesRequest,
+  ApmField,
+  DescribeMetricRecordsRequest,
   ApmAgentInfo,
+  QueryMetricItem,
+  APMKVItem,
 } from "./apm_models"
 
 /**
@@ -46,6 +54,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateApmInstanceResponse) => void
   ): Promise<CreateApmInstanceResponse> {
     return this.request("CreateApmInstance", req, cb)
+  }
+
+  /**
+   * 拉取通用指标列表
+   */
+  async DescribeMetricRecords(
+    req: DescribeMetricRecordsRequest,
+    cb?: (error: string, rep: DescribeMetricRecordsResponse) => void
+  ): Promise<DescribeMetricRecordsResponse> {
+    return this.request("DescribeMetricRecords", req, cb)
   }
 
   /**

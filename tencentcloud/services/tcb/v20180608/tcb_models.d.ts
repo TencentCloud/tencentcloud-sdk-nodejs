@@ -2191,6 +2191,11 @@ export interface EnvInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CustomLogServices: Array<ClsInfo>;
+    /**
+      * 环境类型：baas, run, hoting, weda
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnvType: string;
 }
 /**
  * DestroyEnv请求参数结构体

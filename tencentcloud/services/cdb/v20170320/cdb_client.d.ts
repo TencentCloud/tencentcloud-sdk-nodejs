@@ -490,7 +490,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAutoRenewFlag(req: ModifyAutoRenewFlagRequest, cb?: (error: string, rep: ModifyAutoRenewFlagResponse) => void): Promise<ModifyAutoRenewFlagResponse>;
     /**
-     * 昨晚数据库代理配置变更或则升级版本后手动发起立即切换
+     * 数据库代理配置变更或则升级版本后手动发起立即切换
      */
     SwitchCDBProxy(req: SwitchCDBProxyRequest, cb?: (error: string, rep: SwitchCDBProxyResponse) => void): Promise<SwitchCDBProxyResponse>;
     /**

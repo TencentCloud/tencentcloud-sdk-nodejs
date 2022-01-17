@@ -2041,6 +2041,11 @@ export interface DescribeCertificatesRequest {
    * 是否筛选可续期证书 1筛选 0不筛选
    */
   Renew?: number
+
+  /**
+   * 筛选来源， upload：上传证书， buy：腾讯云证书， 不传默认全部
+   */
+  FilterSource?: string
 }
 
 /**

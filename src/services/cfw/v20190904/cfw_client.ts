@@ -107,6 +107,7 @@ import {
   DescribeUnHandleEventTabListResponse,
   NatFwFilter,
   ScanResultInfo,
+  ModifyRunSyncAssetResponse,
   ModifySecurityGroupSequenceRulesResponse,
   IpStatic,
   AddEnterpriseSecurityGroupRulesResponse,
@@ -174,6 +175,7 @@ import {
   DeleteResourceGroupResponse,
   DescribeSwitchListsRequest,
   ModifyItemSwitchStatusRequest,
+  ModifyRunSyncAssetRequest,
   CreateAcRulesResponse,
   ModifyAssetScanResponse,
   ModifyAcRuleRequest,
@@ -521,6 +523,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTLogInfoResponse) => void
   ): Promise<DescribeTLogInfoResponse> {
     return this.request("DescribeTLogInfo", req, cb)
+  }
+
+  /**
+   * 同步资产-互联网&VPC（新）
+   */
+  async ModifyRunSyncAsset(
+    req: ModifyRunSyncAssetRequest,
+    cb?: (error: string, rep: ModifyRunSyncAssetResponse) => void
+  ): Promise<ModifyRunSyncAssetResponse> {
+    return this.request("ModifyRunSyncAsset", req, cb)
   }
 
   /**
@@ -881,7 +893,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取地址模版列表
+   * 获取地址模板列表
    */
   async DescribeAddrTemplateList(
     req: DescribeAddrTemplateListRequest,

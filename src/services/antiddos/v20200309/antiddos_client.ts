@@ -50,7 +50,7 @@ import {
   CreateWaterPrintConfigResponse,
   DescribeListBGPIPInstancesRequest,
   StaticPackRelation,
-  CreateDDoSBlackWhiteIpListResponse,
+  CreatePortAclConfigRequest,
   DescribeL7RulesBySSLCertIdRequest,
   DescribeListPacketFilterConfigResponse,
   DeleteBlackWhiteIpListResponse,
@@ -61,10 +61,13 @@ import {
   DeleteBlackWhiteIpListRequest,
   SourceServer,
   ModifyDomainUsrNameResponse,
+  CreatePortAclConfigListRequest,
+  AclConfig,
   DisassociateDDoSEipAddressRequest,
   BlackWhiteIpRelation,
   DeleteWaterPrintKeyResponse,
   EipAddressPackRelation,
+  CreateDDoSBlackWhiteIpListResponse,
   ProtocolBlockRelation,
   DescribeListPacketFilterConfigRequest,
   BGPIPInstanceUsages,
@@ -97,6 +100,7 @@ import {
   CreateProtocolBlockConfigResponse,
   BGPIPInstanceSpecification,
   CreateIPAlarmThresholdConfigResponse,
+  CreatePortAclConfigListResponse,
   DeleteWaterPrintConfigRequest,
   DescribeDDoSBlackWhiteIpListRequest,
   DescribeListBlackWhiteIpListResponse,
@@ -109,13 +113,14 @@ import {
   EipAddressRelation,
   DescribeListListenerResponse,
   ProtectThresholdRelation,
-  IpSegment,
+  CreatePortAclConfigResponse,
   ModifyL7RulesEdgeResponse,
   CreateL7RuleCertsResponse,
   DDoSSpeedLimitConfig,
   AssociateDDoSEipLoadBalancerRequest,
   DescribeListProtectThresholdConfigResponse,
   CertIdInsL7Rules,
+  IpSegment,
   CreateDefaultAlarmThresholdResponse,
   DescribeListIPAlarmConfigResponse,
   SuccessCode,
@@ -263,6 +268,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取智能调度域名列表
+   */
+  async DescribeListSchedulingDomain(
+    req: DescribeListSchedulingDomainRequest,
+    cb?: (error: string, rep: DescribeListSchedulingDomainResponse) => void
+  ): Promise<DescribeListSchedulingDomainResponse> {
+    return this.request("DescribeListSchedulingDomain", req, cb)
+  }
+
+  /**
    * 添加DDoS防护的特征过滤规则
    */
   async CreatePacketFilterConfig(
@@ -354,13 +369,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取智能调度域名列表
+   * 删除DDoS防护的IP网段黑白名单
    */
-  async DescribeListSchedulingDomain(
-    req: DescribeListSchedulingDomainRequest,
-    cb?: (error: string, rep: DescribeListSchedulingDomainResponse) => void
-  ): Promise<DescribeListSchedulingDomainResponse> {
-    return this.request("DescribeListSchedulingDomain", req, cb)
+  async DeleteDDoSBlackWhiteIpList(
+    req: DeleteDDoSBlackWhiteIpListRequest,
+    cb?: (error: string, rep: DeleteDDoSBlackWhiteIpListResponse) => void
+  ): Promise<DeleteDDoSBlackWhiteIpListResponse> {
+    return this.request("DeleteDDoSBlackWhiteIpList", req, cb)
   }
 
   /**
@@ -481,6 +496,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeListProtectThresholdConfigResponse) => void
   ): Promise<DescribeListProtectThresholdConfigResponse> {
     return this.request("DescribeListProtectThresholdConfig", req, cb)
+  }
+
+  /**
+   * 添加DDoS防护的端口acl策略
+   */
+  async CreatePortAclConfig(
+    req: CreatePortAclConfigRequest,
+    cb?: (error: string, rep: CreatePortAclConfigResponse) => void
+  ): Promise<CreatePortAclConfigResponse> {
+    return this.request("CreatePortAclConfig", req, cb)
   }
 
   /**
@@ -665,13 +690,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除DDoS防护的IP网段黑白名单
+   * 批量添加DDoS防护的端口acl策略
    */
-  async DeleteDDoSBlackWhiteIpList(
-    req: DeleteDDoSBlackWhiteIpListRequest,
-    cb?: (error: string, rep: DeleteDDoSBlackWhiteIpListResponse) => void
-  ): Promise<DeleteDDoSBlackWhiteIpListResponse> {
-    return this.request("DeleteDDoSBlackWhiteIpList", req, cb)
+  async CreatePortAclConfigList(
+    req: CreatePortAclConfigListRequest,
+    cb?: (error: string, rep: CreatePortAclConfigListResponse) => void
+  ): Promise<CreatePortAclConfigListResponse> {
+    return this.request("CreatePortAclConfigList", req, cb)
   }
 
   /**

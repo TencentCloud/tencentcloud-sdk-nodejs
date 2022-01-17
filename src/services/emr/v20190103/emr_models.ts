@@ -492,6 +492,26 @@ Hadoop-Presto
 Hadoop-Hbase
       */
   SceneName?: string
+
+  /**
+   * 共用组件信息
+   */
+  ExternalService?: Array<ExternalService>
+}
+
+/**
+ * 共用自建组件参数
+ */
+export interface CustomServiceDefine {
+  /**
+   * 自定义参数key
+   */
+  Name?: string
+
+  /**
+   * 自定义参数value
+   */
+  Value?: string
 }
 
 /**
@@ -819,6 +839,31 @@ export interface DescribeJobFlowRequest {
    * 流程任务Id，RunJobFlow接口返回的值。
    */
   JobFlowId: number
+}
+
+/**
+ * 共用组件信息
+ */
+export interface ExternalService {
+  /**
+   * 共用组件类型，EMR/CUSTOM
+   */
+  ShareType: string
+
+  /**
+   * 自定义参数集合
+   */
+  CustomServiceDefineList: Array<CustomServiceDefine>
+
+  /**
+   * 共用组件名
+   */
+  Service: string
+
+  /**
+   * 共用组件集群
+   */
+  InstanceId: string
 }
 
 /**

@@ -563,7 +563,7 @@ export interface DescribeVulInfoCvssResponse {
       */
     Reference: string;
     /**
-      * CVSS信息，wiki:http://tapd.oa.com/Teneyes/markdown_wikis/view/#1010131751011792303
+      * CVSS信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CVSS: string;

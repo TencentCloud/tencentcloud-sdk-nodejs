@@ -732,7 +732,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAutoRenewFlag", req, cb);
     }
     /**
-     * 昨晚数据库代理配置变更或则升级版本后手动发起立即切换
+     * 数据库代理配置变更或则升级版本后手动发起立即切换
      */
     async SwitchCDBProxy(req, cb) {
         return this.request("SwitchCDBProxy", req, cb);

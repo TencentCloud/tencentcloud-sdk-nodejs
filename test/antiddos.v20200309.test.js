@@ -98,6 +98,16 @@ it("antiddos.v20200309.ModifyPacketFilterConfig", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeListSchedulingDomain", async function () {
+    try {
+       const data = await client.DescribeListSchedulingDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.CreatePacketFilterConfig", async function () {
     try {
        const data = await client.CreatePacketFilterConfig({})
@@ -188,9 +198,9 @@ it("antiddos.v20200309.CreateBoundIP", async function () {
     }
 })
 
-it("antiddos.v20200309.DescribeListSchedulingDomain", async function () {
+it("antiddos.v20200309.DeleteDDoSBlackWhiteIpList", async function () {
     try {
-       const data = await client.DescribeListSchedulingDomain({})
+       const data = await client.DeleteDDoSBlackWhiteIpList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +321,16 @@ it("antiddos.v20200309.DescribeListDDoSSpeedLimitConfig", async function () {
 it("antiddos.v20200309.DescribeListProtectThresholdConfig", async function () {
     try {
        const data = await client.DescribeListProtectThresholdConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.CreatePortAclConfig", async function () {
+    try {
+       const data = await client.CreatePortAclConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +518,9 @@ it("antiddos.v20200309.CreateProtocolBlockConfig", async function () {
     }
 })
 
-it("antiddos.v20200309.DeleteDDoSBlackWhiteIpList", async function () {
+it("antiddos.v20200309.CreatePortAclConfigList", async function () {
     try {
-       const data = await client.DeleteDDoSBlackWhiteIpList({})
+       const data = await client.CreatePortAclConfigList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

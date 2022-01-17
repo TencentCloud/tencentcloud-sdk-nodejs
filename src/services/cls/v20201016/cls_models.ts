@@ -1507,7 +1507,7 @@ export interface MachineGroupInfo {
 }
 
 /**
- * 标签索引配置信息
+ * 元字段索引配置
  */
 export interface RuleTagInfo {
   /**
@@ -1516,7 +1516,7 @@ export interface RuleTagInfo {
   CaseSensitive: boolean
 
   /**
-   * 标签索引配置中的字段信息
+   * 元字段索引配置中的字段信息
    */
   KeyValues: Array<KeyValueInfo>
 }
@@ -2325,7 +2325,7 @@ export interface ModifyIndexRequest {
   Status?: boolean
 
   /**
-   * 索引规则，Rule和Effective两个必须有一个参数存在
+   * 索引规则
    */
   Rule?: RuleInfo
 }
@@ -3006,7 +3006,7 @@ export interface ShipperInfo {
  */
 export interface KeyValueInfo {
   /**
-   * 需要配置键值或者元字段索引的字段
+   * 需要配置键值或者元字段索引的字段，元字段Key无需额外添加`__TAG__.`前缀，与上传日志时对应的字段Key一致即可，腾讯云控制台展示时将自动添加`__TAG__.`前缀
    */
   Key: string
 

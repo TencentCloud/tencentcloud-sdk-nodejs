@@ -28,13 +28,13 @@ class Client extends abstract_client_1.AbstractClient {
         super("api.tencentcloudapi.com", "2020-11-06", clientConfig);
     }
     /**
-     * 本接口(DescribeRegions)用于查询各个产品支持地域信息，当前只支持cvm。
+     * 本接口(DescribeRegions)用于查询各个产品支持地域信息。
      */
     async DescribeRegions(req, cb) {
         return this.request("DescribeRegions", req, cb);
     }
     /**
-     * 本接口(DescribeZones)用于查询产品可用区信息，当前只支持cvm。
+     * 本接口(DescribeZones)用于查询产品可用区信息。
      */
     async DescribeZones(req, cb) {
         return this.request("DescribeZones", req, cb);

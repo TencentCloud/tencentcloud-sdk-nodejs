@@ -16,6 +16,21 @@
  */
 
 /**
+ * 指标列表单元
+ */
+export interface ApmMetricRecord {
+  /**
+   * field数组
+   */
+  Fields: Array<ApmField>
+
+  /**
+   * tag数组
+   */
+  Tags: Array<ApmTag>
+}
+
+/**
  * CreateApmInstance返回参数结构体
  */
 export interface CreateApmInstanceResponse {
@@ -197,6 +212,22 @@ export interface CreateApmInstanceRequest {
 }
 
 /**
+ * DescribeMetricRecords返回参数结构体
+ */
+export interface DescribeMetricRecordsResponse {
+  /**
+      * 指标结果集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Records: Array<ApmMetricRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeApmAgent返回参数结构体
  */
 export interface DescribeApmAgentResponse {
@@ -244,23 +275,23 @@ export interface DescribeApmInstancesResponse {
 }
 
 /**
- * DescribeApmInstances请求参数结构体
+ * 查询过滤参数
  */
-export interface DescribeApmInstancesRequest {
+export interface Filter {
   /**
-   * Tag列表
+   * 过滤方式（=, !=, in）
    */
-  Tags?: Array<ApmTag>
+  Type: string
 
   /**
-   * 搜索实例名
+   * 过滤维度名
    */
-  InstanceName?: string
+  Key: string
 
   /**
-   * 过滤实例ID
+   * 过滤值，in过滤方式用逗号分割多个值
    */
-  InstanceIds?: Array<string>
+  Value: string
 }
 
 /**
@@ -286,6 +317,125 @@ export interface DescribeApmAgentRequest {
    * 语言
    */
   LanguageEnvironment?: string
+}
+
+/**
+ * sql排序字段
+ */
+export interface OrderBy {
+  /**
+   * 需要排序的字段
+   */
+  Key: string
+
+  /**
+   * 顺序排序/倒序排序
+   */
+  Value: string
+}
+
+/**
+ * DescribeApmInstances请求参数结构体
+ */
+export interface DescribeApmInstancesRequest {
+  /**
+   * Tag列表
+   */
+  Tags?: Array<ApmTag>
+
+  /**
+   * 搜索实例名
+   */
+  InstanceName?: string
+
+  /**
+   * 过滤实例ID
+   */
+  InstanceIds?: Array<string>
+}
+
+/**
+ * 指标维度信息
+ */
+export interface ApmField {
+  /**
+      * 昨日同比指标值，已弃用，不建议使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompareVal: string
+
+  /**
+      * Compare值结果数组，推荐使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompareVals: Array<APMKVItem>
+
+  /**
+      * 指标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: number
+
+  /**
+      * 指标所对应的单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit: string
+
+  /**
+   * 请求数
+   */
+  Key: string
+}
+
+/**
+ * DescribeMetricRecords请求参数结构体
+ */
+export interface DescribeMetricRecordsRequest {
+  /**
+   * 过滤条件
+   */
+  Filters: Array<Filter>
+
+  /**
+   * 指标列表
+   */
+  Metrics: Array<QueryMetricItem>
+
+  /**
+   * 聚合维度
+   */
+  GroupBy: Array<string>
+
+  /**
+   * 排序
+   */
+  OrderBy?: OrderBy
+
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+
+  /**
+   * 每页大小
+   */
+  Limit?: number
+
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+
+  /**
+   * 分页起始点
+   */
+  Offset?: number
+
+  /**
+   * 结束时间
+   */
+  EndTime?: number
 }
 
 /**
@@ -327,4 +477,41 @@ export interface ApmAgentInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PrivateLinkCollectorURL: string
+}
+
+/**
+ * 查询
+ */
+export interface QueryMetricItem {
+  /**
+   * 指标名
+   */
+  MetricName: string
+
+  /**
+   * 同比，已弃用，不建议使用
+   */
+  Compare?: string
+
+  /**
+   * 同比，支持多种同比方式
+   */
+  Compares?: Array<string>
+}
+
+/**
+ * Apm通用KV结构
+ */
+export interface APMKVItem {
+  /**
+      * Key值定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
+
+  /**
+      * Value值定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
 }

@@ -36,7 +36,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeRegions)用于查询各个产品支持地域信息，当前只支持cvm。
+   * 本接口(DescribeRegions)用于查询各个产品支持地域信息。
    */
   async DescribeRegions(
     req: DescribeRegionsRequest,
@@ -46,7 +46,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeZones)用于查询产品可用区信息，当前只支持cvm。
+   * 本接口(DescribeZones)用于查询产品可用区信息。
    */
   async DescribeZones(
     req: DescribeZonesRequest,

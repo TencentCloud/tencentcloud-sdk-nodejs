@@ -338,6 +338,16 @@ it("cfw.v20190904.DescribeTLogInfo", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyRunSyncAsset", async function () {
+    try {
+       const data = await client.ModifyRunSyncAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyNatFwVpcDnsSwitch", async function () {
     try {
        const data = await client.ModifyNatFwVpcDnsSwitch({})

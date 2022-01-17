@@ -701,13 +701,18 @@ export interface StaticPackRelation {
 }
 
 /**
- * CreateDDoSBlackWhiteIpList返回参数结构体
+ * CreatePortAclConfig请求参数结构体
  */
-export interface CreateDDoSBlackWhiteIpListResponse {
+export interface CreatePortAclConfigRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 资源实例ID
    */
-  RequestId?: string
+  InstanceId: string
+
+  /**
+   * 端口acl策略
+   */
+  AclConfig: AclConfig
 }
 
 /**
@@ -874,6 +879,62 @@ export interface ModifyDomainUsrNameResponse {
 }
 
 /**
+ * CreatePortAclConfigList请求参数结构体
+ */
+export interface CreatePortAclConfigListRequest {
+  /**
+   * 资源实例ID列表
+   */
+  InstanceIdList: Array<string>
+
+  /**
+   * 端口acl策略
+   */
+  AclConfig: AclConfig
+}
+
+/**
+ * 基于端口的acl策略
+ */
+export interface AclConfig {
+  /**
+   * 协议类型, 可取值tcp, udp, all
+   */
+  ForwardProtocol: string
+
+  /**
+   * 目的端口起始，可取值范围0~65535
+   */
+  DPortStart: number
+
+  /**
+   * 目的端口结束，可取值范围0~65535
+   */
+  DPortEnd: number
+
+  /**
+   * 来源端口起始，可取值范围0~65535
+   */
+  SPortStart: number
+
+  /**
+   * 来源端口结束，可取值范围0~65535
+   */
+  SPortEnd: number
+
+  /**
+   * 动作，可取值：drop， transmit， forward
+   */
+  Action: string
+
+  /**
+      * 策略优先级，数字越小，级别越高，该规则越靠前匹配，取值1-1000
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Priority?: number
+}
+
+/**
  * DisassociateDDoSEipAddress请求参数结构体
  */
 export interface DisassociateDDoSEipAddressRequest {
@@ -941,6 +1002,16 @@ export interface EipAddressPackRelation {
    * 当前到期时间
    */
   CurDeadline: string
+}
+
+/**
+ * CreateDDoSBlackWhiteIpList返回参数结构体
+ */
+export interface CreateDDoSBlackWhiteIpListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1629,6 +1700,16 @@ export interface CreateIPAlarmThresholdConfigResponse {
 }
 
 /**
+ * CreatePortAclConfigList返回参数结构体
+ */
+export interface CreatePortAclConfigListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteWaterPrintConfig请求参数结构体
  */
 export interface DeleteWaterPrintConfigRequest {
@@ -1888,18 +1969,13 @@ off(关闭)
 }
 
 /**
- * ip段数据结构
+ * CreatePortAclConfig返回参数结构体
  */
-export interface IpSegment {
+export interface CreatePortAclConfigResponse {
   /**
-   * ip地址
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Ip: string
-
-  /**
-   * ip掩码，如果为32位ip，填0
-   */
-  Mask: number
+  RequestId?: string
 }
 
 /**
@@ -2035,6 +2111,21 @@ export interface CertIdInsL7Rules {
    * 证书ID
    */
   CertId: string
+}
+
+/**
+ * ip段数据结构
+ */
+export interface IpSegment {
+  /**
+   * ip地址
+   */
+  Ip: string
+
+  /**
+   * ip掩码，如果为32位ip，填0
+   */
+  Mask: number
 }
 
 /**

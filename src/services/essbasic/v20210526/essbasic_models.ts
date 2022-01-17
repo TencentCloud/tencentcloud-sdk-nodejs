@@ -227,7 +227,7 @@ export interface TemplateInfo {
  */
 export interface GetDownloadFlowUrlResponse {
   /**
-   * 进入合同（流程）下载确认页面链接
+   * 合同（流程）下载地址
    */
   DownLoadUrl: string
 
@@ -1267,7 +1267,7 @@ export interface FlowInfo {
   Deadline: number
 
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateId?: string
 

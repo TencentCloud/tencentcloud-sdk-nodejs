@@ -944,6 +944,16 @@ export interface DescribeCDBProxyResponse {
       */
     ConnectionPoolInfo: ConnectionPoolInfo;
     /**
+      * 代理数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+    /**
+      * 代理信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyGroup: Array<ProxyGroup>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -6011,6 +6021,36 @@ export interface ModifyAccountMaxUserConnectionsRequest {
       * 设置账户最大可用连接数，最大可设置值为10240。
       */
     MaxUserConnections: number;
+}
+/**
+ * 数据代理组信息
+ */
+export interface ProxyGroup {
+    /**
+      * 代理基本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BaseGroup: BaseGroupInfo;
+    /**
+      * 代理地址信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Address: Array<Address>;
+    /**
+      * 代理连接池信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConnectionPoolInfo: ConnectionPoolInfo;
+    /**
+      * 代理节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProxyNode: Array<ProxyNodeInfo>;
+    /**
+      * 代理路由信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RWInstInfo: RWInfo;
 }
 /**
  * DeleteDeployGroups返回参数结构体

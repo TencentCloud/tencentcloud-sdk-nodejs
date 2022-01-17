@@ -2092,6 +2092,19 @@ export interface ScanResultInfo {
     BanStatus: boolean;
 }
 /**
+ * ModifyRunSyncAsset返回参数结构体
+ */
+export interface ModifyRunSyncAssetResponse {
+    /**
+      * 0：同步成功，1：资产更新中，2：后台同步调用失败
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifySecurityGroupSequenceRules返回参数结构体
  */
 export interface ModifySecurityGroupSequenceRulesResponse {
@@ -3515,6 +3528,15 @@ export interface ModifyItemSwitchStatusRequest {
     Status: number;
     /**
       * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
+      */
+    Type?: number;
+}
+/**
+ * ModifyRunSyncAsset请求参数结构体
+ */
+export interface ModifyRunSyncAssetRequest {
+    /**
+      * 0: 互联网防火墙开关，1：vpc 防火墙开关
       */
     Type?: number;
 }

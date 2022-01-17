@@ -223,6 +223,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTLogInfo", req, cb);
     }
     /**
+     * 同步资产-互联网&VPC（新）
+     */
+    async ModifyRunSyncAsset(req, cb) {
+        return this.request("ModifyRunSyncAsset", req, cb);
+    }
+    /**
      * nat 防火墙VPC DNS 开关切换
      */
     async ModifyNatFwVpcDnsSwitch(req, cb) {
@@ -440,7 +446,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlockByIpTimesList", req, cb);
     }
     /**
-     * 获取地址模版列表
+     * 获取地址模板列表
      */
     async DescribeAddrTemplateList(req, cb) {
         return this.request("DescribeAddrTemplateList", req, cb);

@@ -28,6 +28,16 @@ it("apm.v20210622.CreateApmInstance", async function () {
     }
 })
 
+it("apm.v20210622.DescribeMetricRecords", async function () {
+    try {
+       const data = await client.DescribeMetricRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeApmInstances", async function () {
     try {
        const data = await client.DescribeApmInstances({})

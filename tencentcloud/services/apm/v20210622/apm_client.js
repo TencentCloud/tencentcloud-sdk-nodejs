@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateApmInstance", req, cb);
     }
     /**
+     * 拉取通用指标列表
+     */
+    async DescribeMetricRecords(req, cb) {
+        return this.request("DescribeMetricRecords", req, cb);
+    }
+    /**
      * APM实例列表拉取
      */
     async DescribeApmInstances(req, cb) {

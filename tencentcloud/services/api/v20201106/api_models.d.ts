@@ -68,7 +68,7 @@ export interface ZoneInfo {
  */
 export interface DescribeZonesRequest {
     /**
-      * 待查询产品的名称，例如cvm、vpc
+      * 待查询产品的名称，例如cvm
       */
     Product: string;
 }
@@ -128,7 +128,7 @@ export interface DescribeRegionsResponse {
  */
 export interface DescribeRegionsRequest {
     /**
-      * 待查询产品的名称，例如cvm、vpc
+      * 待查询产品的名称，例如cvm
       */
     Product: string;
 }
