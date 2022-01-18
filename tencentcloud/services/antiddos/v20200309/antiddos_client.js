@@ -233,6 +233,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBasicDeviceStatus", req, cb);
     }
     /**
+     * 配置DDoS连接抑制选项
+     */
+    async CreateDDoSConnectLimit(req, cb) {
+        return this.request("CreateDDoSConnectLimit", req, cb);
+    }
+    /**
      * 获取高防包资产实例列表
 
      */

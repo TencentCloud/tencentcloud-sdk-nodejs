@@ -21,12 +21,18 @@ import {
   Album,
   DescribeMusicResponse,
   DescribePkgOfflineMusicRequest,
+  JoinRoomInput,
+  DestroyKTVRobotResponse,
   DescribeLyricResponse,
   ModifyMusicOnShelvesResponse,
-  UseRange,
+  CreateKTVRobotRequest,
+  PlayCommandInput,
+  SyncKTVRobotCommandRequest,
+  SetAudioParamCommandInput,
   DescribeKTVPlaylistDetailRequest,
   Station,
-  Music,
+  CreateKTVRobotResponse,
+  UseRange,
   MusicDetailInfo,
   DescribeKTVMusicDetailRequest,
   DescribeStationsResponse,
@@ -37,25 +43,31 @@ import {
   DescribeKTVPlaylistsRequest,
   DataInfo,
   DescribeKTVPlaylistDetailResponse,
+  TRTCJoinRoomInput,
   Package,
   ReportDataResponse,
   ModifyMusicOnShelvesRequest,
   DescribePackageItemsRequest,
   AuthInfo,
   TakeMusicOffShelvesRequest,
-  PutMusicOnTheShelvesResponse,
+  DescribeKTVRobotsResponse,
   TakeMusicOffShelves,
   Lyric,
   OfflineMusicDetail,
   DescribeItemByIdRequest,
   DescribeAuthInfoRequest,
   DescribeKTVPlaylistsResponse,
+  Music,
   Artist,
   DescribeStationsRequest,
   MusicOpenDetail,
+  PutMusicOnTheShelvesResponse,
   SearchKTVMusicsResponse,
+  KTVRobotInfo,
   DescribeItemsRequest,
   Item,
+  SetPlaylistCommandInput,
+  SyncKTVRobotCommandResponse,
   DescribeCloudMusicResponse,
   KTVMusicBaseInfo,
   DescribePackagesRequest,
@@ -68,15 +80,19 @@ import {
   DescribeItemByIdResponse,
   MusicStatus,
   DescribeMusicSaleStatusResponse,
+  SendMessageCommandInput,
   PutMusicOnTheShelvesRequest,
   DescribePackagesResponse,
+  DestroyKTVRobotRequest,
   DescribeCloudMusicRequest,
   DescribeAuthInfoResponse,
   TakeMusicOffShelvesResponse,
   DescribeLyricRequest,
   DescribeKTVMusicDetailResponse,
+  DescribeKTVRobotsRequest,
   DescribeMusicRequest,
   ReportDataRequest,
+  SeekCommandInput,
   KTVMusicDefinitionInfo,
 } from "./ame_models"
 
@@ -87,26 +103,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ame.tencentcloudapi.com", "2019-09-16", clientConfig)
-  }
-
-  /**
-   * 根据 Id 查询歌曲的详细信息，包含基础信息及播放信息。
-   */
-  async DescribeKTVMusicDetail(
-    req: DescribeKTVMusicDetailRequest,
-    cb?: (error: string, rep: DescribeKTVMusicDetailResponse) => void
-  ): Promise<DescribeKTVMusicDetailResponse> {
-    return this.request("DescribeKTVMusicDetail", req, cb)
-  }
-
-  /**
-   * 根据歌曲ID查询歌曲信息
-   */
-  async DescribeItemById(
-    req: DescribeItemByIdRequest,
-    cb?: (error: string, rep: DescribeItemByIdResponse) => void
-  ): Promise<DescribeItemByIdResponse> {
-    return this.request("DescribeItemById", req, cb)
   }
 
   /**
@@ -130,36 +126,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据音乐信息查询音乐是否在售
-   */
-  async DescribeMusicSaleStatus(
-    req: DescribeMusicSaleStatusRequest,
-    cb?: (error: string, rep: DescribeMusicSaleStatusResponse) => void
-  ): Promise<DescribeMusicSaleStatusResponse> {
-    return this.request("DescribeMusicSaleStatus", req, cb)
-  }
-
-  /**
-   * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
-   */
-  async DescribeKTVPlaylistDetail(
-    req: DescribeKTVPlaylistDetailRequest,
-    cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void
-  ): Promise<DescribeKTVPlaylistDetailResponse> {
-    return this.request("DescribeKTVPlaylistDetail", req, cb)
-  }
-
-  /**
-   * 获取曲库包下已核销歌曲列表接口
-   */
-  async DescribePackageItems(
-    req: DescribePackageItemsRequest,
-    cb?: (error: string, rep: DescribePackageItemsResponse) => void
-  ): Promise<DescribePackageItemsResponse> {
-    return this.request("DescribePackageItems", req, cb)
-  }
-
-  /**
    * 该服务后续会停用，不再建议使用
    */
   async DescribeItems(
@@ -180,6 +146,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取授权项目下已购云音乐列表
+   */
+  async DescribeCloudMusicPurchased(
+    req: DescribeCloudMusicPurchasedRequest,
+    cb?: (error: string, rep: DescribeCloudMusicPurchasedResponse) => void
+  ): Promise<DescribeCloudMusicPurchasedResponse> {
+    return this.request("DescribeCloudMusicPurchased", req, cb)
+  }
+
+  /**
    * 客户上报用户数据功能，为了更好地为用户提供优质服务
    */
   async ReportData(
@@ -187,6 +163,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReportDataResponse) => void
   ): Promise<ReportDataResponse> {
     return this.request("ReportData", req, cb)
+  }
+
+  /**
+   * 根据购买曲库包用户可查询已回退的歌曲信息
+   */
+  async DescribePkgOfflineMusic(
+    req: DescribePkgOfflineMusicRequest,
+    cb?: (error: string, rep: DescribePkgOfflineMusicResponse) => void
+  ): Promise<DescribePkgOfflineMusicResponse> {
+    return this.request("DescribePkgOfflineMusic", req, cb)
   }
 
   /**
@@ -200,16 +186,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取云音乐播放信息接口
-   */
-  async DescribeCloudMusic(
-    req: DescribeCloudMusicRequest,
-    cb?: (error: string, rep: DescribeCloudMusicResponse) => void
-  ): Promise<DescribeCloudMusicResponse> {
-    return this.request("DescribeCloudMusic", req, cb)
-  }
-
-  /**
    * 根据资源方，需要变更的参数，请求该接口进行变更，为空的参数默认为无变更
    */
   async ModifyMusicOnShelves(
@@ -220,23 +196,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据搜索条件，返回匹配的歌曲列表。
+   * 获取曲库包下已核销歌曲列表接口
    */
-  async SearchKTVMusics(
-    req: SearchKTVMusicsRequest,
-    cb?: (error: string, rep: SearchKTVMusicsResponse) => void
-  ): Promise<SearchKTVMusicsResponse> {
-    return this.request("SearchKTVMusics", req, cb)
-  }
-
-  /**
-   * 获取直播互动曲库推荐歌单列表。
-   */
-  async DescribeKTVPlaylists(
-    req: DescribeKTVPlaylistsRequest,
-    cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void
-  ): Promise<DescribeKTVPlaylistsResponse> {
-    return this.request("DescribeKTVPlaylists", req, cb)
+  async DescribePackageItems(
+    req: DescribePackageItemsRequest,
+    cb?: (error: string, rep: DescribePackageItemsResponse) => void
+  ): Promise<DescribePackageItemsResponse> {
+    return this.request("DescribePackageItems", req, cb)
   }
 
   /**
@@ -250,13 +216,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取授权项目下已购云音乐列表
+   * 获取直播互动曲库推荐歌单列表。
    */
-  async DescribeCloudMusicPurchased(
-    req: DescribeCloudMusicPurchasedRequest,
-    cb?: (error: string, rep: DescribeCloudMusicPurchasedResponse) => void
-  ): Promise<DescribeCloudMusicPurchasedResponse> {
-    return this.request("DescribeCloudMusicPurchased", req, cb)
+  async DescribeKTVPlaylists(
+    req: DescribeKTVPlaylistsRequest,
+    cb?: (error: string, rep: DescribeKTVPlaylistsResponse) => void
+  ): Promise<DescribeKTVPlaylistsResponse> {
+    return this.request("DescribeKTVPlaylists", req, cb)
+  }
+
+  /**
+   * 创建机器人，支持进入 RTC 房间，播放直播互动曲库歌曲。
+   */
+  async CreateKTVRobot(
+    req: CreateKTVRobotRequest,
+    cb?: (error: string, rep: CreateKTVRobotResponse) => void
+  ): Promise<CreateKTVRobotResponse> {
+    return this.request("CreateKTVRobot", req, cb)
+  }
+
+  /**
+   * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+   */
+  async SyncKTVRobotCommand(
+    req: SyncKTVRobotCommandRequest,
+    cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
+  ): Promise<SyncKTVRobotCommandResponse> {
+    return this.request("SyncKTVRobotCommand", req, cb)
+  }
+
+  /**
+   * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
+   */
+  async DescribeKTVPlaylistDetail(
+    req: DescribeKTVPlaylistDetailRequest,
+    cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void
+  ): Promise<DescribeKTVPlaylistDetailResponse> {
+    return this.request("DescribeKTVPlaylistDetail", req, cb)
   }
 
   /**
@@ -270,6 +266,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据 Id 查询歌曲的详细信息，包含基础信息及播放信息。
+   */
+  async DescribeKTVMusicDetail(
+    req: DescribeKTVMusicDetailRequest,
+    cb?: (error: string, rep: DescribeKTVMusicDetailResponse) => void
+  ): Promise<DescribeKTVMusicDetailResponse> {
+    return this.request("DescribeKTVMusicDetail", req, cb)
+  }
+
+  /**
+   * 根据歌曲ID查询歌曲信息
+   */
+  async DescribeItemById(
+    req: DescribeItemByIdRequest,
+    cb?: (error: string, rep: DescribeItemByIdResponse) => void
+  ): Promise<DescribeItemByIdResponse> {
+    return this.request("DescribeItemById", req, cb)
+  }
+
+  /**
+   * 根据音乐信息查询音乐是否在售
+   */
+  async DescribeMusicSaleStatus(
+    req: DescribeMusicSaleStatusRequest,
+    cb?: (error: string, rep: DescribeMusicSaleStatusResponse) => void
+  ): Promise<DescribeMusicSaleStatusResponse> {
+    return this.request("DescribeMusicSaleStatus", req, cb)
+  }
+
+  /**
+   * 销毁机器人，机器人退出 RTC 房间。
+   */
+  async DestroyKTVRobot(
+    req: DestroyKTVRobotRequest,
+    cb?: (error: string, rep: DestroyKTVRobotResponse) => void
+  ): Promise<DestroyKTVRobotResponse> {
+    return this.request("DestroyKTVRobot", req, cb)
+  }
+
+  /**
+   * 获取云音乐播放信息接口
+   */
+  async DescribeCloudMusic(
+    req: DescribeCloudMusicRequest,
+    cb?: (error: string, rep: DescribeCloudMusicResponse) => void
+  ): Promise<DescribeCloudMusicResponse> {
+    return this.request("DescribeCloudMusic", req, cb)
+  }
+
+  /**
    * 根据资源方所传歌曲信息，进行歌曲上架，多个歌曲同时请求时，需构造复合结构进行请求
    */
   async PutMusicOnTheShelves(
@@ -280,12 +326,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据购买曲库包用户可查询已回退的歌曲信息
+   * 查询机器人列表，支持 Id、状态等过滤条件。
    */
-  async DescribePkgOfflineMusic(
-    req: DescribePkgOfflineMusicRequest,
-    cb?: (error: string, rep: DescribePkgOfflineMusicResponse) => void
-  ): Promise<DescribePkgOfflineMusicResponse> {
-    return this.request("DescribePkgOfflineMusic", req, cb)
+  async DescribeKTVRobots(
+    req: DescribeKTVRobotsRequest,
+    cb?: (error: string, rep: DescribeKTVRobotsResponse) => void
+  ): Promise<DescribeKTVRobotsResponse> {
+    return this.request("DescribeKTVRobots", req, cb)
+  }
+
+  /**
+   * 根据搜索条件，返回匹配的歌曲列表。
+   */
+  async SearchKTVMusics(
+    req: SearchKTVMusicsRequest,
+    cb?: (error: string, rep: SearchKTVMusicsResponse) => void
+  ): Promise<SearchKTVMusicsResponse> {
+    return this.request("SearchKTVMusics", req, cb)
   }
 }

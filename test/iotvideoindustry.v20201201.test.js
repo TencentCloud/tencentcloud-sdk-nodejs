@@ -268,9 +268,9 @@ it("iotvideoindustry.v20201201.ControlDevicePTZ", async function () {
     }
 })
 
-it("iotvideoindustry.v20201201.ModifySubscriptionStatus", async function () {
+it("iotvideoindustry.v20201201.GetRecordDatesByDev", async function () {
     try {
-       const data = await client.ModifySubscriptionStatus({})
+       const data = await client.GetRecordDatesByDev({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +358,16 @@ it("iotvideoindustry.v20201201.UpdateDevicePassWord", async function () {
     }
 })
 
+it("iotvideoindustry.v20201201.ModifySubscriptionStatus", async function () {
+    try {
+       const data = await client.ModifySubscriptionStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideoindustry.v20201201.DescribeWarnMod", async function () {
     try {
        const data = await client.DescribeWarnMod({})
@@ -438,9 +448,9 @@ it("iotvideoindustry.v20201201.DescribeRecordDatesByLive", async function () {
     }
 })
 
-it("iotvideoindustry.v20201201.GetRecordDatesByDev", async function () {
+it("iotvideoindustry.v20201201.DescribeChannelLiveStreamURL", async function () {
     try {
-       const data = await client.GetRecordDatesByDev({})
+       const data = await client.DescribeChannelLiveStreamURL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

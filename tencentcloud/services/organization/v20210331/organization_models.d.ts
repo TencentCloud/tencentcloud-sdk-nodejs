@@ -12,6 +12,21 @@ export interface OrgPermission {
     Name: string;
 }
 /**
+ * 成员管理身份
+ */
+export interface MemberIdentity {
+    /**
+      * 身份ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdentityId: number;
+    /**
+      * 身份名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdentityAliasName: string;
+}
+/**
  * DescribeOrganization返回参数结构体
  */
 export interface DescribeOrganizationResponse {
@@ -106,7 +121,7 @@ export interface CreateOrganizationMemberRequest {
       */
     Name: string;
     /**
-      * 关系策略
+      * 关系策略  取值：Financial
       */
     PolicyType: string;
     /**
@@ -129,6 +144,14 @@ export interface CreateOrganizationMemberRequest {
       * 重试创建传记录ID
       */
     RecordId?: number;
+    /**
+      * 代付者Uin
+      */
+    PayUin?: string;
+    /**
+      * 管理身份
+      */
+    IdentityRoleID?: Array<number>;
 }
 /**
  * BindOrganizationMemberAuthAccount返回参数结构体
@@ -224,6 +247,21 @@ export interface OrgMember {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsAllowQuit: string;
+    /**
+      * 代付者Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayUin: string;
+    /**
+      * 代付者名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayName: string;
+    /**
+      * 管理身份
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrgIdentity: Array<MemberIdentity>;
 }
 /**
  * DescribeOrganization请求参数结构体
@@ -255,6 +293,11 @@ export interface DescribeOrganizationMembersResponse {
  * CreateOrganizationMember返回参数结构体
  */
 export interface CreateOrganizationMemberResponse {
+    /**
+      * 成员Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Uin: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

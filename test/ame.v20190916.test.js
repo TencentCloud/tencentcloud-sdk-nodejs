@@ -18,26 +18,6 @@ const client = new tencentcloud.ame.v20190916.Client({
 })
 describe("ame.v20190916.test.js", function () {
 
-it("ame.v20190916.DescribeKTVMusicDetail", async function () {
-    try {
-       const data = await client.DescribeKTVMusicDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ame.v20190916.DescribeItemById", async function () {
-    try {
-       const data = await client.DescribeItemById({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ame.v20190916.DescribePackages", async function () {
     try {
        const data = await client.DescribePackages({})
@@ -51,36 +31,6 @@ it("ame.v20190916.DescribePackages", async function () {
 it("ame.v20190916.DescribeLyric", async function () {
     try {
        const data = await client.DescribeLyric({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ame.v20190916.DescribeMusicSaleStatus", async function () {
-    try {
-       const data = await client.DescribeMusicSaleStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ame.v20190916.DescribeKTVPlaylistDetail", async function () {
-    try {
-       const data = await client.DescribeKTVPlaylistDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ame.v20190916.DescribePackageItems", async function () {
-    try {
-       const data = await client.DescribePackageItems({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +58,29 @@ it("ame.v20190916.DescribeAuthInfo", async function () {
     }
 })
 
+it("ame.v20190916.DescribeCloudMusicPurchased", async function () {
+    try {
+       const data = await client.DescribeCloudMusicPurchased({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.ReportData", async function () {
     try {
        const data = await client.ReportData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribePkgOfflineMusic", async function () {
+    try {
+       const data = await client.DescribePkgOfflineMusic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,16 +98,6 @@ it("ame.v20190916.DescribeMusic", async function () {
     }
 })
 
-it("ame.v20190916.DescribeCloudMusic", async function () {
-    try {
-       const data = await client.DescribeCloudMusic({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ame.v20190916.ModifyMusicOnShelves", async function () {
     try {
        const data = await client.ModifyMusicOnShelves({})
@@ -148,19 +108,9 @@ it("ame.v20190916.ModifyMusicOnShelves", async function () {
     }
 })
 
-it("ame.v20190916.SearchKTVMusics", async function () {
+it("ame.v20190916.DescribePackageItems", async function () {
     try {
-       const data = await client.SearchKTVMusics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ame.v20190916.DescribeKTVPlaylists", async function () {
-    try {
-       const data = await client.DescribeKTVPlaylists({})
+       const data = await client.DescribePackageItems({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +128,39 @@ it("ame.v20190916.TakeMusicOffShelves", async function () {
     }
 })
 
-it("ame.v20190916.DescribeCloudMusicPurchased", async function () {
+it("ame.v20190916.DescribeKTVPlaylists", async function () {
     try {
-       const data = await client.DescribeCloudMusicPurchased({})
+       const data = await client.DescribeKTVPlaylists({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.CreateKTVRobot", async function () {
+    try {
+       const data = await client.CreateKTVRobot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.SyncKTVRobotCommand", async function () {
+    try {
+       const data = await client.SyncKTVRobotCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeKTVPlaylistDetail", async function () {
+    try {
+       const data = await client.DescribeKTVPlaylistDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +178,56 @@ it("ame.v20190916.DescribeStations", async function () {
     }
 })
 
+it("ame.v20190916.DescribeKTVMusicDetail", async function () {
+    try {
+       const data = await client.DescribeKTVMusicDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeItemById", async function () {
+    try {
+       const data = await client.DescribeItemById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeMusicSaleStatus", async function () {
+    try {
+       const data = await client.DescribeMusicSaleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DestroyKTVRobot", async function () {
+    try {
+       const data = await client.DestroyKTVRobot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeCloudMusic", async function () {
+    try {
+       const data = await client.DescribeCloudMusic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.PutMusicOnTheShelves", async function () {
     try {
        const data = await client.PutMusicOnTheShelves({})
@@ -208,9 +238,19 @@ it("ame.v20190916.PutMusicOnTheShelves", async function () {
     }
 })
 
-it("ame.v20190916.DescribePkgOfflineMusic", async function () {
+it("ame.v20190916.DescribeKTVRobots", async function () {
     try {
-       const data = await client.DescribePkgOfflineMusic({})
+       const data = await client.DescribeKTVRobots({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.SearchKTVMusics", async function () {
+    try {
+       const data = await client.SearchKTVMusics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

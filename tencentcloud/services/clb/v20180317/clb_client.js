@@ -72,6 +72,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 这个接口用于删除SnatPro的负载均衡的SnatIp。
+本接口为异步接口，接口返回成功后，需以得到的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */
     async DeleteLoadBalancerSnatIps(req, cb) {
         return this.request("DeleteLoadBalancerSnatIps", req, cb);
@@ -423,6 +424,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 修改负载均衡实例的属性。支持修改负载均衡实例的名称、设置负载均衡的跨域属性。
+本接口为异步接口，接口返回成功后，需以得到的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */
     async ModifyLoadBalancerAttributes(req, cb) {
         return this.request("ModifyLoadBalancerAttributes", req, cb);
@@ -436,6 +438,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启。
+本接口为异步接口，接口返回成功后，需以得到的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */
     async CreateLoadBalancerSnatIps(req, cb) {
         return this.request("CreateLoadBalancerSnatIps", req, cb);

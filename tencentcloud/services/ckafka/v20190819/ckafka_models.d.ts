@@ -435,7 +435,7 @@ export interface DescribeInstancesDetailResponse {
     /**
       * 返回的实例详情结果对象
       */
-    Result?: InstanceDetailResponse;
+    Result: InstanceDetailResponse;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1986,6 +1986,10 @@ export interface DescribeInstancesRequest {
       * 已废弃。匹配标签key值。
       */
     TagKey?: string;
+    /**
+      * 私有网络Id
+      */
+    VpcId?: string;
 }
 /**
  * 实例属性返回结果对象
@@ -2286,11 +2290,11 @@ export interface DescribeInstancesDetailRequest {
       */
     Status?: Array<number>;
     /**
-      * 偏移量，不填默认为0
+      * 偏移量，不填默认为0。
       */
     Offset?: number;
     /**
-      * 返回数量，不填则默认10，最大值20
+      * 返回数量，不填则默认10，最大值20。
       */
     Limit?: number;
     /**
@@ -2298,9 +2302,13 @@ export interface DescribeInstancesDetailRequest {
       */
     TagKey?: string;
     /**
-      * 过滤器
+      * 过滤器。
       */
     Filters?: Array<Filter>;
+    /**
+      * 按照实例ID过滤
+      */
+    InstanceIds?: string;
 }
 /**
  * ModifyPassword返回参数结构体
@@ -3160,6 +3168,21 @@ export interface InstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RebalanceTime: string;
+    /**
+      * 实例当前partition数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PartitionNumber: number;
+    /**
+      * 公网带宽类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicNetworkChargeType: string;
+    /**
+      * 公网带宽值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicNetwork: number;
 }
 /**
  * DescribeTopicDetail返回参数结构体

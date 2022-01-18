@@ -89,6 +89,7 @@ import {
   DescribeZonesRequest,
   StartInstancesRequest,
   Tag,
+  ProgramFpgaImageResponse,
   DescribeInstanceInternetBandwidthConfigsResponse,
   Placement,
   DescribeDisasterRecoverGroupsRequest,
@@ -219,6 +220,7 @@ import {
   DescribeAccountQuotaResponse,
   RunMonitorServiceEnabled,
   ResetInstanceResponse,
+  ProgramFpgaImageRequest,
   DisasterRecoverGroup,
   VirtualPrivateCloud,
   InstanceChargePrepaid,
@@ -423,6 +425,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceResetInstancesInternetMaxBandwidthResponse) => void
   ): Promise<InquiryPriceResetInstancesInternetMaxBandwidthResponse> {
     return this.request("InquiryPriceResetInstancesInternetMaxBandwidth", req, cb)
+  }
+
+  /**
+   * 本接口(ProgramFpgaImage)用于在线烧录由客户提供的FPGA镜像文件到指定实例的指定FPGA卡上。
+   * 只支持对单个实例发起在线烧录FPGA镜像的操作。
+   * 支持对单个实例的多块FPGA卡同时烧录FPGA镜像，DBDFs参数为空时，默认对指定实例的所有FPGA卡进行烧录。
+   */
+  async ProgramFpgaImage(
+    req: ProgramFpgaImageRequest,
+    cb?: (error: string, rep: ProgramFpgaImageResponse) => void
+  ): Promise<ProgramFpgaImageResponse> {
+    return this.request("ProgramFpgaImage", req, cb)
   }
 
   /**

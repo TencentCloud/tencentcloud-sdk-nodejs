@@ -18,27 +18,31 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  RumProject,
-  DescribeDataPerformancePageResponse,
-  DescribeLogListResponse,
-  DescribeDataPerformancePageRequest,
-  DescribeProjectsResponse,
-  DescribeScoresRequest,
-  DescribeErrorRequest,
   ScoreInfo,
   DescribeProjectsRequest,
-  DescribeDataEventUrlResponse,
-  DescribeLogListRequest,
-  Filter,
-  DescribeDataLogUrlStatisticsResponse,
-  CreateProjectResponse,
   DescribeDataEventUrlRequest,
-  DescribeDataPvUrlStatisticsRequest,
+  RumProject,
+  DescribeProjectsResponse,
+  DescribeDataFetchUrlResponse,
+  DescribeErrorRequest,
+  DescribeLogListRequest,
+  DescribeScoresResponse,
   DescribeErrorResponse,
   DescribeDataLogUrlStatisticsRequest,
+  DescribeDataPerformancePageRequest,
+  DescribeScoresRequest,
+  DescribeDataFetchUrlRequest,
+  DescribeDataLogUrlStatisticsResponse,
+  CreateProjectResponse,
+  DescribeDataFetchUrlInfoResponse,
+  DescribeDataPvUrlStatisticsRequest,
+  Filter,
+  DescribeDataPerformancePageResponse,
+  DescribeDataEventUrlResponse,
+  DescribeDataFetchUrlInfoRequest,
+  DescribeLogListResponse,
   DescribeDataPvUrlStatisticsResponse,
   CreateProjectRequest,
-  DescribeScoresResponse,
 } from "./rum_models"
 
 /**
@@ -138,5 +142,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataPvUrlStatisticsResponse) => void
   ): Promise<DescribeDataPvUrlStatisticsResponse> {
     return this.request("DescribeDataPvUrlStatistics", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataFetchUrl信息
+   */
+  async DescribeDataFetchUrl(
+    req: DescribeDataFetchUrlRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlResponse) => void
+  ): Promise<DescribeDataFetchUrlResponse> {
+    return this.request("DescribeDataFetchUrl", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataFetchUrlInfo信息
+   */
+  async DescribeDataFetchUrlInfo(
+    req: DescribeDataFetchUrlInfoRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
+  ): Promise<DescribeDataFetchUrlInfoResponse> {
+    return this.request("DescribeDataFetchUrlInfo", req, cb)
   }
 }

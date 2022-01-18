@@ -150,6 +150,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceResetInstancesInternetMaxBandwidth", req, cb);
     }
     /**
+     * 本接口(ProgramFpgaImage)用于在线烧录由客户提供的FPGA镜像文件到指定实例的指定FPGA卡上。
+* 只支持对单个实例发起在线烧录FPGA镜像的操作。
+* 支持对单个实例的多块FPGA卡同时烧录FPGA镜像，DBDFs参数为空时，默认对指定实例的所有FPGA卡进行烧录。
+     */
+    async ProgramFpgaImage(req, cb) {
+        return this.request("ProgramFpgaImage", req, cb);
+    }
+    /**
      * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
 
 * 只支持[`STOPPED`](https://cloud.tencent.com/document/product/213/15753#InstanceStatus)状态的`Linux`操作系统的实例。

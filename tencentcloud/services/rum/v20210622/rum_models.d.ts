@@ -1,239 +1,4 @@
 /**
- * Rum 项目信息
- */
-export interface RumProject {
-    /**
-      * 项目名
-      */
-    Name: string;
-    /**
-      * 创建者 id
-      */
-    Creator: string;
-    /**
-      * 实例 id
-      */
-    InstanceID: string;
-    /**
-      * 项目类型
-      */
-    Type: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: string;
-    /**
-      * 项目仓库地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Repo: string;
-    /**
-      * 项目网址地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    URL: string;
-    /**
-      * 项目采样频率
-      */
-    Rate: string;
-    /**
-      * 项目唯一key（长度 12 位）
-      */
-    Key: string;
-    /**
-      * 是否开启url聚类
-      */
-    EnableURLGroup: number;
-    /**
-      * 实例名
-      */
-    InstanceName: string;
-    /**
-      * 项目 ID
-      */
-    ID: number;
-    /**
-      * 实例 key
-      */
-    InstanceKey: string;
-    /**
-      * 项目描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Desc: string;
-    /**
-      * 是否星标  1:是 0:否
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsStar: number;
-}
-/**
- * DescribeDataPerformancePage返回参数结构体
- */
-export interface DescribeDataPerformancePageResponse {
-    /**
-      * 返回值
-      */
-    Result: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeLogList返回参数结构体
- */
-export interface DescribeLogListResponse {
-    /**
-      * 返回字符串
-      */
-    Result: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeDataPerformancePage请求参数结构体
- */
-export interface DescribeDataPerformancePageRequest {
-    /**
-      * 项目ID
-      */
-    ID: number;
-    /**
-      * 开始时间
-      */
-    StartTime: number;
-    /**
-      * 结束时间
-      */
-    EndTime: number;
-    /**
-      * ["pagepv", "allcount"]
-      */
-    Type: string;
-    /**
-      * 日志等级
-      */
-    Level?: string;
-    /**
-      * 运营商
-      */
-    Isp?: string;
-    /**
-      * 地区
-      */
-    Area?: string;
-    /**
-      * 网络类型
-      */
-    NetType?: string;
-    /**
-      * 平台
-      */
-    Platform?: string;
-    /**
-      * 机型
-      */
-    Device?: string;
-    /**
-      * 版本
-      */
-    VersionNum?: string;
-    /**
-      * 自定义1
-      */
-    ExtFirst?: string;
-    /**
-      * 自定义2
-      */
-    ExtSecond?: string;
-    /**
-      * 自定义3
-      */
-    ExtThird?: string;
-    /**
-      * 是否海外
-      */
-    IsAbroad?: string;
-    /**
-      * 浏览器
-      */
-    Browser?: string;
-    /**
-      * 操作系统
-      */
-    Os?: string;
-    /**
-      * 浏览器引擎
-      */
-    Engine?: string;
-    /**
-      * 品牌
-      */
-    Brand?: string;
-    /**
-      * 来源页面
-      */
-    From?: string;
-    /**
-      * 耗时计算方式
-      */
-    CostType?: string;
-    /**
-      * 环境变量
-      */
-    Env?: string;
-}
-/**
- * DescribeProjects返回参数结构体
- */
-export interface DescribeProjectsResponse {
-    /**
-      * 列表总数
-      */
-    TotalCount: number;
-    /**
-      * 项目列表
-      */
-    ProjectSet: Array<RumProject>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeScores请求参数结构体
- */
-export interface DescribeScoresRequest {
-    /**
-      * 结束时间
-      */
-    EndTime: string;
-    /**
-      * 开始时间
-      */
-    StartTime: string;
-    /**
-      * 项目ID
-      */
-    ID?: number;
-}
-/**
- * DescribeError请求参数结构体
- */
-export interface DescribeErrorRequest {
-    /**
-      * 日期
-      */
-    Date: string;
-    /**
-      * 项目ID
-      */
-    ID: number;
-}
-/**
  * project Score分数实体
  */
 export interface ScoreInfo {
@@ -306,102 +71,6 @@ export interface DescribeProjectsRequest {
       * 过滤条件
       */
     Filters?: Array<Filter>;
-}
-/**
- * DescribeDataEventUrl返回参数结构体
- */
-export interface DescribeDataEventUrlResponse {
-    /**
-      * 返回值
-      */
-    Result: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeLogList请求参数结构体
- */
-export interface DescribeLogListRequest {
-    /**
-      * 排序方式  desc  asc
-      */
-    Sort: string;
-    /**
-      * searchlog  histogram
-      */
-    ActionType: string;
-    /**
-      * 项目ID
-      */
-    ID: number;
-    /**
-      * 开始时间
-      */
-    StartTime?: string;
-    /**
-      * 单次查询返回的原始日志条数，最大值为100
-      */
-    Limit?: number;
-    /**
-      * 上下文，加载更多日志时使用，透传上次返回的 Context 值，获取后续的日志内容，总计最多可获取1万条原始日志。过期时间1小时
-      */
-    Context?: string;
-    /**
-      * 查询语句，语句长度最大为4096
-      */
-    Query?: string;
-    /**
-      * 结束时间
-      */
-    EndTime?: string;
-}
-/**
- * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
-
-· 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
-· 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
- */
-export interface Filter {
-    /**
-      * 一个或者多个过滤值。
-      */
-    Values?: Array<string>;
-    /**
-      * 过滤键的名称。
-      */
-    Name?: string;
-}
-/**
- * DescribeDataLogUrlStatistics返回参数结构体
- */
-export interface DescribeDataLogUrlStatisticsResponse {
-    /**
-      * 返回值
-      */
-    Result: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateProject返回参数结构体
- */
-export interface CreateProjectResponse {
-    /**
-      * 项目 id
-      */
-    ID: number;
-    /**
-      * 项目唯一key
-      */
-    Key: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * DescribeDataEventUrl请求参数结构体
@@ -497,93 +166,166 @@ export interface DescribeDataEventUrlRequest {
     Env?: string;
 }
 /**
- * DescribeDataPvUrlStatistics请求参数结构体
+ * Rum 项目信息
  */
-export interface DescribeDataPvUrlStatisticsRequest {
+export interface RumProject {
     /**
-      * 开始时间
+      * 项目名
       */
-    StartTime: number;
+    Name: string;
     /**
-      * 类型:"allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+      * 创建者 id
+      */
+    Creator: string;
+    /**
+      * 实例 id
+      */
+    InstanceID: string;
+    /**
+      * 项目类型
       */
     Type: string;
     /**
-      * 结束时间
+      * 创建时间
       */
-    EndTime: number;
+    CreateTime: string;
+    /**
+      * 项目仓库地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Repo: string;
+    /**
+      * 项目网址地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    URL: string;
+    /**
+      * 项目采样频率
+      */
+    Rate: string;
+    /**
+      * 项目唯一key（长度 12 位）
+      */
+    Key: string;
+    /**
+      * 是否开启url聚类
+      */
+    EnableURLGroup: number;
+    /**
+      * 实例名
+      */
+    InstanceName: string;
+    /**
+      * 项目 ID
+      */
+    ID: number;
+    /**
+      * 实例 key
+      */
+    InstanceKey: string;
+    /**
+      * 项目描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Desc: string;
+    /**
+      * 是否星标  1:是 0:否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsStar: number;
+}
+/**
+ * DescribeProjects返回参数结构体
+ */
+export interface DescribeProjectsResponse {
+    /**
+      * 列表总数
+      */
+    TotalCount: number;
+    /**
+      * 项目列表
+      */
+    ProjectSet: Array<RumProject>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDataFetchUrl返回参数结构体
+ */
+export interface DescribeDataFetchUrlResponse {
+    /**
+      * 返回值
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeError请求参数结构体
+ */
+export interface DescribeErrorRequest {
+    /**
+      * 日期
+      */
+    Date: string;
+    /**
+      * 项目ID
+      */
+    ID: number;
+}
+/**
+ * DescribeLogList请求参数结构体
+ */
+export interface DescribeLogListRequest {
+    /**
+      * 排序方式  desc  asc
+      */
+    Sort: string;
+    /**
+      * searchlog  histogram
+      */
+    ActionType: string;
     /**
       * 项目ID
       */
     ID: number;
     /**
-      * 自定义2
+      * 开始时间
       */
-    ExtSecond?: string;
+    StartTime?: string;
     /**
-      * 浏览器引擎
+      * 单次查询返回的原始日志条数，最大值为100
       */
-    Engine?: string;
+    Limit?: number;
     /**
-      * 运营商
+      * 上下文，加载更多日志时使用，透传上次返回的 Context 值，获取后续的日志内容，总计最多可获取1万条原始日志。过期时间1小时
       */
-    Isp?: string;
+    Context?: string;
     /**
-      * 来源页面
+      * 查询语句，语句长度最大为4096
       */
-    From?: string;
+    Query?: string;
     /**
-      * 日志等级
+      * 结束时间
       */
-    Level?: string;
+    EndTime?: string;
+}
+/**
+ * DescribeScores返回参数结构体
+ */
+export interface DescribeScoresResponse {
     /**
-      * 品牌
+      * 数组
       */
-    Brand?: string;
+    ScoreSet: Array<ScoreInfo>;
     /**
-      * 地区
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Area?: string;
-    /**
-      * 版本
-      */
-    VersionNum?: string;
-    /**
-      * 平台
-      */
-    Platform?: string;
-    /**
-      * 自定义3
-      */
-    ExtThird?: string;
-    /**
-      * 自定义1
-      */
-    ExtFirst?: string;
-    /**
-      * 网络类型
-      */
-    NetType?: string;
-    /**
-      * 机型
-      */
-    Device?: string;
-    /**
-      * 是否海外
-      */
-    IsAbroad?: string;
-    /**
-      * 操作系统
-      */
-    Os?: string;
-    /**
-      * 浏览器
-      */
-    Browser?: string;
-    /**
-      * 环境
-      */
-    Env?: string;
+    RequestId?: string;
 }
 /**
  * DescribeError返回参数结构体
@@ -696,6 +438,497 @@ export interface DescribeDataLogUrlStatisticsRequest {
     Env?: string;
 }
 /**
+ * DescribeDataPerformancePage请求参数结构体
+ */
+export interface DescribeDataPerformancePageRequest {
+    /**
+      * 项目ID
+      */
+    ID: number;
+    /**
+      * 开始时间
+      */
+    StartTime: number;
+    /**
+      * 结束时间
+      */
+    EndTime: number;
+    /**
+      * ["pagepv", "allcount"]
+      */
+    Type: string;
+    /**
+      * 日志等级
+      */
+    Level?: string;
+    /**
+      * 运营商
+      */
+    Isp?: string;
+    /**
+      * 地区
+      */
+    Area?: string;
+    /**
+      * 网络类型
+      */
+    NetType?: string;
+    /**
+      * 平台
+      */
+    Platform?: string;
+    /**
+      * 机型
+      */
+    Device?: string;
+    /**
+      * 版本
+      */
+    VersionNum?: string;
+    /**
+      * 自定义1
+      */
+    ExtFirst?: string;
+    /**
+      * 自定义2
+      */
+    ExtSecond?: string;
+    /**
+      * 自定义3
+      */
+    ExtThird?: string;
+    /**
+      * 是否海外
+      */
+    IsAbroad?: string;
+    /**
+      * 浏览器
+      */
+    Browser?: string;
+    /**
+      * 操作系统
+      */
+    Os?: string;
+    /**
+      * 浏览器引擎
+      */
+    Engine?: string;
+    /**
+      * 品牌
+      */
+    Brand?: string;
+    /**
+      * 来源页面
+      */
+    From?: string;
+    /**
+      * 耗时计算方式
+      */
+    CostType?: string;
+    /**
+      * 环境变量
+      */
+    Env?: string;
+}
+/**
+ * DescribeScores请求参数结构体
+ */
+export interface DescribeScoresRequest {
+    /**
+      * 结束时间
+      */
+    EndTime: string;
+    /**
+      * 开始时间
+      */
+    StartTime: string;
+    /**
+      * 项目ID
+      */
+    ID?: number;
+}
+/**
+ * DescribeDataFetchUrl请求参数结构体
+ */
+export interface DescribeDataFetchUrlRequest {
+    /**
+      * 开始时间
+      */
+    StartTime: number;
+    /**
+      * 类型
+      */
+    Type: string;
+    /**
+      * 结束时间
+      */
+    EndTime: number;
+    /**
+      * 项目ID
+      */
+    ID: number;
+    /**
+      * 自定义2
+      */
+    ExtSecond?: string;
+    /**
+      * 浏览器引擎
+      */
+    Engine?: string;
+    /**
+      * 运营商
+      */
+    Isp?: string;
+    /**
+      * 来源页面
+      */
+    From?: string;
+    /**
+      * 日志等级
+      */
+    Level?: string;
+    /**
+      * 品牌
+      */
+    Brand?: string;
+    /**
+      * 地区
+      */
+    Area?: string;
+    /**
+      * 版本
+      */
+    VersionNum?: string;
+    /**
+      * 平台
+      */
+    Platform?: string;
+    /**
+      * 自定义3
+      */
+    ExtThird?: string;
+    /**
+      * 自定义1
+      */
+    ExtFirst?: string;
+    /**
+      * 网络类型
+      */
+    NetType?: string;
+    /**
+      * 机型
+      */
+    Device?: string;
+    /**
+      * 是否海外
+      */
+    IsAbroad?: string;
+    /**
+      * 操作系统
+      */
+    Os?: string;
+    /**
+      * 浏览器
+      */
+    Browser?: string;
+    /**
+      * 耗时计算方式
+      */
+    CostType?: string;
+    /**
+      * 来源
+      */
+    Url?: string;
+    /**
+      * 环境
+      */
+    Env?: string;
+}
+/**
+ * DescribeDataLogUrlStatistics返回参数结构体
+ */
+export interface DescribeDataLogUrlStatisticsResponse {
+    /**
+      * 返回值
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateProject返回参数结构体
+ */
+export interface CreateProjectResponse {
+    /**
+      * 项目 id
+      */
+    ID: number;
+    /**
+      * 项目唯一key
+      */
+    Key: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDataFetchUrlInfo返回参数结构体
+ */
+export interface DescribeDataFetchUrlInfoResponse {
+    /**
+      * 返回值
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDataPvUrlStatistics请求参数结构体
+ */
+export interface DescribeDataPvUrlStatisticsRequest {
+    /**
+      * 开始时间
+      */
+    StartTime: number;
+    /**
+      * 类型:"allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+      */
+    Type: string;
+    /**
+      * 结束时间
+      */
+    EndTime: number;
+    /**
+      * 项目ID
+      */
+    ID: number;
+    /**
+      * 自定义2
+      */
+    ExtSecond?: string;
+    /**
+      * 浏览器引擎
+      */
+    Engine?: string;
+    /**
+      * 运营商
+      */
+    Isp?: string;
+    /**
+      * 来源页面
+      */
+    From?: string;
+    /**
+      * 日志等级
+      */
+    Level?: string;
+    /**
+      * 品牌
+      */
+    Brand?: string;
+    /**
+      * 地区
+      */
+    Area?: string;
+    /**
+      * 版本
+      */
+    VersionNum?: string;
+    /**
+      * 平台
+      */
+    Platform?: string;
+    /**
+      * 自定义3
+      */
+    ExtThird?: string;
+    /**
+      * 自定义1
+      */
+    ExtFirst?: string;
+    /**
+      * 网络类型
+      */
+    NetType?: string;
+    /**
+      * 机型
+      */
+    Device?: string;
+    /**
+      * 是否海外
+      */
+    IsAbroad?: string;
+    /**
+      * 操作系统
+      */
+    Os?: string;
+    /**
+      * 浏览器
+      */
+    Browser?: string;
+    /**
+      * 环境
+      */
+    Env?: string;
+}
+/**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+
+· 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+· 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ */
+export interface Filter {
+    /**
+      * 一个或者多个过滤值。
+      */
+    Values?: Array<string>;
+    /**
+      * 过滤键的名称。
+      */
+    Name?: string;
+}
+/**
+ * DescribeDataPerformancePage返回参数结构体
+ */
+export interface DescribeDataPerformancePageResponse {
+    /**
+      * 返回值
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDataEventUrl返回参数结构体
+ */
+export interface DescribeDataEventUrlResponse {
+    /**
+      * 返回值
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDataFetchUrlInfo请求参数结构体
+ */
+export interface DescribeDataFetchUrlInfoRequest {
+    /**
+      * 开始时间
+      */
+    StartTime: number;
+    /**
+      * 类型
+      */
+    Type: string;
+    /**
+      * 结束时间
+      */
+    EndTime: number;
+    /**
+      * 项目ID
+      */
+    ID: number;
+    /**
+      * 自定义2
+      */
+    ExtSecond?: string;
+    /**
+      * 浏览器引擎
+      */
+    Engine?: string;
+    /**
+      * 运营商
+      */
+    Isp?: string;
+    /**
+      * 来源页面
+      */
+    From?: string;
+    /**
+      * 日志等级
+      */
+    Level?: string;
+    /**
+      * 品牌
+      */
+    Brand?: string;
+    /**
+      * 地区
+      */
+    Area?: string;
+    /**
+      * 版本
+      */
+    VersionNum?: string;
+    /**
+      * 平台
+      */
+    Platform?: string;
+    /**
+      * 自定义3
+      */
+    ExtThird?: string;
+    /**
+      * 自定义1
+      */
+    ExtFirst?: string;
+    /**
+      * 网络类型
+      */
+    NetType?: string;
+    /**
+      * 机型
+      */
+    Device?: string;
+    /**
+      * 是否海外
+      */
+    IsAbroad?: string;
+    /**
+      * 操作系统
+      */
+    Os?: string;
+    /**
+      * 浏览器
+      */
+    Browser?: string;
+    /**
+      * 耗时计算方式
+      */
+    CostType?: string;
+    /**
+      * 来源
+      */
+    Url?: string;
+    /**
+      * 环境
+      */
+    Env?: string;
+}
+/**
+ * DescribeLogList返回参数结构体
+ */
+export interface DescribeLogListResponse {
+    /**
+      * 返回字符串
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDataPvUrlStatistics返回参数结构体
  */
 export interface DescribeDataPvUrlStatisticsResponse {
@@ -744,17 +977,4 @@ export interface CreateProjectRequest {
       * 创建的项目描述(可选，最长为 1000)
       */
     Desc?: string;
-}
-/**
- * DescribeScores返回参数结构体
- */
-export interface DescribeScoresResponse {
-    /**
-      * 数组
-      */
-    ScoreSet: Array<ScoreInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }

@@ -1432,7 +1432,7 @@ export interface ChangeReplicaToMasterRequest {
   /**
    * 副本Id
    */
-  GroupId: number
+  GroupId?: number
 }
 
 /**
@@ -2036,6 +2036,11 @@ export interface KillMasterGroupRequest {
     d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/
       */
   Password: string
+
+  /**
+   * 单AZ实例节点信息
+   */
+  ShardIds?: Array<number>
 }
 
 /**

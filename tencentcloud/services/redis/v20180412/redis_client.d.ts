@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceMonitorTopNCmdTook(req: DescribeInstanceMonitorTopNCmdTookRequest, cb?: (error: string, rep: DescribeInstanceMonitorTopNCmdTookResponse) => void): Promise<DescribeInstanceMonitorTopNCmdTookResponse>;
     /**
-     * 该接口仅支持多AZ实例副本组提主
+     * 该接口仅支持多AZ实例副本组提主和单AZ副本提主
      */
     ChangeReplicaToMaster(req: ChangeReplicaToMasterRequest, cb?: (error: string, rep: ChangeReplicaToMasterResponse) => void): Promise<ChangeReplicaToMasterResponse>;
     /**

@@ -358,6 +358,16 @@ it("antiddos.v20200309.DescribeBasicDeviceStatus", async function () {
     }
 })
 
+it("antiddos.v20200309.CreateDDoSConnectLimit", async function () {
+    try {
+       const data = await client.CreateDDoSConnectLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeListBGPInstances", async function () {
     try {
        const data = await client.DescribeListBGPInstances({})

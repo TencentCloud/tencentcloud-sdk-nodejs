@@ -18,29 +18,9 @@ const client = new tencentcloud.ses.v20201002.Client({
 })
 describe("ses.v20201002.test.js", function () {
 
-it("ses.v20201002.ListEmailAddress", async function () {
+it("ses.v20201002.ListEmailIdentities", async function () {
     try {
-       const data = await client.ListEmailAddress({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.CreateEmailIdentity", async function () {
-    try {
-       const data = await client.CreateEmailIdentity({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.DeleteBlackList", async function () {
-    try {
-       const data = await client.DeleteBlackList({})
+       const data = await client.ListEmailIdentities({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +31,96 @@ it("ses.v20201002.DeleteBlackList", async function () {
 it("ses.v20201002.CreateEmailAddress", async function () {
     try {
        const data = await client.CreateEmailAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.GetSendEmailStatus", async function () {
+    try {
+       const data = await client.GetSendEmailStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.CreateReceiver", async function () {
+    try {
+       const data = await client.CreateReceiver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.GetEmailIdentity", async function () {
+    try {
+       const data = await client.GetEmailIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.GetEmailTemplate", async function () {
+    try {
+       const data = await client.GetEmailTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.GetStatisticsReport", async function () {
+    try {
+       const data = await client.GetStatisticsReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.UpdateEmailTemplate", async function () {
+    try {
+       const data = await client.UpdateEmailTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.UpdateEmailIdentity", async function () {
+    try {
+       const data = await client.UpdateEmailIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.DeleteEmailIdentity", async function () {
+    try {
+       const data = await client.DeleteEmailIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.ListEmailAddress", async function () {
+    try {
+       const data = await client.ListEmailAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,79 +148,9 @@ it("ses.v20201002.BatchSendEmail", async function () {
     }
 })
 
-it("ses.v20201002.SendEmail", async function () {
-    try {
-       const data = await client.SendEmail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.ListEmailIdentities", async function () {
-    try {
-       const data = await client.ListEmailIdentities({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.GetStatisticsReport", async function () {
-    try {
-       const data = await client.GetStatisticsReport({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.GetSendEmailStatus", async function () {
-    try {
-       const data = await client.GetSendEmailStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.ListBlackEmailAddress", async function () {
-    try {
-       const data = await client.ListBlackEmailAddress({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ses.v20201002.DeleteEmailTemplate", async function () {
     try {
        const data = await client.DeleteEmailTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.UpdateEmailTemplate", async function () {
-    try {
-       const data = await client.UpdateEmailTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ses.v20201002.GetEmailIdentity", async function () {
-    try {
-       const data = await client.GetEmailIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("ses.v20201002.ListEmailTemplates", async function () {
     }
 })
 
-it("ses.v20201002.UpdateEmailIdentity", async function () {
+it("ses.v20201002.ListSendTasks", async function () {
     try {
-       const data = await client.UpdateEmailIdentity({})
+       const data = await client.ListSendTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,9 @@ it("ses.v20201002.UpdateEmailIdentity", async function () {
     }
 })
 
-it("ses.v20201002.GetEmailTemplate", async function () {
+it("ses.v20201002.CreateEmailIdentity", async function () {
     try {
-       const data = await client.GetEmailTemplate({})
+       const data = await client.CreateEmailIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +188,49 @@ it("ses.v20201002.GetEmailTemplate", async function () {
     }
 })
 
-it("ses.v20201002.DeleteEmailIdentity", async function () {
+it("ses.v20201002.DeleteBlackList", async function () {
     try {
-       const data = await client.DeleteEmailIdentity({})
+       const data = await client.DeleteBlackList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.SendEmail", async function () {
+    try {
+       const data = await client.SendEmail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.ListBlackEmailAddress", async function () {
+    try {
+       const data = await client.ListBlackEmailAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.CreateReceiverDetail", async function () {
+    try {
+       const data = await client.CreateReceiverDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ses.v20201002.ListReceivers", async function () {
+    try {
+       const data = await client.ListReceivers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

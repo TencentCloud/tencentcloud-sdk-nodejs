@@ -184,10 +184,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ControlDevicePTZ", req, cb);
     }
     /**
-     * 编辑设备订阅状态
+     * 本接口(GetRecordDatesByDev)用于查询设备含有录像文件的日期列表。
+请使用DescribeRecordDatesByChannel接口
      */
-    async ModifySubscriptionStatus(req, cb) {
-        return this.request("ModifySubscriptionStatus", req, cb);
+    async GetRecordDatesByDev(req, cb) {
+        return this.request("GetRecordDatesByDev", req, cb);
     }
     /**
      * 看守位控制
@@ -240,6 +241,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDevicePassWord", req, cb);
     }
     /**
+     * 编辑设备订阅状态
+     */
+    async ModifySubscriptionStatus(req, cb) {
+        return this.request("ModifySubscriptionStatus", req, cb);
+    }
+    /**
      * 告警等级列表
      */
     async DescribeWarnMod(req, cb) {
@@ -289,11 +296,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRecordDatesByLive", req, cb);
     }
     /**
-     * 本接口(GetRecordDatesByDev)用于查询设备含有录像文件的日期列表。
-请使用DescribeRecordDatesByChannel接口
+     * 本接口(DescribeChannelLiveStreamURL)用于获取设备指定通道实时流地址，地址是动态生成，如重新播放需要调用此接口重新获取最新播放地址。
+正常推流，如未设置对应录制计划，且180s无人观看此流，将会被自动掐断。
      */
-    async GetRecordDatesByDev(req, cb) {
-        return this.request("GetRecordDatesByDev", req, cb);
+    async DescribeChannelLiveStreamURL(req, cb) {
+        return this.request("DescribeChannelLiveStreamURL", req, cb);
     }
     /**
      * 查询主设备订阅状态

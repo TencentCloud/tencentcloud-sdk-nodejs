@@ -158,6 +158,16 @@ it("cvm.v20170312.InquiryPriceResetInstancesInternetMaxBandwidth", async functio
     }
 })
 
+it("cvm.v20170312.ProgramFpgaImage", async function () {
+    try {
+       const data = await client.ProgramFpgaImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DisassociateInstancesKeyPairs", async function () {
     try {
        const data = await client.DisassociateInstancesKeyPairs({})

@@ -44,6 +44,10 @@ export interface BatchSendEmailRequest {
       * 定时发送任务的必要参数
       */
     TimedParam?: TimedEmailParam;
+    /**
+      * 退订选项 1: 加入退订链接 0: 不加入退订链接
+      */
+    Unsubscribe?: string;
 }
 /**
  * GetEmailTemplate请求参数结构体
@@ -53,6 +57,36 @@ export interface GetEmailTemplateRequest {
       * 模板ID
       */
     TemplateID: number;
+}
+/**
+ * ListSendTasks返回参数结构体
+ */
+export interface ListSendTasksResponse {
+    /**
+      * 总数
+      */
+    TotalCount: number;
+    /**
+      * 数据记录
+      */
+    Data: Array<SendTaskData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateReceiver返回参数结构体
+ */
+export interface CreateReceiverResponse {
+    /**
+      * 收件人列表id，后续根据收件人列表id上传收件人地址
+      */
+    ReceiverId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateEmailTemplate请求参数结构体
@@ -96,6 +130,27 @@ export interface TemplatesMetadata {
  * ListEmailAddress请求参数结构体
  */
 export declare type ListEmailAddressRequest = null;
+/**
+ * ListReceivers请求参数结构体
+ */
+export interface ListReceiversRequest {
+    /**
+      * 偏移量，整型，从0开始
+      */
+    Offset: number;
+    /**
+      * 限制数目，整型，不超过100
+      */
+    Limit: number;
+    /**
+      * 列表状态(1 待上传 2 上传中  3传完成)，若查询所有就不传这个字段
+      */
+    Status?: number;
+    /**
+      * 列表名称的关键字，模糊查询
+      */
+    KeyWord?: string;
+}
 /**
  * GetEmailIdentity返回参数结构体
  */
@@ -175,6 +230,31 @@ export interface Template {
     TemplateData: string;
 }
 /**
+ * ListSendTasks请求参数结构体
+ */
+export interface ListSendTasksRequest {
+    /**
+      * 偏移量，整型，从0开始，0代表跳过0行
+      */
+    Offset: number;
+    /**
+      * 限制数目，整型,不超过100
+      */
+    Limit: number;
+    /**
+      * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成。查询所有状态，则不传这个字段
+      */
+    Status?: number;
+    /**
+      * 收件人列表ID
+      */
+    ReceiverId?: number;
+    /**
+      * 任务类型 1即时 2定时 3周期，查询所有类型则不传这个字段
+      */
+    TaskType?: number;
+}
+/**
  * GetSendEmailStatus返回参数结构体
  */
 export interface GetSendEmailStatusResponse {
@@ -222,7 +302,7 @@ export interface SendEmailRequest {
       */
     Attachments?: Array<Attachment>;
     /**
-      * 是否加入退订链接
+      * 退订选项 1: 加入退订链接 0: 不加入退订链接
       */
     Unsubscribe?: string;
 }
@@ -316,6 +396,88 @@ export interface GetStatisticsReportRequest {
     ReceivingMailboxType?: string;
 }
 /**
+ * DeleteBlackList请求参数结构体
+ */
+export interface DeleteBlackListRequest {
+    /**
+      * 需要清除的黑名单邮箱列表，数组长度至少为1
+      */
+    EmailAddressList: Array<string>;
+}
+/**
+ * 发送任务数据
+ */
+export interface SendTaskData {
+    /**
+      * 任务id
+      */
+    TaskId: number;
+    /**
+      * 发信地址
+      */
+    FromEmailAddress: string;
+    /**
+      * 收件人列表Id
+      */
+    ReceiverId: number;
+    /**
+      * 任务状态 1 待开始 5 发送中 6 今日暂停发送  7 发信异常 10 发送完成
+      */
+    TaskStatus: number;
+    /**
+      * 任务类型 1 即时 2 定时 3 周期
+      */
+    TaskType: number;
+    /**
+      * 任务请求发信数量
+      */
+    RequestCount: number;
+    /**
+      * 已经发送数量
+      */
+    SendCount: number;
+    /**
+      * 缓存数量
+      */
+    CacheCount: number;
+    /**
+      * 任务创建时间
+      */
+    CreateTime: string;
+    /**
+      * 任务更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 邮件主题
+      */
+    Subject: string;
+    /**
+      * 模板和模板数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Template: Template;
+    /**
+      * 周期任务参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CycleParam: CycleEmailParam;
+    /**
+      * 定时任务参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimedParam: TimedEmailParam;
+    /**
+      * 任务异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMsg: string;
+    /**
+      * 收件人列表名称
+      */
+    ReceiversName: string;
+}
+/**
  * DeleteEmailTemplate返回参数结构体
  */
 export interface DeleteEmailTemplateResponse {
@@ -373,21 +535,35 @@ export interface CreateEmailIdentityRequest {
     EmailIdentity: string;
 }
 /**
- * UpdateEmailTemplate请求参数结构体
+ * 收件人列表数据类型
  */
-export interface UpdateEmailTemplateRequest {
+export interface ReceiverData {
     /**
-      * 模板内容
+      * 收件人列表ID
       */
-    TemplateContent: TemplateContent;
+    ReceiverId: number;
     /**
-      * 模板ID
+      * 收件人列表名称
       */
-    TemplateID: number;
+    ReceiversName: string;
     /**
-      * 模版名字
+      * 收件人地址总数
       */
-    TemplateName: string;
+    Count: number;
+    /**
+      * 收件人列表描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Desc: string;
+    /**
+      * 列表状态(1 待上传 2 上传中 3 上传完成)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReceiversStatus: number;
+    /**
+      * 创建时间,如:2021-09-28 16:40:35
+      */
+    CreateTime: string;
 }
 /**
  * UpdateEmailIdentity返回参数结构体
@@ -427,6 +603,23 @@ export interface DeleteBlackListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UpdateEmailTemplate请求参数结构体
+ */
+export interface UpdateEmailTemplateRequest {
+    /**
+      * 模板内容
+      */
+    TemplateContent: TemplateContent;
+    /**
+      * 模板ID
+      */
+    TemplateID: number;
+    /**
+      * 模版名字
+      */
+    TemplateName: string;
 }
 /**
  * 描述邮件发送状态
@@ -522,13 +715,26 @@ export interface ListEmailTemplatesRequest {
     Offset: number;
 }
 /**
- * DeleteBlackList请求参数结构体
+ * CreateReceiver请求参数结构体
  */
-export interface DeleteBlackListRequest {
+export interface CreateReceiverRequest {
     /**
-      * 需要清除的黑名单邮箱列表，数组长度至少为1
+      * 收件人列表名称
       */
-    EmailAddressList: Array<string>;
+    ReceiversName: string;
+    /**
+      * 收件人列表描述
+      */
+    Desc?: string;
+}
+/**
+ * CreateReceiverDetail返回参数结构体
+ */
+export interface CreateReceiverDetailResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ListEmailTemplates返回参数结构体
@@ -768,9 +974,39 @@ export interface CreateEmailAddressRequest {
     EmailSenderName?: string;
 }
 /**
+ * CreateReceiverDetail请求参数结构体
+ */
+export interface CreateReceiverDetailRequest {
+    /**
+      * 收件人列表ID
+      */
+    ReceiverId: number;
+    /**
+      * 邮箱
+      */
+    Emails: Array<string>;
+}
+/**
  * CreateEmailTemplate返回参数结构体
  */
 export interface CreateEmailTemplateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ListReceivers返回参数结构体
+ */
+export interface ListReceiversResponse {
+    /**
+      * 总数
+      */
+    TotalCount: number;
+    /**
+      * 数据记录
+      */
+    Data: Array<ReceiverData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

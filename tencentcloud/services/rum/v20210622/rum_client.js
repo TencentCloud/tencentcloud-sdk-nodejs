@@ -81,5 +81,17 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeDataPvUrlStatistics(req, cb) {
         return this.request("DescribeDataPvUrlStatistics", req, cb);
     }
+    /**
+     * 获取DescribeDataFetchUrl信息
+     */
+    async DescribeDataFetchUrl(req, cb) {
+        return this.request("DescribeDataFetchUrl", req, cb);
+    }
+    /**
+     * 获取DescribeDataFetchUrlInfo信息
+     */
+    async DescribeDataFetchUrlInfo(req, cb) {
+        return this.request("DescribeDataFetchUrlInfo", req, cb);
+    }
 }
 exports.Client = Client;

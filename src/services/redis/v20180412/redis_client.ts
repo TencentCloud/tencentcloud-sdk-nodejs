@@ -360,7 +360,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口仅支持多AZ实例副本组提主
+   * 该接口仅支持多AZ实例副本组提主和单AZ副本提主
    */
   async ChangeReplicaToMaster(
     req: ChangeReplicaToMasterRequest,

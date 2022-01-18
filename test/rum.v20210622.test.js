@@ -108,4 +108,24 @@ it("rum.v20210622.DescribeDataPvUrlStatistics", async function () {
     }
 })
 
+it("rum.v20210622.DescribeDataFetchUrl", async function () {
+    try {
+       const data = await client.DescribeDataFetchUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
+    try {
+       const data = await client.DescribeDataFetchUrlInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

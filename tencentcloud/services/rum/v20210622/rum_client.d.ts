@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDataPerformancePageResponse, DescribeLogListResponse, DescribeDataPerformancePageRequest, DescribeProjectsResponse, DescribeScoresRequest, DescribeErrorRequest, DescribeProjectsRequest, DescribeDataEventUrlResponse, DescribeLogListRequest, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, DescribeDataEventUrlRequest, DescribeDataPvUrlStatisticsRequest, DescribeErrorResponse, DescribeDataLogUrlStatisticsRequest, DescribeDataPvUrlStatisticsResponse, CreateProjectRequest, DescribeScoresResponse } from "./rum_models";
+import { DescribeProjectsRequest, DescribeDataEventUrlRequest, DescribeProjectsResponse, DescribeDataFetchUrlResponse, DescribeErrorRequest, DescribeLogListRequest, DescribeScoresResponse, DescribeErrorResponse, DescribeDataLogUrlStatisticsRequest, DescribeDataPerformancePageRequest, DescribeScoresRequest, DescribeDataFetchUrlRequest, DescribeDataLogUrlStatisticsResponse, CreateProjectResponse, DescribeDataFetchUrlInfoResponse, DescribeDataPvUrlStatisticsRequest, DescribeDataPerformancePageResponse, DescribeDataEventUrlResponse, DescribeDataFetchUrlInfoRequest, DescribeLogListResponse, DescribeDataPvUrlStatisticsResponse, CreateProjectRequest } from "./rum_models";
 /**
  * rum client
  * @class
@@ -43,4 +43,12 @@ export declare class Client extends AbstractClient {
      * 获取DescribeDataPvUrlStatistics信息
      */
     DescribeDataPvUrlStatistics(req: DescribeDataPvUrlStatisticsRequest, cb?: (error: string, rep: DescribeDataPvUrlStatisticsResponse) => void): Promise<DescribeDataPvUrlStatisticsResponse>;
+    /**
+     * 获取DescribeDataFetchUrl信息
+     */
+    DescribeDataFetchUrl(req: DescribeDataFetchUrlRequest, cb?: (error: string, rep: DescribeDataFetchUrlResponse) => void): Promise<DescribeDataFetchUrlResponse>;
+    /**
+     * 获取DescribeDataFetchUrlInfo信息
+     */
+    DescribeDataFetchUrlInfo(req: DescribeDataFetchUrlInfoRequest, cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void): Promise<DescribeDataFetchUrlInfoResponse>;
 }

@@ -37,7 +37,7 @@ import {
   DescribeListBGPInstancesRequest,
   KeyValue,
   DeleteDDoSSpeedLimitConfigRequest,
-  CreatePacketFilterConfigResponse,
+  CreateDDoSConnectLimitRequest,
   DescribeListWaterPrintConfigRequest,
   CreateL7RuleCertsRequest,
   DeleteDDoSGeoIPBlockConfigRequest,
@@ -64,6 +64,7 @@ import {
   CreatePortAclConfigListRequest,
   AclConfig,
   DisassociateDDoSEipAddressRequest,
+  SwitchWaterPrintConfigResponse,
   BlackWhiteIpRelation,
   DeleteWaterPrintKeyResponse,
   EipAddressPackRelation,
@@ -109,6 +110,7 @@ import {
   CreateDDoSGeoIPBlockConfigResponse,
   ListenerCcThreholdConfig,
   DeleteDDoSBlackWhiteIpListRequest,
+  CreateDDoSConnectLimitResponse,
   IPLineInfo,
   EipAddressRelation,
   DescribeListListenerResponse,
@@ -116,6 +118,7 @@ import {
   CreatePortAclConfigResponse,
   ModifyL7RulesEdgeResponse,
   CreateL7RuleCertsResponse,
+  ConnectLimitConfig,
   DDoSSpeedLimitConfig,
   AssociateDDoSEipLoadBalancerRequest,
   DescribeListProtectThresholdConfigResponse,
@@ -133,7 +136,7 @@ import {
   DefaultAlarmThreshold,
   ForwardListener,
   BGPInstanceSpecification,
-  SwitchWaterPrintConfigResponse,
+  CreatePacketFilterConfigResponse,
   CreateWaterPrintKeyRequest,
   WaterPrintRelation,
   InsL7Rules,
@@ -526,6 +529,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBasicDeviceStatusResponse) => void
   ): Promise<DescribeBasicDeviceStatusResponse> {
     return this.request("DescribeBasicDeviceStatus", req, cb)
+  }
+
+  /**
+   * 配置DDoS连接抑制选项
+   */
+  async CreateDDoSConnectLimit(
+    req: CreateDDoSConnectLimitRequest,
+    cb?: (error: string, rep: CreateDDoSConnectLimitResponse) => void
+  ): Promise<CreateDDoSConnectLimitResponse> {
+    return this.request("CreateDDoSConnectLimit", req, cb)
   }
 
   /**

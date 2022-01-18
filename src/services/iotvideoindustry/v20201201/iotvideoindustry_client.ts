@@ -185,6 +185,7 @@ import {
   DescribeStatisticSummaryRequest,
   DescribeGroupsResponse,
   ChannelDetail,
+  DescribeChannelLiveStreamURLResponse,
   DescribeDeviceStreamsData,
   DeleteLiveRecordPlanRequest,
   ModifyBindRecordingPlanRequest,
@@ -194,6 +195,7 @@ import {
   CreateTimeTemplateResponse,
   DeleteLiveChannelRequest,
   StatisticItem,
+  DescribeChannelLiveStreamURLRequest,
   DescribeSIPServerResponse,
   DescribeGroupByPathRequest,
   DescribeRecordDatesByLiveResponse,
@@ -524,13 +526,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑设备订阅状态
-   */
-  async ModifySubscriptionStatus(
-    req: ModifySubscriptionStatusRequest,
-    cb?: (error: string, rep: ModifySubscriptionStatusResponse) => void
-  ): Promise<ModifySubscriptionStatusResponse> {
-    return this.request("ModifySubscriptionStatus", req, cb)
+     * 本接口(GetRecordDatesByDev)用于查询设备含有录像文件的日期列表。
+请使用DescribeRecordDatesByChannel接口
+     */
+  async GetRecordDatesByDev(
+    req: GetRecordDatesByDevRequest,
+    cb?: (error: string, rep: GetRecordDatesByDevResponse) => void
+  ): Promise<GetRecordDatesByDevResponse> {
+    return this.request("GetRecordDatesByDev", req, cb)
   }
 
   /**
@@ -616,6 +619,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 编辑设备订阅状态
+   */
+  async ModifySubscriptionStatus(
+    req: ModifySubscriptionStatusRequest,
+    cb?: (error: string, rep: ModifySubscriptionStatusResponse) => void
+  ): Promise<ModifySubscriptionStatusResponse> {
+    return this.request("ModifySubscriptionStatus", req, cb)
+  }
+
+  /**
    * 告警等级列表
    */
   async DescribeWarnMod(
@@ -697,14 +710,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(GetRecordDatesByDev)用于查询设备含有录像文件的日期列表。
-请使用DescribeRecordDatesByChannel接口
+     * 本接口(DescribeChannelLiveStreamURL)用于获取设备指定通道实时流地址，地址是动态生成，如重新播放需要调用此接口重新获取最新播放地址。
+正常推流，如未设置对应录制计划，且180s无人观看此流，将会被自动掐断。
      */
-  async GetRecordDatesByDev(
-    req: GetRecordDatesByDevRequest,
-    cb?: (error: string, rep: GetRecordDatesByDevResponse) => void
-  ): Promise<GetRecordDatesByDevResponse> {
-    return this.request("GetRecordDatesByDev", req, cb)
+  async DescribeChannelLiveStreamURL(
+    req: DescribeChannelLiveStreamURLRequest,
+    cb?: (error: string, rep: DescribeChannelLiveStreamURLResponse) => void
+  ): Promise<DescribeChannelLiveStreamURLResponse> {
+    return this.request("DescribeChannelLiveStreamURL", req, cb)
   }
 
   /**

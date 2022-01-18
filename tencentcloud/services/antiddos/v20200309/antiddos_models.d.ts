@@ -338,13 +338,17 @@ export interface DeleteDDoSSpeedLimitConfigRequest {
     DDoSSpeedLimitConfig: DDoSSpeedLimitConfig;
 }
 /**
- * CreatePacketFilterConfig返回参数结构体
+ * CreateDDoSConnectLimit请求参数结构体
  */
-export interface CreatePacketFilterConfigResponse {
+export interface CreateDDoSConnectLimitRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 资源实例Id
       */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+      * 连接抑制配置
+      */
+    ConnectLimitConfig: ConnectLimitConfig;
 }
 /**
  * DescribeListWaterPrintConfig请求参数结构体
@@ -796,6 +800,15 @@ export interface DisassociateDDoSEipAddressRequest {
       * 资源实例ID对应的高防弹性公网IP。
       */
     Eip: string;
+}
+/**
+ * SwitchWaterPrintConfig返回参数结构体
+ */
+export interface SwitchWaterPrintConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 黑白名单IP
@@ -1567,6 +1580,15 @@ export interface DeleteDDoSBlackWhiteIpListRequest {
     Type: string;
 }
 /**
+ * CreateDDoSConnectLimit返回参数结构体
+ */
+export interface CreateDDoSConnectLimitResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * IP线路信息
  */
 export interface IPLineInfo {
@@ -1709,6 +1731,47 @@ export interface CreateL7RuleCertsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 连接抑制相关配置
+ */
+export interface ConnectLimitConfig {
+    /**
+      * 基于源IP+目的IP的每秒新建数限制
+      */
+    SdNewLimit: number;
+    /**
+      * 基于目的IP的每秒新建数限制
+      */
+    DstNewLimit: number;
+    /**
+      * 基于源IP+目的IP的并发连接控制
+      */
+    SdConnLimit: number;
+    /**
+      * 基于目的IP+目的端口的并发连接控制
+      */
+    DstConnLimit: number;
+    /**
+      * 基于连接抑制触发阈值，取值范围[0,4294967295]
+      */
+    BadConnThreshold: number;
+    /**
+      * 异常连接检测条件，空连接防护开关，，取值范围[0,1]
+      */
+    NullConnEnable: number;
+    /**
+      * 异常连接检测条件，连接超时，，取值范围[0,65535]
+      */
+    ConnTimeout: number;
+    /**
+      * 异常连接检测条件，syn占比ack百分比，，取值范围[0,100]
+      */
+    SynRate: number;
+    /**
+      * 异常连接检测条件，syn阈值，取值范围[0,100]
+      */
+    SynLimit: number;
 }
 /**
  * DDoS访问限速配置
@@ -2134,9 +2197,9 @@ export interface BGPInstanceSpecification {
     AutoRenewFlag: number;
 }
 /**
- * SwitchWaterPrintConfig返回参数结构体
+ * CreatePacketFilterConfig返回参数结构体
  */
-export interface SwitchWaterPrintConfigResponse {
+export interface CreatePacketFilterConfigResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -1194,7 +1194,7 @@ export interface ChangeReplicaToMasterRequest {
     /**
       * 副本Id
       */
-    GroupId: number;
+    GroupId?: number;
 }
 /**
  * Proxy节点信息
@@ -1709,6 +1709,10 @@ export interface KillMasterGroupRequest {
     d.()`~!@#$%^&*-+=_|{}[]:;<>,.?/
       */
     Password: string;
+    /**
+      * 单AZ实例节点信息
+      */
+    ShardIds?: Array<number>;
 }
 /**
  * 实例字符型参数描述

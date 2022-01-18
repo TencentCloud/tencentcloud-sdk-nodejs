@@ -68,6 +68,26 @@ export interface DescribePkgOfflineMusicRequest {
 }
 
 /**
+ * 直播进房输入参数
+ */
+export interface JoinRoomInput {
+  /**
+   * TRTC进房参数
+   */
+  TRTCJoinRoomInput?: TRTCJoinRoomInput
+}
+
+/**
+ * DestroyKTVRobot返回参数结构体
+ */
+export interface DestroyKTVRobotResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLyric返回参数结构体
  */
 export interface DescribeLyricResponse {
@@ -94,18 +114,97 @@ export interface ModifyMusicOnShelvesResponse {
 }
 
 /**
- * 曲库包用途信息
+ * CreateKTVRobot请求参数结构体
  */
-export interface UseRange {
+export interface CreateKTVRobotRequest {
   /**
-   * 用途id
-   */
-  UseRangeId: number
+      * RTC厂商类型，取值有：
+<li>TRTC</li>
+      */
+  RTCSystem: string
 
   /**
-   * 用途范围名称
+   * 进房参数。
    */
-  Name: string
+  JoinRoomInput: JoinRoomInput
+}
+
+/**
+ * 播放指令输入参数
+ */
+export interface PlayCommandInput {
+  /**
+   * 歌曲位置索引。
+   */
+  Index: number
+}
+
+/**
+ * SyncKTVRobotCommand请求参数结构体
+ */
+export interface SyncKTVRobotCommandRequest {
+  /**
+   * 机器人Id。
+   */
+  RobotId: string
+
+  /**
+      * 指令，取值有：
+<li>Play：播放</li>
+<li>Pause：暂停</li>
+<li>SwitchPrevious：上一首</li>
+<li>SwitchNext：下一首</li>
+<li>Seek：调整播放进度</li>
+<li>SetPlaylist：歌单变更</li>
+<li>SetAudioParam：音频参数变更</li>
+<li>SendMessage：发送自定义消息</li>
+      */
+  Command: string
+
+  /**
+   * 播放参数。
+   */
+  PlayCommandInput?: PlayCommandInput
+
+  /**
+   * 播放列表变更信息，当Command取SetPlaylist时，必填。
+   */
+  SetPlaylistCommandInput?: SetPlaylistCommandInput
+
+  /**
+   * 播放进度，当Command取Seek时，必填。
+   */
+  SeekCommandInput?: SeekCommandInput
+
+  /**
+   * 音频参数，当Command取SetAudioParam时，必填。
+   */
+  SetAudioParamCommandInput?: SetAudioParamCommandInput
+
+  /**
+   * 自定义消息，当Command取SendMessage时，必填。
+   */
+  SendMessageCommandInput?: SendMessageCommandInput
+}
+
+/**
+ * 音频参数信息
+ */
+export interface SetAudioParamCommandInput {
+  /**
+      * 规格，取值有：
+<li>audio/mi：低规格</li>
+<li>audio/lo：中规格</li>
+<li>audio/hi：高规格</li>
+      */
+  Definition?: string
+
+  /**
+      * 音频类型，取值有：
+<li>Original：原唱</li>
+<li>Accompaniment：伴奏</li>
+      */
+  Type?: string
 }
 
 /**
@@ -163,41 +262,33 @@ export interface Station {
 }
 
 /**
- * 音乐详情
+ * CreateKTVRobot返回参数结构体
  */
-export interface Music {
+export interface CreateKTVRobotResponse {
   /**
-   * 音乐播放链接相对路径，必须通过在正版曲库直通车控制台上登记的域名进行拼接。
+   * 机器人Id。
    */
-  Url: string
+  RobotId: string
 
   /**
-   * 音频文件大小
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FileSize: number
+  RequestId?: string
+}
 
+/**
+ * 曲库包用途信息
+ */
+export interface UseRange {
   /**
-   * 音频文件类型
+   * 用途id
    */
-  FileExtension: string
+  UseRangeId: number
 
   /**
-      * Song fragment start.试听片段开始时间，试听时长为auditionEnd-auditionBegin
-Unit :ms
-      */
-  AuditionBegin: number
-
-  /**
-      * Song fragment end.试听片段结束时间, 试听时长为auditionEnd-auditionBegin
-Unit :ms
-      */
-  AuditionEnd: number
-
-  /**
-      * 音乐播放链接全路径，前提是在正版曲库直通车控制台添加过域名，否则返回空字符。
-如果添加过多个域名只返回第一个添加域名的播放全路径。
-      */
-  FullUrl: string
+   * 用途范围名称
+   */
+  Name: string
 }
 
 /**
@@ -390,7 +481,7 @@ export interface DescribeCloudMusicPurchasedResponse {
       * 云音乐列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MusicOpenDetail?: Array<MusicOpenDetail>
+  MusicOpenDetail: Array<MusicOpenDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -466,6 +557,31 @@ export interface DescribeKTVPlaylistDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TRTC推流进房信息
+ */
+export interface TRTCJoinRoomInput {
+  /**
+   * 签名。
+   */
+  Sign: string
+
+  /**
+   * 房间号。
+   */
+  RoomId: string
+
+  /**
+   * 推流应用ID。
+   */
+  SdkAppId: string
+
+  /**
+   * 用户唯一标识。
+   */
+  UserId: string
 }
 
 /**
@@ -631,24 +747,18 @@ export interface TakeMusicOffShelvesRequest {
 }
 
 /**
- * PutMusicOnTheShelves返回参数结构体
+ * DescribeKTVRobots返回参数结构体
  */
-export interface PutMusicOnTheShelvesResponse {
+export interface DescribeKTVRobotsResponse {
   /**
-   * 操作成功数量
+   * 机器人总数。
    */
-  SuccessNum: number
+  TotalCount: number
 
   /**
-   * 操作失败数量
+   * 机器人信息集合。
    */
-  FailedNum: number
-
-  /**
-      * 失败歌曲Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailedMusicIds: Array<string>
+  KTVRobotInfoSet: Array<KTVRobotInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -768,6 +878,44 @@ export interface DescribeKTVPlaylistsResponse {
 }
 
 /**
+ * 音乐详情
+ */
+export interface Music {
+  /**
+   * 音乐播放链接相对路径，必须通过在正版曲库直通车控制台上登记的域名进行拼接。
+   */
+  Url: string
+
+  /**
+   * 音频文件大小
+   */
+  FileSize: number
+
+  /**
+   * 音频文件类型
+   */
+  FileExtension: string
+
+  /**
+      * Song fragment start.试听片段开始时间，试听时长为auditionEnd-auditionBegin
+Unit :ms
+      */
+  AuditionBegin: number
+
+  /**
+      * Song fragment end.试听片段结束时间, 试听时长为auditionEnd-auditionBegin
+Unit :ms
+      */
+  AuditionEnd: number
+
+  /**
+      * 音乐播放链接全路径，前提是在正版曲库直通车控制台添加过域名，否则返回空字符。
+如果添加过多个域名只返回第一个添加域名的播放全路径。
+      */
+  FullUrl: string
+}
+
+/**
  * Artist
  */
 export interface Artist {
@@ -858,6 +1006,32 @@ export interface MusicOpenDetail {
 }
 
 /**
+ * PutMusicOnTheShelves返回参数结构体
+ */
+export interface PutMusicOnTheShelvesResponse {
+  /**
+   * 操作成功数量
+   */
+  SuccessNum: number
+
+  /**
+   * 操作失败数量
+   */
+  FailedNum: number
+
+  /**
+      * 失败歌曲Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedMusicIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchKTVMusics返回参数结构体
  */
 export interface SearchKTVMusicsResponse {
@@ -875,6 +1049,55 @@ export interface SearchKTVMusicsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 机器人信息
+ */
+export interface KTVRobotInfo {
+  /**
+   * 机器人Id。
+   */
+  RobotId: string
+
+  /**
+      * 状态，取值有：
+<li>Play：播放</li>
+<li>Pause：暂停</li>
+<li>Destroy：销毁</li>
+      */
+  Status: string
+
+  /**
+   * 播放列表。
+   */
+  Playlists: Array<string>
+
+  /**
+   * 当前歌单索引位置。
+   */
+  CurIndex: number
+
+  /**
+   * 播放进度，单位：毫秒。
+   */
+  Position: number
+
+  /**
+   * 音频参数
+   */
+  SetAudioParamInput: SetAudioParamCommandInput
+
+  /**
+   * 进房信息
+   */
+  JoinRoomInput: JoinRoomInput
+
+  /**
+      * RTC厂商类型，取值有：
+<li>TRTC</li>
+      */
+  RTCSystem: string
 }
 
 /**
@@ -934,6 +1157,40 @@ export interface Item {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+}
+
+/**
+ * 设置播放列表指令参数
+ */
+export interface SetPlaylistCommandInput {
+  /**
+      * 变更类型，取值有：
+<li>Add：添加</li>
+<li>Delete：删除</li>
+      */
+  Type: string
+
+  /**
+      * 歌单索引位置，
+当 Type 取 Add 时，-1表示添加在列表最后位置，大于-1表示要添加的位置；
+当 Type 取 Delete 时，表示要删除的位置。
+      */
+  Index: number
+
+  /**
+   * 歌曲 ID 列表，当 Type 取 Add 时，必填。
+   */
+  MusicIds?: Array<string>
+}
+
+/**
+ * SyncKTVRobotCommand返回参数结构体
+ */
+export interface SyncKTVRobotCommandResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1217,6 +1474,21 @@ export interface DescribeMusicSaleStatusResponse {
 }
 
 /**
+ * 发送自定义信息指令参数
+ */
+export interface SendMessageCommandInput {
+  /**
+   * 自定义消息，json格式字符串。
+   */
+  Message: string
+
+  /**
+   * 消息重复次数，默认为 1。
+   */
+  Repeat?: number
+}
+
+/**
  * PutMusicOnTheShelves请求参数结构体
  */
 export interface PutMusicOnTheShelvesRequest {
@@ -1240,6 +1512,16 @@ export interface DescribePackagesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DestroyKTVRobot请求参数结构体
+ */
+export interface DestroyKTVRobotRequest {
+  /**
+   * 机器人Id。
+   */
+  RobotId: string
 }
 
 /**
@@ -1355,6 +1637,34 @@ export interface DescribeKTVMusicDetailResponse {
 }
 
 /**
+ * DescribeKTVRobots请求参数结构体
+ */
+export interface DescribeKTVRobotsRequest {
+  /**
+   * 机器人Id列表。
+   */
+  RobotIds?: Array<string>
+
+  /**
+      * 机器人状态，取值有：
+<li>Play：播放</li>
+<li>Pause：暂停</li>
+<li>Destroy：销毁</li>
+      */
+  Statuses?: Array<string>
+
+  /**
+   * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
+   */
+  Offset?: number
+
+  /**
+   * 分页返回的起始偏移量，默认值：10。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeMusic请求参数结构体
  */
 export interface DescribeMusicRequest {
@@ -1401,6 +1711,16 @@ reportData由两部分数据组成：
 https://github.com/tencentyun/ame-documents
       */
   ReportData: string
+}
+
+/**
+ * 调整播放进度指令参数
+ */
+export interface SeekCommandInput {
+  /**
+   * 播放位置，单位：毫秒。
+   */
+  Position: number
 }
 
 /**

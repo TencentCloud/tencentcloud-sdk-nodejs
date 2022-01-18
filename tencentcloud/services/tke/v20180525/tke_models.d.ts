@@ -4025,6 +4025,10 @@ export interface ModifyClusterNodePoolRequest {
       * 资源标签
       */
     Tags?: Array<Tag>;
+    /**
+      * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
+      */
+    Unschedulable?: number;
 }
 /**
  * 镜像信息

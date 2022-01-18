@@ -1402,6 +1402,16 @@ export interface Tag {
 }
 
 /**
+ * ProgramFpgaImage返回参数结构体
+ */
+export interface ProgramFpgaImageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceInternetBandwidthConfigs返回参数结构体
  */
 export interface DescribeInstanceInternetBandwidthConfigsResponse {
@@ -5113,6 +5123,31 @@ export interface ResetInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ProgramFpgaImage请求参数结构体
+ */
+export interface ProgramFpgaImageRequest {
+  /**
+   * 实例的ID信息。
+   */
+  InstanceId: string
+
+  /**
+   * FPGA镜像文件的COS URL地址。
+   */
+  FPGAUrl: string
+
+  /**
+   * 实例上FPGA卡的DBDF号，不填默认烧录FPGA镜像到实例所拥有的所有FPGA卡。
+   */
+  DBDFs?: Array<string>
+
+  /**
+   * 试运行，不会执行实际的烧录动作，默认为False。
+   */
+  DryRun?: boolean
 }
 
 /**

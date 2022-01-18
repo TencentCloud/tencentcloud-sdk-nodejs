@@ -1060,6 +1060,11 @@ export interface DescribeDetailedSingleProbeDataRequest {
    * 错误类型
    */
   ErrorTypes?: Array<string>
+
+  /**
+   * 城市
+   */
+  City?: Array<string>
 }
 
 /**

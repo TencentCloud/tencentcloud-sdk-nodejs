@@ -78,11 +78,11 @@ export interface DescribeDomainsConfigResponse {
     /**
       * 域名列表。
       */
-    Domains?: Array<DomainDetailInfo>;
+    Domains: Array<DomainDetailInfo>;
     /**
       * 符合查询条件的域名总数，用于分页查询。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -275,11 +275,11 @@ export interface DescribePurgeQuotaResponse {
     /**
       * Url刷新用量及配额。
       */
-    UrlPurge?: Quota;
+    UrlPurge: Quota;
     /**
       * 目录刷新用量及配额。
       */
-    PathPurge?: Quota;
+    PathPurge: Quota;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -716,6 +716,11 @@ export interface DomainBriefInfo {
       * 域名锁定状态，normal、global，分别表示未被锁定、全球锁定。
       */
     Readonly: string;
+    /**
+      * 域名标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tag: Array<Tag>;
 }
 /**
  * StartEcdnDomain返回参数结构体
@@ -780,9 +785,9 @@ export interface StopEcdnDomainResponse {
  */
 export interface PurgePathCacheResponse {
     /**
-      * 刷新任务Id，前十位为提交任务时的UTC时间。
+      * 刷新任务Id。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -793,9 +798,9 @@ export interface PurgePathCacheResponse {
  */
 export interface PurgeUrlsCacheResponse {
     /**
-      * 刷新任务Id，前十位为提交任务时的UTC时间。
+      * 刷新任务Id。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -898,11 +903,11 @@ export interface DescribeDomainsResponse {
     /**
       * 域名信息列表。
       */
-    Domains?: Array<DomainBriefInfo>;
+    Domains: Array<DomainBriefInfo>;
     /**
       * 域名总个数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -924,11 +929,11 @@ export interface DescribePurgeTasksResponse {
     /**
       * 刷新历史记录。
       */
-    PurgeLogs?: Array<PurgeTask>;
+    PurgeLogs: Array<PurgeTask>;
     /**
       * 任务总数，用于分页。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
