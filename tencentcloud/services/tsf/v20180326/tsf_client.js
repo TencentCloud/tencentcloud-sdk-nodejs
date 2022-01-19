@@ -853,7 +853,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("SearchBusinessLog", req, cb);
     }
     /**
-     * 部署容器应用
+     * 部署容器应用-更新
      */
     async DeployContainerGroup(req, cb) {
         return this.request("DeployContainerGroup", req, cb);

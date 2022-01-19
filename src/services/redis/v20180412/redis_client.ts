@@ -28,6 +28,7 @@ import {
   ApplyParamsTemplateRequest,
   UpgradeInstanceVersionResponse,
   CreateInstancesRequest,
+  CreateReplicationGroupRequest,
   DescribeInstanceZoneInfoRequest,
   ModifyNetworkConfigResponse,
   CommandTake,
@@ -71,6 +72,7 @@ import {
   CreateParamTemplateResponse,
   InstanceTagInfo,
   DescribeInstanceDTSInfoResponse,
+  AddReplicationInstanceResponse,
   DestroyPostpaidInstanceResponse,
   SwitchInstanceVipRequest,
   ChangeReplicaToMasterRequest,
@@ -101,6 +103,7 @@ import {
   InstanceIntegerParam,
   UpgradeVersionToMultiAvailabilityZonesRequest,
   DescribeInstanceMonitorTookDistRequest,
+  DeleteReplicationInstanceRequest,
   KillMasterGroupRequest,
   InstanceTextParam,
   ParamTemplateInfo,
@@ -146,6 +149,7 @@ import {
   ReplicaGroup,
   DescribeTaskInfoResponse,
   DescribeInstanceMonitorBigKeyTypeDistResponse,
+  DeleteReplicationInstanceResponse,
   CleanUpInstanceRequest,
   DescribeInstanceDealDetailResponse,
   DescribeInstancesRequest,
@@ -165,6 +169,7 @@ import {
   InquiryPriceRenewInstanceRequest,
   ModifyConnectionConfigResponse,
   ModifyMaintenanceWindowResponse,
+  CreateReplicationGroupResponse,
   DescribeInstanceMonitorBigKeyTypeDistRequest,
   DescribeInstanceMonitorTopNCmdTookRequest,
   DestroyPrepaidInstanceResponse,
@@ -175,6 +180,7 @@ import {
   BigKeyTypeInfo,
   DescribeInstanceNodeInfoRequest,
   DescribeMaintenanceWindowRequest,
+  AddReplicationInstanceRequest,
   InstanceClusterNode,
   DescribeTendisSlowLogRequest,
   DescribeProxySlowLogRequest,
@@ -300,13 +306,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级实例
+   * 移除复制组成员
    */
-  async UpgradeInstance(
-    req: UpgradeInstanceRequest,
-    cb?: (error: string, rep: UpgradeInstanceResponse) => void
-  ): Promise<UpgradeInstanceResponse> {
-    return this.request("UpgradeInstance", req, cb)
+  async DeleteReplicationInstance(
+    req: DeleteReplicationInstanceRequest,
+    cb?: (error: string, rep: DeleteReplicationInstanceResponse) => void
+  ): Promise<DeleteReplicationInstanceResponse> {
+    return this.request("DeleteReplicationInstance", req, cb)
   }
 
   /**
@@ -390,6 +396,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 升级实例
+   */
+  async UpgradeInstance(
+    req: UpgradeInstanceRequest,
+    cb?: (error: string, rep: UpgradeInstanceResponse) => void
+  ): Promise<UpgradeInstanceResponse> {
+    return this.request("UpgradeInstance", req, cb)
+  }
+
+  /**
    * 恢复 CRS 实例
    */
   async RestoreInstance(
@@ -417,6 +433,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteParamTemplateResponse) => void
   ): Promise<DeleteParamTemplateResponse> {
     return this.request("DeleteParamTemplate", req, cb)
+  }
+
+  /**
+   * 添加复制组成员
+   */
+  async AddReplicationInstance(
+    req: AddReplicationInstanceRequest,
+    cb?: (error: string, rep: AddReplicationInstanceResponse) => void
+  ): Promise<AddReplicationInstanceResponse> {
+    return this.request("AddReplicationInstance", req, cb)
   }
 
   /**
@@ -477,6 +503,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNetworkConfigResponse) => void
   ): Promise<ModifyNetworkConfigResponse> {
     return this.request("ModifyNetworkConfig", req, cb)
+  }
+
+  /**
+   * 创建复制组
+   */
+  async CreateReplicationGroup(
+    req: CreateReplicationGroupRequest,
+    cb?: (error: string, rep: CreateReplicationGroupResponse) => void
+  ): Promise<CreateReplicationGroupResponse> {
+    return this.request("CreateReplicationGroup", req, cb)
   }
 
   /**

@@ -355,6 +355,10 @@ export interface DescribeMetricRecordsRequest {
       * 结束时间
       */
     EndTime?: number;
+    /**
+      * 业务名称（默认值：taw）
+      */
+    BusinessName?: string;
 }
 /**
  * apm Agent信息

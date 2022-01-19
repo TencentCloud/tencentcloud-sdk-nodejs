@@ -2703,6 +2703,10 @@ export interface DeployContainerGroupRequest {
       * 数据卷挂载点信息，list
       */
     VolumeMountInfoList?: Array<VolumeMountInfo>;
+    /**
+      * 是否清除数据卷信息，默认false
+      */
+    VolumeClean?: boolean;
 }
 /**
  * DescribeSimpleApplications请求参数结构体

@@ -483,7 +483,7 @@ export interface UploadOrgFileRequest {
  */
 export interface RefundTlinxOrderResponse {
   /**
-   * 业务系统返回码
+   * 业务系统返回码，0表示成功，其他表示失败。
    */
   ErrCode: string
 
@@ -871,7 +871,7 @@ export interface RefundTlinxOrderRequest {
   RefundAmount: string
 
   /**
-   * 主管密码，对密码进行sha1加密，默认为123456
+   * 主管密码，对密码进行SHA-1加密，默认为123456
    */
   ShopPassword: string
 
@@ -2517,7 +2517,7 @@ export interface AddMerchantResponse {
   ErrMessage: string
 
   /**
-   * 业务系统返回码
+   * 业务系统返回码，0表示成功，其他表示失败。
    */
   ErrCode: string
 
@@ -3330,7 +3330,7 @@ export interface QueryContractPayFeeResponse {
   ErrMessage: string
 
   /**
-   * 业务系统返回码
+   * 业务系统返回码，0表示成功，其他表示失败。
    */
   ErrCode: string
 
@@ -4594,7 +4594,7 @@ export interface AddMerchantRequest {
   OpenKey: string
 
   /**
-   * 营业执照过期时间（yyyy-mm-dd）
+   * 营业执照过期时间（yyyy-mm-dd），（小微商户不效验，随意传要有值，公司/个体户必传）
    */
   BusinessLicenseEndDate: string
 
@@ -4859,7 +4859,7 @@ export interface AddMerchantRequest {
   TaxRegistrationNo?: string
 
   /**
-   * 商户类型：1-个人，2-小微，3-企事业。不传默认为2-小微商户。
+   * 商户类型：1-个体，2-小微，3-企业。不传默认为2-小微商户。
    */
   Type?: string
 }
@@ -9650,7 +9650,7 @@ export interface ModifyMntMbrBindRelateAcctBankCodeRequest {
  */
 export interface QueryMerchantPayWayListResponse {
   /**
-   * 业务系统返回码
+   * 业务系统返回码，0表示成功，其他表示失败。
    */
   ErrCode: string
 
@@ -10475,7 +10475,7 @@ export interface UnifiedTlinxOrderResponse {
   ErrMessage: string
 
   /**
-   * 业务系统返回码
+   * 业务系统返回码，0表示成功，其他表示失败。
    */
   ErrCode: string
 
@@ -10949,7 +10949,7 @@ export interface TransferDetailRequest {
  */
 export interface QueryOrderStatusResponse {
   /**
-   * 业务系统返回码
+   * 业务系统返回码，0表示成功，其他表示失败。
    */
   ErrCode: string
 

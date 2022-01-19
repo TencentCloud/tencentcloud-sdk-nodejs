@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateDefaultAlarmThresholdRequest,
+  DescribeDDoSConnectLimitListRequest,
   DescribeListBGPIPInstancesResponse,
   DescribeBlackWhiteIpListResponse,
   ProxyTypeInfo,
@@ -47,6 +48,7 @@ import {
   DescribeListProtectThresholdConfigRequest,
   ModifyNewDomainRulesResponse,
   DescribeDDoSBlackWhiteIpListResponse,
+  DescribeDDoSConnectLimitListResponse,
   CreateWaterPrintConfigResponse,
   DescribeListBGPIPInstancesRequest,
   StaticPackRelation,
@@ -104,8 +106,10 @@ import {
   CreatePortAclConfigListResponse,
   DeleteWaterPrintConfigRequest,
   DescribeDDoSBlackWhiteIpListRequest,
+  ConnectLimitRelation,
   DescribeListBlackWhiteIpListResponse,
   DDoSAIRelation,
+  AclConfigRelation,
   DescribeListDDoSSpeedLimitConfigResponse,
   CreateDDoSGeoIPBlockConfigResponse,
   ListenerCcThreholdConfig,
@@ -162,7 +166,9 @@ import {
   DescribeDDoSTrendRequest,
   ModifyDDoSGeoIPBlockConfigResponse,
   BGPInstance,
+  DescribeListPortAclListResponse,
   DescribeBizTrendRequest,
+  DescribeListPortAclListRequest,
   DescribeListWaterPrintConfigResponse,
   BGPInstanceUsages,
   DeleteDDoSSpeedLimitConfigResponse,
@@ -359,6 +365,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateDDoSEipAddressResponse) => void
   ): Promise<DisassociateDDoSEipAddressResponse> {
     return this.request("DisassociateDDoSEipAddress", req, cb)
+  }
+
+  /**
+   * 获取DDoS连接抑制配置列表
+   */
+  async DescribeDDoSConnectLimitList(
+    req: DescribeDDoSConnectLimitListRequest,
+    cb?: (error: string, rep: DescribeDDoSConnectLimitListResponse) => void
+  ): Promise<DescribeDDoSConnectLimitListResponse> {
+    return this.request("DescribeDDoSConnectLimitList", req, cb)
   }
 
   /**
@@ -720,6 +736,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateL7RuleCertsResponse) => void
   ): Promise<CreateL7RuleCertsResponse> {
     return this.request("CreateL7RuleCerts", req, cb)
+  }
+
+  /**
+   * 获取DDoS防护的端口acl策略列表
+   */
+  async DescribeListPortAclList(
+    req: DescribeListPortAclListRequest,
+    cb?: (error: string, rep: DescribeListPortAclListResponse) => void
+  ): Promise<DescribeListPortAclListResponse> {
+    return this.request("DescribeListPortAclList", req, cb)
   }
 
   /**

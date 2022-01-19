@@ -76,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskList", req, cb);
     }
     /**
-     * 升级实例
+     * 移除复制组成员
      */
-    async UpgradeInstance(req, cb) {
-        return this.request("UpgradeInstance", req, cb);
+    async DeleteReplicationInstance(req, cb) {
+        return this.request("DeleteReplicationInstance", req, cb);
     }
     /**
      * 回收站实例立即下线
@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceShards", req, cb);
     }
     /**
+     * 升级实例
+     */
+    async UpgradeInstance(req, cb) {
+        return this.request("UpgradeInstance", req, cb);
+    }
+    /**
      * 恢复 CRS 实例
      */
     async RestoreInstance(req, cb) {
@@ -146,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteParamTemplate(req, cb) {
         return this.request("DeleteParamTemplate", req, cb);
+    }
+    /**
+     * 添加复制组成员
+     */
+    async AddReplicationInstance(req, cb) {
+        return this.request("AddReplicationInstance", req, cb);
     }
     /**
      * 查询实例维护时间窗，在实例需要进行版本升级或者架构升级的时候，会在维护时间窗时间内进行切换
@@ -182,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyNetworkConfig(req, cb) {
         return this.request("ModifyNetworkConfig", req, cb);
+    }
+    /**
+     * 创建复制组
+     */
+    async CreateReplicationGroup(req, cb) {
+        return this.request("CreateReplicationGroup", req, cb);
     }
     /**
      * 查询实例访问来源信息

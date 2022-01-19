@@ -98,9 +98,9 @@ it("redis.v20180412.DescribeTaskList", async function () {
     }
 })
 
-it("redis.v20180412.UpgradeInstance", async function () {
+it("redis.v20180412.DeleteReplicationInstance", async function () {
     try {
-       const data = await client.UpgradeInstance({})
+       const data = await client.DeleteReplicationInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +188,16 @@ it("redis.v20180412.DescribeInstanceShards", async function () {
     }
 })
 
+it("redis.v20180412.UpgradeInstance", async function () {
+    try {
+       const data = await client.UpgradeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.RestoreInstance", async function () {
     try {
        const data = await client.RestoreInstance({})
@@ -211,6 +221,16 @@ it("redis.v20180412.DescribeInstances", async function () {
 it("redis.v20180412.DeleteParamTemplate", async function () {
     try {
        const data = await client.DeleteParamTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.AddReplicationInstance", async function () {
+    try {
+       const data = await client.AddReplicationInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +291,16 @@ it("redis.v20180412.DescribeInstanceDTSInfo", async function () {
 it("redis.v20180412.ModifyNetworkConfig", async function () {
     try {
        const data = await client.ModifyNetworkConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.CreateReplicationGroup", async function () {
+    try {
+       const data = await client.CreateReplicationGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

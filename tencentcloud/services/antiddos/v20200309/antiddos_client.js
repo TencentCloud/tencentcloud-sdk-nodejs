@@ -131,6 +131,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateDDoSEipAddress", req, cb);
     }
     /**
+     * 获取DDoS连接抑制配置列表
+     */
+    async DescribeDDoSConnectLimitList(req, cb) {
+        return this.request("DescribeDDoSConnectLimitList", req, cb);
+    }
+    /**
      * 绑定IP到高防包实例，支持独享包、共享包；需要注意的是此接口绑定或解绑IP是异步接口，当处于绑定或解绑中时，则不允许再进行绑定或解绑，需要等待当前绑定或解绑完成。
      */
     async CreateBoundIP(req, cb) {
@@ -346,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateL7RuleCerts(req, cb) {
         return this.request("CreateL7RuleCerts", req, cb);
+    }
+    /**
+     * 获取DDoS防护的端口acl策略列表
+     */
+    async DescribeListPortAclList(req, cb) {
+        return this.request("DescribeListPortAclList", req, cb);
     }
     /**
      * 修改DDoS防护的区域封禁配置

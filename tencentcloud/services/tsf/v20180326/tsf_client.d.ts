@@ -559,7 +559,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     SearchBusinessLog(req: SearchBusinessLogRequest, cb?: (error: string, rep: SearchBusinessLogResponse) => void): Promise<SearchBusinessLogResponse>;
     /**
-     * 部署容器应用
+     * 部署容器应用-更新
      */
     DeployContainerGroup(req: DeployContainerGroupRequest, cb?: (error: string, rep: DeployContainerGroupResponse) => void): Promise<DeployContainerGroupResponse>;
     /**

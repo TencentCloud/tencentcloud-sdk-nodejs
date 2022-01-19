@@ -4419,14 +4419,14 @@ export interface ListenerBackend {
  */
 export interface RuleInput {
   /**
-   * 转发规则的域名。长度限制为：1~80。
-   */
-  Domain: string
-
-  /**
    * 转发规则的路径。长度限制为：1~200。
    */
   Url: string
+
+  /**
+   * 转发规则的域名。长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。
+   */
+  Domain?: string
 
   /**
    * 会话保持时间。设置为0表示关闭会话保持，开启会话保持可取值30~3600，单位：秒。
@@ -4483,6 +4483,11 @@ export interface RuleInput {
    * 是否开启QUIC，注意，只有HTTPS域名才能开启QUIC
    */
   Quic?: boolean
+
+  /**
+   * 转发规则的域名列表。每个域名的长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。
+   */
+  Domains?: Array<string>
 }
 
 /**

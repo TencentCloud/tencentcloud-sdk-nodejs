@@ -15,6 +15,27 @@ bgpip(表示高防IP产品)
     InstanceType: string;
 }
 /**
+ * DescribeDDoSConnectLimitList请求参数结构体
+ */
+export interface DescribeDDoSConnectLimitListRequest {
+    /**
+      * 页起始偏移，取值为(页码-1)*一页条数
+      */
+    Offset: number;
+    /**
+      * 一页条数
+      */
+    Limit: number;
+    /**
+      * 可选参数，按照IP进行过滤
+      */
+    FilterIp?: string;
+    /**
+      * 可选参数，按照实例id进行过滤
+      */
+    FilterInstanceId?: string;
+}
+/**
  * DescribeListBGPIPInstances返回参数结构体
  */
 export interface DescribeListBGPIPInstancesResponse {
@@ -489,6 +510,23 @@ export interface DescribeDDoSBlackWhiteIpListResponse {
       * 白名单IP列表
       */
     WhiteIpList: Array<IpSegment>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDDoSConnectLimitList返回参数结构体
+ */
+export interface DescribeDDoSConnectLimitListResponse {
+    /**
+      * 连接抑制配置总数
+      */
+    Total: number;
+    /**
+      * 连接抑制配置详情信息
+      */
+    ConfigList: Array<ConnectLimitRelation>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1483,6 +1521,19 @@ export interface DescribeDDoSBlackWhiteIpListRequest {
     InstanceId: string;
 }
 /**
+ * 连接抑制列表
+ */
+export interface ConnectLimitRelation {
+    /**
+      * 连接抑制配置
+      */
+    ConnectLimitConfig: ConnectLimitConfig;
+    /**
+      * 连接抑制关联的实例信息
+      */
+    InstanceDetailList: Array<InstanceRelation>;
+}
+/**
  * DescribeListBlackWhiteIpList返回参数结构体
  */
 export interface DescribeListBlackWhiteIpListResponse {
@@ -1512,6 +1563,19 @@ off(关闭)
     DDoSAI: string;
     /**
       * AI防护开关所属的资源实例
+      */
+    InstanceDetailList: Array<InstanceRelation>;
+}
+/**
+ * 端口acl策略配置与高防资源关联
+ */
+export interface AclConfigRelation {
+    /**
+      * acl策略
+      */
+    AclConfig: AclConfig;
+    /**
+      * 实例列表
       */
     InstanceDetailList: Array<InstanceRelation>;
 }
@@ -2778,6 +2842,23 @@ export interface BGPInstance {
     CCEnable: number;
 }
 /**
+ * DescribeListPortAclList返回参数结构体
+ */
+export interface DescribeListPortAclListResponse {
+    /**
+      * 总数
+      */
+    Total: number;
+    /**
+      * 端口acl策略
+      */
+    AclList: Array<AclConfigRelation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBizTrend请求参数结构体
  */
 export interface DescribeBizTrendRequest {
@@ -2817,6 +2898,27 @@ export interface DescribeBizTrendRequest {
       * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
       */
     ProtoInfo?: Array<ProtocolPort>;
+}
+/**
+ * DescribeListPortAclList请求参数结构体
+ */
+export interface DescribeListPortAclListRequest {
+    /**
+      * 页起始偏移，取值为(页码-1)*一页条数
+      */
+    Offset: number;
+    /**
+      * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
+      */
+    Limit: number;
+    /**
+      * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
+      */
+    FilterInstanceId: string;
+    /**
+      * ip搜索
+      */
+    FilterIp?: string;
 }
 /**
  * DescribeListWaterPrintConfig返回参数结构体

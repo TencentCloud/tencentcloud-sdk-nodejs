@@ -6024,7 +6024,7 @@ export interface DescribeStreamPlayInfoListRequest {
 
   /**
       * 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
-结束时间 和 开始时间跨度不支持超过24小时，支持距当前时间30天内的数据查询。
+结束时间 和 开始时间跨度不支持超过24小时，支持距当前时间15天内的数据查询。
       */
   EndTime: string
 

@@ -188,6 +188,16 @@ it("antiddos.v20200309.DisassociateDDoSEipAddress", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeDDoSConnectLimitList", async function () {
+    try {
+       const data = await client.DescribeDDoSConnectLimitList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.CreateBoundIP", async function () {
     try {
        const data = await client.CreateBoundIP({})
@@ -541,6 +551,16 @@ it("antiddos.v20200309.CreatePortAclConfigList", async function () {
 it("antiddos.v20200309.CreateL7RuleCerts", async function () {
     try {
        const data = await client.CreateL7RuleCerts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("antiddos.v20200309.DescribeListPortAclList", async function () {
+    try {
+       const data = await client.DescribeListPortAclList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -353,6 +353,26 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
 }
 
 /**
+ * CreateReplicationGroup请求参数结构体
+ */
+export interface CreateReplicationGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 复制组名称
+   */
+  GroupName?: string
+
+  /**
+   * 备注信息
+   */
+  Remark?: string
+}
+
+/**
  * DescribeInstanceZoneInfo请求参数结构体
  */
 export interface DescribeInstanceZoneInfoRequest {
@@ -1376,6 +1396,21 @@ export interface DescribeInstanceDTSInfoResponse {
 }
 
 /**
+ * AddReplicationInstance返回参数结构体
+ */
+export interface AddReplicationInstanceResponse {
+  /**
+   * 异步流程ID
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DestroyPostpaidInstance返回参数结构体
  */
 export interface DestroyPostpaidInstanceResponse {
@@ -2015,6 +2050,26 @@ export interface DescribeInstanceMonitorTookDistRequest {
    * 时间范围：1——实时，2——近30分钟，3——近6小时，4——近24小时
    */
   SpanType: number
+}
+
+/**
+ * DeleteReplicationInstance请求参数结构体
+ */
+export interface DeleteReplicationInstanceRequest {
+  /**
+   * 复制组ID
+   */
+  GroupId: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 数据同步类型，true:需要数据强同步,false:不需要强同步，仅限删除主实例
+   */
+  SyncType: boolean
 }
 
 /**
@@ -3132,6 +3187,21 @@ export interface DescribeInstanceMonitorBigKeyTypeDistResponse {
 }
 
 /**
+ * DeleteReplicationInstance返回参数结构体
+ */
+export interface DeleteReplicationInstanceResponse {
+  /**
+   * 异步任务ID
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CleanUpInstance请求参数结构体
  */
 export interface CleanUpInstanceRequest {
@@ -3783,6 +3853,21 @@ export interface ModifyMaintenanceWindowResponse {
 }
 
 /**
+ * CreateReplicationGroup返回参数结构体
+ */
+export interface CreateReplicationGroupResponse {
+  /**
+   * 异步流程ID
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceMonitorBigKeyTypeDist请求参数结构体
  */
 export interface DescribeInstanceMonitorBigKeyTypeDistRequest {
@@ -3996,6 +4081,26 @@ export interface DescribeMaintenanceWindowRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * AddReplicationInstance请求参数结构体
+ */
+export interface AddReplicationInstanceRequest {
+  /**
+   * 复制组ID
+   */
+  GroupId: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例角色，rw可读写，r只读
+   */
+  InstanceRole: string
 }
 
 /**
