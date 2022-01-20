@@ -58,6 +58,16 @@ it("cii.v20210408.CreateUnderwriteTaskById", async function () {
     }
 })
 
+it("cii.v20210408.DescribeUnderwriteTask", async function () {
+    try {
+       const data = await client.DescribeUnderwriteTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cii.v20210408.DescribeMachineUnderwrite", async function () {
     try {
        const data = await client.DescribeMachineUnderwrite({})
@@ -101,6 +111,26 @@ it("cii.v20210408.DescribeStructCompareData", async function () {
 it("cii.v20210408.DescribeStructureResult", async function () {
     try {
        const data = await client.DescribeStructureResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cii.v20210408.DescribeReportClassify", async function () {
+    try {
+       const data = await client.DescribeReportClassify({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cii.v20210408.AddSubStructureTasks", async function () {
+    try {
+       const data = await client.AddSubStructureTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

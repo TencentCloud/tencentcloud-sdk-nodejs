@@ -2732,7 +2732,7 @@ export interface DescribeInstancesDetailRequest {
   Filters?: Array<Filter>
 
   /**
-   * 按照实例ID过滤
+   * 已经废弃， 使用InstanceIdList
    */
   InstanceIds?: string
 }

@@ -415,7 +415,7 @@ export interface DescribeUserSAMLConfigResponse {
   SAMLMetadata: string
 
   /**
-   * 状态：0:未设置，11:已开启，2:已禁用
+   * 状态：0:未设置，1:已开启，2:已禁用
    */
   Status: number
 
@@ -442,7 +442,7 @@ export interface ListUsersResponse {
   /**
    * 子用户信息
    */
-  Data?: Array<SubAccountInfo>
+  Data: Array<SubAccountInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -654,7 +654,7 @@ export interface DetachGroupPolicyRequest {
 }
 
 /**
- * 用户关联策略(随组管理)信息
+ * 用户关联策略(随组关联)信息
  */
 export interface AttachedUserPolicyGroupInfo {
   /**
@@ -1077,42 +1077,43 @@ export interface GetUserResponse {
   /**
    * 子用户用户 UIN
    */
-  Uin?: number
+  Uin: number
 
   /**
    * 子用户用户名
    */
-  Name?: string
+  Name: string
 
   /**
    * 子用户 UID
    */
-  Uid?: number
+  Uid: number
 
   /**
-   * 子用户备注
-   */
-  Remark?: string
+      * 子用户备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
 
   /**
-   * 子用户能否登录控制台
+   * 子用户能否登录控制台 0-无法登录控制台，1-可以登录控制台
    */
-  ConsoleLogin?: number
+  ConsoleLogin: number
 
   /**
    * 手机号
    */
-  PhoneNum?: string
+  PhoneNum: string
 
   /**
    * 区号
    */
-  CountryCode?: string
+  CountryCode: string
 
   /**
    * 邮箱
    */
-  Email?: string
+  Email: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1490,12 +1491,12 @@ export interface UpdateRoleConsoleLoginRequest {
   ConsoleLogin: number
 
   /**
-   * 角色ID
+   * 角色ID，入参 RoleId 与 RoleName 二选一
    */
   RoleId?: number
 
   /**
-   * 角色名
+   * 角色名，入参 RoleId 与 RoleName 二选一
    */
   RoleName?: string
 }
@@ -1535,7 +1536,7 @@ export interface GetPolicyVersionRequest {
   PolicyId: number
 
   /**
-   * 策略版本号
+   * 策略版本号，可由ListPolicyVersions获取
    */
   VersionId: number
 }
@@ -1547,7 +1548,7 @@ export interface CreateSAMLProviderResponse {
   /**
    * SAML身份提供商资源描述符
    */
-  ProviderArn?: string
+  ProviderArn: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2465,7 +2466,7 @@ export interface GetPolicyVersionResponse {
       * 策略版本详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PolicyVersion?: PolicyVersionDetail
+  PolicyVersion: PolicyVersionDetail
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2496,27 +2497,27 @@ export interface GetSAMLProviderResponse {
   /**
    * SAML身份提供商名称
    */
-  Name?: string
+  Name: string
 
   /**
    * SAML身份提供商描述
    */
-  Description?: string
+  Description: string
 
   /**
    * SAML身份提供商创建时间
    */
-  CreateTime?: string
+  CreateTime: string
 
   /**
    * SAML身份提供商上次修改时间
    */
-  ModifyTime?: string
+  ModifyTime: string
 
   /**
    * SAML身份提供商元数据文档
    */
-  SAMLMetadata?: string
+  SAMLMetadata: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2590,7 +2591,7 @@ export interface SetDefaultPolicyVersionRequest {
   PolicyId: number
 
   /**
-   * 策略版本号
+   * 策略版本号，可由ListPolicyVersions获取
    */
   VersionId: number
 }
@@ -2781,7 +2782,7 @@ export interface GetRoleResponse {
   /**
    * 角色详情
    */
-  RoleInfo?: RoleInfo
+  RoleInfo: RoleInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3145,13 +3146,13 @@ export interface ListEntitiesForPolicyResponse {
       * 实体总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalNum?: number
+  TotalNum: number
 
   /**
       * 实体列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  List?: Array<AttachEntityOfPolicy>
+  List: Array<AttachEntityOfPolicy>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3261,12 +3262,12 @@ export interface ListCollaboratorsResponse {
   /**
    * 总数
    */
-  TotalNum?: number
+  TotalNum: number
 
   /**
    * 协作者信息
    */
-  Data?: Array<SubAccountInfo>
+  Data: Array<SubAccountInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3385,7 +3386,7 @@ export interface GroupMemberInfo {
   CountryCode: string
 
   /**
-   * 是否已验证手机。
+   * 是否已验证手机。0-未验证  1-验证
    */
   PhoneFlag: number
 
@@ -3395,12 +3396,12 @@ export interface GroupMemberInfo {
   Email: string
 
   /**
-   * 是否已验证邮箱。
+   * 是否已验证邮箱。0-未验证  1-验证
    */
   EmailFlag: number
 
   /**
-   * 用户类型。
+   * 用户类型。1-全局协作者 2-项目协作者 3-消息接收者
    */
   UserType: number
 
@@ -3410,7 +3411,7 @@ export interface GroupMemberInfo {
   CreateTime: string
 
   /**
-   * 是否为主消息接收人。
+   * 是否为主消息接收人。0-否 1-是
    */
   IsReceiverOwner: number
 }

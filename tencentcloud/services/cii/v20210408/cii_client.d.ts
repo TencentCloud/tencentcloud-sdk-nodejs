@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, DescribeStructureDifferenceResponse, UploadMedicalFileRequest, CreateAutoClassifyStructureTaskRequest, DescribeMachineUnderwriteRequest, DescribeStructureResultRequest, DescribeStructCompareDataResponse, DescribeStructureResultResponse, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateAutoClassifyStructureTaskResponse, CreateUnderwriteTaskByIdRequest, CreateUnderwriteTaskByIdResponse, DescribeStructureDifferenceRequest, UploadMedicalFileResponse } from "./cii_models";
+import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, AddSubStructureTasksResponse, DescribeStructureDifferenceResponse, CreateUnderwriteTaskByIdRequest, UploadMedicalFileResponse, UploadMedicalFileRequest, CreateAutoClassifyStructureTaskRequest, DescribeMachineUnderwriteRequest, DescribeUnderwriteTaskResponse, DescribeStructureResultRequest, DescribeReportClassifyRequest, DescribeStructCompareDataResponse, DescribeUnderwriteTaskRequest, DescribeStructureResultResponse, DescribeStructureDifferenceRequest, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateAutoClassifyStructureTaskResponse, DescribeReportClassifyResponse, CreateUnderwriteTaskByIdResponse, AddSubStructureTasksRequest } from "./cii_models";
 /**
  * cii client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      */
     CreateUnderwriteTaskById(req: CreateUnderwriteTaskByIdRequest, cb?: (error: string, rep: CreateUnderwriteTaskByIdResponse) => void): Promise<CreateUnderwriteTaskByIdResponse>;
     /**
+     * 本接口(DescribeUnderwriteTask)用于查询核保任务结果
+     */
+    DescribeUnderwriteTask(req: DescribeUnderwriteTaskRequest, cb?: (error: string, rep: DescribeUnderwriteTaskResponse) => void): Promise<DescribeUnderwriteTaskResponse>;
+    /**
      * 本接口(DescribeMachineUnderwrite)用于查询机器核保任务数据
      */
     DescribeMachineUnderwrite(req: DescribeMachineUnderwriteRequest, cb?: (error: string, rep: DescribeMachineUnderwriteResponse) => void): Promise<DescribeMachineUnderwriteResponse>;
@@ -43,4 +47,12 @@ export declare class Client extends AbstractClient {
      * 本接口(DescribeStructureResult)用于查询结构化结果接口
      */
     DescribeStructureResult(req: DescribeStructureResultRequest, cb?: (error: string, rep: DescribeStructureResultResponse) => void): Promise<DescribeStructureResultResponse>;
+    /**
+     * saas页面集成了自动分类功能，该接口提供自动分类结果
+     */
+    DescribeReportClassify(req: DescribeReportClassifyRequest, cb?: (error: string, rep: DescribeReportClassifyResponse) => void): Promise<DescribeReportClassifyResponse>;
+    /**
+     * 中银三星需求，基于主任务批量添加结构化子任务
+     */
+    AddSubStructureTasks(req: AddSubStructureTasksRequest, cb?: (error: string, rep: AddSubStructureTasksResponse) => void): Promise<AddSubStructureTasksResponse>;
 }

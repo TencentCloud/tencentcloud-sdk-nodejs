@@ -1133,6 +1133,12 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FrozenDiskSize: number
+
+  /**
+      * 集群健康状态 -1 未知；0 Green; 1 Yellow; 2 Red
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthStatus: number
 }
 
 /**
@@ -1303,6 +1309,11 @@ export interface DescribeInstancesRequest {
    * 可用区列表
    */
   ZoneList?: Array<string>
+
+  /**
+   * 健康状态筛列表
+   */
+  HealthStatus?: Array<number>
 }
 
 /**

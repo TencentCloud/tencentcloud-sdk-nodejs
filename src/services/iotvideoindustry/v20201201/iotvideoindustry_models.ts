@@ -748,7 +748,7 @@ export interface GetVideoListByConRequest {
   Limit: number
 
   /**
-   * 通道唯一标识
+   * 通道唯一标识，对于NVR设备，多通道IPC设备，设备编码与通道编码不一致的IPC设备，此字段为必填
    */
   ChannelId?: string
 
@@ -2541,7 +2541,7 @@ export interface DescribeRecordStreamRequest {
   EndTime?: number
 
   /**
-   * 通道唯一标识
+   * 通道唯一标识（此接口升级为必填字段）
    */
   ChannelId?: string
 }
@@ -3636,7 +3636,7 @@ export interface GetRecordDatesByDevRequest {
   Offset: number
 
   /**
-   * 通道唯一标识
+   * 通道唯一标识，对于NVR设备，多通道IPC设备，设备编码与通道编码不一致的IPC设备，此字段为必填
    */
   ChannelId?: string
 

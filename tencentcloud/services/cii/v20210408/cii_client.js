@@ -55,6 +55,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUnderwriteTaskById", req, cb);
     }
     /**
+     * 本接口(DescribeUnderwriteTask)用于查询核保任务结果
+     */
+    async DescribeUnderwriteTask(req, cb) {
+        return this.request("DescribeUnderwriteTask", req, cb);
+    }
+    /**
      * 本接口(DescribeMachineUnderwrite)用于查询机器核保任务数据
      */
     async DescribeMachineUnderwrite(req, cb) {
@@ -83,6 +89,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeStructureResult(req, cb) {
         return this.request("DescribeStructureResult", req, cb);
+    }
+    /**
+     * saas页面集成了自动分类功能，该接口提供自动分类结果
+     */
+    async DescribeReportClassify(req, cb) {
+        return this.request("DescribeReportClassify", req, cb);
+    }
+    /**
+     * 中银三星需求，基于主任务批量添加结构化子任务
+     */
+    async AddSubStructureTasks(req, cb) {
+        return this.request("AddSubStructureTasks", req, cb);
     }
 }
 exports.Client = Client;

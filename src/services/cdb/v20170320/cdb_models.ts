@@ -1962,41 +1962,38 @@ export interface ReleaseResult {
 }
 
 /**
- * CreateAuditLogFile请求参数结构体
+ * 数据代理组信息
  */
-export interface CreateAuditLogFileRequest {
+export interface ProxyGroups {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
-   */
-  InstanceId: string
-
-  /**
-   * 开始时间，格式为："2017-07-12 10:29:20"。
-   */
-  StartTime: string
-
-  /**
-   * 结束时间，格式为："2017-07-12 10:29:20"。
-   */
-  EndTime: string
-
-  /**
-   * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
-   */
-  Order?: string
-
-  /**
-      * 排序字段。支持值包括：
-"timestamp" - 时间戳；
-"affectRows" - 影响行数；
-"execTime" - 执行时间。
+      * 代理基本信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  OrderBy?: string
+  BaseGroup: BaseGroupInfo
 
   /**
-   * 过滤条件。可按设置的过滤条件过滤日志。
-   */
-  Filter?: AuditLogFilter
+      * 代理地址信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Address: Array<Address>
+
+  /**
+      * 代理连接池信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConnectionPoolInfo: ConnectionPoolInfo
+
+  /**
+      * 代理节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyNode: Array<ProxyNodeInfo>
+
+  /**
+      * 代理路由信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RWInstInfo: RWInfos
 }
 
 /**
@@ -3270,6 +3267,21 @@ export interface BalanceRoGroupLoadRequest {
 }
 
 /**
+ * QueryCDBProxy请求参数结构体
+ */
+export interface QueryCDBProxyRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 代理ID
+   */
+  ProxyGroupId?: string
+}
+
+/**
  * DescribeBackupOverview返回参数结构体
  */
 export interface DescribeBackupOverviewResponse {
@@ -3310,18 +3322,25 @@ export interface DescribeLocalBinlogConfigRequest {
 }
 
 /**
- * 实例的标签信息
+ * QueryCDBProxy返回参数结构体
  */
-export interface TagsInfoOfInstance {
+export interface QueryCDBProxyResponse {
   /**
-   * 实例Id
-   */
-  InstanceId: string
+      * 代理数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Count: number
 
   /**
-   * 标签信息
+      * 代理信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyGroup: Array<ProxyGroups>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Tags: Array<TagInfoUnit>
+  RequestId?: string
 }
 
 /**
@@ -3464,6 +3483,21 @@ export interface DescribeDeviceMonitorInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例的标签信息
+ */
+export interface TagsInfoOfInstance {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 标签信息
+   */
+  Tags: Array<TagInfoUnit>
 }
 
 /**
@@ -6261,6 +6295,44 @@ export interface ModifyAccountHostRequest {
 }
 
 /**
+ * CreateAuditLogFile请求参数结构体
+ */
+export interface CreateAuditLogFileRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+
+  /**
+   * 开始时间，格式为："2017-07-12 10:29:20"。
+   */
+  StartTime: string
+
+  /**
+   * 结束时间，格式为："2017-07-12 10:29:20"。
+   */
+  EndTime: string
+
+  /**
+   * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
+   */
+  Order?: string
+
+  /**
+      * 排序字段。支持值包括：
+"timestamp" - 时间戳；
+"affectRows" - 影响行数；
+"execTime" - 执行时间。
+      */
+  OrderBy?: string
+
+  /**
+   * 过滤条件。可按设置的过滤条件过滤日志。
+   */
+  Filter?: AuditLogFilter
+}
+
+/**
  * CreateAuditRule请求参数结构体
  */
 export interface CreateAuditRuleRequest {
@@ -6518,6 +6590,60 @@ export interface DescribeTagsOfInstanceIdsRequest {
    * 分页大小。
    */
   Limit?: number
+}
+
+/**
+ * proxy读写分离信息
+ */
+export interface RWInfos {
+  /**
+      * 代理实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstCount: number
+
+  /**
+      * 权重分配模式；
+系统自动分配："system"， 自定义："custom"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WeightMode: string
+
+  /**
+      * 是否开启延迟剔除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsKickOut: boolean
+
+  /**
+      * 最小保留数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinCount: number
+
+  /**
+      * 延迟剔除阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxDelay: number
+
+  /**
+      * 是否开启故障转移
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailOver: boolean
+
+  /**
+      * 是否自动添加RO
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoAddRo: boolean
+
+  /**
+      * 代理实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RWInstInfo: Array<RWInstanceInfo>
 }
 
 /**

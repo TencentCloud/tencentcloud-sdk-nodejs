@@ -372,7 +372,7 @@ export interface DeleteRuleRequest {
   LocationIds?: Array<string>
 
   /**
-   * 要删除的转发规则的域名，已提供LocationIds参数时本参数不生效。
+   * 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个。已提供LocationIds参数时本参数不生效。
    */
   Domain?: string
 
@@ -382,7 +382,7 @@ export interface DeleteRuleRequest {
   Url?: string
 
   /**
-   * 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名。
+   * 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个。
    */
   NewDefaultServerDomain?: string
 }
@@ -2160,6 +2160,11 @@ export interface CreateTopicRequest {
    * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
    */
   TopicType?: string
+
+  /**
+   * 日志集的保存周期，单位：天，默认30天。
+   */
+  Period?: number
 }
 
 /**
@@ -2498,12 +2503,12 @@ export interface ModifyDomainAttributesRequest {
   ListenerId: string
 
   /**
-   * 域名（必须是已经创建的转发规则下的域名）。
+   * 域名（必须是已经创建的转发规则下的域名），如果是多域名，可以指定多域名列表中的任意一个。
    */
   Domain: string
 
   /**
-   * 要修改的新域名。
+   * 要修改的新域名。NewDomain和NewDomains只能传一个。
    */
   NewDomain?: string
 
@@ -2523,9 +2528,14 @@ export interface ModifyDomainAttributesRequest {
   DefaultServer?: boolean
 
   /**
-   * 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名。
+   * 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个。
    */
   NewDefaultServerDomain?: string
+
+  /**
+   * 要修改的新域名列表。NewDomain和NewDomains只能传一个。
+   */
+  NewDomains?: Array<string>
 }
 
 /**
@@ -3029,6 +3039,12 @@ export interface RuleOutput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QuicStatus: string
+
+  /**
+      * 转发规则的域名列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domains: Array<string>
 }
 
 /**
@@ -3409,14 +3425,14 @@ export interface CreateListenerRequest {
  */
 export interface CreateClsLogSetRequest {
   /**
-   * 日志集的保存周期，单位：天，最大 90。
-   */
-  Period: number
-
-  /**
    * 日志集的名字，不能和cls其他日志集重名。不填默认为clb_logset。
    */
   LogsetName?: string
+
+  /**
+   * 日志集的保存周期，单位：天。
+   */
+  Period?: number
 
   /**
    * 日志集类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
@@ -3999,6 +4015,12 @@ Public：公网属性， Private：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TargetHealth: string
+
+  /**
+      * 转发规则的域名列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domains: string
 }
 
 /**

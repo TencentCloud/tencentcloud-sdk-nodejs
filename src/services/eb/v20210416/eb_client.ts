@@ -44,7 +44,7 @@ import {
   UpdateTransformationResponse,
   UpdateEventBusRequest,
   CreateEventBusRequest,
-  UpdateRuleRequest,
+  PutEventsResponse,
   CreateRuleRequest,
   TextParams,
   DeleteConnectionResponse,
@@ -69,6 +69,7 @@ import {
   Transform,
   Filter,
   Connection,
+  PutEventsRequest,
   DeleteEventBusResponse,
   GetTransformationRequest,
   CreateEventBusResponse,
@@ -82,6 +83,7 @@ import {
   UpdateConnectionRequest,
   DeleteTargetRequest,
   CkafkaParams,
+  UpdateRuleRequest,
   OutputStructParam,
   CheckTransformationRequest,
   UpdateConnectionResponse,
@@ -172,13 +174,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于Event事件投递
+   * （已废弃）用于Event事件投递
    */
   async PublishEvent(
     req: PublishEventRequest,
     cb?: (error: string, rep: PublishEventResponse) => void
   ): Promise<PublishEventResponse> {
     return this.request("PublishEvent", req, cb)
+  }
+
+  /**
+   * 用于Event事件投递
+   */
+  async PutEvents(
+    req: PutEventsRequest,
+    cb?: (error: string, rep: PutEventsResponse) => void
+  ): Promise<PutEventsResponse> {
+    return this.request("PutEvents", req, cb)
   }
 
   /**

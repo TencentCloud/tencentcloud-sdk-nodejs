@@ -2450,6 +2450,10 @@ export interface ModifyTaskRequest {
       * 任务参数，长度限制10000个字符
       */
     TaskArgument?: string;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * DeleteUnitNamespaces返回参数结构体
@@ -4578,6 +4582,7 @@ export interface ImageRepositoryResult {
 export interface ModifyTaskResponse {
     /**
       * 更新是否成功
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: boolean;
     /**
@@ -5206,6 +5211,7 @@ export interface CreateLaneRuleResponse {
 export interface CreateTaskResponse {
     /**
       * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: string;
     /**
@@ -5521,6 +5527,10 @@ export interface CreateTaskFlowRequest {
       * 工作流执行超时时间
       */
     TimeOut: number;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * ModifyContainerReplicas返回参数结构体
@@ -5925,6 +5935,7 @@ export interface CreateUnitRuleResponse {
 export interface DescribeTaskRecordsResponse {
     /**
       * 任务记录列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: TaskRecordPage;
     /**
@@ -6808,6 +6819,10 @@ export interface CreateTaskRequest {
       * 任务参数，长度限制10000个字符
       */
     TaskArgument?: string;
+    /**
+      * 无
+      */
+    ProgramIdList?: Array<string>;
 }
 /**
  * 提供给前端，控制按钮是否显示
@@ -7001,6 +7016,10 @@ export interface DescribeTaskRecordsRequest {
       * 任务触发类型，UNICAST、BROADCAST。
       */
     ExecuteType?: string;
+    /**
+      * 无
+      */
+    Ids?: Array<string>;
 }
 /**
  * ModifyContainerGroup返回参数结构体
@@ -7702,8 +7721,9 @@ export interface ModifyLaneRuleRequest {
 export interface CreateTaskFlowResponse {
     /**
       * 工作流 ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

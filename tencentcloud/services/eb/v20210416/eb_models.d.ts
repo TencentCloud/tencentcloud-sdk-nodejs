@@ -496,29 +496,13 @@ export interface CreateEventBusRequest {
     Description?: string;
 }
 /**
- * UpdateRule请求参数结构体
+ * PutEvents返回参数结构体
  */
-export interface UpdateRuleRequest {
+export interface PutEventsResponse {
     /**
-      * 事件规则ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RuleId: string;
-    /**
-      * 事件集ID
-      */
-    EventBusId: string;
-    /**
-      * 使能开关。
-      */
-    Enable?: boolean;
-    /**
-      * 规则描述，不限字符类型，200字符描述以内。
-      */
-    Description?: string;
-    /**
-      * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
-      */
-    RuleName?: string;
+    RequestId?: string;
 }
 /**
  * CreateRule请求参数结构体
@@ -930,6 +914,19 @@ export interface Connection {
     Type: string;
 }
 /**
+ * PutEvents请求参数结构体
+ */
+export interface PutEventsRequest {
+    /**
+      * 事件列表
+      */
+    EventList: Array<Event>;
+    /**
+      * 事件集ID
+      */
+    EventBusId: string;
+}
+/**
  * DeleteEventBus返回参数结构体
  */
 export interface DeleteEventBusResponse {
@@ -1121,6 +1118,31 @@ export interface CkafkaParams {
       * ckafka  topic
       */
     TopicName: string;
+}
+/**
+ * UpdateRule请求参数结构体
+ */
+export interface UpdateRuleRequest {
+    /**
+      * 事件规则ID
+      */
+    RuleId: string;
+    /**
+      * 事件集ID
+      */
+    EventBusId: string;
+    /**
+      * 使能开关。
+      */
+    Enable?: boolean;
+    /**
+      * 规则描述，不限字符类型，200字符描述以内。
+      */
+    Description?: string;
+    /**
+      * 事件规则名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+      */
+    RuleName?: string;
 }
 /**
  * Transform输出参数

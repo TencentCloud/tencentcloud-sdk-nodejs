@@ -96,7 +96,7 @@ import {
   DescribeRollbackRangeTimeResponse,
   ModifyRoGroupInfoRequest,
   ReleaseResult,
-  CreateAuditLogFileRequest,
+  ProxyGroups,
   AuditRule,
   RegionSellConf,
   RollbackDBName,
@@ -153,9 +153,10 @@ import {
   DeviceCpuInfo,
   DescribeAsyncRequestInfoRequest,
   BalanceRoGroupLoadRequest,
+  QueryCDBProxyRequest,
   DescribeBackupOverviewResponse,
   DescribeLocalBinlogConfigRequest,
-  TagsInfoOfInstance,
+  QueryCDBProxyResponse,
   DescribeDeviceMonitorInfoRequest,
   SwitchDrInstanceToMasterResponse,
   DescribeDBInstanceConfigResponse,
@@ -163,6 +164,7 @@ import {
   ModifyAccountPrivilegesResponse,
   StopRollbackRequest,
   DescribeDeviceMonitorInfoResponse,
+  TagsInfoOfInstance,
   DescribeDBInstanceConfigRequest,
   DescribeProxyCustomConfResponse,
   ModifyAuditConfigResponse,
@@ -262,6 +264,7 @@ import {
   DescribeAuditRulesResponse,
   RoInstanceInfo,
   ModifyAccountHostRequest,
+  CreateAuditLogFileRequest,
   CreateAuditRuleRequest,
   DeviceCpuRateInfo,
   ModifyAccountPrivilegesRequest,
@@ -272,6 +275,7 @@ import {
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
   DescribeTagsOfInstanceIdsRequest,
+  RWInfos,
   CloseCDBProxyResponse,
   DescribeDataBackupOverviewRequest,
   DescribeDBInstanceInfoRequest,
@@ -1594,6 +1598,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAuditRuleResponse) => void
   ): Promise<ModifyAuditRuleResponse> {
     return this.request("ModifyAuditRule", req, cb)
+  }
+
+  /**
+   * 查询代理详情
+   */
+  async QueryCDBProxy(
+    req: QueryCDBProxyRequest,
+    cb?: (error: string, rep: QueryCDBProxyResponse) => void
+  ): Promise<QueryCDBProxyResponse> {
+    return this.request("QueryCDBProxy", req, cb)
   }
 
   /**

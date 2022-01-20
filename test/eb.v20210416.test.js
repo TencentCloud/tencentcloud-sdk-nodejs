@@ -98,6 +98,16 @@ it("eb.v20210416.PublishEvent", async function () {
     }
 })
 
+it("eb.v20210416.PutEvents", async function () {
+    try {
+       const data = await client.PutEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eb.v20210416.UpdateTarget", async function () {
     try {
        const data = await client.UpdateTarget({})

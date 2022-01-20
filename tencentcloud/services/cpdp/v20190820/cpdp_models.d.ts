@@ -1094,6 +1094,8 @@ export interface QueryCustAcctIdBalanceResponse {
 export interface CreateRedInvoiceRequest {
     /**
       * 开票平台ID
+0 : 高灯
+1 : 票易通
       */
     InvoicePlatformId: number;
     /**
@@ -2638,6 +2640,8 @@ export interface QueryBankClearRequest {
 export interface QueryInvoiceRequest {
     /**
       * 开票平台ID
+0 : 高灯
+1 : 票易通
       */
     InvoicePlatformId: number;
     /**
@@ -7750,6 +7754,8 @@ export interface DistributeRemoveReceiverResponse {
 export interface QueryInvoiceV2Request {
     /**
       * 开票平台ID
+0 : 高灯
+1 : 票易通
       */
     InvoicePlatformId: number;
     /**
@@ -9426,6 +9432,8 @@ export interface QueryAgentStatementsRequest {
 export interface CreateRedInvoiceV2Request {
     /**
       * 开票平台ID
+0 : 高灯
+1 : 票易通
       */
     InvoicePlatformId: number;
     /**

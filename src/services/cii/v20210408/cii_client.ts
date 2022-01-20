@@ -22,32 +22,41 @@ import {
   DescribeStructureTaskResultRequest,
   MachineUnderwriteOutput,
   CreateStructureTaskRequest,
+  UnderwriteOutput,
   DescribeStructCompareDataRequest,
+  AddSubStructureTasksResponse,
   InsuranceResult,
+  UnderwriteConclusion,
   DescribeStructureDifferenceResponse,
+  CreateUnderwriteTaskByIdRequest,
+  UploadMedicalFileResponse,
   PerStructDifference,
   UploadMedicalFileRequest,
   CompareMetricsData,
+  StructureOneItem,
   CreateAutoClassifyStructureTaskRequest,
   DescribeMachineUnderwriteRequest,
   ReviewDataTaskInfo,
+  DescribeUnderwriteTaskResponse,
   DescribeStructureResultRequest,
+  DescribeReportClassifyRequest,
   UnderwriteItem,
   DescribeStructCompareDataResponse,
-  StructureOneItem,
+  MachinePredict,
+  DescribeUnderwriteTaskRequest,
   ResultObject,
   DescribeStructureResultResponse,
-  MachinePredict,
+  DescribeStructureDifferenceRequest,
   CreateStructureTaskResponse,
   DescribeStructureTaskResultResponse,
+  ClassifiedReports,
   DescribeMachineUnderwriteResponse,
   CreateAutoClassifyStructureTaskResponse,
-  CreateUnderwriteTaskByIdRequest,
+  DescribeReportClassifyResponse,
   CreateUnderwriteTaskByIdResponse,
   StructureResultObject,
   CreateStructureTaskInfo,
-  DescribeStructureDifferenceRequest,
-  UploadMedicalFileResponse,
+  AddSubStructureTasksRequest,
   CreateAutoClassifyStructureTaskInfo,
   StructureModifyItem,
 } from "./cii_models"
@@ -105,6 +114,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeUnderwriteTask)用于查询核保任务结果
+   */
+  async DescribeUnderwriteTask(
+    req: DescribeUnderwriteTaskRequest,
+    cb?: (error: string, rep: DescribeUnderwriteTaskResponse) => void
+  ): Promise<DescribeUnderwriteTaskResponse> {
+    return this.request("DescribeUnderwriteTask", req, cb)
+  }
+
+  /**
    * 本接口(DescribeMachineUnderwrite)用于查询机器核保任务数据
    */
   async DescribeMachineUnderwrite(
@@ -152,5 +171,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStructureResultResponse) => void
   ): Promise<DescribeStructureResultResponse> {
     return this.request("DescribeStructureResult", req, cb)
+  }
+
+  /**
+   * saas页面集成了自动分类功能，该接口提供自动分类结果
+   */
+  async DescribeReportClassify(
+    req: DescribeReportClassifyRequest,
+    cb?: (error: string, rep: DescribeReportClassifyResponse) => void
+  ): Promise<DescribeReportClassifyResponse> {
+    return this.request("DescribeReportClassify", req, cb)
+  }
+
+  /**
+   * 中银三星需求，基于主任务批量添加结构化子任务
+   */
+  async AddSubStructureTasks(
+    req: AddSubStructureTasksRequest,
+    cb?: (error: string, rep: AddSubStructureTasksResponse) => void
+  ): Promise<AddSubStructureTasksResponse> {
+    return this.request("AddSubStructureTasks", req, cb)
   }
 }

@@ -70,10 +70,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckRule", req, cb);
     }
     /**
-     * 用于Event事件投递
+     * （已废弃）用于Event事件投递
      */
     async PublishEvent(req, cb) {
         return this.request("PublishEvent", req, cb);
+    }
+    /**
+     * 用于Event事件投递
+     */
+    async PutEvents(req, cb) {
+        return this.request("PutEvents", req, cb);
     }
     /**
      * 更新事件目标

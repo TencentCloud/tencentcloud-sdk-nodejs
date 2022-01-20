@@ -776,6 +776,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAuditRule", req, cb);
     }
     /**
+     * 查询代理详情
+     */
+    async QueryCDBProxy(req, cb) {
+        return this.request("QueryCDBProxy", req, cb);
+    }
+    /**
      * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
      */
     async ModifyDBInstanceSecurityGroups(req, cb) {

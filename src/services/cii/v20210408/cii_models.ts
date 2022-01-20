@@ -123,6 +123,36 @@ AccidentInsurance：意外险
 }
 
 /**
+ * 核保结果输出
+ */
+export interface UnderwriteOutput {
+  /**
+   * 客户ID
+   */
+  CustomerId: string
+
+  /**
+   * 客户姓名
+   */
+  CustomerName: string
+
+  /**
+   * 结果
+   */
+  Results: Array<InsuranceResult>
+
+  /**
+   * 复核时间
+   */
+  ReviewTime: string
+
+  /**
+   * 人工复核结果
+   */
+  ManualDetail: Array<UnderwriteConclusion>
+}
+
+/**
  * DescribeStructCompareData请求参数结构体
  */
 export interface DescribeStructCompareDataRequest {
@@ -138,6 +168,21 @@ export interface DescribeStructCompareDataRequest {
 }
 
 /**
+ * AddSubStructureTasks返回参数结构体
+ */
+export interface AddSubStructureTasksResponse {
+  /**
+   * 增量子任务id数组
+   */
+  SubTaskIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 包含险种的各个核保结论
  */
 export interface InsuranceResult {
@@ -150,6 +195,26 @@ export interface InsuranceResult {
    * 对应险种的机器核保结果
    */
   Result: Array<MachinePredict>
+}
+
+/**
+ * 核保结论 机器结论和人工结论统一数据结构
+ */
+export interface UnderwriteConclusion {
+  /**
+   * 类型
+   */
+  Type: string
+
+  /**
+   * 结论
+   */
+  Conclusion: string
+
+  /**
+   * 解释
+   */
+  Explanation: string
 }
 
 /**
@@ -174,6 +239,37 @@ export interface DescribeStructureDifferenceResponse {
    * 差异的结果数组
    */
   Results: Array<PerStructDifference>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateUnderwriteTaskById请求参数结构体
+ */
+export interface CreateUnderwriteTaskByIdRequest {
+  /**
+   * 主任务ID数组，
+   */
+  MainTaskIds: Array<string>
+
+  /**
+   * 回调地址，可不传（提供轮询机制）。
+   */
+  CallbackUrl?: string
+}
+
+/**
+ * UploadMedicalFile返回参数结构体
+ */
+export interface UploadMedicalFileResponse {
+  /**
+      * 文件存储的key，可以用来创建结构化任务。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileKey: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -268,6 +364,23 @@ export interface CompareMetricsData {
 }
 
 /**
+ * 复核差异接口的新增或者删除的项
+ */
+export interface StructureOneItem {
+  /**
+      * 新字段的路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path: string
+
+  /**
+      * 字段的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+}
+
+/**
  * CreateAutoClassifyStructureTask请求参数结构体
  */
 export interface CreateAutoClassifyStructureTaskRequest {
@@ -345,6 +458,51 @@ export interface ReviewDataTaskInfo {
 }
 
 /**
+ * DescribeUnderwriteTask返回参数结构体
+ */
+export interface DescribeUnderwriteTaskResponse {
+  /**
+   * 腾讯云主账号ID
+   */
+  Uin: string
+
+  /**
+   * 操作人子账户ID
+   */
+  SubAccountUin: string
+
+  /**
+   * 保单ID
+   */
+  PolicyId: string
+
+  /**
+   * 主任务ID
+   */
+  MainTaskId: string
+
+  /**
+   * 核保任务ID
+   */
+  UnderwriteTaskId: string
+
+  /**
+   * 状态码
+   */
+  Status: number
+
+  /**
+   * 核保结果
+   */
+  UnderwriteResults: Array<UnderwriteOutput>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStructureResult请求参数结构体
  */
 export interface DescribeStructureResultRequest {
@@ -352,6 +510,21 @@ export interface DescribeStructureResultRequest {
    * 创建任务时返回的主任务ID
    */
   MainTaskId: string
+}
+
+/**
+ * DescribeReportClassify请求参数结构体
+ */
+export interface DescribeReportClassifyRequest {
+  /**
+   * 服务类型（Structured/Underwrite）
+   */
+  ServiceType: string
+
+  /**
+   * 文件地址数组
+   */
+  FileList: Array<string>
 }
 
 /**
@@ -452,20 +625,43 @@ export interface DescribeStructCompareDataResponse {
 }
 
 /**
- * 复核差异接口的新增或者删除的项
+ * 机器核保预测结果
  */
-export interface StructureOneItem {
+export interface MachinePredict {
   /**
-      * 新字段的路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Path: string
+   * 核保引擎名称
+   */
+  Title: string
 
   /**
-      * 字段的值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: string
+   * 核保结论：加费、承保、拒保、延期、除外、加费+除外
+   */
+  Conclusion: string
+
+  /**
+   * AI决策树解释
+   */
+  Explanation: Array<UnderwriteItem>
+
+  /**
+   * 疾病指标
+   */
+  Disease: Array<UnderwriteItem>
+
+  /**
+   * 检查异常
+   */
+  Laboratory: Array<UnderwriteItem>
+}
+
+/**
+ * DescribeUnderwriteTask请求参数结构体
+ */
+export interface DescribeUnderwriteTaskRequest {
+  /**
+   * 任务ID
+   */
+  UnderwriteTaskId?: string
 }
 
 /**
@@ -518,33 +714,18 @@ export interface DescribeStructureResultResponse {
 }
 
 /**
- * 机器核保预测结果
+ * DescribeStructureDifference请求参数结构体
  */
-export interface MachinePredict {
+export interface DescribeStructureDifferenceRequest {
   /**
-   * 核保引擎名称
+   * 主任务号
    */
-  Title: string
+  MainTaskId?: string
 
   /**
-   * 核保结论：加费、承保、拒保、延期、除外、加费+除外
+   * 子任务号
    */
-  Conclusion: string
-
-  /**
-   * AI决策树解释
-   */
-  Explanation: Array<UnderwriteItem>
-
-  /**
-   * 疾病指标
-   */
-  Disease: Array<UnderwriteItem>
-
-  /**
-   * 检查异常
-   */
-  Laboratory: Array<UnderwriteItem>
+  SubTaskId?: string
 }
 
 /**
@@ -584,6 +765,21 @@ export interface DescribeStructureTaskResultResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 报告分类结果
+ */
+export interface ClassifiedReports {
+  /**
+   * 报告类型
+   */
+  ReportType: string
+
+  /**
+   * 文件列表
+   */
+  FileList: Array<string>
 }
 
 /**
@@ -647,18 +843,18 @@ export interface CreateAutoClassifyStructureTaskResponse {
 }
 
 /**
- * CreateUnderwriteTaskById请求参数结构体
+ * DescribeReportClassify返回参数结构体
  */
-export interface CreateUnderwriteTaskByIdRequest {
+export interface DescribeReportClassifyResponse {
   /**
-   * 主任务ID数组，
+   * 报告分类结果
    */
-  MainTaskIds: Array<string>
+  Reports: Array<ClassifiedReports>
 
   /**
-   * 回调地址，可不传（提供轮询机制）。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CallbackUrl?: string
+  RequestId?: string
 }
 
 /**
@@ -737,34 +933,18 @@ export interface CreateStructureTaskInfo {
 }
 
 /**
- * DescribeStructureDifference请求参数结构体
+ * AddSubStructureTasks请求参数结构体
  */
-export interface DescribeStructureDifferenceRequest {
+export interface AddSubStructureTasksRequest {
   /**
-   * 主任务号
+   * 主任务id
    */
-  MainTaskId?: string
+  MainTaskId: string
 
   /**
-   * 子任务号
+   * 子任务信息数组
    */
-  SubTaskId?: string
-}
-
-/**
- * UploadMedicalFile返回参数结构体
- */
-export interface UploadMedicalFileResponse {
-  /**
-      * 文件存储的key，可以用来创建结构化任务。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FileKey: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TaskInfos: Array<CreateStructureTaskInfo>
 }
 
 /**
