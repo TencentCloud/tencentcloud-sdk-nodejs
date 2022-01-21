@@ -1651,7 +1651,7 @@ export interface DescribeImageSharePermissionResponse {
   /**
    * 镜像共享信息
    */
-  SharePermissionSet?: Array<SharePermission>
+  SharePermissionSet: Array<SharePermission>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2455,6 +2455,11 @@ export interface CreateImageRequest {
    * 检测本次请求的是否成功，但不会对操作的资源产生任何影响
    */
   DryRun?: boolean
+
+  /**
+   * 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。
+   */
+  TagSpecification?: Array<TagSpecification>
 }
 
 /**
@@ -3287,6 +3292,11 @@ export interface ImportImageRequest {
    * 是否强制导入，参考[强制导入镜像](https://cloud.tencent.com/document/product/213/12849)
    */
   Force?: boolean
+
+  /**
+   * 标签描述列表。通过指定该参数可以同时绑定标签到自定义镜像。
+   */
+  TagSpecification?: Array<TagSpecification>
 }
 
 /**
@@ -4857,13 +4867,19 @@ export interface DescribeImagesRequest {
 
   /**
       * 过滤条件，每次请求的`Filters`的上限为10，`Filters.Values`的上限为5。参数不可以同时指定`ImageIds`和`Filters`。详细的过滤条件如下：
-<li> image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行过滤</li>
-<li> image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：
-    PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像) 
-    PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
-    SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像) 。</li>
-<li> image-name - String - 是否必填： 否 - （过滤条件）按照镜像名称进行过滤</li>
-<li> platform - String - 是否必填： 否 - （过滤条件）按照镜像平台过滤，如 CentOS</li>
+
+<li><strong>image-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>镜像ID</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>image-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>镜像类型</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：</p><p style="padding-left: 30px;">PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像)</p><p style="padding-left: 30px;">PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)</p><p style="padding-left: 30px;">SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像)</p>
+<li><strong>image-name</strong></li>
+<p style="padding-left: 30px;">按照【<strong>镜像名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>platform</strong></li>
+<p style="padding-left: 30px;">按照【<strong>镜像平台</strong>】进行过滤，如CentOS。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-key</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag:tag-key</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
       */
   Filters?: Array<Filter>
 

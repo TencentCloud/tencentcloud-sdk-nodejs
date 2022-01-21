@@ -1698,11 +1698,11 @@ export interface ListAttachedUserPoliciesResponse {
     /**
       * 策略总数
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 策略列表
       */
-    List?: Array<AttachPolicyInfo>;
+    List: Array<AttachPolicyInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1883,7 +1883,7 @@ export interface UpdatePolicyResponse {
       * 策略id，入参是PolicyName时，才会返回
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PolicyId?: number;
+    PolicyId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2443,7 +2443,7 @@ export interface DeleteServiceLinkedRoleResponse {
     /**
       * 删除任务ID，可用于检查删除服务相关角色状态。
       */
-    DeletionTaskId?: string;
+    DeletionTaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

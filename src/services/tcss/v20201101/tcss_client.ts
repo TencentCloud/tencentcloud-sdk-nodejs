@@ -192,6 +192,7 @@ import {
   ReverseShellWhiteListBaseInfo,
   AccessControlRuleInfo,
   DescribeAssetHostListResponse,
+  ImageRepoInfo,
   CreateAssetImageRegistryScanTaskResponse,
   PortInfo,
   DescribeAssetImageRegistrySummaryRequest,
@@ -888,7 +889,7 @@ export class Client extends AbstractClient {
    * 镜像仓库镜像仓库列表详情
    */
   async DescribeAssetImageRegistryDetail(
-    req?: DescribeAssetImageRegistryDetailRequest,
+    req: DescribeAssetImageRegistryDetailRequest,
     cb?: (error: string, rep: DescribeAssetImageRegistryDetailResponse) => void
   ): Promise<DescribeAssetImageRegistryDetailResponse> {
     return this.request("DescribeAssetImageRegistryDetail", req, cb)
@@ -1598,7 +1599,7 @@ export class Client extends AbstractClient {
    * 镜像仓库镜像仓库列表
    */
   async DescribeAssetImageRegistryList(
-    req?: DescribeAssetImageRegistryListRequest,
+    req: DescribeAssetImageRegistryListRequest,
     cb?: (error: string, rep: DescribeAssetImageRegistryListResponse) => void
   ): Promise<DescribeAssetImageRegistryListResponse> {
     return this.request("DescribeAssetImageRegistryList", req, cb)

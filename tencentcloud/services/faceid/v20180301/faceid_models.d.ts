@@ -884,6 +884,38 @@ export interface DetectReflectLivenessAndCompareRequest {
     ImageMd5: string;
 }
 /**
+ * PhoneVerificationCMCC返回参数结构体
+ */
+export interface PhoneVerificationCMCCResponse {
+    /**
+      * 认证结果码，收费情况如下。
+收费结果码：
+0: 认证通过
+-4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）
+不收费结果码：
+-6: 手机号码不合法
+-7: 身份证号码有误
+-8: 姓名校验不通过
+-9: 没有记录
+-10: 认证未通过
+-11: 验证中心服务繁忙
+      */
+    Result: string;
+    /**
+      * 运营商名称。
+取值范围为["移动","联通","电信",""]
+      */
+    Isp: string;
+    /**
+      * 业务结果描述。
+      */
+    Description: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CheckEidTokenStatus返回参数结构体
  */
 export interface CheckEidTokenStatusResponse {
@@ -895,6 +927,38 @@ finished: 验证完成
 timeout: token已超时
       */
     Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * PhoneVerificationCTCC返回参数结构体
+ */
+export interface PhoneVerificationCTCCResponse {
+    /**
+      * 认证结果码，收费情况如下。
+收费结果码：
+0: 认证通过
+-4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）
+不收费结果码：
+-6: 手机号码不合法
+-7: 身份证号码有误
+-8: 姓名校验不通过
+-9: 没有记录
+-10: 认证未通过
+-11: 验证中心服务繁忙
+      */
+    Result: string;
+    /**
+      * 运营商名称。
+取值范围为["移动","联通","电信",""]
+      */
+    Isp: string;
+    /**
+      * 业务结果描述。
+      */
+    Description: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -932,6 +996,27 @@ export interface MobileStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * PhoneVerificationCTCC请求参数结构体
+ */
+export interface PhoneVerificationCTCCRequest {
+    /**
+      * 身份证号
+      */
+    IdCard: string;
+    /**
+      * 姓名
+      */
+    Name: string;
+    /**
+      * 手机号
+      */
+    Phone: string;
+    /**
+      * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+      */
+    Encryption?: Encryption;
 }
 /**
  * IdCardOCRVerification返回参数结构体
@@ -1026,6 +1111,27 @@ export interface ChargeDetail {
       * 本次活体一比一最终结果描述。
       */
     ErrorMessage: string;
+}
+/**
+ * PhoneVerificationCMCC请求参数结构体
+ */
+export interface PhoneVerificationCMCCRequest {
+    /**
+      * 身份证号
+      */
+    IdCard: string;
+    /**
+      * 姓名
+      */
+    Name: string;
+    /**
+      * 手机号
+      */
+    Phone: string;
+    /**
+      * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+      */
+    Encryption?: Encryption;
 }
 /**
  * Liveness返回参数结构体
@@ -1386,6 +1492,27 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
     Encryption?: Encryption;
 }
 /**
+ * PhoneVerificationCUCC请求参数结构体
+ */
+export interface PhoneVerificationCUCCRequest {
+    /**
+      * 身份证号
+      */
+    IdCard: string;
+    /**
+      * 姓名
+      */
+    Name: string;
+    /**
+      * 手机号
+      */
+    Phone: string;
+    /**
+      * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+      */
+    Encryption?: Encryption;
+}
+/**
  * BankCard4EVerification请求参数结构体
  */
 export interface BankCard4EVerificationRequest {
@@ -1444,6 +1571,38 @@ export interface GetFaceIdResultRequest {
       * 是否需要拉取截帧，默认false不需要
       */
     IsNeedBestFrame?: boolean;
+}
+/**
+ * PhoneVerificationCUCC返回参数结构体
+ */
+export interface PhoneVerificationCUCCResponse {
+    /**
+      * 认证结果码，收费情况如下。
+收费结果码：
+0: 认证通过
+-4: 信息不一致（手机号已实名，但姓名和身份证号与实名信息不一致）
+不收费结果码：
+-6: 手机号码不合法
+-7: 身份证号码有误
+-8: 姓名校验不通过
+-9: 没有记录
+-10: 认证未通过
+-11: 验证中心服务繁忙
+      */
+    Result: string;
+    /**
+      * 运营商名称。
+取值范围为["移动","联通","电信",""]
+      */
+    Isp: string;
+    /**
+      * 业务结果描述。
+      */
+    Description: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetActionSequence返回参数结构体

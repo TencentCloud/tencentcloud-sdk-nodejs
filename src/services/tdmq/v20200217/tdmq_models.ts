@@ -1299,6 +1299,24 @@ export interface CmqQueue {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NamespaceName: string
+
+  /**
+      * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+
+  /**
+      * 最大未确认消息数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxUnackedMsgNum: number
+
+  /**
+      * 最大消息堆积大小（字节）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxMsgBacklogSize: number
 }
 
 /**

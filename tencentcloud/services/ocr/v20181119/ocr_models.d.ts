@@ -2175,6 +2175,10 @@ export interface LicensePlateOCRResponse {
       */
     Rect: Rect;
     /**
+      * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”。
+      */
+    Color: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;

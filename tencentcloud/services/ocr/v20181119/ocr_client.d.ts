@@ -368,7 +368,7 @@ export declare class Client extends AbstractClient {
      */
     ArithmeticOCR(req: ArithmeticOCRRequest, cb?: (error: string, rep: ArithmeticOCRResponse) => void): Promise<ArithmeticOCRResponse>;
     /**
-     * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号信息。
+     * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号码与车牌颜色信息。
      */
     LicensePlateOCR(req: LicensePlateOCRRequest, cb?: (error: string, rep: LicensePlateOCRResponse) => void): Promise<LicensePlateOCRResponse>;
     /**

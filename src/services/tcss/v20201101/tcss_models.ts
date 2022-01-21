@@ -1907,6 +1907,18 @@ export interface DescribeAbnormalProcessRulesRequest {
  */
 export interface DescribeAssetImageRegistryListResponse {
   /**
+      * 镜像仓库列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  List: Array<ImageRepoInfo>
+
+  /**
+      * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4192,7 +4204,38 @@ export interface AddEditAbnormalProcessRuleResponse {
 /**
  * DescribeAssetImageRegistryList请求参数结构体
  */
-export type DescribeAssetImageRegistryListRequest = null
+export interface DescribeAssetImageRegistryListRequest {
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+      * 过滤字段
+IsAuthorized是否授权，取值全部all，未授权0，已授权1
+      */
+  Filters?: Array<AssetFilters>
+
+  /**
+   * 排序字段
+   */
+  By?: string
+
+  /**
+   * 排序方式，asc，desc
+   */
+  Order?: string
+
+  /**
+   * 是否仅展示各repository最新的镜像, 默认为false
+   */
+  OnlyShowLatest?: boolean
+}
 
 /**
  * CreateCheckComponent返回参数结构体
@@ -4771,6 +4814,195 @@ export interface DescribeAssetHostListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 容器安全镜像仓库列表
+ */
+export interface ImageRepoInfo {
+  /**
+   * 镜像Digest
+   */
+  ImageDigest: string
+
+  /**
+   * 镜像仓库地址
+   */
+  ImageRepoAddress: string
+
+  /**
+   * 仓库类型
+   */
+  RegistryType: string
+
+  /**
+   * 镜像名称
+   */
+  ImageName: string
+
+  /**
+   * 镜像版本
+   */
+  ImageTag: string
+
+  /**
+   * 镜像大小
+   */
+  ImageSize: number
+
+  /**
+   * 最近扫描时间
+   */
+  ScanTime: string
+
+  /**
+   * 扫描状态
+   */
+  ScanStatus: string
+
+  /**
+   * 安全漏洞数
+   */
+  VulCnt: number
+
+  /**
+   * 木马病毒数
+   */
+  VirusCnt: number
+
+  /**
+   * 风险行为数
+   */
+  RiskCnt: number
+
+  /**
+   * 敏感信息数
+   */
+  SentiveInfoCnt: number
+
+  /**
+   * 是否可信镜像
+   */
+  IsTrustImage: boolean
+
+  /**
+   * 镜像系统
+   */
+  OsName: string
+
+  /**
+      * 木马扫描错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVirusError: string
+
+  /**
+      * 漏洞扫描错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVulError: string
+
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 命名空间
+   */
+  Namespace: string
+
+  /**
+      * 高危扫描错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanRiskError: string
+
+  /**
+      * 敏感信息扫描进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVirusProgress: number
+
+  /**
+      * 木马扫描进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVulProgress: number
+
+  /**
+      * 漏洞扫描进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanRiskProgress: number
+
+  /**
+      * 剩余扫描时间秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanRemainTime: number
+
+  /**
+      * cve扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CveStatus: string
+
+  /**
+      * 高危扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskStatus: string
+
+  /**
+      * 木马扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VirusStatus: string
+
+  /**
+      * 总进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Progress: number
+
+  /**
+   * 授权状态
+   */
+  IsAuthorized: number
+
+  /**
+   * 仓库区域
+   */
+  RegistryRegion: string
+
+  /**
+   * 列表id
+   */
+  Id: number
+
+  /**
+      * 镜像Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId: string
+
+  /**
+      * 镜像创建的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageCreateTime: string
+
+  /**
+      * 是否为镜像的最新版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsLatestImage: boolean
 }
 
 /**
@@ -6248,6 +6480,11 @@ export interface DescribeAssetImageRegistryListExportRequest {
    * 排序方式，asc，desc
    */
   Order?: string
+
+  /**
+   * 是否仅展示repository版本最新的镜像，默认为false
+   */
+  OnlyShowLatest?: boolean
 }
 
 /**
@@ -6606,7 +6843,12 @@ export interface ModifyVirusScanTimeoutSettingResponse {
 /**
  * DescribeAssetImageRegistryDetail请求参数结构体
  */
-export type DescribeAssetImageRegistryDetailRequest = null
+export interface DescribeAssetImageRegistryDetailRequest {
+  /**
+   * 仓库列表id
+   */
+  Id?: number
+}
 
 /**
  * CreateAssetImageRegistryScanTask请求参数结构体
@@ -6628,9 +6870,24 @@ export interface CreateAssetImageRegistryScanTaskRequest {
   ScanType?: Array<string>
 
   /**
-   * 扫描的镜像列表Id
+   * 扫描的镜像列表
    */
   Id?: Array<number>
+
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<AssetFilters>
+
+  /**
+   * 不需要扫描的镜像列表, 与Filters配合使用
+   */
+  ExcludeImageList?: Array<number>
+
+  /**
+   * 是否仅扫描各repository最新版的镜像, 与Filters配合使用
+   */
+  OnlyScanLatest?: boolean
 }
 
 /**
@@ -9629,6 +9886,186 @@ export interface DescribeAssetImageRegistryDetailResponse {
   ImageRepoAddress: string
 
   /**
+      * 镜像类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegistryType: string
+
+  /**
+      * 仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageName: string
+
+  /**
+      * 镜像版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageTag: string
+
+  /**
+      * 扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanTime: string
+
+  /**
+      * 扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanStatus: string
+
+  /**
+      * 安全漏洞数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulCnt: number
+
+  /**
+      * 木马病毒数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VirusCnt: number
+
+  /**
+      * 风险行为数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskCnt: number
+
+  /**
+      * 敏感信息数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SentiveInfoCnt: number
+
+  /**
+      * 镜像系统
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OsName: string
+
+  /**
+      * 木马扫描错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVirusError: string
+
+  /**
+      * 漏洞扫描错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVulError: string
+
+  /**
+      * 层文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LayerInfo: string
+
+  /**
+      * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
+
+  /**
+      * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Namespace: string
+
+  /**
+      * 高危扫描错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanRiskError: string
+
+  /**
+      * 木马信息扫描进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVirusProgress: number
+
+  /**
+      * 漏洞扫描进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanVulProgress: number
+
+  /**
+      * 敏感扫描进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanRiskProgress: number
+
+  /**
+      * 剩余扫描时间秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScanRemainTime: number
+
+  /**
+      * cve扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CveStatus: string
+
+  /**
+      * 高危扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskStatus: string
+
+  /**
+      * 木马扫描状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VirusStatus: string
+
+  /**
+      * 总进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Progress: number
+
+  /**
+      * 授权状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAuthorized: number
+
+  /**
+      * 镜像大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageSize: number
+
+  /**
+      * 镜像Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId: string
+
+  /**
+      * 镜像区域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegistryRegion: string
+
+  /**
+      * 镜像创建的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageCreateTime: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10690,9 +11127,24 @@ export interface ModifyAssetImageRegistryScanStopRequest {
   Images?: Array<ImageInfo>
 
   /**
-   * 扫描的镜像列表Id
+   * 扫描的镜像列表
    */
   Id?: Array<number>
+
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<AssetFilters>
+
+  /**
+   * 不要扫描的镜像列表，与Filters配合使用
+   */
+  ExcludeImageList?: Array<number>
+
+  /**
+   * 是否仅扫描各repository最新版本的镜像
+   */
+  OnlyScanLatest?: boolean
 }
 
 /**

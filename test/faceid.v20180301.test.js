@@ -208,6 +208,16 @@ it("faceid.v20180301.MobileStatus", async function () {
     }
 })
 
+it("faceid.v20180301.PhoneVerificationCMCC", async function () {
+    try {
+       const data = await client.PhoneVerificationCMCC({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.MinorsVerification", async function () {
     try {
        const data = await client.MinorsVerification({})
@@ -241,6 +251,16 @@ it("faceid.v20180301.CheckIdNameDate", async function () {
 it("faceid.v20180301.Liveness", async function () {
     try {
        const data = await client.Liveness({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("faceid.v20180301.PhoneVerificationCUCC", async function () {
+    try {
+       const data = await client.PhoneVerificationCUCC({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +341,16 @@ it("faceid.v20180301.GetDetectInfo", async function () {
 it("faceid.v20180301.BankCard2EVerification", async function () {
     try {
        const data = await client.BankCard2EVerification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("faceid.v20180301.PhoneVerificationCTCC", async function () {
+    try {
+       const data = await client.PhoneVerificationCTCC({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

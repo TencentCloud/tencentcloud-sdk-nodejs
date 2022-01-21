@@ -186,7 +186,7 @@ export declare class Client extends AbstractClient {
     /**
      * 镜像仓库镜像仓库列表详情
      */
-    DescribeAssetImageRegistryDetail(req?: DescribeAssetImageRegistryDetailRequest, cb?: (error: string, rep: DescribeAssetImageRegistryDetailResponse) => void): Promise<DescribeAssetImageRegistryDetailResponse>;
+    DescribeAssetImageRegistryDetail(req: DescribeAssetImageRegistryDetailRequest, cb?: (error: string, rep: DescribeAssetImageRegistryDetailResponse) => void): Promise<DescribeAssetImageRegistryDetailResponse>;
     /**
      * 运行时高危系统调用列表导出
      */
@@ -470,7 +470,7 @@ export declare class Client extends AbstractClient {
     /**
      * 镜像仓库镜像仓库列表
      */
-    DescribeAssetImageRegistryList(req?: DescribeAssetImageRegistryListRequest, cb?: (error: string, rep: DescribeAssetImageRegistryListResponse) => void): Promise<DescribeAssetImageRegistryListResponse>;
+    DescribeAssetImageRegistryList(req: DescribeAssetImageRegistryListRequest, cb?: (error: string, rep: DescribeAssetImageRegistryListResponse) => void): Promise<DescribeAssetImageRegistryListResponse>;
     /**
      * 容器安全搜索查询进程列表
      */

@@ -1324,6 +1324,11 @@ export interface TemNamespaceInfo {
    * 是否开启tsw
    */
   EnableTswTraceService: boolean
+
+  /**
+   * 环境锁，1为上锁，0则为上锁
+   */
+  Locked: number
 }
 
 /**
@@ -1487,6 +1492,31 @@ export interface RollingUpdateApplicationByVersionRequest {
    * 请求来源平台，含 IntelliJ，Coding
    */
   From?: string
+
+  /**
+   * 部署策略，AUTO 为全自动；BETA 为小批量验证后自动；MANUAL 为全手动；
+   */
+  DeployStrategyType?: string
+
+  /**
+   * 发布批次数
+   */
+  TotalBatchCount?: number
+
+  /**
+   * 批次间隔时间
+   */
+  BatchInterval?: number
+
+  /**
+   * 小批量验证批次的实例数
+   */
+  BetaBatchNum?: number
+
+  /**
+   * 发布过程中保障的最小可用实例数
+   */
+  MinAvailable?: number
 }
 
 /**

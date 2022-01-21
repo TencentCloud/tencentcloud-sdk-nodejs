@@ -184,7 +184,7 @@ export interface DescribeLogContextRequest {
   TopicId: string
 
   /**
-   * 日志时间,  格式: YYYY-mm-dd HH:MM:SS
+   * 日志时间,  格式: YYYY-mm-dd HH:MM:SS.FFF
    */
   BTime: string
 

@@ -53,10 +53,14 @@ import {
   EidInfo,
   GetFaceIdTokenResponse,
   DetectReflectLivenessAndCompareRequest,
+  PhoneVerificationCMCCResponse,
   CheckEidTokenStatusResponse,
+  PhoneVerificationCTCCResponse,
   MobileStatusResponse,
+  PhoneVerificationCTCCRequest,
   IdCardOCRVerificationResponse,
   ChargeDetail,
+  PhoneVerificationCMCCRequest,
   LivenessResponse,
   CheckIdCardInformationRequest,
   DetectInfoText,
@@ -67,9 +71,11 @@ import {
   GetEidResultResponse,
   GetRealNameAuthResultRequest,
   ImageRecognitionRequest,
+  PhoneVerificationCUCCRequest,
   BankCard4EVerificationRequest,
   MobileNetworkTimeVerificationRequest,
   GetFaceIdResultRequest,
+  PhoneVerificationCUCCResponse,
   GetActionSequenceResponse,
   LivenessRecognitionResponse,
   BankCardVerificationResponse,
@@ -297,6 +303,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于校验中国移动手机号、姓名和身份证号的真实性和一致性。中国移动支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+   */
+  async PhoneVerificationCMCC(
+    req: PhoneVerificationCMCCRequest,
+    cb?: (error: string, rep: PhoneVerificationCMCCResponse) => void
+  ): Promise<PhoneVerificationCMCCResponse> {
+    return this.request("PhoneVerificationCMCC", req, cb)
+  }
+
+  /**
    * 通过传入手机号或姓名和身份证号，结合权威数据源和腾讯健康守护可信模型，判断该信息是否真实且年满18周岁。腾讯健康守护可信模型覆盖了上十亿手机库源，覆盖率高、准确率高，如果不在库中的手机号，还可以通过姓名+身份证进行兜底验证。
    */
   async MinorsVerification(
@@ -335,6 +351,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LivenessResponse) => void
   ): Promise<LivenessResponse> {
     return this.request("Liveness", req, cb)
+  }
+
+  /**
+   * 本接口用于校验中国联通手机号、姓名和身份证号的真实性和一致性。中国联通支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+   */
+  async PhoneVerificationCUCC(
+    req: PhoneVerificationCUCCRequest,
+    cb?: (error: string, rep: PhoneVerificationCUCCResponse) => void
+  ): Promise<PhoneVerificationCUCCResponse> {
+    return this.request("PhoneVerificationCUCC", req, cb)
   }
 
   /**
@@ -415,6 +441,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BankCard2EVerificationResponse) => void
   ): Promise<BankCard2EVerificationResponse> {
     return this.request("BankCard2EVerification", req, cb)
+  }
+
+  /**
+   * 本接口用于校验中国电信手机号、姓名和身份证号的真实性和一致性。中国电信支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
+   */
+  async PhoneVerificationCTCC(
+    req: PhoneVerificationCTCCRequest,
+    cb?: (error: string, rep: PhoneVerificationCTCCResponse) => void
+  ): Promise<PhoneVerificationCTCCResponse> {
+    return this.request("PhoneVerificationCTCC", req, cb)
   }
 
   /**

@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     CreateEmailAddress(req: CreateEmailAddressRequest, cb?: (error: string, rep: CreateEmailAddressResponse) => void): Promise<CreateEmailAddressResponse>;
     /**
-     * 获取邮件发送状态。仅支持查询180天之内的数据
+     * 获取邮件发送状态。仅支持查询30天之内的数据
      */
     GetSendEmailStatus(req: GetSendEmailStatusRequest, cb?: (error: string, rep: GetSendEmailStatusResponse) => void): Promise<GetSendEmailStatusResponse>;
     /**

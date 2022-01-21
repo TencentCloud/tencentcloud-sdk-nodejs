@@ -2145,6 +2145,10 @@ export interface DescribeBaseMetricsRequest {
       * 指标名，各个云产品的指标名不同。如需获取指标名，请前往各产品监控指标文档，例如云服务器的指标名，可参见 [云服务器监控指标](https://cloud.tencent.com/document/product/248/6843)
       */
     MetricName?: string;
+    /**
+      * 可选参数，按照维度过滤
+      */
+    Dimensions?: Array<string>;
 }
 /**
  * 云监控告警通知模板 - 用户通知详情
