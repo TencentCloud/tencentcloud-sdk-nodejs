@@ -668,6 +668,16 @@ it("ocr.v20181119.MixedInvoiceOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeHealthCodeOCR", async function () {
+    try {
+       const data = await client.RecognizeHealthCodeOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.EduPaperOCR", async function () {
     try {
        const data = await client.EduPaperOCR({})

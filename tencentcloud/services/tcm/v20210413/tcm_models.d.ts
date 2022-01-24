@@ -332,7 +332,7 @@ export interface MeshStatus {
       */
     CanaryVersion: string;
     /**
-      * Prometheus状态
+      * 已废弃
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Prometheus: Array<PrometheusStatus>;
@@ -346,6 +346,11 @@ export interface MeshStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ActiveOperationList: Array<ActiveOperation>;
+    /**
+      * 获取TPS信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TPS: PrometheusStatus;
 }
 /**
  * Istiod配置

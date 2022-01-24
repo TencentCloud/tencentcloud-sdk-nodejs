@@ -2647,6 +2647,12 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsolatedSource: string
+
+  /**
+      * GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GPUInfo?: GPUInfo
 }
 
 /**
@@ -4735,6 +4741,29 @@ export interface InquiryPriceRenewInstancesRequest {
    * 是否续费弹性数据盘。取值范围：<br><li>TRUE：表示续费包年包月实例同时续费其挂载的弹性数据盘<br><li>FALSE：表示续费包年包月实例同时不再续费其挂载的弹性数据盘<br><br>默认取值：TRUE。
    */
   RenewPortableDataDisk?: boolean
+}
+
+/**
+ * 实例GPU信息
+ */
+export interface GPUInfo {
+  /**
+      * 实例GPU个数。值小于1代表VGPU类型，大于1代表GPU直通类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GPUCount: number
+
+  /**
+      * 实例GPU地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GPUId: Array<string>
+
+  /**
+      * 实例GPU类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GPUType: string
 }
 
 /**

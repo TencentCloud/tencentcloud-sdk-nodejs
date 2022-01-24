@@ -154,10 +154,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAuthenticationOptions", req, cb);
     }
     /**
-     * 操作TKE集群的addon
+     * 查看集群状态列表
      */
-    async ForwardApplicationRequestV3(req, cb) {
-        return this.request("ForwardApplicationRequestV3", req, cb);
+    async DescribeClusterStatus(req, cb) {
+        return this.request("DescribeClusterStatus", req, cb);
     }
     /**
      * 查询节点池详情
@@ -410,6 +410,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterEndpoint(req, cb) {
         return this.request("CreateClusterEndpoint", req, cb);
+    }
+    /**
+     * 操作TKE集群的addon
+     */
+    async ForwardApplicationRequestV3(req, cb) {
+        return this.request("ForwardApplicationRequestV3", req, cb);
     }
     /**
      * 获取关联目标集群的实例列表

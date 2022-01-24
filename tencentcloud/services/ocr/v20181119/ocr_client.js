@@ -692,6 +692,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MixedInvoiceOCR", req, cb);
     }
     /**
+     * 本接口支持粤康码识别，包括姓名、更新时间、健康码颜色，三个字段的识别结果输出。
+     */
+    async RecognizeHealthCodeOCR(req, cb) {
+        return this.request("RecognizeHealthCodeOCR", req, cb);
+    }
+    /**
      * 本接口支持数学试题内容的识别和结构化输出，包括通用文本解析和小学/初中/高中数学公式解析能力（包括91种题型，180种符号），公式返回格式为 Latex 格式文本。
      */
     async EduPaperOCR(req, cb) {

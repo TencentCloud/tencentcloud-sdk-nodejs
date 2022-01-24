@@ -152,7 +152,7 @@ import {
   SealOCRResponse,
   DutyPaidProofInfo,
   FinanBillOCRResponse,
-  ShipInvoiceOCRRequest,
+  RecognizeHealthCodeOCRRequest,
   BankSlipOCRResponse,
   QuestionObj,
   VinOCRResponse,
@@ -160,6 +160,7 @@ import {
   FormulaOCRRequest,
   PassportOCRRequest,
   DutyPaidProofOCRRequest,
+  RecognizeHealthCodeOCRResponse,
   RideHailingDriverLicenseOCRRequest,
   QueryBarCodeRequest,
   ItemCoord,
@@ -175,6 +176,7 @@ import {
   VehicleRegCertOCRResponse,
   ClassifyDetectInfo,
   GeneralEfficientOCRResponse,
+  ShipInvoiceOCRRequest,
   SealOCRRequest,
   VerifyOfdVatInvoiceOCRResponse,
   TextTable,
@@ -1150,6 +1152,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
   ): Promise<MixedInvoiceOCRResponse> {
     return this.request("MixedInvoiceOCR", req, cb)
+  }
+
+  /**
+   * 本接口支持粤康码识别，包括姓名、更新时间、健康码颜色，三个字段的识别结果输出。
+   */
+  async RecognizeHealthCodeOCR(
+    req: RecognizeHealthCodeOCRRequest,
+    cb?: (error: string, rep: RecognizeHealthCodeOCRResponse) => void
+  ): Promise<RecognizeHealthCodeOCRResponse> {
+    return this.request("RecognizeHealthCodeOCR", req, cb)
   }
 
   /**

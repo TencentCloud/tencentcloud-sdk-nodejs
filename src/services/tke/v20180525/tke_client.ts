@@ -41,6 +41,7 @@ import {
   UpdateEKSClusterRequest,
   CreateClusterRouteTableResponse,
   DescribeClusterCommonNamesRequest,
+  RunAutomationServiceEnabled,
   NfsVolume,
   DeleteClusterEndpointResponse,
   PrometheusTemplateModify,
@@ -125,9 +126,10 @@ import {
   DescribeClusterAuthenticationOptionsRequest,
   DescribeEksContainerInstanceLogResponse,
   DeleteEKSClusterResponse,
+  DescribeClusterStatusRequest,
   VersionInstance,
   PrometheusConfigItem,
-  DescribePrometheusTemplatesResponse,
+  DescribeClusterStatusResponse,
   DeleteClusterNodePoolRequest,
   EksCi,
   DisableVpcCniNetworkTypeResponse,
@@ -203,6 +205,7 @@ import {
   ModifyClusterAuthenticationOptionsResponse,
   DescribeClusterAuthenticationOptionsResponse,
   DeleteClusterAsGroupsResponse,
+  DescribePrometheusTemplatesResponse,
   DescribePrometheusInstanceRequest,
   DescribeClusterInstancesRequest,
   InstanceAdvancedSettings,
@@ -236,7 +239,7 @@ import {
   CheckInstancesUpgradeAbleResponse,
   Cluster,
   DescribeClusterEndpointStatusResponse,
-  RunAutomationServiceEnabled,
+  ClusterStatus,
   UpgradeClusterInstancesResponse,
   CreatePrometheusDashboardRequest,
   DescribePrometheusAgentsResponse,
@@ -535,13 +538,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 操作TKE集群的addon
+   * 查看集群状态列表
    */
-  async ForwardApplicationRequestV3(
-    req: ForwardApplicationRequestV3Request,
-    cb?: (error: string, rep: ForwardApplicationRequestV3Response) => void
-  ): Promise<ForwardApplicationRequestV3Response> {
-    return this.request("ForwardApplicationRequestV3", req, cb)
+  async DescribeClusterStatus(
+    req: DescribeClusterStatusRequest,
+    cb?: (error: string, rep: DescribeClusterStatusResponse) => void
+  ): Promise<DescribeClusterStatusResponse> {
+    return this.request("DescribeClusterStatus", req, cb)
   }
 
   /**
@@ -962,6 +965,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterEndpointResponse) => void
   ): Promise<CreateClusterEndpointResponse> {
     return this.request("CreateClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 操作TKE集群的addon
+   */
+  async ForwardApplicationRequestV3(
+    req: ForwardApplicationRequestV3Request,
+    cb?: (error: string, rep: ForwardApplicationRequestV3Response) => void
+  ): Promise<ForwardApplicationRequestV3Response> {
+    return this.request("ForwardApplicationRequestV3", req, cb)
   }
 
   /**

@@ -88,6 +88,16 @@ it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
+    try {
+       const data = await client.DescribeAutoCalloutTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeCCCBuyInfoList", async function () {
     try {
        const data = await client.DescribeCCCBuyInfoList({})
@@ -141,6 +151,16 @@ it("ccc.v20200210.CreateSDKLoginToken", async function () {
 it("ccc.v20200210.DescribeSeatUserList", async function () {
     try {
        const data = await client.DescribeSeatUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.CreateCallOutSession", async function () {
+    try {
+       const data = await client.CreateCallOutSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

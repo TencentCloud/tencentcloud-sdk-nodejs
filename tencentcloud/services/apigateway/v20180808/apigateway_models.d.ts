@@ -2562,7 +2562,7 @@ export interface ParameterInfo {
       */
     Unit: string;
     /**
-      * 类型
+      * 类型, integer|string
       */
     Type: string;
     /**
@@ -2577,6 +2577,21 @@ export interface ParameterInfo {
       * 修改时间
       */
     ModifedTime: string;
+    /**
+      * 字符类型的值，当Type为string时才有意义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ValueString: string;
+    /**
+      * 字符类型的默认值，当Type为string时才有意义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultValueString: string;
+    /**
+      * 可调整范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Range: string;
 }
 /**
  * 使用计划绑定密钥

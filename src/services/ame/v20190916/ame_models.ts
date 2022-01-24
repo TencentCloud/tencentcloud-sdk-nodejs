@@ -154,6 +154,7 @@ export interface SyncKTVRobotCommandRequest {
 <li>Pause：暂停</li>
 <li>SwitchPrevious：上一首</li>
 <li>SwitchNext：下一首</li>
+<li>SetPlayMode：设置播放模式</li>
 <li>Seek：调整播放进度</li>
 <li>SetPlaylist：歌单变更</li>
 <li>SetAudioParam：音频参数变更</li>
@@ -185,6 +186,11 @@ export interface SyncKTVRobotCommandRequest {
    * 自定义消息，当Command取SendMessage时，必填。
    */
   SendMessageCommandInput?: SendMessageCommandInput
+
+  /**
+   * 播放模式，当Command取SetPlayMode时，必填。
+   */
+  SetPlayModeCommandInput?: SetPlayModeCommandInput
 }
 
 /**
@@ -1098,6 +1104,15 @@ export interface KTVRobotInfo {
 <li>TRTC</li>
       */
   RTCSystem: string
+
+  /**
+      * 播放模式，PlayMode取值有：
+<li>RepeatPlaylist：列表循环</li>
+<li>Order：顺序播放</li>
+<li>RepeatSingle：单曲循环</li>
+<li>Shuffle：随机播放</li>
+      */
+  SetPlayModeInput: SetPlayModeCommandInput
 }
 
 /**
@@ -1157,6 +1172,20 @@ export interface Item {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+}
+
+/**
+ * 设置播放模式
+ */
+export interface SetPlayModeCommandInput {
+  /**
+      * 播放模式，取值有：
+<li>RepeatPlaylist：列表循环</li>
+<li>Order：顺序播放</li>
+<li>RepeatSingle：单曲循环</li>
+<li>Shuffle：随机播放</li>
+      */
+  PlayMode: string
 }
 
 /**

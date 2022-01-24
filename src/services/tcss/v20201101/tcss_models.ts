@@ -2885,6 +2885,11 @@ export interface DescribeImageAuthorizedInfoResponse {
   NotScannedImageCnt: number
 
   /**
+   * 本地未开启扫描镜像数
+   */
+  NotScannedLocalImageCnt: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5220,14 +5225,24 @@ export interface DescribeVirusScanTimeoutSettingRequest {
  */
 export interface ModifyAssetImageScanStopRequest {
   /**
-   * 任务id
+   * 任务id；任务id，镜像id和根据过滤条件筛选三选一。
    */
   TaskID?: string
 
   /**
-   * 镜像id
+   * 镜像id；任务id，镜像id和根据过滤条件筛选三选一。
    */
   Images?: Array<string>
+
+  /**
+   * 根据过滤条件筛选出镜像；任务id，镜像id和根据过滤条件筛选三选一。
+   */
+  Filters?: Array<AssetFilters>
+
+  /**
+   * 根据过滤条件筛选出镜像，再排除个别镜像
+   */
+  ExcludeImageIds?: string
 }
 
 /**
@@ -9677,29 +9692,39 @@ export interface DescribeContainerAssetSummaryResponse {
  */
 export interface CreateAssetImageScanTaskRequest {
   /**
-   * 是否扫描全部镜像
+   * 是否扫描全部镜像；全部镜像，镜像列表和根据过滤条件筛选三选一。
    */
   All?: boolean
 
   /**
-   * 需要扫描的镜像列表
+   * 需要扫描的镜像列表；全部镜像，镜像列表和根据过滤条件筛选三选一。
    */
   Images?: Array<string>
 
   /**
-   * 扫描漏洞
+   * 扫描漏洞；漏洞，木马和风险需选其一
    */
   ScanVul?: boolean
 
   /**
-   * 扫描木马
+   * 扫描木马；漏洞，木马和风险需选其一
    */
   ScanVirus?: boolean
 
   /**
-   * 扫描风险
+   * 扫描风险；漏洞，木马和风险需选其一
    */
   ScanRisk?: boolean
+
+  /**
+   * 根据过滤条件筛选出镜像；全部镜像，镜像列表和根据过滤条件筛选三选一。
+   */
+  Filters?: Array<AssetFilters>
+
+  /**
+   * 根据过滤条件筛选出镜像，再排除个别镜像
+   */
+  ExcludeImageIds?: Array<string>
 }
 
 /**

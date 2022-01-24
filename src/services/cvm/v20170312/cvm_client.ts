@@ -199,6 +199,7 @@ import {
   OsVersion,
   ModifyImageAttributeResponse,
   InquiryPriceRenewInstancesRequest,
+  GPUInfo,
   InstanceRefund,
   DescribeInstanceTypeConfigsRequest,
   RegionInfo,

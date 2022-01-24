@@ -228,9 +228,9 @@ it("tke.v20180525.DescribeClusterAuthenticationOptions", async function () {
     }
 })
 
-it("tke.v20180525.ForwardApplicationRequestV3", async function () {
+it("tke.v20180525.DescribeClusterStatus", async function () {
     try {
-       const data = await client.ForwardApplicationRequestV3({})
+       const data = await client.DescribeClusterStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +651,16 @@ it("tke.v20180525.DeletePrometheusAlertRule", async function () {
 it("tke.v20180525.CreateClusterEndpoint", async function () {
     try {
        const data = await client.CreateClusterEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ForwardApplicationRequestV3", async function () {
+    try {
+       const data = await client.ForwardApplicationRequestV3({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

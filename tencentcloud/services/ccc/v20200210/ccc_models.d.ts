@@ -96,53 +96,21 @@ export interface DescribeCallInMetricsResponse {
     RequestId?: string;
 }
 /**
- * 呼入实时指标
+ * 呼入技能组相关指标
  */
-export interface CallInMetrics {
+export interface CallInSkillGroupMetrics {
     /**
-      * IVR驻留数量
+      * 技能组ID
       */
-    IvrCount: number;
+    SkillGroupId: number;
     /**
-      * 排队中数量
+      * 数据指标
       */
-    QueueCount: number;
+    Metrics: CallInMetrics;
     /**
-      * 振铃中数量
+      * 技能组名称
       */
-    RingCount: number;
-    /**
-      * 接通中数量
-      */
-    AcceptCount: number;
-    /**
-      * 客服转接外线中数量
-      */
-    TransferOuterCount: number;
-    /**
-      * 最大排队时长
-      */
-    MaxQueueDuration: number;
-    /**
-      * 平均排队时长
-      */
-    AvgQueueDuration: number;
-    /**
-      * 最大振铃时长
-      */
-    MaxRingDuration: number;
-    /**
-      * 平均振铃时长
-      */
-    AvgRingDuration: number;
-    /**
-      * 最大接通时长
-      */
-    MaxAcceptDuration: number;
-    /**
-      * 平均接通时长
-      */
-    AvgAcceptDuration: number;
+    Name: string;
 }
 /**
  * DescribeStaffInfoList返回参数结构体
@@ -421,6 +389,39 @@ export interface UnbindStaffSkillGroupListRequest {
     SkillGroupList: Array<number>;
 }
 /**
+ * DescribeIMCdrs请求参数结构体
+ */
+export interface DescribeIMCdrsRequest {
+    /**
+      * 起始时间
+      */
+    StartTimestamp: number;
+    /**
+      * 结束时间
+      */
+    EndTimestamp: number;
+    /**
+      * 实例ID
+      */
+    InstanceId?: number;
+    /**
+      * 应用ID
+      */
+    SdkAppId?: number;
+    /**
+      * 返回记录条数 最大为100默认20
+      */
+    Limit?: number;
+    /**
+      * 返回记录偏移 默认为0
+      */
+    Offset?: number;
+    /**
+      * 1为全媒体，2为文本客服，不填则查询全部
+      */
+    Type?: number;
+}
+/**
  * DescribeStaffStatusMetrics请求参数结构体
  */
 export interface DescribeStaffStatusMetricsRequest {
@@ -494,37 +495,53 @@ export interface DescribeTelSessionRequest {
     SessionId: string;
 }
 /**
- * DescribeIMCdrs请求参数结构体
+ * 呼入实时指标
  */
-export interface DescribeIMCdrsRequest {
+export interface CallInMetrics {
     /**
-      * 起始时间
+      * IVR驻留数量
       */
-    StartTimestamp: number;
+    IvrCount: number;
     /**
-      * 结束时间
+      * 排队中数量
       */
-    EndTimestamp: number;
+    QueueCount: number;
     /**
-      * 实例ID
+      * 振铃中数量
       */
-    InstanceId?: number;
+    RingCount: number;
     /**
-      * 应用ID
+      * 接通中数量
       */
-    SdkAppId?: number;
+    AcceptCount: number;
     /**
-      * 返回记录条数 最大为100默认20
+      * 客服转接外线中数量
       */
-    Limit?: number;
+    TransferOuterCount: number;
     /**
-      * 返回记录偏移 默认为0
+      * 最大排队时长
       */
-    Offset?: number;
+    MaxQueueDuration: number;
     /**
-      * 1为全媒体，2为文本客服，不填则查询全部
+      * 平均排队时长
       */
-    Type?: number;
+    AvgQueueDuration: number;
+    /**
+      * 最大振铃时长
+      */
+    MaxRingDuration: number;
+    /**
+      * 平均振铃时长
+      */
+    AvgRingDuration: number;
+    /**
+      * 最大接通时长
+      */
+    MaxAcceptDuration: number;
+    /**
+      * 平均接通时长
+      */
+    AvgAcceptDuration: number;
 }
 /**
  * DescribeCCCBuyInfoList请求参数结构体
@@ -548,6 +565,23 @@ export interface DeleteStaffResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 批量添加客服时，返回出错客服的像个信息
+ */
+export interface ErrStaffItem {
+    /**
+      * 坐席邮箱地址
+      */
+    StaffEmail: string;
+    /**
+      * 错误码
+      */
+    Code: string;
+    /**
+      * 错误描述
+      */
+    Message: string;
 }
 /**
  * 坐席状态补充信息
@@ -677,7 +711,20 @@ export interface DescribePSTNActiveSessionListResponse {
     RequestId?: string;
 }
 /**
- * 全媒体服务记录信息
+ * CreateCallOutSession返回参数结构体
+ */
+export interface CreateCallOutSessionResponse {
+    /**
+      * 新创建的会话 ID
+      */
+    SessionId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 文本会话服务记录信息
  */
 export interface IMCdrInfo {
     /**
@@ -690,6 +737,14 @@ export interface IMCdrInfo {
     Duration: number;
     /**
       * 结束状态
+0 异常结束
+1 正常结束
+3 无坐席在线
+17 坐席放弃接听
+100 黑名单
+101 坐席手动转接
+102 IVR阶段放弃
+108 用户超时自动结束
       */
     EndStatus: number;
     /**
@@ -708,6 +763,21 @@ export interface IMCdrInfo {
       * 服务时间戳
       */
     Timestamp: number;
+    /**
+      * 会话ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessionId: string;
+    /**
+      * 技能组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupId: string;
+    /**
+      * 技能组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SkillGroupName: string;
 }
 /**
  * 坐席购买信息
@@ -727,21 +797,21 @@ export interface StaffBuyInfo {
     EndTime: number;
 }
 /**
- * 批量添加客服时，返回出错客服的像个信息
+ * DescribeAutoCalloutTasks请求参数结构体
  */
-export interface ErrStaffItem {
+export interface DescribeAutoCalloutTasksRequest {
     /**
-      * 坐席邮箱地址
+      * 呼叫中心实例Id
       */
-    StaffEmail: string;
+    SdkAppId: number;
     /**
-      * 错误码
+      * 分页大小
       */
-    Code: string;
+    PageSize: number;
     /**
-      * 错误描述
+      * 页数
       */
-    Message: string;
+    PageNumber: number;
 }
 /**
  * DescribeChatMessages请求参数结构体
@@ -884,41 +954,38 @@ export interface DescribeStaffInfoListRequest {
     ModifiedTime?: number;
 }
 /**
- * 技能组信息
+ * 自动外呼任务列表项
  */
-export interface SkillGroupInfoItem {
+export interface AutoCalloutTaskInfo {
     /**
-      * 技能组ID
+      * 任务名
       */
-    SkillGroupId: number;
+    Name: string;
     /**
-      * 技能组名称
+      * 被叫数量
       */
-    SkillGroupName: string;
+    CalleeCount: number;
     /**
-      * 类型：IM、TEL、ALL（全媒体）
+      * 主叫号码列表
       */
-    Type: string;
+    Callers: Array<string>;
     /**
-      * 会话分配策略
+      * 起始时间戳
+      */
+    NotBefore: number;
+    /**
+      * 结束时间戳
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RoutePolicy: string;
+    NotAfter: number;
     /**
-      * 会话分配是否优先上次服务坐席
-注意：此字段可能返回 null，表示取不到有效值。
+      * 任务使用的IvrId
       */
-    UsingLastSeat: number;
+    IvrId: number;
     /**
-      * 单客服最大并发数（电话类型默认1）
-注意：此字段可能返回 null，表示取不到有效值。
+      * 任务状态0初始 1运行中 2已完成 3结束中 4已结束
       */
-    MaxConcurrency: number;
-    /**
-      * 最后修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastModifyTimestamp: number;
+    State: number;
 }
 /**
  * 带有技能组优先级的坐席信息
@@ -1132,21 +1199,62 @@ export interface DescribeStaffStatusMetricsResponse {
     RequestId?: string;
 }
 /**
- * 呼入技能组相关指标
+ * DescribeTelCallInfo返回参数结构体
  */
-export interface CallInSkillGroupMetrics {
+export interface DescribeTelCallInfoResponse {
+    /**
+      * 电话呼出统计分钟数
+      */
+    TelCallOutCount?: number;
+    /**
+      * 电话呼入统计分钟数
+      */
+    TelCallInCount?: number;
+    /**
+      * 坐席使用统计个数
+      */
+    SeatUsedCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 技能组信息
+ */
+export interface SkillGroupInfoItem {
     /**
       * 技能组ID
       */
     SkillGroupId: number;
     /**
-      * 数据指标
-      */
-    Metrics: CallInMetrics;
-    /**
       * 技能组名称
       */
-    Name: string;
+    SkillGroupName: string;
+    /**
+      * 类型：IM、TEL、ALL（全媒体）
+      */
+    Type: string;
+    /**
+      * 会话分配策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RoutePolicy: string;
+    /**
+      * 会话分配是否优先上次服务坐席
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsingLastSeat: number;
+    /**
+      * 单客服最大并发数（电话类型默认1）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxConcurrency: number;
+    /**
+      * 最后修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastModifyTimestamp: number;
 }
 /**
  * DescribeSeatUserList返回参数结构体
@@ -1183,25 +1291,33 @@ export interface DescribeSeatUserListRequest {
     Limit: number;
 }
 /**
- * DescribeTelCallInfo返回参数结构体
+ * CreateCallOutSession请求参数结构体
  */
-export interface DescribeTelCallInfoResponse {
+export interface CreateCallOutSessionRequest {
     /**
-      * 电话呼出统计分钟数
+      * 应用 ID
       */
-    TelCallOutCount?: number;
+    SdkAppId: number;
     /**
-      * 电话呼入统计分钟数
+      * 客服用户 ID，一般为客服邮箱
       */
-    TelCallInCount?: number;
+    UserId: string;
     /**
-      * 坐席使用统计个数
+      * 被叫号码，须带 0086 前缀
       */
-    SeatUsedCount?: number;
+    Callee: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 主叫号码，须带 0086 前缀
       */
-    RequestId?: string;
+    Caller?: string;
+    /**
+      * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单
+      */
+    IsForceUseMobile?: boolean;
+    /**
+      * 自定义数据，长度限制 1024 字节
+      */
+    Uui?: string;
 }
 /**
  * 坐席状态相关信息
@@ -1260,6 +1376,23 @@ export interface StaffStatusMetrics {
  * BindStaffSkillGroupList返回参数结构体
  */
 export interface BindStaffSkillGroupListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAutoCalloutTasks返回参数结构体
+ */
+export interface DescribeAutoCalloutTasksResponse {
+    /**
+      * 总数
+      */
+    TotalCount: number;
+    /**
+      * 任务列表
+      */
+    Tasks: Array<AutoCalloutTaskInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

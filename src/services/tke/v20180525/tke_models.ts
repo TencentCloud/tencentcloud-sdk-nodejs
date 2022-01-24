@@ -516,6 +516,16 @@ export interface DescribeClusterCommonNamesRequest {
 }
 
 /**
+ * 描述了 “云自动化助手” 服务相关的信息
+ */
+export interface RunAutomationServiceEnabled {
+  /**
+   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+   */
+  Enabled?: boolean
+}
+
+/**
  * EKS Instance Nfs Volume
  */
 export interface NfsVolume {
@@ -2510,6 +2520,16 @@ export interface DeleteEKSClusterResponse {
 }
 
 /**
+ * DescribeClusterStatus请求参数结构体
+ */
+export interface DescribeClusterStatusRequest {
+  /**
+   * 集群ID列表，不传默认拉取所有集群
+   */
+  ClusterIds?: Array<string>
+}
+
+/**
  * 版本信息
  */
 export interface VersionInstance {
@@ -2554,18 +2574,18 @@ export interface PrometheusConfigItem {
 }
 
 /**
- * DescribePrometheusTemplates返回参数结构体
+ * DescribeClusterStatus返回参数结构体
  */
-export interface DescribePrometheusTemplatesResponse {
+export interface DescribeClusterStatusResponse {
   /**
-   * 模板列表
+   * 集群状态列表
    */
-  Templates?: Array<PrometheusTemplate>
+  ClusterStatusSet: Array<ClusterStatus>
 
   /**
-   * 总数
+   * 集群个数
    */
-  Total?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4353,6 +4373,26 @@ export interface DeleteClusterAsGroupsResponse {
 }
 
 /**
+ * DescribePrometheusTemplates返回参数结构体
+ */
+export interface DescribePrometheusTemplatesResponse {
+  /**
+   * 模板列表
+   */
+  Templates?: Array<PrometheusTemplate>
+
+  /**
+   * 总数
+   */
+  Total?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePrometheusInstance请求参数结构体
  */
 export interface DescribePrometheusInstanceRequest {
@@ -5312,13 +5352,67 @@ export interface DescribeClusterEndpointStatusResponse {
 }
 
 /**
- * 描述了 “云自动化助手” 服务相关的信息
+ * 集群状态信息
  */
-export interface RunAutomationServiceEnabled {
+export interface ClusterStatus {
   /**
-   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+   * 集群Id
    */
-  Enabled?: boolean
+  ClusterId: string
+
+  /**
+   * 集群状态
+   */
+  ClusterState: string
+
+  /**
+   * 集群下机器实例的状态
+   */
+  ClusterInstanceState: string
+
+  /**
+   * 集群是否开启监控
+   */
+  ClusterBMonitor: boolean
+
+  /**
+   * 集群创建中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+   */
+  ClusterInitNodeNum: number
+
+  /**
+   * 集群运行中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+   */
+  ClusterRunningNodeNum: number
+
+  /**
+   * 集群异常的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+   */
+  ClusterFailedNodeNum: number
+
+  /**
+      * 集群已关机的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterClosedNodeNum: number
+
+  /**
+      * 集群关机中的节点数，-1表示获取节点状态超时，-2表示获取节点状态失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterClosingNodeNum: number
+
+  /**
+      * 集群是否开启删除保护
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterDeletionProtection: boolean
+
+  /**
+      * 集群是否可审计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterAuditEnabled: boolean
 }
 
 /**

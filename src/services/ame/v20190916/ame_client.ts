@@ -66,6 +66,7 @@ import {
   KTVRobotInfo,
   DescribeItemsRequest,
   Item,
+  SetPlayModeCommandInput,
   SetPlaylistCommandInput,
   SyncKTVRobotCommandResponse,
   DescribeCloudMusicResponse,

@@ -1620,7 +1620,7 @@ export interface GetSnapOverviewResponse {
     RequestId?: string;
 }
 /**
- * 自动初始化、挂载云盘时指定配置。
+ * 描述了新购云硬盘时自动将云硬盘初始化并挂载至云服务器内部的配置。
  */
 export interface AutoMountConfiguration {
     /**

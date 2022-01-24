@@ -23,21 +23,23 @@ import {
   IVRKeyPressedElement,
   CreateSDKLoginTokenResponse,
   DescribeCallInMetricsResponse,
-  CallInMetrics,
+  CallInSkillGroupMetrics,
   DescribeStaffInfoListResponse,
   CreateStaffResponse,
   TelCdrInfo,
   CreateUserSigRequest,
   PhoneNumBuyInfo,
   UnbindStaffSkillGroupListRequest,
+  DescribeIMCdrsRequest,
   DescribeStaffStatusMetricsRequest,
   SkillGroupItem,
   CreateUserSigResponse,
   DeleteStaffRequest,
   DescribeTelSessionRequest,
-  DescribeIMCdrsRequest,
+  CallInMetrics,
   DescribeCCCBuyInfoListRequest,
   DeleteStaffResponse,
+  ErrStaffItem,
   StaffStatusExtra,
   DescribeSkillGroupInfoListRequest,
   CreateStaffRequest,
@@ -45,25 +47,28 @@ import {
   SdkAppIdBuyInfo,
   CallInNumberMetrics,
   DescribePSTNActiveSessionListResponse,
+  CreateCallOutSessionResponse,
   IMCdrInfo,
   StaffBuyInfo,
-  ErrStaffItem,
+  DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
   PSTNSession,
   DescribeTelSessionResponse,
   DescribeStaffInfoListRequest,
-  SkillGroupInfoItem,
+  AutoCalloutTaskInfo,
   StaffInfo,
   PSTNSessionInfo,
   ServeParticipant,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsResponse,
-  CallInSkillGroupMetrics,
+  DescribeTelCallInfoResponse,
+  SkillGroupInfoItem,
   DescribeSeatUserListResponse,
   DescribeSeatUserListRequest,
-  DescribeTelCallInfoResponse,
+  CreateCallOutSessionRequest,
   StaffStatusMetrics,
   BindStaffSkillGroupListResponse,
+  DescribeAutoCalloutTasksResponse,
   PackageBuyInfo,
   DescribeTelCdrRequest,
   MessageBody,
@@ -158,6 +163,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量查询自动任务外呼
+   */
+  async DescribeAutoCalloutTasks(
+    req: DescribeAutoCalloutTasksRequest,
+    cb?: (error: string, rep: DescribeAutoCalloutTasksResponse) => void
+  ): Promise<DescribeAutoCalloutTasksResponse> {
+    return this.request("DescribeAutoCalloutTasks", req, cb)
+  }
+
+  /**
    * 获取用户购买信息列表
    */
   async DescribeCCCBuyInfoList(
@@ -217,6 +232,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSeatUserListResponse) => void
   ): Promise<DescribeSeatUserListResponse> {
     return this.request("DescribeSeatUserList", req, cb)
+  }
+
+  /**
+   * 创建外呼会话
+   */
+  async CreateCallOutSession(
+    req: CreateCallOutSessionRequest,
+    cb?: (error: string, rep: CreateCallOutSessionResponse) => void
+  ): Promise<CreateCallOutSessionResponse> {
+    return this.request("CreateCallOutSession", req, cb)
   }
 
   /**

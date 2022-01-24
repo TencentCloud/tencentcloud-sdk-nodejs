@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSkillGroupInfoList", req, cb);
     }
     /**
+     * 批量查询自动任务外呼
+     */
+    async DescribeAutoCalloutTasks(req, cb) {
+        return this.request("DescribeAutoCalloutTasks", req, cb);
+    }
+    /**
      * 获取用户购买信息列表
      */
     async DescribeCCCBuyInfoList(req, cb) {
@@ -106,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSeatUserList(req, cb) {
         return this.request("DescribeSeatUserList", req, cb);
+    }
+    /**
+     * 创建外呼会话
+     */
+    async CreateCallOutSession(req, cb) {
+        return this.request("CreateCallOutSession", req, cb);
     }
     /**
      * 获取当前正在通话的会话列表

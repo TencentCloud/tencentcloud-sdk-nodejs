@@ -618,49 +618,63 @@ vpc-id：按照VPCID过滤，local-gateway-name：按照本地网关名称过滤
  */
 export interface FlowLog {
     /**
-      * 私用网络ID或者统一ID，建议使用统一ID
+      * 私用网络ID或者统一ID，建议使用统一ID。
       */
     VpcId?: string;
     /**
-      * 流日志唯一ID
+      * 流日志唯一ID。
       */
     FlowLogId?: string;
     /**
-      * 流日志实例名字
+      * 流日志实例名字。
       */
     FlowLogName?: string;
     /**
-      * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN
+      * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN。
       */
     ResourceType?: string;
     /**
-      * 资源唯一ID
+      * 资源唯一ID。
       */
     ResourceId?: string;
     /**
-      * 流日志采集类型，ACCEPT|REJECT|ALL
+      * 流日志采集类型，ACCEPT|REJECT|ALL。
       */
     TrafficType?: string;
     /**
-      * 流日志存储ID
+      * 流日志存储ID。
       */
     CloudLogId?: string;
     /**
-      * 流日志存储ID状态
+      * 流日志存储ID状态。
       */
     CloudLogState?: string;
     /**
-      * 流日志描述信息
+      * 流日志描述信息。
       */
     FlowLogDescription?: string;
     /**
-      * 流日志创建时间
+      * 流日志创建时间。
       */
     CreatedTime?: string;
     /**
-      * 标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+      * 标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
       */
     TagSet: Array<Tag>;
+    /**
+      * 是否启用，true-启用，false-停用。
+      */
+    Enable: boolean;
+    /**
+      * 消费端类型：cls、ckafka。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageType: string;
+    /**
+      * 消费端信息，当消费端类型为ckafka时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowLogStorage: FlowLogStorage;
 }
 /**
  * DescribeVpcLimits返回参数结构体
@@ -3382,29 +3396,18 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse 
     RequestId?: string;
 }
 /**
- * 描述网络中心每个产品的配额信息
+ * 流日志存储信息
  */
-export interface ProductQuota {
+export interface FlowLogStorage {
     /**
-      * 产品配额ID
+      * 存储实例Id，当流日志存储类型为ckafka时，必填。
       */
-    QuotaId: string;
+    StorageId: string;
     /**
-      * 产品配额名称
+      * 主题Id，当流日志存储类型为ckafka时，必填。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    QuotaName: string;
-    /**
-      * 产品当前配额
-      */
-    QuotaCurrent: number;
-    /**
-      * 产品配额上限
-      */
-    QuotaLimit: number;
-    /**
-      * 产品配额是否有地域属性
-      */
-    QuotaRegion: boolean;
+    StorageTopic?: string;
 }
 /**
  * DescribeVpcIpv6Addresses返回参数结构体
@@ -6134,11 +6137,11 @@ export interface DescribeFlowLogsResponse {
     /**
       * 流日志实例集合
       */
-    FlowLog?: Array<FlowLog>;
+    FlowLog: Array<FlowLog>;
     /**
       * 流日志总数目
       */
-    TotalNum?: number;
+    TotalNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7493,10 +7496,6 @@ export interface CreateFlowLogRequest {
       */
     TrafficType: string;
     /**
-      * 流日志存储ID
-      */
-    CloudLogId: string;
-    /**
       * 私用网络ID或者统一ID，建议使用统一ID，当ResourceType为CCN时不填，其他类型必填。
       */
     VpcId?: string;
@@ -7505,9 +7504,21 @@ export interface CreateFlowLogRequest {
       */
     FlowLogDescription?: string;
     /**
+      * 流日志存储ID
+      */
+    CloudLogId?: string;
+    /**
       * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
       */
     Tags?: Array<Tag>;
+    /**
+      * 消费端类型：cls、ckafka
+      */
+    StorageType?: string;
+    /**
+      * 流日志消费端信息，当消费端类型为ckafka时，必填。
+      */
+    FlowLogStorage?: FlowLogStorage;
 }
 /**
  * InquirePriceCreateDirectConnectGateway请求参数结构体
@@ -7817,6 +7828,31 @@ export interface RenewAddressesRequest {
       * 续费参数
       */
     AddressChargePrepaid: AddressChargePrepaid;
+}
+/**
+ * 描述网络中心每个产品的配额信息
+ */
+export interface ProductQuota {
+    /**
+      * 产品配额ID
+      */
+    QuotaId: string;
+    /**
+      * 产品配额名称
+      */
+    QuotaName: string;
+    /**
+      * 产品当前配额
+      */
+    QuotaCurrent: number;
+    /**
+      * 产品配额上限
+      */
+    QuotaLimit: number;
+    /**
+      * 产品配额是否有地域属性
+      */
+    QuotaRegion: boolean;
 }
 /**
  * DisableRoutes返回参数结构体
