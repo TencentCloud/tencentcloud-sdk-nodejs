@@ -308,6 +308,11 @@ export interface CreateJobConfigRequest {
    * CLS日志主题ID
    */
   ClsTopicId?: string
+
+  /**
+   * 日志采集类型 2：CLS；3：COS
+   */
+  LogCollectType?: number
 }
 
 /**

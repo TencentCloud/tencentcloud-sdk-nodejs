@@ -3650,7 +3650,7 @@ export interface PushDataInfo {
   VideoFps: number
 
   /**
-   * 推流视频码率，单位: Kbps。
+   * 推流视频码率，单位: bps。
    */
   VideoSpeed: number
 
@@ -3660,7 +3660,7 @@ export interface PushDataInfo {
   AudioFps: number
 
   /**
-   * 推流音频码率，单位: Kbps。
+   * 推流音频码率，单位: bps。
    */
   AudioSpeed: number
 
@@ -3697,12 +3697,12 @@ export interface PushDataInfo {
   AsampleRate: number
 
   /**
-   * metadata 中的音频码率，单位: Kbps。
+   * metadata 中的音频码率，单位: bps。
    */
   MetaAudioSpeed: number
 
   /**
-   * metadata 中的视频码率，单位: Kbps。
+   * metadata 中的视频码率，单位: bps。
    */
   MetaVideoSpeed: number
 
