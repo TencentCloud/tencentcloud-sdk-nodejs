@@ -117,6 +117,21 @@ export interface DescribeSnapshotOperationLogsRequest {
 }
 
 /**
+ * CopySnapshotCrossRegions返回参数结构体
+ */
+export interface CopySnapshotCrossRegionsResponse {
+  /**
+   * 快照跨地域复制的结果，如果请求下发成功，则返回相应地地域的新快照ID，否则返回Error。
+   */
+  SnapshotCopyResultSet: Array<SnapshotCopyResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAutoSnapshotPolicyAttribute返回参数结构体
  */
 export interface ModifyAutoSnapshotPolicyAttributeResponse {
@@ -295,6 +310,31 @@ PROCESSING :表示操作中。
    * 结束时间。
    */
   EndTime: string
+}
+
+/**
+ * 描述快照跨地域复制的结果。
+ */
+export interface SnapshotCopyResult {
+  /**
+   * 复制到目标地域的新快照ID。
+   */
+  SnapshotId: string
+
+  /**
+   * 指示具体错误信息，成功时为空字符串。
+   */
+  Message: string
+
+  /**
+   * 错误码，成功时取值为“Success”。
+   */
+  Code: string
+
+  /**
+   * 跨地复制的目标地域。
+   */
+  DestinationRegion: string
 }
 
 /**
@@ -855,6 +895,26 @@ export interface DescribeSnapshotSharePermissionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CopySnapshotCrossRegions请求参数结构体
+ */
+export interface CopySnapshotCrossRegionsRequest {
+  /**
+   * 快照需要复制到的目标地域，各地域的标准取值可通过接口[DescribeRegions](https://cloud.tencent.com/document/product/213/9456)查询，且只能传入支持快照的地域。
+   */
+  DestinationRegions: Array<string>
+
+  /**
+   * 需要跨地域复制的源快照ID，可通过[DescribeSnapshots](/document/product/362/15647)查询。
+   */
+  SnapshotId?: string
+
+  /**
+   * 新复制快照的名称，如果不传，则默认取值为“Copied 源快照ID from 地域名”。
+   */
+  SnapshotName?: string
 }
 
 /**

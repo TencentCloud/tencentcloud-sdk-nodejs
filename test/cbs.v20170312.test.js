@@ -38,6 +38,16 @@ it("cbs.v20170312.RenewDisk", async function () {
     }
 })
 
+it("cbs.v20170312.CopySnapshotCrossRegions", async function () {
+    try {
+       const data = await client.CopySnapshotCrossRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.DescribeInstancesDiskNum", async function () {
     try {
        const data = await client.DescribeInstancesDiskNum({})

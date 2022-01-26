@@ -42,7 +42,7 @@ export interface BatchSendEmailRequest {
   TaskType: number
 
   /**
-   * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人将会回复到腾讯云（暂未支持）
+   * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人将会回复到腾讯云
    */
   ReplyToAddresses?: string
 

@@ -57,6 +57,7 @@ import {
   DescribeItemByIdRequest,
   DescribeAuthInfoRequest,
   DescribeKTVPlaylistsResponse,
+  TimeRange,
   Music,
   Artist,
   DescribeStationsRequest,

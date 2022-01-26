@@ -18,40 +18,72 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  L1Tag,
   DeleteMediaResponse,
   ShowInfo,
   MultiLevelTag,
-  DescribeTasksRequest,
+  MediaFilter,
+  AddCustomPersonImageRequest,
+  UpdateCustomPersonRequest,
+  DeleteCustomPersonResponse,
   L2Tag,
+  DescribeCustomPersonsResponse,
+  DescribeCustomCategoriesRequest,
   ImportMediaRequest,
+  CreateCustomCategoryRequest,
+  DescribeMediaRequest,
   DescribeMediasRequest,
   VideoAppearInfo,
-  TextInfo,
   DescribeTaskResponse,
+  CreateDefaultCategoriesResponse,
   AppearIndexPair,
-  DescribeTaskDetailResponse,
   CreateTaskResponse,
-  DescribeTaskDetailRequest,
+  DeleteCustomCategoryRequest,
+  DescribeTasksRequest,
+  DescribeTaskDetailResponse,
+  PersonImageInfo,
+  CreateCustomGroupRequest,
+  AddCustomPersonImageResponse,
+  CreateDefaultCategoriesRequest,
   TaskFilter,
   TextAppearInfo,
   DescribeMediaResponse,
+  CustomCategory,
   Data,
   DescribeTaskRequest,
-  L1Tag,
+  DescribeCustomPersonDetailRequest,
+  CustomPersonInfo,
+  UpdateCustomPersonResponse,
+  DescribeCustomGroupResponse,
+  DescribeCustomPersonsRequest,
   DescribeTasksResponse,
+  TextInfo,
   AudioInfo,
+  CustomPersonFilter,
   CreateTaskRequest,
   L3Tag,
-  MediaFilter,
+  UpdateCustomCategoryRequest,
+  DescribeCustomPersonDetailResponse,
+  DeleteCustomPersonImageResponse,
   MediaPreknownInfo,
+  DescribeCustomCategoriesResponse,
+  CreateCustomCategoryResponse,
+  CreateCustomPersonResponse,
   AppearInfo,
+  DescribeCustomGroupRequest,
+  UpdateCustomCategoryResponse,
   DeleteMediaRequest,
+  CreateCustomGroupResponse,
   ImportMediaResponse,
+  DescribeTaskDetailRequest,
   DescribeMediasResponse,
   MediaInfo,
   SortBy,
   MediaMetadata,
-  DescribeMediaRequest,
+  DeleteCustomPersonRequest,
+  DeleteCustomCategoryResponse,
+  DeleteCustomPersonImageRequest,
+  CreateCustomPersonRequest,
   TaskInfo,
 } from "./ivld_models"
 
@@ -95,29 +127,73 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 依照输入条件，描述命中的媒资文件信息，包括媒资状态，分辨率，帧率等。
+     * 创建自定义人物。
 
-请注意，本接口最多支持同时描述**50**个媒资文件
+输入人物名称，基本信息，分类信息与人脸图片，创建自定义人物
 
-如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+人脸图片可使用图片数据(base64编码的图片数据)或者图片URL(推荐使用COS以减少下载时间，其他地址也支持)，原始图片优先，也即如果同时指定了图片数据和图片URL，接口将仅使用图片数据
+
      */
-  async DescribeMedias(
-    req: DescribeMediasRequest,
-    cb?: (error: string, rep: DescribeMediasResponse) => void
-  ): Promise<DescribeMediasResponse> {
-    return this.request("DescribeMedias", req, cb)
+  async CreateCustomPerson(
+    req: CreateCustomPersonRequest,
+    cb?: (error: string, rep: CreateCustomPersonResponse) => void
+  ): Promise<CreateCustomPersonResponse> {
+    return this.request("CreateCustomPerson", req, cb)
   }
 
   /**
-     * 描述媒资文件信息，包括媒资状态，分辨率，帧率等。
+   * 删除自定义人脸数据
+   */
+  async DeleteCustomPersonImage(
+    req: DeleteCustomPersonImageRequest,
+    cb?: (error: string, rep: DeleteCustomPersonImageResponse) => void
+  ): Promise<DeleteCustomPersonImageResponse> {
+    return this.request("DeleteCustomPersonImage", req, cb)
+  }
 
-如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+  /**
+     * 更新自定义人物分类
+
+当L2Category为空时，代表更新CategoryId对应的一级自定义人物类型以及所有二级自定义人物类型所从属的一级自定义人物类型；
+当L2Category非空时，仅更新CategoryId对应的二级自定义人物类型
      */
-  async DescribeMedia(
-    req: DescribeMediaRequest,
-    cb?: (error: string, rep: DescribeMediaResponse) => void
-  ): Promise<DescribeMediaResponse> {
-    return this.request("DescribeMedia", req, cb)
+  async UpdateCustomCategory(
+    req: UpdateCustomCategoryRequest,
+    cb?: (error: string, rep: UpdateCustomCategoryResponse) => void
+  ): Promise<UpdateCustomCategoryResponse> {
+    return this.request("UpdateCustomCategory", req, cb)
+  }
+
+  /**
+   * 更新自定义人物信息，包括姓名，简要信息，分类信息等
+   */
+  async UpdateCustomPerson(
+    req: UpdateCustomPersonRequest,
+    cb?: (error: string, rep: UpdateCustomPersonResponse) => void
+  ): Promise<UpdateCustomPersonResponse> {
+    return this.request("UpdateCustomPerson", req, cb)
+  }
+
+  /**
+   * 删除自定义分类信息
+   */
+  async DeleteCustomCategory(
+    req: DeleteCustomCategoryRequest,
+    cb?: (error: string, rep: DeleteCustomCategoryResponse) => void
+  ): Promise<DeleteCustomCategoryResponse> {
+    return this.request("DeleteCustomCategory", req, cb)
+  }
+
+  /**
+     * 增加自定义人脸图片，每个自定义人物最多可包含5张人脸图片
+
+请注意，与创建自定义人物一样，图片数据优先级优于图片URL优先级
+     */
+  async AddCustomPersonImage(
+    req: AddCustomPersonImageRequest,
+    cb?: (error: string, rep: AddCustomPersonImageResponse) => void
+  ): Promise<AddCustomPersonImageResponse> {
+    return this.request("AddCustomPersonImage", req, cb)
   }
 
   /**
@@ -128,6 +204,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskDetailResponse) => void
   ): Promise<DescribeTaskDetailResponse> {
     return this.request("DescribeTaskDetail", req, cb)
+  }
+
+  /**
+   * 创建默认自定义人物类型
+   */
+  async CreateDefaultCategories(
+    req?: CreateDefaultCategoriesRequest,
+    cb?: (error: string, rep: CreateDefaultCategoriesResponse) => void
+  ): Promise<CreateDefaultCategoriesResponse> {
+    return this.request("CreateDefaultCategories", req, cb)
   }
 
   /**
@@ -145,15 +231,60 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 依照输入条件，描述命中的任务信息，包括任务创建时间，处理时间信息等。
+   * 描述自定义人物详细信息，包括人物信息与人物信息
+   */
+  async DescribeCustomPersonDetail(
+    req: DescribeCustomPersonDetailRequest,
+    cb?: (error: string, rep: DescribeCustomPersonDetailResponse) => void
+  ): Promise<DescribeCustomPersonDetailResponse> {
+    return this.request("DescribeCustomPersonDetail", req, cb)
+  }
 
-请注意，本接口最多支持同时描述**50**个任务信息
+  /**
+     * 创建自定义人物分类信息
+
+当L2Category为空时，将创建一级自定义分类。
+当L1Category与L2Category均不为空时，将创建二级自定义分类。请注意，**只有当一级自定义分类存在时，才可创建二级自定义分类**。
      */
-  async DescribeTasks(
-    req: DescribeTasksRequest,
-    cb?: (error: string, rep: DescribeTasksResponse) => void
-  ): Promise<DescribeTasksResponse> {
-    return this.request("DescribeTasks", req, cb)
+  async CreateCustomCategory(
+    req: CreateCustomCategoryRequest,
+    cb?: (error: string, rep: CreateCustomCategoryResponse) => void
+  ): Promise<CreateCustomCategoryResponse> {
+    return this.request("CreateCustomCategory", req, cb)
+  }
+
+  /**
+     * 批量描述自定义人物
+
+
+     */
+  async DescribeCustomPersons(
+    req: DescribeCustomPersonsRequest,
+    cb?: (error: string, rep: DescribeCustomPersonsResponse) => void
+  ): Promise<DescribeCustomPersonsResponse> {
+    return this.request("DescribeCustomPersons", req, cb)
+  }
+
+  /**
+   * 删除自定义人物
+   */
+  async DeleteCustomPerson(
+    req: DeleteCustomPersonRequest,
+    cb?: (error: string, rep: DeleteCustomPersonResponse) => void
+  ): Promise<DeleteCustomPersonResponse> {
+    return this.request("DeleteCustomPerson", req, cb)
+  }
+
+  /**
+     * 描述媒资文件信息，包括媒资状态，分辨率，帧率等。
+
+如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+     */
+  async DescribeMedia(
+    req: DescribeMediaRequest,
+    cb?: (error: string, rep: DescribeMediaResponse) => void
+  ): Promise<DescribeMediaResponse> {
+    return this.request("DescribeMedia", req, cb)
   }
 
   /**
@@ -166,5 +297,72 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMediaResponse) => void
   ): Promise<DeleteMediaResponse> {
     return this.request("DeleteMedia", req, cb)
+  }
+
+  /**
+     * 依照输入条件，描述命中的任务信息，包括任务创建时间，处理时间信息等。
+
+请注意，本接口最多支持同时描述**50**个任务信息
+     */
+  async DescribeTasks(
+    req: DescribeTasksRequest,
+    cb?: (error: string, rep: DescribeTasksResponse) => void
+  ): Promise<DescribeTasksResponse> {
+    return this.request("DescribeTasks", req, cb)
+  }
+
+  /**
+     * 创建自定义人物库
+
+Bucket的格式参考为 `bucketName-123456.cos.ap-shanghai.myqcloud.com`
+
+在调用CreateCustomPerson和AddCustomPersonImage接口之前，请先确保本接口成功调用。当前每个用户只支持一个自定义人物库，一旦自定义人物库创建成功，后续接口调用均会返回人物库已存在错误。
+
+由于人脸图片对于自定义人物识别至关重要，因此自定义人物识别功能需要用户显式指定COS存储桶方可使用。具体来说，自定义人物识别功能接口(主要是CreateCustomPerson和AddCustomPersonImage)会在此COS桶下面新建IVLDCustomPersonImage目录，并在此目录下存储自定义人物图片数据以支持后续潜在的特征更新。
+
+请注意：本接口指定的COS桶仅用于**备份存储自定义人物图片**，CreateCustomPerson和AddCustomPersonImage接口入参URL可使用任意COS存储桶下的任意图片。
+
+**重要**：请务必确保本接口指定的COS存储桶存在(不要手动删除COS桶)。COS存储桶一旦指定，将不能修改。
+
+     */
+  async CreateCustomGroup(
+    req: CreateCustomGroupRequest,
+    cb?: (error: string, rep: CreateCustomGroupResponse) => void
+  ): Promise<CreateCustomGroupResponse> {
+    return this.request("CreateCustomGroup", req, cb)
+  }
+
+  /**
+   * 批量描述自定义人物分类信息
+   */
+  async DescribeCustomCategories(
+    req?: DescribeCustomCategoriesRequest,
+    cb?: (error: string, rep: DescribeCustomCategoriesResponse) => void
+  ): Promise<DescribeCustomCategoriesResponse> {
+    return this.request("DescribeCustomCategories", req, cb)
+  }
+
+  /**
+   * 描述自定义人物库信息，当前库大小(库中有多少人脸)，以及库中的存储桶
+   */
+  async DescribeCustomGroup(
+    req?: DescribeCustomGroupRequest,
+    cb?: (error: string, rep: DescribeCustomGroupResponse) => void
+  ): Promise<DescribeCustomGroupResponse> {
+    return this.request("DescribeCustomGroup", req, cb)
+  }
+
+  /**
+     * 依照输入条件，描述命中的媒资文件信息，包括媒资状态，分辨率，帧率等。
+
+请注意，本接口最多支持同时描述**50**个媒资文件
+
+如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+     */
+  async DescribeMedias(
+    req: DescribeMediasRequest,
+    cb?: (error: string, rep: DescribeMediasResponse) => void
+  ): Promise<DescribeMediasResponse> {
+    return this.request("DescribeMedias", req, cb)
   }
 }

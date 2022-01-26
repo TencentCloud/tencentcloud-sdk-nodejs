@@ -3211,6 +3211,7 @@ DIRECTCONNECT：专线网关；
 PEERCONNECTION：对等连接；
 NAT：NAT网关；
 NORMAL_CVM：普通云服务器；
+CCN：云联网网关；
       */
   NextHopType?: string
 
@@ -3221,6 +3222,7 @@ NORMAL_CVM：普通云服务器；
 下一跳类型为PEERCONNECTION，取值对等连接ID，形如：pcx-12345678；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
+下一跳类型为CCN，取值云联网ID，形如：ccn-44csczop；
       */
   NextHopDestination?: string
 
@@ -3238,13 +3240,13 @@ export interface DescribeNetDetectStatesResponse {
       * 符合条件的网络探测验证结果对象数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NetDetectStateSet?: Array<NetDetectState>
+  NetDetectStateSet: Array<NetDetectState>
 
   /**
       * 符合条件的网络探测验证结果对象数量。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

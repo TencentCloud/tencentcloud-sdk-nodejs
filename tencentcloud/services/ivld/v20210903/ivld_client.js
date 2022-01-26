@@ -50,28 +50,62 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImportMedia", req, cb);
     }
     /**
-     * 依照输入条件，描述命中的媒资文件信息，包括媒资状态，分辨率，帧率等。
+     * 创建自定义人物。
 
-请注意，本接口最多支持同时描述**50**个媒资文件
+输入人物名称，基本信息，分类信息与人脸图片，创建自定义人物
 
-如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+人脸图片可使用图片数据(base64编码的图片数据)或者图片URL(推荐使用COS以减少下载时间，其他地址也支持)，原始图片优先，也即如果同时指定了图片数据和图片URL，接口将仅使用图片数据
+
      */
-    async DescribeMedias(req, cb) {
-        return this.request("DescribeMedias", req, cb);
+    async CreateCustomPerson(req, cb) {
+        return this.request("CreateCustomPerson", req, cb);
     }
     /**
-     * 描述媒资文件信息，包括媒资状态，分辨率，帧率等。
-
-如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+     * 删除自定义人脸数据
      */
-    async DescribeMedia(req, cb) {
-        return this.request("DescribeMedia", req, cb);
+    async DeleteCustomPersonImage(req, cb) {
+        return this.request("DeleteCustomPersonImage", req, cb);
+    }
+    /**
+     * 更新自定义人物分类
+
+当L2Category为空时，代表更新CategoryId对应的一级自定义人物类型以及所有二级自定义人物类型所从属的一级自定义人物类型；
+当L2Category非空时，仅更新CategoryId对应的二级自定义人物类型
+     */
+    async UpdateCustomCategory(req, cb) {
+        return this.request("UpdateCustomCategory", req, cb);
+    }
+    /**
+     * 更新自定义人物信息，包括姓名，简要信息，分类信息等
+     */
+    async UpdateCustomPerson(req, cb) {
+        return this.request("UpdateCustomPerson", req, cb);
+    }
+    /**
+     * 删除自定义分类信息
+     */
+    async DeleteCustomCategory(req, cb) {
+        return this.request("DeleteCustomCategory", req, cb);
+    }
+    /**
+     * 增加自定义人脸图片，每个自定义人物最多可包含5张人脸图片
+
+请注意，与创建自定义人物一样，图片数据优先级优于图片URL优先级
+     */
+    async AddCustomPersonImage(req, cb) {
+        return this.request("AddCustomPersonImage", req, cb);
     }
     /**
      * 描述任务信息，如果任务成功完成，还将返回任务结果
      */
     async DescribeTaskDetail(req, cb) {
         return this.request("DescribeTaskDetail", req, cb);
+    }
+    /**
+     * 创建默认自定义人物类型
+     */
+    async CreateDefaultCategories(req, cb) {
+        return this.request("CreateDefaultCategories", req, cb);
     }
     /**
      * 描述智能标签任务进度。
@@ -84,12 +118,41 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTask", req, cb);
     }
     /**
-     * 依照输入条件，描述命中的任务信息，包括任务创建时间，处理时间信息等。
-
-请注意，本接口最多支持同时描述**50**个任务信息
+     * 描述自定义人物详细信息，包括人物信息与人物信息
      */
-    async DescribeTasks(req, cb) {
-        return this.request("DescribeTasks", req, cb);
+    async DescribeCustomPersonDetail(req, cb) {
+        return this.request("DescribeCustomPersonDetail", req, cb);
+    }
+    /**
+     * 创建自定义人物分类信息
+
+当L2Category为空时，将创建一级自定义分类。
+当L1Category与L2Category均不为空时，将创建二级自定义分类。请注意，**只有当一级自定义分类存在时，才可创建二级自定义分类**。
+     */
+    async CreateCustomCategory(req, cb) {
+        return this.request("CreateCustomCategory", req, cb);
+    }
+    /**
+     * 批量描述自定义人物
+
+
+     */
+    async DescribeCustomPersons(req, cb) {
+        return this.request("DescribeCustomPersons", req, cb);
+    }
+    /**
+     * 删除自定义人物
+     */
+    async DeleteCustomPerson(req, cb) {
+        return this.request("DeleteCustomPerson", req, cb);
+    }
+    /**
+     * 描述媒资文件信息，包括媒资状态，分辨率，帧率等。
+
+如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+     */
+    async DescribeMedia(req, cb) {
+        return this.request("DescribeMedia", req, cb);
     }
     /**
      * 将MediaId对应的媒资文件从系统中删除。
@@ -98,6 +161,53 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteMedia(req, cb) {
         return this.request("DeleteMedia", req, cb);
+    }
+    /**
+     * 依照输入条件，描述命中的任务信息，包括任务创建时间，处理时间信息等。
+
+请注意，本接口最多支持同时描述**50**个任务信息
+     */
+    async DescribeTasks(req, cb) {
+        return this.request("DescribeTasks", req, cb);
+    }
+    /**
+     * 创建自定义人物库
+
+Bucket的格式参考为 `bucketName-123456.cos.ap-shanghai.myqcloud.com`
+
+在调用CreateCustomPerson和AddCustomPersonImage接口之前，请先确保本接口成功调用。当前每个用户只支持一个自定义人物库，一旦自定义人物库创建成功，后续接口调用均会返回人物库已存在错误。
+
+由于人脸图片对于自定义人物识别至关重要，因此自定义人物识别功能需要用户显式指定COS存储桶方可使用。具体来说，自定义人物识别功能接口(主要是CreateCustomPerson和AddCustomPersonImage)会在此COS桶下面新建IVLDCustomPersonImage目录，并在此目录下存储自定义人物图片数据以支持后续潜在的特征更新。
+
+请注意：本接口指定的COS桶仅用于**备份存储自定义人物图片**，CreateCustomPerson和AddCustomPersonImage接口入参URL可使用任意COS存储桶下的任意图片。
+
+**重要**：请务必确保本接口指定的COS存储桶存在(不要手动删除COS桶)。COS存储桶一旦指定，将不能修改。
+
+     */
+    async CreateCustomGroup(req, cb) {
+        return this.request("CreateCustomGroup", req, cb);
+    }
+    /**
+     * 批量描述自定义人物分类信息
+     */
+    async DescribeCustomCategories(req, cb) {
+        return this.request("DescribeCustomCategories", req, cb);
+    }
+    /**
+     * 描述自定义人物库信息，当前库大小(库中有多少人脸)，以及库中的存储桶
+     */
+    async DescribeCustomGroup(req, cb) {
+        return this.request("DescribeCustomGroup", req, cb);
+    }
+    /**
+     * 依照输入条件，描述命中的媒资文件信息，包括媒资状态，分辨率，帧率等。
+
+请注意，本接口最多支持同时描述**50**个媒资文件
+
+如果媒资文件未完成导入，本接口将仅输出媒资文件的状态信息；导入完成后，本接口还将输出媒资文件的其他元信息。
+     */
+    async DescribeMedias(req, cb) {
+        return this.request("DescribeMedias", req, cb);
     }
 }
 exports.Client = Client;

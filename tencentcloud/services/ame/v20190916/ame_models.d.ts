@@ -738,6 +738,21 @@ export interface DescribeKTVPlaylistsResponse {
     RequestId?: string;
 }
 /**
+ * 时间范围
+ */
+export interface TimeRange {
+    /**
+      * <li>大于等于此时间（起始时间）。</li>
+<li>格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I" target="_blank">ISO 日期格式说明</a>。</li>
+      */
+    Before?: string;
+    /**
+      * <li>小于此时间（结束时间）。</li>
+<li>格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I" target="_blank">ISO 日期格式说明</a>。</li>
+      */
+    After?: string;
+}
+/**
  * 音乐详情
  */
 export interface Music {
@@ -1421,6 +1436,11 @@ export interface DescribeKTVRobotsRequest {
 <li>Destroy：销毁</li>
       */
     Statuses?: Array<string>;
+    /**
+      * 匹配创建时间在此时间段内的机器人。
+<li>包含所指定的头尾时间点。</li>
+      */
+    CreateTime?: TimeRange;
     /**
       * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
       */

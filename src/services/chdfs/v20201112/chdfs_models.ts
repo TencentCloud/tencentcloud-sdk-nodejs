@@ -429,7 +429,7 @@ export interface CreateMountPointResponse {
   /**
    * 挂载点
    */
-  MountPoint?: MountPoint
+  MountPoint: MountPoint
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -509,7 +509,7 @@ export interface DescribeResourceTagsResponse {
   /**
    * 资源标签列表
    */
-  Tags?: Array<Tag>
+  Tags: Array<Tag>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -524,7 +524,7 @@ export interface DescribeAccessGroupsResponse {
   /**
    * 权限组列表
    */
-  AccessGroups?: Array<AccessGroup>
+  AccessGroups: Array<AccessGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -721,7 +721,7 @@ export interface DescribeAccessRulesResponse {
   /**
    * 权限规则列表
    */
-  AccessRules?: Array<AccessRule>
+  AccessRules: Array<AccessRule>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -776,7 +776,7 @@ export interface DescribeRestoreTasksResponse {
   /**
    * 回热任务列表
    */
-  RestoreTasks?: Array<RestoreTask>
+  RestoreTasks: Array<RestoreTask>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -791,7 +791,7 @@ export interface DescribeLifeCycleRulesResponse {
   /**
    * 生命周期规则列表
    */
-  LifeCycleRules?: Array<LifeCycleRule>
+  LifeCycleRules: Array<LifeCycleRule>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -806,7 +806,7 @@ export interface CreateAccessGroupResponse {
   /**
    * 权限组
    */
-  AccessGroup?: AccessGroup
+  AccessGroup: AccessGroup
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -926,7 +926,7 @@ export interface DescribeAccessGroupResponse {
   /**
    * 权限组
    */
-  AccessGroup?: AccessGroup
+  AccessGroup: AccessGroup
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -976,7 +976,7 @@ export interface DescribeMountPointsResponse {
   /**
    * 挂载点列表
    */
-  MountPoints?: Array<MountPoint>
+  MountPoints: Array<MountPoint>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1111,7 +1111,7 @@ export interface DescribeMountPointResponse {
   /**
    * 挂载点
    */
-  MountPoint?: MountPoint
+  MountPoint: MountPoint
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

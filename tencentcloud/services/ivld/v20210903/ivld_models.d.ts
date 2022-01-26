@@ -1,4 +1,30 @@
 /**
+ * 一级标签信息
+
+请注意，一级标签信息可能不包含二级标签(此时L2TagSet为空)。在这种情况下，一级标签可直接包含出现信息。
+ */
+export interface L1Tag {
+    /**
+      * 一级标签名
+      */
+    Name: string;
+    /**
+      * 二级标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    L2TagSet: Array<L2Tag>;
+    /**
+      * 一级标签出现信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppearIndexPairSet: Array<AppearIndexPair>;
+    /**
+      * 一级标签首次出现信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstAppear: number;
+}
+/**
  * DeleteMedia返回参数结构体
  */
 export interface DeleteMediaResponse {
@@ -100,25 +126,77 @@ export interface MultiLevelTag {
     AppearInfo: AppearInfo;
 }
 /**
- * DescribeTasks请求参数结构体
+ * 媒资过滤条件
+
+
  */
-export interface DescribeTasksRequest {
+export interface MediaFilter {
     /**
-      * 分页序号，从1开始
+      * 媒资名称过滤条件
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    PageNumber?: number;
+    MediaNameSet?: Array<string>;
     /**
-      * 每个分页所包含的元素数量，最大为50
+      * 媒资状态数组，媒资状态可选值参见MediaInfo
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    PageSize?: number;
+    StatusSet?: Array<number>;
     /**
-      * 任务过滤条件，相关限制参见TaskFilter
+      * 媒资ID数组
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskFilter?: TaskFilter;
+    MediaIdSet?: Array<string>;
+}
+/**
+ * AddCustomPersonImage请求参数结构体
+ */
+export interface AddCustomPersonImageRequest {
     /**
-      * 返回结果排序信息，By字段只支持CreateTimeStamp
+      * 自定义人物Id
       */
-    SortBy?: SortBy;
+    PersonId: string;
+    /**
+      * 自定义人物图片地址
+      */
+    ImageURL?: string;
+    /**
+      * 图片数据base64之后的结果
+      */
+    Image?: string;
+}
+/**
+ * UpdateCustomPerson请求参数结构体
+ */
+export interface UpdateCustomPersonRequest {
+    /**
+      * 待更新的自定义人物Id
+      */
+    PersonId: string;
+    /**
+      * 更新后的自定义人物名称，如为空则不更新
+      */
+    Name?: string;
+    /**
+      * 更新后的自定义人物简介，如为空则不更新
+      */
+    BasicInfo?: string;
+    /**
+      * 更新后的分类信息，如为空则不更新
+      */
+    CategoryId?: string;
+}
+/**
+ * DeleteCustomPerson返回参数结构体
+ */
+export interface DeleteCustomPersonResponse {
+    /**
+      * 已删除的自定义人物Id
+      */
+    PersonId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 二级标签信息
@@ -148,6 +226,27 @@ export interface L2Tag {
     FirstAppear: number;
 }
 /**
+ * DescribeCustomPersons返回参数结构体
+ */
+export interface DescribeCustomPersonsResponse {
+    /**
+      * 满足过滤条件的自定义人物数量
+      */
+    TotalCount: number;
+    /**
+      * 自定义人物信息
+      */
+    PersonInfoSet: Array<CustomPersonInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCustomCategories请求参数结构体
+ */
+export declare type DescribeCustomCategoriesRequest = null;
+/**
  * ImportMedia请求参数结构体
  */
 export interface ImportMediaRequest {
@@ -163,6 +262,28 @@ export interface ImportMediaRequest {
       * 待分析视频的名称，指定后可支持筛选，最多100个中文字符
       */
     Name?: string;
+}
+/**
+ * CreateCustomCategory请求参数结构体
+ */
+export interface CreateCustomCategoryRequest {
+    /**
+      * 自定义一级类型
+      */
+    L1Category: string;
+    /**
+      * 自定义二级类型
+      */
+    L2Category: string;
+}
+/**
+ * DescribeMedia请求参数结构体
+ */
+export interface DescribeMediaRequest {
+    /**
+      * 导入媒资返回的媒资ID，最长32B
+      */
+    MediaId: string;
 }
 /**
  * DescribeMedias请求参数结构体
@@ -204,27 +325,6 @@ export interface VideoAppearInfo {
     ImageURL: string;
 }
 /**
- * 可视文本识别结果信息(OCR)
- */
-export interface TextInfo {
-    /**
-      * OCR提取的内容
-      */
-    Content: string;
-    /**
-      * OCR起始时间戳，从0开始
-      */
-    StartTimeStamp: number;
-    /**
-      * OCR结束时间戳，从0开始
-      */
-    EndTimeStamp: number;
-    /**
-      * OCR标签信息
-      */
-    Tag: string;
-}
-/**
  * DescribeTask返回参数结构体
  */
 export interface DescribeTaskResponse {
@@ -233,6 +333,15 @@ export interface DescribeTaskResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskInfo: TaskInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateDefaultCategories返回参数结构体
+ */
+export interface CreateDefaultCategoriesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -263,6 +372,49 @@ export interface AppearIndexPair {
     Index: number;
 }
 /**
+ * CreateTask返回参数结构体
+ */
+export interface CreateTaskResponse {
+    /**
+      * 智能标签视频分析任务ID
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteCustomCategory请求参数结构体
+ */
+export interface DeleteCustomCategoryRequest {
+    /**
+      * 自定义分类ID
+      */
+    CategoryId: string;
+}
+/**
+ * DescribeTasks请求参数结构体
+ */
+export interface DescribeTasksRequest {
+    /**
+      * 分页序号，从1开始
+      */
+    PageNumber?: number;
+    /**
+      * 每个分页所包含的元素数量，最大为50
+      */
+    PageSize?: number;
+    /**
+      * 任务过滤条件，相关限制参见TaskFilter
+      */
+    TaskFilter?: TaskFilter;
+    /**
+      * 返回结果排序信息，By字段只支持CreateTimeStamp
+      */
+    SortBy?: SortBy;
+}
+/**
  * DescribeTaskDetail返回参数结构体
  */
 export interface DescribeTaskDetailResponse {
@@ -280,27 +432,56 @@ export interface DescribeTaskDetailResponse {
     RequestId?: string;
 }
 /**
- * CreateTask返回参数结构体
+ * 自定义人物人脸图片信息
  */
-export interface CreateTaskResponse {
+export interface PersonImageInfo {
     /**
-      * 智能标签视频分析任务ID
+      * 人脸图片ID
       */
-    TaskId: string;
+    ImageId: string;
+    /**
+      * 自定义人脸图片的URL，存储在IVLDCustomPreson存储桶内
+      */
+    ImageURL: string;
+    /**
+      * 自定义人脸图片处理错误码
+      */
+    ErrorCode: string;
+    /**
+      * 自定义人脸图片处理错误信息
+      */
+    ErrorMsg: string;
+}
+/**
+ * CreateCustomGroup请求参数结构体
+ */
+export interface CreateCustomGroupRequest {
+    /**
+      * 人脸图片COS存储桶Host地址
+      */
+    Bucket: string;
+}
+/**
+ * AddCustomPersonImage返回参数结构体
+ */
+export interface AddCustomPersonImageResponse {
+    /**
+      * 自定义人物Id
+      */
+    PersonId: string;
+    /**
+      * 自定义人脸图片信息
+      */
+    ImageInfo: PersonImageInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * DescribeTaskDetail请求参数结构体
+ * CreateDefaultCategories请求参数结构体
  */
-export interface DescribeTaskDetailRequest {
-    /**
-      * 创建任务返回的TaskId
-      */
-    TaskId: string;
-}
+export declare type CreateDefaultCategoriesRequest = null;
 /**
  * 任务筛选条件结构体
  */
@@ -368,6 +549,23 @@ export interface DescribeMediaResponse {
     RequestId?: string;
 }
 /**
+ * 自定义分类信息
+ */
+export interface CustomCategory {
+    /**
+      * 自定义分类ID
+      */
+    CategoryId: string;
+    /**
+      * 一级自定义类型
+      */
+    L1Category: string;
+    /**
+      * 二级自定义类型
+      */
+    L2Category: string;
+}
+/**
  * 任务结果数据
  */
 export interface Data {
@@ -387,30 +585,89 @@ export interface DescribeTaskRequest {
     TaskId: string;
 }
 /**
- * 一级标签信息
-
-请注意，一级标签信息可能不包含二级标签(此时L2TagSet为空)。在这种情况下，一级标签可直接包含出现信息。
+ * DescribeCustomPersonDetail请求参数结构体
  */
-export interface L1Tag {
+export interface DescribeCustomPersonDetailRequest {
     /**
-      * 一级标签名
+      * 自定义人物Id
+      */
+    PersonId: string;
+}
+/**
+ * 自定义人物信息
+ */
+export interface CustomPersonInfo {
+    /**
+      * 自定义人物Id
+      */
+    PersonId: string;
+    /**
+      * 自定义人物姓名
       */
     Name: string;
     /**
-      * 二级标签数组
-注意：此字段可能返回 null，表示取不到有效值。
+      * 自定义人物简介信息
       */
-    L2TagSet: Array<L2Tag>;
+    BasicInfo: string;
     /**
-      * 一级标签出现信息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 一级自定义人物类型
       */
-    AppearIndexPairSet: Array<AppearIndexPair>;
+    L1Category: string;
     /**
-      * 一级标签首次出现信息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 二级自定义人物类型
       */
-    FirstAppear: number;
+    L2Category: string;
+}
+/**
+ * UpdateCustomPerson返回参数结构体
+ */
+export interface UpdateCustomPersonResponse {
+    /**
+      * 成功更新的自定义人物Id
+      */
+    PersonId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCustomGroup返回参数结构体
+ */
+export interface DescribeCustomGroupResponse {
+    /**
+      * 自定义人物库所包含的人物个数
+      */
+    GroupSize: number;
+    /**
+      * 自定义人物库图片后续所在的存储桶
+      */
+    Bucket: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCustomPersons请求参数结构体
+ */
+export interface DescribeCustomPersonsRequest {
+    /**
+      * 分页序号，从1开始
+      */
+    PageNumber: number;
+    /**
+      * 分页数据行数，最多50
+      */
+    PageSize: number;
+    /**
+      * 排序信息，默认倒序
+      */
+    SortBy?: SortBy;
+    /**
+      * 自定义人物过滤条件
+      */
+    Filter?: CustomPersonFilter;
 }
 /**
  * DescribeTasks返回参数结构体
@@ -429,6 +686,27 @@ export interface DescribeTasksResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 可视文本识别结果信息(OCR)
+ */
+export interface TextInfo {
+    /**
+      * OCR提取的内容
+      */
+    Content: string;
+    /**
+      * OCR起始时间戳，从0开始
+      */
+    StartTimeStamp: number;
+    /**
+      * OCR结束时间戳，从0开始
+      */
+    EndTimeStamp: number;
+    /**
+      * OCR标签信息
+      */
+    Tag: string;
 }
 /**
  * 音频识别结果信息
@@ -450,6 +728,27 @@ export interface AudioInfo {
       * ASR提取的音频标签
       */
     Tag: string;
+}
+/**
+ * 自定义人物批量查询过滤条件
+ */
+export interface CustomPersonFilter {
+    /**
+      * 待查询的人物姓名
+      */
+    Name: string;
+    /**
+      * 待过滤的自定义类型Id数组
+      */
+    CategoryIdSet: Array<string>;
+    /**
+      * 待过滤的自定义人物Id数组
+      */
+    PersonIdSet: Array<string>;
+    /**
+      * 一级自定义人物类型数组
+      */
+    L1CategorySet: Array<string>;
 }
 /**
  * CreateTask请求参数结构体
@@ -494,26 +793,56 @@ export interface L3Tag {
     FirstAppear: number;
 }
 /**
- * 媒资过滤条件
-
-
+ * UpdateCustomCategory请求参数结构体
  */
-export interface MediaFilter {
+export interface UpdateCustomCategoryRequest {
     /**
-      * 媒资名称过滤条件
+      * 自定义人物类型Id
+      */
+    CategoryId: string;
+    /**
+      * 一级自定义人物类型
+      */
+    L1Category: string;
+    /**
+      * 二级自定义人物类型
+      */
+    L2Category?: string;
+}
+/**
+ * DescribeCustomPersonDetail返回参数结构体
+ */
+export interface DescribeCustomPersonDetailResponse {
+    /**
+      * 自定义人物信息
+      */
+    PersonInfo: CustomPersonInfo;
+    /**
+      * 出现该自定义人物的所有分析人物Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MediaNameSet?: Array<string>;
+    TaskIdSet: Array<string>;
     /**
-      * 媒资状态数组，媒资状态可选值参见MediaInfo
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    StatusSet?: Array<number>;
+    RequestId?: string;
+}
+/**
+ * DeleteCustomPersonImage返回参数结构体
+ */
+export interface DeleteCustomPersonImageResponse {
     /**
-      * 媒资ID数组
-注意：此字段可能返回 null，表示取不到有效值。
+      * 自定义人物Id
       */
-    MediaIdSet?: Array<string>;
+    PersonId: string;
+    /**
+      * 已删除的人物图片Id
+      */
+    ImageId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 描述输入媒资的先验知识，例如文件类型(视频)，媒体类型(新闻/综艺等)
@@ -577,6 +906,49 @@ export interface MediaPreknownInfo {
     MediaLang?: number;
 }
 /**
+ * DescribeCustomCategories返回参数结构体
+ */
+export interface DescribeCustomCategoriesResponse {
+    /**
+      * 自定义人物类型数组
+      */
+    CategorySet: Array<CustomCategory>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCustomCategory返回参数结构体
+ */
+export interface CreateCustomCategoryResponse {
+    /**
+      * 自定义分类信息ID
+      */
+    CategoryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCustomPerson返回参数结构体
+ */
+export interface CreateCustomPersonResponse {
+    /**
+      * 自定义人物Id
+      */
+    PersonId: string;
+    /**
+      * 自定义人脸信息
+      */
+    ImageInfo: PersonImageInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 出现信息结构
 
 包含关键词在音频转文字(ASR)，图片转文字(OCR)以及视频结果中的出现信息
@@ -600,6 +972,23 @@ export interface AppearInfo {
     VideoAppearSet: Array<VideoAppearInfo>;
 }
 /**
+ * DescribeCustomGroup请求参数结构体
+ */
+export declare type DescribeCustomGroupRequest = null;
+/**
+ * UpdateCustomCategory返回参数结构体
+ */
+export interface UpdateCustomCategoryResponse {
+    /**
+      * 成功更新的自定义人物类型Id
+      */
+    CategoryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteMedia请求参数结构体
  */
 export interface DeleteMediaRequest {
@@ -607,6 +996,15 @@ export interface DeleteMediaRequest {
       * 媒资文件在系统中的ID
       */
     MediaId: string;
+}
+/**
+ * CreateCustomGroup返回参数结构体
+ */
+export interface CreateCustomGroupResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ImportMedia返回参数结构体
@@ -620,6 +1018,15 @@ export interface ImportMediaResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeTaskDetail请求参数结构体
+ */
+export interface DescribeTaskDetailRequest {
+    /**
+      * 创建任务返回的TaskId
+      */
+    TaskId: string;
 }
 /**
  * DescribeMedias返回参数结构体
@@ -751,13 +1158,64 @@ export interface MediaMetadata {
     BitRate: number;
 }
 /**
- * DescribeMedia请求参数结构体
+ * DeleteCustomPerson请求参数结构体
  */
-export interface DescribeMediaRequest {
+export interface DeleteCustomPersonRequest {
     /**
-      * 导入媒资返回的媒资ID，最长32B
+      * 待删除的自定义人物ID
       */
-    MediaId: string;
+    PersonId: string;
+}
+/**
+ * DeleteCustomCategory返回参数结构体
+ */
+export interface DeleteCustomCategoryResponse {
+    /**
+      * 123
+      */
+    CategoryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteCustomPersonImage请求参数结构体
+ */
+export interface DeleteCustomPersonImageRequest {
+    /**
+      * 自定义人物Id
+      */
+    PersonId: string;
+    /**
+      * 自定义人脸图片Id
+      */
+    ImageId: string;
+}
+/**
+ * CreateCustomPerson请求参数结构体
+ */
+export interface CreateCustomPersonRequest {
+    /**
+      * 自定义人物姓名
+      */
+    Name: string;
+    /**
+      * 自定义人物简要信息(仅用于标记，不支持检索)
+      */
+    BasicInfo: string;
+    /**
+      * 自定义分类ID，如不存在接口会报错
+      */
+    CategoryId: string;
+    /**
+      * 自定义人物图片URL，可支持任意地址，推荐使用COS
+      */
+    ImageURL?: string;
+    /**
+      * 原始图片base64编码后的数据
+      */
+    Image?: string;
 }
 /**
  * 任务信息

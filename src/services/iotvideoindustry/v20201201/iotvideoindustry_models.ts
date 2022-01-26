@@ -713,7 +713,7 @@ export interface DescribeDeviceEventRequest {
   DeviceId?: string
 
   /**
-   * 事件类型 1:注册 2:心跳 4:录制异常 5:播放异常 6:流中断
+   * 默认为全部 事件类型 1:注册 2:心跳 4:录制异常 5:播放异常 6:流中断
    */
   EventTypes?: Array<number>
 
@@ -738,12 +738,12 @@ export interface GetVideoListByConRequest {
   DeviceId: string
 
   /**
-   * 偏移量，默认0
+   * 偏移量
    */
   Offset: number
 
   /**
-   * 限制量，默认200
+   * 限制量
    */
   Limit: number
 
@@ -3128,12 +3128,12 @@ export interface DescribeXP2PDataRequest {
   P2PAppId: string
 
   /**
-   * 查询开始时间
+   * 查询开始时间，时间戳秒
    */
   From: number
 
   /**
-   * 查询结束时间
+   * 查询结束时间，时间戳秒
    */
   To: number
 

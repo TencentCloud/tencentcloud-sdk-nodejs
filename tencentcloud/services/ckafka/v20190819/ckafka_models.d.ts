@@ -2554,7 +2554,7 @@ export interface DescribeRouteResponse {
     /**
       * 返回的路由信息结果集
       */
-    Result?: RouteResponse;
+    Result: RouteResponse;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

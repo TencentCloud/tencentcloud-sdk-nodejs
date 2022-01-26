@@ -5417,20 +5417,39 @@ export interface CreateSuperPlayerConfigRequest {
       */
     Name: string;
     /**
+      * 播放的音视频类型，可选值：
+<li>AdaptiveDynamicStream：自适应码流输出；</li>
+<li>Transcode：转码输出；</li>
+<li>Original：原始音视频。</li>
+默认为 AdaptiveDynamicStream。
+      */
+    AudioVideoType?: string;
+    /**
       * 播放 DRM 保护的自适应码流开关：
 <li>ON：开启，表示仅播放 DRM  保护的自适应码流输出；</li>
 <li>OFF：关闭，表示播放未加密的自适应码流输出。</li>
 默认为 OFF。
+当 AudioVideoType 为 AdaptiveDynamicStream 时，此参数有效。
       */
     DrmSwitch?: string;
     /**
-      * 允许输出的未加密的自适应码流模板 ID，当 DrmSwitch 为 OFF 时必填。
+      * 允许输出的未加密的自适应码流模板 ID。
+
+当 AudioVideoType 为 AdaptiveDynamicStream 并且 DrmSwitch 为 OFF 时，此参数为必填。
       */
     AdaptiveDynamicStreamingDefinition?: number;
     /**
-      * 允许输出的 DRM 自适应码流模板内容，当 DrmSwitch 为 ON 时必填。
+      * 允许输出的 DRM 自适应码流模板内容。
+
+当 AudioVideoType 为 AdaptiveDynamicStream 并且 DrmSwitch 为 ON 时，此参数为必填。
       */
     DrmStreamingsInfo?: DrmStreamingsInfo;
+    /**
+      * 允许输出的转码模板 ID。
+
+当 AudioVideoType 为 Transcode 时必填。
+      */
+    TranscodeDefinition?: number;
     /**
       * 允许输出的雪碧图模板 ID。
       */
@@ -10690,6 +10709,13 @@ export interface ModifySuperPlayerConfigRequest {
       */
     Name: string;
     /**
+      * 播放的音视频类型，可选值：
+<li>AdaptiveDynamicStream：自适应码流输出；</li>
+<li>Transcode：转码输出；</li>
+<li>Original：原始音视频。</li>
+      */
+    AudioVideoType?: string;
+    /**
       * 播放 DRM 保护的自适应码流开关：
 <li>ON：开启，表示仅播放 DRM  保护的自适应码流输出；</li>
 <li>OFF：关闭，表示播放未加密的自适应码流输出。</li>
@@ -10703,6 +10729,10 @@ export interface ModifySuperPlayerConfigRequest {
       * 允许输出的 DRM 自适应码流模板内容。
       */
     DrmStreamingsInfo?: DrmStreamingsInfoForUpdate;
+    /**
+      * 允许输出的转码模板 ID。
+      */
+    TranscodeDefinition?: number;
     /**
       * 允许输出的雪碧图模板 ID。
       */
