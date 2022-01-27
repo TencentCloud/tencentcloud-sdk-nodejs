@@ -95,6 +95,30 @@
 
 
 
+## 云开发低码(lowcode) 版本：2021-01-08
+
+### 第 1 次发布
+
+发布时间：2022-01-27 10:15:18
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeDataSourceList](https://cloud.tencent.com/document/api/1301/68877)
+
+新增数据结构：
+
+* [DataSourceDetail](https://cloud.tencent.com/document/api/1301/68878#DataSourceDetail)
+* [DataSourceDetailItems](https://cloud.tencent.com/document/api/1301/68878#DataSourceDetailItems)
+* [DataSourceLinkApp](https://cloud.tencent.com/document/api/1301/68878#DataSourceLinkApp)
+* [DataSourceQueryOption](https://cloud.tencent.com/document/api/1301/68878#DataSourceQueryOption)
+* [TicketAuthInfo](https://cloud.tencent.com/document/api/1301/68878#TicketAuthInfo)
+
+
+
 # 历次版本更新如下：
 
 ## 活动防刷(aa) 版本：2020-02-24
@@ -40363,6 +40387,31 @@
 * [StreamInfo](https://cloud.tencent.com/document/api/267/20474#StreamInfo)
 * [StreamName](https://cloud.tencent.com/document/api/267/20474#StreamName)
 * [StreamOnlineInfo](https://cloud.tencent.com/document/api/267/20474#StreamOnlineInfo)
+
+
+
+
+## 云开发低码(lowcode) 版本：2021-01-08
+
+### 第 1 次发布
+
+发布时间：2022-01-27 10:15:18
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [[DescribeDataSourceList](https://cloud.tencent.com/document/api/1301/68877)](https://cloud.tencent.com/document/api/#/#)
+
+新增数据结构：
+
+* [[DataSourceDetail](https://cloud.tencent.com/document/api/1301/68878#DataSourceDetail)](https://cloud.tencent.com/document/api/1301/68878#[DataSourceDetail](https://cloud.tencent.com/document/api/1301/68878#DataSourceDetail))
+* [[DataSourceDetailItems](https://cloud.tencent.com/document/api/1301/68878#DataSourceDetailItems)](https://cloud.tencent.com/document/api/1301/68878#[DataSourceDetailItems](https://cloud.tencent.com/document/api/1301/68878#DataSourceDetailItems))
+* [[DataSourceLinkApp](https://cloud.tencent.com/document/api/1301/68878#DataSourceLinkApp)](https://cloud.tencent.com/document/api/1301/68878#[DataSourceLinkApp](https://cloud.tencent.com/document/api/1301/68878#DataSourceLinkApp))
+* [[DataSourceQueryOption](https://cloud.tencent.com/document/api/1301/68878#DataSourceQueryOption)](https://cloud.tencent.com/document/api/1301/68878#[DataSourceQueryOption](https://cloud.tencent.com/document/api/1301/68878#DataSourceQueryOption))
+* [[TicketAuthInfo](https://cloud.tencent.com/document/api/1301/68878#TicketAuthInfo)](https://cloud.tencent.com/document/api/1301/68878#[TicketAuthInfo](https://cloud.tencent.com/document/api/1301/68878#TicketAuthInfo))
 
 
 
