@@ -18,84 +18,95 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  Album,
   DescribeMusicResponse,
+  ChorusClip,
+  ModifyMusicOnShelvesResponse,
+  Station,
+  DescribeKTVMusicDetailRequest,
+  DescribeKTVSingerCategoriesRequest,
+  KTVSingerBaseInfo,
+  ModifyMusicOnShelvesRequest,
+  PlayCommandInput,
+  DescribeMusicRequest,
+  DescribeMusicSaleStatusRequest,
+  TakeMusicOffShelves,
+  DescribeCloudMusicResponse,
+  MusicDetailInfo,
+  ImagePath,
+  DescribeMusicSaleStatusResponse,
+  DestroyKTVRobotRequest,
+  DescribeAuthInfoResponse,
+  DescribeLyricRequest,
+  ReportDataRequest,
+  SeekCommandInput,
   DescribePkgOfflineMusicRequest,
+  TimeRange,
+  CreateKTVRobotResponse,
+  DescribePackageItemsResponse,
+  DescribeCloudMusicPurchasedResponse,
+  DataInfo,
+  Artist,
+  ReportDataResponse,
+  SearchKTVMusicsResponse,
+  DescribeItemByIdRequest,
+  PutMusicOnTheShelvesResponse,
+  DescribeKTVSingerMusicsResponse,
+  DescribeItemsResponse,
+  DescribePkgOfflineMusicResponse,
+  KTVSingerInfo,
+  PutMusicOnTheShelvesRequest,
+  DescribeCloudMusicRequest,
+  SortBy,
+  DescribeKTVMusicDetailResponse,
+  DescribeKTVRobotsRequest,
   JoinRoomInput,
   DestroyKTVRobotResponse,
-  DescribeLyricResponse,
-  ModifyMusicOnShelvesResponse,
   CreateKTVRobotRequest,
-  PlayCommandInput,
-  SyncKTVRobotCommandRequest,
-  SetAudioParamCommandInput,
   DescribeKTVPlaylistDetailRequest,
-  Station,
-  CreateKTVRobotResponse,
-  UseRange,
-  MusicDetailInfo,
-  DescribeKTVMusicDetailRequest,
+  Music,
   DescribeStationsResponse,
-  DescribePackageItemsResponse,
   DescribeCloudMusicPurchasedRequest,
   PackageItem,
-  DescribeCloudMusicPurchasedResponse,
   DescribeKTVPlaylistsRequest,
-  DataInfo,
-  DescribeKTVPlaylistDetailResponse,
   TRTCJoinRoomInput,
-  Package,
-  ReportDataResponse,
-  ModifyMusicOnShelvesRequest,
   DescribePackageItemsRequest,
   AuthInfo,
-  TakeMusicOffShelvesRequest,
   DescribeKTVRobotsResponse,
-  TakeMusicOffShelves,
-  Lyric,
-  OfflineMusicDetail,
-  DescribeItemByIdRequest,
-  DescribeAuthInfoRequest,
-  DescribeKTVPlaylistsResponse,
-  TimeRange,
-  Music,
-  Artist,
+  UseRange,
   DescribeStationsRequest,
-  MusicOpenDetail,
-  PutMusicOnTheShelvesResponse,
-  SearchKTVMusicsResponse,
+  DescribeKTVSingerMusicsRequest,
+  DescribeKTVSingerCategoriesResponse,
+  DescribeKTVSingersRequest,
+  SetPlaylistCommandInput,
+  SyncKTVRobotCommandResponse,
+  SearchKTVMusicsRequest,
+  KTVPlaylistBaseInfo,
+  DescribeKTVSingersResponse,
+  DescribeItemByIdResponse,
+  MusicStatus,
+  KTVSingerCategoryInfo,
+  SendMessageCommandInput,
+  KTVMusicDefinitionInfo,
+  Album,
+  DescribeLyricResponse,
+  KTVMusicBaseInfo,
+  SyncKTVRobotCommandRequest,
+  DescribeKTVPlaylistsResponse,
+  DescribeKTVPlaylistDetailResponse,
+  SetAudioParamCommandInput,
+  TakeMusicOffShelvesRequest,
+  OfflineMusicDetail,
+  DescribeAuthInfoRequest,
+  Package,
+  SetPlayModeCommandInput,
   KTVRobotInfo,
   DescribeItemsRequest,
   Item,
-  SetPlayModeCommandInput,
-  SetPlaylistCommandInput,
-  SyncKTVRobotCommandResponse,
-  DescribeCloudMusicResponse,
-  KTVMusicBaseInfo,
+  MusicOpenDetail,
   DescribePackagesRequest,
-  DescribeMusicSaleStatusRequest,
-  SearchKTVMusicsRequest,
-  ImagePath,
-  DescribeItemsResponse,
-  DescribePkgOfflineMusicResponse,
-  KTVPlaylistBaseInfo,
-  DescribeItemByIdResponse,
-  MusicStatus,
-  DescribeMusicSaleStatusResponse,
-  SendMessageCommandInput,
-  PutMusicOnTheShelvesRequest,
   DescribePackagesResponse,
-  DestroyKTVRobotRequest,
-  DescribeCloudMusicRequest,
-  DescribeAuthInfoResponse,
+  Lyric,
   TakeMusicOffShelvesResponse,
-  DescribeLyricRequest,
-  DescribeKTVMusicDetailResponse,
-  DescribeKTVRobotsRequest,
-  DescribeMusicRequest,
-  ReportDataRequest,
-  SeekCommandInput,
-  KTVMusicDefinitionInfo,
 } from "./ame_models"
 
 /**
@@ -158,16 +169,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 客户上报用户数据功能，为了更好地为用户提供优质服务
-   */
-  async ReportData(
-    req: ReportDataRequest,
-    cb?: (error: string, rep: ReportDataResponse) => void
-  ): Promise<ReportDataResponse> {
-    return this.request("ReportData", req, cb)
-  }
-
-  /**
    * 根据购买曲库包用户可查询已回退的歌曲信息
    */
   async DescribePkgOfflineMusic(
@@ -175,6 +176,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePkgOfflineMusicResponse) => void
   ): Promise<DescribePkgOfflineMusicResponse> {
     return this.request("DescribePkgOfflineMusic", req, cb)
+  }
+
+  /**
+     * 根据歌手id，返回该歌手下歌曲列表。
+
+
+
+     */
+  async DescribeKTVSingerMusics(
+    req: DescribeKTVSingerMusicsRequest,
+    cb?: (error: string, rep: DescribeKTVSingerMusicsResponse) => void
+  ): Promise<DescribeKTVSingerMusicsResponse> {
+    return this.request("DescribeKTVSingerMusics", req, cb)
   }
 
   /**
@@ -258,6 +272,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 客户上报用户数据功能，为了更好地为用户提供优质服务
+   */
+  async ReportData(
+    req: ReportDataRequest,
+    cb?: (error: string, rep: ReportDataResponse) => void
+  ): Promise<ReportDataResponse> {
+    return this.request("ReportData", req, cb)
+  }
+
+  /**
+   * 获取直播互动曲库歌手分类信息
+   */
+  async DescribeKTVSingerCategories(
+    req?: DescribeKTVSingerCategoriesRequest,
+    cb?: (error: string, rep: DescribeKTVSingerCategoriesResponse) => void
+  ): Promise<DescribeKTVSingerCategoriesResponse> {
+    return this.request("DescribeKTVSingerCategories", req, cb)
+  }
+
+  /**
    * 该服务后续会停用，不再建议使用
    */
   async DescribeStations(
@@ -295,6 +329,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMusicSaleStatusResponse) => void
   ): Promise<DescribeMusicSaleStatusResponse> {
     return this.request("DescribeMusicSaleStatus", req, cb)
+  }
+
+  /**
+   * 根据过滤条件，返回匹配的歌手列表。
+   */
+  async DescribeKTVSingers(
+    req: DescribeKTVSingersRequest,
+    cb?: (error: string, rep: DescribeKTVSingersResponse) => void
+  ): Promise<DescribeKTVSingersResponse> {
+    return this.request("DescribeKTVSingers", req, cb)
   }
 
   /**

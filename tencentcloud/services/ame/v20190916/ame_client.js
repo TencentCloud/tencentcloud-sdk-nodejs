@@ -58,16 +58,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudMusicPurchased", req, cb);
     }
     /**
-     * 客户上报用户数据功能，为了更好地为用户提供优质服务
-     */
-    async ReportData(req, cb) {
-        return this.request("ReportData", req, cb);
-    }
-    /**
      * 根据购买曲库包用户可查询已回退的歌曲信息
      */
     async DescribePkgOfflineMusic(req, cb) {
         return this.request("DescribePkgOfflineMusic", req, cb);
+    }
+    /**
+     * 根据歌手id，返回该歌手下歌曲列表。
+
+
+
+     */
+    async DescribeKTVSingerMusics(req, cb) {
+        return this.request("DescribeKTVSingerMusics", req, cb);
     }
     /**
      * 获取曲库包歌曲播放信息接口
@@ -118,6 +121,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKTVPlaylistDetail", req, cb);
     }
     /**
+     * 客户上报用户数据功能，为了更好地为用户提供优质服务
+     */
+    async ReportData(req, cb) {
+        return this.request("ReportData", req, cb);
+    }
+    /**
+     * 获取直播互动曲库歌手分类信息
+     */
+    async DescribeKTVSingerCategories(req, cb) {
+        return this.request("DescribeKTVSingerCategories", req, cb);
+    }
+    /**
      * 该服务后续会停用，不再建议使用
      */
     async DescribeStations(req, cb) {
@@ -140,6 +155,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMusicSaleStatus(req, cb) {
         return this.request("DescribeMusicSaleStatus", req, cb);
+    }
+    /**
+     * 根据过滤条件，返回匹配的歌手列表。
+     */
+    async DescribeKTVSingers(req, cb) {
+        return this.request("DescribeKTVSingers", req, cb);
     }
     /**
      * 销毁机器人，机器人退出 RTC 房间。

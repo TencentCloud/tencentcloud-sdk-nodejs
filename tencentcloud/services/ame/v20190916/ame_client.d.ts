@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMusicResponse, DescribePkgOfflineMusicRequest, DestroyKTVRobotResponse, DescribeLyricResponse, ModifyMusicOnShelvesResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, CreateKTVRobotResponse, DescribeKTVMusicDetailRequest, DescribeStationsResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedRequest, DescribeCloudMusicPurchasedResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, ReportDataResponse, ModifyMusicOnShelvesRequest, DescribePackageItemsRequest, TakeMusicOffShelvesRequest, DescribeKTVRobotsResponse, DescribeItemByIdRequest, DescribeAuthInfoRequest, DescribeKTVPlaylistsResponse, DescribeStationsRequest, PutMusicOnTheShelvesResponse, SearchKTVMusicsResponse, DescribeItemsRequest, SyncKTVRobotCommandResponse, DescribeCloudMusicResponse, DescribePackagesRequest, DescribeMusicSaleStatusRequest, SearchKTVMusicsRequest, DescribeItemsResponse, DescribePkgOfflineMusicResponse, DescribeItemByIdResponse, DescribeMusicSaleStatusResponse, PutMusicOnTheShelvesRequest, DescribePackagesResponse, DestroyKTVRobotRequest, DescribeCloudMusicRequest, DescribeAuthInfoResponse, TakeMusicOffShelvesResponse, DescribeLyricRequest, DescribeKTVMusicDetailResponse, DescribeKTVRobotsRequest, DescribeMusicRequest, ReportDataRequest } from "./ame_models";
+import { DescribeMusicResponse, ModifyMusicOnShelvesResponse, DescribeKTVMusicDetailRequest, DescribeKTVSingerCategoriesRequest, ModifyMusicOnShelvesRequest, DescribeMusicRequest, DescribeMusicSaleStatusRequest, DescribeCloudMusicResponse, DescribeMusicSaleStatusResponse, DestroyKTVRobotRequest, DescribeAuthInfoResponse, DescribeLyricRequest, ReportDataRequest, DescribePkgOfflineMusicRequest, CreateKTVRobotResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedResponse, ReportDataResponse, SearchKTVMusicsResponse, DescribeItemByIdRequest, PutMusicOnTheShelvesResponse, DescribeKTVSingerMusicsResponse, DescribeItemsResponse, DescribePkgOfflineMusicResponse, PutMusicOnTheShelvesRequest, DescribeCloudMusicRequest, DescribeKTVMusicDetailResponse, DescribeKTVRobotsRequest, DestroyKTVRobotResponse, CreateKTVRobotRequest, DescribeKTVPlaylistDetailRequest, DescribeStationsResponse, DescribeCloudMusicPurchasedRequest, DescribeKTVPlaylistsRequest, DescribePackageItemsRequest, DescribeKTVRobotsResponse, DescribeStationsRequest, DescribeKTVSingerMusicsRequest, DescribeKTVSingerCategoriesResponse, DescribeKTVSingersRequest, SyncKTVRobotCommandResponse, SearchKTVMusicsRequest, DescribeKTVSingersResponse, DescribeItemByIdResponse, DescribeLyricResponse, SyncKTVRobotCommandRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistDetailResponse, TakeMusicOffShelvesRequest, DescribeAuthInfoRequest, DescribeItemsRequest, DescribePackagesRequest, DescribePackagesResponse, TakeMusicOffShelvesResponse } from "./ame_models";
 /**
  * ame client
  * @class
@@ -28,13 +28,16 @@ export declare class Client extends AbstractClient {
      */
     DescribeCloudMusicPurchased(req: DescribeCloudMusicPurchasedRequest, cb?: (error: string, rep: DescribeCloudMusicPurchasedResponse) => void): Promise<DescribeCloudMusicPurchasedResponse>;
     /**
-     * 客户上报用户数据功能，为了更好地为用户提供优质服务
-     */
-    ReportData(req: ReportDataRequest, cb?: (error: string, rep: ReportDataResponse) => void): Promise<ReportDataResponse>;
-    /**
      * 根据购买曲库包用户可查询已回退的歌曲信息
      */
     DescribePkgOfflineMusic(req: DescribePkgOfflineMusicRequest, cb?: (error: string, rep: DescribePkgOfflineMusicResponse) => void): Promise<DescribePkgOfflineMusicResponse>;
+    /**
+     * 根据歌手id，返回该歌手下歌曲列表。
+
+
+
+     */
+    DescribeKTVSingerMusics(req: DescribeKTVSingerMusicsRequest, cb?: (error: string, rep: DescribeKTVSingerMusicsResponse) => void): Promise<DescribeKTVSingerMusicsResponse>;
     /**
      * 获取曲库包歌曲播放信息接口
      */
@@ -68,6 +71,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeKTVPlaylistDetail(req: DescribeKTVPlaylistDetailRequest, cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void): Promise<DescribeKTVPlaylistDetailResponse>;
     /**
+     * 客户上报用户数据功能，为了更好地为用户提供优质服务
+     */
+    ReportData(req: ReportDataRequest, cb?: (error: string, rep: ReportDataResponse) => void): Promise<ReportDataResponse>;
+    /**
+     * 获取直播互动曲库歌手分类信息
+     */
+    DescribeKTVSingerCategories(req?: DescribeKTVSingerCategoriesRequest, cb?: (error: string, rep: DescribeKTVSingerCategoriesResponse) => void): Promise<DescribeKTVSingerCategoriesResponse>;
+    /**
      * 该服务后续会停用，不再建议使用
      */
     DescribeStations(req: DescribeStationsRequest, cb?: (error: string, rep: DescribeStationsResponse) => void): Promise<DescribeStationsResponse>;
@@ -83,6 +94,10 @@ export declare class Client extends AbstractClient {
      * 根据音乐信息查询音乐是否在售
      */
     DescribeMusicSaleStatus(req: DescribeMusicSaleStatusRequest, cb?: (error: string, rep: DescribeMusicSaleStatusResponse) => void): Promise<DescribeMusicSaleStatusResponse>;
+    /**
+     * 根据过滤条件，返回匹配的歌手列表。
+     */
+    DescribeKTVSingers(req: DescribeKTVSingersRequest, cb?: (error: string, rep: DescribeKTVSingersResponse) => void): Promise<DescribeKTVSingersResponse>;
     /**
      * 销毁机器人，机器人退出 RTC 房间。
      */

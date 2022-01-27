@@ -1389,6 +1389,11 @@ export interface SubAccountInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime: string;
+    /**
+      * 昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NickName: string;
 }
 /**
  * CreateGroup请求参数结构体

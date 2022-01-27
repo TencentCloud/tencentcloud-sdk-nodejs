@@ -36,6 +36,21 @@ export interface AudioStreamInfo {
 }
 
 /**
+ * 分类删除事件。
+ */
+export interface ClassDeletedEvent {
+  /**
+   * 删除的分类归属。
+   */
+  Owner: Entity
+
+  /**
+   * 删除的分类路径列表。
+   */
+  ClassPathSet: Array<string>
+}
+
+/**
  * ModifyMaterial返回参数结构体
  */
 export interface ModifyMaterialResponse {
@@ -78,6 +93,16 @@ export interface ExportVideoByVideoSegmentationDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体删除事件。
+ */
+export interface MaterialDeletedEvent {
+  /**
+   * 删除的媒体 Id 列表。
+   */
+  MaterialIdSet: Array<string>
 }
 
 /**
@@ -692,50 +717,23 @@ export interface RevokeResourceAuthorizationResponse {
 }
 
 /**
- * HandleStreamConnectProject请求参数结构体
+ * DescribeTasks返回参数结构体
  */
-export interface HandleStreamConnectProjectRequest {
+export interface DescribeTasksResponse {
   /**
-   * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
+   * 符合搜索条件的记录总数。
    */
-  Platform: string
+  TotalCount: number
 
   /**
-   * 云转推项目 Id 。
+   * 任务基础信息列表。
    */
-  ProjectId: string
+  TaskBaseInfoSet: Array<TaskBaseInfo>
 
   /**
-   * 请参考 [操作类型](#Operation)
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Operation: string
-
-  /**
-   * 转推输入源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
-   */
-  InputInfo?: StreamInputInfo
-
-  /**
-      * 主备输入源标识，取值有：
-<li> Main ：主源；</li>
-<li> Backup ：备源。</li>
-      */
-  InputEndpoint?: string
-
-  /**
-   * 转推输出源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
-   */
-  OutputInfo?: StreamConnectOutput
-
-  /**
-   * 云转推当前预计结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。具体操作方式详见 [操作类型](#Operation) 及下文示例。
-   */
-  CurrentStopTime?: string
-
-  /**
-   * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有云转推项目。如果指定操作者，则操作者必须为项目所有者。
-   */
-  Operator?: string
+  RequestId?: string
 }
 
 /**
@@ -919,6 +917,49 @@ export interface DescribeTeamsRequest {
    * 返回记录条数，默认值：20，最大值：30。
    */
   Limit?: number
+}
+
+/**
+ * 平台信息。
+ */
+export interface PlatformInfo {
+  /**
+   * 平台标识。
+   */
+  Platform: string
+
+  /**
+   * 平台描述。
+   */
+  Description: string
+
+  /**
+   * 云点播子应用 Id。
+   */
+  VodSubAppId: number
+
+  /**
+   * 平台绑定的 license Id。
+   */
+  LicenseId: string
+
+  /**
+      * 平台状态，可取值为：
+<li>Normal：正常，可使用。；</li>
+<li>Stopped：已停用，暂无法使用；</li>
+<li>Expired：已过期，需要重新购买会员包。</li>
+      */
+  Status: string
+
+  /**
+   * 创建时间，格式按照 ISO 8601 标准表示。
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间，格式按照 ISO 8601 标准表示。
+   */
+  UpdateTime: string
 }
 
 /**
@@ -1479,15 +1520,17 @@ export interface StorageNewFileCreatedEvent {
   MaterialId: string
 
   /**
-   * 操作者 Id。
+   * 操作者 Id。（废弃，请勿使用）
    */
   Operator: string
 
   /**
-      * 操作类型，可取值为：
-<li>Upload：上传；</li>
+      * 操作类型，可取值有：
+<li>Upload：本地上传；</li>
 <li>PullUpload：拉取上传；</li>
-<li>Record：直播录制。</li>
+<li>VideoEdit：视频剪辑；</li>
+<li>LiveStreamClip：直播流剪辑；</li>
+<li>LiveStreamRecord：直播流录制。</li>
       */
   OperationType: string
 
@@ -1500,6 +1543,16 @@ export interface StorageNewFileCreatedEvent {
    * 媒体分类路径。
    */
   ClassPath: string
+
+  /**
+   * 生成文件的任务 Id。当生成新文件是拉取上传、视频剪辑、直播流剪辑时为任务 Id。
+   */
+  TaskId: string
+
+  /**
+   * 来源上下文信息。视频剪辑生成新文件时此字段为项目 Id；直播流剪辑或者直播流录制生成新文件则为原始流地址。
+   */
+  SourceContext: string
 }
 
 /**
@@ -1534,16 +1587,6 @@ export interface MediaTrack {
    * 轨道上的媒体片段列表。
    */
   TrackItems: Array<MediaTrackItem>
-}
-
-/**
- * DeleteVideoEncodingPreset返回参数结构体
- */
-export interface DeleteVideoEncodingPresetResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1747,46 +1790,28 @@ export interface EmptyTrackItem {
 }
 
 /**
- * 平台信息。
+ * 分类移动事件。
  */
-export interface PlatformInfo {
+export interface ClassMovedEvent {
   /**
-   * 平台标识。
+   * 源分类归属。
    */
-  Platform: string
+  SourceOwner: Entity
 
   /**
-   * 平台描述。
+   * 源分类路径列表。
    */
-  Description: string
+  SourceClassPathSet: Array<string>
 
   /**
-   * 云点播子应用 Id。
+   * 目标分类归属。
    */
-  VodSubAppId: number
+  DestinationOwner: Entity
 
   /**
-   * 平台绑定的 license Id。
+   * 目标分类归属。
    */
-  LicenseId: string
-
-  /**
-      * 平台状态，可取值为：
-<li>Normal：正常，可使用。；</li>
-<li>Stopped：已停用，暂无法使用；</li>
-<li>Expired：已过期，需要重新购买会员包。</li>
-      */
-  Status: string
-
-  /**
-   * 创建时间，格式按照 ISO 8601 标准表示。
-   */
-  CreateTime: string
-
-  /**
-   * 更新时间，格式按照 ISO 8601 标准表示。
-   */
-  UpdateTime: string
+  DestinationClassPath: string
 }
 
 /**
@@ -1802,6 +1827,26 @@ export interface DeleteVideoEncodingPresetRequest {
    * 要删除的视频编码配置 ID。
    */
   Id: number
+}
+
+/**
+ * 媒体导入事件
+ */
+export interface MaterialImportedEvent {
+  /**
+   * 导入的媒体信息列表。
+   */
+  MediaInfoSet: Array<ImportMediaInfo>
+
+  /**
+   * 媒体归属。
+   */
+  Owner: Entity
+
+  /**
+   * 媒体分类路径。
+   */
+  ClassPath: string
 }
 
 /**
@@ -1970,6 +2015,36 @@ export interface VideoEncodingPresetVideoSetting {
 }
 
 /**
+ * 雪碧图
+ */
+export interface MediaImageSpriteInfo {
+  /**
+   * 雪碧图小图的高度。
+   */
+  Height: number
+
+  /**
+   * 雪碧图小图的宽度。
+   */
+  Width: number
+
+  /**
+   * 雪碧图小图的总数量。
+   */
+  TotalCount: number
+
+  /**
+   * 截取雪碧图输出的地址。
+   */
+  ImageUrlSet: Array<string>
+
+  /**
+   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+   */
+  WebVttUrl: string
+}
+
+/**
  * DeleteClass请求参数结构体
  */
 export interface DeleteClassRequest {
@@ -2096,6 +2171,36 @@ export interface CreateVideoEncodingPresetResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频编码配置的视频设置更新信息
+ */
+export interface VideoEncodingPresetVideoSettingForUpdate {
+  /**
+      * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
+视频最后的分辨率，根据短边尺寸和宽高比进行计算。
+例：如果项目的宽高比是 16：9 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720。</li>
+如果项目的宽高比是 9：16 ：
+<li>短边尺寸为 1080，则导出视频的分辨率为 1080 * 1920。</li>
+<li>短边尺寸为 720，则导出视频的分辨率为 720 * 1280。</li>
+不填则不修改。
+      */
+  ShortEdge?: number
+
+  /**
+      * 指定码率，单位 bps。当该参数为'0' 时则不强制限定码率。
+不填则不修改。
+      */
+  Bitrate?: number
+
+  /**
+      * 指定帧率。单位 Hz。
+不填则不修改。
+      */
+  FrameRate?: number
 }
 
 /**
@@ -2626,33 +2731,33 @@ export interface ModifyTeamMemberRequest {
 }
 
 /**
- * 视频编码配置的视频设置更新信息
+ * 媒体移动事件
  */
-export interface VideoEncodingPresetVideoSettingForUpdate {
+export interface MaterialMovedEvent {
   /**
-      * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
-视频最后的分辨率，根据短边尺寸和宽高比进行计算。
-例：如果项目的宽高比是 16：9 ：
-<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
-<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720。</li>
-如果项目的宽高比是 9：16 ：
-<li>短边尺寸为 1080，则导出视频的分辨率为 1080 * 1920。</li>
-<li>短边尺寸为 720，则导出视频的分辨率为 720 * 1280。</li>
-不填则不修改。
-      */
-  ShortEdge?: number
+   * 要移动的媒体 Id 列表。
+   */
+  MaterialIdSet: Array<string>
 
   /**
-      * 指定码率，单位 bps。当该参数为'0' 时则不强制限定码率。
-不填则不修改。
-      */
-  Bitrate?: number
+   * 源媒体归属。
+   */
+  SourceOwner: Entity
 
   /**
-      * 指定帧率。单位 Hz。
-不填则不修改。
-      */
-  FrameRate?: number
+   * 源媒体分类路径。
+   */
+  SourceClassPath: string
+
+  /**
+   * 目标媒体分类归属。
+   */
+  DestinationOwner: Entity
+
+  /**
+   * 目标媒体分类路径。
+   */
+  DestinationClassPath: string
 }
 
 /**
@@ -3167,14 +3272,9 @@ export interface ListMediaRequest {
 }
 
 /**
- * HandleStreamConnectProject返回参数结构体
+ * DeleteVideoEncodingPreset返回参数结构体
  */
-export interface HandleStreamConnectProjectResponse {
-  /**
-   * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
-   */
-  StreamInputRtmpPushUrl: string
-
+export interface DeleteVideoEncodingPresetResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3258,6 +3358,46 @@ export interface LiveStreamClipProjectInput {
    * 直播流录制时长，单位为秒，最大值为 7200。
    */
   StreamRecordDuration: number
+}
+
+/**
+ * 媒体更新事件。
+ */
+export interface MaterialModifiedEvent {
+  /**
+   * 媒体 Id。
+   */
+  MaterialId: string
+
+  /**
+   * 更新后的媒体名称。如未更新则为空。
+   */
+  Name: string
+
+  /**
+   * 更新后的媒体预置标签列表。如未更新媒体预置标签，则该字段为空数组。
+   */
+  PresetTagIdSet: Array<string>
+
+  /**
+   * 更新后的媒体自定义标签列表。如未更新媒体自定义标签，则该字段为空数组。
+   */
+  TagSet: Array<string>
+}
+
+/**
+ * HandleStreamConnectProject返回参数结构体
+ */
+export interface HandleStreamConnectProjectResponse {
+  /**
+   * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
+   */
+  StreamInputRtmpPushUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3380,21 +3520,89 @@ export interface OtherMaterial {
  */
 export interface EventContent {
   /**
-      * 事件类型，可取值为：
-<li>Storage.NewFileCreated：新文件产生；</li>
-<li>Project.StreamConnect.StatusChanged：云转推项目状态变更。</li>
+      * 事件类型，可取值有：
+<li>Storage.NewFileCreated：新文件产生事件；</li>
+<li>Project.StreamConnect.StatusChanged：云转推项目状态变更事件；</li>
+<li>Project.Switcher.StatusChanged：导播台项目状态变更事件；</li>
+<li>Material.Imported：媒体导入事件；</li>
+<li>Material.Added：媒体添加事件；</li>
+<li>Material.Moved：媒体移动事件；</li>
+<li>Material.Modified：媒体变更事件；</li>
+<li>Material.Deleted：媒体删除事件；</li>
+<li>Class.Created：分类新增事件；</li>
+<li>Class.Moved：分类移动事件；</li>
+<li>Class.Deleted：分类删除事件。</li>
       */
   EventType: string
 
   /**
-   * 新文件产生事件信息。仅当 EventType 为 Storage.NewFileCreated 时有效。
+   * 操作者，表示触发事件的操作者。如果是 `cmeid_system` 表示平台管理员操作。
+   */
+  Operator: string
+
+  /**
+   * 新文件产生事件。仅当 EventType 为 Storage.NewFileCreated 时有效。
    */
   StorageNewFileCreatedEvent: StorageNewFileCreatedEvent
 
   /**
-   * 云转推项目状态变更事件信息。仅当 EventType 为 Project.StreamConnect.StatusChanged 时有效。
+   * 云转推项目状态变更事件。仅当 EventType 为 Project.StreamConnect.StatusChanged 时有效。
    */
   ProjectStreamConnectStatusChangedEvent: ProjectStreamConnectStatusChangedEvent
+
+  /**
+      * 导播台项目状态变更事件。仅当 EventType 为 Project.Switcher.StatusChanged 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectSwitcherStatusChangedEvent: ProjectSwitcherStatusChangedEvent
+
+  /**
+      * 媒体导入事件。仅当 EventType 为 Material.Imported 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaterialImportedEvent: MaterialImportedEvent
+
+  /**
+      * 媒体添加事件。仅当 EventType 为 Material.Added 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaterialAddedEvent: MaterialAddedEvent
+
+  /**
+      * 媒体移动事件。仅当 EventType 为 Material.Moved 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaterialMovedEvent: MaterialMovedEvent
+
+  /**
+      * 媒体更新事件。仅当 EventType 为 Material.Modified 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaterialModifiedEvent: MaterialModifiedEvent
+
+  /**
+      * 媒体删除事件。仅当 EventType 为 Material.Deleted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaterialDeletedEvent: MaterialDeletedEvent
+
+  /**
+      * 分类创建事件。仅当 EventType 为 Class.Created 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassCreatedEvent: ClassCreatedEvent
+
+  /**
+      * 分类移动事件。仅当 EventType 为 Class.Moved 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassMovedEvent: ClassMovedEvent
+
+  /**
+      * 分类删除事件。仅当 EventType 为 Class.Deleted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassDeletedEvent: ClassDeletedEvent
 }
 
 /**
@@ -3615,6 +3823,26 @@ export interface DescribeLoginStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体添加事件。
+ */
+export interface MaterialAddedEvent {
+  /**
+   * 添加的媒体 Id 列表。
+   */
+  MaterialIdSet: Array<string>
+
+  /**
+   * 添加的媒体归属。
+   */
+  Owner: Entity
+
+  /**
+   * 添加的媒体分类路径。
+   */
+  ClassPath: string
 }
 
 /**
@@ -4079,23 +4307,50 @@ export interface CosPublishInputInfo {
 }
 
 /**
- * DescribeTasks返回参数结构体
+ * HandleStreamConnectProject请求参数结构体
  */
-export interface DescribeTasksResponse {
+export interface HandleStreamConnectProjectRequest {
   /**
-   * 符合搜索条件的记录总数。
+   * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
    */
-  TotalCount: number
+  Platform: string
 
   /**
-   * 任务基础信息列表。
+   * 云转推项目 Id 。
    */
-  TaskBaseInfoSet: Array<TaskBaseInfo>
+  ProjectId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 请参考 [操作类型](#Operation)
    */
-  RequestId?: string
+  Operation: string
+
+  /**
+   * 转推输入源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+   */
+  InputInfo?: StreamInputInfo
+
+  /**
+      * 主备输入源标识，取值有：
+<li> Main ：主源；</li>
+<li> Backup ：备源。</li>
+      */
+  InputEndpoint?: string
+
+  /**
+   * 转推输出源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+   */
+  OutputInfo?: StreamConnectOutput
+
+  /**
+   * 云转推当前预计结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+   */
+  CurrentStopTime?: string
+
+  /**
+   * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有云转推项目。如果指定操作者，则操作者必须为项目所有者。
+   */
+  Operator?: string
 }
 
 /**
@@ -4395,6 +4650,27 @@ export interface MediaMetaData {
 }
 
 /**
+ * 导播台项目状态变更事件
+ */
+export interface ProjectSwitcherStatusChangedEvent {
+  /**
+   * 导播台项目 Id。
+   */
+  ProjectId: string
+
+  /**
+      * 导播台项目状态，可取值有：
+<li>Started：导播台启动；</li>
+<li>Stopped：导播台停止；</li>
+<li>PvwStarted：导播台 PVW 开启；</li>
+<li>PgmStarted：导播台 PGM 开启，输出推流开始；</li>
+<li>PvwStopped：导播台 PVW 停止；</li>
+<li>PgmStopped：导播台 PGM 停止，输出推流结束。</li>
+      */
+  Status: string
+}
+
+/**
  * 媒资绑定资源信息，包含媒资绑定模板 ID 和文件信息。
  */
 export interface ExternalMediaInfo {
@@ -4458,33 +4734,18 @@ export interface ExportVideoByEditorTrackDataResponse {
 }
 
 /**
- * 雪碧图
+ * 分类创建事件。
  */
-export interface MediaImageSpriteInfo {
+export interface ClassCreatedEvent {
   /**
-   * 雪碧图小图的高度。
+   * 分类归属。
    */
-  Height: number
+  Owner: Entity
 
   /**
-   * 雪碧图小图的宽度。
+   * 分类路径。
    */
-  Width: number
-
-  /**
-   * 雪碧图小图的总数量。
-   */
-  TotalCount: number
-
-  /**
-   * 截取雪碧图输出的地址。
-   */
-  ImageUrlSet: Array<string>
-
-  /**
-   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
-   */
-  WebVttUrl: string
+  ClassPath: string
 }
 
 /**
@@ -4598,6 +4859,21 @@ export interface TextReplacementInfo {
    * 替换的文本信息。
    */
   Text: string
+}
+
+/**
+ * 导入媒资信息
+ */
+export interface ImportMediaInfo {
+  /**
+   * 云点播文件 FileId。
+   */
+  FileId: string
+
+  /**
+   * 媒体 Id。
+   */
+  MaterialId: string
 }
 
 /**

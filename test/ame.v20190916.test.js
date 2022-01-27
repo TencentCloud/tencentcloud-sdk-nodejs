@@ -68,9 +68,9 @@ it("ame.v20190916.DescribeCloudMusicPurchased", async function () {
     }
 })
 
-it("ame.v20190916.ReportData", async function () {
+it("ame.v20190916.DescribePkgOfflineMusic", async function () {
     try {
-       const data = await client.ReportData({})
+       const data = await client.DescribePkgOfflineMusic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("ame.v20190916.ReportData", async function () {
     }
 })
 
-it("ame.v20190916.DescribePkgOfflineMusic", async function () {
+it("ame.v20190916.DescribeKTVSingerMusics", async function () {
     try {
-       const data = await client.DescribePkgOfflineMusic({})
+       const data = await client.DescribeKTVSingerMusics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +168,26 @@ it("ame.v20190916.DescribeKTVPlaylistDetail", async function () {
     }
 })
 
+it("ame.v20190916.ReportData", async function () {
+    try {
+       const data = await client.ReportData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeKTVSingerCategories", async function () {
+    try {
+       const data = await client.DescribeKTVSingerCategories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.DescribeStations", async function () {
     try {
        const data = await client.DescribeStations({})
@@ -201,6 +221,16 @@ it("ame.v20190916.DescribeItemById", async function () {
 it("ame.v20190916.DescribeMusicSaleStatus", async function () {
     try {
        const data = await client.DescribeMusicSaleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeKTVSingers", async function () {
+    try {
+       const data = await client.DescribeKTVSingers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
