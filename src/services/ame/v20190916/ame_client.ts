@@ -23,13 +23,14 @@ import {
   ModifyMusicOnShelvesResponse,
   Station,
   DescribeKTVMusicDetailRequest,
+  KTVMusicTopInfo,
   DescribeKTVSingerCategoriesRequest,
   KTVSingerBaseInfo,
   ModifyMusicOnShelvesRequest,
   PlayCommandInput,
   DescribeMusicRequest,
   DescribeMusicSaleStatusRequest,
-  TakeMusicOffShelves,
+  TakeMusicOffShelvesRequest,
   DescribeCloudMusicResponse,
   MusicDetailInfo,
   ImagePath,
@@ -62,6 +63,7 @@ import {
   JoinRoomInput,
   DestroyKTVRobotResponse,
   CreateKTVRobotRequest,
+  DescribeKTVTopListRequest,
   DescribeKTVPlaylistDetailRequest,
   Music,
   DescribeStationsResponse,
@@ -94,7 +96,7 @@ import {
   DescribeKTVPlaylistsResponse,
   DescribeKTVPlaylistDetailResponse,
   SetAudioParamCommandInput,
-  TakeMusicOffShelvesRequest,
+  TakeMusicOffShelves,
   OfflineMusicDetail,
   DescribeAuthInfoRequest,
   Package,
@@ -102,6 +104,7 @@ import {
   KTVRobotInfo,
   DescribeItemsRequest,
   Item,
+  DescribeKTVTopListResponse,
   MusicOpenDetail,
   DescribePackagesRequest,
   DescribePackagesResponse,
@@ -259,6 +262,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
   ): Promise<SyncKTVRobotCommandResponse> {
     return this.request("SyncKTVRobotCommand", req, cb)
+  }
+
+  /**
+   * 获取直播互动曲库歌曲的周榜和月榜
+   */
+  async DescribeKTVTopList(
+    req: DescribeKTVTopListRequest,
+    cb?: (error: string, rep: DescribeKTVTopListResponse) => void
+  ): Promise<DescribeKTVTopListResponse> {
+    return this.request("DescribeKTVTopList", req, cb)
   }
 
   /**

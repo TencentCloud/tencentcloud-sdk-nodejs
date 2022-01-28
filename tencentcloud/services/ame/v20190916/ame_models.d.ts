@@ -73,6 +73,39 @@ export interface DescribeKTVMusicDetailRequest {
     MusicId: string;
 }
 /**
+ * 排行榜结构
+ */
+export interface KTVMusicTopInfo {
+    /**
+      * 歌曲Id
+      */
+    MusicId: string;
+    /**
+      * 歌曲名称
+      */
+    Name: string;
+    /**
+      * 歌手名称列表
+      */
+    SingerInfoSet: Array<KTVSingerBaseInfo>;
+    /**
+      * 歌词名称列表
+      */
+    LyricistSet: Array<string>;
+    /**
+      * 作曲列表
+      */
+    ComposerSet: Array<string>;
+    /**
+      * 标签列表
+      */
+    TagSet: Array<string>;
+    /**
+      * 播放时长
+      */
+    Duration: number;
+}
+/**
  * DescribeKTVSingerCategories请求参数结构体
  */
 export declare type DescribeKTVSingerCategoriesRequest = null;
@@ -148,18 +181,13 @@ export interface DescribeMusicSaleStatusRequest {
     PurchaseType: number;
 }
 /**
- * 下架歌曲复合结构
+ * TakeMusicOffShelves请求参数结构体
  */
-export interface TakeMusicOffShelves {
+export interface TakeMusicOffShelvesRequest {
     /**
-      * 资源方对应音乐Id
+      * 资源方下架必传结构
       */
-    MusicIds: string;
-    /**
-      * 当曲目临时下架时：已订购客户无影响，无需消息通知。当曲目封杀下架后，推送消息至已订购老客户，枚举值，判断是否上/下架
-在售状态，0在售，1临时下架，2永久下架
-      */
-    SaleStatus: string;
+    TakeMusicOffShelves: Array<TakeMusicOffShelves>;
 }
 /**
  * DescribeCloudMusic返回参数结构体
@@ -743,6 +771,22 @@ export interface CreateKTVRobotRequest {
       * 进房参数。
       */
     JoinRoomInput: JoinRoomInput;
+}
+/**
+ * DescribeKTVTopList请求参数结构体
+ */
+export interface DescribeKTVTopListRequest {
+    /**
+      * 榜单类型。默认Hot
+<li> Hot, 热歌榜。</li>
+      */
+    Type?: string;
+    /**
+      * 榜单周期 默认为Week
+<li> Week, 周榜。</li>
+<li> Month, 月榜。</li>
+      */
+    Period?: string;
 }
 /**
  * DescribeKTVPlaylistDetail请求参数结构体
@@ -1395,13 +1439,18 @@ export interface SetAudioParamCommandInput {
     Type?: string;
 }
 /**
- * TakeMusicOffShelves请求参数结构体
+ * 下架歌曲复合结构
  */
-export interface TakeMusicOffShelvesRequest {
+export interface TakeMusicOffShelves {
     /**
-      * 资源方下架必传结构
+      * 资源方对应音乐Id
       */
-    TakeMusicOffShelves: Array<TakeMusicOffShelves>;
+    MusicIds: string;
+    /**
+      * 当曲目临时下架时：已订购客户无影响，无需消息通知。当曲目封杀下架后，推送消息至已订购老客户，枚举值，判断是否上/下架
+在售状态，0在售，1临时下架，2永久下架
+      */
+    SaleStatus: string;
 }
 /**
  * 曲库包已下架歌曲详细信息
@@ -1601,6 +1650,23 @@ export interface Item {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: number;
+}
+/**
+ * DescribeKTVTopList返回参数结构体
+ */
+export interface DescribeKTVTopListResponse {
+    /**
+      * 歌曲基础信息列表
+      */
+    KTVMusicTopInfoSet: Array<KTVMusicTopInfo>;
+    /**
+      * 返回总条数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 对外开放信息

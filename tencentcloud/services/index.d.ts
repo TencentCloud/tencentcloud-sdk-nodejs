@@ -100,6 +100,7 @@ export { ivld } from "./ivld";
 export { kms } from "./kms";
 export { lighthouse } from "./lighthouse";
 export { live } from "./live";
+export { lowcode } from "./lowcode";
 export { lp } from "./lp";
 export { mariadb } from "./mariadb";
 export { market } from "./market";

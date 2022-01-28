@@ -115,6 +115,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncKTVRobotCommand", req, cb);
     }
     /**
+     * 获取直播互动曲库歌曲的周榜和月榜
+     */
+    async DescribeKTVTopList(req, cb) {
+        return this.request("DescribeKTVTopList", req, cb);
+    }
+    /**
      * 根据歌单 Id 获取歌单详情，包括歌单的基础信息以及歌曲列表。
      */
     async DescribeKTVPlaylistDetail(req, cb) {
