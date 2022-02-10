@@ -1069,6 +1069,21 @@ export interface ClusterInfo {
 }
 
 /**
+ * DeleteGroup请求参数结构体
+ */
+export interface DeleteGroupRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 消费分组
+   */
+  Group: string
+}
+
+/**
  * DescribeConsumerGroup请求参数结构体
  */
 export interface DescribeConsumerGroupRequest {
@@ -3188,6 +3203,21 @@ export interface BatchModifyTopicAttributesRequest {
    * 主题属性列表
    */
   Topic: Array<BatchModifyTopicInfo>
+}
+
+/**
+ * DeleteGroup返回参数结构体
+ */
+export interface DeleteGroupResponse {
+  /**
+   * 返回结果
+   */
+  Result: JgwOperateResponse
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -64,6 +64,7 @@ import {
   ModifyInstanceAttributesResponse,
   CreatePartitionResponse,
   ClusterInfo,
+  DeleteGroupRequest,
   DescribeConsumerGroupRequest,
   DeleteUserResponse,
   CreateAclRequest,
@@ -147,6 +148,7 @@ import {
   ConsumerRecord,
   ModifyGroupOffsetsRequest,
   BatchModifyTopicAttributesRequest,
+  DeleteGroupResponse,
   CreateTopicIpWhiteListRequest,
   Route,
   AclRuleInfo,
@@ -291,6 +293,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceAttributesResponse) => void
   ): Promise<ModifyInstanceAttributesResponse> {
     return this.request("ModifyInstanceAttributes", req, cb)
+  }
+
+  /**
+   * 删除消费组
+   */
+  async DeleteGroup(
+    req: DeleteGroupRequest,
+    cb?: (error: string, rep: DeleteGroupResponse) => void
+  ): Promise<DeleteGroupResponse> {
+    return this.request("DeleteGroup", req, cb)
   }
 
   /**

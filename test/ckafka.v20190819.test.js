@@ -138,6 +138,16 @@ it("ckafka.v20190819.ModifyInstanceAttributes", async function () {
     }
 })
 
+it("ckafka.v20190819.DeleteGroup", async function () {
+    try {
+       const data = await client.DeleteGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeUser", async function () {
     try {
        const data = await client.DescribeUser({})

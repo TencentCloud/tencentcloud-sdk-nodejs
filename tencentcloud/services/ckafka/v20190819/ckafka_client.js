@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceAttributes", req, cb);
     }
     /**
+     * 删除消费组
+     */
+    async DeleteGroup(req, cb) {
+        return this.request("DeleteGroup", req, cb);
+    }
+    /**
      * 查询用户信息
      */
     async DescribeUser(req, cb) {
