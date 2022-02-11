@@ -141,7 +141,7 @@ export interface FaceFusionRequest {
       */
     CelebrityIdentify?: number;
     /**
-      * 图片Url地址
+      * 图片Url地址，目前Url方式还不支持，后续会支持，可以使用FuseFace接口
       */
     Url?: string;
 }
@@ -176,7 +176,7 @@ export interface FuseFaceReviewDetail {
       */
     Label: string;
     /**
-      * 对应识别label的置信度，分数越高意味涉政可能性越大。
+      * 对应识别label的置信度，分数越高意味违法违规可能性越大。
 0到70，Suggestion建议为PASS；
 70到80，Suggestion建议为REVIEW；
 80到100，Suggestion建议为BLOCK。

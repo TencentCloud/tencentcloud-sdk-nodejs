@@ -1969,6 +1969,16 @@ export interface DescribeClustersRequest {
     类型：String
     必选：否
 
+·  ClusterType
+    按照【集群类型】进行过滤。
+    类型：String
+    必选：否
+
+·  ClusterStatus
+    按照【集群状态】进行过滤。
+    类型：String
+    必选：否
+
 ·  Tags
     按照【标签键值对】进行过滤。
     类型：String
@@ -4012,12 +4022,12 @@ export interface DescribeClusterNodePoolsResponse {
       * NodePools（节点池列表）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  NodePoolSet?: Array<NodePool>
+  NodePoolSet: Array<NodePool>
 
   /**
    * 资源总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5966,6 +5976,29 @@ export interface DescribeClusterNodePoolsRequest {
    * ClusterId（集群id）
    */
   ClusterId: string
+
+  /**
+      * ·  NodePoolsName
+    按照【节点池名】进行过滤。
+    类型：String
+    必选：否
+
+·  NodePoolsId
+    按照【节点池id】进行过滤。
+    类型：String
+    必选：否
+
+·  tags
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+
+·  tag:tag-key
+    按照【标签键值对】进行过滤。
+    类型：String
+    必选：否
+      */
+  Filters?: Array<Filter>
 }
 
 /**

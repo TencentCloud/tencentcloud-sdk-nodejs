@@ -648,6 +648,11 @@ export interface FileSystemInfo {
    * 文件系统总容量
    */
   Capacity: number
+
+  /**
+   * 文件系统标签列表
+   */
+  Tags: Array<TagInfo>
 }
 
 /**

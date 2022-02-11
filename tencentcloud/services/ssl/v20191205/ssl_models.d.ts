@@ -909,6 +909,11 @@ export interface DeployedResources {
       * 资源标识:clb,cdn,live,waf,antiddos
       */
     Type: string;
+    /**
+      * 关联资源ID或关联域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceIds: Array<string>;
 }
 /**
  * DescribeCertificateDetail返回参数结构体

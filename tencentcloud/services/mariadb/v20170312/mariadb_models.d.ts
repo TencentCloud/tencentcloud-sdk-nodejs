@@ -1619,6 +1619,23 @@ export interface SecurityGroup {
     Outbound: Array<SecurityGroupBound>;
 }
 /**
+ * DescribeDatabaseTable请求参数结构体
+ */
+export interface DescribeDatabaseTableRequest {
+    /**
+      * 实例 ID，形如：dcdbt-ow7t8lmc。
+      */
+    InstanceId: string;
+    /**
+      * 数据库名称，通过 DescribeDatabases 接口获取。
+      */
+    DbName: string;
+    /**
+      * 表名称，通过 DescribeDatabaseObjects 接口获取。
+      */
+    Table: string;
+}
+/**
  * OpenDBExtranetAccess返回参数结构体
  */
 export interface OpenDBExtranetAccessResponse {
@@ -1673,6 +1690,19 @@ export interface DeleteAccountRequest {
       * 用户允许的访问 host
       */
     Host: string;
+}
+/**
+ * 数据库列信息
+ */
+export interface TableColumn {
+    /**
+      * 列名称
+      */
+    Col: string;
+    /**
+      * 列类型
+      */
+    Type: string;
 }
 /**
  * CreateTmpInstances返回参数结构体
@@ -3011,6 +3041,31 @@ export interface CreateHourDBInstanceRequest {
       * 回档时间
       */
     RollbackTime?: string;
+}
+/**
+ * DescribeDatabaseTable返回参数结构体
+ */
+export interface DescribeDatabaseTableResponse {
+    /**
+      * 实例名称。
+      */
+    InstanceId?: string;
+    /**
+      * 数据库名称。
+      */
+    DbName?: string;
+    /**
+      * 表名称。
+      */
+    Table?: string;
+    /**
+      * 列信息。
+      */
+    Cols?: Array<TableColumn>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAccountPrivileges请求参数结构体

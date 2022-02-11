@@ -97,10 +97,12 @@ import {
   ModifyDBParametersResponse,
   CopyAccountPrivilegesRequest,
   SecurityGroup,
+  DescribeDatabaseTableRequest,
   OpenDBExtranetAccessResponse,
   KillSessionRequest,
   ModifyDBInstanceNameRequest,
   DeleteAccountRequest,
+  TableColumn,
   CreateTmpInstancesResponse,
   UpgradeDBInstanceRequest,
   SecurityGroupBound,
@@ -155,6 +157,7 @@ import {
   DisassociateSecurityGroupsRequest,
   DBAccount,
   CreateHourDBInstanceRequest,
+  DescribeDatabaseTableResponse,
   DescribeAccountPrivilegesRequest,
   DescribeDBPerformanceDetailsResponse,
   SqlLogItem,
@@ -716,6 +719,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
   ): Promise<DescribeDBSecurityGroupsResponse> {
     return this.request("DescribeDBSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+   */
+  async DescribeDatabaseTable(
+    req: DescribeDatabaseTableRequest,
+    cb?: (error: string, rep: DescribeDatabaseTableResponse) => void
+  ): Promise<DescribeDatabaseTableResponse> {
+    return this.request("DescribeDatabaseTable", req, cb)
   }
 
   /**

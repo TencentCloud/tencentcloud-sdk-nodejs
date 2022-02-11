@@ -122,14 +122,14 @@ export interface CreateDBImportJobRequest {
   InstanceId: string
 
   /**
-   * 文件名称。该文件是指用户已上传到腾讯云的文件，仅支持.sql文件。
-   */
-  FileName: string
-
-  /**
    * 云数据库的用户名。
    */
   User: string
+
+  /**
+   * 文件名称。该文件是指用户已上传到腾讯云的文件，仅支持.sql文件。
+   */
+  FileName?: string
 
   /**
    * 云数据库实例 User 账号的密码。
@@ -140,6 +140,11 @@ export interface CreateDBImportJobRequest {
    * 导入的目标数据库名，不传表示不指定数据库。
    */
   DbName?: string
+
+  /**
+   * 腾讯云COS文件链接。 用户需要指定 FileName 或者 CosUrl 其中一个。 COS文件需要是 .sql 文件。
+   */
+  CosUrl?: string
 }
 
 /**

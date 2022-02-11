@@ -130,6 +130,7 @@ export { rp } from "./rp";
 export { rum } from "./rum";
 export { scf } from "./scf";
 export { ses } from "./ses";
+export { smh } from "./smh";
 export { smpn } from "./smpn";
 export { sms } from "./sms";
 export { soe } from "./soe";
