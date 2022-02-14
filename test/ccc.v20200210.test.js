@@ -18,9 +18,29 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
-it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
+it("ccc.v20200210.DescribeStaffInfoList", async function () {
     try {
-       const data = await client.DescribeStaffStatusMetrics({})
+       const data = await client.DescribeStaffInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
+    try {
+       const data = await client.DescribePSTNActiveSessionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.BindStaffSkillGroupList", async function () {
+    try {
+       const data = await client.BindStaffSkillGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,39 +68,9 @@ it("ccc.v20200210.DescribeIMCdrs", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelSession", async function () {
-    try {
-       const data = await client.DescribeTelSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.CreateUserSig", async function () {
-    try {
-       const data = await client.CreateUserSig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ccc.v20200210.DeleteStaff", async function () {
     try {
        const data = await client.DeleteStaff({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
-    try {
-       const data = await client.DescribeSkillGroupInfoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +88,99 @@ it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
     }
 })
 
+it("ccc.v20200210.CreateStaff", async function () {
+    try {
+       const data = await client.CreateStaff({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeTelSession", async function () {
+    try {
+       const data = await client.DescribeTelSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.CreateCallOutSession", async function () {
+    try {
+       const data = await client.CreateCallOutSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeAutoCalloutTask", async function () {
+    try {
+       const data = await client.DescribeAutoCalloutTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeTelCdr", async function () {
+    try {
+       const data = await client.DescribeTelCdr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
+    try {
+       const data = await client.DescribeSkillGroupInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.StopAutoCalloutTask", async function () {
+    try {
+       const data = await client.StopAutoCalloutTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeCCCBuyInfoList", async function () {
     try {
        const data = await client.DescribeCCCBuyInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
+    try {
+       const data = await client.UnbindStaffSkillGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeStaffStatusMetrics", async function () {
+    try {
+       const data = await client.DescribeStaffStatusMetrics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +198,19 @@ it("ccc.v20200210.DescribeTelCallInfo", async function () {
     }
 })
 
-it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
+it("ccc.v20200210.CreateAutoCalloutTask", async function () {
     try {
-       const data = await client.UnbindStaffSkillGroupList({})
+       const data = await client.CreateAutoCalloutTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.CreateUserSig", async function () {
+    try {
+       const data = await client.CreateUserSig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,66 +241,6 @@ it("ccc.v20200210.CreateSDKLoginToken", async function () {
 it("ccc.v20200210.DescribeSeatUserList", async function () {
     try {
        const data = await client.DescribeSeatUserList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.CreateCallOutSession", async function () {
-    try {
-       const data = await client.CreateCallOutSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
-    try {
-       const data = await client.DescribePSTNActiveSessionList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.DescribeStaffInfoList", async function () {
-    try {
-       const data = await client.DescribeStaffInfoList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.CreateStaff", async function () {
-    try {
-       const data = await client.CreateStaff({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.BindStaffSkillGroupList", async function () {
-    try {
-       const data = await client.BindStaffSkillGroupList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ccc.v20200210.DescribeTelCdr", async function () {
-    try {
-       const data = await client.DescribeTelCdr({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

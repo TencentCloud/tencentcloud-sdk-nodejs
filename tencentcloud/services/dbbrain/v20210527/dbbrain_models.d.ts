@@ -429,6 +429,23 @@ export interface SlowLogTopSqlItem {
     Md5: string;
 }
 /**
+ * DescribeProxySessionKillTasks请求参数结构体
+ */
+export interface DescribeProxySessionKillTasksRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * kill 会话异步任务 ID,  接口 CreateProxySessionKillTask 调用成功后获取。
+      */
+    AsyncRequestIds: Array<number>;
+    /**
+      * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
+      */
+    Product: string;
+}
+/**
  * DescribeMySqlProcessList返回参数结构体
  */
 export interface DescribeMySqlProcessListResponse {
@@ -479,6 +496,55 @@ export interface DescribeTopSpaceTablesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 展示 redis kill 会话任务状态。
+ */
+export interface TaskInfo {
+    /**
+      * 异步任务 ID。
+      */
+    AsyncRequestId: number;
+    /**
+      * 当前实例所有 proxy 列表。
+      */
+    InstProxyList: Array<string>;
+    /**
+      * 当前实例所有 proxy 数量。
+      */
+    InstProxyCount: number;
+    /**
+      * 任务创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 任务启动时间。
+      */
+    StartTime: string;
+    /**
+      * 任务的状态，支持的取值包括："created" - 新建；"chosen" - 待执行； "running" - 执行中；"failed" - 失败；"finished" - 已完成。
+      */
+    TaskStatus: string;
+    /**
+      * 完成 kill 任务的 proxyId。
+      */
+    FinishedProxyList: Array<string>;
+    /**
+      * kill 任务实行失败的 proxyId。
+      */
+    FailedProxyList: Array<string>;
+    /**
+      * 任务结束时间。
+      */
+    EndTime: string;
+    /**
+      * 任务执行进度。
+      */
+    Progress: number;
+    /**
+      * 实例 ID。
+      */
+    InstanceId: string;
 }
 /**
  * KillMySqlThreads返回参数结构体
@@ -1106,26 +1172,21 @@ export interface CreateDBDiagReportUrlRequest {
     Product?: string;
 }
 /**
- * 扣分详情。
+ * DescribeSecurityAuditLogExportTasks返回参数结构体
  */
-export interface ScoreDetail {
+export interface DescribeSecurityAuditLogExportTasksResponse {
     /**
-      * 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。
+      * 安全审计日志导出任务列表。
       */
-    IssueType: string;
+    Tasks: Array<SecLogExportTaskInfo>;
     /**
-      * 扣分总分。
+      * 安全审计日志导出任务总数。
       */
-    ScoreLost: number;
+    TotalCount: number;
     /**
-      * 扣分总分上限。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ScoreLostMax: number;
-    /**
-      * 扣分项列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Items: Array<ScoreItem>;
+    RequestId?: string;
 }
 /**
  * 获取健康得分返回的详情。
@@ -2098,21 +2159,26 @@ export interface DescribeHealthScoreResponse {
     RequestId?: string;
 }
 /**
- * DescribeSecurityAuditLogExportTasks返回参数结构体
+ * 扣分详情。
  */
-export interface DescribeSecurityAuditLogExportTasksResponse {
+export interface ScoreDetail {
     /**
-      * 安全审计日志导出任务列表。
+      * 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。
       */
-    Tasks: Array<SecLogExportTaskInfo>;
+    IssueType: string;
     /**
-      * 安全审计日志导出任务总数。
+      * 扣分总分。
       */
-    TotalCount: number;
+    ScoreLost: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 扣分总分上限。
       */
-    RequestId?: string;
+    ScoreLostMax: number;
+    /**
+      * 扣分项列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Items: Array<ScoreItem>;
 }
 /**
  * DescribeTopSpaceSchemas请求参数结构体
@@ -2226,6 +2292,23 @@ export interface DescribeSecurityAuditLogDownloadUrlsResponse {
       * 导出结果的COS链接列表。当结果集很大时，可能会切分为多个url下载。
       */
     Urls: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeProxySessionKillTasks返回参数结构体
+ */
+export interface DescribeProxySessionKillTasksResponse {
+    /**
+      * kill 任务的详情。
+      */
+    Tasks: Array<TaskInfo>;
+    /**
+      * 任务总数。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

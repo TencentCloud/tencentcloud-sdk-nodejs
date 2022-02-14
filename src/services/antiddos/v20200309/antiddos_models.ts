@@ -99,6 +99,157 @@ export interface DescribeBlackWhiteIpListResponse {
 }
 
 /**
+ * 特征过滤配置
+ */
+export interface PacketFilterConfig {
+  /**
+   * 协议，取值[tcp udp icmp all]
+   */
+  Protocol: string
+
+  /**
+   * 起始源端口，取值0~65535
+   */
+  SportStart: number
+
+  /**
+   * 结束源端口，取值1~65535，必须大于等于起始源端口
+   */
+  SportEnd: number
+
+  /**
+   * 起始目的端口，取值0~65535
+   */
+  DportStart: number
+
+  /**
+   * 结束目的端口，取值1~65535，必须大于等于起始目的端口
+   */
+  DportEnd: number
+
+  /**
+   * 最小报文长度，取值1-1500
+   */
+  PktlenMin: number
+
+  /**
+   * 最大报文长度，取值1-1500，必须大于等于最小报文长度
+   */
+  PktlenMax: number
+
+  /**
+      * 动作，取值[
+drop(丢弃)
+transmit(放行)
+drop_black(丢弃并拉黑)
+drop_rst(拦截)
+drop_black_rst(拦截并拉黑)
+forward(继续防护)
+]
+      */
+  Action: string
+
+  /**
+      * 检测位置，取值[
+begin_l3(IP头)
+begin_l4(TCP/UDP头)
+begin_l5(T载荷)
+no_match(不匹配)
+]
+      */
+  MatchBegin?: string
+
+  /**
+      * 检测类型，取值[
+sunday(关键字)
+pcre(正则表达式)
+]
+      */
+  MatchType?: string
+
+  /**
+      * 检测值，关键字符串或正则表达式,取值[
+当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;
+当检测类型为pcre时, 请填写正则表达式字符串;
+]
+      */
+  Str?: string
+
+  /**
+   * 从检测位置开始的检测深度，取值[0,1500]
+   */
+  Depth?: number
+
+  /**
+   * 从检测位置开始的偏移量，取值范围[0,Depth]
+   */
+  Offset?: number
+
+  /**
+      * 是否包含检测值，取值[
+0(包含)
+1(不包含)
+]
+      */
+  IsNot?: number
+
+  /**
+      * 当有第二个检测条件时，与第一检测条件的且或关系，取值[
+and(且的关系)
+none(当没有第二个检测条件时填写此值)
+]
+      */
+  MatchLogic?: string
+
+  /**
+      * 第二个检测位置，取值[
+begin_l5(载荷)
+no_match(不匹配)
+]
+      */
+  MatchBegin2?: string
+
+  /**
+      * 第二个检测类型，取值[
+sunday(关键字)
+pcre(正则表达式)
+]
+      */
+  MatchType2?: string
+
+  /**
+      * 第二个检测值，关键字符串或正则表达式,取值[
+当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;
+当检测类型为pcre时, 请填写正则表达式字符串;
+]
+      */
+  Str2?: string
+
+  /**
+   * 从第二个检测位置开始的第二个检测深度，取值[0,1500]
+   */
+  Depth2?: number
+
+  /**
+   * 从第二个检测位置开始的偏移量，取值范围[0,Depth2]
+   */
+  Offset2?: number
+
+  /**
+      * 第二个检测是否包含检测值，取值[
+0(包含)
+1(不包含)
+]
+      */
+  IsNot2?: number
+
+  /**
+   * 特征过滤配置添加成功后自动生成的规则ID，当添加新特征过滤配置时，此字段不用填写；
+   */
+  Id?: string
+}
+
+/**
  * 转发类型
  */
 export interface ProxyTypeInfo {
@@ -144,6 +295,51 @@ export interface CreateBoundIPRequest {
    * 已弃用，不填
    */
   CopyPolicy?: string
+}
+
+/**
+ * CC频率限制策略项字段
+ */
+export interface CCReqLimitPolicyRecord {
+  /**
+   * 统计周期，可取值1，10，30，60，单位秒
+   */
+  Period: number
+
+  /**
+   * 请求数，取值1~20000
+   */
+  RequestNum: number
+
+  /**
+   * 频率限制策略方式，可取值alg表示验证码，drop表示丢弃
+   */
+  Action: string
+
+  /**
+   * 频率限制策略时长，可取值1~86400，单位秒
+   */
+  ExecuteDuration: number
+
+  /**
+   * 策略项比对方式，可取值include表示包含，equal表示等于
+   */
+  Mode: string
+
+  /**
+   * Uri，三个策略项仅可填其中之一
+   */
+  Uri?: string
+
+  /**
+   * User-Agent，三个策略项仅可填其中之一
+   */
+  UserAgent?: string
+
+  /**
+   * Cookie，三个策略项仅可填其中之一
+   */
+  Cookie?: string
 }
 
 /**
@@ -247,18 +443,18 @@ export interface IPAlarmThresholdRelation {
 }
 
 /**
- * ModifyDDoSGeoIPBlockConfig请求参数结构体
+ * DeleteCCRequestLimitPolicy请求参数结构体
  */
-export interface ModifyDDoSGeoIPBlockConfigRequest {
+export interface DeleteCCRequestLimitPolicyRequest {
   /**
-   * 资源实例ID
+   * 实例Id
    */
   InstanceId: string
 
   /**
-   * DDoS区域封禁配置，填写参数时配置ID不能为空
+   * 策略Id
    */
-  DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig
+  PolicyId: string
 }
 
 /**
@@ -277,28 +473,23 @@ export interface DescribeL7RulesBySSLCertIdResponse {
 }
 
 /**
- * DescribeListDDoSSpeedLimitConfig请求参数结构体
+ * DescribeDDoSBlackWhiteIpList返回参数结构体
  */
-export interface DescribeListDDoSSpeedLimitConfigRequest {
+export interface DescribeDDoSBlackWhiteIpListResponse {
   /**
-   * 页起始偏移，取值为(页码-1)*一页条数
+   * 黑名单IP列表
    */
-  Offset: number
+  BlackIpList: Array<IpSegment>
 
   /**
-   * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
+   * 白名单IP列表
    */
-  Limit: number
+  WhiteIpList: Array<IpSegment>
 
   /**
-   * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FilterInstanceId: string
-
-  /**
-   * IP搜索
-   */
-  FilterIp?: string
+  RequestId?: string
 }
 
 /**
@@ -334,6 +525,16 @@ export interface ModifyNewDomainRulesRequest {
    * 域名转发规则
    */
   Rule: NewL7RuleEntry
+}
+
+/**
+ * 地域信息
+ */
+export interface RegionInfo {
+  /**
+   * 地域名称，例如，ap-guangzhou
+   */
+  Region: string
 }
 
 /**
@@ -396,7 +597,7 @@ export interface DescribeListBGPInstancesRequest {
   FilterLine?: number
 
   /**
-   * 状态搜索，idle：允许中；attacking：攻击中；blocking：封堵中
+   * 状态搜索，idle：运行中；attacking：攻击中；blocking：封堵中
    */
   FilterStatus?: string
 
@@ -422,6 +623,31 @@ export interface KeyValue {
 }
 
 /**
+ * ModifyCcBlackWhiteIpList请求参数结构体
+ */
+export interface ModifyCcBlackWhiteIpListRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * IP列表
+   */
+  IpList: Array<IpSegment>
+
+  /**
+   * IP类型，取值[black(黑名单IP), white(白名单IP)]
+   */
+  Type: string
+
+  /**
+   * 策略Id
+   */
+  PolicyId: string
+}
+
+/**
  * DeleteDDoSSpeedLimitConfig请求参数结构体
  */
 export interface DeleteDDoSSpeedLimitConfigRequest {
@@ -437,18 +663,23 @@ export interface DeleteDDoSSpeedLimitConfigRequest {
 }
 
 /**
- * CreateDDoSConnectLimit请求参数结构体
+ * CreatePacketFilterConfig返回参数结构体
  */
-export interface CreateDDoSConnectLimitRequest {
+export interface CreatePacketFilterConfigResponse {
   /**
-   * 资源实例Id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
+}
 
+/**
+ * CreateCCReqLimitPolicy返回参数结构体
+ */
+export interface CreateCCReqLimitPolicyResponse {
   /**
-   * 连接抑制配置
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ConnectLimitConfig: ConnectLimitConfig
+  RequestId?: string
 }
 
 /**
@@ -492,6 +723,26 @@ export interface CreateL7RuleCertsRequest {
 }
 
 /**
+ * CreateCCPrecisionPolicy返回参数结构体
+ */
+export interface CreateCCPrecisionPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCcGeoIPBlockConfig返回参数结构体
+ */
+export interface DeleteCcGeoIPBlockConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteDDoSGeoIPBlockConfig请求参数结构体
  */
 export interface DeleteDDoSGeoIPBlockConfigRequest {
@@ -504,6 +755,46 @@ export interface DeleteDDoSGeoIPBlockConfigRequest {
    * DDoS区域封禁配置，填写参数时配置ID不能为空
    */
   DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig
+}
+
+/**
+ * ModifyDDoSGeoIPBlockConfig返回参数结构体
+ */
+export interface ModifyDDoSGeoIPBlockConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCcBlackWhiteIpList返回参数结构体
+ */
+export interface DescribeCcBlackWhiteIpListResponse {
+  /**
+   * CC四层黑白名单策略列表总数
+   */
+  Total: number
+
+  /**
+   * CC四层黑白名单策略列表详情
+   */
+  CcBlackWhiteIpList: Array<CcBlackWhiteIpPolicy>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCCLevelPolicy返回参数结构体
+ */
+export interface ModifyCCLevelPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -600,23 +891,58 @@ export interface ModifyNewDomainRulesResponse {
 }
 
 /**
- * DescribeDDoSBlackWhiteIpList返回参数结构体
+ * CC四层黑白名单列表
  */
-export interface DescribeDDoSBlackWhiteIpListResponse {
+export interface CcBlackWhiteIpPolicy {
   /**
-   * 黑名单IP列表
+   * 策略Id
    */
-  BlackIpList: Array<IpSegment>
+  PolicyId: string
 
   /**
-   * 白名单IP列表
+   * 实例Id
    */
-  WhiteIpList: Array<IpSegment>
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * IP地址
    */
-  RequestId?: string
+  Ip: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 协议
+   */
+  Protocol: string
+
+  /**
+   * IP类型，取值[black(黑名单IP), white(白名单IP)]
+   */
+  Type: string
+
+  /**
+   * 黑白名单IP地址
+   */
+  BlackWhiteIp: string
+
+  /**
+   * 掩码
+   */
+  Mask: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
 }
 
 /**
@@ -640,6 +966,16 @@ export interface DescribeDDoSConnectLimitListResponse {
 }
 
 /**
+ * ModifyPacketFilterConfig返回参数结构体
+ */
+export interface ModifyPacketFilterConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateWaterPrintConfig返回参数结构体
  */
 export interface CreateWaterPrintConfigResponse {
@@ -647,6 +983,26 @@ export interface CreateWaterPrintConfigResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyPortAclConfig请求参数结构体
+ */
+export interface ModifyPortAclConfigRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 旧端口acl策略
+   */
+  OldAclConfig: AclConfig
+
+  /**
+   * 新端口acl策略
+   */
+  NewAclConfig: AclConfig
 }
 
 /**
@@ -866,6 +1222,26 @@ export interface CreateDDoSBlackWhiteIpListRequest {
 }
 
 /**
+ * ModifyCCReqLimitPolicy请求参数结构体
+ */
+export interface ModifyCCReqLimitPolicyRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 策略Id
+   */
+  PolicyId: string
+
+  /**
+   * 策略项
+   */
+  Policy: CCReqLimitPolicyRecord
+}
+
+/**
  * DisassociateDDoSEipAddress返回参数结构体
  */
 export interface DisassociateDDoSEipAddressResponse {
@@ -922,6 +1298,16 @@ export interface SourceServer {
  * ModifyDomainUsrName返回参数结构体
  */
 export interface ModifyDomainUsrNameResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCcBlackWhiteIpList返回参数结构体
+ */
+export interface ModifyCcBlackWhiteIpListResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1135,13 +1521,33 @@ export interface BGPIPInstanceUsages {
 }
 
 /**
- * ModifyPacketFilterConfig返回参数结构体
+ * ModifyDDoSBlackWhiteIpList请求参数结构体
  */
-export interface ModifyPacketFilterConfigResponse {
+export interface ModifyDDoSBlackWhiteIpListRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 资源Id
    */
-  RequestId?: string
+  InstanceId: string
+
+  /**
+   * 当前黑名单类型，取值black时黑名单；取值white时白名单
+   */
+  OldIpType: string
+
+  /**
+   * 当前配置的Ip段，包含ip与掩码
+   */
+  OldIp: IpSegment
+
+  /**
+   * 修改后黑白名单类型，取值black时黑名单，取值white时白名单
+   */
+  NewIpType: string
+
+  /**
+   * 当前配置的Ip段，包含ip与掩码
+   */
+  NewIp: IpSegment
 }
 
 /**
@@ -1170,6 +1576,31 @@ export interface DescribeListDDoSGeoIPBlockConfigRequest {
 }
 
 /**
+ * CreateCcGeoIPBlockConfig返回参数结构体
+ */
+export interface CreateCcGeoIPBlockConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDDoSGeoIPBlockConfig请求参数结构体
+ */
+export interface ModifyDDoSGeoIPBlockConfigRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * DDoS区域封禁配置，填写参数时配置ID不能为空
+   */
+  DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig
+}
+
+/**
  * 7层转发规则
  */
 export interface Layer7Rule {
@@ -1195,6 +1626,16 @@ export interface Layer7Rule {
 }
 
 /**
+ * ModifyPortAclConfig返回参数结构体
+ */
+export interface ModifyPortAclConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBasicDeviceStatus请求参数结构体
  */
 export interface DescribeBasicDeviceStatusRequest {
@@ -1202,6 +1643,21 @@ export interface DescribeBasicDeviceStatusRequest {
    * IP 资源列表
    */
   IpList: Array<string>
+}
+
+/**
+ * DeleteCcGeoIPBlockConfig请求参数结构体
+ */
+export interface DeleteCcGeoIPBlockConfigRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * CC区域封禁配置，填写参数时配置ID不能为空
+   */
+  CcGeoIPBlockConfig: CcGeoIPBlockConfig
 }
 
 /**
@@ -1286,6 +1742,21 @@ export interface DeleteWaterPrintKeyRequest {
 }
 
 /**
+ * 操作返回码，只用于返回成功的情况
+ */
+export interface SuccessCode {
+  /**
+   * 描述
+   */
+  Message: string
+
+  /**
+   * 成功/错误码
+   */
+  Code: string
+}
+
+/**
  * AssociateDDoSEipAddress返回参数结构体
  */
 export interface AssociateDDoSEipAddressResponse {
@@ -1354,18 +1825,43 @@ export interface DescribeBlackWhiteIpListRequest {
 }
 
 /**
- * ModifyDomainUsrName请求参数结构体
+ * CreateCcGeoIPBlockConfig请求参数结构体
  */
-export interface ModifyDomainUsrNameRequest {
+export interface CreateCcGeoIPBlockConfigRequest {
   /**
-   * 用户CNAME
+   * 实例id
    */
-  DomainName: string
+  InstanceId: string
 
   /**
-   * 域名名称
+   * ip地址
    */
-  DomainUserName: string
+  IP: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 协议类型
+   */
+  Protocol: string
+
+  /**
+   * CC区域封禁配置，填写参数时配置ID请为空
+   */
+  CcGeoIPBlockConfig: CcGeoIPBlockConfig
+}
+
+/**
+ * DeletePortAclConfig返回参数结构体
+ */
+export interface DeletePortAclConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1515,6 +2011,21 @@ export interface ProtocolBlockConfig {
    * 异常空连接防护，取值[0(防护关)，1(防护开)]
    */
   CheckExceptNullConnect: number
+}
+
+/**
+ * DeleteCCPrecisionPolicy请求参数结构体
+ */
+export interface DeleteCCPrecisionPolicyRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 策略Id
+   */
+  PolicyId: string
 }
 
 /**
@@ -1843,6 +2354,46 @@ off(关闭)
 }
 
 /**
+ * DescribeCCReqLimitPolicyList请求参数结构体
+ */
+export interface DescribeCCReqLimitPolicyListRequest {
+  /**
+   * 大禹子产品代号（bgp-multip表示高防包，bgpip表示高防ip）
+   */
+  Business: string
+
+  /**
+   * 页起始偏移，取值为(页码-1)*一页条数
+   */
+  Offset: number
+
+  /**
+   * 一页条数
+   */
+  Limit: number
+
+  /**
+   * 指定实例Id
+   */
+  InstanceId?: string
+
+  /**
+   * Ip地址，普通高防ip要传该字段
+   */
+  Ip?: string
+
+  /**
+   * 域名，普通高防ip要传该字段
+   */
+  Domain?: string
+
+  /**
+   * 协议，普通高防ip要传该字段
+   */
+  Protocol?: string
+}
+
+/**
  * 端口acl策略配置与高防资源关联
  */
 export interface AclConfigRelation {
@@ -1878,6 +2429,21 @@ export interface DescribeListDDoSSpeedLimitConfigResponse {
 }
 
 /**
+ * ModifyDDoSThreshold返回参数结构体
+ */
+export interface ModifyDDoSThresholdResponse {
+  /**
+   * 成功码
+   */
+  Success: SuccessCode
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDDoSGeoIPBlockConfig返回参数结构体
  */
 export interface CreateDDoSGeoIPBlockConfigResponse {
@@ -1885,6 +2451,56 @@ export interface CreateDDoSGeoIPBlockConfigResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CC精准防护策略信息
+ */
+export interface CCPrecisionPolicy {
+  /**
+   * 策略Id
+   */
+  PolicyId: string
+
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * Ip地址
+   */
+  Ip: string
+
+  /**
+   * 协议
+   */
+  Protocol: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 策略方式（丢弃或验证码）
+   */
+  PolicyAction: string
+
+  /**
+   * 策略列表
+   */
+  PolicyList: Array<CCPrecisionPlyRecord>
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
 }
 
 /**
@@ -1910,6 +2526,41 @@ export interface ListenerCcThreholdConfig {
    * cc防护阈值
    */
   CCThreshold: number
+}
+
+/**
+ * 高防弹性公网IP关联信息
+ */
+export interface EipAddressRelation {
+  /**
+      * 高防弹性公网IP绑定的实例地区，例如hk代表香港
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EipAddressRegion: string
+
+  /**
+      * 绑定的资源实例ID。可能是一个CVM。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EipBoundRscIns: string
+
+  /**
+      * 绑定的弹性网卡ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EipBoundRscEni: string
+
+  /**
+      * 绑定的资源内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EipBoundRscVip: string
+
+  /**
+      * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModifyTime: string
 }
 
 /**
@@ -1964,38 +2615,53 @@ export interface IPLineInfo {
 }
 
 /**
- * 高防弹性公网IP关联信息
+ * DescribeCcBlackWhiteIpList请求参数结构体
  */
-export interface EipAddressRelation {
+export interface DescribeCcBlackWhiteIpListRequest {
   /**
-      * 高防弹性公网IP绑定的实例地区，例如hk代表香港
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EipAddressRegion: string
+   * 大禹子产品代号（bgp-multip：表示高防包；bgpip：表示高防ip）
+   */
+  Business: string
 
   /**
-      * 绑定的资源实例ID。可能是一个CVM。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EipBoundRscIns: string
+   * 指定特定实例Id
+   */
+  InstanceId: string
 
   /**
-      * 绑定的弹性网卡ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EipBoundRscEni: string
+   * 页起始偏移，取值为(页码-1)*一页条数
+   */
+  Offset: number
 
   /**
-      * 绑定的资源内网ip
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EipBoundRscVip: string
+   * 一页条数
+   */
+  Limit: number
 
   /**
-      * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ModifyTime: string
+   * Ip地址，普通高防ip要传该字段
+   */
+  Ip?: string
+
+  /**
+   * 域名，普通高防ip要传该字段
+   */
+  Domain?: string
+
+  /**
+   * 协议，普通高防ip要传该字段
+   */
+  Protocol?: string
+
+  /**
+   * 筛选ip，需要筛选黑白名单ip时传该字段
+   */
+  FilterIp?: string
+
+  /**
+   * 黑白名单筛选字段，需要筛选黑白名单列表时传该字段
+   */
+  FilterType?: string
 }
 
 /**
@@ -2016,6 +2682,21 @@ export interface DescribeListListenerResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeletePortAclConfig请求参数结构体
+ */
+export interface DeletePortAclConfigRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 端口acl策略
+   */
+  AclConfig: AclConfig
 }
 
 /**
@@ -2079,13 +2760,18 @@ export interface CreatePortAclConfigResponse {
 }
 
 /**
- * ModifyL7RulesEdge返回参数结构体
+ * ModifyDDoSLevel返回参数结构体
  */
-export interface ModifyL7RulesEdgeResponse {
+export interface ModifyDDoSLevelResponse {
   /**
-   * 成功码
+   * 防护等级，取值[low,middle,high]
    */
-  Success: SuccessCode
+  DDoSLevel: string
+
+  /**
+   * 资源ID
+   */
+  Id: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2106,6 +2792,41 @@ export interface CreateL7RuleCertsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCCPrecisionPolicy请求参数结构体
+ */
+export interface CreateCCPrecisionPolicyRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * IP值
+   */
+  Ip: string
+
+  /**
+   * 协议， 可取值HTTP，HTTPS
+   */
+  Protocol: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 策略方式，可取值alg表示验证码，drop表示丢弃
+   */
+  PolicyAction: string
+
+  /**
+   * 策略记录
+   */
+  PolicyList: Array<CCPrecisionPlyRecord>
 }
 
 /**
@@ -2289,6 +3010,52 @@ export interface CreateDefaultAlarmThresholdResponse {
 }
 
 /**
+ * ModifyDDoSThreshold请求参数结构体
+ */
+export interface ModifyDDoSThresholdRequest {
+  /**
+      * DDoS清洗阈值，取值[0, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 1000];
+当设置值为0时，表示采用默认值；
+      */
+  Threshold: number
+
+  /**
+   * 资源ID
+   */
+  Id: string
+
+  /**
+   * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+   */
+  Business: string
+}
+
+/**
+ * ModifyDDoSLevel请求参数结构体
+ */
+export interface ModifyDDoSLevelRequest {
+  /**
+   * 资源ID
+   */
+  Id: string
+
+  /**
+   * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+   */
+  Business: string
+
+  /**
+   * =get表示读取防护等级；=set表示修改防护等级
+   */
+  Method: string
+
+  /**
+   * 防护等级，取值[low,middle,high]；当Method=set时必填
+   */
+  DDoSLevel?: string
+}
+
+/**
  * DescribeListIPAlarmConfig返回参数结构体
  */
 export interface DescribeListIPAlarmConfigResponse {
@@ -2309,18 +3076,168 @@ export interface DescribeListIPAlarmConfigResponse {
 }
 
 /**
- * 操作返回码，只用于返回成功的情况
+ * CC地域封禁列表详情
  */
-export interface SuccessCode {
+export interface CcGeoIpPolicyNew {
   /**
-   * 描述
+   * 策略Id
    */
-  Message: string
+  PolicyId: string
 
   /**
-   * 成功/错误码
+   * 实例Id
    */
-  Code: string
+  InstanceId: string
+
+  /**
+   * IP地址
+   */
+  Ip: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 协议，可取值HTTP，HTTPS
+   */
+  Protocol: string
+
+  /**
+   * 用户动作，drop或alg
+   */
+  Action: string
+
+  /**
+   * 地域类型，分为china, oversea与customized
+   */
+  RegionType: string
+
+  /**
+   * 用户选择封禁的地域ID列表
+   */
+  AreaList: Array<number>
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
+}
+
+/**
+ * ModifyDDoSBlackWhiteIpList返回参数结构体
+ */
+export interface ModifyDDoSBlackWhiteIpListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CC频率限制策略
+ */
+export interface CCReqLimitPolicy {
+  /**
+   * 策略Id
+   */
+  PolicyId: string
+
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * Ip地址
+   */
+  Ip: string
+
+  /**
+   * 协议，可取值HTTP，HTTPS
+   */
+  Protocol: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 策略项
+   */
+  PolicyRecord: CCReqLimitPolicyRecord
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 修改时间
+   */
+  ModifyTime: string
+}
+
+/**
+ * DescribeCCPrecisionPlyList请求参数结构体
+ */
+export interface DescribeCCPrecisionPlyListRequest {
+  /**
+   * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防ip）
+   */
+  Business: string
+
+  /**
+   * 页起始偏移，取值为(页码-1)*一页条数
+   */
+  Offset: number
+
+  /**
+   * 一页条数
+   */
+  Limit: number
+
+  /**
+   * 指定特定实例Id
+   */
+  InstanceId?: string
+
+  /**
+   * ip地址，普通高防ip要传该字段
+   */
+  Ip?: string
+
+  /**
+   * 域名，普通高防ip要传该字段
+   */
+  Domain?: string
+
+  /**
+   * 协议，普通高防ip要传该字段
+   */
+  Protocol?: string
+}
+
+/**
+ * ModifyL7RulesEdge返回参数结构体
+ */
+export interface ModifyL7RulesEdgeResponse {
+  /**
+   * 成功码
+   */
+  Success: SuccessCode
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2339,19 +3256,39 @@ export interface ProtocolPort {
 }
 
 /**
- * DescribeListBGPInstances返回参数结构体
+ * ModifyCCThresholdPolicy请求参数结构体
  */
-export interface DescribeListBGPInstancesResponse {
+export interface ModifyCCThresholdPolicyRequest {
   /**
-   * 总数
+   * 实例Id
    */
-  Total: number
+  InstanceId: string
 
   /**
-   * 高防包资产实例列表
+   * Ip地址
    */
-  InstanceList: Array<BGPInstance>
+  Ip: string
 
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 协议，可取值HTTP，HTTPS
+   */
+  Protocol: string
+
+  /**
+   * 清洗阈值，-1表示开启“默认”模式
+   */
+  Threshold: number
+}
+
+/**
+ * DeleteCCPrecisionPolicy返回参数结构体
+ */
+export interface DeleteCCPrecisionPolicyResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2432,154 +3369,13 @@ export interface PortSegment {
 }
 
 /**
- * 特征过滤配置
+ * ModifyCCReqLimitPolicy返回参数结构体
  */
-export interface PacketFilterConfig {
+export interface ModifyCCReqLimitPolicyResponse {
   /**
-   * 协议，取值[tcp udp icmp all]
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Protocol: string
-
-  /**
-   * 起始源端口，取值0~65535
-   */
-  SportStart: number
-
-  /**
-   * 结束源端口，取值1~65535，必须大于等于起始源端口
-   */
-  SportEnd: number
-
-  /**
-   * 起始目的端口，取值0~65535
-   */
-  DportStart: number
-
-  /**
-   * 结束目的端口，取值1~65535，必须大于等于起始目的端口
-   */
-  DportEnd: number
-
-  /**
-   * 最小报文长度，取值1-1500
-   */
-  PktlenMin: number
-
-  /**
-   * 最大报文长度，取值1-1500，必须大于等于最小报文长度
-   */
-  PktlenMax: number
-
-  /**
-      * 动作，取值[
-drop(丢弃)
-transmit(放行)
-drop_black(丢弃并拉黑)
-drop_rst(拦截)
-drop_black_rst(拦截并拉黑)
-forward(继续防护)
-]
-      */
-  Action: string
-
-  /**
-      * 检测位置，取值[
-begin_l3(IP头)
-begin_l4(TCP/UDP头)
-begin_l5(T载荷)
-no_match(不匹配)
-]
-      */
-  MatchBegin?: string
-
-  /**
-      * 检测类型，取值[
-sunday(关键字)
-pcre(正则表达式)
-]
-      */
-  MatchType?: string
-
-  /**
-      * 检测值，关键字符串或正则表达式,取值[
-当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;
-当检测类型为pcre时, 请填写正则表达式字符串;
-]
-      */
-  Str?: string
-
-  /**
-   * 从检测位置开始的检测深度，取值[0,1500]
-   */
-  Depth?: number
-
-  /**
-   * 从检测位置开始的偏移量，取值范围[0,Depth]
-   */
-  Offset?: number
-
-  /**
-      * 是否包含检测值，取值[
-0(包含)
-1(不包含)
-]
-      */
-  IsNot?: number
-
-  /**
-      * 当有第二个检测条件时，与第一检测条件的且或关系，取值[
-and(且的关系)
-none(当没有第二个检测条件时填写此值)
-]
-      */
-  MatchLogic?: string
-
-  /**
-      * 第二个检测位置，取值[
-begin_l5(载荷)
-no_match(不匹配)
-]
-      */
-  MatchBegin2?: string
-
-  /**
-      * 第二个检测类型，取值[
-sunday(关键字)
-pcre(正则表达式)
-]
-      */
-  MatchType2?: string
-
-  /**
-      * 第二个检测值，关键字符串或正则表达式,取值[
-当检测类型为sunday时，请填写字符串或者16进制字节码，例如\x313233对应的是字符串"123"的16进制字节码;
-当检测类型为pcre时, 请填写正则表达式字符串;
-]
-      */
-  Str2?: string
-
-  /**
-   * 从第二个检测位置开始的第二个检测深度，取值[0,1500]
-   */
-  Depth2?: number
-
-  /**
-   * 从第二个检测位置开始的偏移量，取值范围[0,Depth2]
-   */
-  Offset2?: number
-
-  /**
-      * 第二个检测是否包含检测值，取值[
-0(包含)
-1(不包含)
-]
-      */
-  IsNot2?: number
-
-  /**
-   * 特征过滤配置添加成功后自动生成的规则ID，当添加新特征过滤配置时，此字段不用填写；
-   */
-  Id?: string
+  RequestId?: string
 }
 
 /**
@@ -2652,13 +3448,33 @@ export interface BGPInstanceSpecification {
 }
 
 /**
- * CreatePacketFilterConfig返回参数结构体
+ * ModifyDomainUsrName请求参数结构体
  */
-export interface CreatePacketFilterConfigResponse {
+export interface ModifyDomainUsrNameRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 用户CNAME
    */
-  RequestId?: string
+  DomainName: string
+
+  /**
+   * 域名名称
+   */
+  DomainUserName: string
+}
+
+/**
+ * CreateDDoSConnectLimit请求参数结构体
+ */
+export interface CreateDDoSConnectLimitRequest {
+  /**
+   * 资源实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 连接抑制配置
+   */
+  ConnectLimitConfig: ConnectLimitConfig
 }
 
 /**
@@ -2727,6 +3543,26 @@ export interface InsL7Rules {
 }
 
 /**
+ * DescribeCCReqLimitPolicyList返回参数结构体
+ */
+export interface DescribeCCReqLimitPolicyListResponse {
+  /**
+   * 频率限制列表总数
+   */
+  Total: number
+
+  /**
+   * 频率限制列表详情
+   */
+  RequestLimitPolicyList: Array<CCReqLimitPolicy>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeListDDoSAI返回参数结构体
  */
 export interface DescribeListDDoSAIResponse {
@@ -2744,6 +3580,48 @@ export interface DescribeListDDoSAIResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyCCPrecisionPolicy返回参数结构体
+ */
+export interface ModifyCCPrecisionPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DDoS防护的区域封禁配置
+ */
+export interface CcGeoIPBlockConfig {
+  /**
+      * 区域类型，取值[
+oversea(海外)
+china(国内)
+customized(自定义地区)
+]
+      */
+  RegionType: string
+
+  /**
+      * 封禁动作，取值[
+drop(拦截)
+alg(人机校验)
+]
+      */
+  Action: string
+
+  /**
+   * 配置ID，配置添加成功后生成；添加新配置时不用填写此字段，修改或删除配置时需要填写配置ID
+   */
+  Id?: string
+
+  /**
+   * 当RegionType为customized时，必须填写AreaList；当RegionType为china或oversea时，AreaList为空
+   */
+  AreaList?: Array<number>
 }
 
 /**
@@ -2963,6 +3841,16 @@ export interface NewL7RuleEntry {
 }
 
 /**
+ * DeleteCcBlackWhiteIpList返回参数结构体
+ */
+export interface DeleteCcBlackWhiteIpListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBoundIP返回参数结构体
  */
 export interface CreateBoundIPResponse {
@@ -2975,6 +3863,31 @@ export interface CreateBoundIPResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeListDDoSSpeedLimitConfig请求参数结构体
+ */
+export interface DescribeListDDoSSpeedLimitConfigRequest {
+  /**
+   * 页起始偏移，取值为(页码-1)*一页条数
+   */
+  Offset: number
+
+  /**
+   * 一页条数，当Limit=0时，默认一页条数为100;最大取值为100
+   */
+  Limit: number
+
+  /**
+   * 资源实例ID搜索, 支持资源实例前缀通配搜索，例如bgp-*表示获取高防包类型的资源实例
+   */
+  FilterInstanceId: string
+
+  /**
+   * IP搜索
+   */
+  FilterIp?: string
 }
 
 /**
@@ -3028,6 +3941,31 @@ export interface DescribeListSchedulingDomainResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyCCPrecisionPolicy请求参数结构体
+ */
+export interface ModifyCCPrecisionPolicyRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 策略Id
+   */
+  PolicyId: string
+
+  /**
+   * 策略方式，可取值alg表示验证码，drop表示丢弃
+   */
+  PolicyAction: string
+
+  /**
+   * 策略记录
+   */
+  PolicyList: Array<CCPrecisionPlyRecord>
 }
 
 /**
@@ -3147,6 +4085,41 @@ other(托管IP)
 }
 
 /**
+ * DeleteCcBlackWhiteIpList请求参数结构体
+ */
+export interface DeleteCcBlackWhiteIpListRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 策略Id
+   */
+  PolicyId: string
+}
+
+/**
+ * DescribeCcGeoIPBlockConfigList返回参数结构体
+ */
+export interface DescribeCcGeoIPBlockConfigListResponse {
+  /**
+   * CC地域封禁策略列表总数
+   */
+  Total: number
+
+  /**
+   * CC地域封禁策略列表详情
+   */
+  CcGeoIpPolicyList: Array<CcGeoIpPolicyNew>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDDoSAI返回参数结构体
  */
 export interface CreateDDoSAIResponse {
@@ -3197,13 +4170,23 @@ export interface DescribeListProtocolBlockConfigRequest {
 }
 
 /**
- * 地域信息
+ * DescribeListBGPInstances返回参数结构体
  */
-export interface RegionInfo {
+export interface DescribeListBGPInstancesResponse {
   /**
-   * 地域名称，例如，ap-guangzhou
+   * 总数
    */
-  Region: string
+  Total: number
+
+  /**
+   * 高防包资产实例列表
+   */
+  InstanceList: Array<BGPInstance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3247,9 +4230,9 @@ export interface DescribeDDoSTrendRequest {
 }
 
 /**
- * ModifyDDoSGeoIPBlockConfig返回参数结构体
+ * DeleteCCRequestLimitPolicy返回参数结构体
  */
-export interface ModifyDDoSGeoIPBlockConfigResponse {
+export interface DeleteCCRequestLimitPolicyResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3351,6 +4334,51 @@ export interface DescribeListPortAclListResponse {
    * 端口acl策略
    */
   AclList: Array<AclConfigRelation>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CC精准防护配置项
+ */
+export interface CCPrecisionPlyRecord {
+  /**
+   * 配置项类型，当前仅支持value
+   */
+  FieldType: string
+
+  /**
+   * 配置字段，可取值cgi， ua， cookie， referer， accept,  srcip
+   */
+  FieldName: string
+
+  /**
+   * 配置取值
+   */
+  Value: string
+
+  /**
+   * 配置项值比对方式，可取值equal ，not_equal， include
+   */
+  ValueOperator: string
+}
+
+/**
+ * DescribeCCPrecisionPlyList返回参数结构体
+ */
+export interface DescribeCCPrecisionPlyListResponse {
+  /**
+   * 策略列表总数
+   */
+  Total: number
+
+  /**
+   * 策略列表详情
+   */
+  PrecisionPolicyList: Array<CCPrecisionPolicy>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3601,6 +4629,16 @@ export interface L7RuleEntry {
 }
 
 /**
+ * ModifyCCThresholdPolicy返回参数结构体
+ */
+export interface ModifyCCThresholdPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateWaterPrintKey返回参数结构体
  */
 export interface CreateWaterPrintKeyResponse {
@@ -3699,6 +4737,36 @@ export interface DescribeListBlackWhiteIpListRequest {
    * IP搜索
    */
   FilterIp?: string
+}
+
+/**
+ * CreateCCReqLimitPolicy请求参数结构体
+ */
+export interface CreateCCReqLimitPolicyRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * IP值
+   */
+  Ip: string
+
+  /**
+   * 协议，可取值HTTP，HTTPS
+   */
+  Protocol: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 策略项
+   */
+  Policy: CCReqLimitPolicyRecord
 }
 
 /**
@@ -3810,6 +4878,76 @@ export interface WaterPrintKey {
    * 密钥生成时间
    */
   CreateTime: string
+}
+
+/**
+ * ModifyCCLevelPolicy请求参数结构体
+ */
+export interface ModifyCCLevelPolicyRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * Ip地址
+   */
+  Ip: string
+
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 协议，可取值HTTP，HTTPS
+   */
+  Protocol: string
+
+  /**
+   * CC防护等级，可取值loose表示宽松，strict表示严格，normal表示适中， emergency表示攻击紧急， sup_loose表示超级宽松，default表示默认策略（无频控配置下发），customized表示自定义策略
+   */
+  Level: string
+}
+
+/**
+ * DescribeCcGeoIPBlockConfigList请求参数结构体
+ */
+export interface DescribeCcGeoIPBlockConfigListRequest {
+  /**
+   * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防ip）
+   */
+  Business: string
+
+  /**
+   * 页起始偏移，取值为(页码-1)*一页条数
+   */
+  Offset: number
+
+  /**
+   * 一页条数
+   */
+  Limit: number
+
+  /**
+   * 指定特定实例Id
+   */
+  InstanceId?: string
+
+  /**
+   * Ip地址，普通高防ip要传该字段
+   */
+  Ip?: string
+
+  /**
+   * 域名，普通高防ip要传该字段
+   */
+  Domain?: string
+
+  /**
+   * 协议，普通高防ip要传该字段
+   */
+  Protocol?: string
 }
 
 /**

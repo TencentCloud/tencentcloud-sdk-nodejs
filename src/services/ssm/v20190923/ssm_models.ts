@@ -877,7 +877,7 @@ export interface RestoreSecretRequest {
  */
 export interface RotateProductSecretResponse {
   /**
-   * 当凭据类型为云产品凭据时（即SecretType为1，如Mysq、Tdsql等托管凭据）此字段有效，返回轮转异步任务ID号。
+   * 当凭据类型为云产品凭据时（即SecretType为1，如MySQL、Tdsql等托管凭据）此字段有效，返回轮转异步任务ID号。
    */
   FlowID: number
 
@@ -1023,8 +1023,8 @@ export interface GetServiceStatusResponse {
   InvalidType: number
 
   /**
-      * true表示用户已经可以使用云API密钥安全托管功能，
-false表示用户暂时不能使用云API密钥安全托管功能。
+      * true表示用户已经可以使用密钥安全托管功能，
+false表示用户暂时不能使用密钥安全托管功能。
       */
   AccessKeyEscrowEnabled: boolean
 

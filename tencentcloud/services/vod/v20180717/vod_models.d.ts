@@ -400,7 +400,7 @@ export interface LiveRealTimeClipResponse {
     RequestId?: string;
 }
 /**
- * 智能识别 Asr 文字鉴任违禁务结果类型
+ * 智能识别 Asr 文字鉴违禁任务结果类型
  */
 export interface AiReviewTaskProhibitedAsrResult {
     /**
@@ -499,7 +499,7 @@ export interface DeleteAnimatedGraphicsTemplateResponse {
     RequestId?: string;
 }
 /**
- * 智能识别 Ocr 文字鉴任违禁务结果类型
+ * 智能识别 Ocr 文字鉴违禁任务结果类型
  */
 export interface AiReviewTaskProhibitedOcrResult {
     /**
@@ -1903,7 +1903,7 @@ export interface AiRecognitionTaskOcrWordsResultInput {
     Definition: number;
 }
 /**
- * 只能识别涉及令人反感的信息的任务输入参数类型
+ * 智能识别涉及令人反感的信息的任务输入参数类型
  */
 export interface AiReviewPornTaskInput {
     /**

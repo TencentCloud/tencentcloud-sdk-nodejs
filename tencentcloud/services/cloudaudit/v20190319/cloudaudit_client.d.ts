@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DeleteAuditResponse, UpdateAuditRequest, InquireAuditCreditRequest, DescribeEventsResponse, ListCosEnableRegionResponse, LookUpEventsRequest, StartLoggingRequest, CreateAuditResponse, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, ListAuditsRequest, StopLoggingResponse, ListAuditsResponse, DescribeEventsRequest, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, CreateAuditRequest, DeleteAuditRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, DescribeAuditResponse } from "./cloudaudit_models";
+import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DescribeAuditTracksResponse, DeleteAuditResponse, UpdateAuditRequest, InquireAuditCreditRequest, DescribeEventsResponse, ListCosEnableRegionResponse, LookUpEventsRequest, StartLoggingRequest, DescribeAuditTracksRequest, CreateAuditResponse, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, ListAuditsRequest, StopLoggingResponse, ListAuditsResponse, DescribeEventsRequest, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, CreateAuditRequest, DeleteAuditRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, DescribeAuditResponse } from "./cloudaudit_models";
 /**
  * cloudaudit client
  * @class
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 关闭跟踪集
      */
     StopLogging(req: StopLoggingRequest, cb?: (error: string, rep: StopLoggingResponse) => void): Promise<StopLoggingResponse>;
+    /**
+     * 查询云审计跟踪集列表
+     */
+    DescribeAuditTracks(req?: DescribeAuditTracksRequest, cb?: (error: string, rep: DescribeAuditTracksResponse) => void): Promise<DescribeAuditTracksResponse>;
     /**
      * 查询用户可创建跟踪集的数量
      */

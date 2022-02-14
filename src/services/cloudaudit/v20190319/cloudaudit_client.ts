@@ -22,6 +22,7 @@ import {
   StopLoggingRequest,
   CmqRegionInfo,
   GetAttributeKeyRequest,
+  DescribeAuditTracksResponse,
   DeleteAuditResponse,
   UpdateAuditRequest,
   InquireAuditCreditRequest,
@@ -29,6 +30,7 @@ import {
   ListCosEnableRegionResponse,
   LookUpEventsRequest,
   StartLoggingRequest,
+  DescribeAuditTracksRequest,
   CreateAuditResponse,
   StartLoggingResponse,
   AttributeKeyDetail,
@@ -123,6 +125,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopLoggingResponse) => void
   ): Promise<StopLoggingResponse> {
     return this.request("StopLogging", req, cb)
+  }
+
+  /**
+   * 查询云审计跟踪集列表
+   */
+  async DescribeAuditTracks(
+    req?: DescribeAuditTracksRequest,
+    cb?: (error: string, rep: DescribeAuditTracksResponse) => void
+  ): Promise<DescribeAuditTracksResponse> {
+    return this.request("DescribeAuditTracks", req, cb)
   }
 
   /**

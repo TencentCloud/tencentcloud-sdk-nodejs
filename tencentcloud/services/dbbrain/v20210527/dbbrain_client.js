@@ -219,5 +219,11 @@ class Client extends abstract_client_1.AbstractClient {
     async CreateDBDiagReportUrl(req, cb) {
         return this.request("CreateDBDiagReportUrl", req, cb);
     }
+    /**
+     * 用于查询 redis 执行 kill 会话任务后代理节点的执行结果，入参异步任务 ID 从接口 CreateProxySessionKillTask 调用成功后取得。当前 product 只支持：redis。
+     */
+    async DescribeProxySessionKillTasks(req, cb) {
+        return this.request("DescribeProxySessionKillTasks", req, cb);
+    }
 }
 exports.Client = Client;

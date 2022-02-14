@@ -266,7 +266,7 @@ export interface DescribeAppResponse {
       * 应用信息详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: AppInfo;
+    Data: AppInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

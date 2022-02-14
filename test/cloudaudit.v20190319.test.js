@@ -78,6 +78,16 @@ it("cloudaudit.v20190319.StopLogging", async function () {
     }
 })
 
+it("cloudaudit.v20190319.DescribeAuditTracks", async function () {
+    try {
+       const data = await client.DescribeAuditTracks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudaudit.v20190319.InquireAuditCredit", async function () {
     try {
        const data = await client.InquireAuditCredit({})

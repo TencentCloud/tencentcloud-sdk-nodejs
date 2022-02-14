@@ -487,8 +487,11 @@ export interface DescribeUnderwriteTaskResponse {
   UnderwriteTaskId: string
 
   /**
-   * 状态码
-   */
+      * 结果状态：
+0：返回成功
+1：结果未生成
+2：结果生成失败
+      */
   Status: number
 
   /**
@@ -517,8 +520,10 @@ export interface DescribeStructureResultRequest {
  */
 export interface DescribeReportClassifyRequest {
   /**
-   * 服务类型（Structured/Underwrite）
-   */
+      * 服务类型
+Structured 仅结构化
+Underwrite 结构化+核保
+      */
   ServiceType: string
 
   /**
@@ -812,8 +817,11 @@ export interface DescribeMachineUnderwriteResponse {
   UnderwriteTaskId: string
 
   /**
-   * 状态码
-   */
+      * 结果状态：
+0：返回成功
+1：结果未生成
+2：结果生成失败
+      */
   Status: number
 
   /**

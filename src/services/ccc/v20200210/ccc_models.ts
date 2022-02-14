@@ -16,6 +16,21 @@
  */
 
 /**
+ * StopAutoCalloutTask请求参数结构体
+ */
+export interface StopAutoCalloutTaskRequest {
+  /**
+   * 呼叫中心实例Id
+   */
+  SdkAppId: number
+
+  /**
+   * 任务Id
+   */
+  TaskId: number
+}
+
+/**
  * BindStaffSkillGroupList请求参数结构体
  */
 export interface BindStaffSkillGroupListRequest {
@@ -70,6 +85,56 @@ export interface IVRKeyPressedElement {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Label: string
+}
+
+/**
+ * CreateAutoCalloutTask请求参数结构体
+ */
+export interface CreateAutoCalloutTaskRequest {
+  /**
+   * 呼叫中心实例Id
+   */
+  SdkAppId: number
+
+  /**
+   * 任务起始时间戳，Unix 秒级时间戳
+   */
+  NotBefore: number
+
+  /**
+   * 被叫号码列表
+   */
+  Callees: Array<string>
+
+  /**
+   * 主叫号码列表
+   */
+  Callers: Array<string>
+
+  /**
+   * 呼叫使用的Ivr
+   */
+  IvrId: number
+
+  /**
+   * 任务名
+   */
+  Name?: string
+
+  /**
+   * 任务描述
+   */
+  Description?: string
+
+  /**
+   * 任务停止时间戳，Unix 秒级时间戳
+   */
+  NotAfter?: number
+
+  /**
+   * 最大尝试次数
+   */
+  Tries?: number
 }
 
 /**
@@ -170,14 +235,13 @@ export interface DescribeStaffInfoListResponse {
 }
 
 /**
- * CreateStaff返回参数结构体
+ * CreateAutoCalloutTask返回参数结构体
  */
-export interface CreateStaffResponse {
+export interface CreateAutoCalloutTaskResponse {
   /**
-      * 错误坐席列表及错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrorStaffList: Array<ErrStaffItem>
+   * 任务Id
+   */
+  TaskId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -389,6 +453,12 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IVRKeyPressedEx: Array<IVRKeyPressedElement>
+
+  /**
+      * 获取录音ASR文本信息地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsrUrl: string
 }
 
 /**
@@ -512,6 +582,57 @@ export interface DescribeIMCdrsRequest {
 }
 
 /**
+ * DescribeAutoCalloutTask返回参数结构体
+ */
+export interface DescribeAutoCalloutTaskResponse {
+  /**
+   * 任务名
+   */
+  Name: string
+
+  /**
+   * 任务描述
+   */
+  Description: string
+
+  /**
+   * 任务起始时间戳
+   */
+  NotBefore: number
+
+  /**
+      * 任务结束时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotAfter: number
+
+  /**
+   * 主叫列表
+   */
+  Callers: Array<string>
+
+  /**
+   * 被叫信息列表
+   */
+  Callees: Array<AutoCalloutTaskCalleeInfo>
+
+  /**
+   * 任务使用的IvrId
+   */
+  IvrId: number
+
+  /**
+   * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止
+   */
+  State: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStaffStatusMetrics请求参数结构体
  */
 export interface DescribeStaffStatusMetricsRequest {
@@ -524,6 +645,21 @@ export interface DescribeStaffStatusMetricsRequest {
    * 筛选坐席列表，默认不传返回全部坐席信息
    */
   StaffList?: Array<string>
+}
+
+/**
+ * DescribeAutoCalloutTask请求参数结构体
+ */
+export interface DescribeAutoCalloutTaskRequest {
+  /**
+   * 呼叫中心实例Id
+   */
+  SdkAppId: number
+
+  /**
+   * 任务Id
+   */
+  TaskId: number
 }
 
 /**
@@ -830,6 +966,21 @@ export interface CallInNumberMetrics {
    * 所属技能组相关指标
    */
   SkillGroupMetrics: Array<CallInSkillGroupMetrics>
+}
+
+/**
+ * 外呼任务被叫信息
+ */
+export interface AutoCalloutTaskCalleeInfo {
+  /**
+   * 被叫号码
+   */
+  Callee: string
+
+  /**
+   * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
+   */
+  State: number
 }
 
 /**
@@ -1505,6 +1656,16 @@ export interface SkillGroupInfoItem {
 }
 
 /**
+ * StopAutoCalloutTask返回参数结构体
+ */
+export interface StopAutoCalloutTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSeatUserList返回参数结构体
  */
 export interface DescribeSeatUserListResponse {
@@ -1914,6 +2075,22 @@ export interface DescribeCallInMetricsRequest {
    * 是否返回线路维度信息，默认“否”
    */
   EnabledNumber?: boolean
+}
+
+/**
+ * CreateStaff返回参数结构体
+ */
+export interface CreateStaffResponse {
+  /**
+      * 错误坐席列表及错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorStaffList: Array<ErrStaffItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -28,10 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
-     * 获取坐席实时状态统计指标
+     * 获取坐席信息列表
      */
-    async DescribeStaffStatusMetrics(req, cb) {
-        return this.request("DescribeStaffStatusMetrics", req, cb);
+    async DescribeStaffInfoList(req, cb) {
+        return this.request("DescribeStaffInfoList", req, cb);
+    }
+    /**
+     * 获取当前正在通话的会话列表
+     */
+    async DescribePSTNActiveSessionList(req, cb) {
+        return this.request("DescribePSTNActiveSessionList", req, cb);
+    }
+    /**
+     * 绑定坐席所属技能组
+     */
+    async BindStaffSkillGroupList(req, cb) {
+        return this.request("BindStaffSkillGroupList", req, cb);
     }
     /**
      * 包括具体聊天内容
@@ -46,28 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIMCdrs", req, cb);
     }
     /**
-     * 获取 PSTN 会话信息
-     */
-    async DescribeTelSession(req, cb) {
-        return this.request("DescribeTelSession", req, cb);
-    }
-    /**
-     * 创建用户数据签名
-     */
-    async CreateUserSig(req, cb) {
-        return this.request("CreateUserSig", req, cb);
-    }
-    /**
      * 删除坐席信息
      */
     async DeleteStaff(req, cb) {
         return this.request("DeleteStaff", req, cb);
-    }
-    /**
-     * 获取技能组信息列表
-     */
-    async DescribeSkillGroupInfoList(req, cb) {
-        return this.request("DescribeSkillGroupInfoList", req, cb);
     }
     /**
      * 批量查询自动任务外呼
@@ -76,10 +70,64 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAutoCalloutTasks", req, cb);
     }
     /**
+     * 创建客服账号。
+     */
+    async CreateStaff(req, cb) {
+        return this.request("CreateStaff", req, cb);
+    }
+    /**
+     * 获取 PSTN 会话信息
+     */
+    async DescribeTelSession(req, cb) {
+        return this.request("DescribeTelSession", req, cb);
+    }
+    /**
+     * 创建外呼会话
+     */
+    async CreateCallOutSession(req, cb) {
+        return this.request("CreateCallOutSession", req, cb);
+    }
+    /**
+     * 查询自动外呼任务详情
+     */
+    async DescribeAutoCalloutTask(req, cb) {
+        return this.request("DescribeAutoCalloutTask", req, cb);
+    }
+    /**
+     * 获取电话服务记录与录音
+     */
+    async DescribeTelCdr(req, cb) {
+        return this.request("DescribeTelCdr", req, cb);
+    }
+    /**
+     * 获取技能组信息列表
+     */
+    async DescribeSkillGroupInfoList(req, cb) {
+        return this.request("DescribeSkillGroupInfoList", req, cb);
+    }
+    /**
+     * 停止自动外呼任务
+     */
+    async StopAutoCalloutTask(req, cb) {
+        return this.request("StopAutoCalloutTask", req, cb);
+    }
+    /**
      * 获取用户购买信息列表
      */
     async DescribeCCCBuyInfoList(req, cb) {
         return this.request("DescribeCCCBuyInfoList", req, cb);
+    }
+    /**
+     * 解绑坐席所属技能组
+     */
+    async UnbindStaffSkillGroupList(req, cb) {
+        return this.request("UnbindStaffSkillGroupList", req, cb);
+    }
+    /**
+     * 获取坐席实时状态统计指标
+     */
+    async DescribeStaffStatusMetrics(req, cb) {
+        return this.request("DescribeStaffStatusMetrics", req, cb);
     }
     /**
      * 按实例获取电话消耗统计
@@ -88,10 +136,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTelCallInfo", req, cb);
     }
     /**
-     * 解绑坐席所属技能组
+     * 创建自动外呼任务
      */
-    async UnbindStaffSkillGroupList(req, cb) {
-        return this.request("UnbindStaffSkillGroupList", req, cb);
+    async CreateAutoCalloutTask(req, cb) {
+        return this.request("CreateAutoCalloutTask", req, cb);
+    }
+    /**
+     * 创建用户数据签名
+     */
+    async CreateUserSig(req, cb) {
+        return this.request("CreateUserSig", req, cb);
     }
     /**
      * 获取呼入实时数据统计指标
@@ -112,42 +166,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSeatUserList(req, cb) {
         return this.request("DescribeSeatUserList", req, cb);
-    }
-    /**
-     * 创建外呼会话
-     */
-    async CreateCallOutSession(req, cb) {
-        return this.request("CreateCallOutSession", req, cb);
-    }
-    /**
-     * 获取当前正在通话的会话列表
-     */
-    async DescribePSTNActiveSessionList(req, cb) {
-        return this.request("DescribePSTNActiveSessionList", req, cb);
-    }
-    /**
-     * 获取坐席信息列表
-     */
-    async DescribeStaffInfoList(req, cb) {
-        return this.request("DescribeStaffInfoList", req, cb);
-    }
-    /**
-     * 创建客服账号。
-     */
-    async CreateStaff(req, cb) {
-        return this.request("CreateStaff", req, cb);
-    }
-    /**
-     * 绑定坐席所属技能组
-     */
-    async BindStaffSkillGroupList(req, cb) {
-        return this.request("BindStaffSkillGroupList", req, cb);
-    }
-    /**
-     * 获取电话服务记录与录音
-     */
-    async DescribeTelCdr(req, cb) {
-        return this.request("DescribeTelCdr", req, cb);
     }
 }
 exports.Client = Client;

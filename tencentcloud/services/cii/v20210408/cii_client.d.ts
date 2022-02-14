@@ -48,11 +48,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeStructureResult(req: DescribeStructureResultRequest, cb?: (error: string, rep: DescribeStructureResultResponse) => void): Promise<DescribeStructureResultResponse>;
     /**
-     * saas页面集成了自动分类功能，该接口提供自动分类结果
+     * 辅助用户对批量报告自动分类
      */
     DescribeReportClassify(req: DescribeReportClassifyRequest, cb?: (error: string, rep: DescribeReportClassifyResponse) => void): Promise<DescribeReportClassifyResponse>;
     /**
-     * 中银三星需求，基于主任务批量添加结构化子任务
+     * 如果主任务下的报告不满足需求，可以基于主任务批量添加子任务
      */
     AddSubStructureTasks(req: AddSubStructureTasksRequest, cb?: (error: string, rep: AddSubStructureTasksResponse) => void): Promise<AddSubStructureTasksResponse>;
 }

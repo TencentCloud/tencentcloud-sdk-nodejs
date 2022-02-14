@@ -66,6 +66,16 @@ export interface GetAttributeKeyRequest {
 }
 
 /**
+ * DescribeAuditTracks返回参数结构体
+ */
+export interface DescribeAuditTracksResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAudit返回参数结构体
  */
 export interface DeleteAuditResponse {
@@ -246,6 +256,11 @@ export interface StartLoggingRequest {
    */
   AuditName: string
 }
+
+/**
+ * DescribeAuditTracks请求参数结构体
+ */
+export type DescribeAuditTracksRequest = null
 
 /**
  * CreateAudit返回参数结构体

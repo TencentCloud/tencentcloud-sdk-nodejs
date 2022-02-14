@@ -28,22 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("antiddos.tencentcloudapi.com", "2020-03-09", clientConfig);
     }
     /**
+     * 修改CC四层黑白名单
+     */
+    async ModifyCcBlackWhiteIpList(req, cb) {
+        return this.request("ModifyCcBlackWhiteIpList", req, cb);
+    }
+    /**
      * 本接口 (AssociateDDoSEipAddress) 用于将高防弹性公网IP绑定到实例或弹性网卡的指定内网 IP 上。
      */
     async AssociateDDoSEipAddress(req, cb) {
         return this.request("AssociateDDoSEipAddress", req, cb);
     }
     /**
-     * 修改智能解析域名名称
+     * 修改DDoS清洗阈值
      */
-    async ModifyDomainUsrName(req, cb) {
-        return this.request("ModifyDomainUsrName", req, cb);
+    async ModifyDDoSThreshold(req, cb) {
+        return this.request("ModifyDDoSThreshold", req, cb);
     }
     /**
      * 获取DDoS防护的水印防护配置列表
      */
     async DescribeListWaterPrintConfig(req, cb) {
         return this.request("DescribeListWaterPrintConfig", req, cb);
+    }
+    /**
+     * 删除DDoS防护的IP网段黑白名单
+     */
+    async DeleteDDoSBlackWhiteIpList(req, cb) {
+        return this.request("DeleteDDoSBlackWhiteIpList", req, cb);
     }
     /**
      * 删除DDoS防护的访问限速配置
@@ -70,10 +82,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDDoSGeoIPBlockConfig", req, cb);
     }
     /**
-     * 修改DDoS防护的特征过滤规则
+     * 修改智能解析域名名称
      */
-    async ModifyPacketFilterConfig(req, cb) {
-        return this.request("ModifyPacketFilterConfig", req, cb);
+    async ModifyDomainUsrName(req, cb) {
+        return this.request("ModifyDomainUsrName", req, cb);
+    }
+    /**
+     * 获取CC精准防护列表
+     */
+    async DescribeCCPrecisionPlyList(req, cb) {
+        return this.request("DescribeCCPrecisionPlyList", req, cb);
     }
     /**
      * 获取智能调度域名列表
@@ -88,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePacketFilterConfig", req, cb);
     }
     /**
-     * 获取单IP告警阈值配置列表
+     * 删除CC精准防护策略
      */
-    async DescribeListIPAlarmConfig(req, cb) {
-        return this.request("DescribeListIPAlarmConfig", req, cb);
+    async DeleteCCPrecisionPolicy(req, cb) {
+        return this.request("DeleteCCPrecisionPolicy", req, cb);
     }
     /**
      * 获取高防IP资产实例列表
@@ -99,6 +117,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeListBGPIPInstances(req, cb) {
         return this.request("DescribeListBGPIPInstances", req, cb);
+    }
+    /**
+     * 获取单IP告警阈值配置列表
+     */
+    async DescribeListIPAlarmConfig(req, cb) {
+        return this.request("DescribeListIPAlarmConfig", req, cb);
+    }
+    /**
+     * 获取DDoS攻击流量带宽和攻击包速率数据
+     */
+    async DescribeDDoSTrend(req, cb) {
+        return this.request("DescribeDDoSTrend", req, cb);
     }
     /**
      * 获取单IP默认告警阈值配置
@@ -119,10 +149,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNewDomainRules", req, cb);
     }
     /**
-     * 获取DDoS防护的区域封禁配置列表
+     * 修改CC频率限制策略
      */
-    async DescribeListDDoSGeoIPBlockConfig(req, cb) {
-        return this.request("DescribeListDDoSGeoIPBlockConfig", req, cb);
+    async ModifyCCReqLimitPolicy(req, cb) {
+        return this.request("ModifyCCReqLimitPolicy", req, cb);
+    }
+    /**
+     * 获取CC四层黑白名单列表
+     */
+    async DescribeCcBlackWhiteIpList(req, cb) {
+        return this.request("DescribeCcBlackWhiteIpList", req, cb);
     }
     /**
      * 本接口 (DisassociateDDoSEipAddress) 用于解绑高防弹性公网IP。
@@ -131,10 +167,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateDDoSEipAddress", req, cb);
     }
     /**
-     * 获取DDoS连接抑制配置列表
+     * 获取CC防护的区域封禁配置列表
      */
-    async DescribeDDoSConnectLimitList(req, cb) {
-        return this.request("DescribeDDoSConnectLimitList", req, cb);
+    async DescribeCcGeoIPBlockConfigList(req, cb) {
+        return this.request("DescribeCcGeoIPBlockConfigList", req, cb);
+    }
+    /**
+     * 读取或修改DDoS的防护等级
+     */
+    async ModifyDDoSLevel(req, cb) {
+        return this.request("ModifyDDoSLevel", req, cb);
+    }
+    /**
+     * 修改CC清洗阈值
+     */
+    async ModifyCCThresholdPolicy(req, cb) {
+        return this.request("ModifyCCThresholdPolicy", req, cb);
     }
     /**
      * 绑定IP到高防包实例，支持独享包、共享包；需要注意的是此接口绑定或解绑IP是异步接口，当处于绑定或解绑中时，则不允许再进行绑定或解绑，需要等待当前绑定或解绑完成。
@@ -143,10 +191,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBoundIP", req, cb);
     }
     /**
-     * 删除DDoS防护的IP网段黑白名单
+     * 删除CC防护的区域封禁配置
      */
-    async DeleteDDoSBlackWhiteIpList(req, cb) {
-        return this.request("DeleteDDoSBlackWhiteIpList", req, cb);
+    async DeleteCcGeoIPBlockConfig(req, cb) {
+        return this.request("DeleteCcGeoIPBlockConfig", req, cb);
     }
     /**
      * 删除DDoS防护的水印防护密钥
@@ -173,10 +221,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlackWhiteIpList", req, cb);
     }
     /**
+     * 修改DDoS黑白名单列表
+     */
+    async ModifyDDoSBlackWhiteIpList(req, cb) {
+        return this.request("ModifyDDoSBlackWhiteIpList", req, cb);
+    }
+    /**
      * 获取DDoS防护的AI防护开关列表
      */
     async DescribeListDDoSAI(req, cb) {
         return this.request("DescribeListDDoSAI", req, cb);
+    }
+    /**
+     * 获取CC频率限制策略列表
+     */
+    async DescribeCCReqLimitPolicyList(req, cb) {
+        return this.request("DescribeCCReqLimitPolicyList", req, cb);
     }
     /**
      * 添加DDoS防护的IP网段黑白名单
@@ -191,10 +251,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCCTrend", req, cb);
     }
     /**
+     * 修改CC精准防护策略
+     */
+    async ModifyCCPrecisionPolicy(req, cb) {
+        return this.request("ModifyCCPrecisionPolicy", req, cb);
+    }
+    /**
      * 设置单IP告警阈值配置
      */
     async CreateIPAlarmThresholdConfig(req, cb) {
         return this.request("CreateIPAlarmThresholdConfig", req, cb);
+    }
+    /**
+     * 修改CC防护等级
+     */
+    async ModifyCCLevelPolicy(req, cb) {
+        return this.request("ModifyCCLevelPolicy", req, cb);
     }
     /**
      * 查询与证书ID对于域名匹配的七层规则
@@ -209,10 +281,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListPacketFilterConfig", req, cb);
     }
     /**
-     * 获取DDoS防护的访问限速配置列表
+     * 删除DDoS防护的端口acl策略
      */
-    async DescribeListDDoSSpeedLimitConfig(req, cb) {
-        return this.request("DescribeListDDoSSpeedLimitConfig", req, cb);
+    async DeletePortAclConfig(req, cb) {
+        return this.request("DeletePortAclConfig", req, cb);
+    }
+    /**
+     * 删除CC四层黑白名单
+     */
+    async DeleteCcBlackWhiteIpList(req, cb) {
+        return this.request("DeleteCcBlackWhiteIpList", req, cb);
     }
     /**
      * 获取防护阈值配置列表，包括DDoS的AI、等级、CC阈值开关等
@@ -264,16 +342,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBlackWhiteIpList", req, cb);
     }
     /**
-     * 修改边界防护L7转发规则
+     * 修改DDoS防护的特征过滤规则
      */
-    async ModifyL7RulesEdge(req, cb) {
-        return this.request("ModifyL7RulesEdge", req, cb);
+    async ModifyPacketFilterConfig(req, cb) {
+        return this.request("ModifyPacketFilterConfig", req, cb);
     }
     /**
-     * 获取DDoS攻击流量带宽和攻击包速率数据
+     * 获取DDoS防护的访问限速配置列表
      */
-    async DescribeDDoSTrend(req, cb) {
-        return this.request("DescribeDDoSTrend", req, cb);
+    async DescribeListDDoSSpeedLimitConfig(req, cb) {
+        return this.request("DescribeListDDoSSpeedLimitConfig", req, cb);
+    }
+    /**
+     * 获取DDoS防护的区域封禁配置列表
+     */
+    async DescribeListDDoSGeoIPBlockConfig(req, cb) {
+        return this.request("DescribeListDDoSGeoIPBlockConfig", req, cb);
+    }
+    /**
+     * 新增CC精准防护策略
+     */
+    async CreateCCPrecisionPolicy(req, cb) {
+        return this.request("CreateCCPrecisionPolicy", req, cb);
     }
     /**
      * 删除DDoS防护的IP黑白名单
@@ -292,6 +382,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteWaterPrintConfig(req, cb) {
         return this.request("DeleteWaterPrintConfig", req, cb);
+    }
+    /**
+     * 获取DDoS连接抑制配置列表
+     */
+    async DescribeDDoSConnectLimitList(req, cb) {
+        return this.request("DescribeDDoSConnectLimitList", req, cb);
+    }
+    /**
+     * 新增CC频率限制策略
+     */
+    async CreateCCReqLimitPolicy(req, cb) {
+        return this.request("CreateCCReqLimitPolicy", req, cb);
     }
     /**
      * 设置DDoS防护的AI防护开关
@@ -330,6 +432,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSBlackWhiteIpList", req, cb);
     }
     /**
+     * 修改边界防护L7转发规则
+     */
+    async ModifyL7RulesEdge(req, cb) {
+        return this.request("ModifyL7RulesEdge", req, cb);
+    }
+    /**
      * 添加DDoS防护的水印防护密钥
      */
     async CreateWaterPrintKey(req, cb) {
@@ -360,16 +468,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListPortAclList", req, cb);
     }
     /**
+     * 新建cc防护的地域封禁配置
+     */
+    async CreateCcGeoIPBlockConfig(req, cb) {
+        return this.request("CreateCcGeoIPBlockConfig", req, cb);
+    }
+    /**
      * 修改DDoS防护的区域封禁配置
      */
     async ModifyDDoSGeoIPBlockConfig(req, cb) {
         return this.request("ModifyDDoSGeoIPBlockConfig", req, cb);
     }
     /**
+     * 修改DDoS防护的端口acl策略
+     */
+    async ModifyPortAclConfig(req, cb) {
+        return this.request("ModifyPortAclConfig", req, cb);
+    }
+    /**
      * 获取转发监听器列表
      */
     async DescribeListListener(req, cb) {
         return this.request("DescribeListListener", req, cb);
+    }
+    /**
+     * 删除CC频率限制策略
+     */
+    async DeleteCCRequestLimitPolicy(req, cb) {
+        return this.request("DeleteCCRequestLimitPolicy", req, cb);
     }
 }
 exports.Client = Client;

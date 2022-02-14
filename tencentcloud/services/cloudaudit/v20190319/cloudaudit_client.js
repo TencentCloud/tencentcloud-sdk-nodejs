@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopLogging", req, cb);
     }
     /**
+     * 查询云审计跟踪集列表
+     */
+    async DescribeAuditTracks(req, cb) {
+        return this.request("DescribeAuditTracks", req, cb);
+    }
+    /**
      * 查询用户可创建跟踪集的数量
      */
     async InquireAuditCredit(req, cb) {

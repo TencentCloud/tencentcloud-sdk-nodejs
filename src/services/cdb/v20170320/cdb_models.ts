@@ -2287,6 +2287,11 @@ export interface DescribeDefaultParamsRequest {
    * mysql版本，目前支持 ["5.1", "5.5", "5.6", "5.7"]。
    */
   EngineVersion: string
+
+  /**
+   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模版，"HIGH_PERFORMANCE" - 高性能模版。
+   */
+  TemplateType?: string
 }
 
 /**

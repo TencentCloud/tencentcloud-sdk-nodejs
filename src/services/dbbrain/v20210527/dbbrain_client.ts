@@ -34,9 +34,11 @@ import {
   ModifyDiagDBInstanceConfResponse,
   DescribeTopSpaceSchemaTimeSeriesResponse,
   SlowLogTopSqlItem,
+  DescribeProxySessionKillTasksRequest,
   DescribeMySqlProcessListResponse,
   HealthStatus,
   DescribeTopSpaceTablesResponse,
+  TaskInfo,
   KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
   ContactItem,
@@ -64,7 +66,7 @@ import {
   DeleteSecurityAuditLogExportTasksResponse,
   KillMySqlThreadsRequest,
   CreateDBDiagReportUrlRequest,
-  ScoreDetail,
+  DescribeSecurityAuditLogExportTasksResponse,
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagHistoryResponse,
@@ -106,12 +108,13 @@ import {
   MonitorMetricSeriesData,
   SecLogExportTaskInfo,
   DescribeHealthScoreResponse,
-  DescribeSecurityAuditLogExportTasksResponse,
+  ScoreDetail,
   DescribeTopSpaceSchemasRequest,
   DescribeSlowLogTopSqlsResponse,
   DescribeUserSqlAdviceRequest,
   DescribeMySqlProcessListRequest,
   DescribeSecurityAuditLogDownloadUrlsResponse,
+  DescribeProxySessionKillTasksResponse,
 } from "./dbbrain_models"
 
 /**
@@ -441,5 +444,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDBDiagReportUrlResponse) => void
   ): Promise<CreateDBDiagReportUrlResponse> {
     return this.request("CreateDBDiagReportUrl", req, cb)
+  }
+
+  /**
+   * 用于查询 redis 执行 kill 会话任务后代理节点的执行结果，入参异步任务 ID 从接口 CreateProxySessionKillTask 调用成功后取得。当前 product 只支持：redis。
+   */
+  async DescribeProxySessionKillTasks(
+    req: DescribeProxySessionKillTasksRequest,
+    cb?: (error: string, rep: DescribeProxySessionKillTasksResponse) => void
+  ): Promise<DescribeProxySessionKillTasksResponse> {
+    return this.request("DescribeProxySessionKillTasks", req, cb)
   }
 }

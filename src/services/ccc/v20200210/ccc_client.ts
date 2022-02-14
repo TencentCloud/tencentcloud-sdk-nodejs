@@ -18,20 +18,24 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  StopAutoCalloutTaskRequest,
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
   IVRKeyPressedElement,
+  CreateAutoCalloutTaskRequest,
   CreateSDKLoginTokenResponse,
   DescribeCallInMetricsResponse,
   CallInSkillGroupMetrics,
   DescribeStaffInfoListResponse,
-  CreateStaffResponse,
+  CreateAutoCalloutTaskResponse,
   TelCdrInfo,
   CreateUserSigRequest,
   PhoneNumBuyInfo,
   UnbindStaffSkillGroupListRequest,
   DescribeIMCdrsRequest,
+  DescribeAutoCalloutTaskResponse,
   DescribeStaffStatusMetricsRequest,
+  DescribeAutoCalloutTaskRequest,
   SkillGroupItem,
   CreateUserSigResponse,
   DeleteStaffRequest,
@@ -46,6 +50,7 @@ import {
   DescribeChatMessagesResponse,
   SdkAppIdBuyInfo,
   CallInNumberMetrics,
+  AutoCalloutTaskCalleeInfo,
   DescribePSTNActiveSessionListResponse,
   CreateCallOutSessionResponse,
   IMCdrInfo,
@@ -63,6 +68,7 @@ import {
   DescribeStaffStatusMetricsResponse,
   DescribeTelCallInfoResponse,
   SkillGroupInfoItem,
+  StopAutoCalloutTaskResponse,
   DescribeSeatUserListResponse,
   DescribeSeatUserListRequest,
   CreateCallOutSessionRequest,
@@ -78,6 +84,7 @@ import {
   UnbindStaffSkillGroupListResponse,
   SeatUserInfo,
   DescribeCallInMetricsRequest,
+  CreateStaffResponse,
   Message,
   DescribeSkillGroupInfoListResponse,
   DescribeIMCdrsResponse,
@@ -93,13 +100,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取坐席实时状态统计指标
+   * 获取坐席信息列表
    */
-  async DescribeStaffStatusMetrics(
-    req: DescribeStaffStatusMetricsRequest,
-    cb?: (error: string, rep: DescribeStaffStatusMetricsResponse) => void
-  ): Promise<DescribeStaffStatusMetricsResponse> {
-    return this.request("DescribeStaffStatusMetrics", req, cb)
+  async DescribeStaffInfoList(
+    req: DescribeStaffInfoListRequest,
+    cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
+  ): Promise<DescribeStaffInfoListResponse> {
+    return this.request("DescribeStaffInfoList", req, cb)
+  }
+
+  /**
+   * 获取当前正在通话的会话列表
+   */
+  async DescribePSTNActiveSessionList(
+    req: DescribePSTNActiveSessionListRequest,
+    cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void
+  ): Promise<DescribePSTNActiveSessionListResponse> {
+    return this.request("DescribePSTNActiveSessionList", req, cb)
+  }
+
+  /**
+   * 绑定坐席所属技能组
+   */
+  async BindStaffSkillGroupList(
+    req: BindStaffSkillGroupListRequest,
+    cb?: (error: string, rep: BindStaffSkillGroupListResponse) => void
+  ): Promise<BindStaffSkillGroupListResponse> {
+    return this.request("BindStaffSkillGroupList", req, cb)
   }
 
   /**
@@ -123,26 +150,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取 PSTN 会话信息
-   */
-  async DescribeTelSession(
-    req: DescribeTelSessionRequest,
-    cb?: (error: string, rep: DescribeTelSessionResponse) => void
-  ): Promise<DescribeTelSessionResponse> {
-    return this.request("DescribeTelSession", req, cb)
-  }
-
-  /**
-   * 创建用户数据签名
-   */
-  async CreateUserSig(
-    req: CreateUserSigRequest,
-    cb?: (error: string, rep: CreateUserSigResponse) => void
-  ): Promise<CreateUserSigResponse> {
-    return this.request("CreateUserSig", req, cb)
-  }
-
-  /**
    * 删除坐席信息
    */
   async DeleteStaff(
@@ -150,16 +157,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteStaffResponse) => void
   ): Promise<DeleteStaffResponse> {
     return this.request("DeleteStaff", req, cb)
-  }
-
-  /**
-   * 获取技能组信息列表
-   */
-  async DescribeSkillGroupInfoList(
-    req: DescribeSkillGroupInfoListRequest,
-    cb?: (error: string, rep: DescribeSkillGroupInfoListResponse) => void
-  ): Promise<DescribeSkillGroupInfoListResponse> {
-    return this.request("DescribeSkillGroupInfoList", req, cb)
   }
 
   /**
@@ -173,6 +170,76 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建客服账号。
+   */
+  async CreateStaff(
+    req: CreateStaffRequest,
+    cb?: (error: string, rep: CreateStaffResponse) => void
+  ): Promise<CreateStaffResponse> {
+    return this.request("CreateStaff", req, cb)
+  }
+
+  /**
+   * 获取 PSTN 会话信息
+   */
+  async DescribeTelSession(
+    req: DescribeTelSessionRequest,
+    cb?: (error: string, rep: DescribeTelSessionResponse) => void
+  ): Promise<DescribeTelSessionResponse> {
+    return this.request("DescribeTelSession", req, cb)
+  }
+
+  /**
+   * 创建外呼会话
+   */
+  async CreateCallOutSession(
+    req: CreateCallOutSessionRequest,
+    cb?: (error: string, rep: CreateCallOutSessionResponse) => void
+  ): Promise<CreateCallOutSessionResponse> {
+    return this.request("CreateCallOutSession", req, cb)
+  }
+
+  /**
+   * 查询自动外呼任务详情
+   */
+  async DescribeAutoCalloutTask(
+    req: DescribeAutoCalloutTaskRequest,
+    cb?: (error: string, rep: DescribeAutoCalloutTaskResponse) => void
+  ): Promise<DescribeAutoCalloutTaskResponse> {
+    return this.request("DescribeAutoCalloutTask", req, cb)
+  }
+
+  /**
+   * 获取电话服务记录与录音
+   */
+  async DescribeTelCdr(
+    req: DescribeTelCdrRequest,
+    cb?: (error: string, rep: DescribeTelCdrResponse) => void
+  ): Promise<DescribeTelCdrResponse> {
+    return this.request("DescribeTelCdr", req, cb)
+  }
+
+  /**
+   * 获取技能组信息列表
+   */
+  async DescribeSkillGroupInfoList(
+    req: DescribeSkillGroupInfoListRequest,
+    cb?: (error: string, rep: DescribeSkillGroupInfoListResponse) => void
+  ): Promise<DescribeSkillGroupInfoListResponse> {
+    return this.request("DescribeSkillGroupInfoList", req, cb)
+  }
+
+  /**
+   * 停止自动外呼任务
+   */
+  async StopAutoCalloutTask(
+    req: StopAutoCalloutTaskRequest,
+    cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void
+  ): Promise<StopAutoCalloutTaskResponse> {
+    return this.request("StopAutoCalloutTask", req, cb)
+  }
+
+  /**
    * 获取用户购买信息列表
    */
   async DescribeCCCBuyInfoList(
@@ -180,6 +247,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCCCBuyInfoListResponse) => void
   ): Promise<DescribeCCCBuyInfoListResponse> {
     return this.request("DescribeCCCBuyInfoList", req, cb)
+  }
+
+  /**
+   * 解绑坐席所属技能组
+   */
+  async UnbindStaffSkillGroupList(
+    req: UnbindStaffSkillGroupListRequest,
+    cb?: (error: string, rep: UnbindStaffSkillGroupListResponse) => void
+  ): Promise<UnbindStaffSkillGroupListResponse> {
+    return this.request("UnbindStaffSkillGroupList", req, cb)
+  }
+
+  /**
+   * 获取坐席实时状态统计指标
+   */
+  async DescribeStaffStatusMetrics(
+    req: DescribeStaffStatusMetricsRequest,
+    cb?: (error: string, rep: DescribeStaffStatusMetricsResponse) => void
+  ): Promise<DescribeStaffStatusMetricsResponse> {
+    return this.request("DescribeStaffStatusMetrics", req, cb)
   }
 
   /**
@@ -193,13 +280,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解绑坐席所属技能组
+   * 创建自动外呼任务
    */
-  async UnbindStaffSkillGroupList(
-    req: UnbindStaffSkillGroupListRequest,
-    cb?: (error: string, rep: UnbindStaffSkillGroupListResponse) => void
-  ): Promise<UnbindStaffSkillGroupListResponse> {
-    return this.request("UnbindStaffSkillGroupList", req, cb)
+  async CreateAutoCalloutTask(
+    req: CreateAutoCalloutTaskRequest,
+    cb?: (error: string, rep: CreateAutoCalloutTaskResponse) => void
+  ): Promise<CreateAutoCalloutTaskResponse> {
+    return this.request("CreateAutoCalloutTask", req, cb)
+  }
+
+  /**
+   * 创建用户数据签名
+   */
+  async CreateUserSig(
+    req: CreateUserSigRequest,
+    cb?: (error: string, rep: CreateUserSigResponse) => void
+  ): Promise<CreateUserSigResponse> {
+    return this.request("CreateUserSig", req, cb)
   }
 
   /**
@@ -232,65 +329,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSeatUserListResponse) => void
   ): Promise<DescribeSeatUserListResponse> {
     return this.request("DescribeSeatUserList", req, cb)
-  }
-
-  /**
-   * 创建外呼会话
-   */
-  async CreateCallOutSession(
-    req: CreateCallOutSessionRequest,
-    cb?: (error: string, rep: CreateCallOutSessionResponse) => void
-  ): Promise<CreateCallOutSessionResponse> {
-    return this.request("CreateCallOutSession", req, cb)
-  }
-
-  /**
-   * 获取当前正在通话的会话列表
-   */
-  async DescribePSTNActiveSessionList(
-    req: DescribePSTNActiveSessionListRequest,
-    cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void
-  ): Promise<DescribePSTNActiveSessionListResponse> {
-    return this.request("DescribePSTNActiveSessionList", req, cb)
-  }
-
-  /**
-   * 获取坐席信息列表
-   */
-  async DescribeStaffInfoList(
-    req: DescribeStaffInfoListRequest,
-    cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
-  ): Promise<DescribeStaffInfoListResponse> {
-    return this.request("DescribeStaffInfoList", req, cb)
-  }
-
-  /**
-   * 创建客服账号。
-   */
-  async CreateStaff(
-    req: CreateStaffRequest,
-    cb?: (error: string, rep: CreateStaffResponse) => void
-  ): Promise<CreateStaffResponse> {
-    return this.request("CreateStaff", req, cb)
-  }
-
-  /**
-   * 绑定坐席所属技能组
-   */
-  async BindStaffSkillGroupList(
-    req: BindStaffSkillGroupListRequest,
-    cb?: (error: string, rep: BindStaffSkillGroupListResponse) => void
-  ): Promise<BindStaffSkillGroupListResponse> {
-    return this.request("BindStaffSkillGroupList", req, cb)
-  }
-
-  /**
-   * 获取电话服务记录与录音
-   */
-  async DescribeTelCdr(
-    req: DescribeTelCdrRequest,
-    cb?: (error: string, rep: DescribeTelCdrResponse) => void
-  ): Promise<DescribeTelCdrResponse> {
-    return this.request("DescribeTelCdr", req, cb)
   }
 }

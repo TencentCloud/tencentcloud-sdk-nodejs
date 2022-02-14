@@ -338,4 +338,14 @@ it("dbbrain.v20210527.CreateDBDiagReportUrl", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeProxySessionKillTasks", async function () {
+    try {
+       const data = await client.DescribeProxySessionKillTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })
