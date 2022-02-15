@@ -2791,6 +2791,25 @@ export interface ProductEntry {
     CreatorNickName: string;
 }
 /**
+ * DescribeGatewaySubDeviceList返回参数结构体
+ */
+export interface DescribeGatewaySubDeviceListResponse {
+    /**
+      * 设备的总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceList: Array<FamilySubDevice>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeSpaceFenceEventList请求参数结构体
  */
 export interface DescribeSpaceFenceEventListRequest {
@@ -3090,6 +3109,27 @@ export interface DescribeDeviceBindGatewayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeGatewaySubDeviceList请求参数结构体
+ */
+export interface DescribeGatewaySubDeviceListRequest {
+    /**
+      * 网关产品ID
+      */
+    GatewayProductId: string;
+    /**
+      * 网关设备名称
+      */
+    GatewayDeviceName: string;
+    /**
+      * 分页偏移
+      */
+    Offset: number;
+    /**
+      * 分页的大小
+      */
+    Limit: number;
 }
 /**
  * ControlDeviceData返回参数结构体

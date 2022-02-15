@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableTopicRule", req, cb);
     }
     /**
+     * 查询绑定到家庭的网关设备的子设备列表
+     */
+    async DescribeGatewaySubDeviceList(req, cb) {
+        return this.request("DescribeGatewaySubDeviceList", req, cb);
+    }
+    /**
      * 提供根据产品名称查找产品的能力
      */
     async SearchStudioProduct(req, cb) {

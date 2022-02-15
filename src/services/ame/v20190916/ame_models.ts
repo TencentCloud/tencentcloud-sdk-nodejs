@@ -586,6 +586,24 @@ export interface Artist {
 }
 
 /**
+ * 设置销毁模式
+ */
+export interface SetDestroyModeCommandInput {
+  /**
+      * 销毁模式，取值有：
+<li>Auto：房间没人时自动销毁</li>
+<li>Expire：房间没人时过期自动销毁</li>
+<li>Never：不自动销毁，需手动销毁</li>默认为：Auto。
+      */
+  DestroyMode: string
+
+  /**
+   * 过期销毁时间，单位：秒，当DestroyMode取Expire时必填。
+   */
+  DestroyExpireTime?: number
+}
+
+/**
  * ReportData返回参数结构体
  */
 export interface ReportDataResponse {
@@ -1611,6 +1629,7 @@ export interface SyncKTVRobotCommandRequest {
 <li>SetPlaylist：歌单变更</li>
 <li>SetAudioParam：音频参数变更</li>
 <li>SendMessage：发送自定义消息</li>
+<li>SetDestroyMode：设置销毁模式</li>
       */
   Command: string
 
@@ -1643,6 +1662,11 @@ export interface SyncKTVRobotCommandRequest {
    * 播放模式，当Command取SetPlayMode时，必填。
    */
   SetPlayModeCommandInput?: SetPlayModeCommandInput
+
+  /**
+   * 销毁模式，当Command取SetDestroyMode时，必填。
+   */
+  SetDestroyModeCommandInput?: SetDestroyModeCommandInput
 }
 
 /**

@@ -268,6 +268,16 @@ it("iotexplorer.v20190423.EnableTopicRule", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeGatewaySubDeviceList", async function () {
+    try {
+       const data = await client.DescribeGatewaySubDeviceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.SearchStudioProduct", async function () {
     try {
        const data = await client.SearchStudioProduct({})

@@ -954,6 +954,12 @@ export interface ComplianceK8SDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterName: string
+
+  /**
+      * K8S集群的版本。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterVersion: string
 }
 
 /**
@@ -3116,7 +3122,7 @@ export interface ModifyVirusMonitorSettingRequest {
   ScanPathAll: boolean
 
   /**
-   * 当ScanPathAll为true 生效 0扫描以下路径 1、扫描除以下路径
+   * 当ScanPathAll为true 生效 0扫描以下路径 1、扫描除以下路径(扫描范围只能小于等于1)
    */
   ScanPathType: number
 
@@ -5517,7 +5523,7 @@ export interface DescribeVirusTaskListResponse {
   List: Array<VirusTaskInfo>
 
   /**
-   * 总数量
+   * 总数量(容器任务数量)
    */
   TotalCount: number
 
@@ -6863,6 +6869,11 @@ export interface DescribeAssetImageRegistryDetailRequest {
    * 仓库列表id
    */
   Id?: number
+
+  /**
+   * 镜像ID
+   */
+  ImageId?: string
 }
 
 /**

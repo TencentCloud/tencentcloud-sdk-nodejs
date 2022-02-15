@@ -47,6 +47,7 @@ import {
   DescribeCloudMusicPurchasedResponse,
   DataInfo,
   Artist,
+  SetDestroyModeCommandInput,
   ReportDataResponse,
   SearchKTVMusicsResponse,
   DescribeItemByIdRequest,

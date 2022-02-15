@@ -162,6 +162,7 @@ import {
   DescribeBindedProductsRequest,
   DescribeLoRaFrequencyResponse,
   ProductEntry,
+  DescribeGatewaySubDeviceListResponse,
   DescribeSpaceFenceEventListRequest,
   GetLoRaGatewayListRequest,
   FenceEventItem,
@@ -177,6 +178,7 @@ import {
   CreateLoRaFrequencyRequest,
   LoRaGatewayItem,
   DescribeDeviceBindGatewayResponse,
+  DescribeGatewaySubDeviceListRequest,
   ControlDeviceDataResponse,
   DescribeDeviceDataHistoryRequest,
   UpdateFirmwareRequest,
@@ -486,6 +488,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableTopicRuleResponse) => void
   ): Promise<EnableTopicRuleResponse> {
     return this.request("EnableTopicRule", req, cb)
+  }
+
+  /**
+   * 查询绑定到家庭的网关设备的子设备列表
+   */
+  async DescribeGatewaySubDeviceList(
+    req: DescribeGatewaySubDeviceListRequest,
+    cb?: (error: string, rep: DescribeGatewaySubDeviceListResponse) => void
+  ): Promise<DescribeGatewaySubDeviceListResponse> {
+    return this.request("DescribeGatewaySubDeviceList", req, cb)
   }
 
   /**
