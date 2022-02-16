@@ -25,7 +25,8 @@ import {
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
   AttachCcnRequest,
-  DescribeSnapshotsDeniedActionsResponse,
+  CreateInstancesRequest,
+  DescribeZonesRequest,
   RegionInfo,
   DescribeBlueprintInstancesResponse,
   InstanceDeniedActions,
@@ -35,6 +36,7 @@ import {
   CreateInstanceSnapshotResponse,
   InquirePriceRenewInstancesResponse,
   DeleteFirewallRulesResponse,
+  ModifyInstancesAttributeRequest,
   DescribeGeneralResourceQuotasRequest,
   DeleteKeyPairsRequest,
   SystemDisk,
@@ -76,8 +78,8 @@ import {
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
   ModifyDisksAttributeRequest,
-  ModifyInstancesAttributeRequest,
-  DescribeZonesRequest,
+  DockerContainerPublishPort,
+  DescribeSnapshotsDeniedActionsResponse,
   StartInstancesRequest,
   SnapshotDeniedActions,
   DeleteSnapshotsRequest,
@@ -93,7 +95,7 @@ import {
   DeleteBlueprintsResponse,
   ModifyInstancesLoginKeyPairAttributeRequest,
   StopInstancesResponse,
-  FirewallRule,
+  CreateInstancesResponse,
   ModifyBlueprintAttributeResponse,
   DescribeFirewallRulesTemplateResponse,
   DescribeRegionsRequest,
@@ -107,6 +109,7 @@ import {
   ResetInstancesPasswordResponse,
   LoginSettings,
   Instance,
+  DockerContainerVolume,
   CreateKeyPairResponse,
   DescribeInstanceVncUrlResponse,
   ModifyFirewallRulesResponse,
@@ -138,6 +141,8 @@ import {
   Software,
   DescribeFirewallRulesResponse,
   DescribeInstancesReturnableResponse,
+  ContainerEnv,
+  FirewallRule,
   DeleteBlueprintsRequest,
   FirewallRuleInfo,
   CreateFirewallRulesResponse,
@@ -147,7 +152,9 @@ import {
   CreateBlueprintResponse,
   PolicyDetail,
   DetachDisksResponse,
+  LoginConfiguration,
   DescribeResetInstanceBlueprintsRequest,
+  DockerContainerConfiguration,
   ResetAttachCcnResponse,
   ModifyInstancesRenewFlagResponse,
   ApplyInstanceSnapshotRequest,
@@ -932,6 +939,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RebootInstancesResponse) => void
   ): Promise<RebootInstancesResponse> {
     return this.request("RebootInstances", req, cb)
+  }
+
+  /**
+   * 本接口(CreateInstances)用于创建一个或多个指定套餐的轻量应用服务器实例。
+   */
+  async CreateInstances(
+    req: CreateInstancesRequest,
+    cb?: (error: string, rep: CreateInstancesResponse) => void
+  ): Promise<CreateInstancesResponse> {
+    return this.request("CreateInstances", req, cb)
   }
 
   /**

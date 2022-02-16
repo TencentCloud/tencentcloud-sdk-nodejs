@@ -78,18 +78,58 @@ export interface AttachCcnRequest {
     CcnId: string;
 }
 /**
- * DescribeSnapshotsDeniedActions返回参数结构体
+ * CreateInstances请求参数结构体
  */
-export interface DescribeSnapshotsDeniedActionsResponse {
+export interface CreateInstancesRequest {
     /**
-      * 快照操作限制列表详细信息。
+      * Lighthouse套餐ID。
       */
-    SnapshotDeniedActionSet: Array<SnapshotDeniedActions>;
+    BundleId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * Lighthouse镜像ID。
       */
-    RequestId?: string;
+    BlueprintId: string;
+    /**
+      * 当前Lighthouse实例仅支持预付费模式，即包年包月相关参数设置，单位（月）。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。该参数必传。
+      */
+    InstanceChargePrepaid: InstanceChargePrepaid;
+    /**
+      * Lighthouse实例显示名称。
+      */
+    InstanceName?: string;
+    /**
+      * 购买Lighthouse实例数量。包年包月实例取值范围：[1，30]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量
+      */
+    InstanceCount?: number;
+    /**
+      * 可用区列表。默认为随机可用区
+      */
+    Zones?: Array<string>;
+    /**
+      * 是否只预检此次请求。
+true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和库存。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId.
+false（默认）：发送正常请求，通过检查后直接创建实例
+      */
+    DryRun?: boolean;
+    /**
+      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+      */
+    ClientToken?: string;
+    /**
+      * 实例登录密码信息配置。本字段目前仅支持WINDOWS实例进行密码设置。默认缺失情况下代表用户选择实例创建后设置登录密码。
+      */
+    LoginConfiguration?: LoginConfiguration;
+    /**
+      * 要创建的容器配置列表。
+      */
+    Containers?: Array<DockerContainerConfiguration>;
 }
+/**
+ * DescribeZones请求参数结构体
+ */
+export declare type DescribeZonesRequest = null;
 /**
  * 描述地域信息。
  */
@@ -231,6 +271,19 @@ export interface DeleteFirewallRulesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyInstancesAttribute请求参数结构体
+ */
+export interface ModifyInstancesAttributeRequest {
+    /**
+      * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 实例名称。可任意命名，但不得超过 60 个字符。
+      */
+    InstanceName?: string;
 }
 /**
  * DescribeGeneralResourceQuotas请求参数结构体
@@ -957,22 +1010,41 @@ export interface ModifyDisksAttributeRequest {
     DiskName: string;
 }
 /**
- * ModifyInstancesAttribute请求参数结构体
+ * Docker容器映射的端口
  */
-export interface ModifyInstancesAttributeRequest {
+export interface DockerContainerPublishPort {
     /**
-      * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+      * 主机端口
       */
-    InstanceIds: Array<string>;
+    HostPort: number;
     /**
-      * 实例名称。可任意命名，但不得超过 60 个字符。
+      * 容器端口
       */
-    InstanceName?: string;
+    ContainerPort: number;
+    /**
+      * 对外绑定IP，默认0.0.0.0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ip?: string;
+    /**
+      * 协议，默认tcp，支持tcp/udp/sctp
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol?: string;
 }
 /**
- * DescribeZones请求参数结构体
+ * DescribeSnapshotsDeniedActions返回参数结构体
  */
-export declare type DescribeZonesRequest = null;
+export interface DescribeSnapshotsDeniedActionsResponse {
+    /**
+      * 快照操作限制列表详细信息。
+      */
+    SnapshotDeniedActionSet: Array<SnapshotDeniedActions>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * StartInstances请求参数结构体
  */
@@ -1165,29 +1237,19 @@ export interface StopInstancesResponse {
     RequestId?: string;
 }
 /**
- * 描述防火墙规则信息。
+ * CreateInstances返回参数结构体
  */
-export interface FirewallRule {
+export interface CreateInstancesResponse {
     /**
-      * 协议，取值：TCP，UDP，ICMP，ALL。
+      * 当通过本接口来创建实例时会返回该参数，表示一个或多个实例ID。返回实例ID列表并不代表实例创建成功。
+
+可根据 DescribeInstances 接口查询返回的InstancesSet中对应实例的ID的状态来判断创建是否完成；如果实例状态由“启动中”变为“运行中”，则为创建成功。
       */
-    Protocol: string;
+    InstanceIdSet: Array<string>;
     /**
-      * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Port?: string;
-    /**
-      * 网段或 IP (互斥)。默认为 0.0.0.0/0，表示所有来源。
-      */
-    CidrBlock?: string;
-    /**
-      * 取值：ACCEPT，DROP。默认为 ACCEPT。
-      */
-    Action?: string;
-    /**
-      * 防火墙规则描述。
-      */
-    FirewallRuleDescription?: string;
+    RequestId?: string;
 }
 /**
  * ModifyBlueprintAttribute返回参数结构体
@@ -1479,6 +1541,19 @@ FAILED：表示操作失败
       * 实例绑定的标签列表。
       */
     Tags: Array<Tag>;
+}
+/**
+ * Docker容器挂载卷
+ */
+export interface DockerContainerVolume {
+    /**
+      * 容器路径
+      */
+    ContainerPath: string;
+    /**
+      * 主机路径
+      */
+    HostPath?: string;
 }
 /**
  * CreateKeyPair返回参数结构体
@@ -2143,6 +2218,44 @@ export interface DescribeInstancesReturnableResponse {
     RequestId?: string;
 }
 /**
+ * 容器环境变量
+ */
+export interface ContainerEnv {
+    /**
+      * 环境变量Key
+      */
+    Key: string;
+    /**
+      * 环境变量值
+      */
+    Value: string;
+}
+/**
+ * 描述防火墙规则信息。
+ */
+export interface FirewallRule {
+    /**
+      * 协议，取值：TCP，UDP，ICMP，ALL。
+      */
+    Protocol: string;
+    /**
+      * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。
+      */
+    Port?: string;
+    /**
+      * 网段或 IP (互斥)。默认为 0.0.0.0/0，表示所有来源。
+      */
+    CidrBlock?: string;
+    /**
+      * 取值：ACCEPT，DROP。默认为 ACCEPT。
+      */
+    Action?: string;
+    /**
+      * 防火墙规则描述。
+      */
+    FirewallRuleDescription?: string;
+}
+/**
  * DeleteBlueprints请求参数结构体
  */
 export interface DeleteBlueprintsRequest {
@@ -2317,6 +2430,10 @@ export interface DetachDisksResponse {
     RequestId?: string;
 }
 /**
+ * 实例密码登录配置信息。
+ */
+export declare type LoginConfiguration = null;
+/**
  * DescribeResetInstanceBlueprints请求参数结构体
  */
 export interface DescribeResetInstanceBlueprintsRequest {
@@ -2355,6 +2472,35 @@ export interface DescribeResetInstanceBlueprintsRequest {
 每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
       */
     Filters?: Array<Filter>;
+}
+/**
+ * Docker容器创建时的配置
+ */
+export interface DockerContainerConfiguration {
+    /**
+      * 容器镜像地址
+      */
+    ContainerImage: string;
+    /**
+      * 容器名称
+      */
+    ContainerName?: string;
+    /**
+      * 环境变量列表
+      */
+    Envs?: Array<ContainerEnv>;
+    /**
+      * 容器端口主机端口映射列表
+      */
+    PublishPorts?: Array<DockerContainerPublishPort>;
+    /**
+      * 容器加载本地卷列表
+      */
+    Volumes?: Array<DockerContainerVolume>;
+    /**
+      * 运行的命令
+      */
+    Command?: string;
 }
 /**
  * ResetAttachCcn返回参数结构体

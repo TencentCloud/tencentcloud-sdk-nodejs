@@ -86,11 +86,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomains(req: DescribeDomainsRequest, cb?: (error: string, rep: DescribeDomainsResponse) => void): Promise<DescribeDomainsResponse>;
     /**
-     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="	https://cloud.tencent.com/document/api/228/48118"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      */
     CreateVerifyRecord(req: CreateVerifyRecordRequest, cb?: (error: string, rep: CreateVerifyRecordResponse) => void): Promise<CreateVerifyRecordResponse>;
     /**
-     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
+     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/30986"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      */
     DescribeEcdnDomainStatistics(req: DescribeEcdnDomainStatisticsRequest, cb?: (error: string, rep: DescribeEcdnDomainStatisticsResponse) => void): Promise<DescribeEcdnDomainStatisticsResponse>;
     /**

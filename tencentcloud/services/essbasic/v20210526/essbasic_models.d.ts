@@ -76,11 +76,11 @@ export interface FlowApproverInfo {
       */
     RecipientId?: string;
     /**
-      * 同一渠道下其他合作企业OpenId，签署人为非发起方企业员工场景下必传；
+      * 企业签署方工商营业执照上的企业名称，签署方为非发起方企业场景下必传；
       */
     OrganizationName?: string;
     /**
-      * 同一渠道下其他合作企业OpenId，签署人为非发起方企业员工场景下必传；
+      * 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传；
       */
     OrganizationOpenId?: string;
 }

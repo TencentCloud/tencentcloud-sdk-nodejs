@@ -896,6 +896,16 @@ export interface AccessLogConfig {
    * 腾讯云日志服务相关参数
    */
   CLS?: CLS
+
+  /**
+   * 编码格式，可选值：TEXT、JSON
+   */
+  Encoding?: string
+
+  /**
+   * 日志格式
+   */
+  Format?: string
 }
 
 /**

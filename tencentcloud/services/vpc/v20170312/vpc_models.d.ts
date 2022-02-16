@@ -9982,7 +9982,7 @@ export interface AttachClassicLinkVpcResponse {
  */
 export interface CreateAddressTemplateRequest {
     /**
-      * IP地址模版名称
+      * IP地址模板名称。
       */
     AddressTemplateName: string;
     /**

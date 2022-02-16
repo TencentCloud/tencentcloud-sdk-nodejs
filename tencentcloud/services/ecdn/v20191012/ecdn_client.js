@@ -132,13 +132,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomains", req, cb);
     }
     /**
-     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="	https://cloud.tencent.com/document/api/228/48118"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      */
     async CreateVerifyRecord(req, cb) {
         return this.request("CreateVerifyRecord", req, cb);
     }
     /**
-     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标
+     * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标。
+
+>?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/30986"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。
      */
     async DescribeEcdnDomainStatistics(req, cb) {
         return this.request("DescribeEcdnDomainStatistics", req, cb);

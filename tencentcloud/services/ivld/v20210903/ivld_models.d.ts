@@ -617,6 +617,14 @@ export interface CustomPersonInfo {
       * 二级自定义人物类型
       */
     L2Category: string;
+    /**
+      * 自定义人物图片信息
+      */
+    ImageInfoSet: Array<PersonImageInfo>;
+    /**
+      * 自定义人物创建时间
+      */
+    CreateTime: string;
 }
 /**
  * UpdateCustomPerson返回参数结构体

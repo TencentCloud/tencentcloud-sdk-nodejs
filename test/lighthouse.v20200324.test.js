@@ -648,6 +648,16 @@ it("lighthouse.v20200324.RebootInstances", async function () {
     }
 })
 
+it("lighthouse.v20200324.CreateInstances", async function () {
+    try {
+       const data = await client.CreateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.CreateBlueprint", async function () {
     try {
        const data = await client.CreateBlueprint({})

@@ -1196,7 +1196,7 @@ export interface StartReplicationResponse {
  */
 export interface ZoneSellConf {
     /**
-      * 可用区状态。可能的返回值为：0-未上线；1-上线；2-开放；3-停售；4-不展示
+      * 可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
       */
     Status: number;
     /**
@@ -1260,6 +1260,20 @@ export interface ZoneSellConf {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RemoteRoZone: Array<string>;
+    /**
+      * 独享型可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
+      */
+    ExClusterStatus: number;
+    /**
+      * 独享型可支持的跨可用区只读区信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExClusterRemoteRoZone: Array<string>;
+    /**
+      * 独享型多可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExClusterZoneConf: ZoneConf;
 }
 /**
  * ModifyCDBProxyVipVPort请求参数结构体

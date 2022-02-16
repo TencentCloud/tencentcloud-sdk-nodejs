@@ -338,7 +338,7 @@ export declare class Client extends AbstractClient {
      */
     AcceptAttachCcnInstances(req: AcceptAttachCcnInstancesRequest, cb?: (error: string, rep: AcceptAttachCcnInstancesResponse) => void): Promise<AcceptAttachCcnInstancesResponse>;
     /**
-     * 删除模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 删除模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
      */
     DeleteTemplateMember(req: DeleteTemplateMemberRequest, cb?: (error: string, rep: DeleteTemplateMemberResponse) => void): Promise<DeleteTemplateMemberResponse>;
     /**
@@ -350,7 +350,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeGatewayFlowQos(req: DescribeGatewayFlowQosRequest, cb?: (error: string, rep: DescribeGatewayFlowQosResponse) => void): Promise<DescribeGatewayFlowQosResponse>;
     /**
-     * 修改模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 修改模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
      */
     ModifyTemplateMember(req: ModifyTemplateMemberRequest, cb?: (error: string, rep: ModifyTemplateMemberResponse) => void): Promise<ModifyTemplateMemberResponse>;
     /**
@@ -961,7 +961,7 @@ LimitTypes取值范围：
      */
     CreateNatGatewaySourceIpTranslationNatRule(req: CreateNatGatewaySourceIpTranslationNatRuleRequest, cb?: (error: string, rep: CreateNatGatewaySourceIpTranslationNatRuleResponse) => void): Promise<CreateNatGatewaySourceIpTranslationNatRuleResponse>;
     /**
-     * 增加模版对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
+     * 增加模板对象中的IP地址、协议端口、IP地址组、协议端口组。当前仅支持北京、泰国、北美地域请求。
      */
     AddTemplateMember(req: AddTemplateMemberRequest, cb?: (error: string, rep: AddTemplateMemberResponse) => void): Promise<AddTemplateMemberResponse>;
     /**
@@ -1003,7 +1003,7 @@ LimitTypes取值范围：
      */
     ModifyBandwidthPackageAttribute(req: ModifyBandwidthPackageAttributeRequest, cb?: (error: string, rep: ModifyBandwidthPackageAttributeResponse) => void): Promise<ModifyBandwidthPackageAttributeResponse>;
     /**
-     * 本接口（CreateAddressTemplate）用于创建IP地址模版
+     * 本接口（CreateAddressTemplate）用于创建IP地址模板。
      */
     CreateAddressTemplate(req: CreateAddressTemplateRequest, cb?: (error: string, rep: CreateAddressTemplateResponse) => void): Promise<CreateAddressTemplateResponse>;
     /**
