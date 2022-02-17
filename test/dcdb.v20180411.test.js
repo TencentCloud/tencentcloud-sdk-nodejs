@@ -158,6 +158,16 @@ it("dcdb.v20180411.DescribeDCDBSaleInfo", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeDBSlowLogs", async function () {
+    try {
+       const data = await client.DescribeDBSlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeFlow", async function () {
     try {
        const data = await client.DescribeFlow({})

@@ -302,6 +302,51 @@ export interface DescribeDCDBUpgradePriceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDBSlowLogs请求参数结构体
+ */
+export interface DescribeDBSlowLogsRequest {
+    /**
+      * 实例 ID，形如：dcdbt-hw0qj6m1
+      */
+    InstanceId: string;
+    /**
+      * 从结果的第几条数据开始返回
+      */
+    Offset: number;
+    /**
+      * 返回的结果条数
+      */
+    Limit: number;
+    /**
+      * 查询的起始时间，形如2016-07-23 14:55:20
+      */
+    StartTime: string;
+    /**
+      * 实例的分片ID，形如shard-53ima8ln
+      */
+    ShardId: string;
+    /**
+      * 查询的结束时间，形如2016-08-22 14:55:20。如果不填，那么查询结束时间就是当前时间
+      */
+    EndTime?: string;
+    /**
+      * 要查询的具体数据库名称
+      */
+    Db?: string;
+    /**
+      * 排序指标，取值为query_time_sum或者query_count。不填默认按照query_time_sum排序
+      */
+    OrderBy?: string;
+    /**
+      * 排序类型，desc（降序）或者asc（升序）。不填默认desc排序
+      */
+    OrderByType?: string;
+    /**
+      * 是否查询从机的慢查询，0-主机; 1-从机。不填默认查询主机慢查询
+      */
+    Slave?: number;
+}
+/**
  * CreateAccount请求参数结构体
  */
 export interface CreateAccountRequest {
@@ -2094,6 +2139,89 @@ export interface KillSessionResponse {
     RequestId?: string;
 }
 /**
+ * 慢查询条目信息
+ */
+export interface SlowLogData {
+    /**
+      * 语句校验和，用于查询详情
+      */
+    CheckSum: string;
+    /**
+      * 数据库名称
+      */
+    Db: string;
+    /**
+      * 抽象的SQL语句
+      */
+    FingerPrint: string;
+    /**
+      * 平均的锁时间
+      */
+    LockTimeAvg: string;
+    /**
+      * 最大锁时间
+      */
+    LockTimeMax: string;
+    /**
+      * 最小锁时间
+      */
+    LockTimeMin: string;
+    /**
+      * 锁时间总和
+      */
+    LockTimeSum: string;
+    /**
+      * 查询次数
+      */
+    QueryCount: string;
+    /**
+      * 平均查询时间
+      */
+    QueryTimeAvg: string;
+    /**
+      * 最大查询时间
+      */
+    QueryTimeMax: string;
+    /**
+      * 最小查询时间
+      */
+    QueryTimeMin: string;
+    /**
+      * 查询时间总和
+      */
+    QueryTimeSum: string;
+    /**
+      * 扫描行数
+      */
+    RowsExaminedSum: string;
+    /**
+      * 发送行数
+      */
+    RowsSentSum: string;
+    /**
+      * 最后执行时间
+      */
+    TsMax: string;
+    /**
+      * 首次执行时间
+      */
+    TsMin: string;
+    /**
+      * 帐号
+      */
+    User: string;
+    /**
+      * 样例Sql
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExampleSql: string;
+    /**
+      * 账户的域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Host: string;
+}
+/**
  * DescribeDatabases返回参数结构体
  */
 export interface DescribeDatabasesResponse {
@@ -2806,6 +2934,35 @@ export interface DescribeAccountsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Users?: Array<DBAccount>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDBSlowLogs返回参数结构体
+ */
+export interface DescribeDBSlowLogsResponse {
+    /**
+      * 所有语句锁时间总和
+      */
+    LockTimeSum?: number;
+    /**
+      * 所有语句查询总次数
+      */
+    QueryCount?: number;
+    /**
+      * 总记录数
+      */
+    Total?: number;
+    /**
+      * 所有语句查询时间总和
+      */
+    QueryTimeSum?: number;
+    /**
+      * 慢查询日志数据
+      */
+    Data?: Array<SlowLogData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

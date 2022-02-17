@@ -670,12 +670,12 @@ export interface DescribeOnlineRecordCallbackResponse {
   /**
    * 实时录制事件回调地址，如果未设置回调地址，该字段为空字符串
    */
-  Callback?: string
+  Callback: string
 
   /**
    * 实时录制回调鉴权密钥
    */
-  CallbackKey?: string
+  CallbackKey: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -874,12 +874,12 @@ export interface DescribeWhiteboardPushCallbackResponse {
   /**
    * 白板推流事件回调地址，如果未设置回调地址，该字段为空字符串
    */
-  Callback?: string
+  Callback: string
 
   /**
    * 白板推流回调鉴权密钥
    */
-  CallbackKey?: string
+  CallbackKey: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1661,12 +1661,12 @@ export interface DescribeTranscodeCallbackResponse {
   /**
    * 文档转码回调地址
    */
-  Callback?: string
+  Callback: string
 
   /**
    * 文档转码回调鉴权密钥
    */
-  CallbackKey?: string
+  CallbackKey: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

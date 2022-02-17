@@ -37,6 +37,7 @@ import {
   DescribeDBSyncModeResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeDCDBUpgradePriceResponse,
+  DescribeDBSlowLogsRequest,
   CreateAccountRequest,
   DescribeDBParametersResponse,
   DescribeFlowResponse,
@@ -116,6 +117,7 @@ import {
   DestroyDCDBInstanceRequest,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
+  SlowLogData,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
   DestroyDCDBInstanceResponse,
@@ -147,6 +149,7 @@ import {
   DescribeAccountPrivilegesRequest,
   SqlLogItem,
   DescribeAccountsResponse,
+  DescribeDBSlowLogsResponse,
   DescribeDCDBInstancesRequest,
   Project,
   DestroyHourDCDBInstanceRequest,
@@ -313,6 +316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDCDBSaleInfoResponse) => void
   ): Promise<DescribeDCDBSaleInfoResponse> {
     return this.request("DescribeDCDBSaleInfo", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+   */
+  async DescribeDBSlowLogs(
+    req: DescribeDBSlowLogsRequest,
+    cb?: (error: string, rep: DescribeDBSlowLogsResponse) => void
+  ): Promise<DescribeDBSlowLogsResponse> {
+    return this.request("DescribeDBSlowLogs", req, cb)
   }
 
   /**

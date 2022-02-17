@@ -755,6 +755,10 @@ export interface StructureResultObject {
       * 子任务ID
       */
     SubTaskId: string;
+    /**
+      * 任务文件列表
+      */
+    TaskFiles: Array<string>;
 }
 /**
  * 创建结构化任务子任务信息

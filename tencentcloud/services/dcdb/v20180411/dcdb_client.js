@@ -121,6 +121,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDCDBSaleInfo", req, cb);
     }
     /**
+     * 本接口(DescribeDBSlowLogs)用于查询慢查询日志列表。
+     */
+    async DescribeDBSlowLogs(req, cb) {
+        return this.request("DescribeDBSlowLogs", req, cb);
+    }
+    /**
      * 本接口（DescribeFlow）用于查询流程状态
      */
     async DescribeFlow(req, cb) {

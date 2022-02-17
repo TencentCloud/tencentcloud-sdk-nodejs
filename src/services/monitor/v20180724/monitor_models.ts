@@ -1884,6 +1884,12 @@ export interface AlarmPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagInstances: Array<TagInstance>
+
+  /**
+      * 策略关联的过滤维度信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilterDimensionsParam: string
 }
 
 /**
@@ -2571,7 +2577,7 @@ export interface UserNotice {
   EndTime: number
 
   /**
-      * 通知渠道列表 EMAIL=邮件 SMS=短信 CALL=电话 WECHAT=微信
+      * 通知渠道列表 EMAIL=邮件 SMS=短信 CALL=电话 WECHAT=微信 RTX=企业微信
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NoticeWay: Array<string>
@@ -2617,6 +2623,12 @@ export interface UserNotice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NeedPhoneArriveNotice?: number
+
+  /**
+      * 电话拨打类型 SYNC=同时拨打 CIRCLE=轮询拨打 不指定时默认是轮询
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneCallType?: string
 }
 
 /**
@@ -3893,6 +3905,11 @@ export interface DescribeAlarmPoliciesRequest {
    * 实例分组id
    */
   InstanceGroupId?: number
+
+  /**
+   * 是否需要策略与入参过滤维度参数的对应关系，1：是  0：否，默认为0
+   */
+  NeedCorrespondence?: number
 }
 
 /**

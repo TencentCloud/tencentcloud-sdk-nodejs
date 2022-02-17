@@ -1519,6 +1519,20 @@ export interface RuleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ForwardHost: string
+
+  /**
+      * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerNameIndicationSwitch: string
+
+  /**
+      * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerNameIndication: string
 }
 
 /**
@@ -2013,10 +2027,20 @@ lc，最小连接数。
   ForwardProtocol?: string
 
   /**
-      * 加速通道转发到源站的请求中携带的host。
+      * 回源Host。加速通道转发到源站的请求中携带的host。
 当ForwardHost=default时，使用规则的域名，其他情况为该字段所设置的值。
       */
   ForwardHost?: string
+
+  /**
+   * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+   */
+  ServerNameIndicationSwitch?: string
+
+  /**
+   * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+   */
+  ServerNameIndication?: string
 }
 
 /**
@@ -2716,6 +2740,11 @@ export interface RealServer {
    * 项目ID
    */
   ProjectId: number
+
+  /**
+   * 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。
+   */
+  InBanBlacklist: number
 }
 
 /**
@@ -3237,9 +3266,19 @@ export interface CreateRuleRequest {
   ForwardProtocol?: string
 
   /**
-   * 加速通道转发到远照的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。
+   * 回源Host。加速通道转发到远照的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。
    */
   ForwardHost?: string
+
+  /**
+   * 服务器名称指示（ServerNameIndication，简称SNI）开关。ON表示开启，OFF表示关闭。
+   */
+  ServerNameIndicationSwitch?: string
+
+  /**
+   * 服务器名称指示（ServerNameIndication，简称SNI），当SNI开关打开时，该字段必填。
+   */
+  ServerNameIndication?: string
 }
 
 /**
@@ -3412,7 +3451,7 @@ export interface ProxyGroupDetail {
   IPAddressVersion: string
 
   /**
-      * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示游戏加速器通道组，CrossBorder表示跨境通道组。
+      * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示银牌加速通道组，CrossBorder表示跨境通道组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PackageType: string
@@ -3717,7 +3756,7 @@ export interface SetAuthenticationRequest {
   RealServerCertificateId?: string
 
   /**
-   * 源站证书域名。
+   * 该字段已废弃，请使用创建规则和修改规则中的SNI功能。
    */
   RealServerCertificateDomain?: string
 
@@ -4068,7 +4107,7 @@ export interface DescribeProxyGroupListRequest {
       * 过滤条件。   
 每次请求的Filter.Values的上限为5。
 RealServerRegion - String - 是否必填：否 -（过滤条件）按照源站地域过滤，可参考DescribeDestRegions接口返回结果中的RegionId。
-PackageType - String - 是否必填：否 - （过滤条件）通道组类型，Thunder表示标准通道组，Accelerator表示游戏加速器通道。
+PackageType - String - 是否必填：否 - （过滤条件）通道组类型，Thunder表示标准通道组，Accelerator表示银牌加速通道组。
       */
   Filters?: Array<Filter>
 
@@ -5453,7 +5492,7 @@ CLONING表示复制中。
   NetworkType: string
 
   /**
-      * 通道套餐类型：Thunder表示标准通道，Accelerator表示游戏加速器通道，
+      * 通道套餐类型：Thunder表示标准通道，Accelerator表示银牌加速通道，
 CrossBorder表示跨境通道。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -5478,6 +5517,12 @@ CrossBorder表示跨境通道。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Http3Supported: number
+
+  /**
+      * 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InBanBlacklist: number
 }
 
 /**

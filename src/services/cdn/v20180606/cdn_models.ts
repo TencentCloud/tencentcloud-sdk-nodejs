@@ -5105,6 +5105,12 @@ export interface ServerCert {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Message?: string
+
+  /**
+      * 证书来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  From?: string
 }
 
 /**
@@ -5532,10 +5538,12 @@ offline：已关闭
   ProjectId: number
 
   /**
-      * 域名业务类型
-web：静态加速
-download：下载加速
-media：流媒体点播加速
+      * 加速域名业务类型
+web：网页小文件
+download：下载大文件
+media：音视频点播
+hybrid:  动静加速
+dynamic:  动态加速
       */
   ServiceType: string
 
@@ -5870,6 +5878,30 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ShareCname: ShareCname
+
+  /**
+      * 规则引擎
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleEngine: RuleEngine
+}
+
+/**
+ * 规则引擎配置
+ */
+export interface RuleEngine {
+  /**
+      * 规则引擎配置开关
+on：开启
+off：关闭
+      */
+  Switch: string
+
+  /**
+      * 规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content?: string
 }
 
 /**

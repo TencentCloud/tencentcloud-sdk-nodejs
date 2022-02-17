@@ -2115,7 +2115,7 @@ export interface CreateAuditRuleResponse {
   /**
    * 审计规则 ID。
    */
-  RuleId?: string
+  RuleId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6162,13 +6162,13 @@ export interface DescribeAuditRulesResponse {
   /**
    * 符合条件的审计规则个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 审计规则详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Items?: Array<AuditRule>
+  Items: Array<AuditRule>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

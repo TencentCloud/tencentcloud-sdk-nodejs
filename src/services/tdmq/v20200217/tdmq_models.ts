@@ -345,6 +345,11 @@ export interface CreateCmqTopicRequest {
    * 是否开启消息轨迹标识，true表示开启，false表示不开启，不填表示不开启。
    */
   Trace?: boolean
+
+  /**
+   * 标签数组
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1068,6 +1073,15 @@ export interface Topic {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ConsumerLimit: string
+
+  /**
+      * 0: 非持久非分区
+1: 非持久分区
+2: 持久非分区
+3: 持久分区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PulsarTopicType: number
 }
 
 /**
@@ -1690,6 +1704,24 @@ export interface Subscription {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+      * 订阅类型，Exclusive，Shared，Failover， Key_Shared，空或NULL表示未知，
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubType: string
+
+  /**
+      * 是否由于未 ack 数到达上限而被 block
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BlockedSubscriptionOnUnackedMsgs: boolean
+
+  /**
+      * 未 ack 消息数上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxUnackedMsgNum: number
 }
 
 /**
@@ -2689,23 +2721,32 @@ export interface CreateTopicRequest {
   Partitions: number
 
   /**
+   * 备注，128字符以内。
+   */
+  Remark?: string
+
+  /**
       * 0： 普通消息；
 1 ：全局顺序消息；
 2 ：局部顺序消息；
 3 ：重试队列；
 4 ：死信队列。
       */
-  TopicType: number
-
-  /**
-   * 备注，128字符以内。
-   */
-  Remark?: string
+  TopicType?: number
 
   /**
    * Pulsar 集群的ID
    */
   ClusterId?: string
+
+  /**
+      * Pulsar 主题类型
+0: 非持久非分区
+1: 非持久分区
+2: 持久非分区
+3: 持久分区
+      */
+  PulsarTopicType?: number
 }
 
 /**
@@ -4393,6 +4434,12 @@ export interface Consumer {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientVersion: string
+
+  /**
+      * 消费者连接的主题分区号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Partition: number
 }
 
 /**
@@ -4767,6 +4814,14 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+
+  /**
+      * 计费模式：
+0: 按量计费
+1: 包年包月
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayMode: number
 }
 
 /**
@@ -5399,6 +5454,11 @@ export interface CreateCmqQueueRequest {
    * 是否开启消息轨迹追踪，当不设置字段时，默认为不开启，该字段为true表示开启，为false表示不开启
    */
   Trace?: boolean
+
+  /**
+   * 标签数组
+   */
+  Tags?: Array<Tag>
 }
 
 /**

@@ -903,6 +903,11 @@ export interface StructureResultObject {
    * 子任务ID
    */
   SubTaskId: string
+
+  /**
+   * 任务文件列表
+   */
+  TaskFiles: Array<string>
 }
 
 /**
