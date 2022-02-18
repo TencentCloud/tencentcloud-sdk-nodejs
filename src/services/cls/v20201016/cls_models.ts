@@ -575,7 +575,7 @@ export interface CallBackInfo {
 }
 
 /**
- * 日志告警监控对线
+ * 告警对象
  */
 export interface AlarmTargetInfo {
   /**

@@ -2441,100 +2441,100 @@ export interface ItemPrice {
       * 折扣，如20.0代表2折。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Discount: number
+  Discount?: number
 
   /**
       * 后续合计费用的折扣价，后付费模式使用，单位：元<br><li>如返回了其他时间区间项，如UnitPriceDiscountSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UnitPriceDiscount: number
+  UnitPriceDiscount?: number
 
   /**
       * 使用时间区间在(96, 360)小时的后续合计费用的原价，后付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UnitPriceSecondStep: number
+  UnitPriceSecondStep?: number
 
   /**
       * 使用时间区间在(96, 360)小时的后续合计费用的折扣价，后付费模式使用，单位：元
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UnitPriceDiscountSecondStep: number
+  UnitPriceDiscountSecondStep?: number
 
   /**
       * 使用时间区间在(360, ∞)小时的后续合计费用的原价，后付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UnitPriceThirdStep: number
+  UnitPriceThirdStep?: number
 
   /**
       * 使用时间区间在(360, ∞)小时的后续合计费用的折扣价，后付费模式使用，单位：元
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UnitPriceDiscountThirdStep: number
+  UnitPriceDiscountThirdStep?: number
 
   /**
       * 预支三年合计费用的原价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OriginalPriceThreeYear: number
+  OriginalPriceThreeYear?: number
 
   /**
       * 预支三年合计费用的折扣价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountPriceThreeYear: number
+  DiscountPriceThreeYear?: number
 
   /**
       * 预支三年应用的折扣，如20.0代表2折。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountThreeYear: number
+  DiscountThreeYear?: number
 
   /**
       * 预支五年合计费用的原价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OriginalPriceFiveYear: number
+  OriginalPriceFiveYear?: number
 
   /**
       * 预支五年合计费用的折扣价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountPriceFiveYear: number
+  DiscountPriceFiveYear?: number
 
   /**
       * 预支五年应用的折扣，如20.0代表2折。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountFiveYear: number
+  DiscountFiveYear?: number
 
   /**
       * 预支一年合计费用的原价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OriginalPriceOneYear: number
+  OriginalPriceOneYear?: number
 
   /**
       * 预支一年合计费用的折扣价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountPriceOneYear: number
+  DiscountPriceOneYear?: number
 
   /**
       * 预支一年应用的折扣，如20.0代表2折。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountOneYear: number
+  DiscountOneYear?: number
 }
 
 /**

@@ -70,7 +70,7 @@ export interface DescribeDataFetchProjectRequest {
   StartTime: number
 
   /**
-   * 类型
+   * allcount：性能视图，day：14天数据，condition：条件列表，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
 
@@ -666,7 +666,7 @@ export interface DescribeDataCustomUrlRequest {
   StartTime: number
 
   /**
-   * 类型
+   * top：资源top视图，allcount：性能视图，day：14天数据，condition：条件列表，pagepv：性能视图，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
 
@@ -861,7 +861,7 @@ export interface DescribeDataStaticUrlRequest {
   StartTime: number
 
   /**
-   * 类型
+   * pagepv：性能视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等
    */
   Type: string
 
@@ -1176,7 +1176,7 @@ export interface DescribeDataPerformancePageRequest {
   EndTime: number
 
   /**
-   * ["pagepv", "allcount"]
+   * pagepv：性能视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
    */
   Type: string
 
@@ -1301,7 +1301,7 @@ export interface DescribeDataFetchUrlRequest {
   StartTime: number
 
   /**
-   * 类型
+   * allcount：性能视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
 
@@ -1516,7 +1516,7 @@ export interface DescribeDataPvUrlStatisticsRequest {
   StartTime: number
 
   /**
-   * 类型:"allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+   * allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
 
@@ -1673,7 +1673,7 @@ export interface DescribeDataStaticProjectRequest {
   StartTime: number
 
   /**
-   * 类型
+   * allcount：性能视图，day：14天数据，condition：条件列表，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
 
@@ -1953,7 +1953,7 @@ export interface DescribeDataSetUrlStatisticsRequest {
   StartTime: number
 
   /**
-   * "allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+   * allcount：性能视图，data：小程序，component：小程序相关，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
    */
   Type: string
 
@@ -2368,7 +2368,7 @@ export interface DescribeDataLogUrlStatisticsRequest {
   StartTime: number
 
   /**
-   * "analysis", "compare", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+   * analysis：异常分析，compare：异常列表对比，allcount：性能视图，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
 
@@ -3029,7 +3029,7 @@ export interface DescribeDataEventUrlRequest {
   StartTime: number
 
   /**
-   * 类型
+   * allcount：性能视图，day：14天数据，condition：条件列表，ckuv：获取uv趋势，ckpv：获取pv趋势，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
 
@@ -3234,7 +3234,7 @@ export interface DescribeDataPerformanceProjectRequest {
   StartTime: number
 
   /**
-   * "allcount", "falls", "samp", "version", "ext3","nettype", "platform","isp","region","device","browser","ext1","ext2"
+   * allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，condition：条件列表，area：请求速度分布，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
    */
   Type: string
 
@@ -3399,7 +3399,7 @@ export interface DescribeDataStaticResourceRequest {
   StartTime: number
 
   /**
-   * 类型
+   * top：资源top视图，count40x：40X视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等
    */
   Type: string
 

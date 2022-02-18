@@ -28,10 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("cynosdb.tencentcloudapi.com", "2019-01-07", clientConfig);
     }
     /**
+     * 恢复serverless集群
+     */
+    async ResumeServerless(req, cb) {
+        return this.request("ResumeServerless", req, cb);
+    }
+    /**
      * 查询备份文件列表
      */
     async DescribeBackupList(req, cb) {
         return this.request("DescribeBackupList", req, cb);
+    }
+    /**
+     * 批量回收账号权限
+     */
+    async RevokeAccountPrivileges(req, cb) {
+        return this.request("RevokeAccountPrivileges", req, cb);
+    }
+    /**
+     * 本接口（RollBackCluster）用于回档集群
+     */
+    async RollBackCluster(req, cb) {
+        return this.request("RollBackCluster", req, cb);
     }
     /**
      * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
@@ -50,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OfflineCluster(req, cb) {
         return this.request("OfflineCluster", req, cb);
+    }
+    /**
+     * 暂停serverless集群
+     */
+    async PauseServerless(req, cb) {
+        return this.request("PauseServerless", req, cb);
     }
     /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
@@ -76,10 +100,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
+     * 批量授权账号权限
+     */
+    async GrantAccountPrivileges(req, cb) {
+        return this.request("GrantAccountPrivileges", req, cb);
+    }
+    /**
+     * 本接口（DescribeClusterParamLogs）查询参数修改日志
+     */
+    async DescribeClusterParamLogs(req, cb) {
+        return this.request("DescribeClusterParamLogs", req, cb);
+    }
+    /**
      * 修改维护时间配置
      */
     async ModifyMaintainPeriodConfig(req, cb) {
         return this.request("ModifyMaintainPeriodConfig", req, cb);
+    }
+    /**
+     * 修改账号参数
+     */
+    async ModifyAccountParams(req, cb) {
+        return this.request("ModifyAccountParams", req, cb);
     }
     /**
      * 下线实例
@@ -112,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjectSecurityGroups", req, cb);
     }
     /**
+     * 安全组批量绑定云资源
+     */
+    async AssociateSecurityGroups(req, cb) {
+        return this.request("AssociateSecurityGroups", req, cb);
+    }
+    /**
      * SetRenewFlag设置实例的自动续费功能
      */
     async SetRenewFlag(req, cb) {
@@ -140,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceSpecs(req, cb) {
         return this.request("DescribeInstanceSpecs", req, cb);
+    }
+    /**
+     * 账号所有权限
+     */
+    async DescribeAccountAllGrantPrivileges(req, cb) {
+        return this.request("DescribeAccountAllGrantPrivileges", req, cb);
     }
     /**
      * 本接口(DescribeAccounts)用于查询数据库管理账号。
@@ -172,16 +226,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusters", req, cb);
     }
     /**
-     * 指定时间和集群查询是否可回滚
+     * 本接口(ActivateInstance)用于恢复已隔离的实例访问。
      */
-    async DescribeRollbackTimeValidity(req, cb) {
-        return this.request("DescribeRollbackTimeValidity", req, cb);
+    async ActivateInstance(req, cb) {
+        return this.request("ActivateInstance", req, cb);
     }
     /**
      * 查询实例安全组信息
      */
     async DescribeDBSecurityGroups(req, cb) {
         return this.request("DescribeDBSecurityGroups", req, cb);
+    }
+    /**
+     * 安全组批量解绑云资源
+     */
+    async DisassociateSecurityGroups(req, cb) {
+        return this.request("DisassociateSecurityGroups", req, cb);
+    }
+    /**
+     * 指定时间和集群查询是否可回滚
+     */
+    async DescribeRollbackTimeValidity(req, cb) {
+        return this.request("DescribeRollbackTimeValidity", req, cb);
     }
     /**
      * 本接口（AddInstances）用于集群添加实例

@@ -407,4 +407,14 @@ export interface ServiceGovernanceInfo {
    * 服务治理引擎绑定的网络信息
    */
   VpcInfos?: Array<VpcInfo>
+
+  /**
+   * 当前实例鉴权是否开启
+   */
+  AuthOpen?: boolean
+
+  /**
+   * 该实例支持的功能，鉴权就是 Auth
+   */
+  Features?: Array<string>
 }

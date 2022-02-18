@@ -934,6 +934,16 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HealthStatus: number;
+    /**
+      * https集群内网url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EsPrivateUrl: string;
+    /**
+      * https集群内网域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EsPrivateDomain: string;
 }
 /**
  * DeleteInstance返回参数结构体

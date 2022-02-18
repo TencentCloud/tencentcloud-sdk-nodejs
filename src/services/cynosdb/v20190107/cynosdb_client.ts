@@ -18,78 +18,109 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  AddInstancesResponse,
-  UpgradeInstanceResponse,
-  Addr,
-  DescribeClustersRequest,
-  InstanceSpec,
-  DescribeProjectSecurityGroupsRequest,
-  ModifyClusterParamResponse,
-  Account,
-  SecurityGroup,
-  ModifyDBInstanceSecurityGroupsResponse,
+  DescribeRollbackTimeRangeRequest,
+  ObjectTask,
   DescribeBackupConfigRequest,
+  DescribeAccountsRequest,
+  ModifyMaintainPeriodConfigRequest,
+  DescribeRollbackTimeRangeResponse,
+  AssociateSecurityGroupsRequest,
+  DescribeDBSecurityGroupsResponse,
+  DescribeMaintainPeriodRequest,
+  AccountParam,
+  DescribeInstancesResponse,
+  ClusterInstanceDetail,
+  Account,
+  IsolateInstanceResponse,
+  DescribeInstanceSpecsRequest,
+  RevokeAccountPrivilegesResponse,
+  CreateClustersResponse,
+  SetRenewFlagRequest,
+  CynosdbInstanceGrp,
+  Tag,
+  ActivateInstanceRequest,
+  RollbackTableInfo,
+  DescribeAccountAllGrantPrivilegesResponse,
+  RollbackDatabase,
+  DatabasePrivileges,
+  DescribeClustersRequest,
+  DescribeInstanceDetailResponse,
+  ModifyDBInstanceSecurityGroupsResponse,
+  DescribeClusterParamLogsResponse,
   DescribeClusterInstanceGrpsRequest,
   DescribeResourcesByDealNameResponse,
-  DescribeAccountsRequest,
+  ResumeServerlessResponse,
   IsolateInstanceRequest,
+  DescribeDBSecurityGroupsRequest,
+  RollBackClusterRequest,
+  RollbackTable,
+  DescribeClusterDetailRequest,
+  DescribeProjectSecurityGroupsResponse,
+  PauseServerlessResponse,
+  OfflineClusterRequest,
+  BackupFileInfo,
+  DescribeBackupListRequest,
+  CynosdbInstance,
+  DbTable,
+  GrantAccountPrivilegesRequest,
+  IsolateClusterResponse,
+  CreateClustersRequest,
+  DescribeClustersResponse,
+  QueryFilter,
+  DescribeBackupConfigResponse,
+  ModifyDBInstanceSecurityGroupsRequest,
+  AddInstancesResponse,
+  Addr,
+  DescribeProjectSecurityGroupsRequest,
+  ModifyClusterParamResponse,
+  SecurityGroup,
+  NetAddr,
+  AssociateSecurityGroupsResponse,
+  DescribeResourcesByDealNameRequest,
+  DescribeRollbackTimeValidityResponse,
+  GrantAccountPrivilegesResponse,
+  ResumeServerlessRequest,
+  BillingResourceInfo,
+  ModifyBackupConfigResponse,
+  PauseServerlessRequest,
+  UpgradeInstanceResponse,
+  ModifyAccountParamsRequest,
+  CynosdbCluster,
+  SetRenewFlagResponse,
+  OfflineClusterResponse,
+  RevokeAccountPrivilegesRequest,
+  InstanceSpec,
+  DescribeClusterParamLogsRequest,
+  UpgradeInstanceRequest,
   DescribeMaintainPeriodResponse,
   DescribeBackupListResponse,
-  DescribeRollbackTimeRangeResponse,
-  ModifyMaintainPeriodConfigRequest,
-  ModifyBackupConfigRequest,
-  ModifyClusterParamRequest,
-  DescribeDBSecurityGroupsRequest,
+  RollBackClusterResponse,
+  DescribeClusterDetailResponse,
+  ActivateInstanceResponse,
   DescribeRollbackTimeValidityRequest,
   IsolateClusterRequest,
   DescribeClusterInstanceGrpsResponse,
   AddInstancesRequest,
-  NetAddr,
-  DescribeClusterDetailRequest,
-  Tag,
-  DescribeProjectSecurityGroupsResponse,
+  DescribeInstancesRequest,
+  ClusterParamModifyLog,
   CynosdbInstanceDetail,
-  DescribeDBSecurityGroupsResponse,
-  DescribeMaintainPeriodRequest,
-  DescribeInstancesResponse,
   CynosdbClusterDetail,
-  ClusterInstanceDetail,
-  BackupFileInfo,
-  DescribeRollbackTimeValidityResponse,
   DescribeInstanceDetailRequest,
   ModifyMaintainPeriodConfigResponse,
-  DescribeInstancesRequest,
-  DescribeResourcesByDealNameRequest,
-  IsolateInstanceResponse,
-  DescribeBackupListRequest,
-  DescribeRollbackTimeRangeRequest,
-  QueryFilter,
-  CynosdbInstance,
+  DisassociateSecurityGroupsRequest,
+  TablePrivileges,
+  ModifyClusterParamRequest,
   DescribeAccountsResponse,
-  UpgradeInstanceRequest,
-  DescribeInstanceDetailResponse,
+  ModifyAccountParamsResponse,
   OfflineInstanceRequest,
-  BillingResourceInfo,
-  OfflineClusterResponse,
   DescribeInstanceSpecsResponse,
-  ObjectTask,
-  DescribeInstanceSpecsRequest,
-  ParamItem,
-  IsolateClusterResponse,
-  CreateClustersResponse,
-  SetRenewFlagRequest,
-  CreateClustersRequest,
-  CynosdbCluster,
-  OfflineClusterRequest,
-  DescribeClusterDetailResponse,
+  DescribeAccountAllGrantPrivilegesRequest,
   OfflineInstanceResponse,
-  CynosdbInstanceGrp,
-  DescribeClustersResponse,
-  SetRenewFlagResponse,
-  ModifyBackupConfigResponse,
+  ParamItem,
   PolicyRule,
-  DescribeBackupConfigResponse,
-  ModifyDBInstanceSecurityGroupsRequest,
+  ModifyBackupConfigRequest,
+  InputAccount,
+  DisassociateSecurityGroupsResponse,
 } from "./cynosdb_models"
 
 /**
@@ -102,6 +133,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 恢复serverless集群
+   */
+  async ResumeServerless(
+    req: ResumeServerlessRequest,
+    cb?: (error: string, rep: ResumeServerlessResponse) => void
+  ): Promise<ResumeServerlessResponse> {
+    return this.request("ResumeServerless", req, cb)
+  }
+
+  /**
    * 查询备份文件列表
    */
   async DescribeBackupList(
@@ -109,6 +150,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupListResponse) => void
   ): Promise<DescribeBackupListResponse> {
     return this.request("DescribeBackupList", req, cb)
+  }
+
+  /**
+   * 批量回收账号权限
+   */
+  async RevokeAccountPrivileges(
+    req: RevokeAccountPrivilegesRequest,
+    cb?: (error: string, rep: RevokeAccountPrivilegesResponse) => void
+  ): Promise<RevokeAccountPrivilegesResponse> {
+    return this.request("RevokeAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 本接口（RollBackCluster）用于回档集群
+   */
+  async RollBackCluster(
+    req: RollBackClusterRequest,
+    cb?: (error: string, rep: RollBackClusterResponse) => void
+  ): Promise<RollBackClusterResponse> {
+    return this.request("RollBackCluster", req, cb)
   }
 
   /**
@@ -139,6 +200,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OfflineClusterResponse) => void
   ): Promise<OfflineClusterResponse> {
     return this.request("OfflineCluster", req, cb)
+  }
+
+  /**
+   * 暂停serverless集群
+   */
+  async PauseServerless(
+    req: PauseServerlessRequest,
+    cb?: (error: string, rep: PauseServerlessResponse) => void
+  ): Promise<PauseServerlessResponse> {
+    return this.request("PauseServerless", req, cb)
   }
 
   /**
@@ -182,6 +253,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量授权账号权限
+   */
+  async GrantAccountPrivileges(
+    req: GrantAccountPrivilegesRequest,
+    cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void
+  ): Promise<GrantAccountPrivilegesResponse> {
+    return this.request("GrantAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeClusterParamLogs）查询参数修改日志
+   */
+  async DescribeClusterParamLogs(
+    req: DescribeClusterParamLogsRequest,
+    cb?: (error: string, rep: DescribeClusterParamLogsResponse) => void
+  ): Promise<DescribeClusterParamLogsResponse> {
+    return this.request("DescribeClusterParamLogs", req, cb)
+  }
+
+  /**
    * 修改维护时间配置
    */
   async ModifyMaintainPeriodConfig(
@@ -189,6 +280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMaintainPeriodConfigResponse) => void
   ): Promise<ModifyMaintainPeriodConfigResponse> {
     return this.request("ModifyMaintainPeriodConfig", req, cb)
+  }
+
+  /**
+   * 修改账号参数
+   */
+  async ModifyAccountParams(
+    req: ModifyAccountParamsRequest,
+    cb?: (error: string, rep: ModifyAccountParamsResponse) => void
+  ): Promise<ModifyAccountParamsResponse> {
+    return this.request("ModifyAccountParams", req, cb)
   }
 
   /**
@@ -242,6 +343,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 安全组批量绑定云资源
+   */
+  async AssociateSecurityGroups(
+    req: AssociateSecurityGroupsRequest,
+    cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void
+  ): Promise<AssociateSecurityGroupsResponse> {
+    return this.request("AssociateSecurityGroups", req, cb)
+  }
+
+  /**
    * SetRenewFlag设置实例的自动续费功能
    */
   async SetRenewFlag(
@@ -289,6 +400,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void
   ): Promise<DescribeInstanceSpecsResponse> {
     return this.request("DescribeInstanceSpecs", req, cb)
+  }
+
+  /**
+   * 账号所有权限
+   */
+  async DescribeAccountAllGrantPrivileges(
+    req: DescribeAccountAllGrantPrivilegesRequest,
+    cb?: (error: string, rep: DescribeAccountAllGrantPrivilegesResponse) => void
+  ): Promise<DescribeAccountAllGrantPrivilegesResponse> {
+    return this.request("DescribeAccountAllGrantPrivileges", req, cb)
   }
 
   /**
@@ -342,13 +463,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 指定时间和集群查询是否可回滚
+   * 本接口(ActivateInstance)用于恢复已隔离的实例访问。
    */
-  async DescribeRollbackTimeValidity(
-    req: DescribeRollbackTimeValidityRequest,
-    cb?: (error: string, rep: DescribeRollbackTimeValidityResponse) => void
-  ): Promise<DescribeRollbackTimeValidityResponse> {
-    return this.request("DescribeRollbackTimeValidity", req, cb)
+  async ActivateInstance(
+    req: ActivateInstanceRequest,
+    cb?: (error: string, rep: ActivateInstanceResponse) => void
+  ): Promise<ActivateInstanceResponse> {
+    return this.request("ActivateInstance", req, cb)
   }
 
   /**
@@ -359,6 +480,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
   ): Promise<DescribeDBSecurityGroupsResponse> {
     return this.request("DescribeDBSecurityGroups", req, cb)
+  }
+
+  /**
+   * 安全组批量解绑云资源
+   */
+  async DisassociateSecurityGroups(
+    req: DisassociateSecurityGroupsRequest,
+    cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
+  ): Promise<DisassociateSecurityGroupsResponse> {
+    return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 指定时间和集群查询是否可回滚
+   */
+  async DescribeRollbackTimeValidity(
+    req: DescribeRollbackTimeValidityRequest,
+    cb?: (error: string, rep: DescribeRollbackTimeValidityResponse) => void
+  ): Promise<DescribeRollbackTimeValidityResponse> {
+    return this.request("DescribeRollbackTimeValidity", req, cb)
   }
 
   /**

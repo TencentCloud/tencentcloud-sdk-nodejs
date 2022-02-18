@@ -18,9 +18,39 @@ const client = new tencentcloud.cynosdb.v20190107.Client({
 })
 describe("cynosdb.v20190107.test.js", function () {
 
+it("cynosdb.v20190107.ResumeServerless", async function () {
+    try {
+       const data = await client.ResumeServerless({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeBackupList", async function () {
     try {
        const data = await client.DescribeBackupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
+    try {
+       const data = await client.RevokeAccountPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.RollBackCluster", async function () {
+    try {
+       const data = await client.RollBackCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +81,16 @@ it("cynosdb.v20190107.DescribeClusterInstanceGrps", async function () {
 it("cynosdb.v20190107.OfflineCluster", async function () {
     try {
        const data = await client.OfflineCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.PauseServerless", async function () {
+    try {
+       const data = await client.PauseServerless({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +138,39 @@ it("cynosdb.v20190107.DescribeInstances", async function () {
     }
 })
 
+it("cynosdb.v20190107.GrantAccountPrivileges", async function () {
+    try {
+       const data = await client.GrantAccountPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeClusterParamLogs", async function () {
+    try {
+       const data = await client.DescribeClusterParamLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyMaintainPeriodConfig", async function () {
     try {
        const data = await client.ModifyMaintainPeriodConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyAccountParams", async function () {
+    try {
+       const data = await client.ModifyAccountParams({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +228,16 @@ it("cynosdb.v20190107.DescribeProjectSecurityGroups", async function () {
     }
 })
 
+it("cynosdb.v20190107.AssociateSecurityGroups", async function () {
+    try {
+       const data = await client.AssociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.SetRenewFlag", async function () {
     try {
        const data = await client.SetRenewFlag({})
@@ -201,6 +281,16 @@ it("cynosdb.v20190107.IsolateInstance", async function () {
 it("cynosdb.v20190107.DescribeInstanceSpecs", async function () {
     try {
        const data = await client.DescribeInstanceSpecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeAccountAllGrantPrivileges", async function () {
+    try {
+       const data = await client.DescribeAccountAllGrantPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +348,9 @@ it("cynosdb.v20190107.CreateClusters", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeRollbackTimeValidity", async function () {
+it("cynosdb.v20190107.ActivateInstance", async function () {
     try {
-       const data = await client.DescribeRollbackTimeValidity({})
+       const data = await client.ActivateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +361,26 @@ it("cynosdb.v20190107.DescribeRollbackTimeValidity", async function () {
 it("cynosdb.v20190107.DescribeDBSecurityGroups", async function () {
     try {
        const data = await client.DescribeDBSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DisassociateSecurityGroups", async function () {
+    try {
+       const data = await client.DisassociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeRollbackTimeValidity", async function () {
+    try {
+       const data = await client.DescribeRollbackTimeValidity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
