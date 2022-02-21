@@ -283,6 +283,47 @@ export interface DescribeConsumerGroupResponse {
     RequestId?: string;
 }
 /**
+ * CreateRoute请求参数结构体
+ */
+export interface CreateRouteRequest {
+    /**
+      * 实例唯一id
+      */
+    InstanceId: string;
+    /**
+      * 路由网络类型(3:vpc路由;4:标准版支撑路由;7:专业版支撑路由)
+      */
+    VipType: number;
+    /**
+      * vpc网络Id
+      */
+    VpcId?: string;
+    /**
+      * vpc子网id
+      */
+    SubnetId?: string;
+    /**
+      * 访问类型
+      */
+    AccessType?: number;
+    /**
+      * 是否需要权限管理
+      */
+    AuthFlag?: number;
+    /**
+      * 调用方appId
+      */
+    CallerAppid?: number;
+    /**
+      * 公网带宽
+      */
+    PublicNetwork?: number;
+    /**
+      * vip地址
+      */
+    Ip?: string;
+}
+/**
  * DeleteTopic请求参数结构体
  */
 export interface DeleteTopicRequest {
@@ -744,13 +785,17 @@ export interface DescribeTopicAttributesResponse {
     RequestId?: string;
 }
 /**
- * DeleteRouteTriggerTime请求参数结构体
+ * CreateConsumer返回参数结构体
  */
-export interface DeleteRouteTriggerTimeRequest {
+export interface CreateConsumerResponse {
     /**
-      * 修改时间
+      * 创建group描述
       */
-    DelayTime: string;
+    Result: JgwOperateResponse;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 路由信息返回对象
@@ -909,31 +954,6 @@ export interface DeleteGroupRequest {
       * 消费分组
       */
     Group: string;
-}
-/**
- * DescribeConsumerGroup请求参数结构体
- */
-export interface DescribeConsumerGroupRequest {
-    /**
-      * ckafka实例id。
-      */
-    InstanceId: string;
-    /**
-      * 可选，用户需要查询的group名称。
-      */
-    GroupName?: string;
-    /**
-      * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
-      */
-    TopicName?: string;
-    /**
-      * 本次返回个数限制
-      */
-    Limit?: number;
-    /**
-      * 偏移位置
-      */
-    Offset?: number;
 }
 /**
  * DeleteUser返回参数结构体
@@ -1705,6 +1725,19 @@ export interface DescribeInstanceAttributesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyPassword返回参数结构体
+ */
+export interface ModifyPasswordResponse {
+    /**
+      * 返回结果
+      */
+    Result?: JgwOperateResponse;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 主题详情返回实体
  */
 export interface TopicDetailResponse {
@@ -1869,17 +1902,29 @@ export interface DescribeRegionResponse {
     RequestId?: string;
 }
 /**
- * CreateTopic返回参数结构体
+ * DescribeConsumerGroup请求参数结构体
  */
-export interface CreateTopicResponse {
+export interface DescribeConsumerGroupRequest {
     /**
-      * 返回创建结果
+      * ckafka实例id。
       */
-    Result: CreateTopicResp;
+    InstanceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 可选，用户需要查询的group名称。
       */
-    RequestId?: string;
+    GroupName?: string;
+    /**
+      * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
+      */
+    TopicName?: string;
+    /**
+      * 本次返回个数限制
+      */
+    Limit?: number;
+    /**
+      * 偏移位置
+      */
+    Offset?: number;
 }
 /**
  * 虚拟IP实体
@@ -1970,6 +2015,15 @@ export interface DeleteTopicResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteRouteTriggerTime请求参数结构体
+ */
+export interface DeleteRouteTriggerTimeRequest {
+    /**
+      * 修改时间
+      */
+    DelayTime: string;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -2324,17 +2378,25 @@ export interface DescribeInstancesDetailRequest {
     InstanceIds?: string;
 }
 /**
- * ModifyPassword返回参数结构体
+ * CreateConsumer请求参数结构体
  */
-export interface ModifyPasswordResponse {
+export interface CreateConsumerRequest {
     /**
-      * 返回结果
+      * 实例id
       */
-    Result?: JgwOperateResponse;
+    InstanceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * group名称
       */
-    RequestId?: string;
+    GroupName: string;
+    /**
+      * topic名称
+      */
+    TopicName?: string;
+    /**
+      * topic名称数组
+      */
+    TopicNameList?: Array<string>;
 }
 /**
  * DescribeRoute请求参数结构体
@@ -2452,6 +2514,19 @@ export interface TopicAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AclRuleList: Array<AclRule>;
+}
+/**
+ * CreateRoute返回参数结构体
+ */
+export interface CreateRouteResponse {
+    /**
+      * 返回结果
+      */
+    Result: JgwOperateResponse;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 聚合的实例状态返回结果
@@ -2912,6 +2987,19 @@ export interface ModifyTopicAttributesRequest {
       * 标签列表
       */
     Tags?: Array<Tag>;
+}
+/**
+ * CreateTopic返回参数结构体
+ */
+export interface CreateTopicResponse {
+    /**
+      * 返回创建结果
+      */
+    Result: CreateTopicResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateInstancePre请求参数结构体

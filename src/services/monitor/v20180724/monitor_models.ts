@@ -3846,6 +3846,8 @@ export interface DescribeAlarmPoliciesRequest {
 具体也可以参考下方的示例 2。
 
 不同云产品参数示例详见 [维度信息Dimensions列表](https://cloud.tencent.com/document/product/248/50397)
+
+注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时
       */
   Dimensions?: string
 
@@ -5087,7 +5089,7 @@ export interface DescribeAlarmNoticeResponse {
   /**
    * 告警通知模板详细信息
    */
-  Notice?: AlarmNotice
+  Notice: AlarmNotice
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

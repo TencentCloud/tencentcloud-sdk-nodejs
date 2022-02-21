@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteAclRequest, BatchCreateAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, DescribeConsumerGroupResponse, DeleteTopicRequest, DescribeInstancesResponse, FetchMessageByOffsetResponse, BatchModifyTopicAttributesResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DescribeTopicSubscribeGroupResponse, DescribeCkafkaZoneRequest, BatchModifyGroupOffsetsResponse, DescribeTopicAttributesResponse, DeleteRouteTriggerTimeRequest, DescribeGroupResponse, DeleteAclRuleRequest, CreateUserResponse, ModifyInstanceAttributesResponse, CreatePartitionResponse, DeleteGroupRequest, DescribeConsumerGroupRequest, DeleteUserResponse, CreateAclRequest, DescribeTopicSyncReplicaResponse, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeTopicSubscribeGroupRequest, DeleteInstancePreResponse, FetchMessageByOffsetRequest, DescribeRegionRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, ModifyTopicAttributesResponse, DeleteRouteTriggerTimeResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, DeleteInstancePreRequest, ModifyPasswordRequest, ModifyInstanceAttributesRequest, DescribeRegionResponse, CreateTopicResponse, DeleteTopicResponse, DescribeInstancesRequest, DescribeGroupRequest, BatchCreateAclResponse, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, ModifyPasswordResponse, DescribeRouteRequest, SendMessageResponse, DescribeCkafkaZoneResponse, BatchModifyGroupOffsetsRequest, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, SendMessageRequest, ModifyGroupOffsetsRequest, BatchModifyTopicAttributesRequest, DeleteGroupResponse, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicSyncReplicaRequest, DescribeTopicDetailResponse } from "./ckafka_models";
+import { DeleteAclRequest, BatchCreateAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, DescribeConsumerGroupResponse, CreateRouteRequest, DeleteTopicRequest, DescribeInstancesResponse, FetchMessageByOffsetResponse, BatchModifyTopicAttributesResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DescribeTopicSubscribeGroupResponse, DescribeCkafkaZoneRequest, BatchModifyGroupOffsetsResponse, DescribeTopicAttributesResponse, CreateConsumerResponse, DescribeGroupResponse, DeleteAclRuleRequest, CreateUserResponse, ModifyInstanceAttributesResponse, CreatePartitionResponse, DeleteGroupRequest, DeleteUserResponse, CreateAclRequest, DescribeTopicSyncReplicaResponse, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeTopicSubscribeGroupRequest, DeleteInstancePreResponse, FetchMessageByOffsetRequest, DescribeRegionRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, ModifyTopicAttributesResponse, DeleteRouteTriggerTimeResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, ModifyPasswordResponse, DeleteInstancePreRequest, ModifyPasswordRequest, ModifyInstanceAttributesRequest, DescribeRegionResponse, DescribeConsumerGroupRequest, DeleteTopicResponse, DeleteRouteTriggerTimeRequest, DescribeInstancesRequest, DescribeGroupRequest, BatchCreateAclResponse, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, CreateConsumerRequest, DescribeRouteRequest, SendMessageResponse, DescribeCkafkaZoneResponse, BatchModifyGroupOffsetsRequest, CreateRouteResponse, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, SendMessageRequest, ModifyGroupOffsetsRequest, BatchModifyTopicAttributesRequest, DeleteGroupResponse, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateTopicResponse, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicSyncReplicaRequest, DescribeTopicDetailResponse } from "./ckafka_models";
 /**
  * ckafka client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 获取消费分组信息
      */
     DescribeGroupInfo(req: DescribeGroupInfoRequest, cb?: (error: string, rep: DescribeGroupInfoResponse) => void): Promise<DescribeGroupInfoResponse>;
+    /**
+     * 创建消费者
+     */
+    CreateConsumer(req: CreateConsumerRequest, cb?: (error: string, rep: CreateConsumerResponse) => void): Promise<CreateConsumerResponse>;
     /**
      * 查询消费分组信息
      */
@@ -52,9 +56,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 设置实例属性
+     * 添加实例路由
      */
-    ModifyInstanceAttributes(req: ModifyInstanceAttributesRequest, cb?: (error: string, rep: ModifyInstanceAttributesResponse) => void): Promise<ModifyInstanceAttributesResponse>;
+    CreateRoute(req: CreateRouteRequest, cb?: (error: string, rep: CreateRouteResponse) => void): Promise<CreateRouteResponse>;
     /**
      * 删除消费组
      */
@@ -157,6 +161,10 @@ export declare class Client extends AbstractClient {
 本接口（DescribeTopic）用于在用户获取消息队列 CKafka 实例的主题列表
      */
     DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
+    /**
+     * 设置实例属性
+     */
+    ModifyInstanceAttributes(req: ModifyInstanceAttributesRequest, cb?: (error: string, rep: ModifyInstanceAttributesResponse) => void): Promise<ModifyInstanceAttributesResponse>;
     /**
      * 用于查看ckafka的可用区列表
      */

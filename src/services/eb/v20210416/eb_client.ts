@@ -164,7 +164,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 规则检验
+   * 检验规则
    */
   async CheckRule(
     req?: CheckRuleRequest,

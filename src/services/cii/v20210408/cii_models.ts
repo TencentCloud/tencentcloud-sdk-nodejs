@@ -433,6 +433,16 @@ export interface DescribeMachineUnderwriteRequest {
 }
 
 /**
+ * DescribeQualityScore请求参数结构体
+ */
+export interface DescribeQualityScoreRequest {
+  /**
+   * 文件二进制数据
+   */
+  File: string
+}
+
+/**
  * 人工复核数据的子任务信息
  */
 export interface ReviewDataTaskInfo {
@@ -550,6 +560,48 @@ export interface UnderwriteItem {
    * 风险值或者说明
    */
   Value: string
+
+  /**
+      * 参考范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Range: string
+
+  /**
+      * 报告时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportDate: Array<string>
+
+  /**
+      * 文件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileType: string
+
+  /**
+      * 检查项目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InspectProject: string
+
+  /**
+      * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit: string
+
+  /**
+      * 原名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginName: string
+
+  /**
+      * 阴阳性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  YinYang: string
 }
 
 /**
@@ -657,6 +709,21 @@ export interface MachinePredict {
    * 检查异常
    */
   Laboratory: Array<UnderwriteItem>
+}
+
+/**
+ * DescribeQualityScore返回参数结构体
+ */
+export interface DescribeQualityScoreResponse {
+  /**
+   * 质量分
+   */
+  QualityScore: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

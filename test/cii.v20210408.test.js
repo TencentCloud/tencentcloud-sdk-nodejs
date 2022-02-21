@@ -108,6 +108,16 @@ it("cii.v20210408.DescribeStructCompareData", async function () {
     }
 })
 
+it("cii.v20210408.DescribeQualityScore", async function () {
+    try {
+       const data = await client.DescribeQualityScore({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cii.v20210408.DescribeStructureResult", async function () {
     try {
        const data = await client.DescribeStructureResult({})

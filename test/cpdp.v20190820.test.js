@@ -128,6 +128,16 @@ it("cpdp.v20190820.QueryBankTransactionDetails", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateOpenBankExternalSubMerchantRegistration", async function () {
+    try {
+       const data = await client.CreateOpenBankExternalSubMerchantRegistration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryCommonTransferRecharge", async function () {
     try {
        const data = await client.QueryCommonTransferRecharge({})
@@ -338,6 +348,16 @@ it("cpdp.v20190820.TransferSinglePay", async function () {
     }
 })
 
+it("cpdp.v20190820.CreateOpenBankPaymentOrder", async function () {
+    try {
+       const data = await client.CreateOpenBankPaymentOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RefundTlinxOrder", async function () {
     try {
        const data = await client.RefundTlinxOrder({})
@@ -448,9 +468,9 @@ it("cpdp.v20190820.UnifiedOrder", async function () {
     }
 })
 
-it("cpdp.v20190820.UnBindAcct", async function () {
+it("cpdp.v20190820.QueryOpenBankUnbindExternalSubMerchantBankAccount", async function () {
     try {
-       const data = await client.UnBindAcct({})
+       const data = await client.QueryOpenBankUnbindExternalSubMerchantBankAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +498,19 @@ it("cpdp.v20190820.AddMerchant", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryInvoiceV2", async function () {
+it("cpdp.v20190820.ViewShop", async function () {
     try {
-       const data = await client.QueryInvoiceV2({})
+       const data = await client.ViewShop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.CheckAmount", async function () {
+    try {
+       const data = await client.CheckAmount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +558,16 @@ it("cpdp.v20190820.QueryShopOpenId", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankPaymentOrder", async function () {
+    try {
+       const data = await client.QueryOpenBankPaymentOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryMaliciousRegistration", async function () {
     try {
        const data = await client.QueryMaliciousRegistration({})
@@ -551,6 +591,16 @@ it("cpdp.v20190820.MigrateOrderRefund", async function () {
 it("cpdp.v20190820.QueryAcctInfo", async function () {
     try {
        const data = await client.QueryAcctInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.UnBindAcct", async function () {
+    try {
+       const data = await client.UnBindAcct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +698,9 @@ it("cpdp.v20190820.ModifyBindedAccount", async function () {
     }
 })
 
-it("cpdp.v20190820.CheckAmount", async function () {
+it("cpdp.v20190820.QueryInvoiceV2", async function () {
     try {
-       const data = await client.CheckAmount({})
+       const data = await client.QueryInvoiceV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -731,6 +781,16 @@ it("cpdp.v20190820.QueryMerchant", async function () {
 it("cpdp.v20190820.ReviseMbrProperty", async function () {
     try {
        const data = await client.ReviseMbrProperty({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.BindOpenBankExternalSubMerchantBankAccount", async function () {
+    try {
+       const data = await client.BindOpenBankExternalSubMerchantBankAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,6 +908,16 @@ it("cpdp.v20190820.ApplyTrade", async function () {
     }
 })
 
+it("cpdp.v20190820.UnbindOpenBankExternalSubMerchantBankAccount", async function () {
+    try {
+       const data = await client.UnbindOpenBankExternalSubMerchantBankAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryBankClear", async function () {
     try {
        const data = await client.QueryBankClear({})
@@ -858,9 +928,9 @@ it("cpdp.v20190820.QueryBankClear", async function () {
     }
 })
 
-it("cpdp.v20190820.BindRelateAccReUnionPay", async function () {
+it("cpdp.v20190820.CreateOpenBankMerchant", async function () {
     try {
-       const data = await client.BindRelateAccReUnionPay({})
+       const data = await client.CreateOpenBankMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -881,6 +951,16 @@ it("cpdp.v20190820.CreateRedInvoice", async function () {
 it("cpdp.v20190820.RevResigterBillSupportWithdraw", async function () {
     try {
        const data = await client.RevResigterBillSupportWithdraw({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryOpenBankDownLoadUrl", async function () {
+    try {
+       const data = await client.QueryOpenBankDownLoadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -911,6 +991,16 @@ it("cpdp.v20190820.QueryApplicationMaterial", async function () {
 it("cpdp.v20190820.Refund", async function () {
     try {
        const data = await client.Refund({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.CloseOpenBankPaymentOrder", async function () {
+    try {
+       const data = await client.CloseOpenBankPaymentOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1248,6 +1338,16 @@ it("cpdp.v20190820.QueryContractRelateShop", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankExternalSubMerchantBankAccount", async function () {
+    try {
+       const data = await client.QueryOpenBankExternalSubMerchantBankAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.MigrateOrderRefundQuery", async function () {
     try {
        const data = await client.MigrateOrderRefundQuery({})
@@ -1258,9 +1358,9 @@ it("cpdp.v20190820.MigrateOrderRefundQuery", async function () {
     }
 })
 
-it("cpdp.v20190820.ViewShop", async function () {
+it("cpdp.v20190820.QueryAgentStatements", async function () {
     try {
-       const data = await client.ViewShop({})
+       const data = await client.QueryAgentStatements({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1288,6 +1388,16 @@ it("cpdp.v20190820.ApplyOutwardOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankExternalSubMerchantRegistration", async function () {
+    try {
+       const data = await client.QueryOpenBankExternalSubMerchantRegistration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryContractPayFee", async function () {
     try {
        const data = await client.QueryContractPayFee({})
@@ -1301,6 +1411,16 @@ it("cpdp.v20190820.QueryContractPayFee", async function () {
 it("cpdp.v20190820.QuerySmallAmountTransfer", async function () {
     try {
        const data = await client.QuerySmallAmountTransfer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryOpenBankBindExternalSubMerchantBankAccount", async function () {
+    try {
+       const data = await client.QueryOpenBankBindExternalSubMerchantBankAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,9 +1468,9 @@ it("cpdp.v20190820.QueryAcctInfoList", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryAgentStatements", async function () {
+it("cpdp.v20190820.BindRelateAccReUnionPay", async function () {
     try {
-       const data = await client.QueryAgentStatements({})
+       const data = await client.BindRelateAccReUnionPay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, AddSubStructureTasksResponse, DescribeStructureDifferenceResponse, CreateUnderwriteTaskByIdRequest, UploadMedicalFileResponse, UploadMedicalFileRequest, CreateAutoClassifyStructureTaskRequest, DescribeMachineUnderwriteRequest, DescribeUnderwriteTaskResponse, DescribeStructureResultRequest, DescribeReportClassifyRequest, DescribeStructCompareDataResponse, DescribeUnderwriteTaskRequest, DescribeStructureResultResponse, DescribeStructureDifferenceRequest, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateAutoClassifyStructureTaskResponse, DescribeReportClassifyResponse, CreateUnderwriteTaskByIdResponse, AddSubStructureTasksRequest } from "./cii_models";
+import { DescribeStructureTaskResultRequest, CreateStructureTaskRequest, DescribeStructCompareDataRequest, AddSubStructureTasksResponse, DescribeStructureDifferenceResponse, CreateUnderwriteTaskByIdRequest, UploadMedicalFileResponse, UploadMedicalFileRequest, CreateAutoClassifyStructureTaskRequest, DescribeMachineUnderwriteRequest, DescribeQualityScoreRequest, DescribeUnderwriteTaskResponse, DescribeStructureResultRequest, DescribeReportClassifyRequest, DescribeStructCompareDataResponse, DescribeQualityScoreResponse, DescribeUnderwriteTaskRequest, DescribeStructureResultResponse, DescribeStructureDifferenceRequest, CreateStructureTaskResponse, DescribeStructureTaskResultResponse, DescribeMachineUnderwriteResponse, CreateAutoClassifyStructureTaskResponse, DescribeReportClassifyResponse, CreateUnderwriteTaskByIdResponse, AddSubStructureTasksRequest } from "./cii_models";
 /**
  * cii client
  * @class
@@ -43,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 结构化对比查询接口，对比结构化复核前后数据差异，查询识别正确率，召回率。
      */
     DescribeStructCompareData(req: DescribeStructCompareDataRequest, cb?: (error: string, rep: DescribeStructCompareDataResponse) => void): Promise<DescribeStructCompareDataResponse>;
+    /**
+     * 获取图片质量分
+     */
+    DescribeQualityScore(req: DescribeQualityScoreRequest, cb?: (error: string, rep: DescribeQualityScoreResponse) => void): Promise<DescribeQualityScoreResponse>;
     /**
      * 本接口(DescribeStructureResult)用于查询结构化结果接口
      */

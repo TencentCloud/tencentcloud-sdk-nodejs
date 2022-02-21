@@ -38,6 +38,16 @@ it("ckafka.v20190819.DescribeGroupInfo", async function () {
     }
 })
 
+it("ckafka.v20190819.CreateConsumer", async function () {
+    try {
+       const data = await client.CreateConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.DescribeConsumerGroup", async function () {
     try {
        const data = await client.DescribeConsumerGroup({})
@@ -128,9 +138,9 @@ it("ckafka.v20190819.DescribeInstances", async function () {
     }
 })
 
-it("ckafka.v20190819.ModifyInstanceAttributes", async function () {
+it("ckafka.v20190819.CreateRoute", async function () {
     try {
-       const data = await client.ModifyInstanceAttributes({})
+       const data = await client.CreateRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +391,16 @@ it("ckafka.v20190819.DescribeGroupOffsets", async function () {
 it("ckafka.v20190819.DescribeTopic", async function () {
     try {
        const data = await client.DescribeTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.ModifyInstanceAttributes", async function () {
+    try {
+       const data = await client.ModifyInstanceAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

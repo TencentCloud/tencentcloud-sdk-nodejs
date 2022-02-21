@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListTargets", req, cb);
     }
     /**
-     * 规则检验
+     * 检验规则
      */
     async CheckRule(req, cb) {
         return this.request("CheckRule", req, cb);

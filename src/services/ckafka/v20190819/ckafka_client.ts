@@ -31,6 +31,7 @@ import {
   ConsumerGroup,
   Assignment,
   DescribeConsumerGroupResponse,
+  CreateRouteRequest,
   DeleteTopicRequest,
   DescribeInstancesResponse,
   FetchMessageByOffsetResponse,
@@ -54,7 +55,7 @@ import {
   BatchModifyGroupOffsetsResponse,
   GroupResponse,
   DescribeTopicAttributesResponse,
-  DeleteRouteTriggerTimeRequest,
+  CreateConsumerResponse,
   RouteResponse,
   DescribeGroupResponse,
   DeleteAclRuleRequest,
@@ -65,7 +66,6 @@ import {
   CreatePartitionResponse,
   ClusterInfo,
   DeleteGroupRequest,
-  DescribeConsumerGroupRequest,
   DeleteUserResponse,
   CreateAclRequest,
   DescribeTopicSyncReplicaResponse,
@@ -105,6 +105,7 @@ import {
   ZoneResponse,
   Instance,
   DescribeInstanceAttributesResponse,
+  ModifyPasswordResponse,
   TopicDetailResponse,
   DeleteInstancePreRequest,
   TopicSubscribeGroup,
@@ -112,12 +113,13 @@ import {
   ModifyPasswordRequest,
   ModifyInstanceAttributesRequest,
   DescribeRegionResponse,
-  CreateTopicResponse,
+  DescribeConsumerGroupRequest,
   VipEntity,
   ConsumerGroupTopic,
   User,
   GroupOffsetPartition,
   DeleteTopicResponse,
+  DeleteRouteTriggerTimeRequest,
   DescribeInstancesRequest,
   InstanceAttributesResponse,
   DescribeGroupRequest,
@@ -129,13 +131,14 @@ import {
   DeleteTopicIpWhiteListResponse,
   CreateInstancePreResponse,
   DescribeInstancesDetailRequest,
-  ModifyPasswordResponse,
+  CreateConsumerRequest,
   DescribeRouteRequest,
   TopicInSyncReplicaResult,
   SendMessageResponse,
   DescribeCkafkaZoneResponse,
   BatchModifyGroupOffsetsRequest,
   TopicAttributesResponse,
+  CreateRouteResponse,
   InstanceResponse,
   DescribeGroup,
   TopicPartitionDO,
@@ -155,6 +158,7 @@ import {
   Acl,
   TopicRetentionTimeConfigRsp,
   ModifyTopicAttributesRequest,
+  CreateTopicResponse,
   CreateInstancePreRequest,
   DeleteTopicIpWhiteListRequest,
   DescribeGroupOffsetsRequest,
@@ -193,6 +197,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGroupInfoResponse) => void
   ): Promise<DescribeGroupInfoResponse> {
     return this.request("DescribeGroupInfo", req, cb)
+  }
+
+  /**
+   * 创建消费者
+   */
+  async CreateConsumer(
+    req: CreateConsumerRequest,
+    cb?: (error: string, rep: CreateConsumerResponse) => void
+  ): Promise<CreateConsumerResponse> {
+    return this.request("CreateConsumer", req, cb)
   }
 
   /**
@@ -286,13 +300,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置实例属性
+   * 添加实例路由
    */
-  async ModifyInstanceAttributes(
-    req: ModifyInstanceAttributesRequest,
-    cb?: (error: string, rep: ModifyInstanceAttributesResponse) => void
-  ): Promise<ModifyInstanceAttributesResponse> {
-    return this.request("ModifyInstanceAttributes", req, cb)
+  async CreateRoute(
+    req: CreateRouteRequest,
+    cb?: (error: string, rep: CreateRouteResponse) => void
+  ): Promise<CreateRouteResponse> {
+    return this.request("CreateRoute", req, cb)
   }
 
   /**
@@ -545,6 +559,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicResponse) => void
   ): Promise<DescribeTopicResponse> {
     return this.request("DescribeTopic", req, cb)
+  }
+
+  /**
+   * 设置实例属性
+   */
+  async ModifyInstanceAttributes(
+    req: ModifyInstanceAttributesRequest,
+    cb?: (error: string, rep: ModifyInstanceAttributesResponse) => void
+  ): Promise<ModifyInstanceAttributesResponse> {
+    return this.request("ModifyInstanceAttributes", req, cb)
   }
 
   /**

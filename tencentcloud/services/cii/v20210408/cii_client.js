@@ -85,6 +85,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStructCompareData", req, cb);
     }
     /**
+     * 获取图片质量分
+     */
+    async DescribeQualityScore(req, cb) {
+        let options = {
+            multipart: true
+        };
+        return this.request("DescribeQualityScore", req, cb);
+    }
+    /**
      * 本接口(DescribeStructureResult)用于查询结构化结果接口
      */
     async DescribeStructureResult(req, cb) {

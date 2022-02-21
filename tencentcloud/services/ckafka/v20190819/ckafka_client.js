@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupInfo", req, cb);
     }
     /**
+     * 创建消费者
+     */
+    async CreateConsumer(req, cb) {
+        return this.request("CreateConsumer", req, cb);
+    }
+    /**
      * 查询消费分组信息
      */
     async DescribeConsumerGroup(req, cb) {
@@ -94,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 设置实例属性
+     * 添加实例路由
      */
-    async ModifyInstanceAttributes(req, cb) {
-        return this.request("ModifyInstanceAttributes", req, cb);
+    async CreateRoute(req, cb) {
+        return this.request("CreateRoute", req, cb);
     }
     /**
      * 删除消费组
@@ -250,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTopic(req, cb) {
         return this.request("DescribeTopic", req, cb);
+    }
+    /**
+     * 设置实例属性
+     */
+    async ModifyInstanceAttributes(req, cb) {
+        return this.request("ModifyInstanceAttributes", req, cb);
     }
     /**
      * 用于查看ckafka的可用区列表

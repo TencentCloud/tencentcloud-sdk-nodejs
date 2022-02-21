@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadTaxPaymentRequest, QueryAcctBindingRequest, ReviseMbrPropertyResponse, ApplyPayerInfoResponse, RevokeRechargeByThirdPayRequest, UnifiedOrderResponse, BindAcctRequest, MigrateOrderRefundQueryResponse, QueryOutwardOrderRequest, UploadOrgFileRequest, RefundTlinxOrderResponse, CreatePayMerchantRequest, QueryContractPayWayListResponse, QueryContractPayWayListRequest, QueryAssignmentRequest, QueryMemberTransactionResponse, UnbindRelateAcctRequest, CreateMerchantRequest, QueryContractRelateShopResponse, RefundTlinxOrderRequest, QueryAcctBindingResponse, BindAccountResponse, CreateTransferBatchResponse, BindAccountRequest, QuerySinglePayResponse, QueryCustAcctIdBalanceResponse, CreateRedInvoiceRequest, QueryAcctInfoListResponse, QueryApplicationMaterialRequest, ConfirmOrderRequest, ModifyMerchantResponse, QuerySmallAmountTransferResponse, QueryMerchantClassificationRequest, QuerySingleTransactionStatusResponse, QueryOrderRequest, RevokeMemberRechargeThirdPayResponse, DistributeAccreditTlinxRequest, QueryContractRelateShopRequest, AddContractRequest, CreateAcctResponse, DistributeAddReceiverRequest, QueryPayerInfoResponse, AddMerchantResponse, RegisterBillSupportWithdrawResponse, ApplyReWithdrawalRequest, RechargeByThirdPayResponse, ViewMerchantRequest, QueryDownloadBillURLResponse, CreateInvoiceV2Response, QueryInvoiceV2Response, QueryAgentStatementsResponse, QueryOutwardOrderResponse, QuerySinglePaymentResultRequest, QueryShopOpenIdRequest, QueryBalanceResponse, TerminateContractRequest, QueryMaliciousRegistrationResponse, QueryBankClearRequest, QueryInvoiceRequest, DistributeQueryReceiverRequest, DownloadBillRequest, QuerySinglePayRequest, ApplyTradeResponse, QueryContractPayFeeResponse, BindRelateAcctSmallAmountResponse, QueryBalanceRequest, BindRelateAcctSmallAmountRequest, QueryTransferDetailResponse, QueryTransferBatchResponse, QueryContractPayFeeRequest, RegisterBehaviorRequest, DescribeChargeDetailRequest, QueryBankWithdrawCashDetailsRequest, QueryMerchantPayWayListRequest, WithdrawCashMembershipRequest, RevResigterBillSupportWithdrawRequest, RefundMemberTransactionRequest, AddMerchantRequest, QueryAnchorContractInfoRequest, QueryReconciliationDocumentRequest, DeleteAgentTaxPaymentInfoRequest, ViewContractResponse, ModifyAgentTaxPaymentInfoResponse, QueryBatchPaymentResultResponse, RevokeRechargeByThirdPayResponse, CreateAcctRequest, CreateAgentTaxPaymentInfosRequest, QueryBillDownloadURLResponse, QueryMerchantBalanceRequest, QueryPayerInfoRequest, QuerySingleTransactionStatusRequest, QueryContractRequest, QueryDownloadBillURLRequest, QueryMerchantInfoForManagementResponse, RefundOrderResponse, QueryOrderStatusRequest, CreateExternalAnchorResponse, QueryTradeResponse, QueryMerchantOrderRequest, DistributeQueryResponse, CreateInvoiceV2Request, UploadExternalAnchorInfoResponse, UploadTaxListResponse, BindRelateAcctUnionPayRequest, RegisterBehaviorResponse, ApplyWithdrawalResponse, QueryMerchantInfoForManagementRequest, UnifiedTlinxOrderRequest, DeduceQuotaRequest, RevokeMemberRechargeThirdPayRequest, RechargeMemberThirdPayResponse, QueryBatchPaymentResultRequest, BindAcctResponse, UploadExternalAnchorInfoRequest, BindRelateAccReUnionPayRequest, QueryAcctInfoResponse, MigrateOrderRefundQueryRequest, CreatePayMerchantResponse, UnbindRelateAcctResponse, SyncContractDataRequest, RechargeByThirdPayRequest, CreateCustAcctIdRequest, DistributeApplyResponse, DistributeQueryRequest, CloseOrderRequest, ViewContractRequest, QueryBankTransactionDetailsRequest, QueryExchangeRateRequest, AddContractResponse, QueryBillDownloadURLRequest, RefundMemberTransactionResponse, RevResigterBillSupportWithdrawResponse, ApplyApplicationMaterialResponse, QueryBankClearResponse, DescribeOrderStatusResponse, CreateMerchantResponse, CreateSinglePaymentResponse, UploadTaxListRequest, ApplyWithdrawalRequest, QueryAssignmentResponse, QuerySinglePaymentResultResponse, QueryMemberBindResponse, QueryMemberBindRequest, BindRelateAcctUnionPayResponse, UnifiedOrderRequest, DistributeRemoveReceiverResponse, QueryInvoiceV2Request, DistributeAccreditQueryRequest, QueryMerchantResponse, ViewShopResponse, ApplyTradeRequest, QueryExchangeRateResponse, QuerySmallAmountTransferRequest, ModifyMntMbrBindRelateAcctBankCodeRequest, QueryMerchantPayWayListResponse, QueryCustAcctIdBalanceRequest, ReviseMbrPropertyRequest, QueryBankWithdrawCashDetailsResponse, UploadTaxPaymentResponse, ExecuteMemberTransactionResponse, ContractOrderRequest, DistributeAccreditQueryResponse, ApplyReWithdrawalResponse, RegisterBillRequest, CreateBatchPaymentResponse, CreateExternalAnchorRequest, ConfirmOrderResponse, UnifiedTlinxOrderResponse, CheckAmountResponse, QueryCityCodeResponse, QueryApplicationMaterialResponse, DownloadBillResponse, DistributeRemoveReceiverRequest, DeleteAgentTaxPaymentInfosRequest, QueryAcctInfoListRequest, AddShopRequest, QueryOrderStatusResponse, QueryTransferResultResponse, QueryAcctInfoRequest, DescribeChargeDetailResponse, DistributeQueryReceiverResponse, QueryTransferResultRequest, QueryAgentStatementsRequest, CreateRedInvoiceV2Request, CreateOrderResponse, ModifyMerchantRequest, CreateInvoiceResponse, CheckAmountRequest, DistributeCancelRequest, RegisterBillSupportWithdrawRequest, UnBindAcctResponse, QueryCommonTransferRechargeRequest, QueryTransferDetailRequest, DownloadOrgFileResponse, QueryReconciliationDocumentResponse, QueryBankTransactionDetailsResponse, TransferSinglePayRequest, CreateSinglePayResponse, MigrateOrderRefundRequest, UploadOrgFileResponse, CreateAnchorRequest, ApplyApplicationMaterialRequest, ModifyAgentTaxPaymentInfoRequest, DownloadReconciliationUrlRequest, CreateBatchPaymentRequest, ModifyMntMbrBindRelateAcctBankCodeResponse, SyncContractDataResponse, ExecuteMemberTransactionRequest, DownloadOrgFileRequest, QueryRefundRequest, MigrateOrderRefundResponse, TransferSinglePayResponse, RefundRequest, ContractOrderResponse, QueryInvoiceResponse, UploadFileRequest, ViewMerchantResponse, AddShopResponse, UploadFileResponse, RefundResponse, CreateTransferBatchRequest, QueryMemberTransactionRequest, QueryCityCodeRequest, CreateOrderRequest, ModifyBindedAccountRequest, WithdrawCashMembershipResponse, CreateSinglePaymentRequest, DistributeApplyRequest, ViewShopRequest, ApplyOutwardOrderResponse, QueryShopOpenIdResponse, QueryCommonTransferRechargeResponse, CheckAcctRequest, CreateAgentTaxPaymentInfosResponse, DescribeOrderStatusRequest, CreateAnchorResponse, QueryAgentTaxPaymentBatchResponse, DeleteAgentTaxPaymentInfosResponse, QueryMerchantClassificationResponse, QueryContractResponse, CreateRedInvoiceResponse, QueryMerchantBalanceResponse, CloseOrderResponse, QueryMaliciousRegistrationRequest, QueryOrderResponse, QueryTradeRequest, CreateCustAcctIdResponse, QueryAgentTaxPaymentBatchRequest, RegisterBillResponse, ApplyOutwardOrderRequest, DistributeAccreditTlinxResponse, RechargeMemberThirdPayRequest, CreateInvoiceRequest, CreateRedInvoiceV2Response, RefundOrderRequest, QueryTransferBatchRequest, CheckAcctResponse, ApplyPayerInfoRequest, DownloadReconciliationUrlResponse, ModifyBindedAccountResponse, DistributeCancelResponse, DeduceQuotaResponse, DeleteAgentTaxPaymentInfoResponse, CreateSinglePayRequest, QueryRefundResponse, DistributeAddReceiverResponse, TerminateContractResponse, QueryMerchantRequest, QueryAnchorContractInfoResponse, BindRelateAccReUnionPayResponse, QueryMerchantOrderResponse, UnBindAcctRequest } from "./cpdp_models";
+import { UploadTaxPaymentRequest, QueryAcctBindingRequest, ReviseMbrPropertyResponse, ApplyPayerInfoResponse, RevokeRechargeByThirdPayRequest, UnifiedOrderResponse, BindAcctRequest, MigrateOrderRefundQueryResponse, QueryOpenBankPaymentOrderRequest, QueryOutwardOrderRequest, UploadOrgFileRequest, RefundTlinxOrderResponse, CreatePayMerchantRequest, QueryContractPayWayListResponse, QueryContractPayWayListRequest, QueryAssignmentRequest, QueryMemberTransactionResponse, UnbindRelateAcctRequest, CreateMerchantRequest, QueryContractRelateShopResponse, RefundTlinxOrderRequest, QueryAcctBindingResponse, BindAccountResponse, UnbindOpenBankExternalSubMerchantBankAccountRequest, CloseOpenBankPaymentOrderResponse, CreateTransferBatchResponse, BindAccountRequest, QuerySinglePayResponse, QueryCustAcctIdBalanceResponse, CreateRedInvoiceRequest, QueryAcctInfoListResponse, QueryApplicationMaterialRequest, ConfirmOrderRequest, ModifyMerchantResponse, QuerySmallAmountTransferResponse, QueryMerchantClassificationRequest, QuerySingleTransactionStatusResponse, CreateOpenBankMerchantResponse, QueryOrderRequest, RevokeMemberRechargeThirdPayResponse, DistributeAccreditTlinxRequest, QueryContractRelateShopRequest, AddContractRequest, CreateAcctResponse, DistributeAddReceiverRequest, QueryPayerInfoResponse, BindOpenBankExternalSubMerchantBankAccountResponse, AddMerchantResponse, RegisterBillResponse, ApplyReWithdrawalRequest, RechargeByThirdPayResponse, ViewMerchantRequest, QueryDownloadBillURLResponse, CreateInvoiceV2Response, QueryInvoiceV2Response, QueryAgentStatementsResponse, QueryOutwardOrderResponse, QuerySinglePaymentResultRequest, QueryShopOpenIdRequest, QueryBalanceResponse, QueryOpenBankExternalSubMerchantRegistrationRequest, TerminateContractRequest, QueryMaliciousRegistrationResponse, QueryBankClearRequest, QueryInvoiceRequest, DistributeQueryReceiverRequest, QueryOpenBankUnbindExternalSubMerchantBankAccountResponse, QueryOpenBankDownLoadUrlRequest, DownloadBillRequest, RevokeMemberRechargeThirdPayRequest, QuerySinglePayRequest, ApplyTradeResponse, QueryContractPayFeeResponse, BindRelateAcctSmallAmountResponse, QueryBalanceRequest, BindRelateAcctSmallAmountRequest, QueryTransferDetailResponse, QueryTransferBatchResponse, QueryContractPayFeeRequest, CreateOpenBankExternalSubMerchantRegistrationResponse, RegisterBehaviorRequest, UnbindOpenBankExternalSubMerchantBankAccountResponse, DescribeChargeDetailRequest, QueryBankWithdrawCashDetailsRequest, QueryMerchantPayWayListRequest, WithdrawCashMembershipRequest, RevResigterBillSupportWithdrawRequest, CreateInvoiceResponse, AddMerchantRequest, QueryAnchorContractInfoRequest, CreateOpenBankPaymentOrderRequest, QueryReconciliationDocumentRequest, DeleteAgentTaxPaymentInfoRequest, CreateOpenBankExternalSubMerchantRegistrationRequest, ViewContractResponse, CreateOpenBankMerchantRequest, ModifyAgentTaxPaymentInfoResponse, QueryBatchPaymentResultResponse, RevokeRechargeByThirdPayResponse, CreateAcctRequest, CreateAgentTaxPaymentInfosRequest, QueryBillDownloadURLResponse, QueryMerchantBalanceRequest, QueryPayerInfoRequest, QuerySingleTransactionStatusRequest, QueryContractRequest, QueryDownloadBillURLRequest, QueryMerchantInfoForManagementResponse, RefundOrderResponse, QueryOrderStatusRequest, CreateExternalAnchorResponse, QueryTradeResponse, QueryMerchantOrderRequest, DistributeQueryResponse, CreateInvoiceV2Request, UploadExternalAnchorInfoResponse, UploadTaxListResponse, BindRelateAcctUnionPayRequest, RegisterBehaviorResponse, ApplyWithdrawalResponse, QueryMerchantInfoForManagementRequest, UnifiedTlinxOrderRequest, DeduceQuotaRequest, RechargeMemberThirdPayResponse, QueryBatchPaymentResultRequest, BindAcctResponse, UploadExternalAnchorInfoRequest, BindRelateAccReUnionPayRequest, QueryAcctInfoResponse, MigrateOrderRefundQueryRequest, QueryOpenBankExternalSubMerchantRegistrationResponse, CreatePayMerchantResponse, UnbindRelateAcctResponse, ApplyOutwardOrderRequest, SyncContractDataRequest, QueryAgentStatementsRequest, CreateCustAcctIdRequest, DistributeApplyResponse, DistributeQueryRequest, CloseOrderRequest, ViewContractRequest, QueryBankTransactionDetailsRequest, QueryExchangeRateRequest, AddContractResponse, QueryBillDownloadURLRequest, RefundMemberTransactionResponse, QueryOpenBankDownLoadUrlResponse, RevResigterBillSupportWithdrawResponse, ApplyApplicationMaterialResponse, QueryBankClearResponse, DescribeOrderStatusResponse, CreateMerchantResponse, CreateSinglePaymentResponse, CloseOpenBankPaymentOrderRequest, UploadTaxListRequest, ApplyWithdrawalRequest, QueryAssignmentResponse, QuerySinglePaymentResultResponse, QueryMemberBindResponse, QueryMemberBindRequest, BindRelateAcctUnionPayResponse, UnifiedOrderRequest, RechargeByThirdPayRequest, DistributeRemoveReceiverResponse, QueryInvoiceV2Request, DistributeAccreditQueryRequest, QueryMerchantResponse, ViewShopResponse, ApplyTradeRequest, QueryExchangeRateResponse, QuerySmallAmountTransferRequest, ModifyMntMbrBindRelateAcctBankCodeRequest, QueryMerchantPayWayListResponse, QueryCustAcctIdBalanceRequest, ReviseMbrPropertyRequest, QueryBankWithdrawCashDetailsResponse, UploadTaxPaymentResponse, ExecuteMemberTransactionResponse, ContractOrderRequest, DistributeAccreditQueryResponse, ApplyReWithdrawalResponse, RegisterBillRequest, CreateBatchPaymentResponse, CreateExternalAnchorRequest, ConfirmOrderResponse, UnifiedTlinxOrderResponse, CheckAmountResponse, QueryCityCodeResponse, QueryApplicationMaterialResponse, DownloadBillResponse, QueryOpenBankBindExternalSubMerchantBankAccountRequest, DistributeRemoveReceiverRequest, DeleteAgentTaxPaymentInfosRequest, QueryAcctInfoListRequest, AddShopRequest, QueryOrderStatusResponse, QueryTransferResultResponse, QueryAcctInfoRequest, DescribeChargeDetailResponse, DistributeQueryReceiverResponse, QueryTransferResultRequest, QueryOpenBankExternalSubMerchantBankAccountResponse, CreateRedInvoiceV2Request, CreateOrderResponse, ModifyMerchantRequest, RefundMemberTransactionRequest, CheckAmountRequest, DistributeCancelRequest, RegisterBillSupportWithdrawRequest, UnBindAcctResponse, QueryCommonTransferRechargeRequest, QueryTransferDetailRequest, DownloadOrgFileResponse, QueryOpenBankExternalSubMerchantBankAccountRequest, QueryReconciliationDocumentResponse, QueryBankTransactionDetailsResponse, TransferSinglePayRequest, CreateSinglePayResponse, MigrateOrderRefundRequest, UploadOrgFileResponse, CreateAnchorRequest, ApplyApplicationMaterialRequest, ModifyAgentTaxPaymentInfoRequest, DownloadReconciliationUrlRequest, CreateBatchPaymentRequest, ModifyMntMbrBindRelateAcctBankCodeResponse, SyncContractDataResponse, ExecuteMemberTransactionRequest, DownloadOrgFileRequest, QueryRefundRequest, BindOpenBankExternalSubMerchantBankAccountRequest, MigrateOrderRefundResponse, TransferSinglePayResponse, RefundRequest, ContractOrderResponse, QueryInvoiceResponse, UploadFileRequest, ViewMerchantResponse, AddShopResponse, UploadFileResponse, RefundResponse, CreateTransferBatchRequest, QueryMemberTransactionRequest, QueryCityCodeRequest, CreateOrderRequest, ModifyBindedAccountRequest, WithdrawCashMembershipResponse, CreateSinglePaymentRequest, DistributeApplyRequest, ViewShopRequest, ApplyOutwardOrderResponse, QueryShopOpenIdResponse, QueryCommonTransferRechargeResponse, CheckAcctRequest, CreateAgentTaxPaymentInfosResponse, DescribeOrderStatusRequest, CreateAnchorResponse, QueryAgentTaxPaymentBatchResponse, DeleteAgentTaxPaymentInfosResponse, QueryMerchantClassificationResponse, QueryContractResponse, CreateRedInvoiceResponse, QueryMerchantBalanceResponse, CloseOrderResponse, QueryOpenBankPaymentOrderResponse, QueryMaliciousRegistrationRequest, QueryOrderResponse, QueryTradeRequest, CreateCustAcctIdResponse, QueryAgentTaxPaymentBatchRequest, RegisterBillSupportWithdrawResponse, QueryOpenBankBindExternalSubMerchantBankAccountResponse, DistributeAccreditTlinxResponse, RechargeMemberThirdPayRequest, CreateInvoiceRequest, CreateRedInvoiceV2Response, RefundOrderRequest, QueryTransferBatchRequest, CheckAcctResponse, ApplyPayerInfoRequest, DownloadReconciliationUrlResponse, ModifyBindedAccountResponse, DistributeCancelResponse, CreateOpenBankPaymentOrderResponse, DeduceQuotaResponse, DeleteAgentTaxPaymentInfoResponse, CreateSinglePayRequest, QueryRefundResponse, DistributeAddReceiverResponse, TerminateContractResponse, QueryOpenBankUnbindExternalSubMerchantBankAccountRequest, QueryMerchantRequest, QueryAnchorContractInfoResponse, BindRelateAccReUnionPayResponse, QueryMerchantOrderResponse, UnBindAcctRequest } from "./cpdp_models";
 /**
  * cpdp client
  * @class
@@ -51,6 +51,10 @@ export declare class Client extends AbstractClient {
      * 查询银行时间段内交易明细。查询时间段的会员成功交易。
      */
     QueryBankTransactionDetails(req: QueryBankTransactionDetailsRequest, cb?: (error: string, rep: QueryBankTransactionDetailsResponse) => void): Promise<QueryBankTransactionDetailsResponse>;
+    /**
+     * 云企付-子商户进件
+     */
+    CreateOpenBankExternalSubMerchantRegistration(req: CreateOpenBankExternalSubMerchantRegistrationRequest, cb?: (error: string, rep: CreateOpenBankExternalSubMerchantRegistrationResponse) => void): Promise<CreateOpenBankExternalSubMerchantRegistrationResponse>;
     /**
      * 查询普通转账充值明细。接口用于查询会员主动转账进资金汇总账户的明细情况。若会员使用绑定账号转入，则直接入账到会员子账户。若未使用绑定账号转入，则系统无法自动清分到对应子账户，则转入挂账子账户由平台自行清分。若是 “见证+收单充值”T0充值记录时备注Note为“见证+收单充值,订单号” 此接口可以查到T0到账的“见证+收单充值”充值记录。
      */
@@ -136,6 +140,10 @@ export declare class Client extends AbstractClient {
      */
     TransferSinglePay(req: TransferSinglePayRequest, cb?: (error: string, rep: TransferSinglePayResponse) => void): Promise<TransferSinglePayResponse>;
     /**
+     * 云企付-创建支付订单
+     */
+    CreateOpenBankPaymentOrder(req: CreateOpenBankPaymentOrderRequest, cb?: (error: string, rep: CreateOpenBankPaymentOrderResponse) => void): Promise<CreateOpenBankPaymentOrderResponse>;
+    /**
      * 云支付订单退款接口
      */
     RefundTlinxOrder(req: RefundTlinxOrderRequest, cb?: (error: string, rep: RefundTlinxOrderResponse) => void): Promise<RefundTlinxOrderResponse>;
@@ -180,9 +188,9 @@ export declare class Client extends AbstractClient {
      */
     UnifiedOrder(req: UnifiedOrderRequest, cb?: (error: string, rep: UnifiedOrderResponse) => void): Promise<UnifiedOrderResponse>;
     /**
-     * 商户解除绑定的提现银行卡
+     * 云企付-子商户银行卡解绑结果查询
      */
-    UnBindAcct(req: UnBindAcctRequest, cb?: (error: string, rep: UnBindAcctResponse) => void): Promise<UnBindAcctResponse>;
+    QueryOpenBankUnbindExternalSubMerchantBankAccount(req: QueryOpenBankUnbindExternalSubMerchantBankAccountRequest, cb?: (error: string, rep: QueryOpenBankUnbindExternalSubMerchantBankAccountResponse) => void): Promise<QueryOpenBankUnbindExternalSubMerchantBankAccountResponse>;
     /**
      * 云鉴-消费订单确认接口
      */
@@ -192,9 +200,13 @@ export declare class Client extends AbstractClient {
      */
     AddMerchant(req: AddMerchantRequest, cb?: (error: string, rep: AddMerchantResponse) => void): Promise<AddMerchantResponse>;
     /**
-     * 智慧零售-发票查询V2
+     * 云支付-查询门店明细接口
      */
-    QueryInvoiceV2(req: QueryInvoiceV2Request, cb?: (error: string, rep: QueryInvoiceV2Response) => void): Promise<QueryInvoiceV2Response>;
+    ViewShop(req: ViewShopRequest, cb?: (error: string, rep: ViewShopResponse) => void): Promise<ViewShopResponse>;
+    /**
+     * 验证鉴权金额。此接口可受理BindRelateAcctSmallAmount接口发起的转账金额（往账鉴权方式）的验证处理。若所回填的验证金额验证通过，则会绑定原申请中的银行账户作为提现账户。通过此接口也可以查得BindRelateAcctSmallAmount接口发起的来账鉴权方式的申请的当前状态。
+     */
+    CheckAmount(req: CheckAmountRequest, cb?: (error: string, rep: CheckAmountResponse) => void): Promise<CheckAmountResponse>;
     /**
      * 智能代发-单笔代发转账查询接口
      */
@@ -212,6 +224,10 @@ export declare class Client extends AbstractClient {
      */
     QueryShopOpenId(req: QueryShopOpenIdRequest, cb?: (error: string, rep: QueryShopOpenIdResponse) => void): Promise<QueryShopOpenIdResponse>;
     /**
+     * 云企付-查询订单支付结果
+     */
+    QueryOpenBankPaymentOrder(req: QueryOpenBankPaymentOrderRequest, cb?: (error: string, rep: QueryOpenBankPaymentOrderResponse) => void): Promise<QueryOpenBankPaymentOrderResponse>;
+    /**
      * 商户恶意注册接口
      */
     QueryMaliciousRegistration(req: QueryMaliciousRegistrationRequest, cb?: (error: string, rep: QueryMaliciousRegistrationResponse) => void): Promise<QueryMaliciousRegistrationResponse>;
@@ -223,6 +239,10 @@ export declare class Client extends AbstractClient {
      * 聚鑫-开户信息查询
      */
     QueryAcctInfo(req: QueryAcctInfoRequest, cb?: (error: string, rep: QueryAcctInfoResponse) => void): Promise<QueryAcctInfoResponse>;
+    /**
+     * 商户解除绑定的提现银行卡
+     */
+    UnBindAcct(req: UnBindAcctRequest, cb?: (error: string, rep: UnBindAcctResponse) => void): Promise<UnBindAcctResponse>;
     /**
      * 查询银行时间段内清分提现明细。查询银行时间段内清分提现明细接口：若为“见证+收单退款”“见证+收单充值”记录时备注Note为“见证+收单充值,订单号”“见证+收单退款,订单号”，此接口可以查到T0/T1的充值明细和退款记录。查询标志：充值记录仍用3清分选项查询，退款记录同提现用2选项查询。
      */
@@ -260,9 +280,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBindedAccount(req: ModifyBindedAccountRequest, cb?: (error: string, rep: ModifyBindedAccountResponse) => void): Promise<ModifyBindedAccountResponse>;
     /**
-     * 验证鉴权金额。此接口可受理BindRelateAcctSmallAmount接口发起的转账金额（往账鉴权方式）的验证处理。若所回填的验证金额验证通过，则会绑定原申请中的银行账户作为提现账户。通过此接口也可以查得BindRelateAcctSmallAmount接口发起的来账鉴权方式的申请的当前状态。
+     * 智慧零售-发票查询V2
      */
-    CheckAmount(req: CheckAmountRequest, cb?: (error: string, rep: CheckAmountResponse) => void): Promise<CheckAmountResponse>;
+    QueryInvoiceV2(req: QueryInvoiceV2Request, cb?: (error: string, rep: QueryInvoiceV2Response) => void): Promise<QueryInvoiceV2Response>;
     /**
      * 商户绑定提现银行卡，每个商户只能绑定一张提现银行卡
      */
@@ -299,6 +319,10 @@ export declare class Client extends AbstractClient {
      * 修改会员属性-普通商户子账户。修改会员的会员属性。
      */
     ReviseMbrProperty(req: ReviseMbrPropertyRequest, cb?: (error: string, rep: ReviseMbrPropertyResponse) => void): Promise<ReviseMbrPropertyResponse>;
+    /**
+     * 云企付-子商户银行卡绑定
+     */
+    BindOpenBankExternalSubMerchantBankAccount(req: BindOpenBankExternalSubMerchantBankAccountRequest, cb?: (error: string, rep: BindOpenBankExternalSubMerchantBankAccountResponse) => void): Promise<BindOpenBankExternalSubMerchantBankAccountResponse>;
     /**
      * 子商户余额查询
      */
@@ -344,13 +368,17 @@ export declare class Client extends AbstractClient {
      */
     ApplyTrade(req: ApplyTradeRequest, cb?: (error: string, rep: ApplyTradeResponse) => void): Promise<ApplyTradeResponse>;
     /**
+     * 云企付-子商户银行卡解绑
+     */
+    UnbindOpenBankExternalSubMerchantBankAccount(req: UnbindOpenBankExternalSubMerchantBankAccountRequest, cb?: (error: string, rep: UnbindOpenBankExternalSubMerchantBankAccountResponse) => void): Promise<UnbindOpenBankExternalSubMerchantBankAccountResponse>;
+    /**
      * 查询银行在途清算结果。查询时间段内交易网的在途清算结果。
      */
     QueryBankClear(req: QueryBankClearRequest, cb?: (error: string, rep: QueryBankClearResponse) => void): Promise<QueryBankClearResponse>;
     /**
-     * 会员绑定提现账户-回填银联鉴权短信码。用于会员填写动态验证码后，发往银行进行验证，验证成功则完成绑定。
+     * 云企付-创建商户
      */
-    BindRelateAccReUnionPay(req: BindRelateAccReUnionPayRequest, cb?: (error: string, rep: BindRelateAccReUnionPayResponse) => void): Promise<BindRelateAccReUnionPayResponse>;
+    CreateOpenBankMerchant(req: CreateOpenBankMerchantRequest, cb?: (error: string, rep: CreateOpenBankMerchantResponse) => void): Promise<CreateOpenBankMerchantResponse>;
     /**
      * 智慧零售-发票红冲
      */
@@ -359,6 +387,10 @@ export declare class Client extends AbstractClient {
      * 登记挂账撤销。此接口可以实现把RegisterBillSupportWithdraw接口完成的登记挂账进行撤销，即调减普通会员子账户的可提现和可用余额，调增挂账子账户的可用余额。
      */
     RevResigterBillSupportWithdraw(req: RevResigterBillSupportWithdrawRequest, cb?: (error: string, rep: RevResigterBillSupportWithdrawResponse) => void): Promise<RevResigterBillSupportWithdrawResponse>;
+    /**
+     * 云企付-查询对账单下载地址
+     */
+    QueryOpenBankDownLoadUrl(req: QueryOpenBankDownLoadUrlRequest, cb?: (error: string, rep: QueryOpenBankDownLoadUrlResponse) => void): Promise<QueryOpenBankDownLoadUrlResponse>;
     /**
      * 云支付-查询城市编码接口
      */
@@ -371,6 +403,10 @@ export declare class Client extends AbstractClient {
      * 如交易订单需退款，可以通过本接口将支付款全部或部分退还给付款方，聚鑫将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。最长支持1年的订单退款。在订单包含多个子订单的情况下，如果使用本接口传入OutTradeNo或TransactionId退款，则只支持全单退款；如果需要部分退款，请通过传入子订单的方式来指定部分金额退款。
      */
     Refund(req: RefundRequest, cb?: (error: string, rep: RefundResponse) => void): Promise<RefundResponse>;
+    /**
+     * 云企付-关闭订单
+     */
+    CloseOpenBankPaymentOrder(req: CloseOpenBankPaymentOrderRequest, cb?: (error: string, rep: CloseOpenBankPaymentOrderResponse) => void): Promise<CloseOpenBankPaymentOrderResponse>;
     /**
      * 直播平台-上传代理商完税列表
      */
@@ -509,13 +545,17 @@ export declare class Client extends AbstractClient {
      */
     QueryContractRelateShop(req: QueryContractRelateShopRequest, cb?: (error: string, rep: QueryContractRelateShopResponse) => void): Promise<QueryContractRelateShopResponse>;
     /**
+     * 云企付-子商户银行卡列表查询
+     */
+    QueryOpenBankExternalSubMerchantBankAccount(req: QueryOpenBankExternalSubMerchantBankAccountRequest, cb?: (error: string, rep: QueryOpenBankExternalSubMerchantBankAccountResponse) => void): Promise<QueryOpenBankExternalSubMerchantBankAccountResponse>;
+    /**
      * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时。
      */
     MigrateOrderRefundQuery(req: MigrateOrderRefundQueryRequest, cb?: (error: string, rep: MigrateOrderRefundQueryResponse) => void): Promise<MigrateOrderRefundQueryResponse>;
     /**
-     * 云支付-查询门店明细接口
+     * 直播平台-查询代理商结算单链接
      */
-    ViewShop(req: ViewShopRequest, cb?: (error: string, rep: ViewShopResponse) => void): Promise<ViewShopResponse>;
+    QueryAgentStatements(req: QueryAgentStatementsRequest, cb?: (error: string, rep: QueryAgentStatementsResponse) => void): Promise<QueryAgentStatementsResponse>;
     /**
      * 通过此接口查询签约数据
      */
@@ -525,6 +565,10 @@ export declare class Client extends AbstractClient {
      */
     ApplyOutwardOrder(req: ApplyOutwardOrderRequest, cb?: (error: string, rep: ApplyOutwardOrderResponse) => void): Promise<ApplyOutwardOrderResponse>;
     /**
+     * 云企付-子商户进件结果查询
+     */
+    QueryOpenBankExternalSubMerchantRegistration(req: QueryOpenBankExternalSubMerchantRegistrationRequest, cb?: (error: string, rep: QueryOpenBankExternalSubMerchantRegistrationResponse) => void): Promise<QueryOpenBankExternalSubMerchantRegistrationResponse>;
+    /**
      * 云支付-查询支付方式费率及自定义表单项接口
      */
     QueryContractPayFee(req: QueryContractPayFeeRequest, cb?: (error: string, rep: QueryContractPayFeeResponse) => void): Promise<QueryContractPayFeeResponse>;
@@ -532,6 +576,10 @@ export declare class Client extends AbstractClient {
      * 查询小额鉴权转账结果。查询小额往账鉴权的转账状态。
      */
     QuerySmallAmountTransfer(req: QuerySmallAmountTransferRequest, cb?: (error: string, rep: QuerySmallAmountTransferResponse) => void): Promise<QuerySmallAmountTransferResponse>;
+    /**
+     * 云企付-子商户银行卡绑定结果查询
+     */
+    QueryOpenBankBindExternalSubMerchantBankAccount(req: QueryOpenBankBindExternalSubMerchantBankAccountRequest, cb?: (error: string, rep: QueryOpenBankBindExternalSubMerchantBankAccountResponse) => void): Promise<QueryOpenBankBindExternalSubMerchantBankAccountResponse>;
     /**
      * 查询银行单笔交易状态。查询单笔交易的状态。
      */
@@ -549,9 +597,9 @@ export declare class Client extends AbstractClient {
      */
     QueryAcctInfoList(req: QueryAcctInfoListRequest, cb?: (error: string, rep: QueryAcctInfoListResponse) => void): Promise<QueryAcctInfoListResponse>;
     /**
-     * 直播平台-查询代理商结算单链接
+     * 会员绑定提现账户-回填银联鉴权短信码。用于会员填写动态验证码后，发往银行进行验证，验证成功则完成绑定。
      */
-    QueryAgentStatements(req: QueryAgentStatementsRequest, cb?: (error: string, rep: QueryAgentStatementsResponse) => void): Promise<QueryAgentStatementsResponse>;
+    BindRelateAccReUnionPay(req: BindRelateAccReUnionPayRequest, cb?: (error: string, rep: BindRelateAccReUnionPayResponse) => void): Promise<BindRelateAccReUnionPayResponse>;
     /**
      * 查询对账文件信息。平台调用该接口获取需下载对账文件的文件名称以及密钥。 平台获取到信息后， 可以再调用OPENAPI的文件下载功能。
      */

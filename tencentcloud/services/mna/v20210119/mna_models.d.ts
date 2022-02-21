@@ -30,6 +30,27 @@ export interface DestAddressInfo {
     DestIp: Array<string>;
 }
 /**
+ * 测速数据
+ */
+export interface NetworkData {
+    /**
+      * 时延数组，最大长度30
+      */
+    RTT: Array<number>;
+    /**
+      * 丢包率
+      */
+    Loss: number;
+    /**
+      * 抖动
+      */
+    Jitter: number;
+    /**
+      * 10位秒级时间戳
+      */
+    Timestamp: number;
+}
+/**
  * 移动网络加速源地址结构体
  */
 export interface SrcAddressInfo {
@@ -95,6 +116,23 @@ Android 填写 IMEI
     Wireless?: number;
 }
 /**
+ * 用户期望门限
+ */
+export interface ExpectedThreshold {
+    /**
+      * 期望发起加速的时延阈值
+      */
+    RTT: number;
+    /**
+      * 期望发起加速的丢包率阈值
+      */
+    Loss: number;
+    /**
+      * 期望发起加速的抖动阈值
+      */
+    Jitter: number;
+}
+/**
  * DeleteQos返回参数结构体
  */
 export interface DeleteQosResponse {
@@ -110,6 +148,23 @@ export interface DeleteQosResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 加速策略关键数据
+ */
+export interface Context {
+    /**
+      * 测速数据
+      */
+    NetworkData?: NetworkData;
+    /**
+      * 用户期望最低门限
+      */
+    ExpectedLowThreshold?: ExpectedThreshold;
+    /**
+      * 用户期望最高门限
+      */
+    ExpectedHighThreshold?: ExpectedThreshold;
 }
 /**
  * CreateQos返回参数结构体
@@ -210,4 +265,12 @@ BU4M：带宽型保障 + 上行带宽保障4Mbps
 3. TCP
       */
     Protocol?: number;
+    /**
+      * 加速策略关键数据
+      */
+    Context?: Context;
+    /**
+      * 签名
+      */
+    Extern?: string;
 }

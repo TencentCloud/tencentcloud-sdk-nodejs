@@ -1,48 +1,10 @@
 # 本版本更新包含以下内容：
 
-## 批量计算(batch) 版本：2017-03-12
+## 消息队列 Ckafka(ckafka) 版本：2019-08-19
 
-### 第 39 次发布
+### 第 35 次发布
 
-发布时间：2022-02-18 08:04:38
-
-本次发布包含了以下内容：
-
-改善已有的文档。
-
-修改数据结构：
-
-* [ItemPrice](https://cloud.tencent.com/document/api/599/15912#ItemPrice)
-
-	* <font color="#dd0000">**修改成员**：</font>Discount, UnitPriceDiscount, UnitPriceSecondStep, UnitPriceDiscountSecondStep, UnitPriceThirdStep, UnitPriceDiscountThirdStep, OriginalPriceThreeYear, DiscountPriceThreeYear, DiscountThreeYear, OriginalPriceFiveYear, DiscountPriceFiveYear, DiscountFiveYear, OriginalPriceOneYear, DiscountPriceOneYear, DiscountOneYear
-
-
-
-
-## 云服务器(cvm) 版本：2017-03-12
-
-### 第 73 次发布
-
-发布时间：2022-02-18 08:07:21
-
-本次发布包含了以下内容：
-
-改善已有的文档。
-
-修改数据结构：
-
-* [ItemPrice](https://cloud.tencent.com/document/api/213/15753#ItemPrice)
-
-	* <font color="#dd0000">**修改成员**：</font>Discount, UnitPriceDiscount, UnitPriceSecondStep, UnitPriceDiscountSecondStep, UnitPriceThirdStep, UnitPriceDiscountThirdStep, OriginalPriceThreeYear, DiscountPriceThreeYear, DiscountThreeYear, OriginalPriceFiveYear, DiscountPriceFiveYear, DiscountFiveYear, OriginalPriceOneYear, DiscountPriceOneYear, DiscountOneYear
-
-
-
-
-## 云原生数据库 TDSQL-C(cynosdb) 版本：2019-01-07
-
-### 第 14 次发布
-
-发布时间：2022-02-18 08:07:59
+发布时间：2022-02-21 08:03:18
 
 本次发布包含了以下内容：
 
@@ -50,74 +12,82 @@
 
 新增接口：
 
-* [ActivateInstance](https://cloud.tencent.com/document/api/1003/70116)
-* [AssociateSecurityGroups](https://cloud.tencent.com/document/api/1003/70119)
-* [DescribeAccountAllGrantPrivileges](https://cloud.tencent.com/document/api/1003/70114)
-* [DescribeClusterParamLogs](https://cloud.tencent.com/document/api/1003/70118)
-* [DisassociateSecurityGroups](https://cloud.tencent.com/document/api/1003/70117)
-* [GrantAccountPrivileges](https://cloud.tencent.com/document/api/1003/70113)
-* [ModifyAccountParams](https://cloud.tencent.com/document/api/1003/70112)
-* [PauseServerless](https://cloud.tencent.com/document/api/1003/70122)
-* [ResumeServerless](https://cloud.tencent.com/document/api/1003/70121)
-* [RevokeAccountPrivileges](https://cloud.tencent.com/document/api/1003/70111)
-* [RollBackCluster](https://cloud.tencent.com/document/api/1003/70115)
+* [CreateConsumer](https://cloud.tencent.com/document/api/597/70173)
+* [CreateRoute](https://cloud.tencent.com/document/api/597/70172)
+
+
+
+## 企业收付平台(cpdp) 版本：2019-08-20
+
+### 第 54 次发布
+
+发布时间：2022-02-21 08:04:03
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [BindOpenBankExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70186)
+* [CloseOpenBankPaymentOrder](https://cloud.tencent.com/document/api/1122/70185)
+* [CreateOpenBankExternalSubMerchantRegistration](https://cloud.tencent.com/document/api/1122/70184)
+* [CreateOpenBankMerchant](https://cloud.tencent.com/document/api/1122/70183)
+* [CreateOpenBankPaymentOrder](https://cloud.tencent.com/document/api/1122/70182)
+* [QueryOpenBankBindExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70181)
+* [QueryOpenBankDownLoadUrl](https://cloud.tencent.com/document/api/1122/70180)
+* [QueryOpenBankExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70179)
+* [QueryOpenBankExternalSubMerchantRegistration](https://cloud.tencent.com/document/api/1122/70178)
+* [QueryOpenBankPaymentOrder](https://cloud.tencent.com/document/api/1122/70177)
+* [QueryOpenBankUnbindExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70176)
+* [UnbindOpenBankExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70175)
+
+新增数据结构：
+
+* [BindOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#BindOpenBankExternalSubMerchantBankAccountResult)
+* [CloseOpenBankPaymentOrderResult](https://cloud.tencent.com/document/api/1122/40683#CloseOpenBankPaymentOrderResult)
+* [CreateOpenBankExternalSubMerchantRegistrationResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankExternalSubMerchantRegistrationResult)
+* [CreateOpenBankMerchantResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankMerchantResult)
+* [CreateOpenBankOrderPaymentResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankOrderPaymentResult)
+* [OpenBankGoodsInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankGoodsInfo)
+* [OpenBankPayeeInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankPayeeInfo)
+* [OpenBankPayerInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankPayerInfo)
+* [OpenBankProfitShareInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankProfitShareInfo)
+* [OpenBankRedirectInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankRedirectInfo)
+* [OpenBankSceneInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankSceneInfo)
+* [QueryOpenBankBindExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankBindExternalSubMerchantBankAccountResult)
+* [QueryOpenBankDownLoadUrlResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankDownLoadUrlResult)
+* [QueryOpenBankExternalSubMerchantBankAccountData](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantBankAccountData)
+* [QueryOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantBankAccountResult)
+* [QueryOpenBankExternalSubMerchantRegistrationResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantRegistrationResult)
+* [QueryOpenBankPaymentOrderResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankPaymentOrderResult)
+* [QueryOpenBankUnbindExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankUnbindExternalSubMerchantBankAccountResult)
+* [UnbindOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#UnbindOpenBankExternalSubMerchantBankAccountResult)
+
+
+
+## 移动网络加速(mna) 版本：2021-01-19
+
+### 第 5 次发布
+
+发布时间：2022-02-21 08:09:33
+
+本次发布包含了以下内容：
+
+改善已有的文档。
 
 修改接口：
 
-* [ModifyClusterParam](https://cloud.tencent.com/document/api/1003/63365)
+* [CreateQos](https://cloud.tencent.com/document/api/1385/55845)
 
-	* 新增入参：IsInMaintainPeriod
+	* 新增入参：Context, Extern
 
 
 新增数据结构：
 
-* [AccountParam](https://cloud.tencent.com/document/api/1003/48097#AccountParam)
-* [ClusterParamModifyLog](https://cloud.tencent.com/document/api/1003/48097#ClusterParamModifyLog)
-* [DatabasePrivileges](https://cloud.tencent.com/document/api/1003/48097#DatabasePrivileges)
-* [DbTable](https://cloud.tencent.com/document/api/1003/48097#DbTable)
-* [InputAccount](https://cloud.tencent.com/document/api/1003/48097#InputAccount)
-* [RollbackDatabase](https://cloud.tencent.com/document/api/1003/48097#RollbackDatabase)
-* [RollbackTable](https://cloud.tencent.com/document/api/1003/48097#RollbackTable)
-* [RollbackTableInfo](https://cloud.tencent.com/document/api/1003/48097#RollbackTableInfo)
-* [TablePrivileges](https://cloud.tencent.com/document/api/1003/48097#TablePrivileges)
-
-
-
-## Elasticsearch Service(es) 版本：2018-04-16
-
-### 第 24 次发布
-
-发布时间：2022-02-18 08:09:35
-
-本次发布包含了以下内容：
-
-改善已有的文档。
-
-修改数据结构：
-
-* [InstanceInfo](https://cloud.tencent.com/document/api/845/30634#InstanceInfo)
-
-	* 新增成员：EsPrivateUrl, EsPrivateDomain
-
-
-
-
-## 腾讯云微服务引擎(tse) 版本：2020-12-07
-
-### 第 14 次发布
-
-发布时间：2022-02-18 08:16:25
-
-本次发布包含了以下内容：
-
-改善已有的文档。
-
-修改数据结构：
-
-* [ServiceGovernanceInfo](https://cloud.tencent.com/document/api/1364/54942#ServiceGovernanceInfo)
-
-	* 新增成员：AuthOpen, Features
-
+* [Context](https://cloud.tencent.com/document/api/1385/55846#Context)
+* [ExpectedThreshold](https://cloud.tencent.com/document/api/1385/55846#ExpectedThreshold)
+* [NetworkData](https://cloud.tencent.com/document/api/1385/55846#NetworkData)
 
 
 
@@ -14006,6 +13976,33 @@
 
 ## 智能保险助手(cii) 版本：2021-04-08
 
+### 第 12 次发布
+
+发布时间：2022-02-18 16:00:08
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [UnderwriteItem](https://cloud.tencent.com/document/api/1368/56853#UnderwriteItem)
+
+	* 新增成员：Range, ReportDate, FileType, InspectProject, Unit, OriginName, YinYang
+
+
+### 第 11 次发布
+
+发布时间：2022-02-18 14:29:36
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeQualityScore](https://cloud.tencent.com/document/api/1368/70151)
+
 ### 第 10 次发布
 
 发布时间：2022-02-17 08:07:32
@@ -14251,6 +14248,19 @@
 
 
 ## 消息队列 Ckafka(ckafka) 版本：2019-08-19
+
+### 第 35 次发布
+
+发布时间：2022-02-21 08:03:18
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [[CreateConsumer](https://cloud.tencent.com/document/api/597/70173)](https://cloud.tencent.com/document/api/#/#)
+* [[CreateRoute](https://cloud.tencent.com/document/api/597/70172)](https://cloud.tencent.com/document/api/#/#)
 
 ### 第 34 次发布
 
@@ -18543,6 +18553,51 @@
 
 
 ## 企业收付平台(cpdp) 版本：2019-08-20
+
+### 第 54 次发布
+
+发布时间：2022-02-21 08:04:03
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [[BindOpenBankExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70186)](https://cloud.tencent.com/document/api/#/#)
+* [[CloseOpenBankPaymentOrder](https://cloud.tencent.com/document/api/1122/70185)](https://cloud.tencent.com/document/api/#/#)
+* [[CreateOpenBankExternalSubMerchantRegistration](https://cloud.tencent.com/document/api/1122/70184)](https://cloud.tencent.com/document/api/#/#)
+* [[CreateOpenBankMerchant](https://cloud.tencent.com/document/api/1122/70183)](https://cloud.tencent.com/document/api/#/#)
+* [[CreateOpenBankPaymentOrder](https://cloud.tencent.com/document/api/1122/70182)](https://cloud.tencent.com/document/api/#/#)
+* [[QueryOpenBankBindExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70181)](https://cloud.tencent.com/document/api/#/#)
+* [[QueryOpenBankDownLoadUrl](https://cloud.tencent.com/document/api/1122/70180)](https://cloud.tencent.com/document/api/#/#)
+* [[QueryOpenBankExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70179)](https://cloud.tencent.com/document/api/#/#)
+* [[QueryOpenBankExternalSubMerchantRegistration](https://cloud.tencent.com/document/api/1122/70178)](https://cloud.tencent.com/document/api/#/#)
+* [[QueryOpenBankPaymentOrder](https://cloud.tencent.com/document/api/1122/70177)](https://cloud.tencent.com/document/api/#/#)
+* [[QueryOpenBankUnbindExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70176)](https://cloud.tencent.com/document/api/#/#)
+* [[UnbindOpenBankExternalSubMerchantBankAccount](https://cloud.tencent.com/document/api/1122/70175)](https://cloud.tencent.com/document/api/#/#)
+
+新增数据结构：
+
+* [[BindOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#BindOpenBankExternalSubMerchantBankAccountResult)](https://cloud.tencent.com/document/api/1122/40683#[BindOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#BindOpenBankExternalSubMerchantBankAccountResult))
+* [[CloseOpenBankPaymentOrderResult](https://cloud.tencent.com/document/api/1122/40683#CloseOpenBankPaymentOrderResult)](https://cloud.tencent.com/document/api/1122/40683#[CloseOpenBankPaymentOrderResult](https://cloud.tencent.com/document/api/1122/40683#CloseOpenBankPaymentOrderResult))
+* [[CreateOpenBankExternalSubMerchantRegistrationResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankExternalSubMerchantRegistrationResult)](https://cloud.tencent.com/document/api/1122/40683#[CreateOpenBankExternalSubMerchantRegistrationResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankExternalSubMerchantRegistrationResult))
+* [[CreateOpenBankMerchantResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankMerchantResult)](https://cloud.tencent.com/document/api/1122/40683#[CreateOpenBankMerchantResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankMerchantResult))
+* [[CreateOpenBankOrderPaymentResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankOrderPaymentResult)](https://cloud.tencent.com/document/api/1122/40683#[CreateOpenBankOrderPaymentResult](https://cloud.tencent.com/document/api/1122/40683#CreateOpenBankOrderPaymentResult))
+* [[OpenBankGoodsInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankGoodsInfo)](https://cloud.tencent.com/document/api/1122/40683#[OpenBankGoodsInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankGoodsInfo))
+* [[OpenBankPayeeInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankPayeeInfo)](https://cloud.tencent.com/document/api/1122/40683#[OpenBankPayeeInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankPayeeInfo))
+* [[OpenBankPayerInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankPayerInfo)](https://cloud.tencent.com/document/api/1122/40683#[OpenBankPayerInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankPayerInfo))
+* [[OpenBankProfitShareInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankProfitShareInfo)](https://cloud.tencent.com/document/api/1122/40683#[OpenBankProfitShareInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankProfitShareInfo))
+* [[OpenBankRedirectInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankRedirectInfo)](https://cloud.tencent.com/document/api/1122/40683#[OpenBankRedirectInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankRedirectInfo))
+* [[OpenBankSceneInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankSceneInfo)](https://cloud.tencent.com/document/api/1122/40683#[OpenBankSceneInfo](https://cloud.tencent.com/document/api/1122/40683#OpenBankSceneInfo))
+* [[QueryOpenBankBindExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankBindExternalSubMerchantBankAccountResult)](https://cloud.tencent.com/document/api/1122/40683#[QueryOpenBankBindExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankBindExternalSubMerchantBankAccountResult))
+* [[QueryOpenBankDownLoadUrlResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankDownLoadUrlResult)](https://cloud.tencent.com/document/api/1122/40683#[QueryOpenBankDownLoadUrlResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankDownLoadUrlResult))
+* [[QueryOpenBankExternalSubMerchantBankAccountData](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantBankAccountData)](https://cloud.tencent.com/document/api/1122/40683#[QueryOpenBankExternalSubMerchantBankAccountData](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantBankAccountData))
+* [[QueryOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantBankAccountResult)](https://cloud.tencent.com/document/api/1122/40683#[QueryOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantBankAccountResult))
+* [[QueryOpenBankExternalSubMerchantRegistrationResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantRegistrationResult)](https://cloud.tencent.com/document/api/1122/40683#[QueryOpenBankExternalSubMerchantRegistrationResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankExternalSubMerchantRegistrationResult))
+* [[QueryOpenBankPaymentOrderResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankPaymentOrderResult)](https://cloud.tencent.com/document/api/1122/40683#[QueryOpenBankPaymentOrderResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankPaymentOrderResult))
+* [[QueryOpenBankUnbindExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankUnbindExternalSubMerchantBankAccountResult)](https://cloud.tencent.com/document/api/1122/40683#[QueryOpenBankUnbindExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#QueryOpenBankUnbindExternalSubMerchantBankAccountResult))
+* [[UnbindOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#UnbindOpenBankExternalSubMerchantBankAccountResult)](https://cloud.tencent.com/document/api/1122/40683#[UnbindOpenBankExternalSubMerchantBankAccountResult](https://cloud.tencent.com/document/api/1122/40683#UnbindOpenBankExternalSubMerchantBankAccountResult))
 
 ### 第 53 次发布
 
@@ -23009,17 +23064,17 @@
 
 新增接口：
 
-* [[ActivateInstance](https://cloud.tencent.com/document/api/1003/70116)](https://cloud.tencent.com/document/api/#/#)
-* [[AssociateSecurityGroups](https://cloud.tencent.com/document/api/1003/70119)](https://cloud.tencent.com/document/api/#/#)
-* [[DescribeAccountAllGrantPrivileges](https://cloud.tencent.com/document/api/1003/70114)](https://cloud.tencent.com/document/api/#/#)
-* [[DescribeClusterParamLogs](https://cloud.tencent.com/document/api/1003/70118)](https://cloud.tencent.com/document/api/#/#)
-* [[DisassociateSecurityGroups](https://cloud.tencent.com/document/api/1003/70117)](https://cloud.tencent.com/document/api/#/#)
-* [[GrantAccountPrivileges](https://cloud.tencent.com/document/api/1003/70113)](https://cloud.tencent.com/document/api/#/#)
-* [[ModifyAccountParams](https://cloud.tencent.com/document/api/1003/70112)](https://cloud.tencent.com/document/api/#/#)
-* [[PauseServerless](https://cloud.tencent.com/document/api/1003/70122)](https://cloud.tencent.com/document/api/#/#)
-* [[ResumeServerless](https://cloud.tencent.com/document/api/1003/70121)](https://cloud.tencent.com/document/api/#/#)
-* [[RevokeAccountPrivileges](https://cloud.tencent.com/document/api/1003/70111)](https://cloud.tencent.com/document/api/#/#)
-* [[RollBackCluster](https://cloud.tencent.com/document/api/1003/70115)](https://cloud.tencent.com/document/api/#/#)
+* [ActivateInstance](https://cloud.tencent.com/document/api/1003/70116)
+* [AssociateSecurityGroups](https://cloud.tencent.com/document/api/1003/70119)
+* [DescribeAccountAllGrantPrivileges](https://cloud.tencent.com/document/api/1003/70114)
+* [DescribeClusterParamLogs](https://cloud.tencent.com/document/api/1003/70118)
+* [DisassociateSecurityGroups](https://cloud.tencent.com/document/api/1003/70117)
+* [GrantAccountPrivileges](https://cloud.tencent.com/document/api/1003/70113)
+* [ModifyAccountParams](https://cloud.tencent.com/document/api/1003/70112)
+* [PauseServerless](https://cloud.tencent.com/document/api/1003/70122)
+* [ResumeServerless](https://cloud.tencent.com/document/api/1003/70121)
+* [RevokeAccountPrivileges](https://cloud.tencent.com/document/api/1003/70111)
+* [RollBackCluster](https://cloud.tencent.com/document/api/1003/70115)
 
 修改接口：
 
@@ -23030,15 +23085,15 @@
 
 新增数据结构：
 
-* [[AccountParam](https://cloud.tencent.com/document/api/1003/48097#AccountParam)](https://cloud.tencent.com/document/api/1003/48097#[AccountParam](https://cloud.tencent.com/document/api/1003/48097#AccountParam))
-* [[ClusterParamModifyLog](https://cloud.tencent.com/document/api/1003/48097#ClusterParamModifyLog)](https://cloud.tencent.com/document/api/1003/48097#[ClusterParamModifyLog](https://cloud.tencent.com/document/api/1003/48097#ClusterParamModifyLog))
-* [[DatabasePrivileges](https://cloud.tencent.com/document/api/1003/48097#DatabasePrivileges)](https://cloud.tencent.com/document/api/1003/48097#[DatabasePrivileges](https://cloud.tencent.com/document/api/1003/48097#DatabasePrivileges))
-* [[DbTable](https://cloud.tencent.com/document/api/1003/48097#DbTable)](https://cloud.tencent.com/document/api/1003/48097#[DbTable](https://cloud.tencent.com/document/api/1003/48097#DbTable))
-* [[InputAccount](https://cloud.tencent.com/document/api/1003/48097#InputAccount)](https://cloud.tencent.com/document/api/1003/48097#[InputAccount](https://cloud.tencent.com/document/api/1003/48097#InputAccount))
-* [[RollbackDatabase](https://cloud.tencent.com/document/api/1003/48097#RollbackDatabase)](https://cloud.tencent.com/document/api/1003/48097#[RollbackDatabase](https://cloud.tencent.com/document/api/1003/48097#RollbackDatabase))
-* [[RollbackTable](https://cloud.tencent.com/document/api/1003/48097#RollbackTable)](https://cloud.tencent.com/document/api/1003/48097#[RollbackTable](https://cloud.tencent.com/document/api/1003/48097#RollbackTable))
-* [[RollbackTableInfo](https://cloud.tencent.com/document/api/1003/48097#RollbackTableInfo)](https://cloud.tencent.com/document/api/1003/48097#[RollbackTableInfo](https://cloud.tencent.com/document/api/1003/48097#RollbackTableInfo))
-* [[TablePrivileges](https://cloud.tencent.com/document/api/1003/48097#TablePrivileges)](https://cloud.tencent.com/document/api/1003/48097#[TablePrivileges](https://cloud.tencent.com/document/api/1003/48097#TablePrivileges))
+* [AccountParam](https://cloud.tencent.com/document/api/1003/48097#AccountParam)
+* [ClusterParamModifyLog](https://cloud.tencent.com/document/api/1003/48097#ClusterParamModifyLog)
+* [DatabasePrivileges](https://cloud.tencent.com/document/api/1003/48097#DatabasePrivileges)
+* [DbTable](https://cloud.tencent.com/document/api/1003/48097#DbTable)
+* [InputAccount](https://cloud.tencent.com/document/api/1003/48097#InputAccount)
+* [RollbackDatabase](https://cloud.tencent.com/document/api/1003/48097#RollbackDatabase)
+* [RollbackTable](https://cloud.tencent.com/document/api/1003/48097#RollbackTable)
+* [RollbackTableInfo](https://cloud.tencent.com/document/api/1003/48097#RollbackTableInfo)
+* [TablePrivileges](https://cloud.tencent.com/document/api/1003/48097#TablePrivileges)
 
 ### 第 13 次发布
 
@@ -41822,6 +41877,27 @@
 
 ## 移动网络加速(mna) 版本：2021-01-19
 
+### 第 5 次发布
+
+发布时间：2022-02-21 08:09:33
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateQos](https://cloud.tencent.com/document/api/1385/55845)
+
+	* 新增入参：Context, Extern
+
+
+新增数据结构：
+
+* [[Context](https://cloud.tencent.com/document/api/1385/55846#Context)](https://cloud.tencent.com/document/api/1385/55846#[Context](https://cloud.tencent.com/document/api/1385/55846#Context))
+* [[ExpectedThreshold](https://cloud.tencent.com/document/api/1385/55846#ExpectedThreshold)](https://cloud.tencent.com/document/api/1385/55846#[ExpectedThreshold](https://cloud.tencent.com/document/api/1385/55846#ExpectedThreshold))
+* [[NetworkData](https://cloud.tencent.com/document/api/1385/55846#NetworkData)](https://cloud.tencent.com/document/api/1385/55846#[NetworkData](https://cloud.tencent.com/document/api/1385/55846#NetworkData))
+
 ### 第 4 次发布
 
 发布时间：2021-09-29 08:07:33
@@ -51634,7 +51710,7 @@
 
 
 
-## 态势感知(ssa) 版本：2018-06-08
+## 安全运营中心(ssa) 版本：2018-06-08
 
 ### 第 6 次发布
 

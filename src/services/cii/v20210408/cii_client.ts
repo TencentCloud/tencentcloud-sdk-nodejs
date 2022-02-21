@@ -36,6 +36,7 @@ import {
   StructureOneItem,
   CreateAutoClassifyStructureTaskRequest,
   DescribeMachineUnderwriteRequest,
+  DescribeQualityScoreRequest,
   ReviewDataTaskInfo,
   DescribeUnderwriteTaskResponse,
   DescribeStructureResultRequest,
@@ -43,6 +44,7 @@ import {
   UnderwriteItem,
   DescribeStructCompareDataResponse,
   MachinePredict,
+  DescribeQualityScoreResponse,
   DescribeUnderwriteTaskRequest,
   ResultObject,
   DescribeStructureResultResponse,
@@ -161,6 +163,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStructCompareDataResponse) => void
   ): Promise<DescribeStructCompareDataResponse> {
     return this.request("DescribeStructCompareData", req, cb)
+  }
+
+  /**
+   * 获取图片质量分
+   */
+  async DescribeQualityScore(
+    req: DescribeQualityScoreRequest,
+    cb?: (error: string, rep: DescribeQualityScoreResponse) => void
+  ): Promise<DescribeQualityScoreResponse> {
+    let options = {
+      multipart: true,
+    }
+    return this.request("DescribeQualityScore", req, cb)
   }
 
   /**

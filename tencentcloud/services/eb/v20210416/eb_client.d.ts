@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     ListTargets(req: ListTargetsRequest, cb?: (error: string, rep: ListTargetsResponse) => void): Promise<ListTargetsResponse>;
     /**
-     * 规则检验
+     * 检验规则
      */
     CheckRule(req?: CheckRuleRequest, cb?: (error: string, rep: CheckRuleResponse) => void): Promise<CheckRuleResponse>;
     /**
