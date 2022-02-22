@@ -48,11 +48,11 @@ export declare class Client extends AbstractClient {
      */
     CreateUpdateNodeUnit(req: CreateUpdateNodeUnitRequest, cb?: (error: string, rep: CreateUpdateNodeUnitResponse) => void): Promise<CreateUpdateNodeUnitResponse>;
     /**
-     * 修改边缘单元NodeUnit模版
+     * 修改边缘单元NodeUnit模板
      */
     ModifyNodeUnitTemplate(req: ModifyNodeUnitTemplateRequest, cb?: (error: string, rep: ModifyNodeUnitTemplateResponse) => void): Promise<ModifyNodeUnitTemplateResponse>;
     /**
-     * 查询边缘单元EdgeUnit模版列表
+     * 查询边缘单元EdgeUnit模板列表
      */
     DescribeEdgeUnitNodeUnitTemplates(req: DescribeEdgeUnitNodeUnitTemplatesRequest, cb?: (error: string, rep: DescribeEdgeUnitNodeUnitTemplatesResponse) => void): Promise<DescribeEdgeUnitNodeUnitTemplatesResponse>;
     /**
@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     CreateEdgeNode(req: CreateEdgeNodeRequest, cb?: (error: string, rep: CreateEdgeNodeResponse) => void): Promise<CreateEdgeNodeResponse>;
     /**
-     * 删除边缘单元NodeUnit模版
+     * 删除边缘单元NodeUnit模板
      */
     DeleteEdgeNodeUnitTemplates(req: DeleteEdgeNodeUnitTemplatesRequest, cb?: (error: string, rep: DeleteEdgeNodeUnitTemplatesResponse) => void): Promise<DeleteEdgeNodeUnitTemplatesResponse>;
     /**
@@ -204,7 +204,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteConfigMap(req: DeleteConfigMapRequest, cb?: (error: string, rep: DeleteConfigMapResponse) => void): Promise<DeleteConfigMapResponse>;
     /**
-     * 创建边缘单元NodeUnit模版
+     * 创建边缘单元NodeUnit模板
      */
     CreateEdgeNodeUnitTemplate(req: CreateEdgeNodeUnitTemplateRequest, cb?: (error: string, rep: CreateEdgeNodeUnitTemplateResponse) => void): Promise<CreateEdgeNodeUnitTemplateResponse>;
     /**
@@ -224,7 +224,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteEdgeUnitCloud(req: DeleteEdgeUnitCloudRequest, cb?: (error: string, rep: DeleteEdgeUnitCloudResponse) => void): Promise<DeleteEdgeUnitCloudResponse>;
     /**
-     * 查询指定NodeGroup下NodeUnit模版列表
+     * 查询指定NodeGroup下NodeUnit模板列表
      */
     DescribeNodeUnitTemplateOnNodeGroup(req: DescribeNodeUnitTemplateOnNodeGroupRequest, cb?: (error: string, rep: DescribeNodeUnitTemplateOnNodeGroupResponse) => void): Promise<DescribeNodeUnitTemplateOnNodeGroupResponse>;
     /**

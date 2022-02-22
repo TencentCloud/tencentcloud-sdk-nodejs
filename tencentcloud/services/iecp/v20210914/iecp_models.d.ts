@@ -605,7 +605,7 @@ export interface DescribeNodeUnitTemplateOnNodeGroupResponse {
       */
     Total: number;
     /**
-      * NodeUnit模版
+      * NodeUnit模板
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NodeUnitTemplates: Array<NodeGroupNodeUnitTemplateInfo>;
@@ -1935,7 +1935,7 @@ export interface DeleteEdgeNodeUnitTemplatesRequest {
       */
     EdgeUnitId: number;
     /**
-      * 删除的NodeUnit模版ID列表
+      * 删除的NodeUnit模板ID列表
       */
     NodeUnitTemplateIDs: Array<number>;
 }
@@ -2183,7 +2183,7 @@ export interface DescribeEdgeUnitNodeUnitTemplatesResponse {
       */
     Total: number;
     /**
-      * NodeUnit模版列表
+      * NodeUnit模板列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NodeUnitTemplates: Array<NodeUnitTemplate>;
@@ -2304,7 +2304,7 @@ export interface ModifyNodeUnitTemplateRequest {
       */
     EdgeUnitId: number;
     /**
-      * NodeUnit模版ID
+      * NodeUnit模板ID
       */
     NodeUnitTemplateID: number;
     /**
@@ -2601,7 +2601,7 @@ export interface CreateEdgeNodeUnitTemplateRequest {
       */
     EdgeUnitId: number;
     /**
-      * NodeUnit模版名称
+      * NodeUnit模板名称
       */
     Name: string;
     /**

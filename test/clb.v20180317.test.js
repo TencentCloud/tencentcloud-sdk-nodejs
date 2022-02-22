@@ -28,9 +28,9 @@ it("clb.v20180317.RegisterTargets", async function () {
     }
 })
 
-it("clb.v20180317.ModifyLoadBalancerSla", async function () {
+it("clb.v20180317.ModifyDomainAttributes", async function () {
     try {
-       const data = await client.ModifyLoadBalancerSla({})
+       const data = await client.ModifyDomainAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,6 +228,16 @@ it("clb.v20180317.DeleteTargetGroups", async function () {
     }
 })
 
+it("clb.v20180317.ModifyLoadBalancerSla", async function () {
+    try {
+       const data = await client.ModifyLoadBalancerSla({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.ModifyBlockIPList", async function () {
     try {
        const data = await client.ModifyBlockIPList({})
@@ -278,9 +288,9 @@ it("clb.v20180317.DeleteLoadBalancer", async function () {
     }
 })
 
-it("clb.v20180317.ModifyDomainAttributes", async function () {
+it("clb.v20180317.DescribeResources", async function () {
     try {
-       const data = await client.ModifyDomainAttributes({})
+       const data = await client.DescribeResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

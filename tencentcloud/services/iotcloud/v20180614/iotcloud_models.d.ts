@@ -722,6 +722,23 @@ export interface DescribeTasksRequest {
     Limit: number;
 }
 /**
+ * DownloadDeviceResource请求参数结构体
+ */
+export interface DownloadDeviceResourceRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 资源名称
+      */
+    Name: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+}
+/**
  * DescribeDeviceResource请求参数结构体
  */
 export interface DescribeDeviceResourceRequest {
@@ -1006,6 +1023,15 @@ export interface CreateMultiDevicesTaskRequest {
     Hash?: string;
 }
 /**
+ * DeleteDeviceResource返回参数结构体
+ */
+export interface DeleteDeviceResourceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeFirmwareTaskStatistics返回参数结构体
  */
 export interface DescribeFirmwareTaskStatisticsResponse {
@@ -1228,6 +1254,15 @@ export interface DescribeProductResourceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: ProductResourceInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CancelDeviceFirmwareTask返回参数结构体
+ */
+export interface CancelDeviceFirmwareTaskResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1949,6 +1984,19 @@ export interface SetProductsForbiddenStatusRequest {
     Status: number;
 }
 /**
+ * DownloadDeviceResource返回参数结构体
+ */
+export interface DownloadDeviceResourceResponse {
+    /**
+      * 设备资源的cos链接
+      */
+    Url: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UploadFirmware返回参数结构体
  */
 export interface UploadFirmwareResponse {
@@ -2358,13 +2406,21 @@ export interface CancelDeviceFirmwareTaskRequest {
     TaskId: number;
 }
 /**
- * CancelDeviceFirmwareTask返回参数结构体
+ * DeleteDeviceResource请求参数结构体
  */
-export interface CancelDeviceFirmwareTaskResponse {
+export interface DeleteDeviceResourceRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 产品ID
       */
-    RequestId?: string;
+    ProductID: string;
+    /**
+      * 资源名称
+      */
+    Name: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
 }
 /**
  * DescribeMultiDevices返回参数结构体

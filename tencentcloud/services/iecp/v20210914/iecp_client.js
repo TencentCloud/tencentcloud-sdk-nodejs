@@ -88,13 +88,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUpdateNodeUnit", req, cb);
     }
     /**
-     * 修改边缘单元NodeUnit模版
+     * 修改边缘单元NodeUnit模板
      */
     async ModifyNodeUnitTemplate(req, cb) {
         return this.request("ModifyNodeUnitTemplate", req, cb);
     }
     /**
-     * 查询边缘单元EdgeUnit模版列表
+     * 查询边缘单元EdgeUnit模板列表
      */
     async DescribeEdgeUnitNodeUnitTemplates(req, cb) {
         return this.request("DescribeEdgeUnitNodeUnitTemplates", req, cb);
@@ -178,7 +178,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEdgeNode", req, cb);
     }
     /**
-     * 删除边缘单元NodeUnit模版
+     * 删除边缘单元NodeUnit模板
      */
     async DeleteEdgeNodeUnitTemplates(req, cb) {
         return this.request("DeleteEdgeNodeUnitTemplates", req, cb);
@@ -322,7 +322,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteConfigMap", req, cb);
     }
     /**
-     * 创建边缘单元NodeUnit模版
+     * 创建边缘单元NodeUnit模板
      */
     async CreateEdgeNodeUnitTemplate(req, cb) {
         return this.request("CreateEdgeNodeUnitTemplate", req, cb);
@@ -352,7 +352,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEdgeUnitCloud", req, cb);
     }
     /**
-     * 查询指定NodeGroup下NodeUnit模版列表
+     * 查询指定NodeGroup下NodeUnit模板列表
      */
     async DescribeNodeUnitTemplateOnNodeGroup(req, cb) {
         return this.request("DescribeNodeUnitTemplateOnNodeGroup", req, cb);

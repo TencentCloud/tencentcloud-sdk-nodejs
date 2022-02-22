@@ -408,6 +408,16 @@ it("iotcloud.v20180614.DeleteProduct", async function () {
     }
 })
 
+it("iotcloud.v20180614.DownloadDeviceResource", async function () {
+    try {
+       const data = await client.DownloadDeviceResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20180614.CreateTaskFileUrl", async function () {
     try {
        const data = await client.CreateTaskFileUrl({})
@@ -641,6 +651,16 @@ it("iotcloud.v20180614.PublishToDevice", async function () {
 it("iotcloud.v20180614.DescribeProductResources", async function () {
     try {
        const data = await client.DescribeProductResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.DeleteDeviceResource", async function () {
+    try {
+       const data = await client.DeleteDeviceResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -51,6 +51,7 @@ import {
   SetSecurityGroupForLoadbalancersResponse,
   BasicTargetGroupInfo,
   ModifyTargetWeightResponse,
+  ZoneResource,
   DescribeTaskStatusRequest,
   TargetGroupInstance,
   DescribeClassicalLBByInstanceIdResponse,
@@ -108,6 +109,7 @@ import {
   DescribeLoadBalancersDetailRequest,
   TargetGroupBackend,
   DescribeClassicalLBByInstanceIdRequest,
+  DescribeResourcesResponse,
   ManualRewriteResponse,
   ModifyBlockIPListRequest,
   DescribeClusterResourcesResponse,
@@ -189,10 +191,12 @@ import {
   TagInfo,
   SnatIp,
   DescribeBlockIPTaskResponse,
+  DescribeResourcesRequest,
   DescribeClassicalLBListenersResponse,
   DescribeExclusiveClustersRequest,
   ModifyLoadBalancerSlaRequest,
   DescribeBlockIPTaskRequest,
+  Resource,
   CreateLoadBalancerResponse,
   DescribeRewriteResponse,
   Quota,
@@ -244,13 +248,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 支持共享型clb升级到性能容量型clb（不支持性能保障降级到共享型）。
-   */
-  async ModifyLoadBalancerSla(
-    req: ModifyLoadBalancerSlaRequest,
-    cb?: (error: string, rep: ModifyLoadBalancerSlaResponse) => void
-  ): Promise<ModifyLoadBalancerSlaResponse> {
-    return this.request("ModifyLoadBalancerSla", req, cb)
+     * ModifyDomainAttributes接口用于修改负载均衡7层监听器转发规则的域名级别属性，如修改域名、修改DefaultServer、开启/关闭Http2、修改证书。
+本接口为异步接口，本接口返回成功后，需以返回的RequestId为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+  async ModifyDomainAttributes(
+    req: ModifyDomainAttributesRequest,
+    cb?: (error: string, rep: ModifyDomainAttributesResponse) => void
+  ): Promise<ModifyDomainAttributesResponse> {
+    return this.request("ModifyDomainAttributes", req, cb)
   }
 
   /**
@@ -454,6 +459,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 支持共享型clb升级到性能容量型clb（不支持性能保障降级到共享型）。
+   */
+  async ModifyLoadBalancerSla(
+    req: ModifyLoadBalancerSlaRequest,
+    cb?: (error: string, rep: ModifyLoadBalancerSlaResponse) => void
+  ): Promise<ModifyLoadBalancerSlaResponse> {
+    return this.request("ModifyLoadBalancerSla", req, cb)
+  }
+
+  /**
      * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
 （接口灰度中，如需使用请提工单）
      */
@@ -506,14 +521,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * ModifyDomainAttributes接口用于修改负载均衡7层监听器转发规则的域名级别属性，如修改域名、修改DefaultServer、开启/关闭Http2、修改证书。
-本接口为异步接口，本接口返回成功后，需以返回的RequestId为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     */
-  async ModifyDomainAttributes(
-    req: ModifyDomainAttributesRequest,
-    cb?: (error: string, rep: ModifyDomainAttributesResponse) => void
-  ): Promise<ModifyDomainAttributesResponse> {
-    return this.request("ModifyDomainAttributes", req, cb)
+   * 查询用户在当前地域支持可用区列表和资源列表。
+   */
+  async DescribeResources(
+    req: DescribeResourcesRequest,
+    cb?: (error: string, rep: DescribeResourcesResponse) => void
+  ): Promise<DescribeResourcesResponse> {
+    return this.request("DescribeResources", req, cb)
   }
 
   /**

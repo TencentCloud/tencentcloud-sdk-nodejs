@@ -1150,6 +1150,10 @@ export interface ModifyInstancesAttributeRequest {
       * 指定实例的安全组Id列表，子机将重新关联指定列表的安全组，原本关联的安全组会被解绑。<dx-alert infotype="explain" title="">必须指定SecurityGroups与InstanceName的其中一个，但不能同时设置</dx-alert>
       */
     SecurityGroups?: Array<string>;
+    /**
+      * 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：<br><li>TRUE：表示开启实例保护，不允许通过api接口删除实例<br><li>FALSE：表示关闭实例保护，允许通过api接口删除实例<br><br>默认取值：FALSE。
+      */
+    DisableApiTermination?: boolean;
 }
 /**
  * RenewHosts请求参数结构体
@@ -3064,6 +3068,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       * 实例启动模板。
       */
     LaunchTemplate?: LaunchTemplate;
+    /**
+      * 指定CHC物理服务器来创建CHC云主机。
+      */
+    ChcIds?: Array<string>;
 }
 /**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
@@ -3606,7 +3614,7 @@ export interface InquiryPriceRunInstancesResponse {
     /**
       * 该参数表示对应配置实例的价格。
       */
-    Price?: Price;
+    Price: Price;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

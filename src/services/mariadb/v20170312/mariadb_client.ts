@@ -23,7 +23,7 @@ import {
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   ParamDesc,
-  DescribeDBParametersRequest,
+  DescribeDBResourceUsageRequest,
   DescribeAccountsRequest,
   ProcedurePrivilege,
   DescribeRenewalPriceResponse,
@@ -43,7 +43,7 @@ import {
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
   InitDBInstancesResponse,
-  DescribeDBParametersResponse,
+  DescribeLogFileRetentionPeriodRequest,
   ResourceUsageMonitorSet,
   ModifyLogFileRetentionPeriodRequest,
   PerformanceMonitorSet,
@@ -51,11 +51,12 @@ import {
   CloneAccountResponse,
   ZoneChooseInfo,
   ModifyAccountDescriptionResponse,
-  DescribeDBResourceUsageRequest,
+  DescribeDBParametersRequest,
   ParamConstraint,
   ModifyDBInstancesProjectResponse,
   DBBackupTimeConfig,
   ModifyBackupTimeRequest,
+  DatabaseView,
   DescribeDBLogFilesRequest,
   DescribeRenewalPriceRequest,
   NodeInfo,
@@ -66,6 +67,7 @@ import {
   CopyAccountPrivilegesResponse,
   ModifyRealServerAccessStrategyResponse,
   CreateHourDBInstanceResponse,
+  DescribePriceRequest,
   ParamModifyResult,
   DescribeDBInstancesRequest,
   DescribeDBSecurityGroupsRequest,
@@ -75,15 +77,17 @@ import {
   CreateDedicatedClusterDBInstanceResponse,
   TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
+  DatabaseFunction,
   DescribeSqlLogsRequest,
   ResetAccountPasswordResponse,
   DescribeDBInstanceSpecsRequest,
-  DescribePriceRequest,
+  DescribeDatabaseObjectsRequest,
   CreateDBInstanceResponse,
   ModifyRealServerAccessStrategyRequest,
   DescribeBackupTimeRequest,
   RestartDBInstancesResponse,
   DescribeSaleInfoResponse,
+  DatabaseTable,
   Deal,
   DescribeDBPerformanceDetailsRequest,
   CreateDedicatedClusterDBInstanceRequest,
@@ -100,6 +104,7 @@ import {
   DescribeDatabaseTableRequest,
   OpenDBExtranetAccessResponse,
   KillSessionRequest,
+  DescribeDatabaseObjectsResponse,
   ModifyDBInstanceNameRequest,
   DeleteAccountRequest,
   TableColumn,
@@ -142,6 +147,7 @@ import {
   DescribeFlowRequest,
   ModifyAccountPrivilegesRequest,
   DescribeDBPerformanceResponse,
+  DatabaseProcedure,
   ModifyDBSyncModeRequest,
   DescribeInstanceNodeInfoRequest,
   CloneAccountRequest,
@@ -164,7 +170,7 @@ import {
   DescribeAccountsResponse,
   DescribeDBSlowLogsResponse,
   UpgradeDBInstanceResponse,
-  DescribeLogFileRetentionPeriodRequest,
+  DescribeDBParametersResponse,
   ModifyDBInstancesProjectRequest,
   FlushBinlogRequest,
   MonitorData,
@@ -224,6 +230,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceNodeInfoResponse) => void
   ): Promise<DescribeInstanceNodeInfoResponse> {
     return this.request("DescribeInstanceNodeInfo", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDatabaseObjects）用于查询云数据库实例的数据库中的对象列表，包含表、存储过程、视图和函数。
+   */
+  async DescribeDatabaseObjects(
+    req: DescribeDatabaseObjectsRequest,
+    cb?: (error: string, rep: DescribeDatabaseObjectsResponse) => void
+  ): Promise<DescribeDatabaseObjectsResponse> {
+    return this.request("DescribeDatabaseObjects", req, cb)
   }
 
   /**

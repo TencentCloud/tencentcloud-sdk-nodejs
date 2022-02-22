@@ -53,7 +53,7 @@ export declare class Client extends AbstractClient {
     ListEmailAddress(req?: ListEmailAddressRequest, cb?: (error: string, rep: ListEmailAddressResponse) => void): Promise<ListEmailAddressResponse>;
     /**
      * 创建模板，该模板可以是TXT或者HTML，请注意如果HTML不要包含外部文件的CSS。模板中的变量使用 {{变量名}} 表示。
-注意：模版需要审核通过才可以使用。
+注意：模板需要审核通过才可以使用。
      */
     CreateEmailTemplate(req: CreateEmailTemplateRequest, cb?: (error: string, rep: CreateEmailTemplateResponse) => void): Promise<CreateEmailTemplateResponse>;
     /**

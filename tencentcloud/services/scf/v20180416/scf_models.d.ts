@@ -1239,7 +1239,7 @@ export interface CreateTriggerRequest {
       */
     Namespace?: string;
     /**
-      * 函数的版本
+      * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
       */
     Qualifier?: string;
     /**

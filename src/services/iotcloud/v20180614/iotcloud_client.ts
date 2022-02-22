@@ -50,6 +50,7 @@ import {
   DeleteProductRequest,
   StatusStatistic,
   DescribeTasksRequest,
+  DownloadDeviceResourceRequest,
   DescribeDeviceResourceRequest,
   EditFirmwareRequest,
   MultiDevicesInfo,
@@ -62,6 +63,7 @@ import {
   DescribeFirmwareResponse,
   DescribeResourceTasksRequest,
   CreateMultiDevicesTaskRequest,
+  DeleteDeviceResourceResponse,
   DescribeFirmwareTaskStatisticsResponse,
   DescribePushResourceTaskStatisticsRequest,
   CreateLoraDeviceRequest,
@@ -74,6 +76,7 @@ import {
   CreateTaskRequest,
   DescribeAllDevicesRequest,
   DescribeProductResourceResponse,
+  CancelDeviceFirmwareTaskResponse,
   CreateTopicPolicyResponse,
   PublishToDeviceResponse,
   RetryDeviceFirmwareTaskResponse,
@@ -109,6 +112,7 @@ import {
   DeviceProperty,
   PublishToDeviceRequest,
   SetProductsForbiddenStatusRequest,
+  DownloadDeviceResourceResponse,
   UploadFirmwareResponse,
   ProductInfo,
   DescribeFirmwareTaskDistributionResponse,
@@ -131,7 +135,7 @@ import {
   ReplaceTopicRuleResponse,
   PublishAsDeviceRequest,
   CancelDeviceFirmwareTaskRequest,
-  CancelDeviceFirmwareTaskResponse,
+  DeleteDeviceResourceRequest,
   DescribeMultiDevicesResponse,
   DescribeDeviceShadowRequest,
   UnbindDevicesResponse,
@@ -576,6 +580,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DownloadDeviceResource）用于下载设备资源
+   */
+  async DownloadDeviceResource(
+    req: DownloadDeviceResourceRequest,
+    cb?: (error: string, rep: DownloadDeviceResourceResponse) => void
+  ): Promise<DownloadDeviceResourceResponse> {
+    return this.request("DownloadDeviceResource", req, cb)
+  }
+
+  /**
    * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
    */
   async CreateTaskFileUrl(
@@ -813,6 +827,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductResourcesResponse) => void
   ): Promise<DescribeProductResourcesResponse> {
     return this.request("DescribeProductResources", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteDeviceResource）用于删除设备资源
+   */
+  async DeleteDeviceResource(
+    req: DeleteDeviceResourceRequest,
+    cb?: (error: string, rep: DeleteDeviceResourceResponse) => void
+  ): Promise<DeleteDeviceResourceResponse> {
+    return this.request("DeleteDeviceResource", req, cb)
   }
 
   /**

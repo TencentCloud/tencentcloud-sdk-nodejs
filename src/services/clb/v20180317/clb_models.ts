@@ -988,6 +988,43 @@ export interface ModifyTargetWeightResponse {
 }
 
 /**
+ * 可用区资源列表
+ */
+export interface ZoneResource {
+  /**
+   * 主可用区，如"ap-guangzhou-1"。
+   */
+  MasterZone: string
+
+  /**
+      * 资源列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceSet: Array<Resource>
+
+  /**
+      * 备可用区，如"ap-guangzhou-2"，单可用区时，备可用区为null。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlaveZone: string
+
+  /**
+   * IP版本，如IPv4，IPv6，IPv6_Nat。
+   */
+  IPVersion: string
+
+  /**
+   * 可用区所属地域，如：ap-guangzhou
+   */
+  ZoneRegion: string
+
+  /**
+   * 可用区是否是LocalZone可用区，如：false
+   */
+  LocalZone: boolean
+}
+
+/**
  * DescribeTaskStatus请求参数结构体
  */
 export interface DescribeTaskStatusRequest {
@@ -2376,6 +2413,26 @@ export interface DescribeClassicalLBByInstanceIdRequest {
    * 后端实例ID列表。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * DescribeResources返回参数结构体
+ */
+export interface DescribeResourcesResponse {
+  /**
+   * 可用区支持的资源列表。
+   */
+  ZoneResourceSet: Array<ZoneResource>
+
+  /**
+   * 可用区资源列表数目。
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4558,6 +4615,28 @@ export interface DescribeBlockIPTaskResponse {
 }
 
 /**
+ * DescribeResources请求参数结构体
+ */
+export interface DescribeResourcesRequest {
+  /**
+   * 返回可用区资源列表数目，默认20，最大值100。
+   */
+  Limit?: number
+
+  /**
+   * 返回可用区资源列表起始偏移量，默认0。
+   */
+  Offset?: number
+
+  /**
+      * 查询可用区资源列表条件，详细的过滤条件如下：
+<li> zone - String - 是否必填：否 - （过滤条件）按照 可用区 过滤，如："ap-guangzhou-1"（广州一区）。</li>
+<li> isp -- String - 是否必填：否 - （过滤条件）按照 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC"。</li>
+      */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeClassicalLBListeners返回参数结构体
  */
 export interface DescribeClassicalLBListenersResponse {
@@ -4620,6 +4699,21 @@ export interface DescribeBlockIPTaskRequest {
    * ModifyBlockIPList 接口返回的异步任务的ID。
    */
   TaskId: string
+}
+
+/**
+ * 资源详细信息
+ */
+export interface Resource {
+  /**
+   * 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
+   */
+  Type: Array<string>
+
+  /**
+   * 运营商信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
+   */
+  Isp: string
 }
 
 /**

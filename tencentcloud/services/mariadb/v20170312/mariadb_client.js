@@ -53,6 +53,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceNodeInfo", req, cb);
     }
     /**
+     * 本接口（DescribeDatabaseObjects）用于查询云数据库实例的数据库中的对象列表，包含表、存储过程、视图和函数。
+     */
+    async DescribeDatabaseObjects(req, cb) {
+        return this.request("DescribeDatabaseObjects", req, cb);
+    }
+    /**
      * 本接口（KillSession）用于杀死指定会话。
      */
     async KillSession(req, cb) {

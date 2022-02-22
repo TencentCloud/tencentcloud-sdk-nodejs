@@ -262,6 +262,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteProduct", req, cb);
     }
     /**
+     * 本接口（DownloadDeviceResource）用于下载设备资源
+     */
+    async DownloadDeviceResource(req, cb) {
+        return this.request("DownloadDeviceResource", req, cb);
+    }
+    /**
      * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
      */
     async CreateTaskFileUrl(req, cb) {
@@ -404,6 +410,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProductResources(req, cb) {
         return this.request("DescribeProductResources", req, cb);
+    }
+    /**
+     * 本接口（DeleteDeviceResource）用于删除设备资源
+     */
+    async DeleteDeviceResource(req, cb) {
+        return this.request("DeleteDeviceResource", req, cb);
     }
     /**
      * 本接口（DescribeProductTask）用于查看产品级别的任务信息

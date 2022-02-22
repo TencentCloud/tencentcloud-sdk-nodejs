@@ -35,10 +35,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterTargets", req, cb);
     }
     /**
-     * 支持共享型clb升级到性能容量型clb（不支持性能保障降级到共享型）。
+     * ModifyDomainAttributes接口用于修改负载均衡7层监听器转发规则的域名级别属性，如修改域名、修改DefaultServer、开启/关闭Http2、修改证书。
+本接口为异步接口，本接口返回成功后，需以返回的RequestId为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
-    async ModifyLoadBalancerSla(req, cb) {
-        return this.request("ModifyLoadBalancerSla", req, cb);
+    async ModifyDomainAttributes(req, cb) {
+        return this.request("ModifyDomainAttributes", req, cb);
     }
     /**
      * 根据证书ID查询其在一个地域中所关联到负载均衡实例列表
@@ -165,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTargetGroups", req, cb);
     }
     /**
+     * 支持共享型clb升级到性能容量型clb（不支持性能保障降级到共享型）。
+     */
+    async ModifyLoadBalancerSla(req, cb) {
+        return this.request("ModifyLoadBalancerSla", req, cb);
+    }
+    /**
      * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
 （接口灰度中，如需使用请提工单）
      */
@@ -197,11 +204,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLoadBalancer", req, cb);
     }
     /**
-     * ModifyDomainAttributes接口用于修改负载均衡7层监听器转发规则的域名级别属性，如修改域名、修改DefaultServer、开启/关闭Http2、修改证书。
-本接口为异步接口，本接口返回成功后，需以返回的RequestId为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * 查询用户在当前地域支持可用区列表和资源列表。
      */
-    async ModifyDomainAttributes(req, cb) {
-        return this.request("ModifyDomainAttributes", req, cb);
+    async DescribeResources(req, cb) {
+        return this.request("DescribeResources", req, cb);
     }
     /**
      * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。

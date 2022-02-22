@@ -58,6 +58,16 @@ it("mariadb.v20170312.DescribeInstanceNodeInfo", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeDatabaseObjects", async function () {
+    try {
+       const data = await client.DescribeDatabaseObjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.KillSession", async function () {
     try {
        const data = await client.KillSession({})

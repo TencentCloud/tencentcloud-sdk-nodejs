@@ -220,13 +220,28 @@ export interface ParamDesc {
 }
 
 /**
- * DescribeDBParameters请求参数结构体
+ * DescribeDBResourceUsage请求参数结构体
  */
-export interface DescribeDBParametersRequest {
+export interface DescribeDBResourceUsageRequest {
   /**
    * 实例 ID，形如：tdsql-ow728lmc。
    */
   InstanceId: string
+
+  /**
+   * 开始日期，格式yyyy-mm-dd
+   */
+  StartTime: string
+
+  /**
+   * 结束日期，格式yyyy-mm-dd
+   */
+  EndTime: string
+
+  /**
+   * 拉取的指标名称，支持的值为：data_disk_available,binlog_disk_available,mem_available,cpu_usage_rate
+   */
+  MetricName?: string
 }
 
 /**
@@ -621,23 +636,13 @@ export interface InitDBInstancesResponse {
 }
 
 /**
- * DescribeDBParameters返回参数结构体
+ * DescribeLogFileRetentionPeriod请求参数结构体
  */
-export interface DescribeDBParametersResponse {
+export interface DescribeLogFileRetentionPeriodRequest {
   /**
    * 实例 ID，形如：tdsql-ow728lmc。
    */
-  InstanceId?: string
-
-  /**
-   * 请求DB的当前参数值
-   */
-  Params?: Array<ParamDesc>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -791,28 +796,13 @@ export interface ModifyAccountDescriptionResponse {
 }
 
 /**
- * DescribeDBResourceUsage请求参数结构体
+ * DescribeDBParameters请求参数结构体
  */
-export interface DescribeDBResourceUsageRequest {
+export interface DescribeDBParametersRequest {
   /**
    * 实例 ID，形如：tdsql-ow728lmc。
    */
   InstanceId: string
-
-  /**
-   * 开始日期，格式yyyy-mm-dd
-   */
-  StartTime: string
-
-  /**
-   * 结束日期，格式yyyy-mm-dd
-   */
-  EndTime: string
-
-  /**
-   * 拉取的指标名称，支持的值为：data_disk_available,binlog_disk_available,mem_available,cpu_usage_rate
-   */
-  MetricName?: string
 }
 
 /**
@@ -889,6 +879,16 @@ export interface ModifyBackupTimeRequest {
    * 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:59
    */
   EndBackupTime: string
+}
+
+/**
+ * 数据库视图信息
+ */
+export interface DatabaseView {
+  /**
+   * 视图名称
+   */
+  View: string
 }
 
 /**
@@ -1129,6 +1129,49 @@ export interface CreateHourDBInstanceResponse {
 }
 
 /**
+ * DescribePrice请求参数结构体
+ */
+export interface DescribePriceRequest {
+  /**
+   * 欲新购实例的可用区ID。
+   */
+  Zone: string
+
+  /**
+      * 实例节点个数，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得。
+      */
+  NodeCount: number
+
+  /**
+      * 内存大小，单位：GB，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得。
+      */
+  Memory: number
+
+  /**
+      * 存储空间大小，单位：GB，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
+      */
+  Storage: number
+
+  /**
+   * 欲购买的时长，单位：月。
+   */
+  Period?: number
+
+  /**
+   * 欲购买的数量，默认查询购买1个实例的价格。
+   */
+  Count?: number
+
+  /**
+   * 付费类型。postpaid：按量付费   prepaid：预付费
+   */
+  Paymode?: string
+}
+
+/**
  * 修改参数结果
  */
 export interface ParamModifyResult {
@@ -1364,6 +1407,16 @@ export interface DescribeProjectSecurityGroupsResponse {
 }
 
 /**
+ * 数据库函数信息
+ */
+export interface DatabaseFunction {
+  /**
+   * 函数名称
+   */
+  Func: string
+}
+
+/**
  * DescribeSqlLogs请求参数结构体
  */
 export interface DescribeSqlLogsRequest {
@@ -1399,46 +1452,18 @@ export interface ResetAccountPasswordResponse {
 export type DescribeDBInstanceSpecsRequest = null
 
 /**
- * DescribePrice请求参数结构体
+ * DescribeDatabaseObjects请求参数结构体
  */
-export interface DescribePriceRequest {
+export interface DescribeDatabaseObjectsRequest {
   /**
-   * 欲新购实例的可用区ID。
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
    */
-  Zone: string
+  InstanceId: string
 
   /**
-      * 实例节点个数，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得。
-      */
-  NodeCount: number
-
-  /**
-      * 内存大小，单位：GB，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得。
-      */
-  Memory: number
-
-  /**
-      * 存储空间大小，单位：GB，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
-      */
-  Storage: number
-
-  /**
-   * 欲购买的时长，单位：月。
+   * 数据库名称，通过 DescribeDatabases 接口获取。
    */
-  Period?: number
-
-  /**
-   * 欲购买的数量，默认查询购买1个实例的价格。
-   */
-  Count?: number
-
-  /**
-   * 付费类型。postpaid：按量付费   prepaid：预付费
-   */
-  Paymode?: string
+  DbName: string
 }
 
 /**
@@ -1516,6 +1541,16 @@ export interface DescribeSaleInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据库表信息
+ */
+export interface DatabaseTable {
+  /**
+   * 表名
+   */
+  Table: string
 }
 
 /**
@@ -1987,6 +2022,46 @@ export interface KillSessionRequest {
    * 会话ID列表
    */
   SessionId: Array<number>
+}
+
+/**
+ * DescribeDatabaseObjects返回参数结构体
+ */
+export interface DescribeDatabaseObjectsResponse {
+  /**
+   * 透传入参。
+   */
+  InstanceId?: string
+
+  /**
+   * 数据库名称。
+   */
+  DbName?: string
+
+  /**
+   * 表列表。
+   */
+  Tables?: Array<DatabaseTable>
+
+  /**
+   * 视图列表。
+   */
+  Views?: Array<DatabaseView>
+
+  /**
+   * 存储过程列表。
+   */
+  Procs?: Array<DatabaseProcedure>
+
+  /**
+   * 函数列表。
+   */
+  Funcs?: Array<DatabaseFunction>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3196,6 +3271,16 @@ export interface DescribeDBPerformanceResponse {
 }
 
 /**
+ * 数据库存储过程信息
+ */
+export interface DatabaseProcedure {
+  /**
+   * 存储过程名称
+   */
+  Proc: string
+}
+
+/**
  * ModifyDBSyncMode请求参数结构体
  */
 export interface ModifyDBSyncModeRequest {
@@ -3859,13 +3944,23 @@ export interface UpgradeDBInstanceResponse {
 }
 
 /**
- * DescribeLogFileRetentionPeriod请求参数结构体
+ * DescribeDBParameters返回参数结构体
  */
-export interface DescribeLogFileRetentionPeriodRequest {
+export interface DescribeDBParametersResponse {
   /**
    * 实例 ID，形如：tdsql-ow728lmc。
    */
-  InstanceId: string
+  InstanceId?: string
+
+  /**
+   * 请求DB的当前参数值
+   */
+  Params?: Array<ParamDesc>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
