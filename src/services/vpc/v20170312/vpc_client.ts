@@ -2442,7 +2442,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateAddressTemplateGroup）用于创建IP地址模版集合
+   * 本接口（CreateAddressTemplateGroup）用于创建IP地址模板集合
    */
   async CreateAddressTemplateGroup(
     req: CreateAddressTemplateGroupRequest,

@@ -262,7 +262,7 @@ export interface CheckBankCardInformationResponse {
       */
     AccountBank: string;
     /**
-      * 卡性质：1. 借记卡；2. 贷记卡
+      * 卡性质：1. 借记卡；2. 贷记卡；3. 预付费卡；4. 准贷记卡
       */
     AccountType: number;
     /**

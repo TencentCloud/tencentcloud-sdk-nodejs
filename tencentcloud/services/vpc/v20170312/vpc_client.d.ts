@@ -807,7 +807,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCrossBorderCompliance(req: DescribeCrossBorderComplianceRequest, cb?: (error: string, rep: DescribeCrossBorderComplianceResponse) => void): Promise<DescribeCrossBorderComplianceResponse>;
     /**
-     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模版集合
+     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模板集合
      */
     CreateAddressTemplateGroup(req: CreateAddressTemplateGroupRequest, cb?: (error: string, rep: CreateAddressTemplateGroupResponse) => void): Promise<CreateAddressTemplateGroupResponse>;
     /**

@@ -1155,7 +1155,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCrossBorderCompliance", req, cb);
     }
     /**
-     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模版集合
+     * 本接口（CreateAddressTemplateGroup）用于创建IP地址模板集合
      */
     async CreateAddressTemplateGroup(req, cb) {
         return this.request("CreateAddressTemplateGroup", req, cb);

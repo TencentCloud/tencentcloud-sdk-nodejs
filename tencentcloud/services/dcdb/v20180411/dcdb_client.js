@@ -339,6 +339,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneAccount", req, cb);
     }
     /**
+     * 创建DCDB后付费实例
+     */
+    async CreateHourDCDBInstance(req, cb) {
+        return this.request("CreateHourDCDBInstance", req, cb);
+    }
+    /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
     async DisassociateSecurityGroups(req, cb) {

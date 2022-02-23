@@ -148,6 +148,26 @@ export interface ParamDesc {
 }
 
 /**
+ * DestroyDCDBInstance返回参数结构体
+ */
+export interface DestroyDCDBInstanceResponse {
+  /**
+   * 实例 ID，与入参InstanceId一致。
+   */
+  InstanceId: string
+
+  /**
+   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBParameters请求参数结构体
  */
 export interface DescribeDBParametersRequest {
@@ -526,18 +546,13 @@ export interface ModifyAccountDescriptionResponse {
 }
 
 /**
- * CloseDBExtranetAccess返回参数结构体
+ * DestroyDCDBInstance请求参数结构体
  */
-export interface CloseDBExtranetAccessResponse {
+export interface DestroyDCDBInstanceRequest {
   /**
-   * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+   * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  FlowId: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -813,98 +828,121 @@ export interface CreateDedicatedClusterDCDBInstanceRequest {
 }
 
 /**
- * DCN详情条目
+ * CreateHourDCDBInstance请求参数结构体
  */
-export interface DcnDetailItem {
+export interface CreateHourDCDBInstanceRequest {
   /**
-   * 实例ID
-   */
-  InstanceId: string
+      * 分片内存大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardMemory: number
 
   /**
-   * 实例名称
-   */
-  InstanceName: string
+      * 分片存储空间大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardStorage: number
 
   /**
-   * 实例地域
-   */
-  Region: string
+      * 单个分片节点个数，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardNodeCount: number
 
   /**
-   * 实例可用区
+   * 实例分片个数，可选范围2-8，可以通过升级实例进行新增分片到最多64个分片。
    */
-  Zone: string
+  ShardCount: number
 
   /**
-   * 实例IP地址
+   * 欲购买实例的数量
    */
-  Vip: string
+  Count?: number
 
   /**
-   * 实例IPv6地址
+   * 项目 ID，可以通过查看项目列表获取，不传则关联到默认项目
    */
-  Vipv6: string
+  ProjectId?: number
 
   /**
-   * 实例端口
+   * 虚拟私有网络 ID，不传或传空表示创建为基础网络
    */
-  Vport: number
+  VpcId?: string
 
   /**
-   * 实例状态
+   * 虚拟私有网络子网 ID，VpcId不为空时必填
    */
-  Status: number
+  SubnetId?: string
 
   /**
-   * 实例状态描述
-   */
-  StatusDesc: string
+      * 分片cpu大小，单位：核，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardCpu?: number
 
   /**
-   * 实例DCN标志，1-主，2-备
-   */
-  DcnFlag: number
+      * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。
+10.0.10 - Mariadb 10.0.10；
+10.1.9 - Mariadb 10.1.9；
+5.7.17 - Percona 5.7.17。
+如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。
+      */
+  DbVersionId?: string
 
   /**
-   * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+   * 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
    */
-  DcnStatus: number
+  Zones?: Array<string>
 
   /**
-   * 实例CPU核数
+   * 安全组id
    */
-  Cpu: number
+  SecurityGroupId?: string
 
   /**
-   * 实例内存大小，单位 GB
+   * 实例名称， 可以通过该字段自主的设置实例的名字
    */
-  Memory: number
+  InstanceName?: string
 
   /**
-   * 实例存储大小，单位 GB
+   * 是否支持IPv6
    */
-  Storage: number
+  Ipv6Flag?: number
 
   /**
-   * 付费模式
+   * 标签键值对数组
    */
-  PayMode: number
+  ResourceTags?: Array<ResourceTag>
 
   /**
-   * 实例创建时间，格式为 2006-01-02 15:04:05
+   * DCN源地域
    */
-  CreateTime: string
+  DcnRegion?: string
 
   /**
-   * 实例到期时间，格式为 2006-01-02 15:04:05
+   * DCN源实例ID
    */
-  PeriodEndTime: string
+  DcnInstanceId?: string
 
   /**
-   * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+   * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步可退化）。
    */
-  InstanceType: number
+  InitParams?: Array<DBParamValue>
+
+  /**
+   * 需要回档的源实例ID
+   */
+  RollbackInstanceId?: string
+
+  /**
+   * 回档时间
+   */
+  RollbackTime?: string
+
+  /**
+   * 安全组ids，安全组可以传数组形式，兼容之前SecurityGroupId参数
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -1259,51 +1297,6 @@ export interface ShardZoneChooseInfo {
    * 可选的从可用区
    */
   SlaveZones: Array<ZonesInfo>
-}
-
-/**
- * DescribeDBLogFiles返回参数结构体
- */
-export interface DescribeDBLogFilesResponse {
-  /**
-   * 实例 ID，形如：dcdbt-ow728lmc。
-   */
-  InstanceId: string
-
-  /**
-   * 请求日志类型。1-binlog，2-冷备，3-errlog，4-slowlog。
-   */
-  Type: number
-
-  /**
-   * 请求日志总数
-   */
-  Total: number
-
-  /**
-   * 日志文件列表
-   */
-  Files: Array<LogFileInfo>
-
-  /**
-   * 如果是VPC网络的实例，做用本前缀加上URI为下载地址
-   */
-  VpcPrefix: string
-
-  /**
-   * 如果是普通网络的实例，做用本前缀加上URI为下载地址
-   */
-  NormalPrefix: string
-
-  /**
-   * 分片 ID，形如：shard-7noic7tv
-   */
-  ShardId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -2362,6 +2355,26 @@ export interface ZonesInfo {
 }
 
 /**
+ * CreateHourDCDBInstance返回参数结构体
+ */
+export interface CreateHourDCDBInstanceResponse {
+  /**
+   * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 流程id，可以根据流程id查询创建进度
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据库信息
  */
 export interface Database {
@@ -2492,13 +2505,98 @@ export interface ModifyDBInstancesProjectRequest {
 }
 
 /**
- * ModifyDBInstanceSecurityGroups返回参数结构体
+ * DCN详情条目
  */
-export interface ModifyDBInstanceSecurityGroupsResponse {
+export interface DcnDetailItem {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 实例地域
+   */
+  Region: string
+
+  /**
+   * 实例可用区
+   */
+  Zone: string
+
+  /**
+   * 实例IP地址
+   */
+  Vip: string
+
+  /**
+   * 实例IPv6地址
+   */
+  Vipv6: string
+
+  /**
+   * 实例端口
+   */
+  Vport: number
+
+  /**
+   * 实例状态
+   */
+  Status: number
+
+  /**
+   * 实例状态描述
+   */
+  StatusDesc: string
+
+  /**
+   * 实例DCN标志，1-主，2-备
+   */
+  DcnFlag: number
+
+  /**
+   * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+   */
+  DcnStatus: number
+
+  /**
+   * 实例CPU核数
+   */
+  Cpu: number
+
+  /**
+   * 实例内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 实例存储大小，单位 GB
+   */
+  Storage: number
+
+  /**
+   * 付费模式
+   */
+  PayMode: number
+
+  /**
+   * 实例创建时间，格式为 2006-01-02 15:04:05
+   */
+  CreateTime: string
+
+  /**
+   * 实例到期时间，格式为 2006-01-02 15:04:05
+   */
+  PeriodEndTime: string
+
+  /**
+   * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+   */
+  InstanceType: number
 }
 
 /**
@@ -2512,13 +2610,18 @@ export interface DescribeDBSyncModeRequest {
 }
 
 /**
- * DestroyDCDBInstance请求参数结构体
+ * CloseDBExtranetAccess返回参数结构体
  */
-export interface DestroyDCDBInstanceRequest {
+export interface CloseDBExtranetAccessResponse {
   /**
-   * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * 异步任务ID，可通过 DescribeFlow 查询任务状态。
    */
-  InstanceId: string
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2694,18 +2797,43 @@ export interface DescribeOrdersRequest {
 }
 
 /**
- * DestroyDCDBInstance返回参数结构体
+ * DescribeDBLogFiles返回参数结构体
  */
-export interface DestroyDCDBInstanceResponse {
+export interface DescribeDBLogFilesResponse {
   /**
-   * 实例 ID，与入参InstanceId一致。
+   * 实例 ID，形如：dcdbt-ow728lmc。
    */
   InstanceId: string
 
   /**
-   * 异步任务的请求 ID，可使用此 ID [查询异步任务的执行结果](https://cloud.tencent.com/document/product/557/56485)。
+   * 请求日志类型。1-binlog，2-冷备，3-errlog，4-slowlog。
    */
-  FlowId: number
+  Type: number
+
+  /**
+   * 请求日志总数
+   */
+  Total: number
+
+  /**
+   * 日志文件列表
+   */
+  Files: Array<LogFileInfo>
+
+  /**
+   * 如果是VPC网络的实例，做用本前缀加上URI为下载地址
+   */
+  VpcPrefix: string
+
+  /**
+   * 如果是普通网络的实例，做用本前缀加上URI为下载地址
+   */
+  NormalPrefix: string
+
+  /**
+   * 分片 ID，形如：shard-7noic7tv
+   */
+  ShardId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3707,6 +3835,16 @@ export interface Project {
    * 描述信息
    */
   Info: string
+}
+
+/**
+ * ModifyDBInstanceSecurityGroups返回参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

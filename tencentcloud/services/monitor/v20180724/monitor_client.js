@@ -66,6 +66,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendCustomAlarmMsg", req, cb);
     }
     /**
+     * 获取条件模板列表
+     */
+    async DescribeConditionsTemplateList(req, cb) {
+        return this.request("DescribeConditionsTemplateList", req, cb);
+    }
+    /**
      * 获取已绑定对象列表
      */
     async DescribeBindingPolicyObjectList(req, cb) {

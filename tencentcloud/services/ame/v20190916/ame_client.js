@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuthInfo", req, cb);
     }
     /**
+     * 根据 Id 列表查询歌曲的详细信息，包含基础信息及播放信息。
+     */
+    async BatchDescribeKTVMusicDetails(req, cb) {
+        return this.request("BatchDescribeKTVMusicDetails", req, cb);
+    }
+    /**
      * 获取授权项目下已购云音乐列表
      */
     async DescribeCloudMusicPurchased(req, cb) {

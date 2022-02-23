@@ -94,7 +94,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDisksRenewFlag(req: ModifyDisksRenewFlagRequest, cb?: (error: string, rep: ModifyDisksRenewFlagResponse) => void): Promise<ModifyDisksRenewFlagResponse>;
     /**
-     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模板。
      */
     DescribeFirewallRulesTemplate(req?: DescribeFirewallRulesTemplateRequest, cb?: (error: string, rep: DescribeFirewallRulesTemplateResponse) => void): Promise<DescribeFirewallRulesTemplateResponse>;
     /**

@@ -58,6 +58,16 @@ it("ame.v20190916.DescribeAuthInfo", async function () {
     }
 })
 
+it("ame.v20190916.BatchDescribeKTVMusicDetails", async function () {
+    try {
+       const data = await client.BatchDescribeKTVMusicDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.DescribeCloudMusicPurchased", async function () {
     try {
        const data = await client.DescribeCloudMusicPurchased({})

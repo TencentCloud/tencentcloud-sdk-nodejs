@@ -379,7 +379,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+   * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模板。
    */
   async DescribeFirewallRulesTemplate(
     req?: DescribeFirewallRulesTemplateRequest,

@@ -518,6 +518,16 @@ it("dcdb.v20180411.CloneAccount", async function () {
     }
 })
 
+it("dcdb.v20180411.CreateHourDCDBInstance", async function () {
+    try {
+       const data = await client.CreateHourDCDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})

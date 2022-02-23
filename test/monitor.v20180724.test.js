@@ -68,6 +68,16 @@ it("monitor.v20180724.SendCustomAlarmMsg", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeConditionsTemplateList", async function () {
+    try {
+       const data = await client.DescribeConditionsTemplateList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
     try {
        const data = await client.DescribeBindingPolicyObjectList({})

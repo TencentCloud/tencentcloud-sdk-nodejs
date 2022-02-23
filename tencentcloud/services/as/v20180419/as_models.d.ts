@@ -2216,6 +2216,14 @@ export interface ModifyDesiredCapacityRequest {
       * 期望实例数
       */
     DesiredCapacity: number;
+    /**
+      * 最小实例数，取值范围为0-2000。
+      */
+    MinSize?: number;
+    /**
+      * 最大实例数，取值范围为0-2000。
+      */
+    MaxSize?: number;
 }
 /**
  * CreateScheduledAction返回参数结构体

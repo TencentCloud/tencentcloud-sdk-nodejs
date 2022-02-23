@@ -3817,12 +3817,12 @@ export interface DescribeNetDetectsRequest {
  */
 export interface CreateAddressTemplateGroupRequest {
   /**
-   * IP地址模版集合名称。
+   * IP地址模板集合名称。
    */
   AddressTemplateGroupName: string
 
   /**
-   * IP地址模版实例ID，例如：ipm-mdunqeb6。
+   * IP地址模板实例ID，例如：ipm-mdunqeb6。
    */
   AddressTemplateIds: Array<string>
 }
@@ -10175,7 +10175,7 @@ export interface CreateAddressTemplateGroupResponse {
   /**
    * IP地址模板集合对象。
    */
-  AddressTemplateGroup?: AddressTemplateGroup
+  AddressTemplateGroup: AddressTemplateGroup
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12906,7 +12906,7 @@ export interface DescribeAddressTemplatesResponse {
   TotalCount: number
 
   /**
-   * IP地址模版。
+   * IP地址模板。
    */
   AddressTemplateSet: Array<AddressTemplate>
 

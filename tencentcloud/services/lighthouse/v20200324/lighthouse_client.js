@@ -142,7 +142,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDisksRenewFlag", req, cb);
     }
     /**
-     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模版。
+     * 本接口（DescribeFirewallRulesTemplate）用于查询防火墙规则模板。
      */
     async DescribeFirewallRulesTemplate(req, cb) {
         return this.request("DescribeFirewallRulesTemplate", req, cb);

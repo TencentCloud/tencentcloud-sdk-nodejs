@@ -24,6 +24,7 @@ import {
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   ParamDesc,
+  DestroyDCDBInstanceResponse,
   DescribeDBParametersRequest,
   DescribeAccountsRequest,
   SpecConfig,
@@ -43,7 +44,7 @@ import {
   DescribeFlowResponse,
   CloneAccountResponse,
   ModifyAccountDescriptionResponse,
-  CloseDBExtranetAccessResponse,
+  DestroyDCDBInstanceRequest,
   OpenDBExtranetAccessResponse,
   CreateDCDBInstanceResponse,
   BriefNodeInfo,
@@ -53,7 +54,7 @@ import {
   DescribeDBLogFilesRequest,
   DescribeOrdersResponse,
   CreateDedicatedClusterDCDBInstanceRequest,
-  DcnDetailItem,
+  CreateHourDCDBInstanceRequest,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
@@ -73,7 +74,6 @@ import {
   ExpandShardConfig,
   RenewDCDBInstanceRequest,
   ShardZoneChooseInfo,
-  DescribeDBLogFilesResponse,
   DatabaseTable,
   Deal,
   GrantAccountPrivilegesRequest,
@@ -105,6 +105,7 @@ import {
   DescribeDCDBRenewalPriceResponse,
   DescribeDCDBShardsResponse,
   ZonesInfo,
+  CreateHourDCDBInstanceResponse,
   Database,
   GrantAccountPrivilegesResponse,
   CancelDcnJobRequest,
@@ -112,15 +113,15 @@ import {
   OpenDBExtranetAccessRequest,
   DescribeDCDBSaleInfoResponse,
   ModifyDBInstancesProjectRequest,
-  ModifyDBInstanceSecurityGroupsResponse,
+  DcnDetailItem,
   DescribeDBSyncModeRequest,
-  DestroyDCDBInstanceRequest,
+  CloseDBExtranetAccessResponse,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
   SlowLogData,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
-  DestroyDCDBInstanceResponse,
+  DescribeDBLogFilesResponse,
   CloseDBExtranetAccessRequest,
   InitDCDBInstancesRequest,
   ResourceTag,
@@ -152,6 +153,7 @@ import {
   DescribeDBSlowLogsResponse,
   DescribeDCDBInstancesRequest,
   Project,
+  ModifyDBInstanceSecurityGroupsResponse,
   DestroyHourDCDBInstanceRequest,
   FlushBinlogRequest,
   ModifyDBSyncModeResponse,
@@ -678,6 +680,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloneAccountResponse) => void
   ): Promise<CloneAccountResponse> {
     return this.request("CloneAccount", req, cb)
+  }
+
+  /**
+   * 创建DCDB后付费实例
+   */
+  async CreateHourDCDBInstance(
+    req: CreateHourDCDBInstanceRequest,
+    cb?: (error: string, rep: CreateHourDCDBInstanceResponse) => void
+  ): Promise<CreateHourDCDBInstanceResponse> {
+    return this.request("CreateHourDCDBInstance", req, cb)
   }
 
   /**

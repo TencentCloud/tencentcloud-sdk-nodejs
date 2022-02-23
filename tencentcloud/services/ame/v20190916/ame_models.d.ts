@@ -168,6 +168,35 @@ Values:Y , N(default)
     Ssl?: string;
 }
 /**
+ * 即使广播曲库歌曲信息详情列表
+ */
+export interface KTVMusicDetailInfo {
+    /**
+      * 即使广播曲库歌曲基础信息
+      */
+    KTVMusicBaseInfo: KTVMusicBaseInfo;
+    /**
+      * 播放凭证
+      */
+    PlayToken: string;
+    /**
+      * 歌词下载地址
+      */
+    LyricsUrl: string;
+    /**
+      * 歌曲规格信息列表
+      */
+    DefinitionInfoSet: Array<KTVMusicDefinitionInfo>;
+    /**
+      * 音高数据文件下载地址
+      */
+    MidiJsonUrl: string;
+    /**
+      * 副歌片段数据列表
+      */
+    ChorusClipSet: Array<ChorusClip>;
+}
+/**
  * DescribeMusicSaleStatus请求参数结构体
  */
 export interface DescribeMusicSaleStatusRequest {
@@ -1162,6 +1191,23 @@ export interface SyncKTVRobotCommandResponse {
     RequestId?: string;
 }
 /**
+ * BatchDescribeKTVMusicDetails返回参数结构体
+ */
+export interface BatchDescribeKTVMusicDetailsResponse {
+    /**
+      * 歌曲详情列表信息
+      */
+    KTVMusicDetailInfoSet: Array<KTVMusicDetailInfo>;
+    /**
+      * 不存在的歌曲 ID 列表。
+      */
+    NotExistMusicIdSet: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SearchKTVMusics请求参数结构体
  */
 export interface SearchKTVMusicsRequest {
@@ -1263,6 +1309,15 @@ export interface KTVSingerCategoryInfo {
       * 分类英文名
       */
     EnglishName: string;
+}
+/**
+ * BatchDescribeKTVMusicDetails请求参数结构体
+ */
+export interface BatchDescribeKTVMusicDetailsRequest {
+    /**
+      * 歌曲Id列表，注：列表最大长度为50
+      */
+    MusicIds: Array<string>;
 }
 /**
  * 发送自定义信息指令参数

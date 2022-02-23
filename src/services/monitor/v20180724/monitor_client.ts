@@ -48,8 +48,9 @@ import {
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
   PolicyTag,
+  EventCondition,
   PrometheusInstancesItem,
-  PutMonitorDataRequest,
+  DescribeConditionsTemplateListRequest,
   CreateAlertRuleResponse,
   CreatePolicyGroupResponse,
   ModifyAlarmPolicyTasksResponse,
@@ -69,6 +70,7 @@ import {
   CommonNamespace,
   DescribePolicyConditionListRequest,
   DeletePolicyGroupResponse,
+  DescribeAccidentEventListResponse,
   DescribeMonitorTypesRequest,
   DescribeAlarmNoticesResponse,
   ModifyAlarmPolicyTasksRequest,
@@ -97,6 +99,7 @@ import {
   InstanceGroups,
   Dimension,
   PrometheusInstanceGrantInfo,
+  TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   Point,
   UpdateAlertRuleStateRequest,
@@ -126,6 +129,8 @@ import {
   DescribeAccidentEventListAlarms,
   ModifyPolicyGroupResponse,
   DescribePolicyConditionListConfigManualCalcType,
+  Condition,
+  PutMonitorDataRequest,
   ModifyAlarmPolicyStatusRequest,
   MetricData,
   AlarmEvent,
@@ -140,15 +145,17 @@ import {
   DeleteAlarmNoticesRequest,
   DescribePolicyConditionListConfigManualPeriodNum,
   DescribeAllNamespacesRequest,
+  PolicyGroup,
   UpdateAlertRuleResponse,
   DescribeAlarmMetricsResponse,
   DescribePolicyGroupListGroupInstanceGroup,
   DescribeAlarmPoliciesRequest,
-  DescribeAccidentEventListResponse,
+  DescribeConditionsTemplateListResponse,
   DescribePolicyConditionListConfigManualStatType,
   ModifyAlarmPolicyInfoResponse,
   AlarmNotice,
   MetricConfig,
+  PolicyGroupReceiverInfo,
   DescribeAlarmEventsRequest,
   MidQueryCondition,
   ModifyAlarmNoticeResponse,
@@ -262,6 +269,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SendCustomAlarmMsgResponse) => void
   ): Promise<SendCustomAlarmMsgResponse> {
     return this.request("SendCustomAlarmMsg", req, cb)
+  }
+
+  /**
+   * 获取条件模板列表
+   */
+  async DescribeConditionsTemplateList(
+    req: DescribeConditionsTemplateListRequest,
+    cb?: (error: string, rep: DescribeConditionsTemplateListResponse) => void
+  ): Promise<DescribeConditionsTemplateListResponse> {
+    return this.request("DescribeConditionsTemplateList", req, cb)
   }
 
   /**

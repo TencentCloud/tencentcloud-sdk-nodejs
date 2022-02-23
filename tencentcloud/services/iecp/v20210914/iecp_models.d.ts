@@ -2519,6 +2519,14 @@ export interface MarketComponentInfo {
       * 组件可视化信息
       */
     WorkloadVisualConfig?: string;
+    /**
+      * 无
+      */
+    DetailUrl?: string;
+    /**
+      * 无
+      */
+    Installed?: boolean;
 }
 /**
  * DescribeConfigMap请求参数结构体
@@ -2897,13 +2905,13 @@ export interface CreateEdgeUnitApplicationYamlRequest {
       */
     EdgeUnitId: number;
     /**
-      * 基本信息
-      */
-    BasicInfo: ApplicationBasicInfo;
-    /**
-      * Yaml配置
+      * base64后的Yaml配置
       */
     Yaml: string;
+    /**
+      * 基本信息
+      */
+    BasicInfo?: ApplicationBasicInfo;
 }
 /**
  * DescribeSecret请求参数结构体

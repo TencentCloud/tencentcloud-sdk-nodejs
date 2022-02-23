@@ -824,6 +824,38 @@ export interface PolicyTag {
 }
 
 /**
+ * 事件告警条件
+ */
+export interface EventCondition {
+  /**
+      * 告警通知频率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlarmNotifyPeriod: string
+
+  /**
+      * 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlarmNotifyType: string
+
+  /**
+   * 事件ID
+   */
+  EventID: string
+
+  /**
+   * 事件展示名称（对外）
+   */
+  EventDisplayName: string
+
+  /**
+   * 规则ID
+   */
+  RuleID: string
+}
+
+/**
  * Prometheus 服务响应体
  */
 export interface PrometheusInstancesItem {
@@ -1023,28 +1055,43 @@ export interface PrometheusInstancesItem {
 }
 
 /**
- * PutMonitorData请求参数结构体
+ * DescribeConditionsTemplateList请求参数结构体
  */
-export interface PutMonitorDataRequest {
+export interface DescribeConditionsTemplateListRequest {
   /**
-   * 一组指标和数据
+   * 固定值，为"monitor"
    */
-  Metrics: Array<MetricDatum>
+  Module: string
 
   /**
-   * 上报时自行指定的 IP
+   * 视图名，由 [DescribeAllNamespaces](https://cloud.tencent.com/document/product/248/48683) 获得。对于云产品监控，取接口出参的 QceNamespacesNew.N.Id，例如 cvm_device
    */
-  AnnounceIp?: string
+  ViewName?: string
 
   /**
-   * 上报时自行指定的时间戳
+   * 根据触发条件模板名称过滤查询
    */
-  AnnounceTimestamp?: number
+  GroupName?: string
 
   /**
-   * 上报时自行指定的 IP 或 产品实例ID
+   * 根据触发条件模板ID过滤查询
    */
-  AnnounceInstance?: string
+  GroupID?: string
+
+  /**
+   * 分页参数，每页返回的数量，取值1~100，默认20
+   */
+  Limit?: number
+
+  /**
+   * 分页参数，页偏移量，从0开始计数，默认0
+   */
+  Offset?: number
+
+  /**
+   * 指定按更新时间的排序方式，asc=升序, desc=降序
+   */
+  UpdateTimeOrder?: string
 }
 
 /**
@@ -1445,6 +1492,28 @@ export interface DescribePolicyConditionListRequest {
  * DeletePolicyGroup返回参数结构体
  */
 export interface DeletePolicyGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAccidentEventList返回参数结构体
+ */
+export interface DescribeAccidentEventListResponse {
+  /**
+      * 平台事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Alarms?: Array<DescribeAccidentEventListAlarms>
+
+  /**
+      * 平台事件的总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2312,6 +2381,69 @@ export interface PrometheusInstanceGrantInfo {
    * 是否显示API等信息(1=有, 2=无)
    */
   HasApiOperation: number
+}
+
+/**
+ * 模板列表
+ */
+export interface TemplateGroup {
+  /**
+      * 指标告警规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Conditions: Array<Condition>
+
+  /**
+      * 事件告警规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventConditions: Array<EventCondition>
+
+  /**
+      * 关联告警策略组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyGroups: Array<PolicyGroup>
+
+  /**
+   * 模板策略组ID
+   */
+  GroupID: number
+
+  /**
+   * 模板策略组名称
+   */
+  GroupName: string
+
+  /**
+   * 创建时间
+   */
+  InsertTime: number
+
+  /**
+   * 最后修改人UIN
+   */
+  LastEditUin: number
+
+  /**
+   * 备注
+   */
+  Remark: string
+
+  /**
+   * 更新时间
+   */
+  UpdateTime: number
+
+  /**
+   * 视图
+   */
+  ViewName: string
+
+  /**
+   * 是否为与关系
+   */
+  IsUnionRule: number
 }
 
 /**
@@ -3250,6 +3382,89 @@ export interface DescribePolicyConditionListConfigManualCalcType {
 }
 
 /**
+ * 告警条件
+ */
+export interface Condition {
+  /**
+   * 告警通知频率
+   */
+  AlarmNotifyPeriod: number
+
+  /**
+   * 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）
+   */
+  AlarmNotifyType: number
+
+  /**
+      * 检测方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CalcType: string
+
+  /**
+      * 检测值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CalcValue: string
+
+  /**
+      * 持续时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContinueTime: string
+
+  /**
+   * 指标ID
+   */
+  MetricID: number
+
+  /**
+   * 指标展示名称（对外）
+   */
+  MetricDisplayName: string
+
+  /**
+   * 周期
+   */
+  Period: number
+
+  /**
+   * 规则ID
+   */
+  RuleID: number
+
+  /**
+   * 指标单位
+   */
+  Unit: string
+}
+
+/**
+ * PutMonitorData请求参数结构体
+ */
+export interface PutMonitorDataRequest {
+  /**
+   * 一组指标和数据
+   */
+  Metrics: Array<MetricDatum>
+
+  /**
+   * 上报时自行指定的 IP
+   */
+  AnnounceIp?: string
+
+  /**
+   * 上报时自行指定的时间戳
+   */
+  AnnounceTimestamp?: number
+
+  /**
+   * 上报时自行指定的 IP 或 产品实例ID
+   */
+  AnnounceInstance?: string
+}
+
+/**
  * ModifyAlarmPolicyStatus请求参数结构体
  */
 export interface ModifyAlarmPolicyStatusRequest {
@@ -3736,6 +3951,92 @@ export interface DescribeAllNamespacesRequest {
 }
 
 /**
+ * 策略组信息
+ */
+export interface PolicyGroup {
+  /**
+   * 是否可设为默认告警策略
+   */
+  CanSetDefault: boolean
+
+  /**
+   * 告警策略组ID
+   */
+  GroupID: number
+
+  /**
+   * 告警策略组名称
+   */
+  GroupName: string
+
+  /**
+   * 创建时间
+   */
+  InsertTime: number
+
+  /**
+   * 是否为默认告警策略
+   */
+  IsDefault: number
+
+  /**
+   * 告警策略启用状态
+   */
+  Enable: boolean
+
+  /**
+   * 最后修改人UIN
+   */
+  LastEditUin: number
+
+  /**
+   * 未屏蔽的实例数
+   */
+  NoShieldedInstanceCount: number
+
+  /**
+   * 父策略组ID
+   */
+  ParentGroupID: number
+
+  /**
+   * 所属项目ID
+   */
+  ProjectID: number
+
+  /**
+      * 告警接收对象信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiverInfos: Array<PolicyGroupReceiverInfo>
+
+  /**
+   * 备注信息
+   */
+  Remark: string
+
+  /**
+   * 修改时间
+   */
+  UpdateTime: number
+
+  /**
+   * 总绑定实例数
+   */
+  TotalInstanceCount: number
+
+  /**
+   * 视图
+   */
+  ViewName: string
+
+  /**
+   * 是否为与关系规则
+   */
+  IsUnionRule: number
+}
+
+/**
  * UpdateAlertRule返回参数结构体
  */
 export interface UpdateAlertRuleResponse {
@@ -3915,20 +4216,19 @@ export interface DescribeAlarmPoliciesRequest {
 }
 
 /**
- * DescribeAccidentEventList返回参数结构体
+ * DescribeConditionsTemplateList返回参数结构体
  */
-export interface DescribeAccidentEventListResponse {
+export interface DescribeConditionsTemplateListResponse {
   /**
-      * 平台事件列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Alarms?: Array<DescribeAccidentEventListAlarms>
+   * 模板总数
+   */
+  Total: number
 
   /**
-      * 平台事件的总数
+      * 模板列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total?: number
+  TemplateGroupList: Array<TemplateGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4082,6 +4382,82 @@ export interface MetricConfig {
    * 允许配置的持续周期个数
    */
   ContinuePeriod: Array<number>
+}
+
+/**
+ * 2018版策略模板列表接收人信息
+ */
+export interface PolicyGroupReceiverInfo {
+  /**
+   * 有效时段结束时间
+   */
+  EndTime: number
+
+  /**
+   * 是否需要发送通知
+   */
+  NeedSendNotice: number
+
+  /**
+      * 告警接收渠道
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotifyWay: Array<string>
+
+  /**
+   * 电话告警对个人间隔（秒）
+   */
+  PersonInterval: number
+
+  /**
+      * 消息接收组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiverGroupList: Array<number>
+
+  /**
+   * 接受者类型
+   */
+  ReceiverType: string
+
+  /**
+      * 接收人列表。通过平台接口查询到的接收人id列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiverUserList: Array<number>
+
+  /**
+      * 告警恢复通知方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecoverNotify: Array<string>
+
+  /**
+   * 电话告警每轮间隔（秒）
+   */
+  RoundInterval: number
+
+  /**
+   * 电话告警轮数
+   */
+  RoundNumber: number
+
+  /**
+      * 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SendFor: Array<string>
+
+  /**
+   * 有效时段开始时间
+   */
+  StartTime: number
+
+  /**
+      * 电话告警接收者uid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UIDList: Array<number>
 }
 
 /**

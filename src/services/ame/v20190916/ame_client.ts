@@ -29,6 +29,7 @@ import {
   ModifyMusicOnShelvesRequest,
   PlayCommandInput,
   DescribeMusicRequest,
+  KTVMusicDetailInfo,
   DescribeMusicSaleStatusRequest,
   TakeMusicOffShelvesRequest,
   DescribeCloudMusicResponse,
@@ -82,12 +83,14 @@ import {
   DescribeKTVSingersRequest,
   SetPlaylistCommandInput,
   SyncKTVRobotCommandResponse,
+  BatchDescribeKTVMusicDetailsResponse,
   SearchKTVMusicsRequest,
   KTVPlaylistBaseInfo,
   DescribeKTVSingersResponse,
   DescribeItemByIdResponse,
   MusicStatus,
   KTVSingerCategoryInfo,
+  BatchDescribeKTVMusicDetailsRequest,
   SendMessageCommandInput,
   KTVMusicDefinitionInfo,
   Album,
@@ -160,6 +163,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuthInfoResponse) => void
   ): Promise<DescribeAuthInfoResponse> {
     return this.request("DescribeAuthInfo", req, cb)
+  }
+
+  /**
+   * 根据 Id 列表查询歌曲的详细信息，包含基础信息及播放信息。
+   */
+  async BatchDescribeKTVMusicDetails(
+    req: BatchDescribeKTVMusicDetailsRequest,
+    cb?: (error: string, rep: BatchDescribeKTVMusicDetailsResponse) => void
+  ): Promise<BatchDescribeKTVMusicDetailsResponse> {
+    return this.request("BatchDescribeKTVMusicDetails", req, cb)
   }
 
   /**
