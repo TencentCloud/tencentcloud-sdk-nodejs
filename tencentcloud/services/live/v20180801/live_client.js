@@ -105,10 +105,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveStreamEventList", req, cb);
     }
     /**
-     * 查询直播拉流配置。
+     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
+注意：当前最多支持16路混流。
+最佳实践：https://cloud.tencent.com/document/product/267/45566
      */
-    async DescribePullStreamConfigs(req, cb) {
-        return this.request("DescribePullStreamConfigs", req, cb);
+    async CreateCommonMixStream(req, cb) {
+        return this.request("CreateCommonMixStream", req, cb);
     }
     /**
      * 查询某段时间内5分钟粒度的各播放http状态码的个数。
@@ -165,6 +167,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyPullStreamStatus(req, cb) {
         return this.request("ModifyPullStreamStatus", req, cb);
+    }
+    /**
+     * 创建一个在指定时间启动、结束的截图任务，并使用指定截图模板ID对应的配置进行截图。
+- 注意事项
+1. 断流会结束当前截图。在结束时间到达之前任务仍然有效，期间只要正常推流都会正常截图，与是否多次推、断流无关。
+2. 使用上避免创建时间段相互重叠的截图任务。若同一条流当前存在多个时段重叠的任务，为避免重复系统将启动最多3个截图任务。
+3. 创建的截图任务记录在平台侧只保留3个月。
+4. 当前截图任务管理API（CreateScreenshotTask/StopScreenshotTask/DeleteScreenshotTask）与旧API（CreateLiveInstantSnapshot/StopLiveInstantSnapshot）不兼容，两套接口不能混用。
+5. 避免 创建截图任务 与 推流 操作同时进行，可能导致因截图任务未生效而引起任务延迟启动问题，两者操作间隔建议大于3秒。
+     */
+    async CreateScreenshotTask(req, cb) {
+        return this.request("CreateScreenshotTask", req, cb);
     }
     /**
      * 获取录制模板列表。
@@ -270,12 +284,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveRecordTemplate", req, cb);
     }
     /**
-     * 该接口用来创建通用混流。用法与旧接口 mix_streamv2.start_mix_stream_advanced 基本一致。
-注意：当前最多支持16路混流。
-最佳实践：https://cloud.tencent.com/document/product/267/45566
+     * 提前结束截图，中止运行中的截图任务。任务被成功终止后，本次任务将不再启动。
      */
-    async CreateCommonMixStream(req, cb) {
-        return this.request("CreateCommonMixStream", req, cb);
+    async StopScreenshotTask(req, cb) {
+        return this.request("StopScreenshotTask", req, cb);
+    }
+    /**
+     * 查询直播拉流配置。
+     */
+    async DescribePullStreamConfigs(req, cb) {
+        return this.request("DescribePullStreamConfigs", req, cb);
     }
     /**
      * 删除水印。
@@ -602,11 +620,26 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveStreamPublishedList", req, cb);
     }
     /**
+     * 查询指定时间段范围内启动和结束的截图任务列表。
+- 使用前提
+1. 仅用于查询由 CreateScreenshotTask接口创建的截图任务。
+2. 不能查询被 DeleteScreenshotTask接口删除以及已过期（平台侧保留3个月）的截图任务。
+     */
+    async DescribeScreenshotTask(req, cb) {
+        return this.request("DescribeScreenshotTask", req, cb);
+    }
+    /**
      * 直播推流带宽和流量数据查询。
 推流计费会先取全球推流用量和全球播放用量进行比较，满足计费条件后再按各地区用量出账。详情参见[计费文档](https://cloud.tencent.com/document/product/267/34175)。
      */
     async DescribePushBandwidthAndFluxList(req, cb) {
         return this.request("DescribePushBandwidthAndFluxList", req, cb);
+    }
+    /**
+     * 删除截图任务配置。删除操作不影响正在运行当中的任务，仅对删除之后新的推流有效。
+     */
+    async DeleteScreenshotTask(req, cb) {
+        return this.request("DeleteScreenshotTask", req, cb);
     }
     /**
      * 禁止某条流的推送，可以预设某个时刻将流恢复。

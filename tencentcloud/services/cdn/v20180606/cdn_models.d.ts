@@ -7874,6 +7874,8 @@ export interface DescribePayTypeResponse {
 flux：流量计费
 bandwidth：带宽计费
 request：请求数计费
+flux_sep：动静分离流量计费
+bandwidth_sep：动静分离带宽计费
 日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。
       */
     PayType: string;
@@ -7881,6 +7883,7 @@ request：请求数计费
       * 计费周期：
 day：日结计费
 month：月结计费
+hour：小时结计费
       */
     BillingCycle: string;
     /**
@@ -7902,6 +7905,8 @@ multiple：分地区计费
 flux：流量计费
 bandwidth：带宽计费
 request：请求数计费
+flux_sep：动静分离流量计费
+bandwidth_sep：动静分离带宽计费
       */
     CurrentPayType: string;
     /**

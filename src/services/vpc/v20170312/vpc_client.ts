@@ -36,6 +36,7 @@ import {
   DescribeVpcLimitsRequest,
   ReleaseIp6AddressesBandwidthResponse,
   DescribeVpcIpv6AddressesRequest,
+  SslVpnClient,
   SourceIpTranslationNatRule,
   DisableCcnRoutesRequest,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
@@ -44,6 +45,7 @@ import {
   DescribeVpnGatewaysResponse,
   ServiceTemplateGroup,
   CreateDhcpIpResponse,
+  DeleteVpnGatewaySslServerResponse,
   DescribeIpGeolocationInfosRequest,
   AddTemplateMemberResponse,
   CreateDefaultSecurityGroupRequest,
@@ -59,6 +61,7 @@ import {
   IpField,
   AddBandwidthPackageResourcesRequest,
   AssignIpv6SubnetCidrBlockRequest,
+  DeleteVpnGatewaySslClientResponse,
   CreateVpcResponse,
   AssistantCidr,
   ModifyNetworkAclEntriesRequest,
@@ -74,6 +77,7 @@ import {
   CloneSecurityGroupRequest,
   AssociateNatGatewayAddressRequest,
   CreateDirectConnectGatewayRequest,
+  CreateVpnGatewaySslServerRequest,
   CreateVpcEndPointRequest,
   ModifyBandwidthPackageAttributeRequest,
   TransformAddressResponse,
@@ -94,6 +98,7 @@ import {
   ModifyCustomerGatewayAttributeRequest,
   DescribeRouteTablesResponse,
   DeleteVpcEndPointServiceWhiteListRequest,
+  DetachNetworkInterfaceResponse,
   DeleteVpcEndPointServiceRequest,
   DeleteCcnResponse,
   ServiceTemplate,
@@ -103,7 +108,8 @@ import {
   ModifyFlowLogAttributeResponse,
   DescribeBandwidthPackagesResponse,
   DescribeDirectConnectGatewaysRequest,
-  DisassociateVpcEndPointSecurityGroupsRequest,
+  DisableVpnGatewaySslClientCertRequest,
+  DescribeVpcPrivateIpAddressesResponse,
   ModifyIp6TranslatorResponse,
   CreateVpcEndPointServiceWhiteListResponse,
   DescribeIpGeolocationDatabaseUrlResponse,
@@ -117,6 +123,7 @@ import {
   DeleteFlowLogRequest,
   NetDetectState,
   HaVipDisassociateAddressIpResponse,
+  DisassociateVpcEndPointSecurityGroupsRequest,
   DescribeTaskResultRequest,
   ModifyAddressInternetChargeTypeResponse,
   UnassignIpv6SubnetCidrBlockRequest,
@@ -150,6 +157,7 @@ import {
   SetCcnRegionBandwidthLimitsRequest,
   ModifyAddressInternetChargeTypeRequest,
   ModifyIp6AddressesBandwidthRequest,
+  DisableVpnGatewaySslClientCertResponse,
   CreateLocalGatewayRequest,
   DescribeDirectConnectGatewaysResponse,
   AddBandwidthPackageResourcesResponse,
@@ -167,11 +175,13 @@ import {
   ReferredSecurityGroup,
   ModifyAddressTemplateAttributeRequest,
   CreateNatGatewayResponse,
+  DescribeVpnGatewaySslClientsRequest,
   DescribeIp6TranslatorQuotaRequest,
   ModifySecurityGroupAttributeRequest,
+  DescribeVpnGatewaySslServersRequest,
   ModifyNetDetectRequest,
   DescribeNetDetectStatesResponse,
-  DescribeVpcResourceDashboardResponse,
+  DeleteVpnGatewaySslServerRequest,
   AllocateIp6AddressesBandwidthResponse,
   DescribeNetDetectStatesRequest,
   DescribeNatGatewaysResponse,
@@ -228,10 +238,11 @@ import {
   DisassociateAddressRequest,
   NetworkAclEntrySet,
   DeleteVpnConnectionResponse,
+  DescribeVpnGatewaySslClientsResponse,
   DescribeBandwidthPackageResourcesRequest,
   EnableCcnRoutesRequest,
   Tag,
-  DescribeCcnAttachedInstancesResponse,
+  CreateFlowLogResponse,
   DefaultVpcSubnet,
   DescribeIp6TranslatorsRequest,
   CreateSubnetsResponse,
@@ -241,7 +252,7 @@ import {
   CustomerGateway,
   ModifyDirectConnectGatewayAttributeRequest,
   ModifyBandwidthPackageAttributeResponse,
-  DetachNetworkInterfaceResponse,
+  CreateVpnGatewaySslServerResponse,
   ResetRoutesResponse,
   DeleteNetworkAclRequest,
   NatGatewayDestinationIpPortTranslationNatRule,
@@ -259,7 +270,7 @@ import {
   ReplaceSecurityGroupPolicyRequest,
   ModifyVpcEndPointServiceAttributeResponse,
   ResourceDashboard,
-  DescribeVpcPrivateIpAddressesResponse,
+  DescribeCcnAttachedInstancesResponse,
   HaVipAssociateAddressIpResponse,
   DeleteCustomerGatewayResponse,
   CreateVpnGatewayRoutesResponse,
@@ -267,6 +278,7 @@ import {
   CreateAddressTemplateResponse,
   CreateNatGatewayDestinationIpPortTranslationNatRuleResponse,
   DeleteAddressTemplateGroupRequest,
+  CreateVpnGatewaySslClientResponse,
   DescribeNetworkInterfaceLimitRequest,
   CreateBandwidthPackageRequest,
   DescribeIp6AddressesResponse,
@@ -315,15 +327,17 @@ import {
   ModifyVpnGatewayAttributeResponse,
   AssociateDirectConnectGatewayNatGatewayResponse,
   EndPointService,
+  DescribeVpcResourceDashboardResponse,
   DescribeVpnGatewayCcnRoutesRequest,
   DisassociateDirectConnectGatewayNatGatewayResponse,
   CreateServiceTemplateGroupRequest,
   DescribeClassicLinkInstancesResponse,
+  EnableVpnGatewaySslClientCertRequest,
   DescribeVpnGatewayCcnRoutesResponse,
   DetachCcnInstancesRequest,
   ModifyVpcEndPointServiceWhiteListRequest,
   Filter,
-  CreateFlowLogResponse,
+  MigrateNetworkInterfaceResponse,
   DeleteDirectConnectGatewayRequest,
   CreateNatGatewaySourceIpTranslationNatRuleResponse,
   DeleteNatGatewaySourceIpTranslationNatRuleResponse,
@@ -356,7 +370,8 @@ import {
   CreateAndAttachNetworkInterfaceRequest,
   DeleteVpcEndPointResponse,
   DeleteDhcpIpResponse,
-  ModifyGatewayFlowQosRequest,
+  SslVpnSever,
+  DownloadVpnGatewaySslClientCertResponse,
   DeleteNetDetectResponse,
   AllocateAddressesRequest,
   CrossBorderCompliance,
@@ -371,6 +386,8 @@ import {
   ModifyAddressAttributeResponse,
   AttachClassicLinkVpcRequest,
   GatewayFlowMonitorDetail,
+  CreateVpnGatewaySslClientRequest,
+  DescribeVpnGatewaySslServersResponse,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse,
   DeleteVpnGatewayRequest,
   ReplaceRouteTableAssociationResponse,
@@ -428,6 +445,7 @@ import {
   DescribeAddressTemplateGroupsResponse,
   ReleaseAddressesRequest,
   CreateDirectConnectGatewayCcnRoutesRequest,
+  ModifyGatewayFlowQosRequest,
   CreateDirectConnectGatewayCcnRoutesResponse,
   CreateRouteTableRequest,
   MigrateNetworkInterfaceRequest,
@@ -439,6 +457,7 @@ import {
   DhcpIp,
   DeleteAssistantCidrRequest,
   ModifyTemplateMemberResponse,
+  DeleteVpnGatewaySslClientRequest,
   SubnetInput,
   DescribeNatGatewayDirectConnectGatewayRouteResponse,
   EnableVpcEndPointConnectResponse,
@@ -557,6 +576,7 @@ import {
   DetachNetworkInterfaceRequest,
   Ip6Rule,
   AttachClassicLinkVpcResponse,
+  DownloadVpnGatewaySslClientCertRequest,
   CreateAddressTemplateRequest,
   DescribeRouteConflictsRequest,
   NatDirectConnectGatewayRoute,
@@ -584,7 +604,6 @@ import {
   ModifyAddressTemplateGroupAttributeResponse,
   VpcLimit,
   DetachClassicLinkVpcResponse,
-  MigrateNetworkInterfaceResponse,
   UnassignPrivateIpAddressesRequest,
   DeleteVpnGatewayRoutesRequest,
   DescribeProductQuotaRequest,
@@ -632,6 +651,7 @@ import {
   DescribeSecurityGroupAssociationStatisticsRequest,
   NotifyRoutesResponse,
   Route,
+  EnableVpnGatewaySslClientCertResponse,
   ModifySubnetAttributeRequest,
   ModifyVpcEndPointServiceWhiteListResponse,
   DescribeBandwidthPackageQuotaRequest,
@@ -895,6 +915,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetRoutesResponse) => void
   ): Promise<ResetRoutesResponse> {
     return this.request("ResetRoutes", req, cb)
+  }
+
+  /**
+   * 删除SSL-VPN-SERVER 实例
+   */
+  async DeleteVpnGatewaySslServer(
+    req: DeleteVpnGatewaySslServerRequest,
+    cb?: (error: string, rep: DeleteVpnGatewaySslServerResponse) => void
+  ): Promise<DeleteVpnGatewaySslServerResponse> {
+    return this.request("DeleteVpnGatewaySslServer", req, cb)
   }
 
   /**
@@ -1285,13 +1315,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
+   * 删除SSL-VPN-CLIENT
    */
-  async DescribeDhcpIps(
-    req: DescribeDhcpIpsRequest,
-    cb?: (error: string, rep: DescribeDhcpIpsResponse) => void
-  ): Promise<DescribeDhcpIpsResponse> {
-    return this.request("DescribeDhcpIps", req, cb)
+  async DeleteVpnGatewaySslClient(
+    req: DeleteVpnGatewaySslClientRequest,
+    cb?: (error: string, rep: DeleteVpnGatewaySslClientResponse) => void
+  ): Promise<DeleteVpnGatewaySslClientResponse> {
+    return this.request("DeleteVpnGatewaySslClient", req, cb)
   }
 
   /**
@@ -1370,6 +1400,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSubnetResponse) => void
   ): Promise<CreateSubnetResponse> {
     return this.request("CreateSubnet", req, cb)
+  }
+
+  /**
+   * 创建SSL-VPN-CLIENT
+   */
+  async CreateVpnGatewaySslClient(
+    req: CreateVpnGatewaySslClientRequest,
+    cb?: (error: string, rep: CreateVpnGatewaySslClientResponse) => void
+  ): Promise<CreateVpnGatewaySslClientResponse> {
+    return this.request("CreateVpnGatewaySslClient", req, cb)
   }
 
   /**
@@ -1455,13 +1495,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
+   * 本接口（DescribeVpcs）用于查询私有网络列表。
    */
-  async DisassociateDirectConnectGatewayNatGateway(
-    req: DisassociateDirectConnectGatewayNatGatewayRequest,
-    cb?: (error: string, rep: DisassociateDirectConnectGatewayNatGatewayResponse) => void
-  ): Promise<DisassociateDirectConnectGatewayNatGatewayResponse> {
-    return this.request("DisassociateDirectConnectGatewayNatGateway", req, cb)
+  async DescribeVpcs(
+    req: DescribeVpcsRequest,
+    cb?: (error: string, rep: DescribeVpcsResponse) => void
+  ): Promise<DescribeVpcsResponse> {
+    return this.request("DescribeVpcs", req, cb)
   }
 
   /**
@@ -1609,13 +1649,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeVpcs）用于查询私有网络列表。
+   * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
    */
-  async DescribeVpcs(
-    req: DescribeVpcsRequest,
-    cb?: (error: string, rep: DescribeVpcsResponse) => void
-  ): Promise<DescribeVpcsResponse> {
-    return this.request("DescribeVpcs", req, cb)
+  async DescribeDhcpIps(
+    req: DescribeDhcpIpsRequest,
+    cb?: (error: string, rep: DescribeDhcpIpsResponse) => void
+  ): Promise<DescribeDhcpIpsResponse> {
+    return this.request("DescribeDhcpIps", req, cb)
   }
 
   /**
@@ -2122,6 +2162,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
+   */
+  async ModifyIpv6AddressesAttribute(
+    req: ModifyIpv6AddressesAttributeRequest,
+    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
+  ): Promise<ModifyIpv6AddressesAttributeResponse> {
+    return this.request("ModifyIpv6AddressesAttribute", req, cb)
+  }
+
+  /**
    * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合
    */
   async DeleteAddressTemplateGroup(
@@ -2129,6 +2179,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAddressTemplateGroupResponse) => void
   ): Promise<DeleteAddressTemplateGroupResponse> {
     return this.request("DeleteAddressTemplateGroup", req, cb)
+  }
+
+  /**
+   * 启用SSL-VPN-CLIENT 证书
+   */
+  async EnableVpnGatewaySslClientCert(
+    req: EnableVpnGatewaySslClientCertRequest,
+    cb?: (error: string, rep: EnableVpnGatewaySslClientCertResponse) => void
+  ): Promise<EnableVpnGatewaySslClientCertResponse> {
+    return this.request("EnableVpnGatewaySslClientCert", req, cb)
   }
 
   /**
@@ -2207,13 +2267,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ReplaceDirectConnectGatewayCcnRoutes）根据路由ID（RouteId）修改指定的路由（Route），支持批量修改。
+   * 查询SSL-VPN-CLIENT 列表
    */
-  async ReplaceDirectConnectGatewayCcnRoutes(
-    req: ReplaceDirectConnectGatewayCcnRoutesRequest,
-    cb?: (error: string, rep: ReplaceDirectConnectGatewayCcnRoutesResponse) => void
-  ): Promise<ReplaceDirectConnectGatewayCcnRoutesResponse> {
-    return this.request("ReplaceDirectConnectGatewayCcnRoutes", req, cb)
+  async DescribeVpnGatewaySslClients(
+    req: DescribeVpnGatewaySslClientsRequest,
+    cb?: (error: string, rep: DescribeVpnGatewaySslClientsResponse) => void
+  ): Promise<DescribeVpnGatewaySslClientsResponse> {
+    return this.request("DescribeVpnGatewaySslClients", req, cb)
   }
 
   /**
@@ -2527,6 +2587,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 下载SSL-VPN-CLIENT 客户端证书
+   */
+  async DownloadVpnGatewaySslClientCert(
+    req: DownloadVpnGatewaySslClientCertRequest,
+    cb?: (error: string, rep: DownloadVpnGatewaySslClientCertResponse) => void
+  ): Promise<DownloadVpnGatewaySslClientCertResponse> {
+    return this.request("DownloadVpnGatewaySslClientCert", req, cb)
+  }
+
+  /**
+   * 查询SSL-VPN SERVER 列表信息
+   */
+  async DescribeVpnGatewaySslServers(
+    req: DescribeVpnGatewaySslServersRequest,
+    cb?: (error: string, rep: DescribeVpnGatewaySslServersResponse) => void
+  ): Promise<DescribeVpnGatewaySslServersResponse> {
+    return this.request("DescribeVpnGatewaySslServers", req, cb)
+  }
+
+  /**
    * 删除路由表
    */
   async DeleteRouteTable(
@@ -2581,13 +2661,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
+   * 禁用SSL-VPN-CLIENT 证书
    */
-  async ModifyIpv6AddressesAttribute(
-    req: ModifyIpv6AddressesAttributeRequest,
-    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
-  ): Promise<ModifyIpv6AddressesAttributeResponse> {
-    return this.request("ModifyIpv6AddressesAttribute", req, cb)
+  async DisableVpnGatewaySslClientCert(
+    req: DisableVpnGatewaySslClientCertRequest,
+    cb?: (error: string, rep: DisableVpnGatewaySslClientCertResponse) => void
+  ): Promise<DisableVpnGatewaySslClientCertResponse> {
+    return this.request("DisableVpnGatewaySslClientCert", req, cb)
   }
 
   /**
@@ -2870,6 +2950,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 创建 Server端
+   */
+  async CreateVpnGatewaySslServer(
+    req: CreateVpnGatewaySslServerRequest,
+    cb?: (error: string, rep: CreateVpnGatewaySslServerResponse) => void
+  ): Promise<CreateVpnGatewaySslServerResponse> {
+    return this.request("CreateVpnGatewaySslServer", req, cb)
+  }
+
+  /**
    * 本接口（ModifyVpnGatewayAttribute）用于修改VPN网关属性。
    */
   async ModifyVpnGatewayAttribute(
@@ -3001,6 +3091,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeAssistantCidrResponse) => void
   ): Promise<DescribeAssistantCidrResponse> {
     return this.request("DescribeAssistantCidr", req, cb)
+  }
+
+  /**
+   * 本接口（ReplaceDirectConnectGatewayCcnRoutes）根据路由ID（RouteId）修改指定的路由（Route），支持批量修改。
+   */
+  async ReplaceDirectConnectGatewayCcnRoutes(
+    req: ReplaceDirectConnectGatewayCcnRoutesRequest,
+    cb?: (error: string, rep: ReplaceDirectConnectGatewayCcnRoutesResponse) => void
+  ): Promise<ReplaceDirectConnectGatewayCcnRoutesResponse> {
+    return this.request("ReplaceDirectConnectGatewayCcnRoutes", req, cb)
   }
 
   /**
@@ -3315,6 +3415,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: UnassignIpv6SubnetCidrBlockResponse) => void
   ): Promise<UnassignIpv6SubnetCidrBlockResponse> {
     return this.request("UnassignIpv6SubnetCidrBlock", req, cb)
+  }
+
+  /**
+   * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
+   */
+  async DisassociateDirectConnectGatewayNatGateway(
+    req: DisassociateDirectConnectGatewayNatGatewayRequest,
+    cb?: (error: string, rep: DisassociateDirectConnectGatewayNatGatewayResponse) => void
+  ): Promise<DisassociateDirectConnectGatewayNatGatewayResponse> {
+    return this.request("DisassociateDirectConnectGatewayNatGateway", req, cb)
   }
 
   /**

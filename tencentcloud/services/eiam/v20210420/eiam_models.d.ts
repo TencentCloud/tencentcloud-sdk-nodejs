@@ -365,7 +365,7 @@ export interface UpdateOrgNodeRequest {
       */
     Description?: string;
     /**
-      * 用户自定义可选填的机构节点对外ID，如果非空则校验此ID的唯一性。
+      * 机构代码。如果非空则校验此ID的唯一性。
       */
     CustomizedOrgNodeId?: string;
 }
@@ -386,7 +386,7 @@ export interface CreateOrgNodeRequest {
       */
     Description?: string;
     /**
-      * 用户自定义可选填的机构节点对外ID，如果非空则校验此ID的唯一性。
+      * 机构代码。如果为空，则默认生成机构代码。如果为非空，则校验机构代码的唯一性。
       */
     CustomizedOrgNodeId?: string;
 }
@@ -943,7 +943,7 @@ export interface DescribeUserInfoResponse {
       */
     Status: string;
     /**
-      * 昵称
+      * 昵称。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DisplayName: string;
@@ -978,7 +978,7 @@ export interface DescribeUserInfoResponse {
       */
     OrgNodeId: string;
     /**
-      * 数据来源
+      * 数据来源。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DataSource: string;

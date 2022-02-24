@@ -175,6 +175,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetRoutes", req, cb);
     }
     /**
+     * 删除SSL-VPN-SERVER 实例
+     */
+    async DeleteVpnGatewaySslServer(req, cb) {
+        return this.request("DeleteVpnGatewaySslServer", req, cb);
+    }
+    /**
      * 本接口（DescribeNetworkInterfaceLimit）根据CVM实例ID或弹性网卡ID查询弹性网卡配额，返回该CVM实例或弹性网卡能绑定的弹性网卡配额，以及弹性网卡可以分配的IP配额
      */
     async DescribeNetworkInterfaceLimit(req, cb) {
@@ -418,10 +424,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckNetDetectState", req, cb);
     }
     /**
-     * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
+     * 删除SSL-VPN-CLIENT
      */
-    async DescribeDhcpIps(req, cb) {
-        return this.request("DescribeDhcpIps", req, cb);
+    async DeleteVpnGatewaySslClient(req, cb) {
+        return this.request("DeleteVpnGatewaySslClient", req, cb);
     }
     /**
      * 本接口（InquiryPriceResetVpnGatewayInternetMaxBandwidth）调整VPN网关带宽上限询价。
@@ -474,6 +480,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSubnet", req, cb);
     }
     /**
+     * 创建SSL-VPN-CLIENT
+     */
+    async CreateVpnGatewaySslClient(req, cb) {
+        return this.request("CreateVpnGatewaySslClient", req, cb);
+    }
+    /**
      * 该接口用于给IPv6地址初次分配公网带宽
      */
     async AllocateIp6AddressesBandwidth(req, cb) {
@@ -524,10 +536,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTemplateMember", req, cb);
     }
     /**
-     * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
+     * 本接口（DescribeVpcs）用于查询私有网络列表。
      */
-    async DisassociateDirectConnectGatewayNatGateway(req, cb) {
-        return this.request("DisassociateDirectConnectGatewayNatGateway", req, cb);
+    async DescribeVpcs(req, cb) {
+        return this.request("DescribeVpcs", req, cb);
     }
     /**
      * 1. 该接口用于查询账户下的IPV6转换实例及其绑定的转换规则信息
@@ -622,10 +634,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewVpnGateway", req, cb);
     }
     /**
-     * 本接口（DescribeVpcs）用于查询私有网络列表。
+     * 本接口（DescribeDhcpIps）用于查询DhcpIp列表
      */
-    async DescribeVpcs(req, cb) {
-        return this.request("DescribeVpcs", req, cb);
+    async DescribeDhcpIps(req, cb) {
+        return this.request("DescribeDhcpIps", req, cb);
     }
     /**
      * 本接口（AttachCcnInstances）用于将网络实例加载到云联网实例中，网络实例包括VPC和专线网关。<br />
@@ -955,10 +967,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnassignPrivateIpAddresses", req, cb);
     }
     /**
+     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
+     */
+    async ModifyIpv6AddressesAttribute(req, cb) {
+        return this.request("ModifyIpv6AddressesAttribute", req, cb);
+    }
+    /**
      * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合
      */
     async DeleteAddressTemplateGroup(req, cb) {
         return this.request("DeleteAddressTemplateGroup", req, cb);
+    }
+    /**
+     * 启用SSL-VPN-CLIENT 证书
+     */
+    async EnableVpnGatewaySslClientCert(req, cb) {
+        return this.request("EnableVpnGatewaySslClientCert", req, cb);
     }
     /**
      * 本接口（DescribeCcnRoutes）用于查询已加入云联网（CCN）的路由
@@ -1012,10 +1036,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachNetworkInterface", req, cb);
     }
     /**
-     * 本接口（ReplaceDirectConnectGatewayCcnRoutes）根据路由ID（RouteId）修改指定的路由（Route），支持批量修改。
+     * 查询SSL-VPN-CLIENT 列表
      */
-    async ReplaceDirectConnectGatewayCcnRoutes(req, cb) {
-        return this.request("ReplaceDirectConnectGatewayCcnRoutes", req, cb);
+    async DescribeVpnGatewaySslClients(req, cb) {
+        return this.request("DescribeVpnGatewaySslClients", req, cb);
     }
     /**
      * 本接口（GetCcnRegionBandwidthLimits）用于查询云联网相关地域带宽信息，其中预付费模式的云联网仅支持地域间限速，后付费模式的云联网支持地域间限速和地域出口限速。
@@ -1208,6 +1232,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcInstances", req, cb);
     }
     /**
+     * 下载SSL-VPN-CLIENT 客户端证书
+     */
+    async DownloadVpnGatewaySslClientCert(req, cb) {
+        return this.request("DownloadVpnGatewaySslClientCert", req, cb);
+    }
+    /**
+     * 查询SSL-VPN SERVER 列表信息
+     */
+    async DescribeVpnGatewaySslServers(req, cb) {
+        return this.request("DescribeVpnGatewaySslServers", req, cb);
+    }
+    /**
      * 删除路由表
      */
     async DeleteRouteTable(req, cb) {
@@ -1242,10 +1278,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNatGatewayDirectConnectGatewayRoute", req, cb);
     }
     /**
-     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡内网IPv6地址属性。
+     * 禁用SSL-VPN-CLIENT 证书
      */
-    async ModifyIpv6AddressesAttribute(req, cb) {
-        return this.request("ModifyIpv6AddressesAttribute", req, cb);
+    async DisableVpnGatewaySslClientCert(req, cb) {
+        return this.request("DisableVpnGatewaySslClientCert", req, cb);
     }
     /**
      * 本接口（DescribeDirectConnectGateways）用于查询专线网关。
@@ -1431,6 +1467,12 @@ LimitTypes取值范围：
         return this.request("CreateAddressTemplate", req, cb);
     }
     /**
+     * 创建 Server端
+     */
+    async CreateVpnGatewaySslServer(req, cb) {
+        return this.request("CreateVpnGatewaySslServer", req, cb);
+    }
+    /**
      * 本接口（ModifyVpnGatewayAttribute）用于修改VPN网关属性。
      */
     async ModifyVpnGatewayAttribute(req, cb) {
@@ -1511,6 +1553,12 @@ LimitTypes取值范围：
      */
     async DescribeAssistantCidr(req, cb) {
         return this.request("DescribeAssistantCidr", req, cb);
+    }
+    /**
+     * 本接口（ReplaceDirectConnectGatewayCcnRoutes）根据路由ID（RouteId）修改指定的路由（Route），支持批量修改。
+     */
+    async ReplaceDirectConnectGatewayCcnRoutes(req, cb) {
+        return this.request("ReplaceDirectConnectGatewayCcnRoutes", req, cb);
     }
     /**
      * 本接口（CreateDirectConnectGateway）用于创建专线网关。
@@ -1705,6 +1753,12 @@ LimitTypes取值范围：
      */
     async UnassignIpv6SubnetCidrBlock(req, cb) {
         return this.request("UnassignIpv6SubnetCidrBlock", req, cb);
+    }
+    /**
+     * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
+     */
+    async DisassociateDirectConnectGatewayNatGateway(req, cb) {
+        return this.request("DisassociateDirectConnectGatewayNatGateway", req, cb);
     }
     /**
      * 本接口（DescribeIpGeolocationDatabaseUrl）用于获取IP地理位置库下载链接。

@@ -108,9 +108,9 @@ it("live.v20180801.DescribeLiveStreamEventList", async function () {
     }
 })
 
-it("live.v20180801.DescribePullStreamConfigs", async function () {
+it("live.v20180801.CreateCommonMixStream", async function () {
     try {
-       const data = await client.DescribePullStreamConfigs({})
+       const data = await client.CreateCommonMixStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +201,16 @@ it("live.v20180801.DescribeTopClientIpSumInfoList", async function () {
 it("live.v20180801.ModifyPullStreamStatus", async function () {
     try {
        const data = await client.ModifyPullStreamStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CreateScreenshotTask", async function () {
+    try {
+       const data = await client.CreateScreenshotTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +378,19 @@ it("live.v20180801.DescribeLiveRecordTemplate", async function () {
     }
 })
 
-it("live.v20180801.CreateCommonMixStream", async function () {
+it("live.v20180801.StopScreenshotTask", async function () {
     try {
-       const data = await client.CreateCommonMixStream({})
+       const data = await client.StopScreenshotTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribePullStreamConfigs", async function () {
+    try {
+       const data = await client.DescribePullStreamConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,9 +888,29 @@ it("live.v20180801.DescribeLiveStreamPublishedList", async function () {
     }
 })
 
+it("live.v20180801.DescribeScreenshotTask", async function () {
+    try {
+       const data = await client.DescribeScreenshotTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribePushBandwidthAndFluxList", async function () {
     try {
        const data = await client.DescribePushBandwidthAndFluxList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DeleteScreenshotTask", async function () {
+    try {
+       const data = await client.DeleteScreenshotTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

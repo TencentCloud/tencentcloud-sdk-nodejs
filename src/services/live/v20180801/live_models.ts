@@ -125,6 +125,38 @@ export interface HlsSpecialParam {
 }
 
 /**
+ * 转码总量数据
+ */
+export interface TranscodeTotalInfo {
+  /**
+      * 时间点，北京时间，
+示例：2019-03-01 00:00:00。
+      */
+  Time: string
+
+  /**
+   * 转码时长，单位：分钟。
+   */
+  Duration: number
+
+  /**
+      * 编码方式，带模块，
+示例：
+liveprocessor_H264 =》直播转码-H264，
+liveprocessor_H265 =》 直播转码-H265，
+topspeed_H264 =》极速高清-H264，
+topspeed_H265 =》极速高清-H265。
+      */
+  ModuleCodec: string
+
+  /**
+      * 分辨率，
+示例：540*480。
+      */
+  Resolution: string
+}
+
+/**
  * StopRecordTask返回参数结构体
  */
 export interface StopRecordTaskResponse {
@@ -203,6 +235,16 @@ export interface DeleteLiveTranscodeTemplateResponse {
 }
 
 /**
+ * StopScreenshotTask请求参数结构体
+ */
+export interface StopScreenshotTaskRequest {
+  /**
+   * 截图任务ID。
+   */
+  TaskId: string
+}
+
+/**
  * DescribeBillBandwidthAndFluxList返回参数结构体
  */
 export interface DescribeBillBandwidthAndFluxListResponse {
@@ -243,138 +285,18 @@ export interface DescribeBillBandwidthAndFluxListResponse {
 }
 
 /**
- * 转码模板信息。
+ * CreateScreenshotTask返回参数结构体
  */
-export interface TemplateInfo {
+export interface CreateScreenshotTaskResponse {
   /**
-      * 视频编码：h264/h265/origin，默认h264。
-
-origin: 保持原始编码格式
-      */
-  Vcodec: string
-
-  /**
-      * 视频码率。范围：0kbps - 8000kbps。
-0为保持原始码率。
-注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
-      */
-  VideoBitrate: number
-
-  /**
-      * 音频编码：aac，默认aac。
-注意：当前该参数未生效，待后续支持！
-      */
-  Acodec: string
-
-  /**
-      * 音频码率。取值范围：0kbps - 500kbps。
-默认0。
-      */
-  AudioBitrate: number
-
-  /**
-      * 宽，默认0。
-范围[0-3000]
-数值必须是2的倍数，0是原始宽度
-      */
-  Width: number
-
-  /**
-      * 高，默认0。
-范围[0-3000]
-数值必须是2的倍数，0是原始宽度
-      */
-  Height: number
-
-  /**
-      * 帧率，默认0。
-范围0-60fps
-      */
-  Fps: number
-
-  /**
-      * 关键帧间隔，单位：秒。
-默认原始的间隔
-范围2-6
-      */
-  Gop: number
-
-  /**
-      * 旋转角度，默认0。
-可取值：0，90，180，270
-      */
-  Rotate: number
-
-  /**
-      * 编码质量：
-baseline/main/high。默认baseline
-      */
-  Profile: string
-
-  /**
-      * 当设置的码率>原始码率时，是否以原始码率为准。
-0：否， 1：是
-默认 0。
-      */
-  BitrateToOrig: number
-
-  /**
-      * 当设置的高度>原始高度时，是否以原始高度为准。
-0：否， 1：是
-默认 0。
-      */
-  HeightToOrig: number
-
-  /**
-      * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-0：否， 1：是
-默认 0。
-      */
-  FpsToOrig: number
-
-  /**
-   * 是否保留视频。0：否，1：是。
+   * 任务ID，全局唯一标识截图任务。返回TaskId字段说明截图任务创建成功。
    */
-  NeedVideo: number
+  TaskId: string
 
   /**
-   * 是否保留音频。0：否，1：是。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NeedAudio: number
-
-  /**
-   * 模板 ID。
-   */
-  TemplateId: number
-
-  /**
-   * 模板名称。
-   */
-  TemplateName: string
-
-  /**
-   * 模板描述。
-   */
-  Description: string
-
-  /**
-   * 是否是极速高清模板，0：否，1：是。默认0。
-   */
-  AiTransCode: number
-
-  /**
-      * 极速高清视频码率压缩比。
-极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-
-取值范围：0.0到0.5
-      */
-  AdaptBitratePercent: number
-
-  /**
-      * 是否以短边作为高度，0：否，1：是。默认0。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ShortEdgeAsHeight: number
+  RequestId?: string
 }
 
 /**
@@ -641,6 +563,22 @@ export interface DescribeUploadStreamNumsResponse {
 }
 
 /**
+ * 各状态码的总次数，支持大多数的 HTTP 协议返回码。
+ */
+export interface PlayCodeTotalInfo {
+  /**
+      * HTTP code，可选值包括:
+400，403，404，500，502，503，504。
+      */
+  Code: string
+
+  /**
+   * 总次数。
+   */
+  Num: number
+}
+
+/**
  * DeleteLiveRecordTemplate请求参数结构体
  */
 export interface DeleteLiveRecordTemplateRequest {
@@ -661,38 +599,50 @@ export interface DeleteLiveCallbackTemplateResponse {
 }
 
 /**
- * DescribeLiveStreamOnlineList返回参数结构体
+ * CreateScreenshotTask请求参数结构体
  */
-export interface DescribeLiveStreamOnlineListResponse {
+export interface CreateScreenshotTaskRequest {
   /**
-   * 符合条件的总个数。
+   * 流名称。
    */
-  TotalNum: number
+  StreamName: string
 
   /**
-   * 总页数。
+   * 推流域名。
    */
-  TotalPage: number
+  DomainName: string
 
   /**
-   * 分页的页码。
+   * 推流路径。
    */
-  PageNum: number
+  AppName: string
 
   /**
-   * 每页显示的条数。
+   * 截图任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且EndTime - StartTime不能超过24小时。
    */
-  PageSize: number
+  EndTime: number
 
   /**
-   * 正在推送流的信息列表。
+   * 截图模板ID，CreateLiveSnapshotTemplate 返回值。如果传入错误ID，则不拉起截图。
    */
-  OnlineInfo: Array<StreamOnlineInfo>
+  TemplateId: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 截图任务开始时间，Unix时间戳。如果不填表示立即启动截图。StartTime不能超过当前时间+6天。
    */
-  RequestId?: string
+  StartTime?: number
+
+  /**
+      * 推流类型，默认0。取值：
+0-直播推流。
+1-合成流，即 A+B=C 类型混流。
+      */
+  StreamType?: number
+
+  /**
+   * 扩展字段，暂无定义。默认为空。
+   */
+  Extension?: string
 }
 
 /**
@@ -1787,6 +1737,16 @@ export interface ModifyLiveSnapshotTemplateResponse {
 }
 
 /**
+ * DeleteScreenshotTask请求参数结构体
+ */
+export interface DeleteScreenshotTaskRequest {
+  /**
+   * 任务ID，CreateScreenshotTask返回。删除TaskId指定的截图任务。
+   */
+  TaskId: string
+}
+
+/**
  * DescribeProIspPlaySumInfoList请求参数结构体
  */
 export interface DescribeProIspPlaySumInfoListRequest {
@@ -1850,19 +1810,23 @@ export interface DescribeDeliverBandwidthListRequest {
 }
 
 /**
- * 各状态码的总次数，支持大多数的 HTTP 协议返回码。
+ * DescribeScreenshotTask返回参数结构体
  */
-export interface PlayCodeTotalInfo {
+export interface DescribeScreenshotTaskResponse {
   /**
-      * HTTP code，可选值包括:
-400，403，404，500，502，503，504。
-      */
-  Code: string
+   * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 Token。当该字段为空，说明已无更多数据。
+   */
+  ScrollToken: string
 
   /**
-   * 总次数。
+   * 截图任务列表。当该字段为空，说明已返回所有数据。
    */
-  Num: number
+  TaskList: Array<ScreenshotTask>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3021,6 +2985,41 @@ export interface DescribeLiveRecordTemplatesResponse {
 }
 
 /**
+ * DescribeScreenshotTask请求参数结构体
+ */
+export interface DescribeScreenshotTaskRequest {
+  /**
+   * 查询任务开始时间，Unix 时间戳。设置时间不早于当前时间之前90天的时间，且查询时间跨度不超过一周。
+   */
+  StartTime: number
+
+  /**
+   * 查询任务结束时间，Unix 时间戳。EndTime 必须大于 StartTime，设置时间不早于当前时间之前90天的时间，且查询时间跨度不超过一周。（注意：任务开始结束时间必须在查询时间范围内）。
+   */
+  EndTime: number
+
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+
+  /**
+   * 推流域名。
+   */
+  DomainName?: string
+
+  /**
+   * 推流路径。
+   */
+  AppName?: string
+
+  /**
+   * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
+   */
+  ScrollToken?: string
+}
+
+/**
  * DescribeCallbackRecordsList请求参数结构体
  */
 export interface DescribeCallbackRecordsListRequest {
@@ -3259,18 +3258,48 @@ forbid：禁播。
 }
 
 /**
- * StopLiveRecord请求参数结构体
+ * 截图任务
  */
-export interface StopLiveRecordRequest {
+export interface ScreenshotTask {
+  /**
+   * 截图任务ID。
+   */
+  TaskId: string
+
+  /**
+   * 推流域名。
+   */
+  DomainName: string
+
+  /**
+   * 推流路径。
+   */
+  AppName: string
+
   /**
    * 流名称。
    */
   StreamName: string
 
   /**
-   * 任务ID，由CreateLiveRecord接口返回。
+   * 任务开始时间，Unix时间戳。
    */
-  TaskId: number
+  StartTime: number
+
+  /**
+   * 任务结束时间，Unix时间戳。
+   */
+  EndTime: number
+
+  /**
+   * 截图模板ID。
+   */
+  TemplateId: number
+
+  /**
+   * 调用 StopScreenshotTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
+   */
+  Stopped: number
 }
 
 /**
@@ -4553,53 +4582,38 @@ export interface ResumeLiveStreamResponse {
 }
 
 /**
- * ModifyLiveRecordTemplate请求参数结构体
+ * DescribeLiveStreamOnlineList返回参数结构体
  */
-export interface ModifyLiveRecordTemplateRequest {
+export interface DescribeLiveStreamOnlineListResponse {
   /**
-   * DescribeRecordTemplates接口获取到的模板 ID。
+   * 符合条件的总个数。
    */
-  TemplateId: number
+  TotalNum: number
 
   /**
-   * 模板名称。
+   * 总页数。
    */
-  TemplateName?: string
+  TotalPage: number
 
   /**
-   * 描述信息。
+   * 分页的页码。
    */
-  Description?: string
+  PageNum: number
 
   /**
-   * FLV 录制参数，开启 FLV 录制时设置。
+   * 每页显示的条数。
    */
-  FlvParam?: RecordParam
+  PageSize: number
 
   /**
-   * HLS 录制参数，开启 HLS 录制时设置。
+   * 正在推送流的信息列表。
    */
-  HlsParam?: RecordParam
+  OnlineInfo: Array<StreamOnlineInfo>
 
   /**
-   * MP4 录制参数，开启 MP4 录制时设置。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Mp4Param?: RecordParam
-
-  /**
-   * AAC 录制参数，开启 AAC 录制时设置。
-   */
-  AacParam?: RecordParam
-
-  /**
-   * HLS 录制定制参数。
-   */
-  HlsSpecialParam?: HlsSpecialParam
-
-  /**
-   * MP3 录制参数，开启 MP3 录制时设置。
-   */
-  Mp3Param?: RecordParam
+  RequestId?: string
 }
 
 /**
@@ -5035,6 +5049,54 @@ export interface MonitorStreamPlayInfo {
    * 请求数。
    */
   Request: number
+}
+
+/**
+ * DescribePlayErrorCodeSumInfoList请求参数结构体
+ */
+export interface DescribePlayErrorCodeSumInfoListRequest {
+  /**
+      * 起始时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+      */
+  StartTime: string
+
+  /**
+      * 结束时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
+      */
+  EndTime: string
+
+  /**
+   * 播放域名列表，不填表示总体数据。
+   */
+  PlayDomains?: Array<string>
+
+  /**
+   * 页数，范围[1,1000]，默认值是1。
+   */
+  PageNum?: number
+
+  /**
+   * 每页个数，范围：[1,1000]，默认值是20。
+   */
+  PageSize?: number
+
+  /**
+   * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+   */
+  MainlandOrOversea?: string
+
+  /**
+   * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
+   */
+  GroupType?: string
+
+  /**
+   * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
+   */
+  OutLanguage?: string
 }
 
 /**
@@ -5609,51 +5671,13 @@ NormalLive：普通直播。
 }
 
 /**
- * DescribePlayErrorCodeSumInfoList请求参数结构体
+ * DeleteScreenshotTask返回参数结构体
  */
-export interface DescribePlayErrorCodeSumInfoListRequest {
+export interface DeleteScreenshotTaskResponse {
   /**
-      * 起始时间点，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
-      */
-  StartTime: string
-
-  /**
-      * 结束时间点，北京时间。
-格式：yyyy-mm-dd HH:MM:SS。
-注：EndTime 和 StartTime 只支持最近1天的数据查询。
-      */
-  EndTime: string
-
-  /**
-   * 播放域名列表，不填表示总体数据。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PlayDomains?: Array<string>
-
-  /**
-   * 页数，范围[1,1000]，默认值是1。
-   */
-  PageNum?: number
-
-  /**
-   * 每页个数，范围：[1,1000]，默认值是20。
-   */
-  PageSize?: number
-
-  /**
-   * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-   */
-  MainlandOrOversea?: string
-
-  /**
-   * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
-   */
-  GroupType?: string
-
-  /**
-   * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
-   */
-  OutLanguage?: string
+  RequestId?: string
 }
 
 /**
@@ -5715,35 +5739,53 @@ export interface CommonMixControlParams {
 }
 
 /**
- * 转码总量数据
+ * ModifyLiveRecordTemplate请求参数结构体
  */
-export interface TranscodeTotalInfo {
+export interface ModifyLiveRecordTemplateRequest {
   /**
-      * 时间点，北京时间，
-示例：2019-03-01 00:00:00。
-      */
-  Time: string
-
-  /**
-   * 转码时长，单位：分钟。
+   * DescribeRecordTemplates接口获取到的模板 ID。
    */
-  Duration: number
+  TemplateId: number
 
   /**
-      * 编码方式，带模块，
-示例：
-liveprocessor_H264 =》直播转码-H264，
-liveprocessor_H265 =》 直播转码-H265，
-topspeed_H264 =》极速高清-H264，
-topspeed_H265 =》极速高清-H265。
-      */
-  ModuleCodec: string
+   * 模板名称。
+   */
+  TemplateName?: string
 
   /**
-      * 分辨率，
-示例：540*480。
-      */
-  Resolution: string
+   * 描述信息。
+   */
+  Description?: string
+
+  /**
+   * FLV 录制参数，开启 FLV 录制时设置。
+   */
+  FlvParam?: RecordParam
+
+  /**
+   * HLS 录制参数，开启 HLS 录制时设置。
+   */
+  HlsParam?: RecordParam
+
+  /**
+   * MP4 录制参数，开启 MP4 录制时设置。
+   */
+  Mp4Param?: RecordParam
+
+  /**
+   * AAC 录制参数，开启 AAC 录制时设置。
+   */
+  AacParam?: RecordParam
+
+  /**
+   * HLS 录制定制参数。
+   */
+  HlsSpecialParam?: HlsSpecialParam
+
+  /**
+   * MP3 录制参数，开启 MP3 录制时设置。
+   */
+  Mp3Param?: RecordParam
 }
 
 /**
@@ -7481,6 +7523,21 @@ export interface DescribeStreamDayPlayInfoListResponse {
 }
 
 /**
+ * StopLiveRecord请求参数结构体
+ */
+export interface StopLiveRecordRequest {
+  /**
+   * 流名称。
+   */
+  StreamName: string
+
+  /**
+   * 任务ID，由CreateLiveRecord接口返回。
+   */
+  TaskId: number
+}
+
+/**
  * DescribeVisitTopSumInfoList返回参数结构体
  */
 export interface DescribeVisitTopSumInfoListResponse {
@@ -7692,6 +7749,16 @@ Oversea：则查询国际/港澳台（境外）数据，
 }
 
 /**
+ * StopScreenshotTask返回参数结构体
+ */
+export interface StopScreenshotTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRecordTask返回参数结构体
  */
 export interface CreateRecordTaskResponse {
@@ -7841,6 +7908,141 @@ export interface CreateLiveRecordTemplateRequest {
    * Mp3录制参数，开启Mp3录制时设置。
    */
   Mp3Param?: RecordParam
+}
+
+/**
+ * 转码模板信息。
+ */
+export interface TemplateInfo {
+  /**
+      * 视频编码：h264/h265/origin，默认h264。
+
+origin: 保持原始编码格式
+      */
+  Vcodec: string
+
+  /**
+      * 视频码率。范围：0kbps - 8000kbps。
+0为保持原始码率。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+      */
+  VideoBitrate: number
+
+  /**
+      * 音频编码：aac，默认aac。
+注意：当前该参数未生效，待后续支持！
+      */
+  Acodec: string
+
+  /**
+      * 音频码率。取值范围：0kbps - 500kbps。
+默认0。
+      */
+  AudioBitrate: number
+
+  /**
+      * 宽，默认0。
+范围[0-3000]
+数值必须是2的倍数，0是原始宽度
+      */
+  Width: number
+
+  /**
+      * 高，默认0。
+范围[0-3000]
+数值必须是2的倍数，0是原始宽度
+      */
+  Height: number
+
+  /**
+      * 帧率，默认0。
+范围0-60fps
+      */
+  Fps: number
+
+  /**
+      * 关键帧间隔，单位：秒。
+默认原始的间隔
+范围2-6
+      */
+  Gop: number
+
+  /**
+      * 旋转角度，默认0。
+可取值：0，90，180，270
+      */
+  Rotate: number
+
+  /**
+      * 编码质量：
+baseline/main/high。默认baseline
+      */
+  Profile: string
+
+  /**
+      * 当设置的码率>原始码率时，是否以原始码率为准。
+0：否， 1：是
+默认 0。
+      */
+  BitrateToOrig: number
+
+  /**
+      * 当设置的高度>原始高度时，是否以原始高度为准。
+0：否， 1：是
+默认 0。
+      */
+  HeightToOrig: number
+
+  /**
+      * 当设置的帧率>原始帧率时，是否以原始帧率为准。
+0：否， 1：是
+默认 0。
+      */
+  FpsToOrig: number
+
+  /**
+   * 是否保留视频。0：否，1：是。
+   */
+  NeedVideo: number
+
+  /**
+   * 是否保留音频。0：否，1：是。
+   */
+  NeedAudio: number
+
+  /**
+   * 模板 ID。
+   */
+  TemplateId: number
+
+  /**
+   * 模板名称。
+   */
+  TemplateName: string
+
+  /**
+   * 模板描述。
+   */
+  Description: string
+
+  /**
+   * 是否是极速高清模板，0：否，1：是。默认0。
+   */
+  AiTransCode: number
+
+  /**
+      * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
+      */
+  AdaptBitratePercent: number
+
+  /**
+      * 是否以短边作为高度，0：否，1：是。默认0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShortEdgeAsHeight: number
 }
 
 /**

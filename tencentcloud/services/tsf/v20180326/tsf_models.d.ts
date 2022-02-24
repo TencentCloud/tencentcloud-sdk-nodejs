@@ -6170,6 +6170,16 @@ export interface ServiceSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AllowDeleteService?: boolean;
+    /**
+      * 开启SessionAffinity，true为开启，false为不开启，默认为false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenSessionAffinity?: boolean;
+    /**
+      * SessionAffinity会话时间，默认10800
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessionAffinityTimeoutSeconds?: number;
 }
 /**
  * ModifyUploadInfo请求参数结构体

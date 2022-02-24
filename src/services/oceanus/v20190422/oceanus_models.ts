@@ -313,6 +313,11 @@ export interface CreateJobConfigRequest {
    * 日志采集类型 2：CLS；3：COS
    */
   LogCollectType?: number
+
+  /**
+   * pyflink作业运行时使用的python版本
+   */
+  PythonVersion?: string
 }
 
 /**
@@ -1304,6 +1309,12 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClsTopicId: string
+
+  /**
+      * pyflink作业运行的python版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PythonVersion: string
 }
 
 /**

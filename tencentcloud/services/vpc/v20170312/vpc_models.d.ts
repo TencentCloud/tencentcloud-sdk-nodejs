@@ -323,6 +323,56 @@ export interface DescribeVpcIpv6AddressesRequest {
     Limit?: number;
 }
 /**
+ * SSL-VPN-CLIENT 出参
+ */
+export interface SslVpnClient {
+    /**
+      * VPC实例ID
+      */
+    VpcId: string;
+    /**
+      * SSL-VPN-SERVER 实例ID
+      */
+    SslVpnServerId: string;
+    /**
+      * 证书状态.
+0:创建中
+1:正常
+2:已停用
+3.已过期
+4.创建出错
+      */
+    CertStatus: number;
+    /**
+      * SSL-VPN-CLIENT 实例ID
+      */
+    SslVpnClientId: string;
+    /**
+      * 证书开始时间
+      */
+    CertBeginTime: string;
+    /**
+      * 证书到期时间
+      */
+    CertEndTime: string;
+    /**
+      * CLIENT NAME
+      */
+    Name: string;
+    /**
+      * 创建CLIENT 状态。
+0 创建中
+1 创建出错
+2 更新中
+3 更新出错
+4 销毁中
+5 销毁出粗
+6 已连通
+7 未知
+      */
+    State: string;
+}
+/**
  * NAT的SNAT规则
  */
 export interface SourceIpTranslationNatRule {
@@ -457,6 +507,19 @@ export interface CreateDhcpIpResponse {
       * 新创建的`DhcpIp`信息
       */
     DhcpIpSet?: Array<DhcpIp>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteVpnGatewaySslServer返回参数结构体
+ */
+export interface DeleteVpnGatewaySslServerResponse {
+    /**
+      * 异步任务ID。
+      */
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -763,6 +826,19 @@ export interface AssignIpv6SubnetCidrBlockRequest {
       * 分配 `IPv6` 子网段列表。
       */
     Ipv6SubnetCidrBlocks: Array<Ipv6SubnetCidrBlock>;
+}
+/**
+ * DeleteVpnGatewaySslClient返回参数结构体
+ */
+export interface DeleteVpnGatewaySslClientResponse {
+    /**
+      * 异步任务ID。
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateVpc返回参数结构体
@@ -1108,6 +1184,47 @@ export interface CreateDirectConnectGatewayRequest {
     HaZoneGroupId?: string;
 }
 /**
+ * CreateVpnGatewaySslServer请求参数结构体
+ */
+export interface CreateVpnGatewaySslServerRequest {
+    /**
+      * VPN实例ID
+      */
+    VpnGatewayId: string;
+    /**
+      * SSL_VPN_SERVER 实例名
+      */
+    SslVpnServerName: string;
+    /**
+      * 本端地址网段
+      */
+    LocalAddress: Array<string>;
+    /**
+      * 客户端地址网段
+      */
+    RemoteAddress: string;
+    /**
+      * SSL VPN服务端监听协议。当前仅支持 UDP。默认UDP
+      */
+    SslVpnProtocol?: string;
+    /**
+      * SSL VPN服务端监听协议端口。默认1194。
+      */
+    SslVpnPort?: number;
+    /**
+      * 认证算法。可选 'SHA1', 'MD5', 'NONE'。默认NONE
+      */
+    IntegrityAlgorithm?: string;
+    /**
+      * 加密算法。可选 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'NONE'。默认NONE
+      */
+    EncryptAlgorithm?: string;
+    /**
+      * 是否支持压缩。当前仅支持不支持压缩。默认False
+      */
+    Compress?: boolean;
+}
+/**
  * CreateVpcEndPoint请求参数结构体
  */
 export interface CreateVpcEndPointRequest {
@@ -1438,6 +1555,15 @@ export interface DeleteVpcEndPointServiceWhiteListRequest {
     EndPointServiceId: string;
 }
 /**
+ * DetachNetworkInterface返回参数结构体
+ */
+export interface DetachNetworkInterfaceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteVpcEndPointService请求参数结构体
  */
 export interface DeleteVpcEndPointServiceRequest {
@@ -1617,17 +1743,26 @@ export interface DescribeDirectConnectGatewaysRequest {
     Limit?: number;
 }
 /**
- * DisassociateVpcEndPointSecurityGroups请求参数结构体
+ * DisableVpnGatewaySslClientCert请求参数结构体
  */
-export interface DisassociateVpcEndPointSecurityGroupsRequest {
+export interface DisableVpnGatewaySslClientCertRequest {
     /**
-      * 安全组ID数组。
+      * SSL-VPN-CLIENT 实例ID。
       */
-    SecurityGroupIds: Array<string>;
+    SslVpnClientId: string;
+}
+/**
+ * DescribeVpcPrivateIpAddresses返回参数结构体
+ */
+export interface DescribeVpcPrivateIpAddressesResponse {
     /**
-      * 终端节点ID。
+      * 内网`IP`地址信息列表。
       */
-    EndPointId: string;
+    VpcPrivateIpAddressSet: Array<VpcPrivateIpAddress>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyIp6Translator返回参数结构体
@@ -1847,6 +1982,19 @@ export interface HaVipDisassociateAddressIpResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DisassociateVpcEndPointSecurityGroups请求参数结构体
+ */
+export interface DisassociateVpcEndPointSecurityGroupsRequest {
+    /**
+      * 安全组ID数组。
+      */
+    SecurityGroupIds: Array<string>;
+    /**
+      * 终端节点ID。
+      */
+    EndPointId: string;
 }
 /**
  * DescribeTaskResult请求参数结构体
@@ -2376,6 +2524,19 @@ export interface ModifyIp6AddressesBandwidthRequest {
     Ip6AddressIds?: Array<string>;
 }
 /**
+ * DisableVpnGatewaySslClientCert返回参数结构体
+ */
+export interface DisableVpnGatewaySslClientCertResponse {
+    /**
+      * 异步任务实例ID。
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateLocalGateway请求参数结构体
  */
 export interface CreateLocalGatewayRequest {
@@ -2682,6 +2843,32 @@ export interface CreateNatGatewayResponse {
     RequestId?: string;
 }
 /**
+ * DescribeVpnGatewaySslClients请求参数结构体
+ */
+export interface DescribeVpnGatewaySslClientsRequest {
+    /**
+      * 过滤条件，参数不支持同时指定SslVpnClientIds和Filters。
+<li>vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。</li>
+<li>vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。</li>
+<li>ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID形如：vpngwSslServer-123456。</li>
+<li>ssl-vpn-client-id - String - （过滤条件）SSL-VPN-CLIENT实例ID形如：vpngwSslClient-123456。</li>
+<li>ssl-vpn-client-name - String - （过滤条件）SSL-VPN-CLIENT实例名称。</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 请求对象个数
+      */
+    Limit?: number;
+    /**
+      * SSL-VPN-CLIENT实例ID。形如：vpngwSslClient-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定SslVpnClientIds和Filters。
+      */
+    SslVpnClientIds?: Array<string>;
+}
+/**
  * DescribeIp6TranslatorQuota请求参数结构体
  */
 export interface DescribeIp6TranslatorQuotaRequest {
@@ -2706,6 +2893,32 @@ export interface ModifySecurityGroupAttributeRequest {
       * 安全组备注，最多100个字符。
       */
     GroupDescription?: string;
+}
+/**
+ * DescribeVpnGatewaySslServers请求参数结构体
+ */
+export interface DescribeVpnGatewaySslServersRequest {
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 请求对象个数
+      */
+    Limit?: number;
+    /**
+      * SSL-VPN-SERVER实例ID。形如：vpngwSslServer-12345678。每次请求的实例的上限为100。参数不支持同时指定SslVpnServerIds和Filters。
+      */
+    SslVpnServerIds?: Array<string>;
+    /**
+      * 过滤条件，参数不支持同时指定SslVpnServerIds和Filters。
+<li>vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。</li>
+<li>vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。</li>
+<li>vpn-gateway-name - String - （过滤条件）VPN实例名称。</li>
+<li>ssl-vpn-server-name - String - （过滤条件）SSL-VPN-SERVER实例名称。</li>
+<li>ssl-vpn-server-id - String - （过滤条件）SSL-VPN-SERVER实例ID形如：vpngwSslServer-123456。</li>
+      */
+    Filters?: Array<FilterObject>;
 }
 /**
  * ModifyNetDetect请求参数结构体
@@ -2768,17 +2981,13 @@ export interface DescribeNetDetectStatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeVpcResourceDashboard返回参数结构体
+ * DeleteVpnGatewaySslServer请求参数结构体
  */
-export interface DescribeVpcResourceDashboardResponse {
+export interface DeleteVpnGatewaySslServerRequest {
     /**
-      * 资源对象列表。
+      * SSL-VPN-SERVER 实例ID。
       */
-    ResourceDashboardSet?: Array<ResourceDashboard>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    SslVpnServerId: string;
 }
 /**
  * AllocateIp6AddressesBandwidth返回参数结构体
@@ -3954,6 +4163,23 @@ export interface DeleteVpnConnectionResponse {
     RequestId?: string;
 }
 /**
+ * DescribeVpnGatewaySslClients返回参数结构体
+ */
+export interface DescribeVpnGatewaySslClientsResponse {
+    /**
+      * 符合条件的实例数量。
+      */
+    TotalCount: number;
+    /**
+      * 符合条件的实例个数。
+      */
+    SslVpnClientSet: Array<SslVpnClient>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBandwidthPackageResources请求参数结构体
  */
 export interface DescribeBandwidthPackageResourcesRequest {
@@ -4005,17 +4231,13 @@ export interface Tag {
     Value?: string;
 }
 /**
- * DescribeCcnAttachedInstances返回参数结构体
+ * CreateFlowLog返回参数结构体
  */
-export interface DescribeCcnAttachedInstancesResponse {
+export interface CreateFlowLogResponse {
     /**
-      * 符合条件的对象数。
+      * 创建的流日志信息
       */
-    TotalCount: number;
-    /**
-      * 关联实例列表。
-      */
-    InstanceSet: Array<CcnAttachedInstance>;
+    FlowLog: Array<FlowLog>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4191,9 +4413,13 @@ export interface ModifyBandwidthPackageAttributeResponse {
     RequestId?: string;
 }
 /**
- * DetachNetworkInterface返回参数结构体
+ * CreateVpnGatewaySslServer返回参数结构体
  */
-export interface DetachNetworkInterfaceResponse {
+export interface CreateVpnGatewaySslServerResponse {
+    /**
+      * 创建SSL-VPN server 异步任务ID
+      */
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4676,13 +4902,17 @@ export interface ResourceDashboard {
     RouteTable: number;
 }
 /**
- * DescribeVpcPrivateIpAddresses返回参数结构体
+ * DescribeCcnAttachedInstances返回参数结构体
  */
-export interface DescribeVpcPrivateIpAddressesResponse {
+export interface DescribeCcnAttachedInstancesResponse {
     /**
-      * 内网`IP`地址信息列表。
+      * 符合条件的对象数。
       */
-    VpcPrivateIpAddressSet: Array<VpcPrivateIpAddress>;
+    TotalCount: number;
+    /**
+      * 关联实例列表。
+      */
+    InstanceSet: Array<CcnAttachedInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4794,6 +5024,19 @@ export interface DeleteAddressTemplateGroupRequest {
       * IP地址模板集合实例ID，例如：ipmg-90cex8mq。
       */
     AddressTemplateGroupId: string;
+}
+/**
+ * CreateVpnGatewaySslClient返回参数结构体
+ */
+export interface CreateVpnGatewaySslClientResponse {
+    /**
+      * 异步任务ID。
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeNetworkInterfaceLimit请求参数结构体
@@ -5767,6 +6010,19 @@ export interface EndPointService {
     CreateTime: string;
 }
 /**
+ * DescribeVpcResourceDashboard返回参数结构体
+ */
+export interface DescribeVpcResourceDashboardResponse {
+    /**
+      * 资源对象列表。
+      */
+    ResourceDashboardSet?: Array<ResourceDashboard>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeVpnGatewayCcnRoutes请求参数结构体
  */
 export interface DescribeVpnGatewayCcnRoutesRequest {
@@ -5821,6 +6077,15 @@ export interface DescribeClassicLinkInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * EnableVpnGatewaySslClientCert请求参数结构体
+ */
+export interface EnableVpnGatewaySslClientCertRequest {
+    /**
+      * SSL-VPN-CLIENT 实例ID。
+      */
+    SslVpnClientId: string;
 }
 /**
  * DescribeVpnGatewayCcnRoutes返回参数结构体
@@ -5883,13 +6148,9 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * CreateFlowLog返回参数结构体
+ * MigrateNetworkInterface返回参数结构体
  */
-export interface CreateFlowLogResponse {
-    /**
-      * 创建的流日志信息
-      */
-    FlowLog: Array<FlowLog>;
+export interface MigrateNetworkInterfaceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6591,24 +6852,91 @@ export interface DeleteDhcpIpResponse {
     RequestId?: string;
 }
 /**
- * ModifyGatewayFlowQos请求参数结构体
+ * SSL-VPN-SERVER 信息 SET
  */
-export interface ModifyGatewayFlowQosRequest {
+export interface SslVpnSever {
     /**
-      * 网关实例ID，目前我们支持的网关实例类型有，
-专线网关实例ID，形如，`dcg-ltjahce6`；
-Nat网关实例ID，形如，`nat-ltjahce6`；
-VPN网关实例ID，形如，`vpn-ltjahce6`。
+      * VPC实例ID.
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    GatewayId: string;
+    VpcId: string;
     /**
-      * 流控带宽值。取值大于0，表示限流到指定的Mbps；取值等于0，表示完全限流；取值为-1，不限流。
+      * SSL-VPN-SERVER 实例ID。
       */
-    Bandwidth: number;
+    SslVpnServerId: string;
     /**
-      * 限流的云服务器内网IP。
+      * VPN 实例ID。
       */
-    IpAddresses: Array<string>;
+    VpnGatewayId: string;
+    /**
+      * SSL-VPN-SERVER name。
+      */
+    SslVpnServerName: string;
+    /**
+      * 本端地址段。
+      */
+    LocalAddress: Array<string>;
+    /**
+      * 客户端地址段。
+      */
+    RemoteAddress: string;
+    /**
+      * 客户端最大连接数。
+      */
+    MaxConnection: number;
+    /**
+      * SSL-VPN 网关公网IP。
+      */
+    WanIp: string;
+    /**
+      * SSL VPN服务端监听协议
+      */
+    SslVpnProtocol: string;
+    /**
+      * SSL VPN服务端监听协议端口
+      */
+    SslVpnPort: number;
+    /**
+      * 加密算法。
+      */
+    EncryptAlgorithm: string;
+    /**
+      * 认证算法。
+      */
+    IntegrityAlgorithm: string;
+    /**
+      * 是否支持压缩。
+      */
+    Compress: number;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
+    /**
+      * SSL-VPN-SERVER 创建状态。
+0 创建中
+1 创建出错
+2 更新中
+3 更新出错
+4 销毁中
+5 销毁出粗
+6 已连通
+7 未知
+      */
+    State: number;
+}
+/**
+ * DownloadVpnGatewaySslClientCert返回参数结构体
+ */
+export interface DownloadVpnGatewaySslClientCertResponse {
+    /**
+      * SSL-VPN-CLIENT 证书配置
+      */
+    SslClientConfigsSet: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteNetDetect返回参数结构体
@@ -6926,6 +7254,36 @@ export interface GatewayFlowMonitorDetail {
       * 出流量，单位：`Byte`。
       */
     OutTraffic: number;
+}
+/**
+ * CreateVpnGatewaySslClient请求参数结构体
+ */
+export interface CreateVpnGatewaySslClientRequest {
+    /**
+      * SSL-VPN-SERVER 实例ID。
+      */
+    SslVpnServerId: string;
+    /**
+      * name
+      */
+    SslVpnClientName: string;
+}
+/**
+ * DescribeVpnGatewaySslServers返回参数结构体
+ */
+export interface DescribeVpnGatewaySslServersResponse {
+    /**
+      * 符合条件的实例数量。
+      */
+    TotalCount: number;
+    /**
+      * SSL-VPN-SERVER 实例详细信息列表。
+      */
+    SslVpnSeverSet: Array<SslVpnSever>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
@@ -7748,6 +8106,26 @@ export interface CreateDirectConnectGatewayCcnRoutesRequest {
     Routes: Array<DirectConnectGatewayCcnRoute>;
 }
 /**
+ * ModifyGatewayFlowQos请求参数结构体
+ */
+export interface ModifyGatewayFlowQosRequest {
+    /**
+      * 网关实例ID，目前我们支持的网关实例类型有，
+专线网关实例ID，形如，`dcg-ltjahce6`；
+Nat网关实例ID，形如，`nat-ltjahce6`；
+VPN网关实例ID，形如，`vpn-ltjahce6`。
+      */
+    GatewayId: string;
+    /**
+      * 流控带宽值。取值大于0，表示限流到指定的Mbps；取值等于0，表示完全限流；取值为-1，不限流。
+      */
+    Bandwidth: number;
+    /**
+      * 限流的云服务器内网IP。
+      */
+    IpAddresses: Array<string>;
+}
+/**
  * CreateDirectConnectGatewayCcnRoutes返回参数结构体
  */
 export interface CreateDirectConnectGatewayCcnRoutesResponse {
@@ -7950,6 +8328,15 @@ export interface ModifyTemplateMemberResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteVpnGatewaySslClient请求参数结构体
+ */
+export interface DeleteVpnGatewaySslClientRequest {
+    /**
+      * SSL-VPN-CLIENT 实例ID。
+      */
+    SslVpnClientId: string;
 }
 /**
  * 子网对象
@@ -9978,6 +10365,15 @@ export interface AttachClassicLinkVpcResponse {
     RequestId?: string;
 }
 /**
+ * DownloadVpnGatewaySslClientCert请求参数结构体
+ */
+export interface DownloadVpnGatewaySslClientCertRequest {
+    /**
+      * SSL-VPN-CLIENT 实例ID。
+      */
+    SslVpnClientId: string;
+}
+/**
  * CreateAddressTemplate请求参数结构体
  */
 export interface CreateAddressTemplateRequest {
@@ -10490,15 +10886,6 @@ export interface VpcLimit {
  * DetachClassicLinkVpc返回参数结构体
  */
 export interface DetachClassicLinkVpcResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * MigrateNetworkInterface返回参数结构体
- */
-export interface MigrateNetworkInterfaceResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11235,6 +11622,19 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
       * 路由策略创建时间
       */
     CreatedTime?: string;
+}
+/**
+ * EnableVpnGatewaySslClientCert返回参数结构体
+ */
+export interface EnableVpnGatewaySslClientCertResponse {
+    /**
+      * 异步任务实例ID。
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifySubnetAttribute请求参数结构体

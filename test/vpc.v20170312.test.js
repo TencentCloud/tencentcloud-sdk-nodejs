@@ -248,6 +248,16 @@ it("vpc.v20170312.ResetRoutes", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteVpnGatewaySslServer", async function () {
+    try {
+       const data = await client.DeleteVpnGatewaySslServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeNetworkInterfaceLimit", async function () {
     try {
        const data = await client.DescribeNetworkInterfaceLimit({})
@@ -608,9 +618,9 @@ it("vpc.v20170312.CheckNetDetectState", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeDhcpIps", async function () {
+it("vpc.v20170312.DeleteVpnGatewaySslClient", async function () {
     try {
-       const data = await client.DescribeDhcpIps({})
+       const data = await client.DeleteVpnGatewaySslClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +691,16 @@ it("vpc.v20170312.CreateNatGatewayDestinationIpPortTranslationNatRule", async fu
 it("vpc.v20170312.CreateSubnet", async function () {
     try {
        const data = await client.CreateSubnet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.CreateVpnGatewaySslClient", async function () {
+    try {
+       const data = await client.CreateVpnGatewaySslClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +788,9 @@ it("vpc.v20170312.ModifyTemplateMember", async function () {
     }
 })
 
-it("vpc.v20170312.DisassociateDirectConnectGatewayNatGateway", async function () {
+it("vpc.v20170312.DescribeVpcs", async function () {
     try {
-       const data = await client.DisassociateDirectConnectGatewayNatGateway({})
+       const data = await client.DescribeVpcs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,9 +928,9 @@ it("vpc.v20170312.RenewVpnGateway", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeVpcs", async function () {
+it("vpc.v20170312.DescribeDhcpIps", async function () {
     try {
-       const data = await client.DescribeVpcs({})
+       const data = await client.DescribeDhcpIps({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1358,9 +1378,29 @@ it("vpc.v20170312.UnassignPrivateIpAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyIpv6AddressesAttribute", async function () {
+    try {
+       const data = await client.ModifyIpv6AddressesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteAddressTemplateGroup", async function () {
     try {
        const data = await client.DeleteAddressTemplateGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.EnableVpnGatewaySslClientCert", async function () {
+    try {
+       const data = await client.EnableVpnGatewaySslClientCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1428,9 +1468,9 @@ it("vpc.v20170312.AttachNetworkInterface", async function () {
     }
 })
 
-it("vpc.v20170312.ReplaceDirectConnectGatewayCcnRoutes", async function () {
+it("vpc.v20170312.DescribeVpnGatewaySslClients", async function () {
     try {
-       const data = await client.ReplaceDirectConnectGatewayCcnRoutes({})
+       const data = await client.DescribeVpnGatewaySslClients({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1738,6 +1778,26 @@ it("vpc.v20170312.DescribeVpcInstances", async function () {
     }
 })
 
+it("vpc.v20170312.DownloadVpnGatewaySslClientCert", async function () {
+    try {
+       const data = await client.DownloadVpnGatewaySslClientCert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeVpnGatewaySslServers", async function () {
+    try {
+       const data = await client.DescribeVpnGatewaySslServers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteRouteTable", async function () {
     try {
        const data = await client.DeleteRouteTable({})
@@ -1788,9 +1848,9 @@ it("vpc.v20170312.DescribeNatGatewayDirectConnectGatewayRoute", async function (
     }
 })
 
-it("vpc.v20170312.ModifyIpv6AddressesAttribute", async function () {
+it("vpc.v20170312.DisableVpnGatewaySslClientCert", async function () {
     try {
-       const data = await client.ModifyIpv6AddressesAttribute({})
+       const data = await client.DisableVpnGatewaySslClientCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2038,6 +2098,16 @@ it("vpc.v20170312.CreateAddressTemplate", async function () {
     }
 })
 
+it("vpc.v20170312.CreateVpnGatewaySslServer", async function () {
+    try {
+       const data = await client.CreateVpnGatewaySslServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyVpnGatewayAttribute", async function () {
     try {
        const data = await client.ModifyVpnGatewayAttribute({})
@@ -2161,6 +2231,16 @@ it("vpc.v20170312.DescribeSecurityGroupPolicies", async function () {
 it("vpc.v20170312.DescribeAssistantCidr", async function () {
     try {
        const data = await client.DescribeAssistantCidr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ReplaceDirectConnectGatewayCcnRoutes", async function () {
+    try {
+       const data = await client.ReplaceDirectConnectGatewayCcnRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2461,6 +2541,16 @@ it("vpc.v20170312.DescribeSecurityGroupAssociationStatistics", async function ()
 it("vpc.v20170312.UnassignIpv6SubnetCidrBlock", async function () {
     try {
        const data = await client.UnassignIpv6SubnetCidrBlock({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DisassociateDirectConnectGatewayNatGateway", async function () {
+    try {
+       const data = await client.DisassociateDirectConnectGatewayNatGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
