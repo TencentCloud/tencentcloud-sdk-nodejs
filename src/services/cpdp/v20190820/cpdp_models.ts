@@ -1657,97 +1657,29 @@ CONTRACT_STATUS_PENDING：签约进行中
 }
 
 /**
- * 贸易材料明细查询数据
+ * ExecuteMemberTransaction返回参数结构体
  */
-export interface QueryTradeData {
+export interface ExecuteMemberTransactionResponse {
   /**
-   * 商户号
+   * 请求类型
    */
-  MerchantId: string
+  RequestType?: string
 
   /**
-   * 贸易材料流水号
+   * 银行流水号
    */
-  TradeFileId: string
+  FrontSequenceNumber?: string
 
   /**
-   * 贸易材料订单号
-   */
-  TradeOrderId: string
-
-  /**
-   * 审核状态
-   */
-  Status: string
-
-  /**
-      * 失败原因
+      * 保留域
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailReason: string
+  ReservedMessage?: string
 
   /**
-   * 付款人ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PayerId: string
-
-  /**
-   * 收款人姓名
-   */
-  PayeeName: string
-
-  /**
-   * 收款人常驻国家或地区编码
-   */
-  PayeeCountryCode: string
-
-  /**
-   * 交易类型
-   */
-  TradeType: string
-
-  /**
-   * 交易日期
-   */
-  TradeTime: string
-
-  /**
-   * 交易币种
-   */
-  TradeCurrency: string
-
-  /**
-   * 交易金额
-   */
-  TradeAmount: string
-
-  /**
-   * 交易名称
-   */
-  TradeName: string
-
-  /**
-   * 交易数量
-   */
-  TradeCount: number
-
-  /**
-      * 货贸承运人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GoodsCarrier: string
-
-  /**
-      * 服贸交易细节
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServiceDetail: string
-
-  /**
-      * 服贸服务时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServiceTime: string
+  RequestId?: string
 }
 
 /**
@@ -2328,6 +2260,32 @@ export interface QueryContractPayFeeResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PayFee: Array<PayFeeDataResult>
+}
+
+/**
+ * QueryExceedingInfo返回参数结构体
+ */
+export interface QueryExceedingInfoResponse {
+  /**
+   * 错误码。
+   */
+  ErrCode: string
+
+  /**
+   * 错误消息。
+   */
+  ErrMessage: string
+
+  /**
+      * 超额信息结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: QueryExceedingInfoResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3808,6 +3766,431 @@ export interface ApplyTradeResponse {
 }
 
 /**
+ * 商户明细响应对象
+ */
+export interface ViewMerchantResult {
+  /**
+      * 城市
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  City: string
+
+  /**
+      * 税务登记证图片【私密区】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaxCollectionPicture?: string
+
+  /**
+      * 法人证件号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossIdNo: string
+
+  /**
+      * 法人亲属证件号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountIdNo?: string
+
+  /**
+      * 其他资料3
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherPictureThree?: string
+
+  /**
+      * 法人亲属证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）结算账户人身份为法人亲属时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountIdType?: string
+
+  /**
+      * 商户状态（0未审核，1已审核，2审核未通过，3待审核，4已删除，5初审通过）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 营业执照图片【私密区】（系统返回的图片路径）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessLicensePicture: string
+
+  /**
+      * 品牌名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BrandName: string
+
+  /**
+      * 法人身份证正面【私密区】（系统返回的图片路径）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossPositive: string
+
+  /**
+      * 开通应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppCount: string
+
+  /**
+      * 法人身份证背面【私密区】（系统返回的图片路径）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossBack: string
+
+  /**
+      * 组织机构代码证图片【私密区】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationCodePicture?: string
+
+  /**
+      * 营业执照过期时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessLicenseEndDate: string
+
+  /**
+      * 组织机构代码证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationCodeNo?: string
+
+  /**
+      * 机构编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AgentNo?: string
+
+  /**
+      * 省份
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Province: string
+
+  /**
+      * 法人证件生效时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossStartDate: string
+
+  /**
+      * 更新时间（yyyy-mm-dd hh:ii:ss）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 清算联行号，开户行行号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BankNo: string
+
+  /**
+      * 税务登记证生效时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaxCollectionStartDate?: string
+
+  /**
+      * 营业执照生效时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessLicenseStartDate: string
+
+  /**
+      * 客户经理用户编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountManagerId?: string
+
+  /**
+      * 分类编号(多个以小写逗号分开)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassificationIds: string
+
+  /**
+      * 营业执照类型（1三证合一，2非三证合一）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessLicenseType: string
+
+  /**
+      * 法人证件过期时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossEndDate: string
+
+  /**
+      * 营业执照编号（系统有唯一性校验）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BusinessLicenseNo: string
+
+  /**
+      * 机构名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AgentName?: string
+
+  /**
+      * 商户简介
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Intro?: string
+
+  /**
+      * 法人证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossIdType: string
+
+  /**
+      * 添加时间（yyyy-mm-dd hh:ii:ss）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddTime: string
+
+  /**
+      * 门店数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShopCount: string
+
+  /**
+      * 结算账户人身份（1法人，2法人亲属），结算帐户为对私时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountBoss?: string
+
+  /**
+      * 分类名称(多个以小写逗号分开)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassificationNames: string
+
+  /**
+      * 法人电话
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossTelephone?: string
+
+  /**
+      * 客户经理姓名，必须为系统后台的管理员真实姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountManagerName?: string
+
+  /**
+      * 终端数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TerminalCount: string
+
+  /**
+      * 审核备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 财务联系人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FinancialContact?: string
+
+  /**
+      * 商户名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MerchantName: string
+
+  /**
+      * 法人性别（1男，2女）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossSex: string
+
+  /**
+      * 商户编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MerchantNo: string
+
+  /**
+      * 法人住址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossAddress?: string
+
+  /**
+      * 县/区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Country: string
+
+  /**
+      * 详细地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Address: string
+
+  /**
+      * 法人职业
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossJob?: string
+
+  /**
+      * 许可证图片【私密区】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicencePicture?: string
+
+  /**
+      * 组织机构代码证过期时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationCodeEndDate?: string
+
+  /**
+      * 营业时间，多个以小写逗号分开(9:00-12:00,13:00-18:00)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OpenHours: string
+
+  /**
+      * 其他资料2
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherPictureTwo?: string
+
+  /**
+      * 其他资料1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherPictureOne?: string
+
+  /**
+      * 银行户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountName: string
+
+  /**
+      * 合同数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContractCount: string
+
+  /**
+      * 授权文件【私密区】（当结算帐户身份为法人亲属时必传）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LicencePictureTwo?: string
+
+  /**
+      * 银行账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountNo: string
+
+  /**
+      * 法人邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossEmail?: string
+
+  /**
+      * 结算账户类型（2对私，1对公）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountType: string
+
+  /**
+      * 税务登记证过期时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaxCollectionEndDate?: string
+
+  /**
+      * 开户行名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BankName: string
+
+  /**
+      * 联系电话
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Telephone: string
+
+  /**
+      * 外部商户主键编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutMerchantId: string
+
+  /**
+      * 城市编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CityId: string
+
+  /**
+      * 法人证件国别/地区（中国CHN，香港HKG，澳门MAC，台湾CTN）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossIdCount: string
+
+  /**
+      * 商户标记，自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tag?: string
+
+  /**
+      * 财务联系人电话
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FinancialTelephone?: string
+
+  /**
+      * 法人姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BossName: string
+
+  /**
+      * 组织机构代码证生效时间（yyyy-mm-dd）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrganizationCodeStartDate?: string
+
+  /**
+      * 商户logo【公共区】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Logo?: string
+
+  /**
+      * 其他资料4
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherPictureFour?: string
+
+  /**
+      * 税务登记证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaxCollectionNo?: string
+}
+
+/**
  * 提交贸易材料结果
  */
 export interface ApplyTradeResult {
@@ -4723,78 +5106,18 @@ __其他__: 见附录-错误码表
 }
 
 /**
- * DescribeChargeDetail请求参数结构体
+ * QueryTrade请求参数结构体
  */
-export interface DescribeChargeDetailRequest {
+export interface QueryTradeRequest {
   /**
-   * 请求类型
+   * 贸易材料流水号
    */
-  RequestType: string
+  TradeFileId: string
 
   /**
-   * 商户号
+   * 接入环境。沙箱环境填sandbox
    */
-  MerchantCode: string
-
-  /**
-   * 支付渠道
-   */
-  PayChannel: string
-
-  /**
-   * 子渠道
-   */
-  PayChannelSubId: number
-
-  /**
-   * 原始交易订单号或者流水号
-   */
-  OrderId: string
-
-  /**
-   * 父账户账号，资金汇总账号
-   */
-  BankAccountNumber: string
-
-  /**
-   * 收单渠道类型
-   */
-  AcquiringChannelType: string
-
-  /**
-   * 平台短号(银行分配)
-   */
-  PlatformShortNumber: string
-
-  /**
-   * 聚鑫分配的安全ID
-   */
-  MidasSecretId: string
-
-  /**
-   * 聚鑫分配的支付主MidasAppId
-   */
-  MidasAppId: string
-
-  /**
-   * 计费签名
-   */
-  MidasSignature: string
-
-  /**
-   * 交易流水号
-   */
-  TransSequenceNumber: string
-
-  /**
-   * Midas环境参数
-   */
-  MidasEnvironment: string
-
-  /**
-   * 保留域
-   */
-  ReservedMessage?: string
+  Profile?: string
 }
 
 /**
@@ -4881,6 +5204,22 @@ __PROCESSING__: 绑定中
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BindSerialNo: string
+}
+
+/**
+ * 超额信息结果
+ */
+export interface QueryExceedingInfoResult {
+  /**
+   * 记录总数。
+   */
+  Count: number
+
+  /**
+      * 超额信息数据。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<QueryExceedingInfoData>
 }
 
 /**
@@ -6853,6 +7192,21 @@ export interface QueryItem {
 }
 
 /**
+ * 分页参数
+ */
+export interface Paging {
+  /**
+   * 页码
+   */
+  Index: number
+
+  /**
+   * 页长
+   */
+  Count: number
+}
+
+/**
  * RegisterBehavior返回参数结构体
  */
 export interface RegisterBehaviorResponse {
@@ -7141,428 +7495,41 @@ export interface RechargeMemberThirdPayResponse {
 }
 
 /**
- * 商户明细响应对象
+ * 超额信息数据
  */
-export interface ViewMerchantResult {
+export interface QueryExceedingInfoData {
   /**
-      * 城市
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  City: string
-
-  /**
-      * 税务登记证图片【私密区】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaxCollectionPicture?: string
-
-  /**
-      * 法人证件号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossIdNo: string
-
-  /**
-      * 法人亲属证件号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountIdNo?: string
-
-  /**
-      * 其他资料3
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OtherPictureThree?: string
-
-  /**
-      * 法人亲属证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）结算账户人身份为法人亲属时必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountIdType?: string
-
-  /**
-      * 商户状态（0未审核，1已审核，2审核未通过，3待审核，4已删除，5初审通过）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 营业执照图片【私密区】（系统返回的图片路径）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BusinessLicensePicture: string
-
-  /**
-      * 品牌名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BrandName: string
-
-  /**
-      * 法人身份证正面【私密区】（系统返回的图片路径）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossPositive: string
-
-  /**
-      * 开通应用数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AppCount: string
-
-  /**
-      * 法人身份证背面【私密区】（系统返回的图片路径）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossBack: string
-
-  /**
-      * 组织机构代码证图片【私密区】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationCodePicture?: string
-
-  /**
-      * 营业执照过期时间（yyyy-mm-dd）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BusinessLicenseEndDate: string
-
-  /**
-      * 组织机构代码证号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationCodeNo?: string
-
-  /**
-      * 机构编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AgentNo?: string
-
-  /**
-      * 省份
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Province: string
-
-  /**
-      * 法人证件生效时间（yyyy-mm-dd）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossStartDate: string
-
-  /**
-      * 更新时间（yyyy-mm-dd hh:ii:ss）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
-
-  /**
-      * 清算联行号，开户行行号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BankNo: string
-
-  /**
-      * 税务登记证生效时间（yyyy-mm-dd）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaxCollectionStartDate?: string
-
-  /**
-      * 营业执照生效时间（yyyy-mm-dd）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BusinessLicenseStartDate: string
-
-  /**
-      * 客户经理用户编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountManagerId?: string
-
-  /**
-      * 分类编号(多个以小写逗号分开)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClassificationIds: string
-
-  /**
-      * 营业执照类型（1三证合一，2非三证合一）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BusinessLicenseType: string
-
-  /**
-      * 法人证件过期时间（yyyy-mm-dd）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossEndDate: string
-
-  /**
-      * 营业执照编号（系统有唯一性校验）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BusinessLicenseNo: string
-
-  /**
-      * 机构名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AgentName?: string
-
-  /**
-      * 商户简介
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Intro?: string
-
-  /**
-      * 法人证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossIdType: string
-
-  /**
-      * 添加时间（yyyy-mm-dd hh:ii:ss）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AddTime: string
-
-  /**
-      * 门店数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ShopCount: string
-
-  /**
-      * 结算账户人身份（1法人，2法人亲属），结算帐户为对私时必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountBoss?: string
-
-  /**
-      * 分类名称(多个以小写逗号分开)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClassificationNames: string
-
-  /**
-      * 法人电话
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossTelephone?: string
-
-  /**
-      * 客户经理姓名，必须为系统后台的管理员真实姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountManagerName?: string
-
-  /**
-      * 终端数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TerminalCount: string
-
-  /**
-      * 审核备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Remark: string
-
-  /**
-      * 财务联系人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FinancialContact?: string
-
-  /**
-      * 商户名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MerchantName: string
-
-  /**
-      * 法人性别（1男，2女）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossSex: string
-
-  /**
-      * 商户编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MerchantNo: string
-
-  /**
-      * 法人住址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossAddress?: string
-
-  /**
-      * 县/区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Country: string
-
-  /**
-      * 详细地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Address: string
-
-  /**
-      * 法人职业
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossJob?: string
-
-  /**
-      * 许可证图片【私密区】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LicencePicture?: string
-
-  /**
-      * 组织机构代码证过期时间（yyyy-mm-dd）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrganizationCodeEndDate?: string
-
-  /**
-      * 营业时间，多个以小写逗号分开(9:00-12:00,13:00-18:00)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OpenHours: string
-
-  /**
-      * 其他资料2
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OtherPictureTwo?: string
-
-  /**
-      * 其他资料1
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OtherPictureOne?: string
-
-  /**
-      * 银行户名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountName: string
-
-  /**
-      * 合同数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContractCount: string
-
-  /**
-      * 授权文件【私密区】（当结算帐户身份为法人亲属时必传）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LicencePictureTwo?: string
-
-  /**
-      * 银行账号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountNo: string
-
-  /**
-      * 法人邮箱
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossEmail?: string
-
-  /**
-      * 结算账户类型（2对私，1对公）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountType: string
-
-  /**
-      * 税务登记证过期时间（yyyy-mm-dd）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaxCollectionEndDate?: string
-
-  /**
-      * 开户行名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BankName: string
-
-  /**
-      * 联系电话
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Telephone: string
-
-  /**
-      * 外部商户主键编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OutMerchantId: string
-
-  /**
-      * 城市编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CityId: string
-
-  /**
-      * 法人证件国别/地区（中国CHN，香港HKG，澳门MAC，台湾CTN）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossIdCount: string
-
-  /**
-      * 商户标记，自定义参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tag?: string
-
-  /**
-      * 财务联系人电话
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FinancialTelephone?: string
+   * 代理商ID。
+   */
+  AgentId: string
 
   /**
-      * 法人姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BossName: string
+   * 代理商名称。
+   */
+  AgentName: string
 
   /**
-      * 组织机构代码证生效时间（yyyy-mm-dd）
+      * 主播ID。当入参Dimension为ANCHOR或ORDER时，该字段才会有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OrganizationCodeStartDate?: string
+  AnchorId: string
 
   /**
-      * 商户logo【公共区】
+      * 主播名称。当入参Dimension为ANCHOR或ORDER时，该字段才会有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Logo?: string
+  AnchorName: string
 
   /**
-      * 其他资料4
+      * 订单号。当入参Dimension为ORDER时，该字段才会有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OtherPictureFour?: string
+  OrderId: string
 
   /**
-      * 税务登记证号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaxCollectionNo?: string
+   * 超额类型。目前支持 AGENT_EXCEED_100 和 ANCHOR_EXCEED_100_12 两种类型。
+   */
+  ExceedingType: string
 }
 
 /**
@@ -10906,29 +10873,97 @@ export interface AgencyClientInfo {
 }
 
 /**
- * ExecuteMemberTransaction返回参数结构体
+ * 贸易材料明细查询数据
  */
-export interface ExecuteMemberTransactionResponse {
+export interface QueryTradeData {
   /**
-   * 请求类型
+   * 商户号
    */
-  RequestType?: string
+  MerchantId: string
 
   /**
-   * 银行流水号
+   * 贸易材料流水号
    */
-  FrontSequenceNumber?: string
+  TradeFileId: string
 
   /**
-      * 保留域
+   * 贸易材料订单号
+   */
+  TradeOrderId: string
+
+  /**
+   * 审核状态
+   */
+  Status: string
+
+  /**
+      * 失败原因
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReservedMessage?: string
+  FailReason: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 付款人ID
    */
-  RequestId?: string
+  PayerId: string
+
+  /**
+   * 收款人姓名
+   */
+  PayeeName: string
+
+  /**
+   * 收款人常驻国家或地区编码
+   */
+  PayeeCountryCode: string
+
+  /**
+   * 交易类型
+   */
+  TradeType: string
+
+  /**
+   * 交易日期
+   */
+  TradeTime: string
+
+  /**
+   * 交易币种
+   */
+  TradeCurrency: string
+
+  /**
+   * 交易金额
+   */
+  TradeAmount: string
+
+  /**
+   * 交易名称
+   */
+  TradeName: string
+
+  /**
+   * 交易数量
+   */
+  TradeCount: number
+
+  /**
+      * 货贸承运人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GoodsCarrier: string
+
+  /**
+      * 服贸交易细节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceDetail: string
+
+  /**
+      * 服贸服务时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceTime: string
 }
 
 /**
@@ -13665,6 +13700,26 @@ __WeChat__:微信视频号
 }
 
 /**
+ * QueryExceedingInfo请求参数结构体
+ */
+export interface QueryExceedingInfoRequest {
+  /**
+   * 超额日期。格式为yyyy-MM-dd。
+   */
+  TimeStr: string
+
+  /**
+   * 维度。目前支持三个维度: AGENT, ANCHOR, ORDER。不填默认使用AGENT维度。
+   */
+  Dimension?: string
+
+  /**
+   * 分页信息。不填默认Index为1，Count为100。
+   */
+  PageNumber?: Paging
+}
+
+/**
  * 第三方渠道用户信息
  */
 export interface ExternalContractUserInfo {
@@ -16203,18 +16258,78 @@ export interface UploadFileResult {
 }
 
 /**
- * QueryTrade请求参数结构体
+ * DescribeChargeDetail请求参数结构体
  */
-export interface QueryTradeRequest {
+export interface DescribeChargeDetailRequest {
   /**
-   * 贸易材料流水号
+   * 请求类型
    */
-  TradeFileId: string
+  RequestType: string
 
   /**
-   * 接入环境。沙箱环境填sandbox
+   * 商户号
    */
-  Profile?: string
+  MerchantCode: string
+
+  /**
+   * 支付渠道
+   */
+  PayChannel: string
+
+  /**
+   * 子渠道
+   */
+  PayChannelSubId: number
+
+  /**
+   * 原始交易订单号或者流水号
+   */
+  OrderId: string
+
+  /**
+   * 父账户账号，资金汇总账号
+   */
+  BankAccountNumber: string
+
+  /**
+   * 收单渠道类型
+   */
+  AcquiringChannelType: string
+
+  /**
+   * 平台短号(银行分配)
+   */
+  PlatformShortNumber: string
+
+  /**
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
+
+  /**
+   * 聚鑫分配的支付主MidasAppId
+   */
+  MidasAppId: string
+
+  /**
+   * 计费签名
+   */
+  MidasSignature: string
+
+  /**
+   * 交易流水号
+   */
+  TransSequenceNumber: string
+
+  /**
+   * Midas环境参数
+   */
+  MidasEnvironment: string
+
+  /**
+   * 保留域
+   */
+  ReservedMessage?: string
 }
 
 /**

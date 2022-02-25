@@ -625,7 +625,7 @@ export interface IstioConfig {
   OutboundTrafficPolicy: string
 
   /**
-   * 调用链配置
+   * 调用链配置（Deprecated，请使用 MeshConfig.Tracing 进行配置）
    */
   Tracing?: TracingConfig
 
@@ -664,6 +664,16 @@ export interface TracingConfig {
    * 调用链采样率，百分比
    */
   Sampling?: number
+
+  /**
+   * 是否启用调用跟踪
+   */
+  Enable?: boolean
+
+  /**
+   * 腾讯云 APM 服务相关参数
+   */
+  APM?: APM
 }
 
 /**
@@ -820,6 +830,28 @@ export interface DescribeMeshListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 腾讯云应用性能管理服务参数
+ */
+export interface APM {
+  /**
+   * 是否启用
+   */
+  Enable: boolean
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: string
+
+  /**
+      * APM 实例，如果创建时传入的参数为空，则表示自动创建 APM 实例。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId?: string
 }
 
 /**

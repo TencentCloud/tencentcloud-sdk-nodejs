@@ -62,7 +62,7 @@ import {
   QueryAcctInfoListResponse,
   ContractInfo,
   ExternalReturnContractInfo,
-  QueryTradeData,
+  ExecuteMemberTransactionResponse,
   OrganizationInfo,
   QueryApplicationMaterialRequest,
   ConfirmOrderRequest,
@@ -81,6 +81,7 @@ import {
   DistributeAccreditTlinxRequest,
   QueryContractRelateShopRequest,
   QueryContractPayFeeResult,
+  QueryExceedingInfoResponse,
   AddContractRequest,
   CreateAcctResponse,
   DistributeAddReceiverRequest,
@@ -124,6 +125,7 @@ import {
   RevokeMemberRechargeThirdPayRequest,
   QuerySinglePayRequest,
   ApplyTradeResponse,
+  ViewMerchantResult,
   ApplyTradeResult,
   QueryContractPayFeeResponse,
   BindRelateAcctSmallAmountResponse,
@@ -140,9 +142,10 @@ import {
   RegisterBehaviorRequest,
   UnifiedOrderInSubOrderList,
   UnbindOpenBankExternalSubMerchantBankAccountResponse,
-  DescribeChargeDetailRequest,
+  QueryTradeRequest,
   QueryBankWithdrawCashDetailsRequest,
   QueryOpenBankBindExternalSubMerchantBankAccountResult,
+  QueryExceedingInfoResult,
   QueryMerchantPayWayListRequest,
   WithdrawCashMembershipRequest,
   RevResigterBillSupportWithdrawRequest,
@@ -184,6 +187,7 @@ import {
   BindRelateAcctUnionPayRequest,
   FileItem,
   QueryItem,
+  Paging,
   RegisterBehaviorResponse,
   QueryBillDownloadURLData,
   ApplyWithdrawalResponse,
@@ -192,7 +196,7 @@ import {
   DeduceQuotaRequest,
   QueryMerchantBalanceData,
   RechargeMemberThirdPayResponse,
-  ViewMerchantResult,
+  QueryExceedingInfoData,
   QueryExchangerateResult,
   QueryBatchPaymentResultRequest,
   BindAcctResponse,
@@ -264,7 +268,7 @@ import {
   QueryBankWithdrawCashDetailsResponse,
   UploadTaxPaymentResponse,
   AgencyClientInfo,
-  ExecuteMemberTransactionResponse,
+  QueryTradeData,
   QueryOpenBankUnbindExternalSubMerchantBankAccountResult,
   ApplyDeclareResult,
   ContractOrderRequest,
@@ -331,6 +335,7 @@ import {
   QuerySinglePaymentResultData,
   UploadOrgFileResponse,
   CreateAnchorRequest,
+  QueryExceedingInfoRequest,
   ExternalContractUserInfo,
   ContractUserInfo,
   ApplyApplicationMaterialRequest,
@@ -400,7 +405,7 @@ import {
   AddContractResult,
   QueryOrderResponse,
   UploadFileResult,
-  QueryTradeRequest,
+  DescribeChargeDetailRequest,
   PayOrderResult,
   CreateCustAcctIdResponse,
   QueryAgentTaxPaymentBatchRequest,
@@ -1937,6 +1942,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryReconciliationDocumentResponse) => void
   ): Promise<QueryReconciliationDocumentResponse> {
     return this.request("QueryReconciliationDocument", req, cb)
+  }
+
+  /**
+   * 灵云-查询超额信息
+   */
+  async QueryExceedingInfo(
+    req: QueryExceedingInfoRequest,
+    cb?: (error: string, rep: QueryExceedingInfoResponse) => void
+  ): Promise<QueryExceedingInfoResponse> {
+    return this.request("QueryExceedingInfo", req, cb)
   }
 
   /**

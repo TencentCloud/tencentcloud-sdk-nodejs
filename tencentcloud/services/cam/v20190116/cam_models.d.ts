@@ -327,7 +327,7 @@ export interface GetServiceLinkedRoleDeletionStatusResponse {
  */
 export interface GetSecurityLastUsedRequest {
     /**
-      * 查询密钥ID列表
+      * 查询密钥ID列表。最多支持10个。
       */
     SecretIdList: Array<string>;
 }

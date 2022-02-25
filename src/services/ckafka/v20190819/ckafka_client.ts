@@ -200,7 +200,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建消费者
+   * 创建消费者组
    */
   async CreateConsumer(
     req: CreateConsumerRequest,

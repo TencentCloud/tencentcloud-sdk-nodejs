@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeGroupInfo(req: DescribeGroupInfoRequest, cb?: (error: string, rep: DescribeGroupInfoResponse) => void): Promise<DescribeGroupInfoResponse>;
     /**
-     * 创建消费者
+     * 创建消费者组
      */
     CreateConsumer(req: CreateConsumerRequest, cb?: (error: string, rep: CreateConsumerResponse) => void): Promise<CreateConsumerResponse>;
     /**

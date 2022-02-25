@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupInfo", req, cb);
     }
     /**
-     * 创建消费者
+     * 创建消费者组
      */
     async CreateConsumer(req, cb) {
         return this.request("CreateConsumer", req, cb);

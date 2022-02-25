@@ -1488,6 +1488,16 @@ it("cpdp.v20190820.QueryReconciliationDocument", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryExceedingInfo", async function () {
+    try {
+       const data = await client.QueryExceedingInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RefundOrder", async function () {
     try {
        const data = await client.RefundOrder({})

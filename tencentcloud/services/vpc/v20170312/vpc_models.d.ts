@@ -4541,7 +4541,7 @@ export interface CreateVpnConnectionResponse {
     RequestId?: string;
 }
 /**
- * IP地址模版
+ * IP地址模板
  */
 export interface AddressTemplateSpecification {
     /**
@@ -10289,7 +10289,7 @@ export interface ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest {
     DestinationNatRule: DestinationIpPortTranslationNatRule;
 }
 /**
- * 协议端口模版
+ * 协议端口模板
  */
 export interface ServiceTemplateSpecification {
     /**

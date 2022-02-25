@@ -919,6 +919,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryReconciliationDocument", req, cb);
     }
     /**
+     * 灵云-查询超额信息
+     */
+    async QueryExceedingInfo(req, cb) {
+        return this.request("QueryExceedingInfo", req, cb);
+    }
+    /**
      * 云鉴-消费订单退款的接口
      */
     async RefundOrder(req, cb) {

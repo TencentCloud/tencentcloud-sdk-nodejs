@@ -245,6 +245,11 @@ export interface KTVMusicDetailInfo {
    * 副歌片段数据列表
    */
   ChorusClipSet: Array<ChorusClip>
+
+  /**
+   * 前奏间隔，单位：毫秒；注：若参数返回为0则无人声部分
+   */
+  PreludeInterval: number
 }
 
 /**
@@ -893,6 +898,11 @@ export interface DescribeKTVMusicDetailResponse {
    * 副歌片段数据列表
    */
   ChorusClipSet: Array<ChorusClip>
+
+  /**
+   * 前奏间隔，单位：毫秒；注：若参数返回为0则无人声部分
+   */
+  PreludeInterval: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

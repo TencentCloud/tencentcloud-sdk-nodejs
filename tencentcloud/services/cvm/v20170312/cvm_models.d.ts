@@ -1440,10 +1440,12 @@ export interface ResetInstancesPasswordResponse {
 export interface InquiryPriceRunInstancesRequest {
     /**
       * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+ <b>注：如果您不指定LaunchTemplate参数，则Placement为必选参数。若同时传递Placement和LaunchTemplate，则默认覆盖LaunchTemplate中对应的Placement的值。</b>
       */
     Placement: Placement;
     /**
       * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
+ <b>注：如果您不指定LaunchTemplate参数，则ImageId为必选参数。若同时传递ImageId和LaunchTemplate，则默认覆盖LaunchTemplate中对应的ImageId的值。</b>
       */
     ImageId: string;
     /**
@@ -2970,8 +2972,7 @@ export interface RunInstancesRequest {
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
       * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
- <b>注：本数据结构中的Zone为必填参数。</b>
-如果您不指定LaunchTemplate参数，则Placement为必选参数。若同时传递该参数和LaunchTemplate，则默认覆盖LaunchTemplate中对应的值。
+ <b>注：如果您不指定LaunchTemplate参数，则Placement为必选参数。若同时传递Placement和LaunchTemplate，则默认覆盖LaunchTemplate中对应的Placement的值。</b>
       */
     Placement?: Placement;
     /**
@@ -2981,7 +2982,7 @@ export interface RunInstancesRequest {
     InstanceType?: string;
     /**
       * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
-如果您不指定LaunchTemplate参数，则ImageId为必选参数。若同时传递该参数和LaunchTemplate，则默认覆盖LaunchTemplate中对应的值。
+ <b>注：如果您不指定LaunchTemplate参数，则ImageId为必选参数。若同时传递ImageId和LaunchTemplate，则默认覆盖LaunchTemplate中对应的ImageId的值。</b>
       */
     ImageId?: string;
     /**

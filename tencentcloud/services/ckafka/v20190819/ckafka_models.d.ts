@@ -2390,7 +2390,7 @@ export interface CreateConsumerRequest {
       */
     GroupName: string;
     /**
-      * topic名称
+      * topic名称，TopicName、TopicNameList 需要显示指定一个存在的topic名称
       */
     TopicName?: string;
     /**
@@ -3215,7 +3215,7 @@ export interface InstanceDetail {
       */
     RenewFlag: number;
     /**
-      * 实例状态 int：0表示健康，1表示告警，2 表示实例状态异常
+      * 实例状态 int：1表示健康，2表示告警，3 表示实例状态异常
       */
     Healthy: number;
     /**

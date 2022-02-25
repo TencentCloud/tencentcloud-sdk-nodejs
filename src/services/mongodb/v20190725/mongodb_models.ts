@@ -22,7 +22,7 @@ export interface ResetDBInstancePasswordResponse {
   /**
    * 异步请求Id，用户查询该流程的运行状态
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -227,12 +227,12 @@ export interface DescribeCurrentOpResponse {
   /**
    * 符合查询条件的操作总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 当前操作列表
    */
-  CurrentOps?: Array<CurrentOp>
+  CurrentOps: Array<CurrentOp>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -247,7 +247,7 @@ export interface IsolateDBInstanceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -277,7 +277,7 @@ export interface CreateBackupDBInstanceResponse {
   /**
    * 查询备份流程的状态
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -376,7 +376,7 @@ export interface InquirePriceCreateDBInstancesRequest {
   Zone: string
 
   /**
-   * 每个副本集内节点个数，当前副本集节点数固定为3，分片从节点数可选，具体参照查询云数据库的售卖规格返回参数
+   * 每个副本集内节点个数，具体参照查询云数据库的售卖规格返回参数
    */
   NodeNum: number
 
@@ -396,7 +396,7 @@ export interface InquirePriceCreateDBInstancesRequest {
   MongoVersion: string
 
   /**
-   * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；STDS5：标准型
+   * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；
    */
   MachineCode: string
 
@@ -591,7 +591,7 @@ export interface AssignProjectRequest {
   InstanceIds: Array<string>
 
   /**
-   * 项目ID
+   * 项目ID，用户已创建项目的唯一ID,非自定义
    */
   ProjectId: number
 }
@@ -694,6 +694,16 @@ export interface InquirePriceModifyDBInstanceSpecRequest {
    * 变更配置后实例磁盘大小，单位：GB。
    */
   Volume: number
+
+  /**
+   * 实例变更后的节点数，取值范围具体参照查询云数据库的售卖规格返回参数。默认为不变更节点数
+   */
+  NodeNum?: number
+
+  /**
+   * 实例变更后的分片数，取值范围具体参照查询云数据库的售卖规格返回参数。只能增加不能减少，默认为不变更分片数
+   */
+  ReplicateSetNum?: number
 }
 
 /**
@@ -943,7 +953,7 @@ export interface InquirePriceModifyDBInstanceSpecResponse {
   /**
    * 价格。
    */
-  Price?: DBInstancePrice
+  Price: DBInstancePrice
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1121,7 +1131,7 @@ export interface ResetDBInstancePasswordRequest {
   UserName: string
 
   /**
-   * 新密码
+   * 新密码，新密码长度不能少于8位
    */
   Password: string
 }
@@ -1148,12 +1158,12 @@ export interface DescribeDBInstancesResponse {
   /**
    * 符合查询条件的实例总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例详细信息列表
    */
-  InstanceDetails?: Array<InstanceDetail>
+  InstanceDetails: Array<InstanceDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1196,7 +1206,7 @@ export interface InstanceIntegerParam {
   Min: string
 
   /**
-   * 是否徐亚哦重启后生效 1:需要重启；0:无需重启
+   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
    */
   NeedRestart: string
 
@@ -1216,12 +1226,12 @@ export interface InstanceIntegerParam {
   ValueType: string
 
   /**
-   * 是否正常获取到，1：未正常获取；0：正常获取，仅对前端有实际意义；
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
    */
   Status: number
 
   /**
-   * 暂时未用到，前端使用redis侧代码，为了兼容，保留该参数
+   * 冗余字段，可忽略
    */
   Unit: string
 }
@@ -1484,7 +1494,7 @@ export interface AssignProjectResponse {
   /**
    * 返回的异步任务ID列表
    */
-  FlowIds?: Array<number>
+  FlowIds: Array<number>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1535,6 +1545,17 @@ export interface BackupDownloadTask {
    * 备份数据下载链接
    */
   Url: string
+
+  /**
+   * 备份文件备份类型，0-逻辑备份，1-物理备份
+   */
+  BackupMethod: number
+
+  /**
+      * 发起备份时指定的备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupDesc: string
 }
 
 /**
@@ -1582,7 +1603,7 @@ export interface InstanceMultiParam {
   EnumValue: Array<string>
 
   /**
-   * 是否需要重启
+   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
    */
   NeedRestart: string
 
@@ -1592,7 +1613,7 @@ export interface InstanceMultiParam {
   ParamName: string
 
   /**
-   * 状态值
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
    */
   Status: number
 
@@ -1602,7 +1623,7 @@ export interface InstanceMultiParam {
   Tips: Array<string>
 
   /**
-   * 值类型，multi混合类型
+   * 当前值的类型描述，默认为multi
    */
   ValueType: string
 }
@@ -1617,7 +1638,7 @@ export interface DescribeClientConnectionsRequest {
   InstanceId: string
 
   /**
-   * 查询返回记录条数，默认为10000。
+   * 单次请求返回的数量，最小值为1，最大值为1000，默认值为1000。
    */
   Limit?: number
 
@@ -1634,22 +1655,22 @@ export interface DescribeDBInstanceDealResponse {
   /**
    * 订单状态，1：未支付，2：已支付，3：发货中，4：发货成功，5：发货失败，6：退款，7：订单关闭，8：超时未支付关闭。
    */
-  Status?: number
+  Status: number
 
   /**
    * 订单原价。
    */
-  OriginalPrice?: number
+  OriginalPrice: number
 
   /**
    * 订单折扣价格。
    */
-  DiscountPrice?: number
+  DiscountPrice: number
 
   /**
    * 订单行为，purchase：新购，renew：续费，upgrade：升配，downgrade：降配，refund：退货退款。
    */
-  Action?: string
+  Action: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1677,42 +1698,42 @@ export interface ModifyDBInstanceSpecResponse {
  */
 export interface InstanceTextParam {
   /**
-   * 当前值(暂未使用)
+   * 当前值
    */
   CurrentValue: string
 
   /**
-   * 默认值(暂未使用)
+   * 默认值
    */
   DefaultValue: string
 
   /**
-   * 是否需要重启(暂未使用)
+   * 是否需要重启
    */
   NeedRestart: string
 
   /**
-   * 参数名称(暂未使用)
+   * 参数名称
    */
   ParamName: string
 
   /**
-   * text类型值(暂未使用)
+   * text类型值
    */
   TextValue: string
 
   /**
-   * 说明(暂未使用)
+   * 参数说明
    */
   Tips: Array<string>
 
   /**
-   * 值类型(暂未使用)
+   * 值类型说明
    */
   ValueType: string
 
   /**
-   * 值获取状态(暂未使用)
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
    */
   Status: string
 }
@@ -1724,7 +1745,7 @@ export interface OfflineIsolatedDBInstanceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId?: string
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1747,12 +1768,12 @@ export interface DescribeBackupDownloadTaskRequest {
   BackupName?: string
 
   /**
-   * 指定要查询任务的时间范围，StartTime指定开始时间，不填默认不限制开始时间
+   * 指定查询时间范围内的任务，StartTime指定开始时间，不填默认不限制开始时间
    */
   StartTime?: string
 
   /**
-   * 指定要查询任务的时间范围，EndTime指定结束时间，不填默认不限制结束时间
+   * 指定查询时间范围内的任务，EndTime指定截止时间，不填默认不限制截止时间
    */
   EndTime?: string
 
@@ -1807,7 +1828,7 @@ export interface RenameInstanceRequest {
   InstanceId: string
 
   /**
-   * 实例名称
+   * 自定义实例名称，名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符 -
    */
   NewName: string
 }
@@ -1852,7 +1873,7 @@ export interface InstanceEnumParam {
   EnumValue: Array<string>
 
   /**
-   * 是否需要重启后生效，"1"需要，"0"无需重启
+   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
    */
   NeedRestart: string
 
@@ -1872,7 +1893,7 @@ export interface InstanceEnumParam {
   ValueType: string
 
   /**
-   * 是否获取到参数，1为获取，前端正常显示，0:前段显示loading
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
    */
   Status: number
 }
@@ -1914,12 +1935,12 @@ export interface DescribeClientConnectionsResponse {
   /**
    * 客户端连接信息，包括客户端IP和对应IP的连接数量。
    */
-  Clients?: Array<ClientConnection>
+  Clients: Array<ClientConnection>
 
   /**
    * 满足条件的记录总条数，可用于分页查询。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2041,12 +2062,12 @@ export interface DescribeDBBackupsResponse {
   /**
    * 备份列表
    */
-  BackupList?: Array<BackupInfo>
+  BackupList: Array<BackupInfo>
 
   /**
    * 备份总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2393,7 +2414,7 @@ export interface InquirePriceCreateDBInstancesResponse {
   /**
    * 价格
    */
-  Price?: DBInstancePrice
+  Price: DBInstancePrice
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
