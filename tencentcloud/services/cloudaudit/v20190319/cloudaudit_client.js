@@ -28,16 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("cloudaudit.tencentcloudapi.com", "2019-03-19", clientConfig);
     }
     /**
+     * 修改云审计跟踪
+     */
+    async ModifyAuditTrack(req, cb) {
+        return this.request("ModifyAuditTrack", req, cb);
+    }
+    /**
      * 开启跟踪集
      */
     async StartLogging(req, cb) {
         return this.request("StartLogging", req, cb);
     }
     /**
+     * 查询云审计支持的cos可用区
+     */
+    async ListCosEnableRegion(req, cb) {
+        return this.request("ListCosEnableRegion", req, cb);
+    }
+    /**
      * 查询AttributeKey的有效取值范围
      */
     async GetAttributeKey(req, cb) {
         return this.request("GetAttributeKey", req, cb);
+    }
+    /**
+     * 创建跟踪集
+     */
+    async CreateAuditTrack(req, cb) {
+        return this.request("CreateAuditTrack", req, cb);
     }
     /**
      * 查询云审计支持的cmq的可用区
@@ -108,10 +126,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAudit", req, cb);
     }
     /**
-     * 查询云审计支持的cos可用区
+     * 删除云审计跟踪集
      */
-    async ListCosEnableRegion(req, cb) {
-        return this.request("ListCosEnableRegion", req, cb);
+    async DeleteAuditTrack(req, cb) {
+        return this.request("DeleteAuditTrack", req, cb);
     }
     /**
      * 用于对操作日志进行检索，便于用户进行查询相关的操作信息。

@@ -18,6 +18,16 @@ const client = new tencentcloud.cloudaudit.v20190319.Client({
 })
 describe("cloudaudit.v20190319.test.js", function () {
 
+it("cloudaudit.v20190319.ModifyAuditTrack", async function () {
+    try {
+       const data = await client.ModifyAuditTrack({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudaudit.v20190319.StartLogging", async function () {
     try {
        const data = await client.StartLogging({})
@@ -28,9 +38,29 @@ it("cloudaudit.v20190319.StartLogging", async function () {
     }
 })
 
+it("cloudaudit.v20190319.ListCosEnableRegion", async function () {
+    try {
+       const data = await client.ListCosEnableRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cloudaudit.v20190319.GetAttributeKey", async function () {
     try {
        const data = await client.GetAttributeKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cloudaudit.v20190319.CreateAuditTrack", async function () {
+    try {
+       const data = await client.CreateAuditTrack({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +168,9 @@ it("cloudaudit.v20190319.CreateAudit", async function () {
     }
 })
 
-it("cloudaudit.v20190319.ListCosEnableRegion", async function () {
+it("cloudaudit.v20190319.DeleteAuditTrack", async function () {
     try {
-       const data = await client.ListCosEnableRegion({})
+       const data = await client.DeleteAuditTrack({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

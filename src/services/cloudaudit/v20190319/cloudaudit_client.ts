@@ -24,21 +24,26 @@ import {
   GetAttributeKeyRequest,
   DescribeAuditTracksResponse,
   DeleteAuditResponse,
-  UpdateAuditRequest,
+  ModifyAuditTrackResponse,
   InquireAuditCreditRequest,
   DescribeEventsResponse,
   ListCosEnableRegionResponse,
   LookUpEventsRequest,
   StartLoggingRequest,
+  UpdateAuditRequest,
   DescribeAuditTracksRequest,
   CreateAuditResponse,
+  DeleteAuditTrackRequest,
   StartLoggingResponse,
   AttributeKeyDetail,
   ListCosEnableRegionRequest,
   ListKeyAliasByRegionResponse,
+  CreateAuditTrackResponse,
   Resource,
   ListAuditsRequest,
+  ModifyAuditTrackRequest,
   StopLoggingResponse,
+  CreateAuditTrackRequest,
   LookupAttribute,
   ListAuditsResponse,
   KeyMetadata,
@@ -52,6 +57,7 @@ import {
   GetAttributeKeyResponse,
   ListCmqEnableRegionResponse,
   LookUpEventsResponse,
+  DeleteAuditTrackResponse,
   CosRegionInfo,
   DescribeAuditResponse,
   Event,
@@ -68,6 +74,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云审计跟踪
+   */
+  async ModifyAuditTrack(
+    req?: ModifyAuditTrackRequest,
+    cb?: (error: string, rep: ModifyAuditTrackResponse) => void
+  ): Promise<ModifyAuditTrackResponse> {
+    return this.request("ModifyAuditTrack", req, cb)
+  }
+
+  /**
    * 开启跟踪集
    */
   async StartLogging(
@@ -78,6 +94,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询云审计支持的cos可用区
+   */
+  async ListCosEnableRegion(
+    req: ListCosEnableRegionRequest,
+    cb?: (error: string, rep: ListCosEnableRegionResponse) => void
+  ): Promise<ListCosEnableRegionResponse> {
+    return this.request("ListCosEnableRegion", req, cb)
+  }
+
+  /**
    * 查询AttributeKey的有效取值范围
    */
   async GetAttributeKey(
@@ -85,6 +111,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAttributeKeyResponse) => void
   ): Promise<GetAttributeKeyResponse> {
     return this.request("GetAttributeKey", req, cb)
+  }
+
+  /**
+   * 创建跟踪集
+   */
+  async CreateAuditTrack(
+    req?: CreateAuditTrackRequest,
+    cb?: (error: string, rep: CreateAuditTrackResponse) => void
+  ): Promise<CreateAuditTrackResponse> {
+    return this.request("CreateAuditTrack", req, cb)
   }
 
   /**
@@ -196,13 +232,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云审计支持的cos可用区
+   * 删除云审计跟踪集
    */
-  async ListCosEnableRegion(
-    req: ListCosEnableRegionRequest,
-    cb?: (error: string, rep: ListCosEnableRegionResponse) => void
-  ): Promise<ListCosEnableRegionResponse> {
-    return this.request("ListCosEnableRegion", req, cb)
+  async DeleteAuditTrack(
+    req?: DeleteAuditTrackRequest,
+    cb?: (error: string, rep: DeleteAuditTrackResponse) => void
+  ): Promise<DeleteAuditTrackResponse> {
+    return this.request("DeleteAuditTrack", req, cb)
   }
 
   /**

@@ -148,6 +148,8 @@ var emr_1 = require("./emr");
 Object.defineProperty(exports, "emr", { enumerable: true, get: function () { return emr_1.emr; } });
 var es_1 = require("./es");
 Object.defineProperty(exports, "es", { enumerable: true, get: function () { return es_1.es; } });
+var ess_1 = require("./ess");
+Object.defineProperty(exports, "ess", { enumerable: true, get: function () { return ess_1.ess; } });
 var essbasic_1 = require("./essbasic");
 Object.defineProperty(exports, "essbasic", { enumerable: true, get: function () { return essbasic_1.essbasic; } });
 var facefusion_1 = require("./facefusion");

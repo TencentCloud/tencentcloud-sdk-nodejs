@@ -2944,9 +2944,14 @@ export interface AssociateDDoSEipLoadBalancerRequest {
   LoadBalancerID: string
 
   /**
-   * Clb所在地域，例如：ap-hongkong。
+   * CLB所在地域，例如：ap-hongkong。
    */
   LoadBalancerRegion: string
+
+  /**
+   * CLB内网IP
+   */
+  Vip?: string
 }
 
 /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DescribeAuditTracksResponse, DeleteAuditResponse, UpdateAuditRequest, InquireAuditCreditRequest, DescribeEventsResponse, ListCosEnableRegionResponse, LookUpEventsRequest, StartLoggingRequest, DescribeAuditTracksRequest, CreateAuditResponse, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, ListAuditsRequest, StopLoggingResponse, ListAuditsResponse, DescribeEventsRequest, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, CreateAuditRequest, DeleteAuditRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, DescribeAuditResponse } from "./cloudaudit_models";
+import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DescribeAuditTracksResponse, DeleteAuditResponse, ModifyAuditTrackResponse, InquireAuditCreditRequest, DescribeEventsResponse, ListCosEnableRegionResponse, LookUpEventsRequest, StartLoggingRequest, UpdateAuditRequest, DescribeAuditTracksRequest, CreateAuditResponse, DeleteAuditTrackRequest, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, CreateAuditTrackResponse, ListAuditsRequest, ModifyAuditTrackRequest, StopLoggingResponse, CreateAuditTrackRequest, ListAuditsResponse, DescribeEventsRequest, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, CreateAuditRequest, DeleteAuditRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, DeleteAuditTrackResponse, DescribeAuditResponse } from "./cloudaudit_models";
 /**
  * cloudaudit client
  * @class
@@ -8,13 +8,25 @@ import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest,
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 修改云审计跟踪
+     */
+    ModifyAuditTrack(req?: ModifyAuditTrackRequest, cb?: (error: string, rep: ModifyAuditTrackResponse) => void): Promise<ModifyAuditTrackResponse>;
+    /**
      * 开启跟踪集
      */
     StartLogging(req: StartLoggingRequest, cb?: (error: string, rep: StartLoggingResponse) => void): Promise<StartLoggingResponse>;
     /**
+     * 查询云审计支持的cos可用区
+     */
+    ListCosEnableRegion(req: ListCosEnableRegionRequest, cb?: (error: string, rep: ListCosEnableRegionResponse) => void): Promise<ListCosEnableRegionResponse>;
+    /**
      * 查询AttributeKey的有效取值范围
      */
     GetAttributeKey(req: GetAttributeKeyRequest, cb?: (error: string, rep: GetAttributeKeyResponse) => void): Promise<GetAttributeKeyResponse>;
+    /**
+     * 创建跟踪集
+     */
+    CreateAuditTrack(req?: CreateAuditTrackRequest, cb?: (error: string, rep: CreateAuditTrackResponse) => void): Promise<CreateAuditTrackResponse>;
     /**
      * 查询云审计支持的cmq的可用区
      */
@@ -64,9 +76,9 @@ export declare class Client extends AbstractClient {
      */
     CreateAudit(req: CreateAuditRequest, cb?: (error: string, rep: CreateAuditResponse) => void): Promise<CreateAuditResponse>;
     /**
-     * 查询云审计支持的cos可用区
+     * 删除云审计跟踪集
      */
-    ListCosEnableRegion(req: ListCosEnableRegionRequest, cb?: (error: string, rep: ListCosEnableRegionResponse) => void): Promise<ListCosEnableRegionResponse>;
+    DeleteAuditTrack(req?: DeleteAuditTrackRequest, cb?: (error: string, rep: DeleteAuditTrackResponse) => void): Promise<DeleteAuditTrackResponse>;
     /**
      * 用于对操作日志进行检索，便于用户进行查询相关的操作信息。
      */

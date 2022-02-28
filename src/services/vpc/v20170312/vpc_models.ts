@@ -4492,8 +4492,9 @@ export interface SecurityGroupPolicy {
   Protocol?: string
 
   /**
-   * 端口(all, 离散port,  range)。
-   */
+      * 端口(all, 离散port,  range)。
+说明：如果Protocol设置为ALL，则Port也需要设置为all。
+      */
   Port?: string
 
   /**

@@ -1393,15 +1393,23 @@ export interface SetPlaylistCommandInput {
       * 变更类型，取值有：
 <li>Add：添加</li>
 <li>Delete：删除</li>
+<li>ClearList：清空歌曲列表</li>
+<li>Move：移动歌曲</li>
       */
   Type: string
 
   /**
       * 歌单索引位置，
 当 Type 取 Add 时，-1表示添加在列表最后位置，大于-1表示要添加的位置；
-当 Type 取 Delete 时，表示要删除的位置。
+当 Type 取 Delete 时，表示待删除歌曲的位置；
+当 Type 取 Move 时，表示待调整歌曲的位置。
       */
-  Index: number
+  Index?: number
+
+  /**
+   * 当 Type 取 Move 时，必填，表示移动歌曲的目标位置。
+   */
+  ChangedIndex?: number
 
   /**
    * 歌曲 ID 列表，当 Type 取 Add 时，必填。
