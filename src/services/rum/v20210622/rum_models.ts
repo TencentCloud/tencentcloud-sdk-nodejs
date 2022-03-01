@@ -405,7 +405,7 @@ export interface DescribeLogListRequest {
   Context?: string
 
   /**
-   * 查询语句，语句长度最大为4096
+   * 查询语句，参考控制台请求参数，语句长度最大为4096
    */
   Query?: string
 

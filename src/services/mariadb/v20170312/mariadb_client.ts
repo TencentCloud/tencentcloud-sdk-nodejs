@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  IsolateHourDBInstanceResponse,
   CreateDBInstanceRequest,
   ZonesInfo,
   DescribeAccountPrivilegesResponse,
@@ -27,7 +28,7 @@ import {
   DescribeAccountsRequest,
   ProcedurePrivilege,
   DescribeRenewalPriceResponse,
-  CreateTmpInstancesRequest,
+  CreateDedicatedClusterDBInstanceResponse,
   DestroyHourDBInstanceRequest,
   AssociateSecurityGroupsRequest,
   DescribeUpgradePriceRequest,
@@ -44,6 +45,7 @@ import {
   CreateAccountRequest,
   InitDBInstancesResponse,
   DescribeLogFileRetentionPeriodRequest,
+  IsolateHourDBInstanceRequest,
   ResourceUsageMonitorSet,
   ModifyLogFileRetentionPeriodRequest,
   PerformanceMonitorSet,
@@ -66,22 +68,23 @@ import {
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   ModifyRealServerAccessStrategyResponse,
-  CreateHourDBInstanceResponse,
-  DescribePriceRequest,
+  CloneAccountRequest,
+  DescribeDatabaseObjectsRequest,
+  SlowLogData,
   ParamModifyResult,
   DescribeDBInstancesRequest,
   DescribeDBSecurityGroupsRequest,
   SwitchDBInstanceHAResponse,
   DescribeSaleInfoRequest,
   RenewDBInstanceRequest,
-  CreateDedicatedClusterDBInstanceResponse,
+  CreateTmpInstancesRequest,
   TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
   DescribeSqlLogsRequest,
   ResetAccountPasswordResponse,
   DescribeDBInstanceSpecsRequest,
-  DescribeDatabaseObjectsRequest,
+  DescribePriceRequest,
   CreateDBInstanceResponse,
   ModifyRealServerAccessStrategyRequest,
   DescribeBackupTimeRequest,
@@ -133,7 +136,7 @@ import {
   KillSessionResponse,
   GrantAccountPrivilegesRequest,
   DescribeBackupTimeResponse,
-  SlowLogData,
+  ActivateHourDBInstanceRequest,
   RenewDBInstanceResponse,
   DescribeDatabasesResponse,
   ViewPrivileges,
@@ -149,8 +152,9 @@ import {
   DescribeDBPerformanceResponse,
   DatabaseProcedure,
   ModifyDBSyncModeRequest,
+  ActivateHourDBInstanceResponse,
   DescribeInstanceNodeInfoRequest,
-  CloneAccountRequest,
+  CreateHourDBInstanceResponse,
   CreateAccountResponse,
   DescribeLogFileRetentionPeriodResponse,
   RegionInfo,
@@ -336,6 +340,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBResourceUsageDetailsResponse) => void
   ): Promise<DescribeDBResourceUsageDetailsResponse> {
     return this.request("DescribeDBResourceUsageDetails", req, cb)
+  }
+
+  /**
+   * 解隔离后付费实例
+   */
+  async ActivateHourDBInstance(
+    req: ActivateHourDBInstanceRequest,
+    cb?: (error: string, rep: ActivateHourDBInstanceResponse) => void
+  ): Promise<ActivateHourDBInstanceResponse> {
+    return this.request("ActivateHourDBInstance", req, cb)
   }
 
   /**
@@ -705,6 +719,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CopyAccountPrivilegesResponse) => void
   ): Promise<CopyAccountPrivilegesResponse> {
     return this.request("CopyAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 隔离后付费实例
+   */
+  async IsolateHourDBInstance(
+    req: IsolateHourDBInstanceRequest,
+    cb?: (error: string, rep: IsolateHourDBInstanceResponse) => void
+  ): Promise<IsolateHourDBInstanceResponse> {
+    return this.request("IsolateHourDBInstance", req, cb)
   }
 
   /**

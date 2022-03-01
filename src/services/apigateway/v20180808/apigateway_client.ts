@@ -41,22 +41,27 @@ import {
   ServiceEnvironmentStrategy,
   ApiInfo,
   TargetServicesReq,
-  ServiceEnvironmentSet,
+  DescribeUsagePlansStatusRequest,
   TsfLoadBalanceConfResp,
   CreateIPStrategyRequest,
   IPStrategy,
   DescribeUsagePlansStatusResponse,
   HealthCheckConf,
+  DeleteUpstreamRequest,
   Plugin,
   UnbindApiAppResponse,
+  ModifyUpstreamRequest,
   DescribeApiUsagePlanResponse,
   DeleteIPStrategyRequest,
   DescribeApiAppRequest,
   DescribePluginResponse,
+  DescribeUpstreamBindApisRequest,
   DescribeExclusiveInstancesResponse,
+  K8sService,
   DeleteUsagePlanRequest,
   DeleteServiceRequest,
   DescribeApiEnvironmentStrategyRequest,
+  UpstreamHealthCheckerReqHeaders,
   DescribeServiceForApiAppResponse,
   ServiceConfig,
   DeleteApiAppResponse,
@@ -92,7 +97,7 @@ import {
   CreateApiResponse,
   DescribeIPStrategyApisStatusRequest,
   ModifyIPStrategyResponse,
-  OauthConfig,
+  DescribeUpstreamInfo,
   ModifyApiEnvironmentStrategyRequest,
   NetworkConfig,
   ServiceReleaseHistory,
@@ -103,6 +108,7 @@ import {
   Base64EncodedTriggerRule,
   RequestConfig,
   DeleteApiKeyResponse,
+  UpstreamInfo,
   ModifyExclusiveInstanceRequest,
   UsagePlan,
   DescribeServiceReleaseVersionRequest,
@@ -110,6 +116,7 @@ import {
   DescribeLogSearchResponse,
   ModifyAPIDocRequest,
   UnBindIPStrategyRequest,
+  DescribeUpstreamsResponse,
   DescribePluginApisRequest,
   ResponseErrorCodeReq,
   CreateServiceRequest,
@@ -132,7 +139,7 @@ import {
   ParameterInfo,
   UsagePlanBindSecret,
   DeleteApiKeyRequest,
-  ModifyApiEnvironmentStrategyResponse,
+  DescribeIPStrategyApisStatusResponse,
   ModifyApiAppResponse,
   UpdateApiAppKeyRequest,
   DomainSetList,
@@ -148,6 +155,7 @@ import {
   ApiIdStatus,
   CreateApiRequest,
   DescribeServiceEnvironmentStrategyRequest,
+  DescribeUpstreamBindApisResponse,
   ReleaseServiceRequest,
   DeleteServiceResponse,
   DescribeServiceEnvironmentReleaseHistoryResponse,
@@ -157,6 +165,7 @@ import {
   ServiceReleaseHistoryInfo,
   CreatePluginResponse,
   ModifyExclusiveInstanceResponse,
+  K8sLabel,
   DescribePluginsResponse,
   ReleaseServiceResponse,
   APIDocInfo,
@@ -164,7 +173,7 @@ import {
   ModifyApiIncrementRequest,
   GenerateApiDocumentRequest,
   ServiceUsagePlanSet,
-  DescribeIPStrategyApisStatusResponse,
+  CreateUpstreamRequest,
   ModifyServiceEnvironmentStrategyResponse,
   UpdateApiKeyResponse,
   DescribeApiBindApiAppsStatusRequest,
@@ -179,6 +188,7 @@ import {
   DescribeServiceSubDomainMappingsRequest,
   DescribeApiAppResponse,
   DescribeServiceSubDomainMappingsResponse,
+  OauthConfig,
   DescribeApiAppsStatusResponse,
   ServiceSubDomainMappings,
   DescribeApiKeyRequest,
@@ -188,20 +198,21 @@ import {
   UsagePlanBindSecretStatus,
   DeleteServiceSubDomainMappingResponse,
   CreateApiKeyResponse,
-  DescribeUsagePlansStatusRequest,
+  DescribeUpstreamsRequest,
   UsagePlanEnvironment,
   ModifyIPStrategyRequest,
   ModifyPluginResponse,
   UnBindSecretIdsRequest,
   DescribeApiRequest,
   VpcConfig,
-  UnBindSecretIdsResponse,
+  CreateUpstreamResponse,
   ResetAPIDocPasswordRequest,
   ApiUsagePlan,
   BuildAPIDocRequest,
   DescribeAPIDocsResponse,
   DetachPluginResponse,
   DeletePluginResponse,
+  DescribeUpstreamBindApis,
   ModifyServiceEnvironmentStrategyRequest,
   CreateAPIDocRequest,
   DescribeApiAppBindApisStatusResponse,
@@ -212,6 +223,7 @@ import {
   DescribeServiceSubDomainsResponse,
   AttachPluginRequest,
   DescribeServiceForApiAppRequest,
+  ModifyApiEnvironmentStrategyResponse,
   BindSubDomainRequest,
   ApiAppInfos,
   IPStrategyApiStatus,
@@ -233,23 +245,28 @@ import {
   DeleteIPStrategyResponse,
   ApiInfoSummary,
   ApiKey,
+  BindApiInfo,
   ApiAppApiInfo,
   DescribeUsagePlanResponse,
   UnBindEnvironmentRequest,
   AttachPluginResponse,
   BindEnvironmentRequest,
+  ModifyUpstreamResponse,
   DescribeIPStrategyRequest,
   DescribeApiForApiAppResponse,
   EnvironmentStrategy,
   InstanceParameterInput,
   DescribeUsagePlanEnvironmentsRequest,
   DescribeServiceReleaseVersionResponse,
+  UpstreamNode,
   ApiAppApiInfos,
+  DeleteUpstreamResponse,
   UpdateServiceResponse,
   UsagePlanInfo,
   DescribeServiceEnvironmentReleaseHistoryRequest,
   UnbindApiAppRequest,
   ReleaseService,
+  ServiceEnvironmentSet,
   CreateServiceResponse,
   DeleteAPIDocResponse,
   DescribeServiceEnvironmentStrategyResponse,
@@ -268,11 +285,13 @@ import {
   DescribeIPStrategysStatusResponse,
   UpdateApiAppKeyResponse,
   InstanceDetail,
+  UnBindSecretIdsResponse,
   CreateApiAppRequest,
   EnableApiKeyRequest,
   ResetAPIDocPasswordResponse,
   DescribeServicesStatusRequest,
   RequestParameter,
+  UpstreamHealthChecker,
   InstanceChargePrepaid,
   ServiceReleaseVersion,
   DescribeServicesStatusResponse,
@@ -502,6 +521,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
+   * 查询VPC通道列表详情
+   */
+  async DescribeUpstreams(
+    req: DescribeUpstreamsRequest,
+    cb?: (error: string, rep: DescribeUpstreamsResponse) => void
+  ): Promise<DescribeUpstreamsResponse> {
+    return this.request("DescribeUpstreams", req, cb)
+  }
+
+  /**
    * 本接口（DescribeApi）用于查询用户 API 网关的 API 接口的详细信息。​
    */
   async DescribeApi(
@@ -674,6 +703,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     cb?: (error: string, rep: DescribeIPStrategyResponse) => void
   ): Promise<DescribeIPStrategyResponse> {
     return this.request("DescribeIPStrategy", req, cb)
+  }
+
+  /**
+   * 修改VPC通道
+   */
+  async ModifyUpstream(
+    req: ModifyUpstreamRequest,
+    cb?: (error: string, rep: ModifyUpstreamResponse) => void
+  ): Promise<ModifyUpstreamResponse> {
+    return this.request("ModifyUpstream", req, cb)
   }
 
   /**
@@ -909,6 +948,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
+   * 用于创建创建VPC通道
+   */
+  async CreateUpstream(
+    req: CreateUpstreamRequest,
+    cb?: (error: string, rep: CreateUpstreamResponse) => void
+  ): Promise<CreateUpstreamResponse> {
+    return this.request("CreateUpstream", req, cb)
+  }
+
+  /**
      * 本接口（DescribeUsagePlanEnvironments）用于查询使用计划绑定的环境列表。
 用户在绑定了某个使用计划到环境后，可使用本接口查询这个使用计划绑定的所有服务的环境。
      */
@@ -947,6 +996,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     cb?: (error: string, rep: DescribeServiceEnvironmentListResponse) => void
   ): Promise<DescribeServiceEnvironmentListResponse> {
     return this.request("DescribeServiceEnvironmentList", req, cb)
+  }
+
+  /**
+   * 删除VPC通道，需要注意有api绑定时，不允许删除
+   */
+  async DeleteUpstream(
+    req: DeleteUpstreamRequest,
+    cb?: (error: string, rep: DeleteUpstreamResponse) => void
+  ): Promise<DeleteUpstreamResponse> {
+    return this.request("DeleteUpstream", req, cb)
   }
 
   /**
@@ -990,6 +1049,16 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     cb?: (error: string, rep: DescribeApiKeyResponse) => void
   ): Promise<DescribeApiKeyResponse> {
     return this.request("DescribeApiKey", req, cb)
+  }
+
+  /**
+   * 查询VPC通道绑定的api列表
+   */
+  async DescribeUpstreamBindApis(
+    req: DescribeUpstreamBindApisRequest,
+    cb?: (error: string, rep: DescribeUpstreamBindApisResponse) => void
+  ): Promise<DescribeUpstreamBindApisResponse> {
+    return this.request("DescribeUpstreamBindApis", req, cb)
   }
 
   /**

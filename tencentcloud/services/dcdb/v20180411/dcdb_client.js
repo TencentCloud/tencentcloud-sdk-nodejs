@@ -35,10 +35,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountPrivileges", req, cb);
     }
     /**
-     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+     * 解隔离DCDB后付费实例
      */
-    async DescribeOrders(req, cb) {
-        return this.request("DescribeOrders", req, cb);
+    async ActiveHourDCDBInstance(req, cb) {
+        return this.request("ActiveHourDCDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDatabaseObjects）用于查询云数据库实例的数据库中的对象列表，包含表、存储过程、视图和函数。
@@ -95,6 +95,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAccountDescription(req, cb) {
         return this.request("ModifyAccountDescription", req, cb);
+    }
+    /**
+     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+     */
+    async DescribeOrders(req, cb) {
+        return this.request("DescribeOrders", req, cb);
     }
     /**
      * 本接口（DescribeUserTasks）用于拉取用户任务列表
@@ -187,10 +193,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBLogFiles", req, cb);
     }
     /**
-     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     * 隔离DCDB后付费实例
      */
-    async UpgradeDCDBInstance(req, cb) {
-        return this.request("UpgradeDCDBInstance", req, cb);
+    async IsolateHourDCDBInstance(req, cb) {
+        return this.request("IsolateHourDCDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDBSyncMode）用于查询云数据库实例的同步模式。
@@ -349,6 +355,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     */
+    async UpgradeDCDBInstance(req, cb) {
+        return this.request("UpgradeDCDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDCDBRenewalPrice）用于在续费分布式数据库实例时，查询续费的价格。

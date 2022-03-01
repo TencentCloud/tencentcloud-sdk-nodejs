@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateAgeDetectTaskResponse, DescribeRoomInfoRequest, DescribeScanResultListRequest, CreateAgeDetectTaskRequest, VoiceFilterResponse, DescribeAgeDetectTaskResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeApplicationDataResponse, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, ModifyRoomInfoRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateAgeDetectTaskResponse, DescribeRealtimeScanConfigResponse, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, CreateAgeDetectTaskRequest, VoiceFilterResponse, DescribeAgeDetectTaskResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, DescribeApplicationDataResponse, UpdateScanUsersResponse, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, ModifyRoomInfoRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 根据应用ID和文件ID查询识别结果
      */
     DescribeFilterResult(req: DescribeFilterResultRequest, cb?: (error: string, rep: DescribeFilterResultResponse) => void): Promise<DescribeFilterResultResponse>;
+    /**
+     * 更新自定义送检房间号
+     */
+    UpdateScanRooms(req: UpdateScanRoomsRequest, cb?: (error: string, rep: UpdateScanRoomsResponse) => void): Promise<UpdateScanRoomsResponse>;
     /**
      * 本接口(CreateApp)用于创建一个GME应用。
      */
@@ -34,6 +38,10 @@ Type表示过滤类型，1：色情，2：谩骂
      * 根据日期查询识别结果列表
      */
     DescribeFilterResultList(req: DescribeFilterResultListRequest, cb?: (error: string, rep: DescribeFilterResultListResponse) => void): Promise<DescribeFilterResultListResponse>;
+    /**
+     * 更新自定义送检用户号
+     */
+    UpdateScanUsers(req: UpdateScanUsersRequest, cb?: (error: string, rep: UpdateScanUsersResponse) => void): Promise<UpdateScanUsersResponse>;
     /**
      * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
      */
@@ -198,6 +206,10 @@ Type表示过滤类型，1：色情，2：谩骂
      * 本接口(ModifyAppStatus)用于修改应用总开关状态。
      */
     ModifyAppStatus(req: ModifyAppStatusRequest, cb?: (error: string, rep: ModifyAppStatusResponse) => void): Promise<ModifyAppStatusResponse>;
+    /**
+     * 获取用户自定义送检信息
+     */
+    DescribeRealtimeScanConfig(req: DescribeRealtimeScanConfigRequest, cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void): Promise<DescribeRealtimeScanConfigResponse>;
     /**
      * 拉取用户在房间得进出时间
      */

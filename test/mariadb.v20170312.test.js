@@ -158,6 +158,16 @@ it("mariadb.v20170312.DescribeDBResourceUsageDetails", async function () {
     }
 })
 
+it("mariadb.v20170312.ActivateHourDBInstance", async function () {
+    try {
+       const data = await client.ActivateHourDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.ResetAccountPassword", async function () {
     try {
        const data = await client.ResetAccountPassword({})
@@ -511,6 +521,16 @@ it("mariadb.v20170312.GrantAccountPrivileges", async function () {
 it("mariadb.v20170312.CopyAccountPrivileges", async function () {
     try {
        const data = await client.CopyAccountPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.IsolateHourDBInstance", async function () {
+    try {
+       const data = await client.IsolateHourDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

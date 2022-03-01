@@ -176,6 +176,51 @@ export interface CreateAgeDetectTaskResponse {
 }
 
 /**
+ * DescribeRealtimeScanConfig返回参数结构体
+ */
+export interface DescribeRealtimeScanConfigResponse {
+  /**
+   * 返回结果码
+   */
+  ErrorCode: number
+
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 送检类型
+   */
+  AuditType: number
+
+  /**
+   * 用户号正则
+   */
+  UserIdRegex: Array<string>
+
+  /**
+   * 房间号正则
+   */
+  RoomIdRegex: Array<string>
+
+  /**
+   * 用户号字符串，逗号分隔
+   */
+  UserIdString: string
+
+  /**
+   * 房间号字符串，逗号分隔
+   */
+  RoomIdString: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 语音消息用量统计信息
  */
 export interface VoiceMessageStatisticsItem {
@@ -228,6 +273,26 @@ export interface DescribeRoomInfoRequest {
 }
 
 /**
+ * UpdateScanRooms请求参数结构体
+ */
+export interface UpdateScanRoomsRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 字符串房间号，逗号分隔
+   */
+  RoomIdString?: string
+
+  /**
+   * 正则表达式房间号，["^6.*"]6开头的房间号
+   */
+  RoomIdRegex?: Array<string>
+}
+
+/**
  * 年龄语音任务结果
  */
 export interface AgeDetectTaskResult {
@@ -250,6 +315,16 @@ export interface AgeDetectTaskResult {
    * 任务结果：0: 成年，1:未成年，100:未知
    */
   Age: number
+}
+
+/**
+ * DescribeRealtimeScanConfig请求参数结构体
+ */
+export interface DescribeRealtimeScanConfigRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
 }
 
 /**
@@ -533,6 +608,22 @@ export interface DescribeAppStatisticsResponse {
 }
 
 /**
+ * UpdateScanRooms返回参数结构体
+ */
+export interface UpdateScanRoomsResponse {
+  /**
+      * 返回结果码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorCode: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeApplicationData返回参数结构体
  */
 export interface DescribeApplicationDataResponse {
@@ -570,6 +661,21 @@ export interface Task {
    * gme实时语音用户ID，通过gme实时语音进行语音分析时输入
    */
   OpenId?: string
+}
+
+/**
+ * UpdateScanUsers返回参数结构体
+ */
+export interface UpdateScanUsersResponse {
+  /**
+   * 返回结果码
+   */
+  ErrorCode: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1185,6 +1291,26 @@ export interface VoiceFilterConf {
    * 语音过滤服务开关，取值：open/close
    */
   Status?: string
+}
+
+/**
+ * UpdateScanUsers请求参数结构体
+ */
+export interface UpdateScanUsersRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 字符串用户号，逗号分隔
+   */
+  UserIdString?: string
+
+  /**
+   * 正则表达式用户号，["^6.*"]6开头的用户号
+   */
+  UserIdRegex?: Array<string>
 }
 
 /**

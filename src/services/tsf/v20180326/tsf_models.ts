@@ -617,6 +617,21 @@ export interface ReleaseFileConfigRequest {
 }
 
 /**
+ * DescribeInvocationMetricDataDimension返回参数结构体
+ */
+export interface DescribeInvocationMetricDataDimensionResponse {
+  /**
+   * 维度
+   */
+  Result: TsfPageDimension
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchStdoutLog返回参数结构体
  */
 export interface SearchStdoutLogResponse {
@@ -713,6 +728,46 @@ export interface DescribeGroupBindedGatewaysResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeJvmMonitor请求参数结构体
+ */
+export interface DescribeJvmMonitorRequest {
+  /**
+   * 查询的实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 实例所属应用Id
+   */
+  ApplicationId: string
+
+  /**
+   * 时间粒度,单位:秒
+   */
+  TimeGranularity: number
+
+  /**
+   * 查询数据起始时间格式(yyyy-MM-dd HH:mm:ss)
+   */
+  From: string
+
+  /**
+   * 查询数据结束时间格式(yyyy-MM-dd HH:mm:ss)
+   */
+  To: string
+
+  /**
+   * 查询的监控图列表,以返回值属性名作为入参
+   */
+  RequiredPictures: Array<string>
+
+  /**
+   * 扩展字段
+   */
+  Tag?: string
 }
 
 /**
@@ -1127,6 +1182,32 @@ export interface DescribeRepositoriesRequest {
 }
 
 /**
+ * 监控数据散点图
+ */
+export interface InvocationMetricScatterPlot {
+  /**
+   * 时间轴截止时间，GMT，精确到毫秒
+   */
+  EndTime: number
+
+  /**
+   * 时间粒度
+   */
+  StartTime: number
+
+  /**
+   * 时间轴开始时间，GMT，精确到毫秒
+   */
+  Period: number
+
+  /**
+      * 多值数据点集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataPoints: Array<MultiValueDataPoints>
+}
+
+/**
  * RollbackConfig请求参数结构体
  */
 export interface RollbackConfigRequest {
@@ -1503,86 +1584,43 @@ export interface DescribeServerlessGroupsResponse {
 }
 
 /**
- * 分页的应用描述信息字段
+ * ModifyLaneRule请求参数结构体
  */
-export interface ApplicationForPage {
+export interface ModifyLaneRuleRequest {
   /**
-      * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationId: string
+   * 泳道规则ID
+   */
+  RuleId: string
 
   /**
-      * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationName: string
+   * 泳道规则名称
+   */
+  RuleName: string
 
   /**
-      * 应用描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationDesc: string
+   * 泳道规则备注
+   */
+  Remark: string
 
   /**
-      * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationType: string
+   * 泳道规则标签列表
+   */
+  RuleTagList: Array<LaneRuleTag>
 
   /**
-      * 微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MicroserviceType: string
+   * 泳道规则标签关系
+   */
+  RuleTagRelationship: string
 
   /**
-      * 编程语言
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProgLang: string
+   * 泳道ID
+   */
+  LaneId: string
 
   /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
-
-  /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: string
-
-  /**
-      * 应用资源类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationResourceType: string
-
-  /**
-      * 应用runtime类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationRuntimeType: string
-
-  /**
-      * Apigateway的serviceId
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApigatewayServiceId: string
-
-  /**
-      * 应用备注名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationRemarkName: string
-
-  /**
-      * 服务配置信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServiceConfigList: Array<ServiceConfig>
+   * 开启状态
+   */
+  Enable: boolean
 }
 
 /**
@@ -2350,6 +2388,21 @@ export interface UpdateApiTimeoutsResponse {
 }
 
 /**
+ * 维度分页
+ */
+export interface TsfPageDimension {
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 维度
+   */
+  Content: Array<string>
+}
+
+/**
  * 微服务网关单元化规则
  */
 export interface UnitRule {
@@ -2448,6 +2501,36 @@ export interface DescribeContainerGroupDeployInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeOverviewInvocation请求参数结构体
+ */
+export interface DescribeOverviewInvocationRequest {
+  /**
+   * 命名空间ID
+   */
+  NamespaceId?: string
+
+  /**
+   * 监控统计类型，可选值：SumReqAmount、AvgFailureRate、AvgTimeCost，分别对应请求量、请求错误率、平均响应耗时
+   */
+  Type?: string
+
+  /**
+   * 监控统计数据粒度，可选值：60、3600、86400，分别对应1分钟、1小时、1天
+   */
+  Period?: number
+
+  /**
+   * 查询开始时间，默认为当天的 00:00:00
+   */
+  StartTime?: string
+
+  /**
+   * 查询结束时间，默认为当前时间
+   */
+  EndTime?: string
 }
 
 /**
@@ -2576,6 +2659,71 @@ export interface ImageRepository {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplicationName: ScalableRule
+}
+
+/**
+ * DescribeInovcationIndicators请求参数结构体
+ */
+export interface DescribeInovcationIndicatorsRequest {
+  /**
+   * 维度
+   */
+  Dimension: string
+
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 命名空间ID
+   */
+  NamespaceId?: string
+
+  /**
+   * 微服务ID
+   */
+  ServiceId?: string
+
+  /**
+   * 调用方服务名
+   */
+  CallerServiceName?: string
+
+  /**
+   * 被调方服务名
+   */
+  CalleeServiceName?: string
+
+  /**
+   * 调用方接口名
+   */
+  CallerInterfaceName?: string
+
+  /**
+   * 被调方接口名
+   */
+  CalleeInterfaceName?: string
+
+  /**
+   * 应用ID
+   */
+  ApplicationId?: string
+
+  /**
+   * 部署组ID
+   */
+  GroupId?: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -2920,6 +3068,22 @@ export interface DisableTaskRequest {
    * 任务ID
    */
   TaskId: string
+}
+
+/**
+ * DescribeStatistics返回参数结构体
+ */
+export interface DescribeStatisticsResponse {
+  /**
+      * 查询服务统计结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: ServiceStatisticsResults
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3698,6 +3862,23 @@ export interface DescribeMicroserviceRequest {
 }
 
 /**
+ * Tsf分页集群对象
+ */
+export interface TsfPageCluster {
+  /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 集群列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<Cluster>
+}
+
+/**
  * DescribePodInstances返回参数结构体
  */
 export interface DescribePodInstancesResponse {
@@ -3787,6 +3968,36 @@ export interface FileConfigRelease {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterName?: string
+}
+
+/**
+ * DescribeInvocationMetricDataPoint请求参数结构体
+ */
+export interface DescribeInvocationMetricDataPointRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 维度
+   */
+  MetricDimensionValues: Array<MetricDimensionValue>
+
+  /**
+   * 指标
+   */
+  Metrics: Array<Metric>
+
+  /**
+   * 调用视角。可选值：SERVER, CLIENT。默认为SERVER
+   */
+  Kind?: string
 }
 
 /**
@@ -3898,6 +4109,137 @@ export interface StopTaskBatchResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务统计结果
+ */
+export interface ServiceStatisticsResult {
+  /**
+      * 请求模版路径:type为接口时返回，服务时不返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Path: string
+
+  /**
+      * 请求方法:type为接口时返回，服务时不返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Method: string
+
+  /**
+   * 微服务Id
+   */
+  MicroserviceId: string
+
+  /**
+   * 微服务名称
+   */
+  MicroserviceName: string
+
+  /**
+   * 请求数
+   */
+  RequestCount: number
+
+  /**
+   * 请求错误率，不带百分号
+   */
+  ErrorRate: number
+
+  /**
+   * 平均响应耗时ms
+   */
+  AvgTimeConsuming: number
+
+  /**
+   * 响应耗时曲线
+   */
+  MetricDataCurves: Array<MetricDataCurve>
+
+  /**
+      * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 实例name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
+
+  /**
+      * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
+
+  /**
+      * 部署组name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
+
+  /**
+      * 部署组类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterType: string
+
+  /**
+      * 部署组是否存在
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupExist: number
+
+  /**
+      * 实例是否存在，仅限cvm
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceExist: number
+
+  /**
+      * 应用id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
+
+  /**
+      * 微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MicroserviceType: string
+
+  /**
+      * cpu使用率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CpuPercent: number
+
+  /**
+      * 已用堆大小,单位KB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HeapUsed: number
+
+  /**
+      * 数据库
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbName: string
+
+  /**
+      * Script值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Script: string
+
+  /**
+      * 数据库类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbType: string
 }
 
 /**
@@ -4480,20 +4822,26 @@ export interface DescribeFlowLastBatchStateRequest {
 }
 
 /**
- * Tsf分页集群对象
+ * 指标监控数据曲线
  */
-export interface TsfPageCluster {
+export interface MetricDataCurve {
   /**
-      * 总条数
+      * 指标名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
+  MetricName: string
 
   /**
-      * 集群列表
+      * 指标计算方式
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Content: Array<Cluster>
+  MetricFunction: string
+
+  /**
+      * 指标数据点集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricDataPoints: Array<MetricDataPoint>
 }
 
 /**
@@ -4936,6 +5284,39 @@ export interface UpdateApiTimeoutsRequest {
 }
 
 /**
+ * 指标
+ */
+export interface Metric {
+  /**
+      * 指标名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 指标计算方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Function?: string
+}
+
+/**
+ * DescribeOverviewInvocation返回参数结构体
+ */
+export interface DescribeOverviewInvocationResponse {
+  /**
+      * 监控统计数据列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<MetricDataPoint>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSimpleNamespaces请求参数结构体
  */
 export interface DescribeSimpleNamespacesRequest {
@@ -5275,6 +5656,29 @@ export interface DescribeImageRepositoryRequest {
 }
 
 /**
+ * 监控指标坐标
+ */
+export interface IndicatorCoord {
+  /**
+      * 指标横坐标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CoordX: string
+
+  /**
+      * 指标纵坐标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CoordY: string
+
+  /**
+      * 指标标签，用于标识附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CoordTag: string
+}
+
+/**
  * 单元化规则翻页对象
 
  */
@@ -5338,6 +5742,77 @@ export interface DescribeContainerGroupDetailRequest {
    * 分组ID
    */
   GroupId: string
+}
+
+/**
+ * DescribeJvmMonitor查询jvm监控数据接口返回数据封装
+ */
+export interface JvmMonitorData {
+  /**
+      * 堆内存监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HeapMemory: MemoryPicture
+
+  /**
+      * 非堆内存监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NonHeapMemory: MemoryPicture
+
+  /**
+      * 伊甸园区监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EdenSpace: MemoryPicture
+
+  /**
+      * 幸存者区监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SurvivorSpace: MemoryPicture
+
+  /**
+      * 老年代监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OldSpace: MemoryPicture
+
+  /**
+      * 元空间监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetaSpace: MemoryPicture
+
+  /**
+      * 线程监控图,三条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ThreadPicture: ThreadPicture
+
+  /**
+      * youngGC增量监控图,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  YoungGC: Array<CurvePoint>
+
+  /**
+      * fullGC增量监控图,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FullGC: Array<CurvePoint>
+
+  /**
+      * cpu使用率,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CpuUsage: Array<CurvePoint>
+
+  /**
+      * 加载类数,一条线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassCount: Array<CurvePoint>
 }
 
 /**
@@ -5599,6 +6074,23 @@ export interface DeleteLaneRuleRequest {
    * 泳道规则Id
    */
   RuleId: string
+}
+
+/**
+ * 指标维度
+ */
+export interface MetricDimension {
+  /**
+      * 指标维度名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 指标维度取值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
 }
 
 /**
@@ -6391,6 +6883,23 @@ export interface CreateApplicationRequest {
 }
 
 /**
+ * 服务统计结果集
+ */
+export interface ServiceStatisticsResults {
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<ServiceStatisticsResult>
+
+  /**
+      * 条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+}
+
+/**
  * DeployGroup请求参数结构体
  */
 export interface DeployGroupRequest {
@@ -6649,6 +7158,46 @@ export interface GatewayGroupIds {
    * 分组id
    */
   GroupId: string
+}
+
+/**
+ * DescribeInvocationMetricDataDimension请求参数结构体
+ */
+export interface DescribeInvocationMetricDataDimensionRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 开始index
+   */
+  Offset: number
+
+  /**
+   * 分页大小
+   */
+  Limit: number
+
+  /**
+   * 聚合维度
+   */
+  DimensionName: string
+
+  /**
+   * 搜索关键字
+   */
+  SearchWord?: string
+
+  /**
+   * 维度
+   */
+  MetricDimensionValues?: Array<MetricDimensionValue>
 }
 
 /**
@@ -7529,6 +8078,21 @@ export interface ShardArgument {
 }
 
 /**
+ * 指标维度多值匹配
+ */
+export interface MetricDimensionValue {
+  /**
+   * 维度名
+   */
+  Name: string
+
+  /**
+   * 维度值
+   */
+  Value: Array<string>
+}
+
+/**
  * 监控统计数据点
  */
 export interface MetricDataPoint {
@@ -7851,6 +8415,29 @@ export interface TsfPageUnitNamespace {
 }
 
 /**
+ * 单值指标
+ */
+export interface MetricDataSingleValue {
+  /**
+      * 指标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricName: string
+
+  /**
+      * 统计方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricFunction: string
+
+  /**
+      * 指标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricDataValue: string
+}
+
+/**
  * StopTaskExecute请求参数结构体
  */
 export interface StopTaskExecuteRequest {
@@ -8124,6 +8711,26 @@ export interface ReleaseFileConfigResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * jvm监控数据线程数据封装
+ */
+export interface ThreadPicture {
+  /**
+   * 总线程数
+   */
+  ThreadCount: Array<CurvePoint>
+
+  /**
+   * 活跃线程数
+   */
+  ThreadActive: Array<CurvePoint>
+
+  /**
+   * 守护线程数
+   */
+  DeamonThreadCount: Array<CurvePoint>
 }
 
 /**
@@ -8602,6 +9209,42 @@ export interface ApiVersionArray {
 }
 
 /**
+ * DescribeInovcationIndicators返回参数结构体
+ */
+export interface DescribeInovcationIndicatorsResponse {
+  /**
+      * 服务调用监控指标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: InvocationIndicator
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 多值数据点集合
+ */
+export interface MultiValueDataPoints {
+  /**
+   * 多值数据点
+   */
+  Points: Array<MultiValue>
+
+  /**
+   * 指标名称
+   */
+  MetricName: string
+
+  /**
+   * 多值数据点key列表，每个值表示当前数据点所在区域的下限
+   */
+  PointKeys: Array<string>
+}
+
+/**
  * 配置项发布日志
  */
 export interface ConfigReleaseLog {
@@ -9068,43 +9711,121 @@ export interface DescribeGroupsResponse {
 }
 
 /**
- * ModifyLaneRule请求参数结构体
+ * 分页的应用描述信息字段
  */
-export interface ModifyLaneRuleRequest {
+export interface ApplicationForPage {
   /**
-   * 泳道规则ID
-   */
-  RuleId: string
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
 
   /**
-   * 泳道规则名称
-   */
-  RuleName: string
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
 
   /**
-   * 泳道规则备注
-   */
-  Remark: string
+      * 应用描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationDesc: string
 
   /**
-   * 泳道规则标签列表
-   */
-  RuleTagList: Array<LaneRuleTag>
+      * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationType: string
 
   /**
-   * 泳道规则标签关系
-   */
-  RuleTagRelationship: string
+      * 微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MicroserviceType: string
 
   /**
-   * 泳道ID
-   */
-  LaneId: string
+      * 编程语言
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProgLang: string
 
   /**
-   * 开启状态
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 应用资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationResourceType: string
+
+  /**
+      * 应用runtime类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationRuntimeType: string
+
+  /**
+      * Apigateway的serviceId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApigatewayServiceId: string
+
+  /**
+      * 应用备注名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationRemarkName: string
+
+  /**
+      * 服务配置信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceConfigList: Array<ServiceConfig>
+}
+
+/**
+ * DescribeInvocationMetricScatterPlot请求参数结构体
+ */
+export interface DescribeInvocationMetricScatterPlotRequest {
+  /**
+   * 查询开始时间
    */
-  Enable: boolean
+  StartTime?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 查询时间粒度，单位秒。可选值：60、3600、86400。
+   */
+  Period?: number
+
+  /**
+   * 查询指标维度
+   */
+  MetricDimensions?: Array<MetricDimension>
+
+  /**
+   * 查询指标名
+   */
+  Metrics?: Array<Metric>
+
+  /**
+   * 视图视角。可选值：SERVER, CLIENT。默认为SERVER
+   */
+  Kind?: string
 }
 
 /**
@@ -9187,6 +9908,46 @@ export interface AddClusterInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInvocationMetricDataCurve请求参数结构体
+ */
+export interface DescribeInvocationMetricDataCurveRequest {
+  /**
+   * 查询开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 查询时间粒度，单位秒可选值：60、3600、86400
+   */
+  Period?: number
+
+  /**
+   * 查询指标维度
+   */
+  MetricDimensions?: Array<MetricDimension>
+
+  /**
+   * 查询指标名
+   */
+  Metrics?: Array<Metric>
+
+  /**
+   * 视图视角。可选值：SERVER, CLIENT。默认为SERVER
+   */
+  Kind?: string
+
+  /**
+   * 类型。组件监控使用，可选值：SQL 或者 NoSQL
+   */
+  Type?: string
 }
 
 /**
@@ -9393,6 +10154,17 @@ export interface DescribeTaskDetailRequest {
    * 任务历史ID
    */
   TaskLogId?: string
+}
+
+/**
+ * 多值数据
+ */
+export interface MultiValue {
+  /**
+      * 数据点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Values?: Array<number>
 }
 
 /**
@@ -9646,6 +10418,26 @@ export interface DescribeServerlessGroupsRequest {
    * 无
    */
   GroupIdList?: Array<string>
+}
+
+/**
+ * 构成监控数据图的曲线坐标点
+ */
+export interface CurvePoint {
+  /**
+   * 当前坐标 X轴的值 当前是日期格式:"yyyy-MM-dd HH:mm:ss"
+   */
+  Label: string
+
+  /**
+   * 当前坐标 Y轴的值
+   */
+  Value: string
+
+  /**
+   * 该坐标点时间戳
+   */
+  Timestamp: string
 }
 
 /**
@@ -10560,6 +11352,59 @@ export interface DescribeApplicationsResponse {
 }
 
 /**
+ * 服务调用监控指标
+ */
+export interface InvocationIndicator {
+  /**
+      * 总请求数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationQuantity: number
+
+  /**
+      * 请求成功率，百分比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationSuccessRate: number
+
+  /**
+      * 请求平均耗时，单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationAvgDuration: number
+
+  /**
+      * 成功请求数时间分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationSuccessDistribution: Array<IndicatorCoord>
+
+  /**
+      * 失败请求数时间分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationFailedDistribution: Array<IndicatorCoord>
+
+  /**
+      * 状态码分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationStatusDistribution: Array<IndicatorCoord>
+
+  /**
+      * 时延分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationDurationDistribution: Array<IndicatorCoord>
+
+  /**
+      * 并发请求次数时间分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InvocationQuantityDistribution: Array<IndicatorCoord>
+}
+
+/**
  * DescribeConfig请求参数结构体
  */
 export interface DescribeConfigRequest {
@@ -11152,6 +11997,22 @@ export interface DescribeUnitApiUseDetailResponse {
 }
 
 /**
+ * DescribeInvocationMetricScatterPlot返回参数结构体
+ */
+export interface DescribeInvocationMetricScatterPlotResponse {
+  /**
+      * 多值时间抽统计指标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: InvocationMetricScatterPlot
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUsableUnitNamespaces请求参数结构体
  */
 export interface DescribeUsableUnitNamespacesRequest {
@@ -11214,6 +12075,22 @@ export interface DescribeContainerGroupsRequest {
    * 命名空间 ID
    */
   NamespaceId?: string
+}
+
+/**
+ * DescribeJvmMonitor返回参数结构体
+ */
+export interface DescribeJvmMonitorResponse {
+  /**
+      * Java实例jvm监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: JvmMonitorData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11331,6 +12208,22 @@ export interface TsfPageApplication {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Content: Array<ApplicationForPage>
+}
+
+/**
+ * DescribeInvocationMetricDataCurve返回参数结构体
+ */
+export interface DescribeInvocationMetricDataCurveResponse {
+  /**
+      * 指标监控数据曲线集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<MetricDataCurve>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11954,6 +12847,22 @@ export interface ApiRateLimitRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdatedTime: string
+}
+
+/**
+ * DescribeInvocationMetricDataPoint返回参数结构体
+ */
+export interface DescribeInvocationMetricDataPointResponse {
+  /**
+      * 单值指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<MetricDataSingleValue>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12804,6 +13713,81 @@ export interface RedoTaskBatchResponse {
 }
 
 /**
+ * DescribeStatistics请求参数结构体
+ */
+export interface DescribeStatisticsRequest {
+  /**
+   * 类型：Interface、Service、Group、Instance、SQL、NoSQL
+   */
+  Type: string
+
+  /**
+   * 步长，单位s：60、3600、86400
+   */
+  TimeStep: number
+
+  /**
+   * 偏移量，取值范围大于等于0，默认值为0
+   */
+  Offset: number
+
+  /**
+   * 单页请求配置数量，取值范围[1, 50]，默认值为10
+   */
+  Limit: number
+
+  /**
+   * 命名空间Id
+   */
+  NamespaceId?: string
+
+  /**
+   * 排序字段:AvgTimeConsuming[默认]、RequestCount、ErrorRate。实例监控还支持 CpuPercent
+   */
+  OrderBy?: string
+
+  /**
+   * 排序方式：ASC:0、DESC:1
+   */
+  OrderType?: number
+
+  /**
+   * 开始时间：年月日 时分秒2020-05-12 14:43:12
+   */
+  EndTime?: string
+
+  /**
+   * 开始时间：年月日 时分秒2020-05-12 14:43:12
+   */
+  StartTime?: string
+
+  /**
+   * 服务名称
+   */
+  ServiceName?: string
+
+  /**
+   * 搜索关键词
+   */
+  SearchWord?: string
+
+  /**
+   * 维度
+   */
+  MetricDimensionValues?: Array<MetricDimensionValue>
+
+  /**
+   * 聚合关键词
+   */
+  BucketKey?: string
+
+  /**
+   * 数据库
+   */
+  DbName?: string
+}
+
+/**
  * DescribeMicroservice返回参数结构体
  */
 export interface DescribeMicroserviceResponse {
@@ -12883,6 +13867,26 @@ export interface DescribeImageTagsRequest {
    * TcrRepoInfo值
    */
   TcrRepoInfo?: TcrRepoInfo
+}
+
+/**
+ * Jvm监控内存数据封装
+ */
+export interface MemoryPicture {
+  /**
+   * 内存最大值
+   */
+  Max: Array<CurvePoint>
+
+  /**
+   * 已用内存大小
+   */
+  Used: Array<CurvePoint>
+
+  /**
+   * 系统分配内存大小
+   */
+  Committed: Array<CurvePoint>
 }
 
 /**

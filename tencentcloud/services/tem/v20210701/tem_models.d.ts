@@ -1601,6 +1601,10 @@ export interface DeployStrategyConf {
       * 最小可用实例数
       */
     MinAvailable?: number;
+    /**
+      * 是否强制发布
+      */
+    Force?: boolean;
 }
 /**
  * DescribeIngress请求参数结构体

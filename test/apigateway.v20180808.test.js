@@ -228,6 +228,16 @@ it("apigateway.v20180808.DescribeApiApp", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribeUpstreams", async function () {
+    try {
+       const data = await client.DescribeUpstreams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeApi", async function () {
     try {
        const data = await client.DescribeApi({})
@@ -391,6 +401,16 @@ it("apigateway.v20180808.UnBindSecretIds", async function () {
 it("apigateway.v20180808.DescribeIPStrategy", async function () {
     try {
        const data = await client.DescribeIPStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.ModifyUpstream", async function () {
+    try {
+       const data = await client.ModifyUpstream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,6 +648,16 @@ it("apigateway.v20180808.ModifyExclusiveInstance", async function () {
     }
 })
 
+it("apigateway.v20180808.CreateUpstream", async function () {
+    try {
+       const data = await client.CreateUpstream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeUsagePlanEnvironments", async function () {
     try {
        const data = await client.DescribeUsagePlanEnvironments({})
@@ -668,6 +698,16 @@ it("apigateway.v20180808.DescribeServiceEnvironmentList", async function () {
     }
 })
 
+it("apigateway.v20180808.DeleteUpstream", async function () {
+    try {
+       const data = await client.DeleteUpstream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.UnBindSubDomain", async function () {
     try {
        const data = await client.UnBindSubDomain({})
@@ -701,6 +741,16 @@ it("apigateway.v20180808.DeleteServiceSubDomainMapping", async function () {
 it("apigateway.v20180808.DescribeApiKey", async function () {
     try {
        const data = await client.DescribeApiKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeUpstreamBindApis", async function () {
+    try {
+       const data = await client.DescribeUpstreamBindApis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableTaskFlow", req, cb);
     }
     /**
+     * 禁用单元化规则
+     */
+    async DisableUnitRule(req, cb) {
+        return this.request("DisableUnitRule", req, cb);
+    }
+    /**
      * 获取部署组实例列表
      */
     async DescribePodInstances(req, cb) {
@@ -152,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCluster(req, cb) {
         return this.request("CreateCluster", req, cb);
+    }
+    /**
+     * 服务调用监控统计概览
+     */
+    async DescribeOverviewInvocation(req, cb) {
+        return this.request("DescribeOverviewInvocation", req, cb);
     }
     /**
      * 停止正在某个节点上执行的任务
@@ -401,6 +413,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeCreateGatewayApiStatus", req, cb);
     }
     /**
+     * 查询单值指标维度
+     */
+    async DescribeInvocationMetricDataPoint(req, cb) {
+        return this.request("DescribeInvocationMetricDataPoint", req, cb);
+    }
+    /**
      * 修改任务
      */
     async ModifyTask(req, cb) {
@@ -515,10 +533,28 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("BindApiGroup", req, cb);
     }
     /**
+     * 查询调用监控指标
+     */
+    async DescribeInovcationIndicators(req, cb) {
+        return this.request("DescribeInovcationIndicators", req, cb);
+    }
+    /**
      * 查询简单部署组列表
      */
     async DescribeSimpleGroups(req, cb) {
         return this.request("DescribeSimpleGroups", req, cb);
+    }
+    /**
+     * 服务统计页面：接口和服务维度
+     */
+    async DescribeStatistics(req, cb) {
+        return this.request("DescribeStatistics", req, cb);
+    }
+    /**
+     * 启用任务
+     */
+    async EnableTask(req, cb) {
+        return this.request("EnableTask", req, cb);
     }
     /**
      * 发布文件配置
@@ -558,10 +594,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeConfigSummary", req, cb);
     }
     /**
-     * 禁用单元化规则
+     * 查询调用指标数据散点图
      */
-    async DisableUnitRule(req, cb) {
-        return this.request("DisableUnitRule", req, cb);
+    async DescribeInvocationMetricScatterPlot(req, cb) {
+        return this.request("DescribeInvocationMetricScatterPlot", req, cb);
     }
     /**
      * 创建文件配置项
@@ -661,10 +697,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribePathRewrite", req, cb);
     }
     /**
-     * 启用任务
+     * 查询调用指标数据变化曲线
      */
-    async EnableTask(req, cb) {
-        return this.request("EnableTask", req, cb);
+    async DescribeInvocationMetricDataCurve(req, cb) {
+        return this.request("DescribeInvocationMetricDataCurve", req, cb);
     }
     /**
      * 删除容器部署组
@@ -835,6 +871,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("RedoTaskExecute", req, cb);
     }
     /**
+     * 查询java实例jvm监控数据,返回数据可选
+     */
+    async DescribeJvmMonitor(req, cb) {
+        return this.request("DescribeJvmMonitor", req, cb);
+    }
+    /**
      * 查询网关所有分组下Api列表
      */
     async DescribeGatewayAllGroupApis(req, cb) {
@@ -971,6 +1013,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeRepository(req, cb) {
         return this.request("DescribeRepository", req, cb);
+    }
+    /**
+     * 查询维度
+     */
+    async DescribeInvocationMetricDataDimension(req, cb) {
+        return this.request("DescribeInvocationMetricDataDimension", req, cb);
     }
     /**
      * 获取应用列表其它字段，如实例数量信息等

@@ -157,6 +157,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("DescribeApiApp", req, cb);
     }
     /**
+     * 查询VPC通道列表详情
+     */
+    async DescribeUpstreams(req, cb) {
+        return this.request("DescribeUpstreams", req, cb);
+    }
+    /**
      * 本接口（DescribeApi）用于查询用户 API 网关的 API 接口的详细信息。​
      */
     async DescribeApi(req, cb) {
@@ -262,6 +268,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     async DescribeIPStrategy(req, cb) {
         return this.request("DescribeIPStrategy", req, cb);
+    }
+    /**
+     * 修改VPC通道
+     */
+    async ModifyUpstream(req, cb) {
+        return this.request("ModifyUpstream", req, cb);
     }
     /**
      * 本接口（DescribeServiceReleaseVersion）查询一个服务下面所有已经发布的版本列表。
@@ -404,6 +416,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("ModifyExclusiveInstance", req, cb);
     }
     /**
+     * 用于创建创建VPC通道
+     */
+    async CreateUpstream(req, cb) {
+        return this.request("CreateUpstream", req, cb);
+    }
+    /**
      * 本接口（DescribeUsagePlanEnvironments）用于查询使用计划绑定的环境列表。
 用户在绑定了某个使用计划到环境后，可使用本接口查询这个使用计划绑定的所有服务的环境。
      */
@@ -427,6 +445,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     async DescribeServiceEnvironmentList(req, cb) {
         return this.request("DescribeServiceEnvironmentList", req, cb);
+    }
+    /**
+     * 删除VPC通道，需要注意有api绑定时，不允许删除
+     */
+    async DeleteUpstream(req, cb) {
+        return this.request("DeleteUpstream", req, cb);
     }
     /**
      * 本接口（UnBindSubDomain）用于解绑自定义域名。
@@ -454,6 +478,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     async DescribeApiKey(req, cb) {
         return this.request("DescribeApiKey", req, cb);
+    }
+    /**
+     * 查询VPC通道绑定的api列表
+     */
+    async DescribeUpstreamBindApis(req, cb) {
+        return this.request("DescribeUpstreamBindApis", req, cb);
     }
     /**
      * 本接口（ReleaseService）用于发布服务。

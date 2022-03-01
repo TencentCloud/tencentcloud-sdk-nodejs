@@ -18,6 +18,16 @@ const client = new tencentcloud.cam.v20190116.Client({
 })
 describe("cam.v20190116.test.js", function () {
 
+it("cam.v20190116.GetUserAppId", async function () {
+    try {
+       const data = await client.GetUserAppId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.SetMfaFlag", async function () {
     try {
        const data = await client.SetMfaFlag({})

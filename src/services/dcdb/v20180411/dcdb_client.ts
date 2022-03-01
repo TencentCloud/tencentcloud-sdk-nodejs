@@ -29,6 +29,7 @@ import {
   DescribeAccountsRequest,
   SpecConfig,
   ModifyRealServerAccessStrategyResponse,
+  ActiveHourDCDBInstanceResponse,
   DescribeDCDBPriceResponse,
   AssociateSecurityGroupsRequest,
   FlushBinlogResponse,
@@ -41,6 +42,7 @@ import {
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
   DescribeDBParametersResponse,
+  IsolateHourDCDBInstanceRequest,
   DescribeFlowResponse,
   CloneAccountResponse,
   ModifyAccountDescriptionResponse,
@@ -109,6 +111,7 @@ import {
   Database,
   GrantAccountPrivilegesResponse,
   CancelDcnJobRequest,
+  IsolateHourDCDBInstanceResponse,
   ShardInfo,
   OpenDBExtranetAccessRequest,
   DescribeDCDBSaleInfoResponse,
@@ -144,6 +147,7 @@ import {
   DestroyHourDCDBInstanceResponse,
   ConstraintRange,
   LogFileInfo,
+  ActiveHourDCDBInstanceRequest,
   DisassociateSecurityGroupsRequest,
   DBAccount,
   DescribeDatabaseTableResponse,
@@ -183,13 +187,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+   * 解隔离DCDB后付费实例
    */
-  async DescribeOrders(
-    req: DescribeOrdersRequest,
-    cb?: (error: string, rep: DescribeOrdersResponse) => void
-  ): Promise<DescribeOrdersResponse> {
-    return this.request("DescribeOrders", req, cb)
+  async ActiveHourDCDBInstance(
+    req: ActiveHourDCDBInstanceRequest,
+    cb?: (error: string, rep: ActiveHourDCDBInstanceResponse) => void
+  ): Promise<ActiveHourDCDBInstanceResponse> {
+    return this.request("ActiveHourDCDBInstance", req, cb)
   }
 
   /**
@@ -278,6 +282,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void
   ): Promise<ModifyAccountDescriptionResponse> {
     return this.request("ModifyAccountDescription", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+   */
+  async DescribeOrders(
+    req: DescribeOrdersRequest,
+    cb?: (error: string, rep: DescribeOrdersResponse) => void
+  ): Promise<DescribeOrdersResponse> {
+    return this.request("DescribeOrders", req, cb)
   }
 
   /**
@@ -431,13 +445,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   * 隔离DCDB后付费实例
    */
-  async UpgradeDCDBInstance(
-    req: UpgradeDCDBInstanceRequest,
-    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
-  ): Promise<UpgradeDCDBInstanceResponse> {
-    return this.request("UpgradeDCDBInstance", req, cb)
+  async IsolateHourDCDBInstance(
+    req: IsolateHourDCDBInstanceRequest,
+    cb?: (error: string, rep: IsolateHourDCDBInstanceResponse) => void
+  ): Promise<IsolateHourDCDBInstanceResponse> {
+    return this.request("IsolateHourDCDBInstance", req, cb)
   }
 
   /**
@@ -700,6 +714,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   */
+  async UpgradeDCDBInstance(
+    req: UpgradeDCDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
+  ): Promise<UpgradeDCDBInstanceResponse> {
+    return this.request("UpgradeDCDBInstance", req, cb)
   }
 
   /**

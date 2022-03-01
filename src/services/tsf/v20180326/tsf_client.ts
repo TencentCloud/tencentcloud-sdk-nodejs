@@ -44,12 +44,14 @@ import {
   DescribeConfigsResponse,
   ModifyContainerReplicasRequest,
   ReleaseFileConfigRequest,
+  DescribeInvocationMetricDataDimensionResponse,
   SearchStdoutLogResponse,
   CreateGatewayApiResponse,
   DescribeFileConfigsResponse,
   DescribeApiVersionsRequest,
   TsfPageConfigReleaseLog,
   DescribeGroupBindedGatewaysResponse,
+  DescribeJvmMonitorRequest,
   UnbindApiGroupRequest,
   TaskRecord,
   CreateNamespaceResponse,
@@ -71,6 +73,7 @@ import {
   DescribeUnitRuleResponse,
   DeleteImageTagsRequest,
   DescribeRepositoriesRequest,
+  InvocationMetricScatterPlot,
   RollbackConfigRequest,
   CreateGatewayApiRequest,
   DescribeCreateGatewayApiStatusResponse,
@@ -82,7 +85,7 @@ import {
   MsInstance,
   GatewayPluginBoundParam,
   DescribeServerlessGroupsResponse,
-  ApplicationForPage,
+  ModifyLaneRuleRequest,
   AddInstancesResponse,
   StartContainerGroupRequest,
   DescribeRepositoryResponse,
@@ -108,14 +111,17 @@ import {
   CreateLaneResponse,
   TcrRepoInfo,
   UpdateApiTimeoutsResponse,
+  TsfPageDimension,
   UnitRule,
   DescribePkgsResponse,
   DescribeSimpleNamespacesResponse,
   DeleteImageTag,
   DescribeContainerGroupDeployInfoResponse,
+  DescribeOverviewInvocationRequest,
   TaskLastExecuteStatus,
   DescribePublicConfigRequest,
   ImageRepository,
+  DescribeInovcationIndicatorsRequest,
   CreatePublicConfigResponse,
   LaneRules,
   TsfPageVmGroup,
@@ -131,6 +137,7 @@ import {
   ModifyTaskRequest,
   DeleteUnitNamespacesResponse,
   DisableTaskRequest,
+  DescribeStatisticsResponse,
   DescribeBasicResourceUsageResponse,
   CreateAllGatewayApiAsyncResponse,
   RemoveInstancesRequest,
@@ -155,12 +162,15 @@ import {
   BusinessLogV2,
   DisableTaskResponse,
   DescribeMicroserviceRequest,
+  TsfPageCluster,
   DescribePodInstancesResponse,
   FileConfigRelease,
+  DescribeInvocationMetricDataPointRequest,
   DescribeRepositoriesResponse,
   MonitorOverview,
   CreateGroupRequest,
   StopTaskBatchResponse,
+  ServiceStatisticsResult,
   CreateContainGroupResponse,
   DescribeContainerGroupDetailResponse,
   Ports,
@@ -190,7 +200,7 @@ import {
   DeletePublicConfigResponse,
   DescribeSimpleGroupsResponse,
   DescribeFlowLastBatchStateRequest,
-  TsfPageCluster,
+  MetricDataCurve,
   TerminateTaskFlowBatchResponse,
   ShrinkInstancesRequest,
   ValueFrom,
@@ -203,6 +213,8 @@ import {
   TsfPageNamespace,
   VolumeInfo,
   UpdateApiTimeoutsRequest,
+  Metric,
+  DescribeOverviewInvocationResponse,
   DescribeSimpleNamespacesRequest,
   ExecuteTaskFlowResponse,
   SearchBusinessLogRequest,
@@ -215,10 +227,12 @@ import {
   ApiDefinitionDescr,
   DescribeLaneRulesResponse,
   DescribeImageRepositoryRequest,
+  IndicatorCoord,
   TsfPageUnitRule,
   DescribeApiGroupRequest,
   DescribeGatewayApisRequest,
   DescribeContainerGroupDetailRequest,
+  JvmMonitorData,
   DescribeGroupsWithPluginRequest,
   ImageRepositoryResult,
   ModifyTaskResponse,
@@ -229,6 +243,7 @@ import {
   BindPluginRequest,
   HealthCheckSetting,
   DeleteLaneRuleRequest,
+  MetricDimension,
   GatewayDeployGroup,
   PkgList,
   Cluster,
@@ -251,6 +266,7 @@ import {
   GatewayPlugin,
   GatewayApiGroupVo,
   CreateApplicationRequest,
+  ServiceStatisticsResults,
   DeployGroupRequest,
   LaneInfos,
   CreateTaskFlowRequest,
@@ -262,6 +278,7 @@ import {
   DescribePathRewriteRequest,
   CreateApplicationResponse,
   GatewayGroupIds,
+  DescribeInvocationMetricDataDimensionRequest,
   DeployGroupResponse,
   DescribeServerlessGroupResponse,
   BindApiGroupResponse,
@@ -294,6 +311,7 @@ import {
   DescribePublicConfigReleaseLogsRequest,
   CreateServerlessGroupResponse,
   ShardArgument,
+  MetricDimensionValue,
   MetricDataPoint,
   DescribeApplicationAttributeResponse,
   ModifyLaneRequest,
@@ -311,6 +329,7 @@ import {
   BindPluginResponse,
   RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
+  MetricDataSingleValue,
   StopTaskExecuteRequest,
   DescribePkgsRequest,
   SchedulingStrategy,
@@ -321,6 +340,7 @@ import {
   DescribePublicConfigResponse,
   DescribeUsableUnitNamespacesResponse,
   ReleaseFileConfigResponse,
+  ThreadPicture,
   DescribeConfigResponse,
   SimpleGroup,
   DescribeContainerEventsResponse,
@@ -335,6 +355,8 @@ import {
   DescribePluginInstancesRequest,
   ApiRequestDescr,
   ApiVersionArray,
+  DescribeInovcationIndicatorsResponse,
+  MultiValueDataPoints,
   ConfigReleaseLog,
   CreateFileConfigResponse,
   CreateConfigRequest,
@@ -350,16 +372,19 @@ import {
   TaskFlowLastBatchState,
   DeletePkgsResponse,
   DescribeGroupsResponse,
-  ModifyLaneRuleRequest,
+  ApplicationForPage,
+  DescribeInvocationMetricScatterPlotRequest,
   CreateTaskFlowResponse,
   DescribeMicroservicesRequest,
   AddClusterInstancesResponse,
+  DescribeInvocationMetricDataCurveRequest,
   VmGroupOther,
   DescribeTaskLastStatusResponse,
   DescribePublicConfigsRequest,
   GatewayGroupApiVo,
   DescribeApplicationsRequest,
   DescribeTaskDetailRequest,
+  MultiValue,
   DescribePublicConfigReleasesRequest,
   DescribeLaneRulesRequest,
   CreateServerlessGroupRequest,
@@ -368,6 +393,7 @@ import {
   CreateRepositoryResponse,
   GroupUnitApiDailyUseStatistics,
   DescribeServerlessGroupsRequest,
+  CurvePoint,
   CosDownloadInfo,
   DeletePkgsRequest,
   ServerlessGroupPage,
@@ -412,6 +438,7 @@ import {
   ServiceConfig,
   RedoTaskExecuteRequest,
   DescribeApplicationsResponse,
+  InvocationIndicator,
   DescribeConfigRequest,
   DisableUnitRouteRequest,
   DescribeUnitRulesRequest,
@@ -423,14 +450,17 @@ import {
   ServerlessGroup,
   ApiDetailInfo,
   DescribeUnitApiUseDetailResponse,
+  DescribeInvocationMetricScatterPlotResponse,
   DescribeUsableUnitNamespacesRequest,
   DescribeContainerGroupsRequest,
+  DescribeJvmMonitorResponse,
   DisableTaskFlowRequest,
   DescribePodInstancesRequest,
   RedoTaskResponse,
   DescribeConfigsRequest,
   EnableUnitRouteRequest,
   TsfPageApplication,
+  DescribeInvocationMetricDataCurveResponse,
   DeleteConfigRequest,
   DescribeFileConfigsRequest,
   ExecuteTaskResponse,
@@ -451,6 +481,7 @@ import {
   StopContainerGroupRequest,
   UpdateHealthCheckSettingsResponse,
   ApiRateLimitRule,
+  DescribeInvocationMetricDataPointResponse,
   GroupUseStatisticsEntity,
   DescribePathRewritesResponse,
   AddInstanceResult,
@@ -482,10 +513,12 @@ import {
   DeleteNamespaceRequest,
   SearchStdoutLogRequest,
   RedoTaskBatchResponse,
+  DescribeStatisticsRequest,
   DescribeMicroserviceResponse,
   DescribeImageRepositoryResponse,
   TaskId,
   DescribeImageTagsRequest,
+  MemoryPicture,
   DescribeConfigSummaryResponse,
   CreateContainGroupRequest,
   DescribePublicConfigReleasesResponse,
@@ -579,6 +612,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableTaskFlowResponse) => void
   ): Promise<EnableTaskFlowResponse> {
     return this.request("EnableTaskFlow", req, cb)
+  }
+
+  /**
+   * 禁用单元化规则
+   */
+  async DisableUnitRule(
+    req: DisableUnitRuleRequest,
+    cb?: (error: string, rep: DisableUnitRuleResponse) => void
+  ): Promise<DisableUnitRuleResponse> {
+    return this.request("DisableUnitRule", req, cb)
   }
 
   /**
@@ -719,6 +762,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterResponse) => void
   ): Promise<CreateClusterResponse> {
     return this.request("CreateCluster", req, cb)
+  }
+
+  /**
+   * 服务调用监控统计概览
+   */
+  async DescribeOverviewInvocation(
+    req: DescribeOverviewInvocationRequest,
+    cb?: (error: string, rep: DescribeOverviewInvocationResponse) => void
+  ): Promise<DescribeOverviewInvocationResponse> {
+    return this.request("DescribeOverviewInvocation", req, cb)
   }
 
   /**
@@ -1133,6 +1186,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询单值指标维度
+   */
+  async DescribeInvocationMetricDataPoint(
+    req: DescribeInvocationMetricDataPointRequest,
+    cb?: (error: string, rep: DescribeInvocationMetricDataPointResponse) => void
+  ): Promise<DescribeInvocationMetricDataPointResponse> {
+    return this.request("DescribeInvocationMetricDataPoint", req, cb)
+  }
+
+  /**
    * 修改任务
    */
   async ModifyTask(
@@ -1323,6 +1386,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询调用监控指标
+   */
+  async DescribeInovcationIndicators(
+    req: DescribeInovcationIndicatorsRequest,
+    cb?: (error: string, rep: DescribeInovcationIndicatorsResponse) => void
+  ): Promise<DescribeInovcationIndicatorsResponse> {
+    return this.request("DescribeInovcationIndicators", req, cb)
+  }
+
+  /**
    * 查询简单部署组列表
    */
   async DescribeSimpleGroups(
@@ -1330,6 +1403,26 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeSimpleGroupsResponse) => void
   ): Promise<DescribeSimpleGroupsResponse> {
     return this.request("DescribeSimpleGroups", req, cb)
+  }
+
+  /**
+   * 服务统计页面：接口和服务维度
+   */
+  async DescribeStatistics(
+    req: DescribeStatisticsRequest,
+    cb?: (error: string, rep: DescribeStatisticsResponse) => void
+  ): Promise<DescribeStatisticsResponse> {
+    return this.request("DescribeStatistics", req, cb)
+  }
+
+  /**
+   * 启用任务
+   */
+  async EnableTask(
+    req: EnableTaskRequest,
+    cb?: (error: string, rep: EnableTaskResponse) => void
+  ): Promise<EnableTaskResponse> {
+    return this.request("EnableTask", req, cb)
   }
 
   /**
@@ -1394,13 +1487,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 禁用单元化规则
+   * 查询调用指标数据散点图
    */
-  async DisableUnitRule(
-    req: DisableUnitRuleRequest,
-    cb?: (error: string, rep: DisableUnitRuleResponse) => void
-  ): Promise<DisableUnitRuleResponse> {
-    return this.request("DisableUnitRule", req, cb)
+  async DescribeInvocationMetricScatterPlot(
+    req: DescribeInvocationMetricScatterPlotRequest,
+    cb?: (error: string, rep: DescribeInvocationMetricScatterPlotResponse) => void
+  ): Promise<DescribeInvocationMetricScatterPlotResponse> {
+    return this.request("DescribeInvocationMetricScatterPlot", req, cb)
   }
 
   /**
@@ -1565,13 +1658,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 启用任务
+   * 查询调用指标数据变化曲线
    */
-  async EnableTask(
-    req: EnableTaskRequest,
-    cb?: (error: string, rep: EnableTaskResponse) => void
-  ): Promise<EnableTaskResponse> {
-    return this.request("EnableTask", req, cb)
+  async DescribeInvocationMetricDataCurve(
+    req: DescribeInvocationMetricDataCurveRequest,
+    cb?: (error: string, rep: DescribeInvocationMetricDataCurveResponse) => void
+  ): Promise<DescribeInvocationMetricDataCurveResponse> {
+    return this.request("DescribeInvocationMetricDataCurve", req, cb)
   }
 
   /**
@@ -1855,6 +1948,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询java实例jvm监控数据,返回数据可选
+   */
+  async DescribeJvmMonitor(
+    req: DescribeJvmMonitorRequest,
+    cb?: (error: string, rep: DescribeJvmMonitorResponse) => void
+  ): Promise<DescribeJvmMonitorResponse> {
+    return this.request("DescribeJvmMonitor", req, cb)
+  }
+
+  /**
    * 查询网关所有分组下Api列表
    */
   async DescribeGatewayAllGroupApis(
@@ -2082,6 +2185,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeRepositoryResponse) => void
   ): Promise<DescribeRepositoryResponse> {
     return this.request("DescribeRepository", req, cb)
+  }
+
+  /**
+   * 查询维度
+   */
+  async DescribeInvocationMetricDataDimension(
+    req: DescribeInvocationMetricDataDimensionRequest,
+    cb?: (error: string, rep: DescribeInvocationMetricDataDimensionResponse) => void
+  ): Promise<DescribeInvocationMetricDataDimensionResponse> {
+    return this.request("DescribeInvocationMetricDataDimension", req, cb)
   }
 
   /**

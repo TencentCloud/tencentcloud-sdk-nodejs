@@ -43,6 +43,8 @@ import {
   UpdateRoleDescriptionResponse,
   GetAccountSummaryRequest,
   DetachUserPolicyRequest,
+  GetUserAppIdResponse,
+  GetUserAppIdRequest,
   ListGroupsResponse,
   ListPolicyVersionsRequest,
   GetCustomMFATokenInfoRequest,
@@ -197,6 +199,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cam.tencentcloudapi.com", "2019-01-16", clientConfig)
+  }
+
+  /**
+   * 获取用户AppId
+   */
+  async GetUserAppId(
+    req?: GetUserAppIdRequest,
+    cb?: (error: string, rep: GetUserAppIdResponse) => void
+  ): Promise<GetUserAppIdResponse> {
+    return this.request("GetUserAppId", req, cb)
   }
 
   /**

@@ -28,9 +28,9 @@ it("dcdb.v20180411.DescribeAccountPrivileges", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeOrders", async function () {
+it("dcdb.v20180411.ActiveHourDCDBInstance", async function () {
     try {
-       const data = await client.DescribeOrders({})
+       const data = await client.ActiveHourDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +111,16 @@ it("dcdb.v20180411.DescribeFileDownloadUrl", async function () {
 it("dcdb.v20180411.ModifyAccountDescription", async function () {
     try {
        const data = await client.ModifyAccountDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.DescribeOrders", async function () {
+    try {
+       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +278,9 @@ it("dcdb.v20180411.DescribeDBLogFiles", async function () {
     }
 })
 
-it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+it("dcdb.v20180411.IsolateHourDCDBInstance", async function () {
     try {
-       const data = await client.UpgradeDCDBInstance({})
+       const data = await client.IsolateHourDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -531,6 +541,16 @@ it("dcdb.v20180411.CreateHourDCDBInstance", async function () {
 it("dcdb.v20180411.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

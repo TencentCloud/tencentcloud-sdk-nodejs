@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFilterResult", req, cb);
     }
     /**
+     * 更新自定义送检房间号
+     */
+    async UpdateScanRooms(req, cb) {
+        return this.request("UpdateScanRooms", req, cb);
+    }
+    /**
      * 本接口(CreateApp)用于创建一个GME应用。
      */
     async CreateApp(req, cb) {
@@ -65,6 +71,12 @@ Type表示过滤类型，1：色情，2：谩骂
      */
     async DescribeFilterResultList(req, cb) {
         return this.request("DescribeFilterResultList", req, cb);
+    }
+    /**
+     * 更新自定义送检用户号
+     */
+    async UpdateScanUsers(req, cb) {
+        return this.request("UpdateScanUsers", req, cb);
     }
     /**
      * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
@@ -239,6 +251,12 @@ Type表示过滤类型，1：色情，2：谩骂
      */
     async ModifyAppStatus(req, cb) {
         return this.request("ModifyAppStatus", req, cb);
+    }
+    /**
+     * 获取用户自定义送检信息
+     */
+    async DescribeRealtimeScanConfig(req, cb) {
+        return this.request("DescribeRealtimeScanConfig", req, cb);
     }
     /**
      * 拉取用户在房间得进出时间

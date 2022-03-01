@@ -848,20 +848,23 @@ export interface TargetServicesReq {
 }
 
 /**
- * 服务绑定环境详情
+ * DescribeUsagePlansStatus请求参数结构体
  */
-export interface ServiceEnvironmentSet {
+export interface DescribeUsagePlansStatusRequest {
   /**
-      * 服务绑定环境总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
 
   /**
-      * 服务绑定环境列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EnvironmentList: Array<Environment>
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+
+  /**
+   * 使用计划过滤条件。支持UsagePlanId、UsagePlanName、NotServiceId、NotApiId、Environment。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1019,6 +1022,16 @@ export interface HealthCheckConf {
 }
 
 /**
+ * DeleteUpstream请求参数结构体
+ */
+export interface DeleteUpstreamRequest {
+  /**
+   * 待删除的VPC通道唯一ID
+   */
+  UpstreamId: string
+}
+
+/**
  * API网关插件详情。
  */
 export interface Plugin {
@@ -1088,6 +1101,61 @@ export interface UnbindApiAppResponse {
 }
 
 /**
+ * ModifyUpstream请求参数结构体
+ */
+export interface ModifyUpstreamRequest {
+  /**
+   * VPC通道唯一ID
+   */
+  UpstreamId: string
+
+  /**
+   * VPC通道名字
+   */
+  UpstreamName?: string
+
+  /**
+   * VPC通道描述
+   */
+  UpstreamDescription?: string
+
+  /**
+   * 后端协议，HTTP, HTTPS其中之一
+   */
+  Scheme?: string
+
+  /**
+   * 负载均衡算法目前支持ROUND_ROBIN
+   */
+  Algorithm?: string
+
+  /**
+   * VPC唯一ID
+   */
+  UniqVpcId?: string
+
+  /**
+   * 请求重试次数，默认3次
+   */
+  Retries?: number
+
+  /**
+   * 请求到后端的，host头
+   */
+  UpstreamHost?: string
+
+  /**
+   * 后端节点列表
+   */
+  Nodes?: Array<UpstreamNode>
+
+  /**
+   * k8s服务配置
+   */
+  K8sService?: Array<K8sService>
+}
+
+/**
  * DescribeApiUsagePlan返回参数结构体
  */
 export interface DescribeApiUsagePlanResponse {
@@ -1144,6 +1212,31 @@ export interface DescribePluginResponse {
 }
 
 /**
+ * DescribeUpstreamBindApis请求参数结构体
+ */
+export interface DescribeUpstreamBindApisRequest {
+  /**
+   * 分页
+   */
+  Limit: number
+
+  /**
+   * 分页
+   */
+  Offset: number
+
+  /**
+   * vpc通道Id
+   */
+  UpstreamId: string
+
+  /**
+   * ServiceId和ApiId过滤查询
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeExclusiveInstances返回参数结构体
  */
 export interface DescribeExclusiveInstancesResponse {
@@ -1156,6 +1249,46 @@ export interface DescribeExclusiveInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * k8s 服务的配置
+ */
+export interface K8sService {
+  /**
+   * 权重
+   */
+  Weight: number
+
+  /**
+   * k8s集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 容器命名空间
+   */
+  Namespace: string
+
+  /**
+   * 容器服务的名字
+   */
+  ServiceName: string
+
+  /**
+   * 服务的端口
+   */
+  Port: number
+
+  /**
+   * 额外选择的Pod的Label
+   */
+  ExtraLabels: Array<K8sLabel>
+
+  /**
+   * 自定义的服务名字，可选
+   */
+  Name?: string
 }
 
 /**
@@ -1212,6 +1345,11 @@ export interface DescribeApiEnvironmentStrategyRequest {
    */
   Offset?: number
 }
+
+/**
+ * VPC通道主动健康检查的请求头配置
+ */
+export type UpstreamHealthCheckerReqHeaders = null
 
 /**
  * DescribeServiceForApiApp返回参数结构体
@@ -2208,23 +2346,18 @@ export interface ModifyIPStrategyResponse {
 }
 
 /**
- * Oauth授权配置信息
+ * 查询vpc通道返回信息
  */
-export interface OauthConfig {
+export interface DescribeUpstreamInfo {
   /**
-   * 公钥，用于验证用户token。
+   * 查询总数
    */
-  PublicKey: string
+  TotalCount: number
 
   /**
-   * token传递位置。
+   * 查询列表
    */
-  TokenLocation: string
-
-  /**
-   * 重定向地址，用于引导用户登录操作。
-   */
-  LoginRedirectUrl?: string
+  UpstreamSet: Array<UpstreamInfo>
 }
 
 /**
@@ -2407,6 +2540,85 @@ export interface DeleteApiKeyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VPC通道信息集合
+ */
+export interface UpstreamInfo {
+  /**
+   * VPC通道唯一ID
+   */
+  UpstreamId: string
+
+  /**
+   * VPC通道名字
+   */
+  UpstreamName: string
+
+  /**
+   * VPC通道描述
+   */
+  UpstreamDescription: string
+
+  /**
+   * 写意
+   */
+  Scheme: string
+
+  /**
+   * 负载均衡算法
+   */
+  Algorithm: string
+
+  /**
+   * vpc唯一ID
+   */
+  UniqVpcId: string
+
+  /**
+   * 请求重拾次数
+   */
+  Retries: number
+
+  /**
+   * 后端节点
+   */
+  Nodes: Array<UpstreamNode>
+
+  /**
+   * 创建时间
+   */
+  CreatedTime: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
+
+  /**
+      * 健康检查配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthChecker: UpstreamHealthChecker
+
+  /**
+   * Upstream的类型
+   */
+  UpstreamType: string
+
+  /**
+      * k8s服务配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  K8sServices: Array<K8sService>
+
+  /**
+      * vpc通道的Host
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpstreamHost: string
 }
 
 /**
@@ -2619,6 +2831,21 @@ export interface UnBindIPStrategyRequest {
    * 待解绑的 API 列表。
    */
   UnBindApiIds: Array<string>
+}
+
+/**
+ * DescribeUpstreams返回参数结构体
+ */
+export interface DescribeUpstreamsResponse {
+  /**
+   * 查询结果
+   */
+  Result: DescribeUpstreamInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3104,14 +3331,14 @@ export interface DeleteApiKeyRequest {
 }
 
 /**
- * ModifyApiEnvironmentStrategy返回参数结构体
+ * DescribeIPStrategyApisStatus返回参数结构体
  */
-export interface ModifyApiEnvironmentStrategyResponse {
+export interface DescribeIPStrategyApisStatusResponse {
   /**
-      * 修改操作是否成功。
+      * 环境绑定API列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: boolean
+  Result?: IPStrategyApiStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4030,6 +4257,21 @@ export interface DescribeServiceEnvironmentStrategyRequest {
 }
 
 /**
+ * DescribeUpstreamBindApis返回参数结构体
+ */
+export interface DescribeUpstreamBindApisResponse {
+  /**
+   * 查询结果
+   */
+  Result: DescribeUpstreamBindApis
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReleaseService请求参数结构体
  */
 export interface ReleaseServiceRequest {
@@ -4224,6 +4466,21 @@ export interface ModifyExclusiveInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * k8s Label
+ */
+export interface K8sLabel {
+  /**
+   * Label的Key
+   */
+  Key: string
+
+  /**
+   * Label的Value
+   */
+  Value: string
 }
 
 /**
@@ -4427,19 +4684,53 @@ export interface ServiceUsagePlanSet {
 }
 
 /**
- * DescribeIPStrategyApisStatus返回参数结构体
+ * CreateUpstream请求参数结构体
  */
-export interface DescribeIPStrategyApisStatusResponse {
+export interface CreateUpstreamRequest {
   /**
-      * 环境绑定API列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result?: IPStrategyApiStatus
+   * 后端协议，HTTP, HTTPS其中之一
+   */
+  Scheme: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 负载均衡算法目前支持ROUND_ROBIN
    */
-  RequestId?: string
+  Algorithm: string
+
+  /**
+   * VPC唯一ID
+   */
+  UniqVpcId: string
+
+  /**
+   * VPC通道名字
+   */
+  UpstreamName?: string
+
+  /**
+   * VPC通道描述
+   */
+  UpstreamDescription?: string
+
+  /**
+   * 请求重试次数，默认3次
+   */
+  Retries?: number
+
+  /**
+   * 请求到后端的，host头
+   */
+  UpstreamHost?: string
+
+  /**
+   * 后端节点
+   */
+  Nodes?: Array<UpstreamNode>
+
+  /**
+   * k8s服务的配置
+   */
+  K8sService?: Array<K8sService>
 }
 
 /**
@@ -4734,6 +5025,26 @@ export interface DescribeServiceSubDomainMappingsResponse {
 }
 
 /**
+ * Oauth授权配置信息
+ */
+export interface OauthConfig {
+  /**
+   * 公钥，用于验证用户token。
+   */
+  PublicKey: string
+
+  /**
+   * token传递位置。
+   */
+  TokenLocation: string
+
+  /**
+   * 重定向地址，用于引导用户登录操作。
+   */
+  LoginRedirectUrl?: string
+}
+
+/**
  * DescribeApiAppsStatus返回参数结构体
  */
 export interface DescribeApiAppsStatusResponse {
@@ -4873,21 +5184,21 @@ export interface CreateApiKeyResponse {
 }
 
 /**
- * DescribeUsagePlansStatus请求参数结构体
+ * DescribeUpstreams请求参数结构体
  */
-export interface DescribeUsagePlansStatusRequest {
+export interface DescribeUpstreamsRequest {
   /**
-   * 返回数量，默认为 20，最大值为 100。
+   * 分页
    */
-  Limit?: number
+  Limit: number
 
   /**
-   * 偏移量，默认为 0。
+   * 分页
    */
-  Offset?: number
+  Offset: number
 
   /**
-   * 使用计划过滤条件。支持UsagePlanId、UsagePlanName、NotServiceId、NotApiId、Environment。
+   * 过滤条件
    */
   Filters?: Array<Filter>
 }
@@ -5050,14 +5361,14 @@ export interface VpcConfig {
 }
 
 /**
- * UnBindSecretIds返回参数结构体
+ * CreateUpstream返回参数结构体
  */
-export interface UnBindSecretIdsResponse {
+export interface CreateUpstreamResponse {
   /**
-      * 解绑操作是否成功。
+      * 创建返回的唯一id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: boolean
+  UpstreamId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5223,6 +5534,21 @@ export interface DeletePluginResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询vpc通道绑定api列表
+ */
+export interface DescribeUpstreamBindApis {
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 绑定的api信息
+   */
+  BindApiSet: Array<BindApiInfo>
 }
 
 /**
@@ -5410,6 +5736,22 @@ export interface DescribeServiceForApiAppRequest {
    * 服务所属的地域
    */
   ApiRegion: string
+}
+
+/**
+ * ModifyApiEnvironmentStrategy返回参数结构体
+ */
+export interface ModifyApiEnvironmentStrategyResponse {
+  /**
+      * 修改操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5901,6 +6243,38 @@ export interface ApiKey {
 }
 
 /**
+ * vpc通道绑定的api信息
+ */
+export interface BindApiInfo {
+  /**
+   * api唯一id
+   */
+  ApiId: string
+
+  /**
+   * Service唯一id
+   */
+  ServiceId: string
+
+  /**
+      * api名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiName: string
+
+  /**
+      * 服务名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceName: string
+
+  /**
+   * 绑定时间
+   */
+  BindTime: string
+}
+
+/**
  * 应用绑定的Api信息
  */
 export interface ApiAppApiInfo {
@@ -6044,6 +6418,22 @@ export interface BindEnvironmentRequest {
 }
 
 /**
+ * ModifyUpstream返回参数结构体
+ */
+export interface ModifyUpstreamResponse {
+  /**
+      * 返回修改后的vpc通道信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: UpstreamInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIPStrategy请求参数结构体
  */
 export interface DescribeIPStrategyRequest {
@@ -6171,6 +6561,74 @@ export interface DescribeServiceReleaseVersionResponse {
 }
 
 /**
+ * VPC通道后端节点元数据
+ */
+export interface UpstreamNode {
+  /**
+   * IP（domain）
+   */
+  Host: string
+
+  /**
+   * 端口[0, 65535]
+   */
+  Port: number
+
+  /**
+   * 权重[0, 100], 0为禁用
+   */
+  Weight: number
+
+  /**
+      * vm实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VmInstanceId?: string
+
+  /**
+      * 染色标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags?: Array<string>
+
+  /**
+      * 节点健康状态，创建、编辑时不需要传该参数。OFF：关闭，HEALTHY：健康，UNHEALTHY：异常，NO_DATA：数据未上报
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Healthy?: string
+
+  /**
+      * k8s服务名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceName?: string
+
+  /**
+      * k8s命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NameSpace?: string
+
+  /**
+      * TKE集群的ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+
+  /**
+      * Node的来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Source?: string
+
+  /**
+      * API网关内部记录唯一的服务名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UniqueServiceName?: string
+}
+
+/**
  * 应用信息集
  */
 export interface ApiAppApiInfos {
@@ -6184,6 +6642,22 @@ export interface ApiAppApiInfos {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApiAppApiSet: Array<ApiAppApiInfo>
+}
+
+/**
+ * DeleteUpstream返回参数结构体
+ */
+export interface DeleteUpstreamResponse {
+  /**
+      * 成功删除的vpc通道id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpstreamId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6350,6 +6824,23 @@ export interface ReleaseService {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReleaseVersion: string
+}
+
+/**
+ * 服务绑定环境详情
+ */
+export interface ServiceEnvironmentSet {
+  /**
+      * 服务绑定环境总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 服务绑定环境列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvironmentList: Array<Environment>
 }
 
 /**
@@ -6905,6 +7396,22 @@ export interface InstanceDetail {
 }
 
 /**
+ * UnBindSecretIds返回参数结构体
+ */
+export interface UnBindSecretIdsResponse {
+  /**
+      * 解绑操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateApiApp请求参数结构体
  */
 export interface CreateApiAppRequest {
@@ -6997,6 +7504,71 @@ export interface RequestParameter {
    * 是否必须
    */
   Required?: boolean
+}
+
+/**
+ * VPC通道健康检查参数配置
+ */
+export interface UpstreamHealthChecker {
+  /**
+   * 标识是否开启主动健康检查。
+   */
+  EnableActiveCheck: boolean
+
+  /**
+   * 标识是否开启被动健康检查。
+   */
+  EnablePassiveCheck: boolean
+
+  /**
+   * 健康检查时，判断为成功请求的 HTTP 状态码。
+   */
+  HealthyHttpStatus: string
+
+  /**
+   * 健康检查时，判断为失败请求的 HTTP 状态码。
+   */
+  UnhealthyHttpStatus: string
+
+  /**
+   * TCP连续错误阈值。0 表示禁用 TCP 检查。取值范围：[0, 254]。
+   */
+  TcpFailureThreshold: number
+
+  /**
+   * 连续超时阈值。0 表示禁用超时检查。取值范围：[0, 254]。
+   */
+  TimeoutThreshold: number
+
+  /**
+   * HTTP连续错误阈值。0 表示禁用HTTP检查。取值范围：[0, 254]。
+   */
+  HttpFailureThreshold: number
+
+  /**
+   * 主动健康检查时探测请求的路径。默认为"/"。
+   */
+  ActiveCheckHttpPath?: string
+
+  /**
+   * 主动健康检查的探测请求超时，单位秒。默认为5秒。
+   */
+  ActiveCheckTimeout?: number
+
+  /**
+   * 主动健康检查的时间间隔，默认5秒。
+   */
+  ActiveCheckInterval?: number
+
+  /**
+   * 主动健康检查时探测请求的的请求头。
+   */
+  ActiveRequestHeader?: Array<UpstreamHealthCheckerReqHeaders>
+
+  /**
+   * 异常节点的状态自动恢复时间，单位秒。当只开启被动检查的话，必须设置为 > 0 的值，否则被动异常节点将无法恢复。默认30秒。
+   */
+  UnhealthyTimeout?: number
 }
 
 /**

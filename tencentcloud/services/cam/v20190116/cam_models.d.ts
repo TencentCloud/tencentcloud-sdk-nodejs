@@ -397,6 +397,31 @@ export interface DetachUserPolicyRequest {
     DetachUin: number;
 }
 /**
+ * GetUserAppId返回参数结构体
+ */
+export interface GetUserAppIdResponse {
+    /**
+      * 当前账号Uin
+      */
+    Uin?: string;
+    /**
+      * 当前账号OwnerUin
+      */
+    OwnerUin?: string;
+    /**
+      * 当前账号AppId
+      */
+    AppId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetUserAppId请求参数结构体
+ */
+export declare type GetUserAppIdRequest = null;
+/**
  * ListGroups返回参数结构体
  */
 export interface ListGroupsResponse {

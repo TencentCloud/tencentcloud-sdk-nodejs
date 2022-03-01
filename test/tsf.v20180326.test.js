@@ -88,6 +88,16 @@ it("tsf.v20180326.EnableTaskFlow", async function () {
     }
 })
 
+it("tsf.v20180326.DisableUnitRule", async function () {
+    try {
+       const data = await client.DisableUnitRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribePodInstances", async function () {
     try {
        const data = await client.DescribePodInstances({})
@@ -221,6 +231,16 @@ it("tsf.v20180326.RevocationPublicConfig", async function () {
 it("tsf.v20180326.CreateCluster", async function () {
     try {
        const data = await client.CreateCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeOverviewInvocation", async function () {
+    try {
+       const data = await client.DescribeOverviewInvocation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,6 +658,16 @@ it("tsf.v20180326.DescribeCreateGatewayApiStatus", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeInvocationMetricDataPoint", async function () {
+    try {
+       const data = await client.DescribeInvocationMetricDataPoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.ModifyTask", async function () {
     try {
        const data = await client.ModifyTask({})
@@ -828,9 +858,39 @@ it("tsf.v20180326.BindApiGroup", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeInovcationIndicators", async function () {
+    try {
+       const data = await client.DescribeInovcationIndicators({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeSimpleGroups", async function () {
     try {
        const data = await client.DescribeSimpleGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeStatistics", async function () {
+    try {
+       const data = await client.DescribeStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.EnableTask", async function () {
+    try {
+       const data = await client.EnableTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,9 +958,9 @@ it("tsf.v20180326.DescribeConfigSummary", async function () {
     }
 })
 
-it("tsf.v20180326.DisableUnitRule", async function () {
+it("tsf.v20180326.DescribeInvocationMetricScatterPlot", async function () {
     try {
-       const data = await client.DisableUnitRule({})
+       const data = await client.DescribeInvocationMetricScatterPlot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,9 +1128,9 @@ it("tsf.v20180326.DescribePathRewrite", async function () {
     }
 })
 
-it("tsf.v20180326.EnableTask", async function () {
+it("tsf.v20180326.DescribeInvocationMetricDataCurve", async function () {
     try {
-       const data = await client.EnableTask({})
+       const data = await client.DescribeInvocationMetricDataCurve({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1358,6 +1418,16 @@ it("tsf.v20180326.RedoTaskExecute", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeJvmMonitor", async function () {
+    try {
+       const data = await client.DescribeJvmMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeGatewayAllGroupApis", async function () {
     try {
        const data = await client.DescribeGatewayAllGroupApis({})
@@ -1581,6 +1651,16 @@ it("tsf.v20180326.DescribeServerlessGroup", async function () {
 it("tsf.v20180326.DescribeRepository", async function () {
     try {
        const data = await client.DescribeRepository({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeInvocationMetricDataDimension", async function () {
+    try {
+       const data = await client.DescribeInvocationMetricDataDimension({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

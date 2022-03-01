@@ -28,6 +28,16 @@ it("gme.v20180711.DescribeFilterResult", async function () {
     }
 })
 
+it("gme.v20180711.UpdateScanRooms", async function () {
+    try {
+       const data = await client.UpdateScanRooms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.CreateApp", async function () {
     try {
        const data = await client.CreateApp({})
@@ -78,6 +88,16 @@ it("gme.v20180711.DescribeFilterResultList", async function () {
     }
 })
 
+it("gme.v20180711.UpdateScanUsers", async function () {
+    try {
+       const data = await client.UpdateScanUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.DescribeAppStatistics", async function () {
     try {
        const data = await client.DescribeAppStatistics({})
@@ -121,6 +141,16 @@ it("gme.v20180711.CreateAgeDetectTask", async function () {
 it("gme.v20180711.ModifyAppStatus", async function () {
     try {
        const data = await client.ModifyAppStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeRealtimeScanConfig", async function () {
+    try {
+       const data = await client.DescribeRealtimeScanConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

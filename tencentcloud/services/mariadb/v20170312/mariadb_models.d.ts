@@ -1,4 +1,21 @@
 /**
+ * IsolateHourDBInstance返回参数结构体
+ */
+export interface IsolateHourDBInstanceResponse {
+    /**
+      * 解隔离成功的实例id列表
+      */
+    SuccessInstanceIds?: Array<string>;
+    /**
+      * 解隔离失败的实例id列表
+      */
+    FailedInstanceIds?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateDBInstance请求参数结构体
  */
 export interface CreateDBInstanceRequest {
@@ -232,17 +249,21 @@ export interface DescribeRenewalPriceResponse {
     RequestId?: string;
 }
 /**
- * CreateTmpInstances请求参数结构体
+ * CreateDedicatedClusterDBInstance返回参数结构体
  */
-export interface CreateTmpInstancesRequest {
+export interface CreateDedicatedClusterDBInstanceResponse {
     /**
-      * 回档实例的ID列表，形如：tdsql-ow728lmc。
+      * 分配资源ID数组
       */
     InstanceIds: Array<string>;
     /**
-      * 回档时间点
+      * 流程ID
       */
-    RollbackTime: string;
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DestroyHourDBInstance请求参数结构体
@@ -529,6 +550,15 @@ export interface DescribeLogFileRetentionPeriodRequest {
       * 实例 ID，形如：tdsql-ow728lmc。
       */
     InstanceId: string;
+}
+/**
+ * IsolateHourDBInstance请求参数结构体
+ */
+export interface IsolateHourDBInstanceRequest {
+    /**
+      * 实例ID列表
+      */
+    InstanceIds: Array<string>;
 }
 /**
  * DB资源使用情况监控指标集合
@@ -922,59 +952,128 @@ export interface ModifyRealServerAccessStrategyResponse {
     RequestId?: string;
 }
 /**
- * CreateHourDBInstance返回参数结构体
+ * CloneAccount请求参数结构体
  */
-export interface CreateHourDBInstanceResponse {
+export interface CloneAccountRequest {
     /**
-      * 长订单号。可以据此调用 DescribeOrders
- 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+      * 实例ID
       */
-    DealName: string;
+    InstanceId: string;
     /**
-      * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 源用户账户名
       */
-    InstanceIds: Array<string>;
+    SrcUser: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 源用户HOST
       */
-    RequestId?: string;
+    SrcHost: string;
+    /**
+      * 目的用户账户名
+      */
+    DstUser: string;
+    /**
+      * 目的用户HOST
+      */
+    DstHost: string;
+    /**
+      * 目的用户账户描述
+      */
+    DstDesc?: string;
 }
 /**
- * DescribePrice请求参数结构体
+ * DescribeDatabaseObjects请求参数结构体
  */
-export interface DescribePriceRequest {
+export interface DescribeDatabaseObjectsRequest {
     /**
-      * 欲新购实例的可用区ID。
+      * 实例 ID，形如：dcdbt-ow7t8lmc。
       */
-    Zone: string;
+    InstanceId: string;
     /**
-      * 实例节点个数，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得。
+      * 数据库名称，通过 DescribeDatabases 接口获取。
       */
-    NodeCount: number;
+    DbName: string;
+}
+/**
+ * 慢查询条目信息
+ */
+export interface SlowLogData {
     /**
-      * 内存大小，单位：GB，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得。
+      * 语句校验和，用于查询详情
       */
-    Memory: number;
+    CheckSum: string;
     /**
-      * 存储空间大小，单位：GB，可以通过 DescribeDBInstanceSpecs
- 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
+      * 数据库名称
       */
-    Storage: number;
+    Db: string;
     /**
-      * 欲购买的时长，单位：月。
+      * 抽象的SQL语句
       */
-    Period?: number;
+    FingerPrint: string;
     /**
-      * 欲购买的数量，默认查询购买1个实例的价格。
+      * 平均的锁时间
       */
-    Count?: number;
+    LockTimeAvg: string;
     /**
-      * 付费类型。postpaid：按量付费   prepaid：预付费
+      * 最大锁时间
       */
-    Paymode?: string;
+    LockTimeMax: string;
+    /**
+      * 最小锁时间
+      */
+    LockTimeMin: string;
+    /**
+      * 锁时间总和
+      */
+    LockTimeSum: string;
+    /**
+      * 查询次数
+      */
+    QueryCount: string;
+    /**
+      * 平均查询时间
+      */
+    QueryTimeAvg: string;
+    /**
+      * 最大查询时间
+      */
+    QueryTimeMax: string;
+    /**
+      * 最小查询时间
+      */
+    QueryTimeMin: string;
+    /**
+      * 查询时间总和
+      */
+    QueryTimeSum: string;
+    /**
+      * 扫描行数
+      */
+    RowsExaminedSum: string;
+    /**
+      * 发送行数
+      */
+    RowsSentSum: string;
+    /**
+      * 最后执行时间
+      */
+    TsMax: string;
+    /**
+      * 首次执行时间
+      */
+    TsMin: string;
+    /**
+      * 帐号
+      */
+    User: string;
+    /**
+      * 样例Sql
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExampleSql: string;
+    /**
+      * 账户的域名
+      */
+    Host: string;
 }
 /**
  * 修改参数结果
@@ -1122,21 +1221,17 @@ export interface RenewDBInstanceRequest {
     VoucherIds?: Array<string>;
 }
 /**
- * CreateDedicatedClusterDBInstance返回参数结构体
+ * CreateTmpInstances请求参数结构体
  */
-export interface CreateDedicatedClusterDBInstanceResponse {
+export interface CreateTmpInstancesRequest {
     /**
-      * 分配资源ID数组
+      * 回档实例的ID列表，形如：tdsql-ow728lmc。
       */
     InstanceIds: Array<string>;
     /**
-      * 流程ID
+      * 回档时间点
       */
-    FlowId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    RollbackTime: string;
 }
 /**
  * 数据库表权限
@@ -1212,17 +1307,40 @@ export interface ResetAccountPasswordResponse {
  */
 export declare type DescribeDBInstanceSpecsRequest = null;
 /**
- * DescribeDatabaseObjects请求参数结构体
+ * DescribePrice请求参数结构体
  */
-export interface DescribeDatabaseObjectsRequest {
+export interface DescribePriceRequest {
     /**
-      * 实例 ID，形如：dcdbt-ow7t8lmc。
+      * 欲新购实例的可用区ID。
       */
-    InstanceId: string;
+    Zone: string;
     /**
-      * 数据库名称，通过 DescribeDatabases 接口获取。
+      * 实例节点个数，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得。
       */
-    DbName: string;
+    NodeCount: number;
+    /**
+      * 内存大小，单位：GB，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得。
+      */
+    Memory: number;
+    /**
+      * 存储空间大小，单位：GB，可以通过 DescribeDBInstanceSpecs
+ 查询实例规格获得不同内存大小对应的磁盘规格下限和上限。
+      */
+    Storage: number;
+    /**
+      * 欲购买的时长，单位：月。
+      */
+    Period?: number;
+    /**
+      * 欲购买的数量，默认查询购买1个实例的价格。
+      */
+    Count?: number;
+    /**
+      * 付费类型。postpaid：按量付费   prepaid：预付费
+      */
+    Paymode?: string;
 }
 /**
  * CreateDBInstance返回参数结构体
@@ -2377,86 +2495,13 @@ export interface DescribeBackupTimeResponse {
     RequestId?: string;
 }
 /**
- * 慢查询条目信息
+ * ActivateHourDBInstance请求参数结构体
  */
-export interface SlowLogData {
+export interface ActivateHourDBInstanceRequest {
     /**
-      * 语句校验和，用于查询详情
+      * 实例ID列表
       */
-    CheckSum: string;
-    /**
-      * 数据库名称
-      */
-    Db: string;
-    /**
-      * 抽象的SQL语句
-      */
-    FingerPrint: string;
-    /**
-      * 平均的锁时间
-      */
-    LockTimeAvg: string;
-    /**
-      * 最大锁时间
-      */
-    LockTimeMax: string;
-    /**
-      * 最小锁时间
-      */
-    LockTimeMin: string;
-    /**
-      * 锁时间总和
-      */
-    LockTimeSum: string;
-    /**
-      * 查询次数
-      */
-    QueryCount: string;
-    /**
-      * 平均查询时间
-      */
-    QueryTimeAvg: string;
-    /**
-      * 最大查询时间
-      */
-    QueryTimeMax: string;
-    /**
-      * 最小查询时间
-      */
-    QueryTimeMin: string;
-    /**
-      * 查询时间总和
-      */
-    QueryTimeSum: string;
-    /**
-      * 扫描行数
-      */
-    RowsExaminedSum: string;
-    /**
-      * 发送行数
-      */
-    RowsSentSum: string;
-    /**
-      * 最后执行时间
-      */
-    TsMax: string;
-    /**
-      * 首次执行时间
-      */
-    TsMin: string;
-    /**
-      * 帐号
-      */
-    User: string;
-    /**
-      * 样例Sql
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExampleSql: string;
-    /**
-      * 账户的域名
-      */
-    Host: string;
+    InstanceIds: Array<string>;
 }
 /**
  * RenewDBInstance返回参数结构体
@@ -2762,6 +2807,23 @@ export interface ModifyDBSyncModeRequest {
     SyncMode: number;
 }
 /**
+ * ActivateHourDBInstance返回参数结构体
+ */
+export interface ActivateHourDBInstanceResponse {
+    /**
+      * 隔离成功的实例id列表
+      */
+    SuccessInstanceIds?: Array<string>;
+    /**
+      * 隔离失败的实例id列表
+      */
+    FailedInstanceIds?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeInstanceNodeInfo请求参数结构体
  */
 export interface DescribeInstanceNodeInfoRequest {
@@ -2779,33 +2841,23 @@ export interface DescribeInstanceNodeInfoRequest {
     Offset?: number;
 }
 /**
- * CloneAccount请求参数结构体
+ * CreateHourDBInstance返回参数结构体
  */
-export interface CloneAccountRequest {
+export interface CreateHourDBInstanceResponse {
     /**
-      * 实例ID
+      * 长订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
       */
-    InstanceId: string;
+    DealName: string;
     /**
-      * 源用户账户名
+      * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SrcUser: string;
+    InstanceIds: Array<string>;
     /**
-      * 源用户HOST
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SrcHost: string;
-    /**
-      * 目的用户账户名
-      */
-    DstUser: string;
-    /**
-      * 目的用户HOST
-      */
-    DstHost: string;
-    /**
-      * 目的用户账户描述
-      */
-    DstDesc?: string;
+    RequestId?: string;
 }
 /**
  * CreateAccount返回参数结构体

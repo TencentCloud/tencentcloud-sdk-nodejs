@@ -26,10 +26,13 @@ import {
   DescribeApplicationDataRequest,
   VoiceFilterRequest,
   CreateAgeDetectTaskResponse,
+  DescribeRealtimeScanConfigResponse,
   VoiceMessageStatisticsItem,
   RoomUser,
   DescribeRoomInfoRequest,
+  UpdateScanRoomsRequest,
   AgeDetectTaskResult,
+  DescribeRealtimeScanConfigRequest,
   DescribeScanResultListRequest,
   CreateAgeDetectTaskRequest,
   RealTimeSpeechStatisticsItem,
@@ -42,8 +45,10 @@ import {
   DescribeFilterResultListResponse,
   ModifyAppStatusResp,
   DescribeAppStatisticsResponse,
+  UpdateScanRoomsResponse,
   DescribeApplicationDataResponse,
   Task,
+  UpdateScanUsersResponse,
   VoiceFilterStatisticsItem,
   CreateAppResp,
   DescribeRoomInfoResponse,
@@ -67,6 +72,7 @@ import {
   ModifyAppStatusResponse,
   ScanVoiceRequest,
   VoiceFilterConf,
+  UpdateScanUsersRequest,
   StatisticsItem,
   DescribeFilterResultRequest,
   DescribeUserInAndOutTimeRequest,
@@ -89,6 +95,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFilterResultResponse) => void
   ): Promise<DescribeFilterResultResponse> {
     return this.request("DescribeFilterResult", req, cb)
+  }
+
+  /**
+   * 更新自定义送检房间号
+   */
+  async UpdateScanRooms(
+    req: UpdateScanRoomsRequest,
+    cb?: (error: string, rep: UpdateScanRoomsResponse) => void
+  ): Promise<UpdateScanRoomsResponse> {
+    return this.request("UpdateScanRooms", req, cb)
   }
 
   /**
@@ -142,6 +158,16 @@ Type表示过滤类型，1：色情，2：谩骂
     cb?: (error: string, rep: DescribeFilterResultListResponse) => void
   ): Promise<DescribeFilterResultListResponse> {
     return this.request("DescribeFilterResultList", req, cb)
+  }
+
+  /**
+   * 更新自定义送检用户号
+   */
+  async UpdateScanUsers(
+    req: UpdateScanUsersRequest,
+    cb?: (error: string, rep: UpdateScanUsersResponse) => void
+  ): Promise<UpdateScanUsersResponse> {
+    return this.request("UpdateScanUsers", req, cb)
   }
 
   /**
@@ -336,6 +362,16 @@ Type表示过滤类型，1：色情，2：谩骂
     cb?: (error: string, rep: ModifyAppStatusResponse) => void
   ): Promise<ModifyAppStatusResponse> {
     return this.request("ModifyAppStatus", req, cb)
+  }
+
+  /**
+   * 获取用户自定义送检信息
+   */
+  async DescribeRealtimeScanConfig(
+    req: DescribeRealtimeScanConfigRequest,
+    cb?: (error: string, rep: DescribeRealtimeScanConfigResponse) => void
+  ): Promise<DescribeRealtimeScanConfigResponse> {
+    return this.request("DescribeRealtimeScanConfig", req, cb)
   }
 
   /**

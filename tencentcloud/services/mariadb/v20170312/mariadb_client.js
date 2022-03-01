@@ -119,6 +119,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBResourceUsageDetails", req, cb);
     }
     /**
+     * 解隔离后付费实例
+     */
+    async ActivateHourDBInstance(req, cb) {
+        return this.request("ActivateHourDBInstance", req, cb);
+    }
+    /**
      * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
 注意：相同用户名，不同Host是不同的账号。
      */
@@ -342,6 +348,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CopyAccountPrivileges(req, cb) {
         return this.request("CopyAccountPrivileges", req, cb);
+    }
+    /**
+     * 隔离后付费实例
+     */
+    async IsolateHourDBInstance(req, cb) {
+        return this.request("IsolateHourDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDatabases）用于查询云数据库实例的数据库列表。

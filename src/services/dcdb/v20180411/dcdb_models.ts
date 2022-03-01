@@ -213,6 +213,26 @@ export interface ModifyRealServerAccessStrategyResponse {
 }
 
 /**
+ * ActiveHourDCDBInstance返回参数结构体
+ */
+export interface ActiveHourDCDBInstanceResponse {
+  /**
+   * 解隔离成功的实例id列表
+   */
+  SuccessInstanceIds?: Array<string>
+
+  /**
+   * 解隔离失败的实例id列表
+   */
+  FailedInstanceIds?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDCDBPrice返回参数结构体
  */
 export interface DescribeDCDBPriceResponse {
@@ -503,6 +523,16 @@ export interface DescribeDBParametersResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IsolateHourDCDBInstance请求参数结构体
+ */
+export interface IsolateHourDCDBInstanceRequest {
+  /**
+   * 实例uuid列表
+   */
+  InstanceIds: Array<string>
 }
 
 /**
@@ -2405,6 +2435,26 @@ export interface CancelDcnJobRequest {
 }
 
 /**
+ * IsolateHourDCDBInstance返回参数结构体
+ */
+export interface IsolateHourDCDBInstanceResponse {
+  /**
+   * 隔离成功的实例id列表
+   */
+  SuccessInstanceIds?: Array<string>
+
+  /**
+   * 隔离失败的实例id列表
+   */
+  FailedInstanceIds?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 分片信息
  */
 export interface ShardInfo {
@@ -3438,6 +3488,16 @@ export interface LogFileInfo {
    * 文件名
    */
   FileName: string
+}
+
+/**
+ * ActiveHourDCDBInstance请求参数结构体
+ */
+export interface ActiveHourDCDBInstanceRequest {
+  /**
+   * 待升级的实例ID列表。形如：["dcdbt-ow728lmc"]，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceIds: Array<string>
 }
 
 /**

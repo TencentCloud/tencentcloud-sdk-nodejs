@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cam.tencentcloudapi.com", "2019-01-16", clientConfig);
     }
     /**
+     * 获取用户AppId
+     */
+    async GetUserAppId(req, cb) {
+        return this.request("GetUserAppId", req, cb);
+    }
+    /**
      * 设置子用户的登录保护和敏感操作校验方式
      */
     async SetMfaFlag(req, cb) {
