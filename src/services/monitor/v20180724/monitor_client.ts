@@ -427,7 +427,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建告警策略
+   * 创建云监控告警策略
    */
   async CreateAlarmPolicy(
     req: CreateAlarmPolicyRequest,

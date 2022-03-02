@@ -2028,6 +2028,16 @@ postMoveIn 按量计费迁入资源
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Action: string;
+    /**
+      * 产品编码中文名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductName: string;
+    /**
+      * 子产品编码中文名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubProductName: string;
 }
 /**
  * DescribeCostDetail请求参数结构体

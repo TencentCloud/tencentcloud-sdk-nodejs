@@ -55,6 +55,10 @@ export interface CreateCredentialRequest {
       * 版本
       */
     VersionCredential: string;
+    /**
+      * 是否未签名
+      */
+    UnSigned?: boolean;
 }
 /**
  * 创建凭证第二个
@@ -83,6 +87,97 @@ export interface CreateTDidRequest {
     Relegation: number;
 }
 /**
+ * GetAuthorityIssuer返回参数结构体
+ */
+export interface GetAuthorityIssuerResponse {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 区块链网络id
+      */
+    ClusterId: string;
+    /**
+      * 区块链群组id
+      */
+    GroupId: number;
+    /**
+      * 权威机构did
+      */
+    Did: string;
+    /**
+      * 机构备注信息
+      */
+    Remark: string;
+    /**
+      * 注册时间
+      */
+    RegisterTime: string;
+    /**
+      * 认证时间
+      */
+    RecognizeTime: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 凭证链上状态信息
+ */
+export interface CredentialStatus {
+    /**
+      * 凭证唯一id
+      */
+    CredentialId: string;
+    /**
+      * 凭证状态（0：吊销；1：有效）
+      */
+    Status: number;
+    /**
+      * 凭证颁发者Did
+      */
+    Issuer: string;
+    /**
+      * 凭证摘要
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Digest: string;
+    /**
+      * 凭证签名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Signature: string;
+    /**
+      * 更新时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeStamp: number;
+}
+/**
+ * CreateSelectiveCredential请求参数结构体
+ */
+export interface CreateSelectiveCredentialRequest {
+    /**
+      * 参数集合
+      */
+    FunctionArg: VerifyFunctionArg;
+    /**
+      * 批露策略id
+      */
+    PolicyId: number;
+}
+/**
+ * GetDidDocument请求参数结构体
+ */
+export interface GetDidDocumentRequest {
+    /**
+      * tdid
+      */
+    Did: string;
+}
+/**
  * 创建凭证入参的FunctionArg
  */
 export interface FunctionArg {
@@ -102,19 +197,6 @@ export interface FunctionArg {
       * 声明
       */
     ClaimJson: string;
-}
-/**
- * CreateSelectiveCredential请求参数结构体
- */
-export interface CreateSelectiveCredentialRequest {
-    /**
-      * 参数集合
-      */
-    FunctionArg: VerifyFunctionArg;
-    /**
-      * 批露策略id
-      */
-    PolicyId: number;
 }
 /**
  * CreateTDid返回参数结构体
@@ -143,6 +225,88 @@ export interface CreateSelectiveCredentialResponse {
     RequestId?: string;
 }
 /**
+ * SetCredentialStatus请求参数结构体
+ */
+export interface SetCredentialStatusRequest {
+    /**
+      * 凭证状态
+      */
+    CredentialStatus: CredentialStatus;
+}
+/**
+ * CreateTDidByPublicKey请求参数结构体
+ */
+export interface CreateTDidByPublicKeyRequest {
+    /**
+      * 网络ID
+      */
+    ClusterId: string;
+    /**
+      * 群组ID
+      */
+    GroupId: number;
+    /**
+      * 身份公钥
+      */
+    PublicKey: string;
+    /**
+      * 加密公钥
+      */
+    EncryptPubKey?: string;
+}
+/**
+ * CreateTDidByPublicKey返回参数结构体
+ */
+export interface CreateTDidByPublicKeyResponse {
+    /**
+      * did具体信息
+      */
+    Did: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCredential返回参数结构体
+ */
+export interface CreateCredentialResponse {
+    /**
+      * Credential的具体信息
+      */
+    CredentialData: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetAuthorityIssuer请求参数结构体
+ */
+export interface GetAuthorityIssuerRequest {
+    /**
+      * tdid
+      */
+    Did: string;
+}
+/**
+ * GetDidDocument返回参数结构体
+ */
+export interface GetDidDocumentResponse {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * DID文档
+      */
+    Document: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * VerifyCredential返回参数结构体
  */
 export interface VerifyCredentialResponse {
@@ -164,13 +328,9 @@ export interface VerifyCredentialResponse {
     RequestId?: string;
 }
 /**
- * CreateCredential返回参数结构体
+ * SetCredentialStatus返回参数结构体
  */
-export interface CreateCredentialResponse {
-    /**
-      * Credential的具体信息
-      */
-    CredentialData: string;
+export interface SetCredentialStatusResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

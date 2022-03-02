@@ -101,7 +101,7 @@ export declare class Client extends AbstractClient {
      */
     UpdateAlertRuleState(req: UpdateAlertRuleStateRequest, cb?: (error: string, rep: UpdateAlertRuleStateResponse) => void): Promise<UpdateAlertRuleStateResponse>;
     /**
-     * 创建告警策略
+     * 创建云监控告警策略
      */
     CreateAlarmPolicy(req: CreateAlarmPolicyRequest, cb?: (error: string, rep: CreateAlarmPolicyResponse) => void): Promise<CreateAlarmPolicyResponse>;
     /**

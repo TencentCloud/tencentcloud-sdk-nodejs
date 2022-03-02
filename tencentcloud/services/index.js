@@ -316,6 +316,8 @@ var tcr_1 = require("./tcr");
 Object.defineProperty(exports, "tcr", { enumerable: true, get: function () { return tcr_1.tcr; } });
 var tcss_1 = require("./tcss");
 Object.defineProperty(exports, "tcss", { enumerable: true, get: function () { return tcss_1.tcss; } });
+var tdcpg_1 = require("./tdcpg");
+Object.defineProperty(exports, "tdcpg", { enumerable: true, get: function () { return tdcpg_1.tdcpg; } });
 var tdid_1 = require("./tdid");
 Object.defineProperty(exports, "tdid", { enumerable: true, get: function () { return tdid_1.tdid; } });
 var tdmq_1 = require("./tdmq");

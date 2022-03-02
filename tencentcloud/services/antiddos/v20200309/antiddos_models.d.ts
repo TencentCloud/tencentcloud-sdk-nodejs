@@ -199,6 +199,27 @@ pcre(正则表达式)
     Id?: string;
 }
 /**
+ * DeleteCCLevelPolicy请求参数结构体
+ */
+export interface DeleteCCLevelPolicyRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * 配置策略的IP
+      */
+    Ip: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 协议，可取值http
+      */
+    Protocol: string;
+}
+/**
  * 转发类型
  */
 export interface ProxyTypeInfo {
@@ -678,6 +699,15 @@ export interface CreateIPAlarmThresholdConfigRequest {
     IpAlarmThresholdConfigList: Array<IPAlarmThresholdRelation>;
 }
 /**
+ * CreateCcBlackWhiteIpList返回参数结构体
+ */
+export interface CreateCcBlackWhiteIpListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDefaultAlarmThreshold返回参数结构体
  */
 export interface DescribeDefaultAlarmThresholdResponse {
@@ -820,6 +850,27 @@ export interface ModifyPacketFilterConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCCLevelPolicy请求参数结构体
+ */
+export interface DescribeCCLevelPolicyRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * IP值
+      */
+    Ip: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 协议，可取值HTTP，HTTPS
+      */
+    Protocol: string;
+}
+/**
  * CreateWaterPrintConfig返回参数结构体
  */
 export interface CreateWaterPrintConfigResponse {
@@ -944,6 +995,23 @@ export interface CreatePortAclConfigRequest {
     AclConfig: AclConfig;
 }
 /**
+ * DescribeCCThresholdList返回参数结构体
+ */
+export interface DescribeCCThresholdListResponse {
+    /**
+      * 清洗阈值策略列表总数
+      */
+    Total: number;
+    /**
+      * 清洗阈值策略列表详情
+      */
+    ThresholdList: Array<CCThresholdPolicy>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeL7RulesBySSLCertId请求参数结构体
  */
 export interface DescribeL7RulesBySSLCertIdRequest {
@@ -1055,6 +1123,15 @@ export interface DisassociateDDoSEipAddressResponse {
     RequestId?: string;
 }
 /**
+ * DeleteCCThresholdPolicy返回参数结构体
+ */
+export interface DeleteCCThresholdPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteBlackWhiteIpList请求参数结构体
  */
 export interface DeleteBlackWhiteIpListRequest {
@@ -1092,13 +1169,37 @@ export interface SourceServer {
     Weight: number;
 }
 /**
- * ModifyDomainUsrName返回参数结构体
+ * CC分级策略
  */
-export interface ModifyDomainUsrNameResponse {
+export interface CCLevelPolicy {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例Id
       */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+      * Ip
+      */
+    Ip: string;
+    /**
+      * 协议
+      */
+    Protocol: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 防护等级，可取值default表示默认策略，loose表示宽松，strict表示严格
+      */
+    Level: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 修改时间
+      */
+    ModifyTime: string;
 }
 /**
  * ModifyCcBlackWhiteIpList返回参数结构体
@@ -1406,22 +1507,21 @@ export interface DeleteCcGeoIPBlockConfigRequest {
     CcGeoIPBlockConfig: CcGeoIPBlockConfig;
 }
 /**
- * L4规则回源列表
+ * DescribeCCLevelList返回参数结构体
  */
-export interface L4RuleSource {
+export interface DescribeCCLevelListResponse {
     /**
-      * 回源IP或域名
+      * 分级策略列表总数
       */
-    Source: string;
+    Total: number;
     /**
-      * 权重值，取值[0,100]
+      * 分级策略列表详情
       */
-    Weight: number;
+    LevelList: Array<CCLevelPolicy>;
     /**
-      * 8000
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Port?: number;
+    RequestId?: string;
 }
 /**
  * CreateDDoSSpeedLimitConfig请求参数结构体
@@ -1511,20 +1611,13 @@ export interface DDoSSpeedLimitConfigRelation {
     InstanceDetailList: Array<InstanceRelation>;
 }
 /**
- * 套餐包信息
+ * DeleteCCLevelPolicy返回参数结构体
  */
-export interface PackInfo {
+export interface DeleteCCLevelPolicyResponse {
     /**
-      * 套餐包的类型，取值[
-staticpack：高防IP三网套餐包
-insurance：保险套餐包
-]
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PackType: string;
-    /**
-      * 套餐包的ID
-      */
-    PackId: string;
+    RequestId?: string;
 }
 /**
  * ModifyPacketFilterConfig请求参数结构体
@@ -1684,6 +1777,24 @@ shortfpcheckall（精简模式）
 ]
       */
     Verify?: string;
+}
+/**
+ * L4规则回源列表
+ */
+export interface L4RuleSource {
+    /**
+      * 回源IP或域名
+      */
+    Source: string;
+    /**
+      * 权重值，取值[0,100]
+      */
+    Weight: number;
+    /**
+      * 8000
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: number;
 }
 /**
  * 协议封禁配置
@@ -2196,6 +2307,22 @@ export interface DeleteDDoSBlackWhiteIpListRequest {
       * IP类型，取值[black(黑名单IP), white(白名单IP)]
       */
     Type: string;
+}
+/**
+ * 套餐包信息
+ */
+export interface PackInfo {
+    /**
+      * 套餐包的类型，取值[
+staticpack：高防IP三网套餐包
+insurance：保险套餐包
+]
+      */
+    PackType: string;
+    /**
+      * 套餐包的ID
+      */
+    PackId: string;
 }
 /**
  * CreateDDoSConnectLimit返回参数结构体
@@ -2771,6 +2898,27 @@ export interface ProtocolPort {
     Port: number;
 }
 /**
+ * DescribeCCLevelList请求参数结构体
+ */
+export interface DescribeCCLevelListRequest {
+    /**
+      * 大禹子产品代号（bgp-multip表示高防包）
+      */
+    Business: string;
+    /**
+      * 页起始偏移，取值为(页码-1)*一页条数
+      */
+    Offset: number;
+    /**
+      * 一页条数
+      */
+    Limit: number;
+    /**
+      * 指定实例Id
+      */
+    InstanceId?: string;
+}
+/**
  * ModifyCCThresholdPolicy请求参数结构体
  */
 export interface ModifyCCThresholdPolicyRequest {
@@ -2796,9 +2944,9 @@ export interface ModifyCCThresholdPolicyRequest {
     Threshold: number;
 }
 /**
- * DeleteCCPrecisionPolicy返回参数结构体
+ * DeleteDDoSGeoIPBlockConfig返回参数结构体
  */
-export interface DeleteCCPrecisionPolicyResponse {
+export interface DeleteDDoSGeoIPBlockConfigResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3131,6 +3279,27 @@ export interface AssociateDDoSEipLoadBalancerResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCCThresholdList请求参数结构体
+ */
+export interface DescribeCCThresholdListRequest {
+    /**
+      * 大禹子产品代号（bgp-multip表示高防包）
+      */
+    Business: string;
+    /**
+      * 页起始偏移，取值为(页码-1)*一页条数
+      */
+    Offset: number;
+    /**
+      * 一页条数
+      */
+    Limit: number;
+    /**
+      * 指定实例Id
+      */
+    InstanceId?: string;
+}
+/**
  * CreateBlackWhiteIpList请求参数结构体
  */
 export interface CreateBlackWhiteIpListRequest {
@@ -3386,6 +3555,48 @@ export interface DeleteDDoSBlackWhiteIpListResponse {
     RequestId?: string;
 }
 /**
+ * CC清洗阈值策略
+ */
+export interface CCThresholdPolicy {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * Ip地址
+      */
+    Ip: string;
+    /**
+      * 协议
+      */
+    Protocol: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 清洗阈值
+      */
+    Threshold: number;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 修改时间
+      */
+    ModifyTime: string;
+}
+/**
+ * ModifyDomainUsrName返回参数结构体
+ */
+export interface ModifyDomainUsrNameResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeCCTrend返回参数结构体
  */
 export interface DescribeCCTrendResponse {
@@ -3608,6 +3819,35 @@ export interface DeleteCCRequestLimitPolicyResponse {
     RequestId?: string;
 }
 /**
+ * CreateCcBlackWhiteIpList请求参数结构体
+ */
+export interface CreateCcBlackWhiteIpListRequest {
+    /**
+      * 资源实例ID
+      */
+    InstanceId: string;
+    /**
+      * IP列表
+      */
+    IpList: Array<IpSegment>;
+    /**
+      * IP类型，取值[black(黑名单IP), white(白名单IP)]
+      */
+    Type: string;
+    /**
+      * Ip地址
+      */
+    Ip: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 协议
+      */
+    Protocol: string;
+}
+/**
  * 高防包资产实例信息
  */
 export interface BGPInstance {
@@ -3794,6 +4034,19 @@ export interface DescribeListPortAclListRequest {
     FilterIp?: string;
 }
 /**
+ * DescribeCCLevelPolicy返回参数结构体
+ */
+export interface DescribeCCLevelPolicyResponse {
+    /**
+      * CC防护等级，可取值loose表示宽松，strict表示严格，normal表示适中， emergency表示攻击紧急， sup_loose表示超级宽松，default表示默认策略（无频控配置下发），customized表示自定义策略
+      */
+    Level: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeListWaterPrintConfig返回参数结构体
  */
 export interface DescribeListWaterPrintConfigResponse {
@@ -3835,6 +4088,27 @@ export interface DeleteDDoSSpeedLimitConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteCCThresholdPolicy请求参数结构体
+ */
+export interface DeleteCCThresholdPolicyRequest {
+    /**
+      * 实例Id
+      */
+    InstanceId: string;
+    /**
+      * 配置策略的IP
+      */
+    Ip: string;
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 协议，可取值http
+      */
+    Protocol: string;
 }
 /**
  * DescribeListListener请求参数结构体
@@ -3950,9 +4224,9 @@ export interface CreateWaterPrintKeyResponse {
     RequestId?: string;
 }
 /**
- * DeleteDDoSGeoIPBlockConfig返回参数结构体
+ * DeleteCCPrecisionPolicy返回参数结构体
  */
-export interface DeleteDDoSGeoIPBlockConfigResponse {
+export interface DeleteCCPrecisionPolicyResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

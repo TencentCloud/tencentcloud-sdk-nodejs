@@ -161,7 +161,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAlertRuleState", req, cb);
     }
     /**
-     * 创建告警策略
+     * 创建云监控告警策略
      */
     async CreateAlarmPolicy(req, cb) {
         return this.request("CreateAlarmPolicy", req, cb);

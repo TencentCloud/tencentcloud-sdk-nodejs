@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("antiddos.tencentcloudapi.com", "2020-03-09", clientConfig);
     }
     /**
-     * 修改CC四层黑白名单
+     * 修改CC防护等级
      */
-    async ModifyCcBlackWhiteIpList(req, cb) {
-        return this.request("ModifyCcBlackWhiteIpList", req, cb);
+    async ModifyCCLevelPolicy(req, cb) {
+        return this.request("ModifyCCLevelPolicy", req, cb);
     }
     /**
      * 本接口 (AssociateDDoSEipAddress) 用于将高防弹性公网IP绑定到实例或弹性网卡的指定内网 IP 上。
@@ -52,10 +52,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListWaterPrintConfig", req, cb);
     }
     /**
-     * 删除DDoS防护的IP网段黑白名单
+     * 修改7层转发规则
      */
-    async DeleteDDoSBlackWhiteIpList(req, cb) {
-        return this.request("DeleteDDoSBlackWhiteIpList", req, cb);
+    async ModifyNewDomainRules(req, cb) {
+        return this.request("ModifyNewDomainRules", req, cb);
+    }
+    /**
+     * 新建CC四层黑白名单
+     */
+    async CreateCcBlackWhiteIpList(req, cb) {
+        return this.request("CreateCcBlackWhiteIpList", req, cb);
     }
     /**
      * 删除DDoS防护的访问限速配置
@@ -131,6 +137,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSTrend", req, cb);
     }
     /**
+     * 删除DDoS防护的IP网段黑白名单
+     */
+    async DeleteDDoSBlackWhiteIpList(req, cb) {
+        return this.request("DeleteDDoSBlackWhiteIpList", req, cb);
+    }
+    /**
      * 获取单IP默认告警阈值配置
      */
     async DescribeDefaultAlarmThreshold(req, cb) {
@@ -143,10 +155,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeListBlackWhiteIpList", req, cb);
     }
     /**
-     * 修改7层转发规则
+     * 删除CC清洗阈值策略
      */
-    async ModifyNewDomainRules(req, cb) {
-        return this.request("ModifyNewDomainRules", req, cb);
+    async DeleteCCThresholdPolicy(req, cb) {
+        return this.request("DeleteCCThresholdPolicy", req, cb);
     }
     /**
      * 修改CC频率限制策略
@@ -167,10 +179,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateDDoSEipAddress", req, cb);
     }
     /**
-     * 获取CC防护的区域封禁配置列表
+     * 获取CC分级策略
      */
-    async DescribeCcGeoIPBlockConfigList(req, cb) {
-        return this.request("DescribeCcGeoIPBlockConfigList", req, cb);
+    async DescribeCCLevelPolicy(req, cb) {
+        return this.request("DescribeCCLevelPolicy", req, cb);
     }
     /**
      * 读取或修改DDoS的防护等级
@@ -189,6 +201,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBoundIP(req, cb) {
         return this.request("CreateBoundIP", req, cb);
+    }
+    /**
+     * 修改CC四层黑白名单
+     */
+    async ModifyCcBlackWhiteIpList(req, cb) {
+        return this.request("ModifyCcBlackWhiteIpList", req, cb);
     }
     /**
      * 删除CC防护的区域封禁配置
@@ -221,6 +239,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlackWhiteIpList", req, cb);
     }
     /**
+     * 获取CC防护等级列表
+     */
+    async DescribeCCLevelList(req, cb) {
+        return this.request("DescribeCCLevelList", req, cb);
+    }
+    /**
      * 修改DDoS黑白名单列表
      */
     async ModifyDDoSBlackWhiteIpList(req, cb) {
@@ -245,10 +269,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDDoSBlackWhiteIpList", req, cb);
     }
     /**
-     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
+     * 获取CC清洗阈值列表
      */
-    async DescribeCCTrend(req, cb) {
-        return this.request("DescribeCCTrend", req, cb);
+    async DescribeCCThresholdList(req, cb) {
+        return this.request("DescribeCCThresholdList", req, cb);
     }
     /**
      * 修改CC精准防护策略
@@ -257,16 +281,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCCPrecisionPolicy", req, cb);
     }
     /**
+     * 修改边界防护L7转发规则
+     */
+    async ModifyL7RulesEdge(req, cb) {
+        return this.request("ModifyL7RulesEdge", req, cb);
+    }
+    /**
      * 设置单IP告警阈值配置
      */
     async CreateIPAlarmThresholdConfig(req, cb) {
         return this.request("CreateIPAlarmThresholdConfig", req, cb);
     }
     /**
-     * 修改CC防护等级
+     * 删除CC分级策略
      */
-    async ModifyCCLevelPolicy(req, cb) {
-        return this.request("ModifyCCLevelPolicy", req, cb);
+    async DeleteCCLevelPolicy(req, cb) {
+        return this.request("DeleteCCLevelPolicy", req, cb);
     }
     /**
      * 查询与证书ID对于域名匹配的七层规则
@@ -384,10 +414,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWaterPrintConfig", req, cb);
     }
     /**
-     * 获取DDoS连接抑制配置列表
+     * 获取CC防护的区域封禁配置列表
      */
-    async DescribeDDoSConnectLimitList(req, cb) {
-        return this.request("DescribeDDoSConnectLimitList", req, cb);
+    async DescribeCcGeoIPBlockConfigList(req, cb) {
+        return this.request("DescribeCcGeoIPBlockConfigList", req, cb);
     }
     /**
      * 新增CC频率限制策略
@@ -432,10 +462,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSBlackWhiteIpList", req, cb);
     }
     /**
-     * 修改边界防护L7转发规则
+     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
      */
-    async ModifyL7RulesEdge(req, cb) {
-        return this.request("ModifyL7RulesEdge", req, cb);
+    async DescribeCCTrend(req, cb) {
+        return this.request("DescribeCCTrend", req, cb);
     }
     /**
      * 添加DDoS防护的水印防护密钥
@@ -466,6 +496,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeListPortAclList(req, cb) {
         return this.request("DescribeListPortAclList", req, cb);
+    }
+    /**
+     * 获取DDoS连接抑制配置列表
+     */
+    async DescribeDDoSConnectLimitList(req, cb) {
+        return this.request("DescribeDDoSConnectLimitList", req, cb);
     }
     /**
      * 新建cc防护的地域封禁配置

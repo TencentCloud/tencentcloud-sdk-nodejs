@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDefaultAlarmThresholdRequest, DescribeDDoSConnectLimitListRequest, DescribeListBGPIPInstancesResponse, DescribeBlackWhiteIpListResponse, CreateBoundIPRequest, DescribeListSchedulingDomainRequest, CreateWaterPrintConfigRequest, CreateBlackWhiteIpListResponse, DeleteCCRequestLimitPolicyRequest, DescribeL7RulesBySSLCertIdResponse, DescribeDDoSBlackWhiteIpListResponse, ModifyNewDomainRulesRequest, DescribeListProtocolBlockConfigResponse, DescribeListBGPInstancesRequest, ModifyCcBlackWhiteIpListRequest, DeleteDDoSSpeedLimitConfigRequest, CreatePacketFilterConfigResponse, CreateCCReqLimitPolicyResponse, DescribeListWaterPrintConfigRequest, CreateL7RuleCertsRequest, CreateCCPrecisionPolicyResponse, DeleteCcGeoIPBlockConfigResponse, DeleteDDoSGeoIPBlockConfigRequest, ModifyDDoSGeoIPBlockConfigResponse, DescribeCcBlackWhiteIpListResponse, ModifyCCLevelPolicyResponse, CreateIPAlarmThresholdConfigRequest, DescribeDefaultAlarmThresholdResponse, CreateDDoSAIRequest, DescribeListProtectThresholdConfigRequest, ModifyNewDomainRulesResponse, DescribeDDoSConnectLimitListResponse, ModifyPacketFilterConfigResponse, CreateWaterPrintConfigResponse, ModifyPortAclConfigRequest, DescribeListBGPIPInstancesRequest, CreatePortAclConfigRequest, DescribeL7RulesBySSLCertIdRequest, DescribeListPacketFilterConfigResponse, DeleteBlackWhiteIpListResponse, CreateSchedulingDomainRequest, CreateDDoSBlackWhiteIpListRequest, ModifyCCReqLimitPolicyRequest, DisassociateDDoSEipAddressResponse, DeleteBlackWhiteIpListRequest, ModifyDomainUsrNameResponse, ModifyCcBlackWhiteIpListResponse, CreatePortAclConfigListRequest, DisassociateDDoSEipAddressRequest, SwitchWaterPrintConfigResponse, DeleteWaterPrintKeyResponse, CreateDDoSBlackWhiteIpListResponse, DescribeListPacketFilterConfigRequest, ModifyDDoSBlackWhiteIpListRequest, DescribeListDDoSGeoIPBlockConfigRequest, CreateCcGeoIPBlockConfigResponse, ModifyDDoSGeoIPBlockConfigRequest, ModifyPortAclConfigResponse, DescribeBasicDeviceStatusRequest, DeleteCcGeoIPBlockConfigRequest, CreateDDoSSpeedLimitConfigRequest, CreateDDoSGeoIPBlockConfigRequest, CreateProtocolBlockConfigRequest, DeleteWaterPrintKeyRequest, AssociateDDoSEipAddressResponse, ModifyPacketFilterConfigRequest, DescribeBlackWhiteIpListRequest, CreateCcGeoIPBlockConfigRequest, DeletePortAclConfigResponse, CreateDDoSSpeedLimitConfigResponse, DeletePacketFilterConfigRequest, ModifyL7RulesEdgeRequest, DescribeListDDoSGeoIPBlockConfigResponse, DescribeBasicDeviceStatusResponse, DeleteCCPrecisionPolicyRequest, DeleteWaterPrintConfigResponse, DeletePacketFilterConfigResponse, CreateProtocolBlockConfigResponse, CreateIPAlarmThresholdConfigResponse, CreatePortAclConfigListResponse, DeleteWaterPrintConfigRequest, DescribeDDoSBlackWhiteIpListRequest, DescribeListBlackWhiteIpListResponse, DescribeCCReqLimitPolicyListRequest, DescribeListDDoSSpeedLimitConfigResponse, ModifyDDoSThresholdResponse, CreateDDoSGeoIPBlockConfigResponse, DeleteDDoSBlackWhiteIpListRequest, CreateDDoSConnectLimitResponse, DescribeCcBlackWhiteIpListRequest, DescribeListListenerResponse, DeletePortAclConfigRequest, CreatePortAclConfigResponse, ModifyDDoSLevelResponse, CreateL7RuleCertsResponse, CreateCCPrecisionPolicyRequest, AssociateDDoSEipLoadBalancerRequest, DescribeListProtectThresholdConfigResponse, CreateDefaultAlarmThresholdResponse, ModifyDDoSThresholdRequest, ModifyDDoSLevelRequest, DescribeListIPAlarmConfigResponse, ModifyDDoSBlackWhiteIpListResponse, DescribeCCPrecisionPlyListRequest, ModifyL7RulesEdgeResponse, ModifyCCThresholdPolicyRequest, DeleteCCPrecisionPolicyResponse, DescribeListDDoSAIRequest, DescribeListIPAlarmConfigRequest, ModifyCCReqLimitPolicyResponse, ModifyDomainUsrNameRequest, CreateDDoSConnectLimitRequest, CreateWaterPrintKeyRequest, DescribeCCReqLimitPolicyListResponse, DescribeListDDoSAIResponse, ModifyCCPrecisionPolicyResponse, ModifyDDoSSpeedLimitConfigRequest, AssociateDDoSEipAddressRequest, AssociateDDoSEipLoadBalancerResponse, CreateBlackWhiteIpListRequest, DescribeBizTrendResponse, DeleteCcBlackWhiteIpListResponse, CreateBoundIPResponse, DescribeListDDoSSpeedLimitConfigRequest, SwitchWaterPrintConfigRequest, DescribeListSchedulingDomainResponse, ModifyCCPrecisionPolicyRequest, DeleteDDoSBlackWhiteIpListResponse, DescribeCCTrendResponse, CreateSchedulingDomainResponse, DeleteCcBlackWhiteIpListRequest, DescribeCcGeoIPBlockConfigListResponse, CreateDDoSAIResponse, DescribeListProtocolBlockConfigRequest, DescribeListBGPInstancesResponse, DescribeDDoSTrendRequest, DeleteCCRequestLimitPolicyResponse, DescribeListPortAclListResponse, DescribeCCPrecisionPlyListResponse, DescribeBizTrendRequest, DescribeListPortAclListRequest, DescribeListWaterPrintConfigResponse, DeleteDDoSSpeedLimitConfigResponse, DescribeListListenerRequest, ModifyCCThresholdPolicyResponse, CreateWaterPrintKeyResponse, DeleteDDoSGeoIPBlockConfigResponse, DescribeDDoSTrendResponse, DescribeListBlackWhiteIpListRequest, CreateCCReqLimitPolicyRequest, ModifyDDoSSpeedLimitConfigResponse, DescribeDefaultAlarmThresholdRequest, ModifyCCLevelPolicyRequest, DescribeCcGeoIPBlockConfigListRequest, CreatePacketFilterConfigRequest, DescribeCCTrendRequest } from "./antiddos_models";
+import { CreateDefaultAlarmThresholdRequest, DescribeDDoSConnectLimitListRequest, DescribeListBGPIPInstancesResponse, DescribeBlackWhiteIpListResponse, DeleteCCLevelPolicyRequest, CreateBoundIPRequest, DescribeListSchedulingDomainRequest, CreateWaterPrintConfigRequest, CreateBlackWhiteIpListResponse, DeleteCCRequestLimitPolicyRequest, DescribeL7RulesBySSLCertIdResponse, DescribeDDoSBlackWhiteIpListResponse, ModifyNewDomainRulesRequest, DescribeListProtocolBlockConfigResponse, DescribeListBGPInstancesRequest, ModifyCcBlackWhiteIpListRequest, DeleteDDoSSpeedLimitConfigRequest, CreatePacketFilterConfigResponse, CreateCCReqLimitPolicyResponse, DescribeListWaterPrintConfigRequest, CreateL7RuleCertsRequest, CreateCCPrecisionPolicyResponse, DeleteCcGeoIPBlockConfigResponse, DeleteDDoSGeoIPBlockConfigRequest, ModifyDDoSGeoIPBlockConfigResponse, DescribeCcBlackWhiteIpListResponse, ModifyCCLevelPolicyResponse, CreateIPAlarmThresholdConfigRequest, CreateCcBlackWhiteIpListResponse, DescribeDefaultAlarmThresholdResponse, CreateDDoSAIRequest, DescribeListProtectThresholdConfigRequest, ModifyNewDomainRulesResponse, DescribeDDoSConnectLimitListResponse, ModifyPacketFilterConfigResponse, DescribeCCLevelPolicyRequest, CreateWaterPrintConfigResponse, ModifyPortAclConfigRequest, DescribeListBGPIPInstancesRequest, CreatePortAclConfigRequest, DescribeCCThresholdListResponse, DescribeL7RulesBySSLCertIdRequest, DescribeListPacketFilterConfigResponse, DeleteBlackWhiteIpListResponse, CreateSchedulingDomainRequest, CreateDDoSBlackWhiteIpListRequest, ModifyCCReqLimitPolicyRequest, DisassociateDDoSEipAddressResponse, DeleteCCThresholdPolicyResponse, DeleteBlackWhiteIpListRequest, ModifyCcBlackWhiteIpListResponse, CreatePortAclConfigListRequest, DisassociateDDoSEipAddressRequest, SwitchWaterPrintConfigResponse, DeleteWaterPrintKeyResponse, CreateDDoSBlackWhiteIpListResponse, DescribeListPacketFilterConfigRequest, ModifyDDoSBlackWhiteIpListRequest, DescribeListDDoSGeoIPBlockConfigRequest, CreateCcGeoIPBlockConfigResponse, ModifyDDoSGeoIPBlockConfigRequest, ModifyPortAclConfigResponse, DescribeBasicDeviceStatusRequest, DeleteCcGeoIPBlockConfigRequest, DescribeCCLevelListResponse, CreateDDoSSpeedLimitConfigRequest, CreateDDoSGeoIPBlockConfigRequest, CreateProtocolBlockConfigRequest, DeleteWaterPrintKeyRequest, AssociateDDoSEipAddressResponse, DeleteCCLevelPolicyResponse, ModifyPacketFilterConfigRequest, DescribeBlackWhiteIpListRequest, CreateCcGeoIPBlockConfigRequest, DeletePortAclConfigResponse, CreateDDoSSpeedLimitConfigResponse, DeletePacketFilterConfigRequest, ModifyL7RulesEdgeRequest, DescribeListDDoSGeoIPBlockConfigResponse, DescribeBasicDeviceStatusResponse, DeleteCCPrecisionPolicyRequest, DeleteWaterPrintConfigResponse, DeletePacketFilterConfigResponse, CreateProtocolBlockConfigResponse, CreateIPAlarmThresholdConfigResponse, CreatePortAclConfigListResponse, DeleteWaterPrintConfigRequest, DescribeDDoSBlackWhiteIpListRequest, DescribeListBlackWhiteIpListResponse, DescribeCCReqLimitPolicyListRequest, DescribeListDDoSSpeedLimitConfigResponse, ModifyDDoSThresholdResponse, CreateDDoSGeoIPBlockConfigResponse, DeleteDDoSBlackWhiteIpListRequest, CreateDDoSConnectLimitResponse, DescribeCcBlackWhiteIpListRequest, DescribeListListenerResponse, DeletePortAclConfigRequest, CreatePortAclConfigResponse, ModifyDDoSLevelResponse, CreateL7RuleCertsResponse, CreateCCPrecisionPolicyRequest, AssociateDDoSEipLoadBalancerRequest, DescribeListProtectThresholdConfigResponse, CreateDefaultAlarmThresholdResponse, ModifyDDoSThresholdRequest, ModifyDDoSLevelRequest, DescribeListIPAlarmConfigResponse, ModifyDDoSBlackWhiteIpListResponse, DescribeCCPrecisionPlyListRequest, ModifyL7RulesEdgeResponse, DescribeCCLevelListRequest, ModifyCCThresholdPolicyRequest, DeleteDDoSGeoIPBlockConfigResponse, DescribeListDDoSAIRequest, DescribeListIPAlarmConfigRequest, ModifyCCReqLimitPolicyResponse, ModifyDomainUsrNameRequest, CreateDDoSConnectLimitRequest, CreateWaterPrintKeyRequest, DescribeCCReqLimitPolicyListResponse, DescribeListDDoSAIResponse, ModifyCCPrecisionPolicyResponse, ModifyDDoSSpeedLimitConfigRequest, AssociateDDoSEipAddressRequest, AssociateDDoSEipLoadBalancerResponse, DescribeCCThresholdListRequest, CreateBlackWhiteIpListRequest, DescribeBizTrendResponse, DeleteCcBlackWhiteIpListResponse, CreateBoundIPResponse, DescribeListDDoSSpeedLimitConfigRequest, SwitchWaterPrintConfigRequest, DescribeListSchedulingDomainResponse, ModifyCCPrecisionPolicyRequest, DeleteDDoSBlackWhiteIpListResponse, ModifyDomainUsrNameResponse, DescribeCCTrendResponse, CreateSchedulingDomainResponse, DeleteCcBlackWhiteIpListRequest, DescribeCcGeoIPBlockConfigListResponse, CreateDDoSAIResponse, DescribeListProtocolBlockConfigRequest, DescribeListBGPInstancesResponse, DescribeDDoSTrendRequest, DeleteCCRequestLimitPolicyResponse, CreateCcBlackWhiteIpListRequest, DescribeListPortAclListResponse, DescribeCCPrecisionPlyListResponse, DescribeBizTrendRequest, DescribeListPortAclListRequest, DescribeCCLevelPolicyResponse, DescribeListWaterPrintConfigResponse, DeleteDDoSSpeedLimitConfigResponse, DeleteCCThresholdPolicyRequest, DescribeListListenerRequest, ModifyCCThresholdPolicyResponse, CreateWaterPrintKeyResponse, DeleteCCPrecisionPolicyResponse, DescribeDDoSTrendResponse, DescribeListBlackWhiteIpListRequest, CreateCCReqLimitPolicyRequest, ModifyDDoSSpeedLimitConfigResponse, DescribeDefaultAlarmThresholdRequest, ModifyCCLevelPolicyRequest, DescribeCcGeoIPBlockConfigListRequest, CreatePacketFilterConfigRequest, DescribeCCTrendRequest } from "./antiddos_models";
 /**
  * antiddos client
  * @class
@@ -8,9 +8,9 @@ import { CreateDefaultAlarmThresholdRequest, DescribeDDoSConnectLimitListRequest
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 修改CC四层黑白名单
+     * 修改CC防护等级
      */
-    ModifyCcBlackWhiteIpList(req: ModifyCcBlackWhiteIpListRequest, cb?: (error: string, rep: ModifyCcBlackWhiteIpListResponse) => void): Promise<ModifyCcBlackWhiteIpListResponse>;
+    ModifyCCLevelPolicy(req: ModifyCCLevelPolicyRequest, cb?: (error: string, rep: ModifyCCLevelPolicyResponse) => void): Promise<ModifyCCLevelPolicyResponse>;
     /**
      * 本接口 (AssociateDDoSEipAddress) 用于将高防弹性公网IP绑定到实例或弹性网卡的指定内网 IP 上。
      */
@@ -24,9 +24,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeListWaterPrintConfig(req: DescribeListWaterPrintConfigRequest, cb?: (error: string, rep: DescribeListWaterPrintConfigResponse) => void): Promise<DescribeListWaterPrintConfigResponse>;
     /**
-     * 删除DDoS防护的IP网段黑白名单
+     * 修改7层转发规则
      */
-    DeleteDDoSBlackWhiteIpList(req: DeleteDDoSBlackWhiteIpListRequest, cb?: (error: string, rep: DeleteDDoSBlackWhiteIpListResponse) => void): Promise<DeleteDDoSBlackWhiteIpListResponse>;
+    ModifyNewDomainRules(req: ModifyNewDomainRulesRequest, cb?: (error: string, rep: ModifyNewDomainRulesResponse) => void): Promise<ModifyNewDomainRulesResponse>;
+    /**
+     * 新建CC四层黑白名单
+     */
+    CreateCcBlackWhiteIpList(req: CreateCcBlackWhiteIpListRequest, cb?: (error: string, rep: CreateCcBlackWhiteIpListResponse) => void): Promise<CreateCcBlackWhiteIpListResponse>;
     /**
      * 删除DDoS防护的访问限速配置
      */
@@ -77,6 +81,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDDoSTrend(req: DescribeDDoSTrendRequest, cb?: (error: string, rep: DescribeDDoSTrendResponse) => void): Promise<DescribeDDoSTrendResponse>;
     /**
+     * 删除DDoS防护的IP网段黑白名单
+     */
+    DeleteDDoSBlackWhiteIpList(req: DeleteDDoSBlackWhiteIpListRequest, cb?: (error: string, rep: DeleteDDoSBlackWhiteIpListResponse) => void): Promise<DeleteDDoSBlackWhiteIpListResponse>;
+    /**
      * 获取单IP默认告警阈值配置
      */
     DescribeDefaultAlarmThreshold(req: DescribeDefaultAlarmThresholdRequest, cb?: (error: string, rep: DescribeDefaultAlarmThresholdResponse) => void): Promise<DescribeDefaultAlarmThresholdResponse>;
@@ -85,9 +93,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeListBlackWhiteIpList(req: DescribeListBlackWhiteIpListRequest, cb?: (error: string, rep: DescribeListBlackWhiteIpListResponse) => void): Promise<DescribeListBlackWhiteIpListResponse>;
     /**
-     * 修改7层转发规则
+     * 删除CC清洗阈值策略
      */
-    ModifyNewDomainRules(req: ModifyNewDomainRulesRequest, cb?: (error: string, rep: ModifyNewDomainRulesResponse) => void): Promise<ModifyNewDomainRulesResponse>;
+    DeleteCCThresholdPolicy(req: DeleteCCThresholdPolicyRequest, cb?: (error: string, rep: DeleteCCThresholdPolicyResponse) => void): Promise<DeleteCCThresholdPolicyResponse>;
     /**
      * 修改CC频率限制策略
      */
@@ -101,9 +109,9 @@ export declare class Client extends AbstractClient {
      */
     DisassociateDDoSEipAddress(req: DisassociateDDoSEipAddressRequest, cb?: (error: string, rep: DisassociateDDoSEipAddressResponse) => void): Promise<DisassociateDDoSEipAddressResponse>;
     /**
-     * 获取CC防护的区域封禁配置列表
+     * 获取CC分级策略
      */
-    DescribeCcGeoIPBlockConfigList(req: DescribeCcGeoIPBlockConfigListRequest, cb?: (error: string, rep: DescribeCcGeoIPBlockConfigListResponse) => void): Promise<DescribeCcGeoIPBlockConfigListResponse>;
+    DescribeCCLevelPolicy(req: DescribeCCLevelPolicyRequest, cb?: (error: string, rep: DescribeCCLevelPolicyResponse) => void): Promise<DescribeCCLevelPolicyResponse>;
     /**
      * 读取或修改DDoS的防护等级
      */
@@ -116,6 +124,10 @@ export declare class Client extends AbstractClient {
      * 绑定IP到高防包实例，支持独享包、共享包；需要注意的是此接口绑定或解绑IP是异步接口，当处于绑定或解绑中时，则不允许再进行绑定或解绑，需要等待当前绑定或解绑完成。
      */
     CreateBoundIP(req: CreateBoundIPRequest, cb?: (error: string, rep: CreateBoundIPResponse) => void): Promise<CreateBoundIPResponse>;
+    /**
+     * 修改CC四层黑白名单
+     */
+    ModifyCcBlackWhiteIpList(req: ModifyCcBlackWhiteIpListRequest, cb?: (error: string, rep: ModifyCcBlackWhiteIpListResponse) => void): Promise<ModifyCcBlackWhiteIpListResponse>;
     /**
      * 删除CC防护的区域封禁配置
      */
@@ -137,6 +149,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBlackWhiteIpList(req: DescribeBlackWhiteIpListRequest, cb?: (error: string, rep: DescribeBlackWhiteIpListResponse) => void): Promise<DescribeBlackWhiteIpListResponse>;
     /**
+     * 获取CC防护等级列表
+     */
+    DescribeCCLevelList(req: DescribeCCLevelListRequest, cb?: (error: string, rep: DescribeCCLevelListResponse) => void): Promise<DescribeCCLevelListResponse>;
+    /**
      * 修改DDoS黑白名单列表
      */
     ModifyDDoSBlackWhiteIpList(req: ModifyDDoSBlackWhiteIpListRequest, cb?: (error: string, rep: ModifyDDoSBlackWhiteIpListResponse) => void): Promise<ModifyDDoSBlackWhiteIpListResponse>;
@@ -153,21 +169,25 @@ export declare class Client extends AbstractClient {
      */
     CreateDDoSBlackWhiteIpList(req: CreateDDoSBlackWhiteIpListRequest, cb?: (error: string, rep: CreateDDoSBlackWhiteIpListResponse) => void): Promise<CreateDDoSBlackWhiteIpListResponse>;
     /**
-     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
+     * 获取CC清洗阈值列表
      */
-    DescribeCCTrend(req: DescribeCCTrendRequest, cb?: (error: string, rep: DescribeCCTrendResponse) => void): Promise<DescribeCCTrendResponse>;
+    DescribeCCThresholdList(req: DescribeCCThresholdListRequest, cb?: (error: string, rep: DescribeCCThresholdListResponse) => void): Promise<DescribeCCThresholdListResponse>;
     /**
      * 修改CC精准防护策略
      */
     ModifyCCPrecisionPolicy(req: ModifyCCPrecisionPolicyRequest, cb?: (error: string, rep: ModifyCCPrecisionPolicyResponse) => void): Promise<ModifyCCPrecisionPolicyResponse>;
     /**
+     * 修改边界防护L7转发规则
+     */
+    ModifyL7RulesEdge(req: ModifyL7RulesEdgeRequest, cb?: (error: string, rep: ModifyL7RulesEdgeResponse) => void): Promise<ModifyL7RulesEdgeResponse>;
+    /**
      * 设置单IP告警阈值配置
      */
     CreateIPAlarmThresholdConfig(req: CreateIPAlarmThresholdConfigRequest, cb?: (error: string, rep: CreateIPAlarmThresholdConfigResponse) => void): Promise<CreateIPAlarmThresholdConfigResponse>;
     /**
-     * 修改CC防护等级
+     * 删除CC分级策略
      */
-    ModifyCCLevelPolicy(req: ModifyCCLevelPolicyRequest, cb?: (error: string, rep: ModifyCCLevelPolicyResponse) => void): Promise<ModifyCCLevelPolicyResponse>;
+    DeleteCCLevelPolicy(req: DeleteCCLevelPolicyRequest, cb?: (error: string, rep: DeleteCCLevelPolicyResponse) => void): Promise<DeleteCCLevelPolicyResponse>;
     /**
      * 查询与证书ID对于域名匹配的七层规则
      */
@@ -246,9 +266,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteWaterPrintConfig(req: DeleteWaterPrintConfigRequest, cb?: (error: string, rep: DeleteWaterPrintConfigResponse) => void): Promise<DeleteWaterPrintConfigResponse>;
     /**
-     * 获取DDoS连接抑制配置列表
+     * 获取CC防护的区域封禁配置列表
      */
-    DescribeDDoSConnectLimitList(req: DescribeDDoSConnectLimitListRequest, cb?: (error: string, rep: DescribeDDoSConnectLimitListResponse) => void): Promise<DescribeDDoSConnectLimitListResponse>;
+    DescribeCcGeoIPBlockConfigList(req: DescribeCcGeoIPBlockConfigListRequest, cb?: (error: string, rep: DescribeCcGeoIPBlockConfigListResponse) => void): Promise<DescribeCcGeoIPBlockConfigListResponse>;
     /**
      * 新增CC频率限制策略
      */
@@ -278,9 +298,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDDoSBlackWhiteIpList(req: DescribeDDoSBlackWhiteIpListRequest, cb?: (error: string, rep: DescribeDDoSBlackWhiteIpListResponse) => void): Promise<DescribeDDoSBlackWhiteIpListResponse>;
     /**
-     * 修改边界防护L7转发规则
+     * 获取CC攻击指标数据，包括总请求峰值(QPS)和攻击请求(QPS)以及总请求次数和攻击请求次数
      */
-    ModifyL7RulesEdge(req: ModifyL7RulesEdgeRequest, cb?: (error: string, rep: ModifyL7RulesEdgeResponse) => void): Promise<ModifyL7RulesEdgeResponse>;
+    DescribeCCTrend(req: DescribeCCTrendRequest, cb?: (error: string, rep: DescribeCCTrendResponse) => void): Promise<DescribeCCTrendResponse>;
     /**
      * 添加DDoS防护的水印防护密钥
      */
@@ -301,6 +321,10 @@ export declare class Client extends AbstractClient {
      * 获取DDoS防护的端口acl策略列表
      */
     DescribeListPortAclList(req: DescribeListPortAclListRequest, cb?: (error: string, rep: DescribeListPortAclListResponse) => void): Promise<DescribeListPortAclListResponse>;
+    /**
+     * 获取DDoS连接抑制配置列表
+     */
+    DescribeDDoSConnectLimitList(req: DescribeDDoSConnectLimitListRequest, cb?: (error: string, rep: DescribeDDoSConnectLimitListResponse) => void): Promise<DescribeDDoSConnectLimitListResponse>;
     /**
      * 新建cc防护的地域封禁配置
      */

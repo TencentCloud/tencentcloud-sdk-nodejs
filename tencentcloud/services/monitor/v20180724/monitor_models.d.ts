@@ -500,7 +500,7 @@ export interface CreateAlarmPolicyRequest {
       */
     ProjectId?: number;
     /**
-      * 触发条件模板 Id ，可不传
+      * 触发条件模板 Id，该参数与 Condition 参数二选一。如果策略绑定触发条件模板，则传该参数；否则不传该参数，而是传 Condition 参数。触发条件模板 Id 可以从 [DescribeConditionsTemplateList](https://cloud.tencent.com/document/api/248/70250) 接口获取。
       */
     ConditionTemplateId?: number;
     /**

@@ -140,7 +140,7 @@ export interface CreateAgeDetectTaskResponse {
  */
 export interface DescribeRealtimeScanConfigResponse {
     /**
-      * 返回结果码
+      * 返回结果码，0正常，非0失败
       */
     ErrorCode: number;
     /**
@@ -148,23 +148,23 @@ export interface DescribeRealtimeScanConfigResponse {
       */
     BizId: number;
     /**
-      * 送检类型
+      * 送检类型，0: 全量送审，1: 自定义送审
       */
     AuditType: number;
     /**
-      * 用户号正则
+      * 用户号正则表达式
       */
     UserIdRegex: Array<string>;
     /**
-      * 房间号正则
+      * 房间号正则表达式
       */
     RoomIdRegex: Array<string>;
     /**
-      * 用户号字符串，逗号分隔
+      * 用户号字符串，逗号分隔，示例："0001,0002,0003"
       */
     UserIdString: string;
     /**
-      * 房间号字符串，逗号分隔
+      * 房间号字符串，逗号分隔，示例："0001,0002,0003"
       */
     RoomIdString: string;
     /**
@@ -226,11 +226,11 @@ export interface UpdateScanRoomsRequest {
       */
     BizId: number;
     /**
-      * 字符串房间号，逗号分隔
+      * 需要送检的所有房间号。多个房间号之间用","分隔。示例："0001,0002,0003"
       */
     RoomIdString?: string;
     /**
-      * 正则表达式房间号，["^6.*"]6开头的房间号
+      * 符合此正则表达式规则的房间号将被送检。示例：["^6.*"] 表示所有以6开头的房间号将被送检
       */
     RoomIdRegex?: Array<string>;
 }
@@ -1093,11 +1093,11 @@ export interface UpdateScanUsersRequest {
       */
     BizId: number;
     /**
-      * 字符串用户号，逗号分隔
+      * 需要送检的所有用户号。多个用户号之间用","分隔。示例："0001,0002,0003"
       */
     UserIdString?: string;
     /**
-      * 正则表达式用户号，["^6.*"]6开头的用户号
+      * 符合此正则表达式规则的用户号将被送检。示例：["^6.*"] 表示所有以6开头的用户号将被送检
       */
     UserIdRegex?: Array<string>;
 }

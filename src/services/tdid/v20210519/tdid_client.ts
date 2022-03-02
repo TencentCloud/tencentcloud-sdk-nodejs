@@ -22,12 +22,21 @@ import {
   CreateCredentialRequest,
   TransactionArg,
   CreateTDidRequest,
-  FunctionArg,
+  GetAuthorityIssuerResponse,
+  CredentialStatus,
   CreateSelectiveCredentialRequest,
+  GetDidDocumentRequest,
+  FunctionArg,
   CreateTDidResponse,
   CreateSelectiveCredentialResponse,
-  VerifyCredentialResponse,
+  SetCredentialStatusRequest,
+  CreateTDidByPublicKeyRequest,
+  CreateTDidByPublicKeyResponse,
   CreateCredentialResponse,
+  GetAuthorityIssuerRequest,
+  GetDidDocumentResponse,
+  VerifyCredentialResponse,
+  SetCredentialStatusResponse,
   VerifyCredentialRequest,
   Proof,
 } from "./tdid_models"
@@ -39,6 +48,47 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tdid.tencentcloudapi.com", "2021-05-19", clientConfig)
+  }
+
+  /**
+     * 查看DID文档
+
+     */
+  async GetDidDocument(
+    req: GetDidDocumentRequest,
+    cb?: (error: string, rep: GetDidDocumentResponse) => void
+  ): Promise<GetDidDocumentResponse> {
+    return this.request("GetDidDocument", req, cb)
+  }
+
+  /**
+   * 创建选择性批露凭证
+   */
+  async CreateSelectiveCredential(
+    req: CreateSelectiveCredentialRequest,
+    cb?: (error: string, rep: CreateSelectiveCredentialResponse) => void
+  ): Promise<CreateSelectiveCredentialResponse> {
+    return this.request("CreateSelectiveCredential", req, cb)
+  }
+
+  /**
+   * 创建凭证
+   */
+  async CreateCredential(
+    req: CreateCredentialRequest,
+    cb?: (error: string, rep: CreateCredentialResponse) => void
+  ): Promise<CreateCredentialResponse> {
+    return this.request("CreateCredential", req, cb)
+  }
+
+  /**
+   *  新建DID根据公钥生成Tdid
+   */
+  async CreateTDidByPublicKey(
+    req: CreateTDidByPublicKeyRequest,
+    cb?: (error: string, rep: CreateTDidByPublicKeyResponse) => void
+  ): Promise<CreateTDidByPublicKeyResponse> {
+    return this.request("CreateTDidByPublicKey", req, cb)
   }
 
   /**
@@ -62,22 +112,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建选择性批露凭证
+   * 获取权威机构信息
    */
-  async CreateSelectiveCredential(
-    req: CreateSelectiveCredentialRequest,
-    cb?: (error: string, rep: CreateSelectiveCredentialResponse) => void
-  ): Promise<CreateSelectiveCredentialResponse> {
-    return this.request("CreateSelectiveCredential", req, cb)
+  async GetAuthorityIssuer(
+    req: GetAuthorityIssuerRequest,
+    cb?: (error: string, rep: GetAuthorityIssuerResponse) => void
+  ): Promise<GetAuthorityIssuerResponse> {
+    return this.request("GetAuthorityIssuer", req, cb)
   }
 
   /**
-   * 创建凭证
+   * 设置凭证链上状态
    */
-  async CreateCredential(
-    req: CreateCredentialRequest,
-    cb?: (error: string, rep: CreateCredentialResponse) => void
-  ): Promise<CreateCredentialResponse> {
-    return this.request("CreateCredential", req, cb)
+  async SetCredentialStatus(
+    req: SetCredentialStatusRequest,
+    cb?: (error: string, rep: SetCredentialStatusResponse) => void
+  ): Promise<SetCredentialStatusResponse> {
+    return this.request("SetCredentialStatus", req, cb)
   }
 }

@@ -605,6 +605,11 @@ export interface DescribeAssetImageRegistryRegistryDetailResponse {
       */
     SpeedLimit: number;
     /**
+      * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Insecure: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2795,6 +2800,10 @@ export interface AddAssetImageRegistryRegistryDetailRequest {
       * 限速
       */
     SpeedLimit?: number;
+    /**
+      * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
+      */
+    Insecure?: number;
 }
 /**
  * DescribeAssetImageHostList请求参数结构体
@@ -6382,6 +6391,14 @@ export interface DescribeComplianceWhitelistItemListRequest {
       * 查询过滤器
       */
     Filters?: Array<ComplianceFilters>;
+    /**
+      * 排序字段
+      */
+    By?: string;
+    /**
+      * 排序方式 desc asc
+      */
+    Order?: string;
 }
 /**
  * DescribeAccessControlDetail请求参数结构体
@@ -9724,6 +9741,10 @@ export interface UpdateAssetImageRegistryRegistryDetailRequest {
       * 限速
       */
     SpeedLimit?: number;
+    /**
+      * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
+      */
+    Insecure?: number;
 }
 /**
  * 容器安全服务信息列表

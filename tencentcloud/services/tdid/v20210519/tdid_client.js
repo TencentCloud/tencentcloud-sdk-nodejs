@@ -28,16 +28,11 @@ class Client extends abstract_client_1.AbstractClient {
         super("tdid.tencentcloudapi.com", "2021-05-19", clientConfig);
     }
     /**
-     * 验证凭证
+     * 查看DID文档
+
      */
-    async VerifyCredential(req, cb) {
-        return this.request("VerifyCredential", req, cb);
-    }
-    /**
-     * 创建机构DID
-     */
-    async CreateTDid(req, cb) {
-        return this.request("CreateTDid", req, cb);
+    async GetDidDocument(req, cb) {
+        return this.request("GetDidDocument", req, cb);
     }
     /**
      * 创建选择性批露凭证
@@ -50,6 +45,36 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCredential(req, cb) {
         return this.request("CreateCredential", req, cb);
+    }
+    /**
+     *  新建DID根据公钥生成Tdid
+     */
+    async CreateTDidByPublicKey(req, cb) {
+        return this.request("CreateTDidByPublicKey", req, cb);
+    }
+    /**
+     * 验证凭证
+     */
+    async VerifyCredential(req, cb) {
+        return this.request("VerifyCredential", req, cb);
+    }
+    /**
+     * 创建机构DID
+     */
+    async CreateTDid(req, cb) {
+        return this.request("CreateTDid", req, cb);
+    }
+    /**
+     * 获取权威机构信息
+     */
+    async GetAuthorityIssuer(req, cb) {
+        return this.request("GetAuthorityIssuer", req, cb);
+    }
+    /**
+     * 设置凭证链上状态
+     */
+    async SetCredentialStatus(req, cb) {
+        return this.request("SetCredentialStatus", req, cb);
     }
 }
 exports.Client = Client;
