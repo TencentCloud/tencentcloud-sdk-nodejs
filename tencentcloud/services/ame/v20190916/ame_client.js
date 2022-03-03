@@ -193,7 +193,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PutMusicOnTheShelves", req, cb);
     }
     /**
-     * 查询机器人列表，支持 Id、状态等过滤条件。
+     * 获取机器人列表，支持 Id、状态等过滤条件。
      */
     async DescribeKTVRobots(req, cb) {
         return this.request("DescribeKTVRobots", req, cb);

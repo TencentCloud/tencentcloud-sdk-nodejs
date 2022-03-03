@@ -56,6 +56,31 @@ export interface DeleteMediaResponse {
 }
 
 /**
+ * UpdateCustomPerson请求参数结构体
+ */
+export interface UpdateCustomPersonRequest {
+  /**
+   * 待更新的自定义人物Id
+   */
+  PersonId: string
+
+  /**
+   * 更新后的自定义人物名称，如为空则不更新
+   */
+  Name?: string
+
+  /**
+   * 更新后的自定义人物简介，如为空则不更新
+   */
+  BasicInfo?: string
+
+  /**
+   * 更新后的分类信息，如为空则不更新
+   */
+  CategoryId?: string
+}
+
+/**
  * 视频结构化结果
  */
 export interface ShowInfo {
@@ -186,6 +211,12 @@ export interface MediaFilter {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MediaIdSet?: Array<string>
+
+  /**
+      * 媒资自定义标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LabelSet?: Array<string>
 }
 
 /**
@@ -209,28 +240,18 @@ export interface AddCustomPersonImageRequest {
 }
 
 /**
- * UpdateCustomPerson请求参数结构体
+ * ModifyCallback请求参数结构体
  */
-export interface UpdateCustomPersonRequest {
+export interface ModifyCallbackRequest {
   /**
-   * 待更新的自定义人物Id
+   * 任务分析完成后回调地址
    */
-  PersonId: string
+  TaskFinishNotifyURL: string
 
   /**
-   * 更新后的自定义人物名称，如为空则不更新
+   * 媒体导入完成后回调地址
    */
-  Name?: string
-
-  /**
-   * 更新后的自定义人物简介，如为空则不更新
-   */
-  BasicInfo?: string
-
-  /**
-   * 更新后的分类信息，如为空则不更新
-   */
-  CategoryId?: string
+  MediaFinishNotifyURL: string
 }
 
 /**
@@ -280,23 +301,13 @@ export interface L2Tag {
 }
 
 /**
- * DescribeCustomPersons返回参数结构体
+ * DeleteTask请求参数结构体
  */
-export interface DescribeCustomPersonsResponse {
+export interface DeleteTaskRequest {
   /**
-   * 满足过滤条件的自定义人物数量
+   * 任务Id
    */
-  TotalCount: number
-
-  /**
-   * 自定义人物信息
-   */
-  PersonInfoSet: Array<CustomPersonInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TaskId: string
 }
 
 /**
@@ -322,6 +333,21 @@ export interface ImportMediaRequest {
    * 待分析视频的名称，指定后可支持筛选，最多100个中文字符
    */
   Name?: string
+
+  /**
+   * 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/  (注意，cos路径需要以/分隔符结尾)
+   */
+  WriteBackCosPath?: string
+
+  /**
+   * 自定义标签，可用于查询
+   */
+  Label?: string
+
+  /**
+   * 媒资导入完成的回调地址，该设置优先级高于控制台全局的设置；
+   */
+  CallbackURL?: string
 }
 
 /**
@@ -553,6 +579,26 @@ export interface CreateCustomGroupRequest {
 }
 
 /**
+ * DescribeCustomPersons返回参数结构体
+ */
+export interface DescribeCustomPersonsResponse {
+  /**
+   * 满足过滤条件的自定义人物数量
+   */
+  TotalCount: number
+
+  /**
+   * 自定义人物信息
+   */
+  PersonInfoSet: Array<CustomPersonInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddCustomPersonImage返回参数结构体
  */
 export interface AddCustomPersonImageResponse {
@@ -615,6 +661,11 @@ export interface TaskFilter {
    * 媒资素材一级类型
    */
   MediaLabelSet?: Array<number>
+
+  /**
+   * 媒资自定义标签数组
+   */
+  LabelSet?: Array<string>
 }
 
 /**
@@ -684,6 +735,16 @@ export interface Data {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ShowInfo: ShowInfo
+}
+
+/**
+ * DeleteTask返回参数结构体
+ */
+export interface DeleteTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -775,6 +836,16 @@ export interface DescribeCustomGroupResponse {
    */
   Bucket: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCallback返回参数结构体
+ */
+export interface ModifyCallbackResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -925,6 +996,16 @@ export interface CreateTaskRequest {
    * 是否上传转码后的视频，仅设置true时上传，默认为false
    */
   UploadVideo?: boolean
+
+  /**
+   * 自定义标签，可用于查询
+   */
+  Label?: string
+
+  /**
+   * 任务分析完成的回调地址，该设置优先级高于控制台全局的设置；
+   */
+  CallbackURL?: string
 }
 
 /**
@@ -952,23 +1033,23 @@ export interface L3Tag {
 }
 
 /**
- * UpdateCustomCategory请求参数结构体
+ * QueryCallback返回参数结构体
  */
-export interface UpdateCustomCategoryRequest {
+export interface QueryCallbackResponse {
   /**
-   * 自定义人物类型Id
+   * 任务分析完成后回调地址
    */
-  CategoryId: string
+  TaskFinishNotifyURL: string
 
   /**
-   * 一级自定义人物类型
+   * 媒体导入完成后回调地址
    */
-  L1Category: string
+  MediaFinishNotifyURL: string
 
   /**
-   * 二级自定义人物类型
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  L2Category?: string
+  RequestId?: string
 }
 
 /**
@@ -1154,6 +1235,26 @@ export interface AppearInfo {
 }
 
 /**
+ * UpdateCustomCategory请求参数结构体
+ */
+export interface UpdateCustomCategoryRequest {
+  /**
+   * 自定义人物类型Id
+   */
+  CategoryId: string
+
+  /**
+   * 一级自定义人物类型
+   */
+  L1Category: string
+
+  /**
+   * 二级自定义人物类型
+   */
+  L2Category?: string
+}
+
+/**
  * DescribeCustomGroup请求参数结构体
  */
 export type DescribeCustomGroupRequest = null
@@ -1299,7 +1400,18 @@ export interface MediaInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Progress: number
+
+  /**
+      * 媒资自定义标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Label: string
 }
+
+/**
+ * QueryCallback请求参数结构体
+ */
+export type QueryCallbackRequest = null
 
 /**
  * 排序条件
@@ -1516,4 +1628,10 @@ export interface TaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MediaName: string
+
+  /**
+      * 媒资自定义标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Label: string
 }

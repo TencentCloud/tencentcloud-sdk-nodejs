@@ -179,6 +179,7 @@ import {
   ModifyTargetGroupAttributeRequest,
   ExclusiveCluster,
   DeregisterTargetsRequest,
+  ModifyLoadBalancerMixIpTargetResponse,
   InternetAccessible,
   CreateLoadBalancerSnatIpsRequest,
   ModifyTargetGroupInstancesWeightRequest,
@@ -190,6 +191,7 @@ import {
   RuleInput,
   TagInfo,
   SnatIp,
+  ModifyLoadBalancerMixIpTargetRequest,
   DescribeBlockIPTaskResponse,
   DescribeResourcesRequest,
   DescribeClassicalLBListenersResponse,
@@ -351,14 +353,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 注册服务器到目标组。
-本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
-     */
-  async RegisterTargetGroupInstances(
-    req: RegisterTargetGroupInstancesRequest,
-    cb?: (error: string, rep: RegisterTargetGroupInstancesResponse) => void
-  ): Promise<RegisterTargetGroupInstancesResponse> {
-    return this.request("RegisterTargetGroupInstances", req, cb)
+   * 修改IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标特性。
+   */
+  async ModifyLoadBalancerMixIpTarget(
+    req: ModifyLoadBalancerMixIpTargetRequest,
+    cb?: (error: string, rep: ModifyLoadBalancerMixIpTargetResponse) => void
+  ): Promise<ModifyLoadBalancerMixIpTargetResponse> {
+    return this.request("ModifyLoadBalancerMixIpTarget", req, cb)
   }
 
   /**
@@ -477,6 +478,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBlockIPListResponse) => void
   ): Promise<ModifyBlockIPListResponse> {
     return this.request("ModifyBlockIPList", req, cb)
+  }
+
+  /**
+     * 注册服务器到目标组。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     */
+  async RegisterTargetGroupInstances(
+    req: RegisterTargetGroupInstancesRequest,
+    cb?: (error: string, rep: RegisterTargetGroupInstancesResponse) => void
+  ): Promise<RegisterTargetGroupInstancesResponse> {
+    return this.request("RegisterTargetGroupInstances", req, cb)
   }
 
   /**

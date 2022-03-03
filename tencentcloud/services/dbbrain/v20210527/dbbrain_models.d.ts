@@ -2234,6 +2234,10 @@ export interface DescribeUserSqlAdviceRequest {
       * 库名。
       */
     Schema?: string;
+    /**
+      * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
+      */
+    Product?: string;
 }
 /**
  * DescribeMySqlProcessList请求参数结构体

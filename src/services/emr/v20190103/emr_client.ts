@@ -53,6 +53,7 @@ import {
   PreExecuteFileSettings,
   SyncPodStateRequest,
   CreateInstanceRequest,
+  ClusterExternalServiceInfo,
   InquirePriceRenewEmrRequest,
   PodParameter,
   MetaDbInfo,

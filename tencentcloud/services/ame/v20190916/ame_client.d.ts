@@ -119,7 +119,7 @@ export declare class Client extends AbstractClient {
      */
     PutMusicOnTheShelves(req: PutMusicOnTheShelvesRequest, cb?: (error: string, rep: PutMusicOnTheShelvesResponse) => void): Promise<PutMusicOnTheShelvesResponse>;
     /**
-     * 查询机器人列表，支持 Id、状态等过滤条件。
+     * 获取机器人列表，支持 Id、状态等过滤条件。
      */
     DescribeKTVRobots(req: DescribeKTVRobotsRequest, cb?: (error: string, rep: DescribeKTVRobotsResponse) => void): Promise<DescribeKTVRobotsResponse>;
     /**

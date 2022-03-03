@@ -5100,6 +5100,12 @@ export interface DescribePrometheusInstancesRequest {
       * 偏移量，默认为0。
       */
     Offset?: number;
+    /**
+      * 按照【计费类型】进行过滤。
+<li>2：包年包月</li>
+<li>3：按量</li>
+      */
+    InstanceChargeType?: number;
 }
 /**
  * DescribeProductEventList返回的OverView对象

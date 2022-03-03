@@ -318,4 +318,14 @@ it("mongodb.v20190725.InquirePriceRenewDBInstances", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifyDBInstanceSecurityGroup", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

@@ -18,6 +18,16 @@ const client = new tencentcloud.api.v20201106.Client({
 })
 describe("api.v20201106.test.js", function () {
 
+it("api.v20201106.DescribeProducts", async function () {
+    try {
+       const data = await client.DescribeProducts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("api.v20201106.DescribeRegions", async function () {
     try {
        const data = await client.DescribeRegions({})

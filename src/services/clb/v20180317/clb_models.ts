@@ -4342,6 +4342,16 @@ export interface DeregisterTargetsRequest {
 }
 
 /**
+ * ModifyLoadBalancerMixIpTarget返回参数结构体
+ */
+export interface ModifyLoadBalancerMixIpTargetResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 网络计费模式，最大出带宽
  */
 export interface InternetAccessible {
@@ -4597,6 +4607,21 @@ export interface SnatIp {
    * IP地址，如192.168.0.1
    */
   Ip?: string
+}
+
+/**
+ * ModifyLoadBalancerMixIpTarget请求参数结构体
+ */
+export interface ModifyLoadBalancerMixIpTargetRequest {
+  /**
+   * 负载均衡实例ID数组。
+   */
+  LoadBalancerIds: Array<string>
+
+  /**
+   * 开启/关闭IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标特性。
+   */
+  MixIpTarget: boolean
 }
 
 /**

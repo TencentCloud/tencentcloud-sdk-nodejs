@@ -176,6 +176,36 @@ export interface DescribeDBXlogsRequest {
 }
 
 /**
+ * CreateReadOnlyGroupNetworkAccess请求参数结构体
+ */
+export interface CreateReadOnlyGroupNetworkAccessRequest {
+  /**
+   * RO组ID，形如：pgro-4t9c6g7k。
+   */
+  ReadOnlyGroupId: string
+
+  /**
+   * 私有网络统一 ID。
+   */
+  VpcId: string
+
+  /**
+   * 子网ID。
+   */
+  SubnetId: string
+
+  /**
+   * 是否指定分配vip true-指定分配  false-自动分配。
+   */
+  IsAssignVip: boolean
+
+  /**
+   * 目标VIP地址。
+   */
+  Vip?: string
+}
+
+/**
  * DescribeAccounts请求参数结构体
  */
 export interface DescribeAccountsRequest {
@@ -411,6 +441,22 @@ export interface SpecItemInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KernelVersion: string
+}
+
+/**
+ * CreateDBInstanceNetworkAccess返回参数结构体
+ */
+export interface CreateDBInstanceNetworkAccessResponse {
+  /**
+      * 流程ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -841,6 +887,31 @@ export interface ModifyDBInstanceDeploymentRequest {
 }
 
 /**
+ * DeleteReadOnlyGroupNetworkAccess请求参数结构体
+ */
+export interface DeleteReadOnlyGroupNetworkAccessRequest {
+  /**
+   * RO组ID，形如：pgro-4t9c6g7k。
+   */
+  ReadOnlyGroupId: string
+
+  /**
+   * 私有网络统一 ID，若是基础网络则传"0"。
+   */
+  VpcId: string
+
+  /**
+   * 子网ID，若是基础网络则传"0"。
+   */
+  SubnetId: string
+
+  /**
+   * 目标VIP地址。
+   */
+  Vip: string
+}
+
+/**
  * 描述可用区的编码和状态信息
  */
 export interface ZoneInfo {
@@ -1196,6 +1267,36 @@ export interface InquiryPriceCreateDBInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateDBInstanceNetworkAccess请求参数结构体
+ */
+export interface CreateDBInstanceNetworkAccessRequest {
+  /**
+   * 实例ID，形如：postgres-6bwgamo3。
+   */
+  DBInstanceId: string
+
+  /**
+   * 私有网络统一 ID。
+   */
+  VpcId: string
+
+  /**
+   * 子网ID。
+   */
+  SubnetId: string
+
+  /**
+   * 是否指定分配vip true-指定分配  false-自动分配。
+   */
+  IsAssignVip: boolean
+
+  /**
+   * 目标VIP地址。
+   */
+  Vip?: string
 }
 
 /**
@@ -1696,6 +1797,22 @@ export interface PgDeal {
    * 实例ID数组
    */
   DBInstanceIdSet: Array<string>
+}
+
+/**
+ * DeleteReadOnlyGroupNetworkAccess返回参数结构体
+ */
+export interface DeleteReadOnlyGroupNetworkAccessResponse {
+  /**
+      * 流程ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2224,6 +2341,43 @@ export interface CreateReadOnlyGroupRequest {
 }
 
 /**
+ * CreateReadOnlyGroupNetworkAccess返回参数结构体
+ */
+export interface CreateReadOnlyGroupNetworkAccessResponse {
+  /**
+      * 流程ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeServerlessDBInstances返回参数结构体
+ */
+export interface DescribeServerlessDBInstancesResponse {
+  /**
+   * 查询结果数
+   */
+  TotalCount: number
+
+  /**
+      * 查询结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DBInstanceSet: Array<ServerlessDBInstance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeParamsEvent返回参数结构体
  */
 export interface DescribeParamsEventResponse {
@@ -2593,24 +2747,69 @@ export interface ErrLogDetail {
 }
 
 /**
- * DescribeServerlessDBInstances返回参数结构体
+ * 数据库备份信息
  */
-export interface DescribeServerlessDBInstancesResponse {
+export interface DBBackup {
   /**
-   * 查询结果数
+   * 备份文件唯一标识
    */
-  TotalCount: number
+  Id: number
 
   /**
-      * 查询结果
+   * 文件生成的开始时间
+   */
+  StartTime: string
+
+  /**
+   * 文件生成的结束时间
+   */
+  EndTime: string
+
+  /**
+   * 文件大小(K)
+   */
+  Size: number
+
+  /**
+   * 策略（0-实例备份；1-多库备份）
+   */
+  Strategy: number
+
+  /**
+   * 类型（0-定时）
+   */
+  Way: number
+
+  /**
+   * 备份方式（1-完整）
+   */
+  Type: number
+
+  /**
+   * 状态（1-创建中；2-成功；3-失败）
+   */
+  Status: number
+
+  /**
+   * DB列表
+   */
+  DbList: Array<string>
+
+  /**
+   * 内网下载地址
+   */
+  InternalAddr: string
+
+  /**
+   * 外网下载地址
+   */
+  ExternalAddr: string
+
+  /**
+      * 备份集ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DBInstanceSet: Array<ServerlessDBInstance>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SetId: string
 }
 
 /**
@@ -2646,6 +2845,31 @@ export interface InitDBInstancesRequest {
    * 实例字符集，目前只支持：UTF8、LATIN1。
    */
   Charset: string
+}
+
+/**
+ * DeleteDBInstanceNetworkAccess请求参数结构体
+ */
+export interface DeleteDBInstanceNetworkAccessRequest {
+  /**
+   * 实例ID，形如：postgres-6bwgamo3。
+   */
+  DBInstanceId: string
+
+  /**
+   * 私有网络统一 ID，若是基础网络则传"0"。
+   */
+  VpcId: string
+
+  /**
+   * 子网ID，若是基础网络则传"0"。
+   */
+  SubnetId: string
+
+  /**
+   * 目标VIP地址。
+   */
+  Vip: string
 }
 
 /**
@@ -3217,26 +3441,6 @@ export interface DescribeOrdersRequest {
 }
 
 /**
- * ModifyAccountRemark请求参数结构体
- */
-export interface ModifyAccountRemarkRequest {
-  /**
-   * 实例ID，形如postgres-4wdeb0zv
-   */
-  DBInstanceId: string
-
-  /**
-   * 实例用户名
-   */
-  UserName: string
-
-  /**
-   * 用户UserName对应的新备注
-   */
-  Remark: string
-}
-
-/**
  * CloseDBExtranetAccess请求参数结构体
  */
 export interface CloseDBExtranetAccessRequest {
@@ -3343,6 +3547,22 @@ export interface CreateReadOnlyGroupResponse {
 }
 
 /**
+ * DeleteDBInstanceNetworkAccess返回参数结构体
+ */
+export interface DeleteDBInstanceNetworkAccessResponse {
+  /**
+      * 流程ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteServerlessDBInstance请求参数结构体
  */
 export interface DeleteServerlessDBInstanceRequest {
@@ -3403,69 +3623,23 @@ export interface AccountInfo {
 }
 
 /**
- * 数据库备份信息
+ * ModifyAccountRemark请求参数结构体
  */
-export interface DBBackup {
+export interface ModifyAccountRemarkRequest {
   /**
-   * 备份文件唯一标识
+   * 实例ID，形如postgres-4wdeb0zv
    */
-  Id: number
+  DBInstanceId: string
 
   /**
-   * 文件生成的开始时间
+   * 实例用户名
    */
-  StartTime: string
+  UserName: string
 
   /**
-   * 文件生成的结束时间
+   * 用户UserName对应的新备注
    */
-  EndTime: string
-
-  /**
-   * 文件大小(K)
-   */
-  Size: number
-
-  /**
-   * 策略（0-实例备份；1-多库备份）
-   */
-  Strategy: number
-
-  /**
-   * 类型（0-定时）
-   */
-  Way: number
-
-  /**
-   * 备份方式（1-完整）
-   */
-  Type: number
-
-  /**
-   * 状态（1-创建中；2-成功；3-失败）
-   */
-  Status: number
-
-  /**
-   * DB列表
-   */
-  DbList: Array<string>
-
-  /**
-   * 内网下载地址
-   */
-  InternalAddr: string
-
-  /**
-   * 外网下载地址
-   */
-  ExternalAddr: string
-
-  /**
-      * 备份集ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SetId: string
+  Remark: string
 }
 
 /**

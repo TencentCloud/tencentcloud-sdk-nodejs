@@ -128,9 +128,9 @@ it("clb.v20180317.BatchDeregisterTargets", async function () {
     }
 })
 
-it("clb.v20180317.RegisterTargetGroupInstances", async function () {
+it("clb.v20180317.ModifyLoadBalancerMixIpTarget", async function () {
     try {
-       const data = await client.RegisterTargetGroupInstances({})
+       const data = await client.ModifyLoadBalancerMixIpTarget({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,6 +241,16 @@ it("clb.v20180317.ModifyLoadBalancerSla", async function () {
 it("clb.v20180317.ModifyBlockIPList", async function () {
     try {
        const data = await client.ModifyBlockIPList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.RegisterTargetGroupInstances", async function () {
+    try {
+       const data = await client.RegisterTargetGroupInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

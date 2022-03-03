@@ -18,6 +18,9 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  RegionProduct,
+  DescribeProductsRequest,
+  DescribeProductsResponse,
   ZoneInfo,
   DescribeZonesRequest,
   DescribeZonesResponse,
@@ -33,6 +36,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("api.tencentcloudapi.com", "2020-11-06", clientConfig)
+  }
+
+  /**
+   * 本接口(DescribeProducts)用于查询各个支持地域列表查询的产品信息。
+   */
+  async DescribeProducts(
+    req: DescribeProductsRequest,
+    cb?: (error: string, rep: DescribeProductsResponse) => void
+  ): Promise<DescribeProductsResponse> {
+    return this.request("DescribeProducts", req, cb)
   }
 
   /**

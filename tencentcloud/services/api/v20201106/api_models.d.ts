@@ -1,4 +1,43 @@
 /**
+ * 地域管理系统支持的产品信息
+ */
+export interface RegionProduct {
+    /**
+      * 产品名称，如cvm
+      */
+    Name: string;
+}
+/**
+ * DescribeProducts请求参数结构体
+ */
+export interface DescribeProductsRequest {
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
+ * DescribeProducts返回参数结构体
+ */
+export interface DescribeProductsResponse {
+    /**
+      * 产品详细信息列表。
+      */
+    Products: Array<RegionProduct>;
+    /**
+      * 产品总数量。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 可用区信息
  */
 export interface ZoneInfo {

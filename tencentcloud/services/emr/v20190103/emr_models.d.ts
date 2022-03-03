@@ -1099,6 +1099,35 @@ Hadoop-Presto
 Hadoop-Hbase
       */
     SceneName?: string;
+    /**
+      * 共享组件信息
+      */
+    ExternalService?: Array<ExternalService>;
+}
+/**
+ * 当前集群共用组件与集群对应关系
+ */
+export interface ClusterExternalServiceInfo {
+    /**
+      * 依赖关系，0:被其他集群依赖，1:依赖其他集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DependType: number;
+    /**
+      * 共用组件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Service: string;
+    /**
+      * 共用集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterId: string;
+    /**
+      * 共用集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterStatus: number;
 }
 /**
  * InquirePriceRenewEmr请求参数结构体
@@ -1558,6 +1587,11 @@ export interface EmrProductConfigOutter {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SecurityGroups: Array<string>;
+    /**
+      * SSH密钥Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicKeyId: string;
 }
 /**
  * 磁盘描述。
@@ -1926,6 +1960,11 @@ export interface ClusterInstancesInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubnetName: string;
+    /**
+      * 集群依赖关系
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterExternalServiceInfo: Array<ClusterExternalServiceInfo>;
 }
 /**
  * 扩容容器资源时的资源描述

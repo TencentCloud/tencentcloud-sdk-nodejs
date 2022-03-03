@@ -43,6 +43,10 @@ export interface CreateResourceRequest {
       * 目录ID
       */
     FolderId?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * CreateJob请求参数结构体
@@ -80,6 +84,10 @@ export interface CreateJobRequest {
       * 作业运行的Flink版本
       */
     FlinkVersion?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * JobConfig引用资源信息
@@ -114,6 +122,10 @@ export interface StopJobsRequest {
       * 批量停止作业的描述信息
       */
     StopJobDescriptions: Array<StopJobDescription>;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * CreateJob返回参数结构体
@@ -149,6 +161,10 @@ export interface RunJobsRequest {
       * 批量启动作业的描述信息
       */
     RunJobDescriptions: Array<RunJobDescription>;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * 停止作业的描述信息
@@ -179,7 +195,7 @@ export interface CreateResourceConfigResponse {
     /**
       * 资源版本ID
       */
-    Version?: number;
+    Version: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -253,6 +269,10 @@ export interface CreateJobConfigRequest {
       * pyflink作业运行时使用的python版本
       */
     PythonVersion?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * CreateResourceConfig请求参数结构体
@@ -274,6 +294,10 @@ export interface CreateResourceConfigRequest {
       * 1： 资源版本达到上限，自动删除最早可删除的版本
       */
     AutoDelete?: number;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * 系统配置属性
@@ -304,6 +328,10 @@ export interface DeleteTableConfigRequest {
       * 表名
       */
     TableName: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * 系统资源返回值
@@ -358,6 +386,10 @@ export interface DescribeResourceRelatedJobsRequest {
       * 资源版本号
       */
     ResourceConfigVersion?: number;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * DeleteResources返回参数结构体
@@ -457,6 +489,10 @@ export interface DescribeResourcesRequest {
 <p style="padding-left: 30px;">按照资源名字过滤，支持模糊过滤。传入的过滤名字不超过5个</p><p style="padding-left: 30px;">类型: String</p><p style="padding-left: 30px;">必选: 否</p>
       */
     Filters?: Array<Filter>;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * 资源参数描述
@@ -488,6 +524,10 @@ export interface DeleteResourceConfigsRequest {
       * 资源版本数组
       */
     ResourceConfigVersions: Array<number>;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * RunJobs返回参数结构体
@@ -519,6 +559,10 @@ export interface DeleteResourcesRequest {
       * 待删除资源ID列表
       */
     ResourceIds: Array<string>;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * DescribeJobs返回参数结构体
@@ -684,6 +728,10 @@ export interface DescribeJobConfigsRequest {
       * true 表示只展示草稿
       */
     OnlyDraft?: boolean;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * DescribeResources返回参数结构体
@@ -834,7 +882,7 @@ export interface DescribeJobsRequest {
       */
     JobIds?: Array<string>;
     /**
-      * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId。每次请求的 Filters 个数的上限为 3，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
+      * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
       */
     Filters?: Array<Filter>;
     /**
@@ -845,6 +893,10 @@ export interface DescribeJobsRequest {
       * 分页大小，默认为20，最大值为100
       */
     Limit?: number;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }
 /**
  * Job详细信息
@@ -995,6 +1047,16 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FlinkVersion: string;
+    /**
+      * 工作空间 SerialId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkSpaceId: string;
+    /**
+      * 工作空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkSpaceName: string;
 }
 /**
  * 作业配置详情
@@ -1121,4 +1183,8 @@ export interface DescribeResourceConfigsRequest {
       * 作业ID
       */
     JobId?: string;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
 }

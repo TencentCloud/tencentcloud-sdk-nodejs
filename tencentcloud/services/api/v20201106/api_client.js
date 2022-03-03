@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("api.tencentcloudapi.com", "2020-11-06", clientConfig);
     }
     /**
+     * 本接口(DescribeProducts)用于查询各个支持地域列表查询的产品信息。
+     */
+    async DescribeProducts(req, cb) {
+        return this.request("DescribeProducts", req, cb);
+    }
+    /**
      * 本接口(DescribeRegions)用于查询各个产品支持地域信息。
      */
     async DescribeRegions(req, cb) {

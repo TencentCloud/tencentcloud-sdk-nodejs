@@ -16,21 +16,6 @@
  */
 
 /**
- * ResetDBInstancePassword返回参数结构体
- */
-export interface ResetDBInstancePasswordResponse {
-  /**
-   * 异步请求Id，用户查询该流程的运行状态
-   */
-  AsyncRequestId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeSpecInfo请求参数结构体
  */
 export interface DescribeSpecInfoRequest {
@@ -38,36 +23,6 @@ export interface DescribeSpecInfoRequest {
    * 待查询可用区
    */
   Zone?: string
-}
-
-/**
- * SetAccountUserPrivilege返回参数结构体
- */
-export interface SetAccountUserPrivilegeResponse {
-  /**
-   * 设置任务ID,用于查询是否设置完成
-   */
-  FlowId: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * KillOps请求参数结构体
- */
-export interface KillOpsRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 待终止的操作
-   */
-  Operations: Array<Operation>
 }
 
 /**
@@ -206,21 +161,6 @@ export interface CreateDBInstanceRequest {
 }
 
 /**
- * DescribeSecurityGroup返回参数结构体
- */
-export interface DescribeSecurityGroupResponse {
-  /**
-   * 实例绑定的安全组
-   */
-  Groups: Array<SecurityGroup>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeCurrentOp返回参数结构体
  */
 export interface DescribeCurrentOpResponse {
@@ -233,6 +173,217 @@ export interface DescribeCurrentOpResponse {
    * 当前操作列表
    */
   CurrentOps: Array<CurrentOp>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBackupDBInstance返回参数结构体
+ */
+export interface CreateBackupDBInstanceResponse {
+  /**
+   * 查询备份流程的状态
+   */
+  AsyncRequestId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据库实例价格
+ */
+export interface DBInstancePrice {
+  /**
+      * 单价
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPrice: number
+
+  /**
+   * 原价
+   */
+  OriginalPrice: number
+
+  /**
+   * 折扣加
+   */
+  DiscountPrice: number
+}
+
+/**
+ * KillOps请求参数结构体
+ */
+export interface KillOpsRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 待终止的操作
+   */
+  Operations: Array<Operation>
+}
+
+/**
+ * InquirePriceRenewDBInstances请求参数结构体
+ */
+export interface InquirePriceRenewDBInstancesRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同，接口单次最多只支持5个实例进行操作。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+   */
+  InstanceChargePrepaid: InstanceChargePrepaid
+}
+
+/**
+ * DescribeSlowLogs请求参数结构体
+ */
+export interface DescribeSlowLogsRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+   */
+  StartTime: string
+
+  /**
+   * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+   */
+  EndTime: string
+
+  /**
+   * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+   */
+  SlowMS: number
+
+  /**
+   * 偏移量，最小值为0，最大值为10000，默认值为0。
+   */
+  Offset?: number
+
+  /**
+   * 分页大小，最小值为1，最大值为100，默认值为20。
+   */
+  Limit?: number
+
+  /**
+   * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+   */
+  Format?: string
+}
+
+/**
+ * FlushInstanceRouterConfig返回参数结构体
+ */
+export interface FlushInstanceRouterConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityGroup请求参数结构体
+ */
+export interface DescribeSecurityGroupRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。
+   */
+  InstanceId: string
+}
+
+/**
+ * 用于描述MongoDB数据库慢日志统计信息
+ */
+export interface SlowLogPattern {
+  /**
+   * 慢日志模式
+   */
+  Pattern: string
+
+  /**
+   * 最大执行时间
+   */
+  MaxTime: number
+
+  /**
+   * 平均执行时间
+   */
+  AverageTime: number
+
+  /**
+   * 该模式慢日志条数
+   */
+  Total: number
+}
+
+/**
+ * AssignProject返回参数结构体
+ */
+export interface AssignProjectResponse {
+  /**
+   * 返回的异步任务ID列表
+   */
+  FlowIds: Array<number>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDBInstanceDeal返回参数结构体
+ */
+export interface DescribeDBInstanceDealResponse {
+  /**
+   * 订单状态，1：未支付，2：已支付，3：发货中，4：发货成功，5：发货失败，6：退款，7：订单关闭，8：超时未支付关闭。
+   */
+  Status: number
+
+  /**
+   * 订单原价。
+   */
+  OriginalPrice: number
+
+  /**
+   * 订单折扣价格。
+   */
+  DiscountPrice: number
+
+  /**
+   * 订单行为，purchase：新购，renew：续费，upgrade：升配，downgrade：降配，refund：退货退款。
+   */
+  Action: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OfflineIsolatedDBInstance返回参数结构体
+ */
+export interface OfflineIsolatedDBInstanceResponse {
+  /**
+   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+   */
+  AsyncRequestId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -256,6 +407,281 @@ export interface IsolateDBInstanceResponse {
 }
 
 /**
+ * 实例可修改参数Multi类型集合。
+ */
+export interface InstanceMultiParam {
+  /**
+   * 当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 默认值
+   */
+  DefaultValue: string
+
+  /**
+   * 指导值范围
+   */
+  EnumValue: Array<string>
+
+  /**
+   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
+   */
+  NeedRestart: string
+
+  /**
+   * 参数名称
+   */
+  ParamName: string
+
+  /**
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
+   */
+  Status: number
+
+  /**
+   * 参数说明
+   */
+  Tips: Array<string>
+
+  /**
+   * 当前值的类型描述，默认为multi
+   */
+  ValueType: string
+}
+
+/**
+ * DescribeBackupDownloadTask返回参数结构体
+ */
+export interface DescribeBackupDownloadTaskResponse {
+  /**
+   * 满足查询条件的所有条数
+   */
+  TotalCount: number
+
+  /**
+   * 下载任务列表
+   */
+  Tasks: Array<BackupDownloadTask>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * FlushInstanceRouterConfig请求参数结构体
+ */
+export interface FlushInstanceRouterConfigRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * 实例信息
+ */
+export interface DBInstanceInfo {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 地域信息
+   */
+  Region: string
+}
+
+/**
+ * SetAccountUserPrivilege返回参数结构体
+ */
+export interface SetAccountUserPrivilegeResponse {
+  /**
+   * 设置任务ID,用于查询是否设置完成
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDBInstanceHour返回参数结构体
+ */
+export interface CreateDBInstanceHourResponse {
+  /**
+   * 订单ID
+   */
+  DealId: string
+
+  /**
+   * 创建的实例ID列表
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 需要终止的操作
+ */
+export interface Operation {
+  /**
+   * 操作所在的分片名
+   */
+  ReplicaSetName: string
+
+  /**
+   * 操作所在的节点名
+   */
+  NodeName: string
+
+  /**
+   * 操作序号
+   */
+  OpId: number
+}
+
+/**
+ * mongodb售卖规格
+ */
+export interface SpecItem {
+  /**
+   * 规格信息标识
+   */
+  SpecCode: string
+
+  /**
+   * 规格有效标志，取值：0-停止售卖，1-开放售卖
+   */
+  Status: number
+
+  /**
+   * 计算资源规格，单位为CPU核心数
+   */
+  Cpu: number
+
+  /**
+   * 内存规格，单位为MB
+   */
+  Memory: number
+
+  /**
+   * 默认磁盘规格，单位MB
+   */
+  DefaultStorage: number
+
+  /**
+   * 最大磁盘规格，单位MB
+   */
+  MaxStorage: number
+
+  /**
+   * 最小磁盘规格，单位MB
+   */
+  MinStorage: number
+
+  /**
+   * 可承载qps信息
+   */
+  Qps: number
+
+  /**
+   * 连接数限制
+   */
+  Conns: number
+
+  /**
+   * 实例mongodb版本信息
+   */
+  MongoVersionCode: string
+
+  /**
+   * 实例mongodb版本号
+   */
+  MongoVersionValue: number
+
+  /**
+   * 实例mongodb版本号（短）
+   */
+  Version: string
+
+  /**
+   * 存储引擎
+   */
+  EngineName: string
+
+  /**
+   * 集群类型，取值：1-分片集群，0-副本集集群
+   */
+  ClusterType: number
+
+  /**
+   * 最小副本集从节点数
+   */
+  MinNodeNum: number
+
+  /**
+   * 最大副本集从节点数
+   */
+  MaxNodeNum: number
+
+  /**
+   * 最小分片数
+   */
+  MinReplicateSetNum: number
+
+  /**
+   * 最大分片数
+   */
+  MaxReplicateSetNum: number
+
+  /**
+   * 最小分片从节点数
+   */
+  MinReplicateSetNodeNum: number
+
+  /**
+   * 最大分片从节点数
+   */
+  MaxReplicateSetNodeNum: number
+
+  /**
+   * 机器类型，取值：0-HIO，4-HIO10G
+   */
+  MachineType: string
+}
+
+/**
+ * DescribeSlowLogPatterns返回参数结构体
+ */
+export interface DescribeSlowLogPatternsResponse {
+  /**
+   * 慢日志统计信息总数
+   */
+  Count: number
+
+  /**
+   * 慢日志统计信息
+   */
+  SlowLogPatterns: Array<SlowLogPattern>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 创建备份下载任务结果
  */
 export interface BackupDownloadTaskStatus {
@@ -271,11 +697,688 @@ export interface BackupDownloadTaskStatus {
 }
 
 /**
- * CreateBackupDBInstance返回参数结构体
+ * DescribeSlowLogs返回参数结构体
  */
-export interface CreateBackupDBInstanceResponse {
+export interface DescribeSlowLogsResponse {
   /**
-   * 查询备份流程的状态
+   * 慢日志总数
+   */
+  Count: number
+
+  /**
+      * 慢日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlowLogs: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquirePriceModifyDBInstanceSpec请求参数结构体
+ */
+export interface InquirePriceModifyDBInstanceSpecRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
+   */
+  InstanceId: string
+
+  /**
+   * 变更配置后实例内存大小，单位：GB。
+   */
+  Memory: number
+
+  /**
+   * 变更配置后实例磁盘大小，单位：GB。
+   */
+  Volume: number
+
+  /**
+   * 实例变更后的节点数，取值范围具体参照查询云数据库的售卖规格返回参数。默认为不变更节点数
+   */
+  NodeNum?: number
+
+  /**
+   * 实例变更后的分片数，取值范围具体参照查询云数据库的售卖规格返回参数。只能增加不能减少，默认为不变更分片数
+   */
+  ReplicateSetNum?: number
+}
+
+/**
+ * 备份信息
+ */
+export interface BackupInfo {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 备份方式，0-自动备份，1-手动备份
+   */
+  BackupType: number
+
+  /**
+   * 备份名称
+   */
+  BackupName: string
+
+  /**
+      * 备份备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupDesc: string
+
+  /**
+      * 备份文件大小，单位KB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupSize: number
+
+  /**
+      * 备份开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: string
+
+  /**
+      * 备份结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+
+  /**
+   * 备份状态，1-备份中，2-备份成功
+   */
+  Status: number
+
+  /**
+   * 备份方法，0-逻辑备份，1-物理备份
+   */
+  BackupMethod: number
+}
+
+/**
+ * DescribeDBInstances请求参数结构体
+ */
+export interface DescribeDBInstancesRequest {
+  /**
+   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 实例类型，取值范围：0-所有实例,1-正式实例，2-临时实例, 3-只读实例，-1-正式实例+只读+灾备实例
+   */
+  InstanceType?: number
+
+  /**
+   * 集群类型，取值范围：0-副本集实例，1-分片实例，-1-所有实例
+   */
+  ClusterType?: number
+
+  /**
+   * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-已隔离（包年包月实例），-3-已隔离（按量计费实例）
+   */
+  Status?: Array<number>
+
+  /**
+   * 私有网络的ID，基础网络则不传该参数
+   */
+  VpcId?: string
+
+  /**
+   * 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId
+   */
+  SubnetId?: string
+
+  /**
+   * 付费类型，取值范围：0-按量计费，1-包年包月，-1-按量计费+包年包月
+   */
+  PayMode?: number
+
+  /**
+   * 单次请求返回的数量，最小值为1，最大值为100，默认值为20
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认值为0
+   */
+  Offset?: number
+
+  /**
+   * 返回结果集排序的字段，目前支持："ProjectId", "InstanceName", "CreateTime"，默认为升序排序
+   */
+  OrderBy?: string
+
+  /**
+   * 返回结果集排序方式，目前支持："ASC"或者"DESC"
+   */
+  OrderByType?: string
+
+  /**
+   * 项目 ID
+   */
+  ProjectIds?: Array<number>
+
+  /**
+   * 搜索关键词，支持实例ID、实例名称、完整IP
+   */
+  SearchKey?: string
+
+  /**
+   * Tag信息
+   */
+  Tags?: TagInfo
+}
+
+/**
+ * 云数据库实例当前操作
+ */
+export interface CurrentOp {
+  /**
+      * 操作序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OpId: number
+
+  /**
+      * 操作所在的命名空间，形式如db.collection
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ns: string
+
+  /**
+      * 操作执行语句
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Query: string
+
+  /**
+      * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Op: string
+
+  /**
+   * 操作所在的分片名称
+   */
+  ReplicaSetName: string
+
+  /**
+      * 筛选条件，节点状态，可能的取值为：Primary、Secondary
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State: string
+
+  /**
+      * 操作详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Operation: string
+
+  /**
+   * 操作所在的节点名称
+   */
+  NodeName: string
+
+  /**
+      * 操作已执行时间（ms）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MicrosecsRunning: number
+}
+
+/**
+ * ModifyDBInstanceSpec请求参数结构体
+ */
+export interface ModifyDBInstanceSpecRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 实例配置变更后的内存大小，单位：GB。内存和磁盘必须同时升配或同时降配
+   */
+  Memory: number
+
+  /**
+   * 实例配置变更后的硬盘大小，单位：GB。内存和磁盘必须同时升配或同时降配。降配时，新的磁盘参数必须大于已用磁盘容量的1.2倍
+   */
+  Volume: number
+
+  /**
+   * 实例配置变更后oplog的大小，单位：GB，默认为磁盘空间的10%，允许设置的最小值为磁盘的10%，最大值为磁盘的90%
+   */
+  OplogSize?: number
+
+  /**
+   * 实例变更后的节点数，取值范围具体参照查询云数据库的售卖规格返回参数。默认为不变更节点数
+   */
+  NodeNum?: number
+
+  /**
+   * 实例变更后的分片数，取值范围具体参照查询云数据库的售卖规格返回参数。只能增加不能减少，默认为不变更分片数
+   */
+  ReplicateSetNum?: number
+
+  /**
+   * 实例配置变更的切换时间，参数为：0(默认)、1。0-调整完成时，1-维护时间内。注：调整节点数和分片数不支持在【维护时间内】变更。
+   */
+  InMaintenance?: number
+}
+
+/**
+ * 用户权限
+ */
+export interface Auth {
+  /**
+   * *表示所有数据库,db.name表示特定的name数据库。
+   */
+  NameSpace: string
+
+  /**
+   * 用于控制权限,0无权限，1只读，2只写，3读写。
+   */
+  Mask: number
+}
+
+/**
+ * ResetDBInstancePassword请求参数结构体
+ */
+export interface ResetDBInstancePasswordRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 实例账号名
+   */
+  UserName: string
+
+  /**
+   * 新密码，新密码长度不能少于8位
+   */
+  Password: string
+}
+
+/**
+ * 实例可修改参数integer类型集合。
+ */
+export interface InstanceIntegerParam {
+  /**
+   * 当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 默认值
+   */
+  DefaultValue: string
+
+  /**
+   * 最大值
+   */
+  Max: string
+
+  /**
+   * 最小值
+   */
+  Min: string
+
+  /**
+   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
+   */
+  NeedRestart: string
+
+  /**
+   * 参数名称
+   */
+  ParamName: string
+
+  /**
+   * 参数说明
+   */
+  Tips: Array<string>
+
+  /**
+   * 参数类型
+   */
+  ValueType: string
+
+  /**
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
+   */
+  Status: number
+
+  /**
+   * 冗余字段，可忽略
+   */
+  Unit: string
+}
+
+/**
+ * DescribeAsyncRequestInfo返回参数结构体
+ */
+export interface DescribeAsyncRequestInfoResponse {
+  /**
+   * 状态。返回参数有：initial-初始化、running-运行中、paused-任务执行失败，已暂停、undoed-任务执行失败，已回滚、failed-任务执行失败, 已终止、success-成功
+   */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDBInstance返回参数结构体
+ */
+export interface CreateDBInstanceResponse {
+  /**
+   * 订单ID
+   */
+  DealId: string
+
+  /**
+   * 创建的实例ID列表
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 实例可修改参数text类型集合。
+ */
+export interface InstanceTextParam {
+  /**
+   * 当前值
+   */
+  CurrentValue: string
+
+  /**
+   * 默认值
+   */
+  DefaultValue: string
+
+  /**
+   * 是否需要重启
+   */
+  NeedRestart: string
+
+  /**
+   * 参数名称
+   */
+  ParamName: string
+
+  /**
+   * text类型值
+   */
+  TextValue: string
+
+  /**
+   * 参数说明
+   */
+  Tips: Array<string>
+
+  /**
+   * 值类型说明
+   */
+  ValueType: string
+
+  /**
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
+   */
+  Status: string
+}
+
+/**
+ * ModifyDBInstanceSecurityGroup请求参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 目标安全组id
+   */
+  SecurityGroupIds: Array<string>
+}
+
+/**
+ * DescribeBackupDownloadTask请求参数结构体
+ */
+export interface DescribeBackupDownloadTaskRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 备份文件名，用来过滤指定文件的下载任务
+   */
+  BackupName?: string
+
+  /**
+   * 指定查询时间范围内的任务，StartTime指定开始时间，不填默认不限制开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 指定查询时间范围内的任务，EndTime指定截止时间，不填默认不限制截止时间
+   */
+  EndTime?: string
+
+  /**
+   * 此次查询返回的条数，取值范围为1-100，默认为20
+   */
+  Limit?: number
+
+  /**
+   * 指定此次查询返回的页数，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 排序字段，取值为createTime，finishTime两种，默认为createTime
+   */
+  OrderBy?: string
+
+  /**
+   * 排序方式，取值为asc，desc两种，默认desc
+   */
+  OrderByType?: string
+
+  /**
+   * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试。不填默认返回所有类型
+   */
+  Status?: Array<number>
+}
+
+/**
+ * DescribeClientConnections返回参数结构体
+ */
+export interface DescribeClientConnectionsResponse {
+  /**
+   * 客户端连接信息，包括客户端IP和对应IP的连接数量。
+   */
+  Clients: Array<ClientConnection>
+
+  /**
+   * 满足条件的记录总条数，可用于分页查询。
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDBBackups返回参数结构体
+ */
+export interface DescribeDBBackupsResponse {
+  /**
+   * 备份列表
+   */
+  BackupList: Array<BackupInfo>
+
+  /**
+   * 备份总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDBInstanceSecurityGroup返回参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceParams请求参数结构体
+ */
+export interface DescribeInstanceParamsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * InquirePriceCreateDBInstances返回参数结构体
+ */
+export interface InquirePriceCreateDBInstancesResponse {
+  /**
+   * 价格
+   */
+  Price: DBInstancePrice
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSecurityGroup返回参数结构体
+ */
+export interface DescribeSecurityGroupResponse {
+  /**
+   * 实例绑定的安全组
+   */
+  Groups: Array<SecurityGroup>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 安全组信息
+ */
+export interface SecurityGroup {
+  /**
+   * 所属项目id
+   */
+  ProjectId: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 入站规则
+   */
+  Inbound: Array<SecurityGroupBound>
+
+  /**
+   * 出站规则
+   */
+  Outbound: Array<SecurityGroupBound>
+
+  /**
+   * 安全组id
+   */
+  SecurityGroupId: string
+
+  /**
+   * 安全组名称
+   */
+  SecurityGroupName: string
+
+  /**
+   * 安全组备注
+   */
+  SecurityGroupRemark: string
+}
+
+/**
+ * DescribeBackupAccess返回参数结构体
+ */
+export interface DescribeBackupAccessResponse {
+  /**
+   * 实例所属地域
+   */
+  Region?: string
+
+  /**
+   * 备份文件所在存储桶
+   */
+  Bucket?: string
+
+  /**
+   * 备份文件的存储信息
+   */
+  Files?: Array<BackupFile>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 分片信息
+ */
+export interface ReplicaSetInfo {
+  /**
+   * 分片名称
+   */
+  ReplicaSetId: string
+}
+
+/**
+ * ResetDBInstancePassword返回参数结构体
+ */
+export interface ResetDBInstancePasswordResponse {
+  /**
+   * 异步请求Id，用户查询该流程的运行状态
    */
   AsyncRequestId: string
 
@@ -283,6 +1386,283 @@ export interface CreateBackupDBInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 客户端连接信息，包括客户端IP和连接数
+ */
+export interface ClientConnection {
+  /**
+   * 连接的客户端IP
+   */
+  IP: string
+
+  /**
+   * 对应客户端IP的连接数
+   */
+  Count: number
+
+  /**
+   * 是否为内部ip
+   */
+  InternalService: boolean
+}
+
+/**
+ * DescribeDBInstanceDeal请求参数结构体
+ */
+export interface DescribeDBInstanceDealRequest {
+  /**
+   * 订单ID，通过CreateDBInstance等接口返回
+   */
+  DealId: string
+}
+
+/**
+ * DescribeAsyncRequestInfo请求参数结构体
+ */
+export interface DescribeAsyncRequestInfoRequest {
+  /**
+   * 异步请求Id，涉及到异步流程的接口返回，如CreateBackupDBInstance
+   */
+  AsyncRequestId: string
+}
+
+/**
+ * CreateBackupDownloadTask请求参数结构体
+ */
+export interface CreateBackupDownloadTaskRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 要下载的备份文件名，可通过DescribeDBBackups接口获取
+   */
+  BackupName: string
+
+  /**
+   * 下载备份的分片列表
+   */
+  BackupSets: Array<ReplicaSetInfo>
+}
+
+/**
+ * InquirePriceModifyDBInstanceSpec返回参数结构体
+ */
+export interface InquirePriceModifyDBInstanceSpecResponse {
+  /**
+   * 价格。
+   */
+  Price: DBInstancePrice
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 安全组规则
+ */
+export interface SecurityGroupBound {
+  /**
+   * 执行规则。ACCEPT或DROP
+   */
+  Action: string
+
+  /**
+   * ip段。
+   */
+  CidrIp: string
+
+  /**
+   * 端口范围
+   */
+  PortRange: string
+
+  /**
+   * 传输层协议。tcp，udp或ALL
+   */
+  IpProtocol: string
+
+  /**
+   * 安全组id代表的地址集合
+   */
+  Id: string
+
+  /**
+   * 地址组id代表的地址集合
+   */
+  AddressModule: string
+
+  /**
+   * 服务组id代表的协议和端口集合
+   */
+  ServiceModule: string
+
+  /**
+   * 描述
+   */
+  Desc: string
+}
+
+/**
+ * DescribeCurrentOp请求参数结构体
+ */
+export interface DescribeCurrentOpRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 筛选条件，操作所属的命名空间namespace，格式为db.collection
+   */
+  Ns?: string
+
+  /**
+   * 筛选条件，操作已经执行的时间（单位：毫秒），结果将返回超过设置时间的操作，默认值为0，取值范围为[0, 3600000]
+   */
+  MillisecondRunning?: number
+
+  /**
+   * 筛选条件，操作类型，可能的取值：none，update，insert，query，command，getmore，remove和killcursors
+   */
+  Op?: string
+
+  /**
+   * 筛选条件，分片名称
+   */
+  ReplicaSetName?: string
+
+  /**
+      * 筛选条件，节点状态，可能的取值为：primary
+secondary
+      */
+  State?: string
+
+  /**
+   * 单次请求返回的数量，默认值为100，取值范围为[0,100]
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认值为0，取值范围为[0,10000]
+   */
+  Offset?: number
+
+  /**
+   * 返回结果集排序的字段，目前支持："MicrosecsRunning"/"microsecsrunning"，默认为升序排序
+   */
+  OrderBy?: string
+
+  /**
+   * 返回结果集排序方式，可能的取值："ASC"/"asc"或"DESC"/"desc"
+   */
+  OrderByType?: string
+}
+
+/**
+ * 备份下载任务
+ */
+export interface BackupDownloadTask {
+  /**
+   * 任务创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 备份文件名
+   */
+  BackupName: string
+
+  /**
+   * 分片名称
+   */
+  ReplicaSetId: string
+
+  /**
+   * 备份数据大小，单位为字节
+   */
+  BackupSize: number
+
+  /**
+   * 任务状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
+   */
+  Status: number
+
+  /**
+   * 任务进度百分比
+   */
+  Percent: number
+
+  /**
+   * 耗时，单位为秒
+   */
+  TimeSpend: number
+
+  /**
+   * 备份数据下载链接
+   */
+  Url: string
+
+  /**
+   * 备份文件备份类型，0-逻辑备份，1-物理备份
+   */
+  BackupMethod: number
+
+  /**
+      * 发起备份时指定的备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupDesc: string
+}
+
+/**
+ * DescribeDBBackups请求参数结构体
+ */
+export interface DescribeDBBackupsRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 备份方式，当前支持：0-逻辑备份，1-物理备份，2-所有备份。默认为逻辑备份。
+   */
+  BackupMethod?: number
+
+  /**
+   * 分页大小，最大值为100，不设置默认查询所有。
+   */
+  Limit?: number
+
+  /**
+   * 分页偏移量，最小值为0，默认值为0。
+   */
+  Offset?: number
+}
+
+/**
+ * DescribeClientConnections请求参数结构体
+ */
+export interface DescribeClientConnectionsRequest {
+  /**
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+
+  /**
+   * 单次请求返回的数量，最小值为1，最大值为1000，默认值为1000。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认值为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -331,94 +1711,148 @@ export interface ShardInfo {
 }
 
 /**
- * 数据库实例价格
+ * DescribeBackupAccess请求参数结构体
  */
-export interface DBInstancePrice {
+export interface DescribeBackupAccessRequest {
   /**
-      * 单价
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPrice: number
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
 
   /**
-   * 原价
+   * 需要获取下载授权的备份文件名
    */
-  OriginalPrice: number
-
-  /**
-   * 折扣加
-   */
-  DiscountPrice: number
+  BackupName: string
 }
 
 /**
- * 备份文件存储信息
+ * RenameInstance请求参数结构体
  */
-export interface BackupFile {
+export interface RenameInstanceRequest {
   /**
-   * 备份文件所属的副本集/分片ID
+   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
    */
-  ReplicateSetId: string
+  InstanceId: string
 
   /**
-   * 备份文件保存路径
+   * 自定义实例名称，名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符 -
    */
-  File: string
+  NewName: string
 }
 
 /**
- * InquirePriceCreateDBInstances请求参数结构体
+ * RenewDBInstances返回参数结构体
  */
-export interface InquirePriceCreateDBInstancesRequest {
+export interface RenewDBInstancesResponse {
   /**
-   * 实例所属区域名称，格式如：ap-guangzhou-2
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Zone: string
+  RequestId?: string
+}
+
+/**
+ * 实例可修改参数枚举类型集合。
+ */
+export interface InstanceEnumParam {
+  /**
+   * 参数当前值
+   */
+  CurrentValue: string
 
   /**
-   * 每个副本集内节点个数，具体参照查询云数据库的售卖规格返回参数
+   * 默认值
    */
-  NodeNum: number
+  DefaultValue: string
 
   /**
-   * 实例内存大小，单位：GB
+   * 枚举值，所有支持的值
    */
-  Memory: number
+  EnumValue: Array<string>
 
   /**
-   * 实例硬盘大小，单位：GB
+   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
    */
-  Volume: number
+  NeedRestart: string
 
   /**
-   * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
+   * 参数名称
    */
-  MongoVersion: string
+  ParamName: string
 
   /**
-   * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；
+   * 中英文说明
    */
-  MachineCode: string
+  Tips: Array<string>
 
   /**
-   * 实例数量, 最小值1，最大值为10
+   * 参数值类型说明
    */
-  GoodsNum: number
+  ValueType: string
 
   /**
-   * 实例时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
+   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
    */
-  Period: number
+  Status: number
+}
+
+/**
+ * RenameInstance返回参数结构体
+ */
+export interface RenameInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBackupDBInstance请求参数结构体
+ */
+export interface CreateBackupDBInstanceRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
 
   /**
-   * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
+   * 0-逻辑备份，1-物理备份
    */
-  ClusterType: string
+  BackupMethod: number
 
   /**
-   * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数；若为单节点实例，该参数设置为0
+   * 备份备注
    */
-  ReplicateSetNum: number
+  BackupRemark?: string
+}
+
+/**
+ * SetAccountUserPrivilege请求参数结构体
+ */
+export interface SetAccountUserPrivilegeRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 账号名称
+   */
+  UserName: string
+
+  /**
+   * 权限信息
+   */
+  AuthRole: Array<Auth>
+}
+
+/**
+ * KillOps返回参数结构体
+ */
+export interface KillOpsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -429,36 +1863,6 @@ export interface IsolateDBInstanceRequest {
    * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
    */
   InstanceId: string
-}
-
-/**
- * DescribeSlowLogPatterns返回参数结构体
- */
-export interface DescribeSlowLogPatternsResponse {
-  /**
-   * 慢日志统计信息总数
-   */
-  Count: number
-
-  /**
-   * 慢日志统计信息
-   */
-  SlowLogPatterns: Array<SlowLogPattern>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 分片信息
- */
-export interface ReplicaSetInfo {
-  /**
-   * 分片名称
-   */
-  ReplicaSetId: string
 }
 
 /**
@@ -582,6 +1986,21 @@ export interface CreateDBInstanceHourRequest {
 }
 
 /**
+ * 备份文件存储信息
+ */
+export interface BackupFile {
+  /**
+   * 备份文件所属的副本集/分片ID
+   */
+  ReplicateSetId: string
+
+  /**
+   * 备份文件保存路径
+   */
+  File: string
+}
+
+/**
  * AssignProject请求参数结构体
  */
 export interface AssignProjectRequest {
@@ -597,51 +2016,6 @@ export interface AssignProjectRequest {
 }
 
 /**
- * 安全组规则
- */
-export interface SecurityGroupBound {
-  /**
-   * 执行规则。ACCEPT或DROP
-   */
-  Action: string
-
-  /**
-   * ip段。
-   */
-  CidrIp: string
-
-  /**
-   * 端口范围
-   */
-  PortRange: string
-
-  /**
-   * 传输层协议。tcp，udp或ALL
-   */
-  IpProtocol: string
-
-  /**
-   * 安全组id代表的地址集合
-   */
-  Id: string
-
-  /**
-   * 地址组id代表的地址集合
-   */
-  AddressModule: string
-
-  /**
-   * 服务组id代表的协议和端口集合
-   */
-  ServiceModule: string
-
-  /**
-   * 描述
-   */
-  Desc: string
-}
-
-/**
  * CreateBackupDownloadTask返回参数结构体
  */
 export interface CreateBackupDownloadTaskResponse {
@@ -650,185 +2024,6 @@ export interface CreateBackupDownloadTaskResponse {
    */
   Tasks: Array<BackupDownloadTaskStatus>
 
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 客户端连接信息，包括客户端IP和连接数
- */
-export interface ClientConnection {
-  /**
-   * 连接的客户端IP
-   */
-  IP: string
-
-  /**
-   * 对应客户端IP的连接数
-   */
-  Count: number
-
-  /**
-   * 是否为内部ip
-   */
-  InternalService: boolean
-}
-
-/**
- * InquirePriceModifyDBInstanceSpec请求参数结构体
- */
-export interface InquirePriceModifyDBInstanceSpecRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
-   */
-  InstanceId: string
-
-  /**
-   * 变更配置后实例内存大小，单位：GB。
-   */
-  Memory: number
-
-  /**
-   * 变更配置后实例磁盘大小，单位：GB。
-   */
-  Volume: number
-
-  /**
-   * 实例变更后的节点数，取值范围具体参照查询云数据库的售卖规格返回参数。默认为不变更节点数
-   */
-  NodeNum?: number
-
-  /**
-   * 实例变更后的分片数，取值范围具体参照查询云数据库的售卖规格返回参数。只能增加不能减少，默认为不变更分片数
-   */
-  ReplicateSetNum?: number
-}
-
-/**
- * 备份信息
- */
-export interface BackupInfo {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-
-  /**
-   * 备份方式，0-自动备份，1-手动备份
-   */
-  BackupType: number
-
-  /**
-   * 备份名称
-   */
-  BackupName: string
-
-  /**
-      * 备份备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackupDesc: string
-
-  /**
-      * 备份文件大小，单位KB
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackupSize: number
-
-  /**
-      * 备份开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StartTime: string
-
-  /**
-      * 备份结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EndTime: string
-
-  /**
-   * 备份状态，1-备份中，2-备份成功
-   */
-  Status: number
-
-  /**
-   * 备份方法，0-逻辑备份，1-物理备份
-   */
-  BackupMethod: number
-}
-
-/**
- * 安全组信息
- */
-export interface SecurityGroup {
-  /**
-   * 所属项目id
-   */
-  ProjectId: number
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 入站规则
-   */
-  Inbound: Array<SecurityGroupBound>
-
-  /**
-   * 出站规则
-   */
-  Outbound: Array<SecurityGroupBound>
-
-  /**
-   * 安全组id
-   */
-  SecurityGroupId: string
-
-  /**
-   * 安全组名称
-   */
-  SecurityGroupName: string
-
-  /**
-   * 安全组备注
-   */
-  SecurityGroupRemark: string
-}
-
-/**
- * InquirePriceRenewDBInstances请求参数结构体
- */
-export interface InquirePriceRenewDBInstancesRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同，接口单次最多只支持5个实例进行操作。
-   */
-  InstanceIds: Array<string>
-
-  /**
-   * 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
-   */
-  InstanceChargePrepaid: InstanceChargePrepaid
-}
-
-/**
- * DescribeAsyncRequestInfo请求参数结构体
- */
-export interface DescribeAsyncRequestInfoRequest {
-  /**
-   * 异步请求Id，涉及到异步流程的接口返回，如CreateBackupDBInstance
-   */
-  AsyncRequestId: string
-}
-
-/**
- * KillOps返回参数结构体
- */
-export interface KillOpsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -853,26 +2048,6 @@ export interface SpecificationInfo {
    * 售卖规格信息
    */
   SpecItems: Array<SpecItem>
-}
-
-/**
- * CreateBackupDownloadTask请求参数结构体
- */
-export interface CreateBackupDownloadTaskRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 要下载的备份文件名，可通过DescribeDBBackups接口获取
-   */
-  BackupName: string
-
-  /**
-   * 下载备份的分片列表
-   */
-  BackupSets: Array<ReplicaSetInfo>
 }
 
 /**
@@ -916,177 +2091,6 @@ export interface DescribeSlowLogPatternsRequest {
 }
 
 /**
- * DescribeSlowLogs返回参数结构体
- */
-export interface DescribeSlowLogsResponse {
-  /**
-   * 慢日志总数
-   */
-  Count: number
-
-  /**
-      * 慢日志详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SlowLogs: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * FlushInstanceRouterConfig返回参数结构体
- */
-export interface FlushInstanceRouterConfigResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * InquirePriceModifyDBInstanceSpec返回参数结构体
- */
-export interface InquirePriceModifyDBInstanceSpecResponse {
-  /**
-   * 价格。
-   */
-  Price: DBInstancePrice
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * mongodb售卖规格
- */
-export interface SpecItem {
-  /**
-   * 规格信息标识
-   */
-  SpecCode: string
-
-  /**
-   * 规格有效标志，取值：0-停止售卖，1-开放售卖
-   */
-  Status: number
-
-  /**
-   * 计算资源规格，单位为CPU核心数
-   */
-  Cpu: number
-
-  /**
-   * 内存规格，单位为MB
-   */
-  Memory: number
-
-  /**
-   * 默认磁盘规格，单位MB
-   */
-  DefaultStorage: number
-
-  /**
-   * 最大磁盘规格，单位MB
-   */
-  MaxStorage: number
-
-  /**
-   * 最小磁盘规格，单位MB
-   */
-  MinStorage: number
-
-  /**
-   * 可承载qps信息
-   */
-  Qps: number
-
-  /**
-   * 连接数限制
-   */
-  Conns: number
-
-  /**
-   * 实例mongodb版本信息
-   */
-  MongoVersionCode: string
-
-  /**
-   * 实例mongodb版本号
-   */
-  MongoVersionValue: number
-
-  /**
-   * 实例mongodb版本号（短）
-   */
-  Version: string
-
-  /**
-   * 存储引擎
-   */
-  EngineName: string
-
-  /**
-   * 集群类型，取值：1-分片集群，0-副本集集群
-   */
-  ClusterType: number
-
-  /**
-   * 最小副本集从节点数
-   */
-  MinNodeNum: number
-
-  /**
-   * 最大副本集从节点数
-   */
-  MaxNodeNum: number
-
-  /**
-   * 最小分片数
-   */
-  MinReplicateSetNum: number
-
-  /**
-   * 最大分片数
-   */
-  MaxReplicateSetNum: number
-
-  /**
-   * 最小分片从节点数
-   */
-  MinReplicateSetNodeNum: number
-
-  /**
-   * 最大分片从节点数
-   */
-  MaxReplicateSetNodeNum: number
-
-  /**
-   * 机器类型，取值：0-HIO，4-HIO10G
-   */
-  MachineType: string
-}
-
-/**
- * 用户权限
- */
-export interface Auth {
-  /**
-   * *表示所有数据库,db.name表示特定的name数据库。
-   */
-  NameSpace: string
-
-  /**
-   * 用于控制权限,0无权限，1只读，2只写，3读写。
-   */
-  Mask: number
-}
-
-/**
  * DescribeSpecInfo返回参数结构体
  */
 export interface DescribeSpecInfoResponse {
@@ -1114,26 +2118,6 @@ export interface InquirePriceRenewDBInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ResetDBInstancePassword请求参数结构体
- */
-export interface ResetDBInstancePasswordRequest {
-  /**
-   * 实例Id
-   */
-  InstanceId: string
-
-  /**
-   * 实例账号名
-   */
-  UserName: string
-
-  /**
-   * 新密码，新密码长度不能少于8位
-   */
-  Password: string
 }
 
 /**
@@ -1182,234 +2166,58 @@ export interface OfflineIsolatedDBInstanceRequest {
 }
 
 /**
- * 实例可修改参数integer类型集合。
+ * InquirePriceCreateDBInstances请求参数结构体
  */
-export interface InstanceIntegerParam {
+export interface InquirePriceCreateDBInstancesRequest {
   /**
-   * 当前值
+   * 实例所属区域名称，格式如：ap-guangzhou-2
    */
-  CurrentValue: string
+  Zone: string
 
   /**
-   * 默认值
+   * 每个副本集内节点个数，具体参照查询云数据库的售卖规格返回参数
    */
-  DefaultValue: string
+  NodeNum: number
 
   /**
-   * 最大值
+   * 实例内存大小，单位：GB
    */
-  Max: string
+  Memory: number
 
   /**
-   * 最小值
+   * 实例硬盘大小，单位：GB
    */
-  Min: string
+  Volume: number
 
   /**
-   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
+   * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
    */
-  NeedRestart: string
+  MongoVersion: string
 
   /**
-   * 参数名称
+   * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；
    */
-  ParamName: string
+  MachineCode: string
 
   /**
-   * 参数说明
+   * 实例数量, 最小值1，最大值为10
    */
-  Tips: Array<string>
+  GoodsNum: number
 
   /**
-   * 参数类型
+   * 实例时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
    */
-  ValueType: string
+  Period: number
 
   /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
+   * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
    */
-  Status: number
+  ClusterType: string
 
   /**
-   * 冗余字段，可忽略
+   * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数；若为单节点实例，该参数设置为0
    */
-  Unit: string
-}
-
-/**
- * DescribeCurrentOp请求参数结构体
- */
-export interface DescribeCurrentOpRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 筛选条件，操作所属的命名空间namespace，格式为db.collection
-   */
-  Ns?: string
-
-  /**
-   * 筛选条件，操作已经执行的时间（单位：毫秒），结果将返回超过设置时间的操作，默认值为0，取值范围为[0, 3600000]
-   */
-  MillisecondRunning?: number
-
-  /**
-   * 筛选条件，操作类型，可能的取值：none，update，insert，query，command，getmore，remove和killcursors
-   */
-  Op?: string
-
-  /**
-   * 筛选条件，分片名称
-   */
-  ReplicaSetName?: string
-
-  /**
-      * 筛选条件，节点状态，可能的取值为：primary
-secondary
-      */
-  State?: string
-
-  /**
-   * 单次请求返回的数量，默认值为100，取值范围为[0,100]
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认值为0，取值范围为[0,10000]
-   */
-  Offset?: number
-
-  /**
-   * 返回结果集排序的字段，目前支持："MicrosecsRunning"/"microsecsrunning"，默认为升序排序
-   */
-  OrderBy?: string
-
-  /**
-   * 返回结果集排序方式，可能的取值："ASC"/"asc"或"DESC"/"desc"
-   */
-  OrderByType?: string
-}
-
-/**
- * DescribeDBInstanceDeal请求参数结构体
- */
-export interface DescribeDBInstanceDealRequest {
-  /**
-   * 订单ID，通过CreateDBInstance等接口返回
-   */
-  DealId: string
-}
-
-/**
- * DescribeDBInstances请求参数结构体
- */
-export interface DescribeDBInstancesRequest {
-  /**
-   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceIds?: Array<string>
-
-  /**
-   * 实例类型，取值范围：0-所有实例,1-正式实例，2-临时实例, 3-只读实例，-1-正式实例+只读+灾备实例
-   */
-  InstanceType?: number
-
-  /**
-   * 集群类型，取值范围：0-副本集实例，1-分片实例，-1-所有实例
-   */
-  ClusterType?: number
-
-  /**
-   * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-已隔离（包年包月实例），-3-已隔离（按量计费实例）
-   */
-  Status?: Array<number>
-
-  /**
-   * 私有网络的ID，基础网络则不传该参数
-   */
-  VpcId?: string
-
-  /**
-   * 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId
-   */
-  SubnetId?: string
-
-  /**
-   * 付费类型，取值范围：0-按量计费，1-包年包月，-1-按量计费+包年包月
-   */
-  PayMode?: number
-
-  /**
-   * 单次请求返回的数量，最小值为1，最大值为100，默认值为20
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认值为0
-   */
-  Offset?: number
-
-  /**
-   * 返回结果集排序的字段，目前支持："ProjectId", "InstanceName", "CreateTime"，默认为升序排序
-   */
-  OrderBy?: string
-
-  /**
-   * 返回结果集排序方式，目前支持："ASC"或者"DESC"
-   */
-  OrderByType?: string
-
-  /**
-   * 项目 ID
-   */
-  ProjectIds?: Array<number>
-
-  /**
-   * 搜索关键词，支持实例ID、实例名称、完整IP
-   */
-  SearchKey?: string
-
-  /**
-   * Tag信息
-   */
-  Tags?: TagInfo
-}
-
-/**
- * DescribeAsyncRequestInfo返回参数结构体
- */
-export interface DescribeAsyncRequestInfoResponse {
-  /**
-   * 状态。返回参数有：initial-初始化、running-运行中、paused-任务执行失败，已暂停、undoed-任务执行失败，已回滚、failed-任务执行失败, 已终止、success-成功
-   */
-  Status: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateDBInstance返回参数结构体
- */
-export interface CreateDBInstanceResponse {
-  /**
-   * 订单ID
-   */
-  DealId: string
-
-  /**
-   * 创建的实例ID列表
-   */
-  InstanceIds: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ReplicateSetNum: number
 }
 
 /**
@@ -1438,634 +2246,6 @@ export interface DescribeInstanceParamsResponse {
 
   /**
    * 当前实例支持修改的参数个数统计 如0
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSlowLogs请求参数结构体
- */
-export interface DescribeSlowLogsRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
-   */
-  StartTime: string
-
-  /**
-   * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
-   */
-  EndTime: string
-
-  /**
-   * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
-   */
-  SlowMS: number
-
-  /**
-   * 偏移量，最小值为0，最大值为10000，默认值为0。
-   */
-  Offset?: number
-
-  /**
-   * 分页大小，最小值为1，最大值为100，默认值为20。
-   */
-  Limit?: number
-
-  /**
-   * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
-   */
-  Format?: string
-}
-
-/**
- * AssignProject返回参数结构体
- */
-export interface AssignProjectResponse {
-  /**
-   * 返回的异步任务ID列表
-   */
-  FlowIds: Array<number>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 备份下载任务
- */
-export interface BackupDownloadTask {
-  /**
-   * 任务创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 备份文件名
-   */
-  BackupName: string
-
-  /**
-   * 分片名称
-   */
-  ReplicaSetId: string
-
-  /**
-   * 备份数据大小，单位为字节
-   */
-  BackupSize: number
-
-  /**
-   * 任务状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
-   */
-  Status: number
-
-  /**
-   * 任务进度百分比
-   */
-  Percent: number
-
-  /**
-   * 耗时，单位为秒
-   */
-  TimeSpend: number
-
-  /**
-   * 备份数据下载链接
-   */
-  Url: string
-
-  /**
-   * 备份文件备份类型，0-逻辑备份，1-物理备份
-   */
-  BackupMethod: number
-
-  /**
-      * 发起备份时指定的备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BackupDesc: string
-}
-
-/**
- * DescribeDBBackups请求参数结构体
- */
-export interface DescribeDBBackupsRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 备份方式，当前支持：0-逻辑备份，1-物理备份，2-所有备份。默认为逻辑备份。
-   */
-  BackupMethod?: number
-
-  /**
-   * 分页大小，最大值为100，不设置默认查询所有。
-   */
-  Limit?: number
-
-  /**
-   * 分页偏移量，最小值为0，默认值为0。
-   */
-  Offset?: number
-}
-
-/**
- * 实例可修改参数Multi类型集合。
- */
-export interface InstanceMultiParam {
-  /**
-   * 当前值
-   */
-  CurrentValue: string
-
-  /**
-   * 默认值
-   */
-  DefaultValue: string
-
-  /**
-   * 指导值范围
-   */
-  EnumValue: Array<string>
-
-  /**
-   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
-   */
-  NeedRestart: string
-
-  /**
-   * 参数名称
-   */
-  ParamName: string
-
-  /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
-   */
-  Status: number
-
-  /**
-   * 参数说明
-   */
-  Tips: Array<string>
-
-  /**
-   * 当前值的类型描述，默认为multi
-   */
-  ValueType: string
-}
-
-/**
- * DescribeClientConnections请求参数结构体
- */
-export interface DescribeClientConnectionsRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 单次请求返回的数量，最小值为1，最大值为1000，默认值为1000。
-   */
-  Limit?: number
-
-  /**
-   * 偏移量，默认值为0。
-   */
-  Offset?: number
-}
-
-/**
- * DescribeDBInstanceDeal返回参数结构体
- */
-export interface DescribeDBInstanceDealResponse {
-  /**
-   * 订单状态，1：未支付，2：已支付，3：发货中，4：发货成功，5：发货失败，6：退款，7：订单关闭，8：超时未支付关闭。
-   */
-  Status: number
-
-  /**
-   * 订单原价。
-   */
-  OriginalPrice: number
-
-  /**
-   * 订单折扣价格。
-   */
-  DiscountPrice: number
-
-  /**
-   * 订单行为，purchase：新购，renew：续费，upgrade：升配，downgrade：降配，refund：退货退款。
-   */
-  Action: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyDBInstanceSpec返回参数结构体
- */
-export interface ModifyDBInstanceSpecResponse {
-  /**
-   * 订单ID
-   */
-  DealId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 实例可修改参数text类型集合。
- */
-export interface InstanceTextParam {
-  /**
-   * 当前值
-   */
-  CurrentValue: string
-
-  /**
-   * 默认值
-   */
-  DefaultValue: string
-
-  /**
-   * 是否需要重启
-   */
-  NeedRestart: string
-
-  /**
-   * 参数名称
-   */
-  ParamName: string
-
-  /**
-   * text类型值
-   */
-  TextValue: string
-
-  /**
-   * 参数说明
-   */
-  Tips: Array<string>
-
-  /**
-   * 值类型说明
-   */
-  ValueType: string
-
-  /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
-   */
-  Status: string
-}
-
-/**
- * OfflineIsolatedDBInstance返回参数结构体
- */
-export interface OfflineIsolatedDBInstanceResponse {
-  /**
-   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
-   */
-  AsyncRequestId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeBackupDownloadTask请求参数结构体
- */
-export interface DescribeBackupDownloadTaskRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 备份文件名，用来过滤指定文件的下载任务
-   */
-  BackupName?: string
-
-  /**
-   * 指定查询时间范围内的任务，StartTime指定开始时间，不填默认不限制开始时间
-   */
-  StartTime?: string
-
-  /**
-   * 指定查询时间范围内的任务，EndTime指定截止时间，不填默认不限制截止时间
-   */
-  EndTime?: string
-
-  /**
-   * 此次查询返回的条数，取值范围为1-100，默认为20
-   */
-  Limit?: number
-
-  /**
-   * 指定此次查询返回的页数，默认为0
-   */
-  Offset?: number
-
-  /**
-   * 排序字段，取值为createTime，finishTime两种，默认为createTime
-   */
-  OrderBy?: string
-
-  /**
-   * 排序方式，取值为asc，desc两种，默认desc
-   */
-  OrderByType?: string
-
-  /**
-   * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试。不填默认返回所有类型
-   */
-  Status?: Array<number>
-}
-
-/**
- * DescribeBackupAccess请求参数结构体
- */
-export interface DescribeBackupAccessRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 需要获取下载授权的备份文件名
-   */
-  BackupName: string
-}
-
-/**
- * RenameInstance请求参数结构体
- */
-export interface RenameInstanceRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 自定义实例名称，名称只支持长度为60个字符的中文、英文、数字、下划线_、分隔符 -
-   */
-  NewName: string
-}
-
-/**
- * DescribeSecurityGroup请求参数结构体
- */
-export interface DescribeSecurityGroupRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。
-   */
-  InstanceId: string
-}
-
-/**
- * RenewDBInstances返回参数结构体
- */
-export interface RenewDBInstancesResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 实例可修改参数枚举类型集合。
- */
-export interface InstanceEnumParam {
-  /**
-   * 参数当前值
-   */
-  CurrentValue: string
-
-  /**
-   * 默认值
-   */
-  DefaultValue: string
-
-  /**
-   * 枚举值，所有支持的值
-   */
-  EnumValue: Array<string>
-
-  /**
-   * 是否需要重启生效 1:需要重启后生效；0：无需重启，设置成功即可生效；
-   */
-  NeedRestart: string
-
-  /**
-   * 参数名称
-   */
-  ParamName: string
-
-  /**
-   * 中英文说明
-   */
-  Tips: Array<string>
-
-  /**
-   * 参数值类型说明
-   */
-  ValueType: string
-
-  /**
-   * 是否为运行中参数值 1:运行中参数值；0：非运行中参数值；
-   */
-  Status: number
-}
-
-/**
- * DescribeBackupDownloadTask返回参数结构体
- */
-export interface DescribeBackupDownloadTaskResponse {
-  /**
-   * 满足查询条件的所有条数
-   */
-  TotalCount: number
-
-  /**
-   * 下载任务列表
-   */
-  Tasks: Array<BackupDownloadTask>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RenameInstance返回参数结构体
- */
-export interface RenameInstanceResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClientConnections返回参数结构体
- */
-export interface DescribeClientConnectionsResponse {
-  /**
-   * 客户端连接信息，包括客户端IP和对应IP的连接数量。
-   */
-  Clients: Array<ClientConnection>
-
-  /**
-   * 满足条件的记录总条数，可用于分页查询。
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * FlushInstanceRouterConfig请求参数结构体
- */
-export interface FlushInstanceRouterConfigRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-}
-
-/**
- * 实例信息
- */
-export interface DBInstanceInfo {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-
-  /**
-   * 地域信息
-   */
-  Region: string
-}
-
-/**
- * 云数据库实例当前操作
- */
-export interface CurrentOp {
-  /**
-      * 操作序号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OpId: number
-
-  /**
-      * 操作所在的命名空间，形式如db.collection
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Ns: string
-
-  /**
-      * 操作执行语句
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Query: string
-
-  /**
-      * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Op: string
-
-  /**
-   * 操作所在的分片名称
-   */
-  ReplicaSetName: string
-
-  /**
-      * 筛选条件，节点状态，可能的取值为：Primary、Secondary
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  State: string
-
-  /**
-      * 操作详细信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Operation: string
-
-  /**
-   * 操作所在的节点名称
-   */
-  NodeName: string
-
-  /**
-      * 操作已执行时间（ms）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MicrosecsRunning: number
-}
-
-/**
- * DescribeBackupAccess返回参数结构体
- */
-export interface DescribeBackupAccessResponse {
-  /**
-   * 实例所属地域
-   */
-  Region?: string
-
-  /**
-   * 备份文件所在存储桶
-   */
-  Bucket?: string
-
-  /**
-   * 备份文件的存储信息
-   */
-  Files?: Array<BackupFile>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeDBBackups返回参数结构体
- */
-export interface DescribeDBBackupsResponse {
-  /**
-   * 备份列表
-   */
-  BackupList: Array<BackupInfo>
-
-  /**
-   * 备份总数
    */
   TotalCount: number
 
@@ -2271,118 +2451,18 @@ export interface InstanceDetail {
 }
 
 /**
- * ModifyDBInstanceSpec请求参数结构体
+ * ModifyDBInstanceSpec返回参数结构体
  */
-export interface ModifyDBInstanceSpecRequest {
-  /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-   */
-  InstanceId: string
-
-  /**
-   * 实例配置变更后的内存大小，单位：GB。内存和磁盘必须同时升配或同时降配
-   */
-  Memory: number
-
-  /**
-   * 实例配置变更后的硬盘大小，单位：GB。内存和磁盘必须同时升配或同时降配。降配时，新的磁盘参数必须大于已用磁盘容量的1.2倍
-   */
-  Volume: number
-
-  /**
-   * 实例配置变更后oplog的大小，单位：GB，默认为磁盘空间的10%，允许设置的最小值为磁盘的10%，最大值为磁盘的90%
-   */
-  OplogSize?: number
-
-  /**
-   * 实例变更后的节点数，取值范围具体参照查询云数据库的售卖规格返回参数。默认为不变更节点数
-   */
-  NodeNum?: number
-
-  /**
-   * 实例变更后的分片数，取值范围具体参照查询云数据库的售卖规格返回参数。只能增加不能减少，默认为不变更分片数
-   */
-  ReplicateSetNum?: number
-
-  /**
-   * 实例配置变更的切换时间，参数为：0(默认)、1。0-调整完成时，1-维护时间内。注：调整节点数和分片数不支持在【维护时间内】变更。
-   */
-  InMaintenance?: number
-}
-
-/**
- * 用于描述MongoDB数据库慢日志统计信息
- */
-export interface SlowLogPattern {
-  /**
-   * 慢日志模式
-   */
-  Pattern: string
-
-  /**
-   * 最大执行时间
-   */
-  MaxTime: number
-
-  /**
-   * 平均执行时间
-   */
-  AverageTime: number
-
-  /**
-   * 该模式慢日志条数
-   */
-  Total: number
-}
-
-/**
- * CreateDBInstanceHour返回参数结构体
- */
-export interface CreateDBInstanceHourResponse {
+export interface ModifyDBInstanceSpecResponse {
   /**
    * 订单ID
    */
   DealId: string
 
   /**
-   * 创建的实例ID列表
-   */
-  InstanceIds: Array<string>
-
-  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateBackupDBInstance请求参数结构体
- */
-export interface CreateBackupDBInstanceRequest {
-  /**
-   * 实例id
-   */
-  InstanceId: string
-
-  /**
-   * 0-逻辑备份，1-物理备份
-   */
-  BackupMethod: number
-
-  /**
-   * 备份备注
-   */
-  BackupRemark?: string
-}
-
-/**
- * DescribeInstanceParams请求参数结构体
- */
-export interface DescribeInstanceParamsRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
 }
 
 /**
@@ -2408,21 +2488,6 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费
 }
 
 /**
- * InquirePriceCreateDBInstances返回参数结构体
- */
-export interface InquirePriceCreateDBInstancesResponse {
-  /**
-   * 价格
-   */
-  Price: DBInstancePrice
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * RenewDBInstances请求参数结构体
  */
 export interface RenewDBInstancesRequest {
@@ -2435,44 +2500,4 @@ export interface RenewDBInstancesRequest {
    * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。
    */
   InstanceChargePrepaid: InstanceChargePrepaid
-}
-
-/**
- * SetAccountUserPrivilege请求参数结构体
- */
-export interface SetAccountUserPrivilegeRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-
-  /**
-   * 账号名称
-   */
-  UserName: string
-
-  /**
-   * 权限信息
-   */
-  AuthRole: Array<Auth>
-}
-
-/**
- * 需要终止的操作
- */
-export interface Operation {
-  /**
-   * 操作所在的分片名
-   */
-  ReplicaSetName: string
-
-  /**
-   * 操作所在的节点名
-   */
-  NodeName: string
-
-  /**
-   * 操作序号
-   */
-  OpId: number
 }

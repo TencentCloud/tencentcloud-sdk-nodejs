@@ -98,11 +98,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchDeregisterTargets", req, cb);
     }
     /**
-     * 注册服务器到目标组。
-本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * 修改IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标特性。
      */
-    async RegisterTargetGroupInstances(req, cb) {
-        return this.request("RegisterTargetGroupInstances", req, cb);
+    async ModifyLoadBalancerMixIpTarget(req, cb) {
+        return this.request("ModifyLoadBalancerMixIpTarget", req, cb);
     }
     /**
      * CreateRule 接口用于在一个已存在的负载均衡七层监听器下创建转发规则，七层监听器中，后端服务必须绑定到规则上而非监听器上。
@@ -177,6 +176,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyBlockIPList(req, cb) {
         return this.request("ModifyBlockIPList", req, cb);
+    }
+    /**
+     * 注册服务器到目标组。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     */
+    async RegisterTargetGroupInstances(req, cb) {
+        return this.request("RegisterTargetGroupInstances", req, cb);
     }
     /**
      * DeregisterTargetsFromClassicalLB 接口用于解绑负载均衡后端服务。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。

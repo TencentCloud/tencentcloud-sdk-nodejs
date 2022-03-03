@@ -2486,6 +2486,10 @@ export interface CreateServiceRequest {
       * 独享实例id
       */
     InstanceId?: string;
+    /**
+      * vpc属性
+      */
+    UniqVpcId?: string;
 }
 /**
  * DescribeIPStrategysStatus请求参数结构体

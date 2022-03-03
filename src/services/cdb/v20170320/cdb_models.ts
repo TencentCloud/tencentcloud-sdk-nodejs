@@ -1233,6 +1233,12 @@ export interface AuditPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleName: string
+
+  /**
+      * 数据库实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
 }
 
 /**

@@ -58,6 +58,16 @@ it("ivld.v20210903.DeleteCustomPersonImage", async function () {
     }
 })
 
+it("ivld.v20210903.QueryCallback", async function () {
+    try {
+       const data = await client.QueryCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ivld.v20210903.UpdateCustomCategory", async function () {
     try {
        const data = await client.UpdateCustomCategory({})
@@ -188,6 +198,16 @@ it("ivld.v20210903.DeleteMedia", async function () {
     }
 })
 
+it("ivld.v20210903.ModifyCallback", async function () {
+    try {
+       const data = await client.ModifyCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ivld.v20210903.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
@@ -211,6 +231,16 @@ it("ivld.v20210903.CreateCustomGroup", async function () {
 it("ivld.v20210903.DescribeCustomCategories", async function () {
     try {
        const data = await client.DescribeCustomCategories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ivld.v20210903.DeleteTask", async function () {
+    try {
+       const data = await client.DeleteTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

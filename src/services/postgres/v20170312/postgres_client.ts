@@ -22,10 +22,12 @@ import {
   SetAutoRenewFlagRequest,
   DescribeDatabasesRequest,
   DescribeDBXlogsRequest,
+  CreateReadOnlyGroupNetworkAccessRequest,
   DescribeAccountsRequest,
   DeleteReadOnlyGroupResponse,
   CreateInstancesRequest,
   SpecItemInfo,
+  CreateDBInstanceNetworkAccessResponse,
   DescribeAvailableRecoveryTimeResponse,
   ModifyDBInstanceReadOnlyGroupResponse,
   CloneDBInstanceRequest,
@@ -43,6 +45,7 @@ import {
   DescribeRegionsResponse,
   DBInstanceNetInfo,
   ModifyDBInstanceDeploymentRequest,
+  DeleteReadOnlyGroupNetworkAccessRequest,
   ZoneInfo,
   InquiryPriceCreateDBInstancesRequest,
   NormalQueryItem,
@@ -58,6 +61,7 @@ import {
   DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
   InquiryPriceCreateDBInstancesResponse,
+  CreateDBInstanceNetworkAccessRequest,
   ModifySwitchTimePeriodResponse,
   DisIsolateDBInstancesRequest,
   ServerlessDBInstanceNetInfo,
@@ -75,6 +79,7 @@ import {
   ModifyDBInstancesProjectResponse,
   ReadOnlyGroup,
   PgDeal,
+  DeleteReadOnlyGroupNetworkAccessResponse,
   DescribeDBErrlogsRequest,
   DestroyDBInstanceRequest,
   ServerlessDBAccount,
@@ -90,6 +95,8 @@ import {
   DescribeSlowQueryListResponse,
   ServerlessDBInstance,
   CreateReadOnlyGroupRequest,
+  CreateReadOnlyGroupNetworkAccessResponse,
+  DescribeServerlessDBInstancesResponse,
   DescribeParamsEventResponse,
   CloseServerlessDBExtranetAccessResponse,
   EventItem,
@@ -105,9 +112,10 @@ import {
   InquiryPriceRenewDBInstanceResponse,
   DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
-  DescribeServerlessDBInstancesResponse,
+  DBBackup,
   IsolateDBInstancesRequest,
   InitDBInstancesRequest,
+  DeleteDBInstanceNetworkAccessRequest,
   DBInstance,
   DescribeProductConfigResponse,
   DeleteReadOnlyGroupRequest,
@@ -127,16 +135,16 @@ import {
   CreateServerlessDBInstanceResponse,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
-  ModifyAccountRemarkRequest,
   CloseDBExtranetAccessRequest,
   ModifyBackupPlanResponse,
   CreateServerlessDBInstanceRequest,
   InquiryPriceRenewDBInstanceRequest,
   CreateReadOnlyGroupResponse,
+  DeleteDBInstanceNetworkAccessResponse,
   DeleteServerlessDBInstanceRequest,
   ModifyReadOnlyGroupConfigResponse,
   AccountInfo,
-  DBBackup,
+  ModifyAccountRemarkRequest,
   DescribeDBErrlogsResponse,
   ModifyBackupPlanRequest,
   ParamEntry,
@@ -176,6 +184,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 可对RO组进行网络的添加操作。
+   */
+  async CreateReadOnlyGroupNetworkAccess(
+    req: CreateReadOnlyGroupNetworkAccessRequest,
+    cb?: (error: string, rep: CreateReadOnlyGroupNetworkAccessResponse) => void
+  ): Promise<CreateReadOnlyGroupNetworkAccessResponse> {
+    return this.request("CreateReadOnlyGroupNetworkAccess", req, cb)
+  }
+
+  /**
    * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
    */
   async ModifyDBInstancesProject(
@@ -193,6 +211,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrdersResponse) => void
   ): Promise<DescribeOrdersResponse> {
     return this.request("DescribeOrders", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
+   */
+  async DescribeDBInstances(
+    req: DescribeDBInstancesRequest,
+    cb?: (error: string, rep: DescribeDBInstancesResponse) => void
+  ): Promise<DescribeDBInstancesResponse> {
+    return this.request("DescribeDBInstances", req, cb)
+  }
+
+  /**
+   * 可对RO组进行网络的删除操作。
+   */
+  async DeleteReadOnlyGroupNetworkAccess(
+    req: DeleteReadOnlyGroupNetworkAccessRequest,
+    cb?: (error: string, rep: DeleteReadOnlyGroupNetworkAccessResponse) => void
+  ): Promise<DeleteReadOnlyGroupNetworkAccessResponse> {
+    return this.request("DeleteReadOnlyGroupNetworkAccess", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeDBInstance）用于升级实例配置。
+   */
+  async UpgradeDBInstance(
+    req: UpgradeDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
+  ): Promise<UpgradeDBInstanceResponse> {
+    return this.request("UpgradeDBInstance", req, cb)
   }
 
   /**
@@ -296,13 +344,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例可修改参数列表
+   * 本接口（OpenDBExtranetAccess）用于开通外网。
    */
-  async DescribeDBInstanceParameters(
-    req: DescribeDBInstanceParametersRequest,
-    cb?: (error: string, rep: DescribeDBInstanceParametersResponse) => void
-  ): Promise<DescribeDBInstanceParametersResponse> {
-    return this.request("DescribeDBInstanceParameters", req, cb)
+  async OpenDBExtranetAccess(
+    req: OpenDBExtranetAccessRequest,
+    cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
+  ): Promise<OpenDBExtranetAccessResponse> {
+    return this.request("OpenDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 可对实例进行网络的删除操作。
+   */
+  async DeleteDBInstanceNetworkAccess(
+    req: DeleteDBInstanceNetworkAccessRequest,
+    cb?: (error: string, rep: DeleteDBInstanceNetworkAccessResponse) => void
+  ): Promise<DeleteDBInstanceNetworkAccessResponse> {
+    return this.request("DeleteDBInstanceNetworkAccess", req, cb)
   }
 
   /**
@@ -386,13 +444,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDBInstance）用于升级实例配置。
+   * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
    */
-  async UpgradeDBInstance(
-    req: UpgradeDBInstanceRequest,
-    cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
-  ): Promise<UpgradeDBInstanceResponse> {
-    return this.request("UpgradeDBInstance", req, cb)
+  async InquiryPriceUpgradeDBInstance(
+    req: InquiryPriceUpgradeDBInstanceRequest,
+    cb?: (error: string, rep: InquiryPriceUpgradeDBInstanceResponse) => void
+  ): Promise<InquiryPriceUpgradeDBInstanceResponse> {
+    return this.request("InquiryPriceUpgradeDBInstance", req, cb)
   }
 
   /**
@@ -426,13 +484,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
+   * 获取实例可修改参数列表
    */
-  async DescribeDBInstances(
-    req: DescribeDBInstancesRequest,
-    cb?: (error: string, rep: DescribeDBInstancesResponse) => void
-  ): Promise<DescribeDBInstancesResponse> {
-    return this.request("DescribeDBInstances", req, cb)
+  async DescribeDBInstanceParameters(
+    req: DescribeDBInstanceParametersRequest,
+    cb?: (error: string, rep: DescribeDBInstanceParametersResponse) => void
+  ): Promise<DescribeDBInstanceParametersResponse> {
+    return this.request("DescribeDBInstanceParameters", req, cb)
   }
 
   /**
@@ -453,16 +511,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartDBInstanceResponse) => void
   ): Promise<RestartDBInstanceResponse> {
     return this.request("RestartDBInstance", req, cb)
-  }
-
-  /**
-   * 本接口（OpenDBExtranetAccess）用于开通外网。
-   */
-  async OpenDBExtranetAccess(
-    req: OpenDBExtranetAccessRequest,
-    cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void
-  ): Promise<OpenDBExtranetAccessResponse> {
-    return this.request("OpenDBExtranetAccess", req, cb)
   }
 
   /**
@@ -496,13 +544,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
+   * 可对实例进行网络的添加操作。
    */
-  async InquiryPriceUpgradeDBInstance(
-    req: InquiryPriceUpgradeDBInstanceRequest,
-    cb?: (error: string, rep: InquiryPriceUpgradeDBInstanceResponse) => void
-  ): Promise<InquiryPriceUpgradeDBInstanceResponse> {
-    return this.request("InquiryPriceUpgradeDBInstance", req, cb)
+  async CreateDBInstanceNetworkAccess(
+    req: CreateDBInstanceNetworkAccessRequest,
+    cb?: (error: string, rep: CreateDBInstanceNetworkAccessResponse) => void
+  ): Promise<CreateDBInstanceNetworkAccessResponse> {
+    return this.request("CreateDBInstanceNetworkAccess", req, cb)
   }
 
   /**

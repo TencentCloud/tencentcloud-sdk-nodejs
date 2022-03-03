@@ -576,13 +576,14 @@ export interface DescribeDomainsRequest {
   Limit: number
 
   /**
-      * 搜索的类型有：none，tags，grade，brand，code，hash，limit。
+      * 搜索的类型有：none，tags，grade，brand，code，hash，limit，domain。
 选tags，入参请填Tag，
 选grade，入参请填Grade，
 选brand，入参请填Brand，
 选code，入参请填Code，
 选hash，入参请填Hash
 选limit，标识只返回数量信息
+选domain，入参请填Domain
       */
   SearchType: string
 
@@ -620,4 +621,9 @@ export interface DescribeDomainsRequest {
    * 搜索图标值
    */
   Status?: string
+
+  /**
+   * 搜索域名
+   */
+  Domain?: string
 }

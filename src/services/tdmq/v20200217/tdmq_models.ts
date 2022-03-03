@@ -367,7 +367,7 @@ export interface CreateAMQPExchangeRequest {
   VHosts: Array<string>
 
   /**
-   * 交换机类型，可选值为Direct, Fanout, Topic
+   * 交换机类型，可选值为Direct, Fanout, Topic, x-delayed-message
    */
   Type: string
 
@@ -385,6 +385,11 @@ export interface CreateAMQPExchangeRequest {
    * 备用交换机名称
    */
   AlternateExchange?: string
+
+  /**
+   * 延迟交换机类型，可选值为Direct, Fanout, Topic, 不允许为x-delayed-message
+   */
+  DelayedType?: string
 }
 
 /**
@@ -2070,6 +2075,11 @@ export interface DescribeAMQPVHostsRequest {
    * 按名称搜索
    */
   NameKeyword?: string
+
+  /**
+   * VHostId 列表过滤
+   */
+  VHostIdList?: Array<string>
 }
 
 /**
@@ -2201,6 +2211,12 @@ export interface AMQPVHost {
    * 密码
    */
   Password: string
+
+  /**
+      * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
 }
 
 /**
@@ -4288,6 +4304,24 @@ export interface AMQPExchange {
    * 是否为内部Exchange(以amq.前缀开头的)
    */
   Internal: boolean
+
+  /**
+      * 备用Exchange名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlternateExchange: string
+
+  /**
+      * 备用Exchange是否删除标识: true(已删除)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlternateExchangeDeleteMark: boolean
+
+  /**
+      * 延迟Exchange的类别，为枚举类型:Direct, Fanout, Topic
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DelayType: string
 }
 
 /**
@@ -6201,6 +6235,12 @@ export interface AMQPClusterDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tag>
+
+  /**
+      * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
 }
 
 /**

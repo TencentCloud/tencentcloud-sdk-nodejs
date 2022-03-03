@@ -222,6 +222,11 @@ export interface ModifyBundle {
       * 套餐信息。
       */
     Bundle: Bundle;
+    /**
+      * 不支持套餐变更原因信息。变更套餐状态为"AVAILABLE"时, 该信息为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NotSupportModifyMessage: string;
 }
 /**
  * DetachCcn返回参数结构体

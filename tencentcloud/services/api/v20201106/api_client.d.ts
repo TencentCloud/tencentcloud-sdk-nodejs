@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeZonesRequest, DescribeZonesResponse, DescribeRegionsResponse, DescribeRegionsRequest } from "./api_models";
+import { DescribeProductsRequest, DescribeProductsResponse, DescribeZonesRequest, DescribeZonesResponse, DescribeRegionsResponse, DescribeRegionsRequest } from "./api_models";
 /**
  * api client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 本接口(DescribeProducts)用于查询各个支持地域列表查询的产品信息。
+     */
+    DescribeProducts(req: DescribeProductsRequest, cb?: (error: string, rep: DescribeProductsResponse) => void): Promise<DescribeProductsResponse>;
     /**
      * 本接口(DescribeRegions)用于查询各个产品支持地域信息。
      */

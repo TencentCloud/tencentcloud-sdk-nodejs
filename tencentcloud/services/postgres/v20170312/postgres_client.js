@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("postgres.tencentcloudapi.com", "2017-03-12", clientConfig);
     }
     /**
+     * 可对RO组进行网络的添加操作。
+     */
+    async CreateReadOnlyGroupNetworkAccess(req, cb) {
+        return this.request("CreateReadOnlyGroupNetworkAccess", req, cb);
+    }
+    /**
      * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
      */
     async ModifyDBInstancesProject(req, cb) {
@@ -38,6 +44,24 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOrders(req, cb) {
         return this.request("DescribeOrders", req, cb);
+    }
+    /**
+     * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
+     */
+    async DescribeDBInstances(req, cb) {
+        return this.request("DescribeDBInstances", req, cb);
+    }
+    /**
+     * 可对RO组进行网络的删除操作。
+     */
+    async DeleteReadOnlyGroupNetworkAccess(req, cb) {
+        return this.request("DeleteReadOnlyGroupNetworkAccess", req, cb);
+    }
+    /**
+     * 本接口（UpgradeDBInstance）用于升级实例配置。
+     */
+    async UpgradeDBInstance(req, cb) {
+        return this.request("UpgradeDBInstance", req, cb);
     }
     /**
      * 批量修改参数
@@ -100,10 +124,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateDBInstances", req, cb);
     }
     /**
-     * 获取实例可修改参数列表
+     * 本接口（OpenDBExtranetAccess）用于开通外网。
      */
-    async DescribeDBInstanceParameters(req, cb) {
-        return this.request("DescribeDBInstanceParameters", req, cb);
+    async OpenDBExtranetAccess(req, cb) {
+        return this.request("OpenDBExtranetAccess", req, cb);
+    }
+    /**
+     * 可对实例进行网络的删除操作。
+     */
+    async DeleteDBInstanceNetworkAccess(req, cb) {
+        return this.request("DeleteDBInstanceNetworkAccess", req, cb);
     }
     /**
      * 本接口 (ModifyBackupPlan) 用于实例备份计划的修改，默认是在每天的凌晨开始全量备份，备份保留时长是7天。可以根据此接口指定时间进行实例的备份。
@@ -154,10 +184,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
-     * 本接口（UpgradeDBInstance）用于升级实例配置。
+     * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
      */
-    async UpgradeDBInstance(req, cb) {
-        return this.request("UpgradeDBInstance", req, cb);
+    async InquiryPriceUpgradeDBInstance(req, cb) {
+        return this.request("InquiryPriceUpgradeDBInstance", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceDeployment）用于修改节点可用区部署方式，仅支持主实例。
@@ -178,10 +208,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServerlessDBInstance", req, cb);
     }
     /**
-     * 本接口 (DescribeDBInstances) 用于查询一个或多个实例的详细信息。
+     * 获取实例可修改参数列表
      */
-    async DescribeDBInstances(req, cb) {
-        return this.request("DescribeDBInstances", req, cb);
+    async DescribeDBInstanceParameters(req, cb) {
+        return this.request("DescribeDBInstanceParameters", req, cb);
     }
     /**
      * 本接口 (DescribeZones) 用于查询支持的可用区信息。
@@ -194,12 +224,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RestartDBInstance(req, cb) {
         return this.request("RestartDBInstance", req, cb);
-    }
-    /**
-     * 本接口（OpenDBExtranetAccess）用于开通外网。
-     */
-    async OpenDBExtranetAccess(req, cb) {
-        return this.request("OpenDBExtranetAccess", req, cb);
     }
     /**
      * 本接口（IsolateDBInstances）用于隔离实例
@@ -220,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitDBInstances", req, cb);
     }
     /**
-     * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
+     * 可对实例进行网络的添加操作。
      */
-    async InquiryPriceUpgradeDBInstance(req, cb) {
-        return this.request("InquiryPriceUpgradeDBInstance", req, cb);
+    async CreateDBInstanceNetworkAccess(req, cb) {
+        return this.request("CreateDBInstanceNetworkAccess", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceSpec）用于调整实例规格，包括内存、磁盘。

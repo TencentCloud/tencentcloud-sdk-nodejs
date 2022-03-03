@@ -18,6 +18,16 @@ const client = new tencentcloud.postgres.v20170312.Client({
 })
 describe("postgres.v20170312.test.js", function () {
 
+it("postgres.v20170312.CreateReadOnlyGroupNetworkAccess", async function () {
+    try {
+       const data = await client.CreateReadOnlyGroupNetworkAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.ModifyDBInstancesProject", async function () {
     try {
        const data = await client.ModifyDBInstancesProject({})
@@ -31,6 +41,36 @@ it("postgres.v20170312.ModifyDBInstancesProject", async function () {
 it("postgres.v20170312.DescribeOrders", async function () {
     try {
        const data = await client.DescribeOrders({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeDBInstances", async function () {
+    try {
+       const data = await client.DescribeDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DeleteReadOnlyGroupNetworkAccess", async function () {
+    try {
+       const data = await client.DeleteReadOnlyGroupNetworkAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.UpgradeDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +178,19 @@ it("postgres.v20170312.InquiryPriceCreateDBInstances", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeDBInstanceParameters", async function () {
+it("postgres.v20170312.OpenDBExtranetAccess", async function () {
     try {
-       const data = await client.DescribeDBInstanceParameters({})
+       const data = await client.OpenDBExtranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DeleteDBInstanceNetworkAccess", async function () {
+    try {
+       const data = await client.DeleteDBInstanceNetworkAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +278,9 @@ it("postgres.v20170312.ModifyDBInstanceName", async function () {
     }
 })
 
-it("postgres.v20170312.UpgradeDBInstance", async function () {
+it("postgres.v20170312.InquiryPriceUpgradeDBInstance", async function () {
     try {
-       const data = await client.UpgradeDBInstance({})
+       const data = await client.InquiryPriceUpgradeDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +318,9 @@ it("postgres.v20170312.CreateServerlessDBInstance", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeDBInstances", async function () {
+it("postgres.v20170312.DescribeDBInstanceParameters", async function () {
     try {
-       const data = await client.DescribeDBInstances({})
+       const data = await client.DescribeDBInstanceParameters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,16 +341,6 @@ it("postgres.v20170312.DescribeZones", async function () {
 it("postgres.v20170312.RestartDBInstance", async function () {
     try {
        const data = await client.RestartDBInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("postgres.v20170312.OpenDBExtranetAccess", async function () {
-    try {
-       const data = await client.OpenDBExtranetAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +378,9 @@ it("postgres.v20170312.InitDBInstances", async function () {
     }
 })
 
-it("postgres.v20170312.InquiryPriceUpgradeDBInstance", async function () {
+it("postgres.v20170312.CreateDBInstanceNetworkAccess", async function () {
     try {
-       const data = await client.InquiryPriceUpgradeDBInstance({})
+       const data = await client.CreateDBInstanceNetworkAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

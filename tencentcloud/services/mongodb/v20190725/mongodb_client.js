@@ -210,5 +210,11 @@ class Client extends abstract_client_1.AbstractClient {
     async InquirePriceRenewDBInstances(req, cb) {
         return this.request("InquirePriceRenewDBInstances", req, cb);
     }
+    /**
+     * 修改实例绑定的安全组
+     */
+    async ModifyDBInstanceSecurityGroup(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroup", req, cb);
+    }
 }
 exports.Client = Client;
