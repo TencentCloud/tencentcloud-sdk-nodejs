@@ -124,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeACL", req, cb);
     }
     /**
-     * 获取主题列表详情（仅控制台调用）
+     * 取消授权token
      */
-    async DescribeTopicDetail(req, cb) {
-        return this.request("DescribeTopicDetail", req, cb);
+    async CancelAuthorizationToken(req, cb) {
+        return this.request("CancelAuthorizationToken", req, cb);
     }
     /**
      * 创建实例(预付费包年包月)
@@ -176,6 +176,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteUser(req, cb) {
         return this.request("DeleteUser", req, cb);
+    }
+    /**
+     * 创建最高权限的token
+     */
+    async CreateToken(req, cb) {
+        return this.request("CreateToken", req, cb);
+    }
+    /**
+     * 获取主题列表详情（仅控制台调用）
+     */
+    async DescribeTopicDetail(req, cb) {
+        return this.request("DescribeTopicDetail", req, cb);
     }
     /**
      * 删除ACL
@@ -249,6 +261,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeGroupOffsets(req, cb) {
         return this.request("DescribeGroupOffsets", req, cb);
+    }
+    /**
+     * 给实例授权token
+     */
+    async AuthorizeToken(req, cb) {
+        return this.request("AuthorizeToken", req, cb);
     }
     /**
      * 接口请求域名：https://ckafka.tencentcloudapi.com

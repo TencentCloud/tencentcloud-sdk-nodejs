@@ -378,6 +378,11 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AsrUrl: string;
+    /**
+      * 录音转存第三方COS地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomRecordURL: string;
 }
 /**
  * CreateUserSig请求参数结构体
@@ -1293,6 +1298,11 @@ export interface ServeParticipant {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SkillGroupName: string;
+    /**
+      * 录音转存第三方COS地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomRecordURL: string;
 }
 /**
  * DescribeTelCdr返回参数结构体

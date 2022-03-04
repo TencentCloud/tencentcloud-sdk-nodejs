@@ -50,6 +50,7 @@ import {
   QueryOpenBankDownLoadUrlResult,
   BindAccountResponse,
   CreateInvoiceResultData,
+  FileItem,
   UnbindOpenBankExternalSubMerchantBankAccountRequest,
   CreateRedInvoiceItem,
   AddMerchantResult,
@@ -91,6 +92,7 @@ import {
   BindOpenBankExternalSubMerchantBankAccountResponse,
   QueryPayerinfoResult,
   QueryInvoiceResultData,
+  FundsTransactionItem,
   AddMerchantResponse,
   RegisterBillResponse,
   ApplyReWithdrawalRequest,
@@ -167,6 +169,7 @@ import {
   RevokeRechargeByThirdPayResponse,
   CreateAcctRequest,
   CreateAgentTaxPaymentInfosRequest,
+  QueryReconciliationFileApplyInfoRequest,
   QueryBillDownloadURLResponse,
   QueryMerchantBalanceRequest,
   QueryOutwardOrderResult,
@@ -184,8 +187,9 @@ import {
   CreateInvoiceV2Request,
   UploadExternalAnchorInfoResponse,
   UploadTaxListResponse,
+  QueryReconciliationFileApplyInfoResponse,
   BindRelateAcctUnionPayRequest,
-  FileItem,
+  QueryFundsTransactionDetailsResult,
   QueryItem,
   Paging,
   RegisterBehaviorResponse,
@@ -198,6 +202,7 @@ import {
   RechargeMemberThirdPayResponse,
   QueryExceedingInfoData,
   QueryExchangerateResult,
+  QueryMemberTransactionDetailsRequest,
   QueryBatchPaymentResultRequest,
   BindAcctResponse,
   UploadExternalAnchorInfoRequest,
@@ -212,7 +217,7 @@ import {
   ApplyOutwardOrderRequest,
   AgentTaxPaymentBatch,
   SyncContractDataRequest,
-  QueryAgentStatementsRequest,
+  QueryRefundRequest,
   CreateCustAcctIdRequest,
   DistributeApplyResponse,
   CreateBatchPaymentData,
@@ -305,6 +310,8 @@ import {
   TranItem,
   DistributeQueryReceiverResponse,
   QueryTransferResultRequest,
+  QueryReconciliationFileApplyInfoResult,
+  ApplyReconciliationFileResult,
   QueryOpenBankExternalSubMerchantBankAccountResponse,
   CreateRedInvoiceV2Request,
   CreateOrderResponse,
@@ -313,6 +320,7 @@ import {
   TransferItem,
   OrderItem,
   RefundMemberTransactionRequest,
+  QueryFundsTransactionDetailsRequest,
   BindOpenBankExternalSubMerchantBankAccountResult,
   CheckAmountRequest,
   CreateMerchantResultData,
@@ -349,7 +357,7 @@ import {
   DownloadOrgFileRequest,
   ContractSyncInfo,
   Order,
-  QueryRefundRequest,
+  QueryAgentStatementsRequest,
   CreateExternalAnchorData,
   BindOpenBankExternalSubMerchantBankAccountRequest,
   OpenBankProfitShareInfo,
@@ -362,6 +370,7 @@ import {
   ViewMerchantResponse,
   AddShopResponse,
   UploadFileResponse,
+  QueryMemberTransactionDetailsResult,
   CreateMerchantResult,
   RefundResponse,
   CreateTransferBatchRequest,
@@ -372,6 +381,7 @@ import {
   ModifyBindedAccountRequest,
   WithdrawCashMembershipResponse,
   CreateSinglePaymentRequest,
+  MemberTransactionItem,
   DistributeReceiverResult,
   DistributeApplyRequest,
   ViewShopRequest,
@@ -383,12 +393,14 @@ import {
   ApplyPayerinfoData,
   CheckAcctRequest,
   CreateAgentTaxPaymentInfosResponse,
+  ApplyReconciliationFileResponse,
   ContractPayListResult,
   CreateInvoiceResult,
   DescribeOrderStatusRequest,
-  CloseOpenBankPaymentOrderResult,
+  ChannelContractInfo,
   CreateAnchorResponse,
   MerchantRiskInfo,
+  QueryMemberTransactionDetailsResponse,
   QueryOrderStatusResult,
   QueryAgentTaxPaymentBatchResponse,
   DeleteAgentTaxPaymentInfosResponse,
@@ -409,6 +421,7 @@ import {
   PayOrderResult,
   CreateCustAcctIdResponse,
   QueryAgentTaxPaymentBatchRequest,
+  ApplyReconciliationFileRequest,
   RegisterBillSupportWithdrawResponse,
   QueryOpenBankBindExternalSubMerchantBankAccountResponse,
   AssignmentData,
@@ -417,6 +430,7 @@ import {
   CreateInvoiceRequest,
   AnchorContractInfo,
   QueryMerchantBalanceResult,
+  QueryFundsTransactionDetailsResponse,
   ChannelReturnContractInfo,
   CreateRedInvoiceV2Response,
   DistributeMultiApplyResult,
@@ -439,7 +453,7 @@ import {
   QueryOpenBankExternalSubMerchantBankAccountResult,
   CreateOpenBankPaymentOrderResponse,
   DeduceQuotaResponse,
-  ChannelContractInfo,
+  CloseOpenBankPaymentOrderResult,
   CreateBatchPaymentRecipient,
   DeleteAgentTaxPaymentInfoResponse,
   CreateSinglePayRequest,
@@ -483,6 +497,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DistributeAccreditQueryResponse) => void
   ): Promise<DistributeAccreditQueryResponse> {
     return this.request("DistributeAccreditQuery", req, cb)
+  }
+
+  /**
+   * 聚鑫-查询会员间交易信息列表
+   */
+  async QueryMemberTransactionDetails(
+    req: QueryMemberTransactionDetailsRequest,
+    cb?: (error: string, rep: QueryMemberTransactionDetailsResponse) => void
+  ): Promise<QueryMemberTransactionDetailsResponse> {
+    return this.request("QueryMemberTransactionDetails", req, cb)
   }
 
   /**
@@ -816,6 +840,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 商户解除绑定的提现银行卡
+   */
+  async UnBindAcct(
+    req: UnBindAcctRequest,
+    cb?: (error: string, rep: UnBindAcctResponse) => void
+  ): Promise<UnBindAcctResponse> {
+    return this.request("UnBindAcct", req, cb)
+  }
+
+  /**
    * 查询充值明细接口
    */
   async DescribeChargeDetail(
@@ -1046,13 +1080,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 商户解除绑定的提现银行卡
+   * 聚鑫-申请对账文件
    */
-  async UnBindAcct(
-    req: UnBindAcctRequest,
-    cb?: (error: string, rep: UnBindAcctResponse) => void
-  ): Promise<UnBindAcctResponse> {
-    return this.request("UnBindAcct", req, cb)
+  async ApplyReconciliationFile(
+    req: ApplyReconciliationFileRequest,
+    cb?: (error: string, rep: ApplyReconciliationFileResponse) => void
+  ): Promise<ApplyReconciliationFileResponse> {
+    return this.request("ApplyReconciliationFile", req, cb)
+  }
+
+  /**
+   * 聚鑫-查询对账文件申请结果
+   */
+  async QueryReconciliationFileApplyInfo(
+    req: QueryReconciliationFileApplyInfoRequest,
+    cb?: (error: string, rep: QueryReconciliationFileApplyInfoResponse) => void
+  ): Promise<QueryReconciliationFileApplyInfoResponse> {
+    return this.request("QueryReconciliationFileApplyInfo", req, cb)
   }
 
   /**
@@ -1307,6 +1351,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryAcctBindingResponse) => void
   ): Promise<QueryAcctBindingResponse> {
     return this.request("QueryAcctBinding", req, cb)
+  }
+
+  /**
+   * 聚鑫-查询会员资金交易信息列表
+   */
+  async QueryFundsTransactionDetails(
+    req: QueryFundsTransactionDetailsRequest,
+    cb?: (error: string, rep: QueryFundsTransactionDetailsResponse) => void
+  ): Promise<QueryFundsTransactionDetailsResponse> {
+    return this.request("QueryFundsTransactionDetails", req, cb)
   }
 
   /**
@@ -1715,7 +1769,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云支付-T查询已添加分账接收方接口
+   * 云支付-查询已添加分账接收方接口
    */
   async DistributeQueryReceiver(
     req: DistributeQueryReceiverRequest,

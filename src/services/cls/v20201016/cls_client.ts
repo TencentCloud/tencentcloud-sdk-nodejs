@@ -837,7 +837,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建日志下载任务
+   * 本接口用于创建日志下载任务，导出原始日志
    */
   async CreateExport(
     req: CreateExportRequest,

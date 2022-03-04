@@ -1654,17 +1654,17 @@ export interface LogsetInfo {
  */
 export interface CreateExportRequest {
     /**
-      * 日志主题
+      * 日志主题ID
       */
     TopicId: string;
     /**
-      * 日志导出检索语句
-      */
-    Query: string;
-    /**
-      * 日志导出数量,  最大值1000万
+      * 日志导出数量,  最大值5000万
       */
     Count: number;
+    /**
+      * 日志导出检索语句，不支持<a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>
+      */
+    Query: string;
     /**
       * 日志导出起始时间，毫秒时间戳
       */

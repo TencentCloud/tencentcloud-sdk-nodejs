@@ -382,6 +382,10 @@ export interface UploadOrgFileRequest {
       */
     OpenId: string;
     /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
+    /**
       * 存储区域（0私密区，1公共区），请严格按文件要求，上传到不同的区域
       */
     Storage: string;
@@ -397,10 +401,6 @@ export interface UploadOrgFileRequest {
       * 文件扩展名（png,jpg,gif）
       */
     FileExtension: string;
-    /**
-      * 收单系统分配的密钥
-      */
-    OpenKey: string;
     /**
       * 沙箱环境填sandbox，正式环境不填
       */
@@ -741,11 +741,11 @@ __PROCESSING__: 进件中
  */
 export interface RefundTlinxOrderRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -1005,6 +1005,31 @@ export interface CreateInvoiceResultData {
       * 业务开票号
       */
     OrderSn: string;
+}
+/**
+ * 对账文件信息
+ */
+export interface FileItem {
+    /**
+      * STRING(256)，文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileName: string;
+    /**
+      * STRING(120)，随机密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RandomPassword: string;
+    /**
+      * STRING(512)，文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FilePath: string;
+    /**
+      * STRING(64)，提取码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DrawCode: string;
 }
 /**
  * UnbindOpenBankExternalSubMerchantBankAccount请求参数结构体
@@ -1826,21 +1851,17 @@ export interface RevokeMemberRechargeThirdPayResponse {
  */
 export interface DistributeAccreditTlinxRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
+    /**
+      * 使用门店OpenKey
+      */
+    OpenKey: string;
     /**
       * 验证方式，传1手机验证(验证码时效60S)传2结算卡验证(时效6小时)，多种方式用逗号隔开
       */
     AuthType: string;
-    /**
-      * 收单系统分配的密钥
-      */
-    OpenKey: string;
-    /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
     /**
       * 分账比例（500=5%）不传默认百分之10
       */
@@ -1849,6 +1870,10 @@ export interface DistributeAccreditTlinxRequest {
       * 营业执照商户全称
       */
     FullName?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * QueryContractRelateShop请求参数结构体
@@ -1917,29 +1942,41 @@ export interface QueryExceedingInfoResponse {
  */
 export interface AddContractRequest {
     /**
-      * 签约扣率百分比（如：0.32）
+      * 收单系统分配的开放ID
       */
-    Fee: string;
+    OpenId: string;
+    /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
     /**
       * 机构合同主键（系统有唯一性校验），建议使用合同表的主键ID，防止重复添加合同
       */
     OutContractId: string;
     /**
-      * 封顶值（分为单位，无封顶填0）
+      * 合同编号（系统有唯一性校验）
       */
-    PaymentClassificationLimit: string;
-    /**
-      * 联系人电话
-      */
-    ContactTelephone: string;
+    Code: string;
     /**
       * 支付方式编号
       */
     PaymentId: string;
     /**
-      * 收单系统分配的密钥
+      * 支付方式行业分类编号
       */
-    OpenKey: string;
+    PaymentClassificationId: string;
+    /**
+      * 封顶值（分为单位，无封顶填0）
+      */
+    PaymentClassificationLimit: string;
+    /**
+      * 商户编号
+      */
+    MerchantNo: string;
+    /**
+      * 签约扣率百分比（如：0.32）
+      */
+    Fee: string;
     /**
       * 合同生效日期（yyyy-mm-dd）
       */
@@ -1957,45 +1994,69 @@ export interface AddContractRequest {
       */
     SignName: string;
     /**
-      * 收单系统分配的开放ID
-      */
-    OpenId: string;
-    /**
-      * 商户编号
-      */
-    MerchantNo: string;
-    /**
-      * 合同照片【私密区】
-      */
-    PictureOne: string;
-    /**
-      * 联系人
-      */
-    Contact: string;
-    /**
       * 合同签署日期（yyyy-mm-dd）
       */
     SignDate: string;
-    /**
-      * 合同编号（系统有唯一性校验）
-      */
-    Code: string;
     /**
       * 是否自动续签（1是，0否）
       */
     AutoSign: string;
     /**
-      * 支付方式行业分类编号
+      * 联系人
       */
-    PaymentClassificationId: string;
+    Contact: string;
+    /**
+      * 联系人电话
+      */
+    ContactTelephone: string;
+    /**
+      * 合同照片【私密区】
+      */
+    PictureOne: string;
+    /**
+      * 合同照片【私密区】
+      */
+    PictureTwo?: string;
+    /**
+      * 渠道扩展字段，json格式
+      */
+    ChannelExtJson?: string;
     /**
       * 沙箱环境填sandbox，正式环境不填
       */
     Profile?: string;
     /**
-      * 合同照片【私密区】
+      * 合同选项1（不同支付方式规则不一样，请以支付方式规定的格式传值）
       */
-    PictureTwo?: string;
+    PaymentOptionOne?: string;
+    /**
+      * 合同选项2（不同支付方式规则不一样，请以支付方式规定的格式传值）
+      */
+    PaymentOptionTwo?: string;
+    /**
+      * 合同选项3（不同支付方式规则不一样，请以支付方式规定的格式传值）
+      */
+    PaymentOptionThree?: string;
+    /**
+      * 合同选项4（不同支付方式规则不一样，请以支付方式规定的格式传值）
+      */
+    PaymentOptionFour?: string;
+    /**
+      * 合同证书选项1（不同支付方式规则不一样，请以支付方式规定的格式传值）
+      */
+    PaymentOptionFive?: string;
+    /**
+      * 合同证书选项2（不同支付方式规则不一样，请以支付方式规定的格式传值）
+      */
+    PaymentOptionSix?: string;
+    /**
+      * 合同选项5（不同支付方式规则不一样，请以支付方式规定的格式传值）
+      */
+    PaymentOptionSeven?: string;
+    /**
+      * 合同选项6（不同支付方式规则不一样，请以支付方式规定的格式传值）
+      */
+    PaymentOptionOther?: string;
     /**
       * 合同选项8
       */
@@ -2004,42 +2065,6 @@ export interface AddContractRequest {
       * 合同选项7（不同支付方式规则不一样，请以支付方式规定的格式传值）
       */
     PaymentOptionNine?: string;
-    /**
-      * 合同选项6（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionOther?: string;
-    /**
-      * 合同证书选项1（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionFive?: string;
-    /**
-      * 合同选项4（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionFour?: string;
-    /**
-      * 合同选项5（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionSeven?: string;
-    /**
-      * 合同证书选项2（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionSix?: string;
-    /**
-      * 合同选项1（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionOne?: string;
-    /**
-      * 合同选项3（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionThree?: string;
-    /**
-      * 合同选项2（不同支付方式规则不一样，请以支付方式规定的格式传值）
-      */
-    PaymentOptionTwo?: string;
-    /**
-      * 渠道扩展字段，json格式
-      */
-    ChannelExtJson?: string;
 }
 /**
  * CreateAcct返回参数结构体
@@ -2063,11 +2088,11 @@ export interface CreateAcctResponse {
  */
 export interface DistributeAddReceiverRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -2075,13 +2100,13 @@ export interface DistributeAddReceiverRequest {
       */
     MerchantNo: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
       * 备注
       */
     Remark?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * 查询汇率数据
@@ -2258,6 +2283,73 @@ export interface QueryInvoiceResultData {
     ImageUrl: string;
 }
 /**
+ * 会员资金交易明细信息
+ */
+export interface FundsTransactionItem {
+    /**
+      * 资金交易类型。
+__1__：提现/退款
+__2__：清分/充值
+      */
+    TransType: string;
+    /**
+      * 银行记账说明。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BankBookingMessage: string;
+    /**
+      * 交易状态。
+__0__：成功
+      */
+    TranStatus: string;
+    /**
+      * 业务方会员标识。
+_平安渠道为交易网会员代码_
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransNetMemberCode: string;
+    /**
+      * 子账户账号。
+_平安渠道为见证子账户的账号_
+      */
+    SubAccountNumber: string;
+    /**
+      * 子账户名称。
+_平安渠道为见证子账户的户名_
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAccountName: string;
+    /**
+      * 交易金额。
+      */
+    TransAmount: string;
+    /**
+      * 交易手续费。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransFee: string;
+    /**
+      * 交易日期，格式：yyyyMMdd。
+      */
+    TransDate: string;
+    /**
+      * 交易时间，格式：HHmmss。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransTime: string;
+    /**
+      * 银行系统流水号。
+_平安渠道为见证系统流水号_
+      */
+    BankSequenceNumber: string;
+    /**
+      * 备注。
+_平安渠道，如果是见证+收单的交易，返回交易订单号_
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+}
+/**
  * AddMerchant返回参数结构体
  */
 export interface AddMerchantResponse {
@@ -2385,10 +2477,6 @@ export interface ViewMerchantRequest {
       */
     OpenKey: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
       * 外部商户主键编号（MerchantNo或OutMerchantId必须传一个）
       */
     OutMerchantId?: string;
@@ -2396,6 +2484,10 @@ export interface ViewMerchantRequest {
       * 商户编号（MerchantNo或OutMerchantId必须传一个）
       */
     MerchantNo?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * QueryDownloadBillURL返回参数结构体
@@ -2985,11 +3077,11 @@ export interface CreateOpenBankMerchantResult {
  */
 export interface DistributeQueryReceiverRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -4387,11 +4479,11 @@ export interface QueryExceedingInfoResult {
  */
 export interface QueryMerchantPayWayListRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -4527,29 +4619,69 @@ export interface CreateInvoiceResponse {
  */
 export interface AddMerchantRequest {
     /**
-      * 法人姓名
+      * 收单系统分配的开放ID
       */
-    BossName: string;
-    /**
-      * 营业执照图片【私密区】（系统返回的图片路径），（小微商户不效验，随意传要有值，公司/个体户必传）
-      */
-    BusinessLicensePicture: string;
-    /**
-      * 招牌名称
-      */
-    BrandName: string;
+    OpenId: string;
     /**
       * 收单系统分配的密钥
       */
     OpenKey: string;
     /**
+      * 机构商户主键（系统有唯一性校验），建议使用商户表的主键ID，防止重复添加商户
+      */
+    OutMerchantId: string;
+    /**
+      * 商户名称，小微商户命名要符合“”商户_名字” （例如：商户_张三）
+      */
+    MerchantName: string;
+    /**
+      * 营业执照类型（1三证合一，2非三证合一）
+      */
+    BusinessLicenseType: string;
+    /**
+      * 营业执照编号（系统有唯一性校验），（小微商户不效验，随意传要有值，公司/个体户必传）
+      */
+    BusinessLicenseNo: string;
+    /**
+      * 营业执照图片【私密区】（系统返回的图片路径），（小微商户不效验，随意传要有值，公司/个体户必传）
+      */
+    BusinessLicensePicture: string;
+    /**
+      * 营业执照生效时间（yyyy-mm-dd），（小微商户不效验，随意传要有值，公司/个体户必传）
+      */
+    BusinessLicenseStartDate: string;
+    /**
       * 营业执照过期时间（yyyy-mm-dd），（小微商户不效验，随意传要有值，公司/个体户必传）
       */
     BusinessLicenseEndDate: string;
     /**
-      * 法人证件生效时间（yyyy-mm-dd）
+      * 行业分类编号列表（第一个分类编号为主分类，后面的为二级分类）
       */
-    BossStartDate: string;
+    ClassificationIds: Array<string>;
+    /**
+      * 招牌名称
+      */
+    BrandName: string;
+    /**
+      * 联系电话
+      */
+    Telephone: string;
+    /**
+      * 城市编号
+      */
+    CityId: string;
+    /**
+      * 详细地址，不含省市区县名称，长度需要大于5。
+      */
+    Address: string;
+    /**
+      * 营业时间，多个以小写逗号分开(9:00-12:00,13:00-18:00)
+      */
+    OpenHours: string;
+    /**
+      * 结算账户类型（2对私，1对公）
+      */
+    AccountType: string;
     /**
       * 清算联行号，开户行行号
       */
@@ -4559,205 +4691,165 @@ export interface AddMerchantRequest {
       */
     BankName: string;
     /**
-      * 营业执照类型（1三证合一，2非三证合一）
+      * 银行账号
       */
-    BusinessLicenseType: string;
-    /**
-      * 法人证件过期时间（yyyy-mm-dd）
-      */
-    BossEndDate: string;
-    /**
-      * 营业执照编号（系统有唯一性校验），（小微商户不效验，随意传要有值，公司/个体户必传）
-      */
-    BusinessLicenseNo: string;
-    /**
-      * 营业执照生效时间（yyyy-mm-dd），（小微商户不效验，随意传要有值，公司/个体户必传）
-      */
-    BusinessLicenseStartDate: string;
-    /**
-      * 法人证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）
-      */
-    BossIdType: string;
-    /**
-      * 详细地址，不含省市区县名称，长度需要大于5。
-      */
-    Address: string;
-    /**
-      * 法人证件国别/地区（中国CHN，香港HKG，澳门MAC，台湾CTN）
-      */
-    BossIdCountry: string;
-    /**
-      * 收单系统分配的开放ID
-      */
-    OpenId: string;
-    /**
-      * 商户名称，小微商户命名要符合“”商户_名字” （例如：商户_张三）
-      */
-    MerchantName: string;
-    /**
-      * 法人性别（1男，2女）
-      */
-    BossSex: string;
-    /**
-      * 行业分类编号列表（第一个分类编号为主分类，后面的为二级分类）
-      */
-    ClassificationIds: Array<string>;
-    /**
-      * 法人证件号码
-      */
-    BossIdNo: string;
-    /**
-      * 许可证图片【私密区】，（小微商户不效验，随意传要有值，公司/个体户必传）
-      */
-    LicencePicture: string;
-    /**
-      * 营业时间，多个以小写逗号分开(9:00-12:00,13:00-18:00)
-      */
-    OpenHours: string;
+    AccountNo: string;
     /**
       * 银行户名
       */
     AccountName: string;
     /**
-      * 银行账号
+      * 法人证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）
       */
-    AccountNo: string;
+    BossIdType: string;
     /**
-      * 结算账户类型（2对私，1对公）
+      * 法人证件号码
       */
-    AccountType: string;
+    BossIdNo: string;
     /**
-      * 联系电话
+      * 法人姓名
       */
-    Telephone: string;
+    BossName: string;
+    /**
+      * 法人性别（1男，2女）
+      */
+    BossSex: string;
+    /**
+      * 法人证件国别/地区（中国CHN，香港HKG，澳门MAC，台湾CTN）
+      */
+    BossIdCountry: string;
     /**
       * 法人身份证正面【私密区】（系统返回的图片路径）
       */
     BossPositive: string;
     /**
-      * 城市编号
-      */
-    CityId: string;
-    /**
       * 法人身份证背面【私密区】（系统返回的图片路径）
       */
     BossBack: string;
     /**
-      * 机构商户主键（系统有唯一性校验），建议使用商户表的主键ID，防止重复添加商户
+      * 法人证件生效时间（yyyy-mm-dd）
       */
-    OutMerchantId: string;
+    BossStartDate: string;
     /**
-      * 组织机构代码证生效时间（yyyy-mm-dd）
+      * 法人证件过期时间（yyyy-mm-dd）
       */
-    OrganizationStartDate?: string;
+    BossEndDate: string;
     /**
-      * 法人亲属证件号码
+      * 许可证图片【私密区】，（小微商户不效验，随意传要有值，公司/个体户必传）
       */
-    AccountIdNo?: string;
+    LicencePicture: string;
     /**
-      * 财务联系人
+      * 商户类型：1-个体，2-小微，3-企业。不传默认为2-小微商户。
       */
-    FinancialContact?: string;
-    /**
-      * 法人亲属证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）结算账户人身份为法人亲属时必填
-      */
-    AccountIdType?: string;
+    Type?: string;
     /**
       * 组织机构代码证号
       */
     OrganizationNo?: string;
     /**
-      * 其他资料1
+      * 组织机构代码证生效时间（yyyy-mm-dd）
       */
-    OtherPictureOne?: string;
-    /**
-      * 财务联系人电话
-      */
-    FinancialTelephone?: string;
-    /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
+    OrganizationStartDate?: string;
     /**
       * 组织机构代码证图片【私密区】
       */
     OrganizationPicture?: string;
     /**
-      * 税务登记证生效时间（yyyy-mm-dd）
-      */
-    TaxRegistrationStartDate?: string;
-    /**
-      * 商户标记，自定义参数
-      */
-    Tag?: string;
-    /**
-      * 结算账户人身份（1法人，2法人亲属），结算帐户为对私时必填
-      */
-    AccountBoss?: string;
-    /**
-      * 法人电话
-      */
-    BossTelephone?: string;
-    /**
-      * 税务登记证图片【私密区】
-      */
-    TaxRegistrationPicture?: string;
-    /**
       * 组织机构代码证过期时间（yyyy-mm-dd）
       */
     OrganizationEndDate?: string;
-    /**
-      * 法人职业
-      */
-    BossJob?: string;
-    /**
-      * 其他资料3
-      */
-    OtherPictureThree?: string;
-    /**
-      * 授权文件【私密区】
-      */
-    LicencePictureTwo?: string;
-    /**
-      * 商户logo【公共区】
-      */
-    Logo?: string;
-    /**
-      * 法人住址
-      */
-    BossAddress?: string;
-    /**
-      * 法人邮箱
-      */
-    BossEmail?: string;
-    /**
-      * 其他资料2
-      */
-    OtherPictureTwo?: string;
     /**
       * 商户简介
       */
     Intro?: string;
     /**
-      * 客户经理姓名，必须为系统后台的管理员真实姓名
+      * 商户logo【公共区】
       */
-    AccountManagerName?: string;
+    Logo?: string;
     /**
-      * 税务登记证过期时间（yyyy-mm-dd）
+      * 商户标记，自定义参数
       */
-    TaxRegistrationEndDate?: string;
+    Tag?: string;
     /**
-      * 其他资料4
+      * 财务联系人电话
       */
-    OtherPictureFour?: string;
+    FinancialTelephone?: string;
+    /**
+      * 财务联系人
+      */
+    FinancialContact?: string;
     /**
       * 税务登记证号
       */
     TaxRegistrationNo?: string;
     /**
-      * 商户类型：1-个体，2-小微，3-企业。不传默认为2-小微商户。
+      * 税务登记证图片【私密区】
       */
-    Type?: string;
+    TaxRegistrationPicture?: string;
+    /**
+      * 税务登记证生效时间（yyyy-mm-dd）
+      */
+    TaxRegistrationStartDate?: string;
+    /**
+      * 税务登记证过期时间（yyyy-mm-dd）
+      */
+    TaxRegistrationEndDate?: string;
+    /**
+      * 结算账户人身份（1法人，2法人亲属），结算帐户为对私时必填
+      */
+    AccountBoss?: string;
+    /**
+      * 客户经理姓名，必须为系统后台的管理员真实姓名
+      */
+    AccountManagerName?: string;
+    /**
+      * 法人电话
+      */
+    BossTelephone?: string;
+    /**
+      * 法人职业
+      */
+    BossJob?: string;
+    /**
+      * 法人邮箱
+      */
+    BossEmail?: string;
+    /**
+      * 法人住址
+      */
+    BossAddress?: string;
+    /**
+      * 法人亲属证件类型（1居民身份证,2临时居民身份证,3居民户口簿,4护照,5港澳居民来往内地通行证,6回乡证,7军人证,8武警身份证,9其他法定文件）结算账户人身份为法人亲属时必填
+      */
+    AccountIdType?: string;
+    /**
+      * 法人亲属证件号码
+      */
+    AccountIdNo?: string;
+    /**
+      * 授权文件【私密区】
+      */
+    LicencePictureTwo?: string;
+    /**
+      * 其他资料1
+      */
+    OtherPictureOne?: string;
+    /**
+      * 其他资料2
+      */
+    OtherPictureTwo?: string;
+    /**
+      * 其他资料3
+      */
+    OtherPictureThree?: string;
+    /**
+      * 其他资料4
+      */
+    OtherPictureFour?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * 红票结果V2
@@ -5386,6 +5478,23 @@ export interface CreateAgentTaxPaymentInfosRequest {
     Profile?: string;
 }
 /**
+ * QueryReconciliationFileApplyInfo请求参数结构体
+ */
+export interface QueryReconciliationFileApplyInfoRequest {
+    /**
+      * 申请对账文件的任务ID。
+      */
+    ApplyFileId: string;
+    /**
+      * 环境名。
+__release__: 现网环境
+__sandbox__: 沙箱环境
+__development__: 开发环境
+_缺省: release_
+      */
+    MidasEnvironment?: string;
+}
+/**
  * QueryBillDownloadURL返回参数结构体
  */
 export interface QueryBillDownloadURLResponse {
@@ -5617,11 +5726,11 @@ export interface RefundOrderResponse {
  */
 export interface QueryOrderStatusRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -5899,6 +6008,30 @@ export interface UploadTaxListResponse {
     RequestId?: string;
 }
 /**
+ * QueryReconciliationFileApplyInfo返回参数结构体
+ */
+export interface QueryReconciliationFileApplyInfoResponse {
+    /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryReconciliationFileApplyInfoResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * BindRelateAcctUnionPay请求参数结构体
  */
 export interface BindRelateAcctUnionPayRequest {
@@ -5956,29 +6089,30 @@ export interface BindRelateAcctUnionPayRequest {
     Profile?: string;
 }
 /**
- * 对账文件信息
+ * 查询会员资金交易信息列表结果
  */
-export interface FileItem {
+export interface QueryFundsTransactionDetailsResult {
     /**
-      * STRING(256)，文件名称
+      * 本次交易返回查询结果记录数。
+      */
+    ResultCount: number;
+    /**
+      * 符合业务查询条件的记录总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileName: string;
+    TotalCount: number;
     /**
-      * STRING(120)，随机密码
+      * 结束标志。
+__0__：否
+__1__：是
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RandomPassword: string;
+    EndFlag: string;
     /**
-      * STRING(512)，文件路径
+      * 会员资金交易信息数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FilePath: string;
-    /**
-      * STRING(64)，提取码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DrawCode: string;
+    TranItemArray: Array<FundsTransactionItem>;
 }
 /**
  * 聚鑫商户余额查询输出项
@@ -6103,21 +6237,17 @@ export interface QueryMerchantInfoForManagementRequest {
  */
 export interface UnifiedTlinxOrderRequest {
     /**
-      * 开发者流水号
-      */
-    DeveloperNo: string;
-    /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 交易结果异步通知url地址
-      */
-    NotifyUrl: string;
-    /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
+    /**
+      * 开发者流水号
+      */
+    DeveloperNo: string;
     /**
       * 支付标签
       */
@@ -6127,41 +6257,33 @@ export interface UnifiedTlinxOrderRequest {
       */
     TradeAmount: string;
     /**
-      * 订单备注
+      * 交易结果异步通知url地址
       */
-    Remark?: string;
+    NotifyUrl: string;
     /**
-      * 订单标记，订单附加数据。
+      * 付款方式名称(当PayTag为Diy时，PayName不能为空)
       */
-    Tag?: string;
-    /**
-      * 抹零金额（以分为单位，没有小数点）
-      */
-    IgnoreAmount?: string;
-    /**
-      * 条码支付的授权码（条码抢扫手机扫到的一串数字）
-      */
-    AuthCode?: string;
-    /**
-      * 原始交易金额（以分为单位，没有小数点）
-      */
-    OriginalAmount?: string;
-    /**
-      * 订单名称（描述）
-      */
-    OrderName?: string;
+    PayName?: string;
     /**
       * 公众号支付时，支付成功后跳转url地址
       */
     JumpUrl?: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
+      * 订单名称（描述）
       */
-    Profile?: string;
+    OrderName?: string;
     /**
-      * 收单机构原始交易报文，请转换为json
+      * 原始交易金额（以分为单位，没有小数点）
       */
-    TradeResult?: string;
+    OriginalAmount?: string;
+    /**
+      * 抹零金额（以分为单位，没有小数点）
+      */
+    IgnoreAmount?: string;
+    /**
+      * 折扣金额（以分为单位，没有小数点）
+      */
+    DiscountAmount?: string;
     /**
       * 交易帐号（银行卡号）
       */
@@ -6171,13 +6293,21 @@ export interface UnifiedTlinxOrderRequest {
       */
     TradeNo?: string;
     /**
-      * 折扣金额（以分为单位，没有小数点）
+      * 条码支付的授权码（条码抢扫手机扫到的一串数字）
       */
-    DiscountAmount?: string;
+    AuthCode?: string;
     /**
-      * 付款方式名称(当PayTag为Diy时，PayName不能为空)
+      * 订单标记，订单附加数据。
       */
-    PayName?: string;
+    Tag?: string;
+    /**
+      * 订单备注
+      */
+    Remark?: string;
+    /**
+      * 收单机构原始交易报文，请转换为json
+      */
+    TradeResult?: string;
     /**
       * 0-不分账，1-需分账。为1时标记为待分账订单，待分账订单不会进行清算。不传默认为不分账。
       */
@@ -6196,6 +6326,10 @@ export interface UnifiedTlinxOrderRequest {
 用户在子商户appid下的唯一标识。
       */
     SubOpenId?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * DeduceQuota请求参数结构体
@@ -6316,6 +6450,56 @@ export interface QueryExchangerateResult {
       * 查询汇率数据数组
       */
     Data: Array<QueryExchangerateData>;
+}
+/**
+ * QueryMemberTransactionDetails请求参数结构体
+ */
+export interface QueryMemberTransactionDetailsRequest {
+    /**
+      * 查询的交易发生时间类型。
+__1__：当日
+__2__：历史
+      */
+    QueryDateType: string;
+    /**
+      * 查询的交易类型。
+__1__：全部
+__2__：转出
+__3__：转入
+      */
+    QueryTranType: string;
+    /**
+      * 父账户账号。
+_平安渠道为资金汇总账号_
+      */
+    BankAccountNumber: string;
+    /**
+      * 子账户账号。
+_平安渠道为见证子账户的账号_
+      */
+    SubAccountNumber: string;
+    /**
+      * 分页号, 起始值为1。
+      */
+    PageOffSet: string;
+    /**
+      * 查询开始日期，格式：yyyyMMdd。
+__若是历史查询，则必输，当日查询时，不起作用；开始日期不能超过当前日期__
+      */
+    QueryStartDate?: string;
+    /**
+      * 查询终止日期，格式：yyyyMMdd。
+__若是历史查询，则必输，当日查询时，不起作用；终止日期不能超过当前日期__
+      */
+    QueryEndDate?: string;
+    /**
+      * 环境名。
+__release__: 现网环境
+__sandbox__: 沙箱环境
+__development__: 开发环境
+_缺省: release_
+      */
+    MidasEnvironment?: string;
 }
 /**
  * QueryBatchPaymentResult请求参数结构体
@@ -6787,18 +6971,37 @@ development: 开发环境
     MidasEnvironment?: string;
 }
 /**
- * QueryAgentStatements请求参数结构体
+ * QueryRefund请求参数结构体
  */
-export interface QueryAgentStatementsRequest {
+export interface QueryRefundRequest {
     /**
-      * 结算单日期，月结算单填每月1日
+      * 用户ID，长度不小于5位，仅支持字母和数字的组合。
       */
-    Date: string;
+    UserId: string;
     /**
-      * 日结算单:daily
-月结算单:monthly
+      * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
       */
-    Type: string;
+    RefundId: string;
+    /**
+      * 聚鑫分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 聚鑫分配的安全ID
+      */
+    MidasSecretId: string;
+    /**
+      * 按照聚鑫安全密钥计算的签名
+      */
+    MidasSignature: string;
+    /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+    MidasEnvironment?: string;
 }
 /**
  * CreateCustAcctId请求参数结构体
@@ -6907,11 +7110,11 @@ export interface CreateBatchPaymentData {
  */
 export interface DistributeQueryRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -6919,21 +7122,21 @@ export interface DistributeQueryRequest {
       */
     Type: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
+      * 商户分账单号，type为2时，和DistributeNo二者传其一
       */
-    Profile?: string;
+    OutDistributeNo?: string;
     /**
       * 平台分账单号，type为2时，和OutDistributeNo二者传其一
       */
     DistributeNo?: string;
     /**
-      * 商户分账单号，type为2时，和DistributeNo二者传其一
-      */
-    OutDistributeNo?: string;
-    /**
       * 平台交易订单号
       */
     OrderNo?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * CloseOrder请求参数结构体
@@ -7307,10 +7510,6 @@ export interface ViewContractRequest {
       */
     OpenKey: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
       * 外部合同主键编号（ContractId或OutContractId必须传一个）
       */
     OutContractId?: string;
@@ -7318,6 +7517,10 @@ export interface ViewContractRequest {
       * 合同主键（ContractId或OutContractId必须传一个）
       */
     ContractId?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * QueryBankTransactionDetails请求参数结构体
@@ -8636,11 +8839,11 @@ export interface QueryInvoiceV2Request {
  */
 export interface DistributeAccreditQueryRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -9917,11 +10120,11 @@ _不填默认为生产环境_
  */
 export interface DistributeRemoveReceiverRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -9929,13 +10132,13 @@ export interface DistributeRemoveReceiverRequest {
       */
     MerchantNo: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
       * 备注
       */
     Remark?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * DeleteAgentTaxPaymentInfos请求参数结构体
@@ -9999,13 +10202,45 @@ export interface AddShopRequest {
       */
     OpenId: string;
     /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
+    /**
+      * 机构门店主键（系统有唯一性校验），建议使用门店表的主键ID，防止重复添加门店
+      */
+    OutShopId: string;
+    /**
       * 门店简称（例如：南山店）
       */
     ShopName: string;
     /**
+      * 门店全称（例如：江山小厨（南山店））
+      */
+    ShopFullName: string;
+    /**
       * 商户编号
       */
     MerchantNo: string;
+    /**
+      * 门店电话
+      */
+    Telephone: string;
+    /**
+      * 营业时间，多个以小写逗号分开(9:00-12:00,13:00-18:00)
+      */
+    OpenHours: string;
+    /**
+      * 门店所在的城市编码
+      */
+    CityId: string;
+    /**
+      * 门店详细地址，不含省市区县名称
+      */
+    Address: string;
+    /**
+      * 整体门面（含招牌）图片【公共区】
+      */
+    PictureOne: string;
     /**
       * 整体门面（含招牌）图片【公共区】
       */
@@ -10015,69 +10250,37 @@ export interface AddShopRequest {
       */
     PictureThree: string;
     /**
-      * 整体门面（含招牌）图片【公共区】
+      * 负责人手机号码
       */
-    PictureOne: string;
-    /**
-      * 门店电话
-      */
-    Telephone: string;
-    /**
-      * 机构门店主键（系统有唯一性校验），建议使用门店表的主键ID，防止重复添加门店
-      */
-    OutShopId: string;
-    /**
-      * 门店所在的城市编码
-      */
-    CityId: string;
-    /**
-      * 门店全称（例如：江山小厨（南山店））
-      */
-    ShopFullName: string;
-    /**
-      * 营业时间，多个以小写逗号分开(9:00-12:00,13:00-18:00)
-      */
-    OpenHours: string;
-    /**
-      * 门店详细地址，不含省市区县名称
-      */
-    Address: string;
-    /**
-      * 收单系统分配的密钥
-      */
-    OpenKey: string;
-    /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
-      * 高德地图纬度
-      */
-    LatitudeTwo?: string;
-    /**
-      * 其他照片【公共区】
-      */
-    OtherPicture?: string;
-    /**
-      * 高德地图经度
-      */
-    LongitudeTwo?: string;
+    FinancialTelephone?: string;
     /**
       * 门店负责人
       */
     Contact?: string;
     /**
-      * 百度地图经度
-      */
-    Longitude?: string;
-    /**
       * 百度地图纬度
       */
     Latitude?: string;
     /**
-      * 负责人手机号码
+      * 高德地图纬度
       */
-    FinancialTelephone?: string;
+    LatitudeTwo?: string;
+    /**
+      * 百度地图经度
+      */
+    Longitude?: string;
+    /**
+      * 高德地图经度
+      */
+    LongitudeTwo?: string;
+    /**
+      * 其他照片【公共区】
+      */
+    OtherPicture?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * 批量转账明细实体
@@ -10382,6 +10585,53 @@ export interface QueryTransferResultRequest {
       * 接入环境。沙箱环境填sandbox。
       */
     Profile?: string;
+}
+/**
+ * 查询对账文件申请结果
+ */
+export interface QueryReconciliationFileApplyInfoResult {
+    /**
+      * 申请对账文件的任务ID。
+      */
+    ApplyFileId: string;
+    /**
+      * 对账文件申请状态。
+__I__：申请中
+__S__：申请成功
+__F__：申请失败
+      */
+    ApplyStatus: string;
+    /**
+      * 申请结果描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplyMessage: string;
+    /**
+      * 对账文件下载地址列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileUrlArray: Array<string>;
+}
+/**
+ * 申请对账文件结果
+ */
+export interface ApplyReconciliationFileResult {
+    /**
+      * 申请对账文件的任务ID。
+      */
+    ApplyFileId: string;
+    /**
+      * 对账文件申请状态。
+__I__：申请中
+__S__：申请成功
+__F__：申请失败
+      */
+    ApplyStatus: string;
+    /**
+      * 申请结果描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplyMessage: string;
 }
 /**
  * QueryOpenBankExternalSubMerchantBankAccount返回参数结构体
@@ -10725,6 +10975,55 @@ development 开发环境
     TransFee?: string;
 }
 /**
+ * QueryFundsTransactionDetails请求参数结构体
+ */
+export interface QueryFundsTransactionDetailsRequest {
+    /**
+      * 查询的交易发生时间类型。
+__1__：当日
+__2__：历史
+      */
+    QueryDateType: string;
+    /**
+      * 查询的交易类型。
+__2__：提现/退款
+__3__：清分/充值
+      */
+    QueryTranType: string;
+    /**
+      * 父账户账号。
+_平安渠道为资金汇总账号_
+      */
+    BankAccountNumber: string;
+    /**
+      * 子账户账号。
+_平安渠道为见证子账户的账号_
+      */
+    SubAccountNumber: string;
+    /**
+      * 分页号, 起始值为1。
+      */
+    PageOffSet: string;
+    /**
+      * 查询开始日期，格式：yyyyMMdd。
+__若是历史查询，则必输，当日查询时，不起作用；开始日期不能超过当前日期__
+      */
+    QueryStartDate?: string;
+    /**
+      * 查询终止日期，格式：yyyyMMdd。
+__若是历史查询，则必输，当日查询时，不起作用；终止日期不能超过当前日期__
+      */
+    QueryEndDate?: string;
+    /**
+      * 环境名。
+__release__: 现网环境
+__sandbox__: 沙箱环境
+__development__: 开发环境
+_缺省: release_
+      */
+    MidasEnvironment?: string;
+}
+/**
  * 第三方子商户银行卡绑定返回结果
  */
 export interface BindOpenBankExternalSubMerchantBankAccountResult {
@@ -10811,11 +11110,11 @@ export interface CreateMerchantResultData {
  */
 export interface DistributeCancelRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
     /**
-      * 收单系统分配的密钥
+      * 使用门店OpenKey
       */
     OpenKey: string;
     /**
@@ -10823,17 +11122,17 @@ export interface DistributeCancelRequest {
       */
     OrderNo: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
+      * 商户分账单号，type为2时，和DistributeNo二者传其一
       */
-    Profile?: string;
+    OutDistributeNo?: string;
     /**
       * 平台分账单号，type为2时，和OutDistributeNo二者传其一
       */
     DistributeNo?: string;
     /**
-      * 商户分账单号，type为2时，和DistributeNo二者传其一
+      * 沙箱环境填sandbox，正式环境不填
       */
-    OutDistributeNo?: string;
+    Profile?: string;
 }
 /**
  * RegisterBillSupportWithdraw请求参数结构体
@@ -11833,10 +12132,6 @@ export interface DownloadOrgFileRequest {
       */
     OpenKey: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
       * 存储区域（0私密区，1公共区），请严格按文件要求，上传到不同的区域
       */
     Storage?: string;
@@ -11844,6 +12139,10 @@ export interface DownloadOrgFileRequest {
       * 文件路径
       */
     FilePath?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * 签约同步信息
@@ -11931,37 +12230,18 @@ export interface Order {
     Items: Array<OrderItem>;
 }
 /**
- * QueryRefund请求参数结构体
+ * QueryAgentStatements请求参数结构体
  */
-export interface QueryRefundRequest {
+export interface QueryAgentStatementsRequest {
     /**
-      * 用户ID，长度不小于5位，仅支持字母和数字的组合。
+      * 结算单日期，月结算单填每月1日
       */
-    UserId: string;
+    Date: string;
     /**
-      * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
+      * 日结算单:daily
+月结算单:monthly
       */
-    RefundId: string;
-    /**
-      * 聚鑫分配的支付主MidasAppId
-      */
-    MidasAppId: string;
-    /**
-      * 聚鑫分配的安全ID
-      */
-    MidasSecretId: string;
-    /**
-      * 按照聚鑫安全密钥计算的签名
-      */
-    MidasSignature: string;
-    /**
-      * 环境名:
-release: 现网环境
-sandbox: 沙箱环境
-development: 开发环境
-缺省: release
-      */
-    MidasEnvironment?: string;
+    Type: string;
 }
 /**
  * CreateExternalAnchor接口返回参数
@@ -12259,6 +12539,32 @@ export interface UploadFileResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 聚鑫-查询会员间交易信息列表结果
+ */
+export interface QueryMemberTransactionDetailsResult {
+    /**
+      * 本次交易返回查询结果记录数。
+      */
+    ResultCount: number;
+    /**
+      * 符合业务查询条件的记录总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 结束标志。
+__0__：否
+__1__：是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndFlag: string;
+    /**
+      * 会员间交易信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TranItemArray: Array<MemberTransactionItem>;
 }
 /**
  * 创建商户结果
@@ -12638,6 +12944,73 @@ export interface CreateSinglePaymentRequest {
     NotifyUrl?: string;
 }
 /**
+ * 会员间交易明细信息
+ */
+export interface MemberTransactionItem {
+    /**
+      * 交易类型。
+__1__：转出
+__2__：转入
+      */
+    TransType: string;
+    /**
+      * 交易状态。
+__0__：成功
+      */
+    TranStatus: string;
+    /**
+      * 交易金额。
+      */
+    TransAmount: string;
+    /**
+      * 交易日期，格式：yyyyMMdd。
+      */
+    TransDate: string;
+    /**
+      * 交易时间，格式：HHmmss。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TransTime: string;
+    /**
+      * 银行系统流水号。
+_平安渠道为见证系统流水号_
+      */
+    BankSequenceNumber: string;
+    /**
+      * 银行记账类型。
+_平安渠道为：_
+_1：会员支付_
+_2：会员冻结_
+_3：会员解冻_
+_4：登记挂账_
+_6：下单预支付_
+_7：确认并付款_
+_8：会员退款_
+_22：见证+收单平台调账_
+_23：见证+收单资金冻结_
+_24：见证+收单资金解冻_
+_25：会员间交易退款_
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BankBookingType: string;
+    /**
+      * 转入方子账户账号。
+_平安渠道为转入见证子账户的账号_
+      */
+    InSubAccountNumber: string;
+    /**
+      * 转出方子账户账号。
+_平安渠道为转出见证子账户的账号_
+      */
+    OutSubAccountNumber: string;
+    /**
+      * 备注。
+_平安渠道，如果是见证+收单的交易，返回交易订单号_
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+}
+/**
  * 分账接收方响应对象
  */
 export interface DistributeReceiverResult {
@@ -12652,29 +13025,21 @@ export interface DistributeReceiverResult {
  */
 export interface DistributeApplyRequest {
     /**
-      * 收单系统分配的开放ID
+      * 使用门店OpenId
       */
     OpenId: string;
+    /**
+      * 使用门店OpenKey
+      */
+    OpenKey: string;
     /**
       * 商户分账单号
       */
     OutDistributeNo: string;
     /**
-      * 收单系统分配的密钥
-      */
-    OpenKey: string;
-    /**
       * 分账明细
       */
     Details: Array<MultiApplyDetail>;
-    /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
-      * 说明
-      */
-    Remark?: string;
     /**
       * 商户交易订单号，和OrderNo二者传其一
       */
@@ -12683,6 +13048,14 @@ export interface DistributeApplyRequest {
       * 平台交易订单号，和DeveloperNo二者传其一
       */
     OrderNo?: string;
+    /**
+      * 说明
+      */
+    Remark?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * ViewShop请求参数结构体
@@ -12697,10 +13070,6 @@ export interface ViewShopRequest {
       */
     OpenKey: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
-      */
-    Profile?: string;
-    /**
       * 外部商户主键编号（ShopNo或OutShopId必须传一个）
       */
     OutShopId?: string;
@@ -12708,6 +13077,10 @@ export interface ViewShopRequest {
       * 门店编号（ShopNo或OutShopId必须传一个）
       */
     ShopNo?: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * ApplyOutwardOrder返回参数结构体
@@ -12960,9 +13333,43 @@ export interface CreateAgentTaxPaymentInfosResponse {
     RequestId?: string;
 }
 /**
+ * ApplyReconciliationFile返回参数结构体
+ */
+export interface ApplyReconciliationFileResponse {
+    /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: ApplyReconciliationFileResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 合同-支付方式列表响应对象
  */
 export interface ContractPayListResult {
+    /**
+      * 支付方式编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentId: string;
+    /**
+      * 支持的交易类型（多个以小写逗号分开，0现金，1刷卡，2主扫，3被扫，4JSPAY，5预授权）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentType: string;
     /**
       * 支付标签
 注意：此字段可能返回 null，表示取不到有效值。
@@ -12974,60 +13381,10 @@ export interface ContractPayListResult {
       */
     PaymentIcon: string;
     /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionSix?: string;
-    /**
       * 付款方式名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PaymentName: string;
-    /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionSeven?: string;
-    /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionTwo?: string;
-    /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionOne?: string;
-    /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionOther?: string;
-    /**
-      * 支持的交易类型（多个以小写逗号分开，0现金，1刷卡，2主扫，3被扫，4JSPAY，5预授权）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentType: string;
-    /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionFive?: string;
-    /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionNine?: string;
-    /**
-      * 支付方式编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentId: string;
-    /**
-      * 支付方式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PaymentOptionThree?: string;
     /**
       * 付款方式名称（内部名称）
 注意：此字段可能返回 null，表示取不到有效值。
@@ -13037,7 +13394,47 @@ export interface ContractPayListResult {
       * 支付方式
 注意：此字段可能返回 null，表示取不到有效值。
       */
+    PaymentOptionOne?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentOptionTwo?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentOptionThree?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     PaymentOptionFour?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentOptionFive?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentOptionSix?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentOptionSeven?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentOptionOther?: string;
+    /**
+      * 支付方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentOptionNine?: string;
     /**
       * 支付方式
 注意：此字段可能返回 null，表示取不到有效值。
@@ -13132,21 +13529,17 @@ export interface DescribeOrderStatusRequest {
     TransDate?: string;
 }
 /**
- * 云企付-关单响应
+ * 米大师内部存放的合约信息
  */
-export interface CloseOpenBankPaymentOrderResult {
+export interface ChannelContractInfo {
     /**
-      * 外部商户订单号
+      * 外部合约协议号
       */
-    OutOrderId: string;
+    OutContractCode: string;
     /**
-      * 云企付平台订单号
+      * 米大师内部生成的合约协议号
       */
-    ChannelOrderId: string;
-    /**
-      * 订单状态。关单成功CLOSED
-      */
-    OrderStatus: string;
+    ChannelContractCode: string;
 }
 /**
  * CreateAnchor返回参数结构体
@@ -13175,6 +13568,30 @@ export interface MerchantRiskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RiskTypes: string;
+}
+/**
+ * QueryMemberTransactionDetails返回参数结构体
+ */
+export interface QueryMemberTransactionDetailsResponse {
+    /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryMemberTransactionDetailsResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询订单付款状态响应对象
@@ -13834,6 +14251,36 @@ export interface QueryAgentTaxPaymentBatchRequest {
     Profile?: string;
 }
 /**
+ * ApplyReconciliationFile请求参数结构体
+ */
+export interface ApplyReconciliationFileRequest {
+    /**
+      * 申请的文件类型。
+__CZ__：充值文件
+__TX__：提现文件
+__JY__：交易文件
+__YE__：余额文件
+      */
+    ApplyFileType: string;
+    /**
+      * 申请的对账文件日期，格式：yyyyMMdd。
+      */
+    ApplyFileDate: string;
+    /**
+      * 父账户账号。
+_平安渠道为资金汇总账号_
+      */
+    BankAccountNumber: string;
+    /**
+      * 环境名。
+__release__: 现网环境
+__sandbox__: 沙箱环境
+__development__: 开发环境
+_缺省: release_
+      */
+    MidasEnvironment?: string;
+}
+/**
  * RegisterBillSupportWithdraw返回参数结构体
  */
 export interface RegisterBillSupportWithdrawResponse {
@@ -14193,6 +14640,30 @@ export interface QueryMerchantBalanceResult {
       * 对接账户余额查询数据
       */
     Data: QueryMerchantBalanceData;
+}
+/**
+ * QueryFundsTransactionDetails返回参数结构体
+ */
+export interface QueryFundsTransactionDetailsResponse {
+    /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryFundsTransactionDetailsResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 米大师内部生成的合约信息
@@ -14793,17 +15264,21 @@ export interface DeduceQuotaResponse {
     RequestId?: string;
 }
 /**
- * 米大师内部存放的合约信息
+ * 云企付-关单响应
  */
-export interface ChannelContractInfo {
+export interface CloseOpenBankPaymentOrderResult {
     /**
-      * 外部合约协议号
+      * 外部商户订单号
       */
-    OutContractCode: string;
+    OutOrderId: string;
     /**
-      * 米大师内部生成的合约协议号
+      * 云企付平台订单号
       */
-    ChannelContractCode: string;
+    ChannelOrderId: string;
+    /**
+      * 订单状态。关单成功CLOSED
+      */
+    OrderStatus: string;
 }
 /**
  * CreateBatchPayment转账明细

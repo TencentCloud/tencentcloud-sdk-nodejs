@@ -178,9 +178,9 @@ it("ckafka.v20190819.DescribeACL", async function () {
     }
 })
 
-it("ckafka.v20190819.DescribeTopicDetail", async function () {
+it("ckafka.v20190819.CancelAuthorizationToken", async function () {
     try {
-       const data = await client.DescribeTopicDetail({})
+       const data = await client.CancelAuthorizationToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +261,26 @@ it("ckafka.v20190819.CreatePartition", async function () {
 it("ckafka.v20190819.DeleteUser", async function () {
     try {
        const data = await client.DeleteUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.CreateToken", async function () {
+    try {
+       const data = await client.CreateToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.DescribeTopicDetail", async function () {
+    try {
+       const data = await client.DescribeTopicDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +401,16 @@ it("ckafka.v20190819.DescribeTopicSyncReplica", async function () {
 it("ckafka.v20190819.DescribeGroupOffsets", async function () {
     try {
        const data = await client.DescribeGroupOffsets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.AuthorizeToken", async function () {
+    try {
+       const data = await client.AuthorizeToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

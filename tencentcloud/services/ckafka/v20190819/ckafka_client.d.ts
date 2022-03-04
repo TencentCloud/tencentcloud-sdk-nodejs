@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteAclRequest, BatchCreateAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, DescribeConsumerGroupResponse, CreateRouteRequest, DeleteTopicRequest, DescribeInstancesResponse, FetchMessageByOffsetResponse, BatchModifyTopicAttributesResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DescribeTopicSubscribeGroupResponse, DescribeCkafkaZoneRequest, BatchModifyGroupOffsetsResponse, DescribeTopicAttributesResponse, CreateConsumerResponse, DescribeGroupResponse, DeleteAclRuleRequest, CreateUserResponse, ModifyInstanceAttributesResponse, CreatePartitionResponse, DeleteGroupRequest, DeleteUserResponse, CreateAclRequest, DescribeTopicSyncReplicaResponse, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeTopicSubscribeGroupRequest, DeleteInstancePreResponse, FetchMessageByOffsetRequest, DescribeRegionRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, ModifyTopicAttributesResponse, DeleteRouteTriggerTimeResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, ModifyPasswordResponse, DeleteInstancePreRequest, ModifyPasswordRequest, ModifyInstanceAttributesRequest, DescribeRegionResponse, DescribeConsumerGroupRequest, DeleteTopicResponse, DeleteRouteTriggerTimeRequest, DescribeInstancesRequest, DescribeGroupRequest, BatchCreateAclResponse, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, CreateConsumerRequest, DescribeRouteRequest, SendMessageResponse, DescribeCkafkaZoneResponse, BatchModifyGroupOffsetsRequest, CreateRouteResponse, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, SendMessageRequest, ModifyGroupOffsetsRequest, BatchModifyTopicAttributesRequest, DeleteGroupResponse, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateTopicResponse, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicSyncReplicaRequest, DescribeTopicDetailResponse } from "./ckafka_models";
+import { DeleteAclRequest, BatchCreateAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, AuthorizeTokenResponse, DescribeConsumerGroupResponse, CancelAuthorizationTokenResponse, CreateRouteRequest, DeleteTopicRequest, DescribeInstancesResponse, FetchMessageByOffsetResponse, BatchModifyTopicAttributesResponse, CreateTokenResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DescribeTopicSubscribeGroupResponse, DescribeCkafkaZoneRequest, BatchModifyGroupOffsetsResponse, CreateTokenRequest, DeleteAclRuleRequest, CreateConsumerResponse, DescribeGroupResponse, AuthorizeTokenRequest, CreateUserResponse, ModifyInstanceAttributesResponse, CreatePartitionResponse, DeleteGroupRequest, DeleteUserResponse, CreateAclRequest, DescribeTopicSyncReplicaResponse, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeTopicSubscribeGroupRequest, DeleteInstancePreResponse, FetchMessageByOffsetRequest, DescribeRegionRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, ModifyTopicAttributesResponse, DeleteRouteTriggerTimeResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, ModifyPasswordResponse, DeleteInstancePreRequest, ModifyPasswordRequest, ModifyInstanceAttributesRequest, DescribeRegionResponse, DescribeConsumerGroupRequest, DescribeTopicAttributesResponse, CancelAuthorizationTokenRequest, DeleteTopicResponse, DeleteRouteTriggerTimeRequest, DescribeInstancesRequest, DescribeGroupRequest, BatchCreateAclResponse, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, CreateConsumerRequest, DescribeRouteRequest, SendMessageResponse, DescribeCkafkaZoneResponse, BatchModifyGroupOffsetsRequest, CreateRouteResponse, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, SendMessageRequest, ModifyGroupOffsetsRequest, BatchModifyTopicAttributesRequest, DeleteGroupResponse, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateTopicResponse, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicSyncReplicaRequest, DescribeTopicDetailResponse } from "./ckafka_models";
 /**
  * ckafka client
  * @class
@@ -72,9 +72,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeACL(req: DescribeACLRequest, cb?: (error: string, rep: DescribeACLResponse) => void): Promise<DescribeACLResponse>;
     /**
-     * 获取主题列表详情（仅控制台调用）
+     * 取消授权token
      */
-    DescribeTopicDetail(req: DescribeTopicDetailRequest, cb?: (error: string, rep: DescribeTopicDetailResponse) => void): Promise<DescribeTopicDetailResponse>;
+    CancelAuthorizationToken(req: CancelAuthorizationTokenRequest, cb?: (error: string, rep: CancelAuthorizationTokenResponse) => void): Promise<CancelAuthorizationTokenResponse>;
     /**
      * 创建实例(预付费包年包月)
      */
@@ -107,6 +107,14 @@ export declare class Client extends AbstractClient {
      * 删除用户
      */
     DeleteUser(req: DeleteUserRequest, cb?: (error: string, rep: DeleteUserResponse) => void): Promise<DeleteUserResponse>;
+    /**
+     * 创建最高权限的token
+     */
+    CreateToken(req: CreateTokenRequest, cb?: (error: string, rep: CreateTokenResponse) => void): Promise<CreateTokenResponse>;
+    /**
+     * 获取主题列表详情（仅控制台调用）
+     */
+    DescribeTopicDetail(req: DescribeTopicDetailRequest, cb?: (error: string, rep: DescribeTopicDetailResponse) => void): Promise<DescribeTopicDetailResponse>;
     /**
      * 删除ACL
      */
@@ -156,6 +164,10 @@ export declare class Client extends AbstractClient {
      * 获取消费分组offset
      */
     DescribeGroupOffsets(req: DescribeGroupOffsetsRequest, cb?: (error: string, rep: DescribeGroupOffsetsResponse) => void): Promise<DescribeGroupOffsetsResponse>;
+    /**
+     * 给实例授权token
+     */
+    AuthorizeToken(req: AuthorizeTokenRequest, cb?: (error: string, rep: AuthorizeTokenResponse) => void): Promise<AuthorizeTokenResponse>;
     /**
      * 接口请求域名：https://ckafka.tencentcloudapi.com
 本接口（DescribeTopic）用于在用户获取消息队列 CKafka 实例的主题列表

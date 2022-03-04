@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeAccreditQuery", req, cb);
     }
     /**
+     * 聚鑫-查询会员间交易信息列表
+     */
+    async QueryMemberTransactionDetails(req, cb) {
+        return this.request("QueryMemberTransactionDetails", req, cb);
+    }
+    /**
      * 直播平台-修改代理商完税信息
      */
     async ModifyAgentTaxPaymentInfo(req, cb) {
@@ -238,6 +244,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RefundTlinxOrder", req, cb);
     }
     /**
+     * 商户解除绑定的提现银行卡
+     */
+    async UnBindAcct(req, cb) {
+        return this.request("UnBindAcct", req, cb);
+    }
+    /**
      * 查询充值明细接口
      */
     async DescribeChargeDetail(req, cb) {
@@ -376,10 +388,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryAcctInfo", req, cb);
     }
     /**
-     * 商户解除绑定的提现银行卡
+     * 聚鑫-申请对账文件
      */
-    async UnBindAcct(req, cb) {
-        return this.request("UnBindAcct", req, cb);
+    async ApplyReconciliationFile(req, cb) {
+        return this.request("ApplyReconciliationFile", req, cb);
+    }
+    /**
+     * 聚鑫-查询对账文件申请结果
+     */
+    async QueryReconciliationFileApplyInfo(req, cb) {
+        return this.request("QueryReconciliationFileApplyInfo", req, cb);
     }
     /**
      * 查询银行时间段内清分提现明细。查询银行时间段内清分提现明细接口：若为“见证+收单退款”“见证+收单充值”记录时备注Note为“见证+收单充值,订单号”“见证+收单退款,订单号”，此接口可以查到T0/T1的充值明细和退款记录。查询标志：充值记录仍用3清分选项查询，退款记录同提现用2选项查询。
@@ -534,6 +552,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryAcctBinding(req, cb) {
         return this.request("QueryAcctBinding", req, cb);
+    }
+    /**
+     * 聚鑫-查询会员资金交易信息列表
+     */
+    async QueryFundsTransactionDetails(req, cb) {
+        return this.request("QueryFundsTransactionDetails", req, cb);
     }
     /**
      * 正常结算提现失败情况下，发起重新提现的请求接口
@@ -781,7 +805,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryMemberTransaction", req, cb);
     }
     /**
-     * 云支付-T查询已添加分账接收方接口
+     * 云支付-查询已添加分账接收方接口
      */
     async DistributeQueryReceiver(req, cb) {
         return this.request("DistributeQueryReceiver", req, cb);

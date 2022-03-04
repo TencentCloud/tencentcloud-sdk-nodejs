@@ -30,7 +30,9 @@ import {
   DescribeInstanceAttributesRequest,
   ConsumerGroup,
   Assignment,
+  AuthorizeTokenResponse,
   DescribeConsumerGroupResponse,
+  CancelAuthorizationTokenResponse,
   CreateRouteRequest,
   DeleteTopicRequest,
   DescribeInstancesResponse,
@@ -40,6 +42,7 @@ import {
   GroupInfoTopics,
   TopicResult,
   Region,
+  CreateTokenResponse,
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
   AclRule,
@@ -54,12 +57,13 @@ import {
   Tag,
   BatchModifyGroupOffsetsResponse,
   GroupResponse,
-  DescribeTopicAttributesResponse,
+  CreateTokenRequest,
+  DeleteAclRuleRequest,
   CreateConsumerResponse,
   RouteResponse,
   DescribeGroupResponse,
-  DeleteAclRuleRequest,
   ModifyInstanceAttributesConfig,
+  AuthorizeTokenRequest,
   OperateResponseData,
   CreateUserResponse,
   ModifyInstanceAttributesResponse,
@@ -118,6 +122,8 @@ import {
   ConsumerGroupTopic,
   User,
   GroupOffsetPartition,
+  DescribeTopicAttributesResponse,
+  CancelAuthorizationTokenRequest,
   DeleteTopicResponse,
   DeleteRouteTriggerTimeRequest,
   DescribeInstancesRequest,
@@ -340,13 +346,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取主题列表详情（仅控制台调用）
+   * 取消授权token
    */
-  async DescribeTopicDetail(
-    req: DescribeTopicDetailRequest,
-    cb?: (error: string, rep: DescribeTopicDetailResponse) => void
-  ): Promise<DescribeTopicDetailResponse> {
-    return this.request("DescribeTopicDetail", req, cb)
+  async CancelAuthorizationToken(
+    req: CancelAuthorizationTokenRequest,
+    cb?: (error: string, rep: CancelAuthorizationTokenResponse) => void
+  ): Promise<CancelAuthorizationTokenResponse> {
+    return this.request("CancelAuthorizationToken", req, cb)
   }
 
   /**
@@ -427,6 +433,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserResponse) => void
   ): Promise<DeleteUserResponse> {
     return this.request("DeleteUser", req, cb)
+  }
+
+  /**
+   * 创建最高权限的token
+   */
+  async CreateToken(
+    req: CreateTokenRequest,
+    cb?: (error: string, rep: CreateTokenResponse) => void
+  ): Promise<CreateTokenResponse> {
+    return this.request("CreateToken", req, cb)
+  }
+
+  /**
+   * 获取主题列表详情（仅控制台调用）
+   */
+  async DescribeTopicDetail(
+    req: DescribeTopicDetailRequest,
+    cb?: (error: string, rep: DescribeTopicDetailResponse) => void
+  ): Promise<DescribeTopicDetailResponse> {
+    return this.request("DescribeTopicDetail", req, cb)
   }
 
   /**
@@ -548,6 +574,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGroupOffsetsResponse) => void
   ): Promise<DescribeGroupOffsetsResponse> {
     return this.request("DescribeGroupOffsets", req, cb)
+  }
+
+  /**
+   * 给实例授权token
+   */
+  async AuthorizeToken(
+    req: AuthorizeTokenRequest,
+    cb?: (error: string, rep: AuthorizeTokenResponse) => void
+  ): Promise<AuthorizeTokenResponse> {
+    return this.request("AuthorizeToken", req, cb)
   }
 
   /**

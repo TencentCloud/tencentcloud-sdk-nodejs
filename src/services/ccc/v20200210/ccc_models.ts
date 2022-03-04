@@ -459,6 +459,12 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AsrUrl: string
+
+  /**
+      * 录音转存第三方COS地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomRecordURL: string
 }
 
 /**
@@ -1549,6 +1555,12 @@ export interface ServeParticipant {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SkillGroupName: string
+
+  /**
+      * 录音转存第三方COS地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CustomRecordURL: string
 }
 
 /**

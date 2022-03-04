@@ -361,7 +361,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
     /**
-     * 本接口用于创建日志下载任务
+     * 本接口用于创建日志下载任务，导出原始日志
      */
     CreateExport(req: CreateExportRequest, cb?: (error: string, rep: CreateExportResponse) => void): Promise<CreateExportResponse>;
     /**

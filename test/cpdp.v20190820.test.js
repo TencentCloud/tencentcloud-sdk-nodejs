@@ -38,6 +38,16 @@ it("cpdp.v20190820.DistributeAccreditQuery", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryMemberTransactionDetails", async function () {
+    try {
+       const data = await client.QueryMemberTransactionDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.ModifyAgentTaxPaymentInfo", async function () {
     try {
        const data = await client.ModifyAgentTaxPaymentInfo({})
@@ -368,6 +378,16 @@ it("cpdp.v20190820.RefundTlinxOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.UnBindAcct", async function () {
+    try {
+       const data = await client.UnBindAcct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.DescribeChargeDetail", async function () {
     try {
        const data = await client.DescribeChargeDetail({})
@@ -598,9 +618,19 @@ it("cpdp.v20190820.QueryAcctInfo", async function () {
     }
 })
 
-it("cpdp.v20190820.UnBindAcct", async function () {
+it("cpdp.v20190820.ApplyReconciliationFile", async function () {
     try {
-       const data = await client.UnBindAcct({})
+       const data = await client.ApplyReconciliationFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryReconciliationFileApplyInfo", async function () {
+    try {
+       const data = await client.QueryReconciliationFileApplyInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -851,6 +881,16 @@ it("cpdp.v20190820.DescribeOrderStatus", async function () {
 it("cpdp.v20190820.QueryAcctBinding", async function () {
     try {
        const data = await client.QueryAcctBinding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryFundsTransactionDetails", async function () {
+    try {
+       const data = await client.QueryFundsTransactionDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

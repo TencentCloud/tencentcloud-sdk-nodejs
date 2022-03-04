@@ -270,6 +270,20 @@ export interface Assignment {
     Topics: Array<GroupInfoTopics>;
 }
 /**
+ * AuthorizeToken返回参数结构体
+ */
+export interface AuthorizeTokenResponse {
+    /**
+      * 0 成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeConsumerGroup返回参数结构体
  */
 export interface DescribeConsumerGroupResponse {
@@ -277,6 +291,20 @@ export interface DescribeConsumerGroupResponse {
       * 返回的消费分组信息
       */
     Result?: ConsumerGroupResponse;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CancelAuthorizationToken返回参数结构体
+ */
+export interface CancelAuthorizationTokenResponse {
+    /**
+      * 0 成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -468,6 +496,20 @@ export interface Region {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MultiZone: number;
+}
+/**
+ * CreateToken返回参数结构体
+ */
+export interface CreateTokenResponse {
+    /**
+      * token串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeInstancesDetail返回参数结构体
@@ -772,17 +814,30 @@ export interface GroupResponse {
     GroupList: Array<DescribeGroup>;
 }
 /**
- * DescribeTopicAttributes返回参数结构体
+ * CreateToken请求参数结构体
  */
-export interface DescribeTopicAttributesResponse {
+export interface CreateTokenRequest {
     /**
-      * 返回的结果对象
+      * 实例ID
       */
-    Result: TopicAttributesResponse;
+    InstanceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用户名
       */
-    RequestId?: string;
+    User: string;
+}
+/**
+ * DeleteAclRule请求参数结构体
+ */
+export interface DeleteAclRuleRequest {
+    /**
+      * 实例id信息
+      */
+    InstanceId: string;
+    /**
+      * acl规则名称
+      */
+    RuleName: string;
 }
 /**
  * CreateConsumer返回参数结构体
@@ -821,19 +876,6 @@ export interface DescribeGroupResponse {
     RequestId?: string;
 }
 /**
- * DeleteAclRule请求参数结构体
- */
-export interface DeleteAclRuleRequest {
-    /**
-      * 实例id信息
-      */
-    InstanceId: string;
-    /**
-      * acl规则名称
-      */
-    RuleName: string;
-}
-/**
  * 修改实例属性的配置对象
  */
 export interface ModifyInstanceAttributesConfig {
@@ -849,6 +891,23 @@ export interface ModifyInstanceAttributesConfig {
       * 如歌auto.create.topic.enable设置为true没有指定该值时默认设置为2
       */
     DefaultReplicationFactor?: number;
+}
+/**
+ * AuthorizeToken请求参数结构体
+ */
+export interface AuthorizeTokenRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 用户
+      */
+    User: string;
+    /**
+      * token串
+      */
+    Tokens: string;
 }
 /**
  * 操作类型返回的Data结构
@@ -2002,6 +2061,36 @@ export interface GroupOffsetPartition {
       * 未消费的消息个数
       */
     Lag: number;
+}
+/**
+ * DescribeTopicAttributes返回参数结构体
+ */
+export interface DescribeTopicAttributesResponse {
+    /**
+      * 返回的结果对象
+      */
+    Result: TopicAttributesResponse;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CancelAuthorizationToken请求参数结构体
+ */
+export interface CancelAuthorizationTokenRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 用户
+      */
+    User: string;
+    /**
+      * token串
+      */
+    Tokens: string;
 }
 /**
  * DeleteTopic返回参数结构体
