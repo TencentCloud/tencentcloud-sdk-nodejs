@@ -168,9 +168,9 @@ it("tke.v20180525.DeleteEKSCluster", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterEndpointStatus", async function () {
+it("tke.v20180525.ModifyClusterNodePool", async function () {
     try {
-       const data = await client.DescribeClusterEndpointStatus({})
+       const data = await client.ModifyClusterNodePool({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +378,9 @@ it("tke.v20180525.DescribeClusters", async function () {
     }
 })
 
-it("tke.v20180525.ModifyClusterNodePool", async function () {
+it("tke.v20180525.DescribeClusterEndpointStatus", async function () {
     try {
-       const data = await client.ModifyClusterNodePool({})
+       const data = await client.DescribeClusterEndpointStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +501,16 @@ it("tke.v20180525.DescribePrometheusAlertRule", async function () {
 it("tke.v20180525.RestartEKSContainerInstances", async function () {
     try {
        const data = await client.RestartEKSContainerInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeTKEEdgeScript", async function () {
+    try {
+       const data = await client.DescribeTKEEdgeScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

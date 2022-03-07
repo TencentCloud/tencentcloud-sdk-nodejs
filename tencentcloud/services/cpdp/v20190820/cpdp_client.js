@@ -190,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryInvoice", req, cb);
     }
     /**
+     * 云企付-查询联行号
+     */
+    async QueryOpenBankBankBranchList(req, cb) {
+        return this.request("QueryOpenBankBankBranchList", req, cb);
+    }
+    /**
      * 跨境-查询汇率
      */
     async QueryExchangeRate(req, cb) {
@@ -775,6 +781,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RevokeMemberRechargeThirdPay(req, cb) {
         return this.request("RevokeMemberRechargeThirdPay", req, cb);
+    }
+    /**
+     * 云企付-查询支持银行列表
+     */
+    async QueryOpenBankSupportBankList(req, cb) {
+        return this.request("QueryOpenBankSupportBankList", req, cb);
     }
     /**
      * 云支付-分账撤销接口

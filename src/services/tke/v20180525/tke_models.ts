@@ -516,13 +516,13 @@ export interface DescribeClusterCommonNamesRequest {
 }
 
 /**
- * 描述了 “云自动化助手” 服务相关的信息
+ * DescribeTKEEdgeScript返回参数结构体
  */
-export interface RunAutomationServiceEnabled {
+export interface DescribeTKEEdgeScriptResponse {
   /**
-   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Enabled?: boolean
+  RequestId?: string
 }
 
 /**
@@ -5856,6 +5856,31 @@ export interface AddExistedInstancesRequest {
 }
 
 /**
+ * DescribeTKEEdgeScript请求参数结构体
+ */
+export interface DescribeTKEEdgeScriptRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 网卡名
+   */
+  Interface: string
+
+  /**
+   * 节点名字
+   */
+  NodeName?: string
+
+  /**
+   * json格式的节点配置
+   */
+  Config?: string
+}
+
+/**
  * 集群弹性伸缩配置
  */
 export interface ClusterAsGroupOption {
@@ -6632,6 +6657,16 @@ export interface DeleteClusterNodePoolResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了 “云自动化助手” 服务相关的信息
+ */
+export interface RunAutomationServiceEnabled {
+  /**
+   * 是否开启云自动化助手。取值范围：<br><li>TRUE：表示开启云自动化助手服务<br><li>FALSE：表示不开启云自动化助手服务<br><br>默认取值：FALSE。
+   */
+  Enabled?: boolean
 }
 
 /**

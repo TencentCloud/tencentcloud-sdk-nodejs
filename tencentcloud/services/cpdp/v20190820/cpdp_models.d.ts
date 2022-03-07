@@ -310,6 +310,31 @@ development: 开发环境
     AgencyClientInfo?: AgencyClientInfo;
 }
 /**
+ * QueryOpenBankBankBranchList返回参数结构体
+ */
+export interface QueryOpenBankBankBranchListResponse {
+    /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryOpenBankBankBranchListResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * MigrateOrderRefundQuery返回参数结构体
  */
 export interface MigrateOrderRefundQueryResponse {
@@ -2208,17 +2233,28 @@ __其他__: 见附录-错误码表
     RequestId?: string;
 }
 /**
- * 付款人查询结果
+ * QueryMemberTransactionDetails返回参数结构体
  */
-export interface QueryPayerinfoResult {
+export interface QueryMemberTransactionDetailsResponse {
     /**
-      * 错误码
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
       */
-    Code: string;
+    ErrCode: string;
     /**
-      * 付款人查询数据
+      * 错误消息。
       */
-    Data: QueryPayerinfoData;
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryMemberTransactionDetailsResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询发票结果数据
@@ -3598,6 +3634,35 @@ export interface ViewMerchantResult {
     TaxCollectionNo?: string;
 }
 /**
+ * QueryOpenBankSupportBankList请求参数结构体
+ */
+export interface QueryOpenBankSupportBankListRequest {
+    /**
+      * 渠道商户ID。
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+    ChannelName: string;
+    /**
+      * 支付方式。
+__EBANK_PAYMENT__:ebank付款
+__OPENBANK_PAYMENT__: openbank付款
+      */
+    PaymentMethod: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
+}
+/**
  * 提交贸易材料结果
  */
 export interface ApplyTradeResult {
@@ -3696,6 +3761,15 @@ development: 开发环境
 缺省: release
       */
     MidasEnvironment?: string;
+}
+/**
+ * 查询支持的银行列表返回结果
+ */
+export interface QueryOpenBankSupportBankListResult {
+    /**
+      * 支持的银行列表
+      */
+    SupportBankList: Array<SupportBankInfo>;
 }
 /**
  * BindRelateAcctSmallAmount请求参数结构体
@@ -9074,6 +9148,31 @@ export interface QuerySmallAmountTransferRequest {
     Profile?: string;
 }
 /**
+ * 支持的银行信息
+ */
+export interface SupportBankInfo {
+    /**
+      * 银行简称。
+      */
+    BankCode: string;
+    /**
+      * 银行名称。
+      */
+    BankName: string;
+    /**
+      * 状态。
+__MAINTAINING__: 维护中
+__WORKING__: 正常工作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaintainStatus: string;
+    /**
+      * 银行渠道维护公告。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BankNotice: string;
+}
+/**
  * ModifyMntMbrBindRelateAcctBankCode请求参数结构体
  */
 export interface ModifyMntMbrBindRelateAcctBankCodeRequest {
@@ -11135,49 +11234,29 @@ export interface DistributeCancelRequest {
     Profile?: string;
 }
 /**
- * RegisterBillSupportWithdraw请求参数结构体
+ * QueryOpenBankSupportBankList返回参数结构体
  */
-export interface RegisterBillSupportWithdrawRequest {
+export interface QueryOpenBankSupportBankListResponse {
     /**
-      * STRING(32)，交易网会员代码
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
       */
-    TranNetMemberCode: string;
+    ErrCode: string;
     /**
-      * STRING(50)，订单号
+      * 错误消息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    OrderNo: string;
+    ErrMessage: string;
     /**
-      * STRING(20)，挂账金额（包含交易费用）
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SuspendAmt: string;
+    Result: QueryOpenBankSupportBankListResult;
     /**
-      * STRING(20)，交易费用（暂未使用，默认传0.0）
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TranFee: string;
-    /**
-      * String(22)，商户号（签约客户号）
-      */
-    MrchCode: string;
-    /**
-      * STRING(300)，备注
-      */
-    Remark?: string;
-    /**
-      * STRING(300)，保留域1
-      */
-    ReservedMsgOne?: string;
-    /**
-      * STRING(300)，保留域2
-      */
-    ReservedMsgTwo?: string;
-    /**
-      * STRING(300)，保留域3
-      */
-    ReservedMsgThree?: string;
-    /**
-      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
-      */
-    Profile?: string;
+    RequestId?: string;
 }
 /**
  * 成功申报材料查询结果
@@ -11325,6 +11404,11 @@ export interface OpenBankPayeeInfo {
       * 联行号。渠道为TENPAY，付款方式为OPENBANK_PAYMENT时必选
       */
     BankBranchId?: string;
+    /**
+      * 收款方绑卡序列号。
+当渠道为TENPAY，付款方式为EBANK_PAYMENT时，上送收款方入驻云企付平台时，下发的绑卡序列号。
+      */
+    BindSerialNo?: string;
 }
 /**
  * 添加门店响应对象
@@ -11795,6 +11879,27 @@ export interface ExternalContractUserInfo {
       * 第三方用户ID
       */
     ExternalUserId: string;
+}
+/**
+ * 支行信息
+ */
+export interface BankBranchInfo {
+    /**
+      * 银行名称。
+      */
+    BankName: string;
+    /**
+      * 银行简称。
+      */
+    BankAbbreviation: string;
+    /**
+      * 支行名。
+      */
+    BankBranchName: string;
+    /**
+      * 联行号。
+      */
+    BankBranchId: string;
 }
 /**
  * 用户信息
@@ -13570,28 +13675,17 @@ export interface MerchantRiskInfo {
     RiskTypes: string;
 }
 /**
- * QueryMemberTransactionDetails返回参数结构体
+ * 付款人查询结果
  */
-export interface QueryMemberTransactionDetailsResponse {
+export interface QueryPayerinfoResult {
     /**
-      * 错误码。
-__SUCCESS__: 成功
-__其他__: 见附录-错误码表
+      * 错误码
       */
-    ErrCode: string;
+    Code: string;
     /**
-      * 错误消息。
+      * 付款人查询数据
       */
-    ErrMessage: string;
-    /**
-      * 返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result: QueryMemberTransactionDetailsResult;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Data: QueryPayerinfoData;
 }
 /**
  * 查询订单付款状态响应对象
@@ -15181,6 +15275,60 @@ export interface DistributeCancelResponse {
     RequestId?: string;
 }
 /**
+ * QueryOpenBankBankBranchList请求参数结构体
+ */
+export interface QueryOpenBankBankBranchListRequest {
+    /**
+      * 渠道商户ID。
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+    ChannelName: string;
+    /**
+      * 支付方式。
+__EBANK_PAYMENT__:ebank付款
+__OPENBANK_PAYMENT__: openbank付款
+      */
+    PaymentMethod: string;
+    /**
+      * 支行名称。
+      */
+    BankBranchName: string;
+    /**
+      * 银行简称。
+      */
+    BankAbbreviation: string;
+    /**
+      * 页码。Index和Count必须大于等于1。
+      */
+    PageNumber: Paging;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
+}
+/**
+ * 查询联行号返回结果
+ */
+export interface QueryOpenBankBankBranchListResult {
+    /**
+      * 支行列表。
+      */
+    BankBranchList: Array<BankBranchInfo>;
+    /**
+      * 列表总数。
+      */
+    Count: number;
+}
+/**
  * 提交贸易材料结果
  */
 export interface ApplyTradeData {
@@ -15312,6 +15460,51 @@ export interface CreateBatchPaymentRecipient {
       * 子单请求预留字段
       */
     ReqReserved?: string;
+}
+/**
+ * RegisterBillSupportWithdraw请求参数结构体
+ */
+export interface RegisterBillSupportWithdrawRequest {
+    /**
+      * STRING(32)，交易网会员代码
+      */
+    TranNetMemberCode: string;
+    /**
+      * STRING(50)，订单号
+      */
+    OrderNo: string;
+    /**
+      * STRING(20)，挂账金额（包含交易费用）
+      */
+    SuspendAmt: string;
+    /**
+      * STRING(20)，交易费用（暂未使用，默认传0.0）
+      */
+    TranFee: string;
+    /**
+      * String(22)，商户号（签约客户号）
+      */
+    MrchCode: string;
+    /**
+      * STRING(300)，备注
+      */
+    Remark?: string;
+    /**
+      * STRING(300)，保留域1
+      */
+    ReservedMsgOne?: string;
+    /**
+      * STRING(300)，保留域2
+      */
+    ReservedMsgTwo?: string;
+    /**
+      * STRING(300)，保留域3
+      */
+    ReservedMsgThree?: string;
+    /**
+      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+      */
+    Profile?: string;
 }
 /**
  * DeleteAgentTaxPaymentInfo返回参数结构体

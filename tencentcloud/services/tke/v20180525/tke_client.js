@@ -118,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEKSCluster", req, cb);
     }
     /**
-     * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+     * 编辑节点池
      */
-    async DescribeClusterEndpointStatus(req, cb) {
-        return this.request("DescribeClusterEndpointStatus", req, cb);
+    async ModifyClusterNodePool(req, cb) {
+        return this.request("ModifyClusterNodePool", req, cb);
     }
     /**
      * 集群关联的伸缩组列表
@@ -244,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
-     * 编辑节点池
+     * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
      */
-    async ModifyClusterNodePool(req, cb) {
-        return this.request("ModifyClusterNodePool", req, cb);
+    async DescribeClusterEndpointStatus(req, cb) {
+        return this.request("DescribeClusterEndpointStatus", req, cb);
     }
     /**
      * 获取容器服务支持的所有地域
@@ -320,6 +320,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RestartEKSContainerInstances(req, cb) {
         return this.request("RestartEKSContainerInstances", req, cb);
+    }
+    /**
+     * 获取边缘脚本链接
+     */
+    async DescribeTKEEdgeScript(req, cb) {
+        return this.request("DescribeTKEEdgeScript", req, cb);
     }
     /**
      * 修改节点池关联伸缩组的期望实例数

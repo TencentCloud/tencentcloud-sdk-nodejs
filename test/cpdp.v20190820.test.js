@@ -288,6 +288,16 @@ it("cpdp.v20190820.QueryInvoice", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankBankBranchList", async function () {
+    try {
+       const data = await client.QueryOpenBankBankBranchList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryExchangeRate", async function () {
     try {
        const data = await client.QueryExchangeRate({})
@@ -1251,6 +1261,16 @@ it("cpdp.v20190820.QueryMerchantInfoForManagement", async function () {
 it("cpdp.v20190820.RevokeMemberRechargeThirdPay", async function () {
     try {
        const data = await client.RevokeMemberRechargeThirdPay({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryOpenBankSupportBankList", async function () {
+    try {
+       const data = await client.QueryOpenBankSupportBankList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

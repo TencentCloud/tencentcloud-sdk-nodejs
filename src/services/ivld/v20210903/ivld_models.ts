@@ -139,6 +139,12 @@ export interface ShowInfo {
   TextInfoSet: Array<TextInfo>
 
   /**
+      * 已分类人物信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassifiedPersonInfoSet: Array<ClassifiedPersonInfo>
+
+  /**
       * 文本标签列表，包含标签内容和出现信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -569,6 +575,23 @@ export interface PersonImageInfo {
 }
 
 /**
+ * 已分类的人物信息
+ */
+export interface ClassifiedPersonInfo {
+  /**
+      * 人物分类名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClassifyName: string
+
+  /**
+      * 符合特定分类的人物信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PersonInfoSet: Array<PersonInfo>
+}
+
+/**
  * CreateCustomGroup请求参数结构体
  */
 export interface CreateCustomGroupRequest {
@@ -896,6 +919,31 @@ export interface DescribeTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 人物信息
+ */
+export interface PersonInfo {
+  /**
+   * 公众人物姓名
+   */
+  Name: string
+
+  /**
+   * 公众人物职务
+   */
+  Job: string
+
+  /**
+   * 首次出现模态，可选值为[1,3]，详细参见AppearIndex定义
+   */
+  FirstAppear: number
+
+  /**
+   * 人物出现信息
+   */
+  AppearInfo: AppearInfo
 }
 
 /**

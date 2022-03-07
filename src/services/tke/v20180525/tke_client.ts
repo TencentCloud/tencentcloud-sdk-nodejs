@@ -41,7 +41,7 @@ import {
   UpdateEKSClusterRequest,
   CreateClusterRouteTableResponse,
   DescribeClusterCommonNamesRequest,
-  RunAutomationServiceEnabled,
+  DescribeTKEEdgeScriptResponse,
   NfsVolume,
   DeleteClusterEndpointResponse,
   PrometheusTemplateModify,
@@ -257,6 +257,7 @@ import {
   DescribePrometheusInstanceResponse,
   Capabilities,
   AddExistedInstancesRequest,
+  DescribeTKEEdgeScriptRequest,
   ClusterAsGroupOption,
   AddVpcCniSubnetsResponse,
   ModifyNodePoolDesiredCapacityAboutAsgRequest,
@@ -294,6 +295,7 @@ import {
   DescribeClusterAsGroupOptionResponse,
   ClusterAsGroupAttribute,
   DeleteClusterNodePoolResponse,
+  RunAutomationServiceEnabled,
   PrometheusTemplate,
   RunMonitorServiceEnabled,
   UpdateClusterVersionResponse,
@@ -478,13 +480,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
+   * 编辑节点池
    */
-  async DescribeClusterEndpointStatus(
-    req: DescribeClusterEndpointStatusRequest,
-    cb?: (error: string, rep: DescribeClusterEndpointStatusResponse) => void
-  ): Promise<DescribeClusterEndpointStatusResponse> {
-    return this.request("DescribeClusterEndpointStatus", req, cb)
+  async ModifyClusterNodePool(
+    req: ModifyClusterNodePoolRequest,
+    cb?: (error: string, rep: ModifyClusterNodePoolResponse) => void
+  ): Promise<ModifyClusterNodePoolResponse> {
+    return this.request("ModifyClusterNodePool", req, cb)
   }
 
   /**
@@ -688,13 +690,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑节点池
+   * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
    */
-  async ModifyClusterNodePool(
-    req: ModifyClusterNodePoolRequest,
-    cb?: (error: string, rep: ModifyClusterNodePoolResponse) => void
-  ): Promise<ModifyClusterNodePoolResponse> {
-    return this.request("ModifyClusterNodePool", req, cb)
+  async DescribeClusterEndpointStatus(
+    req: DescribeClusterEndpointStatusRequest,
+    cb?: (error: string, rep: DescribeClusterEndpointStatusResponse) => void
+  ): Promise<DescribeClusterEndpointStatusResponse> {
+    return this.request("DescribeClusterEndpointStatus", req, cb)
   }
 
   /**
@@ -815,6 +817,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartEKSContainerInstancesResponse) => void
   ): Promise<RestartEKSContainerInstancesResponse> {
     return this.request("RestartEKSContainerInstances", req, cb)
+  }
+
+  /**
+   * 获取边缘脚本链接
+   */
+  async DescribeTKEEdgeScript(
+    req: DescribeTKEEdgeScriptRequest,
+    cb?: (error: string, rep: DescribeTKEEdgeScriptResponse) => void
+  ): Promise<DescribeTKEEdgeScriptResponse> {
+    return this.request("DescribeTKEEdgeScript", req, cb)
   }
 
   /**
