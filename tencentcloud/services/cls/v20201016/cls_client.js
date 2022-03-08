@@ -119,7 +119,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConsumer", req, cb);
     }
     /**
-     * 该接口用户创建通知渠道组。
+     * 该接口用于创建通知渠道组。
      */
     async CreateAlarmNotice(req, cb) {
         return this.request("CreateAlarmNotice", req, cb);

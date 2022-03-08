@@ -793,7 +793,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCcn", req, cb);
     }
     /**
-     * 创建终端节点服务。
+     * 本接口(CreateVpcEndPointService)用于创建终端节点服务。
      */
     async CreateVpcEndPointService(req, cb) {
         return this.request("CreateVpcEndPointService", req, cb);

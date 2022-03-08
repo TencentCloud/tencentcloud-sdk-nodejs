@@ -7127,6 +7127,10 @@ export interface ImagesInfo {
       * 是否授权，1是0否
       */
     IsAuthorized: number;
+    /**
+      * 组件个数
+      */
+    ComponentCnt: number;
 }
 /**
  * DescribeReverseShellEventsExport请求参数结构体

@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMerchant", req, cb);
     }
     /**
+     * 云企付-按日期批量查询回单下载地址
+     */
+    async QueryOpenBankDailyReceiptDownloadUrl(req, cb) {
+        return this.request("QueryOpenBankDailyReceiptDownloadUrl", req, cb);
+    }
+    /**
      * 跨境-贸易材料明细查询。
      */
     async QueryTrade(req, cb) {
@@ -935,6 +941,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TerminateContract(req, cb) {
         return this.request("TerminateContract", req, cb);
+    }
+    /**
+     * 云企付-查询账户余额
+     */
+    async QueryOpenBankBankAccountBalance(req, cb) {
+        return this.request("QueryOpenBankBankAccountBalance", req, cb);
     }
     /**
      * 聚鑫-开户信息列表查询, 查询某一段时间的开户信息

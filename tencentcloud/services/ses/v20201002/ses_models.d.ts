@@ -307,6 +307,15 @@ export interface SendEmailRequest {
     Unsubscribe?: string;
 }
 /**
+ * DeleteBlackList请求参数结构体
+ */
+export interface DeleteBlackListRequest {
+    /**
+      * 需要清除的黑名单邮箱列表，数组长度至少为1
+      */
+    EmailAddressList: Array<string>;
+}
+/**
  * 用于描述发件人相关信息
  */
 export interface EmailSender {
@@ -396,13 +405,17 @@ export interface GetStatisticsReportRequest {
     ReceivingMailboxType?: string;
 }
 /**
- * DeleteBlackList请求参数结构体
+ * CreateReceiver请求参数结构体
  */
-export interface DeleteBlackListRequest {
+export interface CreateReceiverRequest {
     /**
-      * 需要清除的黑名单邮箱列表，数组长度至少为1
+      * 收件人列表名称
       */
-    EmailAddressList: Array<string>;
+    ReceiversName: string;
+    /**
+      * 收件人列表描述
+      */
+    Desc?: string;
 }
 /**
  * 发送任务数据
@@ -715,17 +728,27 @@ export interface ListEmailTemplatesRequest {
     Offset: number;
 }
 /**
- * CreateReceiver请求参数结构体
+ * CreateReceiverDetailWithData返回参数结构体
  */
-export interface CreateReceiverRequest {
+export interface CreateReceiverDetailWithDataResponse {
     /**
-      * 收件人列表名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ReceiversName: string;
+    RequestId?: string;
+}
+/**
+ * 收件人明细输入参数，包含收件人邮箱，以及模板参数
+ */
+export interface ReceiverInputData {
     /**
-      * 收件人列表描述
+      * 收件人邮箱
       */
-    Desc?: string;
+    Email: string;
+    /**
+      * 模板中的变量参数，请使用json.dump将json对象格式化为string类型。该对象是一组键值对，每个Key代表模板中的一个变量，模板中的变量使用{{键}}表示，相应的值在发送时会被替换为{{值}}。
+注意：参数值不能是html等复杂类型的数据。
+      */
+    TemplateData: string;
 }
 /**
  * CreateReceiverDetail返回参数结构体
@@ -1029,6 +1052,19 @@ export interface UpdateEmailTemplateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateReceiverDetailWithData请求参数结构体
+ */
+export interface CreateReceiverDetailWithDataRequest {
+    /**
+      * 收件人列表ID
+      */
+    ReceiverId: number;
+    /**
+      * 收信人邮箱以及模板参数，数组形式
+      */
+    Datas: Array<ReceiverInputData>;
 }
 /**
  * 创建定时发送邮件任务时，设置的定时参数，比如开始时间之类

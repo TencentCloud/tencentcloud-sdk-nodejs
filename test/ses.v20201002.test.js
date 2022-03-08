@@ -38,6 +38,16 @@ it("ses.v20201002.CreateEmailAddress", async function () {
     }
 })
 
+it("ses.v20201002.CreateReceiverDetailWithData", async function () {
+    try {
+       const data = await client.CreateReceiverDetailWithData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ses.v20201002.GetSendEmailStatus", async function () {
     try {
        const data = await client.GetSendEmailStatus({})

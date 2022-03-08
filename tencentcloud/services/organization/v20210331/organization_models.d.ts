@@ -272,6 +272,11 @@ export interface OrgMember {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OrgIdentity: Array<MemberIdentity>;
+    /**
+      * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindStatus: string;
 }
 /**
  * DescribeOrganization请求参数结构体

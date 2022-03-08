@@ -33,6 +33,7 @@ import {
   ListSendTasksRequest,
   GetSendEmailStatusResponse,
   SendEmailRequest,
+  DeleteBlackListRequest,
   EmailSender,
   BatchSendEmailResponse,
   DeleteEmailIdentityRequest,
@@ -40,7 +41,7 @@ import {
   GetEmailIdentityRequest,
   DeleteEmailIdentityResponse,
   GetStatisticsReportRequest,
-  DeleteBlackListRequest,
+  CreateReceiverRequest,
   SendTaskData,
   DeleteEmailTemplateResponse,
   Volume,
@@ -52,7 +53,8 @@ import {
   UpdateEmailTemplateRequest,
   SendEmailStatus,
   ListEmailTemplatesRequest,
-  CreateReceiverRequest,
+  CreateReceiverDetailWithDataResponse,
+  ReceiverInputData,
   CreateReceiverDetailResponse,
   ListEmailTemplatesResponse,
   SendEmailResponse,
@@ -75,6 +77,7 @@ import {
   ListReceiversResponse,
   CreateEmailAddressResponse,
   UpdateEmailTemplateResponse,
+  CreateReceiverDetailWithDataRequest,
   TimedEmailParam,
   DNSAttributes,
   GetEmailTemplateResponse,
@@ -108,6 +111,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEmailAddressResponse) => void
   ): Promise<CreateEmailAddressResponse> {
     return this.request("CreateEmailAddress", req, cb)
+  }
+
+  /**
+   * 添加收件人地址附带模板参数
+   */
+  async CreateReceiverDetailWithData(
+    req: CreateReceiverDetailWithDataRequest,
+    cb?: (error: string, rep: CreateReceiverDetailWithDataResponse) => void
+  ): Promise<CreateReceiverDetailWithDataResponse> {
+    return this.request("CreateReceiverDetailWithData", req, cb)
   }
 
   /**

@@ -69,7 +69,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyConsumer(req: ModifyConsumerRequest, cb?: (error: string, rep: ModifyConsumerResponse) => void): Promise<ModifyConsumerResponse>;
     /**
-     * 该接口用户创建通知渠道组。
+     * 该接口用于创建通知渠道组。
      */
     CreateAlarmNotice(req: CreateAlarmNoticeRequest, cb?: (error: string, rep: CreateAlarmNoticeResponse) => void): Promise<CreateAlarmNoticeResponse>;
     /**

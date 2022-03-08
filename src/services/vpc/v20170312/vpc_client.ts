@@ -1884,7 +1884,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建终端节点服务。
+   * 本接口(CreateVpcEndPointService)用于创建终端节点服务。
    */
   async CreateVpcEndPointService(
     req: CreateVpcEndPointServiceRequest,

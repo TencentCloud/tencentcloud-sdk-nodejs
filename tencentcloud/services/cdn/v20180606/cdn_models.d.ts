@@ -683,7 +683,7 @@ export interface CreateClsLogTopicResponse {
       * 主题ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TopicId?: string;
+    TopicId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -792,7 +792,7 @@ export interface DomainFilter {
 - domain：域名。
 - resourceId：域名id。
 - status：域名状态，online，offline或processing。
-- serviceType：业务类型，web，download或media。
+- serviceType：业务类型，web，download，media，hybrid或dynamic。
 - projectId：项目ID。
 - domainType：主源站类型，cname表示自有源，cos表示cos接入，third_party表示第三方对象存储。
 - fullUrlCache：全路径缓存，on或off。
@@ -1604,7 +1604,7 @@ export interface ListClsTopicDomainsRequest {
       */
     TopicId: string;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
 }
@@ -2218,7 +2218,7 @@ export interface DeleteClsLogTopicRequest {
       */
     LogsetId: string;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
 }
@@ -2702,7 +2702,7 @@ export interface DisableClsLogTopicRequest {
       */
     TopicId: string;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
 }
@@ -2733,32 +2733,32 @@ export interface ListClsTopicDomainsResponse {
     /**
       * 开发者ID
       */
-    AppId?: number;
+    AppId: number;
     /**
       * 渠道
       */
-    Channel?: string;
+    Channel: string;
     /**
       * 日志集ID
       */
-    LogsetId?: string;
+    LogsetId: string;
     /**
       * 日志主题ID
       */
-    TopicId?: string;
+    TopicId: string;
     /**
       * 域名区域配置，其中可能含有已删除的域名，如果要再传回ManageClsTopicDomains接口，需要结合ListCdnDomains接口排除掉已删除的域名
       */
-    DomainAreaConfigs?: Array<DomainAreaConfig>;
+    DomainAreaConfigs: Array<DomainAreaConfig>;
     /**
       * 日志主题名称
       */
-    TopicName?: string;
+    TopicName: string;
     /**
       * 日志主题最近更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UpdateTime?: string;
+    UpdateTime: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5206,7 +5206,7 @@ export interface ManageClsTopicDomainsRequest {
       */
     TopicId: string;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
     /**
@@ -6011,7 +6011,7 @@ export interface EnableClsLogTopicRequest {
       */
     TopicId: string;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
 }
@@ -6041,7 +6041,7 @@ export interface CreateClsLogTopicRequest {
       */
     LogsetId: string;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
     /**
@@ -6168,7 +6168,7 @@ export interface ListTopClsLogDataRequest {
       */
     Url: string;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
     /**
@@ -7390,7 +7390,7 @@ export interface DeleteScdnDomainResponse {
  */
 export interface ListClsLogTopicsRequest {
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
 }
@@ -8204,7 +8204,7 @@ export interface SearchClsLogRequest {
       */
     Limit: number;
     /**
-      * 接入渠道，默认值为cdn
+      * 接入渠道，cdn或者ecdn，默认值为cdn
       */
     Channel?: string;
     /**

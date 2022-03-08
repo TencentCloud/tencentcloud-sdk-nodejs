@@ -208,6 +208,16 @@ it("cpdp.v20190820.ModifyMerchant", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryOpenBankDailyReceiptDownloadUrl", async function () {
+    try {
+       const data = await client.QueryOpenBankDailyReceiptDownloadUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryTrade", async function () {
     try {
        const data = await client.QueryTrade({})
@@ -1511,6 +1521,16 @@ it("cpdp.v20190820.QueryTransferBatch", async function () {
 it("cpdp.v20190820.TerminateContract", async function () {
     try {
        const data = await client.TerminateContract({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryOpenBankBankAccountBalance", async function () {
+    try {
+       const data = await client.QueryOpenBankBankAccountBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

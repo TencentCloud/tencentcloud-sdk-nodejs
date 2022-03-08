@@ -329,7 +329,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用户创建通知渠道组。
+   * 该接口用于创建通知渠道组。
    */
   async CreateAlarmNotice(
     req: CreateAlarmNoticeRequest,

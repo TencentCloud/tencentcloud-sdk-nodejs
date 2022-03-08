@@ -295,6 +295,21 @@ export interface EnvInfo {
    * config-server公网访问地址
    */
   ConfigInternetServiceIp?: string
+
+  /**
+   * 规格ID
+   */
+  SpecId?: string
+
+  /**
+   * 环境的节点数
+   */
+  EnvReplica?: number
+
+  /**
+   * 环境运行的节点数
+   */
+  RunningCount?: number
 }
 
 /**

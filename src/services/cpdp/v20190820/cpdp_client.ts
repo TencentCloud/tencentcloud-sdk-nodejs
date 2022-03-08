@@ -89,6 +89,7 @@ import {
   DistributeAddReceiverRequest,
   QueryExchangerateData,
   WithdrawBill,
+  QueryOpenBankDailyReceiptDownloadUrlResponse,
   QueryPayerInfoResponse,
   BindOpenBankExternalSubMerchantBankAccountResponse,
   QueryMemberTransactionDetailsResponse,
@@ -170,6 +171,7 @@ import {
   ModifyAgentTaxPaymentInfoResponse,
   QueryBatchPaymentResultResponse,
   RevokeRechargeByThirdPayResponse,
+  QueryOpenBankDailyReceiptDownloadUrlRequest,
   CreateAcctRequest,
   CreateAgentTaxPaymentInfosRequest,
   QueryReconciliationFileApplyInfoRequest,
@@ -274,6 +276,7 @@ import {
   QueryCustAcctIdBalanceRequest,
   ReviseMbrPropertyRequest,
   AgentTaxPayment,
+  UploadFileRequest,
   QueryBankWithdrawCashDetailsResponse,
   UploadTaxPaymentResponse,
   AgencyClientInfo,
@@ -344,6 +347,7 @@ import {
   TransferSinglePayRequest,
   CreateSinglePayResponse,
   MigrateOrderRefundRequest,
+  QueryOpenBankBankAccountBalanceResult,
   QuerySinglePaymentResultData,
   UploadOrgFileResponse,
   CreateAnchorRequest,
@@ -352,6 +356,7 @@ import {
   BankBranchInfo,
   ContractUserInfo,
   ApplyApplicationMaterialRequest,
+  QueryOpenBankBankAccountBalanceRequest,
   ModifyAgentTaxPaymentInfoRequest,
   DownloadReconciliationUrlRequest,
   CreateBatchPaymentRequest,
@@ -371,7 +376,7 @@ import {
   RefundRequest,
   ContractOrderResponse,
   QueryInvoiceResponse,
-  UploadFileRequest,
+  QueryOpenBankBankAccountBalanceResponse,
   ViewMerchantResponse,
   AddShopResponse,
   UploadFileResponse,
@@ -464,6 +469,7 @@ import {
   CreateBatchPaymentRecipient,
   RegisterBillSupportWithdrawRequest,
   DeleteAgentTaxPaymentInfoResponse,
+  QueryOpenBankDailyReceiptDownloadUrlResult,
   CreateSinglePayRequest,
   QueryRefundResponse,
   DistributeAddReceiverResponse,
@@ -675,6 +681,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMerchantResponse) => void
   ): Promise<ModifyMerchantResponse> {
     return this.request("ModifyMerchant", req, cb)
+  }
+
+  /**
+   * 云企付-按日期批量查询回单下载地址
+   */
+  async QueryOpenBankDailyReceiptDownloadUrl(
+    req: QueryOpenBankDailyReceiptDownloadUrlRequest,
+    cb?: (error: string, rep: QueryOpenBankDailyReceiptDownloadUrlResponse) => void
+  ): Promise<QueryOpenBankDailyReceiptDownloadUrlResponse> {
+    return this.request("QueryOpenBankDailyReceiptDownloadUrl", req, cb)
   }
 
   /**
@@ -1994,6 +2010,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateContractResponse) => void
   ): Promise<TerminateContractResponse> {
     return this.request("TerminateContract", req, cb)
+  }
+
+  /**
+   * 云企付-查询账户余额
+   */
+  async QueryOpenBankBankAccountBalance(
+    req: QueryOpenBankBankAccountBalanceRequest,
+    cb?: (error: string, rep: QueryOpenBankBankAccountBalanceResponse) => void
+  ): Promise<QueryOpenBankBankAccountBalanceResponse> {
+    return this.request("QueryOpenBankBankAccountBalance", req, cb)
   }
 
   /**

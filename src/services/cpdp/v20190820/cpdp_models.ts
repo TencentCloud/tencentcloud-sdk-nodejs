@@ -2632,6 +2632,33 @@ export interface WithdrawBill {
 }
 
 /**
+ * QueryOpenBankDailyReceiptDownloadUrl返回参数结构体
+ */
+export interface QueryOpenBankDailyReceiptDownloadUrlResponse {
+  /**
+   * 业务系统返回码，SUCCESS表示成功，其他表示失败。
+   */
+  ErrCode: string
+
+  /**
+      * 业务系统返回消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+      * 按日期查询回单下载地址响应对象。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: QueryOpenBankDailyReceiptDownloadUrlResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryPayerInfo返回参数结构体
  */
 export interface QueryPayerInfoResponse {
@@ -6464,6 +6491,54 @@ export interface RevokeRechargeByThirdPayResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryOpenBankDailyReceiptDownloadUrl请求参数结构体
+ */
+export interface QueryOpenBankDailyReceiptDownloadUrlRequest {
+  /**
+   * 云企付渠道商户号。外部接入平台入驻云企付平台后下发。
+   */
+  ChannelMerchantId: string
+
+  /**
+   * 云企付渠道子商户号。入驻在渠道商户下的子商户ID，如付款方的商户ID，对应创建支付订单中接口参数中的PayerInfo中的payerId。
+   */
+  ChannelSubMerchantId: string
+
+  /**
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+  ChannelName: string
+
+  /**
+      * 付款方式。如
+__EBANK_PAYMENT__:ebank付款
+__OPENBANK_PAYMENT__: openbank付款
+      */
+  PaymentMethod: string
+
+  /**
+   * 绑卡序列号，银行卡唯一标记，资金账户ID，用于区分商户绑定多卡或多账户场景
+   */
+  BindSerialNo: string
+
+  /**
+   * 查询日期，D日查询D-1日的回单文件
+   */
+  QueryDate: string
+
+  /**
+      * 环境类型
+release:生产环境
+sandbox:沙箱环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -11128,6 +11203,40 @@ export interface AgentTaxPayment {
 }
 
 /**
+ * UploadFile请求参数结构体
+ */
+export interface UploadFileRequest {
+  /**
+   * 文件名
+   */
+  FileName: string
+
+  /**
+      * 文件类型
+__IdCard__:身份证
+__IdCardCheck__:身份证加验证(只支持人像面)
+      */
+  FileType: string
+
+  /**
+      * 文件链接
+__FileUrl和FileContent二选一__
+      */
+  FileUrl?: string
+
+  /**
+      * 文件内容，Base64编码
+__FileUrl和FileContent二选一__
+      */
+  FileContent?: string
+
+  /**
+   * 文件扩展信息
+   */
+  FileExtendInfo?: Array<AnchorExtendInfo>
+}
+
+/**
  * QueryBankWithdrawCashDetails返回参数结构体
  */
 export interface QueryBankWithdrawCashDetailsResponse {
@@ -14006,6 +14115,21 @@ export interface MigrateOrderRefundRequest {
 }
 
 /**
+ * 云企付-查询账户余额
+ */
+export interface QueryOpenBankBankAccountBalanceResult {
+  /**
+   * 总余额，单位分
+   */
+  TotalBalance: string
+
+  /**
+   * 昨日余额，单位分
+   */
+  YesterdayBalance: string
+}
+
+/**
  * QuerySinglePaymentResult接口返回响应
  */
 export interface QuerySinglePaymentResultData {
@@ -14270,6 +14394,49 @@ export interface ApplyApplicationMaterialRequest {
    * 接入环境。沙箱环境填sandbox
    */
   Profile?: string
+}
+
+/**
+ * QueryOpenBankBankAccountBalance请求参数结构体
+ */
+export interface QueryOpenBankBankAccountBalanceRequest {
+  /**
+   * 云企付渠道商户号。外部接入平台入驻云企付平台后下发。
+   */
+  ChannelMerchantId: string
+
+  /**
+   * 云企付渠道子商户号。入驻在渠道商户下的子商户ID，如付款方的商户ID，对应创建支付订单中接口参数中的PayerInfo中的payerId。
+   */
+  ChannelSubMerchantId: string
+
+  /**
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+  ChannelName: string
+
+  /**
+      * 支付方式，如
+__EBANK_PAYMENT__:ebank付款
+__OPENBANK_PAYMENT__: openbank付款
+      */
+  PaymentMethod: string
+
+  /**
+   * 绑卡序列号，银行账户唯一ID，区分多卡或多账户的场景
+   */
+  BindSerialNo: string
+
+  /**
+      * 环境类型
+release:生产环境
+sandbox:沙箱环境
+缺省默认为生产环境
+      */
+  Environment?: string
 }
 
 /**
@@ -14984,37 +15151,30 @@ export interface QueryInvoiceResponse {
 }
 
 /**
- * UploadFile请求参数结构体
+ * QueryOpenBankBankAccountBalance返回参数结构体
  */
-export interface UploadFileRequest {
+export interface QueryOpenBankBankAccountBalanceResponse {
   /**
-   * 文件名
+   * 业务系统返回码，SUCCESS表示成功，其他表示失败。
    */
-  FileName: string
+  ErrCode: string
 
   /**
-      * 文件类型
-__IdCard__:身份证
-__IdCardCheck__:身份证加验证(只支持人像面)
+      * 业务系统返回消息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileType: string
+  ErrMessage: string
 
   /**
-      * 文件链接
-__FileUrl和FileContent二选一__
+      * 账户余额查询响应对象。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileUrl?: string
+  Result: QueryOpenBankBankAccountBalanceResult
 
   /**
-      * 文件内容，Base64编码
-__FileUrl和FileContent二选一__
-      */
-  FileContent?: string
-
-  /**
-   * 文件扩展信息
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FileExtendInfo?: Array<AnchorExtendInfo>
+  RequestId?: string
 }
 
 /**
@@ -18484,6 +18644,28 @@ export interface DeleteAgentTaxPaymentInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云企付-按日期查询回单下载地址
+ */
+export interface QueryOpenBankDailyReceiptDownloadUrlResult {
+  /**
+   * 回单文件下载链接
+   */
+  DownloadUrl: string
+
+  /**
+   * 过期时间
+   */
+  ExpireTime: string
+
+  /**
+      * 回单状态
+PENDING: 处理中
+READY: 可以下载
+      */
+  ReceiptStatus: string
 }
 
 /**

@@ -553,7 +553,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCcn(req: DeleteCcnRequest, cb?: (error: string, rep: DeleteCcnResponse) => void): Promise<DeleteCcnResponse>;
     /**
-     * 创建终端节点服务。
+     * 本接口(CreateVpcEndPointService)用于创建终端节点服务。
      */
     CreateVpcEndPointService(req: CreateVpcEndPointServiceRequest, cb?: (error: string, rep: CreateVpcEndPointServiceResponse) => void): Promise<CreateVpcEndPointServiceResponse>;
     /**

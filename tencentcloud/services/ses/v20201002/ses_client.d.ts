@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { BatchSendEmailRequest, GetEmailTemplateRequest, ListSendTasksResponse, CreateReceiverResponse, CreateEmailTemplateRequest, ListEmailAddressRequest, ListReceiversRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, ListSendTasksRequest, GetSendEmailStatusResponse, SendEmailRequest, BatchSendEmailResponse, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, DeleteBlackListRequest, DeleteEmailTemplateResponse, CreateEmailIdentityRequest, UpdateEmailIdentityResponse, DeleteEmailTemplateRequest, DeleteBlackListResponse, UpdateEmailTemplateRequest, ListEmailTemplatesRequest, CreateReceiverRequest, CreateReceiverDetailResponse, ListEmailTemplatesResponse, SendEmailResponse, ListBlackEmailAddressResponse, GetSendEmailStatusRequest, ListEmailIdentitiesResponse, ListEmailAddressResponse, GetStatisticsReportResponse, DeleteEmailAddressRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, CreateEmailAddressRequest, CreateReceiverDetailRequest, CreateEmailTemplateResponse, ListReceiversResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
+import { BatchSendEmailRequest, GetEmailTemplateRequest, ListSendTasksResponse, CreateReceiverResponse, CreateEmailTemplateRequest, ListEmailAddressRequest, ListReceiversRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, ListSendTasksRequest, GetSendEmailStatusResponse, SendEmailRequest, DeleteBlackListRequest, BatchSendEmailResponse, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, CreateReceiverRequest, DeleteEmailTemplateResponse, CreateEmailIdentityRequest, UpdateEmailIdentityResponse, DeleteEmailTemplateRequest, DeleteBlackListResponse, UpdateEmailTemplateRequest, ListEmailTemplatesRequest, CreateReceiverDetailWithDataResponse, CreateReceiverDetailResponse, ListEmailTemplatesResponse, SendEmailResponse, ListBlackEmailAddressResponse, GetSendEmailStatusRequest, ListEmailIdentitiesResponse, ListEmailAddressResponse, GetStatisticsReportResponse, DeleteEmailAddressRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, CreateEmailAddressRequest, CreateReceiverDetailRequest, CreateEmailTemplateResponse, ListReceiversResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, CreateReceiverDetailWithDataRequest, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
 /**
  * ses client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 在验证了发信域名之后，您需要一个发信地址来发送邮件。例如发信域名是mail.qcloud.com，那么发信地址可以为 service@mail.qcloud.com。如果您想要收件人在收件箱列表中显示您的别名，例如"腾讯云邮件通知"。那么发信地址为： 别名 空格 尖括号 邮箱地址。请注意中间需要有空格
      */
     CreateEmailAddress(req: CreateEmailAddressRequest, cb?: (error: string, rep: CreateEmailAddressResponse) => void): Promise<CreateEmailAddressResponse>;
+    /**
+     * 添加收件人地址附带模板参数
+     */
+    CreateReceiverDetailWithData(req: CreateReceiverDetailWithDataRequest, cb?: (error: string, rep: CreateReceiverDetailWithDataResponse) => void): Promise<CreateReceiverDetailWithDataResponse>;
     /**
      * 获取邮件发送状态。仅支持查询30天之内的数据
      */
