@@ -785,6 +785,17 @@ export interface DeployApplicationRequest {
    * 启动探针配置
    */
   StartupProbe?: HealthCheckConfig
+
+  /**
+      * 操作系统版本；
+当选择openjdk时，可选参数：
+- ALPINE
+- CENTOS
+当选择konajdk时，可选参数：
+- ALPINE
+- TENCENTOS
+      */
+  OsFlavour?: string
 }
 
 /**

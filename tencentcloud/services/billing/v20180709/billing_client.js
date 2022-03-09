@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountBalance", req, cb);
     }
     /**
+     * 获取代金券相关信息
+     */
+    async DescribeVoucherInfo(req, cb) {
+        return this.request("DescribeVoucherInfo", req, cb);
+    }
+    /**
      * 按日期获取产品用量明细
      */
     async DescribeDosageDetailByDate(req, cb) {
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCostSummaryByResource(req, cb) {
         return this.request("DescribeCostSummaryByResource", req, cb);
+    }
+    /**
+     * 获取代金券使用记录
+     */
+    async DescribeVoucherUsageDetails(req, cb) {
+        return this.request("DescribeVoucherUsageDetails", req, cb);
     }
     /**
      * 获取收支明细列表，支持翻页和参数过滤

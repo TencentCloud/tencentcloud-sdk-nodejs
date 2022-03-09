@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CostComponentSet,
+  VoucherInfos,
   DescribeCostSummaryByProductRequest,
   ConsumptionSummaryTotal,
   DescribeCostSummaryByProjectResponse,
@@ -38,11 +39,12 @@ import {
   DescribeBillSummaryByRegionResponse,
   DetailSet,
   BillTransactionInfo,
-  RegionSummaryOverviewItem,
+  DescribeVoucherInfoResponse,
   ConsumptionResourceSummaryDataItem,
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
   ConsumptionProjectSummaryDataItem,
+  RegionSummaryOverviewItem,
   DescribeCostSummaryByProductResponse,
   ProductInfo,
   DescribeDosageDetailByDateResponse,
@@ -55,16 +57,22 @@ import {
   DescribeBillSummaryByRegionRequest,
   DescribeBillSummaryByPayModeRequest,
   DescribeCostSummaryByProjectRequest,
+  UsageRecords,
   ConsumptionRegionSummaryDataItem,
   DescribeDosageCosDetailByDateResponse,
+  UsageDetails,
   DescribeBillResourceSummaryResponse,
   ActionSummaryOverviewItem,
+  DescribeVoucherInfoRequest,
+  ApplicableProducts,
   ConditionPayMode,
+  DescribeVoucherUsageDetailsRequest,
   DescribeDealsByCondRequest,
   DescribeBillResourceSummaryRequest,
   PayDealsRequest,
   DescribeBillListRequest,
   PayDealsResponse,
+  SummaryTotal,
   BillDetail,
   DescribeBillSummaryByTagResponse,
   TagSummaryOverviewItem,
@@ -73,6 +81,7 @@ import {
   ConsumptionResourceSummaryConditionValue,
   Deal,
   DescribeCostDetailRequest,
+  DescribeVoucherUsageDetailsResponse,
   DescribeDealsByCondResponse,
   ConditionProject,
   CosDetailSets,
@@ -82,7 +91,7 @@ import {
   DescribeCostSummaryByResourceRequest,
   DescribeCostDetailResponse,
   DescribeDosageCosDetailByDateRequest,
-  SummaryTotal,
+  ExcludedProducts,
   PayModeSummaryOverviewItem,
   BusinessSummaryTotal,
   DescribeCostSummaryByRegionResponse,
@@ -108,6 +117,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取代金券相关信息
+   */
+  async DescribeVoucherInfo(
+    req: DescribeVoucherInfoRequest,
+    cb?: (error: string, rep: DescribeVoucherInfoResponse) => void
+  ): Promise<DescribeVoucherInfoResponse> {
+    return this.request("DescribeVoucherInfo", req, cb)
+  }
+
+  /**
    * 按日期获取产品用量明细
    */
   async DescribeDosageDetailByDate(
@@ -125,6 +144,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCostSummaryByResourceResponse) => void
   ): Promise<DescribeCostSummaryByResourceResponse> {
     return this.request("DescribeCostSummaryByResource", req, cb)
+  }
+
+  /**
+   * 获取代金券使用记录
+   */
+  async DescribeVoucherUsageDetails(
+    req: DescribeVoucherUsageDetailsRequest,
+    cb?: (error: string, rep: DescribeVoucherUsageDetailsResponse) => void
+  ): Promise<DescribeVoucherUsageDetailsResponse> {
+    return this.request("DescribeVoucherUsageDetails", req, cb)
   }
 
   /**

@@ -28,6 +28,16 @@ it("billing.v20180709.DescribeAccountBalance", async function () {
     }
 })
 
+it("billing.v20180709.DescribeVoucherInfo", async function () {
+    try {
+       const data = await client.DescribeVoucherInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeDosageDetailByDate", async function () {
     try {
        const data = await client.DescribeDosageDetailByDate({})
@@ -41,6 +51,16 @@ it("billing.v20180709.DescribeDosageDetailByDate", async function () {
 it("billing.v20180709.DescribeCostSummaryByResource", async function () {
     try {
        const data = await client.DescribeCostSummaryByResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeVoucherUsageDetails", async function () {
+    try {
+       const data = await client.DescribeVoucherUsageDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

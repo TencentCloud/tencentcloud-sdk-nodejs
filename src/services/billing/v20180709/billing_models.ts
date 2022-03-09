@@ -81,6 +81,68 @@ export interface CostComponentSet {
 }
 
 /**
+ * 代金券相关信息
+ */
+export interface VoucherInfos {
+  /**
+   * 代金券拥有者
+   */
+  OwnerUin: string
+
+  /**
+   * 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue
+   */
+  Status: string
+
+  /**
+   * 代金券面额（微分）
+   */
+  NominalValue: number
+
+  /**
+   * 剩余金额（微分）
+   */
+  Balance: number
+
+  /**
+   * 代金券id
+   */
+  VoucherId: string
+
+  /**
+   * postPay后付费/prePay预付费/riPay预留实例/空字符串或者'*'表示全部模式
+   */
+  PayMode: string
+
+  /**
+   * 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景
+   */
+  PayScene: string
+
+  /**
+   * 有效期生效时间
+   */
+  BeginTime: string
+
+  /**
+   * 有效期截止时间
+   */
+  EndTime: string
+
+  /**
+      * 适用商品信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicableProducts: ApplicableProducts
+
+  /**
+      * 不适用商品信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExcludedProducts: Array<ExcludedProducts>
+}
+
+/**
  * DescribeCostSummaryByProduct请求参数结构体
  */
 export interface DescribeCostSummaryByProductRequest {
@@ -895,54 +957,29 @@ export interface BillTransactionInfo {
 }
 
 /**
- * 按地域汇总消费详情
+ * DescribeVoucherInfo返回参数结构体
  */
-export interface RegionSummaryOverviewItem {
+export interface DescribeVoucherInfoResponse {
   /**
-      * 地域ID
+   * 券总数
+   */
+  TotalCount: number
+
+  /**
+   * 总余额（微分）
+   */
+  TotalBalance: number
+
+  /**
+      * 代金券相关信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RegionId: string
+  VoucherInfos: Array<VoucherInfos>
 
   /**
-   * 地域名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  RegionName: string
-
-  /**
-   * 实际花费
-   */
-  RealTotalCost: string
-
-  /**
-   * 费用所占百分比，两位小数
-   */
-  RealTotalCostRatio: string
-
-  /**
-   * 现金金额
-   */
-  CashPayAmount: string
-
-  /**
-   * 赠送金金额
-   */
-  IncentivePayAmount: string
-
-  /**
-   * 代金券金额
-   */
-  VoucherPayAmount: string
-
-  /**
-   * 账单月份，格式2019-08
-   */
-  BillMonth: string
-
-  /**
-   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
-   */
-  TotalCost: string
+  RequestId?: string
 }
 
 /**
@@ -1150,6 +1187,57 @@ export interface ConsumptionProjectSummaryDataItem {
    * 产品消耗详情
    */
   Business: Array<ConsumptionBusinessSummaryDataItem>
+}
+
+/**
+ * 按地域汇总消费详情
+ */
+export interface RegionSummaryOverviewItem {
+  /**
+      * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionId: string
+
+  /**
+   * 地域名称
+   */
+  RegionName: string
+
+  /**
+   * 实际花费
+   */
+  RealTotalCost: string
+
+  /**
+   * 费用所占百分比，两位小数
+   */
+  RealTotalCostRatio: string
+
+  /**
+   * 现金金额
+   */
+  CashPayAmount: string
+
+  /**
+   * 赠送金金额
+   */
+  IncentivePayAmount: string
+
+  /**
+   * 代金券金额
+   */
+  VoucherPayAmount: string
+
+  /**
+   * 账单月份，格式2019-08
+   */
+  BillMonth: string
+
+  /**
+   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+   */
+  TotalCost: string
 }
 
 /**
@@ -1659,6 +1747,27 @@ export interface DescribeCostSummaryByProjectRequest {
 }
 
 /**
+ * 使用记录
+ */
+export interface UsageRecords {
+  /**
+   * 使用金额（微分）
+   */
+  UsedAmount: number
+
+  /**
+   * 使用时间
+   */
+  UsedTime: string
+
+  /**
+      * 使用记录细节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsageDetails: Array<UsageDetails>
+}
+
+/**
  * 消耗按地域汇总详情
  */
 export interface ConsumptionRegionSummaryDataItem {
@@ -1701,6 +1810,23 @@ export interface DescribeDosageCosDetailByDateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 购买商品信息
+ */
+export interface UsageDetails {
+  /**
+      * 商品名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductName: string
+
+  /**
+      * 商品细节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubProductName: string
 }
 
 /**
@@ -1775,6 +1901,101 @@ export interface ActionSummaryOverviewItem {
 }
 
 /**
+ * DescribeVoucherInfo请求参数结构体
+ */
+export interface DescribeVoucherInfoRequest {
+  /**
+   * 一页多少条数据，默认是20条，最大不超过1000
+   */
+  Limit: number
+
+  /**
+   * 第多少页，默认是1
+   */
+  Offset: number
+
+  /**
+   * 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue
+   */
+  Status?: string
+
+  /**
+   * 代金券id
+   */
+  VoucherId?: string
+
+  /**
+   * 代金券订单id
+   */
+  CodeId?: string
+
+  /**
+   * 商品码
+   */
+  ProductCode?: string
+
+  /**
+   * 活动id
+   */
+  ActivityId?: string
+
+  /**
+   * 代金券名称
+   */
+  VoucherName?: string
+
+  /**
+   * 发放开始时间
+   */
+  TimeFrom?: string
+
+  /**
+   * 发放结束时间
+   */
+  TimeTo?: string
+
+  /**
+   * 指定排序字段：BeginTime开始时间、EndTime到期时间、CreateTime创建时间
+   */
+  SortField?: string
+
+  /**
+   * 指定升序降序：desc、asc
+   */
+  SortOrder?: string
+
+  /**
+   * 付费模式，postPay后付费/prePay预付费/riPay预留实例/""或者"*"表示全部模式，如果payMode为""或"*"，那么productCode与subProductCode必须传空
+   */
+  PayMode?: string
+
+  /**
+   * 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景
+   */
+  PayScene?: string
+
+  /**
+   * 操作人，默认就是用户uin
+   */
+  Operator?: string
+}
+
+/**
+ * 适用商品信息
+ */
+export interface ApplicableProducts {
+  /**
+   * 适用商品名称，值为“全产品通用”或商品名称组成的string，以","分割。
+   */
+  GoodsName: string
+
+  /**
+   * postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。如GoodsName为多个商品名以","分割组成的string，而PayMode为"*"，表示每一件商品的模式都为"*"。
+   */
+  PayMode: string
+}
+
+/**
  * 付费模式过滤条件
  */
 export interface ConditionPayMode {
@@ -1787,6 +2008,31 @@ export interface ConditionPayMode {
    * 付费模式名称
    */
   PayModeName: string
+}
+
+/**
+ * DescribeVoucherUsageDetails请求参数结构体
+ */
+export interface DescribeVoucherUsageDetailsRequest {
+  /**
+   * 一页多少条数据，默认是20条，最大不超过1000
+   */
+  Limit: number
+
+  /**
+   * 第多少页，默认是1
+   */
+  Offset: number
+
+  /**
+   * 代金券id
+   */
+  VoucherId?: string
+
+  /**
+   * 操作人，默认就是用户uin
+   */
+  Operator?: string
 }
 
 /**
@@ -2034,6 +2280,23 @@ export interface PayDealsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 总数
+ */
+export interface SummaryTotal {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealTotalCost: string
+
+  /**
+      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCost: string
 }
 
 /**
@@ -2507,6 +2770,32 @@ export interface DescribeCostDetailRequest {
 }
 
 /**
+ * DescribeVoucherUsageDetails返回参数结构体
+ */
+export interface DescribeVoucherUsageDetailsResponse {
+  /**
+   * 券总数
+   */
+  TotalCount: number
+
+  /**
+   * 总已用金额（微分）
+   */
+  TotalUsedAmount: number
+
+  /**
+      * 代金券使用记录细节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsageRecords: Array<UsageRecords>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDealsByCond返回参数结构体
  */
 export interface DescribeDealsByCondResponse {
@@ -2725,20 +3014,18 @@ export interface DescribeDosageCosDetailByDateRequest {
 }
 
 /**
- * 总数
+ * 不适用商品信息
  */
-export interface SummaryTotal {
+export interface ExcludedProducts {
   /**
-      * 总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RealTotalCost: string
+   * 不适用商品名称
+   */
+  GoodsName: string
 
   /**
-      * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCost: string
+   * postPay后付费/prePay预付费/riPay预留实例/空字符串或者"*"表示全部模式。
+   */
+  PayMode: string
 }
 
 /**

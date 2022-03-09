@@ -1970,6 +1970,11 @@ export interface UpgradeInstanceRequest {
    * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
    */
   UpgradeMode?: string
+
+  /**
+   * 升级版本前是否对集群进行备份，默认不备份
+   */
+  CosBackup?: boolean
 }
 
 /**

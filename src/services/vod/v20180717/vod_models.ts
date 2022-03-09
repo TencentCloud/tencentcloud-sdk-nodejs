@@ -3453,7 +3453,7 @@ export interface CdnLogInfo {
 }
 
 /**
- * 简单加密加解密秘钥对。
+ * 简单加密加解密密钥对。
  */
 export interface SimpleAesEdkPair {
   /**

@@ -642,17 +642,21 @@ export interface DescribePolicyGroupInfoResponse {
  */
 export interface ModifyAlarmPolicyNoticeRequest {
     /**
-      * 模块名，这里填“monitor”
+      * 模块名，这里填“monitor”。
       */
     Module: string;
     /**
-      * 告警策略 ID
+      * 告警策略 ID，如果该参数与PolicyIds参数同时存在，则以PolicyIds为准。
       */
-    PolicyId: string;
+    PolicyId?: string;
     /**
-      * 告警通知模板 ID 列表
+      * 告警通知模板 ID 列表。
       */
     NoticeIds?: Array<string>;
+    /**
+      * 告警策略ID数组，支持给多个告警策略批量绑定通知模板。最多30个。
+      */
+    PolicyIds?: Array<string>;
 }
 /**
  * DeleteAlarmPolicy请求参数结构体
