@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeMusicResponse,
+  DescribeKTVSuggestionsResponse,
   ChorusClip,
   ModifyMusicOnShelvesResponse,
   Station,
@@ -35,7 +36,7 @@ import {
   DescribeCloudMusicResponse,
   MusicDetailInfo,
   ImagePath,
-  DescribeMusicSaleStatusResponse,
+  KTVMusicTagInfo,
   DestroyKTVRobotRequest,
   DescribeAuthInfoResponse,
   DescribeLyricRequest,
@@ -43,10 +44,13 @@ import {
   SeekCommandInput,
   DescribePkgOfflineMusicRequest,
   TimeRange,
+  DescribeMusicSaleStatusResponse,
   CreateKTVRobotResponse,
   DescribePackageItemsResponse,
   DescribeCloudMusicPurchasedResponse,
+  KTVMusicTagGroup,
   DataInfo,
+  ApplicationLicenseInput,
   Artist,
   SetDestroyModeCommandInput,
   ReportDataResponse,
@@ -62,9 +66,12 @@ import {
   SortBy,
   DescribeKTVMusicDetailResponse,
   DescribeKTVRobotsRequest,
+  DescribeKTVMusicTagsResponse,
+  DescribeKTVMusicTagsRequest,
   JoinRoomInput,
   DestroyKTVRobotResponse,
   CreateKTVRobotRequest,
+  KTVSuggestionInfo,
   DescribeKTVTopListRequest,
   DescribeKTVPlaylistDetailRequest,
   Music,
@@ -97,6 +104,7 @@ import {
   DescribeLyricResponse,
   KTVMusicBaseInfo,
   SyncKTVRobotCommandRequest,
+  DescribeKTVSuggestionsRequest,
   DescribeKTVPlaylistsResponse,
   DescribeKTVPlaylistDetailResponse,
   SetAudioParamCommandInput,
@@ -219,6 +227,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取直播互动曲库联想词
+   */
+  async DescribeKTVSuggestions(
+    req: DescribeKTVSuggestionsRequest,
+    cb?: (error: string, rep: DescribeKTVSuggestionsResponse) => void
+  ): Promise<DescribeKTVSuggestionsResponse> {
+    return this.request("DescribeKTVSuggestions", req, cb)
+  }
+
+  /**
    * 根据资源方，需要变更的参数，请求该接口进行变更，为空的参数默认为无变更
    */
   async ModifyMusicOnShelves(
@@ -226,6 +244,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMusicOnShelvesResponse) => void
   ): Promise<ModifyMusicOnShelvesResponse> {
     return this.request("ModifyMusicOnShelves", req, cb)
+  }
+
+  /**
+   * 获取直播互动曲库标签分组信息和标签信息
+   */
+  async DescribeKTVMusicTags(
+    req?: DescribeKTVMusicTagsRequest,
+    cb?: (error: string, rep: DescribeKTVMusicTagsResponse) => void
+  ): Promise<DescribeKTVMusicTagsResponse> {
+    return this.request("DescribeKTVMusicTags", req, cb)
   }
 
   /**

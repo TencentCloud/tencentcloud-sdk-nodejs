@@ -18,6 +18,16 @@ const client = new tencentcloud.tke.v20180525.Client({
 })
 describe("tke.v20180525.test.js", function () {
 
+it("tke.v20180525.UpdateImageCache", async function () {
+    try {
+       const data = await client.UpdateImageCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateCluster", async function () {
     try {
        const data = await client.CreateCluster({})
@@ -138,6 +148,16 @@ it("tke.v20180525.CreatePrometheusTemplate", async function () {
     }
 })
 
+it("tke.v20180525.GetMostSuitableImageCache", async function () {
+    try {
+       const data = await client.GetMostSuitableImageCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateClusterNodePoolFromExistingAsg", async function () {
     try {
        const data = await client.CreateClusterNodePoolFromExistingAsg({})
@@ -178,9 +198,9 @@ it("tke.v20180525.ModifyClusterNodePool", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterAsGroups", async function () {
+it("tke.v20180525.DescribeImageCaches", async function () {
     try {
-       const data = await client.DescribeClusterAsGroups({})
+       const data = await client.DescribeImageCaches({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +221,16 @@ it("tke.v20180525.UpdateClusterVersion", async function () {
 it("tke.v20180525.DescribeAvailableClusterVersion", async function () {
     try {
        const data = await client.DescribeAvailableClusterVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteImageCaches", async function () {
+    try {
+       const data = await client.DeleteImageCaches({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +578,29 @@ it("tke.v20180525.DescribeVpcCniPodLimits", async function () {
     }
 })
 
+it("tke.v20180525.ModifyNodePoolInstanceTypes", async function () {
+    try {
+       const data = await client.ModifyNodePoolInstanceTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.ModifyClusterAsGroupAttribute", async function () {
     try {
        const data = await client.ModifyClusterAsGroupAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterAsGroups", async function () {
+    try {
+       const data = await client.DescribeClusterAsGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -788,9 +838,9 @@ it("tke.v20180525.DescribeClusterRoutes", async function () {
     }
 })
 
-it("tke.v20180525.ModifyNodePoolInstanceTypes", async function () {
+it("tke.v20180525.CreateImageCache", async function () {
     try {
-       const data = await client.ModifyNodePoolInstanceTypes({})
+       const data = await client.CreateImageCache({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

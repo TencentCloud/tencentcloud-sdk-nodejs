@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", clientConfig);
     }
     /**
+     * 更新镜像缓存接口
+     */
+    async UpdateImageCache(req, cb) {
+        return this.request("UpdateImageCache", req, cb);
+    }
+    /**
      * 创建集群
      */
     async CreateCluster(req, cb) {
@@ -100,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusTemplate", req, cb);
     }
     /**
+     * 根据镜像列表，查询匹配的镜像缓存
+     */
+    async GetMostSuitableImageCache(req, cb) {
+        return this.request("GetMostSuitableImageCache", req, cb);
+    }
+    /**
      * 从伸缩组创建节点池
      */
     async CreateClusterNodePoolFromExistingAsg(req, cb) {
@@ -124,10 +136,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterNodePool", req, cb);
     }
     /**
-     * 集群关联的伸缩组列表
+     * 查询镜像缓存信息接口
      */
-    async DescribeClusterAsGroups(req, cb) {
-        return this.request("DescribeClusterAsGroups", req, cb);
+    async DescribeImageCaches(req, cb) {
+        return this.request("DescribeImageCaches", req, cb);
     }
     /**
      * 升级集群 Master 组件到指定版本
@@ -140,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAvailableClusterVersion(req, cb) {
         return this.request("DescribeAvailableClusterVersion", req, cb);
+    }
+    /**
+     * 批量删除镜像缓存
+     */
+    async DeleteImageCaches(req, cb) {
+        return this.request("DeleteImageCaches", req, cb);
     }
     /**
      * 删除集群路由表
@@ -346,10 +364,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcCniPodLimits", req, cb);
     }
     /**
+     * 修改节点池的机型配置
+     */
+    async ModifyNodePoolInstanceTypes(req, cb) {
+        return this.request("ModifyNodePoolInstanceTypes", req, cb);
+    }
+    /**
      * 修改集群伸缩组属性
      */
     async ModifyClusterAsGroupAttribute(req, cb) {
         return this.request("ModifyClusterAsGroupAttribute", req, cb);
+    }
+    /**
+     * 集群关联的伸缩组列表
+     */
+    async DescribeClusterAsGroups(req, cb) {
+        return this.request("DescribeClusterAsGroups", req, cb);
     }
     /**
      * 获取模板同步信息
@@ -490,10 +520,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterRoutes", req, cb);
     }
     /**
-     * 修改节点池的机型配置
+     * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
      */
-    async ModifyNodePoolInstanceTypes(req, cb) {
-        return this.request("ModifyNodePoolInstanceTypes", req, cb);
+    async CreateImageCache(req, cb) {
+        return this.request("CreateImageCache", req, cb);
     }
     /**
      * 检查给定节点列表中哪些是可升级的

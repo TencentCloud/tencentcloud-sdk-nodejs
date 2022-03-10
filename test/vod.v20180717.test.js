@@ -428,6 +428,16 @@ it("vod.v20180717.LiveRealTimeClip", async function () {
     }
 })
 
+it("vod.v20180717.ModifyMediaStorageClass", async function () {
+    try {
+       const data = await client.ModifyMediaStorageClass({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.PullUpload", async function () {
     try {
        const data = await client.PullUpload({})

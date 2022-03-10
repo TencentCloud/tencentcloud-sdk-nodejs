@@ -171,6 +171,7 @@ import {
   DescribeUserRequest,
   DescribeTopicSyncReplicaRequest,
   InstanceDetail,
+  InstanceQuotaConfigResp,
   DescribeTopicDetailResponse,
   SubscribedInfo,
   Price,

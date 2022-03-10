@@ -10103,6 +10103,11 @@ export interface CcnBandwidthInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CcnRegionBandwidthLimit: CcnRegionBandwidthLimit;
+    /**
+      * 云市场实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MarketId: string;
 }
 /**
  * DeleteSecurityGroup返回参数结构体

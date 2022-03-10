@@ -13,6 +13,19 @@ export interface DescribeMusicResponse {
     RequestId?: string;
 }
 /**
+ * DescribeKTVSuggestions返回参数结构体
+ */
+export interface DescribeKTVSuggestionsResponse {
+    /**
+      * 联想词信息列表。返回总数最大为10。
+      */
+    KTVSuggestionInfoSet: Array<KTVSuggestionInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 副歌片段信息
  */
 export interface ChorusClip {
@@ -327,17 +340,17 @@ export interface ImagePath {
     Value: string;
 }
 /**
- * DescribeMusicSaleStatus返回参数结构体
+ * 即使广播曲库歌曲标签信息
  */
-export interface DescribeMusicSaleStatusResponse {
+export interface KTVMusicTagInfo {
     /**
-      * musicId对应歌曲状态
+      * 标签Id
       */
-    MusicStatusSet: Array<MusicStatus>;
+    TagId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 标签
       */
-    RequestId?: string;
+    TagName: string;
 }
 /**
  * DestroyKTVRobot请求参数结构体
@@ -443,6 +456,19 @@ export interface TimeRange {
     After?: string;
 }
 /**
+ * DescribeMusicSaleStatus返回参数结构体
+ */
+export interface DescribeMusicSaleStatusResponse {
+    /**
+      * musicId对应歌曲状态
+      */
+    MusicStatusSet: Array<MusicStatus>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateKTVRobot返回参数结构体
  */
 export interface CreateKTVRobotResponse {
@@ -484,6 +510,23 @@ export interface DescribeCloudMusicPurchasedResponse {
     RequestId?: string;
 }
 /**
+ * 即使广播曲库歌曲标签分组信息
+ */
+export interface KTVMusicTagGroup {
+    /**
+      * 标签分组英文名
+      */
+    EnglishGroupName: string;
+    /**
+      * 标签分组中文名
+      */
+    ChineseGroupName: string;
+    /**
+      * 标签分类下标签列表
+      */
+    TagSet: Array<KTVMusicTagInfo>;
+}
+/**
  * 数据信息
  */
 export interface DataInfo {
@@ -511,6 +554,27 @@ export interface DataInfo {
       * 标签名称
       */
     TagNames: Array<string>;
+}
+/**
+ * 用户license基础信息
+ */
+export interface ApplicationLicenseInput {
+    /**
+      * 应用名称，注：后面三个字段AndroidPackageName、IOSBundleId、PcIdentifier，三者选填一个
+      */
+    AppName: string;
+    /**
+      * app的安卓包名
+      */
+    AndroidPackageName?: string;
+    /**
+      * app的IOS的BundleId名
+      */
+    IOSBundleId?: string;
+    /**
+      * PC标识名
+      */
+    PcIdentifier?: string;
 }
 /**
  * Artist
@@ -794,6 +858,23 @@ export interface DescribeKTVRobotsRequest {
     Limit?: number;
 }
 /**
+ * DescribeKTVMusicTags返回参数结构体
+ */
+export interface DescribeKTVMusicTagsResponse {
+    /**
+      * 标签分组列表
+      */
+    TagGroupSet: Array<KTVMusicTagGroup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeKTVMusicTags请求参数结构体
+ */
+export declare type DescribeKTVMusicTagsRequest = null;
+/**
  * 直播进房输入参数
  */
 export interface JoinRoomInput {
@@ -824,6 +905,19 @@ export interface CreateKTVRobotRequest {
       * 进房参数。
       */
     JoinRoomInput: JoinRoomInput;
+    /**
+      * license基础信息
+      */
+    ApplicationLicenseInput?: ApplicationLicenseInput;
+}
+/**
+ * 即使广播曲库联想词信息
+ */
+export interface KTVSuggestionInfo {
+    /**
+      * 联想词
+      */
+    Suggestion: string;
 }
 /**
  * DescribeKTVTopList请求参数结构体
@@ -1246,6 +1340,11 @@ export interface SearchKTVMusicsRequest {
 <li> 当 KeyWord 不为空时，Sort.Field 字段无效， 搜索结果将以匹配度排序。</li>
       */
     Sort?: SortBy;
+    /**
+      * 标签 ID 集合，匹配集合指定所有 ID 。
+<li>数组长度限制：10。</li>
+      */
+    TagIds?: Array<string>;
 }
 /**
  * 推荐歌单基础信息
@@ -1482,6 +1581,15 @@ export interface SyncKTVRobotCommandRequest {
       * 销毁模式，当Command取SetDestroyMode时，必填。
       */
     SetDestroyModeCommandInput?: SetDestroyModeCommandInput;
+}
+/**
+ * DescribeKTVSuggestions请求参数结构体
+ */
+export interface DescribeKTVSuggestionsRequest {
+    /**
+      * 联想关键词
+      */
+    KeyWord: string;
 }
 /**
  * DescribeKTVPlaylists返回参数结构体

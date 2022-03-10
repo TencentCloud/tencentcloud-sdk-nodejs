@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMusicResponse, ModifyMusicOnShelvesResponse, DescribeKTVMusicDetailRequest, DescribeKTVSingerCategoriesRequest, ModifyMusicOnShelvesRequest, DescribeMusicRequest, DescribeMusicSaleStatusRequest, TakeMusicOffShelvesRequest, DescribeCloudMusicResponse, DescribeMusicSaleStatusResponse, DestroyKTVRobotRequest, DescribeAuthInfoResponse, DescribeLyricRequest, ReportDataRequest, DescribePkgOfflineMusicRequest, CreateKTVRobotResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedResponse, ReportDataResponse, SearchKTVMusicsResponse, DescribeItemByIdRequest, PutMusicOnTheShelvesResponse, DescribeKTVSingerMusicsResponse, DescribeItemsResponse, DescribePkgOfflineMusicResponse, PutMusicOnTheShelvesRequest, DescribeCloudMusicRequest, DescribeKTVMusicDetailResponse, DescribeKTVRobotsRequest, DestroyKTVRobotResponse, CreateKTVRobotRequest, DescribeKTVTopListRequest, DescribeKTVPlaylistDetailRequest, DescribeStationsResponse, DescribeCloudMusicPurchasedRequest, DescribeKTVPlaylistsRequest, DescribePackageItemsRequest, DescribeKTVRobotsResponse, DescribeStationsRequest, DescribeKTVSingerMusicsRequest, DescribeKTVSingerCategoriesResponse, DescribeKTVSingersRequest, SyncKTVRobotCommandResponse, BatchDescribeKTVMusicDetailsResponse, SearchKTVMusicsRequest, DescribeKTVSingersResponse, DescribeItemByIdResponse, BatchDescribeKTVMusicDetailsRequest, DescribeLyricResponse, SyncKTVRobotCommandRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistDetailResponse, DescribeAuthInfoRequest, DescribeItemsRequest, DescribeKTVTopListResponse, DescribePackagesRequest, DescribePackagesResponse, TakeMusicOffShelvesResponse } from "./ame_models";
+import { DescribeMusicResponse, DescribeKTVSuggestionsResponse, ModifyMusicOnShelvesResponse, DescribeKTVMusicDetailRequest, DescribeKTVSingerCategoriesRequest, ModifyMusicOnShelvesRequest, DescribeMusicRequest, DescribeMusicSaleStatusRequest, TakeMusicOffShelvesRequest, DescribeCloudMusicResponse, DestroyKTVRobotRequest, DescribeAuthInfoResponse, DescribeLyricRequest, ReportDataRequest, DescribePkgOfflineMusicRequest, DescribeMusicSaleStatusResponse, CreateKTVRobotResponse, DescribePackageItemsResponse, DescribeCloudMusicPurchasedResponse, ReportDataResponse, SearchKTVMusicsResponse, DescribeItemByIdRequest, PutMusicOnTheShelvesResponse, DescribeKTVSingerMusicsResponse, DescribeItemsResponse, DescribePkgOfflineMusicResponse, PutMusicOnTheShelvesRequest, DescribeCloudMusicRequest, DescribeKTVMusicDetailResponse, DescribeKTVRobotsRequest, DescribeKTVMusicTagsResponse, DescribeKTVMusicTagsRequest, DestroyKTVRobotResponse, CreateKTVRobotRequest, DescribeKTVTopListRequest, DescribeKTVPlaylistDetailRequest, DescribeStationsResponse, DescribeCloudMusicPurchasedRequest, DescribeKTVPlaylistsRequest, DescribePackageItemsRequest, DescribeKTVRobotsResponse, DescribeStationsRequest, DescribeKTVSingerMusicsRequest, DescribeKTVSingerCategoriesResponse, DescribeKTVSingersRequest, SyncKTVRobotCommandResponse, BatchDescribeKTVMusicDetailsResponse, SearchKTVMusicsRequest, DescribeKTVSingersResponse, DescribeItemByIdResponse, BatchDescribeKTVMusicDetailsRequest, DescribeLyricResponse, SyncKTVRobotCommandRequest, DescribeKTVSuggestionsRequest, DescribeKTVPlaylistsResponse, DescribeKTVPlaylistDetailResponse, DescribeAuthInfoRequest, DescribeItemsRequest, DescribeKTVTopListResponse, DescribePackagesRequest, DescribePackagesResponse, TakeMusicOffShelvesResponse } from "./ame_models";
 /**
  * ame client
  * @class
@@ -47,9 +47,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeMusic(req: DescribeMusicRequest, cb?: (error: string, rep: DescribeMusicResponse) => void): Promise<DescribeMusicResponse>;
     /**
+     * 获取直播互动曲库联想词
+     */
+    DescribeKTVSuggestions(req: DescribeKTVSuggestionsRequest, cb?: (error: string, rep: DescribeKTVSuggestionsResponse) => void): Promise<DescribeKTVSuggestionsResponse>;
+    /**
      * 根据资源方，需要变更的参数，请求该接口进行变更，为空的参数默认为无变更
      */
     ModifyMusicOnShelves(req: ModifyMusicOnShelvesRequest, cb?: (error: string, rep: ModifyMusicOnShelvesResponse) => void): Promise<ModifyMusicOnShelvesResponse>;
+    /**
+     * 获取直播互动曲库标签分组信息和标签信息
+     */
+    DescribeKTVMusicTags(req?: DescribeKTVMusicTagsRequest, cb?: (error: string, rep: DescribeKTVMusicTagsResponse) => void): Promise<DescribeKTVMusicTagsResponse>;
     /**
      * 获取曲库包下已核销歌曲列表接口
      */

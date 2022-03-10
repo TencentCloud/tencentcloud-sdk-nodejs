@@ -533,8 +533,11 @@ export interface ApproverInfo {
   ApproverIdCardNumber?: string
 
   /**
-   * 证件类型 ID_CARD 身份证
-   */
+      * 证件类型 
+ID_CARD 身份证
+HONGKONG_AND_MACAO 港澳居民来往内地通行证
+HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+      */
   ApproverIdCardType?: string
 
   /**
@@ -610,14 +613,16 @@ export interface FlowCreateApprover {
   ApproverMobile?: string
 
   /**
-   * 签署方经办人证件类型，ID_CARD表示身份证
-   */
-  ApproverIdCardType?: string
-
-  /**
    * 签署方经办人证件号码
    */
   ApproverIdCardNumber?: string
+
+  /**
+      * 签署方经办人证件类型ID_CARD 身份证
+HONGKONG_AND_MACAO 港澳居民来往内地通行证
+HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+      */
+  ApproverIdCardType?: string
 
   /**
    * 签署方经办人在模板中的角色ID

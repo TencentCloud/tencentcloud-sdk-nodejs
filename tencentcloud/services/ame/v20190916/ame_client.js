@@ -85,10 +85,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMusic", req, cb);
     }
     /**
+     * 获取直播互动曲库联想词
+     */
+    async DescribeKTVSuggestions(req, cb) {
+        return this.request("DescribeKTVSuggestions", req, cb);
+    }
+    /**
      * 根据资源方，需要变更的参数，请求该接口进行变更，为空的参数默认为无变更
      */
     async ModifyMusicOnShelves(req, cb) {
         return this.request("ModifyMusicOnShelves", req, cb);
+    }
+    /**
+     * 获取直播互动曲库标签分组信息和标签信息
+     */
+    async DescribeKTVMusicTags(req, cb) {
+        return this.request("DescribeKTVMusicTags", req, cb);
     }
     /**
      * 获取曲库包下已核销歌曲列表接口

@@ -2603,6 +2603,11 @@ export interface TopicAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AclRuleList: Array<AclRule>;
+    /**
+      * topic 限流策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QuotaConfig: InstanceQuotaConfigResp;
 }
 /**
  * CreateRoute返回参数结构体
@@ -3076,6 +3081,14 @@ export interface ModifyTopicAttributesRequest {
       * 标签列表
       */
     Tags?: Array<Tag>;
+    /**
+      * 生产限流，单位 MB/s
+      */
+    QuotaProducerByteRate?: number;
+    /**
+      * 消费限流，单位 MB/s
+      */
+    QuotaConsumerByteRate?: number;
 }
 /**
  * CreateTopic返回参数结构体
@@ -3386,6 +3399,21 @@ export interface InstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PublicNetwork: number;
+}
+/**
+ * 实例 / topic 维度限流策略
+ */
+export interface InstanceQuotaConfigResp {
+    /**
+      * 生产限流大小，单位 MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QuotaProducerByteRate: number;
+    /**
+      * 消费限流大小，单位 MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QuotaConsumerByteRate: number;
 }
 /**
  * DescribeTopicDetail返回参数结构体

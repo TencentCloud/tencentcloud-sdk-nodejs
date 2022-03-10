@@ -27,6 +27,7 @@ import {
   ModifyPrometheusAlertRuleRequest,
   DeleteClusterInstancesResponse,
   EksCiVolume,
+  GetTkeAppChartListRequest,
   ModifyNodePoolDesiredCapacityAboutAsgResponse,
   ModifyClusterNodePoolResponse,
   DescribeClusterKubeconfigResponse,
@@ -49,6 +50,7 @@ import {
   PrometheusNotification,
   ClusterVersion,
   CreatePrometheusTemplateRequest,
+  CreateImageCacheResponse,
   Exec,
   RestartEKSContainerInstancesRequest,
   DescribeExternalClusterSpecRequest,
@@ -60,6 +62,7 @@ import {
   RouteTableInfo,
   IPAddress,
   DeleteClusterRequest,
+  GetMostSuitableImageCacheRequest,
   PrometheusTarget,
   SecurityContext,
   CreateEKSClusterRequest,
@@ -89,8 +92,10 @@ import {
   DescribeVersionsResponse,
   ScaleInClusterMasterRequest,
   EnvironmentVariable,
+  UpdateImageCacheRequest,
   CreateClusterNodePoolFromExistingAsgRequest,
   PrometheusAlertRule,
+  ImageCache,
   DescribePrometheusAgentInstancesRequest,
   ForwardApplicationRequestV3Response,
   ClusterNetworkSettings,
@@ -112,8 +117,9 @@ import {
   DeletePrometheusTemplateSyncRequest,
   SetNodePoolNodeProtectionResponse,
   DisableVpcCniNetworkTypeRequest,
-  AddVpcCniSubnetsRequest,
+  DeleteEKSContainerInstancesRequest,
   PrometheusAlertRuleDetail,
+  UpgradeClusterInstancesRequest,
   DeleteClusterEndpointVipResponse,
   SyncPrometheusTemplateRequest,
   ClusterBasicSettings,
@@ -132,6 +138,7 @@ import {
   DescribeClusterStatusResponse,
   DeleteClusterNodePoolRequest,
   EksCi,
+  UpdateImageCacheResponse,
   DisableVpcCniNetworkTypeResponse,
   DescribeClusterKubeconfigRequest,
   ClusterCIDRSettings,
@@ -145,6 +152,7 @@ import {
   CheckInstancesUpgradeAbleRequest,
   ExistedInstance,
   ModifyNodePoolInstanceTypesRequest,
+  ImageCacheEvent,
   AddClusterCIDRRequest,
   DeleteEKSContainerInstancesResponse,
   DescribePrometheusAlertRuleRequest,
@@ -173,7 +181,7 @@ import {
   GetUpgradeInstanceProgressResponse,
   DescribeExistedInstancesResponse,
   CreateEKSClusterResponse,
-  DescribeEKSClustersRequest,
+  DescribeClusterAsGroupOptionRequest,
   CreatePrometheusAlertRuleResponse,
   UpdateEKSContainerInstanceResponse,
   ResourceDeleteOption,
@@ -198,7 +206,7 @@ import {
   DescribeAvailableClusterVersionRequest,
   CreateClusterRequest,
   DeletePrometheusAlertRuleResponse,
-  UpgradeClusterInstancesRequest,
+  PrometheusTemplate,
   AcquireClusterAdminRoleRequest,
   CreateClusterAsGroupResponse,
   DescribeEksContainerInstanceLogRequest,
@@ -221,8 +229,9 @@ import {
   ModifyClusterNodePoolRequest,
   ImageInstance,
   UpgradeAbleInstancesItem,
-  GetTkeAppChartListRequest,
+  DescribeImageCachesResponse,
   CreateClusterEndpointResponse,
+  DescribeEKSClustersRequest,
   CreateClusterNodePoolRequest,
   ClusterAdvancedSettings,
   AcquireClusterAdminRoleResponse,
@@ -247,7 +256,7 @@ import {
   DeleteClusterRouteTableResponse,
   CreateClusterInstancesResponse,
   DisableClusterDeletionProtectionResponse,
-  DescribeClusterAsGroupOptionRequest,
+  DeleteImageCachesResponse,
   DescribePrometheusAgentInstancesResponse,
   Container,
   CreateClusterEndpointRequest,
@@ -283,10 +292,11 @@ import {
   DescribeClusterAsGroupsRequest,
   DescribeImagesRequest,
   TaskStepInfo,
+  GetMostSuitableImageCacheResponse,
   DescribeAvailableClusterVersionResponse,
   TagSpecification,
   DescribeClusterRouteTablesResponse,
-  DeleteEKSContainerInstancesRequest,
+  AddVpcCniSubnetsRequest,
   InstanceUpgradePreCheckResultItem,
   DescribePrometheusAlertHistoryResponse,
   DescribeClusterCommonNamesResponse,
@@ -296,7 +306,7 @@ import {
   ClusterAsGroupAttribute,
   DeleteClusterNodePoolResponse,
   RunAutomationServiceEnabled,
-  PrometheusTemplate,
+  DeleteImageCachesRequest,
   RunMonitorServiceEnabled,
   UpdateClusterVersionResponse,
   CreateEKSContainerInstancesRequest,
@@ -304,6 +314,7 @@ import {
   CreateClusterNodePoolResponse,
   ManuallyAdded,
   NodePoolOption,
+  CreateImageCacheRequest,
   ModifyClusterAsGroupAttributeRequest,
   PrometheusGrafanaInfo,
   EipAttribute,
@@ -318,6 +329,7 @@ import {
   DescribeClusterControllersRequest,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
+  DescribeImageCachesRequest,
 } from "./tke_models"
 
 /**
@@ -327,6 +339,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tke.tencentcloudapi.com", "2018-05-25", clientConfig)
+  }
+
+  /**
+   * 更新镜像缓存接口
+   */
+  async UpdateImageCache(
+    req: UpdateImageCacheRequest,
+    cb?: (error: string, rep: UpdateImageCacheResponse) => void
+  ): Promise<UpdateImageCacheResponse> {
+    return this.request("UpdateImageCache", req, cb)
   }
 
   /**
@@ -450,6 +472,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据镜像列表，查询匹配的镜像缓存
+   */
+  async GetMostSuitableImageCache(
+    req: GetMostSuitableImageCacheRequest,
+    cb?: (error: string, rep: GetMostSuitableImageCacheResponse) => void
+  ): Promise<GetMostSuitableImageCacheResponse> {
+    return this.request("GetMostSuitableImageCache", req, cb)
+  }
+
+  /**
    * 从伸缩组创建节点池
    */
   async CreateClusterNodePoolFromExistingAsg(
@@ -490,13 +522,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 集群关联的伸缩组列表
+   * 查询镜像缓存信息接口
    */
-  async DescribeClusterAsGroups(
-    req: DescribeClusterAsGroupsRequest,
-    cb?: (error: string, rep: DescribeClusterAsGroupsResponse) => void
-  ): Promise<DescribeClusterAsGroupsResponse> {
-    return this.request("DescribeClusterAsGroups", req, cb)
+  async DescribeImageCaches(
+    req: DescribeImageCachesRequest,
+    cb?: (error: string, rep: DescribeImageCachesResponse) => void
+  ): Promise<DescribeImageCachesResponse> {
+    return this.request("DescribeImageCaches", req, cb)
   }
 
   /**
@@ -517,6 +549,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
   ): Promise<DescribeAvailableClusterVersionResponse> {
     return this.request("DescribeAvailableClusterVersion", req, cb)
+  }
+
+  /**
+   * 批量删除镜像缓存
+   */
+  async DeleteImageCaches(
+    req: DeleteImageCachesRequest,
+    cb?: (error: string, rep: DeleteImageCachesResponse) => void
+  ): Promise<DeleteImageCachesResponse> {
+    return this.request("DeleteImageCaches", req, cb)
   }
 
   /**
@@ -860,6 +902,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改节点池的机型配置
+   */
+  async ModifyNodePoolInstanceTypes(
+    req: ModifyNodePoolInstanceTypesRequest,
+    cb?: (error: string, rep: ModifyNodePoolInstanceTypesResponse) => void
+  ): Promise<ModifyNodePoolInstanceTypesResponse> {
+    return this.request("ModifyNodePoolInstanceTypes", req, cb)
+  }
+
+  /**
    * 修改集群伸缩组属性
    */
   async ModifyClusterAsGroupAttribute(
@@ -867,6 +919,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterAsGroupAttributeResponse) => void
   ): Promise<ModifyClusterAsGroupAttributeResponse> {
     return this.request("ModifyClusterAsGroupAttribute", req, cb)
+  }
+
+  /**
+   * 集群关联的伸缩组列表
+   */
+  async DescribeClusterAsGroups(
+    req: DescribeClusterAsGroupsRequest,
+    cb?: (error: string, rep: DescribeClusterAsGroupsResponse) => void
+  ): Promise<DescribeClusterAsGroupsResponse> {
+    return this.request("DescribeClusterAsGroups", req, cb)
   }
 
   /**
@@ -1100,13 +1162,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改节点池的机型配置
+   * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
    */
-  async ModifyNodePoolInstanceTypes(
-    req: ModifyNodePoolInstanceTypesRequest,
-    cb?: (error: string, rep: ModifyNodePoolInstanceTypesResponse) => void
-  ): Promise<ModifyNodePoolInstanceTypesResponse> {
-    return this.request("ModifyNodePoolInstanceTypes", req, cb)
+  async CreateImageCache(
+    req: CreateImageCacheRequest,
+    cb?: (error: string, rep: CreateImageCacheResponse) => void
+  ): Promise<CreateImageCacheResponse> {
+    return this.request("CreateImageCache", req, cb)
   }
 
   /**

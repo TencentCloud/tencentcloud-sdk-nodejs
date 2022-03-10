@@ -96,6 +96,7 @@ import {
   DeleteSuperPlayerConfigRequest,
   AiReviewTerrorismOcrTaskInput,
   AiRecognitionTaskOcrWordsResultInput,
+  ModifyMediaStorageClassResponse,
   AiReviewPornTaskInput,
   CreateProcedureTemplateRequest,
   DescribeMediaProcessUsageDataRequest,
@@ -231,6 +232,7 @@ import {
   DeleteHeadTailTemplateRequest,
   AiAnalysisTaskTagResult,
   SearchMediaResponse,
+  ModifyMediaStorageClassRequest,
   AiAnalysisTaskTagOutput,
   AiAnalysisTaskHighlightOutput,
   MediaSubtitleInput,
@@ -1088,6 +1090,28 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LiveRealTimeClipResponse) => void
   ): Promise<LiveRealTimeClipResponse> {
     return this.request("LiveRealTimeClip", req, cb)
+  }
+
+  /**
+     * 修改媒体文件的存储类型。
+当媒体文件的存储类型为标准存储时，可以修改为以下类型：
+<li>低频存储</li>
+<li>归档存储</li>
+<li>深度归档存储</li>
+当媒体文件的当前存储类型为低频存储时，可以修改为以下类型：
+<li>标准存储</li>
+<li>归档存储</li>
+<li>深度归档存储</li>
+当媒体文件的当前存储类型为归档存储时，可以修改为以下类型：
+<li>标准存储</li>
+当媒体文件的当前存储类型为深度归档存储时，可以修改为以下类型：
+<li>标准存储</li>
+     */
+  async ModifyMediaStorageClass(
+    req: ModifyMediaStorageClassRequest,
+    cb?: (error: string, rep: ModifyMediaStorageClassResponse) => void
+  ): Promise<ModifyMediaStorageClassResponse> {
+    return this.request("ModifyMediaStorageClass", req, cb)
   }
 
   /**

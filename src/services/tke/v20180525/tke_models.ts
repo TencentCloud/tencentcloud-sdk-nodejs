@@ -229,6 +229,26 @@ export interface EksCiVolume {
 }
 
 /**
+ * GetTkeAppChartList请求参数结构体
+ */
+export interface GetTkeAppChartListRequest {
+  /**
+   * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
+   */
+  Kind?: string
+
+  /**
+   * app支持的操作系统，取值arm32、arm64、amd64
+   */
+  Arch?: string
+
+  /**
+   * 集群类型，取值tke、eks
+   */
+  ClusterType?: string
+}
+
+/**
  * ModifyNodePoolDesiredCapacityAboutAsg返回参数结构体
  */
 export interface ModifyNodePoolDesiredCapacityAboutAsgResponse {
@@ -744,6 +764,21 @@ export interface CreatePrometheusTemplateRequest {
 }
 
 /**
+ * CreateImageCache返回参数结构体
+ */
+export interface CreateImageCacheResponse {
+  /**
+   * 镜像缓存Id
+   */
+  ImageCacheId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 探针在容器内执行检测命令参数类型
  */
 export interface Exec {
@@ -962,6 +997,16 @@ export interface DeleteClusterRequest {
    * 集群删除时资源的删除策略，目前支持CBS（默认保留CBS）
    */
   ResourceDeleteOptions?: Array<ResourceDeleteOption>
+}
+
+/**
+ * GetMostSuitableImageCache请求参数结构体
+ */
+export interface GetMostSuitableImageCacheRequest {
+  /**
+   * 容器镜像列表
+   */
+  Images: Array<string>
 }
 
 /**
@@ -1675,6 +1720,21 @@ export interface EnvironmentVariable {
 }
 
 /**
+ * UpdateImageCache请求参数结构体
+ */
+export interface UpdateImageCacheRequest {
+  /**
+   * 镜像缓存Id
+   */
+  ImageCacheId: string
+
+  /**
+   * 镜像缓存名称
+   */
+  ImageCacheName?: string
+}
+
+/**
  * CreateClusterNodePoolFromExistingAsg请求参数结构体
  */
 export interface CreateClusterNodePoolFromExistingAsgRequest {
@@ -1735,6 +1795,67 @@ export interface PrometheusAlertRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleState?: number
+}
+
+/**
+ * 镜像缓存的信息
+ */
+export interface ImageCache {
+  /**
+   * 镜像缓存Id
+   */
+  ImageCacheId: string
+
+  /**
+   * 镜像缓存名称
+   */
+  ImageCacheName: string
+
+  /**
+   * 镜像缓存大小。单位：GiB
+   */
+  ImageCacheSize: number
+
+  /**
+   * 镜像缓存包含的镜像列表
+   */
+  Images: Array<string>
+
+  /**
+   * 创建时间
+   */
+  CreationTime: string
+
+  /**
+   * 到期时间
+   */
+  ExpireDateTime: string
+
+  /**
+   * 镜像缓存事件信息
+   */
+  Events: Array<ImageCacheEvent>
+
+  /**
+   * 最新一次匹配到镜像缓存的时间
+   */
+  LastMatchedTime: string
+
+  /**
+   * 镜像缓存对应的快照Id
+   */
+  SnapshotId: string
+
+  /**
+      * 镜像缓存状态，可能取值：
+Pending：创建中
+Ready：创建完成
+Failed：创建失败
+Updating：更新中
+UpdateFailed：更新失败
+只有状态为Ready时，才能正常使用镜像缓存
+      */
+  Status: string
 }
 
 /**
@@ -2218,23 +2339,18 @@ export interface DisableVpcCniNetworkTypeRequest {
 }
 
 /**
- * AddVpcCniSubnets请求参数结构体
+ * DeleteEKSContainerInstances请求参数结构体
  */
-export interface AddVpcCniSubnetsRequest {
+export interface DeleteEKSContainerInstancesRequest {
   /**
-   * 集群ID
+   * 需要删除的EksCi的Id。 最大数量不超过20
    */
-  ClusterId: string
+  EksCiIds: Array<string>
 
   /**
-   * 为集群容器网络增加的子网列表
+   * 是否释放为EksCi自动创建的Eip
    */
-  SubnetIds: Array<string>
-
-  /**
-   * 集群所属的VPC的ID
-   */
-  VpcId: string
+  ReleaseAutoCreatedEip?: boolean
 }
 
 /**
@@ -2277,6 +2393,52 @@ export interface PrometheusAlertRuleDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Interval?: string
+}
+
+/**
+ * UpgradeClusterInstances请求参数结构体
+ */
+export interface UpgradeClusterInstancesRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+      * create 表示开始一次升级任务
+pause 表示停止任务
+resume表示继续任务
+abort表示终止任务
+      */
+  Operation: string
+
+  /**
+      * 升级类型，只有Operation是create需要设置
+reset 大版本重装升级
+hot 小版本热升级
+major 大版本原地升级
+      */
+  UpgradeType?: string
+
+  /**
+   * 需要升级的节点列表
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
+   */
+  ResetParam?: UpgradeNodeResetParam
+
+  /**
+   * 是否忽略节点升级前检查
+   */
+  SkipPreCheck?: boolean
+
+  /**
+   * 最大可容忍的不可用Pod比例
+   */
+  MaxNotReadyPercent?: number
 }
 
 /**
@@ -2766,6 +2928,16 @@ Pending是创建中，Running是 运行中。
 }
 
 /**
+ * UpdateImageCache返回参数结构体
+ */
+export interface UpdateImageCacheResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DisableVpcCniNetworkType返回参数结构体
  */
 export interface DisableVpcCniNetworkTypeResponse {
@@ -3068,6 +3240,41 @@ export interface ModifyNodePoolInstanceTypesRequest {
    * 机型列表
    */
   InstanceTypes: Array<string>
+}
+
+/**
+ * 镜像缓存的事件
+ */
+export interface ImageCacheEvent {
+  /**
+   * 镜像缓存Id
+   */
+  ImageCacheId: string
+
+  /**
+   * 事件类型, Normal或者Warning
+   */
+  Type: string
+
+  /**
+   * 事件原因简述
+   */
+  Reason: string
+
+  /**
+   * 事件原因详述
+   */
+  Message: string
+
+  /**
+   * 事件第一次出现时间
+   */
+  FirstTimestamp: string
+
+  /**
+   * 事件最后一次出现时间
+   */
+  LastTimestamp: string
 }
 
 /**
@@ -3709,29 +3916,13 @@ export interface CreateEKSClusterResponse {
 }
 
 /**
- * DescribeEKSClusters请求参数结构体
+ * DescribeClusterAsGroupOption请求参数结构体
  */
-export interface DescribeEKSClustersRequest {
+export interface DescribeClusterAsGroupOptionRequest {
   /**
-      * 集群ID列表(为空时，
-表示获取账号下所有集群)
-      */
-  ClusterIds?: Array<string>
-
-  /**
-   * 偏移量,默认0
+   * 集群ID
    */
-  Offset?: number
-
-  /**
-   * 最大输出条数，默认20
-   */
-  Limit?: number
-
-  /**
-   * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
-   */
-  Filters?: Array<Filter>
+  ClusterId: string
 }
 
 /**
@@ -4225,49 +4416,92 @@ export interface DeletePrometheusAlertRuleResponse {
 }
 
 /**
- * UpgradeClusterInstances请求参数结构体
+ * 模板实例
  */
-export interface UpgradeClusterInstancesRequest {
+export interface PrometheusTemplate {
   /**
-   * 集群ID
+   * 模板名称
    */
-  ClusterId: string
+  Name: string
 
   /**
-      * create 表示开始一次升级任务
-pause 表示停止任务
-resume表示继续任务
-abort表示终止任务
+      * 模板维度，支持以下类型
+instance 实例级别
+cluster 集群级别
       */
-  Operation: string
+  Level: string
 
   /**
-      * 升级类型，只有Operation是create需要设置
-reset 大版本重装升级
-hot 小版本热升级
-major 大版本原地升级
+      * 模板描述
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpgradeType?: string
+  Describe?: string
 
   /**
-   * 需要升级的节点列表
-   */
-  InstanceIds?: Array<string>
+      * 当Level为instance时有效，
+模板中的告警配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertRules?: Array<PrometheusAlertRule>
 
   /**
-   * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
-   */
-  ResetParam?: UpgradeNodeResetParam
+      * 当Level为instance时有效，
+模板中的聚合规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordRules?: Array<PrometheusConfigItem>
 
   /**
-   * 是否忽略节点升级前检查
-   */
-  SkipPreCheck?: boolean
+      * 当Level为cluster时有效，
+模板中的ServiceMonitor规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceMonitors?: Array<PrometheusConfigItem>
 
   /**
-   * 最大可容忍的不可用Pod比例
-   */
-  MaxNotReadyPercent?: number
+      * 当Level为cluster时有效，
+模板中的PodMonitors规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodMonitors?: Array<PrometheusConfigItem>
+
+  /**
+      * 当Level为cluster时有效，
+模板中的RawJobs规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawJobs?: Array<PrometheusConfigItem>
+
+  /**
+      * 模板的ID, 用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateId?: string
+
+  /**
+      * 最近更新时间，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
+
+  /**
+      * 当前版本，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version?: string
+
+  /**
+      * 是否系统提供的默认模板，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDefault?: boolean
+
+  /**
+      * 当Level为instance时有效，
+模板中的告警配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertDetailRules?: Array<PrometheusAlertRuleDetail>
 }
 
 /**
@@ -4844,23 +5078,23 @@ export interface UpgradeAbleInstancesItem {
 }
 
 /**
- * GetTkeAppChartList请求参数结构体
+ * DescribeImageCaches返回参数结构体
  */
-export interface GetTkeAppChartListRequest {
+export interface DescribeImageCachesResponse {
   /**
-   * app类型，取值log,scheduler,network,storage,monitor,dns,image,other,invisible
+   * 镜像缓存总数
    */
-  Kind?: string
+  TotalCount: number
 
   /**
-   * app支持的操作系统，取值arm32、arm64、amd64
+   * 镜像缓存信息列表
    */
-  Arch?: string
+  ImageCaches: Array<ImageCache>
 
   /**
-   * 集群类型，取值tke、eks
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterType?: string
+  RequestId?: string
 }
 
 /**
@@ -4871,6 +5105,32 @@ export interface CreateClusterEndpointResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeEKSClusters请求参数结构体
+ */
+export interface DescribeEKSClustersRequest {
+  /**
+      * 集群ID列表(为空时，
+表示获取账号下所有集群)
+      */
+  ClusterIds?: Array<string>
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+   * 最大输出条数，默认20
+   */
+  Limit?: number
+
+  /**
+   * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -5546,13 +5806,13 @@ export interface DisableClusterDeletionProtectionResponse {
 }
 
 /**
- * DescribeClusterAsGroupOption请求参数结构体
+ * DeleteImageCaches返回参数结构体
  */
-export interface DescribeClusterAsGroupOptionRequest {
+export interface DeleteImageCachesResponse {
   /**
-   * 集群ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterId: string
+  RequestId?: string
 }
 
 /**
@@ -6420,6 +6680,27 @@ failed: 步骤失败
 }
 
 /**
+ * GetMostSuitableImageCache返回参数结构体
+ */
+export interface GetMostSuitableImageCacheResponse {
+  /**
+   * 是否有匹配的镜像缓存
+   */
+  Found: boolean
+
+  /**
+      * 匹配的镜像缓存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageCache: ImageCache
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAvailableClusterVersion返回参数结构体
  */
 export interface DescribeAvailableClusterVersionResponse {
@@ -6479,18 +6760,23 @@ export interface DescribeClusterRouteTablesResponse {
 }
 
 /**
- * DeleteEKSContainerInstances请求参数结构体
+ * AddVpcCniSubnets请求参数结构体
  */
-export interface DeleteEKSContainerInstancesRequest {
+export interface AddVpcCniSubnetsRequest {
   /**
-   * 需要删除的EksCi的Id。 最大数量不超过20
+   * 集群ID
    */
-  EksCiIds: Array<string>
+  ClusterId: string
 
   /**
-   * 是否释放为EksCi自动创建的Eip
+   * 为集群容器网络增加的子网列表
    */
-  ReleaseAutoCreatedEip?: boolean
+  SubnetIds: Array<string>
+
+  /**
+   * 集群所属的VPC的ID
+   */
+  VpcId: string
 }
 
 /**
@@ -6670,92 +6956,13 @@ export interface RunAutomationServiceEnabled {
 }
 
 /**
- * 模板实例
+ * DeleteImageCaches请求参数结构体
  */
-export interface PrometheusTemplate {
+export interface DeleteImageCachesRequest {
   /**
-   * 模板名称
+   * 镜像缓存Id数组
    */
-  Name: string
-
-  /**
-      * 模板维度，支持以下类型
-instance 实例级别
-cluster 集群级别
-      */
-  Level: string
-
-  /**
-      * 模板描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Describe?: string
-
-  /**
-      * 当Level为instance时有效，
-模板中的告警配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AlertRules?: Array<PrometheusAlertRule>
-
-  /**
-      * 当Level为instance时有效，
-模板中的聚合规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RecordRules?: Array<PrometheusConfigItem>
-
-  /**
-      * 当Level为cluster时有效，
-模板中的ServiceMonitor规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ServiceMonitors?: Array<PrometheusConfigItem>
-
-  /**
-      * 当Level为cluster时有效，
-模板中的PodMonitors规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PodMonitors?: Array<PrometheusConfigItem>
-
-  /**
-      * 当Level为cluster时有效，
-模板中的RawJobs规则列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RawJobs?: Array<PrometheusConfigItem>
-
-  /**
-      * 模板的ID, 用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TemplateId?: string
-
-  /**
-      * 最近更新时间，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime?: string
-
-  /**
-      * 当前版本，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Version?: string
-
-  /**
-      * 是否系统提供的默认模板，用于出参
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsDefault?: boolean
-
-  /**
-      * 当Level为instance时有效，
-模板中的告警配置列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AlertDetailRules?: Array<PrometheusAlertRuleDetail>
+  ImageCacheIds: Array<string>
 }
 
 /**
@@ -6988,6 +7195,67 @@ export interface NodePoolOption {
    * 是否继承节点池相关配置
    */
   InheritConfigurationFromNodePool?: boolean
+}
+
+/**
+ * CreateImageCache请求参数结构体
+ */
+export interface CreateImageCacheRequest {
+  /**
+   * 用于制作镜像缓存的容器镜像列表
+   */
+  Images: Array<string>
+
+  /**
+   * 实例所属子网Id
+   */
+  SubnetId: string
+
+  /**
+   * 实例所属VPC Id
+   */
+  VpcId: string
+
+  /**
+   * 镜像缓存名称
+   */
+  ImageCacheName?: string
+
+  /**
+   * 安全组Id
+   */
+  SecurityGroupIds?: Array<string>
+
+  /**
+   * 镜像仓库凭证数组
+   */
+  ImageRegistryCredentials?: Array<ImageRegistryCredential>
+
+  /**
+   * 用来绑定容器实例的已有EIP
+   */
+  ExistedEipId?: string
+
+  /**
+   * 是否为容器实例自动创建EIP，默认为false。若传true，则此参数和ExistedEipIds互斥
+   */
+  AutoCreateEip?: boolean
+
+  /**
+      * 自动创建EIP的可选参数。若传此参数，则会自动创建EIP。
+另外此参数和ExistedEipIds互斥
+      */
+  AutoCreateEipAttribute?: EipAttribute
+
+  /**
+   * 镜像缓存的大小。默认为20 GiB。取值范围参考[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)中的高性能云盘类型的大小限制。
+   */
+  ImageCacheSize?: number
+
+  /**
+   * 镜像缓存保留时间天数，过期将会自动清理，默认为0，永不过期。
+   */
+  RetentionDays?: number
 }
 
 /**
@@ -7332,4 +7600,37 @@ export interface ScaleOutClusterMasterResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeImageCaches请求参数结构体
+ */
+export interface DescribeImageCachesRequest {
+  /**
+   * 镜像缓存Id数组
+   */
+  ImageCacheIds?: Array<string>
+
+  /**
+   * 镜像缓存名称数组
+   */
+  ImageCacheNames?: Array<string>
+
+  /**
+   * 限定此次返回资源的数量。如果不设定，默认返回20，最大不能超过50
+   */
+  Limit?: number
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+      * 过滤条件，可选条件：
+(1)实例名称
+KeyName: image-cache-name
+类型：String
+      */
+  Filters?: Array<Filter>
 }

@@ -108,9 +108,29 @@ it("ame.v20190916.DescribeMusic", async function () {
     }
 })
 
+it("ame.v20190916.DescribeKTVSuggestions", async function () {
+    try {
+       const data = await client.DescribeKTVSuggestions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.ModifyMusicOnShelves", async function () {
     try {
        const data = await client.ModifyMusicOnShelves({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeKTVMusicTags", async function () {
+    try {
+       const data = await client.DescribeKTVMusicTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
