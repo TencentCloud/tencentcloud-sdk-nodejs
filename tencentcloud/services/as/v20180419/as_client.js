@@ -43,13 +43,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAutoScalingGroup", req, cb);
     }
     /**
-     * 本接口（PreviewPaiDomainName）用于预览PAI实例域名。
-
-     */
-    async PreviewPaiDomainName(req, cb) {
-        return this.request("PreviewPaiDomainName", req, cb);
-    }
-    /**
      * 本接口（ClearLaunchConfigurationAttributes）用于将启动配置内的特定属性完全清空。
      */
     async ClearLaunchConfigurationAttributes(req, cb) {

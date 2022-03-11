@@ -38,16 +38,6 @@ it("as.v20180419.CreateAutoScalingGroup", async function () {
     }
 })
 
-it("as.v20180419.PreviewPaiDomainName", async function () {
-    try {
-       const data = await client.PreviewPaiDomainName({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("as.v20180419.ClearLaunchConfigurationAttributes", async function () {
     try {
        const data = await client.ClearLaunchConfigurationAttributes({})

@@ -2334,16 +2334,6 @@ export interface DataDisk {
 }
 
 /**
- * PreviewPaiDomainName请求参数结构体
- */
-export interface PreviewPaiDomainNameRequest {
-  /**
-   * 域名类型
-   */
-  DomainNameType?: string
-}
-
-/**
  * DeleteScalingPolicy请求参数结构体
  */
 export interface DeleteScalingPolicyRequest {
@@ -3337,21 +3327,6 @@ export interface ClearLaunchConfigurationAttributesRequest {
 填 true 代表清空主机名设置信息，清空后基于此新创建的云主机将按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置。
       */
   ClearInstanceNameSettings?: boolean
-}
-
-/**
- * PreviewPaiDomainName返回参数结构体
- */
-export interface PreviewPaiDomainNameResponse {
-  /**
-   * 可用的PAI域名
-   */
-  DomainName: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

@@ -93,7 +93,6 @@ import {
   DescribeAutoScalingActivitiesResponse,
   DescribeNotificationConfigurationsResponse,
   DataDisk,
-  PreviewPaiDomainNameRequest,
   DeleteScalingPolicyRequest,
   LoginSettings,
   CreateAutoScalingGroupFromInstanceResponse,
@@ -137,7 +136,6 @@ import {
   LifecycleHook,
   ForwardLoadBalancer,
   ClearLaunchConfigurationAttributesRequest,
-  PreviewPaiDomainNameResponse,
   ForwardLoadBalancerIdentification,
   AutoScalingAdvice,
   StartAutoScalingInstancesRequest,
@@ -190,17 +188,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAutoScalingGroupResponse) => void
   ): Promise<CreateAutoScalingGroupResponse> {
     return this.request("CreateAutoScalingGroup", req, cb)
-  }
-
-  /**
-     * 本接口（PreviewPaiDomainName）用于预览PAI实例域名。
-
-     */
-  async PreviewPaiDomainName(
-    req: PreviewPaiDomainNameRequest,
-    cb?: (error: string, rep: PreviewPaiDomainNameResponse) => void
-  ): Promise<PreviewPaiDomainNameResponse> {
-    return this.request("PreviewPaiDomainName", req, cb)
   }
 
   /**
