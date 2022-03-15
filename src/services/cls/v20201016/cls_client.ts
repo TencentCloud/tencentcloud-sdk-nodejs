@@ -30,18 +30,24 @@ import {
   DescribeShipperTasksResponse,
   CreateMachineGroupResponse,
   DescribeConfigMachineGroupsRequest,
+  ModifyConfigExtraResponse,
   CreateLogsetRequest,
+  DescribeShippersRequest,
   LogItem,
   SearchLogResponse,
   DeleteTopicRequest,
   DescribePartitionsRequest,
+  ContainerStdoutInfo,
   ModifyAlarmResponse,
   DescribeShipperTasksRequest,
   DescribeAlarmsRequest,
   MergePartitionRequest,
   DescribeShippersResponse,
+  CreateConfigExtraResponse,
   ModifyShipperResponse,
   RetryShipperTaskRequest,
+  ContainerWorkLoadInfo,
+  DescribeConfigExtrasResponse,
   CallBackInfo,
   AlarmTargetInfo,
   DescribeIndexRequest,
@@ -49,11 +55,11 @@ import {
   CreateLogsetResponse,
   DeleteMachineGroupResponse,
   Tag,
-  DescribeMachineGroupsRequest,
+  DescribeExportsRequest,
   ExtractRuleInfo,
   TopicInfo,
   DescribeConsumerRequest,
-  ShipperTaskInfo,
+  DeleteConfigExtraResponse,
   ModifyConsumerRequest,
   CreateIndexResponse,
   DeleteConfigFromMachineGroupResponse,
@@ -72,11 +78,13 @@ import {
   CreateAlarmRequest,
   DeleteExportResponse,
   PartitionInfo,
-  DescribeShippersRequest,
+  CreateConfigExtraRequest,
   ExcludePathInfo,
   FilterRuleInfo,
+  ConfigExtraInfo,
   RetryShipperTaskResponse,
   SplitPartitionRequest,
+  DescribeMachineGroupConfigsResponse,
   MachineGroupInfo,
   RuleTagInfo,
   CreateIndexRequest,
@@ -84,7 +92,7 @@ import {
   DescribeTopicsRequest,
   GetAlarmLogResponse,
   CreateTopicRequest,
-  DescribeExportsRequest,
+  DescribeMachineGroupsRequest,
   AlarmTarget,
   DeleteConfigResponse,
   ModifyIndexResponse,
@@ -96,9 +104,11 @@ import {
   DescribeConfigsRequest,
   DeleteConfigRequest,
   AnalysisDimensional,
+  ShipperTaskInfo,
   LogsetInfo,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
+  DeleteConfigExtraRequest,
   ModifyConfigRequest,
   DescribeLogsetsResponse,
   JsonInfo,
@@ -142,7 +152,7 @@ import {
   DescribeAlarmNoticesRequest,
   NoticeReceiver,
   Ckafka,
-  CreateExportResponse,
+  DescribeMachinesRequest,
   DeleteAlarmNoticeRequest,
   DeleteLogsetRequest,
   MachineInfo,
@@ -152,18 +162,21 @@ import {
   CreateMachineGroupRequest,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
-  DescribeMachineGroupConfigsResponse,
+  ContainerFileInfo,
   CsvInfo,
+  DescribeConfigExtrasRequest,
   CreateAlarmNoticeRequest,
   DescribeIndexResponse,
   DescribeMachineGroupConfigsRequest,
+  ModifyConfigExtraRequest,
   ModifyLogsetRequest,
   DescribeMachineGroupsResponse,
   DescribeLogsetsRequest,
   DeleteTopicResponse,
   Filter,
   ConsumerContent,
-  DescribeMachinesRequest,
+  CreateExportResponse,
+  HostFileInfo,
   KeyRegexInfo,
   MergePartitionResponse,
 } from "./cls_models"
@@ -228,14 +241,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口用于修改索引配置
-
-     */
-  async ModifyIndex(
-    req: ModifyIndexRequest,
-    cb?: (error: string, rep: ModifyIndexResponse) => void
-  ): Promise<ModifyIndexResponse> {
-    return this.request("ModifyIndex", req, cb)
+   * 获取制定机器组下的机器状态
+   */
+  async DescribeMachines(
+    req: DescribeMachinesRequest,
+    cb?: (error: string, rep: DescribeMachinesResponse) => void
+  ): Promise<DescribeMachinesResponse> {
+    return this.request("DescribeMachines", req, cb)
   }
 
   /**
@@ -266,6 +278,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExportsResponse) => void
   ): Promise<DescribeExportsResponse> {
     return this.request("DescribeExports", req, cb)
+  }
+
+  /**
+   * 本接口用于修改特殊采集配置任务
+   */
+  async ModifyConfigExtra(
+    req: ModifyConfigExtraRequest,
+    cb?: (error: string, rep: ModifyConfigExtraResponse) => void
+  ): Promise<ModifyConfigExtraResponse> {
+    return this.request("ModifyConfigExtra", req, cb)
   }
 
   /**
@@ -306,6 +328,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConfigResponse) => void
   ): Promise<DeleteConfigResponse> {
     return this.request("DeleteConfig", req, cb)
+  }
+
+  /**
+   * 本接口用于获取特殊采集配置
+   */
+  async DescribeConfigExtras(
+    req: DescribeConfigExtrasRequest,
+    cb?: (error: string, rep: DescribeConfigExtrasResponse) => void
+  ): Promise<DescribeConfigExtrasResponse> {
+    return this.request("DescribeConfigExtras", req, cb)
   }
 
   /**
@@ -419,13 +451,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于创建日志集，返回新创建的日志集的 ID。
+   * 本接口用于删除特殊采集规则配置
    */
-  async CreateLogset(
-    req: CreateLogsetRequest,
-    cb?: (error: string, rep: CreateLogsetResponse) => void
-  ): Promise<CreateLogsetResponse> {
-    return this.request("CreateLogset", req, cb)
+  async DeleteConfigExtra(
+    req: DeleteConfigExtraRequest,
+    cb?: (error: string, rep: DeleteConfigExtraResponse) => void
+  ): Promise<DeleteConfigExtraResponse> {
+    return this.request("DeleteConfigExtra", req, cb)
   }
 
   /**
@@ -469,6 +501,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于创建日志集，返回新创建的日志集的 ID。
+   */
+  async CreateLogset(
+    req: CreateLogsetRequest,
+    cb?: (error: string, rep: CreateLogsetResponse) => void
+  ): Promise<CreateLogsetResponse> {
+    return this.request("CreateLogset", req, cb)
+  }
+
+  /**
    * 该接口用于删除通知渠道组
    */
   async DeleteAlarmNotice(
@@ -476,6 +518,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void
   ): Promise<DeleteAlarmNoticeResponse> {
     return this.request("DeleteAlarmNotice", req, cb)
+  }
+
+  /**
+     * 本接口用于修改索引配置
+
+     */
+  async ModifyIndex(
+    req: ModifyIndexRequest,
+    cb?: (error: string, rep: ModifyIndexResponse) => void
+  ): Promise<ModifyIndexResponse> {
+    return this.request("ModifyIndex", req, cb)
   }
 
   /**
@@ -784,13 +837,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 获取制定机器组下的机器状态
+   * 本接口用于创建特殊采集配置任务
    */
-  async DescribeMachines(
-    req: DescribeMachinesRequest,
-    cb?: (error: string, rep: DescribeMachinesResponse) => void
-  ): Promise<DescribeMachinesResponse> {
-    return this.request("DescribeMachines", req, cb)
+  async CreateConfigExtra(
+    req: CreateConfigExtraRequest,
+    cb?: (error: string, rep: CreateConfigExtraResponse) => void
+  ): Promise<CreateConfigExtraResponse> {
+    return this.request("CreateConfigExtra", req, cb)
   }
 
   /**

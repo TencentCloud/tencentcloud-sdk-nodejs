@@ -335,6 +335,19 @@ export interface Keyword {
     Word?: string;
 }
 /**
+ * TextSimilarityPro请求参数结构体
+ */
+export interface TextSimilarityProRequest {
+    /**
+      * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过128字符）
+      */
+    SrcText: string;
+    /**
+      * 目标句子（仅支持UTF-8格式，不超过128字符）
+      */
+    TargetText: Array<string>;
+}
+/**
  * UpdateDict返回参数结构体
  */
 export interface UpdateDictResponse {
@@ -732,6 +745,19 @@ export interface TextCorrectionResponse {
       * 纠错后的文本
       */
     ResultText?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * TextSimilarityPro返回参数结构体
+ */
+export interface TextSimilarityProResponse {
+    /**
+      * 每个目标句子与源句子的相似度分值，按照分值降序排列
+      */
+    Similarity: Array<Similarity>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

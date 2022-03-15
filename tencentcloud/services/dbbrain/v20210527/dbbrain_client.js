@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateKillTask", req, cb);
     }
     /**
-     * 获取SQL优化建议。
+     * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
      */
     async DescribeUserSqlAdvice(req, cb) {
         return this.request("DescribeUserSqlAdvice", req, cb);

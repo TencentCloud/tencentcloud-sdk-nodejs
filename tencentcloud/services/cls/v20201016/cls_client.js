@@ -58,11 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     * 本接口用于修改索引配置
-
+     * 获取制定机器组下的机器状态
      */
-    async ModifyIndex(req, cb) {
-        return this.request("ModifyIndex", req, cb);
+    async DescribeMachines(req, cb) {
+        return this.request("DescribeMachines", req, cb);
     }
     /**
      * 本接口用于获取日志集信息列表。
@@ -81,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeExports(req, cb) {
         return this.request("DescribeExports", req, cb);
+    }
+    /**
+     * 本接口用于修改特殊采集配置任务
+     */
+    async ModifyConfigExtra(req, cb) {
+        return this.request("ModifyConfigExtra", req, cb);
     }
     /**
      * 本接口用于获取索引配置信息
@@ -105,6 +110,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteConfig(req, cb) {
         return this.request("DeleteConfig", req, cb);
+    }
+    /**
+     * 本接口用于获取特殊采集配置
+     */
+    async DescribeConfigExtras(req, cb) {
+        return this.request("DescribeConfigExtras", req, cb);
     }
     /**
      * 创建新的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
@@ -173,10 +184,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteConfigFromMachineGroup", req, cb);
     }
     /**
-     * 本接口用于创建日志集，返回新创建的日志集的 ID。
+     * 本接口用于删除特殊采集规则配置
      */
-    async CreateLogset(req, cb) {
-        return this.request("CreateLogset", req, cb);
+    async DeleteConfigExtra(req, cb) {
+        return this.request("DeleteConfigExtra", req, cb);
     }
     /**
      * 本接口用于获取告警策略列表。
@@ -203,10 +214,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyConfigToMachineGroup", req, cb);
     }
     /**
+     * 本接口用于创建日志集，返回新创建的日志集的 ID。
+     */
+    async CreateLogset(req, cb) {
+        return this.request("CreateLogset", req, cb);
+    }
+    /**
      * 该接口用于删除通知渠道组
      */
     async DeleteAlarmNotice(req, cb) {
         return this.request("DeleteAlarmNotice", req, cb);
+    }
+    /**
+     * 本接口用于修改索引配置
+
+     */
+    async ModifyIndex(req, cb) {
+        return this.request("ModifyIndex", req, cb);
     }
     /**
      * 该接口用于修改通知渠道组
@@ -454,10 +478,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("MergePartition", req, cb);
     }
     /**
-     * 获取制定机器组下的机器状态
+     * 本接口用于创建特殊采集配置任务
      */
-    async DescribeMachines(req, cb) {
-        return this.request("DescribeMachines", req, cb);
+    async CreateConfigExtra(req, cb) {
+        return this.request("CreateConfigExtra", req, cb);
     }
     /**
      * 重试失败的投递任务

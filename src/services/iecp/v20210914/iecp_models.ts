@@ -5704,6 +5704,11 @@ export interface CreateEdgeUnitCloudRequest {
    * 集群service cidr, 默认 10.2.0.0/16
    */
   ServiceCIDR?: string
+
+  /**
+   * 是否开启监控。目前内存中权限开启联系产品开通白名单
+   */
+  OpenCloudMonitor?: boolean
 }
 
 /**

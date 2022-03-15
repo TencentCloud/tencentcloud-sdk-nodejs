@@ -68,9 +68,9 @@ it("cls.v20201016.ModifyTopic", async function () {
     }
 })
 
-it("cls.v20201016.ModifyIndex", async function () {
+it("cls.v20201016.DescribeMachines", async function () {
     try {
-       const data = await client.ModifyIndex({})
+       const data = await client.DescribeMachines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +101,16 @@ it("cls.v20201016.ModifyLogset", async function () {
 it("cls.v20201016.DescribeExports", async function () {
     try {
        const data = await client.DescribeExports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyConfigExtra", async function () {
+    try {
+       const data = await client.ModifyConfigExtra({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +151,16 @@ it("cls.v20201016.CreateIndex", async function () {
 it("cls.v20201016.DeleteConfig", async function () {
     try {
        const data = await client.DeleteConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeConfigExtras", async function () {
+    try {
+       const data = await client.DescribeConfigExtras({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +278,9 @@ it("cls.v20201016.DeleteConfigFromMachineGroup", async function () {
     }
 })
 
-it("cls.v20201016.CreateLogset", async function () {
+it("cls.v20201016.DeleteConfigExtra", async function () {
     try {
-       const data = await client.CreateLogset({})
+       const data = await client.DeleteConfigExtra({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +328,29 @@ it("cls.v20201016.ApplyConfigToMachineGroup", async function () {
     }
 })
 
+it("cls.v20201016.CreateLogset", async function () {
+    try {
+       const data = await client.CreateLogset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteAlarmNotice", async function () {
     try {
        const data = await client.DeleteAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyIndex", async function () {
+    try {
+       const data = await client.ModifyIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +508,9 @@ it("cls.v20201016.MergePartition", async function () {
     }
 })
 
-it("cls.v20201016.DescribeMachines", async function () {
+it("cls.v20201016.CreateConfigExtra", async function () {
     try {
-       const data = await client.DescribeMachines({})
+       const data = await client.CreateConfigExtra({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

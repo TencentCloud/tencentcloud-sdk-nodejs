@@ -383,11 +383,11 @@ export interface DescribeHostsResponse {
     /**
       * 符合查询条件的cdh实例总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * cdh实例详细信息列表
       */
-    HostSet?: Array<HostItem>;
+    HostSet: Array<HostItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -657,11 +657,11 @@ export interface DescribeInstancesStatusResponse {
     /**
       * 符合条件的实例状态数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * [实例状态](https://cloud.tencent.com/document/api/213/15753#InstanceStatus) 列表。
       */
-    InstanceStatusSet?: Array<InstanceStatus>;
+    InstanceStatusSet: Array<InstanceStatus>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -792,7 +792,7 @@ export interface InquiryPriceModifyInstancesChargeTypeResponse {
     /**
       * 该参数表示对应配置实例转换计费模式的价格。
       */
-    Price?: Price;
+    Price: Price;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -919,7 +919,7 @@ export interface ModifyInstancesChargeTypeRequest {
       */
     InstanceIds: Array<string>;
     /**
-      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月。
+      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月。<br><li>POSTPAID_BY_HOUR：后付费，即按量付费。
       */
     InstanceChargeType: string;
     /**
@@ -2037,11 +2037,11 @@ export interface InquiryPriceModifyInstancesChargeTypeRequest {
       */
     InstanceIds: Array<string>;
     /**
-      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月。
+      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月。<br><li>POSTPAID_BY_HOUR：后付费，即按量付费。
       */
     InstanceChargeType: string;
     /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。<dx-alert infotype="explain" title="">若指定实例的付费模式为预付费则该参数必传。</dx-alert>
       */
     InstanceChargePrepaid?: InstanceChargePrepaid;
 }

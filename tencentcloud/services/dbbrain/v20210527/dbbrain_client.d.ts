@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     CreateKillTask(req: CreateKillTaskRequest, cb?: (error: string, rep: CreateKillTaskResponse) => void): Promise<CreateKillTaskResponse>;
     /**
-     * 获取SQL优化建议。
+     * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
      */
     DescribeUserSqlAdvice(req: DescribeUserSqlAdviceRequest, cb?: (error: string, rep: DescribeUserSqlAdviceResponse) => void): Promise<DescribeUserSqlAdviceResponse>;
     /**

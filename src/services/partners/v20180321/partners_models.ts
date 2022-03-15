@@ -810,7 +810,7 @@ export interface AgentDealNewElem {
   BigDealId: string
 
   /**
-      * 客户类型（new：新拓；old：存量；assign：指派）
+      * 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientType: string
@@ -1034,7 +1034,7 @@ export interface AgentAuditedClient {
   HasOverdueBill: number
 
   /**
-   * 客户类型：可以为new(新拓)/assign(指定)/old(存量已关联)/old_newchecking(存量-新关联考核中)/old_newnotpass(存量-新关联未达标)/direct(直销)/direct_newopp(直销(新商机))/空
+   * 客户类型：可以为new(自拓)/assign(指派)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空
    */
   ClientType: string
 
@@ -1362,7 +1362,7 @@ export interface AgentBillElem {
   PayerMode: string
 
   /**
-      * 客户类型：可以为new(新拓)/assign(指定)/old(存量)/空
+      * 客户类型：可以为new(自拓)/assign(指定)/old(官网)/direct(直销)/direct_newopp(直销(新商机))/空
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientType: string
@@ -1595,7 +1595,7 @@ export interface AgentDealElem {
   BigDealId: string
 
   /**
-      * 客户类型（new：新拓；old：存量；assign：指派）
+      * 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientType: string

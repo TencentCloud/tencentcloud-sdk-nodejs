@@ -3602,12 +3602,12 @@ export interface OpenBankSceneInfo {
   /**
    * 用户端实际 ip，示例值：14.17.22.32
    */
-  PayerClientIp: string
+  PayerClientIp?: string
 
   /**
    * 浏览器 User-Agent
    */
-  PayerUa: string
+  PayerUa?: string
 
   /**
    * 用户下单时间，若不上送，服务端默认当前时间
@@ -9299,8 +9299,9 @@ export interface QueryOpenBankDownLoadUrlResponse {
   ErrMessage: string
 
   /**
-   * 查询对账文件下载响应对象。
-   */
+      * 查询对账文件下载响应对象。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Result: QueryOpenBankDownLoadUrlResult
 
   /**
@@ -11874,7 +11875,7 @@ export interface OpenBankGoodsInfo {
   /**
    * 商品名称，默认值“商品支付”
    */
-  GoodsName: string
+  GoodsName?: string
 
   /**
    * 商品详细描述（商品列表）
@@ -13722,7 +13723,7 @@ export interface OpenBankPayeeInfo {
 
   /**
       * 收款方绑卡序列号。
-当渠道为TENPAY，付款方式为EBANK_PAYMENT时，上送收款方入驻云企付平台时，下发的绑卡序列号。
+当渠道为TENPAY，付款方式为EBANK_PAYMENT时，必填，上送收款方入驻云企付平台时，下发的绑卡序列号。
       */
   BindSerialNo?: string
 }

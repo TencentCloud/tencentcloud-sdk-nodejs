@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { LexicalAnalysisResponse, SentenceEmbeddingRequest, DescribeTripleRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, KeywordsExtractionResponse, AutoSummarizationRequest, ChatBotRequest, DescribeRelationRequest, KeywordsExtractionRequest, DescribeEntityResponse, DescribeEntityRequest, UpdateDictResponse, DescribeDictsRequest, DescribeRelationResponse, CreateWordItemsRequest, TextCorrectionRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, TextClassificationResponse, DeleteDictResponse, DescribeWordItemsRequest, SearchWordItemsRequest, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeTripleResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, SentimentAnalysisResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SimilarWordsResponse, DependencyParsingResponse, LexicalAnalysisRequest, CreateWordItemsResponse, SentimentAnalysisRequest, WordSimilarityResponse, CreateDictRequest } from "./nlp_models";
+import { LexicalAnalysisResponse, SentenceEmbeddingRequest, DescribeTripleRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, KeywordsExtractionResponse, AutoSummarizationRequest, ChatBotRequest, DescribeRelationRequest, KeywordsExtractionRequest, DescribeEntityResponse, DescribeEntityRequest, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, DescribeRelationResponse, CreateWordItemsRequest, TextCorrectionRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, TextClassificationResponse, DeleteDictResponse, DescribeWordItemsRequest, SearchWordItemsRequest, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeTripleResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, SentimentAnalysisResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SimilarWordsResponse, DependencyParsingResponse, LexicalAnalysisRequest, CreateWordItemsResponse, SentimentAnalysisRequest, WordSimilarityResponse, CreateDictRequest } from "./nlp_models";
 /**
  * nlp client
  * @class
@@ -92,6 +92,14 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
      * 向指定的词库中添加词条。
      */
     CreateWordItems(req: CreateWordItemsRequest, cb?: (error: string, rep: CreateWordItemsResponse) => void): Promise<CreateWordItemsResponse>;
+    /**
+     * 句子相似度接口能够基于深度学习技术来计算一个源句子和多个目标句子的相似度，相似度分值越大的两个句子在语义上越相似。目前仅支持短文本（不超过128字符）的相似度计算，长文本的相似度计算也即将推出。
+
+鉴于句子相似度是一个应用非常广泛的功能，腾讯云自然语言处理团队在Bert等领先的深度神经网络模型的基础上，专门针对文本相似任务进行了优化，并持续迭代更新。基于句子相似度，可以轻松实现诸如文本去重、相似推荐等功能。
+
+接口将以句子数量为单位消耗资源包，而不是调用接口次数为单位。
+     */
+    TextSimilarityPro(req: TextSimilarityProRequest, cb?: (error: string, rep: TextSimilarityProResponse) => void): Promise<TextSimilarityProResponse>;
     /**
      * 句子相似度接口能够基于深度学习技术来计算一个源句子和多个目标句子的相似度，相似度分值越大的两个句子在语义上越相似。目前仅支持短文本（不超过500字符）的相似度计算，长文本的相似度计算也即将推出。
 

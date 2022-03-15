@@ -5709,7 +5709,7 @@ export interface DescribeCDBProxyRequest {
       */
     InstanceId: string;
     /**
-      * 代理ID
+      * 代理组ID
       */
     ProxyGroupId?: string;
 }

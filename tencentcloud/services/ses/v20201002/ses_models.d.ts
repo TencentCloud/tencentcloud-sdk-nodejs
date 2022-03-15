@@ -102,29 +102,18 @@ export interface CreateEmailTemplateRequest {
     TemplateContent: TemplateContent;
 }
 /**
- * 模板列表结构
+ * ListEmailAddress返回参数结构体
  */
-export interface TemplatesMetadata {
+export interface ListEmailAddressResponse {
     /**
-      * 创建时间
+      * 发信地址列表详情
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    CreatedTimestamp: number;
+    EmailSenders?: Array<EmailSender>;
     /**
-      * 模板名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TemplateName: string;
-    /**
-      * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
-      */
-    TemplateStatus: number;
-    /**
-      * 模板ID
-      */
-    TemplateID: number;
-    /**
-      * 审核原因
-      */
-    ReviewReason: string;
+    RequestId?: string;
 }
 /**
  * ListEmailAddress请求参数结构体
@@ -491,6 +480,31 @@ export interface SendTaskData {
     ReceiversName: string;
 }
 /**
+ * 模板列表结构
+ */
+export interface TemplatesMetadata {
+    /**
+      * 创建时间
+      */
+    CreatedTimestamp: number;
+    /**
+      * 模板名称
+      */
+    TemplateName: string;
+    /**
+      * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
+      */
+    TemplateStatus: number;
+    /**
+      * 模板ID
+      */
+    TemplateID: number;
+    /**
+      * 审核原因
+      */
+    ReviewReason: string;
+}
+/**
  * DeleteEmailTemplate返回参数结构体
  */
 export interface DeleteEmailTemplateResponse {
@@ -845,6 +859,15 @@ export interface Simple {
     Text?: string;
 }
 /**
+ * DeleteReceiver请求参数结构体
+ */
+export interface DeleteReceiverRequest {
+    /**
+      * 收件人列表id，创建收件人列表时会返回
+      */
+    ReceiverId: number;
+}
+/**
  * ListEmailIdentities返回参数结构体
  */
 export interface ListEmailIdentitiesResponse {
@@ -858,14 +881,9 @@ export interface ListEmailIdentitiesResponse {
     RequestId?: string;
 }
 /**
- * ListEmailAddress返回参数结构体
+ * DeleteReceiver返回参数结构体
  */
-export interface ListEmailAddressResponse {
-    /**
-      * 发信地址列表详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EmailSenders?: Array<EmailSender>;
+export interface DeleteReceiverResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

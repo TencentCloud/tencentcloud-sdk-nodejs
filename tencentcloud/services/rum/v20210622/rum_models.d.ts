@@ -34,6 +34,10 @@ export interface CreateTawInstanceRequest {
       * 数据存储时长计费
       */
     PeriodRetain?: string;
+    /**
+      * 实例购买渠道("cdn" 等)
+      */
+    BuyingChannel?: string;
 }
 /**
  * DescribeDataFetchProject请求参数结构体

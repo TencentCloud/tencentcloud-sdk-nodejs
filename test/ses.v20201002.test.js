@@ -138,6 +138,16 @@ it("ses.v20201002.ListEmailAddress", async function () {
     }
 })
 
+it("ses.v20201002.DeleteReceiver", async function () {
+    try {
+       const data = await client.DeleteReceiver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ses.v20201002.CreateEmailTemplate", async function () {
     try {
        const data = await client.CreateEmailTemplate({})

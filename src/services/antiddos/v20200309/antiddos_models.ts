@@ -3625,6 +3625,12 @@ export interface BGPInstanceSpecification {
 ]
       */
   AutoRenewFlag: number
+
+  /**
+      * 联合产品标记，0代表普通高防包，1代表联合高防包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnionPackFlag: number
 }
 
 /**

@@ -178,6 +178,16 @@ it("nlp.v20190408.CreateWordItems", async function () {
     }
 })
 
+it("nlp.v20190408.TextSimilarityPro", async function () {
+    try {
+       const data = await client.TextSimilarityPro({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("nlp.v20190408.TextSimilarity", async function () {
     try {
        const data = await client.TextSimilarity({})

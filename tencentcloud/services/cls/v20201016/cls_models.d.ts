@@ -248,6 +248,15 @@ export interface DescribeConfigMachineGroupsRequest {
     ConfigId: string;
 }
 /**
+ * ModifyConfigExtra返回参数结构体
+ */
+export interface ModifyConfigExtraResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateLogset请求参数结构体
  */
 export interface CreateLogsetRequest {
@@ -259,6 +268,45 @@ export interface CreateLogsetRequest {
       * 标签描述列表。最大支持10个标签键值对，并且不能有重复的键值对
       */
     Tags?: Array<Tag>;
+}
+/**
+ * DescribeShippers请求参数结构体
+ */
+export interface DescribeShippersRequest {
+    /**
+      * <br><li> shipperName
+
+按照【投递规则名称】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> shipperId
+
+按照【投递规则ID】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> topicId
+
+按照【日志主题】进行过滤。
+
+类型：String
+
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 分页的偏移量，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 分页单页的限制数目，默认值为20，最大值100
+      */
+    Limit?: number;
 }
 /**
  * 日志中的KV对
@@ -341,6 +389,45 @@ export interface DescribePartitionsRequest {
       * 日志主题ID
       */
     TopicId: string;
+}
+/**
+ * 自建k8s-容器标准输出信息
+ */
+export interface ContainerStdoutInfo {
+    /**
+      * 是否所有容器
+      */
+    AllContainers: boolean;
+    /**
+      * container为空表所有的，不为空采集指定的容器
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Container?: string;
+    /**
+      * namespace可以多个，用分隔号分割,例如A,B；为空或者没有这个字段，表示所有namespace
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Namespace?: string;
+    /**
+      * pod标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IncludeLabels?: Array<string>;
+    /**
+      * 工作负载信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkLoads?: Array<ContainerWorkLoadInfo>;
+    /**
+      * 需要排除的namespace可以多个，用分隔号分割,例如A,B
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExcludeNamespace?: string;
+    /**
+      * 需要排除的pod标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExcludeLabels?: Array<string>;
 }
 /**
  * ModifyAlarm返回参数结构体
@@ -449,6 +536,19 @@ export interface DescribeShippersResponse {
     RequestId?: string;
 }
 /**
+ * CreateConfigExtra返回参数结构体
+ */
+export interface CreateConfigExtraResponse {
+    /**
+      * 采集配置扩展信息ID
+      */
+    ConfigExtraId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyShipper返回参数结构体
  */
 export interface ModifyShipperResponse {
@@ -469,6 +569,47 @@ export interface RetryShipperTaskRequest {
       * 投递任务ID
       */
     TaskId: string;
+}
+/**
+ * 自建k8s-工作负载信息
+ */
+export interface ContainerWorkLoadInfo {
+    /**
+      * 工作负载的类型
+      */
+    Kind: string;
+    /**
+      * 工作负载的名称
+      */
+    Name: string;
+    /**
+      * 容器名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Container?: string;
+    /**
+      * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Namespace?: string;
+}
+/**
+ * DescribeConfigExtras返回参数结构体
+ */
+export interface DescribeConfigExtrasResponse {
+    /**
+      * 采集配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Configs: Array<ConfigExtraInfo>;
+    /**
+      * 过滤到的总数目
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 回调配置
@@ -584,49 +725,19 @@ export interface Tag {
     Value: string;
 }
 /**
- * DescribeMachineGroups请求参数结构体
+ * DescribeExports请求参数结构体
  */
-export interface DescribeMachineGroupsRequest {
+export interface DescribeExportsRequest {
     /**
-      * <br><li> machineGroupName
-
-按照【机器组名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> machineGroupId
-
-按照【机器组ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> tagKey
-
-按照【标签键】进行过滤。
-
-类型：String
-
-必选：否
-
-<br><li> tag:tagKey
-
-按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-类型：String
-
-必选：否
-
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
+      * 日志主题ID
       */
-    Filters?: Array<Filter>;
+    TopicId: string;
     /**
       * 分页的偏移量，默认值为0
       */
     Offset?: number;
     /**
-      * 分页单页的限制数目，默认值为20，最大值100
+      * 分页单页限制数目，默认值为20，最大值100
       */
     Limit?: number;
 }
@@ -753,45 +864,13 @@ export interface DescribeConsumerRequest {
     TopicId: string;
 }
 /**
- * 投递任务信息
+ * DeleteConfigExtra返回参数结构体
  */
-export interface ShipperTaskInfo {
+export interface DeleteConfigExtraResponse {
     /**
-      * 投递任务ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TaskId: string;
-    /**
-      * 投递信息ID
-      */
-    ShipperId: string;
-    /**
-      * 日志主题ID
-      */
-    TopicId: string;
-    /**
-      * 本批投递的日志的开始时间戳，毫秒
-      */
-    RangeStart: number;
-    /**
-      * 本批投递的日志的结束时间戳， 毫秒
-      */
-    RangeEnd: number;
-    /**
-      * 本次投递任务的开始时间戳， 毫秒
-      */
-    StartTime: number;
-    /**
-      * 本次投递任务的结束时间戳， 毫秒
-      */
-    EndTime: number;
-    /**
-      * 本次投递的结果，"success","running","failed"
-      */
-    Status: string;
-    /**
-      * 结果的详细信息
-      */
-    Message: string;
+    RequestId?: string;
 }
 /**
  * ModifyConsumer请求参数结构体
@@ -802,7 +881,7 @@ export interface ModifyConsumerRequest {
       */
     TopicId: string;
     /**
-      * 投递任务是否生效
+      * 投递任务是否生效，默认不生效
       */
     Effective?: boolean;
     /**
@@ -1137,43 +1216,77 @@ export interface PartitionInfo {
     LastWriteTime: string;
 }
 /**
- * DescribeShippers请求参数结构体
+ * CreateConfigExtra请求参数结构体
  */
-export interface DescribeShippersRequest {
+export interface CreateConfigExtraRequest {
     /**
-      * <br><li> shipperName
-
-按照【投递规则名称】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> shipperId
-
-按照【投递规则ID】进行过滤。
-类型：String
-
-必选：否
-
-<br><li> topicId
-
-按照【日志主题】进行过滤。
-
-类型：String
-
-必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
+      * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
       */
-    Filters?: Array<Filter>;
+    Name: string;
     /**
-      * 分页的偏移量，默认值为0
+      * 日志主题id
       */
-    Offset?: number;
+    TopicId: string;
     /**
-      * 分页单页的限制数目，默认值为20，最大值100
+      * 类型：container_stdout、container_file、host_file
       */
-    Limit?: number;
+    Type: string;
+    /**
+      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+      */
+    LogType: string;
+    /**
+      * 采集配置标
+      */
+    ConfigFlag: string;
+    /**
+      * 日志集id
+      */
+    LogsetId: string;
+    /**
+      * 日志集name
+      */
+    LogsetName: string;
+    /**
+      * 日志主题名称
+      */
+    TopicName: string;
+    /**
+      * 节点文件配置信息
+      */
+    HostFile?: HostFileInfo;
+    /**
+      * 容器文件路径信息
+      */
+    ContainerFile?: ContainerFileInfo;
+    /**
+      * 容器标准输出信息
+      */
+    ContainerStdout?: ContainerStdoutInfo;
+    /**
+      * 日志格式化方式
+      */
+    LogFormat?: string;
+    /**
+      * 提取规则，如果设置了ExtractRule，则必须设置LogType
+      */
+    ExtractRule?: ExtractRuleInfo;
+    /**
+      * 采集黑名单路径列表
+      */
+    ExcludePaths?: Array<ExcludePathInfo>;
+    /**
+      * 用户自定义采集规则，Json格式序列化的字符串
+      */
+    UserDefineRule?: string;
+    /**
+      * 绑定的机器组id
+      */
+    GroupId?: string;
+    /**
+      * 绑定的机器组id列表
+      */
+    GroupIds?: Array<string>;
 }
 /**
  * 黑名单path信息
@@ -1206,6 +1319,99 @@ export interface FilterRuleInfo {
     Value: string;
 }
 /**
+ * 特殊采集规则配置信息
+ */
+export interface ConfigExtraInfo {
+    /**
+      * 采集规则扩展配置ID
+      */
+    ConfigExtraId: string;
+    /**
+      * 采集规则名称
+      */
+    Name: string;
+    /**
+      * 日志主题ID
+      */
+    TopicId: string;
+    /**
+      * 类型：container_stdout、container_file、host_file
+      */
+    Type: string;
+    /**
+      * 节点文件配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HostFile: HostFileInfo;
+    /**
+      * 容器文件路径信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContainerFile: ContainerFileInfo;
+    /**
+      * 容器标准输出信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContainerStdout: ContainerStdoutInfo;
+    /**
+      * 日志格式化方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogFormat: string;
+    /**
+      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogType: string;
+    /**
+      * 提取规则，如果设置了ExtractRule，则必须设置LogType
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtractRule: ExtractRuleInfo;
+    /**
+      * 采集黑名单路径列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExcludePaths: Array<ExcludePathInfo>;
+    /**
+      * 更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 用户自定义解析字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserDefineRule: string;
+    /**
+      * 机器组ID
+      */
+    GroupId: string;
+    /**
+      * 自建采集配置标
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConfigFlag: string;
+    /**
+      * 日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogsetId: string;
+    /**
+      * 日志集name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogsetName: string;
+    /**
+      * 日志主题name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicName: string;
+}
+/**
  * RetryShipperTask返回参数结构体
  */
 export interface RetryShipperTaskResponse {
@@ -1234,6 +1440,20 @@ export interface SplitPartitionRequest {
       * 分区分裂个数(可选)，默认等于2
       */
     Number?: number;
+}
+/**
+ * DescribeMachineGroupConfigs返回参数结构体
+ */
+export interface DescribeMachineGroupConfigsResponse {
+    /**
+      * 采集规则配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Configs: Array<ConfigInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 机器组信息
@@ -1421,19 +1641,49 @@ export interface CreateTopicRequest {
     Period?: number;
 }
 /**
- * DescribeExports请求参数结构体
+ * DescribeMachineGroups请求参数结构体
  */
-export interface DescribeExportsRequest {
+export interface DescribeMachineGroupsRequest {
     /**
-      * 日志主题ID
+      * <br><li> machineGroupName
+
+按照【机器组名称】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> machineGroupId
+
+按照【机器组ID】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> tagKey
+
+按照【标签键】进行过滤。
+
+类型：String
+
+必选：否
+
+<br><li> tag:tagKey
+
+按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+类型：String
+
+必选：否
+
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
       */
-    TopicId: string;
+    Filters?: Array<Filter>;
     /**
       * 分页的偏移量，默认值为0
       */
     Offset?: number;
     /**
-      * 分页单页限制数目，默认值为20，最大值100
+      * 分页单页的限制数目，默认值为20，最大值100
       */
     Limit?: number;
 }
@@ -1620,6 +1870,47 @@ export interface AnalysisDimensional {
     Content: string;
 }
 /**
+ * 投递任务信息
+ */
+export interface ShipperTaskInfo {
+    /**
+      * 投递任务ID
+      */
+    TaskId: string;
+    /**
+      * 投递信息ID
+      */
+    ShipperId: string;
+    /**
+      * 日志主题ID
+      */
+    TopicId: string;
+    /**
+      * 本批投递的日志的开始时间戳，毫秒
+      */
+    RangeStart: number;
+    /**
+      * 本批投递的日志的结束时间戳， 毫秒
+      */
+    RangeEnd: number;
+    /**
+      * 本次投递任务的开始时间戳， 毫秒
+      */
+    StartTime: number;
+    /**
+      * 本次投递任务的结束时间戳， 毫秒
+      */
+    EndTime: number;
+    /**
+      * 本次投递的结果，"success","running","failed"
+      */
+    Status: string;
+    /**
+      * 结果的详细信息
+      */
+    Message: string;
+}
+/**
  * 日志集相关信息
  */
 export interface LogsetInfo {
@@ -1699,6 +1990,15 @@ export interface DescribeAlarmNoticesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteConfigExtra请求参数结构体
+ */
+export interface DeleteConfigExtraRequest {
+    /**
+      * 采集规则扩展配置ID
+      */
+    ConfigExtraId: string;
 }
 /**
  * ModifyConfig请求参数结构体
@@ -2700,17 +3000,13 @@ export interface Ckafka {
     TopicName: string;
 }
 /**
- * CreateExport返回参数结构体
+ * DescribeMachines请求参数结构体
  */
-export interface CreateExportResponse {
+export interface DescribeMachinesRequest {
     /**
-      * 日志导出ID。
+      * 查询的机器组ID
       */
-    ExportId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    GroupId: string;
 }
 /**
  * DeleteAlarmNotice请求参数结构体
@@ -2904,18 +3200,45 @@ export interface ApplyConfigToMachineGroupRequest {
     GroupId: string;
 }
 /**
- * DescribeMachineGroupConfigs返回参数结构体
+ * 自建k8s-容器文件路径信息
  */
-export interface DescribeMachineGroupConfigsResponse {
+export interface ContainerFileInfo {
     /**
-      * 采集规则配置列表
+      * namespace可以多个，用分隔号分割,例如A,B
+      */
+    Namespace: string;
+    /**
+      * 容器名称
+      */
+    Container: string;
+    /**
+      * 日志文件夹
+      */
+    LogPath: string;
+    /**
+      * 日志名称
+      */
+    FilePattern: string;
+    /**
+      * pod标签信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Configs: Array<ConfigInfo>;
+    IncludeLabels?: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 工作负载信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    WorkLoad?: ContainerWorkLoadInfo;
+    /**
+      * 需要排除的namespace可以多个，用分隔号分割,例如A,B
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExcludeNamespace?: string;
+    /**
+      * 需要排除的pod标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExcludeLabels?: Array<string>;
 }
 /**
  * csv内容描述
@@ -2942,6 +3265,23 @@ export interface CsvInfo {
       * 对于上面指定的不存在字段使用该内容填充
       */
     NonExistingField: string;
+}
+/**
+ * DescribeConfigExtras请求参数结构体
+ */
+export interface DescribeConfigExtrasRequest {
+    /**
+      * 支持的key： topicId,name, configExtraId, machineGroupId
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 分页的偏移量，默认值为0
+      */
+    Offset?: number;
+    /**
+      * 分页单页的限制数目，默认值为20，最大值100
+      */
+    Limit?: number;
 }
 /**
  * CreateAlarmNotice请求参数结构体
@@ -3001,6 +3341,79 @@ export interface DescribeMachineGroupConfigsRequest {
       * 机器组ID
       */
     GroupId: string;
+}
+/**
+ * ModifyConfigExtra请求参数结构体
+ */
+export interface ModifyConfigExtraRequest {
+    /**
+      * 采集配置扩展信息id
+      */
+    ConfigExtraId: string;
+    /**
+      * 采集配置规程名称，最长63个字符，只能包含小写字符、数字及分隔符（“-”），且必须以小写字符开头，数字或小写字符结尾
+      */
+    Name?: string;
+    /**
+      * 日志主题id
+      */
+    TopicId?: string;
+    /**
+      * 节点文件配置信息
+      */
+    HostFile?: HostFileInfo;
+    /**
+      * 容器文件路径信息
+      */
+    ContainerFile?: ContainerFileInfo;
+    /**
+      * 容器标准输出信息
+      */
+    ContainerStdout?: ContainerStdoutInfo;
+    /**
+      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+      */
+    LogType?: string;
+    /**
+      * 日志格式化方式
+      */
+    LogFormat?: string;
+    /**
+      * 提取规则，如果设置了ExtractRule，则必须设置LogType
+      */
+    ExtractRule?: ExtractRuleInfo;
+    /**
+      * 采集黑名单路径列表
+      */
+    ExcludePaths?: Array<ExcludePathInfo>;
+    /**
+      * 用户自定义采集规则，Json格式序列化的字符串
+      */
+    UserDefineRule?: string;
+    /**
+      * 类型：container_stdout、container_file、host_file
+      */
+    Type?: string;
+    /**
+      * 机器组ID
+      */
+    GroupId?: string;
+    /**
+      * 自建采集配置标
+      */
+    ConfigFlag?: string;
+    /**
+      * 日志集ID
+      */
+    LogsetId?: string;
+    /**
+      * 日志集name
+      */
+    LogsetName?: string;
+    /**
+      * 日志主题name
+      */
+    TopicName?: string;
 }
 /**
  * ModifyLogset请求参数结构体
@@ -3120,15 +3533,42 @@ export interface ConsumerContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MetaFields: Array<string>;
+    /**
+      * 当EnableTag为true时，必须填写TagJsonNotTiled字段，TagJsonNotTiled用于标识tag信息是否json平铺，TagJsonNotTiled为true时不平铺，false时平铺
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagJsonNotTiled?: boolean;
 }
 /**
- * DescribeMachines请求参数结构体
+ * CreateExport返回参数结构体
  */
-export interface DescribeMachinesRequest {
+export interface CreateExportResponse {
     /**
-      * 查询的机器组ID
+      * 日志导出ID。
       */
-    GroupId: string;
+    ExportId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 自建k8s-节点文件配置信息
+ */
+export interface HostFileInfo {
+    /**
+      * 日志文件夹
+      */
+    LogPath: string;
+    /**
+      * 日志文件名
+      */
+    FilePattern: string;
+    /**
+      * metadata信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomLabels?: Array<string>;
 }
 /**
  * 需要过滤日志的key，及其对应的regex

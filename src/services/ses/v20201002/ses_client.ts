@@ -23,7 +23,7 @@ import {
   ListSendTasksResponse,
   CreateReceiverResponse,
   CreateEmailTemplateRequest,
-  TemplatesMetadata,
+  ListEmailAddressResponse,
   ListEmailAddressRequest,
   ListReceiversRequest,
   GetEmailIdentityResponse,
@@ -43,6 +43,7 @@ import {
   GetStatisticsReportRequest,
   CreateReceiverRequest,
   SendTaskData,
+  TemplatesMetadata,
   DeleteEmailTemplateResponse,
   Volume,
   CreateEmailIdentityRequest,
@@ -61,8 +62,9 @@ import {
   ListBlackEmailAddressResponse,
   GetSendEmailStatusRequest,
   Simple,
+  DeleteReceiverRequest,
   ListEmailIdentitiesResponse,
-  ListEmailAddressResponse,
+  DeleteReceiverResponse,
   TemplateContent,
   GetStatisticsReportResponse,
   DeleteEmailAddressRequest,
@@ -211,6 +213,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListEmailAddressResponse) => void
   ): Promise<ListEmailAddressResponse> {
     return this.request("ListEmailAddress", req, cb)
+  }
+
+  /**
+   * 根据收件id删除收件人列表,同时删除列表中的所有收件邮箱
+   */
+  async DeleteReceiver(
+    req: DeleteReceiverRequest,
+    cb?: (error: string, rep: DeleteReceiverResponse) => void
+  ): Promise<DeleteReceiverResponse> {
+    return this.request("DeleteReceiver", req, cb)
   }
 
   /**
