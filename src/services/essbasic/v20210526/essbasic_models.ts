@@ -116,6 +116,12 @@ export interface FlowApproverInfo {
    * 企业签署方在同一渠道下的其他合作企业OpenId，签署方为非发起方企业场景下必传；
    */
   OrganizationOpenId?: string
+
+  /**
+      * 指定签署人非渠道企业下员工，在ApproverType为ORGANIZATION时指定。
+默认为false，即签署人位于同一个渠道应用号下；
+      */
+  NotChannelOrganization?: boolean
 }
 
 /**
@@ -394,7 +400,7 @@ export interface CreateSignUrlsRequest {
   Endpoint?: string
 
   /**
-   * 签署完成后H5引导页跳转URL
+   * 签署完之后的H5页面的跳转链接，针对Endpoint为CHANNEL时有效
    */
   JumpUrl?: string
 }
@@ -701,6 +707,11 @@ export interface CreateFlowsByTemplatesResponse {
   ErrorMessages: Array<string>
 
   /**
+   * 预览模式下返回的预览文件url数组
+   */
+  PreviewUrls: Array<string>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -766,7 +777,7 @@ export interface SignUrlInfo {
   SignUrl: string
 
   /**
-      * 链接失效时间
+      * 链接失效时间,默认30分钟
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Deadline: number
@@ -901,7 +912,7 @@ export interface SyncProxyOrganizationOperatorsRequest {
  */
 export interface CreateConsoleLoginUrlResponse {
   /**
-   * 控制台url
+   * 控制台url，此链接5分钟内有效，且只能访问一次
    */
   ConsoleUrl: string
 
@@ -935,6 +946,11 @@ export interface CreateFlowsByTemplatesRequest {
    * 操作者的信息
    */
   Operator?: UserInfo
+
+  /**
+   * 是否为预览模式；默认为false，即非预览模式，此时发起合同并返回FlowIds；若为预览模式，则返回PreviewUrls；
+   */
+  NeedPreview?: boolean
 }
 
 /**
@@ -1262,7 +1278,7 @@ export interface FlowInfo {
   FlowName: string
 
   /**
-   * 签署截止时间戳，超过有效签署时间则该签署流程失败
+   * 签署截止时间戳，超过有效签署时间则该签署流程失败，默认一年
    */
   Deadline: number
 
@@ -1286,7 +1302,7 @@ export interface FlowInfo {
   CallbackUrl?: string
 
   /**
-   * 多个签署人信息
+   * 多个签署人信息，渠道侧目前不支持超过5个签署方信息
    */
   FlowApprovers?: Array<FlowApproverInfo>
 

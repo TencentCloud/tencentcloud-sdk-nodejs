@@ -22,19 +22,19 @@ export interface DescribeCaptchaOperDataResponse {
   /**
    * 成功返回 0 其它失败
    */
-  CaptchaCode?: number
+  CaptchaCode: number
 
   /**
       * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CaptchaMsg?: string
+  CaptchaMsg: string
 
   /**
       * 用户操作数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data?: CaptchaOperDataRes
+  Data: CaptchaOperDataRes
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -89,19 +89,19 @@ export interface DescribeCaptchaMiniOperDataResponse {
   /**
    * 成功返回 0 其它失败
    */
-  CaptchaCode?: number
+  CaptchaCode: number
 
   /**
       * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CaptchaMsg?: string
+  CaptchaMsg: string
 
   /**
       * 用户操作数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data?: CaptchaOperDataRes
+  Data: CaptchaOperDataRes
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -556,6 +556,11 @@ export interface DescribeCaptchaTicketDataRequest {
    * 查询开始时间 例如：20200909
    */
   Start: number
+
+  /**
+   * 查询结束时间 例如：20220314
+   */
+  End?: number
 }
 
 /**
@@ -616,6 +621,11 @@ export interface DescribeCaptchaOperDataRequest {
    * 查询类型
    */
   Type: number
+
+  /**
+   * 查询结束时间
+   */
+  End?: number
 }
 
 /**
@@ -902,6 +912,11 @@ export interface DescribeCaptchaMiniOperDataRequest {
    * 查询类型
    */
   Type: number
+
+  /**
+   * 查询结束时间
+   */
+  End?: number
 }
 
 /**

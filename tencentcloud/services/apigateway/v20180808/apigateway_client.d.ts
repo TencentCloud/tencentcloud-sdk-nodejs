@@ -120,7 +120,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
     CreateApiApp(req: CreateApiAppRequest, cb?: (error: string, rep: CreateApiAppResponse) => void): Promise<CreateApiAppResponse>;
     /**
      * 本接口（DescribeApiKeysStatus）用于查询密钥列表。
-当用户创建了多个密钥对时，可使用本接口查询一个或多个 API 密钥信息，本接口不会显示密钥 Key。
+当用户创建了多个密钥对时，可使用本接口查询一个或多个 API 密钥信息。
      */
     DescribeApiKeysStatus(req: DescribeApiKeysStatusRequest, cb?: (error: string, rep: DescribeApiKeysStatusResponse) => void): Promise<DescribeApiKeysStatusResponse>;
     /**

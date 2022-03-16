@@ -291,6 +291,19 @@ true为启用，false为不启用
     Enable?: string;
 }
 /**
+ * ip防护状态
+ */
+export interface IPDefendStatus {
+    /**
+      * ip地址
+      */
+    IP: string;
+    /**
+      * 防护状态   1:防护打开; -1:地址错误; 其他:未防护
+      */
+    Status: number;
+}
+/**
  * 安全组规则
  */
 export interface SecurityGroupRule {
@@ -2475,6 +2488,15 @@ export interface InstanceInfo {
     ResourcePath: Array<string>;
 }
 /**
+ * DescribeIPStatusList请求参数结构体
+ */
+export interface DescribeIPStatusListRequest {
+    /**
+      * 资产Id
+      */
+    IPList: Array<string>;
+}
+/**
  * ModifyNatFwSwitch返回参数结构体
  */
 export interface ModifyNatFwSwitchResponse {
@@ -2698,6 +2720,27 @@ export interface ModifyNatFwSwitchRequest {
       * 路由表id列表，其中CfwInsIdList，SubnetIdList和RouteTableIdList只能传递一种。
       */
     RouteTableIdList?: Array<string>;
+}
+/**
+ * DescribeIPStatusList返回参数结构体
+ */
+export interface DescribeIPStatusListResponse {
+    /**
+      * ip状态信息
+      */
+    StatusList: Array<IPDefendStatus>;
+    /**
+      * 状态码
+      */
+    ReturnCode: number;
+    /**
+      * 状态信息
+      */
+    ReturnMsg: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeNatRuleOverview请求参数结构体

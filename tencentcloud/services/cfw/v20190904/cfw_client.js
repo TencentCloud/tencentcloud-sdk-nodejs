@@ -216,6 +216,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRuleOverview", req, cb);
     }
     /**
+     * ip防护状态查询
+     */
+    async DescribeIPStatusList(req, cb) {
+        return this.request("DescribeIPStatusList", req, cb);
+    }
+    /**
      * DescribeTLogInfo告警中心概况
 
      */

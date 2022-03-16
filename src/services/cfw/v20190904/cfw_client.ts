@@ -29,6 +29,7 @@ import {
   ModifyAcRuleResponse,
   DescribeTableStatusResponse,
   AddAcRuleRequest,
+  IPDefendStatus,
   SecurityGroupRule,
   ModifyNatFwVpcDnsSwitchRequest,
   SecurityGroupApiRuleData,
@@ -127,6 +128,7 @@ import {
   DeleteAcRuleResponse,
   IocListData,
   InstanceInfo,
+  DescribeIPStatusListRequest,
   ModifyNatFwSwitchResponse,
   RunSyncAssetResponse,
   DescribeBlockByIpTimesListResponse,
@@ -139,6 +141,7 @@ import {
   DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
   ModifyNatFwSwitchRequest,
+  DescribeIPStatusListResponse,
   DescribeNatRuleOverviewRequest,
   CreateDatabaseWhiteListRulesRequest,
   DescribeResourceGroupRequest,
@@ -512,6 +515,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRuleOverviewResponse) => void
   ): Promise<DescribeRuleOverviewResponse> {
     return this.request("DescribeRuleOverview", req, cb)
+  }
+
+  /**
+   * ip防护状态查询
+   */
+  async DescribeIPStatusList(
+    req: DescribeIPStatusListRequest,
+    cb?: (error: string, rep: DescribeIPStatusListResponse) => void
+  ): Promise<DescribeIPStatusListResponse> {
+    return this.request("DescribeIPStatusList", req, cb)
   }
 
   /**

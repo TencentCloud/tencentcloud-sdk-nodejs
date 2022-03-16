@@ -24,6 +24,11 @@ export interface CreateDocumentResponse {
       */
     DocumentId: string;
     /**
+      * 返回合同文件的预览地址 5分钟内有效。仅当NeedPreview为true 时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PreviewFileUrl: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -90,6 +95,10 @@ export interface CreateDocumentRequest {
       * 客户端Token，保持接口幂等性
       */
     ClientToken?: string;
+    /**
+      * 是否需要生成预览文件 默认不生成
+      */
+    NeedPreview?: boolean;
 }
 /**
  * CreateFlow请求参数结构体
@@ -325,6 +334,11 @@ export interface CreateFlowByFilesResponse {
       * 流程编号
       */
     FlowId: string;
+    /**
+      * 合同预览链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PreviewUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -598,6 +612,10 @@ MULTI_LINE_TEXT - 多行文本控件
       * 被抄送人的信息列表
       */
     CcInfos?: Array<CcInfo>;
+    /**
+      * 是否需要预览，true：预览模式，false：非预览（默认）
+      */
+    NeedPreview?: boolean;
 }
 /**
  * CreateFlow返回参数结构体

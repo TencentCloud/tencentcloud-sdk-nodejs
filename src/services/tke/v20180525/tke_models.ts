@@ -5911,6 +5911,12 @@ export interface Container {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GpuLimit?: number
+
+  /**
+      * 容器的安全上下文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityContext?: SecurityContext
 }
 
 /**

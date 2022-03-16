@@ -506,7 +506,7 @@ export interface CreateDhcpIpResponse {
     /**
       * 新创建的`DhcpIp`信息
       */
-    DhcpIpSet?: Array<DhcpIp>;
+    DhcpIpSet: Array<DhcpIp>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6069,11 +6069,11 @@ export interface DescribeClassicLinkInstancesResponse {
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 私有网络和基础网络互通设备。
       */
-    ClassicLinkInstanceSet?: Array<ClassicLinkInstance>;
+    ClassicLinkInstanceSet: Array<ClassicLinkInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -11025,11 +11025,11 @@ export interface DescribeDhcpIpsResponse {
     /**
       * 实例详细信息列表。
       */
-    DhcpIpSet?: Array<DhcpIp>;
+    DhcpIpSet: Array<DhcpIp>;
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
