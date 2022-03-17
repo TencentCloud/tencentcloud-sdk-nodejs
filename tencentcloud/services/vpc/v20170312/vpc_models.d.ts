@@ -88,6 +88,10 @@ export interface SecurityGroupLimitSet {
     InstanceSecurityGroupLimit: number;
 }
 /**
+ * LockCcns请求参数结构体
+ */
+export declare type LockCcnsRequest = null;
+/**
  * CreateRoutes请求参数结构体
  */
 export interface CreateRoutesRequest {
@@ -1800,6 +1804,10 @@ export interface DescribeIpGeolocationDatabaseUrlResponse {
     RequestId?: string;
 }
 /**
+ * UnlockCcnBandwidths请求参数结构体
+ */
+export declare type UnlockCcnBandwidthsRequest = null;
+/**
  * DeleteIp6Translators返回参数结构体
  */
 export interface DeleteIp6TranslatorsResponse {
@@ -2299,6 +2307,10 @@ export interface DescribeFlowLogRequest {
       */
     FlowLogId: string;
 }
+/**
+ * DescribeTenantCcns请求参数结构体
+ */
+export declare type DescribeTenantCcnsRequest = null;
 /**
  * DescribeIp6Addresses请求参数结构体
  */
@@ -6136,6 +6148,15 @@ export interface ModifyVpcEndPointServiceWhiteListRequest {
     Description?: string;
 }
 /**
+ * DescribeTenantCcns返回参数结构体
+ */
+export interface DescribeTenantCcnsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 过滤器
  */
 export interface Filter {
@@ -7270,6 +7291,10 @@ export interface CreateVpnGatewaySslClientRequest {
     SslVpnClientName: string;
 }
 /**
+ * UnlockCcns请求参数结构体
+ */
+export declare type UnlockCcnsRequest = null;
+/**
  * DescribeVpnGatewaySslServers返回参数结构体
  */
 export interface DescribeVpnGatewaySslServersResponse {
@@ -7611,6 +7636,10 @@ export interface ResetVpnGatewayInternetMaxBandwidthResponse {
       */
     RequestId?: string;
 }
+/**
+ * LockCcnBandwidths请求参数结构体
+ */
+export declare type LockCcnBandwidthsRequest = null;
 /**
  * 用于描述弹性公网IP的费用对象
  */
@@ -9261,6 +9290,31 @@ export interface CCN {
     RouteTableFlag: boolean;
 }
 /**
+ * 终端节点服务的服务白名单对象详情。
+ */
+export interface VpcEndPointServiceUser {
+    /**
+      * AppId。
+      */
+    Owner: number;
+    /**
+      * Uin。
+      */
+    UserUin: string;
+    /**
+      * 描述信息。
+      */
+    Description: string;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+}
+/**
  * InquirePriceCreateDirectConnectGateway返回参数结构体
  */
 export interface InquirePriceCreateDirectConnectGatewayResponse {
@@ -10110,6 +10164,15 @@ export interface CcnBandwidthInfo {
     MarketId: string;
 }
 /**
+ * DescribeCrossBorderCcnRegionBandwidthLimits返回参数结构体
+ */
+export interface DescribeCrossBorderCcnRegionBandwidthLimitsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteSecurityGroup返回参数结构体
  */
 export interface DeleteSecurityGroupResponse {
@@ -10135,6 +10198,15 @@ export interface CreateNetworkInterfaceResponse {
  * DescribeAddressQuota请求参数结构体
  */
 export declare type DescribeAddressQuotaRequest = null;
+/**
+ * LockCcns返回参数结构体
+ */
+export interface LockCcnsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * RemoveBandwidthPackageResources返回参数结构体
  */
@@ -10604,6 +10676,15 @@ export interface SecurityGroup {
     UpdateTime?: string;
 }
 /**
+ * UnlockCcns返回参数结构体
+ */
+export interface UnlockCcnsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DisableGatewayFlowMonitor返回参数结构体
  */
 export interface DisableGatewayFlowMonitorResponse {
@@ -10743,29 +10824,13 @@ export interface CcnRegionBandwidthLimit {
     DstIsBm?: boolean;
 }
 /**
- * 终端节点服务的服务白名单对象详情。
+ * UnlockCcnBandwidths返回参数结构体
  */
-export interface VpcEndPointServiceUser {
+export interface UnlockCcnBandwidthsResponse {
     /**
-      * AppId。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Owner: number;
-    /**
-      * Uin。
-      */
-    UserUin: string;
-    /**
-      * 描述信息。
-      */
-    Description: string;
-    /**
-      * 创建时间。
-      */
-    CreateTime: string;
-    /**
-      * 终端节点服务ID。
-      */
-    EndPointServiceId: string;
+    RequestId?: string;
 }
 /**
  * CreateDefaultSecurityGroup返回参数结构体
@@ -10980,6 +11045,15 @@ export interface Ipv6SubnetCidrBlock {
     Ipv6CidrBlock?: string;
 }
 /**
+ * LockCcnBandwidths返回参数结构体
+ */
+export interface LockCcnBandwidthsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAddressQuota返回参数结构体
  */
 export interface DescribeAddressQuotaResponse {
@@ -11048,6 +11122,10 @@ export interface CreateRouteTableResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeCrossBorderCcnRegionBandwidthLimits请求参数结构体
+ */
+export declare type DescribeCrossBorderCcnRegionBandwidthLimitsRequest = null;
 /**
  * GetCcnRegionBandwidthLimits请求参数结构体
  */

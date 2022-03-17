@@ -1241,7 +1241,7 @@ export interface DescribeServiceForApiAppResponse {
  */
 export interface ServiceConfig {
     /**
-      * 后端类型。启用vpc时生效，目前支持的类型为clb和vpc通道
+      * 后端类型。启用vpc时生效，目前支持的类型为clb, cvm和upstream
       */
     Product?: string;
     /**
@@ -3880,6 +3880,15 @@ DELETE： DeleteObject。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Authorization?: boolean;
+    /**
+      * API后端COS的路径匹配模式，可选值：
+BackEndPath ： 后端路径匹配
+FullPath ： 全路径匹配
+
+默认值为：BackEndPath
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PathMatchMode?: string;
 }
 /**
  * ModifyApiIncrement请求参数结构体
@@ -4103,12 +4112,12 @@ export interface CreateApiRsp {
       */
     ApiId: string;
     /**
-      * path
+      * 路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Path: string;
     /**
-      * method
+      * 请求方法
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Method: string;
@@ -4117,6 +4126,21 @@ export interface CreateApiRsp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreatedTime: string;
+    /**
+      * 导入状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMsg: string;
+    /**
+      * api name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiName: string;
 }
 /**
  * 使用计划绑定环境信息

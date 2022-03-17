@@ -528,9 +528,9 @@ it("vpc.v20170312.DescribeVpcEndPointService", async function () {
     }
 })
 
-it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+it("vpc.v20170312.EnableRoutes", async function () {
     try {
-       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
+       const data = await client.EnableRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -721,6 +721,16 @@ it("vpc.v20170312.AllocateIp6AddressesBandwidth", async function () {
 it("vpc.v20170312.DeleteDhcpIp", async function () {
     try {
        const data = await client.DeleteDhcpIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.LockCcnBandwidths", async function () {
+    try {
+       const data = await client.LockCcnBandwidths({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1001,6 +1011,16 @@ it("vpc.v20170312.DisassociateNatGatewayAddress", async function () {
 it("vpc.v20170312.DescribeLocalGateway", async function () {
     try {
        const data = await client.DescribeLocalGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+    try {
+       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1708,6 +1728,16 @@ it("vpc.v20170312.CreateAddressTemplateGroup", async function () {
     }
 })
 
+it("vpc.v20170312.UnlockCcnBandwidths", async function () {
+    try {
+       const data = await client.UnlockCcnBandwidths({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateSecurityGroup", async function () {
     try {
        const data = await client.CreateSecurityGroup({})
@@ -1961,6 +1991,16 @@ it("vpc.v20170312.ModifyNatGatewayDestinationIpPortTranslationNatRule", async fu
 it("vpc.v20170312.DescribeVpcLimits", async function () {
     try {
        const data = await client.DescribeVpcLimits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.UnlockCcns", async function () {
+    try {
+       const data = await client.UnlockCcns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2278,9 +2318,9 @@ it("vpc.v20170312.TransformAddress", async function () {
     }
 })
 
-it("vpc.v20170312.EnableRoutes", async function () {
+it("vpc.v20170312.DescribeCrossBorderCcnRegionBandwidthLimits", async function () {
     try {
-       const data = await client.EnableRoutes({})
+       const data = await client.DescribeCrossBorderCcnRegionBandwidthLimits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2321,6 +2361,16 @@ it("vpc.v20170312.ModifyServiceTemplateAttribute", async function () {
 it("vpc.v20170312.DeleteSecurityGroup", async function () {
     try {
        const data = await client.DeleteSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeTenantCcns", async function () {
+    try {
+       const data = await client.DescribeTenantCcns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2401,6 +2451,16 @@ it("vpc.v20170312.DisableGatewayFlowMonitor", async function () {
 it("vpc.v20170312.DeleteNatGatewayDestinationIpPortTranslationNatRule", async function () {
     try {
        const data = await client.DeleteNatGatewayDestinationIpPortTranslationNatRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.LockCcns", async function () {
+    try {
+       const data = await client.LockCcns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

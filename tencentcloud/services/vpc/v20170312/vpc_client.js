@@ -356,10 +356,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcEndPointService", req, cb);
     }
     /**
-     * 刷新专线直连nat路由，更新nat到专线的路由表
+     * 本接口（EnableRoutes）用于启用已禁用的子网路由。<br />
+本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
      */
-    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
-        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
+    async EnableRoutes(req, cb) {
+        return this.request("EnableRoutes", req, cb);
     }
     /**
      * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云服务器。
@@ -498,6 +499,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDhcpIp(req, cb) {
         return this.request("DeleteDhcpIp", req, cb);
+    }
+    /**
+     * 本接口（LockCcnBandwidths）用户锁定云联网限速实例。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（LockCcns）。
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
+     */
+    async LockCcnBandwidths(req, cb) {
+        return this.request("LockCcnBandwidths", req, cb);
     }
     /**
      * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板
@@ -692,6 +701,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLocalGateway(req, cb) {
         return this.request("DescribeLocalGateway", req, cb);
+    }
+    /**
+     * 刷新专线直连nat路由，更新nat到专线的路由表
+     */
+    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
+        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
     }
     /**
      *  本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
@@ -1185,6 +1200,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAddressTemplateGroup", req, cb);
     }
     /**
+     * 本接口（UnlockCcnBandwidths）用户解锁云联网限速实例。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（SecurityUnlockCcns）。
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
+     */
+    async UnlockCcnBandwidths(req, cb) {
+        return this.request("UnlockCcnBandwidths", req, cb);
+    }
+    /**
      * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
 * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
 * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
@@ -1386,6 +1409,18 @@ LimitTypes取值范围：
         return this.request("DescribeVpcLimits", req, cb);
     }
     /**
+     * 本接口（UnlockCcns）用于解锁云联网实例
+
+该接口一般用来解封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间解封禁, 只能按更粗的云联网实例粒度解封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度解封禁（UnlockCcnBandwidths）
+
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+
+
+     */
+    async UnlockCcns(req, cb) {
+        return this.request("UnlockCcns", req, cb);
+    }
+    /**
      * 本接口（HaVipAssociateAddressIp）用于高可用虚拟IP（HAVIP）绑定弹性公网IP（EIP）。<br />
 本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
      */
@@ -1580,11 +1615,13 @@ LimitTypes取值范围：
         return this.request("TransformAddress", req, cb);
     }
     /**
-     * 本接口（EnableRoutes）用于启用已禁用的子网路由。<br />
-本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
+     * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+
      */
-    async EnableRoutes(req, cb) {
-        return this.request("EnableRoutes", req, cb);
+    async DescribeCrossBorderCcnRegionBandwidthLimits(req, cb) {
+        return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb);
     }
     /**
      * 本接口（DisassociateDhcpIpWithAddressIp）用于将DhcpIp已绑定的弹性公网IP（EIP）解除绑定。<br />
@@ -1614,6 +1651,14 @@ LimitTypes取值范围：
      */
     async DeleteSecurityGroup(req, cb) {
         return this.request("DeleteSecurityGroup", req, cb);
+    }
+    /**
+     * 本接口（DescribeTenantCcns）用于获取要锁定的云联网实例列表。
+该接口一般用来封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间封禁, 只能按更粗的云联网实例粒度封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度封禁（DescribeCrossBorderCcnRegionBandwidthLimits）
+如有需要, 可以封禁任意云联网实例, 可接入到内部运营系统
+     */
+    async DescribeTenantCcns(req, cb) {
+        return this.request("DescribeTenantCcns", req, cb);
     }
     /**
      * 本接口（DisassociateNetworkAclSubnets）用于网络ACL解关联vpc下的子网。
@@ -1663,6 +1708,18 @@ LimitTypes取值范围：
      */
     async DeleteNatGatewayDestinationIpPortTranslationNatRule(req, cb) {
         return this.request("DeleteNatGatewayDestinationIpPortTranslationNatRule", req, cb);
+    }
+    /**
+     * 本接口（LockCcns）用于锁定云联网实例
+
+该接口一般用来封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间封禁, 只能按更粗的云联网实例粒度封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度封禁（LockCcnBandwidths）
+
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+
+
+     */
+    async LockCcns(req, cb) {
+        return this.request("LockCcns", req, cb);
     }
     /**
      * 本接口(CreateRoutes)用于创建路由策略。

@@ -324,13 +324,13 @@ export interface CreateEdgeUnitApplicationVisualizationResponse {
 }
 
 /**
- * DescribeEdgeUnitApplicationYamlError请求参数结构体
+ * CreateEdgeNodeBatch返回参数结构体
  */
-export interface DescribeEdgeUnitApplicationYamlErrorRequest {
+export interface CreateEdgeNodeBatchResponse {
   /**
-   * Yaml配置
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Yaml: string
+  RequestId?: string
 }
 
 /**
@@ -664,6 +664,61 @@ export interface CreateApplicationVisualizationRequest {
 }
 
 /**
+ * NodeUnit中边缘节点信息
+ */
+export interface NodeUnitNodeInfo {
+  /**
+   * 节点ID
+   */
+  Id: number
+
+  /**
+   * 节点状态  NodeStatusHealthy (健康)/NodeStatusAbnormal (异常)/NodeStatusOffline (下线)/NodeStatusNotActivated (未激活
+   */
+  Status: string
+
+  /**
+   * 节点名称
+   */
+  NodeName: string
+
+  /**
+   * 内网节点IP
+   */
+  InternalIP: string
+}
+
+/**
+ * DeleteNodeUnit返回参数结构体
+ */
+export interface DeleteNodeUnitResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * NFS挂载卷
+ */
+export interface VolumeNFS {
+  /**
+   * 服务地址
+   */
+  Server: string
+
+  /**
+   * 对应服务器路径
+   */
+  ServerPath: string
+
+  /**
+   * 对应本地路径
+   */
+  Path: string
+}
+
+/**
  * 服务配置
  */
 export interface Service {
@@ -699,36 +754,6 @@ export interface Service {
 }
 
 /**
- * DeleteNodeUnit返回参数结构体
- */
-export interface DeleteNodeUnitResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * NFS挂载卷
- */
-export interface VolumeNFS {
-  /**
-   * 服务地址
-   */
-  Server: string
-
-  /**
-   * 对应服务器路径
-   */
-  ServerPath: string
-
-  /**
-   * 对应本地路径
-   */
-  Path: string
-}
-
-/**
  * DescribeNodeUnitTemplateOnNodeGroup返回参数结构体
  */
 export interface DescribeNodeUnitTemplateOnNodeGroupResponse {
@@ -750,68 +775,13 @@ export interface DescribeNodeUnitTemplateOnNodeGroupResponse {
 }
 
 /**
- * 应用状态
+ * CreateUserToken请求参数结构体
  */
-export interface ApplicationStatusInfo {
+export interface CreateUserTokenRequest {
   /**
-      * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Id?: number
-
-  /**
-      * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-      * 应用版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Version: string
-
-  /**
-      * 应用状态(1:待部署 2:部署中 3:运行中 4:待更新 5:更新中 6:待删除 7:删除中 8:已删除
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StartTime: string
-
-  /**
-      * 管理地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ManageUrl: string
-
-  /**
-      * 负载类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  WorkloadKind: string
-
-  /**
-      * 应用部署模式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeployMode: ApplicationDeployMode
-
-  /**
-      * 期望Pod数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Replicas: number
-
-  /**
-      * 运行Pod数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AvailableReplicas: number
+   * 无
+   */
+  Second?: number
 }
 
 /**
@@ -991,26 +961,6 @@ export interface ModifyApplicationBasicInfoResponse {
 }
 
 /**
- * DeleteEdgeNodeGroup请求参数结构体
- */
-export interface DeleteEdgeNodeGroupRequest {
-  /**
-   * IECP边缘单元ID
-   */
-  EdgeUnitId: number
-
-  /**
-   * NodeGroup名称
-   */
-  Name: string
-
-  /**
-   * 命名空间，默认为default
-   */
-  Namespace?: string
-}
-
-/**
  * DeleteEdgeUnitDeployGridItem返回参数结构体
  */
 export interface DeleteEdgeUnitDeployGridItemResponse {
@@ -1031,23 +981,25 @@ export interface DescribeApplicationVisualizationRequest {
 }
 
 /**
- * 安全上下文
+ * DescribeEdgeSnNodes返回参数结构体
  */
-export interface SecurityContext {
+export interface DescribeEdgeSnNodesResponse {
   /**
-   * 是否开启特权模式
-   */
-  Privilege: boolean
+      * 满足条件的总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
 
   /**
-   * 目录/Proc挂载方式
-   */
-  ProcMount: string
+      * 节点详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeSet: Array<EdgeDracoNodeInfo>
 
   /**
-   * 安全配置
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Capabilities?: SecurityCapabilities
+  RequestId?: string
 }
 
 /**
@@ -1382,6 +1334,31 @@ export interface DescribeEdgeUnitApplicationsResponse {
 }
 
 /**
+ * ModifyEdgeUnitCloudApi请求参数结构体
+ */
+export interface ModifyEdgeUnitCloudApiRequest {
+  /**
+   * 边缘单元ID
+   */
+  EdgeUnitId: number
+
+  /**
+   * 边缘单元名称，64字符内
+   */
+  Name?: string
+
+  /**
+   * 描述，200字符内
+   */
+  Description?: string
+
+  /**
+   * 是否开启监控
+   */
+  OpenCloudMonitor?: boolean
+}
+
+/**
  * DescribeEdgeUnitDeployGridItem请求参数结构体
  */
 export interface DescribeEdgeUnitDeployGridItemRequest {
@@ -1642,6 +1619,16 @@ export interface RedeployEdgeUnitApplicationRequest {
    * 应用ID
    */
   ApplicationId: number
+}
+
+/**
+ * DescribeEdgeNodeRemarkList请求参数结构体
+ */
+export interface DescribeEdgeNodeRemarkListRequest {
+  /**
+   * 边缘单元ID
+   */
+  EdgeUnitId: number
 }
 
 /**
@@ -1994,23 +1981,13 @@ export interface DescribeEdgeAgentNodeInstallerRequest {
 }
 
 /**
- * 环境变量选择
+ * DescribeEdgeUnitApplicationYamlError请求参数结构体
  */
-export interface EnvValueSelector {
+export interface DescribeEdgeUnitApplicationYamlErrorRequest {
   /**
-   * 健名
+   * Yaml配置
    */
-  Key: string
-
-  /**
-   * 对象名
-   */
-  ObjectName: string
-
-  /**
-   * 对象值
-   */
-  ObjectType: string
+  Yaml: string
 }
 
 /**
@@ -2831,6 +2808,26 @@ export interface DeleteApplicationsResponse {
 }
 
 /**
+ * Draco 设备预录入信息
+ */
+export interface DracoNodeInfo {
+  /**
+   * 设备SN。SN仅支持大写字母、数字，长度限制为1~32个字符
+   */
+  SN: string
+
+  /**
+   * 节点名称。长度限制为1~63个字符，节点名称只支持小写英文、数字、中横线、英文句号
+   */
+  Name: string
+
+  /**
+   * 节点备注
+   */
+  Remark?: string
+}
+
+/**
  * docker配置
  */
 export interface DockerConfig {
@@ -2874,6 +2871,21 @@ export interface DescribeEdgeUnitDeployGridItemYamlRequest {
    * 命名空间，默认default
    */
   Namespace?: string
+}
+
+/**
+ * CreateEdgeNodeBatch请求参数结构体
+ */
+export interface CreateEdgeNodeBatchRequest {
+  /**
+   * 边缘单元ID
+   */
+  EdgeUnitId: number
+
+  /**
+   * 节点信息
+   */
+  Nodes: Array<DracoNodeInfo>
 }
 
 /**
@@ -3313,6 +3325,21 @@ export interface EdgeCloudCluster {
 }
 
 /**
+ * CreateUserToken返回参数结构体
+ */
+export interface CreateUserTokenResponse {
+  /**
+   * 无
+   */
+  Token: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSecret请求参数结构体
  */
 export interface DeleteSecretRequest {
@@ -3349,6 +3376,41 @@ export interface DescribeEdgeUnitApplicationPodsResponse {
 }
 
 /**
+ * 预注册节点的信息
+ */
+export interface EdgeDracoNodeInfo {
+  /**
+   * 节点ID
+   */
+  Id: number
+
+  /**
+   * 节点名称
+   */
+  Name: string
+
+  /**
+   * 是否已激活
+   */
+  IsUsed: boolean
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 备注信息，如批次
+   */
+  Remark: string
+
+  /**
+   * SN 设备号
+   */
+  SN: string
+}
+
+/**
  * DescribeEdgeUnitApplicationVisualization请求参数结构体
  */
 export interface DescribeEdgeUnitApplicationVisualizationRequest {
@@ -3382,6 +3444,21 @@ export interface DescribeEdgeNodesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节点基础信息
+ */
+export interface NodeSimpleInfo {
+  /**
+   * 节点ID
+   */
+  ID: number
+
+  /**
+   * 节点名称
+   */
+  NodeName: string
 }
 
 /**
@@ -3537,6 +3614,71 @@ export interface DescribeEdgeUnitApplicationLogsRequest {
    * 容器名
    */
   ContainerName?: string
+}
+
+/**
+ * 应用状态
+ */
+export interface ApplicationStatusInfo {
+  /**
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id?: number
+
+  /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 应用版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version: string
+
+  /**
+      * 应用状态(1:待部署 2:部署中 3:运行中 4:待更新 5:更新中 6:待删除 7:删除中 8:已删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: string
+
+  /**
+      * 管理地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ManageUrl: string
+
+  /**
+      * 负载类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WorkloadKind: string
+
+  /**
+      * 应用部署模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeployMode: ApplicationDeployMode
+
+  /**
+      * 期望Pod数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Replicas: number
+
+  /**
+      * 运行Pod数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvailableReplicas: number
 }
 
 /**
@@ -3792,43 +3934,33 @@ export interface VolumeHostPath {
 }
 
 /**
- * DescribeEdgeOperationLogs请求参数结构体
+ * ApplyMarketComponent请求参数结构体
  */
-export interface DescribeEdgeOperationLogsRequest {
+export interface ApplyMarketComponentRequest {
   /**
-   * 开始时间
+   * 组件ID
    */
-  BeginTime: string
+  ID: number
+}
+
+/**
+ * 环境变量选择
+ */
+export interface EnvValueSelector {
+  /**
+   * 健名
+   */
+  Key: string
 
   /**
-   * 结束时间
+   * 对象名
    */
-  EndTime: string
+  ObjectName: string
 
   /**
-   * 偏移量
+   * 对象值
    */
-  Offset: number
-
-  /**
-   * 翻页大小
-   */
-  Limit: number
-
-  /**
-   * 排序字段
-   */
-  Sort?: Array<FieldSort>
-
-  /**
-   * 模块
-   */
-  Module?: string
-
-  /**
-   * 过滤条件
-   */
-  Condition?: OperationLogsCondition
+  ObjectType: string
 }
 
 /**
@@ -3912,6 +4044,31 @@ export interface SecretItem {
 }
 
 /**
+ * ModifyEdgeDracoNode请求参数结构体
+ */
+export interface ModifyEdgeDracoNodeRequest {
+  /**
+   * 边缘单元ID
+   */
+  EdgeUnitId: number
+
+  /**
+   * 边缘节点ID
+   */
+  NodeId: number
+
+  /**
+   * 节点信息
+   */
+  NodeInfo?: DracoNodeInfo
+
+  /**
+   * 是否重置draco设备
+   */
+  IsReset?: boolean
+}
+
+/**
  * DescribeNodeUnit返回参数结构体
  */
 export interface DescribeNodeUnitResponse {
@@ -3983,28 +4140,43 @@ export interface ModifyEdgeUnitResponse {
 }
 
 /**
- * NodeUnit中边缘节点信息
+ * DescribeYeheResourceLimit返回参数结构体
  */
-export interface NodeUnitNodeInfo {
+export interface DescribeYeheResourceLimitResponse {
   /**
-   * 节点ID
-   */
-  Id: number
+      * 用户父账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin: string
 
   /**
-   * 节点状态  NodeStatusHealthy (健康)/NodeStatusAbnormal (异常)/NodeStatusOffline (下线)/NodeStatusNotActivated (未激活
-   */
-  Status: string
+      * 允许创建的节点数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateNodeLimit: number
 
   /**
-   * 节点名称
-   */
-  NodeName: string
+      * 允许创建的集群数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateClusterLimit: number
 
   /**
-   * 内网节点IP
+      * 是否有监控开启权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnablePermMonitor: boolean
+
+  /**
+      * 节点是否有admin的所有权限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnablePermAdminNode: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InternalIP: string
+  RequestId?: string
 }
 
 /**
@@ -4069,6 +4241,16 @@ export interface DescribeEdgeUnitDeployGridResponse {
       */
   GridSet: Array<GridInfo>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyEdgeUnitCloudApi返回参数结构体
+ */
+export interface ModifyEdgeUnitCloudApiResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4271,13 +4453,23 @@ export interface DescribeEdgeNodePodContainersRequest {
 }
 
 /**
- * ApplyMarketComponent请求参数结构体
+ * DeleteEdgeNodeGroup请求参数结构体
  */
-export interface ApplyMarketComponentRequest {
+export interface DeleteEdgeNodeGroupRequest {
   /**
-   * 组件ID
+   * IECP边缘单元ID
    */
-  ID: number
+  EdgeUnitId: number
+
+  /**
+   * NodeGroup名称
+   */
+  Name: string
+
+  /**
+   * 命名空间，默认为default
+   */
+  Namespace?: string
 }
 
 /**
@@ -4489,6 +4681,22 @@ export interface DescribeNamespacesRequest {
 }
 
 /**
+ * DescribeEdgeNodeRemarkList返回参数结构体
+ */
+export interface DescribeEdgeNodeRemarkListResponse {
+  /**
+      * 边缘单元内的备注列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remarks: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * pod水平伸缩配置
  */
 export interface HorizontalPodAutoscaler {
@@ -4516,21 +4724,6 @@ export interface HorizontalPodAutoscaler {
    * 资源目标指标
    */
   ResourceMetricTarget: Array<ResourceMetricTarget>
-}
-
-/**
- * 节点基础信息
- */
-export interface NodeSimpleInfo {
-  /**
-   * 节点ID
-   */
-  ID: number
-
-  /**
-   * 节点名称
-   */
-  NodeName: string
 }
 
 /**
@@ -4653,6 +4846,41 @@ export interface DescribeEdgeOperationLogsResponse {
 }
 
 /**
+ * DescribeEdgeSnNodes请求参数结构体
+ */
+export interface DescribeEdgeSnNodesRequest {
+  /**
+   * 边缘单元ID
+   */
+  EdgeUnitId: number
+
+  /**
+   * 根据节点名称模糊匹配
+   */
+  NamePattern?: string
+
+  /**
+   * 根据设备SN模糊匹配
+   */
+  SNPattern?: string
+
+  /**
+   * 根据备注批次信息模糊匹配
+   */
+  RemarkPattern?: string
+
+  /**
+   * 默认0
+   */
+  Offset?: number
+
+  /**
+   * 默认20
+   */
+  Limit?: number
+}
+
+/**
  * DeleteEdgeUnitDeployGridItem请求参数结构体
  */
 export interface DeleteEdgeUnitDeployGridItemRequest {
@@ -4675,6 +4903,26 @@ export interface DeleteEdgeUnitDeployGridItemRequest {
    * 命名空间，默认default
    */
   Namespace?: string
+}
+
+/**
+ * 安全上下文
+ */
+export interface SecurityContext {
+  /**
+   * 是否开启特权模式
+   */
+  Privilege: boolean
+
+  /**
+   * 目录/Proc挂载方式
+   */
+  ProcMount: string
+
+  /**
+   * 安全配置
+   */
+  Capabilities?: SecurityCapabilities
 }
 
 /**
@@ -4980,6 +5228,46 @@ export interface DescribeApplicationsRequest {
 }
 
 /**
+ * DescribeEdgeOperationLogs请求参数结构体
+ */
+export interface DescribeEdgeOperationLogsRequest {
+  /**
+   * 开始时间
+   */
+  BeginTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 偏移量
+   */
+  Offset: number
+
+  /**
+   * 翻页大小
+   */
+  Limit: number
+
+  /**
+   * 排序字段
+   */
+  Sort?: Array<FieldSort>
+
+  /**
+   * 模块
+   */
+  Module?: string
+
+  /**
+   * 过滤条件
+   */
+  Condition?: OperationLogsCondition
+}
+
+/**
  * Grid部署应用信息
  */
 export interface GridItemInfo {
@@ -5281,6 +5569,11 @@ export interface PortConfig {
 }
 
 /**
+ * DescribeYeheResourceLimit请求参数结构体
+ */
+export type DescribeYeheResourceLimitRequest = null
+
+/**
  * DescribeSecrets请求参数结构体
  */
 export interface DescribeSecretsRequest {
@@ -5572,6 +5865,16 @@ export interface SecurityCapabilities {
  * DeleteEdgeNodeUnitTemplates返回参数结构体
  */
 export interface DeleteEdgeNodeUnitTemplatesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyEdgeDracoNode返回参数结构体
+ */
+export interface ModifyEdgeDracoNodeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

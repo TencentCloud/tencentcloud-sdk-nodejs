@@ -156,6 +156,18 @@ export interface DescribeTrafficPackagesRequest {
       * 每页数目，整型，配合 PageNumber 使用，默认值为 20，最大值为 100。
       */
     PageSize?: number;
+    /**
+      * 对指定列进行排序
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式
+      */
+    OrderByType?: string;
+    /**
+      * 来源类型筛选
+      */
+    Type?: number;
 }
 /**
  * DescribeTrafficPackages返回参数结构体
@@ -237,6 +249,22 @@ export interface DescribeOfficialInstancesRequest {
       * 每页数目，整型，配合 PageNumber 使用，默认值为 20，最大值为 100。
       */
     PageSize?: number;
+    /**
+      * 对指定列进行排序
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式
+      */
+    OrderByType?: string;
+    /**
+      * 续费管理筛选类型
+      */
+    AutoRenew?: number;
+    /**
+      * 超级管理管理员账号是否绑定了手机号
+      */
+    BindPhone?: boolean;
 }
 /**
  * DescribeLibraries请求参数结构体

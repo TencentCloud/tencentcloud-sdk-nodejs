@@ -300,7 +300,7 @@ export interface ProcessLiveStreamResponse {
     /**
       * 任务 ID
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -617,11 +617,11 @@ export interface ModifySampleSnapshotTemplateRequest {
     FillType?: string;
 }
 /**
- * 内容审核 Ocr 文字鉴政任务输入参数类型
+ * 内容审核 Ocr 文字敏感任务输入参数类型
  */
 export interface AiReviewPoliticalOcrTaskInput {
     /**
-      * 鉴政模板 ID。
+      * 模板 ID。
       */
     Definition: number;
 }
@@ -739,7 +739,7 @@ export interface RawWatermarkParameter {
     ImageTemplate?: RawImageWatermarkInput;
 }
 /**
- * 内容审核 Ocr 文字鉴政、敏感任务结果类型
+ * 内容审核 Ocr 文字敏感任务结果类型
  */
 export interface AiReviewTaskPoliticalOcrResult {
     /**
@@ -759,11 +759,11 @@ export interface AiReviewTaskPoliticalOcrResult {
       */
     Message: string;
     /**
-      * 内容审核 Ocr 文字鉴政任务输入。
+      * 内容审核 Ocr 文字敏感任务输入。
       */
     Input: AiReviewPoliticalOcrTaskInput;
     /**
-      * 内容审核 Ocr 文字鉴政任务输出。
+      * 内容审核 Ocr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPoliticalOcrTaskOutput;
@@ -914,12 +914,12 @@ export interface ContentReviewTemplateItem {
       */
     PornConfigure: PornConfigureInfo;
     /**
-      * 鉴恐控制参数。
+      * 涉敏控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TerrorismConfigure: TerrorismConfigureInfo;
     /**
-      * 鉴政控制参数。
+      * 涉敏控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PoliticalConfigure: PoliticalConfigureInfo;
@@ -1007,11 +1007,11 @@ export interface MosaicInput {
     EndTimeOffset?: number;
 }
 /**
- * 内容审核鉴政任务输入参数类型
+ * 内容审核敏感任务输入参数类型
  */
 export interface AiReviewPoliticalTaskInput {
     /**
-      * 鉴政模板 ID。
+      * 模板 ID。
       */
     Definition: number;
 }
@@ -1369,26 +1369,26 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
     Comment?: string;
 }
 /**
- * 画面鉴恐任务控制参数。
+ * 画面涉敏任务控制参数。
  */
 export interface TerrorismImgReviewTemplateInfoForUpdate {
     /**
-      * 画面鉴恐任务开关，可选值：
-<li>ON：开启画面鉴恐任务；</li>
-<li>OFF：关闭画面鉴恐任务。</li>
+      * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
       */
     Switch?: string;
     /**
-      * 画面鉴恐过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+      * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>guns：武器枪支；</li>
 <li>crowd：人群聚集；</li>
 <li>bloody：血腥画面；</li>
 <li>police：警察部队；</li>
-<li>banners：暴恐旗帜；</li>
+<li>banners：涉敏旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物；</li>
-<li>scenario：暴恐画面。</li>
+<li>terrorists：涉敏人物；</li>
+<li>scenario：涉敏画面。</li>
       */
     LabelSet?: Array<string>;
     /**
@@ -1444,11 +1444,11 @@ export interface TextWatermarkTemplateInputForUpdate {
     FontAlpha?: number;
 }
 /**
- * 内容审核 Ocr 文字鉴恐任务输入参数类型
+ * 内容审核 Ocr 文字敏感任务输入参数类型
  */
 export interface AiReviewTerrorismOcrTaskInput {
     /**
-      * 鉴恐模板 ID。
+      * 模板 ID。
       */
     Definition: number;
 }
@@ -1931,13 +1931,13 @@ export interface EditMediaResponse {
     RequestId?: string;
 }
 /**
- * 文本鉴政任务控制参数。
+ * 文本涉敏任务控制参数。
  */
 export interface PoliticalOcrReviewTemplateInfoForUpdate {
     /**
-      * 文本鉴政任务开关，可选值：
-<li>ON：开启文本鉴政任务；</li>
-<li>OFF：关闭文本鉴政任务。</li>
+      * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
       */
     Switch?: string;
     /**
@@ -2070,7 +2070,7 @@ export interface ProcessMediaResponse {
     /**
       * 任务 ID。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2136,13 +2136,13 @@ export interface CreateWordSamplesRequest {
     Words: Array<AiSampleWordInfo>;
 }
 /**
- * 语音鉴政任务控制参数。
+ * 语音涉敏任务控制参数。
  */
 export interface PoliticalAsrReviewTemplateInfoForUpdate {
     /**
-      * 语音鉴政任务开关，可选值：
-<li>ON：开启语音鉴政任务；</li>
-<li>OFF：关闭语音鉴政任务。</li>
+      * 语音涉敏任务开关，可选值：
+<li>ON：开启语音涉敏任务；</li>
+<li>OFF：关闭语音涉敏任务。</li>
       */
     Switch?: string;
     /**
@@ -2204,7 +2204,7 @@ export interface SvgWatermarkInputForUpdate {
     Height?: string;
 }
 /**
- * 内容审核 Ocr 文字鉴恐任务结果类型
+ * 内容审核 Ocr 文字敏感任务结果类型
  */
 export interface AiReviewTaskTerrorismOcrResult {
     /**
@@ -2224,11 +2224,11 @@ export interface AiReviewTaskTerrorismOcrResult {
       */
     Message: string;
     /**
-      * 内容审核 Ocr 文字鉴恐任务输入。
+      * 内容审核 Ocr 文字敏感任务输入。
       */
     Input: AiReviewTerrorismOcrTaskInput;
     /**
-      * 内容审核 Ocr 文字鉴恐任务输出。
+      * 内容审核 Ocr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewTerrorismOcrTaskOutput;
@@ -2772,13 +2772,13 @@ export interface VideoTemplateInfo {
     Vcrf?: number;
 }
 /**
- * 文本鉴政任务控制参数
+ * 文本涉敏任务控制参数
  */
 export interface PoliticalOcrReviewTemplateInfo {
     /**
-      * 文本鉴政任务开关，可选值：
-<li>ON：开启文本鉴政任务；</li>
-<li>OFF：关闭文本鉴政任务。</li>
+      * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
       */
     Switch: string;
     /**
@@ -3696,7 +3696,7 @@ export interface LiveStreamAiRecognitionResultInfo {
     ResultSet: Array<LiveStreamAiRecognitionResultItem>;
 }
 /**
- * 直播 AI 内容审核图片鉴政结果
+ * 直播 AI 内容审核图片敏感结果
  */
 export interface LiveStreamAiReviewImagePoliticalResult {
     /**
@@ -3708,7 +3708,7 @@ export interface LiveStreamAiReviewImagePoliticalResult {
       */
     EndPtsTime: number;
     /**
-      * 嫌疑片段涉政分数。
+      * 嫌疑片段敏感分数。
       */
     Confidence: number;
     /**
@@ -3719,17 +3719,17 @@ export interface LiveStreamAiReviewImagePoliticalResult {
       */
     Suggestion: string;
     /**
-      * 视频鉴政结果标签，取值范围：
-<li>politician：政治人物。</li>
+      * 视频敏感结果标签，取值范围：
+<li>politician：敏感人物。</li>
 <li>violation_photo：违规图标。</li>
       */
     Label: string;
     /**
-      * 涉政人物、违规图标名字。
+      * 敏感人物、违规图标名字。
       */
     Name: string;
     /**
-      * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      * 敏感人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
       */
     AreaCoordSet: Array<number>;
     /**
@@ -3743,13 +3743,13 @@ PicUrlExpireTime 时间点后图片将被删除）。
     PicUrlExpireTime: string;
 }
 /**
- * 文本鉴恐任务控制参数
+ * 文本涉敏任务控制参数
  */
 export interface TerrorismOcrReviewTemplateInfoForUpdate {
     /**
-      * 文本鉴恐任务开关，可选值：
-<li>ON：开启文本鉴恐任务；</li>
-<li>OFF：关闭文本鉴恐任务。</li>
+      * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
       */
     Switch?: string;
     /**
@@ -3850,15 +3850,15 @@ export interface CreateWatermarkTemplateRequest {
     SvgTemplate?: SvgWatermarkInput;
 }
 /**
- * 鉴恐任务控制参数。
+ * 涉敏任务控制参数。
  */
 export interface TerrorismConfigureInfoForUpdate {
     /**
-      * 画面鉴恐任务控制参数。
+      * 画面涉敏任务控制参数。
       */
     ImgReviewInfo?: TerrorismImgReviewTemplateInfoForUpdate;
     /**
-      * 文本鉴恐任务控制参数。
+      * 文本涉敏任务控制参数。
       */
     OcrReviewInfo?: TerrorismOcrReviewTemplateInfoForUpdate;
 }
@@ -4044,35 +4044,35 @@ export interface DeleteTranscodeTemplateRequest {
     Definition: number;
 }
 /**
- * 暴恐信息
+ * 涉敏信息
  */
 export interface AiReviewTerrorismTaskOutput {
     /**
-      * 视频暴恐评分，分值为0到100。
+      * 视频涉敏评分，分值为0到100。
       */
     Confidence: number;
     /**
-      * 暴恐结果建议，取值范围：
+      * 涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
       */
     Suggestion: string;
     /**
-      * 视频暴恐结果标签，取值范围：
+      * 视频涉敏结果标签，取值范围：
 <li>guns：武器枪支。</li>
 <li>crowd：人群聚集。</li>
 <li>police：警察部队。</li>
 <li>bloody：血腥画面。</li>
-<li>banners：暴恐旗帜。</li>
+<li>banners：涉敏旗帜。</li>
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
-<li>terrorists：暴恐人物。</li>
-<li>scenario：暴恐画面。</li>
+<li>terrorists：涉敏人物。</li>
+<li>scenario：涉敏画面。</li>
       */
     Label: string;
     /**
-      * 有暴恐嫌疑的视频片段列表。
+      * 有涉敏嫌疑的视频片段列表。
       */
     SegmentSet: Array<MediaContentReviewSegmentItem>;
 }
@@ -4092,22 +4092,22 @@ export interface ProhibitedConfigureInfo {
     OcrReviewInfo?: ProhibitedOcrReviewTemplateInfo;
 }
 /**
- * Ocr 文字涉恐信息
+ * Ocr 文字涉敏信息
  */
 export interface AiReviewTerrorismOcrTaskOutput {
     /**
-      * Ocr 文字涉恐评分，分值为0到100。
+      * Ocr 文字涉敏评分，分值为0到100。
       */
     Confidence: number;
     /**
-      * Ocr 文字涉恐结果建议，取值范围：
+      * Ocr 文字涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
       */
     Suggestion: string;
     /**
-      * Ocr 文字有涉恐嫌疑的视频片段列表。
+      * Ocr 文字有涉敏嫌疑的视频片段列表。
       */
     SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>;
 }
@@ -4243,7 +4243,7 @@ export interface ResetWorkflowRequest {
     TaskNotifyConfig?: TaskNotifyConfig;
 }
 /**
- * 内容审核鉴恐任务结果类型
+ * 内容审核涉敏任务结果类型
  */
 export interface AiReviewTaskTerrorismResult {
     /**
@@ -4263,11 +4263,11 @@ export interface AiReviewTaskTerrorismResult {
       */
     Message: string;
     /**
-      * 内容审核鉴恐任务输入。
+      * 内容审核涉敏任务输入。
       */
     Input: AiReviewTerrorismTaskInput;
     /**
-      * 内容审核鉴恐任务输出。
+      * 内容审核涉敏任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewTerrorismTaskOutput;
@@ -4330,7 +4330,7 @@ export interface MediaContentReviewAsrTextSegmentItem {
     KeywordSet: Array<string>;
 }
 /**
- * 内容审核涉政嫌疑片段
+ * 内容审核涉敏嫌疑片段
  */
 export interface MediaContentReviewPoliticalSegmentItem {
     /**
@@ -4342,22 +4342,22 @@ export interface MediaContentReviewPoliticalSegmentItem {
       */
     EndTimeOffset: number;
     /**
-      * 嫌疑片段涉政分数。
+      * 嫌疑片段涉敏分数。
       */
     Confidence: number;
     /**
-      * 嫌疑片段鉴政结果建议，取值范围：
+      * 嫌疑片段涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
       */
     Suggestion: string;
     /**
-      * 涉政人物、违规图标名字。
+      * 涉敏人物、违规图标名字。
       */
     Name: string;
     /**
-      * 嫌疑片段鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
+      * 嫌疑片段涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
 <li>violation_photo：违规图标。</li>
 politician：
@@ -4366,7 +4366,7 @@ politician：
 <li>bureau_politician：厅局级领导人；</li>
 <li>county_politician：县处级领导人；</li>
 <li>rural_politician：乡科级领导人；</li>
-<li>sensitive_politician：敏感政治人物；</li>
+<li>sensitive_politician：涉敏人物；</li>
 <li>foreign_politician：国外领导人。</li>
 entertainment：
 <li>sensitive_entertainment：敏感娱乐人物。</li>
@@ -4389,7 +4389,7 @@ military：
       */
     Url: string;
     /**
-      * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+      * 涉敏人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
       */
     AreaCoordSet: Array<number>;
     /**
@@ -4698,11 +4698,11 @@ export interface ProhibitedAsrReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
- * 内容审核 Asr 文字鉴政、敏感任务输入参数类型
+ * 内容审核 Asr 文字敏感任务输入参数类型
  */
 export interface AiReviewPoliticalAsrTaskInput {
     /**
-      * 鉴政模板 ID。
+      * 模板 ID。
       */
     Definition: number;
 }
@@ -4816,7 +4816,7 @@ export interface PornOcrReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
- * 内容审核 Asr 文字鉴政、敏感任务结果类型
+ * 内容审核 Asr 文字敏感任务结果类型
  */
 export interface AiReviewTaskPoliticalAsrResult {
     /**
@@ -4836,11 +4836,11 @@ export interface AiReviewTaskPoliticalAsrResult {
       */
     Message: string;
     /**
-      * 内容审核 Asr 文字鉴政任务输入。
+      * 内容审核 Asr 文字敏感任务输入。
       */
     Input: AiReviewPoliticalAsrTaskInput;
     /**
-      * 内容审核 Asr 文字鉴政任务输出。
+      * 内容审核 Asr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPoliticalAsrTaskOutput;
@@ -4889,7 +4889,7 @@ export interface AiReviewProhibitedAsrTaskInput {
     Definition: number;
 }
 /**
- * 内容审核涉黄/暴恐嫌疑片段
+ * 内容审核涉黄/涉敏嫌疑片段
  */
 export interface MediaContentReviewSegmentItem {
     /**
@@ -4926,13 +4926,13 @@ export interface MediaContentReviewSegmentItem {
     PicUrlExpireTime: string;
 }
 /**
- * 文本鉴恐任务控制参数
+ * 文本涉敏任务控制参数
  */
 export interface TerrorismOcrReviewTemplateInfo {
     /**
-      * 文本鉴恐任务开关，可选值：
-<li>ON：开启文本鉴恐任务；</li>
-<li>OFF：关闭文本鉴恐任务。</li>
+      * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
       */
     Switch: string;
     /**
@@ -5149,19 +5149,19 @@ export interface SampleSnapshotTemplate {
     FillType: string;
 }
 /**
- * 画面鉴政任务控制参数。
+ * 画面涉敏任务控制参数。
  */
 export interface PoliticalImgReviewTemplateInfoForUpdate {
     /**
-      * 画面鉴政任务开关，可选值：
-<li>ON：开启画面鉴政任务；</li>
-<li>OFF：关闭画面鉴政任务。</li>
+      * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
       */
     Switch?: string;
     /**
-      * 画面鉴政过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+      * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
-<li>politician：政治人物；</li>
+<li>politician：涉敏人物；</li>
 <li>entertainment：娱乐人物；</li>
 <li>sport：体育人物；</li>
 <li>entrepreneur：商业人物；</li>
@@ -5457,22 +5457,22 @@ export interface CosFileUploadTrigger {
     Formats?: Array<string>;
 }
 /**
- * Asr 文字涉政信息
+ * Asr 文字敏感信息
  */
 export interface AiReviewPoliticalAsrTaskOutput {
     /**
-      * Asr 文字涉政、敏感评分，分值为0到100。
+      * Asr 文字敏感评分，分值为0到100。
       */
     Confidence: number;
     /**
-      * Asr 文字涉政、敏感结果建议，取值范围：
+      * Asr 文字敏感结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
       */
     Suggestion: string;
     /**
-      * Asr 文字有涉政、敏感嫌疑的视频片段列表。
+      * Asr 文字敏感嫌疑的视频片段列表。
       */
     SegmentSet: Array<MediaContentReviewAsrTextSegmentItem>;
 }
@@ -5659,7 +5659,7 @@ export interface CreateWorkflowResponse {
     /**
       * 工作流 ID。
       */
-    WorkflowId?: number;
+    WorkflowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5705,19 +5705,19 @@ export interface ModifyAIRecognitionTemplateResponse {
     RequestId?: string;
 }
 /**
- * 画面鉴政任务控制参数
+ * 画面涉敏任务控制参数
  */
 export interface PoliticalImgReviewTemplateInfo {
     /**
-      * 画面鉴政任务开关，可选值：
-<li>ON：开启画面鉴政任务；</li>
-<li>OFF：关闭画面鉴政任务。</li>
+      * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
       */
     Switch: string;
     /**
-      * 画面鉴政过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+      * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>violation_photo：违规图标；</li>
-<li>politician：政治人物；</li>
+<li>politician：涉敏人物；</li>
 <li>entertainment：娱乐人物；</li>
 <li>sport：体育人物；</li>
 <li>entrepreneur：商业人物；</li>
@@ -5736,19 +5736,19 @@ export interface PoliticalImgReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
- * 鉴政任务控制参数
+ * 涉敏任务控制参数
  */
 export interface PoliticalConfigureInfo {
     /**
-      * 画面鉴政控制参数。
+      * 画面涉敏控制参数。
       */
     ImgReviewInfo?: PoliticalImgReviewTemplateInfo;
     /**
-      * 语音鉴政控制参数。
+      * 语音涉敏控制参数。
       */
     AsrReviewInfo?: PoliticalAsrReviewTemplateInfo;
     /**
-      * 文本鉴政控制参数。
+      * 文本涉敏控制参数。
       */
     OcrReviewInfo?: PoliticalOcrReviewTemplateInfo;
 }
@@ -6271,7 +6271,7 @@ export interface TaskNotifyConfig {
     NotifyUrl?: string;
 }
 /**
- * 内容审核鉴政任务结果类型
+ * 内容审核涉敏任务结果类型
  */
 export interface AiReviewTaskPoliticalResult {
     /**
@@ -6291,11 +6291,11 @@ export interface AiReviewTaskPoliticalResult {
       */
     Message: string;
     /**
-      * 内容审核鉴政任务输入。
+      * 内容审核涉敏任务输入。
       */
     Input: AiReviewPoliticalTaskInput;
     /**
-      * 内容审核鉴政任务输出。
+      * 内容审核涉敏任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPoliticalTaskOutput;
@@ -6548,30 +6548,30 @@ export interface AiRecognitionTaskFaceResultInput {
     Definition: number;
 }
 /**
- * 涉政信息
+ * 涉敏信息
  */
 export interface AiReviewPoliticalTaskOutput {
     /**
-      * 视频涉政评分，分值为0到100。
+      * 视频涉敏评分，分值为0到100。
       */
     Confidence: number;
     /**
-      * 涉政结果建议，取值范围：
+      * 涉敏结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
       */
     Suggestion: string;
     /**
-      * 视频鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput)里 LabelSet 参数与此参数取值范围的对应关系：
+      * 视频涉敏结果标签。内容审核模板[画面涉敏任务控制参数](https://cloud.tencent.com/document/api/862/37615#AiReviewPoliticalTaskOutput)里 LabelSet 参数与此参数取值范围的对应关系：
 violation_photo：
 <li>violation_photo：违规图标。</li>
 其他（即 politician/entertainment/sport/entrepreneur/scholar/celebrity/military）：
-<li>politician：政治人物。</li>
+<li>politician：涉敏人物。</li>
       */
     Label: string;
     /**
-      * 有涉政嫌疑的视频片段列表。
+      * 有涉敏嫌疑的视频片段列表。
       */
     SegmentSet: Array<MediaContentReviewPoliticalSegmentItem>;
 }
@@ -6678,8 +6678,8 @@ export interface LiveStreamAiReviewResultItem {
     /**
       * 审核结果的类型，可以取的值有：
 <li>ImagePorn：图片鉴黄</li>
-<li>ImageTerrorism：图片鉴恐</li>
-<li>ImagePolitical：图片鉴政</li>
+<li>ImageTerrorism：图片涉敏</li>
+<li>ImagePolitical：图片涉敏</li>
 <li>PornVoice：声音鉴黄</li>
       */
     Type: string;
@@ -6688,11 +6688,11 @@ export interface LiveStreamAiReviewResultItem {
       */
     ImagePornResultSet: Array<LiveStreamAiReviewImagePornResult>;
     /**
-      * 图片鉴恐的结果，当 Type 为 ImageTerrorism 时有效。
+      * 图片涉敏的结果，当 Type 为 ImageTerrorism 时有效。
       */
     ImageTerrorismResultSet: Array<LiveStreamAiReviewImageTerrorismResult>;
     /**
-      * 图片鉴政的结果，当 Type 为 ImagePolitical 时有效。
+      * 图片涉敏的结果，当 Type 为 ImagePolitical 时有效。
       */
     ImagePoliticalResultSet: Array<LiveStreamAiReviewImagePoliticalResult>;
     /**
@@ -6922,7 +6922,7 @@ export interface FaceConfigureInfoForUpdate {
       * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
 <li>entertainment：娱乐明星；</li>
 <li>sport：体育明星；</li>
-<li>politician：政治人物。</li>
+<li>politician：敏感人物。</li>
       */
     DefaultLibraryLabelSet?: Array<string>;
     /**
@@ -6990,11 +6990,11 @@ export interface CreateAIAnalysisTemplateRequest {
     FrameTagConfigure?: FrameTagConfigureInfo;
 }
 /**
- * 内容审核鉴恐任务输入参数类型
+ * 内容审核涉敏任务输入参数类型
  */
 export interface AiReviewTerrorismTaskInput {
     /**
-      * 鉴恐模板 ID。
+      * 模板 ID。
       */
     Definition: number;
 }
@@ -7045,7 +7045,7 @@ export interface MediaAudioStreamItem {
     Channel: number;
 }
 /**
- * 直播 AI 内容审核图片鉴恐结果
+ * 直播 AI 内容审核图片涉敏结果
  */
 export interface LiveStreamAiReviewImageTerrorismResult {
     /**
@@ -7057,26 +7057,26 @@ export interface LiveStreamAiReviewImageTerrorismResult {
       */
     EndPtsTime: number;
     /**
-      * 嫌疑片段涉恐分数。
+      * 嫌疑片段涉敏分数。
       */
     Confidence: number;
     /**
-      * 嫌疑片段鉴恐结果建议，取值范围：
+      * 嫌疑片段涉敏结果建议，取值范围：
 <li>pass</li>
 <li>review</li>
 <li>block</li>
       */
     Suggestion: string;
     /**
-      * 视频暴恐结果标签，取值范围：
+      * 视频涉敏结果标签，取值范围：
 <li>guns：武器枪支。</li>
 <li>crowd：人群聚集。</li>
 <li>police：警察部队。</li>
 <li>bloody：血腥画面。</li>
-<li>banners：暴恐旗帜。</li>
+<li>banners：涉敏旗帜。</li>
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：涉敏人物。</li>
       */
     Label: string;
     /**
@@ -7356,13 +7356,13 @@ export interface AiContentReviewResult {
     /**
       * 任务的类型，可以取的值有：
 <li>Porn：图片鉴黄</li>
-<li>Terrorism：图片鉴恐</li>
-<li>Political：图片鉴政</li>
+<li>Terrorism：图片敏感</li>
+<li>Political：图片敏感</li>
 <li>Porn.Asr：Asr 文字鉴黄</li>
 <li>Porn.Ocr：Ocr 文字鉴黄</li>
-<li>Political.Asr：Asr 文字鉴政</li>
-<li>Political.Ocr：Ocr 文字鉴政</li>
-<li>Terrorism.Ocr：Ocr 文字鉴恐</li>
+<li>Political.Asr：Asr 文字敏感</li>
+<li>Political.Ocr：Ocr 文字敏感</li>
+<li>Terrorism.Ocr：Ocr 文字敏感</li>
 <li>Prohibited.Asr：Asr 文字鉴违禁</li>
 <li>Prohibited.Ocr：Ocr 文字鉴违禁</li>
       */
@@ -7381,12 +7381,12 @@ export interface AiContentReviewResult {
       */
     PornTask: AiReviewTaskPornResult;
     /**
-      * 视频内容审核智能画面鉴恐任务的查询结果，当任务类型为 Terrorism 时有效。
+      * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Terrorism 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TerrorismTask: AiReviewTaskTerrorismResult;
     /**
-      * 视频内容审核智能画面鉴政任务的查询结果，当任务类型为 Political 时有效。
+      * 视频内容审核智能画面敏感任务的查询结果，当任务类型为 Political 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PoliticalTask: AiReviewTaskPoliticalResult;
@@ -7401,17 +7401,17 @@ export interface AiContentReviewResult {
       */
     PornOcrTask: AiReviewTaskPornOcrResult;
     /**
-      * 视频内容审核 Asr 文字鉴政任务的查询结果，当任务类型为 Political.Asr 时有效。
+      * 视频内容审核 Asr 文字敏感任务的查询结果，当任务类型为 Political.Asr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PoliticalAsrTask: AiReviewTaskPoliticalAsrResult;
     /**
-      * 视频内容审核 Ocr 文字鉴政任务的查询结果，当任务类型为 Political.Ocr 时有效。
+      * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Political.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PoliticalOcrTask: AiReviewTaskPoliticalOcrResult;
     /**
-      * 视频内容审核 Ocr 文字鉴恐任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
+      * 视频内容审核 Ocr 文字敏感任务的查询结果，当任务类型为 Terrorism.Ocr 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TerrorismOcrTask: AiReviewTaskTerrorismOcrResult;
@@ -7427,26 +7427,26 @@ export interface AiContentReviewResult {
     ProhibitedOcrTask: AiReviewTaskProhibitedOcrResult;
 }
 /**
- * 画面鉴恐任务控制参数
+ * 画面涉敏任务控制参数
  */
 export interface TerrorismImgReviewTemplateInfo {
     /**
-      * 画面鉴恐任务开关，可选值：
-<li>ON：开启画面鉴恐任务；</li>
-<li>OFF：关闭画面鉴恐任务。</li>
+      * 画面涉敏任务开关，可选值：
+<li>ON：开启画面涉敏任务；</li>
+<li>OFF：关闭画面涉敏任务。</li>
       */
     Switch: string;
     /**
-      * 画面鉴恐过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
+      * 画面涉敏过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回，可选值为：
 <li>guns：武器枪支；</li>
 <li>crowd：人群聚集；</li>
 <li>bloody：血腥画面；</li>
 <li>police：警察部队；</li>
-<li>banners：暴恐旗帜；</li>
+<li>banners：涉敏旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物；</li>
-<li>scenario：暴恐画面。</li>
+<li>terrorists：涉敏人物；</li>
+<li>scenario：涉敏画面。</li>
       */
     LabelSet?: Array<string>;
     /**
@@ -7503,19 +7503,19 @@ export interface DisableWorkflowRequest {
     WorkflowId: number;
 }
 /**
- * 鉴政任务控制参数。
+ * 涉敏任务控制参数。
  */
 export interface PoliticalConfigureInfoForUpdate {
     /**
-      * 画面鉴政控制参数。
+      * 画面涉敏控制参数。
       */
     ImgReviewInfo?: PoliticalImgReviewTemplateInfoForUpdate;
     /**
-      * 语音鉴政控制参数。
+      * 语音涉敏控制参数。
       */
     AsrReviewInfo?: PoliticalAsrReviewTemplateInfoForUpdate;
     /**
-      * 文本鉴政控制参数。
+      * 文本涉敏控制参数。
       */
     OcrReviewInfo?: PoliticalOcrReviewTemplateInfoForUpdate;
 }
@@ -8008,7 +8008,7 @@ export interface FaceConfigureInfo {
       * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
 <li>entertainment：娱乐明星；</li>
 <li>sport：体育明星；</li>
-<li>politician：政治人物。</li>
+<li>politician：敏感人物。</li>
       */
     DefaultLibraryLabelSet?: Array<string>;
     /**
@@ -8123,22 +8123,22 @@ export interface PornImgReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
- * Ocr 文字涉政信息
+ * Ocr 文字敏感信息
  */
 export interface AiReviewPoliticalOcrTaskOutput {
     /**
-      * Ocr 文字涉政、敏感评分，分值为0到100。
+      * Ocr 文字敏感评分，分值为0到100。
       */
     Confidence: number;
     /**
-      * Ocr 文字涉政、敏感结果建议，取值范围：
+      * Ocr 文字敏感结果建议，取值范围：
 <li>pass。</li>
 <li>review。</li>
 <li>block。</li>
       */
     Suggestion: string;
     /**
-      * Ocr 文字有涉政、敏感嫌疑的视频片段列表。
+      * Ocr 文字有敏感嫌疑的视频片段列表。
       */
     SegmentSet: Array<MediaContentReviewOcrTextSegmentItem>;
 }
@@ -8251,26 +8251,26 @@ export interface SampleSnapshotTaskInput {
     ObjectNumberFormat?: NumberFormat;
 }
 /**
- * 鉴恐任务控制参数
+ * 涉敏任务控制参数
  */
 export interface TerrorismConfigureInfo {
     /**
-      * 画面鉴恐任务控制参数。
+      * 画面涉敏任务控制参数。
       */
     ImgReviewInfo?: TerrorismImgReviewTemplateInfo;
     /**
-      * 文本鉴恐任务控制参数。
+      * 文本涉敏任务控制参数。
       */
     OcrReviewInfo: TerrorismOcrReviewTemplateInfo;
 }
 /**
- * 语音鉴政任务控制参数
+ * 语音涉敏任务控制参数
  */
 export interface PoliticalAsrReviewTemplateInfo {
     /**
-      * 语音鉴政任务开关，可选值：
-<li>ON：开启语音鉴政任务；</li>
-<li>OFF：关闭语音鉴政任务。</li>
+      * 语音涉敏任务开关，可选值：
+<li>ON：开启语音涉敏任务；</li>
+<li>OFF：关闭语音涉敏任务。</li>
       */
     Switch: string;
     /**

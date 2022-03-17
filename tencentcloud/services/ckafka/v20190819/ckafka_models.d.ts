@@ -3171,6 +3171,14 @@ export interface CreateInstancePreRequest {
       * 磁盘类型（ssd填写CLOUD_SSD，sata填写CLOUD_BASIC）
       */
     DiskType?: string;
+    /**
+      * 跨可用区，zoneIds必填
+      */
+    MultiZoneFlag?: boolean;
+    /**
+      * 可用区列表
+      */
+    ZoneIds?: Array<number>;
 }
 /**
  * DeleteTopicIpWhiteList请求参数结构体

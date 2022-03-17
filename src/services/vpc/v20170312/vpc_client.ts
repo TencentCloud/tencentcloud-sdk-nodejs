@@ -23,6 +23,7 @@ import {
   ModifyAddressTemplateAttributeResponse,
   DisassociateDhcpIpWithAddressIpRequest,
   SecurityGroupLimitSet,
+  LockCcnsRequest,
   CreateRoutesRequest,
   DescribeHaVipsResponse,
   SecurityGroupAssociationStatistics,
@@ -113,6 +114,7 @@ import {
   ModifyIp6TranslatorResponse,
   CreateVpcEndPointServiceWhiteListResponse,
   DescribeIpGeolocationDatabaseUrlResponse,
+  UnlockCcnBandwidthsRequest,
   DeleteIp6TranslatorsResponse,
   DescribeNatGatewaySourceIpTranslationNatRulesResponse,
   DescribeVpcsRequest,
@@ -144,6 +146,7 @@ import {
   ModifyNetworkAclEntriesResponse,
   ModifyVpcEndPointAttributeResponse,
   DescribeFlowLogRequest,
+  DescribeTenantCcnsRequest,
   DescribeIp6AddressesRequest,
   AddIp6RulesRequest,
   DescribeAccountAttributesResponse,
@@ -336,6 +339,7 @@ import {
   DescribeVpnGatewayCcnRoutesResponse,
   DetachCcnInstancesRequest,
   ModifyVpcEndPointServiceWhiteListRequest,
+  DescribeTenantCcnsResponse,
   Filter,
   MigrateNetworkInterfaceResponse,
   DeleteDirectConnectGatewayRequest,
@@ -387,6 +391,7 @@ import {
   AttachClassicLinkVpcRequest,
   GatewayFlowMonitorDetail,
   CreateVpnGatewaySslClientRequest,
+  UnlockCcnsRequest,
   DescribeVpnGatewaySslServersResponse,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse,
   DeleteVpnGatewayRequest,
@@ -411,6 +416,7 @@ import {
   DescribeCustomerGatewayVendorsRequest,
   DeleteLocalGatewayRequest,
   ResetVpnGatewayInternetMaxBandwidthResponse,
+  LockCcnBandwidthsRequest,
   AddressChargePrepaid,
   DescribeVpnGatewayRoutesResponse,
   DescribeNetworkAclsResponse,
@@ -507,6 +513,7 @@ import {
   DeleteVpcEndPointRequest,
   UnassignIpv6CidrBlockRequest,
   CCN,
+  VpcEndPointServiceUser,
   InquirePriceCreateDirectConnectGatewayResponse,
   DeleteIp6TranslatorsRequest,
   Ip6Translator,
@@ -558,9 +565,11 @@ import {
   ReplaceRoutesResponse,
   ModifyHaVipAttributeResponse,
   CcnBandwidthInfo,
+  DescribeCrossBorderCcnRegionBandwidthLimitsResponse,
   DeleteSecurityGroupResponse,
   CreateNetworkInterfaceResponse,
   DescribeAddressQuotaRequest,
+  LockCcnsResponse,
   RemoveBandwidthPackageResourcesResponse,
   AssignIpv6AddressesResponse,
   CreateRoutesResponse,
@@ -585,6 +594,7 @@ import {
   DescribeCcnRoutesResponse,
   AllocateIp6AddressesBandwidthRequest,
   SecurityGroup,
+  UnlockCcnsResponse,
   DisableGatewayFlowMonitorResponse,
   DisassociateAddressResponse,
   DirectConnectSubnet,
@@ -593,7 +603,7 @@ import {
   DeleteRoutesRequest,
   AssociateAddressRequest,
   CcnRegionBandwidthLimit,
-  VpcEndPointServiceUser,
+  UnlockCcnBandwidthsResponse,
   CreateDefaultSecurityGroupResponse,
   ClassicLinkInstance,
   DeleteLocalGatewayResponse,
@@ -610,11 +620,13 @@ import {
   ModifyNetDetectResponse,
   CreateHaVipRequest,
   Ipv6SubnetCidrBlock,
+  LockCcnBandwidthsResponse,
   DescribeAddressQuotaResponse,
   CreateCustomerGatewayRequest,
   DeleteSecurityGroupRequest,
   DescribeDhcpIpsResponse,
   CreateRouteTableResponse,
+  DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
   GetCcnRegionBandwidthLimitsRequest,
   DescribeDirectConnectGatewayCcnRoutesResponse,
   ModifyPrivateIpAddressesAttributeRequest,
@@ -1211,13 +1223,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 刷新专线直连nat路由，更新nat到专线的路由表
-   */
-  async RefreshDirectConnectGatewayRouteToNatGateway(
-    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
-    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
-  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
-    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
+     * 本接口（EnableRoutes）用于启用已禁用的子网路由。<br />
+本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
+     */
+  async EnableRoutes(
+    req: EnableRoutesRequest,
+    cb?: (error: string, rep: EnableRoutesResponse) => void
+  ): Promise<EnableRoutesResponse> {
+    return this.request("EnableRoutes", req, cb)
   }
 
   /**
@@ -1432,6 +1445,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDhcpIpResponse) => void
   ): Promise<DeleteDhcpIpResponse> {
     return this.request("DeleteDhcpIp", req, cb)
+  }
+
+  /**
+     * 本接口（LockCcnBandwidths）用户锁定云联网限速实例。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（LockCcns）。
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
+     */
+  async LockCcnBandwidths(
+    req?: LockCcnBandwidthsRequest,
+    cb?: (error: string, rep: LockCcnBandwidthsResponse) => void
+  ): Promise<LockCcnBandwidthsResponse> {
+    return this.request("LockCcnBandwidths", req, cb)
   }
 
   /**
@@ -1738,6 +1763,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLocalGatewayResponse) => void
   ): Promise<DescribeLocalGatewayResponse> {
     return this.request("DescribeLocalGateway", req, cb)
+  }
+
+  /**
+   * 刷新专线直连nat路由，更新nat到专线的路由表
+   */
+  async RefreshDirectConnectGatewayRouteToNatGateway(
+    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
+    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
+  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
+    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
   }
 
   /**
@@ -2512,6 +2547,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（UnlockCcnBandwidths）用户解锁云联网限速实例。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（SecurityUnlockCcns）。
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统。
+     */
+  async UnlockCcnBandwidths(
+    req?: UnlockCcnBandwidthsRequest,
+    cb?: (error: string, rep: UnlockCcnBandwidthsResponse) => void
+  ): Promise<UnlockCcnBandwidthsResponse> {
+    return this.request("UnlockCcnBandwidths", req, cb)
+  }
+
+  /**
    * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
    * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
    * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
@@ -2814,6 +2861,22 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeVpcLimitsResponse) => void
   ): Promise<DescribeVpcLimitsResponse> {
     return this.request("DescribeVpcLimits", req, cb)
+  }
+
+  /**
+     * 本接口（UnlockCcns）用于解锁云联网实例
+
+该接口一般用来解封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间解封禁, 只能按更粗的云联网实例粒度解封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度解封禁（UnlockCcnBandwidths）
+
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+
+
+     */
+  async UnlockCcns(
+    req?: UnlockCcnsRequest,
+    cb?: (error: string, rep: UnlockCcnsResponse) => void
+  ): Promise<UnlockCcnsResponse> {
+    return this.request("UnlockCcns", req, cb)
   }
 
   /**
@@ -3135,14 +3198,16 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（EnableRoutes）用于启用已禁用的子网路由。<br />
-本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
+     * 本接口（DescribeCrossBorderCcnRegionBandwidthLimits）用于获取要锁定的限速实例列表。
+该接口一般用来封禁地域间限速的云联网实例下的限速实例, 目前联通内部运营系统通过云API调用, 如果是出口限速, 一般使用更粗的云联网实例粒度封禁（DescribeTenantCcns）
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+
      */
-  async EnableRoutes(
-    req: EnableRoutesRequest,
-    cb?: (error: string, rep: EnableRoutesResponse) => void
-  ): Promise<EnableRoutesResponse> {
-    return this.request("EnableRoutes", req, cb)
+  async DescribeCrossBorderCcnRegionBandwidthLimits(
+    req?: DescribeCrossBorderCcnRegionBandwidthLimitsRequest,
+    cb?: (error: string, rep: DescribeCrossBorderCcnRegionBandwidthLimitsResponse) => void
+  ): Promise<DescribeCrossBorderCcnRegionBandwidthLimitsResponse> {
+    return this.request("DescribeCrossBorderCcnRegionBandwidthLimits", req, cb)
   }
 
   /**
@@ -3188,6 +3253,18 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DeleteSecurityGroupResponse) => void
   ): Promise<DeleteSecurityGroupResponse> {
     return this.request("DeleteSecurityGroup", req, cb)
+  }
+
+  /**
+     * 本接口（DescribeTenantCcns）用于获取要锁定的云联网实例列表。
+该接口一般用来封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间封禁, 只能按更粗的云联网实例粒度封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度封禁（DescribeCrossBorderCcnRegionBandwidthLimits）
+如有需要, 可以封禁任意云联网实例, 可接入到内部运营系统
+     */
+  async DescribeTenantCcns(
+    req?: DescribeTenantCcnsRequest,
+    cb?: (error: string, rep: DescribeTenantCcnsResponse) => void
+  ): Promise<DescribeTenantCcnsResponse> {
+    return this.request("DescribeTenantCcns", req, cb)
   }
 
   /**
@@ -3269,6 +3346,22 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse) => void
   ): Promise<DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse> {
     return this.request("DeleteNatGatewayDestinationIpPortTranslationNatRule", req, cb)
+  }
+
+  /**
+     * 本接口（LockCcns）用于锁定云联网实例
+
+该接口一般用来封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间封禁, 只能按更粗的云联网实例粒度封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度封禁（LockCcnBandwidths）
+
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+
+
+     */
+  async LockCcns(
+    req?: LockCcnsRequest,
+    cb?: (error: string, rep: LockCcnsResponse) => void
+  ): Promise<LockCcnsResponse> {
+    return this.request("LockCcns", req, cb)
   }
 
   /**
