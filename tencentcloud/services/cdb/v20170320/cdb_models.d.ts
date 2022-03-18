@@ -458,7 +458,7 @@ export interface CreateParamTemplateRequest {
       */
     ParamList?: Array<Parameter>;
     /**
-      * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模版，"HIGH_PERFORMANCE" - 高性能模版。
+      * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
       */
     TemplateType?: string;
 }
@@ -839,7 +839,7 @@ export interface DescribeAuditRulesRequest {
       */
     Limit?: number;
     /**
-      * 分页偏移量。
+      * 分页偏移量。默认值为0。
       */
     Offset?: number;
 }
@@ -1509,7 +1509,7 @@ export interface DescribeParamTemplateInfoResponse {
       */
     Description: string;
     /**
-      * 参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模版，"HIGH_PERFORMANCE" - 高性能模版。
+      * 参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
       */
     TemplateType: string;
     /**
@@ -1871,7 +1871,7 @@ export interface ApplyCDBProxyRequest {
       */
     SecurityGroup?: Array<string>;
     /**
-      * 描述说明
+      * 描述说明，最大支持256位。
       */
     Desc?: string;
 }
@@ -5423,7 +5423,7 @@ export interface ModifyAccountPrivilegesRequest {
       */
     ColumnPrivileges?: Array<ColumnPrivilege>;
     /**
-      * 该参数不为空时，为批量修改权限。可选值为：grant，revoke。
+      * 该参数不为空时，为批量修改权限。可选值为：grant - 授予权限，revoke - 回收权限。
       */
     ModifyAction?: string;
 }
@@ -6542,7 +6542,7 @@ export interface CloseCDBProxyRequest {
       */
     ProxyGroupId: string;
     /**
-      * 是否只关闭读写分离，取值："true" | "false"
+      * 是否只关闭读写分离，取值："true" | "false"，默认为"false"
       */
     OnlyCloseRW?: boolean;
 }

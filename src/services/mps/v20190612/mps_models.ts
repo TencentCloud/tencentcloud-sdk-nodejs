@@ -1017,7 +1017,7 @@ export interface CreateImageSpriteTemplateRequest {
  */
 export interface MediaSnapshotByTimePicInfoItem {
   /**
-   * 该张截图对应视频文件中的时间偏移，单位为<font color=red>毫秒</font>。
+   * 该张截图对应视频文件中的时间偏移，单位为秒。
    */
   TimeOffset: number
 

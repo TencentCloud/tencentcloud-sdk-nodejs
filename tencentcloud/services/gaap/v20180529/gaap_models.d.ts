@@ -2765,7 +2765,7 @@ export interface CreateRuleRequest {
       */
     ForwardProtocol?: string;
     /**
-      * 回源Host。加速通道转发到远照的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。
+      * 回源Host。加速通道转发到源站的host，不设置该参数时，使用默认的host设置，即客户端发起的http请求的host。
       */
     ForwardHost?: string;
     /**

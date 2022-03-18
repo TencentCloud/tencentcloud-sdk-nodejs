@@ -1441,6 +1441,16 @@ export interface CreateUserRequest {
    * 绑定到用户的权限集合
    */
   PolicySet?: Array<Policy>
+
+  /**
+   * 用户类型。ADMIN：管理员 COMMON：一般用户。当用户类型为管理员的时候，不能设置权限集合和绑定的工作组集合，管理员默认拥有所有权限。该参数不填默认为COMMON
+   */
+  UserType?: string
+
+  /**
+   * 绑定到用户的工作组ID集合。
+   */
+  WorkGroupIds?: Array<number>
 }
 
 /**
@@ -2096,6 +2106,11 @@ export interface CreateWorkGroupRequest {
    * 工作组绑定的鉴权策略集合
    */
   PolicySet?: Array<Policy>
+
+  /**
+   * 需要绑定到工作组的用户Id集合
+   */
+  UserIds?: Array<string>
 }
 
 /**

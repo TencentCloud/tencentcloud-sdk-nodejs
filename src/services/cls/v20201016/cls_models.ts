@@ -1005,7 +1005,7 @@ export interface TopicInfo {
   StorageType: string
 
   /**
-      * 生命周期，单位为天
+      * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Period: number
@@ -1933,12 +1933,12 @@ export interface CreateTopicRequest {
   MaxSplitPartitions?: number
 
   /**
-   * 日志主题的存储类型，可选值 hot（实时存储），cold（离线存储）；默认为hot。若传入cold，请先联系客服进行开白。
+   * 日志主题的存储类型，可选值 hot（实时存储），cold（低频存储）；默认为hot。
    */
   StorageType?: string
 
   /**
-   * 生命周期，单位天；可取值范围1~366。默认30天
+   * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
    */
   Period?: number
 }

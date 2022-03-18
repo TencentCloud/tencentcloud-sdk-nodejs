@@ -568,13 +568,8 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
   ApproverRole?: number
 
   /**
-      * 认证方式：
-WEIXINAPP - 微信小程序；
-VERIFYCODE - 验证码；
-
-可以选择多个, 按照顺序进行优先级选择
-注：使用验证码方式认证签署时，请传入["VERIFYCODE","WEIXINAPP"]
-      */
+   * 签署意愿确认渠道,WEIXINAPP:人脸识别
+   */
   VerifyChannel?: Array<string>
 
   /**

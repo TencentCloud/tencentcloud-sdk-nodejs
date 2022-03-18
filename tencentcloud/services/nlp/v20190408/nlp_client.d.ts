@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { LexicalAnalysisResponse, SentenceEmbeddingRequest, DescribeTripleRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, KeywordsExtractionResponse, AutoSummarizationRequest, ChatBotRequest, DescribeRelationRequest, KeywordsExtractionRequest, DescribeEntityResponse, DescribeEntityRequest, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, DescribeRelationResponse, CreateWordItemsRequest, TextCorrectionRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, TextClassificationResponse, DeleteDictResponse, DescribeWordItemsRequest, SearchWordItemsRequest, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeTripleResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, SentimentAnalysisResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SimilarWordsResponse, DependencyParsingResponse, LexicalAnalysisRequest, CreateWordItemsResponse, SentimentAnalysisRequest, WordSimilarityResponse, CreateDictRequest } from "./nlp_models";
+import { LexicalAnalysisResponse, SentenceEmbeddingRequest, DescribeTripleRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, KeywordsExtractionResponse, AutoSummarizationRequest, ChatBotRequest, DescribeRelationRequest, KeywordsExtractionRequest, DescribeEntityResponse, TextCorrectionProResponse, DescribeEntityRequest, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, DescribeRelationResponse, CreateWordItemsRequest, TextCorrectionRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, TextClassificationResponse, DeleteDictResponse, DescribeWordItemsRequest, SearchWordItemsRequest, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeTripleResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, SentimentAnalysisResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionProRequest, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SimilarWordsResponse, DependencyParsingResponse, LexicalAnalysisRequest, CreateWordItemsResponse, SentimentAnalysisRequest, WordSimilarityResponse, CreateDictRequest } from "./nlp_models";
 /**
  * nlp client
  * @class
@@ -140,6 +140,12 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
      * 基于关键词提取平台，通过对文本内容进行深度分析，提取出文本内容中的关键信息，为用户实现诸如新闻内容关键词自动提取、评论关键词提取等提供基础服务。
      */
     KeywordsExtraction(req: KeywordsExtractionRequest, cb?: (error: string, rep: KeywordsExtractionResponse) => void): Promise<KeywordsExtractionResponse>;
+    /**
+     * 提供对中文文本的自动纠错功能，能够识别输入文本中的错误片段，定位错误并给出正确的文本结果；支持长度不超过128字符（含标点符号）的长文本纠错。
+
+此功能是基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升，是搜索引擎、语音识别、内容审核等功能更好运行的基础之一。
+     */
+    TextCorrectionPro(req: TextCorrectionProRequest, cb?: (error: string, rep: TextCorrectionProResponse) => void): Promise<TextCorrectionProResponse>;
     /**
      * 删除自定义词库，会附带相应删除词库包含的所有词条。
      */

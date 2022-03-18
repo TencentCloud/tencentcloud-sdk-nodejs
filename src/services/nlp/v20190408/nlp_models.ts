@@ -380,6 +380,27 @@ export interface ClassificationResult {
 }
 
 /**
+ * TextCorrectionPro返回参数结构体
+ */
+export interface TextCorrectionProResponse {
+  /**
+      * 纠错详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CCITokens: Array<CCIToken>
+
+  /**
+   * 纠错后的文本
+   */
+  ResultText: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEntity请求参数结构体
  */
 export interface DescribeEntityRequest {
@@ -863,6 +884,16 @@ export interface DescribeDictResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TextCorrectionPro请求参数结构体
+ */
+export interface TextCorrectionProRequest {
+  /**
+   * 待纠错的文本（仅支持UTF-8格式，不超过128字符）
+   */
+  Text: string
 }
 
 /**

@@ -248,6 +248,16 @@ it("nlp.v20190408.KeywordsExtraction", async function () {
     }
 })
 
+it("nlp.v20190408.TextCorrectionPro", async function () {
+    try {
+       const data = await client.TextCorrectionPro({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("nlp.v20190408.DeleteDict", async function () {
     try {
        const data = await client.DeleteDict({})

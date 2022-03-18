@@ -4317,6 +4317,16 @@ export interface MLIDPassportOCRResponse {
   AdvancedInfo: string
 
   /**
+   * 最下方第一行 MRZ Code 序列
+   */
+  CodeSet: string
+
+  /**
+   * 最下方第二行 MRZ Code 序列
+   */
+  CodeCrc: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

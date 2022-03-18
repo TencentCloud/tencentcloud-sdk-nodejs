@@ -52,42 +52,42 @@ export interface DescribeClusterSecurityResponse {
     /**
       * 集群的账号名称
       */
-    UserName?: string;
+    UserName: string;
     /**
       * 集群的访问密码
       */
-    Password?: string;
+    Password: string;
     /**
       * 集群访问CA证书
       */
-    CertificationAuthority?: string;
+    CertificationAuthority: string;
     /**
       * 集群访问的地址
       */
-    ClusterExternalEndpoint?: string;
+    ClusterExternalEndpoint: string;
     /**
       * 集群访问的域名
       */
-    Domain?: string;
+    Domain: string;
     /**
       * 集群Endpoint地址
       */
-    PgwEndpoint?: string;
+    PgwEndpoint: string;
     /**
       * 集群访问策略组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SecurityPolicy?: Array<string>;
+    SecurityPolicy: Array<string>;
     /**
       * 集群Kubeconfig文件
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Kubeconfig?: string;
+    Kubeconfig: string;
     /**
       * 集群JnsGw的访问地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    JnsGwEndpoint?: string;
+    JnsGwEndpoint: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -148,17 +148,17 @@ export interface DeleteClusterInstancesResponse {
       * 删除成功的实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SuccInstanceIds?: Array<string>;
+    SuccInstanceIds: Array<string>;
     /**
       * 删除失败的实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FailedInstanceIds?: Array<string>;
+    FailedInstanceIds: Array<string>;
     /**
       * 未匹配到的实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NotFoundInstanceIds?: Array<string>;
+    NotFoundInstanceIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1069,12 +1069,12 @@ export interface DescribeRegionsResponse {
       * 地域的数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 地域列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RegionInstanceSet?: Array<RegionInstance>;
+    RegionInstanceSet: Array<RegionInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1650,12 +1650,12 @@ export interface DescribeImagesResponse {
       * 镜像数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 镜像信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageInstanceSet?: Array<ImageInstance>;
+    ImageInstanceSet: Array<ImageInstance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3599,12 +3599,12 @@ export interface DescribeRouteTableConflictsResponse {
     /**
       * 路由表是否冲突。
       */
-    HasConflict?: boolean;
+    HasConflict: boolean;
     /**
       * 路由表冲突列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RouteTableConflictSet?: Array<RouteTableConflict>;
+    RouteTableConflictSet: Array<RouteTableConflict>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4715,7 +4715,7 @@ export interface Cluster {
       */
     TagSpecification: Array<TagSpecification>;
     /**
-      * 集群状态 (Running 运行中  Creating 创建中 Abnormal 异常  )
+      * 集群状态 (Running 运行中  Creating 创建中 Idling 闲置中  Abnormal 异常  )
       */
     ClusterStatus: string;
     /**
@@ -6344,11 +6344,11 @@ export interface DescribeClusterAsGroupsResponse {
     /**
       * 集群关联的伸缩组总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 集群关联的伸缩组列表
       */
-    ClusterAsGroupSet?: Array<ClusterAsGroup>;
+    ClusterAsGroupSet: Array<ClusterAsGroup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

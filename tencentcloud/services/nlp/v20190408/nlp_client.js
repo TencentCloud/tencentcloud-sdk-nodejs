@@ -207,6 +207,14 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
         return this.request("KeywordsExtraction", req, cb);
     }
     /**
+     * 提供对中文文本的自动纠错功能，能够识别输入文本中的错误片段，定位错误并给出正确的文本结果；支持长度不超过128字符（含标点符号）的长文本纠错。
+
+此功能是基于千亿级大规模互联网语料和LSTM、BERT等深度神经网络模型进行训练，并持续迭代更新，以保证效果不断提升，是搜索引擎、语音识别、内容审核等功能更好运行的基础之一。
+     */
+    async TextCorrectionPro(req, cb) {
+        return this.request("TextCorrectionPro", req, cb);
+    }
+    /**
      * 删除自定义词库，会附带相应删除词库包含的所有词条。
      */
     async DeleteDict(req, cb) {

@@ -1412,6 +1412,10 @@ export interface ModifyAlarmNoticeRequest {
       * 回调通知 最多3个
       */
     URLNotices?: Array<URLNotice>;
+    /**
+      * 告警通知推送到CLS服务 最多1个
+      */
+    CLSNotices?: Array<CLSNotice>;
 }
 /**
  * CreateServiceDiscovery请求参数结构体
@@ -3553,6 +3557,10 @@ export interface DescribeAlarmPoliciesRequest {
       * 是否需要策略与入参过滤维度参数的对应关系，1：是  0：否，默认为0
       */
     NeedCorrespondence?: number;
+    /**
+      * 按照触发任务（例如弹性伸缩）过滤策略。最多10个
+      */
+    TriggerTasks?: Array<AlarmPolicyTriggerTask>;
 }
 /**
  * DescribeConditionsTemplateList返回参数结构体
@@ -3680,6 +3688,11 @@ export interface AlarmNotice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PolicyIds: Array<string>;
+    /**
+      * 推送cls渠道
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CLSNotices: Array<CLSNotice>;
 }
 /**
  * 指标配置
@@ -4728,6 +4741,10 @@ export interface CreateAlarmNoticeRequest {
       * 回调通知 最多3个
       */
     URLNotices?: Array<URLNotice>;
+    /**
+      * 推送CLS日志服务的操作 最多1个
+      */
+    CLSNotices?: Array<CLSNotice>;
 }
 /**
  * 查询策略输出的阈值告警条件
@@ -4892,6 +4909,27 @@ export interface UnBindingAllPolicyObjectRequest {
       * 告警策略ID，使用此字段时 GroupId 会被忽略
       */
     PolicyId?: string;
+}
+/**
+ * 告警通知中的推送CLS操作
+ */
+export interface CLSNotice {
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * 日志集Id
+      */
+    LogSetId: string;
+    /**
+      * 主题Id
+      */
+    TopicId: string;
+    /**
+      * 启停状态，可不传，默认启用。0=停用，1=启用
+      */
+    Enable?: number;
 }
 /**
  * 查询策略输出的事件告警条件

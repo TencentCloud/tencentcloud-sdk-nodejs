@@ -190,6 +190,7 @@ import {
   GetMonitorDataResponse,
   ReceiverInfo,
   UnBindingAllPolicyObjectRequest,
+  CLSNotice,
   DescribePolicyGroupInfoEventCondition,
   SendCustomAlarmMsgResponse,
   AlarmPolicyCondition,

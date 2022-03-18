@@ -772,7 +772,7 @@ export interface ImportKeyPairResponse {
   /**
    * 密钥对ID。
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
