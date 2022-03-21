@@ -91,6 +91,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSmsQuotas", req, cb);
     }
     /**
+     * 修改服务版本的副本数，环境变量
+     */
+    async ModifyCloudBaseRunServerVersion(req, cb) {
+        return this.request("ModifyCloudBaseRunServerVersion", req, cb);
+    }
+    /**
      * 针对特定的版本，进行滚动更新
      */
     async RollUpdateCloudBaseRunServerVersion(req, cb) {
@@ -167,6 +173,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeStandaloneGatewayPackage(req, cb) {
         return this.request("DescribeStandaloneGatewayPackage", req, cb);
+    }
+    /**
+     * 批量解冻服务
+     */
+    async UnfreezeCloudBaseRunServers(req, cb) {
+        return this.request("UnfreezeCloudBaseRunServers", req, cb);
     }
     /**
      * 开通后付费资源
@@ -397,10 +409,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunServerVersion", req, cb);
     }
     /**
-     * 修改服务版本的副本数，环境变量
+     * 批量冻结
      */
-    async ModifyCloudBaseRunServerVersion(req, cb) {
-        return this.request("ModifyCloudBaseRunServerVersion", req, cb);
+    async FreezeCloudBaseRunServers(req, cb) {
+        return this.request("FreezeCloudBaseRunServers", req, cb);
     }
     /**
      * 查询活动信息

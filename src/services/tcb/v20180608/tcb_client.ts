@@ -71,6 +71,7 @@ import {
   EndUserInfo,
   DeleteEndUserRequest,
   DescribeHostingDomainTaskRequest,
+  FreezeCloudBaseRunServersRequest,
   DescribeQuotaDataResponse,
   ActivityInfoItem,
   KVPair,
@@ -133,6 +134,7 @@ import {
   ReplaceActivityRecordRequest,
   DeleteWxGatewayRouteResponse,
   CloudBaseRunKVPriority,
+  UnfreezeCloudBaseRunServersRequest,
   EstablishCloudBaseRunServerRequest,
   ReinstateEnvResponse,
   CloudBaseRunServiceVolumeMount,
@@ -150,6 +152,7 @@ import {
   CreateAndDeployCloudBaseProjectRequest,
   DescribeCloudBaseRunVersionRequest,
   EstablishWxGatewayRouteRequest,
+  UnfreezeCloudBaseRunServersResponse,
   DescribeCloudBaseRunConfForGateWayResponse,
   DatabasesInfo,
   CloudBaseSecurityContext,
@@ -207,6 +210,7 @@ import {
   CreateCloudBaseRunResourceRequest,
   ModifyEndUserResponse,
   DescribeAuthDomainsRequest,
+  FreezeCloudBaseRunServersResponse,
   CloudRunServiceVolume,
   CloudBaseRunForGatewayConf,
   ExtensionFileInfo,
@@ -340,6 +344,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改服务版本的副本数，环境变量
+   */
+  async ModifyCloudBaseRunServerVersion(
+    req: ModifyCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: ModifyCloudBaseRunServerVersionResponse) => void
+  ): Promise<ModifyCloudBaseRunServerVersionResponse> {
+    return this.request("ModifyCloudBaseRunServerVersion", req, cb)
+  }
+
+  /**
    * 针对特定的版本，进行滚动更新
    */
   async RollUpdateCloudBaseRunServerVersion(
@@ -467,6 +481,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStandaloneGatewayPackageResponse) => void
   ): Promise<DescribeStandaloneGatewayPackageResponse> {
     return this.request("DescribeStandaloneGatewayPackage", req, cb)
+  }
+
+  /**
+   * 批量解冻服务
+   */
+  async UnfreezeCloudBaseRunServers(
+    req: UnfreezeCloudBaseRunServersRequest,
+    cb?: (error: string, rep: UnfreezeCloudBaseRunServersResponse) => void
+  ): Promise<UnfreezeCloudBaseRunServersResponse> {
+    return this.request("UnfreezeCloudBaseRunServers", req, cb)
   }
 
   /**
@@ -850,13 +874,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改服务版本的副本数，环境变量
+   * 批量冻结
    */
-  async ModifyCloudBaseRunServerVersion(
-    req: ModifyCloudBaseRunServerVersionRequest,
-    cb?: (error: string, rep: ModifyCloudBaseRunServerVersionResponse) => void
-  ): Promise<ModifyCloudBaseRunServerVersionResponse> {
-    return this.request("ModifyCloudBaseRunServerVersion", req, cb)
+  async FreezeCloudBaseRunServers(
+    req: FreezeCloudBaseRunServersRequest,
+    cb?: (error: string, rep: FreezeCloudBaseRunServersResponse) => void
+  ): Promise<FreezeCloudBaseRunServersResponse> {
+    return this.request("FreezeCloudBaseRunServers", req, cb)
   }
 
   /**

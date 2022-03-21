@@ -220,6 +220,10 @@ export interface DescribeTawInstancesRequest {
       * 过滤参数
       */
     Filters?: Array<Filter>;
+    /**
+      * 是否为demo模式（1=是，2=否）
+      */
+    IsDemo?: number;
 }
 /**
  * DeleteOfflineLogConfig返回参数结构体
@@ -463,6 +467,10 @@ export interface DescribeScoresRequest {
       * 项目ID
       */
     ID?: number;
+    /**
+      * 是否为demo模式（1=是，2=否）
+      */
+    IsDemo?: number;
 }
 /**
  * DescribeDataReportCount请求参数结构体
@@ -1479,14 +1487,6 @@ export interface DescribeDataStaticProjectRequest {
  */
 export interface ProjectLimit {
     /**
-      * 主键ID
-      */
-    ID: number;
-    /**
-      * 项目ID
-      */
-    ProjectID: number;
-    /**
       * 接口
       */
     ProjectInterface: string;
@@ -1498,6 +1498,14 @@ export interface ProjectLimit {
       * 上报类型 1：上报率  2：上报量限制
       */
     ReportType: number;
+    /**
+      * 主键ID
+      */
+    ID?: number;
+    /**
+      * 项目ID
+      */
+    ProjectID?: number;
 }
 /**
  * DeleteLogExport请求参数结构体
@@ -2506,6 +2514,10 @@ export interface DescribeProjectsRequest {
       * 过滤条件
       */
     Filters?: Array<Filter>;
+    /**
+      * 是否为demo模式（1=是，2=否）
+      */
+    IsDemo?: number;
 }
 /**
  * DescribeDataEventUrl请求参数结构体
@@ -3180,6 +3192,11 @@ export interface RumProject {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsStar: number;
+    /**
+      * 项目状态(1 创建中，2 运行中，3 异常，4 重启中，5 停止中，6 已停止， 7 销毁中，8 已销毁)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectStatus: number;
 }
 /**
  * DescribeDataSetUrlStatistics返回参数结构体

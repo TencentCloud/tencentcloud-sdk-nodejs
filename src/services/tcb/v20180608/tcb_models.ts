@@ -1641,6 +1641,21 @@ export interface DescribeHostingDomainTaskRequest {
 }
 
 /**
+ * FreezeCloudBaseRunServers请求参数结构体
+ */
+export interface FreezeCloudBaseRunServersRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 服务名列表
+   */
+  ServerNameList: Array<string>
+}
+
+/**
  * DescribeQuotaData返回参数结构体
  */
 export interface DescribeQuotaDataResponse {
@@ -3343,6 +3358,21 @@ export interface CloudBaseRunKVPriority {
 }
 
 /**
+ * UnfreezeCloudBaseRunServers请求参数结构体
+ */
+export interface UnfreezeCloudBaseRunServersRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 服务名称列表
+   */
+  ServerNameList: Array<string>
+}
+
+/**
  * EstablishCloudBaseRunServer请求参数结构体
  */
 export interface EstablishCloudBaseRunServerRequest {
@@ -3871,6 +3901,33 @@ export interface EstablishWxGatewayRouteRequest {
    * 服务描述
    */
   GatewayRouteDesc?: string
+}
+
+/**
+ * UnfreezeCloudBaseRunServers返回参数结构体
+ */
+export interface UnfreezeCloudBaseRunServersResponse {
+  /**
+      * 批量执行结果
+成功：succ
+失败：fail
+部分：partial（部分成功、部分失败）
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+      * 解冻失败列表
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailServerList: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5511,6 +5568,33 @@ export interface DescribeAuthDomainsRequest {
    * 环境ID
    */
   EnvId: string
+}
+
+/**
+ * FreezeCloudBaseRunServers返回参数结构体
+ */
+export interface FreezeCloudBaseRunServersResponse {
+  /**
+      * 批量状态状态
+成功：succ
+失败：fail
+部分：partial（部分成功、部分失败）
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: string
+
+  /**
+      * 冻结失败服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailServerList: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

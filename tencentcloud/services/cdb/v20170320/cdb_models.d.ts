@@ -3607,11 +3607,11 @@ export interface DescribeProxyConnectionPoolConfRequest {
       */
     InstanceId: string;
     /**
-      * 分页查询偏移量
+      * 分页
       */
     Offset?: number;
     /**
-      * 分页查询限制
+      * 限制
       */
     Limit?: number;
 }
@@ -5812,11 +5812,11 @@ export interface ModifyCDBProxyRequest {
       */
     ProxyGroupId: string;
     /**
-      * 是否开始延迟剔除，取值："true" | "false"
+      * 是否开始延迟剔除，默认false，取值："true" | "false"
       */
     IsKickout?: boolean;
     /**
-      * 最少保留数
+      * 最少保留数，最小为0，最大为实例数量
       */
     MinCount?: number;
     /**
@@ -5832,11 +5832,11 @@ export interface ModifyCDBProxyRequest {
       */
     RoWeightValues?: RoWeight;
     /**
-      * 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值："true" | "false"
+      * 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，默认false，取值："true" | "false"
       */
     FailOver?: boolean;
     /**
-      * 是否自动添加只读实例，取值："true" | "false"
+      * 是否自动添加只读实例，默认false，取值："true" | "false"
       */
     AutoAddRo?: boolean;
 }
@@ -6649,11 +6649,11 @@ export interface UpgradeCDBProxyRequest {
       */
     ProxyGroupId: string;
     /**
-      * 代理节点个数
+      * 代理节点个数，实际规格支持数
       */
     ProxyCount: number;
     /**
-      * 代理节点核数
+      * 代理节点核数，实际规格支持数
       */
     Cpu: number;
     /**

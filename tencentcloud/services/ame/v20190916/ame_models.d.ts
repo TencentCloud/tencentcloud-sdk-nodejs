@@ -753,6 +753,15 @@ export interface KTVSingerInfo {
     PlayCount: number;
 }
 /**
+ * 设置音量。
+ */
+export interface SetVolumeCommandInput {
+    /**
+      * 音量大小，取值范围为 0~100，默认值为 50。
+      */
+    Volume: number;
+}
+/**
  * PutMusicOnTheShelves请求参数结构体
  */
 export interface PutMusicOnTheShelvesRequest {
@@ -1551,6 +1560,7 @@ export interface SyncKTVRobotCommandRequest {
 <li>SetAudioParam：音频参数变更</li>
 <li>SendMessage：发送自定义消息</li>
 <li>SetDestroyMode：设置销毁模式</li>
+<li>SetVolume：设置音量</li>
       */
     Command: string;
     /**
@@ -1581,6 +1591,10 @@ export interface SyncKTVRobotCommandRequest {
       * 销毁模式，当Command取SetDestroyMode时，必填。
       */
     SetDestroyModeCommandInput?: SetDestroyModeCommandInput;
+    /**
+      * 音量，当Command取SetVolume时，必填。
+      */
+    SetVolumeCommandInput?: SetVolumeCommandInput;
 }
 /**
  * DescribeKTVSuggestions请求参数结构体
@@ -1785,11 +1799,11 @@ export interface KTVRobotInfo {
       */
     Position: number;
     /**
-      * 音频参数
+      * 音频参数。
       */
     SetAudioParamInput: SetAudioParamCommandInput;
     /**
-      * 进房信息
+      * 进房信息。
       */
     JoinRoomInput: JoinRoomInput;
     /**
@@ -1805,6 +1819,10 @@ export interface KTVRobotInfo {
 <li>Shuffle：随机播放</li>
       */
     SetPlayModeInput: SetPlayModeCommandInput;
+    /**
+      * 音量，范围 0~100，默认为 50。
+      */
+    SetVolumeInput: SetVolumeCommandInput;
 }
 /**
  * DescribeItems请求参数结构体

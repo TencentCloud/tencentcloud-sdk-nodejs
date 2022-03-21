@@ -408,7 +408,7 @@ export interface CreateWaterPrintConfigRequest {
 export interface DDoSGeoIPBlockConfig {
   /**
       * 区域类型，取值[
-oversea(海外)
+oversea(境外)
 china(国内)
 customized(自定义地区)
 ]

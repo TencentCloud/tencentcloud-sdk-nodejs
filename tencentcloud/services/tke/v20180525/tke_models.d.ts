@@ -696,42 +696,13 @@ export interface DeletePrometheusTemplateRequest {
     TemplateId: string;
 }
 /**
- * 某个节点的升级进度
+ * DescribeClusterAsGroupOption请求参数结构体
  */
-export interface InstanceUpgradeProgressItem {
+export interface DescribeClusterAsGroupOptionRequest {
     /**
-      * 节点instanceID
+      * 集群ID
       */
-    InstanceID: string;
-    /**
-      * 任务生命周期
-process 运行中
-paused 已停止
-pauing 正在停止
-done  已完成
-timeout 已超时
-aborted 已取消
-pending 还未开始
-      */
-    LifeState: string;
-    /**
-      * 升级开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartAt: string;
-    /**
-      * 升级结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndAt: string;
-    /**
-      * 升级前检查结果
-      */
-    CheckResult: InstanceUpgradePreCheckResult;
-    /**
-      * 升级步骤详情
-      */
-    Detail: Array<TaskStepInfo>;
+    ClusterId: string;
 }
 /**
  * DescribeEKSContainerInstanceRegions请求参数结构体
@@ -824,21 +795,13 @@ export interface IPAddress {
     Port: number;
 }
 /**
- * DeleteCluster请求参数结构体
+ * 自动变配集群等级
  */
-export interface DeleteClusterRequest {
+export interface AutoUpgradeClusterLevel {
     /**
-      * 集群ID
+      * 是否开启自动变配集群等级
       */
-    ClusterId: string;
-    /**
-      * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
-      */
-    InstanceDeleteMode: string;
-    /**
-      * 集群删除时资源的删除策略，目前支持CBS（默认保留CBS）
-      */
-    ResourceDeleteOptions?: Array<ResourceDeleteOption>;
+    IsAutoUpgrade: boolean;
 }
 /**
  * GetMostSuitableImageCache请求参数结构体
@@ -955,6 +918,44 @@ export interface DNSConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Options?: Array<DNSConfigOption>;
+}
+/**
+ * 某个节点的升级进度
+ */
+export interface InstanceUpgradeProgressItem {
+    /**
+      * 节点instanceID
+      */
+    InstanceID: string;
+    /**
+      * 任务生命周期
+process 运行中
+paused 已停止
+pauing 正在停止
+done  已完成
+timeout 已超时
+aborted 已取消
+pending 还未开始
+      */
+    LifeState: string;
+    /**
+      * 升级开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartAt: string;
+    /**
+      * 升级结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndAt: string;
+    /**
+      * 升级前检查结果
+      */
+    CheckResult: InstanceUpgradePreCheckResult;
+    /**
+      * 升级步骤详情
+      */
+    Detail: Array<TaskStepInfo>;
 }
 /**
  * DNS配置选项
@@ -1694,6 +1695,14 @@ export interface ModifyClusterAttributeRequest {
       * 集群描述
       */
     ClusterDesc?: string;
+    /**
+      * 集群等级
+      */
+    ClusterLevel?: string;
+    /**
+      * 自动变配集群等级
+      */
+    AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
 }
 /**
  * DeleteClusterRoute返回参数结构体
@@ -1819,17 +1828,27 @@ export interface ModifyClusterAttributeResponse {
       * 集群所属项目
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProjectId?: number;
+    ProjectId: number;
     /**
       * 集群名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterName?: string;
+    ClusterName: string;
     /**
       * 集群描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClusterDesc?: string;
+    ClusterDesc: string;
+    /**
+      * 集群等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterLevel: string;
+    /**
+      * 自动变配集群等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoUpgradeClusterLevel: AutoUpgradeClusterLevel;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2139,6 +2158,14 @@ export interface ClusterBasicSettings {
       * 当选择Cilium Overlay网络插件时，TKE会从该子网获取2个IP用来创建内网负载均衡
       */
     SubnetId?: string;
+    /**
+      * 集群等级，针对托管集群生效
+      */
+    ClusterLevel?: string;
+    /**
+      * 自动变配集群等级，针对托管集群生效
+      */
+    AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
 }
 /**
  * CreatePrometheusDashboard返回参数结构体
@@ -3328,13 +3355,13 @@ export interface CreateEKSClusterResponse {
     RequestId?: string;
 }
 /**
- * DescribeClusterAsGroupOption请求参数结构体
+ * DeleteImageCaches返回参数结构体
  */
-export interface DescribeClusterAsGroupOptionRequest {
+export interface DeleteImageCachesResponse {
     /**
-      * 集群ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ClusterId: string;
+    RequestId?: string;
 }
 /**
  * CreatePrometheusAlertRule返回参数结构体
@@ -4935,13 +4962,21 @@ export interface DisableClusterDeletionProtectionResponse {
     RequestId?: string;
 }
 /**
- * DeleteImageCaches返回参数结构体
+ * DeleteCluster请求参数结构体
  */
-export interface DeleteImageCachesResponse {
+export interface DeleteClusterRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 集群ID
       */
-    RequestId?: string;
+    ClusterId: string;
+    /**
+      * 集群实例删除时的策略：terminate（销毁实例，仅支持按量计费云主机实例） retain （仅移除，保留实例）
+      */
+    InstanceDeleteMode: string;
+    /**
+      * 集群删除时资源的删除策略，目前支持CBS（默认保留CBS）
+      */
+    ResourceDeleteOptions?: Array<ResourceDeleteOption>;
 }
 /**
  * DescribePrometheusAgentInstances返回参数结构体

@@ -430,6 +430,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ParseStreamingManifest", req, cb);
     }
     /**
+     * 对点播中的图片文件发起处理任务，功能包括：
+
+1. 智能识别（令人反感的信息、不安全的信息、不适宜的信息）;
+
+><li>图片文件大小支持：文件 < 5M；</li>
+><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响识别效果；</li>
+><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
+
+     */
+    async ProcessImage(req, cb) {
+        return this.request("ProcessImage", req, cb);
+    }
+    /**
      * 创建用户自定义的任务流模板，模板上限：50。
      */
     async CreateProcedureTemplate(req, cb) {

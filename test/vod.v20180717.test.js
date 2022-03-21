@@ -508,6 +508,16 @@ it("vod.v20180717.ParseStreamingManifest", async function () {
     }
 })
 
+it("vod.v20180717.ProcessImage", async function () {
+    try {
+       const data = await client.ProcessImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateProcedureTemplate", async function () {
     try {
        const data = await client.CreateProcedureTemplate({})

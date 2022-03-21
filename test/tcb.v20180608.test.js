@@ -118,6 +118,16 @@ it("tcb.v20180608.DescribeSmsQuotas", async function () {
     }
 })
 
+it("tcb.v20180608.ModifyCloudBaseRunServerVersion", async function () {
+    try {
+       const data = await client.ModifyCloudBaseRunServerVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.RollUpdateCloudBaseRunServerVersion", async function () {
     try {
        const data = await client.RollUpdateCloudBaseRunServerVersion({})
@@ -241,6 +251,16 @@ it("tcb.v20180608.TurnOnStandaloneGateway", async function () {
 it("tcb.v20180608.DescribeStandaloneGatewayPackage", async function () {
     try {
        const data = await client.DescribeStandaloneGatewayPackage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.UnfreezeCloudBaseRunServers", async function () {
+    try {
+       const data = await client.UnfreezeCloudBaseRunServers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,9 +648,9 @@ it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyCloudBaseRunServerVersion", async function () {
+it("tcb.v20180608.FreezeCloudBaseRunServers", async function () {
     try {
-       const data = await client.ModifyCloudBaseRunServerVersion({})
+       const data = await client.FreezeCloudBaseRunServers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

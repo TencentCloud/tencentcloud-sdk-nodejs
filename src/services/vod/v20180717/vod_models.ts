@@ -1368,6 +1368,34 @@ export interface ResetProcedureTemplateRequest {
 }
 
 /**
+ * 图片Ocr 文字鉴别信息的任务结果类型
+ */
+export interface ContentReviewOcrResult {
+  /**
+   * Ocr 文字鉴别结果的评分，分值为0到100。
+   */
+  Confidence: number
+
+  /**
+      * Ocr 文字鉴别的结果建议，取值范围：
+<li>pass；</li>
+<li>review；</li>
+<li>block。</li>
+      */
+  Suggestion: string
+
+  /**
+   * Ocr 文字鉴别的嫌疑关键词列表。
+   */
+  KeywordSet: Array<string>
+
+  /**
+   * Ocr 文字鉴别的嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+   */
+  AreaCoordSet: Array<number>
+}
+
+/**
  * ComposeMedia返回参数结构体
  */
 export interface ComposeMediaResponse {
@@ -3140,6 +3168,16 @@ export interface DescribeDailyMostPlayedStatResponse {
 }
 
 /**
+ * ModifyAIRecognitionTemplate返回参数结构体
+ */
+export interface ModifyAIRecognitionTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 视频拆条任务配置信息。
  */
 export interface SplitMediaTaskConfig {
@@ -4441,6 +4479,58 @@ export interface ConcatFileInfo2017 {
    * 视频拼接源文件的格式。
    */
   FileType: string
+}
+
+/**
+ * 图片智能内容识别任务结果
+ */
+export interface ContentReviewResult {
+  /**
+      * 结果类型，取值范围：
+<li>Porn.Image：图片画面中的鉴别令人反感的信息结果；</li>
+<li>Terrorism.Image：图片画面中的鉴别令人不安全的信息结果；</li>
+<li>Political.Image：图片画面中的鉴别令人不适宜信息结果；</li>
+<li>Porn.Ocr：图片 OCR 文字中的鉴别令人反感的信息结果；</li>
+<li>Terrorism.Ocr：图片 OCR 文字中的鉴别令人不安全的信息结果；</li>
+<li>Political.Ocr：图片 OCR 文字中的鉴别令人不适宜信息结果。</li>
+      */
+  Type: string
+
+  /**
+      * 图片画面中的鉴别令人反感的信息结果，当 Type 为 Porn.Image 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PornImageResult: PornImageResult
+
+  /**
+      * 图片画面中的鉴别令人不安全的信息结果，当 Type 为 Terrorism.Image 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TerrorismImageResult: TerrorismImageResult
+
+  /**
+      * 图片画面中的鉴别令人不适宜信息结果，当 Type 为 Political.Image 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PoliticalImageResult: PoliticalImageResult
+
+  /**
+      * 图片 OCR 文字中的鉴别令人反感的信息结果，当 Type 为 Porn.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PornOcrResult: ContentReviewOcrResult
+
+  /**
+      * 图片 OCR 中的鉴别令人不安全的信息结果，当 Type 为 Terrorism.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TerrorismOcrResult: ContentReviewOcrResult
+
+  /**
+      * 图片 OCR 文字中的鉴别令人不适宜信息结果，当 Type 为 Political.Ocr 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PoliticalOcrResult: ContentReviewOcrResult
 }
 
 /**
@@ -5922,6 +6012,73 @@ export interface ProcessMediaRequest {
 }
 
 /**
+ * 图片画面智能识别涉及令人反感的信息的任务结果类型
+ */
+export interface PornImageResult {
+  /**
+   * 鉴别涉及令人反感的信息的评分，分值为0到100。
+   */
+  Confidence: number
+
+  /**
+      * 鉴别涉及令人反感的信息的结果建议，取值范围：
+<li>pass；</li>
+<li>review；</li>
+<li>block。</li>
+      */
+  Suggestion: string
+
+  /**
+      * 鉴别涉及令人反感的信息的结果标签，取值范围：
+<li>porn：色情；</li>
+<li>sexy：性感；</li>
+<li>vulgar：低俗；</li>
+<li>intimacy：亲密行为。</li>
+      */
+  Label: string
+}
+
+/**
+ * ProcessImage返回参数结构体
+ */
+export interface ProcessImageResponse {
+  /**
+   * 图片内容智能识别任务结果。
+   */
+  ContentReviewResultSet: Array<ContentReviewResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ProcessImage请求参数结构体
+ */
+export interface ProcessImageRequest {
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符。本接口要求媒体文件必须是图片格式。
+   */
+  FileId: string
+
+  /**
+   * 操作类型。现在仅支持填 ContentReview，表示内容智能识别。
+   */
+  Operation: string
+
+  /**
+   * 图片内容智能识别参数，当 Operation 为 ContentReview 时该字段有效。
+   */
+  ContentReviewInput?: ImageContentReviewInput
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
+}
+
+/**
  * ModifyMediaInfo返回参数结构体
  */
 export interface ModifyMediaInfoResponse {
@@ -6573,6 +6730,34 @@ export interface MediaDeleteItem {
 默认值为0，表示删除参数Type指定种类下所有的视频。
       */
   Definition?: number
+}
+
+/**
+ * 图片画面智能识别涉及令人不适宜信息的任务结果类型
+ */
+export interface PoliticalImageResult {
+  /**
+   * 鉴别涉及令人不适宜信息的评分，分值为0到100。
+   */
+  Confidence: number
+
+  /**
+      * 鉴别涉及令人不适宜信息的结果建议，取值范围：
+<li>pass；</li>
+<li>review；</li>
+<li>block。</li>
+      */
+  Suggestion: string
+
+  /**
+   * 涉及令人不适宜的信息、违规图标名字。
+   */
+  Name: string
+
+  /**
+   * 涉及令人不适宜的信息、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+   */
+  AreaCoordSet: Array<number>
 }
 
 /**
@@ -10870,6 +11055,36 @@ export interface AsrFullTextConfigureInfo {
 }
 
 /**
+ * 图片画面智能识别涉及令人不安全的信息的任务结果类型
+ */
+export interface TerrorismImageResult {
+  /**
+   * 鉴别涉及令人不安全的信息的评分，分值为0到100。
+   */
+  Confidence: number
+
+  /**
+      * 鉴别涉及令人不安全的信息的结果建议，取值范围：
+<li>pass；</li>
+<li>review；</li>
+<li>block。</li>
+      */
+  Suggestion: string
+
+  /**
+      * 鉴别涉及令人不安全的信息的结果标签，取值范围：
+<li>guns：武器枪支；</li>
+<li>crowd：人群聚集；</li>
+<li>police：警察部队；</li>
+<li>bloody：血腥画面；</li>
+<li>banners：暴恐旗帜；</li>
+<li>explosion：爆炸火灾；</li>
+<li>scenario：暴恐画面。</li>
+      */
+  Label: string
+}
+
+/**
  * DeleteVodDomain请求参数结构体
  */
 export interface DeleteVodDomainRequest {
@@ -11095,13 +11310,14 @@ export interface AiRecognitionTaskAsrFullTextResult {
 }
 
 /**
- * ModifyAIRecognitionTemplate返回参数结构体
+ * 图片智能内容识别任务输入
  */
-export interface ModifyAIRecognitionTemplateResponse {
+export interface ImageContentReviewInput {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 图片智能内容审核模板 ID。当前只支持：
+<li>10：所有审核类型均打开。</li>
+      */
+  Definition: number
 }
 
 /**

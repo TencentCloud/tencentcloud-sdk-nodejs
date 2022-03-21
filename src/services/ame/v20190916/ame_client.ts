@@ -61,6 +61,7 @@ import {
   DescribeItemsResponse,
   DescribePkgOfflineMusicResponse,
   KTVSingerInfo,
+  SetVolumeCommandInput,
   PutMusicOnTheShelvesRequest,
   DescribeCloudMusicRequest,
   SortBy,

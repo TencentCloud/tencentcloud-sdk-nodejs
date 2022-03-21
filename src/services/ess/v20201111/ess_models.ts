@@ -267,11 +267,6 @@ export interface CancelFlowRequest {
   Operator: UserInfo
 
   /**
-   * 应用相关信息
-   */
-  Agent: Agent
-
-  /**
    * 流程id
    */
   FlowId: string
@@ -280,6 +275,11 @@ export interface CancelFlowRequest {
    * 撤销原因
    */
   CancelMessage: string
+
+  /**
+   * 应用相关信息
+   */
+  Agent?: Agent
 }
 
 /**
@@ -660,6 +660,11 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
    * 是否发送短信，sms--短信通知，none--不通知，默认为sms
    */
   NotifyType?: string
+
+  /**
+   * 签署意愿确认渠道,WEIXINAPP:人脸识别
+   */
+  VerifyChannel?: Array<string>
 }
 
 /**

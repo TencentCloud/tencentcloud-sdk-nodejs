@@ -63,6 +63,7 @@ import {
   AiReviewPoliticalTaskInput,
   AudioTransform,
   ResetProcedureTemplateRequest,
+  ContentReviewOcrResult,
   ComposeMediaResponse,
   UrlSignatureAuthPolicy,
   DeleteSampleSnapshotTemplateRequest,
@@ -135,6 +136,7 @@ import {
   TaskOutputMediaInfo,
   ProcessMediaByUrlRequest,
   DescribeDailyMostPlayedStatResponse,
+  ModifyAIRecognitionTemplateResponse,
   SplitMediaTaskConfig,
   PlayStatFileInfo,
   ModifyMediaInfoRequest,
@@ -183,6 +185,7 @@ import {
   DeleteAIAnalysisTemplateRequest,
   EditMediaRequest,
   ConcatFileInfo2017,
+  ContentReviewResult,
   MediaProcessTaskImageSpriteResult,
   DescribeMediaInfosResponse,
   DeleteProcedureTemplateResponse,
@@ -237,6 +240,9 @@ import {
   AiAnalysisTaskHighlightOutput,
   MediaSubtitleInput,
   ProcessMediaRequest,
+  PornImageResult,
+  ProcessImageResponse,
+  ProcessImageRequest,
   ModifyMediaInfoResponse,
   AiRecognitionTaskOcrFullTextResult,
   MediaTrackItem,
@@ -259,6 +265,7 @@ import {
   ModifySubAppIdStatusResponse,
   SimpleHlsClipRequest,
   MediaDeleteItem,
+  PoliticalImageResult,
   AiSamplePerson,
   MediaAdaptiveDynamicStreamingInfo,
   DescribeDailyPlayStatFileListRequest,
@@ -409,6 +416,7 @@ import {
   ModifyPersonSampleRequest,
   DescribeDrmDataKeyRequest,
   AsrFullTextConfigureInfo,
+  TerrorismImageResult,
   DeleteVodDomainRequest,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
@@ -416,7 +424,7 @@ import {
   AiAnalysisTaskFrameTagResult,
   AiReviewPornTaskOutput,
   AiRecognitionTaskAsrFullTextResult,
-  ModifyAIRecognitionTemplateResponse,
+  ImageContentReviewInput,
   PoliticalImgReviewTemplateInfo,
   PoliticalConfigureInfo,
   HighlightsConfigureInfo,
@@ -1185,6 +1193,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ParseStreamingManifestResponse) => void
   ): Promise<ParseStreamingManifestResponse> {
     return this.request("ParseStreamingManifest", req, cb)
+  }
+
+  /**
+     * 对点播中的图片文件发起处理任务，功能包括：
+
+1. 智能识别（令人反感的信息、不安全的信息、不适宜的信息）;
+
+><li>图片文件大小支持：文件 < 5M；</li>
+><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响识别效果；</li>
+><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
+
+     */
+  async ProcessImage(
+    req: ProcessImageRequest,
+    cb?: (error: string, rep: ProcessImageResponse) => void
+  ): Promise<ProcessImageResponse> {
+    return this.request("ProcessImage", req, cb)
   }
 
   /**
