@@ -73,6 +73,12 @@ Type表示过滤类型，1：色情，2：谩骂
         return this.request("DescribeFilterResultList", req, cb);
     }
     /**
+     * 删除自定义送检用户
+     */
+    async DeleteScanUser(req, cb) {
+        return this.request("DeleteScanUser", req, cb);
+    }
+    /**
      * 更新自定义送检用户号
      */
     async UpdateScanUsers(req, cb) {
@@ -229,6 +235,12 @@ Type表示过滤类型，1：色情，2：谩骂
      */
     async ModifyRoomInfo(req, cb) {
         return this.request("ModifyRoomInfo", req, cb);
+    }
+    /**
+     * 新增自定义送检用户
+     */
+    async CreateScanUser(req, cb) {
+        return this.request("CreateScanUser", req, cb);
     }
     /**
      * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。

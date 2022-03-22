@@ -351,6 +351,47 @@ export interface DetachWorkGroupPolicyResponse {
 }
 
 /**
+ * 数据表数据格式。
+ */
+export interface DataFormat {
+  /**
+      * 文本格式，TextFile。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TextFile: TextFile
+
+  /**
+      * 文本格式，CSV。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CSV: CSV
+
+  /**
+      * 文本格式，Json。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Json: Other
+
+  /**
+      * Parquet格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Parquet: Other
+
+  /**
+      * ORC格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ORC: Other
+
+  /**
+      * AVRO格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AVRO: Other
+}
+
+/**
  * CSV序列化及反序列化数据结构
  */
 export interface CSVSerde {
@@ -941,6 +982,31 @@ export interface UserInfo {
 }
 
 /**
+ * CreateExportTask请求参数结构体
+ */
+export interface CreateExportTaskRequest {
+  /**
+   * 数据来源，lakefsStorage、taskResult
+   */
+  InputType: string
+
+  /**
+   * 导出任务输入配置
+   */
+  InputConf: Array<KVPair>
+
+  /**
+   * 导出任务输出配置
+   */
+  OutputConf: Array<KVPair>
+
+  /**
+   * 目标数据源的类型，目前支持导出到cos
+   */
+  OutputType?: string
+}
+
+/**
  * AttachWorkGroupPolicy返回参数结构体
  */
 export interface AttachWorkGroupPolicyResponse {
@@ -1178,6 +1244,21 @@ export interface DeleteScriptRequest {
 }
 
 /**
+ * CreateImportTask返回参数结构体
+ */
+export interface CreateImportTaskResponse {
+  /**
+   * 任务id
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SQL语句对象
  */
 export interface Execution {
@@ -1351,44 +1432,24 @@ export interface DescribeUsersResponse {
 }
 
 /**
- * 数据表数据格式。
+ * DescribeScripts返回参数结构体
  */
-export interface DataFormat {
+export interface DescribeScriptsResponse {
   /**
-      * 文本格式，TextFile。
+      * Script列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TextFile: TextFile
+  Scripts: Array<Script>
 
   /**
-      * 文本格式，CSV。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CSV: CSV
+   * 实例总数
+   */
+  TotalCount: number
 
   /**
-      * 文本格式，Json。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Json: Other
-
-  /**
-      * Parquet格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Parquet: Other
-
-  /**
-      * ORC格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ORC: Other
-
-  /**
-      * AVRO格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AVRO: Other
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1720,6 +1781,46 @@ export interface DatabaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Location?: string
+}
+
+/**
+ * CreateImportTask请求参数结构体
+ */
+export interface CreateImportTaskRequest {
+  /**
+   * 数据来源，cos
+   */
+  InputType: string
+
+  /**
+   * 输入配置
+   */
+  InputConf: Array<KVPair>
+
+  /**
+   * 输出配置
+   */
+  OutputConf: Array<KVPair>
+
+  /**
+   * 目标数据源的类型，目前支持导入到托管存储，即lakefsStorage
+   */
+  OutputType?: string
+}
+
+/**
+ * CreateExportTask返回参数结构体
+ */
+export interface CreateExportTaskResponse {
+  /**
+   * 任务id
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2158,27 +2259,6 @@ export interface UserMessage {
  * AttachUserPolicy返回参数结构体
  */
 export interface AttachUserPolicyResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeScripts返回参数结构体
- */
-export interface DescribeScriptsResponse {
-  /**
-      * Script列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Scripts: Array<Script>
-
-  /**
-   * 实例总数
-   */
-  TotalCount: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

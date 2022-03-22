@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUsersToWorkGroup", req, cb);
     }
     /**
+     * 该接口（CreateImportTask）用于创建导入任务
+     */
+    async CreateImportTask(req, cb) {
+        return this.request("CreateImportTask", req, cb);
+    }
+    /**
      * 查询任务结果
      */
     async DescribeTaskResult(req, cb) {
@@ -62,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTable(req, cb) {
         return this.request("CreateTable", req, cb);
+    }
+    /**
+     * 该接口（CreateExportTask）用于创建导出任务
+     */
+    async CreateExportTask(req, cb) {
+        return this.request("CreateExportTask", req, cb);
     }
     /**
      * 获取用户列表信息

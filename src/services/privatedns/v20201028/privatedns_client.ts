@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeQuotaUsageResponse,
   ModifyPrivateZoneVpcRequest,
   DescribeAuditLogResponse,
   DescribePrivateDNSAccountListResponse,
@@ -38,6 +39,7 @@ import {
   DescribeRequestDataResponse,
   ModifyPrivateZoneRequest,
   TagInfo,
+  TldQuota,
   CreatePrivateZoneRequest,
   VpcInfo,
   AccountVpcInfoOut,
@@ -65,6 +67,7 @@ import {
   DescribePrivateDNSAccountListRequest,
   PrivateZone,
   CreatePrivateZoneRecordRequest,
+  DescribeQuotaUsageRequest,
   ModifyPrivateZoneRecordRequest,
   DeletePrivateDNSAccountResponse,
   FlowUsage,
@@ -149,6 +152,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrivateDNSAccountResponse) => void
   ): Promise<DeletePrivateDNSAccountResponse> {
     return this.request("DeletePrivateDNSAccount", req, cb)
+  }
+
+  /**
+   * 查询额度使用情况
+   */
+  async DescribeQuotaUsage(
+    req?: DescribeQuotaUsageRequest,
+    cb?: (error: string, rep: DescribeQuotaUsageResponse) => void
+  ): Promise<DescribeQuotaUsageResponse> {
+    return this.request("DescribeQuotaUsage", req, cb)
   }
 
   /**

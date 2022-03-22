@@ -161,13 +161,13 @@ export interface VoiceFilterRequest {
 }
 
 /**
- * CreateAgeDetectTask返回参数结构体
+ * CreateScanUser返回参数结构体
  */
-export interface CreateAgeDetectTaskResponse {
+export interface CreateScanUserResponse {
   /**
-   * 本次任务提交后唯一id，用于获取任务运行结果
+   * 返回结果码
    */
-  TaskId: string
+  ErrorCode: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -293,28 +293,19 @@ export interface UpdateScanRoomsRequest {
 }
 
 /**
- * 年龄语音任务结果
+ * DescribeFilterResult返回参数结构体
  */
-export interface AgeDetectTaskResult {
+export interface DescribeFilterResultResponse {
   /**
-   * 数据唯一ID
-   */
-  DataId: string
+      * 过滤结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: VoiceFilterInfo
 
   /**
-   * 数据文件的url
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Url: string
-
-  /**
-   * 任务状态，0: 已创建，1:运行中，2:正常结束，3:异常结束，4:运行超时
-   */
-  Status: number
-
-  /**
-   * 任务结果：0: 成年，1:未成年，100:未知
-   */
-  Age: number
+  RequestId?: string
 }
 
 /**
@@ -402,6 +393,21 @@ export interface RealTimeSpeechStatisticsItem {
    * 海外地区总使用时长，单位为min
    */
   OverseaDuration: number
+}
+
+/**
+ * CreateScanUser请求参数结构体
+ */
+export interface CreateScanUserRequest {
+  /**
+   * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
+   */
+  BizId: number
+
+  /**
+   * 需要新增送检的用户号。示例：1234
+   */
+  UserId?: number
 }
 
 /**
@@ -556,25 +562,18 @@ export interface ApplicationDataStatistics {
 }
 
 /**
- * DescribeFilterResultList返回参数结构体
+ * DeleteScanUser请求参数结构体
  */
-export interface DescribeFilterResultListResponse {
+export interface DeleteScanUserRequest {
   /**
-      * 过滤结果总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount?: number
-
-  /**
-      * 当前分页过滤结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data?: Array<VoiceFilterInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 应用ID，登录控制台 - 服务管理创建应用得到的AppID
    */
-  RequestId?: string
+  BizId: number
+
+  /**
+   * 需要删除送检的用户号。示例：1234
+   */
+  UserId?: number
 }
 
 /**
@@ -661,6 +660,21 @@ export interface Task {
    * gme实时语音用户ID，通过gme实时语音进行语音分析时输入
    */
   OpenId?: string
+}
+
+/**
+ * DeleteScanUser返回参数结构体
+ */
+export interface DeleteScanUserResponse {
+  /**
+   * 返回结果码
+   */
+  ErrorCode: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -771,6 +785,28 @@ export interface DescribeAgeDetectTaskRequest {
 }
 
 /**
+ * ModifyRoomInfo请求参数结构体
+ */
+export interface ModifyRoomInfoRequest {
+  /**
+   * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+   */
+  SdkAppId: number
+
+  /**
+   * 房间id
+   */
+  RoomId: number
+
+  /**
+      * 301 启动推流
+302 停止推流
+303 重置RTMP连接
+      */
+  OperationType: number
+}
+
+/**
  * DescribeUserInAndOutTime返回参数结构体
  */
 export interface DescribeUserInAndOutTimeResponse {
@@ -832,19 +868,28 @@ export interface VoiceFilterInfo {
 }
 
 /**
- * DescribeFilterResult返回参数结构体
+ * 年龄语音任务结果
  */
-export interface DescribeFilterResultResponse {
+export interface AgeDetectTaskResult {
   /**
-      * 过滤结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data?: VoiceFilterInfo
+   * 数据唯一ID
+   */
+  DataId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数据文件的url
    */
-  RequestId?: string
+  Url: string
+
+  /**
+   * 任务状态，0: 已创建，1:运行中，2:正常结束，3:异常结束，4:运行超时
+   */
+  Status: number
+
+  /**
+   * 任务结果：0: 成年，1:未成年，100:未知
+   */
+  Age: number
 }
 
 /**
@@ -1022,25 +1067,40 @@ export interface ScanDetail {
 }
 
 /**
- * ModifyRoomInfo请求参数结构体
+ * DescribeFilterResultList返回参数结构体
  */
-export interface ModifyRoomInfoRequest {
+export interface DescribeFilterResultListResponse {
   /**
-   * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
-   */
-  SdkAppId: number
-
-  /**
-   * 房间id
-   */
-  RoomId: number
-
-  /**
-      * 301 启动推流
-302 停止推流
-303 重置RTMP连接
+      * 过滤结果总数
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  OperationType: number
+  TotalCount?: number
+
+  /**
+      * 当前分页过滤结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: Array<VoiceFilterInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAgeDetectTask返回参数结构体
+ */
+export interface CreateAgeDetectTaskResponse {
+  /**
+   * 本次任务提交后唯一id，用于获取任务运行结果
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

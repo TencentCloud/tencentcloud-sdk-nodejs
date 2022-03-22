@@ -3412,7 +3412,7 @@ export interface AllocateHostsResponse {
   /**
    * 新创建云子机的实例id列表。
    */
-  HostIdSet?: Array<string>
+  HostIdSet: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

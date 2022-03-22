@@ -356,6 +356,29 @@ export interface DescribeFlowDetailInfoRequest {
     Operator?: UserInfo;
 }
 /**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+    /**
+      * 文件对应业务类型，用于区分文件存储路径：
+1. TEMPLATE - 模版； 文件类型：.pdf
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.jpg/.png
+      */
+    BusinessType: string;
+    /**
+      * 应用相关信息，若是渠道版调用 appid 和proxyappid 必填
+      */
+    Agent: Agent;
+    /**
+      * 上传文件内容数组，最多支持20个文件
+      */
+    FileInfos?: Array<UploadFile>;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
  * DescribeResourceUrlsByFlows请求参数结构体
  */
 export interface DescribeResourceUrlsByFlowsRequest {
@@ -371,6 +394,19 @@ export interface DescribeResourceUrlsByFlowsRequest {
       * 查询资源所对应的流程Id
       */
     FlowIds?: Array<string>;
+}
+/**
+ * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ */
+export interface UploadFile {
+    /**
+      * Base64编码后的文件内容
+      */
+    FileBody: string;
+    /**
+      * 文件名
+      */
+    FileName?: string;
 }
 /**
  * 此结构体 (Component) 用于描述控件属性。
@@ -897,6 +933,27 @@ export interface DownloadFlowInfo {
       * 合同（流程）的标识数组
       */
     FlowIdList: Array<string>;
+}
+/**
+ * UploadFiles返回参数结构体
+ */
+export interface UploadFilesResponse {
+    /**
+      * 文件id数组
+      */
+    FileIds: Array<string>;
+    /**
+      * 上传成功文件数量
+      */
+    TotalCount: number;
+    /**
+      * 文件Url
+      */
+    FileUrls: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 同步经办人失败原因

@@ -25,43 +25,47 @@ import {
   DescribeScanResultListResponse,
   DescribeApplicationDataRequest,
   VoiceFilterRequest,
-  CreateAgeDetectTaskResponse,
+  CreateScanUserResponse,
   DescribeRealtimeScanConfigResponse,
   VoiceMessageStatisticsItem,
   RoomUser,
   DescribeRoomInfoRequest,
   UpdateScanRoomsRequest,
-  AgeDetectTaskResult,
+  DescribeFilterResultResponse,
   DescribeRealtimeScanConfigRequest,
   DescribeScanResultListRequest,
   CreateAgeDetectTaskRequest,
   RealTimeSpeechStatisticsItem,
+  CreateScanUserRequest,
   VoiceFilterResponse,
   Tag,
   AgeDetectTask,
   DescribeAgeDetectTaskResponse,
   VoiceMessageConf,
   ApplicationDataStatistics,
-  DescribeFilterResultListResponse,
+  DeleteScanUserRequest,
   ModifyAppStatusResp,
   DescribeAppStatisticsResponse,
   UpdateScanRoomsResponse,
   DescribeApplicationDataResponse,
   Task,
+  DeleteScanUserResponse,
   UpdateScanUsersResponse,
   VoiceFilterStatisticsItem,
   CreateAppResp,
   DescribeRoomInfoResponse,
   DescribeAgeDetectTaskRequest,
+  ModifyRoomInfoRequest,
   DescribeUserInAndOutTimeResponse,
   VoiceFilterInfo,
-  DescribeFilterResultResponse,
+  AgeDetectTaskResult,
   ModifyRoomInfoResponse,
   DescribeScanResult,
   DescribeFilterResultListRequest,
   VoiceFilter,
   ScanDetail,
-  ModifyRoomInfoRequest,
+  DescribeFilterResultListResponse,
+  CreateAgeDetectTaskResponse,
   CreateAppRequest,
   RealtimeSpeechConf,
   DescribeAppStatisticsResp,
@@ -158,6 +162,16 @@ Type表示过滤类型，1：色情，2：谩骂
     cb?: (error: string, rep: DescribeFilterResultListResponse) => void
   ): Promise<DescribeFilterResultListResponse> {
     return this.request("DescribeFilterResultList", req, cb)
+  }
+
+  /**
+   * 删除自定义送检用户
+   */
+  async DeleteScanUser(
+    req: DeleteScanUserRequest,
+    cb?: (error: string, rep: DeleteScanUserResponse) => void
+  ): Promise<DeleteScanUserResponse> {
+    return this.request("DeleteScanUser", req, cb)
   }
 
   /**
@@ -332,6 +346,16 @@ Type表示过滤类型，1：色情，2：谩骂
     cb?: (error: string, rep: ModifyRoomInfoResponse) => void
   ): Promise<ModifyRoomInfoResponse> {
     return this.request("ModifyRoomInfo", req, cb)
+  }
+
+  /**
+   * 新增自定义送检用户
+   */
+  async CreateScanUser(
+    req: CreateScanUserRequest,
+    cb?: (error: string, rep: CreateScanUserResponse) => void
+  ): Promise<CreateScanUserResponse> {
+    return this.request("CreateScanUser", req, cb)
   }
 
   /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyPrivateZoneVpcRequest, DescribeAuditLogResponse, DescribePrivateDNSAccountListResponse, DescribePrivateZoneRecordListRequest, DescribePrivateZoneRecordListResponse, DescribePrivateZoneListResponse, DescribePrivateZoneRequest, DescribeAccountVpcListResponse, DescribePrivateZoneServiceRequest, DescribeRequestDataRequest, ModifyPrivateZoneRecordResponse, DescribeAccountVpcListRequest, DescribeRequestDataResponse, ModifyPrivateZoneRequest, CreatePrivateZoneRequest, ModifyPrivateZoneResponse, DescribePrivateZoneListRequest, SubscribePrivateZoneServiceRequest, DescribePrivateZoneResponse, CreatePrivateZoneResponse, DescribeDashboardResponse, CreatePrivateZoneRecordResponse, DescribePrivateZoneServiceResponse, CreatePrivateDNSAccountResponse, DescribeAuditLogRequest, DescribeDashboardRequest, DeletePrivateZoneRequest, SubscribePrivateZoneServiceResponse, DeletePrivateDNSAccountRequest, DeletePrivateZoneRecordRequest, DeletePrivateZoneResponse, CreatePrivateDNSAccountRequest, DescribePrivateDNSAccountListRequest, CreatePrivateZoneRecordRequest, ModifyPrivateZoneRecordRequest, DeletePrivateDNSAccountResponse, DeletePrivateZoneRecordResponse, ModifyPrivateZoneVpcResponse } from "./privatedns_models";
+import { DescribeQuotaUsageResponse, ModifyPrivateZoneVpcRequest, DescribeAuditLogResponse, DescribePrivateDNSAccountListResponse, DescribePrivateZoneRecordListRequest, DescribePrivateZoneRecordListResponse, DescribePrivateZoneListResponse, DescribePrivateZoneRequest, DescribeAccountVpcListResponse, DescribePrivateZoneServiceRequest, DescribeRequestDataRequest, ModifyPrivateZoneRecordResponse, DescribeAccountVpcListRequest, DescribeRequestDataResponse, ModifyPrivateZoneRequest, CreatePrivateZoneRequest, ModifyPrivateZoneResponse, DescribePrivateZoneListRequest, SubscribePrivateZoneServiceRequest, DescribePrivateZoneResponse, CreatePrivateZoneResponse, DescribeDashboardResponse, CreatePrivateZoneRecordResponse, DescribePrivateZoneServiceResponse, CreatePrivateDNSAccountResponse, DescribeAuditLogRequest, DescribeDashboardRequest, DeletePrivateZoneRequest, SubscribePrivateZoneServiceResponse, DeletePrivateDNSAccountRequest, DeletePrivateZoneRecordRequest, DeletePrivateZoneResponse, CreatePrivateDNSAccountRequest, DescribePrivateDNSAccountListRequest, CreatePrivateZoneRecordRequest, DescribeQuotaUsageRequest, ModifyPrivateZoneRecordRequest, DeletePrivateDNSAccountResponse, DeletePrivateZoneRecordResponse, ModifyPrivateZoneVpcResponse } from "./privatedns_models";
 /**
  * privatedns client
  * @class
@@ -35,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 删除私有域解析账号
      */
     DeletePrivateDNSAccount(req: DeletePrivateDNSAccountRequest, cb?: (error: string, rep: DeletePrivateDNSAccountResponse) => void): Promise<DeletePrivateDNSAccountResponse>;
+    /**
+     * 查询额度使用情况
+     */
+    DescribeQuotaUsage(req?: DescribeQuotaUsageRequest, cb?: (error: string, rep: DescribeQuotaUsageResponse) => void): Promise<DescribeQuotaUsageResponse>;
     /**
      * 获取操作日志列表
      */

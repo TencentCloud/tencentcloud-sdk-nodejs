@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateAgeDetectTaskResponse, DescribeRealtimeScanConfigResponse, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, CreateAgeDetectTaskRequest, VoiceFilterResponse, DescribeAgeDetectTaskResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, DescribeApplicationDataResponse, UpdateScanUsersResponse, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, ModifyRoomInfoRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, CreateScanUserResponse, DescribeRealtimeScanConfigResponse, DescribeRoomInfoRequest, UpdateScanRoomsRequest, DescribeFilterResultResponse, DescribeRealtimeScanConfigRequest, DescribeScanResultListRequest, CreateAgeDetectTaskRequest, CreateScanUserRequest, VoiceFilterResponse, DescribeAgeDetectTaskResponse, DeleteScanUserRequest, DescribeAppStatisticsResponse, UpdateScanRoomsResponse, DescribeApplicationDataResponse, DeleteScanUserResponse, UpdateScanUsersResponse, DescribeRoomInfoResponse, DescribeAgeDetectTaskRequest, ModifyRoomInfoRequest, DescribeUserInAndOutTimeResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, DescribeFilterResultListResponse, CreateAgeDetectTaskResponse, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, UpdateScanUsersRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -38,6 +38,10 @@ Type表示过滤类型，1：色情，2：谩骂
      * 根据日期查询识别结果列表
      */
     DescribeFilterResultList(req: DescribeFilterResultListRequest, cb?: (error: string, rep: DescribeFilterResultListResponse) => void): Promise<DescribeFilterResultListResponse>;
+    /**
+     * 删除自定义送检用户
+     */
+    DeleteScanUser(req: DeleteScanUserRequest, cb?: (error: string, rep: DeleteScanUserResponse) => void): Promise<DeleteScanUserResponse>;
     /**
      * 更新自定义送检用户号
      */
@@ -188,6 +192,10 @@ Type表示过滤类型，1：色情，2：谩骂
      * 修改房间信息
      */
     ModifyRoomInfo(req: ModifyRoomInfoRequest, cb?: (error: string, rep: ModifyRoomInfoResponse) => void): Promise<ModifyRoomInfoResponse>;
+    /**
+     * 新增自定义送检用户
+     */
+    CreateScanUser(req: CreateScanUserRequest, cb?: (error: string, rep: CreateScanUserResponse) => void): Promise<CreateScanUserResponse>;
     /**
      * 用于创建年龄语音识别任务的接口，请求频率10次/秒。该接口目前通过白名单开放试用，如有需求，请提交工单申请。
 </br>

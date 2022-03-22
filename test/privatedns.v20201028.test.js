@@ -88,6 +88,16 @@ it("privatedns.v20201028.DeletePrivateDNSAccount", async function () {
     }
 })
 
+it("privatedns.v20201028.DescribeQuotaUsage", async function () {
+    try {
+       const data = await client.DescribeQuotaUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.DescribeAuditLog", async function () {
     try {
        const data = await client.DescribeAuditLog({})

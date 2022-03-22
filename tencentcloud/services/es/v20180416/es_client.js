@@ -142,5 +142,11 @@ class Client extends abstract_client_1.AbstractClient {
     async RestartKibana(req, cb) {
         return this.request("RestartKibana", req, cb);
     }
+    /**
+     * 更新ES集群词典
+     */
+    async UpdateDictionaries(req, cb) {
+        return this.request("UpdateDictionaries", req, cb);
+    }
 }
 exports.Client = Client;

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsRequest, DescribeFlowDetailInfoRequest, DescribeResourceUrlsByFlowsRequest, GetDownloadFlowUrlRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSignUrlsResponse, OperateChannelTemplateRequest, DescribeUsageRequest, DescribeUsageResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, PrepareFlowsResponse, GetDownloadFlowUrlResponse, DescribeResourceUrlsByFlowsResponse, DescribeTemplatesResponse, OperateChannelTemplateResponse, CreateSignUrlsRequest, DescribeFlowDetailInfoRequest, UploadFilesRequest, DescribeResourceUrlsByFlowsRequest, GetDownloadFlowUrlRequest, CreateConsoleLoginUrlRequest, CreateFlowsByTemplatesResponse, PrepareFlowsRequest, SyncProxyOrganizationOperatorsResponse, DescribeTemplatesRequest, SyncProxyOrganizationOperatorsRequest, CreateConsoleLoginUrlResponse, CreateFlowsByTemplatesRequest, SyncProxyOrganizationRequest, CreateSignUrlsResponse, OperateChannelTemplateRequest, UploadFilesResponse, DescribeUsageRequest, DescribeUsageResponse, DescribeFlowDetailInfoResponse } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -65,4 +65,9 @@ export declare class Client extends AbstractClient {
      * 根据流程信息批量获取资源下载链接
      */
     DescribeResourceUrlsByFlows(req: DescribeResourceUrlsByFlowsRequest, cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void): Promise<DescribeResourceUrlsByFlowsResponse>;
+    /**
+     * 此接口（UploadFiles）用于文件上传。
+调用时需要设置Domain 为 file.ess.tencent.cn
+     */
+    UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
 }

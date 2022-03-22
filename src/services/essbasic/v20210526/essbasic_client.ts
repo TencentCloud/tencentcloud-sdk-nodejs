@@ -32,7 +32,9 @@ import {
   CreateSignUrlsRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
+  UploadFilesRequest,
   DescribeResourceUrlsByFlowsRequest,
+  UploadFile,
   Component,
   GetDownloadFlowUrlRequest,
   FlowDetailInfo,
@@ -51,6 +53,7 @@ import {
   CreateSignUrlsResponse,
   OperateChannelTemplateRequest,
   DownloadFlowInfo,
+  UploadFilesResponse,
   SyncFailReason,
   DescribeUsageRequest,
   CcInfo,
@@ -200,5 +203,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
   ): Promise<DescribeResourceUrlsByFlowsResponse> {
     return this.request("DescribeResourceUrlsByFlows", req, cb)
+  }
+
+  /**
+     * 此接口（UploadFiles）用于文件上传。
+调用时需要设置Domain 为 file.ess.tencent.cn
+     */
+  async UploadFiles(
+    req: UploadFilesRequest,
+    cb?: (error: string, rep: UploadFilesResponse) => void
+  ): Promise<UploadFilesResponse> {
+    return this.request("UploadFiles", req, cb)
   }
 }

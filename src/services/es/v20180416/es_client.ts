@@ -36,12 +36,14 @@ import {
   RestartKibanaRequest,
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
+  UpdateDictionariesRequest,
   UpdateRequestTargetNodeTypesRequest,
   NodeView,
   CosBackup,
   TagInfo,
   KeyValue,
   CreateInstanceRequest,
+  UpdateDictionariesResponse,
   InstanceInfo,
   DeleteInstanceResponse,
   DescribeInstancesResponse,
@@ -272,5 +274,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartKibanaResponse) => void
   ): Promise<RestartKibanaResponse> {
     return this.request("RestartKibana", req, cb)
+  }
+
+  /**
+   * 更新ES集群词典
+   */
+  async UpdateDictionaries(
+    req: UpdateDictionariesRequest,
+    cb?: (error: string, rep: UpdateDictionariesResponse) => void
+  ): Promise<UpdateDictionariesResponse> {
+    return this.request("UpdateDictionaries", req, cb)
   }
 }

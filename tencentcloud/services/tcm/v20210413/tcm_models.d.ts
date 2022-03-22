@@ -53,6 +53,16 @@ export interface MeshConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Inject?: InjectConfig;
+    /**
+      * 调用跟踪配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tracing?: TracingConfig;
+    /**
+      * Sidecar自定义资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SidecarResources?: ResourceRequirements;
 }
 /**
  * 负载均衡状态信息
@@ -375,6 +385,11 @@ export interface InjectConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HoldApplicationUntilProxyStarts?: boolean;
+    /**
+      * 是否允许sidecar等待
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HoldProxyUntilApplicationEnds?: boolean;
 }
 /**
  * PodsMetricSource 定义了如何根据特定指标进行扩缩容

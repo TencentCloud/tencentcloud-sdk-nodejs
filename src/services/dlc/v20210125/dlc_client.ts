@@ -35,6 +35,7 @@ import {
   DescribeTasksResponse,
   CreateTasksInOrderRequest,
   DetachWorkGroupPolicyResponse,
+  DataFormat,
   CSVSerde,
   CreateDatabaseRequest,
   UserIdSetOfWorkGroupId,
@@ -62,6 +63,7 @@ import {
   DescribeStoreLocationRequest,
   DescribeViewsRequest,
   UserInfo,
+  CreateExportTaskRequest,
   AttachWorkGroupPolicyResponse,
   ModifyWorkGroupResponse,
   AttachUserPolicyRequest,
@@ -71,6 +73,7 @@ import {
   BindWorkGroupsToUserResponse,
   DescribeStoreLocationResponse,
   DeleteScriptRequest,
+  CreateImportTaskResponse,
   Execution,
   CreateTableResponse,
   CreateScriptRequest,
@@ -79,7 +82,7 @@ import {
   DescribeTaskResultRequest,
   Filter,
   DescribeUsersResponse,
-  DataFormat,
+  DescribeScriptsResponse,
   ViewResponseInfo,
   CreateUserRequest,
   ModifyWorkGroupRequest,
@@ -91,6 +94,8 @@ import {
   DescribeTablesRequest,
   DescribeDatabasesResponse,
   DatabaseInfo,
+  CreateImportTaskRequest,
+  CreateExportTaskResponse,
   UnbindWorkGroupsFromUserRequest,
   DescribeTableRequest,
   Other,
@@ -110,7 +115,6 @@ import {
   SQLTask,
   UserMessage,
   AttachUserPolicyResponse,
-  DescribeScriptsResponse,
   DetachWorkGroupPolicyRequest,
   DescribeViewsResponse,
   ModifyUserRequest,
@@ -157,6 +161,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（CreateImportTask）用于创建导入任务
+   */
+  async CreateImportTask(
+    req: CreateImportTaskRequest,
+    cb?: (error: string, rep: CreateImportTaskResponse) => void
+  ): Promise<CreateImportTaskResponse> {
+    return this.request("CreateImportTask", req, cb)
+  }
+
+  /**
    * 查询任务结果
    */
   async DescribeTaskResult(
@@ -184,6 +198,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTableResponse) => void
   ): Promise<CreateTableResponse> {
     return this.request("CreateTable", req, cb)
+  }
+
+  /**
+   * 该接口（CreateExportTask）用于创建导出任务
+   */
+  async CreateExportTask(
+    req: CreateExportTaskRequest,
+    cb?: (error: string, rep: CreateExportTaskResponse) => void
+  ): Promise<CreateExportTaskResponse> {
+    return this.request("CreateExportTask", req, cb)
   }
 
   /**

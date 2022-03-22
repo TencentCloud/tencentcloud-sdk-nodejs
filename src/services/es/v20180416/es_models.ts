@@ -428,6 +428,46 @@ export interface DescribeInstanceLogsRequest {
 }
 
 /**
+ * UpdateDictionaries请求参数结构体
+ */
+export interface UpdateDictionariesRequest {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+
+  /**
+   * IK分词主词典COS地址
+   */
+  IkMainDicts?: Array<string>
+
+  /**
+   * IK分词停用词词典COS地址
+   */
+  IkStopwords?: Array<string>
+
+  /**
+   * 同义词词典COS地址
+   */
+  Synonym?: Array<string>
+
+  /**
+   * QQ分词词典COS地址
+   */
+  QQDict?: Array<string>
+
+  /**
+   * 0：安装；1：删除
+   */
+  UpdateType?: number
+
+  /**
+   * 是否强制重启集群
+   */
+  ForceRestart?: boolean
+}
+
+/**
  * UpdateRequestTargetNodeTypes请求参数结构体
  */
 export interface UpdateRequestTargetNodeTypesRequest {
@@ -738,6 +778,16 @@ export interface CreateInstanceRequest {
    * 创建https集群，默认是http
    */
   Protocol?: string
+}
+
+/**
+ * UpdateDictionaries返回参数结构体
+ */
+export interface UpdateDictionariesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

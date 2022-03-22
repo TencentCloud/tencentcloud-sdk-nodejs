@@ -48,6 +48,16 @@ it("dlc.v20210125.AddUsersToWorkGroup", async function () {
     }
 })
 
+it("dlc.v20210125.CreateImportTask", async function () {
+    try {
+       const data = await client.CreateImportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeTaskResult", async function () {
     try {
        const data = await client.DescribeTaskResult({})
@@ -71,6 +81,16 @@ it("dlc.v20210125.BindWorkGroupsToUser", async function () {
 it("dlc.v20210125.CreateTable", async function () {
     try {
        const data = await client.CreateTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateExportTask", async function () {
+    try {
+       const data = await client.CreateExportTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

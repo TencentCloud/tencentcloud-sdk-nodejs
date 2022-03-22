@@ -88,6 +88,16 @@ it("gme.v20180711.DescribeFilterResultList", async function () {
     }
 })
 
+it("gme.v20180711.DeleteScanUser", async function () {
+    try {
+       const data = await client.DeleteScanUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.UpdateScanUsers", async function () {
     try {
        const data = await client.UpdateScanUsers({})
@@ -121,6 +131,16 @@ it("gme.v20180711.ScanVoice", async function () {
 it("gme.v20180711.ModifyRoomInfo", async function () {
     try {
        const data = await client.ModifyRoomInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.CreateScanUser", async function () {
+    try {
+       const data = await client.CreateScanUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

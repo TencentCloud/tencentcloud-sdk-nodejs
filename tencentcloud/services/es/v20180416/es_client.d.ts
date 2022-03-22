@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateJdkRequest, GetRequestTargetNodeTypesRequest, UpdateInstanceResponse, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateRequestTargetNodeTypesRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, DiagnoseInstanceRequest, RestartInstanceRequest, DescribeInstancesRequest, UpdateDiagnoseSettingsRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpdateDiagnoseSettingsResponse, UpgradeLicenseResponse, DeleteInstanceRequest, UpdateJdkResponse, RestartNodesResponse, UpgradeInstanceResponse, UpgradeInstanceRequest, DescribeViewsResponse, DescribeViewsRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse, UpgradeLicenseRequest } from "./es_models";
+import { UpdateJdkRequest, GetRequestTargetNodeTypesRequest, UpdateInstanceResponse, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateDictionariesRequest, UpdateRequestTargetNodeTypesRequest, CreateInstanceRequest, UpdateDictionariesResponse, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, DiagnoseInstanceRequest, RestartInstanceRequest, DescribeInstancesRequest, UpdateDiagnoseSettingsRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpdateDiagnoseSettingsResponse, UpgradeLicenseResponse, DeleteInstanceRequest, UpdateJdkResponse, RestartNodesResponse, UpgradeInstanceResponse, UpgradeInstanceRequest, DescribeViewsResponse, DescribeViewsRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse, UpgradeLicenseRequest } from "./es_models";
 /**
  * es client
  * @class
@@ -86,4 +86,8 @@ export declare class Client extends AbstractClient {
      * 重启Kibana
      */
     RestartKibana(req: RestartKibanaRequest, cb?: (error: string, rep: RestartKibanaResponse) => void): Promise<RestartKibanaResponse>;
+    /**
+     * 更新ES集群词典
+     */
+    UpdateDictionaries(req: UpdateDictionariesRequest, cb?: (error: string, rep: UpdateDictionariesResponse) => void): Promise<UpdateDictionariesResponse>;
 }

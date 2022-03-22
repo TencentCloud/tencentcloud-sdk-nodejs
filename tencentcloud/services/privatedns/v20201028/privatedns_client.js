@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivateDNSAccount", req, cb);
     }
     /**
+     * 查询额度使用情况
+     */
+    async DescribeQuotaUsage(req, cb) {
+        return this.request("DescribeQuotaUsage", req, cb);
+    }
+    /**
      * 获取操作日志列表
      */
     async DescribeAuditLog(req, cb) {

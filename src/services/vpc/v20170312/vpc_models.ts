@@ -6928,12 +6928,12 @@ export interface DescribeProductQuotaResponse {
   /**
    * ProductQuota对象数组
    */
-  ProductQuotaSet?: Array<ProductQuota>
+  ProductQuotaSet: Array<ProductQuota>
 
   /**
    * 符合条件的产品类型个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12912,7 +12912,7 @@ export interface DeleteVpnGatewayRoutesRequest {
  */
 export interface DescribeProductQuotaRequest {
   /**
-   * 查询的网络产品名称，如vpc、ccn等
+   * 查询的网络产品名称，可查询的产品有：vpc、ccn、vpn、dc、dfw、clb、eip。
    */
   Product: string
 }
@@ -13106,12 +13106,12 @@ export interface DescribeDirectConnectGatewayCcnRoutesResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 云联网路由（IDC网段）列表。
    */
-  RouteSet?: Array<DirectConnectGatewayCcnRoute>
+  RouteSet: Array<DirectConnectGatewayCcnRoute>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

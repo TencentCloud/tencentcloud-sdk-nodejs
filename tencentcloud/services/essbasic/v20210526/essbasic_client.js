@@ -109,5 +109,12 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeResourceUrlsByFlows(req, cb) {
         return this.request("DescribeResourceUrlsByFlows", req, cb);
     }
+    /**
+     * 此接口（UploadFiles）用于文件上传。
+调用时需要设置Domain 为 file.ess.tencent.cn
+     */
+    async UploadFiles(req, cb) {
+        return this.request("UploadFiles", req, cb);
+    }
 }
 exports.Client = Client;

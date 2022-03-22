@@ -1,4 +1,17 @@
 /**
+ * DescribeQuotaUsage返回参数结构体
+ */
+export interface DescribeQuotaUsageResponse {
+    /**
+      * Tld额度使用情况
+      */
+    TldQuota: TldQuota;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyPrivateZoneVpc请求参数结构体
  */
 export interface ModifyPrivateZoneVpcRequest {
@@ -343,6 +356,27 @@ export interface TagInfo {
       * 标签值
       */
     TagValue: string;
+}
+/**
+ * Tld额度
+ */
+export interface TldQuota {
+    /**
+      * 总共额度
+      */
+    Total: number;
+    /**
+      * 已使用额度
+      */
+    Used: number;
+    /**
+      * 库存
+      */
+    Stock: number;
+    /**
+      * 用户限额
+      */
+    Quota: number;
 }
 /**
  * CreatePrivateZone请求参数结构体
@@ -810,6 +844,10 @@ export interface CreatePrivateZoneRecordRequest {
       */
     TTL?: number;
 }
+/**
+ * DescribeQuotaUsage请求参数结构体
+ */
+export declare type DescribeQuotaUsageRequest = null;
 /**
  * ModifyPrivateZoneRecord请求参数结构体
  */

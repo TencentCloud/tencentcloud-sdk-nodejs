@@ -7379,7 +7379,7 @@ export interface ComposeMediaTask {
   Output: ComposeMediaTaskOutput
 
   /**
-      * 原始视频的元信息。
+      * 输出视频的元信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetaData: MediaMetaData
@@ -15126,7 +15126,7 @@ export interface EditMediaTask {
   Output: EditMediaTaskOutput
 
   /**
-   * 原始视频的元信息。
+   * 输出视频的元信息。
    */
   MetaData: MediaMetaData
 
@@ -16022,7 +16022,7 @@ export interface PullUploadTask {
   MediaBasicInfo: MediaBasicInfo
 
   /**
-   * 原始视频的元信息。
+   * 输出视频的元信息。
    */
   MetaData: MediaMetaData
 

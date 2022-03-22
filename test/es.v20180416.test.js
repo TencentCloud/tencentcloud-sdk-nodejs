@@ -198,4 +198,14 @@ it("es.v20180416.RestartKibana", async function () {
     }
 })
 
+it("es.v20180416.UpdateDictionaries", async function () {
+    try {
+       const data = await client.UpdateDictionaries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })
