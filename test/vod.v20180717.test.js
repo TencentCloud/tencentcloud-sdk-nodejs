@@ -298,6 +298,16 @@ it("vod.v20180717.DescribeCDNStatDetails", async function () {
     }
 })
 
+it("vod.v20180717.DescribeMediaPlayStatDetails", async function () {
+    try {
+       const data = await client.DescribeMediaPlayStatDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyImageSpriteTemplate", async function () {
     try {
        const data = await client.ModifyImageSpriteTemplate({})

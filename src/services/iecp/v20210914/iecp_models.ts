@@ -754,6 +754,27 @@ export interface Service {
 }
 
 /**
+ * DescribeEdgeUnitApplications返回参数结构体
+ */
+export interface DescribeEdgeUnitApplicationsResponse {
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+   * 应用列表
+   */
+  ApplicationSet: Array<ApplicationStatusInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNodeUnitTemplateOnNodeGroup返回参数结构体
  */
 export interface DescribeNodeUnitTemplateOnNodeGroupResponse {
@@ -1313,19 +1334,14 @@ export interface VolumeConfigMapKeyToPath {
 }
 
 /**
- * DescribeEdgeUnitApplications返回参数结构体
+ * DescribeDracoEdgeNodeInstaller返回参数结构体
  */
-export interface DescribeEdgeUnitApplicationsResponse {
+export interface DescribeDracoEdgeNodeInstallerResponse {
   /**
-      * 总数
+      * 在线安装命名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount: number
-
-  /**
-   * 应用列表
-   */
-  ApplicationSet: Array<ApplicationStatusInfo>
+  OnlineInstallationCommand: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3798,6 +3814,16 @@ export interface DescribeEdgeNodePodsRequest {
 }
 
 /**
+ * DeleteIotDeviceBatch请求参数结构体
+ */
+export interface DeleteIotDeviceBatchRequest {
+  /**
+   * 无
+   */
+  DeviceIDList: Array<number>
+}
+
+/**
  * GetMarketComponentList请求参数结构体
  */
 export interface GetMarketComponentListRequest {
@@ -3896,6 +3922,16 @@ export interface DescribeApplicationVisualizationResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDracoEdgeNodeInstaller请求参数结构体
+ */
+export interface DescribeDracoEdgeNodeInstallerRequest {
+  /**
+   * 设备SN
+   */
+  SN: string
 }
 
 /**
@@ -5502,6 +5538,16 @@ export interface DescribeApplicationYamlErrorResponse {
    */
   ErrInfo: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteIotDeviceBatch返回参数结构体
+ */
+export interface DeleteIotDeviceBatchResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

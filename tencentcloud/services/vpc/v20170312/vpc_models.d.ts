@@ -1148,6 +1148,14 @@ export interface AssociateNatGatewayAddressRequest {
       * 弹性IP可用区，自动分配弹性IP时传递。
       */
     Zone?: string;
+    /**
+      * 绑定NAT网关的弹性IP带宽大小（单位Mbps），默认为当前用户类型所能使用的最大值。
+      */
+    StockPublicIpAddressesBandwidthOut?: number;
+    /**
+      * 需要申请公网IP带宽大小（单位Mbps），默认为当前用户类型所能使用的最大值。
+      */
+    PublicIpAddressesBandwidthOut?: number;
 }
 /**
  * CreateDirectConnectGateway请求参数结构体
@@ -8512,6 +8520,14 @@ export interface CreateNatGatewayRequest {
       * NAT网关所属子网
       */
     SubnetId?: string;
+    /**
+      * 绑定NAT网关的弹性IP带宽大小（单位Mbps），默认为当前用户类型所能使用的最大值。
+      */
+    StockPublicIpAddressesBandwidthOut?: number;
+    /**
+      * 需要申请公网IP带宽大小（单位Mbps），默认为当前用户类型所能使用的最大值。
+      */
+    PublicIpAddressesBandwidthOut?: number;
 }
 /**
  * DeleteNetDetect请求参数结构体

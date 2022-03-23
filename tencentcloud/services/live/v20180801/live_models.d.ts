@@ -784,6 +784,11 @@ export interface RecordTemplateInfo {
       * MP3 录制参数。
       */
     Mp3Param: RecordParam;
+    /**
+      * 是否去除水印。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemoveWatermark: boolean;
 }
 /**
  * DeleteLiveTranscodeRule返回参数结构体
@@ -4951,6 +4956,10 @@ export interface ModifyLiveRecordTemplateRequest {
       * MP3 录制参数，开启 MP3 录制时设置。
       */
     Mp3Param?: RecordParam;
+    /**
+      * 是否去除水印，类型为慢直播时此参数无效。
+      */
+    RemoveWatermark?: boolean;
 }
 /**
  * DescribeAreaBillBandwidthAndFluxList返回参数结构体
@@ -6772,6 +6781,10 @@ export interface CreateLiveRecordTemplateRequest {
       * Mp3录制参数，开启Mp3录制时设置。
       */
     Mp3Param?: RecordParam;
+    /**
+      * 是否去除水印，类型为慢直播时此参数无效。
+      */
+    RemoveWatermark?: boolean;
 }
 /**
  * 转码模板信息。

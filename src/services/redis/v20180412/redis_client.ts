@@ -116,6 +116,7 @@ import {
   CreateInstancesResponse,
   DescribeTaskInfoRequest,
   ApplyParamsTemplateResponse,
+  DescribeReplicationGroupRequest,
   RedisNodes,
   DescribeInstanceMonitorTopNCmdRequest,
   ModifyNetworkConfigRequest,
@@ -152,6 +153,7 @@ import {
   DeleteReplicationInstanceResponse,
   CleanUpInstanceRequest,
   DescribeInstanceDealDetailResponse,
+  Groups,
   DescribeInstancesRequest,
   SourceCommand,
   ModfiyInstancePasswordRequest,
@@ -163,6 +165,7 @@ import {
   DeleteInstanceAccountRequest,
   UpgradeInstanceResponse,
   ManualBackupInstanceRequest,
+  DescribeReplicationGroupResponse,
   ModifyParamTemplateRequest,
   ModfiyInstancePasswordResponse,
   InstanceSet,
@@ -209,6 +212,7 @@ import {
   UpgradeInstanceRequest,
   DescribeInstanceNodeInfoResponse,
   DescribeProjectSecurityGroupResponse,
+  Instances,
   DescribeInstanceMonitorHotKeyResponse,
   InstanceParam,
   DisassociateSecurityGroupsResponse,
@@ -233,6 +237,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableReplicaReadonlyResponse) => void
   ): Promise<EnableReplicaReadonlyResponse> {
     return this.request("EnableReplicaReadonly", req, cb)
+  }
+
+  /**
+   * 查询复制组
+   */
+  async DescribeReplicationGroup(
+    req: DescribeReplicationGroupRequest,
+    cb?: (error: string, rep: DescribeReplicationGroupResponse) => void
+  ): Promise<DescribeReplicationGroupResponse> {
+    return this.request("DescribeReplicationGroup", req, cb)
   }
 
   /**
@@ -376,7 +390,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置自动备份时间
+   * 设置自动备份配置
    */
   async ModifyAutoBackupConfig(
     req: ModifyAutoBackupConfigRequest,
@@ -466,7 +480,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建参数模板
+   * 创建参数模板。
    */
   async CreateParamTemplate(
     req: CreateParamTemplateRequest,

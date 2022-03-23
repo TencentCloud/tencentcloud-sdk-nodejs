@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeAgentNodeInstaller", req, cb);
     }
     /**
+     * 批量删除设备
+     */
+    async DeleteIotDeviceBatch(req, cb) {
+        return this.request("DeleteIotDeviceBatch", req, cb);
+    }
+    /**
      * 单元应用重部署
      */
     async RedeployEdgeUnitApplication(req, cb) {
@@ -428,6 +434,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteEdgeNodes(req, cb) {
         return this.request("DeleteEdgeNodes", req, cb);
+    }
+    /**
+     * 自动获取Draco设备的安装包
+     */
+    async DescribeDracoEdgeNodeInstaller(req, cb) {
+        return this.request("DescribeDracoEdgeNodeInstaller", req, cb);
     }
     /**
      * 创建ConfigMap

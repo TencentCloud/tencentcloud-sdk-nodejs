@@ -65,6 +65,7 @@ import {
   ComplianceK8SDetailInfo,
   AccessControlEventDescription,
   DescribeAccessControlEventsResponse,
+  ProcessBaseInfo,
   ComplianceAssetDetailInfo,
   DescribeRiskSyscallEventsResponse,
   DescribeAssetImageRiskListResponse,

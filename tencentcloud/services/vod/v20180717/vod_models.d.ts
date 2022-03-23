@@ -4417,6 +4417,19 @@ export interface DescribeDrmDataKeyResponse {
     RequestId?: string;
 }
 /**
+ * DescribeMediaPlayStatDetails返回参数结构体
+ */
+export interface DescribeMediaPlayStatDetailsResponse {
+    /**
+      * 播放统计数据。
+      */
+    PlayStatInfoSet: Array<PlayStatInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 视频流配置参数
  */
 export interface VideoTemplateInfo {
@@ -8462,6 +8475,34 @@ export interface AiRecognitionTaskObjectResultOutput {
     ResultSetFileUrlExpireTime: string;
 }
 /**
+ * DescribeMediaPlayStatDetails请求参数结构体
+ */
+export interface DescribeMediaPlayStatDetailsRequest {
+    /**
+      * 媒体文件 ID。
+      */
+    FileId: string;
+    /**
+      * 起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    EndTime: string;
+    /**
+      * 统计时间粒度，有效值：
+<li>Hour：以小时为粒度。</li>
+<li>Day：以天为粒度。</li>
+默认按时间跨度决定，小于1天以小时为粒度，大于等于1天则以天为粒度。
+      */
+    Interval?: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
+}
+/**
  * Asr 文字涉违禁信息
  */
 export interface AiReviewProhibitedAsrTaskOutput {
@@ -9694,6 +9735,29 @@ export interface ImageContentReviewInput {
 <li>10：所有审核类型均打开。</li>
       */
     Definition: number;
+}
+/**
+ * 播放统计信息。
+ */
+export interface PlayStatInfo {
+    /**
+      * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+<li>表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。</li>
+<li>表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。</li>
+      */
+    Time: string;
+    /**
+      * 媒体文件ID。
+      */
+    FileId: string;
+    /**
+      * 播放次数。
+      */
+    PlayTimes: number;
+    /**
+      * 播放流量，单位：字节。
+      */
+    Traffic: number;
 }
 /**
  * 画面鉴别涉及令人不适宜的信息的任务控制参数

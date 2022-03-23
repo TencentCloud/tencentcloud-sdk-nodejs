@@ -230,6 +230,12 @@ export interface AbnormalProcessEventDescription {
    * 命中规则的id
    */
   RuleId: string
+
+  /**
+      * 事件最后一次处理的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperationTime: string
 }
 
 /**
@@ -1002,6 +1008,12 @@ export interface AccessControlEventDescription {
    * 命中规则id
    */
   RuleId: string
+
+  /**
+      * 事件最后一次处理的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperationTime: string
 }
 
 /**
@@ -1022,6 +1034,35 @@ export interface DescribeAccessControlEventsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 运行时安全，进程基础信息
+ */
+export interface ProcessBaseInfo {
+  /**
+      * 进程启动用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProcessStartUser: string
+
+  /**
+      * 进程用户组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProcessUserGroup: string
+
+  /**
+      * 进程路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProcessPath: string
+
+  /**
+      * 进程命令行参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProcessParam: string
 }
 
 /**
@@ -2307,6 +2348,12 @@ export interface DescribeRiskSyscallDetailResponse {
   EventDetail: RiskSyscallEventDescription
 
   /**
+      * 祖先进程信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessInfo: ProcessBaseInfo
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2336,6 +2383,12 @@ export interface ReverseShellEventDescription {
    * 目标地址
    */
   DstAddress: string
+
+  /**
+      * 事件最后一次处理的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperationTime: string
 }
 
 /**
@@ -2458,6 +2511,11 @@ export interface AbnormalProcessRuleInfo {
    * 系统策略的子策略数组
    */
   SystemChildRules?: Array<AbnormalProcessSystemChildRuleInfo>
+
+  /**
+   * 是否是系统默认策略
+   */
+  IsDefault?: boolean
 }
 
 /**
@@ -2631,6 +2689,16 @@ export interface DescribeAbnormalProcessRuleDetailRequest {
    * 镜像id, 在添加白名单的时候使用
    */
   ImageId?: string
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -4450,6 +4518,12 @@ export interface EscapeEventDescription {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remark: string
+
+  /**
+      * 事件最后一次处理的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperationTime: string
 }
 
 /**
@@ -4816,6 +4890,11 @@ export interface AccessControlRuleInfo {
    * 系统策略的子策略数组
    */
   SystemChildRules?: Array<AccessControlSystemChildRuleInfo>
+
+  /**
+   * 是否是系统默认策略
+   */
+  IsDefault?: boolean
 }
 
 /**
@@ -5325,6 +5404,16 @@ export interface DescribeAccessControlRuleDetailRequest {
    * 镜像id, 仅仅在事件加白的时候使用
    */
   ImageId?: string
+
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -5733,6 +5822,17 @@ export interface DescribeEscapeEventDetailResponse {
    * 事件描述
    */
   EventDetail: EscapeEventDescription
+
+  /**
+   * 父进程信息
+   */
+  ParentProcessInfo: ProcessBaseInfo
+
+  /**
+      * 祖先进程信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessInfo: ProcessBaseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7778,6 +7878,12 @@ export interface DescribeAbnormalProcessDetailResponse {
   EventDetail: AbnormalProcessEventDescription
 
   /**
+      * 祖先进程信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessInfo: ProcessBaseInfo
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8577,6 +8683,17 @@ export interface DescribeAccessControlDetailResponse {
    * 事件描述
    */
   EventDetail: AccessControlEventDescription
+
+  /**
+   * 父进程信息
+   */
+  ParentProcessInfo: ProcessBaseInfo
+
+  /**
+      * 祖先进程信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessInfo: ProcessBaseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9615,6 +9732,12 @@ export interface DescribeReverseShellDetailResponse {
    * 事件描述
    */
   EventDetail: ReverseShellEventDescription
+
+  /**
+      * 祖先进程信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessInfo: ProcessBaseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10657,6 +10780,12 @@ export interface RiskSyscallEventDescription {
    * 系统调用名称
    */
   SyscallName: string
+
+  /**
+      * 事件最后一次处理的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperationTime: string
 }
 
 /**
@@ -11107,6 +11236,60 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientIP: string
+
+  /**
+      * 父进程启动用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PProcessStartUser: string
+
+  /**
+      * 父进程用户组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PProcessUserGroup: string
+
+  /**
+      * 父进程路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PProcessPath: string
+
+  /**
+      * 父进程命令行参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PProcessParam: string
+
+  /**
+      * 祖先进程启动用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessStartUser: string
+
+  /**
+      * 祖先进程用户组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessUserGroup: string
+
+  /**
+      * 祖先进程路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessPath: string
+
+  /**
+      * 祖先进程命令行参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AncestorProcessParam: string
+
+  /**
+      * 事件最后一次处理的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperationTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

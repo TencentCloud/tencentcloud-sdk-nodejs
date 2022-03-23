@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableReplicaReadonly", req, cb);
     }
     /**
+     * 查询复制组
+     */
+    async DescribeReplicationGroup(req, cb) {
+        return this.request("DescribeReplicationGroup", req, cb);
+    }
+    /**
      * 查询实例节点信息
      */
     async DescribeInstanceNodeInfo(req, cb) {
@@ -118,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChangeReplicaToMaster", req, cb);
     }
     /**
-     * 设置自动备份时间
+     * 设置自动备份配置
      */
     async ModifyAutoBackupConfig(req, cb) {
         return this.request("ModifyAutoBackupConfig", req, cb);
@@ -172,7 +178,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTopNCmd", req, cb);
     }
     /**
-     * 创建参数模板
+     * 创建参数模板。
      */
     async CreateParamTemplate(req, cb) {
         return this.request("CreateParamTemplate", req, cb);

@@ -43,6 +43,7 @@ import {
   DeleteNodeUnitResponse,
   VolumeNFS,
   Service,
+  DescribeEdgeUnitApplicationsResponse,
   DescribeNodeUnitTemplateOnNodeGroupResponse,
   CreateUserTokenRequest,
   DescribeEdgeUnitGridEventsResponse,
@@ -68,7 +69,7 @@ import {
   DescribeEdgeUnitApplicationPodContainersRequest,
   TcpProbe,
   VolumeConfigMapKeyToPath,
-  DescribeEdgeUnitApplicationsResponse,
+  DescribeDracoEdgeNodeInstallerResponse,
   ModifyEdgeUnitCloudApiRequest,
   DescribeEdgeUnitDeployGridItemRequest,
   ModifyEdgeUnitRequest,
@@ -168,8 +169,10 @@ import {
   ModifyEdgeUnitApplicationVisualizationRequest,
   ModifyConfigMapResponse,
   DescribeEdgeNodePodsRequest,
+  DeleteIotDeviceBatchRequest,
   GetMarketComponentListRequest,
   DescribeApplicationVisualizationResponse,
+  DescribeDracoEdgeNodeInstallerRequest,
   CreateNamespaceRequest,
   VolumeHostPath,
   ApplyMarketComponentRequest,
@@ -234,6 +237,7 @@ import {
   DescribeEdgeUnitDeployGridRequest,
   ApplyMarketComponentResponse,
   DescribeApplicationYamlErrorResponse,
+  DeleteIotDeviceBatchResponse,
   CreateEdgeNodeResponse,
   DeleteEdgeNodesRequest,
   DescribeApplicationYamlErrorRequest,
@@ -516,6 +520,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEdgeAgentNodeInstallerResponse) => void
   ): Promise<DescribeEdgeAgentNodeInstallerResponse> {
     return this.request("DescribeEdgeAgentNodeInstaller", req, cb)
+  }
+
+  /**
+   * 批量删除设备
+   */
+  async DeleteIotDeviceBatch(
+    req: DeleteIotDeviceBatchRequest,
+    cb?: (error: string, rep: DeleteIotDeviceBatchResponse) => void
+  ): Promise<DeleteIotDeviceBatchResponse> {
+    return this.request("DeleteIotDeviceBatch", req, cb)
   }
 
   /**
@@ -936,6 +950,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteEdgeNodesResponse) => void
   ): Promise<DeleteEdgeNodesResponse> {
     return this.request("DeleteEdgeNodes", req, cb)
+  }
+
+  /**
+   * 自动获取Draco设备的安装包
+   */
+  async DescribeDracoEdgeNodeInstaller(
+    req: DescribeDracoEdgeNodeInstallerRequest,
+    cb?: (error: string, rep: DescribeDracoEdgeNodeInstallerResponse) => void
+  ): Promise<DescribeDracoEdgeNodeInstallerResponse> {
+    return this.request("DescribeDracoEdgeNodeInstaller", req, cb)
   }
 
   /**

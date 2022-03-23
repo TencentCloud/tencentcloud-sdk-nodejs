@@ -75,6 +75,11 @@ export interface BatchSendEmailRequest {
    * 退订选项 1: 加入退订链接 0: 不加入退订链接
    */
   Unsubscribe?: string
+
+  /**
+   * 是否添加广告标识 0:不添加 1:添加到subject前面，2:添加到subject后面
+   */
+  ADLocation?: number
 }
 
 /**

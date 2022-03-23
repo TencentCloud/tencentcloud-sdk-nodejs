@@ -87,6 +87,10 @@ export interface ModifyAutoBackupConfigResponse {
       */
     TimePeriod: string;
     /**
+      * 全量备份文件保存天数,单位：天
+      */
+    BackupStorageDays: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -313,19 +317,19 @@ export interface ModifyNetworkConfigResponse {
     /**
       * 执行状态：true|false
       */
-    Status?: boolean;
+    Status: boolean;
     /**
       * 子网ID
       */
-    SubnetId?: string;
+    SubnetId: string;
     /**
       * 私有网络ID
       */
-    VpcId?: string;
+    VpcId: string;
     /**
       * VIP地址
       */
-    Vip?: string;
+    Vip: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1973,6 +1977,27 @@ export interface ApplyParamsTemplateResponse {
     RequestId?: string;
 }
 /**
+ * DescribeReplicationGroup请求参数结构体
+ */
+export interface DescribeReplicationGroupRequest {
+    /**
+      * 实例列表的大小，参数默认值20
+      */
+    Limit: number;
+    /**
+      * 偏移量，取Limit整数倍
+      */
+    Offset: number;
+    /**
+      * 复制组ID
+      */
+    GroupId?: string;
+    /**
+      * 实例ID和实例名称，支持模糊查询
+      */
+    SearchKey?: string;
+}
+/**
  * Redis节点信息
  */
 export interface RedisNodes {
@@ -2030,6 +2055,10 @@ export interface ModifyNetworkConfigRequest {
       * 子网ID，changeVpc、changeBaseToVpc的时候需要提供
       */
     SubnetId?: string;
+    /**
+      * vip保留时间，单位：天
+      */
+    Recycle?: number;
 }
 /**
  * DescribeInstanceSecurityGroup请求参数结构体
@@ -2708,11 +2737,51 @@ export interface DescribeInstanceDealDetailResponse {
     /**
       * 订单详细信息
       */
-    DealDetails?: Array<TradeDealDetail>;
+    DealDetails: Array<TradeDealDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 复制组信息
+ */
+export interface Groups {
+    /**
+      * 用户AppID
+      */
+    AppId: number;
+    /**
+      * 地域ID 1--广州 4--上海 5-- 中国香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）16--成都 17--德国 18--韩国 19--重庆 21--印度 22--美东（弗吉尼亚）23--泰国 24--俄罗斯 25--日本
+      */
+    RegionId: number;
+    /**
+      * 复制组信息
+      */
+    GroupId: string;
+    /**
+      * 复制组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupName: string;
+    /**
+      * 复制组状态，37："绑定复制组中"，38："复制组重连中"，51："解绑复制组中"，52："复制组实例切主中"，53："角色变更中"
+      */
+    Status: number;
+    /**
+      * 复制组数量
+      */
+    InstanceCount: number;
+    /**
+      * 复制组实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Instances: Array<Instances>;
+    /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -2944,6 +3013,23 @@ export interface ManualBackupInstanceRequest {
       * 备份的备注信息
       */
     Remark?: string;
+}
+/**
+ * DescribeReplicationGroup返回参数结构体
+ */
+export interface DescribeReplicationGroupResponse {
+    /**
+      * 复制组数
+      */
+    TotalCount: number;
+    /**
+      * 复制组信息
+      */
+    Groups: Array<Groups>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyParamTemplate请求参数结构体
@@ -3605,12 +3691,12 @@ export interface DescribeInstanceAccountResponse {
       * 账号详细信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Accounts?: Array<Account>;
+    Accounts: Array<Account>;
     /**
       * 账号个数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4084,6 +4170,93 @@ export interface DescribeProjectSecurityGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 复制组实例
+ */
+export interface Instances {
+    /**
+      * 用户AppID
+      */
+    AppId: number;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例名称
+      */
+    InstanceName: string;
+    /**
+      * 地域ID 1--广州 4--上海 5-- 香港 6--多伦多 7--上海金融 8--北京 9-- 新加坡 11--深圳金融 15--美西（硅谷）
+      */
+    RegionId: number;
+    /**
+      * 区域ID
+      */
+    ZoneId: number;
+    /**
+      * 副本数量
+      */
+    RedisReplicasNum: number;
+    /**
+      * 分片数量
+      */
+    RedisShardNum: number;
+    /**
+      * 分片大小
+      */
+    RedisShardSize: number;
+    /**
+      * 实例的磁盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskSize: number;
+    /**
+      * 引擎：社区版Redis、腾讯云CKV
+      */
+    Engine: string;
+    /**
+      * 实例角色，rw可读写，r只读
+      */
+    Role: string;
+    /**
+      * 实例VIP
+      */
+    Vip: string;
+    /**
+      * 内部参数，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vip6: string;
+    /**
+      * vpc网络ID 如：75101
+      */
+    VpcID: number;
+    /**
+      * 实例端口
+      */
+    VPort: number;
+    /**
+      * 实例状态：0-待初始化，1-流程中，2-运行中，-2-已隔离，-3-待删除
+      */
+    Status: number;
+    /**
+      * 仓库ID
+      */
+    GrocerySysId: number;
+    /**
+      * 实例类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
+      */
+    ProductType: number;
+    /**
+      * 创建时间
+      */
+    CreateTime: string;
+    /**
+      * 更新实例
+      */
+    UpdateTime: string;
 }
 /**
  * DescribeInstanceMonitorHotKey返回参数结构体

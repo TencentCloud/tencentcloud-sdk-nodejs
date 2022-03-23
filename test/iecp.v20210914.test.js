@@ -268,6 +268,16 @@ it("iecp.v20210914.DescribeEdgeAgentNodeInstaller", async function () {
     }
 })
 
+it("iecp.v20210914.DeleteIotDeviceBatch", async function () {
+    try {
+       const data = await client.DeleteIotDeviceBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iecp.v20210914.RedeployEdgeUnitApplication", async function () {
     try {
        const data = await client.RedeployEdgeUnitApplication({})
@@ -681,6 +691,16 @@ it("iecp.v20210914.DeleteSecret", async function () {
 it("iecp.v20210914.DeleteEdgeNodes", async function () {
     try {
        const data = await client.DeleteEdgeNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iecp.v20210914.DescribeDracoEdgeNodeInstaller", async function () {
+    try {
+       const data = await client.DescribeDracoEdgeNodeInstaller({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

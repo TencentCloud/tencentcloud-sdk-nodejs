@@ -242,6 +242,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCDNStatDetails", req, cb);
     }
     /**
+     * 该接口用于查询媒体文件按指定时间粒度统计的播放数据
+* 可以查询最近一年的播放统计数据。
+* 时间粒度为小时，结束时间和起始时间的跨度最大为7天。
+* 时间粒度为天，结束时间和起始时间的跨度最大为90天。
+     */
+    async DescribeMediaPlayStatDetails(req, cb) {
+        return this.request("DescribeMediaPlayStatDetails", req, cb);
+    }
+    /**
      * 修改用户自定义雪碧图模板。
      */
     async ModifyImageSpriteTemplate(req, cb) {
