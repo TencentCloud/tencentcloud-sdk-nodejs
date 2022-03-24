@@ -398,8 +398,8 @@ export interface CheckSimilarPersonRequest {
     GroupIds: Array<string>;
     /**
       * 人员查重整理力度的控制。
-1：力度较高的档案整理，能够消除更多的重复身份，对应稍高的非重复身份误清除率；
-2：力度较低的档案整理，非重复身份的误清除率较低，对应稍低的重复身份消除率。
+1：力度较高的人员整理，能够消除更多的重复身份，对应稍高的非重复身份误清除率；
+2：力度较低的人员整理，非重复身份的误清除率较低，对应稍低的重复身份消除率。
       */
     UniquePersonControl: number;
 }
@@ -1299,7 +1299,7 @@ export interface CheckSimilarPersonResponse {
     /**
       * 查重任务ID，用于查询、获取查重的进度和结果。
       */
-    JobId?: string;
+    JobId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CleanUpInstance", req, cb);
     }
     /**
-     * 查询参数模板详情
+     * 查询参数模板详情。
      */
     async DescribeParamTemplateInfo(req, cb) {
         return this.request("DescribeParamTemplateInfo", req, cb);
@@ -352,7 +352,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("KillMasterGroup", req, cb);
     }
     /**
-     * 修改实例的连接配置，包括带宽和最大连接数
+     * 修改实例的连接配置，包括带宽和最大连接数。
      */
     async ModifyConnectionConfig(req, cb) {
         return this.request("ModifyConnectionConfig", req, cb);
@@ -430,7 +430,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClearInstance", req, cb);
     }
     /**
-     * 查询Redis节点信息
+     * 查询Redis节点详细信息
      */
     async DescribeInstanceZoneInfo(req, cb) {
         return this.request("DescribeInstanceZoneInfo", req, cb);

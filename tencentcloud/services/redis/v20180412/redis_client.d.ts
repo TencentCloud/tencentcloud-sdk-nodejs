@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     CleanUpInstance(req: CleanUpInstanceRequest, cb?: (error: string, rep: CleanUpInstanceResponse) => void): Promise<CleanUpInstanceResponse>;
     /**
-     * 查询参数模板详情
+     * 查询参数模板详情。
      */
     DescribeParamTemplateInfo(req: DescribeParamTemplateInfoRequest, cb?: (error: string, rep: DescribeParamTemplateInfoResponse) => void): Promise<DescribeParamTemplateInfoResponse>;
     /**
@@ -224,7 +224,7 @@ export declare class Client extends AbstractClient {
      */
     KillMasterGroup(req: KillMasterGroupRequest, cb?: (error: string, rep: KillMasterGroupResponse) => void): Promise<KillMasterGroupResponse>;
     /**
-     * 修改实例的连接配置，包括带宽和最大连接数
+     * 修改实例的连接配置，包括带宽和最大连接数。
      */
     ModifyConnectionConfig(req: ModifyConnectionConfigRequest, cb?: (error: string, rep: ModifyConnectionConfigResponse) => void): Promise<ModifyConnectionConfigResponse>;
     /**
@@ -276,7 +276,7 @@ export declare class Client extends AbstractClient {
      */
     ClearInstance(req: ClearInstanceRequest, cb?: (error: string, rep: ClearInstanceResponse) => void): Promise<ClearInstanceResponse>;
     /**
-     * 查询Redis节点信息
+     * 查询Redis节点详细信息
      */
     DescribeInstanceZoneInfo(req: DescribeInstanceZoneInfoRequest, cb?: (error: string, rep: DescribeInstanceZoneInfoResponse) => void): Promise<DescribeInstanceZoneInfoResponse>;
     /**

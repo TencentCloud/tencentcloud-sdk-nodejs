@@ -340,7 +340,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询参数模板详情
+   * 查询参数模板详情。
    */
   async DescribeParamTemplateInfo(
     req: DescribeParamTemplateInfoRequest,
@@ -770,7 +770,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例的连接配置，包括带宽和最大连接数
+   * 修改实例的连接配置，包括带宽和最大连接数。
    */
   async ModifyConnectionConfig(
     req: ModifyConnectionConfigRequest,
@@ -900,7 +900,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Redis节点信息
+   * 查询Redis节点详细信息
    */
   async DescribeInstanceZoneInfo(
     req: DescribeInstanceZoneInfoRequest,

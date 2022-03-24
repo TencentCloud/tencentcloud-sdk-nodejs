@@ -321,6 +321,7 @@ import {
   ApplyReconciliationFileResult,
   QueryOpenBankExternalSubMerchantBankAccountResponse,
   CreateRedInvoiceV2Request,
+  OpenBankApprovalGuideInfo,
   CreateOrderResponse,
   MultiApplyOrder,
   ModifyMerchantRequest,

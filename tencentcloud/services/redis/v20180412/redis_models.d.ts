@@ -5,11 +5,11 @@ export interface ModifyInstanceParamsResponse {
     /**
       * 修改是否成功。
       */
-    Changed?: boolean;
+    Changed: boolean;
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -56,6 +56,21 @@ export interface RedisBackupSet {
       * 备份是否被锁定，0：未被锁定；1：已被锁定
       */
     Locked: number;
+    /**
+      * 内部字段，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupSize: number;
+    /**
+      * 内部字段，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FullBackup: number;
+    /**
+      * 内部字段，用户可忽略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceType: number;
 }
 /**
  * DescribeInstanceMonitorTopNCmd返回参数结构体
@@ -100,7 +115,7 @@ export interface ModifyAutoBackupConfigResponse {
  */
 export interface RestoreInstanceRequest {
     /**
-      * 待操作的实例ID，可通过 DescribeRedis 接口返回值中的 redisId 获取。
+      * 待操作的实例ID，可通过 DescribeInstances 接口返回值中的 InstanceId 获取。
       */
     InstanceId: string;
     /**
@@ -182,7 +197,7 @@ export interface UpgradeInstanceVersionResponse {
     /**
       * 订单ID
       */
-    DealId?: string;
+    DealId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -422,11 +437,11 @@ export interface DescribeTaskListResponse {
     /**
       * 任务总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 任务详细信息
       */
-    Tasks?: Array<TaskInfoDetail>;
+    Tasks: Array<TaskInfoDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -489,7 +504,7 @@ export interface RenewInstanceResponse {
     /**
       * 交易ID
       */
-    DealId?: string;
+    DealId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -517,11 +532,11 @@ export interface DescribeSlowLogResponse {
  */
 export interface DescribeCommonDBInstancesRequest {
     /**
-      * 实例Vip信息列表
+      * vpc网络ID信息列表
       */
     VpcIds?: Array<number>;
     /**
-      * 子网id信息列表
+      * 子网ID信息列表
       */
     SubnetIds?: Array<number>;
     /**
@@ -529,7 +544,7 @@ export interface DescribeCommonDBInstancesRequest {
       */
     PayMode?: number;
     /**
-      * 实例id过滤信息列表
+      * 实例ID过滤信息列表
       */
     InstanceIds?: Array<string>;
     /**
@@ -578,6 +593,14 @@ export interface DescribeDBSecurityGroupsResponse {
       */
     Groups: Array<SecurityGroup>;
     /**
+      * 安全组生效内网地址
+      */
+    VIP: string;
+    /**
+      * 安全组生效内网端口
+      */
+    VPort: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -589,7 +612,7 @@ export interface RestoreInstanceResponse {
     /**
       * 任务ID，可通过 DescribeTaskInfo 接口查询任务执行状态
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -645,11 +668,11 @@ export interface DescribeInstancesResponse {
     /**
       * 实例数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例详细信息列表
       */
-    InstanceSet?: Array<InstanceSet>;
+    InstanceSet: Array<InstanceSet>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -662,11 +685,11 @@ export interface DescribeInstanceZoneInfoResponse {
     /**
       * 实例节点组的个数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例节点组列表
       */
-    ReplicaGroups?: Array<ReplicaGroup>;
+    ReplicaGroups: Array<ReplicaGroup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -760,7 +783,7 @@ export interface ResetPasswordResponse {
     /**
       * 任务ID（修改密码时的任务ID，如果时切换免密码或者非免密码实例，则无需关注此返回值）
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -879,11 +902,11 @@ export interface DescribeInstanceParamRecordsResponse {
     /**
       * 总的修改历史记录数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 修改历史记录信息。
       */
-    InstanceParamHistory?: Array<InstanceParamHistory>;
+    InstanceParamHistory: Array<InstanceParamHistory>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1071,7 +1094,7 @@ export interface ManualBackupInstanceResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1125,42 +1148,42 @@ export interface DescribeInstanceDTSInfoResponse {
       * DTS任务ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    JobId?: string;
+    JobId: string;
     /**
       * DTS任务名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    JobName?: string;
+    JobName: string;
     /**
       * 任务状态,取值为：1-创建中(Creating),3-校验中(Checking)4-校验通过(CheckPass),5-校验不通过（CheckNotPass）,7-任务运行(Running),8-准备完成（ReadyComplete）,9-任务成功（Success）,10-任务失败（Failed）,11-撤销中（Stopping）,12-完成中（Completing）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: number;
+    Status: number;
     /**
       * 状态描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    StatusDesc?: string;
+    StatusDesc: string;
     /**
       * 同步时延，单位：字节
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Offset?: number;
+    Offset: number;
     /**
       * 断开时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CutDownTime?: string;
+    CutDownTime: string;
     /**
       * 源实例信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SrcInfo?: DescribeInstanceDTSInstanceInfo;
+    SrcInfo: DescribeInstanceDTSInstanceInfo;
     /**
       * 目标实例信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DstInfo?: DescribeInstanceDTSInstanceInfo;
+    DstInfo: DescribeInstanceDTSInstanceInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1186,7 +1209,7 @@ export interface DestroyPostpaidInstanceResponse {
     /**
       * 任务Id
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1226,7 +1249,7 @@ export interface ChangeReplicaToMasterRequest {
       */
     InstanceId: string;
     /**
-      * 副本Id
+      * 副本组Id，多AZ实例必填
       */
     GroupId?: number;
 }
@@ -1434,7 +1457,7 @@ export interface ModifyInstanceAccountRequest {
       */
     Remark?: string;
     /**
-      * 子账号路由策略：填写master或者slave，表示路由主节点，从节点
+      * 路由策略：填写master或者replication，表示主节点或者从节点
       */
     ReadonlyPolicy?: Array<string>;
     /**
@@ -1577,7 +1600,7 @@ export interface ModifyInstanceAccountResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1643,11 +1666,11 @@ export interface DescribeInstanceBackupsResponse {
     /**
       * 备份总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例的备份数组
       */
-    BackupSet?: Array<RedisBackupSet>;
+    BackupSet: Array<RedisBackupSet>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1707,6 +1730,10 @@ export interface UpgradeVersionToMultiAvailabilityZonesRequest {
       * 实例ID
       */
     InstanceId: string;
+    /**
+      * 是否升级proxy和redis内核版本，升级后可支持就近接入
+      */
+    UpgradeProxyAndRedisServer?: boolean;
 }
 /**
  * DescribeInstanceMonitorTookDist请求参数结构体
@@ -1896,7 +1923,7 @@ export interface DescribeTaskListRequest {
       */
     InstanceName?: string;
     /**
-      * 分页大小
+      * 分页大小,默认20，上限不大于100
       */
     Limit?: number;
     /**
@@ -2110,7 +2137,7 @@ export interface CleanUpInstanceResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2207,15 +2234,23 @@ export interface DescribeAutoBackupConfigResponse {
     /**
       * 备份类型。自动备份类型： 1 “定时回档”
       */
-    AutoBackupType?: number;
+    AutoBackupType: number;
     /**
       * Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
       */
-    WeekDays?: Array<string>;
+    WeekDays: Array<string>;
     /**
       * 时间段。
       */
-    TimePeriod?: string;
+    TimePeriod: string;
+    /**
+      * 全量备份文件保存天数
+      */
+    BackupStorageDays: number;
+    /**
+      * tendis binlog备份文件保存天数
+      */
+    BinlogStorageDays: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2268,7 +2303,7 @@ export interface DescribeProjectSecurityGroupsRequest {
       */
     Offset?: number;
     /**
-      * 拉取数量限制。
+      * 拉取数量限制，默认20
       */
     Limit?: number;
     /**
@@ -2365,12 +2400,12 @@ export interface EnableReplicaReadonlyResponse {
       * 错误：ERROR，正确OK（已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: string;
+    Status: string;
     /**
       * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2400,7 +2435,7 @@ export interface DescribeInstanceSecurityGroupResponse {
     /**
       * 实例安全组信息
       */
-    InstanceSecurityGroupsDetail?: Array<InstanceSecurityGroupDetail>;
+    InstanceSecurityGroupsDetail: Array<InstanceSecurityGroupDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2515,7 +2550,7 @@ export interface StartupInstanceResponse {
     /**
       * 任务id
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2673,23 +2708,23 @@ export interface DescribeTaskInfoResponse {
     /**
       * 任务状态preparing:待执行，running：执行中，succeed：成功，failed：失败，error 执行出错
       */
-    Status?: string;
+    Status: string;
     /**
       * 任务开始时间
       */
-    StartTime?: string;
+    StartTime: string;
     /**
       * 任务类型
       */
-    TaskType?: string;
+    TaskType: string;
     /**
       * 实例的ID
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 任务信息，错误时显示错误信息。执行中与成功则为空
       */
-    TaskMessage?: string;
+    TaskMessage: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2788,7 +2823,7 @@ export interface Groups {
  */
 export interface DescribeInstancesRequest {
     /**
-      * 实例列表的大小，参数默认值20
+      * 实例列表的大小，参数默认值20，传值则以传参为准，如果传参大于具体配置etc/conf/component.properties中的DescribeInstancesPageLimit配置项 （读不到配置默认配置项为1000），则以配置项为准
       */
     Limit?: number;
     /**
@@ -2875,6 +2910,14 @@ export interface DescribeInstancesRequest {
       * 内部参数，用户可忽略
       */
     MonitorVersion?: string;
+    /**
+      * 根据标签的Key和Value筛选资源，不传或者传空数组则不进行过滤
+      */
+    InstanceTags?: Array<InstanceTagInfo>;
+    /**
+      * 根据标签的Key筛选资源，不传或者传空数组则不进行过滤
+      */
+    TagKeys?: Array<string>;
 }
 /**
  * 访问命令
@@ -3013,6 +3056,10 @@ export interface ManualBackupInstanceRequest {
       * 备份的备注信息
       */
     Remark?: string;
+    /**
+      * 保存天数。0代表指定默认保留时间
+      */
+    StorageDays?: number;
 }
 /**
  * DescribeReplicationGroup返回参数结构体
@@ -3302,7 +3349,7 @@ export interface ModifyConnectionConfigResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3315,7 +3362,7 @@ export interface ModifyMaintenanceWindowResponse {
     /**
       * 修改状态：success 或者 failed
       */
-    Status?: string;
+    Status: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3367,7 +3414,7 @@ export interface DestroyPrepaidInstanceResponse {
     /**
       * 订单Id
       */
-    DealId?: string;
+    DealId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3772,7 +3819,7 @@ export interface SwitchInstanceVipResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3983,7 +4030,7 @@ export interface DeleteInstanceAccountResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4114,7 +4161,7 @@ export interface UpgradeInstanceRequest {
       */
     RedisShardNum?: number;
     /**
-      * 副本数量，标准架构不需要填写，多AZ实例修改副本时必须要传入NodeSet。该参数不支持与RedisShardNum或MemSize同时输入。
+      * 副本数量，多AZ实例修改副本时必须要传入NodeSet。该参数不支持与RedisShardNum或MemSize同时输入。
       */
     RedisReplicasNum?: number;
     /**
@@ -4129,30 +4176,30 @@ export interface DescribeInstanceNodeInfoResponse {
     /**
       * proxy节点数量
       */
-    ProxyCount?: number;
+    ProxyCount: number;
     /**
       * proxy节点信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Proxy?: Array<ProxyNodes>;
+    Proxy: Array<ProxyNodes>;
     /**
       * redis节点数量
       */
-    RedisCount?: number;
+    RedisCount: number;
     /**
       * redis节点信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Redis?: Array<RedisNodes>;
+    Redis: Array<RedisNodes>;
     /**
       * tendis节点数量
       */
-    TendisCount?: number;
+    TendisCount: number;
     /**
       * tendis节点信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tendis?: Array<TendisNodes>;
+    Tendis: Array<TendisNodes>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4165,7 +4212,7 @@ export interface DescribeProjectSecurityGroupResponse {
     /**
       * 项目安全组
       */
-    SecurityGroupDetails?: Array<SecurityGroupDetail>;
+    SecurityGroupDetails: Array<SecurityGroupDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4300,7 +4347,7 @@ export interface ClearInstanceResponse {
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
