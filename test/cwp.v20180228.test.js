@@ -818,6 +818,16 @@ it("cwp.v20180228.DescribeSecurityDynamics", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeSecurityEventStat", async function () {
+    try {
+       const data = await client.DescribeSecurityEventStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteReverseShellEvents", async function () {
     try {
        const data = await client.DeleteReverseShellEvents({})

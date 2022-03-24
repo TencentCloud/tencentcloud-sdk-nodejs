@@ -612,6 +612,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VehicleRegCertOCR", req, cb);
     }
     /**
+     * 本接口支持通信大数据行程卡识别，包括行程卡颜色、更新时间、途经地、存在中高风险地区的城市、电话号码，五个字段的识别结果输出。
+     */
+    async RecognizeTravelCardOCR(req, cb) {
+        return this.request("RecognizeTravelCardOCR", req, cb);
+    }
+    /**
      * 本接口支持事业单位法人证书关键字段识别，包括注册号、有效期、住所、名称、法定代表人等。
      */
     async InstitutionOCR(req, cb) {

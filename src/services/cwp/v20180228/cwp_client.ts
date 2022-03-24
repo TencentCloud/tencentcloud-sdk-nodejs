@@ -92,6 +92,7 @@ import {
   ExportAttackLogsRequest,
   IgnoreRuleEffectHostInfo,
   DescribeBanModeRequest,
+  DescribeSecurityEventStatRequest,
   DeleteSearchTemplateRequest,
   EmergencyVul,
   ExportReverseShellEventsRequest,
@@ -374,6 +375,7 @@ import {
   DescribeVulHostCountScanTimeRequest,
   ExportScanTaskDetailsResponse,
   ExportBashEventsResponse,
+  EventStat,
   DeleteLoginWhiteListRequest,
   DeleteWebPageEventLogResponse,
   DescribeVulLevelCountResponse,
@@ -422,6 +424,7 @@ import {
   BaselineBasicInfo,
   DescribeBanModeResponse,
   DescribeImportMachineInfoResponse,
+  DescribeSecurityEventStatResponse,
   DescribeAssetDatabaseListRequest,
   ModifyWebPageProtectSwitchResponse,
   DescribeAssetMachineListRequest,
@@ -1362,6 +1365,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityDynamicsResponse) => void
   ): Promise<DescribeSecurityDynamicsResponse> {
     return this.request("DescribeSecurityDynamics", req, cb)
+  }
+
+  /**
+   * 获取安全事件统计
+   */
+  async DescribeSecurityEventStat(
+    req: DescribeSecurityEventStatRequest,
+    cb?: (error: string, rep: DescribeSecurityEventStatResponse) => void
+  ): Promise<DescribeSecurityEventStatResponse> {
+    return this.request("DescribeSecurityEventStat", req, cb)
   }
 
   /**

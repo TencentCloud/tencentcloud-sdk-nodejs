@@ -1588,6 +1588,15 @@ export interface IgnoreRuleEffectHostInfo {
  */
 export declare type DescribeBanModeRequest = null;
 /**
+ * DescribeSecurityEventStat请求参数结构体
+ */
+export interface DescribeSecurityEventStatRequest {
+    /**
+      * 该接口无过滤条件
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * DeleteSearchTemplate请求参数结构体
  */
 export interface DeleteSearchTemplateRequest {
@@ -8014,6 +8023,19 @@ export interface ExportBashEventsResponse {
     RequestId?: string;
 }
 /**
+ * 未处理的安全事件统计信息
+ */
+export interface EventStat {
+    /**
+      * 事件数
+      */
+    EventsNum: number;
+    /**
+      * 受影响的主机数
+      */
+    MachineAffectNum: number;
+}
+/**
  * DeleteLoginWhiteList请求参数结构体
  */
 export interface DeleteLoginWhiteListRequest {
@@ -8989,6 +9011,107 @@ export interface DescribeImportMachineInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InvalidMachineList: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeSecurityEventStat返回参数结构体
+ */
+export interface DescribeSecurityEventStatResponse {
+    /**
+      * 木马事件统计
+      */
+    MalwareStat: EventStat;
+    /**
+      * 异地事件统计
+      */
+    HostLoginStat: EventStat;
+    /**
+      * 爆破事件统计
+      */
+    BruteAttackStat: EventStat;
+    /**
+      * 恶意请求事件统计
+      */
+    MaliciousRequestStat: EventStat;
+    /**
+      * 本地提权事件统计
+      */
+    PrivilegeStat: EventStat;
+    /**
+      * 反弹Shell事件统计
+      */
+    ReverseShellStat: EventStat;
+    /**
+      * 高危命令事件统计
+      */
+    HighRiskBashStat: EventStat;
+    /**
+      * 网络攻击事件统计
+      */
+    AttackLogsStat: EventStat;
+    /**
+      * 高危漏洞事件统计
+      */
+    VulHighStat: EventStat;
+    /**
+      * 中危漏洞事件统计
+      */
+    VulNormalStat: EventStat;
+    /**
+      * 低危漏洞事件统计
+      */
+    VulLowStat: EventStat;
+    /**
+      * 高危基线漏洞事件统计
+      */
+    BaselineHighStat: EventStat;
+    /**
+      * 中危基线漏事件统计
+      */
+    BaselineNormalStat: EventStat;
+    /**
+      * 低危基线漏事件统计
+      */
+    BaselineLowStat: EventStat;
+    /**
+      * 有未处理安全事件的机器总数
+      */
+    MachineTotalAffectNum: number;
+    /**
+      * 有未处理入侵安全事件的机器总数
+      */
+    InvasionTotalAffectNum: number;
+    /**
+      * 有未处理漏洞安全事件的机器总数
+      */
+    VulTotalAffectNum: number;
+    /**
+      * 有未处理基线安全事件的机器总数
+      */
+    BaseLineTotalAffectNum: number;
+    /**
+      * 有未处理网络攻击安全事件的机器总数
+      */
+    CyberAttackTotalAffectNum: number;
+    /**
+      * 严重漏洞事件统计
+      */
+    VulRiskStat: EventStat;
+    /**
+      * 严重基线漏洞事件统计
+      */
+    BaselineRiskStat: EventStat;
+    /**
+      * 漏洞数统计
+      */
+    VulStat: EventStat;
+    /**
+      * 安全得分
+      */
+    Score: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

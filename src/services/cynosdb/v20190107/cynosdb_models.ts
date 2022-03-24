@@ -157,6 +157,16 @@ export interface AssociateSecurityGroupsRequest {
 }
 
 /**
+ * CreateAccounts返回参数结构体
+ */
+export interface CreateAccountsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBSecurityGroups返回参数结构体
  */
 export interface DescribeDBSecurityGroupsResponse {
@@ -313,14 +323,18 @@ export interface IsolateInstanceResponse {
 }
 
 /**
- * DescribeInstanceSpecs请求参数结构体
+ * PauseServerless请求参数结构体
  */
-export interface DescribeInstanceSpecsRequest {
+export interface PauseServerlessRequest {
   /**
-      * 数据库类型，取值范围: 
-<li> MYSQL </li>
-      */
-  DbType: string
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 是否强制暂停，忽略当前的用户链接  0:不强制  1:强制， 默认为1
+   */
+  ForcePause?: number
 }
 
 /**
@@ -642,24 +656,23 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
 }
 
 /**
- * DescribeClusterParamLogs返回参数结构体
+ * ModifyAccountParams请求参数结构体
  */
-export interface DescribeClusterParamLogsResponse {
+export interface ModifyAccountParamsRequest {
   /**
-   * 记录总数
+   * 集群id
    */
-  TotalCount: number
+  ClusterId: string
 
   /**
-      * 参数修改记录
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterParamLogs: Array<ClusterParamModifyLog>
+   * 账号信息
+   */
+  Account: InputAccount
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数据库表权限数组,当前仅支持参数：max_user_connections
    */
-  RequestId?: string
+  AccountParams: Array<AccountParam>
 }
 
 /**
@@ -700,6 +713,21 @@ export interface ResumeServerlessResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAccounts请求参数结构体
+ */
+export interface CreateAccountsRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 新账户列表
+   */
+  Accounts: Array<NewAccount>
 }
 
 /**
@@ -836,6 +864,31 @@ export interface OfflineClusterRequest {
    * 集群ID
    */
   ClusterId: string
+}
+
+/**
+ * 新创建的账号
+ */
+export interface NewAccount {
+  /**
+   * 账户名
+   */
+  AccountName: string
+
+  /**
+   * 密码
+   */
+  AccountPassword: string
+
+  /**
+   * 主机
+   */
+  Host: string
+
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -1762,18 +1815,14 @@ export interface ModifyBackupConfigResponse {
 }
 
 /**
- * PauseServerless请求参数结构体
+ * DescribeInstanceSpecs请求参数结构体
  */
-export interface PauseServerlessRequest {
+export interface DescribeInstanceSpecsRequest {
   /**
-   * 集群id
-   */
-  ClusterId: string
-
-  /**
-   * 是否强制暂停，忽略当前的用户链接  0:不强制  1:强制， 默认为1
-   */
-  ForcePause?: number
+      * 数据库类型，取值范围: 
+<li> MYSQL </li>
+      */
+  DbType: string
 }
 
 /**
@@ -1804,23 +1853,24 @@ export interface UpgradeInstanceResponse {
 }
 
 /**
- * ModifyAccountParams请求参数结构体
+ * DescribeClusterParamLogs返回参数结构体
  */
-export interface ModifyAccountParamsRequest {
+export interface DescribeClusterParamLogsResponse {
   /**
-   * 集群id
+   * 记录总数
    */
-  ClusterId: string
+  TotalCount: number
 
   /**
-   * 账号信息
-   */
-  Account: InputAccount
+      * 参数修改记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterParamLogs: Array<ClusterParamModifyLog>
 
   /**
-   * 数据库表权限数组,当前仅支持参数：max_user_connections
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AccountParams: Array<AccountParam>
+  RequestId?: string
 }
 
 /**
@@ -1828,8 +1878,17 @@ export interface ModifyAccountParamsRequest {
  */
 export interface CynosdbCluster {
   /**
-   * 集群状态
-   */
+      * 集群状态， 可选值如下:
+creating: 创建中
+running:运行中
+isolating:隔离中
+isolated:已隔离
+activating:解隔离中
+offlining:下线中
+offlined:已下线
+deleting:删除中
+deleted:已删除
+      */
   Status: string
 
   /**

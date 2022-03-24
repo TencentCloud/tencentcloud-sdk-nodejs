@@ -25,6 +25,7 @@ import {
   ModifyMaintainPeriodConfigRequest,
   DescribeRollbackTimeRangeResponse,
   AssociateSecurityGroupsRequest,
+  CreateAccountsResponse,
   DescribeDBSecurityGroupsResponse,
   DescribeMaintainPeriodRequest,
   AccountParam,
@@ -32,7 +33,7 @@ import {
   ClusterInstanceDetail,
   Account,
   IsolateInstanceResponse,
-  DescribeInstanceSpecsRequest,
+  PauseServerlessRequest,
   RevokeAccountPrivilegesResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
@@ -46,10 +47,11 @@ import {
   DescribeClustersRequest,
   DescribeInstanceDetailResponse,
   ModifyDBInstanceSecurityGroupsResponse,
-  DescribeClusterParamLogsResponse,
+  ModifyAccountParamsRequest,
   DescribeClusterInstanceGrpsRequest,
   DescribeResourcesByDealNameResponse,
   ResumeServerlessResponse,
+  CreateAccountsRequest,
   IsolateInstanceRequest,
   DescribeDBSecurityGroupsRequest,
   RollBackClusterRequest,
@@ -58,6 +60,7 @@ import {
   DescribeProjectSecurityGroupsResponse,
   PauseServerlessResponse,
   OfflineClusterRequest,
+  NewAccount,
   BackupFileInfo,
   DescribeBackupListRequest,
   CynosdbInstance,
@@ -82,9 +85,9 @@ import {
   ResumeServerlessRequest,
   BillingResourceInfo,
   ModifyBackupConfigResponse,
-  PauseServerlessRequest,
+  DescribeInstanceSpecsRequest,
   UpgradeInstanceResponse,
-  ModifyAccountParamsRequest,
+  DescribeClusterParamLogsResponse,
   CynosdbCluster,
   SetRenewFlagResponse,
   OfflineClusterResponse,
@@ -460,6 +463,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClustersResponse) => void
   ): Promise<CreateClustersResponse> {
     return this.request("CreateClusters", req, cb)
+  }
+
+  /**
+   * 创建账号
+   */
+  async CreateAccounts(
+    req: CreateAccountsRequest,
+    cb?: (error: string, rep: CreateAccountsResponse) => void
+  ): Promise<CreateAccountsResponse> {
+    return this.request("CreateAccounts", req, cb)
   }
 
   /**

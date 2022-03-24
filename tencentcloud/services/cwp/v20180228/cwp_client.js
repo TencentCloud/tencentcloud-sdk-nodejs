@@ -508,6 +508,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityDynamics", req, cb);
     }
     /**
+     * 获取安全事件统计
+     */
+    async DescribeSecurityEventStat(req, cb) {
+        return this.request("DescribeSecurityEventStat", req, cb);
+    }
+    /**
      * 根据Ids删除反弹Shell事件
      */
     async DeleteReverseShellEvents(req, cb) {

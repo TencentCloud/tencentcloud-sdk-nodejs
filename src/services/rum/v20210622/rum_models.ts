@@ -280,12 +280,12 @@ export interface DescribeTawInstancesRequest {
   InstanceIds?: Array<string>
 
   /**
-   * 过滤参数
+   * 过滤参数；demo模式传{"Name": "IsDemo", "Values":["1"]}
    */
   Filters?: Array<Filter>
 
   /**
-   * 是否为demo模式（1=是，2=否）
+   * 该参数已废弃，demo模式请在Filters内注明
    */
   IsDemo?: number
 }
@@ -576,7 +576,7 @@ export interface DescribeScoresRequest {
   ID?: number
 
   /**
-   * 是否为demo模式（1=是，2=否）
+   * 该参数已废弃
    */
   IsDemo?: number
 }
@@ -3029,12 +3029,12 @@ export interface DescribeProjectsRequest {
   Offset: number
 
   /**
-   * 过滤条件
+   * 过滤参数；demo模式传{"Name": "IsDemo", "Values":["1"]}
    */
   Filters?: Array<Filter>
 
   /**
-   * 是否为demo模式（1=是，2=否）
+   * 该参数已废弃，demo模式请在Filters内注明
    */
   IsDemo?: number
 }

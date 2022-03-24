@@ -268,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
+     * 重置指定Group的消费位点到指定时间戳
+     */
+    async ResetRocketMQConsumerOffSet(req, cb) {
+        return this.request("ResetRocketMQConsumerOffSet", req, cb);
+    }
+    /**
      * 查询指定环境和主题下的订阅者列表
      */
     async DescribeSubscriptions(req, cb) {

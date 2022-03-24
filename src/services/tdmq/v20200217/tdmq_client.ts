@@ -32,6 +32,7 @@ import {
   CreateCmqTopicRequest,
   CreateAMQPExchangeRequest,
   DescribeRocketMQNamespacesResponse,
+  ResetRocketMQConsumerOffSetResponse,
   DescribeBindClustersResponse,
   BindCluster,
   ModifyClusterResponse,
@@ -203,6 +204,7 @@ import {
   DescribePublishersResponse,
   DeleteAMQPRouteRelationResponse,
   SendMsgRequest,
+  ResetRocketMQConsumerOffSetRequest,
   DescribeCmqQueueDetailRequest,
   DescribeAMQPQueuesResponse,
   CreateRocketMQTopicRequest,
@@ -663,6 +665,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 重置指定Group的消费位点到指定时间戳
+   */
+  async ResetRocketMQConsumerOffSet(
+    req: ResetRocketMQConsumerOffSetRequest,
+    cb?: (error: string, rep: ResetRocketMQConsumerOffSetResponse) => void
+  ): Promise<ResetRocketMQConsumerOffSetResponse> {
+    return this.request("ResetRocketMQConsumerOffSet", req, cb)
   }
 
   /**

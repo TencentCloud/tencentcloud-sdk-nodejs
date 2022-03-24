@@ -95,22 +95,22 @@ export interface DetectFaceAttributesResponse {
   /**
    * 请求的图片宽度。
    */
-  ImageWidth?: number
+  ImageWidth: number
 
   /**
    * 请求的图片高度。
    */
-  ImageHeight?: number
+  ImageHeight: number
 
   /**
    * 人脸信息列表。
    */
-  FaceDetailInfos?: Array<FaceDetailInfo>
+  FaceDetailInfos: Array<FaceDetailInfo>
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -243,12 +243,12 @@ export interface CreateFaceResponse {
   /**
    * 加入成功的人脸数量
    */
-  SucFaceNum?: number
+  SucFaceNum: number
 
   /**
    * 加入成功的人脸ID列表
    */
-  SucFaceIds?: Array<string>
+  SucFaceIds: Array<string>
 
   /**
       * 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败， 
@@ -256,23 +256,23 @@ export interface CreateFaceResponse {
 其他非 0 值代表算法服务异常。 
 RetCode的顺序和入参中 Images 或 Urls 的顺序一致。
       */
-  RetCode?: Array<number>
+  RetCode: Array<number>
 
   /**
       * 加入成功的人脸索引。索引顺序和入参中 Images 或 Urls 的顺序一致。 
 例， Urls 中 有 3 个 url，第二个 url 失败，则 SucIndexes 值为 [0,2] 。
       */
-  SucIndexes?: Array<number>
+  SucIndexes: Array<number>
 
   /**
    * 加入成功的人脸框位置。顺序和入参中 Images 或 Urls 的顺序一致。
    */
-  SucFaceRects?: Array<FaceRect>
+  SucFaceRects: Array<FaceRect>
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -472,8 +472,8 @@ export interface CheckSimilarPersonRequest {
 
   /**
       * 人员查重整理力度的控制。
-1：力度较高的档案整理，能够消除更多的重复身份，对应稍高的非重复身份误清除率；
-2：力度较低的档案整理，非重复身份的误清除率较低，对应稍低的重复身份消除率。
+1：力度较高的人员整理，能够消除更多的重复身份，对应稍高的非重复身份误清除率；
+2：力度较低的人员整理，非重复身份的误清除率较低，对应稍低的重复身份消除率。
       */
   UniquePersonControl: number
 }
@@ -684,17 +684,17 @@ export interface SearchFacesResponse {
   /**
    * 识别结果。
    */
-  Results?: Array<Result>
+  Results: Array<Result>
 
   /**
    * 搜索的人员库中包含的人脸数。
    */
-  FaceNum?: number
+  FaceNum: number
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -790,18 +790,18 @@ export interface DetectLiveFaceResponse {
       * 活体打分，取值范围 [0,100]，分数一般落于[80, 100]区间内，0分也为常见值。推荐相大于 87 时可判断为活体。可根据具体场景自行调整阈值。
 本字段当且仅当FaceModelVersion为2.0时才具备参考意义。
       */
-  Score?: number
+  Score: number
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
       * 活体检测是否通过。
 本字段只有FaceModelVersion为3.0时才具备参考意义。
       */
-  IsLiveness?: boolean
+  IsLiveness: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -971,18 +971,18 @@ export interface SearchPersonsResponse {
   /**
    * 识别结果。
    */
-  Results?: Array<Result>
+  Results: Array<Result>
 
   /**
    * 搜索的人员库中包含的人员数。若输入图片中所有人脸均不符合质量要求，则返回0。
    */
-  PersonNum?: number
+  PersonNum: number
 
   /**
       * 人脸识别所用的算法模型版本。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1083,17 +1083,17 @@ export interface SearchFacesReturnsByGroupResponse {
   /**
    * 搜索的人员库中包含的人脸数。
    */
-  FaceNum?: number
+  FaceNum: number
 
   /**
    * 识别结果。
    */
-  ResultsReturnsByGroup?: Array<ResultsReturnsByGroup>
+  ResultsReturnsByGroup: Array<ResultsReturnsByGroup>
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2161,22 +2161,22 @@ export interface AnalyzeFaceResponse {
   /**
    * 请求的图片宽度。
    */
-  ImageWidth?: number
+  ImageWidth: number
 
   /**
    * 请求的图片高度。
    */
-  ImageHeight?: number
+  ImageHeight: number
 
   /**
    * 五官定位（人脸关键点）具体信息。
    */
-  FaceShapeSet?: Array<FaceShape>
+  FaceShapeSet: Array<FaceShape>
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2328,13 +2328,13 @@ export interface GetGroupListResponse {
   /**
    * 返回的人员库信息
    */
-  GroupInfos?: Array<GroupInfo>
+  GroupInfos: Array<GroupInfo>
 
   /**
       * 人员库总数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  GroupNum?: number
+  GroupNum: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2444,12 +2444,12 @@ export interface CompareFaceResponse {
 2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。 
 若需要验证两张图片中的人脸是否为同一人，建议使用人脸验证接口。
       */
-  Score?: number
+  Score: number
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2494,17 +2494,17 @@ export interface VerifyFaceResponse {
 若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
 2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
       */
-  Score?: number
+  Score: number
 
   /**
    * 是否为同一人的判断。
    */
-  IsMatch?: boolean
+  IsMatch: boolean
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2673,17 +2673,17 @@ export interface DetectFaceResponse {
   /**
    * 请求的图片宽度。
    */
-  ImageWidth?: number
+  ImageWidth: number
 
   /**
    * 请求的图片高度。
    */
-  ImageHeight?: number
+  ImageHeight: number
 
   /**
    * 人脸信息列表。包含人脸坐标信息、属性信息（若需要）、质量分信息（若需要）。
    */
-  FaceInfos?: Array<FaceInfo>
+  FaceInfos: Array<FaceInfo>
 
   /**
       * 人脸识别服务所用的算法模型版本。
@@ -2696,7 +2696,7 @@ export interface DetectFaceResponse {
 
 不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用“3.0”版本。
       */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2711,7 +2711,7 @@ export interface CheckSimilarPersonResponse {
   /**
    * 查重任务ID，用于查询、获取查重的进度和结果。
    */
-  JobId?: string
+  JobId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2993,7 +2993,7 @@ export interface CreateGroupResponse {
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

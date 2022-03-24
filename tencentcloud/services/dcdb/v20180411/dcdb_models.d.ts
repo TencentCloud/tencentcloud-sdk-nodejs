@@ -5,11 +5,11 @@ export interface DescribeUserTasksResponse {
     /**
       * 任务总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 任务列表
       */
-    FlowSet?: Array<UserTaskInfo>;
+    FlowSet: Array<UserTaskInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -22,11 +22,11 @@ export interface InitDCDBInstancesResponse {
     /**
       * 异步任务ID，可通过 DescribeFlow 查询任务状态。
       */
-    FlowIds?: Array<number>;
+    FlowIds: Array<number>;
     /**
       * 透传入参。
       */
-    InstanceIds?: Array<string>;
+    InstanceIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -53,19 +53,19 @@ export interface DescribeAccountPrivilegesResponse {
     /**
       * 实例ID
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 权限列表。
       */
-    Privileges?: Array<string>;
+    Privileges: Array<string>;
     /**
       * 数据库账号用户名
       */
-    UserName?: string;
+    UserName: string;
     /**
       * 数据库账号Host
       */
-    Host?: string;
+    Host: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -109,6 +109,11 @@ export interface ParamDesc {
       * 是否有设置过值，false:没有设置过值，true:有设置过值。
       */
     HaveSetValue: boolean;
+    /**
+      * 是否需要重启生效，false:不需要重启，
+true:需要重启
+      */
+    NeedRestart: boolean;
 }
 /**
  * DestroyDCDBInstance返回参数结构体
@@ -174,11 +179,11 @@ export interface ActiveHourDCDBInstanceResponse {
     /**
       * 解隔离成功的实例id列表
       */
-    SuccessInstanceIds?: Array<string>;
+    SuccessInstanceIds: Array<string>;
     /**
       * 解隔离失败的实例id列表
       */
-    FailedInstanceIds?: Array<string>;
+    FailedInstanceIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -191,11 +196,11 @@ export interface DescribeDCDBPriceResponse {
     /**
       * 原价，单位：分
       */
-    OriginalPrice?: number;
+    OriginalPrice: number;
     /**
       * 实际价格，单位：分。受折扣等影响，可能和原价不同。
       */
-    Price?: number;
+    Price: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -421,11 +426,11 @@ export interface DescribeDBParametersResponse {
     /**
       * 实例 ID，形如：dcdbt-ow7t8lmc。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 请求DB的当前参数值
       */
-    Params?: Array<ParamDesc>;
+    Params: Array<ParamDesc>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -460,7 +465,7 @@ export interface CloneAccountResponse {
     /**
       * 异步任务流程ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -491,7 +496,7 @@ export interface OpenDBExtranetAccessResponse {
     /**
       * 异步任务ID，可通过 DescribeFlow 查询任务状态。
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1556,11 +1561,11 @@ export interface ModifyDBParametersResponse {
     /**
       * 实例 ID，形如：dcdbt-ow728lmc。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 各参数修改结果
       */
-    Result?: Array<ParamModifyResult>;
+    Result: Array<ParamModifyResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1802,27 +1807,27 @@ export interface DescribeDatabaseObjectsResponse {
     /**
       * 透传入参。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 数据库名称。
       */
-    DbName?: string;
+    DbName: string;
     /**
       * 表列表。
       */
-    Tables?: Array<DatabaseTable>;
+    Tables: Array<DatabaseTable>;
     /**
       * 视图列表。
       */
-    Views?: Array<DatabaseView>;
+    Views: Array<DatabaseView>;
     /**
       * 存储过程列表。
       */
-    Procs?: Array<DatabaseProcedure>;
+    Procs: Array<DatabaseProcedure>;
     /**
       * 函数列表。
       */
-    Funcs?: Array<DatabaseFunction>;
+    Funcs: Array<DatabaseFunction>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1917,7 +1922,7 @@ export interface DescribeShardSpecResponse {
     /**
       * 按机型分类的可售卖规格列表
       */
-    SpecConfig?: Array<SpecConfig>;
+    SpecConfig: Array<SpecConfig>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1939,11 +1944,11 @@ export interface DescribeDCDBRenewalPriceResponse {
     /**
       * 原价，单位：分
       */
-    OriginalPrice?: number;
+    OriginalPrice: number;
     /**
       * 实际价格，单位：分。受折扣等影响，可能和原价不同。
       */
-    Price?: number;
+    Price: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1956,16 +1961,16 @@ export interface DescribeDCDBShardsResponse {
     /**
       * 符合条件的分片数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 分片信息列表
       */
-    Shards?: Array<DCDBShardInfo>;
+    Shards: Array<DCDBShardInfo>;
     /**
       * 灾备标志，0-无，1-主实例，2-灾备实例
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DcnFlag?: number;
+    DcnFlag: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2039,11 +2044,11 @@ export interface IsolateHourDCDBInstanceResponse {
     /**
       * 隔离成功的实例id列表
       */
-    SuccessInstanceIds?: Array<string>;
+    SuccessInstanceIds: Array<string>;
     /**
       * 隔离失败的实例id列表
       */
-    FailedInstanceIds?: Array<string>;
+    FailedInstanceIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2114,7 +2119,7 @@ export interface DescribeDCDBSaleInfoResponse {
     /**
       * 可售卖地域信息列表
       */
-    RegionList?: Array<RegionInfo>;
+    RegionList: Array<RegionInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2356,11 +2361,11 @@ export interface DescribeDatabasesResponse {
     /**
       * 该实例上的数据库列表。
       */
-    Databases?: Array<Database>;
+    Databases: Array<Database>;
     /**
       * 透传入参。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2982,19 +2987,19 @@ export interface DescribeDatabaseTableResponse {
     /**
       * 实例名称。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 数据库名称。
       */
-    DbName?: string;
+    DbName: string;
     /**
       * 表名称。
       */
-    Table?: string;
+    Table: string;
     /**
       * 列信息。
       */
-    Cols?: Array<TableColumn>;
+    Cols: Array<TableColumn>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3085,12 +3090,12 @@ export interface DescribeAccountsResponse {
     /**
       * 实例ID，透传入参。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 实例用户列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Users?: Array<DBAccount>;
+    Users: Array<DBAccount>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3103,23 +3108,23 @@ export interface DescribeDBSlowLogsResponse {
     /**
       * 所有语句锁时间总和
       */
-    LockTimeSum?: number;
+    LockTimeSum: number;
     /**
       * 所有语句查询总次数
       */
-    QueryCount?: number;
+    QueryCount: number;
     /**
       * 总记录数
       */
-    Total?: number;
+    Total: number;
     /**
       * 所有语句查询时间总和
       */
-    QueryTimeSum?: number;
+    QueryTimeSum: number;
     /**
       * 慢查询日志数据
       */
-    Data?: Array<SlowLogData>;
+    Data: Array<SlowLogData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3285,7 +3290,7 @@ export interface ModifyDBSyncModeResponse {
     /**
       * 异步任务Id，可通过 DescribeFlow 查询任务状态。
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

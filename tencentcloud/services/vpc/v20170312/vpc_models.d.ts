@@ -5,7 +5,7 @@ export interface CreateNetworkAclResponse {
     /**
       * 网络ACL实例。
       */
-    NetworkAcl?: NetworkAcl;
+    NetworkAcl: NetworkAcl;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2229,7 +2229,7 @@ export interface ModifyAssistantCidrResponse {
       * 辅助CIDR数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AssistantCidrSet?: Array<AssistantCidr>;
+    AssistantCidrSet: Array<AssistantCidr>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3975,11 +3975,11 @@ export interface DescribeGatewayFlowQosResponse {
     /**
       * 实例详细信息列表。
       */
-    GatewayQosSet?: Array<GatewayQos>;
+    GatewayQosSet: Array<GatewayQos>;
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9799,7 +9799,7 @@ export interface ModifyNetworkInterfaceQosRequest {
       */
     NetworkInterfaceIds: Array<string>;
     /**
-      * 服务质量，可选值：AU、AG、PT，分别代表金、银、白金三个等级。
+      * 服务质量，可选值：PT、AU、AG、DEFAULT，分别代表白金、金、银、默认四个等级。
       */
     QosLevel: string;
 }

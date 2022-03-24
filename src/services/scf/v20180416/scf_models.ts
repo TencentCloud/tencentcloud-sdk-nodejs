@@ -2378,12 +2378,12 @@ Name可选值：Status, Runtime, FunctionType, PublicNetStatus, AsyncRunEnable, 
  */
 export interface Variable {
   /**
-   * 变量的名称
+   * 变量的名称，不可为空字符
    */
   Key?: string
 
   /**
-   * 变量的值
+   * 变量的值，不可为空字符
    */
   Value?: string
 }

@@ -332,6 +332,15 @@ export interface DescribeRocketMQNamespacesResponse {
     RequestId?: string;
 }
 /**
+ * ResetRocketMQConsumerOffSet返回参数结构体
+ */
+export interface ResetRocketMQConsumerOffSetResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBindClusters返回参数结构体
  */
 export interface DescribeBindClustersResponse {
@@ -4249,6 +4258,35 @@ export interface SendMsgRequest {
       * Pulsar 集群的ID
       */
     ClusterId?: string;
+}
+/**
+ * ResetRocketMQConsumerOffSet请求参数结构体
+ */
+export interface ResetRocketMQConsumerOffSetRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 命名空间名称
+      */
+    NamespaceId: string;
+    /**
+      * 消费组名称
+      */
+    GroupId: string;
+    /**
+      * 主题名称
+      */
+    Topic: string;
+    /**
+      * 重置方式，0表示从最新位点开始，1表示从指定时间点开始
+      */
+    Type: number;
+    /**
+      * 重置指定的时间戳，仅在 Type 为1是生效，以毫秒为单位
+      */
+    ResetTimestamp?: number;
 }
 /**
  * DescribeCmqQueueDetail请求参数结构体

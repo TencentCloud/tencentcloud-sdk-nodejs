@@ -142,7 +142,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyFlowLogAttribute", req, cb);
     }
     /**
-     * 修改弹性网卡服务质量
+     * 修改弹性网卡服务质量。
      */
     async ModifyNetworkInterfaceQos(req, cb) {
         return this.request("ModifyNetworkInterfaceQos", req, cb);
@@ -1088,7 +1088,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAddressTemplate", req, cb);
     }
     /**
-     * 路由表列表页操作增加“发布到云联网”，用于发布路由到云联网。
+     * 本接口（NotifyRoutes）用于路由表列表页操作增加“发布到云联网”，发布路由到云联网。
      */
     async NotifyRoutes(req, cb) {
         return this.request("NotifyRoutes", req, cb);

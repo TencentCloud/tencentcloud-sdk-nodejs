@@ -226,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusters", req, cb);
     }
     /**
+     * 创建账号
+     */
+    async CreateAccounts(req, cb) {
+        return this.request("CreateAccounts", req, cb);
+    }
+    /**
      * 本接口(ActivateInstance)用于恢复已隔离的实例访问。
      */
     async ActivateInstance(req, cb) {

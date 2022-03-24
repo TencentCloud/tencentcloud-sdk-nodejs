@@ -348,6 +348,16 @@ it("cynosdb.v20190107.CreateClusters", async function () {
     }
 })
 
+it("cynosdb.v20190107.CreateAccounts", async function () {
+    try {
+       const data = await client.CreateAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ActivateInstance", async function () {
     try {
        const data = await client.ActivateInstance({})

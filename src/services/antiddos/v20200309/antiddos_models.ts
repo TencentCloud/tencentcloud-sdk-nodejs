@@ -630,6 +630,11 @@ export interface DescribeListBGPInstancesRequest {
    * 高防包绑定状态搜索，bounding：绑定中； failed：绑定失败
    */
   FilterBoundStatus?: string
+
+  /**
+   * 实例id数组
+   */
+  FilterInstanceIdList?: Array<string>
 }
 
 /**
@@ -3631,6 +3636,12 @@ export interface BGPInstanceSpecification {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UnionPackFlag: number
+
+  /**
+      * 业务带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceBandWidth: number
 }
 
 /**

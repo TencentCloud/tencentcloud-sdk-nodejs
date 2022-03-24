@@ -86,7 +86,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyFlowLogAttribute(req: ModifyFlowLogAttributeRequest, cb?: (error: string, rep: ModifyFlowLogAttributeResponse) => void): Promise<ModifyFlowLogAttributeResponse>;
     /**
-     * 修改弹性网卡服务质量
+     * 修改弹性网卡服务质量。
      */
     ModifyNetworkInterfaceQos(req: ModifyNetworkInterfaceQosRequest, cb?: (error: string, rep: ModifyNetworkInterfaceQosResponse) => void): Promise<ModifyNetworkInterfaceQosResponse>;
     /**
@@ -762,7 +762,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAddressTemplate(req: DeleteAddressTemplateRequest, cb?: (error: string, rep: DeleteAddressTemplateResponse) => void): Promise<DeleteAddressTemplateResponse>;
     /**
-     * 路由表列表页操作增加“发布到云联网”，用于发布路由到云联网。
+     * 本接口（NotifyRoutes）用于路由表列表页操作增加“发布到云联网”，发布路由到云联网。
      */
     NotifyRoutes(req: NotifyRoutesRequest, cb?: (error: string, rep: NotifyRoutesResponse) => void): Promise<NotifyRoutesResponse>;
     /**
