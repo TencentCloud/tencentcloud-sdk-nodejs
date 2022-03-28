@@ -3052,7 +3052,7 @@ export interface EditMediaResponse {
   /**
    * 编辑视频的任务 ID，可以通过该 ID 查询编辑任务（任务类型为 EditMedia）的状态。
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4290,6 +4290,16 @@ export interface EditMediaOutputConfig {
    * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   ExpireTime?: string
+
+  /**
+   * 输出的视频信息。
+   */
+  VideoStream?: EditMediaVideoStream
+
+  /**
+   * 极速高清转码参数。
+   */
+  TEHDConfig?: EditMediaTEHDConfig
 }
 
 /**
@@ -4409,7 +4419,7 @@ export interface EditMediaRequest {
   /**
       * 编辑模板 ID，取值有 10，20，不填代表使用 10 模板。
 <li>10：拼接时，以分辨率最高的输入为基准；</li>
-<li>20：拼接时，以码率最高的输入为基准；</li>
+<li>20：拼接时，以码率最高的输入为基准。</li>
       */
   Definition?: number
 
@@ -6448,6 +6458,39 @@ export interface DomainDetailInfo {
 <li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
       */
   CreateTime: string
+}
+
+/**
+ * 视频流配置信息
+ */
+export interface EditMediaVideoStream {
+  /**
+      * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+      */
+  ResolutionAdaptive?: string
+
+  /**
+      * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率取基准分辨率；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按基准分辨率比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按基准分辨率比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+      */
+  Width?: number
+
+  /**
+      * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率取基准分辨率；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按基准分辨率比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按基准分辨率比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+      */
+  Height?: number
 }
 
 /**
@@ -13088,11 +13131,11 @@ export interface SnapshotByTimeOffsetTemplate {
   UpdateTime: string
 
   /**
-      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+      * 填充方式，当截图配置宽高参数与原始视频的宽高比不一致时，对截图的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-<li>black：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
-<li>black：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
 默认值：black 。
       */
   FillType: string
@@ -15670,7 +15713,7 @@ export interface SampleSnapshotTemplate {
   UpdateTime: string
 
   /**
-      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+      * 填充方式，当截图配置宽高参数与原始视频的宽高比不一致时，对截图的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
 <li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
@@ -16057,6 +16100,21 @@ export interface ComposeMediaOutput {
 }
 
 /**
+ * ModifyWatermarkTemplate返回参数结构体
+ */
+export interface ModifyWatermarkTemplateResponse {
+  /**
+   * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有值。
+   */
+  ImageUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 视频转拉任务信息
  */
 export interface PullUploadTask {
@@ -16195,18 +16253,13 @@ export interface DescribeAIRecognitionTemplatesRequest {
 }
 
 /**
- * ModifyWatermarkTemplate返回参数结构体
+ * 视频编辑极速高清参数配置。
  */
-export interface ModifyWatermarkTemplateResponse {
+export interface EditMediaTEHDConfig {
   /**
-   * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有值。
+   * 极速高清类型，可选值：<li>TEHD-100 表示极速高清-100;</li> <li>OFF 表示关闭极速高清。</li>不填表示 OFF。
    */
-  ImageUrl?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Type: string
 }
 
 /**

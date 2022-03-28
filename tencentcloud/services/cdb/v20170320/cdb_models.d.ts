@@ -708,11 +708,11 @@ export interface DescribeInstanceParamRecordsRequest {
       */
     InstanceId: string;
     /**
-      * 分页偏移量。
+      * 分页偏移量，默认值：0。
       */
     Offset?: number;
     /**
-      * 分页大小。
+      * 分页大小，默认值：20。
       */
     Limit?: number;
 }
@@ -1170,11 +1170,11 @@ export interface ModifyParamTemplateRequest {
       */
     TemplateId: number;
     /**
-      * 模板名称。
+      * 模板名称，长度不超过64。
       */
     Name?: string;
     /**
-      * 模板描述。
+      * 模板描述，长度不超过255。
       */
     Description?: string;
     /**
@@ -2040,11 +2040,11 @@ export interface DescribeInstanceParamRecordsResponse {
     /**
       * 符合条件的记录数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 参数修改记录。
       */
-    Items?: Array<ParamRecord>;
+    Items: Array<ParamRecord>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

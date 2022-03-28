@@ -1016,17 +1016,22 @@ export interface DescribeSafeAuthFlagResponse {
   /**
    * 登录保护设置
    */
-  LoginFlag?: LoginActionFlag
+  LoginFlag: LoginActionFlag
 
   /**
    * 敏感操作保护设置
    */
-  ActionFlag?: LoginActionFlag
+  ActionFlag: LoginActionFlag
 
   /**
    * 异地登录保护设置
    */
-  OffsiteFlag?: OffsiteFlag
+  OffsiteFlag: OffsiteFlag
+
+  /**
+   * 1: 提示7天信任设备 0: 不提示
+   */
+  PromptTrust: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -310,7 +310,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListPolicyVersions", req, cb);
     }
     /**
-     * 查询安全设置
+     * 查询用户安全设置
      */
     async DescribeSafeAuthFlag(req, cb) {
         return this.request("DescribeSafeAuthFlag", req, cb);

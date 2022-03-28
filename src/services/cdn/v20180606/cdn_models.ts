@@ -3012,6 +3012,11 @@ global：全球锁定
    * 域名所属产品，cdn/ecdn
    */
   Product: string
+
+  /**
+   * 主域名
+   */
+  ParentHost: string
 }
 
 /**
@@ -5892,6 +5897,12 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleEngine: RuleEngine
+
+  /**
+      * 主域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParentHost: string
 }
 
 /**

@@ -255,6 +255,7 @@ import {
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   MediaProcessTaskTranscodeResult,
   DomainDetailInfo,
+  EditMediaVideoStream,
   ImageProcessingTemplate,
   ImageSpriteTaskInput,
   ObjectConfigureInfoForUpdate,
@@ -582,12 +583,13 @@ import {
   HighlightSegmentItem,
   DeleteWatermarkTemplateResponse,
   ComposeMediaOutput,
+  ModifyWatermarkTemplateResponse,
   PullUploadTask,
   ProhibitedConfigureInfoForUpdate,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
   DescribeAIRecognitionTemplatesRequest,
-  ModifyWatermarkTemplateResponse,
+  EditMediaTEHDConfig,
   AiRecognitionResult,
 } from "./vod_models"
 

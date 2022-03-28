@@ -462,12 +462,12 @@ export interface QueryOpenBankPaymentOrderRequest {
   ChannelMerchantId: string
 
   /**
-   * 外部商户订单号。与ChannelOrderId二者选一。
+   * 外部商户订单号。与ChannelOrderId不能同时为空。
    */
   OutOrderId: string
 
   /**
-   * 云平台订单号。与OutOrderId二者选一。
+   * 云平台订单号。与OutOrderId不能同时为空。
    */
   ChannelOrderId: string
 

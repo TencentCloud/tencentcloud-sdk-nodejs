@@ -196,7 +196,7 @@ export declare class Client extends AbstractClient {
      */
     ListPolicyVersions(req: ListPolicyVersionsRequest, cb?: (error: string, rep: ListPolicyVersionsResponse) => void): Promise<ListPolicyVersionsResponse>;
     /**
-     * 查询安全设置
+     * 查询用户安全设置
      */
     DescribeSafeAuthFlag(req?: DescribeSafeAuthFlagRequest, cb?: (error: string, rep: DescribeSafeAuthFlagResponse) => void): Promise<DescribeSafeAuthFlagResponse>;
     /**
