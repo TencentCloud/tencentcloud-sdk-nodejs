@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PauseServerless", req, cb);
     }
     /**
+     * 修改集群名称
+     */
+    async ModifyClusterName(req, cb) {
+        return this.request("ModifyClusterName", req, cb);
+    }
+    /**
      * 本接口(DescribeInstanceDetail)用于查询实例详情。
      */
     async DescribeInstanceDetail(req, cb) {
@@ -128,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OfflineInstance(req, cb) {
         return this.request("OfflineInstance", req, cb);
+    }
+    /**
+     * 本接口(ModifyInstanceName)用于修改实例名称。
+     */
+    async ModifyInstanceName(req, cb) {
+        return this.request("ModifyInstanceName", req, cb);
     }
     /**
      * 查询实例维护时间窗

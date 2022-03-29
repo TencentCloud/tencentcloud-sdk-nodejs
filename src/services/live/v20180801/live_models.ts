@@ -765,6 +765,16 @@ export interface PushQualityData {
    * 推流参数
    */
   StreamParam: string
+
+  /**
+   * 带宽，单位Mbps。
+   */
+  Bandwidth: number
+
+  /**
+   * 流量，单位MB。
+   */
+  Flux: number
 }
 
 /**
@@ -4511,12 +4521,12 @@ export interface DescribeStreamPushInfoListRequest {
   StreamName: string
 
   /**
-   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+   * 起始时间点，北京时间，格式为yyyy-mm-dd HH:MM:SS。
    */
   StartTime: string
 
   /**
-   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，支持查询最近7天数据，建议查询时间跨度在3小时之内。
+   * 结束时间点，北京时间，格式为yyyy-mm-dd HH:MM:SS，支持查询最近7天数据，建议查询时间跨度在3小时之内。
    */
   EndTime: string
 

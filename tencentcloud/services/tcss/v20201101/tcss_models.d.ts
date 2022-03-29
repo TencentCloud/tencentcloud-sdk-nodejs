@@ -199,6 +199,11 @@ export interface CompliancePeriodTaskRule {
       * 在这天的什么时间执行，格式为：HH:mm:SS。
       */
     ExecutionTime: string;
+    /**
+      * 是否开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Enable?: boolean;
 }
 /**
  * DescribeVirusScanTimeoutSetting返回参数结构体
@@ -1220,6 +1225,16 @@ CHECK_FAILED, 检测失败
       * 定时检测规则。
       */
     PeriodRule: CompliancePeriodTaskRule;
+    /**
+      * 已开启的检查项总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenPolicyItemCount?: number;
+    /**
+      * 已忽略的检查项总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IgnoredPolicyItemCount?: number;
 }
 /**
  * 容器逃逸扫描策略开关信息

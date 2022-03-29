@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyClusterNameRequest,
   DescribeRollbackTimeRangeRequest,
   ObjectTask,
   DescribeBackupConfigRequest,
@@ -26,13 +27,16 @@ import {
   DescribeRollbackTimeRangeResponse,
   AssociateSecurityGroupsRequest,
   CreateAccountsResponse,
+  ModifyInstanceNameRequest,
   DescribeDBSecurityGroupsResponse,
   DescribeMaintainPeriodRequest,
   AccountParam,
   DescribeInstancesResponse,
   ClusterInstanceDetail,
   Account,
+  ModifyBackupConfigResponse,
   IsolateInstanceResponse,
+  ModifyInstanceNameResponse,
   PauseServerlessRequest,
   RevokeAccountPrivilegesResponse,
   CreateClustersResponse,
@@ -84,7 +88,7 @@ import {
   GrantAccountPrivilegesResponse,
   ResumeServerlessRequest,
   BillingResourceInfo,
-  ModifyBackupConfigResponse,
+  ModifyClusterNameResponse,
   DescribeInstanceSpecsRequest,
   UpgradeInstanceResponse,
   DescribeClusterParamLogsResponse,
@@ -216,6 +220,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改集群名称
+   */
+  async ModifyClusterName(
+    req: ModifyClusterNameRequest,
+    cb?: (error: string, rep: ModifyClusterNameResponse) => void
+  ): Promise<ModifyClusterNameResponse> {
+    return this.request("ModifyClusterName", req, cb)
+  }
+
+  /**
    * 本接口(DescribeInstanceDetail)用于查询实例详情。
    */
   async DescribeInstanceDetail(
@@ -303,6 +317,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OfflineInstanceResponse) => void
   ): Promise<OfflineInstanceResponse> {
     return this.request("OfflineInstance", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyInstanceName)用于修改实例名称。
+   */
+  async ModifyInstanceName(
+    req: ModifyInstanceNameRequest,
+    cb?: (error: string, rep: ModifyInstanceNameResponse) => void
+  ): Promise<ModifyInstanceNameResponse> {
+    return this.request("ModifyInstanceName", req, cb)
   }
 
   /**

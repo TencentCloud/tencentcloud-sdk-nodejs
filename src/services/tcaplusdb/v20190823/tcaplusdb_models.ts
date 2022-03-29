@@ -1390,6 +1390,24 @@ export interface ClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KafkaInfo: KafkaInfo
+
+  /**
+      * 集群Txh备份文件多少天后过期删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TxhBackupExpireDay: number
+
+  /**
+      * 集群Ulog备份文件多少天后过期删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UlogBackupExpireDay: number
+
+  /**
+      * 集群Ulog备份文件过期策略是否为只读， 0： UlogBackupExpire是只读，不可修改， 1： UlogBackupExpire可以修改（当前业务存在Svrid第二段等于clusterid的机器）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsReadOnlyUlogBackupExpireDay: number
 }
 
 /**
@@ -2354,6 +2372,12 @@ export interface TableInfoNew {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DbClusterInfoStruct: string
+
+  /**
+      * 表格Txh备份文件多少天后过期删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TxhBackupExpireDay: number
 }
 
 /**
@@ -3155,17 +3179,17 @@ export interface DescribeApplicationsRequest {
   ClusterId?: string
 
   /**
-   * 分页
+   * 分页，限制当前返回多少条记录，大于等于10
    */
   Limit?: number
 
   /**
-   * 分页
+   * 分页，从多少条数据开始返回
    */
   Offset?: number
 
   /**
-   * 申请单状态，用于过滤
+   * 申请单状态，用于过滤，0-待审核 1-已经审核并提交任务 2-已驳回
    */
   CensorStatus?: number
 
@@ -3185,7 +3209,7 @@ export interface DescribeApplicationsRequest {
   Applicant?: string
 
   /**
-   * 申请类型，用于过滤
+   * 申请类型，用于过滤，0加表 1删除表 2清理表 3修改表 4表重建 5存储层扩缩容 6接入层扩缩容 7复制表数据 8key回档
    */
   ApplyType?: number
 }

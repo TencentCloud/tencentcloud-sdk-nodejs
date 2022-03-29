@@ -139,6 +139,11 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ConfigInfoVisible: boolean;
+    /**
+      * 引擎实例控制台默认密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsoleDefaultPwd: string;
 }
 /**
  * DescribeSREInstanceAccessAddress返回参数结构体
@@ -311,6 +316,11 @@ export interface BoundK8SInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BoundClusterType: string;
+    /**
+      * 服务同步模式，all为全量同步，demand为按需同步
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SyncMode?: string;
 }
 /**
  * DescribeSREInstanceAccessAddress请求参数结构体
@@ -353,4 +363,8 @@ export interface ServiceGovernanceInfo {
       * 该实例支持的功能，鉴权就是 Auth
       */
     Features?: Array<string>;
+    /**
+      * 主账户名默认为 polaris，该值为主账户的默认密码
+      */
+    MainPassword?: string;
 }

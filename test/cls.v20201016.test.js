@@ -108,6 +108,16 @@ it("cls.v20201016.DescribeExports", async function () {
     }
 })
 
+it("cls.v20201016.ModifyIndex", async function () {
+    try {
+       const data = await client.ModifyIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyConfigExtra", async function () {
     try {
        const data = await client.ModifyConfigExtra({})
@@ -348,9 +358,9 @@ it("cls.v20201016.DeleteAlarmNotice", async function () {
     }
 })
 
-it("cls.v20201016.ModifyIndex", async function () {
+it("cls.v20201016.DescribeLogHistogram", async function () {
     try {
-       const data = await client.ModifyIndex({})
+       const data = await client.DescribeLogHistogram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

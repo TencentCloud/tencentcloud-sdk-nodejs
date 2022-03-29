@@ -1378,6 +1378,11 @@ export interface AssociateNatGatewayAddressRequest {
    * 需要申请公网IP带宽大小（单位Mbps），默认为当前用户类型所能使用的最大值。
    */
   PublicIpAddressesBandwidthOut?: number
+
+  /**
+   * 公网IP是否强制与NAT网关来自同可用区，true表示需要与NAT网关同可用区；false表示可与NAT网关不是同一个可用区。此参数只有当参数Zone存在时才能生效。
+   */
+  PublicIpFromSameZone?: boolean
 }
 
 /**
@@ -5136,7 +5141,7 @@ export interface InquiryPriceCreateVpnGatewayResponse {
   /**
    * 商品价格。
    */
-  Price?: Price
+  Price: Price
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10019,6 +10024,11 @@ export interface CreateNatGatewayRequest {
    * 需要申请公网IP带宽大小（单位Mbps），默认为当前用户类型所能使用的最大值。
    */
   PublicIpAddressesBandwidthOut?: number
+
+  /**
+   * 公网IP是否强制与NAT网关来自同可用区，true表示需要与NAT网关同可用区；false表示可与NAT网关不是同一个可用区。此参数只有当参数Zone存在时才能生效。
+   */
+  PublicIpFromSameZone?: boolean
 }
 
 /**
@@ -13329,6 +13339,16 @@ export interface InquiryPriceCreateVpnGatewayRequest {
    * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
+
+  /**
+   * SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100；单位：个。
+   */
+  MaxConnection?: number
+
+  /**
+   * 查询的VPN类型，支持IPSEC和SSL两种类型，为SSL类型时，MaxConnection参数必传。
+   */
+  Type?: string
 }
 
 /**

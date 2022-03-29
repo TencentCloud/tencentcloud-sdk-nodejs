@@ -787,7 +787,7 @@ export interface UpdateEmailTemplateRequest {
   TemplateID: number
 
   /**
-   * 模版名字
+   * 模板名字
    */
   TemplateName: string
 }
@@ -1234,6 +1234,11 @@ export interface CreateReceiverDetailRequest {
  * CreateEmailTemplate返回参数结构体
  */
 export interface CreateEmailTemplateResponse {
+  /**
+   * 模板id
+   */
+  TemplateID: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

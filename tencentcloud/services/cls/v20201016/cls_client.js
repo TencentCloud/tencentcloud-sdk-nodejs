@@ -82,6 +82,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExports", req, cb);
     }
     /**
+     * 本接口用于修改索引配置
+
+     */
+    async ModifyIndex(req, cb) {
+        return this.request("ModifyIndex", req, cb);
+    }
+    /**
      * 本接口用于修改特殊采集配置任务
      */
     async ModifyConfigExtra(req, cb) {
@@ -226,11 +233,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAlarmNotice", req, cb);
     }
     /**
-     * 本接口用于修改索引配置
-
+     * 本接口用于构建直方图
      */
-    async ModifyIndex(req, cb) {
-        return this.request("ModifyIndex", req, cb);
+    async DescribeLogHistogram(req, cb) {
+        return this.request("DescribeLogHistogram", req, cb);
     }
     /**
      * 该接口用于修改通知渠道组

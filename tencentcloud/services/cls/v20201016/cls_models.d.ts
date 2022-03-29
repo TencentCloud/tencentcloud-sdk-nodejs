@@ -132,6 +132,31 @@ export interface DeleteAlarmNoticeResponse {
     RequestId?: string;
 }
 /**
+ * DescribeLogHistogram请求参数结构体
+ */
+export interface DescribeLogHistogramRequest {
+    /**
+      * 要查询的日志主题ID
+      */
+    TopicId: string;
+    /**
+      * 要查询的日志的起始时间，Unix时间戳，单位ms
+      */
+    From: number;
+    /**
+      * 要查询的日志的结束时间，Unix时间戳，单位ms
+      */
+    To: number;
+    /**
+      * 查询语句
+      */
+    Query: string;
+    /**
+      * 时间间隔: 单位ms
+      */
+    Interval?: number;
+}
+/**
  * DescribeLogContext请求参数结构体
  */
 export interface DescribeLogContextRequest {
@@ -1500,6 +1525,27 @@ export interface MachineGroupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServiceLogging: boolean;
+}
+/**
+ * DescribeLogHistogram返回参数结构体
+ */
+export interface DescribeLogHistogramResponse {
+    /**
+      * 统计周期： 单位ms
+      */
+    Interval: number;
+    /**
+      * 命中关键字的日志总条数
+      */
+    TotalCount: number;
+    /**
+      * 周期内统计结果详情
+      */
+    HistogramInfos: Array<HistogramInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 元字段索引配置
@@ -3332,6 +3378,19 @@ export interface DescribeIndexResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 直方图详细信息
+ */
+export interface HistogramInfo {
+    /**
+      * 统计周期内的日志条数
+      */
+    Count: number;
+    /**
+      * 按 period 取整后的 unix timestamp： 单位毫秒
+      */
+    BTime: number;
 }
 /**
  * DescribeMachineGroupConfigs请求参数结构体

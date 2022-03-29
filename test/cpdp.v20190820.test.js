@@ -878,6 +878,16 @@ it("cpdp.v20190820.DownloadOrgFile", async function () {
     }
 })
 
+it("cpdp.v20190820.GetBillDownloadUrl", async function () {
+    try {
+       const data = await client.GetBillDownloadUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryAgentTaxPaymentBatch", async function () {
     try {
        const data = await client.QueryAgentTaxPaymentBatch({})

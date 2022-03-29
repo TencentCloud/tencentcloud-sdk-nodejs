@@ -548,6 +548,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DownloadOrgFile", req, cb);
     }
     /**
+     * 调用该接口返回对账单下载地址，对账单下载URL通过GET方式访问，返回zip包，解压后为csv格式文件。文件首行如下：
+订单号,订单归属日期,机构编号,订单描述,交易类型,订单状态,支付场景,原始金额,折扣金额,实际交易金额,支付渠道优惠金额,抹零金额,币种,下单时间,付款成功时间,商户编号,门店编号,付款方式编号,付款方式名称,商户手续费T1,商户扣率,是否信用卡交易,原始订单号,用户账号,外部订单号,订单备注
+     */
+    async GetBillDownloadUrl(req, cb) {
+        return this.request("GetBillDownloadUrl", req, cb);
+    }
+    /**
      * 直播平台-查询批次信息
      */
     async QueryAgentTaxPaymentBatch(req, cb) {

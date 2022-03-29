@@ -23,6 +23,7 @@ import {
   AlarmInfo,
   LogInfo,
   DeleteAlarmNoticeResponse,
+  DescribeLogHistogramRequest,
   DescribeLogContextRequest,
   DeleteShipperRequest,
   ModifyTopicRequest,
@@ -86,6 +87,7 @@ import {
   SplitPartitionRequest,
   DescribeMachineGroupConfigsResponse,
   MachineGroupInfo,
+  DescribeLogHistogramResponse,
   RuleTagInfo,
   CreateIndexRequest,
   DeleteConsumerResponse,
@@ -167,6 +169,7 @@ import {
   DescribeConfigExtrasRequest,
   CreateAlarmNoticeRequest,
   DescribeIndexResponse,
+  HistogramInfo,
   DescribeMachineGroupConfigsRequest,
   ModifyConfigExtraRequest,
   ModifyLogsetRequest,
@@ -278,6 +281,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExportsResponse) => void
   ): Promise<DescribeExportsResponse> {
     return this.request("DescribeExports", req, cb)
+  }
+
+  /**
+     * 本接口用于修改索引配置
+
+     */
+  async ModifyIndex(
+    req: ModifyIndexRequest,
+    cb?: (error: string, rep: ModifyIndexResponse) => void
+  ): Promise<ModifyIndexResponse> {
+    return this.request("ModifyIndex", req, cb)
   }
 
   /**
@@ -521,14 +535,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口用于修改索引配置
-
-     */
-  async ModifyIndex(
-    req: ModifyIndexRequest,
-    cb?: (error: string, rep: ModifyIndexResponse) => void
-  ): Promise<ModifyIndexResponse> {
-    return this.request("ModifyIndex", req, cb)
+   * 本接口用于构建直方图
+   */
+  async DescribeLogHistogram(
+    req: DescribeLogHistogramRequest,
+    cb?: (error: string, rep: DescribeLogHistogramResponse) => void
+  ): Promise<DescribeLogHistogramResponse> {
+    return this.request("DescribeLogHistogram", req, cb)
   }
 
   /**

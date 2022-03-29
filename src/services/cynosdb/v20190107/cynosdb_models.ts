@@ -16,6 +16,21 @@
  */
 
 /**
+ * ModifyClusterName请求参数结构体
+ */
+export interface ModifyClusterNameRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 集群名
+   */
+  ClusterName: string
+}
+
+/**
  * DescribeRollbackTimeRange请求参数结构体
  */
 export interface DescribeRollbackTimeRangeRequest {
@@ -167,6 +182,21 @@ export interface CreateAccountsResponse {
 }
 
 /**
+ * ModifyInstanceName请求参数结构体
+ */
+export interface ModifyInstanceNameRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+}
+
+/**
  * DescribeDBSecurityGroups返回参数结构体
  */
 export interface DescribeDBSecurityGroupsResponse {
@@ -302,6 +332,16 @@ export interface Account {
 }
 
 /**
+ * ModifyBackupConfig返回参数结构体
+ */
+export interface ModifyBackupConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IsolateInstance返回参数结构体
  */
 export interface IsolateInstanceResponse {
@@ -316,6 +356,16 @@ export interface IsolateInstanceResponse {
       */
   DealNames: Array<string>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceName返回参数结构体
+ */
+export interface ModifyInstanceNameResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1322,7 +1372,7 @@ export interface CreateClustersRequest {
   PayMode?: number
 
   /**
-   * 购买个数，目前只支持传1（不传默认为1）
+   * 购买集群数，可选值范围[1,50]，默认为1
    */
   Count?: number
 
@@ -1805,9 +1855,9 @@ export interface BillingResourceInfo {
 }
 
 /**
- * ModifyBackupConfig返回参数结构体
+ * ModifyClusterName返回参数结构体
  */
-export interface ModifyBackupConfigResponse {
+export interface ModifyClusterNameResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

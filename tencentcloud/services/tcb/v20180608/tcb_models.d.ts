@@ -1550,6 +1550,10 @@ Activity：活动来源
       * 子网列表
       */
     SubNetIds?: Array<string>;
+    /**
+      * 是否打开云调用
+      */
+    IsOpenCloudInvoke?: boolean;
 }
 /**
  * ModifyCloudBaseRunServerFlowConf请求参数结构体

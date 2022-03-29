@@ -98,6 +98,16 @@ it("cynosdb.v20190107.PauseServerless", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyClusterName", async function () {
+    try {
+       const data = await client.ModifyClusterName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeInstanceDetail", async function () {
     try {
        const data = await client.DescribeInstanceDetail({})
@@ -181,6 +191,16 @@ it("cynosdb.v20190107.ModifyAccountParams", async function () {
 it("cynosdb.v20190107.OfflineInstance", async function () {
     try {
        const data = await client.OfflineInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyInstanceName", async function () {
+    try {
+       const data = await client.ModifyInstanceName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

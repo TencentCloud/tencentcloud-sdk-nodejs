@@ -8202,6 +8202,26 @@ __其他__: 见附录-错误码表
 }
 
 /**
+ * GetBillDownloadUrl请求参数结构体
+ */
+export interface GetBillDownloadUrlRequest {
+  /**
+   * 收单系统分配的开放ID
+   */
+  OpenId: string
+
+  /**
+   * 收单系统分配的密钥
+   */
+  OpenKey: string
+
+  /**
+   * 清算日期（YYYYMMDD，今天传昨天的日期，每日下午1点后出前一日的账单）
+   */
+  Day: string
+}
+
+/**
  * CreatePayMerchant返回参数结构体
  */
 export interface CreatePayMerchantResponse {
@@ -12345,6 +12365,17 @@ export interface DistributeRemoveReceiverRequest {
 }
 
 /**
+ * 机构账单文件下载地址响应对象
+ */
+export interface BillDownloadUrlResult {
+  /**
+      * 对账单下载地址。GET方式访问，返回zip包，解压后为csv格式文件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DownloadUrl: string
+}
+
+/**
  * DeleteAgentTaxPaymentInfos请求参数结构体
  */
 export interface DeleteAgentTaxPaymentInfosRequest {
@@ -13635,6 +13666,33 @@ export interface QueryCommonTransferRechargeRequest {
    * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
    */
   Profile?: string
+}
+
+/**
+ * GetBillDownloadUrl返回参数结构体
+ */
+export interface GetBillDownloadUrlResponse {
+  /**
+   * 业务系统返回码
+   */
+  ErrCode: string
+
+  /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrMessage: string
+
+  /**
+      * 账单文件下载地址响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: BillDownloadUrlResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
