@@ -44,6 +44,7 @@ import {
   ModifyIngressRequest,
   DescribeApplicationPodsRequest,
   CreateApplicationRequest,
+  EnablePrometheusConf,
   DescribeRelatedIngressesResponse,
   DescribeIngressesRequest,
   DescribeRunPodPage,

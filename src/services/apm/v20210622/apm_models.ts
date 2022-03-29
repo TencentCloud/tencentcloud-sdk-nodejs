@@ -352,6 +352,11 @@ export interface DescribeApmInstancesRequest {
    * 过滤实例ID
    */
   InstanceIds?: Array<string>
+
+  /**
+   * 是否查询官方demo实例
+   */
+  DemoInstanceFlag?: number
 }
 
 /**

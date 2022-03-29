@@ -384,17 +384,17 @@ export interface DescribeDBResourceUsageDetailsResponse {
     /**
       * 主节点资源使用情况监控数据
       */
-    Master?: ResourceUsageMonitorSet;
+    Master: ResourceUsageMonitorSet;
     /**
       * 备机1资源使用情况监控数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Slave1?: ResourceUsageMonitorSet;
+    Slave1: ResourceUsageMonitorSet;
     /**
       * 备机2资源使用情况监控数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Slave2?: ResourceUsageMonitorSet;
+    Slave2: ResourceUsageMonitorSet;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -821,11 +821,11 @@ export interface DescribeOrdersResponse {
     /**
       * 返回的订单数量。
       */
-    TotalCount?: Array<number>;
+    TotalCount: Array<number>;
     /**
       * 订单信息列表。
       */
-    Deals?: Array<Deal>;
+    Deals: Array<Deal>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2516,7 +2516,7 @@ export interface RenewDBInstanceResponse {
       * 长订单号。可以据此调用 DescribeOrders
  查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
       */
-    DealName?: string;
+    DealName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2631,27 +2631,27 @@ export interface DescribeSqlLogsResponse {
     /**
       * 当前消息队列中的sql日志条目数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 消息队列中的sql日志起始偏移。
       */
-    StartOffset?: number;
+    StartOffset: number;
     /**
       * 消息队列中的sql日志结束偏移。
       */
-    EndOffset?: number;
+    EndOffset: number;
     /**
       * 返回的第一条sql日志的偏移。
       */
-    Offset?: number;
+    Offset: number;
     /**
       * 返回的sql日志数量。
       */
-    Count?: number;
+    Count: number;
     /**
       * Sql日志列表。
       */
-    SqlItems?: Array<SqlLogItem>;
+    SqlItems: Array<SqlLogItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2747,43 +2747,43 @@ export interface DescribeDBPerformanceResponse {
     /**
       * 慢查询数
       */
-    LongQuery?: MonitorData;
+    LongQuery: MonitorData;
     /**
       * 查询操作数SELECT
       */
-    SelectTotal?: MonitorData;
+    SelectTotal: MonitorData;
     /**
       * 更新操作数UPDATE
       */
-    UpdateTotal?: MonitorData;
+    UpdateTotal: MonitorData;
     /**
       * 插入操作数INSERT
       */
-    InsertTotal?: MonitorData;
+    InsertTotal: MonitorData;
     /**
       * 删除操作数DELETE
       */
-    DeleteTotal?: MonitorData;
+    DeleteTotal: MonitorData;
     /**
       * 缓存命中率
       */
-    MemHitRate?: MonitorData;
+    MemHitRate: MonitorData;
     /**
       * 磁盘每秒IO次数
       */
-    DiskIops?: MonitorData;
+    DiskIops: MonitorData;
     /**
       * 活跃连接数
       */
-    ConnActive?: MonitorData;
+    ConnActive: MonitorData;
     /**
       * 是否发生主备切换，1为发生，0否
       */
-    IsMasterSwitched?: MonitorData;
+    IsMasterSwitched: MonitorData;
     /**
       * 主备延迟
       */
-    SlaveDelay?: MonitorData;
+    SlaveDelay: MonitorData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2968,19 +2968,19 @@ export interface DescribeDBResourceUsageResponse {
     /**
       * binlog日志磁盘可用空间,单位GB
       */
-    BinlogDiskAvailable?: MonitorData;
+    BinlogDiskAvailable: MonitorData;
     /**
       * 磁盘可用空间,单位GB
       */
-    DataDiskAvailable?: MonitorData;
+    DataDiskAvailable: MonitorData;
     /**
       * CPU利用率
       */
-    CpuUsageRate?: MonitorData;
+    CpuUsageRate: MonitorData;
     /**
       * 内存可用空间,单位GB
       */
-    MemAvailable?: MonitorData;
+    MemAvailable: MonitorData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3237,17 +3237,17 @@ export interface DescribeDBPerformanceDetailsResponse {
     /**
       * 主节点性能监控数据
       */
-    Master?: PerformanceMonitorSet;
+    Master: PerformanceMonitorSet;
     /**
       * 备机1性能监控数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Slave1?: PerformanceMonitorSet;
+    Slave1: PerformanceMonitorSet;
     /**
       * 备机2性能监控数据，如果实例是一主一从，则没有该字段
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Slave2?: PerformanceMonitorSet;
+    Slave2: PerformanceMonitorSet;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

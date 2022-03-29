@@ -68,6 +68,16 @@ export interface ClusterOverview {
    * 管控节点概览。
    */
   ManagerNodeSet: Array<ManagerNodeOverview>
+
+  /**
+   * 登录节点概览。
+   */
+  LoginNodeSet: Array<LoginNodeOverview>
+
+  /**
+   * 登录节点数量。
+   */
+  LoginNodeCount: number
 }
 
 /**
@@ -108,6 +118,26 @@ export interface DeleteClusterResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
+ */
+export interface InternetAccessible {
+  /**
+      * 网络计费类型。取值范围：
+BANDWIDTH_PREPAID：预付费按带宽结算
+TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
+BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
+BANDWIDTH_PACKAGE：带宽包用户
+默认取值：非带宽包用户默认与子机付费类型保持一致。
+      */
+  InternetChargeType?: string
+
+  /**
+   * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
+   */
+  InternetMaxBandwidthOut?: number
 }
 
 /**
@@ -434,23 +464,13 @@ export interface StorageOption {
 }
 
 /**
- * 描述了实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等
+ * 登录节点概览。
  */
-export interface InternetAccessible {
+export interface LoginNodeOverview {
   /**
-      * 网络计费类型。取值范围：
-BANDWIDTH_PREPAID：预付费按带宽结算
-TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费
-BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
-BANDWIDTH_PACKAGE：带宽包用户
-默认取值：非带宽包用户默认与子机付费类型保持一致。
-      */
-  InternetChargeType?: string
-
-  /**
-   * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见购买网络带宽。
+   * 登录节点ID。
    */
-  InternetMaxBandwidthOut?: number
+  NodeId: string
 }
 
 /**

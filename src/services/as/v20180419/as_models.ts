@@ -2331,6 +2331,12 @@ export interface DataDisk {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeleteWithInstance?: boolean
+
+  /**
+      * 数据盘是否加密。取值范围：<br><li>TRUE：加密<br><li>FALSE：不加密
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Encrypt?: boolean
 }
 
 /**

@@ -715,12 +715,12 @@ export interface DescribeOrdersResponse {
   /**
    * 返回的订单数量。
    */
-  TotalCount?: Array<number>
+  TotalCount: Array<number>
 
   /**
    * 订单信息列表。
    */
-  Deals?: Array<Deal>
+  Deals: Array<Deal>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2291,7 +2291,7 @@ export interface RenewDCDBInstanceResponse {
       * 长订单号。可以据此调用 DescribeOrders
  查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
       */
-  DealName?: string
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2949,32 +2949,32 @@ export interface DescribeSqlLogsResponse {
   /**
    * 当前消息队列中的sql日志条目数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 消息队列中的sql日志起始偏移。
    */
-  StartOffset?: number
+  StartOffset: number
 
   /**
    * 消息队列中的sql日志结束偏移。
    */
-  EndOffset?: number
+  EndOffset: number
 
   /**
    * 返回的第一条sql日志的偏移。
    */
-  Offset?: number
+  Offset: number
 
   /**
    * 返回的sql日志数量。
    */
-  Count?: number
+  Count: number
 
   /**
    * Sql日志列表。
    */
-  SqlItems?: Array<SqlLogItem>
+  SqlItems: Array<SqlLogItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

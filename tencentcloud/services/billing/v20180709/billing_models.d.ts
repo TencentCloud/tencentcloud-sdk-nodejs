@@ -1723,6 +1723,10 @@ export interface DescribeDealsByCondRequest {
       * 大订单号
       */
     BigDealId?: string;
+    /**
+      * 资源id
+      */
+    ResourceId?: string;
 }
 /**
  * DescribeBillResourceSummary请求参数结构体
@@ -2258,6 +2262,11 @@ postMoveIn 按量计费迁入资源
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubProductName: string;
+    /**
+      * 订单对应的资源id, 查询参数Limit超过200，将返回null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId: Array<string>;
 }
 /**
  * DescribeCostDetail请求参数结构体
@@ -2330,11 +2339,11 @@ export interface DescribeDealsByCondResponse {
     /**
       * 订单列表
       */
-    Deals?: Array<Deal>;
+    Deals: Array<Deal>;
     /**
       * 订单总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

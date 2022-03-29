@@ -1761,7 +1761,7 @@ export interface InitDBInstancesResponse {
   /**
    * 异步任务的请求ID数组，可使用此ID查询异步任务的执行结果
    */
-  AsyncRequestIds?: Array<string>
+  AsyncRequestIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6119,6 +6119,11 @@ export interface DescribeAuditPoliciesRequest {
 注意，参数 RuleId，InstanceId，PolicyId，PolicyName 必须至少传一个。
       */
   RuleId?: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
 }
 
 /**
@@ -7193,13 +7198,13 @@ export interface DescribeAuditPoliciesResponse {
   /**
    * 符合条件的审计策略个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 审计策略详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Items?: Array<AuditPolicy>
+  Items: Array<AuditPolicy>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

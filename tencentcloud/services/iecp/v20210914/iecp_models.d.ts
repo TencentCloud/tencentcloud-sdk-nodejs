@@ -658,7 +658,7 @@ export interface DescribeNodeUnitTemplateOnNodeGroupResponse {
  */
 export interface CreateUserTokenRequest {
     /**
-      * 无
+      * token过期时间，有效值是1~300秒
       */
     Second?: number;
 }

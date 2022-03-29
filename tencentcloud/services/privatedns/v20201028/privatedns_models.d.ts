@@ -75,7 +75,7 @@ export interface DescribePrivateZoneRecordListRequest {
       */
     Offset?: number;
     /**
-      * 分页限制数目， 最大100，默认20
+      * 分页限制数目， 最大200，默认20
       */
     Limit?: number;
 }
@@ -810,6 +810,11 @@ export interface PrivateZone {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AccountVpcSet: Array<AccountVpcInfoOutput>;
+    /**
+      * 是否自定义TLD
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsCustomTld: boolean;
 }
 /**
  * CreatePrivateZoneRecord请求参数结构体

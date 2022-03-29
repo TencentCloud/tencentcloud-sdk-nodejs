@@ -14,6 +14,10 @@ export interface MountedSettingConf {
       * 配置内容
       */
     Data?: Array<Pair>;
+    /**
+      * 加密配置名称
+      */
+    SecretDataName?: string;
 }
 /**
  * RestartApplicationPod返回参数结构体
@@ -70,6 +74,14 @@ export interface CreateResourceRequest {
       * 来源渠道
       */
     SourceChannel?: number;
+    /**
+      * 资源来源，目前支持：existing，已有资源；creating，自动创建
+      */
+    ResourceFrom?: string;
+    /**
+      * 设置 resource 的额外配置
+      */
+    ResourceConfig?: string;
 }
 /**
  * ResumeDeployApplication返回参数结构体
@@ -651,6 +663,10 @@ export interface DeployApplicationRequest {
 - TENCENTOS
       */
     OsFlavour?: string;
+    /**
+      * 是否开启prometheus 业务指标监控
+      */
+    EnablePrometheusConf?: EnablePrometheusConf;
 }
 /**
  * Ingress 配置
@@ -706,6 +722,13 @@ export interface IngressInfo {
       * 是否混合 https，默认 false，可选值 true 代表有 https 协议监听
       */
     Mixed?: boolean;
+    /**
+      * 重定向模式，可选值：
+- AUTO（自动重定向http到https）
+- NONE（不使用重定向）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RewriteType?: string;
 }
 /**
  * ModifyIngress返回参数结构体
@@ -837,9 +860,22 @@ export interface CreateApplicationRequest {
       */
     DeployMode?: string;
     /**
-      * 是否启用调用链功能
+      * 是否开启 Java 应用的 APM 自动上报功能，1 表示启用；0 表示关闭
       */
     EnableTracing?: number;
+}
+/**
+ * 开启prometheus监控配置
+ */
+export interface EnablePrometheusConf {
+    /**
+      * 应用开放的监听端口
+      */
+    Port?: number;
+    /**
+      * 业务指标暴露的url path
+      */
+    Path?: string;
 }
 /**
  * DescribeRelatedIngresses返回参数结构体
@@ -1600,7 +1636,7 @@ export interface DeployStrategyConf {
       */
     BetaBatchNum?: number;
     /**
-      * 分批策略：0-全自动，1-全手动，2-beta分批，beta批一定是手动的
+      * 分批策略：0-全自动，1-全手动，2-beta分批，beta批一定是手动的，3-首次发布
       */
     DeployStrategyType?: number;
     /**
@@ -1867,4 +1903,9 @@ export interface Pair {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Config?: string;
+    /**
+      * 加密配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Secret?: string;
 }

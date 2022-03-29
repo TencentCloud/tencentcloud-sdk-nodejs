@@ -355,7 +355,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建新的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   * 创建新的投递规则，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
    */
   async CreateShipper(
     req: CreateShipperRequest,
