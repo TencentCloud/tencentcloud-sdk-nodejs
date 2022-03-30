@@ -20,45 +20,38 @@ import { ClientConfig } from "../../../common/interface"
 import {
   LexicalAnalysisResponse,
   SentenceEmbeddingRequest,
-  DescribeTripleRequest,
   WordSimilarityRequest,
   SearchWordItemsResponse,
   DpToken,
   TextSimilarityResponse,
   WordEmbeddingRequest,
   ChatBotResponse,
-  KeywordsExtractionResponse,
   AutoSummarizationRequest,
   ChatBotRequest,
-  DescribeRelationRequest,
+  TextClassificationResponse,
   KeywordsExtractionRequest,
   DictInfo,
-  DescribeEntityResponse,
-  WordItem,
+  TextCorrectionRequest,
   ClassificationResult,
   TextCorrectionProResponse,
-  DescribeEntityRequest,
   Keyword,
   TextSimilarityProRequest,
   UpdateDictResponse,
   DescribeDictsRequest,
-  DescribeRelationResponse,
+  WordSimilarityResponse,
   SearchResult,
   CreateWordItemsRequest,
-  TextCorrectionRequest,
+  WordItem,
   DeleteWordItemsResponse,
   SentenceEmbeddingResponse,
   UpdateDictRequest,
-  TextClassificationResponse,
   DeleteDictResponse,
   DescribeWordItemsRequest,
-  SearchWordItemsRequest,
   TextClassificationRequest,
   CreateDictResponse,
   TextSimilarityRequest,
   AutoSummarizationResponse,
   WordEmbeddingResponse,
-  DescribeTripleResponse,
   DescribeWordItemsResponse,
   SimilarWordsRequest,
   DescribeDictRequest,
@@ -74,17 +67,14 @@ import {
   DeleteDictRequest,
   NerToken,
   SimilarWordsResponse,
-  EntityRelationObject,
   DependencyParsingResponse,
   Similarity,
   CCIToken,
   LexicalAnalysisRequest,
   CreateWordItemsResponse,
   SentimentAnalysisRequest,
-  EntityRelationSubject,
-  EntityRelationContent,
-  WordSimilarityResponse,
-  TripleContent,
+  SearchWordItemsRequest,
+  KeywordsExtractionResponse,
   CreateDictRequest,
 } from "./nlp_models"
 
@@ -105,16 +95,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDictResponse) => void
   ): Promise<DescribeDictResponse> {
     return this.request("DescribeDict", req, cb)
-  }
-
-  /**
-   * 此接口正在维护升级，后续上线另行通知。
-   */
-  async DescribeEntity(
-    req: DescribeEntityRequest,
-    cb?: (error: string, rep: DescribeEntityResponse) => void
-  ): Promise<DescribeEntityResponse> {
-    return this.request("DescribeEntity", req, cb)
   }
 
   /**
@@ -193,16 +173,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     cb?: (error: string, rep: CreateDictResponse) => void
   ): Promise<CreateDictResponse> {
     return this.request("CreateDict", req, cb)
-  }
-
-  /**
-   * 此接口正在维护升级，后续上线另行通知。
-   */
-  async DescribeRelation(
-    req: DescribeRelationRequest,
-    cb?: (error: string, rep: DescribeRelationResponse) => void
-  ): Promise<DescribeRelationResponse> {
-    return this.request("DescribeRelation", req, cb)
   }
 
   /**
@@ -346,16 +316,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     cb?: (error: string, rep: LexicalAnalysisResponse) => void
   ): Promise<LexicalAnalysisResponse> {
     return this.request("LexicalAnalysis", req, cb)
-  }
-
-  /**
-   * 此接口正在维护升级，后续上线另行通知。
-   */
-  async DescribeTriple(
-    req: DescribeTripleRequest,
-    cb?: (error: string, rep: DescribeTripleResponse) => void
-  ): Promise<DescribeTripleResponse> {
-    return this.request("DescribeTriple", req, cb)
   }
 
   /**

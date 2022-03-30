@@ -468,9 +468,14 @@ export interface DescribeAgentPayDealsV2Request {
   OwnerUins?: Array<string>
 
   /**
-   * 订单号列表
+   * 子订单号列表
    */
   DealNames?: Array<string>
+
+  /**
+   * 大订单号列表
+   */
+  BigDealIds?: Array<string>
 }
 
 /**
@@ -949,9 +954,14 @@ export interface DescribeAgentSelfPayDealsV2Request {
   Status?: number
 
   /**
-   * 订单号列表
+   * 子订单号列表
    */
   DealNames?: Array<string>
+
+  /**
+   * 大订单号列表
+   */
+  BigDealIds?: Array<string>
 }
 
 /**
@@ -1177,9 +1187,14 @@ export interface DescribeAgentDealsByCacheRequest {
   OwnerUins?: Array<string>
 
   /**
-   * 订单号列表
+   * 子订单号列表
    */
   DealNames?: Array<string>
+
+  /**
+   * 大订单号列表
+   */
+  BigDealIds?: Array<string>
 
   /**
    * 支付方式，0：自付；1：代付

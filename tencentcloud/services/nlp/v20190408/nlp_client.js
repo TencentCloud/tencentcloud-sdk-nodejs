@@ -34,12 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDict", req, cb);
     }
     /**
-     * 此接口正在维护升级，后续上线另行通知。
-     */
-    async DescribeEntity(req, cb) {
-        return this.request("DescribeEntity", req, cb);
-    }
-    /**
      * 查询指定自定义词库中的词条是否存在。
      */
     async SearchWordItems(req, cb) {
@@ -88,12 +82,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
      */
     async CreateDict(req, cb) {
         return this.request("CreateDict", req, cb);
-    }
-    /**
-     * 此接口正在维护升级，后续上线另行通知。
-     */
-    async DescribeRelation(req, cb) {
-        return this.request("DescribeRelation", req, cb);
     }
     /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
@@ -193,12 +181,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
      */
     async LexicalAnalysis(req, cb) {
         return this.request("LexicalAnalysis", req, cb);
-    }
-    /**
-     * 此接口正在维护升级，后续上线另行通知。
-     */
-    async DescribeTriple(req, cb) {
-        return this.request("DescribeTriple", req, cb);
     }
     /**
      * 基于关键词提取平台，通过对文本内容进行深度分析，提取出文本内容中的关键信息，为用户实现诸如新闻内容关键词自动提取、评论关键词提取等提供基础服务。

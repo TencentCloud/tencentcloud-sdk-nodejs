@@ -188,6 +188,16 @@ it("cat.v20180409.GetDailyAvailRatio", async function () {
     }
 })
 
+it("cat.v20180409.DescribeProbeMetricData", async function () {
+    try {
+       const data = await client.DescribeProbeMetricData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cat.v20180409.ResumeProbeTask", async function () {
     try {
        const data = await client.ResumeProbeTask({})

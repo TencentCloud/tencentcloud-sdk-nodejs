@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { LexicalAnalysisResponse, SentenceEmbeddingRequest, DescribeTripleRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, KeywordsExtractionResponse, AutoSummarizationRequest, ChatBotRequest, DescribeRelationRequest, KeywordsExtractionRequest, DescribeEntityResponse, TextCorrectionProResponse, DescribeEntityRequest, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, DescribeRelationResponse, CreateWordItemsRequest, TextCorrectionRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, TextClassificationResponse, DeleteDictResponse, DescribeWordItemsRequest, SearchWordItemsRequest, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeTripleResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, SentimentAnalysisResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionProRequest, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SimilarWordsResponse, DependencyParsingResponse, LexicalAnalysisRequest, CreateWordItemsResponse, SentimentAnalysisRequest, WordSimilarityResponse, CreateDictRequest } from "./nlp_models";
+import { LexicalAnalysisResponse, SentenceEmbeddingRequest, WordSimilarityRequest, SearchWordItemsResponse, TextSimilarityResponse, WordEmbeddingRequest, ChatBotResponse, AutoSummarizationRequest, ChatBotRequest, TextClassificationResponse, KeywordsExtractionRequest, TextCorrectionRequest, TextCorrectionProResponse, TextSimilarityProRequest, UpdateDictResponse, DescribeDictsRequest, WordSimilarityResponse, CreateWordItemsRequest, DeleteWordItemsResponse, SentenceEmbeddingResponse, UpdateDictRequest, DeleteDictResponse, DescribeWordItemsRequest, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, AutoSummarizationResponse, WordEmbeddingResponse, DescribeWordItemsResponse, SimilarWordsRequest, DescribeDictRequest, SentimentAnalysisResponse, DeleteWordItemsRequest, DescribeDictResponse, TextCorrectionProRequest, TextCorrectionResponse, TextSimilarityProResponse, DescribeDictsResponse, DependencyParsingRequest, DeleteDictRequest, SimilarWordsResponse, DependencyParsingResponse, LexicalAnalysisRequest, CreateWordItemsResponse, SentimentAnalysisRequest, SearchWordItemsRequest, KeywordsExtractionResponse, CreateDictRequest } from "./nlp_models";
 /**
  * nlp client
  * @class
@@ -11,10 +11,6 @@ export declare class Client extends AbstractClient {
      * 根据id或名称查询自定义词库信息。
      */
     DescribeDict(req: DescribeDictRequest, cb?: (error: string, rep: DescribeDictResponse) => void): Promise<DescribeDictResponse>;
-    /**
-     * 此接口正在维护升级，后续上线另行通知。
-     */
-    DescribeEntity(req: DescribeEntityRequest, cb?: (error: string, rep: DescribeEntityResponse) => void): Promise<DescribeEntityResponse>;
     /**
      * 查询指定自定义词库中的词条是否存在。
      */
@@ -51,10 +47,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
      * 根据指定的名称、描述创建自定义词库。
      */
     CreateDict(req: CreateDictRequest, cb?: (error: string, rep: CreateDictResponse) => void): Promise<CreateDictResponse>;
-    /**
-     * 此接口正在维护升级，后续上线另行通知。
-     */
-    DescribeRelation(req: DescribeRelationRequest, cb?: (error: string, rep: DescribeRelationResponse) => void): Promise<DescribeRelationResponse>;
     /**
      * 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
 
@@ -132,10 +124,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
 所有的功能均基于千亿级大规模互联网语料进行持续迭代更新，以保证效果不断提升，用户无需担心新词发现、歧义消除、调用性能等问题。目前词法分析已经在泛互联网、金融、政务等不同垂直领域提供业务支持，并取得良好的效果。
      */
     LexicalAnalysis(req: LexicalAnalysisRequest, cb?: (error: string, rep: LexicalAnalysisResponse) => void): Promise<LexicalAnalysisResponse>;
-    /**
-     * 此接口正在维护升级，后续上线另行通知。
-     */
-    DescribeTriple(req: DescribeTripleRequest, cb?: (error: string, rep: DescribeTripleResponse) => void): Promise<DescribeTripleResponse>;
     /**
      * 基于关键词提取平台，通过对文本内容进行深度分析，提取出文本内容中的关键信息，为用户实现诸如新闻内容关键词自动提取、评论关键词提取等提供基础服务。
      */

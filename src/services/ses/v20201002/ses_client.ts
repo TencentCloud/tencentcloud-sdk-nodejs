@@ -126,8 +126,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取邮件发送状态。仅支持查询30天之内的数据
-   */
+     * 获取邮件发送状态。仅支持查询30天之内的数据
+默认接口请求频率限制：1次/秒
+     */
   async GetSendEmailStatus(
     req: GetSendEmailStatusRequest,
     cb?: (error: string, rep: GetSendEmailStatusResponse) => void

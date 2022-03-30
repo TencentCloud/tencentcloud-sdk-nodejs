@@ -480,7 +480,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     CreateLiveRecordTemplate(req: CreateLiveRecordTemplateRequest, cb?: (error: string, rep: CreateLiveRecordTemplateResponse) => void): Promise<CreateLiveRecordTemplateResponse>;
     /**
-     * 直播计费带宽和流量数据查询。
+     * 直播播放带宽和流量数据查询。
      */
     DescribeBillBandwidthAndFluxList(req: DescribeBillBandwidthAndFluxListRequest, cb?: (error: string, rep: DescribeBillBandwidthAndFluxListResponse) => void): Promise<DescribeBillBandwidthAndFluxListResponse>;
     /**

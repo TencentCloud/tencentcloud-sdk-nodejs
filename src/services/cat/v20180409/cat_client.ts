@@ -24,6 +24,7 @@ import {
   DescribeProbeNodesResponse,
   RunTaskRequest,
   DescribeTaskDetailResponse,
+  DescribeProbeMetricDataResponse,
   DeleteTasksResponse,
   CatTaskDetail,
   BindAlarmPolicyRequest,
@@ -82,6 +83,7 @@ import {
   DescribeAlarmTopicRequest,
   DescribeAgentGroupsResponse,
   SuspendProbeTaskRequest,
+  DescribeProbeMetricDataRequest,
   GetRespTimeTrendExRequest,
   UpdateProbeTaskConfigurationListRequest,
   CreateProbeTasksRequest,
@@ -291,6 +293,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDailyAvailRatioResponse) => void
   ): Promise<GetDailyAvailRatioResponse> {
     return this.request("GetDailyAvailRatio", req, cb)
+  }
+
+  /**
+   * 列出云拨测指标详细数据
+   */
+  async DescribeProbeMetricData(
+    req: DescribeProbeMetricDataRequest,
+    cb?: (error: string, rep: DescribeProbeMetricDataResponse) => void
+  ): Promise<DescribeProbeMetricDataResponse> {
+    return this.request("DescribeProbeMetricData", req, cb)
   }
 
   /**

@@ -2171,12 +2171,12 @@ export interface DescribeNatGatewaySourceIpTranslationNatRulesResponse {
       * NAT网关SNAT规则对象数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SourceIpTranslationNatRuleSet?: Array<SourceIpTranslationNatRule>
+  SourceIpTranslationNatRuleSet: Array<SourceIpTranslationNatRule>
 
   /**
    * 符合条件的NAT网关端口转发规则对象数目。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3595,12 +3595,12 @@ export interface DescribeNatGatewaysResponse {
   /**
    * NAT网关对象数组。
    */
-  NatGatewaySet?: Array<NatGateway>
+  NatGatewaySet: Array<NatGateway>
 
   /**
    * 符合条件的NAT网关对象个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4263,12 +4263,12 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse 
   /**
    * NAT网关端口转发规则对象数组。
    */
-  NatGatewayDestinationIpPortTranslationNatRuleSet?: Array<NatGatewayDestinationIpPortTranslationNatRule>
+  NatGatewayDestinationIpPortTranslationNatRuleSet: Array<NatGatewayDestinationIpPortTranslationNatRule>
 
   /**
    * 符合条件的NAT网关端口转发规则对象数目。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

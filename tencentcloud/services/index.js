@@ -72,6 +72,8 @@ var cdn_1 = require("./cdn");
 Object.defineProperty(exports, "cdn", { enumerable: true, get: function () { return cdn_1.cdn; } });
 var cds_1 = require("./cds");
 Object.defineProperty(exports, "cds", { enumerable: true, get: function () { return cds_1.cds; } });
+var cfg_1 = require("./cfg");
+Object.defineProperty(exports, "cfg", { enumerable: true, get: function () { return cfg_1.cfg; } });
 var cfs_1 = require("./cfs");
 Object.defineProperty(exports, "cfs", { enumerable: true, get: function () { return cfs_1.cfs; } });
 var cfw_1 = require("./cfw");

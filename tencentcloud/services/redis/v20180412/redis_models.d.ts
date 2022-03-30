@@ -41,7 +41,7 @@ export interface RedisBackupSet {
       */
     BackupId: string;
     /**
-      * 备份类型。 manualBackupInstance：用户发起的手动备份； systemBackupInstance：凌晨系统发起的备份
+      * 备份类型。1：用户发起的手动备份； 0：凌晨系统发起的备份
       */
     BackupType: string;
     /**

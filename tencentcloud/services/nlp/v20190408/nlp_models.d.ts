@@ -30,15 +30,6 @@ export interface SentenceEmbeddingRequest {
     Text: string;
 }
 /**
- * DescribeTriple请求参数结构体
- */
-export interface DescribeTripleRequest {
-    /**
-      * 三元组查询条件
-      */
-    TripleCondition: string;
-}
-/**
  * WordSimilarity请求参数结构体
  */
 export interface WordSimilarityRequest {
@@ -130,20 +121,6 @@ export interface ChatBotResponse {
     RequestId?: string;
 }
 /**
- * KeywordsExtraction返回参数结构体
- */
-export interface KeywordsExtractionResponse {
-    /**
-      * 关键词提取结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Keywords: Array<Keyword>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * AutoSummarization请求参数结构体
  */
 export interface AutoSummarizationRequest {
@@ -175,17 +152,17 @@ export interface ChatBotRequest {
     Flag?: number;
 }
 /**
- * DescribeRelation请求参数结构体
+ * TextClassification返回参数结构体
  */
-export interface DescribeRelationRequest {
+export interface TextClassificationResponse {
     /**
-      * 输入第一个实体
+      * 文本分类结果（文本分类映射表请参见附录）
       */
-    LeftEntityName: string;
+    Classes: Array<ClassificationResult>;
     /**
-      * 输入第二个实体
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RightEntityName: string;
+    RequestId?: string;
 }
 /**
  * KeywordsExtraction请求参数结构体
@@ -229,35 +206,13 @@ export interface DictInfo {
     CreateTime?: string;
 }
 /**
- * DescribeEntity返回参数结构体
+ * TextCorrection请求参数结构体
  */
-export interface DescribeEntityResponse {
+export interface TextCorrectionRequest {
     /**
-      * 返回查询实体相关信息
-      */
-    Content: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 词条信息。
- */
-export interface WordItem {
-    /**
-      * 词条文本内容。
+      * 待纠错的文本（仅支持UTF-8格式，不超过2000字符）
       */
     Text: string;
-    /**
-      * 词条创建时间。
-      */
-    CreateTime?: string;
-    /**
-      * 词条的词性。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Pos?: string;
 }
 /**
  * 文本分类结果
@@ -331,15 +286,6 @@ export interface TextCorrectionProResponse {
     RequestId?: string;
 }
 /**
- * DescribeEntity请求参数结构体
- */
-export interface DescribeEntityRequest {
-    /**
-      * 实体名称
-      */
-    EntityName: string;
-}
-/**
  * 关键词提取结果
  */
 export interface Keyword {
@@ -388,13 +334,13 @@ export interface DescribeDictsRequest {
     Offset?: number;
 }
 /**
- * DescribeRelation返回参数结构体
+ * WordSimilarity返回参数结构体
  */
-export interface DescribeRelationResponse {
+export interface WordSimilarityResponse {
     /**
-      * 返回查询实体间的关系
+      * 两个词语的相似度
       */
-    Content: Array<EntityRelationContent>;
+    Similarity?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -437,13 +383,22 @@ export interface CreateWordItemsRequest {
     WordItems: Array<WordItem>;
 }
 /**
- * TextCorrection请求参数结构体
+ * 词条信息。
  */
-export interface TextCorrectionRequest {
+export interface WordItem {
     /**
-      * 待纠错的文本（仅支持UTF-8格式，不超过2000字符）
+      * 词条文本内容。
       */
     Text: string;
+    /**
+      * 词条创建时间。
+      */
+    CreateTime?: string;
+    /**
+      * 词条的词性。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pos?: string;
 }
 /**
  * DeleteWordItems返回参数结构体
@@ -489,19 +444,6 @@ export interface UpdateDictRequest {
     Name?: string;
 }
 /**
- * TextClassification返回参数结构体
- */
-export interface TextClassificationResponse {
-    /**
-      * 文本分类结果（文本分类映射表请参见附录）
-      */
-    Classes: Array<ClassificationResult>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DeleteDict返回参数结构体
  */
 export interface DeleteDictResponse {
@@ -530,19 +472,6 @@ export interface DescribeWordItemsRequest {
       * 待检索的词条文本，支持模糊匹配。
       */
     Text?: string;
-}
-/**
- * SearchWordItems请求参数结构体
- */
-export interface SearchWordItemsRequest {
-    /**
-      * 自定义词库ID。
-      */
-    DictId: string;
-    /**
-      * 待检索的词条集合。
-      */
-    WordItems: Array<WordItem>;
 }
 /**
  * TextClassification请求参数结构体
@@ -611,19 +540,6 @@ export interface WordEmbeddingResponse {
       * 词向量的维度
       */
     Dimension?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeTriple返回参数结构体
- */
-export interface DescribeTripleResponse {
-    /**
-      * 返回三元组信息
-      */
-    Content: Array<TripleContent>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -861,26 +777,6 @@ export interface SimilarWordsResponse {
     RequestId?: string;
 }
 /**
- * 实体关系查询返回的Object类型
- */
-export interface EntityRelationObject {
-    /**
-      * object对应popular值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Popular?: Array<number>;
-    /**
-      * object对应id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Id?: Array<string>;
-    /**
-      * object对应name
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name?: Array<string>;
-}
-/**
  * DependencyParsing返回参数结构体
  */
 export interface DependencyParsingResponse {
@@ -990,79 +886,31 @@ export interface SentimentAnalysisRequest {
     Mode?: string;
 }
 /**
- * 实体关系查询返回Subject
+ * SearchWordItems请求参数结构体
  */
-export interface EntityRelationSubject {
+export interface SearchWordItemsRequest {
     /**
-      * Subject对应popular
+      * 自定义词库ID。
       */
-    Popular?: Array<number>;
+    DictId: string;
     /**
-      * Subject对应id
+      * 待检索的词条集合。
       */
-    Id?: Array<string>;
-    /**
-      * Subject对应name
-      */
-    Name?: Array<string>;
+    WordItems: Array<WordItem>;
 }
 /**
- * 返回的实体关系查询结果详细内容
+ * KeywordsExtraction返回参数结构体
  */
-export interface EntityRelationContent {
+export interface KeywordsExtractionResponse {
     /**
-      * 实体关系查询返回关系的object
+      * 关键词提取结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Object?: Array<EntityRelationObject>;
-    /**
-      * 实体关系查询返回的关系名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Relation?: string;
-    /**
-      * 实体关系查询返回关系的subject
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Subject?: Array<EntityRelationSubject>;
-}
-/**
- * WordSimilarity返回参数结构体
- */
-export interface WordSimilarityResponse {
-    /**
-      * 两个词语的相似度
-      */
-    Similarity?: number;
+    Keywords: Array<Keyword>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 三元组查询返回的元记录
- */
-export interface TripleContent {
-    /**
-      * 实体流行度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Popular?: number;
-    /**
-      * 实体名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name?: string;
-    /**
-      * 实体order
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Order?: number;
-    /**
-      * 实体id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Id?: string;
 }
 /**
  * CreateDict请求参数结构体

@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDailyAvailRatio", req, cb);
     }
     /**
+     * 列出云拨测指标详细数据
+     */
+    async DescribeProbeMetricData(req, cb) {
+        return this.request("DescribeProbeMetricData", req, cb);
+    }
+    /**
      * 恢复拨测任务
      */
     async ResumeProbeTask(req, cb) {

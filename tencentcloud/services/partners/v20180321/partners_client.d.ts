@@ -12,8 +12,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAgentSelfPayDeals(req: DescribeAgentSelfPayDealsRequest, cb?: (error: string, rep: DescribeAgentSelfPayDealsResponse) => void): Promise<DescribeAgentSelfPayDealsResponse>;
     /**
-     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
-
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】代理商拉取缓存的全量客户订单
      */
     DescribeAgentDealsCache(req: DescribeAgentDealsCacheRequest, cb?: (error: string, rep: DescribeAgentDealsCacheResponse) => void): Promise<DescribeAgentDealsCacheResponse>;
     /**
@@ -21,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyClientRemark(req: ModifyClientRemarkRequest, cb?: (error: string, rep: ModifyClientRemarkResponse) => void): Promise<ModifyClientRemarkResponse>;
     /**
-     * 可以查询代理商下指定客户的自付订单
+     * 查询代理商名下指定代客的自付订单
      */
     DescribeAgentSelfPayDealsV2(req: DescribeAgentSelfPayDealsV2Request, cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void): Promise<DescribeAgentSelfPayDealsV2Response>;
     /**
@@ -89,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     AuditApplyClient(req: AuditApplyClientRequest, cb?: (error: string, rep: AuditApplyClientResponse) => void): Promise<AuditApplyClientResponse>;
     /**
-     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     * 供代理商拉取缓存的全量客户订单
      */
     DescribeAgentDealsByCache(req: DescribeAgentDealsByCacheRequest, cb?: (error: string, rep: DescribeAgentDealsByCacheResponse) => void): Promise<DescribeAgentDealsByCacheResponse>;
 }

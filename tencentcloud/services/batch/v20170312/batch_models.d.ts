@@ -1017,6 +1017,13 @@ export interface Job {
       * 标签列表。通过指定该参数可以支持绑定标签到作业。每个作业最多绑定10个标签。
       */
     Tags?: Array<Tag>;
+    /**
+      * 表示通知信息的通知目标类型。
+取值范围：CMQ，TDMQ_CMQ。
+CMQ:表示向腾讯云CMQ发送消息。
+TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860)
+      */
+    NotificationTarget?: string;
 }
 /**
  * DeleteComputeEnv请求参数结构体
@@ -1332,6 +1339,13 @@ export interface NamedCpmComputeEnv {
       * 标签列表。通过指定该参数可以支持绑定标签到黑石计算环境。每个黑石计算环境最多绑定10个标签。
       */
     Tags?: Array<Tag>;
+    /**
+      * 表示通知信息的通知目标类型。
+取值范围：CMQ，TDMQ_CMQ。
+CMQ:表示向腾讯云CMQ发送消息。
+TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860)
+      */
+    NotificationTarget?: string;
 }
 /**
  * DeleteTaskTemplates请求参数结构体
@@ -1462,6 +1476,7 @@ export interface DataDisk {
     DiskType?: string;
     /**
       * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
+该参数目前仅用于`DescribeInstances`接口。
       */
     DiskId?: string;
     /**
@@ -1561,6 +1576,13 @@ export interface NamedComputeEnv {
       * 标签列表。通过指定该参数可以支持绑定标签到计算环境。每个计算环境最多绑定10个标签。
       */
     Tags?: Array<Tag>;
+    /**
+      * 表示通知信息的通知目标类型。
+取值范围：CMQ，TDMQ_CMQ。
+CMQ:表示向腾讯云CMQ发送消息。
+TDMQ_CMQ：表示向腾讯云TDMQ_CMQ发送消息。<br/>默认值为CMQ。<br/>注：腾讯云计划于2022年6月前正式下线消息队列 CMQ，建议使用TDMQ_CMQ。参考文档：[CMQ迁移到TDMQ_CMQ](https://cloud.tencent.com/document/product/406/60860)
+      */
+    NotificationTarget?: string;
 }
 /**
  * DeleteJob返回参数结构体

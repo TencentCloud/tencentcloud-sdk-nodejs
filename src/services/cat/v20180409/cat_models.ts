@@ -152,6 +152,21 @@ export interface DescribeTaskDetailResponse {
 }
 
 /**
+ * DescribeProbeMetricData返回参数结构体
+ */
+export interface DescribeProbeMetricDataResponse {
+  /**
+   * 指标 JSON 序列化后的字符串
+   */
+  MetricSet: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteTasks返回参数结构体
  */
 export interface DeleteTasksResponse {
@@ -1977,6 +1992,41 @@ export interface SuspendProbeTaskRequest {
    * 任务 ID
    */
   TaskIds: Array<string>
+}
+
+/**
+ * DescribeProbeMetricData请求参数结构体
+ */
+export interface DescribeProbeMetricDataRequest {
+  /**
+   * 分析任务类型
+   */
+  AnalyzeTaskType?: string
+
+  /**
+   * 指标类型，counter 或者 gauge
+   */
+  MetricType?: string
+
+  /**
+   * 指标详细字段
+   */
+  Field?: string
+
+  /**
+   * 过滤条件
+   */
+  Filter?: string
+
+  /**
+   * 聚合时间, 1m、1d、100d 等等
+   */
+  GroupBy?: string
+
+  /**
+   * 过滤条件数组
+   */
+  Filters?: Array<string>
 }
 
 /**

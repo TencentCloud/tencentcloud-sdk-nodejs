@@ -28,16 +28,6 @@ it("nlp.v20190408.DescribeDict", async function () {
     }
 })
 
-it("nlp.v20190408.DescribeEntity", async function () {
-    try {
-       const data = await client.DescribeEntity({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("nlp.v20190408.SearchWordItems", async function () {
     try {
        const data = await client.SearchWordItems({})
@@ -101,16 +91,6 @@ it("nlp.v20190408.DescribeDicts", async function () {
 it("nlp.v20190408.CreateDict", async function () {
     try {
        const data = await client.CreateDict({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("nlp.v20190408.DescribeRelation", async function () {
-    try {
-       const data = await client.DescribeRelation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,16 +201,6 @@ it("nlp.v20190408.ChatBot", async function () {
 it("nlp.v20190408.LexicalAnalysis", async function () {
     try {
        const data = await client.LexicalAnalysis({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("nlp.v20190408.DescribeTriple", async function () {
-    try {
-       const data = await client.DescribeTriple({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
