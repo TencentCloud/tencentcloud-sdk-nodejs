@@ -840,6 +840,47 @@ export interface DescribeClusterAsGroupOptionRequest {
 }
 
 /**
+ * 地域属性信息
+ */
+export interface RegionInstance {
+  /**
+      * 地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionName: string
+
+  /**
+      * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionId: number
+
+  /**
+      * 地域状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 地域特性开关(按照JSON的形式返回所有属性)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FeatureGates: string
+
+  /**
+      * 地域简称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Alias: string
+
+  /**
+      * 地域白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+}
+
+/**
  * DescribeEKSContainerInstanceRegions请求参数结构体
  */
 export type DescribeEKSContainerInstanceRegionsRequest = null
@@ -1336,6 +1377,56 @@ export interface CreateClusterRouteResponse {
 }
 
 /**
+ * 集群等级变配记录
+ */
+export interface ClusterLevelChangeRecord {
+  /**
+   * 记录ID
+   */
+  ID: string
+
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+
+  /**
+   * 变配状态：trading 发货中,upgrading 变配中,success 变配成功,failed 变配失败。
+   */
+  Status: string
+
+  /**
+   * 状态描述
+   */
+  Message: string
+
+  /**
+   * 变配前规模
+   */
+  OldLevel: string
+
+  /**
+   * 变配后规模
+   */
+  NewLevel: string
+
+  /**
+   * 变配触发类型：manual 手动,auto 自动
+   */
+  TriggerType: string
+
+  /**
+   * 开始时间
+   */
+  StartedAt: string
+
+  /**
+   * 结束时间
+   */
+  EndedAt: string
+}
+
+/**
  * 云原生Prometheus模板同步目标
  */
 export interface PrometheusTemplateSyncTarget {
@@ -1600,6 +1691,58 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AutoscalingGroupId: string
+}
+
+/**
+ * DescribePrometheusInstance返回参数结构体
+ */
+export interface DescribePrometheusInstanceResponse {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  Name: string
+
+  /**
+   * 私有网络id
+   */
+  VpcId: string
+
+  /**
+   * 子网id
+   */
+  SubnetId: string
+
+  /**
+   * cos桶名称
+   */
+  COSBucket: string
+
+  /**
+   * 数据查询地址
+   */
+  QueryAddress: string
+
+  /**
+      * 实例中grafana相关的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Grafana: PrometheusGrafanaInfo
+
+  /**
+      * 用户自定义alertmanager
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertManagerUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2050,6 +2193,26 @@ export interface CreateClusterEndpointVipResponse {
 }
 
 /**
+ * 集群资源使用量
+ */
+export interface ResourceUsage {
+  /**
+   * 资源类型
+   */
+  Name: string
+
+  /**
+   * 资源使用量
+   */
+  Usage: number
+
+  /**
+   * 资源使用详情
+   */
+  Details: Array<ResourceUsageDetail>
+}
+
+/**
  * 自动扩所容的节点
  */
 export interface AutoscalingAdded {
@@ -2358,6 +2521,21 @@ export interface DisableVpcCniNetworkTypeRequest {
    * 集群ID
    */
   ClusterId: string
+}
+
+/**
+ * 资源使用明细
+ */
+export interface ResourceUsageDetail {
+  /**
+   * 资源名称
+   */
+  Name: string
+
+  /**
+   * 资源使用量
+   */
+  Usage: number
 }
 
 /**
@@ -3479,6 +3657,16 @@ export interface PodLimitsByType {
 }
 
 /**
+ * DescribeClusterLevelAttribute请求参数结构体
+ */
+export interface DescribeClusterLevelAttributeRequest {
+  /**
+   * 集群ID，变配时使用
+   */
+  ClusterID?: string
+}
+
+/**
  * UpdateEKSCluster返回参数结构体
  */
 export interface UpdateEKSClusterResponse {
@@ -4145,6 +4333,26 @@ export interface DescribeClusterEndpointStatusRequest {
 }
 
 /**
+ * GetClusterLevelPrice返回参数结构体
+ */
+export interface GetClusterLevelPriceResponse {
+  /**
+   * 询价结果，单位：分，打折后
+   */
+  Cost: number
+
+  /**
+   * 询价结果，单位：分，折扣前
+   */
+  TotalCost: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Probe中的HttpGet
  */
 export interface HttpGet {
@@ -4168,23 +4376,33 @@ export interface HttpGet {
 }
 
 /**
- * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
+ * DescribeResourceUsage返回参数结构体
  */
-export interface EnhancedService {
+export interface DescribeResourceUsageResponse {
   /**
-   * 开启云安全服务。若不指定该参数，则默认开启云安全服务。
+   * CRD使用量
    */
-  SecurityService?: RunSecurityServiceEnabled
+  CRDUsage: ResourceUsage
 
   /**
-   * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
+   * Pod使用量
    */
-  MonitorService?: RunMonitorServiceEnabled
+  PodUsage: number
 
   /**
-   * 开启云自动化助手服务。若不指定该参数，则默认不开启云自动化助手服务。
+   * ConfigMap使用量
    */
-  AutomationService?: RunAutomationServiceEnabled
+  ConfigMapUsage: number
+
+  /**
+   * 其他资源使用量
+   */
+  OtherUsage: ResourceUsage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4778,44 +4996,13 @@ export interface InstanceAdvancedSettings {
 }
 
 /**
- * 地域属性信息
+ * DescribeResourceUsage请求参数结构体
  */
-export interface RegionInstance {
+export interface DescribeResourceUsageRequest {
   /**
-      * 地域名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RegionName: string
-
-  /**
-      * 地域ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RegionId: number
-
-  /**
-      * 地域状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 地域特性开关(按照JSON的形式返回所有属性)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FeatureGates: string
-
-  /**
-      * 地域简称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Alias: string
-
-  /**
-      * 地域白名单
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Remark: string
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -5135,6 +5322,16 @@ export interface DescribeImageCachesResponse {
 }
 
 /**
+ * GetClusterLevelPrice请求参数结构体
+ */
+export interface GetClusterLevelPriceRequest {
+  /**
+   * 集群规格，托管集群询价
+   */
+  ClusterLevel: string
+}
+
+/**
  * CreateClusterEndpoint返回参数结构体
  */
 export interface CreateClusterEndpointResponse {
@@ -5367,6 +5564,42 @@ export interface RestartEKSContainerInstancesResponse {
 }
 
 /**
+ * 健康检查探测参数
+ */
+export interface Probe {
+  /**
+      * Number of seconds after the container has started before liveness probes are initiated.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InitialDelaySeconds?: number
+
+  /**
+      * Number of seconds after which the probe times out.
+Defaults to 1 second. Minimum value is 1.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeoutSeconds?: number
+
+  /**
+      * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PeriodSeconds?: number
+
+  /**
+      * Minimum consecutive successes for the probe to be considered successful after having failed.Defaults to 1. Must be 1 for liveness. Minimum value is 1.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuccessThreshold?: number
+
+  /**
+      * Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1.
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailureThreshold?: number
+}
+
+/**
  * ModifyPrometheusTemplate返回参数结构体
  */
 export interface ModifyPrometheusTemplateResponse {
@@ -5494,6 +5727,26 @@ export interface LivenessOrReadinessProbe {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TcpSocket?: TcpSocket
+}
+
+/**
+ * DescribeClusterLevelChangeRecords返回参数结构体
+ */
+export interface DescribeClusterLevelChangeRecordsResponse {
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 集群规模
+   */
+  Items: Array<ClusterLevelChangeRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6043,50 +6296,18 @@ export interface ModifyClusterAsGroupOptionAttributeResponse {
 }
 
 /**
- * DescribePrometheusInstance返回参数结构体
+ * DescribeClusterLevelAttribute返回参数结构体
  */
-export interface DescribePrometheusInstanceResponse {
+export interface DescribeClusterLevelAttributeResponse {
   /**
-   * 实例id
+   * 总数
    */
-  InstanceId: string
+  TotalCount: number
 
   /**
-   * 实例名称
+   * 集群规模
    */
-  Name: string
-
-  /**
-   * 私有网络id
-   */
-  VpcId: string
-
-  /**
-   * 子网id
-   */
-  SubnetId: string
-
-  /**
-   * cos桶名称
-   */
-  COSBucket: string
-
-  /**
-   * 数据查询地址
-   */
-  QueryAddress: string
-
-  /**
-      * 实例中grafana相关的信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Grafana: PrometheusGrafanaInfo
-
-  /**
-      * 用户自定义alertmanager
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AlertManagerUrl: string
+  Items: Array<ClusterLevelAttribute>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6476,18 +6697,49 @@ export interface DescribePrometheusOverviewsResponse {
 }
 
 /**
- * DeleteClusterEndpoint请求参数结构体
+ * 托管集群等级属性
  */
-export interface DeleteClusterEndpointRequest {
+export interface ClusterLevelAttribute {
   /**
-   * 集群ID
+   * 集群等级
    */
-  ClusterId: string
+  Name: string
 
   /**
-   * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+   * 等级名称
    */
-  IsExtranet?: boolean
+  Alias: string
+
+  /**
+   * 节点数量
+   */
+  NodeCount: number
+
+  /**
+   * Pod数量
+   */
+  PodCount: number
+
+  /**
+   * Configmap数量
+   */
+  ConfigMapCount: number
+
+  /**
+   * CRD数量
+   */
+  CRDCount: number
+
+  /**
+   * 是否启用
+   */
+  Enable: boolean
+
+  /**
+      * 其他资源数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherCount: number
 }
 
 /**
@@ -6530,6 +6782,26 @@ export interface DescribePrometheusTargetsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
+ */
+export interface EnhancedService {
+  /**
+   * 开启云安全服务。若不指定该参数，则默认开启云安全服务。
+   */
+  SecurityService?: RunSecurityServiceEnabled
+
+  /**
+   * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
+   */
+  MonitorService?: RunMonitorServiceEnabled
+
+  /**
+   * 开启云自动化助手服务。若不指定该参数，则默认不开启云自动化助手服务。
+   */
+  AutomationService?: RunAutomationServiceEnabled
 }
 
 /**
@@ -6790,6 +7062,36 @@ export interface TagSpecification {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags?: Array<Tag>
+}
+
+/**
+ * DescribeClusterLevelChangeRecords请求参数结构体
+ */
+export interface DescribeClusterLevelChangeRecordsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+
+  /**
+   * 开始时间
+   */
+  StartAt?: string
+
+  /**
+   * 结束时间
+   */
+  EndAt?: string
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+   * 最大输出条数，默认20
+   */
+  Limit?: number
 }
 
 /**
@@ -7155,39 +7457,18 @@ T4
 }
 
 /**
- * 健康检查探测参数
+ * DeleteClusterEndpoint请求参数结构体
  */
-export interface Probe {
+export interface DeleteClusterEndpointRequest {
   /**
-      * Number of seconds after the container has started before liveness probes are initiated.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InitialDelaySeconds?: number
+   * 集群ID
+   */
+  ClusterId: string
 
   /**
-      * Number of seconds after which the probe times out.
-Defaults to 1 second. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TimeoutSeconds?: number
-
-  /**
-      * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PeriodSeconds?: number
-
-  /**
-      * Minimum consecutive successes for the probe to be considered successful after having failed.Defaults to 1. Must be 1 for liveness. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SuccessThreshold?: number
-
-  /**
-      * Minimum consecutive failures for the probe to be considered failed after having succeeded.Defaults to 3. Minimum value is 1.
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FailureThreshold?: number
+   * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+   */
+  IsExtranet?: boolean
 }
 
 /**

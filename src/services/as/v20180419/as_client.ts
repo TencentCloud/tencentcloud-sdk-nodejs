@@ -73,10 +73,8 @@ import {
   DescribeAutoScalingGroupLastActivitiesRequest,
   HostNameSettings,
   ModifyLoadBalancersResponse,
-  DescribePaiInstancesRequest,
   CreateNotificationConfigurationRequest,
   DescribeScheduledActionsResponse,
-  ModifyNotificationConfigurationRequest,
   DeleteLifecycleHookRequest,
   ModifyLoadBalancerTargetAttributesResponse,
   ModifyAutoScalingGroupResponse,
@@ -85,7 +83,6 @@ import {
   InstanceMarketOptionsRequest,
   UpgradeLifecycleHookResponse,
   InstanceTag,
-  PaiInstance,
   DescribeAutoScalingAdvicesResponse,
   CreateAutoScalingGroupRequest,
   DeleteScheduledActionResponse,
@@ -147,14 +144,14 @@ import {
   ModifyDesiredCapacityResponse,
   StopAutoScalingInstancesRequest,
   RunMonitorServiceEnabled,
-  DeleteLifecycleHookResponse,
+  ModifyNotificationConfigurationRequest,
   ActivtyRelatedInstance,
   CreateAutoScalingGroupFromInstanceRequest,
   InternetAccessible,
   EnableAutoScalingGroupResponse,
   UpgradeLaunchConfigurationResponse,
   InstanceChargePrepaid,
-  DescribePaiInstancesResponse,
+  DeleteLifecycleHookResponse,
   ExecuteScalingPolicyRequest,
 } from "./as_models"
 
@@ -640,19 +637,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLaunchConfigurationsResponse) => void
   ): Promise<DescribeLaunchConfigurationsResponse> {
     return this.request("DescribeLaunchConfigurations", req, cb)
-  }
-
-  /**
-     * 本接口（DescribePaiInstances）用于查询PAI实例信息。
-
-* 可以根据实例ID、实例域名等信息来查询PAI实例的详细信息。过滤信息详细请见过滤器`Filter`。
-* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的PAI实例。
-     */
-  async DescribePaiInstances(
-    req: DescribePaiInstancesRequest,
-    cb?: (error: string, rep: DescribePaiInstancesResponse) => void
-  ): Promise<DescribePaiInstancesResponse> {
-    return this.request("DescribePaiInstances", req, cb)
   }
 
   /**

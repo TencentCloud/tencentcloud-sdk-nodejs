@@ -21,12 +21,14 @@ import {
   SubAccountUser,
   ListAttachedRolePoliciesResponse,
   LoginActionFlagIntl,
+  UpdateUserOIDCConfigResponse,
   ListAccessKeysRequest,
   SetMfaFlagResponse,
   UpdateSAMLProviderRequest,
   DeleteUserRequest,
   GetRolePermissionBoundaryResponse,
   DescribeRoleListResponse,
+  UpdatePolicyResponse,
   CreatePolicyResponse,
   GetRoleRequest,
   CreateServiceLinkedRoleRequest,
@@ -50,6 +52,7 @@ import {
   GetCustomMFATokenInfoRequest,
   DescribeRoleListRequest,
   DescribeUserSAMLConfigRequest,
+  PutRolePermissionsBoundaryRequest,
   GetGroupRequest,
   DeleteRoleResponse,
   PolicyVersionItem,
@@ -75,6 +78,7 @@ import {
   DescribeSafeAuthFlagResponse,
   CreatePolicyVersionRequest,
   SecretIdLastUsed,
+  CreateUserOIDCConfigResponse,
   ListAttachedUserAllPoliciesResponse,
   DeleteGroupRequest,
   GetUserResponse,
@@ -84,6 +88,7 @@ import {
   ListPoliciesGrantingServiceAccessResponse,
   DeleteRolePermissionsBoundaryRequest,
   StrategyInfo,
+  DescribeUserOIDCConfigResponse,
   DeletePolicyRequest,
   GroupInfo,
   AddUserRequest,
@@ -92,6 +97,7 @@ import {
   DeleteRoleRequest,
   ListWeChatWorkSubAccountsRequest,
   UpdateRoleConsoleLoginRequest,
+  ListCollaboratorsRequest,
   GetCustomMFATokenInfoResponse,
   UpdateAssumeRolePolicyResponse,
   GetPolicyVersionRequest,
@@ -103,13 +109,14 @@ import {
   CreateGroupRequest,
   SAMLProviderInfo,
   ListGrantServiceAccessPolicy,
+  DisableUserSSORequest,
   ListPoliciesGrantingServiceAccessRequest,
   UpdateSAMLProviderResponse,
   UpdateUserRequest,
   ListWeChatWorkSubAccountsResponse,
   CreateSAMLProviderRequest,
   AttachPolicyInfo,
-  PutRolePermissionsBoundaryRequest,
+  DisableUserSSOResponse,
   UpdateRoleConsoleLoginResponse,
   AttachRolePolicyRequest,
   ConsumeCustomMFATokenResponse,
@@ -127,8 +134,8 @@ import {
   GetAccountSummaryResponse,
   CreateServiceLinkedRoleResponse,
   ListUsersRequest,
-  ListCollaboratorsRequest,
-  UpdatePolicyResponse,
+  GetSAMLProviderResponse,
+  CreateUserOIDCConfigRequest,
   AttachGroupPolicyResponse,
   UpdateGroupResponse,
   ListEntitiesForPolicyRequest,
@@ -144,15 +151,17 @@ import {
   ListGrantServiceAccessNode,
   GetPolicyVersionResponse,
   CreateRoleResponse,
-  GetSAMLProviderResponse,
+  AttachGroupPolicyRequest,
   DescribeSafeAuthFlagIntlResponse,
   ListPolicyVersionsResponse,
   GetPolicyRequest,
   DescribeSafeAuthFlagIntlRequest,
   SetDefaultPolicyVersionRequest,
+  UpdateUserOIDCConfigRequest,
   AddUserToGroupRequest,
   RemoveUserFromGroupResponse,
   DetachRolePolicyResponse,
+  DescribeUserOIDCConfigRequest,
   AttachedPolicyOfRole,
   PutUserPermissionsBoundaryRequest,
   ListSAMLProvidersResponse,
@@ -166,7 +175,6 @@ import {
   DeleteServiceLinkedRoleResponse,
   GetPolicyResponse,
   DescribeSafeAuthFlagRequest,
-  AttachGroupPolicyRequest,
   DeleteServiceLinkedRoleRequest,
   AttachEntityOfPolicy,
   ListUsersForGroupResponse,
@@ -299,6 +307,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRoleResponse) => void
   ): Promise<CreateRoleResponse> {
     return this.request("CreateRole", req, cb)
+  }
+
+  /**
+   * 修改用户OIDC配置
+   */
+  async UpdateUserOIDCConfig(
+    req: UpdateUserOIDCConfigRequest,
+    cb?: (error: string, rep: UpdateUserOIDCConfigResponse) => void
+  ): Promise<UpdateUserOIDCConfigResponse> {
+    return this.request("UpdateUserOIDCConfig", req, cb)
   }
 
   /**
@@ -532,6 +550,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户OIDC配置
+   */
+  async DescribeUserOIDCConfig(
+    req?: DescribeUserOIDCConfigRequest,
+    cb?: (error: string, rep: DescribeUserOIDCConfigResponse) => void
+  ): Promise<DescribeUserOIDCConfigResponse> {
+    return this.request("DescribeUserOIDCConfig", req, cb)
+  }
+
+  /**
    * 获取所有已授权服务
    */
   async ListPoliciesGrantingServiceAccess(
@@ -692,6 +720,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新用户组
+   */
+  async UpdateGroup(
+    req: UpdateGroupRequest,
+    cb?: (error: string, rep: UpdateGroupResponse) => void
+  ): Promise<UpdateGroupResponse> {
+    return this.request("UpdateGroup", req, cb)
+  }
+
+  /**
    * 本接口（GetRole）用于获取指定角色的详细信息。
    */
   async GetRole(
@@ -832,6 +870,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+   */
+  async CreateUserOIDCConfig(
+    req: CreateUserOIDCConfigRequest,
+    cb?: (error: string, rep: CreateUserOIDCConfigResponse) => void
+  ): Promise<CreateUserOIDCConfigResponse> {
+    return this.request("CreateUserOIDCConfig", req, cb)
+  }
+
+  /**
    * 获取企业微信子用户列表
    */
   async ListWeChatWorkSubAccounts(
@@ -862,13 +910,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新用户组
+   * 禁用用户SSO
    */
-  async UpdateGroup(
-    req: UpdateGroupRequest,
-    cb?: (error: string, rep: UpdateGroupResponse) => void
-  ): Promise<UpdateGroupResponse> {
-    return this.request("UpdateGroup", req, cb)
+  async DisableUserSSO(
+    req?: DisableUserSSORequest,
+    cb?: (error: string, rep: DisableUserSSOResponse) => void
+  ): Promise<DisableUserSSOResponse> {
+    return this.request("DisableUserSSO", req, cb)
   }
 
   /**

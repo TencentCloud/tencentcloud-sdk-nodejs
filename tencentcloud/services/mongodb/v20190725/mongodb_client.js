@@ -102,6 +102,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAsyncRequestInfo", req, cb);
     }
     /**
+     * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+     */
+    async ModifyDBInstanceNetworkAddress(req, cb) {
+        return this.request("ModifyDBInstanceNetworkAddress", req, cb);
+    }
+    /**
      * 本接口(CreateDBInstanceHour)用于创建按量计费的MongoDB云数据库实例。
      */
     async CreateDBInstanceHour(req, cb) {

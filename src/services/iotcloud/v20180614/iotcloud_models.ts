@@ -526,6 +526,16 @@ export interface DescribeProductResourcesRequest {
 }
 
 /**
+ * DescribeProduct请求参数结构体
+ */
+export interface DescribeProductRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+}
+
+/**
  * DescribeProducts返回参数结构体
  */
 export interface DescribeProductsResponse {
@@ -2487,6 +2497,26 @@ export interface DescribeProductResourcesResponse {
 }
 
 /**
+ * UpdateProductDynamicRegister请求参数结构体
+ */
+export interface UpdateProductDynamicRegisterRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
+}
+
+/**
  * CreateTopicPolicy请求参数结构体
  */
 export interface CreateTopicPolicyRequest {
@@ -2910,6 +2940,31 @@ export interface DescribeDeviceShadowRequest {
    * 设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}
    */
   DeviceName: string
+}
+
+/**
+ * UpdateProductDynamicRegister返回参数结构体
+ */
+export interface UpdateProductDynamicRegisterResponse {
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+
+  /**
+   * 动态注册产品密钥
+   */
+  ProductSecret: string
+
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3401,6 +3456,36 @@ export interface SDKLogItem {
    * 日志内容
    */
   Content: string
+}
+
+/**
+ * DescribeProduct返回参数结构体
+ */
+export interface DescribeProductResponse {
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+
+  /**
+   * 产品名
+   */
+  ProductName?: string
+
+  /**
+   * 产品元数据
+   */
+  ProductMetadata?: ProductMetadata
+
+  /**
+   * 产品属性
+   */
+  ProductProperties?: ProductProperties
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

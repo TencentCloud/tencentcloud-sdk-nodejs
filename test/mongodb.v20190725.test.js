@@ -138,6 +138,16 @@ it("mongodb.v20190725.DescribeAsyncRequestInfo", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifyDBInstanceNetworkAddress", async function () {
+    try {
+       const data = await client.ModifyDBInstanceNetworkAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.CreateDBInstanceHour", async function () {
     try {
        const data = await client.CreateDBInstanceHour({})

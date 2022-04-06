@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDeviceAvailableState", req, cb);
     }
     /**
+     * 本接口（DescribeProduct）用于查看产品详情
+     */
+    async DescribeProduct(req, cb) {
+        return this.request("DescribeProduct", req, cb);
+    }
+    /**
      * 本接口（CreateTopicRule）用于创建一个规则
      */
     async CreateTopicRule(req, cb) {
@@ -302,6 +308,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDeviceResources(req, cb) {
         return this.request("DescribeDeviceResources", req, cb);
+    }
+    /**
+     * 更新产品动态注册的配置
+     */
+    async UpdateProductDynamicRegister(req, cb) {
+        return this.request("UpdateProductDynamicRegister", req, cb);
     }
     /**
      * 本接口（ListLog）用于查看日志信息

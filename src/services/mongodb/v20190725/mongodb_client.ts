@@ -38,9 +38,11 @@ import {
   FlushInstanceRouterConfigRequest,
   DBInstanceInfo,
   SetAccountUserPrivilegeResponse,
+  ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
   Operation,
   SpecItem,
+  ModifyDBInstanceNetworkAddressResponse,
   DescribeSlowLogPatternsResponse,
   BackupDownloadTaskStatus,
   DescribeSlowLogsResponse,
@@ -52,6 +54,7 @@ import {
   Auth,
   ResetDBInstancePasswordRequest,
   InstanceIntegerParam,
+  ModifyNetworkAddress,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
   InstanceTextParam,
@@ -235,6 +238,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void
   ): Promise<DescribeAsyncRequestInfoResponse> {
     return this.request("DescribeAsyncRequestInfo", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+   */
+  async ModifyDBInstanceNetworkAddress(
+    req: ModifyDBInstanceNetworkAddressRequest,
+    cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void
+  ): Promise<ModifyDBInstanceNetworkAddressResponse> {
+    return this.request("ModifyDBInstanceNetworkAddress", req, cb)
   }
 
   /**

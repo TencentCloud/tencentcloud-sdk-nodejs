@@ -1418,27 +1418,6 @@ export interface ModifyLoadBalancersResponse {
     RequestId?: string;
 }
 /**
- * DescribePaiInstances请求参数结构体
- */
-export interface DescribePaiInstancesRequest {
-    /**
-      * 依据PAI实例的实例ID进行查询。
-      */
-    InstanceIds?: Array<string>;
-    /**
-      * 过滤条件。
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 返回数量，默认为20，最大值为100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为0。
-      */
-    Offset?: number;
-}
-/**
  * CreateNotificationConfiguration请求参数结构体
  */
 export interface CreateNotificationConfigurationRequest {
@@ -1496,37 +1475,6 @@ export interface DescribeScheduledActionsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * ModifyNotificationConfiguration请求参数结构体
- */
-export interface ModifyNotificationConfigurationRequest {
-    /**
-      * 待修改的通知ID。
-      */
-    AutoScalingNotificationId: string;
-    /**
-      * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
-<li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
-<li>SCALE_OUT_FAILED：扩容失败</li>
-<li>SCALE_IN_SUCCESSFUL：缩容成功</li>
-<li>SCALE_IN_FAILED：缩容失败</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
-<li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
-      */
-    NotificationTypes?: Array<string>;
-    /**
-      * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
-      */
-    NotificationUserGroupIds?: Array<string>;
-    /**
-      * CMQ 队列或 TDMQ CMQ 队列名。
-      */
-    QueueName?: string;
-    /**
-      * CMQ 主题或 TDMQ CMQ 主题名。
-      */
-    TopicName?: string;
 }
 /**
  * DeleteLifecycleHook请求参数结构体
@@ -1637,23 +1585,6 @@ export interface InstanceTag {
       * 标签值
       */
     Value: string;
-}
-/**
- * PAI实例
- */
-export interface PaiInstance {
-    /**
-      * 实例ID
-      */
-    InstanceId: string;
-    /**
-      * 实例域名
-      */
-    DomainName: string;
-    /**
-      * PAI管理页面URL
-      */
-    PaiMateUrl: string;
 }
 /**
  * DescribeAutoScalingAdvices返回参数结构体
@@ -3048,13 +2979,35 @@ export interface RunMonitorServiceEnabled {
     Enabled?: boolean;
 }
 /**
- * DeleteLifecycleHook返回参数结构体
+ * ModifyNotificationConfiguration请求参数结构体
  */
-export interface DeleteLifecycleHookResponse {
+export interface ModifyNotificationConfigurationRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 待修改的通知ID。
       */
-    RequestId?: string;
+    AutoScalingNotificationId: string;
+    /**
+      * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
+<li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
+<li>SCALE_OUT_FAILED：扩容失败</li>
+<li>SCALE_IN_SUCCESSFUL：缩容成功</li>
+<li>SCALE_IN_FAILED：缩容失败</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
+<li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
+      */
+    NotificationTypes?: Array<string>;
+    /**
+      * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
+      */
+    NotificationUserGroupIds?: Array<string>;
+    /**
+      * CMQ 队列或 TDMQ CMQ 队列名。
+      */
+    QueueName?: string;
+    /**
+      * CMQ 主题或 TDMQ CMQ 主题名。
+      */
+    TopicName?: string;
 }
 /**
  * 与本次伸缩活动相关的实例信息。
@@ -3159,17 +3112,9 @@ export interface InstanceChargePrepaid {
     RenewFlag?: string;
 }
 /**
- * DescribePaiInstances返回参数结构体
+ * DeleteLifecycleHook返回参数结构体
  */
-export interface DescribePaiInstancesResponse {
-    /**
-      * 符合条件的PAI实例数量
-      */
-    TotalCount?: number;
-    /**
-      * PAI实例详细信息
-      */
-    PaiInstanceSet?: Array<PaiInstance>;
+export interface DeleteLifecycleHookResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

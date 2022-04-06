@@ -37,6 +37,7 @@ import {
   DescribeMultiDevTaskRequest,
   DescribeDeviceResourceResponse,
   DescribeProductResourcesRequest,
+  DescribeProductRequest,
   DescribeProductsResponse,
   DescribeDeviceShadowResponse,
   EnableTopicRuleResponse,
@@ -120,6 +121,7 @@ import {
   DescribeDeviceRequest,
   CreateMultiDevicesTaskResponse,
   DescribeProductResourcesResponse,
+  UpdateProductDynamicRegisterRequest,
   CreateTopicPolicyRequest,
   DescribeProductResourceRequest,
   DescribeLoraDeviceResponse,
@@ -138,6 +140,7 @@ import {
   DeleteDeviceResourceRequest,
   DescribeMultiDevicesResponse,
   DescribeDeviceShadowRequest,
+  UpdateProductDynamicRegisterResponse,
   UnbindDevicesResponse,
   DeviceInfo,
   DescribeMultiDevicesRequest,
@@ -154,6 +157,7 @@ import {
   ListLogRequest,
   ProductMetadata,
   SDKLogItem,
+  DescribeProductResponse,
   DescribeLoraDeviceRequest,
   DescribeTaskRequest,
   PublishMessageResponse,
@@ -307,6 +311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDeviceAvailableStateResponse) => void
   ): Promise<UpdateDeviceAvailableStateResponse> {
     return this.request("UpdateDeviceAvailableState", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeProduct）用于查看产品详情
+   */
+  async DescribeProduct(
+    req: DescribeProductRequest,
+    cb?: (error: string, rep: DescribeProductResponse) => void
+  ): Promise<DescribeProductResponse> {
+    return this.request("DescribeProduct", req, cb)
   }
 
   /**
@@ -647,6 +661,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceResourcesResponse) => void
   ): Promise<DescribeDeviceResourcesResponse> {
     return this.request("DescribeDeviceResources", req, cb)
+  }
+
+  /**
+   * 更新产品动态注册的配置
+   */
+  async UpdateProductDynamicRegister(
+    req: UpdateProductDynamicRegisterRequest,
+    cb?: (error: string, rep: UpdateProductDynamicRegisterResponse) => void
+  ): Promise<UpdateProductDynamicRegisterResponse> {
+    return this.request("UpdateProductDynamicRegister", req, cb)
   }
 
   /**

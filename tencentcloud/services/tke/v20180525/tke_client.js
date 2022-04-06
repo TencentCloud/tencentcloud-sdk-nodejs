@@ -304,10 +304,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstances", req, cb);
     }
     /**
-     * 用于查询Kubernetes的各个原生控制器是否开启
+     * 获取集群规模
      */
-    async DescribeClusterControllers(req, cb) {
-        return this.request("DescribeClusterControllers", req, cb);
+    async DescribeClusterLevelAttribute(req, cb) {
+        return this.request("DescribeClusterLevelAttribute", req, cb);
     }
     /**
      * 给GR集群增加可用的ClusterCIDR
@@ -442,6 +442,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusAlertRule", req, cb);
     }
     /**
+     * 查询集群变配记录
+     */
+    async DescribeClusterLevelChangeRecords(req, cb) {
+        return this.request("DescribeClusterLevelChangeRecords", req, cb);
+    }
+    /**
      * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
      */
     async CreateClusterEndpoint(req, cb) {
@@ -472,6 +478,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusAlertRule", req, cb);
     }
     /**
+     * 用于查询Kubernetes的各个原生控制器是否开启
+     */
+    async DescribeClusterControllers(req, cb) {
+        return this.request("DescribeClusterControllers", req, cb);
+    }
+    /**
      * 集群的密钥信息
      */
     async DescribeClusterSecurity(req, cb) {
@@ -488,6 +500,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ScaleInClusterMaster(req, cb) {
         return this.request("ScaleInClusterMaster", req, cb);
+    }
+    /**
+     * 获取集群资源使用量
+     */
+    async DescribeResourceUsage(req, cb) {
+        return this.request("DescribeResourceUsage", req, cb);
     }
     /**
      * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
@@ -566,6 +584,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterEndpoint(req, cb) {
         return this.request("DeleteClusterEndpoint", req, cb);
+    }
+    /**
+     * 获取集群规模价格
+     */
+    async GetClusterLevelPrice(req, cb) {
+        return this.request("GetClusterLevelPrice", req, cb);
     }
     /**
      * 修改模板内容

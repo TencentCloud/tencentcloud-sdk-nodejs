@@ -117,6 +117,34 @@ export interface ActivityJoinDetail {
 }
 
 /**
+ * QueryVehicleInfoList返回参数结构体
+ */
+export interface QueryVehicleInfoListResponse {
+  /**
+      * 车系车型信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<VehicleInfo>
+
+  /**
+      * 分页游标，下次调用带上该值，则从当前的位置继续往后拉取新增的数据，以实现增量拉取。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 是否还有更多数据。0-否；1-是。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HasMore: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCorpTag返回参数结构体
  */
 export interface CreateCorpTagResponse {
@@ -202,6 +230,73 @@ export interface LicenseInfo {
 }
 
 /**
+ * 外部联系人SaaS使用明细数据
+ */
+export interface CustomerActionEventDetail {
+  /**
+   * 事件码
+   */
+  EventCode: string
+
+  /**
+   * 事件类型
+   */
+  EventType: number
+
+  /**
+   * 事件来源
+   */
+  EventSource: number
+
+  /**
+   * 外部联系人id
+   */
+  ExternalUserId: string
+
+  /**
+   * 销售顾问id
+   */
+  SalesId: number
+
+  /**
+   * 素材类型
+   */
+  MaterialType: number
+
+  /**
+   * 素材编号id
+   */
+  MaterialId: number
+
+  /**
+   * 事件上报时间，单位：秒
+   */
+  EventTime: number
+}
+
+/**
+ * QueryCustomerEventDetailStatistics返回参数结构体
+ */
+export interface QueryCustomerEventDetailStatisticsResponse {
+  /**
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 外部联系人SaaS使用明细统计响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<CustomerActionEventDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryExternalContactDetail请求参数结构体
  */
 export interface QueryExternalContactDetailRequest {
@@ -238,38 +333,68 @@ export interface QueryExternalUserMappingInfoResponse {
 }
 
 /**
- * 标签组信息
+ * QueryStaffEventDetailStatistics请求参数结构体
  */
-export interface TagGroup {
+export interface QueryStaffEventDetailStatisticsRequest {
   /**
-   * 企微标签组id
+   * 查询开始时间， 单位秒
    */
-  GroupId: string
+  BeginTime: number
 
   /**
-   * 标签组业务id
+   * 查询结束时间， 单位秒
    */
-  BizGroupId: string
+  EndTime: number
 
   /**
-   * 企微标签组名称，不能超过15个字符
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
    */
-  GroupName: string
+  Cursor?: string
 
   /**
-   * 标签组次序值。sort值大的排序靠前。有效的值范围是[0, 2^32)
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
    */
-  Sort: number
+  Limit?: number
+}
+
+/**
+ * QueryUserInfoList请求参数结构体
+ */
+export interface QueryUserInfoListRequest {
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
 
   /**
-   * 标签组创建时间,单位为秒
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
    */
-  CreateTime: number
+  Limit?: number
+}
+
+/**
+ * 外部联系人事件信息
+ */
+export interface ExternalUserEventInfo {
+  /**
+   * 事件编码, 添加外部联系人(ADD_EXTERNAL_CUSTOMER)/成员删除外部联系人(DELETE_EXTERNAL_CUSTOMER)/外部联系人删除成员(DELETE_FOLLOW_USER)
+   */
+  EventCode: string
 
   /**
-   * 标签组内的标签列表, 上限为20
+   * 外部联系人id
    */
-  Tags: Array<TagDetailInfo>
+  ExternalUserId: string
+
+  /**
+   * 企微SaaS的成员id
+   */
+  SalesId: string
+
+  /**
+   * 事件上报时间戳，单位：秒
+   */
+  EventTime: number
 }
 
 /**
@@ -395,6 +520,31 @@ export interface ExternalContact {
 }
 
 /**
+ * QueryExternalUserEventList请求参数结构体
+ */
+export interface QueryExternalUserEventListRequest {
+  /**
+   * 查询开始时间， 单位秒
+   */
+  BeginTime: number
+
+  /**
+   * 查询结束时间， 单位秒
+   */
+  EndTime: number
+
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
+
+  /**
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+   */
+  Limit?: number
+}
+
+/**
  * 标签信息
  */
 export interface TagInfo {
@@ -497,6 +647,26 @@ export interface ChatArchivingMsgTypeVideo {
 }
 
 /**
+ * QueryMaterialList请求参数结构体
+ */
+export interface QueryMaterialListRequest {
+  /**
+   * 素材类型：0-图片，1-视频，3-文章，10-车型，11-名片
+   */
+  MaterialType: number
+
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
+
+  /**
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+   */
+  Limit?: number
+}
+
+/**
  * CreateLead返回参数结构体
  */
 export interface CreateLeadResponse {
@@ -517,26 +687,20 @@ export interface CreateLeadResponse {
 }
 
 /**
- * QueryVehicleInfoList返回参数结构体
+ * QueryUserInfoList返回参数结构体
  */
-export interface QueryVehicleInfoListResponse {
+export interface QueryUserInfoListResponse {
   /**
-      * 车系车型信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PageData: Array<VehicleInfo>
-
-  /**
-      * 分页游标，下次调用带上该值，则从当前的位置继续往后拉取新增的数据，以实现增量拉取。
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NextCursor: string
 
   /**
-      * 是否还有更多数据。0-否；1-是。
+      * 企业成员信息列表响应数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HasMore: number
+  PageData: Array<CorpUserInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -557,6 +721,28 @@ export interface QueryVehicleInfoListRequest {
    * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
    */
   Limit?: number
+}
+
+/**
+ * QueryExternalUserEventList返回参数结构体
+ */
+export interface QueryExternalUserEventListResponse {
+  /**
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 外部联系人事件信息响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<ExternalUserEventInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -901,6 +1087,69 @@ export interface QueryLicenseInfoResponse {
 }
 
 /**
+ * 企业成员信息
+ */
+export interface CorpUserInfo {
+  /**
+   * 企业成员UserId
+   */
+  UserId: number
+
+  /**
+      * 企业成员在SaaS名片内填写的姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserName: string
+
+  /**
+      * 企业成员在企微原生通讯录内的id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserOpenId: string
+
+  /**
+      * 成员所属经销商id，可为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DealerId: number
+
+  /**
+      * 成员所属门店id，可为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShopId: number
+
+  /**
+      * 企业成员手机号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Phone: string
+
+  /**
+      * 成员所属部门id列表，仅返回该应用有查看权限的部门id；成员授权模式下，固定返回根部门id，即固定为1；多个部门使用逗号分割
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrgIds: string
+
+  /**
+      * 主部门，仅当应用对主部门有查看权限时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MainDepartment: string
+
+  /**
+      * 是否为部门负责人，第三方应用可为空。与orgIds值一一对应，多个部门使用逗号隔开，0-否， 1-是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsLeaderInDept: string
+
+  /**
+   * 激活状态: 0=已激活，1=已禁用，-1=退出企业"
+   */
+  Status: number
+}
+
+/**
  * QueryClueInfoList请求参数结构体
  */
 export interface QueryClueInfoListRequest {
@@ -913,6 +1162,72 @@ export interface QueryClueInfoListRequest {
    * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
    */
   Limit?: number
+}
+
+/**
+ * CRM统计数据响应
+ */
+export interface CrmStatisticsData {
+  /**
+   * 新增线索
+   */
+  LeadCnt: number
+
+  /**
+   * 新增建档
+   */
+  BuildCnt: number
+
+  /**
+   * 新增到店
+   */
+  InvitedCnt: number
+
+  /**
+   * 新增下订
+   */
+  OrderedCnt: number
+
+  /**
+   * 新增成交
+   */
+  DeliveredCnt: number
+
+  /**
+   * 新增战败
+   */
+  DefeatCnt: number
+
+  /**
+   * 新增好友
+   */
+  NewContactCnt: number
+
+  /**
+   * 统计时间, 单位：天
+   */
+  StatisticalTime: string
+}
+
+/**
+ * 素材信息响应体
+ */
+export interface MaterialInfo {
+  /**
+   * 素材id
+   */
+  MaterialId: number
+
+  /**
+      * 素材名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaterialName: string
+
+  /**
+   * 素材状态, -1: 删除 0: 启用 1: 禁用
+   */
+  Status: number
 }
 
 /**
@@ -1039,6 +1354,41 @@ export interface LiveCodeDetail {
 }
 
 /**
+ * 标签组信息
+ */
+export interface TagGroup {
+  /**
+   * 企微标签组id
+   */
+  GroupId: string
+
+  /**
+   * 标签组业务id
+   */
+  BizGroupId: string
+
+  /**
+   * 企微标签组名称，不能超过15个字符
+   */
+  GroupName: string
+
+  /**
+   * 标签组次序值。sort值大的排序靠前。有效的值范围是[0, 2^32)
+   */
+  Sort: number
+
+  /**
+   * 标签组创建时间,单位为秒
+   */
+  CreateTime: number
+
+  /**
+   * 标签组内的标签列表, 上限为20
+   */
+  Tags: Array<TagDetailInfo>
+}
+
+/**
  * 外部联系人标签
  */
 export interface ExternalContactTag {
@@ -1148,6 +1498,28 @@ export interface QueryActivityListResponse {
 }
 
 /**
+ * QueryStaffEventDetailStatistics返回参数结构体
+ */
+export interface QueryStaffEventDetailStatisticsResponse {
+  /**
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 企业成员SaaS使用明细统计响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<SalesActionEventDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryActivityJoinList请求参数结构体
  */
 export interface QueryActivityJoinListRequest {
@@ -1190,6 +1562,28 @@ export interface QueryExternalUserMappingInfoRequest {
    * 企业主体对应的外部联系人id列表，列表长度限制最大为50。
    */
   CorpExternalUserIdList: Array<string>
+}
+
+/**
+ * QueryCrmStatistics返回参数结构体
+ */
+export interface QueryCrmStatisticsResponse {
+  /**
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * CRM统计响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<CrmStatisticsData>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1452,6 +1846,66 @@ export interface QueryLicenseInfoRequest {
 }
 
 /**
+ * QueryCustomerEventDetailStatistics请求参数结构体
+ */
+export interface QueryCustomerEventDetailStatisticsRequest {
+  /**
+   * 查询开始时间， 单位秒
+   */
+  BeginTime: number
+
+  /**
+   * 查询结束时间， 单位秒
+   */
+  EndTime: number
+
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
+
+  /**
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+   */
+  Limit?: number
+}
+
+/**
+ * QueryCrmStatistics请求参数结构体
+ */
+export interface QueryCrmStatisticsRequest {
+  /**
+   * 查询开始时间， 单位秒
+   */
+  BeginTime: number
+
+  /**
+   * 查询结束时间， 单位秒
+   */
+  EndTime: number
+
+  /**
+   * 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+   */
+  Cursor?: string
+
+  /**
+   * 返回的最大记录数，整型，最大值100，默认值50，超过最大值时取最大值
+   */
+  Limit?: number
+
+  /**
+   * 请求的企业成员id，为空时默认全租户
+   */
+  SalesId?: string
+
+  /**
+   * 请求的部门id，为空时默认全租户
+   */
+  OrgId?: number
+}
+
+/**
  * QueryActivityList请求参数结构体
  */
 export interface QueryActivityListRequest {
@@ -1591,6 +2045,68 @@ export interface QueryChannelCodeListResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PageData: Array<ChannelCodeInnerDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 企业成员SaaS使用明细数据
+ */
+export interface SalesActionEventDetail {
+  /**
+   * 事件码
+   */
+  EventCode: string
+
+  /**
+   * 事件类型
+   */
+  EventType: number
+
+  /**
+   * 事件来源
+   */
+  EventSource: number
+
+  /**
+   * 销售顾问id
+   */
+  SalesId: number
+
+  /**
+   * 素材类型
+   */
+  MaterialType: number
+
+  /**
+   * 素材编号id
+   */
+  MaterialId: number
+
+  /**
+   * 事件上报时间，单位：秒
+   */
+  EventTime: number
+}
+
+/**
+ * QueryMaterialList返回参数结构体
+ */
+export interface QueryMaterialListResponse {
+  /**
+      * 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextCursor: string
+
+  /**
+      * 企业素材列表响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PageData: Array<MaterialInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

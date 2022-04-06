@@ -56,6 +56,7 @@ import {
   DescribeExternalClusterSpecRequest,
   DeletePrometheusTemplateRequest,
   DescribeClusterAsGroupOptionRequest,
+  RegionInstance,
   DescribeEKSContainerInstanceRegionsRequest,
   DescribeEKSClustersResponse,
   VolumeMount,
@@ -77,6 +78,7 @@ import {
   DescribeRegionsResponse,
   PrometheusAlertHistoryItem,
   CreateClusterRouteResponse,
+  ClusterLevelChangeRecord,
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
   ModifyPrometheusAlertRuleResponse,
@@ -87,6 +89,7 @@ import {
   EnableClusterDeletionProtectionResponse,
   ClusterAsGroup,
   Instance,
+  DescribePrometheusInstanceResponse,
   LoginSettings,
   DescribeVpcCniPodLimitsResponse,
   EksCiRegionInfo,
@@ -106,6 +109,7 @@ import {
   DeleteClusterRouteResponse,
   ModifyClusterEndpointSPResponse,
   CreateClusterEndpointVipResponse,
+  ResourceUsage,
   AutoscalingAdded,
   DescribeClustersRequest,
   ModifyClusterAttributeResponse,
@@ -118,6 +122,7 @@ import {
   DeletePrometheusTemplateSyncRequest,
   SetNodePoolNodeProtectionResponse,
   DisableVpcCniNetworkTypeRequest,
+  ResourceUsageDetail,
   DeleteEKSContainerInstancesRequest,
   PrometheusAlertRuleDetail,
   UpgradeClusterInstancesRequest,
@@ -164,6 +169,7 @@ import {
   DescribeExternalClusterSpecResponse,
   AddNodeToNodePoolResponse,
   PodLimitsByType,
+  DescribeClusterLevelAttributeRequest,
   UpdateEKSClusterResponse,
   DisableClusterDeletionProtectionRequest,
   NodePool,
@@ -192,8 +198,9 @@ import {
   CreateClusterNodePoolFromExistingAsgResponse,
   DescribeEnableVpcCniProgressRequest,
   DescribeClusterEndpointStatusRequest,
+  GetClusterLevelPriceResponse,
   HttpGet,
-  EnhancedService,
+  DescribeResourceUsageResponse,
   CreateClusterAsGroupRequest,
   ImageRegistryCredential,
   DescribeClusterNodePoolsResponse,
@@ -218,7 +225,7 @@ import {
   DescribePrometheusInstanceRequest,
   DescribeClusterInstancesRequest,
   InstanceAdvancedSettings,
-  RegionInstance,
+  DescribeResourceUsageRequest,
   PodLimitsInstance,
   DescribePrometheusAgentsRequest,
   DescribeEnableVpcCniProgressResponse,
@@ -231,6 +238,7 @@ import {
   ImageInstance,
   UpgradeAbleInstancesItem,
   DescribeImageCachesResponse,
+  GetClusterLevelPriceRequest,
   CreateClusterEndpointResponse,
   DescribeEKSClustersRequest,
   CreateClusterNodePoolRequest,
@@ -238,6 +246,7 @@ import {
   AcquireClusterAdminRoleResponse,
   Taint,
   RestartEKSContainerInstancesResponse,
+  Probe,
   ModifyPrometheusTemplateResponse,
   GetTkeAppChartListResponse,
   DeletePrometheusTemplateResponse,
@@ -246,6 +255,7 @@ import {
   ModifyClusterAuthenticationOptionsRequest,
   DeleteClusterEndpointVipRequest,
   LivenessOrReadinessProbe,
+  DescribeClusterLevelChangeRecordsResponse,
   CheckInstancesUpgradeAbleResponse,
   Cluster,
   DescribeClusterEndpointStatusResponse,
@@ -264,7 +274,7 @@ import {
   PrometheusJobTargets,
   DescribeEKSContainerInstanceRegionsResponse,
   ModifyClusterAsGroupOptionAttributeResponse,
-  DescribePrometheusInstanceResponse,
+  DescribeClusterLevelAttributeResponse,
   Capabilities,
   AddExistedInstancesRequest,
   DescribeTKEEdgeScriptRequest,
@@ -280,9 +290,10 @@ import {
   DescribeClusterRoutesRequest,
   DeleteClusterRouteRequest,
   DescribePrometheusOverviewsResponse,
-  DeleteClusterEndpointRequest,
+  ClusterLevelAttribute,
   DescribePrometheusTargetsRequest,
   DescribePrometheusTargetsResponse,
+  EnhancedService,
   DescribeClusterNodePoolDetailRequest,
   SetNodePoolNodeProtectionRequest,
   DeletePrometheusTemplateSyncResponse,
@@ -296,6 +307,7 @@ import {
   GetMostSuitableImageCacheResponse,
   DescribeAvailableClusterVersionResponse,
   TagSpecification,
+  DescribeClusterLevelChangeRecordsRequest,
   DescribeClusterRouteTablesResponse,
   AddVpcCniSubnetsRequest,
   InstanceUpgradePreCheckResultItem,
@@ -311,7 +323,7 @@ import {
   RunMonitorServiceEnabled,
   UpdateClusterVersionResponse,
   CreateEKSContainerInstancesRequest,
-  Probe,
+  DeleteClusterEndpointRequest,
   CreateClusterNodePoolResponse,
   ManuallyAdded,
   NodePoolOption,
@@ -803,13 +815,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询Kubernetes的各个原生控制器是否开启
+   * 获取集群规模
    */
-  async DescribeClusterControllers(
-    req: DescribeClusterControllersRequest,
-    cb?: (error: string, rep: DescribeClusterControllersResponse) => void
-  ): Promise<DescribeClusterControllersResponse> {
-    return this.request("DescribeClusterControllers", req, cb)
+  async DescribeClusterLevelAttribute(
+    req: DescribeClusterLevelAttributeRequest,
+    cb?: (error: string, rep: DescribeClusterLevelAttributeResponse) => void
+  ): Promise<DescribeClusterLevelAttributeResponse> {
+    return this.request("DescribeClusterLevelAttribute", req, cb)
   }
 
   /**
@@ -1033,6 +1045,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询集群变配记录
+   */
+  async DescribeClusterLevelChangeRecords(
+    req: DescribeClusterLevelChangeRecordsRequest,
+    cb?: (error: string, rep: DescribeClusterLevelChangeRecordsResponse) => void
+  ): Promise<DescribeClusterLevelChangeRecordsResponse> {
+    return this.request("DescribeClusterLevelChangeRecords", req, cb)
+  }
+
+  /**
    * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
    */
   async CreateClusterEndpoint(
@@ -1083,6 +1105,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于查询Kubernetes的各个原生控制器是否开启
+   */
+  async DescribeClusterControllers(
+    req: DescribeClusterControllersRequest,
+    cb?: (error: string, rep: DescribeClusterControllersResponse) => void
+  ): Promise<DescribeClusterControllersResponse> {
+    return this.request("DescribeClusterControllers", req, cb)
+  }
+
+  /**
    * 集群的密钥信息
    */
   async DescribeClusterSecurity(
@@ -1110,6 +1142,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScaleInClusterMasterResponse) => void
   ): Promise<ScaleInClusterMasterResponse> {
     return this.request("ScaleInClusterMaster", req, cb)
+  }
+
+  /**
+   * 获取集群资源使用量
+   */
+  async DescribeResourceUsage(
+    req: DescribeResourceUsageRequest,
+    cb?: (error: string, rep: DescribeResourceUsageResponse) => void
+  ): Promise<DescribeResourceUsageResponse> {
+    return this.request("DescribeResourceUsage", req, cb)
   }
 
   /**
@@ -1240,6 +1282,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterEndpointResponse) => void
   ): Promise<DeleteClusterEndpointResponse> {
     return this.request("DeleteClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 获取集群规模价格
+   */
+  async GetClusterLevelPrice(
+    req: GetClusterLevelPriceRequest,
+    cb?: (error: string, rep: GetClusterLevelPriceResponse) => void
+  ): Promise<GetClusterLevelPriceResponse> {
+    return this.request("GetClusterLevelPrice", req, cb)
   }
 
   /**

@@ -520,7 +520,7 @@ export interface ApproverInfo {
 0：企业
 1：个人
 3：企业静默签署
-注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署，目前只支持第一方进行静默签署。
+注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。
       */
   ApproverType: number
 
@@ -598,8 +598,12 @@ export interface StartFlowResponse {
  */
 export interface FlowCreateApprover {
   /**
-   * 签署方类型 (0为企业/1为个人)
-   */
+      * 参与者类型：
+0：企业
+1：个人
+3：企业静默签署
+注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。
+      */
   ApproverType: number
 
   /**

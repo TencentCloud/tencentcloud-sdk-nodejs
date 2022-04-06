@@ -1,4 +1,29 @@
 /**
+ * ListLog返回参数结构体
+ */
+export interface ListLogResponse {
+    /**
+      * 日志上下文
+      */
+    Context: string;
+    /**
+      * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+      */
+    Listover: boolean;
+    /**
+      * 日志列表
+      */
+    Results: Array<CLSLogItem>;
+    /**
+      * 日志总条数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteProduct请求参数结构体
  */
 export interface DeleteProductRequest {
@@ -29,17 +54,30 @@ export interface DescribePrivateCABindedProductsRequest {
     Limit: number;
 }
 /**
- * DescribePrivateCAs返回参数结构体
+ * DeleteProductPrivateCA返回参数结构体
  */
-export interface DescribePrivateCAsResponse {
-    /**
-      * 私有CA证书列表
-      */
-    CAs: Array<CertInfo>;
+export interface DeleteProductPrivateCAResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UpdatePrivateCA请求参数结构体
+ */
+export interface UpdatePrivateCARequest {
+    /**
+      * CA证书名称
+      */
+    CertName: string;
+    /**
+      * CA证书内容
+      */
+    CertText: string;
+    /**
+      * 校验CA证书的证书内容
+      */
+    VerifyCertText: string;
 }
 /**
  * UpdateDevicesEnableState返回参数结构体
@@ -73,6 +111,85 @@ export interface DescribeProductCAResponse {
     RequestId?: string;
 }
 /**
+ * 产品属性
+ */
+export interface ProductProperties {
+    /**
+      * 产品描述
+      */
+    ProductDescription?: string;
+    /**
+      * 加密类型，1表示证书认证，2表示签名认证。如不填写，默认值是1
+      */
+    EncryptionType?: string;
+    /**
+      * 产品所属区域，目前只支持广州（gz）
+      */
+    Region?: string;
+    /**
+      * 产品类型，各个类型值代表的节点-类型如下：
+0 普通产品，2 NB-IoT产品，4 LoRa产品，3 LoRa网关产品，5 普通网关产品   默认值是0
+      */
+    ProductType?: number;
+    /**
+      * 数据格式，取值为json或者custom，默认值是json
+      */
+    Format?: string;
+    /**
+      * 产品所属平台，默认值是0
+      */
+    Platform?: string;
+    /**
+      * LoRa产品运营侧APPEUI，只有LoRa产品需要填写
+      */
+    Appeui?: string;
+    /**
+      * 产品绑定的物模型ID，-1表示不绑定
+      */
+    ModelId?: string;
+    /**
+      * 产品绑定的物模型名称
+      */
+    ModelName?: string;
+    /**
+      * 产品密钥，suite产品才会有
+      */
+    ProductKey?: string;
+    /**
+      * 动态注册类型 0-关闭, 1-预定义设备名 2-动态定义设备名
+      */
+    RegisterType?: number;
+    /**
+      * 动态注册产品秘钥
+      */
+    ProductSecret?: string;
+    /**
+      * RegisterType为2时，设备动态创建的限制数量
+      */
+    RegisterLimit?: number;
+    /**
+      * 划归的产品，展示为源产品ID，其余为空
+      */
+    OriginProductId?: string;
+    /**
+      * 私有CA名称
+      */
+    PrivateCAName?: string;
+    /**
+      * 划归的产品，展示为源用户ID，其余为空
+      */
+    OriginUserId?: number;
+}
+/**
+ * UpdatePrivateCA返回参数结构体
+ */
+export interface UpdatePrivateCAResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeletePrivateCA返回参数结构体
  */
 export interface DeletePrivateCAResponse {
@@ -82,21 +199,63 @@ export interface DeletePrivateCAResponse {
     RequestId?: string;
 }
 /**
- * UpdatePrivateCA请求参数结构体
+ * DescribePrivateCAs返回参数结构体
  */
-export interface UpdatePrivateCARequest {
+export interface DescribePrivateCAsResponse {
     /**
-      * CA证书名称
+      * 私有CA证书列表
       */
-    CertName: string;
+    CAs: Array<CertInfo>;
     /**
-      * CA证书内容
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CertText: string;
+    RequestId?: string;
+}
+/**
+ * DeleteProductPrivateCA请求参数结构体
+ */
+export interface DeleteProductPrivateCARequest {
     /**
-      * 校验CA证书的证书内容
+      * 产品ID
       */
-    VerifyCertText: string;
+    ProductId: string;
+}
+/**
+ * CLS日志
+ */
+export interface CLSLogItem {
+    /**
+      * 日志内容
+      */
+    Content: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 请求ID
+      */
+    RequestId: string;
+    /**
+      * 结果
+      */
+    Result: string;
+    /**
+      * 模块
+      */
+    Scene: string;
+    /**
+      * 日志时间
+      */
+    Time: string;
+    /**
+      * 腾讯云账号
+      */
+    Userid: string;
 }
 /**
  * DescribePrivateCABindedProducts返回参数结构体
@@ -145,6 +304,73 @@ export interface CreatePrivateCAResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SetProductsForbiddenStatus返回参数结构体
+ */
+export interface SetProductsForbiddenStatusResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 内容日志项
+ */
+export interface PayloadLogItem {
+    /**
+      * 账号id
+      */
+    Uin: string;
+    /**
+      * 产品id
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 来源类型
+      */
+    SrcType: string;
+    /**
+      * 来源名称
+      */
+    SrcName: string;
+    /**
+      * 消息topic
+      */
+    Topic: string;
+    /**
+      * 内容格式类型
+      */
+    PayloadFormatType: string;
+    /**
+      * 内容信息
+      */
+    Payload: string;
+    /**
+      * 请求ID
+      */
+    RequestId: string;
+    /**
+      * 日期时间
+      */
+    DateTime: string;
+}
+/**
+ * UpdateProductPrivateCA请求参数结构体
+ */
+export interface UpdateProductPrivateCARequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 私有CA证书名称
+      */
+    CertName: string;
 }
 /**
  * 子产品信息
@@ -199,6 +425,19 @@ export interface DeviceTag {
     Name?: string;
 }
 /**
+ * PublishBroadcastMessage返回参数结构体
+ */
+export interface PublishBroadcastMessageResponse {
+    /**
+      * 广播消息任务ID
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeProductCA请求参数结构体
  */
 export interface DescribeProductCARequest {
@@ -223,6 +462,15 @@ export interface CreatePrivateCARequest {
       * 校验CA证书的证书内容
       */
     VerifyCertText: string;
+}
+/**
+ * UpdateDevicePSK返回参数结构体
+ */
+export interface UpdateDevicePSKResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeProduct返回参数结构体
@@ -263,6 +511,40 @@ export interface DescribeDeviceRequest {
     DeviceName: string;
 }
 /**
+ * UpdateDevicesEnableState请求参数结构体
+ */
+export interface UpdateDevicesEnableStateRequest {
+    /**
+      * 设备所属产品id
+      */
+    ProductId: string;
+    /**
+      * 设备名称集合
+      */
+    DeviceNames: Array<string>;
+    /**
+      * 要设置的设备状态，1为启用，0为禁用
+      */
+    Status: number;
+}
+/**
+ * UpdateDeviceLogLevel请求参数结构体
+ */
+export interface UpdateDeviceLogLevelRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 日志级别，0：关闭，1：错误，2：告警，3：信息，4：调试
+      */
+    LogLevel: number;
+}
+/**
  * 设备标签
  */
 export interface DeviceLabel {
@@ -274,6 +556,23 @@ export interface DeviceLabel {
       * 标签值
       */
     Value: string;
+}
+/**
+ * UpdateProductDynamicRegister请求参数结构体
+ */
+export interface UpdateProductDynamicRegisterRequest {
+    /**
+      * 产品Id
+      */
+    ProductId: string;
+    /**
+      * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+      */
+    RegisterType: number;
+    /**
+      * 动态注册设备上限
+      */
+    RegisterLimit: number;
 }
 /**
  * X509证书信息
@@ -326,13 +625,21 @@ export interface ProductMetadata {
  */
 export declare type DescribePrivateCAsRequest = null;
 /**
- * UpdatePrivateCA返回参数结构体
+ * UpdateDevicePSK请求参数结构体
  */
-export interface UpdatePrivateCAResponse {
+export interface UpdateDevicePSKRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 产品名
       */
-    RequestId?: string;
+    ProductId: string;
+    /**
+      * 设备名
+      */
+    DeviceName: string;
+    /**
+      * 设备的psk
+      */
+    Psk: string;
 }
 /**
  * DescribeDevices请求参数结构体
@@ -364,21 +671,25 @@ export interface DescribeDevicesRequest {
     EnableState?: number;
 }
 /**
- * UpdateDeviceLogLevel请求参数结构体
+ * ListLogPayload返回参数结构体
  */
-export interface UpdateDeviceLogLevelRequest {
+export interface ListLogPayloadResponse {
     /**
-      * 产品ID
+      * 日志上下文
       */
-    ProductId: string;
+    Context: string;
     /**
-      * 设备名称
+      * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
       */
-    DeviceName: string;
+    Listover: boolean;
     /**
-      * 日志级别，0：关闭，1：错误，2：告警，3：信息，4：调试
+      * 日志列表
       */
-    LogLevel: number;
+    Results: Array<PayloadLogItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribePrivateCA返回参数结构体
@@ -401,6 +712,53 @@ export interface UpdateDeviceLogLevelResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ListSDKLog返回参数结构体
+ */
+export interface ListSDKLogResponse {
+    /**
+      * 日志检索上下文
+      */
+    Context: string;
+    /**
+      * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
+      */
+    Listover: boolean;
+    /**
+      * 日志列表
+      */
+    Results: Array<SDKLogItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ListLogPayload请求参数结构体
+ */
+export interface ListLogPayloadRequest {
+    /**
+      * 日志开始时间
+      */
+    MinTime: number;
+    /**
+      * 日志结束时间
+      */
+    MaxTime: number;
+    /**
+      * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key比如：RequestID、ProductID、DeviceName等。
+一个典型的查询示例：ProductID:ABCDE12345 DeviceName:test publish
+      */
+    Keywords: string;
+    /**
+      * 日志检索上下文
+      */
+    Context?: string;
+    /**
+      * 日志最大条数
+      */
+    MaxNum?: number;
 }
 /**
  * CreateDevice返回参数结构体
@@ -444,21 +802,33 @@ export interface CreateDeviceResponse {
     RequestId?: string;
 }
 /**
- * UpdateDevicesEnableState请求参数结构体
+ * ListSDKLog请求参数结构体
  */
-export interface UpdateDevicesEnableStateRequest {
+export interface ListSDKLogRequest {
     /**
-      * 设备所属产品id
+      * 日志开始时间
       */
-    ProductId: string;
+    MinTime: number;
     /**
-      * 设备名称集合
+      * 日志结束时间
       */
-    DeviceNames: Array<string>;
+    MaxTime: number;
     /**
-      * 要设置的设备状态，1为启用，0为禁用
+      * 查询关键字，可以同时支持键值查询和文本查询，
+例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。
+键值或文本可以包含多个，以空格隔开。
+其中可以索引的key包括：productid、devicename、loglevel
+一个典型的查询示例：productid:7JK1G72JNE devicename:name publish loglevel:WARN一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW publish
       */
-    Status: number;
+    Keywords: string;
+    /**
+      * 日志检索上下文
+      */
+    Context?: string;
+    /**
+      * 查询条数
+      */
+    MaxNum?: number;
 }
 /**
  * CreateDevice请求参数结构体
@@ -517,6 +887,15 @@ export interface DescribeProductRequest {
       * 产品ID
       */
     ProductId: string;
+}
+/**
+ * UpdateProductPrivateCA返回参数结构体
+ */
+export interface UpdateProductPrivateCAResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 设备属性
@@ -656,74 +1035,68 @@ export interface DeviceInfo {
     FirmwareUpdateTime: number;
 }
 /**
- * 产品属性
+ * SetProductsForbiddenStatus请求参数结构体
  */
-export interface ProductProperties {
+export interface SetProductsForbiddenStatusRequest {
     /**
-      * 产品描述
+      * 要设置禁用状态的产品列表
       */
-    ProductDescription?: string;
+    ProductId: Array<string>;
     /**
-      * 加密类型，1表示证书认证，2表示签名认证。如不填写，默认值是1
+      * 0启用，1禁用
       */
-    EncryptionType?: string;
+    Status: number;
+}
+/**
+ * SDK日志项
+ */
+export interface SDKLogItem {
     /**
-      * 产品所属区域，目前只支持广州（gz）
+      * 产品ID
       */
-    Region?: string;
+    ProductId: string;
     /**
-      * 产品类型，各个类型值代表的节点-类型如下：
-0 普通产品，2 NB-IoT产品，4 LoRa产品，3 LoRa网关产品，5 普通网关产品   默认值是0
+      * 设备名称
       */
-    ProductType?: number;
+    DeviceName: string;
     /**
-      * 数据格式，取值为json或者custom，默认值是json
+      * 日志等级
       */
-    Format?: string;
+    Level: string;
     /**
-      * 产品所属平台，默认值是0
+      * 日志时间
       */
-    Platform?: string;
+    DateTime: string;
     /**
-      * LoRa产品运营侧APPEUI，只有LoRa产品需要填写
+      * 日志内容
       */
-    Appeui?: string;
+    Content: string;
+}
+/**
+ * ListLog请求参数结构体
+ */
+export interface ListLogRequest {
     /**
-      * 产品绑定的物模型ID，-1表示不绑定
+      * 日志开始时间
       */
-    ModelId?: string;
+    MinTime: number;
     /**
-      * 产品绑定的物模型名称
+      * 日志结束时间
       */
-    ModelName?: string;
+    MaxTime: number;
     /**
-      * 产品密钥，suite产品才会有
+      * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。
+一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish
       */
-    ProductKey?: string;
+    Keywords?: string;
     /**
-      * 动态注册类型 0-关闭, 1-预定义设备名 2-动态定义设备名
+      * 日志检索上下文
       */
-    RegisterType?: number;
+    Context?: string;
     /**
-      * 动态注册产品秘钥
+      * 查询条数
       */
-    ProductSecret?: string;
-    /**
-      * RegisterType为2时，设备动态创建的限制数量
-      */
-    RegisterLimit?: number;
-    /**
-      * 划归的产品，展示为源产品ID，其余为空
-      */
-    OriginProductId?: string;
-    /**
-      * 私有CA名称
-      */
-    PrivateCAName?: string;
-    /**
-      * 划归的产品，展示为源用户ID，其余为空
-      */
-    OriginUserId?: number;
+    MaxNum?: number;
 }
 /**
  * DescribeDevice返回参数结构体
@@ -834,6 +1207,53 @@ export interface DescribeDeviceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FirmwareUpdateTime: number;
+    /**
+      * 创建者账号ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateUserId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * PublishBroadcastMessage请求参数结构体
+ */
+export interface PublishBroadcastMessageRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 消息内容
+      */
+    Payload: string;
+    /**
+      * 消息质量等级
+      */
+    Qos: number;
+    /**
+      * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+      */
+    PayloadEncoding?: string;
+}
+/**
+ * UpdateProductDynamicRegister返回参数结构体
+ */
+export interface UpdateProductDynamicRegisterResponse {
+    /**
+      * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+      */
+    RegisterType: number;
+    /**
+      * 动态注册产品密钥
+      */
+    ProductSecret: string;
+    /**
+      * 动态注册设备上限
+      */
+    RegisterLimit: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

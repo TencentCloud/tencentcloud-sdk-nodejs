@@ -293,7 +293,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesDeniedActions", req, cb);
     }
     /**
-     * 本接口（InquirePriceCreateInstances）用于续费实例询价。
+     * 本接口（InquirePriceRenewInstances）用于续费实例询价。
      */
     async InquirePriceRenewInstances(req, cb) {
         return this.request("InquirePriceRenewInstances", req, cb);

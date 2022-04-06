@@ -2002,7 +2002,7 @@ export interface HostLoginList {
       */
     SrcIp: string;
     /**
-      * 1:正常登录；2异地登录； 5已加白
+      * 1:正常登录；2异地登录； 5已加白； 14：已处理；15：已忽略。
       */
     Status: number;
     /**
@@ -2715,7 +2715,7 @@ export interface ReverseShell {
       */
     ParentProcPath: string;
     /**
-      * 处理状态：0-待处理 2-白名单
+      * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
       */
     Status: number;
     /**
@@ -3792,7 +3792,7 @@ export interface PrivilegeEscalationProcess {
       */
     ProcTree: string;
     /**
-      * 处理状态：0-待处理 2-白名单
+      * 处理状态：0-待处理 2-白名单 3-已处理 4-已忽略
       */
     Status: number;
     /**
@@ -5012,6 +5012,7 @@ export interface DescribeBruteAttackListRequest {
       * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Uuid - String - 是否必填：否 - 云镜唯一Uuid</li>
+<li>Quuid - String - 是否必填：否 - 云服务器uuid</li>
 <li>Status - String - 是否必填：否 - 状态筛选：失败：FAILED 成功：SUCCESS</li>
 <li>UserName - String - 是否必填：否 - UserName筛选</li>
 <li>SrcIp - String - 是否必填：否 - 来源ip筛选</li>
@@ -5675,7 +5676,7 @@ export interface BashEvent {
       */
     RuleLevel: number;
     /**
-      * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白
+      * 处理状态： 0 = 待处理 1= 已处理, 2 = 已加白， 3 = 已忽略
       */
     Status: number;
     /**
@@ -6910,7 +6911,7 @@ export interface DescribeMachineInfoResponse {
       */
     ProVersionOpenDate: string;
     /**
-      * 云主机类型。
+      * 云服务器类型。
 <li>CVM: 腾讯云服务器</li>
 <li>BM: 黑石物理机</li>
 <li>ECM: 边缘计算服务器</li>
@@ -8549,11 +8550,12 @@ export interface DescribeHostLoginListRequest {
       * 过滤条件。
 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
 <li>Uuid - String - 是否必填：否 - 云镜唯一Uuid</li>
+<li>Quuid - String - 是否必填：否 - 云服务器uuid</li>
 <li>UserName - String - 是否必填：否 - 用户名筛选</li>
 <li>LoginTimeBegin - String - 是否必填：否 - 按照修改时间段筛选，开始时间</li>
 <li>LoginTimeEnd - String - 是否必填：否 - 按照修改时间段筛选，结束时间</li>
 <li>SrcIp - String - 是否必填：否 - 来源ip筛选</li>
-<li>Status - int - 是否必填：否 - 状态筛选1:正常登录；5：已加白</li>
+<li>Status - int - 是否必填：否 - 状态筛选1:正常登录；5：已加白,14:已处理，15：已忽略</li>
 <li>RiskLevel - int - 是否必填：否 - 状态筛选0:高危；1：可疑</li>
       */
     Filters?: Array<Filter>;
@@ -9007,7 +9009,7 @@ export interface DescribeImportMachineInfoResponse {
       */
     EffectiveMachineInfoList: Array<EffectiveMachineInfo>;
     /**
-      * 用户批量导入失败的机器列表（比如机器不存在等...）
+      * 用户批量导入失败的机器列表（例如机器不存在等...）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InvalidMachineList: Array<string>;
@@ -9570,6 +9572,11 @@ export interface BruteAttackInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceId: string;
+    /**
+      * 0：待处理，1：忽略，5：已处理，6：加入白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataStatus: number;
 }
 /**
  * DescribeWebPageProtectStat返回参数结构体
@@ -9728,7 +9735,7 @@ export interface RiskDnsList {
       */
     UserRuleId: number;
     /**
-      * 状态；0-待处理，2-已加白，3-非信任状态
+      * 状态；0-待处理，2-已加白，3-非信任状态，4-已处理，5-已忽略
       */
     Status: number;
     /**
@@ -12101,7 +12108,7 @@ export interface WarningInfoObj {
  */
 export interface OpenProVersionRequest {
     /**
-      * 云主机类型。(当前参数已作废,可以留空值 )
+      * 云服务器类型。(当前参数已作废,可以留空值 )
       */
     MachineType: string;
     /**

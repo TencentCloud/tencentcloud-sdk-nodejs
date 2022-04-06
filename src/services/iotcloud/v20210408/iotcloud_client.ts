@@ -18,44 +18,65 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ListLogResponse,
   DeleteProductRequest,
   DescribePrivateCABindedProductsRequest,
-  DescribePrivateCAsResponse,
+  DeleteProductPrivateCAResponse,
+  UpdatePrivateCARequest,
   UpdateDevicesEnableStateResponse,
   DescribePrivateCARequest,
   DescribeProductCAResponse,
+  ProductProperties,
+  UpdatePrivateCAResponse,
   DeletePrivateCAResponse,
-  UpdatePrivateCARequest,
+  DescribePrivateCAsResponse,
+  DeleteProductPrivateCARequest,
+  CLSLogItem,
   DescribePrivateCABindedProductsResponse,
   DeleteDeviceRequest,
   DeleteProductResponse,
   CreatePrivateCAResponse,
+  SetProductsForbiddenStatusResponse,
+  PayloadLogItem,
+  UpdateProductPrivateCARequest,
   BindProductInfo,
   DescribeDevicesResponse,
   DeviceTag,
+  PublishBroadcastMessageResponse,
   DescribeProductCARequest,
   CreatePrivateCARequest,
+  UpdateDevicePSKResponse,
   DescribeProductResponse,
   DescribeDeviceRequest,
+  UpdateDevicesEnableStateRequest,
+  UpdateDeviceLogLevelRequest,
   DeviceLabel,
+  UpdateProductDynamicRegisterRequest,
   CertInfo,
   ProductMetadata,
   DescribePrivateCAsRequest,
-  UpdatePrivateCAResponse,
+  UpdateDevicePSKRequest,
   DescribeDevicesRequest,
-  UpdateDeviceLogLevelRequest,
+  ListLogPayloadResponse,
   DescribePrivateCAResponse,
   UpdateDeviceLogLevelResponse,
+  ListSDKLogResponse,
+  ListLogPayloadRequest,
   CreateDeviceResponse,
-  UpdateDevicesEnableStateRequest,
+  ListSDKLogRequest,
   CreateDeviceRequest,
   DescribeProductRequest,
+  UpdateProductPrivateCAResponse,
   Attribute,
   DeleteDeviceResponse,
   DeletePrivateCARequest,
   DeviceInfo,
-  ProductProperties,
+  SetProductsForbiddenStatusRequest,
+  SDKLogItem,
+  ListLogRequest,
   DescribeDeviceResponse,
+  PublishBroadcastMessageRequest,
+  UpdateProductDynamicRegisterResponse,
 } from "./iotcloud_models"
 
 /**
@@ -78,33 +99,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询私有CA绑定的产品列表
+   * 查询私有CA证书列表
    */
-  async DescribePrivateCABindedProducts(
-    req: DescribePrivateCABindedProductsRequest,
-    cb?: (error: string, rep: DescribePrivateCABindedProductsResponse) => void
-  ): Promise<DescribePrivateCABindedProductsResponse> {
-    return this.request("DescribePrivateCABindedProducts", req, cb)
+  async DescribePrivateCAs(
+    req?: DescribePrivateCAsRequest,
+    cb?: (error: string, rep: DescribePrivateCAsResponse) => void
+  ): Promise<DescribePrivateCAsResponse> {
+    return this.request("DescribePrivateCAs", req, cb)
   }
 
   /**
-   * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
+   * 获取日志内容列表
    */
-  async DescribeDevices(
-    req: DescribeDevicesRequest,
-    cb?: (error: string, rep: DescribeDevicesResponse) => void
-  ): Promise<DescribeDevicesResponse> {
-    return this.request("DescribeDevices", req, cb)
+  async ListLogPayload(
+    req: ListLogPayloadRequest,
+    cb?: (error: string, rep: ListLogPayloadResponse) => void
+  ): Promise<ListLogPayloadResponse> {
+    return this.request("ListLogPayload", req, cb)
   }
 
   /**
-   * 本接口（CreateDevice）用于新建一个物联网通信设备。
+   * 本接口（DescribeDevice）用于查看设备信息
    */
-  async CreateDevice(
-    req: CreateDeviceRequest,
-    cb?: (error: string, rep: CreateDeviceResponse) => void
-  ): Promise<CreateDeviceResponse> {
-    return this.request("CreateDevice", req, cb)
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeProduct）用于查看产品详情
+   */
+  async DescribeProduct(
+    req: DescribeProductRequest,
+    cb?: (error: string, rep: DescribeProductResponse) => void
+  ): Promise<DescribeProductResponse> {
+    return this.request("DescribeProduct", req, cb)
+  }
+
+  /**
+   * 更新产品的私有CA
+   */
+  async UpdateProductPrivateCA(
+    req: UpdateProductPrivateCARequest,
+    cb?: (error: string, rep: UpdateProductPrivateCAResponse) => void
+  ): Promise<UpdateProductPrivateCAResponse> {
+    return this.request("UpdateProductPrivateCA", req, cb)
   }
 
   /**
@@ -118,13 +159,63 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询私有化CA信息
+   * 删除产品的私有CA证书
    */
-  async DescribePrivateCA(
-    req: DescribePrivateCARequest,
-    cb?: (error: string, rep: DescribePrivateCAResponse) => void
-  ): Promise<DescribePrivateCAResponse> {
-    return this.request("DescribePrivateCA", req, cb)
+  async DeleteProductPrivateCA(
+    req: DeleteProductPrivateCARequest,
+    cb?: (error: string, rep: DeleteProductPrivateCAResponse) => void
+  ): Promise<DeleteProductPrivateCAResponse> {
+    return this.request("DeleteProductPrivateCA", req, cb)
+  }
+
+  /**
+   * 批量启用或者禁用设备
+   */
+  async UpdateDevicesEnableState(
+    req: UpdateDevicesEnableStateRequest,
+    cb?: (error: string, rep: UpdateDevicesEnableStateResponse) => void
+  ): Promise<UpdateDevicesEnableStateResponse> {
+    return this.request("UpdateDevicesEnableState", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteDevice）用于删除物联网通信设备。
+   */
+  async DeleteDevice(
+    req: DeleteDeviceRequest,
+    cb?: (error: string, rep: DeleteDeviceResponse) => void
+  ): Promise<DeleteDeviceResponse> {
+    return this.request("DeleteDevice", req, cb)
+  }
+
+  /**
+   * 获取设备上报的日志
+   */
+  async ListSDKLog(
+    req: ListSDKLogRequest,
+    cb?: (error: string, rep: ListSDKLogResponse) => void
+  ): Promise<ListSDKLogResponse> {
+    return this.request("ListSDKLog", req, cb)
+  }
+
+  /**
+   * 本接口（CreateDevice）用于新建一个物联网通信设备。
+   */
+  async CreateDevice(
+    req: CreateDeviceRequest,
+    cb?: (error: string, rep: CreateDeviceResponse) => void
+  ): Promise<CreateDeviceResponse> {
+    return this.request("CreateDevice", req, cb)
+  }
+
+  /**
+   * 查询私有CA绑定的产品列表
+   */
+  async DescribePrivateCABindedProducts(
+    req: DescribePrivateCABindedProductsRequest,
+    cb?: (error: string, rep: DescribePrivateCABindedProductsResponse) => void
+  ): Promise<DescribePrivateCABindedProductsResponse> {
+    return this.request("DescribePrivateCABindedProducts", req, cb)
   }
 
   /**
@@ -158,16 +249,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询私有CA证书列表
-   */
-  async DescribePrivateCAs(
-    req?: DescribePrivateCAsRequest,
-    cb?: (error: string, rep: DescribePrivateCAsResponse) => void
-  ): Promise<DescribePrivateCAsResponse> {
-    return this.request("DescribePrivateCAs", req, cb)
-  }
-
-  /**
    * 删除私有CA证书
    */
   async DeletePrivateCA(
@@ -178,42 +259,72 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDevice）用于查看设备信息
+   * 更新产品动态注册的配置
    */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
+  async UpdateProductDynamicRegister(
+    req: UpdateProductDynamicRegisterRequest,
+    cb?: (error: string, rep: UpdateProductDynamicRegisterResponse) => void
+  ): Promise<UpdateProductDynamicRegisterResponse> {
+    return this.request("UpdateProductDynamicRegister", req, cb)
   }
 
   /**
-   * 批量启用或者禁用设备
+   * 本接口（ListLog）用于查看日志信息
    */
-  async UpdateDevicesEnableState(
-    req: UpdateDevicesEnableStateRequest,
-    cb?: (error: string, rep: UpdateDevicesEnableStateResponse) => void
-  ): Promise<UpdateDevicesEnableStateResponse> {
-    return this.request("UpdateDevicesEnableState", req, cb)
+  async ListLog(
+    req: ListLogRequest,
+    cb?: (error: string, rep: ListLogResponse) => void
+  ): Promise<ListLogResponse> {
+    return this.request("ListLog", req, cb)
   }
 
   /**
-   * 本接口（DeleteDevice）用于删除物联网通信设备。
+   * 查询私有化CA信息
    */
-  async DeleteDevice(
-    req: DeleteDeviceRequest,
-    cb?: (error: string, rep: DeleteDeviceResponse) => void
-  ): Promise<DeleteDeviceResponse> {
-    return this.request("DeleteDevice", req, cb)
+  async DescribePrivateCA(
+    req: DescribePrivateCARequest,
+    cb?: (error: string, rep: DescribePrivateCAResponse) => void
+  ): Promise<DescribePrivateCAResponse> {
+    return this.request("DescribePrivateCA", req, cb)
   }
 
   /**
-   * 本接口（DescribeProduct）用于查看产品详情
+   * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
    */
-  async DescribeProduct(
-    req: DescribeProductRequest,
-    cb?: (error: string, rep: DescribeProductResponse) => void
-  ): Promise<DescribeProductResponse> {
-    return this.request("DescribeProduct", req, cb)
+  async DescribeDevices(
+    req: DescribeDevicesRequest,
+    cb?: (error: string, rep: DescribeDevicesResponse) => void
+  ): Promise<DescribeDevicesResponse> {
+    return this.request("DescribeDevices", req, cb)
+  }
+
+  /**
+   * 批量设置产品禁用状态
+   */
+  async SetProductsForbiddenStatus(
+    req: SetProductsForbiddenStatusRequest,
+    cb?: (error: string, rep: SetProductsForbiddenStatusResponse) => void
+  ): Promise<SetProductsForbiddenStatusResponse> {
+    return this.request("SetProductsForbiddenStatus", req, cb)
+  }
+
+  /**
+   * 发布广播消息
+   */
+  async PublishBroadcastMessage(
+    req: PublishBroadcastMessageRequest,
+    cb?: (error: string, rep: PublishBroadcastMessageResponse) => void
+  ): Promise<PublishBroadcastMessageResponse> {
+    return this.request("PublishBroadcastMessage", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateDevicePSK）用于更新设备的PSK
+   */
+  async UpdateDevicePSK(
+    req: UpdateDevicePSKRequest,
+    cb?: (error: string, rep: UpdateDevicePSKResponse) => void
+  ): Promise<UpdateDevicePSKResponse> {
+    return this.request("UpdateDevicePSK", req, cb)
   }
 }

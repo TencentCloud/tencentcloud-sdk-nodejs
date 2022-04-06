@@ -205,7 +205,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstancesDeniedActions(req: DescribeInstancesDeniedActionsRequest, cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void): Promise<DescribeInstancesDeniedActionsResponse>;
     /**
-     * 本接口（InquirePriceCreateInstances）用于续费实例询价。
+     * 本接口（InquirePriceRenewInstances）用于续费实例询价。
      */
     InquirePriceRenewInstances(req: InquirePriceRenewInstancesRequest, cb?: (error: string, rep: InquirePriceRenewInstancesResponse) => void): Promise<InquirePriceRenewInstancesResponse>;
     /**

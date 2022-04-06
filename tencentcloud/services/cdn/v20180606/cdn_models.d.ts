@@ -3485,17 +3485,17 @@ export interface UpdateDomainConfigRequest {
       */
     MaxAge?: MaxAge;
     /**
+      * 地域属性特殊配置
+适用于域名境内加速、境外加速配置不一致场景
+      */
+    SpecificConfig?: SpecificConfig;
+    /**
       * 域名业务类型
 web：静态加速
 download：下载加速
 media：流媒体点播加速
       */
     ServiceType?: string;
-    /**
-      * 地域属性特殊配置
-适用于域名境内加速、境外加速配置不一致场景
-      */
-    SpecificConfig?: SpecificConfig;
     /**
       * 域名加速区域
 mainland：中国境内加速
@@ -7579,35 +7579,40 @@ export interface DescribeDiagnoseReportResponse {
     /**
       * 诊断报告基础信息
       */
-    BaskInfo?: DiagnoseData;
+    BaskInfo: DiagnoseData;
     /**
       * CNAME检测信息
       */
-    CnameInfo?: DiagnoseData;
+    CnameInfo: DiagnoseData;
     /**
       * 客户端检测信息
       */
-    ClientInfo?: DiagnoseData;
+    ClientInfo: DiagnoseData;
     /**
       * DNS检测信息
       */
-    DnsInfo?: DiagnoseData;
+    DnsInfo: DiagnoseData;
     /**
       * 网络检测信息
       */
-    NetworkInfo?: DiagnoseData;
+    NetworkInfo: DiagnoseData;
     /**
       * 边缘节点检测信息
       */
-    OcNodeInfo?: DiagnoseData;
+    OcNodeInfo: DiagnoseData;
     /**
       * 中间源节点检测信息
       */
-    MidNodeInfo?: DiagnoseData;
+    MidNodeInfo: DiagnoseData;
     /**
       * 源站检测信息
       */
-    OriginInfo?: DiagnoseData;
+    OriginInfo: DiagnoseData;
+    /**
+      * 刷新检测信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PurgeInfo: DiagnoseData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

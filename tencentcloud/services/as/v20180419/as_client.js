@@ -359,15 +359,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLaunchConfigurations", req, cb);
     }
     /**
-     * 本接口（DescribePaiInstances）用于查询PAI实例信息。
-
-* 可以根据实例ID、实例域名等信息来查询PAI实例的详细信息。过滤信息详细请见过滤器`Filter`。
-* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的PAI实例。
-     */
-    async DescribePaiInstances(req, cb) {
-        return this.request("DescribePaiInstances", req, cb);
-    }
-    /**
      * 本接口（CreateScalingPolicy）用于创建告警触发策略。
      */
     async CreateScalingPolicy(req, cb) {

@@ -1603,7 +1603,7 @@ Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请
   Encryption?: Encryption
 
   /**
-   * 意愿核身使用的文案，若未使用意愿核身功能，该字段无需传入。默认为空，最长可接受100的字符串长度。
+   * 意愿核身使用的文案，若未使用意愿核身功能，该字段无需传入。默认为空，最长可接受120的字符串长度。
    */
   IntentionVerifyText?: string
 }
@@ -2372,6 +2372,12 @@ export interface IntentionVerifyData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IntentionVerifyBestFrame: string
+
+  /**
+      * 本次流程用户语音与传入文本比对的相似度分值，取值范围 [0.00, 100.00]。只有配置了相似度阈值后才进行语音校验并返回相似度分值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsrResultSimilarity: string
 }
 
 /**

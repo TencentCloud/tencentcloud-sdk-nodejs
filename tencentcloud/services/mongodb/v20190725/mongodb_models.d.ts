@@ -416,6 +416,31 @@ export interface SetAccountUserPrivilegeResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBInstanceNetworkAddress请求参数结构体
+ */
+export interface ModifyDBInstanceNetworkAddressRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 原IP保留时长，单位为分钟；原IP会在约定时间后释放，在释放前原IP和新IP均可访问；0表示立即回收原IP
+      */
+    OldIpExpiredTime: number;
+    /**
+      * 切换后IP地址所属私有网络统一ID，若为基础网络，该字段为空
+      */
+    NewUniqVpcId: string;
+    /**
+      * 切换后IP地址所属子网统一ID，若为基础网络，该字段为空
+      */
+    NewUniqSubnetId: string;
+    /**
+      * 待修改IP信息
+      */
+    NetworkAddresses?: Array<ModifyNetworkAddress>;
+}
+/**
  * CreateDBInstanceHour返回参数结构体
  */
 export interface CreateDBInstanceHourResponse {
@@ -537,6 +562,15 @@ export interface SpecItem {
       * 机器类型，取值：0-HIO，4-HIO10G
       */
     MachineType: string;
+}
+/**
+ * ModifyDBInstanceNetworkAddress返回参数结构体
+ */
+export interface ModifyDBInstanceNetworkAddressResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeSlowLogPatterns返回参数结构体
@@ -872,6 +906,19 @@ export interface InstanceIntegerParam {
       * 冗余字段，可忽略
       */
     Unit: string;
+}
+/**
+ * 修改数据库地址
+ */
+export interface ModifyNetworkAddress {
+    /**
+      * 新IP地址。
+      */
+    NewIPAddress: string;
+    /**
+      * 原IP地址。
+      */
+    OldIpAddress: string;
 }
 /**
  * DescribeAsyncRequestInfo返回参数结构体

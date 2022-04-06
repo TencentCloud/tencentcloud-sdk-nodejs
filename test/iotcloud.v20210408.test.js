@@ -28,9 +28,9 @@ it("iotcloud.v20210408.UpdateDeviceLogLevel", async function () {
     }
 })
 
-it("iotcloud.v20210408.DescribePrivateCABindedProducts", async function () {
+it("iotcloud.v20210408.DescribePrivateCAs", async function () {
     try {
-       const data = await client.DescribePrivateCABindedProducts({})
+       const data = await client.DescribePrivateCAs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("iotcloud.v20210408.DescribePrivateCABindedProducts", async function () {
     }
 })
 
-it("iotcloud.v20210408.DescribeDevices", async function () {
+it("iotcloud.v20210408.ListLogPayload", async function () {
     try {
-       const data = await client.DescribeDevices({})
+       const data = await client.ListLogPayload({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,29 @@ it("iotcloud.v20210408.DescribeDevices", async function () {
     }
 })
 
-it("iotcloud.v20210408.CreateDevice", async function () {
+it("iotcloud.v20210408.DescribeDevice", async function () {
     try {
-       const data = await client.CreateDevice({})
+       const data = await client.DescribeDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.DescribeProduct", async function () {
+    try {
+       const data = await client.DescribeProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.UpdateProductPrivateCA", async function () {
+    try {
+       const data = await client.UpdateProductPrivateCA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +88,59 @@ it("iotcloud.v20210408.DescribeProductCA", async function () {
     }
 })
 
-it("iotcloud.v20210408.DescribePrivateCA", async function () {
+it("iotcloud.v20210408.DeleteProductPrivateCA", async function () {
     try {
-       const data = await client.DescribePrivateCA({})
+       const data = await client.DeleteProductPrivateCA({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.UpdateDevicesEnableState", async function () {
+    try {
+       const data = await client.UpdateDevicesEnableState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.DeleteDevice", async function () {
+    try {
+       const data = await client.DeleteDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.ListSDKLog", async function () {
+    try {
+       const data = await client.ListSDKLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.CreateDevice", async function () {
+    try {
+       const data = await client.CreateDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.DescribePrivateCABindedProducts", async function () {
+    try {
+       const data = await client.DescribePrivateCABindedProducts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,16 +178,6 @@ it("iotcloud.v20210408.UpdatePrivateCA", async function () {
     }
 })
 
-it("iotcloud.v20210408.DescribePrivateCAs", async function () {
-    try {
-       const data = await client.DescribePrivateCAs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iotcloud.v20210408.DeletePrivateCA", async function () {
     try {
        const data = await client.DeletePrivateCA({})
@@ -128,9 +188,9 @@ it("iotcloud.v20210408.DeletePrivateCA", async function () {
     }
 })
 
-it("iotcloud.v20210408.DescribeDevice", async function () {
+it("iotcloud.v20210408.UpdateProductDynamicRegister", async function () {
     try {
-       const data = await client.DescribeDevice({})
+       const data = await client.UpdateProductDynamicRegister({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +198,9 @@ it("iotcloud.v20210408.DescribeDevice", async function () {
     }
 })
 
-it("iotcloud.v20210408.UpdateDevicesEnableState", async function () {
+it("iotcloud.v20210408.ListLog", async function () {
     try {
-       const data = await client.UpdateDevicesEnableState({})
+       const data = await client.ListLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +208,9 @@ it("iotcloud.v20210408.UpdateDevicesEnableState", async function () {
     }
 })
 
-it("iotcloud.v20210408.DeleteDevice", async function () {
+it("iotcloud.v20210408.DescribePrivateCA", async function () {
     try {
-       const data = await client.DeleteDevice({})
+       const data = await client.DescribePrivateCA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +218,39 @@ it("iotcloud.v20210408.DeleteDevice", async function () {
     }
 })
 
-it("iotcloud.v20210408.DescribeProduct", async function () {
+it("iotcloud.v20210408.DescribeDevices", async function () {
     try {
-       const data = await client.DescribeProduct({})
+       const data = await client.DescribeDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.SetProductsForbiddenStatus", async function () {
+    try {
+       const data = await client.SetProductsForbiddenStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.PublishBroadcastMessage", async function () {
+    try {
+       const data = await client.PublishBroadcastMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.UpdateDevicePSK", async function () {
+    try {
+       const data = await client.UpdateDevicePSK({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

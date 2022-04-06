@@ -350,7 +350,7 @@ export interface Task {
       */
     RestartComputeNode?: boolean;
     /**
-      * 启动任务过程中，创建计算资源如CVM失败后的最大重试次数，默认为0。
+      * 启动任务过程中，创建计算资源如CVM失败后的最大重试次数，默认为0。最大值100。
       */
     ResourceMaxRetryCount?: number;
 }
@@ -412,11 +412,11 @@ export interface DescribeComputeEnvActivitiesResponse {
     /**
       * 计算环境中的活动列表
       */
-    ActivitySet?: Array<Activity>;
+    ActivitySet: Array<Activity>;
     /**
       * 活动数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -608,52 +608,52 @@ export interface DescribeComputeEnvResponse {
     /**
       * 计算环境ID
       */
-    EnvId?: string;
+    EnvId: string;
     /**
       * 计算环境名称
       */
-    EnvName?: string;
+    EnvName: string;
     /**
       * 位置信息
       */
-    Placement?: Placement;
+    Placement: Placement;
     /**
       * 计算环境创建时间
       */
-    CreateTime?: string;
+    CreateTime: string;
     /**
       * 计算节点列表信息
       */
-    ComputeNodeSet?: Array<ComputeNode>;
+    ComputeNodeSet: Array<ComputeNode>;
     /**
       * 计算节点统计指标
       */
-    ComputeNodeMetrics?: ComputeNodeMetrics;
+    ComputeNodeMetrics: ComputeNodeMetrics;
     /**
       * 计算节点期望个数
       */
-    DesiredComputeNodeCount?: number;
+    DesiredComputeNodeCount: number;
     /**
       * 计算环境类型
       */
-    EnvType?: string;
+    EnvType: string;
     /**
       * 计算环境资源类型，当前为CVM和CPM（黑石）
       */
-    ResourceType?: string;
+    ResourceType: string;
     /**
       * 下一步动作
       */
-    NextAction?: string;
+    NextAction: string;
     /**
       * 用户添加到计算环境中的计算节点个数
       */
-    AttachedComputeNodeCount?: number;
+    AttachedComputeNodeCount: number;
     /**
       * 计算环境绑定的标签列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<Tag>;
+    Tags: Array<Tag>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -666,7 +666,7 @@ export interface DescribeCpmOsInfoResponse {
     /**
       * 操作系统信息列表。
       */
-    OsInfoSet?: Array<OsInfo>;
+    OsInfoSet: Array<OsInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1058,49 +1058,49 @@ export interface DescribeComputeEnvCreateInfoResponse {
     /**
       * 计算环境 ID
       */
-    EnvId?: string;
+    EnvId: string;
     /**
       * 计算环境名称
       */
-    EnvName?: string;
+    EnvName: string;
     /**
       * 计算环境描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnvDescription?: string;
+    EnvDescription: string;
     /**
       * 计算环境类型，仅支持“MANAGED”类型
       */
-    EnvType?: string;
+    EnvType: string;
     /**
       * 计算环境参数
       */
-    EnvData?: EnvData;
+    EnvData: EnvData;
     /**
       * 数据盘挂载选项
       */
-    MountDataDisks?: Array<MountDataDisk>;
+    MountDataDisks: Array<MountDataDisk>;
     /**
       * 输入映射
       */
-    InputMappings?: Array<InputMapping>;
+    InputMappings: Array<InputMapping>;
     /**
       * 授权信息
       */
-    Authentications?: Array<Authentication>;
+    Authentications: Array<Authentication>;
     /**
       * 通知信息
       */
-    Notifications?: Array<Notification>;
+    Notifications: Array<Notification>;
     /**
       * 计算节点期望个数
       */
-    DesiredComputeNodeCount?: number;
+    DesiredComputeNodeCount: number;
     /**
       * 计算环境绑定的标签列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<Tag>;
+    Tags: Array<Tag>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1225,11 +1225,11 @@ export interface DescribeTaskTemplatesResponse {
     /**
       * 任务模板列表
       */
-    TaskTemplateSet?: Array<TaskTemplateView>;
+    TaskTemplateSet: Array<TaskTemplateView>;
     /**
       * 任务模板数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1281,11 +1281,11 @@ export interface DescribeTaskLogsResponse {
     /**
       * 任务实例总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 任务实例日志详情集合
       */
-    TaskInstanceLogSet?: Array<TaskInstanceLog>;
+    TaskInstanceLogSet: Array<TaskInstanceLog>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1332,7 +1332,7 @@ export interface NamedCpmComputeEnv {
       */
     ActionIfComputeNodeInactive?: string;
     /**
-      * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+      * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值100，如果不设置的话，系统会设置一个默认值，当前为7。
       */
     ResourceMaxRetryCount?: number;
     /**
@@ -1363,61 +1363,61 @@ export interface DescribeJobResponse {
     /**
       * 作业ID
       */
-    JobId?: string;
+    JobId: string;
     /**
       * 作业名称
       */
-    JobName?: string;
+    JobName: string;
     /**
       * 可用区信息
       */
-    Zone?: string;
+    Zone: string;
     /**
       * 作业优先级
       */
-    Priority?: number;
+    Priority: number;
     /**
       * 作业状态
       */
-    JobState?: string;
+    JobState: string;
     /**
       * 创建时间
       */
-    CreateTime?: string;
+    CreateTime: string;
     /**
       * 结束时间
       */
-    EndTime?: string;
+    EndTime: string;
     /**
       * 任务视图信息
       */
-    TaskSet?: Array<TaskView>;
+    TaskSet: Array<TaskView>;
     /**
       * 任务间依赖信息
       */
-    DependenceSet?: Array<Dependence>;
+    DependenceSet: Array<Dependence>;
     /**
       * 任务统计指标
       */
-    TaskMetrics?: TaskMetrics;
+    TaskMetrics: TaskMetrics;
     /**
       * 任务实例统计指标
       */
-    TaskInstanceMetrics?: TaskInstanceMetrics;
+    TaskInstanceMetrics: TaskInstanceMetrics;
     /**
       * 作业失败原因
       */
-    StateReason?: string;
+    StateReason: string;
     /**
       * 作业绑定的标签列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<Tag>;
+    Tags: Array<Tag>;
     /**
       * 下一步动作
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NextAction?: string;
+    NextAction: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1569,7 +1569,7 @@ export interface NamedComputeEnv {
       */
     ActionIfComputeNodeInactive?: string;
     /**
-      * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+      * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值100，如果不设置的话，系统会设置一个默认值，当前为7
       */
     ResourceMaxRetryCount?: number;
     /**
@@ -1708,32 +1708,32 @@ export interface DescribeJobSubmitInfoResponse {
     /**
       * 作业ID
       */
-    JobId?: string;
+    JobId: string;
     /**
       * 作业名称
       */
-    JobName?: string;
+    JobName: string;
     /**
       * 作业描述
       */
-    JobDescription?: string;
+    JobDescription: string;
     /**
       * 作业优先级，任务（Task）和任务实例（TaskInstance）会继承作业优先级
       */
-    Priority?: number;
+    Priority: number;
     /**
       * 任务信息
       */
-    Tasks?: Array<Task>;
+    Tasks: Array<Task>;
     /**
       * 依赖信息
       */
-    Dependences?: Array<Dependence>;
+    Dependences: Array<Dependence>;
     /**
       * 作业绑定的标签列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<Tag>;
+    Tags: Array<Tag>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1746,11 +1746,11 @@ export interface DescribeComputeEnvCreateInfosResponse {
     /**
       * 计算环境数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 计算环境创建信息列表
       */
-    ComputeEnvCreateInfoSet?: Array<ComputeEnvCreateInfo>;
+    ComputeEnvCreateInfoSet: Array<ComputeEnvCreateInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2240,7 +2240,7 @@ export interface CreateTaskTemplateResponse {
     /**
       * 任务模板ID
       */
-    TaskTemplateId?: string;
+    TaskTemplateId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2473,35 +2473,35 @@ export interface DescribeTaskResponse {
     /**
       * 作业ID
       */
-    JobId?: string;
+    JobId: string;
     /**
       * 任务名称
       */
-    TaskName?: string;
+    TaskName: string;
     /**
       * 任务状态
       */
-    TaskState?: string;
+    TaskState: string;
     /**
       * 创建时间
       */
-    CreateTime?: string;
+    CreateTime: string;
     /**
       * 结束时间
       */
-    EndTime?: string;
+    EndTime: string;
     /**
       * 任务实例总数
       */
-    TaskInstanceTotalCount?: number;
+    TaskInstanceTotalCount: number;
     /**
       * 任务实例信息
       */
-    TaskInstanceSet?: Array<TaskInstanceView>;
+    TaskInstanceSet: Array<TaskInstanceView>;
     /**
       * 任务实例统计指标
       */
-    TaskInstanceMetrics?: TaskInstanceMetrics;
+    TaskInstanceMetrics: TaskInstanceMetrics;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2577,11 +2577,11 @@ export interface DescribeComputeEnvsResponse {
     /**
       * 计算环境列表
       */
-    ComputeEnvSet?: Array<ComputeEnvView>;
+    ComputeEnvSet: Array<ComputeEnvView>;
     /**
       * 计算环境数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2675,11 +2675,11 @@ export interface DescribeJobsResponse {
     /**
       * 作业列表
       */
-    JobSet?: Array<JobView>;
+    JobSet: Array<JobView>;
     /**
       * 符合条件的作业数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

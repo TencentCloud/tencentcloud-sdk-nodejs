@@ -1050,7 +1050,7 @@ export interface DescribeCertificateDetailResponse {
       */
     SubjectAltName: Array<string>;
     /**
-      * 是否为 VIP 客户。
+      * 是否为付费证书。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsVip: boolean;
@@ -1075,7 +1075,7 @@ export interface DescribeCertificateDetailResponse {
       */
     SubmittedData: SubmittedData;
     /**
-      * 是否可重颁发证书。
+      * 是否可续费。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RenewAble: boolean;

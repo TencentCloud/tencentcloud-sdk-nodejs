@@ -34,22 +34,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDeviceLogLevel", req, cb);
     }
     /**
-     * 查询私有CA绑定的产品列表
+     * 查询私有CA证书列表
      */
-    async DescribePrivateCABindedProducts(req, cb) {
-        return this.request("DescribePrivateCABindedProducts", req, cb);
+    async DescribePrivateCAs(req, cb) {
+        return this.request("DescribePrivateCAs", req, cb);
     }
     /**
-     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
+     * 获取日志内容列表
      */
-    async DescribeDevices(req, cb) {
-        return this.request("DescribeDevices", req, cb);
+    async ListLogPayload(req, cb) {
+        return this.request("ListLogPayload", req, cb);
     }
     /**
-     * 本接口（CreateDevice）用于新建一个物联网通信设备。
+     * 本接口（DescribeDevice）用于查看设备信息
      */
-    async CreateDevice(req, cb) {
-        return this.request("CreateDevice", req, cb);
+    async DescribeDevice(req, cb) {
+        return this.request("DescribeDevice", req, cb);
+    }
+    /**
+     * 本接口（DescribeProduct）用于查看产品详情
+     */
+    async DescribeProduct(req, cb) {
+        return this.request("DescribeProduct", req, cb);
+    }
+    /**
+     * 更新产品的私有CA
+     */
+    async UpdateProductPrivateCA(req, cb) {
+        return this.request("UpdateProductPrivateCA", req, cb);
     }
     /**
      * 查询产品绑定的CA证书
@@ -58,10 +70,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductCA", req, cb);
     }
     /**
-     * 查询私有化CA信息
+     * 删除产品的私有CA证书
      */
-    async DescribePrivateCA(req, cb) {
-        return this.request("DescribePrivateCA", req, cb);
+    async DeleteProductPrivateCA(req, cb) {
+        return this.request("DeleteProductPrivateCA", req, cb);
+    }
+    /**
+     * 批量启用或者禁用设备
+     */
+    async UpdateDevicesEnableState(req, cb) {
+        return this.request("UpdateDevicesEnableState", req, cb);
+    }
+    /**
+     * 本接口（DeleteDevice）用于删除物联网通信设备。
+     */
+    async DeleteDevice(req, cb) {
+        return this.request("DeleteDevice", req, cb);
+    }
+    /**
+     * 获取设备上报的日志
+     */
+    async ListSDKLog(req, cb) {
+        return this.request("ListSDKLog", req, cb);
+    }
+    /**
+     * 本接口（CreateDevice）用于新建一个物联网通信设备。
+     */
+    async CreateDevice(req, cb) {
+        return this.request("CreateDevice", req, cb);
+    }
+    /**
+     * 查询私有CA绑定的产品列表
+     */
+    async DescribePrivateCABindedProducts(req, cb) {
+        return this.request("DescribePrivateCABindedProducts", req, cb);
     }
     /**
      * 创建私有CA证书
@@ -82,40 +124,52 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdatePrivateCA", req, cb);
     }
     /**
-     * 查询私有CA证书列表
-     */
-    async DescribePrivateCAs(req, cb) {
-        return this.request("DescribePrivateCAs", req, cb);
-    }
-    /**
      * 删除私有CA证书
      */
     async DeletePrivateCA(req, cb) {
         return this.request("DeletePrivateCA", req, cb);
     }
     /**
-     * 本接口（DescribeDevice）用于查看设备信息
+     * 更新产品动态注册的配置
      */
-    async DescribeDevice(req, cb) {
-        return this.request("DescribeDevice", req, cb);
+    async UpdateProductDynamicRegister(req, cb) {
+        return this.request("UpdateProductDynamicRegister", req, cb);
     }
     /**
-     * 批量启用或者禁用设备
+     * 本接口（ListLog）用于查看日志信息
      */
-    async UpdateDevicesEnableState(req, cb) {
-        return this.request("UpdateDevicesEnableState", req, cb);
+    async ListLog(req, cb) {
+        return this.request("ListLog", req, cb);
     }
     /**
-     * 本接口（DeleteDevice）用于删除物联网通信设备。
+     * 查询私有化CA信息
      */
-    async DeleteDevice(req, cb) {
-        return this.request("DeleteDevice", req, cb);
+    async DescribePrivateCA(req, cb) {
+        return this.request("DescribePrivateCA", req, cb);
     }
     /**
-     * 本接口（DescribeProduct）用于查看产品详情
+     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
      */
-    async DescribeProduct(req, cb) {
-        return this.request("DescribeProduct", req, cb);
+    async DescribeDevices(req, cb) {
+        return this.request("DescribeDevices", req, cb);
+    }
+    /**
+     * 批量设置产品禁用状态
+     */
+    async SetProductsForbiddenStatus(req, cb) {
+        return this.request("SetProductsForbiddenStatus", req, cb);
+    }
+    /**
+     * 发布广播消息
+     */
+    async PublishBroadcastMessage(req, cb) {
+        return this.request("PublishBroadcastMessage", req, cb);
+    }
+    /**
+     * 本接口（UpdateDevicePSK）用于更新设备的PSK
+     */
+    async UpdateDevicePSK(req, cb) {
+        return this.request("UpdateDevicePSK", req, cb);
     }
 }
 exports.Client = Client;

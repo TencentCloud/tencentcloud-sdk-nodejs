@@ -118,6 +118,16 @@ it("cam.v20190116.CreateRole", async function () {
     }
 })
 
+it("cam.v20190116.UpdateUserOIDCConfig", async function () {
+    try {
+       const data = await client.UpdateUserOIDCConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.PutRolePermissionsBoundary", async function () {
     try {
        const data = await client.PutRolePermissionsBoundary({})
@@ -348,6 +358,16 @@ it("cam.v20190116.GetServiceLinkedRoleDeletionStatus", async function () {
     }
 })
 
+it("cam.v20190116.DescribeUserOIDCConfig", async function () {
+    try {
+       const data = await client.DescribeUserOIDCConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.ListPoliciesGrantingServiceAccess", async function () {
     try {
        const data = await client.ListPoliciesGrantingServiceAccess({})
@@ -508,6 +528,16 @@ it("cam.v20190116.DescribeSafeAuthFlagIntl", async function () {
     }
 })
 
+it("cam.v20190116.UpdateGroup", async function () {
+    try {
+       const data = await client.UpdateGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.GetRole", async function () {
     try {
        const data = await client.GetRole({})
@@ -648,6 +678,16 @@ it("cam.v20190116.ListEntitiesForPolicy", async function () {
     }
 })
 
+it("cam.v20190116.CreateUserOIDCConfig", async function () {
+    try {
+       const data = await client.CreateUserOIDCConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.ListWeChatWorkSubAccounts", async function () {
     try {
        const data = await client.ListWeChatWorkSubAccounts({})
@@ -678,9 +718,9 @@ it("cam.v20190116.AttachGroupPolicy", async function () {
     }
 })
 
-it("cam.v20190116.UpdateGroup", async function () {
+it("cam.v20190116.DisableUserSSO", async function () {
     try {
-       const data = await client.UpdateGroup({})
+       const data = await client.DisableUserSSO({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

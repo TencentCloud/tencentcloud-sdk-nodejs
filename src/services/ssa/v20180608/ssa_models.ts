@@ -32,7 +32,7 @@ export interface DescribeVulListResponse {
   /**
    * 漏洞列表
    */
-  Data?: VulList
+  Data: VulList
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -650,6 +650,12 @@ export interface VulItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VulRepairPlan: string
+
+  /**
+      * 漏洞文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulPath: string
 }
 
 /**
@@ -1085,7 +1091,7 @@ export interface Tag {
  */
 export interface AlertType {
   /**
-      * 时间戳
+      * 标准时间格式
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AlertTime: string
@@ -1263,6 +1269,11 @@ export interface DescribeSocAlertListRequest {
    * 排序参数
    */
   Sorter?: Array<QuerySort>
+
+  /**
+   * 是否导出
+   */
+  ExportFlag?: boolean
 }
 
 /**
@@ -2169,6 +2180,36 @@ export interface ConcernInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StatisticsCount: number
+
+  /**
+      * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SearchData: string
+
+  /**
+      * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpCountryIso: string
+
+  /**
+      * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpProvinceIso: string
+
+  /**
+      * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IpCity: string
+
+  /**
+      * 可疑关注点字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventSubType: string
 }
 
 /**
@@ -2617,127 +2658,133 @@ export interface DescribeVulDetailResponse {
       * 漏洞类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VulType?: number
+  VulType: number
 
   /**
       * 漏洞子类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SubVulType?: string
+  SubVulType: string
 
   /**
       * cvss分数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CvssScore?: string
+  CvssScore: string
 
   /**
       * cvss值
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Cvss?: string
+  Cvss: string
 
   /**
       * cve编号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Cve?: string
+  Cve: string
 
   /**
       * cnvd编号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Cnvd?: string
+  Cnvd: string
 
   /**
       * cnnvd编号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Cnnvd?: string
+  Cnnvd: string
 
   /**
       * 描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Desc?: string
+  Desc: string
 
   /**
       * 参考
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Reference?: string
+  Reference: string
 
   /**
       * 修复意见
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Repair?: string
+  Repair: string
 
   /**
       * 披露时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReleaseTime?: string
+  ReleaseTime: string
 
   /**
       * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdateTime?: string
+  UpdateTime: string
 
   /**
       * 漏洞名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Name?: string
+  Name: string
 
   /**
       * 等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Level?: number
+  Level: number
 
   /**
       * 状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status?: number
+  Status: number
 
   /**
       * 受影响资产唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImpactAsset?: string
+  ImpactAsset: string
 
   /**
       * 受影响资产名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImpactAssetName?: string
+  ImpactAssetName: string
 
   /**
       * 受影响资产是否已删除
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IsAssetDeleted?: boolean
+  IsAssetDeleted: boolean
 
   /**
       * 漏洞来源
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Source?: string
+  Source: string
 
   /**
       * 漏洞URL
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VulUrl?: string
+  VulUrl: string
 
   /**
       * 资产归属
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  SsaAssetCategory?: number
+  SsaAssetCategory: number
+
+  /**
+      * 资产文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulPath: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRole", req, cb);
     }
     /**
+     * 修改用户OIDC配置
+     */
+    async UpdateUserOIDCConfig(req, cb) {
+        return this.request("UpdateUserOIDCConfig", req, cb);
+    }
+    /**
      * 设置角色权限边界
      */
     async PutRolePermissionsBoundary(req, cb) {
@@ -226,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetServiceLinkedRoleDeletionStatus", req, cb);
     }
     /**
+     * 查询用户OIDC配置
+     */
+    async DescribeUserOIDCConfig(req, cb) {
+        return this.request("DescribeUserOIDCConfig", req, cb);
+    }
+    /**
      * 获取所有已授权服务
      */
     async ListPoliciesGrantingServiceAccess(req, cb) {
@@ -322,6 +334,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSafeAuthFlagIntl", req, cb);
     }
     /**
+     * 更新用户组
+     */
+    async UpdateGroup(req, cb) {
+        return this.request("UpdateGroup", req, cb);
+    }
+    /**
      * 本接口（GetRole）用于获取指定角色的详细信息。
      */
     async GetRole(req, cb) {
@@ -406,6 +424,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListEntitiesForPolicy", req, cb);
     }
     /**
+     * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+     */
+    async CreateUserOIDCConfig(req, cb) {
+        return this.request("CreateUserOIDCConfig", req, cb);
+    }
+    /**
      * 获取企业微信子用户列表
      */
     async ListWeChatWorkSubAccounts(req, cb) {
@@ -424,10 +448,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachGroupPolicy", req, cb);
     }
     /**
-     * 更新用户组
+     * 禁用用户SSO
      */
-    async UpdateGroup(req, cb) {
-        return this.request("UpdateGroup", req, cb);
+    async DisableUserSSO(req, cb) {
+        return this.request("DisableUserSSO", req, cb);
     }
     /**
      * 设置用户权限边界

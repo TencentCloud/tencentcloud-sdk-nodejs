@@ -52,6 +52,8 @@ var bmvpc_1 = require("./bmvpc");
 Object.defineProperty(exports, "bmvpc", { enumerable: true, get: function () { return bmvpc_1.bmvpc; } });
 var bri_1 = require("./bri");
 Object.defineProperty(exports, "bri", { enumerable: true, get: function () { return bri_1.bri; } });
+var bsca_1 = require("./bsca");
+Object.defineProperty(exports, "bsca", { enumerable: true, get: function () { return bsca_1.bsca; } });
 var btoe_1 = require("./btoe");
 Object.defineProperty(exports, "btoe", { enumerable: true, get: function () { return btoe_1.btoe; } });
 var cam_1 = require("./cam");

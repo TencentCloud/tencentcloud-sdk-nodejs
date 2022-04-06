@@ -117,7 +117,10 @@ export interface CFSOption {
       */
     RemotePath: string;
     /**
-      * 文件系统协议类型，默认值NFS 3.0
+      * 文件系统协议类型，默认值NFS 3.0。
+<li>NFS 3.0。
+<li>NFS 4.0。
+<li>TURBO。
       */
     Protocol?: string;
     /**
@@ -126,18 +129,40 @@ export interface CFSOption {
     StorageType?: string;
 }
 /**
- * CreateCluster返回参数结构体
+ * 登录节点信息。
  */
-export interface CreateClusterResponse {
+export interface LoginNode {
     /**
-      * 集群ID。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 节点[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
       */
-    ClusterId: string;
+    InstanceChargeType?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月节点的购买时长、是否设置自动续费等属性。若指定节点的付费模式为预付费则该参数必传。
       */
-    RequestId?: string;
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 节点机型。不同实例机型指定了不同的资源规格。
+<br><li>具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。
+      */
+    InstanceType?: string;
+    /**
+      * 节点系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+      */
+    SystemDisk?: Array<SystemDisk>;
+    /**
+      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+      */
+    DataDisks?: Array<DataDisk>;
+    /**
+      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+      */
+    InternetAccessible?: Array<InternetAccessible>;
+    /**
+      * 节点显示名称。<br><li>
+不指定节点显示名称则默认显示‘未命名’。
+最多支持60个字符。
+      */
+    InstanceName?: string;
 }
 /**
  * CreateCluster请求参数结构体
@@ -152,7 +177,7 @@ export interface CreateClusterRequest {
       */
     ManagerNode?: ManagerNode;
     /**
-      * 指定管理节点的数量。目前仅支持一个管理节点。
+      * 指定管理节点的数量。默认取值：1。取值范围：1～2。
       */
     ManagerNodeCount?: number;
     /**
@@ -164,11 +189,11 @@ export interface CreateClusterRequest {
       */
     ComputeNodeCount?: number;
     /**
-      * 调度器类型。<br><li>SGE：SGE调度器。
+      * 调度器类型。<br><li>SGE：SGE调度器。<br><li>SLURM：SLURM调度器。
       */
     SchedulerType?: string;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和自定义镜像。
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像。
       */
     ImageId?: string;
     /**
@@ -196,7 +221,8 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       */
     DryRun?: boolean;
     /**
-      * 域名字服务类型。<br><li>NIS：NIS域名字服务。
+      * 域名字服务类型。默认值：NIS
+<li>NIS：NIS域名字服务。
       */
     AccountType?: string;
     /**
@@ -207,6 +233,47 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       * 集群存储选项
       */
     StorageOption?: StorageOption;
+    /**
+      * 已废弃。
+指定登录节点。
+      */
+    LoginNode?: Array<LoginNode>;
+    /**
+      * 已废弃。
+指定登录节点的数量。默认取值：0。取值范围：0～10。
+      */
+    LoginNodeCount?: number;
+    /**
+      * 创建集群时同时绑定的标签对说明。
+      */
+    Tags?: Array<Tag>;
+}
+/**
+ * 标签键值对。
+ */
+export interface Tag {
+    /**
+      * 标签键
+      */
+    Key: string;
+    /**
+      * 标签值
+      */
+    Value: string;
+}
+/**
+ * CreateCluster返回参数结构体
+ */
+export interface CreateClusterResponse {
+    /**
+      * 集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * BindAutoScalingGroup返回参数结构体

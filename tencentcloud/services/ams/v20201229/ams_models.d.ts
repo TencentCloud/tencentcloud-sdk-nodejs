@@ -45,6 +45,12 @@ export interface TextResult {
 2：自定义库；
       */
     LibType: number;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * DescribeTasks请求参数结构体
@@ -525,6 +531,12 @@ export interface MoanResult {
       * 违规事件结束时间，单位为毫秒（ms）；
       */
     EndTime: number;
+    /**
+      * 该字段用于返回当前标签（Lable）下的二级标签。
+注意：此字段可能返回null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubLabel: string;
 }
 /**
  * CancelTask返回参数结构体

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeClustersRequest, DeleteClusterResponse, CreateClusterResponse, CreateClusterRequest, BindAutoScalingGroupResponse, DeleteClusterRequest, BindAutoScalingGroupRequest, DescribeClustersResponse } from "./thpc_models";
+import { DescribeClustersRequest, DeleteClusterResponse, CreateClusterRequest, CreateClusterResponse, BindAutoScalingGroupResponse, DeleteClusterRequest, BindAutoScalingGroupRequest, DescribeClustersResponse } from "./thpc_models";
 /**
  * thpc client
  * @class

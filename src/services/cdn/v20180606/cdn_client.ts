@@ -822,7 +822,7 @@ export class Client extends AbstractClient {
 
   /**
      * PurgePathCache 用于批量提交目录刷新，根据域名的加速区域进行对应区域的刷新。
-默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 20 条。
+默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 500 条。
      */
   async PurgePathCache(
     req: PurgePathCacheRequest,
@@ -947,7 +947,7 @@ export class Client extends AbstractClient {
 
   /**
      * PushUrlsCache 用于将指定 URL 资源列表加载至 CDN 节点，支持指定加速区域预热。
-默认情况下境内、境外每日预热 URL 限额为各 1000 条，每次最多可提交 20 条。注意：中国境外区域预热，资源默认加载至中国境外边缘节点，所产生的边缘层流量会计入计费流量。
+默认情况下境内、境外每日预热 URL 限额为各 1000 条，每次最多可提交 500 条。注意：中国境外区域预热，资源默认加载至中国境外边缘节点，所产生的边缘层流量会计入计费流量。
      */
   async PushUrlsCache(
     req: PushUrlsCacheRequest,

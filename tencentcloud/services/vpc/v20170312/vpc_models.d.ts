@@ -697,7 +697,7 @@ export interface FlowLog {
       */
     FlowLogName?: string;
     /**
-      * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN。
+      * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG。
       */
     ResourceType?: string;
     /**
@@ -7886,7 +7886,7 @@ export interface CreateFlowLogRequest {
       */
     FlowLogName: string;
     /**
-      * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN
+      * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE|CCN|NAT|DCG
       */
     ResourceType: string;
     /**

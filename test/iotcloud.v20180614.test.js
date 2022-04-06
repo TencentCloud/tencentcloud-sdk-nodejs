@@ -138,6 +138,16 @@ it("iotcloud.v20180614.UpdateDeviceAvailableState", async function () {
     }
 })
 
+it("iotcloud.v20180614.DescribeProduct", async function () {
+    try {
+       const data = await client.DescribeProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20180614.CreateTopicRule", async function () {
     try {
        const data = await client.CreateTopicRule({})
@@ -471,6 +481,16 @@ it("iotcloud.v20180614.DescribeTasks", async function () {
 it("iotcloud.v20180614.DescribeDeviceResources", async function () {
     try {
        const data = await client.DescribeDeviceResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.UpdateProductDynamicRegister", async function () {
+    try {
+       const data = await client.UpdateProductDynamicRegister({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

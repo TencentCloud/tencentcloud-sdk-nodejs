@@ -118,6 +118,16 @@ export interface LoginActionFlagIntl {
 }
 
 /**
+ * UpdateUserOIDCConfig返回参数结构体
+ */
+export interface UpdateUserOIDCConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListAccessKeys请求参数结构体
  */
 export interface ListAccessKeysRequest {
@@ -226,6 +236,22 @@ export interface DescribeRoleListResponse {
    * 角色总数
    */
   TotalNum: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdatePolicy返回参数结构体
+ */
+export interface UpdatePolicyResponse {
+  /**
+      * 策略id，入参是PolicyName时，才会返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -569,6 +595,26 @@ export interface DescribeRoleListRequest {
  * DescribeUserSAMLConfig请求参数结构体
  */
 export type DescribeUserSAMLConfigRequest = null
+
+/**
+ * PutRolePermissionsBoundary请求参数结构体
+ */
+export interface PutRolePermissionsBoundaryRequest {
+  /**
+   * 策略ID
+   */
+  PolicyId: number
+
+  /**
+   * 角色ID（与角色名至少填一个）
+   */
+  RoleId?: string
+
+  /**
+   * 角色名（与角色ID至少填一个）
+   */
+  RoleName?: string
+}
 
 /**
  * GetGroup请求参数结构体
@@ -1076,6 +1122,16 @@ export interface SecretIdLastUsed {
 }
 
 /**
+ * CreateUserOIDCConfig返回参数结构体
+ */
+export interface CreateUserOIDCConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListAttachedUserAllPolicies返回参数结构体
  */
 export interface ListAttachedUserAllPoliciesResponse {
@@ -1352,6 +1408,71 @@ export interface StrategyInfo {
 }
 
 /**
+ * DescribeUserOIDCConfig返回参数结构体
+ */
+export interface DescribeUserOIDCConfigResponse {
+  /**
+   * 身份提供商类型。 12：用户OIDC身份提供商
+   */
+  ProviderType: number
+
+  /**
+   * 身份提供商URL
+   */
+  IdentityUrl: string
+
+  /**
+   * 签名公钥
+   */
+  IdentityKey: string
+
+  /**
+   * 客户端id
+   */
+  ClientId: string
+
+  /**
+   * 状态：0:未设置，11:已开启，2:已禁用
+   */
+  Status: number
+
+  /**
+   * 授权请求Endpoint
+   */
+  AuthorizationEndpoint: string
+
+  /**
+   * 授权请求Scope
+   */
+  Scope: Array<string>
+
+  /**
+   * 授权请求Response type
+   */
+  ResponseType: string
+
+  /**
+   * 授权请求Response mode
+   */
+  ResponseMode: string
+
+  /**
+   * 映射字段名称
+   */
+  MappingFiled: string
+
+  /**
+   * 描述
+   */
+  Description: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeletePolicy请求参数结构体
  */
 export interface DeletePolicyRequest {
@@ -1534,6 +1655,21 @@ export interface UpdateRoleConsoleLoginRequest {
    * 角色名，入参 RoleId 与 RoleName 二选一
    */
   RoleName?: string
+}
+
+/**
+ * ListCollaborators请求参数结构体
+ */
+export interface ListCollaboratorsRequest {
+  /**
+   * 分页条数，缺省为20
+   */
+  Limit?: number
+
+  /**
+   * 分页起始值，缺省为0
+   */
+  Offset?: number
 }
 
 /**
@@ -1754,6 +1890,11 @@ export interface ListGrantServiceAccessPolicy {
 }
 
 /**
+ * DisableUserSSO请求参数结构体
+ */
+export type DisableUserSSORequest = null
+
+/**
  * ListPoliciesGrantingServiceAccess请求参数结构体
  */
 export interface ListPoliciesGrantingServiceAccessRequest {
@@ -1944,23 +2085,13 @@ export interface AttachPolicyInfo {
 }
 
 /**
- * PutRolePermissionsBoundary请求参数结构体
+ * DisableUserSSO返回参数结构体
  */
-export interface PutRolePermissionsBoundaryRequest {
+export interface DisableUserSSOResponse {
   /**
-   * 策略ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PolicyId: number
-
-  /**
-   * 角色ID（与角色名至少填一个）
-   */
-  RoleId?: string
-
-  /**
-   * 角色名（与角色ID至少填一个）
-   */
-  RoleName?: string
+  RequestId?: string
 }
 
 /**
@@ -2244,34 +2375,89 @@ export interface CreateServiceLinkedRoleResponse {
 export type ListUsersRequest = null
 
 /**
- * ListCollaborators请求参数结构体
+ * GetSAMLProvider返回参数结构体
  */
-export interface ListCollaboratorsRequest {
+export interface GetSAMLProviderResponse {
   /**
-   * 分页条数，缺省为20
+   * SAML身份提供商名称
    */
-  Limit?: number
+  Name: string
 
   /**
-   * 分页起始值，缺省为0
+   * SAML身份提供商描述
    */
-  Offset?: number
-}
+  Description: string
 
-/**
- * UpdatePolicy返回参数结构体
- */
-export interface UpdatePolicyResponse {
   /**
-      * 策略id，入参是PolicyName时，才会返回
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PolicyId: number
+   * SAML身份提供商创建时间
+   */
+  CreateTime: string
+
+  /**
+   * SAML身份提供商上次修改时间
+   */
+  ModifyTime: string
+
+  /**
+   * SAML身份提供商元数据文档
+   */
+  SAMLMetadata: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateUserOIDCConfig请求参数结构体
+ */
+export interface CreateUserOIDCConfigRequest {
+  /**
+      * 身份提供商URL。OpenID Connect身份提供商标识。
+对应企业IdP提供的Openid-configuration中"issuer"字段的值。
+      */
+  IdentityUrl: string
+
+  /**
+   * 签名公钥，需要base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的帐号安全，建议您定期轮换签名公钥。
+   */
+  IdentityKey: string
+
+  /**
+   * 客户端ID，在OpenID Connect身份提供商注册的客户端ID。
+   */
+  ClientId: string
+
+  /**
+   * 授权请求Endpoint，OpenID Connect身份提供商授权地址。对应企业IdP提供的Openid-configuration中"authorization_endpoint"字段的值。
+   */
+  AuthorizationEndpoint: string
+
+  /**
+   * 授权请求Response type，固定值id_token
+   */
+  ResponseType: string
+
+  /**
+   * 授权请求Response mode。授权请求返回模式，form_post和fragment两种可选模式，推荐选择form_post模式。
+   */
+  ResponseMode: string
+
+  /**
+   * 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段
+   */
+  MappingFiled: string
+
+  /**
+   * 授权请求Scope。openid; email;profile。授权请求信息范围。默认必选openid。
+   */
+  Scope?: Array<string>
+
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -2532,38 +2718,18 @@ export interface CreateRoleResponse {
 }
 
 /**
- * GetSAMLProvider返回参数结构体
+ * AttachGroupPolicy请求参数结构体
  */
-export interface GetSAMLProviderResponse {
+export interface AttachGroupPolicyRequest {
   /**
-   * SAML身份提供商名称
+   * 策略 id
    */
-  Name: string
+  PolicyId: number
 
   /**
-   * SAML身份提供商描述
+   * 用户组 id
    */
-  Description: string
-
-  /**
-   * SAML身份提供商创建时间
-   */
-  CreateTime: string
-
-  /**
-   * SAML身份提供商上次修改时间
-   */
-  ModifyTime: string
-
-  /**
-   * SAML身份提供商元数据文档
-   */
-  SAMLMetadata: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  AttachGroupId: number
 }
 
 /**
@@ -2638,6 +2804,57 @@ export interface SetDefaultPolicyVersionRequest {
 }
 
 /**
+ * UpdateUserOIDCConfig请求参数结构体
+ */
+export interface UpdateUserOIDCConfigRequest {
+  /**
+      * 身份提供商URL。OpenID Connect身份提供商标识。
+对应企业IdP提供的Openid-configuration中"issuer"字段的值。
+      */
+  IdentityUrl: string
+
+  /**
+   * 签名公钥，需要base64_encode。验证OpenID Connect身份提供商ID Token签名的公钥。为了您的帐号安全，建议您定期轮换签名公钥。
+   */
+  IdentityKey: string
+
+  /**
+   * 客户端ID，在OpenID Connect身份提供商注册的客户端ID。
+   */
+  ClientId: string
+
+  /**
+   * 授权请求Endpoint，OpenID Connect身份提供商授权地址。对应企业IdP提供的Openid-configuration中"authorization_endpoint"字段的值。
+   */
+  AuthorizationEndpoint: string
+
+  /**
+   * 授权请求Response type，固定值id_token。
+   */
+  ResponseType: string
+
+  /**
+   * 授权请求Response mode。授权请求返回模式，form_post和fragment两种可选模式，推荐选择form_post模式。
+   */
+  ResponseMode: string
+
+  /**
+   * 映射字段名称。IdP的id_token中哪一个字段映射到子用户的用户名，通常是sub或者name字段
+   */
+  MappingFiled: string
+
+  /**
+   * 授权请求Scope。openid; email;profile。授权请求信息范围。默认必选openid。
+   */
+  Scope?: Array<string>
+
+  /**
+   * 描述
+   */
+  Description?: string
+}
+
+/**
  * AddUserToGroup请求参数结构体
  */
 export interface AddUserToGroupRequest {
@@ -2666,6 +2883,11 @@ export interface DetachRolePolicyResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeUserOIDCConfig请求参数结构体
+ */
+export type DescribeUserOIDCConfigRequest = null
 
 /**
  * 角色关联的策略信息
@@ -2991,21 +3213,6 @@ export interface GetPolicyResponse {
  * DescribeSafeAuthFlag请求参数结构体
  */
 export type DescribeSafeAuthFlagRequest = null
-
-/**
- * AttachGroupPolicy请求参数结构体
- */
-export interface AttachGroupPolicyRequest {
-  /**
-   * 策略 id
-   */
-  PolicyId: number
-
-  /**
-   * 用户组 id
-   */
-  AttachGroupId: number
-}
 
 /**
  * DeleteServiceLinkedRole请求参数结构体

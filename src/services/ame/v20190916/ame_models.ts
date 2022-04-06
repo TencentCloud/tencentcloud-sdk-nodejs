@@ -1272,13 +1272,23 @@ export interface PackageItem {
  */
 export interface DescribeKTVPlaylistsRequest {
   /**
-   * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
-   */
+      * 歌单类型，取值有：
+·OfficialRec：官方推荐
+·Normal：自定义
+当该字段未填时，默认为取OfficialRec
+      */
+  Type?: string
+
+  /**
+      * 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
+取值范围：Offset + Limit 不超过5000
+      */
   Offset?: number
 
   /**
-   * 分页返回的记录条数，默认值：50。将返回第 Offset 到第 Offset+Limit-1 条。
-   */
+      * 分页返回的记录条数，默认值：50。将返回第 Offset 到第 Offset+Limit-1 条。
+取值范围：Offset + Limit 不超过5000
+      */
   Limit?: number
 }
 
