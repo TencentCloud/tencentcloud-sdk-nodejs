@@ -652,7 +652,7 @@ export interface DescribeDBInstancesRequest {
   SubnetIds?: Array<number>
 
   /**
-   * 是否锁定标记。
+   * 是否锁定标记，可选值：0 - 不锁定，1 - 锁定，默认为0。
    */
   CdbErrors?: Array<number>
 
@@ -720,6 +720,21 @@ export interface DescribeDBInstancesRequest {
    * 金融围拢 ID 。
    */
   CageIds?: Array<string>
+
+  /**
+   * 标签值
+   */
+  TagValues?: Array<string>
+
+  /**
+   * 私有网络字符型vpcId
+   */
+  UniqueVpcIds?: Array<string>
+
+  /**
+   * 私有网络字符型subnetId
+   */
+  UniqSubnetIds?: Array<string>
 }
 
 /**

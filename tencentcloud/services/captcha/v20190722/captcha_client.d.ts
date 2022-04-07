@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCaptchaMiniDataSum(req: DescribeCaptchaMiniDataSumRequest, cb?: (error: string, rep: DescribeCaptchaMiniDataSumResponse) => void): Promise<DescribeCaptchaMiniDataSumResponse>;
     /**
-     * 核查验证码小程序插件票据结果
+     * 核查验证码票据结果(小程序插件)
      */
     DescribeCaptchaMiniResult(req: DescribeCaptchaMiniResultRequest, cb?: (error: string, rep: DescribeCaptchaMiniResultResponse) => void): Promise<DescribeCaptchaMiniResultResponse>;
     /**
@@ -56,7 +56,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCaptchaAppIdInfo(req: DescribeCaptchaAppIdInfoRequest, cb?: (error: string, rep: DescribeCaptchaAppIdInfoResponse) => void): Promise<DescribeCaptchaAppIdInfoResponse>;
     /**
-     * 核查验证码票据结果
+     * 核查验证码票据结果(Web|APP)
      */
     DescribeCaptchaResult(req: DescribeCaptchaResultRequest, cb?: (error: string, rep: DescribeCaptchaResultResponse) => void): Promise<DescribeCaptchaResultResponse>;
 }

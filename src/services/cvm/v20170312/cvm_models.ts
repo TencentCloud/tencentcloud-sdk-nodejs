@@ -2859,7 +2859,7 @@ export interface DescribeInstanceVncUrlResponse {
   /**
    * 实例的管理终端地址。
    */
-  InstanceVncUrl?: string
+  InstanceVncUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3649,6 +3649,11 @@ false（默认）：发送正常请求，通过检查后直接创建实例
    * 指定CHC物理服务器来创建CHC云主机。
    */
   ChcIds?: Array<string>
+
+  /**
+   * 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：<br><li>TRUE：表示开启实例保护，不允许通过api接口删除实例<br><li>FALSE：表示关闭实例保护，允许通过api接口删除实例<br><br>默认取值：FALSE。
+   */
+  DisableApiTermination?: boolean
 }
 
 /**
@@ -4823,7 +4828,7 @@ export interface DescribeInstanceTypeConfigsRequest {
       * <li><strong>zone</strong></li>
 <p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
 <li><strong>instance-family</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
       */
   Filters?: Array<Filter>
@@ -5325,7 +5330,7 @@ export interface DescribeInstanceTypeConfigsResponse {
   /**
    * 实例机型配置列表。
    */
-  InstanceTypeConfigSet?: Array<InstanceTypeConfig>
+  InstanceTypeConfigSet: Array<InstanceTypeConfig>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

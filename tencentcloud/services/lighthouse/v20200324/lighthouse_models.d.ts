@@ -125,6 +125,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
       * 要创建的容器配置列表。
       */
     Containers?: Array<DockerContainerConfiguration>;
+    /**
+      * 是否自动使用代金券。默认不使用。
+      */
+    AutoVoucher?: boolean;
 }
 /**
  * DescribeZones请求参数结构体

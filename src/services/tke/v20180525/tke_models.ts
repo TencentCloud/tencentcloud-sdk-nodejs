@@ -5887,6 +5887,18 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EnableExternalNode: boolean
+
+  /**
+      * 集群等级，针对托管集群生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterLevel: string
+
+  /**
+      * 自动变配集群等级，针对托管集群生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoUpgradeClusterLevel: boolean
 }
 
 /**

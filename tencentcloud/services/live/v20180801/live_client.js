@@ -29,6 +29,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 断开推流连接，但可以重新推流。
+注：对已经不活跃的流，调用该断流接口时，接口返回成功。
      */
     async DropLiveStream(req, cb) {
         return this.request("DropLiveStream", req, cb);

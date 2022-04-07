@@ -45,9 +45,9 @@ import {
   Service,
   DescribeEdgeUnitApplicationsResponse,
   DescribeNodeUnitTemplateOnNodeGroupResponse,
-  CreateUserTokenRequest,
+  ApplicationStatusInfo,
   DescribeEdgeUnitGridEventsResponse,
-  ModifyApplicationVisualizationResponse,
+  IotDevicesInfo,
   DescribeEdgeUnitApplicationYamlErrorResponse,
   DeleteEdgeUnitCloudResponse,
   ModifyConfigMapRequest,
@@ -61,6 +61,7 @@ import {
   DescribeEdgeUnitApplicationYamlResponse,
   DescribeConfigMapYamlErrorResponse,
   DescribeConfigMapResponse,
+  GetMarketComponentListRequest,
   DescribeApplicationYamlRequest,
   ModifyApplicationVisualizationRequest,
   DescribeEdgeUnitNodeUnitTemplatesRequest,
@@ -83,17 +84,17 @@ import {
   DescribeApplicationsResponse,
   DeleteConfigMapRequest,
   DescribeEdgeUnitDeployGridItemResponse,
-  NodeUnitInfo,
+  CreateMessageRouteRequest,
   DescribeEdgeUnitExtraRequest,
   CreateUpdateNodeUnitRequest,
-  Event,
+  DescribeIotDeviceRequest,
   CreateConfigMapResponse,
   DescribeEdgeUnitsCloudRequest,
   ApplicationTemplate,
   ApplicationBasicInfo,
   DescribeEdgeDefaultVpcRequest,
   DescribeSecretsResponse,
-  DescribeEdgeAgentNodeInstallerRequest,
+  DeleteEdgeNodeGroupRequest,
   DescribeEdgeUnitApplicationYamlErrorRequest,
   DescribeEdgeNodePodsResponse,
   DescribeEdgePodResponse,
@@ -106,8 +107,10 @@ import {
   GetMarketComponentListResponse,
   DescribeEdgeNodePodContainersResponse,
   CreateNamespaceResponse,
+  DeleteEdgeUnitDevicesRequest,
   CronJob,
   DeleteEdgeUnitPodRequest,
+  CreateIotDeviceRequest,
   CreateSecretResponse,
   DeleteEdgeNodeUnitTemplatesRequest,
   ModifyEdgeNodeLabelsResponse,
@@ -118,22 +121,26 @@ import {
   DescribeEdgeUnitApplicationLogsResponse,
   ModifyEdgeUnitDeployGridItemResponse,
   CreateEdgeNodeRequest,
+  BuildMessageRouteResponse,
   DescribeEdgeUnitMonitorStatusResponse,
   DeleteNamespaceResponse,
   DescribeEdgeUnitExtraResponse,
   DescribeConfigMapsRequest,
   DescribeEdgeUnitNodeUnitTemplatesResponse,
   GridDetail,
+  ModifyIotDeviceResponse,
   ModifyEdgeNodeLabelsRequest,
+  DeleteEdgeUnitDevicesResponse,
   CreateEdgeNodeGroupResponse,
   EdgeNodePodInfo,
-  ModifyNodeUnitTemplateRequest,
-  DescribeEdgeDefaultVpcResponse,
+  RouteInfo,
+  CreateEdgeUnitApplicationYamlRequest,
   HttpHeader,
   DeleteEdgeUnitApplicationsResponse,
-  DescribeEdgeUnitApplicationEventsResponse,
+  DescribeSecretRequest,
   DeleteApplicationsResponse,
   DracoNodeInfo,
+  NodeUnitInfo,
   DockerConfig,
   DescribeEdgeUnitDeployGridItemYamlRequest,
   CreateEdgeNodeBatchRequest,
@@ -146,9 +153,11 @@ import {
   CreateEdgeNodeUnitTemplateRequest,
   GridInfo,
   CreateApplicationVisualizationResponse,
+  Event,
   DescribeEdgeUnitCloudRequest,
   CreateEdgeUnitApplicationYamlResponse,
   DescribeSecretYamlErrorRequest,
+  DescribeMessageRouteListResponse,
   FieldSort,
   EdgeCloudCluster,
   CreateUserTokenResponse,
@@ -157,37 +166,46 @@ import {
   EdgeDracoNodeInfo,
   DescribeEdgeUnitApplicationVisualizationRequest,
   DescribeEdgeNodesResponse,
-  NodeSimpleInfo,
+  ModifyIotDeviceRequest,
   DescribeEdgeUnitGridPodsRequest,
   VolumeConfigMap,
-  CreateEdgeUnitApplicationYamlRequest,
-  DescribeSecretRequest,
+  DeleteEdgeUnitDevicesDevice,
+  DeleteIotDeviceResponse,
+  DescribeEdgeDefaultVpcResponse,
+  ModifyNodeUnitTemplateRequest,
   DescribeEdgeNodesRequest,
   DescribeEdgeUnitApplicationLogsRequest,
-  ApplicationStatusInfo,
+  CreateUserTokenRequest,
   DescribeEdgeAgentNodeInstallerResponse,
   ModifyEdgeUnitApplicationVisualizationRequest,
   ModifyConfigMapResponse,
+  ModifyApplicationVisualizationResponse,
   DescribeEdgeNodePodsRequest,
   DeleteIotDeviceBatchRequest,
-  GetMarketComponentListRequest,
+  DescribeEdgeAgentNodeInstallerRequest,
   DescribeApplicationVisualizationResponse,
   DescribeDracoEdgeNodeInstallerRequest,
   CreateNamespaceRequest,
   VolumeHostPath,
+  DeleteMessageRouteRequest,
   ApplyMarketComponentRequest,
+  NodeSimpleInfo,
   EnvValueSelector,
   DescribeNamespaceResourcesResponse,
   DescribeEdgeUnitGridEventsRequest,
+  CreateEdgeUnitDevicesResponse,
   SecretItem,
   ModifyEdgeDracoNodeRequest,
+  CreateMessageRouteResponse,
   DescribeNodeUnitResponse,
   DeleteEdgeNodeGroupResponse,
+  DescribeMessageRouteListRequest,
   KeyValueObj,
   Label,
   ModifyEdgeUnitResponse,
   DescribeYeheResourceLimitResponse,
   DescribeEdgeUnitsCloudResponse,
+  DescribeIotDevicesRequest,
   CreateConfigMapRequest,
   DescribeEdgeUnitDeployGridResponse,
   ModifyEdgeUnitCloudApiResponse,
@@ -195,16 +213,18 @@ import {
   ModifyEdgeUnitApplicationVisualizationResponse,
   DeleteEdgeNodesResponse,
   EdgeNodePodContainerInfo,
+  BuildMessageRouteRequest,
   GridEventInfo,
   ResourceMetricTarget,
   DescribeEdgeNodePodContainersRequest,
-  DeleteEdgeNodeGroupRequest,
+  DescribeEdgeUnitApplicationEventsResponse,
   ModifySecretRequest,
   DeleteEdgeUnitPodResponse,
   Probe,
   Container,
   DescribeEdgeUnitApplicationEventsRequest,
   DescribeNamespacesRequest,
+  DeleteIotDeviceRequest,
   DescribeEdgeNodeRemarkListResponse,
   HorizontalPodAutoscaler,
   NamespaceResource,
@@ -217,10 +237,13 @@ import {
   DeleteEdgeUnitDeployGridItemRequest,
   SecurityContext,
   ApplicationDeployMode,
+  CreateIotDeviceResponse,
+  CreateEdgeUnitDevicesRequest,
   ModifySecretResponse,
   Sort,
   DescribeEdgeUnitDeployGridItemYamlResponse,
   DescribeEdgeUnitApplicationVisualizationResponse,
+  DescribeIotDeviceResponse,
   DescribeEdgePodRequest,
   DescribeNamespaceResourcesRequest,
   DescribeMonitorMetricsRequest,
@@ -229,11 +252,13 @@ import {
   DescribeApplicationsRequest,
   DescribeEdgeOperationLogsRequest,
   GridItemInfo,
+  SetRouteOnOffResponse,
   EdgeNodeLabel,
   DeleteNamespaceRequest,
   EdgeNodeInfo,
   GetMarketComponentRequest,
   HttpProbe,
+  DeleteMessageRouteResponse,
   DescribeEdgeUnitDeployGridRequest,
   ApplyMarketComponentResponse,
   DescribeApplicationYamlErrorResponse,
@@ -243,6 +268,7 @@ import {
   DescribeApplicationYamlErrorRequest,
   PortConfig,
   DescribeYeheResourceLimitRequest,
+  DescribeIotDevicesResponse,
   DescribeSecretsRequest,
   DescribeNodeUnitTemplateOnNodeGroupRequest,
   MonitorMetricsColumn,
@@ -261,6 +287,7 @@ import {
   DescribeEdgeUnitGridPodsResponse,
   DescribeConfigMapYamlErrorRequest,
   ModifyEdgeUnitApplicationBasicInfoResponse,
+  SetRouteOnOffRequest,
 } from "./iecp_models"
 
 /**
@@ -423,6 +450,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量解绑单元设备
+   */
+  async DeleteEdgeUnitDevices(
+    req: DeleteEdgeUnitDevicesRequest,
+    cb?: (error: string, rep: DeleteEdgeUnitDevicesResponse) => void
+  ): Promise<DeleteEdgeUnitDevicesResponse> {
+    return this.request("DeleteEdgeUnitDevices", req, cb)
+  }
+
+  /**
+   * 批量绑定设备到单元
+   */
+  async CreateEdgeUnitDevices(
+    req: CreateEdgeUnitDevicesRequest,
+    cb?: (error: string, rep: CreateEdgeUnitDevicesResponse) => void
+  ): Promise<CreateEdgeUnitDevicesResponse> {
+    return this.request("CreateEdgeUnitDevices", req, cb)
+  }
+
+  /**
+   * 获取设备列表信息
+   */
+  async DescribeIotDevices(
+    req: DescribeIotDevicesRequest,
+    cb?: (error: string, rep: DescribeIotDevicesResponse) => void
+  ): Promise<DescribeIotDevicesResponse> {
+    return this.request("DescribeIotDevices", req, cb)
+  }
+
+  /**
    * 查询指定NodeGroup下NodeUnit模板列表
    */
   async DescribeNodeUnitTemplateOnNodeGroup(
@@ -473,6 +530,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取设备信息
+   */
+  async DescribeIotDevice(
+    req: DescribeIotDeviceRequest,
+    cb?: (error: string, rep: DescribeIotDeviceResponse) => void
+  ): Promise<DescribeIotDeviceResponse> {
+    return this.request("DescribeIotDevice", req, cb)
+  }
+
+  /**
    * 删除指定pod
    */
   async DeleteEdgeUnitPod(
@@ -510,6 +577,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteEdgeNodeGroupResponse) => void
   ): Promise<DeleteEdgeNodeGroupResponse> {
     return this.request("DeleteEdgeNodeGroup", req, cb)
+  }
+
+  /**
+   * 创建子设备
+   */
+  async CreateIotDevice(
+    req: CreateIotDeviceRequest,
+    cb?: (error: string, rep: CreateIotDeviceResponse) => void
+  ): Promise<CreateIotDeviceResponse> {
+    return this.request("CreateIotDevice", req, cb)
   }
 
   /**
@@ -713,6 +790,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改设备信息
+   */
+  async ModifyIotDevice(
+    req: ModifyIotDeviceRequest,
+    cb?: (error: string, rep: ModifyIotDeviceResponse) => void
+  ): Promise<ModifyIotDeviceResponse> {
+    return this.request("ModifyIotDevice", req, cb)
+  }
+
+  /**
    * 校验ConfigMap的Yaml语法
    */
   async DescribeConfigMapYamlError(
@@ -763,6 +850,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除设备
+   */
+  async DeleteIotDevice(
+    req: DeleteIotDeviceRequest,
+    cb?: (error: string, rep: DeleteIotDeviceResponse) => void
+  ): Promise<DeleteIotDeviceResponse> {
+    return this.request("DeleteIotDevice", req, cb)
+  }
+
+  /**
    * 检查应用模板的Yaml配置
    */
   async DescribeApplicationYamlError(
@@ -803,6 +900,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除Secret
+   */
+  async DeleteSecret(
+    req: DeleteSecretRequest,
+    cb?: (error: string, rep: DeleteSecretResponse) => void
+  ): Promise<DeleteSecretResponse> {
+    return this.request("DeleteSecret", req, cb)
+  }
+
+  /**
    * 可视化创建应用
    */
   async CreateEdgeUnitApplicationVisualization(
@@ -813,6 +920,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开关消息路由
+   */
+  async SetRouteOnOff(
+    req: SetRouteOnOffRequest,
+    cb?: (error: string, rep: SetRouteOnOffResponse) => void
+  ): Promise<SetRouteOnOffResponse> {
+    return this.request("SetRouteOnOff", req, cb)
+  }
+
+  /**
    * 查询边缘集群NodeGroup
    */
   async DescribeEdgeUnitNodeGroup(
@@ -820,6 +937,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEdgeUnitNodeGroupResponse) => void
   ): Promise<DescribeEdgeUnitNodeGroupResponse> {
     return this.request("DescribeEdgeUnitNodeGroup", req, cb)
+  }
+
+  /**
+   * 删除消息路由
+   */
+  async DeleteMessageRoute(
+    req: DeleteMessageRouteRequest,
+    cb?: (error: string, rep: DeleteMessageRouteResponse) => void
+  ): Promise<DeleteMessageRouteResponse> {
+    return this.request("DeleteMessageRoute", req, cb)
   }
 
   /**
@@ -933,13 +1060,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Secret
+   * 建立消息路由
    */
-  async DeleteSecret(
-    req: DeleteSecretRequest,
-    cb?: (error: string, rep: DeleteSecretResponse) => void
-  ): Promise<DeleteSecretResponse> {
-    return this.request("DeleteSecret", req, cb)
+  async BuildMessageRoute(
+    req: BuildMessageRouteRequest,
+    cb?: (error: string, rep: BuildMessageRouteResponse) => void
+  ): Promise<BuildMessageRouteResponse> {
+    return this.request("BuildMessageRoute", req, cb)
   }
 
   /**
@@ -990,6 +1117,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteNamespaceResponse) => void
   ): Promise<DeleteNamespaceResponse> {
     return this.request("DeleteNamespace", req, cb)
+  }
+
+  /**
+   * 获取消息路由列表
+   */
+  async DescribeMessageRouteList(
+    req: DescribeMessageRouteListRequest,
+    cb?: (error: string, rep: DescribeMessageRouteListResponse) => void
+  ): Promise<DescribeMessageRouteListResponse> {
+    return this.request("DescribeMessageRouteList", req, cb)
   }
 
   /**
@@ -1130,6 +1267,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEdgeNodeBatchResponse) => void
   ): Promise<CreateEdgeNodeBatchResponse> {
     return this.request("CreateEdgeNodeBatch", req, cb)
+  }
+
+  /**
+   * 创建消息路由
+   */
+  async CreateMessageRoute(
+    req: CreateMessageRouteRequest,
+    cb?: (error: string, rep: CreateMessageRouteResponse) => void
+  ): Promise<CreateMessageRouteResponse> {
+    return this.request("CreateMessageRoute", req, cb)
   }
 
   /**

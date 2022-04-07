@@ -18,9 +18,13 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UnTagResourcesResponse,
   TagWithDelete,
   DetachResourcesTagRequest,
+  GetTagValuesResponse,
   AttachResourcesTagResponse,
+  GetTagKeysResponse,
+  GetResourcesRequest,
   DeleteTagRequest,
   DeleteResourceTagResponse,
   DescribeResourceTagsByTagKeysRequest,
@@ -28,20 +32,26 @@ import {
   DescribeTagsRequest,
   DescribeTagKeysResponse,
   DescribeTagValuesRequest,
-  ModifyResourceTagsRequest,
   DescribeResourcesByTagsUnionRequest,
+  DeleteTagsResponse,
+  ModifyResourcesTagValueResponse,
   DescribeTagsResponse,
-  DescribeResourcesByTagsResponse,
+  DeleteTagsRequest,
   DescribeTagKeysRequest,
+  GetTagsRequest,
+  UnTagResourcesRequest,
   DescribeTagsSeqResponse,
+  ModifyResourceTagsRequest,
   DescribeResourceTagsResponse,
   DescribeResourceTagsByResourceIdsRequest,
   DescribeResourcesByTagsUnionResponse,
   DescribeResourceTagsByResourceIdsResponse,
+  GetTagsResponse,
   ModifyResourcesTagValueRequest,
   TagResource,
+  GetTagKeysRequest,
   AddResourceTagResponse,
-  ModifyResourcesTagValueResponse,
+  DescribeResourcesByTagsResponse,
   AddResourceTagRequest,
   DescribeTagValuesSeqResponse,
   CreateTagRequest,
@@ -52,18 +62,26 @@ import {
   Tag,
   AttachResourcesTagRequest,
   CreateTagResponse,
+  FailedResource,
+  ResourceTagMapping,
   DetachResourcesTagResponse,
+  GetResourcesResponse,
   DescribeResourceTagsByResourceIdsSeqResponse,
   DeleteTagResponse,
   ResourceIdTag,
   DescribeTagValuesSeqRequest,
   UpdateResourceTagValueRequest,
+  TagResourcesResponse,
+  CreateTagsRequest,
+  CreateTagsResponse,
   DescribeResourcesByTagsRequest,
+  TagResourcesRequest,
   DeleteResourceTagRequest,
   UpdateResourceTagValueResponse,
   TagKeyObject,
   DescribeResourceTagsRequest,
   DescribeResourceTagsByResourceIdsSeqRequest,
+  GetTagValuesRequest,
   ResourceTag,
 } from "./tag_models"
 
@@ -74,6 +92,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tag.tencentcloudapi.com", "2018-08-13", clientConfig)
+  }
+
+  /**
+   * 本接口用于删除一对标签键和标签值
+   */
+  async DeleteTags(
+    req: DeleteTagsRequest,
+    cb?: (error: string, rep: DeleteTagsResponse) => void
+  ): Promise<DeleteTagsResponse> {
+    return this.request("DeleteTags", req, cb)
   }
 
   /**
@@ -89,31 +117,11 @@ export class Client extends AbstractClient {
   /**
    * 用于查询已建立的标签列表中的标签值。
    */
-  async DescribeTagValuesSeq(
-    req: DescribeTagValuesSeqRequest,
-    cb?: (error: string, rep: DescribeTagValuesSeqResponse) => void
-  ): Promise<DescribeTagValuesSeqResponse> {
-    return this.request("DescribeTagValuesSeq", req, cb)
-  }
-
-  /**
-   * 解绑多个资源关联的某个标签
-   */
-  async DetachResourcesTag(
-    req: DetachResourcesTagRequest,
-    cb?: (error: string, rep: DetachResourcesTagResponse) => void
-  ): Promise<DetachResourcesTagResponse> {
-    return this.request("DetachResourcesTag", req, cb)
-  }
-
-  /**
-   * 用于查询已建立的标签列表中的标签值。
-   */
-  async DescribeTagValues(
-    req: DescribeTagValuesRequest,
-    cb?: (error: string, rep: DescribeTagValuesResponse) => void
-  ): Promise<DescribeTagValuesResponse> {
-    return this.request("DescribeTagValues", req, cb)
+  async GetTagValues(
+    req: GetTagValuesRequest,
+    cb?: (error: string, rep: GetTagValuesResponse) => void
+  ): Promise<GetTagValuesResponse> {
+    return this.request("GetTagValues", req, cb)
   }
 
   /**
@@ -127,37 +135,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询资源关联标签
-   */
-  async DescribeResourceTags(
-    req: DescribeResourceTagsRequest,
-    cb?: (error: string, rep: DescribeResourceTagsResponse) => void
-  ): Promise<DescribeResourceTagsResponse> {
-    return this.request("DescribeResourceTags", req, cb)
-  }
-
-  /**
-   * 本接口用于修改资源关联的所有标签
-   */
-  async ModifyResourceTags(
-    req: ModifyResourceTagsRequest,
-    cb?: (error: string, rep: ModifyResourceTagsResponse) => void
-  ): Promise<ModifyResourceTagsResponse> {
-    return this.request("ModifyResourceTags", req, cb)
-  }
-
-  /**
-     * 用于查询已建立的标签列表中的标签键。
-
-     */
-  async DescribeTagKeys(
-    req: DescribeTagKeysRequest,
-    cb?: (error: string, rep: DescribeTagKeysResponse) => void
-  ): Promise<DescribeTagKeysResponse> {
-    return this.request("DescribeTagKeys", req, cb)
-  }
-
-  /**
    * 本接口用于修改资源已关联的标签值（标签键不变）
    */
   async UpdateResourceTagValue(
@@ -165,26 +142,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateResourceTagValueResponse) => void
   ): Promise<UpdateResourceTagValueResponse> {
     return this.request("UpdateResourceTagValue", req, cb)
-  }
-
-  /**
-   * 本接口用于解除标签和资源的关联关系
-   */
-  async DeleteResourceTag(
-    req: DeleteResourceTagRequest,
-    cb?: (error: string, rep: DeleteResourceTagResponse) => void
-  ): Promise<DeleteResourceTagResponse> {
-    return this.request("DeleteResourceTag", req, cb)
-  }
-
-  /**
-   * 通过标签查询资源列表并集
-   */
-  async DescribeResourcesByTagsUnion(
-    req: DescribeResourcesByTagsUnionRequest,
-    cb?: (error: string, rep: DescribeResourcesByTagsUnionResponse) => void
-  ): Promise<DescribeResourcesByTagsUnionResponse> {
-    return this.request("DescribeResourcesByTagsUnion", req, cb)
   }
 
   /**
@@ -198,14 +155,73 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于查询已建立的标签列表。
+   * 用于获取已建立的标签列表。
+   */
+  async GetTags(
+    req: GetTagsRequest,
+    cb?: (error: string, rep: GetTagsResponse) => void
+  ): Promise<GetTagsResponse> {
+    return this.request("GetTags", req, cb)
+  }
 
-     */
-  async DescribeTags(
-    req: DescribeTagsRequest,
-    cb?: (error: string, rep: DescribeTagsResponse) => void
-  ): Promise<DescribeTagsResponse> {
-    return this.request("DescribeTags", req, cb)
+  /**
+   * 修改多个资源关联的某个标签键对应的标签值
+   */
+  async ModifyResourcesTagValue(
+    req: ModifyResourcesTagValueRequest,
+    cb?: (error: string, rep: ModifyResourcesTagValueResponse) => void
+  ): Promise<ModifyResourcesTagValueResponse> {
+    return this.request("ModifyResourcesTagValue", req, cb)
+  }
+
+  /**
+   * 通过标签查询资源列表
+   */
+  async DescribeResourcesByTags(
+    req: DescribeResourcesByTagsRequest,
+    cb?: (error: string, rep: DescribeResourcesByTagsResponse) => void
+  ): Promise<DescribeResourcesByTagsResponse> {
+    return this.request("DescribeResourcesByTags", req, cb)
+  }
+
+  /**
+   * 本接口用于删除一对标签键和标签值
+   */
+  async DeleteTag(
+    req: DeleteTagRequest,
+    cb?: (error: string, rep: DeleteTagResponse) => void
+  ): Promise<DeleteTagResponse> {
+    return this.request("DeleteTag", req, cb)
+  }
+
+  /**
+   * 查询绑定了标签的资源列表。
+   */
+  async GetResources(
+    req: GetResourcesRequest,
+    cb?: (error: string, rep: GetResourcesResponse) => void
+  ): Promise<GetResourcesResponse> {
+    return this.request("GetResources", req, cb)
+  }
+
+  /**
+   * 查询资源关联标签
+   */
+  async DescribeResourceTags(
+    req: DescribeResourceTagsRequest,
+    cb?: (error: string, rep: DescribeResourceTagsResponse) => void
+  ): Promise<DescribeResourceTagsResponse> {
+    return this.request("DescribeResourceTags", req, cb)
+  }
+
+  /**
+   * 查询标签键列表。
+   */
+  async GetTagKeys(
+    req: GetTagKeysRequest,
+    cb?: (error: string, rep: GetTagKeysResponse) => void
+  ): Promise<GetTagKeysResponse> {
+    return this.request("GetTagKeys", req, cb)
   }
 
   /**
@@ -220,16 +236,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过标签查询资源列表
-   */
-  async DescribeResourcesByTags(
-    req: DescribeResourcesByTagsRequest,
-    cb?: (error: string, rep: DescribeResourcesByTagsResponse) => void
-  ): Promise<DescribeResourcesByTagsResponse> {
-    return this.request("DescribeResourcesByTags", req, cb)
-  }
-
-  /**
    * 本接口用于给标签关联资源
    */
   async AddResourceTag(
@@ -237,16 +243,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddResourceTagResponse) => void
   ): Promise<AddResourceTagResponse> {
     return this.request("AddResourceTag", req, cb)
-  }
-
-  /**
-   * 本接口用于删除一对标签键和标签值
-   */
-  async DeleteTag(
-    req: DeleteTagRequest,
-    cb?: (error: string, rep: DeleteTagResponse) => void
-  ): Promise<DeleteTagResponse> {
-    return this.request("DeleteTag", req, cb)
   }
 
   /**
@@ -270,12 +266,114 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改多个资源关联的某个标签键对应的标签值
+   * 解绑多个资源关联的某个标签
    */
-  async ModifyResourcesTagValue(
-    req: ModifyResourcesTagValueRequest,
-    cb?: (error: string, rep: ModifyResourcesTagValueResponse) => void
-  ): Promise<ModifyResourcesTagValueResponse> {
-    return this.request("ModifyResourcesTagValue", req, cb)
+  async DetachResourcesTag(
+    req: DetachResourcesTagRequest,
+    cb?: (error: string, rep: DetachResourcesTagResponse) => void
+  ): Promise<DetachResourcesTagResponse> {
+    return this.request("DetachResourcesTag", req, cb)
+  }
+
+  /**
+   * 用于查询已建立的标签列表中的标签值。
+   */
+  async DescribeTagValues(
+    req: DescribeTagValuesRequest,
+    cb?: (error: string, rep: DescribeTagValuesResponse) => void
+  ): Promise<DescribeTagValuesResponse> {
+    return this.request("DescribeTagValues", req, cb)
+  }
+
+  /**
+   * 为指定的多个云产品的多个云资源统一创建并绑定标签。
+   */
+  async TagResources(
+    req: TagResourcesRequest,
+    cb?: (error: string, rep: TagResourcesResponse) => void
+  ): Promise<TagResourcesResponse> {
+    return this.request("TagResources", req, cb)
+  }
+
+  /**
+   * 本接口用于解除标签和资源的关联关系
+   */
+  async DeleteResourceTag(
+    req: DeleteResourceTagRequest,
+    cb?: (error: string, rep: DeleteResourceTagResponse) => void
+  ): Promise<DeleteResourceTagResponse> {
+    return this.request("DeleteResourceTag", req, cb)
+  }
+
+  /**
+     * 用于查询已建立的标签列表。
+
+     */
+  async DescribeTags(
+    req: DescribeTagsRequest,
+    cb?: (error: string, rep: DescribeTagsResponse) => void
+  ): Promise<DescribeTagsResponse> {
+    return this.request("DescribeTags", req, cb)
+  }
+
+  /**
+     * 用于查询已建立的标签列表中的标签键。
+
+     */
+  async DescribeTagKeys(
+    req: DescribeTagKeysRequest,
+    cb?: (error: string, rep: DescribeTagKeysResponse) => void
+  ): Promise<DescribeTagKeysResponse> {
+    return this.request("DescribeTagKeys", req, cb)
+  }
+
+  /**
+   * 指定的多个云产品的多个云资源统一解绑标签。
+   */
+  async UnTagResources(
+    req: UnTagResourcesRequest,
+    cb?: (error: string, rep: UnTagResourcesResponse) => void
+  ): Promise<UnTagResourcesResponse> {
+    return this.request("UnTagResources", req, cb)
+  }
+
+  /**
+   * 用于查询已建立的标签列表中的标签值。
+   */
+  async DescribeTagValuesSeq(
+    req: DescribeTagValuesSeqRequest,
+    cb?: (error: string, rep: DescribeTagValuesSeqResponse) => void
+  ): Promise<DescribeTagValuesSeqResponse> {
+    return this.request("DescribeTagValuesSeq", req, cb)
+  }
+
+  /**
+   * 本接口用于创建多对标签键和标签值
+   */
+  async CreateTags(
+    req: CreateTagsRequest,
+    cb?: (error: string, rep: CreateTagsResponse) => void
+  ): Promise<CreateTagsResponse> {
+    return this.request("CreateTags", req, cb)
+  }
+
+  /**
+   * 通过标签查询资源列表并集
+   */
+  async DescribeResourcesByTagsUnion(
+    req: DescribeResourcesByTagsUnionRequest,
+    cb?: (error: string, rep: DescribeResourcesByTagsUnionResponse) => void
+  ): Promise<DescribeResourcesByTagsUnionResponse> {
+    return this.request("DescribeResourcesByTagsUnion", req, cb)
+  }
+
+  /**
+   * 本接口用于修改资源关联的所有标签
+   */
+  async ModifyResourceTags(
+    req: ModifyResourceTagsRequest,
+    cb?: (error: string, rep: ModifyResourceTagsResponse) => void
+  ): Promise<ModifyResourceTagsResponse> {
+    return this.request("ModifyResourceTags", req, cb)
   }
 }

@@ -236,7 +236,7 @@ export declare class Client extends AbstractClient {
      */
     PurgeUrlsCache(req: PurgeUrlsCacheRequest, cb?: (error: string, rep: PurgeUrlsCacheResponse) => void): Promise<PurgeUrlsCacheResponse>;
     /**
-     * DescribeTrafficPackages 用于查询中国境内 CDN 流量包详情。
+     * DescribeTrafficPackages 用于查询 CDN 流量包详情。
      */
     DescribeTrafficPackages(req: DescribeTrafficPackagesRequest, cb?: (error: string, rep: DescribeTrafficPackagesResponse) => void): Promise<DescribeTrafficPackagesResponse>;
     /**

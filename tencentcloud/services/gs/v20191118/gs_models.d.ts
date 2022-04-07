@@ -166,6 +166,12 @@ export interface CreateSessionRequest {
       * 游戏相关参数
       */
     GameContext?: string;
+    /**
+      * 云端运行模式。
+RunWithoutClient：允许无客户端连接的情况下仍保持云端 App 运行
+默认值（空）：要求必须有客户端连接才会保持云端 App 运行。
+      */
+    RunMode?: string;
 }
 /**
  * CreateSession返回参数结构体

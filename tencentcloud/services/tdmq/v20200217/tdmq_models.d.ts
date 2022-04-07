@@ -123,6 +123,16 @@ export interface RocketMQNamespace {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Remark: string;
+    /**
+      * 公网接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicEndpoint: string;
+    /**
+      * VPC接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcEndpoint: string;
 }
 /**
  * DescribeSubscriptions请求参数结构体
@@ -1121,6 +1131,11 @@ export interface CmqQueue {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MaxMsgBacklogSize: number;
+    /**
+      * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RetentionSizeInMB: number;
 }
 /**
  * CreateEnvironment返回参数结构体
@@ -2605,6 +2620,11 @@ FilterType = 2表示用户使用 BindingKey 过滤。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NamespaceName: string;
+    /**
+      * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
 }
 /**
  * UnbindCmqDeadLetter返回参数结构体
@@ -2971,6 +2991,11 @@ export interface RocketMQClusterInfo {
       * VPC接入地址
       */
     VpcEndPoint: string;
+    /**
+      * 是否支持命名空间接入点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportNamespaceEndpoint: boolean;
 }
 /**
  * DescribeRocketMQTopics返回参数结构体

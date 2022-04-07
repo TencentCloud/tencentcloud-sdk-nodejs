@@ -394,7 +394,7 @@ export interface DescribePushQuotaResponse {
   /**
    * Url预热用量及配额。
    */
-  UrlPush?: Array<Quota>
+  UrlPush: Array<Quota>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -409,12 +409,12 @@ export interface DescribePurgeQuotaResponse {
   /**
    * URL刷新用量及配额。
    */
-  UrlPurge?: Array<Quota>
+  UrlPurge: Array<Quota>
 
   /**
    * 目录刷新用量及配额。
    */
-  PathPurge?: Array<Quota>
+  PathPurge: Array<Quota>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1003,13 +1003,17 @@ export interface SpecificConfig {
 export interface DescribeTopDataRequest {
   /**
       * 查询起始日期：yyyy-MM-dd HH:mm:ss
-当前仅支持按天粒度的数据查询，参数需为某天的起点时刻
+仅支持按天粒度的数据查询，取入参中的天信息作为起始日期
+返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04 10:40:00，返回数据的起始时间为2018-09-04 00:00:00
+仅支持 90 天内数据查询
       */
   StartTime: string
 
   /**
-      * 查询起始日期：yyyy-MM-dd HH:mm:ss
-当前仅支持按天粒度的数据查询，参数需为某天的结束时刻
+      * 查询结束日期：yyyy-MM-dd HH:mm:ss
+仅支持按天粒度的数据查询，取入参中的天信息作为结束日期
+返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59
+EndTime 需要大于等于 StartTime
       */
   EndTime: string
 
@@ -1042,12 +1046,14 @@ request：Metric 为 host 时指代访问请求数
   Detail?: boolean
 
   /**
-   * 地域，目前可不填，默认是大陆
-   */
+      * 指定服务地域查询，不填充表示查询中国境内 CDN 数据
+mainland：指定查询中国境内 CDN 数据
+overseas：指定查询中国境外 CDN 数据
+      */
   Area?: string
 
   /**
-   * 产品名，目前仅可使用cdn
+   * 指定查询的产品数据，目前仅可使用cdn
    */
   Product?: string
 }
@@ -2109,7 +2115,7 @@ export interface UpdateScdnDomainResponse {
   /**
    * 提交结果，Success表示成功
    */
-  Result?: string
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3419,6 +3425,17 @@ export interface DescribeTrafficPackagesRequest {
    * 分页查询记录个数，默认100，最大1000
    */
   Limit?: number
+
+  /**
+      * 流量包排序方式，支持以下值：
+expireTimeDesc：默认值，按过期时间倒序
+expireTimeAsc：按过期时间正序
+createTimeDesc：按创建时间倒序
+createTimeAsc：按创建时间正序
+status：按状态排序，正常抵扣>未生效>已用尽>已过期
+channel：按来源排序，主动购买>自动续订>CDN赠送
+      */
+  SortBy?: string
 }
 
 /**
@@ -5022,7 +5039,7 @@ export interface VerifyDomainRecordResponse {
   /**
    * 是否验证成功
    */
-  Result?: boolean
+  Result: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7222,17 +7239,17 @@ export interface CreateVerifyRecordResponse {
   /**
    * 子解析
    */
-  SubDomain?: string
+  SubDomain: string
 
   /**
    * 解析值
    */
-  Record?: string
+  Record: string
 
   /**
    * 解析类型
    */
-  RecordType?: string
+  RecordType: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7258,19 +7275,19 @@ export interface DescribeMapInfoResponse {
   /**
    * 映射关系数组。
    */
-  MapInfoList?: Array<MapInfo>
+  MapInfoList: Array<MapInfo>
 
   /**
       * 服务端区域id和子区域id的映射关系。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ServerRegionRelation?: Array<RegionMapRelation>
+  ServerRegionRelation: Array<RegionMapRelation>
 
   /**
       * 客户端区域id和子区域id的映射关系。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ClientRegionRelation?: Array<RegionMapRelation>
+  ClientRegionRelation: Array<RegionMapRelation>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7285,22 +7302,27 @@ export interface DescribeTrafficPackagesResponse {
   /**
    * 流量包总个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 流量包详情
    */
-  TrafficPackages?: Array<TrafficPackage>
+  TrafficPackages: Array<TrafficPackage>
 
   /**
    * 即将过期的流量包个数（7天内）
    */
-  ExpiringCount?: number
+  ExpiringCount: number
 
   /**
    * 有效流量包个数
    */
-  EnabledCount?: number
+  EnabledCount: number
+
+  /**
+   * 付费流量包个数
+   */
+  PaidCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7855,7 +7877,7 @@ export interface StopScdnDomainResponse {
   /**
    * 关闭结果，Success表示成功
    */
-  Result?: string
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7942,7 +7964,7 @@ export interface StartScdnDomainResponse {
   /**
    * 开启结果，Success表示成功
    */
-  Result?: string
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8094,7 +8116,7 @@ export interface DescribeCdnIpResponse {
   /**
    * 查询的节点归属详情。
    */
-  Ips?: Array<CdnIp>
+  Ips: Array<CdnIp>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9041,33 +9063,33 @@ export interface DescribeScdnConfigResponse {
   /**
    * 自定义防护策略配置
    */
-  Acl?: ScdnAclConfig
+  Acl: ScdnAclConfig
 
   /**
    * Web 攻击防护（WAF）配置
    */
-  Waf?: ScdnWafConfig
+  Waf: ScdnWafConfig
 
   /**
    * CC 防护配置
    */
-  CC?: ScdnConfig
+  CC: ScdnConfig
 
   /**
    * DDOS 防护配置
    */
-  Ddos?: ScdnDdosConfig
+  Ddos: ScdnDdosConfig
 
   /**
    * BOT 防护配置
    */
-  Bot?: ScdnBotConfig
+  Bot: ScdnBotConfig
 
   /**
       * 当前状态，取值online | offline
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status?: string
+  Status: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9728,12 +9750,12 @@ export interface DescribeUrlViolationsResponse {
       * 违规 URL 详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UrlRecordList?: Array<ViolationUrl>
+  UrlRecordList: Array<ViolationUrl>
 
   /**
    * 记录总数，用于分页
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10379,19 +10401,19 @@ export interface DescribeImageConfigResponse {
       * WebpAdapter配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WebpAdapter?: WebpAdapter
+  WebpAdapter: WebpAdapter
 
   /**
       * TpgAdapter配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TpgAdapter?: TpgAdapter
+  TpgAdapter: TpgAdapter
 
   /**
       * GuetzliAdapter配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  GuetzliAdapter?: GuetzliAdapter
+  GuetzliAdapter: GuetzliAdapter
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

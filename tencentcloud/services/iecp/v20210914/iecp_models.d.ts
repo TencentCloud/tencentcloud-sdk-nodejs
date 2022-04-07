@@ -654,13 +654,59 @@ export interface DescribeNodeUnitTemplateOnNodeGroupResponse {
     RequestId?: string;
 }
 /**
- * CreateUserToken请求参数结构体
+ * 应用状态
  */
-export interface CreateUserTokenRequest {
+export interface ApplicationStatusInfo {
     /**
-      * token过期时间，有效值是1~300秒
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Second?: number;
+    Id?: number;
+    /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 应用版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: string;
+    /**
+      * 应用状态(1:待部署 2:部署中 3:运行中 4:待更新 5:更新中 6:待删除 7:删除中 8:已删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: string;
+    /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 管理地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ManageUrl: string;
+    /**
+      * 负载类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WorkloadKind: string;
+    /**
+      * 应用部署模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployMode: ApplicationDeployMode;
+    /**
+      * 期望Pod数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Replicas: number;
+    /**
+      * 运行Pod数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AvailableReplicas: number;
 }
 /**
  * DescribeEdgeUnitGridEvents返回参数结构体
@@ -677,13 +723,57 @@ export interface DescribeEdgeUnitGridEventsResponse {
     RequestId?: string;
 }
 /**
- * ModifyApplicationVisualization返回参数结构体
+ * 子设备列表信息
  */
-export interface ModifyApplicationVisualizationResponse {
+export interface IotDevicesInfo {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 设备id
       */
-    RequestId?: string;
+    Id: number;
+    /**
+      * 设备名称
+      */
+    Name: string;
+    /**
+      * 设备状态
+      */
+    Status: number;
+    /**
+      * 设备打开状态
+      */
+    Disabled: boolean;
+    /**
+      * 描述
+      */
+    Description: string;
+    /**
+      * 设备创建时间
+      */
+    CreateTime: string;
+    /**
+      * 最后在线时间
+      */
+    LastOnlineTime: string;
+    /**
+      * 设备是否绑定到节点
+      */
+    IsBound: boolean;
+    /**
+      * 设备版本
+      */
+    Version: string;
+    /**
+      * 无
+      */
+    Region: string;
+    /**
+      * 无
+      */
+    UnitID: number;
+    /**
+      * 无
+      */
+    UnitName: string;
 }
 /**
  * DescribeEdgeUnitApplicationYamlError返回参数结构体
@@ -949,6 +1039,27 @@ export interface DescribeConfigMapResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetMarketComponentList请求参数结构体
+ */
+export interface GetMarketComponentListRequest {
+    /**
+      * 页偏移，从0开始
+      */
+    Offset: number;
+    /**
+      * 每页条数
+      */
+    Limit: number;
+    /**
+      * 名称模糊筛选
+      */
+    Filter?: string;
+    /**
+      * 以名称排序，ASC、DESC
+      */
+    Order?: string;
 }
 /**
  * DescribeApplicationYaml请求参数结构体
@@ -1449,22 +1560,17 @@ export interface DescribeEdgeUnitDeployGridItemResponse {
     RequestId?: string;
 }
 /**
- * NodeUnit信息
+ * CreateMessageRoute请求参数结构体
  */
-export interface NodeUnitInfo {
+export interface CreateMessageRouteRequest {
     /**
-      * NodeUnitId
+      * 路由名称
       */
-    Id: number;
+    RouteName: string;
     /**
-      * NodeUnit名称
+      * 路由备注
       */
-    NodeUnitName: string;
-    /**
-      * 包含节点列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NodeList: Array<NodeUnitNodeInfo>;
+    Descript?: string;
 }
 /**
  * DescribeEdgeUnitExtra请求参数结构体
@@ -1505,48 +1611,21 @@ export interface CreateUpdateNodeUnitRequest {
     NodeUnitTemplateIDs?: Array<number>;
 }
 /**
- * 事件信息
+ * DescribeIotDevice请求参数结构体
  */
-export interface Event {
+export interface DescribeIotDeviceRequest {
     /**
-      * 第一次出现时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 设备id，传0值表示此参数无效
       */
-    FirstTime: string;
+    DeviceId?: number;
     /**
-      * 最后一次出现时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 无
       */
-    LastTime: string;
+    ProductID?: string;
     /**
-      * 事件关联对象类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * 无
       */
-    InvolvedObjectKind: string;
-    /**
-      * 事件关联对象名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InvolvedObjectName: string;
-    /**
-      * 事件类型(Normal|Warning)
-      */
-    Type: string;
-    /**
-      * 原因
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Reason: string;
-    /**
-      * 内容
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Message: string;
-    /**
-      * 出现次数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Count: number;
+    DeviceName?: string;
 }
 /**
  * CreateConfigMap返回参数结构体
@@ -1663,17 +1742,21 @@ export interface DescribeSecretsResponse {
     RequestId?: string;
 }
 /**
- * DescribeEdgeAgentNodeInstaller请求参数结构体
+ * DeleteEdgeNodeGroup请求参数结构体
  */
-export interface DescribeEdgeAgentNodeInstallerRequest {
+export interface DeleteEdgeNodeGroupRequest {
     /**
       * IECP边缘单元ID
       */
     EdgeUnitId: number;
     /**
-      * IECP边缘节点ID
+      * NodeGroup名称
       */
-    NodeId: number;
+    Name: string;
+    /**
+      * 命名空间，默认为default
+      */
+    Namespace?: string;
 }
 /**
  * DescribeEdgeUnitApplicationYamlError请求参数结构体
@@ -1876,6 +1959,19 @@ export interface CreateNamespaceResponse {
     RequestId?: string;
 }
 /**
+ * DeleteEdgeUnitDevices请求参数结构体
+ */
+export interface DeleteEdgeUnitDevicesRequest {
+    /**
+      * 无
+      */
+    EdgeUnitId: number;
+    /**
+      * 无
+      */
+    Devices: Array<DeleteEdgeUnitDevicesDevice>;
+}
+/**
  * CronJob配置
  */
 export interface CronJob {
@@ -1912,6 +2008,27 @@ export interface DeleteEdgeUnitPodRequest {
       * 命名空间
       */
     Namespace: string;
+}
+/**
+ * CreateIotDevice请求参数结构体
+ */
+export interface CreateIotDeviceRequest {
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 设备所属的产品id
+      */
+    ProductId: string;
+    /**
+      * 描述
+      */
+    Description?: string;
+    /**
+      * 无
+      */
+    UnitID?: number;
 }
 /**
  * CreateSecret返回参数结构体
@@ -2078,6 +2195,15 @@ export interface CreateEdgeNodeRequest {
     Name: string;
 }
 /**
+ * BuildMessageRoute返回参数结构体
+ */
+export interface BuildMessageRouteResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeEdgeUnitMonitorStatus返回参数结构体
  */
 export interface DescribeEdgeUnitMonitorStatusResponse {
@@ -2202,6 +2328,15 @@ export interface GridDetail {
     Id: number;
 }
 /**
+ * ModifyIotDevice返回参数结构体
+ */
+export interface ModifyIotDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyEdgeNodeLabels请求参数结构体
  */
 export interface ModifyEdgeNodeLabelsRequest {
@@ -2217,6 +2352,15 @@ export interface ModifyEdgeNodeLabelsRequest {
       * 标签列表
       */
     Labels: Array<KeyValueObj>;
+}
+/**
+ * DeleteEdgeUnitDevices返回参数结构体
+ */
+export interface DeleteEdgeUnitDevicesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateEdgeNodeGroup返回参数结构体
@@ -2292,50 +2436,90 @@ export interface EdgeNodePodInfo {
     ClusterID: string;
 }
 /**
- * ModifyNodeUnitTemplate请求参数结构体
+ * 消息路由
  */
-export interface ModifyNodeUnitTemplateRequest {
+export interface RouteInfo {
     /**
-      * IECP边缘单元ID
+      * 无
+      */
+    RouteID: number;
+    /**
+      * 无
+      */
+    RouteName: string;
+    /**
+      * 无
+      */
+    SourceProductID: string;
+    /**
+      * 无
+      */
+    TopicFilter: string;
+    /**
+      * 无
+      */
+    Mode: string;
+    /**
+      * 无
+      */
+    TargetOptions: string;
+    /**
+      * 无
+      */
+    CreateTime: string;
+    /**
+      * 无
+      */
+    Descript: string;
+    /**
+      * 无
+      */
+    Healthy: string;
+    /**
+      * 无
+      */
+    Status: string;
+    /**
+      * 无
+      */
+    MessageCount: number;
+    /**
+      * 无
+      */
+    MessageLastTime: string;
+    /**
+      * 无
+      */
+    SourceProductName: string;
+    /**
+      * 无
+      */
+    SourceUnitIDList: Array<string>;
+    /**
+      * 无
+      */
+    SourceUnitNameList: Array<string>;
+    /**
+      * 无
+      */
+    SourceDeviceNameList: Array<string>;
+}
+/**
+ * CreateEdgeUnitApplicationYaml请求参数结构体
+ */
+export interface CreateEdgeUnitApplicationYamlRequest {
+    /**
+      * 单元ID
       */
     EdgeUnitId: number;
     /**
-      * NodeUnit模板ID
+      * base64后的Yaml配置
       */
-    NodeUnitTemplateID: number;
+    Yaml: string;
     /**
-      * 包含的节点列表
+      * 基本信息
       */
-    Nodes?: Array<string>;
-}
-/**
- * DescribeEdgeDefaultVpc返回参数结构体
- */
-export interface DescribeEdgeDefaultVpcResponse {
-    /**
-      * 私有网络ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VpcId: string;
-    /**
-      * 网络CIDR
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VpcCidrBlock: string;
-    /**
-      * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubnetId: string;
-    /**
-      * 子网CIDR
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubnetCidrBlock: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    BasicInfo?: ApplicationBasicInfo;
 }
 /**
  * Http探测头
@@ -2362,18 +2546,21 @@ export interface DeleteEdgeUnitApplicationsResponse {
     RequestId?: string;
 }
 /**
- * DescribeEdgeUnitApplicationEvents返回参数结构体
+ * DescribeSecret请求参数结构体
  */
-export interface DescribeEdgeUnitApplicationEventsResponse {
+export interface DescribeSecretRequest {
     /**
-      * 事件列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 边缘单元ID
       */
-    EventSet: Array<Event>;
+    EdgeUnitID: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * secret名
       */
-    RequestId?: string;
+    SecretName: string;
+    /**
+      * 命名空间(默认值:default）
+      */
+    SecretNamespace?: string;
 }
 /**
  * DeleteApplications返回参数结构体
@@ -2400,6 +2587,24 @@ export interface DracoNodeInfo {
       * 节点备注
       */
     Remark?: string;
+}
+/**
+ * NodeUnit信息
+ */
+export interface NodeUnitInfo {
+    /**
+      * NodeUnitId
+      */
+    Id: number;
+    /**
+      * NodeUnit名称
+      */
+    NodeUnitName: string;
+    /**
+      * 包含节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeList: Array<NodeUnitNodeInfo>;
 }
 /**
  * docker配置
@@ -2708,6 +2913,50 @@ export interface CreateApplicationVisualizationResponse {
     RequestId?: string;
 }
 /**
+ * 事件信息
+ */
+export interface Event {
+    /**
+      * 第一次出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstTime: string;
+    /**
+      * 最后一次出现时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastTime: string;
+    /**
+      * 事件关联对象类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvolvedObjectKind: string;
+    /**
+      * 事件关联对象名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvolvedObjectName: string;
+    /**
+      * 事件类型(Normal|Warning)
+      */
+    Type: string;
+    /**
+      * 原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
+    /**
+      * 内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+    /**
+      * 出现次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+}
+/**
  * DescribeEdgeUnitCloud请求参数结构体
  */
 export interface DescribeEdgeUnitCloudRequest {
@@ -2738,6 +2987,23 @@ export interface DescribeSecretYamlErrorRequest {
       * yaml文件
       */
     Yaml: string;
+}
+/**
+ * DescribeMessageRouteList返回参数结构体
+ */
+export interface DescribeMessageRouteListResponse {
+    /**
+      * 无
+      */
+    RouteList: Array<RouteInfo>;
+    /**
+      * 无
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 字段排序
@@ -2927,17 +3193,29 @@ export interface DescribeEdgeNodesResponse {
     RequestId?: string;
 }
 /**
- * 节点基础信息
+ * ModifyIotDevice请求参数结构体
  */
-export interface NodeSimpleInfo {
+export interface ModifyIotDeviceRequest {
     /**
-      * 节点ID
+      * 设备id
       */
-    ID: number;
+    DeviceId: number;
     /**
-      * 节点名称
+      * 描述
       */
-    NodeName: string;
+    Description?: string;
+    /**
+      * 设备是否开启
+      */
+    Disabled?: boolean;
+    /**
+      * 日志设置
+      */
+    LogSetting?: number;
+    /**
+      * 日志级别
+      */
+    LogLevel?: number;
 }
 /**
  * DescribeEdgeUnitGridPods请求参数结构体
@@ -2978,38 +3256,72 @@ export interface VolumeConfigMap {
     Items: Array<VolumeConfigMapKeyToPath>;
 }
 /**
- * CreateEdgeUnitApplicationYaml请求参数结构体
+ * 从单元批量解绑设备
  */
-export interface CreateEdgeUnitApplicationYamlRequest {
+export interface DeleteEdgeUnitDevicesDevice {
     /**
-      * 单元ID
+      * 无
+      */
+    ProductId: string;
+    /**
+      * 无
+      */
+    DeviceName: string;
+}
+/**
+ * DeleteIotDevice返回参数结构体
+ */
+export interface DeleteIotDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeEdgeDefaultVpc返回参数结构体
+ */
+export interface DescribeEdgeDefaultVpcResponse {
+    /**
+      * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId: string;
+    /**
+      * 网络CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcCidrBlock: string;
+    /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId: string;
+    /**
+      * 子网CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetCidrBlock: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyNodeUnitTemplate请求参数结构体
+ */
+export interface ModifyNodeUnitTemplateRequest {
+    /**
+      * IECP边缘单元ID
       */
     EdgeUnitId: number;
     /**
-      * base64后的Yaml配置
+      * NodeUnit模板ID
       */
-    Yaml: string;
+    NodeUnitTemplateID: number;
     /**
-      * 基本信息
+      * 包含的节点列表
       */
-    BasicInfo?: ApplicationBasicInfo;
-}
-/**
- * DescribeSecret请求参数结构体
- */
-export interface DescribeSecretRequest {
-    /**
-      * 边缘单元ID
-      */
-    EdgeUnitID: number;
-    /**
-      * secret名
-      */
-    SecretName: string;
-    /**
-      * 命名空间(默认值:default）
-      */
-    SecretNamespace?: string;
+    Nodes?: Array<string>;
 }
 /**
  * DescribeEdgeNodes请求参数结构体
@@ -3070,59 +3382,13 @@ export interface DescribeEdgeUnitApplicationLogsRequest {
     ContainerName?: string;
 }
 /**
- * 应用状态
+ * CreateUserToken请求参数结构体
  */
-export interface ApplicationStatusInfo {
+export interface CreateUserTokenRequest {
     /**
-      * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * token过期时间，有效值是1~300秒
       */
-    Id?: number;
-    /**
-      * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 应用版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Version: string;
-    /**
-      * 应用状态(1:待部署 2:部署中 3:运行中 4:待更新 5:更新中 6:待删除 7:删除中 8:已删除
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Status: string;
-    /**
-      * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTime: string;
-    /**
-      * 管理地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ManageUrl: string;
-    /**
-      * 负载类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    WorkloadKind: string;
-    /**
-      * 应用部署模式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeployMode: ApplicationDeployMode;
-    /**
-      * 期望Pod数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Replicas: number;
-    /**
-      * 运行Pod数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AvailableReplicas: number;
+    Second?: number;
 }
 /**
  * DescribeEdgeAgentNodeInstaller返回参数结构体
@@ -3201,6 +3467,15 @@ export interface ModifyConfigMapResponse {
     RequestId?: string;
 }
 /**
+ * ModifyApplicationVisualization返回参数结构体
+ */
+export interface ModifyApplicationVisualizationResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeEdgeNodePods请求参数结构体
  */
 export interface DescribeEdgeNodePodsRequest {
@@ -3231,25 +3506,17 @@ export interface DeleteIotDeviceBatchRequest {
     DeviceIDList: Array<number>;
 }
 /**
- * GetMarketComponentList请求参数结构体
+ * DescribeEdgeAgentNodeInstaller请求参数结构体
  */
-export interface GetMarketComponentListRequest {
+export interface DescribeEdgeAgentNodeInstallerRequest {
     /**
-      * 页偏移，从0开始
+      * IECP边缘单元ID
       */
-    Offset: number;
+    EdgeUnitId: number;
     /**
-      * 每页条数
+      * IECP边缘节点ID
       */
-    Limit: number;
-    /**
-      * 名称模糊筛选
-      */
-    Filter?: string;
-    /**
-      * 以名称排序，ASC、DESC
-      */
-    Order?: string;
+    NodeId: number;
 }
 /**
  * DescribeApplicationVisualization返回参数结构体
@@ -3355,6 +3622,15 @@ export interface VolumeHostPath {
     Path: string;
 }
 /**
+ * DeleteMessageRoute请求参数结构体
+ */
+export interface DeleteMessageRouteRequest {
+    /**
+      * 无
+      */
+    RouteID: number;
+}
+/**
  * ApplyMarketComponent请求参数结构体
  */
 export interface ApplyMarketComponentRequest {
@@ -3362,6 +3638,19 @@ export interface ApplyMarketComponentRequest {
       * 组件ID
       */
     ID: number;
+}
+/**
+ * 节点基础信息
+ */
+export interface NodeSimpleInfo {
+    /**
+      * 节点ID
+      */
+    ID: number;
+    /**
+      * 节点名称
+      */
+    NodeName: string;
 }
 /**
  * 环境变量选择
@@ -3424,6 +3713,15 @@ export interface DescribeEdgeUnitGridEventsRequest {
     PodName?: string;
 }
 /**
+ * CreateEdgeUnitDevices返回参数结构体
+ */
+export interface CreateEdgeUnitDevicesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * Secret信息
  */
 export interface SecretItem {
@@ -3470,6 +3768,19 @@ export interface ModifyEdgeDracoNodeRequest {
     IsReset?: boolean;
 }
 /**
+ * CreateMessageRoute返回参数结构体
+ */
+export interface CreateMessageRouteResponse {
+    /**
+      * 路由id
+      */
+    RouteID: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeNodeUnit返回参数结构体
  */
 export interface DescribeNodeUnitResponse {
@@ -3495,6 +3806,35 @@ export interface DeleteEdgeNodeGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeMessageRouteList请求参数结构体
+ */
+export interface DescribeMessageRouteListRequest {
+    /**
+      * 无
+      */
+    Limit: number;
+    /**
+      * 无
+      */
+    Offset: number;
+    /**
+      * 无
+      */
+    Filter?: string;
+    /**
+      * 无
+      */
+    StartTime?: string;
+    /**
+      * 无
+      */
+    EndTime?: string;
+    /**
+      * 无
+      */
+    Order?: string;
 }
 /**
  * KeyValue对象
@@ -3583,6 +3923,35 @@ export interface DescribeEdgeUnitsCloudResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeIotDevices请求参数结构体
+ */
+export interface DescribeIotDevicesRequest {
+    /**
+      * 页偏移
+      */
+    Offset: number;
+    /**
+      * 每页数量
+      */
+    Limit: number;
+    /**
+      * 产品id
+      */
+    ProductId?: string;
+    /**
+      * 设备名称模糊查找
+      */
+    NamePattern?: string;
+    /**
+      * 版本列表
+      */
+    Versions?: Array<string>;
+    /**
+      * ASC 或 DESC
+      */
+    Order?: string;
 }
 /**
  * CreateConfigMap请求参数结构体
@@ -3710,6 +4079,43 @@ export interface EdgeNodePodContainerInfo {
     Status: string;
 }
 /**
+ * BuildMessageRoute请求参数结构体
+ */
+export interface BuildMessageRouteRequest {
+    /**
+      * 路由名字
+      */
+    RouteName: string;
+    /**
+      * 源产品id
+      */
+    SourceProductID: string;
+    /**
+      * 源设备名列表
+      */
+    SourceDeviceNameList: Array<string>;
+    /**
+      * 第一个字符为 "0"或"1"，"1"表示自定义topic
+      */
+    TopicFilter: string;
+    /**
+      * http或mqtt-broker
+      */
+    Mode: string;
+    /**
+      * 源单元id列表
+      */
+    SourceUnitIDList?: Array<string>;
+    /**
+      * 描述
+      */
+    Descript?: string;
+    /**
+      * 无
+      */
+    TargetOptions?: string;
+}
+/**
  * Grid事件信息
  */
 export interface GridEventInfo {
@@ -3798,21 +4204,18 @@ export interface DescribeEdgeNodePodContainersRequest {
     Namespace?: string;
 }
 /**
- * DeleteEdgeNodeGroup请求参数结构体
+ * DescribeEdgeUnitApplicationEvents返回参数结构体
  */
-export interface DeleteEdgeNodeGroupRequest {
+export interface DescribeEdgeUnitApplicationEventsResponse {
     /**
-      * IECP边缘单元ID
+      * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EdgeUnitId: number;
+    EventSet: Array<Event>;
     /**
-      * NodeGroup名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Name: string;
-    /**
-      * 命名空间，默认为default
-      */
-    Namespace?: string;
+    RequestId?: string;
 }
 /**
  * ModifySecret请求参数结构体
@@ -3987,6 +4390,15 @@ export interface DescribeNamespacesRequest {
       * 边缘节点名称模糊搜索串
       */
     NamePattern?: string;
+}
+/**
+ * DeleteIotDevice请求参数结构体
+ */
+export interface DeleteIotDeviceRequest {
+    /**
+      * 设备id
+      */
+    DeviceId: number;
 }
 /**
  * DescribeEdgeNodeRemarkList返回参数结构体
@@ -4216,6 +4628,32 @@ export interface ApplicationDeployMode {
     ResourceName: string;
 }
 /**
+ * CreateIotDevice返回参数结构体
+ */
+export interface CreateIotDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateEdgeUnitDevices请求参数结构体
+ */
+export interface CreateEdgeUnitDevicesRequest {
+    /**
+      * 无
+      */
+    EdgeUnitId: number;
+    /**
+      * 无
+      */
+    ProductId: string;
+    /**
+      * 无
+      */
+    DeviceNames: Array<string>;
+}
+/**
  * ModifySecret返回参数结构体
  */
 export interface ModifySecretResponse {
@@ -4314,6 +4752,87 @@ export interface DescribeEdgeUnitApplicationVisualizationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ImagePullSecrets: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeIotDevice返回参数结构体
+ */
+export interface DescribeIotDeviceResponse {
+    /**
+      * 设备id
+      */
+    Id: number;
+    /**
+      * 设备名称
+      */
+    Name: string;
+    /**
+      * 版本号
+      */
+    Version: string;
+    /**
+      * ssl证书
+      */
+    Cert: string;
+    /**
+      * ssl私钥
+      */
+    PrivateKey: string;
+    /**
+      * psk认证密钥
+      */
+    Psk: string;
+    /**
+      * 设备是否打开
+      */
+    Disabled: boolean;
+    /**
+      * 设备日志
+      */
+    LogSetting: number;
+    /**
+      * 设备日志级别
+      */
+    LogLevel: number;
+    /**
+      * mqtt参数
+      */
+    UserName: string;
+    /**
+      * mqtt参数
+      */
+    Password: string;
+    /**
+      * mqtt参数
+      */
+    ClientID: string;
+    /**
+      * 16进制的psk格式
+      */
+    PskHex: string;
+    /**
+      * 描述
+      */
+    Description: string;
+    /**
+      * 设备在线状态
+      */
+    Status: number;
+    /**
+      * 无
+      */
+    Region: string;
+    /**
+      * 无
+      */
+    UnitID: number;
+    /**
+      * 无
+      */
+    UnitName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4513,6 +5032,15 @@ export interface GridItemInfo {
     WorkloadKind: string;
 }
 /**
+ * SetRouteOnOff返回参数结构体
+ */
+export interface SetRouteOnOffResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 边缘节点标签
  */
 export interface EdgeNodeLabel {
@@ -4629,6 +5157,15 @@ export interface HttpProbe {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Headers?: Array<HttpHeader>;
+}
+/**
+ * DeleteMessageRoute返回参数结构体
+ */
+export interface DeleteMessageRouteResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeEdgeUnitDeployGrid请求参数结构体
@@ -4756,6 +5293,23 @@ export interface PortConfig {
  * DescribeYeheResourceLimit请求参数结构体
  */
 export declare type DescribeYeheResourceLimitRequest = null;
+/**
+ * DescribeIotDevices返回参数结构体
+ */
+export interface DescribeIotDevicesResponse {
+    /**
+      * 符合查找条件的总数量
+      */
+    TotalCount: number;
+    /**
+      * 设备列表
+      */
+    DeviceSet: Array<IotDevicesInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * DescribeSecrets请求参数结构体
  */
@@ -5159,4 +5713,17 @@ export interface ModifyEdgeUnitApplicationBasicInfoResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SetRouteOnOff请求参数结构体
+ */
+export interface SetRouteOnOffRequest {
+    /**
+      * 无
+      */
+    RouteID: number;
+    /**
+      * on 或 off
+      */
+    Status: string;
 }

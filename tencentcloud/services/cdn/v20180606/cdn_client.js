@@ -350,7 +350,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PurgeUrlsCache", req, cb);
     }
     /**
-     * DescribeTrafficPackages 用于查询中国境内 CDN 流量包详情。
+     * DescribeTrafficPackages 用于查询 CDN 流量包详情。
      */
     async DescribeTrafficPackages(req, cb) {
         return this.request("DescribeTrafficPackages", req, cb);

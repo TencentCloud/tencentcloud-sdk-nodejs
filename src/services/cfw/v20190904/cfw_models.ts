@@ -1701,17 +1701,17 @@ export interface AssetZone {
  */
 export interface DescribeAddrTemplateListResponse {
   /**
-   * 模版总数
+   * 模板总数
    */
   Total: number
 
   /**
-   * 模版列表数据
+   * 模板列表数据
    */
   Data: Array<TemplateListInfo>
 
   /**
-   * 模版名称列表
+   * 模板名称列表
    */
   NameList: Array<string>
 
@@ -2634,6 +2634,16 @@ export interface DescribeBlockByIpTimesListRequest {
    * 来源
    */
   Source?: string
+
+  /**
+   * vpc间防火墙开关边id
+   */
+  EdgeId?: string
+
+  /**
+   * 日志来源 move：vpc间防火墙
+   */
+  LogSource?: string
 }
 
 /**
@@ -3106,6 +3116,12 @@ export interface UnHandleEvent {
    * 1 打开 0 关闭
    */
   BaseLineOutSwitch: number
+
+  /**
+      * vpc间防火墙实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcFwCount: number
 }
 
 /**
@@ -3185,13 +3201,13 @@ export interface DeleteAllAccessControlRuleResponse {
   /**
    * 状态值 0: 修改成功, !0: 修改失败
    */
-  Status?: number
+  Status: number
 
   /**
       * 删除了几条访问控制规则
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Info?: number
+  Info: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3689,7 +3705,7 @@ export interface ModifyAllRuleStatusResponse {
       * 0: 修改成功, 其他: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status?: number
+  Status: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

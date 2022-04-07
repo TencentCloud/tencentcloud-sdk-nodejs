@@ -9,6 +9,7 @@ export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
      * 断开推流连接，但可以重新推流。
+注：对已经不活跃的流，调用该断流接口时，接口返回成功。
      */
     DropLiveStream(req: DropLiveStreamRequest, cb?: (error: string, rep: DropLiveStreamResponse) => void): Promise<DropLiveStreamResponse>;
     /**

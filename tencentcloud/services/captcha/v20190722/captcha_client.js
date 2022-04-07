@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCaptchaMiniDataSum", req, cb);
     }
     /**
-     * 核查验证码小程序插件票据结果
+     * 核查验证码票据结果(小程序插件)
      */
     async DescribeCaptchaMiniResult(req, cb) {
         return this.request("DescribeCaptchaMiniResult", req, cb);
@@ -100,7 +100,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCaptchaAppIdInfo", req, cb);
     }
     /**
-     * 核查验证码票据结果
+     * 核查验证码票据结果(Web|APP)
      */
     async DescribeCaptchaResult(req, cb) {
         return this.request("DescribeCaptchaResult", req, cb);

@@ -16,6 +16,23 @@
  */
 
 /**
+ * UnTagResources返回参数结构体
+ */
+export interface UnTagResourcesResponse {
+  /**
+      * 失败资源信息。
+解绑标签成功时，返回的FailedResources为空。
+解绑标签失败或部分失败时，返回的FailedResources会显示失败资源的详细信息。
+      */
+  FailedResources: Array<FailedResource>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 表示一个标签键值对以及是否允许删除
  */
 export interface TagWithDelete {
@@ -66,6 +83,26 @@ export interface DetachResourcesTagRequest {
 }
 
 /**
+ * GetTagValues返回参数结构体
+ */
+export interface GetTagValuesResponse {
+  /**
+   * 获取的下一页的Token值
+   */
+  PaginationToken: string
+
+  /**
+   * 标签列表。
+   */
+  Tags: Array<Tag>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AttachResourcesTag返回参数结构体
  */
 export interface AttachResourcesTagResponse {
@@ -73,6 +110,59 @@ export interface AttachResourcesTagResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetTagKeys返回参数结构体
+ */
+export interface GetTagKeysResponse {
+  /**
+   * 获取的下一页的Token值
+   */
+  PaginationToken: string
+
+  /**
+   * 标签键信息。
+   */
+  TagKeys: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetResources请求参数结构体
+ */
+export interface GetResourcesRequest {
+  /**
+      * 资源六段式列表。腾讯云使用资源六段式描述一个资源。
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+如果传入了此参数会返回所有匹配的资源列表，指定的MaxResults会失效。
+N取值范围：0~9
+      */
+  ResourceList?: Array<string>
+
+  /**
+      * 标签键和标签值。
+指定多个标签，会查询同时绑定了该多个标签的资源。
+N取值范围：0~5。
+每个TagFilters中的TagValue最多支持10个
+      */
+  TagFilters?: Array<TagFilter>
+
+  /**
+      * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+      */
+  PaginationToken?: string
+
+  /**
+      * 每一页返回的数据最大条数，最大200。
+缺省值：50。
+      */
+  MaxResults?: number
 }
 
 /**
@@ -246,26 +336,6 @@ export interface DescribeTagValuesRequest {
 }
 
 /**
- * ModifyResourceTags请求参数结构体
- */
-export interface ModifyResourceTagsRequest {
-  /**
-   * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
-   */
-  Resource: string
-
-  /**
-   * 需要增加或修改的标签集合。如果Resource描述的资源未关联输入的标签键，则增加关联；若已关联，则将该资源关联的键对应的标签值修改为输入值。本接口中ReplaceTags和DeleteTags二者必须存在其一，且二者不能包含相同的标签键。可以不传该参数，但不能是空数组。
-   */
-  ReplaceTags?: Array<Tag>
-
-  /**
-   * 需要解关联的标签集合。本接口中ReplaceTags和DeleteTags二者必须存在其一，且二者不能包含相同的标签键。可以不传该参数，但不能是空数组。
-   */
-  DeleteTags?: Array<TagKeyObject>
-}
-
-/**
  * DescribeResourcesByTagsUnion请求参数结构体
  */
 export interface DescribeResourcesByTagsUnionRequest {
@@ -311,6 +381,26 @@ export interface DescribeResourcesByTagsUnionRequest {
 }
 
 /**
+ * DeleteTags返回参数结构体
+ */
+export interface DeleteTagsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyResourcesTagValue返回参数结构体
+ */
+export interface ModifyResourcesTagValueResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTags返回参数结构体
  */
 export interface DescribeTagsResponse {
@@ -341,34 +431,14 @@ export interface DescribeTagsResponse {
 }
 
 /**
- * DescribeResourcesByTags返回参数结构体
+ * DeleteTags请求参数结构体
  */
-export interface DescribeResourcesByTagsResponse {
+export interface DeleteTagsRequest {
   /**
-   * 结果总数
-   */
-  TotalCount: number
-
-  /**
-   * 数据位移偏量
-   */
-  Offset: number
-
-  /**
-      * 每页大小
-注意：此字段可能返回 null，表示取不到有效值。
+      * 标签列表。
+N取值范围：0~9
       */
-  Limit: number
-
-  /**
-   * 资源标签
-   */
-  Rows: Array<ResourceTag>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Tags: Array<Tag>
 }
 
 /**
@@ -394,6 +464,48 @@ export interface DescribeTagKeysRequest {
    * 是否展现项目
    */
   ShowProject?: number
+}
+
+/**
+ * GetTags请求参数结构体
+ */
+export interface GetTagsRequest {
+  /**
+      * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+      */
+  PaginationToken?: string
+
+  /**
+      * 每一页返回的数据最大条数，最大1000。
+缺省值：50。
+      */
+  MaxResults?: number
+
+  /**
+      * 标签键。
+返回所有标签键列表对应的标签。
+最大长度：20
+      */
+  TagKeys?: Array<string>
+}
+
+/**
+ * UnTagResources请求参数结构体
+ */
+export interface UnTagResourcesRequest {
+  /**
+      * 资源六段式列表。腾讯云使用资源六段式描述一个资源。可参考[访问管理](https://cloud.tencent.com/document/product/598/67350)-概览-接口列表-资源六段式信息
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+N取值范围：0~9
+      */
+  ResourceList: Array<string>
+
+  /**
+      * 标签键。
+取值范围：0~9
+      */
+  TagKeys: Array<string>
 }
 
 /**
@@ -424,6 +536,26 @@ export interface DescribeTagsSeqResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyResourceTags请求参数结构体
+ */
+export interface ModifyResourceTagsRequest {
+  /**
+   * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
+   */
+  Resource: string
+
+  /**
+   * 需要增加或修改的标签集合。如果Resource描述的资源未关联输入的标签键，则增加关联；若已关联，则将该资源关联的键对应的标签值修改为输入值。本接口中ReplaceTags和DeleteTags二者必须存在其一，且二者不能包含相同的标签键。可以不传该参数，但不能是空数组。
+   */
+  ReplaceTags?: Array<Tag>
+
+  /**
+   * 需要解关联的标签集合。本接口中ReplaceTags和DeleteTags二者必须存在其一，且二者不能包含相同的标签键。可以不传该参数，但不能是空数组。
+   */
+  DeleteTags?: Array<TagKeyObject>
 }
 
 /**
@@ -553,6 +685,26 @@ export interface DescribeResourceTagsByResourceIdsResponse {
 }
 
 /**
+ * GetTags返回参数结构体
+ */
+export interface GetTagsResponse {
+  /**
+   * 获取的下一页的Token值
+   */
+  PaginationToken: string
+
+  /**
+   * 标签列表。
+   */
+  Tags: Array<Tag>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyResourcesTagValue请求参数结构体
  */
 export interface ModifyResourcesTagValueRequest {
@@ -624,6 +776,23 @@ export interface TagResource {
 }
 
 /**
+ * GetTagKeys请求参数结构体
+ */
+export interface GetTagKeysRequest {
+  /**
+      * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+      */
+  PaginationToken?: string
+
+  /**
+      * 每一页返回的数据最大条数，最大1000。
+缺省值：50。
+      */
+  MaxResults?: number
+}
+
+/**
  * AddResourceTag返回参数结构体
  */
 export interface AddResourceTagResponse {
@@ -634,9 +803,30 @@ export interface AddResourceTagResponse {
 }
 
 /**
- * ModifyResourcesTagValue返回参数结构体
+ * DescribeResourcesByTags返回参数结构体
  */
-export interface ModifyResourcesTagValueResponse {
+export interface DescribeResourcesByTagsResponse {
+  /**
+   * 结果总数
+   */
+  TotalCount: number
+
+  /**
+   * 数据位移偏量
+   */
+  Offset: number
+
+  /**
+      * 每页大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Limit: number
+
+  /**
+   * 资源标签
+   */
+  Rows: Array<ResourceTag>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -884,9 +1074,66 @@ export interface CreateTagResponse {
 }
 
 /**
+ * 失败资源信息。
+绑定或解绑资源标签时失败返回
+ */
+export interface FailedResource {
+  /**
+   * 失败的资源六段式
+   */
+  Resource: string
+
+  /**
+   * 错误码
+   */
+  Code: string
+
+  /**
+   * 错误信息
+   */
+  Message: string
+}
+
+/**
+ * 资源及关联的标签(键和值)。
+ */
+export interface ResourceTagMapping {
+  /**
+      * 资源六段式。腾讯云使用资源六段式描述一个资源。
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+      */
+  Resource: string
+
+  /**
+   * 资源关联的标签列表
+   */
+  Tags: Array<Tag>
+}
+
+/**
  * DetachResourcesTag返回参数结构体
  */
 export interface DetachResourcesTagResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetResources返回参数结构体
+ */
+export interface GetResourcesResponse {
+  /**
+   * 获取的下一页的Token值
+   */
+  PaginationToken: string
+
+  /**
+   * 资源及关联的标签(键和值)列表
+   */
+  ResourceTagMappingList: Array<ResourceTagMapping>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -996,6 +1243,44 @@ export interface UpdateResourceTagValueRequest {
 }
 
 /**
+ * TagResources返回参数结构体
+ */
+export interface TagResourcesResponse {
+  /**
+      * 失败资源信息。
+创建并绑定标签成功时，返回的FailedResources为空。
+创建并绑定标签失败或部分失败时，返回的FailedResources会显示失败资源的详细信息。
+      */
+  FailedResources: Array<FailedResource>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTags请求参数结构体
+ */
+export interface CreateTagsRequest {
+  /**
+      * 标签列表。
+N取值范围：0~9
+      */
+  Tags?: Array<Tag>
+}
+
+/**
+ * CreateTags返回参数结构体
+ */
+export interface CreateTagsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeResourcesByTags请求参数结构体
  */
 export interface DescribeResourcesByTagsRequest {
@@ -1038,6 +1323,27 @@ export interface DescribeResourcesByTagsRequest {
    * 业务类型
    */
   ServiceType?: string
+}
+
+/**
+ * TagResources请求参数结构体
+ */
+export interface TagResourcesRequest {
+  /**
+      * 资源六段式列表。腾讯云使用资源六段式描述一个资源。可参考[访问管理](https://cloud.tencent.com/document/product/598/67350)-概览-接口列表-资源六段式信息
+例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
+N取值范围：0~9
+      */
+  ResourceList: Array<string>
+
+  /**
+      * 标签键和标签值。
+如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。
+同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。
+如果标签不存在会为您自动创建标签。
+N取值范围：0~9
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -1153,6 +1459,30 @@ export interface DescribeResourceTagsByResourceIdsSeqRequest {
    * 每页大小，默认为 15
    */
   Limit?: number
+}
+
+/**
+ * GetTagValues请求参数结构体
+ */
+export interface GetTagValuesRequest {
+  /**
+      * 标签键。
+返回所有标签键列表对应的标签值。
+最大长度：20
+      */
+  TagKeys: Array<string>
+
+  /**
+      * 从上一页的响应中获取的下一页的Token值。
+如果是第一次请求，设置为空。
+      */
+  PaginationToken?: string
+
+  /**
+      * 每一页返回的数据最大条数，最大1000。
+缺省值：50。
+      */
+  MaxResults?: number
 }
 
 /**

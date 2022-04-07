@@ -118,6 +118,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEdgeNodeUnitTemplate", req, cb);
     }
     /**
+     * 批量解绑单元设备
+     */
+    async DeleteEdgeUnitDevices(req, cb) {
+        return this.request("DeleteEdgeUnitDevices", req, cb);
+    }
+    /**
+     * 批量绑定设备到单元
+     */
+    async CreateEdgeUnitDevices(req, cb) {
+        return this.request("CreateEdgeUnitDevices", req, cb);
+    }
+    /**
+     * 获取设备列表信息
+     */
+    async DescribeIotDevices(req, cb) {
+        return this.request("DescribeIotDevices", req, cb);
+    }
+    /**
      * 查询指定NodeGroup下NodeUnit模板列表
      */
     async DescribeNodeUnitTemplateOnNodeGroup(req, cb) {
@@ -148,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplications", req, cb);
     }
     /**
+     * 获取设备信息
+     */
+    async DescribeIotDevice(req, cb) {
+        return this.request("DescribeIotDevice", req, cb);
+    }
+    /**
      * 删除指定pod
      */
     async DeleteEdgeUnitPod(req, cb) {
@@ -170,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteEdgeNodeGroup(req, cb) {
         return this.request("DeleteEdgeNodeGroup", req, cb);
+    }
+    /**
+     * 创建子设备
+     */
+    async CreateIotDevice(req, cb) {
+        return this.request("CreateIotDevice", req, cb);
     }
     /**
      * 获取节点安装信息
@@ -292,6 +322,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespaceResources", req, cb);
     }
     /**
+     * 修改设备信息
+     */
+    async ModifyIotDevice(req, cb) {
+        return this.request("ModifyIotDevice", req, cb);
+    }
+    /**
      * 校验ConfigMap的Yaml语法
      */
     async DescribeConfigMapYamlError(req, cb) {
@@ -322,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeNode", req, cb);
     }
     /**
+     * 删除设备
+     */
+    async DeleteIotDevice(req, cb) {
+        return this.request("DeleteIotDevice", req, cb);
+    }
+    /**
      * 检查应用模板的Yaml配置
      */
     async DescribeApplicationYamlError(req, cb) {
@@ -346,16 +388,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEdgeUnitCloud", req, cb);
     }
     /**
+     * 删除Secret
+     */
+    async DeleteSecret(req, cb) {
+        return this.request("DeleteSecret", req, cb);
+    }
+    /**
      * 可视化创建应用
      */
     async CreateEdgeUnitApplicationVisualization(req, cb) {
         return this.request("CreateEdgeUnitApplicationVisualization", req, cb);
     }
     /**
+     * 开关消息路由
+     */
+    async SetRouteOnOff(req, cb) {
+        return this.request("SetRouteOnOff", req, cb);
+    }
+    /**
      * 查询边缘集群NodeGroup
      */
     async DescribeEdgeUnitNodeGroup(req, cb) {
         return this.request("DescribeEdgeUnitNodeGroup", req, cb);
+    }
+    /**
+     * 删除消息路由
+     */
+    async DeleteMessageRoute(req, cb) {
+        return this.request("DeleteMessageRoute", req, cb);
     }
     /**
      * 从组件市场选中组件并添加到应用模板列表
@@ -424,10 +484,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeUnitDeployGrid", req, cb);
     }
     /**
-     * 删除Secret
+     * 建立消息路由
      */
-    async DeleteSecret(req, cb) {
-        return this.request("DeleteSecret", req, cb);
+    async BuildMessageRoute(req, cb) {
+        return this.request("BuildMessageRoute", req, cb);
     }
     /**
      * 批量删除边缘节点
@@ -458,6 +518,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteNamespace(req, cb) {
         return this.request("DeleteNamespace", req, cb);
+    }
+    /**
+     * 获取消息路由列表
+     */
+    async DescribeMessageRouteList(req, cb) {
+        return this.request("DescribeMessageRouteList", req, cb);
     }
     /**
      * 编辑边缘节点标签
@@ -542,6 +608,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateEdgeNodeBatch(req, cb) {
         return this.request("CreateEdgeNodeBatch", req, cb);
+    }
+    /**
+     * 创建消息路由
+     */
+    async CreateMessageRoute(req, cb) {
+        return this.request("CreateMessageRoute", req, cb);
     }
     /**
      * 查询用户的资源限制

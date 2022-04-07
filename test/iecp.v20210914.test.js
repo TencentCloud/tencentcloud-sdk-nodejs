@@ -168,6 +168,36 @@ it("iecp.v20210914.CreateEdgeNodeUnitTemplate", async function () {
     }
 })
 
+it("iecp.v20210914.DeleteEdgeUnitDevices", async function () {
+    try {
+       const data = await client.DeleteEdgeUnitDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iecp.v20210914.CreateEdgeUnitDevices", async function () {
+    try {
+       const data = await client.CreateEdgeUnitDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iecp.v20210914.DescribeIotDevices", async function () {
+    try {
+       const data = await client.DescribeIotDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iecp.v20210914.DescribeNodeUnitTemplateOnNodeGroup", async function () {
     try {
        const data = await client.DescribeNodeUnitTemplateOnNodeGroup({})
@@ -218,6 +248,16 @@ it("iecp.v20210914.DescribeApplications", async function () {
     }
 })
 
+it("iecp.v20210914.DescribeIotDevice", async function () {
+    try {
+       const data = await client.DescribeIotDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iecp.v20210914.DeleteEdgeUnitPod", async function () {
     try {
        const data = await client.DeleteEdgeUnitPod({})
@@ -251,6 +291,16 @@ it("iecp.v20210914.DescribeEdgeUnitMonitorStatus", async function () {
 it("iecp.v20210914.DeleteEdgeNodeGroup", async function () {
     try {
        const data = await client.DeleteEdgeNodeGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iecp.v20210914.CreateIotDevice", async function () {
+    try {
+       const data = await client.CreateIotDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,6 +508,16 @@ it("iecp.v20210914.DescribeNamespaceResources", async function () {
     }
 })
 
+it("iecp.v20210914.ModifyIotDevice", async function () {
+    try {
+       const data = await client.ModifyIotDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iecp.v20210914.DescribeConfigMapYamlError", async function () {
     try {
        const data = await client.DescribeConfigMapYamlError({})
@@ -508,6 +568,16 @@ it("iecp.v20210914.DescribeEdgeNode", async function () {
     }
 })
 
+it("iecp.v20210914.DeleteIotDevice", async function () {
+    try {
+       const data = await client.DeleteIotDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iecp.v20210914.DescribeApplicationYamlError", async function () {
     try {
        const data = await client.DescribeApplicationYamlError({})
@@ -548,6 +618,16 @@ it("iecp.v20210914.CreateEdgeUnitCloud", async function () {
     }
 })
 
+it("iecp.v20210914.DeleteSecret", async function () {
+    try {
+       const data = await client.DeleteSecret({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iecp.v20210914.CreateEdgeUnitApplicationVisualization", async function () {
     try {
        const data = await client.CreateEdgeUnitApplicationVisualization({})
@@ -558,9 +638,29 @@ it("iecp.v20210914.CreateEdgeUnitApplicationVisualization", async function () {
     }
 })
 
+it("iecp.v20210914.SetRouteOnOff", async function () {
+    try {
+       const data = await client.SetRouteOnOff({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iecp.v20210914.DescribeEdgeUnitNodeGroup", async function () {
     try {
        const data = await client.DescribeEdgeUnitNodeGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iecp.v20210914.DeleteMessageRoute", async function () {
+    try {
+       const data = await client.DeleteMessageRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +778,9 @@ it("iecp.v20210914.DescribeEdgeUnitDeployGrid", async function () {
     }
 })
 
-it("iecp.v20210914.DeleteSecret", async function () {
+it("iecp.v20210914.BuildMessageRoute", async function () {
     try {
-       const data = await client.DeleteSecret({})
+       const data = await client.BuildMessageRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -731,6 +831,16 @@ it("iecp.v20210914.DescribeEdgeUnitCloud", async function () {
 it("iecp.v20210914.DeleteNamespace", async function () {
     try {
        const data = await client.DeleteNamespace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iecp.v20210914.DescribeMessageRouteList", async function () {
+    try {
+       const data = await client.DescribeMessageRouteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -871,6 +981,16 @@ it("iecp.v20210914.DescribeEdgeUnitApplicationPodContainers", async function () 
 it("iecp.v20210914.CreateEdgeNodeBatch", async function () {
     try {
        const data = await client.CreateEdgeNodeBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iecp.v20210914.CreateMessageRoute", async function () {
+    try {
+       const data = await client.CreateMessageRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

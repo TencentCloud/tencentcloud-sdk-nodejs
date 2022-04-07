@@ -965,7 +965,7 @@ export class Client extends AbstractClient {
    * 创建一个域名，可用于在封堵时调度切换IP
    */
   async CreateSchedulingDomain(
-    req?: CreateSchedulingDomainRequest,
+    req: CreateSchedulingDomainRequest,
     cb?: (error: string, rep: CreateSchedulingDomainResponse) => void
   ): Promise<CreateSchedulingDomainResponse> {
     return this.request("CreateSchedulingDomain", req, cb)

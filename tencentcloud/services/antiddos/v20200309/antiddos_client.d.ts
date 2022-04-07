@@ -292,7 +292,7 @@ export declare class Client extends AbstractClient {
     /**
      * 创建一个域名，可用于在封堵时调度切换IP
      */
-    CreateSchedulingDomain(req?: CreateSchedulingDomainRequest, cb?: (error: string, rep: CreateSchedulingDomainResponse) => void): Promise<CreateSchedulingDomainResponse>;
+    CreateSchedulingDomain(req: CreateSchedulingDomainRequest, cb?: (error: string, rep: CreateSchedulingDomainResponse) => void): Promise<CreateSchedulingDomainResponse>;
     /**
      * 获取DDoS防护的IP网段黑白名单
      */

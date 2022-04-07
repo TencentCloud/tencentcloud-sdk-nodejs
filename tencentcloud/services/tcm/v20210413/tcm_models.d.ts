@@ -207,7 +207,7 @@ export interface WorkloadConfig {
       */
     Replicas?: number;
     /**
-      * 资源限制
+      * 资源配置
       */
     Resources?: ResourceRequirements;
     /**

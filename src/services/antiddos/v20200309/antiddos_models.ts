@@ -1254,7 +1254,14 @@ export interface DeleteBlackWhiteIpListResponse {
 /**
  * CreateSchedulingDomain请求参数结构体
  */
-export type CreateSchedulingDomainRequest = null
+export interface CreateSchedulingDomainRequest {
+  /**
+      * 代表是否混合云本地化的产品。
+hybrid: 宙斯盾本地化
+不填写：其他
+      */
+  Product?: string
+}
 
 /**
  * 高防包绑定IP对象
@@ -2495,7 +2502,7 @@ off(关闭)
  */
 export interface DescribeCCReqLimitPolicyListRequest {
   /**
-   * 大禹子产品代号（bgp-multip表示高防包，bgpip表示高防ip）
+   * 大禹子产品代号（bgp-multip表示高防包，bgpip表示高防IP）
    */
   Business: string
 
@@ -2515,17 +2522,17 @@ export interface DescribeCCReqLimitPolicyListRequest {
   InstanceId?: string
 
   /**
-   * Ip地址，普通高防ip要传该字段
+   * IP地址，普通高防IP要传该字段
    */
   Ip?: string
 
   /**
-   * 域名，普通高防ip要传该字段
+   * 域名，普通高防IP要传该字段
    */
   Domain?: string
 
   /**
-   * 协议，普通高防ip要传该字段
+   * 协议，普通高防IP要传该字段
    */
   Protocol?: string
 }
@@ -2774,7 +2781,7 @@ export interface IPLineInfo {
  */
 export interface DescribeCcBlackWhiteIpListRequest {
   /**
-   * 大禹子产品代号（bgp-multip：表示高防包；bgpip：表示高防ip）
+   * 大禹子产品代号（bgp-multip：表示高防包；bgpip：表示高防IP）
    */
   Business: string
 
@@ -2794,22 +2801,22 @@ export interface DescribeCcBlackWhiteIpListRequest {
   Limit: number
 
   /**
-   * Ip地址，普通高防ip要传该字段
+   * IP地址，普通高防IP要传该字段
    */
   Ip?: string
 
   /**
-   * 域名，普通高防ip要传该字段
+   * 域名，普通高防IP要传该字段
    */
   Domain?: string
 
   /**
-   * 协议，普通高防ip要传该字段
+   * 协议，普通高防IP要传该字段
    */
   Protocol?: string
 
   /**
-   * 筛选ip，需要筛选黑白名单ip时传该字段
+   * 筛选IP，需要筛选黑白名单IP时传该字段
    */
   FilterIp?: string
 
@@ -3350,7 +3357,7 @@ export interface CCReqLimitPolicy {
  */
 export interface DescribeCCPrecisionPlyListRequest {
   /**
-   * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防ip）
+   * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP）
    */
   Business: string
 
@@ -3370,17 +3377,17 @@ export interface DescribeCCPrecisionPlyListRequest {
   InstanceId?: string
 
   /**
-   * ip地址，普通高防ip要传该字段
+   * IP地址，普通高防IP要传该字段
    */
   Ip?: string
 
   /**
-   * 域名，普通高防ip要传该字段
+   * 域名，普通高防IP要传该字段
    */
   Domain?: string
 
   /**
-   * 协议，普通高防ip要传该字段
+   * 协议，普通高防IP要传该字段
    */
   Protocol?: string
 }
@@ -3450,7 +3457,7 @@ export interface ModifyCCThresholdPolicyRequest {
   InstanceId: string
 
   /**
-   * Ip地址
+   * IP地址
    */
   Ip: string
 
@@ -5237,7 +5244,7 @@ export interface ModifyCCLevelPolicyRequest {
   InstanceId: string
 
   /**
-   * Ip地址
+   * IP地址
    */
   Ip: string
 
@@ -5262,7 +5269,7 @@ export interface ModifyCCLevelPolicyRequest {
  */
 export interface DescribeCcGeoIPBlockConfigListRequest {
   /**
-   * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防ip）
+   * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP）
    */
   Business: string
 
@@ -5277,22 +5284,22 @@ export interface DescribeCcGeoIPBlockConfigListRequest {
   Limit: number
 
   /**
-   * 指定特定实例Id
+   * 指定特定实例ID
    */
   InstanceId?: string
 
   /**
-   * Ip地址，普通高防ip要传该字段
+   * IP地址，普通高防IP要传该字段
    */
   Ip?: string
 
   /**
-   * 域名，普通高防ip要传该字段
+   * 域名，普通高防IP要传该字段
    */
   Domain?: string
 
   /**
-   * 协议，普通高防ip要传该字段
+   * 协议，普通高防IP要传该字段
    */
   Protocol?: string
 }

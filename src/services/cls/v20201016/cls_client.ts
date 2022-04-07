@@ -32,8 +32,9 @@ import {
   CreateMachineGroupResponse,
   DescribeConfigMachineGroupsRequest,
   ModifyConfigExtraResponse,
+  ModifyLogsetRequest,
   CreateLogsetRequest,
-  DescribeShippersRequest,
+  ModifyDataTransformRequest,
   LogItem,
   SearchLogResponse,
   DeleteTopicRequest,
@@ -59,14 +60,14 @@ import {
   DescribeExportsRequest,
   ExtractRuleInfo,
   TopicInfo,
-  DescribeConsumerRequest,
+  DeleteDataTransformResponse,
   DeleteConfigExtraResponse,
   ModifyConsumerRequest,
   CreateIndexResponse,
   DeleteConfigFromMachineGroupResponse,
   CreateConsumerResponse,
   ModifyMachineGroupResponse,
-  RuleInfo,
+  DataTransformResouceInfo,
   DeleteMachineGroupRequest,
   FullTextInfo,
   DescribePartitionsResponse,
@@ -79,7 +80,7 @@ import {
   CreateAlarmRequest,
   DeleteExportResponse,
   PartitionInfo,
-  CreateConfigExtraRequest,
+  DescribeShippersRequest,
   ExcludePathInfo,
   FilterRuleInfo,
   ConfigExtraInfo,
@@ -104,12 +105,14 @@ import {
   UploadLogRequest,
   ModifyConsumerResponse,
   DescribeConfigsRequest,
+  DescribeConsumerRequest,
   DeleteConfigRequest,
   AnalysisDimensional,
   ShipperTaskInfo,
   LogsetInfo,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
+  DeleteDataTransformRequest,
   DeleteConfigExtraRequest,
   ModifyConfigRequest,
   DescribeLogsetsResponse,
@@ -128,20 +131,25 @@ import {
   Column,
   CompressInfo,
   ValueInfo,
-  GetAlarmLogRequest,
+  DescribeDataTransformInfoRequest,
   DeleteShipperResponse,
   ExportInfo,
+  DescribeLogContextResponse,
   ConfigInfo,
   DeleteExportRequest,
   SplitPartitionResponse,
+  CreateDataTransformResponse,
   LogContextInfo,
   ModifyShipperRequest,
-  DescribeLogContextResponse,
+  RuleInfo,
+  CreateConfigExtraRequest,
   CreateConsumerRequest,
   AlarmNotice,
   ModifyConfigResponse,
   ModifyAlarmNoticeResponse,
+  DataTransformTaskInfo,
   DescribeMachinesResponse,
+  PreviewLogStatistic,
   ContentInfo,
   ApplyConfigToMachineGroupResponse,
   DeleteAlarmRequest,
@@ -164,6 +172,7 @@ import {
   CreateMachineGroupRequest,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
+  GetAlarmLogRequest,
   ContainerFileInfo,
   CsvInfo,
   DescribeConfigExtrasRequest,
@@ -172,11 +181,13 @@ import {
   HistogramInfo,
   DescribeMachineGroupConfigsRequest,
   ModifyConfigExtraRequest,
-  ModifyLogsetRequest,
+  CreateDataTransformRequest,
   DescribeMachineGroupsResponse,
   DescribeLogsetsRequest,
   DeleteTopicResponse,
   Filter,
+  ModifyDataTransformResponse,
+  DescribeDataTransformInfoResponse,
   ConsumerContent,
   CreateExportResponse,
   HostFileInfo,
@@ -465,6 +476,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于删除数据加工任务
+   */
+  async DeleteDataTransform(
+    req: DeleteDataTransformRequest,
+    cb?: (error: string, rep: DeleteDataTransformResponse) => void
+  ): Promise<DeleteDataTransformResponse> {
+    return this.request("DeleteDataTransform", req, cb)
+  }
+
+  /**
    * 本接口用于删除特殊采集规则配置
    */
   async DeleteConfigExtra(
@@ -475,13 +496,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于获取告警策略列表。
+   * 本接口用于创建数据加工任务。
    */
-  async DescribeAlarms(
-    req: DescribeAlarmsRequest,
-    cb?: (error: string, rep: DescribeAlarmsResponse) => void
-  ): Promise<DescribeAlarmsResponse> {
-    return this.request("DescribeAlarms", req, cb)
+  async CreateDataTransform(
+    req: CreateDataTransformRequest,
+    cb?: (error: string, rep: CreateDataTransformResponse) => void
+  ): Promise<CreateDataTransformResponse> {
+    return this.request("CreateDataTransform", req, cb)
+  }
+
+  /**
+   * 本接口用于获取数据加工任务列表基本信息
+   */
+  async DescribeDataTransformInfo(
+    req: DescribeDataTransformInfoRequest,
+    cb?: (error: string, rep: DescribeDataTransformInfoResponse) => void
+  ): Promise<DescribeDataTransformInfoResponse> {
+    return this.request("DescribeDataTransformInfo", req, cb)
   }
 
   /**
@@ -800,6 +831,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 本接口用于修改数据加工任务
+   */
+  async ModifyDataTransform(
+    req: ModifyDataTransformRequest,
+    cb?: (error: string, rep: ModifyDataTransformResponse) => void
+  ): Promise<ModifyDataTransformResponse> {
+    return this.request("ModifyDataTransform", req, cb)
+  }
+
+  /**
    * 本接口用于删除告警策略。
    */
   async DeleteAlarm(
@@ -927,5 +968,15 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: SplitPartitionResponse) => void
   ): Promise<SplitPartitionResponse> {
     return this.request("SplitPartition", req, cb)
+  }
+
+  /**
+   * 本接口用于获取告警策略列表。
+   */
+  async DescribeAlarms(
+    req: DescribeAlarmsRequest,
+    cb?: (error: string, rep: DescribeAlarmsResponse) => void
+  ): Promise<DescribeAlarmsResponse> {
+    return this.request("DescribeAlarms", req, cb)
   }
 }
