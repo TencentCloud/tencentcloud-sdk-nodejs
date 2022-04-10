@@ -779,6 +779,21 @@ export interface CallBackInfo {
 }
 
 /**
+ * OpenKafkaConsumer返回参数结构体
+ */
+export interface OpenKafkaConsumerResponse {
+  /**
+   * 待消费TopicId
+   */
+  TopicID: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 告警对象
  */
 export interface AlarmTargetInfo {
@@ -1786,6 +1801,16 @@ export interface DescribeLogHistogramResponse {
 }
 
 /**
+ * CloseKafkaConsumer返回参数结构体
+ */
+export interface CloseKafkaConsumerResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 元字段索引配置
  */
 export interface RuleTagInfo {
@@ -2036,6 +2061,16 @@ export interface AlarmTarget {
 }
 
 /**
+ * OpenKafkaConsumer请求参数结构体
+ */
+export interface OpenKafkaConsumerRequest {
+  /**
+   * CLS控制台创建的TopicId
+   */
+  FromTopicId: string
+}
+
+/**
  * DeleteConfig返回参数结构体
  */
 export interface DeleteConfigResponse {
@@ -2179,6 +2214,42 @@ export interface DescribeConfigsRequest {
 }
 
 /**
+ * 日志集相关信息
+ */
+export interface LogsetInfo {
+  /**
+   * 日志集ID
+   */
+  LogsetId: string
+
+  /**
+   * 日志集名称
+   */
+  LogsetName: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+      * 日志集绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
+
+  /**
+   * 日志集下日志主题的数目
+   */
+  TopicCount: number
+
+  /**
+   * 若AssumerUin非空，则表示创建该日志集的服务方角色
+   */
+  RoleName: string
+}
+
+/**
  * DescribeConsumer请求参数结构体
  */
 export interface DescribeConsumerRequest {
@@ -2269,39 +2340,13 @@ export interface ShipperTaskInfo {
 }
 
 /**
- * 日志集相关信息
+ * CloseKafkaConsumer请求参数结构体
  */
-export interface LogsetInfo {
+export interface CloseKafkaConsumerRequest {
   /**
-   * 日志集ID
+   * CLS对应的topic标识
    */
-  LogsetId: string
-
-  /**
-   * 日志集名称
-   */
-  LogsetName: string
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-      * 日志集绑定的标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Tags: Array<Tag>
-
-  /**
-   * 日志集下日志主题的数目
-   */
-  TopicCount: number
-
-  /**
-   * 若AssumerUin非空，则表示创建该日志集的服务方角色
-   */
-  RoleName: string
+  FromTopicId: string
 }
 
 /**

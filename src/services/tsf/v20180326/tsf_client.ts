@@ -163,6 +163,7 @@ import {
   DisableTaskResponse,
   DescribeMicroserviceRequest,
   TsfPageCluster,
+  InstanceEnrichedInfoPage,
   DescribePodInstancesResponse,
   FileConfigRelease,
   DescribeInvocationMetricDataPointRequest,
@@ -304,6 +305,7 @@ import {
   DescribeGatewayApisResponse,
   DescribeUnitRuleRequest,
   UpdateGatewayApiResponse,
+  DescribeInstancesResponse,
   ContainerEvent,
   ModifyLaneResponse,
   DescribeDownloadInfoRequest,
@@ -364,6 +366,7 @@ import {
   OverviewBasicResourceUsage,
   DescribeUnitRulesResponse,
   UpdateGatewayApiRequest,
+  DescribeInstancesRequest,
   PathRewriteCreateObject,
   DescribeApiGroupsRequest,
   DescribeServerlessGroupRequest,
@@ -460,6 +463,7 @@ import {
   DescribeConfigsRequest,
   EnableUnitRouteRequest,
   TsfPageApplication,
+  InstanceEnrichedInfo,
   DescribeInvocationMetricDataCurveResponse,
   DeleteConfigRequest,
   DescribeFileConfigsRequest,
@@ -481,6 +485,7 @@ import {
   StopContainerGroupRequest,
   UpdateHealthCheckSettingsResponse,
   ApiRateLimitRule,
+  Filter,
   DescribeInvocationMetricDataPointResponse,
   GroupUseStatisticsEntity,
   DescribePathRewritesResponse,
@@ -2095,6 +2100,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DeleteUnitNamespacesResponse) => void
   ): Promise<DeleteUnitNamespacesResponse> {
     return this.request("DeleteUnitNamespaces", req, cb)
+  }
+
+  /**
+   * 无
+   */
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
   }
 
   /**

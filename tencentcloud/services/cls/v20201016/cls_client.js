@@ -251,16 +251,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogHistogram", req, cb);
     }
     /**
+     * 本接口用于检索分析日志, 该接口除受默认接口请求频率限制外，针对单个日志主题，查询并发数不能超过15。
+     */
+    async SearchLog(req, cb) {
+        return this.request("SearchLog", req, cb);
+    }
+    /**
      * 该接口用于修改通知渠道组
      */
     async ModifyAlarmNotice(req, cb) {
         return this.request("ModifyAlarmNotice", req, cb);
     }
     /**
-     * 本接口用于检索分析日志, 该接口除受默认接口请求频率限制外，针对单个日志主题，查询并发数不能超过15。
+     * 打开kafka协议消费
      */
-    async SearchLog(req, cb) {
-        return this.request("SearchLog", req, cb);
+    async OpenKafkaConsumer(req, cb) {
+        return this.request("OpenKafkaConsumer", req, cb);
     }
     /**
      * 修改采集规则配置
@@ -490,6 +496,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeConsumer", req, cb);
     }
     /**
+     * 本接口用于分裂主题分区
+     */
+    async SplitPartition(req, cb) {
+        return this.request("SplitPartition", req, cb);
+    }
+    /**
      * 获取采集规则配置
      */
     async DescribeConfigs(req, cb) {
@@ -544,10 +556,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateExport", req, cb);
     }
     /**
-     * 本接口用于分裂主题分区
+     * 关闭Kafka协议消费
      */
-    async SplitPartition(req, cb) {
-        return this.request("SplitPartition", req, cb);
+    async CloseKafkaConsumer(req, cb) {
+        return this.request("CloseKafkaConsumer", req, cb);
     }
     /**
      * 本接口用于获取告警策略列表。

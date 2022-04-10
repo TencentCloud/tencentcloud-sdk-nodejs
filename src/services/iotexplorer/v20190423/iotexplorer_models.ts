@@ -1350,32 +1350,32 @@ export interface DescribeBatchProductionResponse {
   /**
    * 量产数量。
    */
-  BatchCnt?: number
+  BatchCnt: number
 
   /**
    * 烧录方式。
    */
-  BurnMethod?: number
+  BurnMethod: number
 
   /**
    * 创建时间。
    */
-  CreateTime?: number
+  CreateTime: number
 
   /**
    * 下载URL。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 生成方式。
    */
-  GenerationMethod?: number
+  GenerationMethod: number
 
   /**
    * 上传URL。
    */
-  UploadUrl?: string
+  UploadUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1556,7 +1556,7 @@ export interface UnbindProductsResponse {
   /**
    * 绑定了待解绑的LoRa产品下的设备的网关设备列表
    */
-  GatewayDeviceNames?: Array<string>
+  GatewayDeviceNames: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1887,7 +1887,7 @@ export interface CreateProjectResponse {
   /**
    * 返回信息
    */
-  Project?: ProjectEntry
+  Project: ProjectEntry
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1903,25 +1903,25 @@ export interface DescribeDeviceDataHistoryResponse {
       * 属性字段名称，对应数据模板中功能属性的标识符
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FieldName?: string
+  FieldName: string
 
   /**
       * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Listover?: boolean
+  Listover: boolean
 
   /**
       * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Context?: string
+  Context: string
 
   /**
       * 历史数据结果数组，返回对应时间点及取值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Results?: Array<DeviceDataHistoryItem>
+  Results: Array<DeviceDataHistoryItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2034,12 +2034,12 @@ export interface GetStudioProductListRequest {
   DevStatus?: string
 
   /**
-   * Offset
+   * 偏移量
    */
   Offset?: number
 
   /**
-   * Limit
+   * 数量限制
    */
   Limit?: number
 }
@@ -2226,7 +2226,7 @@ export interface DescribeStudioProductResponse {
   /**
    * 产品详情
    */
-  Product?: ProductEntry
+  Product: ProductEntry
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2296,12 +2296,12 @@ export interface GetStudioProductListResponse {
   /**
    * 产品列表
    */
-  Products?: Array<ProductEntry>
+  Products: Array<ProductEntry>
 
   /**
    * 产品数量
    */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2423,7 +2423,7 @@ export interface ModifyTopicRuleRequest {
  */
 export interface GetDeviceListRequest {
   /**
-   * 需要查看设备列表的产品 ID
+   * 需要查看设备列表的产品ID, -1代表ProjectId来筛选
    */
   ProductId: string
 
@@ -2532,12 +2532,12 @@ export interface GetTopicRuleListResponse {
   /**
    * 规则总数量
    */
-  TotalCnt?: number
+  TotalCnt: number
 
   /**
    * 规则列表
    */
-  Rules?: Array<TopicRuleInfo>
+  Rules: Array<TopicRuleInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2627,13 +2627,13 @@ export interface GetLoRaGatewayListResponse {
   /**
    * 返回总数
    */
-  Total?: number
+  Total: number
 
   /**
       * 返回详情项
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Gateways?: Array<LoRaGatewayItem>
+  Gateways: Array<LoRaGatewayItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2678,7 +2678,7 @@ export interface ModifyLoRaGatewayResponse {
   /**
    * 返回网关数据
    */
-  Gateway?: LoRaGatewayItem
+  Gateway: LoRaGatewayItem
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2863,7 +2863,7 @@ export interface DescribeTopicRuleResponse {
       * 规则描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Rule?: TopicRule
+  Rule: TopicRule
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2923,12 +2923,12 @@ export interface DescribeBindedProductsResponse {
   /**
    * 当前分页的子产品数组
    */
-  Products?: Array<BindProductInfo>
+  Products: Array<BindProductInfo>
 
   /**
    * 绑定的子产品总数量
    */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3012,16 +3012,6 @@ export interface PositionSpaceInfo {
  */
 export interface LoRaGatewayLocation {
   /**
-   * 准确度
-   */
-  Accuracy: number
-
-  /**
-   * 海拔
-   */
-  Altitude: number
-
-  /**
    * 纬度
    */
   Latitude: number
@@ -3030,6 +3020,16 @@ export interface LoRaGatewayLocation {
    * 精度
    */
   Longitude: number
+
+  /**
+   * 准确度
+   */
+  Accuracy?: number
+
+  /**
+   * 海拔
+   */
+  Altitude?: number
 }
 
 /**
@@ -3520,7 +3520,7 @@ export interface CreateLoRaGatewayResponse {
   /**
    * LoRa 网关信息
    */
-  Gateway?: LoRaGatewayItem
+  Gateway: LoRaGatewayItem
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4395,7 +4395,7 @@ export interface DescribeDeviceDataResponse {
   /**
    * 设备数据
    */
-  Data?: string
+  Data: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4688,25 +4688,25 @@ export interface ListEventHistoryResponse {
       * 搜索上下文, 用作查询游标
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Context?: string
+  Context: string
 
   /**
       * 搜索结果数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total?: number
+  Total: number
 
   /**
       * 搜索结果是否已经结束
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Listover?: boolean
+  Listover: boolean
 
   /**
       * 搜集结果集
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EventHistory?: Array<EventHistoryItem>
+  EventHistory: Array<EventHistoryItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4722,12 +4722,12 @@ export interface GetBatchProductionsListResponse {
       * 返回详情信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BatchProductions?: Array<BatchProductionInfo>
+  BatchProductions: Array<BatchProductionInfo>
 
   /**
    * 返回数量。
    */
-  TotalCnt?: number
+  TotalCnt: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4742,17 +4742,17 @@ export interface DescribeGatewayBindDevicesResponse {
   /**
    * 子设备信息。
    */
-  Devices?: Array<BindDeviceInfo>
+  Devices: Array<BindDeviceInfo>
 
   /**
    * 子设备总数。
    */
-  Total?: number
+  Total: number
 
   /**
    * 子设备所属的产品名。
    */
-  ProductName?: string
+  ProductName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

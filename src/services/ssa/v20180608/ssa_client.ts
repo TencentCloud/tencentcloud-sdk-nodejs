@@ -18,12 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeMappingResultsResponse,
   DescribeAssetDetailRequest,
   DescribeVulListResponse,
   DescribeSocAlertDetailsRequest,
   DescribeComplianceAssetListResponse,
   DataCheck,
   SocProductionItem,
+  MappingResult,
   DescribeCheckConfigAssetListRequest,
   Asset,
   DescribeComplianceListResponse,
@@ -34,6 +36,7 @@ import {
   DescribeSocAlertDetailsResponse,
   VulItem,
   DescribeCheckConfigAssetListResponse,
+  Tag,
   AlertListData,
   SaDivulgeDataQueryPub,
   SocComplianceInfoResp,
@@ -42,6 +45,7 @@ import {
   DescribeAssetsMappingListResponse,
   DescribeSocAlertListResponse,
   SocComplianceItem,
+  SecurityStatus,
   QuerySort,
   DescribeComplianceListRequest,
   DescribeVulListRequest,
@@ -50,7 +54,7 @@ import {
   DescribeSafetyEventListResponse,
   SaDivulgeDataQueryPubList,
   DescribeSafetyEventListRequest,
-  Tag,
+  AssetQueryFilter,
   AlertType,
   DescribeSocAlertListRequest,
   ComplianceCheckDetail,
@@ -58,6 +62,7 @@ import {
   Bucket,
   DescribeConfigListRequest,
   DescribeSocCspmComplianceResponse,
+  DescribeMappingResultsRequest,
   Filter,
   AssetList,
   DataAssetMapping,
@@ -69,11 +74,13 @@ import {
   SocCheckItem,
   DescribeEventDetailRequest,
   CheckAssetItem,
+  AssetTypeStatistic,
   SaDivulgeDataQueryPubRequest,
   DescribeVulDetailRequest,
   ConcernInfo,
   DescribeAssetsMappingListRequest,
   DataCompliance,
+  Results,
   AssetDetail,
   DescribeComplianceAssetListRequest,
   QueryFilter,
@@ -191,6 +198,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSocCspmComplianceResponse) => void
   ): Promise<DescribeSocCspmComplianceResponse> {
     return this.request("DescribeSocCspmCompliance", req, cb)
+  }
+
+  /**
+   * 获取测绘列表
+   */
+  async DescribeMappingResults(
+    req: DescribeMappingResultsRequest,
+    cb?: (error: string, rep: DescribeMappingResultsResponse) => void
+  ): Promise<DescribeMappingResultsResponse> {
+    return this.request("DescribeMappingResults", req, cb)
   }
 
   /**

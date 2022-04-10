@@ -1963,12 +1963,12 @@ export interface DescribeReservedInstancesResponse {
   /**
    * 符合条件的预留实例计费数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 符合条件的预留实例计费列表。
    */
-  ReservedInstancesSet?: Array<ReservedInstances>
+  ReservedInstancesSet: Array<ReservedInstances>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4415,7 +4415,7 @@ export interface SharePermission {
  */
 export interface ReservedInstances {
   /**
-   * 已购买的预留实例计费ID。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。
+   * （此字段已废弃，建议使用字段：ReservedInstanceId）已购买的预留实例计费ID。形如：ri-rtbh4han。
    */
   ReservedInstancesId: string
 
@@ -4481,6 +4481,16 @@ export interface ReservedInstances {
 返回项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a>
       */
   InstanceFamily: string
+
+  /**
+   * 已购买的预留实例计费ID。形如：ri-rtbh4han。
+   */
+  ReservedInstanceId: string
+
+  /**
+   * 预留实例显示名称。形如：riname-01
+   */
+  ReservedInstanceName: string
 }
 
 /**

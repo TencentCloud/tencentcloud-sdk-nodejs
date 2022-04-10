@@ -388,6 +388,16 @@ it("cls.v20201016.DescribeLogHistogram", async function () {
     }
 })
 
+it("cls.v20201016.SearchLog", async function () {
+    try {
+       const data = await client.SearchLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyAlarmNotice", async function () {
     try {
        const data = await client.ModifyAlarmNotice({})
@@ -398,9 +408,9 @@ it("cls.v20201016.ModifyAlarmNotice", async function () {
     }
 })
 
-it("cls.v20201016.SearchLog", async function () {
+it("cls.v20201016.OpenKafkaConsumer", async function () {
     try {
-       const data = await client.SearchLog({})
+       const data = await client.OpenKafkaConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +538,16 @@ it("cls.v20201016.DescribeConsumer", async function () {
     }
 })
 
+it("cls.v20201016.SplitPartition", async function () {
+    try {
+       const data = await client.SplitPartition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeConfigs", async function () {
     try {
        const data = await client.DescribeConfigs({})
@@ -618,9 +638,9 @@ it("cls.v20201016.CreateExport", async function () {
     }
 })
 
-it("cls.v20201016.SplitPartition", async function () {
+it("cls.v20201016.CloseKafkaConsumer", async function () {
     try {
-       const data = await client.SplitPartition({})
+       const data = await client.CloseKafkaConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

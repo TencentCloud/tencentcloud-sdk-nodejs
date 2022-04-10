@@ -51,6 +51,7 @@ import {
   ContainerWorkLoadInfo,
   DescribeConfigExtrasResponse,
   CallBackInfo,
+  OpenKafkaConsumerResponse,
   AlarmTargetInfo,
   DescribeIndexRequest,
   DescribeConfigsResponse,
@@ -89,6 +90,7 @@ import {
   DescribeMachineGroupConfigsResponse,
   MachineGroupInfo,
   DescribeLogHistogramResponse,
+  CloseKafkaConsumerResponse,
   RuleTagInfo,
   CreateIndexRequest,
   DeleteConsumerResponse,
@@ -97,6 +99,7 @@ import {
   CreateTopicRequest,
   DescribeMachineGroupsRequest,
   AlarmTarget,
+  OpenKafkaConsumerRequest,
   DeleteConfigResponse,
   ModifyIndexResponse,
   DeleteConsumerRequest,
@@ -105,11 +108,12 @@ import {
   UploadLogRequest,
   ModifyConsumerResponse,
   DescribeConfigsRequest,
+  LogsetInfo,
   DescribeConsumerRequest,
   DeleteConfigRequest,
   AnalysisDimensional,
   ShipperTaskInfo,
-  LogsetInfo,
+  CloseKafkaConsumerRequest,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
   DeleteDataTransformRequest,
@@ -576,6 +580,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于检索分析日志, 该接口除受默认接口请求频率限制外，针对单个日志主题，查询并发数不能超过15。
+   */
+  async SearchLog(
+    req: SearchLogRequest,
+    cb?: (error: string, rep: SearchLogResponse) => void
+  ): Promise<SearchLogResponse> {
+    return this.request("SearchLog", req, cb)
+  }
+
+  /**
    * 该接口用于修改通知渠道组
    */
   async ModifyAlarmNotice(
@@ -586,13 +600,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于检索分析日志, 该接口除受默认接口请求频率限制外，针对单个日志主题，查询并发数不能超过15。
+   * 打开kafka协议消费
    */
-  async SearchLog(
-    req: SearchLogRequest,
-    cb?: (error: string, rep: SearchLogResponse) => void
-  ): Promise<SearchLogResponse> {
-    return this.request("SearchLog", req, cb)
+  async OpenKafkaConsumer(
+    req: OpenKafkaConsumerRequest,
+    cb?: (error: string, rep: OpenKafkaConsumerResponse) => void
+  ): Promise<OpenKafkaConsumerResponse> {
+    return this.request("OpenKafkaConsumer", req, cb)
   }
 
   /**
@@ -871,6 +885,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 本接口用于分裂主题分区
+   */
+  async SplitPartition(
+    req: SplitPartitionRequest,
+    cb?: (error: string, rep: SplitPartitionResponse) => void
+  ): Promise<SplitPartitionResponse> {
+    return this.request("SplitPartition", req, cb)
+  }
+
+  /**
    * 获取采集规则配置
    */
   async DescribeConfigs(
@@ -961,13 +985,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于分裂主题分区
+   * 关闭Kafka协议消费
    */
-  async SplitPartition(
-    req: SplitPartitionRequest,
-    cb?: (error: string, rep: SplitPartitionResponse) => void
-  ): Promise<SplitPartitionResponse> {
-    return this.request("SplitPartition", req, cb)
+  async CloseKafkaConsumer(
+    req: CloseKafkaConsumerRequest,
+    cb?: (error: string, rep: CloseKafkaConsumerResponse) => void
+  ): Promise<CloseKafkaConsumerResponse> {
+    return this.request("CloseKafkaConsumer", req, cb)
   }
 
   /**

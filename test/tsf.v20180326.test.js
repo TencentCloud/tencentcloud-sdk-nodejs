@@ -1568,6 +1568,16 @@ it("tsf.v20180326.DeleteUnitNamespaces", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeInstances", async function () {
+    try {
+       const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DraftApiGroup", async function () {
     try {
        const data = await client.DraftApiGroup({})

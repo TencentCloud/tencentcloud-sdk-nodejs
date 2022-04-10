@@ -16,6 +16,28 @@
  */
 
 /**
+ * DescribeMappingResults返回参数结构体
+ */
+export interface DescribeMappingResultsResponse {
+  /**
+      * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
+      * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Results
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAssetDetail请求参数结构体
  */
 export interface DescribeAssetDetailRequest {
@@ -158,6 +180,119 @@ export interface SocProductionItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+}
+
+/**
+ * 测绘记录
+ */
+export interface MappingResult {
+  /**
+      * 资产名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetName: string
+
+  /**
+      * 公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetIp: string
+
+  /**
+      * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateIp: string
+
+  /**
+      * 资产id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetId: string
+
+  /**
+      * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Protocol: string
+
+  /**
+      * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Port: string
+
+  /**
+      * 服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Service: string
+
+  /**
+      * 组件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Component: string
+
+  /**
+      * 进程
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Process: string
+
+  /**
+      * 操作系统
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OS: string
+
+  /**
+      * 测绘时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastMappingTime: string
+
+  /**
+      * 处置建议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisposalRecommendations: string
+
+  /**
+      * 处置建议详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DisposalRecommendationDetails: string
+
+  /**
+      * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetType: string
+
+  /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
+
+  /**
+      * 测绘状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MappingStatus: number
+
+  /**
+      * 区域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * 安全防护状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityStatus: Array<SecurityStatus>
 }
 
 /**
@@ -680,6 +815,21 @@ export interface DescribeCheckConfigAssetListResponse {
 }
 
 /**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 数据库标识
+   */
+  Fid: number
+
+  /**
+   * 标签名称
+   */
+  Fname: string
+}
+
+/**
  * 告警列表响应数据
  */
 export interface AlertListData {
@@ -912,6 +1062,11 @@ export interface SocComplianceItem {
 }
 
 /**
+ * 安全放回状态
+ */
+export type SecurityStatus = null
+
+/**
  * 排序的字段
  */
 export interface QuerySort {
@@ -1072,18 +1227,18 @@ export interface DescribeSafetyEventListRequest {
 }
 
 /**
- * 标签
+ * 资产查询过滤参数
  */
-export interface Tag {
+export interface AssetQueryFilter {
   /**
-   * 数据库标识
+   * 查询参数
    */
-  Fid: number
+  Filter?: Array<QueryFilter>
 
   /**
-   * 标签名称
+   * 查询连接符，1 and  ，2 or
    */
-  Fname: string
+  Logic?: number
 }
 
 /**
@@ -1457,6 +1612,31 @@ export interface DescribeSocCspmComplianceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeMappingResults请求参数结构体
+ */
+export interface DescribeMappingResultsRequest {
+  /**
+   * 过滤条件，FilterKey 取值范围：AssetId，AssetIp，PrivateIp，Protocol，Service，OS，Process，Component，AssetType，Domain，Port，LastMappingTime，MappingType，Disposal，Vpc
+   */
+  Filter?: Array<AssetQueryFilter>
+
+  /**
+   * 排序条件，SortKey取值范围：CreateTime，LastMappingTime
+   */
+  Sorter?: Array<QuerySort>
+
+  /**
+   * 页码
+   */
+  PageIndex?: number
+
+  /**
+   * 页大小，默认大小20
+   */
+  PageSize?: number
 }
 
 /**
@@ -2074,6 +2254,23 @@ export interface CheckAssetItem {
 }
 
 /**
+ * 资产测绘结果统计
+ */
+export interface AssetTypeStatistic {
+  /**
+      * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetType: string
+
+  /**
+      * 统计计数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssetCount: number
+}
+
+/**
  * SaDivulgeDataQueryPub请求参数结构体
  */
 export interface SaDivulgeDataQueryPubRequest {
@@ -2319,6 +2516,35 @@ export interface DataCompliance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Remarks: string
+}
+
+/**
+ * 测绘结果
+ */
+export interface Results {
+  /**
+      * 测绘类型统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Statistics: Array<AssetTypeStatistic>
+
+  /**
+      * 测绘结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<MappingResult>
+
+  /**
+      * 测绘任务数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskCount: number
+
+  /**
+      * 最大测绘任务数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskMaxCount: number
 }
 
 /**
@@ -2629,7 +2855,7 @@ export interface QueryFilter {
   FilterValue: string
 
   /**
-   * 匹配类型，枚举见pb
+   * 匹配类型，1等于；2大于；3小于；4大于等于；5小于等于；6不等于；7in；8not in；9模糊匹配
    */
   FilterOperatorType: number
 }

@@ -961,6 +961,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeleteUnitNamespaces", req, cb);
     }
     /**
+     * 无
+     */
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
+    }
+    /**
      * 下线Api分组
      */
     async DraftApiGroup(req, cb) {

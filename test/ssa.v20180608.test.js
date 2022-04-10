@@ -118,6 +118,16 @@ it("ssa.v20180608.DescribeSocCspmCompliance", async function () {
     }
 })
 
+it("ssa.v20180608.DescribeMappingResults", async function () {
+    try {
+       const data = await client.DescribeMappingResults({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssa.v20180608.DescribeVulList", async function () {
     try {
        const data = await client.DescribeVulList({})

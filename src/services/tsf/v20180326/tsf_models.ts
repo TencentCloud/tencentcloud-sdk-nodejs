@@ -3879,6 +3879,23 @@ export interface TsfPageCluster {
 }
 
 /**
+ * InstanceEnrichedInfo列表结构
+ */
+export interface InstanceEnrichedInfoPage {
+  /**
+      * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<InstanceEnrichedInfo>
+}
+
+/**
  * DescribePodInstances返回参数结构体
  */
 export interface DescribePodInstancesResponse {
@@ -7917,6 +7934,22 @@ export interface UpdateGatewayApiResponse {
 }
 
 /**
+ * DescribeInstances返回参数结构体
+ */
+export interface DescribeInstancesResponse {
+  /**
+      * 机器列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: InstanceEnrichedInfoPage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 返回容器的事件，比如 k8s deployment 或者 pod 的 events
  */
 export interface ContainerEvent {
@@ -9536,6 +9569,26 @@ export interface UpdateGatewayApiRequest {
    * api描述信息
    */
   Description?: string
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ */
+export interface DescribeInstancesRequest {
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 分页个数，默认为20，最大100
+   */
+  Limit?: number
 }
 
 /**
@@ -12211,6 +12264,113 @@ export interface TsfPageApplication {
 }
 
 /**
+ * 包含虚拟机所在TSF中的位置信息
+ */
+export interface InstanceEnrichedInfo {
+  /**
+      * 机器ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 机器名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
+
+  /**
+      * 机器内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LanIp: string
+
+  /**
+      * 机器外网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanIp: string
+
+  /**
+      * 机器所在VPC
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * 机器运行状态 Pending Running Stopped Rebooting Starting Stopping Abnormal Unknown
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceStatus: string
+
+  /**
+      * 机器可用状态（表示机器上的Agent在线）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceAvailableStatus: string
+
+  /**
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
+
+  /**
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationName: string
+
+  /**
+      * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationType: string
+
+  /**
+      * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+
+  /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterName: string
+
+  /**
+      * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterType: string
+
+  /**
+      * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceId: string
+
+  /**
+      * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceName: string
+
+  /**
+      * 机器所在部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
+
+  /**
+      * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
+}
+
+/**
  * DescribeInvocationMetricDataCurve返回参数结构体
  */
 export interface DescribeInvocationMetricDataCurveResponse {
@@ -12847,6 +13007,21 @@ export interface ApiRateLimitRule {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdatedTime: string
+}
+
+/**
+ * 用于请求参数中的条件过滤字段
+ */
+export interface Filter {
+  /**
+   * 过滤条件名
+   */
+  Name: string
+
+  /**
+   * 过滤条件匹配值，几个条件间是或关系
+   */
+  Values: Array<string>
 }
 
 /**
