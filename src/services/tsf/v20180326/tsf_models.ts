@@ -2655,10 +2655,16 @@ export interface ImageRepository {
   ApplicationId: string
 
   /**
-      * ApplicationName值（类型是string）
+      * ApplicationName值（废弃）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplicationName: ScalableRule
+
+  /**
+      * ApplicationName值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationNameReal: string
 }
 
 /**
@@ -3526,6 +3532,12 @@ export interface ContainGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Alias: string
+
+  /**
+      * KubeInjectEnable值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KubeInjectEnable: boolean
 }
 
 /**
@@ -4257,6 +4269,54 @@ export interface ServiceStatisticsResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DbType: string
+
+  /**
+      * Apdex值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Apdex: number
+
+  /**
+      * Qps值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Qps: number
+
+  /**
+      * 实例在线数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceOnlineCount: number
+
+  /**
+      * 实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceTotalCount: number
+
+  /**
+      * normal/error
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * normal/warn/error
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorRateLevel: string
+
+  /**
+      * normal/warn/error
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvgTimeConsumingLevel: string
+
+  /**
+      * normal/warn/error
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApdexLevel: string
 }
 
 /**
@@ -4551,6 +4611,12 @@ export interface Namespace {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   IsHaEnable: string
+
+  /**
+      * KubeInjectEnable值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KubeInjectEnable: boolean
 }
 
 /**
@@ -5241,6 +5307,12 @@ export interface ContainerGroupDeploy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   VolumeMountInfos: Array<VolumeMountInfo>
+
+  /**
+      * KubeInjectEnable值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KubeInjectEnable: boolean
 }
 
 /**

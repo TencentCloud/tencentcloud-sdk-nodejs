@@ -188,7 +188,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 核查验证码票据结果(Web|APP)
+   * 核查验证码票据结果(Web及APP)
    */
   async DescribeCaptchaResult(
     req: DescribeCaptchaResultRequest,

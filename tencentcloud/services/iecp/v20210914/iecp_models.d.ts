@@ -820,7 +820,7 @@ export interface ModifyConfigMapRequest {
       */
     ConfigMapName: string;
     /**
-      * Yaml配置
+      * Yaml配置, base64之后的串
       */
     Yaml: string;
     /**

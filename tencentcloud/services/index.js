@@ -184,6 +184,8 @@ var iai_1 = require("./iai");
 Object.defineProperty(exports, "iai", { enumerable: true, get: function () { return iai_1.iai; } });
 var ic_1 = require("./ic");
 Object.defineProperty(exports, "ic", { enumerable: true, get: function () { return ic_1.ic; } });
+var icr_1 = require("./icr");
+Object.defineProperty(exports, "icr", { enumerable: true, get: function () { return icr_1.icr; } });
 var ie_1 = require("./ie");
 Object.defineProperty(exports, "ie", { enumerable: true, get: function () { return ie_1.ie; } });
 var iecp_1 = require("./iecp");

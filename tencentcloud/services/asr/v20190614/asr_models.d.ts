@@ -792,6 +792,11 @@ export interface SentenceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SpeechSpeed: number;
+    /**
+      * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpeakerId: number;
 }
 /**
  * UpdateAsrVocab请求参数结构体

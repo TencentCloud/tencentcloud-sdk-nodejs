@@ -90,6 +90,7 @@ export { habo } from "./habo";
 export { hcm } from "./hcm";
 export { iai } from "./iai";
 export { ic } from "./ic";
+export { icr } from "./icr";
 export { ie } from "./ie";
 export { iecp } from "./iecp";
 export { iir } from "./iir";

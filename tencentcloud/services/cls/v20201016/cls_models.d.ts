@@ -1560,6 +1560,14 @@ export interface CreateIndexRequest {
       * 是否生效，默认为true
       */
     Status?: boolean;
+    /**
+      * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+      */
+    IncludeInternalFields?: boolean;
+    /**
+      * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+      */
+    MetadataFlag?: number;
 }
 /**
  * DeleteConsumer返回参数结构体
@@ -2350,6 +2358,14 @@ export interface ModifyIndexRequest {
       * 索引规则
       */
     Rule?: RuleInfo;
+    /**
+      * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+      */
+    IncludeInternalFields?: boolean;
+    /**
+      * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+      */
+    MetadataFlag?: number;
 }
 /**
  * 日志分析的列属性
@@ -3626,6 +3642,16 @@ export interface DescribeIndexResponse {
       * 索引修改时间，初始值为索引创建时间。
       */
     ModifyTime: string;
+    /**
+      * 全文索引系统预置字段标记，默认false。  false:不包含系统预置字段， true:包含系统预置字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IncludeInternalFields: boolean;
+    /**
+      * 元数据相关标志位，默认为0。 0：全文索引包括开启键值索引的元数据字段， 1：全文索引包括所有元数据字段，2：全文索引不包括元数据字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetadataFlag: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -146,7 +146,7 @@ export interface ModifyStudioProductResponse {
   /**
    * 产品描述
    */
-  Product?: ProductEntry
+  Product: ProductEntry
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -489,7 +489,7 @@ export interface CreateStudioProductResponse {
   /**
    * 产品描述
    */
-  Product?: ProductEntry
+  Product: ProductEntry
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1122,7 +1122,7 @@ export interface DescribeProjectResponse {
   /**
    * 返回信息
    */
-  Project?: ProjectEntryEx
+  Project: ProjectEntryEx
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1706,12 +1706,12 @@ export interface SearchTopicRuleResponse {
   /**
    * 搜索到的规则总数
    */
-  TotalCnt?: number
+  TotalCnt: number
 
   /**
    * 规则信息列表
    */
-  Rules?: Array<TopicRuleInfo>
+  Rules: Array<TopicRuleInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2256,7 +2256,7 @@ export interface DescribeDeviceResponse {
   /**
    * 设备信息
    */
-  Device?: DeviceInfo
+  Device: DeviceInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3670,6 +3670,12 @@ export interface DescribeDeviceBindGatewayResponse {
   GatewayDeviceName: string
 
   /**
+      * 网关产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GatewayName: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3707,14 +3713,15 @@ export interface ControlDeviceDataResponse {
   /**
    * 返回信息
    */
-  Data?: string
+  Data: string
 
   /**
       * JSON字符串， 返回下发控制的结果信息, 
-Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic
+Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic.
+pushResult 是表示发送结果，其中 0 表示成功， 23101 表示设备未在线或没有订阅相关的 MQTT Topic。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: string
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4120,7 +4127,7 @@ export interface ModifyProjectResponse {
   /**
    * 项目详情
    */
-  Project?: ProjectEntry
+  Project: ProjectEntry
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

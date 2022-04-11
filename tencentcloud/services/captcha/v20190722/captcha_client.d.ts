@@ -56,7 +56,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCaptchaAppIdInfo(req: DescribeCaptchaAppIdInfoRequest, cb?: (error: string, rep: DescribeCaptchaAppIdInfoResponse) => void): Promise<DescribeCaptchaAppIdInfoResponse>;
     /**
-     * 核查验证码票据结果(Web|APP)
+     * 核查验证码票据结果(Web及APP)
      */
     DescribeCaptchaResult(req: DescribeCaptchaResultRequest, cb?: (error: string, rep: DescribeCaptchaResultResponse) => void): Promise<DescribeCaptchaResultResponse>;
 }

@@ -100,7 +100,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCaptchaAppIdInfo", req, cb);
     }
     /**
-     * 核查验证码票据结果(Web|APP)
+     * 核查验证码票据结果(Web及APP)
      */
     async DescribeCaptchaResult(req, cb) {
         return this.request("DescribeCaptchaResult", req, cb);

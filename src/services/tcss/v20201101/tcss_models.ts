@@ -4294,6 +4294,19 @@ export interface DescribeProVersionInfoResponse {
   ResourceId: string
 
   /**
+      * 购买状态
+待购: Pending
+已购: Normal
+隔离: Isolate
+      */
+  BuyStatus: string
+
+  /**
+   * 是否曾经购买过(false:未曾 true:曾经购买过)
+   */
+  IsPurchased: boolean
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
