@@ -5,10 +5,11 @@ import { HttpConnection } from "./http/http_connection"
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
 import { Response } from "node-fetch"
 
-type ResponseCallback = (error: string, rep: any) => void
-interface RequestOptions {
-  multipart: boolean
+export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
+export interface RequestOptions extends Pick<ClientProfile['httpProfile'], 'headers'>{
+  multipart?: boolean
 }
+
 interface RequestData {
   Action: string
   RequestClient: string
@@ -109,7 +110,7 @@ export class AbstractClient {
       options = {} as RequestOptions
     }
     try {
-      const result = await this.doRequest(action, req, options as RequestOptions)
+      const result = await this.doRequest(action, req ?? {}, options as RequestOptions)
       cb && cb(null, result)
       return result
     } catch (e) {
@@ -124,7 +125,7 @@ export class AbstractClient {
   private async doRequest(
     action: string,
     req: any,
-    options?: RequestOptions
+    options: RequestOptions = {}
   ): Promise<ResponseData> {
     if (this.profile.signMethod === "TC3-HMAC-SHA256") {
       return this.doRequestWithSign3(action, req, options)
@@ -138,6 +139,7 @@ export class AbstractClient {
         url: this.profile.httpProfile.protocol + this.endpoint + this.path,
         data: params,
         timeout: this.profile.httpProfile.reqTimeout * 1000,
+        headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
       })
     } catch (error) {
       throw new TencentCloudSDKHttpException(error.message)
@@ -151,7 +153,7 @@ export class AbstractClient {
   private async doRequestWithSign3(
     action: string,
     params: any,
-    options?: RequestOptions
+    options: RequestOptions = {}
   ): Promise<ResponseData> {
     let res
     try {
@@ -170,6 +172,7 @@ export class AbstractClient {
         token: this.credential.token,
         requestClient: this.sdkVersion,
         language: this.profile.language,
+        headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
       })
     } catch (e) {
       throw new TencentCloudSDKHttpException(e.message)
