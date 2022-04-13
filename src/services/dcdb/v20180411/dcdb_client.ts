@@ -33,7 +33,6 @@ import {
   DescribeDCDBPriceResponse,
   AssociateSecurityGroupsRequest,
   FlushBinlogResponse,
-  DescribeDBSecurityGroupsResponse,
   CancelDcnJobResponse,
   DescribeFileDownloadUrlRequest,
   DescribeDBSyncModeResponse,
@@ -46,7 +45,7 @@ import {
   DescribeFlowResponse,
   CloneAccountResponse,
   ModifyAccountDescriptionResponse,
-  DestroyDCDBInstanceRequest,
+  CloseDBExtranetAccessResponse,
   OpenDBExtranetAccessResponse,
   CreateDCDBInstanceResponse,
   BriefNodeInfo,
@@ -54,7 +53,6 @@ import {
   DescribeDCDBInstanceNodeInfoRequest,
   DatabaseView,
   DescribeDBLogFilesRequest,
-  DescribeOrdersResponse,
   CreateDedicatedClusterDCDBInstanceRequest,
   CreateHourDCDBInstanceRequest,
   ResetAccountPasswordRequest,
@@ -62,7 +60,6 @@ import {
   CloneAccountRequest,
   DescribeDCDBRenewalPriceRequest,
   ParamModifyResult,
-  DescribeDBSecurityGroupsRequest,
   DatabaseProcedure,
   DescribeDCDBPriceRequest,
   SwitchDBInstanceHAResponse,
@@ -77,7 +74,6 @@ import {
   RenewDCDBInstanceRequest,
   ShardZoneChooseInfo,
   DatabaseTable,
-  Deal,
   GrantAccountPrivilegesRequest,
   DescribeShardSpecRequest,
   DescribeDCDBShardsRequest,
@@ -118,12 +114,11 @@ import {
   ModifyDBInstancesProjectRequest,
   DcnDetailItem,
   DescribeDBSyncModeRequest,
-  CloseDBExtranetAccessResponse,
+  DestroyDCDBInstanceRequest,
   ModifyAccountDescriptionRequest,
   KillSessionResponse,
   SlowLogData,
   DescribeDatabasesResponse,
-  DescribeOrdersRequest,
   DescribeDBLogFilesResponse,
   CloseDBExtranetAccessRequest,
   InitDCDBInstancesRequest,
@@ -207,16 +202,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
-   */
-  async DescribeDatabaseTable(
-    req: DescribeDatabaseTableRequest,
-    cb?: (error: string, rep: DescribeDatabaseTableResponse) => void
-  ): Promise<DescribeDatabaseTableResponse> {
-    return this.request("DescribeDatabaseTable", req, cb)
-  }
-
-  /**
    * 查询可创建的分布式数据库可售卖的分片规格配置。
    */
   async DescribeShardSpec(
@@ -282,16 +267,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void
   ): Promise<ModifyAccountDescriptionResponse> {
     return this.request("ModifyAccountDescription", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
-   */
-  async DescribeOrders(
-    req: DescribeOrdersRequest,
-    cb?: (error: string, rep: DescribeOrdersResponse) => void
-  ): Promise<DescribeOrdersResponse> {
-    return this.request("DescribeOrders", req, cb)
   }
 
   /**
@@ -657,13 +632,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
+   * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
    */
-  async DescribeDBSecurityGroups(
-    req: DescribeDBSecurityGroupsRequest,
-    cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
-  ): Promise<DescribeDBSecurityGroupsResponse> {
-    return this.request("DescribeDBSecurityGroups", req, cb)
+  async DescribeDatabaseTable(
+    req: DescribeDatabaseTableRequest,
+    cb?: (error: string, rep: DescribeDatabaseTableResponse) => void
+  ): Promise<DescribeDatabaseTableResponse> {
+    return this.request("DescribeDatabaseTable", req, cb)
   }
 
   /**

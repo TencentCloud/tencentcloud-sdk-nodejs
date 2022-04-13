@@ -83,6 +83,19 @@ export interface ModifyWatermarkTemplateRequest {
     SubAppId?: number;
 }
 /**
+ * CreateStorageRegion请求参数结构体
+ */
+export interface CreateStorageRegionRequest {
+    /**
+      * 待开通的存储地域，必须是系统支持的地域。
+      */
+    StorageRegion: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
+}
+/**
  * 语音全文识别片段。
  */
 export interface AiRecognitionTaskAsrFullTextSegmentItem {
@@ -638,6 +651,19 @@ export interface CreateImageProcessingTemplateRequest {
     SubAppId?: number;
 }
 /**
+ * ModifyDefaultStorageRegion请求参数结构体
+ */
+export interface ModifyDefaultStorageRegionRequest {
+    /**
+      * 默认的存储地域，必须是已经开通的地域」，建议改成「默认的存储地域，必须是已经开通的地域（通过 DescribeStorageRegions 接口查询）。
+      */
+    StorageRegion: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
+}
+/**
  * ModifyEventConfig返回参数结构体
  */
 export interface ModifyEventConfigResponse {
@@ -869,22 +895,29 @@ export interface AiReviewTaskPoliticalOcrResult {
     Output: AiReviewPoliticalOcrTaskOutput;
 }
 /**
- * ManageTask请求参数结构体
+ * AI 样本管理，关键词输出信息。
  */
-export interface ManageTaskRequest {
+export interface AiSampleWord {
     /**
-      * 视频处理的任务 ID。
+      * 关键词。
       */
-    TaskId: string;
+    Keyword: string;
     /**
-      * 操作类型，取值范围：
-<li>Abort：终止任务。只能终止已发起且状态为等待中（WAITING）的任务。</li>
+      * 关键词标签。
       */
-    OperationType: string;
+    TagSet: Array<string>;
     /**
-      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      * 关键词应用场景。
       */
-    SubAppId?: number;
+    UsageSet: Array<string>;
+    /**
+      * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    CreateTime: string;
+    /**
+      * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    UpdateTime: string;
 }
 /**
  * CreateImageSpriteTemplate请求参数结构体
@@ -2039,6 +2072,29 @@ export interface CreatePersonSampleRequest {
       * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
       */
     SubAppId?: number;
+}
+/**
+ * 存储地域信息
+ */
+export interface StorageRegionInfo {
+    /**
+      * 存储地域
+      */
+    Region: string;
+    /**
+      * 存储地域描述信息
+      */
+    Description: string;
+    /**
+      * 状态，是否开通，取值有：
+<li>opened：已经开通。</li>
+<li>unopened：未开通。</li>
+      */
+    Status: string;
+    /**
+      * 是否默认的存储地域，true：是；false：否
+      */
+    IsDefault: boolean;
 }
 /**
  * 转场信息
@@ -5347,29 +5403,22 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
     Output: MediaSnapshotByTimeOffsetItem;
 }
 /**
- * AI 样本管理，关键词输出信息。
+ * ManageTask请求参数结构体
  */
-export interface AiSampleWord {
+export interface ManageTaskRequest {
     /**
-      * 关键词。
+      * 视频处理的任务 ID。
       */
-    Keyword: string;
+    TaskId: string;
     /**
-      * 关键词标签。
+      * 操作类型，取值范围：
+<li>Abort：终止任务。只能终止已发起且状态为等待中（WAITING）的任务。</li>
       */
-    TagSet: Array<string>;
+    OperationType: string;
     /**
-      * 关键词应用场景。
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
       */
-    UsageSet: Array<string>;
-    /**
-      * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-      */
-    CreateTime: string;
-    /**
-      * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-      */
-    UpdateTime: string;
+    SubAppId?: number;
 }
 /**
  * ModifyEventConfig请求参数结构体
@@ -6318,6 +6367,15 @@ FINISH：已完成。
 <li>Rejected：智能识别未通过。</li>
       */
     PublishResult: string;
+}
+/**
+ * ModifyDefaultStorageRegion返回参数结构体
+ */
+export interface ModifyDefaultStorageRegionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateImageProcessingTemplate返回参数结构体
@@ -8854,6 +8912,15 @@ export interface ModifyAIRecognitionTemplateRequest {
     SubAppId?: number;
 }
 /**
+ * DescribeStorageRegions请求参数结构体
+ */
+export interface DescribeStorageRegionsRequest {
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
+}
+/**
  * 微信发布任务信息
  */
 export interface WechatPublishTask {
@@ -9060,6 +9127,15 @@ export interface StatDataItem {
 <li>带宽数据，单位是比特每秒。</li>
       */
     Value: number;
+}
+/**
+ * CreateStorageRegion返回参数结构体
+ */
+export interface CreateStorageRegionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 域名的地区加速信息
@@ -10891,6 +10967,19 @@ export interface AiReviewTaskPoliticalResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPoliticalTaskOutput;
+}
+/**
+ * DescribeStorageRegions返回参数结构体
+ */
+export interface DescribeStorageRegionsResponse {
+    /**
+      * 存储地域信息列表。
+      */
+    StorageRegionInfos?: Array<StorageRegionInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifySnapshotByTimeOffsetTemplate请求参数结构体

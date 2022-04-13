@@ -48,6 +48,16 @@ export interface DescribeAssetDetailRequest {
 }
 
 /**
+ * DescribeSocCheckItemList返回参数结构体
+ */
+export interface DescribeSocCheckItemListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVulList返回参数结构体
  */
 export interface DescribeVulListResponse {
@@ -1563,9 +1573,9 @@ export interface ComplianceCheckDetail {
  */
 export interface SaDivulgeDataQueryPubResponse {
   /**
-   * 结果
+   * 自定义泄露事件列表
    */
-  Data?: SaDivulgeDataQueryPubList
+  Data: SaDivulgeDataQueryPubList
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2049,6 +2059,11 @@ export interface DataEvent {
 }
 
 /**
+ * DescribeSocCheckItemList请求参数结构体
+ */
+export type DescribeSocCheckItemListRequest = null
+
+/**
  * 云安全配置检查项详情
  */
 export interface CheckConfigDetail {
@@ -2275,7 +2290,7 @@ export interface AssetTypeStatistic {
  */
 export interface SaDivulgeDataQueryPubRequest {
   /**
-   * 模糊查询字段
+   * 模糊查询字段(针对appid或者uin)
    */
   QueryKey: string
 
@@ -2285,7 +2300,7 @@ export interface SaDivulgeDataQueryPubRequest {
   EventName: string
 
   /**
-   * 监控源
+   * 监控源  0:全部 1:GitHub 2:暗网 默认值1
    */
   DivulgeSoure: string
 
@@ -2305,12 +2320,12 @@ export interface SaDivulgeDataQueryPubRequest {
   RuleId: string
 
   /**
-   * 风险等级
+   * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
    */
   Level: string
 
   /**
-   * 安全事件状态
+   * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
    */
   Status: string
 

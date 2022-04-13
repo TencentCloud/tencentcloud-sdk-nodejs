@@ -862,6 +862,26 @@ STATIC：静态
    * 高速上云服务ID
    */
   CloudAttachId?: string
+
+  /**
+   * 是否开启BFD
+   */
+  BfdEnable?: number
+
+  /**
+   * 是否开启NQA
+   */
+  NqaEnable?: number
+
+  /**
+   * BFD配置信息
+   */
+  BfdInfo?: BFDInfo
+
+  /**
+   * NQA配置信息
+   */
+  NqaInfo?: NQAInfo
 }
 
 /**
@@ -1404,7 +1424,7 @@ export interface CreateDirectConnectTunnelResponse {
   /**
    * 专用通道ID
    */
-  DirectConnectTunnelIdSet?: Array<string>
+  DirectConnectTunnelIdSet: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

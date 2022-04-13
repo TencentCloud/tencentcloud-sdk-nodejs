@@ -18,7 +18,7 @@ class AbstractClient {
      * @param {string} region 产品地域
      * @param {ClientProfile} profile 可选配置实例
      */
-    constructor(endpoint, version, { credential, region, profile }) {
+    constructor(endpoint, version, { credential, region, profile = {} }) {
         this.path = "/";
         /**
          * 认证信息实例

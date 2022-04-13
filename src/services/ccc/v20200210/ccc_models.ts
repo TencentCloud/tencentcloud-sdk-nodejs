@@ -1897,19 +1897,19 @@ export interface DescribeTelCdrRequest {
   EndTimeStamp: number
 
   /**
+   * 实例 ID（deprecated）
+   */
+  InstanceId?: number
+
+  /**
    * 返回数据条数，上限（deprecated）
    */
-  Limit: number
+  Limit?: number
 
   /**
    * 偏移（deprecated）
    */
-  Offset: number
-
-  /**
-   * 实例 ID（deprecated）
-   */
-  InstanceId?: number
+  Offset?: number
 
   /**
    * 应用 ID

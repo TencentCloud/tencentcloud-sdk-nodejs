@@ -112,7 +112,7 @@ export interface InquiryPriceCreateDisksResponse {
     /**
       * 描述了新购云盘的价格。
       */
-    DiskPrice?: Price;
+    DiskPrice: Price;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -363,6 +363,10 @@ export interface CreateDisksRequest {
       * 创建云盘时指定自动挂载并初始化该数据盘。
       */
     AutoMountConfiguration?: AutoMountConfiguration;
+    /**
+      * 指定云硬盘备份点配额。
+      */
+    DiskBackupQuota?: number;
 }
 /**
  * AttachDisks请求参数结构体
@@ -663,6 +667,14 @@ export interface Disk {
       * 销毁云盘时删除关联的非永久保留快照。0 表示非永久快照不随云盘销毁而销毁，1表示非永久快照随云盘销毁而销毁，默认取0。快照是否永久保留可以通过DescribeSnapshots接口返回的快照详情的IsPermanent字段来判断，true表示永久快照，false表示非永久快照。
       */
     DeleteSnapshot: number;
+    /**
+      * 云硬盘备份点已使用的数量。
+      */
+    DiskBackupCount: number;
+    /**
+      * 云硬盘挂载实例的类型。取值范围：<br><li>CVM<br><li>EKS
+      */
+    InstanceType: string;
 }
 /**
  * TerminateDisks返回参数结构体
@@ -720,6 +732,10 @@ export interface CreateSnapshotRequest {
       * 快照的到期时间，到期后该快照将会自动删除,需要传入UTC时间下的ISO-8601标准时间格式,例如:2022-01-08T09:47:55+00:00
       */
     Deadline?: string;
+    /**
+      * 云硬盘备份点ID。传入此参数时，将通过备份点创建快照。
+      */
+    DiskBackupId?: string;
 }
 /**
  * DescribeInstancesDiskNum请求参数结构体
@@ -1180,6 +1196,10 @@ export interface Filter {
  */
 export interface InquiryPriceCreateDisksRequest {
     /**
+      * 云硬盘计费类型。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费
+      */
+    DiskChargeType: string;
+    /**
       * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
       */
     DiskType: string;
@@ -1188,25 +1208,25 @@ export interface InquiryPriceCreateDisksRequest {
       */
     DiskSize: number;
     /**
-      * 云硬盘计费类型。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费
+      * 云盘所属项目ID。
       */
-    DiskChargeType: string;
-    /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数指定包年包月云盘的购买时长、是否设置自动续费等属性。<br>创建预付费云盘该参数必传，创建按小时后付费云盘无需传该参数。
-      */
-    DiskChargePrepaid?: DiskChargePrepaid;
+    ProjectId?: number;
     /**
       * 购买云盘的数量。不填则默认为1。
       */
     DiskCount?: number;
     /**
-      * 云盘所属项目ID。
-      */
-    ProjectId?: number;
-    /**
       * 额外购买的云硬盘性能值，单位MB/s。<br>目前仅支持增强型SSD云硬盘（CLOUD_HSSD）和极速型SSD云硬盘（CLOUD_TSSD）
       */
     ThroughputPerformance?: number;
+    /**
+      * 预付费模式，即包年包月相关参数设置。通过该参数指定包年包月云盘的购买时长、是否设置自动续费等属性。<br>创建预付费云盘该参数必传，创建按小时后付费云盘无需传该参数。
+      */
+    DiskChargePrepaid?: DiskChargePrepaid;
+    /**
+      * 指定云硬盘备份点配额。
+      */
+    DiskBackupQuota?: number;
 }
 /**
  * DescribeSnapshots返回参数结构体
@@ -1516,10 +1536,10 @@ export interface Policy {
  */
 export interface Price {
     /**
-      * 预付费云盘预支费用的原价，单位：元。
+      * 后付费云盘折扣单价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OriginalPrice?: number;
+    UnitPriceDiscount: number;
     /**
       * 预付费云盘预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1531,35 +1551,35 @@ export interface Price {
       */
     UnitPrice: number;
     /**
-      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+      * 高精度后付费云盘原单价, 单位：元
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ChargeUnit: string;
-    /**
-      * 后付费云盘折扣单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UnitPriceDiscount: number;
+    UnitPriceHigh: string;
     /**
       * 高精度预付费云盘预支费用的原价, 单位：元	。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginalPriceHigh: string;
     /**
+      * 预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalPrice?: number;
+    /**
       * 高精度预付费云盘预支费用的折扣价, 单位：元
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DiscountPriceHigh: string;
     /**
-      * 高精度后付费云盘原单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UnitPriceHigh: string;
-    /**
       * 高精度后付费云盘折扣单价, 单位：元
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnitPriceDiscountHigh: string;
+    /**
+      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChargeUnit: string;
 }
 /**
  * InquirePriceModifyDiskExtraPerformance请求参数结构体

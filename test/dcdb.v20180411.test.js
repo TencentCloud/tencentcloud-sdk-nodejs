@@ -48,16 +48,6 @@ it("dcdb.v20180411.DescribeDatabaseObjects", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDatabaseTable", async function () {
-    try {
-       const data = await client.DescribeDatabaseTable({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dcdb.v20180411.DescribeShardSpec", async function () {
     try {
        const data = await client.DescribeShardSpec({})
@@ -111,16 +101,6 @@ it("dcdb.v20180411.DescribeFileDownloadUrl", async function () {
 it("dcdb.v20180411.ModifyAccountDescription", async function () {
     try {
        const data = await client.ModifyAccountDescription({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dcdb.v20180411.DescribeOrders", async function () {
-    try {
-       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +468,9 @@ it("dcdb.v20180411.DestroyHourDCDBInstance", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDBSecurityGroups", async function () {
+it("dcdb.v20180411.DescribeDatabaseTable", async function () {
     try {
-       const data = await client.DescribeDBSecurityGroups({})
+       const data = await client.DescribeDatabaseTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

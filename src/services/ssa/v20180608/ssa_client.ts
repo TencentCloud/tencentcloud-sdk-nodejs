@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeMappingResultsResponse,
   DescribeAssetDetailRequest,
+  DescribeSocCheckItemListResponse,
   DescribeVulListResponse,
   DescribeSocAlertDetailsRequest,
   DescribeComplianceAssetListResponse,
@@ -70,6 +71,7 @@ import {
   VulList,
   DescribeLeakDetectionListResponse,
   DataEvent,
+  DescribeSocCheckItemListRequest,
   CheckConfigDetail,
   SocCheckItem,
   DescribeEventDetailRequest,
@@ -208,6 +210,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMappingResultsResponse) => void
   ): Promise<DescribeMappingResultsResponse> {
     return this.request("DescribeMappingResults", req, cb)
+  }
+
+  /**
+   * 云安全配置检查项列表
+   */
+  async DescribeSocCheckItemList(
+    req?: DescribeSocCheckItemListRequest,
+    cb?: (error: string, rep: DescribeSocCheckItemListResponse) => void
+  ): Promise<DescribeSocCheckItemListResponse> {
+    return this.request("DescribeSocCheckItemList", req, cb)
   }
 
   /**

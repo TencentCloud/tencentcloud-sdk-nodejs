@@ -233,29 +233,6 @@ export interface FlushBinlogResponse {
     RequestId?: string;
 }
 /**
- * DescribeDBSecurityGroups返回参数结构体
- */
-export interface DescribeDBSecurityGroupsResponse {
-    /**
-      * 安全组详情。
-      */
-    Groups: Array<SecurityGroup>;
-    /**
-      * 实例VIP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VIP: string;
-    /**
-      * 实例端口
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VPort: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * CancelDcnJob返回参数结构体
  */
 export interface CancelDcnJobResponse {
@@ -481,13 +458,17 @@ export interface ModifyAccountDescriptionResponse {
     RequestId?: string;
 }
 /**
- * DestroyDCDBInstance请求参数结构体
+ * CloseDBExtranetAccess返回参数结构体
  */
-export interface DestroyDCDBInstanceRequest {
+export interface CloseDBExtranetAccessResponse {
     /**
-      * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      * 异步任务ID，可通过 DescribeFlow 查询任务状态。
       */
-    InstanceId: string;
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * OpenDBExtranetAccess返回参数结构体
@@ -589,23 +570,6 @@ export interface DescribeDBLogFilesRequest {
       * 请求日志类型，取值只能为1、2、3或者4。1-binlog，2-冷备，3-errlog，4-slowlog。
       */
     Type: number;
-}
-/**
- * DescribeOrders返回参数结构体
- */
-export interface DescribeOrdersResponse {
-    /**
-      * 返回的订单数量。
-      */
-    TotalCount: Array<number>;
-    /**
-      * 订单信息列表。
-      */
-    Deals: Array<Deal>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * CreateDedicatedClusterDCDBInstance请求参数结构体
@@ -899,19 +863,6 @@ export interface ParamModifyResult {
     Code: number;
 }
 /**
- * DescribeDBSecurityGroups请求参数结构体
- */
-export interface DescribeDBSecurityGroupsRequest {
-    /**
-      * 数据库引擎名称，本接口取值：dcdb。
-      */
-    Product: string;
-    /**
-      * 实例ID。
-      */
-    InstanceId: string;
-}
-/**
  * 数据库存储过程信息
  */
 export interface DatabaseProcedure {
@@ -1123,36 +1074,6 @@ export interface DatabaseTable {
       * 表名
       */
     Table: string;
-}
-/**
- * 订单信息
- */
-export interface Deal {
-    /**
-      * 订单号
-      */
-    DealName: string;
-    /**
-      * 所属账号
-      */
-    OwnerUin: string;
-    /**
-      * 商品数量
-      */
-    Count: number;
-    /**
-      * 关联的流程 Id，可用于查询流程执行状态
-      */
-    FlowId: number;
-    /**
-      * 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceIds: Array<string>;
-    /**
-      * 付费模式，0后付费/1预付费
-      */
-    PayMode: number;
 }
 /**
  * GrantAccountPrivileges请求参数结构体
@@ -2006,6 +1927,11 @@ export interface CreateHourDCDBInstanceResponse {
       */
     FlowId: number;
     /**
+      * 订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+      */
+    DealName: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -2225,17 +2151,13 @@ export interface DescribeDBSyncModeRequest {
     InstanceId: string;
 }
 /**
- * CloseDBExtranetAccess返回参数结构体
+ * DestroyDCDBInstance请求参数结构体
  */
-export interface CloseDBExtranetAccessResponse {
+export interface DestroyDCDBInstanceRequest {
     /**
-      * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+      * 实例 ID，格式如：tdsqlshard-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
       */
-    FlowId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
  * ModifyAccountDescription请求参数结构体
@@ -2370,15 +2292,6 @@ export interface DescribeDatabasesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * DescribeOrders请求参数结构体
- */
-export interface DescribeOrdersRequest {
-    /**
-      * 待查询的长订单号列表，创建实例、续费实例、扩容实例接口返回。
-      */
-    DealNames: Array<string>;
 }
 /**
  * DescribeDBLogFiles返回参数结构体

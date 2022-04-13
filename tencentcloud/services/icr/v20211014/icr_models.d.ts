@@ -272,11 +272,11 @@ export interface GetIndustryV1HomeMembersResponse {
  */
 export interface ReqMetadataLBS {
     /**
-      * 无
+      * 纬度
       */
     Latitude?: number;
     /**
-      * 无
+      * 经度
       */
     Longitude?: number;
 }

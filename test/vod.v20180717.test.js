@@ -38,6 +38,16 @@ it("vod.v20180717.CreateSnapshotByTimeOffsetTemplate", async function () {
     }
 })
 
+it("vod.v20180717.ModifyDefaultStorageRegion", async function () {
+    try {
+       const data = await client.ModifyDefaultStorageRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.EditMedia", async function () {
     try {
        const data = await client.EditMedia({})
@@ -168,9 +178,9 @@ it("vod.v20180717.SplitMedia", async function () {
     }
 })
 
-it("vod.v20180717.ModifyAIAnalysisTemplate", async function () {
+it("vod.v20180717.DescribeImageProcessingTemplates", async function () {
     try {
-       const data = await client.ModifyAIAnalysisTemplate({})
+       const data = await client.DescribeImageProcessingTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +261,16 @@ it("vod.v20180717.ModifyClass", async function () {
 it("vod.v20180717.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateStorageRegion", async function () {
+    try {
+       const data = await client.CreateStorageRegion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,6 +638,16 @@ it("vod.v20180717.DescribeDailyMostPlayedStat", async function () {
     }
 })
 
+it("vod.v20180717.DescribeStorageRegions", async function () {
+    try {
+       const data = await client.DescribeStorageRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeEventsState", async function () {
     try {
        const data = await client.DescribeEventsState({})
@@ -818,9 +848,9 @@ it("vod.v20180717.ManageTask", async function () {
     }
 })
 
-it("vod.v20180717.DescribeImageProcessingTemplates", async function () {
+it("vod.v20180717.ModifyAIAnalysisTemplate", async function () {
     try {
-       const data = await client.DescribeImageProcessingTemplates({})
+       const data = await client.ModifyAIAnalysisTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

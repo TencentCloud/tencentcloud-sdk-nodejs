@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMappingResults", req, cb);
     }
     /**
+     * 云安全配置检查项列表
+     */
+    async DescribeSocCheckItemList(req, cb) {
+        return this.request("DescribeSocCheckItemList", req, cb);
+    }
+    /**
      * 漏洞管理页，获取漏洞列表
      */
     async DescribeVulList(req, cb) {

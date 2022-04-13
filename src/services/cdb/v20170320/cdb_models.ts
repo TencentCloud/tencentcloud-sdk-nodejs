@@ -2327,7 +2327,7 @@ export interface DescribeDefaultParamsRequest {
   EngineVersion: string
 
   /**
-   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模版，"HIGH_PERFORMANCE" - 高性能模版。
+   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
    */
   TemplateType?: string
 }
@@ -4293,12 +4293,12 @@ export interface DescribeProxyConnectionPoolConfRequest {
   InstanceId: string
 
   /**
-   * 分页
+   * 分页查询偏移量
    */
   Offset?: number
 
   /**
-   * 限制
+   * 分页查询限制
    */
   Limit?: number
 }

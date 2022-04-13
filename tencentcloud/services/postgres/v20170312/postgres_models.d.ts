@@ -235,7 +235,7 @@ export interface CreateInstancesRequest {
       */
     ProjectId?: number;
     /**
-      * PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例
+      * PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBMajorVersion、DBKernelVersion至少需要传递一个。
       */
     DBVersion?: string;
     /**
@@ -283,17 +283,29 @@ export interface CreateInstancesRequest {
       */
     SecurityGroupIds?: Array<string>;
     /**
-      * PostgreSQL主要版本。目前支持10，11，12，13这几个版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例
+      * PostgreSQL主要版本。目前支持10，11，12，13这几个版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBVersion、DBKernelVersion至少需要传递一个。
       */
     DBMajorVersion?: string;
     /**
-      * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例
+      * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例。该参数和DBVersion、DBMajorVersion至少需要传递一个。
       */
     DBKernelVersion?: string;
     /**
       * 实例节点信息，购买跨可用区实例时填写。
       */
     DBNodeSet?: Array<DBNode>;
+    /**
+      * 是否需要支持数据透明加密，1：是，0：否（默认）。
+      */
+    NeedSupportTDE?: number;
+    /**
+      * 自定义密钥的keyId，若选择自定义密匙加密，则需要传入自定义密匙的keyId，keyId是CMK的唯一标识。
+      */
+    KMSKeyId?: string;
+    /**
+      * 使用KMS服务的地域，KMSRegion为空默认使用本地域的kms，本地域不支持的情况下需自选其他KMS支持的地域。
+      */
+    KMSRegion?: string;
 }
 /**
  * 描述一种规格的信息
@@ -349,6 +361,11 @@ export interface SpecItemInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     KernelVersion: string;
+    /**
+      * 是否支持TDE数据加密功能，0-不支持，1-支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsSupportTDE: number;
 }
 /**
  * CreateDBInstanceNetworkAccess返回参数结构体
@@ -1285,6 +1302,11 @@ export interface SpecInfo {
       * 规格详细信息列表
       */
     SpecItemInfoList: Array<SpecItemInfo>;
+    /**
+      * 支持KMS的地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportKMSRegions: Array<string>;
 }
 /**
  * DescribeReadOnlyGroups返回参数结构体
@@ -2555,6 +2577,11 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DBNodeSet: Array<DBNode>;
+    /**
+      * 实例是否支持TDE数据加密  0：不支持，1：支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsSupportTDE: number;
 }
 /**
  * DescribeProductConfig返回参数结构体
@@ -2563,7 +2590,7 @@ export interface DescribeProductConfigResponse {
     /**
       * 售卖规格列表。
       */
-    SpecInfoList?: Array<SpecInfo>;
+    SpecInfoList: Array<SpecInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2797,7 +2824,7 @@ export interface CreateReadOnlyDBInstanceRequest {
       */
     ReadOnlyGroupId?: string;
     /**
-      * 实例需要绑定的Tag信息，默认为空
+      * 实例需要绑定的Tag信息，默认为空（该类型为Tag数组类型）
       */
     TagList?: Tag;
     /**

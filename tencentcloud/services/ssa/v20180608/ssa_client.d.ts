@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeMappingResultsResponse, DescribeAssetDetailRequest, DescribeVulListResponse, DescribeSocAlertDetailsRequest, DescribeComplianceAssetListResponse, DescribeCheckConfigAssetListRequest, DescribeComplianceListResponse, DescribeConfigListResponse, DescribeCheckConfigDetailResponse, DescribeAssetListResponse, DescribeSocAlertDetailsResponse, DescribeCheckConfigAssetListResponse, DescribeAssetListRequest, DescribeComplianceDetailResponse, DescribeAssetsMappingListResponse, DescribeSocAlertListResponse, DescribeComplianceListRequest, DescribeVulListRequest, DescribeLeakDetectionListRequest, DescribeEventDetailResponse, DescribeSafetyEventListResponse, DescribeSafetyEventListRequest, DescribeSocAlertListRequest, SaDivulgeDataQueryPubResponse, DescribeConfigListRequest, DescribeSocCspmComplianceResponse, DescribeMappingResultsRequest, DescribeCheckConfigDetailRequest, DescribeLeakDetectionListResponse, DescribeEventDetailRequest, SaDivulgeDataQueryPubRequest, DescribeVulDetailRequest, DescribeAssetsMappingListRequest, DescribeComplianceAssetListRequest, DescribeAssetDetailResponse, DescribeVulDetailResponse, DescribeSocCspmComplianceRequest, DescribeComplianceDetailRequest } from "./ssa_models";
+import { DescribeMappingResultsResponse, DescribeAssetDetailRequest, DescribeSocCheckItemListResponse, DescribeVulListResponse, DescribeSocAlertDetailsRequest, DescribeComplianceAssetListResponse, DescribeCheckConfigAssetListRequest, DescribeComplianceListResponse, DescribeConfigListResponse, DescribeCheckConfigDetailResponse, DescribeAssetListResponse, DescribeSocAlertDetailsResponse, DescribeCheckConfigAssetListResponse, DescribeAssetListRequest, DescribeComplianceDetailResponse, DescribeAssetsMappingListResponse, DescribeSocAlertListResponse, DescribeComplianceListRequest, DescribeVulListRequest, DescribeLeakDetectionListRequest, DescribeEventDetailResponse, DescribeSafetyEventListResponse, DescribeSafetyEventListRequest, DescribeSocAlertListRequest, SaDivulgeDataQueryPubResponse, DescribeConfigListRequest, DescribeSocCspmComplianceResponse, DescribeMappingResultsRequest, DescribeCheckConfigDetailRequest, DescribeLeakDetectionListResponse, DescribeSocCheckItemListRequest, DescribeEventDetailRequest, SaDivulgeDataQueryPubRequest, DescribeVulDetailRequest, DescribeAssetsMappingListRequest, DescribeComplianceAssetListRequest, DescribeAssetDetailResponse, DescribeVulDetailResponse, DescribeSocCspmComplianceRequest, DescribeComplianceDetailRequest } from "./ssa_models";
 /**
  * ssa client
  * @class
@@ -51,6 +51,10 @@ export declare class Client extends AbstractClient {
      * 获取测绘列表
      */
     DescribeMappingResults(req: DescribeMappingResultsRequest, cb?: (error: string, rep: DescribeMappingResultsResponse) => void): Promise<DescribeMappingResultsResponse>;
+    /**
+     * 云安全配置检查项列表
+     */
+    DescribeSocCheckItemList(req?: DescribeSocCheckItemListRequest, cb?: (error: string, rep: DescribeSocCheckItemListResponse) => void): Promise<DescribeSocCheckItemListResponse>;
     /**
      * 漏洞管理页，获取漏洞列表
      */

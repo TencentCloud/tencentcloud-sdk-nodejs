@@ -5521,12 +5521,12 @@ export interface CreateCmqQueueRequest {
   MaxMsgSize?: number
 
   /**
-   * 消息保留周期。取值范围 60-1296000 秒（1min-15天），默认值 345600 (4 天)。
+   * 消息最长未确认时间。取值范围 30-43200 秒（30秒~12小时），默认值 3600 (1 小时)。
    */
   MsgRetentionSeconds?: number
 
   /**
-   * 队列是否开启回溯消息能力，该参数取值范围0-msgRetentionSeconds,即最大的回溯时间为消息在队列中的保留周期，0表示不开启。
+   * 队列是否开启回溯消息能力，该参数取值范围0-1296000，0表示不开启。
    */
   RewindSeconds?: number
 
@@ -5574,6 +5574,11 @@ export interface CreateCmqQueueRequest {
    * 标签数组
    */
   Tags?: Array<Tag>
+
+  /**
+   * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+   */
+  RetentionSizeInMB?: number
 }
 
 /**
@@ -6237,12 +6242,12 @@ export interface ModifyCmqQueueAttributeRequest {
   MaxMsgSize?: number
 
   /**
-   * 消息保留周期。取值范围 60-1296000 秒（1min-15天），默认值 345600 (4 天)。
+   * 消息最长未确认时间。取值范围 30-43200 秒（30秒~12小时），默认值 3600 (1 小时)。
    */
   MsgRetentionSeconds?: number
 
   /**
-   * 消息最长回溯时间，取值范围0-msgRetentionSeconds，消息的最大回溯之间为消息在队列中的保存周期，0表示不开启消息回溯。
+   * 队列是否开启回溯消息能力，该参数取值范围0-1296000，0表示不开启。
    */
   RewindSeconds?: number
 
@@ -6285,6 +6290,11 @@ export interface ModifyCmqQueueAttributeRequest {
    * 是否开启事务，1开启，0不开启
    */
   Transaction?: number
+
+  /**
+   * 队列可回溯存储空间，取值范围1024MB - 10240MB，0表示不开启
+   */
+  RetentionSizeInMB?: number
 }
 
 /**

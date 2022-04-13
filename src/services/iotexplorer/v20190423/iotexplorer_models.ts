@@ -3895,7 +3895,7 @@ export interface GetProjectListRequest {
   InstanceId?: string
 
   /**
-   * 按项目D搜索
+   * 按项目ID搜索
    */
   ProjectId?: string
 

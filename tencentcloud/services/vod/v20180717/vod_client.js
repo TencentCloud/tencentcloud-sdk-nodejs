@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb);
     }
     /**
+     * 该接口用于设置默认的存储地域。上传文件时如果没有指定地域，将上传到默认地域。
+     */
+    async ModifyDefaultStorageRegion(req, cb) {
+        return this.request("ModifyDefaultStorageRegion", req, cb);
+    }
+    /**
      * 对视频进行编辑（剪辑、拼接等），生成一个新的点播视频。编辑的功能包括：
 
 1. 对点播中的一个文件进行剪辑，生成一个新的视频；
@@ -149,12 +155,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SplitMedia", req, cb);
     }
     /**
-     * 修改用户自定义视频内容分析模板。
-
-注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     * 获取图片处理模板列表，支持根据条件，分页查询。
      */
-    async ModifyAIAnalysisTemplate(req, cb) {
-        return this.request("ModifyAIAnalysisTemplate", req, cb);
+    async DescribeImageProcessingTemplates(req, cb) {
+        return this.request("DescribeImageProcessingTemplates", req, cb);
     }
     /**
      * 删除用户自定义的任务流模板。
@@ -209,6 +213,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTasks(req, cb) {
         return this.request("DescribeTasks", req, cb);
+    }
+    /**
+     * 该接口用于开通某地域的存储。
+  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
+  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
+     */
+    async CreateStorageRegion(req, cb) {
+        return this.request("CreateStorageRegion", req, cb);
     }
     /**
      * 重新设置用户自定义任务流模板的内容。
@@ -517,6 +529,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDailyMostPlayedStat", req, cb);
     }
     /**
+     * 该接口用于：
+  1. 查询点播可开通的所有存储园区列表。
+  2. 查询已经开通的园区列表。
+  3. 查询默认使用的存储园区。
+     */
+    async DescribeStorageRegions(req, cb) {
+        return this.request("DescribeStorageRegions", req, cb);
+    }
+    /**
      * * 该接口用于业务服务器获取 [可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83) 事件通知的状态。
 
      */
@@ -646,10 +667,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManageTask", req, cb);
     }
     /**
-     * 获取图片处理模板列表，支持根据条件，分页查询。
+     * 修改用户自定义视频内容分析模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
      */
-    async DescribeImageProcessingTemplates(req, cb) {
-        return this.request("DescribeImageProcessingTemplates", req, cb);
+    async ModifyAIAnalysisTemplate(req, cb) {
+        return this.request("ModifyAIAnalysisTemplate", req, cb);
     }
     /**
      * 修改用户自定义指定时间点截图模板。
