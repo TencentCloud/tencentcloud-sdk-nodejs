@@ -118,6 +118,16 @@ it("tiia.v20190529.CropImage", async function () {
     }
 })
 
+it("tiia.v20190529.SearchImage", async function () {
+    try {
+       const data = await client.SearchImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiia.v20190529.DescribeImages", async function () {
     try {
        const data = await client.DescribeImages({})
@@ -158,9 +168,9 @@ it("tiia.v20190529.DetectProduct", async function () {
     }
 })
 
-it("tiia.v20190529.SearchImage", async function () {
+it("tiia.v20190529.RecognizeCarPro", async function () {
     try {
-       const data = await client.SearchImage({})
+       const data = await client.RecognizeCarPro({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

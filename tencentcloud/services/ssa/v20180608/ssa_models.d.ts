@@ -31,6 +31,11 @@ export interface DescribeAssetDetailRequest {
  */
 export interface DescribeSocCheckItemListResponse {
     /**
+      * 检查项列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: DescribeSocCheckItemListRspRsp;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -710,67 +715,67 @@ export interface AlertListData {
  */
 export interface SaDivulgeDataQueryPub {
     /**
-      * Id
+      * Id信息
       */
     Id: string;
     /**
-      * Uin
+      * 用户Uin
       */
     Uin: string;
     /**
-      * AppId
+      * 用户AppId
       */
     AppId: string;
     /**
-      * EventName
+      * 事件名称
       */
     EventName: string;
     /**
-      * DivulgeSoure
+      * 监控源 0:全部 1:GitHub 2:暗网 默认值1
       */
     DivulgeSoure: string;
     /**
-      * Asset
+      * 受影响资产
       */
     Asset: string;
     /**
-      * RuleName
+      * 命中主题集下的规则topic名称
       */
     RuleName: string;
     /**
-      * RuleId
+      * 命中主题集下的规则topic唯一id
       */
     RuleId: string;
     /**
-      * RuleWord
+      * 命中主题集下的自定义规则策略
       */
     RuleWord: string;
     /**
-      * ScanUrl
+      * 扫描监测url"
       */
     ScanUrl: string;
     /**
-      * ScanCount
+      * 扫描监测命中次数
       */
     ScanCount: string;
     /**
-      * Level
+      * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
       */
     Level: string;
     /**
-      * Status
+      * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
       */
     Status: string;
     /**
-      * EventTime
+      * 安全事件发生时间
       */
     EventTime: string;
     /**
-      * InsertTime
+      * 事件插入时间
       */
     InsertTime: string;
     /**
-      * UpdateTime
+      * 事件更新时间
       */
     UpdateTime: string;
 }
@@ -947,6 +952,46 @@ export interface DescribeLeakDetectionListRequest {
     EndTime: string;
 }
 /**
+ * 检查项相关信息
+ */
+export interface SocCheckItemV1 {
+    /**
+      * 检查项id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CheckId: string;
+    /**
+      * 配置要求
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 检查项类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 检查对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AssetType: string;
+    /**
+      * 默认风险等级 2:低危 3:中危 4:高危
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level: number;
+    /**
+      * 相关规范
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Standard: string;
+    /**
+      * 检查项是否付费 1:免费 2:付费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsFree?: number;
+}
+/**
  * DescribeEventDetail返回参数结构体
  */
 export interface DescribeEventDetailResponse {
@@ -977,15 +1022,15 @@ export interface DescribeSafetyEventListResponse {
     RequestId?: string;
 }
 /**
- * 查询_通用字段
+ * 自定义泄露事件列表
  */
 export interface SaDivulgeDataQueryPubList {
     /**
-      * Count
+      * 数据条数
       */
     Count: number;
     /**
-      * List
+      * 自定义泄露事件列表
       */
     List: Array<SaDivulgeDataQueryPub>;
 }
@@ -1720,7 +1765,24 @@ export interface DataEvent {
 /**
  * DescribeSocCheckItemList请求参数结构体
  */
-export declare type DescribeSocCheckItemListRequest = null;
+export interface DescribeSocCheckItemListRequest {
+    /**
+      * 查询参数,可支持的排序字段:Name,Type,AssetType,Level,Standard,IsFree
+      */
+    Filter?: Array<QueryFilter>;
+    /**
+      * 排序参数:无
+      */
+    Sorter?: Array<QuerySort>;
+    /**
+      * 当前页码数据，默认值为10
+      */
+    PageSize?: number;
+    /**
+      * 当前页面索引，默认值为0
+      */
+    PageIndex?: number;
+}
 /**
  * 云安全配置检查项详情
  */
@@ -1781,6 +1843,21 @@ export interface CheckConfigDetail {
       * 是否忽略
       */
     IsIgnore: number;
+}
+/**
+ * 云安全配置检查项列表
+ */
+export interface DescribeSocCheckItemListRspRsp {
+    /**
+      * 检查项详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<SocCheckItemV1>;
+    /**
+      * 检查项总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
 }
 /**
  * SocCheckItem类型

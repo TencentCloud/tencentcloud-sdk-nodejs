@@ -388,6 +388,16 @@ export interface UrlRecord {
 }
 
 /**
+ * UpdatePayType返回参数结构体
+ */
+export interface UpdatePayTypeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePushQuota返回参数结构体
  */
 export interface DescribePushQuotaResponse {
@@ -2242,6 +2252,12 @@ ip_ipv6_domain：源站列表为多个 IPv4 地址IPv6 地址以及域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AdvanceHttps?: AdvanceHttps
+
+  /**
+      * 对象存储回源厂商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginCompany?: string
 }
 
 /**
@@ -2588,20 +2604,41 @@ export interface DeleteClsLogTopicRequest {
 }
 
 /**
- * UserAgent黑白名单配置
+ * ListTopBotData请求参数结构体
  */
-export interface UserAgentFilter {
+export interface ListTopBotDataRequest {
   /**
-      * 开关，on或off
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Switch: string
+   * 获取Top量，取值范围[1-10]
+   */
+  TopCount: number
 
   /**
-      * UA黑白名单生效规则列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+      * session表示查询BOT会话的Top信息
+ip表示查询BOT客户端IP的Top信息
+
+不填代表获取会话信息
       */
-  FilterRules?: Array<UserAgentFilterRule>
+  Metric?: string
+
+  /**
+   * 域名，仅当Metric=ip时有效，不填写表示使用Domains参数
+   */
+  Domain?: string
+
+  /**
+   * 域名，仅当Metric=ip，并且Domain为空时有效，不填写表示获取AppID信息
+   */
+  Domains?: Array<string>
 }
 
 /**
@@ -3908,6 +3945,16 @@ global：全球加速
    * 回源OSS私有鉴权
    */
   OssPrivateAccess?: OssPrivateAccess
+
+  /**
+   * 华为云对象存储回源鉴权
+   */
+  HwPrivateAccess?: HwPrivateAccess
+
+  /**
+   * 七牛云对象存储回源鉴权
+   */
+  QnPrivateAccess?: QnPrivateAccess
 }
 
 /**
@@ -4189,6 +4236,16 @@ global：全球加速
    * 共享CNAME配置，白名单功能
    */
   ShareCname?: ShareCname
+
+  /**
+   * 华为云对象存储回源鉴权
+   */
+  HwPrivateAccess?: HwPrivateAccess
+
+  /**
+   * 七牛云对象存储回源鉴权
+   */
+  QnPrivateAccess?: QnPrivateAccess
 }
 
 /**
@@ -4581,31 +4638,24 @@ export interface ScdnEventLogConditions {
 }
 
 /**
- * SCDN访问控制
+ * 七牛元对象存储回源鉴权配置
  */
-export interface ScdnAclConfig {
+export interface QnPrivateAccess {
   /**
-   * 是否开启，on | off
+   * 开关 on/off
    */
   Switch: string
 
   /**
-      * 新版本请使用AdvancedScriptData
+      * 访问 ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ScriptData?: Array<ScdnAclGroup>
+  AccessKey?: string
 
   /**
-      * 错误页面配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ErrorPage?: ScdnErrorPage
-
-  /**
-      * Acl规则组，switch为on时必填
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AdvancedScriptData?: Array<AdvancedScdnAclGroup>
+   * 密钥
+   */
+  SecretKey?: string
 }
 
 /**
@@ -5927,6 +5977,18 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ParentHost: string
+
+  /**
+      * 华为云对象存储回源鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HwPrivateAccess: HwPrivateAccess
+
+  /**
+      * 七牛云对象存储回源鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QnPrivateAccess: QnPrivateAccess
 }
 
 /**
@@ -6726,6 +6788,18 @@ export interface MainlandConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OssPrivateAccess?: OssPrivateAccess
+
+  /**
+      * 华为云对象存储回源鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HwPrivateAccess?: HwPrivateAccess
+
+  /**
+      * 七牛云对象存储回源鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QnPrivateAccess?: QnPrivateAccess
 }
 
 /**
@@ -7089,13 +7163,31 @@ export interface CreateClsLogTopicRequest {
 }
 
 /**
- * UpdatePayType返回参数结构体
+ * SCDN访问控制
  */
-export interface UpdatePayTypeResponse {
+export interface ScdnAclConfig {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 是否开启，on | off
    */
-  RequestId?: string
+  Switch: string
+
+  /**
+      * 新版本请使用AdvancedScriptData
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScriptData?: Array<ScdnAclGroup>
+
+  /**
+      * 错误页面配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorPage?: ScdnErrorPage
+
+  /**
+      * Acl规则组，switch为on时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdvancedScriptData?: Array<AdvancedScdnAclGroup>
 }
 
 /**
@@ -9284,41 +9376,31 @@ export interface DescribeEventLogDataResponse {
 }
 
 /**
- * ListTopBotData请求参数结构体
+ *  华为云对象存储回源鉴权
  */
-export interface ListTopBotDataRequest {
+export interface HwPrivateAccess {
   /**
-   * 获取Top量，取值范围[1-10]
+   * 开关 on/off
    */
-  TopCount: number
+  Switch: string
 
   /**
-   * 开始时间
-   */
-  StartTime: string
-
-  /**
-   * 结束时间
-   */
-  EndTime: string
-
-  /**
-      * session表示查询BOT会话的Top信息
-ip表示查询BOT客户端IP的Top信息
-
-不填代表获取会话信息
+      * 访问 ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Metric?: string
+  AccessKey?: string
 
   /**
-   * 域名，仅当Metric=ip时有效，不填写表示使用Domains参数
-   */
-  Domain?: string
+      * 密钥
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecretKey?: string
 
   /**
-   * 域名，仅当Metric=ip，并且Domain为空时有效，不填写表示获取AppID信息
-   */
-  Domains?: Array<string>
+      * bucketname
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket?: string
 }
 
 /**
@@ -9454,6 +9536,18 @@ export interface OssPrivateAccess {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SecretKey?: string
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: string
+
+  /**
+      * Bucketname
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket?: string
 }
 
 /**
@@ -9618,6 +9712,18 @@ export interface AwsPrivateAccess {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SecretKey?: string
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: string
+
+  /**
+      * Bucketname
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Bucket?: string
 }
 
 /**
@@ -9839,6 +9945,23 @@ export interface DescribeScdnBotDataRequest {
    * 域名数组，多选域名时，使用此参数,不填写表示查询所有域名的数据（AppID维度数据）
    */
   Domains?: Array<string>
+}
+
+/**
+ * UserAgent黑白名单配置
+ */
+export interface UserAgentFilter {
+  /**
+      * 开关，on或off
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch: string
+
+  /**
+      * UA黑白名单生效规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FilterRules?: Array<UserAgentFilterRule>
 }
 
 /**

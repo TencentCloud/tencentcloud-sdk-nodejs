@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, CreateImageRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DescribeGroupsRequest, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, DetectMisbehaviorResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, DetectLabelBetaRequest, CreateImageResponse, DetectLabelBetaResponse, DetectCelebrityResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
+import { DetectProductBetaResponse, DetectDisgustRequest, SearchImageResponse, RecognizeCarProResponse, CreateImageRequest, DeleteImagesResponse, CropImageRequest, DetectProductRequest, DescribeGroupsRequest, AssessQualityResponse, DetectDisgustResponse, SearchImageRequest, RecognizeCarResponse, DetectLabelRequest, DetectLabelResponse, EnhanceImageResponse, AssessQualityRequest, DeleteImagesRequest, CreateGroupRequest, DescribeImagesRequest, DetectProductBetaRequest, DetectMisbehaviorResponse, RecognizeCarRequest, EnhanceImageRequest, CropImageResponse, DetectCelebrityRequest, DetectProductResponse, DetectLabelBetaRequest, CreateImageResponse, DetectLabelBetaResponse, RecognizeCarProRequest, DetectCelebrityResponse, DescribeGroupsResponse, DescribeImagesResponse, DetectMisbehaviorRequest, CreateGroupResponse } from "./tiia_models";
 /**
  * tiia client
  * @class
@@ -87,6 +87,10 @@ export declare class Client extends AbstractClient {
      */
     CropImage(req: CropImageRequest, cb?: (error: string, rep: CropImageResponse) => void): Promise<CropImageResponse>;
     /**
+     * 本接口用于对一张待识别的商品图片，在指定图片库中检索出最相似的图片列表。
+     */
+    SearchImage(req: SearchImageRequest, cb?: (error: string, rep: SearchImageResponse) => void): Promise<SearchImageResponse>;
+    /**
      * 获取指定图片库中的图片列表。
      */
     DescribeImages(req: DescribeImagesRequest, cb?: (error: string, rep: DescribeImagesResponse) => void): Promise<DescribeImagesResponse>;
@@ -108,9 +112,12 @@ export declare class Client extends AbstractClient {
      */
     DetectProduct(req: DetectProductRequest, cb?: (error: string, rep: DetectProductResponse) => void): Promise<DetectProductResponse>;
     /**
-     * 本接口用于对一张待识别的商品图片，在指定图片库中检索出最相似的图片列表。
+     * 车辆识别（增强版）可对图片中汽车的车型和车牌进行识别，可识别7000多种车型，覆盖轿车、SUV、大型客车等市面常见车，输出车辆的车身颜色、品牌、车系、年份、车牌和位置等信息。如果图片中存在多辆车，会分别输出每辆车的车型、车牌和坐标。
+
+>
+- 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
-    SearchImage(req: SearchImageRequest, cb?: (error: string, rep: SearchImageResponse) => void): Promise<SearchImageResponse>;
+    RecognizeCarPro(req: RecognizeCarProRequest, cb?: (error: string, rep: RecognizeCarProResponse) => void): Promise<RecognizeCarProResponse>;
     /**
      * 传入一张图片，输出清晰度提升后的图片。
 

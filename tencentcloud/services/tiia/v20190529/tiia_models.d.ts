@@ -63,6 +63,23 @@ export interface SearchImageResponse {
     RequestId?: string;
 }
 /**
+ * RecognizeCarPro返回参数结构体
+ */
+export interface RecognizeCarProResponse {
+    /**
+      * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
+      */
+    CarCoords: Array<Coord>;
+    /**
+      * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
+      */
+    CarTags: Array<CarTagItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateImage请求参数结构体
  */
 export interface CreateImageRequest {
@@ -166,6 +183,26 @@ export interface DetectProductRequest {
 **注意：图片需要base64编码，并且要去掉编码头部。**
       */
     ImageBase64?: string;
+}
+/**
+ * 检测到的图片中的商品位置和品类预测。
+当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。
+最多可以输出__3组__检测结果。
+ */
+export interface RegionDetected {
+    /**
+      * 商品的品类预测结果。
+包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。
+      */
+    Category: string;
+    /**
+      * 商品品类预测的置信度
+      */
+    CategoryScore: number;
+    /**
+      * 检测到的主体在图片中的坐标，表示为矩形框的四个顶点坐标
+      */
+    Location: Location;
 }
 /**
  * DescribeGroups请求参数结构体
@@ -964,24 +1001,26 @@ export interface ImageInfo {
     Score: number;
 }
 /**
- * 检测到的图片中的商品位置和品类预测。
-当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。
-最多可以输出__3组__检测结果。
+ * RecognizeCarPro请求参数结构体
  */
-export interface RegionDetected {
+export interface RecognizeCarProRequest {
     /**
-      * 商品的品类预测结果。
-包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。
+      * 图片URL地址。
+图片限制：
+• 图片格式：PNG、JPG、JPEG。
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果；
+• 长宽比：长边：短边<5；
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
       */
-    Category: string;
+    ImageUrl?: string;
     /**
-      * 商品品类预测的置信度
+      * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
       */
-    CategoryScore: number;
-    /**
-      * 检测到的主体在图片中的坐标，表示为矩形框的四个顶点坐标
-      */
-    Location: Location;
+    ImageBase64?: string;
 }
 /**
  * 名人识别的标签

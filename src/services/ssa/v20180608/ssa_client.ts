@@ -51,6 +51,7 @@ import {
   DescribeComplianceListRequest,
   DescribeVulListRequest,
   DescribeLeakDetectionListRequest,
+  SocCheckItemV1,
   DescribeEventDetailResponse,
   DescribeSafetyEventListResponse,
   SaDivulgeDataQueryPubList,
@@ -73,6 +74,7 @@ import {
   DataEvent,
   DescribeSocCheckItemListRequest,
   CheckConfigDetail,
+  DescribeSocCheckItemListRspRsp,
   SocCheckItem,
   DescribeEventDetailRequest,
   CheckAssetItem,
@@ -216,7 +218,7 @@ export class Client extends AbstractClient {
    * 云安全配置检查项列表
    */
   async DescribeSocCheckItemList(
-    req?: DescribeSocCheckItemListRequest,
+    req: DescribeSocCheckItemListRequest,
     cb?: (error: string, rep: DescribeSocCheckItemListResponse) => void
   ): Promise<DescribeSocCheckItemListResponse> {
     return this.request("DescribeSocCheckItemList", req, cb)

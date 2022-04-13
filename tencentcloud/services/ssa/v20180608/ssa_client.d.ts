@@ -54,7 +54,7 @@ export declare class Client extends AbstractClient {
     /**
      * 云安全配置检查项列表
      */
-    DescribeSocCheckItemList(req?: DescribeSocCheckItemListRequest, cb?: (error: string, rep: DescribeSocCheckItemListResponse) => void): Promise<DescribeSocCheckItemListResponse>;
+    DescribeSocCheckItemList(req: DescribeSocCheckItemListRequest, cb?: (error: string, rep: DescribeSocCheckItemListResponse) => void): Promise<DescribeSocCheckItemListResponse>;
     /**
      * 漏洞管理页，获取漏洞列表
      */

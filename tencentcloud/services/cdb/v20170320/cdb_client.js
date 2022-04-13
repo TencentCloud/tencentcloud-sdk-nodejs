@@ -649,6 +649,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDownloadRestriction", req, cb);
     }
     /**
+     * 重置实例ROOT账，初始化账号权限
+     */
+    async ResetRootAccount(req, cb) {
+        return this.request("ResetRootAccount", req, cb);
+    }
+    /**
      * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
      */
     async ModifyAccountPassword(req, cb) {

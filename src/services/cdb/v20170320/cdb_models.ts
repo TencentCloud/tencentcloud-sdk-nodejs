@@ -360,6 +360,11 @@ export interface ModifyTimeWindowRequest {
    * 指定修改哪一天的客户时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
    */
   Weekdays?: Array<string>
+
+  /**
+   * 数据延迟阈值，仅对主实例和灾备实例有效，不传默认修改为10
+   */
+  MaxDelayTime?: number
 }
 
 /**
@@ -2726,6 +2731,11 @@ export interface AddTimeWindowRequest {
    * 星期日的可维护时间窗口。 一周中应至少设置一天的时间窗。
    */
   Sunday?: Array<string>
+
+  /**
+   * 最大延迟阈值，仅对主实例和灾备实例有效
+   */
+  MaxDelayTime?: number
 }
 
 /**
@@ -3096,37 +3106,42 @@ export interface DescribeTimeWindowResponse {
   /**
    * 星期一的可维护时间列表。
    */
-  Monday?: Array<string>
+  Monday: Array<string>
 
   /**
    * 星期二的可维护时间列表。
    */
-  Tuesday?: Array<string>
+  Tuesday: Array<string>
 
   /**
    * 星期三的可维护时间列表。
    */
-  Wednesday?: Array<string>
+  Wednesday: Array<string>
 
   /**
    * 星期四的可维护时间列表。
    */
-  Thursday?: Array<string>
+  Thursday: Array<string>
 
   /**
    * 星期五的可维护时间列表。
    */
-  Friday?: Array<string>
+  Friday: Array<string>
 
   /**
    * 星期六的可维护时间列表。
    */
-  Saturday?: Array<string>
+  Saturday: Array<string>
 
   /**
    * 星期日的可维护时间列表。
    */
-  Sunday?: Array<string>
+  Sunday: Array<string>
+
+  /**
+   * 最大数据延迟阈值
+   */
+  MaxDelayTime: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3546,6 +3561,16 @@ export interface TagsInfoOfInstance {
    * 标签信息
    */
   Tags: Array<TagInfoUnit>
+}
+
+/**
+ * ResetRootAccount请求参数结构体
+ */
+export interface ResetRootAccountRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
 }
 
 /**
@@ -4228,7 +4253,7 @@ export interface CreateDBInstanceRequest {
   DeployGroupId?: string
 
   /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在当天内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
    */
   ClientToken?: string
 
@@ -4281,6 +4306,11 @@ export interface CreateDBInstanceRequest {
    * 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.默认为false：发送正常请求，通过检查后直接创建实例。
    */
   DryRun?: boolean
+
+  /**
+   * 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。
+   */
+  Vips?: Array<string>
 }
 
 /**
@@ -4723,6 +4753,16 @@ export interface MasterInfo {
    * 独享集群名称
    */
   ExClusterName: string
+}
+
+/**
+ * ResetRootAccount返回参数结构体
+ */
+export interface ResetRootAccountResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6441,25 +6481,25 @@ export interface ModifyAccountPrivilegesRequest {
 
   /**
       * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER","CREATE USER","RELOAD","REPLICATION CLIENT","REPLICATION SLAVE","UPDATE"。
-注意，不传该参数表示清除该权限。
+注意，ModifyAction为空时，不传该参数表示清除该权限。
       */
   GlobalPrivileges?: Array<string>
 
   /**
       * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
-注意，不传该参数表示清除该权限。
+注意，ModifyAction为空时，不传该参数表示清除该权限。
       */
   DatabasePrivileges?: Array<DatabasePrivilege>
 
   /**
       * 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
-注意，不传该参数表示清除该权限。
+注意，ModifyAction为空时，不传该参数表示清除该权限。
       */
   TablePrivileges?: Array<TablePrivilege>
 
   /**
       * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
-注意，不传该参数表示清除该权限。
+注意，ModifyAction为空时，不传该参数表示清除该权限。
       */
   ColumnPrivileges?: Array<ColumnPrivilege>
 
@@ -7579,7 +7619,7 @@ export interface CreateDBInstanceHourRequest {
   DeployGroupId?: string
 
   /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在当天内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
    */
   ClientToken?: string
 
@@ -7632,6 +7672,11 @@ export interface CreateDBInstanceHourRequest {
    * 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.默认为false：发送正常请求，通过检查后直接创建实例。
    */
   DryRun?: boolean
+
+  /**
+   * 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。
+   */
+  Vips?: Array<string>
 }
 
 /**

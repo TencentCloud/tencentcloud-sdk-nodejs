@@ -165,6 +165,7 @@ import {
   StopRollbackRequest,
   DescribeDeviceMonitorInfoResponse,
   TagsInfoOfInstance,
+  ResetRootAccountRequest,
   DescribeDBInstanceConfigRequest,
   DescribeProxyCustomConfResponse,
   ModifyAuditConfigResponse,
@@ -207,6 +208,7 @@ import {
   CreateDeployGroupResponse,
   SellConfig,
   MasterInfo,
+  ResetRootAccountResponse,
   ProxyNodeInfo,
   Account,
   ModifyNameOrDescByDpIdResponse,
@@ -1391,6 +1393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupDownloadRestrictionResponse) => void
   ): Promise<DescribeBackupDownloadRestrictionResponse> {
     return this.request("DescribeBackupDownloadRestriction", req, cb)
+  }
+
+  /**
+   * 重置实例ROOT账，初始化账号权限
+   */
+  async ResetRootAccount(
+    req: ResetRootAccountRequest,
+    cb?: (error: string, rep: ResetRootAccountResponse) => void
+  ): Promise<ResetRootAccountResponse> {
+    return this.request("ResetRootAccount", req, cb)
   }
 
   /**
