@@ -659,6 +659,58 @@ export interface PutMusicOnTheShelvesResponse {
     RequestId?: string;
 }
 /**
+ * KTV 机器人初始化参数，在创建后自动完成相关初始化工作。
+ */
+export interface SyncRobotCommand {
+    /**
+      * 可同时传入多个指令，顺序执行。取值有：
+<li>Play：播放</li>
+<li>Pause：暂停</li>
+<li>SwitchPrevious：上一首</li>
+<li>SwitchNext：下一首</li>
+<li>SetPlayMode：设置播放模式</li>
+<li>Seek：调整播放进度</li>
+<li>SetPlaylist：歌单变更</li>
+<li>SetAudioParam：音频参数变更</li>
+<li>SendMessage：发送自定义消息</li>
+<li>SetDestroyMode：设置销毁模式</li>
+<li>SetVolume：设置音量</li>
+      */
+    Command: string;
+    /**
+      * 播放参数。
+      */
+    PlayCommandInput?: PlayCommandInput;
+    /**
+      * 播放列表变更信息，当Command取SetPlaylist时，必填。
+      */
+    SetPlaylistCommandInput?: SetPlaylistCommandInput;
+    /**
+      * 播放进度，当Command取Seek时，必填。
+      */
+    SeekCommandInput?: SeekCommandInput;
+    /**
+      * 音频参数，当Command取SetAudioParam时，必填。
+      */
+    SetAudioParamCommandInput?: SetAudioParamCommandInput;
+    /**
+      * 自定义消息，当Command取SendMessage时，必填。
+      */
+    SendMessageCommandInput?: SendMessageCommandInput;
+    /**
+      * 播放模式，当Command取SetPlayMode时，必填。
+      */
+    SetPlayModeCommandInput?: SetPlayModeCommandInput;
+    /**
+      * 销毁模式，当Command取SetDestroyMode时，必填。
+      */
+    SetDestroyModeCommandInput?: SetDestroyModeCommandInput;
+    /**
+      * 音量，当Command取SetVolume时，必填。
+      */
+    SetVolumeCommandInput?: SetVolumeCommandInput;
+}
+/**
  * DescribeKTVSingerMusics返回参数结构体
  */
 export interface DescribeKTVSingerMusicsResponse {
@@ -918,6 +970,10 @@ export interface CreateKTVRobotRequest {
       * license基础信息
       */
     ApplicationLicenseInput?: ApplicationLicenseInput;
+    /**
+      * 创建机器人时初始化参数。
+      */
+    SyncRobotCommands?: Array<SyncRobotCommand>;
 }
 /**
  * 即使广播曲库联想词信息

@@ -1032,6 +1032,38 @@ export interface CreateInvoiceResultData {
     OrderSn: string;
 }
 /**
+ * 客户端信息
+ */
+export interface CloudClientInfo {
+    /**
+      * 场景类型。
+wechat_ecommerce渠道 - h5支付方式，此字段必填；
+枚举值：
+CLIENT_TYPE_UNKNOWN 未知;
+CLIENT_TYPE_IOS ios系统;
+CLIENT_TYPE_ANDROID 安卓系统;
+CLIENT_TYPE_WAP WAP场景;
+CLIENT_TYPE_H5 H5场景;
+      */
+    ClientType?: string;
+    /**
+      * 应用名称。
+      */
+    AppName?: string;
+    /**
+      * 网站URL。
+      */
+    AppUrl?: string;
+    /**
+      * IOS平台BundleID。
+      */
+    BundleId?: string;
+    /**
+      * Android平台PackageName
+      */
+    PackageName?: string;
+}
+/**
  * 对账文件信息
  */
 export interface FileItem {
@@ -1137,26 +1169,28 @@ export interface AddMerchantResult {
     MerchantNo: string;
 }
 /**
- * CloseOpenBankPaymentOrder返回参数结构体
+ * QueryOpenBankExternalSubMerchantRegistration请求参数结构体
  */
-export interface CloseOpenBankPaymentOrderResponse {
+export interface QueryOpenBankExternalSubMerchantRegistrationRequest {
     /**
-      * 业务系统返回码，SUCCESS表示成功，其他表示失败。
+      * 渠道商户号。
       */
-    ErrCode: string;
+    ChannelMerchantId: string;
     /**
-      * 业务系统返回消息
+      * 渠道进件号，与外部进件号二者选填其一。
       */
-    ErrMessage: string;
+    ChannelRegistrationNo?: string;
     /**
-      * 关单响应对象
-注意：此字段可能返回 null，表示取不到有效值。
+      * 外部进件号，与渠道进件号二者选填其一。
       */
-    Result: CloseOpenBankPaymentOrderResult;
+    OutRegistrationNo?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
       */
-    RequestId?: string;
+    Environment?: string;
 }
 /**
  * CreateTransferBatch返回参数结构体
@@ -1209,6 +1243,50 @@ export interface BindAccountRequest {
       * 手机号
       */
     PhoneNum: string;
+}
+/**
+ * QueryCloudChannelData返回参数结构体
+ */
+export interface QueryCloudChannelDataResponse {
+    /**
+      * 外部订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutOrderNo: string;
+    /**
+      * 渠道订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelOrderId: string;
+    /**
+      * 第三方渠道数据类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalChannelDataType: string;
+    /**
+      * 渠道名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Channel: string;
+    /**
+      * 第三方渠道数据列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalChannelDataList: Array<CloudExternalChannelData>;
+    /**
+      * 子应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAppId: string;
+    /**
+      * 米大师分配的支付主MidasAppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * QuerySinglePay返回参数结构体
@@ -1369,6 +1447,39 @@ export interface ContractInfo {
     ExternalContractData: string;
 }
 /**
+ * QueryOpenBankExternalSubMerchantBankAccount请求参数结构体
+ */
+export interface QueryOpenBankExternalSubMerchantBankAccountRequest {
+    /**
+      * 渠道商户ID。
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道子商户ID。
+      */
+    ChannelSubMerchantId: string;
+    /**
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+    ChannelName: string;
+    /**
+      * 支付方式。
+__EBANK_PAYMENT__: ebank支付
+__OPENBANK_PAYMENT__: openbank支付
+      */
+    PaymentMethod: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
+}
+/**
  * 第三方渠道合约信息
  */
 export interface ExternalReturnContractInfo {
@@ -1505,6 +1616,22 @@ export interface ConfirmOrderRequest {
       * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
       */
     OrderNo: string;
+}
+/**
+ * 渠道扩展促销信息
+ */
+export interface CloudExternalPromptGroup {
+    /**
+      * 渠道名。
+为米大师定义的枚举值：
+wechat 微信渠道
+      */
+    ChannelName: string;
+    /**
+      * 渠道扩展促销信息列表，由各个渠道自行定义。
+ChannelName为wechat时，组成为 <Wechat-ExternalPromptInfo>
+      */
+    ExternalPromptInfoList: Array<CloudExternalPromptInfo>;
 }
 /**
  * ModifyMerchant返回参数结构体
@@ -2432,6 +2559,69 @@ export interface AddMerchantResponse {
     RequestId?: string;
 }
 /**
+ * RefundCloudOrder请求参数结构体
+ */
+export interface RefundCloudOrderRequest {
+    /**
+      * 米大师分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 用户Id，长度不小于5位，仅支持字母和数字的组合
+      */
+    UserId: string;
+    /**
+      * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+      */
+    RefundId: string;
+    /**
+      * 退款金额，单位：分
+当该字段为空或者为0时，系统会默认使用订单当实付金额做为退款金额
+      */
+    TotalRefundAmt: number;
+    /**
+      * 商品订单，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+      */
+    OutTradeNo: string;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    MidasEnvironment?: string;
+    /**
+      * 平台应收金额，单位：分
+      */
+    PlatformRefundAmt?: number;
+    /**
+      * 结算应收金额，单位：分
+      */
+    MchRefundAmt?: number;
+    /**
+      * 支持多个子订单批量退款单个子订单退款支持传SubOutTradeNo
+也支持传SubOrderRefundList，都传的时候以SubOrderRefundList为准。
+如果传了子单退款细节，外部不需要再传退款金额，平台应退，商户应退金额
+      */
+    SubOrderRefundList?: Array<CloudSubOrderRefund>;
+    /**
+      * 渠道订单号，当出现重复支付时，可以将重复支付订单的渠道订单号传入，以进行退款（注意：目前该重复支付订单的渠道订单号仅能通过米大师内部获取），更多重复支付订单退款说明，请参考[重复支付订单退款说明](https://dev.tke.midas.qq.com/juxin-doc-next/apidocs/receive-order/Refund.html#%E9%87%8D%E5%A4%8D%E6%94%AF%E4%BB%98%E8%AE%A2%E5%8D%95%E9%80%80%E6%AC%BE%E8%AF%B4%E6%98%8E)
+      */
+    ChannelOrderId?: string;
+    /**
+      * 通知地址
+      */
+    RefundNotifyUrl?: string;
+    /**
+      * 透传字段，退款成功回调透传给应用，用于开发者透传自定义内容
+      */
+    Metadata?: string;
+    /**
+      * 渠道扩展退款促销列表，可将各个渠道的退款促销信息放于该列表
+      */
+    ExternalRefundPromptGroupList?: string;
+}
+/**
  * RegisterBill返回参数结构体
  */
 export interface RegisterBillResponse {
@@ -2913,28 +3103,26 @@ export interface CreateOpenBankOrderPaymentResult {
     OutOrderId: string;
 }
 /**
- * QueryOpenBankExternalSubMerchantRegistration请求参数结构体
+ * CloseOpenBankPaymentOrder返回参数结构体
  */
-export interface QueryOpenBankExternalSubMerchantRegistrationRequest {
+export interface CloseOpenBankPaymentOrderResponse {
     /**
-      * 渠道商户号。
+      * 业务系统返回码，SUCCESS表示成功，其他表示失败。
       */
-    ChannelMerchantId: string;
+    ErrCode: string;
     /**
-      * 渠道进件号，与外部进件号二者选填其一。
+      * 业务系统返回消息
       */
-    ChannelRegistrationNo?: string;
+    ErrMessage: string;
     /**
-      * 外部进件号，与渠道进件号二者选填其一。
+      * 关单响应对象
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    OutRegistrationNo?: string;
+    Result: CloseOpenBankPaymentOrderResult;
     /**
-      * 环境类型
-__release__:生产环境
-__sandbox__:沙箱环境
-_不填默认为生产环境_
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Environment?: string;
+    RequestId?: string;
 }
 /**
  * TerminateContract请求参数结构体
@@ -3052,6 +3240,15 @@ export interface QueryMaliciousRegistrationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: MerchantRiskInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RefundCloudOrder返回参数结构体
+ */
+export interface RefundCloudOrderResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4413,45 +4610,40 @@ yyyyMMddHHmmss
     SignChannel?: number;
 }
 /**
- * 子订单列表
+ * UnifiedCloudOrder返回参数结构体
  */
-export interface UnifiedOrderInSubOrderList {
+export interface UnifiedCloudOrderResponse {
     /**
-      * 子订单结算应收金额，单位： 分
+      * 米大师的交易订单号。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubMchIncome: number;
+    TransactionId: string;
     /**
-      * 子订单平台应收金额，单位：分
+      * 开发者的支付订单号。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    PlatformIncome: number;
+    OutTradeNo: string;
     /**
-      * 子订单商品详情
+      * SDK的支付参数。
+支付参数透传给米大师SDK（原文透传给SDK即可，不需要解码）
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProductDetail: string;
+    PayInfo: string;
     /**
-      * 子订单商品名称
+      * 支付金额，单位：分。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProductName: string;
+    TotalAmt: number;
     /**
-      * 聚鑫计费SubAppId，代表子商户
+      * 渠道信息，用于拉起渠道支付。j
+son字符串，注意此字段仅会在传入正确的PayScene入参时才会有效。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubAppId: string;
+    ChannelInfo: string;
     /**
-      * 子订单号
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SubOutTradeNo: string;
-    /**
-      * 子订单支付金额
-      */
-    Amt: number;
-    /**
-      * 发货标识，由业务在调用聚鑫下单接口的 时候下发
-      */
-    Metadata: string;
-    /**
-      * 子订单原始金额
-      */
-    OriginalAmt: number;
+    RequestId?: string;
 }
 /**
  * UnbindOpenBankExternalSubMerchantBankAccount返回参数结构体
@@ -4489,6 +4681,125 @@ export interface QueryTradeRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
+}
+/**
+ * 返回订单信息
+ */
+export interface CloudOrderReturn {
+    /**
+      * 米大师分配的支付主MidasAppId
+      */
+    AppId: string;
+    /**
+      * 开发者支付订单号
+      */
+    OutTradeNo: string;
+    /**
+      * 调用下单接口传进来的子单列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubOrderList: Array<CloudSubOrderReturn>;
+    /**
+      * 调用下单接口获取的米大师交易订单号
+      */
+    TransactionId: string;
+    /**
+      * 用户Id
+      */
+    UserId: string;
+    /**
+      * 支付渠道
+wechat:微信支付
+      */
+    Channel: string;
+    /**
+      * 物品Id
+      */
+    ProductId: string;
+    /**
+      * 发货标识，由开发者在调用下单接口的时候传入
+      */
+    Metadata: string;
+    /**
+      * ISO货币代码
+      */
+    CurrencyType: string;
+    /**
+      * 支付金额，单位：分
+      */
+    Amt: number;
+    /**
+      * 订单状态
+0:初始状态，获取米大师交易订单成功
+1:拉起米大师支付页面成功，用户未支付
+2:用户支付成功，正在发货
+3:用户支付成功，发货失败
+4:用户支付成功，发货成功
+5:关单中
+6:已关单
+      */
+    OrderState: string;
+    /**
+      * 下单时间，unix时间戳
+      */
+    OrderTime: string;
+    /**
+      * 支付时间，unix时间戳
+      */
+    PayTime: string;
+    /**
+      * 支付回调时间，unix时间戳
+      */
+    CallBackTime: string;
+    /**
+      * 支付机构订单号
+      */
+    ChannelExternalOrderId: string;
+    /**
+      * 米大师内部渠道订单号
+      */
+    ChannelOrderId: string;
+    /**
+      * 是否曾退款
+      */
+    RefundFlag: string;
+    /**
+      * 用户支付金额
+      */
+    CashAmt: string;
+    /**
+      * 抵扣券金额
+      */
+    CouponAmt: string;
+    /**
+      * 商品名称
+      */
+    ProductName: string;
+    /**
+      * 结算信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SettleInfo: CloudSettleInfo;
+    /**
+      * 附加项信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachmentInfoList: Array<CloudAttachmentInfo>;
+    /**
+      * 渠道方返回的用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelExternalUserInfoList: Array<CloudChannelExternalUserInfo>;
+    /**
+      * 渠道扩展促销列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalReturnPromptGroupList: Array<CloudExternalPromptGroup>;
+    /**
+      * 场景扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SceneInfo: string;
 }
 /**
  * QueryBankWithdrawCashDetails请求参数结构体
@@ -5424,6 +5735,34 @@ export interface QueryBatchPaymentResultResponse {
     RequestId?: string;
 }
 /**
+ * 附加项信息对象
+ */
+export interface CloudAttachmentInfo {
+    /**
+      * 附加项金额。
+附加项的金额（必须是正数，单位：分），代表积分的数量、抵扣的金额、溢价的金额、补贴的金额
+      */
+    AttachmentAmount: number;
+    /**
+      * 附加项类型。
+Add：加项；
+Sub：减项；
+Point：积分项；
+Subsidy：补贴项。
+      */
+    AttachmentType: string;
+    /**
+      * 附加项名称。
+当银行作为收单机构可能会对该字段有要求，请向米大师确认。
+      */
+    AttachmentName: string;
+    /**
+      * 附加项编号。
+当银行作为收单机构可能会对该字段有要求，请向米大师确认。
+      */
+    AttachmentCode: string;
+}
+/**
  * RevokeRechargeByThirdPay返回参数结构体
  */
 export interface RevokeRechargeByThirdPayResponse {
@@ -6258,6 +6597,24 @@ __1__：是
     TranItemArray: Array<FundsTransactionItem>;
 }
 /**
+ * QueryCloudOrder返回参数结构体
+ */
+export interface QueryCloudOrderResponse {
+    /**
+      * 订单数量
+      */
+    TotalNum: number;
+    /**
+      * 订单列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OrderList: Array<CloudOrderReturn>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 聚鑫商户余额查询输出项
  */
 export interface QueryItem {
@@ -6835,6 +7192,71 @@ export interface MigrateOrderRefundQueryRequest {
     Profile?: string;
 }
 /**
+ * 子订单对象
+ */
+export interface CloudSubOrder {
+    /**
+      * 子订单号。
+长度32个字符供参考，部分渠道存在长度更短的情况接入时请联系开发咨询。
+      */
+    SubOutTradeNo: string;
+    /**
+      * 支付子商户ID。
+米大师计费SubAppId，代表子商户。
+      */
+    SubAppId: string;
+    /**
+      * 商品名称。
+业务自定义的子订单商品名称，无需URL编码，长度限制以具体所接入渠道为准。
+      */
+    ProductName: string;
+    /**
+      * 商品详情。
+业务自定义的子订单商品详情，无需URL编码，长度限制以具体所接入渠道为准。
+      */
+    ProductDetail: string;
+    /**
+      * 平台应收。
+子订单平台应收金额，单位：分，需要注意的是Amt = PlatformIncome+SubMchIncome。
+      */
+    PlatformIncome: number;
+    /**
+      * 商户应收。
+子订单结算应收金额，单位：分，需要注意的是Amt = PlatformIncome+SubMchIncome。
+      */
+    SubMchIncome: number;
+    /**
+      * 透传字段。
+发货标识，由开发者在调用米大师下单接口的 时候下发。
+      */
+    Metadata: string;
+    /**
+      * 支付金额。
+子订单支付金额，需要注意的是Amt = PlatformIncome+SubMchIncome。
+      */
+    Amt: number;
+    /**
+      * 原始金额。
+子订单原始金额，OriginalAmt>=Amt。
+      */
+    OriginalAmt: number;
+    /**
+      * 微信子商户号。
+      */
+    WxSubMchId?: string;
+    /**
+      * 结算信息。
+例如是否需要分账、是否需要支付确认等。
+      */
+    SettleInfo?: CloudSettleInfo;
+    /**
+      * 附加项信息列表。
+例如溢价信息、抵扣信息、积分信息、补贴信息
+通过该字段可以实现渠道方的优惠抵扣补贴等营销功能。
+      */
+    AttachmentInfoList?: Array<CloudAttachmentInfo>;
+}
+/**
  * 主播扩展信息
  */
 export interface AnchorExtendInfo {
@@ -7227,6 +7649,25 @@ export interface CreateCustAcctIdRequest {
       * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
       */
     Profile?: string;
+}
+/**
+ * 第三方渠道数据信息
+ */
+export interface CloudExternalChannelData {
+    /**
+      * 第三方渠道数据名。
+PAYMENT_ORDER_EXTERNAL_REQUEST_DATA: 支付下单请求数据
+PAYMENT_ORDER_EXTERNAL_RETURN_DATA: 支付下单返回数据
+PAYMENT_ORDER_EXTERNAL_NOTIFY_DATA: 支付通知数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalChannelDataName: string;
+    /**
+      * 第三方渠道数据值。
+当ExternalChannelDataType=PAYMENT时，反序列化格式请参考[ExternalChannelPaymentDataValue](https://midas-juxin-next.pages.woa.com/apidocs/external-channel-data/QueryExternalChannelData.html#ExternalChannelPaymentDataValue)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExternalChannelDataValue: string;
 }
 /**
  * DistributeApply返回参数结构体
@@ -7724,6 +8165,69 @@ export interface QueryBankTransactionDetailsRequest {
     Profile?: string;
 }
 /**
+ * 子订单详情
+ */
+export interface CloudSubOrderReturn {
+    /**
+      * 子订单号
+      */
+    SubOutTradeNo: string;
+    /**
+      * 米大师计费SubAppId，代表子商户
+      */
+    SubAppId: string;
+    /**
+      * 子订单商品名称
+      */
+    ProductName: string;
+    /**
+      * 子订单商品详情
+      */
+    ProductDetail: string;
+    /**
+      * 子订单平台应收金额，单位：分
+      */
+    PlatformIncome: number;
+    /**
+      * 子订单结算应收金额，单位：分
+      */
+    SubMchIncome: number;
+    /**
+      * 子订单支付金额
+      */
+    Amt: number;
+    /**
+      * 子订单原始金额
+      */
+    OriginalAmt: number;
+    /**
+      * 核销状态，1表示核销，0表示未核销
+      */
+    SettleCheck: number;
+    /**
+      * 结算信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SettleInfo: CloudSettleInfo;
+    /**
+      * 透传字段，由开发者在调用米大师下单接口的时候下发
+      */
+    Metadata: string;
+    /**
+      * 附加项信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachmentInfoList: CloudAttachmentInfo;
+    /**
+      * 渠道方应答的订单号，透传处理
+      */
+    ChannelExternalSubOrderId: string;
+    /**
+      * 微信子商户号
+      */
+    WxSubMchId: string;
+}
+/**
  * QueryExchangeRate请求参数结构体
  */
 export interface QueryExchangeRateRequest {
@@ -7784,25 +8288,49 @@ export interface QueryBillDownloadURLRequest {
     BillDate: string;
 }
 /**
- * RefundMemberTransaction返回参数结构体
+ * 子单退款信息
  */
-export interface RefundMemberTransactionResponse {
+export interface CloudSubRefundItem {
     /**
-      * 请求类型
+      * 渠道方应答的退款ID，透传处理
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestType?: string;
+    ChannelExternalRefundId: string;
     /**
-      * 银行流水号
+      * 渠道方应答的订单号，透传处理
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FrontSequenceNumber?: string;
+    ChannelExternalOrderId: string;
     /**
-      * 保留域
+      * 子单退款金额
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReservedMessage?: string;
+    RefundAmt: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 子单订单号
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    SubOutTradeNo: string;
+    /**
+      * 子单退款id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubRefundId: string;
+    /**
+      * 子应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAppId: string;
+    /**
+      * 渠道子单支付订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelSubOrderId: string;
+    /**
+      * 渠道子退款订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelSubRefundId: string;
 }
 /**
  * QueryOpenBankDownLoadUrl返回参数结构体
@@ -8478,25 +9006,61 @@ export interface QueryContractRelateShopResult {
     AliPayDesc?: string;
 }
 /**
- * UploadTaxList请求参数结构体
+ * Refund请求参数结构体
  */
-export interface UploadTaxListRequest {
+export interface RefundRequest {
     /**
-      * 平台渠道
+      * 用户ID，长度不小于5位， 仅支持字母和数字的组合
       */
-    Channel: number;
+    UserId: string;
     /**
-      * 起始月份，YYYY-MM
+      * 退款订单号，仅支持数字、 字母、下划线（_）、横杠字 符（-）、点（.）的组合
       */
-    BeginMonth: string;
+    RefundId: string;
     /**
-      * 结束月份。如果只上传一个月，结束月份等于起始月份
+      * 聚鑫分配的支付主MidasAppId
       */
-    EndMonth: string;
+    MidasAppId: string;
     /**
-      * 完税列表下载地址
+      * 退款金额，单位：分。备注：当该字段为空或者为0 时，系统会默认使用订单当 实付金额作为退款金额
       */
-    FileUrl: string;
+    TotalRefundAmt: number;
+    /**
+      * 聚鑫分配的安全ID
+      */
+    MidasSecretId: string;
+    /**
+      * 按照聚鑫安全密钥计算的签名
+      */
+    MidasSignature: string;
+    /**
+      * 商品订单，仅支持数字、字 母、下划线（_）、横杠字符 （-）、点（.）的组合。  OutTradeNo ,TransactionId 二选一,不能都为空,优先使用 OutTradeNo
+      */
+    OutTradeNo?: string;
+    /**
+      * 结算应收金额，单位：分
+      */
+    MchRefundAmt?: number;
+    /**
+      * 调用下单接口获取的聚鑫交 易订单。  OutTradeNo ,TransactionId 二选一,不能都为空,优先使用 OutTradeNo
+      */
+    TransactionId?: string;
+    /**
+      * 平台应收金额，单位：分
+      */
+    PlatformRefundAmt?: number;
+    /**
+      * 支持多个子订单批量退款单 个子订单退款支持传 SubOutTradeNo ，也支持传 SubOutTradeNoList ，都传的时候以 SubOutTradeNoList 为准。  如果传了子单退款细节，外 部不需要再传退款金额，平 台应退，商户应退金额，我 们可以直接根据子单退款算出来总和。
+      */
+    SubOrderRefundList?: Array<RefundOutSubOrderRefundList>;
+    /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+    MidasEnvironment?: string;
 }
 /**
  * ApplyWithdrawal请求参数结构体
@@ -8726,6 +9290,30 @@ export interface BindRelateAcctUnionPayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryCloudRefundOrder请求参数结构体
+ */
+export interface QueryCloudRefundOrderRequest {
+    /**
+      * 米大师分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 用户Id，长度不小于5位，仅支持字母和数字的组合
+      */
+    UserId: string;
+    /**
+      * 退款订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+      */
+    RefundId: string;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    MidasEnvironment?: string;
 }
 /**
  * UnifiedOrder请求参数结构体
@@ -9320,6 +9908,26 @@ export interface QueryMerchantPayWayListResponse {
     RequestId?: string;
 }
 /**
+ * 全局支付时间信息
+ */
+export interface CloudGlobalPayTimeInfo {
+    /**
+      * 订单开始时间。
+不指定时默认为当前时间。
+      */
+    StartTimestamp?: number;
+    /**
+      * 订单结束时间。
+逾期将会拒绝下单。不指定时默认为当前时间的7天后结束。
+      */
+    ExpireTimestamp?: number;
+    /**
+      * 时区。
+不指定时默认为28800，表示北京时间（东八区）。
+      */
+    TimeOffset?: number;
+}
+/**
  * QueryCustAcctIdBalance请求参数结构体
  */
 export interface QueryCustAcctIdBalanceRequest {
@@ -9490,6 +10098,72 @@ export interface QueryBankWithdrawCashDetailsResponse {
  * UploadTaxPayment返回参数结构体
  */
 export interface UploadTaxPaymentResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * QueryCloudRefundOrder返回参数结构体
+ */
+export interface QueryCloudRefundOrderResponse {
+    /**
+      * 该笔退款订单对应的UnifiedOrder下单时传入的OutTradeNo
+      */
+    OutTradeNo: string;
+    /**
+      * 该笔退款订单对应的支付成功后支付机构返回的支付订单号
+      */
+    ChannelExternalOrderId: string;
+    /**
+      * 该笔退款订单退款后支付机构返回的退款单号
+      */
+    ChannelExternalRefundId: string;
+    /**
+      * 内部请求微信支付、银行等支付机构的订单号
+      */
+    ChannelOrderId: string;
+    /**
+      * 请求退款时传的退款ID后查询退款时传的RefundId
+      */
+    RefundId: string;
+    /**
+      * 被使用的RefundId，业务可忽略该字段
+      */
+    UsedRefundId: string;
+    /**
+      * 退款总金额
+      */
+    TotalRefundAmt: number;
+    /**
+      * ISO货币代码
+      */
+    CurrencyType: string;
+    /**
+      * 退款状态码，退款提交成功后返回
+1:退款中
+2:退款成功
+3:退款失败
+      */
+    State: string;
+    /**
+      * 子单退款信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubRefundList: Array<CloudSubRefundItem>;
+    /**
+      * 透传字段，退款成功回调透传给应用，用于开发者透传自定义内容
+      */
+    Metadata: string;
+    /**
+      * 米大师分配的支付主MidasAppId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId: string;
+    /**
+      * 该笔退款订单退款后内部返回的退款单号
+      */
+    ChannelRefundId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9788,6 +10462,47 @@ export interface DistributeAccreditQueryResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 子订单列表
+ */
+export interface UnifiedOrderInSubOrderList {
+    /**
+      * 子订单结算应收金额，单位： 分
+      */
+    SubMchIncome: number;
+    /**
+      * 子订单平台应收金额，单位：分
+      */
+    PlatformIncome: number;
+    /**
+      * 子订单商品详情
+      */
+    ProductDetail: string;
+    /**
+      * 子订单商品名称
+      */
+    ProductName: string;
+    /**
+      * 聚鑫计费SubAppId，代表子商户
+      */
+    SubAppId: string;
+    /**
+      * 子订单号
+      */
+    SubOutTradeNo: string;
+    /**
+      * 子订单支付金额
+      */
+    Amt: number;
+    /**
+      * 发货标识，由业务在调用聚鑫下单接口的 时候下发
+      */
+    Metadata: string;
+    /**
+      * 子订单原始金额
+      */
+    OriginalAmt: number;
 }
 /**
  * 获取门店OpenId响应对象
@@ -10587,6 +11302,30 @@ export interface QueryTransferResultResponse {
     RequestId?: string;
 }
 /**
+ * CloseCloudOrder请求参数结构体
+ */
+export interface CloseCloudOrderRequest {
+    /**
+      * 米大师分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 用户Id，长度不小于5位，仅支持字母和数字的组合
+      */
+    UserId: string;
+    /**
+      * 开发者订单号
+      */
+    OutTradeNo: string;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    MidasEnvironment?: string;
+}
+/**
  * 发票结果V2
  */
 export interface CreateInvoiceResultV2 {
@@ -11214,6 +11953,30 @@ development 开发环境
     TransFee?: string;
 }
 /**
+ * CreateCloudSubMerchant返回参数结构体
+ */
+export interface CreateCloudSubMerchantResponse {
+    /**
+      * 子应用Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubAppId: string;
+    /**
+      * 渠道子商户Id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelSubMerchantId: string;
+    /**
+      * 层级，从0开始。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Level: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * QueryFundsTransactionDetails请求参数结构体
  */
 export interface QueryFundsTransactionDetailsRequest {
@@ -11410,6 +12173,56 @@ export interface QueryDeclareResult {
       * 错误码
       */
     Code: string;
+}
+/**
+ * RefundMemberTransaction返回参数结构体
+ */
+export interface RefundMemberTransactionResponse {
+    /**
+      * 请求类型
+      */
+    RequestType?: string;
+    /**
+      * 银行流水号
+      */
+    FrontSequenceNumber?: string;
+    /**
+      * 保留域
+      */
+    ReservedMessage?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * QueryCloudOrder请求参数结构体
+ */
+export interface QueryCloudOrderRequest {
+    /**
+      * 米大师分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 用户Id，长度不小于5位，仅支持字母和数字的组合
+      */
+    UserId: string;
+    /**
+      * 查询类型
+by_order:根据订单号查订单
+      */
+    Type: string;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    MidasEnvironment?: string;
+    /**
+      * 开发者的主订单号
+      */
+    OutTradeNo?: string;
 }
 /**
  * UnBindAcct返回参数结构体
@@ -11661,37 +12474,26 @@ export interface PayDataResult {
     PaymentOptionTen?: string;
 }
 /**
- * QueryOpenBankExternalSubMerchantBankAccount请求参数结构体
+ * ModifyBindedAccount返回参数结构体
  */
-export interface QueryOpenBankExternalSubMerchantBankAccountRequest {
+export interface ModifyBindedAccountResponse {
     /**
-      * 渠道商户ID。
+      * 错误码。响应成功："SUCCESS"，其他为不成功。
       */
-    ChannelMerchantId: string;
+    ErrCode: string;
     /**
-      * 渠道子商户ID。
+      * 响应消息。
       */
-    ChannelSubMerchantId: string;
+    ErrMessage: string;
     /**
-      * 渠道名称。
-__TENPAY__: 商企付
-__WECHAT__: 微信支付
-__ALIPAY__: 支付宝
+      * 该字段为null。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ChannelName: string;
+    Result: string;
     /**
-      * 支付方式。
-__EBANK_PAYMENT__: ebank支付
-__OPENBANK_PAYMENT__: openbank支付
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PaymentMethod: string;
-    /**
-      * 环境类型。
-__release__:生产环境
-__sandbox__:沙箱环境
-_不填默认为生产环境_
-      */
-    Environment?: string;
+    RequestId?: string;
 }
 /**
  * QueryReconciliationDocument返回参数结构体
@@ -12135,6 +12937,44 @@ export interface ApplyApplicationMaterialRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
+}
+/**
+ * QueryCloudChannelData请求参数结构体
+ */
+export interface QueryCloudChannelDataRequest {
+    /**
+      * 米大师分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 业务订单号，外部订单号
+      */
+    OutOrderNo: string;
+    /**
+      * 数据类型
+PAYMENT:支付
+      */
+    ExternalChannelDataType: string;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    MidasEnvironment?: string;
+    /**
+      * 子应用ID
+      */
+    SubAppId?: string;
+    /**
+      * 渠道订单号
+      */
+    ChannelOrderId?: string;
+    /**
+      * 渠道名称，指定渠道查询
+wechat:微信支付
+      */
+    Channel?: string;
 }
 /**
  * QueryOpenBankBankAccountBalance请求参数结构体
@@ -12672,61 +13512,30 @@ export interface TransferSinglePayResponse {
     RequestId?: string;
 }
 /**
- * Refund请求参数结构体
+ * 门店信息
  */
-export interface RefundRequest {
+export interface CloudStoreInfo {
     /**
-      * 用户ID，长度不小于5位， 仅支持字母和数字的组合
+      * 门店ID。
       */
-    UserId: string;
+    StoreId?: string;
     /**
-      * 退款订单号，仅支持数字、 字母、下划线（_）、横杠字 符（-）、点（.）的组合
+      * 门店名称。
       */
-    RefundId: string;
+    StoreName?: string;
     /**
-      * 聚鑫分配的支付主MidasAppId
+      * 门店地址。
       */
-    MidasAppId: string;
+    StoreAddress?: string;
     /**
-      * 退款金额，单位：分。备注：当该字段为空或者为0 时，系统会默认使用订单当 实付金额作为退款金额
+      * 门店地区代码。
       */
-    TotalRefundAmt: number;
+    StoreAreaCode?: string;
     /**
-      * 聚鑫分配的安全ID
+      * 设备ID。
+wechat_ecommerce渠道 - h5支付方式，此字段必填。
       */
-    MidasSecretId: string;
-    /**
-      * 按照聚鑫安全密钥计算的签名
-      */
-    MidasSignature: string;
-    /**
-      * 商品订单，仅支持数字、字 母、下划线（_）、横杠字符 （-）、点（.）的组合。  OutTradeNo ,TransactionId 二选一,不能都为空,优先使用 OutTradeNo
-      */
-    OutTradeNo?: string;
-    /**
-      * 结算应收金额，单位：分
-      */
-    MchRefundAmt?: number;
-    /**
-      * 调用下单接口获取的聚鑫交 易订单。  OutTradeNo ,TransactionId 二选一,不能都为空,优先使用 OutTradeNo
-      */
-    TransactionId?: string;
-    /**
-      * 平台应收金额，单位：分
-      */
-    PlatformRefundAmt?: number;
-    /**
-      * 支持多个子订单批量退款单 个子订单退款支持传 SubOutTradeNo ，也支持传 SubOutTradeNoList ，都传的时候以 SubOutTradeNoList 为准。  如果传了子单退款细节，外 部不需要再传退款金额，平 台应退，商户应退金额，我 们可以直接根据子单退款算出来总和。
-      */
-    SubOrderRefundList?: Array<RefundOutSubOrderRefundList>;
-    /**
-      * 环境名:
-release: 现网环境
-sandbox: 沙箱环境
-development: 开发环境
-缺省: release
-      */
-    MidasEnvironment?: string;
+    StoreDeviceId?: string;
 }
 /**
  * ContractOrder返回参数结构体
@@ -13867,6 +14676,228 @@ export interface CreateAnchorResponse {
     RequestId?: string;
 }
 /**
+ * UnifiedCloudOrder请求参数结构体
+ */
+export interface UnifiedCloudOrderRequest {
+    /**
+      * 米大师分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 用户Id。
+长度不小于5位，仅支持字母和数字的组合，长度限制以具体接入渠道为准
+      */
+    UserId: string;
+    /**
+      * 开发者主订单号。
+支付订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合，长度供参考，部分渠道存在长度更短的情况接入时请联系开发咨询
+      */
+    OutTradeNo: string;
+    /**
+      * 货币类型。
+ISO货币代码，CNY
+      */
+    CurrencyType: string;
+    /**
+      * 商品Id。
+业务自定义的商品id，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
+      */
+    ProductId: string;
+    /**
+      * 商品名称。
+业务自定义的商品名称，无需URL编码，长度限制以具体所接入渠道为准。
+      */
+    ProductName: string;
+    /**
+      * 商品详情。
+业务自定义的商品详情，无需URL编码，长度限制以具体所接入渠道为准。
+      */
+    ProductDetail: string;
+    /**
+      * 原始金额。
+单位：分，需要注意的是，OriginalAmt>=TotalAmt
+      */
+    OriginalAmt: number;
+    /**
+      * 支付金额。
+单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome。
+      */
+    TotalAmt: number;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    MidasEnvironment?: string;
+    /**
+      * 支付SubAppId。
+米大师计费SubAppId，代表子商户。指定使用该商户的商户号下单时必传。
+      */
+    SubAppId?: string;
+    /**
+      * 顶层支付渠道。
+银行收单:
+openbank_ccb: 建设银行
+openbank_icbc: 工商银行
+openbank_cmb: 招商银行
+openbank_ping: 平安银行
+openbank_icbc_jft：工商银行聚付通
+非银行收单，可以为空
+      */
+    RealChannel?: string;
+    /**
+      * 支付渠道。
+wechat：微信支付
+wechat_ecommerce: 微信电商收付通
+open_alipay: 支付宝
+open_quickpass: 银联云闪付
+icbc_epay: 工银e支付
+foreign_cardpay: 外卡支付
+icbc_jft_wechat: 工行聚付通-微信
+icbc_jft_alipay: 工行聚付通-支付宝
+icbc_jft_epay: 工行聚付通-e支付
+指定渠道下单时必传
+      */
+    Channel?: string;
+    /**
+      * 透传字段。
+支付成功回调透传给应用，用于开发者透传自定义内容。
+      */
+    Metadata?: string;
+    /**
+      * 数量。
+购买数量,不传默认为1。
+      */
+    Quantity?: number;
+    /**
+      * Web端回调地址。
+Web端网页回调地址，仅当Web端SDK使用页面跳转方式时有效。
+      */
+    CallbackUrl?: string;
+    /**
+      * 支付取消地址。
+      */
+    CancelUrl?: string;
+    /**
+      * 微信AppId。
+wechat渠道或wchat_ecommerce渠道可以指定下单时的wxappid。
+      */
+    WxAppId?: string;
+    /**
+      * 微信SubAppId。
+wechat渠道可以指定下单时的sub_appid。
+      */
+    WxSubAppId?: string;
+    /**
+      * 微信公众号/小程序OpenId。
+微信公众号/小程序支付时为必选，需要传微信下的openid。
+      */
+    WxOpenId?: string;
+    /**
+      * 微信公众号/小程序SubOpenId。
+在服务商模式下，微信公众号/小程序支付时wx_sub_openid和wx_openid二选一。
+      */
+    WxSubOpenId?: string;
+    /**
+      * 平台应收金额。
+单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome
+      */
+    TotalPlatformIncome?: number;
+    /**
+      * 结算应收金额。
+单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome
+      */
+    TotalMchIncome?: number;
+    /**
+      * 子订单列表。
+格式：子订单号、子应用Id、金额。压缩后最长不可超过32K字节(去除空格，换行，制表符等无意义字符)。
+      */
+    SubOrderList?: Array<CloudSubOrder>;
+    /**
+      * 结算信息。
+例如是否需要分账、是否需要支付确认等，
+注意：如果子单列表中传入了SettleInfo，在主单中不可再传入SettleInfo字段。
+      */
+    SettleInfo?: CloudSettleInfo;
+    /**
+      * 附加项信息列表。
+例如溢价信息、抵扣信息、积分信息、补贴信息
+通过该字段可以实现渠道方的优惠抵扣补贴等营销功能
+注意：当传SubOrderList时，请在子单信息中传附加项信息，不要在主单中传该字段。
+      */
+    AttachmentInfoList?: Array<CloudAttachmentInfo>;
+    /**
+      * 支付通知地址。
+调用方可通过该字段传入自定义支付通知地址。
+      */
+    PaymentNotifyUrl?: string;
+    /**
+      * 支付场景。
+需要结合 RealChannel和Channel字段使用可选值:
+wechat-app 微信APP支付方式
+wechat-mini 微信小程序支付，示例：当 RealChannel=wechat Channel=wechat PayScene=wechat-mini时，内部会直接以小程序方式调用微信统一下单接口。
+      */
+    PayScene?: string;
+    /**
+      * 语言代码。
+(BCP-47格式)，取值请参考https://mpay.pages.woa.com/zh/api/objectdefinitions/objects/#mpayapisordersapplicationcontextapplicationcontext
+      */
+    LocaleCode?: string;
+    /**
+      * 地区代码。
+取值请参考https://mpay.pages.woa.com/zh/api/objectdefinitions/objects/#mpayapisordersapplicationcontextapplicationcontext
+      */
+    RegionCode?: string;
+    /**
+      * 用户IP。
+请求用户的IP地址，特定的渠道或特定的支付方式，此字段为必填
+wechat_ecommerce渠道 - h5支付方式，此字段必填。
+      */
+    UserClientIp?: string;
+    /**
+      * 渠道订单号生成模式。
+枚举值。决定请求渠道方时的订单号的生成模式，详情请联系米大师沟通。不指定时默认为由米大师自行生成。
+      */
+    ChannelOrderIdMode?: string;
+    /**
+      * 全局支付时间信息。
+      */
+    GlobalPayTimeInfo?: CloudGlobalPayTimeInfo;
+    /**
+      * 渠道应用Id取用方式。
+USE_APPID 使用渠道应用Id;
+USE_SUB_APPID 使用子渠道应用Id;
+USE_APPID_AND_SUB_APPID 既使用渠道应用Id也使用子渠道应用ID。
+      */
+    ChannelAppIdPolicy?: string;
+    /**
+      * 门店信息。
+特定的渠道或特定的支付方式，此字段为必填
+wechat_ecommerce渠道 - h5支付方式，此字段必填
+      */
+    StoreInfo?: CloudStoreInfo;
+    /**
+      * 客户端信息。
+特定的渠道或特定的支付方式，此字段为必填
+wechat_ecommerce渠道 - h5支付方式，此字段必填
+      */
+    ClientInfo?: CloudClientInfo;
+    /**
+      * 渠道扩展促销列表。
+可将各个渠道的促销信息放于该列表。
+      */
+    ExternalPromptGroupList?: Array<CloudExternalPromptGroup>;
+    /**
+      * 收单模式。
+ORDER_RECEIVE_MODE_COMMON - 普通支付
+ORDER_RECEIVE_MODE_COMBINE - 合单支付
+ORDER_RECEIVE_MODE_V_COMBINE - 虚拟合单支付
+若不传入该字段，则会根据是否传入子单来判断是 普通支付 还是 合单支付
+      */
+    OrderReceiveMode?: string;
+}
+/**
  * 商户风险信息
  */
 export interface MerchantRiskInfo {
@@ -14190,6 +15221,45 @@ export interface MerchantManagementResult {
     List: Array<MerchantManagementList>;
 }
 /**
+ * UploadTaxList请求参数结构体
+ */
+export interface UploadTaxListRequest {
+    /**
+      * 平台渠道
+      */
+    Channel: number;
+    /**
+      * 起始月份，YYYY-MM
+      */
+    BeginMonth: string;
+    /**
+      * 结束月份。如果只上传一个月，结束月份等于起始月份
+      */
+    EndMonth: string;
+    /**
+      * 完税列表下载地址
+      */
+    FileUrl: string;
+}
+/**
+ * 结算信息对象
+ */
+export interface CloudSettleInfo {
+    /**
+      * 是否需要支付确认。
+0: 不需要支付确认
+1: 需要支付确认
+传1时，需要在支付完成后成功调用了《支付确认》接口，该笔订单才会被清分出去
+      */
+    NeedToBeConfirmed?: number;
+    /**
+      * 是否指定分账。
+0: 不指定分账
+1: 指定分账
+      */
+    ProfitSharing?: number;
+}
+/**
  * 签约信息
  */
 export interface RegisterInfo {
@@ -14508,6 +15578,46 @@ export interface PayOrderResult {
     WechatPaySign: string;
 }
 /**
+ * CreateCloudSubMerchant请求参数结构体
+ */
+export interface CreateCloudSubMerchantRequest {
+    /**
+      * 米大师分配的支付主MidasAppId，根应用Id。
+      */
+    MidasAppId: string;
+    /**
+      * 父应用Id。
+      */
+    ParentAppId: string;
+    /**
+      * 子商户名。
+      */
+    SubMchName: string;
+    /**
+      * 子商户描述。
+      */
+    SubMchDescription: string;
+    /**
+      * 环境类型
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    MidasEnvironment?: string;
+    /**
+      * 子应用Id，为空则自动创建子应用id。
+      */
+    SubAppId?: string;
+    /**
+      * 子商户名缩写。
+      */
+    SubMchShortName?: string;
+    /**
+      * 业务平台自定义的子商户Id，唯一。
+      */
+    OutSubMerchantId?: string;
+}
+/**
  * CreateCustAcctId返回参数结构体
  */
 export interface CreateCustAcctIdResponse {
@@ -14550,6 +15660,21 @@ export interface QueryAgentTaxPaymentBatchRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
+}
+/**
+ * 渠道方用户信息
+ */
+export interface CloudChannelExternalUserInfo {
+    /**
+      * 渠道方用户类型，枚举值:
+WX_OPENID 微信支付类型
+ALIPAY_BUYERID 支付宝支付类型
+      */
+    ChannelExternalUserType: string;
+    /**
+      * 渠道方用户Id
+      */
+    ChannelExternalUserId: string;
 }
 /**
  * ApplyReconciliationFile请求参数结构体
@@ -15207,6 +16332,31 @@ export interface CheckAcctResponse {
     RequestId?: string;
 }
 /**
+ * 退款子单
+ */
+export interface CloudSubOrderRefund {
+    /**
+      * 子订单退款金额
+      */
+    RefundAmt: number;
+    /**
+      * 平台应退金额
+      */
+    PlatformRefundAmt: number;
+    /**
+      * 商家应退金额
+      */
+    SubMchRefundAmt: number;
+    /**
+      * 子订单号
+      */
+    SubOutTradeNo: string;
+    /**
+      * 子退款单号，调用方需要保证全局唯一性
+      */
+    SubRefundId: string;
+}
+/**
  * 付款人查询数据
  */
 export interface QueryPayerinfoData {
@@ -15389,22 +16539,9 @@ export interface DownloadReconciliationUrlResponse {
     RequestId?: string;
 }
 /**
- * ModifyBindedAccount返回参数结构体
+ * CloseCloudOrder返回参数结构体
  */
-export interface ModifyBindedAccountResponse {
-    /**
-      * 错误码。响应成功："SUCCESS"，其他为不成功。
-      */
-    ErrCode: string;
-    /**
-      * 响应消息。
-      */
-    ErrMessage: string;
-    /**
-      * 该字段为null。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result: string;
+export interface CloseCloudOrderResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -15457,6 +16594,23 @@ export interface QuerySinglePayResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Items: Array<QuerySinglePayItem>;
+}
+/**
+ * 渠道扩展促销信息
+ */
+export interface CloudExternalPromptInfo {
+    /**
+      * 优惠商品信息类型。
+      */
+    ExternalPromptType: string;
+    /**
+      * 优惠商品信息数据。
+      */
+    ExternalPromptValue: string;
+    /**
+      * 优惠商品名称。
+      */
+    ExternalPromptName?: string;
 }
 /**
  * DistributeCancel返回参数结构体

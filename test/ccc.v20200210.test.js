@@ -218,6 +218,16 @@ it("ccc.v20200210.CreateUserSig", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeProtectedTelCdr", async function () {
+    try {
+       const data = await client.DescribeProtectedTelCdr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeCallInMetrics", async function () {
     try {
        const data = await client.DescribeCallInMetrics({})

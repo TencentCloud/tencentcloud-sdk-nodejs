@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadExternalAnchorInfo", req, cb);
     }
     /**
+     * 根据订单号或用户ID，查询支付订单状态。
+     */
+    async QueryCloudOrder(req, cb) {
+        return this.request("QueryCloudOrder", req, cb);
+    }
+    /**
      * 会员提现-不验证。此接口受理会员发起的提现申请。会员子账户的可提现余额、可用余额会减少，市场的资金汇总账户(监管账户)会减少相应的发生金额，提现到会员申请的收款账户。
      */
     async WithdrawCashMembership(req, cb) {
@@ -116,6 +122,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DownloadBill(req, cb) {
         return this.request("DownloadBill", req, cb);
+    }
+    /**
+     * 云支付-查询合同明细接口
+     */
+    async ViewContract(req, cb) {
+        return this.request("ViewContract", req, cb);
     }
     /**
      * 查询银行子账户余额。查询会员子账户以及平台的功能子账户的余额。
@@ -280,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryContractPayWayList", req, cb);
     }
     /**
+     * 创建子商户
+     */
+    async CreateCloudSubMerchant(req, cb) {
+        return this.request("CreateCloudSubMerchant", req, cb);
+    }
+    /**
      * 直播平台-删除代理商完税信息
      */
     async DeleteAgentTaxPaymentInfo(req, cb) {
@@ -334,10 +352,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ConfirmOrder", req, cb);
     }
     /**
-     * 云支付-添加商户接口
+     * 云支付-查询合同可关联门店接口
      */
-    async AddMerchant(req, cb) {
-        return this.request("AddMerchant", req, cb);
+    async QueryContractRelateShop(req, cb) {
+        return this.request("QueryContractRelateShop", req, cb);
     }
     /**
      * 云支付-查询门店明细接口
@@ -454,10 +472,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncContractData", req, cb);
     }
     /**
-     * 云支付-查询合同明细接口
+     * 直播平台-上传代理商完税列表
      */
-    async ViewContract(req, cb) {
-        return this.request("ViewContract", req, cb);
+    async UploadTaxList(req, cb) {
+        return this.request("UploadTaxList", req, cb);
     }
     /**
      * 灵云-重新绑定账号
@@ -540,6 +558,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RevokeRechargeByThirdPay(req, cb) {
         return this.request("RevokeRechargeByThirdPay", req, cb);
+    }
+    /**
+     * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时，用微信零钱支付的退款约20分钟内到账，银行卡支付的退款约3个工作日后到账。
+     */
+    async QueryCloudRefundOrder(req, cb) {
+        return this.request("QueryCloudRefundOrder", req, cb);
     }
     /**
      * 云支付-下载机构文件接口
@@ -639,10 +663,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevResigterBillSupportWithdraw", req, cb);
     }
     /**
-     * 云企付-查询对账单下载地址
+     * 发起支付等渠道操作后，可以调用该接口查询渠道的数据。
      */
-    async QueryOpenBankDownLoadUrl(req, cb) {
-        return this.request("QueryOpenBankDownLoadUrl", req, cb);
+    async QueryCloudChannelData(req, cb) {
+        return this.request("QueryCloudChannelData", req, cb);
     }
     /**
      * 云支付-查询城市编码接口
@@ -669,10 +693,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseOpenBankPaymentOrder", req, cb);
     }
     /**
-     * 直播平台-上传代理商完税列表
+     * 如交易订单需退款，可以通过本接口将支付款全部或部分退还给付款方，聚鑫将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。最长支持1年的订单退款。在订单包含多个子订单的情况下，如果使用本接口传入OutTradeNo或TransactionId退款，则只支持全单退款；如果需要部分退款，请通过传入子订单的方式来指定部分金额退款。
      */
-    async UploadTaxList(req, cb) {
-        return this.request("UploadTaxList", req, cb);
+    async RefundCloudOrder(req, cb) {
+        return this.request("RefundCloudOrder", req, cb);
     }
     /**
      * 云支付-分账授权申请接口
@@ -733,6 +757,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RegisterBill(req, cb) {
         return this.request("RegisterBill", req, cb);
+    }
+    /**
+     * 云企付-查询对账单下载地址
+     */
+    async QueryOpenBankDownLoadUrl(req, cb) {
+        return this.request("QueryOpenBankDownLoadUrl", req, cb);
     }
     /**
      * 云支付-查询订单付款状态
@@ -872,10 +902,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RefundMemberTransaction", req, cb);
     }
     /**
-     * 云支付-查询合同可关联门店接口
+     * 云支付-添加商户接口
      */
-    async QueryContractRelateShop(req, cb) {
-        return this.request("QueryContractRelateShop", req, cb);
+    async AddMerchant(req, cb) {
+        return this.request("AddMerchant", req, cb);
     }
     /**
      * 云企付-子商户银行卡列表查询
@@ -912,6 +942,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryOpenBankExternalSubMerchantRegistration(req, cb) {
         return this.request("QueryOpenBankExternalSubMerchantRegistration", req, cb);
+    }
+    /**
+     * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+     */
+    async UnifiedCloudOrder(req, cb) {
+        return this.request("UnifiedCloudOrder", req, cb);
     }
     /**
      * 云支付-查询支付方式费率及自定义表单项接口
@@ -972,6 +1008,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryReconciliationDocument(req, cb) {
         return this.request("QueryReconciliationDocument", req, cb);
+    }
+    /**
+     * 通过此接口关闭此前已创建的订单。关闭后，用户将无法继续付款，仅能关闭创建后未支付的订单。
+     */
+    async CloseCloudOrder(req, cb) {
+        return this.request("CloseCloudOrder", req, cb);
     }
     /**
      * 灵云-查询超额信息

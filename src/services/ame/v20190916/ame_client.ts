@@ -57,6 +57,7 @@ import {
   SearchKTVMusicsResponse,
   DescribeItemByIdRequest,
   PutMusicOnTheShelvesResponse,
+  SyncRobotCommand,
   DescribeKTVSingerMusicsResponse,
   DescribeItemsResponse,
   DescribePkgOfflineMusicResponse,

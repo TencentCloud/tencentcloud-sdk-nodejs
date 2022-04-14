@@ -51,23 +51,27 @@ import {
   QueryOpenBankDownLoadUrlResult,
   BindAccountResponse,
   CreateInvoiceResultData,
+  CloudClientInfo,
   FileItem,
   UnbindOpenBankExternalSubMerchantBankAccountRequest,
   CreateRedInvoiceItem,
   AddMerchantResult,
-  CloseOpenBankPaymentOrderResponse,
+  QueryOpenBankExternalSubMerchantRegistrationRequest,
   CreateTransferBatchResponse,
   BindAccountRequest,
+  QueryCloudChannelDataResponse,
   QuerySinglePayResponse,
   QueryCustAcctIdBalanceResponse,
   CreateRedInvoiceRequest,
   QueryAcctInfoListResponse,
   ContractInfo,
+  QueryOpenBankExternalSubMerchantBankAccountRequest,
   ExternalReturnContractInfo,
   ExecuteMemberTransactionResponse,
   OrganizationInfo,
   QueryApplicationMaterialRequest,
   ConfirmOrderRequest,
+  CloudExternalPromptGroup,
   ModifyMerchantResponse,
   ReturnContractInfo,
   QuerySmallAmountTransferResponse,
@@ -96,6 +100,7 @@ import {
   QueryInvoiceResultData,
   FundsTransactionItem,
   AddMerchantResponse,
+  RefundCloudOrderRequest,
   RegisterBillResponse,
   ApplyReWithdrawalRequest,
   DownloadFileResult,
@@ -115,10 +120,11 @@ import {
   QueryShopOpenIdRequest,
   QueryBalanceResponse,
   CreateOpenBankOrderPaymentResult,
-  QueryOpenBankExternalSubMerchantRegistrationRequest,
+  CloseOpenBankPaymentOrderResponse,
   TerminateContractRequest,
   OpenBankSceneInfo,
   QueryMaliciousRegistrationResponse,
+  RefundCloudOrderResponse,
   QueryBankClearRequest,
   QueryInvoiceRequest,
   CreateOpenBankMerchantResult,
@@ -146,9 +152,10 @@ import {
   QueryBatchPaymentResultDataInfo,
   ContractOrderInSubOrder,
   RegisterBehaviorRequest,
-  UnifiedOrderInSubOrderList,
+  UnifiedCloudOrderResponse,
   UnbindOpenBankExternalSubMerchantBankAccountResponse,
   QueryTradeRequest,
+  CloudOrderReturn,
   QueryBankWithdrawCashDetailsRequest,
   QueryOpenBankBindExternalSubMerchantBankAccountResult,
   QueryExceedingInfoResult,
@@ -170,6 +177,7 @@ import {
   QueryOrderOutOrderList,
   ModifyAgentTaxPaymentInfoResponse,
   QueryBatchPaymentResultResponse,
+  CloudAttachmentInfo,
   RevokeRechargeByThirdPayResponse,
   QueryOpenBankDailyReceiptDownloadUrlRequest,
   CreateAcctRequest,
@@ -195,6 +203,7 @@ import {
   QueryReconciliationFileApplyInfoResponse,
   BindRelateAcctUnionPayRequest,
   QueryFundsTransactionDetailsResult,
+  QueryCloudOrderResponse,
   QueryItem,
   Paging,
   RegisterBehaviorResponse,
@@ -215,6 +224,7 @@ import {
   CreateSinglePayResult,
   QueryAcctInfoResponse,
   MigrateOrderRefundQueryRequest,
+  CloudSubOrder,
   AnchorExtendInfo,
   QueryOpenBankExternalSubMerchantRegistrationResponse,
   GetBillDownloadUrlRequest,
@@ -225,6 +235,7 @@ import {
   SyncContractDataRequest,
   QueryRefundRequest,
   CreateCustAcctIdRequest,
+  CloudExternalChannelData,
   DistributeApplyResponse,
   CreateBatchPaymentData,
   DistributeQueryRequest,
@@ -235,10 +246,11 @@ import {
   OpenBankRedirectInfo,
   ViewContractRequest,
   QueryBankTransactionDetailsRequest,
+  CloudSubOrderReturn,
   QueryExchangeRateRequest,
   AddContractResponse,
   QueryBillDownloadURLRequest,
-  RefundMemberTransactionResponse,
+  CloudSubRefundItem,
   QueryOpenBankDownLoadUrlResponse,
   RevResigterBillSupportWithdrawResponse,
   ApplyApplicationMaterialResponse,
@@ -252,13 +264,14 @@ import {
   ViewContractResult,
   QueryAcctItem,
   QueryContractRelateShopResult,
-  UploadTaxListRequest,
+  RefundRequest,
   ApplyWithdrawalRequest,
   QueryAssignmentResponse,
   QuerySinglePaymentResultResponse,
   QueryMemberBindResponse,
   QueryMemberBindRequest,
   BindRelateAcctUnionPayResponse,
+  QueryCloudRefundOrderRequest,
   UnifiedOrderRequest,
   RechargeByThirdPayRequest,
   DistributeRemoveReceiverResponse,
@@ -274,18 +287,21 @@ import {
   SupportBankInfo,
   ModifyMntMbrBindRelateAcctBankCodeRequest,
   QueryMerchantPayWayListResponse,
+  CloudGlobalPayTimeInfo,
   QueryCustAcctIdBalanceRequest,
   ReviseMbrPropertyRequest,
   AgentTaxPayment,
   UploadFileRequest,
   QueryBankWithdrawCashDetailsResponse,
   UploadTaxPaymentResponse,
+  QueryCloudRefundOrderResponse,
   AgencyClientInfo,
   QueryTradeData,
   QueryOpenBankUnbindExternalSubMerchantBankAccountResult,
   ApplyDeclareResult,
   ContractOrderRequest,
   DistributeAccreditQueryResponse,
+  UnifiedOrderInSubOrderList,
   QueryShopOpenIdResult,
   ApplyReWithdrawalResponse,
   RegisterBillRequest,
@@ -313,6 +329,7 @@ import {
   TransferDetailRequest,
   QueryOrderStatusResponse,
   QueryTransferResultResponse,
+  CloseCloudOrderRequest,
   CreateInvoiceResultV2,
   QueryAcctInfoRequest,
   DescribeChargeDetailResponse,
@@ -330,6 +347,7 @@ import {
   TransferItem,
   OrderItem,
   RefundMemberTransactionRequest,
+  CreateCloudSubMerchantResponse,
   QueryFundsTransactionDetailsRequest,
   BindOpenBankExternalSubMerchantBankAccountResult,
   CheckAmountRequest,
@@ -337,6 +355,8 @@ import {
   DistributeCancelRequest,
   QueryOpenBankSupportBankListResponse,
   QueryDeclareResult,
+  RefundMemberTransactionResponse,
+  QueryCloudOrderRequest,
   UnBindAcctResponse,
   QueryCommonTransferRechargeRequest,
   GetBillDownloadUrlResponse,
@@ -345,7 +365,7 @@ import {
   OpenBankPayeeInfo,
   AddShopResult,
   PayDataResult,
-  QueryOpenBankExternalSubMerchantBankAccountRequest,
+  ModifyBindedAccountResponse,
   QueryReconciliationDocumentResponse,
   QueryBankTransactionDetailsResponse,
   TransferSinglePayRequest,
@@ -360,6 +380,7 @@ import {
   BankBranchInfo,
   ContractUserInfo,
   ApplyApplicationMaterialRequest,
+  QueryCloudChannelDataRequest,
   QueryOpenBankBankAccountBalanceRequest,
   ModifyAgentTaxPaymentInfoRequest,
   DownloadReconciliationUrlRequest,
@@ -377,7 +398,7 @@ import {
   OpenBankProfitShareInfo,
   MigrateOrderRefundResponse,
   TransferSinglePayResponse,
-  RefundRequest,
+  CloudStoreInfo,
   ContractOrderResponse,
   QueryInvoiceResponse,
   QueryOpenBankBankAccountBalanceResponse,
@@ -413,6 +434,7 @@ import {
   DescribeOrderStatusRequest,
   ChannelContractInfo,
   CreateAnchorResponse,
+  UnifiedCloudOrderRequest,
   MerchantRiskInfo,
   QueryPayerinfoResult,
   QueryOrderStatusResult,
@@ -425,6 +447,8 @@ import {
   QueryMerchantBalanceResponse,
   CloseOrderResponse,
   MerchantManagementResult,
+  UploadTaxListRequest,
+  CloudSettleInfo,
   RegisterInfo,
   QueryOpenBankPaymentOrderResponse,
   QueryMaliciousRegistrationRequest,
@@ -433,8 +457,10 @@ import {
   UploadFileResult,
   DescribeChargeDetailRequest,
   PayOrderResult,
+  CreateCloudSubMerchantRequest,
   CreateCustAcctIdResponse,
   QueryAgentTaxPaymentBatchRequest,
+  CloudChannelExternalUserInfo,
   ApplyReconciliationFileRequest,
   RegisterBillSupportWithdrawResponse,
   QueryOpenBankBindExternalSubMerchantBankAccountResponse,
@@ -454,14 +480,16 @@ import {
   QueryTransferBatchRequest,
   TransferSinglePayData,
   CheckAcctResponse,
+  CloudSubOrderRefund,
   QueryPayerinfoData,
   ApplyOutwardOrderResult,
   ApplyPayerInfoRequest,
   CreateBatchPaymentBatchData,
   DownloadReconciliationUrlResponse,
-  ModifyBindedAccountResponse,
+  CloseCloudOrderResponse,
   DistributeCancelResult,
   QuerySinglePayResult,
+  CloudExternalPromptInfo,
   DistributeCancelResponse,
   QueryOpenBankBankBranchListRequest,
   QueryOpenBankBankBranchListResult,
@@ -598,6 +626,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据订单号或用户ID，查询支付订单状态。
+   */
+  async QueryCloudOrder(
+    req: QueryCloudOrderRequest,
+    cb?: (error: string, rep: QueryCloudOrderResponse) => void
+  ): Promise<QueryCloudOrderResponse> {
+    return this.request("QueryCloudOrder", req, cb)
+  }
+
+  /**
    * 会员提现-不验证。此接口受理会员发起的提现申请。会员子账户的可提现余额、可用余额会减少，市场的资金汇总账户(监管账户)会减少相应的发生金额，提现到会员申请的收款账户。
    */
   async WithdrawCashMembership(
@@ -645,6 +683,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DownloadBillResponse) => void
   ): Promise<DownloadBillResponse> {
     return this.request("DownloadBill", req, cb)
+  }
+
+  /**
+   * 云支付-查询合同明细接口
+   */
+  async ViewContract(
+    req: ViewContractRequest,
+    cb?: (error: string, rep: ViewContractResponse) => void
+  ): Promise<ViewContractResponse> {
+    return this.request("ViewContract", req, cb)
   }
 
   /**
@@ -918,6 +966,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建子商户
+   */
+  async CreateCloudSubMerchant(
+    req: CreateCloudSubMerchantRequest,
+    cb?: (error: string, rep: CreateCloudSubMerchantResponse) => void
+  ): Promise<CreateCloudSubMerchantResponse> {
+    return this.request("CreateCloudSubMerchant", req, cb)
+  }
+
+  /**
    * 直播平台-删除代理商完税信息
    */
   async DeleteAgentTaxPaymentInfo(
@@ -1008,13 +1066,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云支付-添加商户接口
+   * 云支付-查询合同可关联门店接口
    */
-  async AddMerchant(
-    req: AddMerchantRequest,
-    cb?: (error: string, rep: AddMerchantResponse) => void
-  ): Promise<AddMerchantResponse> {
-    return this.request("AddMerchant", req, cb)
+  async QueryContractRelateShop(
+    req: QueryContractRelateShopRequest,
+    cb?: (error: string, rep: QueryContractRelateShopResponse) => void
+  ): Promise<QueryContractRelateShopResponse> {
+    return this.request("QueryContractRelateShop", req, cb)
   }
 
   /**
@@ -1208,13 +1266,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云支付-查询合同明细接口
+   * 直播平台-上传代理商完税列表
    */
-  async ViewContract(
-    req: ViewContractRequest,
-    cb?: (error: string, rep: ViewContractResponse) => void
-  ): Promise<ViewContractResponse> {
-    return this.request("ViewContract", req, cb)
+  async UploadTaxList(
+    req: UploadTaxListRequest,
+    cb?: (error: string, rep: UploadTaxListResponse) => void
+  ): Promise<UploadTaxListResponse> {
+    return this.request("UploadTaxList", req, cb)
   }
 
   /**
@@ -1349,6 +1407,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RevokeRechargeByThirdPayResponse) => void
   ): Promise<RevokeRechargeByThirdPayResponse> {
     return this.request("RevokeRechargeByThirdPay", req, cb)
+  }
+
+  /**
+   * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时，用微信零钱支付的退款约20分钟内到账，银行卡支付的退款约3个工作日后到账。
+   */
+  async QueryCloudRefundOrder(
+    req: QueryCloudRefundOrderRequest,
+    cb?: (error: string, rep: QueryCloudRefundOrderResponse) => void
+  ): Promise<QueryCloudRefundOrderResponse> {
+    return this.request("QueryCloudRefundOrder", req, cb)
   }
 
   /**
@@ -1513,13 +1581,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付-查询对账单下载地址
+   * 发起支付等渠道操作后，可以调用该接口查询渠道的数据。
    */
-  async QueryOpenBankDownLoadUrl(
-    req: QueryOpenBankDownLoadUrlRequest,
-    cb?: (error: string, rep: QueryOpenBankDownLoadUrlResponse) => void
-  ): Promise<QueryOpenBankDownLoadUrlResponse> {
-    return this.request("QueryOpenBankDownLoadUrl", req, cb)
+  async QueryCloudChannelData(
+    req: QueryCloudChannelDataRequest,
+    cb?: (error: string, rep: QueryCloudChannelDataResponse) => void
+  ): Promise<QueryCloudChannelDataResponse> {
+    return this.request("QueryCloudChannelData", req, cb)
   }
 
   /**
@@ -1563,13 +1631,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 直播平台-上传代理商完税列表
+   * 如交易订单需退款，可以通过本接口将支付款全部或部分退还给付款方，聚鑫将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。最长支持1年的订单退款。在订单包含多个子订单的情况下，如果使用本接口传入OutTradeNo或TransactionId退款，则只支持全单退款；如果需要部分退款，请通过传入子订单的方式来指定部分金额退款。
    */
-  async UploadTaxList(
-    req: UploadTaxListRequest,
-    cb?: (error: string, rep: UploadTaxListResponse) => void
-  ): Promise<UploadTaxListResponse> {
-    return this.request("UploadTaxList", req, cb)
+  async RefundCloudOrder(
+    req: RefundCloudOrderRequest,
+    cb?: (error: string, rep: RefundCloudOrderResponse) => void
+  ): Promise<RefundCloudOrderResponse> {
+    return this.request("RefundCloudOrder", req, cb)
   }
 
   /**
@@ -1670,6 +1738,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegisterBillResponse) => void
   ): Promise<RegisterBillResponse> {
     return this.request("RegisterBill", req, cb)
+  }
+
+  /**
+   * 云企付-查询对账单下载地址
+   */
+  async QueryOpenBankDownLoadUrl(
+    req: QueryOpenBankDownLoadUrlRequest,
+    cb?: (error: string, rep: QueryOpenBankDownLoadUrlResponse) => void
+  ): Promise<QueryOpenBankDownLoadUrlResponse> {
+    return this.request("QueryOpenBankDownLoadUrl", req, cb)
   }
 
   /**
@@ -1898,13 +1976,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云支付-查询合同可关联门店接口
+   * 云支付-添加商户接口
    */
-  async QueryContractRelateShop(
-    req: QueryContractRelateShopRequest,
-    cb?: (error: string, rep: QueryContractRelateShopResponse) => void
-  ): Promise<QueryContractRelateShopResponse> {
-    return this.request("QueryContractRelateShop", req, cb)
+  async AddMerchant(
+    req: AddMerchantRequest,
+    cb?: (error: string, rep: AddMerchantResponse) => void
+  ): Promise<AddMerchantResponse> {
+    return this.request("AddMerchant", req, cb)
   }
 
   /**
@@ -1965,6 +2043,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryOpenBankExternalSubMerchantRegistrationResponse) => void
   ): Promise<QueryOpenBankExternalSubMerchantRegistrationResponse> {
     return this.request("QueryOpenBankExternalSubMerchantRegistration", req, cb)
+  }
+
+  /**
+   * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+   */
+  async UnifiedCloudOrder(
+    req: UnifiedCloudOrderRequest,
+    cb?: (error: string, rep: UnifiedCloudOrderResponse) => void
+  ): Promise<UnifiedCloudOrderResponse> {
+    return this.request("UnifiedCloudOrder", req, cb)
   }
 
   /**
@@ -2065,6 +2153,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryReconciliationDocumentResponse) => void
   ): Promise<QueryReconciliationDocumentResponse> {
     return this.request("QueryReconciliationDocument", req, cb)
+  }
+
+  /**
+   * 通过此接口关闭此前已创建的订单。关闭后，用户将无法继续付款，仅能关闭创建后未支付的订单。
+   */
+  async CloseCloudOrder(
+    req: CloseCloudOrderRequest,
+    cb?: (error: string, rep: CloseCloudOrderResponse) => void
+  ): Promise<CloseCloudOrderResponse> {
+    return this.request("CloseCloudOrder", req, cb)
   }
 
   /**

@@ -228,6 +228,10 @@ appid，用来唯一标识网站或应用
 1：md5
       */
     NameCryptoType?: string;
+    /**
+      * 是否使用旧回包
+      */
+    OldResponseType?: string;
 }
 /**
  * AntiFraudCryptoFilter – 业务入参

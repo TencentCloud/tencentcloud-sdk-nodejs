@@ -741,11 +741,11 @@ export interface SendEmailStatus {
  */
 export interface ListEmailTemplatesRequest {
     /**
-      * 获取模版数据量，用于分页
+      * 获取模板数据量，用于分页
       */
     Limit: number;
     /**
-      * 获取模版偏移值，用于分页
+      * 获取模板偏移值，用于分页
       */
     Offset: number;
 }
@@ -788,11 +788,11 @@ export interface ListEmailTemplatesResponse {
     /**
       * 邮件模板列表
       */
-    TemplatesMetadata?: Array<TemplatesMetadata>;
+    TemplatesMetadata: Array<TemplatesMetadata>;
     /**
-      * 模版总数量
+      * 模板总数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

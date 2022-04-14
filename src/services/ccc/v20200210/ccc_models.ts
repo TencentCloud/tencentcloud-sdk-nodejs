@@ -1111,6 +1111,26 @@ export interface StaffBuyInfo {
 }
 
 /**
+ * DescribeProtectedTelCdr返回参数结构体
+ */
+export interface DescribeProtectedTelCdrResponse {
+  /**
+   * 话单记录总数
+   */
+  TotalCount: number
+
+  /**
+   * 话单记录
+   */
+  TelCdrs: Array<TelCdrInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAutoCalloutTasks请求参数结构体
  */
 export interface DescribeAutoCalloutTasksRequest {
@@ -1887,42 +1907,42 @@ export interface PackageBuyInfo {
  */
 export interface DescribeTelCdrRequest {
   /**
-   * 起始时间戳，Unix 时间戳
+   * 起始时间戳，Unix 秒级时间戳
    */
   StartTimeStamp: number
 
   /**
-   * 结束时间戳，Unix 时间戳
+   * 结束时间戳，Unix 秒级时间戳
    */
   EndTimeStamp: number
 
   /**
-   * 实例 ID（deprecated）
+   * 实例 ID（废弃）
    */
   InstanceId?: number
 
   /**
-   * 返回数据条数，上限（deprecated）
+   * 返回数据条数，上限（废弃）
    */
   Limit?: number
 
   /**
-   * 偏移（deprecated）
+   * 偏移（废弃）
    */
   Offset?: number
 
   /**
-   * 应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId?: number
 
   /**
-   * 分页尺寸，上限 100
+   * 分页尺寸（必填），上限 100
    */
   PageSize?: number
 
   /**
-   * 分页页码，从 0 开始
+   * 分页页码（必填），从 0 开始
    */
   PageNumber?: number
 
@@ -1935,6 +1955,36 @@ export interface DescribeTelCdrRequest {
    * 按SessionId筛选
    */
   SessionIds?: Array<string>
+}
+
+/**
+ * DescribeProtectedTelCdr请求参数结构体
+ */
+export interface DescribeProtectedTelCdrRequest {
+  /**
+   * 起始时间戳，Unix 秒级时间戳
+   */
+  StartTimeStamp: number
+
+  /**
+   * 结束时间戳，Unix 秒级时间戳
+   */
+  EndTimeStamp: number
+
+  /**
+   * 应用 ID，可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+
+  /**
+   * 分页尺寸，上限 100
+   */
+  PageSize: number
+
+  /**
+   * 分页页码，从 0 开始
+   */
+  PageNumber: number
 }
 
 /**

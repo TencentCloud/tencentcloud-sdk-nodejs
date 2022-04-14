@@ -55,6 +55,7 @@ import {
   CreateCallOutSessionResponse,
   IMCdrInfo,
   StaffBuyInfo,
+  DescribeProtectedTelCdrResponse,
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
   PSTNSession,
@@ -77,6 +78,7 @@ import {
   DescribeAutoCalloutTasksResponse,
   PackageBuyInfo,
   DescribeTelCdrRequest,
+  DescribeProtectedTelCdrRequest,
   MessageBody,
   CreateSDKLoginTokenRequest,
   DescribeTelCallInfoRequest,
@@ -297,6 +299,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserSigResponse) => void
   ): Promise<CreateUserSigResponse> {
     return this.request("CreateUserSig", req, cb)
+  }
+
+  /**
+   * 获取主被叫受保护的电话服务记录与录音
+   */
+  async DescribeProtectedTelCdr(
+    req: DescribeProtectedTelCdrRequest,
+    cb?: (error: string, rep: DescribeProtectedTelCdrResponse) => void
+  ): Promise<DescribeProtectedTelCdrResponse> {
+    return this.request("DescribeProtectedTelCdr", req, cb)
   }
 
   /**

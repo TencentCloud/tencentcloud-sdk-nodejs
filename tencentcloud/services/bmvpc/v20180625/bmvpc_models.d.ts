@@ -684,11 +684,11 @@ export interface DescribeRoutePoliciesResponse {
     /**
       * 路由策略数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 路由策略列表
       */
-    RoutePolicySet?: Array<RoutePolicy>;
+    RoutePolicySet: Array<RoutePolicy>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2517,7 +2517,7 @@ export interface ModifyRoutePolicyResponse {
     /**
       * 异步任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

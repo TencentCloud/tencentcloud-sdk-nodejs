@@ -148,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUserSig", req, cb);
     }
     /**
+     * 获取主被叫受保护的电话服务记录与录音
+     */
+    async DescribeProtectedTelCdr(req, cb) {
+        return this.request("DescribeProtectedTelCdr", req, cb);
+    }
+    /**
      * 获取呼入实时数据统计指标
      */
     async DescribeCallInMetrics(req, cb) {
