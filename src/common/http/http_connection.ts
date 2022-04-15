@@ -16,11 +16,13 @@ export class HttpConnection {
     url,
     data,
     timeout,
+    headers = {},
   }: {
     method: string
     url: string
     data: any
     timeout: number
+    headers?: Record<string, string>
   }): Promise<Response> {
     const config: {
       method: string
@@ -31,7 +33,7 @@ export class HttpConnection {
       body?: string
     } = {
       method: method,
-      headers: {},
+      headers: Object.assign({}, headers),
       timeout,
     }
     if (method === "GET") {
@@ -58,6 +60,7 @@ export class HttpConnection {
     token,
     requestClient,
     language,
+    headers = {},
   }: {
     method: string
     url: string
@@ -73,6 +76,7 @@ export class HttpConnection {
     token: string
     requestClient: string
     language: string
+    headers?: Record<string, string>
   }): Promise<Response> {
     // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
     // 所以这里把 readStream 转为 Buffer
@@ -104,7 +108,7 @@ export class HttpConnection {
     } = {
       method,
       timeout,
-      headers: {
+      headers: Object.assign({}, headers, {
         Host: new URL(url).host,
         "X-TC-Action": action,
         "X-TC-Region": region,
@@ -112,7 +116,7 @@ export class HttpConnection {
         "X-TC-Version": version,
         "X-TC-Token": token,
         "X-TC-RequestClient": requestClient,
-      },
+      }),
     }
 
     if (token === null) {

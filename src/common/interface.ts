@@ -59,6 +59,12 @@ export interface ClientProfile {
      * 非必选
      */
     reqTimeout?: number
+    /**
+     * 自定义请求头，例如 { "X-TC-TraceId": "ffe0c072-8a5d-4e17-8887-a8a60252abca" }
+     * @type {Record<string, string>}
+     * 非必选
+     */
+    headers?: Record<string, string>
   }
   /**
    * api请求时附带的 language 字段
