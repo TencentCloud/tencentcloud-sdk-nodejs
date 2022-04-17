@@ -62,7 +62,7 @@ class AbstractClient {
             options = {};
         }
         try {
-            const result = await this.doRequest(action, req, options);
+            const result = await this.doRequest(action, req !== null && req !== void 0 ? req : {}, options);
             cb && cb(null, result);
             return result;
         }
@@ -74,7 +74,7 @@ class AbstractClient {
     /**
      * @inner
      */
-    async doRequest(action, req, options) {
+    async doRequest(action, req, options = {}) {
         if (this.profile.signMethod === "TC3-HMAC-SHA256") {
             return this.doRequestWithSign3(action, req, options);
         }
@@ -87,6 +87,7 @@ class AbstractClient {
                 url: this.profile.httpProfile.protocol + this.endpoint + this.path,
                 data: params,
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
+                headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
             });
         }
         catch (error) {
@@ -97,7 +98,7 @@ class AbstractClient {
     /**
      * @inner
      */
-    async doRequestWithSign3(action, params, options) {
+    async doRequestWithSign3(action, params, options = {}) {
         let res;
         try {
             res = await http_connection_1.HttpConnection.doRequestWithSign3({
@@ -115,6 +116,7 @@ class AbstractClient {
                 token: this.credential.token,
                 requestClient: this.sdkVersion,
                 language: this.profile.language,
+                headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
             });
         }
         catch (e) {

@@ -6,7 +6,7 @@ import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exceptio
 import { Response } from "node-fetch"
 
 export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
-export interface RequestOptions extends Pick<ClientProfile['httpProfile'], 'headers'>{
+export interface RequestOptions extends Pick<ClientProfile["httpProfile"], "headers"> {
   multipart?: boolean
 }
 

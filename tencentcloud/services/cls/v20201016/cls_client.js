@@ -263,7 +263,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAlarmNotice", req, cb);
     }
     /**
-     * 打开kafka协议消费
+     * 打开Kafka协议消费功能
      */
     async OpenKafkaConsumer(req, cb) {
         return this.request("OpenKafkaConsumer", req, cb);

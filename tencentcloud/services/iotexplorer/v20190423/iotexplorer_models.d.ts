@@ -1919,6 +1919,27 @@ export interface DescribeDeviceResponse {
     RequestId?: string;
 }
 /**
+ * PublishBroadcastMessage请求参数结构体
+ */
+export interface PublishBroadcastMessageRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 消息内容
+      */
+    Payload: string;
+    /**
+      * 消息质量等级
+      */
+    Qos: number;
+    /**
+      * ayload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+      */
+    PayloadEncoding?: string;
+}
+/**
  * ListFirmwares请求参数结构体
  */
 export interface ListFirmwaresRequest {
@@ -2442,17 +2463,17 @@ export interface CreatePositionFenceResponse {
     RequestId?: string;
 }
 /**
- * Topic信息, 包括Topic名字和权限
+ * PublishBroadcastMessage返回参数结构体
  */
-export interface TopicItem {
+export interface PublishBroadcastMessageResponse {
     /**
-      * Topic名称
+      * 广播消息任务Id
       */
-    TopicName: string;
+    TaskId: number;
     /**
-      * Topic权限 , 1上报  2下发
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Privilege: number;
+    RequestId?: string;
 }
 /**
  * DescribeFenceBindList请求参数结构体
@@ -2669,6 +2690,19 @@ export interface DirectBindDeviceInFamilyRequest {
       * 房间ID
       */
     RoomId?: string;
+}
+/**
+ * Topic信息, 包括Topic名字和权限
+ */
+export interface TopicItem {
+    /**
+      * Topic名称
+      */
+    TopicName: string;
+    /**
+      * Topic权限 , 1上报  2下发
+      */
+    Privilege: number;
 }
 /**
  * GetFamilyDeviceUserList请求参数结构体

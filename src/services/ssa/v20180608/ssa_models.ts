@@ -176,6 +176,22 @@ export interface DataCheck {
 }
 
 /**
+ * DescribeSocCheckResultList返回参数结构体
+ */
+export interface DescribeSocCheckResultListResponse {
+  /**
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: DescribeSocCheckResultListRspRsp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * soc产品购买信息
  */
 export interface SocProductionItem {
@@ -516,6 +532,71 @@ export interface Asset {
 }
 
 /**
+ * SaDivulgeDataQueryPub请求参数结构体
+ */
+export interface SaDivulgeDataQueryPubRequest {
+  /**
+   * 模糊查询字段(针对appid或者uin)
+   */
+  QueryKey: string
+
+  /**
+   * 安全事件名称
+   */
+  EventName: string
+
+  /**
+   * 监控源  0:全部 1:GitHub 2:暗网 默认值1
+   */
+  DivulgeSoure: string
+
+  /**
+   * 受影响资产
+   */
+  Asset: string
+
+  /**
+   * 命中主题集下的规则topic名称
+   */
+  RuleName: string
+
+  /**
+   * 命中主题集下的规则topic唯一id
+   */
+  RuleId: string
+
+  /**
+   * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
+   */
+  Level: string
+
+  /**
+   * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
+   */
+  Status: string
+
+  /**
+   * 起始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 查询起始地址
+   */
+  Offset: string
+
+  /**
+   * 查询个数
+   */
+  Limit: string
+}
+
+/**
  * DescribeComplianceList返回参数结构体
  */
 export interface DescribeComplianceListResponse {
@@ -843,6 +924,61 @@ export interface Tag {
    * 标签名称
    */
   Fname: string
+}
+
+/**
+ * 云安全配置检测结果
+ */
+export interface SocCheckResult {
+  /**
+   * 检查项的uuid
+   */
+  CheckId: string
+
+  /**
+   * 配置要求
+   */
+  Name: string
+
+  /**
+   * 检查项的类型
+   */
+  Type: string
+
+  /**
+   * 检查对象
+   */
+  AssetType: string
+
+  /**
+   * 策略名
+   */
+  PloyName: string
+
+  /**
+   * 策略id
+   */
+  PloyId: number
+
+  /**
+   * 正常,低危,中危,高危
+   */
+  Result: string
+
+  /**
+   * 不符合数
+   */
+  FailAssetNum: number
+
+  /**
+   * 总数
+   */
+  TotalAssetNum: number
+
+  /**
+   * 处置建议url链接
+   */
+  DealUrl: string
 }
 
 /**
@@ -1242,6 +1378,37 @@ export interface SaDivulgeDataQueryPubList {
    * 自定义泄露事件列表
    */
   List: Array<SaDivulgeDataQueryPub>
+}
+
+/**
+ * DescribeSocCheckResultList请求参数结构体
+ */
+export interface DescribeSocCheckResultListRequest {
+  /**
+      * 查询参数,可支持的查询参数：
+Name,Type,AssetType,Result,PloyName,PloyId
+      */
+  Filter?: Array<QueryFilter>
+
+  /**
+   * 排序参数,可支持的排序参数：CheckStatus,RiskCount
+   */
+  Sorter?: Array<QuerySort>
+
+  /**
+   * 当前页码数据，默认值为10
+   */
+  PageSize?: number
+
+  /**
+   * 当前页面索引，默认值为0
+   */
+  PageIndex?: number
+
+  /**
+   * 资产id
+   */
+  AssetId?: string
 }
 
 /**
@@ -2376,68 +2543,38 @@ export interface AssetTypeStatistic {
 }
 
 /**
- * SaDivulgeDataQueryPub请求参数结构体
+ * 检查项结果详情列表
  */
-export interface SaDivulgeDataQueryPubRequest {
+export interface DescribeSocCheckResultListRspRsp {
   /**
-   * 模糊查询字段(针对appid或者uin)
+   * 具体检查项详情
    */
-  QueryKey: string
+  List: Array<SocCheckResult>
 
   /**
-   * 安全事件名称
+   * 检查结果总数
    */
-  EventName: string
+  Total: number
 
   /**
-   * 监控源  0:全部 1:GitHub 2:暗网 默认值1
+   * 低危个数
    */
-  DivulgeSoure: string
+  LowTotal: number
 
   /**
-   * 受影响资产
+   * 中危个数
    */
-  Asset: string
+  MiddleTotal: number
 
   /**
-   * 命中主题集下的规则topic名称
+   * 高危个数
    */
-  RuleName: string
+  HighTotal: number
 
   /**
-   * 命中主题集下的规则topic唯一id
+   * 正常个数
    */
-  RuleId: string
-
-  /**
-   * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
-   */
-  Level: string
-
-  /**
-   * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
-   */
-  Status: string
-
-  /**
-   * 起始时间
-   */
-  StartTime: string
-
-  /**
-   * 结束时间
-   */
-  EndTime: string
-
-  /**
-   * 查询起始地址
-   */
-  Offset: string
-
-  /**
-   * 查询个数
-   */
-  Limit: string
+  NormalTotal: number
 }
 
 /**

@@ -2656,27 +2656,47 @@ export interface DescribeBackupConfigResponse {
     /**
       * 自动备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
       */
-    StartTimeMin?: number;
+    StartTimeMin: number;
     /**
       * 自动备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
       */
-    StartTimeMax?: number;
+    StartTimeMax: number;
     /**
       * 备份文件保留时间，单位为天。
       */
-    BackupExpireDays?: number;
+    BackupExpireDays: number;
     /**
       * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份。
       */
-    BackupMethod?: string;
+    BackupMethod: string;
     /**
       * Binlog 文件保留时间，单位为天。
       */
-    BinlogExpireDays?: number;
+    BinlogExpireDays: number;
     /**
       * 实例自动备份的时间窗。
       */
-    BackupTimeWindow?: CommonTimeWindow;
+    BackupTimeWindow: CommonTimeWindow;
+    /**
+      * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off
+      */
+    EnableBackupPeriodSave: string;
+    /**
+      * 定期保留最长天数，最小值：90，最大值：3650，默认值：1080
+      */
+    BackupPeriodSaveDays: number;
+    /**
+      * 定期保留策略周期，可取值：weekly - 周，monthly - 月， quarterly - 季度，yearly - 年，默认为monthly
+      */
+    BackupPeriodSaveInterval: string;
+    /**
+      * 定期保留的备份数量，最小值为1，最大值不超过定期保留策略周期内常规备份个数，默认值为1
+      */
+    BackupPeriodSaveCount: number;
+    /**
+      * 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss
+      */
+    StartBackupPeriodSaveDate: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3402,6 +3422,30 @@ export interface ModifyBackupConfigRequest {
       * 备份时间窗，比如要设置每周二和周日 10:00-14:00之间备份，该参数如下：{"Monday": "", "Tuesday": "10:00-14:00", "Wednesday": "", "Thursday": "", "Friday": "", "Saturday": "", "Sunday": "10:00-14:00"}    （注：可以设置一周的某几天备份，但是每天的备份时间需要设置为相同的时间段。 如果设置了该字段，将忽略StartTime字段的设置）
       */
     BackupTimeWindow?: CommonTimeWindow;
+    /**
+      * 定期保留开关，off - 不开启定期保留策略，on - 开启定期保留策略，默认为off
+      */
+    EnableBackupPeriodSave?: string;
+    /**
+      * 长期保留开关,该字段功能暂未上线，可忽略。off - 不开启长期保留策略，on - 开启长期保留策略，默认为off，如果开启，则BackupPeriodSaveDays，BackupPeriodSaveInterval，BackupPeriodSaveCount参数无效
+      */
+    EnableBackupPeriodLongTermSave?: string;
+    /**
+      * 定期保留最长天数，最小值：90，最大值：3650，默认值：1080
+      */
+    BackupPeriodSaveDays?: number;
+    /**
+      * 定期保留策略周期，可取值：weekly - 周，monthly - 月， quarterly - 季度，yearly - 年，默认为monthly
+      */
+    BackupPeriodSaveInterval?: string;
+    /**
+      * 定期保留的备份数量，最小值为1，最大值不超过定期保留策略周期内常规备份个数，默认值为1
+      */
+    BackupPeriodSaveCount?: number;
+    /**
+      * 定期保留策略周期起始日期，格式：YYYY-MM-dd HH:mm:ss
+      */
+    StartBackupPeriodSaveDate?: string;
 }
 /**
  * DisassociateSecurityGroups返回参数结构体
@@ -4560,6 +4604,10 @@ export interface BackupInfo {
       * 手动备份别名
       */
     ManualBackupName: string;
+    /**
+      * 备份保留类型，save_mode_regular - 常规保存备份，save_mode_period - 定期保存备份
+      */
+    SaveMode: string;
 }
 /**
  * CloseWanService返回参数结构体

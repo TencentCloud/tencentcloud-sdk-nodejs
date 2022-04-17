@@ -274,6 +274,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicRule", req, cb);
     }
     /**
+     * 发布广播消息
+     */
+    async PublishBroadcastMessage(req, cb) {
+        return this.request("PublishBroadcastMessage", req, cb);
+    }
+    /**
      * 批量解绑子产品
      */
     async UnbindProducts(req, cb) {

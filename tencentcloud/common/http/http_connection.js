@@ -12,10 +12,10 @@ const fetch_1 = require("./fetch");
  * @inner
  */
 class HttpConnection {
-    static async doRequest({ method, url, data, timeout, }) {
+    static async doRequest({ method, url, data, timeout, headers = {}, }) {
         const config = {
             method: method,
-            headers: {},
+            headers: Object.assign({}, headers),
             timeout,
         };
         if (method === "GET") {
@@ -27,7 +27,7 @@ class HttpConnection {
         }
         return await fetch_1.default(url, config);
     }
-    static async doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart = false, timeout = 60000, token, requestClient, language, }) {
+    static async doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart = false, timeout = 60000, token, requestClient, language, headers = {}, }) {
         // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
         // 所以这里把 readStream 转为 Buffer
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -48,7 +48,7 @@ class HttpConnection {
         const config = {
             method,
             timeout,
-            headers: {
+            headers: Object.assign({}, headers, {
                 Host: new url_1.URL(url).host,
                 "X-TC-Action": action,
                 "X-TC-Region": region,
@@ -56,7 +56,7 @@ class HttpConnection {
                 "X-TC-Version": version,
                 "X-TC-Token": token,
                 "X-TC-RequestClient": requestClient,
-            },
+            }),
         };
         if (token === null) {
             delete config.headers["X-TC-Token"];

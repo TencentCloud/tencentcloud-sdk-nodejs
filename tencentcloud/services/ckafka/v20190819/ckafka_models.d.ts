@@ -3054,7 +3054,7 @@ export interface ModifyTopicAttributesRequest {
       */
     SegmentMs?: number;
     /**
-      * 主题消息最大值，单位为 Byte，最大值为8388608Byte（即8MB）。
+      * 主题消息最大值，单位为 Byte，最大值为12582912Byte（即12MB）。
       */
     MaxMessageBytes?: number;
     /**
@@ -3120,7 +3120,8 @@ export interface CreateInstancePreRequest {
       */
     Period: string;
     /**
-      * 实例规格，专业版默认填写1。1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
+      * 实例规格说明 专业版实例[所有规格]填写1.
+标准版实例 ([入门型]填写1，[标准型]填写2，[进阶型]填写3，[容量型]填写4，[高阶型1]填写5，[高阶性2]填写6,[高阶型3]填写7,[高阶型4]填写8，[独占型]填写9。
       */
     InstanceType: number;
     /**
@@ -3144,11 +3145,11 @@ export interface CreateInstancePreRequest {
       */
     RenewFlag?: number;
     /**
-      * 支持指定版本Kafka版本（0.10.2/1.1.1/2.4.1） 。指定专业版参数specificationsType=pro
+      * CKafka版本号[0.10.2、1.1.1、2.4.1], 默认是1.1.1
       */
     KafkaVersion?: string;
     /**
-      * 专业版必须填写 （专业版：profession、标准版：standard） 默认是standard。专业版填profession
+      * 实例类型: [标准版实例]填写 standard(默认), [专业版实例]填写 profession
       */
     SpecificationsType?: string;
     /**

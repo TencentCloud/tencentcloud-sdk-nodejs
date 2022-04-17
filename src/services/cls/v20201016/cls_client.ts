@@ -600,7 +600,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 打开kafka协议消费
+   * 打开Kafka协议消费功能
    */
   async OpenKafkaConsumer(
     req: OpenKafkaConsumerRequest,

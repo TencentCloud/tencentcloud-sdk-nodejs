@@ -120,6 +120,7 @@ import {
   DescribeStudioProductResponse,
   CreateFenceBindRequest,
   DescribeDeviceResponse,
+  PublishBroadcastMessageRequest,
   ListFirmwaresRequest,
   GetStudioProductListResponse,
   PublishMessageRequest,
@@ -146,7 +147,7 @@ import {
   CreateFenceBindResponse,
   DescribeTopicRuleResponse,
   CreatePositionFenceResponse,
-  TopicItem,
+  PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
   DescribeBindedProductsResponse,
   DeviceSignatureInfo,
@@ -158,6 +159,7 @@ import {
   DescribeBatchProductionRequest,
   CreateTopicPolicyRequest,
   DirectBindDeviceInFamilyRequest,
+  TopicItem,
   GetFamilyDeviceUserListRequest,
   DescribeBindedProductsRequest,
   DescribeLoRaFrequencyResponse,
@@ -648,6 +650,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicRuleResponse) => void
   ): Promise<DescribeTopicRuleResponse> {
     return this.request("DescribeTopicRule", req, cb)
+  }
+
+  /**
+   * 发布广播消息
+   */
+  async PublishBroadcastMessage(
+    req: PublishBroadcastMessageRequest,
+    cb?: (error: string, rep: PublishBroadcastMessageResponse) => void
+  ): Promise<PublishBroadcastMessageResponse> {
+    return this.request("PublishBroadcastMessage", req, cb)
   }
 
   /**

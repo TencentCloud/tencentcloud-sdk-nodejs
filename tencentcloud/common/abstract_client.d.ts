@@ -1,7 +1,7 @@
 import { ClientProfile, Credential, ClientConfig } from "./interface";
-declare type ResponseCallback = (error: string, rep: any) => void;
-interface RequestOptions {
-    multipart: boolean;
+export declare type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void;
+export interface RequestOptions extends Pick<ClientProfile['httpProfile'], 'headers'> {
+    multipart?: boolean;
 }
 declare type ResponseData = any;
 /**

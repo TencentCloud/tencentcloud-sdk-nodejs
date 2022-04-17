@@ -165,7 +165,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAlarmNotice(req: ModifyAlarmNoticeRequest, cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void): Promise<ModifyAlarmNoticeResponse>;
     /**
-     * 打开kafka协议消费
+     * 打开Kafka协议消费功能
      */
     OpenKafkaConsumer(req: OpenKafkaConsumerRequest, cb?: (error: string, rep: OpenKafkaConsumerResponse) => void): Promise<OpenKafkaConsumerResponse>;
     /**

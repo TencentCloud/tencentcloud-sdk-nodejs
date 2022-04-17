@@ -147,5 +147,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeVulDetail(req, cb) {
         return this.request("DescribeVulDetail", req, cb);
     }
+    /**
+     * 云安全配置检查项结果列表
+     */
+    async DescribeSocCheckResultList(req, cb) {
+        return this.request("DescribeSocCheckResultList", req, cb);
+    }
 }
 exports.Client = Client;

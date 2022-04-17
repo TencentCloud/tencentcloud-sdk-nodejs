@@ -3948,24 +3948,9 @@ export interface DescribeBizTrendResponse {
  */
 export interface NewL7RuleEntry {
   /**
-   * 会话保持时间，单位秒
+   * 转发协议，取值[http, https]
    */
-  KeepTime: number
-
-  /**
-   * 负载均衡方式，取值[1(加权轮询)]
-   */
-  LbType: number
-
-  /**
-   * 回源列表
-   */
-  SourceList: Array<L4RuleSource>
-
-  /**
-   * 会话保持开关，取值[0(会话保持关闭)，1(会话保持开启)]
-   */
-  KeepEnable: number
+  Protocol: string
 
   /**
    * 转发域名
@@ -3973,9 +3958,19 @@ export interface NewL7RuleEntry {
   Domain: string
 
   /**
-   * 转发协议，取值[http, https]
+   * 负载均衡方式，取值[1(加权轮询)]
    */
-  Protocol: string
+  LbType: number
+
+  /**
+   * 会话保持开关，取值[0(会话保持关闭)，1(会话保持开启)]
+   */
+  KeepEnable: number
+
+  /**
+   * 会话保持时间，单位秒
+   */
+  KeepTime: number
 
   /**
    * 回源方式，取值[1(域名回源)，2(IP回源)]
@@ -3983,9 +3978,54 @@ export interface NewL7RuleEntry {
   SourceType: number
 
   /**
-   * 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭
+   * 回源列表
    */
-  HttpsToHttpEnable?: number
+  SourceList: Array<L4RuleSource>
+
+  /**
+   * 区域码
+   */
+  Region?: number
+
+  /**
+   * 资源Id
+   */
+  Id?: string
+
+  /**
+   * 资源Ip
+   */
+  Ip?: string
+
+  /**
+   * 规则ID，当添加新规则时可以不用填写此字段；当修改或者删除规则时需要填写此字段；
+   */
+  RuleId?: string
+
+  /**
+   * 规则描述
+   */
+  RuleName?: string
+
+  /**
+   * 证书来源，当转发协议为https时必须填，取值[2(腾讯云托管证书)]，当转发协议为http时也可以填0
+   */
+  CertType?: number
+
+  /**
+   * 当证书来源为腾讯云托管证书时，此字段必须填写托管证书ID
+   */
+  SSLId?: string
+
+  /**
+   * 当证书来源为自有证书时，此字段必须填写证书内容；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
+   */
+  Cert?: string
+
+  /**
+   * 当证书来源为自有证书时，此字段必须填写证书密钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
+   */
+  PrivateKey?: string
 
   /**
    * 规则状态，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)]
@@ -3993,9 +4033,9 @@ export interface NewL7RuleEntry {
   Status?: number
 
   /**
-   * HTTPS协议的CC防护等级
+   * cc防护状态，取值[0(关闭), 1(开启)]
    */
-  CCLevel?: string
+  CCStatus?: number
 
   /**
    * HTTPS协议的CC防护状态，取值[0(关闭), 1(开启)]
@@ -4008,19 +4048,9 @@ export interface NewL7RuleEntry {
   CCThreshold?: number
 
   /**
-   * 区域码
+   * HTTPS协议的CC防护等级
    */
-  Region?: number
-
-  /**
-   * 规则描述
-   */
-  RuleName?: string
-
-  /**
-   * 当证书来源为自有证书时，此字段必须填写证书内容；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
-   */
-  Cert?: string
+  CCLevel?: string
 
   /**
    * 修改时间
@@ -4028,24 +4058,9 @@ export interface NewL7RuleEntry {
   ModifyTime?: string
 
   /**
-   * 规则ID，当添加新规则时可以不用填写此字段；当修改或者删除规则时需要填写此字段；
+   * 是否开启Https协议使用Http回源，取值[0(关闭), 1(开启)]，不填写默认是关闭
    */
-  RuleId?: string
-
-  /**
-   * 资源Ip
-   */
-  Ip?: string
-
-  /**
-   * 当证书来源为自有证书时，此字段必须填写证书密钥；(因已不再支持自有证书，此字段已弃用，请不用填写此字段)
-   */
-  PrivateKey?: string
-
-  /**
-   * 证书来源，当转发协议为https时必须填，取值[2(腾讯云托管证书)]，当转发协议为http时也可以填0
-   */
-  CertType?: number
+  HttpsToHttpEnable?: number
 
   /**
       * 接入端口值
@@ -4054,19 +4069,14 @@ export interface NewL7RuleEntry {
   VirtualPort?: number
 
   /**
-   * cc防护状态，取值[0(关闭), 1(开启)]
+   * http强制跳转https，1表示打开，0表示关闭
    */
-  CCStatus?: number
+  RewriteHttps?: number
 
   /**
-   * 当证书来源为腾讯云托管证书时，此字段必须填写托管证书ID
+   * 规则配置失败时的详细错误原因(仅当Status=2时有效)，1001证书不存在，1002证书获取失败，1003证书上传失败，1004证书已过期
    */
-  SSLId?: string
-
-  /**
-   * 资源Id
-   */
-  Id?: string
+  ErrCode?: number
 }
 
 /**

@@ -3750,6 +3750,18 @@ export interface OverseaConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OssPrivateAccess?: OssPrivateAccess
+
+  /**
+      * 华为云对象存储鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HwPrivateAccess?: HwPrivateAccess
+
+  /**
+      * 七牛云对象存储鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  QnPrivateAccess?: QnPrivateAccess
 }
 
 /**

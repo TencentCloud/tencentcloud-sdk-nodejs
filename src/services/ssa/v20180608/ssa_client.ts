@@ -25,10 +25,12 @@ import {
   DescribeSocAlertDetailsRequest,
   DescribeComplianceAssetListResponse,
   DataCheck,
+  DescribeSocCheckResultListResponse,
   SocProductionItem,
   MappingResult,
   DescribeCheckConfigAssetListRequest,
   Asset,
+  SaDivulgeDataQueryPubRequest,
   DescribeComplianceListResponse,
   DescribeConfigListResponse,
   AggregationObj,
@@ -38,6 +40,7 @@ import {
   VulItem,
   DescribeCheckConfigAssetListResponse,
   Tag,
+  SocCheckResult,
   AlertListData,
   SaDivulgeDataQueryPub,
   SocComplianceInfoResp,
@@ -55,6 +58,7 @@ import {
   DescribeEventDetailResponse,
   DescribeSafetyEventListResponse,
   SaDivulgeDataQueryPubList,
+  DescribeSocCheckResultListRequest,
   DescribeSafetyEventListRequest,
   AssetQueryFilter,
   AlertType,
@@ -79,7 +83,7 @@ import {
   DescribeEventDetailRequest,
   CheckAssetItem,
   AssetTypeStatistic,
-  SaDivulgeDataQueryPubRequest,
+  DescribeSocCheckResultListRspRsp,
   DescribeVulDetailRequest,
   ConcernInfo,
   DescribeAssetsMappingListRequest,
@@ -302,5 +306,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulDetailResponse) => void
   ): Promise<DescribeVulDetailResponse> {
     return this.request("DescribeVulDetail", req, cb)
+  }
+
+  /**
+   * 云安全配置检查项结果列表
+   */
+  async DescribeSocCheckResultList(
+    req: DescribeSocCheckResultListRequest,
+    cb?: (error: string, rep: DescribeSocCheckResultListResponse) => void
+  ): Promise<DescribeSocCheckResultListResponse> {
+    return this.request("DescribeSocCheckResultList", req, cb)
   }
 }

@@ -16,6 +16,106 @@
  */
 
 /**
+ * SearchAccessLog请求参数结构体
+ */
+export interface SearchAccessLogRequest {
+  /**
+   * 客户要查询的日志主题ID，每个客户都有对应的一个主题
+   */
+  TopicId: string
+
+  /**
+   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   */
+  From: number
+
+  /**
+   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   */
+  To: number
+
+  /**
+   * 查询语句，语句长度最大为4096
+   */
+  Query: string
+
+  /**
+   * 单次查询返回的日志条数，最大值为100
+   */
+  Limit?: number
+
+  /**
+   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+   */
+  Context?: string
+
+  /**
+   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   */
+  Sort?: string
+}
+
+/**
+ * Waf 攻击自动封禁详情
+ */
+export interface AutoDenyDetail {
+  /**
+   * 攻击封禁类型标签
+   */
+  AttackTags: Array<string>
+
+  /**
+   * 攻击次数阈值
+   */
+  AttackThreshold: number
+
+  /**
+   * 自动封禁状态
+   */
+  DefenseStatus: number
+
+  /**
+   * 攻击时间阈值
+   */
+  TimeThreshold: number
+
+  /**
+   * 自动封禁时间
+   */
+  DenyTimeThreshold: number
+
+  /**
+   * 最后更新时间
+   */
+  LastUpdateTime?: string
+}
+
+/**
+ * 自定义规则的匹配条件结构体
+ */
+export interface Strategy {
+  /**
+   * 匹配字段
+   */
+  Field: string
+
+  /**
+   * 逻辑符号
+   */
+  CompareFunc: string
+
+  /**
+   * 匹配内容
+   */
+  Content: string
+
+  /**
+   * 匹配参数
+   */
+  Arg: string
+}
+
+/**
  * DescribeAccessFastAnalysis返回参数结构体
  */
 export interface DescribeAccessFastAnalysisResponse {
@@ -63,6 +163,112 @@ export interface CreateAccessExportRequest {
    * 日志导出时间排序。desc，asc，默认为desc
    */
   Order?: string
+}
+
+/**
+ * ModifyWafThreatenIntelligence请求参数结构体
+ */
+export interface ModifyWafThreatenIntelligenceRequest {
+  /**
+   * 配置WAF威胁情报封禁模块详情
+   */
+  WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails
+}
+
+/**
+ * DescribeWafAutoDenyRules返回参数结构体
+ */
+export interface DescribeWafAutoDenyRulesResponse {
+  /**
+   * 攻击次数阈值
+   */
+  AttackThreshold: number
+
+  /**
+   * 攻击时间阈值
+   */
+  TimeThreshold: number
+
+  /**
+   * 自动封禁时间
+   */
+  DenyTimeThreshold: number
+
+  /**
+   * 自动封禁状态
+   */
+  DefenseStatus: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyWafAutoDenyStatus返回参数结构体
+ */
+export interface ModifyWafAutoDenyStatusResponse {
+  /**
+   * WAF 自动封禁配置项
+   */
+  WafAutoDenyDetails?: AutoDenyDetail
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 规则白名单
+ */
+export interface RuleList {
+  /**
+   * 规则Id
+   */
+  Id: number
+
+  /**
+   * 规则列表的id
+   */
+  Rules: Array<number>
+
+  /**
+   * 请求url
+   */
+  Url: string
+
+  /**
+   * 请求的方法
+   */
+  Function: string
+
+  /**
+   * 时间戳
+   */
+  Time: string
+
+  /**
+   * 开关状态
+   */
+  Status: number
+}
+
+/**
+ * DescribeIpHitItems返回参数结构体
+ */
+export interface DescribeIpHitItemsResponse {
+  /**
+      * 结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: IpHitItemsData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -145,6 +351,21 @@ export interface AccessFullTextInfo {
 }
 
 /**
+ * ModifyWafAutoDenyRules返回参数结构体
+ */
+export interface ModifyWafAutoDenyRulesResponse {
+  /**
+   * 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码）
+   */
+  Success: ResponseCode
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCustomRuleStatus返回参数结构体
  */
 export interface ModifyCustomRuleStatusResponse {
@@ -191,6 +412,86 @@ export interface DescribeUserClbWafRegionsResponse {
 }
 
 /**
+ * DescribeIpHitItems请求参数结构体
+ */
+export interface DescribeIpHitItemsRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 计数标识
+   */
+  Count: number
+
+  /**
+   * 类别
+   */
+  Category: string
+
+  /**
+   * 有效时间最小时间戳
+   */
+  VtsMin?: number
+
+  /**
+   * 有效时间最大时间戳
+   */
+  VtsMax?: number
+
+  /**
+   * 创建时间最小时间戳
+   */
+  CtsMin?: number
+
+  /**
+   * 创建时间最大时间戳
+   */
+  CtsMax?: number
+
+  /**
+   * 偏移参数
+   */
+  Skip?: number
+
+  /**
+   * 限制数目
+   */
+  Limit?: number
+
+  /**
+   * 策略名称
+   */
+  Name?: string
+
+  /**
+   * 排序参数
+   */
+  Sort?: string
+
+  /**
+   * IP
+   */
+  Ip?: string
+}
+
+/**
+ * 封装参数
+ */
+export interface IpHitItemsData {
+  /**
+   * 数组封装
+   */
+  Res: Array<IpHitItem>
+
+  /**
+   * 总数目
+   */
+  TotalCount: number
+}
+
+/**
  * DeleteAttackDownloadRecord返回参数结构体
  */
 export interface DeleteAttackDownloadRecordResponse {
@@ -198,6 +499,22 @@ export interface DeleteAttackDownloadRecordResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据封装
+ */
+export interface IpAccessControlData {
+  /**
+      * ip黑白名单
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Res: Array<IpAccessControlItem>
+
+  /**
+   * 计数
+   */
+  TotalCount: number
 }
 
 /**
@@ -252,56 +569,29 @@ export interface DescribeFlowTrendRequest {
 }
 
 /**
- * 日志KeyValue对数组，用于搜索访问日志
+ * DescribeWafAutoDenyStatus请求参数结构体
  */
-export interface AccessLogItems {
-  /**
-      * 分析结果返回的KV数据对
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<AccessLogItem>
-}
+export type DescribeWafAutoDenyStatusRequest = null
 
 /**
- * ModifyCustomRuleStatus请求参数结构体
+ * Waf 威胁情报封禁模块配置详情
  */
-export interface ModifyCustomRuleStatusRequest {
+export interface WafThreatenIntelligenceDetails {
   /**
-   * 域名
+   * 封禁模组启用状态
    */
-  Domain: string
+  DefenseStatus: number
 
   /**
-   * 规则ID
-   */
-  RuleId: number
-
-  /**
-   * 开关的状态，1是开启、0是关闭
-   */
-  Status: number
-
-  /**
-   * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
-   */
-  Edition?: string
-}
-
-/**
- * DescribeAccessIndex接口的出参
- */
-export interface AccessRuleKeyValueInfo {
-  /**
-      * 是否大小写敏感
+      * 封禁属性标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CaseSensitive: boolean
+  Tags?: Array<string>
 
   /**
-      * 需要建立索引的键值对信息；最大只能配置100个键值对
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KeyValues: Array<AccessKeyValueInfo>
+   * 最后更新时间
+   */
+  LastUpdateTime?: string
 }
 
 /**
@@ -351,13 +641,38 @@ export interface SearchAccessLogResponse {
 }
 
 /**
- * DeleteDownloadRecord返回参数结构体
+ * DescribeDomainWhiteRules请求参数结构体
  */
-export interface DeleteDownloadRecordResponse {
+export interface DescribeDomainWhiteRulesRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 需要查询的域名
    */
-  RequestId?: string
+  Domain: string
+
+  /**
+   * 请求的白名单匹配路径
+   */
+  Url?: string
+
+  /**
+   * 翻到多少页
+   */
+  Page?: number
+
+  /**
+   * 每页展示的条数
+   */
+  Count?: number
+
+  /**
+   * 排序方式
+   */
+  Sort?: string
+
+  /**
+   * 规则ID
+   */
+  RuleId?: string
 }
 
 /**
@@ -376,6 +691,203 @@ export interface DeleteAccessExportRequest {
 }
 
 /**
+ * 日志KeyValue对数组，用于搜索访问日志
+ */
+export interface AccessLogItems {
+  /**
+      * 分析结果返回的KV数据对
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<AccessLogItem>
+}
+
+/**
+ * ModifyCustomRuleStatus请求参数结构体
+ */
+export interface ModifyCustomRuleStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 规则ID
+   */
+  RuleId: number
+
+  /**
+   * 开关的状态，1是开启、0是关闭
+   */
+  Status: number
+
+  /**
+   * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
+   */
+  Edition?: string
+}
+
+/**
+ * DescribeAutoDenyIP返回参数结构体
+ */
+export interface DescribeAutoDenyIPResponse {
+  /**
+   * 查询IP封禁状态返回结果
+   */
+  Data?: IpHitItemsData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDownloadRecord请求参数结构体
+ */
+export interface DeleteDownloadRecordRequest {
+  /**
+   * 记录id
+   */
+  Flow: string
+}
+
+/**
+ * ModifyWafAutoDenyStatus请求参数结构体
+ */
+export interface ModifyWafAutoDenyStatusRequest {
+  /**
+   * WAF 自动封禁配置项
+   */
+  WafAutoDenyDetails: AutoDenyDetail
+}
+
+/**
+ * DeleteDownloadRecord返回参数结构体
+ */
+export interface DeleteDownloadRecordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddDomainWhiteRule返回参数结构体
+ */
+export interface AddDomainWhiteRuleResponse {
+  /**
+   * 规则id
+   */
+  Id?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIpAccessControl返回参数结构体
+ */
+export interface DescribeIpAccessControlResponse {
+  /**
+      * 输出
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: IpAccessControlData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIpAccessControl请求参数结构体
+ */
+export interface DescribeIpAccessControlRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 计数标识
+   */
+  Count: number
+
+  /**
+   * 动作
+   */
+  ActionType?: number
+
+  /**
+   * 有效时间最小时间戳
+   */
+  VtsMin?: number
+
+  /**
+   * 有效时间最大时间戳
+   */
+  VtsMax?: number
+
+  /**
+   * 创建时间最小时间戳
+   */
+  CtsMin?: number
+
+  /**
+   * 创建时间最大时间戳
+   */
+  CtsMax?: number
+
+  /**
+   * 偏移
+   */
+  OffSet?: number
+
+  /**
+   * 限制
+   */
+  Limit?: number
+
+  /**
+   * 来源
+   */
+  Source?: string
+
+  /**
+   * 排序参数
+   */
+  Sort?: string
+
+  /**
+   * ip
+   */
+  Ip?: string
+}
+
+/**
+ * DescribeDomainWhiteRules返回参数结构体
+ */
+export interface DescribeDomainWhiteRulesResponse {
+  /**
+   * 规则列表
+   */
+  RuleList: Array<RuleList>
+
+  /**
+   * 规则的数量
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAccessPeriod请求参数结构体
  */
 export interface ModifyAccessPeriodRequest {
@@ -388,6 +900,56 @@ export interface ModifyAccessPeriodRequest {
    * 日志主题
    */
   TopicId: string
+}
+
+/**
+ * DescribeWafThreatenIntelligence返回参数结构体
+ */
+export interface DescribeWafThreatenIntelligenceResponse {
+  /**
+   * WAF 威胁情报封禁信息
+   */
+  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDomainWhiteRule请求参数结构体
+ */
+export interface ModifyDomainWhiteRuleRequest {
+  /**
+   * 需要更改的规则的域名
+   */
+  Domain: string
+
+  /**
+   * 白名单id
+   */
+  Id: number
+
+  /**
+   * 规则的id列表
+   */
+  Rules: Array<number>
+
+  /**
+   * 规则匹配路径
+   */
+  Url: string
+
+  /**
+   * 规则匹配方法
+   */
+  Function: string
+
+  /**
+   * 规则的开关状态
+   */
+  Status: number
 }
 
 /**
@@ -420,6 +982,71 @@ export interface AccessRuleTagInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KeyValues: Array<AccessKeyValueInfo>
+}
+
+/**
+ * DescribeAutoDenyIP请求参数结构体
+ */
+export interface DescribeAutoDenyIPRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 查询IP自动封禁状态
+   */
+  Ip?: string
+
+  /**
+   * 计数标识
+   */
+  Count?: number
+
+  /**
+   * 类别
+   */
+  Category?: string
+
+  /**
+   * 有效时间最小时间戳
+   */
+  VtsMin?: number
+
+  /**
+   * 有效时间最大时间戳
+   */
+  VtsMax?: number
+
+  /**
+   * 创建时间最小时间戳
+   */
+  CtsMin?: number
+
+  /**
+   * 创建时间最大时间戳
+   */
+  CtsMax?: number
+
+  /**
+   * 偏移量
+   */
+  Skip?: number
+
+  /**
+   * 限制条数
+   */
+  Limit?: number
+
+  /**
+   * 策略名字
+   */
+  Name?: string
+
+  /**
+   * 排序参数
+   */
+  Sort?: string
 }
 
 /**
@@ -484,6 +1111,36 @@ export interface DescribeAccessFastAnalysisRequest {
 }
 
 /**
+ * AddDomainWhiteRule请求参数结构体
+ */
+export interface AddDomainWhiteRuleRequest {
+  /**
+   * 需要添加的域名
+   */
+  Domain: string
+
+  /**
+   * 需要添加的规则
+   */
+  Rules: Array<number>
+
+  /**
+   * 需要添加的规则url
+   */
+  Url: string
+
+  /**
+   * 规则的方法
+   */
+  Function: string
+
+  /**
+   * 规则的开关
+   */
+  Status: number
+}
+
+/**
  * 用于DescribeAccessIndex接口的出参
  */
 export interface AccessValueInfo {
@@ -511,6 +1168,63 @@ export interface AccessValueInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ContainZH: boolean
+}
+
+/**
+ * DeleteIpAccessControl返回参数结构体
+ */
+export interface DeleteIpAccessControlResponse {
+  /**
+      * 删除失败的条目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedItems: string
+
+  /**
+      * 删除失败的条目数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ip封堵状态数据
+ */
+export interface IpHitItem {
+  /**
+   * 动作
+   */
+  Action: number
+
+  /**
+   * 类别
+   */
+  Category: string
+
+  /**
+   * ip
+   */
+  Ip: string
+
+  /**
+   * 规则名称
+   */
+  Name: string
+
+  /**
+   * 时间戳
+   */
+  TsVersion: number
+
+  /**
+   * 有效截止时间戳
+   */
+  ValidTs: number
 }
 
 /**
@@ -616,6 +1330,16 @@ export interface DeleteSessionRequest {
 }
 
 /**
+ * DescribeWafAutoDenyRules请求参数结构体
+ */
+export interface DescribeWafAutoDenyRulesRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+}
+
+/**
  * DescribeAccessExports请求参数结构体
  */
 export interface DescribeAccessExportsRequest {
@@ -634,6 +1358,11 @@ export interface DescribeAccessExportsRequest {
    */
   Limit?: number
 }
+
+/**
+ * DescribeWafThreatenIntelligence请求参数结构体
+ */
+export type DescribeWafThreatenIntelligenceRequest = null
 
 /**
  * DescribeAccessIndex返回参数结构体
@@ -690,6 +1419,26 @@ export interface CreateAccessExportResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpsertIpAccessControl请求参数结构体
+ */
+export interface UpsertIpAccessControlRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳
+   */
+  Items: Array<string>
+
+  /**
+   * clb-waf或者sparta-waf
+   */
+  Edition?: string
 }
 
 /**
@@ -806,6 +1555,26 @@ export interface AddCustomRuleRequest {
 }
 
 /**
+ * DeleteIpAccessControl请求参数结构体
+ */
+export interface DeleteIpAccessControlRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 删除的ip数组
+   */
+  Items: Array<string>
+
+  /**
+   * 删除对应的域名下的所有黑/白IP名额单
+   */
+  DeleteAll?: boolean
+}
+
+/**
  * DescribeCustomRules返回参数结构体
  */
 export interface DescribeCustomRulesResponse {
@@ -841,28 +1610,19 @@ export interface DescribeFlowTrendResponse {
 }
 
 /**
- * 自定义规则的匹配条件结构体
+ * DeleteDomainWhiteRules返回参数结构体
  */
-export interface Strategy {
+export interface DeleteDomainWhiteRulesResponse {
   /**
-   * 匹配字段
-   */
-  Field: string
+      * 出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: string
 
   /**
-   * 逻辑符号
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CompareFunc: string
-
-  /**
-   * 匹配内容
-   */
-  Content: string
-
-  /**
-   * 匹配参数
-   */
-  Arg: string
+  RequestId?: string
 }
 
 /**
@@ -911,13 +1671,30 @@ export interface DescribeCustomRulesPagingInfo {
 }
 
 /**
- * DeleteDownloadRecord请求参数结构体
+ * DescribeAccessIndex接口的出参
  */
-export interface DeleteDownloadRecordRequest {
+export interface AccessRuleKeyValueInfo {
   /**
-   * 记录id
+      * 是否大小写敏感
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaseSensitive: boolean
+
+  /**
+      * 需要建立索引的键值对信息；最大只能配置100个键值对
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyValues: Array<AccessKeyValueInfo>
+}
+
+/**
+ * ModifyDomainWhiteRule返回参数结构体
+ */
+export interface ModifyDomainWhiteRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Flow: string
+  RequestId?: string
 }
 
 /**
@@ -992,9 +1769,54 @@ export interface ExportAccessInfo {
 }
 
 /**
+ * ModifyWafAutoDenyRules请求参数结构体
+ */
+export interface ModifyWafAutoDenyRulesRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 攻击次数阈值
+   */
+  AttackThreshold: number
+
+  /**
+   * 攻击时间阈值
+   */
+  TimeThreshold: number
+
+  /**
+   * 自动封禁时间
+   */
+  DenyTimeThreshold: number
+
+  /**
+   * 自动封禁状态
+   */
+  DefenseStatus: number
+}
+
+/**
  * DeleteAccessExport返回参数结构体
  */
 export interface DeleteAccessExportResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyWafThreatenIntelligence返回参数结构体
+ */
+export interface ModifyWafThreatenIntelligenceResponse {
+  /**
+   * 当前WAF威胁情报封禁模块详情
+   */
+  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1052,41 +1874,89 @@ export interface CreateAttackDownloadTaskRequest {
 }
 
 /**
- * SearchAccessLog请求参数结构体
+ * DescribeWafAutoDenyStatus返回参数结构体
  */
-export interface SearchAccessLogRequest {
+export interface DescribeWafAutoDenyStatusResponse {
   /**
-   * 客户要查询的日志主题ID，每个客户都有对应的一个主题
+   * WAF 自动封禁详情
    */
-  TopicId: string
+  WafAutoDenyDetails?: AutoDenyDetail
 
   /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  From: number
+  RequestId?: string
+}
+
+/**
+ * DeleteDomainWhiteRules请求参数结构体
+ */
+export interface DeleteDomainWhiteRulesRequest {
+  /**
+   * 需要删除的规则域名
+   */
+  Domain: string
 
   /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   * 需要删除的白名单规则
    */
-  To: number
+  Ids: Array<number>
+}
+
+/**
+ * UpsertIpAccessControl返回参数结构体
+ */
+export interface UpsertIpAccessControlResponse {
+  /**
+      * 添加或修改失败的条目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedItems: string
 
   /**
-   * 查询语句，语句长度最大为4096
-   */
-  Query: string
+      * 添加或修改失败的数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedCount: number
 
   /**
-   * 单次查询返回的日志条数，最大值为100
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
+  RequestId?: string
+}
+
+/**
+ * ip黑白名单
+ */
+export interface IpAccessControlItem {
+  /**
+   * 动作
+   */
+  ActionType: number
 
   /**
-   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+   * ip
    */
-  Context?: string
+  Ip: string
 
   /**
-   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   * 备注
    */
-  Sort?: string
+  Note: string
+
+  /**
+   * 来源
+   */
+  Source: string
+
+  /**
+      * 更新时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TsVersion: number
+
+  /**
+   * 有效截止时间戳
+   */
+  ValidTs: number
 }
