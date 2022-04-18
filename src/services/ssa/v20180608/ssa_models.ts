@@ -1048,7 +1048,7 @@ export interface SaDivulgeDataQueryPub {
   RuleWord: string
 
   /**
-   * 扫描监测url"
+   * 扫描监测url
    */
   ScanUrl: string
 

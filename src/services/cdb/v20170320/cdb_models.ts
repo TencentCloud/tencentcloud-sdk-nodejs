@@ -4030,7 +4030,7 @@ export interface ModifyBackupConfigRequest {
   InstanceId: string
 
   /**
-   * 备份文件的保留时间，单位为天。最小值为7天，最大值为732天。
+   * 备份文件的保留时间，单位为天。最小值为7天，最大值为1830天。
    */
   ExpireDays?: number
 
@@ -4045,7 +4045,7 @@ export interface ModifyBackupConfigRequest {
   BackupMethod?: string
 
   /**
-   * binlog的保留时间，单位为天。最小值为7天，最大值为732天。该值的设置不能大于备份文件的保留时间。
+   * binlog的保留时间，单位为天。最小值为7天，最大值为1830天。该值的设置不能大于备份文件的保留时间。
    */
   BinlogExpireDays?: number
 
@@ -7719,7 +7719,7 @@ export interface CreateDBInstanceHourRequest {
   CageId?: string
 
   /**
-   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。
+   * 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板，默认值是："HIGH_STABILITY"。
    */
   ParamTemplateType?: string
 

@@ -627,11 +627,11 @@ export interface CreateEipResponse {
     /**
       * EIP列表
       */
-    EipIds?: Array<string>;
+    EipIds: Array<string>;
     /**
       * 任务ID
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -807,7 +807,7 @@ export interface UnbindVpcIpResponse {
     /**
       * 绑定黑石物理机异步任务ID，可以通过查询EIP任务状态查询任务状态
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

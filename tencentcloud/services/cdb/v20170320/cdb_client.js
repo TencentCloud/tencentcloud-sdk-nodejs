@@ -649,7 +649,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupDownloadRestriction", req, cb);
     }
     /**
-     * 重置实例ROOT账，初始化账号权限
+     * 重置实例ROOT账号，初始化账号权限
      */
     async ResetRootAccount(req, cb) {
         return this.request("ResetRootAccount", req, cb);

@@ -188,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainWhiteRules", req, cb);
     }
     /**
+     * 添加Spart防护域名
+     */
+    async AddSpartaProtection(req, cb) {
+        return this.request("AddSpartaProtection", req, cb);
+    }
+    /**
      * 描述WAF威胁情报封禁模块配置详情
      */
     async DescribeWafThreatenIntelligence(req, cb) {

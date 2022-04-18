@@ -2337,6 +2337,11 @@ export interface UserNotice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PhoneCallType?: string;
+    /**
+      * 通知周期 1-7表示周一到周日
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weekday?: Array<number>;
 }
 /**
  * 告警策略过滤条件
@@ -4058,6 +4063,11 @@ export interface URLNotice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EndTime?: number;
+    /**
+      * 通知周期 1-7表示周一到周日
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weekday?: Array<number>;
 }
 /**
  * DescribeAlarmPolicy请求参数结构体

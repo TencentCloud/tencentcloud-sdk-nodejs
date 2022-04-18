@@ -876,7 +876,7 @@ export interface CreateKillTaskRequest {
       */
     InstanceId: string;
     /**
-      * 任务持续时间时间，单位秒，手动关闭任务传-1。
+      * 任务持续时间，单位秒，手动关闭任务传-1。
       */
     Duration: number;
     /**
@@ -976,7 +976,7 @@ export interface MailConfiguration {
       */
     SendMail: number;
     /**
-      * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模版，配置需要发送巡检邮件的地域；订阅的邮件发送模版，配置当前订阅实例的所属地域。
+      * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模板，配置需要发送巡检邮件的地域；订阅的邮件发送模板，配置当前订阅实例的所属地域。
       */
     Region: Array<string>;
     /**

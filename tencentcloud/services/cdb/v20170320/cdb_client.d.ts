@@ -433,7 +433,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupDownloadRestriction(req?: DescribeBackupDownloadRestrictionRequest, cb?: (error: string, rep: DescribeBackupDownloadRestrictionResponse) => void): Promise<DescribeBackupDownloadRestrictionResponse>;
     /**
-     * 重置实例ROOT账，初始化账号权限
+     * 重置实例ROOT账号，初始化账号权限
      */
     ResetRootAccount(req: ResetRootAccountRequest, cb?: (error: string, rep: ResetRootAccountResponse) => void): Promise<ResetRootAccountResponse>;
     /**

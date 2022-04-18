@@ -394,12 +394,12 @@ export interface RecognizeCarResponse {
   /**
    * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
    */
-  CarCoords?: Array<Coord>
+  CarCoords: Array<Coord>
 
   /**
    * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
    */
-  CarTags?: Array<CarTagItem>
+  CarTags: Array<CarTagItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

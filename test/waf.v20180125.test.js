@@ -278,6 +278,16 @@ it("waf.v20180125.DescribeDomainWhiteRules", async function () {
     }
 })
 
+it("waf.v20180125.AddSpartaProtection", async function () {
+    try {
+       const data = await client.AddSpartaProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
     try {
        const data = await client.DescribeWafThreatenIntelligence({})
