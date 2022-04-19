@@ -1,3 +1,26 @@
+# Release 4.0.329
+
+## 文字识别(ocr) 版本：2018-11-19
+
+### 第 65 次发布
+
+发布时间：2022-04-19 19:47:18
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [RecognizeHealthCodeOCR](https://cloud.tencent.com/document/api/866/68580)
+
+	* 新增入参：Type
+
+	* 新增出参：IDNumber, TestingInterval, TestingResult, TestingTime
+
+
+
+
 # Release 4.0.328
 
 ## 云监控(monitor) 版本：2018-07-24

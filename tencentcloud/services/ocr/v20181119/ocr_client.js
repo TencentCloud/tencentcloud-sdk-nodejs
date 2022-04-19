@@ -698,7 +698,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MixedInvoiceOCR", req, cb);
     }
     /**
-     * 本接口支持粤康码识别，包括姓名、更新时间、健康码颜色，三个字段的识别结果输出。
+     * 本接口支持深圳粤康码、上海随申码、北京健康宝的识别，包括持码人姓名、持码人身份证号、健康码更新时间、健康码颜色、核酸检测结果、核酸检测间隔时长、核酸检测时间，七个字段的识别结果输出。不同省市健康码显示的字段信息有所不同，上述字段的识别结果可能为空，以图片上的具体信息为准。
      */
     async RecognizeHealthCodeOCR(req, cb) {
         return this.request("RecognizeHealthCodeOCR", req, cb);

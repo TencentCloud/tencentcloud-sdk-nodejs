@@ -4491,6 +4491,17 @@ export interface RecognizeHealthCodeOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
   ImageUrl?: string
+
+  /**
+      * 需要识别的健康码类型列表，为空或不填表示默认为粤康码。
+
+1:粤康码
+
+2:随申码
+
+3:健康宝
+      */
+  Type?: number
 }
 
 /**
@@ -4671,9 +4682,14 @@ export interface DutyPaidProofOCRRequest {
  */
 export interface RecognizeHealthCodeOCRResponse {
   /**
-   * 持码人姓名
+   * 持码人姓名，如：王*
    */
   Name: string
+
+  /**
+   * 持码人身份证号，如：11**************01
+   */
+  IDNumber: string
 
   /**
    * 健康码更新时间，格式为：XXXX-XX-XX XX:XX:XX
@@ -4684,6 +4700,21 @@ export interface RecognizeHealthCodeOCRResponse {
    * 健康码颜色：绿色、黄色、红色
    */
   Color: string
+
+  /**
+   * 核酸检测间隔时长：24小时、48小时、72小时、暂无核酸检测记录
+   */
+  TestingInterval: string
+
+  /**
+   * 核酸检测结果：阴性、阳性、暂无核酸检测记录
+   */
+  TestingResult: string
+
+  /**
+   * 核酸检测时间，格式为：XXXX-XX-XX XX:XX
+   */
+  TestingTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
