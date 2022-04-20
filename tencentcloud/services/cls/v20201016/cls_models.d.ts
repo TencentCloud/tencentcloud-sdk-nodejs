@@ -121,6 +121,11 @@ export interface LogInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LogJson: string;
+    /**
+      * 日志来源主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HostName: string;
 }
 /**
  * DeleteAlarmNotice返回参数结构体
@@ -2652,6 +2657,11 @@ export interface LogContextInfo {
       * 日志时间戳
       */
     BTime: number;
+    /**
+      * 日志来源主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HostName: string;
 }
 /**
  * ModifyShipper请求参数结构体

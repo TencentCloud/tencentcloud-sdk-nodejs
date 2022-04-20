@@ -72,7 +72,7 @@ export interface CreateDocumentRequest {
       */
     Operator: UserInfo;
     /**
-      * 用户上传的模版ID
+      * 用户上传的模板ID
       */
     TemplateId: string;
     /**
@@ -96,7 +96,8 @@ export interface CreateDocumentRequest {
       */
     ClientToken?: string;
     /**
-      * 是否需要生成预览文件 默认不生成
+      * 是否需要生成预览文件 默认不生成；
+预览链接有效期300秒；
       */
     NeedPreview?: boolean;
 }

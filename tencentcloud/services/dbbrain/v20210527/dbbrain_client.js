@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSchedulerMailProfile", req, cb);
     }
     /**
+     * 查询SQL模版。
+     */
+    async DescribeSqlTemplate(req, cb) {
+        return this.request("DescribeSqlTemplate", req, cb);
+    }
+    /**
      * 获取实例Top库的实时空间统计信息，默认返回按大小排序。
      */
     async DescribeTopSpaceSchemas(req, cb) {
@@ -58,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMySqlProcessList", req, cb);
     }
     /**
-     * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
+     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
      */
-    async CreateProxySessionKillTask(req, cb) {
-        return this.request("CreateProxySessionKillTask", req, cb);
+    async CreateMailProfile(req, cb) {
+        return this.request("CreateMailProfile", req, cb);
     }
     /**
      * 查询健康报告生成任务列表。
@@ -94,10 +100,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSlowLogUserHostStats", req, cb);
     }
     /**
-     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+     * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
      */
-    async DescribeTopSpaceTables(req, cb) {
-        return this.request("DescribeTopSpaceTables", req, cb);
+    async DescribeSlowLogTopSqls(req, cb) {
+        return this.request("DescribeSlowLogTopSqls", req, cb);
+    }
+    /**
+     * 创建实例SQL限流任务。
+     */
+    async CreateSqlFilter(req, cb) {
+        return this.request("CreateSqlFilter", req, cb);
     }
     /**
      * 获取指定时间段内的实例空间使用概览，包括磁盘增长量(MB)、磁盘剩余(MB)、磁盘总量(MB)及预计可用天数。
@@ -106,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSpaceStatus", req, cb);
     }
     /**
-     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
+     * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
      */
-    async CreateMailProfile(req, cb) {
-        return this.request("CreateMailProfile", req, cb);
+    async CreateProxySessionKillTask(req, cb) {
+        return this.request("CreateProxySessionKillTask", req, cb);
     }
     /**
      * 根据实例ID获取指定时间段（30分钟）的健康得分，以及异常扣分项。
@@ -118,10 +130,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHealthScore", req, cb);
     }
     /**
+     * 终止中断会话任务。
+     */
+    async CancelKillTask(req, cb) {
+        return this.request("CancelKillTask", req, cb);
+    }
+    /**
      * 创建安全审计日志导出任务。
      */
     async CreateSecurityAuditLogExportTask(req, cb) {
         return this.request("CreateSecurityAuditLogExportTask", req, cb);
+    }
+    /**
+     * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
+     */
+    async DescribeUserSqlAdvice(req, cb) {
+        return this.request("DescribeUserSqlAdvice", req, cb);
     }
     /**
      * 删除安全审计日志导出任务。
@@ -130,10 +154,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSecurityAuditLogExportTasks", req, cb);
     }
     /**
-     * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+     * 查询redis实例大key列表。
      */
-    async DescribeSlowLogTopSqls(req, cb) {
-        return this.request("DescribeSlowLogTopSqls", req, cb);
+    async DescribeRedisTopBigKeys(req, cb) {
+        return this.request("DescribeRedisTopBigKeys", req, cb);
     }
     /**
      * 查询安全审计日志导出任务列表。
@@ -160,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagHistory", req, cb);
     }
     /**
+     * 更改实例限流任务状态，目前仅用于终止限流。
+     */
+    async ModifySqlFilters(req, cb) {
+        return this.request("ModifySqlFilters", req, cb);
+    }
+    /**
      * 创建健康报告，并可以选择是否发送邮件。
      */
     async CreateDBDiagReportTask(req, cb) {
@@ -170,6 +200,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDiagDBInstances(req, cb) {
         return this.request("DescribeDiagDBInstances", req, cb);
+    }
+    /**
+     * 删除实例SQL限流任务。
+     */
+    async DeleteSqlFilters(req, cb) {
+        return this.request("DeleteSqlFilters", req, cb);
     }
     /**
      * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。
@@ -190,10 +226,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateKillTask", req, cb);
     }
     /**
-     * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
+     * 查询实例无主键表。
      */
-    async DescribeUserSqlAdvice(req, cb) {
-        return this.request("DescribeUserSqlAdvice", req, cb);
+    async DescribeNoPrimaryKeyTables(req, cb) {
+        return this.request("DescribeNoPrimaryKeyTables", req, cb);
+    }
+    /**
+     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+     */
+    async DescribeTopSpaceTables(req, cb) {
+        return this.request("DescribeTopSpaceTables", req, cb);
+    }
+    /**
+     * 查询实例SQL限流任务列表。
+     */
+    async DescribeSqlFilters(req, cb) {
+        return this.request("DescribeSqlFilters", req, cb);
     }
     /**
      * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
@@ -218,6 +266,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateDBDiagReportUrl(req, cb) {
         return this.request("CreateDBDiagReportUrl", req, cb);
+    }
+    /**
+     * 验证用户数据库账号权限，获取会话token。
+     */
+    async VerifyUserAccount(req, cb) {
+        return this.request("VerifyUserAccount", req, cb);
     }
     /**
      * 用于查询 redis 执行 kill 会话任务后代理节点的执行结果，入参异步任务 ID 从接口 CreateProxySessionKillTask 调用成功后取得。当前 product 只支持：redis。

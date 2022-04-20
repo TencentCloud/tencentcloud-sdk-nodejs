@@ -258,6 +258,10 @@ export interface AccessRuleTagInfo {
  */
 export declare type DescribeAccessIndexRequest = null;
 /**
+ * 域名的详细信息
+ */
+export declare type DomainInfo = null;
+/**
  * 日志KeyValue对
  */
 export interface AccessLogItem {
@@ -457,6 +461,23 @@ export interface DeleteAccessExportResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 实例入参过滤器
+ */
+export interface FiltersItemNew {
+    /**
+      * 字段名
+      */
+    Name: string;
+    /**
+      * 过滤值
+      */
+    Values: Array<string>;
+    /**
+      * 是否精确查找
+      */
+    ExactMatch: boolean;
 }
 /**
  * DescribeAutoDenyIP返回参数结构体
@@ -711,7 +732,7 @@ export interface AddSpartaProtectionRequest {
       */
     UpstreamDomain?: string;
     /**
-      * UpstreamType=0时，填次字段表示回源ip
+      * UpstreamType=0时，填次字段表示回源IP
       */
     SrcList?: Array<string>;
     /**
@@ -739,9 +760,13 @@ export interface AddSpartaProtectionRequest {
       */
     InstanceID?: string;
     /**
-      * anycast ip类型开关： 0 普通ip 1 Anycast ip
+      * anycast IP类型开关： 0 普通IP 1 Anycast IP
       */
     Anycast?: number;
+    /**
+      * src权重
+      */
+    Weights?: Array<number>;
 }
 /**
  * DescribeAccessFastAnalysis请求参数结构体
@@ -1305,6 +1330,24 @@ export interface DescribeAccessFastAnalysisResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDomains返回参数结构体
+ */
+export interface DescribeDomainsResponse {
+    /**
+      * 总数
+      */
+    Total: number;
+    /**
+      * domain列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domains: Array<DomainInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * Waf 攻击自动封禁详情
  */
 export interface AutoDenyDetail {
@@ -1764,6 +1807,23 @@ export interface AccessRuleKeyValueInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     KeyValues: Array<AccessKeyValueInfo>;
+}
+/**
+ * DescribeDomains请求参数结构体
+ */
+export interface DescribeDomainsRequest {
+    /**
+      * 偏移
+      */
+    Offset: number;
+    /**
+      * 容量
+      */
+    Limit: number;
+    /**
+      * 过滤数组
+      */
+    Filters?: Array<FiltersItemNew>;
 }
 /**
  * ModifyWafThreatenIntelligence返回参数结构体

@@ -48,6 +48,16 @@ it("dbbrain.v20210527.CreateSchedulerMailProfile", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeSqlTemplate", async function () {
+    try {
+       const data = await client.DescribeSqlTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeTopSpaceSchemas", async function () {
     try {
        const data = await client.DescribeTopSpaceSchemas({})
@@ -68,9 +78,9 @@ it("dbbrain.v20210527.DescribeMySqlProcessList", async function () {
     }
 })
 
-it("dbbrain.v20210527.CreateProxySessionKillTask", async function () {
+it("dbbrain.v20210527.CreateMailProfile", async function () {
     try {
-       const data = await client.CreateProxySessionKillTask({})
+       const data = await client.CreateMailProfile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +138,19 @@ it("dbbrain.v20210527.DescribeSlowLogUserHostStats", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeTopSpaceTables", async function () {
+it("dbbrain.v20210527.DescribeSlowLogTopSqls", async function () {
     try {
-       const data = await client.DescribeTopSpaceTables({})
+       const data = await client.DescribeSlowLogTopSqls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.CreateSqlFilter", async function () {
+    try {
+       const data = await client.CreateSqlFilter({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,9 @@ it("dbbrain.v20210527.DescribeDBSpaceStatus", async function () {
     }
 })
 
-it("dbbrain.v20210527.CreateMailProfile", async function () {
+it("dbbrain.v20210527.CreateProxySessionKillTask", async function () {
     try {
-       const data = await client.CreateMailProfile({})
+       const data = await client.CreateProxySessionKillTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +188,29 @@ it("dbbrain.v20210527.DescribeHealthScore", async function () {
     }
 })
 
+it("dbbrain.v20210527.CancelKillTask", async function () {
+    try {
+       const data = await client.CancelKillTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CreateSecurityAuditLogExportTask", async function () {
     try {
        const data = await client.CreateSecurityAuditLogExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeUserSqlAdvice", async function () {
+    try {
+       const data = await client.DescribeUserSqlAdvice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +228,9 @@ it("dbbrain.v20210527.DeleteSecurityAuditLogExportTasks", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeSlowLogTopSqls", async function () {
+it("dbbrain.v20210527.DescribeRedisTopBigKeys", async function () {
     try {
-       const data = await client.DescribeSlowLogTopSqls({})
+       const data = await client.DescribeRedisTopBigKeys({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +278,16 @@ it("dbbrain.v20210527.DescribeDBDiagHistory", async function () {
     }
 })
 
+it("dbbrain.v20210527.ModifySqlFilters", async function () {
+    try {
+       const data = await client.ModifySqlFilters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.CreateDBDiagReportTask", async function () {
     try {
        const data = await client.CreateDBDiagReportTask({})
@@ -251,6 +301,16 @@ it("dbbrain.v20210527.CreateDBDiagReportTask", async function () {
 it("dbbrain.v20210527.DescribeDiagDBInstances", async function () {
     try {
        const data = await client.DescribeDiagDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DeleteSqlFilters", async function () {
+    try {
+       const data = await client.DeleteSqlFilters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +348,29 @@ it("dbbrain.v20210527.CreateKillTask", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeUserSqlAdvice", async function () {
+it("dbbrain.v20210527.DescribeNoPrimaryKeyTables", async function () {
     try {
-       const data = await client.DescribeUserSqlAdvice({})
+       const data = await client.DescribeNoPrimaryKeyTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeTopSpaceTables", async function () {
+    try {
+       const data = await client.DescribeTopSpaceTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeSqlFilters", async function () {
+    try {
+       const data = await client.DescribeSqlFilters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +411,16 @@ it("dbbrain.v20210527.KillMySqlThreads", async function () {
 it("dbbrain.v20210527.CreateDBDiagReportUrl", async function () {
     try {
        const data = await client.CreateDBDiagReportUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.VerifyUserAccount", async function () {
+    try {
+       const data = await client.VerifyUserAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

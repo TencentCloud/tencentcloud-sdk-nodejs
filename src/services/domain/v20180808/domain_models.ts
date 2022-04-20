@@ -68,63 +68,145 @@ false：关闭60天内禁止转移注册商锁定
 }
 
 /**
- * Template数据
+ * 获取域名基础模板信息
  */
-export interface TemplateInfo {
+export interface DomainSimpleInfo {
   /**
-   * 模板ID
+   * 域名资源ID。
    */
-  TemplateId: string
+  DomainId: string
 
   /**
-   * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+   * 域名名称。
    */
-  AuditStatus: string
+  DomainName: string
 
   /**
-   * 创建时间
-   */
-  CreatedOn: string
+      * 域名实名认证状态。
+NotUpload：未实名认证
+InAudit：实名审核中
+Approved：实名审核通过
+Reject：实名审核失败
+NoAudit: 无需实名认证
+      */
+  RealNameAuditStatus: string
 
   /**
-   * 更新时间
-   */
-  UpdatedOn: string
+      * 域名实名认证不通过原因。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealNameAuditUnpassReason: string
 
   /**
-   * 用户UIN
-   */
-  UserUin: string
+      * 域名命名审核状态。
+NotAudit：命名审核未上传
+Pending：命名审核待上传
+Auditing：域名命名审核中
+Approved：域名命名审核通过
+Rejected：域名命名审核拒绝
+      */
+  DomainNameAuditStatus: string
 
   /**
-   * 是否是默认模板: 是:yes，否:no
-   */
-  IsDefault: string
+      * 域名命名审核不通过原因。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DomainNameAuditUnpassReason: string
 
   /**
-   * 认证失败原因
+   * 注册时间。
    */
-  AuditReason: string
+  CreationDate: string
 
   /**
-   * 认证信息
+   * 到期时间
    */
-  CertificateInfo: CertificateInfo
+  ExpirationDate: string
 
   /**
-   * 联系人信息
-   */
-  ContactInfo: ContactInfo
+      * 域名状态。
+ok：正常
+serverHold：注册局暂停解析 
+clientHold：注册商暂停解析
+pendingTransfer：转移中
+renewingPeriod：续费期
+redemptionPeriod：偿还期
+pendingDelete：删除期
+serverTransferProhibited：注册局禁止转移
+serverUpdateProhibited：注册局禁止更新
+serverDeleteProhibited：注册局禁止删除
+clientTransferProhibited：注册商禁止转移
+clientUpdateProhibited：注册商禁止更新
+clientDeleteProhibited：注册商禁止删除
+      */
+  DomainStatus: Array<string>
 
   /**
-   * 模板是否符合规范， 1是 0 否
-   */
-  IsValidTemplate: number
+      * 域名购买状态。
+ok：正常
+RegisterPending：待注册
+RegisterDoing：注册中
+RegisterFailed：注册失败
+AboutToExpire: 即将过期
+RenewPending：已进入续费期，需要进行续费
+RenewDoing：续费中
+RedemptionPending：已进入赎回期，需要进行续费
+RedemptionDoing：赎回中
+TransferPending：待转入中
+TransferTransing：转入中
+TransferFailed：转入失败
+      */
+  BuyStatus: string
 
   /**
-   * 不符合规范原因
+      * 注册商类型
+epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）
+qcloud: Tencent Cloud Computing (Beijing) Limited Liability Company（腾讯云计算（北京）有限责任公司）
+yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）
+xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
+      */
+  RegistrarType: string
+
+  /**
+   * 域名绑定的ns
    */
-  InvalidReason: string
+  NameServer: Array<string>
+
+  /**
+      * true：开启锁定
+false：关闭锁定
+      */
+  LockTransfer: boolean
+
+  /**
+   * 锁定结束时间
+   */
+  LockEndTime: string
+
+  /**
+   * 认证类型：I=个人，E=企业
+   */
+  RegistrantType: string
+
+  /**
+   * 域名所有者，中文
+   */
+  OrganizationNameCN: string
+
+  /**
+   * 域名所有者，英文
+   */
+  OrganizationName: string
+
+  /**
+   * 域名联系人，中文
+   */
+  RegistrantNameCN: string
+
+  /**
+   * 域名联系人，英文
+   */
+  RegistrantName: string
 }
 
 /**
@@ -423,6 +505,16 @@ export interface CheckDomainResponse {
 }
 
 /**
+ * DescribeDomainSimpleInfo请求参数结构体
+ */
+export interface DescribeDomainSimpleInfoRequest {
+  /**
+   * 域名
+   */
+  DomainName: string
+}
+
+/**
  * CreatePhoneEmail请求参数结构体
  */
 export interface CreatePhoneEmailRequest {
@@ -538,6 +630,66 @@ export interface ModifyDomainOwnerBatchResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Template数据
+ */
+export interface TemplateInfo {
+  /**
+   * 模板ID
+   */
+  TemplateId: string
+
+  /**
+   * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+   */
+  AuditStatus: string
+
+  /**
+   * 创建时间
+   */
+  CreatedOn: string
+
+  /**
+   * 更新时间
+   */
+  UpdatedOn: string
+
+  /**
+   * 用户UIN
+   */
+  UserUin: string
+
+  /**
+   * 是否是默认模板: 是:yes，否:no
+   */
+  IsDefault: string
+
+  /**
+   * 认证失败原因
+   */
+  AuditReason: string
+
+  /**
+   * 认证信息
+   */
+  CertificateInfo: CertificateInfo
+
+  /**
+   * 联系人信息
+   */
+  ContactInfo: ContactInfo
+
+  /**
+   * 模板是否符合规范， 1是 0 否
+   */
+  IsValidTemplate: number
+
+  /**
+   * 不符合规范原因
+   */
+  InvalidReason: string
 }
 
 /**
@@ -1026,18 +1178,23 @@ export interface CreateDomainBatchRequest {
 }
 
 /**
- * SendPhoneEmailCode请求参数结构体
+ * DescribeDomainSimpleInfo返回参数结构体
  */
-export interface SendPhoneEmailCodeRequest {
+export interface DescribeDomainSimpleInfoResponse {
   /**
-   * 手机或者邮箱号。
+   * 域名信息
    */
-  Code: string
+  DomainInfo: DomainSimpleInfo
 
   /**
-   * 1：手机  2：邮箱。
+   * 账号ID
    */
-  Type: number
+  Uin: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1440,6 +1597,21 @@ export interface ModifyDomainOwnerBatchRequest {
    * 是否同时转移对应的 DNS 解析域名，默认false
    */
   TransferDns?: boolean
+}
+
+/**
+ * SendPhoneEmailCode请求参数结构体
+ */
+export interface SendPhoneEmailCodeRequest {
+  /**
+   * 手机或者邮箱号。
+   */
+  Code: string
+
+  /**
+   * 1：手机  2：邮箱。
+   */
+  Type: number
 }
 
 /**

@@ -95,7 +95,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     DescribeApiApp(req: DescribeApiAppRequest, cb?: (error: string, rep: DescribeApiAppResponse) => void): Promise<DescribeApiAppResponse>;
     /**
-     * 查询VPC通道列表详情
+     * 查询后端通道列表详情
      */
     DescribeUpstreams(req: DescribeUpstreamsRequest, cb?: (error: string, rep: DescribeUpstreamsResponse) => void): Promise<DescribeUpstreamsResponse>;
     /**
@@ -172,7 +172,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     DescribeIPStrategy(req: DescribeIPStrategyRequest, cb?: (error: string, rep: DescribeIPStrategyResponse) => void): Promise<DescribeIPStrategyResponse>;
     /**
-     * 修改VPC通道
+     * 修改后端通道
      */
     ModifyUpstream(req: ModifyUpstreamRequest, cb?: (error: string, rep: ModifyUpstreamResponse) => void): Promise<ModifyUpstreamResponse>;
     /**
@@ -270,7 +270,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     ModifyExclusiveInstance(req: ModifyExclusiveInstanceRequest, cb?: (error: string, rep: ModifyExclusiveInstanceResponse) => void): Promise<ModifyExclusiveInstanceResponse>;
     /**
-     * 用于创建创建VPC通道
+     * 用于创建创建后端通道
      */
     CreateUpstream(req: CreateUpstreamRequest, cb?: (error: string, rep: CreateUpstreamResponse) => void): Promise<CreateUpstreamResponse>;
     /**
@@ -291,7 +291,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     DescribeServiceEnvironmentList(req: DescribeServiceEnvironmentListRequest, cb?: (error: string, rep: DescribeServiceEnvironmentListResponse) => void): Promise<DescribeServiceEnvironmentListResponse>;
     /**
-     * 删除VPC通道，需要注意有api绑定时，不允许删除
+     * 删除后端通道，需要注意有API绑定时，不允许删除
      */
     DeleteUpstream(req: DeleteUpstreamRequest, cb?: (error: string, rep: DeleteUpstreamResponse) => void): Promise<DeleteUpstreamResponse>;
     /**
@@ -314,7 +314,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     DescribeApiKey(req: DescribeApiKeyRequest, cb?: (error: string, rep: DescribeApiKeyResponse) => void): Promise<DescribeApiKeyResponse>;
     /**
-     * 查询VPC通道绑定的api列表
+     * 查询后端通道所绑定的API列表
      */
     DescribeUpstreamBindApis(req: DescribeUpstreamBindApisRequest, cb?: (error: string, rep: DescribeUpstreamBindApisResponse) => void): Promise<DescribeUpstreamBindApisResponse>;
     /**

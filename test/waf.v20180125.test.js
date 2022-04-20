@@ -68,6 +68,16 @@ it("waf.v20180125.DeleteDomainWhiteRules", async function () {
     }
 })
 
+it("waf.v20180125.DescribeDomains", async function () {
+    try {
+       const data = await client.DescribeDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAccessIndex", async function () {
     try {
        const data = await client.DescribeAccessIndex({})

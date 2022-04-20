@@ -1090,7 +1090,12 @@ export interface DescribeStatisticDataRequest {
       */
     Conditions?: Array<MidQueryCondition>;
     /**
-      * 统计粒度。默认取值为300，单位为s
+      * 统计粒度。默认取值为300，单位为s；可选的值为60、300、3600、86400
+受存储时长限制，统计粒度与统计的时间范围有关：
+60s：EndTime-StartTime<12小时，且StartTime距当前时间不能超过15天；
+300s：EndTime-StartTime<3天，且StartTime距当前时间不能超过31天；
+3600s：EndTime-StartTime<30天，且StartTime距当前时间不能超过93天；
+86400s：EndTime-StartTime<186天，且StartTime距当前时间不能超过186天。
       */
     Period?: number;
     /**
@@ -4242,19 +4247,19 @@ export interface DescribeStatisticDataResponse {
     /**
       * 统计周期
       */
-    Period?: number;
+    Period: number;
     /**
       * 开始时间
       */
-    StartTime?: string;
+    StartTime: string;
     /**
       * 结束时间
       */
-    EndTime?: string;
+    EndTime: string;
     /**
       * 监控数据
       */
-    Data?: Array<MetricData>;
+    Data: Array<MetricData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

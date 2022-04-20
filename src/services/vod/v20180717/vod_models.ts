@@ -8210,6 +8210,16 @@ export interface DrmStreamingsInfo {
    * 保护类型为 SimpleAES 的转自适应码流模板 ID。
    */
   SimpleAesDefinition?: number
+
+  /**
+   * 保护类型为 Widevine 的转自适应码流模板 ID。
+   */
+  WidevineDefinition?: number
+
+  /**
+   * 保护类型为 FairPlay 的转自适应码流模板 ID。
+   */
+  FairPlayDefinition?: number
 }
 
 /**
@@ -13976,6 +13986,16 @@ export interface DrmStreamingsInfoForUpdate {
    * 保护类型为 SimpleAES 的转自适应码流模板 ID。
    */
   SimpleAesDefinition?: number
+
+  /**
+   * 保护类型为 Widevine 的转自适应码流模板 ID。
+   */
+  WidevineDefinition?: number
+
+  /**
+   * 保护类型为 FairPlay 的转自适应码流模板 ID。
+   */
+  FairPlayDefinition?: number
 }
 
 /**
@@ -14827,7 +14847,7 @@ export interface SearchMediaRequest {
   SourceTypes?: Array<string>
 
   /**
-      * 推流 [直播码](https://cloud.tencent.com/document/product/267/5959) 集合。匹配集合中的任意元素。
+      * 推流直播码集合。匹配集合中的任意元素。
 <li>数组长度限制：10。</li>
       */
   StreamIds?: Array<string>
@@ -14919,7 +14939,7 @@ export interface SearchMediaRequest {
 
   /**
       * （不推荐：应使用 StreamIds 替代）
-推流 [直播码](https://cloud.tencent.com/document/product/267/5959)。
+推流直播码。
       */
   StreamId?: string
 

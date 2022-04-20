@@ -170,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendPhoneEmailCode", req, cb);
     }
     /**
+     * 获取域名实名信息详情
+     */
+    async DescribeDomainSimpleInfo(req, cb) {
+        return this.request("DescribeDomainSimpleInfo", req, cb);
+    }
+    /**
      * 按照域名后缀获取对应的价格列表
      */
     async DescribeDomainPriceList(req, cb) {

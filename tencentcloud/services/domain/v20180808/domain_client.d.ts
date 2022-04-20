@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadImageResponse, RenewDomainBatchResponse, BatchModifyDomainInfoRequest, UpdateProhibitionBatchRequest, TransferInDomainBatchResponse, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, SendPhoneEmailCodeResponse, ModifyDomainDNSBatchResponse, DeletePhoneEmailRequest, DescribeTemplateResponse, UpdateProhibitionBatchResponse, CheckDomainResponse, CreatePhoneEmailRequest, DescribeTemplateRequest, RenewDomainBatchRequest, BatchModifyDomainInfoResponse, ModifyDomainOwnerBatchResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeBatchOperationLogDetailsRequest, DescribeDomainNameListResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, CreateDomainBatchRequest, SendPhoneEmailCodeRequest, DescribeDomainBaseInfoRequest, DescribePhoneEmailListRequest, DescribeDomainNameListRequest, DescribeBatchOperationLogsRequest, UploadImageRequest, CheckDomainRequest, DescribeBatchOperationLogsResponse, TransferProhibitionBatchResponse, ModifyDomainDNSBatchRequest, DescribeBatchOperationLogDetailsResponse, DescribePhoneEmailListResponse, CheckBatchStatusResponse, DeletePhoneEmailResponse, DescribeTemplateListRequest, CreatePhoneEmailResponse, SetDomainAutoRenewRequest, ModifyDomainOwnerBatchRequest } from "./domain_models";
+import { UploadImageResponse, RenewDomainBatchResponse, BatchModifyDomainInfoRequest, UpdateProhibitionBatchRequest, TransferInDomainBatchResponse, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, SendPhoneEmailCodeResponse, ModifyDomainDNSBatchResponse, DeletePhoneEmailRequest, DescribeTemplateResponse, UpdateProhibitionBatchResponse, CheckDomainResponse, DescribeDomainSimpleInfoRequest, CreatePhoneEmailRequest, DescribeTemplateRequest, RenewDomainBatchRequest, BatchModifyDomainInfoResponse, ModifyDomainOwnerBatchResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeBatchOperationLogDetailsRequest, DescribeDomainNameListResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, CreateDomainBatchRequest, DescribeDomainSimpleInfoResponse, DescribeDomainBaseInfoRequest, DescribePhoneEmailListRequest, DescribeDomainNameListRequest, DescribeBatchOperationLogsRequest, UploadImageRequest, CheckDomainRequest, DescribeBatchOperationLogsResponse, TransferProhibitionBatchResponse, ModifyDomainDNSBatchRequest, DescribeBatchOperationLogDetailsResponse, DescribePhoneEmailListResponse, CheckBatchStatusResponse, DeletePhoneEmailResponse, DescribeTemplateListRequest, CreatePhoneEmailResponse, SetDomainAutoRenewRequest, ModifyDomainOwnerBatchRequest, SendPhoneEmailCodeRequest } from "./domain_models";
 /**
  * domain client
  * @class
@@ -103,6 +103,10 @@ export declare class Client extends AbstractClient {
      * 此接口用于发送手机邮箱验证码。
      */
     SendPhoneEmailCode(req: SendPhoneEmailCodeRequest, cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void): Promise<SendPhoneEmailCodeResponse>;
+    /**
+     * 获取域名实名信息详情
+     */
+    DescribeDomainSimpleInfo(req: DescribeDomainSimpleInfoRequest, cb?: (error: string, rep: DescribeDomainSimpleInfoResponse) => void): Promise<DescribeDomainSimpleInfoResponse>;
     /**
      * 按照域名后缀获取对应的价格列表
      */

@@ -491,6 +491,7 @@ task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a
 task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。
 task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。
 task-operator- string （子uin过滤）
+task-kind - string （任务类型过滤）
       */
   Filters?: Array<Filter>
 
@@ -817,7 +818,7 @@ export interface DescribeUsersRequest {
   Sorting?: string
 
   /**
-   * 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。
+   * 过滤条件，支持如下字段类型，user-type：根据用户类型过滤。user-keyword：根据用户名称过滤
    */
   Filters?: Array<Filter>
 }
@@ -979,6 +980,12 @@ export interface UserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UserType: string
+
+  /**
+      * 用户别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserAlias: string
 }
 
 /**
@@ -1189,6 +1196,12 @@ export interface TaskResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CanDownload: boolean
+
+  /**
+      * 用户别名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserAlias: string
 }
 
 /**
@@ -1512,6 +1525,11 @@ export interface CreateUserRequest {
    * 绑定到用户的工作组ID集合。
    */
   WorkGroupIds?: Array<number>
+
+  /**
+   * 用户别名，字符长度小50
+   */
+  UserAlias?: string
 }
 
 /**
@@ -2253,6 +2271,11 @@ export interface UserMessage {
    * 当前用户的创建时间，形如2021-07-28 16:19:32
    */
   CreateTime: string
+
+  /**
+   * 用户别名
+   */
+  UserAlias: string
 }
 
 /**

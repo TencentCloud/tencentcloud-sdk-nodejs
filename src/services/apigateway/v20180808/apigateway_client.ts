@@ -521,7 +521,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 查询VPC通道列表详情
+   * 查询后端通道列表详情
    */
   async DescribeUpstreams(
     req: DescribeUpstreamsRequest,
@@ -706,7 +706,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 修改VPC通道
+   * 修改后端通道
    */
   async ModifyUpstream(
     req: ModifyUpstreamRequest,
@@ -948,7 +948,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 用于创建创建VPC通道
+   * 用于创建创建后端通道
    */
   async CreateUpstream(
     req: CreateUpstreamRequest,
@@ -999,7 +999,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 删除VPC通道，需要注意有api绑定时，不允许删除
+   * 删除后端通道，需要注意有API绑定时，不允许删除
    */
   async DeleteUpstream(
     req: DeleteUpstreamRequest,
@@ -1052,7 +1052,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
   }
 
   /**
-   * 查询VPC通道绑定的api列表
+   * 查询后端通道所绑定的API列表
    */
   async DescribeUpstreamBindApis(
     req: DescribeUpstreamBindApisRequest,

@@ -21,7 +21,7 @@ import {
   UploadImageResponse,
   RenewDomainBatchResponse,
   BatchModifyDomainInfoRequest,
-  TemplateInfo,
+  DomainSimpleInfo,
   UpdateProhibitionBatchRequest,
   TransferInDomainBatchResponse,
   DeleteTemplateResponse,
@@ -34,12 +34,14 @@ import {
   DescribeTemplateResponse,
   UpdateProhibitionBatchResponse,
   CheckDomainResponse,
+  DescribeDomainSimpleInfoRequest,
   CreatePhoneEmailRequest,
   PriceInfo,
   DescribeTemplateRequest,
   RenewDomainBatchRequest,
   BatchModifyDomainInfoResponse,
   ModifyDomainOwnerBatchResponse,
+  TemplateInfo,
   DescribeDomainBaseInfoResponse,
   DescribeTemplateListResponse,
   TransferProhibitionBatchRequest,
@@ -58,7 +60,7 @@ import {
   DomainList,
   DescribeDomainPriceListRequest,
   CreateDomainBatchRequest,
-  SendPhoneEmailCodeRequest,
+  DescribeDomainSimpleInfoResponse,
   DescribeDomainBaseInfoRequest,
   DescribePhoneEmailListRequest,
   DomainBaseInfo,
@@ -77,6 +79,7 @@ import {
   CreatePhoneEmailResponse,
   SetDomainAutoRenewRequest,
   ModifyDomainOwnerBatchRequest,
+  SendPhoneEmailCodeRequest,
   DomainBatchLogSet,
 } from "./domain_models"
 
@@ -321,6 +324,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void
   ): Promise<SendPhoneEmailCodeResponse> {
     return this.request("SendPhoneEmailCode", req, cb)
+  }
+
+  /**
+   * 获取域名实名信息详情
+   */
+  async DescribeDomainSimpleInfo(
+    req: DescribeDomainSimpleInfoRequest,
+    cb?: (error: string, rep: DescribeDomainSimpleInfoResponse) => void
+  ): Promise<DescribeDomainSimpleInfoResponse> {
+    return this.request("DescribeDomainSimpleInfo", req, cb)
   }
 
   /**

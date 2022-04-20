@@ -200,6 +200,12 @@ reject：拒绝，高风险恶意
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RiskType: Array<number>
+
+  /**
+      * 唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConstId: string
 }
 
 /**
@@ -548,6 +554,11 @@ export interface InputManageMarketingRisk {
    * 可选填写。详情请跳转至OnlineScamInfo查看。
    */
   OnlineScam?: OnlineScamInfo
+
+  /**
+   * 平台: 1android
+   */
+  Platform?: string
 }
 
 /**

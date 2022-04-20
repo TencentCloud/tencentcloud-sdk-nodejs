@@ -349,6 +349,14 @@ export interface DeleteImagesRequest {
       * 准备删除的镜像Id列表
       */
     ImageIds: Array<string>;
+    /**
+      * 是否删除镜像关联的快照
+      */
+    DeleteBindedSnap?: boolean;
+    /**
+      * 检测是否支持删除镜像
+      */
+    DryRun?: boolean;
 }
 /**
  * DeleteLaunchTemplate请求参数结构体
@@ -1300,6 +1308,10 @@ export interface SyncImagesRequest {
       * 目的同步地域列表；必须满足限制：<br><li>不能为源地域，<br><li>必须是一个合法的Region。<br><li>暂不支持部分地域同步。<br>具体地域参数请参考[Region](https://cloud.tencent.com/document/product/213/6091)。
       */
     DestinationRegions: Array<string>;
+    /**
+      * 检测是否支持发起同步镜像
+      */
+    DryRun?: boolean;
 }
 /**
  * DisassociateInstancesKeyPairs请求参数结构体
@@ -4203,6 +4215,8 @@ export interface DescribeImagesRequest {
 <p style="padding-left: 30px;">按照【<strong>镜像平台</strong>】进行过滤，如CentOS。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag-key</strong></li>
 <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-value</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag:tag-key</strong></li>
 <p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
       */

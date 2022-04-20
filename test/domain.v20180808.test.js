@@ -248,6 +248,16 @@ it("domain.v20180808.SendPhoneEmailCode", async function () {
     }
 })
 
+it("domain.v20180808.DescribeDomainSimpleInfo", async function () {
+    try {
+       const data = await client.DescribeDomainSimpleInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.DescribeDomainPriceList", async function () {
     try {
        const data = await client.DescribeDomainPriceList({})

@@ -60,6 +60,8 @@ var cam_1 = require("./cam");
 Object.defineProperty(exports, "cam", { enumerable: true, get: function () { return cam_1.cam; } });
 var captcha_1 = require("./captcha");
 Object.defineProperty(exports, "captcha", { enumerable: true, get: function () { return captcha_1.captcha; } });
+var car_1 = require("./car");
+Object.defineProperty(exports, "car", { enumerable: true, get: function () { return car_1.car; } });
 var casb_1 = require("./casb");
 Object.defineProperty(exports, "casb", { enumerable: true, get: function () { return casb_1.casb; } });
 var cat_1 = require("./cat");

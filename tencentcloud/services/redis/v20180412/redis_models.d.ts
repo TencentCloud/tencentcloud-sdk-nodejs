@@ -128,54 +128,13 @@ export interface RestoreInstanceRequest {
     Password?: string;
 }
 /**
- * 任务信息详情
+ * AllocateWanAddress请求参数结构体
  */
-export interface TaskInfoDetail {
+export interface AllocateWanAddressRequest {
     /**
-      * 任务Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TaskId: number;
-    /**
-      * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTime: string;
-    /**
-      * 任务类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TaskType: string;
-    /**
-      * 实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceName: string;
-    /**
-      * 实例Id
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例ID
       */
     InstanceId: string;
-    /**
-      * 项目Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProjectId: number;
-    /**
-      * 任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Progress: number;
-    /**
-      * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndTime: string;
-    /**
-      * 任务状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result: number;
 }
 /**
  * ApplyParamsTemplate请求参数结构体
@@ -1101,6 +1060,56 @@ export interface ManualBackupInstanceResponse {
     RequestId?: string;
 }
 /**
+ * 任务信息详情
+ */
+export interface TaskInfoDetail {
+    /**
+      * 任务Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: number;
+    /**
+      * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskType: string;
+    /**
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName: string;
+    /**
+      * 实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 项目Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectId: number;
+    /**
+      * 任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Progress: number;
+    /**
+      * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+    /**
+      * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: number;
+}
+/**
  * DisableReplicaReadonly返回参数结构体
  */
 export interface DisableReplicaReadonlyResponse {
@@ -1734,6 +1743,23 @@ export interface UpgradeVersionToMultiAvailabilityZonesRequest {
       * 是否升级proxy和redis内核版本，升级后可支持就近接入
       */
     UpgradeProxyAndRedisServer?: boolean;
+}
+/**
+ * AllocateWanAddress返回参数结构体
+ */
+export interface AllocateWanAddressResponse {
+    /**
+      * 异步流程ID
+      */
+    FlowId: number;
+    /**
+      * 开通外网的状态
+      */
+    WanStatus: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeInstanceMonitorTookDist请求参数结构体
@@ -2436,6 +2462,23 @@ export interface DescribeInstanceSecurityGroupResponse {
       * 实例安全组信息
       */
     InstanceSecurityGroupsDetail: Array<InstanceSecurityGroupDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ReleaseWanAddress返回参数结构体
+ */
+export interface ReleaseWanAddressResponse {
+    /**
+      * 异步流程ID
+      */
+    FlowId: number;
+    /**
+      * 关闭外网的状态
+      */
+    WanStatus: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3328,6 +3371,15 @@ export interface InstanceSet {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Region: string;
+}
+/**
+ * ReleaseWanAddress请求参数结构体
+ */
+export interface ReleaseWanAddressRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
 }
 /**
  * InquiryPriceRenewInstance请求参数结构体

@@ -2181,6 +2181,10 @@ bandwidth：计费带宽
       * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
       */
     Product?: string;
+    /**
+      * 指定查询时间的时区，默认UTC+08:00
+      */
+    TimeZone?: string;
 }
 /**
  * 缓存配置基础版本
@@ -3620,6 +3624,10 @@ global：全球加速
       */
     OriginCombine?: OriginCombine;
     /**
+      * POST请求传输配置
+      */
+    PostMaxSize?: PostSize;
+    /**
       * Quic访问（收费服务，详见计费说明和产品文档）
       */
     Quic?: Quic;
@@ -3673,6 +3681,11 @@ on：开启
 off：关闭
       */
     Switch: string;
+    /**
+      * 启发式缓存配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeuristicCache?: HeuristicCache;
 }
 /**
  * MagAge 规则配置
@@ -4264,6 +4277,22 @@ export interface DescribeScdnIpStrategyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 自定义响应头配置，默认为关闭状态
+ */
+export interface ResponseHeader {
+    /**
+      * 自定义响应头开关
+on：开启
+off：关闭
+      */
+    Switch: string;
+    /**
+      * 自定义响应头规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeaderRules?: Array<HttpHeaderPathRule>;
 }
 /**
  * 回源鉴权高级配置TypeA
@@ -5190,20 +5219,18 @@ export interface Ipv6Access {
     Switch: string;
 }
 /**
- * 自定义响应头配置，默认为关闭状态
+ * 启发式缓存配置
  */
-export interface ResponseHeader {
+export interface HeuristicCache {
     /**
-      * 自定义响应头开关
-on：开启
-off：关闭
+      * on 代表开启启发式缓存
+off 代表关闭启发式缓存
       */
     Switch: string;
     /**
-      * 自定义响应头规则
-注意：此字段可能返回 null，表示取不到有效值。
+      * 自定义启发式缓存时间配置
       */
-    HeaderRules?: Array<HttpHeaderPathRule>;
+    CacheConfig?: CacheConfig;
 }
 /**
  * DuplicateDomainConfig返回参数结构体
@@ -5492,6 +5519,10 @@ mainland：指定查询中国境内 CDN 数据
 overseas：指定查询中国境外 CDN 数据
       */
     Area?: string;
+    /**
+      * 指定查询时间的时区，默认UTC+08:00
+      */
+    TimeZone?: string;
 }
 /**
  * DescribeScdnBotRecords请求参数结构体
@@ -8127,6 +8158,20 @@ export interface HwPrivateAccess {
     Bucket?: string;
 }
 /**
+ * 启发式自定义时间缓存配置
+ */
+export interface CacheConfig {
+    /**
+      * on 代表开启自定义启发式缓存时间
+off 代表关闭自定义启发式缓存时间
+      */
+    HeuristicCacheTimeSwitch: string;
+    /**
+      * 单位 秒.
+      */
+    HeuristicCacheTime: number;
+}
+/**
  * PushUrlsCache返回参数结构体
  */
 export interface PushUrlsCacheResponse {
@@ -9089,6 +9134,10 @@ client：指定查询客户端地区（用户请求终端所在地区）数据
       * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
       */
     Product?: string;
+    /**
+      * 指定查询时间的时区，默认UTC+08:00
+      */
+    TimeZone?: string;
 }
 /**
  * DescribeImageConfig返回参数结构体

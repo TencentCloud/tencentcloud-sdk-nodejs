@@ -200,7 +200,7 @@ export interface DeleteUsagePlanResponse {
       * 删除操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -214,7 +214,7 @@ export interface DisableApiKeyResponse {
       * 禁用密钥操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -227,7 +227,7 @@ export interface DescribeApiResponse {
     /**
       * API 详情。
       */
-    Result?: ApiInfo;
+    Result: ApiInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -350,7 +350,7 @@ export interface DescribeServiceEnvironmentListResponse {
       * 服务绑定环境详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ServiceEnvironmentSet;
+    Result: ServiceEnvironmentSet;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -823,7 +823,7 @@ export interface DescribeUsagePlansStatusResponse {
       * 使用计划列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: UsagePlansStatus;
+    Result: UsagePlansStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -855,7 +855,7 @@ export interface HealthCheckConf {
  */
 export interface DeleteUpstreamRequest {
     /**
-      * 待删除的VPC通道唯一ID
+      * 待删除的后端通道ID
       */
     UpstreamId: string;
 }
@@ -922,23 +922,27 @@ export interface UnbindApiAppResponse {
  */
 export interface ModifyUpstreamRequest {
     /**
-      * VPC通道唯一ID
+      * 后端通道唯一ID
       */
     UpstreamId: string;
     /**
-      * VPC通道名字
+      * 后端通道名字
       */
     UpstreamName?: string;
     /**
-      * VPC通道描述
+      * 后端通道描述
       */
     UpstreamDescription?: string;
     /**
-      * 后端协议，HTTP, HTTPS其中之一
+      * 后端协议，取值范围：HTTP, HTTPS
       */
     Scheme?: string;
     /**
-      * 负载均衡算法目前支持ROUND_ROBIN
+      * 后端访问类型，取值范围：IP_PORT, K8S
+      */
+    UpstreamType?: string;
+    /**
+      * 负载均衡算法，取值范围：ROUND_ROBIN
       */
     Algorithm?: string;
     /**
@@ -950,7 +954,7 @@ export interface ModifyUpstreamRequest {
       */
     Retries?: number;
     /**
-      * 请求到后端的，host头
+      * 网关转发到后端的 Host 请求头
       */
     UpstreamHost?: string;
     /**
@@ -958,7 +962,11 @@ export interface ModifyUpstreamRequest {
       */
     Nodes?: Array<UpstreamNode>;
     /**
-      * k8s服务配置
+      * 健康检查配置，目前只支持VPC通道
+      */
+    HealthChecker?: UpstreamHealthChecker;
+    /**
+      * 容器服务配置
       */
     K8sService?: Array<K8sService>;
 }
@@ -970,7 +978,7 @@ export interface DescribeApiUsagePlanResponse {
       * api绑定使用计划列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ApiUsagePlanSet;
+    Result: ApiUsagePlanSet;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1016,15 +1024,15 @@ export interface DescribePluginResponse {
  */
 export interface DescribeUpstreamBindApisRequest {
     /**
-      * 分页
+      * 分页大小
       */
     Limit: number;
     /**
-      * 分页
+      * 分页起始位置
       */
     Offset: number;
     /**
-      * vpc通道Id
+      * 后端通道ID
       */
     UpstreamId: string;
     /**
@@ -1126,7 +1134,7 @@ export interface DescribeApiEnvironmentStrategyRequest {
     Offset?: number;
 }
 /**
- * VPC通道主动健康检查的请求头配置
+ * 后端通道主动健康检查的请求头配置
  */
 export declare type UpstreamHealthCheckerReqHeaders = null;
 /**
@@ -1401,7 +1409,7 @@ export interface DescribeServiceResponse {
       */
     DeploymentType: string;
     /**
-      * 特殊用途
+      * 特殊用途, NULL和DEFAULT表示无特殊用途，其他用途如HTTP_DNS等
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SpecialUse: string;
@@ -1464,7 +1472,7 @@ export interface BindEnvironmentResponse {
       * 绑定操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1657,7 +1665,7 @@ export interface UnBindIPStrategyResponse {
       * 解绑操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1701,7 +1709,7 @@ export interface BindIPStrategyResponse {
       * 绑定操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1842,7 +1850,7 @@ export interface DescribeIPStrategyResponse {
       * IP策略详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: IPStrategy;
+    Result: IPStrategy;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1968,14 +1976,14 @@ export interface ModifyIPStrategyResponse {
       * 修改操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * 查询vpc通道返回信息
+ * 查询后端通道返回信息
  */
 export interface DescribeUpstreamInfo {
     /**
@@ -2056,7 +2064,7 @@ export interface ModifyUsagePlanResponse {
       * 使用计划详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: UsagePlanInfo;
+    Result: UsagePlanInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2070,7 +2078,7 @@ export interface CreateUsagePlanResponse {
       * 使用计划详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: UsagePlanInfo;
+    Result: UsagePlanInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2139,42 +2147,42 @@ export interface DeleteApiKeyResponse {
       * 删除操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * VPC通道信息集合
+ * 后端通道详细信息
  */
 export interface UpstreamInfo {
     /**
-      * VPC通道唯一ID
+      * 后端通道唯一ID
       */
     UpstreamId: string;
     /**
-      * VPC通道名字
+      * 后端通道名字
       */
     UpstreamName: string;
     /**
-      * VPC通道描述
+      * 后端通道描述
       */
     UpstreamDescription: string;
     /**
-      * 写意
+      * 后端协议，取值范围：HTTP, HTTPS
       */
     Scheme: string;
     /**
-      * 负载均衡算法
+      * 负载均衡算法，取值范围：ROUND_ROBIN
       */
     Algorithm: string;
     /**
-      * vpc唯一ID
+      * VPC唯一ID
       */
     UniqVpcId: string;
     /**
-      * 请求重拾次数
+      * 请求重试次数
       */
     Retries: number;
     /**
@@ -2196,16 +2204,16 @@ export interface UpstreamInfo {
       */
     HealthChecker: UpstreamHealthChecker;
     /**
-      * Upstream的类型
+      * 后端的类型，取值范围：IP_PORT, K8S
       */
     UpstreamType: string;
     /**
-      * k8s服务配置
+      * K8S容器服务配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
     K8sServices: Array<K8sService>;
     /**
-      * vpc通道的Host
+      * 网关转发给后端的Host请求头
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpstreamHost: string;
@@ -2305,7 +2313,7 @@ export interface DescribeLogSearchResponse {
     /**
       * 获取更多检索结果的游标，值为""表示无后续结果
       */
-    ConText?: string;
+    ConText: string;
     /**
       * 由0或多条日志组成，每条日志格式如下：
 '[$app_id][$env_name][$service_id][$http_host][$api_id][$uri][$scheme][rsp_st:$status][ups_st:$upstream_status]'
@@ -2336,11 +2344,11 @@ err_msg： 错误信息。
 tcp_rtt： 客户端 TCP 连接信息，RTT（Round Trip Time）由三部分组成：链路的传播时间（propagation delay）、末端系统的处理时间、路由器缓存中的排队和处理时间（queuing delay）。
 req_id：请求id。
       */
-    LogSet?: Array<string>;
+    LogSet: Array<string>;
     /**
       * 单次搜索返回的日志条数，TotalCount <= Limit
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2517,7 +2525,7 @@ export interface DemoteServiceUsagePlanResponse {
       * 降级操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2544,7 +2552,7 @@ export interface EnableApiKeyResponse {
       * 启动密钥操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2567,7 +2575,7 @@ export interface UnReleaseServiceResponse {
       * 下线操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2639,7 +2647,7 @@ export interface DescribeUsagePlanSecretIdsResponse {
       * 使用计划绑定的密钥列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: UsagePlanBindSecretStatus;
+    Result: UsagePlanBindSecretStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2654,7 +2662,7 @@ export interface CreatePluginRequest {
       */
     PluginName: string;
     /**
-      * 插件类型。目前支持IPControl, TrafficControl, Cors, CustomReq, CustomAuth，Routing，TrafficControlByParameter。
+      * 插件类型。目前支持IPControl, TrafficControl, Cors, CustomReq, CustomAuth，Routing，TrafficControlByParameter, CircuitBreaker, ProxyCache。
       */
     PluginType: string;
     /**
@@ -2665,6 +2673,10 @@ export interface CreatePluginRequest {
       * 插件描述，限定200字以内。
       */
     Description?: string;
+    /**
+      * 标签
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * tsf类型入参
@@ -2827,7 +2839,7 @@ export interface DescribeIPStrategyApisStatusResponse {
       * 环境绑定API列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: IPStrategyApiStatus;
+    Result: IPStrategyApiStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2924,7 +2936,7 @@ export interface DescribeApiKeyResponse {
       * 密钥详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ApiKey;
+    Result: ApiKey;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3639,7 +3651,7 @@ export interface DescribeServiceEnvironmentReleaseHistoryResponse {
       * 服务发布历史。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ServiceReleaseHistory;
+    Result: ServiceReleaseHistory;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3961,11 +3973,11 @@ export interface ServiceUsagePlanSet {
  */
 export interface CreateUpstreamRequest {
     /**
-      * 后端协议，HTTP, HTTPS其中之一
+      * 后端协议，取值范围：HTTP, HTTPS
       */
     Scheme: string;
     /**
-      * 负载均衡算法目前支持ROUND_ROBIN
+      * 负载均衡算法，取值范围：ROUND-ROBIN
       */
     Algorithm: string;
     /**
@@ -3973,19 +3985,23 @@ export interface CreateUpstreamRequest {
       */
     UniqVpcId: string;
     /**
-      * VPC通道名字
+      * 后端通道名字
       */
     UpstreamName?: string;
     /**
-      * VPC通道描述
+      * 后端通道描述
       */
     UpstreamDescription?: string;
+    /**
+      * 后端访问类型，取值范围：IP_PORT, K8S
+      */
+    UpstreamType?: string;
     /**
       * 请求重试次数，默认3次
       */
     Retries?: number;
     /**
-      * 请求到后端的，host头
+      * 网关转发到后端的Host请求头
       */
     UpstreamHost?: string;
     /**
@@ -3993,7 +4009,15 @@ export interface CreateUpstreamRequest {
       */
     Nodes?: Array<UpstreamNode>;
     /**
-      * k8s服务的配置
+      * 标签
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 健康检查配置，目前只支持VPC通道
+      */
+    HealthChecker?: UpstreamHealthChecker;
+    /**
+      * K8S容器服务的配置
       */
     K8sService?: Array<K8sService>;
 }
@@ -4005,7 +4029,7 @@ export interface ModifyServiceEnvironmentStrategyResponse {
       * 修改操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4019,7 +4043,7 @@ export interface UpdateApiKeyResponse {
       * 更换后的密钥详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ApiKey;
+    Result: ApiKey;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4057,7 +4081,7 @@ export interface DescribeApisStatusResponse {
     /**
       * API 详情列表。
       */
-    Result?: ApisStatus;
+    Result: ApisStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4394,7 +4418,7 @@ export interface CreateApiKeyResponse {
       * 新增的密钥详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ApiKey;
+    Result: ApiKey;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4405,15 +4429,15 @@ export interface CreateApiKeyResponse {
  */
 export interface DescribeUpstreamsRequest {
     /**
-      * 分页
+      * 分页大小
       */
     Limit: number;
     /**
-      * 分页
+      * 分页起始位置
       */
     Offset: number;
     /**
-      * 过滤条件
+      * 过滤条件，支持后端通道ID（UpstreamId）、后端通道名字（UpstreamName）过滤查询
       */
     Filters?: Array<Filter>;
 }
@@ -4556,7 +4580,7 @@ export interface VpcConfig {
  */
 export interface CreateUpstreamResponse {
     /**
-      * 创建返回的唯一id
+      * 创建返回的唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpstreamId: string;
@@ -4808,7 +4832,7 @@ export interface GenerateApiDocumentResponse {
     /**
       * api文档&sdk链接。
       */
-    Result?: DocumentSDK;
+    Result: DocumentSDK;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4822,7 +4846,7 @@ export interface DescribeUsagePlanEnvironmentsResponse {
       * 使用计划绑定详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: UsagePlanEnvironmentStatus;
+    Result: UsagePlanEnvironmentStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4883,7 +4907,7 @@ export interface ModifyApiEnvironmentStrategyResponse {
       * 修改操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4981,7 +5005,7 @@ export interface UnBindEnvironmentResponse {
       * 解绑操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5155,7 +5179,7 @@ export interface DescribeApiEnvironmentStrategyResponse {
       * api绑定策略详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ApiEnvironmentStrategyStataus;
+    Result: ApiEnvironmentStrategyStataus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5253,7 +5277,7 @@ export interface DeleteIPStrategyResponse {
       * 删除操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5384,7 +5408,7 @@ export interface DescribeUsagePlanResponse {
       * 使用计划详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: UsagePlanInfo;
+    Result: UsagePlanInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5458,7 +5482,7 @@ export interface BindEnvironmentRequest {
  */
 export interface ModifyUpstreamResponse {
     /**
-      * 返回修改后的vpc通道信息
+      * 返回修改后的后端通道信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: UpstreamInfo;
@@ -5569,18 +5593,18 @@ export interface DescribeServiceReleaseVersionResponse {
       * 服务发布版本列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ServiceReleaseVersion;
+    Result: ServiceReleaseVersion;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * VPC通道后端节点元数据
+ * 后端通道后端节点元数据
  */
 export interface UpstreamNode {
     /**
-      * IP（domain）
+      * IP或域名
       */
     Host: string;
     /**
@@ -5592,7 +5616,7 @@ export interface UpstreamNode {
       */
     Weight: number;
     /**
-      * vm实例id
+      * CVM实例ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VmInstanceId?: string;
@@ -5602,17 +5626,17 @@ export interface UpstreamNode {
       */
     Tags?: Array<string>;
     /**
-      * 节点健康状态，创建、编辑时不需要传该参数。OFF：关闭，HEALTHY：健康，UNHEALTHY：异常，NO_DATA：数据未上报
+      * 节点健康状态，创建、编辑时不需要传该参数。OFF：关闭，HEALTHY：健康，UNHEALTHY：异常，NO_DATA：数据未上报。目前只支持VPC通道。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Healthy?: string;
     /**
-      * k8s服务名字
+      * K8S容器服务名字
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServiceName?: string;
     /**
-      * k8s命名空间
+      * K8S命名空间
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NameSpace?: string;
@@ -5622,7 +5646,7 @@ export interface UpstreamNode {
       */
     ClusterId?: string;
     /**
-      * Node的来源
+      * Node的来源，取值范围：K8S
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Source?: string;
@@ -5651,7 +5675,7 @@ export interface ApiAppApiInfos {
  */
 export interface DeleteUpstreamResponse {
     /**
-      * 成功删除的vpc通道id
+      * 成功删除的后端通道ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpstreamId: string;
@@ -5879,7 +5903,7 @@ export interface DescribeServiceEnvironmentStrategyResponse {
       * 限流策略列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ServiceEnvironmentStrategyStatus;
+    Result: ServiceEnvironmentStrategyStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6116,7 +6140,7 @@ export interface DescribeServiceUsagePlanResponse {
       * 服务绑定使用计划列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ServiceUsagePlanSet;
+    Result: ServiceUsagePlanSet;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6199,7 +6223,7 @@ export interface DescribeIPStrategysStatusResponse {
       * 符合条件的策略列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: IPStrategysStatus;
+    Result: IPStrategysStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6292,7 +6316,7 @@ export interface UnBindSecretIdsResponse {
       * 解绑操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6380,7 +6404,7 @@ export interface RequestParameter {
     Required?: boolean;
 }
 /**
- * VPC通道健康检查参数配置
+ * 后端通道健康检查参数配置
  */
 export interface UpstreamHealthChecker {
     /**

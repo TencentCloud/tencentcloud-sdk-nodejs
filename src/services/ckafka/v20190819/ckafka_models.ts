@@ -1505,7 +1505,7 @@ export interface CreateTopicRequest {
   UncleanLeaderElectionEnable?: number
 
   /**
-   * 可消息选。保留时间，单位ms，当前最小值为60000ms
+   * 可选参数。消息保留时间，单位ms，当前最小值为60000ms
    */
   RetentionMs?: number
 
@@ -1513,6 +1513,11 @@ export interface CreateTopicRequest {
    * Segment分片滚动的时长，单位ms，当前最小为3600000ms
    */
   SegmentMs?: number
+
+  /**
+   * 主题消息最大值，单位为 Byte，最小值1024Byte(即1KB)，最大值为8388608Byte（即8MB）。
+   */
+  MaxMessageBytes?: number
 
   /**
    * 预设ACL规则, 1:打开  0:关闭，默认不打开
@@ -2910,7 +2915,7 @@ export interface DescribeInstancesDetailRequest {
   TagKey?: string
 
   /**
-   * 过滤器。
+   * 过滤器。filter.Name 支持('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId') ,filter.Values最多传递10个值.
    */
   Filters?: Array<Filter>
 
@@ -2918,6 +2923,11 @@ export interface DescribeInstancesDetailRequest {
    * 已经废弃， 使用InstanceIdList
    */
   InstanceIds?: string
+
+  /**
+   * 按照实例ID过滤
+   */
+  InstanceIdList?: Array<string>
 }
 
 /**

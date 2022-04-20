@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParamTemplates", req, cb);
     }
     /**
+     * 关闭外网
+     */
+    async ReleaseWanAddress(req, cb) {
+        return this.request("ReleaseWanAddress", req, cb);
+    }
+    /**
      * 查询实例慢查询记录
      */
     async DescribeSlowLog(req, cb) {
@@ -262,10 +268,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskInfo", req, cb);
     }
     /**
-     * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
+     * 开通外网
      */
-    async DescribeBackupUrl(req, cb) {
-        return this.request("DescribeBackupUrl", req, cb);
+    async AllocateWanAddress(req, cb) {
+        return this.request("AllocateWanAddress", req, cb);
     }
     /**
      * 本接口（DescribeProxySlowLog）用于查询代理慢查询。
@@ -326,6 +332,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceMonitorBigKey(req, cb) {
         return this.request("DescribeInstanceMonitorBigKey", req, cb);
+    }
+    /**
+     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+     */
+    async SwitchInstanceVip(req, cb) {
+        return this.request("SwitchInstanceVip", req, cb);
     }
     /**
      * 查询实例安全组信息
@@ -478,10 +490,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTookDist", req, cb);
     }
     /**
-     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+     * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
      */
-    async SwitchInstanceVip(req, cb) {
-        return this.request("SwitchInstanceVip", req, cb);
+    async DescribeBackupUrl(req, cb) {
+        return this.request("DescribeBackupUrl", req, cb);
     }
 }
 exports.Client = Client;

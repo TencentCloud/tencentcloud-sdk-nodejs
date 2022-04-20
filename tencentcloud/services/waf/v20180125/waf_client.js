@@ -60,6 +60,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDomainWhiteRules", req, cb);
     }
     /**
+     * 查询用户所有域名的详细信息
+     */
+    async DescribeDomains(req, cb) {
+        return this.request("DescribeDomains", req, cb);
+    }
+    /**
      * 本接口用于获取访问日志索引配置信息
      */
     async DescribeAccessIndex(req, cb) {

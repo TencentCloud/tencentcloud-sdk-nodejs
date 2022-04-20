@@ -33,6 +33,7 @@ import {
   ModifyDomainWhiteRuleRequest,
   AccessRuleTagInfo,
   DescribeAccessIndexRequest,
+  DomainInfo,
   AccessLogItem,
   DescribeCustomRulesResponse,
   DeleteSessionRequest,
@@ -47,6 +48,7 @@ import {
   ResponseCode,
   ModifyAccessPeriodResponse,
   DeleteAccessExportResponse,
+  FiltersItemNew,
   DescribeAutoDenyIPResponse,
   SearchAccessLogResponse,
   IpAccessControlItem,
@@ -80,6 +82,7 @@ import {
   ExportAccessInfo,
   ModifyWafAutoDenyRulesRequest,
   DescribeAccessFastAnalysisResponse,
+  DescribeDomainsResponse,
   AutoDenyDetail,
   ModifyWafAutoDenyStatusRequest,
   ModifyWafThreatenIntelligenceRequest,
@@ -104,6 +107,7 @@ import {
   BotStatPointItem,
   AccessLogInfo,
   AccessRuleKeyValueInfo,
+  DescribeDomainsRequest,
   ModifyWafThreatenIntelligenceResponse,
 } from "./waf_models"
 
@@ -166,6 +170,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDomainWhiteRulesResponse) => void
   ): Promise<DeleteDomainWhiteRulesResponse> {
     return this.request("DeleteDomainWhiteRules", req, cb)
+  }
+
+  /**
+   * 查询用户所有域名的详细信息
+   */
+  async DescribeDomains(
+    req: DescribeDomainsRequest,
+    cb?: (error: string, rep: DescribeDomainsResponse) => void
+  ): Promise<DescribeDomainsResponse> {
+    return this.request("DescribeDomains", req, cb)
   }
 
   /**

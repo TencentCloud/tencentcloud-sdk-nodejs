@@ -24,7 +24,7 @@ import {
   DescribeInstanceMonitorTopNCmdResponse,
   ModifyAutoBackupConfigResponse,
   RestoreInstanceRequest,
-  TaskInfoDetail,
+  AllocateWanAddressRequest,
   ApplyParamsTemplateRequest,
   UpgradeInstanceVersionResponse,
   CreateInstancesRequest,
@@ -68,6 +68,7 @@ import {
   DescribeInstanceShardsResponse,
   DestroyPrepaidInstanceRequest,
   ManualBackupInstanceResponse,
+  TaskInfoDetail,
   DisableReplicaReadonlyResponse,
   CreateParamTemplateResponse,
   InstanceTagInfo,
@@ -102,6 +103,7 @@ import {
   DescribeInstanceBackupsResponse,
   InstanceIntegerParam,
   UpgradeVersionToMultiAvailabilityZonesRequest,
+  AllocateWanAddressResponse,
   DescribeInstanceMonitorTookDistRequest,
   DeleteReplicationInstanceRequest,
   KillMasterGroupRequest,
@@ -138,6 +140,7 @@ import {
   EnableReplicaReadonlyResponse,
   DescribeMaintenanceWindowResponse,
   DescribeInstanceSecurityGroupResponse,
+  ReleaseWanAddressResponse,
   ProductConf,
   ModifyConnectionConfigRequest,
   InstanceNode,
@@ -169,6 +172,7 @@ import {
   ModifyParamTemplateRequest,
   ModfiyInstancePasswordResponse,
   InstanceSet,
+  ReleaseWanAddressRequest,
   InquiryPriceRenewInstanceRequest,
   ModifyConnectionConfigResponse,
   ModifyMaintenanceWindowResponse,
@@ -297,6 +301,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeParamTemplatesResponse) => void
   ): Promise<DescribeParamTemplatesResponse> {
     return this.request("DescribeParamTemplates", req, cb)
+  }
+
+  /**
+   * 关闭外网
+   */
+  async ReleaseWanAddress(
+    req: ReleaseWanAddressRequest,
+    cb?: (error: string, rep: ReleaseWanAddressResponse) => void
+  ): Promise<ReleaseWanAddressResponse> {
+    return this.request("ReleaseWanAddress", req, cb)
   }
 
   /**
@@ -620,13 +634,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
+   * 开通外网
    */
-  async DescribeBackupUrl(
-    req: DescribeBackupUrlRequest,
-    cb?: (error: string, rep: DescribeBackupUrlResponse) => void
-  ): Promise<DescribeBackupUrlResponse> {
-    return this.request("DescribeBackupUrl", req, cb)
+  async AllocateWanAddress(
+    req: AllocateWanAddressRequest,
+    cb?: (error: string, rep: AllocateWanAddressResponse) => void
+  ): Promise<AllocateWanAddressResponse> {
+    return this.request("AllocateWanAddress", req, cb)
   }
 
   /**
@@ -727,6 +741,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorBigKeyResponse) => void
   ): Promise<DescribeInstanceMonitorBigKeyResponse> {
     return this.request("DescribeInstanceMonitorBigKey", req, cb)
+  }
+
+  /**
+   * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+   */
+  async SwitchInstanceVip(
+    req: SwitchInstanceVipRequest,
+    cb?: (error: string, rep: SwitchInstanceVipResponse) => void
+  ): Promise<SwitchInstanceVipResponse> {
+    return this.request("SwitchInstanceVip", req, cb)
   }
 
   /**
@@ -980,12 +1004,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+   * 查询备份Rdb下载地址(接口灰度中，需要加白名单使用)
    */
-  async SwitchInstanceVip(
-    req: SwitchInstanceVipRequest,
-    cb?: (error: string, rep: SwitchInstanceVipResponse) => void
-  ): Promise<SwitchInstanceVipResponse> {
-    return this.request("SwitchInstanceVip", req, cb)
+  async DescribeBackupUrl(
+    req: DescribeBackupUrlRequest,
+    cb?: (error: string, rep: DescribeBackupUrlResponse) => void
+  ): Promise<DescribeBackupUrlResponse> {
+    return this.request("DescribeBackupUrl", req, cb)
   }
 }

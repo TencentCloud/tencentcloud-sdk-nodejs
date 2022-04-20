@@ -19,8 +19,8 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   SchemaSpaceTimeSeries,
+  RedisKeySpaceData,
   HealthReportTask,
-  CreateDBDiagReportTaskResponse,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
   DescribeTopSpaceTablesRequest,
@@ -31,14 +31,19 @@ import {
   DescribeDBDiagEventsResponse,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
-  ModifyDiagDBInstanceConfResponse,
+  CancelKillTaskResponse,
+  DescribeRedisTopBigKeysResponse,
+  DescribeSqlTemplateRequest,
   DescribeTopSpaceSchemaTimeSeriesResponse,
   SlowLogTopSqlItem,
+  DescribeNoPrimaryKeyTablesResponse,
+  DiagHistoryEventItem,
   DescribeProxySessionKillTasksRequest,
   DescribeMySqlProcessListResponse,
   HealthStatus,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
+  ModifySqlFiltersResponse,
   KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
   ContactItem,
@@ -46,12 +51,14 @@ import {
   TimeSlice,
   ModifyDiagDBInstanceConfRequest,
   DescribeSecurityAuditLogDownloadUrlsRequest,
-  MySqlProcess,
+  CreateDBDiagReportTaskResponse,
   CreateMailProfileResponse,
   DescribeSlowLogTimeSeriesStatsRequest,
-  DiagHistoryEventItem,
+  CancelKillTaskRequest,
+  MySqlProcess,
   DescribeDBDiagHistoryRequest,
   CreateKillTaskResponse,
+  DeleteSqlFiltersResponse,
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
   CreateKillTaskRequest,
@@ -59,34 +66,44 @@ import {
   CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
   MailConfiguration,
+  VerifyUserAccountRequest,
   DescribeSlowLogUserHostStatsResponse,
   TableSpaceData,
   EventInfo,
   DescribeMailProfileRequest,
   DeleteSecurityAuditLogExportTasksResponse,
   KillMySqlThreadsRequest,
+  DescribeSqlFiltersResponse,
   CreateDBDiagReportUrlRequest,
   DescribeSecurityAuditLogExportTasksResponse,
+  DescribeSqlTemplateResponse,
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagHistoryResponse,
   DescribeDBDiagEventRequest,
+  ModifySqlFiltersRequest,
   DescribeAllUserContactResponse,
   MonitorMetric,
   ProfileInfo,
   UserProfile,
   AddUserContactRequest,
+  CreateSqlFilterRequest,
   InstanceBasicInfo,
   SchemaSpaceData,
   DescribeAllUserContactRequest,
   DescribeDiagDBInstancesRequest,
+  DescribeNoPrimaryKeyTablesRequest,
   InstanceInfo,
+  CreateSqlFilterResponse,
+  VerifyUserAccountResponse,
+  DescribeSqlFiltersRequest,
   DescribeSecurityAuditLogExportTasksRequest,
   DeleteSecurityAuditLogExportTasksRequest,
   CreateSchedulerMailProfileResponse,
   DescribeTopSpaceSchemaTimeSeriesRequest,
   DescribeSlowLogTopSqlsRequest,
   DescribeMailProfileResponse,
+  DescribeRedisTopBigKeysRequest,
   DescribeHealthScoreRequest,
   IssueTypeInfo,
   DescribeDiagDBInstancesResponse,
@@ -100,8 +117,10 @@ import {
   DescribeSlowLogTimeSeriesStatsResponse,
   MonitorFloatMetric,
   DescribeAllUserGroupResponse,
+  ModifyDiagDBInstanceConfResponse,
   DescribeUserSqlAdviceResponse,
   DescribeDBSpaceStatusResponse,
+  SQLFilter,
   GroupItem,
   DescribeTopSpaceTableTimeSeriesRequest,
   DescribeDBDiagReportTasksRequest,
@@ -111,7 +130,9 @@ import {
   ScoreDetail,
   DescribeTopSpaceSchemasRequest,
   DescribeSlowLogTopSqlsResponse,
+  DeleteSqlFiltersRequest,
   DescribeUserSqlAdviceRequest,
+  Table,
   DescribeMySqlProcessListRequest,
   DescribeSecurityAuditLogDownloadUrlsResponse,
   DescribeProxySessionKillTasksResponse,
@@ -157,6 +178,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询SQL模版。
+   */
+  async DescribeSqlTemplate(
+    req: DescribeSqlTemplateRequest,
+    cb?: (error: string, rep: DescribeSqlTemplateResponse) => void
+  ): Promise<DescribeSqlTemplateResponse> {
+    return this.request("DescribeSqlTemplate", req, cb)
+  }
+
+  /**
    * 获取实例Top库的实时空间统计信息，默认返回按大小排序。
    */
   async DescribeTopSpaceSchemas(
@@ -177,13 +208,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
+   * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
    */
-  async CreateProxySessionKillTask(
-    req: CreateProxySessionKillTaskRequest,
-    cb?: (error: string, rep: CreateProxySessionKillTaskResponse) => void
-  ): Promise<CreateProxySessionKillTaskResponse> {
-    return this.request("CreateProxySessionKillTask", req, cb)
+  async CreateMailProfile(
+    req: CreateMailProfileRequest,
+    cb?: (error: string, rep: CreateMailProfileResponse) => void
+  ): Promise<CreateMailProfileResponse> {
+    return this.request("CreateMailProfile", req, cb)
   }
 
   /**
@@ -237,13 +268,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+   * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
    */
-  async DescribeTopSpaceTables(
-    req: DescribeTopSpaceTablesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void
-  ): Promise<DescribeTopSpaceTablesResponse> {
-    return this.request("DescribeTopSpaceTables", req, cb)
+  async DescribeSlowLogTopSqls(
+    req: DescribeSlowLogTopSqlsRequest,
+    cb?: (error: string, rep: DescribeSlowLogTopSqlsResponse) => void
+  ): Promise<DescribeSlowLogTopSqlsResponse> {
+    return this.request("DescribeSlowLogTopSqls", req, cb)
+  }
+
+  /**
+   * 创建实例SQL限流任务。
+   */
+  async CreateSqlFilter(
+    req: CreateSqlFilterRequest,
+    cb?: (error: string, rep: CreateSqlFilterResponse) => void
+  ): Promise<CreateSqlFilterResponse> {
+    return this.request("CreateSqlFilter", req, cb)
   }
 
   /**
@@ -257,13 +298,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
+   * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
    */
-  async CreateMailProfile(
-    req: CreateMailProfileRequest,
-    cb?: (error: string, rep: CreateMailProfileResponse) => void
-  ): Promise<CreateMailProfileResponse> {
-    return this.request("CreateMailProfile", req, cb)
+  async CreateProxySessionKillTask(
+    req: CreateProxySessionKillTaskRequest,
+    cb?: (error: string, rep: CreateProxySessionKillTaskResponse) => void
+  ): Promise<CreateProxySessionKillTaskResponse> {
+    return this.request("CreateProxySessionKillTask", req, cb)
   }
 
   /**
@@ -277,6 +318,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 终止中断会话任务。
+   */
+  async CancelKillTask(
+    req: CancelKillTaskRequest,
+    cb?: (error: string, rep: CancelKillTaskResponse) => void
+  ): Promise<CancelKillTaskResponse> {
+    return this.request("CancelKillTask", req, cb)
+  }
+
+  /**
    * 创建安全审计日志导出任务。
    */
   async CreateSecurityAuditLogExportTask(
@@ -284,6 +335,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSecurityAuditLogExportTaskResponse) => void
   ): Promise<CreateSecurityAuditLogExportTaskResponse> {
     return this.request("CreateSecurityAuditLogExportTask", req, cb)
+  }
+
+  /**
+   * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
+   */
+  async DescribeUserSqlAdvice(
+    req: DescribeUserSqlAdviceRequest,
+    cb?: (error: string, rep: DescribeUserSqlAdviceResponse) => void
+  ): Promise<DescribeUserSqlAdviceResponse> {
+    return this.request("DescribeUserSqlAdvice", req, cb)
   }
 
   /**
@@ -297,13 +358,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+   * 查询redis实例大key列表。
    */
-  async DescribeSlowLogTopSqls(
-    req: DescribeSlowLogTopSqlsRequest,
-    cb?: (error: string, rep: DescribeSlowLogTopSqlsResponse) => void
-  ): Promise<DescribeSlowLogTopSqlsResponse> {
-    return this.request("DescribeSlowLogTopSqls", req, cb)
+  async DescribeRedisTopBigKeys(
+    req: DescribeRedisTopBigKeysRequest,
+    cb?: (error: string, rep: DescribeRedisTopBigKeysResponse) => void
+  ): Promise<DescribeRedisTopBigKeysResponse> {
+    return this.request("DescribeRedisTopBigKeys", req, cb)
   }
 
   /**
@@ -347,6 +408,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更改实例限流任务状态，目前仅用于终止限流。
+   */
+  async ModifySqlFilters(
+    req: ModifySqlFiltersRequest,
+    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
+  ): Promise<ModifySqlFiltersResponse> {
+    return this.request("ModifySqlFilters", req, cb)
+  }
+
+  /**
    * 创建健康报告，并可以选择是否发送邮件。
    */
   async CreateDBDiagReportTask(
@@ -364,6 +435,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiagDBInstancesResponse) => void
   ): Promise<DescribeDiagDBInstancesResponse> {
     return this.request("DescribeDiagDBInstances", req, cb)
+  }
+
+  /**
+   * 删除实例SQL限流任务。
+   */
+  async DeleteSqlFilters(
+    req: DeleteSqlFiltersRequest,
+    cb?: (error: string, rep: DeleteSqlFiltersResponse) => void
+  ): Promise<DeleteSqlFiltersResponse> {
+    return this.request("DeleteSqlFilters", req, cb)
   }
 
   /**
@@ -397,13 +478,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
+   * 查询实例无主键表。
    */
-  async DescribeUserSqlAdvice(
-    req: DescribeUserSqlAdviceRequest,
-    cb?: (error: string, rep: DescribeUserSqlAdviceResponse) => void
-  ): Promise<DescribeUserSqlAdviceResponse> {
-    return this.request("DescribeUserSqlAdvice", req, cb)
+  async DescribeNoPrimaryKeyTables(
+    req: DescribeNoPrimaryKeyTablesRequest,
+    cb?: (error: string, rep: DescribeNoPrimaryKeyTablesResponse) => void
+  ): Promise<DescribeNoPrimaryKeyTablesResponse> {
+    return this.request("DescribeNoPrimaryKeyTables", req, cb)
+  }
+
+  /**
+   * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+   */
+  async DescribeTopSpaceTables(
+    req: DescribeTopSpaceTablesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void
+  ): Promise<DescribeTopSpaceTablesResponse> {
+    return this.request("DescribeTopSpaceTables", req, cb)
+  }
+
+  /**
+   * 查询实例SQL限流任务列表。
+   */
+  async DescribeSqlFilters(
+    req: DescribeSqlFiltersRequest,
+    cb?: (error: string, rep: DescribeSqlFiltersResponse) => void
+  ): Promise<DescribeSqlFiltersResponse> {
+    return this.request("DescribeSqlFilters", req, cb)
   }
 
   /**
@@ -444,6 +545,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDBDiagReportUrlResponse) => void
   ): Promise<CreateDBDiagReportUrlResponse> {
     return this.request("CreateDBDiagReportUrl", req, cb)
+  }
+
+  /**
+   * 验证用户数据库账号权限，获取会话token。
+   */
+  async VerifyUserAccount(
+    req: VerifyUserAccountRequest,
+    cb?: (error: string, rep: VerifyUserAccountResponse) => void
+  ): Promise<VerifyUserAccountResponse> {
+    return this.request("VerifyUserAccount", req, cb)
   }
 
   /**

@@ -88,6 +88,16 @@ it("redis.v20180412.DescribeParamTemplates", async function () {
     }
 })
 
+it("redis.v20180412.ReleaseWanAddress", async function () {
+    try {
+       const data = await client.ReleaseWanAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeSlowLog", async function () {
     try {
        const data = await client.DescribeSlowLog({})
@@ -408,9 +418,9 @@ it("redis.v20180412.DescribeTaskInfo", async function () {
     }
 })
 
-it("redis.v20180412.DescribeBackupUrl", async function () {
+it("redis.v20180412.AllocateWanAddress", async function () {
     try {
-       const data = await client.DescribeBackupUrl({})
+       const data = await client.AllocateWanAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -511,6 +521,16 @@ it("redis.v20180412.DestroyPostpaidInstance", async function () {
 it("redis.v20180412.DescribeInstanceMonitorBigKey", async function () {
     try {
        const data = await client.DescribeInstanceMonitorBigKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.SwitchInstanceVip", async function () {
+    try {
+       const data = await client.SwitchInstanceVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +788,9 @@ it("redis.v20180412.DescribeInstanceMonitorTookDist", async function () {
     }
 })
 
-it("redis.v20180412.SwitchInstanceVip", async function () {
+it("redis.v20180412.DescribeBackupUrl", async function () {
     try {
-       const data = await client.SwitchInstanceVip({})
+       const data = await client.DescribeBackupUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

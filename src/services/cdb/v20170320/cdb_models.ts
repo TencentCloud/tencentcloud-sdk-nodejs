@@ -6030,7 +6030,7 @@ export interface InstanceInfo {
   Vport: number
 
   /**
-   * 是否锁定标记
+   * 磁盘写入是否被锁定（实例数据写入量已经超过磁盘配额）。0 -未被锁定 1 -已被锁定
    */
   CdbError: number
 
