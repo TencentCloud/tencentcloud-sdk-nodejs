@@ -1261,6 +1261,11 @@ export interface ServiceConfig {
       */
     Method?: string;
     /**
+      * 当绑定vpc通道才需要
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpstreamId?: string;
+    /**
       * API后端COS配置。如果 ServiceType 是 COS，则此参数必传。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -3556,6 +3561,10 @@ export interface CreateApiRequest {
       * EIAM应用ID。
       */
     EIAMAppId?: string;
+    /**
+      * 资源的Owner
+      */
+    Owner?: string;
 }
 /**
  * DescribeServiceEnvironmentStrategy请求参数结构体
@@ -4694,7 +4703,7 @@ export interface DeletePluginResponse {
     RequestId?: string;
 }
 /**
- * 查询vpc通道绑定api列表
+ * 查询后端通道绑定API列表
  */
 export interface DescribeUpstreamBindApis {
     /**
@@ -4702,7 +4711,7 @@ export interface DescribeUpstreamBindApis {
       */
     TotalCount: number;
     /**
-      * 绑定的api信息
+      * 绑定的API信息
       */
     BindApiSet: Array<BindApiInfo>;
 }

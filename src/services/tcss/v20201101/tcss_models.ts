@@ -222,7 +222,7 @@ export interface AbnormalProcessEventDescription {
   MatchRule: AbnormalProcessChildRuleInfo
 
   /**
-   * 命中规则名字
+   * 命中规则名称，PROXY_TOOL：代理软件，TRANSFER_CONTROL：横向渗透，ATTACK_CMD：恶意命令，REVERSE_SHELL：反弹shell，FILELESS：无文件程序执行，RISK_CMD：高危命令，ABNORMAL_CHILD_PROC：敏感服务异常子进程启动，USER_DEFINED_RULE：用户自定义规则
    */
   RuleName: string
 
@@ -236,6 +236,12 @@ export interface AbnormalProcessEventDescription {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OperationTime: string
+
+  /**
+      * 命中策略名称：SYSTEM_DEFINED_RULE （系统策略）或  用户自定义的策略名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
 }
 
 /**
@@ -1499,6 +1505,11 @@ MountNamespace逃逸、
    * 是否打开：false否 ，true是
    */
   IsEnable: boolean
+
+  /**
+   * 规则组别。RISK_CONTAINER：风险容器，PROCESS_PRIVILEGE：程序特权，CONTAINER_ESCAPE：容器逃逸
+   */
+  Group: string
 }
 
 /**
@@ -2829,11 +2840,8 @@ export interface ModifyEscapeEventStatusRequest {
   EventIdSet: Array<string>
 
   /**
-      * 标记事件的状态
-   EVENT_DEALED:事件已经处理
-     EVENT_INGNORE：事件忽略
-     EVENT_DEL:事件删除
-      */
+   * 标记事件的状态：EVENT_UNDEAL:未处理（取消忽略），EVENT_DEALED:已处理，EVENT_IGNORE:忽略，EVENT_DELETE：已删除
+   */
   Status: string
 
   /**
@@ -3444,7 +3452,7 @@ export interface AbnormalProcessEventInfo {
   EventType: string
 
   /**
-   * 命中规则
+   * 命中规则名称，PROXY_TOOL：代理软件，TRANSFER_CONTROL：横向渗透，ATTACK_CMD：恶意命令，REVERSE_SHELL：反弹shell，FILELESS：无文件程序执行，RISK_CMD：高危命令，ABNORMAL_CHILD_PROC：敏感服务异常子进程启动，USER_DEFINED_RULE：用户自定义规则
    */
   MatchRuleName: string
 
@@ -3541,6 +3549,16 @@ RULE_MODE_HOLDUP 拦截
    * 规则组Id
    */
   RuleId: string
+
+  /**
+   * 命中策略名称：SYSTEM_DEFINED_RULE （系统策略）或  用户自定义的策略名字
+   */
+  MatchGroupName: string
+
+  /**
+   * 命中规则等级，HIGH：高危，MIDDLE：中危，LOW：低危。
+   */
+  MatchRuleLevel: string
 }
 
 /**
@@ -3893,6 +3911,37 @@ MountNamespace逃逸、
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClientIP: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetSubStatus: string
+
+  /**
+      * 容器隔离操作来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerIsolateOperationSrc: string
 }
 
 /**
@@ -4770,6 +4819,12 @@ RISK_CMD：高危命令
 ABNORMAL_CHILD_PROC: 敏感服务异常子进程启动
       */
   RuleType: string
+
+  /**
+      * 威胁等级，HIGH:高，MIDDLE:中，LOW:低
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleLevel?: string
 }
 
 /**
@@ -6924,11 +6979,8 @@ export interface EscapeEventInfo {
   ImageName: string
 
   /**
-      * 状态
-     EVENT_UNDEAL:事件未处理
-     EVENT_DEALED:事件已经处理
-     EVENT_INGNORE：事件忽略
-      */
+   * 状态，EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略
+   */
   Status: string
 
   /**
@@ -6991,6 +7043,18 @@ MountNamespace逃逸、
    * 最近生成时间
    */
   LatestFoundTime: string
+
+  /**
+      * 节点IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeIP: string
+
+  /**
+      * 主机IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HostID: string
 }
 
 /**
@@ -7219,6 +7283,12 @@ export interface AbnormalProcessChildRuleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleId?: string
+
+  /**
+      * 威胁等级，HIGH:高，MIDDLE:中，LOW:低
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleLevel?: string
 }
 
 /**
@@ -9408,7 +9478,7 @@ export interface DescribeEscapeEventInfoRequest {
   Offset?: number
 
   /**
-   * 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]
+   * 过滤参数,Status：EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略
    */
   Filters?: Array<RunTimeFilters>
 
