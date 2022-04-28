@@ -667,7 +667,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUploadedFiles", req, cb);
     }
     /**
-     * 查询数据库代理
+     * 查询数据库代理（待下线，替换接口QueryCDBProxy）
      */
     async DescribeCDBProxy(req, cb) {
         return this.request("DescribeCDBProxy", req, cb);

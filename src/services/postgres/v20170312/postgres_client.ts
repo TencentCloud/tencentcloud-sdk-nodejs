@@ -60,6 +60,7 @@ import {
   DurationAnalysis,
   DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
+  OpenServerlessDBExtranetAccessResponse,
   InquiryPriceCreateDBInstancesResponse,
   CreateDBInstanceNetworkAccessRequest,
   ModifySwitchTimePeriodResponse,
@@ -96,7 +97,6 @@ import {
   ServerlessDBInstance,
   CreateReadOnlyGroupRequest,
   CreateReadOnlyGroupNetworkAccessResponse,
-  DescribeServerlessDBInstancesResponse,
   DescribeParamsEventResponse,
   CloseServerlessDBExtranetAccessResponse,
   EventItem,
@@ -108,11 +108,11 @@ import {
   InquiryPriceUpgradeDBInstanceRequest,
   RebalanceReadOnlyGroupResponse,
   ModifyDBInstanceNameRequest,
-  OpenServerlessDBExtranetAccessResponse,
+  EncryptionKey,
   InquiryPriceRenewDBInstanceResponse,
   DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
-  DBBackup,
+  DescribeServerlessDBInstancesResponse,
   IsolateDBInstancesRequest,
   InitDBInstancesRequest,
   DeleteDBInstanceNetworkAccessRequest,
@@ -135,7 +135,9 @@ import {
   CreateServerlessDBInstanceResponse,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
+  ModifyAccountRemarkRequest,
   CloseDBExtranetAccessRequest,
+  DescribeEncryptionKeysRequest,
   ModifyBackupPlanResponse,
   CreateServerlessDBInstanceRequest,
   InquiryPriceRenewDBInstanceRequest,
@@ -144,7 +146,7 @@ import {
   DeleteServerlessDBInstanceRequest,
   ModifyReadOnlyGroupConfigResponse,
   AccountInfo,
-  ModifyAccountRemarkRequest,
+  DBBackup,
   DescribeDBErrlogsResponse,
   ModifyBackupPlanRequest,
   ParamEntry,
@@ -170,6 +172,7 @@ import {
   DescribeDBInstanceAttributeResponse,
   ModifyDBInstanceSpecResponse,
   DescribeDBXlogsResponse,
+  DescribeEncryptionKeysResponse,
   DescribeDBSlowlogsResponse,
   CreateDBInstancesResponse,
 } from "./postgres_models"
@@ -191,6 +194,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReadOnlyGroupNetworkAccessResponse) => void
   ): Promise<CreateReadOnlyGroupNetworkAccessResponse> {
     return this.request("CreateReadOnlyGroupNetworkAccess", req, cb)
+  }
+
+  /**
+   * 获取实例的密钥信息列表。
+   */
+  async DescribeEncryptionKeys(
+    req: DescribeEncryptionKeysRequest,
+    cb?: (error: string, rep: DescribeEncryptionKeysResponse) => void
+  ): Promise<DescribeEncryptionKeysResponse> {
+    return this.request("DescribeEncryptionKeys", req, cb)
   }
 
   /**

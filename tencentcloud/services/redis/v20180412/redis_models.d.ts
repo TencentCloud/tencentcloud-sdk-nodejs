@@ -2109,7 +2109,7 @@ export interface ModifyNetworkConfigRequest {
       */
     SubnetId?: string;
     /**
-      * vip保留时间，单位：天
+      * vip保留时间，单位：天，注：需要最新版SDK支持
       */
     Recycle?: number;
 }

@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterNodes", req, cb);
     }
     /**
+     * 修改了yarn的资源调度器，点击部署生效
+     */
+    async ModifyResourceScheduler(req, cb) {
+        return this.request("ModifyResourceScheduler", req, cb);
+    }
+    /**
      * 续费询价。
      */
     async InquiryPriceRenewInstance(req, cb) {
@@ -68,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateInstance(req, cb) {
         return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 刷新动态资源池
+     */
+    async ModifyResourcePools(req, cb) {
+        return this.request("ModifyResourcePools", req, cb);
     }
     /**
      * 创建实例询价
@@ -82,10 +94,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceRenewEmr", req, cb);
     }
     /**
+     * 获取yarn资源调度页面的数据
+     */
+    async DescribeResourceSchedule(req, cb) {
+        return this.request("DescribeResourceSchedule", req, cb);
+    }
+    /**
      * 扩容询价. 当扩容时候，请通过该接口查询价格。
      */
     async InquiryPriceScaleOutInstance(req, cb) {
         return this.request("InquiryPriceScaleOutInstance", req, cb);
+    }
+    /**
+     * 修改yarn资源调度的资源配置
+     */
+    async ModifyResourceScheduleConfig(req, cb) {
+        return this.request("ModifyResourceScheduleConfig", req, cb);
     }
     /**
      * 查询流程任务

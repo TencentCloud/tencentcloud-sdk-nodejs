@@ -2625,6 +2625,12 @@ export interface EnvInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   EnvType: string
+
+  /**
+      * 是否是dau新套餐
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDauPackage: boolean
 }
 
 /**
@@ -3980,6 +3986,12 @@ export interface DatabasesInfo {
 当前支持ap-shanghai
       */
   Region: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
 }
 
 /**
@@ -4346,6 +4358,11 @@ export interface DescribeWxCloudBaseRunEnvsRequest {
    * wx应用Id
    */
   WxAppId?: string
+
+  /**
+   * 是否查询全地域
+   */
+  AllRegions?: boolean
 }
 
 /**

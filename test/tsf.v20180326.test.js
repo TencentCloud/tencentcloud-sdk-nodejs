@@ -78,16 +78,6 @@ it("tsf.v20180326.ShrinkInstances", async function () {
     }
 })
 
-it("tsf.v20180326.EnableTaskFlow", async function () {
-    try {
-       const data = await client.EnableTaskFlow({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tsf.v20180326.DisableUnitRule", async function () {
     try {
        const data = await client.DisableUnitRule({})
@@ -358,16 +348,6 @@ it("tsf.v20180326.DisableUnitRoute", async function () {
     }
 })
 
-it("tsf.v20180326.DeployServerlessGroup", async function () {
-    try {
-       const data = await client.DeployServerlessGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tsf.v20180326.CreateConfig", async function () {
     try {
        const data = await client.CreateConfig({})
@@ -498,16 +478,6 @@ it("tsf.v20180326.CreateUnitRule", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeServerlessGroups", async function () {
-    try {
-       const data = await client.DescribeServerlessGroups({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tsf.v20180326.DescribeGroupUseDetail", async function () {
     try {
        const data = await client.DescribeGroupUseDetail({})
@@ -618,9 +588,9 @@ it("tsf.v20180326.CreateApiRateLimitRule", async function () {
     }
 })
 
-it("tsf.v20180326.CreateServerlessGroup", async function () {
+it("tsf.v20180326.DeleteMicroservice", async function () {
     try {
-       const data = await client.CreateServerlessGroup({})
+       const data = await client.DeleteMicroservice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1288,9 +1258,9 @@ it("tsf.v20180326.ModifyMicroservice", async function () {
     }
 })
 
-it("tsf.v20180326.DeleteNamespace", async function () {
+it("tsf.v20180326.EnableTaskFlow", async function () {
     try {
-       const data = await client.DeleteNamespace({})
+       const data = await client.EnableTaskFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1518,9 +1488,9 @@ it("tsf.v20180326.DescribeApiRateLimitRules", async function () {
     }
 })
 
-it("tsf.v20180326.DeleteMicroservice", async function () {
+it("tsf.v20180326.DeleteNamespace", async function () {
     try {
-       const data = await client.DeleteMicroservice({})
+       const data = await client.DeleteNamespace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1641,16 +1611,6 @@ it("tsf.v20180326.CreateContainGroup", async function () {
 it("tsf.v20180326.DescribeEnabledUnitRule", async function () {
     try {
        const data = await client.DescribeEnabledUnitRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tsf.v20180326.DescribeServerlessGroup", async function () {
-    try {
-       const data = await client.DescribeServerlessGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

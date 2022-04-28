@@ -248,16 +248,6 @@ it("cwp.v20180228.DeletePrivilegeEvents", async function () {
     }
 })
 
-it("cwp.v20180228.RenewProVersion", async function () {
-    try {
-       const data = await client.RenewProVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.ExportAttackLogs", async function () {
     try {
        const data = await client.ExportAttackLogs({})
@@ -958,16 +948,6 @@ it("cwp.v20180228.UpdateBaselineStrategy", async function () {
     }
 })
 
-it("cwp.v20180228.CloseProVersion", async function () {
-    try {
-       const data = await client.CloseProVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.ScanVulSetting", async function () {
     try {
        const data = await client.ScanVulSetting({})
@@ -1201,16 +1181,6 @@ it("cwp.v20180228.DescribeVulEffectHostList", async function () {
 it("cwp.v20180228.DescribeScanTaskStatus", async function () {
     try {
        const data = await client.DescribeScanTaskStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cwp.v20180228.OpenProVersionPrepaid", async function () {
-    try {
-       const data = await client.OpenProVersionPrepaid({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1708,16 +1678,6 @@ it("cwp.v20180228.UntrustMalwares", async function () {
     }
 })
 
-it("cwp.v20180228.OpenProVersion", async function () {
-    try {
-       const data = await client.OpenProVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.DescribeAssetWebFrameList", async function () {
     try {
        const data = await client.DescribeAssetWebFrameList({})
@@ -1791,16 +1751,6 @@ it("cwp.v20180228.ModifyMalwareTimingScanSettings", async function () {
 it("cwp.v20180228.DescribeVulList", async function () {
     try {
        const data = await client.DescribeVulList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cwp.v20180228.ModifyProVersionRenewFlag", async function () {
-    try {
-       const data = await client.ModifyProVersionRenewFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2121,16 +2071,6 @@ it("cwp.v20180228.ExportVulDetectionReport", async function () {
 it("cwp.v20180228.DescribeWebPageEventList", async function () {
     try {
        const data = await client.DescribeWebPageEventList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cwp.v20180228.InquiryPriceOpenProVersionPrepaid", async function () {
-    try {
-       const data = await client.InquiryPriceOpenProVersionPrepaid({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

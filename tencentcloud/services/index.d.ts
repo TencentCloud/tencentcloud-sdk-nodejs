@@ -165,6 +165,7 @@ export { tdcpg } from "./tdcpg";
 export { tdid } from "./tdid";
 export { tdmq } from "./tdmq";
 export { tem } from "./tem";
+export { teo } from "./teo";
 export { thpc } from "./thpc";
 export { tia } from "./tia";
 export { tic } from "./tic";

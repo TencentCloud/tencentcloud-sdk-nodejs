@@ -1426,7 +1426,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库代理
+   * 查询数据库代理（待下线，替换接口QueryCDBProxy）
    */
   async DescribeCDBProxy(
     req: DescribeCDBProxyRequest,

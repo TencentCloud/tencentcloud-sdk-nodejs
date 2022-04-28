@@ -127,19 +127,6 @@ export interface ExportWebPageEventListResponse {
     RequestId?: string;
 }
 /**
- * InquiryPriceOpenProVersionPrepaid请求参数结构体
- */
-export interface InquiryPriceOpenProVersionPrepaidRequest {
-    /**
-      * 预付费模式(包年包月)参数设置。
-      */
-    ChargePrepaid: ChargePrepaid;
-    /**
-      * 需要开通专业版机器列表数组。
-      */
-    Machines: Array<ProVersionMachine>;
-}
-/**
  * DescribeUndoVulCounts返回参数结构体
  */
 export interface DescribeUndoVulCountsResponse {
@@ -1311,16 +1298,6 @@ export interface DescribeServerRelatedDirInfoResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * CloseProVersion请求参数结构体
- */
-export interface CloseProVersionRequest {
-    /**
-      * 主机唯一标识Uuid数组。
-黑石的InstanceId，CVM的Uuid ,边缘计算的Uuid , 轻量应用服务器的Uuid ,混合云机器的Quuid 。 当前参数最大长度限制20
-      */
-    Quuid?: string;
 }
 /**
  * DescribeUsualLoginPlaces返回参数结构体
@@ -2877,7 +2854,6 @@ export interface DescribeVulListRequest {
 <li>ModifyTime - String - 是否必填：否 - 最近发生时间</li>
 <li>Uuid- String - 是否必填：否 - 主机uuid查询</li>
 <li>VulName- string -</li>
-<li>HostIp- string - 是否必填：否 - 主机ip</li>
 <li>VulCategory- string - 是否必填：否 - 漏洞类别 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞</li>
       */
     Filters?: Array<Filters>;
@@ -3119,13 +3095,33 @@ export interface DescribeAssetMachineListResponse {
  */
 export declare type DescribeWebPageGeneralizeRequest = null;
 /**
- * DescribeBaselineDetail请求参数结构体
+ * 资产管理磁盘分区信息
  */
-export interface DescribeBaselineDetailRequest {
+export interface AssetDiskPartitionInfo {
     /**
-      * 基线id
+      * 分区名
       */
-    BaselineId: number;
+    Name: string;
+    /**
+      * 分区大小：单位G
+      */
+    Size: number;
+    /**
+      * 分区使用率
+      */
+    Percent: number;
+    /**
+      * 文件系统类型
+      */
+    Type: string;
+    /**
+      * 挂载目录
+      */
+    Path: string;
+    /**
+      * 已使用空间：单位G
+      */
+    Used: number;
 }
 /**
  * ModifyWarningSetting请求参数结构体
@@ -3668,31 +3664,6 @@ export interface DescribeAssetWebLocationListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 告警更新或插入的参数
- */
-export interface WarningObject {
-    /**
-      * 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高位命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线
-      */
-    Type?: number;
-    /**
-      * 1: 关闭告警 0: 开启告警
-      */
-    DisablePhoneWarning?: number;
-    /**
-      * 开始时间，格式: HH:mm
-      */
-    BeginTime?: string;
-    /**
-      * 结束时间，格式: HH:mm
-      */
-    EndTime?: string;
-    /**
-      * 漏洞等级控制位二进制，每一位对应页面漏洞等级的开启关闭：低中高（0:关闭；1：开启），例如：101 → 同时勾选低+高；01→(登录审计)疑似不告警，高危告警
-      */
-    ControlBits?: string;
 }
 /**
  * DescribeAssetJarList请求参数结构体
@@ -4396,19 +4367,6 @@ export interface SecurityDynamic {
     SecurityLevel: string;
 }
 /**
- * OpenProVersionPrepaid请求参数结构体
- */
-export interface OpenProVersionPrepaidRequest {
-    /**
-      * 购买相关参数。
-      */
-    ChargePrepaid: ChargePrepaid;
-    /**
-      * 需要开通专业版主机信息数组。
-      */
-    Machines: Array<ProVersionMachine>;
-}
-/**
  * DescribeMalWareList请求参数结构体
  */
 export interface DescribeMalWareListRequest {
@@ -4753,15 +4711,6 @@ export interface CreateProtectServerResponse {
     RequestId?: string;
 }
 /**
- * OpenProVersion返回参数结构体
- */
-export interface OpenProVersionResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeExpertServiceList请求参数结构体
  */
 export interface DescribeExpertServiceListRequest {
@@ -4851,20 +4800,13 @@ export declare type DescribeHistoryServiceRequest = null;
  */
 export declare type DescribeWarningListRequest = null;
 /**
- * ModifyProVersionRenewFlag请求参数结构体
+ * SyncAssetScan请求参数结构体
  */
-export interface ModifyProVersionRenewFlagRequest {
+export interface SyncAssetScanRequest {
     /**
-      * 自动续费标识。取值范围：
-<li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
-<li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
-<li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
+      * 是否同步：true-是 false-否；默认false
       */
-    RenewFlag: string;
-    /**
-      * 主机唯一ID，对应CVM的uuid、BM的instanceId。
-      */
-    Quuid: string;
+    Sync: boolean;
 }
 /**
  * 漏洞影响主机列表
@@ -5070,15 +5012,6 @@ export interface ScanAssetResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ModifyProVersionRenewFlag返回参数结构体
- */
-export interface ModifyProVersionRenewFlagResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6347,33 +6280,13 @@ export interface DeleteMachineTagRequest {
     Rid: number;
 }
 /**
- * 资产管理磁盘分区信息
+ * DescribeBaselineDetail请求参数结构体
  */
-export interface AssetDiskPartitionInfo {
+export interface DescribeBaselineDetailRequest {
     /**
-      * 分区名
+      * 基线id
       */
-    Name: string;
-    /**
-      * 分区大小：单位G
-      */
-    Size: number;
-    /**
-      * 分区使用率
-      */
-    Percent: number;
-    /**
-      * 文件系统类型
-      */
-    Type: string;
-    /**
-      * 挂载目录
-      */
-    Path: string;
-    /**
-      * 已使用空间：单位G
-      */
-    Used: number;
+    BaselineId: number;
 }
 /**
  * 可用区信息
@@ -6521,15 +6434,6 @@ export interface ModifyBanStatusRequest {
  * DescribeWebPageServiceInfo请求参数结构体
  */
 export declare type DescribeWebPageServiceInfoRequest = null;
-/**
- * SyncAssetScan请求参数结构体
- */
-export interface SyncAssetScanRequest {
-    /**
-      * 是否同步：true-是 false-否；默认false
-      */
-    Sync: boolean;
-}
 /**
  * DescribeLogStorageStatistic返回参数结构体
  */
@@ -7354,15 +7258,6 @@ export interface BashRule {
     DealOldEvents: number;
 }
 /**
- * RenewProVersion返回参数结构体
- */
-export interface RenewProVersionResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * CreateSearchLog返回参数结构体
  */
 export interface CreateSearchLogResponse {
@@ -7877,19 +7772,6 @@ export interface LoginWhiteCombinedInfo {
       * 服务器Uuid
       */
     Uuid: string;
-}
-/**
- * OpenProVersionPrepaid返回参数结构体
- */
-export interface OpenProVersionPrepaidResponse {
-    /**
-      * 订单ID列表。
-      */
-    DealIds: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * DescribeMalwareInfo返回参数结构体
@@ -9694,17 +9576,29 @@ export interface CreateScanMalwareSettingResponse {
     RequestId?: string;
 }
 /**
- * RenewProVersion请求参数结构体
+ * 告警更新或插入的参数
  */
-export interface RenewProVersionRequest {
+export interface WarningObject {
     /**
-      * 购买相关参数。
+      * 事件告警类型；1：离线，2：木马，3：异常登录，4：爆破，5：漏洞（已拆分为9-12四种类型）6：高位命令，7：反弹sell，8：本地提权，9：系统组件漏洞，10：web应用漏洞，11：应急漏洞，12：安全基线
       */
-    ChargePrepaid: ChargePrepaid;
+    Type?: number;
     /**
-      * 主机唯一ID，对应CVM的uuid、BM的InstanceId。
+      * 1: 关闭告警 0: 开启告警
       */
-    Quuid: string;
+    DisablePhoneWarning?: number;
+    /**
+      * 开始时间，格式: HH:mm
+      */
+    BeginTime?: string;
+    /**
+      * 结束时间，格式: HH:mm
+      */
+    EndTime?: string;
+    /**
+      * 漏洞等级控制位二进制，每一位对应页面漏洞等级的开启关闭：低中高（0:关闭；1：开启），例如：101 → 同时勾选低+高；01→(登录审计)疑似不告警，高危告警
+      */
+    ControlBits?: string;
 }
 /**
  * 恶意请求列表
@@ -10711,23 +10605,6 @@ export interface DescribeProtectDirRelatedServerRequest {
     By?: string;
 }
 /**
- * InquiryPriceOpenProVersionPrepaid返回参数结构体
- */
-export interface InquiryPriceOpenProVersionPrepaidResponse {
-    /**
-      * 预支费用的原价，单位：元。
-      */
-    OriginalPrice: number;
-    /**
-      * 预支费用的折扣价，单位：元。
-      */
-    DiscountPrice: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeSearchLogs返回参数结构体
  */
 export interface DescribeSearchLogsResponse {
@@ -11157,30 +11034,6 @@ export interface ExportIgnoreRuleEffectHostListRequest {
     Filters?: Array<Filters>;
 }
 /**
- * 需要开通专业版机器信息。
- */
-export interface ProVersionMachine {
-    /**
-      * 主机类型。
-<li>CVM: 云服务器</li>
-<li>BM: 黑石物理机</li>
-<li>ECM: 边缘计算服务器</li>
-<li>LH: 轻量应用服务器</li>
-<li>Other: 混合云机器</li>
-      */
-    MachineType: string;
-    /**
-      * 主机所在地域。
-如：ap-guangzhou、ap-beijing
-      */
-    MachineRegion: string;
-    /**
-      * 主机唯一标识Uuid数组。
-黑石的InstanceId，CVM的Uuid ,边缘计算的Uuid , 轻量应用服务器的Uuid ,混合云机器的Quuid 。 当前参数最大长度限制20
-      */
-    Quuid: string;
-}
-/**
  * DescribeVulHostCountScanTime返回参数结构体
  */
 export interface DescribeVulHostCountScanTimeResponse {
@@ -11244,15 +11097,6 @@ export interface DescribeAssetCoreModuleListRequest {
       * 服务器Quuid
       */
     Quuid?: string;
-}
-/**
- * CloseProVersion返回参数结构体
- */
-export interface CloseProVersionResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * DeleteAttackLogs请求参数结构体
@@ -11500,24 +11344,6 @@ export interface DescribeSaveOrUpdateWarningsRequest {
       * 告警设置的修改内容
       */
     WarningObjects?: Array<WarningObject>;
-}
-/**
- * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
- */
-export interface ChargePrepaid {
-    /**
-      * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
-      */
-    Period: number;
-    /**
-      * 自动续费标识。取值范围：
-<li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
-<li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
-<li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
-
-默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-      */
-    RenewFlag?: string;
 }
 /**
  * DescribeAssetProcessInfoList返回参数结构体
@@ -12102,28 +11928,6 @@ export interface WarningInfoObj {
       * 漏洞等级控制位二进制，每一位对应页面漏洞等级的开启关闭：低中高（0:关闭；1：开启），例如：101 → 同时勾选低+高
       */
     ControlBits: string;
-}
-/**
- * OpenProVersion请求参数结构体
- */
-export interface OpenProVersionRequest {
-    /**
-      * 云服务器类型。(当前参数已作废,可以留空值 )
-      */
-    MachineType: string;
-    /**
-      * 机器所属地域。(当前参数已作废,可以留空值 )
-      */
-    MachineRegion: string;
-    /**
-      * 主机唯一标识Uuid数组。
-黑石的InstanceId，CVM的Uuid ,边缘计算的Uuid , 轻量应用服务器的Uuid ,混合云机器的Quuid 。 当前参数最大长度限制20
-      */
-    Quuids: Array<string>;
-    /**
-      * 活动ID。
-      */
-    ActivityId?: number;
 }
 /**
  * UpdateMachineTags请求参数结构体

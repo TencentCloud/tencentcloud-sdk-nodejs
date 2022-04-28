@@ -678,71 +678,17 @@ export interface SyncProxyOrganizationOperatorsResponse {
     RequestId?: string;
 }
 /**
- * 签署链接内容
+ * CreateSealByImage返回参数结构体
  */
-export interface SignUrlInfo {
+export interface CreateSealByImageResponse {
     /**
-      * 签署链接
-注意：此字段可能返回 null，表示取不到有效值。
+      * 印章id
       */
-    SignUrl: string;
+    SealId: string;
     /**
-      * 链接失效时间,默认30分钟
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Deadline: number;
-    /**
-      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SignOrder: number;
-    /**
-      * 签署人编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SignId: string;
-    /**
-      * 自定义用户编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CustomUserId: string;
-    /**
-      * 用户姓名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Name: string;
-    /**
-      * 用户手机号码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Mobile: string;
-    /**
-      * 签署参与者机构名字
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OrganizationName: string;
-    /**
-      * 参与者类型:
-ORGANIZATION 企业经办人
-PERSON 自然人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApproverType: string;
-    /**
-      * 经办人身份证号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IdCardNumber: string;
-    /**
-      * 签署链接对应流程Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FlowId: string;
-    /**
-      * 企业经办人 用户在渠道的编号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OpenId: string;
+    RequestId?: string;
 }
 /**
  * 流程对应资源链接信息
@@ -863,6 +809,52 @@ export interface SyncProxyOrganizationRequest {
     Operator?: UserInfo;
 }
 /**
+ * CreateSealByImage请求参数结构体
+ */
+export interface CreateSealByImageRequest {
+    /**
+      * 渠道应用相关信息
+      */
+    Agent: Agent;
+    /**
+      * 印章名称
+      */
+    SealName: string;
+    /**
+      * 印章图片base64
+      */
+    SealImage: string;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+}
+/**
+ * 接口调用者信息
+ */
+export interface UserInfo {
+    /**
+      * 自定义用户编号
+      */
+    CustomUserId?: string;
+    /**
+      * 用户的来源渠道
+      */
+    Channel?: string;
+    /**
+      * 用户在渠道的编号
+      */
+    OpenId?: string;
+    /**
+      * 用户真实IP
+      */
+    ClientIp?: string;
+    /**
+      * 用户代理IP
+      */
+    ProxyIp?: string;
+}
+/**
  * 用量明细
  */
 export interface UsageDetail {
@@ -945,25 +937,13 @@ export interface DownloadFlowInfo {
     FlowIdList: Array<string>;
 }
 /**
- * UploadFiles返回参数结构体
+ * 抄送信息
  */
-export interface UploadFilesResponse {
+export interface CcInfo {
     /**
-      * 文件id数组
+      * 被抄送人手机号
       */
-    FileIds: Array<string>;
-    /**
-      * 上传成功文件数量
-      */
-    TotalCount: number;
-    /**
-      * 文件Url
-      */
-    FileUrls: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Mobile?: string;
 }
 /**
  * 同步经办人失败原因
@@ -1017,13 +997,88 @@ export interface DescribeUsageRequest {
     Offset?: number;
 }
 /**
- * 抄送信息
+ * ChannelCreateFlowByFiles请求参数结构体
  */
-export interface CcInfo {
+export interface ChannelCreateFlowByFilesRequest {
     /**
-      * 被抄送人手机号
+      * 渠道应用相关信息
       */
-    Mobile?: string;
+    Agent?: Agent;
+    /**
+      * 操作者的信息
+      */
+    Operator?: UserInfo;
+    /**
+      * 签署文件资源Id列表，目前仅支持单个文件
+      */
+    FileIds?: Array<string>;
+    /**
+      * 流程名称，长度不超过200个字符
+      */
+    FlowName?: string;
+    /**
+      * 流程截止时间，十位数时间戳，最大值为33162419560，即3020年
+      */
+    Deadline?: number;
+    /**
+      * 流程的描述，长度不超过1000个字符
+      */
+    FlowDescription?: string;
+    /**
+      * 流程的类型，长度不超过255个字符
+      */
+    FlowType?: string;
+    /**
+      * 流程回调地址，长度不超过255个字符
+      */
+    CallbackUrl?: string;
+    /**
+      * 流程签约方列表，最多不超过5个参与方
+      */
+    FlowApprovers?: Array<FlowApproverInfo>;
+    /**
+      * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
+      */
+    Unordered?: boolean;
+    /**
+      * 签署文件中的控件，如：填写控件等
+      */
+    Components?: Array<Component>;
+}
+/**
+ * ChannelCreateFlowByFiles返回参数结构体
+ */
+export interface ChannelCreateFlowByFilesResponse {
+    /**
+      * 合同流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UploadFiles返回参数结构体
+ */
+export interface UploadFilesResponse {
+    /**
+      * 文件id数组
+      */
+    FileIds: Array<string>;
+    /**
+      * 上传成功文件数量
+      */
+    TotalCount: number;
+    /**
+      * 文件Url
+      */
+    FileUrls: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 应用相关信息
@@ -1173,29 +1228,71 @@ export interface FlowInfo {
     CcInfos?: Array<CcInfo>;
 }
 /**
- * 接口调用者信息
+ * 签署链接内容
  */
-export interface UserInfo {
+export interface SignUrlInfo {
+    /**
+      * 签署链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignUrl: string;
+    /**
+      * 链接失效时间,默认30分钟
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Deadline: number;
+    /**
+      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignOrder: number;
+    /**
+      * 签署人编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignId: string;
     /**
       * 自定义用户编号
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    CustomUserId?: string;
+    CustomUserId: string;
     /**
-      * 用户的来源渠道
+      * 用户姓名
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Channel?: string;
+    Name: string;
     /**
-      * 用户在渠道的编号
+      * 用户手机号码
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    OpenId?: string;
+    Mobile: string;
     /**
-      * 用户真实IP
+      * 签署参与者机构名字
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClientIp?: string;
+    OrganizationName: string;
     /**
-      * 用户代理IP
+      * 参与者类型:
+ORGANIZATION 企业经办人
+PERSON 自然人
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProxyIp?: string;
+    ApproverType: string;
+    /**
+      * 经办人身份证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdCardNumber: string;
+    /**
+      * 签署链接对应流程Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 企业经办人 用户在渠道的编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OpenId: string;
 }
 /**
  * DescribeUsage返回参数结构体

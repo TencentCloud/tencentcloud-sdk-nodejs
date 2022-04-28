@@ -83,6 +83,7 @@ import {
   InstanceMarketOptionsRequest,
   UpgradeLifecycleHookResponse,
   InstanceTag,
+  ModifyLifecycleHookResponse,
   DescribeAutoScalingAdvicesResponse,
   CreateAutoScalingGroupRequest,
   DeleteScheduledActionResponse,
@@ -106,6 +107,7 @@ import {
   CreateScheduledActionResponse,
   CreateLifecycleHookRequest,
   ScheduledAction,
+  ModifyLifecycleHookRequest,
   CompleteLifecycleActionResponse,
   ScaleOutInstancesResponse,
   Filter,
@@ -277,6 +279,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeLaunchConfigurationResponse) => void
   ): Promise<UpgradeLaunchConfigurationResponse> {
     return this.request("UpgradeLaunchConfiguration", req, cb)
+  }
+
+  /**
+   * 此接口用于修改生命周期挂钩。
+   */
+  async ModifyLifecycleHook(
+    req: ModifyLifecycleHookRequest,
+    cb?: (error: string, rep: ModifyLifecycleHookResponse) => void
+  ): Promise<ModifyLifecycleHookResponse> {
+    return this.request("ModifyLifecycleHook", req, cb)
   }
 
   /**

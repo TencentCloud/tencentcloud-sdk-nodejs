@@ -128,6 +128,7 @@ import {
   MaterialMovedEvent,
   CreateTeamRequest,
   MaterialBasicInfo,
+  VideoExportCompletedEvent,
   ResourceInfo,
   MediaPreprocessOperation,
   JoinTeamInfo,

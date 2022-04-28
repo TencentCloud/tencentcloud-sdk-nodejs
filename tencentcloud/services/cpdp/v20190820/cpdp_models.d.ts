@@ -455,30 +455,30 @@ export interface RefundTlinxOrderResponse {
     RequestId?: string;
 }
 /**
- * CreatePayMerchant请求参数结构体
+ * 聚鑫-查询会员间交易信息列表结果
  */
-export interface CreatePayMerchantRequest {
+export interface QueryMemberTransactionDetailsResult {
     /**
-      * 平台编号
+      * 本次交易返回查询结果记录数。
       */
-    PlatformCode: string;
+    ResultCount: number;
     /**
-      * 渠道方收款商户编号，由渠道方(银行)提 供。
+      * 符合业务查询条件的记录总数。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ChannelMerchantNo: string;
+    TotalCount: number;
     /**
-      * 是否需要向渠道进行 商户信息验证 1:验证
-0:不验证
+      * 结束标志。
+__0__：否
+__1__：是
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ChannelCheckFlag: string;
+    EndFlag: string;
     /**
-      * 收款商户名称
+      * 会员间交易信息数组
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    MerchantName: string;
-    /**
-      * 是否开通 B2B 支付 1:开通 0:不开通 缺省:1
-      */
-    BusinessPayFlag?: string;
+    TranItemArray: Array<MemberTransactionItem>;
 }
 /**
  * QueryContractPayWayList返回参数结构体
@@ -841,6 +841,63 @@ export interface QueryAcctBindingResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 付款人查询数据
+ */
+export interface QueryPayerinfoData {
+    /**
+      * 商户号
+      */
+    MerchantId: string;
+    /**
+      * 付款人ID
+      */
+    PayerId: string;
+    /**
+      * 审核状态
+      */
+    Status: string;
+    /**
+      * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailReason: string;
+    /**
+      * 付款人类型
+      */
+    PayerType: string;
+    /**
+      * 付款人姓名
+      */
+    PayerName: string;
+    /**
+      * 付款人证件类型
+      */
+    PayerIdType: string;
+    /**
+      * 付款人证件号
+      */
+    PayerIdNo: string;
+    /**
+      * 付款人联系电话
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayerContactNumber: string;
+    /**
+      * 付款人联系邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayerEmailAddress: string;
+    /**
+      * 付款人常驻国家或地区编码
+      */
+    PayerCountryCode: string;
+    /**
+      * 付款人联系名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayerContactName: string;
 }
 /**
  * 发票开具明细
@@ -2049,6 +2106,61 @@ export interface QueryContractRelateShopRequest {
     Profile?: string;
 }
 /**
+ * CreateOpenBankRechargeOrder请求参数结构体
+ */
+export interface CreateOpenBankRechargeOrderRequest {
+    /**
+      * 云企付渠道商户号。外部接入平台入驻云企付平台后下发。
+      */
+    ChannelMerchantId: string;
+    /**
+      * 外部订单号,只能是数字、大小写字母，且在同一个接入平台下唯一，限定长度40位。
+      */
+    OutOrderId: string;
+    /**
+      * 付款金额，单位分。
+      */
+    TotalAmount: number;
+    /**
+      * 固定值CNY。
+      */
+    Currency: string;
+    /**
+      * 订单过期时间，yyyy-MM-dd HH:mm:ss格式。
+      */
+    ExpireTime: string;
+    /**
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+    ChannelName: string;
+    /**
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+    PaymentMethod: string;
+    /**
+      * 收款方信息。
+      */
+    PayeeInfo: OpenBankRechargePayeeInfo;
+    /**
+      * 渠道子商户号
+      */
+    ChannelSubMerchantId: string;
+    /**
+      * 通知地址，如www.test.com。
+      */
+    NotifyUrl?: string;
+    /**
+      * 备注信息。
+      */
+    Remark?: string;
+}
+/**
  * 支付方式费率及自定义表单项
  */
 export interface QueryContractPayFeeResult {
@@ -2739,17 +2851,9 @@ export interface ViewMerchantRequest {
     Profile?: string;
 }
 /**
- * QueryDownloadBillURL返回参数结构体
+ * CloseCloudOrder返回参数结构体
  */
-export interface QueryDownloadBillURLResponse {
-    /**
-      * 分配给商户的AppId。进件成功后返给商户方的AppId。
-      */
-    MerchantAppId: string;
-    /**
-      * 对账单下载地址。
-      */
-    DownloadUrl: string;
+export interface CloseCloudOrderResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3224,6 +3328,32 @@ export interface OpenBankSceneInfo {
     DeviceId?: string;
 }
 /**
+ * CreatePayMerchant请求参数结构体
+ */
+export interface CreatePayMerchantRequest {
+    /**
+      * 平台编号
+      */
+    PlatformCode: string;
+    /**
+      * 渠道方收款商户编号，由渠道方(银行)提 供。
+      */
+    ChannelMerchantNo: string;
+    /**
+      * 是否需要向渠道进行 商户信息验证 1:验证
+0:不验证
+      */
+    ChannelCheckFlag: string;
+    /**
+      * 收款商户名称
+      */
+    MerchantName: string;
+    /**
+      * 是否开通 B2B 支付 1:开通 0:不开通 缺省:1
+      */
+    BusinessPayFlag?: string;
+}
+/**
  * QueryMaliciousRegistration返回参数结构体
  */
 export interface QueryMaliciousRegistrationResponse {
@@ -3380,6 +3510,8 @@ __其他__: 见附录-错误码表
 export interface QueryOpenBankDownLoadUrlRequest {
     /**
       * 渠道商户号，外部接入平台方入驻云企付平台后下发。
+EBANK_PAYMENT支付方式下，填写渠道商户号；
+SAFT_ISV支付方式下，填写渠道子商户号。
       */
     ChannelMerchantId: string;
     /**
@@ -3394,6 +3526,20 @@ export interface QueryOpenBankDownLoadUrlRequest {
       * 接入环境。沙箱环境填 sandbox。缺省默认调用生产环境。
       */
     Environment?: string;
+    /**
+      * 渠道名称。不填默认为商企付。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+    ChannelName?: string;
+    /**
+      * 支付方式。不填默认为ebank支付。
+__EBANK_PAYMENT__: ebank支付
+__OPENBANK_PAYMENT__: openbank支付
+__SAFT_ISV__: 人资ISV支付
+      */
+    PaymentMethod?: string;
 }
 /**
  * DownloadBill请求参数结构体
@@ -5323,6 +5469,7 @@ __ALIPAY__: 支付宝
       * 付款方式。如
 __EBANK_PAYMENT__:B2B EBank付款
 __OPENBANK_PAYMENT__:B2C  openbank付款
+__SAFT_ISV__:支付宝安心发
       */
     PaymentMethod: string;
     /**
@@ -5403,6 +5550,38 @@ __sandbox__:沙箱环境
 缺省默认为生产环境
       */
     Environment?: string;
+}
+/**
+ * 单笔交易回单申请结果查询
+ */
+export interface QueryOpenBankOrderDetailReceiptInfoResult {
+    /**
+      * 渠道回单申请ID
+      */
+    ChannelApplyId: string;
+    /**
+      * 申请状态。
+SUCCESS：申请成功；
+FAILED：申请失败；
+PROCESSING：申请中。
+注意：若返回申请中，需要再次调用回单申请结果查询接口，查询结果。
+      */
+    ReceiptStatus: string;
+    /**
+      * 申请返回描述，例如失败原因等。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReceiptMessage: string;
+    /**
+      * 回单下载链接，申请成功时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadUrl: string;
+    /**
+      * 过期时间，yyyy-MM-dd HH:mm:ss格式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpireTime: string;
 }
 /**
  * QueryReconciliationDocument请求参数结构体
@@ -6145,6 +6324,29 @@ ANONYMOUS: 匿名类型 USER_ID
     ContractMethod?: string;
 }
 /**
+ * CreateOpenBankRechargeOrder返回参数结构体
+ */
+export interface CreateOpenBankRechargeOrderResponse {
+    /**
+      * 业务系统返回码，SUCCESS表示成功，其他表示失败。
+      */
+    ErrCode: string;
+    /**
+      * 业务系统返回消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 充值响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: CreateOpenBankOrderRechargeResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * QueryDownloadBillURL请求参数结构体
  */
 export interface QueryDownloadBillURLRequest {
@@ -6176,28 +6378,53 @@ export interface QueryMerchantInfoForManagementResponse {
     RequestId?: string;
 }
 /**
- * RefundOrder返回参数结构体
+ * QueryOpenBankOrderDetailReceiptInfo请求参数结构体
  */
-export interface RefundOrderResponse {
+export interface QueryOpenBankOrderDetailReceiptInfoRequest {
     /**
-      * 进件成功后返给商户方的AppId
+      * 渠道商户ID
       */
-    MerchantAppId: string;
+    ChannelMerchantId: string;
     /**
-      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
+      * 渠道子商户ID
       */
-    OrderNo: string;
+    ChannelSubMerchantId: string;
     /**
-      * 订单退款状态。0-退款失败
-1-退款成功
-2-可疑状态
+      * 渠道名称，目前只支持ALIPAY
       */
-    Status: string;
+    ChannelName: string;
     /**
-      * 订单退款状态描述
+      * 支付方式，目前只支持SAFT_ISV
+      */
+    PaymentMethod: string;
+    /**
+      * 外部回单申请ID，与渠道回单申请ID二者选填其一
+      */
+    OutApplyId?: string;
+    /**
+      * 渠道回单申请ID，与外部回单申请ID二者选填其一
+      */
+    ChannelApplyId?: string;
+}
+/**
+ * QueryOpenBankExternalSubAccountBookBalance返回参数结构体
+ */
+export interface QueryOpenBankExternalSubAccountBookBalanceResponse {
+    /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Description: string;
+    Result: QueryExternalAccountBookResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6664,6 +6891,37 @@ export interface Paging {
       * 页长
       */
     Count: number;
+}
+/**
+ * CreateOpenBankExternalSubMerchantAccountBook请求参数结构体
+ */
+export interface CreateOpenBankExternalSubMerchantAccountBookRequest {
+    /**
+      * 外部账本ID
+      */
+    OutAccountBookId: string;
+    /**
+      * 渠道商户ID
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道子商户ID
+      */
+    ChannelSubMerchantId: string;
+    /**
+      * 渠道名称。目前只支持支付宝
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
+      */
+    ChannelName: string;
+    /**
+      * 支付方式。目前只支持安心发支付
+__EBANK_PAYMENT__: ebank支付
+__OPENBANK_PAYMENT__: openbank支付
+__SAFT_ISV__: 安心发支付
+      */
+    PaymentMethod: string;
 }
 /**
  * RegisterBehavior返回参数结构体
@@ -7361,91 +7619,28 @@ export interface UnbindRelateAcctResponse {
     RequestId?: string;
 }
 /**
- * ApplyOutwardOrder请求参数结构体
+ * QueryOpenBankBindExternalSubMerchantBankAccount返回参数结构体
  */
-export interface ApplyOutwardOrderRequest {
+export interface QueryOpenBankBindExternalSubMerchantBankAccountResponse {
     /**
-      * 对接方汇出指令编号
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
       */
-    TransactionId: string;
+    ErrCode: string;
     /**
-      * 定价币种
+      * 错误消息。
       */
-    PricingCurrency: string;
+    ErrMessage: string;
     /**
-      * 源币种
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SourceCurrency: string;
+    Result: QueryOpenBankBindExternalSubMerchantBankAccountResult;
     /**
-      * 目的币种
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TargetCurrency: string;
-    /**
-      * 收款人类型（银行卡填"BANK_ACCOUNT"）
-      */
-    PayeeType: string;
-    /**
-      * 收款人账号
-      */
-    PayeeAccount: string;
-    /**
-      * 源币种金额
-      */
-    SourceAmount?: number;
-    /**
-      * 目的金额
-      */
-    TargetAmount?: number;
-    /**
-      * 收款人姓名（PayeeType为"BANK_COUNT"时必填）
-      */
-    PayeeName?: string;
-    /**
-      * 收款人地址（PayeeType为"BANK_COUNT"时必填）
-      */
-    PayeeAddress?: string;
-    /**
-      * 收款人银行账号类型（PayeeType为"BANK_COUNT"时必填）
-个人填"INDIVIDUAL"
-企业填"CORPORATE"
-      */
-    PayeeBankAccountType?: string;
-    /**
-      * 收款人国家或地区编码（PayeeType为"BANK_COUNT"时必填）
-      */
-    PayeeCountryCode?: string;
-    /**
-      * 收款人开户银行名称（PayeeType为"BANK_COUNT"时必填）
-      */
-    PayeeBankName?: string;
-    /**
-      * 收款人开户银行地址（PayeeType为"BANK_COUNT"时必填）
-      */
-    PayeeBankAddress?: string;
-    /**
-      * 收款人开户银行所在国家或地区编码（PayeeType为"BANK_COUNT"时必填）
-      */
-    PayeeBankDistrict?: string;
-    /**
-      * 收款银行SwiftCode（PayeeType为"BANK_COUNT"时必填）
-      */
-    PayeeBankSwiftCode?: string;
-    /**
-      * 收款银行国际编码类型
-      */
-    PayeeBankType?: string;
-    /**
-      * 收款银行国际编码
-      */
-    PayeeBankCode?: string;
-    /**
-      * 收款人附言
-      */
-    ReferenceForBeneficiary?: string;
-    /**
-      * 接入环境。沙箱环境填sandbox
-      */
-    Profile?: string;
+    RequestId?: string;
 }
 /**
  * 代理商完税证明批次信息
@@ -8409,25 +8604,112 @@ export interface DistributeQueryResult {
     Orders?: Array<MultiApplyOrder>;
 }
 /**
- * 红票结果数据
+ * ExecuteMemberTransaction请求参数结构体
  */
-export interface CreateRedInvoiceResultData {
+export interface ExecuteMemberTransactionRequest {
     /**
-      * 红冲状态码
+      * 请求类型此接口固定填：MemberTransactionReq
       */
-    Code: number;
+    RequestType: string;
     /**
-      * 红冲状态消息
+      * 银行注册商户号
       */
-    Message: string;
+    MerchantCode: string;
     /**
-      * 发票ID
+      * 支付渠道
       */
-    InvoiceId: string;
+    PayChannel: string;
     /**
-      * 业务开票号
+      * 子渠道
       */
-    OrderSn: string;
+    PayChannelSubId: number;
+    /**
+      * 转出交易网会员代码
+      */
+    OutTransNetMemberCode: string;
+    /**
+      * 转出见证子账户的户名
+      */
+    OutSubAccountName: string;
+    /**
+      * 转入见证子账户的户名
+      */
+    InSubAccountName: string;
+    /**
+      * 转出子账户账号
+      */
+    OutSubAccountNumber: string;
+    /**
+      * 转入子账户账号
+      */
+    InSubAccountNumber: string;
+    /**
+      * 父账户账号，资金汇总账号
+      */
+    BankAccountNumber: string;
+    /**
+      * 货币单位 单位，1：元，2：角，3：分
+      */
+    CurrencyUnit: string;
+    /**
+      * 币种
+      */
+    CurrencyType: string;
+    /**
+      * 交易金额
+      */
+    CurrencyAmount: string;
+    /**
+      * 订单号
+      */
+    OrderId: string;
+    /**
+      * 聚鑫分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 聚鑫分配的安全ID
+      */
+    MidasSecretId: string;
+    /**
+      * 计费签名
+      */
+    MidasSignature: string;
+    /**
+      * 交易流水号
+生成方式：用户短号+日期（6位）+ 随机编号（10位）例如：F088722005120904930798
+短号：F08872  日期： 200512   随机编号：0904930798
+      */
+    TransSequenceNumber: string;
+    /**
+      * 转入交易网会员代码
+      */
+    InTransNetMemberCode: string;
+    /**
+      * Midas环境标识 release 现网环境 sandbox 沙箱环境
+development 开发环境
+      */
+    MidasEnvironment: string;
+    /**
+      * 平台短号(银行分配)
+      */
+    PlatformShortNumber?: string;
+    /**
+      * 1：下单预支付
+2：确认并付款
+3：退款
+6：直接支付T+1
+9：直接支付T+0
+      */
+    TransType?: string;
+    /**
+      * 交易手续费
+      */
+    TransFee?: string;
+    /**
+      * 保留域
+      */
+    ReservedMessage?: string;
 }
 /**
  * QueryBankClear返回参数结构体
@@ -8934,6 +9216,25 @@ merchant:商户子账户
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SubMerchantMemberType: string;
+}
+/**
+ * 云企付-充值单收款人信息
+ */
+export interface OpenBankRechargePayeeInfo {
+    /**
+      * 收款方标识
+收款方类型为电子记账本时，上送渠道电子记账本ID
+      */
+    PayeeId: string;
+    /**
+      * 收款方标识类型
+ACCOUNT_BOOK_ID：电子记账本ID
+      */
+    PayeeIdType: string;
+    /**
+      * 收款方名称
+      */
+    PayeeName?: string;
 }
 /**
  * 合同可关联门店响应对象
@@ -9957,6 +10258,25 @@ export interface QueryCustAcctIdBalanceRequest {
     Profile?: string;
 }
 /**
+ * 查询第三方电子记账本余额返回值
+ */
+export interface QueryExternalAccountBookResult {
+    /**
+      * 渠道记账本ID
+      */
+    ChannelAccountBookId: string;
+    /**
+      * 可用余额。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AvailableBalance: string;
+    /**
+      * 电子记账本对外收款的账户信息。为JSON格式字符串（成功状态下返回）。详情见附录-复杂类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CollectMoneyAccountInfo: string;
+}
+/**
  * ReviseMbrProperty请求参数结构体
  */
 export interface ReviseMbrPropertyRequest {
@@ -10932,6 +11252,33 @@ export interface QueryApplicationMaterialResponse {
     RequestId?: string;
 }
 /**
+ * 创建第三方电子记账本返回值
+ */
+export interface CreateExternalAccountBookResult {
+    /**
+      * 处理状态。
+__SUCCESS__: 成功
+__FAILED__: 失败
+__PROCESSING__: 进行中。
+      */
+    DealStatus: string;
+    /**
+      * 处理返回描述，例如失败原因等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DealMessage: string;
+    /**
+      * 渠道电子记账本ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChannelAccountBookId: string;
+    /**
+      * 电子记账本对外收款的账户信息。为JSON格式字符串（成功状态下返回）。详情见附录-复杂类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CollectMoneyAccountInfo: string;
+}
+/**
  * 智能代发-单笔代发转账查询接口返回内容
  */
 export interface QueryTransferResultData {
@@ -11645,6 +11992,29 @@ export interface CreateRedInvoiceV2Request {
     InvoiceChannel?: number;
 }
 /**
+ * ApplyOpenBankOrderDetailReceipt返回参数结构体
+ */
+export interface ApplyOpenBankOrderDetailReceiptResponse {
+    /**
+      * 错误码。
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: ApplyOpenBankOrderDetailReceiptResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 银行复核指引。银行侧返回网银授权指引链接，一般PC网银，手机网银链接
  */
 export interface OpenBankApprovalGuideInfo {
@@ -12225,6 +12595,16 @@ _不填默认为生产环境_
     OutTradeNo?: string;
 }
 /**
+ * 云企付-充值跳转参数
+ */
+export interface OpenBankRechargeRedirectInfo {
+    /**
+      * 跳转URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
+}
+/**
  * UnBindAcct返回参数结构体
  */
 export interface UnBindAcctResponse {
@@ -12265,6 +12645,35 @@ export interface QueryCommonTransferRechargeRequest {
       * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
       */
     Profile?: string;
+}
+/**
+ * ApplyOpenBankOrderDetailReceipt请求参数结构体
+ */
+export interface ApplyOpenBankOrderDetailReceiptRequest {
+    /**
+      * 外部回单申请编号
+      */
+    OutApplyId: string;
+    /**
+      * 渠道商户ID
+      */
+    ChannelMerchantId: string;
+    /**
+      * 渠道子商户ID
+      */
+    ChannelSubMerchantId: string;
+    /**
+      * 渠道名称，目前只支持ALIPAY
+      */
+    ChannelName: string;
+    /**
+      * 支付方式，目前只支持SAFT_ISV
+      */
+    PaymentMethod: string;
+    /**
+      * 云企付平台订单号
+      */
+    ChannelOrderId: string;
 }
 /**
  * GetBillDownloadUrl返回参数结构体
@@ -12365,7 +12774,7 @@ export interface OpenBankPayeeInfo {
     PayeeId?: string;
     /**
       * 收款方名称。当渠道为TENPAY，付款方式为EBANK_PAYMENT时，上送收款方入驻云企付的商户名称；
-渠道为TENPAY，付款方式为OPENBANK_PAYMENT时必选，上送收款方账户名称
+渠道为TENPAY，付款方式为OPENBANK_PAYMENT时必选，上送收款方账户名称；渠道为ALIPAY，付款方式为SAFT_ISV时，收款账户标识类型为ALIPAY_LOGON_ID时必传，上送收款方真实姓名。
       */
     PayeeName?: string;
     /**
@@ -12382,9 +12791,18 @@ export interface OpenBankPayeeInfo {
     BankBranchId?: string;
     /**
       * 收款方绑卡序列号。
-当渠道为TENPAY，付款方式为EBANK_PAYMENT时，必填，上送收款方入驻云企付平台时，下发的绑卡序列号。
+当渠道为TENPAY，付款方式为EBANK_PAYMENT时，必填，上送收款方入驻云企付平台时，下发的绑卡序列号；当渠道为ALIPAY，付款方式为SAFT_ISV时，必填，根据收款账户标识类型上送。
       */
     BindSerialNo?: string;
+    /**
+      * 收款账户标识类型
+BANK_ACCOUNT：绑定银行账户
+ACCOUNT_BOOK_ID：电子记账本ID
+ALIPAY_USER_ID：支付宝的会员ID
+ALIPAY_LOGON_ID：支付宝登录号。
+付款方式为SAFT_ISV时，必填。
+      */
+    AccountType?: string;
 }
 /**
  * 添加门店响应对象
@@ -12785,6 +13203,29 @@ export interface UploadOrgFileResponse {
     RequestId?: string;
 }
 /**
+ * QueryOpenBankOrderDetailReceiptInfo返回参数结构体
+ */
+export interface QueryOpenBankOrderDetailReceiptInfoResponse {
+    /**
+      * 错误码。
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryOpenBankOrderDetailReceiptInfoResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateAnchor请求参数结构体
  */
 export interface CreateAnchorRequest {
@@ -13079,6 +13520,30 @@ export interface CreateBatchPaymentRequest {
     NotifyUrl?: string;
 }
 /**
+ * CreateOpenBankExternalSubMerchantAccountBook返回参数结构体
+ */
+export interface CreateOpenBankExternalSubMerchantAccountBookResponse {
+    /**
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
+      */
+    ErrCode: string;
+    /**
+      * 错误消息。
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: CreateExternalAccountBookResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyMntMbrBindRelateAcctBankCode返回参数结构体
  */
 export interface ModifyMntMbrBindRelateAcctBankCodeResponse {
@@ -13118,112 +13583,25 @@ export interface SyncContractDataResponse {
     RequestId?: string;
 }
 /**
- * ExecuteMemberTransaction请求参数结构体
+ * 红票结果数据
  */
-export interface ExecuteMemberTransactionRequest {
+export interface CreateRedInvoiceResultData {
     /**
-      * 请求类型此接口固定填：MemberTransactionReq
+      * 红冲状态码
       */
-    RequestType: string;
+    Code: number;
     /**
-      * 银行注册商户号
+      * 红冲状态消息
       */
-    MerchantCode: string;
+    Message: string;
     /**
-      * 支付渠道
+      * 发票ID
       */
-    PayChannel: string;
+    InvoiceId: string;
     /**
-      * 子渠道
+      * 业务开票号
       */
-    PayChannelSubId: number;
-    /**
-      * 转出交易网会员代码
-      */
-    OutTransNetMemberCode: string;
-    /**
-      * 转出见证子账户的户名
-      */
-    OutSubAccountName: string;
-    /**
-      * 转入见证子账户的户名
-      */
-    InSubAccountName: string;
-    /**
-      * 转出子账户账号
-      */
-    OutSubAccountNumber: string;
-    /**
-      * 转入子账户账号
-      */
-    InSubAccountNumber: string;
-    /**
-      * 父账户账号，资金汇总账号
-      */
-    BankAccountNumber: string;
-    /**
-      * 货币单位 单位，1：元，2：角，3：分
-      */
-    CurrencyUnit: string;
-    /**
-      * 币种
-      */
-    CurrencyType: string;
-    /**
-      * 交易金额
-      */
-    CurrencyAmount: string;
-    /**
-      * 订单号
-      */
-    OrderId: string;
-    /**
-      * 聚鑫分配的支付主MidasAppId
-      */
-    MidasAppId: string;
-    /**
-      * 聚鑫分配的安全ID
-      */
-    MidasSecretId: string;
-    /**
-      * 计费签名
-      */
-    MidasSignature: string;
-    /**
-      * 交易流水号
-生成方式：用户短号+日期（6位）+ 随机编号（10位）例如：F088722005120904930798
-短号：F08872  日期： 200512   随机编号：0904930798
-      */
-    TransSequenceNumber: string;
-    /**
-      * 转入交易网会员代码
-      */
-    InTransNetMemberCode: string;
-    /**
-      * Midas环境标识 release 现网环境 sandbox 沙箱环境
-development 开发环境
-      */
-    MidasEnvironment: string;
-    /**
-      * 平台短号(银行分配)
-      */
-    PlatformShortNumber?: string;
-    /**
-      * 1：下单预支付
-2：确认并付款
-3：退款
-6：直接支付T+1
-9：直接支付T+0
-      */
-    TransType?: string;
-    /**
-      * 交易手续费
-      */
-    TransFee?: string;
-    /**
-      * 保留域
-      */
-    ReservedMessage?: string;
+    OrderSn: string;
 }
 /**
  * 签约数据
@@ -13660,32 +14038,6 @@ export interface UploadFileResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 聚鑫-查询会员间交易信息列表结果
- */
-export interface QueryMemberTransactionDetailsResult {
-    /**
-      * 本次交易返回查询结果记录数。
-      */
-    ResultCount: number;
-    /**
-      * 符合业务查询条件的记录总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * 结束标志。
-__0__：否
-__1__：是
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndFlag: string;
-    /**
-      * 会员间交易信息数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TranItemArray: Array<MemberTransactionItem>;
 }
 /**
  * 创建商户结果
@@ -14684,42 +15036,42 @@ export interface UnifiedCloudOrderRequest {
       */
     MidasAppId: string;
     /**
-      * 用户Id。
+      * 用户ID
 长度不小于5位，仅支持字母和数字的组合，长度限制以具体接入渠道为准
       */
     UserId: string;
     /**
-      * 开发者主订单号。
+      * 开发者主订单号
 支付订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合，长度供参考，部分渠道存在长度更短的情况接入时请联系开发咨询
       */
     OutTradeNo: string;
     /**
-      * 货币类型。
+      * 货币类型
 ISO货币代码，CNY
       */
     CurrencyType: string;
     /**
-      * 商品Id。
+      * 商品ID
 业务自定义的商品id，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合。
       */
     ProductId: string;
     /**
-      * 商品名称。
+      * 商品名称
 业务自定义的商品名称，无需URL编码，长度限制以具体所接入渠道为准。
       */
     ProductName: string;
     /**
-      * 商品详情。
+      * 商品详情
 业务自定义的商品详情，无需URL编码，长度限制以具体所接入渠道为准。
       */
     ProductDetail: string;
     /**
-      * 原始金额。
+      * 原始金额
 单位：分，需要注意的是，OriginalAmt>=TotalAmt
       */
     OriginalAmt: number;
     /**
-      * 支付金额。
+      * 支付金额
 单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome。
       */
     TotalAmt: number;
@@ -14731,12 +15083,12 @@ _不填默认为生产环境_
       */
     MidasEnvironment?: string;
     /**
-      * 支付SubAppId。
+      * 支付SubAppId
 米大师计费SubAppId，代表子商户。指定使用该商户的商户号下单时必传。
       */
     SubAppId?: string;
     /**
-      * 顶层支付渠道。
+      * 顶层支付渠道
 银行收单:
 openbank_ccb: 建设银行
 openbank_icbc: 工商银行
@@ -14747,7 +15099,7 @@ openbank_icbc_jft：工商银行聚付通
       */
     RealChannel?: string;
     /**
-      * 支付渠道。
+      * 支付渠道
 wechat：微信支付
 wechat_ecommerce: 微信电商收付通
 open_alipay: 支付宝
@@ -14761,135 +15113,135 @@ icbc_jft_epay: 工行聚付通-e支付
       */
     Channel?: string;
     /**
-      * 透传字段。
+      * 透传字段
 支付成功回调透传给应用，用于开发者透传自定义内容。
       */
     Metadata?: string;
     /**
-      * 数量。
+      * 数量
 购买数量,不传默认为1。
       */
     Quantity?: number;
     /**
-      * Web端回调地址。
+      * Web端回调地址
 Web端网页回调地址，仅当Web端SDK使用页面跳转方式时有效。
       */
     CallbackUrl?: string;
     /**
-      * 支付取消地址。
+      * 支付取消地址
       */
     CancelUrl?: string;
     /**
-      * 微信AppId。
+      * 微信AppId
 wechat渠道或wchat_ecommerce渠道可以指定下单时的wxappid。
       */
     WxAppId?: string;
     /**
-      * 微信SubAppId。
+      * 微信SubAppId
 wechat渠道可以指定下单时的sub_appid。
       */
     WxSubAppId?: string;
     /**
-      * 微信公众号/小程序OpenId。
+      * 微信公众号/小程序OpenId
 微信公众号/小程序支付时为必选，需要传微信下的openid。
       */
     WxOpenId?: string;
     /**
-      * 微信公众号/小程序SubOpenId。
+      * 微信公众号/小程序SubOpenId
 在服务商模式下，微信公众号/小程序支付时wx_sub_openid和wx_openid二选一。
       */
     WxSubOpenId?: string;
     /**
-      * 平台应收金额。
+      * 平台应收金额
 单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome
       */
     TotalPlatformIncome?: number;
     /**
-      * 结算应收金额。
+      * 结算应收金额
 单位：分，需要注意的是，TotalAmt=TotalPlatformIncome+TotalMchIncome
       */
     TotalMchIncome?: number;
     /**
-      * 子订单列表。
+      * 子订单列表
 格式：子订单号、子应用Id、金额。压缩后最长不可超过32K字节(去除空格，换行，制表符等无意义字符)。
       */
     SubOrderList?: Array<CloudSubOrder>;
     /**
-      * 结算信息。
+      * 结算信息
 例如是否需要分账、是否需要支付确认等，
 注意：如果子单列表中传入了SettleInfo，在主单中不可再传入SettleInfo字段。
       */
     SettleInfo?: CloudSettleInfo;
     /**
-      * 附加项信息列表。
+      * 附加项信息列表
 例如溢价信息、抵扣信息、积分信息、补贴信息
 通过该字段可以实现渠道方的优惠抵扣补贴等营销功能
 注意：当传SubOrderList时，请在子单信息中传附加项信息，不要在主单中传该字段。
       */
     AttachmentInfoList?: Array<CloudAttachmentInfo>;
     /**
-      * 支付通知地址。
+      * 支付通知地址
 调用方可通过该字段传入自定义支付通知地址。
       */
     PaymentNotifyUrl?: string;
     /**
-      * 支付场景。
+      * 支付场景
 需要结合 RealChannel和Channel字段使用可选值:
 wechat-app 微信APP支付方式
 wechat-mini 微信小程序支付，示例：当 RealChannel=wechat Channel=wechat PayScene=wechat-mini时，内部会直接以小程序方式调用微信统一下单接口。
       */
     PayScene?: string;
     /**
-      * 语言代码。
-(BCP-47格式)，取值请参考https://mpay.pages.woa.com/zh/api/objectdefinitions/objects/#mpayapisordersapplicationcontextapplicationcontext
+      * 语言代码
+取值请参考[ISO 639-1代码表](https://zh.wikipedia.org/zh-cn/ISO_639-1%E4%BB%A3%E7%A0%81%E8%A1%A8)
       */
     LocaleCode?: string;
     /**
-      * 地区代码。
-取值请参考https://mpay.pages.woa.com/zh/api/objectdefinitions/objects/#mpayapisordersapplicationcontextapplicationcontext
+      * 地区代码
+取值请参考[ISO 3166-1二位字母代码表](https://zh.wikipedia.org/zh-cn/ISO_3166-1%E4%BA%8C%E4%BD%8D%E5%AD%97%E6%AF%8D%E4%BB%A3%E7%A0%81#%E6%AD%A3%E5%BC%8F%E5%88%86%E9%85%8D%E4%BB%A3%E7%A0%81)
       */
     RegionCode?: string;
     /**
-      * 用户IP。
+      * 用户IP
 请求用户的IP地址，特定的渠道或特定的支付方式，此字段为必填
 wechat_ecommerce渠道 - h5支付方式，此字段必填。
       */
     UserClientIp?: string;
     /**
-      * 渠道订单号生成模式。
+      * 渠道订单号生成模式
 枚举值。决定请求渠道方时的订单号的生成模式，详情请联系米大师沟通。不指定时默认为由米大师自行生成。
       */
     ChannelOrderIdMode?: string;
     /**
-      * 全局支付时间信息。
+      * 全局支付时间信息
       */
     GlobalPayTimeInfo?: CloudGlobalPayTimeInfo;
     /**
-      * 渠道应用Id取用方式。
+      * 渠道应用ID取用方式
 USE_APPID 使用渠道应用Id;
 USE_SUB_APPID 使用子渠道应用Id;
 USE_APPID_AND_SUB_APPID 既使用渠道应用Id也使用子渠道应用ID。
       */
     ChannelAppIdPolicy?: string;
     /**
-      * 门店信息。
+      * 门店信息
 特定的渠道或特定的支付方式，此字段为必填
 wechat_ecommerce渠道 - h5支付方式，此字段必填
       */
     StoreInfo?: CloudStoreInfo;
     /**
-      * 客户端信息。
+      * 客户端信息
 特定的渠道或特定的支付方式，此字段为必填
 wechat_ecommerce渠道 - h5支付方式，此字段必填
       */
     ClientInfo?: CloudClientInfo;
     /**
-      * 渠道扩展促销列表。
+      * 渠道扩展促销列表
 可将各个渠道的促销信息放于该列表。
       */
     ExternalPromptGroupList?: Array<CloudExternalPromptGroup>;
     /**
-      * 收单模式。
+      * 收单模式
 ORDER_RECEIVE_MODE_COMMON - 普通支付
 ORDER_RECEIVE_MODE_COMBINE - 合单支付
 ORDER_RECEIVE_MODE_V_COMBINE - 虚拟合单支付
@@ -15193,6 +15545,34 @@ export interface QueryMerchantBalanceResponse {
       * 对接方账户余额查询结果
       */
     Result: QueryMerchantBalanceResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RefundOrder返回参数结构体
+ */
+export interface RefundOrderResponse {
+    /**
+      * 进件成功后返给商户方的AppId
+      */
+    MerchantAppId: string;
+    /**
+      * 平台流水号。消费订单发起成功后，返回的平台唯一订单号。
+      */
+    OrderNo: string;
+    /**
+      * 订单退款状态。0-退款失败
+1-退款成功
+2-可疑状态
+      */
+    Status: string;
+    /**
+      * 订单退款状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -15739,28 +16119,91 @@ export interface RegisterBillSupportWithdrawResponse {
     RequestId?: string;
 }
 /**
- * QueryOpenBankBindExternalSubMerchantBankAccount返回参数结构体
+ * ApplyOutwardOrder请求参数结构体
  */
-export interface QueryOpenBankBindExternalSubMerchantBankAccountResponse {
+export interface ApplyOutwardOrderRequest {
     /**
-      * 错误码。
-__SUCCESS__: 成功
-__其他__: 见附录-错误码表
+      * 对接方汇出指令编号
       */
-    ErrCode: string;
+    TransactionId: string;
     /**
-      * 错误消息。
+      * 定价币种
       */
-    ErrMessage: string;
+    PricingCurrency: string;
     /**
-      * 返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 源币种
       */
-    Result: QueryOpenBankBindExternalSubMerchantBankAccountResult;
+    SourceCurrency: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 目的币种
       */
-    RequestId?: string;
+    TargetCurrency: string;
+    /**
+      * 收款人类型（银行卡填"BANK_ACCOUNT"）
+      */
+    PayeeType: string;
+    /**
+      * 收款人账号
+      */
+    PayeeAccount: string;
+    /**
+      * 源币种金额
+      */
+    SourceAmount?: number;
+    /**
+      * 目的金额
+      */
+    TargetAmount?: number;
+    /**
+      * 收款人姓名（PayeeType为"BANK_COUNT"时必填）
+      */
+    PayeeName?: string;
+    /**
+      * 收款人地址（PayeeType为"BANK_COUNT"时必填）
+      */
+    PayeeAddress?: string;
+    /**
+      * 收款人银行账号类型（PayeeType为"BANK_COUNT"时必填）
+个人填"INDIVIDUAL"
+企业填"CORPORATE"
+      */
+    PayeeBankAccountType?: string;
+    /**
+      * 收款人国家或地区编码（PayeeType为"BANK_COUNT"时必填）
+      */
+    PayeeCountryCode?: string;
+    /**
+      * 收款人开户银行名称（PayeeType为"BANK_COUNT"时必填）
+      */
+    PayeeBankName?: string;
+    /**
+      * 收款人开户银行地址（PayeeType为"BANK_COUNT"时必填）
+      */
+    PayeeBankAddress?: string;
+    /**
+      * 收款人开户银行所在国家或地区编码（PayeeType为"BANK_COUNT"时必填）
+      */
+    PayeeBankDistrict?: string;
+    /**
+      * 收款银行SwiftCode（PayeeType为"BANK_COUNT"时必填）
+      */
+    PayeeBankSwiftCode?: string;
+    /**
+      * 收款银行国际编码类型
+      */
+    PayeeBankType?: string;
+    /**
+      * 收款银行国际编码
+      */
+    PayeeBankCode?: string;
+    /**
+      * 收款人附言
+      */
+    ReferenceForBeneficiary?: string;
+    /**
+      * 接入环境。沙箱环境填sandbox
+      */
+    Profile?: string;
 }
 /**
  * 分配关系
@@ -16109,6 +16552,38 @@ CONTRACT_STATUS_PENDING：签约进行中
     ChannelContractInfo: ChannelContractInfo;
 }
 /**
+ * 申请单笔交易回单结果
+ */
+export interface ApplyOpenBankOrderDetailReceiptResult {
+    /**
+      * 渠道回单申请ID
+      */
+    ChannelApplyId: string;
+    /**
+      * 申请状态。
+SUCCESS：申请成功；
+FAILED：申请失败；
+PROCESSING：申请中。
+注意：若返回申请中，需要再次调用回单申请结果查询接口，查询结果。
+      */
+    ReceiptStatus: string;
+    /**
+      * 申请返回描述，例如失败原因等。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReceiptMessage: string;
+    /**
+      * 回单下载链接，申请成功时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadUrl: string;
+    /**
+      * 过期时间，yyyy-MM-dd HH:mm:ss格式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpireTime: string;
+}
+/**
  * CreateRedInvoiceV2返回参数结构体
  */
 export interface CreateRedInvoiceV2Response {
@@ -16192,9 +16667,17 @@ export interface OpenBankPayerInfo {
       */
     PayerName?: string;
     /**
-      * 付款方付款账户标识，当付款方式为OPENBANK_PAYMENT时，必输表示企业账户ID。
+      * 付款方付款账户标识。
+当付款方式为OPENBANK_PAYMENT时，必输表示企业账户ID；当付款方式为SAFT_ISV时，必须上送付款方的渠道电子记账本ID。
       */
     BindSerialNo?: string;
+    /**
+      * 付款账户标识类型
+BANK_ACCOUNT：绑定银行账户
+ACCOUNT_BOOK_ID：电子记账本ID。
+当付款方式为SAFT_ISV时，必须上送类型为ACCOUNT_BOOK_ID。
+      */
+    AccountType?: string;
 }
 /**
  * 交易明细信息
@@ -16357,61 +16840,39 @@ export interface CloudSubOrderRefund {
     SubRefundId: string;
 }
 /**
- * 付款人查询数据
+ * QueryOpenBankExternalSubAccountBookBalance请求参数结构体
  */
-export interface QueryPayerinfoData {
+export interface QueryOpenBankExternalSubAccountBookBalanceRequest {
     /**
-      * 商户号
+      * 渠道商户ID
       */
-    MerchantId: string;
+    ChannelMerchantId: string;
     /**
-      * 付款人ID
+      * 渠道子商户ID
       */
-    PayerId: string;
+    ChannelSubMerchantId: string;
     /**
-      * 审核状态
+      * 渠道名称。目前只支持支付宝
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
       */
-    Status: string;
+    ChannelName: string;
     /**
-      * 失败原因
-注意：此字段可能返回 null，表示取不到有效值。
+      * 支付方式。目前只支持安心发支付
+__EBANK_PAYMENT__: ebank支付
+__OPENBANK_PAYMENT__: openbank支付
+__SAFT_ISV__: 安心发支付
       */
-    FailReason: string;
+    PaymentMethod: string;
     /**
-      * 付款人类型
+      * 外部账本号ID。与ChannelAccountBookId二者选填其一。
       */
-    PayerType: string;
+    OutAccountBookId?: string;
     /**
-      * 付款人姓名
+      * 渠道账本号ID。与OutAccountBookId二者选填其一。
       */
-    PayerName: string;
-    /**
-      * 付款人证件类型
-      */
-    PayerIdType: string;
-    /**
-      * 付款人证件号
-      */
-    PayerIdNo: string;
-    /**
-      * 付款人联系电话
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PayerContactNumber: string;
-    /**
-      * 付款人联系邮箱
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PayerEmailAddress: string;
-    /**
-      * 付款人常驻国家或地区编码
-      */
-    PayerCountryCode: string;
-    /**
-      * 付款人联系名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PayerContactName: string;
+    ChannelAccountBookId?: string;
 }
 /**
  * 汇出指令申请结果
@@ -16539,9 +17000,17 @@ export interface DownloadReconciliationUrlResponse {
     RequestId?: string;
 }
 /**
- * CloseCloudOrder返回参数结构体
+ * QueryDownloadBillURL返回参数结构体
  */
-export interface CloseCloudOrderResponse {
+export interface QueryDownloadBillURLResponse {
+    /**
+      * 分配给商户的AppId。进件成功后返给商户方的AppId。
+      */
+    MerchantAppId: string;
+    /**
+      * 对账单下载地址。
+      */
+    DownloadUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -16571,6 +17040,29 @@ export interface DistributeCancelResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DistributeNo?: string;
+}
+/**
+ * 云企付-充值下单返回响应
+ */
+export interface CreateOpenBankOrderRechargeResult {
+    /**
+      * 云企付平台订单号。
+      */
+    ChannelOrderId: string;
+    /**
+      * 第三方支付平台返回支付订单号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ThirdPayOrderId: string;
+    /**
+      * 跳转参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RedirectInfo: OpenBankRechargeRedirectInfo;
+    /**
+      * 外部商户订单号，只能是数字、大小写字母，且在同一个接入平台下唯一。
+      */
+    OutOrderId: string;
 }
 /**
  * 银企直连-查询单笔支付状态结果

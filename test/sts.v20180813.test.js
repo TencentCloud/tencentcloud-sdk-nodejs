@@ -38,16 +38,6 @@ it("sts.v20180813.QueryApiKey", async function () {
     }
 })
 
-it("sts.v20180813.AssumeRoleWithSAML", async function () {
-    try {
-       const data = await client.AssumeRoleWithSAML({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("sts.v20180813.AssumeRole", async function () {
     try {
        const data = await client.AssumeRole({})
@@ -58,9 +48,29 @@ it("sts.v20180813.AssumeRole", async function () {
     }
 })
 
+it("sts.v20180813.AssumeRoleWithWebIdentity", async function () {
+    try {
+       const data = await client.AssumeRoleWithWebIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sts.v20180813.GetCallerIdentity", async function () {
     try {
        const data = await client.GetCallerIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sts.v20180813.AssumeRoleWithSAML", async function () {
+    try {
+       const data = await client.AssumeRoleWithSAML({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

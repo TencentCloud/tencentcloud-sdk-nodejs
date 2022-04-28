@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryAnchorContractInfo", req, cb);
     }
     /**
+     * 智能代发-单笔代发转账接口
+     */
+    async TransferSinglePay(req, cb) {
+        return this.request("TransferSinglePay", req, cb);
+    }
+    /**
      * 商户查询已开通的支付方式列表
      */
     async QueryMerchantPayWayList(req, cb) {
@@ -160,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryOpenBankDailyReceiptDownloadUrl", req, cb);
     }
     /**
+     * 云企付-创建充值订单
+     */
+    async CreateOpenBankRechargeOrder(req, cb) {
+        return this.request("CreateOpenBankRechargeOrder", req, cb);
+    }
+    /**
      * 跨境-贸易材料明细查询。
      */
     async QueryTrade(req, cb) {
@@ -176,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddShop(req, cb) {
         return this.request("AddShop", req, cb);
+    }
+    /**
+     * 第三方子商户电子记账本余额查询接口
+     */
+    async QueryOpenBankExternalSubAccountBookBalance(req, cb) {
+        return this.request("QueryOpenBankExternalSubAccountBookBalance", req, cb);
     }
     /**
      * 云支付-查询商户分类接口
@@ -238,6 +256,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QuerySinglePaymentResult", req, cb);
     }
     /**
+     * 云企付-申请单笔交易回单
+     */
+    async ApplyOpenBankOrderDetailReceipt(req, cb) {
+        return this.request("ApplyOpenBankOrderDetailReceipt", req, cb);
+    }
+    /**
      * 云支付-查询商户明细接口
      */
     async ViewMerchant(req, cb) {
@@ -250,10 +274,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadTaxPayment", req, cb);
     }
     /**
-     * 智能代发-单笔代发转账接口
+     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
+查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
-    async TransferSinglePay(req, cb) {
-        return this.request("TransferSinglePay", req, cb);
+    async QueryMemberBind(req, cb) {
+        return this.request("QueryMemberBind", req, cb);
     }
     /**
      * 云企付-创建支付订单
@@ -274,10 +299,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnBindAcct", req, cb);
     }
     /**
-     * 查询充值明细接口
+     * 云支付-分账请求接口
      */
-    async DescribeChargeDetail(req, cb) {
-        return this.request("DescribeChargeDetail", req, cb);
+    async DistributeApply(req, cb) {
+        return this.request("DistributeApply", req, cb);
     }
     /**
      * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
@@ -356,12 +381,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryContractRelateShop(req, cb) {
         return this.request("QueryContractRelateShop", req, cb);
-    }
-    /**
-     * 云支付-查询门店明细接口
-     */
-    async ViewShop(req, cb) {
-        return this.request("ViewShop", req, cb);
     }
     /**
      * 验证鉴权金额。此接口可受理BindRelateAcctSmallAmount接口发起的转账金额（往账鉴权方式）的验证处理。若所回填的验证金额验证通过，则会绑定原申请中的银行账户作为提现账户。通过此接口也可以查得BindRelateAcctSmallAmount接口发起的来账鉴权方式的申请的当前状态。
@@ -523,11 +542,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadOrgFile", req, cb);
     }
     /**
-     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
-查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
+     * 会员绑定提现账户-回填银联鉴权短信码。用于会员填写动态验证码后，发往银行进行验证，验证成功则完成绑定。
      */
-    async QueryMemberBind(req, cb) {
-        return this.request("QueryMemberBind", req, cb);
+    async BindRelateAccReUnionPay(req, cb) {
+        return this.request("BindRelateAccReUnionPay", req, cb);
     }
     /**
      * 云鉴-商户信息查询接口
@@ -789,10 +807,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyWithdrawal", req, cb);
     }
     /**
-     * 云支付-分账请求接口
+     * 查询充值明细接口
      */
-    async DistributeApply(req, cb) {
-        return this.request("DistributeApply", req, cb);
+    async DescribeChargeDetail(req, cb) {
+        return this.request("DescribeChargeDetail", req, cb);
     }
     /**
      * 银企直连-单笔支付接口
@@ -884,6 +902,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInvoice", req, cb);
     }
     /**
+     * 云企付-单笔交易回单申请结果查询
+     */
+    async QueryOpenBankOrderDetailReceiptInfo(req, cb) {
+        return this.request("QueryOpenBankOrderDetailReceiptInfo", req, cb);
+    }
+    /**
      * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时，用微信零钱支付的退款约20分钟内到账，银行卡支付的退款约3个工作日后到账。
      */
     async QueryRefund(req, cb) {
@@ -920,10 +944,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MigrateOrderRefundQuery", req, cb);
     }
     /**
-     * 直播平台-查询代理商结算单链接
+     * 云支付-查询门店明细接口
      */
-    async QueryAgentStatements(req, cb) {
-        return this.request("QueryAgentStatements", req, cb);
+    async ViewShop(req, cb) {
+        return this.request("ViewShop", req, cb);
     }
     /**
      * 通过此接口查询签约数据
@@ -968,6 +992,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryOpenBankBindExternalSubMerchantBankAccount", req, cb);
     }
     /**
+     * 第三方子商户电子记账本创建接口
+     */
+    async CreateOpenBankExternalSubMerchantAccountBook(req, cb) {
+        return this.request("CreateOpenBankExternalSubMerchantAccountBook", req, cb);
+    }
+    /**
      * 查询银行单笔交易状态。查询单笔交易的状态。
      */
     async QuerySingleTransactionStatus(req, cb) {
@@ -998,10 +1028,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryAcctInfoList", req, cb);
     }
     /**
-     * 会员绑定提现账户-回填银联鉴权短信码。用于会员填写动态验证码后，发往银行进行验证，验证成功则完成绑定。
+     * 直播平台-查询代理商结算单链接
      */
-    async BindRelateAccReUnionPay(req, cb) {
-        return this.request("BindRelateAccReUnionPay", req, cb);
+    async QueryAgentStatements(req, cb) {
+        return this.request("QueryAgentStatements", req, cb);
     }
     /**
      * 查询对账文件信息。平台调用该接口获取需下载对账文件的文件名称以及密钥。 平台获取到信息后， 可以再调用OPENAPI的文件下载功能。

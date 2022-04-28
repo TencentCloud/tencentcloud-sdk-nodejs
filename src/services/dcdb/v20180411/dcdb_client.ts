@@ -42,6 +42,7 @@ import {
   CreateAccountRequest,
   DescribeDBParametersResponse,
   IsolateHourDCDBInstanceRequest,
+  ModifyDBInstanceNameResponse,
   DescribeFlowResponse,
   CloneAccountResponse,
   ModifyAccountDescriptionResponse,
@@ -93,6 +94,7 @@ import {
   DescribeDCDBInstanceNodeInfoResponse,
   KillSessionRequest,
   DescribeDatabaseObjectsResponse,
+  ModifyDBInstanceNameRequest,
   DescribeDcnDetailResponse,
   TableColumn,
   SecurityGroupBound,
@@ -669,6 +671,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloneAccountResponse) => void
   ): Promise<CloneAccountResponse> {
     return this.request("CloneAccount", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceName）用于修改实例名字
+   */
+  async ModifyDBInstanceName(
+    req: ModifyDBInstanceNameRequest,
+    cb?: (error: string, rep: ModifyDBInstanceNameResponse) => void
+  ): Promise<ModifyDBInstanceNameResponse> {
+    return this.request("ModifyDBInstanceName", req, cb)
   }
 
   /**

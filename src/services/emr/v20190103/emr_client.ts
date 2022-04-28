@@ -22,6 +22,7 @@ import {
   MultiDiskMC,
   ClusterSetting,
   PodState,
+  ModifyResourceSchedulerRequest,
   JobResult,
   CustomMetaInfo,
   LoginSettings,
@@ -37,7 +38,7 @@ import {
   TerminateTasksRequest,
   PodVolume,
   SyncPodStateResponse,
-  TerminateInstanceResponse,
+  ModifyResourceScheduleConfigRequest,
   CreateInstanceResponse,
   PersistentVolumeContext,
   InquiryPriceRenewInstanceResponse,
@@ -58,10 +59,13 @@ import {
   PodParameter,
   MetaDbInfo,
   Configuration,
+  DescribeResourceScheduleRequest,
   DescribeInstancesResponse,
   InquiryPriceScaleOutInstanceRequest,
+  OutterResource,
   Tag,
   Placement,
+  QuotaEntity,
   SearchItem,
   DynamicPodSpec,
   DescribeInstancesRequest,
@@ -71,18 +75,21 @@ import {
   DescribeCvmQuotaResponse,
   InquiryPriceUpdateInstanceRequest,
   DescribeInstanceRenewNodesResponse,
+  TerminateInstanceResponse,
   COSSettings,
   ClusterInstancesInfo,
   PodSpec,
+  ModifyResourcePoolsRequest,
   MultiDisk,
   RunJobFlowResponse,
   RenewInstancesInfo,
   InquiryPriceScaleOutInstanceResponse,
-  OutterResource,
+  ModifyResourceSchedulerResponse,
   UpdateInstanceSettings,
   Execution,
   TerminateTasksResponse,
-  QuotaEntity,
+  ModifyResourcePoolsResponse,
+  ModifyResourceScheduleConfigResponse,
   PodSaleSpec,
   DescribeClusterNodesResponse,
   NodeHardwareInfo,
@@ -92,6 +99,7 @@ import {
   JobFlowResource,
   DescribeJobFlowResponse,
   InquiryPriceRenewInstanceRequest,
+  DescribeResourceScheduleResponse,
   CdbInfo,
   ScaleOutInstanceRequest,
 } from "./emr_models"
@@ -156,6 +164,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改了yarn的资源调度器，点击部署生效
+   */
+  async ModifyResourceScheduler(
+    req: ModifyResourceSchedulerRequest,
+    cb?: (error: string, rep: ModifyResourceSchedulerResponse) => void
+  ): Promise<ModifyResourceSchedulerResponse> {
+    return this.request("ModifyResourceScheduler", req, cb)
+  }
+
+  /**
    * 续费询价。
    */
   async InquiryPriceRenewInstance(
@@ -173,6 +191,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceResponse) => void
   ): Promise<CreateInstanceResponse> {
     return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 刷新动态资源池
+   */
+  async ModifyResourcePools(
+    req: ModifyResourcePoolsRequest,
+    cb?: (error: string, rep: ModifyResourcePoolsResponse) => void
+  ): Promise<ModifyResourcePoolsResponse> {
+    return this.request("ModifyResourcePools", req, cb)
   }
 
   /**
@@ -196,6 +224,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取yarn资源调度页面的数据
+   */
+  async DescribeResourceSchedule(
+    req: DescribeResourceScheduleRequest,
+    cb?: (error: string, rep: DescribeResourceScheduleResponse) => void
+  ): Promise<DescribeResourceScheduleResponse> {
+    return this.request("DescribeResourceSchedule", req, cb)
+  }
+
+  /**
    * 扩容询价. 当扩容时候，请通过该接口查询价格。
    */
   async InquiryPriceScaleOutInstance(
@@ -203,6 +241,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceScaleOutInstanceResponse) => void
   ): Promise<InquiryPriceScaleOutInstanceResponse> {
     return this.request("InquiryPriceScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 修改yarn资源调度的资源配置
+   */
+  async ModifyResourceScheduleConfig(
+    req: ModifyResourceScheduleConfigRequest,
+    cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void
+  ): Promise<ModifyResourceScheduleConfigResponse> {
+    return this.request("ModifyResourceScheduleConfig", req, cb)
   }
 
   /**

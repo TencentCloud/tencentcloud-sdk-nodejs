@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskList", req, cb);
     }
     /**
-     * 移除复制组成员
+     * 移除复制组成员 注：接口下线中，请使用 RemoveReplicationInstance
      */
     async DeleteReplicationInstance(req, cb) {
         return this.request("DeleteReplicationInstance", req, cb);

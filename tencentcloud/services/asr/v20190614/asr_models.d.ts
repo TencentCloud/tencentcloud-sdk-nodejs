@@ -197,7 +197,7 @@ export interface SentenceRecognitionRequest {
       */
     SourceType: number;
     /**
-      * 识别音频的音频格式。mp3、wav。
+      * 识别音频的音频格式，支持wav、pcm、ogg-opus、speex、silk、mp3、m4a、aac。
       */
     VoiceFormat: string;
     /**

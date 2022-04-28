@@ -64,12 +64,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ShrinkInstances", req, cb);
     }
     /**
-     * 启用工作流
-     */
-    async EnableTaskFlow(req, cb) {
-        return this.request("EnableTaskFlow", req, cb);
-    }
-    /**
      * 禁用单元化规则
      */
     async DisableUnitRule(req, cb) {
@@ -232,12 +226,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableUnitRoute", req, cb);
     }
     /**
-     * 部署Serverless应用
-     */
-    async DeployServerlessGroup(req, cb) {
-        return this.request("DeployServerlessGroup", req, cb);
-    }
-    /**
      * 创建配置项
      */
     async CreateConfig(req, cb) {
@@ -317,12 +305,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("CreateUnitRule", req, cb);
     }
     /**
-     * 查询Serverless部署组列表
-     */
-    async DescribeServerlessGroups(req, cb) {
-        return this.request("DescribeServerlessGroups", req, cb);
-    }
-    /**
      * 查询网关分组监控明细数据
      */
     async DescribeGroupUseDetail(req, cb) {
@@ -389,10 +371,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("CreateApiRateLimitRule", req, cb);
     }
     /**
-     * 创建Serverless部署组
+     * 删除微服务
      */
-    async CreateServerlessGroup(req, cb) {
-        return this.request("CreateServerlessGroup", req, cb);
+    async DeleteMicroservice(req, cb) {
+        return this.request("DeleteMicroservice", req, cb);
     }
     /**
      * 停止容器部署组
@@ -793,10 +775,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("ModifyMicroservice", req, cb);
     }
     /**
-     * 删除命名空间
+     * 启用工作流
      */
-    async DeleteNamespace(req, cb) {
-        return this.request("DeleteNamespace", req, cb);
+    async EnableTaskFlow(req, cb) {
+        return this.request("EnableTaskFlow", req, cb);
     }
     /**
      * 查询单元化规则详情
@@ -931,10 +913,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeApiRateLimitRules", req, cb);
     }
     /**
-     * 删除微服务
+     * 删除命名空间
      */
-    async DeleteMicroservice(req, cb) {
-        return this.request("DeleteMicroservice", req, cb);
+    async DeleteNamespace(req, cb) {
+        return this.request("DeleteNamespace", req, cb);
     }
     /**
      * TSF基本资源信息概览接口
@@ -1007,12 +989,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeEnabledUnitRule(req, cb) {
         return this.request("DescribeEnabledUnitRule", req, cb);
-    }
-    /**
-     * 查询Serverless部署组明细
-     */
-    async DescribeServerlessGroup(req, cb) {
-        return this.request("DescribeServerlessGroup", req, cb);
     }
     /**
      * 查询仓库信息

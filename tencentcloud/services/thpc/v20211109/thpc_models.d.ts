@@ -397,6 +397,10 @@ export interface BindAutoScalingGroupRequest {
       */
     AutoScalingGroupId: string;
     /**
+      * 队列名称。
+      */
+    QueueName?: string;
+    /**
       * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。默认值120。
       */
     ExpansionBusyTime?: number;

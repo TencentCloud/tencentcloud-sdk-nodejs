@@ -1568,22 +1568,6 @@ export interface GatewayPluginBoundParam {
 }
 
 /**
- * DescribeServerlessGroups返回参数结构体
- */
-export interface DescribeServerlessGroupsResponse {
-  /**
-      * 数据列表对象
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: ServerlessGroupPage
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyLaneRule请求参数结构体
  */
 export interface ModifyLaneRuleRequest {
@@ -4395,21 +4379,6 @@ export interface RevocationConfigResponse {
 }
 
 /**
- * DeployServerlessGroup返回参数结构体
- */
-export interface DeployServerlessGroupResponse {
-  /**
-   * 结果true：成功；false：失败；
-   */
-  Result?: boolean
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 描述程序包关联信息
  */
 export interface PkgBind {
@@ -5646,36 +5615,6 @@ export interface DescribeSimpleClustersRequest {
    * 无
    */
   DisableProgramAuthCheck?: boolean
-}
-
-/**
- * DeployServerlessGroup请求参数结构体
- */
-export interface DeployServerlessGroupRequest {
-  /**
-   * 部署组ID
-   */
-  GroupId: string
-
-  /**
-   * 程序包ID
-   */
-  PkgId: string
-
-  /**
-   * 所需实例内存大小，取值为 1Gi 2Gi 4Gi 8Gi 16Gi，缺省为 1Gi，不传表示维持原态
-   */
-  Memory?: string
-
-  /**
-   * 要求最小实例数，取值范围 [1, 4]，缺省为 1，不传表示维持原态
-   */
-  InstanceRequest?: number
-
-  /**
-   * 部署组启动参数，不传表示维持原态
-   */
-  StartupParameters?: string
 }
 
 /**
@@ -7306,22 +7245,6 @@ export interface DeployGroupResponse {
 }
 
 /**
- * DescribeServerlessGroup返回参数结构体
- */
-export interface DescribeServerlessGroupResponse {
-  /**
-      * 结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result?: ServerlessGroup
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * BindApiGroup返回参数结构体
  */
 export interface BindApiGroupResponse {
@@ -8148,22 +8071,6 @@ export interface DescribePublicConfigReleaseLogsRequest {
    * 每页条数，默认为20
    */
   Limit?: number
-}
-
-/**
- * CreateServerlessGroup返回参数结构体
- */
-export interface CreateServerlessGroupResponse {
-  /**
-      * 创建成功的部署组ID，返回null表示失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -9744,16 +9651,6 @@ export interface DescribeApiGroupsRequest {
 }
 
 /**
- * DescribeServerlessGroup请求参数结构体
- */
-export interface DescribeServerlessGroupRequest {
-  /**
-   * 部署组ID
-   */
-  GroupId: string
-}
-
-/**
  * DeleteUnitRule请求参数结构体
  */
 export interface DeleteUnitRuleRequest {
@@ -10353,31 +10250,6 @@ export interface DescribeLaneRulesRequest {
 }
 
 /**
- * CreateServerlessGroup请求参数结构体
- */
-export interface CreateServerlessGroupRequest {
-  /**
-   * 分组所属应用ID
-   */
-  ApplicationId: string
-
-  /**
-   * 分组名称字段，长度1~60，字母或下划线开头，可包含字母数字下划线
-   */
-  GroupName: string
-
-  /**
-   * 分组所属名字空间ID
-   */
-  NamespaceId: string
-
-  /**
-   * 分组所属集群ID
-   */
-  ClusterId: string
-}
-
-/**
  * 微服务网关单元化规则标签
  */
 export interface UnitRuleTag {
@@ -10496,56 +10368,6 @@ export interface GroupUnitApiDailyUseStatistics {
 }
 
 /**
- * DescribeServerlessGroups请求参数结构体
- */
-export interface DescribeServerlessGroupsRequest {
-  /**
-   * 搜索字段，模糊搜索groupName字段
-   */
-  SearchWord?: string
-
-  /**
-   * 分组所属应用ID
-   */
-  ApplicationId?: string
-
-  /**
-   * 排序字段，默认为 createTime字段，支持id， name， createTime
-   */
-  OrderBy?: string
-
-  /**
-   * 排序方式，默认为1：倒序排序，0：正序，1：倒序
-   */
-  OrderType?: string
-
-  /**
-   * 偏移量，取值从0开始
-   */
-  Offset?: number
-
-  /**
-   * 分页个数，默认为20， 取值应为1~50
-   */
-  Limit?: number
-
-  /**
-   * 分组所属名字空间ID
-   */
-  NamespaceId?: string
-
-  /**
-   * 分组所属集群ID
-   */
-  ClusterId?: string
-
-  /**
-   * 无
-   */
-  GroupIdList?: Array<string>
-}
-
-/**
  * 构成监控数据图的曲线坐标点
  */
 export interface CurvePoint {
@@ -10617,23 +10439,6 @@ export interface DeletePkgsRequest {
    * 程序包仓库id
    */
   RepositoryId?: string
-}
-
-/**
- * ServerlessGroup 翻页对象
- */
-export interface ServerlessGroupPage {
-  /**
-      * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
-  /**
-      * 列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Content: Array<ServerlessGroup>
 }
 
 /**
@@ -11854,125 +11659,6 @@ export interface StopTaskBatchRequest {
    * 参数ID
    */
   TaskId?: string
-}
-
-/**
- * Serverless部署组信息
- */
-export interface ServerlessGroup {
-  /**
-      * 部署组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupId: string
-
-  /**
-      * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupName: string
-
-  /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
-
-  /**
-      * 服务状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 程序包ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgId: string
-
-  /**
-      * 程序包名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgName: string
-
-  /**
-      * 集群id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterId: string
-
-  /**
-      * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterName: string
-
-  /**
-      * 命名空间id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NamespaceId: string
-
-  /**
-      * 命名空间名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NamespaceName: string
-
-  /**
-      * vpc ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VpcId: string
-
-  /**
-      * vpc 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubnetId: string
-
-  /**
-      * 程序包版本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PkgVersion: string
-
-  /**
-      * 所需实例内存大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Memory: string
-
-  /**
-      * 要求最小实例数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceRequest: number
-
-  /**
-      * 部署组启动参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StartupParameters: string
-
-  /**
-      * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationId: string
-
-  /**
-      * 部署组实例数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceCount: number
-
-  /**
-      * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ApplicationName: Array<string>
 }
 
 /**

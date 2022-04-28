@@ -141,6 +141,23 @@ export interface PodState {
     Memory: number;
 }
 /**
+ * ModifyResourceScheduler请求参数结构体
+ */
+export interface ModifyResourceSchedulerRequest {
+    /**
+      * emr集群的英文id
+      */
+    InstanceId: string;
+    /**
+      * 老的调度器:fair
+      */
+    OldValue: string;
+    /**
+      * 新的调度器:capacity
+      */
+    NewValue: string;
+}
+/**
  * 任务步骤结果描述
  */
 export interface JobResult {
@@ -622,13 +639,21 @@ export interface SyncPodStateResponse {
     RequestId?: string;
 }
 /**
- * TerminateInstance返回参数结构体
+ * ModifyResourceScheduleConfig请求参数结构体
  */
-export interface TerminateInstanceResponse {
+export interface ModifyResourceScheduleConfigRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * emr集群的英文id
       */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+      * 业务标识，fair表示编辑公平的配置项，fairPlan表示编辑执行计划，capacity表示编辑容量的配置项
+      */
+    Key: string;
+    /**
+      * 修改后的模块消息
+      */
+    Value: string;
 }
 /**
  * CreateInstance返回参数结构体
@@ -1316,6 +1341,15 @@ export interface Configuration {
     Properties: string;
 }
 /**
+ * DescribeResourceSchedule请求参数结构体
+ */
+export interface DescribeResourceScheduleRequest {
+    /**
+      * emr集群的英文id
+      */
+    InstanceId: string;
+}
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -1391,6 +1425,56 @@ export interface InquiryPriceScaleOutInstanceRequest {
     MasterCount?: number;
 }
 /**
+ * 资源详情
+ */
+export interface OutterResource {
+    /**
+      * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Spec: string;
+    /**
+      * 规格名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SpecName: string;
+    /**
+      * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageType: number;
+    /**
+      * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskType: string;
+    /**
+      * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RootSize: number;
+    /**
+      * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MemSize: number;
+    /**
+      * CPU个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cpu: number;
+    /**
+      * 硬盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskSize: number;
+    /**
+      * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceType: string;
+}
+/**
  * 标签
  */
 export interface Tag {
@@ -1413,6 +1497,31 @@ export interface Placement {
     ProjectId: number;
     /**
       * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用 DescribeZones 的返回值中的Zone字段来获取。
+      */
+    Zone: string;
+}
+/**
+ * 获取CVM配额
+ */
+export interface QuotaEntity {
+    /**
+      * 已使用配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsedQuota: number;
+    /**
+      * 剩余配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RemainingQuota: number;
+    /**
+      * 总配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalQuota: number;
+    /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Zone: string;
 }
@@ -1733,6 +1842,15 @@ export interface DescribeInstanceRenewNodesResponse {
     RequestId?: string;
 }
 /**
+ * TerminateInstance返回参数结构体
+ */
+export interface TerminateInstanceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * COS 相关配置
  */
 export interface COSSettings {
@@ -2023,6 +2141,19 @@ export interface PodSpec {
     SubnetId?: string;
 }
 /**
+ * ModifyResourcePools请求参数结构体
+ */
+export interface ModifyResourcePoolsRequest {
+    /**
+      * emr集群id
+      */
+    InstanceId: string;
+    /**
+      * 标识是fair还是capacity
+      */
+    Key: string;
+}
+/**
  * 多云盘参数
  */
 export interface MultiDisk {
@@ -2129,54 +2260,13 @@ export interface InquiryPriceScaleOutInstanceResponse {
     RequestId?: string;
 }
 /**
- * 资源详情
+ * ModifyResourceScheduler返回参数结构体
  */
-export interface OutterResource {
+export interface ModifyResourceSchedulerResponse {
     /**
-      * 规格
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Spec: string;
-    /**
-      * 规格名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SpecName: string;
-    /**
-      * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StorageType: number;
-    /**
-      * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiskType: string;
-    /**
-      * 系统盘大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RootSize: number;
-    /**
-      * 内存大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MemSize: number;
-    /**
-      * CPU个数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Cpu: number;
-    /**
-      * 硬盘大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiskSize: number;
-    /**
-      * 规格
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceType: string;
+    RequestId?: string;
 }
 /**
  * 变配资源规格
@@ -2225,29 +2315,40 @@ export interface TerminateTasksResponse {
     RequestId?: string;
 }
 /**
- * 获取CVM配额
+ * ModifyResourcePools返回参数结构体
  */
-export interface QuotaEntity {
+export interface ModifyResourcePoolsResponse {
     /**
-      * 已使用配额
+      * false表示不是草稿，提交刷新请求成功
+      */
+    IsDraft: boolean;
+    /**
+      * 扩展字段，暂时没用
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UsedQuota: number;
+    ErrorMsg: string;
     /**
-      * 剩余配额
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyResourceScheduleConfig返回参数结构体
+ */
+export interface ModifyResourceScheduleConfigResponse {
+    /**
+      * true为草稿，表示还没有刷新资源池
+      */
+    IsDraft: boolean;
+    /**
+      * 校验错误信息，如果不为空，则说明校验失败，配置没有成功
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RemainingQuota: number;
+    ErrorMsg: string;
     /**
-      * 总配额
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TotalQuota: number;
-    /**
-      * 可用区
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Zone: string;
+    RequestId?: string;
 }
 /**
  * Pod资源售卖规格
@@ -2664,6 +2765,31 @@ export interface InquiryPriceRenewInstanceRequest {
       * 是否按量转包年包月。0：否，1：是。
       */
     ModifyPayMode?: number;
+}
+/**
+ * DescribeResourceSchedule返回参数结构体
+ */
+export interface DescribeResourceScheduleResponse {
+    /**
+      * 资源调度功能是否开启
+      */
+    OpenSwitch: boolean;
+    /**
+      * 正在使用的资源调度器
+      */
+    Scheduler: string;
+    /**
+      * 公平调度器的信息
+      */
+    FSInfo: string;
+    /**
+      * 容量调度器的信息
+      */
+    CSInfo: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 出参

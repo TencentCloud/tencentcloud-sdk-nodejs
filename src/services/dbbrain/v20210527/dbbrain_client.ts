@@ -178,7 +178,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询SQL模版。
+   * 查询SQL模板。
    */
   async DescribeSqlTemplate(
     req: DescribeSqlTemplateRequest,

@@ -2428,6 +2428,36 @@ export interface MaterialBasicInfo {
     TagInfoSet: Array<MaterialTagInfo>;
 }
 /**
+ * 视频导出完成事件。
+ */
+export interface VideoExportCompletedEvent {
+    /**
+      * 任务 Id。
+      */
+    TaskId: string;
+    /**
+      * 任务状态，取值有：
+<li>SUCCESS：成功；</li>
+<li>FAIL：失败。</li>
+      */
+    Status: string;
+    /**
+      * 错误码，取值有：
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+      */
+    ErrCode: number;
+    /**
+      * 错误信息。
+      */
+    ErrMsg: string;
+    /**
+      * 任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Output: VideoEditProjectOutput;
+}
+/**
  * 资源信息，包含资源以及归属信息
  */
 export interface ResourceInfo {
@@ -3004,7 +3034,8 @@ export interface EventContent {
 <li>Material.Deleted：媒体删除事件；</li>
 <li>Class.Created：分类新增事件；</li>
 <li>Class.Moved：分类移动事件；</li>
-<li>Class.Deleted：分类删除事件。</li>
+<li>Class.Deleted：分类删除事件；</li>
+<li>Task.VideoExportCompleted：视频导出完成事件。 </li>
       */
     EventType: string;
     /**
@@ -3064,6 +3095,11 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClassDeletedEvent: ClassDeletedEvent;
+    /**
+      * 视频导出完成事件。仅当 EventType 为 Task.VideoExportCompleted 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VideoExportCompletedEvent: VideoExportCompletedEvent;
 }
 /**
  * 视频素材信息

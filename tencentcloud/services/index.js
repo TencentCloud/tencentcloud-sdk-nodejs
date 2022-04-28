@@ -334,6 +334,8 @@ var tdmq_1 = require("./tdmq");
 Object.defineProperty(exports, "tdmq", { enumerable: true, get: function () { return tdmq_1.tdmq; } });
 var tem_1 = require("./tem");
 Object.defineProperty(exports, "tem", { enumerable: true, get: function () { return tem_1.tem; } });
+var teo_1 = require("./teo");
+Object.defineProperty(exports, "teo", { enumerable: true, get: function () { return teo_1.teo; } });
 var thpc_1 = require("./thpc");
 Object.defineProperty(exports, "thpc", { enumerable: true, get: function () { return thpc_1.thpc; } });
 var tia_1 = require("./tia");

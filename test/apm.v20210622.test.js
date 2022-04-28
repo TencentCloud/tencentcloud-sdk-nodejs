@@ -58,4 +58,14 @@ it("apm.v20210622.DescribeApmAgent", async function () {
     }
 })
 
+it("apm.v20210622.DescribeServiceOverview", async function () {
+    try {
+       const data = await client.DescribeServiceOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

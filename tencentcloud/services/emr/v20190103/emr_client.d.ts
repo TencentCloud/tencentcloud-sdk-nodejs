@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquirePriceRenewEmrResponse, RunJobFlowRequest, DescribeInstanceRenewNodesRequest, ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateTasksRequest, SyncPodStateResponse, TerminateInstanceResponse, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, InquirePriceRenewEmrRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, DescribeCvmQuotaResponse, InquiryPriceUpdateInstanceRequest, DescribeInstanceRenewNodesResponse, RunJobFlowResponse, InquiryPriceScaleOutInstanceResponse, TerminateTasksResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, DescribeJobFlowResponse, InquiryPriceRenewInstanceRequest, ScaleOutInstanceRequest } from "./emr_models";
+import { InquirePriceRenewEmrResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeInstanceRenewNodesRequest, ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateTasksRequest, SyncPodStateResponse, ModifyResourceScheduleConfigRequest, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, DescribeCvmQuotaRequest, DescribeClusterNodesRequest, SyncPodStateRequest, CreateInstanceRequest, InquirePriceRenewEmrRequest, DescribeResourceScheduleRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, DescribeCvmQuotaResponse, InquiryPriceUpdateInstanceRequest, DescribeInstanceRenewNodesResponse, TerminateInstanceResponse, ModifyResourcePoolsRequest, RunJobFlowResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, TerminateTasksResponse, ModifyResourcePoolsResponse, ModifyResourceScheduleConfigResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, DescribeJobFlowResponse, InquiryPriceRenewInstanceRequest, DescribeResourceScheduleResponse, ScaleOutInstanceRequest } from "./emr_models";
 /**
  * emr client
  * @class
@@ -28,6 +28,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterNodes(req: DescribeClusterNodesRequest, cb?: (error: string, rep: DescribeClusterNodesResponse) => void): Promise<DescribeClusterNodesResponse>;
     /**
+     * 修改了yarn的资源调度器，点击部署生效
+     */
+    ModifyResourceScheduler(req: ModifyResourceSchedulerRequest, cb?: (error: string, rep: ModifyResourceSchedulerResponse) => void): Promise<ModifyResourceSchedulerResponse>;
+    /**
      * 续费询价。
      */
     InquiryPriceRenewInstance(req: InquiryPriceRenewInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void): Promise<InquiryPriceRenewInstanceResponse>;
@@ -35,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 创建EMR集群实例
      */
     CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
+    /**
+     * 刷新动态资源池
+     */
+    ModifyResourcePools(req: ModifyResourcePoolsRequest, cb?: (error: string, rep: ModifyResourcePoolsResponse) => void): Promise<ModifyResourcePoolsResponse>;
     /**
      * 创建实例询价
      */
@@ -44,9 +52,17 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceRenewEmr(req: InquirePriceRenewEmrRequest, cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void): Promise<InquirePriceRenewEmrResponse>;
     /**
+     * 获取yarn资源调度页面的数据
+     */
+    DescribeResourceSchedule(req: DescribeResourceScheduleRequest, cb?: (error: string, rep: DescribeResourceScheduleResponse) => void): Promise<DescribeResourceScheduleResponse>;
+    /**
      * 扩容询价. 当扩容时候，请通过该接口查询价格。
      */
     InquiryPriceScaleOutInstance(req: InquiryPriceScaleOutInstanceRequest, cb?: (error: string, rep: InquiryPriceScaleOutInstanceResponse) => void): Promise<InquiryPriceScaleOutInstanceResponse>;
+    /**
+     * 修改yarn资源调度的资源配置
+     */
+    ModifyResourceScheduleConfig(req: ModifyResourceScheduleConfigRequest, cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void): Promise<ModifyResourceScheduleConfigResponse>;
     /**
      * 查询流程任务
      */

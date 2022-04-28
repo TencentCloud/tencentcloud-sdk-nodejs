@@ -144,6 +144,21 @@ export interface SearchPersonsReturnsByGroupResponse {
 }
 
 /**
+ * 包含此人员的人员库及描述字段内容列表
+ */
+export interface PersonGroupInfo {
+  /**
+   * 包含此人员的人员库ID
+   */
+  GroupId: string
+
+  /**
+   * 人员描述字段内容
+   */
+  PersonExDescriptions: Array<string>
+}
+
+/**
  * 帽子信息
  */
 export interface Hat {
@@ -461,21 +476,26 @@ export interface FaceInfo {
 }
 
 /**
- * CheckSimilarPerson请求参数结构体
+ * 眉毛信息
  */
-export interface CheckSimilarPersonRequest {
+export interface Eyebrow {
   /**
-      * 待整理的人员库列表。 
-人员库总人数不可超过200万，人员库个数不可超过10个。
+      * 眉毛浓密。
+AttributeItem对应的Type为 —— 0：淡眉，1：浓眉。
       */
-  GroupIds: Array<string>
+  EyebrowDensity: AttributeItem
 
   /**
-      * 人员查重整理力度的控制。
-1：力度较高的人员整理，能够消除更多的重复身份，对应稍高的非重复身份误清除率；
-2：力度较低的人员整理，非重复身份的误清除率较低，对应稍低的重复身份消除率。
+      * 眉毛弯曲。
+AttributeItem对应的Type为 —— 0：不弯，1：弯眉。
       */
-  UniquePersonControl: number
+  EyebrowCurve: AttributeItem
+
+  /**
+      * 眉毛长短。
+AttributeItem对应的Type为 —— 0：短眉毛，1：长眉毛。
+      */
+  EyebrowLength: AttributeItem
 }
 
 /**
@@ -723,21 +743,6 @@ export interface CopyPersonResponse {
 }
 
 /**
- * EstimateCheckSimilarPersonCostTime返回参数结构体
- */
-export interface EstimateCheckSimilarPersonCostTimeResponse {
-  /**
-   * 人员查重任务预估需要耗费时间。 单位为分钟。
-   */
-  EstimatedTimeCost?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 分组识别结果Item
  */
 export interface GroupCandidate {
@@ -860,27 +865,6 @@ export interface DeleteGroupRequest {
 }
 
 /**
- * EstimateCheckSimilarPersonCostTime请求参数结构体
- */
-export interface EstimateCheckSimilarPersonCostTimeRequest {
-  /**
-      * 待整理的人员库列表。 
-人员库总人数不可超过200万，人员库个数不可超过10个。
-      */
-  GroupIds: Array<string>
-}
-
-/**
- * RevertGroupFaceModelVersion返回参数结构体
- */
-export interface RevertGroupFaceModelVersionResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * UpgradeGroupFaceModelVersion请求参数结构体
  */
 export interface UpgradeGroupFaceModelVersionRequest {
@@ -952,16 +936,6 @@ export interface GetPersonBaseInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * GetSimilarPersonResult请求参数结构体
- */
-export interface GetSimilarPersonResultRequest {
-  /**
-   * 查重任务ID，用于查询、获取查重的进度和结果。
-   */
-  JobId: string
 }
 
 /**
@@ -1190,26 +1164,6 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
  * DeletePersonFromGroup返回参数结构体
  */
 export interface DeletePersonFromGroupResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetCheckSimilarPersonJobIdList返回参数结构体
- */
-export interface GetCheckSimilarPersonJobIdListResponse {
-  /**
-   * 人员查重任务信息列表。
-   */
-  JobIdInfos?: Array<JobIdInfo>
-
-  /**
-   * 查重任务总数量。
-   */
-  JobIdNum?: number
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1484,16 +1438,6 @@ AttributeItem对应的Type为 —— 0：黑色，1：金色，2：棕色，3：
 }
 
 /**
- * GetPersonListNum请求参数结构体
- */
-export interface GetPersonListNumRequest {
-  /**
-   * 人员库ID
-   */
-  GroupId: string
-}
-
-/**
  * 人脸的识别结果
  */
 export interface Result {
@@ -1662,27 +1606,6 @@ export interface AnalyzeDenseLandmarksResponse {
  * ModifyPersonBaseInfo返回参数结构体
  */
 export interface ModifyPersonBaseInfoResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetSimilarPersonResult返回参数结构体
- */
-export interface GetSimilarPersonResultResponse {
-  /**
-   * 查重任务完成进度。取值[0.0，100.0]。当且仅当值为100时，SimilarPersons才有意义。
-   */
-  Progress?: number
-
-  /**
-      * 疑似同一人的人员信息文件临时下载链接， 有效时间为5分钟，结果文件实际保存90天。
-文件内容由 SimilarPerson 的数组组成。
-      */
-  SimilarPersonsUrl?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1903,26 +1826,32 @@ export interface ModifyPersonBaseInfoRequest {
 }
 
 /**
- * 查重任务信息
+ * VerifyFace返回参数结构体
  */
-export interface JobIdInfo {
+export interface VerifyFaceResponse {
   /**
-   * 查重任务ID，用于查询、获取查重的进度和结果。
-   */
-  JobId: string
+      * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
 
-  /**
-      * 查重起始时间。 
-StartTime的值是自 Unix 纪元时间到Group创建时间的毫秒数。 
-Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。 
-有关更多信息，请参阅 Unix 时间。
+不同算法版本返回的相似度分数不同。
+若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
+2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
       */
-  StartTime: number
+  Score: number
 
   /**
-   * 查重任务是否已完成。0: 成功 1: 未完成 2: 失败
+   * 是否为同一人的判断。
    */
-  JobStatus: number
+  IsMatch: boolean
+
+  /**
+   * 人脸识别所用的算法模型版本。
+   */
+  FaceModelVersion: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2013,21 +1942,6 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
    * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
    */
   NeedRotateDetection?: number
-}
-
-/**
- * GetCheckSimilarPersonJobIdList请求参数结构体
- */
-export interface GetCheckSimilarPersonJobIdListRequest {
-  /**
-   * 起始序号，默认值为0。
-   */
-  Offset?: number
-
-  /**
-   * 返回数量，默认值为10，最大值为1000。
-   */
-  Limit?: number
 }
 
 /**
@@ -2469,43 +2383,9 @@ AttributeItem对应的Type为 —— 0：不张嘴，1：张嘴。
 }
 
 /**
- * 包含此人员的人员库及描述字段内容列表
+ * RevertGroupFaceModelVersion返回参数结构体
  */
-export interface PersonGroupInfo {
-  /**
-   * 包含此人员的人员库ID
-   */
-  GroupId: string
-
-  /**
-   * 人员描述字段内容
-   */
-  PersonExDescriptions: Array<string>
-}
-
-/**
- * VerifyFace返回参数结构体
- */
-export interface VerifyFaceResponse {
-  /**
-      * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
-
-不同算法版本返回的相似度分数不同。
-若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
-2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
-      */
-  Score: number
-
-  /**
-   * 是否为同一人的判断。
-   */
-  IsMatch: boolean
-
-  /**
-   * 人脸识别所用的算法模型版本。
-   */
-  FaceModelVersion: string
-
+export interface RevertGroupFaceModelVersionResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2705,41 +2585,13 @@ export interface DetectFaceResponse {
 }
 
 /**
- * CheckSimilarPerson返回参数结构体
+ * GetPersonListNum请求参数结构体
  */
-export interface CheckSimilarPersonResponse {
+export interface GetPersonListNumRequest {
   /**
-   * 查重任务ID，用于查询、获取查重的进度和结果。
+   * 人员库ID
    */
-  JobId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 眉毛信息
- */
-export interface Eyebrow {
-  /**
-      * 眉毛浓密。
-AttributeItem对应的Type为 —— 0：淡眉，1：浓眉。
-      */
-  EyebrowDensity: AttributeItem
-
-  /**
-      * 眉毛弯曲。
-AttributeItem对应的Type为 —— 0：不弯，1：弯眉。
-      */
-  EyebrowCurve: AttributeItem
-
-  /**
-      * 眉毛长短。
-AttributeItem对应的Type为 —— 0：短眉毛，1：长眉毛。
-      */
-  EyebrowLength: AttributeItem
+  GroupId: string
 }
 
 /**

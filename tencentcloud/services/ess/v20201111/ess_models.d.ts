@@ -1,4 +1,17 @@
 /**
+ * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
+ */
+export interface UploadFile {
+    /**
+      * Base64编码后的文件内容
+      */
+    FileBody: string;
+    /**
+      * 文件名
+      */
+    FileName?: string;
+}
+/**
  * DescribeFileUrls返回参数结构体
  */
 export interface DescribeFileUrlsResponse {
@@ -203,6 +216,48 @@ export interface DescribeThirdPartyAuthCodeRequest {
     AuthCode: string;
 }
 /**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+    /**
+      * 调用方信息
+      */
+    Caller: Caller;
+    /**
+      * 文件对应业务类型，用于区分文件存储路径：
+1. TEMPLATE - 模版； 文件类型：.pdf/.html
+2. DOCUMENT - 签署过程及签署后的合同文档 文件类型：.pdf/.html
+3. FLOW - 签署过程 文件类型：.pdf/.html
+4. SEAL - 印章； 文件类型：.jpg/.jpeg/.png
+5. BUSINESSLICENSE - 营业执照 文件类型：.jpg/.jpeg/.png
+6. IDCARD - 身份证 文件类型：.jpg/.jpeg/.png
+      */
+    BusinessType: string;
+    /**
+      * 上传文件内容数组，最多支持20个文件
+      */
+    FileInfos?: Array<UploadFile>;
+    /**
+      * 上传文件链接数组，最多支持20个URL
+      */
+    FileUrls?: string;
+    /**
+      * 是否将pdf灰色矩阵置白
+true--是，处理置白
+false--否，不处理
+      */
+    CoverRect?: boolean;
+    /**
+      * 特殊文件类型需要指定文件类型：
+HTML-- .html文件
+      */
+    FileType?: string;
+    /**
+      * 用户自定义ID数组，与上传文件一一对应
+      */
+    CustomIds?: Array<string>;
+}
+/**
  * CancelFlow请求参数结构体
  */
 export interface CancelFlowRequest {
@@ -313,6 +368,23 @@ KEYWORD 关键字，使用ComponentId指定关键字
       * 日期控件类型字号
       */
     ComponentDateFontSize?: number;
+}
+/**
+ * UploadFiles返回参数结构体
+ */
+export interface UploadFilesResponse {
+    /**
+      * 文件id数组
+      */
+    FileIds: Array<string>;
+    /**
+      * 上传成功文件数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeThirdPartyAuthCode返回参数结构体
@@ -470,6 +542,27 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       * 合同的强制预览时间：3~300s，未指定则按合同页数计算
       */
     PreReadTime?: number;
+}
+/**
+ * 此结构体 (Caller) 用于描述调用方属性。
+ */
+export interface Caller {
+    /**
+      * 应用号
+      */
+    ApplicationId: string;
+    /**
+      * 主机构ID
+      */
+    OrganizationId?: string;
+    /**
+      * 下属机构ID
+      */
+    SubOrganizationId?: string;
+    /**
+      * 经办人的用户ID
+      */
+    OperatorId?: string;
 }
 /**
  * StartFlow返回参数结构体

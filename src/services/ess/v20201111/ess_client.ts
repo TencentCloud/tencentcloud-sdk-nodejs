@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UploadFile,
   DescribeFileUrlsResponse,
   CreateDocumentResponse,
   StartFlowRequest,
@@ -27,14 +28,17 @@ import {
   CreateSchemeUrlRequest,
   FileUrl,
   DescribeThirdPartyAuthCodeRequest,
+  UploadFilesRequest,
   CancelFlowRequest,
   DescribeFlowBriefsResponse,
   Component,
+  UploadFilesResponse,
   DescribeThirdPartyAuthCodeResponse,
   CreateFlowByFilesResponse,
   DescribeFlowBriefsRequest,
   DescribeFileUrlsRequest,
   ApproverInfo,
+  Caller,
   StartFlowResponse,
   FlowCreateApprover,
   CreateSchemeUrlResponse,
@@ -144,5 +148,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowByFilesResponse) => void
   ): Promise<CreateFlowByFilesResponse> {
     return this.request("CreateFlowByFiles", req, cb)
+  }
+
+  /**
+     * 此接口（UploadFiles）用于文件上传。
+调用时需要设置Domain 为 file.ess.tencent.cn，设置Version为2020-12-22
+     */
+  async UploadFiles(
+    req: UploadFilesRequest,
+    cb?: (error: string, rep: UploadFilesResponse) => void
+  ): Promise<UploadFilesResponse> {
+    return this.request("UploadFiles", req, cb)
   }
 }

@@ -68,6 +68,16 @@ it("emr.v20190103.DescribeClusterNodes", async function () {
     }
 })
 
+it("emr.v20190103.ModifyResourceScheduler", async function () {
+    try {
+       const data = await client.ModifyResourceScheduler({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.InquiryPriceRenewInstance", async function () {
     try {
        const data = await client.InquiryPriceRenewInstance({})
@@ -81,6 +91,16 @@ it("emr.v20190103.InquiryPriceRenewInstance", async function () {
 it("emr.v20190103.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyResourcePools", async function () {
+    try {
+       const data = await client.ModifyResourcePools({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +128,29 @@ it("emr.v20190103.InquirePriceRenewEmr", async function () {
     }
 })
 
+it("emr.v20190103.DescribeResourceSchedule", async function () {
+    try {
+       const data = await client.DescribeResourceSchedule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.InquiryPriceScaleOutInstance", async function () {
     try {
        const data = await client.InquiryPriceScaleOutInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
+    try {
+       const data = await client.ModifyResourceScheduleConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

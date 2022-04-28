@@ -578,22 +578,22 @@ export interface DescribeAccountLimitsResponse {
   /**
    * 用户账户被允许创建的启动配置最大数量
    */
-  MaxNumberOfLaunchConfigurations?: number
+  MaxNumberOfLaunchConfigurations: number
 
   /**
    * 用户账户启动配置的当前数量
    */
-  NumberOfLaunchConfigurations?: number
+  NumberOfLaunchConfigurations: number
 
   /**
    * 用户账户被允许创建的伸缩组最大数量
    */
-  MaxNumberOfAutoScalingGroups?: number
+  MaxNumberOfAutoScalingGroups: number
 
   /**
    * 用户账户伸缩组的当前数量
    */
-  NumberOfAutoScalingGroups?: number
+  NumberOfAutoScalingGroups: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -668,12 +668,12 @@ export interface DescribeAutoScalingGroupsResponse {
   /**
    * 伸缩组详细信息列表。
    */
-  AutoScalingGroupSet?: Array<AutoScalingGroup>
+  AutoScalingGroupSet: Array<AutoScalingGroup>
 
   /**
    * 符合条件的伸缩组数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1355,8 +1355,18 @@ export interface AutoScalingGroup {
   AutoScalingGroupName: string
 
   /**
-   * 伸缩组当前状态。取值范围：<br><li>NORMAL：正常<br><li>CVM_ABNORMAL：启动配置异常<br><li>LB_ABNORMAL：负载均衡器异常<br><li>VPC_ABNORMAL：VPC网络异常<br><li>INSUFFICIENT_BALANCE：余额不足<br><li>LB_BACKEND_REGION_NOT_MATCH：CLB实例后端地域与AS服务所在地域不匹配<br>
-   */
+      * 伸缩组当前状态。取值范围：<br>
+<li>NORMAL：正常<br>
+<li>CVM_ABNORMAL：启动配置异常<br>
+<li>LB_ABNORMAL：负载均衡器异常<br>
+<li>LB_LISTENER_ABNORMAL：负载均衡器监听器异常<br>
+<li>LB_LOCATION_ABNORMAL：负载均衡器监听器转发配置异常<br>
+<li>VPC_ABNORMAL：VPC网络异常<br>
+<li>SUBNET_ABNORMAL：VPC子网异常<br>
+<li>INSUFFICIENT_BALANCE：余额不足<br>
+<li>LB_BACKEND_REGION_NOT_MATCH：CLB实例后端地域与AS服务所在地域不匹配<br>
+<li>LB_BACKEND_VPC_NOT_MATCH：CLB实例VPC与伸缩组VPC不匹配
+      */
   AutoScalingGroupStatus: string
 
   /**
@@ -1529,7 +1539,7 @@ export interface DescribeAutoScalingGroupLastActivitiesResponse {
   /**
    * 符合条件的伸缩活动信息集合。说明：伸缩组伸缩活动不存在的则不返回，如传50个伸缩组ID，返回45条数据，说明其中有5个伸缩组伸缩活动不存在。
    */
-  ActivitySet?: Array<Activity>
+  ActivitySet: Array<Activity>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1890,6 +1900,16 @@ export interface InstanceTag {
 }
 
 /**
+ * ModifyLifecycleHook返回参数结构体
+ */
+export interface ModifyLifecycleHookResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAutoScalingAdvices返回参数结构体
  */
 export interface DescribeAutoScalingAdvicesResponse {
@@ -2210,12 +2230,12 @@ export interface DescribeNotificationConfigurationsResponse {
   /**
    * 符合条件的通知数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 弹性伸缩事件通知详细信息列表。
    */
-  AutoScalingNotificationSet?: Array<AutoScalingNotification>
+  AutoScalingNotificationSet: Array<AutoScalingNotification>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2228,7 +2248,7 @@ export interface DescribeNotificationConfigurationsResponse {
  */
 export interface DataDisk {
   /**
-      * 数据盘类型。数据盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
+      * 数据盘类型。数据盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><br>默认取值与系统盘类型（SystemDisk.DiskType）保持一致。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DiskType?: string
@@ -2256,6 +2276,13 @@ export interface DataDisk {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Encrypt?: boolean
+
+  /**
+      * 云硬盘性能，单位：MB/s。使用此参数可给云硬盘购买额外的性能，功能介绍和类型限制详见：[增强型 SSD 云硬盘额外性能说明](https://cloud.tencent.com/document/product/362/51896#.E5.A2.9E.E5.BC.BA.E5.9E.8B-ssd-.E4.BA.91.E7.A1.AC.E7.9B.98.E9.A2.9D.E5.A4.96.E6.80.A7.E8.83.BD)。
+当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且 需容量 > 460GB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ThroughputPerformance?: number
 }
 
 /**
@@ -2569,7 +2596,7 @@ export interface CreateScheduledActionResponse {
   /**
    * 定时任务ID
    */
-  ScheduledActionId?: string
+  ScheduledActionId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2680,6 +2707,55 @@ export interface ScheduledAction {
    * 定时任务的执行类型。取值范围：<br><li>CRONTAB：代表定时任务为重复执行。<br><li>ONCE：代表定时任务为单次执行。
    */
   ScheduledType: string
+}
+
+/**
+ * ModifyLifecycleHook请求参数结构体
+ */
+export interface ModifyLifecycleHookRequest {
+  /**
+   * 生命周期挂钩ID。
+   */
+  LifecycleHookId: string
+
+  /**
+   * 生命周期挂钩名称。
+   */
+  LifecycleHookName?: string
+
+  /**
+      * 进入生命周期挂钩场景，取值包括：
+<li> INSTANCE_LAUNCHING：实例启动后
+<li> INSTANCE_TERMINATING：实例销毁前
+      */
+  LifecycleTransition?: string
+
+  /**
+      * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值包括：
+<li> CONTINUE： 超时后继续伸缩活动
+<li> ABANDON：超时后终止伸缩活动
+      */
+  DefaultResult?: string
+
+  /**
+   * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从 30 到 7200 秒。
+   */
+  HeartbeatTimeout?: number
+
+  /**
+   * 弹性伸缩向通知目标发送的附加信息。
+   */
+  NotificationMetadata?: string
+
+  /**
+   * 进行生命周期挂钩的场景类型，取值范围包括`NORMAL`和 `EXTENSION`。说明：设置为`EXTENSION`值，在AttachInstances、DetachInstances、RemoveInstances 接口时会触发生命周期挂钩操作，值为`NORMAL`则不会在这些接口中触发生命周期挂钩。
+   */
+  LifecycleTransitionType?: string
+
+  /**
+   * 通知目标信息。
+   */
+  NotificationTarget?: NotificationTarget
 }
 
 /**
@@ -3284,6 +3360,14 @@ export interface AutoScalingAdvice {
   AutoScalingGroupId: string
 
   /**
+      * 伸缩组警告级别。取值范围：<br>
+<li>NORMAL：正常<br>
+<li>WARNING：警告级别<br>
+<li>CRITICAL：严重级别<br>
+      */
+  Level: string
+
+  /**
    * 伸缩组配置建议集合。
    */
   Advices: Array<Advice>
@@ -3382,12 +3466,12 @@ export interface DescribeScalingPoliciesResponse {
   /**
    * 弹性伸缩告警触发策略详细信息列表。
    */
-  ScalingPolicySet?: Array<ScalingPolicy>
+  ScalingPolicySet: Array<ScalingPolicy>
 
   /**
    * 符合条件的通知数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

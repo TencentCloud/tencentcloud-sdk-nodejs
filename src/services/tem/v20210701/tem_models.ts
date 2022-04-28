@@ -1049,6 +1049,11 @@ export interface CreateApplicationRequest {
    * 是否开启 Java 应用的 APM 自动上报功能，1 表示启用；0 表示关闭
    */
   EnableTracing?: number
+
+  /**
+   * 使用默认镜像服务额外参数
+   */
+  UseDefaultImageServiceParameters?: UseDefaultRepoParameters
 }
 
 /**
@@ -1929,6 +1934,29 @@ export interface PortMapping {
    * 协议栈 TCP/UDP
    */
   Protocol: string
+}
+
+/**
+ * 创建应用，创建仓库参数
+ */
+export interface UseDefaultRepoParameters {
+  /**
+      * 企业版实例名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnterpriseInstanceName: string
+
+  /**
+      * 企业版收费类型  0 按量收费   1 包年包月
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnterpriseInstanceChargeType: number
+
+  /**
+      * 企业版规格：basic-基础班 ，standard-标准版，premium-高级版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnterpriseInstanceType: string
 }
 
 /**

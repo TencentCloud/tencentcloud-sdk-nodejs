@@ -2082,7 +2082,7 @@ export interface DescribeNoPrimaryKeyTablesRequest {
   InstanceId: string
 
   /**
-   * 查询日期，最早为30天前的日期。
+   * 查询日期，如2021-05-27，最早为30天前的日期。
    */
   Date: string
 
@@ -2484,7 +2484,7 @@ export interface DescribeRedisTopBigKeysRequest {
   InstanceId: string
 
   /**
-   * 查询日期，最早可为前30天的日期。
+   * 查询日期，如2021-05-27，最早可为前30天的日期。
    */
   Date: string
 
@@ -2494,7 +2494,7 @@ export interface DescribeRedisTopBigKeysRequest {
   Product: string
 
   /**
-   * 排序字段，取值包括Capacity - 内存，ItemCount - 元素数量。
+   * 排序字段，取值包括Capacity - 内存，ItemCount - 元素数量，默认为Capacity。
    */
   SortBy?: string
 

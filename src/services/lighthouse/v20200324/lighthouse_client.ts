@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeInstancesTrafficPackagesRequest,
   AssociateInstancesKeyPairsResponse,
+  RenewInstancesRequest,
   DescribeDisksDeniedActionsRequest,
   DescribeInstancesTrafficPackagesResponse,
   DescribeInstancesDeniedActionsRequest,
@@ -183,6 +184,7 @@ import {
   ModifyInstancesRenewFlagRequest,
   StopInstancesRequest,
   DescribeModifyInstanceBundlesRequest,
+  RenewInstancesResponse,
   ResetInstanceResponse,
   DescribeFirewallRulesRequest,
   DiskDeniedActions,
@@ -804,6 +806,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateInstancesResponse) => void
   ): Promise<TerminateInstancesResponse> {
     return this.request("TerminateInstances", req, cb)
+  }
+
+  /**
+   * 本接口(RenewInstances)用于续费一个或多个轻量应用服务器实例。
+   */
+  async RenewInstances(
+    req: RenewInstancesRequest,
+    cb?: (error: string, rep: RenewInstancesResponse) => void
+  ): Promise<RenewInstancesResponse> {
+    return this.request("RenewInstances", req, cb)
   }
 
   /**

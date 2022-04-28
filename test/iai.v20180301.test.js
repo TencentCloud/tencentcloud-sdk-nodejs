@@ -48,16 +48,6 @@ it("iai.v20180301.CreateGroup", async function () {
     }
 })
 
-it("iai.v20180301.GetCheckSimilarPersonJobIdList", async function () {
-    try {
-       const data = await client.GetCheckSimilarPersonJobIdList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iai.v20180301.GetPersonBaseInfo", async function () {
     try {
        const data = await client.GetPersonBaseInfo({})
@@ -158,9 +148,9 @@ it("iai.v20180301.CopyPerson", async function () {
     }
 })
 
-it("iai.v20180301.CheckSimilarPerson", async function () {
+it("iai.v20180301.VerifyFace", async function () {
     try {
-       const data = await client.CheckSimilarPerson({})
+       const data = await client.VerifyFace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,16 +191,6 @@ it("iai.v20180301.ModifyGroup", async function () {
 it("iai.v20180301.UpgradeGroupFaceModelVersion", async function () {
     try {
        const data = await client.UpgradeGroupFaceModelVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iai.v20180301.GetSimilarPersonResult", async function () {
-    try {
-       const data = await client.GetSimilarPersonResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,16 +298,6 @@ it("iai.v20180301.ModifyPersonGroupInfo", async function () {
     }
 })
 
-it("iai.v20180301.VerifyFace", async function () {
-    try {
-       const data = await client.VerifyFace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iai.v20180301.SearchPersons", async function () {
     try {
        const data = await client.SearchPersons({})
@@ -361,16 +331,6 @@ it("iai.v20180301.SearchPersonsReturnsByGroup", async function () {
 it("iai.v20180301.GetGroupList", async function () {
     try {
        const data = await client.GetGroupList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iai.v20180301.EstimateCheckSimilarPersonCostTime", async function () {
-    try {
-       const data = await client.EstimateCheckSimilarPersonCostTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

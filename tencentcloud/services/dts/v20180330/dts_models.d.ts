@@ -114,7 +114,7 @@ export interface ModifySubscribeObjectsResponse {
     /**
       * 异步任务的ID
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -168,6 +168,14 @@ export interface CreateMigrateJobRequest {
       * 迁移实例的tag
       */
     Tags?: Array<TagItem>;
+    /**
+      * 源实例类型: ""或者"simple":主从节点，"cluster": 集群节点
+      */
+    SrcNodeType?: string;
+    /**
+      * 源实例信息，具体内容跟迁移任务类型相关
+      */
+    SrcInfoMulti?: Array<SrcInfo>;
 }
 /**
  * 数据订阅地域售卖信息
@@ -261,109 +269,118 @@ export interface DescribeSubscribeConfResponse {
     /**
       * 订阅实例ID
       */
-    SubscribeId?: string;
+    SubscribeId: string;
     /**
       * 订阅实例名称
       */
-    SubscribeName?: string;
+    SubscribeName: string;
     /**
       * 订阅通道
       */
-    ChannelId?: string;
+    ChannelId: string;
     /**
       * 订阅数据库类型
       */
-    Product?: string;
+    Product: string;
     /**
       * 被订阅的实例
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 被订阅的实例的状态，可能的值有running,offline,isolate
       */
-    InstanceStatus?: string;
+    InstanceStatus: string;
     /**
       * 订阅实例状态，可能的值有unconfigure-未配置，configuring-配置中，configured-已配置
       */
-    SubsStatus?: string;
+    SubsStatus: string;
     /**
       * 订阅实例生命周期状态，可能的值有：normal-正常，isolating-隔离中，isolated-已隔离，offlining-下线中
       */
-    Status?: string;
+    Status: string;
     /**
       * 订阅实例创建时间
       */
-    CreateTime?: string;
+    CreateTime: string;
     /**
       * 订阅实例被隔离时间
       */
-    IsolateTime?: string;
+    IsolateTime: string;
     /**
       * 订阅实例到期时间
       */
-    ExpireTime?: string;
+    ExpireTime: string;
     /**
       * 订阅实例下线时间
       */
-    OfflineTime?: string;
+    OfflineTime: string;
     /**
       * 订阅实例消费时间起点。
       */
-    ConsumeStartTime?: string;
+    ConsumeStartTime: string;
     /**
       * 订阅实例计费类型，1-小时计费，0-包年包月
       */
-    PayType?: number;
+    PayType: number;
     /**
       * 订阅通道Vip
       */
-    Vip?: string;
+    Vip: string;
     /**
       * 订阅通道Port
       */
-    Vport?: number;
+    Vport: number;
     /**
       * 订阅通道所在VpcId
       */
-    UniqVpcId?: string;
+    UniqVpcId: string;
     /**
       * 订阅通道所在SubnetId
       */
-    UniqSubnetId?: string;
+    UniqSubnetId: string;
     /**
       * 当前SDK消费时间位点
       */
-    SdkConsumedTime?: string;
+    SdkConsumedTime: string;
     /**
       * 订阅SDK IP地址
       */
-    SdkHost?: string;
+    SdkHost: string;
     /**
       * 订阅对象类型0-全实例订阅，1-DDL数据订阅，2-DML结构订阅，3-DDL数据订阅+DML结构订阅
       */
-    SubscribeObjectType?: number;
+    SubscribeObjectType: number;
     /**
       * 订阅对象，当SubscribeObjectType 为0时，此字段为空数组
       */
-    SubscribeObjects?: Array<SubscribeObject>;
+    SubscribeObjects: Array<SubscribeObject>;
     /**
       * 修改时间
       */
-    ModifyTime?: string;
+    ModifyTime: string;
     /**
       * 地域
       */
-    Region?: string;
+    Region: string;
     /**
       * 订阅实例的标签
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<TagItem>;
+    Tags: Array<TagItem>;
     /**
       * 自动续费标识,0-不自动续费，1-自动续费
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AutoRenewFlag?: number;
+    AutoRenewFlag: number;
+    /**
+      * 数据订阅版本。老版订阅填txdts，kafka版填kafka
+      */
+    SubscribeVersion: string;
+    /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Errors: Array<SubsErr>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -508,6 +525,14 @@ export interface ModifyMigrateJobRequest {
 如果是'整个实例'的迁移模式,不需设置该字段
       */
     DatabaseInfo?: string;
+    /**
+      * 源实例类型: ""或者"simple":主从节点，"cluster": 集群节点
+      */
+    SrcNodeType?: string;
+    /**
+      * 源实例信息，具体内容跟迁移任务类型相关
+      */
+    SrcInfoMulti?: Array<SrcInfo>;
 }
 /**
  * CreateSubscribe请求参数结构体
@@ -537,6 +562,10 @@ export interface CreateSubscribeRequest {
       * 实例资源标签
       */
     Tags?: Array<TagItem>;
+    /**
+      * 用户自定义实例名
+      */
+    Name?: string;
 }
 /**
  * CreateMigrateCheckJob返回参数结构体
@@ -571,23 +600,23 @@ export interface DescribeMigrateCheckJobResponse {
     /**
       * 校验任务状态：unavailable(当前不可用), starting(开始中)，running(校验中)，finished(校验完成)
       */
-    Status?: string;
+    Status: string;
     /**
       * 任务的错误码
       */
-    ErrorCode?: number;
+    ErrorCode: number;
     /**
       * 任务的错误信息
       */
-    ErrorMessage?: string;
+    ErrorMessage: string;
     /**
       * Check任务总进度,如："30"表示30%
       */
-    Progress?: string;
+    Progress: string;
     /**
       * 校验是否通过,0-未通过，1-校验通过, 3-未校验
       */
-    CheckFlag?: number;
+    CheckFlag: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -704,11 +733,11 @@ export interface DescribeSubscribesResponse {
     /**
       * 符合查询条件的实例总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 数据订阅实例的信息列表
       */
-    Items?: Array<SubscribeInfo>;
+    Items: Array<SubscribeInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1120,6 +1149,11 @@ export interface MigrateJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<TagItem>;
+    /**
+      * 源实例为集群时且接入为非cdb时源实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SrcInfoMulti: Array<SrcInfo>;
 }
 /**
  * DescribeRegionConf请求参数结构体
@@ -1201,7 +1235,7 @@ export interface ActivateSubscribeResponse {
     /**
       * 配置数据订阅任务ID。
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1215,7 +1249,7 @@ export interface CreateSubscribeResponse {
       * 数据订阅实例的ID数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubscribeIds?: Array<string>;
+    SubscribeIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1272,6 +1306,16 @@ MySQL暂不支持额外参数设置。
       * 仅用于“抽样数据一致性检测”，ConsistencyType配置为抽样检测时，必选
       */
     ConsistencyParams?: ConsistencyParams;
+}
+/**
+ * 查询订阅配置的错误信息
+ */
+export interface SubsErr {
+    /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
 }
 /**
  * 迁移任务错误信息及提示

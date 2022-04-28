@@ -103,6 +103,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeLaunchConfiguration", req, cb);
     }
     /**
+     * 此接口用于修改生命周期挂钩。
+     */
+    async ModifyLifecycleHook(req, cb) {
+        return this.request("ModifyLifecycleHook", req, cb);
+    }
+    /**
      * 本接口（DetachLoadBalancers）用于从伸缩组移出负载均衡器，本接口不会销毁负载均衡器。
      */
     async DetachLoadBalancers(req, cb) {

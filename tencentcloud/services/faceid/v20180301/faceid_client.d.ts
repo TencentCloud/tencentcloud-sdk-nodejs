@@ -20,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     GetWeChatBillDetails(req: GetWeChatBillDetailsRequest, cb?: (error: string, rep: GetWeChatBillDetailsResponse) => void): Promise<GetWeChatBillDetailsResponse>;
     /**
-     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
+     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
      */
     CheckIdCardInformation(req: CheckIdCardInformationRequest, cb?: (error: string, rep: CheckIdCardInformationResponse) => void): Promise<CheckIdCardInformationResponse>;
     /**
@@ -70,7 +70,7 @@ export declare class Client extends AbstractClient {
      */
     GetFaceIdResult(req: GetFaceIdResultRequest, cb?: (error: string, rep: GetFaceIdResultResponse) => void): Promise<GetFaceIdResultResponse>;
     /**
-     * 传入照片和身份信息，判断该照片与公安权威库的证件照是否属于同一个人。
+     * 传入照片和身份信息，判断该照片与权威库的证件照是否属于同一个人。
      */
     ImageRecognition(req: ImageRecognitionRequest, cb?: (error: string, rep: ImageRecognitionResponse) => void): Promise<ImageRecognitionResponse>;
     /**
@@ -111,7 +111,7 @@ export declare class Client extends AbstractClient {
      */
     PhoneVerificationCUCC(req: PhoneVerificationCUCCRequest, cb?: (error: string, rep: PhoneVerificationCUCCResponse) => void): Promise<PhoneVerificationCUCCResponse>;
     /**
-     * 传入视频和身份信息，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与公安权威库的证件照是否属于同一个人。
+     * 传入视频和身份信息，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与权威库的证件照是否属于同一个人。
      */
     LivenessRecognition(req: LivenessRecognitionRequest, cb?: (error: string, rep: LivenessRecognitionResponse) => void): Promise<LivenessRecognitionResponse>;
     /**

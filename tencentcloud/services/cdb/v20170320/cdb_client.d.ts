@@ -445,7 +445,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeUploadedFiles(req: DescribeUploadedFilesRequest, cb?: (error: string, rep: DescribeUploadedFilesResponse) => void): Promise<DescribeUploadedFilesResponse>;
     /**
-     * 查询数据库代理
+     * 查询数据库代理（待下线，替换接口QueryCDBProxy）
      */
     DescribeCDBProxy(req: DescribeCDBProxyRequest, cb?: (error: string, rep: DescribeCDBProxyResponse) => void): Promise<DescribeCDBProxyResponse>;
     /**

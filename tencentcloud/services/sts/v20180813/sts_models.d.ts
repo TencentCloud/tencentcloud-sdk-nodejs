@@ -37,17 +37,17 @@ export interface ApiKey {
     Status: number;
 }
 /**
- * AssumeRoleWithSAML请求参数结构体
+ * AssumeRoleWithWebIdentity请求参数结构体
  */
-export interface AssumeRoleWithSAMLRequest {
+export interface AssumeRoleWithWebIdentityRequest {
     /**
-      * base64 编码的 SAML 断言信息
+      * 身份提供商名称
       */
-    SAMLAssertion: string;
+    ProviderId: string;
     /**
-      * 扮演者访问描述名
+      * IdP签发的OIDC令牌
       */
-    PrincipalArn: string;
+    WebIdentityToken: string;
     /**
       * 角色访问描述名
       */
@@ -60,6 +60,27 @@ export interface AssumeRoleWithSAMLRequest {
       * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
       */
     DurationSeconds?: number;
+}
+/**
+ * AssumeRoleWithWebIdentity返回参数结构体
+ */
+export interface AssumeRoleWithWebIdentityResponse {
+    /**
+      * 临时秘钥过期时间(时间戳)
+      */
+    ExpiredTime: number;
+    /**
+      * 临时秘钥过期时间
+      */
+    Expiration: string;
+    /**
+      * 临时秘钥
+      */
+    Credentials: Credentials;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetFederationToken返回参数结构体
@@ -237,3 +258,28 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
  * GetCallerIdentity请求参数结构体
  */
 export declare type GetCallerIdentityRequest = null;
+/**
+ * AssumeRoleWithSAML请求参数结构体
+ */
+export interface AssumeRoleWithSAMLRequest {
+    /**
+      * base64 编码的 SAML 断言信息
+      */
+    SAMLAssertion: string;
+    /**
+      * 扮演者访问描述名
+      */
+    PrincipalArn: string;
+    /**
+      * 角色访问描述名
+      */
+    RoleArn: string;
+    /**
+      * 会话名称
+      */
+    RoleSessionName: string;
+    /**
+      * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
+      */
+    DurationSeconds?: number;
+}

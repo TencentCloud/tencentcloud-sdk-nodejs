@@ -166,12 +166,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivilegeEvents", req, cb);
     }
     /**
-     * 本接口 (RenewProVersion) 用于续费专业版(包年包月)。
-     */
-    async RenewProVersion(req, cb) {
-        return this.request("RenewProVersion", req, cb);
-    }
-    /**
      * 导出网络攻击日志
      */
     async ExportAttackLogs(req, cb) {
@@ -592,12 +586,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateBaselineStrategy", req, cb);
     }
     /**
-     * 本接口 (CloseProVersion) 用于关闭专业版。
-     */
-    async CloseProVersion(req, cb) {
-        return this.request("CloseProVersion", req, cb);
-    }
-    /**
      * 定期扫描漏洞设置
      */
     async ScanVulSetting(req, cb) {
@@ -740,12 +728,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeScanTaskStatus(req, cb) {
         return this.request("DescribeScanTaskStatus", req, cb);
-    }
-    /**
-     * 本接口 (OpenProVersionPrepaid) 用于开通专业版(包年包月)。
-     */
-    async OpenProVersionPrepaid(req, cb) {
-        return this.request("OpenProVersionPrepaid", req, cb);
     }
     /**
      * 获取快速检索列表
@@ -1042,12 +1024,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UntrustMalwares", req, cb);
     }
     /**
-     * 本接口 (OpenProVersion) 用于开通专业版。
-     */
-    async OpenProVersion(req, cb) {
-        return this.request("OpenProVersion", req, cb);
-    }
-    /**
      * 获取资产管理Web框架列表
      */
     async DescribeAssetWebFrameList(req, cb) {
@@ -1094,12 +1070,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVulList(req, cb) {
         return this.request("DescribeVulList", req, cb);
-    }
-    /**
-     * 本接口 (ModifyProVersionRenewFlag) 用于修改专业版包年包月续费标识。
-     */
-    async ModifyProVersionRenewFlag(req, cb) {
-        return this.request("ModifyProVersionRenewFlag", req, cb);
     }
     /**
      * 获取内核模块详情
@@ -1292,12 +1262,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeWebPageEventList(req, cb) {
         return this.request("DescribeWebPageEventList", req, cb);
-    }
-    /**
-     * 本接口 (InquiryPriceOpenProVersionPrepaid) 用于开通专业版询价(预付费)。
-     */
-    async InquiryPriceOpenProVersionPrepaid(req, cb) {
-        return this.request("InquiryPriceOpenProVersionPrepaid", req, cb);
     }
     /**
      * 获取木马文件下载地址

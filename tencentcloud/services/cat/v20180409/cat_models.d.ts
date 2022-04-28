@@ -1767,6 +1767,14 @@ export interface CreateProbeTasksRequest {
       * 资源标签值
       */
     Tag?: Array<Tag>;
+    /**
+      * 测试类型，包含定时测试与即时测试
+      */
+    ProbeType?: number;
+    /**
+      * 插件类型
+      */
+    PluginSource?: string;
 }
 /**
  * 拨测记录

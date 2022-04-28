@@ -81,6 +81,7 @@ import {
   StorageMountConf,
   ModifyEnvironmentRequest,
   PortMapping,
+  UseDefaultRepoParameters,
   RevertDeployApplicationResponse,
   DeployStrategyConf,
   DescribeIngressRequest,

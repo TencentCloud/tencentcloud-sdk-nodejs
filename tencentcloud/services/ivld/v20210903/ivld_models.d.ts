@@ -278,7 +278,8 @@ export interface ImportMediaRequest {
       */
     Name?: string;
     /**
-      * 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/  (注意，cos路径需要以/分隔符结尾)
+      * 当非本人外部视频地址导入时，该字段为转存的cos桶地址且不可为空; 示例：https://${Bucket}-${AppId}.cos.${Region}.myqcloud.com/${PathPrefix}/  (注意，cos路径需要以/分隔符结尾)。
+推荐采用本主帐号COS桶，如果使用其他帐号COS桶，请确保COS桶可写，否则可导致分析失败
       */
     WriteBackCosPath?: string;
     /**
@@ -447,6 +448,7 @@ export interface DescribeTasksRequest {
 export interface DescribeTaskDetailResponse {
     /**
       * 任务信息，不包含任务结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
     TaskInfo: TaskInfo;
     /**
@@ -1240,6 +1242,11 @@ export interface MediaInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
+    /**
+      * 媒资导入完成后的回调地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CallbackURL: string;
 }
 /**
  * QueryCallback请求参数结构体
@@ -1435,4 +1442,9 @@ export interface TaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
+    /**
+      * 任务分析完成后的后调地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CallbackURL: string;
 }

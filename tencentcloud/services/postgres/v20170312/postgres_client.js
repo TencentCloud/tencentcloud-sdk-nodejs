@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateReadOnlyGroupNetworkAccess", req, cb);
     }
     /**
+     * 获取实例的密钥信息列表。
+     */
+    async DescribeEncryptionKeys(req, cb) {
+        return this.request("DescribeEncryptionKeys", req, cb);
+    }
+    /**
      * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
      */
     async ModifyDBInstancesProject(req, cb) {

@@ -27,7 +27,6 @@ import {
   ScanVulAgainRequest,
   DeleteBaselineStrategyResponse,
   ExportWebPageEventListResponse,
-  InquiryPriceOpenProVersionPrepaidRequest,
   DescribeUndoVulCountsResponse,
   DescribeBaselineScanScheduleResponse,
   MaliciousRequestWhiteListInfo,
@@ -76,7 +75,6 @@ import {
   BruteAttackRule,
   DescribeAvailableExpertServiceDetailRequest,
   DescribeServerRelatedDirInfoResponse,
-  CloseProVersionRequest,
   DescribeUsualLoginPlacesResponse,
   IgnoreBaselineRule,
   DescribeBaselineBasicInfoResponse,
@@ -161,7 +159,7 @@ import {
   DescribeAssetSystemPackageListResponse,
   DescribeAssetMachineListResponse,
   DescribeWebPageGeneralizeRequest,
-  DescribeBaselineDetailRequest,
+  AssetDiskPartitionInfo,
   ModifyWarningSettingRequest,
   DescribeMalwareRiskWarningRequest,
   DescribeAssetInfoRequest,
@@ -192,7 +190,6 @@ import {
   DescribeBashEventsRequest,
   DeleteMachineRequest,
   DescribeAssetWebLocationListResponse,
-  WarningObject,
   DescribeAssetJarListRequest,
   PrivilegeEscalationProcess,
   DescribeProtectNetListResponse,
@@ -214,7 +211,6 @@ import {
   DescribeOpenPortStatisticsResponse,
   DeleteAttackLogsResponse,
   SecurityDynamic,
-  OpenProVersionPrepaidRequest,
   DescribeMalWareListRequest,
   DescribeProVersionInfoResponse,
   DeleteTagsResponse,
@@ -229,7 +225,6 @@ import {
   ProtectDirInfo,
   DeleteBashRulesRequest,
   CreateProtectServerResponse,
-  OpenProVersionResponse,
   DescribeExpertServiceListRequest,
   DescribeBaselineHostTopRequest,
   ExportBaselineEffectHostListResponse,
@@ -237,7 +232,7 @@ import {
   TrustMalwaresResponse,
   DescribeHistoryServiceRequest,
   DescribeWarningListRequest,
-  ModifyProVersionRenewFlagRequest,
+  SyncAssetScanRequest,
   VulEffectHostList,
   DescribeServerRelatedDirInfoRequest,
   DescribeESAggregationsRequest,
@@ -247,7 +242,6 @@ import {
   DescribeVulListResponse,
   DescribeUndoVulCountsRequest,
   ScanAssetResponse,
-  ModifyProVersionRenewFlagResponse,
   Machine,
   ProtectMachineInfo,
   DescribeMalwareFileRequest,
@@ -299,7 +293,7 @@ import {
   DescribeScanTaskStatusRequest,
   ExportIgnoreBaselineRuleRequest,
   DeleteMachineTagRequest,
-  AssetDiskPartitionInfo,
+  DescribeBaselineDetailRequest,
   ZoneInfo,
   BaselineRuleInfo,
   DescribeExportMachinesResponse,
@@ -309,7 +303,6 @@ import {
   DeleteProtectDirResponse,
   ModifyBanStatusRequest,
   DescribeWebPageServiceInfoRequest,
-  SyncAssetScanRequest,
   DescribeLogStorageStatisticResponse,
   DescribeEmergencyResponseListRequest,
   DescribeScanStateResponse,
@@ -350,7 +343,6 @@ import {
   AssetWebLocationBaseInfo,
   DescribeMalwareTimingScanSettingRequest,
   BashRule,
-  RenewProVersionResponse,
   CreateSearchLogResponse,
   DescribeSecurityTrendsResponse,
   AssetSystemPackageInfo,
@@ -367,7 +359,6 @@ import {
   DescribeIgnoreRuleEffectHostListRequest,
   ModifyWarningSettingResponse,
   LoginWhiteCombinedInfo,
-  OpenProVersionPrepaidResponse,
   DescribeMalwareInfoResponse,
   DescribeAssetJarInfoRequest,
   DescribePrivilegeEventsRequest,
@@ -445,7 +436,7 @@ import {
   VulLevelCountInfo,
   DescribeExportMachinesRequest,
   CreateScanMalwareSettingResponse,
-  RenewProVersionRequest,
+  WarningObject,
   RiskDnsList,
   DeleteMalwareScanTaskRequest,
   DescribeIgnoreRuleEffectHostListResponse,
@@ -484,7 +475,6 @@ import {
   DescribeAssetPlanTaskListRequest,
   DescribeScanTaskDetailsRequest,
   DescribeProtectDirRelatedServerRequest,
-  InquiryPriceOpenProVersionPrepaidResponse,
   DescribeSearchLogsResponse,
   SecurityEventInfo,
   DescribeBaselineAnalysisDataResponse,
@@ -498,10 +488,8 @@ import {
   SeparateMalwaresRequest,
   VulInfoList,
   ExportIgnoreRuleEffectHostListRequest,
-  ProVersionMachine,
   DescribeVulHostCountScanTimeResponse,
   DescribeAssetCoreModuleListRequest,
-  CloseProVersionResponse,
   DeleteAttackLogsRequest,
   DescribeBaselineStrategyDetailResponse,
   DescribeBaselineListRequest,
@@ -512,7 +500,6 @@ import {
   ExportBruteAttacksResponse,
   SecurityButlerInfo,
   DescribeSaveOrUpdateWarningsRequest,
-  ChargePrepaid,
   DescribeAssetProcessInfoListResponse,
   ProcessStatistics,
   DescribeScanScheduleResponse,
@@ -538,7 +525,6 @@ import {
   DeleteMachineTagResponse,
   DescribeSecurityEventsCntResponse,
   WarningInfoObj,
-  OpenProVersionRequest,
   UpdateMachineTagsRequest,
   UpdateBaselineStrategyRequest,
   DescribeHostLoginListResponse,
@@ -795,16 +781,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrivilegeEventsResponse) => void
   ): Promise<DeletePrivilegeEventsResponse> {
     return this.request("DeletePrivilegeEvents", req, cb)
-  }
-
-  /**
-   * 本接口 (RenewProVersion) 用于续费专业版(包年包月)。
-   */
-  async RenewProVersion(
-    req: RenewProVersionRequest,
-    cb?: (error: string, rep: RenewProVersionResponse) => void
-  ): Promise<RenewProVersionResponse> {
-    return this.request("RenewProVersion", req, cb)
   }
 
   /**
@@ -1508,16 +1484,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (CloseProVersion) 用于关闭专业版。
-   */
-  async CloseProVersion(
-    req: CloseProVersionRequest,
-    cb?: (error: string, rep: CloseProVersionResponse) => void
-  ): Promise<CloseProVersionResponse> {
-    return this.request("CloseProVersion", req, cb)
-  }
-
-  /**
    * 定期扫描漏洞设置
    */
   async ScanVulSetting(
@@ -1755,16 +1721,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanTaskStatusResponse) => void
   ): Promise<DescribeScanTaskStatusResponse> {
     return this.request("DescribeScanTaskStatus", req, cb)
-  }
-
-  /**
-   * 本接口 (OpenProVersionPrepaid) 用于开通专业版(包年包月)。
-   */
-  async OpenProVersionPrepaid(
-    req: OpenProVersionPrepaidRequest,
-    cb?: (error: string, rep: OpenProVersionPrepaidResponse) => void
-  ): Promise<OpenProVersionPrepaidResponse> {
-    return this.request("OpenProVersionPrepaid", req, cb)
   }
 
   /**
@@ -2258,16 +2214,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (OpenProVersion) 用于开通专业版。
-   */
-  async OpenProVersion(
-    req: OpenProVersionRequest,
-    cb?: (error: string, rep: OpenProVersionResponse) => void
-  ): Promise<OpenProVersionResponse> {
-    return this.request("OpenProVersion", req, cb)
-  }
-
-  /**
    * 获取资产管理Web框架列表
    */
   async DescribeAssetWebFrameList(
@@ -2345,16 +2291,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulListResponse) => void
   ): Promise<DescribeVulListResponse> {
     return this.request("DescribeVulList", req, cb)
-  }
-
-  /**
-   * 本接口 (ModifyProVersionRenewFlag) 用于修改专业版包年包月续费标识。
-   */
-  async ModifyProVersionRenewFlag(
-    req: ModifyProVersionRenewFlagRequest,
-    cb?: (error: string, rep: ModifyProVersionRenewFlagResponse) => void
-  ): Promise<ModifyProVersionRenewFlagResponse> {
-    return this.request("ModifyProVersionRenewFlag", req, cb)
   }
 
   /**
@@ -2675,16 +2611,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWebPageEventListResponse) => void
   ): Promise<DescribeWebPageEventListResponse> {
     return this.request("DescribeWebPageEventList", req, cb)
-  }
-
-  /**
-   * 本接口 (InquiryPriceOpenProVersionPrepaid) 用于开通专业版询价(预付费)。
-   */
-  async InquiryPriceOpenProVersionPrepaid(
-    req: InquiryPriceOpenProVersionPrepaidRequest,
-    cb?: (error: string, rep: InquiryPriceOpenProVersionPrepaidResponse) => void
-  ): Promise<InquiryPriceOpenProVersionPrepaidResponse> {
-    return this.request("InquiryPriceOpenProVersionPrepaid", req, cb)
   }
 
   /**

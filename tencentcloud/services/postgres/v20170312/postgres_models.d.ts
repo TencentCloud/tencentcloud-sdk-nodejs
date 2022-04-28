@@ -1047,6 +1047,15 @@ export interface DescribeOrdersResponse {
     RequestId?: string;
 }
 /**
+ * OpenServerlessDBExtranetAccess返回参数结构体
+ */
+export interface OpenServerlessDBExtranetAccessResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * InquiryPriceCreateDBInstances返回参数结构体
  */
 export interface InquiryPriceCreateDBInstancesResponse {
@@ -1983,24 +1992,6 @@ export interface CreateReadOnlyGroupNetworkAccessResponse {
     RequestId?: string;
 }
 /**
- * DescribeServerlessDBInstances返回参数结构体
- */
-export interface DescribeServerlessDBInstancesResponse {
-    /**
-      * 查询结果数
-      */
-    TotalCount: number;
-    /**
-      * 查询结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DBInstanceSet: Array<ServerlessDBInstance>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeParamsEvent返回参数结构体
  */
 export interface DescribeParamsEventResponse {
@@ -2232,13 +2223,39 @@ export interface ModifyDBInstanceNameRequest {
     InstanceName: string;
 }
 /**
- * OpenServerlessDBExtranetAccess返回参数结构体
+ * KMS密钥信息
  */
-export interface OpenServerlessDBExtranetAccessResponse {
+export interface EncryptionKey {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * KMS实例加密的KeyId。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    KeyId: string;
+    /**
+      * KMS实例加密Key的别名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyAlias: string;
+    /**
+      * 实例加密密钥DEK的密文。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DEKCipherTextBlob: string;
+    /**
+      * 密钥是否启用，1-启用， 0-未启用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsEnabled: number;
+    /**
+      * KMS密钥所在地域。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    KeyRegion: string;
+    /**
+      * DEK密钥创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
 }
 /**
  * InquiryPriceRenewDBInstance返回参数结构体
@@ -2316,58 +2333,22 @@ export interface ErrLogDetail {
     ErrMsg: string;
 }
 /**
- * 数据库备份信息
+ * DescribeServerlessDBInstances返回参数结构体
  */
-export interface DBBackup {
+export interface DescribeServerlessDBInstancesResponse {
     /**
-      * 备份文件唯一标识
+      * 查询结果数
       */
-    Id: number;
+    TotalCount: number;
     /**
-      * 文件生成的开始时间
-      */
-    StartTime: string;
-    /**
-      * 文件生成的结束时间
-      */
-    EndTime: string;
-    /**
-      * 文件大小(K)
-      */
-    Size: number;
-    /**
-      * 策略（0-实例备份；1-多库备份）
-      */
-    Strategy: number;
-    /**
-      * 类型（0-定时）
-      */
-    Way: number;
-    /**
-      * 备份方式（1-完整）
-      */
-    Type: number;
-    /**
-      * 状态（1-创建中；2-成功；3-失败）
-      */
-    Status: number;
-    /**
-      * DB列表
-      */
-    DbList: Array<string>;
-    /**
-      * 内网下载地址
-      */
-    InternalAddr: string;
-    /**
-      * 外网下载地址
-      */
-    ExternalAddr: string;
-    /**
-      * 备份集ID
+      * 查询结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SetId: string;
+    DBInstanceSet: Array<ServerlessDBInstance>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * IsolateDBInstances请求参数结构体
@@ -2902,6 +2883,23 @@ export interface DescribeOrdersRequest {
     DealNames: Array<string>;
 }
 /**
+ * ModifyAccountRemark请求参数结构体
+ */
+export interface ModifyAccountRemarkRequest {
+    /**
+      * 实例ID，形如postgres-4wdeb0zv
+      */
+    DBInstanceId: string;
+    /**
+      * 实例用户名
+      */
+    UserName: string;
+    /**
+      * 用户UserName对应的新备注
+      */
+    Remark: string;
+}
+/**
  * CloseDBExtranetAccess请求参数结构体
  */
 export interface CloseDBExtranetAccessRequest {
@@ -2913,6 +2911,15 @@ export interface CloseDBExtranetAccessRequest {
       * 是否关闭Ipv6外网，1：是，0：否
       */
     IsIpv6?: number;
+}
+/**
+ * DescribeEncryptionKeys请求参数结构体
+ */
+export interface DescribeEncryptionKeysRequest {
+    /**
+      * 实例ID。
+      */
+    DBInstanceId: string;
 }
 /**
  * ModifyBackupPlan返回参数结构体
@@ -3057,21 +3064,58 @@ export interface AccountInfo {
     UpdateTime: string;
 }
 /**
- * ModifyAccountRemark请求参数结构体
+ * 数据库备份信息
  */
-export interface ModifyAccountRemarkRequest {
+export interface DBBackup {
     /**
-      * 实例ID，形如postgres-4wdeb0zv
+      * 备份文件唯一标识
       */
-    DBInstanceId: string;
+    Id: number;
     /**
-      * 实例用户名
+      * 文件生成的开始时间
       */
-    UserName: string;
+    StartTime: string;
     /**
-      * 用户UserName对应的新备注
+      * 文件生成的结束时间
       */
-    Remark: string;
+    EndTime: string;
+    /**
+      * 文件大小(K)
+      */
+    Size: number;
+    /**
+      * 策略（0-实例备份；1-多库备份）
+      */
+    Strategy: number;
+    /**
+      * 类型（0-定时）
+      */
+    Way: number;
+    /**
+      * 备份方式（1-完整）
+      */
+    Type: number;
+    /**
+      * 状态（1-创建中；2-成功；3-失败）
+      */
+    Status: number;
+    /**
+      * DB列表
+      */
+    DbList: Array<string>;
+    /**
+      * 内网下载地址
+      */
+    InternalAddr: string;
+    /**
+      * 外网下载地址
+      */
+    ExternalAddr: string;
+    /**
+      * 备份集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SetId: string;
 }
 /**
  * DescribeDBErrlogs返回参数结构体
@@ -3526,6 +3570,20 @@ export interface DescribeDBXlogsResponse {
       * Xlog列表
       */
     XlogList?: Array<Xlog>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeEncryptionKeys返回参数结构体
+ */
+export interface DescribeEncryptionKeysResponse {
+    /**
+      * 实例密钥信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EncryptionKeys: Array<EncryptionKey>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

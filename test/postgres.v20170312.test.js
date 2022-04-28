@@ -28,6 +28,16 @@ it("postgres.v20170312.CreateReadOnlyGroupNetworkAccess", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeEncryptionKeys", async function () {
+    try {
+       const data = await client.DescribeEncryptionKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.ModifyDBInstancesProject", async function () {
     try {
        const data = await client.ModifyDBInstancesProject({})

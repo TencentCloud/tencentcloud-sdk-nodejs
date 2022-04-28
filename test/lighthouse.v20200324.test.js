@@ -528,6 +528,16 @@ it("lighthouse.v20200324.TerminateInstances", async function () {
     }
 })
 
+it("lighthouse.v20200324.RenewInstances", async function () {
+    try {
+       const data = await client.RenewInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeInstanceVncUrl", async function () {
     try {
        const data = await client.DescribeInstanceVncUrl({})

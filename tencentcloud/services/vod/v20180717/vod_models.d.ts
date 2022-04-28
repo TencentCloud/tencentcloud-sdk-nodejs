@@ -2027,6 +2027,7 @@ export interface DescribeMediaProcessUsageDataRequest {
 <li> Transcoding: 普通转码</li>
 <li> Transcoding-TESHD: 极速高清转码</li>
 <li> Editing: 视频编辑</li>
+<li> Editing-TESHD: 极速高清视频编辑</li>
 <li> AdaptiveBitrateStreaming: 自适应码流</li>
 <li> ContentAudit: 内容审核</li>
 <li> RemoveWatermark: 去除水印</li>
@@ -3110,6 +3111,7 @@ export interface TaskStatData {
 <li> Transcoding: 普通转码</li>
 <li> Transcoding-TESHD: 极速高清转码</li>
 <li> Editing: 视频编辑</li>
+<li> Editing-TESHD: 极速高清视频编辑</li>
 <li> AdaptiveBitrateStreaming: 自适应码流</li>
 <li> ContentAudit: 智能识别</li>
 <li> RemoveWatermark: 去水印</li>
@@ -3156,6 +3158,16 @@ export interface TaskStatData {
 <li>Edit.H265.FHD: H.265编码方式全高清视频编辑</li>
 <li>Edit.H265.2K: H.265编码方式2K视频编辑</li>
 <li>Edit.H265.4K: H.265编码方式4K视频编辑</li>
+<li>Edit.TESHD-10.H264.SD: H.264编码方式标清极速高清视频编辑</li>
+<li>Edit.TESHD-10.H264.HD: H.264编码方式高清极速高清视频编辑</li>
+<li>Edit.TESHD-10.H264.FHD: H.264编码方式全高清极速高清视频编辑</li>
+<li>Edit.TESHD-10.H264.2K: H.264编码方式2K极速高清视频编辑</li>
+<li>Edit.TESHD-10.H264.4K: H.264编码方式4K极速高清视频编辑</li>
+<li>Edit.TESHD-10.H265.SD: H.265编码方式标清极速高清视频编辑</li>
+<li>Edit.TESHD-10.H265.HD: H.265编码方式高清极速高清视频编辑</li>
+<li>Edit.TESHD-10.H265.FHD: H.265编码方式全高清极速高清视频编辑</li>
+<li>Edit.TESHD-10.H265.2K: H.265编码方式2K极速高清视频编辑</li>
+<li>Edit.TESHD-10.H265.4K: H.265编码方式4K极速高清视频编辑</li>
 去水印规格：
 <li>480P: 分辨率640*480及以下</li>
 <li>720P: 分辨率1280*720及以下</li>
@@ -6384,7 +6396,7 @@ export interface CreateImageProcessingTemplateResponse {
     /**
       * 图片处理模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10532,6 +10544,7 @@ export interface DescribeTaskDetailResponse {
 <li>WechatPublish：微信发布任务；</li>
 <li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
 <li>PullUpload：拉取上传媒体文件任务。</li>
+<li>FastClipMedia：快速剪辑任务。</li>
 
 兼容 2017 版的任务类型：
 <li>Transcode：视频转码任务；</li>
@@ -13408,11 +13421,11 @@ export interface DescribeImageProcessingTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 图片处理模板详情列表。
       */
-    ImageProcessingTemplateSet?: Array<ImageProcessingTemplate>;
+    ImageProcessingTemplateSet: Array<ImageProcessingTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

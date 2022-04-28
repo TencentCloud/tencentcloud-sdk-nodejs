@@ -48,6 +48,16 @@ it("essbasic.v20210526.DescribeTemplates", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreateFlowByFiles", async function () {
+    try {
+       const data = await client.ChannelCreateFlowByFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.PrepareFlows", async function () {
     try {
        const data = await client.PrepareFlows({})
@@ -61,6 +71,16 @@ it("essbasic.v20210526.PrepareFlows", async function () {
 it("essbasic.v20210526.OperateChannelTemplate", async function () {
     try {
        const data = await client.OperateChannelTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateSealByImage", async function () {
+    try {
+       const data = await client.CreateSealByImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

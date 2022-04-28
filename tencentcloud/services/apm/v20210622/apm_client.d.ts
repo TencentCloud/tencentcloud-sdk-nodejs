@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateApmInstanceResponse, CreateApmInstanceRequest, DescribeMetricRecordsResponse, DescribeApmAgentResponse, DescribeApmInstancesResponse, DescribeApmAgentRequest, DescribeApmInstancesRequest, DescribeMetricRecordsRequest } from "./apm_models";
+import { CreateApmInstanceResponse, DescribeServiceOverviewRequest, CreateApmInstanceRequest, DescribeMetricRecordsResponse, DescribeApmAgentResponse, DescribeServiceOverviewResponse, DescribeApmInstancesResponse, DescribeApmAgentRequest, DescribeApmInstancesRequest, DescribeMetricRecordsRequest } from "./apm_models";
 /**
  * apm client
  * @class
@@ -23,4 +23,8 @@ export declare class Client extends AbstractClient {
      * 获取Apm Agent信息
      */
     DescribeApmAgent(req: DescribeApmAgentRequest, cb?: (error: string, rep: DescribeApmAgentResponse) => void): Promise<DescribeApmAgentResponse>;
+    /**
+     * 服务概览数据拉取
+     */
+    DescribeServiceOverview(req: DescribeServiceOverviewRequest, cb?: (error: string, rep: DescribeServiceOverviewResponse) => void): Promise<DescribeServiceOverviewResponse>;
 }

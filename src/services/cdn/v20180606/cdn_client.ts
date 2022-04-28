@@ -247,6 +247,7 @@ import {
   BotStatisticsCount,
   EventLogStatsData,
   SchemeKey,
+  StatisticItem,
   DescribeImageConfigRequest,
   DescribeCdnIpResponse,
   AdvanceCacheRule,

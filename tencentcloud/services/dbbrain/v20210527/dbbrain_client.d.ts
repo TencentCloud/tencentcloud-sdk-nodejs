@@ -20,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     CreateSchedulerMailProfile(req: CreateSchedulerMailProfileRequest, cb?: (error: string, rep: CreateSchedulerMailProfileResponse) => void): Promise<CreateSchedulerMailProfileResponse>;
     /**
-     * 查询SQL模版。
+     * 查询SQL模板。
      */
     DescribeSqlTemplate(req: DescribeSqlTemplateRequest, cb?: (error: string, rep: DescribeSqlTemplateResponse) => void): Promise<DescribeSqlTemplateResponse>;
     /**

@@ -4446,6 +4446,10 @@ export interface CreateVpnGatewaySslServerResponse {
       */
     TaskId: number;
     /**
+      * SSL-VPN server 唯一ID
+      */
+    SslVpnServerId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -5058,6 +5062,10 @@ export interface CreateVpnGatewaySslClientResponse {
       * 异步任务ID。
       */
     TaskId: number;
+    /**
+      * SSL-VPN client 唯一ID
+      */
+    SslVpnClientId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

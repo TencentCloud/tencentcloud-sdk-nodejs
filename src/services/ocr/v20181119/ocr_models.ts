@@ -4493,13 +4493,16 @@ export interface RecognizeHealthCodeOCRRequest {
   ImageUrl?: string
 
   /**
-      * 需要识别的健康码类型列表，为空或不填表示默认为粤康码。
+      * 需要识别的健康码类型列表，为空或不填表示默认为自动识别。
+0:自动识别
 
 1:粤康码
 
 2:随申码
 
 3:健康宝
+
+4.穗康码
       */
   Type?: number
 }
@@ -4692,7 +4695,7 @@ export interface RecognizeHealthCodeOCRResponse {
   IDNumber: string
 
   /**
-   * 健康码更新时间，格式为：XXXX-XX-XX XX:XX:XX
+   * 健康码更新时间
    */
   Time: string
 
@@ -4712,7 +4715,7 @@ export interface RecognizeHealthCodeOCRResponse {
   TestingResult: string
 
   /**
-   * 核酸检测时间，格式为：XXXX-XX-XX XX:XX
+   * 核酸检测时间
    */
   TestingTime: string
 

@@ -38,19 +38,9 @@ it("iai.v20200303.SearchFacesReturnsByGroup", async function () {
     }
 })
 
-it("iai.v20200303.GetPersonGroupInfo", async function () {
+it("iai.v20200303.CreateGroup", async function () {
     try {
-       const data = await client.GetPersonGroupInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iai.v20200303.GetCheckSimilarPersonJobIdList", async function () {
-    try {
-       const data = await client.GetCheckSimilarPersonJobIdList({})
+       const data = await client.CreateGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +98,9 @@ it("iai.v20200303.GetPersonListNum", async function () {
     }
 })
 
-it("iai.v20200303.CreateGroup", async function () {
+it("iai.v20200303.GetPersonGroupInfo", async function () {
     try {
-       const data = await client.CreateGroup({})
+       const data = await client.GetPersonGroupInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +148,9 @@ it("iai.v20200303.CopyPerson", async function () {
     }
 })
 
-it("iai.v20200303.CheckSimilarPerson", async function () {
+it("iai.v20200303.VerifyFace", async function () {
     try {
-       const data = await client.CheckSimilarPerson({})
+       const data = await client.VerifyFace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,16 +191,6 @@ it("iai.v20200303.ModifyGroup", async function () {
 it("iai.v20200303.UpgradeGroupFaceModelVersion", async function () {
     try {
        const data = await client.UpgradeGroupFaceModelVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iai.v20200303.GetSimilarPersonResult", async function () {
-    try {
-       const data = await client.GetSimilarPersonResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,16 +318,6 @@ it("iai.v20200303.ModifyPersonGroupInfo", async function () {
     }
 })
 
-it("iai.v20200303.VerifyFace", async function () {
-    try {
-       const data = await client.VerifyFace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iai.v20200303.SearchPersons", async function () {
     try {
        const data = await client.SearchPersons({})
@@ -381,16 +351,6 @@ it("iai.v20200303.SearchPersonsReturnsByGroup", async function () {
 it("iai.v20200303.GetGroupList", async function () {
     try {
        const data = await client.GetGroupList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iai.v20200303.EstimateCheckSimilarPersonCostTime", async function () {
-    try {
-       const data = await client.EstimateCheckSimilarPersonCostTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

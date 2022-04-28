@@ -423,6 +423,19 @@ export interface IsolateHourDCDBInstanceRequest {
     InstanceIds: Array<string>;
 }
 /**
+ * ModifyDBInstanceName返回参数结构体
+ */
+export interface ModifyDBInstanceNameResponse {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeFlow返回参数结构体
  */
 export interface DescribeFlowResponse {
@@ -1753,6 +1766,19 @@ export interface DescribeDatabaseObjectsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyDBInstanceName请求参数结构体
+ */
+export interface ModifyDBInstanceNameRequest {
+    /**
+      * 实例ID，形如tdsql-hdaprz0v
+      */
+    InstanceId: string;
+    /**
+      * 实例名称
+      */
+    InstanceName: string;
 }
 /**
  * DescribeDcnDetail返回参数结构体

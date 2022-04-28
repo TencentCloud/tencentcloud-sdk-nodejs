@@ -20,11 +20,13 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ApmMetricRecord,
   CreateApmInstanceResponse,
+  DescribeServiceOverviewRequest,
   ApmInstanceDetail,
   CreateApmInstanceRequest,
   DescribeMetricRecordsResponse,
   DescribeApmAgentResponse,
   ApmTag,
+  DescribeServiceOverviewResponse,
   DescribeApmInstancesResponse,
   Filter,
   DescribeApmAgentRequest,
@@ -84,5 +86,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApmAgentResponse) => void
   ): Promise<DescribeApmAgentResponse> {
     return this.request("DescribeApmAgent", req, cb)
+  }
+
+  /**
+   * 服务概览数据拉取
+   */
+  async DescribeServiceOverview(
+    req: DescribeServiceOverviewRequest,
+    cb?: (error: string, rep: DescribeServiceOverviewResponse) => void
+  ): Promise<DescribeServiceOverviewResponse> {
+    return this.request("DescribeServiceOverview", req, cb)
   }
 }

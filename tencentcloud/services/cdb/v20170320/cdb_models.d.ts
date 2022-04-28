@@ -6755,11 +6755,11 @@ export interface UpgradeCDBProxyRequest {
       */
     ProxyGroupId: string;
     /**
-      * 代理节点个数，实际规格支持数
+      * 代理节点个数
       */
     ProxyCount: number;
     /**
-      * 代理节点核数，实际规格支持数
+      * 代理节点核数
       */
     Cpu: number;
     /**

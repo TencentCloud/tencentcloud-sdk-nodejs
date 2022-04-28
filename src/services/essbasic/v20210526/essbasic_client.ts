@@ -42,26 +42,30 @@ import {
   CreateFlowsByTemplatesResponse,
   PrepareFlowsRequest,
   SyncProxyOrganizationOperatorsResponse,
-  SignUrlInfo,
+  CreateSealByImageResponse,
   FlowResourceUrlInfo,
   DescribeTemplatesRequest,
   SyncProxyOrganizationOperatorsRequest,
   CreateConsoleLoginUrlResponse,
   CreateFlowsByTemplatesRequest,
   SyncProxyOrganizationRequest,
+  CreateSealByImageRequest,
+  UserInfo,
   UsageDetail,
   CreateSignUrlsResponse,
   OperateChannelTemplateRequest,
   DownloadFlowInfo,
-  UploadFilesResponse,
+  CcInfo,
   SyncFailReason,
   DescribeUsageRequest,
-  CcInfo,
+  ChannelCreateFlowByFilesRequest,
+  ChannelCreateFlowByFilesResponse,
+  UploadFilesResponse,
   Agent,
   FormField,
   FlowApproverDetail,
   FlowInfo,
-  UserInfo,
+  SignUrlInfo,
   DescribeUsageResponse,
   DescribeFlowDetailInfoResponse,
 } from "./essbasic_models"
@@ -108,6 +112,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 接口（ChannelCreateFlowByFiles）用于渠道版通过文件创建流程。此接口不可直接使用，需要运营申请
+   */
+  async ChannelCreateFlowByFiles(
+    req: ChannelCreateFlowByFilesRequest,
+    cb?: (error: string, rep: ChannelCreateFlowByFilesResponse) => void
+  ): Promise<ChannelCreateFlowByFilesResponse> {
+    return this.request("ChannelCreateFlowByFiles", req, cb)
+  }
+
+  /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
 用户通过该接口进入流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
 目前该接口只支持B2C。
@@ -131,6 +145,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OperateChannelTemplateResponse) => void
   ): Promise<OperateChannelTemplateResponse> {
     return this.request("OperateChannelTemplate", req, cb)
+  }
+
+  /**
+   * 渠道通过图片为子客代创建印章，图片最大5m；此接口不可直接使用，需要运营申请
+   */
+  async CreateSealByImage(
+    req: CreateSealByImageRequest,
+    cb?: (error: string, rep: CreateSealByImageResponse) => void
+  ): Promise<CreateSealByImageResponse> {
+    return this.request("CreateSealByImage", req, cb)
   }
 
   /**

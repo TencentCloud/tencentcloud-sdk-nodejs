@@ -422,6 +422,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TerminateInstances", req, cb);
     }
     /**
+     * 本接口(RenewInstances)用于续费一个或多个轻量应用服务器实例。
+     */
+    async RenewInstances(req, cb) {
+        return this.request("RenewInstances", req, cb);
+    }
+    /**
      * 本接口（DescribeInstanceVncUrl）用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
 
 * 处于 RUNNING 状态的机器可使用此功能。

@@ -2711,7 +2711,7 @@ export interface ClusterBasicSettings {
   OsCustomizeType?: string
 
   /**
-   * 是否开启节点的默认安全组(默认: 否，Aphla特性)
+   * 是否开启节点的默认安全组(默认: 否，Alpha特性)
    */
   NeedWorkSecurityGroup?: boolean
 

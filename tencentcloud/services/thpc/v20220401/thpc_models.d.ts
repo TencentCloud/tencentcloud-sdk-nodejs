@@ -445,7 +445,7 @@ export interface AddNodesRequest {
       */
     DataDisks?: Array<DataDisk>;
     /**
-      * 节点数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
       */
     InternetAccessible?: InternetAccessible;
     /**
@@ -499,6 +499,10 @@ export interface BindAutoScalingGroupRequest {
       * 弹性伸缩组ID。
       */
     AutoScalingGroupId: string;
+    /**
+      * 队列名称。
+      */
+    QueueName?: string;
     /**
       * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。默认值120。
       */

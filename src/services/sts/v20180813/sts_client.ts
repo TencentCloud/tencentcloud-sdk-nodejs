@@ -20,7 +20,8 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AssumeRoleWithSAMLResponse,
   ApiKey,
-  AssumeRoleWithSAMLRequest,
+  AssumeRoleWithWebIdentityRequest,
+  AssumeRoleWithWebIdentityResponse,
   GetFederationTokenResponse,
   QueryApiKeyResponse,
   AssumeRoleResponse,
@@ -30,6 +31,7 @@ import {
   Credentials,
   AssumeRoleRequest,
   GetCallerIdentityRequest,
+  AssumeRoleWithSAMLRequest,
 } from "./sts_models"
 
 /**
@@ -62,16 +64,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（AssumeRoleWithSAML）用于根据 SAML 断言申请角色临时凭证。
-   */
-  async AssumeRoleWithSAML(
-    req: AssumeRoleWithSAMLRequest,
-    cb?: (error: string, rep: AssumeRoleWithSAMLResponse) => void
-  ): Promise<AssumeRoleWithSAMLResponse> {
-    return this.request("AssumeRoleWithSAML", req, cb)
-  }
-
-  /**
    * 申请扮演角色
    */
   async AssumeRole(
@@ -79,6 +71,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssumeRoleResponse) => void
   ): Promise<AssumeRoleResponse> {
     return this.request("AssumeRole", req, cb)
+  }
+
+  /**
+   * 申请OIDC角色临时密钥
+   */
+  async AssumeRoleWithWebIdentity(
+    req: AssumeRoleWithWebIdentityRequest,
+    cb?: (error: string, rep: AssumeRoleWithWebIdentityResponse) => void
+  ): Promise<AssumeRoleWithWebIdentityResponse> {
+    return this.request("AssumeRoleWithWebIdentity", req, cb)
   }
 
   /**
@@ -90,5 +92,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetCallerIdentityResponse) => void
   ): Promise<GetCallerIdentityResponse> {
     return this.request("GetCallerIdentity", req, cb)
+  }
+
+  /**
+   * 本接口（AssumeRoleWithSAML）用于根据 SAML 断言申请角色临时凭证。
+   */
+  async AssumeRoleWithSAML(
+    req: AssumeRoleWithSAMLRequest,
+    cb?: (error: string, rep: AssumeRoleWithSAMLResponse) => void
+  ): Promise<AssumeRoleWithSAMLResponse> {
+    return this.request("AssumeRoleWithSAML", req, cb)
   }
 }

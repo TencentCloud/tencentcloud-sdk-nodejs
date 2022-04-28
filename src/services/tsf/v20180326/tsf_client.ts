@@ -84,7 +84,6 @@ import {
   LaneRule,
   MsInstance,
   GatewayPluginBoundParam,
-  DescribeServerlessGroupsResponse,
   ModifyLaneRuleRequest,
   AddInstancesResponse,
   StartContainerGroupRequest,
@@ -177,7 +176,6 @@ import {
   Ports,
   DescribeGroupGatewaysResponse,
   RevocationConfigResponse,
-  DeployServerlessGroupResponse,
   PkgBind,
   DeleteTaskResponse,
   TsfPageMsInstance,
@@ -224,7 +222,6 @@ import {
   DescribeUnitNamespacesResponse,
   ContinueRunFailedTaskBatchResponse,
   DescribeSimpleClustersRequest,
-  DeployServerlessGroupRequest,
   ApiDefinitionDescr,
   DescribeLaneRulesResponse,
   DescribeImageRepositoryRequest,
@@ -281,7 +278,6 @@ import {
   GatewayGroupIds,
   DescribeInvocationMetricDataDimensionRequest,
   DeployGroupResponse,
-  DescribeServerlessGroupResponse,
   BindApiGroupResponse,
   MetricDataPointMap,
   DescribeGroupAttributeResponse,
@@ -311,7 +307,6 @@ import {
   DescribeDownloadInfoRequest,
   DescribePublicConfigSummaryResponse,
   DescribePublicConfigReleaseLogsRequest,
-  CreateServerlessGroupResponse,
   ShardArgument,
   MetricDimensionValue,
   MetricDataPoint,
@@ -369,7 +364,6 @@ import {
   DescribeInstancesRequest,
   PathRewriteCreateObject,
   DescribeApiGroupsRequest,
-  DescribeServerlessGroupRequest,
   DeleteUnitRuleRequest,
   ApplicationAttribute,
   TaskFlowLastBatchState,
@@ -390,16 +384,13 @@ import {
   MultiValue,
   DescribePublicConfigReleasesRequest,
   DescribeLaneRulesRequest,
-  CreateServerlessGroupRequest,
   UnitRuleTag,
   DescribePluginInstancesResponse,
   CreateRepositoryResponse,
   GroupUnitApiDailyUseStatistics,
-  DescribeServerlessGroupsRequest,
   CurvePoint,
   CosDownloadInfo,
   DeletePkgsRequest,
-  ServerlessGroupPage,
   InstanceAdvancedSettings,
   GroupApiUseStatistics,
   ChangeApiUsableStatusResponse,
@@ -450,7 +441,6 @@ import {
   ContainerGroupDetail,
   BindApiGroupRequest,
   StopTaskBatchRequest,
-  ServerlessGroup,
   ApiDetailInfo,
   DescribeUnitApiUseDetailResponse,
   DescribeInvocationMetricScatterPlotResponse,
@@ -607,16 +597,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ShrinkInstancesResponse) => void
   ): Promise<ShrinkInstancesResponse> {
     return this.request("ShrinkInstances", req, cb)
-  }
-
-  /**
-   * 启用工作流
-   */
-  async EnableTaskFlow(
-    req: EnableTaskFlowRequest,
-    cb?: (error: string, rep: EnableTaskFlowResponse) => void
-  ): Promise<EnableTaskFlowResponse> {
-    return this.request("EnableTaskFlow", req, cb)
   }
 
   /**
@@ -890,16 +870,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 部署Serverless应用
-   */
-  async DeployServerlessGroup(
-    req: DeployServerlessGroupRequest,
-    cb?: (error: string, rep: DeployServerlessGroupResponse) => void
-  ): Promise<DeployServerlessGroupResponse> {
-    return this.request("DeployServerlessGroup", req, cb)
-  }
-
-  /**
    * 创建配置项
    */
   async CreateConfig(
@@ -1031,16 +1001,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询Serverless部署组列表
-   */
-  async DescribeServerlessGroups(
-    req: DescribeServerlessGroupsRequest,
-    cb?: (error: string, rep: DescribeServerlessGroupsResponse) => void
-  ): Promise<DescribeServerlessGroupsResponse> {
-    return this.request("DescribeServerlessGroups", req, cb)
-  }
-
-  /**
    * 查询网关分组监控明细数据
    */
   async DescribeGroupUseDetail(
@@ -1151,13 +1111,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 创建Serverless部署组
+   * 删除微服务
    */
-  async CreateServerlessGroup(
-    req: CreateServerlessGroupRequest,
-    cb?: (error: string, rep: CreateServerlessGroupResponse) => void
-  ): Promise<CreateServerlessGroupResponse> {
-    return this.request("CreateServerlessGroup", req, cb)
+  async DeleteMicroservice(
+    req: DeleteMicroserviceRequest,
+    cb?: (error: string, rep: DeleteMicroserviceResponse) => void
+  ): Promise<DeleteMicroserviceResponse> {
+    return this.request("DeleteMicroservice", req, cb)
   }
 
   /**
@@ -1823,13 +1783,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 删除命名空间
+   * 启用工作流
    */
-  async DeleteNamespace(
-    req: DeleteNamespaceRequest,
-    cb?: (error: string, rep: DeleteNamespaceResponse) => void
-  ): Promise<DeleteNamespaceResponse> {
-    return this.request("DeleteNamespace", req, cb)
+  async EnableTaskFlow(
+    req: EnableTaskFlowRequest,
+    cb?: (error: string, rep: EnableTaskFlowResponse) => void
+  ): Promise<EnableTaskFlowResponse> {
+    return this.request("EnableTaskFlow", req, cb)
   }
 
   /**
@@ -2053,13 +2013,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 删除微服务
+   * 删除命名空间
    */
-  async DeleteMicroservice(
-    req: DeleteMicroserviceRequest,
-    cb?: (error: string, rep: DeleteMicroserviceResponse) => void
-  ): Promise<DeleteMicroserviceResponse> {
-    return this.request("DeleteMicroservice", req, cb)
+  async DeleteNamespace(
+    req: DeleteNamespaceRequest,
+    cb?: (error: string, rep: DeleteNamespaceResponse) => void
+  ): Promise<DeleteNamespaceResponse> {
+    return this.request("DeleteNamespace", req, cb)
   }
 
   /**
@@ -2180,16 +2140,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeEnabledUnitRuleResponse) => void
   ): Promise<DescribeEnabledUnitRuleResponse> {
     return this.request("DescribeEnabledUnitRule", req, cb)
-  }
-
-  /**
-   * 查询Serverless部署组明细
-   */
-  async DescribeServerlessGroup(
-    req: DescribeServerlessGroupRequest,
-    cb?: (error: string, rep: DescribeServerlessGroupResponse) => void
-  ): Promise<DescribeServerlessGroupResponse> {
-    return this.request("DescribeServerlessGroup", req, cb)
   }
 
   /**

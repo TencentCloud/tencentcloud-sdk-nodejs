@@ -51,5 +51,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeApmAgent(req, cb) {
         return this.request("DescribeApmAgent", req, cb);
     }
+    /**
+     * 服务概览数据拉取
+     */
+    async DescribeServiceOverview(req, cb) {
+        return this.request("DescribeServiceOverview", req, cb);
+    }
 }
 exports.Client = Client;

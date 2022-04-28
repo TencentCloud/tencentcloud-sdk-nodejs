@@ -48,6 +48,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTemplates", req, cb);
     }
     /**
+     * 接口（ChannelCreateFlowByFiles）用于渠道版通过文件创建流程。此接口不可直接使用，需要运营申请
+     */
+    async ChannelCreateFlowByFiles(req, cb) {
+        return this.request("ChannelCreateFlowByFiles", req, cb);
+    }
+    /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
 用户通过该接口进入流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
 目前该接口只支持B2C。
@@ -64,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async OperateChannelTemplate(req, cb) {
         return this.request("OperateChannelTemplate", req, cb);
+    }
+    /**
+     * 渠道通过图片为子客代创建印章，图片最大5m；此接口不可直接使用，需要运营申请
+     */
+    async CreateSealByImage(req, cb) {
+        return this.request("CreateSealByImage", req, cb);
     }
     /**
      * 创建参与者签署短链

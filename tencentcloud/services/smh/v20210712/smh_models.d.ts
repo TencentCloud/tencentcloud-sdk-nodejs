@@ -225,9 +225,13 @@ export interface SendSmsCodeRequest {
       */
     InstanceId: string;
     /**
-      * 将作为超级管理员账号的手机号码，仅限中国境内手机号，无需国家代码“+86”。
+      * 将作为超级管理员账号的手机号码
       */
     PhoneNumber: string;
+    /**
+      * 将作为超级管理员账号的手机号码的国家代码。默认为 +86。
+      */
+    CountryCode?: string;
 }
 /**
  * DescribeOfficialInstances请求参数结构体
@@ -448,13 +452,17 @@ export interface VerifySmsCodeRequest {
       */
     InstanceId: string;
     /**
-      * 将作为超级管理员账号的手机号码，仅限中国境内手机号，无需国家代码“+86”。
+      * 将作为超级管理员账号的手机号码
       */
     PhoneNumber: string;
     /**
       * 短信验证码
       */
     Code: string;
+    /**
+      * 将作为超级管理员账号的手机号码的国家代码。默认为 +86。
+      */
+    CountryCode?: string;
 }
 /**
  * CreateLibrary返回参数结构体

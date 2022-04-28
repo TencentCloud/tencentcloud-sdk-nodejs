@@ -542,6 +542,10 @@ export interface TasksInfo {
       * 任务的配置信息，当前仅支持SparkSQLTask任务。
       */
     Config?: Array<KVPair>;
+    /**
+      * 任务的用户自定义参数信息
+      */
+    Params?: Array<KVPair>;
 }
 /**
  * AttachWorkGroupPolicy请求参数结构体

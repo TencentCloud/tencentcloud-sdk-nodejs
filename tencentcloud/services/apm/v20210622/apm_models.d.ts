@@ -26,6 +26,47 @@ export interface CreateApmInstanceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeServiceOverview请求参数结构体
+ */
+export interface DescribeServiceOverviewRequest {
+    /**
+      * 过滤条件
+      */
+    Filters: Array<Filter>;
+    /**
+      * 指标列表
+      */
+    Metrics: Array<QueryMetricItem>;
+    /**
+      * 聚合维度
+      */
+    GroupBy: Array<string>;
+    /**
+      * 排序
+      */
+    OrderBy?: OrderBy;
+    /**
+      * 实例ID
+      */
+    InstanceId?: string;
+    /**
+      * 每页大小
+      */
+    Limit?: number;
+    /**
+      * 开始时间
+      */
+    StartTime?: number;
+    /**
+      * 分页起始点
+      */
+    Offset?: number;
+    /**
+      * 结束时间
+      */
+    EndTime?: number;
+}
+/**
  * apm实例信息
  */
 export interface ApmInstanceDetail {
@@ -203,6 +244,20 @@ export interface ApmTag {
       * 维度值（标签值）
       */
     Value: string;
+}
+/**
+ * DescribeServiceOverview返回参数结构体
+ */
+export interface DescribeServiceOverviewResponse {
+    /**
+      * 指标结果集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Records: Array<ApmMetricRecord>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeApmInstances返回参数结构体

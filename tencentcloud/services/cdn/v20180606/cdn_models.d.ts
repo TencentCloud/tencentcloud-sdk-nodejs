@@ -6040,8 +6040,8 @@ blacklist：黑名单
     Referers: Array<string>;
     /**
       * 是否允许空 referer
-true：允许空 referer
-false：不允许空 referer
+防盗链类型为白名单时，true表示允许空 referer，false表示不允许空 referer；
+防盗链类型为黑名单时，true表示拒绝空referer，false表示不拒绝空referer；
       */
     AllowEmpty: boolean;
 }
@@ -6352,6 +6352,11 @@ export interface CreateVerifyRecordResponse {
       * 解析类型
       */
     RecordType: string;
+    /**
+      * 文件验证 URL 指引
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileVerifyUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7111,6 +7116,56 @@ export interface SchemeKey {
     Switch: string;
 }
 /**
+ * 累计用量封顶的配置
+ */
+export interface StatisticItem {
+    /**
+      * 封顶类型，累计用量total，瞬时用量moment
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
+    /**
+      * 自动解封时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnBlockTime?: number;
+    /**
+      * 带宽、流量阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BpsThreshold?: number;
+    /**
+      * 关闭方式 返回404:RETURN_404, dns回源：RESOLVE_DNS_TO_ORIGIN
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CounterMeasure?: string;
+    /**
+      * 触发提醒阈值百分比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlertPercentage?: number;
+    /**
+      * 提醒开关 on/off
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlertSwitch?: string;
+    /**
+      * 指标类型，流量flux或带宽bandwidth
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Metric?: string;
+    /**
+      * 检测周期，单位分钟，60或1440
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cycle?: number;
+    /**
+      * 是否开启该选项，on/off
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Switch?: string;
+}
+/**
  * DescribeImageConfig请求参数结构体
  */
 export interface DescribeImageConfigRequest {
@@ -7617,6 +7672,11 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Metric?: string;
+    /**
+      * 累计用量配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatisticItems?: Array<StatisticItem>;
 }
 /**
  * CreateVerifyRecord请求参数结构体
@@ -9204,6 +9264,12 @@ export interface VerifyDomainRecordRequest {
       * 域名
       */
     Domain: string;
+    /**
+      * 验证方式
+dns: DNS 解析验证（默认值）
+file: 文件验证
+      */
+    VerifyType?: string;
 }
 /**
  * Scdn饼图数据，waf仅有

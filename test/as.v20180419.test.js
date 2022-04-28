@@ -118,6 +118,16 @@ it("as.v20180419.UpgradeLaunchConfiguration", async function () {
     }
 })
 
+it("as.v20180419.ModifyLifecycleHook", async function () {
+    try {
+       const data = await client.ModifyLifecycleHook({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.DetachLoadBalancers", async function () {
     try {
        const data = await client.DetachLoadBalancers({})

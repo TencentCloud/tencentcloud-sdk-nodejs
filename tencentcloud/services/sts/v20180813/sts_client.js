@@ -40,16 +40,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryApiKey", req, cb);
     }
     /**
-     * 本接口（AssumeRoleWithSAML）用于根据 SAML 断言申请角色临时凭证。
-     */
-    async AssumeRoleWithSAML(req, cb) {
-        return this.request("AssumeRoleWithSAML", req, cb);
-    }
-    /**
      * 申请扮演角色
      */
     async AssumeRole(req, cb) {
         return this.request("AssumeRole", req, cb);
+    }
+    /**
+     * 申请OIDC角色临时密钥
+     */
+    async AssumeRoleWithWebIdentity(req, cb) {
+        return this.request("AssumeRoleWithWebIdentity", req, cb);
     }
     /**
      * 获取当前调用者的身份信息。
@@ -57,6 +57,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetCallerIdentity(req, cb) {
         return this.request("GetCallerIdentity", req, cb);
+    }
+    /**
+     * 本接口（AssumeRoleWithSAML）用于根据 SAML 断言申请角色临时凭证。
+     */
+    async AssumeRoleWithSAML(req, cb) {
+        return this.request("AssumeRoleWithSAML", req, cb);
     }
 }
 exports.Client = Client;

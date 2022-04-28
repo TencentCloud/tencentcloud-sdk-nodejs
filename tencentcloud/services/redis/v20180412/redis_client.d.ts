@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskList(req: DescribeTaskListRequest, cb?: (error: string, rep: DescribeTaskListResponse) => void): Promise<DescribeTaskListResponse>;
     /**
-     * 移除复制组成员
+     * 移除复制组成员 注：接口下线中，请使用 RemoveReplicationInstance
      */
     DeleteReplicationInstance(req: DeleteReplicationInstanceRequest, cb?: (error: string, rep: DeleteReplicationInstanceResponse) => void): Promise<DeleteReplicationInstanceResponse>;
     /**

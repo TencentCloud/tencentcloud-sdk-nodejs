@@ -302,17 +302,17 @@ export interface DescribeMaintenanceSpanResponse {
   /**
    * 以周为单位，表示周几允许维护，例如：[1,2,3,4,5,6,7]表示周一到周日均为可维护日。
    */
-  Weekly?: Array<number>
+  Weekly: Array<number>
 
   /**
    * 每天可维护的开始时间，例如：10:24标识可维护时间窗10点24分开始。
    */
-  StartTime?: string
+  StartTime: string
 
   /**
    * 每天可维护的持续时间，单位是h，例如：1 表示从可维护的开始时间起持续1小时。
    */
-  Span?: number
+  Span: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -927,7 +927,7 @@ export interface DescribeRollbackTimeResponse {
   /**
    * 数据库可回档实例信息
    */
-  Details?: Array<DbRollbackTimeInfo>
+  Details: Array<DbRollbackTimeInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3464,7 +3464,7 @@ export interface DescribeBackupUploadSizeResponse {
   /**
    * 已上传的备份的信息
    */
-  CosUploadBackupFileSet?: Array<CosUploadBackupFile>
+  CosUploadBackupFileSet: Array<CosUploadBackupFile>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3679,7 +3679,7 @@ export interface CreateBackupResponse {
   /**
    * 异步任务ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3930,42 +3930,42 @@ export interface DescribeUploadBackupInfoResponse {
   /**
    * 存储桶名称
    */
-  BucketName?: string
+  BucketName: string
 
   /**
    * 存储桶地域信息
    */
-  Region?: string
+  Region: string
 
   /**
    * 存储路径
    */
-  Path?: string
+  Path: string
 
   /**
    * 临时密钥ID
    */
-  TmpSecretId?: string
+  TmpSecretId: string
 
   /**
    * 临时密钥Key
    */
-  TmpSecretKey?: string
+  TmpSecretKey: string
 
   /**
    * 临时密钥Token
    */
-  XCosSecurityToken?: string
+  XCosSecurityToken: string
 
   /**
    * 临时密钥开始时间
    */
-  StartTime?: string
+  StartTime: string
 
   /**
    * 临时密钥到期时间
    */
-  ExpiredTime?: string
+  ExpiredTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4705,7 +4705,7 @@ export interface CreateBackupMigrationResponse {
   /**
    * 备份导入任务ID
    */
-  BackupMigrationId?: string
+  BackupMigrationId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5265,7 +5265,7 @@ export interface DeleteDBResponse {
   /**
    * 任务流ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5280,7 +5280,7 @@ export interface CreateDBResponse {
   /**
    * 任务流ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5726,7 +5726,7 @@ export interface DescribeBackupCommandResponse {
   /**
    * 创建备份命令
    */
-  Command?: string
+  Command: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5756,12 +5756,12 @@ export interface DescribePublishSubscribeResponse {
   /**
    * 总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 发布订阅列表
    */
-  PublishSubscribeSet?: Array<PublishSubscribe>
+  PublishSubscribeSet: Array<PublishSubscribe>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5901,7 +5901,7 @@ export interface DeleteAccountResponse {
   /**
    * 任务流ID
    */
-  FlowId?: number
+  FlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

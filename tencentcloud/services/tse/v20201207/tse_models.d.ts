@@ -144,6 +144,26 @@ export interface SREInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ConsoleDefaultPwd: string;
+    /**
+      * 交易付费类型，0后付费/1预付费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TradeType: number;
+    /**
+      * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoRenewFlag: number;
+    /**
+      * 预付费到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CurDeadline: string;
+    /**
+      * 隔离开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsolateTime: string;
 }
 /**
  * DescribeSREInstanceAccessAddress返回参数结构体
@@ -171,6 +191,16 @@ export interface DescribeSREInstanceAccessAddressResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ConsoleIntranetAddress: string;
+    /**
+      * 客户端公网带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternetBandWidth: number;
+    /**
+      * 控制台公网带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsoleInternetBandWidth: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

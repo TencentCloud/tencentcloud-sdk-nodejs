@@ -46,7 +46,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSchedulerMailProfile", req, cb);
     }
     /**
-     * 查询SQL模版。
+     * 查询SQL模板。
      */
     async DescribeSqlTemplate(req, cb) {
         return this.request("DescribeSqlTemplate", req, cb);
