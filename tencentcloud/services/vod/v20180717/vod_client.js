@@ -486,10 +486,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMedia", req, cb);
     }
     /**
-     * 创建超级播放器配置，数量上限：100。
+     * 该接口返回查询时间范围内每天使用的图片智能识别用量信息。
+   1. 可以查询最近365天内的图片智能识别统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+
      */
-    async CreateSuperPlayerConfig(req, cb) {
-        return this.request("CreateSuperPlayerConfig", req, cb);
+    async DescribeImageReviewUsageData(req, cb) {
+        return this.request("DescribeImageReviewUsageData", req, cb);
     }
     /**
      * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
@@ -543,6 +547,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEventsState(req, cb) {
         return this.request("DescribeEventsState", req, cb);
+    }
+    /**
+     * 创建超级播放器配置，数量上限：100。
+     */
+    async CreateSuperPlayerConfig(req, cb) {
+        return this.request("CreateSuperPlayerConfig", req, cb);
     }
     /**
      * 该接口用于修改域名配置，可以修改域名的防盗链配置。
@@ -886,6 +896,17 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyMediaInfo(req, cb) {
         return this.request("ModifyMediaInfo", req, cb);
+    }
+    /**
+     * 对点播中的图片文件发起智能识别（令人反感的信息、不安全的信息、不适宜的信息）任务。
+
+><li>图片文件大小支持：文件 < 5M；</li>
+><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响智能识别效果；</li>
+><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
+
+     */
+    async ReviewImage(req, cb) {
+        return this.request("ReviewImage", req, cb);
     }
     /**
      * 删除用户自定义采样截图模板。

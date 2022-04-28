@@ -65,6 +65,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesDiskNum", req, cb);
     }
     /**
+     * 本接口(IsolateInstances)用于退还一个或多个轻量应用服务器实例。
+* 只有状态为 RUNNING 或 STOPPED 的实例才可以进行此操作。
+* 接口调用成功后，实例会进入SHUTDOWN 状态。
+* 支持批量操作。每次请求批量资源（包括实例与数据盘）的上限为 20。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     */
+    async IsolateInstances(req, cb) {
+        return this.request("IsolateInstances", req, cb);
+    }
+    /**
      * 本接口 (ModifyInstancesRenewFlag) 用于修改包年包月实例续费标识。
 
 * 实例被标识为自动续费后，每次在实例到期时，会自动续费一个月。
@@ -423,6 +433,9 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口(RenewInstances)用于续费一个或多个轻量应用服务器实例。
+* 只有状态为 RUNNING，STOPPED 或 SHUTDOWN 的实例才可以进行此操作。
+* 支持批量操作。每次请求批量实例的上限为 100。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
      */
     async RenewInstances(req, cb) {
         return this.request("RenewInstances", req, cb);

@@ -1297,6 +1297,21 @@ export interface DescribeAppInfoRequest {
 }
 
 /**
+ * DeleteRoute返回参数结构体
+ */
+export interface DeleteRouteResponse {
+  /**
+   * 返回结果
+   */
+  Result: JgwOperateResponse
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * partition信息
  */
 export interface Partitions {
@@ -2848,6 +2863,31 @@ export interface InstanceDetailResponse {
    * 符合条件的实例详情列表
    */
   InstanceList: Array<InstanceDetail>
+}
+
+/**
+ * DeleteRoute请求参数结构体
+ */
+export interface DeleteRouteRequest {
+  /**
+   * 实例唯一id
+   */
+  InstanceId: string
+
+  /**
+   * 路由id
+   */
+  RouteId: number
+
+  /**
+   * 调用方appId
+   */
+  CallerAppid?: number
+
+  /**
+   * 删除路由时间
+   */
+  DeleteRouteTime?: string
 }
 
 /**

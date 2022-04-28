@@ -191,6 +191,18 @@ export interface CreateSchemeUrlRequest {
       * 合同详情 id (PathType=1时必传)
       */
     FlowId?: string;
+    /**
+      * 企业名称
+      */
+    OrganizationName?: string;
+    /**
+      * 链接类型 HTTP：跳转电子签小程序的http_url，APP：第三方APP或小程序跳转电子签小程序，默认为HTTP类型
+      */
+    EndPoint?: string;
+    /**
+      * 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效
+      */
+    AutoJumpBack?: boolean;
 }
 /**
  * 下载文件的URL信息

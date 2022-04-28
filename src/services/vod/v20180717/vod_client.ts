@@ -52,6 +52,7 @@ import {
   DescribePrepaidProductsRequest,
   MediaInputInfo,
   CreateImageSpriteTask2017,
+  ClipFileInfo2017,
   TempCertificate,
   AiReviewTaskPoliticalOcrResult,
   AiSampleWord,
@@ -281,6 +282,7 @@ import {
   DeleteImageSpriteTemplateResponse,
   DescribeContentReviewTemplatesResponse,
   TEHDConfig,
+  ImageReviewUsageDataItem,
   AnimatedGraphicsTemplate,
   DailyPlayStatInfo,
   TerrorismOcrReviewTemplateInfoForUpdate,
@@ -343,6 +345,7 @@ import {
   ProcedureTemplate,
   AiReviewTaskTerrorismResult,
   ProcessMediaByUrlResponse,
+  DescribeImageReviewUsageDataRequest,
   MediaContentReviewAsrTextSegmentItem,
   DescribeEventConfigResponse,
   DescribeCdnLogsResponse,
@@ -401,7 +404,7 @@ import {
   WechatPublishTask,
   DescribeCDNStatDetailsRequest,
   AiRecognitionTaskOcrFullTextResultInput,
-  ClipFileInfo2017,
+  DescribeImageReviewUsageDataResponse,
   StatDataItem,
   CreateStorageRegionResponse,
   AccelerateAreaInfo,
@@ -483,6 +486,7 @@ import {
   AiRecognitionTaskFaceResultInput,
   AiReviewPoliticalTaskOutput,
   AiReviewTaskPoliticalResult,
+  ReviewImageResponse,
   DescribeStorageRegionsResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
   ProcedureTask,
@@ -573,6 +577,7 @@ import {
   MediaAiAnalysisFrameTagItem,
   DescribeImageProcessingTemplatesResponse,
   SampleSnapshotTaskInput,
+  ReviewImageRequest,
   DescribeHeadTailTemplatesResponse,
   TerrorismConfigureInfo,
   PoliticalAsrReviewTemplateInfo,
@@ -1292,13 +1297,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建超级播放器配置，数量上限：100。
-   */
-  async CreateSuperPlayerConfig(
-    req: CreateSuperPlayerConfigRequest,
-    cb?: (error: string, rep: CreateSuperPlayerConfigResponse) => void
-  ): Promise<CreateSuperPlayerConfigResponse> {
-    return this.request("CreateSuperPlayerConfig", req, cb)
+     * 该接口返回查询时间范围内每天使用的图片智能识别用量信息。
+   1. 可以查询最近365天内的图片智能识别统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+
+     */
+  async DescribeImageReviewUsageData(
+    req: DescribeImageReviewUsageDataRequest,
+    cb?: (error: string, rep: DescribeImageReviewUsageDataResponse) => void
+  ): Promise<DescribeImageReviewUsageDataResponse> {
+    return this.request("DescribeImageReviewUsageData", req, cb)
   }
 
   /**
@@ -1380,6 +1389,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEventsStateResponse) => void
   ): Promise<DescribeEventsStateResponse> {
     return this.request("DescribeEventsState", req, cb)
+  }
+
+  /**
+   * 创建超级播放器配置，数量上限：100。
+   */
+  async CreateSuperPlayerConfig(
+    req: CreateSuperPlayerConfigRequest,
+    cb?: (error: string, rep: CreateSuperPlayerConfigResponse) => void
+  ): Promise<CreateSuperPlayerConfigResponse> {
+    return this.request("CreateSuperPlayerConfig", req, cb)
   }
 
   /**
@@ -1915,6 +1934,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMediaInfoResponse) => void
   ): Promise<ModifyMediaInfoResponse> {
     return this.request("ModifyMediaInfo", req, cb)
+  }
+
+  /**
+     * 对点播中的图片文件发起智能识别（令人反感的信息、不安全的信息、不适宜的信息）任务。
+
+><li>图片文件大小支持：文件 < 5M；</li>
+><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响智能识别效果；</li>
+><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
+
+     */
+  async ReviewImage(
+    req: ReviewImageRequest,
+    cb?: (error: string, rep: ReviewImageResponse) => void
+  ): Promise<ReviewImageResponse> {
+    return this.request("ReviewImage", req, cb)
   }
 
   /**

@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyTopicAttributes", req, cb);
     }
     /**
+     * 删除路由
+     */
+    async DeleteRoute(req, cb) {
+        return this.request("DeleteRoute", req, cb);
+    }
+    /**
      * 通过HTTP接入层发送消息
      */
     async SendMessage(req, cb) {

@@ -29,7 +29,7 @@ export interface AssociateInstancesKeyPairsResponse {
  */
 export interface RenewInstancesRequest {
     /**
-      * 实例ID列表。一个或多个待操作的实例ID。可通过DescribeInstances接口返回值中的InstanceId获取。每次请求批量实例的上限为100。
+      * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为100。
       */
     InstanceIds: Array<string>;
     /**
@@ -1275,6 +1275,22 @@ export interface ModifyInstancesLoginKeyPairAttributeRequest {
     PermitLogin?: string;
 }
 /**
+ * IsolateInstances请求参数结构体
+ */
+export interface IsolateInstancesRequest {
+    /**
+      * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求退还实例和数据盘数量总计上限为20。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 是否退还挂载的数据盘。取值范围：
+TRUE：表示退还实例同时退还其挂载的数据盘。
+FALSE：表示退还实例同时不再退还其挂载的数据盘。
+默认取值：TRUE。
+      */
+    IsolateDataDisk?: boolean;
+}
+/**
  * StopInstances返回参数结构体
  */
 export interface StopInstancesResponse {
@@ -1606,6 +1622,15 @@ export interface DockerContainerVolume {
       * 主机路径
       */
     HostPath?: string;
+}
+/**
+ * IsolateInstances返回参数结构体
+ */
+export interface IsolateInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateKeyPair返回参数结构体

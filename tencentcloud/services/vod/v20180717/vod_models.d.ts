@@ -471,9 +471,9 @@ export interface AdaptiveDynamicStreamingTemplate {
     Format: string;
     /**
       * DRM 类型，取值范围：
-<li>FairPlay；</li>
-<li>SimpleAES；</li>
-<li>Widevine。</li>
+<li>SimpleAES</li>
+<li>Widevine</li>
+<li>FairPlay</li>
 如果取值为空字符串，代表不对视频做 DRM 保护。
       */
     DrmType: string;
@@ -842,6 +842,33 @@ export interface CreateImageSpriteTask2017 {
       * 雪碧图子图位置与时间关系 WebVtt 文件地址。
       */
     WebVttUrl: string;
+}
+/**
+ * 视频裁剪结果文件信息（2017 版）
+ */
+export interface ClipFileInfo2017 {
+    /**
+      * 错误码
+<li>0：成功；</li>
+<li>其他值：失败。</li>
+      */
+    ErrCode: number;
+    /**
+      * 错误描述。
+      */
+    Message: string;
+    /**
+      * 输出目标文件的文件 ID。
+      */
+    FileId: string;
+    /**
+      * 输出目标文件的文件地址。
+      */
+    FileUrl: string;
+    /**
+      * 输出目标文件的文件类型。
+      */
+    FileType: string;
 }
 /**
  * 临时凭证
@@ -1636,8 +1663,10 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
       */
     Name?: string;
     /**
-      * DRM方案类型，取值范围：
-<li>SimpleAES。</li>
+      * DRM 方案类型，取值范围：
+<li>SimpleAES</li>
+<li>Widevine</li>
+<li>FairPlay</li>
 如果取值为空字符串，代表不对视频做 DRM 保护。
       */
     DrmType?: string;
@@ -6062,6 +6091,19 @@ export interface TEHDConfig {
     MaxVideoBitrate?: number;
 }
 /**
+ * 图片智能识别次数统计数据。
+ */
+export interface ImageReviewUsageDataItem {
+    /**
+      * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+      */
+    Time: string;
+    /**
+      * 次数。
+      */
+    Count: number;
+}
+/**
  * 转动图模板详情。
  */
 export interface AnimatedGraphicsTemplate {
@@ -7512,6 +7554,23 @@ export interface ProcessMediaByUrlResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeImageReviewUsageData请求参数结构体
+ */
+export interface DescribeImageReviewUsageDataRequest {
+    /**
+      * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+      */
+    StartTime: string;
+    /**
+      * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+      */
+    EndTime: string;
+    /**
+      * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
 }
 /**
  * 智能识别 Asr 文字的嫌疑片段
@@ -9103,31 +9162,17 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
     Definition: number;
 }
 /**
- * 视频裁剪结果文件信息（2017 版）
+ * DescribeImageReviewUsageData返回参数结构体
  */
-export interface ClipFileInfo2017 {
+export interface DescribeImageReviewUsageDataResponse {
     /**
-      * 错误码
-<li>0：成功；</li>
-<li>其他值：失败。</li>
+      * 图片智能识别次数统计数据，展示查询时间范围内的图片智能识别次数的概览数据。
       */
-    ErrCode: number;
+    ImageReviewUsageDataSet: Array<ImageReviewUsageDataItem>;
     /**
-      * 错误描述。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Message: string;
-    /**
-      * 输出目标文件的文件 ID。
-      */
-    FileId: string;
-    /**
-      * 输出目标文件的文件地址。
-      */
-    FileUrl: string;
-    /**
-      * 输出目标文件的文件类型。
-      */
-    FileType: string;
+    RequestId?: string;
 }
 /**
  * 统计数据
@@ -10988,6 +11033,19 @@ export interface AiReviewTaskPoliticalResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Output: AiReviewPoliticalTaskOutput;
+}
+/**
+ * ReviewImage返回参数结构体
+ */
+export interface ReviewImageResponse {
+    /**
+      * 图片智能识别任务结果。
+      */
+    ReviewResultSet: Array<ContentReviewResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeStorageRegions返回参数结构体
@@ -13443,6 +13501,23 @@ export interface SampleSnapshotTaskInput {
       * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
       */
     WatermarkSet?: Array<WatermarkInput>;
+}
+/**
+ * ReviewImage请求参数结构体
+ */
+export interface ReviewImageRequest {
+    /**
+      * 媒体文件 ID，即该文件在云点播上的全局唯一标识符。本接口要求媒体文件必须是图片格式。
+      */
+    FileId: string;
+    /**
+      * 图片智能识别模板 ID，当前固定填 10。
+      */
+    Definition: number;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
 }
 /**
  * DescribeHeadTailTemplates返回参数结构体

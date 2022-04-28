@@ -306,6 +306,27 @@ export interface DeleteLogsetResponse {
 }
 
 /**
+ * Parquet内容描述
+ */
+export interface ParquetKeyInfo {
+  /**
+   * 键值名称
+   */
+  KeyName: string
+
+  /**
+   * 数据类型，目前支持6种类型：string、boolean、int32、int64、float、double
+   */
+  KeyType: string
+
+  /**
+      * 解析失败赋值信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyNonExistingField: string
+}
+
+/**
  * DescribeShipperTasks返回参数结构体
  */
 export interface DescribeShipperTasksResponse {
@@ -3567,6 +3588,12 @@ export interface ContentInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Json?: JsonInfo
+
+  /**
+      * parquet格式内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Parquet?: ParquetInfo
 }
 
 /**
@@ -4555,6 +4582,16 @@ export interface DescribeLogsetsRequest {
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+}
+
+/**
+ * Parquet内容
+ */
+export interface ParquetInfo {
+  /**
+   * ParquetKeyInfo数组
+   */
+  ParquetKeyInfo: Array<ParquetKeyInfo>
 }
 
 /**

@@ -578,9 +578,9 @@ it("vod.v20180717.DeleteMedia", async function () {
     }
 })
 
-it("vod.v20180717.CreateSuperPlayerConfig", async function () {
+it("vod.v20180717.DescribeImageReviewUsageData", async function () {
     try {
-       const data = await client.CreateSuperPlayerConfig({})
+       const data = await client.DescribeImageReviewUsageData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +651,16 @@ it("vod.v20180717.DescribeStorageRegions", async function () {
 it("vod.v20180717.DescribeEventsState", async function () {
     try {
        const data = await client.DescribeEventsState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateSuperPlayerConfig", async function () {
+    try {
+       const data = await client.CreateSuperPlayerConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1131,6 +1141,16 @@ it("vod.v20180717.ModifyEventConfig", async function () {
 it("vod.v20180717.ModifyMediaInfo", async function () {
     try {
        const data = await client.ModifyMediaInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ReviewImage", async function () {
+    try {
+       const data = await client.ReviewImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

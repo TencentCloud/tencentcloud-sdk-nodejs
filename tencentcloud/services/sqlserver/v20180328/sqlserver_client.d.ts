@@ -112,7 +112,7 @@ export declare class Client extends AbstractClient {
      */
     TerminateDBInstance(req: TerminateDBInstanceRequest, cb?: (error: string, rep: TerminateDBInstanceResponse) => void): Promise<TerminateDBInstanceResponse>;
     /**
-     * 本接口（DeleteDBInstance）用于释放回收站中的SQL server实例。释放后的实例将保存一段时间后物理销毁。其发布订阅将自动解除，其ro副本将自动释放。
+     * 本接口（DeleteDBInstance）用于释放回收站中的SQL server实例(立即下线)。释放后的实例将保存一段时间后物理销毁。其发布订阅将自动解除，其ro副本将自动释放。
      */
     DeleteDBInstance(req: DeleteDBInstanceRequest, cb?: (error: string, rep: DeleteDBInstanceResponse) => void): Promise<DeleteDBInstanceResponse>;
     /**

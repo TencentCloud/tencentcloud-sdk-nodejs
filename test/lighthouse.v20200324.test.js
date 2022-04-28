@@ -58,6 +58,16 @@ it("lighthouse.v20200324.DescribeInstancesDiskNum", async function () {
     }
 })
 
+it("lighthouse.v20200324.IsolateInstances", async function () {
+    try {
+       const data = await client.IsolateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.ModifyInstancesRenewFlag", async function () {
     try {
        const data = await client.ModifyInstancesRenewFlag({})

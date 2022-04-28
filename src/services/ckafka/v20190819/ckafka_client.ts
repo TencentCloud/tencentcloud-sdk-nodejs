@@ -74,6 +74,7 @@ import {
   CreateAclRequest,
   DescribeTopicSyncReplicaResponse,
   DescribeAppInfoRequest,
+  DeleteRouteResponse,
   Partitions,
   DescribeTopicResponse,
   ConsumerGroupResponse,
@@ -134,6 +135,7 @@ import {
   BatchCreateAclResponse,
   CreateUserRequest,
   InstanceDetailResponse,
+  DeleteRouteRequest,
   DeleteTopicIpWhiteListResponse,
   CreateInstancePreResponse,
   DescribeInstancesDetailRequest,
@@ -244,6 +246,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchModifyTopicAttributesResponse) => void
   ): Promise<BatchModifyTopicAttributesResponse> {
     return this.request("BatchModifyTopicAttributes", req, cb)
+  }
+
+  /**
+   * 删除路由
+   */
+  async DeleteRoute(
+    req: DeleteRouteRequest,
+    cb?: (error: string, rep: DeleteRouteResponse) => void
+  ): Promise<DeleteRouteResponse> {
+    return this.request("DeleteRoute", req, cb)
   }
 
   /**

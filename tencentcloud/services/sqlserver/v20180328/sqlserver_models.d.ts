@@ -426,7 +426,7 @@ export interface StartBackupMigrationResponse {
     /**
       * 流程ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -619,7 +619,7 @@ export interface RollbackInstanceResponse {
     /**
       * 异步任务ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1306,7 +1306,7 @@ export interface ResetAccountPasswordResponse {
     /**
       * 修改帐号密码的异步任务流程ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1974,7 +1974,7 @@ export interface ModifyBackupMigrationResponse {
     /**
       * 备份导入任务ID
       */
-    BackupMigrationId?: string;
+    BackupMigrationId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2453,35 +2453,35 @@ export interface DescribeUploadIncrementalInfoResponse {
     /**
       * 存储桶名称
       */
-    BucketName?: string;
+    BucketName: string;
     /**
       * 存储桶地域信息
       */
-    Region?: string;
+    Region: string;
     /**
       * 存储路径
       */
-    Path?: string;
+    Path: string;
     /**
       * 临时密钥ID
       */
-    TmpSecretId?: string;
+    TmpSecretId: string;
     /**
       * 临时密钥Key
       */
-    TmpSecretKey?: string;
+    TmpSecretKey: string;
     /**
       * 临时密钥Token
       */
-    XCosSecurityToken?: string;
+    XCosSecurityToken: string;
     /**
       * 临时密钥开始时间
       */
-    StartTime?: string;
+    StartTime: string;
     /**
       * 临时密钥到期时间
       */
-    ExpiredTime?: string;
+    ExpiredTime: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2959,7 +2959,7 @@ export interface StartIncrementalMigrationResponse {
     /**
       * 流程ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3461,7 +3461,7 @@ export interface ModifyDBNameResponse {
     /**
       * 任务流ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3727,7 +3727,7 @@ export interface CreateIncrementalMigrationResponse {
     /**
       * 增量备份导入任务ID
       */
-    IncrementalMigrationId?: string;
+    IncrementalMigrationId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4438,7 +4438,7 @@ export interface RestartDBInstanceResponse {
     /**
       * 异步任务流程ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4485,11 +4485,11 @@ export interface DescribeSlowlogsResponse {
     /**
       * 查询总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 慢查询日志信息列表
       */
-    Slowlogs?: Array<SlowlogInfo>;
+    Slowlogs: Array<SlowlogInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
