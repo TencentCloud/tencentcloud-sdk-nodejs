@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/sendSMS",
+      "handler": "sms.send",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
