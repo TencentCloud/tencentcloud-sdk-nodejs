@@ -46,10 +46,10 @@ module.exports = {
       };
       client.SendSms(params).then(
         (data) => {
-          console.log(data);
+          ctx.send({data})
         },
         (err) => {
-          console.error("error", err);
+          ctx.send({err})
         }
       );
   }
