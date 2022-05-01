@@ -1,4 +1,5 @@
 'use strict';
+
 const tencentcloud = require("../tencentcloud")
 const SmsClient = tencentcloud.sms.v20210111.Client;
 
