@@ -140,7 +140,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeProVersionInfo(req?: DescribeProVersionInfoRequest, cb?: (error: string, rep: DescribeProVersionInfoResponse) => void): Promise<DescribeProVersionInfoResponse>;
     /**
-     * 专家服务-旗舰护网列表
+     * 专家服务-旗舰重保列表
      */
     DescribeProtectNetList(req: DescribeProtectNetListRequest, cb?: (error: string, rep: DescribeProtectNetListResponse) => void): Promise<DescribeProtectNetListResponse>;
     /**

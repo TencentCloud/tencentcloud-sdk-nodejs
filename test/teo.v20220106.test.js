@@ -38,4 +38,14 @@ it("teo.v20220106.DescribePurgeTasks", async function () {
     }
 })
 
+it("teo.v20220106.DescribeZones", async function () {
+    try {
+       const data = await client.DescribeZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

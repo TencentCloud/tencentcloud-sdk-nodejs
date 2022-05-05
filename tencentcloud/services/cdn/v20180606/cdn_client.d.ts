@@ -50,7 +50,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomainsConfig(req: DescribeDomainsConfigRequest, cb?: (error: string, rep: DescribeDomainsConfigResponse) => void): Promise<DescribeDomainsConfigResponse>;
     /**
-     * AddCdnDomain 用于新增内容分发网络加速域名。
+     * AddCdnDomain 用于新增内容分发网络加速域名。1分钟内最多可新增100个域名。
      */
     AddCdnDomain(req: AddCdnDomainRequest, cb?: (error: string, rep: AddCdnDomainResponse) => void): Promise<AddCdnDomainResponse>;
     /**

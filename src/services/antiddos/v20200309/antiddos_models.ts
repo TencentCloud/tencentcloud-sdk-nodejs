@@ -250,6 +250,46 @@ pcre(正则表达式)
 }
 
 /**
+ * DescribeOverviewCCTrend请求参数结构体
+ */
+export interface DescribeOverviewCCTrendRequest {
+  /**
+   * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护）
+   */
+  Business: string
+
+  /**
+   * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
+   */
+  Period: number
+
+  /**
+   * 统计开始时间
+   */
+  StartTime: string
+
+  /**
+   * 统计结束时间
+   */
+  EndTime: string
+
+  /**
+   * 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))，incount(请求次数), dropcount(攻击次数)]
+   */
+  MetricName: string
+
+  /**
+   * 资源的IP
+   */
+  IpList?: Array<string>
+
+  /**
+   * 资源实例ID
+   */
+  Id?: string
+}
+
+/**
  * DeleteCCLevelPolicy请求参数结构体
  */
 export interface DeleteCCLevelPolicyRequest {
@@ -1051,23 +1091,33 @@ export interface CreateWaterPrintConfigResponse {
 }
 
 /**
- * ModifyPortAclConfig请求参数结构体
+ * DescribeOverviewAttackTrend请求参数结构体
  */
-export interface ModifyPortAclConfigRequest {
+export interface DescribeOverviewAttackTrendRequest {
   /**
-   * 资源实例ID
+   * 攻击类型，取值ddos， cc
    */
-  InstanceId: string
+  Type: string
 
   /**
-   * 旧端口acl策略
+   * 纬度，当前仅支持attackcount
    */
-  OldAclConfig: AclConfig
+  Dimension: string
 
   /**
-   * 新端口acl策略
+   * 周期，当前仅支持86400
    */
-  NewAclConfig: AclConfig
+  Period: number
+
+  /**
+   * 起始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
 }
 
 /**
@@ -1264,6 +1314,26 @@ hybrid: 宙斯盾本地化
 }
 
 /**
+ * ModifyPortAclConfig请求参数结构体
+ */
+export interface ModifyPortAclConfigRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 旧端口acl策略
+   */
+  OldAclConfig: AclConfig
+
+  /**
+   * 新端口acl策略
+   */
+  NewAclConfig: AclConfig
+}
+
+/**
  * 高防包绑定IP对象
  */
 export interface BoundIpInfo {
@@ -1331,6 +1401,46 @@ export interface ModifyCCReqLimitPolicyRequest {
    * 策略项
    */
   Policy: CCReqLimitPolicyRecord
+}
+
+/**
+ * DescribeOverviewDDoSTrend请求参数结构体
+ */
+export interface DescribeOverviewDDoSTrendRequest {
+  /**
+   * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护）
+   */
+  Business: string
+
+  /**
+   * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
+   */
+  Period: number
+
+  /**
+   * 统计开始时间
+   */
+  StartTime: string
+
+  /**
+   * 统计结束时间
+   */
+  EndTime: string
+
+  /**
+   * 指标，取值[bps(攻击流量带宽，pps(攻击包速率))]
+   */
+  MetricName: string
+
+  /**
+   * 资源实例的IP列表
+   */
+  IpList?: Array<string>
+
+  /**
+   * 资源实例ID
+   */
+  Id?: string
 }
 
 /**
@@ -1437,9 +1547,59 @@ export interface CCLevelPolicy {
 }
 
 /**
- * ModifyCcBlackWhiteIpList返回参数结构体
+ * DescribeOverviewIndex返回参数结构体
  */
-export interface ModifyCcBlackWhiteIpListResponse {
+export interface DescribeOverviewIndexResponse {
+  /**
+   * IP总数
+   */
+  AllIpCount: number
+
+  /**
+   * 高防IP总数（包含高防包+高防IP）
+   */
+  AntiddosIpCount: number
+
+  /**
+   * 攻击IP总数
+   */
+  AttackIpCount: number
+
+  /**
+   * 封堵IP总数
+   */
+  BlockIpCount: number
+
+  /**
+   * 高防域名总数
+   */
+  AntiddosDomainCount: number
+
+  /**
+   * 攻击域名总数
+   */
+  AttackDomainCount: number
+
+  /**
+   * 攻击流量峰值
+   */
+  MaxAttackFlow: number
+
+  /**
+   * 当前最近一条攻击中的起始时间
+   */
+  NewAttackTime: string
+
+  /**
+   * 当前最近一条攻击中的IP
+   */
+  NewAttackIp: string
+
+  /**
+   * 当前最近一条攻击中的攻击类型
+   */
+  NewAttackType: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1593,6 +1753,16 @@ export interface CreateDDoSBlackWhiteIpListResponse {
 }
 
 /**
+ * ModifyCcBlackWhiteIpList返回参数结构体
+ */
+export interface ModifyCcBlackWhiteIpListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 协议封禁相关信息
  */
 export interface ProtocolBlockRelation {
@@ -1630,6 +1800,21 @@ export interface DescribeListPacketFilterConfigRequest {
    * IP搜索
    */
   FilterIp?: string
+}
+
+/**
+ * DescribeOverviewIndex请求参数结构体
+ */
+export interface DescribeOverviewIndexRequest {
+  /**
+   * 拉取指标起始时间
+   */
+  StartTime: string
+
+  /**
+   * 拉取指标结束时间
+   */
+  EndTime: string
 }
 
 /**
@@ -1718,18 +1903,43 @@ export interface CreateCcGeoIPBlockConfigResponse {
 }
 
 /**
- * ModifyDDoSGeoIPBlockConfig请求参数结构体
+ * DescribeOverviewAttackTrend返回参数结构体
  */
-export interface ModifyDDoSGeoIPBlockConfigRequest {
+export interface DescribeOverviewAttackTrendResponse {
   /**
-   * 资源实例ID
+   * 攻击类型
    */
-  InstanceId: string
+  Type: string
 
   /**
-   * DDoS区域封禁配置，填写参数时配置ID不能为空
+   * 起始时间
    */
-  DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 周期
+   */
+  Period: number
+
+  /**
+   * 每个周期点的攻击次数
+   */
+  Data: Array<number>
+
+  /**
+   * 包含的周期点数
+   */
+  Count: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3561,6 +3771,26 @@ export interface PortSegment {
 }
 
 /**
+ * DescribeOverviewCCTrend返回参数结构体
+ */
+export interface DescribeOverviewCCTrendResponse {
+  /**
+   * 值个数
+   */
+  Count: number
+
+  /**
+   * 值数组
+   */
+  Data: Array<number>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCCReqLimitPolicy返回参数结构体
  */
 export interface ModifyCCReqLimitPolicyResponse {
@@ -3933,6 +4163,21 @@ export interface CreateBlackWhiteIpListRequest {
    * IP类型，取值[black(黑名单IP), white(白名单IP)]
    */
   Type: string
+}
+
+/**
+ * ModifyDDoSGeoIPBlockConfig请求参数结构体
+ */
+export interface ModifyDDoSGeoIPBlockConfigRequest {
+  /**
+   * 资源实例ID
+   */
+  InstanceId: string
+
+  /**
+   * DDoS区域封禁配置，填写参数时配置ID不能为空
+   */
+  DDoSGeoIPBlockConfig: DDoSGeoIPBlockConfig
 }
 
 /**
@@ -4825,6 +5070,26 @@ export interface DescribeListWaterPrintConfigResponse {
    * 水印配置列表
    */
   ConfigList: Array<WaterPrintRelation>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeOverviewDDoSTrend返回参数结构体
+ */
+export interface DescribeOverviewDDoSTrendResponse {
+  /**
+   * 值个数
+   */
+  Count: number
+
+  /**
+   * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
+   */
+  Data: Array<number>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

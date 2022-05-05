@@ -386,17 +386,28 @@ export interface QueryOpenBankPaymentOrderRequest {
     Environment?: string;
 }
 /**
- * QueryOutwardOrder请求参数结构体
+ * QueryOpenBankBindExternalSubMerchantBankAccount返回参数结构体
  */
-export interface QueryOutwardOrderRequest {
+export interface QueryOpenBankBindExternalSubMerchantBankAccountResponse {
     /**
-      * 对接方汇出指令编号
+      * 错误码。
+__SUCCESS__: 成功
+__其他__: 见附录-错误码表
       */
-    TransactionId: string;
+    ErrCode: string;
     /**
-      * 接入环境。沙箱环境填sandbox
+      * 错误消息。
       */
-    Profile?: string;
+    ErrMessage: string;
+    /**
+      * 返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryOpenBankBindExternalSubMerchantBankAccountResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UploadOrgFile请求参数结构体
@@ -2824,6 +2835,19 @@ export interface RechargeByThirdPayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryOutwardOrder请求参数结构体
+ */
+export interface QueryOutwardOrderRequest {
+    /**
+      * 对接方汇出指令编号
+      */
+    TransactionId: string;
+    /**
+      * 接入环境。沙箱环境填sandbox
+      */
+    Profile?: string;
 }
 /**
  * ViewMerchant请求参数结构体
@@ -5716,6 +5740,29 @@ _不填默认为生产环境_
     Environment?: string;
 }
 /**
+ * GetDistributeBillDownloadUrl返回参数结构体
+ */
+export interface GetDistributeBillDownloadUrlResponse {
+    /**
+      * 业务系统返回码
+      */
+    ErrCode: string;
+    /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 账单文件下载地址响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: BillDownloadUrlResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ViewContract返回参数结构体
  */
 export interface ViewContractResponse {
@@ -7619,28 +7666,21 @@ export interface UnbindRelateAcctResponse {
     RequestId?: string;
 }
 /**
- * QueryOpenBankBindExternalSubMerchantBankAccount返回参数结构体
+ * GetDistributeBillDownloadUrl请求参数结构体
  */
-export interface QueryOpenBankBindExternalSubMerchantBankAccountResponse {
+export interface GetDistributeBillDownloadUrlRequest {
     /**
-      * 错误码。
-__SUCCESS__: 成功
-__其他__: 见附录-错误码表
+      * 收单系统分配的开放ID
       */
-    ErrCode: string;
+    OpenId: string;
     /**
-      * 错误消息。
+      * 收单系统分配的密钥
       */
-    ErrMessage: string;
+    OpenKey: string;
     /**
-      * 返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 分账日期（YYYYMMDD，今天传昨天的日期）
       */
-    Result: QueryOpenBankBindExternalSubMerchantBankAccountResult;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Day: string;
 }
 /**
  * 代理商完税证明批次信息

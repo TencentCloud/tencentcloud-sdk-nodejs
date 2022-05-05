@@ -226,7 +226,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProVersionInfo", req, cb);
     }
     /**
-     * 专家服务-旗舰护网列表
+     * 专家服务-旗舰重保列表
      */
     async DescribeProtectNetList(req, cb) {
         return this.request("DescribeProtectNetList", req, cb);

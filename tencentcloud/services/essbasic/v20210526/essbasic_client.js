@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowsByTemplates", req, cb);
     }
     /**
-     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，支持客户合同（流程）按照自定义文件夹形式 分类下载。
+     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
 当前接口限制最多合同（流程）50个.
 
      */
@@ -56,7 +56,7 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
 用户通过该接口进入流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
-目前该接口只支持B2C。
+目前该接口只支持B2C，不建议使用。
      */
     async PrepareFlows(req, cb) {
         return this.request("PrepareFlows", req, cb);
@@ -116,7 +116,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncProxyOrganization", req, cb);
     }
     /**
-     * 根据流程信息批量获取资源下载链接
+     * 根据流程信息批量获取资源下载链接，可直接下载
+限制：只能下载合作企业授权过的、单方签署的流程文件（若合作企业与渠道是同一企业，可以下载所有流程文件）
      */
     async DescribeResourceUrlsByFlows(req, cb) {
         return this.request("DescribeResourceUrlsByFlows", req, cb);

@@ -19,11 +19,15 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreatePurgeTaskResponse,
-  Task,
-  DescribePurgeTasksRequest,
-  FailReason,
   CreatePurgeTaskRequest,
+  DescribePurgeTasksRequest,
+  Zone,
+  DescribeZonesRequest,
+  DescribeZonesResponse,
+  FailReason,
+  Task,
   DescribePurgeTasksResponse,
+  ZoneFilter,
 } from "./teo_models"
 
 /**
@@ -53,5 +57,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePurgeTasksResponse) => void
   ): Promise<DescribePurgeTasksResponse> {
     return this.request("DescribePurgeTasks", req, cb)
+  }
+
+  /**
+   * 用户查询用户站点信息列表，支持分页
+   */
+  async DescribeZones(
+    req: DescribeZonesRequest,
+    cb?: (error: string, rep: DescribeZonesResponse) => void
+  ): Promise<DescribeZonesResponse> {
+    return this.request("DescribeZones", req, cb)
   }
 }

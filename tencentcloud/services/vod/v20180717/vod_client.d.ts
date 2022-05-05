@@ -327,7 +327,9 @@ export declare class Client extends AbstractClient {
      */
     ParseStreamingManifest(req: ParseStreamingManifestRequest, cb?: (error: string, rep: ParseStreamingManifestResponse) => void): Promise<ParseStreamingManifestResponse>;
     /**
-     * 对点播中的图片文件发起处理任务，功能包括：
+     * 该 API 已经<font color='red'>不再维护</font>，智能识别任务请使用图片智能识别 [ReviewImage](https://cloud.tencent.com/document/api/266/73217) 接口。
+
+对点播中的图片文件发起处理任务，功能包括：
 
 1. 智能识别（令人反感的信息、不安全的信息、不适宜的信息）;
 

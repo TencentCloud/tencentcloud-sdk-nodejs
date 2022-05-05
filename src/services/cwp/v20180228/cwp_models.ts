@@ -13615,7 +13615,7 @@ export interface ExpertServiceOrderInfo {
   OrderId: number
 
   /**
-   * 订单类型 1应急 2 旗舰护网 3 安全管家
+   * 订单类型 1应急 2 旗舰重保 3 安全管家
    */
   InquireType: number
 

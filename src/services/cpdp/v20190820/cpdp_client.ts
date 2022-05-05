@@ -29,7 +29,7 @@ import {
   QueryOpenBankBankBranchListResponse,
   MigrateOrderRefundQueryResponse,
   QueryOpenBankPaymentOrderRequest,
-  QueryOutwardOrderRequest,
+  QueryOpenBankBindExternalSubMerchantBankAccountResponse,
   UploadOrgFileRequest,
   RefundTlinxOrderResponse,
   QueryMemberTransactionDetailsResult,
@@ -107,6 +107,7 @@ import {
   ApplyReWithdrawalRequest,
   DownloadFileResult,
   RechargeByThirdPayResponse,
+  QueryOutwardOrderRequest,
   ViewMerchantRequest,
   CloseCloudOrderResponse,
   QueryOpenBankPaymentOrderResult,
@@ -176,6 +177,7 @@ import {
   QueryOpenBankExternalSubMerchantBankAccountData,
   DeleteAgentTaxPaymentInfoRequest,
   CreateOpenBankExternalSubMerchantRegistrationRequest,
+  GetDistributeBillDownloadUrlResponse,
   ViewContractResponse,
   CreateOpenBankMerchantRequest,
   QueryOrderOutOrderList,
@@ -237,7 +239,7 @@ import {
   GetBillDownloadUrlRequest,
   CreatePayMerchantResponse,
   UnbindRelateAcctResponse,
-  QueryOpenBankBindExternalSubMerchantBankAccountResponse,
+  GetDistributeBillDownloadUrlRequest,
   AgentTaxPaymentBatch,
   SyncContractDataRequest,
   QueryRefundRequest,
@@ -1795,6 +1797,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryOpenBankDownLoadUrlResponse) => void
   ): Promise<QueryOpenBankDownLoadUrlResponse> {
     return this.request("QueryOpenBankDownLoadUrl", req, cb)
+  }
+
+  /**
+     * 调用该接口返回对账单下载地址，对账单下载URL通过GET方式访问，返回zip包，解压后为csv格式文件。文件首行如下：
+商户号,订单号,支付订单号,分账订单总金额,分账详情（通过|分割每笔明细：商户号1#分账金额1|商户号2#分账金额2）,交易手续费承担方商户号,交易手续费,发起时间,分账状态,结算日期,非交易主体分账金额,商户退款订单号,商户分账单号
+     */
+  async GetDistributeBillDownloadUrl(
+    req: GetDistributeBillDownloadUrlRequest,
+    cb?: (error: string, rep: GetDistributeBillDownloadUrlResponse) => void
+  ): Promise<GetDistributeBillDownloadUrlResponse> {
+    return this.request("GetDistributeBillDownloadUrl", req, cb)
   }
 
   /**

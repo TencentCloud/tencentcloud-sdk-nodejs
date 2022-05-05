@@ -1701,19 +1701,19 @@ export interface ListLogResponse {
     /**
       * 日志上下文
       */
-    Context?: string;
+    Context: string;
     /**
       * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
       */
-    Listover?: boolean;
+    Listover: boolean;
     /**
       * 日志列表
       */
-    Results?: Array<CLSLogItem>;
+    Results: Array<CLSLogItem>;
     /**
       * 日志总条数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1910,15 +1910,15 @@ export interface ListLogPayloadResponse {
     /**
       * 日志上下文
       */
-    Context?: string;
+    Context: string;
     /**
       * 是否还有日志，如有仍有日志，下次查询的请求带上当前请求返回的Context
       */
-    Listover?: boolean;
+    Listover: boolean;
     /**
       * 日志列表
       */
-    Results?: Array<PayloadLogItem>;
+    Results: Array<PayloadLogItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2858,11 +2858,11 @@ export interface DescribeAllDevicesResponse {
  */
 export interface ListLogRequest {
     /**
-      * 日志开始时间
+      * 日志开始时间，毫秒级时间戳
       */
     MinTime: number;
     /**
-      * 日志结束时间
+      * 日志结束时间，毫秒级时间戳
       */
     MaxTime: number;
     /**
@@ -3149,11 +3149,11 @@ export interface CreateTopicRuleResponse {
  */
 export interface ListLogPayloadRequest {
     /**
-      * 日志开始时间
+      * 日志开始时间，毫秒级时间戳
       */
     MinTime: number;
     /**
-      * 日志结束时间
+      * 日志结束时间，毫秒级时间戳
       */
     MaxTime: number;
     /**

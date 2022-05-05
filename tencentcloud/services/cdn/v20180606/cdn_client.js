@@ -90,7 +90,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainsConfig", req, cb);
     }
     /**
-     * AddCdnDomain 用于新增内容分发网络加速域名。
+     * AddCdnDomain 用于新增内容分发网络加速域名。1分钟内最多可新增100个域名。
      */
     async AddCdnDomain(req, cb) {
         return this.request("AddCdnDomain", req, cb);

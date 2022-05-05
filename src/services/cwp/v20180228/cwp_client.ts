@@ -884,7 +884,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专家服务-旗舰护网列表
+   * 专家服务-旗舰重保列表
    */
   async DescribeProtectNetList(
     req: DescribeProtectNetListRequest,

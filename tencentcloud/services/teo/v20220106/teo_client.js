@@ -39,5 +39,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribePurgeTasks(req, cb) {
         return this.request("DescribePurgeTasks", req, cb);
     }
+    /**
+     * 用户查询用户站点信息列表，支持分页
+     */
+    async DescribeZones(req, cb) {
+        return this.request("DescribeZones", req, cb);
+    }
 }
 exports.Client = Client;
