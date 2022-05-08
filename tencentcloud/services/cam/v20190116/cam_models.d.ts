@@ -141,38 +141,17 @@ export interface DeleteUserRequest {
     Force?: number;
 }
 /**
- * GetRolePermissionBoundary返回参数结构体
+ * DetachGroupPolicy请求参数结构体
  */
-export interface GetRolePermissionBoundaryResponse {
+export interface DetachGroupPolicyRequest {
     /**
-      * 策略ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 策略 id
       */
-    PolicyId?: number;
+    PolicyId: number;
     /**
-      * 策略名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 用户组 id
       */
-    PolicyName?: string;
-    /**
-      * 策略语法
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PolicyDocument?: string;
-    /**
-      * 策略类型：1.自定义策略，2.预设策略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PolicyType?: number;
-    /**
-      * 创建方式：1.按产品功能或项目权限创建，2.按策略语法创建，3.按策略生成器创建，4.按标签授权创建，5.按权限边界规则创建
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateMode?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DetachGroupId: number;
 }
 /**
  * DescribeRoleList返回参数结构体
@@ -207,13 +186,9 @@ export interface UpdatePolicyResponse {
     RequestId?: string;
 }
 /**
- * CreatePolicy返回参数结构体
+ * DeleteUser返回参数结构体
  */
-export interface CreatePolicyResponse {
-    /**
-      * 新增策略ID
-      */
-    PolicyId?: number;
+export interface DeleteUserResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -308,6 +283,15 @@ export interface GetUserPermissionBoundaryRequest {
       * 子账号Uin
       */
     TargetUin: number;
+}
+/**
+ * DescribeOIDCConfig请求参数结构体
+ */
+export interface DescribeOIDCConfigRequest {
+    /**
+      * 名称
+      */
+    Name: string;
 }
 /**
  * GetRolePermissionBoundary请求参数结构体
@@ -407,17 +391,13 @@ export interface UpdateRoleDescriptionResponse {
  */
 export declare type GetAccountSummaryRequest = null;
 /**
- * DetachUserPolicy请求参数结构体
+ * DeletePolicy返回参数结构体
  */
-export interface DetachUserPolicyRequest {
+export interface DeletePolicyResponse {
     /**
-      * 策略 id
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PolicyId: number;
-    /**
-      * 子账号 uin
-      */
-    DetachUin: number;
+    RequestId?: string;
 }
 /**
  * GetUserAppId返回参数结构体
@@ -445,17 +425,37 @@ export interface GetUserAppIdResponse {
  */
 export declare type GetUserAppIdRequest = null;
 /**
- * ListGroups返回参数结构体
+ * DescribeOIDCConfig返回参数结构体
  */
-export interface ListGroupsResponse {
+export interface DescribeOIDCConfigResponse {
     /**
-      * 用户组总数。
+      * 身份提供商类型 11角色身份提供商
       */
-    TotalNum?: number;
+    ProviderType: number;
     /**
-      * 用户组数组信息。
+      * 身份提供商URL
       */
-    GroupInfo?: Array<GroupInfo>;
+    IdentityUrl: string;
+    /**
+      * 签名公钥
+      */
+    IdentityKey: string;
+    /**
+      * 客户端id
+      */
+    ClientId: Array<string>;
+    /**
+      * 状态：0:未设置，11:已开启，2:已禁用
+      */
+    Status: number;
+    /**
+      * 描述
+      */
+    Description: string;
+    /**
+      * 名称
+      */
+    Name: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -552,6 +552,19 @@ export interface PolicyVersionItem {
     IsDefaultVersion: number;
 }
 /**
+ * DetachUserPolicy请求参数结构体
+ */
+export interface DetachUserPolicyRequest {
+    /**
+      * 策略 id
+      */
+    PolicyId: number;
+    /**
+      * 子账号 uin
+      */
+    DetachUin: number;
+}
+/**
  * DescribeSubAccounts请求参数结构体
  */
 export interface DescribeSubAccountsRequest {
@@ -600,17 +613,38 @@ export interface DeletePolicyVersionResponse {
     RequestId?: string;
 }
 /**
- * DetachGroupPolicy请求参数结构体
+ * GetRolePermissionBoundary返回参数结构体
  */
-export interface DetachGroupPolicyRequest {
+export interface GetRolePermissionBoundaryResponse {
     /**
-      * 策略 id
+      * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    PolicyId: number;
+    PolicyId?: number;
     /**
-      * 用户组 id
+      * 策略名
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    DetachGroupId: number;
+    PolicyName?: string;
+    /**
+      * 策略语法
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicyDocument?: string;
+    /**
+      * 策略类型：1.自定义策略，2.预设策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicyType?: number;
+    /**
+      * 创建方式：1.按产品功能或项目权限创建，2.按策略语法创建，3.按策略生成器创建，4.按标签授权创建，5.按权限边界规则创建
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateMode?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 用户关联策略(随组关联)信息
@@ -1057,9 +1091,13 @@ export interface GetUserPermissionBoundaryResponse {
     RequestId?: string;
 }
 /**
- * DeleteUser返回参数结构体
+ * CreatePolicy返回参数结构体
  */
-export interface DeleteUserResponse {
+export interface CreatePolicyResponse {
+    /**
+      * 新增策略ID
+      */
+    PolicyId?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1397,26 +1435,9 @@ export interface UpdateRoleConsoleLoginRequest {
     RoleName?: string;
 }
 /**
- * ListCollaborators请求参数结构体
+ * UpdateUser返回参数结构体
  */
-export interface ListCollaboratorsRequest {
-    /**
-      * 分页条数，缺省为20
-      */
-    Limit?: number;
-    /**
-      * 分页起始值，缺省为0
-      */
-    Offset?: number;
-}
-/**
- * GetCustomMFATokenInfo返回参数结构体
- */
-export interface GetCustomMFATokenInfoResponse {
-    /**
-      * 自定义多因子验证Token对应的帐号Id
-      */
-    Uin?: number;
+export interface UpdateUserResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1854,6 +1875,23 @@ export interface ListAttachedUserPoliciesResponse {
     RequestId?: string;
 }
 /**
+ * ListGroups返回参数结构体
+ */
+export interface ListGroupsResponse {
+    /**
+      * 用户组总数。
+      */
+    TotalNum?: number;
+    /**
+      * 用户组数组信息。
+      */
+    GroupInfo?: Array<GroupInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * PutUserPermissionsBoundary返回参数结构体
  */
 export interface PutUserPermissionsBoundaryResponse {
@@ -1863,9 +1901,27 @@ export interface PutUserPermissionsBoundaryResponse {
     RequestId?: string;
 }
 /**
- * DeletePolicy返回参数结构体
+ * GetPolicyVersion返回参数结构体
  */
-export interface DeletePolicyResponse {
+export interface GetPolicyVersionResponse {
+    /**
+      * 策略版本详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicyVersion: PolicyVersionDetail;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetCustomMFATokenInfo返回参数结构体
+ */
+export interface GetCustomMFATokenInfoResponse {
+    /**
+      * 自定义多因子验证Token对应的帐号Id
+      */
+    Uin?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1879,6 +1935,31 @@ export interface ConsumeCustomMFATokenRequest {
       * 自定义多因子验证Token
       */
     MFAToken: string;
+}
+/**
+ * CreateOIDCConfig请求参数结构体
+ */
+export interface CreateOIDCConfigRequest {
+    /**
+      * 身份提供商URL
+      */
+    IdentityUrl: string;
+    /**
+      * 签名公钥，需要base64
+      */
+    IdentityKey: string;
+    /**
+      * 客户端ID
+      */
+    ClientId: Array<string>;
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 描述
+      */
+    Description?: string;
 }
 /**
  * 访问密钥列表
@@ -1931,6 +2012,15 @@ export interface GetGroupResponse {
     RequestId?: string;
 }
 /**
+ * UpdateOIDCConfig返回参数结构体
+ */
+export interface UpdateOIDCConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteSAMLProvider请求参数结构体
  */
 export interface DeleteSAMLProviderRequest {
@@ -1943,15 +2033,6 @@ export interface DeleteSAMLProviderRequest {
  * DeleteSAMLProvider返回参数结构体
  */
 export interface DeleteSAMLProviderResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * UpdateUser返回参数结构体
- */
-export interface UpdateUserResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2008,33 +2089,17 @@ export interface CreateServiceLinkedRoleResponse {
  */
 export declare type ListUsersRequest = null;
 /**
- * GetSAMLProvider返回参数结构体
+ * ListCollaborators请求参数结构体
  */
-export interface GetSAMLProviderResponse {
+export interface ListCollaboratorsRequest {
     /**
-      * SAML身份提供商名称
+      * 分页条数，缺省为20
       */
-    Name: string;
+    Limit?: number;
     /**
-      * SAML身份提供商描述
+      * 分页起始值，缺省为0
       */
-    Description: string;
-    /**
-      * SAML身份提供商创建时间
-      */
-    CreateTime: string;
-    /**
-      * SAML身份提供商上次修改时间
-      */
-    ModifyTime: string;
-    /**
-      * SAML身份提供商元数据文档
-      */
-    SAMLMetadata: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Offset?: number;
 }
 /**
  * CreateUserOIDCConfig请求参数结构体
@@ -2170,6 +2235,55 @@ export interface DetachGroupPolicyResponse {
     RequestId?: string;
 }
 /**
+ * 用户组用户信息
+ */
+export interface GroupMemberInfo {
+    /**
+      * 子用户 Uid。
+      */
+    Uid: number;
+    /**
+      * 子用户 Uin。
+      */
+    Uin: number;
+    /**
+      * 子用户名称。
+      */
+    Name: string;
+    /**
+      * 手机号。
+      */
+    PhoneNum: string;
+    /**
+      * 手机区域代码。
+      */
+    CountryCode: string;
+    /**
+      * 是否已验证手机。0-未验证  1-验证
+      */
+    PhoneFlag: number;
+    /**
+      * 邮箱地址。
+      */
+    Email: string;
+    /**
+      * 是否已验证邮箱。0-未验证  1-验证
+      */
+    EmailFlag: number;
+    /**
+      * 用户类型。1-全局协作者 2-项目协作者 3-消息接收者
+      */
+    UserType: number;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 是否为主消息接收人。0-否 1-是
+      */
+    IsReceiverOwner: number;
+}
+/**
  * CreatePolicy请求参数结构体
  */
 export interface CreatePolicyRequest {
@@ -2272,18 +2386,42 @@ export interface ListGrantServiceAccessNode {
     Policy: Array<ListGrantServiceAccessPolicy>;
 }
 /**
- * GetPolicyVersion返回参数结构体
+ * AttachGroupPolicy请求参数结构体
  */
-export interface GetPolicyVersionResponse {
+export interface AttachGroupPolicyRequest {
     /**
-      * 策略版本详情
-注意：此字段可能返回 null，表示取不到有效值。
+      * 策略 id
       */
-    PolicyVersion: PolicyVersionDetail;
+    PolicyId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用户组 id
       */
-    RequestId?: string;
+    AttachGroupId: number;
+}
+/**
+ * UpdateOIDCConfig请求参数结构体
+ */
+export interface UpdateOIDCConfigRequest {
+    /**
+      * 身份提供商URL
+      */
+    IdentityUrl: string;
+    /**
+      * 签名公钥，需要base64
+      */
+    IdentityKey: string;
+    /**
+      * 客户端ID
+      */
+    ClientId: Array<string>;
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 描述
+      */
+    Description?: string;
 }
 /**
  * CreateRole返回参数结构体
@@ -2300,17 +2438,33 @@ export interface CreateRoleResponse {
     RequestId?: string;
 }
 /**
- * AttachGroupPolicy请求参数结构体
+ * GetSAMLProvider返回参数结构体
  */
-export interface AttachGroupPolicyRequest {
+export interface GetSAMLProviderResponse {
     /**
-      * 策略 id
+      * SAML身份提供商名称
       */
-    PolicyId: number;
+    Name: string;
     /**
-      * 用户组 id
+      * SAML身份提供商描述
       */
-    AttachGroupId: number;
+    Description: string;
+    /**
+      * SAML身份提供商创建时间
+      */
+    CreateTime: string;
+    /**
+      * SAML身份提供商上次修改时间
+      */
+    ModifyTime: string;
+    /**
+      * SAML身份提供商元数据文档
+      */
+    SAMLMetadata: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeSafeAuthFlagIntl返回参数结构体
@@ -2446,6 +2600,15 @@ export interface DetachRolePolicyResponse {
  * DescribeUserOIDCConfig请求参数结构体
  */
 export declare type DescribeUserOIDCConfigRequest = null;
+/**
+ * CreateOIDCConfig返回参数结构体
+ */
+export interface CreateOIDCConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * 角色关联的策略信息
  */
@@ -2669,6 +2832,23 @@ export interface DeleteServiceLinkedRoleResponse {
     RequestId?: string;
 }
 /**
+ * ListUsersForGroup返回参数结构体
+ */
+export interface ListUsersForGroupResponse {
+    /**
+      * 用户组关联的用户总数。
+      */
+    TotalNum?: number;
+    /**
+      * 子用户信息。
+      */
+    UserInfo?: Array<GroupMemberInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GetPolicy返回参数结构体
  */
 export interface GetPolicyResponse {
@@ -2759,17 +2939,9 @@ export interface AttachEntityOfPolicy {
     AttachmentTime: string;
 }
 /**
- * ListUsersForGroup返回参数结构体
+ * DeleteOIDCConfig返回参数结构体
  */
-export interface ListUsersForGroupResponse {
-    /**
-      * 用户组关联的用户总数。
-      */
-    TotalNum?: number;
-    /**
-      * 子用户信息。
-      */
-    UserInfo?: Array<GroupMemberInfo>;
+export interface DeleteOIDCConfigResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3057,53 +3229,13 @@ export interface UpdatePolicyRequest {
     Alias?: string;
 }
 /**
- * 用户组用户信息
+ * DeleteOIDCConfig请求参数结构体
  */
-export interface GroupMemberInfo {
+export interface DeleteOIDCConfigRequest {
     /**
-      * 子用户 Uid。
-      */
-    Uid: number;
-    /**
-      * 子用户 Uin。
-      */
-    Uin: number;
-    /**
-      * 子用户名称。
+      * OIDC身份提供商名称
       */
     Name: string;
-    /**
-      * 手机号。
-      */
-    PhoneNum: string;
-    /**
-      * 手机区域代码。
-      */
-    CountryCode: string;
-    /**
-      * 是否已验证手机。0-未验证  1-验证
-      */
-    PhoneFlag: number;
-    /**
-      * 邮箱地址。
-      */
-    Email: string;
-    /**
-      * 是否已验证邮箱。0-未验证  1-验证
-      */
-    EmailFlag: number;
-    /**
-      * 用户类型。1-全局协作者 2-项目协作者 3-消息接收者
-      */
-    UserType: number;
-    /**
-      * 创建时间。
-      */
-    CreateTime: string;
-    /**
-      * 是否为主消息接收人。0-否 1-是
-      */
-    IsReceiverOwner: number;
 }
 /**
  * CreateGroup返回参数结构体

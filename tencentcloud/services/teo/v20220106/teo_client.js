@@ -40,6 +40,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePurgeTasks", req, cb);
     }
     /**
+     * 创建预热任务
+     */
+    async CreatePrefetchTask(req, cb) {
+        return this.request("CreatePrefetchTask", req, cb);
+    }
+    /**
+     * 查询预热任务状态
+     */
+    async DescribePrefetchTasks(req, cb) {
+        return this.request("DescribePrefetchTasks", req, cb);
+    }
+    /**
      * 用户查询用户站点信息列表，支持分页
      */
     async DescribeZones(req, cb) {

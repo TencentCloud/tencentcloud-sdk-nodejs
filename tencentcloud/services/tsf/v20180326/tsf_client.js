@@ -606,6 +606,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("CreateApiGroup", req, cb);
     }
     /**
+     * 查询数据集列表
+     */
+    async DescribePrograms(req, cb) {
+        return this.request("DescribePrograms", req, cb);
+    }
+    /**
      * 查询简单应用列表
      */
     async DescribeSimpleApplications(req, cb) {

@@ -210,7 +210,7 @@ export interface ModifyBackupStrategyRequest {
   InstanceId: string
 
   /**
-   * 备份类型，当前只支持按天备份，取值为daily
+   * 备份类型，当length(BackupDay) <=7 && length(BackupDay) >=2时，取值为weekly，当length(BackupDay)=1时，取值daily，默认daily
    */
   BackupType?: string
 
@@ -228,6 +228,16 @@ export interface ModifyBackupStrategyRequest {
    * 备份模式，master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
    */
   BackupModel?: string
+
+  /**
+   * BackupType取值为weekly时，表示每周的星期N做备份。（如果数据备份保留时间<7天，则取值[1,2,3,4,5,6,7]。如果数据备份保留时间>=7天，则备份周期取值至少是一周的任意2天）
+   */
+  BackupCycle?: Array<number>
+
+  /**
+   * 数据(日志)备份保留时间，取值[3-1830]天，默认7天
+   */
+  BackupSaveDays?: number
 }
 
 /**
@@ -817,7 +827,7 @@ export interface DescribeReadOnlyGroupListResponse {
   /**
    * 只读组列表
    */
-  ReadOnlyGroupSet?: Array<ReadOnlyGroup>
+  ReadOnlyGroupSet: Array<ReadOnlyGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -903,6 +913,16 @@ export interface DescribeBackupsRequest {
    * 是否分组查询，默认是0，单库备份情况下 0-兼容老方式不分组，1-单库备份分组后展示
    */
   Group?: number
+
+  /**
+   * 备份类型，1-数据备份，2-日志备份，默认值为1
+   */
+  Type?: number
+
+  /**
+   * 按照备份文件形式筛选，pkg-打包备份文件，single-单库备份文件
+   */
+  BackupFormat?: string
 }
 
 /**
@@ -2014,6 +2034,11 @@ export interface DescribeDBInstancesRequest {
    * 实例唯一Uid列表
    */
   UidSet?: Array<string>
+
+  /**
+   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
+   */
+  InstanceType?: string
 }
 
 /**
@@ -3090,6 +3115,11 @@ export interface DescribeBackupFilesRequest {
    * 按照备份的库名称筛选，不填则不筛选此项
    */
   DatabaseName?: string
+
+  /**
+   * 列表项排序，目前只按照备份大小排序（desc-降序，asc-升序），默认desc
+   */
+  OrderBy?: string
 }
 
 /**
@@ -3886,6 +3916,32 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BackupModel: string
+
+  /**
+      * 实例备份信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceNote: string
+
+  /**
+   * 备份周期
+   */
+  BackupCycle: Array<number>
+
+  /**
+   * 备份周期类型，[daily、weekly、monthly]
+   */
+  BackupCycleType: string
+
+  /**
+   * 数据(日志)备份保留时间
+   */
+  BackupSaveDays: number
+
+  /**
+   * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
+   */
+  InstanceType: string
 }
 
 /**
@@ -4331,6 +4387,11 @@ export interface Backup {
    * 聚合Id，对于打包备份文件不返回此值。通过此值调用DescribeBackupFiles接口，获取单库备份文件的详细信息
    */
   GroupId: string
+
+  /**
+   * 备份文件形式（pkg-打包备份文件，single-单库备份文件）
+   */
+  BackupFormat: string
 }
 
 /**

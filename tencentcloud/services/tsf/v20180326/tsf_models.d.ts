@@ -838,6 +838,20 @@ export interface TaskRecordPage {
     Content: Array<TaskRecord>;
 }
 /**
+ * DescribeJvmMonitor返回参数结构体
+ */
+export interface DescribeJvmMonitorResponse {
+    /**
+      * Java实例jvm监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: JvmMonitorData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteServerlessGroup请求参数结构体
  */
 export interface DeleteServerlessGroupRequest {
@@ -2151,6 +2165,23 @@ export interface TaskLastExecuteStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BatchLogId: string;
+}
+/**
+ * DescribePrograms请求参数结构体
+ */
+export interface DescribeProgramsRequest {
+    /**
+      * 模糊查询数据集ID，数据集名称，不传入时查询全量
+      */
+    SearchWord?: string;
+    /**
+      * 每页数量
+      */
+    Limit?: number;
+    /**
+      * 起始偏移量
+      */
+    Offset?: number;
 }
 /**
  * DescribePublicConfig请求参数结构体
@@ -3924,6 +3955,86 @@ export interface ResourceFieldRef {
     Resource?: string;
 }
 /**
+ * tsf-privilege 模块，资源
+ */
+export interface Resource {
+    /**
+      * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId?: string;
+    /**
+      * 资源编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceCode?: string;
+    /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceName?: string;
+    /**
+      * 资源所属产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceCode?: string;
+    /**
+      * 选取资源使用的Action
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceAction?: string;
+    /**
+      * 资源数据查询的ID字段名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdField?: string;
+    /**
+      * 资源数据查询的名称字段名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NameField?: string;
+    /**
+      * 资源数据查询的ID过滤字段名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SelectIdsField?: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime?: number;
+    /**
+      * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastUpdateTime?: number;
+    /**
+      * 删除标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteFlag?: boolean;
+    /**
+      * 资源描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceDesc?: string;
+    /**
+      * 是否可以选择全部
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CanSelectAll?: boolean;
+    /**
+      * 资源数据查询的模糊查询字段名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SearchWordField?: string;
+    /**
+      * 排序
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Index?: number;
+}
+/**
  * DeleteContainerGroup返回参数结构体
  */
 export interface DeleteContainerGroupResponse {
@@ -4755,6 +4866,46 @@ export interface DescribeSimpleClustersRequest {
       * 无
       */
     DisableProgramAuthCheck?: boolean;
+}
+/**
+ * tsf-privilege模块 Program数据集
+ */
+export interface Program {
+    /**
+      * 数据集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramId?: string;
+    /**
+      * 数据集名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramName?: string;
+    /**
+      * 数据集描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramDesc?: string;
+    /**
+      * 删除标识，true: 可以删除; false: 不可删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteFlag?: boolean;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime?: number;
+    /**
+      * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastUpdateTime?: number;
+    /**
+      * 数据项列表，无值时返回空数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramItemList?: Array<ProgramItem>;
 }
 /**
  * API 对象类型描述
@@ -8932,17 +9083,17 @@ export interface VolumeMountInfo {
     ReadOrWrite?: string;
 }
 /**
- * UpdateApiRateLimitRules返回参数结构体
+ * tsf-privilege模块，分页数据集列表
  */
-export interface UpdateApiRateLimitRulesResponse {
+export interface PagedProgram {
     /**
-      * 是否成功
+      * 总条数
       */
-    Result?: boolean;
+    TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 数据集列表
       */
-    RequestId?: string;
+    Content: Array<Program>;
 }
 /**
  * 查询网关API监控明细数据（单元化网关使用详情）
@@ -10084,18 +10235,62 @@ export interface DescribeContainerGroupsRequest {
     NamespaceId?: string;
 }
 /**
- * DescribeJvmMonitor返回参数结构体
+ * DescribePrograms返回参数结构体
  */
-export interface DescribeJvmMonitorResponse {
+export interface DescribeProgramsResponse {
     /**
-      * Java实例jvm监控数据
-注意：此字段可能返回 null，表示取不到有效值。
+      * 数据集列表
       */
-    Result?: JvmMonitorData;
+    Result?: PagedProgram;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * tsf-privilege模块，数据项
+ */
+export interface ProgramItem {
+    /**
+      * 数据项ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramItemId?: string;
+    /**
+      * 资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource?: Resource;
+    /**
+      * 数据值列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ValueList?: Array<string>;
+    /**
+      * 全选标识，true: 全选；false: 非全选
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsAll?: boolean;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime?: number;
+    /**
+      * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastUpdateTime?: number;
+    /**
+      * 删除标识，true: 可删除；false: 不可删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeleteFlag?: boolean;
+    /**
+      * 数据集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramId?: string;
 }
 /**
  * DisableTaskFlow请求参数结构体
@@ -10938,6 +11133,19 @@ export interface DescribeFlowLastBatchStateResponse {
 export interface StopTaskExecuteResponse {
     /**
       * 操作成功 or 失败
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateApiRateLimitRules返回参数结构体
+ */
+export interface UpdateApiRateLimitRulesResponse {
+    /**
+      * 是否成功
       */
     Result?: boolean;
     /**

@@ -21,12 +21,17 @@ import {
   CreatePurgeTaskResponse,
   CreatePurgeTaskRequest,
   DescribePurgeTasksRequest,
+  CreatePrefetchTaskResponse,
   Zone,
+  DescribePrefetchTasksResponse,
   DescribeZonesRequest,
   DescribeZonesResponse,
+  Header,
   FailReason,
   Task,
+  CreatePrefetchTaskRequest,
   DescribePurgeTasksResponse,
+  DescribePrefetchTasksRequest,
   ZoneFilter,
 } from "./teo_models"
 
@@ -57,6 +62,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePurgeTasksResponse) => void
   ): Promise<DescribePurgeTasksResponse> {
     return this.request("DescribePurgeTasks", req, cb)
+  }
+
+  /**
+   * 创建预热任务
+   */
+  async CreatePrefetchTask(
+    req: CreatePrefetchTaskRequest,
+    cb?: (error: string, rep: CreatePrefetchTaskResponse) => void
+  ): Promise<CreatePrefetchTaskResponse> {
+    return this.request("CreatePrefetchTask", req, cb)
+  }
+
+  /**
+   * 查询预热任务状态
+   */
+  async DescribePrefetchTasks(
+    req: DescribePrefetchTasksRequest,
+    cb?: (error: string, rep: DescribePrefetchTasksResponse) => void
+  ): Promise<DescribePrefetchTasksResponse> {
+    return this.request("DescribePrefetchTasks", req, cb)
   }
 
   /**

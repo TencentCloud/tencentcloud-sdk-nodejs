@@ -258,6 +258,16 @@ it("cam.v20190116.UpdateUser", async function () {
     }
 })
 
+it("cam.v20190116.CreateUserOIDCConfig", async function () {
+    try {
+       const data = await client.CreateUserOIDCConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.GetPolicy", async function () {
     try {
        const data = await client.GetPolicy({})
@@ -308,6 +318,16 @@ it("cam.v20190116.DeleteGroup", async function () {
     }
 })
 
+it("cam.v20190116.UpdateOIDCConfig", async function () {
+    try {
+       const data = await client.UpdateOIDCConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.DeleteRole", async function () {
     try {
        const data = await client.DeleteRole({})
@@ -331,6 +351,16 @@ it("cam.v20190116.GetUser", async function () {
 it("cam.v20190116.DeleteUserPermissionsBoundary", async function () {
     try {
        const data = await client.DeleteUserPermissionsBoundary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.DescribeOIDCConfig", async function () {
+    try {
+       const data = await client.DescribeOIDCConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +418,9 @@ it("cam.v20190116.ConsumeCustomMFAToken", async function () {
     }
 })
 
-it("cam.v20190116.GetGroup", async function () {
+it("cam.v20190116.CreateOIDCConfig", async function () {
     try {
-       const data = await client.GetGroup({})
+       const data = await client.CreateOIDCConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,6 +588,16 @@ it("cam.v20190116.UpdateRoleDescription", async function () {
     }
 })
 
+it("cam.v20190116.ListEntitiesForPolicy", async function () {
+    try {
+       const data = await client.ListEntitiesForPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.ListAttachedUserPolicies", async function () {
     try {
        const data = await client.ListAttachedUserPolicies({})
@@ -668,9 +708,9 @@ it("cam.v20190116.AttachUserPolicy", async function () {
     }
 })
 
-it("cam.v20190116.ListEntitiesForPolicy", async function () {
+it("cam.v20190116.GetGroup", async function () {
     try {
-       const data = await client.ListEntitiesForPolicy({})
+       const data = await client.GetGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +718,9 @@ it("cam.v20190116.ListEntitiesForPolicy", async function () {
     }
 })
 
-it("cam.v20190116.CreateUserOIDCConfig", async function () {
+it("cam.v20190116.DeleteOIDCConfig", async function () {
     try {
-       const data = await client.CreateUserOIDCConfig({})
+       const data = await client.DeleteOIDCConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

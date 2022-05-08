@@ -1702,19 +1702,6 @@ export interface DescribePrometheusAgentInstancesRequest {
     ClusterId: string;
 }
 /**
- * ForwardApplicationRequestV3返回参数结构体
- */
-export interface ForwardApplicationRequestV3Response {
-    /**
-      * 请求集群addon后返回的数据
-      */
-    ResponseBody: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * 集群网络相关的参数
  */
 export interface ClusterNetworkSettings {
@@ -2513,17 +2500,17 @@ export interface PrometheusConfigItem {
     TemplateId?: string;
 }
 /**
- * DescribeClusterStatus返回参数结构体
+ * DescribePrometheusTemplates返回参数结构体
  */
-export interface DescribeClusterStatusResponse {
+export interface DescribePrometheusTemplatesResponse {
     /**
-      * 集群状态列表
+      * 模板列表
       */
-    ClusterStatusSet: Array<ClusterStatus>;
+    Templates?: Array<PrometheusTemplate>;
     /**
-      * 集群个数
+      * 总数
       */
-    TotalCount: number;
+    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3743,29 +3730,21 @@ export interface DescribeResourceUsageResponse {
     RequestId?: string;
 }
 /**
- * CreateClusterAsGroup请求参数结构体
+ * DescribeClusterStatus返回参数结构体
  */
-export interface CreateClusterAsGroupRequest {
+export interface DescribeClusterStatusResponse {
     /**
-      * 集群ID
+      * 集群状态列表
       */
-    ClusterId: string;
+    ClusterStatusSet: Array<ClusterStatus>;
     /**
-      * 伸缩组创建透传参数，json化字符串格式，详见[伸缩组创建实例](https://cloud.tencent.com/document/api/377/20440)接口。LaunchConfigurationId由LaunchConfigurePara参数创建，不支持填写
+      * 集群个数
       */
-    AutoScalingGroupPara: string;
+    TotalCount: number;
     /**
-      * 启动配置创建透传参数，json化字符串格式，详见[创建启动配置](https://cloud.tencent.com/document/api/377/20447)接口。另外ImageId参数由于集群维度已经有的ImageId信息，这个字段不需要填写。UserData字段设置通过UserScript设置，这个字段不需要填写。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    LaunchConfigurePara: string;
-    /**
-      * 节点高级配置信息
-      */
-    InstanceAdvancedSettings?: InstanceAdvancedSettings;
-    /**
-      * 节点Label数组
-      */
-    Labels?: Array<Label>;
+    RequestId?: string;
 }
 /**
  * 从镜像仓库拉取镜像的凭据
@@ -4053,17 +4032,9 @@ export interface AcquireClusterAdminRoleRequest {
     ClusterId: string;
 }
 /**
- * CreateClusterAsGroup返回参数结构体
+ * DeletePrometheusTemplate返回参数结构体
  */
-export interface CreateClusterAsGroupResponse {
-    /**
-      * 启动配置ID
-      */
-    LaunchConfigurationId?: string;
-    /**
-      * 伸缩组ID
-      */
-    AutoScalingGroupId?: string;
+export interface DeletePrometheusTemplateResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4134,23 +4105,6 @@ export interface DescribeClusterAuthenticationOptionsResponse {
  * DeleteClusterAsGroups返回参数结构体
  */
 export interface DeleteClusterAsGroupsResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribePrometheusTemplates返回参数结构体
- */
-export interface DescribePrometheusTemplatesResponse {
-    /**
-      * 模板列表
-      */
-    Templates?: Array<PrometheusTemplate>;
-    /**
-      * 总数
-      */
-    Total?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4781,9 +4735,13 @@ export interface GetTkeAppChartListResponse {
     RequestId?: string;
 }
 /**
- * DeletePrometheusTemplate返回参数结构体
+ * ForwardApplicationRequestV3返回参数结构体
  */
-export interface DeletePrometheusTemplateResponse {
+export interface ForwardApplicationRequestV3Response {
+    /**
+      * 请求集群addon后返回的数据
+      */
+    ResponseBody: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

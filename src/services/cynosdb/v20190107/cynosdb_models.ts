@@ -2939,7 +2939,7 @@ export interface ModifyClusterParamRequest {
   ClusterId: string
 
   /**
-   * 修改参数列表
+   * 要修改的参数列表。每一个元素是ParamName、CurrentValue和OldValue的组合。ParamName是参数名称，CurrentValue是当前值，OldValue是之前值
    */
   ParamList: Array<ParamItem>
 

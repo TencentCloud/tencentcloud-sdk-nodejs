@@ -89,6 +89,24 @@ export interface DescribePurgeTasksRequest {
     Target?: string;
 }
 /**
+ * CreatePrefetchTask返回参数结构体
+ */
+export interface CreatePrefetchTaskResponse {
+    /**
+      * 任务ID
+      */
+    JobId: string;
+    /**
+      * 失败的任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedList: Array<FailReason>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 站点信息
  */
 export interface Zone {
@@ -136,6 +154,23 @@ export interface Zone {
     ModifiedOn: string;
 }
 /**
+ * DescribePrefetchTasks返回参数结构体
+ */
+export interface DescribePrefetchTasksResponse {
+    /**
+      * 该查询条件总共条目数
+      */
+    TotalCount: number;
+    /**
+      * 任务结果列表
+      */
+    Tasks: Array<Task>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeZones请求参数结构体
  */
 export interface DescribeZonesRequest {
@@ -169,6 +204,19 @@ export interface DescribeZonesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 刷新预热附带的头部信息
+ */
+export interface Header {
+    /**
+      * HTTP头部
+      */
+    Name: string;
+    /**
+      * HTTP头部值
+      */
+    Value: string;
 }
 /**
  * 失败原因
@@ -213,6 +261,27 @@ export interface Task {
     UpdateTime: string;
 }
 /**
+ * CreatePrefetchTask请求参数结构体
+ */
+export interface CreatePrefetchTaskRequest {
+    /**
+      * Zone ID
+      */
+    ZoneId: string;
+    /**
+      * 预热的资源列表
+      */
+    Targets?: Array<string>;
+    /**
+      * 是否对url进行encode
+      */
+    EncodeUrl?: boolean;
+    /**
+      * 附带的http头部信息
+      */
+    Headers?: Array<Header>;
+}
+/**
  * DescribePurgeTasks返回参数结构体
  */
 export interface DescribePurgeTasksResponse {
@@ -228,6 +297,48 @@ export interface DescribePurgeTasksResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribePrefetchTasks请求参数结构体
+ */
+export interface DescribePrefetchTasksRequest {
+    /**
+      * 任务ID
+      */
+    JobId?: string;
+    /**
+      * 查询起始时间
+      */
+    StartTime?: string;
+    /**
+      * 查询结束时间
+      */
+    EndTime?: string;
+    /**
+      * 查询起始偏移量
+      */
+    Offset?: number;
+    /**
+      * 查询最大返回的结果条数
+      */
+    Limit?: number;
+    /**
+      * 查询的状态
+允许的值为：processing、success、failed、timeout、invalid
+      */
+    Statuses?: Array<string>;
+    /**
+      * zone id
+      */
+    ZoneId?: string;
+    /**
+      * 查询的域名列表
+      */
+    Domains?: Array<string>;
+    /**
+      * 查询的资源
+      */
+    Target?: string;
 }
 /**
  * 站点查询过滤条件

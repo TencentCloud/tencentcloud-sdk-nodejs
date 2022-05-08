@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateUser", req, cb);
     }
     /**
+     * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+     */
+    async CreateUserOIDCConfig(req, cb) {
+        return this.request("CreateUserOIDCConfig", req, cb);
+    }
+    /**
      * 本接口（GetPolicy）可用于查询查看策略详情。
      */
     async GetPolicy(req, cb) {
@@ -202,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteGroup", req, cb);
     }
     /**
+     * 修改角色OIDC配置
+     */
+    async UpdateOIDCConfig(req, cb) {
+        return this.request("UpdateOIDCConfig", req, cb);
+    }
+    /**
      * 本接口（DeleteRole）用于删除指定角色。
      */
     async DeleteRole(req, cb) {
@@ -218,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteUserPermissionsBoundary(req, cb) {
         return this.request("DeleteUserPermissionsBoundary", req, cb);
+    }
+    /**
+     * 查询角色OIDC配置
+     */
+    async DescribeOIDCConfig(req, cb) {
+        return this.request("DescribeOIDCConfig", req, cb);
     }
     /**
      * 本接口（ListAttachedGroupPolicies）可用于查询用户组关联的策略列表。
@@ -250,10 +268,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ConsumeCustomMFAToken", req, cb);
     }
     /**
-     * 查询用户组详情
+     * 创建角色OIDC配置
      */
-    async GetGroup(req, cb) {
-        return this.request("GetGroup", req, cb);
+    async CreateOIDCConfig(req, cb) {
+        return this.request("CreateOIDCConfig", req, cb);
     }
     /**
      * 该接口（GetPolicyVersion）用于查询策略版本详情
@@ -352,6 +370,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateRoleDescription", req, cb);
     }
     /**
+     * 本接口（ListEntitiesForPolicy）可用于查询策略关联的实体列表。
+     */
+    async ListEntitiesForPolicy(req, cb) {
+        return this.request("ListEntitiesForPolicy", req, cb);
+    }
+    /**
      * 本接口（ListAttachedUserPolicies）可用于查询子账号关联的策略列表。
      */
     async ListAttachedUserPolicies(req, cb) {
@@ -418,16 +442,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachUserPolicy", req, cb);
     }
     /**
-     * 本接口（ListEntitiesForPolicy）可用于查询策略关联的实体列表。
+     * 查询用户组详情
      */
-    async ListEntitiesForPolicy(req, cb) {
-        return this.request("ListEntitiesForPolicy", req, cb);
+    async GetGroup(req, cb) {
+        return this.request("GetGroup", req, cb);
     }
     /**
-     * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+     * 删除OIDC身份提供商
      */
-    async CreateUserOIDCConfig(req, cb) {
-        return this.request("CreateUserOIDCConfig", req, cb);
+    async DeleteOIDCConfig(req, cb) {
+        return this.request("DeleteOIDCConfig", req, cb);
     }
     /**
      * 获取企业微信子用户列表

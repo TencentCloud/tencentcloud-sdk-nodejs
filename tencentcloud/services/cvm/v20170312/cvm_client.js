@@ -517,6 +517,12 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("ModifyInstancesProject", req, cb);
     }
     /**
+     * 提供导出自定义镜像到指定COS存储桶的能力
+     */
+    async ExportImages(req, cb) {
+        return this.request("ExportImages", req, cb);
+    }
+    /**
      * 本接口 (ResetInstance) 用于重装指定实例上的操作系统。
 
 * 如果指定了`ImageId`参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。

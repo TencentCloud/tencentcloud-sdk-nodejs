@@ -27,7 +27,7 @@ export interface CreateDBInstancesRequest {
       */
     ProjectId?: number;
     /**
-      * PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。
+      * PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBMajorVersion、DBKernelVersion至少需要传递一个。
       */
     DBVersion?: string;
     /**
@@ -75,11 +75,11 @@ export interface CreateDBInstancesRequest {
       */
     SecurityGroupIds?: Array<string>;
     /**
-      * PostgreSQL主要版本。目前支持10，11，12，13这几个版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。
+      * PostgreSQL主要版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBVersion、DBKernelVersion至少需要传递一个。
       */
     DBMajorVersion?: string;
     /**
-      * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例。
+      * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例。该参数和DBVersion、DBMajorVersion至少需要传递一个。
       */
     DBKernelVersion?: string;
 }
@@ -728,15 +728,15 @@ export interface ModifyDBInstanceDeploymentRequest {
       */
     DBNodeSet: Array<DBNode>;
     /**
-      * 切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。
+      * 切换时间。默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。2：维护时间窗口内切换
       */
     SwitchTag: number;
     /**
-      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。
+      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
       */
     SwitchStartTime?: string;
     /**
-      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。
+      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。
       */
     SwitchEndTime?: string;
 }
@@ -1229,15 +1229,15 @@ export interface ModifyDBInstanceSpecRequest {
       */
     ActivityId?: number;
     /**
-      * 指定实例配置完成变更后的切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。
+      * 指定实例配置完成变更后的切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。2：维护时间窗口内切换。
       */
     SwitchTag?: number;
     /**
-      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。
+      * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
       */
     SwitchStartTime?: string;
     /**
-      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。
+      * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。
       */
     SwitchEndTime?: string;
 }

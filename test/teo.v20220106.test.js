@@ -38,6 +38,26 @@ it("teo.v20220106.DescribePurgeTasks", async function () {
     }
 })
 
+it("teo.v20220106.CreatePrefetchTask", async function () {
+    try {
+       const data = await client.CreatePrefetchTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220106.DescribePrefetchTasks", async function () {
+    try {
+       const data = await client.DescribePrefetchTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.DescribeZones", async function () {
     try {
        const data = await client.DescribeZones({})

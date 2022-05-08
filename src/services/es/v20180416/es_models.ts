@@ -457,12 +457,12 @@ export interface UpdateDictionariesRequest {
   QQDict?: Array<string>
 
   /**
-   * 0：安装；1：删除
+   * 0：安装；1：删除。默认值0
    */
   UpdateType?: number
 
   /**
-   * 是否强制重启集群
+   * 是否强制重启集群。默认值false
    */
   ForceRestart?: boolean
 }
@@ -850,7 +850,7 @@ export interface InstanceInfo {
   ChargePeriod: number
 
   /**
-   * 自动续费标识。取值范围：  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费  NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费  DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费  默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   * 自动续费标识。取值范围：RENEW_FLAG_AUTO：自动续费  RENEW_FLAG_MANUAL：不自动续费  默认取值：RENEW_FLAG_DEFAULT：不自动续费。若该参数指定为RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
   RenewFlag: string
 
@@ -1644,12 +1644,12 @@ export interface UpdatePluginsRequest {
   RemovePluginList?: Array<string>
 
   /**
-   * 是否强制重启
+   * 是否强制重启，默认值false
    */
   ForceRestart?: boolean
 
   /**
-   * 是否重新安装
+   * 是否重新安装，默认值false
    */
   ForceUpdate?: boolean
 

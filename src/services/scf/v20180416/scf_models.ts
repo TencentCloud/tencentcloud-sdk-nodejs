@@ -3497,10 +3497,16 @@ export interface NamespaceUsage {
   TotalConcurrencyMem: number
 
   /**
-      * 命名空间配额使用量
+      * 命名空间并发使用量
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalAllocatedConcurrencyMem: number
+
+  /**
+      * 命名空间预置使用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalAllocatedProvisionedMem: number
 }
 
 /**

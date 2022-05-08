@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ListAttachedRolePoliciesResponse, UpdateUserOIDCConfigResponse, ListAccessKeysRequest, SetMfaFlagResponse, UpdateSAMLProviderRequest, DeleteUserRequest, GetRolePermissionBoundaryResponse, DescribeRoleListResponse, UpdatePolicyResponse, CreatePolicyResponse, GetRoleRequest, CreateServiceLinkedRoleRequest, ListAttachedGroupPoliciesRequest, ListGroupsForUserRequest, AttachRolePolicyResponse, GetUserPermissionBoundaryRequest, GetRolePermissionBoundaryRequest, GetServiceLinkedRoleDeletionStatusResponse, GetSecurityLastUsedRequest, DescribeUserSAMLConfigResponse, DeleteUserPermissionsBoundaryResponse, ListUsersResponse, UpdateRoleDescriptionResponse, GetAccountSummaryRequest, DetachUserPolicyRequest, GetUserAppIdResponse, GetUserAppIdRequest, ListGroupsResponse, ListPolicyVersionsRequest, GetCustomMFATokenInfoRequest, DescribeRoleListRequest, DescribeUserSAMLConfigRequest, PutRolePermissionsBoundaryRequest, GetGroupRequest, DeleteRoleResponse, DescribeSubAccountsRequest, DeleteUserPermissionsBoundaryRequest, ListSAMLProvidersRequest, ListGroupsRequest, DeletePolicyVersionResponse, DetachGroupPolicyRequest, ListGroupsForUserResponse, ListUsersForGroupRequest, RemoveUserFromGroupRequest, CreatePolicyVersionResponse, ListPoliciesResponse, UpdateRoleDescriptionRequest, UpdateUserSAMLConfigRequest, DeleteGroupResponse, DescribeSafeAuthFlagResponse, CreatePolicyVersionRequest, CreateUserOIDCConfigResponse, ListAttachedUserAllPoliciesResponse, DeleteGroupRequest, GetUserResponse, GetUserPermissionBoundaryResponse, DeleteUserResponse, DetachRolePolicyRequest, ListPoliciesGrantingServiceAccessResponse, DeleteRolePermissionsBoundaryRequest, DescribeUserOIDCConfigResponse, DeletePolicyRequest, AddUserRequest, UpdateAssumeRolePolicyRequest, DeleteRoleRequest, ListWeChatWorkSubAccountsRequest, UpdateRoleConsoleLoginRequest, ListCollaboratorsRequest, GetCustomMFATokenInfoResponse, UpdateAssumeRolePolicyResponse, GetPolicyVersionRequest, CreateSAMLProviderResponse, DeleteRolePermissionsBoundaryResponse, GetUserRequest, CreateGroupRequest, DisableUserSSORequest, ListPoliciesGrantingServiceAccessRequest, UpdateSAMLProviderResponse, UpdateUserRequest, ListWeChatWorkSubAccountsResponse, CreateSAMLProviderRequest, DisableUserSSOResponse, UpdateRoleConsoleLoginResponse, AttachRolePolicyRequest, ConsumeCustomMFATokenResponse, AttachUserPolicyRequest, ListAttachedGroupPoliciesResponse, ListAttachedUserPoliciesResponse, PutUserPermissionsBoundaryResponse, DeletePolicyResponse, ConsumeCustomMFATokenRequest, GetGroupResponse, DeleteSAMLProviderRequest, DeleteSAMLProviderResponse, UpdateUserResponse, GetAccountSummaryResponse, CreateServiceLinkedRoleResponse, ListUsersRequest, GetSAMLProviderResponse, CreateUserOIDCConfigRequest, AttachGroupPolicyResponse, UpdateGroupResponse, ListEntitiesForPolicyRequest, ListPoliciesRequest, GetServiceLinkedRoleDeletionStatusRequest, DetachGroupPolicyResponse, CreatePolicyRequest, ListAttachedUserAllPoliciesRequest, DeletePolicyVersionRequest, CreateUserSAMLConfigRequest, UpdateGroupRequest, GetPolicyVersionResponse, CreateRoleResponse, AttachGroupPolicyRequest, DescribeSafeAuthFlagIntlResponse, ListPolicyVersionsResponse, GetPolicyRequest, DescribeSafeAuthFlagIntlRequest, SetDefaultPolicyVersionRequest, UpdateUserOIDCConfigRequest, AddUserToGroupRequest, RemoveUserFromGroupResponse, DetachRolePolicyResponse, DescribeUserOIDCConfigRequest, PutUserPermissionsBoundaryRequest, ListSAMLProvidersResponse, SetDefaultPolicyVersionResponse, ListAttachedRolePoliciesRequest, GetSAMLProviderRequest, DetachUserPolicyResponse, GetRoleResponse, CreateRoleRequest, DeleteServiceLinkedRoleResponse, GetPolicyResponse, DescribeSafeAuthFlagRequest, DeleteServiceLinkedRoleRequest, ListUsersForGroupResponse, AddUserResponse, CreateUserSAMLConfigResponse, DescribeSubAccountsResponse, ListEntitiesForPolicyResponse, AddUserToGroupResponse, UpdateUserSAMLConfigResponse, AttachUserPolicyResponse, DescribeSafeAuthFlagCollResponse, DescribeSafeAuthFlagCollRequest, PutRolePermissionsBoundaryResponse, SetMfaFlagRequest, ListCollaboratorsResponse, ListAccessKeysResponse, GetSecurityLastUsedResponse, ListAttachedUserPoliciesRequest, UpdatePolicyRequest, CreateGroupResponse } from "./cam_models";
+import { ListAttachedRolePoliciesResponse, UpdateUserOIDCConfigResponse, ListAccessKeysRequest, SetMfaFlagResponse, UpdateSAMLProviderRequest, DeleteUserRequest, DetachGroupPolicyRequest, DescribeRoleListResponse, UpdatePolicyResponse, DeleteUserResponse, GetRoleRequest, CreateServiceLinkedRoleRequest, ListAttachedGroupPoliciesRequest, ListGroupsForUserRequest, AttachRolePolicyResponse, GetUserPermissionBoundaryRequest, DescribeOIDCConfigRequest, GetRolePermissionBoundaryRequest, GetServiceLinkedRoleDeletionStatusResponse, GetSecurityLastUsedRequest, DescribeUserSAMLConfigResponse, DeleteUserPermissionsBoundaryResponse, ListUsersResponse, UpdateRoleDescriptionResponse, GetAccountSummaryRequest, DeletePolicyResponse, GetUserAppIdResponse, GetUserAppIdRequest, DescribeOIDCConfigResponse, ListPolicyVersionsRequest, GetCustomMFATokenInfoRequest, DescribeRoleListRequest, DescribeUserSAMLConfigRequest, PutRolePermissionsBoundaryRequest, GetGroupRequest, DeleteRoleResponse, DetachUserPolicyRequest, DescribeSubAccountsRequest, DeleteUserPermissionsBoundaryRequest, ListSAMLProvidersRequest, ListGroupsRequest, DeletePolicyVersionResponse, GetRolePermissionBoundaryResponse, ListGroupsForUserResponse, ListUsersForGroupRequest, RemoveUserFromGroupRequest, CreatePolicyVersionResponse, ListPoliciesResponse, UpdateRoleDescriptionRequest, UpdateUserSAMLConfigRequest, DeleteGroupResponse, DescribeSafeAuthFlagResponse, CreatePolicyVersionRequest, CreateUserOIDCConfigResponse, ListAttachedUserAllPoliciesResponse, DeleteGroupRequest, GetUserResponse, GetUserPermissionBoundaryResponse, CreatePolicyResponse, DetachRolePolicyRequest, ListPoliciesGrantingServiceAccessResponse, DeleteRolePermissionsBoundaryRequest, DescribeUserOIDCConfigResponse, DeletePolicyRequest, AddUserRequest, UpdateAssumeRolePolicyRequest, DeleteRoleRequest, ListWeChatWorkSubAccountsRequest, UpdateRoleConsoleLoginRequest, UpdateUserResponse, UpdateAssumeRolePolicyResponse, GetPolicyVersionRequest, CreateSAMLProviderResponse, DeleteRolePermissionsBoundaryResponse, GetUserRequest, CreateGroupRequest, DisableUserSSORequest, ListPoliciesGrantingServiceAccessRequest, UpdateSAMLProviderResponse, UpdateUserRequest, ListWeChatWorkSubAccountsResponse, CreateSAMLProviderRequest, DisableUserSSOResponse, UpdateRoleConsoleLoginResponse, AttachRolePolicyRequest, ConsumeCustomMFATokenResponse, AttachUserPolicyRequest, ListAttachedGroupPoliciesResponse, ListAttachedUserPoliciesResponse, ListGroupsResponse, PutUserPermissionsBoundaryResponse, GetPolicyVersionResponse, GetCustomMFATokenInfoResponse, ConsumeCustomMFATokenRequest, CreateOIDCConfigRequest, GetGroupResponse, UpdateOIDCConfigResponse, DeleteSAMLProviderRequest, DeleteSAMLProviderResponse, GetAccountSummaryResponse, CreateServiceLinkedRoleResponse, ListUsersRequest, ListCollaboratorsRequest, CreateUserOIDCConfigRequest, AttachGroupPolicyResponse, UpdateGroupResponse, ListEntitiesForPolicyRequest, ListPoliciesRequest, GetServiceLinkedRoleDeletionStatusRequest, DetachGroupPolicyResponse, CreatePolicyRequest, ListAttachedUserAllPoliciesRequest, DeletePolicyVersionRequest, CreateUserSAMLConfigRequest, UpdateGroupRequest, AttachGroupPolicyRequest, UpdateOIDCConfigRequest, CreateRoleResponse, GetSAMLProviderResponse, DescribeSafeAuthFlagIntlResponse, ListPolicyVersionsResponse, GetPolicyRequest, DescribeSafeAuthFlagIntlRequest, SetDefaultPolicyVersionRequest, UpdateUserOIDCConfigRequest, AddUserToGroupRequest, RemoveUserFromGroupResponse, DetachRolePolicyResponse, DescribeUserOIDCConfigRequest, CreateOIDCConfigResponse, PutUserPermissionsBoundaryRequest, ListSAMLProvidersResponse, SetDefaultPolicyVersionResponse, ListAttachedRolePoliciesRequest, GetSAMLProviderRequest, DetachUserPolicyResponse, GetRoleResponse, CreateRoleRequest, DeleteServiceLinkedRoleResponse, ListUsersForGroupResponse, GetPolicyResponse, DescribeSafeAuthFlagRequest, DeleteServiceLinkedRoleRequest, DeleteOIDCConfigResponse, AddUserResponse, CreateUserSAMLConfigResponse, DescribeSubAccountsResponse, ListEntitiesForPolicyResponse, AddUserToGroupResponse, UpdateUserSAMLConfigResponse, AttachUserPolicyResponse, DescribeSafeAuthFlagCollResponse, DescribeSafeAuthFlagCollRequest, PutRolePermissionsBoundaryResponse, SetMfaFlagRequest, ListCollaboratorsResponse, ListAccessKeysResponse, GetSecurityLastUsedResponse, ListAttachedUserPoliciesRequest, UpdatePolicyRequest, DeleteOIDCConfigRequest, CreateGroupResponse } from "./cam_models";
 /**
  * cam client
  * @class
@@ -104,6 +104,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateUser(req: UpdateUserRequest, cb?: (error: string, rep: UpdateUserResponse) => void): Promise<UpdateUserResponse>;
     /**
+     * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+     */
+    CreateUserOIDCConfig(req: CreateUserOIDCConfigRequest, cb?: (error: string, rep: CreateUserOIDCConfigResponse) => void): Promise<CreateUserOIDCConfigResponse>;
+    /**
      * 本接口（GetPolicy）可用于查询查看策略详情。
      */
     GetPolicy(req: GetPolicyRequest, cb?: (error: string, rep: GetPolicyResponse) => void): Promise<GetPolicyResponse>;
@@ -124,6 +128,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteGroup(req: DeleteGroupRequest, cb?: (error: string, rep: DeleteGroupResponse) => void): Promise<DeleteGroupResponse>;
     /**
+     * 修改角色OIDC配置
+     */
+    UpdateOIDCConfig(req: UpdateOIDCConfigRequest, cb?: (error: string, rep: UpdateOIDCConfigResponse) => void): Promise<UpdateOIDCConfigResponse>;
+    /**
      * 本接口（DeleteRole）用于删除指定角色。
      */
     DeleteRole(req: DeleteRoleRequest, cb?: (error: string, rep: DeleteRoleResponse) => void): Promise<DeleteRoleResponse>;
@@ -135,6 +143,10 @@ export declare class Client extends AbstractClient {
      * 删除用户权限边界
      */
     DeleteUserPermissionsBoundary(req: DeleteUserPermissionsBoundaryRequest, cb?: (error: string, rep: DeleteUserPermissionsBoundaryResponse) => void): Promise<DeleteUserPermissionsBoundaryResponse>;
+    /**
+     * 查询角色OIDC配置
+     */
+    DescribeOIDCConfig(req: DescribeOIDCConfigRequest, cb?: (error: string, rep: DescribeOIDCConfigResponse) => void): Promise<DescribeOIDCConfigResponse>;
     /**
      * 本接口（ListAttachedGroupPolicies）可用于查询用户组关联的策略列表。
      */
@@ -156,9 +168,9 @@ export declare class Client extends AbstractClient {
      */
     ConsumeCustomMFAToken(req: ConsumeCustomMFATokenRequest, cb?: (error: string, rep: ConsumeCustomMFATokenResponse) => void): Promise<ConsumeCustomMFATokenResponse>;
     /**
-     * 查询用户组详情
+     * 创建角色OIDC配置
      */
-    GetGroup(req: GetGroupRequest, cb?: (error: string, rep: GetGroupResponse) => void): Promise<GetGroupResponse>;
+    CreateOIDCConfig(req: CreateOIDCConfigRequest, cb?: (error: string, rep: CreateOIDCConfigResponse) => void): Promise<CreateOIDCConfigResponse>;
     /**
      * 该接口（GetPolicyVersion）用于查询策略版本详情
      */
@@ -224,6 +236,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateRoleDescription(req: UpdateRoleDescriptionRequest, cb?: (error: string, rep: UpdateRoleDescriptionResponse) => void): Promise<UpdateRoleDescriptionResponse>;
     /**
+     * 本接口（ListEntitiesForPolicy）可用于查询策略关联的实体列表。
+     */
+    ListEntitiesForPolicy(req: ListEntitiesForPolicyRequest, cb?: (error: string, rep: ListEntitiesForPolicyResponse) => void): Promise<ListEntitiesForPolicyResponse>;
+    /**
      * 本接口（ListAttachedUserPolicies）可用于查询子账号关联的策略列表。
      */
     ListAttachedUserPolicies(req: ListAttachedUserPoliciesRequest, cb?: (error: string, rep: ListAttachedUserPoliciesResponse) => void): Promise<ListAttachedUserPoliciesResponse>;
@@ -268,13 +284,13 @@ export declare class Client extends AbstractClient {
      */
     AttachUserPolicy(req: AttachUserPolicyRequest, cb?: (error: string, rep: AttachUserPolicyResponse) => void): Promise<AttachUserPolicyResponse>;
     /**
-     * 本接口（ListEntitiesForPolicy）可用于查询策略关联的实体列表。
+     * 查询用户组详情
      */
-    ListEntitiesForPolicy(req: ListEntitiesForPolicyRequest, cb?: (error: string, rep: ListEntitiesForPolicyResponse) => void): Promise<ListEntitiesForPolicyResponse>;
+    GetGroup(req: GetGroupRequest, cb?: (error: string, rep: GetGroupResponse) => void): Promise<GetGroupResponse>;
     /**
-     * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
+     * 删除OIDC身份提供商
      */
-    CreateUserOIDCConfig(req: CreateUserOIDCConfigRequest, cb?: (error: string, rep: CreateUserOIDCConfigResponse) => void): Promise<CreateUserOIDCConfigResponse>;
+    DeleteOIDCConfig(req: DeleteOIDCConfigRequest, cb?: (error: string, rep: DeleteOIDCConfigResponse) => void): Promise<DeleteOIDCConfigResponse>;
     /**
      * 获取企业微信子用户列表
      */

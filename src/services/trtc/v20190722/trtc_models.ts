@@ -1485,7 +1485,7 @@ export interface DescribeRecordStatisticResponse {
   /**
    * 应用的用量信息数组。
    */
-  SdkAppIdUsages?: Array<SdkAppIdRecordUsage>
+  SdkAppIdUsages: Array<SdkAppIdRecordUsage>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

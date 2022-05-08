@@ -54,6 +54,7 @@ import {
   DescribeRegionsResponse,
   PurchaseReservedInstancesOfferingRequest,
   RebootInstancesRequest,
+  InstanceTypeConfigStatus,
   AssociateInstancesKeyPairsRequest,
   DeleteLaunchTemplateResponse,
   ImportKeyPairResponse,
@@ -91,6 +92,7 @@ import {
   Tag,
   ProgramFpgaImageResponse,
   DescribeInstanceInternetBandwidthConfigsResponse,
+  RunSecurityServiceEnabled,
   Placement,
   DescribeDisasterRecoverGroupsRequest,
   ModifyKeyPairAttributeResponse,
@@ -136,7 +138,7 @@ import {
   ReservedInstanceFamilyItem,
   ImageQuota,
   DescribeDisasterRecoverGroupsResponse,
-  RunSecurityServiceEnabled,
+  ExportImagesRequest,
   ActionTimer,
   ModifyInstanceDiskTypeResponse,
   CreateLaunchTemplateRequest,
@@ -176,7 +178,7 @@ import {
   InquiryPriceTerminateInstancesRequest,
   ImageOsList,
   ReservedInstanceTypeItem,
-  InstanceTypeConfigStatus,
+  ExportImagesResponse,
   InquiryPriceRunInstancesResponse,
   DescribeHostsRequest,
   DescribeAccountQuotaRequest,
@@ -961,6 +963,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: ModifyInstancesProjectResponse) => void
   ): Promise<ModifyInstancesProjectResponse> {
     return this.request("ModifyInstancesProject", req, cb)
+  }
+
+  /**
+   * 提供导出自定义镜像到指定COS存储桶的能力
+   */
+  async ExportImages(
+    req: ExportImagesRequest,
+    cb?: (error: string, rep: ExportImagesResponse) => void
+  ): Promise<ExportImagesResponse> {
+    return this.request("ExportImages", req, cb)
   }
 
   /**

@@ -9033,6 +9033,46 @@ export interface DescribeClusterDetailResponse {
   TaskCreateTime: string
 
   /**
+   * 网络类型.PublicNetwork为公网类型,VPCNetwork为VPC网络
+   */
+  NetworkType: string
+
+  /**
+   * API Server地址
+   */
+  ApiServerAddress: string
+
+  /**
+   * 节点数
+   */
+  NodeCount: number
+
+  /**
+   * 命名空间数
+   */
+  NamespaceCount: number
+
+  /**
+   * 工作负载数
+   */
+  WorkloadCount: number
+
+  /**
+   * Pod数量
+   */
+  PodCount: number
+
+  /**
+   * Service数量
+   */
+  ServiceCount: number
+
+  /**
+   * Ingress数量
+   */
+  IngressCount: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

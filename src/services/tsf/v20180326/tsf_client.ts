@@ -61,6 +61,7 @@ import {
   TsfPageConfig,
   CreateApiRateLimitRuleRequest,
   TaskRecordPage,
+  DescribeJvmMonitorResponse,
   DeleteServerlessGroupRequest,
   ChangeApiUsableStatusRequest,
   DescribeMicroservicesResponse,
@@ -118,6 +119,7 @@ import {
   DescribeContainerGroupDeployInfoResponse,
   DescribeOverviewInvocationRequest,
   TaskLastExecuteStatus,
+  DescribeProgramsRequest,
   DescribePublicConfigRequest,
   ImageRepository,
   DescribeInovcationIndicatorsRequest,
@@ -187,6 +189,7 @@ import {
   DescribeGroupResponse,
   Env,
   ResourceFieldRef,
+  Resource,
   DeleteContainerGroupResponse,
   DeleteServerlessGroupResponse,
   DeleteImageTagsResponse,
@@ -222,6 +225,7 @@ import {
   DescribeUnitNamespacesResponse,
   ContinueRunFailedTaskBatchResponse,
   DescribeSimpleClustersRequest,
+  Program,
   ApiDefinitionDescr,
   DescribeLaneRulesResponse,
   DescribeImageRepositoryRequest,
@@ -396,7 +400,7 @@ import {
   ChangeApiUsableStatusResponse,
   EnableTaskResponse,
   VolumeMountInfo,
-  UpdateApiRateLimitRulesResponse,
+  PagedProgram,
   GroupUnitApiUseStatistics,
   DescribeGroupInstancesResponse,
   DescribeContainerGroupDeployInfoRequest,
@@ -446,7 +450,8 @@ import {
   DescribeInvocationMetricScatterPlotResponse,
   DescribeUsableUnitNamespacesRequest,
   DescribeContainerGroupsRequest,
-  DescribeJvmMonitorResponse,
+  DescribeProgramsResponse,
+  ProgramItem,
   DisableTaskFlowRequest,
   DescribePodInstancesRequest,
   RedoTaskResponse,
@@ -482,6 +487,7 @@ import {
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   StopTaskExecuteResponse,
+  UpdateApiRateLimitRulesResponse,
   DescribeSimpleGroupsRequest,
   DescribeConfigReleasesResponse,
   ApiGroupInfo,
@@ -1499,6 +1505,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: CreateApiGroupResponse) => void
   ): Promise<CreateApiGroupResponse> {
     return this.request("CreateApiGroup", req, cb)
+  }
+
+  /**
+   * 查询数据集列表
+   */
+  async DescribePrograms(
+    req: DescribeProgramsRequest,
+    cb?: (error: string, rep: DescribeProgramsResponse) => void
+  ): Promise<DescribeProgramsResponse> {
+    return this.request("DescribePrograms", req, cb)
   }
 
   /**

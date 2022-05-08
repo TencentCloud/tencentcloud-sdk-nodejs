@@ -106,7 +106,7 @@ export declare class Client extends AbstractClient {
      */
     GetPersonList(req: GetPersonListRequest, cb?: (error: string, rep: GetPersonListResponse) => void): Promise<GetPersonListResponse>;
     /**
-     * 本接口为离线人像分割处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
+     * 本接口为人像分割在线处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
      */
     CreateSegmentationTask(req: CreateSegmentationTaskRequest, cb?: (error: string, rep: CreateSegmentationTaskResponse) => void): Promise<CreateSegmentationTaskResponse>;
 }

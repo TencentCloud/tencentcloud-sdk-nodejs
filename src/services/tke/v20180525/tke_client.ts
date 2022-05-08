@@ -101,7 +101,6 @@ import {
   PrometheusAlertRule,
   ImageCache,
   DescribePrometheusAgentInstancesRequest,
-  ForwardApplicationRequestV3Response,
   ClusterNetworkSettings,
   DescribeImagesResponse,
   AutoScalingGroupRange,
@@ -141,7 +140,7 @@ import {
   DescribeClusterStatusRequest,
   VersionInstance,
   PrometheusConfigItem,
-  DescribeClusterStatusResponse,
+  DescribePrometheusTemplatesResponse,
   DeleteClusterNodePoolRequest,
   EksCi,
   UpdateImageCacheResponse,
@@ -201,7 +200,7 @@ import {
   GetClusterLevelPriceResponse,
   HttpGet,
   DescribeResourceUsageResponse,
-  CreateClusterAsGroupRequest,
+  DescribeClusterStatusResponse,
   ImageRegistryCredential,
   DescribeClusterNodePoolsResponse,
   DescribeRouteTableConflictsResponse,
@@ -216,12 +215,11 @@ import {
   DeletePrometheusAlertRuleResponse,
   PrometheusTemplate,
   AcquireClusterAdminRoleRequest,
-  CreateClusterAsGroupResponse,
+  DeletePrometheusTemplateResponse,
   DescribeEksContainerInstanceLogRequest,
   ModifyClusterAuthenticationOptionsResponse,
   DescribeClusterAuthenticationOptionsResponse,
   DeleteClusterAsGroupsResponse,
-  DescribePrometheusTemplatesResponse,
   DescribePrometheusInstanceRequest,
   DescribeClusterInstancesRequest,
   InstanceAdvancedSettings,
@@ -249,7 +247,7 @@ import {
   Probe,
   ModifyPrometheusTemplateResponse,
   GetTkeAppChartListResponse,
-  DeletePrometheusTemplateResponse,
+  ForwardApplicationRequestV3Response,
   DescribePrometheusTemplateSyncRequest,
   UpdateClusterVersionRequest,
   ModifyClusterAuthenticationOptionsRequest,
@@ -672,16 +670,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddVpcCniSubnetsResponse) => void
   ): Promise<AddVpcCniSubnetsResponse> {
     return this.request("AddVpcCniSubnets", req, cb)
-  }
-
-  /**
-   * 为已经存在的集群创建伸缩组
-   */
-  async CreateClusterAsGroup(
-    req: CreateClusterAsGroupRequest,
-    cb?: (error: string, rep: CreateClusterAsGroupResponse) => void
-  ): Promise<CreateClusterAsGroupResponse> {
-    return this.request("CreateClusterAsGroup", req, cb)
   }
 
   /**

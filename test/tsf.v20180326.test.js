@@ -978,6 +978,16 @@ it("tsf.v20180326.CreateApiGroup", async function () {
     }
 })
 
+it("tsf.v20180326.DescribePrograms", async function () {
+    try {
+       const data = await client.DescribePrograms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeSimpleApplications", async function () {
     try {
        const data = await client.DescribeSimpleApplications({})

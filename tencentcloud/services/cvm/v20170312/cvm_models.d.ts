@@ -620,6 +620,24 @@ export interface RebootInstancesRequest {
     StopType?: string;
 }
 /**
+ * 描述实例机型配置信息及状态信息
+ */
+export interface InstanceTypeConfigStatus {
+    /**
+      * 状态描述
+      */
+    Status: string;
+    /**
+      * 状态描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+    /**
+      * 配置信息
+      */
+    InstanceTypeConfig: InstanceTypeConfig;
+}
+/**
  * AssociateInstancesKeyPairs请求参数结构体
  */
 export interface AssociateInstancesKeyPairsRequest {
@@ -1227,6 +1245,15 @@ export interface DescribeInstanceInternetBandwidthConfigsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 描述了 “云安全” 服务相关的信息
+ */
+export interface RunSecurityServiceEnabled {
+    /**
+      * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+      */
+    Enabled?: boolean;
 }
 /**
  * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅CDH产品可用），母机ip等
@@ -2527,13 +2554,37 @@ export interface DescribeDisasterRecoverGroupsResponse {
     RequestId?: string;
 }
 /**
- * 描述了 “云安全” 服务相关的信息
+ * ExportImages请求参数结构体
  */
-export interface RunSecurityServiceEnabled {
+export interface ExportImagesRequest {
     /**
-      * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+      * COS存储桶名称
       */
-    Enabled?: boolean;
+    BucketName: string;
+    /**
+      * 镜像ID列表
+      */
+    ImageIds?: Array<string>;
+    /**
+      * 镜像文件导出格式。取值范围：RAW，QCOW2，VHD，VMDK。默认为RAW
+      */
+    ExportFormat?: string;
+    /**
+      * 导出文件的名称前缀列表
+      */
+    FileNamePrefixList?: Array<string>;
+    /**
+      * 是否只导出系统盘
+      */
+    OnlyExportRootDisk?: boolean;
+    /**
+      * 检测镜像是否支持导出
+      */
+    DryRun?: boolean;
+    /**
+      * 角色名称。默认为CVM_QcsRole，发起请求前请确认是否存在该角色，以及是否已正确配置COS写入权限。
+      */
+    RoleName?: string;
 }
 /**
  * 定时任务
@@ -3624,22 +3675,17 @@ export interface ReservedInstanceTypeItem {
     Prices: Array<ReservedInstancePriceItem>;
 }
 /**
- * 描述实例机型配置信息及状态信息
+ * ExportImages返回参数结构体
  */
-export interface InstanceTypeConfigStatus {
+export interface ExportImagesResponse {
     /**
-      * 状态描述
+      * 导出镜像任务ID
       */
-    Status: string;
+    TaskId: number;
     /**
-      * 状态描述信息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Message: string;
-    /**
-      * 配置信息
-      */
-    InstanceTypeConfig: InstanceTypeConfig;
+    RequestId?: string;
 }
 /**
  * InquiryPriceRunInstances返回参数结构体

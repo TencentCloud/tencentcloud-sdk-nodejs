@@ -220,12 +220,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddVpcCniSubnets", req, cb);
     }
     /**
-     * 为已经存在的集群创建伸缩组
-     */
-    async CreateClusterAsGroup(req, cb) {
-        return this.request("CreateClusterAsGroup", req, cb);
-    }
-    /**
      * 查询已经存在的节点，判断是否可以加入集群
      */
     async DescribeExistedInstances(req, cb) {
