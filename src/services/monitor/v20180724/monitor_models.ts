@@ -1974,6 +1974,18 @@ export interface AlarmPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FilterDimensionsParam: string
+
+  /**
+      * 是否为一键告警策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsOneClick: number
+
+  /**
+      * 一键告警策略是否开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OneClickStatus: number
 }
 
 /**

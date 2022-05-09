@@ -910,9 +910,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * DescribePushTasks  用于查询预热任务提交历史记录及执行进度。
-接口灰度中，暂未全量开放，敬请期待。
-     */
+   * DescribePushTasks  用于查询预热任务提交历史记录及执行进度。
+   */
   async DescribePushTasks(
     req: DescribePushTasksRequest,
     cb?: (error: string, rep: DescribePushTasksResponse) => void
