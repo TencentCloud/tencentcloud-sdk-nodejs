@@ -1655,9 +1655,13 @@ export interface Layer7Rule {
       */
     RealServers: Array<SourceServer>;
     /**
-      * 规则所属的资源实例
+      * 资源实例
       */
     InstanceDetails: Array<InstanceRelation>;
+    /**
+      * 规则所属的资源实例
+      */
+    InstanceDetailRule?: Array<RuleInstanceRelation>;
 }
 /**
  * ModifyPortAclConfig返回参数结构体
@@ -2152,9 +2156,13 @@ UDP(UDP协议)
       */
     RealServers: Array<SourceServer>;
     /**
-      * 规则所属的资源实例
+      * 资源实例
       */
     InstanceDetails: Array<InstanceRelation>;
+    /**
+      * 规则所属的资源实例
+      */
+    InstanceDetailRule?: Array<RuleInstanceRelation>;
 }
 /**
  * DeletePacketFilterConfig返回参数结构体
@@ -4748,6 +4756,23 @@ export interface PacketFilterRelation {
       * 特征过滤配置所属的实例
       */
     InstanceDetailList: Array<InstanceRelation>;
+}
+/**
+ * 四七层规则的
+ */
+export interface RuleInstanceRelation {
+    /**
+      * 资源实例的IP
+      */
+    EipList: Array<string>;
+    /**
+      * 资源实例的ID
+      */
+    InstanceId: string;
+    /**
+      * 资源实例的Cname
+      */
+    Cname: string;
 }
 /**
  * CreatePacketFilterConfig请求参数结构体

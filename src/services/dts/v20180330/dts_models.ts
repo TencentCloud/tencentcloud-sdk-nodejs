@@ -681,7 +681,7 @@ export interface CreateSubscribeRequest {
   Count?: number
 
   /**
-   * 是否自动续费，默认为0，1表示自动续费。小时计费实例设置该标识无效。
+   * 是否自动续费，0表示不自动续费，1表示自动续费，默认为0。小时计费实例设置该标识无效。
    */
   AutoRenew?: number
 
@@ -851,12 +851,12 @@ export interface DescribeSubscribesRequest {
   SubsStatus?: Array<string>
 
   /**
-   * 返回记录的起始偏移量
+   * 返回记录的起始偏移量，默认为0。请输入非负整数
    */
   Offset?: number
 
   /**
-   * 单次返回的记录数量
+   * 单次返回的记录数量，默认20。请输入1到100的整数
    */
   Limit?: number
 

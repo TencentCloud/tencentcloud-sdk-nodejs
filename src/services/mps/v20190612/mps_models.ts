@@ -1120,6 +1120,14 @@ export interface ContentReviewTemplateItem {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime: string
+
+  /**
+      * 模板类型，取值范围：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
 }
 
 /**
@@ -1516,6 +1524,14 @@ export interface AIRecognitionTemplateItem {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime: string
+
+  /**
+      * 模板类型，取值范围：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
 }
 
 /**
@@ -2219,12 +2235,12 @@ export interface DescribeAIRecognitionTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 视频内容识别模板详情列表。
    */
-  AIRecognitionTemplateSet?: Array<AIRecognitionTemplateItem>
+  AIRecognitionTemplateSet: Array<AIRecognitionTemplateItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4606,6 +4622,14 @@ export interface AIAnalysisTemplateItem {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime: string
+
+  /**
+      * 模板类型，取值范围：
+* Preset：系统预置模板；
+* Custom：用户自定义模板。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
 }
 
 /**
@@ -4858,6 +4882,13 @@ export interface DescribeAIAnalysisTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
+
+  /**
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
 }
 
 /**
@@ -7238,6 +7269,13 @@ export interface DescribeContentReviewTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：50。
    */
   Limit?: number
+
+  /**
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
 }
 
 /**
@@ -9040,12 +9078,12 @@ export interface DescribeAIAnalysisTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 视频内容分析模板详情列表。
    */
-  AIAnalysisTemplateSet?: Array<AIAnalysisTemplateItem>
+  AIAnalysisTemplateSet: Array<AIAnalysisTemplateItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9929,6 +9967,13 @@ export interface DescribeAIRecognitionTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：50。
    */
   Limit?: number
+
+  /**
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
 }
 
 /**

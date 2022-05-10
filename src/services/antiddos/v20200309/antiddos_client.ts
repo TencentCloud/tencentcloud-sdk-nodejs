@@ -254,6 +254,7 @@ import {
   ModifyCCLevelPolicyRequest,
   DescribeCcGeoIPBlockConfigListRequest,
   PacketFilterRelation,
+  RuleInstanceRelation,
   CreatePacketFilterConfigRequest,
   DescribeCCTrendRequest,
 } from "./antiddos_models"
