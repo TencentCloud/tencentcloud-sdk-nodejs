@@ -108,6 +108,16 @@ it("ocr.v20181119.MLIDCardOCR", async function () {
     }
 })
 
+it("ocr.v20181119.VatInvoiceVerifyNew", async function () {
+    try {
+       const data = await client.VatInvoiceVerifyNew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.QrcodeOCR", async function () {
     try {
        const data = await client.QrcodeOCR({})

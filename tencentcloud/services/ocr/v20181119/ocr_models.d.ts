@@ -1977,6 +1977,36 @@ export interface ClassifyDetectOCRResponse {
     RequestId?: string;
 }
 /**
+ * VatInvoiceVerifyNew请求参数结构体
+ */
+export interface VatInvoiceVerifyNewRequest {
+    /**
+      * 发票号码，8位、20位（全电票）
+      */
+    InvoiceNo: string;
+    /**
+      * 开票日期（不支持当天发票查询，支持五年以内开具的发票），格式：“YYYY-MM-DD”，如：2019-12-20。
+      */
+    InvoiceDate: string;
+    /**
+      * 发票代码（10或12 位），全电发票为空。查验未成功超过5次后当日无法再查。
+      */
+    InvoiceCode?: string;
+    /**
+      * 票种类型 01:增值税专用发票， 02:货运运输业增值税专用发 票， 03:机动车销售统一发票， 04:增值税普通发票， 08:增值税电子专用发票(含全电)， 10:增值税电子普通发票(含全电)， 11:增值税普通发票(卷式)， 14:增值税电子(通行费)发 票， 15:二手车销售统一发票， 32:深圳区块链发票(云南区块链因业务调整现已下线)。
+      */
+    InvoiceKind?: string;
+    /**
+      * 校验码后 6 位，增值税普通发票、增值税电子普通发票、增值税普通发票(卷式)、增值税电子普通发票(通行费)时必填;
+区块链为 5 位
+      */
+    CheckCode?: string;
+    /**
+      * 不含税金额，增值税专用发票、增值税电子专用发票、机动车销售统一发票、二手车销售统一发票、区块链发票时必填; 全电发票为价税合计(含税金额)
+      */
+    Amount?: string;
+}
+/**
  * VehicleLicenseOCR返回参数结构体
  */
 export interface VehicleLicenseOCRResponse {
@@ -2345,6 +2375,31 @@ export interface InvoiceGeneralOCRResponse {
       * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
       */
     Angle: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * VatInvoiceVerifyNew返回参数结构体
+ */
+export interface VatInvoiceVerifyNewResponse {
+    /**
+      * 增值税发票信息，详情请点击左侧链接。
+      */
+    Invoice: VatInvoice;
+    /**
+      * 机动车销售统一发票信息
+      */
+    VehicleInvoiceInfo: VehicleInvoiceInfo;
+    /**
+      * 二手车销售统一发票信息
+      */
+    UsedVehicleInvoiceInfo: UsedVehicleInvoiceInfo;
+    /**
+      * 通行费发票信息
+      */
+    PassInvoiceInfoList: Array<PassInvoiceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3848,6 +3903,31 @@ export interface BankSlipOCRResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 通行费发票信息
+ */
+export interface PassInvoiceInfo {
+    /**
+      * 通行费车牌号
+      */
+    NumberPlate: string;
+    /**
+      * 通行费类型
+      */
+    Type: string;
+    /**
+      * 通行日期起
+      */
+    PassDateBegin: string;
+    /**
+      * 通行日期止
+      */
+    PassDateEnd: string;
+    /**
+      * 税收分类编码
+      */
+    TaxClassifyCode: string;
 }
 /**
  * 试题识别结构化信息

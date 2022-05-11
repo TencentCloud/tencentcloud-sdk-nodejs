@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankCard4EVerification", req, cb);
     }
     /**
-     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持MD5加密传输。
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持明文、MD5和SHA256加密传输。
      */
     async EncryptedPhoneVerification(req, cb) {
         return this.request("EncryptedPhoneVerification", req, cb);

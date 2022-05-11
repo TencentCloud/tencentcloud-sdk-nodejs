@@ -721,6 +721,24 @@ export interface Partition {
    * 对分区的描述。
    */
   Comment: string
+
+  /**
+      * 隐式分区转换策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Transform: string
+
+  /**
+      * 转换策略参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransformArgs: Array<string>
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: number
 }
 
 /**
@@ -1756,6 +1774,11 @@ table-id - String - （过滤条件）table id形如：12342。
    * table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW
    */
   TableType?: string
+
+  /**
+   * 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它；
+   */
+  TableFormat?: string
 }
 
 /**
@@ -2005,6 +2028,18 @@ export interface Policy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateTime?: string
+
+  /**
+      * 权限所属工作组的ID，只有当该权限的来源为工作组时才会有值。即仅当Source字段的值为WORKGROUP时该字段才有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceId?: number
+
+  /**
+      * 权限所属工作组的名称，只有当该权限的来源为工作组时才会有值。即仅当Source字段的值为WORKGROUP时该字段才有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceName?: string
 }
 
 /**

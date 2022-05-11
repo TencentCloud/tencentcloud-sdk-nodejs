@@ -6199,6 +6199,21 @@ export interface CreateClusterEndpointRequest {
    * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
    */
   IsExtranet?: boolean
+
+  /**
+   * 设置域名
+   */
+  Domain?: string
+
+  /**
+   * 使用的安全组，只有外网访问需要传递
+   */
+  SecurityGroup?: string
+
+  /**
+   * 创建lb参数，只有外网访问需要设置
+   */
+  ExtensiveParameters?: string
 }
 
 /**

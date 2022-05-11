@@ -1398,7 +1398,7 @@ export interface FetchMessageByOffsetRequest {
       */
     Partition: number;
     /**
-      * 位点信息
+      * 位点信息，必填
       */
     Offset?: number;
 }

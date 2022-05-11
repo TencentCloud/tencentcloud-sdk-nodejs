@@ -857,6 +857,10 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
       * 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。
       */
     ClientToken?: string;
+    /**
+      * 是否延迟下发，1则延迟下发，否则立即下发
+      */
+    IsDelay?: number;
 }
 /**
  * DeleteSecurityGroupRule返回参数结构体

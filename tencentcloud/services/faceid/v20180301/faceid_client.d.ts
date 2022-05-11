@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     BankCard4EVerification(req: BankCard4EVerificationRequest, cb?: (error: string, rep: BankCard4EVerificationResponse) => void): Promise<BankCard4EVerificationResponse>;
     /**
-     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持MD5加密传输。
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持明文、MD5和SHA256加密传输。
      */
     EncryptedPhoneVerification(req: EncryptedPhoneVerificationRequest, cb?: (error: string, rep: EncryptedPhoneVerificationResponse) => void): Promise<EncryptedPhoneVerificationResponse>;
     /**

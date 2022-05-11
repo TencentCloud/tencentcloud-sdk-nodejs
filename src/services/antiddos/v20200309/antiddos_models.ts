@@ -1184,6 +1184,16 @@ export interface DescribeListBGPIPInstancesRequest {
    * 获取特定状态的资源，运行中填idle，攻击中填attacking，封堵中填blocking
    */
   FilterStatus?: string
+
+  /**
+   * 获取特定的实例Cname
+   */
+  FilterCname?: string
+
+  /**
+   * 批量查询实例ID对应的高防IP实例资源
+   */
+  FilterInstanceIdList?: Array<string>
 }
 
 /**
@@ -1893,6 +1903,26 @@ export interface DescribeListDDoSGeoIPBlockConfigRequest {
 }
 
 /**
+ * DescribeOverviewDDoSEventList返回参数结构体
+ */
+export interface DescribeOverviewDDoSEventListResponse {
+  /**
+   * 记录总数
+   */
+  Total: number
+
+  /**
+   * 事件列表
+   */
+  EventList: Array<OverviewDDoSEvent>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCcGeoIPBlockConfig返回参数结构体
  */
 export interface CreateCcGeoIPBlockConfigResponse {
@@ -2505,6 +2535,12 @@ export interface BGPIPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   V6Flag: number
+
+  /**
+      * 是否渠道版高防IP，是为1，否为0
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BGPIPChannelFlag: number
 }
 
 /**
@@ -2868,6 +2904,36 @@ export interface CCPrecisionPolicy {
 }
 
 /**
+ * DescribeOverviewDDoSEventList请求参数结构体
+ */
+export interface DescribeOverviewDDoSEventListRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 可选按攻击状态过滤，start：攻击中；end：攻击结束
+   */
+  AttackStatus?: string
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 记录条数
+   */
+  Limit?: number
+}
+
+/**
  * 域名与协议纬度的CC防护阈值
  */
 export interface ListenerCcThreholdConfig {
@@ -2994,6 +3060,16 @@ export interface IPLineInfo {
    * 线路IP
    */
   Eip: string
+
+  /**
+   * 实例对应的cname
+   */
+  Cname?: string
+
+  /**
+   * 资源flag，0：高防包资源，1：高防IP资源，2：非高防资源IP
+   */
+  ResourceFlag?: number
 }
 
 /**
@@ -3763,6 +3839,11 @@ export interface DescribeListIPAlarmConfigRequest {
    * IP搜索
    */
   FilterIp?: string
+
+  /**
+   * 高防IP实例资源的cname
+   */
+  FilterCname?: string
 }
 
 /**
@@ -3901,6 +3982,18 @@ export interface BGPInstanceSpecification {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ChannelEditionFlag: number
+
+  /**
+      * 高防包企业版标记，0表示普通高防包；1表示企业版高防包
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnterpriseFlag: number
+
+  /**
+      * 高防包企业版弹性阈值，0表示未开启；大于0为弹性防护阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ElasticLimit: number
 }
 
 /**
@@ -5050,6 +5143,66 @@ export interface DescribeListPortAclListRequest {
    * ip搜索
    */
   FilterIp?: string
+}
+
+/**
+ * 防护概览DDoS攻击事件
+ */
+export interface OverviewDDoSEvent {
+  /**
+   * 事件Id
+   */
+  Id: string
+
+  /**
+   * ip
+   */
+  Vip: string
+
+  /**
+   * 开始时间
+   */
+  StartTime: string
+
+  /**
+   * 结束时间
+   */
+  EndTime: string
+
+  /**
+   * 攻击类型
+   */
+  AttackType: string
+
+  /**
+   * 攻击状态，0：攻击中；1：攻击结束
+   */
+  AttackStatus: number
+
+  /**
+   * 攻击流量，单位Mbps
+   */
+  Mbps: number
+
+  /**
+   * 攻击包量，单位pps
+   */
+  Pps: number
+
+  /**
+   * 业务类型，bgp-multip：高防包；bgpip：高防ip；basic：基础防护
+   */
+  Business: string
+
+  /**
+   * 高防实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 高防实例名称
+   */
+  InstanceName: string
 }
 
 /**

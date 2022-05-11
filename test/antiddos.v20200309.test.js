@@ -558,6 +558,16 @@ it("antiddos.v20200309.CreateBoundIP", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeOverviewDDoSEventList", async function () {
+    try {
+       const data = await client.DescribeOverviewDDoSEventList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.CreateDefaultAlarmThreshold", async function () {
     try {
        const data = await client.CreateDefaultAlarmThreshold({})

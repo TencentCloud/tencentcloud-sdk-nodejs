@@ -100,6 +100,7 @@ import {
   BGPIPInstanceUsages,
   ModifyDDoSBlackWhiteIpListRequest,
   DescribeListDDoSGeoIPBlockConfigRequest,
+  DescribeOverviewDDoSEventListResponse,
   CreateCcGeoIPBlockConfigResponse,
   DescribeOverviewAttackTrendResponse,
   Layer7Rule,
@@ -147,6 +148,7 @@ import {
   ModifyDDoSThresholdResponse,
   CreateDDoSGeoIPBlockConfigResponse,
   CCPrecisionPolicy,
+  DescribeOverviewDDoSEventListRequest,
   ListenerCcThreholdConfig,
   EipAddressRelation,
   DeleteDDoSBlackWhiteIpListRequest,
@@ -233,6 +235,7 @@ import {
   DescribeCCPrecisionPlyListResponse,
   DescribeBizTrendRequest,
   DescribeListPortAclListRequest,
+  OverviewDDoSEvent,
   DescribeCCLevelPolicyResponse,
   DescribeListWaterPrintConfigResponse,
   DescribeOverviewDDoSTrendResponse,
@@ -808,6 +811,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBoundIPResponse) => void
   ): Promise<CreateBoundIPResponse> {
     return this.request("CreateBoundIP", req, cb)
+  }
+
+  /**
+   * 获取防护概览的ddos攻击事件
+   */
+  async DescribeOverviewDDoSEventList(
+    req: DescribeOverviewDDoSEventListRequest,
+    cb?: (error: string, rep: DescribeOverviewDDoSEventListResponse) => void
+  ): Promise<DescribeOverviewDDoSEventListResponse> {
+    return this.request("DescribeOverviewDDoSEventList", req, cb)
   }
 
   /**
