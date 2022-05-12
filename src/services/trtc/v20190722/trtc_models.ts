@@ -1453,22 +1453,22 @@ export interface WaterMarkParams {
   WaterMarkId: number
 
   /**
-   * 混流-水印宽。单位为像素值。
+   * 混流-水印宽。单位为像素值。水印宽+X偏移不能超过整个画布宽。
    */
   WaterMarkWidth: number
 
   /**
-   * 混流-水印高。单位为像素值。
+   * 混流-水印高。单位为像素值。水印高+Y偏移不能超过整个画布高。
    */
   WaterMarkHeight: number
 
   /**
-   * 水印在输出时的X偏移。单位为像素值。
+   * 水印在输出时的X偏移。单位为像素值。水印宽+X偏移不能超过整个画布宽。
    */
   LocationX: number
 
   /**
-   * 水印在输出时的Y偏移。单位为像素值。
+   * 水印在输出时的Y偏移。单位为像素值。水印高+Y偏移不能超过整个画布高。
    */
   LocationY: number
 

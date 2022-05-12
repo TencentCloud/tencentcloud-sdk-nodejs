@@ -3581,6 +3581,10 @@ export interface DescribeAlarmPoliciesRequest {
       * 按照触发任务（例如弹性伸缩）过滤策略。最多10个
       */
     TriggerTasks?: Array<AlarmPolicyTriggerTask>;
+    /**
+      * 根据一键告警策略筛选 不传展示全部策略 ONECLICK=展示一键告警策略 NOT_ONECLICK=展示非一键告警策略
+      */
+    OneClickPolicyType?: Array<string>;
 }
 /**
  * DescribeConditionsTemplateList返回参数结构体

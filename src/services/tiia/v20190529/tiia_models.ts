@@ -607,7 +607,7 @@ export interface CreateGroupRequest {
   GroupName: string
 
   /**
-   * 该库的容量限制。
+   * 图库可容纳的最大图片数量。
    */
   MaxCapacity: number
 
@@ -617,7 +617,7 @@ export interface CreateGroupRequest {
   Brief?: string
 
   /**
-   * 该库的访问限频 ，默认10。
+   * 访问限制默认为10qps，如需扩容请联系[在线客服](https://cloud.tencent.com/online-service)申请。
    */
   MaxQps?: number
 

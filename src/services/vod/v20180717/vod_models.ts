@@ -2748,6 +2748,11 @@ export interface FileDeleteTask {
    * 删除文件 ID 列表。
    */
   FileIdSet: Array<string>
+
+  /**
+   * 删除文件结果信息列表。
+   */
+  FileDeleteResultInfo: Array<FileDeleteResultItem>
 }
 
 /**
@@ -4293,7 +4298,7 @@ export interface ModifyAIAnalysisTemplateResponse {
  */
 export interface LiveRealTimeClipRequest {
   /**
-   * 推流[直播码](https://cloud.tencent.com/document/product/267/5959)。
+   * 推流直播码。
    */
   StreamId: string
 
@@ -9307,6 +9312,22 @@ export interface SegmentConfigureInfo {
 <li>OFF：关闭智能视频拆条识别任务。</li>
       */
   Switch: string
+}
+
+/**
+ * 文件删除结果信息
+ */
+export interface FileDeleteResultItem {
+  /**
+   * 删除的文件 ID 。
+   */
+  FileId: string
+
+  /**
+      * 本次删除的文件部分。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeleteParts: Array<MediaDeleteItem>
 }
 
 /**

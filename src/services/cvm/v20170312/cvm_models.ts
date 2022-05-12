@@ -3272,7 +3272,7 @@ duration
  */
 export interface TagSpecification {
   /**
-   * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”
+   * 标签绑定的资源类型，云服务器为“instance”，专用宿主机为“host”，镜像为“image”
    */
   ResourceType: string
 

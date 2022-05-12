@@ -362,6 +362,7 @@ import {
   AiRecognitionTaskOcrFullTextSegmentTextItem,
   AiRecognitionTaskSegmentResultOutput,
   SegmentConfigureInfo,
+  FileDeleteResultItem,
   SnapshotByTimeOffsetTaskInput,
   RefererAuthPolicy,
   TaskStatDataItem,
