@@ -42,6 +42,7 @@ import {
   GroupInfoTopics,
   TopicResult,
   Region,
+  ModifyInstancePreRequest,
   CreateTokenResponse,
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
@@ -133,6 +134,7 @@ import {
   Filter,
   GroupOffsetResponse,
   BatchCreateAclResponse,
+  ModifyInstancePreResponse,
   CreateUserRequest,
   InstanceDetailResponse,
   DeleteRouteRequest,
@@ -236,6 +238,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicSubscribeGroupResponse) => void
   ): Promise<DescribeTopicSubscribeGroupResponse> {
     return this.request("DescribeTopicSubscribeGroup", req, cb)
+  }
+
+  /**
+   * 预付费实例变配接口，调整磁盘，带宽
+   */
+  async ModifyInstancePre(
+    req: ModifyInstancePreRequest,
+    cb?: (error: string, rep: ModifyInstancePreResponse) => void
+  ): Promise<ModifyInstancePreResponse> {
+    return this.request("ModifyInstancePre", req, cb)
   }
 
   /**

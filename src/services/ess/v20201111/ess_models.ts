@@ -394,12 +394,12 @@ SIGN_SIGNATURE - 手写签名控件
   ComponentType: string
 
   /**
-   * 参数控件宽度，单位px
+   * 参数控件宽度，单位pt
    */
   ComponentWidth: number
 
   /**
-   * 参数控件高度，单位px
+   * 参数控件高度，单位pt
    */
   ComponentHeight: number
 
@@ -409,12 +409,12 @@ SIGN_SIGNATURE - 手写签名控件
   ComponentPage: number
 
   /**
-   * 参数控件X位置，单位px
+   * 参数控件X位置，单位pt
    */
   ComponentPosX: number
 
   /**
-   * 参数控件Y位置，单位px
+   * 参数控件Y位置，单位pt
    */
   ComponentPosY: number
 
@@ -424,12 +424,12 @@ SIGN_SIGNATURE - 手写签名控件
   FileIndex: number
 
   /**
-   * 控件编号
+   * GenerateMode==KEYWORD 指定关键字
    */
   ComponentId?: string
 
   /**
-   * 控件名称
+   * GenerateMode==FIELD 指定表单域名称
    */
   ComponentName?: string
 
@@ -439,8 +439,16 @@ SIGN_SIGNATURE - 手写签名控件
   ComponentRequired?: boolean
 
   /**
-   * 参数控件样式
-   */
+      * 扩展参数：
+ComponentType为SIGN_SIGNATURE类型可以控制签署方式
+{“ComponentTypeLimit”: [“xxx”]}
+xxx可以为：
+HANDWRITE – 手写签名
+BORDERLESS_ESIGN – 自动生成无边框腾讯体
+OCR_ESIGN -- AI智能识别手写签名
+ESIGN -- 个人印章类型
+如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]}
+      */
   ComponentExtra?: string
 
   /**
@@ -469,6 +477,16 @@ KEYWORD 关键字，使用ComponentId指定关键字
    * 日期控件类型字号
    */
   ComponentDateFontSize?: number
+
+  /**
+   * 指定关键字时横坐标偏移量
+   */
+  OffsetX?: number
+
+  /**
+   * 指定关键字时纵坐标偏移量
+   */
+  OffsetY?: number
 }
 
 /**

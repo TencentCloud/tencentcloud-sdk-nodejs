@@ -1231,7 +1231,7 @@ export interface PresetLayoutConfig {
   MixInputType?: number
 
   /**
-   * 占位图ID。启用占位图功能时，在当前位置的用户没有上行视频时显示占位图。占位图在实时音视频控制台上传并生成，https://cloud.tencent.com/document/product/647/50769
+   * 占位图ID。启用占位图功能时，在当前位置的用户没有上行视频时显示占位图。占位图大小不能超过2M，在实时音视频控制台上传并生成，https://cloud.tencent.com/document/product/647/50769
    */
   PlaceImageId?: number
 }

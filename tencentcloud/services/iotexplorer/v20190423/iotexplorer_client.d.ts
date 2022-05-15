@@ -8,7 +8,7 @@ import { UpdateDevicesEnableStateResponse, DeleteProjectRequest, DeleteFenceBind
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 本接口（GetCOSURL）用于获取固件存储在COS的URL
+     * 本接口（GetCOSURL）用于获取固件COS存储的上传请求URL地址
      */
     GetCOSURL(req: GetCOSURLRequest, cb?: (error: string, rep: GetCOSURLResponse) => void): Promise<GetCOSURLResponse>;
     /**
@@ -212,7 +212,7 @@ export declare class Client extends AbstractClient {
      */
     CreateTopicPolicy(req: CreateTopicPolicyRequest, cb?: (error: string, rep: CreateTopicPolicyResponse) => void): Promise<CreateTopicPolicyResponse>;
     /**
-     * 本接口（UploadFirmware）用于上传设备固件至平台
+     * 本接口（UploadFirmware）用于创建设备固件版本信息，在平台用于固件版本升级、固件资源下发等。
      */
     UploadFirmware(req: UploadFirmwareRequest, cb?: (error: string, rep: UploadFirmwareResponse) => void): Promise<UploadFirmwareResponse>;
     /**

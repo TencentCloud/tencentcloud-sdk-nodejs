@@ -498,6 +498,27 @@ export interface Region {
     MultiZone: number;
 }
 /**
+ * ModifyInstancePre请求参数结构体
+ */
+export interface ModifyInstancePreRequest {
+    /**
+      * 实例名称
+      */
+    InstanceId: string;
+    /**
+      * 预计磁盘，根据磁盘步长，规格向上调整。
+      */
+    DiskSize: number;
+    /**
+      * 预计带宽，根据带宽步长，规格向上调整。
+      */
+    BandWidth: number;
+    /**
+      * 预计分区，根据带宽步长，规格向上调整。
+      */
+    Partition?: number;
+}
+/**
  * CreateToken返回参数结构体
  */
 export interface CreateTokenResponse {
@@ -2385,6 +2406,19 @@ export interface BatchCreateAclResponse {
       * 状态码
       */
     Result: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyInstancePre返回参数结构体
+ */
+export interface ModifyInstancePreResponse {
+    /**
+      * 变更预付费实例配置返回结构
+      */
+    Result: CreateInstancePreResp;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -243,7 +243,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（GetCOSURL）用于获取固件存储在COS的URL
+   * 本接口（GetCOSURL）用于获取固件COS存储的上传请求URL地址
    */
   async GetCOSURL(
     req: GetCOSURLRequest,
@@ -753,7 +753,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UploadFirmware）用于上传设备固件至平台
+   * 本接口（UploadFirmware）用于创建设备固件版本信息，在平台用于固件版本升级、固件资源下发等。
    */
   async UploadFirmware(
     req: UploadFirmwareRequest,

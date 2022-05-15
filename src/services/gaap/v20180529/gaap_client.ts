@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   RegionDetail,
+  DestAddressInfo,
   DescribeUDPListenersRequest,
   DeleteProxyGroupRequest,
   DescribeResourcesByTagRequest,
@@ -38,6 +39,7 @@ import {
   ModifyGroupDomainConfigRequest,
   BandwidthPriceGradient,
   DescribeHTTPListenersRequest,
+  BindListenerRealServersResponse,
   DescribeCustomHeaderResponse,
   ModifyRealServerNameResponse,
   DescribeGroupDomainConfigResponse,
@@ -47,7 +49,6 @@ import {
   DescribeListenerRealServersRequest,
   DescribeProxyGroupStatisticsRequest,
   DescribeHTTPSListenersRequest,
-  DescribeAccessRegionsByDestRegionResponse,
   DescribeCountryAreaMappingRequest,
   CheckProxyCreateResponse,
   ModifyCertificateRequest,
@@ -60,7 +61,7 @@ import {
   DeleteProxyGroupResponse,
   CreateDomainErrorPageInfoResponse,
   BindListenerRealServersRequest,
-  ModifyProxyConfigurationRequest,
+  DeleteDomainErrorPageInfoResponse,
   DescribeRuleRealServersRequest,
   DescribeGroupDomainConfigRequest,
   CreateProxyGroupDomainRequest,
@@ -74,7 +75,7 @@ import {
   IPDetail,
   ProxyStatus,
   DeleteDomainRequest,
-  OpenSecurityPolicyResponse,
+  CreateFirstLinkSessionRequest,
   ModifyCertificateAttributesResponse,
   DescribeSecurityPolicyDetailResponse,
   CreateHTTPListenerResponse,
@@ -88,6 +89,7 @@ import {
   DescribeRealServersResponse,
   ModifyHTTPListenerAttributeResponse,
   DescribeRealServerStatisticsRequest,
+  DeleteFirstLinkSessionRequest,
   BindRealServerInfo,
   DescribeProxyAndStatisticsListenersRequest,
   DescribeAccessRegionsResponse,
@@ -96,7 +98,7 @@ import {
   DescribeDestRegionsResponse,
   DescribeDomainErrorPageInfoByIdsResponse,
   DescribeProxiesRequest,
-  BindListenerRealServersResponse,
+  DescribeAccessRegionsByDestRegionResponse,
   ModifyProxyGroupAttributeResponse,
   ListenerInfo,
   DescribeUDPListenersResponse,
@@ -115,7 +117,7 @@ import {
   DomainAccessRegionDict,
   CloseSecurityPolicyRequest,
   ModifyCertificateAttributesRequest,
-  TagPair,
+  ModifyProxyConfigurationRequest,
   CreateSecurityRulesRequest,
   DescribeCertificatesRequest,
   DescribeProxiesStatusRequest,
@@ -132,6 +134,7 @@ import {
   StatisticsDataInfo,
   CreateCustomHeaderRequest,
   ProxyGroupInfo,
+  Capacity,
   CreateProxyGroupDomainResponse,
   Certificate,
   DescribeDomainErrorPageInfoResponse,
@@ -167,6 +170,7 @@ import {
   SetAuthenticationRequest,
   InquiryPriceCreateProxyResponse,
   NewRealServer,
+  DescribeFirstLinkSessionResponse,
   DescribeHTTPListenersResponse,
   HttpHeaderParam,
   DescribeRealServerStatisticsResponse,
@@ -179,13 +183,17 @@ import {
   AccessRegionDetial,
   DescribeProxyGroupListRequest,
   SecurityPolicyRuleOut,
+  CreateFirstLinkSessionResponse,
   BindRealServer,
   GroupStatisticsInfo,
+  TagPair,
   CreateProxyGroupResponse,
   CreateHTTPSListenerResponse,
   DeleteRuleResponse,
+  DescribeFirstLinkSessionRequest,
   BindRuleRealServersResponse,
   DescribeGroupAndStatisticsProxyRequest,
+  SrcAddressInfo,
   ModifyUDPListenerAttributeRequest,
   DeleteSecurityRulesResponse,
   ModifyTCPListenerAttributeResponse,
@@ -204,7 +212,7 @@ import {
   DescribeRealServersStatusResponse,
   ModifyProxyGroupAttributeRequest,
   CloseProxyGroupResponse,
-  DeleteDomainErrorPageInfoResponse,
+  DeleteFirstLinkSessionResponse,
   ModifyProxiesAttributeResponse,
   DescribeDomainErrorPageInfoByIdsRequest,
   CheckProxyCreateRequest,
@@ -225,10 +233,12 @@ import {
   InquiryPriceCreateProxyRequest,
   DescribeProxyGroupDetailsResponse,
   OpenProxyGroupRequest,
+  DeviceInfo,
   UDPListener,
   ProxyInfo,
   RemoveRealServersResponse,
   DescribeRulesByRuleIdsRequest,
+  OpenSecurityPolicyResponse,
   RealServerBindSetReq,
   CloseProxyGroupRequest,
   OpenProxiesResponse,
@@ -407,16 +417,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeRulesByRuleIds）用于根据规则ID拉取规则信息列表。支持一个或者多个规则信息的拉取。一次最多支持10个规则信息的拉取。
-   */
-  async DescribeRulesByRuleIds(
-    req: DescribeRulesByRuleIdsRequest,
-    cb?: (error: string, rep: DescribeRulesByRuleIdsResponse) => void
-  ): Promise<DescribeRulesByRuleIdsResponse> {
-    return this.request("DescribeRulesByRuleIds", req, cb)
-  }
-
-  /**
    * 本接口（DescribeProxyGroupList）用于拉取通道组列表及各通道组基本信息。
    */
   async DescribeProxyGroupList(
@@ -518,6 +518,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateFirstLinkSession）用于创建接入段加速会话，创建有可能成功，也可能失败，需要通过返回码来进行判断。
+   */
+  async CreateFirstLinkSession(
+    req: CreateFirstLinkSessionRequest,
+    cb?: (error: string, rep: CreateFirstLinkSessionResponse) => void
+  ): Promise<CreateFirstLinkSessionResponse> {
+    return this.request("CreateFirstLinkSession", req, cb)
+  }
+
+  /**
    * 本接口（DescribeAccessRegionsByDestRegion）根据源站区域查询可用的加速区域列表。
    */
   async DescribeAccessRegionsByDestRegion(
@@ -578,13 +588,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+   * 本接口（DescribeRulesByRuleIds）用于根据规则ID拉取规则信息列表。支持一个或者多个规则信息的拉取。一次最多支持10个规则信息的拉取。
    */
-  async DescribeUDPListeners(
-    req: DescribeUDPListenersRequest,
-    cb?: (error: string, rep: DescribeUDPListenersResponse) => void
-  ): Promise<DescribeUDPListenersResponse> {
-    return this.request("DescribeUDPListeners", req, cb)
+  async DescribeRulesByRuleIds(
+    req: DescribeRulesByRuleIdsRequest,
+    cb?: (error: string, rep: DescribeRulesByRuleIdsResponse) => void
+  ): Promise<DescribeRulesByRuleIdsResponse> {
+    return this.request("DescribeRulesByRuleIds", req, cb)
   }
 
   /**
@@ -628,13 +638,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
+   * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
    */
-  async DescribeHTTPListeners(
-    req: DescribeHTTPListenersRequest,
-    cb?: (error: string, rep: DescribeHTTPListenersResponse) => void
-  ): Promise<DescribeHTTPListenersResponse> {
-    return this.request("DescribeHTTPListeners", req, cb)
+  async DescribeUDPListeners(
+    req: DescribeUDPListenersRequest,
+    cb?: (error: string, rep: DescribeUDPListenersResponse) => void
+  ): Promise<DescribeUDPListenersResponse> {
+    return this.request("DescribeUDPListeners", req, cb)
   }
 
   /**
@@ -788,6 +798,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
+   */
+  async DescribeHTTPListeners(
+    req: DescribeHTTPListenersRequest,
+    cb?: (error: string, rep: DescribeHTTPListenersResponse) => void
+  ): Promise<DescribeHTTPListenersResponse> {
+    return this.request("DescribeHTTPListeners", req, cb)
+  }
+
+  /**
    * 本接口（ModifyUDPListenerAttribute）用于修改通道实例下UDP监听器配置，包括监听器名称和调度策略的修改。
    */
   async ModifyUDPListenerAttribute(
@@ -866,6 +886,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCertificateDetailResponse) => void
   ): Promise<DescribeCertificateDetailResponse> {
     return this.request("DescribeCertificateDetail", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeFirstLinkSession）用于查询接入段加速会话状态，包括会话状态，生效时长，加速套餐等信息。
+   */
+  async DescribeFirstLinkSession(
+    req: DescribeFirstLinkSessionRequest,
+    cb?: (error: string, rep: DescribeFirstLinkSessionResponse) => void
+  ): Promise<DescribeFirstLinkSessionResponse> {
+    return this.request("DescribeFirstLinkSession", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteFirstLinkSession）用于删除接入段加速会话，删除加速会话后会停止加速。
+   */
+  async DeleteFirstLinkSession(
+    req: DeleteFirstLinkSessionRequest,
+    cb?: (error: string, rep: DeleteFirstLinkSessionResponse) => void
+  ): Promise<DeleteFirstLinkSessionResponse> {
+    return this.request("DeleteFirstLinkSession", req, cb)
   }
 
   /**

@@ -178,16 +178,6 @@ it("gaap.v20180529.DescribeDestRegions", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeRulesByRuleIds", async function () {
-    try {
-       const data = await client.DescribeRulesByRuleIds({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("gaap.v20180529.DescribeProxyGroupList", async function () {
     try {
        const data = await client.DescribeProxyGroupList({})
@@ -288,6 +278,16 @@ it("gaap.v20180529.DeleteCertificate", async function () {
     }
 })
 
+it("gaap.v20180529.CreateFirstLinkSession", async function () {
+    try {
+       const data = await client.CreateFirstLinkSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.DescribeAccessRegionsByDestRegion", async function () {
     try {
        const data = await client.DescribeAccessRegionsByDestRegion({})
@@ -348,9 +348,9 @@ it("gaap.v20180529.CreateHTTPListener", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeUDPListeners", async function () {
+it("gaap.v20180529.DescribeRulesByRuleIds", async function () {
     try {
-       const data = await client.DescribeUDPListeners({})
+       const data = await client.DescribeRulesByRuleIds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +398,9 @@ it("gaap.v20180529.DescribeRealServerStatistics", async function () {
     }
 })
 
-it("gaap.v20180529.DescribeHTTPListeners", async function () {
+it("gaap.v20180529.DescribeUDPListeners", async function () {
     try {
-       const data = await client.DescribeHTTPListeners({})
+       const data = await client.DescribeUDPListeners({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,6 +558,16 @@ it("gaap.v20180529.OpenProxies", async function () {
     }
 })
 
+it("gaap.v20180529.DescribeHTTPListeners", async function () {
+    try {
+       const data = await client.DescribeHTTPListeners({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gaap.v20180529.ModifyUDPListenerAttribute", async function () {
     try {
        const data = await client.ModifyUDPListenerAttribute({})
@@ -631,6 +641,26 @@ it("gaap.v20180529.CreateDomain", async function () {
 it("gaap.v20180529.DescribeCertificateDetail", async function () {
     try {
        const data = await client.DescribeCertificateDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.DescribeFirstLinkSession", async function () {
+    try {
+       const data = await client.DescribeFirstLinkSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gaap.v20180529.DeleteFirstLinkSession", async function () {
+    try {
+       const data = await client.DeleteFirstLinkSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

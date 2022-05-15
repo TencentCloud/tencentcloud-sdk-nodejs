@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicSubscribeGroup", req, cb);
     }
     /**
+     * 预付费实例变配接口，调整磁盘，带宽
+     */
+    async ModifyInstancePre(req, cb) {
+        return this.request("ModifyInstancePre", req, cb);
+    }
+    /**
      * 批量设置主题属性
      */
     async BatchModifyTopicAttributes(req, cb) {

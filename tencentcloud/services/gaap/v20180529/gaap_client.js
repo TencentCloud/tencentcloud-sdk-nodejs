@@ -125,12 +125,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDestRegions", req, cb);
     }
     /**
-     * 本接口（DescribeRulesByRuleIds）用于根据规则ID拉取规则信息列表。支持一个或者多个规则信息的拉取。一次最多支持10个规则信息的拉取。
-     */
-    async DescribeRulesByRuleIds(req, cb) {
-        return this.request("DescribeRulesByRuleIds", req, cb);
-    }
-    /**
      * 本接口（DescribeProxyGroupList）用于拉取通道组列表及各通道组基本信息。
      */
     async DescribeProxyGroupList(req, cb) {
@@ -192,6 +186,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCertificate", req, cb);
     }
     /**
+     * 本接口（CreateFirstLinkSession）用于创建接入段加速会话，创建有可能成功，也可能失败，需要通过返回码来进行判断。
+     */
+    async CreateFirstLinkSession(req, cb) {
+        return this.request("CreateFirstLinkSession", req, cb);
+    }
+    /**
      * 本接口（DescribeAccessRegionsByDestRegion）根据源站区域查询可用的加速区域列表。
      */
     async DescribeAccessRegionsByDestRegion(req, cb) {
@@ -228,10 +228,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateHTTPListener", req, cb);
     }
     /**
-     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
+     * 本接口（DescribeRulesByRuleIds）用于根据规则ID拉取规则信息列表。支持一个或者多个规则信息的拉取。一次最多支持10个规则信息的拉取。
      */
-    async DescribeUDPListeners(req, cb) {
-        return this.request("DescribeUDPListeners", req, cb);
+    async DescribeRulesByRuleIds(req, cb) {
+        return this.request("DescribeRulesByRuleIds", req, cb);
     }
     /**
      * 本接口（ModifyProxyConfiguration）用于修改通道的配置。根据当前业务的容量需求，扩容或缩容相关通道的配置。仅支持Scalarable为1的通道,Scalarable可通过接口DescribeProxies获取。
@@ -258,10 +258,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRealServerStatistics", req, cb);
     }
     /**
-     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
+     * 该接口（DescribeUDPListeners）用于查询单通道或者通道组下的UDP监听器信息
      */
-    async DescribeHTTPListeners(req, cb) {
-        return this.request("DescribeHTTPListeners", req, cb);
+    async DescribeUDPListeners(req, cb) {
+        return this.request("DescribeUDPListeners", req, cb);
     }
     /**
      * 本接口（CreateProxyGroup）用于创建通道组。
@@ -354,6 +354,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenProxies", req, cb);
     }
     /**
+     * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。
+     */
+    async DescribeHTTPListeners(req, cb) {
+        return this.request("DescribeHTTPListeners", req, cb);
+    }
+    /**
      * 本接口（ModifyUDPListenerAttribute）用于修改通道实例下UDP监听器配置，包括监听器名称和调度策略的修改。
      */
     async ModifyUDPListenerAttribute(req, cb) {
@@ -401,6 +407,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCertificateDetail(req, cb) {
         return this.request("DescribeCertificateDetail", req, cb);
+    }
+    /**
+     * 本接口（DescribeFirstLinkSession）用于查询接入段加速会话状态，包括会话状态，生效时长，加速套餐等信息。
+     */
+    async DescribeFirstLinkSession(req, cb) {
+        return this.request("DescribeFirstLinkSession", req, cb);
+    }
+    /**
+     * 本接口（DeleteFirstLinkSession）用于删除接入段加速会话，删除加速会话后会停止加速。
+     */
+    async DeleteFirstLinkSession(req, cb) {
+        return this.request("DeleteFirstLinkSession", req, cb);
     }
     /**
      * 该接口（DescribeRegionAndPrice）用于获取源站区域和带宽梯度价格

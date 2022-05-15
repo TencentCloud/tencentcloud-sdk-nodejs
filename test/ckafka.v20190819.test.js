@@ -68,6 +68,16 @@ it("ckafka.v20190819.DescribeTopicSubscribeGroup", async function () {
     }
 })
 
+it("ckafka.v20190819.ModifyInstancePre", async function () {
+    try {
+       const data = await client.ModifyInstancePre({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.BatchModifyTopicAttributes", async function () {
     try {
        const data = await client.BatchModifyTopicAttributes({})
