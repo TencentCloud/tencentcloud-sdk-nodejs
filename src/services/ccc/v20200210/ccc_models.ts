@@ -35,7 +35,7 @@ export interface StopAutoCalloutTaskRequest {
  */
 export interface BindStaffSkillGroupListRequest {
   /**
-   * 实例ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -55,7 +55,7 @@ export interface BindStaffSkillGroupListRequest {
  */
 export interface DescribePSTNActiveSessionListRequest {
   /**
-   * 应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -92,7 +92,7 @@ export interface IVRKeyPressedElement {
  */
 export interface CreateAutoCalloutTaskRequest {
   /**
-   * 呼叫中心实例Id
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -144,17 +144,17 @@ export interface CreateSDKLoginTokenResponse {
   /**
    * SDK 登录 Token。
    */
-  Token?: string
+  Token: string
 
   /**
    * 过期时间戳，Unix 时间戳。
    */
-  ExpiredTime?: number
+  ExpiredTime: number
 
   /**
    * SDK 加载路径会随着 SDK 的发布而变动。
    */
-  SdkURL?: string
+  SdkURL: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -472,7 +472,7 @@ notInService       不在服务区
  */
 export interface CreateUserSigRequest {
   /**
-   * 应用 ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -532,7 +532,7 @@ export interface PhoneNumBuyInfo {
  */
 export interface UnbindStaffSkillGroupListRequest {
   /**
-   * 实例ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -562,12 +562,12 @@ export interface DescribeIMCdrsRequest {
   EndTimestamp: number
 
   /**
-   * 实例ID
+   * 实例 ID（废弃）
    */
   InstanceId?: number
 
   /**
-   * 应用ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId?: number
 
@@ -643,7 +643,7 @@ export interface DescribeAutoCalloutTaskResponse {
  */
 export interface DescribeStaffStatusMetricsRequest {
   /**
-   * 实例ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -658,7 +658,7 @@ export interface DescribeStaffStatusMetricsRequest {
  */
 export interface DescribeAutoCalloutTaskRequest {
   /**
-   * 呼叫中心实例Id
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -713,7 +713,7 @@ export interface CreateUserSigResponse {
  */
 export interface DeleteStaffRequest {
   /**
-   * 实例ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -728,12 +728,12 @@ export interface DeleteStaffRequest {
  */
 export interface DescribeTelSessionRequest {
   /**
-   * 应用ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
   /**
-   * 会话ID
+   * 会话 ID
    */
   SessionId: string
 }
@@ -864,7 +864,7 @@ export interface StaffStatusExtra {
  */
 export interface DescribeSkillGroupInfoListRequest {
   /**
-   * 应用ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -894,7 +894,7 @@ export interface DescribeSkillGroupInfoListRequest {
  */
 export interface CreateStaffRequest {
   /**
-   * 应用ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -914,8 +914,9 @@ export interface DescribeChatMessagesResponse {
   TotalCount: number
 
   /**
-   * 消息列表
-   */
+      * 消息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Messages: Array<MessageBody>
 
   /**
@@ -1135,7 +1136,7 @@ export interface DescribeProtectedTelCdrResponse {
  */
 export interface DescribeAutoCalloutTasksRequest {
   /**
-   * 呼叫中心实例Id
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -1155,12 +1156,12 @@ export interface DescribeAutoCalloutTasksRequest {
  */
 export interface DescribeChatMessagesRequest {
   /**
-   * 实例ID
+   * 实例 ID（废弃）
    */
   InstanceId?: number
 
   /**
-   * 应用ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId?: number
 
@@ -1294,7 +1295,7 @@ export interface DescribeTelSessionResponse {
  */
 export interface DescribeStaffInfoListRequest {
   /**
-   * 应用ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -1625,17 +1626,17 @@ export interface DescribeTelCallInfoResponse {
   /**
    * 电话呼出统计分钟数
    */
-  TelCallOutCount?: number
+  TelCallOutCount: number
 
   /**
    * 电话呼入统计分钟数
    */
-  TelCallInCount?: number
+  TelCallInCount: number
 
   /**
    * 坐席使用统计个数
    */
-  SeatUsedCount?: number
+  SeatUsedCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2012,7 +2013,7 @@ export interface MessageBody {
  */
 export interface CreateSDKLoginTokenRequest {
   /**
-   * 应用ID。
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -2124,7 +2125,7 @@ export interface SeatUserInfo {
  */
 export interface DescribeCallInMetricsRequest {
   /**
-   * 实例ID
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
 
@@ -2197,12 +2198,12 @@ export interface DescribeIMCdrsResponse {
   /**
    * 总记录数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 服务记录列表
    */
-  IMCdrs?: Array<IMCdrInfo>
+  IMCdrs: Array<IMCdrInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

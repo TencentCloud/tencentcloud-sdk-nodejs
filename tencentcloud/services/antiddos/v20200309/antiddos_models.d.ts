@@ -560,6 +560,10 @@ export interface DescribeListBGPInstancesRequest {
       * 实例id数组
       */
     FilterInstanceIdList?: Array<string>;
+    /**
+      * 企业版搜索
+      */
+    FilterEnterpriseFlag?: number;
 }
 /**
  * 字段值，K-V形式

@@ -48,6 +48,16 @@ it("redis.v20180412.DescribeInstanceNodeInfo", async function () {
     }
 })
 
+it("redis.v20180412.ModifyInstanceReadOnly", async function () {
+    try {
+       const data = await client.ModifyInstanceReadOnly({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeInstanceMonitorBigKeySizeDist", async function () {
     try {
        const data = await client.DescribeInstanceMonitorBigKeySizeDist({})

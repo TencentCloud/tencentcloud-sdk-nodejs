@@ -163,6 +163,26 @@ export interface StopOnlineRecordResponse {
 }
 
 /**
+ * 鉴权参数
+ */
+export interface AuthParam {
+  /**
+   * 应用SdkAppId
+   */
+  SdkAppId: number
+
+  /**
+   * 用户ID
+   */
+  UserId: string
+
+  /**
+   * 用户ID对应的签名
+   */
+  UserSig: string
+}
+
+/**
  * SetVideoGenerationTaskCallbackKey请求参数结构体
  */
 export interface SetVideoGenerationTaskCallbackKeyRequest {
@@ -194,8 +214,9 @@ export interface StartWhiteboardPushRequest {
   RoomId: number
 
   /**
-   * 用于白板推流服务进房进行推流的用户ID，最大长度不能大于60个字节，该ID必须是一个单独的未在SDK中使用的ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该ID和SDK中使用的ID重复，会导致SDK和白板推流服务互踢，影响正常推流。
-   */
+      * 用于白板推流服务进入白板房间的用户ID。在没有进行额外指定的情况下，这个用户ID同时会用于IM登录、IM加群、TRTC进房推流等操作。
+用户ID最大长度不能大于60个字节，该ID必须是一个单独的未在SDK中使用的ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该ID和SDK中使用的ID重复，会导致SDK和白板推流服务互踢，影响正常推流。
+      */
   PushUserId: string
 
   /**
@@ -314,6 +335,26 @@ SdkAppID = 12345678，RoomID = 12345，PushUserID = push_user_1
 在指定了TRTCRoomIdStr的情况下，会优先使用TRTCRoomIdStr作为白板流进行推流的TRTC房间号。
       */
   TRTCRoomIdStr?: string
+
+  /**
+      * 内测参数，需开通白名单进行体验。
+
+IM鉴权信息参数，用于IM鉴权。
+当白板信令所使用的IM应用与白板应用的SdkAppId不一致时，可以通过此参数提供对应IM应用鉴权信息。
+
+如果提供了此参数，白板推流服务会优先使用此参数指定的SdkAppId作为白板信令的传输通道，否则使用公共参数中的SdkAppId作为白板信令的传输通道。
+      */
+  IMAuthParam?: AuthParam
+
+  /**
+      * 内测参数，需开通白名单进行体验。
+
+TRTC鉴权信息参数，用于TRTC进房推流鉴权。
+当需要推流到的TRTC房间所对应的TRTC应用与白板应用的SdkAppId不一致时，可以通过此参数提供对应的TRTC应用鉴权信息。
+
+如果提供了此参数，白板推流服务会优先使用此参数指定的SdkAppId作为白板推流的目标TRTC应用，否则使用公共参数中的SdkAppId作为白板推流的目标TRTC应用。
+      */
+  TRTCAuthParam?: AuthParam
 }
 
 /**
@@ -1383,18 +1424,44 @@ export interface SetTranscodeCallbackKeyRequest {
 }
 
 /**
- * DescribeTranscode请求参数结构体
+ * CreateSnapshotTask请求参数结构体
  */
-export interface DescribeTranscodeRequest {
+export interface CreateSnapshotTaskRequest {
   /**
-   * 客户的SdkAppId
+   * 白板相关参数
+   */
+  Whiteboard: SnapshotWhiteboard
+
+  /**
+   * 白板房间 `SdkAppId`
    */
   SdkAppId: number
 
   /**
-   * 文档转码任务的唯一标识Id
+   * 白板房间号
    */
-  TaskId: string
+  RoomId: number
+
+  /**
+   * 白板板书生成结果通知回调地址
+   */
+  CallbackURL?: string
+
+  /**
+   * 白板板书文件 `COS` 存储参数， 不填默认存储在公共存储桶，公共存储桶的数据仅保存3天
+   */
+  COS?: SnapshotCOS
+
+  /**
+      * 白板板书生成模式，默认为 `AllMarks`。取值说明如下：
+
+`AllMarks` - 全量模式，即对于客户端每一次调用 `addSnapshotMark` 接口打上的白板板书生成标志全部都会生成对应的白板板书图片。
+
+`LatestMarksOnly` - 单页去重模式，即对于客户端在同一页白板上多次调用 `addSnapshotMark` 打上的白板板书生成标志仅保留最新一次标志来生成对应白板页的白板板书图片。
+
+（**注意：`LatestMarksOnly` 模式只有客户端使用v2.6.8及以上版本的白板SDK调用 `addSnapshotMark` 时才生效，否则即使在调用本API是指定了 `LatestMarksOnly` 模式，服务后台会使用默认的 `AllMarks` 模式生成白板板书**）
+      */
+  SnapshotMode?: string
 }
 
 /**
@@ -1614,44 +1681,18 @@ export interface DescribeTranscodeCallbackRequest {
 }
 
 /**
- * CreateSnapshotTask请求参数结构体
+ * DescribeTranscode请求参数结构体
  */
-export interface CreateSnapshotTaskRequest {
+export interface DescribeTranscodeRequest {
   /**
-   * 白板相关参数
-   */
-  Whiteboard: SnapshotWhiteboard
-
-  /**
-   * 白板房间 `SdkAppId`
+   * 客户的SdkAppId
    */
   SdkAppId: number
 
   /**
-   * 白板房间号
+   * 文档转码任务的唯一标识Id
    */
-  RoomId: number
-
-  /**
-   * 白板板书生成结果通知回调地址
-   */
-  CallbackURL?: string
-
-  /**
-   * 白板板书文件 `COS` 存储参数， 不填默认存储在公共存储桶，公共存储桶的数据仅保存3天
-   */
-  COS?: SnapshotCOS
-
-  /**
-      * 白板板书生成模式，默认为 `AllMarks`。取值说明如下：
-
-`AllMarks` - 全量模式，即对于客户端每一次调用 `addSnapshotMark` 接口打上的白板板书生成标志全部都会生成对应的白板板书图片。
-
-`LatestMarksOnly` - 单页去重模式，即对于客户端在同一页白板上多次调用 `addSnapshotMark` 打上的白板板书生成标志仅保留最新一次标志来生成对应白板页的白板板书图片。
-
-（**注意：`LatestMarksOnly` 模式只有客户端使用v2.6.8及以上版本的白板SDK调用 `addSnapshotMark` 时才生效，否则即使在调用本API是指定了 `LatestMarksOnly` 模式，服务后台会使用默认的 `AllMarks` 模式生成白板板书**）
-      */
-  SnapshotMode?: string
+  TaskId: string
 }
 
 /**

@@ -1,4 +1,17 @@
 /**
+ * DismissRoomByStrRoomId请求参数结构体
+ */
+export interface DismissRoomByStrRoomIdRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 房间号。
+      */
+    RoomId: string;
+}
+/**
  * DescribeAbnormalEvent返回参数结构体
  */
 export interface DescribeAbnormalEventResponse {
@@ -14,6 +27,36 @@ export interface DescribeAbnormalEventResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 第三方云存储的账号信息。
+ */
+export interface CloudStorage {
+    /**
+      * 第三方云储存的供应商:
+0：腾讯云存储 COS，暂不支持其他家。
+      */
+    Vendor: number;
+    /**
+      * 第三方云存储的地域信息。
+      */
+    Region: string;
+    /**
+      * 第三方存储桶信息。
+      */
+    Bucket: string;
+    /**
+      * 第三方存储的access_key账号信息。
+      */
+    AccessKey: string;
+    /**
+      * 第三方存储的secret_key账号信息。
+      */
+    SecretKey: string;
+    /**
+      * 第三方云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围a~z,A~Z,0~9，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。
+      */
+    FileNamePrefix?: Array<string>;
 }
 /**
  * DescribeAbnormalEvent请求参数结构体
@@ -72,6 +115,61 @@ export interface ModifyPictureResponse {
     RequestId?: string;
 }
 /**
+ * RemoveUser请求参数结构体
+ */
+export interface RemoveUserRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 房间号。
+      */
+    RoomId: number;
+    /**
+      * 要移出的用户列表，最多10个。
+      */
+    UserIds: Array<string>;
+}
+/**
+ * DescribeCloudRecording返回参数结构体
+ */
+export interface DescribeCloudRecordingResponse {
+    /**
+      * 录制任务的唯一Id。
+      */
+    TaskId: string;
+    /**
+      * 云端录制任务的状态信息。
+Idle：表示当前录制任务空闲中
+InProgress：表示当前录制任务正在进行中。
+Exited：表示当前录制任务正在退出的过程中。
+      */
+    Status: string;
+    /**
+      * 录制文件信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageFileList: Array<StorageFile>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 返回的质量数据，时间:值
+ */
+export interface TimeValue {
+    /**
+      * 时间，unix时间戳（1590065877s)
+      */
+    Time: number;
+    /**
+      * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
+      */
+    Value: number;
+}
+/**
  * StartMCUMixTranscodeByStrRoomId请求参数结构体
  */
 export interface StartMCUMixTranscodeByStrRoomIdRequest {
@@ -99,64 +197,6 @@ export interface StartMCUMixTranscodeByStrRoomIdRequest {
       * 第三方CDN转推参数。
       */
     PublishCdnParams?: PublishCdnParams;
-}
-/**
- * MCU混流布局参数
- */
-export interface LayoutParams {
-    /**
-      * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
-      */
-    Template?: number;
-    /**
-      * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
-      */
-    MainVideoUserId?: string;
-    /**
-      * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
-      */
-    MainVideoStreamType?: number;
-    /**
-      * 画中画模板中有效，代表小画面的布局参数。
-      */
-    SmallVideoLayoutParams?: SmallVideoLayoutParams;
-    /**
-      * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
-      */
-    MainVideoRightAlign?: number;
-    /**
-      * 悬浮模板、九宫格、屏幕分享模板有效。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。最多可设置16个用户。
-      */
-    MixVideoUids?: Array<string>;
-    /**
-      * 自定义模板中有效，指定用户视频在混合画面中的位置。
-      */
-    PresetLayoutConfig?: Array<PresetLayoutConfig>;
-    /**
-      * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
-      */
-    PlaceHolderMode?: number;
-    /**
-      * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
-      */
-    PureAudioHoldPlaceMode?: number;
-    /**
-      * 水印参数。
-      */
-    WaterMarkParams?: WaterMarkParams;
-}
-/**
- * 返回的质量数据，时间:值
- */
-export interface TimeValue {
-    /**
-      * 时间，unix时间戳（1590065877s)
-      */
-    Time: number;
-    /**
-      * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
-      */
-    Value: number;
 }
 /**
  * CreatePicture请求参数结构体
@@ -234,6 +274,88 @@ export interface RemoveUserByStrRoomIdRequest {
       * 要移出的用户列表，最多10个。
       */
     UserIds: Array<string>;
+}
+/**
+ * 指定订阅流白名单或者黑名单，音频的白名单和音频黑名单不能同时设置，视频亦然。同时实际并发订阅的媒体流路数最大支持25路流，混流场景下视频的多画面最大支持24画面。
+ */
+export interface SubscribeStreamUserIds {
+    /**
+      * 订阅音频流白名单，指定订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表订阅UserId 1，2，3的音频流，默认不填订阅房间内所有的音频流，订阅列表用户数不超过32。
+      */
+    SubscribeAudioUserIds?: Array<string>;
+    /**
+      * 订阅音频流黑名单，指定不订阅哪几个UserId的音频流，例如["1", "2", "3"], 代表不订阅UserId 1，2，3的音频流，默认不填订阅房间内所有音频流，订阅列表用户数不超过32。
+      */
+    UnSubscribeAudioUserIds?: Array<string>;
+    /**
+      * 订阅视频流白名单，指定订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表订阅UserId  1，2，3的视频流，默认不填订阅房间内所有视频流，订阅列表用户数不超过32。
+      */
+    SubscribeVideoUserIds?: Array<string>;
+    /**
+      * 订阅视频流黑名单，指定不订阅哪几个UserId的视频流，例如["1", "2", "3"], 代表不订阅UserId  1，2，3的视频流，默认不填订阅房间内所有视频流，订阅列表用户数不超过32。
+      */
+    UnSubscribeVideoUserIds?: Array<string>;
+}
+/**
+ * 录制的混流布局参数。
+
+ */
+export interface MixLayoutParams {
+    /**
+      * 布局模式:
+1：悬浮布局；
+2：屏幕分享布局；
+3：九宫格布局（默认）；
+4：自定义布局；
+
+悬浮布局：默认第一个进入房间的主播（也可以指定一个主播）的视频画面会铺满整个屏幕。其他主播的视频画面从左下角开始依次按照进房顺序水平排列，显示为小画面，小画面悬浮于大画面之上。当画面数量小于等于17个时，每行4个（4 x 4排列）。当画面数量大于17个时，重新布局小画面为每行5个（5 x 5）排列。最多支持25个画面，如果用户只发送音频，仍然会占用画面位置。
+
+屏幕分享布局：指定一个主播在屏幕左侧的大画面位置（如果不指定，那么大画面位置为背景色），其他主播自上而下依次垂直排列于右侧。当画面数量少于17个的时候，右侧每列最多8人，最多占据两列。当画面数量多于17个的时候，超过17个画面的主播从左下角开始依次水平排列。最多支持25个画面，如果主播只发送音频，仍然会占用画面位置。
+
+九宫格布局：根据主播的数量自动调整每个画面的大小，每个主播的画面大小一致，最多支持25个画面。
+
+自定义布局：根据需要在MixLayoutList内定制每个主播画面的布局。
+      */
+    MixLayoutMode: number;
+    /**
+      * 如果MixLayoutMode 选择为4自定义布局模式的话，设置此参数为每个主播所对应的布局画面的详细信息，最大不超过25个。
+      */
+    MixLayoutList?: Array<MixLayout>;
+    /**
+      * 录制背景颜色，RGB的颜色表的16进制表示，每个颜色通过8bit长度标识，默认为黑色。比如橙色对应的RGB为 R:255 G:165 B:0, 那么对应的字符串描述为#FFA500，格式规范：‘#‘开头，后面跟固定RGB的颜色值
+      */
+    BackGroundColor?: string;
+    /**
+      * 在布局模式为1：悬浮布局和 2：屏幕分享布局时，设定为显示大视频画面的UserId。不填的话：悬浮布局默认是第一个进房间的主播，屏幕分享布局默认是背景色
+      */
+    MaxResolutionUserId?: string;
+    /**
+      * 主辅路标识，
+0：主流（默认）；
+1：辅流（屏幕分享）；
+这个位置的MediaId代表的是对应MaxResolutionUserId的主辅路，MixLayoutList内代表的是自定义用户的主辅路。
+      */
+    MediaId?: number;
+    /**
+      * 下载的url地址， 只支持jpg， png，大小限制不超过5M。
+      */
+    BackgroundImageUrl?: string;
+    /**
+      * 设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+      */
+    PlaceHolderMode?: number;
+    /**
+      * 背景画面宽高比不一致的时候处理方案，与MixLayoufList定义的RenderMode一致。
+      */
+    BackgroundImageRenderMode?: number;
+    /**
+      * 下载的url地址， 只支持jpg， png，大小限制不超过5M，宽高比不一致的处理方案同 RenderMode。
+      */
+    DefaultSubBackgroundImage?: string;
+    /**
+      * 水印布局参数， 最多支持25个。
+      */
+    WaterMarkList?: Array<WaterMark>;
 }
 /**
  * DismissRoom返回参数结构体
@@ -399,22 +521,26 @@ export interface ScaleInfomation {
     RoomNumbers: number;
 }
 /**
- * DescribeUserInformation返回参数结构体
+ * 第三方存储参数。
  */
-export interface DescribeUserInformationResponse {
+export interface StorageParams {
     /**
-      * 返回的用户总条数
+      * 第三方云存储的账号信息。
       */
-    Total: number;
+    CloudStorage?: CloudStorage;
     /**
-      * 用户信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 第三方云点播的账号信息。
       */
-    UserList: Array<UserInformation>;
+    CloudVod?: CloudVod;
+}
+/**
+ * 点播相关参数。
+ */
+export interface CloudVod {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 腾讯云点播相关参数。
       */
-    RequestId?: string;
+    TencentVod?: TencentVod;
 }
 /**
  * MCU混流输出流编码参数
@@ -477,13 +603,33 @@ export interface EncodeParams {
     BackgroundImageUrl?: string;
 }
 /**
- * RemoveUserByStrRoomId返回参数结构体
+ * ModifyPicture请求参数结构体
  */
-export interface RemoveUserByStrRoomIdResponse {
+export interface ModifyPictureRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 图片id
       */
-    RequestId?: string;
+    PictureId: number;
+    /**
+      * 应用id
+      */
+    SdkAppId: number;
+    /**
+      * 图片长度
+      */
+    Height?: number;
+    /**
+      * 图片宽度
+      */
+    Width?: number;
+    /**
+      * 显示位置x轴方向
+      */
+    XPosition?: number;
+    /**
+      * 显示位置y轴方向
+      */
+    YPosition?: number;
 }
 /**
  * StartMCUMixTranscode请求参数结构体
@@ -513,6 +659,83 @@ export interface StartMCUMixTranscodeRequest {
       * 第三方CDN转推参数。
       */
     PublishCdnParams?: PublishCdnParams;
+}
+/**
+ * DescribeCloudRecording请求参数结构体
+ */
+export interface DescribeCloudRecordingRequest {
+    /**
+      * TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。
+      */
+    SdkAppId: number;
+    /**
+      * 录制任务的唯一Id，在启动录制成功后会返回。
+      */
+    TaskId: string;
+}
+/**
+ * 腾讯云点播相关参数。
+ */
+export interface TencentVod {
+    /**
+      * 媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 创建任务流模板 并为模板命名。
+      */
+    Procedure?: string;
+    /**
+      * 媒体文件过期时间，为当前时间的绝对过期时间；保存一天，就填"86400"，永久保存就填"0"，默认永久保存。
+      */
+    ExpireTime?: number;
+    /**
+      * 指定上传园区，仅适用于对上传地域有特殊需求的用户。
+      */
+    StorageRegion?: string;
+    /**
+      * 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。
+默认值：0，表示其他分类。
+      */
+    ClassId?: number;
+    /**
+      * 点播 子应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
+    /**
+      * 任务流上下文，任务完成回调时透传。
+      */
+    SessionContext?: string;
+    /**
+      * 上传上下文，上传完成回调时透传。
+      */
+    SourceContext?: string;
+}
+/**
+ * 云端录制控制参数。
+ */
+export interface RecordParams {
+    /**
+      * 录制模式：
+1：单流录制，分别录制房间的订阅UserId的音频和视频，将录制文件（M3U8/TS）上传至云存储；
+2：混流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件[M3U8/TS]上传至云存储；
+      */
+    RecordMode: number;
+    /**
+      * 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
+      */
+    MaxIdleTime?: number;
+    /**
+      * 录制的媒体流类型：
+0：录制音频+视频流（默认）;
+1：仅录制音频流；
+2：仅录制视频流，
+      */
+    StreamType?: number;
+    /**
+      * 指定订阅流白名单或者黑名单。
+      */
+    SubscribeStreamUserIds?: SubscribeStreamUserIds;
+    /**
+      * 输出文件的格式。0：(默认)输出文件为hls格式。1：输出文件格式为hls+mp4（hls录制完成后转mp4文件）
+      */
+    OutputFormat?: number;
 }
 /**
  * StopMCUMixTranscode请求参数结构体
@@ -565,6 +788,59 @@ export interface UserInformation {
     Finished: boolean;
 }
 /**
+ * 用户自定义混流布局参数列表。
+ */
+export interface MixLayout {
+    /**
+      * 画布上该画面左上角的 y 轴坐标，取值范围 [0, 1920]，不能超过画布的高。
+      */
+    Top: number;
+    /**
+      * 画布上该画面左上角的 x 轴坐标，取值范围 [0, 1920]，不能超过画布的宽。
+      */
+    Left: number;
+    /**
+      * 画布上该画面宽度的相对值，取值范围 [0, 1920]，与Left相加不应超过画布的宽。
+      */
+    Width: number;
+    /**
+      * 画布上该画面高度的相对值，取值范围 [0, 1920]，与Top相加不应超过画布的高。
+      */
+    Height: number;
+    /**
+      * 字符串内容为待显示在该画面的主播对应的UserId，如果不指定，会按照主播加入房间的顺序匹配。
+      */
+    UserId?: string;
+    /**
+      * 画布的透明度值，取值范围[0, 255]。0表示不透明，255表示全透明。默认值为0。
+      */
+    Alpha?: number;
+    /**
+      * 0 ：拉伸模式，这个模式下整个视频内容会全部显示，并填满子画面，在源视频和目的视频宽高比不一致的时候，画面不会缺少内容，但是画面可能产生形变；
+
+1 ：剪裁模式（默认），这个模式下会严格按照目的视频的宽高比对源视频剪裁之后再拉伸，并填满子画面画布，在源视频和目的视频宽高比不一致的时候，画面保持不变形，但是会被剪裁；
+
+2 ：填黑模式，这个模式下会严格保持源视频的宽高比进行等比缩放，在源视频和目的视频宽高比不一致的时候，画面的上下侧边缘或者左右侧边缘会露出子画面画布的背景；
+
+3 ：智能拉伸模式，这个模式类似剪裁模式，区别是在源视频和目的视频宽高比不一致的时候，限制了最大剪裁比例为画面的宽度或者高度的20%；
+      */
+    RenderMode?: number;
+    /**
+      * 对应订阅流的主辅路标识：
+0：主流（默认）；
+1：辅流；
+      */
+    MediaId?: number;
+    /**
+      * 该画布的图层顺序, 这个值越小表示图层越靠后。默认值为0。
+      */
+    ImageLayer?: number;
+    /**
+      * 下载的url地址， 只支持jpg， png，大小限制不超过5M，宽高比不一致的处理方案同 RenderMode。
+      */
+    SubBackgroundImage?: string;
+}
+/**
  * DescribeHistoryScale请求参数结构体
  */
 export interface DescribeHistoryScaleRequest {
@@ -593,6 +869,51 @@ export interface DeletePictureRequest {
       * 应用id
       */
     SdkAppId: number;
+}
+/**
+ * MCU混流布局参数
+ */
+export interface LayoutParams {
+    /**
+      * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
+      */
+    Template?: number;
+    /**
+      * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
+      */
+    MainVideoUserId?: string;
+    /**
+      * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
+      */
+    MainVideoStreamType?: number;
+    /**
+      * 画中画模板中有效，代表小画面的布局参数。
+      */
+    SmallVideoLayoutParams?: SmallVideoLayoutParams;
+    /**
+      * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
+      */
+    MainVideoRightAlign?: number;
+    /**
+      * 悬浮模板、九宫格、屏幕分享模板有效。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。最多可设置16个用户。
+      */
+    MixVideoUids?: Array<string>;
+    /**
+      * 自定义模板中有效，指定用户视频在混合画面中的位置。
+      */
+    PresetLayoutConfig?: Array<PresetLayoutConfig>;
+    /**
+      * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+      */
+    PlaceHolderMode?: number;
+    /**
+      * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
+      */
+    PureAudioHoldPlaceMode?: number;
+    /**
+      * 水印参数。
+      */
+    WaterMarkParams?: WaterMarkParams;
 }
 /**
  * DescribeRoomInformation返回参数结构体
@@ -637,21 +958,55 @@ export interface RecordUsage {
     AudioTime: number;
 }
 /**
- * RemoveUser请求参数结构体
+ * CreateCloudRecording请求参数结构体
  */
-export interface RemoveUserRequest {
+export interface CreateCloudRecordingRequest {
     /**
-      * TRTC的SDKAppId。
+      * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和录制的房间所对应的SdkAppId相同。
       */
     SdkAppId: number;
     /**
-      * 房间号。
+      * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，录制的TRTC房间所对应的RoomId。
       */
-    RoomId: number;
+    RoomId: string;
     /**
-      * 要移出的用户列表，最多10个。
+      * 录制服务在TRTC房间使用的[UserId](https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者录制服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。
       */
-    UserIds: Array<string>;
+    UserId: string;
+    /**
+      * 云端录制加入房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+      */
+    UserSig: string;
+    /**
+      * 云端录制控制参数。
+      */
+    RecordParams: RecordParams;
+    /**
+      * 云端录制文件上传到云存储的参数。
+      */
+    StorageParams: StorageParams;
+    /**
+      * TRTC房间号的类型，必须和录制的房间所对应的RoomId类型相同:
+0: 字符串类型的RoomId
+1: 32位整型的RoomId（默认）
+      */
+    RoomIdType?: number;
+    /**
+      * 混流的转码参数，录制模式为混流的时候可以设置。
+      */
+    MixTranscodeParams?: MixTranscodeParams;
+    /**
+      * 混流的布局参数，录制模式为混流的时候可以设置。
+      */
+    MixLayoutParams?: MixLayoutParams;
+    /**
+      * 接口可以调用的时效性，从成功开启录制并获得任务ID后开始计算，超时后无法调用查询、更新和停止等接口，但是录制任务不会停止。 参数的单位是小时，默认72小时（3天），最大可设置720小时（30天），最小设置6小时。举例说明：如果不设置该参数，那么开始录制成功后，查询、更新和停止录制的调用时效为72个小时。
+      */
+    ResourceExpiredHour?: number;
+    /**
+      * TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey]（https://cloud.tencent.com/document/product/647/32240） 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。
+      */
+    PrivateMapKey?: string;
 }
 /**
  * MCU混流的输出参数
@@ -675,33 +1030,43 @@ export interface OutputParams {
     RecordAudioOnly?: number;
 }
 /**
- * ModifyPicture请求参数结构体
+ * 水印布局参数
  */
-export interface ModifyPictureRequest {
+export interface WaterMark {
     /**
-      * 图片id
+      * 水印类型，0为图片（默认），1为文字（暂不支持）。
       */
-    PictureId: number;
+    WaterMarkType?: number;
     /**
-      * 应用id
+      * 水印为图片时的参数列表，水印为图片时校验必填。
       */
-    SdkAppId: number;
+    WaterMarkImage?: WaterMarkImage;
+}
+/**
+ * DeleteCloudRecording返回参数结构体
+ */
+export interface DeleteCloudRecordingResponse {
     /**
-      * 图片长度
+      * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。
       */
-    Height?: number;
+    TaskId: string;
     /**
-      * 图片宽度
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Width?: number;
+    RequestId?: string;
+}
+/**
+ * 录制的音视频转码参数。
+ */
+export interface MixTranscodeParams {
     /**
-      * 显示位置x轴方向
+      * 录制视频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
       */
-    XPosition?: number;
+    VideoParams?: VideoParams;
     /**
-      * 显示位置y轴方向
+      * 录制音频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
       */
-    YPosition?: number;
+    AudioParams?: AudioParams;
 }
 /**
  * CreateTroubleInfo返回参数结构体
@@ -762,6 +1127,15 @@ export interface AbnormalEvent {
     PeerId: string;
 }
 /**
+ * RemoveUserByStrRoomId返回参数结构体
+ */
+export interface RemoveUserByStrRoomIdResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StopMCUMixTranscodeByStrRoomId返回参数结构体
  */
 export interface StopMCUMixTranscodeByStrRoomIdResponse {
@@ -778,6 +1152,27 @@ export interface DeletePictureResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyCloudRecording请求参数结构体
+ */
+export interface ModifyCloudRecordingRequest {
+    /**
+      * TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。
+      */
+    SdkAppId: number;
+    /**
+      * 录制任务的唯一Id，在启动录制成功后会返回。
+      */
+    TaskId: string;
+    /**
+      * 需要更新的混流的布局参数。
+      */
+    MixLayoutParams?: MixLayoutParams;
+    /**
+      * 指定订阅流白名单或者黑名单。
+      */
+    SubscribeStreamUserIds?: SubscribeStreamUserIds;
 }
 /**
  * CreateTroubleInfo请求参数结构体
@@ -838,17 +1233,77 @@ export interface EventList {
     PeerId: string;
 }
 /**
- * DismissRoom请求参数结构体
+ * 云端录制查询接口，录制文件的信息
  */
-export interface DismissRoomRequest {
+export interface StorageFile {
     /**
-      * TRTC的SDKAppId。
+      * 录制文件对应的UserId，如果是混流的话的这里返回的是空串。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserId: string;
+    /**
+      * 录制索引文件名。
+      */
+    FileName: string;
+    /**
+      * 录制文件流信息。
+video：视频录制文件
+audio：音频录制文件
+audio_video：音视频录制文件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TrackType: string;
+    /**
+      * 录制文件开始Unix时间戳。
+      */
+    BeginTimeStamp: number;
+}
+/**
+ * 图片列表信息
+ */
+export interface PictureInfo {
+    /**
+      * 图片长度
+      */
+    Height: number;
+    /**
+      * 图片宽度
+      */
+    Width: number;
+    /**
+      * 显示位置x轴方向
+      */
+    XPosition: number;
+    /**
+      * 显示位置y轴方向
+      */
+    YPosition: number;
+    /**
+      * 应用id
       */
     SdkAppId: number;
     /**
-      * 房间号。
+      * 图片id
       */
-    RoomId: number;
+    PictureId: number;
+}
+/**
+ * DescribeUserInformation返回参数结构体
+ */
+export interface DescribeUserInformationResponse {
+    /**
+      * 返回的用户总条数
+      */
+    Total: number;
+    /**
+      * 用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserList: Array<UserInformation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDetailEvent返回参数结构体
@@ -864,22 +1319,36 @@ export interface DescribeDetailEventResponse {
     RequestId?: string;
 }
 /**
- * DismissRoomByStrRoomId请求参数结构体
+ * CreateCloudRecording返回参数结构体
  */
-export interface DismissRoomByStrRoomIdRequest {
+export interface CreateCloudRecordingResponse {
     /**
-      * TRTC的SDKAppId。
+      * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。任务 ID需要业务保存下来，作为下次针对这个录制任务操作的参数。
       */
-    SdkAppId: number;
+    TaskId: string;
     /**
-      * 房间号。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RoomId: string;
+    RequestId?: string;
 }
 /**
- * StartMCUMixTranscode返回参数结构体
+ * DescribeCallDetail返回参数结构体
  */
-export interface StartMCUMixTranscodeResponse {
+export interface DescribeCallDetailResponse {
+    /**
+      * 返回的用户总条数
+      */
+    Total: number;
+    /**
+      * 用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserList: Array<UserInformation>;
+    /**
+      * 质量数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<QualityData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -914,6 +1383,19 @@ export interface DescribeTrtcMcuTranscodeTimeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteCloudRecording请求参数结构体
+ */
+export interface DeleteCloudRecordingRequest {
+    /**
+      * TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。
+      */
+    SdkAppId: number;
+    /**
+      * 录制任务的唯一Id，在启动录制成功后会返回。
+      */
+    TaskId: string;
 }
 /**
  * DescribePicture请求参数结构体
@@ -1033,27 +1515,51 @@ export interface PresetLayoutConfig {
     PlaceImageId?: number;
 }
 /**
- * DescribeCallDetail返回参数结构体
+ * 录制视频转码参数。
  */
-export interface DescribeCallDetailResponse {
+export interface VideoParams {
     /**
-      * 返回的用户总条数
+      * 视频的宽度值，单位为像素，默认值360。不能超过1920，与height的乘积不能超过1920*1080。
       */
-    Total: number;
+    Width: number;
     /**
-      * 用户信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 视频的高度值，单位为像素，默认值640。不能超过1920，与width的乘积不能超过1920*1080。
       */
-    UserList: Array<UserInformation>;
+    Height: number;
     /**
-      * 质量数据
-注意：此字段可能返回 null，表示取不到有效值。
+      * 视频的帧率，范围[1, 60]，默认15。
       */
-    Data: Array<QualityData>;
+    Fps: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 视频的码率,单位是bps，范围[64000, 8192000]，默认550000bps。
       */
-    RequestId?: string;
+    BitRate: number;
+    /**
+      * 视频关键帧时间间隔，单位秒，默认值10秒。
+      */
+    Gop: number;
+}
+/**
+ * 录制音频转码参数。
+ */
+export interface AudioParams {
+    /**
+      * 音频采样率:
+1：48000Hz（默认）;
+2：44100Hz
+3：16000Hz。
+      */
+    SampleRate: number;
+    /**
+      * 声道数:
+1：单身道;
+2：双声道（默认）。
+      */
+    Channel: number;
+    /**
+      * 音频码率: 取值范围[32000, 128000] ，单位bps，默认64000bps。
+      */
+    BitRate: number;
 }
 /**
  * DescribePicture返回参数结构体
@@ -1071,6 +1577,44 @@ export interface DescribePictureResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 水印类型为图片的参数列表
+ */
+export interface WaterMarkImage {
+    /**
+      * 下载的url地址， 只支持jpg， png，大小限制不超过5M。
+      */
+    WaterMarkUrl: string;
+    /**
+      * 画布上该画面左上角的 y 轴坐标，取值范围 [0, 2560]，不能超过画布的高。
+      */
+    Top: number;
+    /**
+      * 画布上该画面左上角的 x 轴坐标，取值范围 [0, 2560]，不能超过画布的宽。
+      */
+    Left: number;
+    /**
+      * 画布上该画面宽度的相对值，取值范围 [0, 2560]，与Left相加不应超过画布的宽。
+      */
+    Width: number;
+    /**
+      * 画布上该画面高度的相对值，取值范围 [0, 2560]，与Top相加不应超过画布的高。
+      */
+    Height: number;
+}
+/**
+ * DismissRoom请求参数结构体
+ */
+export interface DismissRoomRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 房间号。
+      */
+    RoomId: number;
 }
 /**
  * 第三方CDN转推参数
@@ -1163,6 +1707,15 @@ export interface AbnormalExperience {
       * 异常事件的上报时间
       */
     EventTime: number;
+}
+/**
+ * StartMCUMixTranscode返回参数结构体
+ */
+export interface StartMCUMixTranscodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 房间信息列表
@@ -1285,31 +1838,15 @@ export interface StartMCUMixTranscodeByStrRoomIdResponse {
     RequestId?: string;
 }
 /**
- * 图片列表信息
+ * ModifyCloudRecording返回参数结构体
  */
-export interface PictureInfo {
+export interface ModifyCloudRecordingResponse {
     /**
-      * 图片长度
+      * 云录制服务分配的任务 ID。任务 ID 是对一次录制生命周期过程的唯一标识，结束录制时会失去意义。
       */
-    Height: number;
+    TaskId: string;
     /**
-      * 图片宽度
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Width: number;
-    /**
-      * 显示位置x轴方向
-      */
-    XPosition: number;
-    /**
-      * 显示位置y轴方向
-      */
-    YPosition: number;
-    /**
-      * 应用id
-      */
-    SdkAppId: number;
-    /**
-      * 图片id
-      */
-    PictureId: number;
+    RequestId?: string;
 }

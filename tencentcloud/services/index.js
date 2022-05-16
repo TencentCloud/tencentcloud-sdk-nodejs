@@ -74,6 +74,8 @@ var ccc_1 = require("./ccc");
 Object.defineProperty(exports, "ccc", { enumerable: true, get: function () { return ccc_1.ccc; } });
 var cdb_1 = require("./cdb");
 Object.defineProperty(exports, "cdb", { enumerable: true, get: function () { return cdb_1.cdb; } });
+var cdc_1 = require("./cdc");
+Object.defineProperty(exports, "cdc", { enumerable: true, get: function () { return cdc_1.cdc; } });
 var cdn_1 = require("./cdn");
 Object.defineProperty(exports, "cdn", { enumerable: true, get: function () { return cdn_1.cdn; } });
 var cds_1 = require("./cds");

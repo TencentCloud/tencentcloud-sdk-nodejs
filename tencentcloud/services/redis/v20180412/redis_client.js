@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceNodeInfo", req, cb);
     }
     /**
+     * 设置实例输入模式
+     */
+    async ModifyInstanceReadOnly(req, cb) {
+        return this.request("ModifyInstanceReadOnly", req, cb);
+    }
+    /**
      * 查询实例大Key大小分布
      */
     async DescribeInstanceMonitorBigKeySizeDist(req, cb) {

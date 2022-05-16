@@ -347,6 +347,21 @@ export interface CreateReplicationGroupRequest {
 }
 
 /**
+ * ModifyInstanceReadOnly返回参数结构体
+ */
+export interface ModifyInstanceReadOnlyResponse {
+  /**
+   * 任务ID
+   */
+  TaskId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstanceZoneInfo请求参数结构体
  */
 export interface DescribeInstanceZoneInfoRequest {
@@ -920,6 +935,26 @@ export interface ClearInstanceRequest {
    * redis的实例密码（免密实例不需要传密码，非免密实例必传）
    */
   Password?: string
+}
+
+/**
+ * UpgradeInstanceVersion请求参数结构体
+ */
+export interface UpgradeInstanceVersionRequest {
+  /**
+   * 目标实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type，即实例要变更的目标类型
+   */
+  TargetInstanceType: string
+
+  /**
+   * 切换模式：1-维护时间窗切换，2-立即切换
+   */
+  SwitchOption: number
+
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -4485,23 +4520,18 @@ export interface DescribeProxySlowLogResponse {
 }
 
 /**
- * UpgradeInstanceVersion请求参数结构体
+ * ModifyInstanceReadOnly请求参数结构体
  */
-export interface UpgradeInstanceVersionRequest {
-  /**
-   * 目标实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type，即实例要变更的目标类型
-   */
-  TargetInstanceType: string
-
-  /**
-   * 切换模式：1-维护时间窗切换，2-立即切换
-   */
-  SwitchOption: number
-
+export interface ModifyInstanceReadOnlyRequest {
   /**
    * 实例ID
    */
   InstanceId: string
+
+  /**
+   * 实例输入模式，0：读写 1：只读
+   */
+  InputMode: string
 }
 
 /**

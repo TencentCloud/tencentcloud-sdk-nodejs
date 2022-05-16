@@ -328,6 +328,16 @@ it("vod.v20180717.DescribeMediaPlayStatDetails", async function () {
     }
 })
 
+it("vod.v20180717.DescribeLicenseUsageData", async function () {
+    try {
+       const data = await client.DescribeLicenseUsageData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyImageSpriteTemplate", async function () {
     try {
        const data = await client.ModifyImageSpriteTemplate({})
@@ -768,9 +778,9 @@ it("vod.v20180717.DescribeStorageDetails", async function () {
     }
 })
 
-it("vod.v20180717.ForbidMediaDistribution", async function () {
+it("vod.v20180717.DeleteWordSamples", async function () {
     try {
-       const data = await client.ForbidMediaDistribution({})
+       const data = await client.DeleteWordSamples({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,9 +848,9 @@ it("vod.v20180717.DescribeAnimatedGraphicsTemplates", async function () {
     }
 })
 
-it("vod.v20180717.DeleteWordSamples", async function () {
+it("vod.v20180717.ForbidMediaDistribution", async function () {
     try {
-       const data = await client.DeleteWordSamples({})
+       const data = await client.ForbidMediaDistribution({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

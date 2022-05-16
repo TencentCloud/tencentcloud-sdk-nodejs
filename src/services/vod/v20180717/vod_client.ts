@@ -68,6 +68,7 @@ import {
   ResetProcedureTemplateRequest,
   ContentReviewOcrResult,
   ComposeMediaResponse,
+  DescribeLicenseUsageDataResponse,
   UrlSignatureAuthPolicy,
   DeleteSampleSnapshotTemplateRequest,
   DescribeStorageDataResponse,
@@ -188,6 +189,7 @@ import {
   SimpleHlsClipResponse,
   DeleteAIAnalysisTemplateRequest,
   EditMediaRequest,
+  LicenseUsageDataItem,
   ConcatFileInfo2017,
   ContentReviewResult,
   MediaProcessTaskImageSpriteResult,
@@ -536,6 +538,7 @@ import {
   ConfirmEventsResponse,
   ModifyPersonSampleResponse,
   VideoTrackItem,
+  DescribeLicenseUsageDataRequest,
   DeleteTranscodeTemplateResponse,
   MediaTranscodeItem,
   DescribePersonSamplesResponse,
@@ -972,6 +975,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMediaPlayStatDetailsResponse) => void
   ): Promise<DescribeMediaPlayStatDetailsResponse> {
     return this.request("DescribeMediaPlayStatDetails", req, cb)
+  }
+
+  /**
+     * 该接口返回查询时间范围内每天 License 请求次数信息。
+   1. 可以查询最近365天内的 License 请求次数统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+
+     */
+  async DescribeLicenseUsageData(
+    req: DescribeLicenseUsageDataRequest,
+    cb?: (error: string, rep: DescribeLicenseUsageDataResponse) => void
+  ): Promise<DescribeLicenseUsageDataResponse> {
+    return this.request("DescribeLicenseUsageData", req, cb)
   }
 
   /**
@@ -1511,14 +1528,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
-  禁播/解禁操作全网生效时间约 5~10 分钟。
-     */
-  async ForbidMediaDistribution(
-    req: ForbidMediaDistributionRequest,
-    cb?: (error: string, rep: ForbidMediaDistributionResponse) => void
-  ): Promise<ForbidMediaDistributionResponse> {
-    return this.request("ForbidMediaDistribution", req, cb)
+   * 该接口用于批量删除关键词样本。
+   */
+  async DeleteWordSamples(
+    req: DeleteWordSamplesRequest,
+    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
+  ): Promise<DeleteWordSamplesResponse> {
+    return this.request("DeleteWordSamples", req, cb)
   }
 
   /**
@@ -1583,13 +1599,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量删除关键词样本。
-   */
-  async DeleteWordSamples(
-    req: DeleteWordSamplesRequest,
-    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
-  ): Promise<DeleteWordSamplesResponse> {
-    return this.request("DeleteWordSamples", req, cb)
+     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
+  禁播/解禁操作全网生效时间约 5~10 分钟。
+     */
+  async ForbidMediaDistribution(
+    req: ForbidMediaDistributionRequest,
+    cb?: (error: string, rep: ForbidMediaDistributionResponse) => void
+  ): Promise<ForbidMediaDistributionResponse> {
+    return this.request("ForbidMediaDistribution", req, cb)
   }
 
   /**

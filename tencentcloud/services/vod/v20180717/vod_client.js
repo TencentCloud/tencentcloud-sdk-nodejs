@@ -263,6 +263,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMediaPlayStatDetails", req, cb);
     }
     /**
+     * 该接口返回查询时间范围内每天 License 请求次数信息。
+   1. 可以查询最近365天内的 License 请求次数统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+
+     */
+    async DescribeLicenseUsageData(req, cb) {
+        return this.request("DescribeLicenseUsageData", req, cb);
+    }
+    /**
      * 修改用户自定义雪碧图模板。
      */
     async ModifyImageSpriteTemplate(req, cb) {
@@ -623,11 +633,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStorageDetails", req, cb);
     }
     /**
-     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
-  禁播/解禁操作全网生效时间约 5~10 分钟。
+     * 该接口用于批量删除关键词样本。
      */
-    async ForbidMediaDistribution(req, cb) {
-        return this.request("ForbidMediaDistribution", req, cb);
+    async DeleteWordSamples(req, cb) {
+        return this.request("DeleteWordSamples", req, cb);
     }
     /**
      * 该接口用于将加速域名添加到点播，一个用户最多添加20个加速域名。
@@ -667,10 +676,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAnimatedGraphicsTemplates", req, cb);
     }
     /**
-     * 该接口用于批量删除关键词样本。
+     * * 对媒体禁播后，除了点播控制台预览，其他场景访问视频各种资源的 URL（原始文件、转码输出文件、截图等）均会返回 403。
+  禁播/解禁操作全网生效时间约 5~10 分钟。
      */
-    async DeleteWordSamples(req, cb) {
-        return this.request("DeleteWordSamples", req, cb);
+    async ForbidMediaDistribution(req, cb) {
+        return this.request("ForbidMediaDistribution", req, cb);
     }
     /**
      * 对已发起的任务进行管理。

@@ -1482,6 +1482,21 @@ export interface ComposeMediaResponse {
 }
 
 /**
+ * DescribeLicenseUsageData返回参数结构体
+ */
+export interface DescribeLicenseUsageDataResponse {
+  /**
+   * License 查询次数统计数据，展示所查询 License 次数的明细数据。
+   */
+  LicenseUsageDataSet: Array<LicenseUsageDataItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 基于签名的 Key 防盗链信息
  */
 export interface UrlSignatureAuthPolicy {
@@ -4574,6 +4589,21 @@ export interface EditMediaRequest {
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
   SubAppId?: number
+}
+
+/**
+ * License 请求次数统计数据。
+ */
+export interface LicenseUsageDataItem {
+  /**
+   * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+   */
+  Time: string
+
+  /**
+   * License 请求次数。
+   */
+  Count: number
 }
 
 /**
@@ -14495,6 +14525,32 @@ export interface VideoTrackItem {
    * 对音频进行操作，如静音等。
    */
   AudioOperations?: Array<AudioTransform>
+}
+
+/**
+ * DescribeLicenseUsageData请求参数结构体
+ */
+export interface DescribeLicenseUsageDataRequest {
+  /**
+   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   */
+  StartTime: string
+
+  /**
+   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   */
+  EndTime: string
+
+  /**
+      * License 类型，默认为 DRM 。目前支持的 License 类型包括：
+<li> DRM: DRM 加密播放 License</li>
+      */
+  LicenseType?: string
+
+  /**
+   * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**

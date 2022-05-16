@@ -29,6 +29,7 @@ import {
   UpgradeInstanceVersionResponse,
   CreateInstancesRequest,
   CreateReplicationGroupRequest,
+  ModifyInstanceReadOnlyResponse,
   DescribeInstanceZoneInfoRequest,
   ModifyNetworkConfigResponse,
   CommandTake,
@@ -53,6 +54,7 @@ import {
   SecurityGroupsInboundAndOutbound,
   ResetPasswordResponse,
   ClearInstanceRequest,
+  UpgradeInstanceVersionRequest,
   RegionConf,
   BigKeyInfo,
   DescribeParamTemplatesRequest,
@@ -192,7 +194,7 @@ import {
   DescribeTendisSlowLogRequest,
   DescribeProxySlowLogRequest,
   DescribeProxySlowLogResponse,
-  UpgradeInstanceVersionRequest,
+  ModifyInstanceReadOnlyRequest,
   DescribeInstanceAccountResponse,
   DescribeInstanceMonitorBigKeyRequest,
   DisableReplicaReadonlyRequest,
@@ -261,6 +263,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceNodeInfoResponse) => void
   ): Promise<DescribeInstanceNodeInfoResponse> {
     return this.request("DescribeInstanceNodeInfo", req, cb)
+  }
+
+  /**
+   * 设置实例输入模式
+   */
+  async ModifyInstanceReadOnly(
+    req: ModifyInstanceReadOnlyRequest,
+    cb?: (error: string, rep: ModifyInstanceReadOnlyResponse) => void
+  ): Promise<ModifyInstanceReadOnlyResponse> {
+    return this.request("ModifyInstanceReadOnly", req, cb)
   }
 
   /**
