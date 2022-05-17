@@ -324,6 +324,11 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    * 创建实例需要应用的参数模板ID，不传则应用默认的参数模板
    */
   TemplateId?: string
+
+  /**
+   * false ：默认值,发送正常请求，通过检查后直接创建实例 true：发送检查请求，不会创建实例。
+   */
+  DryRun?: boolean
 }
 
 /**

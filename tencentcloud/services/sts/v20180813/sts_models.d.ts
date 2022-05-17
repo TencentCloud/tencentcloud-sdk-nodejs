@@ -124,15 +124,15 @@ export interface AssumeRoleResponse {
     /**
       * 临时安全证书
       */
-    Credentials?: Credentials;
+    Credentials: Credentials;
     /**
       * 证书无效的时间，返回 Unix 时间戳，精确到秒
       */
-    ExpiredTime?: number;
+    ExpiredTime: number;
     /**
       * 证书无效的时间，以 iso8601 格式的 UTC 时间表示
       */
-    Expiration?: string;
+    Expiration: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -167,6 +167,19 @@ export interface GetFederationTokenRequest {
       * 指定临时证书的有效期，单位：秒，默认1800秒，主账号最长可设定有效期为7200秒，子账号最长可设定有效期为129600秒。
       */
     DurationSeconds?: number;
+}
+/**
+ * 标签
+ */
+export interface Tag {
+    /**
+      * 标签键，最长128个字符，区分大小写。
+      */
+    Key: string;
+    /**
+      * 标签值，最长256个字符，区分大小写。
+      */
+    Value: string;
 }
 /**
  * GetCallerIdentity返回参数结构体
@@ -253,6 +266,10 @@ qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::c
 长度在2到128之间，可包含大小写字符，数字以及特殊字符：=,.@:/-。 正则为：[\w+=,.@:\/-]*
       */
     ExternalId?: string;
+    /**
+      * 会话标签列表。最多可以传递 50 个会话标签，不支持包含相同标签键。
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * GetCallerIdentity请求参数结构体

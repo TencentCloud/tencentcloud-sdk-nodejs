@@ -18,9 +18,29 @@ const client = new tencentcloud.apm.v20210622.Client({
 })
 describe("apm.v20210622.test.js", function () {
 
-it("apm.v20210622.CreateApmInstance", async function () {
+it("apm.v20210622.DescribeApmInstances", async function () {
     try {
-       const data = await client.CreateApmInstance({})
+       const data = await client.DescribeApmInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apm.v20210622.DescribeApmAgent", async function () {
+    try {
+       const data = await client.DescribeApmAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apm.v20210622.DescribeGeneralMetricData", async function () {
+    try {
+       const data = await client.DescribeGeneralMetricData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,19 +58,9 @@ it("apm.v20210622.DescribeMetricRecords", async function () {
     }
 })
 
-it("apm.v20210622.DescribeApmInstances", async function () {
+it("apm.v20210622.CreateApmInstance", async function () {
     try {
-       const data = await client.DescribeApmInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("apm.v20210622.DescribeApmAgent", async function () {
-    try {
-       const data = await client.DescribeApmAgent({})
+       const data = await client.CreateApmInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

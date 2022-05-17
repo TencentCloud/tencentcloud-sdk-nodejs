@@ -18,6 +18,16 @@ const client = new tencentcloud.teo.v20220106.Client({
 })
 describe("teo.v20220106.test.js", function () {
 
+it("teo.v20220106.DownloadL7Logs", async function () {
+    try {
+       const data = await client.DownloadL7Logs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220106.CreatePurgeTask", async function () {
     try {
        const data = await client.CreatePurgeTask({})
@@ -38,9 +48,9 @@ it("teo.v20220106.DescribePurgeTasks", async function () {
     }
 })
 
-it("teo.v20220106.CreatePrefetchTask", async function () {
+it("teo.v20220106.DescribePrefetchTasks", async function () {
     try {
-       const data = await client.CreatePrefetchTask({})
+       const data = await client.DescribePrefetchTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +58,9 @@ it("teo.v20220106.CreatePrefetchTask", async function () {
     }
 })
 
-it("teo.v20220106.DescribePrefetchTasks", async function () {
+it("teo.v20220106.CreatePrefetchTask", async function () {
     try {
-       const data = await client.DescribePrefetchTasks({})
+       const data = await client.CreatePrefetchTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

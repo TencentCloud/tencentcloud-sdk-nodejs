@@ -17,6 +17,35 @@ export interface CreatePurgeTaskResponse {
     RequestId?: string;
 }
 /**
+ * DownloadL7Logs请求参数结构体
+ */
+export interface DownloadL7LogsRequest {
+    /**
+      * 起始时间(需严格按照RFC3339标准传参)
+      */
+    StartTime: string;
+    /**
+      * 结束时间(需严格按照RFC3339标准传参)
+      */
+    EndTime: string;
+    /**
+      * 每页展示条数
+      */
+    PageSize: number;
+    /**
+      * 当前页
+      */
+    PageNo: number;
+    /**
+      * 站点集合
+      */
+    Zones?: Array<string>;
+    /**
+      * 域名集合
+      */
+    Domains?: Array<string>;
+}
+/**
  * CreatePurgeTask请求参数结构体
  */
 export interface CreatePurgeTaskRequest {
@@ -33,12 +62,20 @@ export interface CreatePurgeTaskRequest {
       */
     Type: string;
     /**
-      * 内容，一行一个
+      * 要刷新的资源列表，每个元素格式依据Type而定
+1) Type = purge_host 时
+形如：www.example.com 或 foo.bar.example.com
+2) Type = purge_prefix 时
+形如：http://www.example.com/example
+3) Type = purge_url 时
+形如：https://www.example.com/example.jpg
+4）Type = purge_all 时
+Targets可为空，不需要填写
       */
     Targets?: Array<string>;
     /**
       * 若有编码转换，仅清除编码转换后匹配的资源
-若内容含有非 ASCII 字符集的字符，请打开 URL Encode 开关，编码转换（编码规则遵循 RFC3986）
+若内容含有非 ASCII 字符集的字符，请开启此开关，编码转换（编码规则遵循 RFC3986）
       */
     EncodeUrl?: boolean;
 }
@@ -154,6 +191,40 @@ export interface Zone {
     ModifiedOn: string;
 }
 /**
+ * DownloadL7Logs返回参数结构体
+ */
+export interface DownloadL7LogsResponse {
+    /**
+      * 七层离线日志data
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Array<L7OfflineLog>;
+    /**
+      * 页面大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageSize: number;
+    /**
+      * 页号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PageNo: number;
+    /**
+      * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pages: number;
+    /**
+      * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalSize: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribePrefetchTasks返回参数结构体
  */
 export interface DescribePrefetchTasksResponse {
@@ -227,7 +298,8 @@ export interface FailReason {
       */
     Reason: string;
     /**
-      * 失败列表
+      * 处理失败的资源列表。
+该列表元素来源于输入参数中的Targets，因此格式和入参中的Targets保持一致
       */
     Targets: Array<string>;
 }
@@ -269,11 +341,13 @@ export interface CreatePrefetchTaskRequest {
       */
     ZoneId: string;
     /**
-      * 预热的资源列表
+      * 要预热的资源列表，每个元素格式类似如下:
+http://www.example.com/example.txt
       */
     Targets?: Array<string>;
     /**
       * 是否对url进行encode
+若内容含有非 ASCII 字符集的字符，请开启此开关，编码转换（编码规则遵循 RFC3986）
       */
     EncodeUrl?: boolean;
     /**
@@ -358,4 +432,34 @@ export interface ZoneFilter {
       * 是否启用模糊查询，仅支持过滤字段名为name。模糊查询时，Values长度最大为1
       */
     Fuzzy?: boolean;
+}
+/**
+ * 离线日志详细信息
+ */
+export interface L7OfflineLog {
+    /**
+      * 日志打包开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogTime: number;
+    /**
+      * 站点名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Domain: string;
+    /**
+      * 原始大小 单位byte
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Size: number;
+    /**
+      * 下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
+    /**
+      * 日志数据包名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogPacketName: string;
 }

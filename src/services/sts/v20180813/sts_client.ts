@@ -27,6 +27,7 @@ import {
   AssumeRoleResponse,
   QueryApiKeyRequest,
   GetFederationTokenRequest,
+  Tag,
   GetCallerIdentityResponse,
   Credentials,
   AssumeRoleRequest,

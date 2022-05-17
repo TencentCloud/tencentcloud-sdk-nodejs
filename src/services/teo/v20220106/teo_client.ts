@@ -19,10 +19,12 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreatePurgeTaskResponse,
+  DownloadL7LogsRequest,
   CreatePurgeTaskRequest,
   DescribePurgeTasksRequest,
   CreatePrefetchTaskResponse,
   Zone,
+  DownloadL7LogsResponse,
   DescribePrefetchTasksResponse,
   DescribeZonesRequest,
   DescribeZonesResponse,
@@ -33,6 +35,7 @@ import {
   DescribePurgeTasksResponse,
   DescribePrefetchTasksRequest,
   ZoneFilter,
+  L7OfflineLog,
 } from "./teo_models"
 
 /**
@@ -42,6 +45,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("teo.tencentcloudapi.com", "2022-01-06", clientConfig)
+  }
+
+  /**
+   * 查询七层离线日志
+   */
+  async DownloadL7Logs(
+    req: DownloadL7LogsRequest,
+    cb?: (error: string, rep: DownloadL7LogsResponse) => void
+  ): Promise<DownloadL7LogsResponse> {
+    return this.request("DownloadL7Logs", req, cb)
   }
 
   /**
@@ -65,16 +78,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建预热任务
-   */
-  async CreatePrefetchTask(
-    req: CreatePrefetchTaskRequest,
-    cb?: (error: string, rep: CreatePrefetchTaskResponse) => void
-  ): Promise<CreatePrefetchTaskResponse> {
-    return this.request("CreatePrefetchTask", req, cb)
-  }
-
-  /**
    * 查询预热任务状态
    */
   async DescribePrefetchTasks(
@@ -82,6 +85,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrefetchTasksResponse) => void
   ): Promise<DescribePrefetchTasksResponse> {
     return this.request("DescribePrefetchTasks", req, cb)
+  }
+
+  /**
+   * 创建预热任务
+   */
+  async CreatePrefetchTask(
+    req: CreatePrefetchTaskRequest,
+    cb?: (error: string, rep: CreatePrefetchTaskResponse) => void
+  ): Promise<CreatePrefetchTaskResponse> {
+    return this.request("CreatePrefetchTask", req, cb)
   }
 
   /**

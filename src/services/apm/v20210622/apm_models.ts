@@ -16,87 +16,6 @@
  */
 
 /**
- * 指标列表单元
- */
-export interface ApmMetricRecord {
-  /**
-   * field数组
-   */
-  Fields: Array<ApmField>
-
-  /**
-   * tag数组
-   */
-  Tags: Array<ApmTag>
-}
-
-/**
- * CreateApmInstance返回参数结构体
- */
-export interface CreateApmInstanceResponse {
-  /**
-      * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeServiceOverview请求参数结构体
- */
-export interface DescribeServiceOverviewRequest {
-  /**
-   * 过滤条件
-   */
-  Filters: Array<Filter>
-
-  /**
-   * 指标列表
-   */
-  Metrics: Array<QueryMetricItem>
-
-  /**
-   * 聚合维度
-   */
-  GroupBy: Array<string>
-
-  /**
-   * 排序
-   */
-  OrderBy?: OrderBy
-
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-
-  /**
-   * 每页大小
-   */
-  Limit?: number
-
-  /**
-   * 开始时间
-   */
-  StartTime?: number
-
-  /**
-   * 分页起始点
-   */
-  Offset?: number
-
-  /**
-   * 结束时间
-   */
-  EndTime?: number
-}
-
-/**
  * apm实例信息
  */
 export interface ApmInstanceDetail {
@@ -262,9 +181,9 @@ export interface CreateApmInstanceRequest {
 }
 
 /**
- * DescribeMetricRecords返回参数结构体
+ * DescribeServiceOverview返回参数结构体
  */
-export interface DescribeMetricRecordsResponse {
+export interface DescribeServiceOverviewResponse {
   /**
       * 指标结果集
 注意：此字段可能返回 null，表示取不到有效值。
@@ -278,6 +197,148 @@ export interface DescribeMetricRecordsResponse {
 }
 
 /**
+ * 查询
+ */
+export interface QueryMetricItem {
+  /**
+   * 指标名
+   */
+  MetricName: string
+
+  /**
+   * 同比，已弃用，不建议使用
+   */
+  Compare?: string
+
+  /**
+   * 同比，支持多种同比方式
+   */
+  Compares?: Array<string>
+}
+
+/**
+ * DescribeApmInstances返回参数结构体
+ */
+export interface DescribeApmInstancesResponse {
+  /**
+      * apm实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Instances: Array<ApmInstanceDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * apm Agent信息
+ */
+export interface ApmAgentInfo {
+  /**
+      * Agent下载地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AgentDownloadURL: string
+
+  /**
+      * Collector上报地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CollectorURL: string
+
+  /**
+      * Token信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Token: string
+
+  /**
+      * 外网上报地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublicCollectorURL: string
+
+  /**
+      * 自研VPC上报地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InnerCollectorURL: string
+
+  /**
+      * 内网上报地址(Private Link上报地址)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateLinkCollectorURL: string
+}
+
+/**
+ * 指标列表单元
+ */
+export interface ApmMetricRecord {
+  /**
+   * field数组
+   */
+  Fields: Array<ApmField>
+
+  /**
+   * tag数组
+   */
+  Tags: Array<ApmTag>
+}
+
+/**
+ * DescribeServiceOverview请求参数结构体
+ */
+export interface DescribeServiceOverviewRequest {
+  /**
+   * 过滤条件
+   */
+  Filters: Array<Filter>
+
+  /**
+   * 指标列表
+   */
+  Metrics: Array<QueryMetricItem>
+
+  /**
+   * 聚合维度
+   */
+  GroupBy: Array<string>
+
+  /**
+   * 排序
+   */
+  OrderBy?: OrderBy
+
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+
+  /**
+   * 每页大小
+   */
+  Limit?: number
+
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+
+  /**
+   * 分页起始点
+   */
+  Offset?: number
+
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+}
+
+/**
  * DescribeApmAgent返回参数结构体
  */
 export interface DescribeApmAgentResponse {
@@ -286,6 +347,120 @@ export interface DescribeApmAgentResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApmAgent: ApmAgentInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 指标维度信息
+ */
+export interface ApmField {
+  /**
+      * 昨日同比指标值，已弃用，不建议使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompareVal: string
+
+  /**
+      * Compare值结果数组，推荐使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CompareVals: Array<APMKVItem>
+
+  /**
+      * 指标值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: number
+
+  /**
+      * 指标所对应的单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit: string
+
+  /**
+   * 请求数
+   */
+  Key: string
+}
+
+/**
+ * 指标曲线数据
+ */
+export interface Line {
+  /**
+   * 指标名
+   */
+  MetricName: string
+
+  /**
+   * 指标中文名
+   */
+  MetricNameCN: string
+
+  /**
+   * 时间序列
+   */
+  TimeSerial: Array<number>
+
+  /**
+      * 数据序列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataSerial: Array<number>
+
+  /**
+      * 维度列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<ApmTag>
+}
+
+/**
+ * Apm通用KV结构
+ */
+export interface APMKVItem {
+  /**
+      * Key值定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
+
+  /**
+      * Value值定义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+}
+
+/**
+ * sql排序字段
+ */
+export interface OrderBy {
+  /**
+   * 需要排序的字段
+   */
+  Key: string
+
+  /**
+   * 顺序排序/倒序排序
+   */
+  Value: string
+}
+
+/**
+ * DescribeMetricRecords返回参数结构体
+ */
+export interface DescribeMetricRecordsResponse {
+  /**
+      * 指标结果集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Records: Array<ApmMetricRecord>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -306,38 +481,6 @@ export interface ApmTag {
    * 维度值（标签值）
    */
   Value: string
-}
-
-/**
- * DescribeServiceOverview返回参数结构体
- */
-export interface DescribeServiceOverviewResponse {
-  /**
-      * 指标结果集
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Records: Array<ApmMetricRecord>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeApmInstances返回参数结构体
- */
-export interface DescribeApmInstancesResponse {
-  /**
-      * apm实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Instances: Array<ApmInstanceDetail>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -383,80 +526,6 @@ export interface DescribeApmAgentRequest {
    * 语言
    */
   LanguageEnvironment?: string
-}
-
-/**
- * sql排序字段
- */
-export interface OrderBy {
-  /**
-   * 需要排序的字段
-   */
-  Key: string
-
-  /**
-   * 顺序排序/倒序排序
-   */
-  Value: string
-}
-
-/**
- * DescribeApmInstances请求参数结构体
- */
-export interface DescribeApmInstancesRequest {
-  /**
-   * Tag列表
-   */
-  Tags?: Array<ApmTag>
-
-  /**
-   * 搜索实例名
-   */
-  InstanceName?: string
-
-  /**
-   * 过滤实例ID
-   */
-  InstanceIds?: Array<string>
-
-  /**
-   * 是否查询官方demo实例
-   */
-  DemoInstanceFlag?: number
-}
-
-/**
- * 指标维度信息
- */
-export interface ApmField {
-  /**
-      * 昨日同比指标值，已弃用，不建议使用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CompareVal: string
-
-  /**
-      * Compare值结果数组，推荐使用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CompareVals: Array<APMKVItem>
-
-  /**
-      * 指标值
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: number
-
-  /**
-      * 指标所对应的单位
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Unit: string
-
-  /**
-   * 请求数
-   */
-  Key: string
 }
 
 /**
@@ -515,79 +584,125 @@ export interface DescribeMetricRecordsRequest {
 }
 
 /**
- * apm Agent信息
+ * DescribeGeneralMetricData请求参数结构体
  */
-export interface ApmAgentInfo {
+export interface DescribeGeneralMetricDataRequest {
   /**
-      * Agent下载地址
-注意：此字段可能返回 null，表示取不到有效值。
+      * 要过滤的维度信息，支持：service.name（服务名）、span.kind（客户端/服务端视角）为维度进行过滤。
+
+span.kind:
+
+       server:服务端视角
+       client:客户端视角
+
+默认为服务端视角进行查询。
       */
-  AgentDownloadURL: string
+  Filters: Array<GeneralFilter>
 
   /**
-      * Collector上报地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CollectorURL: string
+   * 需要查询的指标，不可自定义输入。支持：service_request_count（总请求）、service_duration（平均响应时间）的指标数据。
+   */
+  Metrics: Array<string>
 
   /**
-      * Token信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Token: string
+   * 实例ID
+   */
+  InstanceId: string
 
   /**
-      * 外网上报地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PublicCollectorURL: string
+   * 视图名称
+   */
+  ViewName: string
 
   /**
-      * 自研VPC上报地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InnerCollectorURL: string
+   * 聚合维度，支持：service.name（服务名）、span.kind （客户端/服务端视角）维度进行聚合。
+   */
+  GroupBy?: Array<string>
 
   /**
-      * 内网上报地址(Private Link上报地址)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PrivateLinkCollectorURL: string
+   * 起始时间的时间戳，单位为秒，只支持查询2天内最多1小时的指标数据。
+   */
+  StartTime?: number
+
+  /**
+   * 结束时间的时间戳，单位为秒，只支持查询2天内最多1小时的指标数据。
+   */
+  EndTime?: number
+
+  /**
+   * 聚合粒度，单位为秒，最小为60s，即一分钟的聚合粒度；如果为空或0则计算开始时间到截止时间的指标数据，上报其他值会报错。
+   */
+  Period?: number
 }
 
 /**
- * 查询
+ * CreateApmInstance返回参数结构体
  */
-export interface QueryMetricItem {
+export interface CreateApmInstanceResponse {
   /**
-   * 指标名
-   */
-  MetricName: string
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
 
   /**
-   * 同比，已弃用，不建议使用
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Compare?: string
-
-  /**
-   * 同比，支持多种同比方式
-   */
-  Compares?: Array<string>
+  RequestId?: string
 }
 
 /**
- * Apm通用KV结构
+ * 查询过滤参数
  */
-export interface APMKVItem {
+export interface GeneralFilter {
   /**
-      * Key值定义
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 过滤维度名
+   */
   Key: string
 
   /**
-      * Value值定义
+   * 过滤值
+   */
+  Value: string
+}
+
+/**
+ * DescribeApmInstances请求参数结构体
+ */
+export interface DescribeApmInstancesRequest {
+  /**
+   * Tag列表
+   */
+  Tags?: Array<ApmTag>
+
+  /**
+   * 搜索实例名
+   */
+  InstanceName?: string
+
+  /**
+   * 过滤实例ID
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 是否查询官方demo实例
+   */
+  DemoInstanceFlag?: number
+}
+
+/**
+ * DescribeGeneralMetricData返回参数结构体
+ */
+export interface DescribeGeneralMetricDataResponse {
+  /**
+      * 指标结果集
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Value: string
+  Records: Array<Line>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

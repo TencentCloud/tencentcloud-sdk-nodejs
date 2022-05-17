@@ -1,4 +1,200 @@
 /**
+ * TextTranslate返回参数结构体
+ */
+export interface TextTranslateResponse {
+    /**
+      * 翻译后的文本
+      */
+    TargetText: string;
+    /**
+      * 源语言，详见入参Target
+      */
+    Source: string;
+    /**
+      * 目标语言，详见入参Target
+      */
+    Target: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ImageTranslate请求参数结构体
+ */
+export interface ImageTranslateRequest {
+    /**
+      * 唯一id，返回时原样返回
+      */
+    SessionUuid: string;
+    /**
+      * doc:文档扫描
+      */
+    Scene: string;
+    /**
+      * 图片数据的Base64字符串，图片大小上限为4M，建议对源图片进行一定程度压缩
+      */
+    Data: string;
+    /**
+      * 源语言，支持语言列表：<li> auto：自动识别（识别为一种语言）</li> <li>zh：简体中文</li> <li>zh-TW：繁体中文</li> <li>en：英语</li> <li>ja：日语</li> <li>ko：韩语</li> <li>ru：俄语</li> <li>fr：法语</li> <li>de：德语</li> <li>it：意大利语</li> <li>es：西班牙语</li> <li>pt：葡萄牙语</li> <li>ms：马来西亚语</li> <li>th：泰语</li><li>vi：越南语</li>
+      */
+    Source: string;
+    /**
+      * 目标语言，各源语言的目标语言支持列表如下：
+<li>zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
+<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
+<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
+<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
+<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
+<li>ru：俄语：zh（中文）、en（英语）</li>
+<li>fr：法语：zh（中文）、en（英语）</li>
+<li>de：德语：zh（中文）、en（英语）</li>
+<li>it：意大利语：zh（中文）、en（英语）</li>
+<li>es：西班牙语：zh（中文）、en（英语）</li>
+<li>pt：葡萄牙语：zh（中文）、en（英语）</li>
+<li>ms：马来西亚语：zh（中文）、en（英语）</li>
+<li>th：泰语：zh（中文）、en（英语）</li>
+<li>vi：越南语：zh（中文）、en（英语）</li>
+      */
+    Target: string;
+    /**
+      * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
+      */
+    ProjectId: number;
+}
+/**
+ * 查询文件翻译任务
+ */
+export interface GetFileTranslateData {
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+    /**
+      * 状态
+      */
+    Status: string;
+    /**
+      * 文件数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileData: string;
+    /**
+      * 错误提示
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+}
+/**
+ * SpeechTranslate返回参数结构体
+ */
+export interface SpeechTranslateResponse {
+    /**
+      * 请求的SessionUuid直接返回
+      */
+    SessionUuid?: string;
+    /**
+      * 语音识别状态 1-进行中 0-完成
+      */
+    RecognizeStatus?: number;
+    /**
+      * 识别出的原文
+      */
+    SourceText?: string;
+    /**
+      * 翻译出的译文
+      */
+    TargetText?: string;
+    /**
+      * 第几个语音分片
+      */
+    Seq?: number;
+    /**
+      * 原语言
+      */
+    Source?: string;
+    /**
+      * 目标语言
+      */
+    Target?: string;
+    /**
+      * 当请求的Mode参数填写bvad是，启动VadSeq。此时Seq会被设置为后台vad（静音检测）后的新序号，而VadSeq代表客户端原始Seq值
+      */
+    VadSeq?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 图片翻译结果
+ */
+export interface ImageRecord {
+    /**
+      * 图片翻译结果
+      */
+    Value: Array<ItemValue>;
+}
+/**
+ * ImageTranslate返回参数结构体
+ */
+export interface ImageTranslateResponse {
+    /**
+      * 请求的SessionUuid返回
+      */
+    SessionUuid: string;
+    /**
+      * 源语言
+      */
+    Source: string;
+    /**
+      * 目标语言
+      */
+    Target: string;
+    /**
+      * 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本
+      */
+    ImageRecord: ImageRecord;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * LanguageDetect请求参数结构体
+ */
+export interface LanguageDetectRequest {
+    /**
+      * 待识别的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败。单次请求的文本长度需要低于2000。
+      */
+    Text: string;
+    /**
+      * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
+      */
+    ProjectId: number;
+}
+/**
+ * TextTranslateBatch返回参数结构体
+ */
+export interface TextTranslateBatchResponse {
+    /**
+      * 源语言，详见入参Target
+      */
+    Source: string;
+    /**
+      * 目标语言，详见入参Target
+      */
+    Target: string;
+    /**
+      * 翻译后的文本列表
+      */
+    TargetTextList: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * TextTranslateBatch请求参数结构体
  */
 export interface TextTranslateBatchRequest {
@@ -58,113 +254,13 @@ hi：印地语
     SourceTextList: Array<string>;
 }
 /**
- * ImageTranslate返回参数结构体
+ * 文件翻译请求的返回数据
  */
-export interface ImageTranslateResponse {
+export interface Task {
     /**
-      * 请求的SessionUuid返回
+      * 任务ID，可通过此ID在轮询接口获取识别状态与结果。注意：TaskId数据类型为字符串类型
       */
-    SessionUuid: string;
-    /**
-      * 源语言
-      */
-    Source: string;
-    /**
-      * 目标语言
-      */
-    Target: string;
-    /**
-      * 图片翻译结果，翻译结果按识别的文本每一行独立翻译，后续会推出按段落划分并翻译的版本
-      */
-    ImageRecord: ImageRecord;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * SpeechTranslate返回参数结构体
- */
-export interface SpeechTranslateResponse {
-    /**
-      * 请求的SessionUuid直接返回
-      */
-    SessionUuid?: string;
-    /**
-      * 语音识别状态 1-进行中 0-完成
-      */
-    RecognizeStatus?: number;
-    /**
-      * 识别出的原文
-      */
-    SourceText?: string;
-    /**
-      * 翻译出的译文
-      */
-    TargetText?: string;
-    /**
-      * 第几个语音分片
-      */
-    Seq?: number;
-    /**
-      * 原语言
-      */
-    Source?: string;
-    /**
-      * 目标语言
-      */
-    Target?: string;
-    /**
-      * 当请求的Mode参数填写bvad是，启动VadSeq。此时Seq会被设置为后台vad（静音检测）后的新序号，而VadSeq代表客户端原始Seq值
-      */
-    VadSeq?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 图片翻译结果
- */
-export interface ImageRecord {
-    /**
-      * 图片翻译结果
-      */
-    Value: Array<ItemValue>;
-}
-/**
- * LanguageDetect请求参数结构体
- */
-export interface LanguageDetectRequest {
-    /**
-      * 待识别的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败。单次请求的文本长度需要低于2000。
-      */
-    Text: string;
-    /**
-      * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
-      */
-    ProjectId: number;
-}
-/**
- * TextTranslateBatch返回参数结构体
- */
-export interface TextTranslateBatchResponse {
-    /**
-      * 源语言，详见入参Target
-      */
-    Source: string;
-    /**
-      * 目标语言，详见入参Target
-      */
-    Target: string;
-    /**
-      * 翻译后的文本列表
-      */
-    TargetTextList: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    TaskId: string;
 }
 /**
  * LanguageDetect返回参数结构体
@@ -181,50 +277,13 @@ export interface LanguageDetectResponse {
     RequestId?: string;
 }
 /**
- * 翻译结果
+ * GetFileTranslate返回参数结构体
  */
-export interface ItemValue {
+export interface GetFileTranslateResponse {
     /**
-      * 识别出的源文
+      * 任务id
       */
-    SourceText: string;
-    /**
-      * 翻译后的译文
-      */
-    TargetText: string;
-    /**
-      * X坐标
-      */
-    X: number;
-    /**
-      * Y坐标
-      */
-    Y: number;
-    /**
-      * 宽度
-      */
-    W: number;
-    /**
-      * 高度
-      */
-    H: number;
-}
-/**
- * TextTranslate返回参数结构体
- */
-export interface TextTranslateResponse {
-    /**
-      * 翻译后的文本
-      */
-    TargetText: string;
-    /**
-      * 源语言，详见入参Target
-      */
-    Source: string;
-    /**
-      * 目标语言，详见入参Target
-      */
-    Target: string;
+    Data: GetFileTranslateData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -276,47 +335,86 @@ export interface SpeechTranslateRequest {
     TransType?: number;
 }
 /**
- * ImageTranslate请求参数结构体
+ * FileTranslate返回参数结构体
  */
-export interface ImageTranslateRequest {
+export interface FileTranslateResponse {
     /**
-      * 唯一id，返回时原样返回
+      * 文件翻译的请求返回结果，包含结果查询需要的TaskId
       */
-    SessionUuid: string;
+    Data: Task;
     /**
-      * doc:文档扫描
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Scene: string;
+    RequestId?: string;
+}
+/**
+ * FileTranslate请求参数结构体
+ */
+export interface FileTranslateRequest {
     /**
-      * 图片数据的Base64字符串，图片大小上限为4M，建议对源图片进行一定程度压缩
-      */
-    Data: string;
-    /**
-      * 源语言，支持语言列表：<li> auto：自动识别（识别为一种语言）</li> <li>zh：简体中文</li> <li>zh-TW：繁体中文</li> <li>en：英语</li> <li>ja：日语</li> <li>ko：韩语</li> <li>ru：俄语</li> <li>fr：法语</li> <li>de：德语</li> <li>it：意大利语</li> <li>es：西班牙语</li> <li>pt：葡萄牙语</li> <li>ms：马来西亚语</li> <li>th：泰语</li><li>vi：越南语</li>
+      * 源语言，支持
+zh:简体中文
+zh-HK：繁体中文
+zh-TW : 繁体中文
+zh-TR:  繁体中文
+en ：英语
+ar：阿拉伯语
+de：德语
+es：西班牙语
+fr：法语
+it：意大利语
+ja：日语
+pt：葡萄牙语
+ru：俄语
+ko：韩语
+km：高棉语
+lo：老挝语
       */
     Source: string;
     /**
-      * 目标语言，各源语言的目标语言支持列表如下：
-<li>zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
-<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
-<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、ru（俄语）、fr（法语）、de（德语）、it（意大利语）、es（西班牙语）、pt（葡萄牙语）、ms（马来语）、th（泰语）、vi（越南语）</li>
-<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
-<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
-<li>ru：俄语：zh（中文）、en（英语）</li>
-<li>fr：法语：zh（中文）、en（英语）</li>
-<li>de：德语：zh（中文）、en（英语）</li>
-<li>it：意大利语：zh（中文）、en（英语）</li>
-<li>es：西班牙语：zh（中文）、en（英语）</li>
-<li>pt：葡萄牙语：zh（中文）、en（英语）</li>
-<li>ms：马来西亚语：zh（中文）、en（英语）</li>
-<li>th：泰语：zh（中文）、en（英语）</li>
-<li>vi：越南语：zh（中文）、en（英语）</li>
+      * 目标语言，各源语言的目标语言支持列表如下
+zh（简体中文）： en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+zh-HK（繁体中文） ：en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+zh-TW（繁体中文）：en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+zh-TR 繁体中文 : en （英语）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+en （英语） ：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、 zh-TR(繁体中文）、 ar (阿拉伯语）、 de （德语）、  es（西班牙语） 、fr（法语）、  it（意大利语） 、 ja （日语）、 pt （葡萄牙语）、 ru（俄语）、  ko（韩语）、 km（高棉语）、   lo（老挝语）
+ar（阿拉伯语） ：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+de（德语 ）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+es（西班牙语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+fr（法语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+it（意大利语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+ja（日语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+pt（葡萄牙语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+ru（俄语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+ko（韩语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+km（高棉语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
+lo（老挝语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（繁体中文)、zh-TR(繁体中文）
       */
     Target: string;
     /**
-      * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
+      * 文档类型：可支持以下几种(pdf,docx,pptx,xlsx,txt,xml,html,markdown,properties)
       */
-    ProjectId: number;
+    DocumentType: string;
+    /**
+      * 数据来源，0：url，1：直接传文件编码后数据
+      */
+    SourceType?: number;
+    /**
+      * 需要翻译文件url
+      */
+    Url?: string;
+    /**
+      * 原始文档类型
+      */
+    BasicDocumentType?: string;
+    /**
+      * 回调url
+      */
+    CallbackUrl?: string;
+    /**
+      * 文件数据，当SourceType 值为1时必须填写，为0可不写。要base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据要小于5MB。
+      */
+    Data?: string;
 }
 /**
  * TextTranslate请求参数结构体
@@ -380,4 +478,42 @@ hi：印地语
       * 用来标记不希望被翻译的文本内容，如句子中的特殊符号、人名、地名等；每次请求只支持配置一个不被翻译的单词；仅支持配置人名、地名等名词，不要配置动词或短语，否则会影响翻译结果。
       */
     UntranslatedText?: string;
+}
+/**
+ * GetFileTranslate请求参数结构体
+ */
+export interface GetFileTranslateRequest {
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+}
+/**
+ * 翻译结果
+ */
+export interface ItemValue {
+    /**
+      * 识别出的源文
+      */
+    SourceText: string;
+    /**
+      * 翻译后的译文
+      */
+    TargetText: string;
+    /**
+      * X坐标
+      */
+    X: number;
+    /**
+      * Y坐标
+      */
+    Y: number;
+    /**
+      * 宽度
+      */
+    W: number;
+    /**
+      * 高度
+      */
+    H: number;
 }

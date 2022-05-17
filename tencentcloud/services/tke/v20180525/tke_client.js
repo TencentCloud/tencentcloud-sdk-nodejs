@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterCommonNames", req, cb);
     }
     /**
+     * 开启事件持久化功能
+     */
+    async EnableEventPersistence(req, cb) {
+        return this.request("EnableEventPersistence", req, cb);
+    }
+    /**
      * 获取告警历史
      */
     async DescribePrometheusAlertHistory(req, cb) {
@@ -118,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterNodePoolFromExistingAsg", req, cb);
     }
     /**
+     * 从TKE集群中卸载CLS日志采集组件
+     */
+    async UninstallLogAgent(req, cb) {
+        return this.request("UninstallLogAgent", req, cb);
+    }
+    /**
      * 获取集群版本信息
      */
     async DescribeVersions(req, cb) {
@@ -128,6 +140,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteEKSCluster(req, cb) {
         return this.request("DeleteEKSCluster", req, cb);
+    }
+    /**
+     * 开启集群审计
+     */
+    async EnableClusterAudit(req, cb) {
+        return this.request("EnableClusterAudit", req, cb);
     }
     /**
      * 编辑节点池
@@ -164,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterRouteTable(req, cb) {
         return this.request("DeleteClusterRouteTable", req, cb);
+    }
+    /**
+     * 修改2.0实例告警策略
+     */
+    async ModifyPrometheusAlertPolicy(req, cb) {
+        return this.request("ModifyPrometheusAlertPolicy", req, cb);
     }
     /**
      * 查看集群认证配置
@@ -226,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExistedInstances", req, cb);
     }
     /**
+     * 查询节点池列表
+     */
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
+    }
+    /**
      * 获取弹性容器集群的接入认证信息
      */
     async DescribeEKSClusterCredential(req, cb) {
@@ -272,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddExistedInstances(req, cb) {
         return this.request("AddExistedInstances", req, cb);
+    }
+    /**
+     * 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）
+     */
+    async ModifyClusterEndpointSP(req, cb) {
+        return this.request("ModifyClusterEndpointSP", req, cb);
     }
     /**
      * 关闭集群删除保护
@@ -322,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateEKSContainerInstance", req, cb);
     }
     /**
+     * 拉取模板列表，默认模板将总是在最前面
+     */
+    async DescribePrometheusTemp(req, cb) {
+        return this.request("DescribePrometheusTemp", req, cb);
+    }
+    /**
      * 获取告警规则列表
      */
     async DescribePrometheusAlertRule(req, cb) {
@@ -368,6 +410,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyClusterAsGroupAttribute(req, cb) {
         return this.request("ModifyClusterAsGroupAttribute", req, cb);
+    }
+    /**
+     * 创建一个云原生Prometheus模板
+     */
+    async CreatePrometheusTemp(req, cb) {
+        return this.request("CreatePrometheusTemp", req, cb);
     }
     /**
      * 集群关联的伸缩组列表
@@ -430,6 +478,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEKSContainerInstances", req, cb);
     }
     /**
+     * 获取聚合规则列表，包含关联集群内crd资源创建的record rule
+     */
+    async DescribePrometheusRecordRules(req, cb) {
+        return this.request("DescribePrometheusRecordRules", req, cb);
+    }
+    /**
      * 删除告警规则
      */
     async DeletePrometheusAlertRule(req, cb) {
@@ -484,16 +538,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterSecurity", req, cb);
     }
     /**
+     * 获取2.0实例关联集群列表
+     */
+    async DescribePrometheusClusterAgents(req, cb) {
+        return this.request("DescribePrometheusClusterAgents", req, cb);
+    }
+    /**
      * 删除节点池
      */
     async DeleteClusterNodePool(req, cb) {
         return this.request("DeleteClusterNodePool", req, cb);
     }
     /**
-     * 缩容独立集群master节点
+     * 在TKE集群中安装CLS日志采集组件
      */
-    async ScaleInClusterMaster(req, cb) {
-        return this.request("ScaleInClusterMaster", req, cb);
+    async InstallLogAgent(req, cb) {
+        return this.request("InstallLogAgent", req, cb);
     }
     /**
      * 获取集群资源使用量
@@ -502,16 +562,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceUsage", req, cb);
     }
     /**
+     * 获取模板关联实例信息，针对V2版本实例
+     */
+    async DescribePrometheusTempSync(req, cb) {
+        return this.request("DescribePrometheusTempSync", req, cb);
+    }
+    /**
      * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
      */
     async DeleteClusterEndpointVip(req, cb) {
         return this.request("DeleteClusterEndpointVip", req, cb);
     }
     /**
-     * 查询节点池列表
+     * 拉取模板列表，默认模板将总是在最前面
      */
-    async DescribeClusterNodePools(req, cb) {
-        return this.request("DescribeClusterNodePools", req, cb);
+    async DescribePrometheusTemplates(req, cb) {
+        return this.request("DescribePrometheusTemplates", req, cb);
     }
     /**
      * 获取镜像信息
@@ -520,16 +586,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImages", req, cb);
     }
     /**
-     * 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）
+     * 关闭集群审计
      */
-    async ModifyClusterEndpointSP(req, cb) {
-        return this.request("ModifyClusterEndpointSP", req, cb);
+    async DisableClusterAudit(req, cb) {
+        return this.request("DisableClusterAudit", req, cb);
+    }
+    /**
+     * 修改集群认证配置
+     */
+    async ModifyClusterAuthenticationOptions(req, cb) {
+        return this.request("ModifyClusterAuthenticationOptions", req, cb);
     }
     /**
      * 查询集群路由
      */
     async DescribeClusterRoutes(req, cb) {
         return this.request("DescribeClusterRoutes", req, cb);
+    }
+    /**
+     * 同步模板到实例或者集群，针对V2版本实例
+     */
+    async SyncPrometheusTemp(req, cb) {
+        return this.request("SyncPrometheusTemp", req, cb);
     }
     /**
      * 创建镜像缓存的接口。创建过程中，请勿删除EKSCI实例和云盘，否则镜像缓存将创建失败。
@@ -556,22 +634,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusOverviews", req, cb);
     }
     /**
+     * 创建告警策略
+     */
+    async CreatePrometheusAlertPolicy(req, cb) {
+        return this.request("CreatePrometheusAlertPolicy", req, cb);
+    }
+    /**
      * 删除一个云原生Prometheus配置模板
      */
     async DeletePrometheusTemplate(req, cb) {
         return this.request("DeletePrometheusTemplate", req, cb);
     }
     /**
-     * 修改集群认证配置
+     * 获取2.0实例告警策略列表
      */
-    async ModifyClusterAuthenticationOptions(req, cb) {
-        return this.request("ModifyClusterAuthenticationOptions", req, cb);
+    async DescribePrometheusAlertPolicy(req, cb) {
+        return this.request("DescribePrometheusAlertPolicy", req, cb);
     }
     /**
      * 获取被关联集群列表
      */
     async DescribePrometheusAgents(req, cb) {
         return this.request("DescribePrometheusAgents", req, cb);
+    }
+    /**
+     * 关闭事件持久化功能
+     */
+    async DisableEventPersistence(req, cb) {
+        return this.request("DisableEventPersistence", req, cb);
     }
     /**
      * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
@@ -604,6 +694,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAsGroupOption", req, cb);
     }
     /**
+     * 缩容独立集群master节点
+     */
+    async ScaleInClusterMaster(req, cb) {
+        return this.request("ScaleInClusterMaster", req, cb);
+    }
+    /**
      * 查询弹性集群列表
      */
     async DescribeEKSClusters(req, cb) {
@@ -616,10 +712,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterNodePool", req, cb);
     }
     /**
-     * 拉取模板列表，默认模板将总是在最前面
+     * 删除一个云原生Prometheus配置模板
      */
-    async DescribePrometheusTemplates(req, cb) {
-        return this.request("DescribePrometheusTemplates", req, cb);
+    async DeletePrometheusTemp(req, cb) {
+        return this.request("DeletePrometheusTemp", req, cb);
     }
     /**
      * 本接口用于查询开启vpc-cni模式的任务进度
@@ -658,10 +754,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableVpcCniNetworkType", req, cb);
     }
     /**
+     * 获取与云监控融合实例列表
+     */
+    async DescribePrometheusInstancesOverview(req, cb) {
+        return this.request("DescribePrometheusInstancesOverview", req, cb);
+    }
+    /**
      * 删除集群中的实例
      */
     async DeleteClusterInstances(req, cb) {
         return this.request("DeleteClusterInstances", req, cb);
+    }
+    /**
+     * 解除模板同步，这将会删除目标中该模板所生产的配置，针对V2版本实例
+     */
+    async DeletePrometheusTempSync(req, cb) {
+        return this.request("DeletePrometheusTempSync", req, cb);
+    }
+    /**
+     * 删除2.0实例告警策略
+     */
+    async DeletePrometheusAlertPolicy(req, cb) {
+        return this.request("DeletePrometheusAlertPolicy", req, cb);
     }
     /**
      * 修改弹性集群名称等属性

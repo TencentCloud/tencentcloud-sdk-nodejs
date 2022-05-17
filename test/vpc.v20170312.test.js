@@ -1528,6 +1528,16 @@ it("vpc.v20170312.DeleteNetDetect", async function () {
     }
 })
 
+it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
+    try {
+       const data = await client.InquirePriceCreateDirectConnectGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifySecurityGroupAttribute", async function () {
     try {
        const data = await client.ModifySecurityGroupAttribute({})
@@ -1638,9 +1648,9 @@ it("vpc.v20170312.ModifyNetworkInterfaceAttribute", async function () {
     }
 })
 
-it("vpc.v20170312.ModifySubnetAttribute", async function () {
+it("vpc.v20170312.DisableFlowLogs", async function () {
     try {
-       const data = await client.ModifySubnetAttribute({})
+       const data = await client.DisableFlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1788,6 +1798,16 @@ it("vpc.v20170312.DescribeVpnGateways", async function () {
     }
 })
 
+it("vpc.v20170312.ModifySubnetAttribute", async function () {
+    try {
+       const data = await client.ModifySubnetAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DownloadCustomerGatewayConfiguration", async function () {
     try {
        const data = await client.DownloadCustomerGatewayConfiguration({})
@@ -1928,9 +1948,9 @@ it("vpc.v20170312.AssignIpv6Addresses", async function () {
     }
 })
 
-it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
+it("vpc.v20170312.EnableFlowLogs", async function () {
     try {
-       const data = await client.InquirePriceCreateDirectConnectGateway({})
+       const data = await client.EnableFlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

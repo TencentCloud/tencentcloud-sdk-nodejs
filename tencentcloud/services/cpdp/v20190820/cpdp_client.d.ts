@@ -675,7 +675,7 @@ export declare class Client extends AbstractClient {
      */
     TerminateContract(req: TerminateContractRequest, cb?: (error: string, rep: TerminateContractResponse) => void): Promise<TerminateContractResponse>;
     /**
-     * 云企付-查询账户余额
+     * 云企付-子商户银行卡余额查询
      */
     QueryOpenBankBankAccountBalance(req: QueryOpenBankBankAccountBalanceRequest, cb?: (error: string, rep: QueryOpenBankBankAccountBalanceResponse) => void): Promise<QueryOpenBankBankAccountBalanceResponse>;
     /**

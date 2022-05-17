@@ -1077,6 +1077,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNetDetect", req, cb);
     }
     /**
+     * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+     */
+    async InquirePriceCreateDirectConnectGateway(req, cb) {
+        return this.request("InquirePriceCreateDirectConnectGateway", req, cb);
+    }
+    /**
      * 本接口（ModifySecurityGroupAttribute）用于修改安全组（SecurityGroupPolicy）属性。
      */
     async ModifySecurityGroupAttribute(req, cb) {
@@ -1146,10 +1152,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNetworkInterfaceAttribute", req, cb);
     }
     /**
-     * 本接口（ModifySubnetAttribute）用于修改子网属性。
+     * 本接口（DisableFlowLogs）用于停止流日志。
      */
-    async ModifySubnetAttribute(req, cb) {
-        return this.request("ModifySubnetAttribute", req, cb);
+    async DisableFlowLogs(req, cb) {
+        return this.request("DisableFlowLogs", req, cb);
     }
     /**
      * 本接口（DescribeNetworkInterfaces）用于查询弹性网卡列表。
@@ -1242,6 +1248,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVpnGateways(req, cb) {
         return this.request("DescribeVpnGateways", req, cb);
+    }
+    /**
+     * 本接口（ModifySubnetAttribute）用于修改子网属性。
+     */
+    async ModifySubnetAttribute(req, cb) {
+        return this.request("ModifySubnetAttribute", req, cb);
     }
     /**
      * 本接口(DownloadCustomerGatewayConfiguration)用于下载VPN通道配置。
@@ -1337,10 +1349,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignIpv6Addresses", req, cb);
     }
     /**
-     * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+     * 本接口（EnableFlowLogs）用于启动流日志。
      */
-    async InquirePriceCreateDirectConnectGateway(req, cb) {
-        return this.request("InquirePriceCreateDirectConnectGateway", req, cb);
+    async EnableFlowLogs(req, cb) {
+        return this.request("EnableFlowLogs", req, cb);
     }
     /**
      * 本接口（DescribeIpGeolocationInfos）用于查询IP地址信息，包括地理位置信息和网络信息。

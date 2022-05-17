@@ -1023,7 +1023,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TerminateContract", req, cb);
     }
     /**
-     * 云企付-查询账户余额
+     * 云企付-子商户银行卡余额查询
      */
     async QueryOpenBankBankAccountBalance(req, cb) {
         return this.request("QueryOpenBankBankAccountBalance", req, cb);

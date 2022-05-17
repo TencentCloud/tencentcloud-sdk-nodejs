@@ -6992,6 +6992,16 @@ export interface HaVipDisassociateAddressIpRequest {
 }
 
 /**
+ * DisableFlowLogs返回参数结构体
+ */
+export interface DisableFlowLogsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBandwidthPackageResources返回参数结构体
  */
 export interface DescribeBandwidthPackageResourcesResponse {
@@ -9954,6 +9964,16 @@ export interface AssociateNetworkInterfaceSecurityGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableFlowLogs请求参数结构体
+ */
+export interface EnableFlowLogsRequest {
+  /**
+   * 流日志Id。
+   */
+  FlowLogIds: Array<string>
 }
 
 /**
@@ -13008,6 +13028,16 @@ export interface Ipv6SubnetCidrBlock {
 }
 
 /**
+ * EnableFlowLogs返回参数结构体
+ */
+export interface EnableFlowLogsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * LockCcnBandwidths返回参数结构体
  */
 export interface LockCcnBandwidthsResponse {
@@ -13675,6 +13705,16 @@ export interface CreateVpcRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * DisableFlowLogs请求参数结构体
+ */
+export interface DisableFlowLogsRequest {
+  /**
+   * 流日志Id。
+   */
+  FlowLogIds: Array<string>
 }
 
 /**

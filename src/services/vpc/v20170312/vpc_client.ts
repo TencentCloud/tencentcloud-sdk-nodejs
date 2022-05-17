@@ -325,6 +325,7 @@ import {
   DescribeProductQuotaResponse,
   Price,
   HaVipDisassociateAddressIpRequest,
+  DisableFlowLogsResponse,
   DescribeBandwidthPackageResourcesResponse,
   DescribeCrossBorderComplianceResponse,
   ModifyVpnGatewayAttributeResponse,
@@ -471,6 +472,7 @@ import {
   DeleteCcnRequest,
   ModifyLocalGatewayResponse,
   AssociateNetworkInterfaceSecurityGroupsResponse,
+  EnableFlowLogsRequest,
   ModifyVpnGatewayAttributeRequest,
   CreateNatGatewayRequest,
   DeleteNetDetectRequest,
@@ -620,6 +622,7 @@ import {
   ModifyNetDetectResponse,
   CreateHaVipRequest,
   Ipv6SubnetCidrBlock,
+  EnableFlowLogsResponse,
   LockCcnBandwidthsResponse,
   DescribeAddressQuotaResponse,
   CreateCustomerGatewayRequest,
@@ -659,6 +662,7 @@ import {
   DescribeServiceTemplateGroupsRequest,
   CreateSecurityGroupWithPoliciesRequest,
   CreateVpcRequest,
+  DisableFlowLogsRequest,
   DeleteServiceTemplateRequest,
   DescribeSecurityGroupAssociationStatisticsRequest,
   NotifyRoutesResponse,
@@ -2344,6 +2348,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+   */
+  async InquirePriceCreateDirectConnectGateway(
+    req?: InquirePriceCreateDirectConnectGatewayRequest,
+    cb?: (error: string, rep: InquirePriceCreateDirectConnectGatewayResponse) => void
+  ): Promise<InquirePriceCreateDirectConnectGatewayResponse> {
+    return this.request("InquirePriceCreateDirectConnectGateway", req, cb)
+  }
+
+  /**
    * 本接口（ModifySecurityGroupAttribute）用于修改安全组（SecurityGroupPolicy）属性。
    */
   async ModifySecurityGroupAttribute(
@@ -2457,13 +2471,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifySubnetAttribute）用于修改子网属性。
+   * 本接口（DisableFlowLogs）用于停止流日志。
    */
-  async ModifySubnetAttribute(
-    req: ModifySubnetAttributeRequest,
-    cb?: (error: string, rep: ModifySubnetAttributeResponse) => void
-  ): Promise<ModifySubnetAttributeResponse> {
-    return this.request("ModifySubnetAttribute", req, cb)
+  async DisableFlowLogs(
+    req: DisableFlowLogsRequest,
+    cb?: (error: string, rep: DisableFlowLogsResponse) => void
+  ): Promise<DisableFlowLogsResponse> {
+    return this.request("DisableFlowLogs", req, cb)
   }
 
   /**
@@ -2612,6 +2626,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVpnGatewaysResponse) => void
   ): Promise<DescribeVpnGatewaysResponse> {
     return this.request("DescribeVpnGateways", req, cb)
+  }
+
+  /**
+   * 本接口（ModifySubnetAttribute）用于修改子网属性。
+   */
+  async ModifySubnetAttribute(
+    req: ModifySubnetAttributeRequest,
+    cb?: (error: string, rep: ModifySubnetAttributeResponse) => void
+  ): Promise<ModifySubnetAttributeResponse> {
+    return this.request("ModifySubnetAttribute", req, cb)
   }
 
   /**
@@ -2764,13 +2788,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+   * 本接口（EnableFlowLogs）用于启动流日志。
    */
-  async InquirePriceCreateDirectConnectGateway(
-    req?: InquirePriceCreateDirectConnectGatewayRequest,
-    cb?: (error: string, rep: InquirePriceCreateDirectConnectGatewayResponse) => void
-  ): Promise<InquirePriceCreateDirectConnectGatewayResponse> {
-    return this.request("InquirePriceCreateDirectConnectGateway", req, cb)
+  async EnableFlowLogs(
+    req: EnableFlowLogsRequest,
+    cb?: (error: string, rep: EnableFlowLogsResponse) => void
+  ): Promise<EnableFlowLogsResponse> {
+    return this.request("EnableFlowLogs", req, cb)
   }
 
   /**

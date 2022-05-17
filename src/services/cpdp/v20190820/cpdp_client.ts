@@ -2196,7 +2196,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云企付-查询账户余额
+   * 云企付-子商户银行卡余额查询
    */
   async QueryOpenBankBankAccountBalance(
     req: QueryOpenBankBankAccountBalanceRequest,
