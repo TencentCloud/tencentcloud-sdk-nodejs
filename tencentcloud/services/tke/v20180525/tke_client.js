@@ -526,6 +526,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusAlertRule", req, cb);
     }
     /**
+     * 修改模板内容
+     */
+    async ModifyPrometheusTemp(req, cb) {
+        return this.request("ModifyPrometheusTemp", req, cb);
+    }
+    /**
      * 用于查询Kubernetes的各个原生控制器是否开启
      */
     async DescribeClusterControllers(req, cb) {

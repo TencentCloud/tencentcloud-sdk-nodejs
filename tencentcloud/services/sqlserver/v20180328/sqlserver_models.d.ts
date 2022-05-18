@@ -3807,6 +3807,10 @@ export interface AccountPrivilegeModifyInfo {
       * 账号权限变更信息
       */
     DBPrivileges: Array<DBPrivilegeModifyInfo>;
+    /**
+      * 是否为管理员账户
+      */
+    IsAdmin?: boolean;
 }
 /**
  * DescribeBackupMigration返回参数结构体
@@ -4000,7 +4004,7 @@ export interface RecycleDBInstanceResponse {
     /**
       * 流程id
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

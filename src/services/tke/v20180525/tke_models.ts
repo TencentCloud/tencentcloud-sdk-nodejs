@@ -1438,6 +1438,11 @@ export interface PodLimitsInstance {
 }
 
 /**
+ * ModifyPrometheusTemp请求参数结构体
+ */
+export type ModifyPrometheusTempRequest = null
+
+/**
  * 集群中控制器的状态描述
  */
 export interface ControllerStatus {
@@ -6113,6 +6118,16 @@ export interface DeleteClusterInstancesResponse {
       */
   NotFoundInstanceIds: Array<string>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyPrometheusTemp返回参数结构体
+ */
+export interface ModifyPrometheusTempResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

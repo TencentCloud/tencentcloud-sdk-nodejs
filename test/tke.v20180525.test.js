@@ -848,6 +848,16 @@ it("tke.v20180525.CreatePrometheusAlertRule", async function () {
     }
 })
 
+it("tke.v20180525.ModifyPrometheusTemp", async function () {
+    try {
+       const data = await client.ModifyPrometheusTemp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeClusterControllers", async function () {
     try {
        const data = await client.DescribeClusterControllers({})

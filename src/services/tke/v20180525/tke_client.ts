@@ -81,6 +81,7 @@ import {
   DescribeEksContainerInstanceLogRequest,
   DescribeClusterInstancesRequest,
   PodLimitsInstance,
+  ModifyPrometheusTempRequest,
   ControllerStatus,
   DeletePrometheusTempSyncResponse,
   DescribePrometheusRecordRulesRequest,
@@ -283,6 +284,7 @@ import {
   DescribeClusterAsGroupsResponse,
   ScaleOutClusterMasterRequest,
   DeleteClusterInstancesResponse,
+  ModifyPrometheusTempResponse,
   PrometheusAlertRuleDetail,
   DescribeClusterInstancesResponse,
   CreatePrometheusAlertRuleRequest,
@@ -1218,6 +1220,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrometheusAlertRuleResponse) => void
   ): Promise<CreatePrometheusAlertRuleResponse> {
     return this.request("CreatePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 修改模板内容
+   */
+  async ModifyPrometheusTemp(
+    req?: ModifyPrometheusTempRequest,
+    cb?: (error: string, rep: ModifyPrometheusTempResponse) => void
+  ): Promise<ModifyPrometheusTempResponse> {
+    return this.request("ModifyPrometheusTemp", req, cb)
   }
 
   /**

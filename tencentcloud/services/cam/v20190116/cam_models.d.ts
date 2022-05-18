@@ -223,6 +223,10 @@ export interface CreateServiceLinkedRoleRequest {
       * 角色说明。
       */
     Description?: string;
+    /**
+      * 角色绑定标签。
+      */
+    Tags?: Array<RoleTags>;
 }
 /**
  * ListAttachedGroupPolicies请求参数结构体
@@ -491,6 +495,10 @@ export interface DescribeRoleListRequest {
       * 每页行数，不能大于200
       */
     Rp: number;
+    /**
+      * 标签筛选
+      */
+    Tags?: Array<RoleTags>;
 }
 /**
  * DescribeUserSAMLConfig请求参数结构体
@@ -521,6 +529,81 @@ export interface GetGroupRequest {
       * 用户组 ID
       */
     GroupId: number;
+}
+/**
+ * 策略信息
+ */
+export interface StrategyInfo {
+    /**
+      * 策略ID。
+      */
+    PolicyId: number;
+    /**
+      * 策略名称。
+      */
+    PolicyName: string;
+    /**
+      * 策略创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AddTime: string;
+    /**
+      * 策略类型。1 表示自定义策略，2 表示预设策略。
+      */
+    Type: number;
+    /**
+      * 策略描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 创建来源，1 通过控制台创建, 2 通过策略语法创建。
+      */
+    CreateMode: number;
+    /**
+      * 关联的用户数
+      */
+    Attachments: number;
+    /**
+      * 策略关联的产品
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceType: string;
+    /**
+      * 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsAttached: number;
+    /**
+      * 是否已下线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Deactived: number;
+    /**
+      * 已下线产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeactivedDetail: Array<string>;
+    /**
+      * 是否是服务相关角色策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsServiceLinkedPolicy: number;
+    /**
+      * 关联策略实体数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachEntityCount: number;
+    /**
+      * 关联权限边界实体数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AttachEntityBoundaryCount: number;
+    /**
+      * 最后编辑时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
 }
 /**
  * DeleteRole返回参数结构体
@@ -922,6 +1005,11 @@ export interface RoleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeletionTaskId: string;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<RoleTags>;
 }
 /**
  * DescribeSafeAuthFlag返回参数结构体
@@ -1151,79 +1239,17 @@ export interface DeleteRolePermissionsBoundaryRequest {
     RoleName?: string;
 }
 /**
- * 策略信息
+ * 角色标签类型
  */
-export interface StrategyInfo {
+export interface RoleTags {
     /**
-      * 策略ID。
+      * 标签键
       */
-    PolicyId: number;
+    Key: string;
     /**
-      * 策略名称。
+      * 标签值
       */
-    PolicyName: string;
-    /**
-      * 策略创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AddTime: string;
-    /**
-      * 策略类型。1 表示自定义策略，2 表示预设策略。
-      */
-    Type: number;
-    /**
-      * 策略描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Description: string;
-    /**
-      * 创建来源，1 通过控制台创建, 2 通过策略语法创建。
-      */
-    CreateMode: number;
-    /**
-      * 关联的用户数
-      */
-    Attachments: number;
-    /**
-      * 策略关联的产品
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceType: string;
-    /**
-      * 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsAttached: number;
-    /**
-      * 是否已下线
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Deactived: number;
-    /**
-      * 已下线产品列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeactivedDetail: Array<string>;
-    /**
-      * 是否是服务相关角色策略
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsServiceLinkedPolicy: number;
-    /**
-      * 关联策略实体数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AttachEntityCount: number;
-    /**
-      * 关联权限边界实体数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AttachEntityBoundaryCount: number;
-    /**
-      * 最后编辑时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdateTime: string;
+    Value: string;
 }
 /**
  * DescribeUserOIDCConfig返回参数结构体
@@ -2078,7 +2104,7 @@ export interface CreateServiceLinkedRoleResponse {
     /**
       * 角色ID
       */
-    RoleId?: string;
+    RoleId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2431,7 +2457,7 @@ export interface CreateRoleResponse {
       * 角色ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RoleId?: string;
+    RoleId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2773,6 +2799,10 @@ export interface CreateRoleRequest {
       * 申请角色临时密钥的最长有效期限制(范围：0~43200)
       */
     SessionDuration?: number;
+    /**
+      * 角色绑定标签
+      */
+    Tags?: Array<RoleTags>;
 }
 /**
  * 用户关联的策略详情

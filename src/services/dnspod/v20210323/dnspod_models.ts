@@ -2154,6 +2154,11 @@ export interface ModifyDynamicDNSRequest {
    * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
    */
   RecordLineId?: string
+
+  /**
+   * TTL值，如果不传，默认为域名的TTL值。
+   */
+  Ttl?: number
 }
 
 /**
