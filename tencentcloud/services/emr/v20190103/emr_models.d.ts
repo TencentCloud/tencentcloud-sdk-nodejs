@@ -136,34 +136,6 @@ export interface PodVolume {
     HostVolume?: HostVolumeContext;
 }
 /**
- * DescribeClusterNodes返回参数结构体
- */
-export interface DescribeClusterNodesResponse {
-    /**
-      * 查询到的节点总数
-      */
-    TotalCnt: number;
-    /**
-      * 节点详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NodeList: Array<NodeHardwareInfo>;
-    /**
-      * 用户所有的标签键列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TagKeys: Array<string>;
-    /**
-      * 资源类型列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    HardwareResourceTypeList: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * SyncPodState返回参数结构体
  */
 export interface SyncPodStateResponse {
@@ -714,6 +686,136 @@ export interface Tag {
     TagValue?: string;
 }
 /**
+ * 集群列表返回示例
+ */
+export interface EmrListInstance {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StatusDesc: string;
+    /**
+      * 集群名字
+      */
+    ClusterName: string;
+    /**
+      * 集群地域
+      */
+    ZoneId: number;
+    /**
+      * 用户APPID
+      */
+    AppId: number;
+    /**
+      * 创建时间
+      */
+    AddTime: string;
+    /**
+      * 运行时间
+      */
+    RunTime: string;
+    /**
+      * 集群IP
+      */
+    MasterIp: string;
+    /**
+      * 集群版本
+      */
+    EmrVersion: string;
+    /**
+      * 集群计费类型
+      */
+    ChargeType: number;
+    /**
+      * emr ID
+      */
+    Id: number;
+    /**
+      * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductId: number;
+    /**
+      * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectId: number;
+    /**
+      * 区域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RegionId: number;
+    /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId: number;
+    /**
+      * 网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId: number;
+    /**
+      * 地区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone: string;
+    /**
+      * 状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 实例标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+    /**
+      * 告警信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AlarmInfo: string;
+    /**
+      * 是否是woodpecker集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsWoodpeckerCluster: number;
+    /**
+      * Vpc中文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcName: string;
+    /**
+      * 子网中文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetName: string;
+    /**
+      * 字符串VpcId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqVpcId: string;
+    /**
+      * 字符串子网
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqSubnetId: string;
+    /**
+      * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterClass: string;
+    /**
+      * 是否为跨AZ集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsMultiZoneCluster: boolean;
+}
+/**
  * ModifyResourceScheduleConfig返回参数结构体
  */
 export interface ModifyResourceScheduleConfigResponse {
@@ -843,6 +945,23 @@ export interface VPCSettings {
       * Subnet ID
       */
     SubnetId: string;
+}
+/**
+ * DescribeInstancesList返回参数结构体
+ */
+export interface DescribeInstancesListResponse {
+    /**
+      * 符合条件的实例总数。
+      */
+    TotalCnt: number;
+    /**
+      * 集群实例列表
+      */
+    InstancesList: Array<EmrListInstance>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeInstanceRenewNodes请求参数结构体
@@ -1010,6 +1129,19 @@ export interface InquiryPriceCreateInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * TerminateInstance请求参数结构体
+ */
+export interface TerminateInstanceRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 销毁节点ID。该参数为预留参数，用户无需配置。
+      */
+    ResourceIds?: Array<string>;
 }
 /**
  * 流程作业资源描述
@@ -1297,17 +1429,26 @@ export interface SearchItem {
     SearchValue: string;
 }
 /**
- * TerminateInstance请求参数结构体
+ * 各个可用区的参数信息
  */
-export interface TerminateInstanceRequest {
+export interface MultiZoneSetting {
     /**
-      * 实例ID。
+      * "master"、"standby"、"third-party"
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceId: string;
+    ZoneTag?: string;
     /**
-      * 销毁节点ID。该参数为预留参数，用户无需配置。
+      * 无
       */
-    ResourceIds?: Array<string>;
+    VPCSettings?: VPCSettings;
+    /**
+      * 无
+      */
+    Placement?: Placement;
+    /**
+      * 无
+      */
+    ResourceSpec?: NewResourceSpec;
 }
 /**
  * TerminateInstance返回参数结构体
@@ -2011,17 +2152,33 @@ export interface InquiryPriceUpdateInstanceRequest {
     Currency?: string;
 }
 /**
- * ModifyResourcePools请求参数结构体
+ * DescribeInstancesList请求参数结构体
  */
-export interface ModifyResourcePoolsRequest {
+export interface DescribeInstancesListRequest {
     /**
-      * emr集群id
+      * 集群筛选策略。取值范围：<li>clusterList：表示查询除了已销毁集群之外的集群列表。</li><li>monitorManage：表示查询除了已销毁、创建中以及创建失败的集群之外的集群列表。</li><li>cloudHardwareManage/componentManage：目前这两个取值为预留取值，暂时和monitorManage表示同样的含义。</li>
       */
-    InstanceId: string;
+    DisplayStrategy: string;
     /**
-      * 标识是fair还是capacity
+      * 页编号，默认值为0，表示第一页。
       */
-    Key: string;
+    Offset?: number;
+    /**
+      * 每页返回数量，默认值为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 排序字段。取值范围：<li>clusterId：表示按照实例ID排序。</li><li>addTime：表示按照实例创建时间排序。</li><li>status：表示按照实例的状态码排序。</li>
+      */
+    OrderField?: string;
+    /**
+      * 按照OrderField升序或者降序进行排序。取值范围：<li>0：表示降序。</li><li>1：表示升序。</li>默认值为0。
+      */
+    Asc?: number;
+    /**
+      * 自定义查询
+      */
+    Filters?: Array<Filters>;
 }
 /**
  * 资源详情
@@ -2289,6 +2446,15 @@ export interface MultiDiskMC {
     Volume?: number;
 }
 /**
+ * AddUsersForUserManager请求参数结构体
+ */
+export interface AddUsersForUserManagerRequest {
+    /**
+      * 用户信息列表
+      */
+    UserManagerUserList: Array<UserInfoForUserManager>;
+}
+/**
  * 用户自建Hive-MetaDB信息
  */
 export interface CustomMetaInfo {
@@ -2403,26 +2569,32 @@ Hadoop-Hbase
     MultiZoneSettings?: Array<MultiZoneSetting>;
 }
 /**
- * 各个可用区的参数信息
+ * DescribeClusterNodes返回参数结构体
  */
-export interface MultiZoneSetting {
+export interface DescribeClusterNodesResponse {
     /**
-      * "master"、"standby"、"third-party"
+      * 查询到的节点总数
+      */
+    TotalCnt: number;
+    /**
+      * 节点详细信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ZoneTag?: string;
+    NodeList: Array<NodeHardwareInfo>;
     /**
-      * 无
+      * 用户所有的标签键列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    VPCSettings?: VPCSettings;
+    TagKeys: Array<string>;
     /**
-      * 无
+      * 资源类型列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Placement?: Placement;
+    HardwareResourceTypeList: Array<string>;
     /**
-      * 无
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ResourceSpec?: NewResourceSpec;
+    RequestId?: string;
 }
 /**
  * ModifyResourceScheduleConfig请求参数结构体
@@ -2440,6 +2612,27 @@ export interface ModifyResourceScheduleConfigRequest {
       * 修改后的模块消息
       */
     Value: string;
+}
+/**
+ * 添加的用户信息列表
+ */
+export interface UserInfoForUserManager {
+    /**
+      * 用户名
+      */
+    UserName: string;
+    /**
+      * 用户所属的组
+      */
+    UserGroup: string;
+    /**
+      * 密码
+      */
+    PassWord: string;
+    /**
+      * 备注
+      */
+    ReMark?: string;
 }
 /**
  * POD浮动规格
@@ -2718,6 +2911,19 @@ export interface Resource {
     DiskNum?: number;
 }
 /**
+ * Emr集群列表实例自定义查询过滤
+ */
+export interface Filters {
+    /**
+      * 字段名称
+      */
+    Name: string;
+    /**
+      * 过滤字段值
+      */
+    Values: Array<string>;
+}
+/**
  * InquirePriceRenewEmr请求参数结构体
  */
 export interface InquirePriceRenewEmrRequest {
@@ -2838,6 +3044,15 @@ export interface ShortNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NodeSize?: number;
+}
+/**
+ * AddUsersForUserManager返回参数结构体
+ */
+export interface AddUsersForUserManagerResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 节点硬件信息
@@ -3085,6 +3300,19 @@ export interface JobFlowResource {
       * 磁盘描述列表。
       */
     DiskGroups: Array<DiskGroup>;
+}
+/**
+ * ModifyResourcePools请求参数结构体
+ */
+export interface ModifyResourcePoolsRequest {
+    /**
+      * emr集群id
+      */
+    InstanceId: string;
+    /**
+      * 标识是fair还是capacity
+      */
+    Key: string;
 }
 /**
  * DescribeJobFlow返回参数结构体

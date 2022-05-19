@@ -735,6 +735,32 @@ export interface DeviceUpdateStatus {
     TaskId: number;
 }
 /**
+ * ListLog请求参数结构体
+ */
+export interface ListLogRequest {
+    /**
+      * 日志开始时间，毫秒级时间戳
+      */
+    MinTime: number;
+    /**
+      * 日志结束时间，毫秒级时间戳
+      */
+    MaxTime: number;
+    /**
+      * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。
+一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish
+      */
+    Keywords?: string;
+    /**
+      * 日志检索上下文
+      */
+    Context?: string;
+    /**
+      * 查询条数
+      */
+    MaxNum?: number;
+}
+/**
  * BatchUpdateFirmware返回参数结构体
  */
 export interface BatchUpdateFirmwareResponse {
@@ -957,6 +983,23 @@ export interface DescribeFirmwareTaskDistributionRequest {
       * 固件升级任务ID
       */
     TaskId: number;
+}
+/**
+ * ListFirmwares返回参数结构体
+ */
+export interface ListFirmwaresResponse {
+    /**
+      * 固件总数
+      */
+    TotalCount: number;
+    /**
+      * 固件列表
+      */
+    Firmwares: Array<FirmwareInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeFirmwareTaskDevices请求参数结构体
@@ -1411,6 +1454,43 @@ export interface DescribeFirmwareTaskResponse {
     RequestId?: string;
 }
 /**
+ * 设备固件详细信息
+ */
+export interface FirmwareInfo {
+    /**
+      * 固件版本
+      */
+    Version: string;
+    /**
+      * 固件MD5值
+      */
+    Md5sum: string;
+    /**
+      * 固件创建时间
+      */
+    CreateTime: number;
+    /**
+      * 产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductName: string;
+    /**
+      * 固件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 固件描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductId: string;
+}
+/**
  * CreateProduct请求参数结构体
  */
 export interface CreateProductRequest {
@@ -1462,21 +1542,17 @@ export interface DisableTopicRuleResponse {
     RequestId?: string;
 }
 /**
- * GetCOSURL请求参数结构体
+ * GetAllVersion返回参数结构体
  */
-export interface GetCOSURLRequest {
+export interface GetAllVersionResponse {
     /**
-      * 产品ID
+      * 版本号列表
       */
-    ProductId: string;
+    Version: Array<string>;
     /**
-      * 固件版本
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    FirmwareVersion: string;
-    /**
-      * 固件版本大小
-      */
-    FileSize?: number;
+    RequestId?: string;
 }
 /**
  * UpdateTopicPolicy返回参数结构体
@@ -1639,6 +1715,27 @@ export interface PublishBroadcastMessageRequest {
       * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
       */
     PayloadEncoding?: string;
+}
+/**
+ * ListFirmwares请求参数结构体
+ */
+export interface ListFirmwaresRequest {
+    /**
+      * 获取的页数
+      */
+    PageNum: number;
+    /**
+      * 分页的大小
+      */
+    PageSize: number;
+    /**
+      * 产品ID
+      */
+    ProductId?: string;
+    /**
+      * 搜索过滤条件
+      */
+    Filters?: Array<SearchKeyword>;
 }
 /**
  * ListLog返回参数结构体
@@ -2331,6 +2428,15 @@ export interface UpdateProductDynamicRegisterResponse {
     RequestId?: string;
 }
 /**
+ * GetAllVersion请求参数结构体
+ */
+export interface GetAllVersionRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+}
+/**
  * UnbindDevices返回参数结构体
  */
 export interface UnbindDevicesResponse {
@@ -2606,30 +2712,21 @@ export interface DeviceTag {
     Name?: string;
 }
 /**
- * ListLog请求参数结构体
+ * GetCOSURL请求参数结构体
  */
-export interface ListLogRequest {
+export interface GetCOSURLRequest {
     /**
-      * 日志开始时间，毫秒级时间戳
+      * 产品ID
       */
-    MinTime: number;
+    ProductId: string;
     /**
-      * 日志结束时间，毫秒级时间戳
+      * 固件版本
       */
-    MaxTime: number;
+    FirmwareVersion: string;
     /**
-      * 查询关键字，可以同时支持键值查询和文本查询，例如，查询某key的值为value，并且包含某word的日志，该参数为：key:value word。键值或文本可以包含多个，以空格隔开。其中可以索引的key包括：requestid、productid、devicename、scene、content。
-一个典型的查询示例：productid:ABCDE12345 devicename:test scene:SHADOW content:Device%20connect publish
+      * 固件版本大小
       */
-    Keywords?: string;
-    /**
-      * 日志检索上下文
-      */
-    Context?: string;
-    /**
-      * 查询条数
-      */
-    MaxNum?: number;
+    FileSize?: number;
 }
 /**
  * 产品元数据

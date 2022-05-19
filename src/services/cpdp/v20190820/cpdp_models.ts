@@ -264,6 +264,41 @@ export interface UnifiedOrderResponse {
 }
 
 /**
+ * CreatePayRollToken返回参数结构体
+ */
+export interface CreatePayRollTokenResponse {
+  /**
+   * Token有效时间，单位秒
+   */
+  ExpireTime: number
+
+  /**
+   * 微信服务商商户的商户号，由微信支付生成并下发
+   */
+  MerchantId: string
+
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+
+  /**
+   * Token值
+   */
+  Token: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 付款人申请结果
  */
 export interface ApplyPayerinfoResult {
@@ -546,6 +581,21 @@ export interface UploadOrgFileRequest {
 }
 
 /**
+ * GetPayRollAuthResult请求参数结构体
+ */
+export interface GetPayRollAuthResultRequest {
+  /**
+   * 商户系统内部的商家核身单号，要求此参数只能由数字、大小写字母组成，在服务商内部唯一
+   */
+  AuthNumber: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+}
+
+/**
  * RefundTlinxOrder返回参数结构体
  */
 export interface RefundTlinxOrderResponse {
@@ -573,33 +623,48 @@ export interface RefundTlinxOrderResponse {
 }
 
 /**
- * 聚鑫-查询会员间交易信息列表结果
+ * 聚鑫商户余额查询输出项
  */
-export interface QueryMemberTransactionDetailsResult {
+export interface QueryItem {
   /**
-   * 本次交易返回查询结果记录数。
+   * 子商户账户
    */
-  ResultCount: number
+  SubAcctNo: string
 
   /**
-      * 符合业务查询条件的记录总数。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 子账户属性 
+1：普通会员子账号 
+2：挂账子账号 
+3：手续费子账号 
+4：利息子账号
+5：平台担保子账号
       */
-  TotalCount: number
+  SubAcctProperty: string
 
   /**
-      * 结束标志。
-__0__：否
-__1__：是
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EndFlag: string
+   * 业务平台的子商户Id，唯一
+   */
+  SubMchId: string
 
   /**
-      * 会员间交易信息数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TranItemArray: Array<MemberTransactionItem>
+   * 子账户名称
+   */
+  SubAcctName: string
+
+  /**
+   * 账户可用余额
+   */
+  AcctAvailBal: string
+
+  /**
+   * 可提现金额
+   */
+  CashAmt: string
+
+  /**
+   * 维护日期 开户日期或修改日期
+   */
+  MaintenanceDate: string
 }
 
 /**
@@ -660,40 +725,18 @@ export interface QueryAssignmentRequest {
 }
 
 /**
- * QueryMemberTransaction返回参数结构体
+ * 提交贸易材料结果
  */
-export interface QueryMemberTransactionResponse {
+export interface ApplyTradeResult {
   /**
-   * String(20)，返回码
+   * 错误码
    */
-  TxnReturnCode?: string
+  Code: string
 
   /**
-   * String(100)，返回信息
+   * 提交贸易材料数据
    */
-  TxnReturnMsg?: string
-
-  /**
-   * String(22)，交易流水号
-   */
-  CnsmrSeqNo?: string
-
-  /**
-      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FrontSeqNo?: string
-
-  /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReservedMsg?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Data: ApplyTradeData
 }
 
 /**
@@ -1515,6 +1558,22 @@ __sandbox__:沙箱环境
 _不填默认为生产环境_
       */
   Environment?: string
+}
+
+/**
+ * QueryMerchantInfoForManagement返回参数结构体
+ */
+export interface QueryMerchantInfoForManagementResponse {
+  /**
+      * 商户结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: MerchantManagementResult
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4151,6 +4210,46 @@ export interface QueryInvoiceRequest {
 }
 
 /**
+ * CreatePayRollPreOrder返回参数结构体
+ */
+export interface CreatePayRollPreOrderResponse {
+  /**
+   * 商户系统内部的商家核身单号，要求此参数只能由数字、大小写字母组成，在服务商内部唯一
+   */
+  AuthNumber: string
+
+  /**
+   * Token有效时间，单位秒
+   */
+  ExpireTime: number
+
+  /**
+   * 微信服务商商户的商户号，由微信支付生成并下发
+   */
+  MerchantId: string
+
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+
+  /**
+   * Token值
+   */
+  Token: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 创建渠道商户返回结果
  */
 export interface CreateOpenBankMerchantResult {
@@ -4839,18 +4938,174 @@ _不填默认为生产环境_
 }
 
 /**
- * 提交贸易材料结果
+ * ContractOrder请求参数结构体
  */
-export interface ApplyTradeResult {
+export interface ContractOrderRequest {
   /**
-   * 错误码
+   * ISO 货币代码，CNY
    */
-  Code: string
+  CurrencyType: string
 
   /**
-   * 提交贸易材料数据
+   * 聚鑫分配的支付主MidasAppId
    */
-  Data: ApplyTradeData
+  MidasAppId: string
+
+  /**
+   * 支付订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+   */
+  OutTradeNo: string
+
+  /**
+   * 商品详情，需要URL编码
+   */
+  ProductDetail: string
+
+  /**
+   * 商品ID，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+   */
+  ProductId: string
+
+  /**
+   * 商品名称，需要URL编码
+   */
+  ProductName: string
+
+  /**
+   * 支付金额，单位： 分
+   */
+  TotalAmt: number
+
+  /**
+   * 用户ID，长度不小于5位，仅支持字母和数字的组合
+   */
+  UserId: string
+
+  /**
+   * 银行真实渠道.如:bank_pingan
+   */
+  RealChannel: string
+
+  /**
+   * 原始金额
+   */
+  OriginalAmt: number
+
+  /**
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
+
+  /**
+   * 按照聚鑫安全密钥计算的签名
+   */
+  MidasSignature: string
+
+  /**
+   * 签约通知地址
+   */
+  ContractNotifyUrl: string
+
+  /**
+   * Web端回调地址
+   */
+  CallbackUrl?: string
+
+  /**
+      * 指定支付渠道：  wechat：微信支付  qqwallet：QQ钱包 
+ bank：网银支付  只有一个渠道时需要指定
+      */
+  Channel?: string
+
+  /**
+   * 透传字段，支付成功回调透传给应用，用于业务透传自定义内容
+   */
+  Metadata?: string
+
+  /**
+   * 购买数量，不传默认为1
+   */
+  Quantity?: number
+
+  /**
+   * 聚鑫计费SubAppId，代表子商户
+   */
+  SubAppId?: string
+
+  /**
+      * 子订单信息列表，格式：子订单号、子应用ID、金额。 压缩后最长不可超过65535字节(去除空格，换行，制表符等无意义字符)
+注：接入银行或其他支付渠道服务商模式下，必传
+      */
+  SubOrderList?: Array<ContractOrderInSubOrder>
+
+  /**
+   * 结算应收金额，单位：分
+   */
+  TotalMchIncome?: number
+
+  /**
+   * 平台应收金额，单位：分
+   */
+  TotalPlatformIncome?: number
+
+  /**
+   * 微信公众号/小程序支付时为必选，需要传微信下的openid
+   */
+  WxOpenId?: string
+
+  /**
+   * 在服务商模式下，微信公众号/小程序支付时wx_sub_openid和wx_openid二选一
+   */
+  WxSubOpenId?: string
+
+  /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+  MidasEnvironment?: string
+
+  /**
+   * 微信商户应用ID
+   */
+  WxAppId?: string
+
+  /**
+   * 微信商户子应用ID
+   */
+  WxSubAppId?: string
+
+  /**
+   * 支付通知地址
+   */
+  PaymentNotifyUrl?: string
+
+  /**
+   * 传入调用方在Midas注册签约信息时获得的ContractSceneId。若未在Midas注册签约信息，则传入ExternalContractData。注意：ContractSceneId与ExternalContractData必须二选一传入其中一个
+   */
+  ContractSceneId?: string
+
+  /**
+   * 需要按照各个渠道的扩展签约信息规范组装好该字段。若未在Midas注册签约信息，则传入该字段。注意：ContractSceneId与ExternalContractData必须二选一传入其中一个
+   */
+  ExternalContractData?: string
+
+  /**
+   * 外部签约协议号，唯一标记一个签约关系。仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+   */
+  OutContractCode?: string
+
+  /**
+   * 透传给第三方渠道的附加数据
+   */
+  AttachData?: string
+
+  /**
+   * 展示用的签约用户名称，若不传入时，默认取UserId
+   */
+  ContractDisplayName?: string
 }
 
 /**
@@ -5389,6 +5644,26 @@ export interface QueryContractPayFeeRequest {
    * 沙箱环境填sandbox，正式环境不填
    */
   Profile?: string
+}
+
+/**
+ * QueryOrder返回参数结构体
+ */
+export interface QueryOrderResponse {
+  /**
+   * 返回订单数
+   */
+  TotalNum?: number
+
+  /**
+   * 查询结果的订单列表
+   */
+  OrderList?: Array<QueryOrderOutOrderList>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7394,29 +7669,63 @@ _缺省: release_
 }
 
 /**
- * QueryBillDownloadURL返回参数结构体
+ * CreatePayRollPreOrderWithAuth请求参数结构体
  */
-export interface QueryBillDownloadURLResponse {
+export interface CreatePayRollPreOrderWithAuthRequest {
   /**
-   * 错误码。响应成功："SUCCESS"，其他为不成功
+   * 用户在商户对应appid下的唯一标识
    */
-  ErrCode: string
+  OpenId: string
 
   /**
-   * 响应消息
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
    */
-  ErrMessage: string
+  SubMerchantId: string
 
   /**
-      * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 商户系统内部的商家核身单号，要求此参数只能由数字、大小写字母组成，在服务商内部唯一
+   */
+  AuthNumber: string
+
+  /**
+   * 该劳务活动的项目名称
+   */
+  ProjectName: string
+
+  /**
+   * 该工人所属的用工企业
+   */
+  CompanyName: string
+
+  /**
+   * 用户实名信息，该字段需进行加密处理，加密方法详见[敏感信息加密说明](https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml)
+   */
+  UserName: string
+
+  /**
+   * 用户证件号，该字段需进行加密处理，加密方法详见[敏感信息加密说明](https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml)
+   */
+  IdNo: string
+
+  /**
+      * 微工卡服务仅支持用于与商户有用工关系的用户，需明确用工类型；参考值：
+LONG_TERM_EMPLOYMENT：长期用工，
+SHORT_TERM_EMPLOYMENT： 短期用工，
+COOPERATION_EMPLOYMENT：合作关系
       */
-  Result: QueryBillDownloadURLData
+  EmploymentType: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 是服务商在微信申请公众号/小程序或移动应用成功后分配的账号ID（与服务商主体一致）
+当输入服务商Appid时，会校验其与服务商商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatAppId?: string
+
+  /**
+      * 特约商户在微信申请公众号/小程序或移动应用成功后分配的账号ID（与特约商户主体一致）
+当输入特约商户Appid时，会校验其与特约商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatSubAppId?: string
 }
 
 /**
@@ -7641,19 +7950,18 @@ export interface QueryDownloadBillURLRequest {
 }
 
 /**
- * QueryMerchantInfoForManagement返回参数结构体
+ * 对接账户余额查询结果
  */
-export interface QueryMerchantInfoForManagementResponse {
+export interface QueryMerchantBalanceResult {
   /**
-      * 商户结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result: MerchantManagementResult
+   * 错误码
+   */
+  Code: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 对接账户余额查询数据
    */
-  RequestId?: string
+  Data: QueryMerchantBalanceData
 }
 
 /**
@@ -8214,51 +8522,6 @@ export interface QueryCloudOrderResponse {
 }
 
 /**
- * 聚鑫商户余额查询输出项
- */
-export interface QueryItem {
-  /**
-   * 子商户账户
-   */
-  SubAcctNo: string
-
-  /**
-      * 子账户属性 
-1：普通会员子账号 
-2：挂账子账号 
-3：手续费子账号 
-4：利息子账号
-5：平台担保子账号
-      */
-  SubAcctProperty: string
-
-  /**
-   * 业务平台的子商户Id，唯一
-   */
-  SubMchId: string
-
-  /**
-   * 子账户名称
-   */
-  SubAcctName: string
-
-  /**
-   * 账户可用余额
-   */
-  AcctAvailBal: string
-
-  /**
-   * 可提现金额
-   */
-  CashAmt: string
-
-  /**
-   * 维护日期 开户日期或修改日期
-   */
-  MaintenanceDate: string
-}
-
-/**
  * 分页参数
  */
 export interface Paging {
@@ -8332,6 +8595,53 @@ F：失败
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetPayRollAuthList请求参数结构体
+ */
+export interface GetPayRollAuthListRequest {
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+
+  /**
+   * 核身日期，一次只能查询一天，最久可查询90天内的记录，格式为YYYY-MM-DD
+   */
+  AuthDate: string
+
+  /**
+   * 非负整数，表示该次请求资源的起始位置，从0开始计数
+   */
+  Offset: number
+
+  /**
+   * 非0非负的整数，该次请求可返回的最大资源条数，默认值为10，最大支持10条
+   */
+  Limit: number
+
+  /**
+      * 是服务商在微信申请公众号/小程序或移动应用成功后分配的账号ID（与服务商主体一致）
+当输入服务商Appid时，会校验其与服务商商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatAppId?: string
+
+  /**
+      * 特约商户在微信申请公众号/小程序或移动应用成功后分配的账号ID（与特约商户主体一致）
+当输入特约商户Appid时，会校验其与特约商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatSubAppId?: string
+
+  /**
+   * 核身状态，列表查询仅提供成功状态的核身记录查询，故此字段固定AUTHENTICATE_SUCCESS即可
+   */
+  AuthStatus?: string
 }
 
 /**
@@ -9275,6 +9585,37 @@ development: 开发环境
 缺省: release
       */
   MidasEnvironment?: string
+}
+
+/**
+ * GetPayRollAuthList返回参数结构体
+ */
+export interface GetPayRollAuthListResponse {
+  /**
+      * 核身结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Results: Array<PayRollAuthResult>
+
+  /**
+   * 总记录条数
+   */
+  Total: number
+
+  /**
+   * 记录起始位置，该次请求资源的起始位置，请求中包含偏移量时应答消息返回相同偏移量，否则返回默认值0
+   */
+  Offset: number
+
+  /**
+   * 本次返回条数
+   */
+  Limit: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10608,6 +10949,33 @@ export interface CloseOpenBankPaymentOrderRequest {
    * 接入环境。沙箱环境填 sandbox。缺省默认调用生产环境
    */
   Environment?: string
+}
+
+/**
+ * GetPayRollAuth请求参数结构体
+ */
+export interface GetPayRollAuthRequest {
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+
+  /**
+      * 是服务商在微信申请公众号/小程序或移动应用成功后分配的账号ID（与服务商主体一致）
+当输入服务商Appid时，会校验其与服务商商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatAppId?: string
+
+  /**
+      * 特约商户在微信申请公众号/小程序或移动应用成功后分配的账号ID（与特约商户主体一致）
+当输入特约商户Appid时，会校验其与特约商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatSubAppId?: string
 }
 
 /**
@@ -12223,6 +12591,72 @@ export interface QueryMerchantPayWayListResponse {
 }
 
 /**
+ * 微工卡核身结果
+ */
+export interface PayRollAuthResult {
+  /**
+      * 结果为核身失败时的原因描述，仅在失败记录返回，空字符串等同null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthFailedReason: string
+
+  /**
+   * 商户系统内部的商家核身单号，要求此参数只能由数字、大小写字母组成，在服务商内部唯一
+   */
+  AuthNumber: string
+
+  /**
+      * 核身渠道，发起核身时的来源渠道，如通过小程序，硬件设备等
+FROM_MINI_APP：来自小程序方式核身
+FROM_HARDWARE：来自硬件设备方式核身
+      */
+  AuthScene: string
+
+  /**
+   * 核身渠道标识，用于定位渠道具体来源，如果是扫码打卡渠道标识就是具体的小程序appid，若是硬件设备，则是设备的序列号等
+   */
+  AuthSource: string
+
+  /**
+      * 核身状态
+AUTHENTICATE_PROCESSING：核身中
+AUTHENTICATE_SUCCESS：核身成功
+AUTHENTICATE_FAILED：核身失败
+      */
+  AuthStatus: string
+
+  /**
+   * 核身时间，遵循[rfc3339](https://datatracker.ietf.org/doc/html/rfc3339)标准格式，格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE
+   */
+  AuthTime: string
+
+  /**
+   * 该用户所属的单位名称
+   */
+  CompanyName: string
+
+  /**
+   * 微信服务商商户的商户号，由微信支付生成并下发
+   */
+  MerchantId: string
+
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 该项目的名称
+   */
+  ProjectName: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+}
+
+/**
  * 全局支付时间信息
  */
 export interface CloudGlobalPayTimeInfo {
@@ -12716,177 +13150,6 @@ export interface ApplyDeclareResult {
 }
 
 /**
- * ContractOrder请求参数结构体
- */
-export interface ContractOrderRequest {
-  /**
-   * ISO 货币代码，CNY
-   */
-  CurrencyType: string
-
-  /**
-   * 聚鑫分配的支付主MidasAppId
-   */
-  MidasAppId: string
-
-  /**
-   * 支付订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
-   */
-  OutTradeNo: string
-
-  /**
-   * 商品详情，需要URL编码
-   */
-  ProductDetail: string
-
-  /**
-   * 商品ID，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
-   */
-  ProductId: string
-
-  /**
-   * 商品名称，需要URL编码
-   */
-  ProductName: string
-
-  /**
-   * 支付金额，单位： 分
-   */
-  TotalAmt: number
-
-  /**
-   * 用户ID，长度不小于5位，仅支持字母和数字的组合
-   */
-  UserId: string
-
-  /**
-   * 银行真实渠道.如:bank_pingan
-   */
-  RealChannel: string
-
-  /**
-   * 原始金额
-   */
-  OriginalAmt: number
-
-  /**
-   * 聚鑫分配的安全ID
-   */
-  MidasSecretId: string
-
-  /**
-   * 按照聚鑫安全密钥计算的签名
-   */
-  MidasSignature: string
-
-  /**
-   * 签约通知地址
-   */
-  ContractNotifyUrl: string
-
-  /**
-   * Web端回调地址
-   */
-  CallbackUrl?: string
-
-  /**
-      * 指定支付渠道：  wechat：微信支付  qqwallet：QQ钱包 
- bank：网银支付  只有一个渠道时需要指定
-      */
-  Channel?: string
-
-  /**
-   * 透传字段，支付成功回调透传给应用，用于业务透传自定义内容
-   */
-  Metadata?: string
-
-  /**
-   * 购买数量，不传默认为1
-   */
-  Quantity?: number
-
-  /**
-   * 聚鑫计费SubAppId，代表子商户
-   */
-  SubAppId?: string
-
-  /**
-      * 子订单信息列表，格式：子订单号、子应用ID、金额。 压缩后最长不可超过65535字节(去除空格，换行，制表符等无意义字符)
-注：接入银行或其他支付渠道服务商模式下，必传
-      */
-  SubOrderList?: Array<ContractOrderInSubOrder>
-
-  /**
-   * 结算应收金额，单位：分
-   */
-  TotalMchIncome?: number
-
-  /**
-   * 平台应收金额，单位：分
-   */
-  TotalPlatformIncome?: number
-
-  /**
-   * 微信公众号/小程序支付时为必选，需要传微信下的openid
-   */
-  WxOpenId?: string
-
-  /**
-   * 在服务商模式下，微信公众号/小程序支付时wx_sub_openid和wx_openid二选一
-   */
-  WxSubOpenId?: string
-
-  /**
-      * 环境名:
-release: 现网环境
-sandbox: 沙箱环境
-development: 开发环境
-缺省: release
-      */
-  MidasEnvironment?: string
-
-  /**
-   * 微信商户应用ID
-   */
-  WxAppId?: string
-
-  /**
-   * 微信商户子应用ID
-   */
-  WxSubAppId?: string
-
-  /**
-   * 支付通知地址
-   */
-  PaymentNotifyUrl?: string
-
-  /**
-   * 传入调用方在Midas注册签约信息时获得的ContractSceneId。若未在Midas注册签约信息，则传入ExternalContractData。注意：ContractSceneId与ExternalContractData必须二选一传入其中一个
-   */
-  ContractSceneId?: string
-
-  /**
-   * 需要按照各个渠道的扩展签约信息规范组装好该字段。若未在Midas注册签约信息，则传入该字段。注意：ContractSceneId与ExternalContractData必须二选一传入其中一个
-   */
-  ExternalContractData?: string
-
-  /**
-   * 外部签约协议号，唯一标记一个签约关系。仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
-   */
-  OutContractCode?: string
-
-  /**
-   * 透传给第三方渠道的附加数据
-   */
-  AttachData?: string
-
-  /**
-   * 展示用的签约用户名称，若不传入时，默认取UserId
-   */
-  ContractDisplayName?: string
-}
-
-/**
  * DistributeAccreditQuery返回参数结构体
  */
 export interface DistributeAccreditQueryResponse {
@@ -13060,6 +13323,21 @@ export interface ApplyReWithdrawalResponse {
    * 重新提现业务订单号
    */
   WithdrawOrderId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetPayRollAuthResult返回参数结构体
+ */
+export interface GetPayRollAuthResultResponse {
+  /**
+   * 核身结果
+   */
+  Result: PayRollAuthResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13328,6 +13606,51 @@ export interface ConfirmOrderResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Description: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetPayRollAuth返回参数结构体
+ */
+export interface GetPayRollAuthResponse {
+  /**
+      * 授权状态：
+UNAUTHORIZED：未授权
+AUTHORIZED：已授权
+DEAUTHORIZED：已取消授权
+      */
+  AuthStatus: string
+
+  /**
+      * 授权时间，遵循[rfc3339](https://datatracker.ietf.org/doc/html/rfc3339)标准格式，格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，空字符串等同null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthTime: string
+
+  /**
+      * 授权时间，遵循[rfc3339](https://datatracker.ietf.org/doc/html/rfc3339)标准格式，格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，空字符串等同null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CancelAuthTime: string
+
+  /**
+   * 微信服务商商户的商户号，由微信支付生成并下发
+   */
+  MerchantId: string
+
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13680,6 +14003,48 @@ export interface BillDownloadUrlResult {
 }
 
 /**
+ * CreatePayRollPreOrder请求参数结构体
+ */
+export interface CreatePayRollPreOrderRequest {
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+
+  /**
+   * 商户系统内部的商家核身单号，要求此参数只能由数字、大小写字母组成，在服务商内部唯一
+   */
+  AuthNumber: string
+
+  /**
+   * 该劳务活动的项目名称
+   */
+  ProjectName: string
+
+  /**
+   * 该工人所属的用工企业
+   */
+  CompanyName: string
+
+  /**
+      * 是服务商在微信申请公众号/小程序或移动应用成功后分配的账号ID（与服务商主体一致）
+当输入服务商Appid时，会校验其与服务商商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatAppId?: string
+
+  /**
+      * 特约商户在微信申请公众号/小程序或移动应用成功后分配的账号ID（与特约商户主体一致）
+当输入特约商户Appid时，会校验其与特约商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatSubAppId?: string
+}
+
+/**
  * DeleteAgentTaxPaymentInfos请求参数结构体
  */
 export interface DeleteAgentTaxPaymentInfosRequest {
@@ -13739,6 +14104,51 @@ development: 开发环境
 缺省: release
       */
   MidasEnvironment?: string
+}
+
+/**
+ * CreatePayRollToken请求参数结构体
+ */
+export interface CreatePayRollTokenRequest {
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+
+  /**
+   * 用户实名信息，该字段需进行加密处理，加密方法详见[敏感信息加密说明](https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml)
+   */
+  UserName: string
+
+  /**
+   * 用户证件号，该字段需进行加密处理，加密方法详见[敏感信息加密说明](https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml)
+   */
+  IdNo: string
+
+  /**
+      * 微工卡服务仅支持用于与商户有用工关系的用户，需明确用工类型；参考值：
+LONG_TERM_EMPLOYMENT：长期用工，
+SHORT_TERM_EMPLOYMENT： 短期用工，
+COOPERATION_EMPLOYMENT：合作关系
+      */
+  EmploymentType: string
+
+  /**
+      * 是服务商在微信申请公众号/小程序或移动应用成功后分配的账号ID（与服务商主体一致）
+当输入服务商Appid时，会校验其与服务商商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatAppId?: string
+
+  /**
+      * 特约商户在微信申请公众号/小程序或移动应用成功后分配的账号ID（与特约商户主体一致）
+当输入特约商户Appid时，会校验其与特约商户号的绑定关系。服务商APPID和与特约商户APPID至少输入一个，且必须要有拉起领薪卡小程序时使用的APPID
+      */
+  WechatSubAppId?: string
 }
 
 /**
@@ -16779,6 +17189,36 @@ export interface UploadFileResponse {
 }
 
 /**
+ * 聚鑫-查询会员间交易信息列表结果
+ */
+export interface QueryMemberTransactionDetailsResult {
+  /**
+   * 本次交易返回查询结果记录数。
+   */
+  ResultCount: number
+
+  /**
+      * 符合业务查询条件的记录总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 结束标志。
+__0__：否
+__1__：是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndFlag: string
+
+  /**
+      * 会员间交易信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranItemArray: Array<MemberTransactionItem>
+}
+
+/**
  * 创建商户结果
  */
 export interface CreateMerchantResult {
@@ -17920,6 +18360,43 @@ export interface DescribeOrderStatusRequest {
 }
 
 /**
+ * QueryMemberTransaction返回参数结构体
+ */
+export interface QueryMemberTransactionResponse {
+  /**
+   * String(20)，返回码
+   */
+  TxnReturnCode?: string
+
+  /**
+   * String(100)，返回信息
+   */
+  TxnReturnMsg?: string
+
+  /**
+   * String(22)，交易流水号
+   */
+  CnsmrSeqNo?: string
+
+  /**
+      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrontSeqNo?: string
+
+  /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReservedMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 米大师内部存放的合约信息
  */
 export interface ChannelContractInfo {
@@ -18810,18 +19287,24 @@ export interface AddContractResult {
 }
 
 /**
- * QueryOrder返回参数结构体
+ * QueryBillDownloadURL返回参数结构体
  */
-export interface QueryOrderResponse {
+export interface QueryBillDownloadURLResponse {
   /**
-   * 返回订单数
+   * 错误码。响应成功："SUCCESS"，其他为不成功
    */
-  TotalNum?: number
+  ErrCode: string
 
   /**
-   * 查询结果的订单列表
+   * 响应消息
    */
-  OrderList?: Array<QueryOrderOutOrderList>
+  ErrMessage: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: QueryBillDownloadURLData
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -19699,21 +20182,6 @@ export interface AnchorContractInfo {
 }
 
 /**
- * 对接账户余额查询结果
- */
-export interface QueryMerchantBalanceResult {
-  /**
-   * 错误码
-   */
-  Code: string
-
-  /**
-   * 对接账户余额查询数据
-   */
-  Data: QueryMerchantBalanceData
-}
-
-/**
  * QueryFundsTransactionDetails返回参数结构体
  */
 export interface QueryFundsTransactionDetailsResponse {
@@ -20330,6 +20798,46 @@ export interface DistributeCancelResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DistributeNo?: string
+}
+
+/**
+ * CreatePayRollPreOrderWithAuth返回参数结构体
+ */
+export interface CreatePayRollPreOrderWithAuthResponse {
+  /**
+   * 商户系统内部的商家核身单号，要求此参数只能由数字、大小写字母组成，在服务商内部唯一
+   */
+  AuthNumber: string
+
+  /**
+   * Token有效时间，单位秒
+   */
+  ExpireTime: number
+
+  /**
+   * 微信服务商商户的商户号，由微信支付生成并下发
+   */
+  MerchantId: string
+
+  /**
+   * 用户在商户对应appid下的唯一标识
+   */
+  OpenId: string
+
+  /**
+   * 微信服务商下特约商户的商户号，由微信支付生成并下发
+   */
+  SubMerchantId: string
+
+  /**
+   * Token值
+   */
+  Token: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

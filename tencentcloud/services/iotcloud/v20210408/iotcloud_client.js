@@ -226,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDevicesEnableState", req, cb);
     }
     /**
+     * 本接口（ListFirmwares）用于获取固件列表
+     */
+    async ListFirmwares(req, cb) {
+        return this.request("ListFirmwares", req, cb);
+    }
+    /**
      * 获取设备上报的日志
      */
     async ListSDKLog(req, cb) {
@@ -386,6 +392,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDevices(req, cb) {
         return this.request("DescribeDevices", req, cb);
+    }
+    /**
+     * 本接口（GetAllVersion）用于获取所有的版本列表
+     */
+    async GetAllVersion(req, cb) {
+        return this.request("GetAllVersion", req, cb);
     }
     /**
      * 本接口（DisableTopicRule）用于禁用规则

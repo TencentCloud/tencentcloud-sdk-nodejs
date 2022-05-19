@@ -373,7 +373,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     /**
      * 查询地域下可用区
      */
-    DescribeZones(req?: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
+    DescribeZones(req: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
     /**
      * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
      */

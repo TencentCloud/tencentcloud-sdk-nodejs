@@ -1225,6 +1225,30 @@ export interface TaskResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UserAlias: string
+
+  /**
+      * spark应用作业名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SparkJobName: string
+
+  /**
+      * spark应用作业Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SparkJobId: string
+
+  /**
+      * spark应用入口jar文件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SparkJobFile: string
+
+  /**
+      * spark ui url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UiUrl: string
 }
 
 /**

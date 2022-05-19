@@ -126,6 +126,41 @@ export interface CompleteCertificateRequest {
 }
 
 /**
+ * UploadCertificate请求参数结构体
+ */
+export interface UploadCertificateRequest {
+  /**
+   * 证书内容。
+   */
+  CertificatePublicKey: string
+
+  /**
+   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
+   */
+  CertificatePrivateKey?: string
+
+  /**
+   * 证书类型，默认 SVR。CA = 客户端证书，SVR = 服务器证书。
+   */
+  CertificateType?: string
+
+  /**
+   * 备注名称。
+   */
+  Alias?: string
+
+  /**
+   * 项目 ID。
+   */
+  ProjectId?: number
+
+  /**
+   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
+   */
+  CertificateUse?: string
+}
+
+/**
  * DeleteCertificate请求参数结构体
  */
 export interface DeleteCertificateRequest {
@@ -159,6 +194,21 @@ export interface DescribeCertificateOperateLogsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyCertificateAlias请求参数结构体
+ */
+export interface ModifyCertificateAliasRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+
+  /**
+   * 备注名称。
+   */
+  Alias?: string
 }
 
 /**
@@ -748,38 +798,18 @@ export interface DescribeCertificateResponse {
 }
 
 /**
- * UploadCertificate请求参数结构体
+ * HostCertificate返回参数结构体
  */
-export interface UploadCertificateRequest {
+export interface HostCertificateResponse {
   /**
-   * 证书内容。
+   * 云资源配置详情
    */
-  CertificatePublicKey: string
+  CertHostingInfo: CertHostingInfo
 
   /**
-   * 私钥内容，证书类型为 SVR 时必填，为 CA 时可不填。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CertificatePrivateKey?: string
-
-  /**
-   * 证书类型，默认 SVR。CA = 客户端证书，SVR = 服务器证书。
-   */
-  CertificateType?: string
-
-  /**
-   * 备注名称。
-   */
-  Alias?: string
-
-  /**
-   * 项目 ID。
-   */
-  ProjectId?: number
-
-  /**
-   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
-   */
-  CertificateUse?: string
+  RequestId?: string
 }
 
 /**
@@ -1354,6 +1384,34 @@ export interface ModifyCertificateProjectRequest {
 }
 
 /**
+ * 云资源配置详情
+ */
+export interface CertHostingInfo {
+  /**
+   * 证书ID
+   */
+  CertId: string
+
+  /**
+      * 已替换的新证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RenewCertId: string
+
+  /**
+      * 云资源托管 ，CDN或CLB：部分开启，CDN,CLB：已开启，null：未开启托管
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+}
+
+/**
  * 返回参数键为 DvAuths 的内容。
  */
 export interface DvAuths {
@@ -1395,18 +1453,18 @@ export interface DvAuths {
 }
 
 /**
- * ModifyCertificateAlias请求参数结构体
+ * HostCertificate请求参数结构体
  */
-export interface ModifyCertificateAliasRequest {
+export interface HostCertificateRequest {
   /**
-   * 证书 ID。
+   * 证书ID
    */
   CertificateId: string
 
   /**
-   * 备注名称。
+   * 资源类型：目前仅限于CLB,CDN
    */
-  Alias?: string
+  ResourceType?: Array<string>
 }
 
 /**

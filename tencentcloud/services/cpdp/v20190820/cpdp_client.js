@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("WithdrawCashMembership", req, cb);
     }
     /**
+     * 务工卡-获取核身结果
+     */
+    async GetPayRollAuthResult(req, cb) {
+        return this.request("GetPayRollAuthResult", req, cb);
+    }
+    /**
      * 查询银行时间段内交易明细。查询时间段的会员成功交易。
      */
     async QueryBankTransactionDetails(req, cb) {
@@ -158,6 +164,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyMerchant(req, cb) {
         return this.request("ModifyMerchant", req, cb);
+    }
+    /**
+     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+     */
+    async RegisterBillSupportWithdraw(req, cb) {
+        return this.request("RegisterBillSupportWithdraw", req, cb);
     }
     /**
      * 云企付-按日期批量查询回单下载地址
@@ -274,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadTaxPayment", req, cb);
     }
     /**
+     * 务工卡-核身预下单带授权
+     */
+    async CreatePayRollPreOrderWithAuth(req, cb) {
+        return this.request("CreatePayRollPreOrderWithAuth", req, cb);
+    }
+    /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
@@ -305,16 +323,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeApply", req, cb);
     }
     /**
-     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+     * 跨境-对接方账户余额查询
      */
-    async RegisterBillSupportWithdraw(req, cb) {
-        return this.request("RegisterBillSupportWithdraw", req, cb);
+    async QueryMerchantBalance(req, cb) {
+        return this.request("QueryMerchantBalance", req, cb);
     }
     /**
      * 云支付-查询合同支付方式列表接口
      */
     async QueryContractPayWayList(req, cb) {
         return this.request("QueryContractPayWayList", req, cb);
+    }
+    /**
+     * 务工卡-核身预下单
+     */
+    async CreatePayRollPreOrder(req, cb) {
+        return this.request("CreatePayRollPreOrder", req, cb);
     }
     /**
      * 创建子商户
@@ -347,16 +371,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ContractOrder", req, cb);
     }
     /**
+     * 务工卡-查询核身记录
+     */
+    async GetPayRollAuthList(req, cb) {
+        return this.request("GetPayRollAuthList", req, cb);
+    }
+    /**
      * 商户查询是否签约和签约行为上报
      */
     async RegisterBehavior(req, cb) {
         return this.request("RegisterBehavior", req, cb);
     }
     /**
-     * 跨境-对接方账户余额查询
+     * 务工卡-生成授权令牌
      */
-    async QueryMerchantBalance(req, cb) {
-        return this.request("QueryMerchantBalance", req, cb);
+    async CreatePayRollToken(req, cb) {
+        return this.request("CreatePayRollToken", req, cb);
     }
     /**
      * 应用需要先调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
@@ -818,6 +848,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeChargeDetail(req, cb) {
         return this.request("DescribeChargeDetail", req, cb);
+    }
+    /**
+     * 务工卡-查询授权关系
+     */
+    async GetPayRollAuth(req, cb) {
+        return this.request("GetPayRollAuth", req, cb);
     }
     /**
      * 银企直连-单笔支付接口

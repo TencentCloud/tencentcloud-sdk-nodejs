@@ -53,6 +53,7 @@ import {
   PublishRRPCMessageRequest,
   ProductProperties,
   DeviceUpdateStatus,
+  ListLogRequest,
   BatchUpdateFirmwareResponse,
   DeleteProductRequest,
   StatusStatistic,
@@ -66,6 +67,7 @@ import {
   CLSLogItem,
   DeleteDeviceRequest,
   DescribeFirmwareTaskDistributionRequest,
+  ListFirmwaresResponse,
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
   DescribeResourceTasksRequest,
@@ -86,14 +88,16 @@ import {
   CreateDeviceRequest,
   DescribeProductTaskRequest,
   DescribeFirmwareTaskResponse,
+  FirmwareInfo,
   CreateProductRequest,
   DescribeFirmwareTasksRequest,
   DisableTopicRuleResponse,
-  GetCOSURLRequest,
+  GetAllVersionResponse,
   UpdateTopicPolicyResponse,
   DescribeProductTaskResponse,
   DescribeDeviceResponse,
   PublishBroadcastMessageRequest,
+  ListFirmwaresRequest,
   ListLogResponse,
   RetryDeviceFirmwareTaskRequest,
   DescribeFirmwareTaskDevicesResponse,
@@ -137,6 +141,7 @@ import {
   DeleteDeviceResourceRequest,
   DescribeDeviceShadowRequest,
   UpdateProductDynamicRegisterResponse,
+  GetAllVersionRequest,
   UnbindDevicesResponse,
   DescribePrivateCABindedProductsRequest,
   DescribePrivateCAsResponse,
@@ -147,7 +152,7 @@ import {
   CertInfo,
   GetUserResourceInfoRequest,
   DeviceTag,
-  ListLogRequest,
+  GetCOSURLRequest,
   ProductMetadata,
   DescribeProductResponse,
   DescribeGatewayBindDevicesRequest,
@@ -519,6 +524,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ListFirmwares）用于获取固件列表
+   */
+  async ListFirmwares(
+    req: ListFirmwaresRequest,
+    cb?: (error: string, rep: ListFirmwaresResponse) => void
+  ): Promise<ListFirmwaresResponse> {
+    return this.request("ListFirmwares", req, cb)
+  }
+
+  /**
    * 获取设备上报的日志
    */
   async ListSDKLog(
@@ -786,6 +801,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicesResponse) => void
   ): Promise<DescribeDevicesResponse> {
     return this.request("DescribeDevices", req, cb)
+  }
+
+  /**
+   * 本接口（GetAllVersion）用于获取所有的版本列表
+   */
+  async GetAllVersion(
+    req: GetAllVersionRequest,
+    cb?: (error: string, rep: GetAllVersionResponse) => void
+  ): Promise<GetAllVersionResponse> {
+    return this.request("GetAllVersion", req, cb)
   }
 
   /**

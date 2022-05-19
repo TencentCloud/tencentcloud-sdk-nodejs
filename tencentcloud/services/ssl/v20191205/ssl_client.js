@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeManagerDetail", req, cb);
     }
     /**
+     * 云资源托管
+     */
+    async HostCertificate(req, cb) {
+        return this.request("HostCertificate", req, cb);
+    }
+    /**
      * 批量修改证书所属项目。
      */
     async ModifyCertificateProject(req, cb) {

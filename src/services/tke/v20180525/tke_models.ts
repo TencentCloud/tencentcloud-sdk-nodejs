@@ -198,7 +198,24 @@ export interface DescribeEKSClustersRequest {
 /**
  * DescribePrometheusInstancesOverview请求参数结构体
  */
-export type DescribePrometheusInstancesOverviewRequest = null
+export interface DescribePrometheusInstancesOverviewRequest {
+  /**
+   * 用于分页
+   */
+  Offset?: number
+
+  /**
+   * 用于分页
+   */
+  Limit?: number
+
+  /**
+      * 过滤实例，目前支持：
+ID: 通过实例ID来过滤 
+Name: 通过实例名称来过滤
+      */
+  Filters?: Array<Filter>
+}
 
 /**
  * ServiceAccount认证相关配置
@@ -453,6 +470,56 @@ export interface ClusterAsGroup {
    * 创建时间
    */
   CreatedTime: string
+}
+
+/**
+ * 云原生Prometheus模板可修改项
+ */
+export interface PrometheusTempModify {
+  /**
+   * 修改名称
+   */
+  Name?: string
+
+  /**
+      * 修改描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Describe?: string
+
+  /**
+      * 当Level为cluster时有效，
+模板中的ServiceMonitor规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+
+  /**
+      * 当Level为cluster时有效，
+模板中的PodMonitors规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodMonitors?: Array<PrometheusConfigItem>
+
+  /**
+      * 当Level为cluster时有效，
+模板中的RawJobs规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawJobs?: Array<PrometheusConfigItem>
+
+  /**
+      * 当Level为instance时有效，
+模板中的聚合规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordRules?: Array<PrometheusConfigItem>
+
+  /**
+      * 修改内容，只有当模板类型是Alert时生效
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertDetailRules?: Array<PrometheusAlertPolicyItem>
 }
 
 /**
@@ -778,6 +845,38 @@ export interface RegionInstance {
 }
 
 /**
+ * prometheus聚合规则实例详情，包含所属集群ID
+ */
+export interface PrometheusRecordRuleYamlItem {
+  /**
+   * 实例名称
+   */
+  Name: string
+
+  /**
+   * 最近更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * Yaml内容
+   */
+  TemplateId: string
+
+  /**
+      * 如果该聚合规则来至模板，则TemplateId为模板id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: string
+
+  /**
+      * 该聚合规则如果来源于用户集群crd资源定义，则ClusterId为所属集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+}
+
+/**
  * k8s中标签，一般以数组的方式存在
  */
 export interface Label {
@@ -1068,6 +1167,92 @@ export interface AddNodeToNodePoolResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 托管prometheusV2实例概览
+ */
+export interface PrometheusInstancesOverview {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例名
+   */
+  InstanceName: string
+
+  /**
+   * VPC ID
+   */
+  VpcId: string
+
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+
+  /**
+   * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）
+   */
+  InstanceStatus: number
+
+  /**
+      * 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeStatus: number
+
+  /**
+   * 是否开启 Grafana（0:不开启，1:开启）
+   */
+  EnableGrafana: number
+
+  /**
+      * Grafana 面板 URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GrafanaURL: string
+
+  /**
+   * 实例付费类型（1:试用版；2:预付费）
+   */
+  InstanceChargeType: number
+
+  /**
+      * 规格名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SpecName: string
+
+  /**
+      * 存储周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataRetentionTime: number
+
+  /**
+      * 购买的实例过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
+
+  /**
+      * 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoRenewFlag: number
+
+  /**
+   * 绑定集群总数
+   */
+  BoundTotal: number
+
+  /**
+   * 绑定集群正常状态总数
+   */
+  BoundNormal: number
 }
 
 /**
@@ -1440,7 +1625,17 @@ export interface PodLimitsInstance {
 /**
  * ModifyPrometheusTemp请求参数结构体
  */
-export type ModifyPrometheusTempRequest = null
+export interface ModifyPrometheusTempRequest {
+  /**
+   * 模板ID
+   */
+  TemplateId: string
+
+  /**
+   * 修改内容
+   */
+  Template: PrometheusTempModify
+}
 
 /**
  * 集群中控制器的状态描述
@@ -1470,7 +1665,27 @@ export interface DeletePrometheusTempSyncResponse {
 /**
  * DescribePrometheusRecordRules请求参数结构体
  */
-export type DescribePrometheusRecordRulesRequest = null
+export interface DescribePrometheusRecordRulesRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 分页
+   */
+  Offset?: number
+
+  /**
+   * 分页
+   */
+  Limit?: number
+
+  /**
+   * 过滤
+   */
+  Filters?: Array<Filter>
+}
 
 /**
  * AcquireClusterAdminRole返回参数结构体
@@ -1835,12 +2050,27 @@ export interface DescribeClusterNodePoolDetailRequest {
 /**
  * DescribePrometheusTempSync请求参数结构体
  */
-export type DescribePrometheusTempSyncRequest = null
+export interface DescribePrometheusTempSyncRequest {
+  /**
+   * 模板ID
+   */
+  TemplateId: string
+}
 
 /**
  * DescribePrometheusClusterAgents返回参数结构体
  */
 export interface DescribePrometheusClusterAgentsResponse {
+  /**
+   * 被关联集群信息
+   */
+  Agents: Array<PrometheusAgentOverview>
+
+  /**
+   * 被关联集群总量
+   */
+  Total: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2476,7 +2706,17 @@ export interface DeleteClusterAsGroupsRequest {
 /**
  * ModifyPrometheusAlertPolicy请求参数结构体
  */
-export type ModifyPrometheusAlertPolicyRequest = null
+export interface ModifyPrometheusAlertPolicyRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 告警配置
+   */
+  AlertRule: PrometheusAlertPolicyItem
+}
 
 /**
  * ForwardApplicationRequestV3请求参数结构体
@@ -2642,6 +2882,17 @@ ID 按templateId过滤
  */
 export interface DescribePrometheusAlertPolicyResponse {
   /**
+      * 告警详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertRules: Array<PrometheusAlertPolicyItem>
+
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2745,6 +2996,22 @@ export interface Event {
    * 事件内容
    */
   Message: string
+}
+
+/**
+ * DescribePrometheusGlobalNotification返回参数结构体
+ */
+export interface DescribePrometheusGlobalNotificationResponse {
+  /**
+      * 全局告警通知渠道
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Notification: PrometheusNotificationItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2855,7 +3122,22 @@ export interface SetNodePoolNodeProtectionResponse {
 /**
  * DeletePrometheusAlertPolicy请求参数结构体
  */
-export type DeletePrometheusAlertPolicyRequest = null
+export interface DeletePrometheusAlertPolicyRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 告警策略id列表
+   */
+  AlertIds: Array<string>
+
+  /**
+   * 告警策略名称
+   */
+  Names?: Array<string>
+}
 
 /**
  * 路由表冲突对象
@@ -3213,6 +3495,28 @@ export interface ModifyNodePoolInstanceTypesResponse {
 }
 
 /**
+ * 告警渠道使用自建alertmanager的配置
+ */
+export interface PrometheusAlertManagerConfig {
+  /**
+   * alertmanager url
+   */
+  Url: string
+
+  /**
+      * alertmanager部署所在集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterType?: string
+
+  /**
+      * alertmanager部署所在集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
+}
+
+/**
  * GetClusterLevelPrice返回参数结构体
  */
 export interface GetClusterLevelPriceResponse {
@@ -3300,7 +3604,28 @@ export interface DescribeAvailableClusterVersionRequest {
 /**
  * DescribePrometheusAlertPolicy请求参数结构体
  */
-export type DescribePrometheusAlertPolicyRequest = null
+export interface DescribePrometheusAlertPolicyRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 分页
+   */
+  Offset?: number
+
+  /**
+   * 分页
+   */
+  Limit?: number
+
+  /**
+      * 过滤
+支持ID，Name
+      */
+  Filters?: Array<Filter>
+}
 
 /**
  * DeleteClusterAsGroups返回参数结构体
@@ -3336,6 +3661,12 @@ export interface DeletePrometheusTemplateRequest {
  * DescribePrometheusTempSync返回参数结构体
  */
 export interface DescribePrometheusTempSyncResponse {
+  /**
+      * 同步目标详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Targets: Array<PrometheusTemplateSyncTarget>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4451,6 +4782,11 @@ export interface DNSConfig {
  */
 export interface CreatePrometheusAlertPolicyResponse {
   /**
+   * 告警id
+   */
+  Id: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4593,6 +4929,16 @@ export interface AutoScalingGroupRange {
    * 伸缩组最大实例数
    */
   MaxSize?: number
+}
+
+/**
+ * DescribePrometheusGlobalNotification请求参数结构体
+ */
+export interface DescribePrometheusGlobalNotificationRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -4925,6 +5271,17 @@ export interface DeleteEKSContainerInstancesResponse {
  */
 export interface DescribePrometheusInstancesOverviewResponse {
   /**
+   * 实例列表
+   */
+  Instances: Array<PrometheusInstancesOverview>
+
+  /**
+      * 实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5156,19 +5513,9 @@ export interface CreatePrometheusTemplateRequest {
 }
 
 /**
- * DescribeEKSContainerInstances返回参数结构体
+ * DeleteImageCaches返回参数结构体
  */
-export interface DescribeEKSContainerInstancesResponse {
-  /**
-   * 容器组总数
-   */
-  TotalCount: number
-
-  /**
-   * 容器组列表
-   */
-  EksCis: Array<EksCi>
-
+export interface DeleteImageCachesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5358,6 +5705,114 @@ export interface TagSpecification {
 }
 
 /**
+ * 告警通知渠道配置
+ */
+export interface PrometheusNotificationItem {
+  /**
+   * 是否启用
+   */
+  Enabled: boolean
+
+  /**
+      * 通道类型，默认为amp，支持以下
+amp
+webhook
+alertmanager
+      */
+  Type: string
+
+  /**
+      * 如果Type为webhook, 则该字段为必填项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WebHook?: string
+
+  /**
+      * 如果Type为alertmanager, 则该字段为必填项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertManager?: PrometheusAlertManagerConfig
+
+  /**
+   * 收敛时间
+   */
+  RepeatInterval?: string
+
+  /**
+   * 生效起始时间
+   */
+  TimeRangeStart?: string
+
+  /**
+   * 生效结束时间
+   */
+  TimeRangeEnd?: string
+
+  /**
+      * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NotifyWay?: Array<string>
+
+  /**
+      * 告警接收组（用户组）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiverGroups?: Array<string>
+
+  /**
+      * 电话告警顺序。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneNotifyOrder?: Array<number>
+
+  /**
+      * 电话告警次数。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneCircleTimes?: number
+
+  /**
+      * 电话告警轮内间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneInnerInterval?: number
+
+  /**
+      * 电话告警轮外间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneCircleInterval?: number
+
+  /**
+      * 电话告警触达通知
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneArriveNotice?: boolean
+}
+
+/**
+ * CreatePrometheusGlobalNotification返回参数结构体
+ */
+export interface CreatePrometheusGlobalNotificationResponse {
+  /**
+      * 全局告警通知渠道ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterAuthenticationOptions返回参数结构体
  */
 export interface DescribeClusterAuthenticationOptionsResponse {
@@ -5494,7 +5949,17 @@ export interface ImageInstance {
 /**
  * CreatePrometheusAlertPolicy请求参数结构体
  */
-export type CreatePrometheusAlertPolicyRequest = null
+export interface CreatePrometheusAlertPolicyRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 告警配置
+   */
+  AlertRule: PrometheusAlertPolicyItem
+}
 
 /**
  * GetTkeAppChartList请求参数结构体
@@ -5594,7 +6059,22 @@ export interface CreateClusterNodePoolRequest {
 /**
  * DescribePrometheusClusterAgents请求参数结构体
  */
-export type DescribePrometheusClusterAgentsRequest = null
+export interface DescribePrometheusClusterAgentsRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 用于分页
+   */
+  Offset?: number
+
+  /**
+   * 用于分页
+   */
+  Limit?: number
+}
 
 /**
  * CheckInstancesUpgradeAble返回参数结构体
@@ -5631,7 +6111,12 @@ export interface CheckInstancesUpgradeAbleResponse {
 /**
  * CreatePrometheusTemp请求参数结构体
  */
-export type CreatePrometheusTempRequest = null
+export interface CreatePrometheusTempRequest {
+  /**
+   * 模板设置
+   */
+  Template: PrometheusTemp
+}
 
 /**
  * CreatePrometheusDashboard请求参数结构体
@@ -5734,6 +6219,11 @@ export interface UninstallLogAgentResponse {
  */
 export interface CreatePrometheusTempResponse {
   /**
+   * 模板Id
+   */
+  TemplateId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5804,7 +6294,17 @@ export interface DescribeClusterAsGroupsRequest {
 /**
  * SyncPrometheusTemp请求参数结构体
  */
-export type SyncPrometheusTempRequest = null
+export interface SyncPrometheusTempRequest {
+  /**
+   * 实例id
+   */
+  TemplateId: string
+
+  /**
+   * 同步目标
+   */
+  Targets: Array<PrometheusTemplateSyncTarget>
+}
 
 /**
  * ModifyClusterEndpointSP返回参数结构体
@@ -6122,6 +6622,21 @@ export interface DeleteClusterInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreatePrometheusGlobalNotification请求参数结构体
+ */
+export interface CreatePrometheusGlobalNotificationRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 告警通知渠道
+   */
+  Notification: PrometheusNotificationItem
 }
 
 /**
@@ -6678,21 +7193,9 @@ export interface ClusterExtraArgs {
 }
 
 /**
- * DescribeAvailableClusterVersion返回参数结构体
+ * SyncPrometheusTemplate返回参数结构体
  */
-export interface DescribeAvailableClusterVersionResponse {
-  /**
-      * 可升级的集群版本号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Versions?: Array<string>
-
-  /**
-      * 集群信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Clusters?: Array<ClusterVersion>
-
+export interface SyncPrometheusTemplateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6978,7 +7481,12 @@ export interface ModifyClusterAsGroupAttributeResponse {
 /**
  * DeletePrometheusTemp请求参数结构体
  */
-export type DeletePrometheusTempRequest = null
+export interface DeletePrometheusTempRequest {
+  /**
+   * 模板id
+   */
+  TemplateId: string
+}
 
 /**
  * DescribeTKEEdgeScript返回参数结构体
@@ -7028,7 +7536,17 @@ export interface DescribeClusterKubeconfigRequest {
 /**
  * DeletePrometheusTempSync请求参数结构体
  */
-export type DeletePrometheusTempSyncRequest = null
+export interface DeletePrometheusTempSyncRequest {
+  /**
+   * 模板id
+   */
+  TemplateId: string
+
+  /**
+   * 取消同步的对象列表
+   */
+  Targets: Array<PrometheusTemplateSyncTarget>
+}
 
 /**
  * CreatePrometheusTemplate返回参数结构体
@@ -7165,6 +7683,21 @@ export interface ExistedInstance {
 }
 
 /**
+ * ModifyPrometheusGlobalNotification请求参数结构体
+ */
+export interface ModifyPrometheusGlobalNotificationRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 告警通知渠道
+   */
+  Notification: PrometheusNotificationItem
+}
+
+/**
  * GetUpgradeInstanceProgress请求参数结构体
  */
 export interface GetUpgradeInstanceProgressRequest {
@@ -7199,6 +7732,16 @@ export interface UpdateEKSClusterResponse {
  */
 export interface DescribePrometheusRecordRulesResponse {
   /**
+   * 聚合规则
+   */
+  Records: Array<PrometheusRecordRuleYamlItem>
+
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7232,6 +7775,51 @@ export interface ModifyClusterNodePoolResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 托管prometheus告警策略实例
+ */
+export interface PrometheusAlertPolicyItem {
+  /**
+   * 策略名称
+   */
+  Name: string
+
+  /**
+   * 规则列表
+   */
+  Rules: Array<PrometheusAlertRule>
+
+  /**
+      * 告警策略 id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id?: string
+
+  /**
+      * 如果该告警来自模板下发，则TemplateId为模板id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateId?: string
+
+  /**
+      * 告警渠道，模板中使用可能返回null
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Notification?: PrometheusNotificationItem
+
+  /**
+      * 最后修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedAt?: string
+
+  /**
+      * 如果告警策略来源于用户集群CRD资源定义，则ClusterId为所属集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId?: string
 }
 
 /**
@@ -7399,7 +7987,46 @@ export type DescribeVersionsRequest = null
 /**
  * DescribePrometheusTemp请求参数结构体
  */
-export type DescribePrometheusTempRequest = null
+export interface DescribePrometheusTempRequest {
+  /**
+      * 模糊过滤条件，支持
+Level 按模板级别过滤
+Name 按名称过滤
+Describe 按描述过滤
+ID 按templateId过滤
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+
+  /**
+   * 总数限制
+   */
+  Limit?: number
+}
+
+/**
+ * DescribeEKSContainerInstances返回参数结构体
+ */
+export interface DescribeEKSContainerInstancesResponse {
+  /**
+   * 容器组总数
+   */
+  TotalCount: number
+
+  /**
+   * 容器组列表
+   */
+  EksCis: Array<EksCi>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DeleteClusterRouteTable请求参数结构体
@@ -7506,6 +8133,16 @@ export interface DescribePrometheusInstanceRequest {
  * DescribePrometheusTemp返回参数结构体
  */
 export interface DescribePrometheusTempResponse {
+  /**
+   * 模板列表
+   */
+  Templates: Array<PrometheusTemp>
+
+  /**
+   * 总数
+   */
+  Total: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8019,9 +8656,9 @@ export interface DescribeVpcCniPodLimitsRequest {
 }
 
 /**
- * DeleteImageCaches返回参数结构体
+ * ModifyPrometheusGlobalNotification返回参数结构体
  */
-export interface DeleteImageCachesResponse {
+export interface ModifyPrometheusGlobalNotificationResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8186,9 +8823,21 @@ export interface ScaleInClusterMasterResponse {
 }
 
 /**
- * SyncPrometheusTemplate返回参数结构体
+ * DescribeAvailableClusterVersion返回参数结构体
  */
-export interface SyncPrometheusTemplateResponse {
+export interface DescribeAvailableClusterVersionResponse {
+  /**
+      * 可升级的集群版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Versions?: Array<string>
+
+  /**
+      * 集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Clusters?: Array<ClusterVersion>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8223,6 +8872,94 @@ export interface DescribeClusterCommonNamesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模板实例
+ */
+export interface PrometheusTemp {
+  /**
+   * 模板名称
+   */
+  Name: string
+
+  /**
+      * 模板维度，支持以下类型
+instance 实例级别
+cluster 集群级别
+      */
+  Level: string
+
+  /**
+      * 模板描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Describe?: string
+
+  /**
+      * 当Level为instance时有效，
+模板中的聚合规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordRules?: Array<PrometheusConfigItem>
+
+  /**
+      * 当Level为cluster时有效，
+模板中的ServiceMonitor规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+
+  /**
+      * 当Level为cluster时有效，
+模板中的PodMonitors规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PodMonitors?: Array<PrometheusConfigItem>
+
+  /**
+      * 当Level为cluster时有效，
+模板中的RawJobs规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawJobs?: Array<PrometheusConfigItem>
+
+  /**
+      * 模板的ID, 用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateId?: string
+
+  /**
+      * 最近更新时间，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
+
+  /**
+      * 当前版本，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version?: string
+
+  /**
+      * 是否系统提供的默认模板，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDefault?: boolean
+
+  /**
+      * 当Level为instance时有效，
+模板中的告警配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlertDetailRules?: Array<PrometheusAlertPolicyItem>
+
+  /**
+      * 关联实例数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TargetsTotal?: number
 }
 
 /**

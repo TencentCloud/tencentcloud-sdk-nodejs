@@ -24,6 +24,7 @@ import {
   ApplyPayerInfoResponse,
   RevokeRechargeByThirdPayRequest,
   UnifiedOrderResponse,
+  CreatePayRollTokenResponse,
   ApplyPayerinfoResult,
   BindAcctRequest,
   QueryOpenBankBankBranchListResponse,
@@ -31,12 +32,13 @@ import {
   QueryOpenBankPaymentOrderRequest,
   QueryOpenBankBindExternalSubMerchantBankAccountResponse,
   UploadOrgFileRequest,
+  GetPayRollAuthResultRequest,
   RefundTlinxOrderResponse,
-  QueryMemberTransactionDetailsResult,
+  QueryItem,
   QueryContractPayWayListResponse,
   QueryContractPayWayListRequest,
   QueryAssignmentRequest,
-  QueryMemberTransactionResponse,
+  ApplyTradeResult,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
   CreateMerchantRequest,
@@ -58,6 +60,7 @@ import {
   CreateRedInvoiceItem,
   AddMerchantResult,
   QueryOpenBankExternalSubMerchantRegistrationRequest,
+  QueryMerchantInfoForManagementResponse,
   CreateTransferBatchResponse,
   BindAccountRequest,
   QueryCloudChannelDataResponse,
@@ -131,6 +134,7 @@ import {
   RefundCloudOrderResponse,
   QueryBankClearRequest,
   QueryInvoiceRequest,
+  CreatePayRollPreOrderResponse,
   CreateOpenBankMerchantResult,
   DistributeQueryReceiverRequest,
   QueryOpenBankUnbindExternalSubMerchantBankAccountResponse,
@@ -141,7 +145,7 @@ import {
   ApplyTradeResponse,
   ViewMerchantResult,
   QueryOpenBankSupportBankListRequest,
-  ApplyTradeResult,
+  ContractOrderRequest,
   QueryContractPayFeeResponse,
   BindRelateAcctSmallAmountResponse,
   QueryBalanceRequest,
@@ -151,6 +155,7 @@ import {
   QueryTransferBatchResponse,
   QueryDeclareData,
   QueryContractPayFeeRequest,
+  QueryOrderResponse,
   CreateOpenBankExternalSubMerchantRegistrationResponse,
   RefundOrderResult,
   QueryBatchPaymentResultDataInfo,
@@ -189,7 +194,7 @@ import {
   CreateAcctRequest,
   CreateAgentTaxPaymentInfosRequest,
   QueryReconciliationFileApplyInfoRequest,
-  QueryBillDownloadURLResponse,
+  CreatePayRollPreOrderWithAuthRequest,
   QueryMerchantBalanceRequest,
   QueryOutwardOrderResult,
   QueryPayerInfoRequest,
@@ -197,7 +202,7 @@ import {
   QueryContractRequest,
   CreateOpenBankRechargeOrderResponse,
   QueryDownloadBillURLRequest,
-  QueryMerchantInfoForManagementResponse,
+  QueryMerchantBalanceResult,
   QueryOpenBankOrderDetailReceiptInfoRequest,
   QueryOpenBankExternalSubAccountBookBalanceResponse,
   QueryOrderStatusRequest,
@@ -212,10 +217,10 @@ import {
   BindRelateAcctUnionPayRequest,
   QueryFundsTransactionDetailsResult,
   QueryCloudOrderResponse,
-  QueryItem,
   Paging,
   CreateOpenBankExternalSubMerchantAccountBookRequest,
   RegisterBehaviorResponse,
+  GetPayRollAuthListRequest,
   QueryBillDownloadURLData,
   ApplyWithdrawalResponse,
   QueryMerchantInfoForManagementRequest,
@@ -242,6 +247,7 @@ import {
   GetDistributeBillDownloadUrlRequest,
   AgentTaxPaymentBatch,
   SyncContractDataRequest,
+  GetPayRollAuthListResponse,
   QueryRefundRequest,
   CreateCustAcctIdRequest,
   CloudExternalChannelData,
@@ -270,6 +276,7 @@ import {
   CreateMerchantResponse,
   CreateSinglePaymentResponse,
   CloseOpenBankPaymentOrderRequest,
+  GetPayRollAuthRequest,
   ViewContractResult,
   QueryAcctItem,
   OpenBankRechargePayeeInfo,
@@ -297,6 +304,7 @@ import {
   SupportBankInfo,
   ModifyMntMbrBindRelateAcctBankCodeRequest,
   QueryMerchantPayWayListResponse,
+  PayRollAuthResult,
   CloudGlobalPayTimeInfo,
   QueryCustAcctIdBalanceRequest,
   QueryExternalAccountBookResult,
@@ -310,17 +318,18 @@ import {
   QueryTradeData,
   QueryOpenBankUnbindExternalSubMerchantBankAccountResult,
   ApplyDeclareResult,
-  ContractOrderRequest,
   DistributeAccreditQueryResponse,
   UnifiedOrderInSubOrderList,
   QueryShopOpenIdResult,
   ApplyReWithdrawalResponse,
+  GetPayRollAuthResultResponse,
   RegisterBillRequest,
   OpenBankGoodsInfo,
   QueryOrderOutSubOrderList,
   CreateBatchPaymentResponse,
   CreateExternalAnchorRequest,
   ConfirmOrderResponse,
+  GetPayRollAuthResponse,
   UnifiedTlinxOrderResponse,
   CreateSinglePaymentData,
   CheckAmountResponse,
@@ -335,8 +344,10 @@ import {
   QueryOpenBankBindExternalSubMerchantBankAccountRequest,
   DistributeRemoveReceiverRequest,
   BillDownloadUrlResult,
+  CreatePayRollPreOrderRequest,
   DeleteAgentTaxPaymentInfosRequest,
   QueryAcctInfoListRequest,
+  CreatePayRollTokenRequest,
   AddShopRequest,
   TransferDetailRequest,
   QueryOrderStatusResponse,
@@ -422,6 +433,7 @@ import {
   ViewMerchantResponse,
   AddShopResponse,
   UploadFileResponse,
+  QueryMemberTransactionDetailsResult,
   CreateMerchantResult,
   RefundResponse,
   CreateTransferBatchRequest,
@@ -448,6 +460,7 @@ import {
   ContractPayListResult,
   CreateInvoiceResult,
   DescribeOrderStatusRequest,
+  QueryMemberTransactionResponse,
   ChannelContractInfo,
   CreateAnchorResponse,
   UnifiedCloudOrderRequest,
@@ -470,7 +483,7 @@ import {
   QueryOpenBankPaymentOrderResponse,
   QueryMaliciousRegistrationRequest,
   AddContractResult,
-  QueryOrderResponse,
+  QueryBillDownloadURLResponse,
   UploadFileResult,
   DescribeChargeDetailRequest,
   PayOrderResult,
@@ -486,7 +499,6 @@ import {
   RechargeMemberThirdPayRequest,
   CreateInvoiceRequest,
   AnchorContractInfo,
-  QueryMerchantBalanceResult,
   QueryFundsTransactionDetailsResponse,
   ChannelReturnContractInfo,
   ApplyOpenBankOrderDetailReceiptResult,
@@ -506,6 +518,7 @@ import {
   DownloadReconciliationUrlResponse,
   QueryDownloadBillURLResponse,
   DistributeCancelResult,
+  CreatePayRollPreOrderWithAuthResponse,
   CreateOpenBankOrderRechargeResult,
   QuerySinglePayResult,
   CloudExternalPromptInfo,
@@ -665,6 +678,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 务工卡-获取核身结果
+   */
+  async GetPayRollAuthResult(
+    req: GetPayRollAuthResultRequest,
+    cb?: (error: string, rep: GetPayRollAuthResultResponse) => void
+  ): Promise<GetPayRollAuthResultResponse> {
+    return this.request("GetPayRollAuthResult", req, cb)
+  }
+
+  /**
    * 查询银行时间段内交易明细。查询时间段的会员成功交易。
    */
   async QueryBankTransactionDetails(
@@ -762,6 +785,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMerchantResponse) => void
   ): Promise<ModifyMerchantResponse> {
     return this.request("ModifyMerchant", req, cb)
+  }
+
+  /**
+   * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+   */
+  async RegisterBillSupportWithdraw(
+    req: RegisterBillSupportWithdrawRequest,
+    cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void
+  ): Promise<RegisterBillSupportWithdrawResponse> {
+    return this.request("RegisterBillSupportWithdraw", req, cb)
   }
 
   /**
@@ -955,6 +988,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 务工卡-核身预下单带授权
+   */
+  async CreatePayRollPreOrderWithAuth(
+    req: CreatePayRollPreOrderWithAuthRequest,
+    cb?: (error: string, rep: CreatePayRollPreOrderWithAuthResponse) => void
+  ): Promise<CreatePayRollPreOrderWithAuthResponse> {
+    return this.request("CreatePayRollPreOrderWithAuth", req, cb)
+  }
+
+  /**
      * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
 查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
      */
@@ -1006,13 +1049,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+   * 跨境-对接方账户余额查询
    */
-  async RegisterBillSupportWithdraw(
-    req: RegisterBillSupportWithdrawRequest,
-    cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void
-  ): Promise<RegisterBillSupportWithdrawResponse> {
-    return this.request("RegisterBillSupportWithdraw", req, cb)
+  async QueryMerchantBalance(
+    req: QueryMerchantBalanceRequest,
+    cb?: (error: string, rep: QueryMerchantBalanceResponse) => void
+  ): Promise<QueryMerchantBalanceResponse> {
+    return this.request("QueryMerchantBalance", req, cb)
   }
 
   /**
@@ -1023,6 +1066,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryContractPayWayListResponse) => void
   ): Promise<QueryContractPayWayListResponse> {
     return this.request("QueryContractPayWayList", req, cb)
+  }
+
+  /**
+   * 务工卡-核身预下单
+   */
+  async CreatePayRollPreOrder(
+    req: CreatePayRollPreOrderRequest,
+    cb?: (error: string, rep: CreatePayRollPreOrderResponse) => void
+  ): Promise<CreatePayRollPreOrderResponse> {
+    return this.request("CreatePayRollPreOrder", req, cb)
   }
 
   /**
@@ -1076,6 +1129,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 务工卡-查询核身记录
+   */
+  async GetPayRollAuthList(
+    req: GetPayRollAuthListRequest,
+    cb?: (error: string, rep: GetPayRollAuthListResponse) => void
+  ): Promise<GetPayRollAuthListResponse> {
+    return this.request("GetPayRollAuthList", req, cb)
+  }
+
+  /**
    * 商户查询是否签约和签约行为上报
    */
   async RegisterBehavior(
@@ -1086,13 +1149,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 跨境-对接方账户余额查询
+   * 务工卡-生成授权令牌
    */
-  async QueryMerchantBalance(
-    req: QueryMerchantBalanceRequest,
-    cb?: (error: string, rep: QueryMerchantBalanceResponse) => void
-  ): Promise<QueryMerchantBalanceResponse> {
-    return this.request("QueryMerchantBalance", req, cb)
+  async CreatePayRollToken(
+    req: CreatePayRollTokenRequest,
+    cb?: (error: string, rep: CreatePayRollTokenResponse) => void
+  ): Promise<CreatePayRollTokenResponse> {
+    return this.request("CreatePayRollToken", req, cb)
   }
 
   /**
@@ -1858,6 +1921,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeChargeDetailResponse) => void
   ): Promise<DescribeChargeDetailResponse> {
     return this.request("DescribeChargeDetail", req, cb)
+  }
+
+  /**
+   * 务工卡-查询授权关系
+   */
+  async GetPayRollAuth(
+    req: GetPayRollAuthRequest,
+    cb?: (error: string, rep: GetPayRollAuthResponse) => void
+  ): Promise<GetPayRollAuthResponse> {
+    return this.request("GetPayRollAuth", req, cb)
   }
 
   /**

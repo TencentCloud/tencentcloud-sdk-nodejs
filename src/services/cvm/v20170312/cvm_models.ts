@@ -3730,6 +3730,11 @@ false（默认）：发送正常请求，通过检查后直接创建实例
   LaunchTemplate?: LaunchTemplate
 
   /**
+   * 指定专用集群创建。
+   */
+  DedicatedClusterId?: string
+
+  /**
    * 指定CHC物理服务器来创建CHC云主机。
    */
   ChcIds?: Array<string>

@@ -138,6 +138,16 @@ it("cpdp.v20190820.WithdrawCashMembership", async function () {
     }
 })
 
+it("cpdp.v20190820.GetPayRollAuthResult", async function () {
+    try {
+       const data = await client.GetPayRollAuthResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryBankTransactionDetails", async function () {
     try {
        const data = await client.QueryBankTransactionDetails({})
@@ -231,6 +241,16 @@ it("cpdp.v20190820.QueryMerchantPayWayList", async function () {
 it("cpdp.v20190820.ModifyMerchant", async function () {
     try {
        const data = await client.ModifyMerchant({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
+    try {
+       const data = await client.RegisterBillSupportWithdraw({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,6 +448,16 @@ it("cpdp.v20190820.UploadTaxPayment", async function () {
     }
 })
 
+it("cpdp.v20190820.CreatePayRollPreOrderWithAuth", async function () {
+    try {
+       const data = await client.CreatePayRollPreOrderWithAuth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryMemberBind", async function () {
     try {
        const data = await client.QueryMemberBind({})
@@ -478,9 +508,9 @@ it("cpdp.v20190820.DistributeApply", async function () {
     }
 })
 
-it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
+it("cpdp.v20190820.QueryMerchantBalance", async function () {
     try {
-       const data = await client.RegisterBillSupportWithdraw({})
+       const data = await client.QueryMerchantBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +521,16 @@ it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
 it("cpdp.v20190820.QueryContractPayWayList", async function () {
     try {
        const data = await client.QueryContractPayWayList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.CreatePayRollPreOrder", async function () {
+    try {
+       const data = await client.CreatePayRollPreOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +588,16 @@ it("cpdp.v20190820.ContractOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.GetPayRollAuthList", async function () {
+    try {
+       const data = await client.GetPayRollAuthList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.RegisterBehavior", async function () {
     try {
        const data = await client.RegisterBehavior({})
@@ -558,9 +608,9 @@ it("cpdp.v20190820.RegisterBehavior", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryMerchantBalance", async function () {
+it("cpdp.v20190820.CreatePayRollToken", async function () {
     try {
-       const data = await client.QueryMerchantBalance({})
+       const data = await client.CreatePayRollToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1321,6 +1371,16 @@ it("cpdp.v20190820.ApplyWithdrawal", async function () {
 it("cpdp.v20190820.DescribeChargeDetail", async function () {
     try {
        const data = await client.DescribeChargeDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.GetPayRollAuth", async function () {
+    try {
+       const data = await client.GetPayRollAuth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

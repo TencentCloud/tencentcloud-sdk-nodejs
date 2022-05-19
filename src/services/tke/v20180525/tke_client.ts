@@ -40,6 +40,7 @@ import {
   RouteTableInfo,
   EnableClusterDeletionProtectionResponse,
   ClusterAsGroup,
+  PrometheusTempModify,
   EnableClusterAuditResponse,
   EnvironmentVariable,
   UpdateImageCacheRequest,
@@ -52,6 +53,7 @@ import {
   UpgradeClusterInstancesRequest,
   ExtensionAddon,
   RegionInstance,
+  PrometheusRecordRuleYamlItem,
   Label,
   PodLimitsByType,
   DeletePrometheusTemplateSyncRequest,
@@ -67,6 +69,7 @@ import {
   DescribeImageCachesRequest,
   DescribePrometheusAlertRuleRequest,
   AddNodeToNodePoolResponse,
+  PrometheusInstancesOverview,
   DisableEventPersistenceResponse,
   UpdateEKSContainerInstanceRequest,
   GetMostSuitableImageCacheResponse,
@@ -138,6 +141,7 @@ import {
   EksCiRegionInfo,
   DisableClusterAuditRequest,
   Event,
+  DescribePrometheusGlobalNotificationResponse,
   HttpGet,
   ResourceUsage,
   DescribePrometheusAlertHistoryRequest,
@@ -157,6 +161,7 @@ import {
   DnsServerConf,
   EksCluster,
   ModifyNodePoolInstanceTypesResponse,
+  PrometheusAlertManagerConfig,
   GetClusterLevelPriceResponse,
   DescribeResourceUsageResponse,
   DescribeClusterRoutesResponse,
@@ -213,6 +218,7 @@ import {
   PrometheusNotification,
   DescribeExternalClusterSpecRequest,
   AutoScalingGroupRange,
+  DescribePrometheusGlobalNotificationRequest,
   ClusterPublicLB,
   DescribePrometheusTemplateSyncResponse,
   ModifyPrometheusTemplateResponse,
@@ -239,7 +245,7 @@ import {
   GetUpgradeInstanceProgressResponse,
   DescribeExistedInstancesResponse,
   CreatePrometheusTemplateRequest,
-  DescribeEKSContainerInstancesResponse,
+  DeleteImageCachesResponse,
   CreatePrometheusAlertRuleResponse,
   ResourceDeleteOption,
   ModifyClusterAuthenticationOptionsResponse,
@@ -250,6 +256,8 @@ import {
   UninstallLogAgentRequest,
   TcpSocket,
   TagSpecification,
+  PrometheusNotificationItem,
+  CreatePrometheusGlobalNotificationResponse,
   DescribeClusterAuthenticationOptionsResponse,
   DescribePrometheusAgentsRequest,
   AddClusterCIDRResponse,
@@ -284,6 +292,7 @@ import {
   DescribeClusterAsGroupsResponse,
   ScaleOutClusterMasterRequest,
   DeleteClusterInstancesResponse,
+  CreatePrometheusGlobalNotificationRequest,
   ModifyPrometheusTempResponse,
   PrometheusAlertRuleDetail,
   DescribeClusterInstancesResponse,
@@ -309,7 +318,7 @@ import {
   ClusterNetworkSettings,
   DescribeImagesResponse,
   ClusterExtraArgs,
-  DescribeAvailableClusterVersionResponse,
+  SyncPrometheusTemplateResponse,
   CreateClusterEndpointVipResponse,
   TaskStepInfo,
   DeletePrometheusAlertRuleRequest,
@@ -328,12 +337,14 @@ import {
   CreateClusterEndpointVipRequest,
   ClusterInternalLB,
   ExistedInstance,
+  ModifyPrometheusGlobalNotificationRequest,
   GetUpgradeInstanceProgressRequest,
   UpdateEKSClusterResponse,
   DescribePrometheusRecordRulesResponse,
   DeleteClusterNodePoolResponse,
   DeleteClusterRouteResponse,
   ModifyClusterNodePoolResponse,
+  PrometheusAlertPolicyItem,
   PrometheusTarget,
   LoginSettings,
   SyncPrometheusTemplateRequest,
@@ -343,6 +354,7 @@ import {
   DescribeRouteTableConflictsResponse,
   DescribeVersionsRequest,
   DescribePrometheusTempRequest,
+  DescribeEKSContainerInstancesResponse,
   DeleteClusterRouteTableRequest,
   CreateClusterRequest,
   InstanceExtraArgs,
@@ -368,7 +380,7 @@ import {
   ClusterStatus,
   DescribePrometheusAgentsResponse,
   DescribeVpcCniPodLimitsRequest,
-  DeleteImageCachesResponse,
+  ModifyPrometheusGlobalNotificationResponse,
   DescribeEKSContainerInstanceRegionsResponse,
   DescribeTKEEdgeScriptRequest,
   AddVpcCniSubnetsResponse,
@@ -376,9 +388,10 @@ import {
   DescribePrometheusOverviewsResponse,
   DescribeEKSContainerInstancesRequest,
   ScaleInClusterMasterResponse,
-  SyncPrometheusTemplateResponse,
+  DescribeAvailableClusterVersionResponse,
   DeleteEKSContainerInstancesRequest,
   DescribeClusterCommonNamesResponse,
+  PrometheusTemp,
   PrometheusInstanceOverview,
   ScaleInMaster,
 } from "./tke_models"
@@ -656,7 +669,7 @@ export class Client extends AbstractClient {
    * 修改2.0实例告警策略
    */
   async ModifyPrometheusAlertPolicy(
-    req?: ModifyPrometheusAlertPolicyRequest,
+    req: ModifyPrometheusAlertPolicyRequest,
     cb?: (error: string, rep: ModifyPrometheusAlertPolicyResponse) => void
   ): Promise<ModifyPrometheusAlertPolicyResponse> {
     return this.request("ModifyPrometheusAlertPolicy", req, cb)
@@ -946,7 +959,7 @@ export class Client extends AbstractClient {
    * 拉取模板列表，默认模板将总是在最前面
    */
   async DescribePrometheusTemp(
-    req?: DescribePrometheusTempRequest,
+    req: DescribePrometheusTempRequest,
     cb?: (error: string, rep: DescribePrometheusTempResponse) => void
   ): Promise<DescribePrometheusTempResponse> {
     return this.request("DescribePrometheusTemp", req, cb)
@@ -1036,7 +1049,7 @@ export class Client extends AbstractClient {
    * 创建一个云原生Prometheus模板
    */
   async CreatePrometheusTemp(
-    req?: CreatePrometheusTempRequest,
+    req: CreatePrometheusTempRequest,
     cb?: (error: string, rep: CreatePrometheusTempResponse) => void
   ): Promise<CreatePrometheusTempResponse> {
     return this.request("CreatePrometheusTemp", req, cb)
@@ -1070,6 +1083,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusInstanceResponse) => void
   ): Promise<DescribePrometheusInstanceResponse> {
     return this.request("DescribePrometheusInstance", req, cb)
+  }
+
+  /**
+   * 创建全局告警通知渠道
+   */
+  async CreatePrometheusGlobalNotification(
+    req: CreatePrometheusGlobalNotificationRequest,
+    cb?: (error: string, rep: CreatePrometheusGlobalNotificationResponse) => void
+  ): Promise<CreatePrometheusGlobalNotificationResponse> {
+    return this.request("CreatePrometheusGlobalNotification", req, cb)
   }
 
   /**
@@ -1146,7 +1169,7 @@ export class Client extends AbstractClient {
    * 获取聚合规则列表，包含关联集群内crd资源创建的record rule
    */
   async DescribePrometheusRecordRules(
-    req?: DescribePrometheusRecordRulesRequest,
+    req: DescribePrometheusRecordRulesRequest,
     cb?: (error: string, rep: DescribePrometheusRecordRulesResponse) => void
   ): Promise<DescribePrometheusRecordRulesResponse> {
     return this.request("DescribePrometheusRecordRules", req, cb)
@@ -1160,6 +1183,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePrometheusAlertRuleResponse) => void
   ): Promise<DeletePrometheusAlertRuleResponse> {
     return this.request("DeletePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 查询全局告警通知渠道
+   */
+  async DescribePrometheusGlobalNotification(
+    req: DescribePrometheusGlobalNotificationRequest,
+    cb?: (error: string, rep: DescribePrometheusGlobalNotificationResponse) => void
+  ): Promise<DescribePrometheusGlobalNotificationResponse> {
+    return this.request("DescribePrometheusGlobalNotification", req, cb)
   }
 
   /**
@@ -1180,6 +1213,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterEndpointResponse) => void
   ): Promise<CreateClusterEndpointResponse> {
     return this.request("CreateClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 修改全局告警通知渠道
+   */
+  async ModifyPrometheusGlobalNotification(
+    req: ModifyPrometheusGlobalNotificationRequest,
+    cb?: (error: string, rep: ModifyPrometheusGlobalNotificationResponse) => void
+  ): Promise<ModifyPrometheusGlobalNotificationResponse> {
+    return this.request("ModifyPrometheusGlobalNotification", req, cb)
   }
 
   /**
@@ -1226,7 +1269,7 @@ export class Client extends AbstractClient {
    * 修改模板内容
    */
   async ModifyPrometheusTemp(
-    req?: ModifyPrometheusTempRequest,
+    req: ModifyPrometheusTempRequest,
     cb?: (error: string, rep: ModifyPrometheusTempResponse) => void
   ): Promise<ModifyPrometheusTempResponse> {
     return this.request("ModifyPrometheusTemp", req, cb)
@@ -1256,7 +1299,7 @@ export class Client extends AbstractClient {
    * 获取2.0实例关联集群列表
    */
   async DescribePrometheusClusterAgents(
-    req?: DescribePrometheusClusterAgentsRequest,
+    req: DescribePrometheusClusterAgentsRequest,
     cb?: (error: string, rep: DescribePrometheusClusterAgentsResponse) => void
   ): Promise<DescribePrometheusClusterAgentsResponse> {
     return this.request("DescribePrometheusClusterAgents", req, cb)
@@ -1296,7 +1339,7 @@ export class Client extends AbstractClient {
    * 获取模板关联实例信息，针对V2版本实例
    */
   async DescribePrometheusTempSync(
-    req?: DescribePrometheusTempSyncRequest,
+    req: DescribePrometheusTempSyncRequest,
     cb?: (error: string, rep: DescribePrometheusTempSyncResponse) => void
   ): Promise<DescribePrometheusTempSyncResponse> {
     return this.request("DescribePrometheusTempSync", req, cb)
@@ -1366,7 +1409,7 @@ export class Client extends AbstractClient {
    * 同步模板到实例或者集群，针对V2版本实例
    */
   async SyncPrometheusTemp(
-    req?: SyncPrometheusTempRequest,
+    req: SyncPrometheusTempRequest,
     cb?: (error: string, rep: SyncPrometheusTempResponse) => void
   ): Promise<SyncPrometheusTempResponse> {
     return this.request("SyncPrometheusTemp", req, cb)
@@ -1416,7 +1459,7 @@ export class Client extends AbstractClient {
    * 创建告警策略
    */
   async CreatePrometheusAlertPolicy(
-    req?: CreatePrometheusAlertPolicyRequest,
+    req: CreatePrometheusAlertPolicyRequest,
     cb?: (error: string, rep: CreatePrometheusAlertPolicyResponse) => void
   ): Promise<CreatePrometheusAlertPolicyResponse> {
     return this.request("CreatePrometheusAlertPolicy", req, cb)
@@ -1436,7 +1479,7 @@ export class Client extends AbstractClient {
    * 获取2.0实例告警策略列表
    */
   async DescribePrometheusAlertPolicy(
-    req?: DescribePrometheusAlertPolicyRequest,
+    req: DescribePrometheusAlertPolicyRequest,
     cb?: (error: string, rep: DescribePrometheusAlertPolicyResponse) => void
   ): Promise<DescribePrometheusAlertPolicyResponse> {
     return this.request("DescribePrometheusAlertPolicy", req, cb)
@@ -1546,7 +1589,7 @@ export class Client extends AbstractClient {
    * 删除一个云原生Prometheus配置模板
    */
   async DeletePrometheusTemp(
-    req?: DeletePrometheusTempRequest,
+    req: DeletePrometheusTempRequest,
     cb?: (error: string, rep: DeletePrometheusTempResponse) => void
   ): Promise<DeletePrometheusTempResponse> {
     return this.request("DeletePrometheusTemp", req, cb)
@@ -1616,7 +1659,7 @@ export class Client extends AbstractClient {
    * 获取与云监控融合实例列表
    */
   async DescribePrometheusInstancesOverview(
-    req?: DescribePrometheusInstancesOverviewRequest,
+    req: DescribePrometheusInstancesOverviewRequest,
     cb?: (error: string, rep: DescribePrometheusInstancesOverviewResponse) => void
   ): Promise<DescribePrometheusInstancesOverviewResponse> {
     return this.request("DescribePrometheusInstancesOverview", req, cb)
@@ -1636,7 +1679,7 @@ export class Client extends AbstractClient {
    * 解除模板同步，这将会删除目标中该模板所生产的配置，针对V2版本实例
    */
   async DeletePrometheusTempSync(
-    req?: DeletePrometheusTempSyncRequest,
+    req: DeletePrometheusTempSyncRequest,
     cb?: (error: string, rep: DeletePrometheusTempSyncResponse) => void
   ): Promise<DeletePrometheusTempSyncResponse> {
     return this.request("DeletePrometheusTempSync", req, cb)
@@ -1646,7 +1689,7 @@ export class Client extends AbstractClient {
    * 删除2.0实例告警策略
    */
   async DeletePrometheusAlertPolicy(
-    req?: DeletePrometheusAlertPolicyRequest,
+    req: DeletePrometheusAlertPolicyRequest,
     cb?: (error: string, rep: DeletePrometheusAlertPolicyResponse) => void
   ): Promise<DeletePrometheusAlertPolicyResponse> {
     return this.request("DeletePrometheusAlertPolicy", req, cb)

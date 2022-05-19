@@ -951,7 +951,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
    * 查询地域下可用区
    */
   async DescribeZones(
-    req?: DescribeZonesRequest,
+    req: DescribeZonesRequest,
     cb?: (error: string, rep: DescribeZonesResponse) => void
   ): Promise<DescribeZonesResponse> {
     return this.request("DescribeZones", req, cb)

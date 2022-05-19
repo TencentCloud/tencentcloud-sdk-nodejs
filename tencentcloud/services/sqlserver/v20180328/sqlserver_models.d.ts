@@ -216,7 +216,7 @@ export interface CreateBasicDBInstancesResponse {
     /**
       * 订单名称
       */
-    DealName?: string;
+    DealName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -554,7 +554,7 @@ export interface RunMigrationResponse {
     /**
       * 迁移流程启动后，返回流程ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -701,11 +701,11 @@ export interface DescribeRegionsResponse {
     /**
       * 返回地域信息总的条目
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 地域信息数组
       */
-    RegionSet?: Array<RegionInfo>;
+    RegionSet: Array<RegionInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -775,7 +775,7 @@ export interface ModifyDBInstanceProjectResponse {
     /**
       * 修改成功的实例个数
       */
-    Count?: number;
+    Count: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -859,51 +859,51 @@ export interface DescribeReadOnlyGroupByReadOnlyInstanceResponse {
     /**
       * 只读组ID
       */
-    ReadOnlyGroupId?: string;
+    ReadOnlyGroupId: string;
     /**
       * 只读组名称
       */
-    ReadOnlyGroupName?: string;
+    ReadOnlyGroupName: string;
     /**
       * 只读组的地域ID
       */
-    RegionId?: string;
+    RegionId: string;
     /**
       * 只读组的可用区ID
       */
-    ZoneId?: string;
+    ZoneId: string;
     /**
       * 是否启动超时剔除功能 ,0-不开启剔除功能，1-开启剔除功能
       */
-    IsOfflineDelay?: number;
+    IsOfflineDelay: number;
     /**
       * 启动超时剔除功能后，使用的超时阈值，单位是秒
       */
-    ReadOnlyMaxDelayTime?: number;
+    ReadOnlyMaxDelayTime: number;
     /**
       * 启动超时剔除功能后，只读组至少保留的只读副本数
       */
-    MinReadOnlyInGroup?: number;
+    MinReadOnlyInGroup: number;
     /**
       * 只读组vip
       */
-    Vip?: string;
+    Vip: string;
     /**
       * 只读组vport
       */
-    Vport?: number;
+    Vport: number;
     /**
       * 只读组在私有网络ID
       */
-    VpcId?: string;
+    VpcId: string;
     /**
       * 只读组在私有网络子网ID
       */
-    SubnetId?: string;
+    SubnetId: string;
     /**
       * 主实例ID，形如mssql-sgeshe3th
       */
-    MasterInstanceId?: string;
+    MasterInstanceId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1309,7 +1309,7 @@ export interface CompleteMigrationResponse {
     /**
       * 完成迁移流程发起后，返回的流程id
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1335,7 +1335,7 @@ export interface StartMigrationCheckResponse {
     /**
       * 迁移检查流程发起后，返回的流程id
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1475,11 +1475,11 @@ export interface DescribeOrdersResponse {
     /**
       * 订单信息数组
       */
-    Deals?: Array<DealInfo>;
+    Deals: Array<DealInfo>;
     /**
       * 返回多少个订单的信息
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1492,11 +1492,11 @@ export interface InquiryPriceCreateDBInstancesResponse {
     /**
       * 未打折前价格，其值除以100表示多少钱。例如10010表示100.10元
       */
-    OriginalPrice?: number;
+    OriginalPrice: number;
     /**
       * 实际需要支付的价格，其值除以100表示多少钱。例如10010表示100.10元
       */
-    Price?: number;
+    Price: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1565,7 +1565,7 @@ export interface ModifyMigrationResponse {
     /**
       * 迁移任务ID
       */
-    MigrateId?: number;
+    MigrateId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1578,7 +1578,7 @@ export interface RecycleReadOnlyGroupResponse {
     /**
       * 任务流ID
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1591,11 +1591,11 @@ export interface DescribeZonesResponse {
     /**
       * 返回多少个可用区信息
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 可用区数组
       */
-    ZoneSet?: Array<ZoneInfo>;
+    ZoneSet: Array<ZoneInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1762,11 +1762,11 @@ export interface DescribeMigrationsResponse {
     /**
       * 查询结果的总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 查询结果的列表
       */
-    MigrateTaskSet?: Array<MigrateTask>;
+    MigrateTaskSet: Array<MigrateTask>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1855,7 +1855,7 @@ export interface DescribeProjectSecurityGroupsResponse {
     /**
       * 安全组详情。
       */
-    SecurityGroupSet?: Array<SecurityGroup>;
+    SecurityGroupSet: Array<SecurityGroup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1868,11 +1868,11 @@ export interface DescribeCrossRegionZoneResponse {
     /**
       * 备机所在地域的字符串ID，形如：ap-guangzhou
       */
-    Region?: string;
+    Region: string;
     /**
       * 备机所在可用区的字符串ID，形如：ap-guangzhou-1
       */
-    Zone?: string;
+    Zone: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1885,7 +1885,7 @@ export interface ModifyDBInstanceRenewFlagResponse {
     /**
       * 修改成功的个数
       */
-    Count?: number;
+    Count: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1898,11 +1898,12 @@ export interface DescribeMigrationDatabasesResponse {
     /**
       * 数据库数量
       */
-    Amount?: number;
+    Amount: number;
     /**
       * 数据库名称数组
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    MigrateDBSet?: Array<string>;
+    MigrateDBSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1915,7 +1916,7 @@ export interface CompleteExpansionResponse {
     /**
       * 流程ID，可通过接口DescribeFlowStatus查询立即切换升级任务的状态。
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2068,7 +2069,7 @@ export interface DescribeFlowStatusResponse {
     /**
       * 流程状态，0：成功，1：失败，2：运行中
       */
-    Status?: number;
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2081,15 +2082,15 @@ export interface QueryMigrationCheckProcessResponse {
     /**
       * 总步骤数量
       */
-    TotalStep?: number;
+    TotalStep: number;
     /**
       * 当前步骤编号，从1开始
       */
-    CurrentStep?: number;
+    CurrentStep: number;
     /**
       * 所有步骤详情
       */
-    StepDetails?: Array<StepDetail>;
+    StepDetails: Array<StepDetail>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2389,7 +2390,7 @@ export interface CreateReadOnlyDBInstancesResponse {
     /**
       * 订单名称数组
       */
-    DealNames?: Array<string>;
+    DealNames: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3090,6 +3091,14 @@ export interface AccountDetail {
       * 是否为管理员账户
       */
     IsAdmin: boolean;
+    /**
+      * win-windows鉴权,sql-sqlserver鉴权
+      */
+    Authentication: string;
+    /**
+      * win-windows鉴权账户需要host
+      */
+    Host: string;
 }
 /**
  * ModifyDatabaseMdf返回参数结构体
@@ -3853,6 +3862,10 @@ export interface AccountCreateInfo {
       * 是否为管理员账户，默认为否
       */
     IsAdmin?: boolean;
+    /**
+      * win-windows鉴权,sql-sqlserver鉴权，不填模式兼容接口sqlserver鉴权
+      */
+    Authentication?: string;
 }
 /**
  * RenewDBInstance返回参数结构体
@@ -3896,59 +3909,59 @@ export interface DescribeReadOnlyGroupDetailsResponse {
     /**
       * 只读组ID
       */
-    ReadOnlyGroupId?: string;
+    ReadOnlyGroupId: string;
     /**
       * 只读组名称
       */
-    ReadOnlyGroupName?: string;
+    ReadOnlyGroupName: string;
     /**
       * 只读组的地域ID，与主实例相同
       */
-    RegionId?: string;
+    RegionId: string;
     /**
       * 只读组的可用区ID，与主实例相同
       */
-    ZoneId?: string;
+    ZoneId: string;
     /**
       * 是否启动超时剔除功能，0-不开启剔除功能，1-开启剔除功能
       */
-    IsOfflineDelay?: number;
+    IsOfflineDelay: number;
     /**
       * 启动超时剔除功能后，使用的超时阈值
       */
-    ReadOnlyMaxDelayTime?: number;
+    ReadOnlyMaxDelayTime: number;
     /**
       * 启动超时剔除功能后，至少只读组保留的只读副本数
       */
-    MinReadOnlyInGroup?: number;
+    MinReadOnlyInGroup: number;
     /**
       * 只读组vip
       */
-    Vip?: string;
+    Vip: string;
     /**
       * 只读组vport
       */
-    Vport?: number;
+    Vport: number;
     /**
       * 只读组私有网络ID
       */
-    VpcId?: string;
+    VpcId: string;
     /**
       * 只读组私有网络子网ID
       */
-    SubnetId?: string;
+    SubnetId: string;
     /**
       * 只读实例副本集合
       */
-    ReadOnlyInstanceSet?: Array<ReadOnlyInstance>;
+    ReadOnlyInstanceSet: Array<ReadOnlyInstance>;
     /**
       * 只读组状态: 1-申请成功运行中，5-申请中
       */
-    Status?: number;
+    Status: number;
     /**
       * 主实例ID，形如mssql-sgeshe3th
       */
-    MasterInstanceId?: string;
+    MasterInstanceId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4205,11 +4218,11 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
     /**
       * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
       */
-    OriginalPrice?: number;
+    OriginalPrice: number;
     /**
       * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
       */
-    Price?: number;
+    Price: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4235,59 +4248,59 @@ export interface DescribeMigrationDetailResponse {
     /**
       * 迁移任务ID
       */
-    MigrateId?: number;
+    MigrateId: number;
     /**
       * 迁移任务名称
       */
-    MigrateName?: string;
+    MigrateName: string;
     /**
       * 迁移任务所属的用户ID
       */
-    AppId?: number;
+    AppId: number;
     /**
       * 迁移任务所属的地域
       */
-    Region?: string;
+    Region: string;
     /**
       * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
       */
-    SourceType?: number;
+    SourceType: number;
     /**
       * 迁移任务的创建时间
       */
-    CreateTime?: string;
+    CreateTime: string;
     /**
       * 迁移任务的开始时间
       */
-    StartTime?: string;
+    StartTime: string;
     /**
       * 迁移任务的结束时间
       */
-    EndTime?: string;
+    EndTime: string;
     /**
       * 迁移任务的状态（1:初始化,4:迁移中,5.迁移失败,6.迁移成功）
       */
-    Status?: number;
+    Status: number;
     /**
       * 迁移任务当前进度
       */
-    Progress?: number;
+    Progress: number;
     /**
       * 迁移类型（1:结构迁移 2:数据迁移 3:增量同步）
       */
-    MigrateType?: number;
+    MigrateType: number;
     /**
       * 迁移源
       */
-    Source?: MigrateSource;
+    Source: MigrateSource;
     /**
       * 迁移目标
       */
-    Target?: MigrateTarget;
+    Target: MigrateTarget;
     /**
       * 迁移DB对象 ，离线迁移（SourceType=4或SourceType=5）不使用。
       */
-    MigrateDBSet?: Array<MigrateDB>;
+    MigrateDBSet: Array<MigrateDB>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4444,6 +4457,10 @@ export interface UpgradeDBInstanceRequest {
       * 修改实例是否为跨可用区容灾，SameZones-修改为同可用区 MultiZones-修改为夸可用区
       */
     MultiZones?: string;
+    /**
+      * 执行变配的方式，默认为 1。支持值包括：0 - 立刻执行，1 - 维护时间窗执行
+      */
+    WaitSwitch?: number;
 }
 /**
  * CreateAccount请求参数结构体
@@ -4504,11 +4521,11 @@ export interface InquiryPriceRenewDBInstanceResponse {
     /**
       * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
       */
-    OriginalPrice?: number;
+    OriginalPrice: number;
     /**
       * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
       */
-    Price?: number;
+    Price: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4753,7 +4770,7 @@ export interface StopMigrationResponse {
     /**
       * 中止迁移流程发起后，返回的流程id
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4787,7 +4804,7 @@ export interface CreatePublishSubscribeResponse {
     /**
       * 流程ID，可通过接口DescribeFlowStatus查询立即切换升级任务的状态。
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4843,7 +4860,7 @@ export interface UpgradeDBInstanceResponse {
     /**
       * 订单名称
       */
-    DealName?: string;
+    DealName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4960,11 +4977,11 @@ export interface CreateDBInstancesResponse {
     /**
       * 订单名称
       */
-    DealName?: string;
+    DealName: string;
     /**
       * 订单名称数组
       */
-    DealNames?: Array<string>;
+    DealNames: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

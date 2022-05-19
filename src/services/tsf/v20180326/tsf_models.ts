@@ -1069,8 +1069,9 @@ export interface DescribeApiRateLimitRulesRequest {
  */
 export interface DescribeApiGroupsResponse {
   /**
-   * 翻页结构体
-   */
+      * 翻页结构体
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Result: TsfPageApiGroupInfo
 
   /**
@@ -9809,7 +9810,7 @@ export interface DescribeApiGroupsRequest {
   GroupType?: string
 
   /**
-   * 鉴权类型。 secret： 秘钥鉴权； none:无鉴权
+   * 鉴权类型。 secret： 密钥鉴权； none:无鉴权
    */
   AuthType?: string
 

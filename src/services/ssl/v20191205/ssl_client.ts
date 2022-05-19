@@ -21,8 +21,10 @@ import {
   ApplyCertificateResponse,
   ManagerInfo,
   CompleteCertificateRequest,
+  UploadCertificateRequest,
   DeleteCertificateRequest,
   DescribeCertificateOperateLogsResponse,
+  ModifyCertificateAliasRequest,
   CommitCertificateInformationRequest,
   DownloadCertificateResponse,
   ReplaceCertificateResponse,
@@ -35,7 +37,7 @@ import {
   CompanyInfo,
   DescribeManagersResponse,
   DescribeCertificateResponse,
-  UploadCertificateRequest,
+  HostCertificateResponse,
   UploadConfirmLetterRequest,
   OperationLog,
   VerifyManagerResponse,
@@ -55,8 +57,9 @@ import {
   DescribeCertificateDetailResponse,
   CheckCertificateChainResponse,
   ModifyCertificateProjectRequest,
+  CertHostingInfo,
   DvAuths,
-  ModifyCertificateAliasRequest,
+  HostCertificateRequest,
   DescribeCertificateRequest,
   DescribeManagerDetailRequest,
   DvAuthDetail,
@@ -252,6 +255,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeManagerDetailResponse) => void
   ): Promise<DescribeManagerDetailResponse> {
     return this.request("DescribeManagerDetail", req, cb)
+  }
+
+  /**
+   * 云资源托管
+   */
+  async HostCertificate(
+    req: HostCertificateRequest,
+    cb?: (error: string, rep: HostCertificateResponse) => void
+  ): Promise<HostCertificateResponse> {
+    return this.request("HostCertificate", req, cb)
   }
 
   /**

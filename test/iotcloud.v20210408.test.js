@@ -348,6 +348,16 @@ it("iotcloud.v20210408.UpdateDevicesEnableState", async function () {
     }
 })
 
+it("iotcloud.v20210408.ListFirmwares", async function () {
+    try {
+       const data = await client.ListFirmwares({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20210408.ListSDKLog", async function () {
     try {
        const data = await client.ListSDKLog({})
@@ -611,6 +621,16 @@ it("iotcloud.v20210408.DescribeProductTasks", async function () {
 it("iotcloud.v20210408.DescribeDevices", async function () {
     try {
        const data = await client.DescribeDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20210408.GetAllVersion", async function () {
+    try {
+       const data = await client.GetAllVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

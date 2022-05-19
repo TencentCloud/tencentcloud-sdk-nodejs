@@ -436,6 +436,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusInstance", req, cb);
     }
     /**
+     * 创建全局告警通知渠道
+     */
+    async CreatePrometheusGlobalNotification(req, cb) {
+        return this.request("CreatePrometheusGlobalNotification", req, cb);
+    }
+    /**
      * 查询集群开启端口流程状态(仅支持托管集群外网端口)
      */
     async DescribeClusterEndpointVipStatus(req, cb) {
@@ -490,6 +496,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrometheusAlertRule", req, cb);
     }
     /**
+     * 查询全局告警通知渠道
+     */
+    async DescribePrometheusGlobalNotification(req, cb) {
+        return this.request("DescribePrometheusGlobalNotification", req, cb);
+    }
+    /**
      * 查询集群变配记录
      */
     async DescribeClusterLevelChangeRecords(req, cb) {
@@ -500,6 +512,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterEndpoint(req, cb) {
         return this.request("CreateClusterEndpoint", req, cb);
+    }
+    /**
+     * 修改全局告警通知渠道
+     */
+    async ModifyPrometheusGlobalNotification(req, cb) {
+        return this.request("ModifyPrometheusGlobalNotification", req, cb);
     }
     /**
      * 操作TKE集群的addon
