@@ -1090,6 +1090,11 @@ export interface DescribeReadOnlyGroupByReadOnlyInstanceResponse {
   MasterInstanceId: string
 
   /**
+   * 主实例的地域ID
+   */
+  MasterRegionId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3266,6 +3271,16 @@ SyncNormal:正常
    * 只读副本隔离时间
    */
   IsolateTime: string
+
+  /**
+   * 只读副本所在地域
+   */
+  RegionId: string
+
+  /**
+   * 只读副本所在可用区
+   */
+  ZoneId: string
 }
 
 /**

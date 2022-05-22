@@ -1580,6 +1580,16 @@ export interface PodParameter {
 }
 
 /**
+ * DescribeUsersForUserManager请求参数结构体
+ */
+export interface DescribeUsersForUserManagerRequest {
+  /**
+   * 是否需要keytab文件的信息，仅对开启kerberos的集群有效，默认为false
+   */
+  NeedKeytabInfo?: boolean
+}
+
+/**
  * 集群续费实例信息
  */
 export interface RenewInstancesInfo {
@@ -2679,6 +2689,16 @@ export interface DescribeInstancesResponse {
       */
   TagKeys: Array<string>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUsersForUserManager返回参数结构体
+ */
+export interface DescribeUsersForUserManagerResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

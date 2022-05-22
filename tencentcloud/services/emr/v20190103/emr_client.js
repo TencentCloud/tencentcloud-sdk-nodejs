@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpdateInstance", req, cb);
     }
     /**
+     * 批量导出用户
+     */
+    async DescribeUsersForUserManager(req, cb) {
+        return this.request("DescribeUsersForUserManager", req, cb);
+    }
+    /**
      * 续费询价。
      */
     async InquiryPriceRenewInstance(req, cb) {

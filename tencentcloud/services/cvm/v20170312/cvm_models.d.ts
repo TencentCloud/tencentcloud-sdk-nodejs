@@ -112,37 +112,45 @@ export interface ResetInstancesTypeResponse {
     RequestId?: string;
 }
 /**
- * cdh实例的资源信息
+ * 专用宿主机实例的资源信息
  */
 export interface HostResource {
     /**
-      * cdh实例总cpu核数
+      * 专用宿主机实例总cpu核数
       */
     CpuTotal?: number;
     /**
-      * cdh实例可用cpu核数
+      * 专用宿主机实例可用cpu核数
       */
     CpuAvailable?: number;
     /**
-      * cdh实例总内存大小（单位为:GiB）
+      * 专用宿主机实例总内存大小（单位为:GiB）
       */
     MemTotal?: number;
     /**
-      * cdh实例可用内存大小（单位为:GiB）
+      * 专用宿主机实例可用内存大小（单位为:GiB）
       */
     MemAvailable?: number;
     /**
-      * cdh实例总磁盘大小（单位为:GiB）
+      * 专用宿主机实例总磁盘大小（单位为:GiB）
       */
     DiskTotal?: number;
     /**
-      * cdh实例可用磁盘大小（单位为:GiB）
+      * 专用宿主机实例可用磁盘大小（单位为:GiB）
       */
     DiskAvailable?: number;
     /**
-      * cdh实例磁盘类型
+      * 专用宿主机实例磁盘类型
       */
     DiskType: string;
+    /**
+      * 专用宿主机实例总GPU卡数
+      */
+    GpuTotal?: number;
+    /**
+      * 专用宿主机实例可用GPU卡数
+      */
+    GpuAvailable?: number;
 }
 /**
  * DeleteDisasterRecoverGroups请求参数结构体
@@ -1256,7 +1264,7 @@ export interface RunSecurityServiceEnabled {
     Enabled?: boolean;
 }
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅CDH产品可用），母机ip等
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机ip等
  */
 export interface Placement {
     /**
@@ -1889,7 +1897,7 @@ export interface LaunchTemplateVersionData {
       */
     InstanceName?: string;
     /**
-      * 实例计费模式。取值范围：<br><li>`PREPAID`：表示预付费，即包年包月<br><li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费<br><li>`CDHPAID`：`CDH`付费，即只对`CDH`计费，不对`CDH`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
+      * 实例计费模式。取值范围：<br><li>`PREPAID`：表示预付费，即包年包月<br><li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费<br><li>`CDHPAID`：`专用宿主机`付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceChargeType?: string;
@@ -2175,7 +2183,7 @@ export interface Instance {
       */
     InstanceName?: string;
     /**
-      * 实例计费模式。取值范围：<br><li>`PREPAID`：表示预付费，即包年包月<br><li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费<br><li>`CDHPAID`：`CDH`付费，即只对`CDH`计费，不对`CDH`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
+      * 实例计费模式。取值范围：<br><li>`PREPAID`：表示预付费，即包年包月<br><li>`POSTPAID_BY_HOUR`：表示后付费，即按量计费<br><li>`CDHPAID`：`专用宿主机`付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
       */
     InstanceChargeType?: string;
     /**
@@ -3521,7 +3529,7 @@ export interface InstanceTypeQuotaItem {
       */
     InstanceType: string;
     /**
-      * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对CDH计费，不对CDH上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
+      * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
       */
     InstanceChargeType: string;
     /**

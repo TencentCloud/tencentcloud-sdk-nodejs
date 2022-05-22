@@ -53,6 +53,7 @@ import {
   DescribeResourceScheduleRequest,
   Placement,
   PodParameter,
+  DescribeUsersForUserManagerRequest,
   RenewInstancesInfo,
   RunJobFlowResponse,
   MultiDisk,
@@ -83,6 +84,7 @@ import {
   ModifyResourcePoolsResponse,
   TerminateTasksResponse,
   DescribeInstancesResponse,
+  DescribeUsersForUserManagerResponse,
   InquiryPriceRenewInstanceRequest,
   CdbInfo,
   InquirePriceRenewEmrResponse,
@@ -142,6 +144,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceUpdateInstanceResponse) => void
   ): Promise<InquiryPriceUpdateInstanceResponse> {
     return this.request("InquiryPriceUpdateInstance", req, cb)
+  }
+
+  /**
+   * 批量导出用户
+   */
+  async DescribeUsersForUserManager(
+    req: DescribeUsersForUserManagerRequest,
+    cb?: (error: string, rep: DescribeUsersForUserManagerResponse) => void
+  ): Promise<DescribeUsersForUserManagerResponse> {
+    return this.request("DescribeUsersForUserManager", req, cb)
   }
 
   /**

@@ -58,9 +58,9 @@ it("oceanus.v20190422.CreateResource", async function () {
     }
 })
 
-it("oceanus.v20190422.DescribeResourceRelatedJobs", async function () {
+it("oceanus.v20190422.DescribeJobSavepoint", async function () {
     try {
-       const data = await client.DescribeResourceRelatedJobs({})
+       const data = await client.DescribeJobSavepoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +81,16 @@ it("oceanus.v20190422.RunJobs", async function () {
 it("oceanus.v20190422.DeleteResources", async function () {
     try {
        const data = await client.DeleteResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.DescribeResourceRelatedJobs", async function () {
+    try {
+       const data = await client.DescribeResourceRelatedJobs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +121,16 @@ it("oceanus.v20190422.DescribeSystemResources", async function () {
 it("oceanus.v20190422.DeleteResourceConfigs", async function () {
     try {
        const data = await client.DeleteResourceConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.CheckSavepoint", async function () {
+    try {
+       const data = await client.CheckSavepoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

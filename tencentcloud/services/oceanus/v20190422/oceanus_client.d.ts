@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeResourceConfigsResponse, CreateResourceRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, DeleteTableConfigRequest, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, CreateJobConfigResponse, DescribeResourcesRequest, DeleteResourceConfigsRequest, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, StopJobsResponse, CreateResourceResponse, DescribeSystemResourcesRequest, DescribeJobConfigsRequest, DescribeResourcesResponse, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeSystemResourcesResponse, DescribeJobsRequest, DescribeResourceConfigsRequest } from "./oceanus_models";
+import { DescribeResourceConfigsResponse, CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, DeleteTableConfigRequest, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, CreateJobConfigResponse, DescribeResourcesRequest, DescribeJobSavepointRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, StopJobsResponse, CreateResourceResponse, DescribeSystemResourcesRequest, DescribeJobConfigsRequest, DescribeResourcesResponse, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeSystemResourcesResponse, DescribeJobsRequest, DescribeResourceConfigsRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -24,9 +24,9 @@ export declare class Client extends AbstractClient {
      */
     CreateResource(req: CreateResourceRequest, cb?: (error: string, rep: CreateResourceResponse) => void): Promise<CreateResourceResponse>;
     /**
-     * 获取资源关联作业信息
+     * 查找Savepoint列表
      */
-    DescribeResourceRelatedJobs(req: DescribeResourceRelatedJobsRequest, cb?: (error: string, rep: DescribeResourceRelatedJobsResponse) => void): Promise<DescribeResourceRelatedJobsResponse>;
+    DescribeJobSavepoint(req: DescribeJobSavepointRequest, cb?: (error: string, rep: DescribeJobSavepointResponse) => void): Promise<DescribeJobSavepointResponse>;
     /**
      * 批量启动或者恢复作业，批量操作数量上限20
      */
@@ -35,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 删除资源接口
      */
     DeleteResources(req: DeleteResourcesRequest, cb?: (error: string, rep: DeleteResourcesResponse) => void): Promise<DeleteResourcesResponse>;
+    /**
+     * 获取资源关联作业信息
+     */
+    DescribeResourceRelatedJobs(req: DescribeResourceRelatedJobsRequest, cb?: (error: string, rep: DescribeResourceRelatedJobsResponse) => void): Promise<DescribeResourceRelatedJobsResponse>;
     /**
      * 查询作业
      */
@@ -47,6 +51,10 @@ export declare class Client extends AbstractClient {
      * 删除资源版本
      */
     DeleteResourceConfigs(req: DeleteResourceConfigsRequest, cb?: (error: string, rep: DeleteResourceConfigsResponse) => void): Promise<DeleteResourceConfigsResponse>;
+    /**
+     * 检查快照是否可用
+     */
+    CheckSavepoint(req: CheckSavepointRequest, cb?: (error: string, rep: CheckSavepointResponse) => void): Promise<CheckSavepointResponse>;
     /**
      * 创建资源配置接口
      */

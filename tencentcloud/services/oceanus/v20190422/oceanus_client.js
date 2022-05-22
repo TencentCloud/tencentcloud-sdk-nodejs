@@ -52,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateResource", req, cb);
     }
     /**
-     * 获取资源关联作业信息
+     * 查找Savepoint列表
      */
-    async DescribeResourceRelatedJobs(req, cb) {
-        return this.request("DescribeResourceRelatedJobs", req, cb);
+    async DescribeJobSavepoint(req, cb) {
+        return this.request("DescribeJobSavepoint", req, cb);
     }
     /**
      * 批量启动或者恢复作业，批量操作数量上限20
@@ -68,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteResources(req, cb) {
         return this.request("DeleteResources", req, cb);
+    }
+    /**
+     * 获取资源关联作业信息
+     */
+    async DescribeResourceRelatedJobs(req, cb) {
+        return this.request("DescribeResourceRelatedJobs", req, cb);
     }
     /**
      * 查询作业
@@ -86,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteResourceConfigs(req, cb) {
         return this.request("DeleteResourceConfigs", req, cb);
+    }
+    /**
+     * 检查快照是否可用
+     */
+    async CheckSavepoint(req, cb) {
+        return this.request("CheckSavepoint", req, cb);
     }
     /**
      * 创建资源配置接口

@@ -49,6 +49,31 @@ export interface CreateResourceRequest {
     WorkSpaceId?: string;
 }
 /**
+ * CheckSavepoint请求参数结构体
+ */
+export interface CheckSavepointRequest {
+    /**
+      * 作业 id
+      */
+    JobId: string;
+    /**
+      * 快照资源 id
+      */
+    SerialId: string;
+    /**
+      * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+      */
+    RecordType: number;
+    /**
+      * 快照路径，目前只支持 cos 路径
+      */
+    SavepointPath: string;
+    /**
+      * 工作空间 id
+      */
+    WorkSpaceId: string;
+}
+/**
  * CreateJob请求参数结构体
  */
 export interface CreateJobRequest {
@@ -334,6 +359,71 @@ export interface DeleteTableConfigRequest {
     WorkSpaceId?: string;
 }
 /**
+ * 描述Savepoint信息
+ */
+export interface Savepoint {
+    /**
+      * 主键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id: number;
+    /**
+      * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionId: number;
+    /**
+      * 状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: number;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: number;
+    /**
+      * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * 大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Size: number;
+    /**
+      * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RecordType: number;
+    /**
+      * 运行作业实例的顺序 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JobRuntimeId: number;
+    /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 固定超时时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Timeout: number;
+    /**
+      * 快照 serialId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SerialId: string;
+}
+/**
  * 系统资源返回值
  */
 export interface SystemResourceItem {
@@ -513,6 +603,44 @@ export interface ResourceLocParam {
     Region?: string;
 }
 /**
+ * DescribeJobSavepoint请求参数结构体
+ */
+export interface DescribeJobSavepointRequest {
+    /**
+      * 作业 SerialId
+      */
+    JobId: string;
+    /**
+      * 分页参数，单页总数
+      */
+    Limit: number;
+    /**
+      * 分页参数，偏移量
+      */
+    Offset: number;
+    /**
+      * 工作空间 SerialId
+      */
+    WorkSpaceId?: string;
+}
+/**
+ * CheckSavepoint返回参数结构体
+ */
+export interface CheckSavepointResponse {
+    /**
+      * 资源 id
+      */
+    SerialId: string;
+    /**
+      * 1=可用，2=不可用
+      */
+    SavepointStatus: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteResourceConfigs请求参数结构体
  */
 export interface DeleteResourceConfigsRequest {
@@ -528,6 +656,35 @@ export interface DeleteResourceConfigsRequest {
       * 工作空间 SerialId
       */
     WorkSpaceId?: string;
+}
+/**
+ * DescribeJobSavepoint返回参数结构体
+ */
+export interface DescribeJobSavepointResponse {
+    /**
+      * 快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalNumber: number;
+    /**
+      * 快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Savepoint: Array<Savepoint>;
+    /**
+      * 进行中的快照列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RunningSavepoint: Array<Savepoint>;
+    /**
+      * 进行中的快照列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RunningTotalNumber: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RunJobs返回参数结构体

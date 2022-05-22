@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeResourceConfigsResponse,
   CreateResourceRequest,
+  CheckSavepointRequest,
   CreateJobRequest,
   ResourceRefDetail,
   StopJobsRequest,
@@ -33,6 +34,7 @@ import {
   CreateResourceConfigRequest,
   Property,
   DeleteTableConfigRequest,
+  Savepoint,
   SystemResourceItem,
   DescribeResourceRelatedJobsRequest,
   DeleteResourcesResponse,
@@ -40,7 +42,10 @@ import {
   ResourceConfigItem,
   DescribeResourcesRequest,
   ResourceLocParam,
+  DescribeJobSavepointRequest,
+  CheckSavepointResponse,
   DeleteResourceConfigsRequest,
+  DescribeJobSavepointResponse,
   RunJobsResponse,
   Filter,
   DeleteResourcesRequest,
@@ -114,13 +119,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取资源关联作业信息
+   * 查找Savepoint列表
    */
-  async DescribeResourceRelatedJobs(
-    req: DescribeResourceRelatedJobsRequest,
-    cb?: (error: string, rep: DescribeResourceRelatedJobsResponse) => void
-  ): Promise<DescribeResourceRelatedJobsResponse> {
-    return this.request("DescribeResourceRelatedJobs", req, cb)
+  async DescribeJobSavepoint(
+    req: DescribeJobSavepointRequest,
+    cb?: (error: string, rep: DescribeJobSavepointResponse) => void
+  ): Promise<DescribeJobSavepointResponse> {
+    return this.request("DescribeJobSavepoint", req, cb)
   }
 
   /**
@@ -141,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteResourcesResponse) => void
   ): Promise<DeleteResourcesResponse> {
     return this.request("DeleteResources", req, cb)
+  }
+
+  /**
+   * 获取资源关联作业信息
+   */
+  async DescribeResourceRelatedJobs(
+    req: DescribeResourceRelatedJobsRequest,
+    cb?: (error: string, rep: DescribeResourceRelatedJobsResponse) => void
+  ): Promise<DescribeResourceRelatedJobsResponse> {
+    return this.request("DescribeResourceRelatedJobs", req, cb)
   }
 
   /**
@@ -171,6 +186,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteResourceConfigsResponse) => void
   ): Promise<DeleteResourceConfigsResponse> {
     return this.request("DeleteResourceConfigs", req, cb)
+  }
+
+  /**
+   * 检查快照是否可用
+   */
+  async CheckSavepoint(
+    req: CheckSavepointRequest,
+    cb?: (error: string, rep: CheckSavepointResponse) => void
+  ): Promise<CheckSavepointResponse> {
+    return this.request("CheckSavepoint", req, cb)
   }
 
   /**

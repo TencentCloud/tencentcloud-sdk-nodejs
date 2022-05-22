@@ -1602,6 +1602,18 @@ export interface NodeDefine {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Location: number
+
+  /**
+      * 节点类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodeType: string
+
+  /**
+      * 节点状态：1-运行,2-下线
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodeDefineStatus: number
 }
 
 /**
@@ -2144,6 +2156,11 @@ export interface CreateProbeTasksRequest {
    * 插件类型
    */
   PluginSource?: string
+
+  /**
+   * 客户度ID
+   */
+  ClientNum?: string
 }
 
 /**
@@ -2745,6 +2762,11 @@ export interface DeleteProbeTaskResponse {
  * CreateProbeTasks返回参数结构体
  */
 export interface CreateProbeTasksResponse {
+  /**
+   * 任务ID列表
+   */
+  TaskIDs: Array<string>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
