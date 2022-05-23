@@ -51,6 +51,7 @@ import {
   SelectedItems,
   Cluster,
   DescribeMeshListResponse,
+  TracingZipkin,
   APM,
   ResourceRequirements,
   ClusterStatus,

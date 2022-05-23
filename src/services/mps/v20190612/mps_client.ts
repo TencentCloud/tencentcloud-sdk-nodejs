@@ -413,7 +413,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义内容智能识别模板。
+   * 修改用户自定义内容审核模板。
    */
   async ModifyContentReviewTemplate(
     req: ModifyContentReviewTemplateRequest,
@@ -864,7 +864,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口仅用于定制开发的特殊场景，除非云视频处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
+   * 本接口仅用于定制开发的特殊场景，除非云媒体处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
    */
   async ExecuteFunction(
     req: ExecuteFunctionRequest,
@@ -999,7 +999,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义内容智能识别模板。
+   * 删除用户自定义内容审核模板。
    */
   async DeleteContentReviewTemplate(
     req: DeleteContentReviewTemplateRequest,
@@ -1069,7 +1069,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据内容智能识别模板唯一标识，获取内容智能识别模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置内容智能识别模板。
+   * 根据智能审核模板唯一标识，获取智能审核模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置智能审核模板。
    */
   async DescribeContentReviewTemplates(
     req: DescribeContentReviewTemplatesRequest,

@@ -204,12 +204,12 @@ export interface WorkflowInfo {
       */
     Trigger: WorkflowTrigger;
     /**
-      * 视频处理的文件输出存储位置。
+      * 媒体处理的文件输出存储位置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OutputStorage: TaskOutputStorage;
     /**
-      * 视频处理类型任务参数。
+      * 媒体处理类型任务参数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MediaProcessTask: MediaProcessTaskInput;
@@ -238,7 +238,7 @@ export interface WorkflowInfo {
       */
     TaskPriority: number;
     /**
-      * 视频处理生成的文件输出的目标目录，如`/movie/201907/`。
+      * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。
       */
     OutputDir: string;
     /**
@@ -338,7 +338,7 @@ export interface AiReviewTaskProhibitedAsrResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -430,7 +430,7 @@ export interface AiReviewTaskProhibitedOcrResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -528,7 +528,7 @@ export interface AiAnalysisTaskCoverResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -626,7 +626,7 @@ export interface AiReviewPoliticalOcrTaskInput {
     Definition: number;
 }
 /**
- * 视频处理的输入对象信息。
+ * 媒体处理的输入对象信息。
  */
 export interface MediaInputInfo {
     /**
@@ -634,11 +634,11 @@ export interface MediaInputInfo {
       */
     Type: string;
     /**
-      * 当 Type 为 COS 时有效，则该项为必填，表示视频处理 COS 对象信息。
+      * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 对象信息。
       */
     CosInputInfo?: CosInputInfo;
     /**
-      * 当 Type 为 URL 时有效，则该项为必填，表示视频处理 URL 对象信息。
+      * 当 Type 为 URL 时有效，则该项为必填，表示媒体处理 URL 对象信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UrlInputInfo?: UrlInputInfo;
@@ -656,15 +656,15 @@ export interface CreateWorkflowRequest {
       */
     Trigger: WorkflowTrigger;
     /**
-      * 视频处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
+      * 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
       */
     OutputStorage?: TaskOutputStorage;
     /**
-      * 视频处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。
+      * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与触发文件所在的目录一致。
       */
     OutputDir?: string;
     /**
-      * 视频处理类型任务参数。
+      * 媒体处理类型任务参数。
       */
     MediaProcessTask?: MediaProcessTaskInput;
     /**
@@ -747,7 +747,7 @@ export interface AiReviewTaskPoliticalOcrResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -961,7 +961,7 @@ export interface DeleteAIRecognitionTemplateResponse {
     RequestId?: string;
 }
 /**
- * 视频处理任务中的马赛克参数类型
+ * 媒体处理任务中的马赛克参数类型
  */
 export interface MosaicInput {
     /**
@@ -1236,7 +1236,7 @@ export interface ExecuteFunctionResponse {
     /**
       * 处理结果打包后的字符串，具体与后台一同协调。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1323,7 +1323,7 @@ export interface AiRecognitionTaskFaceResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -1538,19 +1538,19 @@ export interface MediaAiAnalysisCoverItem {
     Confidence: number;
 }
 /**
- * 视频处理 COS 对象信息。
+ * 媒体处理 COS 对象信息。
  */
 export interface CosInputInfo {
     /**
-      * 视频处理对象文件所在的 COS Bucket 名，如 TopRankVideo-125xxx88。
+      * 媒体处理对象文件所在的 COS Bucket 名，如 TopRankVideo-125xxx88。
       */
     Bucket: string;
     /**
-      * 视频处理对象文件所在的 COS Bucket 所属园区，如 ap-chongqing。
+      * 媒体处理对象文件所在的 COS Bucket 所属园区，如 ap-chongqing。
       */
     Region: string;
     /**
-      * 视频处理对象文件的输入路径，如`/movie/201907/WildAnimal.mov`。
+      * 媒体处理对象文件的输入路径，如`/movie/201907/WildAnimal.mov`。
       */
     Object: string;
 }
@@ -1767,7 +1767,7 @@ export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -2015,7 +2015,7 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
     Definition: number;
 }
 /**
- * 视频处理任务类型
+ * 媒体处理任务类型
  */
 export interface MediaProcessTaskInput {
     /**
@@ -2044,15 +2044,15 @@ export interface MediaProcessTaskInput {
     AdaptiveDynamicStreamingTaskSet?: Array<AdaptiveDynamicStreamingTaskInput>;
 }
 /**
- * 视频处理 COS 输出对象信息。
+ * 媒体处理 COS 输出对象信息。
  */
 export interface CosOutputStorage {
     /**
-      * 视频处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
+      * 媒体处理生成的文件输出的目标 Bucket 名，如 TopRankVideo-125xxx88。如果不填，表示继承上层。
       */
     Bucket?: string;
     /**
-      * 视频处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
+      * 媒体处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
       */
     Region?: string;
 }
@@ -2226,7 +2226,7 @@ export interface AiReviewTaskTerrorismOcrResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -2256,7 +2256,7 @@ export interface AiRecognitionTaskOcrWordsResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -2397,11 +2397,11 @@ export interface EditMediaRequest {
       */
     FileInfos: Array<EditMediaFileInfo>;
     /**
-      * 视频处理输出文件的目标存储。
+      * 媒体处理输出文件的目标存储。
       */
     OutputStorage: TaskOutputStorage;
     /**
-      * 视频处理输出文件的目标路径。
+      * 媒体处理输出文件的目标路径。
       */
     OutputObjectPath: string;
     /**
@@ -2434,7 +2434,7 @@ export interface MediaProcessTaskImageSpriteResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -2462,11 +2462,11 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 转自适应码流模板详情列表。
       */
-    AdaptiveDynamicStreamingTemplateSet?: Array<AdaptiveDynamicStreamingTemplate>;
+    AdaptiveDynamicStreamingTemplateSet: Array<AdaptiveDynamicStreamingTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2514,7 +2514,7 @@ PicUrlExpireTime 时间点后图片将被删除）。
     PicUrlExpireTime: string;
 }
 /**
- * 视频处理 URL 对象信息。
+ * 媒体处理 URL 对象信息。
  */
 export interface UrlInputInfo {
     /**
@@ -2832,7 +2832,7 @@ export interface AiReviewTaskPornOcrResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -2888,15 +2888,15 @@ export interface DescribeWatermarkTemplatesRequest {
     Limit?: number;
 }
 /**
- * 视频处理输出对象信息。
+ * 媒体处理输出对象信息。
  */
 export interface TaskOutputStorage {
     /**
-      * 视频处理输出对象存储位置的类型，现在仅支持 COS。
+      * 媒体处理输出对象存储位置的类型，现在仅支持 COS。
       */
     Type: string;
     /**
-      * 当 Type 为 COS 时有效，则该项为必填，表示视频处理 COS 输出位置。
+      * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 输出位置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CosOutputStorage?: CosOutputStorage;
@@ -3067,7 +3067,7 @@ export interface MediaProcessTaskAnimatedGraphicResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -3097,7 +3097,7 @@ export interface AiAnalysisTaskTagResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -3132,19 +3132,19 @@ export interface AiAnalysisTaskTagOutput {
  */
 export interface ProcessMediaRequest {
     /**
-      * 视频处理的文件输入信息。
+      * 媒体处理的文件输入信息。
       */
     InputInfo: MediaInputInfo;
     /**
-      * 视频处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+      * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
       */
     OutputStorage?: TaskOutputStorage;
     /**
-      * 视频处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。
+      * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。
       */
     OutputDir?: string;
     /**
-      * 视频处理类型任务参数。
+      * 媒体处理类型任务参数。
       */
     MediaProcessTask?: MediaProcessTaskInput;
     /**
@@ -3185,7 +3185,7 @@ export interface AiRecognitionTaskOcrFullTextResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -3215,7 +3215,7 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -3328,7 +3328,7 @@ export interface MediaProcessTaskTranscodeResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -3550,11 +3550,11 @@ export interface DescribeWorkflowsResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 工作流信息数组。
       */
-    WorkflowInfoSet?: Array<WorkflowInfo>;
+    WorkflowInfoSet: Array<WorkflowInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3907,7 +3907,7 @@ export interface AnimatedGraphicTaskInput {
  */
 export interface DeleteContentReviewTemplateRequest {
     /**
-      * 内容智能识别模板唯一标识。
+      * 内容审核模板唯一标识。
       */
     Definition: number;
 }
@@ -4278,7 +4278,7 @@ export interface AiReviewTaskTerrorismResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -4440,7 +4440,7 @@ export interface CreateSnapshotByTimeOffsetTemplateResponse {
     /**
       * 时间点截图模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4451,15 +4451,15 @@ export interface CreateSnapshotByTimeOffsetTemplateResponse {
  */
 export interface ModifyContentReviewTemplateRequest {
     /**
-      * 内容智能识别模板唯一标识。
+      * 内容审核模板唯一标识。
       */
     Definition: number;
     /**
-      * 内容智能识别模板名称，长度限制：64 个字符。
+      * 内容审核模板名称，长度限制：64 个字符。
       */
     Name?: string;
     /**
-      * 内容智能识别模板描述信息，长度限制：256 个字符。
+      * 内容审核模板描述信息，长度限制：256 个字符。
       */
     Comment?: string;
     /**
@@ -4482,7 +4482,7 @@ export interface ModifyContentReviewTemplateRequest {
       */
     ProhibitedConfigure?: ProhibitedConfigureInfoForUpdate;
     /**
-      * 用户自定义内容智能识别控制参数。
+      * 用户自定义内容审核控制参数。
       */
     UserDefineConfigure?: UserDefineConfigureInfoForUpdate;
 }
@@ -4531,7 +4531,7 @@ export interface CreateAdaptiveDynamicStreamingTemplateResponse {
     /**
       * 自适应转码模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4699,7 +4699,7 @@ export interface CreateSampleSnapshotTemplateResponse {
     /**
       * 采样截图模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4851,7 +4851,7 @@ export interface AiReviewTaskPoliticalAsrResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -4980,7 +4980,7 @@ export interface AiReviewTaskPornResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -5409,7 +5409,7 @@ export interface CreateAIAnalysisTemplateResponse {
     /**
       * 视频内容分析模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5424,7 +5424,7 @@ export interface MediaProcessTaskSampleSnapshotResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -5630,7 +5630,7 @@ export interface AiAnalysisTaskFrameTagResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -5701,7 +5701,7 @@ export interface AiRecognitionTaskAsrFullTextResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -5910,7 +5910,7 @@ export interface DeleteWordSamplesResponse {
     RequestId?: string;
 }
 /**
- * 视频处理任务中的水印参数类型
+ * 媒体处理任务中的水印参数类型
  */
 export interface WatermarkInput {
     /**
@@ -6212,7 +6212,7 @@ export interface CreateContentReviewTemplateRequest {
  */
 export interface DescribeContentReviewTemplatesRequest {
     /**
-      * 内容智能识别模板唯一标识过滤条件，数组长度限制：50。
+      * 智能审核模板唯一标识过滤条件，数组长度限制：50。
       */
     Definitions?: Array<number>;
     /**
@@ -6267,11 +6267,11 @@ export interface DescribeImageSpriteTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 雪碧图模板详情列表。
       */
-    ImageSpriteTemplateSet?: Array<ImageSpriteTemplate>;
+    ImageSpriteTemplateSet: Array<ImageSpriteTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6282,27 +6282,31 @@ export interface DescribeImageSpriteTemplatesResponse {
  */
 export interface TaskNotifyConfig {
     /**
-      * CMQ 的模型，有 Queue 和 Topic 两种，目前仅支持 Queue。
+      * CMQ或TDMQ-CMQ 的模型，有 Queue 和 Topic 两种。
       */
     CmqModel: string;
     /**
-      * CMQ 的园区，如 sh，bj 等。
+      * CMQ或TDMQ-CMQ 的园区，如 sh，bj 等。
       */
     CmqRegion: string;
     /**
-      * 当模型为 Queue 时有效，表示接收事件通知的 CMQ 的队列名。
-      */
-    QueueName?: string;
-    /**
-      * 当模型为 Topic 时有效，表示接收事件通知的 CMQ 的主题名。
+      * 当模型为 Topic 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的主题名。
       */
     TopicName?: string;
+    /**
+      * 当模型为 Queue 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的队列名。
+      */
+    QueueName?: string;
     /**
       * 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。
       */
     NotifyMode?: string;
     /**
-      * 通知类型，默认CMQ，指定URL时HTTP回调推送到 NotifyUrl 指定的地址。
+      * 通知类型，可选值：
+<li>CMQ：已下线，建议切换到TDMQ-CMQ</li>
+<li>TDMQ-CMQ：消息队列</li>
+<li>URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 </li>
+目前 默认CMQ。
       */
     NotifyType?: string;
     /**
@@ -6319,7 +6323,7 @@ export interface AiReviewTaskPoliticalResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -6775,11 +6779,11 @@ export interface DescribeSnapshotByTimeOffsetTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 指定时间点截图模板详情列表。
       */
-    SnapshotByTimeOffsetTemplateSet?: Array<SnapshotByTimeOffsetTemplate>;
+    SnapshotByTimeOffsetTemplateSet: Array<SnapshotByTimeOffsetTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6985,7 +6989,7 @@ export interface CreateTranscodeTemplateResponse {
     /**
       * 转码模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7324,7 +7328,7 @@ export interface ModifyAIAnalysisTemplateRequest {
  */
 export interface LiveStreamProcessTask {
     /**
-      * 视频处理任务 ID。
+      * 媒体处理任务 ID。
       */
     TaskId: string;
     /**
@@ -7353,11 +7357,11 @@ export interface CreateWatermarkTemplateResponse {
     /**
       * 水印模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 水印图片地址，仅当 Type 为 image，该字段有效。
       */
-    ImageUrl?: string;
+    ImageUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7370,11 +7374,11 @@ export interface DescribeSampleSnapshotTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 采样截图模板详情列表。
       */
-    SampleSnapshotTemplateSet?: Array<SampleSnapshotTemplate>;
+    SampleSnapshotTemplateSet: Array<SampleSnapshotTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7566,11 +7570,11 @@ export interface DescribeWatermarkTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 水印模板详情列表。
       */
-    WatermarkTemplateSet?: Array<WatermarkTemplate>;
+    WatermarkTemplateSet: Array<WatermarkTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7850,7 +7854,7 @@ export interface AiRecognitionTaskAsrWordsResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -7935,11 +7939,11 @@ export interface CreateSampleSnapshotTemplateRequest {
     FillType?: string;
 }
 /**
- * 视频处理任务信息
+ * 媒体处理任务信息
  */
 export interface WorkflowTask {
     /**
-      * 视频处理任务 ID。
+      * 媒体处理任务 ID。
       */
     TaskId: string;
     /**
@@ -7957,7 +7961,7 @@ export interface WorkflowTask {
       */
     Message: string;
     /**
-      * 视频处理的目标文件信息。
+      * 媒体处理的目标文件信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InputInfo: MediaInputInfo;
@@ -7967,7 +7971,7 @@ export interface WorkflowTask {
       */
     MetaData: MediaMetaData;
     /**
-      * 视频处理任务的执行状态与结果。
+      * 媒体处理任务的执行状态与结果。
       */
     MediaProcessResultSet: Array<MediaProcessTaskResult>;
     /**
@@ -7992,7 +7996,7 @@ export interface AiReviewTaskPornAsrResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -8200,11 +8204,11 @@ export interface DescribeTranscodeTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 转码模板详情列表。
       */
-    TranscodeTemplateSet?: Array<TranscodeTemplate>;
+    TranscodeTemplateSet: Array<TranscodeTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8235,11 +8239,11 @@ export interface DescribeAnimatedGraphicsTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 转动图模板详情列表。
       */
-    AnimatedGraphicsTemplateSet?: Array<AnimatedGraphicsTemplate>;
+    AnimatedGraphicsTemplateSet: Array<AnimatedGraphicsTemplate>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8329,7 +8333,7 @@ export interface CreateAnimatedGraphicsTemplateResponse {
     /**
       * 转动图模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8344,7 +8348,7 @@ export interface AiAnalysisTaskClassificationResult {
       */
     Status: string;
     /**
-      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
       */
     ErrCodeExt: string;
     /**
@@ -8454,6 +8458,57 @@ export interface AiRecognitionTaskFaceResultItem {
       * 人物出现的片段结果集。
       */
     SegmentSet: Array<AiRecognitionTaskFaceSegmentItem>;
+    /**
+      * 人物性别：
+<li>Male：男性；</li>
+<li>Female：女性。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Gender: string;
+    /**
+      * 人物出生日期。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Birthday: string;
+    /**
+      * 人物职业或者职务。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Profession: string;
+    /**
+      * 人物毕业院校。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SchoolOfGraduation: string;
+    /**
+      * 人物简介。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Abstract: string;
+    /**
+      * 人物出生地或者籍贯。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PlaceOfBirth: string;
+    /**
+      * 人物类型：
+<li>Politician：官员；</li>
+<li>Artist：艺人。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PersonType: string;
+    /**
+      * 敏感度标注：
+<li>Normal：正常；</li>
+<li>Sensitive：敏感。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 截图链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
 }
 /**
  * 智能分类任务输入类型
@@ -8513,7 +8568,7 @@ export interface CreateImageSpriteTemplateResponse {
     /**
       * 雪碧图模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8549,7 +8604,7 @@ export interface ModifyWatermarkTemplateResponse {
     /**
       * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有效。
       */
-    ImageUrl?: string;
+    ImageUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -698,6 +698,11 @@ export interface TracingConfig {
    * 腾讯云 APM 服务相关参数
    */
   APM?: APM
+
+  /**
+   * 启动第三方服务器的地址
+   */
+  Zipkin?: TracingZipkin
 }
 
 /**
@@ -854,6 +859,16 @@ export interface DescribeMeshListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 调用追踪的Zipkin设置
+ */
+export interface TracingZipkin {
+  /**
+   * Zipkin调用地址
+   */
+  Address: string
 }
 
 /**

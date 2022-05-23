@@ -1359,6 +1359,11 @@ export interface AutoCalloutTaskInfo {
    * 任务状态0初始 1运行中 2已完成 3结束中 4已结束
    */
   State: number
+
+  /**
+   * 任务Id
+   */
+  TaskId: number
 }
 
 /**

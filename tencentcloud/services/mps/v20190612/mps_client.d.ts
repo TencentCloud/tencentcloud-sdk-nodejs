@@ -17,7 +17,7 @@ export declare class Client extends AbstractClient {
      */
     ParseNotification(req: ParseNotificationRequest, cb?: (error: string, rep: ParseNotificationResponse) => void): Promise<ParseNotificationResponse>;
     /**
-     * 修改用户自定义内容智能识别模板。
+     * 修改用户自定义内容审核模板。
      */
     ModifyContentReviewTemplate(req: ModifyContentReviewTemplateRequest, cb?: (error: string, rep: ModifyContentReviewTemplateResponse) => void): Promise<ModifyContentReviewTemplateResponse>;
     /**
@@ -204,7 +204,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePersonSample(req: CreatePersonSampleRequest, cb?: (error: string, rep: CreatePersonSampleResponse) => void): Promise<CreatePersonSampleResponse>;
     /**
-     * 本接口仅用于定制开发的特殊场景，除非云视频处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
+     * 本接口仅用于定制开发的特殊场景，除非云媒体处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
      */
     ExecuteFunction(req: ExecuteFunctionRequest, cb?: (error: string, rep: ExecuteFunctionResponse) => void): Promise<ExecuteFunctionResponse>;
     /**
@@ -273,7 +273,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeImageSpriteTemplates(req: DescribeImageSpriteTemplatesRequest, cb?: (error: string, rep: DescribeImageSpriteTemplatesResponse) => void): Promise<DescribeImageSpriteTemplatesResponse>;
     /**
-     * 删除用户自定义内容智能识别模板。
+     * 删除用户自定义内容审核模板。
      */
     DeleteContentReviewTemplate(req: DeleteContentReviewTemplateRequest, cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void): Promise<DeleteContentReviewTemplateResponse>;
     /**
@@ -301,7 +301,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTranscodeTemplates(req: DescribeTranscodeTemplatesRequest, cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void): Promise<DescribeTranscodeTemplatesResponse>;
     /**
-     * 根据内容智能识别模板唯一标识，获取内容智能识别模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置内容智能识别模板。
+     * 根据智能审核模板唯一标识，获取智能审核模板详情列表。返回结果包含符合条件的所有用户自定义模板及系统预置智能审核模板。
      */
     DescribeContentReviewTemplates(req: DescribeContentReviewTemplatesRequest, cb?: (error: string, rep: DescribeContentReviewTemplatesResponse) => void): Promise<DescribeContentReviewTemplatesResponse>;
 }

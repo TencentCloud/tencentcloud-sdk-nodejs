@@ -1597,6 +1597,11 @@ export interface ModifyDomainOwnerBatchRequest {
    * 是否同时转移对应的 DNS 解析域名，默认false
    */
   TransferDns?: boolean
+
+  /**
+   * 转入账户的appid。
+   */
+  NewOwnerAppId?: string
 }
 
 /**

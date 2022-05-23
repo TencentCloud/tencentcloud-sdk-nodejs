@@ -6431,7 +6431,7 @@ MyKid 儿童卡
   Type: string
 
   /**
-   * 出生日期（目前该字段仅支持IKAD劳工证）
+   * 出生日期（目前该字段仅支持IKAD劳工证、MyKad 身份证）
    */
   Birthday: string
 
