@@ -628,7 +628,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddAssetImageRegistryRegistryDetail", req, cb);
     }
     /**
-     * 运行时文件查杀事件列表
+     * 查询运行时文件查杀事件列表
      */
     async DescribeVirusList(req, cb) {
         return this.request("DescribeVirusList", req, cb);

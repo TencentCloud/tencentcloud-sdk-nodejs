@@ -607,6 +607,16 @@ export interface DescribeRoleListRequest {
 export type DescribeUserSAMLConfigRequest = null
 
 /**
+ * TagRole返回参数结构体
+ */
+export interface TagRoleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * PutRolePermissionsBoundary请求参数结构体
  */
 export interface PutRolePermissionsBoundaryRequest {
@@ -1436,6 +1446,16 @@ export interface DetachRolePolicyRequest {
    * 策略名，入参PolicyId与PolicyName二选一
    */
   PolicyName?: string
+}
+
+/**
+ * UntagRole返回参数结构体
+ */
+export interface UntagRoleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2610,6 +2630,26 @@ export interface ListEntitiesForPolicyRequest {
    * 可取值 'All'、'User'、'Group' 和 'Role'，'All' 表示获取所有实体类型，'User' 表示只获取子账号，'Group' 表示只获取用户组，'Role' 表示只获取角色，默认取 'All'
    */
   EntityFilter?: string
+}
+
+/**
+ * TagRole请求参数结构体
+ */
+export interface TagRoleRequest {
+  /**
+   * 标签
+   */
+  Tags: Array<RoleTags>
+
+  /**
+   * 角色名，与角色ID至少输入一个
+   */
+  RoleName?: string
+
+  /**
+   * 角色ID，与角色名至少输入一个
+   */
+  RoleId?: string
 }
 
 /**
@@ -3853,6 +3893,26 @@ export interface DeleteOIDCConfigRequest {
    * OIDC身份提供商名称
    */
   Name: string
+}
+
+/**
+ * UntagRole请求参数结构体
+ */
+export interface UntagRoleRequest {
+  /**
+   * 标签键
+   */
+  TagKeys: Array<string>
+
+  /**
+   * 角色名，与角色ID至少输入一个
+   */
+  RoleName?: string
+
+  /**
+   * 角色ID，与角色名至少输入一个
+   */
+  RoleId?: string
 }
 
 /**

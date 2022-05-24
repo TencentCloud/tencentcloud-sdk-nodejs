@@ -76,28 +76,44 @@ export interface LocalDiskInfo {
 }
 
 /**
- * 实例操作记录中的流程任务信息
+ * 索引生命周期字段
  */
-export interface TaskDetail {
+export interface IndexPolicyField {
   /**
-   * 任务名
-   */
-  Name: string
+      * 是否开启warm阶段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WarmEnable?: string
 
   /**
-   * 任务进度
-   */
-  Progress: number
+      * warm阶段转入时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WarmMinAge?: string
 
   /**
-   * 任务完成时间
-   */
-  FinishTime: string
+      * 是否开启cold阶段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ColdEnable?: string
 
   /**
-   * 子任务
-   */
-  SubTasks: Array<SubTaskDetail>
+      * cold阶段转入时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ColdMinAge?: string
+
+  /**
+      * 是否开启frozen阶段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrozenEnable?: string
+
+  /**
+      * frozen阶段转入时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrozenMinAge?: string
 }
 
 /**
@@ -150,6 +166,16 @@ export interface NodeInfo {
 }
 
 /**
+ * UpgradeInstance返回参数结构体
+ */
+export interface UpgradeInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateJdk请求参数结构体
  */
 export interface UpdateJdkRequest {
@@ -175,13 +201,19 @@ export interface UpdateJdkRequest {
 }
 
 /**
- * GetRequestTargetNodeTypes请求参数结构体
+ * DescribeIndexMeta返回参数结构体
  */
-export interface GetRequestTargetNodeTypesRequest {
+export interface DescribeIndexMetaResponse {
   /**
-   * 实例ID
+      * 索引元数据字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexMetaField: IndexMetaField
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -228,6 +260,16 @@ export interface DescribeInstanceOperationsRequest {
    * 分页大小
    */
   Limit: number
+}
+
+/**
+ * CreateIndex返回参数结构体
+ */
+export interface CreateIndexResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -316,6 +358,41 @@ export interface EsPublicAcl {
 }
 
 /**
+ * 后备索引元数据字段
+ */
+export interface BackingIndexMetaField {
+  /**
+      * 后备索引名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexName: string
+
+  /**
+      * 后备索引状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexStatus: string
+
+  /**
+      * 后备索引存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexStorage: number
+
+  /**
+      * 后备索引当前生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexPhrase: string
+
+  /**
+      * 后备索引创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexCreateTime: string
+}
+
+/**
  * ik插件词典信息
  */
 export interface DictInfo {
@@ -374,6 +451,29 @@ export interface CreateInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 索引配置字段
+ */
+export interface IndexSettingsField {
+  /**
+      * 索引主分片数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumberOfShards?: string
+
+  /**
+      * 索引副本分片数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NumberOfReplicas?: string
+
+  /**
+      * 索引刷新频率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RefreshInterval?: string
 }
 
 /**
@@ -465,6 +565,21 @@ export interface UpdateDictionariesRequest {
    * 是否强制重启集群。默认值false
    */
   ForceRestart?: boolean
+}
+
+/**
+ * 多可用区部署时可用区的详细信息
+ */
+export interface ZoneDetail {
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * 子网ID
+   */
+  SubnetId: string
 }
 
 /**
@@ -570,6 +685,61 @@ export interface NodeView {
    * 是否为隐藏可用区
    */
   Hidden: boolean
+}
+
+/**
+ * DescribeIndexList请求参数结构体
+ */
+export interface DescribeIndexListRequest {
+  /**
+   * 索引类型。auto：自治索引；normal：普通索引
+   */
+  IndexType: string
+
+  /**
+   * ES集群ID
+   */
+  InstanceId?: string
+
+  /**
+   * 索引名，若填空则获取所有索引
+   */
+  IndexName?: string
+
+  /**
+   * 集群访问用户名
+   */
+  Username?: string
+
+  /**
+   * 集群访问密码
+   */
+  Password?: string
+
+  /**
+   * 分页起始位置
+   */
+  Offset?: number
+
+  /**
+   * 一页展示数量
+   */
+  Limit?: number
+
+  /**
+   * 排序字段，支持索引名：IndexName、索引存储量：IndexStorage、索引创建时间：IndexCreateTime
+   */
+  OrderBy?: string
+
+  /**
+   * 过滤索引状态
+   */
+  IndexStatusList?: Array<string>
+
+  /**
+   * 排序顺序，支持asc、desc
+   */
+  Order?: string
 }
 
 /**
@@ -1259,6 +1429,89 @@ export interface DescribeInstanceLogsResponse {
 }
 
 /**
+ * 索引元数据字段
+ */
+export interface IndexMetaField {
+  /**
+      * 索引类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexType: string
+
+  /**
+      * 索引名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexName: string
+
+  /**
+      * 索引状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexStatus: string
+
+  /**
+      * 索引存储大小，单位Byte
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexStorage: number
+
+  /**
+      * 索引创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexCreateTime: string
+
+  /**
+      * 后备索引
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackingIndices: Array<BackingIndexMetaField>
+
+  /**
+      * 索引所属集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterId: string
+
+  /**
+      * 索引所属集群名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterName: string
+
+  /**
+      * 索引所属集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterVersion: string
+
+  /**
+      * 索引生命周期字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexPolicyField: IndexPolicyField
+
+  /**
+      * 索引自治字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexOptionsField: IndexOptionsField
+
+  /**
+      * 索引配置字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexSettingsField: IndexSettingsField
+
+  /**
+      * 索引所属集群APP ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AppId: number
+}
+
+/**
  * UpdatePlugins返回参数结构体
  */
 export interface UpdatePluginsResponse {
@@ -1309,18 +1562,13 @@ export interface RestartInstanceRequest {
 }
 
 /**
- * 多可用区部署时可用区的详细信息
+ * RestartKibana返回参数结构体
  */
-export interface ZoneDetail {
+export interface RestartKibanaResponse {
   /**
-   * 可用区
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Zone: string
-
-  /**
-   * 子网ID
-   */
-  SubnetId: string
+  RequestId?: string
 }
 
 /**
@@ -1384,23 +1632,155 @@ export interface DescribeInstancesRequest {
 }
 
 /**
- * UpdateDiagnoseSettings请求参数结构体
+ * CreateIndex请求参数结构体
  */
-export interface UpdateDiagnoseSettingsRequest {
+export interface CreateIndexRequest {
   /**
-   * ES实例ID
+   * ES集群ID
    */
   InstanceId: string
 
   /**
-   * 0：开启智能运维；-1：关闭智能运维
+   * 创建的索引类型。auto：自治索引；normal：普通索引
    */
-  Status?: number
+  IndexType: string
 
   /**
-   * 智能运维每天定时巡检时间
+   * 创建的索引名
    */
-  CronTime?: string
+  IndexName: string
+
+  /**
+   * 创建的索引元数据JSON，如mappings、settings
+   */
+  IndexMetaJson?: string
+
+  /**
+   * 集群访问用户名
+   */
+  Username?: string
+
+  /**
+   * 集群访问密码
+   */
+  Password?: string
+}
+
+/**
+ * 集群维度视图数据
+ */
+export interface ClusterView {
+  /**
+   * 集群健康状态
+   */
+  Health?: number
+
+  /**
+   * 集群是否可见
+   */
+  Visible: number
+
+  /**
+   * 集群是否熔断
+   */
+  Break: number
+
+  /**
+   * 平均磁盘使用率
+   */
+  AvgDiskUsage: number
+
+  /**
+   * 平均内存使用率
+   */
+  AvgMemUsage: number
+
+  /**
+   * 平均cpu使用率
+   */
+  AvgCpuUsage: number
+
+  /**
+   * 集群总存储大小
+   */
+  TotalDiskSize: number
+
+  /**
+   * 客户端请求节点
+   */
+  TargetNodeTypes: Array<string>
+
+  /**
+   * 在线节点数
+   */
+  NodeNum: number
+
+  /**
+   * 总节点数
+   */
+  TotalNodeNum: number
+
+  /**
+   * 数据节点数
+   */
+  DataNodeNum: number
+
+  /**
+   * 索引数
+   */
+  IndexNum: number
+
+  /**
+   * 文档数
+   */
+  DocNum: number
+
+  /**
+   * 磁盘已使用字节数
+   */
+  DiskUsedInBytes: number
+
+  /**
+   * 分片个数
+   */
+  ShardNum: number
+
+  /**
+   * 主分片个数
+   */
+  PrimaryShardNum: number
+
+  /**
+   * 迁移中的分片个数
+   */
+  RelocatingShardNum: number
+
+  /**
+   * 初始化中的分片个数
+   */
+  InitializingShardNum: number
+
+  /**
+   * 未分配的分片个数
+   */
+  UnassignedShardNum: number
+
+  /**
+   * 企业版COS存储容量大小，单位GB
+   */
+  TotalCosStorage: number
+
+  /**
+      * 企业版集群可搜索快照cos存放的bucket名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SearchableSnapshotCosBucket: string
+
+  /**
+      * 企业版集群可搜索快照cos所属appid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SearchableSnapshotCosAppId: string
 }
 
 /**
@@ -1557,6 +1937,11 @@ export interface UpdateInstanceRequest {
    * Cerebro内网访问状态
    */
   CerebroPrivateAccess?: string
+
+  /**
+   * 新增或修改的配置组信息
+   */
+  EsConfigSet?: EsConfigSetInfo
 }
 
 /**
@@ -1665,13 +2050,13 @@ export interface UpdatePluginsRequest {
 }
 
 /**
- * UpdateRequestTargetNodeTypes返回参数结构体
+ * GetRequestTargetNodeTypes请求参数结构体
  */
-export interface UpdateRequestTargetNodeTypesResponse {
+export interface GetRequestTargetNodeTypesRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -1751,6 +2136,41 @@ export interface EsAcl {
 }
 
 /**
+ * UpdateIndex请求参数结构体
+ */
+export interface UpdateIndexRequest {
+  /**
+   * ES集群ID
+   */
+  InstanceId: string
+
+  /**
+   * 更新的索引类型。auto：自治索引；normal：普通索引
+   */
+  IndexType: string
+
+  /**
+   * 更新的索引名
+   */
+  IndexName: string
+
+  /**
+   * 更新的索引元数据JSON，如mappings、settings
+   */
+  UpdateMetaJson?: string
+
+  /**
+   * 集群访问用户名
+   */
+  Username?: string
+
+  /**
+   * 集群访问密码
+   */
+  Password?: string
+}
+
+/**
  * 实例专用主节点相关信息
  */
 export interface MasterNodeInfo {
@@ -1791,6 +2211,78 @@ export interface MasterNodeInfo {
 }
 
 /**
+ * 索引自治字段
+ */
+export interface IndexOptionsField {
+  /**
+      * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireMaxAge?: string
+
+  /**
+      * 过期大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireMaxSize?: string
+
+  /**
+      * 滚动周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RolloverMaxAge?: string
+
+  /**
+      * 是否开启动态滚动
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RolloverDynamic?: string
+
+  /**
+      * 是否开启动态分片
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShardNumDynamic?: string
+
+  /**
+      * 时间分区字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimestampField?: string
+
+  /**
+      * 写入模式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WriteMode?: string
+}
+
+/**
+ * 实例操作记录中的流程任务信息
+ */
+export interface TaskDetail {
+  /**
+   * 任务名
+   */
+  Name: string
+
+  /**
+   * 任务进度
+   */
+  Progress: number
+
+  /**
+   * 任务完成时间
+   */
+  FinishTime: string
+
+  /**
+   * 子任务
+   */
+  SubTasks: Array<SubTaskDetail>
+}
+
+/**
  * DeleteInstance请求参数结构体
  */
 export interface DeleteInstanceRequest {
@@ -1798,6 +2290,54 @@ export interface DeleteInstanceRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * DescribeViews返回参数结构体
+ */
+export interface DescribeViewsResponse {
+  /**
+      * 集群维度视图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterView: ClusterView
+
+  /**
+      * 节点维度视图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodesView: Array<NodeView>
+
+  /**
+      * Kibana维度视图
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KibanasView: Array<KibanaView>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateJdk返回参数结构体
+ */
+export interface UpdateJdkResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestartNodes返回参数结构体
+ */
+export interface RestartNodesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1846,150 +2386,33 @@ export interface SubTaskDetail {
 }
 
 /**
- * UpdateJdk返回参数结构体
+ * DescribeIndexMeta请求参数结构体
  */
-export interface UpdateJdkResponse {
+export interface DescribeIndexMetaRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * ES集群ID
    */
-  RequestId?: string
-}
+  InstanceId: string
 
-/**
- * RestartNodes返回参数结构体
- */
-export interface RestartNodesResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 索引类型。auto：自治索引；normal：普通索引
    */
-  RequestId?: string
-}
+  IndexType: string
 
-/**
- * UpgradeInstance返回参数结构体
- */
-export interface UpgradeInstanceResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 索引名，若填空则获取所有索引
    */
-  RequestId?: string
-}
+  IndexName: string
 
-/**
- * 集群维度视图数据
- */
-export interface ClusterView {
   /**
-   * 集群健康状态
+   * 集群访问用户名
    */
-  Health?: number
+  Username?: string
 
   /**
-   * 集群是否可见
+   * 集群访问密码
    */
-  Visible: number
-
-  /**
-   * 集群是否熔断
-   */
-  Break: number
-
-  /**
-   * 平均磁盘使用率
-   */
-  AvgDiskUsage: number
-
-  /**
-   * 平均内存使用率
-   */
-  AvgMemUsage: number
-
-  /**
-   * 平均cpu使用率
-   */
-  AvgCpuUsage: number
-
-  /**
-   * 集群总存储大小
-   */
-  TotalDiskSize: number
-
-  /**
-   * 客户端请求节点
-   */
-  TargetNodeTypes: Array<string>
-
-  /**
-   * 在线节点数
-   */
-  NodeNum: number
-
-  /**
-   * 总节点数
-   */
-  TotalNodeNum: number
-
-  /**
-   * 数据节点数
-   */
-  DataNodeNum: number
-
-  /**
-   * 索引数
-   */
-  IndexNum: number
-
-  /**
-   * 文档数
-   */
-  DocNum: number
-
-  /**
-   * 磁盘已使用字节数
-   */
-  DiskUsedInBytes: number
-
-  /**
-   * 分片个数
-   */
-  ShardNum: number
-
-  /**
-   * 主分片个数
-   */
-  PrimaryShardNum: number
-
-  /**
-   * 迁移中的分片个数
-   */
-  RelocatingShardNum: number
-
-  /**
-   * 初始化中的分片个数
-   */
-  InitializingShardNum: number
-
-  /**
-   * 未分配的分片个数
-   */
-  UnassignedShardNum: number
-
-  /**
-   * 企业版COS存储容量大小，单位GB
-   */
-  TotalCosStorage: number
-
-  /**
-      * 企业版集群可搜索快照cos存放的bucket名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SearchableSnapshotCosBucket: string
-
-  /**
-      * 企业版集群可搜索快照cos所属appid
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SearchableSnapshotCosAppId: string
+  Password?: string
 }
 
 /**
@@ -2033,31 +2456,63 @@ export interface UpgradeInstanceRequest {
 }
 
 /**
- * DescribeViews返回参数结构体
+ * DeleteIndex返回参数结构体
  */
-export interface DescribeViewsResponse {
-  /**
-      * 集群维度视图
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClusterView: ClusterView
-
-  /**
-      * 节点维度视图
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NodesView: Array<NodeView>
-
-  /**
-      * Kibana维度视图
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KibanasView: Array<KibanaView>
-
+export interface DeleteIndexResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteIndex请求参数结构体
+ */
+export interface DeleteIndexRequest {
+  /**
+   * ES集群ID
+   */
+  InstanceId: string
+
+  /**
+   * 删除的索引类型。auto：自治索引；normal：普通索引
+   */
+  IndexType: string
+
+  /**
+   * 删除的索引名
+   */
+  IndexName: string
+
+  /**
+   * 集群访问用户名
+   */
+  Username?: string
+
+  /**
+   * 集群访问密码
+   */
+  Password?: string
+
+  /**
+   * 后备索引名
+   */
+  BackingIndexName?: string
+}
+
+/**
+ * 配置组信息
+ */
+export interface EsConfigSetInfo {
+  /**
+   * 配置组类型，如ldap,ad等
+   */
+  Type: string
+
+  /**
+   * "{\"order\":0,\"url\":\"ldap://10.0.1.72:389\",\"bind_dn\":\"cn=admin,dc=tencent,dc=com\",\"user_search.base_dn\":\"dc=tencent,dc=com\",\"user_search.filter\":\"(cn={0})\",\"group_search.base_dn\":\"dc=tencent,dc=com\"}"
+   */
+  EsConfig: string
 }
 
 /**
@@ -2086,9 +2541,41 @@ export interface GetRequestTargetNodeTypesResponse {
 }
 
 /**
- * RestartKibana返回参数结构体
+ * UpdateDiagnoseSettings请求参数结构体
  */
-export interface RestartKibanaResponse {
+export interface UpdateDiagnoseSettingsRequest {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 0：开启智能运维；-1：关闭智能运维
+   */
+  Status?: number
+
+  /**
+   * 智能运维每天定时巡检时间
+   */
+  CronTime?: string
+}
+
+/**
+ * DescribeIndexList返回参数结构体
+ */
+export interface DescribeIndexListResponse {
+  /**
+      * 索引元数据字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IndexMetaFields: Array<IndexMetaField>
+
+  /**
+      * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2136,6 +2623,16 @@ export interface Operation {
 }
 
 /**
+ * UpdateIndex返回参数结构体
+ */
+export interface UpdateIndexResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpgradeLicense请求参数结构体
  */
 export interface UpgradeLicenseRequest {
@@ -2168,4 +2665,14 @@ export interface UpgradeLicenseRequest {
    * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
    */
   ForceRestart?: boolean
+}
+
+/**
+ * UpdateRequestTargetNodeTypes返回参数结构体
+ */
+export interface UpdateRequestTargetNodeTypesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

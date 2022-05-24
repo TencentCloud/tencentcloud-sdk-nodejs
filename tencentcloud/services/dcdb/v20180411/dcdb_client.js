@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseObjects", req, cb);
     }
     /**
+     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+     */
+    async DescribeDatabaseTable(req, cb) {
+        return this.request("DescribeDatabaseTable", req, cb);
+    }
+    /**
      * 查询可创建的分布式数据库可售卖的分片规格配置。
      */
     async DescribeShardSpec(req, cb) {
@@ -89,6 +95,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAccountDescription(req, cb) {
         return this.request("ModifyAccountDescription", req, cb);
+    }
+    /**
+     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+     */
+    async DescribeOrders(req, cb) {
+        return this.request("DescribeOrders", req, cb);
     }
     /**
      * 本接口（DescribeUserTasks）用于拉取用户任务列表
@@ -309,10 +321,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyHourDCDBInstance", req, cb);
     }
     /**
-     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+     * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      */
-    async DescribeDatabaseTable(req, cb) {
-        return this.request("DescribeDatabaseTable", req, cb);
+    async DescribeDBSecurityGroups(req, cb) {
+        return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
      * 本接口（DescribeDCDBUpgradePrice）用于查询变配分布式数据库实例价格。

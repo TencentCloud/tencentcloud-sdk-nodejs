@@ -208,6 +208,16 @@ it("cam.v20190116.DetachRolePolicy", async function () {
     }
 })
 
+it("cam.v20190116.TagRole", async function () {
+    try {
+       const data = await client.TagRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.SetDefaultPolicyVersion", async function () {
     try {
        const data = await client.SetDefaultPolicyVersion({})
@@ -521,6 +531,16 @@ it("cam.v20190116.DescribeSafeAuthFlagColl", async function () {
 it("cam.v20190116.GetAccountSummary", async function () {
     try {
        const data = await client.GetAccountSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.UntagRole", async function () {
+    try {
+       const data = await client.UntagRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

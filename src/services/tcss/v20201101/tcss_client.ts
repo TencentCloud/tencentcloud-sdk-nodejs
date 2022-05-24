@@ -1447,7 +1447,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 运行时文件查杀事件列表
+   * 查询运行时文件查杀事件列表
    */
   async DescribeVirusList(
     req: DescribeVirusListRequest,

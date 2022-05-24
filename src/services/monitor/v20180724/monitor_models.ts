@@ -1986,6 +1986,12 @@ export interface AlarmPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OneClickStatus: number
+
+  /**
+      * 高级指标数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdvancedMetricNumber: number
 }
 
 /**
@@ -2300,6 +2306,24 @@ re=正则匹配
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleType?: string
+
+  /**
+      * 是否为高级指标，0否，1是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAdvanced?: number
+
+  /**
+      * 高级指标是否开通，0否，1是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsOpen?: number
+
+  /**
+      * 集成中心产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId?: string
 }
 
 /**
@@ -2606,6 +2630,24 @@ export interface Metric {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetricConfig: MetricConfig
+
+  /**
+      * 是否为高级指标。1是 0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAdvanced: number
+
+  /**
+      * 高级指标是否开通。1是 0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsOpen: number
+
+  /**
+      * 集成中心产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId: number
 }
 
 /**

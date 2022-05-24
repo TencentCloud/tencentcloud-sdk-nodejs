@@ -248,9 +248,9 @@ it("mariadb.v20170312.RestartDBInstances", async function () {
     }
 })
 
-it("mariadb.v20170312.GrantAccountPrivileges", async function () {
+it("mariadb.v20170312.DescribeOrders", async function () {
     try {
-       const data = await client.GrantAccountPrivileges({})
+       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,6 +508,16 @@ it("mariadb.v20170312.FlushBinlog", async function () {
     }
 })
 
+it("mariadb.v20170312.GrantAccountPrivileges", async function () {
+    try {
+       const data = await client.GrantAccountPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.CopyAccountPrivileges", async function () {
     try {
        const data = await client.CopyAccountPrivileges({})
@@ -541,6 +551,16 @@ it("mariadb.v20170312.DescribeDatabases", async function () {
 it("mariadb.v20170312.DescribePrice", async function () {
     try {
        const data = await client.DescribePrice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.DescribeDBSecurityGroups", async function () {
+    try {
+       const data = await client.DescribeDBSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

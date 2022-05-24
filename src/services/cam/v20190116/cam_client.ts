@@ -53,6 +53,7 @@ import {
   GetCustomMFATokenInfoRequest,
   DescribeRoleListRequest,
   DescribeUserSAMLConfigRequest,
+  TagRoleResponse,
   PutRolePermissionsBoundaryRequest,
   GetGroupRequest,
   StrategyInfo,
@@ -88,6 +89,7 @@ import {
   GetUserPermissionBoundaryResponse,
   CreatePolicyResponse,
   DetachRolePolicyRequest,
+  UntagRoleResponse,
   ListPoliciesGrantingServiceAccessResponse,
   DeleteRolePermissionsBoundaryRequest,
   RoleTags,
@@ -144,6 +146,7 @@ import {
   AttachGroupPolicyResponse,
   UpdateGroupResponse,
   ListEntitiesForPolicyRequest,
+  TagRoleRequest,
   ListPoliciesRequest,
   GetServiceLinkedRoleDeletionStatusRequest,
   ListGrantServiceAccessActionNode,
@@ -206,6 +209,7 @@ import {
   ListAttachedUserPoliciesRequest,
   UpdatePolicyRequest,
   DeleteOIDCConfigRequest,
+  UntagRoleRequest,
   CreateGroupResponse,
 } from "./cam_models"
 
@@ -406,6 +410,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachRolePolicyResponse) => void
   ): Promise<DetachRolePolicyResponse> {
     return this.request("DetachRolePolicy", req, cb)
+  }
+
+  /**
+   * 角色绑定标签
+   */
+  async TagRole(
+    req: TagRoleRequest,
+    cb?: (error: string, rep: TagRoleResponse) => void
+  ): Promise<TagRoleResponse> {
+    return this.request("TagRole", req, cb)
   }
 
   /**
@@ -726,6 +740,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAccountSummaryResponse) => void
   ): Promise<GetAccountSummaryResponse> {
     return this.request("GetAccountSummary", req, cb)
+  }
+
+  /**
+   * 角色解绑标签。
+   */
+  async UntagRole(
+    req: UntagRoleRequest,
+    cb?: (error: string, rep: UntagRoleResponse) => void
+  ): Promise<UntagRoleResponse> {
+    return this.request("UntagRole", req, cb)
   }
 
   /**

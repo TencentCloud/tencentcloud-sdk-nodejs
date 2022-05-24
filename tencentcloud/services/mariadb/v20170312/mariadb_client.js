@@ -174,11 +174,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartDBInstances", req, cb);
     }
     /**
-     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-注意：相同用户名，不同Host是不同的账号。
+     * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单ID来查询订单关联的云数据库实例，和对应的任务流程ID。
      */
-    async GrantAccountPrivileges(req, cb) {
-        return this.request("GrantAccountPrivileges", req, cb);
+    async DescribeOrders(req, cb) {
+        return this.request("DescribeOrders", req, cb);
     }
     /**
      * 本接口（DeleteAccount）用于删除云数据库账号。用户名+host唯一确定一个账号。
@@ -337,6 +336,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FlushBinlog", req, cb);
     }
     /**
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
+    async GrantAccountPrivileges(req, cb) {
+        return this.request("GrantAccountPrivileges", req, cb);
+    }
+    /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
      */
@@ -360,6 +366,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrice(req, cb) {
         return this.request("DescribePrice", req, cb);
+    }
+    /**
+     * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
+     */
+    async DescribeDBSecurityGroups(req, cb) {
+        return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
      * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。

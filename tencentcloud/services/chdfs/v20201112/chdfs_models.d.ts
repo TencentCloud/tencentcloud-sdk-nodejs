@@ -402,6 +402,10 @@ export interface CreateFileSystemRequest {
       * Ranger地址列表，默认为空数组
       */
     RangerServiceAddresses?: Array<string>;
+    /**
+      * 多个资源标签，可以为空数组
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * DisassociateAccessGroups请求参数结构体

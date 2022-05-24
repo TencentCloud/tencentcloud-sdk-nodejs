@@ -474,6 +474,12 @@ export interface DescribeAccessControlEventsExportResponse {
   DownloadUrl: string
 
   /**
+      * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1846,12 +1852,12 @@ export interface DescribeAssetImageRegistryVulListExportRequest {
  */
 export interface AddEditRiskSyscallWhiteListRequest {
   /**
-   * 仅在添加白名单时候使用
+   * 仅在添加事件白名单时候使用
    */
   EventId?: string
 
   /**
-   * 增加白名单信息，白名单id为空，编辑白名单id不能为空
+   * 增加或编辑白名单信。新增白名单时WhiteListInfo.id为空，编辑白名单WhiteListInfo.id不能为空.
    */
   WhiteListInfo?: RiskSyscallWhiteListInfo
 }
@@ -1942,6 +1948,34 @@ export interface ReverseShellEventInfo {
    * 目标地址
    */
   DstAddress: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+	"NODE_DESTROYED"      //节点已销毁
+	"CONTAINER_EXITED"    //容器已退出
+	"CONTAINER_DESTROYED" //容器已销毁
+	"SHARED_HOST"         // 容器与主机共享网络
+	"RESOURCE_LIMIT"      //隔离操作资源超限
+	"UNKNOW"              // 原因未知
+      */
+  ContainerNetSubStatus: string
+
+  /**
+   * 容器隔离操作来源
+   */
+  ContainerIsolateOperationSrc: string
 }
 
 /**
@@ -2322,11 +2356,6 @@ export interface CheckRepeatAssetImageRegistryResponse {
  */
 export interface DescribeAccessControlEventsExportRequest {
   /**
-   * 导出字段
-   */
-  ExportField: Array<string>
-
-  /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
@@ -2350,6 +2379,11 @@ export interface DescribeAccessControlEventsExportRequest {
    * 排序字段
    */
   By?: string
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
 }
 
 /**
@@ -2477,6 +2511,7 @@ export interface DescribeAssetContainerListRequest {
 <li>ImageName- String - 是否必填：否 - 镜像名称搜索</li>
 <li>HostIP- string - 是否必填：否 - 主机ip搜索</li>
 <li>OrderBy - String 是否必填：否 -排序字段，支持：cpu_usage, mem_usage的动态排序 ["cpu_usage","+"]  '+'升序、'-'降序</li>
+<li>NetStatus - String -是否必填: 否 -  容器网络状态筛选 normal isolated isolating isolate_failed restoring restore_failed</li>
       */
   Filters?: Array<AssetFilters>
 
@@ -3066,6 +3101,8 @@ export interface DescribeVirusListRequest {
 <li>ImageId- string - 是否必填：否 - 镜像id</li>
 <li>IsRealTime- int - 是否必填：否 - 过滤是否实时监控数据</li>
 <li>TaskId- string - 是否必填：否 - 任务ID</li>
+<li>ContainerNetStatus - String -是否必填: 否 -  容器网络状态筛选 NORMAL ISOLATED ISOLATING RESTORING RESTORE_FAILED</li>
+<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
       */
   Filters?: Array<RunTimeFilters>
 
@@ -3559,6 +3596,37 @@ RULE_MODE_HOLDUP 拦截
    * 命中规则等级，HIGH：高危，MIDDLE：中危，LOW：低危。
    */
   MatchRuleLevel: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetSubStatus: string
+
+  /**
+      * 容器隔离操作来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerIsolateOperationSrc: string
 }
 
 /**
@@ -3743,6 +3811,34 @@ RULE_MODE_HOLDUP 拦截
    * 规则组id
    */
   RuleId: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+      */
+  ContainerNetSubStatus: string
+
+  /**
+   * 容器隔离操作来源
+   */
+  ContainerIsolateOperationSrc: string
 }
 
 /**
@@ -5515,6 +5611,10 @@ export interface ExportVirusListRequest {
 <li>ContainerId- string - 是否必填：否 - 容器id</li>
 <li>ImageName- string - 是否必填：否 - 镜像名称</li>
 <li>ImageId- string - 是否必填：否 - 镜像id</li>
+<li>IsRealTime- int - 是否必填：否 - 过滤是否实时监控数据</li>
+<li>TaskId- string - 是否必填：否 - 任务ID</li>
+<li>NetStatus - String -是否必填: 否 -  容器网络状态筛选 NORMAL ISOLATED ISOLATING RESTORING RESTORE_FAILED</li>
+<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
       */
   Filters?: Array<RunTimeFilters>
 
@@ -6261,6 +6361,34 @@ export interface RiskSyscallEventInfo {
    * 最近生成时间
    */
   LatestFoundTime: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+      */
+  ContainerNetSubStatus: string
+
+  /**
+   * 容器隔离操作来源
+   */
+  ContainerIsolateOperationSrc: string
 }
 
 /**
@@ -6653,9 +6781,11 @@ export interface ModifyVirusFileStatusRequest {
       * 标记事件的状态，   
     EVENT_DEALED:事件处理
     EVENT_INGNORE"：事件忽略
-     EVENT_DEL:事件删除
-     EVENT_ADD_WHITE:事件加白
-     EVENT_PENDING: 事件待处理
+    EVENT_DEL:事件删除
+    EVENT_ADD_WHITE:事件加白
+    EVENT_PENDING: 事件待处理
+	EVENT_ISOLATE_CONTAINER: 隔离容器
+	EVENT_RESOTRE_CONTAINER: 恢复容器
       */
   Status: string
 
@@ -6663,6 +6793,11 @@ export interface ModifyVirusFileStatusRequest {
    * 事件备注
    */
   Remark?: string
+
+  /**
+   * 是否后续自动隔离相同MD5文件
+   */
+  AutoIsolate?: boolean
 }
 
 /**
@@ -7055,6 +7190,37 @@ MountNamespace逃逸、
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HostID: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetSubStatus: string
+
+  /**
+      * 容器隔离操作来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerIsolateOperationSrc: string
 }
 
 /**
@@ -7255,6 +7421,34 @@ export interface DescribeAssetContainerDetailResponse {
    * 主机状态 offline,online,pause
    */
   HostStatus: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+      */
+  NetStatus: string
+
+  /**
+   * 网络子状态
+   */
+  NetSubStatus: string
+
+  /**
+      * 隔离来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolateSource: string
+
+  /**
+      * 隔离时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolateTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8683,11 +8877,6 @@ export interface ImagesInfo {
  */
 export interface DescribeReverseShellEventsExportRequest {
   /**
-   * 导出字段
-   */
-  ExportField: Array<string>
-
-  /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
@@ -8711,6 +8900,11 @@ export interface DescribeReverseShellEventsExportRequest {
    * 排序字段
    */
   By?: string
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
 }
 
 /**
@@ -9544,6 +9738,12 @@ export interface DescribeRiskSyscallEventsExportResponse {
   DownloadUrl: string
 
   /**
+      * 任务Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9632,6 +9832,34 @@ export interface ContainerInfo {
    * 外网ip
    */
   PublicIp: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+      */
+  NetStatus: string
+
+  /**
+   * 网络子状态
+   */
+  NetSubStatus: string
+
+  /**
+      * 隔离来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolateSource: string
+
+  /**
+      * 隔离时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolateTime: string
 }
 
 /**
@@ -10481,6 +10709,12 @@ export interface DescribeReverseShellEventsExportResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DownloadUrl: string
+
+  /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  JobId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11433,6 +11667,24 @@ CONTAINER_NOT_FOUND_DEAL_RECOVER:恢复时，容器不存在
   OperationTime: string
 
   /**
+      * 容器隔离状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器隔离子状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerNetSubStatus: string
+
+  /**
+      * 容器隔离操作来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContainerIsolateOperationSrc: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11708,11 +11960,6 @@ export interface DescribeAssetHostListRequest {
  */
 export interface DescribeRiskSyscallEventsExportRequest {
   /**
-   * 导出字段
-   */
-  ExportField: Array<string>
-
-  /**
    * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
@@ -11736,6 +11983,11 @@ export interface DescribeRiskSyscallEventsExportRequest {
    * 排序字段
    */
   By?: string
+
+  /**
+   * 导出字段
+   */
+  ExportField?: Array<string>
 }
 
 /**
@@ -12310,6 +12562,40 @@ INTERNAL: 服务内部错误
 VALIDATION: 参数非法
       */
   SubStatus: string
+
+  /**
+      * 网络状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+      */
+  ContainerNetStatus: string
+
+  /**
+      * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+	"NODE_DESTROYED"      //节点已销毁
+	"CONTAINER_EXITED"    //容器已退出
+	"CONTAINER_DESTROYED" //容器已销毁
+	"SHARED_HOST"         // 容器与主机共享网络
+	"RESOURCE_LIMIT"      //隔离操作资源超限
+	"UNKNOW"              // 原因未知
+      */
+  ContainerNetSubStatus: string
+
+  /**
+   * 容器隔离操作来源
+   */
+  ContainerIsolateOperationSrc: string
+
+  /**
+      * md5值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MD5: string
 }
 
 /**

@@ -391,6 +391,16 @@ export interface PositionItem {
       * 位置点的纬度
       */
     Latitude: number;
+    /**
+      * 位置点的定位类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocationType: string;
+    /**
+      * 位置点的精度预估，单位为米
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Accuracy: number;
 }
 /**
  * ModifyModelDefinition请求参数结构体

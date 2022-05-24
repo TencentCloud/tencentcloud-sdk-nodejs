@@ -220,6 +220,23 @@ export interface DescribeAccountsRequest {
     InstanceId: string;
 }
 /**
+ * 存储过程权限信息
+ */
+export interface ProcedurePrivilege {
+    /**
+      * 数据库名
+      */
+    Database: string;
+    /**
+      * 数据库存储过程名
+      */
+    Procedure: string;
+    /**
+      * 权限信息
+      */
+    Privileges: Array<string>;
+}
+/**
  * DescribeRenewalPrice返回参数结构体
  */
 export interface DescribeRenewalPriceResponse {
@@ -306,6 +323,29 @@ export interface DescribeUpgradePriceRequest {
  * FlushBinlog返回参数结构体
  */
 export interface FlushBinlogResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDBSecurityGroups返回参数结构体
+ */
+export interface DescribeDBSecurityGroupsResponse {
+    /**
+      * 安全组详情。
+      */
+    Groups: Array<SecurityGroup>;
+    /**
+      * 实例VIP。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VIP: string;
+    /**
+      * 实例端口。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VPort: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -775,6 +815,23 @@ export interface NodeInfo {
     Role: string;
 }
 /**
+ * DescribeOrders返回参数结构体
+ */
+export interface DescribeOrdersResponse {
+    /**
+      * 返回的订单数量。
+      */
+    TotalCount: number;
+    /**
+      * 订单信息列表。
+      */
+    Deals: Array<Deal>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifySyncTaskAttribute返回参数结构体
  */
 export interface ModifySyncTaskAttributeResponse {
@@ -1118,21 +1175,17 @@ export interface DescribeDBInstancesRequest {
     ExcludeStatus?: Array<number>;
 }
 /**
- * 存储过程权限信息
+ * DescribeDBSecurityGroups请求参数结构体
  */
-export interface ProcedurePrivilege {
+export interface DescribeDBSecurityGroupsRequest {
     /**
-      * 数据库名
+      * 数据库引擎名称，本接口取值：mariadb。
       */
-    Database: string;
+    Product: string;
     /**
-      * 数据库存储过程名
+      * 实例ID。
       */
-    Procedure: string;
-    /**
-      * 权限信息
-      */
-    Privileges: Array<string>;
+    InstanceId: string;
 }
 /**
  * SwitchDBInstanceHA返回参数结构体
@@ -1369,6 +1422,36 @@ export interface DatabaseTable {
       * 表名
       */
     Table: string;
+}
+/**
+ * 订单信息
+ */
+export interface Deal {
+    /**
+      * 订单号
+      */
+    DealName: string;
+    /**
+      * 所属账号
+      */
+    OwnerUin: string;
+    /**
+      * 商品数量
+      */
+    Count: number;
+    /**
+      * 关联的流程 Id，可用于查询流程执行状态
+      */
+    FlowId: number;
+    /**
+      * 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 付费模式，0后付费/1预付费
+      */
+    PayMode: number;
 }
 /**
  * DescribeDBPerformanceDetails请求参数结构体
@@ -2472,6 +2555,15 @@ export interface ViewPrivileges {
       * 权限信息
       */
     Privileges: Array<string>;
+}
+/**
+ * DescribeOrders请求参数结构体
+ */
+export interface DescribeOrdersRequest {
+    /**
+      * 待查询的长订单号列表，创建实例、续费实例、扩容实例接口返回。
+      */
+    DealNames: Array<string>;
 }
 /**
  * DescribeDBLogFiles返回参数结构体

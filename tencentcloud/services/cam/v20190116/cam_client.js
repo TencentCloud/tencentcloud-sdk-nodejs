@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachRolePolicy", req, cb);
     }
     /**
+     * 角色绑定标签
+     */
+    async TagRole(req, cb) {
+        return this.request("TagRole", req, cb);
+    }
+    /**
      * 本接口（SetDefaultPolicyVersion）可用于设置生效的策略版本。
      */
     async SetDefaultPolicyVersion(req, cb) {
@@ -332,6 +338,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetAccountSummary(req, cb) {
         return this.request("GetAccountSummary", req, cb);
+    }
+    /**
+     * 角色解绑标签。
+     */
+    async UntagRole(req, cb) {
+        return this.request("UntagRole", req, cb);
     }
     /**
      * 该接口（ListPolicyVersions）用于获取策略版本列表

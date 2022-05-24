@@ -408,7 +408,7 @@ export declare class Client extends AbstractClient {
      */
     AddAssetImageRegistryRegistryDetail(req: AddAssetImageRegistryRegistryDetailRequest, cb?: (error: string, rep: AddAssetImageRegistryRegistryDetailResponse) => void): Promise<AddAssetImageRegistryRegistryDetailResponse>;
     /**
-     * 运行时文件查杀事件列表
+     * 查询运行时文件查杀事件列表
      */
     DescribeVirusList(req: DescribeVirusListRequest, cb?: (error: string, rep: DescribeVirusListResponse) => void): Promise<DescribeVirusListResponse>;
     /**

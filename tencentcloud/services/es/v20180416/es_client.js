@@ -28,28 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("es.tencentcloudapi.com", "2018-04-16", clientConfig);
     }
     /**
-     * 更新接收客户端请求的节点类型
-     */
-    async UpdateRequestTargetNodeTypes(req, cb) {
-        return this.request("UpdateRequestTargetNodeTypes", req, cb);
-    }
-    /**
      * 智能运维诊断集群
      */
     async DiagnoseInstance(req, cb) {
         return this.request("DiagnoseInstance", req, cb);
-    }
-    /**
-     * 查询实例指定条件下的操作记录
-     */
-    async DescribeInstanceOperations(req, cb) {
-        return this.request("DescribeInstanceOperations", req, cb);
-    }
-    /**
-     * 查询用户该地域下符合条件的所有实例
-     */
-    async DescribeInstances(req, cb) {
-        return this.request("DescribeInstances", req, cb);
     }
     /**
      * 获取接收客户端请求的节点类型
@@ -58,22 +40,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRequestTargetNodeTypes", req, cb);
     }
     /**
-     * 变更插件列表
+     * 获取索引列表
      */
-    async UpdatePlugins(req, cb) {
-        return this.request("UpdatePlugins", req, cb);
+    async DescribeIndexList(req, cb) {
+        return this.request("DescribeIndexList", req, cb);
     }
     /**
-     * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+     * 销毁集群实例
      */
-    async DescribeViews(req, cb) {
-        return this.request("DescribeViews", req, cb);
+    async DeleteInstance(req, cb) {
+        return this.request("DeleteInstance", req, cb);
     }
     /**
-     * 创建指定规格的ES集群实例
+     * 创建索引
      */
-    async CreateInstance(req, cb) {
-        return this.request("CreateInstance", req, cb);
+    async CreateIndex(req, cb) {
+        return this.request("CreateIndex", req, cb);
     }
     /**
      * 更新智能运维配置
@@ -82,22 +64,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDiagnoseSettings", req, cb);
     }
     /**
+     * 查询用户该地域下符合条件的所有实例
+     */
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
+    }
+    /**
+     * 变更插件列表
+     */
+    async UpdatePlugins(req, cb) {
+        return this.request("UpdatePlugins", req, cb);
+    }
+    /**
      * 更新实例Jdk配置
      */
     async UpdateJdk(req, cb) {
         return this.request("UpdateJdk", req, cb);
-    }
-    /**
-     * 升级ES集群版本
-     */
-    async UpgradeInstance(req, cb) {
-        return this.request("UpgradeInstance", req, cb);
-    }
-    /**
-     * 升级ES商业特性
-     */
-    async UpgradeLicense(req, cb) {
-        return this.request("UpgradeLicense", req, cb);
     }
     /**
      * 对集群进行节点规格变更，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
@@ -113,22 +95,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateInstance", req, cb);
     }
     /**
-     * 销毁集群实例
-     */
-    async DeleteInstance(req, cb) {
-        return this.request("DeleteInstance", req, cb);
-    }
-    /**
      * 重启ES集群实例(用于系统版本更新等操作)
      */
     async RestartInstance(req, cb) {
         return this.request("RestartInstance", req, cb);
-    }
-    /**
-     * 用于重启集群节点
-     */
-    async RestartNodes(req, cb) {
-        return this.request("RestartNodes", req, cb);
     }
     /**
      * 查询用户该地域下符合条件的ES集群的日志
@@ -147,6 +117,66 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateDictionaries(req, cb) {
         return this.request("UpdateDictionaries", req, cb);
+    }
+    /**
+     * 更新接收客户端请求的节点类型
+     */
+    async UpdateRequestTargetNodeTypes(req, cb) {
+        return this.request("UpdateRequestTargetNodeTypes", req, cb);
+    }
+    /**
+     * 查询实例指定条件下的操作记录
+     */
+    async DescribeInstanceOperations(req, cb) {
+        return this.request("DescribeInstanceOperations", req, cb);
+    }
+    /**
+     * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+     */
+    async DescribeViews(req, cb) {
+        return this.request("DescribeViews", req, cb);
+    }
+    /**
+     * 创建指定规格的ES集群实例
+     */
+    async CreateInstance(req, cb) {
+        return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 更新索引
+     */
+    async UpdateIndex(req, cb) {
+        return this.request("UpdateIndex", req, cb);
+    }
+    /**
+     * 用于重启集群节点
+     */
+    async RestartNodes(req, cb) {
+        return this.request("RestartNodes", req, cb);
+    }
+    /**
+     * 删除索引
+     */
+    async DeleteIndex(req, cb) {
+        return this.request("DeleteIndex", req, cb);
+    }
+    /**
+     * 升级ES集群版本
+     */
+    async UpgradeInstance(req, cb) {
+        return this.request("UpgradeInstance", req, cb);
+    }
+    /**
+     * 升级ES商业特性
+     */
+    async UpgradeLicense(req, cb) {
+        return this.request("UpgradeLicense", req, cb);
+    }
+    /**
+     * 获取索引元数据
+     */
+    async DescribeIndexMeta(req, cb) {
+        return this.request("DescribeIndexMeta", req, cb);
     }
 }
 exports.Client = Client;

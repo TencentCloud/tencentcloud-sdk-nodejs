@@ -423,7 +423,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义内容智能识别模板，数量上限：50。
+   * 创建用户自定义内容审核模板，数量上限：50。
    */
   async CreateContentReviewTemplate(
     req: CreateContentReviewTemplateRequest,

@@ -4003,7 +4003,7 @@ export interface DescribeCmqQueuesRequest {
   IsTagFilter?: boolean
 
   /**
-   * 过滤器。目前支持按标签过滤。
+   * 过滤器。目前支持按标签过滤，标签的Name需要加前缀“tag:”，例如：tag:负责人、tag:环境、tag:业务
    */
   Filters?: Array<Filter>
 }
@@ -4280,7 +4280,7 @@ export interface DescribeCmqTopicsRequest {
   IsTagFilter?: boolean
 
   /**
-   * 过滤器。目前支持按标签过滤。
+   * 过滤器。目前支持按标签过滤，标签的Name需要加前缀“tag:”，例如：tag:负责人、tag:环境、tag:业务
    */
   Filters?: Array<Filter>
 }

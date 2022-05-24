@@ -3048,7 +3048,7 @@ export interface CreatePersonSampleResponse {
  */
 export interface CreateContentReviewTemplateResponse {
   /**
-   * 内容智能识别模板唯一标识。
+   * 内容审核模板唯一标识。
    */
   Definition: number
 
@@ -7213,12 +7213,12 @@ export interface VideoTemplateInfoForUpdate {
  */
 export interface CreateContentReviewTemplateRequest {
   /**
-   * 内容智能识别模板名称，长度限制：64 个字符。
+   * 内容审核模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 内容智能识别模板描述信息，长度限制：256 个字符。
+   * 内容审核模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
@@ -7246,7 +7246,7 @@ export interface CreateContentReviewTemplateRequest {
   ProhibitedConfigure?: ProhibitedConfigureInfo
 
   /**
-   * 用户自定义内容智能识别控制参数。
+   * 用户自定义内容审核控制参数。
    */
   UserDefineConfigure?: UserDefineConfigureInfo
 }

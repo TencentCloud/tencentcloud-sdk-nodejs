@@ -21,24 +21,30 @@ import {
   WebNodeTypeInfo,
   InstanceLog,
   LocalDiskInfo,
-  TaskDetail,
+  IndexPolicyField,
   NodeInfo,
+  UpgradeInstanceResponse,
   UpdateJdkRequest,
-  GetRequestTargetNodeTypesRequest,
+  DescribeIndexMetaResponse,
   UpdateInstanceResponse,
   DescribeInstanceOperationsRequest,
+  CreateIndexResponse,
   OperationDetail,
   DiagnoseInstanceResponse,
   KibanaView,
   EsPublicAcl,
+  BackingIndexMetaField,
   DictInfo,
   RestartInstanceResponse,
   RestartKibanaRequest,
   CreateInstanceResponse,
+  IndexSettingsField,
   DescribeInstanceLogsRequest,
   UpdateDictionariesRequest,
+  ZoneDetail,
   UpdateRequestTargetNodeTypesRequest,
   NodeView,
+  DescribeIndexListRequest,
   CosBackup,
   TagInfo,
   KeyValue,
@@ -48,36 +54,46 @@ import {
   DeleteInstanceResponse,
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
+  IndexMetaField,
   UpdatePluginsResponse,
   DiagnoseInstanceRequest,
   RestartInstanceRequest,
-  ZoneDetail,
+  RestartKibanaResponse,
   DescribeInstancesRequest,
-  UpdateDiagnoseSettingsRequest,
+  CreateIndexRequest,
+  ClusterView,
   UpdateInstanceRequest,
   EsDictionaryInfo,
   DescribeInstanceOperationsResponse,
   RestartNodesRequest,
   UpdatePluginsRequest,
-  UpdateRequestTargetNodeTypesResponse,
+  GetRequestTargetNodeTypesRequest,
   KibanaNodeInfo,
   UpdateDiagnoseSettingsResponse,
   UpgradeLicenseResponse,
   EsAcl,
+  UpdateIndexRequest,
   MasterNodeInfo,
+  IndexOptionsField,
+  TaskDetail,
   DeleteInstanceRequest,
-  SubTaskDetail,
+  DescribeViewsResponse,
   UpdateJdkResponse,
   RestartNodesResponse,
-  UpgradeInstanceResponse,
-  ClusterView,
+  SubTaskDetail,
+  DescribeIndexMetaRequest,
   UpgradeInstanceRequest,
-  DescribeViewsResponse,
+  DeleteIndexResponse,
+  DeleteIndexRequest,
+  EsConfigSetInfo,
   DescribeViewsRequest,
   GetRequestTargetNodeTypesResponse,
-  RestartKibanaResponse,
+  UpdateDiagnoseSettingsRequest,
+  DescribeIndexListResponse,
   Operation,
+  UpdateIndexResponse,
   UpgradeLicenseRequest,
+  UpdateRequestTargetNodeTypesResponse,
 } from "./es_models"
 
 /**
@@ -87,16 +103,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("es.tencentcloudapi.com", "2018-04-16", clientConfig)
-  }
-
-  /**
-   * 更新接收客户端请求的节点类型
-   */
-  async UpdateRequestTargetNodeTypes(
-    req: UpdateRequestTargetNodeTypesRequest,
-    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
-  ): Promise<UpdateRequestTargetNodeTypesResponse> {
-    return this.request("UpdateRequestTargetNodeTypes", req, cb)
   }
 
   /**
@@ -110,26 +116,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例指定条件下的操作记录
-   */
-  async DescribeInstanceOperations(
-    req: DescribeInstanceOperationsRequest,
-    cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
-  ): Promise<DescribeInstanceOperationsResponse> {
-    return this.request("DescribeInstanceOperations", req, cb)
-  }
-
-  /**
-   * 查询用户该地域下符合条件的所有实例
-   */
-  async DescribeInstances(
-    req: DescribeInstancesRequest,
-    cb?: (error: string, rep: DescribeInstancesResponse) => void
-  ): Promise<DescribeInstancesResponse> {
-    return this.request("DescribeInstances", req, cb)
-  }
-
-  /**
    * 获取接收客户端请求的节点类型
    */
   async GetRequestTargetNodeTypes(
@@ -140,33 +126,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 变更插件列表
+   * 获取索引列表
    */
-  async UpdatePlugins(
-    req: UpdatePluginsRequest,
-    cb?: (error: string, rep: UpdatePluginsResponse) => void
-  ): Promise<UpdatePluginsResponse> {
-    return this.request("UpdatePlugins", req, cb)
+  async DescribeIndexList(
+    req: DescribeIndexListRequest,
+    cb?: (error: string, rep: DescribeIndexListResponse) => void
+  ): Promise<DescribeIndexListResponse> {
+    return this.request("DescribeIndexList", req, cb)
   }
 
   /**
-   * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+   * 销毁集群实例
    */
-  async DescribeViews(
-    req: DescribeViewsRequest,
-    cb?: (error: string, rep: DescribeViewsResponse) => void
-  ): Promise<DescribeViewsResponse> {
-    return this.request("DescribeViews", req, cb)
+  async DeleteInstance(
+    req: DeleteInstanceRequest,
+    cb?: (error: string, rep: DeleteInstanceResponse) => void
+  ): Promise<DeleteInstanceResponse> {
+    return this.request("DeleteInstance", req, cb)
   }
 
   /**
-   * 创建指定规格的ES集群实例
+   * 创建索引
    */
-  async CreateInstance(
-    req: CreateInstanceRequest,
-    cb?: (error: string, rep: CreateInstanceResponse) => void
-  ): Promise<CreateInstanceResponse> {
-    return this.request("CreateInstance", req, cb)
+  async CreateIndex(
+    req: CreateIndexRequest,
+    cb?: (error: string, rep: CreateIndexResponse) => void
+  ): Promise<CreateIndexResponse> {
+    return this.request("CreateIndex", req, cb)
   }
 
   /**
@@ -180,6 +166,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户该地域下符合条件的所有实例
+   */
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 变更插件列表
+   */
+  async UpdatePlugins(
+    req: UpdatePluginsRequest,
+    cb?: (error: string, rep: UpdatePluginsResponse) => void
+  ): Promise<UpdatePluginsResponse> {
+    return this.request("UpdatePlugins", req, cb)
+  }
+
+  /**
    * 更新实例Jdk配置
    */
   async UpdateJdk(
@@ -187,26 +193,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateJdkResponse) => void
   ): Promise<UpdateJdkResponse> {
     return this.request("UpdateJdk", req, cb)
-  }
-
-  /**
-   * 升级ES集群版本
-   */
-  async UpgradeInstance(
-    req: UpgradeInstanceRequest,
-    cb?: (error: string, rep: UpgradeInstanceResponse) => void
-  ): Promise<UpgradeInstanceResponse> {
-    return this.request("UpgradeInstance", req, cb)
-  }
-
-  /**
-   * 升级ES商业特性
-   */
-  async UpgradeLicense(
-    req: UpgradeLicenseRequest,
-    cb?: (error: string, rep: UpgradeLicenseResponse) => void
-  ): Promise<UpgradeLicenseResponse> {
-    return this.request("UpgradeLicense", req, cb)
   }
 
   /**
@@ -227,16 +213,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁集群实例
-   */
-  async DeleteInstance(
-    req: DeleteInstanceRequest,
-    cb?: (error: string, rep: DeleteInstanceResponse) => void
-  ): Promise<DeleteInstanceResponse> {
-    return this.request("DeleteInstance", req, cb)
-  }
-
-  /**
    * 重启ES集群实例(用于系统版本更新等操作)
    */
   async RestartInstance(
@@ -244,16 +220,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartInstanceResponse) => void
   ): Promise<RestartInstanceResponse> {
     return this.request("RestartInstance", req, cb)
-  }
-
-  /**
-   * 用于重启集群节点
-   */
-  async RestartNodes(
-    req: RestartNodesRequest,
-    cb?: (error: string, rep: RestartNodesResponse) => void
-  ): Promise<RestartNodesResponse> {
-    return this.request("RestartNodes", req, cb)
   }
 
   /**
@@ -284,5 +250,105 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDictionariesResponse) => void
   ): Promise<UpdateDictionariesResponse> {
     return this.request("UpdateDictionaries", req, cb)
+  }
+
+  /**
+   * 更新接收客户端请求的节点类型
+   */
+  async UpdateRequestTargetNodeTypes(
+    req: UpdateRequestTargetNodeTypesRequest,
+    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
+  ): Promise<UpdateRequestTargetNodeTypesResponse> {
+    return this.request("UpdateRequestTargetNodeTypes", req, cb)
+  }
+
+  /**
+   * 查询实例指定条件下的操作记录
+   */
+  async DescribeInstanceOperations(
+    req: DescribeInstanceOperationsRequest,
+    cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
+  ): Promise<DescribeInstanceOperationsResponse> {
+    return this.request("DescribeInstanceOperations", req, cb)
+  }
+
+  /**
+   * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+   */
+  async DescribeViews(
+    req: DescribeViewsRequest,
+    cb?: (error: string, rep: DescribeViewsResponse) => void
+  ): Promise<DescribeViewsResponse> {
+    return this.request("DescribeViews", req, cb)
+  }
+
+  /**
+   * 创建指定规格的ES集群实例
+   */
+  async CreateInstance(
+    req: CreateInstanceRequest,
+    cb?: (error: string, rep: CreateInstanceResponse) => void
+  ): Promise<CreateInstanceResponse> {
+    return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 更新索引
+   */
+  async UpdateIndex(
+    req: UpdateIndexRequest,
+    cb?: (error: string, rep: UpdateIndexResponse) => void
+  ): Promise<UpdateIndexResponse> {
+    return this.request("UpdateIndex", req, cb)
+  }
+
+  /**
+   * 用于重启集群节点
+   */
+  async RestartNodes(
+    req: RestartNodesRequest,
+    cb?: (error: string, rep: RestartNodesResponse) => void
+  ): Promise<RestartNodesResponse> {
+    return this.request("RestartNodes", req, cb)
+  }
+
+  /**
+   * 删除索引
+   */
+  async DeleteIndex(
+    req: DeleteIndexRequest,
+    cb?: (error: string, rep: DeleteIndexResponse) => void
+  ): Promise<DeleteIndexResponse> {
+    return this.request("DeleteIndex", req, cb)
+  }
+
+  /**
+   * 升级ES集群版本
+   */
+  async UpgradeInstance(
+    req: UpgradeInstanceRequest,
+    cb?: (error: string, rep: UpgradeInstanceResponse) => void
+  ): Promise<UpgradeInstanceResponse> {
+    return this.request("UpgradeInstance", req, cb)
+  }
+
+  /**
+   * 升级ES商业特性
+   */
+  async UpgradeLicense(
+    req: UpgradeLicenseRequest,
+    cb?: (error: string, rep: UpgradeLicenseResponse) => void
+  ): Promise<UpgradeLicenseResponse> {
+    return this.request("UpgradeLicense", req, cb)
+  }
+
+  /**
+   * 获取索引元数据
+   */
+  async DescribeIndexMeta(
+    req: DescribeIndexMetaRequest,
+    cb?: (error: string, rep: DescribeIndexMetaResponse) => void
+  ): Promise<DescribeIndexMetaResponse> {
+    return this.request("DescribeIndexMeta", req, cb)
   }
 }

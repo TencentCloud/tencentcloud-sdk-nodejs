@@ -21,7 +21,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyContentReviewTemplate(req: ModifyContentReviewTemplateRequest, cb?: (error: string, rep: ModifyContentReviewTemplateResponse) => void): Promise<ModifyContentReviewTemplateResponse>;
     /**
-     * 创建用户自定义内容智能识别模板，数量上限：50。
+     * 创建用户自定义内容审核模板，数量上限：50。
      */
     CreateContentReviewTemplate(req: CreateContentReviewTemplateRequest, cb?: (error: string, rep: CreateContentReviewTemplateResponse) => void): Promise<CreateContentReviewTemplateResponse>;
     /**
