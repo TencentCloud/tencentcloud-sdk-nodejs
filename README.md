@@ -36,7 +36,8 @@ const tencentcloud = require("tencentcloud-sdk-nodejs")
 // 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client
 
-const clientConfig = {
+// 实例化要请求产品(以cvm为例)的client对象
+const client = new CvmClient({
   // 腾讯云认证信息
   credential: {
     secretId: "secretId",
@@ -52,9 +53,7 @@ const clientConfig = {
       reqTimeout: 30, // 请求超时时间，默认60s
     },
   },
-}
-// 实例化要请求产品(以cvm为例)的client对象
-const client = new CvmClient(clientConfig)
+})
 // 通过client对象调用想要访问的接口（Action），需要传入请求对象（Params）以及响应回调函数
 // 即：client.Action(Params).then(res => console.log(res), err => console.error(err))
 // 如：查询云服务器可用区列表
@@ -76,7 +75,8 @@ import * as tencentcloud from "tencentcloud-sdk-nodejs"
 // 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client
 
-const clientConfig = {
+// 实例化要请求产品(以cvm为例)的client对象
+const client = new CvmClient({
   // 腾讯云认证信息
   credential: {
     secretId: "secretId",
@@ -92,18 +92,16 @@ const clientConfig = {
       reqTimeout: 30, // 请求超时时间，默认60s
     },
   },
-}
-// 实例化要请求产品(以cvm为例)的client对象
-const client = new CvmClient(clientConfig)
-// 通过client对象调用想要访问的接口，需要传入请求对象以及响应回调函数
-client.DescribeZones().then(
-  (data) => {
+})
+async function main(){
+  try{
+    // async/await 方式调用
+    const data = await client.DescribeZones()
     console.log(data)
-  },
-  (err) => {
+  }catch(err){
     console.error("error", err)
   }
-)
+}
 ```
 
 实例化`Client` 的入参支持 `clientConfig` 数据结构和说明 详见 [ClientConfig](https://github.com/TencentCloud/tencentcloud-sdk-nodejs/blob/master/src/common/interface.ts)
@@ -121,3 +119,31 @@ client.DescribeZones().then(
 # 旧版 SDK
 
 我们推荐使用新版 NODEJS SDK，如果一定要用旧版 SDK，请前往[github 仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
+
+# 常见问题
+- webpack打包出错
+
+  请**务必不要**将此sdk直接用于web前端(包括小程序等)，暴露密钥在这些环境非常不安全。
+
+  正确的做法是在自己的服务端引用此sdk，并保存好密钥，做好请求鉴权；前端再调用服务端执行业务流程。
+
+- `The "original" argument must be of type Function.`
+
+  通常是因为nodejs版本低于 `v10` ，请再次确认执行环境。
+
+- 请求不通
+
+  设置环境变量 `NODE_DEBUG=http` 来开启请求日志输出来定位问题，例如：
+  ```sh
+  # MacOS
+  NODE_DEBUG=http node app.js
+  # windows cmd
+  set NODE_DEBUG=http & node app.js
+  # windows powershell
+  $env:NODE_DEBUG='http' ; node app.js
+  ```
+  如需要配置代理，请设置环境变量 `https_proxy`，例如：
+  ```sh
+  # MacOS
+  https_proxy=http://代理地址:代理端口 node app.js
+  ```
