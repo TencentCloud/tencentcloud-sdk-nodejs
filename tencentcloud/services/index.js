@@ -122,6 +122,8 @@ var cws_1 = require("./cws");
 Object.defineProperty(exports, "cws", { enumerable: true, get: function () { return cws_1.cws; } });
 var cynosdb_1 = require("./cynosdb");
 Object.defineProperty(exports, "cynosdb", { enumerable: true, get: function () { return cynosdb_1.cynosdb; } });
+var dasb_1 = require("./dasb");
+Object.defineProperty(exports, "dasb", { enumerable: true, get: function () { return dasb_1.dasb; } });
 var dayu_1 = require("./dayu");
 Object.defineProperty(exports, "dayu", { enumerable: true, get: function () { return dayu_1.dayu; } });
 var dbbrain_1 = require("./dbbrain");

@@ -59,6 +59,7 @@ export { cvm } from "./cvm";
 export { cwp } from "./cwp";
 export { cws } from "./cws";
 export { cynosdb } from "./cynosdb";
+export { dasb } from "./dasb";
 export { dayu } from "./dayu";
 export { dbbrain } from "./dbbrain";
 export { dc } from "./dc";

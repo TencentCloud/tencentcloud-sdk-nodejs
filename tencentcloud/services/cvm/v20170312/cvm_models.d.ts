@@ -1248,7 +1248,7 @@ export interface DescribeInstanceInternetBandwidthConfigsResponse {
     /**
       * 带宽配置信息列表。
       */
-    InternetBandwidthConfigSet?: Array<InternetBandwidthConfig>;
+    InternetBandwidthConfigSet: Array<InternetBandwidthConfig>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

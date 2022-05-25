@@ -1480,6 +1480,12 @@ export interface Event {
    * 事件来源详细描述，可自定义，选填。云服务默认为标准qcs资源表示语法：qcs::dts:ap-guangzhou:appid/uin:xxx
    */
   Subject: string
+
+  /**
+      * 事件发生的毫秒时间戳，
+time.Now().UnixNano()/1e6
+      */
+  Time?: number
 }
 
 /**
