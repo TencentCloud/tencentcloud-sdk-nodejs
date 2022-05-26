@@ -206,7 +206,7 @@ export class AbstractClient {
   private mergeData(data: any, prefix = "") {
     const ret: any = {}
     for (const k in data) {
-      if (data[k] === null) {
+      if (data[k] === null || data[k] === undefined) {
         continue
       }
       if (data[k] instanceof Array || data[k] instanceof Object) {
