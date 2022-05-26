@@ -22,42 +22,49 @@ import {
   DescribeDatabasesRequest,
   WorkGroupMessage,
   DeleteUserRequest,
+  DescribeSparkAppJobRequest,
   CreateStoreLocationResponse,
   CreateScriptResponse,
   CreateTasksInOrderResponse,
   DescribeTablesResponse,
-  WorkGroupInfo,
+  SparkJobInfo,
+  DeleteSparkAppRequest,
   ModifyUserResponse,
   DeleteScriptResponse,
+  TableInfo,
   Task,
   DetachUserPolicyRequest,
-  TableInfo,
+  DescribeSparkAppTasksResponse,
   DescribeTasksResponse,
   CreateTasksInOrderRequest,
   DetachWorkGroupPolicyResponse,
-  DataFormat,
   CSVSerde,
+  ModifySparkAppRequest,
   CreateDatabaseRequest,
   UserIdSetOfWorkGroupId,
   ViewBaseInfo,
   CreateDatabaseResponse,
   DescribeTasksRequest,
-  Script,
+  CreateSparkAppTaskRequest,
   DeleteWorkGroupRequest,
   KVPair,
   TableBaseInfo,
+  AttachUserPolicyRequest,
   TasksInfo,
   AttachWorkGroupPolicyRequest,
   CreateUserResponse,
   DeleteUserResponse,
   CreateStoreLocationRequest,
+  DescribeSparkAppJobsRequest,
   Partition,
   CreateTaskRequest,
-  Property,
+  ModifySparkAppResponse,
+  CSV,
   CreateTableRequest,
   DescribeWorkGroupsResponse,
   DescribeUsersRequest,
   DescribeScriptsRequest,
+  DescribeSparkAppJobResponse,
   DeleteUsersFromWorkGroupResponse,
   AddUsersToWorkGroupRequest,
   DescribeStoreLocationRequest,
@@ -66,16 +73,20 @@ import {
   CreateExportTaskRequest,
   AttachWorkGroupPolicyResponse,
   ModifyWorkGroupResponse,
-  AttachUserPolicyRequest,
+  ModifyUserRequest,
+  StreamingStatistics,
+  CreateSparkAppTaskResponse,
   CancelTaskRequest,
   TaskResponseInfo,
   TextFile,
   BindWorkGroupsToUserResponse,
   DescribeStoreLocationResponse,
   DeleteScriptRequest,
+  Script,
   CreateImportTaskResponse,
   Execution,
   CreateTableResponse,
+  WorkGroupInfo,
   CreateScriptRequest,
   BindWorkGroupsToUserRequest,
   Column,
@@ -99,25 +110,30 @@ import {
   UnbindWorkGroupsFromUserRequest,
   DescribeTableRequest,
   Other,
-  CSV,
   DeleteUsersFromWorkGroupRequest,
   Policy,
-  CreateTasksRequest,
+  CreateSparkAppResponse,
   CreateTaskResponse,
-  DescribeWorkGroupsRequest,
+  DeleteSparkAppResponse,
+  CreateTasksRequest,
   DescribeTableResponse,
+  DescribeSparkAppJobsResponse,
   TableResponseInfo,
   AddUsersToWorkGroupResponse,
   DetachUserPolicyResponse,
+  DescribeWorkGroupsRequest,
   CreateTasksResponse,
+  CreateSparkAppRequest,
   UnbindWorkGroupsFromUserResponse,
   CreateWorkGroupRequest,
+  DescribeSparkAppTasksRequest,
   SQLTask,
   UserMessage,
+  Property,
   AttachUserPolicyResponse,
   DetachWorkGroupPolicyRequest,
   DescribeViewsResponse,
-  ModifyUserRequest,
+  DataFormat,
   DatabaseResponseInfo,
 } from "./dlc_models"
 
@@ -211,6 +227,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除spark应用
+   */
+  async DeleteSparkApp(
+    req: DeleteSparkAppRequest,
+    cb?: (error: string, rep: DeleteSparkAppResponse) => void
+  ): Promise<DeleteSparkAppResponse> {
+    return this.request("DeleteSparkApp", req, cb)
+  }
+
+  /**
    * 获取用户列表信息
    */
   async DescribeUsers(
@@ -301,13 +327,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取工作组列表
+   * 创建spark应用
    */
-  async DescribeWorkGroups(
-    req: DescribeWorkGroupsRequest,
-    cb?: (error: string, rep: DescribeWorkGroupsResponse) => void
-  ): Promise<DescribeWorkGroupsResponse> {
-    return this.request("DescribeWorkGroups", req, cb)
+  async CreateSparkApp(
+    req: CreateSparkAppRequest,
+    cb?: (error: string, rep: CreateSparkAppResponse) => void
+  ): Promise<CreateSparkAppResponse> {
+    return this.request("CreateSparkApp", req, cb)
   }
 
   /**
@@ -341,6 +367,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取工作组列表
+   */
+  async DescribeWorkGroups(
+    req: DescribeWorkGroupsRequest,
+    cb?: (error: string, rep: DescribeWorkGroupsResponse) => void
+  ): Promise<DescribeWorkGroupsResponse> {
+    return this.request("DescribeWorkGroups", req, cb)
+  }
+
+  /**
    * 修改工作组信息
    */
   async ModifyWorkGroup(
@@ -348,6 +384,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyWorkGroupResponse) => void
   ): Promise<ModifyWorkGroupResponse> {
     return this.request("ModifyWorkGroup", req, cb)
+  }
+
+  /**
+   * 更新spark应用
+   */
+  async ModifySparkApp(
+    req: ModifySparkAppRequest,
+    cb?: (error: string, rep: ModifySparkAppResponse) => void
+  ): Promise<ModifySparkAppResponse> {
+    return this.request("ModifySparkApp", req, cb)
   }
 
   /**
@@ -388,6 +434,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteScriptResponse) => void
   ): Promise<DeleteScriptResponse> {
     return this.request("DeleteScript", req, cb)
+  }
+
+  /**
+   * 创建spark任务
+   */
+  async CreateSparkAppTask(
+    req: CreateSparkAppTaskRequest,
+    cb?: (error: string, rep: CreateSparkAppTaskResponse) => void
+  ): Promise<CreateSparkAppTaskResponse> {
+    return this.request("CreateSparkAppTask", req, cb)
   }
 
   /**
@@ -448,6 +504,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStoreLocationResponse) => void
   ): Promise<DescribeStoreLocationResponse> {
     return this.request("DescribeStoreLocation", req, cb)
+  }
+
+  /**
+   * 查询具体的spark应用
+   */
+  async DescribeSparkAppJob(
+    req: DescribeSparkAppJobRequest,
+    cb?: (error: string, rep: DescribeSparkAppJobResponse) => void
+  ): Promise<DescribeSparkAppJobResponse> {
+    return this.request("DescribeSparkAppJob", req, cb)
+  }
+
+  /**
+   * 查询spark应用的运行任务实例列表
+   */
+  async DescribeSparkAppTasks(
+    req: DescribeSparkAppTasksRequest,
+    cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void
+  ): Promise<DescribeSparkAppTasksResponse> {
+    return this.request("DescribeSparkAppTasks", req, cb)
+  }
+
+  /**
+   * 获取spark应用列表
+   */
+  async DescribeSparkAppJobs(
+    req: DescribeSparkAppJobsRequest,
+    cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void
+  ): Promise<DescribeSparkAppJobsResponse> {
+    return this.request("DescribeSparkAppJobs", req, cb)
   }
 
   /**

@@ -98,6 +98,16 @@ it("dlc.v20210125.CreateExportTask", async function () {
     }
 })
 
+it("dlc.v20210125.DeleteSparkApp", async function () {
+    try {
+       const data = await client.DeleteSparkApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeUsers", async function () {
     try {
        const data = await client.DescribeUsers({})
@@ -188,9 +198,9 @@ it("dlc.v20210125.AttachWorkGroupPolicy", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeWorkGroups", async function () {
+it("dlc.v20210125.CreateSparkApp", async function () {
     try {
-       const data = await client.DescribeWorkGroups({})
+       const data = await client.CreateSparkApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +238,29 @@ it("dlc.v20210125.CreateDatabase", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeWorkGroups", async function () {
+    try {
+       const data = await client.DescribeWorkGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.ModifyWorkGroup", async function () {
     try {
        const data = await client.ModifyWorkGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ModifySparkApp", async function () {
+    try {
+       const data = await client.ModifySparkApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +301,16 @@ it("dlc.v20210125.DescribeTasks", async function () {
 it("dlc.v20210125.DeleteScript", async function () {
     try {
        const data = await client.DeleteScript({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateSparkAppTask", async function () {
+    try {
+       const data = await client.CreateSparkAppTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +371,36 @@ it("dlc.v20210125.AttachUserPolicy", async function () {
 it("dlc.v20210125.DescribeStoreLocation", async function () {
     try {
        const data = await client.DescribeStoreLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeSparkAppJob", async function () {
+    try {
+       const data = await client.DescribeSparkAppJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeSparkAppTasks", async function () {
+    try {
+       const data = await client.DescribeSparkAppTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeSparkAppJobs", async function () {
+    try {
+       const data = await client.DescribeSparkAppJobs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

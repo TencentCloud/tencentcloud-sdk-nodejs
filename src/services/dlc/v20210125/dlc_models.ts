@@ -108,6 +108,21 @@ export interface DeleteUserRequest {
 }
 
 /**
+ * DescribeSparkAppJob请求参数结构体
+ */
+export interface DescribeSparkAppJobRequest {
+  /**
+   * spark作业Id，与JobName同时存在时，JobName无效
+   */
+  JobId?: string
+
+  /**
+   * spark作业名
+   */
+  JobName?: string
+}
+
+/**
  * CreateStoreLocation返回参数结构体
  */
 export interface CreateStoreLocationResponse {
@@ -168,51 +183,150 @@ export interface DescribeTablesResponse {
 }
 
 /**
- * 工作组信息
+ * spark作业详情
  */
-export interface WorkGroupInfo {
+export interface SparkJobInfo {
   /**
-   * 查询到的工作组唯一Id
+   * spark作业ID
    */
-  WorkGroupId: number
+  JobId: string
 
   /**
-   * 工作组名称
+   * spark作业名
    */
-  WorkGroupName: string
+  JobName: string
 
   /**
-      * 工作组描述
+   * spark作业类型，可去1或者2，1表示batch作业， 2表示streaming作业
+   */
+  JobType: number
+
+  /**
+   * 引擎名
+   */
+  DataEngine: string
+
+  /**
+   * 该字段已下线，请使用字段Datasource
+   */
+  Eni: string
+
+  /**
+   * 程序包是否本地上传，cos或者lakefs
+   */
+  IsLocal: string
+
+  /**
+   * 程序包路径
+   */
+  JobFile: string
+
+  /**
+   * 角色ID
+   */
+  RoleArn: number
+
+  /**
+   * spark作业运行主类
+   */
+  MainClass: string
+
+  /**
+   * 命令行参数，spark作业命令行参数，空格分隔
+   */
+  CmdArgs: string
+
+  /**
+   * spark原生配置，换行符分隔
+   */
+  JobConf: string
+
+  /**
+   * 依赖jars是否本地上传，cos或者lakefs
+   */
+  IsLocalJars: string
+
+  /**
+   * spark作业依赖jars，逗号分隔
+   */
+  JobJars: string
+
+  /**
+   * 依赖文件是否本地上传，cos或者lakefs
+   */
+  IsLocalFiles: string
+
+  /**
+   * spark作业依赖文件，逗号分隔
+   */
+  JobFiles: string
+
+  /**
+   * spark作业driver资源大小
+   */
+  JobDriverSize: string
+
+  /**
+   * spark作业executor资源大小
+   */
+  JobExecutorSize: string
+
+  /**
+   * spark作业executor个数
+   */
+  JobExecutorNums: number
+
+  /**
+   * spark流任务最大重试次数
+   */
+  JobMaxAttempts: number
+
+  /**
+   * spark作业创建者
+   */
+  JobCreator: string
+
+  /**
+   * spark作业创建时间
+   */
+  JobCreateTime: number
+
+  /**
+   * spark作业更新时间
+   */
+  JobUpdateTime: number
+
+  /**
+   * spark作业最近任务ID
+   */
+  CurrentTaskId: string
+
+  /**
+   * spark作业最近运行状态
+   */
+  JobStatus: number
+
+  /**
+      * spark流作业统计
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WorkGroupDescription: string
+  StreamingStat: StreamingStatistics
 
   /**
-   * 工作组关联的用户数量
-   */
-  UserNum: number
-
-  /**
-      * 工作组关联的用户集合
+      * 数据源名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UserSet: Array<UserMessage>
+  DataSource: string
+}
 
+/**
+ * DeleteSparkApp请求参数结构体
+ */
+export interface DeleteSparkAppRequest {
   /**
-      * 工作组绑定的权限集合
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PolicySet: Array<Policy>
-
-  /**
-   * 工作组的创建人
+   * spark应用名
    */
-  Creator: string
-
-  /**
-   * 工作组的创建时间，形如2021-07-28 16:19:32
-   */
-  CreateTime: string
+  AppName: string
 }
 
 /**
@@ -238,6 +352,36 @@ export interface DeleteScriptResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 返回数据表的相关信息。
+ */
+export interface TableInfo {
+  /**
+   * 数据表配置信息。
+   */
+  TableBaseInfo: TableBaseInfo
+
+  /**
+   * 数据表格式。每次入参可选如下其一的KV结构，[TextFile，CSV，Json, Parquet, ORC, AVRD]。
+   */
+  DataFormat: DataFormat
+
+  /**
+   * 数据表列信息。
+   */
+  Columns: Array<Column>
+
+  /**
+   * 数据表分块信息。
+   */
+  Partitions: Array<Partition>
+
+  /**
+   * 数据存储路径。当前仅支持cos路径，格式如下：cosn://bucket-name/filepath。
+   */
+  Location: string
 }
 
 /**
@@ -271,33 +415,24 @@ export interface DetachUserPolicyRequest {
 }
 
 /**
- * 返回数据表的相关信息。
+ * DescribeSparkAppTasks返回参数结构体
  */
-export interface TableInfo {
+export interface DescribeSparkAppTasksResponse {
   /**
-   * 数据表配置信息。
-   */
-  TableBaseInfo: TableBaseInfo
+      * 任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tasks: TaskResponseInfo
 
   /**
-   * 数据表格式。每次入参可选如下其一的KV结构，[TextFile，CSV，Json, Parquet, ORC, AVRD]。
+   * 任务总数
    */
-  DataFormat: DataFormat
+  TotalCount: number
 
   /**
-   * 数据表列信息。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Columns: Array<Column>
-
-  /**
-   * 数据表分块信息。
-   */
-  Partitions: Array<Partition>
-
-  /**
-   * 数据存储路径。当前仅支持cos路径，格式如下：cosn://bucket-name/filepath。
-   */
-  Location: string
+  RequestId?: string
 }
 
 /**
@@ -351,47 +486,6 @@ export interface DetachWorkGroupPolicyResponse {
 }
 
 /**
- * 数据表数据格式。
- */
-export interface DataFormat {
-  /**
-      * 文本格式，TextFile。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TextFile: TextFile
-
-  /**
-      * 文本格式，CSV。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CSV: CSV
-
-  /**
-      * 文本格式，Json。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Json: Other
-
-  /**
-      * Parquet格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Parquet: Other
-
-  /**
-      * ORC格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ORC: Other
-
-  /**
-      * AVRO格式
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AVRO: Other
-}
-
-/**
  * CSV序列化及反序列化数据结构
  */
 export interface CSVSerde {
@@ -409,6 +503,111 @@ export interface CSVSerde {
    * CSV序列化分隔符，默认为"\t"，最长8个字符, 如 Separator: "\t"
    */
   Separator?: string
+}
+
+/**
+ * ModifySparkApp请求参数结构体
+ */
+export interface ModifySparkAppRequest {
+  /**
+   * spark应用名
+   */
+  AppName: string
+
+  /**
+   * 1代表spark jar应用，2代表spark streaming应用
+   */
+  AppType: number
+
+  /**
+   * 执行spark作业的数据引擎
+   */
+  DataEngine: string
+
+  /**
+   * spark应用的执行入口
+   */
+  AppFile: string
+
+  /**
+   * 执行spark作业的角色ID
+   */
+  RoleArn: number
+
+  /**
+   * spark作业driver资源规格大小, 可取small,medium,large,xlarge
+   */
+  AppDriverSize: string
+
+  /**
+   * spark作业executor资源规格大小, 可取small,medium,large,xlarge
+   */
+  AppExecutorSize: string
+
+  /**
+   * spark作业executor个数
+   */
+  AppExecutorNums: number
+
+  /**
+   * spark应用Id
+   */
+  SparkAppId: string
+
+  /**
+   * 该字段已下线，请使用字段Datasource
+   */
+  Eni?: string
+
+  /**
+   * 是否本地上传，可取cos,lakefs
+   */
+  IsLocal?: string
+
+  /**
+   * spark jar作业时的主类
+   */
+  MainClass?: string
+
+  /**
+   * spark配置，以换行符分隔
+   */
+  AppConf?: string
+
+  /**
+   * 是否本地上传，可去cos,lakefs
+   */
+  IsLocalJars?: string
+
+  /**
+   * spark jar作业依赖jars，以逗号分隔
+   */
+  AppJars?: string
+
+  /**
+   * 是否本地上传，可去cos,lakefs
+   */
+  IsLocalFiles?: string
+
+  /**
+   * spark作业依赖资源，以逗号分隔
+   */
+  AppFiles?: string
+
+  /**
+   * spark作业命令行参数
+   */
+  CmdArgs?: string
+
+  /**
+   * 只对spark流任务生效
+   */
+  MaxRetries?: number
+
+  /**
+   * 数据源名
+   */
+  DataSource?: string
 }
 
 /**
@@ -522,44 +721,18 @@ task-kind - string （任务类型过滤）
 }
 
 /**
- * script实例。
+ * CreateSparkAppTask请求参数结构体
  */
-export interface Script {
+export interface CreateSparkAppTaskRequest {
   /**
-      * 脚本Id，长度36字节。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ScriptId: string
+   * spark作业名
+   */
+  JobName: string
 
   /**
-      * 脚本名称，长度0-25。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ScriptName: string
-
-  /**
-      * 脚本描述，长度0-50。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ScriptDesc: string
-
-  /**
-      * 默认关联数据库。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DatabaseName: string
-
-  /**
-      * SQL描述，长度0-10000。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SQLStatement: string
-
-  /**
-      * 更新时间戳， 单位：ms。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UpdateTime: number
+   * spark作业的命令行参数，以空格分隔；一般用于周期性调用使用
+   */
+  CmdArgs?: string
 }
 
 /**
@@ -626,6 +799,21 @@ export interface TableBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TableFormat?: string
+}
+
+/**
+ * AttachUserPolicy请求参数结构体
+ */
+export interface AttachUserPolicyRequest {
+  /**
+   * 用户Id，和子用户uin相同，需要先使用CreateUser接口创建用户。可以使用DescribeUsers接口查看。
+   */
+  UserId: string
+
+  /**
+   * 鉴权策略集合
+   */
+  PolicySet?: Array<Policy>
 }
 
 /**
@@ -704,6 +892,46 @@ export interface CreateStoreLocationRequest {
 }
 
 /**
+ * DescribeSparkAppJobs请求参数结构体
+ */
+export interface DescribeSparkAppJobsRequest {
+  /**
+   * 返回结果按照该字段排序
+   */
+  SortBy?: string
+
+  /**
+   * 正序或者倒序，例如：desc
+   */
+  Sorting?: string
+
+  /**
+   * 按照该参数过滤
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 更新时间起始点
+   */
+  StartTime?: string
+
+  /**
+   * 更新时间截止点
+   */
+  EndTime?: string
+
+  /**
+   * 查询列表偏移量
+   */
+  Offset?: number
+
+  /**
+   * 查询列表限制数量
+   */
+  Limit?: number
+}
+
+/**
  * 数据表分块信息。
  */
 export interface Partition {
@@ -767,18 +995,40 @@ export interface CreateTaskRequest {
 }
 
 /**
- * 数据库和数据表属性信息
+ * ModifySparkApp返回参数结构体
  */
-export interface Property {
+export interface ModifySparkAppResponse {
   /**
-   * 属性key名称。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Key: string
+  RequestId?: string
+}
+
+/**
+ * CSV类型数据格式
+ */
+export interface CSV {
+  /**
+   * 压缩格式，["Snappy", "Gzip", "None"选一]。
+   */
+  CodeCompress?: string
 
   /**
-   * 属性key对应的value。
+   * CSV序列化及反序列化数据结构。
    */
-  Value: string
+  CSVSerde?: CSVSerde
+
+  /**
+      * 标题行，默认为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HeadLines?: number
+
+  /**
+      * 格式，默认值为CSV
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Format?: string
 }
 
 /**
@@ -876,6 +1126,27 @@ script-id - String - （过滤条件）script-id取值形如：157de0d1-26b4-4df
 script-name-keyword - String - （过滤条件）数据表名称,形如：script-test。
       */
   Filters?: Array<Filter>
+}
+
+/**
+ * DescribeSparkAppJob返回参数结构体
+ */
+export interface DescribeSparkAppJobResponse {
+  /**
+      * spark作业详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Job: SparkJobInfo
+
+  /**
+   * 查询的spark作业是否存在
+   */
+  IsExists: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1057,18 +1328,98 @@ export interface ModifyWorkGroupResponse {
 }
 
 /**
- * AttachUserPolicy请求参数结构体
+ * ModifyUser请求参数结构体
  */
-export interface AttachUserPolicyRequest {
+export interface ModifyUserRequest {
   /**
-   * 用户Id，和子用户uin相同，需要先使用CreateUser接口创建用户。可以使用DescribeUsers接口查看。
+   * 用户Id，和CAM侧Uin匹配
    */
   UserId: string
 
   /**
-   * 鉴权策略集合
+   * 用户描述
    */
-  PolicySet?: Array<Policy>
+  UserDescription: string
+}
+
+/**
+ * spark流任务统计信息
+ */
+export interface StreamingStatistics {
+  /**
+   * 任务开始时间
+   */
+  StartTime: string
+
+  /**
+   * 数据接收器数
+   */
+  Receivers: number
+
+  /**
+   * 运行中的接收器数
+   */
+  NumActiveReceivers: number
+
+  /**
+   * 不活跃的接收器数
+   */
+  NumInactiveReceivers: number
+
+  /**
+   * 运行中的批数
+   */
+  NumActiveBatches: number
+
+  /**
+   * 待处理的批数
+   */
+  NumRetainedCompletedBatches: number
+
+  /**
+   * 已完成的批数
+   */
+  NumTotalCompletedBatches: number
+
+  /**
+   * 平均输入速率
+   */
+  AverageInputRate: number
+
+  /**
+   * 平均等待时长
+   */
+  AverageSchedulingDelay: number
+
+  /**
+   * 平均处理时长
+   */
+  AverageProcessingTime: number
+
+  /**
+   * 平均延时
+   */
+  AverageTotalDelay: number
+}
+
+/**
+ * CreateSparkAppTask返回参数结构体
+ */
+export interface CreateSparkAppTaskResponse {
+  /**
+   * 批Id
+   */
+  BatchId: string
+
+  /**
+   * 任务Id
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1304,6 +1655,47 @@ export interface DeleteScriptRequest {
 }
 
 /**
+ * script实例。
+ */
+export interface Script {
+  /**
+      * 脚本Id，长度36字节。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScriptId: string
+
+  /**
+      * 脚本名称，长度0-25。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScriptName: string
+
+  /**
+      * 脚本描述，长度0-50。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScriptDesc: string
+
+  /**
+      * 默认关联数据库。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DatabaseName: string
+
+  /**
+      * SQL描述，长度0-10000。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SQLStatement: string
+
+  /**
+      * 更新时间戳， 单位：ms。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: number
+}
+
+/**
  * CreateImportTask返回参数结构体
  */
 export interface CreateImportTaskResponse {
@@ -1341,6 +1733,54 @@ export interface CreateTableResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 工作组信息
+ */
+export interface WorkGroupInfo {
+  /**
+   * 查询到的工作组唯一Id
+   */
+  WorkGroupId: number
+
+  /**
+   * 工作组名称
+   */
+  WorkGroupName: string
+
+  /**
+      * 工作组描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WorkGroupDescription: string
+
+  /**
+   * 工作组关联的用户数量
+   */
+  UserNum: number
+
+  /**
+      * 工作组关联的用户集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserSet: Array<UserMessage>
+
+  /**
+      * 工作组绑定的权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicySet: Array<Policy>
+
+  /**
+   * 工作组的创建人
+   */
+  Creator: string
+
+  /**
+   * 工作组的创建时间，形如2021-07-28 16:19:32
+   */
+  CreateTime: string
 }
 
 /**
@@ -1934,33 +2374,6 @@ export interface Other {
 }
 
 /**
- * CSV类型数据格式
- */
-export interface CSV {
-  /**
-   * 压缩格式，["Snappy", "Gzip", "None"选一]。
-   */
-  CodeCompress?: string
-
-  /**
-   * CSV序列化及反序列化数据结构。
-   */
-  CSVSerde?: CSVSerde
-
-  /**
-      * 标题行，默认为0。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  HeadLines?: number
-
-  /**
-      * 格式，默认值为CSV
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Format?: string
-}
-
-/**
  * DeleteUsersFromWorkGroup请求参数结构体
  */
 export interface DeleteUsersFromWorkGroupRequest {
@@ -2067,6 +2480,42 @@ export interface Policy {
 }
 
 /**
+ * CreateSparkApp返回参数结构体
+ */
+export interface CreateSparkAppResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTask返回参数结构体
+ */
+export interface CreateTaskResponse {
+  /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteSparkApp返回参数结构体
+ */
+export interface DeleteSparkAppResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTasks请求参数结构体
  */
 export interface CreateTasksRequest {
@@ -2092,14 +2541,13 @@ export interface CreateTasksRequest {
 }
 
 /**
- * CreateTask返回参数结构体
+ * DescribeTable返回参数结构体
  */
-export interface CreateTaskResponse {
+export interface DescribeTableResponse {
   /**
-      * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaskId: string
+   * 数据表对象
+   */
+  Table: TableResponseInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2108,48 +2556,18 @@ export interface CreateTaskResponse {
 }
 
 /**
- * DescribeWorkGroups请求参数结构体
+ * DescribeSparkAppJobs返回参数结构体
  */
-export interface DescribeWorkGroupsRequest {
+export interface DescribeSparkAppJobsResponse {
   /**
-   * 查询的工作组Id，不填或填0表示不过滤。
+   * spark作业列表详情
    */
-  WorkGroupId?: number
+  SparkAppJobs: Array<SparkJobInfo>
 
   /**
-   * 过滤条件，当前仅支持按照工作组名称进行模糊搜索。Key为workgroup-name
+   * spark作业总数
    */
-  Filters?: Array<Filter>
-
-  /**
-   * 偏移量，默认为0
-   */
-  Offset?: number
-
-  /**
-   * 返回数量，默认20，最大值100
-   */
-  Limit?: number
-
-  /**
-   * 排序字段，支持如下字段类型，create-time
-   */
-  SortBy?: string
-
-  /**
-   * 排序方式，desc表示正序，asc表示反序， 默认为asc
-   */
-  Sorting?: string
-}
-
-/**
- * DescribeTable返回参数结构体
- */
-export interface DescribeTableResponse {
-  /**
-   * 数据表对象
-   */
-  Table: TableResponseInfo
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2242,6 +2660,41 @@ export interface DetachUserPolicyResponse {
 }
 
 /**
+ * DescribeWorkGroups请求参数结构体
+ */
+export interface DescribeWorkGroupsRequest {
+  /**
+   * 查询的工作组Id，不填或填0表示不过滤。
+   */
+  WorkGroupId?: number
+
+  /**
+   * 过滤条件，当前仅支持按照工作组名称进行模糊搜索。Key为workgroup-name
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认20，最大值100
+   */
+  Limit?: number
+
+  /**
+   * 排序字段，支持如下字段类型，create-time
+   */
+  SortBy?: string
+
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc
+   */
+  Sorting?: string
+}
+
+/**
  * CreateTasks返回参数结构体
  */
 export interface CreateTasksResponse {
@@ -2259,6 +2712,106 @@ export interface CreateTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateSparkApp请求参数结构体
+ */
+export interface CreateSparkAppRequest {
+  /**
+   * spark应用名
+   */
+  AppName: string
+
+  /**
+   * 1代表spark jar应用，2代表spark streaming应用
+   */
+  AppType: number
+
+  /**
+   * 执行spark作业的数据引擎
+   */
+  DataEngine: string
+
+  /**
+   * spark应用的执行入口
+   */
+  AppFile: string
+
+  /**
+   * 执行spark作业的角色ID
+   */
+  RoleArn: number
+
+  /**
+   * spark作业driver资源规格大小, 可取small,medium,large,xlarge
+   */
+  AppDriverSize: string
+
+  /**
+   * spark作业executor资源规格大小, 可取small,medium,large,xlarge
+   */
+  AppExecutorSize: string
+
+  /**
+   * spark作业executor个数
+   */
+  AppExecutorNums: number
+
+  /**
+   * 该字段已下线，请使用字段Datasource
+   */
+  Eni?: string
+
+  /**
+   * 是否本地上传，可去cos,lakefs
+   */
+  IsLocal?: string
+
+  /**
+   * spark jar作业时的主类
+   */
+  MainClass?: string
+
+  /**
+   * spark配置，以换行符分隔
+   */
+  AppConf?: string
+
+  /**
+   * 是否本地上传，包含cos,lakefs
+   */
+  IsLocalJars?: string
+
+  /**
+   * spark jar作业依赖jars，以逗号分隔
+   */
+  AppJars?: string
+
+  /**
+   * 是否本地上传，包含cos,lakefs
+   */
+  IsLocalFiles?: string
+
+  /**
+   * spark作业依赖资源，以逗号分隔
+   */
+  AppFiles?: string
+
+  /**
+   * spark作业命令行参数
+   */
+  CmdArgs?: string
+
+  /**
+   * 只对spark流任务生效
+   */
+  MaxRetries?: number
+
+  /**
+   * 数据源名
+   */
+  DataSource?: string
 }
 
 /**
@@ -2294,6 +2847,26 @@ export interface CreateWorkGroupRequest {
    * 需要绑定到工作组的用户Id集合
    */
   UserIds?: Array<string>
+}
+
+/**
+ * DescribeSparkAppTasks请求参数结构体
+ */
+export interface DescribeSparkAppTasksRequest {
+  /**
+   * spark作业Id
+   */
+  JobId: string
+
+  /**
+   * 分页查询偏移量
+   */
+  Offset?: number
+
+  /**
+   * 分页查询Limit
+   */
+  Limit?: number
 }
 
 /**
@@ -2343,6 +2916,21 @@ export interface UserMessage {
 }
 
 /**
+ * 数据库和数据表属性信息
+ */
+export interface Property {
+  /**
+   * 属性key名称。
+   */
+  Key: string
+
+  /**
+   * 属性key对应的value。
+   */
+  Value: string
+}
+
+/**
  * AttachUserPolicy返回参数结构体
  */
 export interface AttachUserPolicyResponse {
@@ -2388,18 +2976,44 @@ export interface DescribeViewsResponse {
 }
 
 /**
- * ModifyUser请求参数结构体
+ * 数据表数据格式。
  */
-export interface ModifyUserRequest {
+export interface DataFormat {
   /**
-   * 用户Id，和CAM侧Uin匹配
-   */
-  UserId: string
+      * 文本格式，TextFile。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TextFile: TextFile
 
   /**
-   * 用户描述
-   */
-  UserDescription: string
+      * 文本格式，CSV。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CSV: CSV
+
+  /**
+      * 文本格式，Json。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Json: Other
+
+  /**
+      * Parquet格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Parquet: Other
+
+  /**
+      * ORC格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ORC: Other
+
+  /**
+      * AVRO格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AVRO: Other
 }
 
 /**

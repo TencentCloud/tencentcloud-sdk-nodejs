@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateExportTask", req, cb);
     }
     /**
+     * 删除spark应用
+     */
+    async DeleteSparkApp(req, cb) {
+        return this.request("DeleteSparkApp", req, cb);
+    }
+    /**
      * 获取用户列表信息
      */
     async DescribeUsers(req, cb) {
@@ -130,10 +136,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachWorkGroupPolicy", req, cb);
     }
     /**
-     * 获取工作组列表
+     * 创建spark应用
      */
-    async DescribeWorkGroups(req, cb) {
-        return this.request("DescribeWorkGroups", req, cb);
+    async CreateSparkApp(req, cb) {
+        return this.request("CreateSparkApp", req, cb);
     }
     /**
      * 本接口（CancelTask），用于取消任务执行
@@ -154,10 +160,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatabase", req, cb);
     }
     /**
+     * 获取工作组列表
+     */
+    async DescribeWorkGroups(req, cb) {
+        return this.request("DescribeWorkGroups", req, cb);
+    }
+    /**
      * 修改工作组信息
      */
     async ModifyWorkGroup(req, cb) {
         return this.request("ModifyWorkGroup", req, cb);
+    }
+    /**
+     * 更新spark应用
+     */
+    async ModifySparkApp(req, cb) {
+        return this.request("ModifySparkApp", req, cb);
     }
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
@@ -182,6 +200,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteScript(req, cb) {
         return this.request("DeleteScript", req, cb);
+    }
+    /**
+     * 创建spark任务
+     */
+    async CreateSparkAppTask(req, cb) {
+        return this.request("CreateSparkAppTask", req, cb);
     }
     /**
      * 修改用户信息
@@ -218,6 +242,24 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeStoreLocation(req, cb) {
         return this.request("DescribeStoreLocation", req, cb);
+    }
+    /**
+     * 查询具体的spark应用
+     */
+    async DescribeSparkAppJob(req, cb) {
+        return this.request("DescribeSparkAppJob", req, cb);
+    }
+    /**
+     * 查询spark应用的运行任务实例列表
+     */
+    async DescribeSparkAppTasks(req, cb) {
+        return this.request("DescribeSparkAppTasks", req, cb);
+    }
+    /**
+     * 获取spark应用列表
+     */
+    async DescribeSparkAppJobs(req, cb) {
+        return this.request("DescribeSparkAppJobs", req, cb);
     }
     /**
      * 创建用户

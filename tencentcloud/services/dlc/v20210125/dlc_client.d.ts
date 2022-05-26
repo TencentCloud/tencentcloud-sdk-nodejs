@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTaskResultResponse, DescribeDatabasesRequest, DeleteUserRequest, CreateStoreLocationResponse, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DescribeTasksResponse, CreateTasksInOrderRequest, DetachWorkGroupPolicyResponse, CreateDatabaseRequest, CreateDatabaseResponse, DescribeTasksRequest, DeleteWorkGroupRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, CreateStoreLocationRequest, CreateTaskRequest, CreateTableRequest, DescribeWorkGroupsResponse, DescribeUsersRequest, DescribeScriptsRequest, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, DescribeViewsRequest, CreateExportTaskRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, AttachUserPolicyRequest, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, CreateImportTaskResponse, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeTaskResultRequest, DescribeUsersResponse, DescribeScriptsResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, DeleteWorkGroupResponse, CreateWorkGroupResponse, DescribeTablesRequest, DescribeDatabasesResponse, CreateImportTaskRequest, CreateExportTaskResponse, UnbindWorkGroupsFromUserRequest, DescribeTableRequest, DeleteUsersFromWorkGroupRequest, CreateTasksRequest, CreateTaskResponse, DescribeWorkGroupsRequest, DescribeTableResponse, AddUsersToWorkGroupResponse, DetachUserPolicyResponse, CreateTasksResponse, UnbindWorkGroupsFromUserResponse, CreateWorkGroupRequest, AttachUserPolicyResponse, DetachWorkGroupPolicyRequest, DescribeViewsResponse, ModifyUserRequest } from "./dlc_models";
+import { DescribeTaskResultResponse, DescribeDatabasesRequest, DeleteUserRequest, DescribeSparkAppJobRequest, CreateStoreLocationResponse, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, DeleteSparkAppRequest, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, DescribeSparkAppTasksResponse, DescribeTasksResponse, CreateTasksInOrderRequest, DetachWorkGroupPolicyResponse, ModifySparkAppRequest, CreateDatabaseRequest, CreateDatabaseResponse, DescribeTasksRequest, CreateSparkAppTaskRequest, DeleteWorkGroupRequest, AttachUserPolicyRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DeleteUserResponse, CreateStoreLocationRequest, DescribeSparkAppJobsRequest, CreateTaskRequest, ModifySparkAppResponse, CreateTableRequest, DescribeWorkGroupsResponse, DescribeUsersRequest, DescribeScriptsRequest, DescribeSparkAppJobResponse, DeleteUsersFromWorkGroupResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, DescribeViewsRequest, CreateExportTaskRequest, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, ModifyUserRequest, CreateSparkAppTaskResponse, CancelTaskRequest, BindWorkGroupsToUserResponse, DescribeStoreLocationResponse, DeleteScriptRequest, CreateImportTaskResponse, CreateTableResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DescribeTaskResultRequest, DescribeUsersResponse, DescribeScriptsResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, DeleteWorkGroupResponse, CreateWorkGroupResponse, DescribeTablesRequest, DescribeDatabasesResponse, CreateImportTaskRequest, CreateExportTaskResponse, UnbindWorkGroupsFromUserRequest, DescribeTableRequest, DeleteUsersFromWorkGroupRequest, CreateSparkAppResponse, CreateTaskResponse, DeleteSparkAppResponse, CreateTasksRequest, DescribeTableResponse, DescribeSparkAppJobsResponse, AddUsersToWorkGroupResponse, DetachUserPolicyResponse, DescribeWorkGroupsRequest, CreateTasksResponse, CreateSparkAppRequest, UnbindWorkGroupsFromUserResponse, CreateWorkGroupRequest, DescribeSparkAppTasksRequest, AttachUserPolicyResponse, DetachWorkGroupPolicyRequest, DescribeViewsResponse } from "./dlc_models";
 /**
  * dlc client
  * @class
@@ -40,6 +40,10 @@ export declare class Client extends AbstractClient {
      */
     CreateExportTask(req: CreateExportTaskRequest, cb?: (error: string, rep: CreateExportTaskResponse) => void): Promise<CreateExportTaskResponse>;
     /**
+     * 删除spark应用
+     */
+    DeleteSparkApp(req: DeleteSparkAppRequest, cb?: (error: string, rep: DeleteSparkAppResponse) => void): Promise<DeleteSparkAppResponse>;
+    /**
      * 获取用户列表信息
      */
     DescribeUsers(req: DescribeUsersRequest, cb?: (error: string, rep: DescribeUsersResponse) => void): Promise<DescribeUsersResponse>;
@@ -76,9 +80,9 @@ export declare class Client extends AbstractClient {
      */
     AttachWorkGroupPolicy(req: AttachWorkGroupPolicyRequest, cb?: (error: string, rep: AttachWorkGroupPolicyResponse) => void): Promise<AttachWorkGroupPolicyResponse>;
     /**
-     * 获取工作组列表
+     * 创建spark应用
      */
-    DescribeWorkGroups(req: DescribeWorkGroupsRequest, cb?: (error: string, rep: DescribeWorkGroupsResponse) => void): Promise<DescribeWorkGroupsResponse>;
+    CreateSparkApp(req: CreateSparkAppRequest, cb?: (error: string, rep: CreateSparkAppResponse) => void): Promise<CreateSparkAppResponse>;
     /**
      * 本接口（CancelTask），用于取消任务执行
      */
@@ -92,9 +96,17 @@ export declare class Client extends AbstractClient {
      */
     CreateDatabase(req: CreateDatabaseRequest, cb?: (error: string, rep: CreateDatabaseResponse) => void): Promise<CreateDatabaseResponse>;
     /**
+     * 获取工作组列表
+     */
+    DescribeWorkGroups(req: DescribeWorkGroupsRequest, cb?: (error: string, rep: DescribeWorkGroupsResponse) => void): Promise<DescribeWorkGroupsResponse>;
+    /**
      * 修改工作组信息
      */
     ModifyWorkGroup(req: ModifyWorkGroupRequest, cb?: (error: string, rep: ModifyWorkGroupResponse) => void): Promise<ModifyWorkGroupResponse>;
+    /**
+     * 更新spark应用
+     */
+    ModifySparkApp(req: ModifySparkAppRequest, cb?: (error: string, rep: ModifySparkAppResponse) => void): Promise<ModifySparkAppResponse>;
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
      */
@@ -111,6 +123,10 @@ export declare class Client extends AbstractClient {
      * 该接口（DeleteScript）用于删除sql脚本。
      */
     DeleteScript(req: DeleteScriptRequest, cb?: (error: string, rep: DeleteScriptResponse) => void): Promise<DeleteScriptResponse>;
+    /**
+     * 创建spark任务
+     */
+    CreateSparkAppTask(req: CreateSparkAppTaskRequest, cb?: (error: string, rep: CreateSparkAppTaskResponse) => void): Promise<CreateSparkAppTaskResponse>;
     /**
      * 修改用户信息
      */
@@ -135,6 +151,18 @@ export declare class Client extends AbstractClient {
      * 查询计算结果存储位置。
      */
     DescribeStoreLocation(req?: DescribeStoreLocationRequest, cb?: (error: string, rep: DescribeStoreLocationResponse) => void): Promise<DescribeStoreLocationResponse>;
+    /**
+     * 查询具体的spark应用
+     */
+    DescribeSparkAppJob(req: DescribeSparkAppJobRequest, cb?: (error: string, rep: DescribeSparkAppJobResponse) => void): Promise<DescribeSparkAppJobResponse>;
+    /**
+     * 查询spark应用的运行任务实例列表
+     */
+    DescribeSparkAppTasks(req: DescribeSparkAppTasksRequest, cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void): Promise<DescribeSparkAppTasksResponse>;
+    /**
+     * 获取spark应用列表
+     */
+    DescribeSparkAppJobs(req: DescribeSparkAppJobsRequest, cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void): Promise<DescribeSparkAppJobsResponse>;
     /**
      * 创建用户
      */

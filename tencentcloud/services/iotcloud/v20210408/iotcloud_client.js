@@ -418,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTasks", req, cb);
     }
     /**
+     * 本接口（ListTopicRules）用于分页获取规则列表
+     */
+    async ListTopicRules(req, cb) {
+        return this.request("ListTopicRules", req, cb);
+    }
+    /**
      * 本接口（DescribeProductResources）用于查询产品资源列表。
      */
     async DescribeProductResources(req, cb) {

@@ -76,6 +76,7 @@ import {
   DescribeFirmwareTaskStatisticsResponse,
   DescribePushResourceTaskStatisticsRequest,
   UpdateDevicesEnableStateRequest,
+  ListTopicRulesRequest,
   ListSDKLogRequest,
   SetProductsForbiddenStatusResponse,
   CreateProductResponse,
@@ -92,6 +93,7 @@ import {
   CreateProductRequest,
   DescribeFirmwareTasksRequest,
   DisableTopicRuleResponse,
+  TopicRuleInfo,
   GetAllVersionResponse,
   UpdateTopicPolicyResponse,
   DescribeProductTaskResponse,
@@ -137,6 +139,7 @@ import {
   UploadFirmwareResponse,
   DeleteTopicRuleRequest,
   ReplaceTopicRuleResponse,
+  ListTopicRulesResponse,
   CancelDeviceFirmwareTaskRequest,
   DeleteDeviceResourceRequest,
   DescribeDeviceShadowRequest,
@@ -841,6 +844,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
   ): Promise<DescribeFirmwareTasksResponse> {
     return this.request("DescribeFirmwareTasks", req, cb)
+  }
+
+  /**
+   * 本接口（ListTopicRules）用于分页获取规则列表
+   */
+  async ListTopicRules(
+    req: ListTopicRulesRequest,
+    cb?: (error: string, rep: ListTopicRulesResponse) => void
+  ): Promise<ListTopicRulesResponse> {
+    return this.request("ListTopicRules", req, cb)
   }
 
   /**

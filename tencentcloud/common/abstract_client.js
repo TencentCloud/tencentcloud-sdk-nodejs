@@ -148,7 +148,7 @@ class AbstractClient {
     mergeData(data, prefix = "") {
         const ret = {};
         for (const k in data) {
-            if (data[k] === null) {
+            if (data[k] === null || data[k] === undefined) {
                 continue;
             }
             if (data[k] instanceof Array || data[k] instanceof Object) {

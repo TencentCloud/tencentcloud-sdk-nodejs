@@ -1414,6 +1414,21 @@ export interface UpdateDevicesEnableStateRequest {
 }
 
 /**
+ * ListTopicRules请求参数结构体
+ */
+export interface ListTopicRulesRequest {
+  /**
+   * 请求的页数
+   */
+  PageNum: number
+
+  /**
+   * 分页的大小
+   */
+  PageSize: number
+}
+
+/**
  * ListSDKLog请求参数结构体
  */
 export interface ListSDKLogRequest {
@@ -1828,6 +1843,36 @@ export interface DisableTopicRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 规则详细信息
+ */
+export interface TopicRuleInfo {
+  /**
+   * 规则名称
+   */
+  RuleName: string
+
+  /**
+   * 规则描述
+   */
+  Description: string
+
+  /**
+   * 创建时间
+   */
+  CreatedAt: number
+
+  /**
+   * 不生效
+   */
+  RuleDisabled: boolean
+
+  /**
+   * 规则模式
+   */
+  TopicPattern: string
 }
 
 /**
@@ -2780,6 +2825,26 @@ export interface DeleteTopicRuleRequest {
  * ReplaceTopicRule返回参数结构体
  */
 export interface ReplaceTopicRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListTopicRules返回参数结构体
+ */
+export interface ListTopicRulesResponse {
+  /**
+   * 规则总数量
+   */
+  TotalCnt: number
+
+  /**
+   * 规则列表
+   */
+  Rules: Array<TopicRuleInfo>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

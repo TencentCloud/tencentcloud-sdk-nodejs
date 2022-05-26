@@ -309,7 +309,7 @@ export interface ModifyInstanceNameResponse {
  */
 export interface PauseServerlessRequest {
     /**
-      * 集群id
+      * 集群ID
       */
     ClusterId: string;
     /**
@@ -369,7 +369,7 @@ export interface SetRenewFlagRequest {
       */
     ResourceIds: Array<string>;
     /**
-      * 自动续费标志位
+      * 自动续费标志位，续费标记 0:正常续费  1:自动续费 2:到期不续
       */
     AutoRenewFlag: number;
 }
@@ -460,7 +460,7 @@ export interface ActivateInstanceRequest {
       */
     ClusterId: string;
     /**
-      * 实例ID数组
+      * 实例 ID 列表，单个实例 ID 格式如：cynosdbmysql-ins-n7ocdslw，与TDSQL-C MySQL数据库控制台页面中显示的实例 ID 相同，可使用 查询实例列表 接口获取，其值为输出参数中字段 InstanceId 的值。
       */
     InstanceIdList: Array<string>;
 }
@@ -592,7 +592,7 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
  */
 export interface ModifyAccountParamsRequest {
     /**
-      * 集群id
+      * 集群id，不超过32个字符
       */
     ClusterId: string;
     /**
@@ -631,7 +631,7 @@ export interface DescribeResourcesByDealNameResponse {
  */
 export interface ResumeServerlessResponse {
     /**
-      * 异步流程Id
+      * 异步流程ID
       */
     FlowId: number;
     /**
@@ -752,7 +752,7 @@ export interface DescribeProjectSecurityGroupsResponse {
  */
 export interface PauseServerlessResponse {
     /**
-      * 异步流程Id
+      * 异步流程ID
       */
     FlowId: number;
     /**
@@ -1105,7 +1105,7 @@ export interface CreateClustersRequest {
     DbType: string;
     /**
       * 数据库版本，取值范围:
-<li> MYSQL可选值：5.7 </li>
+<li> MYSQL可选值：5.7，8.0 </li>
       */
     DbVersion: string;
     /**
@@ -1128,7 +1128,7 @@ export interface CreateClustersRequest {
       */
     Storage?: number;
     /**
-      * 集群名称
+      * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
       */
     ClusterName?: string;
     /**
@@ -1185,7 +1185,7 @@ timeRollback，时间点回档
       */
     TimeSpan?: number;
     /**
-      * 包年包月购买时长单位
+      * 包年包月购买时长单位，['s','d','m','y']
       */
     TimeUnit?: string;
     /**
@@ -1342,7 +1342,7 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
       */
     InstanceId: string;
     /**
-      * 要修改的安全组ID列表，一个或者多个安全组Id组成的数组。
+      * 要修改的安全组ID列表，一个或者多个安全组ID组成的数组。
       */
     SecurityGroupIds: Array<string>;
     /**
@@ -1534,7 +1534,7 @@ export interface GrantAccountPrivilegesResponse {
  */
 export interface ResumeServerlessRequest {
     /**
-      * 集群id
+      * 集群ID
       */
     ClusterId: string;
 }
@@ -1840,11 +1840,11 @@ export interface DescribeClusterParamLogsRequest {
       */
     ClusterId: string;
     /**
-      * 返回数量，默认为 20，最大值为 100
+      * 返回数量，默认为 20，取值范围为(0,100]
       */
     Limit?: number;
     /**
-      * 记录偏移量，默认值为0
+      * 记录偏移量，默认值为0，取值范围为[0,INF)
       */
     Offset?: number;
 }
@@ -1861,7 +1861,7 @@ export interface UpgradeInstanceRequest {
       */
     Cpu: number;
     /**
-      * 数据库内存
+      * 数据库内存，单位GB
       */
     Memory: number;
     /**
@@ -2024,11 +2024,11 @@ export interface AddInstancesRequest {
       */
     Cpu: number;
     /**
-      * 内存
+      * 内存，单位为GB
       */
     Memory: number;
     /**
-      * 新增只读实例数
+      * 新增只读实例数，取值范围为(0,16]
       */
     ReadOnlyCount: number;
     /**
@@ -2040,15 +2040,15 @@ export interface AddInstancesRequest {
       */
     VpcId?: string;
     /**
-      * 所属子网ID
+      * 所属子网ID，如果设置了VpcId，则SubnetId必填
       */
     SubnetId?: string;
     /**
-      * 新增RO组时使用的Port
+      * 新增RO组时使用的Port，取值范围为[0,65535)
       */
     Port?: number;
     /**
-      * 实例名称
+      * 实例名称，字符串长度范围为[0,64)
       */
     InstanceName?: string;
     /**
@@ -2061,7 +2061,7 @@ export interface AddInstancesRequest {
       */
     DbType?: string;
     /**
-      * 订单来源
+      * 订单来源，字符串长度范围为[0,64)
       */
     OrderSource?: string;
     /**
@@ -2421,7 +2421,7 @@ export interface DisassociateSecurityGroupsRequest {
       */
     InstanceIds: Array<string>;
     /**
-      * 要修改的安全组ID列表，一个或者多个安全组Id组成的数组。
+      * 要修改的安全组ID列表，一个或者多个安全组ID组成的数组。
       */
     SecurityGroupIds: Array<string>;
     /**

@@ -668,6 +668,16 @@ it("iotcloud.v20210408.DescribeFirmwareTasks", async function () {
     }
 })
 
+it("iotcloud.v20210408.ListTopicRules", async function () {
+    try {
+       const data = await client.ListTopicRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20210408.DescribeProductResources", async function () {
     try {
        const data = await client.DescribeProductResources({})
