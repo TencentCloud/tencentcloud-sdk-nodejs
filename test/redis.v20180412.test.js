@@ -488,6 +488,16 @@ it("redis.v20180412.ModifyInstanceParams", async function () {
     }
 })
 
+it("redis.v20180412.UpgradeProxyVersion", async function () {
+    try {
+       const data = await client.UpgradeProxyVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ModifyParamTemplate", async function () {
     try {
        const data = await client.ModifyParamTemplate({})
@@ -631,6 +641,16 @@ it("redis.v20180412.DescribeProductInfo", async function () {
 it("redis.v20180412.RenewInstance", async function () {
     try {
        const data = await client.RenewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.UpgradeSmallVersion", async function () {
+    try {
+       const data = await client.UpgradeSmallVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

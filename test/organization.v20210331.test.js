@@ -58,4 +58,14 @@ it("organization.v20210331.DescribeOrganization", async function () {
     }
 })
 
+it("organization.v20210331.CreateOrganizationMemberPolicy", async function () {
+    try {
+       const data = await client.CreateOrganizationMemberPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

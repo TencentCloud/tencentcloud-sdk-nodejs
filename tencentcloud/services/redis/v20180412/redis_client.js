@@ -310,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceParams", req, cb);
     }
     /**
+     * 实例proxy版本升级
+     */
+    async UpgradeProxyVersion(req, cb) {
+        return this.request("UpgradeProxyVersion", req, cb);
+    }
+    /**
      * 修改参数模板
      */
     async ModifyParamTemplate(req, cb) {
@@ -398,6 +404,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RenewInstance(req, cb) {
         return this.request("RenewInstance", req, cb);
+    }
+    /**
+     * 实例小版本升级
+     */
+    async UpgradeSmallVersion(req, cb) {
+        return this.request("UpgradeSmallVersion", req, cb);
     }
     /**
      * 手动备份Redis实例

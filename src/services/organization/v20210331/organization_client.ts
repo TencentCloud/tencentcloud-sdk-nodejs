@@ -23,11 +23,13 @@ import {
   DescribeOrganizationResponse,
   BindOrganizationMemberAuthAccountRequest,
   CreateOrganizationMemberRequest,
-  BindOrganizationMemberAuthAccountResponse,
+  DescribeOrganizationMembersResponse,
   DescribeOrganizationMembersRequest,
   OrgMember,
+  CreateOrganizationMemberPolicyResponse,
+  CreateOrganizationMemberPolicyRequest,
   DescribeOrganizationRequest,
-  DescribeOrganizationMembersResponse,
+  BindOrganizationMemberAuthAccountResponse,
   CreateOrganizationMemberResponse,
 } from "./organization_models"
 
@@ -78,5 +80,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationResponse) => void
   ): Promise<DescribeOrganizationResponse> {
     return this.request("DescribeOrganization", req, cb)
+  }
+
+  /**
+   * 创建组织成员的授权策略
+   */
+  async CreateOrganizationMemberPolicy(
+    req: CreateOrganizationMemberPolicyRequest,
+    cb?: (error: string, rep: CreateOrganizationMemberPolicyResponse) => void
+  ): Promise<CreateOrganizationMemberPolicyResponse> {
+    return this.request("CreateOrganizationMemberPolicy", req, cb)
   }
 }

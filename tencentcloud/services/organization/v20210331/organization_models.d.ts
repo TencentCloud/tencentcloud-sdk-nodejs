@@ -164,9 +164,17 @@ export interface CreateOrganizationMemberRequest {
     IdentityRoleID?: Array<number>;
 }
 /**
- * BindOrganizationMemberAuthAccount返回参数结构体
+ * DescribeOrganizationMembers返回参数结构体
  */
-export interface BindOrganizationMemberAuthAccountResponse {
+export interface DescribeOrganizationMembersResponse {
+    /**
+      * 成员列表
+      */
+    Items: Array<OrgMember>;
+    /**
+      * 总数目
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -279,6 +287,41 @@ export interface OrgMember {
     BindStatus: string;
 }
 /**
+ * CreateOrganizationMemberPolicy返回参数结构体
+ */
+export interface CreateOrganizationMemberPolicyResponse {
+    /**
+      * 策略ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicyId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateOrganizationMemberPolicy请求参数结构体
+ */
+export interface CreateOrganizationMemberPolicyRequest {
+    /**
+      * 成员Uin。
+      */
+    MemberUin: number;
+    /**
+      * 策略名。
+      */
+    PolicyName: string;
+    /**
+      * 身份ID。
+      */
+    IdentityId: number;
+    /**
+      * 描述。
+      */
+    Description?: string;
+}
+/**
  * DescribeOrganization请求参数结构体
  */
 export interface DescribeOrganizationRequest {
@@ -288,17 +331,9 @@ export interface DescribeOrganizationRequest {
     Lang?: string;
 }
 /**
- * DescribeOrganizationMembers返回参数结构体
+ * BindOrganizationMemberAuthAccount返回参数结构体
  */
-export interface DescribeOrganizationMembersResponse {
-    /**
-      * 成员列表
-      */
-    Items: Array<OrgMember>;
-    /**
-      * 总数目
-      */
-    Total: number;
+export interface BindOrganizationMemberAuthAccountResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

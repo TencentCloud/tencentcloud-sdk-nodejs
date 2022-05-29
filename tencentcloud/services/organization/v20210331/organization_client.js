@@ -51,5 +51,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeOrganization(req, cb) {
         return this.request("DescribeOrganization", req, cb);
     }
+    /**
+     * 创建组织成员的授权策略
+     */
+    async CreateOrganizationMemberPolicy(req, cb) {
+        return this.request("CreateOrganizationMemberPolicy", req, cb);
+    }
 }
 exports.Client = Client;

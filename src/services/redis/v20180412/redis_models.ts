@@ -16,6 +16,31 @@
  */
 
 /**
+ * UpgradeSmallVersion请求参数结构体
+ */
+export interface UpgradeSmallVersionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 当前redis版本
+   */
+  CurrentRedisVersion: string
+
+  /**
+   * 可升级的redis版本
+   */
+  UpgradeRedisVersion: string
+
+  /**
+   * 1-立即升级   0-维护时间窗口升级
+   */
+  InstanceTypeUpgradeNow: number
+}
+
+/**
  * ModifyInstanceParams返回参数结构体
  */
 export interface ModifyInstanceParamsResponse {
@@ -1931,6 +1956,21 @@ export interface InstanceSecurityGroupDetail {
    * 安全组信息
    */
   SecurityGroupDetails: Array<SecurityGroupDetail>
+}
+
+/**
+ * UpgradeProxyVersion返回参数结构体
+ */
+export interface UpgradeProxyVersionResponse {
+  /**
+   * 异步流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4250,6 +4290,21 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
 }
 
 /**
+ * UpgradeSmallVersion返回参数结构体
+ */
+export interface UpgradeSmallVersionResponse {
+  /**
+   * 异步流程ID
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstanceParams请求参数结构体
  */
 export interface ModifyInstanceParamsRequest {
@@ -4990,6 +5045,31 @@ export interface TendisSlowLogDetail {
    * 节点ID
    */
   Node: string
+}
+
+/**
+ * UpgradeProxyVersion请求参数结构体
+ */
+export interface UpgradeProxyVersionRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 当前proxy版本
+   */
+  CurrentProxyVersion: string
+
+  /**
+   * 可升级的redis版本
+   */
+  UpgradeProxyVersion: string
+
+  /**
+   * 1-立即升级   0-维护时间窗口升级
+   */
+  InstanceTypeUpgradeNow: number
 }
 
 /**

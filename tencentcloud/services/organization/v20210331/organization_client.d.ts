@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeOrganizationResponse, BindOrganizationMemberAuthAccountRequest, CreateOrganizationMemberRequest, BindOrganizationMemberAuthAccountResponse, DescribeOrganizationMembersRequest, DescribeOrganizationRequest, DescribeOrganizationMembersResponse, CreateOrganizationMemberResponse } from "./organization_models";
+import { DescribeOrganizationResponse, BindOrganizationMemberAuthAccountRequest, CreateOrganizationMemberRequest, DescribeOrganizationMembersResponse, DescribeOrganizationMembersRequest, CreateOrganizationMemberPolicyResponse, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse } from "./organization_models";
 /**
  * organization client
  * @class
@@ -23,4 +23,8 @@ export declare class Client extends AbstractClient {
      * 获取企业组织信息
      */
     DescribeOrganization(req: DescribeOrganizationRequest, cb?: (error: string, rep: DescribeOrganizationResponse) => void): Promise<DescribeOrganizationResponse>;
+    /**
+     * 创建组织成员的授权策略
+     */
+    CreateOrganizationMemberPolicy(req: CreateOrganizationMemberPolicyRequest, cb?: (error: string, rep: CreateOrganizationMemberPolicyResponse) => void): Promise<CreateOrganizationMemberPolicyResponse>;
 }

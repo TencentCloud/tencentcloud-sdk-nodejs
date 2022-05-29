@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UpgradeSmallVersionRequest,
   ModifyInstanceParamsResponse,
   EnableReplicaReadonlyRequest,
   RedisBackupSet,
@@ -97,6 +98,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   InquiryPriceCreateInstanceResponse,
   InstanceSecurityGroupDetail,
+  UpgradeProxyVersionResponse,
   ResetPasswordRequest,
   ModifyInstanceAccountResponse,
   DelayDistribution,
@@ -184,6 +186,7 @@ import {
   DestroyPrepaidInstanceResponse,
   DescribeCommonDBInstancesResponse,
   InquiryPriceCreateInstanceRequest,
+  UpgradeSmallVersionResponse,
   ModifyInstanceParamsRequest,
   BackupDownloadInfo,
   BigKeyTypeInfo,
@@ -214,6 +217,7 @@ import {
   DescribeInstanceMonitorSIPRequest,
   InstanceClusterShard,
   TendisSlowLogDetail,
+  UpgradeProxyVersionRequest,
   ZoneCapacityConf,
   UpgradeInstanceRequest,
   DescribeInstanceNodeInfoResponse,
@@ -706,6 +710,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 实例proxy版本升级
+   */
+  async UpgradeProxyVersion(
+    req: UpgradeProxyVersionRequest,
+    cb?: (error: string, rep: UpgradeProxyVersionResponse) => void
+  ): Promise<UpgradeProxyVersionResponse> {
+    return this.request("UpgradeProxyVersion", req, cb)
+  }
+
+  /**
    * 修改参数模板
    */
   async ModifyParamTemplate(
@@ -853,6 +867,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewInstanceResponse) => void
   ): Promise<RenewInstanceResponse> {
     return this.request("RenewInstance", req, cb)
+  }
+
+  /**
+   * 实例小版本升级
+   */
+  async UpgradeSmallVersion(
+    req: UpgradeSmallVersionRequest,
+    cb?: (error: string, rep: UpgradeSmallVersionResponse) => void
+  ): Promise<UpgradeSmallVersionResponse> {
+    return this.request("UpgradeSmallVersion", req, cb)
   }
 
   /**
