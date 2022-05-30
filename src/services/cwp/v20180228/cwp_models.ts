@@ -753,7 +753,7 @@ export interface MalWareList {
   Alias: string
 
   /**
-      * 特性标签
+      * 特性标签，已废弃字段，不会再返回标签，详情中才会返回标签信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<string>
@@ -784,6 +784,21 @@ export interface MalWareList {
    * 风险等级 0未知、1低、2中、3高、4严重
    */
   Level: number
+
+  /**
+   * '木马检测平台用,分割 1云查杀引擎、2TAV、3binaryAi、4异常行为、5威胁情报
+   */
+  CheckPlatform: string
+
+  /**
+   * 木马进程是否存在 0:不存在，1:存在
+   */
+  ProcessExists: number
+
+  /**
+   * 木马文件是否存在 0:不存在，1:存在
+   */
+  FileExists: number
 }
 
 /**
@@ -5210,7 +5225,7 @@ export interface DescribeMalWareListRequest {
 <li>VirusName - String - 是否必填：否 - 描述筛选</li>
 <li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间</li>
 <li>CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间</li>
-<li>Status - String - 是否必填：否 - 状态筛选 4待处理,5信任沃尔玛可哦啊吗,6已隔离,10隔离中,11恢复隔离中</li>
+<li>Status - String - 是否必填：否 - 状态筛选 4待处理,5信任,6已隔离,10隔离中,11恢复隔离中</li>
       */
   Filters?: Array<Filter>
 

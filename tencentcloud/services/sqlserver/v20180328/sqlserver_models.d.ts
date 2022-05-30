@@ -3875,7 +3875,7 @@ export interface AccountCreateInfo {
       */
     IsAdmin?: boolean;
     /**
-      * win-windows鉴权,sql-sqlserver鉴权，不填模式兼容接口sqlserver鉴权
+      * win-windows鉴权,sql-sqlserver鉴权，不填默认值为sql-sqlserver鉴权
       */
     Authentication?: string;
 }

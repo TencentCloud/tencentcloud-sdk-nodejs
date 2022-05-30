@@ -279,6 +279,21 @@ export interface AssociateSecurityGroupsRequest {
 }
 
 /**
+ * TerminateDedicatedDBInstance返回参数结构体
+ */
+export interface TerminateDedicatedDBInstanceResponse {
+  /**
+   * 异步流程Id
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * FlushBinlog返回参数结构体
  */
 export interface FlushBinlogResponse {
@@ -2176,6 +2191,16 @@ export interface KillSessionRequest {
    * 分片序列ID，与ShardId设置一个
    */
   ShardSerialId?: string
+}
+
+/**
+ * TerminateDedicatedDBInstance请求参数结构体
+ */
+export interface TerminateDedicatedDBInstanceRequest {
+  /**
+   * 实例 Id，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
 }
 
 /**

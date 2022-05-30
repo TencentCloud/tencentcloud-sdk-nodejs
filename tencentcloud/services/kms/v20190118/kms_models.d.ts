@@ -88,6 +88,10 @@ export interface CreateKeyRequest {
       * 标签列表
       */
     Tags?: Array<Tag>;
+    /**
+      * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+      */
+    HsmClusterId?: string;
 }
 /**
  * DisableWhiteBoxKey返回参数结构体
@@ -732,6 +736,10 @@ export interface ListKeyDetailRequest {
       * 标签过滤条件
       */
     TagFilters?: Array<TagFilter>;
+    /**
+      * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+      */
+    HsmClusterId?: string;
 }
 /**
  * DeleteWhiteBoxKey请求参数结构体
@@ -896,6 +904,11 @@ export interface CreateKeyResponse {
       */
     TagMsg: string;
     /**
+      * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HsmClusterId: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1002,6 +1015,16 @@ export interface GetServiceStatusResponse {
       */
     ProResourceId: string;
     /**
+      * 是否开通 KMS 托管版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExclusiveVSMEnabled: boolean;
+    /**
+      * 是否开通 KMS 独享版
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExclusiveHSMEnabled: boolean;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1088,6 +1111,10 @@ export interface ListKeysRequest {
       * 根据创建者角色筛选，默认 0 表示用户自己创建的cmk， 1 表示授权其它云产品自动创建的cmk
       */
     Role?: number;
+    /**
+      * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
+      */
+    HsmClusterId?: string;
 }
 /**
  * DescribeWhiteBoxDecryptKey请求参数结构体
@@ -1165,6 +1192,11 @@ export interface KeyMetadata {
       * 资源ID，格式：creatorUin/$creatorUin/$keyId
       */
     ResourceId: string;
+    /**
+      * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HsmClusterId: string;
 }
 /**
  * CancelKeyArchive返回参数结构体

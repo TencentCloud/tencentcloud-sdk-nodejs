@@ -339,6 +339,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelDcnJob", req, cb);
     }
     /**
+     * 本接口（IsolateDedicatedDBInstance）用于销毁已隔离的独享分布式数据库实例。
+     */
+    async TerminateDedicatedDBInstance(req, cb) {
+        return this.request("TerminateDedicatedDBInstance", req, cb);
+    }
+    /**
      * 本接口（CloneAccount）用于克隆实例账户。
      */
     async CloneAccount(req, cb) {

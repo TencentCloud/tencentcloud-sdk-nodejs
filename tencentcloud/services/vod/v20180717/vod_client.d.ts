@@ -676,6 +676,7 @@ export declare class Client extends AbstractClient {
     DeleteSampleSnapshotTemplate(req: DeleteSampleSnapshotTemplateRequest, cb?: (error: string, rep: DeleteSampleSnapshotTemplateResponse) => void): Promise<DeleteSampleSnapshotTemplateResponse>;
     /**
      * 将点播视频发布到微信小程序，供微信小程序播放器播放。
+本接口支持发布原始视频和转码后视频，暂不支持发布自适应码流。
      */
     WeChatMiniProgramPublish(req: WeChatMiniProgramPublishRequest, cb?: (error: string, rep: WeChatMiniProgramPublishResponse) => void): Promise<WeChatMiniProgramPublishResponse>;
     /**

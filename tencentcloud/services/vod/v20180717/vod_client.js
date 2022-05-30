@@ -928,6 +928,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 将点播视频发布到微信小程序，供微信小程序播放器播放。
+本接口支持发布原始视频和转码后视频，暂不支持发布自适应码流。
      */
     async WeChatMiniProgramPublish(req, cb) {
         return this.request("WeChatMiniProgramPublish", req, cb);

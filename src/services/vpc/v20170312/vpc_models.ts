@@ -334,6 +334,7 @@ export interface DescribeNetworkInterfacesRequest {
 <li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2</li>
 <li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例3。</li>
 <li>is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。</li>
+<li>eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡</li>
       */
   Filters?: Array<Filter>
 
@@ -6415,6 +6416,18 @@ export interface DescribeNetworkInterfaceLimitResponse {
   ExtendEniPrivateIpAddressQuantity: number
 
   /**
+      * 中继网卡配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubEniQuantity: number
+
+  /**
+      * 每个中继网卡可以分配的IP配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubEniPrivateIpAddressQuantity: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -7554,6 +7567,11 @@ export interface CreateNetworkInterfaceRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
    */
   Tags?: Array<Tag>
+
+  /**
+   * 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。
+   */
+  TrunkingFlag?: string
 }
 
 /**
@@ -12870,6 +12888,11 @@ export interface ModifyNetworkInterfaceAttributeRequest {
    * 指定绑定的安全组，例如:['sg-1dd51d']。
    */
   SecurityGroupIds?: Array<string>
+
+  /**
+   * 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。
+   */
+  TrunkingFlag?: string
 }
 
 /**
@@ -13582,12 +13605,12 @@ export interface DescribeNetworkInterfacesResponse {
   /**
    * 实例详细信息列表。
    */
-  NetworkInterfaceSet?: Array<NetworkInterface>
+  NetworkInterfaceSet: Array<NetworkInterface>
 
   /**
    * 符合条件的实例数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -25,45 +25,60 @@ export interface ModifyDiskAttributesResponse {
  */
 export interface AutoSnapshotPolicy {
     /**
-      * 定期快照策略ID。
+      * 已绑定当前定期快照策略的云盘ID列表。
       */
-    AutoSnapshotPolicyId?: string;
-    /**
-      * 定期快照策略名称。
-      */
-    AutoSnapshotPolicyName?: string;
-    /**
-      * 定期快照策略的状态。取值范围：<br><li>NORMAL：正常<br><li>ISOLATED：已隔离。
-      */
-    AutoSnapshotPolicyState?: string;
+    DiskIdSet?: Array<string>;
     /**
       * 定期快照策略是否激活。
       */
     IsActivated?: boolean;
     /**
+      * 定期快照策略的状态。取值范围：<br><li>NORMAL：正常<br><li>ISOLATED：已隔离。
+      */
+    AutoSnapshotPolicyState?: string;
+    /**
+      * 是否是跨账号复制快照快照, 1：是, 0: 不是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsCopyToRemote: number;
+    /**
       * 使用该定期快照策略创建出来的快照是否永久保留。
       */
     IsPermanent?: boolean;
-    /**
-      * 使用该定期快照策略创建出来的快照保留天数。
-      */
-    RetentionDays?: number;
-    /**
-      * 定期快照策略的创建时间。
-      */
-    CreateTime?: string;
     /**
       * 定期快照下次触发的时间。
       */
     NextTriggerTime?: string;
     /**
+      * 定期快照策略名称。
+      */
+    AutoSnapshotPolicyName?: string;
+    /**
+      * 定期快照策略ID。
+      */
+    AutoSnapshotPolicyId?: string;
+    /**
       * 定期快照的执行策略。
       */
     Policy?: Array<Policy>;
     /**
-      * 已绑定当前定期快照策略的云盘ID列表。
+      * 定期快照策略的创建时间。
       */
-    DiskIdSet?: Array<string>;
+    CreateTime?: string;
+    /**
+      * 使用该定期快照策略创建出来的快照保留天数。
+      */
+    RetentionDays?: number;
+    /**
+      * 复制的目标账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CopyToAccountUin: string;
+    /**
+      * 已绑定当前定期快照策略的实例ID列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceIdSet: Array<string>;
 }
 /**
  * DescribeSnapshotOperationLogs请求参数结构体
@@ -129,7 +144,7 @@ export interface BindAutoSnapshotPolicyRequest {
     /**
       * 要绑定的云硬盘ID列表，一次请求最多绑定80块云盘。
       */
-    DiskIds: Array<string>;
+    DiskIds?: Array<string>;
 }
 /**
  * CreateSnapshot返回参数结构体
@@ -736,6 +751,10 @@ export interface CreateSnapshotRequest {
       * 云硬盘备份点ID。传入此参数时，将通过备份点创建快照。
       */
     DiskBackupId?: string;
+    /**
+      * 快照绑定的标签。
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeInstancesDiskNum请求参数结构体
@@ -1101,13 +1120,13 @@ export interface ModifySnapshotAttributeRequest {
  */
 export interface UnbindAutoSnapshotPolicyRequest {
     /**
-      * 要解绑定期快照策略的云盘ID列表。
-      */
-    DiskIds: Array<string>;
-    /**
       * 要解绑的定期快照策略ID。
       */
     AutoSnapshotPolicyId: string;
+    /**
+      * 要解绑定期快照策略的云盘ID列表。
+      */
+    DiskIds?: Array<string>;
 }
 /**
  * 云盘配置。
@@ -1325,6 +1344,10 @@ export interface Snapshot {
       * 快照开始共享的时间。
       */
     TimeStartShare: string;
+    /**
+      * 快照绑定的标签列表。
+      */
+    Tags: Array<Tag>;
 }
 /**
  * CreateDisks返回参数结构体

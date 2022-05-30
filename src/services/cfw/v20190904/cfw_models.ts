@@ -2306,23 +2306,23 @@ export interface DescribeAcListsResponse {
   /**
    * 总条数
    */
-  Total?: number
+  Total: number
 
   /**
    * 访问控制列表数据
    */
-  Data?: Array<AcListsData>
+  Data: Array<AcListsData>
 
   /**
    * 不算筛选条数的总条数
    */
-  AllTotal?: number
+  AllTotal: number
 
   /**
       * 访问控制规则全部启用/全部停用
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Enable?: number
+  Enable: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3063,7 +3063,7 @@ export interface DescribeAcListsRequest {
   Offset?: number
 
   /**
-   * 出站还是入站，0：入站，1：出站
+   * 出站还是入站，1：入站，0：出站
    */
   Direction?: number
 

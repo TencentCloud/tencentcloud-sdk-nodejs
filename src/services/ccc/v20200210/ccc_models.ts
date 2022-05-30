@@ -1629,12 +1629,12 @@ export interface DescribeStaffStatusMetricsResponse {
  */
 export interface DescribeTelCallInfoResponse {
   /**
-   * 电话呼出统计分钟数
+   * 呼出套餐包消耗分钟数
    */
   TelCallOutCount: number
 
   /**
-   * 电话呼入统计分钟数
+   * 呼入套餐包消耗分钟数
    */
   TelCallInCount: number
 

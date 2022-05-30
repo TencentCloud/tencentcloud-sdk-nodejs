@@ -3391,7 +3391,7 @@ export interface SendMessageRequest {
   DataHubId: string
 
   /**
-   * 发送消息内容
+   * 发送消息内容(单次请求最多500条)
    */
   Message: Array<BatchContent>
 }
