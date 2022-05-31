@@ -596,6 +596,11 @@ export interface DescribeManagersResponse {
 }
 
 /**
+ * 根证书
+ */
+export type RootCertificates = null
+
+/**
  * DescribeCertificate返回参数结构体
  */
 export interface DescribeCertificateResponse {
@@ -1336,6 +1341,24 @@ export interface DescribeCertificateDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags: Array<Tags>
+
+  /**
+      * 根证书。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RootCert: RootCertificates
+
+  /**
+      * 国密加密证书
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EncryptCert: string
+
+  /**
+      * 国密加密私钥
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EncryptPrivateKey: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

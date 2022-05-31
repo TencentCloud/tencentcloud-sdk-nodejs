@@ -284,12 +284,12 @@ export interface DescribeNamespacesResponse {
   /**
    * 命名空间列表信息
    */
-  NamespaceList?: Array<TcrNamespaceInfo>
+  NamespaceList: Array<TcrNamespaceInfo>
 
   /**
    * 总个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

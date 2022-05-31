@@ -60,6 +60,11 @@ export interface ModifyWatermarkTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 水印模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -106,11 +111,6 @@ export interface ModifyWatermarkTemplateRequest {
    * SVG 水印模板，该字段仅对 SVG 水印模板有效。
    */
   SvgTemplate?: SvgWatermarkInputForUpdate
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -427,6 +427,11 @@ export interface MediaAiAnalysisHighlightItem {
  */
 export interface DescribeAnimatedGraphicsTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 转动图模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -447,11 +452,6 @@ export interface DescribeAnimatedGraphicsTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
       */
   Type?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -754,6 +754,11 @@ export interface CreateImageProcessingTemplateRequest {
   Operations: Array<ImageOperation>
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 图片处理模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -762,11 +767,6 @@ export interface CreateImageProcessingTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -840,6 +840,11 @@ export interface ModifySampleSnapshotTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 采样截图模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -895,11 +900,6 @@ export interface ModifySampleSnapshotTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 
   /**
       * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
@@ -1366,7 +1366,7 @@ export interface DeleteContentReviewTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -1524,7 +1524,7 @@ export interface DeleteSampleSnapshotTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -2117,6 +2117,11 @@ export interface ModifyTranscodeTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
    */
   Container?: string
@@ -2159,11 +2164,6 @@ export interface ModifyTranscodeTemplateRequest {
    * 极速高清转码参数。
    */
   TEHDConfig?: TEHDConfigForUpdate
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -2222,7 +2222,7 @@ export interface DeleteImageProcessingTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -2605,7 +2605,7 @@ export interface DeleteAIRecognitionTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -3153,12 +3153,12 @@ export interface DescribeAIRecognitionTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 视频内容识别模板详情列表。
    */
-  AIRecognitionTemplateSet?: Array<AIRecognitionTemplateItem>
+  AIRecognitionTemplateSet: Array<AIRecognitionTemplateItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3452,7 +3452,7 @@ export interface DeleteTranscodeTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -3494,6 +3494,11 @@ export interface MediaAnimatedGraphicsInfo {
  */
 export interface DescribeSnapshotByTimeOffsetTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 指定时间点截图模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -3514,11 +3519,6 @@ export interface DescribeSnapshotByTimeOffsetTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
       */
   Type?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -4373,7 +4373,7 @@ export interface DeleteAdaptiveDynamicStreamingTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -4524,7 +4524,7 @@ export interface DeleteAIAnalysisTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -4763,12 +4763,12 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 转自适应码流模板详情列表。
    */
-  AdaptiveDynamicStreamingTemplateSet?: Array<AdaptiveDynamicStreamingTemplate>
+  AdaptiveDynamicStreamingTemplateSet: Array<AdaptiveDynamicStreamingTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4823,6 +4823,11 @@ export interface TimeRange {
  */
 export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 转自适应码流模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -4843,11 +4848,6 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
       */
   Type?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -5025,6 +5025,11 @@ export interface ModifyAnimatedGraphicsTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 转动图模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -5076,11 +5081,6 @@ export interface ModifyAnimatedGraphicsTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -5125,6 +5125,11 @@ export interface CreateHeadTailTemplateRequest {
   Name: string
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 模板描述信息，长度限制 256 个字符。
    */
   Comment?: string
@@ -5148,11 +5153,6 @@ export interface CreateHeadTailTemplateRequest {
 默认值：stretch 。
       */
   FillType?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -5504,9 +5504,9 @@ export interface ModifyContentReviewTemplateResponse {
  */
 export interface DescribeWatermarkTemplatesRequest {
   /**
-   * 水印模板唯一标识过滤条件，数组长度限制：100。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
-  Definitions?: Array<number>
+  SubAppId?: number
 
   /**
       * 水印类型过滤条件，可选值：
@@ -5522,16 +5522,16 @@ export interface DescribeWatermarkTemplatesRequest {
   Offset?: number
 
   /**
+   * 水印模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number>
+
+  /**
       * 返回记录条数
 <li>默认值：10；</li>
 <li>最大值：100。</li>
       */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -5954,7 +5954,7 @@ export interface DeleteHeadTailTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -6475,6 +6475,11 @@ export interface AiRecognitionTaskAsrWordsResultOutput {
  */
 export interface DescribeHeadTailTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 片头片尾模板号，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -6488,11 +6493,6 @@ export interface DescribeHeadTailTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -7952,6 +7952,11 @@ export interface MediaSnapshotByTimeOffsetInfo {
  */
 export interface DescribeImageSpriteTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 雪碧图模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -7972,11 +7977,6 @@ export interface DescribeImageSpriteTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
       */
   Type?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -8250,6 +8250,11 @@ export interface AiReviewTerrorismTaskOutput {
  */
 export interface DescribeImageProcessingTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 图片处理模板标识列表。长度限制：100。
    */
   Definitions?: Array<number>
@@ -8270,11 +8275,6 @@ export interface DescribeImageProcessingTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -8475,6 +8475,11 @@ export interface ImageWatermarkInputForUpdate {
  */
 export interface DescribeAIAnalysisTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
    */
   Definitions?: Array<number>
@@ -8488,11 +8493,6 @@ export interface DescribeAIAnalysisTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -9087,6 +9087,11 @@ export interface ModifyContentReviewTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 内容智能识别模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -9134,11 +9139,6 @@ export interface ModifyContentReviewTemplateRequest {
 <li>OFF：否。</li>
       */
   ReviewWallSwitch?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -10258,6 +10258,11 @@ export interface DeleteSuperPlayerConfigResponse {
  */
 export interface DescribeSampleSnapshotTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 采样截图模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -10278,11 +10283,6 @@ export interface DescribeSampleSnapshotTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
       */
   Type?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -10502,6 +10502,11 @@ export interface ModifyAIRecognitionTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 视频内容识别模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -10555,11 +10560,6 @@ export interface ModifyAIRecognitionTemplateRequest {
    * 截帧间隔，单位为秒，最小值为 0.5 秒。
    */
   ScreenshotInterval?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -12285,6 +12285,11 @@ export interface CreateContentReviewTemplateRequest {
  */
 export interface DescribeContentReviewTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 内容智能识别模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -12298,11 +12303,6 @@ export interface DescribeContentReviewTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -12334,12 +12334,12 @@ export interface DescribeImageSpriteTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 雪碧图模板详情列表。
    */
-  ImageSpriteTemplateSet?: Array<ImageSpriteTemplate>
+  ImageSpriteTemplateSet: Array<ImageSpriteTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -12552,7 +12552,7 @@ export interface DeleteImageSpriteTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -12771,6 +12771,11 @@ export interface ModifyHeadTailTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 模板名，长度限制 64 个字符。不传代表不修改。
    */
   Name?: string
@@ -12799,11 +12804,6 @@ export interface ModifyHeadTailTemplateRequest {
 默认值为不修改。
       */
   FillType?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -12980,6 +12980,11 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 指定时间点截图模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -13021,11 +13026,6 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 
   /**
       * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
@@ -13274,12 +13274,12 @@ export interface DescribeSnapshotByTimeOffsetTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 指定时间点截图模板详情列表。
    */
-  SnapshotByTimeOffsetTemplateSet?: Array<SnapshotByTimeOffsetTemplate>
+  SnapshotByTimeOffsetTemplateSet: Array<SnapshotByTimeOffsetTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -13709,6 +13709,11 @@ export interface ModifyImageSpriteTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 雪碧图模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -13767,11 +13772,6 @@ export interface ModifyImageSpriteTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -13794,7 +13794,7 @@ export interface DeleteWatermarkTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -13909,6 +13909,11 @@ export interface ModifyAIAnalysisTemplateRequest {
   Definition: number
 
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 视频内容分析模板名称，长度限制：64 个字符。
    */
   Name?: string
@@ -13942,11 +13947,6 @@ export interface ModifyAIAnalysisTemplateRequest {
    * 智能精彩集锦任务控制参数。
    */
   HighlightConfigure?: HighlightsConfigureInfoForUpdate
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -13983,12 +13983,12 @@ export interface DescribeSampleSnapshotTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 采样截图模板详情列表。
    */
-  SampleSnapshotTemplateSet?: Array<SampleSnapshotTemplate>
+  SampleSnapshotTemplateSet: Array<SampleSnapshotTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14162,6 +14162,11 @@ export interface DeleteClassRequest {
  */
 export interface DescribeTranscodeTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 转码模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -14196,11 +14201,6 @@ export interface DescribeTranscodeTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**
@@ -14258,13 +14258,13 @@ export interface DescribeWatermarkTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 水印模板详情列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WatermarkTemplateSet?: Array<WatermarkTemplate>
+  WatermarkTemplateSet: Array<WatermarkTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -14810,12 +14810,12 @@ export interface DescribeAIAnalysisTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 视频内容分析模板详情列表。
    */
-  AIAnalysisTemplateSet?: Array<AIAnalysisTemplateItem>
+  AIAnalysisTemplateSet: Array<AIAnalysisTemplateItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15731,13 +15731,13 @@ export interface DescribeTranscodeTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 转码模板详情列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranscodeTemplateSet?: Array<TranscodeTemplate>
+  TranscodeTemplateSet: Array<TranscodeTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15755,7 +15755,7 @@ export interface DeleteAnimatedGraphicsTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -15770,7 +15770,7 @@ export interface DeleteSnapshotByTimeOffsetTemplateRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -15782,12 +15782,12 @@ export interface DescribeAnimatedGraphicsTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 转动图模板详情列表。
    */
-  AnimatedGraphicsTemplateSet?: Array<AnimatedGraphicsTemplate>
+  AnimatedGraphicsTemplateSet: Array<AnimatedGraphicsTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -15866,7 +15866,7 @@ export interface ReviewImageRequest {
   Definition: number
 
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
 }
@@ -16418,7 +16418,7 @@ export interface ModifyWatermarkTemplateResponse {
   /**
    * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有值。
    */
-  ImageUrl?: string
+  ImageUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -16544,6 +16544,11 @@ export interface CreateImageSpriteTemplateResponse {
  */
 export interface DescribeAIRecognitionTemplatesRequest {
   /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+
+  /**
    * 视频内容识别模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number>
@@ -16557,11 +16562,6 @@ export interface DescribeAIRecognitionTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
-
-  /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-   */
-  SubAppId?: number
 }
 
 /**

@@ -36,6 +36,7 @@ import {
   CertificateExtra,
   CompanyInfo,
   DescribeManagersResponse,
+  RootCertificates,
   DescribeCertificateResponse,
   HostCertificateResponse,
   UploadConfirmLetterRequest,

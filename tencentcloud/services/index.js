@@ -128,6 +128,8 @@ var dayu_1 = require("./dayu");
 Object.defineProperty(exports, "dayu", { enumerable: true, get: function () { return dayu_1.dayu; } });
 var dbbrain_1 = require("./dbbrain");
 Object.defineProperty(exports, "dbbrain", { enumerable: true, get: function () { return dbbrain_1.dbbrain; } });
+var dbdc_1 = require("./dbdc");
+Object.defineProperty(exports, "dbdc", { enumerable: true, get: function () { return dbdc_1.dbdc; } });
 var dc_1 = require("./dc");
 Object.defineProperty(exports, "dc", { enumerable: true, get: function () { return dc_1.dc; } });
 var dcdb_1 = require("./dcdb");

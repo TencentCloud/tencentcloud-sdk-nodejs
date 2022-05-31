@@ -251,6 +251,16 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DataSource: string;
+    /**
+      * pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsLocalPythonFiles: string;
+    /**
+      * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppPythonFiles: string;
 }
 /**
  * DeleteSparkApp请求参数结构体
@@ -484,6 +494,14 @@ export interface ModifySparkAppRequest {
       * spark作业依赖资源，以逗号分隔
       */
     AppFiles?: string;
+    /**
+      * pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+      */
+    IsLocalPythonFiles?: string;
+    /**
+      * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+      */
+    AppPythonFiles?: string;
     /**
       * spark作业命令行参数
       */
@@ -2361,6 +2379,14 @@ export interface CreateSparkAppRequest {
       * 数据源名
       */
     DataSource?: string;
+    /**
+      * pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+      */
+    IsLocalPythonFiles?: string;
+    /**
+      * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+      */
+    AppPythonFiles?: string;
 }
 /**
  * UnbindWorkGroupsFromUser返回参数结构体
