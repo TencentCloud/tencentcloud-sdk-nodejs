@@ -18,6 +18,116 @@ const client = new tencentcloud.dasb.v20191018.Client({
 })
 describe("dasb.v20191018.test.js", function () {
 
+it("dasb.v20191018.DescribeDeviceGroupMembers", async function () {
+    try {
+       const data = await client.DescribeDeviceGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.CreateDeviceGroup", async function () {
+    try {
+       const data = await client.CreateDeviceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.AddUserGroupMembers", async function () {
+    try {
+       const data = await client.AddUserGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DescribeUsers", async function () {
+    try {
+       const data = await client.DescribeUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.BindDeviceResource", async function () {
+    try {
+       const data = await client.BindDeviceResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DeleteAcls", async function () {
+    try {
+       const data = await client.DeleteAcls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DescribeUserGroups", async function () {
+    try {
+       const data = await client.DescribeUserGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DescribeResources", async function () {
+    try {
+       const data = await client.DescribeResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DeleteUserGroupMembers", async function () {
+    try {
+       const data = await client.DeleteUserGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DeleteDeviceGroups", async function () {
+    try {
+       const data = await client.DeleteDeviceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.ModifyAcl", async function () {
+    try {
+       const data = await client.ModifyAcl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.DeleteUsers", async function () {
     try {
        const data = await client.DeleteUsers({})
@@ -48,6 +158,36 @@ it("dasb.v20191018.DescribeDasbImageIds", async function () {
     }
 })
 
+it("dasb.v20191018.DescribeAcls", async function () {
+    try {
+       const data = await client.DescribeAcls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DeleteDeviceGroupMembers", async function () {
+    try {
+       const data = await client.DeleteDeviceGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.DeleteUserGroups", async function () {
+    try {
+       const data = await client.DeleteUserGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.ModifyUser", async function () {
     try {
        const data = await client.ModifyUser({})
@@ -58,9 +198,9 @@ it("dasb.v20191018.ModifyUser", async function () {
     }
 })
 
-it("dasb.v20191018.DeleteAcls", async function () {
+it("dasb.v20191018.DescribeDeviceGroups", async function () {
     try {
-       const data = await client.DeleteAcls({})
+       const data = await client.DescribeDeviceGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +218,29 @@ it("dasb.v20191018.DescribeDevices", async function () {
     }
 })
 
-it("dasb.v20191018.DescribeAcls", async function () {
+it("dasb.v20191018.DescribeUserGroupMembers", async function () {
     try {
-       const data = await client.DescribeAcls({})
+       const data = await client.DescribeUserGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.AddDeviceGroupMembers", async function () {
+    try {
+       const data = await client.AddDeviceGroupMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.CreateUserGroup", async function () {
+    try {
+       const data = await client.CreateUserGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,26 +251,6 @@ it("dasb.v20191018.DescribeAcls", async function () {
 it("dasb.v20191018.CreateUser", async function () {
     try {
        const data = await client.CreateUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dasb.v20191018.DescribeUsers", async function () {
-    try {
-       const data = await client.DescribeUsers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dasb.v20191018.ModifyAcl", async function () {
-    try {
-       const data = await client.ModifyAcl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

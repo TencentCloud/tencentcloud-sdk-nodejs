@@ -1647,6 +1647,10 @@ IMPORTFAILED-导入失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<Tag>;
+    /**
+      * 镜像许可类型
+      */
+    LicenseType?: string;
 }
 /**
  * DescribeDisasterRecoverGroupQuota返回参数结构体
@@ -2307,6 +2311,10 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     GPUInfo?: GPUInfo;
+    /**
+      * 实例的操作系统许可类型，默认为TencentCloud
+      */
+    LicenseType?: string;
 }
 /**
  * CreateLaunchTemplateVersion请求参数结构体

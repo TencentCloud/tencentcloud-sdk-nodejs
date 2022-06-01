@@ -29,6 +29,67 @@ export interface DescribeFileUrlsResponse {
     RequestId?: string;
 }
 /**
+ * 二期接口返回的模板的信息结构
+ */
+export interface TemplateInfo {
+    /**
+      * 模板ID
+      */
+    TemplateId?: string;
+    /**
+      * 模板名字
+      */
+    TemplateName?: string;
+    /**
+      * 模板描述信息
+      */
+    Description?: string;
+    /**
+      * 模板关联的资源IDs
+      */
+    DocumentResourceIds?: Array<string>;
+    /**
+      * 返回的文件信息结构
+      */
+    FileInfos?: Array<FileInfo>;
+    /**
+      * 附件关联的资源ID是
+      */
+    AttachmentResourceIds?: Array<string>;
+    /**
+      * 签署顺序
+      */
+    SignOrder?: Array<number>;
+    /**
+      * 签署参与者的信息
+      */
+    Recipients?: Array<Recipient>;
+    /**
+      * 模板信息结构
+      */
+    Components?: Array<Component>;
+    /**
+      * 签署区模板信息结构
+      */
+    SignComponents?: Array<Component>;
+    /**
+      * 模板状态(-1:不可用；0:草稿态；1:正式态)
+      */
+    Status?: number;
+    /**
+      * 模板的创建人
+      */
+    Creator?: string;
+    /**
+      * 模板创建的时间戳（精确到秒）
+      */
+    CreatedOn?: number;
+    /**
+      * 发起人角色信息
+      */
+    Promoter?: Recipient;
+}
+/**
  * CreateDocument返回参数结构体
  */
 export interface CreateDocumentResponse {
@@ -196,7 +257,10 @@ export interface CreateSchemeUrlRequest {
       */
     OrganizationName?: string;
     /**
-      * 链接类型 HTTP：跳转电子签小程序的http_url，APP：第三方APP或小程序跳转电子签小程序，默认为HTTP类型
+      * 链接类型
+HTTP：跳转电子签小程序的http_url，
+APP：第三方APP或小程序跳转电子签小程序的path。
+默认为HTTP类型
       */
     EndPoint?: string;
     /**
@@ -463,6 +527,63 @@ export interface DescribeFlowBriefsRequest {
     Agent?: Agent;
 }
 /**
+ * 签署参与者信息
+ */
+export interface Recipient {
+    /**
+      * 签署参与者ID
+      */
+    RecipientId?: string;
+    /**
+      * 参与者类型（ENTERPRISE/INDIVIDUAL）
+      */
+    RecipientType?: string;
+    /**
+      * 描述信息
+      */
+    Description?: string;
+    /**
+      * 角色名称
+      */
+    RoleName?: string;
+    /**
+      * 是否需要验证，默认为false
+      */
+    RequireValidation?: boolean;
+    /**
+      * 是否需要签署，默认为true
+      */
+    RequireSign?: boolean;
+    /**
+      * 添加序列
+      */
+    RoutingOrder?: number;
+    /**
+      * 是否需要发送，默认为true
+      */
+    RequireDelivery?: boolean;
+    /**
+      * 邮箱地址
+      */
+    Email?: string;
+    /**
+      * 电话号码
+      */
+    Mobile?: string;
+    /**
+      * 关联的用户ID
+      */
+    UserId?: string;
+    /**
+      * 发送方式（EMAIL/MOBILE）
+      */
+    DeliveryMethod?: string;
+    /**
+      * 附属信息
+      */
+    RecipientExtra?: string;
+}
+/**
  * DescribeFileUrls请求参数结构体
  */
 export interface DescribeFileUrlsRequest {
@@ -593,17 +714,55 @@ export interface Caller {
     OperatorId?: string;
 }
 /**
- * StartFlow返回参数结构体
+ * DescribeFlowTemplates返回参数结构体
  */
-export interface StartFlowResponse {
+export interface DescribeFlowTemplatesResponse {
     /**
-      * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
+      * 模板详情列表
       */
-    Status: string;
+    Templates: Array<TemplateInfo>;
+    /**
+      * 查询到的总个数
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 查询过滤条件
+ */
+export interface Filter {
+    /**
+      * 查询过滤条件的Key
+      */
+    Key: string;
+    /**
+      * 查询过滤条件的Value列表
+      */
+    Values: Array<string>;
+}
+/**
+ * 二期接口返回的模板中文件的信息结构
+ */
+export interface FileInfo {
+    /**
+      * 文件Id
+      */
+    FileId?: string;
+    /**
+      * 文件名
+      */
+    FileName?: string;
+    /**
+      * 文件大小，单位为Byte
+      */
+    FileSize?: number;
+    /**
+      * 文件上传时间，10位时间戳（精确到秒）
+      */
+    CreatedOn?: number;
 }
 /**
  * 创建流程的签署方信息
@@ -669,6 +828,19 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
       * 签署意愿确认渠道,WEIXINAPP:人脸识别
       */
     VerifyChannel?: Array<string>;
+}
+/**
+ * StartFlow返回参数结构体
+ */
+export interface StartFlowResponse {
+    /**
+      * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
+      */
+    Status: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateSchemeUrl返回参数结构体
@@ -775,6 +947,39 @@ export interface FormField {
       * 控件名字
       */
     ComponentName?: string;
+}
+/**
+ * DescribeFlowTemplates请求参数结构体
+ */
+export interface DescribeFlowTemplatesRequest {
+    /**
+      * 操作人信息
+      */
+    Operator: UserInfo;
+    /**
+      * 查询偏移位置，默认0
+      */
+    Offset?: number;
+    /**
+      * 查询个数，默认20，最大100
+      */
+    Limit?: number;
+    /**
+      * 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 应用相关信息
+      */
+    Agent?: Agent;
+    /**
+      * 暂未开放
+      */
+    GenerateSource?: number;
+    /**
+      * 查询内容：0-模版列表及详情（默认），1-仅模版列表
+      */
+    ContentType?: number;
 }
 /**
  * 用户信息

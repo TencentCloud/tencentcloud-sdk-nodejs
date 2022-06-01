@@ -187,6 +187,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LivenessRecognition", req, cb);
     }
     /**
+     * 解析SDK获取到的证件NFC数据，接口传入SDK返回的ReqId，返回证件信息（个别字段为特定证件类型特有）。SDK生成的ReqId五分钟内有效，重复查询仅收一次费。支持身份证类证件（二代身份证、港澳居住证、台湾居住证、外国人永居证）以及旅行类证件（港澳通行证、台湾通行证、台胞证、回乡证）的NFC识别及核验。
+     */
+    async ParseNfcData(req, cb) {
+        return this.request("ParseNfcData", req, cb);
+    }
+    /**
      * 传入姓名和身份证号，校验两者的真实性和一致性。
      */
     async IdCardVerification(req, cb) {

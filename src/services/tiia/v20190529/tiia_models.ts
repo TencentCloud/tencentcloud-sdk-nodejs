@@ -323,12 +323,12 @@ export interface DetectDisgustResponse {
   /**
    * 对于图片中包含恶心内容的置信度，取值[0,1]，一般超过0.5则表明可能是恶心图片。
    */
-  Confidence?: number
+  Confidence: number
 
   /**
    * 与图像内容最相似的恶心内容的类别，包含腐烂、密集、畸形、血腥、蛇、虫子、牙齿等。
    */
-  Type?: string
+  Type: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -485,7 +485,7 @@ export interface EnhanceImageResponse {
   /**
    * 增强后图片的base64编码。
    */
-  EnhancedImage?: string
+  EnhancedImage: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -801,32 +801,32 @@ export interface CropImageResponse {
   /**
    * 裁剪区域左上角X坐标值
    */
-  X?: number
+  X: number
 
   /**
    * 裁剪区域左上角Y坐标值
    */
-  Y?: number
+  Y: number
 
   /**
    * 裁剪区域的宽度，单位为像素
    */
-  Width?: number
+  Width: number
 
   /**
    * 裁剪区域的高度，单位为像素
    */
-  Height?: number
+  Height: number
 
   /**
    * 原图宽度，单位为像素
    */
-  OriginalWidth?: number
+  OriginalWidth: number
 
   /**
    * 原图高度，单位为像素
    */
-  OriginalHeight?: number
+  OriginalHeight: number
 
   /**
       * 0：抠图正常；
@@ -839,7 +839,7 @@ export interface CropImageResponse {
 
 以上是辅助决策的参考建议，可以根据业务需求选择采纳或忽视。
       */
-  CropResult?: number
+  CropResult: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -943,7 +943,7 @@ export interface DetectProductResponse {
   /**
    * 商品识别结果数组
    */
-  Products?: Array<Product>
+  Products: Array<Product>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", clientConfig);
     }
     /**
+     * 创建边缘计算ECM机器
+     */
+    async CreateECMInstances(req, cb) {
+        return this.request("CreateECMInstances", req, cb);
+    }
+    /**
      * 更新镜像缓存接口
      */
     async UpdateImageCache(req, cb) {
@@ -58,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCluster", req, cb);
     }
     /**
+     * 删除边缘计算实例
+     */
+    async DeleteEdgeClusterInstances(req, cb) {
+        return this.request("DeleteEdgeClusterInstances", req, cb);
+    }
+    /**
      * 修改告警规则
      */
     async ModifyPrometheusAlertRule(req, cb) {
@@ -74,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEKSContainerInstanceEvent(req, cb) {
         return this.request("DescribeEKSContainerInstanceEvent", req, cb);
+    }
+    /**
+     * 查询边缘容器集群可用的自定义参数
+     */
+    async DescribeEdgeAvailableExtraArgs(req, cb) {
+        return this.request("DescribeEdgeAvailableExtraArgs", req, cb);
     }
     /**
      * 获取指定子账户在RBAC授权模式中对应kube-apiserver客户端证书的CommonName字段，如果没有客户端证书，将会签发一个，此接口有最大传入子账户数量上限，当前为50
@@ -94,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusAlertHistory", req, cb);
     }
     /**
+     * 获取边缘计算集群的认证信息
+     */
+    async DescribeTKEEdgeClusterCredential(req, cb) {
+        return this.request("DescribeTKEEdgeClusterCredential", req, cb);
+    }
+    /**
      * 创建集群路由表
      */
     async CreateClusterRouteTable(req, cb) {
@@ -112,16 +136,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusTemplate", req, cb);
     }
     /**
+     * 在TKE集群中安装CLS日志采集组件
+     */
+    async InstallLogAgent(req, cb) {
+        return this.request("InstallLogAgent", req, cb);
+    }
+    /**
      * 根据镜像列表，查询匹配的镜像缓存
      */
     async GetMostSuitableImageCache(req, cb) {
         return this.request("GetMostSuitableImageCache", req, cb);
     }
     /**
-     * 从伸缩组创建节点池
+     * 边缘计算支持的k8s版本
      */
-    async CreateClusterNodePoolFromExistingAsg(req, cb) {
-        return this.request("CreateClusterNodePoolFromExistingAsg", req, cb);
+    async DescribeAvailableTKEEdgeVersion(req, cb) {
+        return this.request("DescribeAvailableTKEEdgeVersion", req, cb);
+    }
+    /**
+     * 查询边缘集群列表
+     */
+    async DescribeTKEEdgeClusters(req, cb) {
+        return this.request("DescribeTKEEdgeClusters", req, cb);
     }
     /**
      * 从TKE集群中卸载CLS日志采集组件
@@ -136,10 +172,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVersions", req, cb);
     }
     /**
+     * 操作TKE集群的addon
+     */
+    async ForwardApplicationRequestV3(req, cb) {
+        return this.request("ForwardApplicationRequestV3", req, cb);
+    }
+    /**
      * 删除弹性集群(yunapiv3)
      */
     async DeleteEKSCluster(req, cb) {
         return this.request("DeleteEKSCluster", req, cb);
+    }
+    /**
+     * 获取边缘计算外部访问的kubeconfig
+     */
+    async DescribeTKEEdgeExternalKubeconfig(req, cb) {
+        return this.request("DescribeTKEEdgeExternalKubeconfig", req, cb);
     }
     /**
      * 开启集群审计
@@ -148,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableClusterAudit", req, cb);
     }
     /**
-     * 编辑节点池
+     * 查询边缘集群自定义参数
      */
-    async ModifyClusterNodePool(req, cb) {
-        return this.request("ModifyClusterNodePool", req, cb);
+    async DescribeEdgeClusterExtraArgs(req, cb) {
+        return this.request("DescribeEdgeClusterExtraArgs", req, cb);
     }
     /**
      * 查询镜像缓存信息接口
@@ -196,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAuthenticationOptions", req, cb);
     }
     /**
-     * 查看集群状态列表
+     * 删除ECM实例
      */
-    async DescribeClusterStatus(req, cb) {
-        return this.request("DescribeClusterStatus", req, cb);
+    async DeleteECMInstances(req, cb) {
+        return this.request("DeleteECMInstances", req, cb);
     }
     /**
      * 查询节点池详情
@@ -250,12 +298,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExistedInstances", req, cb);
     }
     /**
-     * 查询节点池列表
-     */
-    async DescribeClusterNodePools(req, cb) {
-        return this.request("DescribeClusterNodePools", req, cb);
-    }
-    /**
      * 获取弹性容器集群的接入认证信息
      */
     async DescribeEKSClusterCredential(req, cb) {
@@ -272,6 +314,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusterRouteTables(req, cb) {
         return this.request("DescribeClusterRouteTables", req, cb);
+    }
+    /**
+     * 删除边缘容器CVM实例
+     */
+    async DeleteEdgeCVMInstances(req, cb) {
+        return this.request("DeleteEdgeCVMInstances", req, cb);
     }
     /**
      * 将集群内节点移入节点池
@@ -334,10 +382,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstances", req, cb);
     }
     /**
+     * 获取边缘容器CVM实例相关信息
+     */
+    async DescribeEdgeCVMInstances(req, cb) {
+        return this.request("DescribeEdgeCVMInstances", req, cb);
+    }
+    /**
      * 获取集群规模
      */
     async DescribeClusterLevelAttribute(req, cb) {
         return this.request("DescribeClusterLevelAttribute", req, cb);
+    }
+    /**
+     * 删除边缘计算集群
+     */
+    async DeleteTKEEdgeCluster(req, cb) {
+        return this.request("DeleteTKEEdgeCluster", req, cb);
     }
     /**
      * 给GR集群增加可用的ClusterCIDR
@@ -430,6 +490,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTemplateSync", req, cb);
     }
     /**
+     * 提供给附加了VPC-CNI能力的Global-Route集群关闭VPC-CNI
+     */
+    async DisableVpcCniNetworkType(req, cb) {
+        return this.request("DisableVpcCniNetworkType", req, cb);
+    }
+    /**
      * 获取实例详细信息
      */
     async DescribePrometheusInstance(req, cb) {
@@ -478,6 +544,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExternalClusterSpec", req, cb);
     }
     /**
+     * 编辑节点池
+     */
+    async ModifyClusterNodePool(req, cb) {
+        return this.request("ModifyClusterNodePool", req, cb);
+    }
+    /**
      * 创建容器实例
      */
     async CreateEKSContainerInstances(req, cb) {
@@ -520,10 +592,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusGlobalNotification", req, cb);
     }
     /**
-     * 操作TKE集群的addon
+     * 查看集群状态列表
      */
-    async ForwardApplicationRequestV3(req, cb) {
-        return this.request("ForwardApplicationRequestV3", req, cb);
+    async DescribeClusterStatus(req, cb) {
+        return this.request("DescribeClusterStatus", req, cb);
     }
     /**
      * 获取关联目标集群的实例列表
@@ -574,10 +646,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterNodePool", req, cb);
     }
     /**
-     * 在TKE集群中安装CLS日志采集组件
+     * 创建边缘计算集群
      */
-    async InstallLogAgent(req, cb) {
-        return this.request("InstallLogAgent", req, cb);
+    async CreateTKEEdgeCluster(req, cb) {
+        return this.request("CreateTKEEdgeCluster", req, cb);
     }
     /**
      * 获取集群资源使用量
@@ -598,10 +670,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterEndpointVip", req, cb);
     }
     /**
-     * 拉取模板列表，默认模板将总是在最前面
+     * 获取ECM实例相关信息
      */
-    async DescribePrometheusTemplates(req, cb) {
-        return this.request("DescribePrometheusTemplates", req, cb);
+    async DescribeECMInstances(req, cb) {
+        return this.request("DescribeECMInstances", req, cb);
+    }
+    /**
+     * 查询节点池列表
+     */
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
     }
     /**
      * 获取镜像信息
@@ -658,6 +736,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusOverviews", req, cb);
     }
     /**
+     * 获取边缘计算集群的当前状态以及过程信息
+     */
+    async DescribeTKEEdgeClusterStatus(req, cb) {
+        return this.request("DescribeTKEEdgeClusterStatus", req, cb);
+    }
+    /**
      * 创建告警策略
      */
     async CreatePrometheusAlertPolicy(req, cb) {
@@ -706,10 +790,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusTemplate", req, cb);
     }
     /**
+     * 从伸缩组创建节点池
+     */
+    async CreateClusterNodePoolFromExistingAsg(req, cb) {
+        return this.request("CreateClusterNodePoolFromExistingAsg", req, cb);
+    }
+    /**
      * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
      */
     async DescribeClusterKubeconfig(req, cb) {
         return this.request("DescribeClusterKubeconfig", req, cb);
+    }
+    /**
+     * 查询边缘计算集群的节点信息
+     */
+    async DescribeEdgeClusterInstances(req, cb) {
+        return this.request("DescribeEdgeClusterInstances", req, cb);
     }
     /**
      * 集群弹性伸缩配置
@@ -766,16 +862,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEKSContainerInstanceRegions", req, cb);
     }
     /**
+     * 修改边缘计算集群名称等属性
+     */
+    async UpdateTKEEdgeCluster(req, cb) {
+        return this.request("UpdateTKEEdgeCluster", req, cb);
+    }
+    /**
      * 移出节点池节点，但保留在集群内
      */
     async RemoveNodeFromNodePool(req, cb) {
         return this.request("RemoveNodeFromNodePool", req, cb);
     }
     /**
-     * 提供给附加了VPC-CNI能力的Global-Route集群关闭VPC-CNI
+     * 拉取模板列表，默认模板将总是在最前面
      */
-    async DisableVpcCniNetworkType(req, cb) {
-        return this.request("DisableVpcCniNetworkType", req, cb);
+    async DescribePrometheusTemplates(req, cb) {
+        return this.request("DescribePrometheusTemplates", req, cb);
     }
     /**
      * 获取与云监控融合实例列表
@@ -812,6 +914,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetTkeAppChartList(req, cb) {
         return this.request("GetTkeAppChartList", req, cb);
+    }
+    /**
+     * 检查边缘计算集群的CIDR是否冲突
+     */
+    async CheckEdgeClusterCIDR(req, cb) {
+        return this.request("CheckEdgeClusterCIDR", req, cb);
     }
     /**
      * 创建托管集群外网访问端口（老的方式，仅支持托管集群外网端口）

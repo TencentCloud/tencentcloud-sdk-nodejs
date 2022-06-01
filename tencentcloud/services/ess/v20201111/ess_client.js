@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFileUrls", req, cb);
     }
     /**
+     * 通过AuthCode查询用户是否实名
+     */
+    async DescribeThirdPartyAuthCode(req, cb) {
+        return this.request("DescribeThirdPartyAuthCode", req, cb);
+    }
+    /**
      * 创建签署流程
      */
     async CreateFlow(req, cb) {
@@ -59,15 +65,20 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取小程序跳转链接
+
+跳转到小程序的实现，参考官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式）
+
+
+如您需要自主配置小程序跳转链接，请参考: <a href="https://tcloud-doc.isd.com/document/product/1323/74774">跳转小程序链接配置说明</a>
      */
     async CreateSchemeUrl(req, cb) {
         return this.request("CreateSchemeUrl", req, cb);
     }
     /**
-     * 通过AuthCode查询用户是否实名
+     * 二期接口-查询模板
      */
-    async DescribeThirdPartyAuthCode(req, cb) {
-        return this.request("DescribeThirdPartyAuthCode", req, cb);
+    async DescribeFlowTemplates(req, cb) {
+        return this.request("DescribeFlowTemplates", req, cb);
     }
     /**
      * 查询流程摘要

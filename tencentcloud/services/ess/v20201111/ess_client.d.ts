@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, UploadFilesRequest, CancelFlowRequest, DescribeFlowBriefsResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, StartFlowResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CreateFlowResponse } from "./ess_models";
+import { DescribeFileUrlsResponse, CreateDocumentResponse, StartFlowRequest, CancelFlowResponse, CreateDocumentRequest, CreateFlowRequest, CreateSchemeUrlRequest, DescribeThirdPartyAuthCodeRequest, UploadFilesRequest, CancelFlowRequest, DescribeFlowBriefsResponse, UploadFilesResponse, DescribeThirdPartyAuthCodeResponse, CreateFlowByFilesResponse, DescribeFlowBriefsRequest, DescribeFileUrlsRequest, DescribeFlowTemplatesResponse, StartFlowResponse, CreateSchemeUrlResponse, CreateFlowByFilesRequest, CreateFlowResponse, DescribeFlowTemplatesRequest } from "./ess_models";
 /**
  * ess client
  * @class
@@ -24,17 +24,26 @@ export declare class Client extends AbstractClient {
      */
     DescribeFileUrls(req: DescribeFileUrlsRequest, cb?: (error: string, rep: DescribeFileUrlsResponse) => void): Promise<DescribeFileUrlsResponse>;
     /**
+     * 通过AuthCode查询用户是否实名
+     */
+    DescribeThirdPartyAuthCode(req: DescribeThirdPartyAuthCodeRequest, cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void): Promise<DescribeThirdPartyAuthCodeResponse>;
+    /**
      * 创建签署流程
      */
     CreateFlow(req: CreateFlowRequest, cb?: (error: string, rep: CreateFlowResponse) => void): Promise<CreateFlowResponse>;
     /**
      * 获取小程序跳转链接
+
+跳转到小程序的实现，参考官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式）
+
+
+如您需要自主配置小程序跳转链接，请参考: <a href="https://tcloud-doc.isd.com/document/product/1323/74774">跳转小程序链接配置说明</a>
      */
     CreateSchemeUrl(req: CreateSchemeUrlRequest, cb?: (error: string, rep: CreateSchemeUrlResponse) => void): Promise<CreateSchemeUrlResponse>;
     /**
-     * 通过AuthCode查询用户是否实名
+     * 二期接口-查询模板
      */
-    DescribeThirdPartyAuthCode(req: DescribeThirdPartyAuthCodeRequest, cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void): Promise<DescribeThirdPartyAuthCodeResponse>;
+    DescribeFlowTemplates(req: DescribeFlowTemplatesRequest, cb?: (error: string, rep: DescribeFlowTemplatesResponse) => void): Promise<DescribeFlowTemplatesResponse>;
     /**
      * 查询流程摘要
      */

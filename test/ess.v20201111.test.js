@@ -58,6 +58,16 @@ it("ess.v20201111.DescribeFileUrls", async function () {
     }
 })
 
+it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
+    try {
+       const data = await client.DescribeThirdPartyAuthCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlow", async function () {
     try {
        const data = await client.CreateFlow({})
@@ -78,9 +88,9 @@ it("ess.v20201111.CreateSchemeUrl", async function () {
     }
 })
 
-it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
+it("ess.v20201111.DescribeFlowTemplates", async function () {
     try {
-       const data = await client.DescribeThirdPartyAuthCode({})
+       const data = await client.DescribeFlowTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

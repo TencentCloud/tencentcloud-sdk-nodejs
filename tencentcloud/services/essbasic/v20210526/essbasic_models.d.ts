@@ -263,6 +263,18 @@ export interface DescribeTemplatesResponse {
       */
     Templates: Array<TemplateInfo>;
     /**
+      * 查询总数
+      */
+    TotalCount: number;
+    /**
+      * 查询数量
+      */
+    Limit: number;
+    /**
+      * 查询起始偏移
+      */
+    Offset: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -721,6 +733,18 @@ export interface DescribeTemplatesRequest {
       * 模板唯一标识
       */
     TemplateId?: string;
+    /**
+      * 查询内容：0-模版列表及详情（默认），1-仅模版列表
+      */
+    ContentType?: number;
+    /**
+      * 查询个数，默认20，最大100
+      */
+    Limit?: number;
+    /**
+      * 查询偏移位置，默认0
+      */
+    Offset?: number;
 }
 /**
  * SyncProxyOrganizationOperators请求参数结构体

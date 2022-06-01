@@ -131,6 +131,7 @@ import {
   DescribeDBSecurityGroupsRequest,
   DescribeDBSwitchRecordsResponse,
   ModifyCDBProxyConnectionPoolResponse,
+  Tag,
   CreateAuditLogFileResponse,
   ModifyInstanceTagResponse,
   DescribeDBSwitchRecordsRequest,

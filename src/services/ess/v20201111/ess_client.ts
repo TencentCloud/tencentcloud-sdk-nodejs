@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   UploadFile,
   DescribeFileUrlsResponse,
+  TemplateInfo,
   CreateDocumentResponse,
   StartFlowRequest,
   CancelFlowResponse,
@@ -36,16 +37,21 @@ import {
   DescribeThirdPartyAuthCodeResponse,
   CreateFlowByFilesResponse,
   DescribeFlowBriefsRequest,
+  Recipient,
   DescribeFileUrlsRequest,
   ApproverInfo,
   Caller,
-  StartFlowResponse,
+  DescribeFlowTemplatesResponse,
+  Filter,
+  FileInfo,
   FlowCreateApprover,
+  StartFlowResponse,
   CreateSchemeUrlResponse,
   CreateFlowByFilesRequest,
   CreateFlowResponse,
   Agent,
   FormField,
+  DescribeFlowTemplatesRequest,
   UserInfo,
   FlowBrief,
   CcInfo,
@@ -101,6 +107,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过AuthCode查询用户是否实名
+   */
+  async DescribeThirdPartyAuthCode(
+    req: DescribeThirdPartyAuthCodeRequest,
+    cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void
+  ): Promise<DescribeThirdPartyAuthCodeResponse> {
+    return this.request("DescribeThirdPartyAuthCode", req, cb)
+  }
+
+  /**
    * 创建签署流程
    */
   async CreateFlow(
@@ -111,8 +127,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取小程序跳转链接
-   */
+     * 获取小程序跳转链接
+
+跳转到小程序的实现，参考官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式）
+
+
+如您需要自主配置小程序跳转链接，请参考: <a href="https://tcloud-doc.isd.com/document/product/1323/74774">跳转小程序链接配置说明</a>
+     */
   async CreateSchemeUrl(
     req: CreateSchemeUrlRequest,
     cb?: (error: string, rep: CreateSchemeUrlResponse) => void
@@ -121,13 +142,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过AuthCode查询用户是否实名
+   * 二期接口-查询模板
    */
-  async DescribeThirdPartyAuthCode(
-    req: DescribeThirdPartyAuthCodeRequest,
-    cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void
-  ): Promise<DescribeThirdPartyAuthCodeResponse> {
-    return this.request("DescribeThirdPartyAuthCode", req, cb)
+  async DescribeFlowTemplates(
+    req: DescribeFlowTemplatesRequest,
+    cb?: (error: string, rep: DescribeFlowTemplatesResponse) => void
+  ): Promise<DescribeFlowTemplatesResponse> {
+    return this.request("DescribeFlowTemplates", req, cb)
   }
 
   /**

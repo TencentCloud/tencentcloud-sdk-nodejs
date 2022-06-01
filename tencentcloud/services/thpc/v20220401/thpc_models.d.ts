@@ -413,7 +413,7 @@ export interface AddNodesRequest {
       */
     ClusterId: string;
     /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜像和自定义镜像。
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。目前仅支持公有镜。
       */
     ImageId: string;
     /**

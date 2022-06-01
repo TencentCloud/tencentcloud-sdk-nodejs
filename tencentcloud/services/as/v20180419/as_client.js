@@ -116,6 +116,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（AttachInstances）用于将 CVM 实例添加到伸缩组。
+* 仅支持添加处于`RUNNING`（运行中）或`STOPPED`（已关机）状态的 CVM 实例
+* 添加的 CVM 实例需要和伸缩组 VPC 网络一致
 
      */
     async AttachInstances(req, cb) {

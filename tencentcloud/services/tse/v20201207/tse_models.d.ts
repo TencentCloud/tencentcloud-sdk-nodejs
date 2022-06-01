@@ -284,6 +284,10 @@ export interface EnvInfo {
       * 环境运行的节点数
       */
     RunningCount?: number;
+    /**
+      * 环境别名
+      */
+    AliasEnvName?: string;
 }
 /**
  * 查询过滤通用对象

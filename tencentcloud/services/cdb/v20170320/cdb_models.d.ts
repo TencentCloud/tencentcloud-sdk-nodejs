@@ -607,6 +607,10 @@ export interface DescribeDBInstancesRequest {
       * 私有网络字符型subnetId
       */
     UniqSubnetIds?: Array<string>;
+    /**
+      * 标签键值
+      */
+    Tags?: Array<Tag>;
 }
 /**
  * 表名
@@ -2435,6 +2439,19 @@ export interface ModifyCDBProxyConnectionPoolResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 标签结构
+ */
+export interface Tag {
+    /**
+      * 标签键
+      */
+    Key: string;
+    /**
+      * 标签值
+      */
+    Value: string;
 }
 /**
  * CreateAuditLogFile返回参数结构体

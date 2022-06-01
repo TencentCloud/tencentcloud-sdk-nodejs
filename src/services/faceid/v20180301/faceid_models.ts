@@ -557,6 +557,31 @@ export interface PhoneVerificationRequest {
 }
 
 /**
+ * PhoneVerificationCMCC请求参数结构体
+ */
+export interface PhoneVerificationCMCCRequest {
+  /**
+   * 身份证号
+   */
+  IdCard: string
+
+  /**
+   * 姓名
+   */
+  Name: string
+
+  /**
+   * 手机号
+   */
+  Phone: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
+}
+
+/**
  * GetEidResult请求参数结构体
  */
 export interface GetEidResultRequest {
@@ -873,6 +898,138 @@ export interface GetRealNameAuthTokenRequest {
    * 回调地址。实名认证完成后，将会重定向到这个地址通知认证发起方。仅支持http或https协议。
    */
   CallbackURL: string
+}
+
+/**
+ * ParseNfcData返回参数结构体
+ */
+export interface ParseNfcDataResponse {
+  /**
+      * 0为首次查询成功，-1为查询失败。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultCode: string
+
+  /**
+      * 身份证号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdNum: string
+
+  /**
+      * 姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 照片
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Picture: string
+
+  /**
+      * 出生日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BirthDate: string
+
+  /**
+      * 有效期起始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginTime: string
+
+  /**
+      * 有效期结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+
+  /**
+      * 住址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Address: string
+
+  /**
+      * 民族
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Nation: string
+
+  /**
+      * 性别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sex: string
+
+  /**
+      * 身份证 01 中国护照 03 军官证 04 武警证 05 港澳通行证 06 台胞证 07 外国护照 08 士兵证 09 临时身份证 10 户口本 11 警官证 12 外国人永久居留证 13 港澳台居民居住证 14 回乡证 15 大陆居民来往台湾通行证 16 其他证件 99
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IdType: string
+
+  /**
+      * 英文姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnName: string
+
+  /**
+      * 签发机关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SigningOrganization: string
+
+  /**
+      * 港澳台居民居住证，通行证号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OtherIdNum: string
+
+  /**
+      * 旅行证件国籍
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Nationality: string
+
+  /**
+      * 旅行证件机读区第二行 29~42 位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PersonalNumber: string
+
+  /**
+      * 旅行证件类的核验结果。JSON格式如下：
+{"result_issuer ":"签发者证书合法性验证结果 ","result_pape r":"证件安全对象合法性验证 结果 ","result_data" :"防数据篡改验证结果 ","result_chip" :"防证书件芯片被复制验证结果"} 
+ 0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckMRTD: string
+
+  /**
+      * 身份证照片面合成图片
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageA: string
+
+  /**
+      * 身份证国徽面合成图片
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageB: string
+
+  /**
+      * 对result code的结果描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultDescription: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1314,28 +1471,13 @@ export interface ChargeDetail {
 }
 
 /**
- * PhoneVerificationCMCC请求参数结构体
+ * ParseNfcData请求参数结构体
  */
-export interface PhoneVerificationCMCCRequest {
+export interface ParseNfcDataRequest {
   /**
-   * 身份证号
+   * 前端SDK返回
    */
-  IdCard: string
-
-  /**
-   * 姓名
-   */
-  Name: string
-
-  /**
-   * 手机号
-   */
-  Phone: string
-
-  /**
-   * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
-   */
-  Encryption?: Encryption
+  ReqId: string
 }
 
 /**
