@@ -58,9 +58,38 @@ export interface SearchImageResponse {
       */
     ImageInfos: Array<ImageInfo>;
     /**
+      * 输入图的主体信息。
+若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。
+注意：此字段可能返回 null，表示取不到有效值。服务类型为商品图像搜索时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Object: ObjectInfo;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RecognizeCarPro请求参数结构体
+ */
+export interface RecognizeCarProRequest {
+    /**
+      * 图片URL地址。
+图片限制：
+• 图片格式：PNG、JPG、JPEG。
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果；
+• 长宽比：长边：短边<5；
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      */
+    ImageUrl?: string;
+    /**
+      * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+      */
+    ImageBase64?: string;
 }
 /**
  * RecognizeCarPro返回参数结构体
@@ -101,26 +130,87 @@ export interface CreateImageRequest {
     /**
       * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
 Url、Image必须提供一个，如果都提供，只使用 Url。
-图片分辨率不超过4096*4096。
+图片分辨率不超过4096\*4096。
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
       */
     ImageUrl?: string;
-    /**
-      * 图片 base64 数据，base64 编码后大小不可超过5M。
-图片分辨率不超过4096*4096。
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-      */
-    ImageBase64?: string;
     /**
       * 用户自定义的内容，最多支持4096个字符，查询时原样带回。
       */
     CustomContent?: string;
     /**
+      * 图片 base64 数据，base64 编码后大小不可超过5M。
+图片分辨率不超过4096\*4096。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
+      */
+    ImageBase64?: string;
+    /**
       * 图片自定义标签，最多不超过10个，格式为JSON。
       */
     Tags?: string;
+    /**
+      * 是否需要启用主体识别，默认为**TRUE**。
+1.  为**TRUE**时，启用主体识别，返回主体信息。若没有指定**ImageRect**，自动提取最大面积主体创建图片并进行主体识别。主体识别结果可在**Response**中获取。
+2. 为**FALSE**时，不启用主体识别，不返回主体信息。若没有指定**ImageRect**，以整张图创建图片。
+注意：服务类型为商品图像搜索时生效。
+      */
+    EnableDetect?: boolean;
+    /**
+      * 图像类目ID。
+若设置类目ID，提取对应类目的主体创建图片。
+注意：服务类型为商品图像搜索时生效。
+类目信息：
+0：上衣。
+1：裙装。
+2：下装。
+3：包。
+4：鞋。
+5：配饰。
+      */
+    CategoryId?: number;
+    /**
+      * 图像主体区域。
+若设置主体区域，提取指定的区域创建图片。
+      */
+    ImageRect?: Rect;
+}
+/**
+ * DetectLabelBeta请求参数结构体
+ */
+export interface DetectLabelBetaRequest {
+    /**
+      * 图片URL地址。
+图片限制：
+• 图片格式：PNG、JPG、JPEG。
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果；
+• 长宽比：长边：短边<5；
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      */
+    ImageUrl?: string;
+    /**
+      * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+      */
+    ImageBase64?: string;
+    /**
+      * 本次调用支持的识别场景，可选值如下：
+WEB，针对网络图片优化;
+CAMERA，针对手机摄像头拍摄图片优化;
+ALBUM，针对手机相册、网盘产品优化;
+NEWS，针对新闻、资讯、广电等行业优化；
+NONECAM，非实拍图；
+LOCATION，主体位置识别；
+如果不传此参数，则默认为WEB。
+
+支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+      */
+    Scenes?: Array<string>;
 }
 /**
  * DeleteImages返回参数结构体
@@ -186,6 +276,27 @@ export interface DetectProductRequest {
     ImageBase64?: string;
 }
 /**
+ * 图像的主体信息。
+ */
+export interface ObjectInfo {
+    /**
+      * 图像主体区域。
+      */
+    Box: Box;
+    /**
+      * 主体类别ID。
+      */
+    CategoryId: number;
+    /**
+      * 整张图颜色信息。
+      */
+    Colors: Array<ColorInfo>;
+    /**
+      * 属性信息。
+      */
+    Attributes: Array<Attribute>;
+}
+/**
  * 检测到的图片中的商品位置和品类预测。
 当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。
 最多可以输出__3组__检测结果。
@@ -221,6 +332,23 @@ export interface DescribeGroupsRequest {
       * 图库ID，如果不为空，则返回指定库信息。
       */
     GroupId?: string;
+}
+/**
+ * DetectMisbehavior返回参数结构体
+ */
+export interface DetectMisbehaviorResponse {
+    /**
+      * 对于图片中包含不良行为的置信度，取值[0,1]，一般超过0.5则表明可能包含不良行为内容；
+      */
+    Confidence: number;
+    /**
+      * 图像中最可能包含的不良行为类别，包括赌博、打架斗殴、吸毒等。
+      */
+    Type: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AssessQuality返回参数结构体
@@ -285,40 +413,63 @@ export interface SearchImageRequest {
       */
     GroupId: string;
     /**
-      * 图片的 Url 。对应图片 base64 编码后大小不可超过2M。
-图片分辨率不超过1920*1080。
+      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+图片分辨率不超4096\*4096。
 Url、Image必须提供一个，如果都提供，只使用 Url。
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
       */
     ImageUrl?: string;
     /**
-      * 图片 base64 数据，base64 编码后大小不可超过2M。
-图片分辨率不超过1920*1080。
+      * 图片 base64 数据，base64 编码后大小不可超过5M。
+图片分辨率不超过4096\*4096。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+注意：开启主体识别分辨率不超过2000\*2000，图片长宽比小于10（长/短 < 10）。
       */
     ImageBase64?: string;
     /**
-      * 出参Score中，只有超过MatchThreshold值的结果才会返回。默认为0
+      * 返回数量，默认值为10，最大值为100。
       */
-    MatchThreshold?: number;
+    Limit?: number;
     /**
       * 起始序号，默认值为0。
       */
     Offset?: number;
     /**
-      * 返回数量，默认值为10，最大值为100。
+      * 出参Score中，只有超过**MatchThreshold**值的结果才会返回。默认为0
       */
-    Limit?: number;
+    MatchThreshold?: number;
     /**
       * 针对入库时提交的Tags信息进行条件过滤。支持>、>=、 <、 <=、=，!=，多个条件之间支持AND和OR进行连接。
       */
     Filter?: string;
     /**
       * 图像主体区域。
+若设置主体区域，提取指定的区域进行检索。
       */
     ImageRect?: ImageRect;
+    /**
+      * 是否需要启用主体识别，默认为**TRUE** 。
+1. 为**TRUE**时，启用主体识别，返回主体信息。若没有指定**ImageRect**，自动提取最大面积主体进行检索并进行主体识别。主体识别结果可在**Response中**获取。
+2. 为**FALSE**时，不启用主体识别，不返回主体信息。若没有指定**ImageRect**，以整张图检索图片。
+注意：服务类型为商品图像搜索时生效。
+      */
+    EnableDetect?: boolean;
+    /**
+      * 图像类目ID。
+若设置类目ID，提取对应类目的主体进行检索。
+注意：服务类型为商品图像搜索时生效。
+类目信息：
+0：上衣。
+1：裙装。
+2：下装。
+3：包。
+4：鞋。
+5：配饰。
+      */
+    CategoryId?: number;
 }
 /**
  * RecognizeCar返回参数结构体
@@ -522,7 +673,7 @@ export interface CreateGroupRequest {
       */
     MaxQps?: number;
     /**
-      * 图库类型，对应不同服务类型，默认为1。建议手动调整为4～6，1～3为历史版本，不推荐。
+      * 图库类型，对应不同服务类型，默认为4。1～3为历史版本，不推荐。
 参数值：
 4：在自建图库中搜索相同原图，可支持裁剪、翻转、调色、加水印后的图片搜索，适用于图片版权保护、原图查询等场景。
 5：在自建图库中搜索相同或相似的商品图片，适用于商品分类、检索、推荐等电商场景。
@@ -548,6 +699,27 @@ export interface DescribeImagesRequest {
     PicName?: string;
 }
 /**
+ * 具体坐标，可用来判断边界
+ */
+export interface Rect {
+    /**
+      * x轴坐标
+      */
+    X: number;
+    /**
+      * y轴坐标
+      */
+    Y: number;
+    /**
+      * (x,y)坐标距离长度
+      */
+    Width: number;
+    /**
+      * (x,y)坐标距离高度
+      */
+    Height: number;
+}
+/**
  * DetectProductBeta请求参数结构体
  */
 export interface DetectProductBetaRequest {
@@ -567,21 +739,17 @@ export interface DetectProductBetaRequest {
     NeedLemma?: number;
 }
 /**
- * DetectMisbehavior返回参数结构体
+ * 图像主体区域。
  */
-export interface DetectMisbehaviorResponse {
+export interface Box {
     /**
-      * 对于图片中包含不良行为的置信度，取值[0,1]，一般超过0.5则表明可能包含不良行为内容；
+      * 图像主体区域。
       */
-    Confidence: number;
+    Rect: ImageRect;
     /**
-      * 图像中最可能包含的不良行为类别，包括赌博、打架斗殴、吸毒等。
+      * 置信度。
       */
-    Type: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Score: number;
 }
 /**
  * RecognizeCar请求参数结构体
@@ -806,38 +974,21 @@ export interface DetectProductResponse {
     RequestId?: string;
 }
 /**
- * DetectLabelBeta请求参数结构体
+ * 整张图颜色信息。
  */
-export interface DetectLabelBetaRequest {
+export interface ColorInfo {
     /**
-      * 图片URL地址。
-图片限制：
-• 图片格式：PNG、JPG、JPEG。
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果；
-• 长宽比：长边：短边<5；
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      * RGB颜色值（16进制），例如：291A18。
       */
-    ImageUrl?: string;
+    Color: string;
     /**
-      * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
+      * 当前颜色标签所占比例。
       */
-    ImageBase64?: string;
+    Percentage: number;
     /**
-      * 本次调用支持的识别场景，可选值如下：
-WEB，针对网络图片优化;
-CAMERA，针对手机摄像头拍摄图片优化;
-ALBUM，针对手机相册、网盘产品优化;
-NEWS，针对新闻、资讯、广电等行业优化；
-NONECAM，非实拍图；
-LOCATION，主体位置识别；
-如果不传此参数，则默认为WEB。
-
-支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+      * 颜色标签。蜜柚色，米驼色等。
       */
-    Scenes?: Array<string>;
+    Label: string;
 }
 /**
  * 图像主体区域坐标
@@ -864,6 +1015,13 @@ export interface ImageRect {
  * CreateImage返回参数结构体
  */
 export interface CreateImageResponse {
+    /**
+      * 输入图的主体信息。
+若启用主体识别且在请求中指定了类目ID或主体区域，以指定的主体为准。若启用主体识别且没有指定，以最大面积主体为准。
+注意：此字段可能返回 null，表示取不到有效值。服务类型为商品图像搜索时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Object: ObjectInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1002,26 +1160,17 @@ export interface ImageInfo {
     Score: number;
 }
 /**
- * RecognizeCarPro请求参数结构体
+ * 属性
  */
-export interface RecognizeCarProRequest {
+export interface Attribute {
     /**
-      * 图片URL地址。
-图片限制：
-• 图片格式：PNG、JPG、JPEG。
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果；
-• 长宽比：长边：短边<5；
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+      * 属性
       */
-    ImageUrl?: string;
+    Type: string;
     /**
-      * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-**注意：图片需要base64编码，并且要去掉编码头部。**
-支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+      * 属性详情
       */
-    ImageBase64?: string;
+    Details: string;
 }
 /**
  * 名人识别的标签

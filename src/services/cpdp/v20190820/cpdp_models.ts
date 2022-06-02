@@ -6872,15 +6872,13 @@ __FREEZE__:担保支付
   ExpireTime?: string
 
   /**
-      * 前端成功回调URL。条件可选
-当付款方式PaymentMethod为EBANK_PAYMENT时必填
-      */
+   * 前端成功回调URL。条件可选。
+   */
   FrontUrl?: string
 
   /**
-      * 前端刷新 URL。条件可选
-当付款方式PaymentMethod为EBANK_PAYMENT时必填
-      */
+   * 前端刷新 URL。条件可选。
+   */
   RefreshUrl?: string
 
   /**
@@ -13450,7 +13448,7 @@ export interface RegisterBillRequest {
  */
 export interface OpenBankGoodsInfo {
   /**
-   * 商品名称，默认值“商品支付”
+   * 商品标题，默认值“商品支付”
    */
   GoodsName?: string
 
@@ -13460,7 +13458,7 @@ export interface OpenBankGoodsInfo {
   GoodsDetail?: string
 
   /**
-   * 商品简单描述。需传入应用市场上的 APP 名字-实际商品名称，例如：天天爱消除-游戏充值
+   * 银行附言，不可以有以下字符：<>+{}()%*&';"[]等特殊符号
    */
   GoodsDescription?: string
 }

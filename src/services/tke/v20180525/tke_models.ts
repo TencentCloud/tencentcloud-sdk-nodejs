@@ -3693,6 +3693,11 @@ export interface ClusterCIDRSettings {
    * VPC-CNI网络模式下，弹性网卡IP的回收时间，取值范围[300,15768000)
    */
   ClaimExpiredSeconds?: number
+
+  /**
+   * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
+   */
+  IgnoreServiceCIDRConflict?: boolean
 }
 
 /**
@@ -8134,6 +8139,12 @@ export interface ClusterNetworkSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Subnets: Array<string>
+
+  /**
+      * 是否忽略 ServiceCIDR 冲突错误, 仅在 VPC-CNI 模式生效，默认不忽略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IgnoreServiceCIDRConflict: boolean
 }
 
 /**
