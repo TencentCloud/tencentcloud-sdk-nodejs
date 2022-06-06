@@ -38,6 +38,16 @@ it("cpdp.v20190820.DistributeAccreditQuery", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryFlexFreezeOrderList", async function () {
+    try {
+       const data = await client.QueryFlexFreezeOrderList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryMemberTransactionDetails", async function () {
     try {
        const data = await client.QueryMemberTransactionDetails({})
@@ -188,6 +198,16 @@ it("cpdp.v20190820.DownloadBill", async function () {
     }
 })
 
+it("cpdp.v20190820.ApplyFlexPayment", async function () {
+    try {
+       const data = await client.ApplyFlexPayment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.ViewContract", async function () {
     try {
        const data = await client.ViewContract({})
@@ -288,9 +308,19 @@ it("cpdp.v20190820.QueryTrade", async function () {
     }
 })
 
-it("cpdp.v20190820.QueryTransferDetail", async function () {
+it("cpdp.v20190820.QueryFlexPayeeAccountList", async function () {
     try {
-       const data = await client.QueryTransferDetail({})
+       const data = await client.QueryFlexPayeeAccountList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.FreezeFlexBalance", async function () {
+    try {
+       const data = await client.FreezeFlexBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +351,16 @@ it("cpdp.v20190820.QueryOpenBankExternalSubAccountBookBalance", async function (
 it("cpdp.v20190820.QueryMerchantClassification", async function () {
     try {
        const data = await client.QueryMerchantClassification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryFlexSettlementOrderList", async function () {
+    try {
+       const data = await client.QueryFlexSettlementOrderList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,6 +408,26 @@ it("cpdp.v20190820.QueryInvoice", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryFlexPayeeInfo", async function () {
+    try {
+       const data = await client.QueryFlexPayeeInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryTransferDetail", async function () {
+    try {
+       const data = await client.QueryTransferDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryOpenBankBankBranchList", async function () {
     try {
        const data = await client.QueryOpenBankBankBranchList({})
@@ -398,9 +458,9 @@ it("cpdp.v20190820.UnbindRelateAcct", async function () {
     }
 })
 
-it("cpdp.v20190820.CreatePayMerchant", async function () {
+it("cpdp.v20190820.ContractOrder", async function () {
     try {
-       const data = await client.CreatePayMerchant({})
+       const data = await client.ContractOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +481,26 @@ it("cpdp.v20190820.QuerySinglePaymentResult", async function () {
 it("cpdp.v20190820.ApplyOpenBankOrderDetailReceipt", async function () {
     try {
        const data = await client.ApplyOpenBankOrderDetailReceipt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryFlexPaymentOrderList", async function () {
+    try {
+       const data = await client.QueryFlexPaymentOrderList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.RegisterBehavior", async function () {
+    try {
+       const data = await client.RegisterBehavior({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,9 +658,9 @@ it("cpdp.v20190820.DeleteAgentTaxPaymentInfos", async function () {
     }
 })
 
-it("cpdp.v20190820.ContractOrder", async function () {
+it("cpdp.v20190820.CreatePayMerchant", async function () {
     try {
-       const data = await client.ContractOrder({})
+       const data = await client.CreatePayMerchant({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +678,9 @@ it("cpdp.v20190820.GetPayRollAuthList", async function () {
     }
 })
 
-it("cpdp.v20190820.RegisterBehavior", async function () {
+it("cpdp.v20190820.QueryFlexPayeeAccountInfo", async function () {
     try {
-       const data = await client.RegisterBehavior({})
+       const data = await client.QueryFlexPayeeAccountInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,6 +818,26 @@ it("cpdp.v20190820.MigrateOrderRefund", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryFlexPaymentOrderStatus", async function () {
+    try {
+       const data = await client.QueryFlexPaymentOrderStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryFlexAmountBeforeTax", async function () {
+    try {
+       const data = await client.QueryFlexAmountBeforeTax({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.QueryAcctInfo", async function () {
     try {
        const data = await client.QueryAcctInfo({})
@@ -811,6 +911,16 @@ it("cpdp.v20190820.BindAccount", async function () {
 it("cpdp.v20190820.QueryMerchantOrder", async function () {
     try {
        const data = await client.QueryMerchantOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.CreateFlexPayee", async function () {
+    try {
+       const data = await client.CreateFlexPayee({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,6 +1288,16 @@ it("cpdp.v20190820.QueryApplicationMaterial", async function () {
     }
 })
 
+it("cpdp.v20190820.ModifyFlexPayeeAccountRightStatus", async function () {
+    try {
+       const data = await client.ModifyFlexPayeeAccountRightStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.Refund", async function () {
     try {
        const data = await client.Refund({})
@@ -1201,6 +1321,16 @@ it("cpdp.v20190820.CloseOpenBankPaymentOrder", async function () {
 it("cpdp.v20190820.RefundCloudOrder", async function () {
     try {
        const data = await client.RefundCloudOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryFlexPayeeAccountBalance", async function () {
+    try {
+       const data = await client.QueryFlexPayeeAccountBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1711,6 +1841,16 @@ it("cpdp.v20190820.QueryTransferBatch", async function () {
 it("cpdp.v20190820.TerminateContract", async function () {
     try {
        const data = await client.TerminateContract({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.ApplyFlexSettlement", async function () {
+    try {
+       const data = await client.ApplyFlexSettlement({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,9 +18,9 @@ const client = new tencentcloud.cdn.v20180606.Client({
 })
 describe("cdn.v20180606.test.js", function () {
 
-it("cdn.v20180606.CreateEdgePackTask", async function () {
+it("cdn.v20180606.AddCLSTopicDomains", async function () {
     try {
-       const data = await client.CreateEdgePackTask({})
+       const data = await client.AddCLSTopicDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +168,9 @@ it("cdn.v20180606.DisableCaches", async function () {
     }
 })
 
-it("cdn.v20180606.DescribeDomains", async function () {
+it("cdn.v20180606.CreateEdgePackTask", async function () {
     try {
-       const data = await client.DescribeDomains({})
+       const data = await client.CreateEdgePackTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,6 +471,16 @@ it("cdn.v20180606.DescribeWafData", async function () {
 it("cdn.v20180606.ListTopDDoSData", async function () {
     try {
        const data = await client.ListTopDDoSData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.DescribeDomains", async function () {
+    try {
+       const data = await client.DescribeDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

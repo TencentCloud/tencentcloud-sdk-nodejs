@@ -57,7 +57,7 @@ import {
   StartScdnDomainRequest,
   PostSize,
   ListTopWafDataRequest,
-  DescribeCdnDataResponse,
+  AdvanceCacheRule,
   DescribeIpStatusResponse,
   UpdateImageConfigResponse,
   ScdnDomain,
@@ -174,7 +174,7 @@ import {
   CreateScdnLogTaskRequest,
   Quota,
   DistrictIspInfo,
-  ScdnAclRule,
+  AddCLSTopicDomainsResponse,
   SimpleCacheRule,
   ModifyPurgeFetchTaskStatusResponse,
   DisableClsLogTopicResponse,
@@ -191,6 +191,7 @@ import {
   UpdateScdnDomainRequest,
   BotSortBy,
   ManageClsTopicDomainsRequest,
+  AddCLSTopicDomainsRequest,
   ListDiagnoseReportRequest,
   OriginAuthentication,
   DomainBotCount,
@@ -250,7 +251,7 @@ import {
   StatisticItem,
   DescribeImageConfigRequest,
   DescribeCdnIpResponse,
-  AdvanceCacheRule,
+  DescribeCdnDataResponse,
   DescribeCcDataRequest,
   AccessControl,
   ListScdnLogTasksResponse,
@@ -357,6 +358,7 @@ import {
   TopDataMore,
   DiagnoseList,
   IpFilterPathRule,
+  ScdnAclRule,
 } from "./cdn_models"
 
 /**
@@ -369,13 +371,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 动态打包任务提交接口
+   * AddCLSTopicDomains 用于新增域名到某日志主题下
    */
-  async CreateEdgePackTask(
-    req: CreateEdgePackTaskRequest,
-    cb?: (error: string, rep: CreateEdgePackTaskResponse) => void
-  ): Promise<CreateEdgePackTaskResponse> {
-    return this.request("CreateEdgePackTask", req, cb)
+  async AddCLSTopicDomains(
+    req: AddCLSTopicDomainsRequest,
+    cb?: (error: string, rep: AddCLSTopicDomainsResponse) => void
+  ): Promise<AddCLSTopicDomainsResponse> {
+    return this.request("AddCLSTopicDomains", req, cb)
   }
 
   /**
@@ -536,13 +538,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
+   * 动态打包任务提交接口
    */
-  async DescribeDomains(
-    req: DescribeDomainsRequest,
-    cb?: (error: string, rep: DescribeDomainsResponse) => void
-  ): Promise<DescribeDomainsResponse> {
-    return this.request("DescribeDomains", req, cb)
+  async CreateEdgePackTask(
+    req: CreateEdgePackTaskRequest,
+    cb?: (error: string, rep: CreateEdgePackTaskResponse) => void
+  ): Promise<CreateEdgePackTaskResponse> {
+    return this.request("CreateEdgePackTask", req, cb)
   }
 
   /**
@@ -865,6 +867,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListTopDDoSDataResponse) => void
   ): Promise<ListTopDDoSDataResponse> {
     return this.request("ListTopDDoSData", req, cb)
+  }
+
+  /**
+   * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
+   */
+  async DescribeDomains(
+    req: DescribeDomainsRequest,
+    cb?: (error: string, rep: DescribeDomainsResponse) => void
+  ): Promise<DescribeDomainsResponse> {
+    return this.request("DescribeDomains", req, cb)
   }
 
   /**

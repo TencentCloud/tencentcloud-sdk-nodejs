@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DistributeAccreditQuery", req, cb);
     }
     /**
+     * 灵云V2-查询冻结订单列表
+     */
+    async QueryFlexFreezeOrderList(req, cb) {
+        return this.request("QueryFlexFreezeOrderList", req, cb);
+    }
+    /**
      * 聚鑫-查询会员间交易信息列表
      */
     async QueryMemberTransactionDetails(req, cb) {
@@ -130,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DownloadBill", req, cb);
     }
     /**
+     * 灵云V2-付款
+     */
+    async ApplyFlexPayment(req, cb) {
+        return this.request("ApplyFlexPayment", req, cb);
+    }
+    /**
      * 云支付-查询合同明细接口
      */
     async ViewContract(req, cb) {
@@ -190,10 +202,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryTrade", req, cb);
     }
     /**
-     * 通过商家或者微信批次明细单号查询明细单
+     * 灵云V2-收款用户账户列表查询
      */
-    async QueryTransferDetail(req, cb) {
-        return this.request("QueryTransferDetail", req, cb);
+    async QueryFlexPayeeAccountList(req, cb) {
+        return this.request("QueryFlexPayeeAccountList", req, cb);
+    }
+    /**
+     * 灵云V2-冻结余额
+     */
+    async FreezeFlexBalance(req, cb) {
+        return this.request("FreezeFlexBalance", req, cb);
     }
     /**
      * 云支付-添加门店接口
@@ -212,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryMerchantClassification(req, cb) {
         return this.request("QueryMerchantClassification", req, cb);
+    }
+    /**
+     * 灵云V2-查询结算订单列表
+     */
+    async QueryFlexSettlementOrderList(req, cb) {
+        return this.request("QueryFlexSettlementOrderList", req, cb);
     }
     /**
      * 跨境-提交申报材料。申报材料的主体是付款人，需要提前调用【跨境-付款人申请】接口提交付款人信息且审核通过后调用。
@@ -238,6 +262,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryInvoice", req, cb);
     }
     /**
+     * 灵云V2-收款用户信息查询
+     */
+    async QueryFlexPayeeInfo(req, cb) {
+        return this.request("QueryFlexPayeeInfo", req, cb);
+    }
+    /**
+     * 通过商家或者微信批次明细单号查询明细单
+     */
+    async QueryTransferDetail(req, cb) {
+        return this.request("QueryTransferDetail", req, cb);
+    }
+    /**
      * 云企付-查询联行号
      */
     async QueryOpenBankBankBranchList(req, cb) {
@@ -256,10 +292,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindRelateAcct", req, cb);
     }
     /**
-     * 商户新增的接口
+     * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
      */
-    async CreatePayMerchant(req, cb) {
-        return this.request("CreatePayMerchant", req, cb);
+    async ContractOrder(req, cb) {
+        return this.request("ContractOrder", req, cb);
     }
     /**
      * 灵云-单笔转账结果查询
@@ -272,6 +308,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ApplyOpenBankOrderDetailReceipt(req, cb) {
         return this.request("ApplyOpenBankOrderDetailReceipt", req, cb);
+    }
+    /**
+     * 灵云V2-查询付款订单列表
+     */
+    async QueryFlexPaymentOrderList(req, cb) {
+        return this.request("QueryFlexPaymentOrderList", req, cb);
+    }
+    /**
+     * 商户查询是否签约和签约行为上报
+     */
+    async RegisterBehavior(req, cb) {
+        return this.request("RegisterBehavior", req, cb);
     }
     /**
      * 云支付-查询商户明细接口
@@ -365,10 +413,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAgentTaxPaymentInfos", req, cb);
     }
     /**
-     * 应用需要先带上签约信息调用本接口生成支付订单号，并将应答的PayInfo透传给聚鑫SDK，拉起客户端（包括微信公众号/微信小程序/客户端App）支付。
+     * 商户新增的接口
      */
-    async ContractOrder(req, cb) {
-        return this.request("ContractOrder", req, cb);
+    async CreatePayMerchant(req, cb) {
+        return this.request("CreatePayMerchant", req, cb);
     }
     /**
      * 务工卡-查询核身记录
@@ -377,10 +425,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPayRollAuthList", req, cb);
     }
     /**
-     * 商户查询是否签约和签约行为上报
+     * 灵云V2-收款用户账户信息查询
      */
-    async RegisterBehavior(req, cb) {
-        return this.request("RegisterBehavior", req, cb);
+    async QueryFlexPayeeAccountInfo(req, cb) {
+        return this.request("QueryFlexPayeeAccountInfo", req, cb);
     }
     /**
      * 务工卡-生成授权令牌
@@ -461,6 +509,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MigrateOrderRefund", req, cb);
     }
     /**
+     * 灵云V2-查询付款订单状态
+     */
+    async QueryFlexPaymentOrderStatus(req, cb) {
+        return this.request("QueryFlexPaymentOrderStatus", req, cb);
+    }
+    /**
+     * 灵云V2-查询税前金额
+     */
+    async QueryFlexAmountBeforeTax(req, cb) {
+        return this.request("QueryFlexAmountBeforeTax", req, cb);
+    }
+    /**
      * 聚鑫-开户信息查询
      */
     async QueryAcctInfo(req, cb) {
@@ -507,6 +567,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryMerchantOrder(req, cb) {
         return this.request("QueryMerchantOrder", req, cb);
+    }
+    /**
+     * 灵云V2-收款用户开立
+     */
+    async CreateFlexPayee(req, cb) {
+        return this.request("CreateFlexPayee", req, cb);
     }
     /**
      * 智慧零售-发票红冲V2
@@ -729,6 +795,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryApplicationMaterial", req, cb);
     }
     /**
+     * 灵云V2-收款用户账户权益状态修改
+     */
+    async ModifyFlexPayeeAccountRightStatus(req, cb) {
+        return this.request("ModifyFlexPayeeAccountRightStatus", req, cb);
+    }
+    /**
      * 如交易订单需退款，可以通过本接口将支付款全部或部分退还给付款方，聚鑫将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。最长支持1年的订单退款。在订单包含多个子订单的情况下，如果使用本接口传入OutTradeNo或TransactionId退款，则只支持全单退款；如果需要部分退款，请通过传入子订单的方式来指定部分金额退款。
      */
     async Refund(req, cb) {
@@ -745,6 +817,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RefundCloudOrder(req, cb) {
         return this.request("RefundCloudOrder", req, cb);
+    }
+    /**
+     * 灵云V2-收款用户账户余额查询
+     */
+    async QueryFlexPayeeAccountBalance(req, cb) {
+        return this.request("QueryFlexPayeeAccountBalance", req, cb);
     }
     /**
      * 云支付-分账授权申请接口
@@ -1057,6 +1135,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TerminateContract(req, cb) {
         return this.request("TerminateContract", req, cb);
+    }
+    /**
+     * 灵云V2-结算
+     */
+    async ApplyFlexSettlement(req, cb) {
+        return this.request("ApplyFlexSettlement", req, cb);
     }
     /**
      * 云企付-子商户银行卡余额查询

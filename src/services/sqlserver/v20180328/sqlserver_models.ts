@@ -1851,7 +1851,17 @@ export interface RemoveBackupsRequest {
   /**
    * 待删除的备份名称，备份名称可通过DescribeBackups接口的FileName字段获得。单次请求批量删除备份数不能超过10个。
    */
-  BackupNames: Array<string>
+  BackupNames?: Array<string>
+
+  /**
+   * 批量删除手动备份起始时间
+   */
+  StartTime?: string
+
+  /**
+   * 批量删除手动备份截止时间
+   */
+  EndTime?: string
 }
 
 /**

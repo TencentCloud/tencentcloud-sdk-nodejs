@@ -18,91 +18,97 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DismissRoomByStrRoomIdRequest,
   DescribeAbnormalEventResponse,
-  CloudStorage,
   DescribeAbnormalEventRequest,
-  SdkAppIdTrtcMcuTranscodeTimeUsage,
-  ModifyPictureResponse,
-  RemoveUserRequest,
-  DescribeCloudRecordingResponse,
-  TimeValue,
-  StartMCUMixTranscodeByStrRoomIdRequest,
   CreatePictureRequest,
-  DescribeTrtcMcuTranscodeTimeRequest,
-  StopMCUMixTranscodeResponse,
-  RemoveUserByStrRoomIdRequest,
-  SubscribeStreamUserIds,
-  MixLayoutParams,
-  DismissRoomResponse,
+  MixLayout,
+  DescribeHistoryScaleRequest,
+  DescribeCallDetailRequest,
+  RemoveUserByStrRoomIdResponse,
+  StartMCUMixTranscodeRequest,
+  StartMCUMixTranscodeByStrRoomIdRequest,
+  ScaleInfomation,
+  CreateTroubleInfoRequest,
+  DescribeDetailEventResponse,
+  StopMCUMixTranscodeByStrRoomIdResponse,
+  PictureInfo,
+  MixTranscodeParams,
+  DescribeRoomInformationRequest,
+  WaterMarkParams,
+  DescribeRecordStatisticResponse,
+  StartMCUMixTranscodeByStrRoomIdResponse,
+  CloudStorage,
+  TimeValue,
+  DismissRoomByStrRoomIdRequest,
   EventMessage,
   DescribeRecordStatisticRequest,
-  DescribeUserInformationRequest,
-  DescribeCallDetailRequest,
-  ScaleInfomation,
   StorageParams,
   CloudVod,
   EncodeParams,
+  MeasureTrtcMcuExternalResponse,
+  DescribeUserInformationRequest,
+  TrtcTimeNewUsage,
   ModifyPictureRequest,
-  StartMCUMixTranscodeRequest,
+  SmallVideoLayoutParams,
+  SubscribeStreamUserIds,
+  MeasureTrtcMcuExternalRequest,
+  EventList,
+  WaterMarkImage,
+  SdkAppIdTrtcMcuTranscodeTimeUsage,
+  ModifyPictureResponse,
+  StorageFile,
+  WaterMark,
+  MixLayoutParams,
+  StopMCUMixTranscodeResponse,
+  SdkAppIdNewTrtcTimeUsage,
+  RemoveUserRequest,
+  DismissRoomRequest,
   DescribeCloudRecordingRequest,
   TencentVod,
-  RecordParams,
   StopMCUMixTranscodeRequest,
-  UserInformation,
-  MixLayout,
-  DescribeHistoryScaleRequest,
-  DeletePictureRequest,
   LayoutParams,
-  DescribeRoomInformationResponse,
   RecordUsage,
   CreateCloudRecordingRequest,
   OutputParams,
-  WaterMark,
   DeleteCloudRecordingResponse,
-  MixTranscodeParams,
   CreateTroubleInfoResponse,
   StopMCUMixTranscodeByStrRoomIdRequest,
   QualityData,
-  AbnormalEvent,
-  RemoveUserByStrRoomIdResponse,
-  StopMCUMixTranscodeByStrRoomIdResponse,
   DeletePictureResponse,
   ModifyCloudRecordingRequest,
-  CreateTroubleInfoRequest,
-  EventList,
-  StorageFile,
-  PictureInfo,
-  DescribeUserInformationResponse,
-  DescribeDetailEventResponse,
-  CreateCloudRecordingResponse,
-  DescribeCallDetailResponse,
+  VideoParams,
   OneSdkAppIdTranscodeTimeUsagesInfo,
+  CreateCloudRecordingResponse,
+  StartMCUMixTranscodeResponse,
   DescribeTrtcMcuTranscodeTimeResponse,
   DeleteCloudRecordingRequest,
   DescribePictureRequest,
-  SdkAppIdRecordUsage,
-  SmallVideoLayoutParams,
-  RemoveUserResponse,
-  PresetLayoutConfig,
-  VideoParams,
-  AudioParams,
+  DescribeExternalTrtcMeasureResponse,
   DescribePictureResponse,
-  WaterMarkImage,
-  DismissRoomRequest,
-  PublishCdnParams,
-  DescribeRoomInformationRequest,
+  DescribeTrtcMcuTranscodeTimeRequest,
   DescribeDetailEventRequest,
+  UserInformation,
+  DismissRoomByStrRoomIdResponse,
+  ModifyCloudRecordingResponse,
+  AbnormalEvent,
+  DescribeCloudRecordingResponse,
+  DismissRoomResponse,
+  DescribeUserInformationResponse,
+  DescribeCallDetailResponse,
+  DeletePictureRequest,
+  DescribeRoomInformationResponse,
+  DescribeExternalTrtcMeasureRequest,
+  RemoveUserByStrRoomIdRequest,
+  RecordParams,
+  SdkAppIdRecordUsage,
+  PresetLayoutConfig,
+  AudioParams,
+  PublishCdnParams,
   AbnormalExperience,
-  StartMCUMixTranscodeResponse,
   RoomState,
   CreatePictureResponse,
-  WaterMarkParams,
-  DescribeRecordStatisticResponse,
-  DismissRoomByStrRoomIdResponse,
+  RemoveUserResponse,
   DescribeHistoryScaleResponse,
-  StartMCUMixTranscodeByStrRoomIdResponse,
-  ModifyCloudRecordingResponse,
 } from "./trtc_models"
 
 /**
@@ -216,16 +222,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
-   */
-  async ModifyCloudRecording(
-    req: ModifyCloudRecordingRequest,
-    cb?: (error: string, rep: ModifyCloudRecordingResponse) => void
-  ): Promise<ModifyCloudRecordingResponse> {
-    return this.request("ModifyCloudRecording", req, cb)
-  }
-
-  /**
    * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，查询起止时间不超过4个小时， 默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
    **注意**：该接口只用于历史数据统计或核对数据使用，实时类关键业务逻辑不能使用。
    */
@@ -234,6 +230,20 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeCallDetailResponse) => void
   ): Promise<DescribeCallDetailResponse> {
     return this.request("DescribeCallDetail", req, cb)
+  }
+
+  /**
+     * 查询旁路转码计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过2天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async MeasureTrtcMcuExternal(
+    req: MeasureTrtcMcuExternalRequest,
+    cb?: (error: string, rep: MeasureTrtcMcuExternalResponse) => void
+  ): Promise<MeasureTrtcMcuExternalResponse> {
+    return this.request("MeasureTrtcMcuExternal", req, cb)
   }
 
   /**
@@ -258,6 +268,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
+   * 获取Trtc的用量统计数据。走计费渠道二期 只允许查两天的数据
+   */
+  async DescribeExternalTrtcMeasure(
+    req: DescribeExternalTrtcMeasureRequest,
+    cb?: (error: string, rep: DescribeExternalTrtcMeasureResponse) => void
+  ): Promise<DescribeExternalTrtcMeasureResponse> {
+    return this.request("DescribeExternalTrtcMeasure", req, cb)
+  }
+
+  /**
    * 接口说明：结束云端混流
    */
   async StopMCUMixTranscodeByStrRoomId(
@@ -265,6 +285,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void
   ): Promise<StopMCUMixTranscodeByStrRoomIdResponse> {
     return this.request("StopMCUMixTranscodeByStrRoomId", req, cb)
+  }
+
+  /**
+   * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。
+   */
+  async ModifyCloudRecording(
+    req: ModifyCloudRecordingRequest,
+    cb?: (error: string, rep: ModifyCloudRecordingResponse) => void
+  ): Promise<ModifyCloudRecordingResponse> {
+    return this.request("ModifyCloudRecording", req, cb)
   }
 
   /**

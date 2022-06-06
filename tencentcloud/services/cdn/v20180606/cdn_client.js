@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("cdn.tencentcloudapi.com", "2018-06-06", clientConfig);
     }
     /**
-     * 动态打包任务提交接口
+     * AddCLSTopicDomains 用于新增域名到某日志主题下
      */
-    async CreateEdgePackTask(req, cb) {
-        return this.request("CreateEdgePackTask", req, cb);
+    async AddCLSTopicDomains(req, cb) {
+        return this.request("AddCLSTopicDomains", req, cb);
     }
     /**
      * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：边缘节点（edge）尚未全量开放，未在内测名单中的账号不支持调用。
@@ -135,10 +135,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableCaches", req, cb);
     }
     /**
-     * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
+     * 动态打包任务提交接口
      */
-    async DescribeDomains(req, cb) {
-        return this.request("DescribeDomains", req, cb);
+    async CreateEdgePackTask(req, cb) {
+        return this.request("CreateEdgePackTask", req, cb);
     }
     /**
      * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
@@ -341,6 +341,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListTopDDoSData(req, cb) {
         return this.request("ListTopDDoSData", req, cb);
+    }
+    /**
+     * DescribeDomains 用于查询内容分发网络加速域名（含境内、境外）基本配置信息，包括项目ID、服务状态，业务类型、创建时间、更新时间等信息。
+     */
+    async DescribeDomains(req, cb) {
+        return this.request("DescribeDomains", req, cb);
     }
     /**
      * PurgeUrlsCache 用于批量提交 URL 进行刷新，根据 URL 中域名的当前加速区域进行对应区域的刷新。

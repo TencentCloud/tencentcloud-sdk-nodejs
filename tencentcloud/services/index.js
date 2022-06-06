@@ -310,6 +310,8 @@ var taf_1 = require("./taf");
 Object.defineProperty(exports, "taf", { enumerable: true, get: function () { return taf_1.taf; } });
 var tag_1 = require("./tag");
 Object.defineProperty(exports, "tag", { enumerable: true, get: function () { return tag_1.tag; } });
+var tan_1 = require("./tan");
+Object.defineProperty(exports, "tan", { enumerable: true, get: function () { return tan_1.tan; } });
 var tat_1 = require("./tat");
 Object.defineProperty(exports, "tat", { enumerable: true, get: function () { return tat_1.tat; } });
 var tav_1 = require("./tav");

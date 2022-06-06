@@ -1252,27 +1252,37 @@ domain：当查询整个AppID下数据时，按照域名请求量排序
 }
 
 /**
- * DescribeCdnData返回参数结构体
+ * 缓存配置高级版本规则
  */
-export interface DescribeCdnDataResponse {
+export interface AdvanceCacheRule {
   /**
-      * 返回数据的时间粒度，查询时指定：
-min：1 分钟粒度
-5min：5 分钟粒度
-hour：1 小时粒度
-day：天粒度
+      * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+default：源站未返回 max-age 情况下的缓存规则
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Interval: string
+  CacheType: string
 
   /**
-   * 指定条件查询得到的数据明细
-   */
-  Data: Array<ResourceData>
+      * 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+default 时填充 "no max-age"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CacheContents: Array<string>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 缓存过期时间
+单位为秒，最大可设置为 365 天
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CacheTime: number
 }
 
 /**
@@ -5509,23 +5519,13 @@ export interface DistrictIspInfo {
 }
 
 /**
- * 精准访问控制匹配规则
+ * AddCLSTopicDomains返回参数结构体
  */
-export interface ScdnAclRule {
+export interface AddCLSTopicDomainsResponse {
   /**
-   * 匹配关键字
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MatchKey: string
-
-  /**
-   * 逻辑操作符，取值如下
-   */
-  LogiOperator: string
-
-  /**
-   * 匹配值。
-   */
-  MatchValue: string
+  RequestId?: string
 }
 
 /**
@@ -6230,6 +6230,31 @@ export interface ManageClsTopicDomainsRequest {
    * 域名区域配置，注意：如果此字段为空，则表示解绑对应主题下的所有域名
    */
   DomainAreaConfigs?: Array<DomainAreaConfig>
+}
+
+/**
+ * AddCLSTopicDomains请求参数结构体
+ */
+export interface AddCLSTopicDomainsRequest {
+  /**
+   * 日志集ID
+   */
+  LogsetId: string
+
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+
+  /**
+   * 域名区域配置
+   */
+  DomainAreaConfigs: Array<DomainAreaConfig>
+
+  /**
+   * 接入渠道，cdn或者ecdn，默认值为cdn
+   */
+  Channel?: string
 }
 
 /**
@@ -8339,37 +8364,27 @@ export interface DescribeCdnIpResponse {
 }
 
 /**
- * 缓存配置高级版本规则
+ * DescribeCdnData返回参数结构体
  */
-export interface AdvanceCacheRule {
+export interface DescribeCdnDataResponse {
   /**
-      * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-default：源站未返回 max-age 情况下的缓存规则
-注意：此字段可能返回 null，表示取不到有效值。
+      * 返回数据的时间粒度，查询时指定：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
       */
-  CacheType: string
+  Interval: string
 
   /**
-      * 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-default 时填充 "no max-age"
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CacheContents: Array<string>
+   * 指定条件查询得到的数据明细
+   */
+  Data: Array<ResourceData>
 
   /**
-      * 缓存过期时间
-单位为秒，最大可设置为 365 天
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CacheTime: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11007,4 +11022,24 @@ path 时填充绝对路径，如 /xxx/test.html
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RulePaths: Array<string>
+}
+
+/**
+ * 精准访问控制匹配规则
+ */
+export interface ScdnAclRule {
+  /**
+   * 匹配关键字
+   */
+  MatchKey: string
+
+  /**
+   * 逻辑操作符，取值如下
+   */
+  LogiOperator: string
+
+  /**
+   * 匹配值。
+   */
+  MatchValue: string
 }

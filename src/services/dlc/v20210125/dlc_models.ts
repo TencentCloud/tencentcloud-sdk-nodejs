@@ -431,7 +431,7 @@ export interface DetachUserPolicyRequest {
  */
 export interface DescribeSparkAppTasksResponse {
   /**
-      * 任务列表
+      * 任务结果（该字段已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tasks: TaskResponseInfo
@@ -440,6 +440,12 @@ export interface DescribeSparkAppTasksResponse {
    * 任务总数
    */
   TotalCount: number
+
+  /**
+      * 任务结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SparkAppTasks: Array<TaskResponseInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

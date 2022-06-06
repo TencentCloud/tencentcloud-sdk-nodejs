@@ -98,9 +98,9 @@ it("trtc.v20190722.RemoveUser", async function () {
     }
 })
 
-it("trtc.v20190722.ModifyCloudRecording", async function () {
+it("trtc.v20190722.DescribeCallDetail", async function () {
     try {
-       const data = await client.ModifyCloudRecording({})
+       const data = await client.DescribeCallDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("trtc.v20190722.ModifyCloudRecording", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeCallDetail", async function () {
+it("trtc.v20190722.MeasureTrtcMcuExternal", async function () {
     try {
-       const data = await client.DescribeCallDetail({})
+       const data = await client.MeasureTrtcMcuExternal({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,29 @@ it("trtc.v20190722.CreateCloudRecording", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeExternalTrtcMeasure", async function () {
+    try {
+       const data = await client.DescribeExternalTrtcMeasure({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StopMCUMixTranscodeByStrRoomId", async function () {
     try {
        const data = await client.StopMCUMixTranscodeByStrRoomId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.ModifyCloudRecording", async function () {
+    try {
+       const data = await client.ModifyCloudRecording({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1751,6 +1751,10 @@ export interface SpecificationInfo {
       * 售卖规格信息
       */
     SpecItems: Array<SpecItem>;
+    /**
+      * 是否支持跨可用区部署 1-支持，0-不支持
+      */
+    SupportMultiAZ: number;
 }
 /**
  * DescribeSlowLogPatterns请求参数结构体

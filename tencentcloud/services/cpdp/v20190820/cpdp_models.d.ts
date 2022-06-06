@@ -1,19 +1,15 @@
 /**
- * UploadTaxPayment请求参数结构体
+ * QueryFlexPaymentOrderStatus请求参数结构体
  */
-export interface UploadTaxPaymentRequest {
+export interface QueryFlexPaymentOrderStatusRequest {
     /**
-      * 平台渠道
+      * 外部订单ID
       */
-    Channel: number;
+    OutOrderId?: string;
     /**
-      * 完税ID
+      * 订单ID
       */
-    TaxId: string;
-    /**
-      * 完税列表下载地址
-      */
-    FileUrl: string;
+    OrderId?: string;
 }
 /**
  * QueryAcctBinding请求参数结构体
@@ -245,6 +241,15 @@ export interface ApplyPayerinfoResult {
       * 数据
       */
     Data: ApplyPayerinfoData;
+}
+/**
+ * 冻结余额结果
+ */
+export interface FreezeFlexBalanceResult {
+    /**
+      * 冻结订单ID
+      */
+    OrderId: string;
 }
 /**
  * BindAcct请求参数结构体
@@ -508,42 +513,30 @@ export interface RefundTlinxOrderResponse {
     RequestId?: string;
 }
 /**
- * 聚鑫商户余额查询输出项
+ * CreatePayMerchant请求参数结构体
  */
-export interface QueryItem {
+export interface CreatePayMerchantRequest {
     /**
-      * 子商户账户
+      * 平台编号
       */
-    SubAcctNo: string;
+    PlatformCode: string;
     /**
-      * 子账户属性
-1：普通会员子账号
-2：挂账子账号
-3：手续费子账号
-4：利息子账号
-5：平台担保子账号
+      * 渠道方收款商户编号，由渠道方(银行)提 供。
       */
-    SubAcctProperty: string;
+    ChannelMerchantNo: string;
     /**
-      * 业务平台的子商户Id，唯一
+      * 是否需要向渠道进行 商户信息验证 1:验证
+0:不验证
       */
-    SubMchId: string;
+    ChannelCheckFlag: string;
     /**
-      * 子账户名称
+      * 收款商户名称
       */
-    SubAcctName: string;
+    MerchantName: string;
     /**
-      * 账户可用余额
+      * 是否开通 B2B 支付 1:开通 0:不开通 缺省:1
       */
-    AcctAvailBal: string;
-    /**
-      * 可提现金额
-      */
-    CashAmt: string;
-    /**
-      * 维护日期 开户日期或修改日期
-      */
-    MaintenanceDate: string;
+    BusinessPayFlag?: string;
 }
 /**
  * QueryContractPayWayList返回参数结构体
@@ -1168,29 +1161,30 @@ CLIENT_TYPE_H5 H5场景;
     PackageName?: string;
 }
 /**
- * 对账文件信息
+ * 查询会员资金交易信息列表结果
  */
-export interface FileItem {
+export interface QueryFundsTransactionDetailsResult {
     /**
-      * STRING(256)，文件名称
+      * 本次交易返回查询结果记录数。
+      */
+    ResultCount: number;
+    /**
+      * 符合业务查询条件的记录总数。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FileName: string;
+    TotalCount: number;
     /**
-      * STRING(120)，随机密码
+      * 结束标志。
+__0__：否
+__1__：是
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RandomPassword: string;
+    EndFlag: string;
     /**
-      * STRING(512)，文件路径
+      * 会员资金交易信息数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FilePath: string;
-    /**
-      * STRING(64)，提取码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DrawCode: string;
+    TranItemArray: Array<FundsTransactionItem>;
 }
 /**
  * UnbindOpenBankExternalSubMerchantBankAccount请求参数结构体
@@ -1420,6 +1414,28 @@ export interface QuerySinglePayResponse {
     RequestId?: string;
 }
 /**
+ * UploadExternalAnchorInfo返回参数结构体
+ */
+export interface UploadExternalAnchorInfoResponse {
+    /**
+      * 错误码。响应成功："SUCCESS"，其他为不成功。
+      */
+    ErrCode: string;
+    /**
+      * 响应消息。
+      */
+    ErrMessage: string;
+    /**
+      * 该字段为null。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * QueryCustAcctIdBalance返回参数结构体
  */
 export interface QueryCustAcctIdBalanceResponse {
@@ -1565,37 +1581,19 @@ export interface ContractInfo {
     ExternalContractData: string;
 }
 /**
- * QueryOpenBankExternalSubMerchantBankAccount请求参数结构体
+ * 结算订单列表
  */
-export interface QueryOpenBankExternalSubMerchantBankAccountRequest {
+export interface SettlementOrders {
     /**
-      * 渠道商户ID。
+      * 列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ChannelMerchantId: string;
+    List: Array<SettlementOrderResult>;
     /**
-      * 渠道子商户ID。
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ChannelSubMerchantId: string;
-    /**
-      * 渠道名称。
-__TENPAY__: 商企付
-__WECHAT__: 微信支付
-__ALIPAY__: 支付宝
-      */
-    ChannelName: string;
-    /**
-      * 支付方式。
-__EBANK_PAYMENT__: ebank支付
-__OPENBANK_PAYMENT__: openbank支付
-      */
-    PaymentMethod: string;
-    /**
-      * 环境类型。
-__release__:生产环境
-__sandbox__:沙箱环境
-_不填默认为生产环境_
-      */
-    Environment?: string;
+    Count: number;
 }
 /**
  * 第三方渠道合约信息
@@ -1710,17 +1708,21 @@ export interface OrganizationInfo {
     LegalPersonIdCode?: string;
 }
 /**
- * QueryApplicationMaterial请求参数结构体
+ * 灵云V2-银行信息
  */
-export interface QueryApplicationMaterialRequest {
+export interface FlexFundingAccountInfo {
     /**
-      * 申报流水号
+      * 资金账户号
       */
-    DeclareId: string;
+    FundingAccountNo?: string;
     /**
-      * 接入环境。沙箱环境填sandbox
+      * 资金账户类型
       */
-    Profile?: string;
+    FundingAccountType?: string;
+    /**
+      * 资金账户绑定序列号
+      */
+    FundingAccountBindSerialNo?: string;
 }
 /**
  * ConfirmOrder请求参数结构体
@@ -1750,6 +1752,28 @@ wechat 微信渠道
 ChannelName为wechat时，组成为 <Wechat-ExternalPromptInfo>
       */
     ExternalPromptInfoList: Array<CloudExternalPromptInfo>;
+}
+/**
+ * ModifyFlexPayeeAccountRightStatus返回参数结构体
+ */
+export interface ModifyFlexPayeeAccountRightStatusResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果。默认为空。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyMerchant返回参数结构体
@@ -1839,21 +1863,26 @@ export interface CityCodeResult {
     City: string;
 }
 /**
- * QueryMerchantClassification请求参数结构体
+ * CreateFlexPayee返回参数结构体
  */
-export interface QueryMerchantClassificationRequest {
+export interface CreateFlexPayeeResponse {
     /**
-      * 收单系统分配的开放ID
+      * 错误码。SUCCESS为成功，其他为失败
       */
-    OpenId: string;
+    ErrCode: string;
     /**
-      * 收单系统分配的密钥
+      * 错误消息
       */
-    OpenKey: string;
+    ErrMessage: string;
     /**
-      * 沙箱环境填sandbox，正式环境不填
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Profile?: string;
+    Result: CreateFlexPayeeResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 第三方子商户银行卡解绑返回结果
@@ -2409,6 +2438,65 @@ export interface CreateAcctResponse {
     RequestId?: string;
 }
 /**
+ * 付款订单结果
+ */
+export interface PaymentOrderResult {
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 税前金额
+      */
+    AmountBeforeTax: string;
+    /**
+      * 税后金额
+      */
+    AmountAfterTax: string;
+    /**
+      * 税金
+      */
+    Tax: string;
+    /**
+      * 外部订单ID
+      */
+    OutOrderId: string;
+    /**
+      * 订单ID
+      */
+    OrderId: string;
+    /**
+      * 发起时间
+      */
+    InitiateTime: string;
+    /**
+      * 完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime: string;
+    /**
+      * 状态
+ACCEPTED:已受理
+ACCOUNTED:已记账
+PAYING:付款中
+PAYED:完成付款渠道调用
+SUCCEED:已成功
+FAILED:已失败
+      */
+    Status: string;
+    /**
+      * 状态描述
+      */
+    StatusDesc: string;
+    /**
+      * 提现备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+}
+/**
  * DistributeAddReceiver请求参数结构体
  */
 export interface DistributeAddReceiverRequest {
@@ -2532,6 +2620,19 @@ export interface QueryPayerInfoResponse {
     RequestId?: string;
 }
 /**
+ * QueryMerchantBalance返回参数结构体
+ */
+export interface QueryMerchantBalanceResponse {
+    /**
+      * 对接方账户余额查询结果
+      */
+    Result: QueryMerchantBalanceResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * BindOpenBankExternalSubMerchantBankAccount返回参数结构体
  */
 export interface BindOpenBankExternalSubMerchantBankAccountResponse {
@@ -2554,6 +2655,83 @@ __其他__: 见附录-错误码表
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 贸易材料明细查询数据
+ */
+export interface QueryTradeData {
+    /**
+      * 商户号
+      */
+    MerchantId: string;
+    /**
+      * 贸易材料流水号
+      */
+    TradeFileId: string;
+    /**
+      * 贸易材料订单号
+      */
+    TradeOrderId: string;
+    /**
+      * 审核状态
+      */
+    Status: string;
+    /**
+      * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailReason: string;
+    /**
+      * 付款人ID
+      */
+    PayerId: string;
+    /**
+      * 收款人姓名
+      */
+    PayeeName: string;
+    /**
+      * 收款人常驻国家或地区编码
+      */
+    PayeeCountryCode: string;
+    /**
+      * 交易类型
+      */
+    TradeType: string;
+    /**
+      * 交易日期
+      */
+    TradeTime: string;
+    /**
+      * 交易币种
+      */
+    TradeCurrency: string;
+    /**
+      * 交易金额
+      */
+    TradeAmount: string;
+    /**
+      * 交易名称
+      */
+    TradeName: string;
+    /**
+      * 交易数量
+      */
+    TradeCount: number;
+    /**
+      * 货贸承运人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GoodsCarrier: string;
+    /**
+      * 服贸交易细节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceDetail: string;
+    /**
+      * 服贸服务时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceTime: string;
 }
 /**
  * QueryMemberTransactionDetails返回参数结构体
@@ -2580,66 +2758,25 @@ __其他__: 见附录-错误码表
     RequestId?: string;
 }
 /**
- * 查询发票结果数据
+ * 付款结果
  */
-export interface QueryInvoiceResultData {
+export interface ApplyFlexPaymentResult {
     /**
-      * 订单号
+      * 订单ID
       */
     OrderId: string;
     /**
-      * 业务开票号
+      * 税前金额
       */
-    OrderSn: string;
+    AmountBeforeTax: string;
     /**
-      * 发票状态
+      * 税后金额
       */
-    Status: number;
+    AmountAfterTax: string;
     /**
-      * 开票描述
+      * 税金
       */
-    Message: string;
-    /**
-      * 开票日期
-      */
-    TicketDate: string;
-    /**
-      * 发票号码
-      */
-    TicketSn: string;
-    /**
-      * 发票代码
-      */
-    TicketCode: string;
-    /**
-      * 检验码
-      */
-    CheckCode: string;
-    /**
-      * 含税金额(元)
-      */
-    AmountWithTax: string;
-    /**
-      * 不含税金额(元)
-      */
-    AmountWithoutTax: string;
-    /**
-      * 税额(元)
-      */
-    TaxAmount: string;
-    /**
-      * 是否被红冲
-      */
-    IsRedWashed: number;
-    /**
-      * pdf地址
-      */
-    PdfUrl: string;
-    /**
-      * png地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ImageUrl: string;
+    Tax: string;
 }
 /**
  * 会员资金交易明细信息
@@ -2730,6 +2867,27 @@ export interface AddMerchantResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryFlexSettlementOrderList请求参数结构体
+ */
+export interface QueryFlexSettlementOrderListRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 开始时间，格式"yyyy-MM-dd hh:mm:ss"
+      */
+    StartTime: string;
+    /**
+      * 结束时间，格式"yyyy-MM-dd hh:mm:ss"
+      */
+    EndTime: string;
+    /**
+      * 分页
+      */
+    PageNumber: Paging;
 }
 /**
  * RefundCloudOrder请求参数结构体
@@ -3402,30 +3560,25 @@ export interface OpenBankSceneInfo {
     DeviceId?: string;
 }
 /**
- * CreatePayMerchant请求参数结构体
+ * ModifyFlexPayeeAccountRightStatus请求参数结构体
  */
-export interface CreatePayMerchantRequest {
+export interface ModifyFlexPayeeAccountRightStatusRequest {
     /**
-      * 平台编号
+      * 收款用户ID
       */
-    PlatformCode: string;
+    PayeeId: string;
     /**
-      * 渠道方收款商户编号，由渠道方(银行)提 供。
+      * 账户权益类型
+SETTLEMENT:结算权益
+PAYMENT:付款权益
       */
-    ChannelMerchantNo: string;
+    AccountRightType: string;
     /**
-      * 是否需要向渠道进行 商户信息验证 1:验证
-0:不验证
+      * 账户权益状态
+ENABLE:启用
+DISABLE:停用
       */
-    ChannelCheckFlag: string;
-    /**
-      * 收款商户名称
-      */
-    MerchantName: string;
-    /**
-      * 是否开通 B2B 支付 1:开通 0:不开通 缺省:1
-      */
-    BusinessPayFlag?: string;
+    AccountRightStatus: string;
 }
 /**
  * QueryMaliciousRegistration返回参数结构体
@@ -3457,6 +3610,19 @@ export interface RefundCloudOrderResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 付款人查询结果
+ */
+export interface QueryPayerinfoResult {
+    /**
+      * 错误码
+      */
+    Code: string;
+    /**
+      * 付款人查询数据
+      */
+    Data: QueryPayerinfoData;
 }
 /**
  * QueryBankClear请求参数结构体
@@ -4141,6 +4307,21 @@ _不填默认为生产环境_
     Environment?: string;
 }
 /**
+ * QueryFlexPayeeAccountBalance请求参数结构体
+ */
+export interface QueryFlexPayeeAccountBalanceRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+}
+/**
  * ContractOrder请求参数结构体
  */
 export interface ContractOrderRequest {
@@ -4329,6 +4510,53 @@ export interface BindRelateAcctSmallAmountResponse {
     RequestId?: string;
 }
 /**
+ * 账户余额信息
+ */
+export interface PayeeAccountBalanceResult {
+    /**
+      * 账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccountId: string;
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IncomeType: number;
+    /**
+      * 总余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Balance: string;
+    /**
+      * 系统冻结余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SystemFreezeBalance: string;
+    /**
+      * 人工冻结余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ManualFreezeBalance: string;
+    /**
+      * 可提现余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayableBalance: string;
+    /**
+      * 已提现余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaidBalance: string;
+    /**
+      * 提现中余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InPayBalance: string;
+}
+/**
  * QueryBalance请求参数结构体
  */
 export interface QueryBalanceRequest {
@@ -4376,61 +4604,82 @@ export interface QueryOpenBankSupportBankListResult {
     SupportBankList: Array<SupportBankInfo>;
 }
 /**
- * BindRelateAcctSmallAmount请求参数结构体
+ * 冻结单结果
  */
-export interface BindRelateAcctSmallAmountRequest {
+export interface FreezeOrderResult {
     /**
-      * String(22)，商户号（签约客户号）
+      * 税前金额
       */
-    MrchCode: string;
+    AmountBeforeTax: string;
     /**
-      * STRING(32)，交易网会员代码（若需要把一个待绑定账户关联到两个会员名下，此字段可上送两个会员的交易网代码，并且须用“|::|”(右侧)进行分隔）
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
       */
-    TranNetMemberCode: string;
+    IncomeType: string;
     /**
-      * STRING(150)，见证子账户的户名（首次绑定的情况下，此字段即为待绑定的提现账户的户名。非首次绑定的情况下，须注意带绑定的提现账户的户名须与留存在后台系统的会员户名一致）
+      * 外部订单ID
       */
-    MemberName: string;
+    OutOrderId: string;
     /**
-      * STRING(5)，会员证件类型（详情见“常见问题”）
+      * 订单ID
       */
-    MemberGlobalType: string;
+    OrderId: string;
     /**
-      * STRING(32)，会员证件号码
+      * 操作类型
+FREEZE:冻结
+UNFREEZE:解冻
       */
-    MemberGlobalId: string;
+    OperationType: string;
     /**
-      * STRING(50)，会员的待绑定账户的账号（提现的银行卡）
+      * 发起时间
       */
-    MemberAcctNo: string;
+    InitiateTime: string;
     /**
-      * STRING(10)，会员的待绑定账户的本他行类型（1: 本行; 2: 他行）
+      * 完成时间
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    BankType: string;
+    FinishTime: string;
     /**
-      * STRING(150)，会员的待绑定账户的开户行名称
+      * 状态
+ACCEPTED:已受理
+ACCOUNTED:已记账
+SUCCEED:已成功
+FAILED:已失败
       */
-    AcctOpenBranchName: string;
+    Status: string;
     /**
-      * STRING(30)，会员的手机号（手机号须由长度为11位的数字构成）
+      * 状态描述
       */
-    Mobile: string;
+    StatusDesc: string;
     /**
-      * STRING(20)，会员的待绑定账户的开户行的联行号（本他行类型为他行的情况下，此字段和下一个字段至少一个不为空）
+      * 冻结备注
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    CnapsBranchId?: string;
+    Remark: string;
+}
+/**
+ * 计税信息
+ */
+export interface PayeeTaxInfo {
     /**
-      * STRING(20)，会员的待绑定账户的开户行的超级网银行号（本他行类型为他行的情况下，此字段和上一个字段至少一个不为空）
+      * 计税模板列表
       */
-    EiconBankBranchId?: string;
+    TaxTemplateInfoList: Array<PayeeTaxTemplateInfo>;
     /**
-      * STRING(1027)，转账方式（1: 往账鉴权(默认值); 2: 来账鉴权）
+      * 纳税人识别号
       */
-    ReservedMsg?: string;
+    TaxpayerIdNo: string;
     /**
-      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+      * 纳税主体类型
+NATURAL:自然人
+NON_NATURAL:非自然人
       */
-    Profile?: string;
+    TaxEntityType: string;
+    /**
+      * 财税服务商ID
+      */
+    TaxServiceProviderId: string;
 }
 /**
  * QueryTransferDetail返回参数结构体
@@ -4780,6 +5029,28 @@ __其他__: 见附录-错误码表
     RequestId?: string;
 }
 /**
+ * QueryFlexPayeeInfo返回参数结构体
+ */
+export interface QueryFlexPayeeInfoResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: PayeeInfoResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 订单退款响应对象
  */
 export interface RefundOrderResult {
@@ -4946,6 +5217,56 @@ export interface ContractOrderInSubOrder {
     Metadata?: string;
 }
 /**
+ * QueryMemberTransactionDetails请求参数结构体
+ */
+export interface QueryMemberTransactionDetailsRequest {
+    /**
+      * 查询的交易发生时间类型。
+__1__：当日
+__2__：历史
+      */
+    QueryDateType: string;
+    /**
+      * 查询的交易类型。
+__1__：全部
+__2__：转出
+__3__：转入
+      */
+    QueryTranType: string;
+    /**
+      * 父账户账号。
+_平安渠道为资金汇总账号_
+      */
+    BankAccountNumber: string;
+    /**
+      * 子账户账号。
+_平安渠道为见证子账户的账号_
+      */
+    SubAccountNumber: string;
+    /**
+      * 分页号, 起始值为1。
+      */
+    PageOffSet: string;
+    /**
+      * 查询开始日期，格式：yyyyMMdd。
+__若是历史查询，则必输，当日查询时，不起作用；开始日期不能超过当前日期__
+      */
+    QueryStartDate?: string;
+    /**
+      * 查询终止日期，格式：yyyyMMdd。
+__若是历史查询，则必输，当日查询时，不起作用；终止日期不能超过当前日期__
+      */
+    QueryEndDate?: string;
+    /**
+      * 环境名。
+__release__: 现网环境
+__sandbox__: 沙箱环境
+__development__: 开发环境
+_缺省: release_
+      */
+    MidasEnvironment?: string;
+}
+/**
  * RegisterBehavior请求参数结构体
  */
 export interface RegisterBehaviorRequest {
@@ -5004,6 +5325,27 @@ yyyyMMddHHmmss
 功能标志FunctionFlag=1时必输
       */
     SignChannel?: number;
+}
+/**
+ * 结算结果
+ */
+export interface ApplyFlexSettlementResult {
+    /**
+      * 订单ID
+      */
+    OrderId: string;
+    /**
+      * 税前金额
+      */
+    AmountBeforeTax: string;
+    /**
+      * 税后金额
+      */
+    AmountAfterTax: string;
+    /**
+      * 税金
+      */
+    Tax: string;
 }
 /**
  * UnifiedCloudOrder返回参数结构体
@@ -6215,22 +6557,22 @@ Subsidy：补贴项。
     AttachmentCode: string;
 }
 /**
- * RevokeRechargeByThirdPay返回参数结构体
+ * FreezeFlexBalance返回参数结构体
  */
-export interface RevokeRechargeByThirdPayResponse {
+export interface FreezeFlexBalanceResponse {
     /**
-      * 请求类型
+      * 错误码。SUCCESS为成功，其他为失败
       */
-    RequestType?: string;
+    ErrCode: string;
     /**
-      * 保留域
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReservedMessage?: string;
-    /**
-      * 银行流水号
-      */
-    FrontSequenceNumber?: string;
+    Result: FreezeFlexBalanceResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6276,6 +6618,23 @@ sandbox:沙箱环境
 缺省默认为生产环境
       */
     Environment?: string;
+}
+/**
+ * UploadExternalAnchorInfo请求参数结构体
+ */
+export interface UploadExternalAnchorInfoRequest {
+    /**
+      * 主播Id
+      */
+    AnchorId: string;
+    /**
+      * 身份证正面图片下载链接
+      */
+    IdCardFront?: string;
+    /**
+      * 身份证反面图片下载链接
+      */
+    IdCardReverse?: string;
 }
 /**
  * CreateAcct请求参数结构体
@@ -6490,6 +6849,28 @@ export interface QueryMerchantBalanceRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
+}
+/**
+ * ApplyFlexSettlement返回参数结构体
+ */
+export interface ApplyFlexSettlementResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: ApplyFlexSettlementResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询汇出结果
@@ -6982,22 +7363,22 @@ export interface CreateInvoiceV2Request {
     InvoiceChannel?: number;
 }
 /**
- * UploadExternalAnchorInfo返回参数结构体
+ * QueryFlexPayeeAccountList返回参数结构体
  */
-export interface UploadExternalAnchorInfoResponse {
+export interface QueryFlexPayeeAccountListResponse {
     /**
-      * 错误码。响应成功："SUCCESS"，其他为不成功。
+      * 错误码。SUCCESS为成功，其他为失败
       */
     ErrCode: string;
     /**
-      * 响应消息。
+      * 错误消息
       */
     ErrMessage: string;
     /**
-      * 该字段为null。
+      * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: string;
+    Result: PayeeAccountInfos;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7039,6 +7420,65 @@ __其他__: 见附录-错误码表
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 结算订单结果
+ */
+export interface SettlementOrderResult {
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 税前金额
+      */
+    AmountBeforeTax: string;
+    /**
+      * 税后金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AmountAfterTax: string;
+    /**
+      * 税金
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tax: string;
+    /**
+      * 外部订单ID
+      */
+    OutOrderId: string;
+    /**
+      * 订单ID
+      */
+    OrderId: string;
+    /**
+      * 发起时间
+      */
+    InitiateTime: string;
+    /**
+      * 完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FinishTime: string;
+    /**
+      * 状态
+ACCEPTED:已受理
+ACCOUNTED:已记账
+SUCCEED:已成功
+FAILED:已失败
+      */
+    Status: string;
+    /**
+      * 状态描述
+      */
+    StatusDesc: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
 }
 /**
  * BindRelateAcctUnionPay请求参数结构体
@@ -7098,30 +7538,29 @@ export interface BindRelateAcctUnionPayRequest {
     Profile?: string;
 }
 /**
- * 查询会员资金交易信息列表结果
+ * 对账文件信息
  */
-export interface QueryFundsTransactionDetailsResult {
+export interface FileItem {
     /**
-      * 本次交易返回查询结果记录数。
-      */
-    ResultCount: number;
-    /**
-      * 符合业务查询条件的记录总数。
+      * STRING(256)，文件名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount: number;
+    FileName: string;
     /**
-      * 结束标志。
-__0__：否
-__1__：是
+      * STRING(120)，随机密码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EndFlag: string;
+    RandomPassword: string;
     /**
-      * 会员资金交易信息数组。
+      * STRING(512)，文件路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TranItemArray: Array<FundsTransactionItem>;
+    FilePath: string;
+    /**
+      * STRING(64)，提取码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DrawCode: string;
 }
 /**
  * QueryCloudOrder返回参数结构体
@@ -7140,6 +7579,81 @@ export interface QueryCloudOrderResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryFlexFreezeOrderList返回参数结构体
+ */
+export interface QueryFlexFreezeOrderListResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: FreezeOrders;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 收款用户计税模板信息
+ */
+export interface PayeeTaxTemplateInfo {
+    /**
+      * 收入类型
+LABOR: 劳务所得
+OCCASION: 偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 计税模板ID
+      */
+    TaxTemplateId: string;
+}
+/**
+ * 聚鑫商户余额查询输出项
+ */
+export interface QueryItem {
+    /**
+      * 子商户账户
+      */
+    SubAcctNo: string;
+    /**
+      * 子账户属性
+1：普通会员子账号
+2：挂账子账号
+3：手续费子账号
+4：利息子账号
+5：平台担保子账号
+      */
+    SubAcctProperty: string;
+    /**
+      * 业务平台的子商户Id，唯一
+      */
+    SubMchId: string;
+    /**
+      * 子账户名称
+      */
+    SubAcctName: string;
+    /**
+      * 账户可用余额
+      */
+    AcctAvailBal: string;
+    /**
+      * 可提现金额
+      */
+    CashAmt: string;
+    /**
+      * 维护日期 开户日期或修改日期
+      */
+    MaintenanceDate: string;
 }
 /**
  * 分页参数
@@ -7184,6 +7698,19 @@ __OPENBANK_PAYMENT__: openbank支付
 __SAFT_ISV__: 安心发支付
       */
     PaymentMethod: string;
+}
+/**
+ * QueryFlexPayeeInfo请求参数结构体
+ */
+export interface QueryFlexPayeeInfoRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId?: string;
+    /**
+      * 外部用户ID
+      */
+    OutUserId?: string;
 }
 /**
  * RegisterBehavior返回参数结构体
@@ -7511,54 +8038,22 @@ export interface QueryExchangerateResult {
     Data: Array<QueryExchangerateData>;
 }
 /**
- * QueryMemberTransactionDetails请求参数结构体
+ * 结算信息对象
  */
-export interface QueryMemberTransactionDetailsRequest {
+export interface CloudSettleInfo {
     /**
-      * 查询的交易发生时间类型。
-__1__：当日
-__2__：历史
+      * 是否需要支付确认。
+0: 不需要支付确认
+1: 需要支付确认
+传1时，需要在支付完成后成功调用了《支付确认》接口，该笔订单才会被清分出去
       */
-    QueryDateType: string;
+    NeedToBeConfirmed?: number;
     /**
-      * 查询的交易类型。
-__1__：全部
-__2__：转出
-__3__：转入
+      * 是否指定分账。
+0: 不指定分账
+1: 指定分账
       */
-    QueryTranType: string;
-    /**
-      * 父账户账号。
-_平安渠道为资金汇总账号_
-      */
-    BankAccountNumber: string;
-    /**
-      * 子账户账号。
-_平安渠道为见证子账户的账号_
-      */
-    SubAccountNumber: string;
-    /**
-      * 分页号, 起始值为1。
-      */
-    PageOffSet: string;
-    /**
-      * 查询开始日期，格式：yyyyMMdd。
-__若是历史查询，则必输，当日查询时，不起作用；开始日期不能超过当前日期__
-      */
-    QueryStartDate?: string;
-    /**
-      * 查询终止日期，格式：yyyyMMdd。
-__若是历史查询，则必输，当日查询时，不起作用；终止日期不能超过当前日期__
-      */
-    QueryEndDate?: string;
-    /**
-      * 环境名。
-__release__: 现网环境
-__sandbox__: 沙箱环境
-__development__: 开发环境
-_缺省: release_
-      */
-    MidasEnvironment?: string;
+    ProfitSharing?: number;
 }
 /**
  * QueryBatchPaymentResult请求参数结构体
@@ -7579,21 +8074,115 @@ export interface BindAcctResponse {
     RequestId?: string;
 }
 /**
- * UploadExternalAnchorInfo请求参数结构体
+ * BindRelateAcctSmallAmount请求参数结构体
  */
-export interface UploadExternalAnchorInfoRequest {
+export interface BindRelateAcctSmallAmountRequest {
     /**
-      * 主播Id
+      * String(22)，商户号（签约客户号）
       */
-    AnchorId: string;
+    MrchCode: string;
     /**
-      * 身份证正面图片下载链接
+      * STRING(32)，交易网会员代码（若需要把一个待绑定账户关联到两个会员名下，此字段可上送两个会员的交易网代码，并且须用“|::|”(右侧)进行分隔）
       */
-    IdCardFront?: string;
+    TranNetMemberCode: string;
     /**
-      * 身份证反面图片下载链接
+      * STRING(150)，见证子账户的户名（首次绑定的情况下，此字段即为待绑定的提现账户的户名。非首次绑定的情况下，须注意带绑定的提现账户的户名须与留存在后台系统的会员户名一致）
       */
-    IdCardReverse?: string;
+    MemberName: string;
+    /**
+      * STRING(5)，会员证件类型（详情见“常见问题”）
+      */
+    MemberGlobalType: string;
+    /**
+      * STRING(32)，会员证件号码
+      */
+    MemberGlobalId: string;
+    /**
+      * STRING(50)，会员的待绑定账户的账号（提现的银行卡）
+      */
+    MemberAcctNo: string;
+    /**
+      * STRING(10)，会员的待绑定账户的本他行类型（1: 本行; 2: 他行）
+      */
+    BankType: string;
+    /**
+      * STRING(150)，会员的待绑定账户的开户行名称
+      */
+    AcctOpenBranchName: string;
+    /**
+      * STRING(30)，会员的手机号（手机号须由长度为11位的数字构成）
+      */
+    Mobile: string;
+    /**
+      * STRING(20)，会员的待绑定账户的开户行的联行号（本他行类型为他行的情况下，此字段和下一个字段至少一个不为空）
+      */
+    CnapsBranchId?: string;
+    /**
+      * STRING(20)，会员的待绑定账户的开户行的超级网银行号（本他行类型为他行的情况下，此字段和上一个字段至少一个不为空）
+      */
+    EiconBankBranchId?: string;
+    /**
+      * STRING(1027)，转账方式（1: 往账鉴权(默认值); 2: 来账鉴权）
+      */
+    ReservedMsg?: string;
+    /**
+      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+      */
+    Profile?: string;
+}
+/**
+ * QueryFlexPaymentOrderList请求参数结构体
+ */
+export interface QueryFlexPaymentOrderListRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 开始时间，格式"yyyy-MM-dd hh:mm:ss"
+      */
+    StartTime: string;
+    /**
+      * 结束时间，格式"yyyy-MM-dd hh:mm:ss"
+      */
+    EndTime: string;
+    /**
+      * 分页
+      */
+    PageNumber: Paging;
+}
+/**
+ * FreezeFlexBalance请求参数结构体
+ */
+export interface FreezeFlexBalanceRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 税前金额
+      */
+    AmountBeforeTax: string;
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 外部订单ID
+      */
+    OutOrderId: string;
+    /**
+      * 操作类型
+FREEZE:冻结
+UNFREEZE:解冻
+      */
+    OperationType: string;
+    /**
+      * 冻结备注
+      */
+    Remark?: string;
 }
 /**
  * BindRelateAccReUnionPay请求参数结构体
@@ -8166,6 +8755,37 @@ export interface CreateCustAcctIdRequest {
     Profile?: string;
 }
 /**
+ * ApplyFlexPayment请求参数结构体
+ */
+export interface ApplyFlexPaymentRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 税前金额
+      */
+    AmountBeforeTax: string;
+    /**
+      * 外部订单ID
+      */
+    OutOrderId: string;
+    /**
+      * 资金账户信息
+      */
+    FundingAccountInfo: FlexFundingAccountInfo;
+    /**
+      * 提现备注
+      */
+    Remark?: string;
+}
+/**
  * 第三方渠道数据信息
  */
 export interface CloudExternalChannelData {
@@ -8290,6 +8910,28 @@ development: 开发环境
 缺省: release
       */
     MidasEnvironment?: string;
+}
+/**
+ * QueryFlexPayeeAccountBalance返回参数结构体
+ */
+export interface QueryFlexPayeeAccountBalanceResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: PayeeAccountBalanceResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 门店明细响应对象
@@ -8803,6 +9445,19 @@ export interface QueryBillDownloadURLRequest {
     BillDate: string;
 }
 /**
+ * 付款订单列表
+ */
+export interface PaymentOrders {
+    /**
+      * 列表
+      */
+    List: Array<PaymentOrderResult>;
+    /**
+      * 总数
+      */
+    Count: number;
+}
+/**
  * 子单退款信息
  */
 export interface CloudSubRefundItem {
@@ -9032,55 +9687,13 @@ development 开发环境
     ReservedMessage?: string;
 }
 /**
- * QueryBankClear返回参数结构体
+ * CreateExternalAnchor接口返回参数
  */
-export interface QueryBankClearResponse {
+export interface CreateExternalAnchorData {
     /**
-      * String(20)，返回码
+      * 主播Id
       */
-    TxnReturnCode?: string;
-    /**
-      * String(100)，返回信息
-      */
-    TxnReturnMsg?: string;
-    /**
-      * String(22)，交易流水号
-      */
-    CnsmrSeqNo?: string;
-    /**
-      * STRING (10)，本次交易返回查询结果记录数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResultNum?: string;
-    /**
-      * STRING(30)，起始记录号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartRecordNo?: string;
-    /**
-      * STRING(2)，结束标志（0: 否; 1: 是）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndFlag?: string;
-    /**
-      * STRING (10)，符合业务查询条件的记录总数（重复次数, 一次最多返回20条记录）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalNum?: string;
-    /**
-      * 交易信息数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TranItemArray?: Array<ClearItem>;
-    /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReservedMsg?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    AnchorId: string;
 }
 /**
  * DescribeOrderStatus返回参数结构体
@@ -10700,6 +11313,29 @@ export interface ReviseMbrPropertyRequest {
     Profile?: string;
 }
 /**
+ * UnifiedTlinxOrder返回参数结构体
+ */
+export interface UnifiedTlinxOrderResponse {
+    /**
+      * 业务系统返回消息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrMessage: string;
+    /**
+      * 业务系统返回码，0表示成功，其他表示失败。
+      */
+    ErrCode: string;
+    /**
+      * 统一下单响应对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: PayOrderResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 代理商完税证明
  */
 export interface AgentTaxPayment {
@@ -10909,81 +11545,26 @@ export interface AgencyClientInfo {
     AgencyClientMobile: string;
 }
 /**
- * 贸易材料明细查询数据
+ * QueryFlexSettlementOrderList返回参数结构体
  */
-export interface QueryTradeData {
+export interface QueryFlexSettlementOrderListResponse {
     /**
-      * 商户号
+      * 错误码。SUCCESS为成功，其他为失败
       */
-    MerchantId: string;
+    ErrCode: string;
     /**
-      * 贸易材料流水号
+      * 错误消息
       */
-    TradeFileId: string;
+    ErrMessage: string;
     /**
-      * 贸易材料订单号
-      */
-    TradeOrderId: string;
-    /**
-      * 审核状态
-      */
-    Status: string;
-    /**
-      * 失败原因
+      * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FailReason: string;
+    Result: SettlementOrders;
     /**
-      * 付款人ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PayerId: string;
-    /**
-      * 收款人姓名
-      */
-    PayeeName: string;
-    /**
-      * 收款人常驻国家或地区编码
-      */
-    PayeeCountryCode: string;
-    /**
-      * 交易类型
-      */
-    TradeType: string;
-    /**
-      * 交易日期
-      */
-    TradeTime: string;
-    /**
-      * 交易币种
-      */
-    TradeCurrency: string;
-    /**
-      * 交易金额
-      */
-    TradeAmount: string;
-    /**
-      * 交易名称
-      */
-    TradeName: string;
-    /**
-      * 交易数量
-      */
-    TradeCount: number;
-    /**
-      * 货贸承运人
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    GoodsCarrier: string;
-    /**
-      * 服贸交易细节
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceDetail: string;
-    /**
-      * 服贸服务时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceTime: string;
+    RequestId?: string;
 }
 /**
  * 第三方子商户银行卡解绑结果查询返回结果
@@ -11082,6 +11663,75 @@ export interface UnifiedOrderInSubOrderList {
       * 子订单原始金额
       */
     OriginalAmt: number;
+}
+/**
+ * 账户信息结果
+ */
+export interface PayeeAccountInfoResult {
+    /**
+      * 账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccountId: string;
+    /**
+      * 账户名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccountName: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserInfo: PayeeAccountUserInfo;
+    /**
+      * 属性信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PropertyInfo: PayeeAccountPropertyInfo;
+}
+/**
+ * 账户用户信息
+ */
+export interface PayeeAccountUserInfo {
+    /**
+      * 外部用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OutUserId: string;
+    /**
+      * 用户类型
+0:B端用户
+1:C端用户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserType: number;
+    /**
+      * 证件类型
+0:身份证
+1:社会信用代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdType: number;
+    /**
+      * 证件号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdNo: string;
+    /**
+      * 姓名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
 }
 /**
  * 获取门店OpenId响应对象
@@ -11349,6 +11999,46 @@ export interface CreateBatchPaymentResponse {
     RequestId?: string;
 }
 /**
+ * ApplyFlexSettlement请求参数结构体
+ */
+export interface ApplyFlexSettlementRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 税前金额
+      */
+    AmountBeforeTax: string;
+    /**
+      * 外部订单ID
+      */
+    OutOrderId: string;
+    /**
+      * 备注
+      */
+    Remark: string;
+}
+/**
+ * QueryFlexPayeeAccountInfo请求参数结构体
+ */
+export interface QueryFlexPayeeAccountInfoRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId?: string;
+    /**
+      * 外部用户ID
+      */
+    OutUserId?: string;
+}
+/**
  * CreateExternalAnchor请求参数结构体
  */
 export interface CreateExternalAnchorRequest {
@@ -11444,27 +12134,17 @@ DEAUTHORIZED：已取消授权
     RequestId?: string;
 }
 /**
- * UnifiedTlinxOrder返回参数结构体
+ * QueryApplicationMaterial请求参数结构体
  */
-export interface UnifiedTlinxOrderResponse {
+export interface QueryApplicationMaterialRequest {
     /**
-      * 业务系统返回消息
-注意：此字段可能返回 null，表示取不到有效值。
+      * 申报流水号
       */
-    ErrMessage: string;
+    DeclareId: string;
     /**
-      * 业务系统返回码，0表示成功，其他表示失败。
+      * 接入环境。沙箱环境填sandbox
       */
-    ErrCode: string;
-    /**
-      * 统一下单响应对象
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result: PayOrderResult;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Profile?: string;
 }
 /**
  * CreateSinglePayment接口返回响应
@@ -11499,6 +12179,28 @@ export interface CheckAmountResponse {
       * STRING(1027)，保留域
       */
     ReservedMsg?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * QueryFlexPaymentOrderStatus返回参数结构体
+ */
+export interface QueryFlexPaymentOrderStatusResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: PaymentOrderStatusResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -12010,6 +12712,28 @@ export interface QueryOrderStatusResponse {
     RequestId?: string;
 }
 /**
+ * ApplyFlexPayment返回参数结构体
+ */
+export interface ApplyFlexPaymentResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: ApplyFlexPaymentResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * QueryTransferResult返回参数结构体
  */
 export interface QueryTransferResultResponse {
@@ -12250,6 +12974,33 @@ export interface DistributeQueryReceiverResponse {
     RequestId?: string;
 }
 /**
+ * QueryFlexFreezeOrderList请求参数结构体
+ */
+export interface QueryFlexFreezeOrderListRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 操作类型
+FREEZE:冻结
+UNFREEZE:解冻
+      */
+    OperationType: string;
+    /**
+      * 开始时间，格式"yyyy-MM-dd hh:mm:ss"
+      */
+    StartTime: string;
+    /**
+      * 结束时间，格式"yyyy-MM-dd hh:mm:ss"
+      */
+    EndTime: string;
+    /**
+      * 分页
+      */
+    PageNumber: Paging;
+}
+/**
  * QueryTransferResult请求参数结构体
  */
 export interface QueryTransferResultRequest {
@@ -12279,6 +13030,28 @@ export interface QueryTransferResultRequest {
       * 接入环境。沙箱环境填sandbox。
       */
     Profile?: string;
+}
+/**
+ * TransferSinglePay返回参数结构体
+ */
+export interface TransferSinglePayResponse {
+    /**
+      * 错误码。响应成功："SUCCESS"，其他为不成功
+      */
+    ErrCode: string;
+    /**
+      * 响应消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: TransferSinglePayData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询对账文件申请结果
@@ -12396,6 +13169,23 @@ export interface ApplyOpenBankOrderDetailReceiptResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * QueryMerchantClassification请求参数结构体
+ */
+export interface QueryMerchantClassificationRequest {
+    /**
+      * 收单系统分配的开放ID
+      */
+    OpenId: string;
+    /**
+      * 收单系统分配的密钥
+      */
+    OpenKey: string;
+    /**
+      * 沙箱环境填sandbox，正式环境不填
+      */
+    Profile?: string;
 }
 /**
  * 银行复核指引。银行侧返回网银授权指引链接，一般PC网银，手机网银链接
@@ -12602,6 +13392,21 @@ export interface OrderItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TaxCode: string;
+}
+/**
+ * 账户信息列表
+ */
+export interface PayeeAccountInfos {
+    /**
+      * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    List: Array<PayeeAccountInfoResult>;
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
 }
 /**
  * RefundMemberTransaction请求参数结构体
@@ -13281,26 +14086,37 @@ export interface PayDataResult {
     PaymentOptionTen?: string;
 }
 /**
- * ModifyBindedAccount返回参数结构体
+ * QueryOpenBankExternalSubMerchantBankAccount请求参数结构体
  */
-export interface ModifyBindedAccountResponse {
+export interface QueryOpenBankExternalSubMerchantBankAccountRequest {
     /**
-      * 错误码。响应成功："SUCCESS"，其他为不成功。
+      * 渠道商户ID。
       */
-    ErrCode: string;
+    ChannelMerchantId: string;
     /**
-      * 响应消息。
+      * 渠道子商户ID。
       */
-    ErrMessage: string;
+    ChannelSubMerchantId: string;
     /**
-      * 该字段为null。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 渠道名称。
+__TENPAY__: 商企付
+__WECHAT__: 微信支付
+__ALIPAY__: 支付宝
       */
-    Result: string;
+    ChannelName: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 支付方式。
+__EBANK_PAYMENT__: ebank支付
+__OPENBANK_PAYMENT__: openbank支付
       */
-    RequestId?: string;
+    PaymentMethod: string;
+    /**
+      * 环境类型。
+__release__:生产环境
+__sandbox__:沙箱环境
+_不填默认为生产环境_
+      */
+    Environment?: string;
 }
 /**
  * QueryReconciliationDocument返回参数结构体
@@ -13390,6 +14206,25 @@ export interface QueryBankTransactionDetailsResponse {
     RequestId?: string;
 }
 /**
+ * 付款订单状态结果
+ */
+export interface PaymentOrderStatusResult {
+    /**
+      * 状态
+ACCEPTED:已受理
+ACCOUNTED:已记账
+PAYING:付款中
+PAYED:完成付款渠道调用
+SUCCEED:已成功
+FAILED:已失败
+      */
+    Status: string;
+    /**
+      * 状态描述
+      */
+    StatusDesc: string;
+}
+/**
  * TransferSinglePay请求参数结构体
  */
 export interface TransferSinglePayRequest {
@@ -13450,6 +14285,25 @@ PayeeBankName：收款人开户行名称
       * 接入环境。沙箱环境填sandbox。
       */
     Profile?: string;
+}
+/**
+ * QueryFlexAmountBeforeTax请求参数结构体
+ */
+export interface QueryFlexAmountBeforeTaxRequest {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 收入类型
+LABOR:劳务所得
+OCCASION:偶然所得
+      */
+    IncomeType: string;
+    /**
+      * 税后金额
+      */
+    AmountAfterTax: string;
 }
 /**
  * CreateSinglePay返回参数结构体
@@ -13886,6 +14740,28 @@ export interface DownloadReconciliationUrlRequest {
     SubAppId?: string;
 }
 /**
+ * QueryFlexAmountBeforeTax返回参数结构体
+ */
+export interface QueryFlexAmountBeforeTaxResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: AmountBeforeTaxResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateBatchPayment请求参数结构体
  */
 export interface CreateBatchPaymentRequest {
@@ -14169,13 +15045,55 @@ export interface QueryAgentStatementsRequest {
     Type: string;
 }
 /**
- * CreateExternalAnchor接口返回参数
+ * QueryBankClear返回参数结构体
  */
-export interface CreateExternalAnchorData {
+export interface QueryBankClearResponse {
     /**
-      * 主播Id
+      * String(20)，返回码
       */
-    AnchorId: string;
+    TxnReturnCode?: string;
+    /**
+      * String(100)，返回信息
+      */
+    TxnReturnMsg?: string;
+    /**
+      * String(22)，交易流水号
+      */
+    CnsmrSeqNo?: string;
+    /**
+      * STRING (10)，本次交易返回查询结果记录数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultNum?: string;
+    /**
+      * STRING(30)，起始记录号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartRecordNo?: string;
+    /**
+      * STRING(2)，结束标志（0: 否; 1: 是）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndFlag?: string;
+    /**
+      * STRING (10)，符合业务查询条件的记录总数（重复次数, 一次最多返回20条记录）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalNum?: string;
+    /**
+      * 交易信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TranItemArray?: Array<ClearItem>;
+    /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedMsg?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * BindOpenBankExternalSubMerchantBankAccount请求参数结构体
@@ -14257,22 +15175,22 @@ export interface MigrateOrderRefundResponse {
     RequestId?: string;
 }
 /**
- * TransferSinglePay返回参数结构体
+ * QueryFlexPaymentOrderList返回参数结构体
  */
-export interface TransferSinglePayResponse {
+export interface QueryFlexPaymentOrderListResponse {
     /**
-      * 错误码。响应成功："SUCCESS"，其他为不成功
+      * 错误码。SUCCESS为成功，其他为失败
       */
     ErrCode: string;
     /**
-      * 响应消息
+      * 错误消息
       */
     ErrMessage: string;
     /**
       * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result: TransferSinglePayData;
+    Result: PaymentOrders;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -14345,6 +15263,44 @@ export interface QueryInvoiceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UploadTaxPayment请求参数结构体
+ */
+export interface UploadTaxPaymentRequest {
+    /**
+      * 平台渠道
+      */
+    Channel: number;
+    /**
+      * 完税ID
+      */
+    TaxId: string;
+    /**
+      * 完税列表下载地址
+      */
+    FileUrl: string;
+}
+/**
+ * QueryFlexPayeeAccountList请求参数结构体
+ */
+export interface QueryFlexPayeeAccountListRequest {
+    /**
+      * 账户属性信息
+      */
+    PropertyInfo: PayeeAccountPropertyInfo;
+    /**
+      * 开始时间
+      */
+    StartTime?: string;
+    /**
+      * 结束时间
+      */
+    EndTime?: string;
+    /**
+      * 分页
+      */
+    PageNumber?: Paging;
 }
 /**
  * QueryOpenBankBankAccountBalance返回参数结构体
@@ -14832,6 +15788,28 @@ export interface CreateSinglePaymentRequest {
     NotifyUrl?: string;
 }
 /**
+ * QueryFlexPayeeAccountInfo返回参数结构体
+ */
+export interface QueryFlexPayeeAccountInfoResponse {
+    /**
+      * 错误码。SUCCESS为成功，其他为失败
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: PayeeAccountInfoResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 会员间交易明细信息
  */
 export interface MemberTransactionItem {
@@ -15215,6 +16193,28 @@ export interface CreateAgentTaxPaymentInfosResponse {
       * 代理商完税证明批次信息
       */
     AgentTaxPaymentBatch: AgentTaxPaymentBatch;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RevokeRechargeByThirdPay返回参数结构体
+ */
+export interface RevokeRechargeByThirdPayResponse {
+    /**
+      * 请求类型
+      */
+    RequestType?: string;
+    /**
+      * 保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedMessage?: string;
+    /**
+      * 银行流水号
+      */
+    FrontSequenceNumber?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -15711,17 +16711,28 @@ export interface MerchantRiskInfo {
     RiskTypes: string;
 }
 /**
- * 付款人查询结果
+ * 账户开立结果
  */
-export interface QueryPayerinfoResult {
+export interface CreateFlexPayeeResult {
     /**
-      * 错误码
+      * 收款用户ID
       */
-    Code: string;
+    PayeeId: string;
+}
+/**
+ * 冻结订单列表
+ */
+export interface FreezeOrders {
     /**
-      * 付款人查询数据
+      * 列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data: QueryPayerinfoData;
+    List: Array<FreezeOrderResult>;
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
 }
 /**
  * 查询订单付款状态响应对象
@@ -15984,17 +16995,66 @@ export interface CreateRedInvoiceResponse {
     RequestId?: string;
 }
 /**
- * QueryMerchantBalance返回参数结构体
+ * 查询发票结果数据
  */
-export interface QueryMerchantBalanceResponse {
+export interface QueryInvoiceResultData {
     /**
-      * 对接方账户余额查询结果
+      * 订单号
       */
-    Result: QueryMerchantBalanceResult;
+    OrderId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 业务开票号
       */
-    RequestId?: string;
+    OrderSn: string;
+    /**
+      * 发票状态
+      */
+    Status: number;
+    /**
+      * 开票描述
+      */
+    Message: string;
+    /**
+      * 开票日期
+      */
+    TicketDate: string;
+    /**
+      * 发票号码
+      */
+    TicketSn: string;
+    /**
+      * 发票代码
+      */
+    TicketCode: string;
+    /**
+      * 检验码
+      */
+    CheckCode: string;
+    /**
+      * 含税金额(元)
+      */
+    AmountWithTax: string;
+    /**
+      * 不含税金额(元)
+      */
+    AmountWithoutTax: string;
+    /**
+      * 税额(元)
+      */
+    TaxAmount: string;
+    /**
+      * 是否被红冲
+      */
+    IsRedWashed: number;
+    /**
+      * pdf地址
+      */
+    PdfUrl: string;
+    /**
+      * png地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageUrl: string;
 }
 /**
  * RefundOrder返回参数结构体
@@ -16066,24 +17126,6 @@ export interface UploadTaxListRequest {
       * 完税列表下载地址
       */
     FileUrl: string;
-}
-/**
- * 结算信息对象
- */
-export interface CloudSettleInfo {
-    /**
-      * 是否需要支付确认。
-0: 不需要支付确认
-1: 需要支付确认
-传1时，需要在支付完成后成功调用了《支付确认》接口，该笔订单才会被清分出去
-      */
-    NeedToBeConfirmed?: number;
-    /**
-      * 是否指定分账。
-0: 不指定分账
-1: 指定分账
-      */
-    ProfitSharing?: number;
 }
 /**
  * 签约信息
@@ -16570,6 +17612,43 @@ export interface RegisterBillSupportWithdrawResponse {
     RequestId?: string;
 }
 /**
+ * 收款用户信息结果
+ */
+export interface PayeeInfoResult {
+    /**
+      * 收款用户ID
+      */
+    PayeeId: string;
+    /**
+      * 用户外部业务ID
+      */
+    OutUserId: string;
+    /**
+      * 姓名
+      */
+    Name: string;
+    /**
+      * 证件类型
+0:身份证
+1:社会信用代码
+      */
+    IdType: number;
+    /**
+      * 证件号
+      */
+    IdNo: string;
+    /**
+      * 服务商ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceProviderId: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+}
+/**
  * ApplyOutwardOrder请求参数结构体
  */
 export interface ApplyOutwardOrderRequest {
@@ -16924,6 +18003,45 @@ export interface CreateInvoiceRequest {
     InvoiceChannel?: number;
 }
 /**
+ * CreateFlexPayee请求参数结构体
+ */
+export interface CreateFlexPayeeRequest {
+    /**
+      * 用户外部业务ID
+      */
+    OutUserId: string;
+    /**
+      * 姓名
+      */
+    Name: string;
+    /**
+      * 证件号
+      */
+    IdNo: string;
+    /**
+      * 账户名称
+      */
+    AccountName: string;
+    /**
+      * 服务商ID
+      */
+    ServiceProviderId: string;
+    /**
+      * 计税信息
+      */
+    TaxInfo: PayeeTaxInfo;
+    /**
+      * 证件类型
+0:身份证
+1:社会信用代码
+      */
+    IdType: number;
+    /**
+      * 备注
+      */
+    Remark?: string;
+}
+/**
  * 主播签约信息
  */
 export interface AnchorContractInfo {
@@ -17042,6 +18160,25 @@ export interface CreateRedInvoiceV2Response {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 账户属性信息
+ */
+export interface PayeeAccountPropertyInfo {
+    /**
+      * 结算权益状态
+ENABLE:启用
+DISABLE:停用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SettleRightStatus?: string;
+    /**
+      * 付款权益状态
+ENABLE:启用
+DISABLE:停用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PaymentRightStatus?: string;
 }
 /**
  * 分账申请响应对象
@@ -17438,17 +18575,22 @@ export interface DownloadReconciliationUrlResponse {
     RequestId?: string;
 }
 /**
- * QueryDownloadBillURL返回参数结构体
+ * ModifyBindedAccount返回参数结构体
  */
-export interface QueryDownloadBillURLResponse {
+export interface ModifyBindedAccountResponse {
     /**
-      * 分配给商户的AppId。进件成功后返给商户方的AppId。
+      * 错误码。响应成功："SUCCESS"，其他为不成功。
       */
-    MerchantAppId: string;
+    ErrCode: string;
     /**
-      * 对账单下载地址。
+      * 响应消息。
       */
-    DownloadUrl: string;
+    ErrMessage: string;
+    /**
+      * 该字段为null。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -17534,6 +18676,16 @@ export interface CreateOpenBankOrderRechargeResult {
       * 外部商户订单号，只能是数字、大小写字母，且在同一个接入平台下唯一。
       */
     OutOrderId: string;
+}
+/**
+ * 税前金额结果
+ */
+export interface AmountBeforeTaxResult {
+    /**
+      * 税前金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AmountBeforeTax: string;
 }
 /**
  * 银企直连-查询单笔支付状态结果
@@ -18025,6 +19177,23 @@ export interface QueryMerchantRequest {
       * 进件成功后返给商户方的 AppId
       */
     MerchantAppId: string;
+}
+/**
+ * QueryDownloadBillURL返回参数结构体
+ */
+export interface QueryDownloadBillURLResponse {
+    /**
+      * 分配给商户的AppId。进件成功后返给商户方的AppId。
+      */
+    MerchantAppId: string;
+    /**
+      * 对账单下载地址。
+      */
+    DownloadUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * QueryAnchorContractInfo返回参数结构体

@@ -107,7 +107,7 @@ export interface ZoneInfo {
  */
 export interface DescribeZonesRequest {
     /**
-      * 待查询产品的名称，例如cvm
+      * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
       */
     Product: string;
 }
@@ -167,7 +167,7 @@ export interface DescribeRegionsResponse {
  */
 export interface DescribeRegionsRequest {
     /**
-      * 待查询产品的名称，例如cvm
+      * 待查询产品的名称，例如cvm，具体取值请查询DescribeProducts接口
       */
     Product: string;
 }
